@@ -39,14 +39,14 @@ import DASHI.Governance.SexedHistoricalBracketedMultiverseTSFVBridgeExact as Bra
 ------------------------------------------------------------------------
 
 data CoalitionPiece : Set where
-  feminineLocal
-  masculineLocal
-  institutionalLocal
-  feminineMasculineCoalition
-  masculineInstitutionCoalition
-  reciprocalInstitutionalCollective
-  institutionMediatedPluralCollective
-  : CoalitionPiece
+  feminineLocal : CoalitionPiece
+  masculineLocal : CoalitionPiece
+  institutionalLocal : CoalitionPiece
+  feminineMasculineCoalition : CoalitionPiece
+  masculineInstitutionCoalition : CoalitionPiece
+  reciprocalInstitutionalCollective : CoalitionPiece
+  institutionMediatedPluralCollective : CoalitionPiece
+
 
 data _⋄_↝_ : CoalitionPiece → CoalitionPiece → CoalitionPiece → Set where
   glueFM :

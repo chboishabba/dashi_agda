@@ -25,29 +25,29 @@ import DASHI.Planning.PlanningAdmissibleTransitionBridgeExact as Admission
 ------------------------------------------------------------------------
 
 data MaterialCustodyStage : Set where
-  required
-  allocated
-  physicallyClaimed
-  tankFarmReady
-  unitFeedReady
-  inProcess
-  intermediateStorage
-  loadedForTransfer
-  inTransit
-  deliveredToDownstreamUnit
-  quarantinedOrException
-  : MaterialCustodyStage
+  required : MaterialCustodyStage
+  allocated : MaterialCustodyStage
+  physicallyClaimed : MaterialCustodyStage
+  tankFarmReady : MaterialCustodyStage
+  unitFeedReady : MaterialCustodyStage
+  inProcess : MaterialCustodyStage
+  intermediateStorage : MaterialCustodyStage
+  loadedForTransfer : MaterialCustodyStage
+  inTransit : MaterialCustodyStage
+  deliveredToDownstreamUnit : MaterialCustodyStage
+  quarantinedOrException : MaterialCustodyStage
+
 
 data MaterialRole : Set where
-  chlorineFeed
-  causticFeed
-  hydrogenFeed
-  ethyleneFeed
-  propyleneFeed
-  intermediateFeed
-  catalystOrReagent
-  productInventory
-  : MaterialRole
+  chlorineFeed : MaterialRole
+  causticFeed : MaterialRole
+  hydrogenFeed : MaterialRole
+  ethyleneFeed : MaterialRole
+  propyleneFeed : MaterialRole
+  intermediateFeed : MaterialRole
+  catalystOrReagent : MaterialRole
+  productInventory : MaterialRole
+
 
 data ShortageClass : Set where
   noShortage substitutableShortage nonSubstitutableShortage : ShortageClass
@@ -154,11 +154,11 @@ record ChemicalSubstitutionReceipt : Set where
 ------------------------------------------------------------------------
 
 data CoproductInventoryPressure : Set where
-  chlorineStoragePressure
-  causticStoragePressure
-  hydrogenDispositionPressure
-  balancedDisposition
-  : CoproductInventoryPressure
+  chlorineStoragePressure : CoproductInventoryPressure
+  causticStoragePressure : CoproductInventoryPressure
+  hydrogenDispositionPressure : CoproductInventoryPressure
+  balancedDisposition : CoproductInventoryPressure
+
 
 record CoproductPlanningReceipt : Set where
   constructor coproduct-planning-receipt
@@ -178,16 +178,16 @@ record CoproductPlanningReceipt : Set where
 ------------------------------------------------------------------------
 
 data ChemicalNetworkStage : Set where
-  saltMineOrBrine
-  chlorAlkaliPlant
-  crackerOrRefinery
-  intermediatePlant
-  polymerPlant
-  formulationPlant
-  warehouseOrTankFarm
-  transportCorridor
-  customerOrDownstreamPlant
-  : ChemicalNetworkStage
+  saltMineOrBrine : ChemicalNetworkStage
+  chlorAlkaliPlant : ChemicalNetworkStage
+  crackerOrRefinery : ChemicalNetworkStage
+  intermediatePlant : ChemicalNetworkStage
+  polymerPlant : ChemicalNetworkStage
+  formulationPlant : ChemicalNetworkStage
+  warehouseOrTankFarm : ChemicalNetworkStage
+  transportCorridor : ChemicalNetworkStage
+  customerOrDownstreamPlant : ChemicalNetworkStage
+
 
 record ChemicalNetworkLeg : Set where
   constructor chemical-network-leg

@@ -10,11 +10,11 @@ import DASHI.Core.AdmissibleTransitionHyperfabricExact as Transition
 ------------------------------------------------------------------------
 
 data EncounterPhase : Set where
-  publicPresence compelledContact wandRequirement scannerResponse
+  publicPresence compelledContact wandRequirement scannerResponse : EncounterPhase
   downstreamPredicate personalSearch arrestOrRelease : EncounterPhase
 
 data Move : Set where
-  compelStop requireWand observeResponse createDownstreamPredicate
+  compelStop requireWand observeResponse createDownstreamPredicate : Move
   conductSearch concludeEncounter : Move
 
 record EncounterFibre : Set where
@@ -100,12 +100,12 @@ record AggregateBoundary (a : AggregateProjection) : Set where
 ------------------------------------------------------------------------
 
 data ConsumerClaim : Set where
-  lawfulInitialWand lawfulDownstreamSearch gatewayRate selectionDisparity
+  lawfulInitialWand lawfulDownstreamSearch gatewayRate selectionDisparity : ConsumerClaim
   deterrenceEffect forceHistoryReconstruction : ConsumerClaim
 
 data ProducerObligation : Set where
-  wandAuthorityReceipt searchPredicateReceipt transitionCrossTab
-  eligiblePopulationDenominator counterfactualControl
+  wandAuthorityReceipt searchPredicateReceipt transitionCrossTab : ProducerObligation
+  eligiblePopulationDenominator counterfactualControl : ProducerObligation
   physicalTraceReceipt recordingReceipt telemetryReceipt witnessReceipt : ProducerObligation
 
 reverseRoute : ConsumerClaim → ProducerObligation

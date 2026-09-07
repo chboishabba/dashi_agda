@@ -91,13 +91,13 @@ canonicalZeta23FkCheckedSourceReturn =
 ------------------------------------------------------------------------
 
 data FkSourceSearchAction : Set where
-  searchForAnotherModulationOperator
-  reproveSourcePaperFTShift
-  reproveSourceContDiff
-  reproveSourceCompactSupport
-  attachConcreteFkFamilyToCanonicalAgdaTest
-  transportCheckedSourceTheorems
-  : FkSourceSearchAction
+  searchForAnotherModulationOperator : FkSourceSearchAction
+  reproveSourcePaperFTShift : FkSourceSearchAction
+  reproveSourceContDiff : FkSourceSearchAction
+  reproveSourceCompactSupport : FkSourceSearchAction
+  attachConcreteFkFamilyToCanonicalAgdaTest : FkSourceSearchAction
+  transportCheckedSourceTheorems : FkSourceSearchAction
+
 
 FkSourceRelevant : FkSourceSearchAction → Set
 FkSourceRelevant searchForAnotherModulationOperator = ⊥

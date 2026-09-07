@@ -27,11 +27,11 @@ data HistoricalGenderedPosition : Set where
   masculineCoded feminineCoded : HistoricalGenderedPosition
 
 data HistoricalComparisonFrame : Set where
-  inheritedPatriarchalFrame
-  feministCounterFrame
-  masculineCounterReactionFrame
-  reciprocalReconstitutionFrame
-  : HistoricalComparisonFrame
+  inheritedPatriarchalFrame : HistoricalComparisonFrame
+  feministCounterFrame : HistoricalComparisonFrame
+  masculineCounterReactionFrame : HistoricalComparisonFrame
+  reciprocalReconstitutionFrame : HistoricalComparisonFrame
+
 
 historicalRoleSystem :
   Dialectic.ContextualRoleSystem HistoricalComparisonFrame HistoricalGenderedPosition

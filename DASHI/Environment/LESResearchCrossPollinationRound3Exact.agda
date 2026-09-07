@@ -16,6 +16,7 @@ module DASHI.Environment.LESResearchCrossPollinationRound3Exact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
 import DASHI.Environment.LESResearchCrossPollinationRound2Exact as Round2
@@ -38,7 +39,7 @@ spatialAggregationToGenericIntertwiner :
     analyseFine
     analyseCoarse
 spatialAggregationToGenericIntertwiner witness =
-  Core.intertwiner (Round2.commutes witness)
+  Core.intertwiner (λ fine → sym (Round2.commutes witness fine))
 
 maupDefectToGenericIntertwiningDefect :
   ∀ {Fine Coarse FineResult CoarseResult}
@@ -56,7 +57,7 @@ maupDefectToGenericIntertwiningDefect :
 maupDefectToGenericIntertwiningDefect defect =
   Core.intertwiningDefect
     (Round2.witnessFineState defect)
-    (Round2.descentFails defect)
+    (λ eq → Round2.descentFails defect (sym eq))
 
 maupDefectContradictsGenericIntertwiner :
   ∀ {Fine Coarse FineResult CoarseResult}

@@ -57,20 +57,20 @@ data _∈_ {A : Set} (x : A) : List A → Set where
 ------------------------------------------------------------------------
 
 data ExperimentalDesignSlot : Set where
-  sourcePopulationSlot
-  treatmentAssignmentSlot
-  comparatorSlot
-  baselineMeasurementSlot
-  endpointMeasurementSlot
-  timeSlot
-  assaySlot
-  nuisanceControlSlot
-  statisticalContrastSlot
-  causalIdentificationSlot
-  mechanismIdentificationSlot
-  transportSlot
-  practicalSignificanceSlot
-  : ExperimentalDesignSlot
+  sourcePopulationSlot : ExperimentalDesignSlot
+  treatmentAssignmentSlot : ExperimentalDesignSlot
+  comparatorSlot : ExperimentalDesignSlot
+  baselineMeasurementSlot : ExperimentalDesignSlot
+  endpointMeasurementSlot : ExperimentalDesignSlot
+  timeSlot : ExperimentalDesignSlot
+  assaySlot : ExperimentalDesignSlot
+  nuisanceControlSlot : ExperimentalDesignSlot
+  statisticalContrastSlot : ExperimentalDesignSlot
+  causalIdentificationSlot : ExperimentalDesignSlot
+  mechanismIdentificationSlot : ExperimentalDesignSlot
+  transportSlot : ExperimentalDesignSlot
+  practicalSignificanceSlot : ExperimentalDesignSlot
+
 
 record PredicateDesignPlacement
     (assertion : PNF.PredicateNormalAssertion) : Set where
@@ -101,10 +101,10 @@ open AssertionDesignMap public
 ------------------------------------------------------------------------
 
 data ConeEdgeStatus : Set where
-  supportedEdge
-  qualifiedEdge
-  blockedEdge
-  : ConeEdgeStatus
+  supportedEdge : ConeEdgeStatus
+  qualifiedEdge : ConeEdgeStatus
+  blockedEdge : ConeEdgeStatus
+
 
 supportedNotBlocked : supportedEdge ≡ blockedEdge → ⊥
 supportedNotBlocked ()
@@ -113,15 +113,15 @@ qualifiedNotSupported : qualifiedEdge ≡ supportedEdge → ⊥
 qualifiedNotSupported ()
 
 data ImplicationKind : Set where
-  restatesMeasuredResult
-  derivesBoundedContrast
-  derivesResidualEnvelope
-  associatesTreatmentAndOutcome
-  attributesCausalEffect
-  identifiesMechanism
-  transportsPopulation
-  recommendsPractice
-  : ImplicationKind
+  restatesMeasuredResult : ImplicationKind
+  derivesBoundedContrast : ImplicationKind
+  derivesResidualEnvelope : ImplicationKind
+  associatesTreatmentAndOutcome : ImplicationKind
+  attributesCausalEffect : ImplicationKind
+  identifiesMechanism : ImplicationKind
+  transportsPopulation : ImplicationKind
+  recommendsPractice : ImplicationKind
+
 
 record ImplicationNode : Set where
   constructor implicationNode

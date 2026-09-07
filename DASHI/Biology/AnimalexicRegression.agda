@@ -101,7 +101,8 @@ tinyInspectPreservesWorld :
   Fidelity.nextState (Fidelity.executeDualEffect tinyDualSystem inspect world0)
   ≡ world0
 tinyInspectPreservesWorld =
-  Fidelity.informationOnlyPreservesWorld tinyInspectIsInformationOnly world0
+  Fidelity.informationOnlyPreservesWorld {system = tinyDualSystem} {action = inspect}
+    tinyInspectIsInformationOnly world0
 
 animalEpistemicBoundaryRecorded : Animal.AnimalexicEpistemicBoundary
 animalEpistemicBoundaryRecorded = Animal.canonicalAnimalexicEpistemicBoundary

@@ -209,9 +209,9 @@ record NavierStokesParaproductDualRoute
 open NavierStokesParaproductDualRoute public
 
 data HarmonicFrameworkLevel : Set where
-  primaryThreeFunction
-  frozenOutputTwoFunction
-  frozenLegParametrizedParaproduct
+  primaryThreeFunction : HarmonicFrameworkLevel
+  frozenOutputTwoFunction : HarmonicFrameworkLevel
+  frozenLegParametrizedParaproduct : HarmonicFrameworkLevel
   classwiseParaproductRealization : HarmonicFrameworkLevel
 
 record Stage3HarmonicHierarchy : Set₁ where

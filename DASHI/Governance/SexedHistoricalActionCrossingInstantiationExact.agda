@@ -69,7 +69,7 @@ counterformationThenRepair =
 ------------------------------------------------------------------------
 
 data TraceCode : Set where
-  supportInstitutionCode institutionSupportCode
+  supportInstitutionCode institutionSupportCode : TraceCode
   repairCounterformationCode counterformationRepairCode : TraceCode
 
 data CoarseEndpoint : Set where

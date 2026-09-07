@@ -30,11 +30,11 @@ data FormalChannel : Set where
   formalMM formalMF formalFM formalFF : FormalChannel
 
 data HistoricalFibre : Set where
-  inheritedClosedFibre
-  contestedDependentFibre
-  pluralResourceFibre
-  reciprocalOpenFibre
-  : HistoricalFibre
+  inheritedClosedFibre : HistoricalFibre
+  contestedDependentFibre : HistoricalFibre
+  pluralResourceFibre : HistoricalFibre
+  reciprocalOpenFibre : HistoricalFibre
+
 
 data LocalReachability : Set where
   locallyBlocked locallyUnresolved locallyReachable : LocalReachability

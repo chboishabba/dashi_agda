@@ -14,13 +14,13 @@ import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalCutsetExact as Cutset
 ------------------------------------------------------------------------
 
 data DoctrinalConsumerGoal : Set where
-  listSourceBackedContinuityPropositions
-  listSourceBackedExtinguishmentPropositions
-  identifyRecognitionConditionInterpretation
-  identifyRecognitionEvidenceBasis
-  adjudicateFinalContinuityDoctrine
-  adjudicateUnifiedRecognitionDoctrine
-  : DoctrinalConsumerGoal
+  listSourceBackedContinuityPropositions : DoctrinalConsumerGoal
+  listSourceBackedExtinguishmentPropositions : DoctrinalConsumerGoal
+  identifyRecognitionConditionInterpretation : DoctrinalConsumerGoal
+  identifyRecognitionEvidenceBasis : DoctrinalConsumerGoal
+  adjudicateFinalContinuityDoctrine : DoctrinalConsumerGoal
+  adjudicateUnifiedRecognitionDoctrine : DoctrinalConsumerGoal
+
 
 data GoalStatus : Set where goalOpen goalClosed : GoalStatus
 

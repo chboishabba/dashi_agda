@@ -16,23 +16,23 @@ import DASHI.Biology.CrossKingdomAnaestheticExcitabilityFlowBidiExact as Flow
 ------------------------------------------------------------------------
 
 data MechanismCandidate : Set where
-  channelCandidate
-  membraneCandidate
-  pumpCandidate
-  : MechanismCandidate
+  channelCandidate : MechanismCandidate
+  membraneCandidate : MechanismCandidate
+  pumpCandidate : MechanismCandidate
+
 
 data BehaviourObservation : Set where
   suppressedBehaviour : BehaviourObservation
 
 data VoltageObservation : Set where
-  voltagePatternA
-  voltagePatternB
-  : VoltageObservation
+  voltagePatternA : VoltageObservation
+  voltagePatternB : VoltageObservation
+
 
 data CurrentObservation : Set where
-  currentPatternA
-  currentPatternB
-  : CurrentObservation
+  currentPatternA : CurrentObservation
+  currentPatternB : CurrentObservation
+
 
 behaviourObserver :
   Observer.Observer MechanismCandidate BehaviourObservation

@@ -77,7 +77,7 @@ data DisparityClaim : Set where
   descriptiveScanShare descriptiveSelectionDisparity causalDiscrimination : DisparityClaim
 
 data DisparityProducer : Set where
-  scanCountProducer eligibilityDenominatorProducer selectionProducer
+  scanCountProducer eligibilityDenominatorProducer selectionProducer : DisparityProducer
   personLinkageProducer missingStatusProducer causalSelectionModelProducer : DisparityProducer
 
 reverseDisparity : DisparityClaim → DisparityProducer
@@ -99,7 +99,7 @@ record SelectionDisparityCutset : Set where
 open SelectionDisparityCutset public
 
 data DisparityResidual : Set where
-  scanCountResidual eligibilityResidual selectionResidual linkageResidual
+  scanCountResidual eligibilityResidual selectionResidual linkageResidual : DisparityResidual
   missingStatusResidual causalModelResidual disparityClosed : DisparityResidual
 
 firstDisparityResidual : DisparityClaim → SelectionDisparityCutset → DisparityResidual

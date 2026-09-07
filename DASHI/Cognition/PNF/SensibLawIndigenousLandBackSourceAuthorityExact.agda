@@ -17,30 +17,30 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data SourceAuthorityKind : Set where
-  peerReviewedCausalStudy
-  peerReviewedComparativeStudy
-  peerReviewedSystematicReview
-  officialAdministrativeReceipt
-  officialAdministrativePolicy
-  governmentResearchCommunication
-  independentPolicyResearch
-  academicDescriptiveStatisticalSynthesis
-  economicValuationReport
-  historicalPolicyAnalysis
-  workingPaperCausalClaim
-  commercialMarketObservation
-  criticalInterpretation
-  normativeDecolonialHypothesis
-  : SourceAuthorityKind
+  peerReviewedCausalStudy : SourceAuthorityKind
+  peerReviewedComparativeStudy : SourceAuthorityKind
+  peerReviewedSystematicReview : SourceAuthorityKind
+  officialAdministrativeReceipt : SourceAuthorityKind
+  officialAdministrativePolicy : SourceAuthorityKind
+  governmentResearchCommunication : SourceAuthorityKind
+  independentPolicyResearch : SourceAuthorityKind
+  academicDescriptiveStatisticalSynthesis : SourceAuthorityKind
+  economicValuationReport : SourceAuthorityKind
+  historicalPolicyAnalysis : SourceAuthorityKind
+  workingPaperCausalClaim : SourceAuthorityKind
+  commercialMarketObservation : SourceAuthorityKind
+  criticalInterpretation : SourceAuthorityKind
+  normativeDecolonialHypothesis : SourceAuthorityKind
+
 
 data PublicationStatus : Set where
-  peerReviewedPublished
-  officialPublished
-  institutionalReportPublished
-  workingPaperNotPeerReviewed
-  commercialObservationPublished
-  interpretiveLayerOnly
-  : PublicationStatus
+  peerReviewedPublished : PublicationStatus
+  officialPublished : PublicationStatus
+  institutionalReportPublished : PublicationStatus
+  workingPaperNotPeerReviewed : PublicationStatus
+  commercialObservationPublished : PublicationStatus
+  interpretiveLayerOnly : PublicationStatus
+
 
 record SourceAuthorityReceipt : Set where
   constructor sourceAuthorityReceipt

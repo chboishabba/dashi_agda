@@ -33,12 +33,12 @@ import DASHI.Reasoning.RelationRepresentationRealizationExact as Realization
 ------------------------------------------------------------------------
 
 data CandidateClass : Set where
-  offsetCandidate
-  rotationCandidate
-  affineCandidate
-  nonlinearCandidate
-  contextualCandidate
-  : CandidateClass
+  offsetCandidate : CandidateClass
+  rotationCandidate : CandidateClass
+  affineCandidate : CandidateClass
+  nonlinearCandidate : CandidateClass
+  contextualCandidate : CandidateClass
+
 
 candidateFamily : CandidateClass → Adequacy.TransformationFamily
 candidateFamily offsetCandidate = Adequacy.fixedTranslation

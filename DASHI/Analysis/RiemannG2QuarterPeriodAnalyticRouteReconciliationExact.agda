@@ -37,20 +37,20 @@ import DASHI.Analysis.RiemannG2GapSplitClusteringLeanReturn8894Exact as Gap8894
 ------------------------------------------------------------------------
 
 data AnalyticLeafCode : Set where
-  HXcomplexCharacter
-  HAtestModulationShift
-  HMassembledModulation
-  HTtranslationModulation
-  HWwindowRestriction
-  HEphaseSensitiveFiniteNearEvaluation
-  HGammaPrecision
-  : AnalyticLeafCode
+  HXcomplexCharacter : AnalyticLeafCode
+  HAtestModulationShift : AnalyticLeafCode
+  HMassembledModulation : AnalyticLeafCode
+  HTtranslationModulation : AnalyticLeafCode
+  HWwindowRestriction : AnalyticLeafCode
+  HEphaseSensitiveFiniteNearEvaluation : AnalyticLeafCode
+  HGammaPrecision : AnalyticLeafCode
+
 
 data RegimeDependency : Set where
-  regimeIndependentInfrastructure
-  quarterPeriodSensitiveConsumer
-  deterministicComplementPrecision
-  : RegimeDependency
+  regimeIndependentInfrastructure : RegimeDependency
+  quarterPeriodSensitiveConsumer : RegimeDependency
+  deterministicComplementPrecision : RegimeDependency
+
 
 regimeClass : AnalyticLeafCode -> RegimeDependency
 regimeClass HXcomplexCharacter = regimeIndependentInfrastructure
@@ -164,12 +164,12 @@ adaptiveInverseWidthRouteNotRefutedBy8894DensityCut =
 ------------------------------------------------------------------------
 
 data LiveWorkPackage : Set where
-  widthAndCrossingScale
-  canonicalCharacterInfrastructure
-  gammaPrecisionRepair
-  crossedRegimeFiniteEvaluation
-  finalIndependentBudgetCombination
-  : LiveWorkPackage
+  widthAndCrossingScale : LiveWorkPackage
+  canonicalCharacterInfrastructure : LiveWorkPackage
+  gammaPrecisionRepair : LiveWorkPackage
+  crossedRegimeFiniteEvaluation : LiveWorkPackage
+  finalIndependentBudgetCombination : LiveWorkPackage
+
 
 data WorkState : Set where
   live blocked conditional : WorkState

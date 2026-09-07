@@ -22,23 +22,23 @@ import DASHI.Cognition.PNF.SensibLawMaboDawsonRadicalTitleRecognitionHingeExact 
 ------------------------------------------------------------------------
 
 data AuditDisposition : Set where
-  attributionBoundaryConfirmed
-  localClassificationCorrected
-  interpretiveBridgeRemainsExplicit
-  unresolvedSourcePromotionBlocked
-  : AuditDisposition
+  attributionBoundaryConfirmed : AuditDisposition
+  localClassificationCorrected : AuditDisposition
+  interpretiveBridgeRemainsExplicit : AuditDisposition
+  unresolvedSourcePromotionBlocked : AuditDisposition
+
 
 data AuditIssueKind : Set where
-  parserAuthorityBoundary
-  ocrTranscriptionBoundary
-  sourceAuthorshipBoundary
-  underlyingDataProvenanceBoundary
-  publicationStatusBoundary
-  causalDesignBoundary
-  legalAuthorityBoundary
-  interpretationBoundary
-  quantitativeComparabilityBoundary
-  : AuditIssueKind
+  parserAuthorityBoundary : AuditIssueKind
+  ocrTranscriptionBoundary : AuditIssueKind
+  sourceAuthorshipBoundary : AuditIssueKind
+  underlyingDataProvenanceBoundary : AuditIssueKind
+  publicationStatusBoundary : AuditIssueKind
+  causalDesignBoundary : AuditIssueKind
+  legalAuthorityBoundary : AuditIssueKind
+  interpretationBoundary : AuditIssueKind
+  quantitativeComparabilityBoundary : AuditIssueKind
+
 
 record SourceAttributionAuditItem : Set where
   constructor sourceAttributionAuditItem

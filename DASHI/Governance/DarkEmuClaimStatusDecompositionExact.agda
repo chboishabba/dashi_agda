@@ -15,11 +15,11 @@ import DASHI.Governance.MithakaArchaeologicalEvidenceExact as Mithaka
 ------------------------------------------------------------------------
 
 data ClaimKind : Set where
-  localMaterialPractice
-  historicalSourceUse
-  classificatoryLabel
-  geographicGeneralization
-  : ClaimKind
+  localMaterialPractice : ClaimKind
+  historicalSourceUse : ClaimKind
+  classificatoryLabel : ClaimKind
+  geographicGeneralization : ClaimKind
+
 
 data ClaimStatus : ClaimKind → Set where
   independentlySupportedLocalPractice : ClaimStatus localMaterialPractice

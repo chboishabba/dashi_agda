@@ -20,37 +20,37 @@ import DASHI.Governance.HistoricalDrugGovernanceClassifierExact as Historical
 ------------------------------------------------------------------------
 
 data CategoryChart : Set where
-  stateLegalChart
-  enforcementChart
-  biomedicalChart
-  veteranClinicalChart
-  commercialChart
-  livedSubjectChart
-  affectedCommunityChart
-  indigenousSovereignChart
-  : CategoryChart
+  stateLegalChart : CategoryChart
+  enforcementChart : CategoryChart
+  biomedicalChart : CategoryChart
+  veteranClinicalChart : CategoryChart
+  commercialChart : CategoryChart
+  livedSubjectChart : CategoryChart
+  affectedCommunityChart : CategoryChart
+  indigenousSovereignChart : CategoryChart
+
 
 data CategoryUsePractice : Set where
-  prohibitUse
-  policeUse
-  diagnoseUse
-  treatUse
-  researchUse
-  commercialiseUse
-  selfDescribeUse
-  communityGovernUse
-  ceremonialGovernUse
-  : CategoryUsePractice
+  prohibitUse : CategoryUsePractice
+  policeUse : CategoryUsePractice
+  diagnoseUse : CategoryUsePractice
+  treatUse : CategoryUsePractice
+  researchUse : CategoryUsePractice
+  commercialiseUse : CategoryUsePractice
+  selfDescribeUse : CategoryUsePractice
+  communityGovernUse : CategoryUsePractice
+  ceremonialGovernUse : CategoryUsePractice
+
 
 data ContestedSubject : Set where
-  genericDrugCarrier
-  countercultureCarrier
-  veteranCarrier
-  regulatedPatientCarrier
-  criminalizedCarrier
-  commercialConsumerCarrier
-  indigenousCeremonialCarrier
-  : ContestedSubject
+  genericDrugCarrier : ContestedSubject
+  countercultureCarrier : ContestedSubject
+  veteranCarrier : ContestedSubject
+  regulatedPatientCarrier : ContestedSubject
+  criminalizedCarrier : ContestedSubject
+  commercialConsumerCarrier : ContestedSubject
+  indigenousCeremonialCarrier : ContestedSubject
+
 
 record CategoryAssertion : Set where
   constructor categoryAssertion
@@ -71,26 +71,26 @@ open CategoryAssertion public
 ------------------------------------------------------------------------
 
 data ContestReason : Set where
-  originatingSubjectPositionErased
-  affectedCommunityVoiceErased
-  usePracticeMismatch
-  historicalResidueErased
-  clinicalEvidenceMismatch
-  democraticLegitimacyGap
-  indigenousSovereigntyErased
-  commercialCaptureCandidate
-  : ContestReason
+  originatingSubjectPositionErased : ContestReason
+  affectedCommunityVoiceErased : ContestReason
+  usePracticeMismatch : ContestReason
+  historicalResidueErased : ContestReason
+  clinicalEvidenceMismatch : ContestReason
+  democraticLegitimacyGap : ContestReason
+  indigenousSovereigntyErased : ContestReason
+  commercialCaptureCandidate : ContestReason
+
 
 data ResidualCoordinate : Set where
-  subjectAuthorshipResidual
-  communityVoiceResidual
-  usePracticeResidual
-  historicalPathResidual
-  clinicalNeedResidual
-  legitimacyResidual
-  sovereigntyResidual
-  materialBenefitResidual
-  : ResidualCoordinate
+  subjectAuthorshipResidual : ResidualCoordinate
+  communityVoiceResidual : ResidualCoordinate
+  usePracticeResidual : ResidualCoordinate
+  historicalPathResidual : ResidualCoordinate
+  clinicalNeedResidual : ResidualCoordinate
+  legitimacyResidual : ResidualCoordinate
+  sovereigntyResidual : ResidualCoordinate
+  materialBenefitResidual : ResidualCoordinate
+
 
 record CategoryContest (assertion : CategoryAssertion) : Set where
   constructor categoryContest
@@ -125,18 +125,18 @@ record RechartReceipt (assertion : CategoryAssertion) : Set where
 ------------------------------------------------------------------------
 
 data PatientUseState : Set where
-  stateAdminPatient
-  clinicalCarePatient
-  selfSituatedPatient
-  : PatientUseState
+  stateAdminPatient : PatientUseState
+  clinicalCarePatient : PatientUseState
+  selfSituatedPatient : PatientUseState
+
 
 data PatientWord : Set where samePatientWord : PatientWord
 
 data PatientPracticeCode : Set where
-  administrativePatientCode
-  clinicalPatientCode
-  livedPatientCode
-  : PatientPracticeCode
+  administrativePatientCode : PatientPracticeCode
+  clinicalPatientCode : PatientPracticeCode
+  livedPatientCode : PatientPracticeCode
+
 
 patientWord : PatientUseState → PatientWord
 patientWord _ = samePatientWord

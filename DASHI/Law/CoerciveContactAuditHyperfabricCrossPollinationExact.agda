@@ -84,7 +84,7 @@ forceToRecordProjection = fabricTransport
 ------------------------------------------------------------------------
 
 data Residual : Set where
-  authorityResidual transitionResidual denominatorResidual counterfactualResidual
+  authorityResidual transitionResidual denominatorResidual counterfactualResidual : Residual
   traceResidual recordingResidual telemetryResidual witnessResidual : Residual
 
 claimResidual : Wand.ConsumerClaim → Residual

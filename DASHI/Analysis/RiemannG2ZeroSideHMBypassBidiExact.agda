@@ -42,22 +42,22 @@ canonicalHXAndTargetWindowToHW H_X m w attachment =
 ------------------------------------------------------------------------
 
 data ZeroSideNode : Set where
-  canonicalHX
-  historicalHM
-  canonicalHT
-  literalTargetModulation
-  literalPoleNearTargetWindow
-  modulationSpectralIdentification
-  historicalHW
-  signedFiniteNearEvaluation
-  : ZeroSideNode
+  canonicalHX : ZeroSideNode
+  historicalHM : ZeroSideNode
+  canonicalHT : ZeroSideNode
+  literalTargetModulation : ZeroSideNode
+  literalPoleNearTargetWindow : ZeroSideNode
+  modulationSpectralIdentification : ZeroSideNode
+  historicalHW : ZeroSideNode
+  signedFiniteNearEvaluation : ZeroSideNode
+
 
 data EdgeKind : Set where
-  compilerEdge
-  liveSameObjectEdge
-  liveAnalyticEdge
-  optionalLegacyEdge
-  : EdgeKind
+  compilerEdge : EdgeKind
+  liveSameObjectEdge : EdgeKind
+  liveAnalyticEdge : EdgeKind
+  optionalLegacyEdge : EdgeKind
+
 
 record ZeroSideDependencyEdge : Set where
   constructor zero-side-dependency-edge
@@ -98,14 +98,14 @@ hmLegacyEdge =
 ------------------------------------------------------------------------
 
 data ZeroSideSearchAction : Set where
-  recoverCanonicalHXAction
-  recoverLiteralPoleNearTargetWindow
-  proveSameSelectedWindowAttachment
-  reproveHTAfterHX
-  closeHMPointwiseFactorizationBeforeHW
-  reproveHWFamilyInterface
-  evaluateFiniteSignedNearResponse
-  : ZeroSideSearchAction
+  recoverCanonicalHXAction : ZeroSideSearchAction
+  recoverLiteralPoleNearTargetWindow : ZeroSideSearchAction
+  proveSameSelectedWindowAttachment : ZeroSideSearchAction
+  reproveHTAfterHX : ZeroSideSearchAction
+  closeHMPointwiseFactorizationBeforeHW : ZeroSideSearchAction
+  reproveHWFamilyInterface : ZeroSideSearchAction
+  evaluateFiniteSignedNearResponse : ZeroSideSearchAction
+
 
 data SearchStatus : Set where
   live pruned downstream parallel : SearchStatus

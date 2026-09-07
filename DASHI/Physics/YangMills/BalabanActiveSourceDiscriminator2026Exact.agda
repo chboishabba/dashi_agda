@@ -24,13 +24,13 @@ import DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140
 ------------------------------------------------------------------------
 
 data SourceSeam : Set where
-  densityToRepositoryState
-  repositoryStateToBC1Potential
-  stressVariationToWholeLocalizedD1
-  metricPerturbationAdmissibility
-  a1A2ToBetaDensityHistory
-  cmp119MeasureSchwingerEndpoint
-  : SourceSeam
+  densityToRepositoryState : SourceSeam
+  repositoryStateToBC1Potential : SourceSeam
+  stressVariationToWholeLocalizedD1 : SourceSeam
+  metricPerturbationAdmissibility : SourceSeam
+  a1A2ToBetaDensityHistory : SourceSeam
+  cmp119MeasureSchwingerEndpoint : SourceSeam
+
 
 seamReference : SourceSeam → String
 seamReference densityToRepositoryState =
@@ -52,11 +52,11 @@ seamReference cmp119MeasureSchwingerEndpoint =
 ------------------------------------------------------------------------
 
 data SourceWorld : Set where
-  labelsOnly
-  actionRealised
-  stressRealised
-  literalRecoveryReady
-  : SourceWorld
+  labelsOnly : SourceWorld
+  actionRealised : SourceWorld
+  stressRealised : SourceWorld
+  literalRecoveryReady : SourceWorld
+
 
 -- Public/narrative naming cannot distinguish these worlds.
 data CoarseSourceSurface : Set where sameBalabanRecoveryClaim : CoarseSourceSurface

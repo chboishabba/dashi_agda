@@ -79,12 +79,12 @@ canonicalRecoveredGammaCandidateLineage =
 ------------------------------------------------------------------------
 
 data GammaLineagePayment : Set where
-  searchForAnyConcreteGammaSourceFamily
-  recoverCandidateGammaEnvelopeFamily
-  proveCandidateFeeds8889PoleQuotientBound
-  localizePrecisionLossInsideCandidateBeforeIdentity
-  localizePrecisionLossAfterSameConsumerIdentity
-  : GammaLineagePayment
+  searchForAnyConcreteGammaSourceFamily : GammaLineagePayment
+  recoverCandidateGammaEnvelopeFamily : GammaLineagePayment
+  proveCandidateFeeds8889PoleQuotientBound : GammaLineagePayment
+  localizePrecisionLossInsideCandidateBeforeIdentity : GammaLineagePayment
+  localizePrecisionLossAfterSameConsumerIdentity : GammaLineagePayment
+
 
 data PaymentStatus : Set where
   pruned owned live blocked downstream : PaymentStatus

@@ -15,29 +15,29 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data QuantifierForce : Set where
-  existentialQ
-  studyPopulationQ
-  boundedUniversalQ
+  existentialQ : QuantifierForce
+  studyPopulationQ : QuantifierForce
+  boundedUniversalQ : QuantifierForce
   universalQ : QuantifierForce
 
 data InferentialForce : Set where
-  descriptiveF
-  associationalF
-  comparativeF
-  causalF
-  bestPracticeF
+  descriptiveF : InferentialForce
+  associationalF : InferentialForce
+  comparativeF : InferentialForce
+  causalF : InferentialForce
+  bestPracticeF : InferentialForce
   normativeF : InferentialForce
 
 data PredicateRole : Set where
-  populationPredicate
-  contextPredicate
-  interventionPredicate
-  comparatorPredicate
-  outcomePredicate
-  temporalPredicate
-  causalPredicate
-  transportPredicate
-  significancePredicate
+  populationPredicate : PredicateRole
+  contextPredicate : PredicateRole
+  interventionPredicate : PredicateRole
+  comparatorPredicate : PredicateRole
+  outcomePredicate : PredicateRole
+  temporalPredicate : PredicateRole
+  causalPredicate : PredicateRole
+  transportPredicate : PredicateRole
+  significancePredicate : PredicateRole
   authorityPredicate : PredicateRole
 
 record PredicateAtom : Set where
@@ -82,16 +82,16 @@ open PredicateNormalAssertion public
 ------------------------------------------------------------------------
 
 data ObligationKind : Set where
-  predicateContentObligation
-  quantifierObligation
-  populationScopeObligation
-  contextScopeObligation
-  comparatorObligation
-  outcomeObligation
-  temporalObligation
-  causalForceObligation
-  transportObligation
-  practicalSignificanceObligation
+  predicateContentObligation : ObligationKind
+  quantifierObligation : ObligationKind
+  populationScopeObligation : ObligationKind
+  contextScopeObligation : ObligationKind
+  comparatorObligation : ObligationKind
+  outcomeObligation : ObligationKind
+  temporalObligation : ObligationKind
+  causalForceObligation : ObligationKind
+  transportObligation : ObligationKind
+  practicalSignificanceObligation : ObligationKind
   normativePromotionObligation : ObligationKind
 
 record AssertionObligation : Set where
@@ -104,10 +104,10 @@ record AssertionObligation : Set where
 open AssertionObligation public
 
 data ObligationStatus : Set where
-  discharged
-  partiallyDischarged
-  unresolved
-  contradictedAtSameScope
+  discharged : ObligationStatus
+  partiallyDischarged : ObligationStatus
+  unresolved : ObligationStatus
+  contradictedAtSameScope : ObligationStatus
   inadmissibleEvidence : ObligationStatus
 
 record ObligationAudit : Set where
@@ -126,15 +126,15 @@ open ObligationAudit public
 ------------------------------------------------------------------------
 
 data PromotionDelta : Set where
-  sameAssertionStrength
-  widensPopulation
-  widensContext
-  strengthensQuantifier
-  strengthensCausalForce
-  strengthensComparativeForce
-  strengthensNormativeForce
-  dropsContextPredicate
-  dropsComparator
+  sameAssertionStrength : PromotionDelta
+  widensPopulation : PromotionDelta
+  widensContext : PromotionDelta
+  strengthensQuantifier : PromotionDelta
+  strengthensCausalForce : PromotionDelta
+  strengthensComparativeForce : PromotionDelta
+  strengthensNormativeForce : PromotionDelta
+  dropsContextPredicate : PromotionDelta
+  dropsComparator : PromotionDelta
   dropsUncertainty : PromotionDelta
 
 record ProposedPromotion : Set where
@@ -172,8 +172,8 @@ promotionHasReceipt (promote receipt) = receipt
 ------------------------------------------------------------------------
 
 data LogicalShape : Set where
-  someInstance
-  allInstances
+  someInstance : LogicalShape
+  allInstances : LogicalShape
   noInstance : LogicalShape
 
 some≢all : ¬ (someInstance ≡ allInstances)

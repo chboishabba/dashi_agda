@@ -1,6 +1,7 @@
 module DASHI.Environment.LESConsumerRelativeMechanismReductionExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
 import DASHI.Core.PredictionEnvelopeExact as Envelope
@@ -80,8 +81,6 @@ record LESMeasurementEnvelopeQuestion
     Envelope.MeasurementClosesEnvelope
       compatible measure consumer (currentEvidence , measuredValue)
 
-open LESMeasurementEnvelopeQuestion public
-
 record LESAssimilationStep
     (mechanism : Basis.DomainMechanismSocket) : Set₁ where
   constructor lesAssimilationStep
@@ -96,8 +95,6 @@ record LESAssimilationStep
   assimilatedCompatible : Basis.State mechanism → Set
   assimilatedCompatible =
     Envelope.MeasuredCompatible compatible measure (priorEvidence , observation)
-
-open LESAssimilationStep public
 
 record LESMechanismEquifinality
     (mechanism : Basis.DomainMechanismSocket)

@@ -21,21 +21,21 @@ data CanonicalSource : Set where
   rawImageSource refinedCandidateSource : CanonicalSource
 
 data GateWarning : Set where
-  lowViewDiversity
-  longLensFlatteningRisk
-  coarseDetectorEvidence
-  finalExportRepaired
+  lowViewDiversity : GateWarning
+  longLensFlatteningRisk : GateWarning
+  coarseDetectorEvidence : GateWarning
+  finalExportRepaired : GateWarning
   retainedDiagnosticWarning : GateWarning
 
 data GateBlocker : Set where
-  nonFiniteCandidate
-  malformedPolicy
-  solverFailure
-  excessiveBetaShift
-  residualDegradation
-  invalidFinalTopology
-  lowBodyTrust
-  skullResidualExceeded
+  nonFiniteCandidate : GateBlocker
+  malformedPolicy : GateBlocker
+  solverFailure : GateBlocker
+  excessiveBetaShift : GateBlocker
+  residualDegradation : GateBlocker
+  invalidFinalTopology : GateBlocker
+  lowBodyTrust : GateBlocker
+  skullResidualExceeded : GateBlocker
   missingLineage : GateBlocker
 
 data Consumer : Set where
@@ -218,18 +218,18 @@ warningsDoNotUniversallyVetoBody =
 
 
 data PipelineStage : Set where
-  observationStage
-  imageFitStage
-  refinementStage
-  bodyCarrierStage
-  bodyFieldStage
-  seamCostStage
-  solverPromotionStage
-  cutTopologyStage
-  metricCorrectionStage
-  sequentialSearchStage
-  serializationCompetitionStage
-  panelUnwrapStage
+  observationStage : PipelineStage
+  imageFitStage : PipelineStage
+  refinementStage : PipelineStage
+  bodyCarrierStage : PipelineStage
+  bodyFieldStage : PipelineStage
+  seamCostStage : PipelineStage
+  solverPromotionStage : PipelineStage
+  cutTopologyStage : PipelineStage
+  metricCorrectionStage : PipelineStage
+  sequentialSearchStage : PipelineStage
+  serializationCompetitionStage : PipelineStage
+  panelUnwrapStage : PipelineStage
   manufacturingArtifactStage : PipelineStage
 
 record StageArtifact : Set where
@@ -278,17 +278,17 @@ gate6V1ProvesBasisExhaustion = false
 
 
 data PanelOperator : Set where
-  stretchZone
-  gussetPatch
-  dartWedge
-  lensPatch
-  reliefPath
-  reliefTree
-  drainPath
-  grainRotation
-  easeBand
-  seamRelocation
-  boundarySplit
+  stretchZone : PanelOperator
+  gussetPatch : PanelOperator
+  dartWedge : PanelOperator
+  lensPatch : PanelOperator
+  reliefPath : PanelOperator
+  reliefTree : PanelOperator
+  drainPath : PanelOperator
+  grainRotation : PanelOperator
+  easeBand : PanelOperator
+  seamRelocation : PanelOperator
+  boundarySplit : PanelOperator
   variableKnitProxy : PanelOperator
 
 record PanelState : Set where
@@ -349,10 +349,10 @@ open Gate6SearchReceiptV2 public
 
 
 data FailureClass : Set where
-  operatorExpressivityFailure
-  serializationBackendFailure
-  panelizationFailure
-  physicalOrMaterialPolicyInfeasibility
+  operatorExpressivityFailure : FailureClass
+  serializationBackendFailure : FailureClass
+  panelizationFailure : FailureClass
+  physicalOrMaterialPolicyInfeasibility : FailureClass
   indeterminateFailure : FailureClass
 
 record FailureDiagnosis : Set where

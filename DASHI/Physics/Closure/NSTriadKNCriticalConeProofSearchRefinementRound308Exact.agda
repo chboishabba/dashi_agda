@@ -37,11 +37,11 @@ data CriticalConeSubproblem : Set where
   flShoulder hhShoulder comparable : CriticalConeSubproblem
 
 data RefinementState : Set where
-  heatOnlyDiagnostic
-  scalarCommutatorReuse
-  outerHelicitySlotKernel
-  nestedProjectedNonlinearity
-  rowColumnShellBudget
+  heatOnlyDiagnostic : RefinementState
+  scalarCommutatorReuse : RefinementState
+  outerHelicitySlotKernel : RefinementState
+  nestedProjectedNonlinearity : RefinementState
+  rowColumnShellBudget : RefinementState
   spacetimePayment : RefinementState
 
 heatOnlyRoute : Admission.RouteDisposition

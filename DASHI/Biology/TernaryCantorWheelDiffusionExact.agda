@@ -1,6 +1,7 @@
 module DASHI.Biology.TernaryCantorWheelDiffusionExact where
 
 open import DASHI.Core.Prelude
+open import Relation.Binary.PropositionalEquality using (cong₂)
 open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
@@ -84,9 +85,8 @@ rotateWheelAddressThree :
       (rotateWheelAddress xs))
   ≡ xs
 rotateWheelAddressThree vnil = refl
-rotateWheelAddressThree (x vcons xs)
-  with nextWheelPhaseThree x | rotateWheelAddressThree xs
-... | refl | refl = refl
+rotateWheelAddressThree (x vcons xs) =
+  cong₂ _vcons_ (nextWheelPhaseThree x) (rotateWheelAddressThree xs)
 
 ------------------------------------------------------------------------
 -- Finite diffusion on a three-sector wheel.

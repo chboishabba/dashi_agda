@@ -13,11 +13,11 @@ import FascisticSystem as Fascist
 ------------------------------------------------------------------------
 
 data FascismFeature : Set where
-  distinctionErasure
-  provenanceWeaponisation
-  collectiveGuiltTransport
-  terminalisation
-  asymmetricRouting
+  distinctionErasure : FascismFeature
+  provenanceWeaponisation : FascismFeature
+  collectiveGuiltTransport : FascismFeature
+  terminalisation : FascismFeature
+  asymmetricRouting : FascismFeature
   coerciveContraction : FascismFeature
 
 record FeatureReceipt : Set where
@@ -60,16 +60,16 @@ canonicalSourceOnlyAssessment = fascismAssessmentFibre
 ------------------------------------------------------------------------
 
 data CrossPollinationClaim : Set where
-  genocideFindingInvitesFascismFeatureAudit
-  herzogIncitementFindingInvitesCommandIdeologyAudit
-  historicalTerrorismInvitesGenealogyAudit
+  genocideFindingInvitesFascismFeatureAudit : CrossPollinationClaim
+  herzogIncitementFindingInvitesCommandIdeologyAudit : CrossPollinationClaim
+  historicalTerrorismInvitesGenealogyAudit : CrossPollinationClaim
   fascismDiagnosisClosed : CrossPollinationClaim
 
 data CrossPollinationProducer : Set where
-  sourceReceiptProducer
-  featureSpecificEmpiricalReceiptProducer
-  commandIdeologyBridgeProducer
-  genealogyReceiptProducer
+  sourceReceiptProducer : CrossPollinationProducer
+  featureSpecificEmpiricalReceiptProducer : CrossPollinationProducer
+  commandIdeologyBridgeProducer : CrossPollinationProducer
+  genealogyReceiptProducer : CrossPollinationProducer
   fullFascismAssessmentProducer : CrossPollinationProducer
 
 reverseCrossPollination : CrossPollinationClaim → CrossPollinationProducer

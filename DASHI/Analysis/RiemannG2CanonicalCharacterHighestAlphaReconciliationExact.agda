@@ -84,13 +84,13 @@ open CanonicalCharacterCarrierAttachment public
 ------------------------------------------------------------------------
 
 data HXSearchAction : Set where
-  rebuildConstructedComplexNumbers
-  reproveRealPhaseCoherence
-  reproveComplexExpAdditivity
-  reproveCosineProjection
-  proveCanonicalCarrierAttachment
-  continueToCanonicalTestModulation
-  : HXSearchAction
+  rebuildConstructedComplexNumbers : HXSearchAction
+  reproveRealPhaseCoherence : HXSearchAction
+  reproveComplexExpAdditivity : HXSearchAction
+  reproveCosineProjection : HXSearchAction
+  proveCanonicalCarrierAttachment : HXSearchAction
+  continueToCanonicalTestModulation : HXSearchAction
+
 
 HXRelevant : HXSearchAction → Set
 HXRelevant rebuildConstructedComplexNumbers = ⊥

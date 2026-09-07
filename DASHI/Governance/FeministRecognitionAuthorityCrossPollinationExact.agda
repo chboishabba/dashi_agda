@@ -40,19 +40,19 @@ import DASHI.Core.RecognitionConstitutionNonfactorabilityExact as Recognition
 ------------------------------------------------------------------------
 
 data TheoremPattern : Set where
-  erasedCoordinateNonfactorability
-  strictPositiveRecharting
-  nonlinearIntersection
-  capabilityRecognitionSeparation
-  antiSublationExteriorAuthority
-  recognitionConstitutionSeparation
-  subjectPositionNonfactorability
-  relationalMultiplicity
-  sameCarrierDifferentGrammar
-  : TheoremPattern
+  erasedCoordinateNonfactorability : TheoremPattern
+  strictPositiveRecharting : TheoremPattern
+  nonlinearIntersection : TheoremPattern
+  capabilityRecognitionSeparation : TheoremPattern
+  antiSublationExteriorAuthority : TheoremPattern
+  recognitionConstitutionSeparation : TheoremPattern
+  subjectPositionNonfactorability : TheoremPattern
+  relationalMultiplicity : TheoremPattern
+  sameCarrierDifferentGrammar : TheoremPattern
+
 
 data SourceRegister : Set where
-  irigarayRegister cixousRegister lordeRegister wittigRegister crenshawRegister
+  irigarayRegister cixousRegister lordeRegister wittigRegister crenshawRegister : SourceRegister
   moretonRobinsonRegister smithRegister whyteRegister : SourceRegister
 
 record CrossPollinationRole : Set where

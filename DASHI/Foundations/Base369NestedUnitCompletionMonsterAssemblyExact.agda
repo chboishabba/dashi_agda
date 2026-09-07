@@ -17,12 +17,12 @@ import DASHI.Biology.MoonshineWeightTwoGriessProductSchemaExact as Griess
 ------------------------------------------------------------------------
 
 data UnitRole : Set where
-  quotientIdentityRole
-  pointedCompletionJRole
-  stageFreshUnitRole
-  localBoundaryInvariantRole
-  conformalInvariantRole
-  : UnitRole
+  quotientIdentityRole : UnitRole
+  pointedCompletionJRole : UnitRole
+  stageFreshUnitRole : UnitRole
+  localBoundaryInvariantRole : UnitRole
+  conformalInvariantRole : UnitRole
+
 
 data UnitAt (role : UnitRole) : Set where
   unit-at : UnitAt role

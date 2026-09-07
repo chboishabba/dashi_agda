@@ -90,12 +90,12 @@ selectedArithmeticIsClusterNearFar {space} {formula} {attachment = attachment} w
 ------------------------------------------------------------------------
 
 data ExplicitFormulaWeldPayment : Set where
-  reconstructGenericExplicitFormula
-  identifyWholeSourceTestCarrier
-  recoverSelectedOrbitEmbedding
-  recoverSelectedSpectralNearFarEquality
-  reuseCanonicalExplicitFormulaOnSelectedTest
-  : ExplicitFormulaWeldPayment
+  reconstructGenericExplicitFormula : ExplicitFormulaWeldPayment
+  identifyWholeSourceTestCarrier : ExplicitFormulaWeldPayment
+  recoverSelectedOrbitEmbedding : ExplicitFormulaWeldPayment
+  recoverSelectedSpectralNearFarEquality : ExplicitFormulaWeldPayment
+  reuseCanonicalExplicitFormulaOnSelectedTest : ExplicitFormulaWeldPayment
+
 
 PaymentRelevant : ExplicitFormulaWeldPayment → Set
 PaymentRelevant reconstructGenericExplicitFormula = ⊥

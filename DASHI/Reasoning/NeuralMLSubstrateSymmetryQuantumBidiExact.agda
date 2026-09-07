@@ -31,13 +31,13 @@ import DASHI.Governance.ConsciousnessPhysicalDiscriminatorSynthesisExact as Cons
 ------------------------------------------------------------------------
 
 data AbstractionLayer : Set where
-  behaviouralSurface
-  statisticalFunction
-  learnedRepresentation
-  realisedCausalTopology
-  physicalSubstrate
-  phenomenalInstantiation
-  : AbstractionLayer
+  behaviouralSurface : AbstractionLayer
+  statisticalFunction : AbstractionLayer
+  learnedRepresentation : AbstractionLayer
+  realisedCausalTopology : AbstractionLayer
+  physicalSubstrate : AbstractionLayer
+  phenomenalInstantiation : AbstractionLayer
+
 
 record NeuralMLBidiReceipt : Set where
   constructor neural-ml-bidi-receipt

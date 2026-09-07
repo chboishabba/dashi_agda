@@ -88,8 +88,8 @@ volumeIndexedGapIsUniform : ∀ firstVolume secondVolume →
 volumeIndexedGapIsUniform firstVolume secondVolume = refl
 
 data MeasureModelTag : Set where
-  independentFiniteToyModel
-  interactingNonabelianLatticeYangMills
+  independentFiniteToyModel : MeasureModelTag
+  interactingNonabelianLatticeYangMills : MeasureModelTag
   continuumYangMillsMeasure : MeasureModelTag
 
 finiteToyIsNotInteractingYangMills :

@@ -23,11 +23,11 @@ import DASHI.Analysis.RiemannG2TargetCenteredScalarCancellationAssemblyExact as 
 ------------------------------------------------------------------------
 
 data ComparisonChangeKind : Set where
-  explicitBalanceDefect
-  changedComparisonObject
-  strictOffClusterSeparation
-  refinedConsumerWithDifferentMargin
-  : ComparisonChangeKind
+  explicitBalanceDefect : ComparisonChangeKind
+  changedComparisonObject : ComparisonChangeKind
+  strictOffClusterSeparation : ComparisonChangeKind
+  refinedConsumerWithDifferentMargin : ComparisonChangeKind
+
 
 record LiteralG2ComparisonProblem : Set₁ where
   field
@@ -95,12 +95,12 @@ scalarClosureAndBalanceBreakAdmitFinalComparison S P scalarClosed break strictBe
 ------------------------------------------------------------------------
 
 data PostScalarSearchMove : Set where
-  tightenSameScalarEstimate
-  exposeBalanceDefect
-  changeComparisonObject
-  proveStrictOffClusterSeparation
-  refineFinalConsumerMargin
-  : PostScalarSearchMove
+  tightenSameScalarEstimate : PostScalarSearchMove
+  exposeBalanceDefect : PostScalarSearchMove
+  changeComparisonObject : PostScalarSearchMove
+  proveStrictOffClusterSeparation : PostScalarSearchMove
+  refineFinalConsumerMargin : PostScalarSearchMove
+
 
 SearchRelevantAfterScalarClosure : PostScalarSearchMove -> Set
 SearchRelevantAfterScalarClosure tightenSameScalarEstimate = ⊥

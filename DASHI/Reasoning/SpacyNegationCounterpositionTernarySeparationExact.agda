@@ -46,10 +46,10 @@ negationCandidateFormulaIsNotF
 ------------------------------------------------------------------------
 
 data SpacyDialecticOperator : Set where
-  parserScopedNegation
-  contextualCounterposition
-  ternarySuspension
-  : SpacyDialecticOperator
+  parserScopedNegation : SpacyDialecticOperator
+  contextualCounterposition : SpacyDialecticOperator
+  ternarySuspension : SpacyDialecticOperator
+
 
 parserNegationIsNotCounterposition :
   parserScopedNegation ≡ contextualCounterposition → ⊥

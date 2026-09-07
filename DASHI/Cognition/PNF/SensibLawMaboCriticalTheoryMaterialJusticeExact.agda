@@ -26,29 +26,29 @@ import DASHI.Governance.SituatedConstituency as Situated
 ------------------------------------------------------------------------
 
 data ClaimAuthorityClass : Set where
-  courtHoldingClass
-  courtInternalPremiseClass
-  officialEmpiricalReceiptClass
-  criticalTheoryLensClass
-  decolonialNormativeHypothesisClass
-  affectedCommunityClaimClass
-  : ClaimAuthorityClass
+  courtHoldingClass : ClaimAuthorityClass
+  courtInternalPremiseClass : ClaimAuthorityClass
+  officialEmpiricalReceiptClass : ClaimAuthorityClass
+  criticalTheoryLensClass : ClaimAuthorityClass
+  decolonialNormativeHypothesisClass : ClaimAuthorityClass
+  affectedCommunityClaimClass : ClaimAuthorityClass
+
 
 data CriticalCourtFeature : Set where
-  crownSovereigntyTreatedAsNonJusticiable
-  consequencesOfCrownSovereigntyRemainJusticiable
-  recognitionPowerHeldByColonialState
-  remedyDefinedInsideColonialLegalOrder
-  affectedCommunityNormativeSourceExternalToCourt
-  landReturnNotEntailedByRecognition
-  : CriticalCourtFeature
+  crownSovereigntyTreatedAsNonJusticiable : CriticalCourtFeature
+  consequencesOfCrownSovereigntyRemainJusticiable : CriticalCourtFeature
+  recognitionPowerHeldByColonialState : CriticalCourtFeature
+  remedyDefinedInsideColonialLegalOrder : CriticalCourtFeature
+  affectedCommunityNormativeSourceExternalToCourt : CriticalCourtFeature
+  landReturnNotEntailedByRecognition : CriticalCourtFeature
+
 
 data LensStatus : Set where
-  lensCandidate
-  sourceBackedCriticalLens
-  contestedInterpretiveFramework
-  adjudicatedWorldTruth
-  : LensStatus
+  lensCandidate : LensStatus
+  sourceBackedCriticalLens : LensStatus
+  contestedInterpretiveFramework : LensStatus
+  adjudicatedWorldTruth : LensStatus
+
 
 record CriticalCourtLens : Set where
   constructor criticalCourtLens
@@ -115,14 +115,14 @@ maboSovereigntyJusticiability = maboSovereigntyJusticiabilityReceipt
 ------------------------------------------------------------------------
 
 data MaterialJusticeDomain : Set where
-  landProtectionDomain
-  landRestitutionDomain
-  sovereigntyRecognitionDomain
-  politicalRecognitionDomain
-  apologyAcknowledgementDomain
-  socioeconomicOutcomeDomain
-  institutionalRepairDomain
-  : MaterialJusticeDomain
+  landProtectionDomain : MaterialJusticeDomain
+  landRestitutionDomain : MaterialJusticeDomain
+  sovereigntyRecognitionDomain : MaterialJusticeDomain
+  politicalRecognitionDomain : MaterialJusticeDomain
+  apologyAcknowledgementDomain : MaterialJusticeDomain
+  socioeconomicOutcomeDomain : MaterialJusticeDomain
+  institutionalRepairDomain : MaterialJusticeDomain
+
 
 record BarrambinMaterialEfficacyReceipt : Set where
   constructor barrambinMaterialEfficacyReceipt
@@ -216,24 +216,24 @@ ruddApology2008 = nationalApologyReceipt
 ------------------------------------------------------------------------
 
 data RepairAxis : Set where
-  nativeTitleRecognitionAxis
-  indigenousSovereigntyRecognitionAxis
-  landProtectionAxis
-  landReturnAxis
-  treatyAgreementAxis
-  politicalRepresentationAxis
-  apologyAxis
-  materialReparationAxis
-  institutionalRepairAxis
-  socioeconomicOutcomeAxis
-  : RepairAxis
+  nativeTitleRecognitionAxis : RepairAxis
+  indigenousSovereigntyRecognitionAxis : RepairAxis
+  landProtectionAxis : RepairAxis
+  landReturnAxis : RepairAxis
+  treatyAgreementAxis : RepairAxis
+  politicalRepresentationAxis : RepairAxis
+  apologyAxis : RepairAxis
+  materialReparationAxis : RepairAxis
+  institutionalRepairAxis : RepairAxis
+  socioeconomicOutcomeAxis : RepairAxis
+
 
 data AxisClosure : Set where
-  repairAxisOpen
-  repairAxisPartiallyIdentified
-  repairAxisSourceMapped
-  repairAxisMateriallySatisfied
-  : AxisClosure
+  repairAxisOpen : AxisClosure
+  repairAxisPartiallyIdentified : AxisClosure
+  repairAxisSourceMapped : AxisClosure
+  repairAxisMateriallySatisfied : AxisClosure
+
 
 record CriticalRepairState : Set where
   constructor criticalRepairState
@@ -270,11 +270,11 @@ currentCriticalRepairState = criticalRepairState
 ------------------------------------------------------------------------
 
 data DecolonialHypothesisKind : Set where
-  landBackWouldMateriallyReduceGap
-  sovereigntyRecognitionWouldAlterInstitutionalRelation
-  landReturnRequiredForAdequateRepair
-  courtReformCannotByItselfDecoloniseLandRelation
-  : DecolonialHypothesisKind
+  landBackWouldMateriallyReduceGap : DecolonialHypothesisKind
+  sovereigntyRecognitionWouldAlterInstitutionalRelation : DecolonialHypothesisKind
+  landReturnRequiredForAdequateRepair : DecolonialHypothesisKind
+  courtReformCannotByItselfDecoloniseLandRelation : DecolonialHypothesisKind
+
 
 record DecolonialHypothesis : Set where
   constructor decolonialHypothesis

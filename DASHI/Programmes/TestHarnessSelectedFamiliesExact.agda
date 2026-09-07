@@ -9,8 +9,8 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data SelectedTestFamily : Set where
-  treeDiffusionBridge
-  phase3QuotientLearning
+  treeDiffusionBridge : SelectedTestFamily
+  phase3QuotientLearning : SelectedTestFamily
   backendParity : SelectedTestFamily
 
 record TreeDiffusionBridgeReceipt : Set₁ where

@@ -23,11 +23,11 @@ import DASHI.Governance.SexedHistoricalTransportedSupportConsumerClosureExact as
 ------------------------------------------------------------------------
 
 data HistoricalConsumer : Set where
-  reopeningPriorityConsumer
-  localOptionConeConsumer
-  globalCompatibilityConsumer
-  futureCorridorConsumer
-  : HistoricalConsumer
+  reopeningPriorityConsumer : HistoricalConsumer
+  localOptionConeConsumer : HistoricalConsumer
+  globalCompatibilityConsumer : HistoricalConsumer
+  futureCorridorConsumer : HistoricalConsumer
+
 
 consumerStratum : HistoricalConsumer → Strata.VoxelStratum
 consumerStratum reopeningPriorityConsumer = Strata.centreStratum
@@ -36,11 +36,11 @@ consumerStratum globalCompatibilityConsumer = Strata.edgeCentreStratum
 consumerStratum futureCorridorConsumer = Strata.cornerStratum
 
 data ConsumerDecision : Set where
-  institutionFirst distributedFirst
-  localRepairCone counterformationCone
-  compatibleGlobal blockedGlobal
-  reciprocityCorridor pluralCorridor
-  : ConsumerDecision
+  institutionFirst distributedFirst : ConsumerDecision
+  localRepairCone counterformationCone : ConsumerDecision
+  compatibleGlobal blockedGlobal : ConsumerDecision
+  reciprocityCorridor pluralCorridor : ConsumerDecision
+
 
 consumerDecision :
   HistoricalConsumer → Transported.SupportHistoryFine → ConsumerDecision
@@ -58,9 +58,9 @@ consumerDecision futureCorridorConsumer Transported.counterformedThenRepaired = 
 ------------------------------------------------------------------------
 
 data MeasurementKind : Set where
-  coarseCentreProbe
-  supportOrderSharedProbe
-  : MeasurementKind
+  coarseCentreProbe : MeasurementKind
+  supportOrderSharedProbe : MeasurementKind
+
 
 data CoversStratum : MeasurementKind → Strata.VoxelStratum → Set where
   coarseCoversCentre : CoversStratum coarseCentreProbe Strata.centreStratum

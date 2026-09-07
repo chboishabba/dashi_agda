@@ -20,12 +20,12 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data ConstitutionalAxis : Set where
-  affectedPartyRights
-  wellbeing
-  autonomyManipulation
-  externality
-  contestability
-  : ConstitutionalAxis
+  affectedPartyRights : ConstitutionalAxis
+  wellbeing : ConstitutionalAxis
+  autonomyManipulation : ConstitutionalAxis
+  externality : ConstitutionalAxis
+  contestability : ConstitutionalAxis
+
 
 data AxisCovered : ConstitutionalAxis → Set where
   rightsCovered : AxisCovered affectedPartyRights

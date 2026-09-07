@@ -24,10 +24,10 @@ import DASHI.Core.TrajectoryResidueExact as Residue
 ------------------------------------------------------------------------
 
 data EcosystemRecoveryState : Set where
-  baselineSystem
-  perturbedRecoverableSystem
-  restoredClimateButAlteredSystem
-  : EcosystemRecoveryState
+  baselineSystem : EcosystemRecoveryState
+  perturbedRecoverableSystem : EcosystemRecoveryState
+  restoredClimateButAlteredSystem : EcosystemRecoveryState
+
 
 data ClimateShadow : Set where
   baselineLikeClimate : ClimateShadow

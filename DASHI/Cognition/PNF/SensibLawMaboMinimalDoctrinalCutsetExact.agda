@@ -25,15 +25,15 @@ record MinimalDoctrinalCutset : Set where
 open MinimalDoctrinalCutset public
 
 data MinimalFirstResidual : Set where
-  sourceIdentityResidual
-  existenceContinuityResidual
-  recognitionConditionResidual
-  recognitionEvidenceResidual
-  extinguishmentResidual
-  authorityInterpretationResidual
-  unifiedReconciliationResidual
-  minimalDoctrinalClosed
-  : MinimalFirstResidual
+  sourceIdentityResidual : MinimalFirstResidual
+  existenceContinuityResidual : MinimalFirstResidual
+  recognitionConditionResidual : MinimalFirstResidual
+  recognitionEvidenceResidual : MinimalFirstResidual
+  extinguishmentResidual : MinimalFirstResidual
+  authorityInterpretationResidual : MinimalFirstResidual
+  unifiedReconciliationResidual : MinimalFirstResidual
+  minimalDoctrinalClosed : MinimalFirstResidual
+
 
 firstResidual : Minimal.MinimalDoctrinalQuery → MinimalDoctrinalCutset → MinimalFirstResidual
 firstResidual Minimal.identifyExistenceContinuity c with sourceIdentityClosed c

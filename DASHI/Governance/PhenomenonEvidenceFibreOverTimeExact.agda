@@ -18,36 +18,36 @@ import DASHI.Core.RelationalHistoryFabricExact as HistoryFabric
 ------------------------------------------------------------------------
 
 data EvidenceCoordinate : Set where
-  reportReliability
-  anomalyStrength
-  controlStrength
-  independentReplication
-  mechanismDiscrimination
-  generalisation
-  operationalUtility
-  ontologicalInference
-  : EvidenceCoordinate
+  reportReliability : EvidenceCoordinate
+  anomalyStrength : EvidenceCoordinate
+  controlStrength : EvidenceCoordinate
+  independentReplication : EvidenceCoordinate
+  mechanismDiscrimination : EvidenceCoordinate
+  generalisation : EvidenceCoordinate
+  operationalUtility : EvidenceCoordinate
+  ontologicalInference : EvidenceCoordinate
+
 
 data CoordinateStanding : Set where
-  unsupported
-  sourceReported
-  empiricallySupported
-  contested
-  downgraded
-  unresolved
-  : CoordinateStanding
+  unsupported : CoordinateStanding
+  sourceReported : CoordinateStanding
+  empiricallySupported : CoordinateStanding
+  contested : CoordinateStanding
+  downgraded : CoordinateStanding
+  unresolved : CoordinateStanding
+
 
 data EvidenceUpdateKind : Set where
-  newObservation
-  controlledReplication
-  failedReplication
-  successfulReplication
-  methodologicalCritique
-  reanalysis
-  sourceDisclosure
-  clinicalTrial
-  metaAnalysis
-  : EvidenceUpdateKind
+  newObservation : EvidenceUpdateKind
+  controlledReplication : EvidenceUpdateKind
+  failedReplication : EvidenceUpdateKind
+  successfulReplication : EvidenceUpdateKind
+  methodologicalCritique : EvidenceUpdateKind
+  reanalysis : EvidenceUpdateKind
+  sourceDisclosure : EvidenceUpdateKind
+  clinicalTrial : EvidenceUpdateKind
+  metaAnalysis : EvidenceUpdateKind
+
 
 record TemporalEvidenceSystem : Set₁ where
   field

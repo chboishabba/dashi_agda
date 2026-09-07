@@ -18,12 +18,12 @@ import DASHI.Governance.DrugCategoryConsumerQuotientRefinementExact as Refinemen
 ------------------------------------------------------------------------
 
 data ProbeKind : Set where
-  subjectProbe
-  historyProbe
-  authorityProbe
-  materialBenefitProbe
-  sovereigntyProbe
-  : ProbeKind
+  subjectProbe : ProbeKind
+  historyProbe : ProbeKind
+  authorityProbe : ProbeKind
+  materialBenefitProbe : ProbeKind
+  sovereigntyProbe : ProbeKind
+
 
 probeCost : ProbeKind → Nat
 probeCost subjectProbe = 1

@@ -20,18 +20,18 @@ import DASHI.Culture.HistoricalTotalityCriticalTheoryCrossPollinationExact as Cr
 ------------------------------------------------------------------------
 
 data DrugCategoryAudit : Set where
-  wittgensteinUseAudit
-  zizekClosureFantasyAudit
-  foucaultPowerClassificationAudit
-  marxMaterialInterestAudit
-  nietzscheValuationFormationAudit
-  spinozaPowerToActAudit
-  kantNonInstrumentalisationAudit
-  levinasOtherExceedsChartAudit
-  derridaNoFinalClosureAudit
-  feministSubjectPositionAudit
-  intersectionalAxisAudit
-  : DrugCategoryAudit
+  wittgensteinUseAudit : DrugCategoryAudit
+  zizekClosureFantasyAudit : DrugCategoryAudit
+  foucaultPowerClassificationAudit : DrugCategoryAudit
+  marxMaterialInterestAudit : DrugCategoryAudit
+  nietzscheValuationFormationAudit : DrugCategoryAudit
+  spinozaPowerToActAudit : DrugCategoryAudit
+  kantNonInstrumentalisationAudit : DrugCategoryAudit
+  levinasOtherExceedsChartAudit : DrugCategoryAudit
+  derridaNoFinalClosureAudit : DrugCategoryAudit
+  feministSubjectPositionAudit : DrugCategoryAudit
+  intersectionalAxisAudit : DrugCategoryAudit
+
 
 data AuditQuestion : DrugCategoryAudit → Set where
   askUsePractice : AuditQuestion wittgensteinUseAudit

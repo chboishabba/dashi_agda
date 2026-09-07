@@ -23,8 +23,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNCherevanResonantParaproductAudit as Resonant
 
 data FrequencyScalingConvention : Set where
-  inversePowerNarrowScale
-  dimensionallyRelativeLowScale
+  inversePowerNarrowScale : FrequencyScalingConvention
+  dimensionallyRelativeLowScale : FrequencyScalingConvention
   reconciledScalingDerivation : FrequencyScalingConvention
 
 resonantPaperNarrowScaling : FrequencyScalingConvention

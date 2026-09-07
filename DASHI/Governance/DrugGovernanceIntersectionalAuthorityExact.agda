@@ -18,22 +18,22 @@ import DASHI.Governance.TrumpDrugPolicyPsychedelicClassificationBidiExact as Tru
 ------------------------------------------------------------------------
 
 data CarrierPosition : Set where
-  criminalizedIllicitCarrier
-  veteranTrialParticipant
-  regulatedMedicalPatient
-  commercialConsumer
-  indigenousCeremonialCarrier
-  externalBiomedicalResearcher
-  : CarrierPosition
+  criminalizedIllicitCarrier : CarrierPosition
+  veteranTrialParticipant : CarrierPosition
+  regulatedMedicalPatient : CarrierPosition
+  commercialConsumer : CarrierPosition
+  indigenousCeremonialCarrier : CarrierPosition
+  externalBiomedicalResearcher : CarrierPosition
+
 
 data GovernanceStanding : Set where
-  punitiveStanding
-  clinicalResearchStanding
-  regulatedTherapeuticStanding
-  consumerMarketStanding
-  sovereignCeremonialStanding
-  externalObserverStanding
-  : GovernanceStanding
+  punitiveStanding : GovernanceStanding
+  clinicalResearchStanding : GovernanceStanding
+  regulatedTherapeuticStanding : GovernanceStanding
+  consumerMarketStanding : GovernanceStanding
+  sovereignCeremonialStanding : GovernanceStanding
+  externalObserverStanding : GovernanceStanding
+
 
 data PsychoactiveSurface : Set where
   sameBroadPsychoactiveDomain : PsychoactiveSurface

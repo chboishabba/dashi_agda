@@ -76,11 +76,11 @@ certificateReopensWhenCalibrationDependencyPathExists path =
 
 consumerDecisionReopensTransitively :
   ∀ {graph : ReductionDependencyGraph}
-    {change : ReductionChange} →
-  SelectiveReductionReopening graph change →
+    {change : ReductionChange}
+    (reopening : SelectiveReductionReopening graph change) →
   Dependency.ReopeningObligation
     (Depends graph)
-    reductionCertificateArtifact
+    (target reopening)
     consumerDecisionArtifact →
   Dependency.ReopeningObligation
     (Depends graph)

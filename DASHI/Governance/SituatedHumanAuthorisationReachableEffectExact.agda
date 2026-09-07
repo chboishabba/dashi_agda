@@ -68,14 +68,14 @@ decorativeApprovalIsNotSituatedAuthorisation _ _ = false
 ------------------------------------------------------------------------
 
 data CoercionMode : Set where
-  noPressure
-  physicalCoercion
-  institutionalCoercion
-  roleCoercion
-  epistemicCoercion
-  temporalCoercion
-  moralBlackmail
-  : CoercionMode
+  noPressure : CoercionMode
+  physicalCoercion : CoercionMode
+  institutionalCoercion : CoercionMode
+  roleCoercion : CoercionMode
+  epistemicCoercion : CoercionMode
+  temporalCoercion : CoercionMode
+  moralBlackmail : CoercionMode
+
 
 data ValidAuthorisationUnder : CoercionMode → Set where
   validUnpressuredAuthorisation : ValidAuthorisationUnder noPressure

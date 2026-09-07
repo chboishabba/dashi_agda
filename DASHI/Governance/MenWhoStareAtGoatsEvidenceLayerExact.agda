@@ -22,30 +22,30 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data GoatsClaimKind : Set where
-  programmeExistedClaim
-  remoteViewingSessionOccurredClaim
-  extraordinaryEffectClaim
-  intelligenceUtilityClaim
-  goatKillingByStaringClaim
-  institutionalInterestClaim
-  : GoatsClaimKind
+  programmeExistedClaim : GoatsClaimKind
+  remoteViewingSessionOccurredClaim : GoatsClaimKind
+  extraordinaryEffectClaim : GoatsClaimKind
+  intelligenceUtilityClaim : GoatsClaimKind
+  goatKillingByStaringClaim : GoatsClaimKind
+  institutionalInterestClaim : GoatsClaimKind
+
 
 data EvidenceLayer : Set where
-  declassifiedInstitutionalRecord
-  sessionReport
-  programmeEvaluation
-  participantTestimony
-  investigativeJournalism
-  publisherNarrative
-  dramatizedFilm
-  : EvidenceLayer
+  declassifiedInstitutionalRecord : EvidenceLayer
+  sessionReport : EvidenceLayer
+  programmeEvaluation : EvidenceLayer
+  participantTestimony : EvidenceLayer
+  investigativeJournalism : EvidenceLayer
+  publisherNarrative : EvidenceLayer
+  dramatizedFilm : EvidenceLayer
+
 
 data SupportStatus : Set where
-  documented
-  sourceReports
-  disputedOrUnresolved
-  notEstablishedHere
-  : SupportStatus
+  documented : SupportStatus
+  sourceReports : SupportStatus
+  disputedOrUnresolved : SupportStatus
+  notEstablishedHere : SupportStatus
+
 
 record GoatsEvidenceReceipt : Set where
   constructor goatsEvidenceReceipt
@@ -110,9 +110,9 @@ data PublicGoatsSurface : Set where
   sameGoatsStorySurface : PublicGoatsSurface
 
 data EvidentialWorld : Set where
-  institutionalProgrammeWorld
-  narratedExtraordinaryWorld
-  : EvidentialWorld
+  institutionalProgrammeWorld : EvidentialWorld
+  narratedExtraordinaryWorld : EvidentialWorld
+
 
 publicSurface : EvidentialWorld → PublicGoatsSurface
 publicSurface _ = sameGoatsStorySurface

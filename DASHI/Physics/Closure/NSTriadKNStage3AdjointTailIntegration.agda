@@ -30,9 +30,9 @@ import DASHI.Physics.Closure.NSTriadKNThreeWeightAffineCertificateProgram as Cer
 import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3
 
 data FirstAdjointRoute : Set where
-  directSobolevTailPrimary
-  weightedCommutatorFallback
-  restrictedHelicalNullFallback
+  directSobolevTailPrimary : FirstAdjointRoute
+  weightedCommutatorFallback : FirstAdjointRoute
+  restrictedHelicalNullFallback : FirstAdjointRoute
   phaseGeometricReconnaissanceOnly : FirstAdjointRoute
 
 selectedFirstAdjointRoute : FirstAdjointRoute

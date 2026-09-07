@@ -14,19 +14,19 @@ import DASHI.Governance.ContestedDrugCategoryAtlasBidiExact as Atlas
 ------------------------------------------------------------------------
 
 data TranslationPathState : Set where
-  stateClinicalLivedPath
-  stateCommercialLivedPath
-  stateSovereignCommunityPath
-  : TranslationPathState
+  stateClinicalLivedPath : TranslationPathState
+  stateCommercialLivedPath : TranslationPathState
+  stateSovereignCommunityPath : TranslationPathState
+
 
 data VisibleDestination : Set where
   positivePsychedelicLegibility : VisibleDestination
 
 data PathResidueCode : Set where
-  clinicalSubjectResidue
-  commercialExtractionResidue
-  sovereignCommunityResidue
-  : PathResidueCode
+  clinicalSubjectResidue : PathResidueCode
+  commercialExtractionResidue : PathResidueCode
+  sovereignCommunityResidue : PathResidueCode
+
 
 visibleDestination : TranslationPathState → VisibleDestination
 visibleDestination _ = positivePsychedelicLegibility
@@ -56,10 +56,10 @@ sameVisibleDestinationCannotRecoverTranslationPathResidue =
 ------------------------------------------------------------------------
 
 data TranslationRouteKind : Set where
-  medicalisationRoute
-  commercialisationRoute
-  sovereignCommunityRoute
-  : TranslationRouteKind
+  medicalisationRoute : TranslationRouteKind
+  commercialisationRoute : TranslationRouteKind
+  sovereignCommunityRoute : TranslationRouteKind
+
 
 routeKind : TranslationPathState → TranslationRouteKind
 routeKind stateClinicalLivedPath = medicalisationRoute

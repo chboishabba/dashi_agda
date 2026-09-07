@@ -25,12 +25,12 @@ import DASHI.Analysis.RiemannG2GammaPrecisionLossLocalizationExact as Localizati
 ------------------------------------------------------------------------
 
 data GammaProducerRecoveryStage : Set where
-  coarseBoundKnown
-  producerArtifactRequired
-  producerDecompositionRecovered
-  precisionLossLocalized
-  sharpSameTaperRepairOwned
-  : GammaProducerRecoveryStage
+  coarseBoundKnown : GammaProducerRecoveryStage
+  producerArtifactRequired : GammaProducerRecoveryStage
+  producerDecompositionRecovered : GammaProducerRecoveryStage
+  precisionLossLocalized : GammaProducerRecoveryStage
+  sharpSameTaperRepairOwned : GammaProducerRecoveryStage
+
 
 currentGammaProducerRecoveryStage : GammaProducerRecoveryStage
 currentGammaProducerRecoveryStage = producerArtifactRequired
@@ -60,14 +60,14 @@ open GammaProducerSourceLocalization public
 ------------------------------------------------------------------------
 
 data GammaSourceSearchAction : Set where
-  findAnotherGenericGammaBound
-  guessStirlingLossWithoutProducer
-  guessDigammaLossWithoutProducer
-  recoverExactUniformBoundArtifact
-  recoverExactProducerDecomposition
-  localizeFirstLossOnRecoveredProducer
-  repairLocalizedSameTaperStep
-  : GammaSourceSearchAction
+  findAnotherGenericGammaBound : GammaSourceSearchAction
+  guessStirlingLossWithoutProducer : GammaSourceSearchAction
+  guessDigammaLossWithoutProducer : GammaSourceSearchAction
+  recoverExactUniformBoundArtifact : GammaSourceSearchAction
+  recoverExactProducerDecomposition : GammaSourceSearchAction
+  localizeFirstLossOnRecoveredProducer : GammaSourceSearchAction
+  repairLocalizedSameTaperStep : GammaSourceSearchAction
+
 
 SearchRelevant : GammaSourceSearchAction -> Set
 SearchRelevant findAnotherGenericGammaBound = ⊥

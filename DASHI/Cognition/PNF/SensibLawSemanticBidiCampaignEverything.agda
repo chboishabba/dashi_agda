@@ -27,12 +27,12 @@ import DASHI.Cognition.PNF.SensibLawPdfActiveRequirementPlannerLiveExact as PdfP
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 
 data BidiCampaign : Set where
-  attributionPropositionCampaign occurrenceCampaign antecedentIdentityCampaign
-  scopeCompositionCampaign participantLegalRoleCampaign legalApplicabilityCampaign
-  documentWorldContextCampaign consumerQueryDemandCampaign
-  activeRequirementPlannerCampaign requirementProducerRoutingCampaign
-  liveProducerEvidenceCampaign resolvedLegalEvidenceCampaign
-  resolvedLegalJurisdictionCampaign legalSourceAuthorityCampaign
+  attributionPropositionCampaign occurrenceCampaign antecedentIdentityCampaign : BidiCampaign
+  scopeCompositionCampaign participantLegalRoleCampaign legalApplicabilityCampaign : BidiCampaign
+  documentWorldContextCampaign consumerQueryDemandCampaign : BidiCampaign
+  activeRequirementPlannerCampaign requirementProducerRoutingCampaign : BidiCampaign
+  liveProducerEvidenceCampaign resolvedLegalEvidenceCampaign : BidiCampaign
+  resolvedLegalJurisdictionCampaign legalSourceAuthorityCampaign : BidiCampaign
   resolvedScopePlannerCampaign pdfPlannerRegressionCampaign : BidiCampaign
 
 data CampaignReadiness : Set where

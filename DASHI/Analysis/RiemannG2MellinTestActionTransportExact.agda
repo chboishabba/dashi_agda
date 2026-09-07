@@ -136,12 +136,12 @@ toSameCarrierTestModulationPayment action = record
 ------------------------------------------------------------------------
 
 data MellinActionSearchAction : Set where
-  demandProducerDirectlyOnWeilFacade
-  recoverProducerOnCanonicalMellinTest
-  useMerelyIsomorphicFunctionSpace
-  transportAcrossCompatibilityEquality
-  continueToSameFormulaShift
-  : MellinActionSearchAction
+  demandProducerDirectlyOnWeilFacade : MellinActionSearchAction
+  recoverProducerOnCanonicalMellinTest : MellinActionSearchAction
+  useMerelyIsomorphicFunctionSpace : MellinActionSearchAction
+  transportAcrossCompatibilityEquality : MellinActionSearchAction
+  continueToSameFormulaShift : MellinActionSearchAction
+
 
 MellinActionRelevant : MellinActionSearchAction → Set
 MellinActionRelevant demandProducerDirectlyOnWeilFacade = ⊥

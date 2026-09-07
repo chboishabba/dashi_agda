@@ -71,12 +71,12 @@ inverseAndExteriorRemainDistinct ()
 ------------------------------------------------------------------------
 
 data ZeroKind : Set where
-  zeroUnknown
-  zeroUnclassified
-  zeroBalanced
-  zeroIncomparable
-  zeroOpen
-  zeroExpired
+  zeroUnknown : ZeroKind
+  zeroUnclassified : ZeroKind
+  zeroBalanced : ZeroKind
+  zeroIncomparable : ZeroKind
+  zeroOpen : ZeroKind
+  zeroExpired : ZeroKind
   zeroCompletedNeutral : ZeroKind
 
 record FibredOrientation : Set where

@@ -54,8 +54,8 @@ open ExactFiniteEnumeration public
 ------------------------------------------------------------------------
 
 data PairIncidenceSlot : Set where
-  leftRightSlot
-  leftOutputSlot
+  leftRightSlot : PairIncidenceSlot
+  leftOutputSlot : PairIncidenceSlot
   rightOutputSlot : PairIncidenceSlot
 
 record ProjectedConvolutionTriad {ℓ : Level} (Mode : Set ℓ) : Set ℓ where

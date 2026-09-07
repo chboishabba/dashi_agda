@@ -25,17 +25,17 @@ import DASHI.Core.ActiveBidiDiscriminatorLoopExact as Bidi
 ------------------------------------------------------------------------
 
 data RealisationStatus : Set where
-  counterfactualParameterPoint
-  physicallyRealisedWorld
-  realisationUnresolved
-  : RealisationStatus
+  counterfactualParameterPoint : RealisationStatus
+  physicallyRealisedWorld : RealisationStatus
+  realisationUnresolved : RealisationStatus
+
 
 data SelectionReading : Set where
-  noSelectionReading
-  observerSelectionCandidate
-  dynamicalAttractorCandidate
-  historyConditionedCandidate
-  : SelectionReading
+  noSelectionReading : SelectionReading
+  observerSelectionCandidate : SelectionReading
+  dynamicalAttractorCandidate : SelectionReading
+  historyConditionedCandidate : SelectionReading
+
 
 record CosmologicalCandidate : Set where
   constructor cosmological-candidate

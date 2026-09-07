@@ -20,12 +20,12 @@ import DASHI.Governance.CountercultureDrugReclassificationHistoryExact as Counte
 ------------------------------------------------------------------------
 
 data DrugRechartOperation : Set where
-  negativeToPositiveValueReversal
-  imposedDrugCategoryReclamation
-  subjectAuthoredReconstitution
-  communityAuthoredReconstitution
-  sovereignCeremonialReconstitution
-  : DrugRechartOperation
+  negativeToPositiveValueReversal : DrugRechartOperation
+  imposedDrugCategoryReclamation : DrugRechartOperation
+  subjectAuthoredReconstitution : DrugRechartOperation
+  communityAuthoredReconstitution : DrugRechartOperation
+  sovereignCeremonialReconstitution : DrugRechartOperation
+
 
 valueReversal≠reclamation :
   negativeToPositiveValueReversal ≡ imposedDrugCategoryReclamation → ⊥
@@ -48,23 +48,23 @@ communityReconstitution≠sovereignReconstitution ()
 ------------------------------------------------------------------------
 
 data DrugCategoryHistoryState : Set where
-  criminalizedCountercultureState
-  stateTherapeuticReversalState
-  commercialPsychedelicReclamationState
-  patientSubjectReconstitutionState
-  indigenousSovereignReconstitutionState
-  : DrugCategoryHistoryState
+  criminalizedCountercultureState : DrugCategoryHistoryState
+  stateTherapeuticReversalState : DrugCategoryHistoryState
+  commercialPsychedelicReclamationState : DrugCategoryHistoryState
+  patientSubjectReconstitutionState : DrugCategoryHistoryState
+  indigenousSovereignReconstitutionState : DrugCategoryHistoryState
+
 
 data ValueSign : Set where
   negativeValue positiveValue : ValueSign
 
 data CategoryAuthorPosition : Set where
-  externalStateAuthor
-  commercialAuthor
-  affectedSubjectAuthor
-  affectedCommunityAuthor
-  sovereignCommunityAuthor
-  : CategoryAuthorPosition
+  externalStateAuthor : CategoryAuthorPosition
+  commercialAuthor : CategoryAuthorPosition
+  affectedSubjectAuthor : CategoryAuthorPosition
+  affectedCommunityAuthor : CategoryAuthorPosition
+  sovereignCommunityAuthor : CategoryAuthorPosition
+
 
 valueSign : DrugCategoryHistoryState → ValueSign
 valueSign criminalizedCountercultureState = negativeValue

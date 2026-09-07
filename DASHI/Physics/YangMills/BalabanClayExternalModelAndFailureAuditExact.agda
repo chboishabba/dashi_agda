@@ -13,7 +13,7 @@ import DASHI.Physics.YangMills.BalabanClayNumericalIngredientDependencyAuditExac
 ------------------------------------------------------------------------
 
 data ExternalAuditClass : Set where
-  modelSuitabilityAudit adversarialFailureAnalysis unverifiedObstructionClaim
+  modelSuitabilityAudit adversarialFailureAnalysis unverifiedObstructionClaim : ExternalAuditClass
   completionClaimQuarantine : ExternalAuditClass
 
 record ExternalAuditEntry : Set where

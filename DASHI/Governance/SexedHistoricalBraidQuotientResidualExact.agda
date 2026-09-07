@@ -22,17 +22,17 @@ import DASHI.Governance.SexedHistoricalBraidedStratifiedConsumerKernelExact as K
 ------------------------------------------------------------------------
 
 data FineBraidState : Set where
-  evidenceThenFidelity
-  fidelityThenEvidence
-  : FineBraidState
+  evidenceThenFidelity : FineBraidState
+  fidelityThenEvidence : FineBraidState
+
 
 data ImmediateQuotientCode : Set where
   sameImmediateClass : ImmediateQuotientCode
 
 data OrderResidual : Set where
-  evidenceFirstResidual
-  fidelityFirstResidual
-  : OrderResidual
+  evidenceFirstResidual : OrderResidual
+  fidelityFirstResidual : OrderResidual
+
 
 immediateClass : FineBraidState → ImmediateQuotientCode
 immediateClass _ = sameImmediateClass

@@ -71,13 +71,13 @@ asLanguageExtension {problem} discriminator =
 ------------------------------------------------------------------------
 
 data InstitutionalStudyKind : Set where
-  matchedJurisdictionStudy
-  regulatoryDiscontinuityStudy
-  longitudinalEnforcementChangeStudy
-  ownershipProvisioningContrastStudy
-  naturalExperimentStudy
-  policyTransitionStudy
-  : InstitutionalStudyKind
+  matchedJurisdictionStudy : InstitutionalStudyKind
+  regulatoryDiscontinuityStudy : InstitutionalStudyKind
+  longitudinalEnforcementChangeStudy : InstitutionalStudyKind
+  ownershipProvisioningContrastStudy : InstitutionalStudyKind
+  naturalExperimentStudy : InstitutionalStudyKind
+  policyTransitionStudy : InstitutionalStudyKind
+
 
 record CandidateInstitutionalStudy
     (problem : InstitutionalComparisonProblem) : Set₁ where

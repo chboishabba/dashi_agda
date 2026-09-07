@@ -130,11 +130,11 @@ cryptoEndpointCannotRecoverProvenance =
 ------------------------------------------------------------------------
 
 data CrossDomainStrand : Set where
-  assetA assetB institutionA institutionB proofStateA proofStateB
+  assetA assetB institutionA institutionB proofStateA proofStateB : CrossDomainStrand
   positionA positionB ecosystemA ecosystemB : CrossDomainStrand
 
 data CrossDomainAction : Set where
-  transferAction delegationAction vetoAction lemmaAction branchAction
+  transferAction delegationAction vetoAction lemmaAction branchAction : CrossDomainAction
   hedgeAction rebalanceAction repairAction disturbanceAction : CrossDomainAction
 
 canonicalTransferCrossing : Trace.CrossingEvent CrossDomainStrand CrossDomainAction

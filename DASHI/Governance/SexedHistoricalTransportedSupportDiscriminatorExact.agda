@@ -32,10 +32,10 @@ supportHistoryCollision =
 ------------------------------------------------------------------------
 
 data SupportProbeObservation : Set where
-  repairObservedFirst
-  counterformationObservedFirst
-  unresolvedSupportOrder
-  : SupportProbeObservation
+  repairObservedFirst : SupportProbeObservation
+  counterformationObservedFirst : SupportProbeObservation
+  unresolvedSupportOrder : SupportProbeObservation
+
 
 supportOrderProbe :
   Discriminator.ExperimentBundle Transported.SupportHistoryFine
@@ -102,14 +102,14 @@ joinedObserverSeparatesSupportHistories =
 ------------------------------------------------------------------------
 
 data SupportConsumer : Set where
-  recoverSupportOrder
-  recoverCurrentPersistentResidual
-  : SupportConsumer
+  recoverSupportOrder : SupportConsumer
+  recoverCurrentPersistentResidual : SupportConsumer
+
 
 data SelectedSupportProbe : Set where
-  chooseSupportOrderProbe
-  chooseCurrentSupportProbe
-  : SelectedSupportProbe
+  chooseSupportOrderProbe : SelectedSupportProbe
+  chooseCurrentSupportProbe : SelectedSupportProbe
+
 
 nextSupportProbe : SupportConsumer → SelectedSupportProbe
 nextSupportProbe recoverSupportOrder = chooseSupportOrderProbe

@@ -70,8 +70,8 @@ open InstrumentedMarketExperiment public
 ------------------------------------------------------------------------
 
 data DiscoveryDirection : Set where
-  discoveryReduced discoveryPreserved discoveryExpanded discoveryUnknown
-  : DiscoveryDirection
+  discoveryReduced discoveryPreserved discoveryExpanded discoveryUnknown : DiscoveryDirection
+
 
 data RiskDirection : Set where
   riskReduced riskPreserved riskExpanded riskUnknown : RiskDirection
@@ -92,13 +92,13 @@ open RuleRevisionAssessment public
 ------------------------------------------------------------------------
 
 data SignalRole : Set where
-  physicalDemandSignal
-  hedgingSignal
-  leverageSignal
-  speculativeSignal
-  liquiditySignal
-  administrativeSignal
-  : SignalRole
+  physicalDemandSignal : SignalRole
+  hedgingSignal : SignalRole
+  leverageSignal : SignalRole
+  speculativeSignal : SignalRole
+  liquiditySignal : SignalRole
+  administrativeSignal : SignalRole
+
 
 record TypedMarketSignal (surface : MarketCyberneticSurface) : Set₁ where
   constructor typedMarketSignal
@@ -115,8 +115,8 @@ open TypedMarketSignal public
 ------------------------------------------------------------------------
 
 data ProducerKind : Set where
-  marketProducer firmProducer governmentProducer aiProducer humanProducer
-  : ProducerKind
+  marketProducer firmProducer governmentProducer aiProducer humanProducer : ProducerKind
+
 
 record TransitionProducerJurisdiction
     (surface : MarketCyberneticSurface) : Set₁ where

@@ -28,11 +28,11 @@ data BinarySign : Set where
   positive negative : BinarySign
 
 data MHDAmplitudeChannel : Set where
-  velocityVelocity
-  magneticMagnetic
-  velocityMagnetic
-  magneticVelocity
-  : MHDAmplitudeChannel
+  velocityVelocity : MHDAmplitudeChannel
+  magneticMagnetic : MHDAmplitudeChannel
+  velocityMagnetic : MHDAmplitudeChannel
+  magneticVelocity : MHDAmplitudeChannel
+
 
 record HelicalMHDMode {r : _} (F : C3.RealField r) : Set r where
   constructor helical-mhd-mode

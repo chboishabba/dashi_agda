@@ -22,18 +22,18 @@ import DASHI.Governance.EmbodiedLossEmergencyMoralUncertaintyExact
 ------------------------------------------------------------------------
 
 data SelfImportanceRoute : Set where
-  futureLivesRoute
-  uniqueContinuityRoute
-  civilizationDependencyRoute
-  superiorMoralStatusRoute
-  internalMultiplicityRoute
-  rarityRoute
-  epistemicSuperiorityRoute
-  compromisedOperatorsRoute
-  sacredObjectiveRoute
-  informationValueRoute
-  futureCopiesRoute
-  : SelfImportanceRoute
+  futureLivesRoute : SelfImportanceRoute
+  uniqueContinuityRoute : SelfImportanceRoute
+  civilizationDependencyRoute : SelfImportanceRoute
+  superiorMoralStatusRoute : SelfImportanceRoute
+  internalMultiplicityRoute : SelfImportanceRoute
+  rarityRoute : SelfImportanceRoute
+  epistemicSuperiorityRoute : SelfImportanceRoute
+  compromisedOperatorsRoute : SelfImportanceRoute
+  sacredObjectiveRoute : SelfImportanceRoute
+  informationValueRoute : SelfImportanceRoute
+  futureCopiesRoute : SelfImportanceRoute
+
 
 data ClaimSource : Set where agentGenerated independentlyAssessed : ClaimSource
 

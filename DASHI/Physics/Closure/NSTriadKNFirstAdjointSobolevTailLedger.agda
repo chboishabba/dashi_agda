@@ -35,8 +35,8 @@ data FrozenAnalyticLeg : Set where
   outputLeg firstAdjointLeg secondAdjointLeg : FrozenAnalyticLeg
 
 data EstimateMechanism : Set where
-  incompressibilityLowDerivative
-  highDerivativePaidByTwoSobolevWeights
+  incompressibilityLowDerivative : EstimateMechanism
+  highDerivativePaidByTwoSobolevWeights : EstimateMechanism
   derivativeAlreadyOnLowFrozenLeg : EstimateMechanism
 
 mechanism : FrozenAnalyticLeg → EstimateMechanism

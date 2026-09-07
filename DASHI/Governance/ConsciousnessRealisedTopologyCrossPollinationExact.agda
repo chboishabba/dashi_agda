@@ -25,13 +25,13 @@ import DASHI.Biology.ConsciousAccessNetworkRegression as Access
 ------------------------------------------------------------------------
 
 data AssayLayer : Set where
-  declaredComputationLayer
-  realisedInteractionLayer
-  behaviourLayer
-  physicalConstitutionLayer
-  phenomenalInstantiationLayer
-  moralGovernanceLayer
-  : AssayLayer
+  declaredComputationLayer : AssayLayer
+  realisedInteractionLayer : AssayLayer
+  behaviourLayer : AssayLayer
+  physicalConstitutionLayer : AssayLayer
+  phenomenalInstantiationLayer : AssayLayer
+  moralGovernanceLayer : AssayLayer
+
 
 record RefinedConsciousnessAssay : Set where
   constructor refined-consciousness-assay

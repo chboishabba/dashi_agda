@@ -29,28 +29,28 @@ import DASHI.Governance.NormativeCorrectionMaterialPersistenceExact as Persisten
 ------------------------------------------------------------------------
 
 data LegalTemporalStage : Set where
-  preMaboOrthodoxRegime
-  mabo1992Correction
-  postMaboRecognitionRegime
-  : LegalTemporalStage
+  preMaboOrthodoxRegime : LegalTemporalStage
+  mabo1992Correction : LegalTemporalStage
+  postMaboRecognitionRegime : LegalTemporalStage
+
 
 data SettledColonyClassification : Set where
   settledClassificationOperative : SettledColonyClassification
 
 data PropertyConsequence : Set where
-  crownBeneficialOwnershipExhaustive
-  radicalTitleCompatibleWithNativeTitle
-  : PropertyConsequence
+  crownBeneficialOwnershipExhaustive : PropertyConsequence
+  radicalTitleCompatibleWithNativeTitle : PropertyConsequence
+
 
 data NativeTitleVisibility : Set where
-  nativeTitleDeniedByOrthodoxRule
-  nativeTitleRecognisableAtCommonLaw
-  : NativeTitleVisibility
+  nativeTitleDeniedByOrthodoxRule : NativeTitleVisibility
+  nativeTitleRecognisableAtCommonLaw : NativeTitleVisibility
+
 
 data DoctrinalEvaluation : Set where
-  discriminatoryDenigrationOperative
-  discriminatoryDoctrineRejected
-  : DoctrinalEvaluation
+  discriminatoryDenigrationOperative : DoctrinalEvaluation
+  discriminatoryDoctrineRejected : DoctrinalEvaluation
+
 
 settledClassification : LegalTemporalStage → SettledColonyClassification
 settledClassification preMaboOrthodoxRegime = settledClassificationOperative
@@ -168,10 +168,10 @@ canonicalDiscriminatoryDoctrineReceipt = discriminatory-doctrine-receipt
 ------------------------------------------------------------------------
 
 data InterpretationAuthority : Set where
-  primaryCourtHolding
-  criticalDecolonialInterpretation
-  repositoryStructuralTheorem
-  : InterpretationAuthority
+  primaryCourtHolding : InterpretationAuthority
+  criticalDecolonialInterpretation : InterpretationAuthority
+  repositoryStructuralTheorem : InterpretationAuthority
+
 
 record JuridicalOntologicalDehumanisationInterpretation : Set where
   constructor juridical-ontological-dehumanisation-interpretation

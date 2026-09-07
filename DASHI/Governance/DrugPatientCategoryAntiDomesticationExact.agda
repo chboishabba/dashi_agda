@@ -16,17 +16,17 @@ import DASHI.Governance.FeministDrugClassificationAuthorityExact as Feminist
 ------------------------------------------------------------------------
 
 data VoiceState : Set where
-  admittedPatientVoice
-  exteriorDrugUserVoice
-  : VoiceState
+  admittedPatientVoice : VoiceState
+  exteriorDrugUserVoice : VoiceState
+
 
 data LegibilitySurface : Set where
   samePsychoactiveConcernSurface : LegibilitySurface
 
 data MetaRuleStanding : Set where
-  admittedWithoutMetaRulePower
-  exteriorContestOfAdmissionRule
-  : MetaRuleStanding
+  admittedWithoutMetaRulePower : MetaRuleStanding
+  exteriorContestOfAdmissionRule : MetaRuleStanding
+
 
 voiceSurface : VoiceState → LegibilitySurface
 voiceSurface _ = samePsychoactiveConcernSurface

@@ -5,30 +5,30 @@ open import DASHI.Core.Prelude
 -- The formal job played by a term inside a domain/fibre.
 -- Domain nouns are not baked into this vocabulary.
 data FormalRole : Set where
-  carrierSpaceRole
-  stateRole
-  operatorRole
-  observableRole
-  spectrumToolRole
-  boundaryGateRole
-  obstructionRole
-  algebraRole
-  proofObligationRole
-  decompositionRole
-  hamiltonianRole
-  metricRole
-  projectionRole
-  residualRole
-  receiptRole
-  functorRole
-  transitionRole
-  invariantRole
-  symmetryRole
-  modeRole
-  sourceRole
-  sinkRole
-  flowRole
-  constraintRole
+  carrierSpaceRole : FormalRole
+  stateRole : FormalRole
+  operatorRole : FormalRole
+  observableRole : FormalRole
+  spectrumToolRole : FormalRole
+  boundaryGateRole : FormalRole
+  obstructionRole : FormalRole
+  algebraRole : FormalRole
+  proofObligationRole : FormalRole
+  decompositionRole : FormalRole
+  hamiltonianRole : FormalRole
+  metricRole : FormalRole
+  projectionRole : FormalRole
+  residualRole : FormalRole
+  receiptRole : FormalRole
+  functorRole : FormalRole
+  transitionRole : FormalRole
+  invariantRole : FormalRole
+  symmetryRole : FormalRole
+  modeRole : FormalRole
+  sourceRole : FormalRole
+  sinkRole : FormalRole
+  flowRole : FormalRole
+  constraintRole : FormalRole
   remedyRole : FormalRole
 
 -- A domain supplies the meaning of every formal role lazily through RoleType.

@@ -129,10 +129,10 @@ okaGorenGulmez2025 = quantitative-bridge-source
 ------------------------------------------------------------------------
 
 data BridgeFit : Set where
-  directPopulationAdjacency
-  developmentalFamilyAdjacency
-  religionProviderAdjacency
-  constructInstrumentAdjacency
+  directPopulationAdjacency : BridgeFit
+  developmentalFamilyAdjacency : BridgeFit
+  religionProviderAdjacency : BridgeFit
+  constructInstrumentAdjacency : BridgeFit
   comparatorOnly : BridgeFit
 
 record QuantitativeHypothesisBridge : Set where

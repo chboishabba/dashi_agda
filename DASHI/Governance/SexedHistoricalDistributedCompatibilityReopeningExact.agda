@@ -20,17 +20,17 @@ import DASHI.Governance.SexedHistoricalBracketedMultiverseTSFVBridgeExact as Bra
 ------------------------------------------------------------------------
 
 data DistributedArtifact : Set where
-  feminineEnactedBranch
-  masculineEcologyCertificate
-  masculineOptionConeCertificate
-  feminineLocalCertificate
-  masculineLocalCertificate
-  institutionalLocalCertificate
-  globalCompatibilityCertificate
-  globalContinuationCertificate
-  collectiveFutureConeCertificate
-  sourceAttributionCertificate
-  : DistributedArtifact
+  feminineEnactedBranch : DistributedArtifact
+  masculineEcologyCertificate : DistributedArtifact
+  masculineOptionConeCertificate : DistributedArtifact
+  feminineLocalCertificate : DistributedArtifact
+  masculineLocalCertificate : DistributedArtifact
+  institutionalLocalCertificate : DistributedArtifact
+  globalCompatibilityCertificate : DistributedArtifact
+  globalContinuationCertificate : DistributedArtifact
+  collectiveFutureConeCertificate : DistributedArtifact
+  sourceAttributionCertificate : DistributedArtifact
+
 
 ------------------------------------------------------------------------
 -- 2. Dependency graph.

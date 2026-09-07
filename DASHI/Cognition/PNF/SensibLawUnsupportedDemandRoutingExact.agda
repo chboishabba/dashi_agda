@@ -16,11 +16,11 @@ import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact as Contextu
 ------------------------------------------------------------------------
 
 data WorkRoute : Set where
-  surfaceStructural
-  relationAttachment
-  nominalStructure
-  predicateAction
-  coordination
+  surfaceStructural : WorkRoute
+  relationAttachment : WorkRoute
+  nominalStructure : WorkRoute
+  predicateAction : WorkRoute
+  coordination : WorkRoute
   parserUnknown : WorkRoute
 
 route : V04.UnsupportedDependencyLabel → WorkRoute

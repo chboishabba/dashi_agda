@@ -130,14 +130,14 @@ producerToSameObjectNearFarAttachment producer =
 ------------------------------------------------------------------------
 
 data SelectedPoleNearSearchAction : Set where
-  separatelyRecoverOrbitAttachment
-  separatelyRecoverNearFarWeld
-  separatelyRecoverSameTestWeld
-  recoverActualSelectedPoleNearProducer
-  compileSelectedSameObjectWeld
-  compileSelectedNearFarWeld
-  compileSameObjectNearFarAttachment
-  : SelectedPoleNearSearchAction
+  separatelyRecoverOrbitAttachment : SelectedPoleNearSearchAction
+  separatelyRecoverNearFarWeld : SelectedPoleNearSearchAction
+  separatelyRecoverSameTestWeld : SelectedPoleNearSearchAction
+  recoverActualSelectedPoleNearProducer : SelectedPoleNearSearchAction
+  compileSelectedSameObjectWeld : SelectedPoleNearSearchAction
+  compileSelectedNearFarWeld : SelectedPoleNearSearchAction
+  compileSameObjectNearFarAttachment : SelectedPoleNearSearchAction
+
 
 data SearchStatus : Set where
   live pruned downstream : SearchStatus

@@ -20,12 +20,12 @@ import DASHI.Core.TrajectoryResidueExact as Residue
 ------------------------------------------------------------------------
 
 data CarbonReservoir : Set where
-  atmosphericReservoir
-  oceanReservoir
-  biosphereReservoir
-  sedimentReservoir
-  fossilReservoir
-  : CarbonReservoir
+  atmosphericReservoir : CarbonReservoir
+  oceanReservoir : CarbonReservoir
+  biosphereReservoir : CarbonReservoir
+  sedimentReservoir : CarbonReservoir
+  fossilReservoir : CarbonReservoir
+
 
 record CarbonLedger : Set where
   constructor carbon-ledger

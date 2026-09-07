@@ -36,9 +36,9 @@ open import DASHI.Foundations.Base369SignedMembershipExact using
 ------------------------------------------------------------------------
 
 data BranchBoundary : Set where
-  boundaryClosed
-  boundaryOpen
-  boundaryDeferred
+  boundaryClosed : BranchBoundary
+  boundaryOpen : BranchBoundary
+  boundaryDeferred : BranchBoundary
   boundaryExpired : BranchBoundary
 
 record EnhancedStepState : Set where
@@ -253,14 +253,14 @@ sameTritDifferentCostHasDiscrepancy = refl
 ------------------------------------------------------------------------
 
 data NominalBranch : Set where
-  branchA
+  branchA : NominalBranch
   branchB : NominalBranch
 
 data CoarseOrbit : Set where
   sharedOrbit : CoarseOrbit
 
 data RefinedOrbit : Set where
-  orbitA
+  orbitA : RefinedOrbit
   orbitB : RefinedOrbit
 
 coarseOrbit : NominalBranch → CoarseOrbit

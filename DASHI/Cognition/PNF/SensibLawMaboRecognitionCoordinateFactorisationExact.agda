@@ -12,15 +12,15 @@ import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisAuthorityEvidenceExact a
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisDiscriminatorClosureExact as Closure
 
 data RecognitionCoordinate : Set where
-  antecedentRightExistence
-  continuityAcrossSovereignty
-  radicalTitleCompatibility
-  enforceabilityAgainstCrown
-  crownRecognitionRequirement
-  recognitionByCrownConduct
-  evidentialInferenceOfRecognition
-  authorityInterpretation
-  : RecognitionCoordinate
+  antecedentRightExistence : RecognitionCoordinate
+  continuityAcrossSovereignty : RecognitionCoordinate
+  radicalTitleCompatibility : RecognitionCoordinate
+  enforceabilityAgainstCrown : RecognitionCoordinate
+  crownRecognitionRequirement : RecognitionCoordinate
+  recognitionByCrownConduct : RecognitionCoordinate
+  evidentialInferenceOfRecognition : RecognitionCoordinate
+  authorityInterpretation : RecognitionCoordinate
+
 
 record CoordinateQuestion : Set where
   constructor coordinateQuestion
@@ -110,12 +110,12 @@ amoduCoordinateContrast = sameAuthorityDifferentCoordinateReceipt
   "same Amodu Tijani authority identity; Brennan use concerns radical-title compatibility while Dawson use concerns recognition doctrine"
 
 data RecognitionQuery : Set where
-  identifyContinuityRule
-  identifyCrownRecognitionRule
-  identifyRecognitionByConductRule
-  identifyEnforceabilityStructure
-  identifyExactUnifiedTheory
-  : RecognitionQuery
+  identifyContinuityRule : RecognitionQuery
+  identifyCrownRecognitionRule : RecognitionQuery
+  identifyRecognitionByConductRule : RecognitionQuery
+  identifyEnforceabilityStructure : RecognitionQuery
+  identifyExactUnifiedTheory : RecognitionQuery
+
 
 requiredCoordinates : RecognitionQuery → List RecognitionCoordinate
 requiredCoordinates identifyContinuityRule = antecedentRightExistence ∷ continuityAcrossSovereignty ∷ []

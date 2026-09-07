@@ -34,13 +34,13 @@ import DASHI.Culture.ReligiousPowerChildFearClaimBidiExact as ClaimAudit
 ------------------------------------------------------------------------
 
 data ConditionalRole : Set where
-  antecedentRole
-  consequenceRole
-  authorityRole
-  targetRole
-  sanctionRole
-  modalityRole
-  temporalRole
+  antecedentRole : ConditionalRole
+  consequenceRole : ConditionalRole
+  authorityRole : ConditionalRole
+  targetRole : ConditionalRole
+  sanctionRole : ConditionalRole
+  modalityRole : ConditionalRole
+  temporalRole : ConditionalRole
   contextRole : ConditionalRole
 
 record ConditionalPredicateAtom : Set where
@@ -111,20 +111,20 @@ hellThreatAssertion = conditional-threat-assertion
 ------------------------------------------------------------------------
 
 data ThreatObligationKind : Set where
-  antecedentMeaningObligation
-  consequenceDoctrineObligation
-  conditionalLinkObligation
-  authorityProvenanceObligation
-  authorityScopeObligation
-  targetDevelopmentObligation
-  targetDependencyObligation
-  threatComprehensionObligation
-  experiencedFearObligation
-  behaviourEffectObligation
-  belongingPenaltyObligation
-  practicalExitObligation
-  enduringOutcomeObligation
-  truthStatusObligation
+  antecedentMeaningObligation : ThreatObligationKind
+  consequenceDoctrineObligation : ThreatObligationKind
+  conditionalLinkObligation : ThreatObligationKind
+  authorityProvenanceObligation : ThreatObligationKind
+  authorityScopeObligation : ThreatObligationKind
+  targetDevelopmentObligation : ThreatObligationKind
+  targetDependencyObligation : ThreatObligationKind
+  threatComprehensionObligation : ThreatObligationKind
+  experiencedFearObligation : ThreatObligationKind
+  behaviourEffectObligation : ThreatObligationKind
+  belongingPenaltyObligation : ThreatObligationKind
+  practicalExitObligation : ThreatObligationKind
+  enduringOutcomeObligation : ThreatObligationKind
+  truthStatusObligation : ThreatObligationKind
   legalClassificationObligation : ThreatObligationKind
 
 record ThreatObligation : Set where
@@ -137,11 +137,11 @@ record ThreatObligation : Set where
 open ThreatObligation public
 
 data ThreatObligationStatus : Set where
-  discharged
-  partiallyDischarged
-  unresolved
-  contradictedAtSameScope
-  notEmpiricallyTestableHere
+  discharged : ThreatObligationStatus
+  partiallyDischarged : ThreatObligationStatus
+  unresolved : ThreatObligationStatus
+  contradictedAtSameScope : ThreatObligationStatus
+  notEmpiricallyTestableHere : ThreatObligationStatus
   requiresIndependentReceipt : ThreatObligationStatus
 
 record ThreatObligationAudit : Set where
@@ -204,11 +204,11 @@ canonicalHellThreatAudit =
 ------------------------------------------------------------------------
 
 data ThreatOppositionMode : Set where
-  logicalNegation
-  doctrinalCounterclaim
-  ethicalCounterposition
-  contextualQualification
-  authorityChallenge
+  logicalNegation : ThreatOppositionMode
+  doctrinalCounterclaim : ThreatOppositionMode
+  ethicalCounterposition : ThreatOppositionMode
+  contextualQualification : ThreatOppositionMode
+  authorityChallenge : ThreatOppositionMode
   refusalPosition : ThreatOppositionMode
 
 logicalNegationNotEthicalCounterposition :
@@ -267,10 +267,10 @@ authorityChallengeExample = threat-position
 ------------------------------------------------------------------------
 
 data ThreatClaimComponent : Set where
-  conditionalDoctrineComponent
-  speakerAuthorityComponent
-  recipientFearComponent
-  coerciveEffectComponent
+  conditionalDoctrineComponent : ThreatClaimComponent
+  speakerAuthorityComponent : ThreatClaimComponent
+  recipientFearComponent : ThreatClaimComponent
+  coerciveEffectComponent : ThreatClaimComponent
   metaphysicalTruthComponent : ThreatClaimComponent
 
 componentStatus : ThreatClaimComponent → Epistemic.EpistemicTrit

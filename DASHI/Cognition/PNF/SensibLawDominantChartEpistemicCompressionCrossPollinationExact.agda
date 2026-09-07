@@ -218,13 +218,13 @@ biaReclassificationCannotRecoverStewardshipRelation =
 ------------------------------------------------------------------------
 
 data PoliticalEpistemicAuditLens : Set where
-  antiCapitalistCommodityFormAudit
-  communistMaterialRelationAudit
-  decolonialRecognitionAudit
-  feministSubjectPositionAudit
-  intersectionalSingleAxisAudit
-  antiPsychologisationStructuralAudit
-  : PoliticalEpistemicAuditLens
+  antiCapitalistCommodityFormAudit : PoliticalEpistemicAuditLens
+  communistMaterialRelationAudit : PoliticalEpistemicAuditLens
+  decolonialRecognitionAudit : PoliticalEpistemicAuditLens
+  feministSubjectPositionAudit : PoliticalEpistemicAuditLens
+  intersectionalSingleAxisAudit : PoliticalEpistemicAuditLens
+  antiPsychologisationStructuralAudit : PoliticalEpistemicAuditLens
+
 
 record AuditLensBoundary : Set where
   constructor audit-lens-boundary

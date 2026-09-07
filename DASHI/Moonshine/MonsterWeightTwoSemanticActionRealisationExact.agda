@@ -194,13 +194,13 @@ open ConstituentPreservation public
 ------------------------------------------------------------------------
 
 data WeightTwoSemanticActionStage : Set where
-  gradedEndomorphismOwned
-  endomorphismEvaluationRequired
-  fullWeightTwoCarrierBridgeRequired
-  conformalLineCompatibilityRequired
-  constituentPreservationRequired
-  semanticCoordinateIntertwiningRequired
-  : WeightTwoSemanticActionStage
+  gradedEndomorphismOwned : WeightTwoSemanticActionStage
+  endomorphismEvaluationRequired : WeightTwoSemanticActionStage
+  fullWeightTwoCarrierBridgeRequired : WeightTwoSemanticActionStage
+  conformalLineCompatibilityRequired : WeightTwoSemanticActionStage
+  constituentPreservationRequired : WeightTwoSemanticActionStage
+  semanticCoordinateIntertwiningRequired : WeightTwoSemanticActionStage
+
 
 ------------------------------------------------------------------------
 -- Boundaries.

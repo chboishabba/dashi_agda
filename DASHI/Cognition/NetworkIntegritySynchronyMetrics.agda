@@ -31,11 +31,11 @@ metricSources =
   Sources.friesCommunicationThroughCoherence ∷ []
 
 data MetricKind : Set where
-  baselineDifferenceNorm
-  flattenedProfileCosine
-  dynamicalJacobian
-  phaseSynchronyMetric
-  withinNetworkIntegrity
+  baselineDifferenceNorm : MetricKind
+  flattenedProfileCosine : MetricKind
+  dynamicalJacobian : MetricKind
+  phaseSynchronyMetric : MetricKind
+  withinNetworkIntegrity : MetricKind
   crossNetworkTransport : MetricKind
 
 ------------------------------------------------------------------------
@@ -103,11 +103,11 @@ withinIntegrityLowerCrossTransportHigher = refl , refl
 ------------------------------------------------------------------------
 
 data NetworkQuestion : Set where
-  howFarFromBaseline
-  sameConnectivityDirection
-  localResponseToPerturbation
-  timingAlignment
-  internalCohesion
+  howFarFromBaseline : NetworkQuestion
+  sameConnectivityDirection : NetworkQuestion
+  localResponseToPerturbation : NetworkQuestion
+  timingAlignment : NetworkQuestion
+  internalCohesion : NetworkQuestion
   intersystemCommunication : NetworkQuestion
 
 appropriateMetric : NetworkQuestion → MetricKind

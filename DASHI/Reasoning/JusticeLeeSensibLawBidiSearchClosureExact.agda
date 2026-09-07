@@ -31,38 +31,38 @@ import DASHI.Reasoning.JusticeLeeSensibLawExperimentSearchCrossPollinationExact 
 ------------------------------------------------------------------------
 
 data ProceduralConsumer : Set where
-  identifyCommonGround
-  isolateLiveControversy
-  prepareEvidenceConference
-  prepareForAdjudication
-  : ProceduralConsumer
+  identifyCommonGround : ProceduralConsumer
+  isolateLiveControversy : ProceduralConsumer
+  prepareEvidenceConference : ProceduralConsumer
+  prepareForAdjudication : ProceduralConsumer
+
 
 data ResidualCoordinate : Set where
-  nodeCoordinate
-  relationCoordinate
-  evidenceCoordinate
-  characterisationCoordinate
-  causationCoordinate
-  legalConsequenceCoordinate
-  : ResidualCoordinate
+  nodeCoordinate : ResidualCoordinate
+  relationCoordinate : ResidualCoordinate
+  evidenceCoordinate : ResidualCoordinate
+  characterisationCoordinate : ResidualCoordinate
+  causationCoordinate : ResidualCoordinate
+  legalConsequenceCoordinate : ResidualCoordinate
+
 
 data ObligationKind : Set where
-  establishOccurrence
-  establishRelation
-  establishReliability
-  establishCharacterisation
-  establishCausation
-  establishLegalConsequence
-  : ObligationKind
+  establishOccurrence : ObligationKind
+  establishRelation : ObligationKind
+  establishReliability : ObligationKind
+  establishCharacterisation : ObligationKind
+  establishCausation : ObligationKind
+  establishLegalConsequence : ObligationKind
+
 
 data DiscriminatorKind : Set where
-  sourceDiscriminator
-  relationDiscriminator
-  reliabilityDiscriminator
-  characterisationDiscriminator
-  causationDiscriminator
-  consequenceDiscriminator
-  : DiscriminatorKind
+  sourceDiscriminator : DiscriminatorKind
+  relationDiscriminator : DiscriminatorKind
+  reliabilityDiscriminator : DiscriminatorKind
+  characterisationDiscriminator : DiscriminatorKind
+  causationDiscriminator : DiscriminatorKind
+  consequenceDiscriminator : DiscriminatorKind
+
 
 residualCoordinate : Legal.DisagreementKind → ResidualCoordinate
 residualCoordinate Legal.nodeDisagreement = nodeCoordinate

@@ -62,13 +62,13 @@ separatedComponent secondOutputLow =
   Components.component Geometry.secondAdjointView Geometry.unsplitPiece Geometry.outputLowTag
 
 data IndependentCoefficientFamily : Set where
-  lowHighFamily
-  lowLowFamily
-  directFirstConvolutionFamily
-  outputRelocationFamily
-  secondFrozenFamily
-  outputOverlapFamily
-  firstOverlapFamily
+  lowHighFamily : IndependentCoefficientFamily
+  lowLowFamily : IndependentCoefficientFamily
+  directFirstConvolutionFamily : IndependentCoefficientFamily
+  outputRelocationFamily : IndependentCoefficientFamily
+  secondFrozenFamily : IndependentCoefficientFamily
+  outputOverlapFamily : IndependentCoefficientFamily
+  firstOverlapFamily : IndependentCoefficientFamily
   secondOverlapFamily : IndependentCoefficientFamily
 
 data ArchetypeFamilyMatch :

@@ -63,14 +63,14 @@ publicBehaviourCannotRecoverFormationRoute =
 ------------------------------------------------------------------------
 
 data ReligiousSubjectPosition : Set where
-  doctrineExposed
-  threatUnderstood
-  threatFeared
-  behaviourCompliant
-  identityAttributed
-  identitySelfEndorsed
-  subjectInMaking
-  : ReligiousSubjectPosition
+  doctrineExposed : ReligiousSubjectPosition
+  threatUnderstood : ReligiousSubjectPosition
+  threatFeared : ReligiousSubjectPosition
+  behaviourCompliant : ReligiousSubjectPosition
+  identityAttributed : ReligiousSubjectPosition
+  identitySelfEndorsed : ReligiousSubjectPosition
+  subjectInMaking : ReligiousSubjectPosition
+
 
 identityAttributed≠identitySelfEndorsed :
   identityAttributed ≡ identitySelfEndorsed → ⊥

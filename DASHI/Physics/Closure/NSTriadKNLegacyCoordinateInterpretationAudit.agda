@@ -17,7 +17,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 ------------------------------------------------------------------------
 
 data CoordinateMeaning : Set where
-  shellIndex modeIndex orientation helicity permutation realityOrbit
+  shellIndex modeIndex orientation helicity permutation realityOrbit : CoordinateMeaning
   angularSector phaseSector multiplicityResidue unexplained : CoordinateMeaning
 
 ------------------------------------------------------------------------

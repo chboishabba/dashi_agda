@@ -16,9 +16,9 @@ import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact a
 ------------------------------------------------------------------------
 
 data GaugeSector : Set where
-  abelianElectromagneticSector
-  nonAbelianYangMillsSector
-  : GaugeSector
+  abelianElectromagneticSector : GaugeSector
+  nonAbelianYangMillsSector : GaugeSector
+
 
 record ElectrochemicalFieldSocket : Set₁ where
   constructor electrochemicalFieldSocket

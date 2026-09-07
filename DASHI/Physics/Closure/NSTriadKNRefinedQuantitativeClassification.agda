@@ -22,7 +22,7 @@ data AngularRegime : Set where
   angularGeneric angularSmall nearParallel nearAntiparallel : AngularRegime
 
 data PolarisationRegime : Set where
-  polarisationGeneric inputNullSuppressed outputOrthogonal
+  polarisationGeneric inputNullSuppressed outputOrthogonal : PolarisationRegime
   helicalSelectionSuppressed : PolarisationRegime
 
 data CancellationOrbit : Set where

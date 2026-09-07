@@ -153,11 +153,11 @@ completeSourceProducerDoesNotCloseSourceAuditByItself receipt x = x
 ------------------------------------------------------------------------
 
 data HAProducerSearchTarget : Set where
-  recoverSourceNativeObject
-  recoverSourceNativeProofBundle
-  recoverIndependentSourceProvenance
-  compileMathematicalHA
-  : HAProducerSearchTarget
+  recoverSourceNativeObject : HAProducerSearchTarget
+  recoverSourceNativeProofBundle : HAProducerSearchTarget
+  recoverIndependentSourceProvenance : HAProducerSearchTarget
+  compileMathematicalHA : HAProducerSearchTarget
+
 
 producerCoordinateWidth : HAProducerSearchTarget → Nat
 producerCoordinateWidth recoverSourceNativeObject = sourceBaseProducerWidth

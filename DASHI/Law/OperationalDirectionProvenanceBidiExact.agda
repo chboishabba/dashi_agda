@@ -65,17 +65,17 @@ canonicalCommandFieldBoundary = commandFieldCommunicationBoundary
 ------------------------------------------------------------------------
 
 data DirectionClaim : Set where
-  directionExisted
-  directionWasLawfullyAuthorised
-  directionGovernedFieldAction
-  fieldOfficerReceivedDirection
+  directionExisted : DirectionClaim
+  directionWasLawfullyAuthorised : DirectionClaim
+  directionGovernedFieldAction : DirectionClaim
+  fieldOfficerReceivedDirection : DirectionClaim
   fieldActionLawfullyFollowedDirection : DirectionClaim
 
 data DirectionProducer : Set where
-  directionDocumentReceipt
-  legalAuthorityReceipt
-  transmissionReceipt
-  fieldReceiptProducer
+  directionDocumentReceipt : DirectionProducer
+  legalAuthorityReceipt : DirectionProducer
+  transmissionReceipt : DirectionProducer
+  fieldReceiptProducer : DirectionProducer
   lawfulExecutionReceipt : DirectionProducer
 
 reverseDirection : DirectionClaim → DirectionProducer

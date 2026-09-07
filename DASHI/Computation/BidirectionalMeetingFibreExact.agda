@@ -33,9 +33,9 @@ observeBidirectional s =
     (bestMeetingCost s)
 
 data FrontierTailSwap : Set where
-  identityFrontierTail
-  swapForwardTail
-  swapReverseTail
+  identityFrontierTail : FrontierTailSwap
+  swapForwardTail : FrontierTailSwap
+  swapReverseTail : FrontierTailSwap
   swapBothTails : FrontierTailSwap
 
 flip : Bool → Bool

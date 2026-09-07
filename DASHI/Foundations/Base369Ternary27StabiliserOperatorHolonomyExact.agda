@@ -24,10 +24,10 @@ import DASHI.Foundations.Base369Ternary27StratumStabiliserFibreAdmissibilityExac
 ------------------------------------------------------------------------
 
 data FibreOperator : Set where
-  identityOperator
-  swapXYOperator
-  rotateXYZOperator
-  : FibreOperator
+  identityOperator : FibreOperator
+  swapXYOperator : FibreOperator
+  rotateXYZOperator : FibreOperator
+
 
 applyOperator : FibreOperator -> Geometry.Ternary27Point -> Geometry.Ternary27Point
 applyOperator identityOperator p = p

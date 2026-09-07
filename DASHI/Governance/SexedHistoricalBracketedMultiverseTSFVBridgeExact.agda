@@ -36,14 +36,14 @@ import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact as TSFVChoi
 ------------------------------------------------------------------------
 
 data ResidualEffect : Set where
-  powerResidual
-  symbolicResidual
-  networkResidual
-  powerSymbolicBundle
-  symbolicNetworkBundle
-  relationalExpansionBundle
-  pluralUnresolvedBundle
-  : ResidualEffect
+  powerResidual : ResidualEffect
+  symbolicResidual : ResidualEffect
+  networkResidual : ResidualEffect
+  powerSymbolicBundle : ResidualEffect
+  symbolicNetworkBundle : ResidualEffect
+  relationalExpansionBundle : ResidualEffect
+  pluralUnresolvedBundle : ResidualEffect
+
 
 mergeResidual : ResidualEffect → ResidualEffect → ResidualEffect
 mergeResidual powerResidual symbolicResidual = powerSymbolicBundle
@@ -105,19 +105,19 @@ sameInventoryCannotRecoverBracketedOutcome =
 ------------------------------------------------------------------------
 
 data DescendantBranch : Set where
-  reciprocalExpansionBranch
-  counterformationBranch
-  pluralUnresolvedBranch
-  : DescendantBranch
+  reciprocalExpansionBranch : DescendantBranch
+  counterformationBranch : DescendantBranch
+  pluralUnresolvedBranch : DescendantBranch
+
 
 data CoarsePresentJoin : Set where
   sameProductivePresent : CoarsePresentJoin
 
 data BranchFutureCone : Set where
-  recognitionAutonomyCone
-  contractionReactionCone
-  openPluralCone
-  : BranchFutureCone
+  recognitionAutonomyCone : BranchFutureCone
+  contractionReactionCone : BranchFutureCone
+  openPluralCone : BranchFutureCone
+
 
 coarsePresent : DescendantBranch → CoarsePresentJoin
 coarsePresent _ = sameProductivePresent
@@ -148,10 +148,10 @@ data PastBoundary : Set where
   inheritedProductiveJoinHistory : PastBoundary
 
 data FutureConstraint : Set where
-  preserveReciprocity
-  requireMaterialReachability
-  retainPluralUnresolved
-  : FutureConstraint
+  preserveReciprocity : FutureConstraint
+  requireMaterialReachability : FutureConstraint
+  retainPluralUnresolved : FutureConstraint
+
 
 data BoundaryCompatible : PastBoundary → FutureConstraint → DescendantBranch → Set where
   reciprocalCompatible :
@@ -197,22 +197,22 @@ finiteHistoryTwoBoundaryPruningPrecedent =
 ------------------------------------------------------------------------
 
 data BranchQuestion : Set where
-  recoverBracketing
-  recoverFutureCone
-  verifyFutureCompatibility
-  : BranchQuestion
+  recoverBracketing : BranchQuestion
+  recoverFutureCone : BranchQuestion
+  verifyFutureCompatibility : BranchQuestion
+
 
 data BranchMeasurement : Set where
-  bracketTraceProbe
-  futureConeProbe
-  boundaryCompatibilityProbe
-  : BranchMeasurement
+  bracketTraceProbe : BranchMeasurement
+  futureConeProbe : BranchMeasurement
+  boundaryCompatibilityProbe : BranchMeasurement
+
 
 data BranchMeasurementValue : Set where
-  leftBracketSeen rightBracketSeen
-  expansionConeSeen reactionConeSeen pluralConeSeen
-  compatibleSeen unresolvedCompatibility
-  : BranchMeasurementValue
+  leftBracketSeen rightBracketSeen : BranchMeasurementValue
+  expansionConeSeen reactionConeSeen pluralConeSeen : BranchMeasurementValue
+  compatibleSeen unresolvedCompatibility : BranchMeasurementValue
+
 
 measureBranch : BranchMeasurement → DescendantBranch → BranchMeasurementValue
 measureBranch bracketTraceProbe reciprocalExpansionBranch = leftBracketSeen

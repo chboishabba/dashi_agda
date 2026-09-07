@@ -19,19 +19,19 @@ import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSourceAuthorityExact as So
 ------------------------------------------------------------------------
 
 data CarbonQuantityUnit : Set where
-  usdPerHectarePerYear
-  usdPerTonneCO2e
-  usdPerProjectPerYear
-  legalCategoryNoNumericUnit
-  : CarbonQuantityUnit
+  usdPerHectarePerYear : CarbonQuantityUnit
+  usdPerTonneCO2e : CarbonQuantityUnit
+  usdPerProjectPerYear : CarbonQuantityUnit
+  legalCategoryNoNumericUnit : CarbonQuantityUnit
+
 
 data CarbonValueRole : Set where
-  tenureSecurityCost
-  socialCarbonMitigationValue
-  voluntaryMarketCreditPrice
-  illustrativeProjectRevenue
-  agencyTrustAssetClassification
-  : CarbonValueRole
+  tenureSecurityCost : CarbonValueRole
+  socialCarbonMitigationValue : CarbonValueRole
+  voluntaryMarketCreditPrice : CarbonValueRole
+  illustrativeProjectRevenue : CarbonValueRole
+  agencyTrustAssetClassification : CarbonValueRole
+
 
 record CarbonValueObservation : Set where
   constructor carbonValueObservation
@@ -92,10 +92,10 @@ embrapaPoyanawaIllustrativeAnnualRevenue = carbonValueObservation
 ------------------------------------------------------------------------
 
 data UnitComparability : Set where
-  sameFunctionalUnit
-  conversionReceiptRequired
-  incomparableWithoutAdditionalMapping
-  : UnitComparability
+  sameFunctionalUnit : UnitComparability
+  conversionReceiptRequired : UnitComparability
+  incomparableWithoutAdditionalMapping : UnitComparability
+
 
 unitComparability : CarbonQuantityUnit → CarbonQuantityUnit → UnitComparability
 unitComparability usdPerHectarePerYear usdPerHectarePerYear = sameFunctionalUnit

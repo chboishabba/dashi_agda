@@ -211,11 +211,11 @@ pabaiFirstInstanceNotPromotedToFinalAppealLaw = refl
 ------------------------------------------------------------------------
 
 data DeclaredCriticalOrientation : Set where
-  anticolonialOrientation
-  intersectionalFeministOrientation
-  anticapitalistOrientation
-  anarchoCommunistOrientation
-  : DeclaredCriticalOrientation
+  anticolonialOrientation : DeclaredCriticalOrientation
+  intersectionalFeministOrientation : DeclaredCriticalOrientation
+  anticapitalistOrientation : DeclaredCriticalOrientation
+  anarchoCommunistOrientation : DeclaredCriticalOrientation
+
 
 record CriticalOrientationBoundary : Set where
   constructor critical-orientation-boundary

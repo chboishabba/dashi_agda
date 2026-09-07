@@ -24,24 +24,24 @@ import DASHI.Biology.KluverFormConstantPsychedelicBoundaryExact as Kluver
 ------------------------------------------------------------------------
 
 data CrossObservation : Set where
-  punitiveNationalDrugStrategyObservation
-  psychedelicAccelerationObservation
-  veteranTrialPriorityObservation
-  reflectingExternalEnemyNarrativeObservation
-  indigenousAuthorityBoundaryObservation
-  recurrentGeometricPhenomenologyObservation
-  : CrossObservation
+  punitiveNationalDrugStrategyObservation : CrossObservation
+  psychedelicAccelerationObservation : CrossObservation
+  veteranTrialPriorityObservation : CrossObservation
+  reflectingExternalEnemyNarrativeObservation : CrossObservation
+  indigenousAuthorityBoundaryObservation : CrossObservation
+  recurrentGeometricPhenomenologyObservation : CrossObservation
+
 
 data CrossMeaning : Set where
-  candidatePunitiveRestorationMeaning
-  candidateTherapeuticReclassificationMeaning
-  candidateStatusConditionedDeservingnessMeaning
-  candidateExternalisingReflectionMeaning
-  candidateWarOnDrugsGoalFailureMeaning
-  candidateCommercialExtractionMeaning
-  candidateIndigenousEpistemicJusticeMeaning
-  candidatePluralTrumpismContradictionMeaning
-  : CrossMeaning
+  candidatePunitiveRestorationMeaning : CrossMeaning
+  candidateTherapeuticReclassificationMeaning : CrossMeaning
+  candidateStatusConditionedDeservingnessMeaning : CrossMeaning
+  candidateExternalisingReflectionMeaning : CrossMeaning
+  candidateWarOnDrugsGoalFailureMeaning : CrossMeaning
+  candidateCommercialExtractionMeaning : CrossMeaning
+  candidateIndigenousEpistemicJusticeMeaning : CrossMeaning
+  candidatePluralTrumpismContradictionMeaning : CrossMeaning
+
 
 meaningScale : CrossMeaning → SemEpi.InterpretationScale
 meaningScale candidatePunitiveRestorationMeaning = SemEpi.institutionalGovernanceScale

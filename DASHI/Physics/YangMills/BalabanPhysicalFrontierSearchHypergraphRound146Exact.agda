@@ -18,35 +18,35 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Reasoning.AristotleMCGSHypergraphExact as Aristotle
 
 data BalabanFrontierLeaf : Set where
-  densityActionRealization
-  round108FixedDensitySemantics
-  round108SelectedPotentialMatchesBC1
-  densityToCombinedRGState
-  combinedRGStateToBC1Potential
-  physicalCompositeD1ChainRule
-  stressInsertionEqualsPhysicalD1Sum
-  metricPerturbationAdmission
-  a1CouplingToBetaHistory
-  a2CouplingToBetaHistory
-  cmp119FiniteMeasureSchwingerEndpoint
-  unifiedSectorStressRecovery
-  : BalabanFrontierLeaf
+  densityActionRealization : BalabanFrontierLeaf
+  round108FixedDensitySemantics : BalabanFrontierLeaf
+  round108SelectedPotentialMatchesBC1 : BalabanFrontierLeaf
+  densityToCombinedRGState : BalabanFrontierLeaf
+  combinedRGStateToBC1Potential : BalabanFrontierLeaf
+  physicalCompositeD1ChainRule : BalabanFrontierLeaf
+  stressInsertionEqualsPhysicalD1Sum : BalabanFrontierLeaf
+  metricPerturbationAdmission : BalabanFrontierLeaf
+  a1CouplingToBetaHistory : BalabanFrontierLeaf
+  a2CouplingToBetaHistory : BalabanFrontierLeaf
+  cmp119FiniteMeasureSchwingerEndpoint : BalabanFrontierLeaf
+  unifiedSectorStressRecovery : BalabanFrontierLeaf
+
 
 data BalabanFrontierRoute : Set where
-  directRound108ActionRoute
-  viaCombinedRGActionRoute
-  round108SemanticsAction
-  round108SourceMatchAction
-  realizeDensityStateAction
-  realizeStatePotentialAction
-  physicalD1ChainRuleAction
-  assembleStressAction
-  metricDomainAction
-  a1HistoryAction
-  a2HistoryAction
-  schwingerEndpointAction
-  closeUnifiedSectorAction
-  : BalabanFrontierRoute
+  directRound108ActionRoute : BalabanFrontierRoute
+  viaCombinedRGActionRoute : BalabanFrontierRoute
+  round108SemanticsAction : BalabanFrontierRoute
+  round108SourceMatchAction : BalabanFrontierRoute
+  realizeDensityStateAction : BalabanFrontierRoute
+  realizeStatePotentialAction : BalabanFrontierRoute
+  physicalD1ChainRuleAction : BalabanFrontierRoute
+  assembleStressAction : BalabanFrontierRoute
+  metricDomainAction : BalabanFrontierRoute
+  a1HistoryAction : BalabanFrontierRoute
+  a2HistoryAction : BalabanFrontierRoute
+  schwingerEndpointAction : BalabanFrontierRoute
+  closeUnifiedSectorAction : BalabanFrontierRoute
+
 
 routeSource : BalabanFrontierRoute → BalabanFrontierLeaf
 routeSource directRound108ActionRoute = densityActionRealization

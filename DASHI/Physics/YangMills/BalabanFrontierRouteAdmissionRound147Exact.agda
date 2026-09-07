@@ -14,12 +14,12 @@ import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Least
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as R146
 
 data FrontierMoveKind : Set where
-  repositoryProofReuse
-  sourceReconstruction
-  symbolicDerivation
-  numericalExperiment
-  physicalMeasurement
-  : FrontierMoveKind
+  repositoryProofReuse : FrontierMoveKind
+  sourceReconstruction : FrontierMoveKind
+  symbolicDerivation : FrontierMoveKind
+  numericalExperiment : FrontierMoveKind
+  physicalMeasurement : FrontierMoveKind
+
 
 record AdmittedBalabanFrontierRoute : Set₁ where
   field

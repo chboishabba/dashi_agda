@@ -32,20 +32,20 @@ import DASHI.Core.OperationalSystemBehaviourSemanticsExact as Operational
 ------------------------------------------------------------------------
 
 data EnforcementStage : Set where
-  conduct
-  statutoryElement
-  contravention
-  regulatorJurisdiction
-  causeOfActionOrEnforcementPower
-  proofRequirement
-  defenceOrException
-  liability
-  availablePenalty
-  penaltyDiscretion
-  appeal
-  collection
-  behaviouralOrder
-  : EnforcementStage
+  conduct : EnforcementStage
+  statutoryElement : EnforcementStage
+  contravention : EnforcementStage
+  regulatorJurisdiction : EnforcementStage
+  causeOfActionOrEnforcementPower : EnforcementStage
+  proofRequirement : EnforcementStage
+  defenceOrException : EnforcementStage
+  liability : EnforcementStage
+  availablePenalty : EnforcementStage
+  penaltyDiscretion : EnforcementStage
+  appeal : EnforcementStage
+  collection : EnforcementStage
+  behaviouralOrder : EnforcementStage
+
 
 record EnforcementEdge : Set where
   constructor enforcement-edge
@@ -131,16 +131,16 @@ open LegislativeRepairCandidate public
 ------------------------------------------------------------------------
 
 data EvidenceRelation : Set where
-  internalContemporaneousRecord
-  observedConduct
-  expertFinding
-  regulatoryFinding
-  adjudicatedFact
-  partyAllegation
-  partyDenial
-  postHocPublicStatement
-  independentContraryEvidence
-  : EvidenceRelation
+  internalContemporaneousRecord : EvidenceRelation
+  observedConduct : EvidenceRelation
+  expertFinding : EvidenceRelation
+  regulatoryFinding : EvidenceRelation
+  adjudicatedFact : EvidenceRelation
+  partyAllegation : EvidenceRelation
+  partyDenial : EvidenceRelation
+  postHocPublicStatement : EvidenceRelation
+  independentContraryEvidence : EvidenceRelation
+
 
 record EvidenceReceipt : Set where
   constructor evidence-receipt

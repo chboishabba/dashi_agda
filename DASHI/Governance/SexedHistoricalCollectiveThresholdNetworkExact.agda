@@ -31,49 +31,49 @@ import DASHI.Governance.RevolutionaryPracticeBraid as Practice
 ------------------------------------------------------------------------
 
 data CollectiveActionKind : Set where
-  suffrageMobilisation
-  abolitionMobilisation
-  ludditeCollectiveResistance
-  religiousExitCommunity
-  feministWitchCollective
-  masculineCounterMovement
-  crossSexSolidarityNetwork
-  : CollectiveActionKind
+  suffrageMobilisation : CollectiveActionKind
+  abolitionMobilisation : CollectiveActionKind
+  ludditeCollectiveResistance : CollectiveActionKind
+  religiousExitCommunity : CollectiveActionKind
+  feministWitchCollective : CollectiveActionKind
+  masculineCounterMovement : CollectiveActionKind
+  crossSexSolidarityNetwork : CollectiveActionKind
+
 
 data ParticipationBand : Set where
-  isolatedParticipation
-  emergingCollective
-  thresholdCollective
-  massCollective
-  : ParticipationBand
+  isolatedParticipation : ParticipationBand
+  emergingCollective : ParticipationBand
+  thresholdCollective : ParticipationBand
+  massCollective : ParticipationBand
+
 
 data PublicLegibility : Set where
-  privatelyLegible
-  locallyLegible
-  publiclyLegible
-  institutionallyLegible
-  : PublicLegibility
+  privatelyLegible : PublicLegibility
+  locallyLegible : PublicLegibility
+  publiclyLegible : PublicLegibility
+  institutionallyLegible : PublicLegibility
+
 
 data CoordinationCapacity : Set where
-  fragmentedCoordination
-  localCoordination
-  networkedCoordination
-  durableCoordination
-  : CoordinationCapacity
+  fragmentedCoordination : CoordinationCapacity
+  localCoordination : CoordinationCapacity
+  networkedCoordination : CoordinationCapacity
+  durableCoordination : CoordinationCapacity
+
 
 data MemoryStatus : Set where
-  ephemeralMemory
-  retainedMemory
-  transmittedMemory
-  contestedMemory
-  : MemoryStatus
+  ephemeralMemory : MemoryStatus
+  retainedMemory : MemoryStatus
+  transmittedMemory : MemoryStatus
+  contestedMemory : MemoryStatus
+
 
 data CollectiveOutcome : Set where
-  noInstitutionalShift
-  partialInstitutionalShift
-  institutionalShift
-  counterMobilisation
-  : CollectiveOutcome
+  noInstitutionalShift : CollectiveOutcome
+  partialInstitutionalShift : CollectiveOutcome
+  institutionalShift : CollectiveOutcome
+  counterMobilisation : CollectiveOutcome
+
 
 record CollectiveActionState : Set where
   constructor collective-action-state
@@ -151,9 +151,9 @@ postThresholdLegibilityState =
 ------------------------------------------------------------------------
 
 data ThresholdOutcomeFineState : Set where
-  thresholdWithShift
-  thresholdWithCounterMobilisation
-  : ThresholdOutcomeFineState
+  thresholdWithShift : ThresholdOutcomeFineState
+  thresholdWithCounterMobilisation : ThresholdOutcomeFineState
+
 
 participationSurface : ThresholdOutcomeFineState → ParticipationBand
 participationSurface _ = thresholdCollective
@@ -195,9 +195,9 @@ publicLegibilityCannotRecoverInstitutionalOutcome =
 ------------------------------------------------------------------------
 
 data NetworkOptionFineState : Set where
-  visibleNetworkWithoutOptionExpansion
-  visibleNetworkWithOptionExpansion
-  : NetworkOptionFineState
+  visibleNetworkWithoutOptionExpansion : NetworkOptionFineState
+  visibleNetworkWithOptionExpansion : NetworkOptionFineState
+
 
 networkActionSurface : NetworkOptionFineState → Feedback.EnactedAction
 networkActionSurface _ = Feedback.crossSexSolidarity

@@ -10,16 +10,16 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.SensibLawMaboRecognitionCoordinateFactorisationExact as Factor
 
 data RecognitionProbe : Set where
-  inspectBrennanContinuityPassages
-  inspectBrennanRadicalTitlePassages
-  inspectDawsonRecognitionPassages
-  inspectDawsonAcquiescencePassages
-  inspectCalderHallPassages
-  inspectCalderJudsonPassages
-  inspectAmoduRadicalTitlePassages
-  inspectAmoduRecognitionPassages
-  inspectAllFactorisedCoordinates
-  : RecognitionProbe
+  inspectBrennanContinuityPassages : RecognitionProbe
+  inspectBrennanRadicalTitlePassages : RecognitionProbe
+  inspectDawsonRecognitionPassages : RecognitionProbe
+  inspectDawsonAcquiescencePassages : RecognitionProbe
+  inspectCalderHallPassages : RecognitionProbe
+  inspectCalderJudsonPassages : RecognitionProbe
+  inspectAmoduRadicalTitlePassages : RecognitionProbe
+  inspectAmoduRecognitionPassages : RecognitionProbe
+  inspectAllFactorisedCoordinates : RecognitionProbe
+
 
 data RecognitionWorkKind : Set where thinkWork lookWork testWork : RecognitionWorkKind
 

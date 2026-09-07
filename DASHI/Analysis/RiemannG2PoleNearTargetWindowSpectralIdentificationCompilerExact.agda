@@ -77,12 +77,12 @@ windowToModulationSpectralIdentification {space} m w attachment =
 ------------------------------------------------------------------------
 
 data SpectralIdentificationSearchAction : Set where
-  reproveClusterNearFarDecomposition
-  recoverLiteralPoleNearTargetWindow
-  proveSameSelectedTargetWindow
-  compileModulationSpectralIdentification
-  compileHistoricalHW
-  : SpectralIdentificationSearchAction
+  reproveClusterNearFarDecomposition : SpectralIdentificationSearchAction
+  recoverLiteralPoleNearTargetWindow : SpectralIdentificationSearchAction
+  proveSameSelectedTargetWindow : SpectralIdentificationSearchAction
+  compileModulationSpectralIdentification : SpectralIdentificationSearchAction
+  compileHistoricalHW : SpectralIdentificationSearchAction
+
 
 data SearchStatus : Set where
   live pruned downstream : SearchStatus

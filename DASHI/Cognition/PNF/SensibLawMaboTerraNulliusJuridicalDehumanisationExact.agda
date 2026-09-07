@@ -31,22 +31,22 @@ import DASHI.Core.DeclaredRealizedIntegrityResidualExact as DeclaredRealized
 ------------------------------------------------------------------------
 
 data FoundationalJuridicalCapacity : Set where
-  suppliesLegalOccupancy
-  suppliesLocalLaw
-  suppliesPoliticalSovereignty
-  suppliesLandProprietorship
-  : FoundationalJuridicalCapacity
+  suppliesLegalOccupancy : FoundationalJuridicalCapacity
+  suppliesLocalLaw : FoundationalJuridicalCapacity
+  suppliesPoliticalSovereignty : FoundationalJuridicalCapacity
+  suppliesLandProprietorship : FoundationalJuridicalCapacity
+
 
 data RecognitionState : Set where
   recognisedCapacity deniedCapacity : RecognitionState
 
 data TerraNulliusOperation : Set where
-  treatInhabitedAsLegallyUninhabited
-  denyLocalLawAsJuridicallyConstitutive
-  denyIndigenousSovereignAsJuridicallyConstitutive
-  ignoreIndigenousOccupancyForCrownTitle
-  ignoreIndigenousProprietorshipForCrownTitle
-  : TerraNulliusOperation
+  treatInhabitedAsLegallyUninhabited : TerraNulliusOperation
+  denyLocalLawAsJuridicallyConstitutive : TerraNulliusOperation
+  denyIndigenousSovereignAsJuridicallyConstitutive : TerraNulliusOperation
+  ignoreIndigenousOccupancyForCrownTitle : TerraNulliusOperation
+  ignoreIndigenousProprietorshipForCrownTitle : TerraNulliusOperation
+
 
 record MaboPrimaryProposition : Set where
   constructor mabo-primary-proposition

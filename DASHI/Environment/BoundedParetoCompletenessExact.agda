@@ -48,7 +48,7 @@ completeEnumerationLiftsNonDominance :
     (enumeration : Core.BoundedEnumeration Admissible) →
   Pareto.NonDominatedIn candidate (Core.enumerated enumeration) →
   BoundedParetoComplete Admissible candidate
-completeEnumerationLiftsNonDominance enumeration nonDominated =
+completeEnumerationLiftsNonDominance {Admissible = Admissible} {candidate = candidate} enumeration nonDominated =
   boundedParetoComplete noDominator
   where
     noDominator :

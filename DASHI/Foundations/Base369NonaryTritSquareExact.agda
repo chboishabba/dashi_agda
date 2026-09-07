@@ -138,8 +138,8 @@ complementReversesLowTrit non-7 = refl
 complementReversesLowTrit non-8 = refl
 
 data LowTritFibre : Set where
-  neutralLowFibre
-  positiveLowFibre
+  neutralLowFibre : LowTritFibre
+  positiveLowFibre : LowTritFibre
   negativeLowFibre : LowTritFibre
 
 lowTritFibre : NonaryTruth → LowTritFibre

@@ -33,15 +33,15 @@ open CommandIdeologyProvenanceFibre public
 ------------------------------------------------------------------------
 
 data IdeologyCommandClaim : Set where
-  herzogHasCommissionIncitementFinding
-  nswCommandReflectedHerzogPosition
-  nswCommandWasZionistIdeologyMotivated
+  herzogHasCommissionIncitementFinding : IdeologyCommandClaim
+  nswCommandReflectedHerzogPosition : IdeologyCommandClaim
+  nswCommandWasZionistIdeologyMotivated : IdeologyCommandClaim
   nswPoliceCoordinatedWithHerzogOrIsraeliOfficials : IdeologyCommandClaim
 
 data IdeologyCommandProducer : Set where
-  commissionFindingProducer
-  commandContentAndPolicyBridgeProducer
-  motiveEvidenceProducer
+  commissionFindingProducer : IdeologyCommandProducer
+  commandContentAndPolicyBridgeProducer : IdeologyCommandProducer
+  motiveEvidenceProducer : IdeologyCommandProducer
   coordinationEvidenceProducer : IdeologyCommandProducer
 
 reverseIdeologyCommand : IdeologyCommandClaim → IdeologyCommandProducer

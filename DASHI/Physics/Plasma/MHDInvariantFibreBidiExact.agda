@@ -12,11 +12,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data InvariantKind : Set where
-  kineticHelicity
-  magneticHelicity
-  crossHelicity
-  totalEnergy
-  : InvariantKind
+  kineticHelicity : InvariantKind
+  magneticHelicity : InvariantKind
+  crossHelicity : InvariantKind
+  totalEnergy : InvariantKind
+
 
 record MHDStateFibre : Set₁ where
   constructor mhd-state-fibre

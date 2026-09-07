@@ -76,7 +76,7 @@ zeroFibreNonseparability =
 ------------------------------------------------------------------------
 
 data CompositeAuthority : Set where
-  cartesianCompositeDefined
-  nonrectangularSupportProved
-  quantumEntanglementNotYetDerived
+  cartesianCompositeDefined : CompositeAuthority
+  nonrectangularSupportProved : CompositeAuthority
+  quantumEntanglementNotYetDerived : CompositeAuthority
   bellViolationNotYetDerived : CompositeAuthority

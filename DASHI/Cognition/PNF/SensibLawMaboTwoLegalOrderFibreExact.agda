@@ -20,37 +20,37 @@ import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalDiscriminatorExact as Mi
 ------------------------------------------------------------------------
 
 data LegalOrderKind : Set where
-  crownMunicipalLegalOrder
-  indigenousNormativeLegalOrder
-  : LegalOrderKind
+  crownMunicipalLegalOrder : LegalOrderKind
+  indigenousNormativeLegalOrder : LegalOrderKind
+
 
 data CrownOrderNode : Set where
-  crownSovereigntyPremise
-  crownSovereigntyNonJusticiability
-  crownRadicalTitle
-  crownRecognitionCondition
-  crownExtinguishmentPower
-  crownRemedyPower
-  : CrownOrderNode
+  crownSovereigntyPremise : CrownOrderNode
+  crownSovereigntyNonJusticiability : CrownOrderNode
+  crownRadicalTitle : CrownOrderNode
+  crownRecognitionCondition : CrownOrderNode
+  crownExtinguishmentPower : CrownOrderNode
+  crownRemedyPower : CrownOrderNode
+
 
 data IndigenousOrderNode : Set where
-  antecedentIndigenousLaw
-  indigenousSovereignty
-  countryLandRelation
-  communityAuthority
-  reciprocalCountryObligations
-  intergenerationalContinuity
-  : IndigenousOrderNode
+  antecedentIndigenousLaw : IndigenousOrderNode
+  indigenousSovereignty : IndigenousOrderNode
+  countryLandRelation : IndigenousOrderNode
+  communityAuthority : IndigenousOrderNode
+  reciprocalCountryObligations : IndigenousOrderNode
+  intergenerationalContinuity : IndigenousOrderNode
+
 
 data CrossOrderRelation : Set where
-  crownRecognitionOfIndigenousInterest
-  crownNonRecognition
-  partialAccommodation
-  translationAcrossOrders
-  conflictAcrossOrders
-  externalisationByCourt
-  coexistenceWithoutCollapse
-  : CrossOrderRelation
+  crownRecognitionOfIndigenousInterest : CrossOrderRelation
+  crownNonRecognition : CrossOrderRelation
+  partialAccommodation : CrossOrderRelation
+  translationAcrossOrders : CrossOrderRelation
+  conflictAcrossOrders : CrossOrderRelation
+  externalisationByCourt : CrossOrderRelation
+  coexistenceWithoutCollapse : CrossOrderRelation
+
 
 record LegalOrderFibre : Set where
   constructor legalOrderFibre
@@ -86,10 +86,10 @@ indigenousOrderFibre = legalOrderFibre
 ------------------------------------------------------------------------
 
 data CrownInternalBridgeStatus : Set where
-  reviewedCourtInternalBridge
-  contestedCourtInternalBridge
-  unresolvedCourtInternalBridge
-  : CrownInternalBridgeStatus
+  reviewedCourtInternalBridge : CrownInternalBridgeStatus
+  contestedCourtInternalBridge : CrownInternalBridgeStatus
+  unresolvedCourtInternalBridge : CrownInternalBridgeStatus
+
 
 record CrownInternalMediation : Set where
   constructor crownInternalMediation
@@ -205,21 +205,21 @@ sovereigntyExternalisationInterface = crossOrderInterface
 ------------------------------------------------------------------------
 
 data TwoOrderQuestion : Set where
-  explainCourtInternalRecognition
-  explainIndigenousSourceOfRight
-  compareSovereigntyClaims
-  assessMaterialLandRepair
-  reconcileOrdersWithoutCollapse
-  : TwoOrderQuestion
+  explainCourtInternalRecognition : TwoOrderQuestion
+  explainIndigenousSourceOfRight : TwoOrderQuestion
+  compareSovereigntyClaims : TwoOrderQuestion
+  assessMaterialLandRepair : TwoOrderQuestion
+  reconcileOrdersWithoutCollapse : TwoOrderQuestion
+
 
 data TwoOrderResidual : Set where
-  crownRecognitionMediationResidual
-  indigenousSourceResidual
-  sovereigntyCrossFrameResidual
-  materialLandRepairResidual
-  crossOrderReconciliationResidual
-  twoOrderClosed
-  : TwoOrderResidual
+  crownRecognitionMediationResidual : TwoOrderResidual
+  indigenousSourceResidual : TwoOrderResidual
+  sovereigntyCrossFrameResidual : TwoOrderResidual
+  materialLandRepairResidual : TwoOrderResidual
+  crossOrderReconciliationResidual : TwoOrderResidual
+  twoOrderClosed : TwoOrderResidual
+
 
 firstResidual : TwoOrderQuestion → TwoOrderResidual
 firstResidual explainCourtInternalRecognition = crownRecognitionMediationResidual

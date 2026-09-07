@@ -21,16 +21,16 @@ import DASHI.Planning.AgenticMaterialProcessPlanningCrossPollinationExact as Pro
 ------------------------------------------------------------------------
 
 data DomainLane : Set where
-  consciousnessTheoryLane
-  agenticMaterialCompetencyLane
-  industrialMaterialProcessLane
-  : DomainLane
+  consciousnessTheoryLane : DomainLane
+  agenticMaterialCompetencyLane : DomainLane
+  industrialMaterialProcessLane : DomainLane
+
 
 data DomainDisposition : Set where
-  unresolvedRefine
-  consumerAdequate
-  authorisedOperationalAction
-  : DomainDisposition
+  unresolvedRefine : DomainDisposition
+  consumerAdequate : DomainDisposition
+  authorisedOperationalAction : DomainDisposition
+
 
 record DomainActiveBidiReceipt : Set where
   constructor domain-active-bidi-receipt

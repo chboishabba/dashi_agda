@@ -27,13 +27,13 @@ import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as Wind
 ------------------------------------------------------------------------
 
 data CutoffWindowPayment : Set where
-  reproveFarShellDecay
-  reproveFiniteNearCarrier
-  transportLeanProofTermIntoAgda
-  recoverLiteralPoleNearTargetWindow
-  attachCheckedCutoffCoordinatesToSameWindow
-  evaluateFiniteSignedNearCosine
-  : CutoffWindowPayment
+  reproveFarShellDecay : CutoffWindowPayment
+  reproveFiniteNearCarrier : CutoffWindowPayment
+  transportLeanProofTermIntoAgda : CutoffWindowPayment
+  recoverLiteralPoleNearTargetWindow : CutoffWindowPayment
+  attachCheckedCutoffCoordinatesToSameWindow : CutoffWindowPayment
+  evaluateFiniteSignedNearCosine : CutoffWindowPayment
+
 
 data PaymentStatus : Set where
   ownedExternally live pruned optional : PaymentStatus

@@ -33,10 +33,10 @@ open import Relation.Binary.PropositionalEquality using (sym; cong)
 import DASHI.Physics.Closure.NSTriadKNTaoFrozenLegParaproductProgram as Tao
 
 data GainMechanism : Set where
-  incompressibilityRelocation
-  derivativeAlreadyFrozen
-  sobolevTailPayment
-  multiplierCommutatorGain
+  incompressibilityRelocation : GainMechanism
+  derivativeAlreadyFrozen : GainMechanism
+  sobolevTailPayment : GainMechanism
+  multiplierCommutatorGain : GainMechanism
   noPrimitiveLowGain : GainMechanism
 
 gainMechanism : Tao.FrozenLeg → GainMechanism

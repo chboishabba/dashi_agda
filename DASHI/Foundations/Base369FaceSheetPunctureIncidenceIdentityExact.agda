@@ -26,10 +26,10 @@ import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
 ------------------------------------------------------------------------
 
 data PuncturedFace8 : Set where
-  negNeg negZero negPos
-  zeroNeg zeroPos
-  posNeg posZero posPos
-  : PuncturedFace8
+  negNeg negZero negPos : PuncturedFace8
+  zeroNeg zeroPos : PuncturedFace8
+  posNeg posZero posPos : PuncturedFace8
+
 
 data FaceSheet9 : Set where
   faceCentre : FaceSheet9
@@ -83,11 +83,11 @@ placementIsOnFace Geometry.zPositiveFace sheet = Geometry.onFace refl
 ------------------------------------------------------------------------
 
 data FaceDirection4 : Set where
-  horizontalDirection
-  verticalDirection
-  positiveDiagonalDirection
-  negativeDiagonalDirection
-  : FaceDirection4
+  horizontalDirection : FaceDirection4
+  verticalDirection : FaceDirection4
+  positiveDiagonalDirection : FaceDirection4
+  negativeDiagonalDirection : FaceDirection4
+
 
 data FaceEndpointOrientation2 : Set where
   negativeEndpoint positiveEndpoint : FaceEndpointOrientation2

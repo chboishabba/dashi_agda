@@ -100,19 +100,19 @@ canonicalTeachingLearningCommissionSourceSurface =
 ------------------------------------------------------------------------
 
 data ExpandedAuditFinding : Set where
-  fullyAdmissibleFinding
-  partiallyAdmissibleFinding
-  predicateContentMismatch
-  quantifierOverreach
-  populationScopeOverreach
-  contextScopeOverreach
-  causalStrengthOverreach
-  comparatorDropped
-  outcomeMismatch
-  designQuestionMismatch
-  provenanceBreak
-  sameScopeContradiction
-  dialecticalCounterevidence
+  fullyAdmissibleFinding : ExpandedAuditFinding
+  partiallyAdmissibleFinding : ExpandedAuditFinding
+  predicateContentMismatch : ExpandedAuditFinding
+  quantifierOverreach : ExpandedAuditFinding
+  populationScopeOverreach : ExpandedAuditFinding
+  contextScopeOverreach : ExpandedAuditFinding
+  causalStrengthOverreach : ExpandedAuditFinding
+  comparatorDropped : ExpandedAuditFinding
+  outcomeMismatch : ExpandedAuditFinding
+  designQuestionMismatch : ExpandedAuditFinding
+  provenanceBreak : ExpandedAuditFinding
+  sameScopeContradiction : ExpandedAuditFinding
+  dialecticalCounterevidence : ExpandedAuditFinding
   unresolvedAudit : ExpandedAuditFinding
 
 record ClaimSourceBidiAudit : Set where

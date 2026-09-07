@@ -16,11 +16,11 @@ import DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact as 
 ------------------------------------------------------------------------
 
 data AttributionCode : Set where
-  noTherapeuticEffectCode
-  pharmacologicalContributionCode
-  expectancyContributionCode
-  outsideCurrentPsilocybinFibreCode
-  : AttributionCode
+  noTherapeuticEffectCode : AttributionCode
+  pharmacologicalContributionCode : AttributionCode
+  expectancyContributionCode : AttributionCode
+  outsideCurrentPsilocybinFibreCode : AttributionCode
+
 
 attributionConsumer : Trajectory.Interpretation → AttributionCode
 attributionConsumer Trajectory.noPsilocybinTherapeuticEffect = noTherapeuticEffectCode
@@ -57,8 +57,8 @@ efficacyBundle = Disc.experimentBundle
 ------------------------------------------------------------------------
 
 data AttributionObservation : Set where
-  noEffectReadout drugContributionReadout expectancyContributionReadout irrelevantAttributionReadout
-  : AttributionObservation
+  noEffectReadout drugContributionReadout expectancyContributionReadout irrelevantAttributionReadout : AttributionObservation
+
 
 attributionObserve : Trajectory.Interpretation → AttributionObservation
 attributionObserve Trajectory.noPsilocybinTherapeuticEffect = noEffectReadout

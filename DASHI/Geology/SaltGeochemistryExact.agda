@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.TransitionKernel as Chemistry
+open Chemistry
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
 
 ------------------------------------------------------------------------
@@ -27,22 +28,22 @@ import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact a
 ------------------------------------------------------------------------
 
 data SaltReservoirKind : Set where
-  evaporiteBed
-  saltDome
-  brineAquifer
-  surfaceBrine
-  seawaterReservoir
-  industrialBrineReservoir
-  : SaltReservoirKind
+  evaporiteBed : SaltReservoirKind
+  saltDome : SaltReservoirKind
+  brineAquifer : SaltReservoirKind
+  surfaceBrine : SaltReservoirKind
+  seawaterReservoir : SaltReservoirKind
+  industrialBrineReservoir : SaltReservoirKind
+
 
 data SaltGeochemicalProcess : Set where
-  haliteDissolution
-  halitePrecipitation
-  evaporativeConcentration
-  aqueousDilution
-  advectiveSaltTransport
-  diffusiveSaltTransport
-  : SaltGeochemicalProcess
+  haliteDissolution : SaltGeochemicalProcess
+  halitePrecipitation : SaltGeochemicalProcess
+  evaporativeConcentration : SaltGeochemicalProcess
+  aqueousDilution : SaltGeochemicalProcess
+  advectiveSaltTransport : SaltGeochemicalProcess
+  diffusiveSaltTransport : SaltGeochemicalProcess
+
 
 ------------------------------------------------------------------------
 -- Canonical chemistry species used by the salt spine.
@@ -50,38 +51,38 @@ data SaltGeochemicalProcess : Set where
 
 haliteSpecies : Chemistry.Species
 haliteSpecies = record
-  { Chemistry.speciesId = "halite / sodium chloride mineral"
-  ; Chemistry.phase = Chemistry.solid
-  ; Chemistry.chargeLabel = "electrically neutral formula unit"
-  ; Chemistry.compositionLabel = "NaCl"
-  ; Chemistry.mobilityClass = Chemistry.immobile
-  ; Chemistry.activityModelLabel = "solid halite activity / geochemical model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "halite / sodium chloride mineral"
+  ; phase = Chemistry.solid
+  ; chargeLabel = "electrically neutral formula unit"
+  ; compositionLabel = "NaCl"
+  ; mobilityClass = Chemistry.immobile
+  ; activityModelLabel = "solid halite activity / geochemical model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 sodiumIonSpecies : Chemistry.Species
 sodiumIonSpecies = record
-  { Chemistry.speciesId = "sodium ion"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "+1"
-  ; Chemistry.compositionLabel = "Na+"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous electrolyte activity model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "sodium ion"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "+1"
+  ; compositionLabel = "Na+"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous electrolyte activity model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 chlorideIonSpecies : Chemistry.Species
 chlorideIonSpecies = record
-  { Chemistry.speciesId = "chloride ion"
-  ; Chemistry.phase = Chemistry.dissolved
-  ; Chemistry.chargeLabel = "-1"
-  ; Chemistry.compositionLabel = "Cl-"
-  ; Chemistry.mobilityClass = Chemistry.mobile
-  ; Chemistry.activityModelLabel = "aqueous electrolyte activity model supplied by application"
-  ; Chemistry.opticalRoleLabel = "not asserted"
-  ; Chemistry.evidence = Chemistry.literatureEstablished
+  { speciesId = "chloride ion"
+  ; phase = Chemistry.dissolved
+  ; chargeLabel = "-1"
+  ; compositionLabel = "Cl-"
+  ; mobilityClass = Chemistry.mobile
+  ; activityModelLabel = "aqueous electrolyte activity model supplied by application"
+  ; opticalRoleLabel = "not asserted"
+  ; evidence = Chemistry.literatureEstablished
   }
 
 haliteIsSolid : Chemistry.phase haliteSpecies ≡ Chemistry.solid

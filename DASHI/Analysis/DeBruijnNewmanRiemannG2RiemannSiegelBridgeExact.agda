@@ -142,12 +142,12 @@ open RiemannSiegelToG2BridgeReceipt public
 -- No constructor is supplied from Theorem 1.3 alone.
 
 data BridgeStage : Set where
-  sourceTheoremRecovered
-  carrierComparisonCompleted
-  exactTransformRecovered
-  g2BudgetDischarged
-  theoremBearingBridge
-  : BridgeStage
+  sourceTheoremRecovered : BridgeStage
+  carrierComparisonCompleted : BridgeStage
+  exactTransformRecovered : BridgeStage
+  g2BudgetDischarged : BridgeStage
+  theoremBearingBridge : BridgeStage
+
 
 currentBridgeStage : BridgeStage
 currentBridgeStage = carrierComparisonCompleted
@@ -200,10 +200,10 @@ exactIntegerSumToZeroSumTransformRecoveredIsFalse = refl
 ------------------------------------------------------------------------
 
 data PresentUse : Set where
-  dbnFiniteEvaluationInterpretation
-  rhSourceSearchGuide
-  directG2Lemma
-  : PresentUse
+  dbnFiniteEvaluationInterpretation : PresentUse
+  rhSourceSearchGuide : PresentUse
+  directG2Lemma : PresentUse
+
 
 highestJustifiedPresentUse : PresentUse
 highestJustifiedPresentUse = dbnFiniteEvaluationInterpretation

@@ -63,12 +63,12 @@ open BackingReceipt public
 ------------------------------------------------------------------------
 
 data ExposureChannel : Set where
-  physicalChannel
-  accumulationChannel
-  fullyFundedFinancialChannel
-  leveragedFinancialChannel
-  deferredFinancialChannel
-  : ExposureChannel
+  physicalChannel : ExposureChannel
+  accumulationChannel : ExposureChannel
+  fullyFundedFinancialChannel : ExposureChannel
+  leveragedFinancialChannel : ExposureChannel
+  deferredFinancialChannel : ExposureChannel
+
 
 record ChannelPolicy : Set where
   constructor channelPolicy

@@ -8,24 +8,24 @@ import DASHI.Governance.MenWhoStareAtGoatsEvidenceLayerExact as Goats
 import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as RepairPlanner
 
 data ProgrammeFamily : Set where
-  bluebirdArtichokeFamily mkultraMksearchFamily stargateGrillFlameFamily
+  bluebirdArtichokeFamily mkultraMksearchFamily stargateGrillFlameFamily : ProgrammeFamily
   edgewoodHallucinogenFamily civilianPsychedelicResearchFamily : ProgrammeFamily
 
 data PhenomenonFamily : Set where
-  hypnosisSuggestion drugAlteredState isolationDeprivation remoteViewingPsi
+  hypnosisSuggestion drugAlteredState isolationDeprivation remoteViewingPsi : PhenomenonFamily
   psychokineticExtraordinaryInfluence psychedelicTherapeuticEffect : PhenomenonFamily
 
 data InstitutionalObjective : Set where
-  interrogationControlObjective defensiveCountermeasureObjective
-  intelligenceCollectionObjective militaryDisruptionObjective
+  interrogationControlObjective defensiveCountermeasureObjective : InstitutionalObjective
+  intelligenceCollectionObjective militaryDisruptionObjective : InstitutionalObjective
   biomedicalTherapeuticObjective exploratoryMechanismObjective : InstitutionalObjective
 
 data SubjectRelation : Set where
-  volunteerParticipantRelation volunteerWithLimitedDisclosureRelation
+  volunteerParticipantRelation volunteerWithLimitedDisclosureRelation : SubjectRelation
   unwittingSubjectRelation patientParticipantRelation humanCognitiveParticipantRelation : SubjectRelation
 
 data EfficacyStanding : Set where
-  programmeExistenceOnly phenomenonReported mixedOrUnresolvedEfficacy
+  programmeExistenceOnly phenomenonReported mixedOrUnresolvedEfficacy : EfficacyStanding
   operationalUtilityNotEstablished therapeuticEvidenceDeveloping : EfficacyStanding
 
 record ProgrammeAtlasEntry : Set where
@@ -98,7 +98,7 @@ oddityCannotRecoverObjective = INF.witnessRulesOutEveryFlatFactorisation
   (INF.nonFactorabilityWitness artichokeWorld stargateWorld refl objectiveDiffers)
 
 data AtlasConsumer : Set where
-  programmeHistoryConsumer efficacyConsumer subjectEthicsConsumer therapeuticConsumer
+  programmeHistoryConsumer efficacyConsumer subjectEthicsConsumer therapeuticConsumer : AtlasConsumer
   operationalUtilityConsumer institutionalRepairConsumer : AtlasConsumer
 
 data AtlasDemand : AtlasConsumer → Set where

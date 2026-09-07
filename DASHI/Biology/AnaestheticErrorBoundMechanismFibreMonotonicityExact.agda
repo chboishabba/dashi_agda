@@ -116,17 +116,17 @@ strictGrowthWitnessProducesLooserOnlyPoint witness =
 ------------------------------------------------------------------------
 
 data BoundLevel : Set where
-  tightBound
-  looseBound
-  : BoundLevel
+  tightBound : BoundLevel
+  looseBound : BoundLevel
+
 
 data SyntheticMeasurement : Set where
   measuredSuppressedTrace : SyntheticMeasurement
 
 data SyntheticCandidate : Set where
-  robustCandidate
-  marginalCandidate
-  : SyntheticCandidate
+  robustCandidate : SyntheticCandidate
+  marginalCandidate : SyntheticCandidate
+
 
 data BoundLeq : BoundLevel → BoundLevel → Set where
   tightTight : BoundLeq tightBound tightBound

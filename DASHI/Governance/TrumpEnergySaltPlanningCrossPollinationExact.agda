@@ -30,15 +30,15 @@ import DASHI.Governance.SocioTechnicalPowerSelectionAssayExact as Socio
 ------------------------------------------------------------------------
 
 data EnergyProcessLayer : Set where
-  feedstockAvailabilityLayer
-  feedstockChemistryLayer
-  pretreatmentLayer
-  refineryReliabilityLayer
-  effectiveThroughputLayer
-  logisticsLayer
-  productMarketLayer
-  retailIncidenceLayer
-  : EnergyProcessLayer
+  feedstockAvailabilityLayer : EnergyProcessLayer
+  feedstockChemistryLayer : EnergyProcessLayer
+  pretreatmentLayer : EnergyProcessLayer
+  refineryReliabilityLayer : EnergyProcessLayer
+  effectiveThroughputLayer : EnergyProcessLayer
+  logisticsLayer : EnergyProcessLayer
+  productMarketLayer : EnergyProcessLayer
+  retailIncidenceLayer : EnergyProcessLayer
+
 
 record EnergyProcessChainReceipt : Set where
   constructor energy-process-chain-receipt

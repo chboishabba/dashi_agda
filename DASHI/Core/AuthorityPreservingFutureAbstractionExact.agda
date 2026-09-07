@@ -44,12 +44,12 @@ record DecisionPreservingAbstraction
 open DecisionPreservingAbstraction public
 
 sameProjectionSameDecision :
-  ∀ {Fine Coarse Action Consumer Observation Decision}
+  ∀ {Fine Coarse Action Consumer Observation Decision : Set}
     {fine : Governed.ConsumerIndexedGovernedTransition
       Fine Action Consumer Observation}
     {project : Fine → Coarse}
     {safe : Governed.ConsumerSafeAbstraction fine project}
-    (decision : DecisionPreservingAbstraction fine project safe)
+    (decision : DecisionPreservingAbstraction {Decision = Decision} fine project safe)
     (consumer : Consumer)
     {left right : Fine} →
   project left ≡ project right →
@@ -85,12 +85,12 @@ record GovernedFutureAgreement
 open GovernedFutureAgreement public
 
 sameProjectionGivesGovernedFutureAgreement :
-  ∀ {Fine Coarse Action Consumer Observation Decision}
+  ∀ {Fine Coarse Action Consumer Observation Decision : Set}
     {fine : Governed.ConsumerIndexedGovernedTransition
       Fine Action Consumer Observation}
     {project : Fine → Coarse}
     (safe : Governed.ConsumerSafeAbstraction fine project)
-    (decision : DecisionPreservingAbstraction fine project safe)
+    (decision : DecisionPreservingAbstraction {Decision = Decision} fine project safe)
     (consumer : Consumer)
     (depth : Nat)
     {left right : Fine} →

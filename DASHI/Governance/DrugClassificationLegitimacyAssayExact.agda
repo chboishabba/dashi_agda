@@ -17,23 +17,23 @@ import DASHI.Governance.HistoricalDrugGovernanceClassifierExact as Historical
 ------------------------------------------------------------------------
 
 data LegitimacyAxis : Set where
-  empiricalAdequacyAxis
-  clinicalJustificationAxis
-  affectedSubjectVoiceAxis
-  affectedCommunityVoiceAxis
-  democraticMandateAxis
-  proceduralContestabilityAxis
-  historicalRepairAxis
-  indigenousSovereigntyAxis
-  : LegitimacyAxis
+  empiricalAdequacyAxis : LegitimacyAxis
+  clinicalJustificationAxis : LegitimacyAxis
+  affectedSubjectVoiceAxis : LegitimacyAxis
+  affectedCommunityVoiceAxis : LegitimacyAxis
+  democraticMandateAxis : LegitimacyAxis
+  proceduralContestabilityAxis : LegitimacyAxis
+  historicalRepairAxis : LegitimacyAxis
+  indigenousSovereigntyAxis : LegitimacyAxis
+
 
 data AxisStatus : Set where
-  satisfied
-  missing
-  contested
-  unresolved
-  notApplicable
-  : AxisStatus
+  satisfied : AxisStatus
+  missing : AxisStatus
+  contested : AxisStatus
+  unresolved : AxisStatus
+  notApplicable : AxisStatus
+
 
 record ClassificationLegitimacyProfile : Set where
   constructor classificationLegitimacyProfile
@@ -54,17 +54,17 @@ open ClassificationLegitimacyProfile public
 ------------------------------------------------------------------------
 
 data LegitimacyState : Set where
-  coercivelyImposedPunitiveState
-  procedurallyReviewedPunitiveState
-  : LegitimacyState
+  coercivelyImposedPunitiveState : LegitimacyState
+  procedurallyReviewedPunitiveState : LegitimacyState
+
 
 data ImposedRouteSurface : Set where
   samePunitiveRoute : ImposedRouteSurface
 
 data LegitimacyCode : Set where
-  coerciveLowLegitimacyCode
-  reviewedContestableCode
-  : LegitimacyCode
+  coerciveLowLegitimacyCode : LegitimacyCode
+  reviewedContestableCode : LegitimacyCode
+
 
 imposedRouteObserver : LegitimacyState → ImposedRouteSurface
 imposedRouteObserver coercivelyImposedPunitiveState = samePunitiveRoute

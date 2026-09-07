@@ -18,12 +18,12 @@ import DASHI.Governance.TrumpDrugPolicyPsychedelicClassificationBidiExact as Tru
 ------------------------------------------------------------------------
 
 data ReclassificationState : Set where
-  countercultureAssociatedState
-  punitiveProhibitionState
-  researchReopeningState
-  veteranTherapeuticState
-  commercialTherapeuticState
-  : ReclassificationState
+  countercultureAssociatedState : ReclassificationState
+  punitiveProhibitionState : ReclassificationState
+  researchReopeningState : ReclassificationState
+  veteranTherapeuticState : ReclassificationState
+  commercialTherapeuticState : ReclassificationState
+
 
 data ReclassificationStep : ReclassificationState → ReclassificationState → Set where
   countercultureToPunitive :
@@ -57,10 +57,10 @@ countercultureToCommercialHistory =
 ------------------------------------------------------------------------
 
 data PresentLegibility : Set where
-  countercultureLegibility
-  prohibitedLegibility
-  therapeuticLegibility
-  : PresentLegibility
+  countercultureLegibility : PresentLegibility
+  prohibitedLegibility : PresentLegibility
+  therapeuticLegibility : PresentLegibility
+
 
 observePresent : ReclassificationState → PresentLegibility
 observePresent countercultureAssociatedState = countercultureLegibility
@@ -78,11 +78,11 @@ veteranCommercialPresentCollision = refl
 ------------------------------------------------------------------------
 
 data RouteResidue : Set where
-  criminalizationResidue
-  countercultureStigmaResidue
-  veteranInstitutionalPrivilegeResidue
-  commercialExtractionResidue
-  : RouteResidue
+  criminalizationResidue : RouteResidue
+  countercultureStigmaResidue : RouteResidue
+  veteranInstitutionalPrivilegeResidue : RouteResidue
+  commercialExtractionResidue : RouteResidue
+
 
 record ReclassificationHistoryReceipt : Set where
   constructor reclassificationHistoryReceipt

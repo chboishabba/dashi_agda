@@ -56,14 +56,14 @@ import DASHI.Physics.Closure.NSTriadKNTaoFrozenLegParaproductProgram as Tao
 import DASHI.Physics.Closure.NSTriadKNFrozenLegDerivativeLerayLedger as Derivative
 
 data SourceAttribution : Set where
-  standardLittlewoodPaley
-  taoTrichotomy
-  bonyParadifferential
-  germainParamultiplierLedger
+  standardLittlewoodPaley : SourceAttribution
+  taoTrichotomy : SourceAttribution
+  bonyParadifferential : SourceAttribution
+  germainParamultiplierLedger : SourceAttribution
   repositoryOriginalSubdivision : SourceAttribution
 
 data ShellClass : Set where
-  lowHigh highLow highHighToLow nearDiagonal
+  lowHigh highLow highHighToLow nearDiagonal : ShellClass
   farLow farHigh transition residual : ShellClass
 
 classAttribution : ShellClass → SourceAttribution

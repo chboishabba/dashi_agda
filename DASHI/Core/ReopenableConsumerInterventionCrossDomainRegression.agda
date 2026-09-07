@@ -34,23 +34,22 @@ data OneAction : Set where
   tick : OneAction
 
 data OneConsumer : Set where
-  public : OneConsumer
+  publicConsumer : OneConsumer
 
 data Obs : Set where
   sameObs differentObs : Obs
 
 stepFine : OneAction → Fine → Fine
-stepFine tick state = state
+stepFine _ state = state
 
 observePublic : OneConsumer → Fine → Obs
-observePublic public left = sameObs
-observePublic public right = sameObs
+observePublic _ _ = sameObs
 
 declaredPublic : OneConsumer → OneAction → Set
-declaredPublic public tick = ⊤
+declaredPublic _ _ = ⊤
 
 authorityPublic : OneConsumer → Fine → Governed.AuthorityDecision
-authorityPublic public state = Governed.promote
+authorityPublic _ _ = Governed.promote
 
 publicSystem :
   Governed.ConsumerIndexedGovernedTransition Fine OneAction OneConsumer Obs
@@ -62,13 +61,13 @@ project : Fine → Coarse
 project state = coarse
 
 coarseStep : OneAction → Coarse → Coarse
-coarseStep tick coarse = coarse
+coarseStep _ _ = coarse
 
 coarseObserve : OneConsumer → Coarse → Obs
-coarseObserve public coarse = sameObs
+coarseObserve _ _ = sameObs
 
 coarseAuthority : OneConsumer → Coarse → Governed.AuthorityDecision
-coarseAuthority public coarse = Governed.promote
+coarseAuthority _ _ = Governed.promote
 
 publicAbstraction : Governed.ConsumerSafeAbstraction publicSystem project
 publicAbstraction =
@@ -80,10 +79,10 @@ publicAbstraction =
 
 publicStatesEquivalentAtEveryRequestedDepth :
   (depth : Nat) →
-  Governed.FutureEquivalent publicSystem public depth left right
+  Governed.FutureEquivalent publicSystem publicConsumer depth left right
 publicStatesEquivalentAtEveryRequestedDepth depth =
   Governed.sameProjectionFutureEquivalent
-    publicAbstraction public depth refl
+    publicAbstraction publicConsumer depth refl
 
 ------------------------------------------------------------------------
 -- Explicit downstream decision preservation strengthens observation/authority
@@ -93,10 +92,10 @@ publicStatesEquivalentAtEveryRequestedDepth depth =
 data Decision : Set where allow : Decision
 
 fineDecision : OneConsumer → Fine → Decision
-fineDecision public state = allow
+fineDecision _ _ = allow
 
 coarseDecision : OneConsumer → Coarse → Decision
-coarseDecision public coarse = allow
+coarseDecision _ _ = allow
 
 decisionSafe :
   FutureAuthority.DecisionPreservingAbstraction
@@ -108,10 +107,10 @@ decisionSafe =
 publicStatesGovernedFutureAgree :
   (depth : Nat) →
   FutureAuthority.GovernedFutureAgreement
-    publicSystem fineDecision public depth left right
+    publicSystem fineDecision publicConsumer depth left right
 publicStatesGovernedFutureAgree depth =
   FutureAuthority.sameProjectionGivesGovernedFutureAgreement
-    publicAbstraction decisionSafe public depth refl
+    publicAbstraction decisionSafe publicConsumer depth refl
 
 ------------------------------------------------------------------------
 -- A second consumer on the same fine/coarse carrier distinguishes the states,

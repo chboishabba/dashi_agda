@@ -20,20 +20,20 @@ import DASHI.Reasoning.Spacy369MultiConsumerCoveragePathResidueExact as Path
 ------------------------------------------------------------------------
 
 data ConsumerBundle : Set where
-  operationalOnly
-  subjectOnly
-  standingOnly
-  subjectAndStanding
-  closureOnly
-  subjectStandingAndClosure
-  : ConsumerBundle
+  operationalOnly : ConsumerBundle
+  subjectOnly : ConsumerBundle
+  standingOnly : ConsumerBundle
+  subjectAndStanding : ConsumerBundle
+  closureOnly : ConsumerBundle
+  subjectStandingAndClosure : ConsumerBundle
+
 
 data ScheduledPlan : Set where
-  stopNow
-  runSharedContext
-  runClosureResidual
-  runSharedThenClosure
-  : ScheduledPlan
+  stopNow : ScheduledPlan
+  runSharedContext : ScheduledPlan
+  runClosureResidual : ScheduledPlan
+  runSharedThenClosure : ScheduledPlan
+
 
 schedule : ConsumerBundle → ScheduledPlan
 schedule operationalOnly = stopNow

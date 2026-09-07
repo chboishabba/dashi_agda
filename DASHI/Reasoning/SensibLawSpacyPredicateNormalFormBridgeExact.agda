@@ -22,9 +22,9 @@ import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 ------------------------------------------------------------------------
 
 data PNFSense : Set where
-  parserNumericPNF
-  evidentialPredicateNormalForm
-  : PNFSense
+  parserNumericPNF : PNFSense
+  evidentialPredicateNormalForm : PNFSense
+
 
 parserPNFNotEvidentialPNF :
   parserNumericPNF ≡ evidentialPredicateNormalForm → ⊥

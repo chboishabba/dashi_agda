@@ -18,10 +18,10 @@ import DASHI.Cognition.PNF.StreamingSemanticPacmanKernelExact as Streaming
 ------------------------------------------------------------------------
 
 data RoadmapStage : Set where
-  directMechanism
-  boundedParity
-  productionCutover
-  streamingDeltaHierarchy
+  directMechanism : RoadmapStage
+  boundedParity : RoadmapStage
+  productionCutover : RoadmapStage
+  streamingDeltaHierarchy : RoadmapStage
   systemRebenchmark : RoadmapStage
 
 record CertificationFrontier : Set where

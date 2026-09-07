@@ -68,10 +68,10 @@ clinicalLivedDoesNotOccurInStateClinicalOnlyPath
 ------------------------------------------------------------------------
 
 data MaintainedTranslationConsequence : Set where
-  clinicalSafetyMaintained
-  livedSubjectMaintained
-  sovereignCommercialExtractionMaintained
-  : MaintainedTranslationConsequence
+  clinicalSafetyMaintained : MaintainedTranslationConsequence
+  livedSubjectMaintained : MaintainedTranslationConsequence
+  sovereignCommercialExtractionMaintained : MaintainedTranslationConsequence
+
 
 maintainedPathSource : MaintainedTranslationConsequence → Atlas.CategoryChart
 maintainedPathSource clinicalSafetyMaintained = Atlas.stateLegalChart

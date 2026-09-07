@@ -37,10 +37,10 @@ canonicalLoom = Loom.canonicalAliceBrownCorpusLoom
 ------------------------------------------------------------------------
 
 data ParticipationClaimRoute : Set where
-  situatedParticipantEvidenceRoute
-  surveyEqualsVoiceRoute
-  feedbackEqualsAgencyRoute
-  researcherInterpretationEqualsStudentJudgementRoute
+  situatedParticipantEvidenceRoute : ParticipationClaimRoute
+  surveyEqualsVoiceRoute : ParticipationClaimRoute
+  feedbackEqualsAgencyRoute : ParticipationClaimRoute
+  researcherInterpretationEqualsStudentJudgementRoute : ParticipationClaimRoute
   invitationEqualsPartnershipRoute : ParticipationClaimRoute
 
 data AdmissibleParticipationClaimRoute : ParticipationClaimRoute → Set where
@@ -79,9 +79,9 @@ voiceSourceBoundaryRetained =
 ------------------------------------------------------------------------
 
 data SupportPromotionRoute : Set where
-  localCandidateRoute
-  identifiedThemeEqualsUniversalInterventionRoute
-  localPreferenceEqualsCausalEffectRoute
+  localCandidateRoute : SupportPromotionRoute
+  identifiedThemeEqualsUniversalInterventionRoute : SupportPromotionRoute
+  localPreferenceEqualsCausalEffectRoute : SupportPromotionRoute
   oneContextEqualsAllLearnersRoute : SupportPromotionRoute
 
 data AdmissibleSupportPromotionRoute : SupportPromotionRoute → Set where
@@ -115,10 +115,10 @@ strategiesRemainNonUniversal =
 ------------------------------------------------------------------------
 
 data ObserverPromotionRoute : Set where
-  pluralObserverRoute
-  researcherEqualsWholeSystemRoute
-  institutionEqualsStudentExperienceRoute
-  parentEqualsChildVoiceRoute
+  pluralObserverRoute : ObserverPromotionRoute
+  researcherEqualsWholeSystemRoute : ObserverPromotionRoute
+  institutionEqualsStudentExperienceRoute : ObserverPromotionRoute
+  parentEqualsChildVoiceRoute : ObserverPromotionRoute
   modelEqualsSemanticExperienceRoute : ObserverPromotionRoute
 
 data AdmissibleObserverPromotionRoute : ObserverPromotionRoute → Set where
@@ -169,9 +169,9 @@ canonicalHumourConditionalShape =
   conditionalPracticeShape true true true true true true true
 
 data ConditionalPromotionRoute : Set where
-  retainConditionsRoute
-  dropAudienceContextRoute
-  dropFeedbackRoute
+  retainConditionsRoute : ConditionalPromotionRoute
+  dropAudienceContextRoute : ConditionalPromotionRoute
+  dropFeedbackRoute : ConditionalPromotionRoute
   conditionalPracticeEqualsUniversalEffectRoute : ConditionalPromotionRoute
 
 data AdmissibleConditionalPromotionRoute : ConditionalPromotionRoute → Set where
@@ -206,11 +206,11 @@ humourFrameworkPreservesContext =
 ------------------------------------------------------------------------
 
 data BrownDerivedAuditObligationKind : Set where
-  participantRoleObligation
-  observerPluralityObligation
-  localChoiceObligation
-  conditionalContextObligation
-  epistemicReturnObligation
+  participantRoleObligation : BrownDerivedAuditObligationKind
+  observerPluralityObligation : BrownDerivedAuditObligationKind
+  localChoiceObligation : BrownDerivedAuditObligationKind
+  conditionalContextObligation : BrownDerivedAuditObligationKind
+  epistemicReturnObligation : BrownDerivedAuditObligationKind
   representationBoundaryObligation : BrownDerivedAuditObligationKind
 
 record BrownDerivedAuditObligation : Set where

@@ -44,7 +44,7 @@ observationReopensPlan =
 
 noPlanToUnrelated :
   Closure.AffectedClosure Depends candidatePlan unrelatedArchive → ⊥
-noPlanToUnrelated ()
+noPlanToUnrelated (Closure.affectedStep () _)
 
 noModelToUnrelated :
   Closure.AffectedClosure Depends modelRun unrelatedArchive → ⊥

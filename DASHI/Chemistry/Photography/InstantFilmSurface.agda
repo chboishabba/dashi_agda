@@ -16,26 +16,26 @@ import DASHI.Chemistry.TransitionKernel as K
 -- measured coefficient, or wet-lab success is asserted here.
 
 data FilmProcessFamily : Set where
-  integralColour
-  peelApartColour
-  peelApartBlackAndWhite
+  integralColour : FilmProcessFamily
+  peelApartColour : FilmProcessFamily
+  peelApartBlackAndWhite : FilmProcessFamily
   singleColourSurrogate : FilmProcessFamily
 
 data FilmLayerRole : Set where
-  clearSupport
-  acidNeutralisationLayer
-  timingLayer
-  imageReceiver
-  reflectingLayer
-  opacificationLayer
-  blueSensitiveRecord
-  yellowImageLayer
-  greenSensitiveRecord
-  magentaImageLayer
-  redSensitiveRecord
-  cyanImageLayer
-  interlayer
-  opaqueSupport
+  clearSupport : FilmLayerRole
+  acidNeutralisationLayer : FilmLayerRole
+  timingLayer : FilmLayerRole
+  imageReceiver : FilmLayerRole
+  reflectingLayer : FilmLayerRole
+  opacificationLayer : FilmLayerRole
+  blueSensitiveRecord : FilmLayerRole
+  yellowImageLayer : FilmLayerRole
+  greenSensitiveRecord : FilmLayerRole
+  magentaImageLayer : FilmLayerRole
+  redSensitiveRecord : FilmLayerRole
+  cyanImageLayer : FilmLayerRole
+  interlayer : FilmLayerRole
+  opaqueSupport : FilmLayerRole
   reagentSpreadLayer : FilmLayerRole
 
 record FilmLayer : Set where

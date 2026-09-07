@@ -16,14 +16,14 @@ import DASHI.Governance.HistoryObserverAuthorityOptionConeCapstoneExact as Histo
 ------------------------------------------------------------------------
 
 data GovernanceOption : Set where
-  clinicalAccess
-  marketPurchase
-  selfDefinitionContest
-  historicalRepairClaim
-  categoryAuthorityContest
-  benefitSharingClaim
-  sovereignCeremonialGovernance
-  : GovernanceOption
+  clinicalAccess : GovernanceOption
+  marketPurchase : GovernanceOption
+  selfDefinitionContest : GovernanceOption
+  historicalRepairClaim : GovernanceOption
+  categoryAuthorityContest : GovernanceOption
+  benefitSharingClaim : GovernanceOption
+  sovereignCeremonialGovernance : GovernanceOption
+
 
 data Available : Five.ProbeWorld → GovernanceOption → Set where
   baseClinical : Available Five.baseExternalWorld clinicalAccess

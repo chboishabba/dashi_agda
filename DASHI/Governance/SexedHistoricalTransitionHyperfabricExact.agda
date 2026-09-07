@@ -39,17 +39,17 @@ data HistoricalEdge :
 ------------------------------------------------------------------------
 
 data TransitionAxis : Set where
-  formalPoliticalRepresentation
-  legalCapacity
-  economicCapacity
-  religiousAuthority
-  familyAuthority
-  sexualNormGrammar
-  epistemicAuthority
-  symbolicSubjectGrammar
-  materialIndependence
-  historicalMemory
-  : TransitionAxis
+  formalPoliticalRepresentation : TransitionAxis
+  legalCapacity : TransitionAxis
+  economicCapacity : TransitionAxis
+  religiousAuthority : TransitionAxis
+  familyAuthority : TransitionAxis
+  sexualNormGrammar : TransitionAxis
+  epistemicAuthority : TransitionAxis
+  symbolicSubjectGrammar : TransitionAxis
+  materialIndependence : TransitionAxis
+  historicalMemory : TransitionAxis
+
 
 data AxisTransitionStatus : Set where
   corrected changed persisted mixed unresolved : AxisTransitionStatus
@@ -146,9 +146,9 @@ data SymbolicClosureState : Set where
   symbolicResidualOpen symbolicResidualClosed : SymbolicClosureState
 
 data FineTransitionState : Set where
-  correctedWithSymbolicResidual
-  correctedWithSymbolicClosure
-  : FineTransitionState
+  correctedWithSymbolicResidual : FineTransitionState
+  correctedWithSymbolicClosure : FineTransitionState
+
 
 formalCorrectionObserver : FineTransitionState → FormalCorrectionSurface
 formalCorrectionObserver _ = formalRepresentationCorrected

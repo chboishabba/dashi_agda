@@ -41,10 +41,10 @@ import DASHI.Governance.Fanning2022DataRealizationExact as Data
 ------------------------------------------------------------------------
 
 data SupplementaryDataSurface : Set where
-  natureSupplementaryData
-  whiteRoseAcceptedSpreadsheet
-  leedsNationalTrendsDownload
-  : SupplementaryDataSurface
+  natureSupplementaryData : SupplementaryDataSurface
+  whiteRoseAcceptedSpreadsheet : SupplementaryDataSurface
+  leedsNationalTrendsDownload : SupplementaryDataSurface
+
 
 record SupplementaryDataReference : Set where
   constructor supplementaryDataReference

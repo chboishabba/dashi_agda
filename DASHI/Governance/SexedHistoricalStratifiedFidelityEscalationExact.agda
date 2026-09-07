@@ -24,10 +24,10 @@ import DASHI.Governance.SexedHistoricalStratifiedMultiConsumerClosureExact as Mu
 ------------------------------------------------------------------------
 
 data HistoricalModelFidelity : Set where
-  centreFaceFidelity
-  edgeFidelity
-  cornerFidelity
-  : HistoricalModelFidelity
+  centreFaceFidelity : HistoricalModelFidelity
+  edgeFidelity : HistoricalModelFidelity
+  cornerFidelity : HistoricalModelFidelity
+
 
 modelCoversStratum : HistoricalModelFidelity → Strata.VoxelStratum → Set
 modelCoversStratum centreFaceFidelity Strata.centreStratum = ⊤
@@ -121,10 +121,10 @@ cornerFidelityUnlocksFutureCorridor =
 ------------------------------------------------------------------------
 
 data FidelityNeed : Set where
-  noEscalationNeeded
-  escalateToEdge
-  escalateToCorner
-  : FidelityNeed
+  noEscalationNeeded : FidelityNeed
+  escalateToEdge : FidelityNeed
+  escalateToCorner : FidelityNeed
+
 
 fidelityNeed : HistoricalModelFidelity → Multi.HistoricalConsumer → FidelityNeed
 fidelityNeed centreFaceFidelity Multi.reopeningPriorityConsumer = noEscalationNeeded

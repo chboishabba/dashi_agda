@@ -33,22 +33,22 @@ import DASHI.Cognition.PNF.SensibLawTypedLegalAuthorityEdgeExact as Edge
 ------------------------------------------------------------------------
 
 data DeliberationMode : Set where
-  adversarialHearing
-  majorityDecision
-  extendedDeliberation
-  consensusSeeking
-  restorativeDeliberation
-  nationSpecificProcedure
-  : DeliberationMode
+  adversarialHearing : DeliberationMode
+  majorityDecision : DeliberationMode
+  extendedDeliberation : DeliberationMode
+  consensusSeeking : DeliberationMode
+  restorativeDeliberation : DeliberationMode
+  nationSpecificProcedure : DeliberationMode
+
 
 data ClosureRule : Set where
-  authoritativeFinality
-  majorityClosure
-  objectionTriggersReopen
-  consensusClosure
-  legitimateResidualDisagreement
-  nationSpecificClosure
-  : ClosureRule
+  authoritativeFinality : ClosureRule
+  majorityClosure : ClosureRule
+  objectionTriggersReopen : ClosureRule
+  consensusClosure : ClosureRule
+  legitimateResidualDisagreement : ClosureRule
+  nationSpecificClosure : ClosureRule
+
 
 record DecisionProcedure : Set where
   constructor decision-procedure
@@ -71,16 +71,16 @@ open DecisionProcedure public
 ------------------------------------------------------------------------
 
 data RelationalCoordinate : Set where
-  custodianship
-  permission
-  ceremonialAuthority
-  useObligation
-  kinshipResponsibility
-  careForCountryOrPlace
-  repair
-  continuingRelationship
-  intergenerationalObligation
-  : RelationalCoordinate
+  custodianship : RelationalCoordinate
+  permission : RelationalCoordinate
+  ceremonialAuthority : RelationalCoordinate
+  useObligation : RelationalCoordinate
+  kinshipResponsibility : RelationalCoordinate
+  careForCountryOrPlace : RelationalCoordinate
+  repair : RelationalCoordinate
+  continuingRelationship : RelationalCoordinate
+  intergenerationalObligation : RelationalCoordinate
+
 
 record RelationalResolution : Set where
   constructor relational-resolution
@@ -103,13 +103,13 @@ open RelationalResolution public
 ------------------------------------------------------------------------
 
 data DeliberationState : Set where
-  open
-  objectionRaised
-  reopened
-  consensusReached
-  residualDisagreementAccepted
-  authoritativelyClosed
-  : DeliberationState
+  open : DeliberationState
+  objectionRaised : DeliberationState
+  reopened : DeliberationState
+  consensusReached : DeliberationState
+  residualDisagreementAccepted : DeliberationState
+  authoritativelyClosed : DeliberationState
+
 
 reopenOnObjection : DeliberationState → DeliberationState
 reopenOnObjection open = open

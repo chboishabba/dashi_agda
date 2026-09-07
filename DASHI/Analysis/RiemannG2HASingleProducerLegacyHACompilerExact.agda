@@ -104,11 +104,11 @@ singleProducerToLegacyHA {analytic} {space} {formula} {compat}
 ------------------------------------------------------------------------
 
 data PostSingleProducerSearchAction : Set where
-  recoverActualSingleSourceProducer
-  rebuildLegacyHAInterface
-  constructLegacyHMRepresentationBridge
-  recoverPoleNearHTAdapter
-  : PostSingleProducerSearchAction
+  recoverActualSingleSourceProducer : PostSingleProducerSearchAction
+  rebuildLegacyHAInterface : PostSingleProducerSearchAction
+  constructLegacyHMRepresentationBridge : PostSingleProducerSearchAction
+  recoverPoleNearHTAdapter : PostSingleProducerSearchAction
+
 
 data SearchStatus : Set where
   live pruned downstream : SearchStatus

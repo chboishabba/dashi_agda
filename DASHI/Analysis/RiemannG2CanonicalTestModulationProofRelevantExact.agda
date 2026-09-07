@@ -133,10 +133,10 @@ toSameCarrierTestModulationPayment P = record
 ------------------------------------------------------------------------
 
 data ModulationEvidenceLevel : Set where
-  interfaceSocket
-  namedProducer
-  proofRelevantSameObjectProducer
-  : ModulationEvidenceLevel
+  interfaceSocket : ModulationEvidenceLevel
+  namedProducer : ModulationEvidenceLevel
+  proofRelevantSameObjectProducer : ModulationEvidenceLevel
+
 
 AcceptedForTheoremBearingHA : ModulationEvidenceLevel → Set
 AcceptedForTheoremBearingHA interfaceSocket = ⊥

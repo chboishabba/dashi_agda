@@ -19,17 +19,17 @@ import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSocioeconomicModeratorHype
 ------------------------------------------------------------------------
 
 data SituatedLandState : Set where
-  sameCashIncomeDispossessed
-  sameCashIncomeLandSecure
-  : SituatedLandState
+  sameCashIncomeDispossessed : SituatedLandState
+  sameCashIncomeLandSecure : SituatedLandState
+
 
 data CashIncomeObservation : Set where
   sameObservedCashIncome : CashIncomeObservation
 
 data LandAuthorityOutcome : Set where
-  landAuthorityAbsent
-  landAuthorityPresent
-  : LandAuthorityOutcome
+  landAuthorityAbsent : LandAuthorityOutcome
+  landAuthorityPresent : LandAuthorityOutcome
+
 
 cashIncomeObserver : SituatedLandState → CashIncomeObservation
 cashIncomeObserver sameCashIncomeDispossessed = sameObservedCashIncome
@@ -76,16 +76,16 @@ cashIncomeReweightingStillCannotRecoverLandAuthority rechart =
 ------------------------------------------------------------------------
 
 data LandBackWellbeingCoordinate : Set where
-  householdCashIncomeCoordinate
-  incomeDistributionCoordinate
-  collectiveLandSecurityCoordinate
-  indigenousDecisionAuthorityCoordinate
-  culturalContinuityCoordinate
-  ecologicalIntegrityCoordinate
-  externalityBurdenCoordinate
-  serviceAccessCoordinate
-  sovereigntyCapacityCoordinate
-  : LandBackWellbeingCoordinate
+  householdCashIncomeCoordinate : LandBackWellbeingCoordinate
+  incomeDistributionCoordinate : LandBackWellbeingCoordinate
+  collectiveLandSecurityCoordinate : LandBackWellbeingCoordinate
+  indigenousDecisionAuthorityCoordinate : LandBackWellbeingCoordinate
+  culturalContinuityCoordinate : LandBackWellbeingCoordinate
+  ecologicalIntegrityCoordinate : LandBackWellbeingCoordinate
+  externalityBurdenCoordinate : LandBackWellbeingCoordinate
+  serviceAccessCoordinate : LandBackWellbeingCoordinate
+  sovereigntyCapacityCoordinate : LandBackWellbeingCoordinate
+
 
 record MetricAdequacyBoundary : Set where
   constructor metricAdequacyBoundary

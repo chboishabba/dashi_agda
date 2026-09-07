@@ -21,21 +21,21 @@ import DASHI.Cognition.PNF.SensibLawMaboPrimaryAuthorityPropositionWeldExact as 
 ------------------------------------------------------------------------
 
 data HingeSourceStatus : Set where
-  directPrimaryText
-  reviewedDoctrinalInference
-  secondaryInterpretation
-  unresolvedBridge
-  : HingeSourceStatus
+  directPrimaryText : HingeSourceStatus
+  reviewedDoctrinalInference : HingeSourceStatus
+  secondaryInterpretation : HingeSourceStatus
+  unresolvedBridge : HingeSourceStatus
+
 
 data HingePremiseKind : Set where
-  crownSovereigntyReordersMunicipalLegalRelations
-  radicalTitleStructuresCrownMunicipalPropertyOrder
-  continuingInterestRequiresNewSovereignRecognition
-  recognitionConditionMediatesMunicipalLegalEffect
-  recognitionMayBeInferredFromFacts
-  acquiescenceMayEvidenceRecognition
-  continuedOccupationMayEvidenceRecognition
-  : HingePremiseKind
+  crownSovereigntyReordersMunicipalLegalRelations : HingePremiseKind
+  radicalTitleStructuresCrownMunicipalPropertyOrder : HingePremiseKind
+  continuingInterestRequiresNewSovereignRecognition : HingePremiseKind
+  recognitionConditionMediatesMunicipalLegalEffect : HingePremiseKind
+  recognitionMayBeInferredFromFacts : HingePremiseKind
+  acquiescenceMayEvidenceRecognition : HingePremiseKind
+  continuedOccupationMayEvidenceRecognition : HingePremiseKind
+
 
 record DawsonHingePremise : Set where
   constructor dawsonHingePremise
@@ -95,10 +95,10 @@ continuingInterestRecognitionRequirementCandidate = dawsonHingePremise
 ------------------------------------------------------------------------
 
 data ContinuityModelKind : Set where
-  antecedentRightsBurdenRadicalTitle
-  recognitionMediatedMunicipalContinuity
-  communalRightLimitsRadicalTitle
-  : ContinuityModelKind
+  antecedentRightsBurdenRadicalTitle : ContinuityModelKind
+  recognitionMediatedMunicipalContinuity : ContinuityModelKind
+  communalRightLimitsRadicalTitle : ContinuityModelKind
+
 
 record ContinuityModelReceipt : Set where
   constructor continuityModelReceipt
@@ -135,11 +135,11 @@ dawsonRecognitionMediatedModel = continuityModelReceipt
 ------------------------------------------------------------------------
 
 data HingeClosure : Set where
-  sourceMapped
-  partiallyIdentified
-  unresolvedDoctrinalBridge
-  closedDoctrinalBridge
-  : HingeClosure
+  sourceMapped : HingeClosure
+  partiallyIdentified : HingeClosure
+  unresolvedDoctrinalBridge : HingeClosure
+  closedDoctrinalBridge : HingeClosure
+
 
 record DawsonRadicalTitleRecognitionHinge : Set where
   constructor dawsonRadicalTitleRecognitionHinge

@@ -157,8 +157,8 @@ threePointStabilizerOrderInM11IsEight = refl
 ------------------------------------------------------------------------
 
 data SourceOfEight : Set where
-  remainingImagesAfterFixingThreePoints
-  squareGridDihedralOrder
+  remainingImagesAfterFixingThreePoints : SourceOfEight
+  squareGridDihedralOrder : SourceOfEight
   unrelatedOrderEightObject : SourceOfEight
 
 mathieuEightSource : SourceOfEight

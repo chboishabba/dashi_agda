@@ -12,14 +12,14 @@ import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Ex
 import DASHI.Physics.YangMills.BalabanFrontierExperimentDesignRound148Exact as R148
 
 data FrontierConsumer : Set where
-  densityActionConsumer
-  a1PresentCutConsumer
-  a2PresentCutConsumer
-  bc1EffectiveActionConsumer
-  bc2HeatDoobConsumer
-  sectorStressConsumer
-  qftgrStressConsumer
-  : FrontierConsumer
+  densityActionConsumer : FrontierConsumer
+  a1PresentCutConsumer : FrontierConsumer
+  a2PresentCutConsumer : FrontierConsumer
+  bc1EffectiveActionConsumer : FrontierConsumer
+  bc2HeatDoobConsumer : FrontierConsumer
+  sectorStressConsumer : FrontierConsumer
+  qftgrStressConsumer : FrontierConsumer
+
 
 leafConsumers : R146.BalabanFrontierLeaf → List FrontierConsumer
 leafConsumers R146.densityActionRealization =

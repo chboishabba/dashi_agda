@@ -20,18 +20,18 @@ import DASHI.Governance.DrugGovernanceIntersectionalAuthorityExact as Intersecti
 ------------------------------------------------------------------------
 
 data VeteranPsychedelicSurface : Set where
-  vaPsilocybinPIVOTSurface
-  vaMDMAPTSDTrialSurface
-  hhsVaFdaCollaborationSurface
-  : VeteranPsychedelicSurface
+  vaPsilocybinPIVOTSurface : VeteranPsychedelicSurface
+  vaMDMAPTSDTrialSurface : VeteranPsychedelicSurface
+  hhsVaFdaCollaborationSurface : VeteranPsychedelicSurface
+
 
 data AccessAuthority : Set where
-  researchParticipationAuthority
-  clinicalEvidenceAuthority
-  regulatoryAccessAuthority
-  universalTreatmentAuthority
-  politicalNarrativeAuthority
-  : AccessAuthority
+  researchParticipationAuthority : AccessAuthority
+  clinicalEvidenceAuthority : AccessAuthority
+  regulatoryAccessAuthority : AccessAuthority
+  universalTreatmentAuthority : AccessAuthority
+  politicalNarrativeAuthority : AccessAuthority
+
 
 record VeteranClinicalPriorityReceipt : Set where
   constructor veteranClinicalPriorityReceipt

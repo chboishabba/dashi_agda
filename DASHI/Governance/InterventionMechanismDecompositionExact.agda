@@ -42,10 +42,10 @@ open MultiMechanismRepair public
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  resourceOnly
-  recognitionOnly
-  fullRepair
-  : DemoState
+  resourceOnly : DemoState
+  recognitionOnly : DemoState
+  fullRepair : DemoState
+
 
 data ResourceEvidence : DemoState → Set where
   resourceAtResourceOnly : ResourceEvidence resourceOnly

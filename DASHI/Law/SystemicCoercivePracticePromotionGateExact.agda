@@ -15,8 +15,8 @@ data PopulationClaim : Set where
   descriptiveGatewayPattern systemicPractice pretextualIntent causalDeterrence : PopulationClaim
 
 data PopulationProducer : Set where
-  typedEncounterPopulation samplingFrame comparableEncounterDefinition
-  transitionCrossTab repeatedPattern operationalPolicyReceipt intentReceipt
+  typedEncounterPopulation samplingFrame comparableEncounterDefinition : PopulationProducer
+  transitionCrossTab repeatedPattern operationalPolicyReceipt intentReceipt : PopulationProducer
   counterfactualControl : PopulationProducer
 
 record SystemicPromotionCutset : Set where
@@ -35,7 +35,7 @@ record SystemicPromotionCutset : Set where
 open SystemicPromotionCutset public
 
 data PromotionResidual : Set where
-  samplingFrameResidual comparabilityResidual transitionResidual repeatedPatternResidual
+  samplingFrameResidual comparabilityResidual transitionResidual repeatedPatternResidual : PromotionResidual
   operationalPolicyResidual intentResidual counterfactualResidual promotionClosed : PromotionResidual
 
 firstSystemicResidual : PopulationClaim → SystemicPromotionCutset → PromotionResidual

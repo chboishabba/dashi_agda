@@ -56,16 +56,13 @@ canonicalAdmittedLegitimacy : AdmittedLegitimacy demoEvidence allThree
 canonicalAdmittedLegitimacy = admitted-legitimacy allRule allBelief allConsent
 
 legalOnlyIsNotAdmittedLegitimacy : AdmittedLegitimacy demoEvidence legalOnly → ⊥
-legalOnlyIsNotAdmittedLegitimacy legitimacy =
-  (λ ()) (justificationWitness legitimacy)
+legalOnlyIsNotAdmittedLegitimacy (admitted-legitimacy rule () consent)
 
 justifiedOnlyIsNotAdmittedLegitimacy : AdmittedLegitimacy demoEvidence justifiedOnly → ⊥
-justifiedOnlyIsNotAdmittedLegitimacy legitimacy =
-  (λ ()) (ruleWitness legitimacy)
+justifiedOnlyIsNotAdmittedLegitimacy (admitted-legitimacy () justification consent)
 
 consentOnlyIsNotAdmittedLegitimacy : AdmittedLegitimacy demoEvidence consentOnly → ⊥
-consentOnlyIsNotAdmittedLegitimacy legitimacy =
-  (λ ()) (ruleWitness legitimacy)
+consentOnlyIsNotAdmittedLegitimacy (admitted-legitimacy () justification consent)
 
 record LegitimacyBoundary : Set where
   constructor legitimacy-boundary

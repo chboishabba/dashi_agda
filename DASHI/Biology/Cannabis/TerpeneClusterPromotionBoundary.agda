@@ -122,10 +122,10 @@ data ClusterEffectEvidence
       Outcome Protocol Exposure Study Population Endpoint Harm Uncertainty Recommendation
 
 data PromotionStatus : Set where
-  chemical-established
-  association-candidate
-  causal-study-bounded
-  replicated-effect-bounded
+  chemical-established : PromotionStatus
+  association-candidate : PromotionStatus
+  causal-study-bounded : PromotionStatus
+  replicated-effect-bounded : PromotionStatus
   clinical-translation-bounded : PromotionStatus
 
 status :

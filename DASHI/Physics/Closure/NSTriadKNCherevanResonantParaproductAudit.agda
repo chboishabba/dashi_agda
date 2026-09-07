@@ -21,13 +21,13 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 data SourceTier : Set where
-  peerReviewedJournal
-  arxivPreprint
+  peerReviewedJournal : SourceTier
+  arxivPreprint : SourceTier
   selfPublishedManuscript : SourceTier
 
 data AuditDecision : Set where
-  theoremDependencyAllowed
-  reconnaissanceOnly
+  theoremDependencyAllowed : AuditDecision
+  reconnaissanceOnly : AuditDecision
   rejectedAsDependency : AuditDecision
 
 sourceTier : SourceTier

@@ -37,9 +37,9 @@ record LocalFactorInsertion
     insertedFactor : Factor
     Affected : Variable → Set
     affectedRequiresDependency :
-      ∀ variable →
-      Affected variable →
-      Animal.DependsOn graph insertedFactor variable
+      ∀ var →
+      Affected var →
+      Animal.DependsOn graph insertedFactor var
 
 open LocalFactorInsertion public
 
@@ -145,8 +145,8 @@ animalUncoveredRelevantDebtForcesResolution :
   Debt.NeedsResolution debt residual consumer →
   Debt.Deferred policy residual →
   ⊥
-animalUncoveredRelevantDebtForcesResolution =
-  Debt.needsResolutionRefutesDeferral
+animalUncoveredRelevantDebtForcesResolution {debt = debt} {policy = policy} need deferred =
+  Debt.needsResolutionRefutesDeferral {debt = debt} {policy = policy} need deferred
 
 ------------------------------------------------------------------------
 -- 7. Finite counterexample-guided refinement can reuse the already-proved

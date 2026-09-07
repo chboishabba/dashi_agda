@@ -18,13 +18,13 @@ import DASHI.Governance.SexedHistoricalConsumerIndexedBraidCryptoDivergenceExact
 import DASHI.Governance.SexedHistoricalStratifiedMultiConsumerClosureExact as Multi
 
 data HistoricalStrand : Set where
-  evidenceStrand
-  fidelityStrand
-  supportStrand
-  institutionalStrand
-  relationalStrand
-  ecologicalStrand
-  : HistoricalStrand
+  evidenceStrand : HistoricalStrand
+  fidelityStrand : HistoricalStrand
+  supportStrand : HistoricalStrand
+  institutionalStrand : HistoricalStrand
+  relationalStrand : HistoricalStrand
+  ecologicalStrand : HistoricalStrand
+
 
 data BraidWord2 : Set where
   braidWord : HistoricalStrand → HistoricalStrand → BraidWord2
@@ -35,18 +35,18 @@ swap2 (braidWord left right) = braidWord right left
 data ImmediateOrderCode : Set where sameImmediateActionCode : ImmediateOrderCode
 
 data ProvenanceOrderCode : Set where
-  evidenceBeforeFidelity
-  fidelityBeforeEvidence
-  supportBeforeInstitution
-  institutionBeforeSupport
-  otherOrder
-  : ProvenanceOrderCode
+  evidenceBeforeFidelity : ProvenanceOrderCode
+  fidelityBeforeEvidence : ProvenanceOrderCode
+  supportBeforeInstitution : ProvenanceOrderCode
+  institutionBeforeSupport : ProvenanceOrderCode
+  otherOrder : ProvenanceOrderCode
+
 
 data FutureOrderCode : Set where
-  sameNearFutureCode
-  supportFirstLongFuture
-  institutionFirstLongFuture
-  : FutureOrderCode
+  sameNearFutureCode : FutureOrderCode
+  supportFirstLongFuture : FutureOrderCode
+  institutionFirstLongFuture : FutureOrderCode
+
 
 immediateOrder : BraidWord2 → ImmediateOrderCode
 immediateOrder _ = sameImmediateActionCode

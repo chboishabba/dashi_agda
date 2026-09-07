@@ -18,9 +18,9 @@ import DASHI.Reasoning.LogicalConsequenceHistoryResidueExact as HistoryFixture
 ------------------------------------------------------------------------
 
 data EvidenceReusePolicy : Set where
-  acquireFreshEvidence
-  mayReuseSameObligationEvidence
-  : EvidenceReusePolicy
+  acquireFreshEvidence : EvidenceReusePolicy
+  mayReuseSameObligationEvidence : EvidenceReusePolicy
+
 
 reusePolicy : Trajectory.ResidueFlag → EvidenceReusePolicy
 reusePolicy Trajectory.residueAbsent = acquireFreshEvidence

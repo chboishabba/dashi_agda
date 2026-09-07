@@ -60,23 +60,23 @@ data Round7Status : Set where
   OWNED GENERATED LIVE DOWNSTREAM PRUNED PARALLEL : Round7Status
 
 data Round7Leaf : Set where
-  appraisalX6
-  appraisalMonomialAction
-  literalVOAAction
-  sameElementTraceActionWeld
-  selected3BPhaseSource
-  elementKernelClassAttachment
-  kernelClassFusion3B
-  selectedTrace53
-  centralZetaAmplitude65610
-  ninetyHeisenbergIsotypy
-  zetaRecognition
-  actual729Recognition
-  actual729Slices
-  fin90Inertia
-  twelvePlusSeventyEight
-  residual53Action
-  : Round7Leaf
+  appraisalX6 : Round7Leaf
+  appraisalMonomialAction : Round7Leaf
+  literalVOAAction : Round7Leaf
+  sameElementTraceActionWeld : Round7Leaf
+  selected3BPhaseSource : Round7Leaf
+  elementKernelClassAttachment : Round7Leaf
+  kernelClassFusion3B : Round7Leaf
+  selectedTrace53 : Round7Leaf
+  centralZetaAmplitude65610 : Round7Leaf
+  ninetyHeisenbergIsotypy : Round7Leaf
+  zetaRecognition : Round7Leaf
+  actual729Recognition : Round7Leaf
+  actual729Slices : Round7Leaf
+  fin90Inertia : Round7Leaf
+  twelvePlusSeventyEight : Round7Leaf
+  residual53Action : Round7Leaf
+
 
 round7Status : Round7Leaf → Round7Status
 round7Status appraisalX6 = OWNED

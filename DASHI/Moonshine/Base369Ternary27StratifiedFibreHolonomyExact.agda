@@ -135,9 +135,9 @@ orderedEndpointsShareFabricStratum = refl
 ------------------------------------------------------------------------
 
 data TransportOrder : Set where
-  flipThenSwap
-  swapThenFlip
-  : TransportOrder
+  flipThenSwap : TransportOrder
+  swapThenFlip : TransportOrder
+
 
 routeEndpoint : TransportOrder → Geometry.TernaryHyperformalPoint
 routeEndpoint flipThenSwap = flipThenSwapEndpoint

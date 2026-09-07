@@ -19,17 +19,17 @@ import DASHI.Reasoning.SemanticLogicalSelectiveReopeningExact as Canonical
 ------------------------------------------------------------------------
 
 data ImplicationArtifact : Set where
-  parserObservationArtifact
-  semanticResolutionArtifact
-  evidentialPNFArtifact
-  logicalDerivationArtifact
-  empiricalPromotionArtifact
-  residualEnvelopeArtifact
-  designDischargeArtifact
-  implicationEdgeCertificate
-  downstreamConeCertificate
-  consumerUseCertificate
-  : ImplicationArtifact
+  parserObservationArtifact : ImplicationArtifact
+  semanticResolutionArtifact : ImplicationArtifact
+  evidentialPNFArtifact : ImplicationArtifact
+  logicalDerivationArtifact : ImplicationArtifact
+  empiricalPromotionArtifact : ImplicationArtifact
+  residualEnvelopeArtifact : ImplicationArtifact
+  designDischargeArtifact : ImplicationArtifact
+  implicationEdgeCertificate : ImplicationArtifact
+  downstreamConeCertificate : ImplicationArtifact
+  consumerUseCertificate : ImplicationArtifact
+
 
 record ImplicationDependencyGraph : Set₁ where
   constructor implicationDependencyGraph

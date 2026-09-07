@@ -50,7 +50,7 @@ record HistoricalSocialTotality : Set where
 open HistoricalSocialTotality public
 
 data TotalityMoment : Set where
-  materialMoment institutionalMoment juridicalMoment kinshipMoment
+  materialMoment institutionalMoment juridicalMoment kinshipMoment : TotalityMoment
   culturalMoment subjectMoment historicalRelationMoment : TotalityMoment
 
 materialNotCulture : materialMoment ≡ culturalMoment → ⊥
@@ -67,7 +67,7 @@ institutionNotJuridical ()
 ------------------------------------------------------------------------
 
 data CulturalFormationState : Set where
-  sharedChristianEnvironmentSelfEndorsed
+  sharedChristianEnvironmentSelfEndorsed : CulturalFormationState
   sharedChristianEnvironmentDissenting : CulturalFormationState
 
 data CulturalSurface : Set where

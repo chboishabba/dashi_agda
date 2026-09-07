@@ -28,10 +28,10 @@ import DASHI.Cognition.PNF.SensibLawDocumentWorldSemanticStatusBidiExact as Worl
 ------------------------------------------------------------------------
 
 data LiveCampaign : Set where
-  claimDiscourseLive occurrenceLive evidenceLineageLive crossCarrierClaimLive
-  identityRefinementLive referencePopulationLive materialisedSpacyOntologyLive
-  materialisedSpacyEndToEndLive pdfReportingAttributionLive
-  pdfReportingDocumentContextLive scopeCompositionLive documentContextLive
+  claimDiscourseLive occurrenceLive evidenceLineageLive crossCarrierClaimLive : LiveCampaign
+  identityRefinementLive referencePopulationLive materialisedSpacyOntologyLive : LiveCampaign
+  materialisedSpacyEndToEndLive pdfReportingAttributionLive : LiveCampaign
+  pdfReportingDocumentContextLive scopeCompositionLive documentContextLive : LiveCampaign
   participantLegalRoleLive narrativeLegalGateLive : LiveCampaign
 
 data LiveCampaignState : Set where

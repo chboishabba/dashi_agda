@@ -159,12 +159,12 @@ richardsMcKinzieUnderwood2026 = verified-source
 ------------------------------------------------------------------------
 
 data EvidenceCoordinate : Set where
-  constructCoordinate
-  instrumentCoordinate
-  populationCoordinate
-  associationCoordinate
-  causalCoordinate
-  qualitativeMeaningCoordinate
+  constructCoordinate : EvidenceCoordinate
+  instrumentCoordinate : EvidenceCoordinate
+  populationCoordinate : EvidenceCoordinate
+  associationCoordinate : EvidenceCoordinate
+  causalCoordinate : EvidenceCoordinate
+  qualitativeMeaningCoordinate : EvidenceCoordinate
   recoveryCoordinate : EvidenceCoordinate
 
 record SourceToHypothesis : Set where

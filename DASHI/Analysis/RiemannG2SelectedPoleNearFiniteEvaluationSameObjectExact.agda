@@ -171,15 +171,15 @@ checkedDoffTransportAlreadyOwned =
 ------------------------------------------------------------------------
 
 data SelectedFiniteNearPayment : Set where
-  rebuildFiniteNearCarrier
-  reproveFarShellDecay
-  reproveArbitraryAccuracyCutoff
-  reproveDoffCutoffTransport
-  recoverSignedFiniteNearProducer
-  weldEvaluationToSelectedWindowFiniteNear
-  recoverBudgetTransportToSelectedScalar
-  extractNearBudget
-  : SelectedFiniteNearPayment
+  rebuildFiniteNearCarrier : SelectedFiniteNearPayment
+  reproveFarShellDecay : SelectedFiniteNearPayment
+  reproveArbitraryAccuracyCutoff : SelectedFiniteNearPayment
+  reproveDoffCutoffTransport : SelectedFiniteNearPayment
+  recoverSignedFiniteNearProducer : SelectedFiniteNearPayment
+  weldEvaluationToSelectedWindowFiniteNear : SelectedFiniteNearPayment
+  recoverBudgetTransportToSelectedScalar : SelectedFiniteNearPayment
+  extractNearBudget : SelectedFiniteNearPayment
+
 
 data PaymentStatus : Set where
   pruned live downstream : PaymentStatus

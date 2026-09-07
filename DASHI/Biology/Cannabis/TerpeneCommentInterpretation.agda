@@ -5,19 +5,19 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 -- The discussion contains several distinct claims.  They must not be merged
 -- into one undifferentiated pro- or anti-terpene position.
 data CommentClaim : Set where
-  historical-taxonomy-claim
-  genomic-similarity-claim
-  label-predictiveness-critique
-  correlation-warning
-  terpene-causality-denial
+  historical-taxonomy-claim : CommentClaim
+  genomic-similarity-claim : CommentClaim
+  label-predictiveness-critique : CommentClaim
+  correlation-warning : CommentClaim
+  terpene-causality-denial : CommentClaim
   medicinal-effect-question : CommentClaim
 
 data SourceObligation : Set where
-  historical-source-required
-  genomic-study-required
-  classification-study-required
-  methodological-guard-only
-  mechanistic-experiment-required
+  historical-source-required : SourceObligation
+  genomic-study-required : SourceObligation
+  classification-study-required : SourceObligation
+  methodological-guard-only : SourceObligation
+  mechanistic-experiment-required : SourceObligation
   controlled-outcome-study-required : SourceObligation
 
 obligation : CommentClaim → SourceObligation
@@ -29,9 +29,9 @@ obligation terpene-causality-denial        = mechanistic-experiment-required
 obligation medicinal-effect-question      = controlled-outcome-study-required
 
 data ClaimAuthority : Set where
-  framing-only
-  source-bound-candidate
-  experiment-required
+  framing-only : ClaimAuthority
+  source-bound-candidate : ClaimAuthority
+  experiment-required : ClaimAuthority
   blocked-without-source : ClaimAuthority
 
 authority : CommentClaim → ClaimAuthority

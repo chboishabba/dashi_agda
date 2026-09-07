@@ -14,7 +14,7 @@ data SearchStratum : Set where
   searched notSearched : SearchStratum
 
 data MissingnessPattern : Set where
-  missingConcentratedAfterSearch
+  missingConcentratedAfterSearch : MissingnessPattern
   missingConcentratedWithoutSearch : MissingnessPattern
 
 record StratifiedMissingnessPopulation : Set where
@@ -131,15 +131,15 @@ canonicalConditionalAudit = conditionalMissingnessAudit
 ------------------------------------------------------------------------
 
 data MissingnessStructureClaim : Set where
-  marginalMissingnessRate
-  outcomeConditionedMissingness
-  officerConditionedMissingness
+  marginalMissingnessRate : MissingnessStructureClaim
+  outcomeConditionedMissingness : MissingnessStructureClaim
+  officerConditionedMissingness : MissingnessStructureClaim
   placeConditionedMissingness : MissingnessStructureClaim
 
 data MissingnessStructureProducer : Set where
-  marginalMissingCountProducer
-  outcomeMissingnessCrossTabProducer
-  officerMissingnessCrossTabProducer
+  marginalMissingCountProducer : MissingnessStructureProducer
+  outcomeMissingnessCrossTabProducer : MissingnessStructureProducer
+  officerMissingnessCrossTabProducer : MissingnessStructureProducer
   placeMissingnessCrossTabProducer : MissingnessStructureProducer
 
 reverseMissingnessStructure : MissingnessStructureClaim → MissingnessStructureProducer

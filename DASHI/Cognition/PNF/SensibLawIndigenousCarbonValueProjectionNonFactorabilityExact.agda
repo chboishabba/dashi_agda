@@ -18,19 +18,19 @@ import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSourceAuthorityExact as So
 ------------------------------------------------------------------------
 
 data TrustAssetProjection : Set where
-  notTrustAsset
-  trustAsset
-  : TrustAssetProjection
+  notTrustAsset : TrustAssetProjection
+  trustAsset : TrustAssetProjection
+
 
 data StewardshipValueState : Set where
-  storageValueLow
-  storageValueHigh
-  : StewardshipValueState
+  storageValueLow : StewardshipValueState
+  storageValueHigh : StewardshipValueState
+
 
 data CarbonStewardshipState : Set where
-  sameBiaCategoryLowUncapturedValue
-  sameBiaCategoryHighUncapturedValue
-  : CarbonStewardshipState
+  sameBiaCategoryLowUncapturedValue : CarbonStewardshipState
+  sameBiaCategoryHighUncapturedValue : CarbonStewardshipState
+
 
 trustAssetObserver : CarbonStewardshipState → TrustAssetProjection
 trustAssetObserver sameBiaCategoryLowUncapturedValue = notTrustAsset
@@ -90,13 +90,13 @@ biaSourceDoesNotPermitUniversalGeneralisation = refl
 ------------------------------------------------------------------------
 
 data CarbonValueCoordinate : Set where
-  agencyTrustAssetClassification
-  voluntaryMarketCreditPrice
-  socialCarbonMitigationValuation
-  ecosystemServiceValuation
-  indigenousStewardshipValue
-  culturalRelationalValue
-  : CarbonValueCoordinate
+  agencyTrustAssetClassification : CarbonValueCoordinate
+  voluntaryMarketCreditPrice : CarbonValueCoordinate
+  socialCarbonMitigationValuation : CarbonValueCoordinate
+  ecosystemServiceValuation : CarbonValueCoordinate
+  indigenousStewardshipValue : CarbonValueCoordinate
+  culturalRelationalValue : CarbonValueCoordinate
+
 
 record CarbonValueCoordinateBoundary : Set where
   constructor carbonValueCoordinateBoundary

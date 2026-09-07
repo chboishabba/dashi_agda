@@ -18,54 +18,54 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data LandBackEvidenceDomain : Set where
-  deforestationDomain
-  forestDegradationDomain
-  secondaryForestRecoveryDomain
-  biodiversityConservationDomain
-  climateResilienceDomain
-  mentalHealthDispossessionDomain
-  foodSovereigntyDomain
-  selfDeterminationWellbeingDomain
-  socioeconomicTradeoffDomain
-  genericPrivateTitlingDomain
-  : LandBackEvidenceDomain
+  deforestationDomain : LandBackEvidenceDomain
+  forestDegradationDomain : LandBackEvidenceDomain
+  secondaryForestRecoveryDomain : LandBackEvidenceDomain
+  biodiversityConservationDomain : LandBackEvidenceDomain
+  climateResilienceDomain : LandBackEvidenceDomain
+  mentalHealthDispossessionDomain : LandBackEvidenceDomain
+  foodSovereigntyDomain : LandBackEvidenceDomain
+  selfDeterminationWellbeingDomain : LandBackEvidenceDomain
+  socioeconomicTradeoffDomain : LandBackEvidenceDomain
+  genericPrivateTitlingDomain : LandBackEvidenceDomain
+
 
 data EvidenceDesign : Set where
-  globalSpatialAnalysis
-  panTropicalMatchedCounterfactual
-  regressionDiscontinuityCausal
-  differenceInDifferencesCausal
-  systematicReviewDesign
-  comparativeObservationalDesign
-  officialSynthesisDesign
-  : EvidenceDesign
+  globalSpatialAnalysis : EvidenceDesign
+  panTropicalMatchedCounterfactual : EvidenceDesign
+  regressionDiscontinuityCausal : EvidenceDesign
+  differenceInDifferencesCausal : EvidenceDesign
+  systematicReviewDesign : EvidenceDesign
+  comparativeObservationalDesign : EvidenceDesign
+  officialSynthesisDesign : EvidenceDesign
+
 
 data EvidenceDirection : Set where
-  supportsIndigenousLandAuthority
-  dispossessionAssociatedWithHarm
-  mixedOrTradeoffEvidence
-  counterexampleToGenericTitlingProxy
-  descriptiveImportanceOnly
-  : EvidenceDirection
+  supportsIndigenousLandAuthority : EvidenceDirection
+  dispossessionAssociatedWithHarm : EvidenceDirection
+  mixedOrTradeoffEvidence : EvidenceDirection
+  counterexampleToGenericTitlingProxy : EvidenceDirection
+  descriptiveImportanceOnly : EvidenceDirection
+
 
 data EvidenceStrength : Set where
-  causalLocalStrong
-  systematicReviewStrong
-  panRegionalComparativeStrong
-  globalDescriptiveStrong
-  heterogeneousButMaterial
-  hypothesisGeneratingOnly
-  : EvidenceStrength
+  causalLocalStrong : EvidenceStrength
+  systematicReviewStrong : EvidenceStrength
+  panRegionalComparativeStrong : EvidenceStrength
+  globalDescriptiveStrong : EvidenceStrength
+  heterogeneousButMaterial : EvidenceStrength
+  hypothesisGeneratingOnly : EvidenceStrength
+
 
 data TenureInterventionKind : Set where
-  indigenousCollectiveTenureRecognition
-  fullCollectivePropertyRights
-  indigenousTerritoryGovernance
-  landRestitutionOrReturnIntervention
-  communityFoodSovereigntyIntervention
-  genericPrivateLandTitling
-  dispossessionByIndustrialDevelopment
-  : TenureInterventionKind
+  indigenousCollectiveTenureRecognition : TenureInterventionKind
+  fullCollectivePropertyRights : TenureInterventionKind
+  indigenousTerritoryGovernance : TenureInterventionKind
+  landRestitutionOrReturnIntervention : TenureInterventionKind
+  communityFoodSovereigntyIntervention : TenureInterventionKind
+  genericPrivateLandTitling : TenureInterventionKind
+  dispossessionByIndustrialDevelopment : TenureInterventionKind
+
 
 record LandBackStudyReceipt : Set where
   constructor landBackStudyReceipt
@@ -233,13 +233,13 @@ amazonSocioeconomicTradeoff2024 = landBackStudyReceipt
 ------------------------------------------------------------------------
 
 data DomainEvidenceState : Set where
-  noEvidenceMapped
-  descriptiveSupportMapped
-  strongComparativeSupportMapped
-  strongCausalSupportMapped
-  systematicHarmEvidenceMapped
-  mixedTradeoffMapped
-  : DomainEvidenceState
+  noEvidenceMapped : DomainEvidenceState
+  descriptiveSupportMapped : DomainEvidenceState
+  strongComparativeSupportMapped : DomainEvidenceState
+  strongCausalSupportMapped : DomainEvidenceState
+  systematicHarmEvidenceMapped : DomainEvidenceState
+  mixedTradeoffMapped : DomainEvidenceState
+
 
 record GlobalLandBackEvidenceState : Set where
   constructor globalLandBackEvidenceState
@@ -272,15 +272,15 @@ currentGlobalEvidenceState = globalLandBackEvidenceState
 ------------------------------------------------------------------------
 
 data LandBackComponent : Set where
-  territorialReturnOrRestitution
-  collectiveTenureSecurity
-  indigenousDecisionAuthority
-  protectionFromExternalDispossession
-  culturalAndSpiritualAccess
-  intergenerationalContinuity
-  resourceGovernanceAuthority
-  materialCapacityForStewardship
-  : LandBackComponent
+  territorialReturnOrRestitution : LandBackComponent
+  collectiveTenureSecurity : LandBackComponent
+  indigenousDecisionAuthority : LandBackComponent
+  protectionFromExternalDispossession : LandBackComponent
+  culturalAndSpiritualAccess : LandBackComponent
+  intergenerationalContinuity : LandBackComponent
+  resourceGovernanceAuthority : LandBackComponent
+  materialCapacityForStewardship : LandBackComponent
+
 
 canonicalLandBackBundle : List LandBackComponent
 canonicalLandBackBundle =
@@ -299,11 +299,11 @@ canonicalLandBackBundle =
 ------------------------------------------------------------------------
 
 data LandBackHypothesisStatus : Set where
-  normativeDemand
-  empiricallySupportedInSomeDomains
-  crossDomainCausalHypothesis
-  universallyProvedOutcome
-  : LandBackHypothesisStatus
+  normativeDemand : LandBackHypothesisStatus
+  empiricallySupportedInSomeDomains : LandBackHypothesisStatus
+  crossDomainCausalHypothesis : LandBackHypothesisStatus
+  universallyProvedOutcome : LandBackHypothesisStatus
+
 
 record LandBackGlobalHypothesis : Set where
   constructor landBackGlobalHypothesis

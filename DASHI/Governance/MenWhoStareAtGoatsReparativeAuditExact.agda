@@ -15,13 +15,13 @@ import DASHI.Governance.DrugGovernanceMultiAxisRepairPlannerExact as Planner
 ------------------------------------------------------------------------
 
 data InstitutionalHistoryResidual : Set where
-  programmeHistoryResidual
-  participantTreatmentResidual
-  oversightResidual
-  decisionRightsResidual
-  nonRepetitionResidual
-  extraordinaryClaimValidationResidual
-  : InstitutionalHistoryResidual
+  programmeHistoryResidual : InstitutionalHistoryResidual
+  participantTreatmentResidual : InstitutionalHistoryResidual
+  oversightResidual : InstitutionalHistoryResidual
+  decisionRightsResidual : InstitutionalHistoryResidual
+  nonRepetitionResidual : InstitutionalHistoryResidual
+  extraordinaryClaimValidationResidual : InstitutionalHistoryResidual
+
 
 residualProbe : InstitutionalHistoryResidual → Planner.RepairConsumer
 residualProbe programmeHistoryResidual = Planner.truthHistoryConsumer

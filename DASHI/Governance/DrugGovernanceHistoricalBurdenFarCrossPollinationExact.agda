@@ -20,23 +20,23 @@ import DASHI.Governance.DrugGovernanceBurdenPathEdgeIndexedReopeningExact as Reo
 ------------------------------------------------------------------------
 
 data AuditDomain : Set where
-  drugGovernanceAudit
-  climateResponsibilityAudit
-  labourPowerAudit
-  indigenousAuthorityAudit
-  reparativeClosureAudit
-  historyQualifiedAudit
-  : AuditDomain
+  drugGovernanceAudit : AuditDomain
+  climateResponsibilityAudit : AuditDomain
+  labourPowerAudit : AuditDomain
+  indigenousAuthorityAudit : AuditDomain
+  reparativeClosureAudit : AuditDomain
+  historyQualifiedAudit : AuditDomain
+
 
 data AuditQuestion : Set where
-  whoBearsBurdenQuestion
-  whoBenefitsQuestion
-  whoContributedQuestion
-  whoControlsRulesQuestion
-  whatRepairAxisRemainsQuestion
-  whatHistoryPathRemainsQuestion
-  whoHoldsOriginatingAuthorityQuestion
-  : AuditQuestion
+  whoBearsBurdenQuestion : AuditQuestion
+  whoBenefitsQuestion : AuditQuestion
+  whoContributedQuestion : AuditQuestion
+  whoControlsRulesQuestion : AuditQuestion
+  whatRepairAxisRemainsQuestion : AuditQuestion
+  whatHistoryPathRemainsQuestion : AuditQuestion
+  whoHoldsOriginatingAuthorityQuestion : AuditQuestion
+
 
 auditQuestion : AuditDomain → AuditQuestion
 auditQuestion drugGovernanceAudit = whatHistoryPathRemainsQuestion
@@ -52,14 +52,14 @@ auditQuestion historyQualifiedAudit = whatHistoryPathRemainsQuestion
 ------------------------------------------------------------------------
 
 data ProbeFamily : Set where
-  burdenDistributionProbe
-  benefitRoutingProbe
-  contributionProbe
-  controlTopologyProbe
-  repairAxisProbe
-  historyPathProbe
-  sovereignAuthorityProbe
-  : ProbeFamily
+  burdenDistributionProbe : ProbeFamily
+  benefitRoutingProbe : ProbeFamily
+  contributionProbe : ProbeFamily
+  controlTopologyProbe : ProbeFamily
+  repairAxisProbe : ProbeFamily
+  historyPathProbe : ProbeFamily
+  sovereignAuthorityProbe : ProbeFamily
+
 
 suggestedProbe : AuditQuestion → ProbeFamily
 suggestedProbe whoBearsBurdenQuestion = burdenDistributionProbe

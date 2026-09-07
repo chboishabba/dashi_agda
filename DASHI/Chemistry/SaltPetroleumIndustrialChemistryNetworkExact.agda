@@ -33,37 +33,37 @@ import DASHI.Geology.SaltGeochemistryExact as Salt
 ------------------------------------------------------------------------
 
 data IndustrialProcessKind : Set where
-  chlorAlkaliElectrolysis
-  steamCracking
-  catalyticCracking
-  chlorination
-  dehydrochlorination
-  polymerisation
-  hydrogenation
-  oxidation
-  neutralisationExtraction
-  separationPurification
-  formulationFinishing
-  : IndustrialProcessKind
+  chlorAlkaliElectrolysis : IndustrialProcessKind
+  steamCracking : IndustrialProcessKind
+  catalyticCracking : IndustrialProcessKind
+  chlorination : IndustrialProcessKind
+  dehydrochlorination : IndustrialProcessKind
+  polymerisation : IndustrialProcessKind
+  hydrogenation : IndustrialProcessKind
+  oxidation : IndustrialProcessKind
+  neutralisationExtraction : IndustrialProcessKind
+  separationPurification : IndustrialProcessKind
+  formulationFinishing : IndustrialProcessKind
+
 
 data MaterialFamily : Set where
-  geologicalSalt
-  purifiedBrine
-  chlorine
-  causticSoda
-  hydrogen
-  hydrocarbonFeed
-  ethylene
-  propylene
-  aromatics
-  ethyleneDichloride
-  vinylChlorideMonomer
-  pvcResin
-  hydrochloricAcid
-  refineryTreatedStream
-  pharmaceuticalIntermediate
-  formulatedMedicine
-  : MaterialFamily
+  geologicalSalt : MaterialFamily
+  purifiedBrine : MaterialFamily
+  chlorine : MaterialFamily
+  causticSoda : MaterialFamily
+  hydrogen : MaterialFamily
+  hydrocarbonFeed : MaterialFamily
+  ethylene : MaterialFamily
+  propylene : MaterialFamily
+  aromatics : MaterialFamily
+  ethyleneDichloride : MaterialFamily
+  vinylChlorideMonomer : MaterialFamily
+  pvcResin : MaterialFamily
+  hydrochloricAcid : MaterialFamily
+  refineryTreatedStream : MaterialFamily
+  pharmaceuticalIntermediate : MaterialFamily
+  formulatedMedicine : MaterialFamily
+
 
 ------------------------------------------------------------------------
 -- Important process non-collapse.

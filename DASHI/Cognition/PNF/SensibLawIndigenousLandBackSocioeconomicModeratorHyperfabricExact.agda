@@ -21,31 +21,31 @@ import DASHI.Cognition.PNF.SensibLawIndigenousLandBackSourceAuthorityExact as Au
 ------------------------------------------------------------------------
 
 data SocioeconomicIndicator : Set where
-  meanMonthlyHouseholdIncome
-  householdIncomeInequalityGini
-  literacyRate
-  poorSanitationShare
-  lowIncomePopulationShare
-  unemploymentRate
-  : SocioeconomicIndicator
+  meanMonthlyHouseholdIncome : SocioeconomicIndicator
+  householdIncomeInequalityGini : SocioeconomicIndicator
+  literacyRate : SocioeconomicIndicator
+  poorSanitationShare : SocioeconomicIndicator
+  lowIncomePopulationShare : SocioeconomicIndicator
+  unemploymentRate : SocioeconomicIndicator
+
 
 data ObservedDirection : Set where
-  significantlyHigher
-  significantlyLower
-  noConsistentSignificantDifference
-  comparatorDependent
-  notObservedInStudy
-  : ObservedDirection
+  significantlyHigher : ObservedDirection
+  significantlyLower : ObservedDirection
+  noConsistentSignificantDifference : ObservedDirection
+  comparatorDependent : ObservedDirection
+  notObservedInStudy : ObservedDirection
+
 
 data ComparatorKind : Set where
-  sparselyPopulatedControl
-  verySmallAgriculturalLandholders
-  smallAgriculturalLandholders
-  mediumAgriculturalLandholders
-  largeAgriculturalLandholders
-  legalMiningConcessions
-  usIndigenousCommunityPanel
-  : ComparatorKind
+  sparselyPopulatedControl : ComparatorKind
+  verySmallAgriculturalLandholders : ComparatorKind
+  smallAgriculturalLandholders : ComparatorKind
+  mediumAgriculturalLandholders : ComparatorKind
+  largeAgriculturalLandholders : ComparatorKind
+  legalMiningConcessions : ComparatorKind
+  usIndigenousCommunityPanel : ComparatorKind
+
 
 record DisaggregatedOutcomeReceipt : Set where
   constructor disaggregatedOutcomeReceipt
@@ -171,25 +171,25 @@ arcoiteJohnsonUnemployment = disaggregatedOutcomeReceipt
 ------------------------------------------------------------------------
 
 data ModeratorKind : Set where
-  subsidizedRuralCreditExposure
-  historicalTaxCreditDistortion
-  landClearingAsTenureSignal
-  extractiveCommodityProfitability
-  ecosystemServiceExternality
-  transferAccessConstraint
-  marketIntegrationIntensity
-  indigenousDecisionAuthorityModerator
-  collectiveTenureSecurityModerator
-  territorialControlModerator
-  : ModeratorKind
+  subsidizedRuralCreditExposure : ModeratorKind
+  historicalTaxCreditDistortion : ModeratorKind
+  landClearingAsTenureSignal : ModeratorKind
+  extractiveCommodityProfitability : ModeratorKind
+  ecosystemServiceExternality : ModeratorKind
+  transferAccessConstraint : ModeratorKind
+  marketIntegrationIntensity : ModeratorKind
+  indigenousDecisionAuthorityModerator : ModeratorKind
+  collectiveTenureSecurityModerator : ModeratorKind
+  territorialControlModerator : ModeratorKind
+
 
 data ModeratorEvidenceStatus : Set where
-  officialAssociationMapped
-  historicalMechanismMapped
-  economicValuationMapped
-  sourceSuggestedMechanism
-  criticalHypothesisOnly
-  : ModeratorEvidenceStatus
+  officialAssociationMapped : ModeratorEvidenceStatus
+  historicalMechanismMapped : ModeratorEvidenceStatus
+  economicValuationMapped : ModeratorEvidenceStatus
+  sourceSuggestedMechanism : ModeratorEvidenceStatus
+  criticalHypothesisOnly : ModeratorEvidenceStatus
+
 
 record SocioeconomicModeratorReceipt : Set where
   constructor socioeconomicModeratorReceipt
@@ -271,34 +271,34 @@ wriOpportunityCostContext = opportunityCostValuationReceipt
 ------------------------------------------------------------------------
 
 data GovernanceCondition : Set where
-  strongCollectiveTenure
-  effectiveIndigenousDecisionAuthority
-  externalDispossessionProtection
-  stewardshipMaterialCapacity
-  transferAndServiceAccess
-  extractiveSubsidyPressure
-  marketCommodityPressure
-  weakCrossOrderEnforcement
-  : GovernanceCondition
+  strongCollectiveTenure : GovernanceCondition
+  effectiveIndigenousDecisionAuthority : GovernanceCondition
+  externalDispossessionProtection : GovernanceCondition
+  stewardshipMaterialCapacity : GovernanceCondition
+  transferAndServiceAccess : GovernanceCondition
+  extractiveSubsidyPressure : GovernanceCondition
+  marketCommodityPressure : GovernanceCondition
+  weakCrossOrderEnforcement : GovernanceCondition
+
 
 data OutcomeKind : Set where
-  deforestationOutcome
-  restorationOutcome
-  incomeOutcome
-  inequalityOutcome
-  employmentOutcome
-  mentalHealthOutcome
-  foodSovereigntyOutcome
-  sovereigntyCapacityOutcome
-  : OutcomeKind
+  deforestationOutcome : OutcomeKind
+  restorationOutcome : OutcomeKind
+  incomeOutcome : OutcomeKind
+  inequalityOutcome : OutcomeKind
+  employmentOutcome : OutcomeKind
+  mentalHealthOutcome : OutcomeKind
+  foodSovereigntyOutcome : OutcomeKind
+  sovereigntyCapacityOutcome : OutcomeKind
+
 
 data CausalStatus : Set where
-  peerReviewedCausalMapped
-  peerReviewedComparativeMapped
-  systematicReviewMapped
-  workingPaperCausalClaimMapped
-  moderatorHypothesisOpen
-  : CausalStatus
+  peerReviewedCausalMapped : CausalStatus
+  peerReviewedComparativeMapped : CausalStatus
+  systematicReviewMapped : CausalStatus
+  workingPaperCausalClaimMapped : CausalStatus
+  moderatorHypothesisOpen : CausalStatus
+
 
 record ComponentModeratorOutcomeEdge : Set where
   constructor componentModeratorOutcomeEdge
@@ -362,13 +362,13 @@ extractivePressureIncomeInterpretationEdge = componentModeratorOutcomeEdge
 ------------------------------------------------------------------------
 
 data RefinedSocioeconomicState : Set where
-  aggregateTradeoffLabelTooCoarse
-  incomePenaltyComparatorSpecific
-  inequalityBenefitComparatorSpecific
-  literacySanitationNoUniformPenalty
-  usWorkingPaperPositiveEconomicSignal
-  governanceModeratorIdentificationOpen
-  : RefinedSocioeconomicState
+  aggregateTradeoffLabelTooCoarse : RefinedSocioeconomicState
+  incomePenaltyComparatorSpecific : RefinedSocioeconomicState
+  inequalityBenefitComparatorSpecific : RefinedSocioeconomicState
+  literacySanitationNoUniformPenalty : RefinedSocioeconomicState
+  usWorkingPaperPositiveEconomicSignal : RefinedSocioeconomicState
+  governanceModeratorIdentificationOpen : RefinedSocioeconomicState
+
 
 record RefinedSocioeconomicAtlas : Set where
   constructor refinedSocioeconomicAtlas

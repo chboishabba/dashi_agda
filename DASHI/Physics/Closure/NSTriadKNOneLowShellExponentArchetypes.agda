@@ -35,8 +35,8 @@ import DASHI.Physics.Closure.NSTriadKNShellExponentLedgerProgram as Ledger
 ------------------------------------------------------------------------
 
 data OneLowDerivativeLocation : Set where
-  derivativeHigh
-  derivativeLow
+  derivativeHigh : OneLowDerivativeLocation
+  derivativeLow : OneLowDerivativeLocation
   orderedPairContainsBoth : OneLowDerivativeLocation
 
 record EndpointOneLowProfile : Set where

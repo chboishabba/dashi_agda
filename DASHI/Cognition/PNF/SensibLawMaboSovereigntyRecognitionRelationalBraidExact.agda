@@ -21,17 +21,17 @@ import DASHI.Governance.RevolutionaryPracticeBraid as Braid
 ------------------------------------------------------------------------
 
 data SovereigntyTransitionKind : Set where
-  mereChangeOfSovereignty
-  rightsAlteringJuridicalAct
-  expressExtinguishmentAct
-  inconsistentGrantOrAppropriation
-  : SovereigntyTransitionKind
+  mereChangeOfSovereignty : SovereigntyTransitionKind
+  rightsAlteringJuridicalAct : SovereigntyTransitionKind
+  expressExtinguishmentAct : SovereigntyTransitionKind
+  inconsistentGrantOrAppropriation : SovereigntyTransitionKind
+
 
 data RightsEffect : Set where
-  continuityNotDisplacedByTransitionAlone
-  rightsAlterationRequiresFurtherJuridicalBasis
-  extinguishmentCandidate
-  : RightsEffect
+  continuityNotDisplacedByTransitionAlone : RightsEffect
+  rightsAlterationRequiresFurtherJuridicalBasis : RightsEffect
+  extinguishmentCandidate : RightsEffect
+
 
 transitionEffect : SovereigntyTransitionKind → RightsEffect
 transitionEffect mereChangeOfSovereignty = continuityNotDisplacedByTransitionAlone
@@ -67,18 +67,18 @@ maboMereSovereigntyBoundary = mereSovereigntyTransitionBoundary
 ------------------------------------------------------------------------
 
 data RecognitionRole : Set where
-  recognitionAsConstitutiveCondition
-  recognitionAsEvidence
-  recognitionAsExternalAcknowledgement
-  recognitionAsSourceOfAuthority
-  : RecognitionRole
+  recognitionAsConstitutiveCondition : RecognitionRole
+  recognitionAsEvidence : RecognitionRole
+  recognitionAsExternalAcknowledgement : RecognitionRole
+  recognitionAsSourceOfAuthority : RecognitionRole
+
 
 data EntitlementSourceRole : Set where
-  antecedentCommunityLawOrCustom
-  crownOrStateGrant
-  delegatedPublicMandate
-  sourceUnresolved
-  : EntitlementSourceRole
+  antecedentCommunityLawOrCustom : EntitlementSourceRole
+  crownOrStateGrant : EntitlementSourceRole
+  delegatedPublicMandate : EntitlementSourceRole
+  sourceUnresolved : EntitlementSourceRole
+
 
 record RecognitionCreationFirewall : Set where
   constructor recognitionCreationFirewall
@@ -102,9 +102,9 @@ nativeTitleRecognitionFirewall = recognitionCreationFirewall
 ------------------------------------------------------------------------
 
 data BridgeKind : Set where
-  shapeOnlyAnalogy
-  noSemanticAuthorityTransport
-  : BridgeKind
+  shapeOnlyAnalogy : BridgeKind
+  noSemanticAuthorityTransport : BridgeKind
+
 
 record CrossDomainRecognitionBridge : Set where
   constructor crossDomainRecognitionBridge

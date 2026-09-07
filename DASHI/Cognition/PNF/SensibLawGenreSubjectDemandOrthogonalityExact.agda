@@ -118,10 +118,10 @@ lawSchoolLecture frame =
 ------------------------------------------------------------------------
 
 data ReportedAuthorityStatus : Set where
-  authorityUnresolved
-  attributedExternalAuthority
-  governedAuthorityVerified
-  : ReportedAuthorityStatus
+  authorityUnresolved : ReportedAuthorityStatus
+  attributedExternalAuthority : ReportedAuthorityStatus
+  governedAuthorityVerified : ReportedAuthorityStatus
+
 
 record NestedReportedSource : Set where
   constructor nestedReportedSource

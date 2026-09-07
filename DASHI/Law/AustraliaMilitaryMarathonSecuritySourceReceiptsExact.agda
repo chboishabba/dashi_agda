@@ -8,22 +8,22 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ContemporarySourceRole : Set where
-  primeMinisterOfficialStatement
-  parliamentaryRecord
-  abcReport
-  investigativeJournalism
-  civilSocietyLegalAdvocacy
-  eventOrganiserOrCommunityReport
+  primeMinisterOfficialStatement : ContemporarySourceRole
+  parliamentaryRecord : ContemporarySourceRole
+  abcReport : ContemporarySourceRole
+  investigativeJournalism : ContemporarySourceRole
+  civilSocietyLegalAdvocacy : ContemporarySourceRole
+  eventOrganiserOrCommunityReport : ContemporarySourceRole
   dashiCorrection : ContemporarySourceRole
 
 data ContemporaryProposition : Set where
-  threeAustraliansAboardUSSubmarine
-  iranianVesselWasFrigateWarship
-  australianPersonnelParticipatedInAttack
-  australiansOrderedToBunks
-  israeliMilitaryBackgroundDelegationAtSydneyMarathon
-  sixServingIDFRunnersPoliceProtectedReport
-  dedicatedRunningPoliceProtectionOfficiallyConfirmed
+  threeAustraliansAboardUSSubmarine : ContemporaryProposition
+  iranianVesselWasFrigateWarship : ContemporaryProposition
+  australianPersonnelParticipatedInAttack : ContemporaryProposition
+  australiansOrderedToBunks : ContemporaryProposition
+  israeliMilitaryBackgroundDelegationAtSydneyMarathon : ContemporaryProposition
+  sixServingIDFRunnersPoliceProtectedReport : ContemporaryProposition
+  dedicatedRunningPoliceProtectionOfficiallyConfirmed : ContemporaryProposition
   generalMarathonHighVisibilityPoliceOperation : ContemporaryProposition
 
 record ContemporarySourceReceipt : Set where

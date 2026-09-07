@@ -26,27 +26,27 @@ import DASHI.Core.ActiveBidiDiscriminatorLoopExact as Bidi
 ------------------------------------------------------------------------
 
 data DeepTimeStage : Set where
-  prebioticChemistry
-  microbialBiosphere
-  complexEcosystems
-  terrestrialForests
-  carboniferousPeatSystems
-  mesozoicFaunalWorlds
-  organicMatterBurial
-  kerogenCoalification
-  petroleumGasGeneration
-  fossilCarbonReservoir
-  industrialExtraction
-  industrialCombustion
-  atmosphericOceanReturn
-  : DeepTimeStage
+  prebioticChemistry : DeepTimeStage
+  microbialBiosphere : DeepTimeStage
+  complexEcosystems : DeepTimeStage
+  terrestrialForests : DeepTimeStage
+  carboniferousPeatSystems : DeepTimeStage
+  mesozoicFaunalWorlds : DeepTimeStage
+  organicMatterBurial : DeepTimeStage
+  kerogenCoalification : DeepTimeStage
+  petroleumGasGeneration : DeepTimeStage
+  fossilCarbonReservoir : DeepTimeStage
+  industrialExtraction : DeepTimeStage
+  industrialCombustion : DeepTimeStage
+  atmosphericOceanReturn : DeepTimeStage
+
 
 data OrganicSourceFamily : Set where
-  terrestrialPlantMatter
-  marineLacustrineMicroorganisms
-  mixedSedimentaryOrganicMatter
-  vertebrateBiomass
-  : OrganicSourceFamily
+  terrestrialPlantMatter : OrganicSourceFamily
+  marineLacustrineMicroorganisms : OrganicSourceFamily
+  mixedSedimentaryOrganicMatter : OrganicSourceFamily
+  vertebrateBiomass : OrganicSourceFamily
+
 
 data FossilCarbonFamily : Set where
   coal petroleum naturalGas : FossilCarbonFamily

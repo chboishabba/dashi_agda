@@ -22,10 +22,10 @@ import DASHI.Reasoning.TernarySynthesisLogicQualificationExact as Qualification
 ------------------------------------------------------------------------
 
 data CandidateDisposition : Set where
-  rejectCandidate
-  suspendCandidate
-  admitCandidate
-  : CandidateDisposition
+  rejectCandidate : CandidateDisposition
+  suspendCandidate : CandidateDisposition
+  admitCandidate : CandidateDisposition
+
 
 dispositionTrit : CandidateDisposition → Base.TriTruth
 dispositionTrit rejectCandidate = Base.tri-low

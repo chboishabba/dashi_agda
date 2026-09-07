@@ -11,23 +11,23 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
-  unIndependentCommissionFinding
-  icjProvisionalMeasuresOrder
-  generalAssemblyResolution
-  unHistoricalStudy
-  partyAllegation
-  secondaryReport
+  unIndependentCommissionFinding : SourceRole
+  icjProvisionalMeasuresOrder : SourceRole
+  generalAssemblyResolution : SourceRole
+  unHistoricalStudy : SourceRole
+  partyAllegation : SourceRole
+  secondaryReport : SourceRole
   dashiInterpretiveBridge : SourceRole
 
 data PropositionKind : Set where
-  commissionFindsIsraelResponsibleForGenocideInGaza
-  commissionFindsGenocideContinuing
-  commissionFindsHerzogIncitementToGenocide
-  icjMeritsGenocideJudgmentExists
-  unga3379ZionismRacismDetermination
-  unga4686Revoked3379
-  historicalIrgunSternTerrorism
-  zionismOfficiallyDeclaredTerroristIdeology
+  commissionFindsIsraelResponsibleForGenocideInGaza : PropositionKind
+  commissionFindsGenocideContinuing : PropositionKind
+  commissionFindsHerzogIncitementToGenocide : PropositionKind
+  icjMeritsGenocideJudgmentExists : PropositionKind
+  unga3379ZionismRacismDetermination : PropositionKind
+  unga4686Revoked3379 : PropositionKind
+  historicalIrgunSternTerrorism : PropositionKind
+  zionismOfficiallyDeclaredTerroristIdeology : PropositionKind
   fascismDiagnosis : PropositionKind
 
 record SourceReceipt : Set where

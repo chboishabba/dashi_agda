@@ -27,37 +27,37 @@ import DASHI.Chemistry.AlliumOrganosulfurMechanismExact as Allium
 ------------------------------------------------------------------------
 
 data Ingredient : Set where
-  garlic
-  onionOrLeek
-  wine
-  bovineBile
-  brassExposure
-  : Ingredient
+  garlic : Ingredient
+  onionOrLeek : Ingredient
+  wine : Ingredient
+  bovineBile : Ingredient
+  brassExposure : Ingredient
+
 
 data AssayModel : Set where
-  brothCulture
-  syntheticWound
-  animalWound
-  cornealSafetyModel
-  : AssayModel
+  brothCulture : AssayModel
+  syntheticWound : AssayModel
+  animalWound : AssayModel
+  cornealSafetyModel : AssayModel
+
 
 data EndpointKind : Set where
-  growthInhibition
-  viableCountReduction
-  biofilmKilling
-  irritation
-  cytotoxicity
-  quorumReporterChange
-  virulenceChange
-  : EndpointKind
+  growthInhibition : EndpointKind
+  viableCountReduction : EndpointKind
+  biofilmKilling : EndpointKind
+  irritation : EndpointKind
+  cytotoxicity : EndpointKind
+  quorumReporterChange : EndpointKind
+  virulenceChange : EndpointKind
+
 
 data EvidenceStatus : Set where
-  directlyObserved
-  chemicallyIdentified
-  supportedByRelatedSource
-  mechanisticHypothesis
-  openQuestion
-  : EvidenceStatus
+  directlyObserved : EvidenceStatus
+  chemicallyIdentified : EvidenceStatus
+  supportedByRelatedSource : EvidenceStatus
+  mechanisticHypothesis : EvidenceStatus
+  openQuestion : EvidenceStatus
+
 
 record Preparation : Set where
   constructor preparation

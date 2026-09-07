@@ -29,18 +29,18 @@ import DASHI.Analysis.RiemannAristotleG2eTargetCenteredSymmetryNoGoExact as NoGo
 ------------------------------------------------------------------------
 
 data DonorCandidate : Set where
-  polymathRiemannSiegel
-  explicitFormulaSpectralZero
-  existingZetaSymmetryAndCounting
-  exactLiteralTargetCenteredDonor
-  : DonorCandidate
+  polymathRiemannSiegel : DonorCandidate
+  explicitFormulaSpectralZero : DonorCandidate
+  existingZetaSymmetryAndCounting : DonorCandidate
+  exactLiteralTargetCenteredDonor : DonorCandidate
+
 
 data DonorDisposition : Set where
-  sharedDomainOnly
-  representationBridgeOnly
-  provedInsufficientForTargetPhase
-  exactSameObjectCancellationDonor
-  : DonorDisposition
+  sharedDomainOnly : DonorDisposition
+  representationBridgeOnly : DonorDisposition
+  provedInsufficientForTargetPhase : DonorDisposition
+  exactSameObjectCancellationDonor : DonorDisposition
+
 
 disposition : DonorCandidate -> DonorDisposition
 disposition polymathRiemannSiegel = sharedDomainOnly

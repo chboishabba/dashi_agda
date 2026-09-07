@@ -22,25 +22,25 @@ import DASHI.Governance.NormativeCorrectionMaterialPersistenceExact as Persisten
 ------------------------------------------------------------------------
 
 data NativeTitleRelationCoordinate : Set where
-  antecedentIndigenousOrderExists
-  commonLawRecognitionCondition
-  crownSovereigntyPremise
-  crownRadicalTitleArchitecture
-  crownExtinguishmentPower
-  statutoryFutureActValidation
-  indigenousCessionStatus
-  equalSovereignStanding
-  landReturn
-  materialRepair
-  institutionalRelationTransformation
-  : NativeTitleRelationCoordinate
+  antecedentIndigenousOrderExists : NativeTitleRelationCoordinate
+  commonLawRecognitionCondition : NativeTitleRelationCoordinate
+  crownSovereigntyPremise : NativeTitleRelationCoordinate
+  crownRadicalTitleArchitecture : NativeTitleRelationCoordinate
+  crownExtinguishmentPower : NativeTitleRelationCoordinate
+  statutoryFutureActValidation : NativeTitleRelationCoordinate
+  indigenousCessionStatus : NativeTitleRelationCoordinate
+  equalSovereignStanding : NativeTitleRelationCoordinate
+  landReturn : NativeTitleRelationCoordinate
+  materialRepair : NativeTitleRelationCoordinate
+  institutionalRelationTransformation : NativeTitleRelationCoordinate
+
 
 data CoordinateState : Set where
-  sourceBackedPresent
-  sourceBackedAbsent
-  criticalResidualOpen
-  worldTruthUnresolved
-  : CoordinateState
+  sourceBackedPresent : CoordinateState
+  sourceBackedAbsent : CoordinateState
+  criticalResidualOpen : CoordinateState
+  worldTruthUnresolved : CoordinateState
+
 
 nativeTitleCoordinateState : NativeTitleRelationCoordinate → CoordinateState
 nativeTitleCoordinateState antecedentIndigenousOrderExists = sourceBackedPresent
@@ -172,12 +172,12 @@ maboCorrectionDoesNotEqualCompleteRepair = refl
 ------------------------------------------------------------------------
 
 data RecognitionCriticalLens : Set where
-  coulthardColonialRecognitionLens
-  povinelliAuthenticityLegibilityLens
-  moretonRobinsonPossessiveSovereigntyLens
-  nicholsRecursiveDispossessionLens
-  sensibLawInfantilisationLens
-  : RecognitionCriticalLens
+  coulthardColonialRecognitionLens : RecognitionCriticalLens
+  povinelliAuthenticityLegibilityLens : RecognitionCriticalLens
+  moretonRobinsonPossessiveSovereigntyLens : RecognitionCriticalLens
+  nicholsRecursiveDispossessionLens : RecognitionCriticalLens
+  sensibLawInfantilisationLens : RecognitionCriticalLens
+
 
 record RecognitionLensReceipt : Set where
   constructor recognition-lens-receipt

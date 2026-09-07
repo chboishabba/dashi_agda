@@ -28,18 +28,18 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data RHAnalyticLeaf : Set where
-  buildCanonicalComplexCharacter
-  proveCanonicalTestModulationShift
-  assembleCanonicalAnalyticModulationExtension
-  proveTargetTranslationModulationIntertwiner
-  proveWindowRestrictionResidualCompatibility
-  provePhaseSensitiveFiniteNearEvaluation
-  repairGammaPrecision
-  sharpenZeroCount
-  sharpenAbsoluteEnvelope
-  reuseGenericExplicitFormulaWithoutWindow
-  reuseNameOnlyHardyDonor
-  : RHAnalyticLeaf
+  buildCanonicalComplexCharacter : RHAnalyticLeaf
+  proveCanonicalTestModulationShift : RHAnalyticLeaf
+  assembleCanonicalAnalyticModulationExtension : RHAnalyticLeaf
+  proveTargetTranslationModulationIntertwiner : RHAnalyticLeaf
+  proveWindowRestrictionResidualCompatibility : RHAnalyticLeaf
+  provePhaseSensitiveFiniteNearEvaluation : RHAnalyticLeaf
+  repairGammaPrecision : RHAnalyticLeaf
+  sharpenZeroCount : RHAnalyticLeaf
+  sharpenAbsoluteEnvelope : RHAnalyticLeaf
+  reuseGenericExplicitFormulaWithoutWindow : RHAnalyticLeaf
+  reuseNameOnlyHardyDonor : RHAnalyticLeaf
+
 
 data LeafState : Set where
   closed open blocked pruned : LeafState

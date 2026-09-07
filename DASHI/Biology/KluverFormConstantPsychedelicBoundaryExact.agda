@@ -21,18 +21,18 @@ import DASHI.Biology.PsychedelicAttractorReweightingBoundary as Psychedelic
 ------------------------------------------------------------------------
 
 data FormConstant : Set where
-  tunnelFunnel
-  spiral
-  latticeHoneycombTriangle
-  cobweb
-  : FormConstant
+  tunnelFunnel : FormConstant
+  spiral : FormConstant
+  latticeHoneycombTriangle : FormConstant
+  cobweb : FormConstant
+
 
 data PhenomenologyAuthority : Set where
-  reportedPhenomenology
-  neuralMechanismCandidate
-  personalMeaningInterpretation
-  culturalSymbolicInterpretation
-  : PhenomenologyAuthority
+  reportedPhenomenology : PhenomenologyAuthority
+  neuralMechanismCandidate : PhenomenologyAuthority
+  personalMeaningInterpretation : PhenomenologyAuthority
+  culturalSymbolicInterpretation : PhenomenologyAuthority
+
 
 record FormConstantObservation : Set where
   constructor formConstantObservation

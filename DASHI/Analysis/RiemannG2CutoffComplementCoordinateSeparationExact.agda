@@ -36,12 +36,12 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientBidiMeetingExact as Meeting
 ------------------------------------------------------------------------
 
 data ConsumerCoordinate : Set where
-  cutoffCoordinate
-  taperCoordinate
-  signedOffOrdinateCoordinate
-  deterministicGammaCoordinate
-  quantitativeClusterCoordinate
-  : ConsumerCoordinate
+  cutoffCoordinate : ConsumerCoordinate
+  taperCoordinate : ConsumerCoordinate
+  signedOffOrdinateCoordinate : ConsumerCoordinate
+  deterministicGammaCoordinate : ConsumerCoordinate
+  quantitativeClusterCoordinate : ConsumerCoordinate
+
 
 record CutoffDependentOffProducer : Set₁ where
   field
@@ -122,12 +122,12 @@ targetCenteredOffOrdinateStillOpen = refl
 ------------------------------------------------------------------------
 
 data NextPayment : Set where
-  deriveCutoffDependentOffBudget
-  proveSameTaperGammaBudget
-  proveQuantitativeClusterMargin
-  proveCombinedStrictBudget
-  inventGammaAsFunctionOfCutoff
-  : NextPayment
+  deriveCutoffDependentOffBudget : NextPayment
+  proveSameTaperGammaBudget : NextPayment
+  proveQuantitativeClusterMargin : NextPayment
+  proveCombinedStrictBudget : NextPayment
+  inventGammaAsFunctionOfCutoff : NextPayment
+
 
 SearchRelevant : NextPayment -> Set
 SearchRelevant deriveCutoffDependentOffBudget = ⊤

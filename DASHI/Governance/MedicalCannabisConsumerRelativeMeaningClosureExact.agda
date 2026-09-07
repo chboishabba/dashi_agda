@@ -34,9 +34,9 @@ localSafetyConsumerClosedAcrossMeaningFibre left right leftLive rightLive = refl
 ------------------------------------------------------------------------
 
 data PoliticalEconomyDecision : Set where
-  structuralAttributionNotEstablished
-  structuralCapitalistHypothesisLive
-  : PoliticalEconomyDecision
+  structuralAttributionNotEstablished : PoliticalEconomyDecision
+  structuralCapitalistHypothesisLive : PoliticalEconomyDecision
+
 
 politicalEconomyConsumer :
   Cannabis.CannabisMeaning → PoliticalEconomyDecision

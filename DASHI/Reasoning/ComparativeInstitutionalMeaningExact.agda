@@ -14,18 +14,18 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data InstitutionalCoordinate : Set where
-  ownershipCoordinate
-  profitIncentiveCoordinate
-  externalityAllocationCoordinate
-  regulatoryRuleCoordinate
-  enforcementCapacityCoordinate
-  informationTransparencyCoordinate
-  patientVoiceCoordinate
-  productionTechnologyCoordinate
-  productStandardCoordinate
-  populationCoordinate
-  timeCoordinate
-  : InstitutionalCoordinate
+  ownershipCoordinate : InstitutionalCoordinate
+  profitIncentiveCoordinate : InstitutionalCoordinate
+  externalityAllocationCoordinate : InstitutionalCoordinate
+  regulatoryRuleCoordinate : InstitutionalCoordinate
+  enforcementCapacityCoordinate : InstitutionalCoordinate
+  informationTransparencyCoordinate : InstitutionalCoordinate
+  patientVoiceCoordinate : InstitutionalCoordinate
+  productionTechnologyCoordinate : InstitutionalCoordinate
+  productStandardCoordinate : InstitutionalCoordinate
+  populationCoordinate : InstitutionalCoordinate
+  timeCoordinate : InstitutionalCoordinate
+
 
 data CoordinateRelation : Set where
   heldMatched intentionallyVaried unresolvedCoordinate : CoordinateRelation
@@ -111,8 +111,8 @@ open ComparativeStructuralMeaning public
 ------------------------------------------------------------------------
 
 data PoliticalEconomyLabel : Set where
-  capitalismLabel cooperativeLabel publicProvisionLabel mixedEconomyLabel
-  : PoliticalEconomyLabel
+  capitalismLabel cooperativeLabel publicProvisionLabel mixedEconomyLabel : PoliticalEconomyLabel
+
 
 record ComparativeInstitutionalMeaningBoundary : Set where
   constructor comparativeInstitutionalMeaningBoundary

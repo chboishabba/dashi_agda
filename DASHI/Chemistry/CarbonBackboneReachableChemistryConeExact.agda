@@ -22,14 +22,14 @@ data BackboneState : Set where
   carbonCarrier siliconComparison : BackboneState
 
 data ChemistryCapability : Set where
-  stableChainFormation
-  branchedFrameworkFormation
-  multipleBondRepertoire
-  heteroatomFunctionalisation
-  broadRedoxRepertoire
-  macromolecularCombinatorics
-  informationPolymerCandidate
-  : ChemistryCapability
+  stableChainFormation : ChemistryCapability
+  branchedFrameworkFormation : ChemistryCapability
+  multipleBondRepertoire : ChemistryCapability
+  heteroatomFunctionalisation : ChemistryCapability
+  broadRedoxRepertoire : ChemistryCapability
+  macromolecularCombinatorics : ChemistryCapability
+  informationPolymerCandidate : ChemistryCapability
+
 
 data ReachableChemistry : BackboneState → ChemistryCapability → Set where
   carbonStableChain : ReachableChemistry carbonCarrier stableChainFormation

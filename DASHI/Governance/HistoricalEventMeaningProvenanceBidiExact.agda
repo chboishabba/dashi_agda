@@ -69,13 +69,13 @@ burnedSurfaceCannotRecoverCause =
 ------------------------------------------------------------------------
 
 data HistoricalMeaningLayer : Set where
-  physicalEventLayer
-  causalAttributionLayer
-  actorMeaningLayer
-  officialClassificationLayer
-  legalCulpabilityLayer
-  laterHistoricalInterpretationLayer
-  : HistoricalMeaningLayer
+  physicalEventLayer : HistoricalMeaningLayer
+  causalAttributionLayer : HistoricalMeaningLayer
+  actorMeaningLayer : HistoricalMeaningLayer
+  officialClassificationLayer : HistoricalMeaningLayer
+  legalCulpabilityLayer : HistoricalMeaningLayer
+  laterHistoricalInterpretationLayer : HistoricalMeaningLayer
+
 
 physical≠motive : physicalEventLayer ≡ actorMeaningLayer → ⊥
 physical≠motive ()

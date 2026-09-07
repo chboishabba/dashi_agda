@@ -19,9 +19,9 @@ import DASHI.Environment.GlyphosateSauerkrautAssertionPNFConeExact as Claim
 ------------------------------------------------------------------------
 
 data ParserRunMaterialisation : Set where
-  parserRunNotMaterialised
-  parserRunMaterialised
-  : ParserRunMaterialisation
+  parserRunNotMaterialised : ParserRunMaterialisation
+  parserRunMaterialised : ParserRunMaterialisation
+
 
 notMaterialisedNotMaterialised :
   parserRunNotMaterialised ≡ parserRunMaterialised → ⊥

@@ -26,9 +26,9 @@ data ProjectorPlacement : Set where
   originalOutputProjector transposeOutputProjector : ProjectorPlacement
 
 data DerivativeDescription : Set where
-  derivativeOnLeftMode
-  derivativeOnRightMode
-  derivativeOnFrozenMode
+  derivativeOnLeftMode : DerivativeDescription
+  derivativeOnRightMode : DerivativeDescription
+  derivativeOnFrozenMode : DerivativeDescription
   derivativeRemainsOnHighInput : DerivativeDescription
 
 data SobolevTarget : Set where

@@ -40,9 +40,9 @@ open MissingObservation public
 ------------------------------------------------------------------------
 
 data MechanismClass : Set where
-  unrestrictedMissingness
-  observationIndependentMissingness
-  observedCovariateConditionedMissingness
+  unrestrictedMissingness : MechanismClass
+  observationIndependentMissingness : MechanismClass
+  observedCovariateConditionedMissingness : MechanismClass
   nonIgnorableOrUnresolvedMissingness : MechanismClass
 
 allNoObservedDependencies : MissingnessMechanismFibre → Bool
@@ -99,13 +99,13 @@ canonicalIndependentClass = refl
 ------------------------------------------------------------------------
 
 data MechanismClaim : Set where
-  unrestrictedWorstCaseBounds
-  narrowedBoundsUnderIndependence
+  unrestrictedWorstCaseBounds : MechanismClaim
+  narrowedBoundsUnderIndependence : MechanismClaim
   completeCaseRepresentsPopulation : MechanismClaim
 
 data MechanismProducer : Set where
-  unresolvedMassProducer
-  missingnessIndependenceReceipt
+  unresolvedMassProducer : MechanismProducer
+  missingnessIndependenceReceipt : MechanismProducer
   completeCaseTransportReceipt : MechanismProducer
 
 reverseMechanism : MechanismClaim → MechanismProducer

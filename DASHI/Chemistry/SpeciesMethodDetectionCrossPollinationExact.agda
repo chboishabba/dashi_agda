@@ -22,19 +22,19 @@ import DASHI.Chemistry.AssayDetectionEnvelopeExact as Detection
 ------------------------------------------------------------------------
 
 data SignalMechanism : Set where
-  electronImpactIonisation
-  electrosprayIonisation
-  atmosphericPressureChemicalIonisation
-  opticalAbsorption
-  fluorescenceReadout
-  otherValidatedSignalMechanism
-  : SignalMechanism
+  electronImpactIonisation : SignalMechanism
+  electrosprayIonisation : SignalMechanism
+  atmosphericPressureChemicalIonisation : SignalMechanism
+  opticalAbsorption : SignalMechanism
+  fluorescenceReadout : SignalMechanism
+  otherValidatedSignalMechanism : SignalMechanism
+
 
 data ResponseStatus : Set where
-  responseValidated
-  responseSuppressedOrBelowEnvelope
-  responseUnresolved
-  : ResponseStatus
+  responseValidated : ResponseStatus
+  responseSuppressedOrBelowEnvelope : ResponseStatus
+  responseUnresolved : ResponseStatus
+
 
 record SpeciesMethodDetectionReceipt (species : Chemistry.Species) : Set where
   constructor speciesMethodDetectionReceipt

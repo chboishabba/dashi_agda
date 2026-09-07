@@ -15,11 +15,11 @@ import DASHI.Cognition.PNF.SensibLawMaboRecognitionBasisAuthorityEvidenceExact a
 ------------------------------------------------------------------------
 
 data RecognitionBasisState : Set where
-  broadRecognitionBasisOpen
-  sharedAuthorityRolesRecovered
-  authorityInterpretationResidual
-  recognitionBasisPartiallyIdentified
-  : RecognitionBasisState
+  broadRecognitionBasisOpen : RecognitionBasisState
+  sharedAuthorityRolesRecovered : RecognitionBasisState
+  authorityInterpretationResidual : RecognitionBasisState
+  recognitionBasisPartiallyIdentified : RecognitionBasisState
+
 
 record RecognitionBasisDiscriminatorReceipt : Set where
   constructor recognitionBasisDiscriminatorReceipt
@@ -64,15 +64,15 @@ resultNarrowsWithoutWholeRescan = refl
 ------------------------------------------------------------------------
 
 data RecognitionBasisClosureGoal : Set where
-  listCompatibleRecognitionBases
-  identifyExactExhaustiveJurisprudentialTheory
-  identifySharedAuthorityRole
-  : RecognitionBasisClosureGoal
+  listCompatibleRecognitionBases : RecognitionBasisClosureGoal
+  identifyExactExhaustiveJurisprudentialTheory : RecognitionBasisClosureGoal
+  identifySharedAuthorityRole : RecognitionBasisClosureGoal
+
 
 data RecognitionBasisGoalStatus : Set where
-  goalClosed
-  goalOpen
-  : RecognitionBasisGoalStatus
+  goalClosed : RecognitionBasisGoalStatus
+  goalOpen : RecognitionBasisGoalStatus
+
 
 goalStatus : RecognitionBasisClosureGoal → RecognitionBasisDiscriminatorReceipt → RecognitionBasisGoalStatus
 goalStatus listCompatibleRecognitionBases receipt = goalClosed
@@ -93,11 +93,11 @@ sharedAuthorityRoleConsumerRemainsOpen = refl
 ------------------------------------------------------------------------
 
 data RecognitionBasisProbe : Set where
-  inspectBrennanParas54To61
-  inspectDawsonParas7To16
-  inspectCalderHallAndJudsonSplit
-  inspectAmoduTijaniRecognitionAndRadicalTitlePassages
-  : RecognitionBasisProbe
+  inspectBrennanParas54To61 : RecognitionBasisProbe
+  inspectDawsonParas7To16 : RecognitionBasisProbe
+  inspectCalderHallAndJudsonSplit : RecognitionBasisProbe
+  inspectAmoduTijaniRecognitionAndRadicalTitlePassages : RecognitionBasisProbe
+
 
 nextProbes : RecognitionBasisDiscriminatorReceipt → List RecognitionBasisProbe
 nextProbes receipt =

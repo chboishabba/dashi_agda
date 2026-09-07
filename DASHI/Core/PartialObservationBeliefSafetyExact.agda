@@ -23,6 +23,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Core.GenericFuturePartitionRefinementExact as Future
 
@@ -74,7 +75,7 @@ beliefRunCommutes :
   ≡ runBelief machine actions (encodeBelief machine history)
 beliefRunCommutes machine [] history = refl
 beliefRunCommutes machine (action ∷ rest) history
-  rewrite updateCommutes machine action history =
+  rewrite sym (updateCommutes machine action history) =
   beliefRunCommutes machine rest (advanceHistory machine action history)
 
 sameBeliefPreservesFiniteFutureObservation :

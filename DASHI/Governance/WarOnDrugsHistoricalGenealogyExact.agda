@@ -14,12 +14,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data DrugPolicyEra : Set where
-  federalProhibitionPrehistory
-  nixonLaunchEra
-  nixonTreatmentExpansionEra
-  nixonInternalDissentEra
-  reaganPunitiveEscalationEra
-  : DrugPolicyEra
+  federalProhibitionPrehistory : DrugPolicyEra
+  nixonLaunchEra : DrugPolicyEra
+  nixonTreatmentExpansionEra : DrugPolicyEra
+  nixonInternalDissentEra : DrugPolicyEra
+  reaganPunitiveEscalationEra : DrugPolicyEra
+
 
 data HistoricalActor : Set where
   harryAnslinger
@@ -34,16 +34,16 @@ data HistoricalActor : Set where
   namedActor : String → HistoricalActor
 
 data ActorRole : Set where
-  predecessorEnforcementArchitect
-  presidentialLaunchAuthority
-  justiceEnforcementAuthority
-  domesticPolicyCoordinator
-  narcoticsPolicyProjectManager
-  treatmentPublicHealthArchitect
-  scientificPolicyDissent
-  punitiveEscalationAuthority
-  publicPreventionMobilizer
-  : ActorRole
+  predecessorEnforcementArchitect : ActorRole
+  presidentialLaunchAuthority : ActorRole
+  justiceEnforcementAuthority : ActorRole
+  domesticPolicyCoordinator : ActorRole
+  narcoticsPolicyProjectManager : ActorRole
+  treatmentPublicHealthArchitect : ActorRole
+  scientificPolicyDissent : ActorRole
+  punitiveEscalationAuthority : ActorRole
+  publicPreventionMobilizer : ActorRole
+
 
 record ActorRoleReceipt : Set where
   constructor actorRoleReceipt
@@ -150,12 +150,12 @@ canonicalActorGenealogy =
 ------------------------------------------------------------------------
 
 data MotiveEvidenceGrade : Set where
-  contemporaneousPrimary
-  archivalAdministrative
-  retrospectiveInterview
-  contestedRetrospectiveInterview
-  scholarlySynthesis
-  : MotiveEvidenceGrade
+  contemporaneousPrimary : MotiveEvidenceGrade
+  archivalAdministrative : MotiveEvidenceGrade
+  retrospectiveInterview : MotiveEvidenceGrade
+  contestedRetrospectiveInterview : MotiveEvidenceGrade
+  scholarlySynthesis : MotiveEvidenceGrade
+
 
 record MotiveClaimReceipt : Set where
   constructor motiveClaimReceipt
@@ -184,22 +184,22 @@ ehrlichmanRetrospectiveClaim = motiveClaimReceipt
 ------------------------------------------------------------------------
 
 data CountercultureFormation : Set where
-  hippieCounterculture
-  antiwarMovement
-  blackPoliticalMovements
-  youthRevolt
-  veteranHeroinCrisis
-  : CountercultureFormation
+  hippieCounterculture : CountercultureFormation
+  antiwarMovement : CountercultureFormation
+  blackPoliticalMovements : CountercultureFormation
+  youthRevolt : CountercultureFormation
+  veteranHeroinCrisis : CountercultureFormation
+
 
 data CountercultureCoordinate : Set where
-  drugPracticeCoordinate
-  antiwarPoliticsCoordinate
-  racializedPolicingCoordinate
-  youthCultureCoordinate
-  communalExperimentCoordinate
-  musicArtSpiritualityCoordinate
-  institutionalOppositionCoordinate
-  : CountercultureCoordinate
+  drugPracticeCoordinate : CountercultureCoordinate
+  antiwarPoliticsCoordinate : CountercultureCoordinate
+  racializedPolicingCoordinate : CountercultureCoordinate
+  youthCultureCoordinate : CountercultureCoordinate
+  communalExperimentCoordinate : CountercultureCoordinate
+  musicArtSpiritualityCoordinate : CountercultureCoordinate
+  institutionalOppositionCoordinate : CountercultureCoordinate
+
 
 record CountercultureSurface : Set where
   constructor countercultureSurface

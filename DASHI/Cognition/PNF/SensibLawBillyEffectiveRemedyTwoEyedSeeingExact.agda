@@ -31,12 +31,12 @@ import DASHI.Core.DeclaredRealizedIntegrityResidualExact as DeclaredRealized
 ------------------------------------------------------------------------
 
 data BillySourceKind : Set where
-  humanRightsCommitteeView
-  statePartyResponse
-  treatyBodyFollowUpQuestion
-  statePeriodicReportDraft
-  dashiImplementationAudit
-  : BillySourceKind
+  humanRightsCommitteeView : BillySourceKind
+  statePartyResponse : BillySourceKind
+  treatyBodyFollowUpQuestion : BillySourceKind
+  statePeriodicReportDraft : BillySourceKind
+  dashiImplementationAudit : BillySourceKind
+
 
 record BillySourceProposition : Set where
   constructor billy-source-proposition
@@ -112,22 +112,22 @@ australia2026PeriodicDraft = billy-source-proposition
 ------------------------------------------------------------------------
 
 data RemedyCoordinate : Set where
-  adequateCompensation
-  meaningfulConsultation
-  communityNeedsAssessment
-  continuedSafeExistenceMeasures
-  monitoringAndReview
-  correctionOfDeficiencies
-  preventionOfSimilarViolations
-  publicationAndDissemination
-  : RemedyCoordinate
+  adequateCompensation : RemedyCoordinate
+  meaningfulConsultation : RemedyCoordinate
+  communityNeedsAssessment : RemedyCoordinate
+  continuedSafeExistenceMeasures : RemedyCoordinate
+  monitoringAndReview : RemedyCoordinate
+  correctionOfDeficiencies : RemedyCoordinate
+  preventionOfSimilarViolations : RemedyCoordinate
+  publicationAndDissemination : RemedyCoordinate
+
 
 data PublicImplementationState : Set where
-  publicEvidencePresent
-  publicEvidencePartial
-  publicReceiptNotRecovered
-  sourceDoesNotAddress
-  : PublicImplementationState
+  publicEvidencePresent : PublicImplementationState
+  publicEvidencePartial : PublicImplementationState
+  publicReceiptNotRecovered : PublicImplementationState
+  sourceDoesNotAddress : PublicImplementationState
+
 
 publicImplementationState : RemedyCoordinate → PublicImplementationState
 publicImplementationState adequateCompensation = publicReceiptNotRecovered
@@ -156,9 +156,9 @@ adaptationEvidencePresent = refl
 ------------------------------------------------------------------------
 
 data FullReparationStatus : Set where
-  fullReparationClosed
-  fullReparationResidualLive
-  : FullReparationStatus
+  fullReparationClosed : FullReparationStatus
+  fullReparationResidualLive : FullReparationStatus
+
 
 currentPublicFullReparationStatus : FullReparationStatus
 currentPublicFullReparationStatus = fullReparationResidualLive
@@ -172,22 +172,22 @@ currentPublicFullReparationResidualIsLive = refl
 ------------------------------------------------------------------------
 
 data ImplementationMechanism : Set where
-  stateExecutiveImplementation
-  parliamentaryAppropriationOrLegislation
-  treatyBodyFollowUpProcedure
-  periodicReportingAndQuestioning
-  publicPoliticalAccountability
-  communityNegotiatedAgreement
-  separateDomesticCauseOfAction
-  directTreatyBodyDomesticExecutionWrit
-  : ImplementationMechanism
+  stateExecutiveImplementation : ImplementationMechanism
+  parliamentaryAppropriationOrLegislation : ImplementationMechanism
+  treatyBodyFollowUpProcedure : ImplementationMechanism
+  periodicReportingAndQuestioning : ImplementationMechanism
+  publicPoliticalAccountability : ImplementationMechanism
+  communityNegotiatedAgreement : ImplementationMechanism
+  separateDomesticCauseOfAction : ImplementationMechanism
+  directTreatyBodyDomesticExecutionWrit : ImplementationMechanism
+
 
 data MechanismStrength : Set where
-  availableDirect
-  availableIndirect
-  legallySeparateRoute
-  unavailableByDefault
-  : MechanismStrength
+  availableDirect : MechanismStrength
+  availableIndirect : MechanismStrength
+  legallySeparateRoute : MechanismStrength
+  unavailableByDefault : MechanismStrength
+
 
 mechanismStrength : ImplementationMechanism → MechanismStrength
 mechanismStrength stateExecutiveImplementation = availableDirect
@@ -216,11 +216,11 @@ followUpIsIndirectLeverage = refl
 ------------------------------------------------------------------------
 
 data PracticalProspect : Set where
-  comparativelyStrongProspect
-  politicallyContingentProspect
-  structurallyWeakCoerciveProspect
-  insufficientPublicEvidenceForEstimate
-  : PracticalProspect
+  comparativelyStrongProspect : PracticalProspect
+  politicallyContingentProspect : PracticalProspect
+  structurallyWeakCoerciveProspect : PracticalProspect
+  insufficientPublicEvidenceForEstimate : PracticalProspect
+
 
 prospectFor : RemedyCoordinate → PracticalProspect
 prospectFor meaningfulConsultation = comparativelyStrongProspect
@@ -262,21 +262,21 @@ braidingKeepsDistinctWarrants = TwoEyed.braidingReading
 ------------------------------------------------------------------------
 
 data ConsultationCoordinate : Set where
-  observedNeed
-  placeRelation
-  communityAuthority
-  knowledgeProvenance
-  permissionAndProtocol
-  reciprocalObligation
-  implementationFeedback
-  : ConsultationCoordinate
+  observedNeed : ConsultationCoordinate
+  placeRelation : ConsultationCoordinate
+  communityAuthority : ConsultationCoordinate
+  knowledgeProvenance : ConsultationCoordinate
+  permissionAndProtocol : ConsultationCoordinate
+  reciprocalObligation : ConsultationCoordinate
+  implementationFeedback : ConsultationCoordinate
+
 
 data ConsultationAdequacy : Set where
-  extractiveConsultation
-  provenancePreservingConsultation
-  authorityBearingConsultation
-  reciprocalRemedyCoDesign
-  : ConsultationAdequacy
+  extractiveConsultation : ConsultationAdequacy
+  provenancePreservingConsultation : ConsultationAdequacy
+  authorityBearingConsultation : ConsultationAdequacy
+  reciprocalRemedyCoDesign : ConsultationAdequacy
+
 
 record RemedyConsultationBoundary : Set where
   constructor remedy-consultation-boundary

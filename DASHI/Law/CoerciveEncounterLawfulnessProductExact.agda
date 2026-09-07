@@ -66,7 +66,7 @@ lawfulEdgeHasPositiveProducer = positiveProducerReceipt
 ------------------------------------------------------------------------
 
 data LawfulnessCoordinate : Set where
-  occurrenceCoordinate authorityCoordinate triggerCoordinate scopeCoordinate
+  occurrenceCoordinate authorityCoordinate triggerCoordinate scopeCoordinate : LawfulnessCoordinate
   procedureCoordinate safeguardCoordinate temporalCoordinate evidenceCoordinate : LawfulnessCoordinate
 
 data CoordinateState : Set where

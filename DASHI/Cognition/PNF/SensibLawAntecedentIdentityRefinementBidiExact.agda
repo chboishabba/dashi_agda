@@ -27,8 +27,8 @@ record BindingCandidateSnapshot : Set where
 open BindingCandidateSnapshot public
 
 data RefinementDisposition : Set where
-  retainedAmbiguity narrowedAmbiguity uniqueCandidate noCandidate
-  : RefinementDisposition
+  retainedAmbiguity narrowedAmbiguity uniqueCandidate noCandidate : RefinementDisposition
+
 
 record AntecedentRefinementReceipt
     (subject : Status.SemanticSubject) : Set where

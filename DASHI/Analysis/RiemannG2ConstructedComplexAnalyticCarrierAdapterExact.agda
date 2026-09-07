@@ -134,12 +134,12 @@ toCanonicalCharacterCarrierAttachment {C = C} A = record
 ------------------------------------------------------------------------
 
 data CarrierAttachmentAction : Set where
-  reuseTerminalOnePointAnalyticModel
-  assertRealAndComplexNamesMatch
-  recoverWholeCanonicalCarrierIdentity
-  realizeCanonicalCharacterOperations
-  continueToTestModulation
-  : CarrierAttachmentAction
+  reuseTerminalOnePointAnalyticModel : CarrierAttachmentAction
+  assertRealAndComplexNamesMatch : CarrierAttachmentAction
+  recoverWholeCanonicalCarrierIdentity : CarrierAttachmentAction
+  realizeCanonicalCharacterOperations : CarrierAttachmentAction
+  continueToTestModulation : CarrierAttachmentAction
+
 
 CarrierAttachmentRelevant : CarrierAttachmentAction → Set
 CarrierAttachmentRelevant reuseTerminalOnePointAnalyticModel = ⊥

@@ -12,8 +12,8 @@ import DASHI.Law.MissingnessMechanismFibreExact as Mechanism
 ------------------------------------------------------------------------
 
 data BoundPolicy : Set where
-  unrestrictedWorstCase
-  independenceConditioned
+  unrestrictedWorstCase : BoundPolicy
+  independenceConditioned : BoundPolicy
   observedCovariateConditioned : BoundPolicy
 
 record BoundTransportRequest : Set where
@@ -50,13 +50,13 @@ transportStatus r with policy r
 ------------------------------------------------------------------------
 
 data BoundConsumer : Set where
-  conservativeIdentifiedSet
-  tightenedIdentifiedSet
+  conservativeIdentifiedSet : BoundConsumer
+  tightenedIdentifiedSet : BoundConsumer
   completeCasePopulationRate : BoundConsumer
 
 data BoundProducer : Set where
-  unresolvedMassBoundsProducer
-  explicitMechanismReceiptProducer
+  unresolvedMassBoundsProducer : BoundProducer
+  explicitMechanismReceiptProducer : BoundProducer
   completeCaseTransportProducer : BoundProducer
 
 reverseBoundConsumer : BoundConsumer → BoundProducer

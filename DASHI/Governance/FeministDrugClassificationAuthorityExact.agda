@@ -20,40 +20,40 @@ import DASHI.Governance.HistoricalDrugGovernanceClassifierExact as Historical
 ------------------------------------------------------------------------
 
 data DrugCategory : Set where
-  illicitDrugCategory
-  medicineCategory
-  patientCategory
-  addictCategory
-  criminalCategory
-  veteranTherapeuticCategory
-  psychedelicCategory
-  ceremonialMedicineCategory
-  commercialWellnessCategory
-  : DrugCategory
+  illicitDrugCategory : DrugCategory
+  medicineCategory : DrugCategory
+  patientCategory : DrugCategory
+  addictCategory : DrugCategory
+  criminalCategory : DrugCategory
+  veteranTherapeuticCategory : DrugCategory
+  psychedelicCategory : DrugCategory
+  ceremonialMedicineCategory : DrugCategory
+  commercialWellnessCategory : DrugCategory
+
 
 data CategoryIssuer : Set where
-  federalExecutiveIssuer
-  enforcementAgencyIssuer
-  regulatorIssuer
-  medicalProfessionIssuer
-  veteranHealthSystemIssuer
-  commercialSponsorIssuer
-  affectedPersonIssuer
-  drugUserCommunityIssuer
-  indigenousSovereignCommunityIssuer
-  : CategoryIssuer
+  federalExecutiveIssuer : CategoryIssuer
+  enforcementAgencyIssuer : CategoryIssuer
+  regulatorIssuer : CategoryIssuer
+  medicalProfessionIssuer : CategoryIssuer
+  veteranHealthSystemIssuer : CategoryIssuer
+  commercialSponsorIssuer : CategoryIssuer
+  affectedPersonIssuer : CategoryIssuer
+  drugUserCommunityIssuer : CategoryIssuer
+  indigenousSovereignCommunityIssuer : CategoryIssuer
+
 
 data ClassificationAuthorityKind : Set where
-  coerciveImpositionAuthority
-  legalAdministrativeAuthority
-  empiricalEpistemicAuthority
-  clinicalAuthority
-  originatingSubjectAuthority
-  affectedCommunityAuthority
-  democraticMandateAuthority
-  commercialMarketAuthority
-  indigenousSovereignAuthority
-  : ClassificationAuthorityKind
+  coerciveImpositionAuthority : ClassificationAuthorityKind
+  legalAdministrativeAuthority : ClassificationAuthorityKind
+  empiricalEpistemicAuthority : ClassificationAuthorityKind
+  clinicalAuthority : ClassificationAuthorityKind
+  originatingSubjectAuthority : ClassificationAuthorityKind
+  affectedCommunityAuthority : ClassificationAuthorityKind
+  democraticMandateAuthority : ClassificationAuthorityKind
+  commercialMarketAuthority : ClassificationAuthorityKind
+  indigenousSovereignAuthority : ClassificationAuthorityKind
+
 
 record ClassificationAuthorityReceipt : Set where
   constructor classificationAuthorityReceipt
@@ -72,17 +72,17 @@ open ClassificationAuthorityReceipt public
 ------------------------------------------------------------------------
 
 data CategoryState : Set where
-  externallyClassifiedPatient
-  selfSituatedPatient
-  : CategoryState
+  externallyClassifiedPatient : CategoryState
+  selfSituatedPatient : CategoryState
+
 
 data VisibleCategory : Set where
   samePatientCategory : VisibleCategory
 
 data OriginatingPosition : Set where
-  representedPatientPosition
-  originatingPatientPosition
-  : OriginatingPosition
+  representedPatientPosition : OriginatingPosition
+  originatingPatientPosition : OriginatingPosition
+
 
 visibleCategory : CategoryState → VisibleCategory
 visibleCategory externallyClassifiedPatient = samePatientCategory
@@ -172,11 +172,11 @@ data SharedDrugCarrier : Set where
   sharedPsychoactiveCarrier : SharedDrugCarrier
 
 data ClassificationGrammar : Set where
-  stateCentredGrammar
-  clinicalRelationalGrammar
-  livedSubjectGrammar
-  sovereignCeremonialGrammar
-  : ClassificationGrammar
+  stateCentredGrammar : ClassificationGrammar
+  clinicalRelationalGrammar : ClassificationGrammar
+  livedSubjectGrammar : ClassificationGrammar
+  sovereignCeremonialGrammar : ClassificationGrammar
+
 
 record SituatedDrugClassification : Set where
   constructor situatedDrugClassification

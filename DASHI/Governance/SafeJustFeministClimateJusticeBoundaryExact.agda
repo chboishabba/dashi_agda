@@ -27,20 +27,20 @@ import DASHI.Governance.FeministClimateJusticeResidualBundleExact as ResidualGen
 ------------------------------------------------------------------------
 
 data FeministClimateSource : Set where
-  power2004 waring1988 macgregor2014 sultana2022
-  alstonFullerKwarney2023 carterHoward2020 yusoff2018 maathai2004
-  : FeministClimateSource
+  power2004 waring1988 macgregor2014 sultana2022 : FeministClimateSource
+  alstonFullerKwarney2023 carterHoward2020 yusoff2018 maathai2004 : FeministClimateSource
+
 
 data SourceRole : Set where
-  socialProvisioningMethodology
-  productionBoundaryCritique
-  postPoliticalAuthorityCritique
-  climateColoniality
-  situatedLivedOutcome
-  hiddenNegotiatingContribution
-  categoryNeutralityCritique
-  bottomUpSituatedAuthority
-  : SourceRole
+  socialProvisioningMethodology : SourceRole
+  productionBoundaryCritique : SourceRole
+  postPoliticalAuthorityCritique : SourceRole
+  climateColoniality : SourceRole
+  situatedLivedOutcome : SourceRole
+  hiddenNegotiatingContribution : SourceRole
+  categoryNeutralityCritique : SourceRole
+  bottomUpSituatedAuthority : SourceRole
+
 
 record SourceRoleEntry : Set where
   constructor sourceRoleEntry
@@ -119,7 +119,7 @@ strongWaringNonfactorabilityAvailable =
 ------------------------------------------------------------------------
 
 data ResidualKind : Set where
-  phenomenonResidual epistemicResidual responsibilityImpactAsymmetryResidual
+  phenomenonResidual epistemicResidual responsibilityImpactAsymmetryResidual : ResidualKind
   categoricalAuthorityResidual democraticAuthorityResidual : ResidualKind
 
 phenomenonResidualDiffersFromEpistemicResidual :

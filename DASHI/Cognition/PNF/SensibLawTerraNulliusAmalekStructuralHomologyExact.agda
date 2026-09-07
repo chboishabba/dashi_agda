@@ -32,27 +32,27 @@ import DASHI.Core.DominantChartEpistemicCompressionExact as Compression
 ------------------------------------------------------------------------
 
 data TerraNulliusFeature : Set where
-  antecedentLawMadeIllegible
-  antecedentLandRightsMadeIllegible
-  dominantRecognitionDefinesLegibility
-  socialOrganisationDevalued
-  colonialPossessionEnabledByNonRecognition
-  : TerraNulliusFeature
+  antecedentLawMadeIllegible : TerraNulliusFeature
+  antecedentLandRightsMadeIllegible : TerraNulliusFeature
+  dominantRecognitionDefinesLegibility : TerraNulliusFeature
+  socialOrganisationDevalued : TerraNulliusFeature
+  colonialPossessionEnabledByNonRecognition : TerraNulliusFeature
+
 
 data AmalekOperatorFeature : Set where
-  terminalEnemyProduction
-  authoritySelfValidation
-  externalCorrectionDelegitimation
-  dissentAsConfirmingFault
-  humanPollutantProjectionRisk
-  : AmalekOperatorFeature
+  terminalEnemyProduction : AmalekOperatorFeature
+  authoritySelfValidation : AmalekOperatorFeature
+  externalCorrectionDelegitimation : AmalekOperatorFeature
+  dissentAsConfirmingFault : AmalekOperatorFeature
+  humanPollutantProjectionRisk : AmalekOperatorFeature
+
 
 data ComparisonStrength : Set where
-  noComparison
-  structuralHomologyOnly
-  historicalLineageEstablished
-  doctrinalIdentityEstablished
-  : ComparisonStrength
+  noComparison : ComparisonStrength
+  structuralHomologyOnly : ComparisonStrength
+  historicalLineageEstablished : ComparisonStrength
+  doctrinalIdentityEstablished : ComparisonStrength
+
 
 record StructuralHomologyReceipt : Set where
   constructor structural-homology-receipt

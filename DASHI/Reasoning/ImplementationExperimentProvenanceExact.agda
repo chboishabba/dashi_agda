@@ -19,13 +19,13 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ProvenanceRole : Set where
-  primaryImplementationSource
-  mirrorOrCloneLocation
-  experimentProducer
-  dataOrArtifactProducer
-  formalizationOwner
-  downstreamInferenceOwner
-  : ProvenanceRole
+  primaryImplementationSource : ProvenanceRole
+  mirrorOrCloneLocation : ProvenanceRole
+  experimentProducer : ProvenanceRole
+  dataOrArtifactProducer : ProvenanceRole
+  formalizationOwner : ProvenanceRole
+  downstreamInferenceOwner : ProvenanceRole
+
 
 record ProvenanceCoordinate : Set where
   constructor provenanceCoordinate

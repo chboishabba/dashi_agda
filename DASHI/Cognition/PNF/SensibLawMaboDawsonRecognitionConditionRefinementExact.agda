@@ -22,22 +22,22 @@ import DASHI.Governance.RevolutionaryPracticeBraid as Braid
 ------------------------------------------------------------------------
 
 data DawsonRecognitionComponent : Set where
-  preExistingInterestCarrier
-  newSovereignRecognitionOrAcceptanceCondition
-  noGeneralRecognitionPresumption
-  factSpecificRecognitionDetermination
-  acquiescenceAsRecognitionEvidence
-  continuedOccupationAsRecognitionEvidence
-  crownConductAsRecognitionEvidence
-  : DawsonRecognitionComponent
+  preExistingInterestCarrier : DawsonRecognitionComponent
+  newSovereignRecognitionOrAcceptanceCondition : DawsonRecognitionComponent
+  noGeneralRecognitionPresumption : DawsonRecognitionComponent
+  factSpecificRecognitionDetermination : DawsonRecognitionComponent
+  acquiescenceAsRecognitionEvidence : DawsonRecognitionComponent
+  continuedOccupationAsRecognitionEvidence : DawsonRecognitionComponent
+  crownConductAsRecognitionEvidence : DawsonRecognitionComponent
+
 
 data ComponentRole : Set where
-  antecedentObjectRole
-  juridicalConditionRole
-  antiPresumptionRuleRole
-  adjudicativeFactQuestionRole
-  evidenceModeRole
-  : ComponentRole
+  antecedentObjectRole : ComponentRole
+  juridicalConditionRole : ComponentRole
+  antiPresumptionRuleRole : ComponentRole
+  adjudicativeFactQuestionRole : ComponentRole
+  evidenceModeRole : ComponentRole
+
 
 componentRole : DawsonRecognitionComponent → ComponentRole
 componentRole preExistingInterestCarrier = antecedentObjectRole
@@ -126,11 +126,11 @@ dawsonConditionAcquiescenceSplit = dawsonRecognitionConditionEvidenceSplit
 ------------------------------------------------------------------------
 
 data RightObjectStage : Set where
-  antecedentCommunityNormativeRelation
-  commonLawLegalRecognitionRelation
-  crownRecognitionEvidenceState
-  extinguishedState
-  : RightObjectStage
+  antecedentCommunityNormativeRelation : RightObjectStage
+  commonLawLegalRecognitionRelation : RightObjectStage
+  crownRecognitionEvidenceState : RightObjectStage
+  extinguishedState : RightObjectStage
+
 
 record DawsonSourceCreationBoundary : Set where
   constructor dawsonSourceCreationBoundary
@@ -162,11 +162,11 @@ dawsonSourceCreationBoundary = dawsonSourceCreationBoundary
 ------------------------------------------------------------------------
 
 data RecognitionObserverPosition : Set where
-  affectedCommunitySelfArticulation
-  crownOrStateRecognition
-  judicialRecognition
-  externalAcademicInterpretation
-  : RecognitionObserverPosition
+  affectedCommunitySelfArticulation : RecognitionObserverPosition
+  crownOrStateRecognition : RecognitionObserverPosition
+  judicialRecognition : RecognitionObserverPosition
+  externalAcademicInterpretation : RecognitionObserverPosition
+
 
 record PluralRecognitionObserverBoundary : Set where
   constructor pluralRecognitionObserverBoundary

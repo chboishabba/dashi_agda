@@ -22,23 +22,23 @@ import DASHI.Chemistry.AlliumReactionNetworkCrossPollinationExact as ReactionNet
 ------------------------------------------------------------------------
 
 data HiddenMicroState : Set where
-  thiolDominantState
-  quorumPerturbedState
-  mixedOrUnknownState
-  : HiddenMicroState
+  thiolDominantState : HiddenMicroState
+  quorumPerturbedState : HiddenMicroState
+  mixedOrUnknownState : HiddenMicroState
+
 
 data AssayContext : Set where
-  planktonicContext
-  biofilmContext
-  quorumReporterContext
-  : AssayContext
+  planktonicContext : AssayContext
+  biofilmContext : AssayContext
+  quorumReporterContext : AssayContext
+
 
 data CoarsePhenotype : Set where
-  growthReduced
-  biofilmReduced
-  reporterReduced
-  unresolvedPhenotype
-  : CoarsePhenotype
+  growthReduced : CoarsePhenotype
+  biofilmReduced : CoarsePhenotype
+  reporterReduced : CoarsePhenotype
+  unresolvedPhenotype : CoarsePhenotype
+
 
 phenotypeProject : AssayContext → HiddenMicroState → CoarsePhenotype
 phenotypeProject planktonicContext thiolDominantState = growthReduced
@@ -97,14 +97,14 @@ canonicalMechanismProjectionBoundary =
 ------------------------------------------------------------------------
 
 data CandidateLane : Set where
-  allicinThiolProteome
-  cellularRedoxHomeostasis
-  enzymeInhibition
-  ajoeneGacRsmQuorumLane
-  diallylQSRegulation
-  biofilmPenetrationOrMatrixInteraction
-  preparationChemistryEvolution
-  : CandidateLane
+  allicinThiolProteome : CandidateLane
+  cellularRedoxHomeostasis : CandidateLane
+  enzymeInhibition : CandidateLane
+  ajoeneGacRsmQuorumLane : CandidateLane
+  diallylQSRegulation : CandidateLane
+  biofilmPenetrationOrMatrixInteraction : CandidateLane
+  preparationChemistryEvolution : CandidateLane
+
 
 record CrossSourceCandidate : Set where
   constructor crossSourceCandidate

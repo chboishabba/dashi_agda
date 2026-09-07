@@ -71,12 +71,12 @@ canonicalHXHMToPoleNearHTAdapter {analytic} {space} {formula} {compat} H_X H_M =
 ------------------------------------------------------------------------
 
 data PoleNearHTSearchAction : Set where
-  rebuildHTIntertwiner
-  buildFreshPoleNearAdapter
-  recoverCanonicalHMFactorization
-  compilePoleNearAdapter
-  proceedToWindowRestriction
-  : PoleNearHTSearchAction
+  rebuildHTIntertwiner : PoleNearHTSearchAction
+  buildFreshPoleNearAdapter : PoleNearHTSearchAction
+  recoverCanonicalHMFactorization : PoleNearHTSearchAction
+  compilePoleNearAdapter : PoleNearHTSearchAction
+  proceedToWindowRestriction : PoleNearHTSearchAction
+
 
 data SearchStatus : Set where
   live pruned downstream : SearchStatus

@@ -14,22 +14,22 @@ import DASHI.Governance.DrugGovernanceErrorAsymmetryBurdenAllocationExact as Bur
 ------------------------------------------------------------------------
 
 data ErrorWorld : Set where
-  baselineWorld
-  punitiveErrorWorld
-  careDenialWorld
-  authorityCaptureWorld
-  commercialCaptureWorld
-  sovereigntyOverrideWorld
-  : ErrorWorld
+  baselineWorld : ErrorWorld
+  punitiveErrorWorld : ErrorWorld
+  careDenialWorld : ErrorWorld
+  authorityCaptureWorld : ErrorWorld
+  commercialCaptureWorld : ErrorWorld
+  sovereigntyOverrideWorld : ErrorWorld
+
 
 data GovernanceOption : Set where
-  futureHelpSeeking
-  careAccess
-  categoryContest
-  fairBenefitClaim
-  sovereignCeremonialGovernance
-  ordinarySafetySupport
-  : GovernanceOption
+  futureHelpSeeking : GovernanceOption
+  careAccess : GovernanceOption
+  categoryContest : GovernanceOption
+  fairBenefitClaim : GovernanceOption
+  sovereignCeremonialGovernance : GovernanceOption
+  ordinarySafetySupport : GovernanceOption
+
 
 data Available : ErrorWorld → GovernanceOption → Set where
   baselineHelp : Available baselineWorld futureHelpSeeking

@@ -124,7 +124,7 @@ longHorizonRecoveryDrift = horizonDrift tri-low tri-mid tri-high
 
 -- A complete local horizon can coexist with open deeper horizons.
 data HorizonCompletion : Set where
-  horizonOpen
+  horizonOpen : HorizonCompletion
   horizonComplete : HorizonCompletion
 
 record LayeredCompletion : Set where

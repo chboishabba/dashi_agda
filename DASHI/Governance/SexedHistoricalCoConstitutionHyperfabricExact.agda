@@ -26,11 +26,11 @@ import DASHI.Governance.SexedHistoricalSubjectDialecticBidiExact as Dialectic
 ------------------------------------------------------------------------
 
 data HistoricalEpoch : Set where
-  witchTrialOrder
-  suffrageRearticulation
-  feministWitchReclamation
-  reciprocalReconstitution
-  : HistoricalEpoch
+  witchTrialOrder : HistoricalEpoch
+  suffrageRearticulation : HistoricalEpoch
+  feministWitchReclamation : HistoricalEpoch
+  reciprocalReconstitution : HistoricalEpoch
+
 
 Position : Set
 Position = Dialectic.HistoricalGenderedPosition
@@ -42,13 +42,13 @@ feminine : Position
 feminine = Dialectic.feminineCoded
 
 data ConstructionMode : Set where
-  imposedNorm
-  internalisedNorm
-  counterFormation
-  selfRearticulation
-  reciprocalRevision
-  pluralUnresolved
-  : ConstructionMode
+  imposedNorm : ConstructionMode
+  internalisedNorm : ConstructionMode
+  counterFormation : ConstructionMode
+  selfRearticulation : ConstructionMode
+  reciprocalRevision : ConstructionMode
+  pluralUnresolved : ConstructionMode
+
 
 coConstructs : HistoricalEpoch → Position → Position → ConstructionMode
 coConstructs witchTrialOrder masculine masculine = internalisedNorm
@@ -84,9 +84,9 @@ constructionTensorAt epoch = coConstructs epoch
 ------------------------------------------------------------------------
 
 data PowerAxis : Set where
-  legalPower economicPower religiousPower familyPower
-  sexualNormPower epistemicPower politicalRepresentationPower
-  : PowerAxis
+  legalPower economicPower religiousPower familyPower : PowerAxis
+  sexualNormPower epistemicPower politicalRepresentationPower : PowerAxis
+
 
 data PowerLevel : Set where
   lowPower mediumPower highPower : PowerLevel

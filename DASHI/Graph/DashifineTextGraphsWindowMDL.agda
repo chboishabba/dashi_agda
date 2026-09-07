@@ -10,11 +10,11 @@ open import DASHI.Graph.DashifineTextGraphsBridge
 -- Candidate non-local graph rules from the current bridge sweep.
 
 data GraphVariant : Set where
-  baseline
-  ternaryL1Le1
-  ternaryL1Le2
-  stateRecurrence
-  rzL1Le1
+  baseline : GraphVariant
+  ternaryL1Le1 : GraphVariant
+  ternaryL1Le2 : GraphVariant
+  stateRecurrence : GraphVariant
+  rzL1Le1 : GraphVariant
   hybridL1Recurrence : GraphVariant
 
 ------------------------------------------------------------------------

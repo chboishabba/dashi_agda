@@ -71,16 +71,16 @@ specificLABRequirement = Backprop.missingDesignRequirement
 ------------------------------------------------------------------------
 
 data GlyphosateNextExperiment : Set where
-  contemporaneousTreatedControlResidueTimeSeries
-  materialInputLedgerPlusResidueTimeSeries
-  indigenousMicrobiomeMatchedControl
-  viableLABTrackingAndResidueTimeSeries
-  sterileOrAbioticBrineControl
-  pHCarbonIonicMatchedControl
-  sorptionDesorptionFractionationAssay
-  isotopeOrMassBalanceTransformationStudy
-  independentFieldReplication
-  : GlyphosateNextExperiment
+  contemporaneousTreatedControlResidueTimeSeries : GlyphosateNextExperiment
+  materialInputLedgerPlusResidueTimeSeries : GlyphosateNextExperiment
+  indigenousMicrobiomeMatchedControl : GlyphosateNextExperiment
+  viableLABTrackingAndResidueTimeSeries : GlyphosateNextExperiment
+  sterileOrAbioticBrineControl : GlyphosateNextExperiment
+  pHCarbonIonicMatchedControl : GlyphosateNextExperiment
+  sorptionDesorptionFractionationAssay : GlyphosateNextExperiment
+  isotopeOrMassBalanceTransformationStudy : GlyphosateNextExperiment
+  independentFieldReplication : GlyphosateNextExperiment
+
 
 record GlyphosateCandidateDesign : Set where
   constructor glyphosateCandidateDesign

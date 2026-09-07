@@ -12,9 +12,9 @@ import DASHI.Interop.SensibLawResidualLattice as PNF
 ------------------------------------------------------------------------
 
 data PlanningClaimKind : Set where
-  consultationClaim consentClaim legalApprovalClaim custodialApprovalClaim
-  apologyClaim reparativeClosureClaim recommendationAcceptedClaim
-  recommendationImplementedClaim declaredVictoryClaim strategicClosureClaim
+  consultationClaim consentClaim legalApprovalClaim custodialApprovalClaim : PlanningClaimKind
+  apologyClaim reparativeClosureClaim recommendationAcceptedClaim : PlanningClaimKind
+  recommendationImplementedClaim declaredVictoryClaim strategicClosureClaim : PlanningClaimKind
   recognitionClaim sovereigntySettlementClaim : PlanningClaimKind
 
 record ReceiptedPlanningClaim : Set where

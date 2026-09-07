@@ -28,7 +28,7 @@ record RelativeFineModelState
 open RelativeFineModelState public
 
 modelChangeKeepsWorldCoordinates :
-  ∀ {World ModelState}
+  ∀ {World ModelState : Set}
     (geometry : Fibre.CoarseFineReopening World)
     (world : World)
     (leftModel rightModel : ModelState) →
@@ -99,7 +99,7 @@ relativeFineEvidenceMove geometry measurementCost resourceRef calibrationRef =
     calibrationRef
 
 relativeFineObservationRefinesWithoutChangingModel :
-  ∀ {World ModelState}
+  ∀ {World ModelState : Set}
     (geometry : Fibre.CoarseFineReopening World)
     (live : World → Set)
     (model : ModelState)

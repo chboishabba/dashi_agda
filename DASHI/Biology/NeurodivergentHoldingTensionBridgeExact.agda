@@ -47,12 +47,12 @@ noInstalledAutismMetabolicBridge ()
 ------------------------------------------------------------------------
 
 data CandidateCoordinate : Set where
-  multiscaleDynamics
-  precisionAndUpdating
-  attentionalPersistence
-  crossNeurotypeTransfer
-  measurementHeterogeneity
-  : CandidateCoordinate
+  multiscaleDynamics : CandidateCoordinate
+  precisionAndUpdating : CandidateCoordinate
+  attentionalPersistence : CandidateCoordinate
+  crossNeurotypeTransfer : CandidateCoordinate
+  measurementHeterogeneity : CandidateCoordinate
+
 
 coordinateForRole : Sources.EvidenceRole → CandidateCoordinate
 coordinateForRole Sources.dynamicMultiscaleMathematicalFramework = multiscaleDynamics

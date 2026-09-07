@@ -10,26 +10,26 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SovereigntySourceRole : Set where
-  highCourtHolding
-  firstNationsConsensusStatement
-  icjAdvisoryOpinion
-  australianGovernmentRecognitionAct
-  governmentPolicyStatement
-  secondaryInterpretation
+  highCourtHolding : SovereigntySourceRole
+  firstNationsConsensusStatement : SovereigntySourceRole
+  icjAdvisoryOpinion : SovereigntySourceRole
+  australianGovernmentRecognitionAct : SovereigntySourceRole
+  governmentPolicyStatement : SovereigntySourceRole
+  secondaryInterpretation : SovereigntySourceRole
   dashiStructuralHomology : SovereigntySourceRole
 
 data SovereigntyProposition : Set where
-  terraNulliusRejected
-  nativeTitleMaySurviveCrownSovereignty
-  crownAcquiredRadicalNotAutomaticBeneficialTitle
-  crownSovereigntyAcquisitionNonJusticiableMunicipally
-  firstNationsSovereigntyNeverCededAssertion
-  firstNationsSovereigntyCoexistsWithCrownAssertion
-  palestinianSelfDeterminationRight
-  israelNotEntitledToSovereigntyOverOccupiedPalestinianTerritory
-  israeliSettlementsAndAnnexationUnlawful
-  australianRecognitionOfSovereignStateOfPalestine
-  australianAndPalestinianCasesLegallyIdentical
+  terraNulliusRejected : SovereigntyProposition
+  nativeTitleMaySurviveCrownSovereignty : SovereigntyProposition
+  crownAcquiredRadicalNotAutomaticBeneficialTitle : SovereigntyProposition
+  crownSovereigntyAcquisitionNonJusticiableMunicipally : SovereigntyProposition
+  firstNationsSovereigntyNeverCededAssertion : SovereigntyProposition
+  firstNationsSovereigntyCoexistsWithCrownAssertion : SovereigntyProposition
+  palestinianSelfDeterminationRight : SovereigntyProposition
+  israelNotEntitledToSovereigntyOverOccupiedPalestinianTerritory : SovereigntyProposition
+  israeliSettlementsAndAnnexationUnlawful : SovereigntyProposition
+  australianRecognitionOfSovereignStateOfPalestine : SovereigntyProposition
+  australianAndPalestinianCasesLegallyIdentical : SovereigntyProposition
   settlerColonialStructuralHomology : SovereigntyProposition
 
 record SovereigntySourceReceipt : Set where
@@ -108,14 +108,14 @@ australiaPalestineRecognitionReceipt = sovereigntySourceReceipt
 ------------------------------------------------------------------------
 
 data ComparisonCoordinate : Set where
-  priorPeoplehood
-  imposedSovereignOrder
-  dispossessionOrTerritorialTaking
-  recognitionRegime
-  settlementOrDemographicTransformation
-  securityAdministration
-  differentialMovementControl
-  selfDeterminationConstraint
+  priorPeoplehood : ComparisonCoordinate
+  imposedSovereignOrder : ComparisonCoordinate
+  dispossessionOrTerritorialTaking : ComparisonCoordinate
+  recognitionRegime : ComparisonCoordinate
+  settlementOrDemographicTransformation : ComparisonCoordinate
+  securityAdministration : ComparisonCoordinate
+  differentialMovementControl : ComparisonCoordinate
+  selfDeterminationConstraint : ComparisonCoordinate
   coerciveEnforcement : ComparisonCoordinate
 
 record ComparativeColonialityFibre : Set where
@@ -143,18 +143,18 @@ canonicalComparativeFibre = comparativeColonialityFibre
 ------------------------------------------------------------------------
 
 data SovereigntyComparisonClaim : Set where
-  australianNativeTitleSurvival
-  firstNationsNeverCededAssertion
-  palestinianSelfDeterminationViolation
-  israelLacksSovereigntyInOPT
-  structuralColonialityComparison
+  australianNativeTitleSurvival : SovereigntyComparisonClaim
+  firstNationsNeverCededAssertion : SovereigntyComparisonClaim
+  palestinianSelfDeterminationViolation : SovereigntyComparisonClaim
+  israelLacksSovereigntyInOPT : SovereigntyComparisonClaim
+  structuralColonialityComparison : SovereigntyComparisonClaim
   identicalColonisationClaim : SovereigntyComparisonClaim
 
 data SovereigntyComparisonProducer : Set where
-  maboHoldingProducer
-  firstNationsStatementProducer
-  icjAdvisoryProducer
-  pairedCaseSpecificCoordinateProducer
+  maboHoldingProducer : SovereigntyComparisonProducer
+  firstNationsStatementProducer : SovereigntyComparisonProducer
+  icjAdvisoryProducer : SovereigntyComparisonProducer
+  pairedCaseSpecificCoordinateProducer : SovereigntyComparisonProducer
   historicalIdentityProducer : SovereigntyComparisonProducer
 
 reverseSovereigntyComparison : SovereigntyComparisonClaim → SovereigntyComparisonProducer

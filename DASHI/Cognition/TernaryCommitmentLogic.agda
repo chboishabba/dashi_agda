@@ -70,6 +70,6 @@ canonicalCommitmentPolicy = commitmentPolicy BT.zero BT.pos BT.neg
 ------------------------------------------------------------------------
 
 data LogicalAuthority : Set where
-  excludedMiddleRetained
-  ternaryCommitmentAdded
+  excludedMiddleRetained : LogicalAuthority
+  ternaryCommitmentAdded : LogicalAuthority
   threeValuedTruthNotForced : LogicalAuthority

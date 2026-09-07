@@ -172,13 +172,13 @@ nearFarFromConsumerAttachment attachment nearFar = record
 ------------------------------------------------------------------------
 
 data SameObjectFkPayment : Set where
-  relateSourceAndWeilTestsByName
-  useDifferentTestForAdmissibility
-  useDifferentTestForSpectralDecomposition
-  weldLiteralSelectedTest
-  attachNearFarToSameLiteralTest
-  recoverNearFarSpectralEquality
-  : SameObjectFkPayment
+  relateSourceAndWeilTestsByName : SameObjectFkPayment
+  useDifferentTestForAdmissibility : SameObjectFkPayment
+  useDifferentTestForSpectralDecomposition : SameObjectFkPayment
+  weldLiteralSelectedTest : SameObjectFkPayment
+  attachNearFarToSameLiteralTest : SameObjectFkPayment
+  recoverNearFarSpectralEquality : SameObjectFkPayment
+
 
 PaymentRelevant : SameObjectFkPayment → Set
 PaymentRelevant relateSourceAndWeilTestsByName = ⊥

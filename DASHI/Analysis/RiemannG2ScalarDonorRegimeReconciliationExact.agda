@@ -23,16 +23,16 @@ import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 ------------------------------------------------------------------------
 
 data DonorRegime : Set where
-  narrowPinnedProblem
-  quarterPeriodCrossedProblem
-  changedComparisonProblem
-  : DonorRegime
+  narrowPinnedProblem : DonorRegime
+  quarterPeriodCrossedProblem : DonorRegime
+  changedComparisonProblem : DonorRegime
+
 
 data DonorUseDisposition : Set where
-  noCancellationDonorPossibleBySharpening
-  cancellationDonorSearchLive
-  changedProblemDonorSearchLive
-  : DonorUseDisposition
+  noCancellationDonorPossibleBySharpening : DonorUseDisposition
+  cancellationDonorSearchLive : DonorUseDisposition
+  changedProblemDonorSearchLive : DonorUseDisposition
+
 
 disposition : DonorRegime -> DonorUseDisposition
 disposition narrowPinnedProblem = noCancellationDonorPossibleBySharpening

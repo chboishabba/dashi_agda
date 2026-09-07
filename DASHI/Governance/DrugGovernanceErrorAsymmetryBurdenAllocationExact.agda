@@ -18,38 +18,38 @@ import DASHI.Governance.DrugGovernanceErrorAllocationChillingExact as Error
 ------------------------------------------------------------------------
 
 data ClassificationErrorKind : Set where
-  wrongfulPunitiveClassification
-  wrongfulCareDenial
-  wrongfulAuthorityAttribution
-  wrongfulCommercialLegitimacy
-  wrongfulSovereigntyOverride
-  : ClassificationErrorKind
+  wrongfulPunitiveClassification : ClassificationErrorKind
+  wrongfulCareDenial : ClassificationErrorKind
+  wrongfulAuthorityAttribution : ClassificationErrorKind
+  wrongfulCommercialLegitimacy : ClassificationErrorKind
+  wrongfulSovereigntyOverride : ClassificationErrorKind
+
 
 data BurdenBearer : Set where
-  classifiedPerson
-  affectedCommunity
-  patientOrCareSeeker
-  publicInstitution
-  commercialBeneficiary
-  indigenousSovereignCommunity
-  futureHelpSeeker
-  : BurdenBearer
+  classifiedPerson : BurdenBearer
+  affectedCommunity : BurdenBearer
+  patientOrCareSeeker : BurdenBearer
+  publicInstitution : BurdenBearer
+  commercialBeneficiary : BurdenBearer
+  indigenousSovereignCommunity : BurdenBearer
+  futureHelpSeeker : BurdenBearer
+
 
 data EvidenceBurden : Set where
-  punitiveJustificationEvidence
-  careEligibilityEvidence
-  classificationAuthorityEvidence
-  materialBenefitProvenanceEvidence
-  sovereignPermissionAuthorityEvidence
-  : EvidenceBurden
+  punitiveJustificationEvidence : EvidenceBurden
+  careEligibilityEvidence : EvidenceBurden
+  classificationAuthorityEvidence : EvidenceBurden
+  materialBenefitProvenanceEvidence : EvidenceBurden
+  sovereignPermissionAuthorityEvidence : EvidenceBurden
+
 
 data RepairBurden : Set where
-  reopenPunitiveClassification
-  reassessCareEligibility
-  reopenCategoryAuthority
-  reopenCommercialBenefitLegitimacy
-  restoreSovereignAuthorityBoundary
-  : RepairBurden
+  reopenPunitiveClassification : RepairBurden
+  reassessCareEligibility : RepairBurden
+  reopenCategoryAuthority : RepairBurden
+  reopenCommercialBenefitLegitimacy : RepairBurden
+  restoreSovereignAuthorityBoundary : RepairBurden
+
 
 primaryBearer : ClassificationErrorKind → BurdenBearer
 primaryBearer wrongfulPunitiveClassification = classifiedPerson

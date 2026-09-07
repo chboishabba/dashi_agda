@@ -121,8 +121,8 @@ monster3BConformalTraceIs54 = refl
 ------------------------------------------------------------------------
 
 data RepresentationZeroKind : Set where
-  emptyRepresentationZero
-  balancedEvaluationZero
+  emptyRepresentationZero : RepresentationZeroKind
+  balancedEvaluationZero : RepresentationZeroKind
   invariantNeutralZero : RepresentationZeroKind
 
 record PhaseCompleteFibreObservation : Set where

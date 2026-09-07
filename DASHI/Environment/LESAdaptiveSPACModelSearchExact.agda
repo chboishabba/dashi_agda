@@ -21,11 +21,11 @@ import DASHI.Environment.FiniteSPACCalibrationExperimentExact as Experiment
 ------------------------------------------------------------------------
 
 data SPACFidelityTier : Set where
-  empiricalWaterBalance
-  richardsPorousFlow
-  hydraulicSPAC
-  electroBiogeochemicalSPAC
-  : SPACFidelityTier
+  empiricalWaterBalance : SPACFidelityTier
+  richardsPorousFlow : SPACFidelityTier
+  hydraulicSPAC : SPACFidelityTier
+  electroBiogeochemicalSPAC : SPACFidelityTier
+
 
 record TieredSPACCandidate
     (mechanism : Basis.DomainMechanismSocket) : Set₁ where

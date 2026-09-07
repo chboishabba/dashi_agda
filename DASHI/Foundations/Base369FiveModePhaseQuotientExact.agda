@@ -24,7 +24,7 @@ data D4IrreducibleType : Set where
   A1 A2 B1 B2 E : D4IrreducibleType
 
 data BinaryOrientation : Set where
-  negativeOrientation
+  negativeOrientation : BinaryOrientation
   positiveOrientation : BinaryOrientation
 
 record OrientedMode : Set where
@@ -37,8 +37,8 @@ open OrientedMode public
 
 -- Nine ordinary cells plus one distinguished completion point.
 data PointedNonary10 : Set where
-  ordinary0 ordinary1 ordinary2 ordinary3 ordinary4
-  ordinary5 ordinary6 ordinary7 ordinary8
+  ordinary0 ordinary1 ordinary2 ordinary3 ordinary4 : PointedNonary10
+  ordinary5 ordinary6 ordinary7 ordinary8 : PointedNonary10
   completionJ : PointedNonary10
 
 pointedNonaryToOrientedMode : PointedNonary10 → OrientedMode
@@ -105,10 +105,10 @@ orientedModeRoundTrip (orientedMode E positiveOrientation) = refl
 
 -- Quotient by the duplicated orientation of the distinguished identity mode.
 data ModePhaseQuotient9 : Set where
-  identityMode
-  A2negative A2positive
-  B1negative B1positive
-  B2negative B2positive
+  identityMode : ModePhaseQuotient9
+  A2negative A2positive : ModePhaseQuotient9
+  B1negative B1positive : ModePhaseQuotient9
+  B2negative B2positive : ModePhaseQuotient9
   Enegative Epositive : ModePhaseQuotient9
 
 quotientOrientedMode : OrientedMode → ModePhaseQuotient9

@@ -30,19 +30,19 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AuthorityKind : Set where
-  constitutionalText
-  legislation
-  delegatedLegislation
-  bindingPrecedent
-  persuasivePrecedent
-  commonLawDevelopment
-  judicialPolicyConsideration
-  adjudicatedFact
-  partySubmission
-  empiricalSource
-  criticalTheorySource
-  dashSyntheticInference
-  : AuthorityKind
+  constitutionalText : AuthorityKind
+  legislation : AuthorityKind
+  delegatedLegislation : AuthorityKind
+  bindingPrecedent : AuthorityKind
+  persuasivePrecedent : AuthorityKind
+  commonLawDevelopment : AuthorityKind
+  judicialPolicyConsideration : AuthorityKind
+  adjudicatedFact : AuthorityKind
+  partySubmission : AuthorityKind
+  empiricalSource : AuthorityKind
+  criticalTheorySource : AuthorityKind
+  dashSyntheticInference : AuthorityKind
+
 
 record SourceIdentity : Set where
   constructor source-identity
@@ -72,12 +72,12 @@ open TypedLegalEdge public
 ------------------------------------------------------------------------
 
 data GateForce : Set where
-  hardBlocker
-  factorFor
-  factorAgainst
-  interpretiveConstraint
-  evidentialRequirement
-  : GateForce
+  hardBlocker : GateForce
+  factorFor : GateForce
+  factorAgainst : GateForce
+  interpretiveConstraint : GateForce
+  evidentialRequirement : GateForce
+
 
 record DoctrinalGate : Set where
   constructor doctrinal-gate
@@ -148,10 +148,10 @@ nativeTitleActAuthority = source-identity
 ------------------------------------------------------------------------
 
 data LegalRouteState : Set where
-  routeOpen
-  routeBlocked
-  routeContested
-  : LegalRouteState
+  routeOpen : LegalRouteState
+  routeBlocked : LegalRouteState
+  routeContested : LegalRouteState
+
 
 record RouteObstruction : Set where
   constructor route-obstruction

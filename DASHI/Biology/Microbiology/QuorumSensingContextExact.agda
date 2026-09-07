@@ -15,24 +15,24 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data GrowthState : Set where
-  planktonic
-  biofilm
-  : GrowthState
+  planktonic : GrowthState
+  biofilm : GrowthState
+
 
 data QSEffectKind : Set where
-  signalSynthesisInhibition
-  signalDegradation
-  receptorInterference
-  downstreamResponseInterference
-  : QSEffectKind
+  signalSynthesisInhibition : QSEffectKind
+  signalDegradation : QSEffectKind
+  receptorInterference : QSEffectKind
+  downstreamResponseInterference : QSEffectKind
+
 
 data AntimicrobialEffectKind : Set where
-  bactericidal
-  bacteriostatic
-  antiVirulence
-  quorumQuenching
-  antiBiofilm
-  : AntimicrobialEffectKind
+  bactericidal : AntimicrobialEffectKind
+  bacteriostatic : AntimicrobialEffectKind
+  antiVirulence : AntimicrobialEffectKind
+  quorumQuenching : AntimicrobialEffectKind
+  antiBiofilm : AntimicrobialEffectKind
+
 
 record QSSignalSystem : Set₁ where
   constructor qsSignalSystem

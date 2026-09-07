@@ -21,13 +21,13 @@ import DASHI.Cognition.PNF.SensibLawMaboTwoLegalOrderFibreExact as TwoOrder
 ------------------------------------------------------------------------
 
 data MaboParaconsistentAxis : Set where
-  dawsonInternalReconstructionAxis
-  crownExhaustiveSourceAxis
-  indigenousOrderIndependenceAxis
-  colonialLegitimacyAxis
-  indigenousCessionAxis
-  materialLandRepairAxis
-  : MaboParaconsistentAxis
+  dawsonInternalReconstructionAxis : MaboParaconsistentAxis
+  crownExhaustiveSourceAxis : MaboParaconsistentAxis
+  indigenousOrderIndependenceAxis : MaboParaconsistentAxis
+  colonialLegitimacyAxis : MaboParaconsistentAxis
+  indigenousCessionAxis : MaboParaconsistentAxis
+  materialLandRepairAxis : MaboParaconsistentAxis
+
 
 axisSupport : MaboParaconsistentAxis → Square.SupportSquare
 axisSupport dawsonInternalReconstructionAxis = Square.supportSquare true false

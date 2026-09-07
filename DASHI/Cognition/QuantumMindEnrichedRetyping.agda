@@ -86,15 +86,15 @@ identityClassCanBeVacuumAtNonzeroFloor = IdentityVacuum.shiftedIdentityWitness
 ------------------------------------------------------------------------
 
 data DerivedStructure : Set where
-  observableTernaryShadow
-  phaseBearingZeroFibre
-  common369Quotient
-  nonrectangularJointSupport
-  noGlobalZeroSection
-  recursiveCompatibleFibreFamily
-  identityVacuumAtDefectFloor
-  complexHilbertAmplitudeNotDerived
-  bornProbabilityNotDerived
+  observableTernaryShadow : DerivedStructure
+  phaseBearingZeroFibre : DerivedStructure
+  common369Quotient : DerivedStructure
+  nonrectangularJointSupport : DerivedStructure
+  noGlobalZeroSection : DerivedStructure
+  recursiveCompatibleFibreFamily : DerivedStructure
+  identityVacuumAtDefectFloor : DerivedStructure
+  complexHilbertAmplitudeNotDerived : DerivedStructure
+  bornProbabilityNotDerived : DerivedStructure
   physicalBellViolationNotDerived : DerivedStructure
 
 record EnrichedQuantumAuthorityBoundary : Set where

@@ -140,7 +140,7 @@ record LESJointMeasurementFidelityCampaign
       Basis.Control mechanism → Set
     live : Basis.State mechanism → Set
     initialModel : SPAC.SPACFidelityTier
-    policy : LESJointPolicy
+    policy : LESJointPolicy {mechanism = mechanism}
       system Authority DecisionAdequate live initialModel
     worstCaseCostBound : Nat
     costCertificate : Joint.JointPolicyCostAtMost policy worstCaseCostBound

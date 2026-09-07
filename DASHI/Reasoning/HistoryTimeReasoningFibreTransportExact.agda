@@ -15,28 +15,28 @@ import DASHI.Reasoning.HistoryTimeRelationalReasoningFibreExact as Fibre
 ------------------------------------------------------------------------
 
 data Coordinate : Set where
-  sourceCoordinate
-  parserCoordinate
-  semanticCoordinate
-  pnfCoordinate
-  logicalContextCoordinate
-  derivationCoordinate
-  consumerCoordinate
-  coneCoordinate
-  obligationsCoordinate
-  residueCoordinate
-  provenanceCoordinate
-  : Coordinate
+  sourceCoordinate : Coordinate
+  parserCoordinate : Coordinate
+  semanticCoordinate : Coordinate
+  pnfCoordinate : Coordinate
+  logicalContextCoordinate : Coordinate
+  derivationCoordinate : Coordinate
+  consumerCoordinate : Coordinate
+  coneCoordinate : Coordinate
+  obligationsCoordinate : Coordinate
+  residueCoordinate : Coordinate
+  provenanceCoordinate : Coordinate
+
 
 data TransitionKind : Set where
-  sourceCorrection
-  parserCorrection
-  semanticRefinement
-  pnfRevision
-  empiricalEvidenceUpdate
-  consumerRevision
-  governanceRevision
-  : TransitionKind
+  sourceCorrection : TransitionKind
+  parserCorrection : TransitionKind
+  semanticRefinement : TransitionKind
+  pnfRevision : TransitionKind
+  empiricalEvidenceUpdate : TransitionKind
+  consumerRevision : TransitionKind
+  governanceRevision : TransitionKind
+
 
 data MayChange : TransitionKind → Coordinate → Set where
   sourceMayChange : MayChange sourceCorrection sourceCoordinate

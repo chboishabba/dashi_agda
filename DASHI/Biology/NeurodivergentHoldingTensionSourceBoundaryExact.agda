@@ -22,15 +22,15 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data EvidenceRole : Set where
-  dynamicMultiscaleMathematicalFramework
-  activeInferencePrecisionUpdating
-  precisionWeightingNullCorrective
-  transdiagnosticHyperfocusContextualEffects
-  hyperfocusMeasurementNonConvergence
-  stickySpringyAttentionOperationalisation
-  crossNeurotypeInformationTransfer
-  precisionReviewContext
-  : EvidenceRole
+  dynamicMultiscaleMathematicalFramework : EvidenceRole
+  activeInferencePrecisionUpdating : EvidenceRole
+  precisionWeightingNullCorrective : EvidenceRole
+  transdiagnosticHyperfocusContextualEffects : EvidenceRole
+  hyperfocusMeasurementNonConvergence : EvidenceRole
+  stickySpringyAttentionOperationalisation : EvidenceRole
+  crossNeurotypeInformationTransfer : EvidenceRole
+  precisionReviewContext : EvidenceRole
+
 
 record SourceReference : Set where
   constructor sourceReference

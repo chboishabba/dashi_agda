@@ -86,16 +86,16 @@ discreteTransportPlusConjugateTestDerivativeZero E {p} {q} {k} {uP}
       (C3.bilinearDot3 uP (C3.modeVector E k)))
 
 data FrozenOrderingRole : Set where
-  lowTransportOutput
-  highAdvectedInput
-  highOriginalOutput
-  highRealityMateAdvected
-  highRealityMateOutput
+  lowTransportOutput : FrozenOrderingRole
+  highAdvectedInput : FrozenOrderingRole
+  highOriginalOutput : FrozenOrderingRole
+  highRealityMateAdvected : FrozenOrderingRole
+  highRealityMateOutput : FrozenOrderingRole
   lowSecondAdjointFrozenDerivative : FrozenOrderingRole
 
 data AntisymmetryRouteDecision : Set where
-  exactClassicalIdentityAvailable
-  transfersFirstEstimateToFavourableSecondEstimate
+  exactClassicalIdentityAvailable : AntisymmetryRouteDecision
+  transfersFirstEstimateToFavourableSecondEstimate : AntisymmetryRouteDecision
   sameFrozenTransportOrderingNeedsOwnEstimate : AntisymmetryRouteDecision
 
 classicalIdentityDecision : AntisymmetryRouteDecision

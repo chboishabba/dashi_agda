@@ -19,15 +19,15 @@ import DASHI.Chemistry.TransitionKernel as Chemistry
 ------------------------------------------------------------------------
 
 data NitrificationEvidenceKind : Set where
-  ammoniaShift
-  nitriteShift
-  nitrateShift
-  residualLoss
-  pHShift
-  alkalinityShift
-  dissolvedOxygenShift
-  microbiologicalEvidence
-  : NitrificationEvidenceKind
+  ammoniaShift : NitrificationEvidenceKind
+  nitriteShift : NitrificationEvidenceKind
+  nitrateShift : NitrificationEvidenceKind
+  residualLoss : NitrificationEvidenceKind
+  pHShift : NitrificationEvidenceKind
+  alkalinityShift : NitrificationEvidenceKind
+  dissolvedOxygenShift : NitrificationEvidenceKind
+  microbiologicalEvidence : NitrificationEvidenceKind
+
 
 record NitrificationStateReceipt : Set₁ where
   constructor nitrificationStateReceipt

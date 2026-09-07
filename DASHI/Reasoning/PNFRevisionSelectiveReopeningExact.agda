@@ -17,12 +17,12 @@ import DASHI.Reasoning.SemanticLogicalSelectiveReopeningExact as Reopen
 ------------------------------------------------------------------------
 
 data RevisionImpact : Set where
-  parserSurfaceRevision
-  semanticInterpretationRevision
-  evidentialStrengthRevision
-  contextRevision
-  supersessionImpact
-  : RevisionImpact
+  parserSurfaceRevision : RevisionImpact
+  semanticInterpretationRevision : RevisionImpact
+  evidentialStrengthRevision : RevisionImpact
+  contextRevision : RevisionImpact
+  supersessionImpact : RevisionImpact
+
 
 impactOf : Event.RevisionKind → RevisionImpact
 impactOf Event.parserCorrection = parserSurfaceRevision
@@ -96,10 +96,10 @@ canonicalSemanticRevisionReopening revision semantic =
 ------------------------------------------------------------------------
 
 data HistoricalDerivationStatus : Set where
-  currentDerivation
-  stalePendingReaudit
-  refutedDerivation
-  : HistoricalDerivationStatus
+  currentDerivation : HistoricalDerivationStatus
+  stalePendingReaudit : HistoricalDerivationStatus
+  refutedDerivation : HistoricalDerivationStatus
+
 
 staleIsNotRefuted : stalePendingReaudit ≡ refutedDerivation → ⊥
 staleIsNotRefuted ()

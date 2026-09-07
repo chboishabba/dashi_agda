@@ -16,24 +16,24 @@ import DASHI.Governance.PhenomenonEvidenceLadderProjectionOverTimeExact as Ladde
 ------------------------------------------------------------------------
 
 data ResearchQuestion : Set where
-  reproduceClaimedSignal
-  auditMethodAndSelection
-  discriminateMechanism
-  testOperationalUtility
-  separateExpectancyAndDrugEffect
-  testGeneralisationAndDurability
-  timeLockedRealityTest
-  characterizePhenomenology
-  : ResearchQuestion
+  reproduceClaimedSignal : ResearchQuestion
+  auditMethodAndSelection : ResearchQuestion
+  discriminateMechanism : ResearchQuestion
+  testOperationalUtility : ResearchQuestion
+  separateExpectancyAndDrugEffect : ResearchQuestion
+  testGeneralisationAndDurability : ResearchQuestion
+  timeLockedRealityTest : ResearchQuestion
+  characterizePhenomenology : ResearchQuestion
+
 
 data ResearchDisposition : Set where
-  highValueDecisiveTest
-  highValueMechanismWork
-  highValueClinicalGeneralisation
-  mediumValueAdversarialReplication
-  mediumValueMethodAudit
-  lowValueRepeatSameParadigm
-  : ResearchDisposition
+  highValueDecisiveTest : ResearchDisposition
+  highValueMechanismWork : ResearchDisposition
+  highValueClinicalGeneralisation : ResearchDisposition
+  mediumValueAdversarialReplication : ResearchDisposition
+  mediumValueMethodAudit : ResearchDisposition
+  lowValueRepeatSameParadigm : ResearchDisposition
+
 
 record TemporalResearchMove : Set where
   constructor temporalResearchMove

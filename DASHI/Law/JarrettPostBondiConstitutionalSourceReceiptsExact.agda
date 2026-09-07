@@ -10,21 +10,21 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data LegalSourceRole : Set where
-  courtHolding
-  plaintiffSubmission
-  defendantSubmission
-  governmentMediaRelease
-  secondaryReport
+  courtHolding : LegalSourceRole
+  plaintiffSubmission : LegalSourceRole
+  defendantSubmission : LegalSourceRole
+  governmentMediaRelease : LegalSourceRole
+  secondaryReport : LegalSourceRole
   dashiFormalBridge : LegalSourceRole
 
 data PropositionKind : Set where
-  provisionsDeclaredInvalid
-  impliedFreedomImpermissibleBurden
-  purposeConstitutionallyIllegitimate
-  stateReasonablyAppropriateAdaptedArgument
-  plaintiffsInvalidityArgument
-  postBondiEnactmentHistory
-  shorthandUnconstitutionalLabel
+  provisionsDeclaredInvalid : PropositionKind
+  impliedFreedomImpermissibleBurden : PropositionKind
+  purposeConstitutionallyIllegitimate : PropositionKind
+  stateReasonablyAppropriateAdaptedArgument : PropositionKind
+  plaintiffsInvalidityArgument : PropositionKind
+  postBondiEnactmentHistory : PropositionKind
+  shorthandUnconstitutionalLabel : PropositionKind
   operationalAuthorityConsequence : PropositionKind
 
 record LegalSourceReceipt : Set where
@@ -112,8 +112,8 @@ canonicalSourceAttributionBoundary =
 ------------------------------------------------------------------------
 
 data IndividualConsequenceClaim : Set where
-  everyHerzogPoliceActUnlawful
-  everyHerzogChargeInvalid
+  everyHerzogPoliceActUnlawful : IndividualConsequenceClaim
+  everyHerzogChargeInvalid : IndividualConsequenceClaim
   individualActRequiresIndependentLawfulnessAudit : IndividualConsequenceClaim
 
 record ConstitutionalConsequenceBoundary : Set where

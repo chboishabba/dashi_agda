@@ -16,43 +16,43 @@ import DASHI.Reasoning.DialecticalOppositionNonExplosionExact as Dialectic
 ------------------------------------------------------------------------
 
 data DesignKind : Set where
-  randomisedControlledTrial
-  quasiExperiment
-  observationalQuantitative
-  qualitativeInterview
-  qualitativeFocusGroup
-  mixedMethods
-  designBasedResearch
-  systematicReview
-  metaAnalysis
-  narrativeReview
-  practitionerSynthesis
+  randomisedControlledTrial : DesignKind
+  quasiExperiment : DesignKind
+  observationalQuantitative : DesignKind
+  qualitativeInterview : DesignKind
+  qualitativeFocusGroup : DesignKind
+  mixedMethods : DesignKind
+  designBasedResearch : DesignKind
+  systematicReview : DesignKind
+  metaAnalysis : DesignKind
+  narrativeReview : DesignKind
+  practitionerSynthesis : DesignKind
   conceptualFramework : DesignKind
 
 data ValidityLevel : Set where
-  validityUnassessed
-  validityLimited
-  validityModerate
+  validityUnassessed : ValidityLevel
+  validityLimited : ValidityLevel
+  validityModerate : ValidityLevel
   validityStrong : ValidityLevel
 
 data EpistemicRole : Set where
-  measuredSubject
-  respondent
-  informant
-  domainExpert
-  coDesigner
-  researchPartner
+  measuredSubject : EpistemicRole
+  respondent : EpistemicRole
+  informant : EpistemicRole
+  domainExpert : EpistemicRole
+  coDesigner : EpistemicRole
+  researchPartner : EpistemicRole
   governingParticipant : EpistemicRole
 
 data EvidenceQuestion : Set where
-  existenceQuestion
-  associationQuestion
-  causalQuestion
-  mechanismQuestion
-  livedExperienceQuestion
-  acceptabilityQuestion
-  implementationQuestion
-  transportQuestion
+  existenceQuestion : EvidenceQuestion
+  associationQuestion : EvidenceQuestion
+  causalQuestion : EvidenceQuestion
+  mechanismQuestion : EvidenceQuestion
+  livedExperienceQuestion : EvidenceQuestion
+  acceptabilityQuestion : EvidenceQuestion
+  implementationQuestion : EvidenceQuestion
+  transportQuestion : EvidenceQuestion
   normativeQuestion : EvidenceQuestion
 
 record StudyDesignReceipt : Set where
@@ -97,13 +97,13 @@ open EvidenceReceipt public
 ------------------------------------------------------------------------
 
 data AdmissibilityFinding : Set where
-  fullyAdmissible
-  partiallyAdmissible
-  scopeOverreach
-  strengthOverreach
-  designMismatch
-  provenanceFailure
-  contradictedFinding
+  fullyAdmissible : AdmissibilityFinding
+  partiallyAdmissible : AdmissibilityFinding
+  scopeOverreach : AdmissibilityFinding
+  strengthOverreach : AdmissibilityFinding
+  designMismatch : AdmissibilityFinding
+  provenanceFailure : AdmissibilityFinding
+  contradictedFinding : AdmissibilityFinding
   unresolvedFinding : AdmissibilityFinding
 
 record EvidenceForObligation : Set where
@@ -145,12 +145,12 @@ provenanceFailureNotPromotionAdmissible ()
 ------------------------------------------------------------------------
 
 data EvidenceOpposition : Set where
-  directSameScopeContradiction
-  scopeQualifiedDisagreement
-  methodologicalChallenge
-  alternativeExplanation
-  effectSizeDisagreement
-  nullEvidence
+  directSameScopeContradiction : EvidenceOpposition
+  scopeQualifiedDisagreement : EvidenceOpposition
+  methodologicalChallenge : EvidenceOpposition
+  alternativeExplanation : EvidenceOpposition
+  effectSizeDisagreement : EvidenceOpposition
+  nullEvidence : EvidenceOpposition
   constructedCounterevidence : EvidenceOpposition
 
 evidenceOppositionMode : EvidenceOpposition → Dialectic.OppositionMode

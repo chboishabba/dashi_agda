@@ -51,15 +51,15 @@ canonicalStructuralZeroCell = cellSupportFibre
 ------------------------------------------------------------------------
 
 data SparseCellClaim : Set where
-  exactCellCount
-  cellIsStructuralZero
-  noInteractionInCell
+  exactCellCount : SparseCellClaim
+  cellIsStructuralZero : SparseCellClaim
+  noInteractionInCell : SparseCellClaim
   privacySafeAggregate : SparseCellClaim
 
 data SparseCellProducer : Set where
-  unsuppressedCellCountProducer
-  structuralZeroReceipt
-  interactionSupportProducer
+  unsuppressedCellCountProducer : SparseCellProducer
+  structuralZeroReceipt : SparseCellProducer
+  interactionSupportProducer : SparseCellProducer
   disclosureControlReceipt : SparseCellProducer
 
 reverseSparseCell : SparseCellClaim → SparseCellProducer

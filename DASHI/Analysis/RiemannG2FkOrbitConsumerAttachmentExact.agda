@@ -102,13 +102,13 @@ open FkOrbitConsumerAttachment public
 ------------------------------------------------------------------------
 
 data FkRepresentationPayment : Set where
-  identifyWholeSourceFunctionSpaceWithWeilTest
-  identifyWholeSourceFunctionSpaceWithMellinTest
-  recoverSelectedFkOrbitEmbedding
-  recoverSelectedFkAdmissibility
-  recoverSelectedSameFormulaSpectralObservation
-  recoverSelectedPoleNearDecomposition
-  : FkRepresentationPayment
+  identifyWholeSourceFunctionSpaceWithWeilTest : FkRepresentationPayment
+  identifyWholeSourceFunctionSpaceWithMellinTest : FkRepresentationPayment
+  recoverSelectedFkOrbitEmbedding : FkRepresentationPayment
+  recoverSelectedFkAdmissibility : FkRepresentationPayment
+  recoverSelectedSameFormulaSpectralObservation : FkRepresentationPayment
+  recoverSelectedPoleNearDecomposition : FkRepresentationPayment
+
 
 PaymentRelevant : FkRepresentationPayment → Set
 PaymentRelevant identifyWholeSourceFunctionSpaceWithWeilTest = ⊥

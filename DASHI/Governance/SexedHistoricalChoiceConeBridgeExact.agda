@@ -40,10 +40,10 @@ data ConceivedChoiceSurface : Set where
   notConceived conceivedAsPossible : ConceivedChoiceSurface
 
 data FineChoiceState : Set where
-  formalButInaccessible
-  formalReachableButUnconceived
-  formalReachableAndConceived
-  : FineChoiceState
+  formalButInaccessible : FineChoiceState
+  formalReachableButUnconceived : FineChoiceState
+  formalReachableAndConceived : FineChoiceState
+
 
 formalRight : FineChoiceState → FormalRightSurface
 formalRight _ = formallyPermitted

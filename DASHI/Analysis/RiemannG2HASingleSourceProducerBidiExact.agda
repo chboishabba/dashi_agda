@@ -99,16 +99,16 @@ singleProducerToProofRelevantCanonicalHA producer =
 ------------------------------------------------------------------------
 
 data HASingleProducerSearchAction : Set where
-  recoverLiteralSourceNativeProducer
-  separatelyRecoverImplementationIdentity
-  separatelyRecoverParameterizedAction
-  separatelyRecoverAdmissibility
-  separatelyRecoverCanonicalHXAgreement
-  separatelyRecoverSameFormulaShift
-  separatelyRecoverSameWeilTransformShift
-  recoverIndependentSourceProvenance
-  compileProofRelevantHA
-  : HASingleProducerSearchAction
+  recoverLiteralSourceNativeProducer : HASingleProducerSearchAction
+  separatelyRecoverImplementationIdentity : HASingleProducerSearchAction
+  separatelyRecoverParameterizedAction : HASingleProducerSearchAction
+  separatelyRecoverAdmissibility : HASingleProducerSearchAction
+  separatelyRecoverCanonicalHXAgreement : HASingleProducerSearchAction
+  separatelyRecoverSameFormulaShift : HASingleProducerSearchAction
+  separatelyRecoverSameWeilTransformShift : HASingleProducerSearchAction
+  recoverIndependentSourceProvenance : HASingleProducerSearchAction
+  compileProofRelevantHA : HASingleProducerSearchAction
+
 
 data SearchStatus : Set where
   live pruned downstream parallel : SearchStatus

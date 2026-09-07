@@ -81,7 +81,7 @@ open RelativeAddressFibre public
 canonicalTwoToElevenFibre : RelativeAddressFibre
 canonicalTwoToElevenFibre = relativeAddressFibre 2 11 9 refl
 
-record JRelativeScaleBoundary : Set where
+record JRelativeScaleBoundary : Set₁ where
   constructor jRelativeScaleBoundary
   field
     jFineIsLiteralSelfDivision : Set

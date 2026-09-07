@@ -15,14 +15,14 @@ import DASHI.Core.AffectedDependencyClosureExact as Dependency
 ------------------------------------------------------------------------
 
 data ReasoningCertificate : Set where
-  parserObservationCertificate
-  semanticResolutionCertificate
-  evidentialPNFCertificate
-  logicalInterpretationCertificate
-  logicalDerivationCertificate
-  implicationConeCertificate
-  designDischargeCertificate
-  : ReasoningCertificate
+  parserObservationCertificate : ReasoningCertificate
+  semanticResolutionCertificate : ReasoningCertificate
+  evidentialPNFCertificate : ReasoningCertificate
+  logicalInterpretationCertificate : ReasoningCertificate
+  logicalDerivationCertificate : ReasoningCertificate
+  implicationConeCertificate : ReasoningCertificate
+  designDischargeCertificate : ReasoningCertificate
+
 
 data Depends : ReasoningCertificate → ReasoningCertificate → Set where
   parserFeedsSemantic :

@@ -18,12 +18,12 @@ import DASHI.Governance.AnomalousTemporalProofSearchExperimentAdmissionExact as 
 ------------------------------------------------------------------------
 
 data ResidualResearchMove : Set where
-  laboratoryReplication
-  modelFidelityAudit
-  formalProofSearch
-  institutionalSourceRecovery
-  contextProvenanceAudit
-  : ResidualResearchMove
+  laboratoryReplication : ResidualResearchMove
+  modelFidelityAudit : ResidualResearchMove
+  formalProofSearch : ResidualResearchMove
+  institutionalSourceRecovery : ResidualResearchMove
+  contextProvenanceAudit : ResidualResearchMove
+
 
 residualMoveKind : ResidualResearchMove → Residual.ResidualInformationMoveKind
 residualMoveKind laboratoryReplication = Residual.replicationResidualMove
@@ -51,12 +51,12 @@ fidelityAuditNotReplication ()
 ------------------------------------------------------------------------
 
 data ResearchResidual : Set where
-  ganzfeldReplicationResidual
-  psilocybinMaskingResidual
-  bemMethodResidual
-  stargateArchiveResidual
-  stargateContextResidual
-  : ResearchResidual
+  ganzfeldReplicationResidual : ResearchResidual
+  psilocybinMaskingResidual : ResearchResidual
+  bemMethodResidual : ResearchResidual
+  stargateArchiveResidual : ResearchResidual
+  stargateContextResidual : ResearchResidual
+
 
 candidateMoveFor : ResearchResidual → ResidualResearchMove
 candidateMoveFor ganzfeldReplicationResidual = laboratoryReplication

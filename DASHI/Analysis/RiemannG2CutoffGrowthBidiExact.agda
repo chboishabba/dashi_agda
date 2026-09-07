@@ -20,19 +20,19 @@ import DASHI.Analysis.RiemannAristotleG2CurrentCutExact as Current
 ------------------------------------------------------------------------
 
 data CutoffStrategy : Set where
-  fixedCutoff
-  subcriticalGrowth
-  quarterPeriodCrossingGrowth
-  adaptiveLiteralCutoff
-  : CutoffStrategy
+  fixedCutoff : CutoffStrategy
+  subcriticalGrowth : CutoffStrategy
+  quarterPeriodCrossingGrowth : CutoffStrategy
+  adaptiveLiteralCutoff : CutoffStrategy
+
 
 data CutoffGrowthStage : Set where
-  narrowNoCancellationKnown
-  crossingLawRequired
-  crossingLawOwned
-  downstreamCompatibilityRequired
-  oscillatoryConsumerReady
-  : CutoffGrowthStage
+  narrowNoCancellationKnown : CutoffGrowthStage
+  crossingLawRequired : CutoffGrowthStage
+  crossingLawOwned : CutoffGrowthStage
+  downstreamCompatibilityRequired : CutoffGrowthStage
+  oscillatoryConsumerReady : CutoffGrowthStage
+
 
 currentCutoffGrowthStage : CutoffGrowthStage
 currentCutoffGrowthStage = crossingLawRequired

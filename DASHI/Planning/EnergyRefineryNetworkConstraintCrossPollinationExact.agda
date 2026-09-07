@@ -20,9 +20,9 @@ import DASHI.Chemistry.RefineryFeedstockSaltConstraintBidiExact as Refinery
 ------------------------------------------------------------------------
 
 data EnergyPlanningState : Set where
-  crudeAbundantRefiningConstrained
-  crudeAbundantRefiningAvailable
-  : EnergyPlanningState
+  crudeAbundantRefiningConstrained : EnergyPlanningState
+  crudeAbundantRefiningAvailable : EnergyPlanningState
+
 
 data CrudeSupplySurface : Set where
   crudeSupplyAdequate : CrudeSupplySurface

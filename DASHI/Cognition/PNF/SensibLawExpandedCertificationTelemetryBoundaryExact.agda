@@ -125,7 +125,7 @@ rawHashFailure0833 =
 ------------------------------------------------------------------------
 
 data StreamFrameClass : Set where
-  documentFrame paragraphOpenFrame sentenceFrame tokenFrame sentenceEndFrame
+  documentFrame paragraphOpenFrame sentenceFrame tokenFrame sentenceEndFrame : StreamFrameClass
   paragraphEndFrame runtimeTimingTelemetryFrame : StreamFrameClass
 
 semanticObservationFrame : StreamFrameClass → Bool
@@ -183,8 +183,8 @@ v01FailureDoesNotPreCertifyCorrectedV02 ()
 ------------------------------------------------------------------------
 
 data ExpandedCertificationFrontier : Set where
-  semanticParityAndPerformanceObservedAwaitingCanonicalDigestRerun
-  : ExpandedCertificationFrontier
+  semanticParityAndPerformanceObservedAwaitingCanonicalDigestRerun : ExpandedCertificationFrontier
+
 
 currentExpandedCertificationFrontier : ExpandedCertificationFrontier
 currentExpandedCertificationFrontier =

@@ -14,10 +14,10 @@ import DASHI.Physics.Plasma.MHDHelicalElsasserTriadTangentExact as Tangent
 ------------------------------------------------------------------------
 
 data IdealInvariantKind : Set where
-  totalEnergyInvariant
-  crossHelicityInvariant
-  magneticHelicityInvariant
-  : IdealInvariantKind
+  totalEnergyInvariant : IdealInvariantKind
+  crossHelicityInvariant : IdealInvariantKind
+  magneticHelicityInvariant : IdealInvariantKind
+
 
 record TriadInvariantTest : Set₁ where
   constructor triad-invariant-test

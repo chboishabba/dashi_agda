@@ -160,17 +160,17 @@ toProofRelevantImplementedMellinAction P proof = record
 ------------------------------------------------------------------------
 
 data SourceNativeSearchAction : Set where
-  rebuildGenericFourierTheory
-  reuseFiniteC3FourierAsRiemannTest
-  searchForAnotherAbstractHAInterface
-  recoverConcreteSourceTestImplementation
-  identifySourceTestWithCanonicalMellinTest
-  recoverSourceCharacterMultiplicationAction
-  recoverSourceAdmissibilityProof
-  recoverSourceSameFormulaShift
-  recoverSourceSameWeilTransformShift
-  compileIntoProofRelevantHA
-  : SourceNativeSearchAction
+  rebuildGenericFourierTheory : SourceNativeSearchAction
+  reuseFiniteC3FourierAsRiemannTest : SourceNativeSearchAction
+  searchForAnotherAbstractHAInterface : SourceNativeSearchAction
+  recoverConcreteSourceTestImplementation : SourceNativeSearchAction
+  identifySourceTestWithCanonicalMellinTest : SourceNativeSearchAction
+  recoverSourceCharacterMultiplicationAction : SourceNativeSearchAction
+  recoverSourceAdmissibilityProof : SourceNativeSearchAction
+  recoverSourceSameFormulaShift : SourceNativeSearchAction
+  recoverSourceSameWeilTransformShift : SourceNativeSearchAction
+  compileIntoProofRelevantHA : SourceNativeSearchAction
+
 
 SourceNativeRelevant : SourceNativeSearchAction → Set
 SourceNativeRelevant rebuildGenericFourierTheory = ⊥

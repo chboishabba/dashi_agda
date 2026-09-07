@@ -22,10 +22,10 @@ import DASHI.Governance.AnomalousCompetingExperimentCostedSelectionExact as Comp
 ------------------------------------------------------------------------
 
 data StudyDesign : Set where
-  preregisteredStudy
-  adversarialMultiLabStudy
-  retrospectiveSurvey
-  : StudyDesign
+  preregisteredStudy : StudyDesign
+  adversarialMultiLabStudy : StudyDesign
+  retrospectiveSurvey : StudyDesign
+
 
 bundleOf : StudyDesign → Disc.ExperimentBundle Trajectory.Interpretation
 bundleOf preregisteredStudy = Competition.cheapSeparator

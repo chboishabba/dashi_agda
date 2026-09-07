@@ -90,14 +90,14 @@ canonicalZeta23FkSourceReturn =
 ------------------------------------------------------------------------
 
 data HARecoveryAction : Set where
-  searchForAnyModulationOperation
-  rebuildCharacterMultiplication
-  recoverSourceCarrierToMellinIdentity
-  recoverFkAdmissibilityClosure
-  recoverFkTransformShiftProof
-  identifyShiftWithSameExplicitFormula
-  compileThroughProofRelevantHA
-  : HARecoveryAction
+  searchForAnyModulationOperation : HARecoveryAction
+  rebuildCharacterMultiplication : HARecoveryAction
+  recoverSourceCarrierToMellinIdentity : HARecoveryAction
+  recoverFkAdmissibilityClosure : HARecoveryAction
+  recoverFkTransformShiftProof : HARecoveryAction
+  identifyShiftWithSameExplicitFormula : HARecoveryAction
+  compileThroughProofRelevantHA : HARecoveryAction
+
 
 HARelevant : HARecoveryAction -> Set
 HARelevant searchForAnyModulationOperation = ⊥

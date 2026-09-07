@@ -16,11 +16,11 @@ import DASHI.Reasoning.HistoryTimeIndexedAlgorithmModelExact as Model
 ------------------------------------------------------------------------
 
 data ComputationRole : Set where
-  observationRole
-  candidateRefinementRole
-  successfulRecoveryRole
-  modelRevisionRole
-  : ComputationRole
+  observationRole : ComputationRole
+  candidateRefinementRole : ComputationRole
+  successfulRecoveryRole : ComputationRole
+  modelRevisionRole : ComputationRole
+
 
 roleSector : ComputationRole → B369.CubeFrequencySector
 roleSector observationRole =

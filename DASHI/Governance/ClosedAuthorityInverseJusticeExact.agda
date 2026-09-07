@@ -48,8 +48,8 @@ record ClosedAuthorityRepairRequirement : Set₁ where
 open ClosedAuthorityRepairRequirement public
 
 canonicalClosedLoopCannotAlreadySatisfyIndependentRepairRequirement :
-  ClosedAuthorityRepairRequirement →
-  sourceLoop
+  (requirement : ClosedAuthorityRepairRequirement) →
+  sourceLoop requirement
     ≡ AuthorityLoop.canonicalClosedAuthorityRisk →
   ⊥
 canonicalClosedLoopCannotAlreadySatisfyIndependentRepairRequirement

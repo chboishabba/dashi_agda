@@ -22,33 +22,33 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data OrganosulfurCompound : Set where
-  alliin
-  allicin
-  ajoene
-  diallylDisulfide
-  diallylTrisulfide
-  : OrganosulfurCompound
+  alliin : OrganosulfurCompound
+  allicin : OrganosulfurCompound
+  ajoene : OrganosulfurCompound
+  diallylDisulfide : OrganosulfurCompound
+  diallylTrisulfide : OrganosulfurCompound
+
 
 data MolecularActionKind : Set where
-  alliinaseConversion
-  membraneEntry
-  thiolReaction
-  sThioallylation
-  lowMolecularWeightThiolDepletion
-  enzymeInhibition
-  redoxStress
-  regulatoryRNAModulation
-  quorumRegulationInterference
-  : MolecularActionKind
+  alliinaseConversion : MolecularActionKind
+  membraneEntry : MolecularActionKind
+  thiolReaction : MolecularActionKind
+  sThioallylation : MolecularActionKind
+  lowMolecularWeightThiolDepletion : MolecularActionKind
+  enzymeInhibition : MolecularActionKind
+  redoxStress : MolecularActionKind
+  regulatoryRNAModulation : MolecularActionKind
+  quorumRegulationInterference : MolecularActionKind
+
 
 data EvidenceRelation : Set where
-  directChemicalReaction
-  biochemicalTargetEvidence
-  proteomicEvidence
-  reporterAssayEvidence
-  reviewSynthesis
-  inferredPathwayBridge
-  : EvidenceRelation
+  directChemicalReaction : EvidenceRelation
+  biochemicalTargetEvidence : EvidenceRelation
+  proteomicEvidence : EvidenceRelation
+  reporterAssayEvidence : EvidenceRelation
+  reviewSynthesis : EvidenceRelation
+  inferredPathwayBridge : EvidenceRelation
+
 
 record MolecularActionReceipt : Set where
   constructor molecularActionReceipt

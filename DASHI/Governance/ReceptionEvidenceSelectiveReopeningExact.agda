@@ -20,13 +20,13 @@ import DASHI.Governance.ReceptionRelationEvidenceTemporalGraphExact as Graph
 ------------------------------------------------------------------------
 
 data ReceptionAuditArtifact : Set where
-  sourceReceiptArtifact
-  edgeClassificationArtifact
-  semanticTransportArtifact
-  institutionalContinuityArtifact
-  presentUseArtifact
-  downstreamPolicyArtifact
-  : ReceptionAuditArtifact
+  sourceReceiptArtifact : ReceptionAuditArtifact
+  edgeClassificationArtifact : ReceptionAuditArtifact
+  semanticTransportArtifact : ReceptionAuditArtifact
+  institutionalContinuityArtifact : ReceptionAuditArtifact
+  presentUseArtifact : ReceptionAuditArtifact
+  downstreamPolicyArtifact : ReceptionAuditArtifact
+
 
 data ReceptionDepends : ReceptionAuditArtifact → ReceptionAuditArtifact → Set where
   sourceToEdge : ReceptionDepends sourceReceiptArtifact edgeClassificationArtifact
@@ -79,9 +79,9 @@ sourceChangeReopensPolicyTransitively =
 ------------------------------------------------------------------------
 
 data EvidenceUpdateKind : Set where
-  strengthOnlyUpdate
-  relationReclassificationUpdate
-  : EvidenceUpdateKind
+  strengthOnlyUpdate : EvidenceUpdateKind
+  relationReclassificationUpdate : EvidenceUpdateKind
+
 
 record RelationReclassificationReceipt : Set where
   constructor relation-reclassification-receipt

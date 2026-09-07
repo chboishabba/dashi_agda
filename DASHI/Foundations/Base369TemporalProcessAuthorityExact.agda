@@ -38,9 +38,9 @@ record RecordingWitness : Set₁ where
 open RecordingWitness public
 
 data PostRevocationActKind : Set where
-  alreadyCompleted
-  unavoidableContinuation
-  requiredClosureStep
+  alreadyCompleted : PostRevocationActKind
+  unavoidableContinuation : PostRevocationActKind
+  requiredClosureStep : PostRevocationActKind
   newDiscretionaryStep : PostRevocationActKind
 
 record ProcessAuthority : Set₁ where
@@ -86,11 +86,11 @@ record TemporalReconstruction : Set₁ where
 open TemporalReconstruction public
 
 data TemporalClassification : Set where
-  authorisedAndCompletedBeforeRevocation
-  authorisedInitiallyStillUnfolding
-  requiredClosureAfterRevocation
-  newDiscretionaryPostRevocation
-  recordingDiffersFromRecollection
+  authorisedAndCompletedBeforeRevocation : TemporalClassification
+  authorisedInitiallyStillUnfolding : TemporalClassification
+  requiredClosureAfterRevocation : TemporalClassification
+  newDiscretionaryPostRevocation : TemporalClassification
+  recordingDiffersFromRecollection : TemporalClassification
   conditionalOrAmbiguousResponse : TemporalClassification
 
 record ClassifiedTemporalReconstruction
@@ -107,11 +107,11 @@ open ClassifiedTemporalReconstruction public
 ------------------------------------------------------------------------
 
 data CorruptionDimension : Set where
-  parentToDescendant
-  narrowToBroadContext
-  considerToCommit
-  boundedToIndefiniteScope
-  openZeroToPositive
+  parentToDescendant : CorruptionDimension
+  narrowToBroadContext : CorruptionDimension
+  considerToCommit : CorruptionDimension
+  boundedToIndefiniteScope : CorruptionDimension
+  openZeroToPositive : CorruptionDimension
   earlierToLaterTime : CorruptionDimension
 
 record PropositionCorruption : Set₁ where
@@ -138,11 +138,11 @@ open CorruptionBlocked public
 ------------------------------------------------------------------------
 
 data LegalInterpretationNode : Set where
-  physicalEventOccurred
-  participantExperiencedDistress
-  actWasInappropriate
-  actIntendedToControl
-  systematicCoercivePattern
+  physicalEventOccurred : LegalInterpretationNode
+  participantExperiencedDistress : LegalInterpretationNode
+  actWasInappropriate : LegalInterpretationNode
+  actIntendedToControl : LegalInterpretationNode
+  systematicCoercivePattern : LegalInterpretationNode
   legalCharacterisation : LegalInterpretationNode
 
 record LegalNodeResponse : Set where

@@ -108,18 +108,18 @@ compileActualRecognitionToBase369 {ActualSector} recognition = record
 ------------------------------------------------------------------------
 
 data SemanticRepresentationLeaf : Set where
-  replayActual3BRestriction
-  prove729WitnessedIrreducibility
-  prove729FixedCentralCharacterUniqueness
-  constructActualZetaSectorRecognition
-  composeActualRecognitionToBase369
-  identify53ResidualAction
-  identify729By90TensorConstituent
-  realiseWeightTwoEndomorphisms
-  identifyFullWeightTwoCarrier
-  preserveMonsterConstituent
-  intertwineSemanticCoordinates
-  : SemanticRepresentationLeaf
+  replayActual3BRestriction : SemanticRepresentationLeaf
+  prove729WitnessedIrreducibility : SemanticRepresentationLeaf
+  prove729FixedCentralCharacterUniqueness : SemanticRepresentationLeaf
+  constructActualZetaSectorRecognition : SemanticRepresentationLeaf
+  composeActualRecognitionToBase369 : SemanticRepresentationLeaf
+  identify53ResidualAction : SemanticRepresentationLeaf
+  identify729By90TensorConstituent : SemanticRepresentationLeaf
+  realiseWeightTwoEndomorphisms : SemanticRepresentationLeaf
+  identifyFullWeightTwoCarrier : SemanticRepresentationLeaf
+  preserveMonsterConstituent : SemanticRepresentationLeaf
+  intertwineSemanticCoordinates : SemanticRepresentationLeaf
+
 
 data LeafStatus : Set where leafClosed leafOpen leafBlocked : LeafStatus
 

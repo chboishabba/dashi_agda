@@ -17,26 +17,26 @@ import DASHI.Governance.WarOnDrugsHistoricalGenealogyExact as Genealogy
 ------------------------------------------------------------------------
 
 data RevisionMode : Set where
-  evidenceResponsiveRevision
-  politicalStrategicRevision
-  bureaucraticConsolidationRevision
-  punitiveEscalationRevision
-  commercialMedicalizationRevision
-  rightsSovereigntyRevision
-  mixedInstitutionalRevision
-  : RevisionMode
+  evidenceResponsiveRevision : RevisionMode
+  politicalStrategicRevision : RevisionMode
+  bureaucraticConsolidationRevision : RevisionMode
+  punitiveEscalationRevision : RevisionMode
+  commercialMedicalizationRevision : RevisionMode
+  rightsSovereigntyRevision : RevisionMode
+  mixedInstitutionalRevision : RevisionMode
+
 
 data RevisionDriver : Set where
-  scientificClinicalDriver
-  treatmentCapacityDriver
-  enforcementDriver
-  electoralPoliticalDriver
-  countercultureConflictDriver
-  bureaucraticReorganizationDriver
-  commercialInvestmentDriver
-  rightsSovereigntyDriver
-  publicHealthOutcomeDriver
-  : RevisionDriver
+  scientificClinicalDriver : RevisionDriver
+  treatmentCapacityDriver : RevisionDriver
+  enforcementDriver : RevisionDriver
+  electoralPoliticalDriver : RevisionDriver
+  countercultureConflictDriver : RevisionDriver
+  bureaucraticReorganizationDriver : RevisionDriver
+  commercialInvestmentDriver : RevisionDriver
+  rightsSovereigntyDriver : RevisionDriver
+  publicHealthOutcomeDriver : RevisionDriver
+
 
 record ClassifierTransition
     (before after : Historical.ClassifierVersion) : Set where
@@ -121,13 +121,13 @@ canonicalClassifierEvolution =
 ------------------------------------------------------------------------
 
 data HistoricalClassifierResidue : Set where
-  federalProhibitionResidue
-  nixonEnforcementTreatmentBifurcationResidue
-  countercultureConflictResidue
-  reaganPunitiveEscalationResidue
-  psychedelicResearchReopeningResidue
-  veteranTherapeuticPriorityResidue
-  : HistoricalClassifierResidue
+  federalProhibitionResidue : HistoricalClassifierResidue
+  nixonEnforcementTreatmentBifurcationResidue : HistoricalClassifierResidue
+  countercultureConflictResidue : HistoricalClassifierResidue
+  reaganPunitiveEscalationResidue : HistoricalClassifierResidue
+  psychedelicResearchReopeningResidue : HistoricalClassifierResidue
+  veteranTherapeuticPriorityResidue : HistoricalClassifierResidue
+
 
 record EvolutionResidueLedger : Set where
   constructor evolutionResidueLedger

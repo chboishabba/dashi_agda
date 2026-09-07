@@ -61,14 +61,14 @@ open PropositionFibre public
 ------------------------------------------------------------------------
 
 data ResponseMode : Set where
-  denyOccurrence
-  admitOccurrenceDisputeCharacterisation
-  admitConductAddContext
-  disputeCausation
-  challengeEvidenceReliability
-  offerAlternativeEvent
-  admitProposition
-  : ResponseMode
+  denyOccurrence : ResponseMode
+  admitOccurrenceDisputeCharacterisation : ResponseMode
+  admitConductAddContext : ResponseMode
+  disputeCausation : ResponseMode
+  challengeEvidenceReliability : ResponseMode
+  offerAlternativeEvent : ResponseMode
+  admitProposition : ResponseMode
+
 
 record ResponseEdge : Set where
   constructor responseEdge
@@ -97,13 +97,13 @@ causalDisputeIsNotOccurrenceDenial ()
 ------------------------------------------------------------------------
 
 data DisagreementKind : Set where
-  nodeDisagreement
-  relationDisagreement
-  evidenceDisagreement
-  characterisationDisagreement
-  causalDisagreement
-  legalConsequenceDisagreement
-  : DisagreementKind
+  nodeDisagreement : DisagreementKind
+  relationDisagreement : DisagreementKind
+  evidenceDisagreement : DisagreementKind
+  characterisationDisagreement : DisagreementKind
+  causalDisagreement : DisagreementKind
+  legalConsequenceDisagreement : DisagreementKind
+
 
 record ControversyResidual : Set where
   constructor controversyResidual
@@ -121,12 +121,12 @@ open ControversyResidual public
 ------------------------------------------------------------------------
 
 data ObligationKind : Set where
-  premiseObligation
-  evidenceObligation
-  responseObligation
-  discriminatorObligation
-  adjudicativeObligation
-  : ObligationKind
+  premiseObligation : ObligationKind
+  evidenceObligation : ObligationKind
+  responseObligation : ObligationKind
+  discriminatorObligation : ObligationKind
+  adjudicativeObligation : ObligationKind
+
 
 record ProofObligation : Set where
   constructor proofObligation
@@ -155,20 +155,20 @@ open ProofGraph public
 ------------------------------------------------------------------------
 
 data MachineOperation : Set where
-  parseSource
-  linkProvenance
-  constructChronology
-  alignPredicates
-  synthesizeControversy
-  rankDiscriminator
-  : MachineOperation
+  parseSource : MachineOperation
+  linkProvenance : MachineOperation
+  constructChronology : MachineOperation
+  alignPredicates : MachineOperation
+  synthesizeControversy : MachineOperation
+  rankDiscriminator : MachineOperation
+
 
 data AdjudicativeOperation : Set where
-  determineCredibility
-  determineUltimateFact
-  assignNormativeWeight
-  enterFinalJudgment
-  : AdjudicativeOperation
+  determineCredibility : AdjudicativeOperation
+  determineUltimateFact : AdjudicativeOperation
+  assignNormativeWeight : AdjudicativeOperation
+  enterFinalJudgment : AdjudicativeOperation
+
 
 record AuthorityBoundary : Set where
   constructor authorityBoundary
@@ -236,11 +236,11 @@ open ForwardCompilation public
 ------------------------------------------------------------------------
 
 data ProceduralGoal : Set where
-  identifyCommonGround
-  isolateResidualControversy
-  decideEvidenceNeeded
-  prepareForAdjudication
-  : ProceduralGoal
+  identifyCommonGround : ProceduralGoal
+  isolateResidualControversy : ProceduralGoal
+  decideEvidenceNeeded : ProceduralGoal
+  prepareForAdjudication : ProceduralGoal
+
 
 record ReverseProofSearch : Set where
   constructor reverseProofSearch

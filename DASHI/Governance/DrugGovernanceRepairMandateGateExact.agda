@@ -18,22 +18,22 @@ import DASHI.Governance.DrugGovernanceCapabilityFunctioningExact as Capability
 ------------------------------------------------------------------------
 
 data DrugClassificationDefect : Set where
-  chillingFaultAllocation
-  patientVoiceDomestication
-  capabilityConeContraction
-  authorityMisclassification
-  materialBenefitCapture
-  sovereigntyErasure
-  : DrugClassificationDefect
+  chillingFaultAllocation : DrugClassificationDefect
+  patientVoiceDomestication : DrugClassificationDefect
+  capabilityConeContraction : DrugClassificationDefect
+  authorityMisclassification : DrugClassificationDefect
+  materialBenefitCapture : DrugClassificationDefect
+  sovereigntyErasure : DrugClassificationDefect
+
 
 data DrugRepairProposal : Set where
-  refineBeforeFault
-  reopenCategoryContest
-  widenCapabilityCone
-  reviseClassificationRule
-  reviseBenefitRouting
-  restoreSovereignAuthorityGate
-  : DrugRepairProposal
+  refineBeforeFault : DrugRepairProposal
+  reopenCategoryContest : DrugRepairProposal
+  widenCapabilityCone : DrugRepairProposal
+  reviseClassificationRule : DrugRepairProposal
+  reviseBenefitRouting : DrugRepairProposal
+  restoreSovereignAuthorityGate : DrugRepairProposal
+
 
 record DefectDiagnosis : Set where
   constructor defectDiagnosis

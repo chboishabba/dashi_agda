@@ -191,9 +191,9 @@ stratumCannotRecoverLocalContinuation =
 ------------------------------------------------------------------------
 
 data GlobalFineState : Set where
-  genuinelyCompatiblePublicEquality
-  suppressedIncompatibilityPublicEquality
-  : GlobalFineState
+  genuinelyCompatiblePublicEquality : GlobalFineState
+  suppressedIncompatibilityPublicEquality : GlobalFineState
+
 
 data GlobalPublicSurface : Set where
   formalEqualityAndReciprocalNorm : GlobalPublicSurface

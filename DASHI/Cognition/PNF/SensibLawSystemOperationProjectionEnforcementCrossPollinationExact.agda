@@ -147,15 +147,15 @@ findingDoesNotCollapseToCompulsion = Climate.findingDoesNotEqualDomesticCompulsi
 ------------------------------------------------------------------------
 
 data DiagnosticQuestion : Set where
-  whatDoesSystemDeclare
-  whatDoesSystemDo
-  whatCanSystemSee
-  whatDoesSystemTreatAsNonexistent
-  howDoesSystemHandleCorrection
-  whatAuthorityAttachesToItsOutput
-  whatEnforcementChannelExists
-  whatMaterialStatePersists
-  : DiagnosticQuestion
+  whatDoesSystemDeclare : DiagnosticQuestion
+  whatDoesSystemDo : DiagnosticQuestion
+  whatCanSystemSee : DiagnosticQuestion
+  whatDoesSystemTreatAsNonexistent : DiagnosticQuestion
+  howDoesSystemHandleCorrection : DiagnosticQuestion
+  whatAuthorityAttachesToItsOutput : DiagnosticQuestion
+  whatEnforcementChannelExists : DiagnosticQuestion
+  whatMaterialStatePersists : DiagnosticQuestion
+
 
 record SystemIsWhatItDoesDiagnosticBoundary : Set where
   constructor system-is-what-it-does-diagnostic-boundary

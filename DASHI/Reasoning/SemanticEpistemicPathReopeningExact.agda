@@ -86,10 +86,10 @@ unrelatedEdgeCannotCreateDirectMeaningDependency =
 ------------------------------------------------------------------------
 
 data MeaningCertificateStatus : Set where
-  currentMeaningCertificate
-  reopenableMeaningCertificate
-  refutedMeaningCertificate
-  : MeaningCertificateStatus
+  currentMeaningCertificate : MeaningCertificateStatus
+  reopenableMeaningCertificate : MeaningCertificateStatus
+  refutedMeaningCertificate : MeaningCertificateStatus
+
 
 reopenableMeaningNotRefuted :
   reopenableMeaningCertificate ≡ refutedMeaningCertificate → ⊥

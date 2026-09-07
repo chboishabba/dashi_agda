@@ -27,23 +27,23 @@ infixr 5 _∨_
 infixr 4 _⇒_
 
 data DependencyShape : Set where
-  nominalSubject
-  directObject
-  passiveSubject
-  adjectivalModifier
-  nominalModifier
-  conjunction
-  negation
-  modalAuxiliary
-  determiner
-  temporalModifier
-  clausalComplement
-  openClausalComplement
-  adverbialClause
-  clausalModifier
-  relativeClause
-  unresolvedDependency
-  : DependencyShape
+  nominalSubject : DependencyShape
+  directObject : DependencyShape
+  passiveSubject : DependencyShape
+  adjectivalModifier : DependencyShape
+  nominalModifier : DependencyShape
+  conjunction : DependencyShape
+  negation : DependencyShape
+  modalAuxiliary : DependencyShape
+  determiner : DependencyShape
+  temporalModifier : DependencyShape
+  clausalComplement : DependencyShape
+  openClausalComplement : DependencyShape
+  adverbialClause : DependencyShape
+  clausalModifier : DependencyShape
+  relativeClause : DependencyShape
+  unresolvedDependency : DependencyShape
+
 
 record DependencyWitness : Set where
   constructor dependencyWitness
@@ -55,19 +55,19 @@ record DependencyWitness : Set where
 open DependencyWitness public
 
 data SemanticFragmentKind : Set where
-  actorFragment
-  patientFragment
-  propertyFragment
-  relationFragment
-  conjunctionFragment
-  negationFragment
-  modalityFragment
-  quantifierFragment
-  temporalFragment
-  contentClauseFragment
-  clauseAttachmentFragment
-  unresolvedFragment
-  : SemanticFragmentKind
+  actorFragment : SemanticFragmentKind
+  patientFragment : SemanticFragmentKind
+  propertyFragment : SemanticFragmentKind
+  relationFragment : SemanticFragmentKind
+  conjunctionFragment : SemanticFragmentKind
+  negationFragment : SemanticFragmentKind
+  modalityFragment : SemanticFragmentKind
+  quantifierFragment : SemanticFragmentKind
+  temporalFragment : SemanticFragmentKind
+  contentClauseFragment : SemanticFragmentKind
+  clauseAttachmentFragment : SemanticFragmentKind
+  unresolvedFragment : SemanticFragmentKind
+
 
 record CandidateSemanticFragment : Set where
   constructor candidateSemanticFragment

@@ -19,15 +19,15 @@ data ValueSurface : Set where
   samePositivePsychedelicValue : ValueSurface
 
 data BenefitPosition : Set where
-  concentratedInstitutionalCapture
-  sharedCommunityBenefit
-  : BenefitPosition
+  concentratedInstitutionalCapture : BenefitPosition
+  sharedCommunityBenefit : BenefitPosition
+
 
 data RepairResidue : Set where
-  historicalRepairOutstanding
-  historicalRepairAcknowledged
-  historicalRepairDischarged
-  : RepairResidue
+  historicalRepairOutstanding : RepairResidue
+  historicalRepairAcknowledged : RepairResidue
+  historicalRepairDischarged : RepairResidue
+
 
 record BenefitRepairWorld : Set where
   constructor benefitRepairWorld

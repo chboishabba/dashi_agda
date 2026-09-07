@@ -18,14 +18,14 @@ import DASHI.Governance.PhenomenonEvidenceLadderProjectionOverTimeExact as Ladde
 ------------------------------------------------------------------------
 
 data EvidenceConsumer : Set where
-  phenomenologyConsumer
-  anomalyConsumer
-  replicationConsumer
-  mechanismConsumer
-  operationalUtilityConsumer
-  therapeuticConsumer
-  ontologicalConsumer
-  : EvidenceConsumer
+  phenomenologyConsumer : EvidenceConsumer
+  anomalyConsumer : EvidenceConsumer
+  replicationConsumer : EvidenceConsumer
+  mechanismConsumer : EvidenceConsumer
+  operationalUtilityConsumer : EvidenceConsumer
+  therapeuticConsumer : EvidenceConsumer
+  ontologicalConsumer : EvidenceConsumer
+
 
 ActiveAxis :
   Trajectory.EvidenceMoment → EvidenceConsumer → Temporal.EvidenceCoordinate → Set

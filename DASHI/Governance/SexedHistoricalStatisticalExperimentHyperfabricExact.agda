@@ -37,11 +37,11 @@ data RecordedSexCategory : Set where
   recordedMale recordedFemale recordedOtherOrUnresolved : RecordedSexCategory
 
 data ConstructionDirection : Set where
-  masculineToMasculine
-  masculineToFeminine
-  feminineToMasculine
-  feminineToFeminine
-  : ConstructionDirection
+  masculineToMasculine : ConstructionDirection
+  masculineToFeminine : ConstructionDirection
+  feminineToMasculine : ConstructionDirection
+  feminineToFeminine : ConstructionDirection
+
 
 constructionDirection : Hyper.Position → Hyper.Position → ConstructionDirection
 constructionDirection Hyper.masculine Hyper.masculine = masculineToMasculine
@@ -55,40 +55,40 @@ constructionDirection Hyper.feminine Hyper.feminine = feminineToFeminine
 ------------------------------------------------------------------------
 
 data StatisticalFamily : Set where
-  binaryLogisticRegression
-  mixedEffectsLogisticRegression
-  ordinalRegression
-  multinomialRegression
-  linearMixedEffects
-  survivalModel
-  qualitativeComparativeLane
-  : StatisticalFamily
+  binaryLogisticRegression : StatisticalFamily
+  mixedEffectsLogisticRegression : StatisticalFamily
+  ordinalRegression : StatisticalFamily
+  multinomialRegression : StatisticalFamily
+  linearMixedEffects : StatisticalFamily
+  survivalModel : StatisticalFamily
+  qualitativeComparativeLane : StatisticalFamily
+
 
 data ModelCoordinate : Set where
-  recordedSexCoordinate
-  constructorPositionCoordinate
-  constructedPositionCoordinate
-  constructionDirectionCoordinate
-  epochCoordinate
-  legalPowerCoordinate
-  religiousPowerCoordinate
-  familyPowerCoordinate
-  collectiveLegibilityCoordinate
-  retainedHistoryCoordinate
-  exposureCoordinate
-  repeatedSubjectCoordinate
-  networkClusterCoordinate
-  observerCoordinate
-  : ModelCoordinate
+  recordedSexCoordinate : ModelCoordinate
+  constructorPositionCoordinate : ModelCoordinate
+  constructedPositionCoordinate : ModelCoordinate
+  constructionDirectionCoordinate : ModelCoordinate
+  epochCoordinate : ModelCoordinate
+  legalPowerCoordinate : ModelCoordinate
+  religiousPowerCoordinate : ModelCoordinate
+  familyPowerCoordinate : ModelCoordinate
+  collectiveLegibilityCoordinate : ModelCoordinate
+  retainedHistoryCoordinate : ModelCoordinate
+  exposureCoordinate : ModelCoordinate
+  repeatedSubjectCoordinate : ModelCoordinate
+  networkClusterCoordinate : ModelCoordinate
+  observerCoordinate : ModelCoordinate
+
 
 data InteractionTerm : Set where
-  constructorByConstructedInteraction
-  positionByEpochInteraction
-  positionByPowerInteraction
-  positionByExposureInteraction
-  exposureByHistoryInteraction
-  networkByPositionInteraction
-  : InteractionTerm
+  constructorByConstructedInteraction : InteractionTerm
+  positionByEpochInteraction : InteractionTerm
+  positionByPowerInteraction : InteractionTerm
+  positionByExposureInteraction : InteractionTerm
+  exposureByHistoryInteraction : InteractionTerm
+  networkByPositionInteraction : InteractionTerm
+
 
 record StatisticalModelReceipt : Set where
   constructor statistical-model-receipt
@@ -137,9 +137,9 @@ canonicalSexConstructionInteractionModel =
 ------------------------------------------------------------------------
 
 data SexMarginalFineState : Set where
-  femaleObservedUnderMasculineConstruction
-  femaleObservedUnderFeminineSelfConstruction
-  : SexMarginalFineState
+  femaleObservedUnderMasculineConstruction : SexMarginalFineState
+  femaleObservedUnderFeminineSelfConstruction : SexMarginalFineState
+
 
 recordedSexSurface : SexMarginalFineState → RecordedSexCategory
 recordedSexSurface _ = recordedFemale
@@ -164,9 +164,9 @@ recordedSexCannotRecoverConstructionDirection =
 ------------------------------------------------------------------------
 
 data ConstructionPowerFineState : Set where
-  sameDirectionLowPower
-  sameDirectionHighPower
-  : ConstructionPowerFineState
+  sameDirectionLowPower : ConstructionPowerFineState
+  sameDirectionHighPower : ConstructionPowerFineState
+
 
 constructionDirectionSurface : ConstructionPowerFineState → ConstructionDirection
 constructionDirectionSurface _ = feminineToMasculine
@@ -196,9 +196,9 @@ data CausalStatus : Set where
   causalUnidentified causalIdentified : CausalStatus
 
 data AssociationFineState : Set where
-  adjustedObservationalAssociation
-  identifiedInterventionEffect
-  : AssociationFineState
+  adjustedObservationalAssociation : AssociationFineState
+  identifiedInterventionEffect : AssociationFineState
+
 
 associationSurface : AssociationFineState → AssociationSurface
 associationSurface _ = positiveAssociation
@@ -222,9 +222,9 @@ associationCannotRecoverCausalStatus =
 ------------------------------------------------------------------------
 
 data LogisticRole : Set where
-  dynamicalLogisticMap
-  statisticalLogitLink
-  : LogisticRole
+  dynamicalLogisticMap : LogisticRole
+  statisticalLogitLink : LogisticRole
+
 
 dynamicalLogisticRoleIsNotStatisticalLogitRole :
   dynamicalLogisticMap ≡ statisticalLogitLink → ⊥
@@ -299,9 +299,9 @@ data InstitutionalOutcomeSurface : Set where
   noShift shift : InstitutionalOutcomeSurface
 
 data SignificanceFineState : Set where
-  significantWithoutInstitutionalShift
-  significantWithInstitutionalShift
-  : SignificanceFineState
+  significantWithoutInstitutionalShift : SignificanceFineState
+  significantWithInstitutionalShift : SignificanceFineState
+
 
 significanceSurface : SignificanceFineState → StatisticalSignificanceSurface
 significanceSurface _ = conventionallySignificant

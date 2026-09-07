@@ -17,19 +17,19 @@ import DASHI.Reasoning.Spacy369FeministLacanConsumerRelativeExact as Consumer
 ------------------------------------------------------------------------
 
 data AnalysisObjective : Set where
-  operationalOnly
-  scopeSensitive
-  subjectPositionSensitive
-  broadCriticalAudit
-  : AnalysisObjective
+  operationalOnly : AnalysisObjective
+  scopeSensitive : AnalysisObjective
+  subjectPositionSensitive : AnalysisObjective
+  broadCriticalAudit : AnalysisObjective
+
 
 data InformationAction : Set where
-  terminateWithOperationalDecision
-  askScopeQuestion
-  acquireSubjectPosition
-  inspectClosureResidual
-  inspectReciprocalRelation
-  : InformationAction
+  terminateWithOperationalDecision : InformationAction
+  askScopeQuestion : InformationAction
+  acquireSubjectPosition : InformationAction
+  inspectClosureResidual : InformationAction
+  inspectReciprocalRelation : InformationAction
+
 
 data InformationAvailable : AnalysisObjective → InformationAction → Set where
   operationalStop :
@@ -93,10 +93,10 @@ subjectConsumerDoesNotExposeScopeProbe ()
 ------------------------------------------------------------------------
 
 data AuditHistory : Set where
-  directOperationalClosure
-  scopeAuditThenOperationalClosure
-  subjectAuditThenOperationalClosure
-  : AuditHistory
+  directOperationalClosure : AuditHistory
+  scopeAuditThenOperationalClosure : AuditHistory
+  subjectAuditThenOperationalClosure : AuditHistory
+
 
 operationalEndpoint : AuditHistory → Consumer.OperationalDecision
 operationalEndpoint directOperationalClosure = Consumer.noAutomaticStateMutation
@@ -104,10 +104,10 @@ operationalEndpoint scopeAuditThenOperationalClosure = Consumer.noAutomaticState
 operationalEndpoint subjectAuditThenOperationalClosure = Consumer.noAutomaticStateMutation
 
 data AuditRouteResidue : Set where
-  noAuditResidue
-  scopeAuditResidue
-  subjectAuditResidue
-  : AuditRouteResidue
+  noAuditResidue : AuditRouteResidue
+  scopeAuditResidue : AuditRouteResidue
+  subjectAuditResidue : AuditRouteResidue
+
 
 auditResidue : AuditHistory → AuditRouteResidue
 auditResidue directOperationalClosure = noAuditResidue

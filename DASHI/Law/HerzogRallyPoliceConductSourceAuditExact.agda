@@ -10,41 +10,41 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AuditSourceRole : Set where
-  legalObserverReport
-  abcVideoVerification
-  abcReportedWitnessAccount
-  policeOfficialAccount
-  independentOversightInvestigation
-  civilPleadingReported
-  leakedBodyWornVideoReport
-  secondaryInvestigativeReport
+  legalObserverReport : AuditSourceRole
+  abcVideoVerification : AuditSourceRole
+  abcReportedWitnessAccount : AuditSourceRole
+  policeOfficialAccount : AuditSourceRole
+  independentOversightInvestigation : AuditSourceRole
+  civilPleadingReported : AuditSourceRole
+  leakedBodyWornVideoReport : AuditSourceRole
+  secondaryInvestigativeReport : AuditSourceRole
   dashiAnalyticBridge : AuditSourceRole
 
 data ConductProposition : Set where
-  policeEncircledAndRestrictedExits
-  mountedPoliceCreatedCrowdCrushRisk
-  protestersPushedTowardLightRail
-  policePursuedProtestersIntoCity
-  forceAgainstRestrainedOrComplyingPeople
-  forceAgainstDisabledOrElderlyPeople
-  pepperSprayUsedOnCrowd
-  gogglesRemovedBeforePepperSprayAllegation
-  inadequateMedicalAssistanceAllegation
-  legalObserversPunchedOrPepperSprayedAllegation
-  firstNationsIntermediariesArrested
-  noClearDirectionBeforeForceOrArrestAllegation
-  requestsToLeaveRefusedOrIgnoredAllegation
-  searchesWithoutApparentLawfulBasisAllegation
-  teenagerDraggedKickedOrPushedAllegation
-  prayerGroupHadPriorPolicePermission
-  prayerPermissionNotCommunicatedToField
-  shadidAssaultFalseImprisonmentMisfeasanceClaims
-  policeSaidCrowdThreatenedJostledAssaultedOfficers
-  policeSaidCrowdAggressiveVolatile
-  officerBoastedAboutPunchingDownedProtester
-  postEventHomeRaidsAndLaterArrestsChillingEffectAllegation
-  leccInvestigatingLawfulnessAndAppropriateness
-  leccLargestComplaintVolume
+  policeEncircledAndRestrictedExits : ConductProposition
+  mountedPoliceCreatedCrowdCrushRisk : ConductProposition
+  protestersPushedTowardLightRail : ConductProposition
+  policePursuedProtestersIntoCity : ConductProposition
+  forceAgainstRestrainedOrComplyingPeople : ConductProposition
+  forceAgainstDisabledOrElderlyPeople : ConductProposition
+  pepperSprayUsedOnCrowd : ConductProposition
+  gogglesRemovedBeforePepperSprayAllegation : ConductProposition
+  inadequateMedicalAssistanceAllegation : ConductProposition
+  legalObserversPunchedOrPepperSprayedAllegation : ConductProposition
+  firstNationsIntermediariesArrested : ConductProposition
+  noClearDirectionBeforeForceOrArrestAllegation : ConductProposition
+  requestsToLeaveRefusedOrIgnoredAllegation : ConductProposition
+  searchesWithoutApparentLawfulBasisAllegation : ConductProposition
+  teenagerDraggedKickedOrPushedAllegation : ConductProposition
+  prayerGroupHadPriorPolicePermission : ConductProposition
+  prayerPermissionNotCommunicatedToField : ConductProposition
+  shadidAssaultFalseImprisonmentMisfeasanceClaims : ConductProposition
+  policeSaidCrowdThreatenedJostledAssaultedOfficers : ConductProposition
+  policeSaidCrowdAggressiveVolatile : ConductProposition
+  officerBoastedAboutPunchingDownedProtester : ConductProposition
+  postEventHomeRaidsAndLaterArrestsChillingEffectAllegation : ConductProposition
+  leccInvestigatingLawfulnessAndAppropriateness : ConductProposition
+  leccLargestComplaintVolume : ConductProposition
   policeConductUltimatelyUnlawfulOrSystemic : ConductProposition
 
 record ConductSourceReceipt : Set where
@@ -174,17 +174,17 @@ postEventChillingReceipt = conductSourceReceipt
 ------------------------------------------------------------------------
 
 data PoliceAuditClaim : Set where
-  specificForceEventOccurred
-  policeOperationalPatternAlleged
-  policeOperationalPatternCorroborated
-  systemicUnlawfulPoliceStrategy
+  specificForceEventOccurred : PoliceAuditClaim
+  policeOperationalPatternAlleged : PoliceAuditClaim
+  policeOperationalPatternCorroborated : PoliceAuditClaim
+  systemicUnlawfulPoliceStrategy : PoliceAuditClaim
   commandLevelProvocationIntent : PoliceAuditClaim
 
 data PoliceAuditProducer : Set where
-  eventVideoOrDirectObservationProducer
-  multiIncidentSourceBundleProducer
-  independentOversightCorroborationProducer
-  finalLawfulnessFindingProducer
+  eventVideoOrDirectObservationProducer : PoliceAuditProducer
+  multiIncidentSourceBundleProducer : PoliceAuditProducer
+  independentOversightCorroborationProducer : PoliceAuditProducer
+  finalLawfulnessFindingProducer : PoliceAuditProducer
   commandIntentDocumentProducer : PoliceAuditProducer
 
 reversePoliceAudit : PoliceAuditClaim → PoliceAuditProducer

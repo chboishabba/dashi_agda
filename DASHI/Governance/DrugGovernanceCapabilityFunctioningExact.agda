@@ -17,20 +17,20 @@ import DASHI.Governance.DrugGovernanceFiveProbeWorldExact as Five
 ------------------------------------------------------------------------
 
 data GovernanceState : Set where
-  broadConeSameTreatment
-  narrowConeSameTreatment
-  broadConeContestChosen
-  : GovernanceState
+  broadConeSameTreatment : GovernanceState
+  narrowConeSameTreatment : GovernanceState
+  broadConeContestChosen : GovernanceState
+
 
 data RealizedFunctioning : Set where
-  receivesTreatment
-  contestsCategory
-  : RealizedFunctioning
+  receivesTreatment : RealizedFunctioning
+  contestsCategory : RealizedFunctioning
+
 
 data CapabilityCode : Set where
-  broadCapabilityCone
-  narrowCapabilityCone
-  : CapabilityCode
+  broadCapabilityCone : CapabilityCode
+  narrowCapabilityCone : CapabilityCode
+
 
 functioning : GovernanceState → RealizedFunctioning
 functioning broadConeSameTreatment = receivesTreatment

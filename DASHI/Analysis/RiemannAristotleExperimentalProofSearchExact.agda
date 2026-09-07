@@ -17,18 +17,18 @@ data RHResearchSocket : Set where
   offOrdinateSocket gammaSocket clusterMarginSocket : RHResearchSocket
 
 data RHResearchMove : Set where
-  attackOffOrdinateCancellation
-  payGammaResidual
-  instantiateClusterMargin
-  auditExternalAnalyticDonor
-  : RHResearchMove
+  attackOffOrdinateCancellation : RHResearchMove
+  payGammaResidual : RHResearchMove
+  instantiateClusterMargin : RHResearchMove
+  auditExternalAnalyticDonor : RHResearchMove
+
 
 data ResearchOutcome : Set where
-  openOutcome
-  theoremOwned
-  boundOwnedButConsumerOpen
-  refutedRoute
-  : ResearchOutcome
+  openOutcome : ResearchOutcome
+  theoremOwned : ResearchOutcome
+  boundOwnedButConsumerOpen : ResearchOutcome
+  refutedRoute : ResearchOutcome
+
 
 MovePays : RHResearchMove → RHResearchSocket → Set
 MovePays attackOffOrdinateCancellation offOrdinateSocket = ⊤

@@ -14,20 +14,20 @@ import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admis
 import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact as Contextual
 
 data ProducerClass : Set where
-  parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer
-  attributionProducer evidenceProducer legalEvidenceResolutionProducer temporalProducer
-  scopeResolutionProducer documentContextProducer legalJurisdictionProducer
-  legalSourceAuthorityProducer legalRoleResolutionProducer legalTypedMeetProducer
+  parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer : ProducerClass
+  attributionProducer evidenceProducer legalEvidenceResolutionProducer temporalProducer : ProducerClass
+  scopeResolutionProducer documentContextProducer legalJurisdictionProducer : ProducerClass
+  legalSourceAuthorityProducer legalRoleResolutionProducer legalTypedMeetProducer : ProducerClass
   governedAdmissionProducer : ProducerClass
 
 data StatusAxis : Set where
-  participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis
-  propositionAxis attributionAxis evidenceCandidateAxis resolvedLegalEvidenceAxis
-  modalityAxis temporalAxis conditionAxis scopeCandidateAxis resolvedScopeAxis
-  documentContextAxis jurisdictionCandidateAxis resolvedLegalJurisdictionAxis
-  semanticAdmissionAuthorityAxis legalSourceAuthorityAxis legalRoleAxis applicabilityAxis
-  violationAxis liabilityAxis burdenAxis judicialDiscourseAxis normativeRelationAxis
-  : StatusAxis
+  participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis : StatusAxis
+  propositionAxis attributionAxis evidenceCandidateAxis resolvedLegalEvidenceAxis : StatusAxis
+  modalityAxis temporalAxis conditionAxis scopeCandidateAxis resolvedScopeAxis : StatusAxis
+  documentContextAxis jurisdictionCandidateAxis resolvedLegalJurisdictionAxis : StatusAxis
+  semanticAdmissionAuthorityAxis legalSourceAuthorityAxis legalRoleAxis applicabilityAxis : StatusAxis
+  violationAxis liabilityAxis burdenAxis judicialDiscourseAxis normativeRelationAxis : StatusAxis
+
 
 record AxisPopulationReceipt : Set where
   constructor axisPopulationReceipt

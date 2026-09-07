@@ -64,13 +64,13 @@ branchDrift branch =
 ------------------------------------------------------------------------
 
 data GoalStatus : Set where
-  outcomeReached
-  outcomeUnstarted
-  outcomeSearching
-  outcomePending
-  outcomeBlocked
-  outcomeExpired
-  outcomeHandover
+  outcomeReached : GoalStatus
+  outcomeUnstarted : GoalStatus
+  outcomeSearching : GoalStatus
+  outcomePending : GoalStatus
+  outcomeBlocked : GoalStatus
+  outcomeExpired : GoalStatus
+  outcomeHandover : GoalStatus
   outcomeAbandoned : GoalStatus
 
 record GoalProcessState (SearchState : Set) : Set where
@@ -84,12 +84,12 @@ record GoalProcessState (SearchState : Set) : Set where
 ------------------------------------------------------------------------
 
 data BranchValueReason : Set where
-  attractorAligned
-  exploratoryInformation
-  redundantCirculation
-  adverseDrift
-  trapAttractor
-  capacityDestructive
+  attractorAligned : BranchValueReason
+  exploratoryInformation : BranchValueReason
+  redundantCirculation : BranchValueReason
+  adverseDrift : BranchValueReason
+  trapAttractor : BranchValueReason
+  capacityDestructive : BranchValueReason
   interferenceLoss : BranchValueReason
 
 record FibredBranchValue : Set where
@@ -137,7 +137,7 @@ record EffectiveBranchOrbit (Branch : Set) : Set₁ where
 ------------------------------------------------------------------------
 
 data DuplicateBranch : Set where
-  duplicateLeft
+  duplicateLeft : DuplicateBranch
   duplicateRight : DuplicateBranch
 
 data DuplicateOrbit : Set where

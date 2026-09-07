@@ -34,14 +34,14 @@ data BackboneCandidate : Set where
   carbonBackbone siliconBackbone otherBackbone : BackboneCandidate
 
 data ChemicalSuitabilityCoordinate : Set where
-  tetravalentBonding
-  catenation
-  multipleBondSupport
-  aqueousStabilityReactivityBalance
-  heteroatomDiversity
-  redoxRange
-  macromolecularCombinatorics
-  : ChemicalSuitabilityCoordinate
+  tetravalentBonding : ChemicalSuitabilityCoordinate
+  catenation : ChemicalSuitabilityCoordinate
+  multipleBondSupport : ChemicalSuitabilityCoordinate
+  aqueousStabilityReactivityBalance : ChemicalSuitabilityCoordinate
+  heteroatomDiversity : ChemicalSuitabilityCoordinate
+  redoxRange : ChemicalSuitabilityCoordinate
+  macromolecularCombinatorics : ChemicalSuitabilityCoordinate
+
 
 record CarbonSuitabilityReceipt : Set where
   constructor carbon-suitability-receipt

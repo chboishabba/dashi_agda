@@ -19,13 +19,13 @@ import DASHI.Governance.AnomalousConsumerIndexedObligationFibreExact as Obligati
 ------------------------------------------------------------------------
 
 data CandidateExperiment : Set where
-  bemResidualMethodAudit
-  presentimentPreregisteredReplication
-  ganzfeldAdversarialReplication
-  stargateProtocolAudit
-  psilocybinExpectancyControlStudy
-  ndeTimeLockedRealityTest
-  : CandidateExperiment
+  bemResidualMethodAudit : CandidateExperiment
+  presentimentPreregisteredReplication : CandidateExperiment
+  ganzfeldAdversarialReplication : CandidateExperiment
+  stargateProtocolAudit : CandidateExperiment
+  psilocybinExpectancyControlStudy : CandidateExperiment
+  ndeTimeLockedRealityTest : CandidateExperiment
+
 
 data ExperimentalValue : Set where
   supportsDistinction doesNotSupportDistinction unresolvedOutcome : ExperimentalValue
@@ -148,11 +148,11 @@ ndeMechanismRoute = experimentRoute
 ------------------------------------------------------------------------
 
 data RejectedExperimentRoute : Set where
-  repeatBemOriginalAfterTransparentPsi
-  ndePhenomenologySurveyForMechanismConsumer
-  psychedelicMysticalReportAsPsiMechanismTest
-  stargateHistoricalRecordAsOperationalUtilityTest
-  : RejectedExperimentRoute
+  repeatBemOriginalAfterTransparentPsi : RejectedExperimentRoute
+  ndePhenomenologySurveyForMechanismConsumer : RejectedExperimentRoute
+  psychedelicMysticalReportAsPsiMechanismTest : RejectedExperimentRoute
+  stargateHistoricalRecordAsOperationalUtilityTest : RejectedExperimentRoute
+
 
 rejectionReason : RejectedExperimentRoute → ProofSearch.RouteError
 rejectionReason repeatBemOriginalAfterTransparentPsi = ProofSearch.consumerMismatch

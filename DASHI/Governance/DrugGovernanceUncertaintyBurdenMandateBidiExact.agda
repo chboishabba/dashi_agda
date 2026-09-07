@@ -19,12 +19,12 @@ import DASHI.Governance.DrugGovernanceFarCrossPollinationCapstoneExact as Far
 ------------------------------------------------------------------------
 
 data ContestedPower : Set where
-  imposePunitiveClassification
-  denyCareRoute
-  assertCategoryAuthority
-  assertCommercialLegitimacy
-  overrideSovereignStanding
-  : ContestedPower
+  imposePunitiveClassification : ContestedPower
+  denyCareRoute : ContestedPower
+  assertCategoryAuthority : ContestedPower
+  assertCommercialLegitimacy : ContestedPower
+  overrideSovereignStanding : ContestedPower
+
 
 powerForError : Burden.ClassificationErrorKind → ContestedPower
 powerForError Burden.wrongfulPunitiveClassification = imposePunitiveClassification
@@ -34,12 +34,12 @@ powerForError Burden.wrongfulCommercialLegitimacy = assertCommercialLegitimacy
 powerForError Burden.wrongfulSovereigntyOverride = overrideSovereignStanding
 
 data BurdenHolder : Set where
-  punitiveClassifierInstitution
-  careGatekeepingInstitution
-  categoryClaimingInstitution
-  commercialLegitimacyClaimant
-  externalSovereigntyOverrideActor
-  : BurdenHolder
+  punitiveClassifierInstitution : BurdenHolder
+  careGatekeepingInstitution : BurdenHolder
+  categoryClaimingInstitution : BurdenHolder
+  commercialLegitimacyClaimant : BurdenHolder
+  externalSovereigntyOverrideActor : BurdenHolder
+
 
 burdenHolder : Burden.ClassificationErrorKind → BurdenHolder
 burdenHolder Burden.wrongfulPunitiveClassification = punitiveClassifierInstitution
