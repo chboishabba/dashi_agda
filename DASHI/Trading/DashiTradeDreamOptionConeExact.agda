@@ -109,26 +109,14 @@ actionAvailable state holdAction = true
 actionAvailable state sellAction with risk state
 ... | riskBlocked = false
 ... | _ = true
-actionAvailable state buyAction with risk state
-... | riskBlocked = false
-... | riskCaution with liquidity state
-...   | thinBook = false
-...   | liquidBook with inventory state
-...     | crowdedLongInventory = false
-...     | neutralInventory with uncertainty state
-...       | uncertain = false
-...       | calibrated with history state
-...         | flipHeavyHistory = false
-...         | stableHistory = true
-... | riskClear with liquidity state
-...   | thinBook = false
-...   | liquidBook with inventory state
-...     | crowdedLongInventory = false
-...     | neutralInventory with uncertainty state
-...       | uncertain = false
-...       | calibrated with history state
-...         | flipHeavyHistory = false
-...         | stableHistory = true
+actionAvailable state buyAction with risk state | liquidity state | inventory state | uncertainty state | history state
+... | riskBlocked | _ | _ | _ | _ = false
+... | _ | thinBook | _ | _ | _ = false
+... | _ | _ | crowdedLongInventory | _ | _ = false
+... | _ | _ | _ | uncertain | _ = false
+... | _ | _ | _ | _ | flipHeavyHistory = false
+... | riskCaution | liquidBook | neutralInventory | calibrated | stableHistory = true
+... | riskClear | liquidBook | neutralInventory | calibrated | stableHistory = true
 
 Available : TradingFabricState → TradeAction → Set
 Available state action = actionAvailable state action ≡ true
