@@ -11,13 +11,14 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13ReducedTwoCarrierSourceFamilyEx
 -- Two source routes are retained:
 --
 --   A. the compact four-input historical cut/defect weld;
---   B. a provenance-separated native-radius route in which physical link
---      smallness is the already-owned Path13 `SelectedInverseLinkRadius13`,
---      standard SU(2) operator representation is source-independent, and only
---      three selected-chart recognition facts remain at the cut.
+--   B. a provenance-separated native-radius route in which the selected Path13
+--      background and its `SelectedInverseLinkRadius13` receipt inhabit one
+--      dependent same-object fibre; standard SU(2) operator representation is
+--      source-independent; and only three selected-chart recognition facts
+--      remain at the cut.
 --
 -- Route B is not claimed to have fewer fields.  Its gain is typed ownership:
--- physical radius, standard representation and selected chart recognition can
+-- physical selection/radius, standard representation and chart recognition can
 -- no longer be conflated into one opaque weld.
 ------------------------------------------------------------------------
 
@@ -26,7 +27,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as PathTarget
-import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
+import DASHI.Physics.YangMills.BalabanPath13SelectedBackgroundRadiusFibreExact as BackgroundRadius
 import DASHI.Physics.YangMills.BalabanCMP98Path13ReducedFamilyGeometryExact as Geometry
 import DASHI.Physics.YangMills.BalabanCMP98Path13RelativeContourPrincipalImageExact as Principal
 import DASHI.Physics.YangMills.BalabanPath13RadiusOperatorDefectRouteExact as RadiusOperator
@@ -160,13 +161,8 @@ canonicalSourceGeometryBackgroundExact inputs = refl
 record RadiusNativePath13TwoCarrierSourceFamilyInputs
     (CoarseField : Set) : Set₁ where
   field
-    selectedPhysicalRadius :
-      PathTarget.SelectedPhysicalBackground13Instantiation
-        CoarseField Lie.SU2LieAlgebra
-
-    nativeInverseLinkRadius :
-      Background.SelectedInverseLinkRadius13
-        (PathTarget.path13Background selectedPhysicalRadius)
+    selectedBackgroundRadius :
+      BackgroundRadius.SelectedPath13BackgroundWithRadius CoarseField
 
     scalarEmbeddingRadius : R208.RationalRealRingEmbedding
     federbushConventionRadius : R177.ExistingFederbushConventionFamily
@@ -176,9 +172,26 @@ record RadiusNativePath13TwoCarrierSourceFamilyInputs
 
     cutRecognition :
       RadiusPrincipal.Path13RadiusCutRecognition
-        selectedPhysicalRadius operatorRepresentation
+        (BackgroundRadius.selectedPhysical selectedBackgroundRadius)
+        operatorRepresentation
 
 open RadiusNativePath13TwoCarrierSourceFamilyInputs public
+
+selectedPhysicalRadius :
+  ∀ {CoarseField} →
+  RadiusNativePath13TwoCarrierSourceFamilyInputs CoarseField →
+  PathTarget.SelectedPhysicalBackground13Instantiation
+    CoarseField Lie.SU2LieAlgebra
+selectedPhysicalRadius inputs =
+  BackgroundRadius.selectedPhysical (selectedBackgroundRadius inputs)
+
+nativeInverseLinkRadius :
+  ∀ {CoarseField}
+    (inputs : RadiusNativePath13TwoCarrierSourceFamilyInputs CoarseField) →
+  DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact.SelectedInverseLinkRadius13
+    (PathTarget.path13Background (selectedPhysicalRadius inputs))
+nativeInverseLinkRadius inputs =
+  BackgroundRadius.nativeInverseLinkRadius (selectedBackgroundRadius inputs)
 
 radiusNativeReducedGeometry :
   ∀ {CoarseField} →
@@ -230,7 +243,7 @@ radiusNativeBackgroundSameObject :
   ∀ {CoarseField}
     (inputs : RadiusNativePath13TwoCarrierSourceFamilyInputs CoarseField) →
   Geometry.selectedPhysical (radiusNativeReducedGeometry inputs)
-  ≡ selectedPhysicalRadius inputs
+  ≡ BackgroundRadius.selectedPhysical (selectedBackgroundRadius inputs)
 radiusNativeBackgroundSameObject inputs = refl
 
 cmp98Path13ReducedSourceFamilyAdapterLevel : ProofLevel
@@ -254,9 +267,13 @@ cmp98Path13RadiusNativeSourceAdapterLevel = machineChecked
 cmp98Path13RadiusNativeFieldDerivativeLevel : ProofLevel
 cmp98Path13RadiusNativeFieldDerivativeLevel = machineChecked
 
+cmp98Path13RadiusNativeSameObjectOwnershipLevel : ProofLevel
+cmp98Path13RadiusNativeSameObjectOwnershipLevel =
+  BackgroundRadius.cmp98Path13SelectedBackgroundRadiusFibreLevel
+
 -- The compact four-input route remains the fewest top-level fields.  The
 -- radius-native route is retained because it separates physical smallness from
--- standard representation and chart recognition, and reuses the exact Path13
--- radius already consumed by the coercivity lane.
+-- standard representation and chart recognition, and now makes the selected
+-- physical background/radius dependency structural.
 literalCMP98Path13ReducedSourceFamilyInputsLevel : ProofLevel
 literalCMP98Path13ReducedSourceFamilyInputsLevel = conditional
