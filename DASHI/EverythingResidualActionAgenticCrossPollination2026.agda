@@ -18,6 +18,7 @@ import DASHI.Core.RecursiveParetoFrontierLiftingExact
 import DASHI.Core.ProofSearchExperimentalParetoCrossPollinationExact
 import DASHI.Core.LiteralFrontierSchedulerExact
 import DASHI.Core.ClayCrossDomainLiteralFrontierExact
+import DASHI.Core.ProofCarryingFiniteSumEnclosureExact
 
 import DASHI.Foundations.Base369Ternary27DiscriminatorPortfolioBridgeExact
 import DASHI.Foundations.Base369NDimParetoChartExact
@@ -48,6 +49,9 @@ import DASHI.Biology.Microbiology.BaldEyesalveAssayLiteralFrontierSchedulerBidiE
 
 import DASHI.Analysis.RiemannZetaLiteralFrontierSchedulerExact
 import DASHI.Analysis.RiemannZetaTerminalPaymentCompressionExact
+import DASHI.Analysis.RiemannG2CertifiedFiniteNearEvaluationCompilerExact
+import DASHI.Analysis.RiemannG2CertifiedFiniteNearToOffPaymentExact
+import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeCompilerExact
 import DASHI.Analysis.RiemannZetaDirectTerminalCompilerExact
 import DASHI.Analysis.RiemannZetaDirectTerminalCompilerRegression
 
