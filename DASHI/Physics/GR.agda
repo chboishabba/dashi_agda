@@ -8,6 +8,7 @@ import DASHI.Physics.GR.StressEnergyCompatibility
 import DASHI.Physics.GR.GravitationalObservationSourceAtlasExact
 import DASHI.Physics.GR.GravitationalObservationBidiExact
 import DASHI.Physics.GR.GravitationalWaveTheoryTestBidiExact
+import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
