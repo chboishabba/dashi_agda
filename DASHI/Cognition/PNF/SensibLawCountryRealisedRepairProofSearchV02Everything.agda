@@ -8,6 +8,7 @@ import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairCalibrationV02Exact as 
 import DASHI.Cognition.PNF.SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact as Acquisition
 import DASHI.Cognition.PNF.SensibLawGriffithsCustodialOutcomePaymentV02Exact as GriffithsOutcome
 import DASHI.Cognition.PNF.SensibLawGriffithsCustodialAuthorityCutV02Exact as GriffithsAuthority
+import DASHI.Cognition.PNF.SensibLawGriffithsCustodialAuthorityIntrospectionV02Exact as GriffithsIntrospection
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Assessment
 
@@ -77,6 +78,12 @@ griffithsNextProducerIsMandateAttribution :
   Acquisition.producerForPaymentCoordinate GriffithsAuthority.nextSearchCoordinate
   ≡ Search.attributionProducer
 griffithsNextProducerIsMandateAttribution = refl
+
+griffithsIntrospectionTargetsExactLiveMandateResidual :
+  GriffithsIntrospection.liveResidual
+    GriffithsIntrospection.currentBoundPresentMandateDemandV02
+  ≡ GriffithsAuthority.presentCustodialMandateResidual
+griffithsIntrospectionTargetsExactLiveMandateResidual = refl
 
 ------------------------------------------------------------------------
 -- Existing V02 positive evidence remains visible and bounded.
