@@ -17,9 +17,10 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularSectorCMP109116Round215Exact 
 -- Therefore the preferred BC1 source is the literal CMP119 E_k coordinate,
 -- NOT the whole complete-density action A_k.
 --
--- This module bypasses the earlier free `Density -> Potential` interpretation.
--- It builds the exact CMP109/CMP116 continuation directly from the source-native
--- `regularSmallFieldTerm` field of `CMP119Section2SourceNativeState`.
+-- The preferred carrier here is the newer RAW CMP119 source state.  Section-2
+-- analyticity/regularity predicates are not stored in the state; CMP122 Theorem 1
+-- supplies them separately on active scales.  This prevents all-scale closure
+-- from being smuggled into the data model.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -28,28 +29,25 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as CMP119
+import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as CMP119
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Continue
 
 record CMP119RegularSectorRealization
     {Density Background Fluctuation Action WilsonTerm SmallFieldTerm
       RTerm BoundaryTerm Vacuum : Set}
-    (source : CMP119.CMP119Section2SourceNativeState
+    (source : CMP119.CMP119SourceNativeRawState
       Density Background Fluctuation Action WilsonTerm SmallFieldTerm
       RTerm BoundaryTerm Vacuum) : Set₁ where
   field
     Volume Tangent Component : Set
 
-    -- Physical pointwise meaning of the literal regular E_k source object.
     evaluateRegularTerm : SmallFieldTerm → Background → ℝ
 
     components : Nat → Volume → List Component
     localizedRegularActivity :
       Nat → Volume → Component → Background → ℝ
 
-    -- Literal CMP116 localization of the SAME E_k object.  No R/B/Wilson term
-    -- may pay this equality unless it is already part of `regularSmallFieldTerm`.
     regularEIsLocalizedCompositeSum :
       ∀ scale volume background →
       evaluateRegularTerm (CMP119.regularSmallFieldTerm source scale) background
@@ -104,9 +102,5 @@ cmp119RegularSectorContinuationCompilerLevel = machineChecked
 cmp119RegularEToCMP109PotentialSameObjectLevel : ProofLevel
 cmp119RegularEToCMP109PotentialSameObjectLevel = machineChecked
 
--- Source/physical leaf: instantiate the pointwise E_k meaning and CMP116
--- localized activities on the literal CMP119 source-native state.  The source
--- authority for the Part-I/Part-II continuation is imported elsewhere; the
--- repository same-object realization remains conditional until inhabited.
 literalCMP119RegularSectorRealizationLevel : ProofLevel
 literalCMP119RegularSectorRealizationLevel = conditional
