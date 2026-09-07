@@ -44,6 +44,9 @@ unresolved name kind note =
     ("qid-unresolved:" ++ name)
 
 -- YM authors / entities.
+arthurJaffe edwardWitten ludvigFaddeev victorPopov paulFederbush : ScientificReferenceEntity
+konradOsterwalder davidGross frankWilczek hughPolitzer erhardSeiler : ScientificReferenceEntity
+tadeuszBalaban robertSchrader : ScientificReferenceEntity
 arthurJaffe = verified "Arthur Jaffe" personEntity "Q370094" "Wikidata lookup 2026-09-08"
 edwardWitten = verified "Edward Witten" personEntity "Q201513" "Wikidata lookup 2026-09-08"
 ludvigFaddeev = verified "Ludvig Faddeev" personEntity "Q1030228" "Wikidata lookup 2026-09-08"
@@ -58,6 +61,9 @@ tadeuszBalaban = unresolved "Tadeusz Balaban" personEntity "no trustworthy Wikid
 robertSchrader = unresolved "Robert Schrader" personEntity "OS physicist identity not safely resolved in 2026-09-08 audit"
 
 -- NS authors / entities.
+ronaldCoifman yvesMeyer jeanLeray eberhardHopf tosioKato : ScientificReferenceEntity
+andrewMajda luisCaffarelli louisNirenberg gangTian vladimirSverak : ScientificReferenceEntity
+jamesBeale robertKohn zhenLei xiaoRen gregorySeregin luisEscauriaza : ScientificReferenceEntity
 ronaldCoifman = verified "Ronald Coifman" personEntity "Q2165588" "Wikidata lookup 2026-09-08"
 yvesMeyer = verified "Yves Meyer" personEntity "Q574597" "Wikidata lookup 2026-09-08"
 jeanLeray = verified "Jean Leray" personEntity "Q441143" "Wikidata lookup 2026-09-08"
@@ -76,6 +82,8 @@ gregorySeregin = unresolved "Gregory Seregin" personEntity "no trustworthy Wikid
 luisEscauriaza = unresolved "Luis Escauriaza" personEntity "no trustworthy Wikidata item resolved in 2026-09-08 audit"
 
 -- RH authors / projects / concepts.
+bernhardRiemann nicolaasDeBruijn charlesNewman timothyTrudgian polymathProject : ScientificReferenceEntity
+davePlatt judeGomila : ScientificReferenceEntity
 bernhardRiemann = verified "Bernhard Riemann" personEntity "Q42299" "Wikidata lookup 2026-09-08"
 nicolaasDeBruijn = verified "Nicolaas Govert de Bruijn" personEntity "Q1078285" "Wikidata lookup 2026-09-08"
 charlesNewman = verified "Charles M. Newman" personEntity "Q5080476" "Wikidata lookup 2026-09-08"
@@ -85,6 +93,8 @@ davePlatt = unresolved "Dave Platt" personEntity "mathematician identity ambiguo
 judeGomila = unresolved "Jude Gomila" personEntity "candidate-audit author not safely resolved to Wikidata"
 
 -- Shared concepts / publication identities.
+navierStokesEquations riemannHypothesis millenniumPrizeProblems gaugeFixing : ScientificReferenceEntity
+gangTianGaugeCalibratedGeometryI : ScientificReferenceEntity
 navierStokesEquations = verified "Navier-Stokes equations" conceptEntity "Q201321" "Wikidata lookup 2026-09-08"
 riemannHypothesis = verified "Riemann hypothesis" conceptEntity "Q205966" "Wikidata lookup 2026-09-08"
 millenniumPrizeProblems = verified "Millennium Prize Problems" conceptEntity "Q727000" "Wikidata lookup 2026-09-08"
