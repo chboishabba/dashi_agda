@@ -2,6 +2,7 @@ module DASHI.EverythingScientificReferenceQidAtlas where
 
 import DASHI.Wikimedia.ScientificReferenceEntityAtlasExact
 import DASHI.Wikimedia.ScientificCitationQidBindingsExact
+import DASHI.Wikimedia.ScientificReferenceResidualAcquisitionExact
 import DASHI.Physics.YangMills.SourceEntityQidBindingsExact
 import DASHI.Physics.Closure.NavierStokesSourceEntityQidBindingsExact
 import DASHI.Physics.Closure.NavierStokesCitationIdentityAuditExact
