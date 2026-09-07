@@ -8,6 +8,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR423LocalPaymentPrerequisiteRound489Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPositiveRateLaplaceAuthorityRound490Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNStrictFixedOutputCompanionToR423Round492Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNStrictR423ProofSearchRound493Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
   workflow_dispatch:
@@ -28,30 +30,40 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
 
-      - name: Type-check R487 fixed-output to R423 compiler
+      - name: Type-check R487 fixed-output scalar compiler
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNFixedOutputPaymentsToR423Round487Exact.agda
 
-      - name: Type-check R488 first-missing producer scheduler
+      - name: Type-check R488 producer scheduler
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNR423FixedOutputProducerProofSearchRound488Exact.agda
 
-      - name: Type-check R490 standard positive-rate Laplace authority
+      - name: Type-check R489 direct-vs-Laplace scheduler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNR423LocalPaymentPrerequisiteRound489Exact.agda
+
+      - name: Type-check R490 standard Laplace authority
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNPositiveRateLaplaceAuthorityRound490Exact.agda
 
-      - name: Type-check R491 physical Cauchy Laplace weld
+      - name: Type-check R491 physical Cauchy specialization
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact.agda
 
-      - name: Type-check R489 local payment prerequisite scheduler
+      - name: Type-check R492 strict same-object R423 compiler
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNR423LocalPaymentPrerequisiteRound489Exact.agda
+          DASHI/Physics/Closure/NSTriadKNStrictFixedOutputCompanionToR423Round492Exact.agda
+
+      - name: Type-check R493 strict first-missing scheduler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNStrictR423ProofSearchRound493Exact.agda
 
       - name: Type-check authoritative closure rollup
         run: >-
