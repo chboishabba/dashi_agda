@@ -3,6 +3,7 @@ name: GEV world research loop
 on:
   pull_request:
     paths:
+      - 'DASHI/Core/BoundAcquisitionDemandExact.agda'
       - 'DASHI/Interop/GodsEyeViewRuntimeNeutralAcquisitionABIExact.agda'
       - 'DASHI/Interop/GodsEyeViewExecutableWorldResearchLoopExact.agda'
       - 'DASHI/Interop/GodsEyeViewAcquisitionResultAssessmentBridgeExact.agda'
@@ -31,6 +32,11 @@ jobs:
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check generic bound acquisition carrier
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Core/BoundAcquisitionDemandExact.agda
 
       - name: Type-check runtime-neutral acquisition ABI
         run: >-
