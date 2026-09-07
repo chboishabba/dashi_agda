@@ -3,27 +3,20 @@ module DASHI.Physics.Closure.NSTriadKNRationalInfinityShellBernsteinRound465Exac
 ------------------------------------------------------------------------
 -- ROUND465 / GENUINE RATIONAL FINITE CS -> PERIODIC SHELL BERNSTEIN
 --
--- NSPeriodicFiniteScalarCauchySchwarzSquared is an authority interface: its
--- finite-CS inequality is a field, not a theorem.  This owner supplies the
--- theorem on the literal rational carrier by reusing the already-proved finite
--- squared Cauchy--Schwarz theorem in RationalOrderedFiniteL2.
+-- The generic periodic scalar-CS/Bernstein surfaces carry their inequalities
+-- as input fields.  Here the literal rational theorem is derived instead from
+-- RationalOrderedFiniteL2 by embedding a scalar list a_i as pairs (a_i , 1).
+-- Thus
 --
--- A scalar list a_i is embedded as the pair list (a_i , 1).  Hence
+--   (sum a_i)^2 <= length(a) * sum a_i^2.
 --
---   (sum a_i)^2 <= (sum a_i^2) * length(a)
+-- Since sum a_i^2 is nonnegative, a natural shell-length bound transports this
+-- to the existing infinity-cube count
 --
--- and, because sum a_i^2 is nonnegative, any natural length bound L gives
+--   27 * 2^(3 n).
 --
---   (sum a_i)^2 <= L * sum a_i^2.
---
--- Combining this with the existing literal infinity-cube count produces the
--- exact coefficient
---
---   27 * 2^(3 n)
---
--- without silently normalising away 27.  The only remaining shell-routing
--- receipt is the finite combinatorial statement that the chosen shell list has
--- length at most the counted infinity cube.
+-- The factor 27 is retained literally.  No monotonicity for negative scalars
+-- is requested.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -31,11 +24,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_; length)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Product.Base using (_,_)
-open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSPeriodicInfinityShellModeCount as Count
@@ -62,7 +54,9 @@ pairDotMeaning :
   Rational.pairDot (pairWithOne xs) ≡ sumCoefficients xs
 pairDotMeaning [] = refl
 pairDotMeaning (x ∷ xs) =
-  cong (x +_) (pairDotMeaning xs)
+  trans
+    (cong (x * 1ℚ +_) (pairDotMeaning xs))
+    (solve (x ∷ sumCoefficients xs ∷ []))
 
 leftNormMeaning :
   (xs : List ℚ) →
@@ -76,7 +70,9 @@ rightNormMeaning :
   Rational.rightNormSquared (pairWithOne xs) ≡ scaleNat (length xs) 1ℚ
 rightNormMeaning [] = refl
 rightNormMeaning (x ∷ xs) =
-  cong (1ℚ +_) (rightNormMeaning xs)
+  trans
+    (cong (1ℚ * 1ℚ +_) (rightNormMeaning xs))
+    (solve (scaleNat (length xs) 1ℚ ∷ []))
 
 sumSquaresNonnegative : (xs : List ℚ) → 0ℚ ≤ sumSquares xs
 sumSquaresNonnegative [] = ℚP.≤-refl
@@ -98,48 +94,18 @@ scaleNatMonotone :
   0ℚ ≤ value →
   m Cube.≤ᴺ n →
   scaleNat m value ≤ scaleNat n value
-scaleNatMonotone valueNN Cube.z≤n =
-  scaleNatNonnegative _ valueNN
+scaleNatMonotone valueNN Cube.z≤n = scaleNatNonnegative _ valueNN
 scaleNatMonotone valueNN (Cube.s≤s bound) =
   ℚP.+-mono-≤ ℚP.≤-refl (scaleNatMonotone valueNN bound)
 
-productCountMeaning :
-  (xs : List ℚ) →
-  sumSquares xs * scaleNat (length xs) 1ℚ
-  ≡ scaleNat (length xs) (sumSquares xs)
-productCountMeaning [] = solve []
-productCountMeaning (x ∷ xs) =
-  let
-    s = x * x + sumSquares xs
-    nCount = scaleNat (length xs) 1ℚ
-    nScaled = scaleNat (length xs) s
-  in
-  trans
-    (solve (s ∷ nCount ∷ []))
-    (cong (s +_)
-      (trans
-        (sym (productCountMeaningForValue xs s))
-        refl))
-  where
-  productCountMeaningForValue :
-    (ys : List ℚ) → (value : ℚ) →
-    value * scaleNat (length ys) 1ℚ
-    ≡ scaleNat (length ys) value
-  productCountMeaningForValue [] value = solve []
-  productCountMeaningForValue (y ∷ ys) value =
-    trans
-      (cong (value +_) (productCountMeaningForValue ys value))
-      (solve (value ∷ scaleNat (length ys) value ∷ []))
-
--- A simpler standalone product/count identity, used below and kept public.
 scaleNatByOnes :
   (n : Nat) (value : ℚ) →
   value * scaleNat n 1ℚ ≡ scaleNat n value
 scaleNatByOnes zero value = solve []
 scaleNatByOnes (suc n) value =
   trans
+    (solve (value ∷ scaleNat n 1ℚ ∷ []))
     (cong (value +_) (scaleNatByOnes n value))
-    (solve (value ∷ scaleNat n value ∷ []))
 
 finiteRationalScalarCauchySchwarzSquared :
   (xs : List ℚ) →
@@ -151,10 +117,7 @@ finiteRationalScalarCauchySchwarzSquared xs =
     lhs :
       Rational.square (Rational.pairDot (pairWithOne xs))
       ≡ sumCoefficients xs * sumCoefficients xs
-    lhs =
-      trans
-        (cong (λ z → z * z) (pairDotMeaning xs))
-        refl
+    lhs = cong (λ z → z * z) (pairDotMeaning xs)
     rhs :
       Rational.leftNormSquared (pairWithOne xs)
         * Rational.rightNormSquared (pairWithOne xs)
