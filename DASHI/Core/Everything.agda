@@ -137,6 +137,14 @@ import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.SituatedClaimAuthoritySystemExact
 import DASHI.Core.KnowledgeContentAuthoritySeparationExact
 
+-- Situated fibre dynamics / consumer-indexed adequacy.
+import DASHI.Core.SituatedActionabilityFibreExact
+import DASHI.Core.TrajectoryRecoveryFibreExact
+import DASHI.Core.MultiaxialIncidenceFibreExact
+import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact
+import DASHI.Core.ConsumerFibreRefinementSchedulerExact
+import DASHI.Core.SituatedFibreDynamicsEverything
+
 -- Proof-carrying physical execution / shared-state coalition / proof-search
 -- least-privilege closure.
 import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
