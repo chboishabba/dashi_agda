@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Biology.CarbonClimateEcologicalDependencyBidiExact as ClimateDependency
 import DASHI.Biology.ClimateCarryingCapacityDeepTimeCrossPollinationExact as ClimateContext
 import DASHI.Biology.Agriculture.HungriaEconomicEmissionModel2023Exact as Model2023
@@ -32,10 +33,6 @@ import DASHI.Cognition.PNF.SensibLawIndigenousCarbonValueProjectionNonFactorabil
 --     cultural or stewardship value;
 --   * LES: runtime simulation/calibration/optimisation remains distinct from
 --     DASHI semantic admission/promotion authority.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- 1. Selective reopening for the BNF climate/economic chain.
 ------------------------------------------------------------------------
 
 data BNFClimateArtifact : Set where
@@ -97,11 +94,6 @@ climateHydrologyReopensFarmEconomics =
     (Dependency.oneEdgeCreatesReopeningObligation localClimateToYield)
     (Dependency.oneEdgeCreatesReopeningObligation yieldToUnitEconomics)
 
-------------------------------------------------------------------------
--- The absence of an edge is deliberate: changing a fertilizer price or climate
--- scenario does not rewrite the nitrogenase stoichiometry or source authorship.
-------------------------------------------------------------------------
-
 data UreaPriceChangeImpliesNitrogenaseMechanismRevisionPermission : Set where
 
 data ClimateScenarioImpliesSourceAuthorshipRevisionPermission : Set where
@@ -119,10 +111,6 @@ climateScenarioDoesNotAutoReviseSourceAuthorship ()
 emissionFactorRevisionDoesNotAutoReviseBiologicalEfficacy :
   EmissionFactorRevisionImpliesBiologicalEfficacyRevisionPermission → ⊥
 emissionFactorRevisionDoesNotAutoReviseBiologicalEfficacy ()
-
-------------------------------------------------------------------------
--- 2. Climate accounting is not ecological totality.
-------------------------------------------------------------------------
 
 record BNFClimateBenefitVector : Set₁ where
   constructor bnfClimateBenefitVector
@@ -165,14 +153,6 @@ carbonClimateSelectiveReopeningBoundary :
 carbonClimateSelectiveReopeningBoundary =
   ClimateDependency.canonicalCarbonClimateEcologicalDependencyBoundary
 
-------------------------------------------------------------------------
--- 3. Mabo/Country cross-pollination.
---
--- Carbon, economic and simulation observers are useful but cannot be promoted
--- into Country/community authority.  This mirrors the repo's existing theorem
--- that Crown recognition does not factor Indigenous authority.
-------------------------------------------------------------------------
-
 data CountryPlanningObserver : Set where
   sameCarbonAndEconomicSurface : CountryPlanningObserver
 
@@ -198,6 +178,20 @@ countryAuthorityOutcomesDiffer :
   countryAuthorityOutcome sameMetricsDifferentAuthorityLow ≡
   countryAuthorityOutcome sameMetricsDifferentAuthorityHigh → ⊥
 countryAuthorityOutcomesDiffer ()
+
+countryPlanningNonFactorability :
+  INF.NonFactorabilityWitness countryPlanningObserver countryAuthorityOutcome
+countryPlanningNonFactorability =
+  INF.nonFactorabilityWitness
+    sameMetricsDifferentAuthorityLow
+    sameMetricsDifferentAuthorityHigh
+    refl
+    countryAuthorityOutcomesDiffer
+
+carbonEconomicsCannotFactorCountryAuthority :
+  INF.FactorsThrough countryPlanningObserver countryAuthorityOutcome → ⊥
+carbonEconomicsCannotFactorCountryAuthority =
+  INF.witnessRulesOutEveryFlatFactorisation countryPlanningNonFactorability
 
 record CountryPlanningBoundary : Set where
   constructor countryPlanningBoundary
@@ -230,7 +224,7 @@ canonicalCountryPlanningBoundary =
 crownRecognitionStillDoesNotFactorAuthority :
   ∀ {Recharted : Set} →
   (rechart : Crown.CrownRecognitionObservation → Recharted) →
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  INF.FactorsThrough
     (λ state → rechart (Crown.crownRecognitionObserver state))
     Crown.indigenousAuthorityOutcome → ⊥
 crownRecognitionStillDoesNotFactorAuthority =
@@ -243,14 +237,6 @@ indigenousOrderNotCreatedByExternalRecognition = refl
 carbonMarketPriceStillNotStewardshipValue :
   CarbonValue.CarbonMarketPriceEqualsSocialCarbonValue → ⊥
 carbonMarketPriceStillNotStewardshipValue = CarbonValue.marketPriceDoesNotEqualSocialValue
-
-------------------------------------------------------------------------
--- 4. LES planning-contract interface.
---
--- Prior LES planning architecture assigns semantic contracts and promotion
--- gates to dashi_agda, while LES owns GIS state, model execution, calibration,
--- optimisation and evidence serialization.  We preserve that direction here.
-------------------------------------------------------------------------
 
 data LESRuntimeResponsibility : Set where
   gisStateConstruction
@@ -311,10 +297,6 @@ dashiContractDoesNotAutoPromoteToLESCalibration :
   DASHIContractImpliesLESNumericalCalibrationPermission → ⊥
 dashiContractDoesNotAutoPromoteToLESCalibration ()
 
-------------------------------------------------------------------------
--- 5. Combined intervention receipt.
-------------------------------------------------------------------------
-
 record QualifiedBNFInterventionReceipt : Set₁ where
   constructor qualifiedBNFInterventionReceipt
   field
@@ -344,10 +326,6 @@ technicalBundleDoesNotAutoPromoteToQualifiedUse ()
 countryAuthorityDoesNotAutoPromoteToModelValidity :
   CountryAuthorityWithoutEmpiricalAdequacyImpliesModelValidityPermission → ⊥
 countryAuthorityDoesNotAutoPromoteToModelValidity ()
-
-------------------------------------------------------------------------
--- Existing source/version facts remain separate.
-------------------------------------------------------------------------
 
 paper2019_2020Mitigation = Model2023.mitigationIs183MillionMg
 nationalSavingsDoesNotMeanTerminalFarmerBenefit =
