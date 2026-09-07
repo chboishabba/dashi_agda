@@ -60,13 +60,15 @@ associationForConsumer inertialResponseConsumer = Assoc.woodwardAssociation
 associationForConsumer persistentImpulseConsumer = Assoc.impulsiveAssociation
 associationForConsumer metricResponseConsumer = Assoc.metricAssociation
 
-observationChannelForConsumer :
-  ReverseConsumer → Obs.GravitationalObservationChannel
-observationChannelForConsumer consumer =
-  Unified.observationChannelForClaim (claimForConsumer consumer)
+observationRouteForConsumer : ReverseConsumer → Unified.ClaimObservationRoute
+observationRouteForConsumer consumer =
+  Unified.observationRouteForClaim (claimForConsumer consumer)
 
 ------------------------------------------------------------------------
--- Consumer-indexed projection.
+-- Consumer-indexed gravitational projection.  The route proof means this
+-- carrier is constructible only when the selected consumer really lands in a
+-- gravitational observation channel.  Inertial and momentum consumers remain
+-- available upstream but cannot be coerced into this receipt.
 ------------------------------------------------------------------------
 
 record AmyGravityReverseSearchProjection : Set where
@@ -102,9 +104,12 @@ record AmyGravityReverseSearchProjection : Set where
     requestClaimMatches : Anti.claim request ≡ derivedClaim
     requestRegimeMatches : Anti.materialRegime request ≡ materialRegime
 
+    observationRoute : Unified.ClaimObservationRoute
+    observationRouteMatchesConsumer :
+      observationRouteForConsumer consumer ≡ observationRoute
     observationChannel : Obs.GravitationalObservationChannel
-    observationChannelMatches :
-      observationChannelForConsumer consumer ≡ observationChannel
+    routeIsGravitational :
+      observationRoute ≡ Unified.gravitationalObservationRoute observationChannel
 
     sourceBoundedReading : String
     sourceBoundedReadingMatchesReceipt :
@@ -113,12 +118,6 @@ record AmyGravityReverseSearchProjection : Set where
     dashiReconstructionScope : String
 
 open AmyGravityReverseSearchProjection public
-
-------------------------------------------------------------------------
--- Concrete Li-Torr/coherent-superconductor projections.  The same contextual
--- mechanism coordinate reaches two different consumers and therefore two
--- different physical observation channels.
-------------------------------------------------------------------------
 
 amyLiTorrFreeFallProjection : AmyGravityReverseSearchProjection
 amyLiTorrFreeFallProjection =
@@ -137,6 +136,7 @@ amyLiTorrFreeFallProjection =
       Anti.freeFallDiscriminator
       refl)
     refl refl
+    (Unified.gravitationalObservationRoute Obs.freeFallEquivalence) refl
     Obs.freeFallEquivalence refl
     (V.boundedReading Amy.amyExoticPropulsionReceipt) refl
     "DASHI reconstruction: test whether a coherent-superconductor gravity-family hypothesis predicts a changed free-fall response"
@@ -158,12 +158,13 @@ amyLiTorrRemoteFieldProjection =
       Anti.externalTestMassDiscriminator
       refl)
     refl refl
+    (Unified.gravitationalObservationRoute Obs.localTestMassAcceleration) refl
     Obs.localTestMassAcceleration refl
     (V.boundedReading Amy.amyExoticPropulsionReceipt) refl
     "DASHI reconstruction: test whether a coherent-superconductor gravity-family hypothesis predicts a remote external-test-mass acceleration"
 
 ------------------------------------------------------------------------
--- Introspective collision: mechanism family alone is too coarse.
+-- Introspective collisions and non-coercion proofs.
 ------------------------------------------------------------------------
 
 liTorrMechanismCollision :
@@ -175,15 +176,23 @@ freeFallAndRemoteClaimsDistinct :
   claimForConsumer freeFallConsumer ≡ claimForConsumer remoteFieldConsumer → ⊥
 freeFallAndRemoteClaimsDistinct ()
 
-freeFallAndRemoteObservationChannelsDistinct :
-  observationChannelForConsumer freeFallConsumer
-    ≡ observationChannelForConsumer remoteFieldConsumer → ⊥
-freeFallAndRemoteObservationChannelsDistinct ()
+freeFallAndRemoteObservationRoutesDistinct :
+  observationRouteForConsumer freeFallConsumer
+    ≡ observationRouteForConsumer remoteFieldConsumer → ⊥
+freeFallAndRemoteObservationRoutesDistinct ()
+
+inertialConsumerDoesNotHaveGravityRoute :
+  observationRouteForConsumer inertialResponseConsumer
+    ≡ Unified.gravitationalObservationRoute Obs.freeFallEquivalence → ⊥
+inertialConsumerDoesNotHaveGravityRoute ()
+
+impulseConsumerDoesNotHaveGravityRoute :
+  observationRouteForConsumer persistentImpulseConsumer
+    ≡ Unified.gravitationalObservationRoute Obs.localTestMassAcceleration → ⊥
+impulseConsumerDoesNotHaveGravityRoute ()
 
 ------------------------------------------------------------------------
--- Ordinary-confounder lane stays outside antigravity promotion.  The existing
--- chart's high-voltage/electrohydrodynamic family remains a contextual ordinary
--- momentum/EM alternative, not an Amy-source-entitled antigravity claim.
+-- Ordinary-confounder lane stays outside antigravity promotion.
 ------------------------------------------------------------------------
 
 amyHighVoltageOrdinaryConfounder : Gravity.MechanismFamily
@@ -202,20 +211,17 @@ highVoltageAssociationIsContextual :
   Assoc.status amyHighVoltageAssociation ≡ Assoc.dashiContextualReconstruction
 highVoltageAssociationIsContextual = refl
 
-------------------------------------------------------------------------
--- Attribution / promotion boundary.
-------------------------------------------------------------------------
-
 record AmyAntigravityObservationBoundary : Set where
   constructor amy-antigravity-observation-boundary
   field
     amyViewpointReceiptIsPhysicalObservation : Bool
     chartMembershipEqualsAmySourceEntitlement : Bool
     historicalMechanismFamilyUniquelyDeterminesModernClaim : Bool
+    everyReverseConsumerIsGravityObservationConsumer : Bool
     dashiReverseProjectionIsAmySourceEntitledClaim : Bool
     sourceReferenceStringIsFullyMigratedAttributedSource : Bool
     consumerSpecificClaimRequired : Bool
-    typedObservationChannelRequired : Bool
+    typedObservationRouteRequired : Bool
     ordinaryHighVoltageConfounderMayBePromotedToAntigravity : Bool
     successfulModernExperimentRetroactivelyProvesAmyViewpoint : Bool
     contextualHistoricalAssociationMayNominateReverseSearchRoute : Bool
@@ -223,4 +229,4 @@ record AmyAntigravityObservationBoundary : Set where
 canonicalAmyAntigravityObservationBoundary : AmyAntigravityObservationBoundary
 canonicalAmyAntigravityObservationBoundary =
   amy-antigravity-observation-boundary
-    false false false false false true true false false true
+    false false false false false false true true false false true
