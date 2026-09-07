@@ -39,6 +39,7 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariation
 import DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact as QTelescope
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanP33QuaternionAdjointNormSquaredExact as AdjointNorm
+import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
 import DASHI.Physics.YangMills.BalabanP33RelaxedRadiusQuaternionL1DefectExact as L1
 import DASHI.Physics.YangMills.BalabanP33RelaxedRadiusQuaternionL1SharpExact as Sharp
 import DASHI.Physics.YangMills.BalabanCMP98SelectedPhysicalUnitCarrierErasureBridgeExact as Erasure
@@ -77,7 +78,7 @@ path13PositiveLinkNormSqBelowRadius :
   ∀ axis site →
   Norm.normSq
     (QTelescope._-q_ (Background.link background axis site) Q.oneQ)
-  ≤ DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact.fourRhoSquare
+  ≤ Relaxed.fourRhoSquare
 path13PositiveLinkNormSqBelowRadius background radius axis site =
   let
     inverseBound = Background.inverseLinkDefectBound radius axis site
@@ -85,7 +86,7 @@ path13PositiveLinkNormSqBelowRadius background radius axis site =
       (Background.link background axis site)
   in
   subst
-    (λ lower → lower ≤ DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact.fourRhoSquare)
+    (λ lower → lower ≤ Relaxed.fourRhoSquare)
     sameNorm inverseBound
 
 path13PositiveLinkQuaternionL1BelowOne2048 :
