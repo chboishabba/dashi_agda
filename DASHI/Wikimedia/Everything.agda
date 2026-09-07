@@ -14,4 +14,5 @@ import DASHI.Wikimedia.SourceProvenanceExact
 import DASHI.Wikimedia.ConceptEntityAlignmentExact
 import DASHI.Wikimedia.NativeEpistemicProjectionExact
 import DASHI.Wikimedia.WikidataPNFPredicateBridgeExact
+import DASHI.Wikimedia.SensibLawWikipediaIngestContractExact
 import DASHI.Wikimedia.MaboNativeWikimediaBridgeExact
