@@ -46,6 +46,10 @@ dashIDialecticNotClaimedAsHegelIdentity ()
 
 ------------------------------------------------------------------------
 -- 2. Dialectical materialism is not mere material primacy nor ideal fusion.
+--
+-- Žižek's source atlas owns the bibliographic calibration; this module only
+-- supplies a bounded comparison category.  It does not claim this enum is
+-- Žižek's terminology or a complete definition of dialectical materialism.
 ------------------------------------------------------------------------
 
 data MaterialistDialecticReading : Set where
@@ -67,6 +71,11 @@ zizekBoundedReadingNotDiscourseOnly ()
 
 ------------------------------------------------------------------------
 -- 3. Levels/pluralism: stage maps and perspective maps are not total orders.
+--
+-- hoe_math owns the assembled pedagogical chart/presentation.  Graves/Beck/
+-- Cowan, Wilber and other cited developmental traditions retain authorship of
+-- their underlying models.  DASHI does not import empirical validity from the
+-- chart and does not treat "higher" as universal authority over every axis.
 ------------------------------------------------------------------------
 
 data PluralMapKind : Set where
@@ -98,6 +107,12 @@ polyphonyDoesNotRequireFinalSynthesis = Polyphony.canonicalNoForcedFinalSynthesi
 ------------------------------------------------------------------------
 -- 4. Representation: object, image, word, institutional designation and
 -- provenance/history remain separable coordinates.
+--
+-- Magritte calibrates image/word/object non-identity; Duchamp calibrates
+-- designation/context; Kosuth explicitly places object/image/definition in one
+-- work; Rauschenberg makes provenance/event history indispensable to the
+-- meaning of a nearly erased visible surface.  These relations are DASHI's
+-- comparative abstraction, not a single doctrine attributed to the artists.
 ------------------------------------------------------------------------
 
 data RepresentationRegister : Set where
@@ -147,7 +162,8 @@ data InterpretationEdge : Set where
   : InterpretationEdge
 
 data LaterInterpretationOwnsUpstreamIntent : Set where
-\data UpstreamArtworkOwnsLaterTheory : Set where
+
+data UpstreamArtworkOwnsLaterTheory : Set where
 
 laterInterpretationDoesNotOwnUpstreamIntent :
   LaterInterpretationOwnsUpstreamIntent → ⊥
