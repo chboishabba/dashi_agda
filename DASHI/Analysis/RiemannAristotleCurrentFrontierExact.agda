@@ -320,7 +320,7 @@ terminalOffFarDecayAloneDoesNotSelectCutoff :
 terminalOffFarDecayAloneDoesNotSelectCutoff = refl
 
 terminalGammaHasNoCutoffCoordinate :
-  GammaDirect.PoleQuotientGammaAllowanceDirectCompilerBoundary.gammaFinalConsumerHasCutoffCoordinate
+  GammaDirect.PoleQuotientGammaAllowanceDirectCompilerBoundary.gammaDependsOnQuarterPeriodCutoff
     GammaDirect.canonicalPoleQuotientGammaAllowanceDirectCompilerBoundary ≡ false
 terminalGammaHasNoCutoffCoordinate = refl
 
