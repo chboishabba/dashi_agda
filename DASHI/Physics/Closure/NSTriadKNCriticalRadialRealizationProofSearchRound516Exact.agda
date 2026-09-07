@@ -115,8 +115,7 @@ round516ClayPromotion = false
 
 round516UpperSquaredPacketSelectorClosedIsTrue :
   round516UpperSquaredPacketSelectorClosed ≡ true
-round516UpperSquaredPacketSelectorClosedIsTrue =
-  Packet.round104ConcreteUpperSquaredPacketBoundaryFluxClosedIsTrue
+round516UpperSquaredPacketSelectorClosedIsTrue = refl
 
 round516PacketBoundaryFluxSameObjectClosedIsTrue :
   round516PacketBoundaryFluxSameObjectClosed ≡ true
