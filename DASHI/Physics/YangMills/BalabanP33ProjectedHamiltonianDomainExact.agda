@@ -180,12 +180,11 @@ record CoerciveFiniteProjectedHamiltonian
 open CoerciveFiniteProjectedHamiltonian public
 
 coerciveProjectedHamiltonian :
-  ∀ {mask} →
-  CoerciveFiniteProjectedHamiltonian mask →
+  ∀ {mask}
+    (package : CoerciveFiniteProjectedHamiltonian mask) →
   FiniteProjectedHamiltonian
     mask
-    (MatrixCoercivity.matrix
-      (CoerciveFiniteProjectedHamiltonian.hessian _))
+    (MatrixCoercivity.matrix (hessian package))
 coerciveProjectedHamiltonian package = record
   { matrixSymmetric = hessianSymmetric package }
 
@@ -245,6 +244,35 @@ assembleFiniteProjectedHamiltonianClosure package = record
   ; matrixRepresentativeSymmetric = projectedHamiltonianMatrixSymmetric package
   }
 
+record FiniteCoerciveProjectedHamiltonianClosure
+    {mask : PhysicalCoordinateMask}
+    (package : CoerciveFiniteProjectedHamiltonian mask) : Set₁ where
+  field
+    closure :
+      FiniteProjectedHamiltonianClosure
+        (coerciveProjectedHamiltonian package)
+
+    physicalFloor : ∀ vector →
+      ProjectedPhysicalDomain
+        (coerciveProjectedHamiltonian package) vector →
+      P33.p33PhysicalFloor
+        * Physical.physicalSU2CoordinateNormSq vector
+      ≤ projectedHamiltonianQuadratic
+          (coerciveProjectedHamiltonian package) vector
+
+open FiniteCoerciveProjectedHamiltonianClosure public
+
+assembleFiniteCoerciveProjectedHamiltonianClosure :
+  ∀ {mask}
+    (package : CoerciveFiniteProjectedHamiltonian mask) →
+  FiniteCoerciveProjectedHamiltonianClosure package
+assembleFiniteCoerciveProjectedHamiltonianClosure package = record
+  { closure =
+      assembleFiniteProjectedHamiltonianClosure
+        (coerciveProjectedHamiltonian package)
+  ; physicalFloor = projectedP33FloorOnPhysicalDomain package
+  }
+
 p33ProjectedHamiltonianInvariantDomainLevel : ProofLevel
 p33ProjectedHamiltonianInvariantDomainLevel = machineChecked
 
@@ -256,6 +284,9 @@ p33ProjectedHamiltonianFiniteSymmetryLevel = machineChecked
 
 p33ProjectedHamiltonianPhysicalFloorLevel : ProofLevel
 p33ProjectedHamiltonianPhysicalFloorLevel = machineChecked
+
+p33ProjectedHamiltonianCoerciveClosureLevel : ProofLevel
+p33ProjectedHamiltonianCoerciveClosureLevel = machineChecked
 
 -- Promotion firewall.
 --
