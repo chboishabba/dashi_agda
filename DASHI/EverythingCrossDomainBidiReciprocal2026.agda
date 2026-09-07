@@ -54,4 +54,7 @@ import DASHI.Core.ReformulationClosureWithoutFibreRefinementBidiExact
 import DASHI.Core.ProvenanceQuorumAdequacyBidiExact
 import DASHI.Core.PairIndexedInformationLossLocusBidiExact
 
+-- Far-and-wide methodology x-pollination.
+import DASHI.Core.PluralEpistemicProgressCrossDomainEverything
+
 import DASHI.Core.CrossDomainBidiReciprocal2026Validation
