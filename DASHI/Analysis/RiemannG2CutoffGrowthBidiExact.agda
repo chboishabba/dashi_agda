@@ -14,9 +14,11 @@ import DASHI.Analysis.RiemannAristotleG2CurrentCutExact as Current
 -- J*Lambda <= pi/2, the same literal near scalar is positively pinned and no
 -- direct or explicit-formula evaluation can manufacture cancellation.
 --
--- Therefore a surviving route must first cross the quarter-period threshold on
--- the SAME taper/cutoff pair, and must then prove that all downstream near/far,
--- Gamma, and cluster consumers remain admissible under that changed cutoff.
+-- Therefore a surviving route must cross the quarter-period threshold on the
+-- SAME taper/cutoff pair. After crossing, J remains a coordinate only of the
+-- finite-near/far Off producer. Gamma and cluster are not cutoff-indexed in the
+-- final pole-quotient API; their downstream compatibility is same-TAPER, not
+-- same-J compatibility.
 ------------------------------------------------------------------------
 
 data CutoffStrategy : Set where
@@ -63,9 +65,15 @@ record DownstreamCutoffCompatibility
   field
     nearCarrierRemainsFinite : Set
     farRemainderFormulaUsesSameCutoff : Set
-    gammaErrorBudgetValidAtSameCutoff : Set
-    clusterMarginComparisonUsesSameCutoff : Set
-    explicitFormulaWindowUsesSameCutoff : Set
+
+    -- Deterministic complement channels are taper-only. These receipts assert
+    -- same literal taper, not fictitious Gamma(J)/cluster(J) laws.
+    gammaBudgetUsesSameLiteralTaper : Set
+    clusterMarginUsesSameLiteralTaper : Set
+
+    -- Explicit-formula route is optional/fallback; if used, its finite window
+    -- must share the actual Off cutoff.
+    explicitFormulaWindowUsesSameOffCutoff : Set
     compatibilityReference : String
 
 open DownstreamCutoffCompatibility public
@@ -155,4 +163,22 @@ canonicalCutoffGrowthBidiBoundary =
     false refl
     true refl
     false refl
-    "The checked Lean pinning theorem forces the RH scalar search out of the fixed narrow-window regime. The next payment is a same-object quarter-period crossing pi/2 < J*Lambda, naturally suggesting J on the inverse taper-width scale (and hence order |t| for the high-ordinate taper when Lambda is order 1/|t|). But crossing is only admission to an oscillatory regime: the same enlarged cutoff must also preserve the literal near/far decomposition, Gamma budget, cluster margin, and explicit-formula window before any cancellation theorem can reach the final consumer."
+    "The checked Lean pinning theorem forces the scalar search out of the fixed narrow-window regime. A surviving Off route needs pi/2 < J*Lambda on the literal taper/cutoff pair. After crossing, preserve the same J only through the finite-near/far Off decomposition. Gamma and cluster remain taper-only and require same-literal-taper compatibility, not Gamma(J) or cluster(J). Crossing is admission to oscillatory analysis, not the cancellation theorem itself. RH is not derived."
+
+------------------------------------------------------------------------
+-- Coordinate correction pins.
+------------------------------------------------------------------------
+
+gammaIsCutoffIndexedDownstream : Bool
+gammaIsCutoffIndexedDownstream = false
+
+gammaIsCutoffIndexedDownstreamIsFalse :
+  gammaIsCutoffIndexedDownstream ≡ false
+gammaIsCutoffIndexedDownstreamIsFalse = refl
+
+clusterIsCutoffIndexedDownstream : Bool
+clusterIsCutoffIndexedDownstream = false
+
+clusterIsCutoffIndexedDownstreamIsFalse :
+  clusterIsCutoffIndexedDownstream ≡ false
+clusterIsCutoffIndexedDownstreamIsFalse = refl
