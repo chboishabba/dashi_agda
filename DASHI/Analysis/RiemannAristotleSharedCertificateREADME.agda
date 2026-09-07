@@ -41,11 +41,20 @@ open import DASHI.Core.Prelude
 -- allowance receipts directly into the existing contradiction consumer; the
 -- strict combined-budget theorem is not a separate research leaf.
 --
--- The genuinely analytic high-ordinate leaves are therefore:
+-- The Off leaf is further decomposed on one common quarter-period cutoff J:
 --
---   * literal universal-pole-quotient signed off evaluation at the selected
---     quarter-period cutoff, with its budget below the assigned A_off;
---   * same-taper Gamma precision, with its budget below the assigned A_Gamma.
+--   D_off <= D_near(J) + D_far(J)
+--         <= B_near(J) + B_far(J)
+--         <= A_off.
+--
+-- Far-tail decay is owned, but J cannot be selected from the far channel alone
+-- because the signed near core changes with J. The live zero-side theorem is the
+-- joint common-cutoff allowance fit on the exact universal pole-quotient taper.
+--
+-- Gamma has no cutoff coordinate. Its terminal theorem is simply the same-taper
+-- assigned allowance fit B_Gamma(g_pole) <= A_Gamma. A concrete epsGamma /
+-- gammaConeEnvelope lineage is recovered historically, but lineage recovery is
+-- a proof route, not part of the terminal consumer API.
 --
 -- Existing representation machinery is reused rather than re-searched.
 -- Uninhabited adapter records remain infrastructure obligations, not fabricated
@@ -77,9 +86,13 @@ import DASHI.Analysis.RiemannG2AdaptiveJLambdaConstantWindowExact
 import DASHI.Analysis.RiemannG2QuarterPeriodAnalyticRouteReconciliationExact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter369Exact
 import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
+import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact
 import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact
+import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact
+import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact
 import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
+import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHAnalyticLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleNearCoreDensityReturnRegression
