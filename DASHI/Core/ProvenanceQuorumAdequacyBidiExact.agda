@@ -7,10 +7,6 @@ import DASHI.Core.ProvenanceSensitiveConsumerAdequacyBidiExact as Provenance
 
 ------------------------------------------------------------------------
 -- HEADCOUNT QUORUM != INDEPENDENT-PROVENANCE QUORUM
---
--- Two visible supporting items may satisfy a headcount threshold while sharing
--- one ultimate provenance root. Independent corroboration therefore requires a
--- separate root-separation receipt, not merely enough supporting documents.
 ------------------------------------------------------------------------
 
 HeadcountQuorumTwo :
@@ -25,7 +21,8 @@ IndependentProvenanceQuorumTwo :
   ∀ {Evidence Root Consumer : Set} →
   Provenance.ProvenanceAdequacyPolicy Evidence Root Consumer →
   Consumer → Evidence → Evidence → Set
-IndependentProvenanceQuorumTwo = Provenance.AdequatePairFor
+IndependentProvenanceQuorumTwo policy consumer left right =
+  Provenance.AdequatePairFor policy consumer left right
 
 independentQuorumCarriesHeadcount :
   ∀ {Evidence Root Consumer : Set}
