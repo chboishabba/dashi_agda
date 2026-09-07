@@ -6,12 +6,13 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact as Salience
 import DASHI.Core.ReformulationClosureWithoutFibreRefinementBidiExact as Reform
 import DASHI.Core.ProvenanceQuorumAdequacyBidiExact as Quorum
+import DASHI.Core.ProvenanceSensitiveConsumerAdequacyBidiExact as Provenance
 import DASHI.Core.PairIndexedInformationLossLocusBidiExact as Loss
 
 ------------------------------------------------------------------------
 -- PLURAL EPISTEMIC PROGRESS METHODOLOGY
 --
--- Useful epistemic progress is not identified with one mechanism.  A consumer
+-- Useful epistemic progress is not identified with one mechanism. A consumer
 -- may progress by narrowing the live hypothesis set, reformulating the question,
 -- establishing provenance independence, or adding genuinely new information
 -- after a projection has collapsed a relevant distinction.
@@ -48,10 +49,10 @@ reformulationRouteMayLeaveFibreDefinitionallySame = Reform.reformulationLeavesFi
 
 headcountRouteDoesNotCreateIndependentProvenance :
   Quorum.IndependentProvenanceQuorumTwo
-    Quorum.Provenance.toyPolicy
-    Quorum.Provenance.targetConsumer
-    Quorum.Provenance.firstReport
-    Quorum.Provenance.secondReport → ⊥
+    Provenance.toyPolicy
+    Provenance.targetConsumer
+    Provenance.firstReport
+    Provenance.secondReport → ⊥
 headcountRouteDoesNotCreateIndependentProvenance =
   Quorum.toyHeadcountDoesNotCreateIndependentQuorum
 
