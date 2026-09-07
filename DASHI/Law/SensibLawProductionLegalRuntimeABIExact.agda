@@ -189,7 +189,7 @@ data ParserCandidateAutomaticallyOccurrence : Set where
 data LegalIRProjectionAutomaticallyApplicable : Set where
 data TypedMeetAutomaticallyViolation : Set where
 data SourceFollowAutomaticallyAuthority : Set where
-\data HistoricalSensibLawRuntimeDefinesFormalSemantics : Set where
+data HistoricalSensibLawRuntimeDefinesFormalSemantics : Set where
 
 sharedSurfaceDoesNotEstablishTypedMeet :
   SharedSurfaceAutomaticallySameTypedMeet → ⊥
