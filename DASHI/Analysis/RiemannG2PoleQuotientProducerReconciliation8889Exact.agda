@@ -20,8 +20,11 @@ import DASHI.Analysis.RiemannG2QuarterPeriodPoleQuotientFinalCompilerExact as Fi
 --   * budget-circularity no-go owned;
 --   * signed off-ordinate evaluation still unpaid.
 --
--- No Lean proof term is transported here.  This owner only corrects the BIDI
+-- No Lean proof term is transported here. This owner only corrects the BIDI
 -- search graph on the exact Agda target sockets already present on this branch.
+-- Later allowance composition additionally proves that the strict combined
+-- budget is compiler output once the producer-assigned channel allowances fit
+-- below the quantitative cluster margin.
 ------------------------------------------------------------------------
 
 record CheckedLeanPoleQuotientReturn8889 : Set where
@@ -111,7 +114,7 @@ LeafRelevant findAnyGammaUpperBound = ⊥
 LeafRelevant repairGammaToSharpWindow = ⊤
 LeafRelevant proveQuarterPeriodOffOrdinateBound = ⊤
 LeafRelevant rebuildFinalComplementCompiler = ⊥
-LeafRelevant proveStrictCombinedBudget = ⊤
+LeafRelevant proveStrictCombinedBudget = ⊥
 
 reproveClusterPositivityPruned : LeafRelevant reproveClusterPositivity -> ⊥
 reproveClusterPositivityPruned x = x
@@ -125,6 +128,10 @@ findAnyGammaUpperBoundPruned x = x
 rebuildFinalComplementCompilerPruned :
   LeafRelevant rebuildFinalComplementCompiler -> ⊥
 rebuildFinalComplementCompilerPruned x = x
+
+strictCombinedBudgetReproofPruned :
+  LeafRelevant proveStrictCombinedBudget -> ⊥
+strictCombinedBudgetReproofPruned x = x
 
 currentAgdaCutStillMarksGammaOpen :
   Current.gammaResidualBudgetClosed Current.canonicalPoleQuotientCurrentCut ≡ false
@@ -183,4 +190,4 @@ canonicalPoleQuotientProducerReconciliationBoundary =
     true refl
     true refl
     false refl
-    "The 8889 checked-Lean return upgrades the pole-quotient cluster leaf from fresh analysis to same-object attachment: a quantitative cluster margin is already owned in Lean, but its proof term is not transported into Agda. The Gamma channel is not 'find any bound' either: a uniform bound exists but is too coarse for the sharp cluster window, so only precision repair on the literal universal pole-quotient taper is live. In parallel, the 8890 quarter-period regime cut leaves the signed off-ordinate bound live only at a crossing cutoff. Once those exact inputs satisfy B_off + B_Gamma < M_cluster, the existing final compiler is reused unchanged."
+    "The 8889 checked-Lean return upgrades the pole-quotient cluster leaf from fresh analysis to same-object attachment: a quantitative cluster margin is already owned in Lean, but its proof term is not transported into Agda. The Gamma channel is not 'find any bound' either: a uniform bound exists but is too coarse for the sharp cluster window, so only precision repair on the literal universal pole-quotient taper is live. In parallel, the 8890 quarter-period regime cut leaves the signed off-ordinate bound live only at one common crossing cutoff. Later channel-allowance composition makes B_off + B_Gamma < M_cluster compiler output once B_off <= A_off, B_Gamma <= A_Gamma, and A_off + A_Gamma < M_cluster are owned; do not schedule a separate strict-combined-budget proof."
