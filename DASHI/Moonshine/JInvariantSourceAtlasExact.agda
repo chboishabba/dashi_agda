@@ -126,7 +126,29 @@ conwayNortonMoonshinePointer =
     false
 
 ------------------------------------------------------------------------
--- 4. Attribution and proof-debt firewall.
+-- 4. Typed source residuals.
+--
+-- The inspected secondary source may schedule primary-source work, but it may
+-- not silently pay it.  These are source/transcription residuals, not new
+-- mathematical conjectures.
+------------------------------------------------------------------------
+
+data JSourceResidual : Set where
+  missingPrimaryLambdaSourceInspection : JSourceResidual
+  missingPrimaryMoonshineSourceInspection : JSourceResidual
+  missingAnalyticLambdaStatementAlignment : JSourceResidual
+  missingThetaFormulaStatementAlignment : JSourceResidual
+  missingBelyiBranchStatementAlignment : JSourceResidual
+  missingMonsterRepresentationIntertwiner : JSourceResidual
+
+preferredLambdaSourceResidual : JSourceResidual
+preferredLambdaSourceResidual = missingPrimaryLambdaSourceInspection
+
+preferredMoonshineSourceResidual : JSourceResidual
+preferredMoonshineSourceResidual = missingPrimaryMoonshineSourceInspection
+
+------------------------------------------------------------------------
+-- 5. Attribution and proof-debt firewall.
 ------------------------------------------------------------------------
 
 record JSourceAttributionBoundary : Set where
@@ -140,10 +162,11 @@ record JSourceAttributionBoundary : Set where
     sourceClaimAutomaticallyCreatesKernelProof : Bool
     monsterConnectionAutomaticallyExplainsBase369 : Bool
     rhAutomaticallyProvesJInvariant : Bool
+    missingPrimaryInspectionIsTypedResidual : Bool
 
 canonicalJSourceAttributionBoundary : JSourceAttributionBoundary
 canonicalJSourceAttributionBoundary =
-  j-source-attribution-boundary true true false false false false false false
+  j-source-attribution-boundary true true false false false false false false true
 
 secondaryReferenceDoesNotPromotePrimaryInspection :
   JSourceAttributionBoundary.secondaryReferenceIsPrimaryInspection
@@ -154,3 +177,8 @@ visualPatternDoesNotBecomeSourceClaim :
   JSourceAttributionBoundary.visualPatternIsSourceEntitledClaim
     canonicalJSourceAttributionBoundary ≡ false
 visualPatternDoesNotBecomeSourceClaim = refl
+
+primaryInspectionDebtRemainsVisible :
+  JSourceAttributionBoundary.missingPrimaryInspectionIsTypedResidual
+    canonicalJSourceAttributionBoundary ≡ true
+primaryInspectionDebtRemainsVisible = refl
