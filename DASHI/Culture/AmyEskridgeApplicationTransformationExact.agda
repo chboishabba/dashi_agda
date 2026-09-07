@@ -28,8 +28,48 @@ amyPOAMSApplicationTransformation = A.application-transformation
    A.uncertaintyModel ∷
    A.integrationWorkflow ∷
    A.tacitExecutionKnowledge ∷ [])
-  "NASA/TM-20205010911; Amy Eskridge captured September 2020 release-review statement; Institute for Exotic Science public materials"
+  "NASA/TM-20205010911; official HAL5 2018 presentation; Amy Eskridge captured September 2020 release-review statement; SEC/entity materials"
   "The public/report-level theory and preliminary experiment do not determine the Institute's later apparatus configuration, calibration, analysis workflow, validation corpus, or privately matured derivative results."
+
+------------------------------------------------------------------------
+-- Source-stage discrimination.
+--
+-- HAL5 2018 establishes HoloChron/Institute identity, stated gravity-
+-- modification R&D mission and Amy/Richard roles. It is a historical survey and
+-- does not itself identify original Institute experimental data or a build
+-- record. The captured 2020 statement asserts private maturation and NASA review
+-- but supplies no paper title, case number, apparatus identity or data artifact.
+------------------------------------------------------------------------
+
+record AmyApplicationSourceStageAudit : Set where
+  constructor amy-application-source-stage-audit
+  field
+    holochronGravityRDStated2018 : Bool
+    holochronGravityRDStated2018IsTrue : holochronGravityRDStated2018 ≡ true
+    hal5ContainsExactInstituteDerivativeIdentity : Bool
+    hal5ContainsExactInstituteDerivativeIdentityIsFalse :
+      hal5ContainsExactInstituteDerivativeIdentity ≡ false
+    hal5ContainsOriginalInstituteExperimentalDataset : Bool
+    hal5ContainsOriginalInstituteExperimentalDatasetIsFalse :
+      hal5ContainsOriginalInstituteExperimentalDataset ≡ false
+    captured2020PrivateMaturationClaimExists : Bool
+    captured2020PrivateMaturationClaimExistsIsTrue :
+      captured2020PrivateMaturationClaimExists ≡ true
+    captured2020SuppliesPaperTitleOrCaseNumber : Bool
+    captured2020SuppliesPaperTitleOrCaseNumberIsFalse :
+      captured2020SuppliesPaperTitleOrCaseNumber ≡ false
+    captured2020SuppliesApparatusOrDatasetIdentity : Bool
+    captured2020SuppliesApparatusOrDatasetIdentityIsFalse :
+      captured2020SuppliesApparatusOrDatasetIdentity ≡ false
+
+canonicalAmyApplicationSourceStageAudit : AmyApplicationSourceStageAudit
+canonicalAmyApplicationSourceStageAudit = amy-application-source-stage-audit
+  true refl
+  false refl
+  false refl
+  true refl
+  false refl
+  false refl
 
 record AmyApplicationTransformationFrontier : Set where
   constructor amy-application-transformation-frontier
@@ -69,3 +109,6 @@ data AmyApplicationReverseTarget : Set where
   acquireSuccessorOrHandover
   acquireIndependentEventLink
   : AmyApplicationReverseTarget
+
+firstAmyApplicationMissingLeaf : AmyApplicationReverseTarget
+firstAmyApplicationMissingLeaf = acquireInstituteDerivedObjectIdentity
