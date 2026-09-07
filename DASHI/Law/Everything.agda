@@ -78,3 +78,4 @@ import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything
 import DASHI.Law.SensibLawProofDirectedCorpusSearchEverything
 import DASHI.Law.SensibLawGovernedOfflineProofSearchEverything
 import DASHI.Law.SensibLawOfflineResearchEngineRoadmapEverything
+import DASHI.Law.SensibLawLegalResearchProviderSourceAtlasExact
