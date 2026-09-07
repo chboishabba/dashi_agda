@@ -18,6 +18,7 @@ FILES=(
   DASHI/Analysis/RiemannG2FreshSameTaperGammaEnvelopeRegression.agda
   DASHI/Analysis/RiemannG2FinalSplitComplementOrderTransportCompilerExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientMinimalAnalyticCutExact.agda
+  DASHI/Analysis/RiemannG2FinalPoleQuotientTwoPaymentCutExact.agda
   DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda
 )
 
