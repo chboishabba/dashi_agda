@@ -117,9 +117,10 @@ r490AuthorityInterfaceDoesNotCreateInhabitant :
   R490.round490AuthorityInterfaceCreatesAuthorityInhabitant ≡ false
 r490AuthorityInterfaceDoesNotCreateInhabitant = refl
 
-r491PhysicalKernelSpecializationAddsNoNSTheorem :
-  R491.round491PhysicalKernelWeldAddsNavierStokesTheorem ≡ false
-r491PhysicalKernelSpecializationAddsNoNSTheorem = refl
+r491PhysicalKernelSpecializationNeedsNoNewNSIdentity :
+  R491.round491PhysicalCellLaplaceWeldNeedsNoNewNSIdentity ≡ true
+r491PhysicalKernelSpecializationNeedsNoNewNSIdentity =
+  R491.round491PhysicalCellLaplaceWeldNeedsNoNewNSIdentityIsTrue
 
 data ScalarBudgetWithoutCompanionIdentityPaysR423 : Set where
 
