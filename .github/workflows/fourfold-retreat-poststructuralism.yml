@@ -10,6 +10,11 @@ on:
       - 'DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda'
       - 'DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda'
       - 'DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda'
+      - 'DASHI/Culture/DASHIDialecticGenealogyAttributionCorrectionExact.agda'
+      - 'DASHI/Culture/HegelDialecticPrimarySourceBoundaryExact.agda'
+      - 'DASHI/Culture/HoeMathLevelsSourceBoundaryExact.agda'
+      - 'DASHI/Culture/AestheticPerceptionEyeTrackingSourceBoundaryExact.agda'
+      - 'DASHI/Culture/DialecticLevelsAestheticConsumerFibreCrossPollinationExact.agda'
       - 'DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda'
       - 'DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda'
       - 'DASHI/Culture/Everything.agda'
@@ -41,6 +46,11 @@ jobs:
             DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda
             DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
             DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda
+            DASHI/Culture/DASHIDialecticGenealogyAttributionCorrectionExact.agda
+            DASHI/Culture/HegelDialecticPrimarySourceBoundaryExact.agda
+            DASHI/Culture/HoeMathLevelsSourceBoundaryExact.agda
+            DASHI/Culture/AestheticPerceptionEyeTrackingSourceBoundaryExact.agda
+            DASHI/Culture/DialecticLevelsAestheticConsumerFibreCrossPollinationExact.agda
             DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda
             DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda
           )
@@ -54,44 +64,43 @@ jobs:
       - name: Kernel-check Rockhill-Foster source boundary
         run: |
           agda --version
-          agda -i . -l standard-library \
-            DASHI/Culture/RockhillFosterFourfoldRetreatSourceBoundaryExact.agda
+          agda -i . -l standard-library DASHI/Culture/RockhillFosterFourfoldRetreatSourceBoundaryExact.agda
 
       - name: Kernel-check poststructuralism generic cross-pollination
-        run: |
-          agda -i . -l standard-library \
-            DASHI/Culture/PoststructuralismFourfoldRetreatCrossPollinationExact.agda
+        run: agda -i . -l standard-library DASHI/Culture/PoststructuralismFourfoldRetreatCrossPollinationExact.agda
 
       - name: Kernel-check Foucault primary-source lane
-        run: |
-          agda -i . -l standard-library \
-            DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda
+        run: agda -i . -l standard-library DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda
 
       - name: Kernel-check Derrida primary-source lane
-        run: |
-          agda -i . -l standard-library \
-            DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda
+        run: agda -i . -l standard-library DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda
 
       - name: Kernel-check named-thinker axis cross-pollination
-        run: |
-          agda -i . -l standard-library \
-            DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
+        run: agda -i . -l standard-library DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
 
       - name: Kernel-check Indigenous plural-authority cross-pollination
-        run: |
-          agda -i . -l standard-library \
-            DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda
+        run: agda -i . -l standard-library DASHI/Culture/FourfoldRetreatIndigenousPluralAuthorityCrossPollinationExact.agda
+
+      - name: Kernel-check DASHI dialectic genealogy correction
+        run: agda -i . -l standard-library DASHI/Culture/DASHIDialecticGenealogyAttributionCorrectionExact.agda
+
+      - name: Kernel-check Hegel primary-source dialectic boundary
+        run: agda -i . -l standard-library DASHI/Culture/HegelDialecticPrimarySourceBoundaryExact.agda
+
+      - name: Kernel-check hoe_math Levels source boundary
+        run: agda -i . -l standard-library DASHI/Culture/HoeMathLevelsSourceBoundaryExact.agda
+
+      - name: Kernel-check aesthetic eye-tracking source boundary
+        run: agda -i . -l standard-library DASHI/Culture/AestheticPerceptionEyeTrackingSourceBoundaryExact.agda
+
+      - name: Kernel-check dialectic/levels/aesthetic consumer fibre
+        run: agda -i . -l standard-library DASHI/Culture/DialecticLevelsAestheticConsumerFibreCrossPollinationExact.agda
 
       - name: Kernel-check dialectic pluralism representation sources
-        run: |
-          agda -i . -l standard-library \
-            DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda
+        run: agda -i . -l standard-library DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda
 
       - name: Kernel-check dialectic pluralism representation cross-pollination
-        run: |
-          agda -i . -l standard-library \
-            DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda
+        run: agda -i . -l standard-library DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda
 
       - name: Kernel-check Culture aggregate
-        run: |
-          agda -i . -l standard-library DASHI/Culture/Everything.agda
+        run: agda -i . -l standard-library DASHI/Culture/Everything.agda
