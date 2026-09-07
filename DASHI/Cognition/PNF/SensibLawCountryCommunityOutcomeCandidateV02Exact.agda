@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairProofSearchBridgeV02Exact as Bridge
 import DASHI.Law.ComparativeSettlerColonialSovereigntySourceBidiExact as Sovereignty
+import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Assessment
 import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as IK
 import DASHI.Core.IntersectionalNonFactorability as INF
 
@@ -85,8 +86,7 @@ uluruCandidateDoesNotResolveCurrentAuthorityScope = refl
 ------------------------------------------------------------------------
 
 candidateDeltaKeepsOutcomeResidualLive :
-  DASHI.Law.SensibLawProofSearchResultAssessmentExact.firstResidualAfterReference
-    Bridge.communityOutcomeCandidateDeltaV02
+  Assessment.firstResidualAfterReference Bridge.communityOutcomeCandidateDeltaV02
   ≡ "affectedCommunityOutcomeResidualV02"
 candidateDeltaKeepsOutcomeResidualLive = refl
 
