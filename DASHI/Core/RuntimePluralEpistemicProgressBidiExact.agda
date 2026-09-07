@@ -6,14 +6,10 @@ import DASHI.Core.BraidedRuntimeProofProvenanceBidiExact as Runtime
 import DASHI.Core.PluralEpistemicProgressMethodologyBidiExact as Method
 import DASHI.Core.PairIndexedInformationLossLocusBidiExact as Loss
 import DASHI.Core.ProvenanceQuorumAdequacyBidiExact as Quorum
+import DASHI.Core.ProvenanceSensitiveConsumerAdequacyBidiExact as Provenance
 
 ------------------------------------------------------------------------
 -- RUNTIME / PROVENANCE <-> PLURAL EPISTEMIC PROGRESS
---
--- Runtime correction is append-only and provenance-bearing.  The plural
--- methodology prevents two collapses: repeated runtime events do not become
--- independent corroboration by count, and a coarse event view cannot recover a
--- fine distinction already erased by its observer through deterministic replay.
 ------------------------------------------------------------------------
 
 runtimeCorrectionAppendsHistory :
@@ -31,6 +27,12 @@ coarseViewCannotRecoverCollapsedPair :
   ≡ Loss.toyDownstream (Loss.toyObserve Loss.y)
 coarseViewCannotRecoverCollapsedPair = Loss.toyCollapsedPairNeverRestored
 
+repeatedEvidenceStillNeedsRootIndependence :
+  Quorum.IndependentProvenanceQuorumTwo
+    Provenance.toyPolicy
+    Provenance.targetConsumer
+    Provenance.firstReport
+    Provenance.secondReport → ⊥
 repeatedEvidenceStillNeedsRootIndependence =
   Quorum.toyHeadcountDoesNotCreateIndependentQuorum
 
