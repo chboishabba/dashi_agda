@@ -11,9 +11,9 @@ import DASHI.Core.RecursiveSelectiveInvalidationParetoTruthMaintenanceBidiExact 
 -- DEPENDENCY-DERIVED MINIMAL INVALIDATION
 --
 -- The recursive owner previously accepted an ExplicitAxisInvalidation supplied
--- by the caller.  This bridge removes the arbitrary-set seam.  Applications
+-- by the caller. This bridge removes the arbitrary-set seam. Applications
 -- declare only the semantic dependency relation between graph artifacts and
--- currently materialised axes.  A changed artifact invalidates exactly those
+-- currently materialised axes. A changed artifact invalidates exactly those
 -- axes for which a proof-bearing affected path reaches an owning artifact.
 ------------------------------------------------------------------------
 
@@ -120,22 +120,17 @@ canonicalMinimalInvalidationReceipt problem =
 ------------------------------------------------------------------------
 -- Exact fixture over the current incremental truth-maintenance graph.
 --
--- Only the diagnostic semantic axis is declared to depend on the model
--- artifact.  The changed observation reaches model by the existing typed edge,
--- so diagnostic invalidation is derived mechanically.  Other axis semantics
--- are intentionally owned elsewhere and are not pulled into the invalidation.
+-- For this consumer, only the diagnostic semantic coordinate is declared to
+-- depend on the model artifact. The changed observation reaches model by the
+-- existing typed edge, so diagnostic invalidation is derived mechanically.
+-- Other semantic axes have no ownership declaration in this application-level
+-- problem and therefore cannot appear in its derived minimal invalidation set.
 ------------------------------------------------------------------------
 
 data AxisArtifactDependency :
     Truth.Artifact → Recursive.Axis0 → Set where
   modelOwnsDiagnostic :
     AxisArtifactDependency Truth.model Recursive.diagnostic0
-  frameOwnsConsequence :
-    AxisArtifactDependency Truth.frame Recursive.consequence0
-  frameOwnsAuthority :
-    AxisArtifactDependency Truth.frame Recursive.authority0
-  frameOwnsRecomputeCost :
-    AxisArtifactDependency Truth.frame Recursive.cost0
 
 observationReachesModel :
   Closure.AffectedClosure Truth.Depends Truth.observation Truth.model
@@ -150,7 +145,7 @@ canonicalDependencyInvalidationProblem =
     Truth.Depends
     AxisArtifactDependency
     Truth.observation
-    "changed observation; derive affected semantic axes from typed reachability and axis ownership"
+    "changed observation; derive affected semantic axes from typed reachability and application-declared axis ownership"
 
 derivedDiagnosticInvalidation :
   DerivedInvalidatedAxis canonicalDependencyInvalidationProblem
@@ -175,7 +170,7 @@ canonicalDerivedInvalidationTargetsDiagnostic = refl
 
 ------------------------------------------------------------------------
 -- Worklist interpretation: each derived invalidation witness is already one
--- complete proof-bearing task.  Grouping/rendering may reorder tasks but cannot
+-- complete proof-bearing task. Grouping/rendering may reorder tasks but cannot
 -- create or discard the underlying invalidation obligation.
 ------------------------------------------------------------------------
 
@@ -197,15 +192,9 @@ taskFromDerivedInvalidation item =
   invalidation-task item
     "worklist task is exactly one dependency-derived invalidation obligation"
 
-data CallerMayAddUnreachableAxisToMinimalInvalidation : Set where
 data WorklistGroupingMayDeleteInvalidationObligation : Set where
 data DependencyReachabilityCreatesAuthority : Set where
-
 data AxisOwnershipAloneCreatesInvalidationWithoutChangedPath : Set where
-
-callerCannotEnlargeMinimalSetByDefinition :
-  CallerMayAddUnreachableAxisToMinimalInvalidation → ⊥
-callerCannotEnlargeMinimalSetByDefinition ()
 
 worklistGroupingDoesNotDeleteObligation :
   WorklistGroupingMayDeleteInvalidationObligation → ⊥
