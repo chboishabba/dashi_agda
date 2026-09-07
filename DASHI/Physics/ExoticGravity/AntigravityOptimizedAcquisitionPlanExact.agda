@@ -2,6 +2,7 @@ module DASHI.Physics.ExoticGravity.AntigravityOptimizedAcquisitionPlanExact wher
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
@@ -16,9 +17,9 @@ import DASHI.Physics.ExoticGravity.SuperconductingSourceVsConstitutiveEnhancemen
 ------------------------------------------------------------------------
 -- OPTIMIZED SAME-APPARATUS ACQUISITION PLAN
 --
--- Proof search should acquire a sufficiently rich source/geometry bundle once
--- rather than paying overlapping first leaves independently.  This module
--- describes the payment target.  It does not construct an empirical receipt.
+-- The plan is a sequence of payment targets, not a sequence of asserted
+-- experimental successes.  Each bundle can advance several existing state
+-- machines only if a real receipt carries the exact per-consumer witnesses.
 ------------------------------------------------------------------------
 
 record FullSourceGeometryBundleReceipt : Set where
@@ -63,13 +64,6 @@ candidateSourceMoveDoesNotCreateFullBundle ()
 
 sourceBundleCandidateMove : Choice.InformationMove
 sourceBundleCandidateMove = Hyper.characteriseSourceMove
-
-------------------------------------------------------------------------
--- Exact hypothetical post-payment frontier.  These states say what would be
--- true if a real FullSourceGeometryBundleReceipt were obtained while retaining
--- already-owned EvidenceClosureState coordinates.  They are planning fixtures,
--- not claims about current experiments.
-------------------------------------------------------------------------
 
 postSourceEvidenceState : Evidence.EvidenceClosureState
 postSourceEvidenceState =
@@ -117,10 +111,7 @@ postSourceEnhancementFirstOpen :
 postSourceEnhancementFirstOpen = refl
 
 ------------------------------------------------------------------------
--- Second optimized bundle: cross phase while recording the external probe.
--- This can potentially attack transition-lock, coupling external-probe/phase,
--- and enhancement phase-matched-field coordinates together, but only with a
--- receipt that proves those exact payments on the same apparatus.
+-- Bundle 2: cross the phase boundary while recording the external probe.
 ------------------------------------------------------------------------
 
 record PhaseProbeBundleReceipt : Set where
@@ -174,10 +165,161 @@ postPhaseEnhancementFirstOpen :
 postPhaseEnhancementFirstOpen = refl
 
 ------------------------------------------------------------------------
--- After the first two optimized bundles the dominant remaining collision is
--- now ordinary-model closure: weak-field GR plus ordinary backgrounds.  This is
--- much narrower than a generic search for anomalous force.
+-- Bundle 3: ordinary-model closure on the exact same apparatus.  Weak-field GR
+-- is solved from the measured source and ordinary EM/mechanical/thermal
+-- backgrounds are closed in the same observable channel.
 ------------------------------------------------------------------------
+
+record OrdinaryModelClosureBundleReceipt : Set where
+  constructor ordinary-model-closure-bundle-receipt
+  field
+    apparatusCarrier : String
+    weakFieldSolverCarrier : String
+    backgroundModelCarrier : String
+
+    evidenceState : Evidence.EvidenceClosureState
+    evidenceBackgroundsPaid : Evidence.backgroundsClosed evidenceState ≡ true
+
+    couplingState : Coupling.AlphaClosureState
+    couplingOrdinaryGRPaid : Coupling.ordinaryGROwned couplingState ≡ true
+    couplingBackgroundsPaid : Coupling.ordinaryBackgroundOwned couplingState ≡ true
+
+    comparatorState : GRComparator.GRComparatorState
+    comparatorWeakFieldPaid :
+      GRComparator.weakFieldPredictionOwned comparatorState ≡ true
+    comparatorBackgroundsPaid : GRComparator.backgroundsOwned comparatorState ≡ true
+
+    enhancementState : Enhancement.EnhancementClosureState
+    enhancementBackgroundsPaid : Enhancement.backgroundsOwned enhancementState ≡ true
+
+open OrdinaryModelClosureBundleReceipt public
+
+data OrdinaryModelClosureAuthority : Set where
+
+ordinaryModelCandidateDoesNotCreateReceipt :
+  OrdinaryModelClosureAuthority → ⊥
+ordinaryModelCandidateDoesNotCreateReceipt ()
+
+ordinaryModelClosureMove : Choice.InformationMove
+ordinaryModelClosureMove = Choice.informationMove
+  Choice.increaseFidelity 3
+  "solve same-apparatus weak-field GR and close ordinary EM/mechanical/thermal backgrounds"
+  "requires the paid full source/geometry bundle and calibrated nuisance-channel models"
+  "same-apparatus ordinary-model closure protocol"
+
+postOrdinaryEvidenceState : Evidence.EvidenceClosureState
+postOrdinaryEvidenceState =
+  Evidence.evidence-closure-state true true true true true false
+
+postOrdinaryCouplingState : Coupling.AlphaClosureState
+postOrdinaryCouplingState =
+  Coupling.alpha-closure-state true true true true true false false
+
+postOrdinaryComparatorState : GRComparator.GRComparatorState
+postOrdinaryComparatorState =
+  GRComparator.gr-comparator-state true true true true true true
+
+postOrdinaryEnhancementState : Enhancement.EnhancementClosureState
+postOrdinaryEnhancementState =
+  Enhancement.enhancement-closure-state true true true true true false
+
+postOrdinaryEvidenceFirstOpen :
+  Evidence.firstOpenEvidenceLeaf postOrdinaryEvidenceState
+    ≡ Evidence.constitutiveResidualLeaf
+postOrdinaryEvidenceFirstOpen = refl
+
+postOrdinaryCouplingFirstOpen :
+  Coupling.firstOpenAlphaLeaf postOrdinaryCouplingState
+    ≡ Coupling.reproducibilityLeaf
+postOrdinaryCouplingFirstOpen = refl
+
+postOrdinaryComparatorClosed :
+  GRComparator.firstOpenGRComparatorLeaf postOrdinaryComparatorState
+    ≡ GRComparator.comparatorClosed
+postOrdinaryComparatorClosed = refl
+
+postOrdinaryEnhancementFirstOpen :
+  Enhancement.firstOpenEnhancementLeaf postOrdinaryEnhancementState
+    ≡ Enhancement.constitutiveRatioLeaf
+postOrdinaryEnhancementFirstOpen = refl
+
+------------------------------------------------------------------------
+-- Bundle 4: independent source-normalised replication plus a declared scaling
+-- sweep.  This is the earliest bundle allowed to pay the constitutive/scaling
+-- leaves; one repeated anomaly at one operating point is insufficient.
+------------------------------------------------------------------------
+
+record ScalingReplicationBundleReceipt : Set where
+  constructor scaling-replication-bundle-receipt
+  field
+    apparatusCarrier : String
+    replicationCarrier : String
+    scalingSweepCarrier : String
+
+    evidenceState : Evidence.EvidenceClosureState
+    evidenceConstitutiveResidualPaid :
+      Evidence.constitutiveResidualOwned evidenceState ≡ true
+
+    couplingState : Coupling.AlphaClosureState
+    couplingReplicationPaid : Coupling.replicated couplingState ≡ true
+    couplingScalingLawPaid : Coupling.scalingLawOwned couplingState ≡ true
+
+    enhancementState : Enhancement.EnhancementClosureState
+    enhancementConstitutiveRatioPaid :
+      Enhancement.constitutiveRatioOwned enhancementState ≡ true
+
+open ScalingReplicationBundleReceipt public
+
+data ScalingReplicationAuthority : Set where
+
+replicationCandidateDoesNotCreateScalingReceipt :
+  ScalingReplicationAuthority → ⊥
+replicationCandidateDoesNotCreateScalingReceipt ()
+
+scalingReplicationMove : Choice.InformationMove
+scalingReplicationMove = Choice.informationMove
+  Choice.replicateMeasurement 4
+  "independently replicate the source-normalised residual while sweeping the declared source coordinate"
+  "requires reproducibility protocol, same-object source reconstruction, and enough operating points to test residual scaling"
+  "replication-plus-scaling protocol"
+
+postScalingEvidenceState : Evidence.EvidenceClosureState
+postScalingEvidenceState =
+  Evidence.evidence-closure-state true true true true true true
+
+postScalingCouplingState : Coupling.AlphaClosureState
+postScalingCouplingState =
+  Coupling.alpha-closure-state true true true true true true true
+
+postScalingEnhancementState : Enhancement.EnhancementClosureState
+postScalingEnhancementState =
+  Enhancement.enhancement-closure-state true true true true true true
+
+postScalingEvidenceBounded :
+  Evidence.firstOpenEvidenceLeaf postScalingEvidenceState
+    ≡ Evidence.boundedNoPromotionLeaf
+postScalingEvidenceBounded = refl
+
+postScalingCouplingClosed :
+  Coupling.firstOpenAlphaLeaf postScalingCouplingState ≡ Coupling.alphaClosed
+postScalingCouplingClosed = refl
+
+postScalingEnhancementClosed :
+  Enhancement.firstOpenEnhancementLeaf postScalingEnhancementState
+    ≡ Enhancement.closedEnhancementSplit
+postScalingEnhancementClosed = refl
+
+------------------------------------------------------------------------
+-- The optimized experimental schedule.  The order is dependency-driven, not a
+-- claim that these declared numeric costs are an empirical optimum.
+------------------------------------------------------------------------
+
+optimizedExperimentalMoves : List Choice.InformationMove
+optimizedExperimentalMoves =
+  sourceBundleCandidateMove ∷
+  phaseProbeCandidateMove ∷
+  ordinaryModelClosureMove ∷
+  scalingReplicationMove ∷ []
 
 record OptimizedAcquisitionBoundary : Set where
   constructor optimized-acquisition-boundary
@@ -188,10 +330,13 @@ record OptimizedAcquisitionBoundary : Set where
     fullSourceBundleCanCloseLiteralGeometryPlanningState : Bool
     phaseProbeBundleMayAttackThreeConsumerFamilies : Bool
     phaseProbeCandidateAutomaticallyPaysThoseConsumers : Bool
-    afterTwoBundlesOrdinaryModelClosureIsDominant : Bool
-    optimizedPlanAutomaticallyProvesAntigravity : Bool
+    ordinaryModelBundleMayCloseGRAndBackgroundConsumersTogether : Bool
+    singleAnomalyPointDefinesScalingLaw : Bool
+    scalingReplicationMayCloseExperimentalCouplingCut : Bool
+    closedExperimentalCouplingCutAutomaticallyProvesAntigravity : Bool
+    closedExperimentalCouplingCutMayAdvanceToAttributedTheoryComparison : Bool
 
 canonicalOptimizedAcquisitionBoundary : OptimizedAcquisitionBoundary
 canonicalOptimizedAcquisitionBoundary =
   optimized-acquisition-boundary
-    false true false true true false true false
+    false true false true true false true false true false true
