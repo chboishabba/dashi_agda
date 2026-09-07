@@ -136,6 +136,7 @@ import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.SituatedClaimAuthoritySystemExact
 import DASHI.Core.KnowledgeContentAuthoritySeparationExact
+import DASHI.Core.TerminalRealisationValidationExact
 
 -- Situated fibre dynamics / consumer-indexed adequacy.
 import DASHI.Core.SituatedActionabilityFibreExact
