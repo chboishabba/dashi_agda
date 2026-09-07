@@ -163,7 +163,6 @@ data ReactivationDeletesElimination : Set where
 data EliminatedOnceMeansForeverFalse : Set where
 data ReactivatedMeansPreviouslyEliminatedWasWrong : Set where
 data CurrentStatusErasesHistory : Set where
-
 data TriggerReferenceCreatesWorldTruth : Set where
 
 reactivationDoesNotDeleteElimination : ReactivationDeletesElimination → ⊥
