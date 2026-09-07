@@ -38,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNFiniteWeightedGramFluxAggregationRound385E
 import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
 import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyOffDiagonalR397WeldRound448Exact as R448
 import DASHI.Physics.Closure.NSTriadKNPhysicalDiagonalEnergySquareEndpointRound457Exact as R457
+import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedDoubleMixedMassRound456Exact as R456
 import DASHI.Physics.Closure.NSTriadKNDiagonalResolventRateFloorRound449Exact as R449
 import DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact as R452
 
@@ -51,15 +52,10 @@ module TerminalFluxEndpoint
       F (Field30.physicalEmbedding physicalSystem)
         (Field30.physicalInverseSquare physicalSystem) S)
     (H : R142.HelicalHalfCalibration S)
-    (Pdata : R225.PhysicalFixedOutputHelicityData
-      (Field30.physicalEmbedding physicalSystem)
-      (Field30.physicalInverseSquare physicalSystem)
-      S L H
-      (D.velocity))
     (viscosityPositive : Positive (Field30.viscosity physicalSystem))
     (unitGap : R450.CanonicalFourierUnitGap physicalSystem)
     (radiusCalibration :
-      R457.R456.PhysicalModeRadiusCalibration
+      R456.PhysicalModeRadiusCalibration
         (Field30.physicalEmbedding physicalSystem)
         (Field30.physicalInverseSquare physicalSystem) S)
     (cutoff : Nat)
@@ -70,33 +66,43 @@ module TerminalFluxEndpoint
     physicalSystem S L H viscosityPositive unitGap radiusCalibration
     cutoff output outputNonzero
 
-  module O = R448.PhysicalOffDiagonalWeld
-    physicalSystem S L H Pdata viscosityPositive cutoff output outputNonzero
+  PhysicalHelicityReceipt : Set
+  PhysicalHelicityReceipt =
+    R225.PhysicalFixedOutputHelicityData
+      (Field30.physicalEmbedding physicalSystem)
+      (Field30.physicalInverseSquare physicalSystem)
+      S L H D.velocity
 
-  terminalFlux : ℚ
-  terminalFlux =
-    R385.sumWeightedFlux (O.OutputFlux.outputPairs cutoff output O.pairPositive)
+  module WithHelicity (Pdata : PhysicalHelicityReceipt) where
 
-  terminalFluxIsOffDiagonal :
-    terminalFlux ≡ D.Diag.Completion.offDiagonal
-  terminalFluxIsOffDiagonal = sym O.r447OffDiagonalIsR397WeightedFlux
+    module O = R448.PhysicalOffDiagonalWeld
+      physicalSystem S L H Pdata viscosityPositive cutoff output outputNonzero
 
-  negativeTerminalFluxPaidByDiagonal :
-    0ℚ - terminalFlux ≤ D.Diag.Completion.diagonal
-  negativeTerminalFluxPaidByDiagonal =
-    subst
-      (λ selected → 0ℚ - selected ≤ D.Diag.Completion.diagonal)
-      terminalFluxIsOffDiagonal
-      D.Diag.Completion.negativeOffDiagonalPaidByDiagonal
+    terminalFlux : ℚ
+    terminalFlux =
+      R385.sumWeightedFlux
+        (O.OutputFlux.outputPairs cutoff output O.pairPositive)
 
-  negativeTerminalFluxEnergySquareEndpoint :
-    0ℚ - terminalFlux
-    ≤ R449.diagonalCeilingAt D.Diag.nu D.Diag.Floor.nuPositive
-        * (R452.fortyEight * D.energySquare)
-  negativeTerminalFluxEnergySquareEndpoint =
-    ℚP.≤-trans
-      negativeTerminalFluxPaidByDiagonal
-      (D.r447DiagonalEnergySquareEndpoint Pdata)
+    terminalFluxIsOffDiagonal :
+      terminalFlux ≡ D.Diag.Completion.offDiagonal
+    terminalFluxIsOffDiagonal = sym O.r447OffDiagonalIsR397WeightedFlux
+
+    negativeTerminalFluxPaidByDiagonal :
+      0ℚ - terminalFlux ≤ D.Diag.Completion.diagonal
+    negativeTerminalFluxPaidByDiagonal =
+      subst
+        (λ selected → 0ℚ - selected ≤ D.Diag.Completion.diagonal)
+        terminalFluxIsOffDiagonal
+        D.Diag.Completion.negativeOffDiagonalPaidByDiagonal
+
+    negativeTerminalFluxEnergySquareEndpoint :
+      0ℚ - terminalFlux
+      ≤ R449.diagonalCeilingAt D.Diag.nu D.Diag.Floor.nuPositive
+          * (R452.fortyEight * D.energySquare)
+    negativeTerminalFluxEnergySquareEndpoint =
+      ℚP.≤-trans
+        negativeTerminalFluxPaidByDiagonal
+        (D.r447DiagonalEnergySquareEndpoint Pdata)
 
 round458NegativeTerminalR397FluxPaid : Bool
 round458NegativeTerminalR397FluxPaid = true
