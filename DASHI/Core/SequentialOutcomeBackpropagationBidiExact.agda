@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Planner
 import DASHI.Core.SequentialPlannerPluralClosureBidiExact as PluralPlanner
+import DASHI.Core.ReformulationClosureWithoutFibreRefinementBidiExact as Reform
 import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Backprop
 import DASHI.Core.DependencySensitiveClosureReopeningBidiExact as Closure
 import DASHI.Core.PluralEpistemicProgressMethodologyBidiExact as Progress
@@ -91,8 +92,8 @@ reformulationConsumerBackprop =
 
 reformulatedTerminalPlanStillExists :
   Planner.SequentialConsumerPlan
-    (PluralPlanner.Reform.answer PluralPlanner.Reform.reformulatedQuestion)
-    PluralPlanner.Reform.liveFibre
+    (Reform.answer Reform.reformulatedQuestion)
+    Reform.liveFibre
 reformulatedTerminalPlanStillExists = PluralPlanner.reformulatedTerminalPlan
 
 adverseModelDoesNotByItselfInvalidateReformulationTerminal :
@@ -135,7 +136,6 @@ data TerminalMeansIrreversible : Set where
 data AdverseMeansChooseOppositeConclusion : Set where
 data IndeterminateMeansDiscardWholePlan : Set where
 data RevisionActionIsAlreadyProgressReceipt : Set where
-
 data UnaffectedDependencyMustReopen : Set where
 
 terminalDoesNotMeanIrreversible : TerminalMeansIrreversible → ⊥
