@@ -107,8 +107,15 @@ import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact
 -- agreement equalities are refl rather than independent physical payments.
 import DASHI.Physics.YangMills.BalabanClayT5PreferredContinuumOSGapExact
 
--- Current terminal scheduler after Eq. (119), Kato-M7 and T5 minimization.
+-- Quantitative T5 -> broad continuum closure compiler.  The finite diagonal
+-- measure sequence, continuum candidate and complete Gram carrier are reused
+-- from the mature quantitative package; only the remaining analytic closure
+-- laws survive as primitive producers.
+import DASHI.Physics.YangMills.BalabanClayT5QuantitativeContinuumClosureCompilerExact
+
+-- Current terminal schedulers after Eq. (119), Kato-M7 and T5 minimization.
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound191Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound192Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
