@@ -15,6 +15,22 @@ on:
       - 'scripts/check_riemann_aristotle_two_zero_return.sh'
       - 'scripts/check_riemann_g2_minimal_final_cut.sh'
       - '.github/workflows/riemann-aristotle-pole-quotient-return.yml'
+  push:
+    branches:
+      - agent/rh-direct-combined-off-cut
+    paths:
+      - 'DASHI/Core/TwoChannelAllowanceCompositionExact.agda'
+      - 'DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotient*.agda'
+      - 'DASHI/Analysis/RiemannAristotleRHFinalAllowanceLeafSchedulerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
+      - 'DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda'
+      - 'DASHI/Analysis/RiemannG2*.agda'
+      - 'scripts/check_riemann_aristotle_pole_quotient_return.sh'
+      - 'scripts/check_riemann_aristotle_two_zero_return.sh'
+      - 'scripts/check_riemann_g2_minimal_final_cut.sh'
+      - '.github/workflows/riemann-aristotle-pole-quotient-return.yml'
   workflow_dispatch:
 
 jobs:
