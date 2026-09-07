@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.SensibLawCountryRealisedRepairProofSearchBridgeV02Exact as Bridge
 import DASHI.Governance.NativeTitleAuthorityLayerExact as NativeTitle
 import DASHI.Governance.IndigenousAuthorityEnvelopeExact as Envelope
+import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- COMMUNITY AUTHORITY ADMISSIBILITY V02
@@ -126,7 +127,7 @@ admitAuthority candidate evidence = admitted-community-authority-v02
 
 communityAuthorityProducerIsAttributionNotLegalAuthorityDiscovery :
   Bridge.producerFor Bridge.communityAuthorityCapacityResidualV02
-  ≡ DASHI.Law.SensibLawProofDirectedSearchIntentExact.attributionProducer
+  ≡ Search.attributionProducer
 communityAuthorityProducerIsAttributionNotLegalAuthorityDiscovery = refl
 
 data RNTBCRolePaysWholeCommunityAuthority : Set where
