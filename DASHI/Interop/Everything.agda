@@ -22,3 +22,4 @@ import DASHI.Interop.GodsEyeViewHighestAlphaObservationChoiceExact
 import DASHI.Interop.SourceDiligenceProofSearchBridgeExact
 import DASHI.Interop.FormalisationGovernanceAttributedSourceMigrationExact
 import DASHI.Interop.SourceAttributionShapePolicyExact
+import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
