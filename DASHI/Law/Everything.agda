@@ -78,4 +78,5 @@ import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything
 import DASHI.Law.SensibLawProofDirectedCorpusSearchEverything
 import DASHI.Law.SensibLawGovernedOfflineProofSearchEverything
 import DASHI.Law.SensibLawOfflineResearchEngineRoadmapEverything
+import DASHI.Law.SensibLawOfficialHCAFullJudgmentLiveReceipt516867cExact
 import DASHI.Law.SensibLawLegalResearchProviderSourceAtlasExact
