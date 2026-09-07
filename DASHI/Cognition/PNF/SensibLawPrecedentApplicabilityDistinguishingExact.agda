@@ -7,11 +7,6 @@ module DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact wh
 -- roles: ratio, dictum, factual finding, concurrence, dissent, policy reason,
 -- submission, etc. Applicability to a later case requires proof-bearing fit;
 -- textual similarity does not establish precedent application.
---
--- This version makes the material-correspondence theory explicit. A consumer
--- cannot manufacture applicability by choosing an arbitrary private `mapsFeature`
--- relation inside the applicability proof itself. Conversely, this module does
--- not impose StableId equality as a universal legal-materiality criterion.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -97,49 +92,32 @@ record CurrentCase : Set where
 open CurrentCase public
 
 ------------------------------------------------------------------------
--- Material factual/doctrinal correspondence is consumer/source-theory indexed.
+-- Legacy material factual/doctrinal correspondence.
 --
--- Examples of correspondence theories may demand literal identity, a recognised
--- doctrinal analogue, or a source-backed mapping. The theory is fixed *before*
--- an applicability witness is supplied.
+-- Kept for compatibility. `mapsFeature` is selected inside the witness, so this
+-- shape is not strong enough by itself for promotion from a finite missing-
+-- feature search. The policy-indexed layer below is the preferred executable
+-- promotion surface.
 ------------------------------------------------------------------------
 
-record ApplicabilityTheory
-  (p : PrecedentProposition)
-  (c : CurrentCase) : Set where
-  constructor applicability-theory
-  field
-    corresponds : Algebra.LegalProposition → Algebra.LegalProposition → Set
-    criterionLabel : String
-    criterionAuthority : Algebra.LegalSourceRef
-    criterionItselfRequiresLegalJustification : Bool
-
-open ApplicabilityTheory public
-
-record FeatureMap
-  {p : PrecedentProposition}
-  {c : CurrentCase}
-  (theory : ApplicabilityTheory p c) : Set where
+record FeatureMap (p : PrecedentProposition) (c : CurrentCase) : Set where
   constructor feature-map
   field
+    mapsFeature : Algebra.LegalProposition → Algebra.LegalProposition → Set
     everyMaterialPrecedentFeatureMapped :
       ∀ {f} → Algebra._∈_ f (materialFeatures p) →
       Σ Algebra.LegalProposition (λ g →
-        Algebra._∈_ g (factsAndFeatures c) ×
-        ApplicabilityTheory.corresponds theory f g)
+        Algebra._∈_ g (factsAndFeatures c) × mapsFeature f g)
 
 open FeatureMap public
 
-record PrecedentApplicable
-  {p : PrecedentProposition}
-  {c : CurrentCase}
-  (theory : ApplicabilityTheory p c) : Set where
+record PrecedentApplicable (p : PrecedentProposition) (c : CurrentCase) : Set where
   constructor precedent-applicable
   field
     jurisdictionCompatible : String
     issueIdentity : issueReference p ≡ issueReference c
     roleCanCarryRule : Set
-    featureMap : FeatureMap theory
+    featureMap : FeatureMap p c
     notOverruledForThisProposition : Set
 
 open PrecedentApplicable public
@@ -169,21 +147,11 @@ record DistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set wher
 
 open DistinguishingSet public
 
-------------------------------------------------------------------------
--- A minimal distinguishing set is relative to an explicit applicability theory.
--- This prevents two opposite errors:
---   * executable mismatch -> universal doctrinal distinction;
---   * arbitrary correspondence relation -> automatic applicability.
-------------------------------------------------------------------------
-
-record MinimalDistinguishingSet
-  {p : PrecedentProposition}
-  {c : CurrentCase}
-  (theory : ApplicabilityTheory p c) : Set where
+record MinimalDistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set where
   constructor minimal-distinguishing-set
   field
     distinguishing : DistinguishingSet p c
-    sufficientAgainstApplication : PrecedentApplicable theory → ⊥
+    sufficientAgainstApplication : PrecedentApplicable p c → ⊥
     eachDifferenceNecessary :
       ∀ {d} →
       Algebra._∈_ d (DistinguishingSet.differences distinguishing) → Set
@@ -191,8 +159,71 @@ record MinimalDistinguishingSet
 open MinimalDistinguishingSet public
 
 ------------------------------------------------------------------------
--- Role-to-authority bridge. This keeps source form separate from proposition
--- role, while allowing ratios/other roles to participate in the universal graph.
+-- Preferred policy-indexed applicability layer.
+--
+-- A correspondence policy is fixed before application is attempted. This avoids
+-- both unsound extremes:
+--   * `same StableId` silently becoming universal materiality;
+--   * the applicability witness privately choosing any relation it needs.
+------------------------------------------------------------------------
+
+record MaterialCorrespondencePolicy
+  (p : PrecedentProposition)
+  (c : CurrentCase) : Set where
+  constructor material-correspondence-policy
+  field
+    corresponds : Algebra.LegalProposition → Algebra.LegalProposition → Set
+    criterionLabel : String
+    criterionAuthority : Algebra.LegalSourceRef
+    criterionItselfRequiresLegalJustification : Bool
+
+open MaterialCorrespondencePolicy public
+
+record PolicyFeatureMap
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (policy : MaterialCorrespondencePolicy p c) : Set where
+  constructor policy-feature-map
+  field
+    everyMaterialFeatureMappedUnderPolicy :
+      ∀ {f} → Algebra._∈_ f (materialFeatures p) →
+      Σ Algebra.LegalProposition (λ g →
+        Algebra._∈_ g (factsAndFeatures c) ×
+        MaterialCorrespondencePolicy.corresponds policy f g)
+
+open PolicyFeatureMap public
+
+record PolicyPrecedentApplicable
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (policy : MaterialCorrespondencePolicy p c) : Set where
+  constructor policy-precedent-applicable
+  field
+    jurisdictionCompatibleUnderPolicy : String
+    issueIdentityUnderPolicy : issueReference p ≡ issueReference c
+    roleCanCarryRuleUnderPolicy : Set
+    policyFeatureMap : PolicyFeatureMap policy
+    notOverruledForThisPropositionUnderPolicy : Set
+
+open PolicyPrecedentApplicable public
+
+record PolicyMinimalDistinguishingSet
+  {p : PrecedentProposition}
+  {c : CurrentCase}
+  (policy : MaterialCorrespondencePolicy p c) : Set where
+  constructor policy-minimal-distinguishing-set
+  field
+    policyDistinguishing : DistinguishingSet p c
+    sufficientAgainstPolicyApplication :
+      PolicyPrecedentApplicable policy → ⊥
+    eachPolicyDifferenceNecessary :
+      ∀ {d} →
+      Algebra._∈_ d (DistinguishingSet.differences policyDistinguishing) → Set
+
+open PolicyMinimalDistinguishingSet public
+
+------------------------------------------------------------------------
+-- Role-to-authority bridge.
 ------------------------------------------------------------------------
 
 roleAuthority : JudgmentPropositionRole → Algebra.AuthorityRole
@@ -214,9 +245,8 @@ data SameCaseMeansSameAuthorityRole : Set where
 data SimilarFactsAutomaticallyApplyPrecedent : Set where
 data DistinctionAutomaticallyOverrulesPrecedent : Set where
 data DissentIsBindingRatioBySourceContainer : Set where
-data ApplicabilityMayChoosePrivateCorrespondenceTheory : Set where
-
-data OneCorrespondenceTheoryIsUniversalMateriality : Set where
+data LegacyFeatureMapSupportsExecutablePromotionByItself : Set where
+data OneCorrespondencePolicyIsUniversalMateriality : Set where
 
 sameCaseDoesNotFlattenRoles : SameCaseMeansSameAuthorityRole → ⊥
 sameCaseDoesNotFlattenRoles ()
@@ -230,9 +260,10 @@ distinguishingDoesNotOverrule ()
 dissentDoesNotBecomeBindingRatio : DissentIsBindingRatioBySourceContainer → ⊥
 dissentDoesNotBecomeBindingRatio ()
 
-applicabilityUsesSuppliedTheory : ApplicabilityMayChoosePrivateCorrespondenceTheory → ⊥
-applicabilityUsesSuppliedTheory ()
+legacyFeatureMapDoesNotSupportSafeSearchPromotion :
+  LegacyFeatureMapSupportsExecutablePromotionByItself → ⊥
+legacyFeatureMapDoesNotSupportSafeSearchPromotion ()
 
-correspondenceTheoryDoesNotBecomeUniversalLaw :
-  OneCorrespondenceTheoryIsUniversalMateriality → ⊥
-correspondenceTheoryDoesNotBecomeUniversalLaw ()
+correspondencePolicyDoesNotBecomeUniversalLaw :
+  OneCorrespondencePolicyIsUniversalMateriality → ⊥
+correspondencePolicyDoesNotBecomeUniversalLaw ()
