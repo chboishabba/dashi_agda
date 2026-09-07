@@ -22,6 +22,8 @@ import DASHI.Law.SensibLawOfficialJudgmentResourceDiscoveryExact as JudgmentReso
 import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextMaterializationExact as CanonicalText
 import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextPnfHandoffExact as JudgmentPnf
 import DASHI.Law.SensibLawResidualBoundGovernedAcquisitionParityExact as BoundAcquisition
+import DASHI.Law.SensibLawCanonicalJudgmentCitationCandidateExtractionExact as CitationCandidates
+import DASHI.Law.SensibLawReviewedJudgmentCitationTreatmentGateExact as CitationReview
 
 ------------------------------------------------------------------------
 -- OFFLINE / GOVERNED-ONLINE RESEARCH ENGINE CAPSTONE
@@ -38,18 +40,21 @@ import DASHI.Law.SensibLawResidualBoundGovernedAcquisitionParityExact as BoundAc
 --   -> immutable source revision
 --   -> deterministic canonical text materialization
 --   -> existing evidential/PNF bridge ABI
---   -> reviewed proposition/citation/reasoning/condition extraction
+--   -> paragraph-located citation candidates / lexical hints
+--   -> explicit locator-bound reviewed treatment decision
+--   -> existing proposition reasoning graph edge
 --   -> append-only world/research memory
 --   -> frontier delta
 --   -> next search
 --
--- The introspective repair is now explicit in the preferred path: merely seeing
--- a relevant source is not enough to schedule it.  BoundAcquisition requires the
--- exact live open residual, selected hypothesis, target proposition, scheduled
--- producer and jurisdiction to agree before governed research acquisition may be
--- executed.  The resulting permit still does not pay semantics or close the
--- consumer.  Current Rust head validation and the one-request full-DOCX live
--- receipt remain open coordinates.
+-- The introspective repair is explicit at both acquisition and interpretation
+-- boundaries.  Seeing a relevant source does not schedule acquisition until the
+-- live residual/proposition/producer/hypothesis are bound.  Seeing a citation or
+-- treatment word in canonical text does not create CitationUse/ReasoningRole
+-- until an explicit reviewed decision matches the exact candidate locator and
+-- citation and supplies reviewer/evidence/proposition coordinates.  Neither step
+-- automatically pays semantics, closes the consumer, establishes ratio, or
+-- creates current authority.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -88,6 +93,12 @@ record OfflineResearchEngineBoundary : Set where
     residualBoundGovernedAcquisitionImplemented : Bool
     residualBoundGovernedAcquisitionImplementedIsTrue :
       residualBoundGovernedAcquisitionImplemented ≡ true
+    sourceLocatedCitationCandidateExtractionImplemented : Bool
+    sourceLocatedCitationCandidateExtractionImplementedIsTrue :
+      sourceLocatedCitationCandidateExtractionImplemented ≡ true
+    explicitCitationReviewGateImplemented : Bool
+    explicitCitationReviewGateImplementedIsTrue :
+      explicitCitationReviewGateImplemented ≡ true
     fullJudgmentLiveAcquisitionObserved : Bool
     fullJudgmentLiveAcquisitionObservedIsFalse :
       fullJudgmentLiveAcquisitionObserved ≡ false
@@ -105,6 +116,8 @@ record OfflineResearchEngineBoundary : Set where
 canonicalOfflineResearchEngineBoundary : OfflineResearchEngineBoundary
 canonicalOfflineResearchEngineBoundary =
   offlineResearchEngineBoundary
+    true refl
+    true refl
     true refl
     true refl
     true refl
@@ -204,6 +217,16 @@ selectedResidualBoundGovernedAcquisitionBoundary :
   BoundAcquisition.ResidualBoundGovernedAcquisitionBoundary
 selectedResidualBoundGovernedAcquisitionBoundary =
   BoundAcquisition.canonicalResidualBoundGovernedAcquisitionBoundary
+
+selectedCitationCandidateExtractionBoundary :
+  CitationCandidates.CanonicalJudgmentCitationCandidateBoundary
+selectedCitationCandidateExtractionBoundary =
+  CitationCandidates.canonicalCanonicalJudgmentCitationCandidateBoundary
+
+selectedCitationReviewGateBoundary :
+  CitationReview.ReviewedJudgmentCitationTreatmentGateBoundary
+selectedCitationReviewGateBoundary =
+  CitationReview.canonicalReviewedJudgmentCitationTreatmentGateBoundary
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
