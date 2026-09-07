@@ -21,7 +21,7 @@ rustBranch : String
 rustBranch = "agent/governed-online-r6-v2"
 
 rustSourceHead : String
-rustSourceHead = "dfee0176b83c38e7bb88488b1246d79bc0206883"
+rustSourceHead = "9c3007be97f7e4a1e9a8bc9c7c85b92368515935"
 
 record OfficialAcquisitionResearchHandoffBoundary : Set where
   constructor officialAcquisitionResearchHandoffBoundary
