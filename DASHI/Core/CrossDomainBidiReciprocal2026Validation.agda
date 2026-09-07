@@ -53,3 +53,6 @@ import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact
 import DASHI.Core.ReformulationClosureWithoutFibreRefinementBidiExact
 import DASHI.Core.ProvenanceQuorumAdequacyBidiExact
 import DASHI.Core.PairIndexedInformationLossLocusBidiExact
+
+-- Far-and-wide methodology x-pollination into planning, governance, law and runtime.
+import DASHI.Core.PluralEpistemicProgressCrossDomainEverything
