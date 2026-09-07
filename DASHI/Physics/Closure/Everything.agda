@@ -99,21 +99,25 @@ import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Ex
 import DASHI.Physics.Closure.NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
 
--- R487-R491 return to the canonical direct R423 Clay consumer on current
--- master. R487 compiles theorem-bearing fixed-output signed payments plus one
--- cutoff-uniform sum-of-budgets theorem into the exact R423 payment. R488 makes
--- local payments the first missing producer. R489 then orders the local leaf.
--- R490 isolates the positive-rate Laplace identity as standard analysis
--- authority, and R491 shows that any such scalar realization for R443's literal
--- cauchyEntry specializes directly to the R446 physical cell kernel. Thus no
--- extra Navier--Stokes kernel-identification theorem remains between standard
--- Laplace authority and the genuine same-output/same-scale signed spacetime
--- estimate. R423 remains the terminal consumer throughout.
+-- R487-R493 return to the canonical direct R423 Clay consumer while restoring
+-- the same-object firewall. R487 compiles theorem-bearing fixed-output signed
+-- payments plus one cutoff-uniform sum-of-budgets theorem into the scalar R423
+-- shape. R488 makes local payments the first producer. R489 records that direct
+-- signed payment is the canonical physical route and that Laplace is optional.
+-- R490/R491 retain the standard positive-rate Laplace producer lane without
+-- making it mandatory. R492 then requires an external theorem identifying the
+-- fixed-output scalar aggregate with the literal integrated R420/R439
+-- quadratic-companion observable before constructing the Clay-facing R423
+-- payment. R493 schedules that same-object weld first, followed by the genuine
+-- same-output/same-scale signed spacetime estimate and finally the cutoff-
+-- uniform fibre-budget sum.
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPaymentsToR423Round487Exact
 import DASHI.Physics.Closure.NSTriadKNR423FixedOutputProducerProofSearchRound488Exact
+import DASHI.Physics.Closure.NSTriadKNR423LocalPaymentPrerequisiteRound489Exact
 import DASHI.Physics.Closure.NSTriadKNPositiveRateLaplaceAuthorityRound490Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact
-import DASHI.Physics.Closure.NSTriadKNR423LocalPaymentPrerequisiteRound489Exact
+import DASHI.Physics.Closure.NSTriadKNStrictFixedOutputCompanionToR423Round492Exact
+import DASHI.Physics.Closure.NSTriadKNStrictR423ProofSearchRound493Exact
 
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
@@ -138,3 +142,4 @@ import DASHI.Physics.Closure.TSFVActionPhaseWeightSeparationExact
 -- TSFV contributes history/projection non-factorability only; it is not promoted
 -- into a multiverse or anthropic-selection theorem.
 import DASHI.Physics.Closure.TSFVMultiverseViabilityCrossPollinationExact
+import DASHI.Physics.Closure.MultiverseAttractorDiscriminatorBidiExact
