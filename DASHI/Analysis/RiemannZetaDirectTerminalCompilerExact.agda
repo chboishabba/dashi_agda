@@ -15,6 +15,9 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as 
 import DASHI.Analysis.RiemannAristotlePoleQuotientClusterMarginTargetExact as Cluster
 import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact as Final
 import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact as Core
+import DASHI.Analysis.RiemannG2CertifiedFiniteNearEvaluationCompilerExact as CertifiedNear
+import DASHI.Analysis.RiemannG2CertifiedFiniteNearToOffPaymentExact as CertifiedOff
+import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeCompilerExact as FreshGamma
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannZetaTerminalPaymentCompressionExact as Cut
 
@@ -161,6 +164,21 @@ gammaFinalPaymentCompiles :
   Gamma.PoleQuotientGammaAllowanceDirectCompilerBoundary.finalGammaAllowancePaymentCompiles
     Gamma.canonicalPoleQuotientGammaAllowanceDirectCompilerBoundary ≡ true
 gammaFinalPaymentCompiles = refl
+
+certifiedFiniteSumCompilesMinimalSelectedPayment :
+  CertifiedNear.CertifiedFiniteNearCompilerBoundary.certifiedFiniteSumCompilesMinimalSelectedPayment
+    CertifiedNear.canonicalCertifiedFiniteNearCompilerBoundary ≡ true
+certifiedFiniteSumCompilesMinimalSelectedPayment = refl
+
+certifiedFiniteRouteCompilesTerminalOffPayment :
+  CertifiedOff.CertifiedFiniteNearOffBoundary.finiteCertificateRouteCompilesTerminalOffPayment
+    CertifiedOff.canonicalCertifiedFiniteNearOffBoundary ≡ true
+certifiedFiniteRouteCompilesTerminalOffPayment = refl
+
+freshGammaEnvelopeCompilesTerminalPayment :
+  FreshGamma.FreshSameTaperGammaEnvelopeBoundary.freshEnvelopeAllowanceFitCompilesFinalPayment
+    FreshGamma.canonicalFreshSameTaperGammaEnvelopeBoundary ≡ true
+freshGammaEnvelopeCompilesTerminalPayment = refl
 
 analyticCoresCompileExistingPayments :
   Core.FinalPoleQuotientAnalyticCoreBoundary.analyticCoresPlusAttachmentsCompileExistingPayments
