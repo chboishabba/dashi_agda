@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Cognition.PNF.SensibLawCountryRelationalLossGenocideBoundaryExact as Genocide
+import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as ElementAlgebra
 
 ------------------------------------------------------------------------
 -- Genocide Convention as a proper WrongType fibre.
@@ -64,6 +65,15 @@ data ElementState : Set where
   elementFailed
   elementOpen
   : ElementState
+
+axisLegalElementKind : ConventionElementAxis → ElementAlgebra.LegalElementKind
+axisLegalElementKind protectedGroupAxis = ElementAlgebra.statutoryElement
+axisLegalElementKind enumeratedActAxis = ElementAlgebra.statutoryElement
+axisLegalElementKind specificIntentAxis = ElementAlgebra.mentalStateElement
+
+specificIntentIsMentalStateElement :
+  axisLegalElementKind specificIntentAxis ≡ ElementAlgebra.mentalStateElement
+specificIntentIsMentalStateElement = refl
 
 record ConventionElementState : Set where
   constructor convention-element-state
@@ -215,6 +225,10 @@ data POSIWIDAutomaticallySatisfiesSpecificIntent : Set where
 data BringingThemHomeFindingAutomaticallyCreatesCriminalConviction : Set where
 data AlternativeRouteAutomaticallyEstablishesAlternativeWrong : Set where
 
+data WrongTypeIdentityAutomaticallyProvesAllElements : Set where
+
+data ElementClosureAutomaticallyChoosesForum : Set where
+
 conventionFailureDoesNotMeanNoWrong :
   ConventionGenocideFailureMeansNoWrongOccurred → ⊥
 conventionFailureDoesNotMeanNoWrong ()
@@ -234,6 +248,13 @@ bringingThemHomeDoesNotAutoBecomeConviction ()
 reverseRouteDoesNotEstablishDestination :
   AlternativeRouteAutomaticallyEstablishesAlternativeWrong → ⊥
 reverseRouteDoesNotEstablishDestination ()
+
+wrongTypeIdentityDoesNotProveElements :
+  WrongTypeIdentityAutomaticallyProvesAllElements → ⊥
+wrongTypeIdentityDoesNotProveElements ()
+
+elementClosureDoesNotChooseForum : ElementClosureAutomaticallyChoosesForum → ⊥
+elementClosureDoesNotChooseForum ()
 
 ------------------------------------------------------------------------
 -- Existing owner remains the legal-definition authority surface.
