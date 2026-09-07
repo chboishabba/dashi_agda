@@ -9,10 +9,6 @@ import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
 
 ------------------------------------------------------------------------
 -- ATTRIBUTION-PRESERVING MULTI-SCALE FINGERPRINT
---
--- Every scale prediction retains the exact attribution/proof-lineage carrier
--- for the prediction actually used in the physical fingerprint.  Attribution
--- cannot be dropped merely because several scales are aggregated.
 ------------------------------------------------------------------------
 
 record AttributedScalePrediction : Set where
@@ -37,7 +33,7 @@ record AttributedScaleComparison : Set where
     comparisonLineage :
       Attr.SinglePredictionComparisonLineage
         (attributedPrediction attributedScalePrediction)
-        (Multi.observation scaleComparison)
+        (Multi.observation (Multi.scaleObservation scaleComparison))
 
 open AttributedScaleComparison public
 
@@ -81,7 +77,8 @@ record MultiScaleAttributionBoundary : Set where
     genericComparisonLineageMayFloatAcrossScaleInputs : Bool
     derivedCrossScaleComparisonIsExternalSourceClaim : Bool
     exactPredictionIdentityRequiredAtEveryScale : Bool
+    scaleContextMayBeDroppedDuringAttribution : Bool
 
 canonicalMultiScaleAttributionBoundary : MultiScaleAttributionBoundary
 canonicalMultiScaleAttributionBoundary =
-  multi-scale-attribution-boundary false false false false false true
+  multi-scale-attribution-boundary false false false false false true false
