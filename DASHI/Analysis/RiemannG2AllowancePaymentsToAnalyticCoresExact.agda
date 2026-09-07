@@ -12,6 +12,7 @@ import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as Wind
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2CertifiedFiniteNearToOffPaymentExact as Certified
+import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeCompilerExact as FreshGamma
 
 ------------------------------------------------------------------------
 -- TERMINAL PAYMENT -> MINIMAL ANALYTIC CORE FACTORIZATION
@@ -90,13 +91,7 @@ gammaPaymentRoundTrip :
 gammaPaymentRoundTrip payment = refl
 
 ------------------------------------------------------------------------
--- Concrete highest-alpha consequence for the new certified finite-near route.
---
--- A proof-carrying finite-near certificate plus the already-separated transport,
--- far-fit and slack receipts already compiles a terminal Off payment. Therefore
--- it also compiles the minimal OffAnalyticCore. The remaining search obligation
--- is inhabitance of that finite packet; there is no additional analytic-core
--- theorem between the packet and the preferred terminal API.
+-- Concrete Off consequence: proof-carrying finite near -> minimal Off core.
 ------------------------------------------------------------------------
 
 certifiedFiniteNearUpperToOffAnalyticCore :
@@ -137,6 +132,40 @@ certifiedFiniteNearUpperCorePaymentRoundTrip :
   ≡ Certified.compileCertifiedFiniteNearUpperOffPayment packet
 certifiedFiniteNearUpperCorePaymentRoundTrip packet = refl
 
+------------------------------------------------------------------------
+-- Concrete Gamma consequence: fresh same-taper envelope -> minimal Gamma core.
+--
+-- The new fresh-envelope route on the exact final taper deliberately bypasses
+-- historical 8889-source identity. Once its response upper theorem and assigned
+-- allowance fit are present, the preferred GammaAnalyticCore is compiler output.
+------------------------------------------------------------------------
+
+freshGammaEnvelopeToAnalyticCore :
+  (envelope : FreshGamma.FreshSameTaperGammaEnvelope) →
+  FreshGamma.FreshSameTaperGammaAllowanceInput envelope →
+  Core.GammaAnalyticCore
+freshGammaEnvelopeToAnalyticCore envelope input =
+  gammaPaymentToAnalyticCore
+    (FreshGamma.compileFreshSameTaperGammaAllowancePayment envelope input)
+
+freshGammaEnvelopeToAttachment :
+  (envelope : FreshGamma.FreshSameTaperGammaEnvelope) →
+  (input : FreshGamma.FreshSameTaperGammaAllowanceInput envelope) →
+  Core.GammaRepresentationAttachment
+    (freshGammaEnvelopeToAnalyticCore envelope input)
+freshGammaEnvelopeToAttachment envelope input =
+  gammaPaymentToRepresentationAttachment
+    (FreshGamma.compileFreshSameTaperGammaAllowancePayment envelope input)
+
+freshGammaCorePaymentRoundTrip :
+  (envelope : FreshGamma.FreshSameTaperGammaEnvelope) →
+  (input : FreshGamma.FreshSameTaperGammaAllowanceInput envelope) →
+  Core.compileGammaAllowancePayment
+    (freshGammaEnvelopeToAnalyticCore envelope input)
+    (freshGammaEnvelopeToAttachment envelope input)
+  ≡ FreshGamma.compileFreshSameTaperGammaAllowancePayment envelope input
+freshGammaCorePaymentRoundTrip envelope input = refl
+
 record AllowancePaymentCoreFactorizationBoundary : Set where
   constructor allowance-payment-core-factorization-boundary
   field
@@ -155,12 +184,17 @@ record AllowancePaymentCoreFactorizationBoundary : Set where
     certifiedFiniteNearRouteReachesMinimalOffCoreIsTrue :
       certifiedFiniteNearRouteReachesMinimalOffCore ≡ true
 
+    freshSameTaperRouteReachesMinimalGammaCore : Bool
+    freshSameTaperRouteReachesMinimalGammaCoreIsTrue :
+      freshSameTaperRouteReachesMinimalGammaCore ≡ true
+
     certifiedFiniteNearPacketInhabitedHere : Bool
     certifiedFiniteNearPacketInhabitedHereIsFalse :
       certifiedFiniteNearPacketInhabitedHere ≡ false
 
-    gammaCoreInhabitedHere : Bool
-    gammaCoreInhabitedHereIsFalse : gammaCoreInhabitedHere ≡ false
+    freshGammaEnvelopeInhabitedHere : Bool
+    freshGammaEnvelopeInhabitedHereIsFalse :
+      freshGammaEnvelopeInhabitedHere ≡ false
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
@@ -171,6 +205,7 @@ canonicalAllowancePaymentCoreFactorizationBoundary =
   allowance-payment-core-factorization-boundary
     false refl
     false refl
+    true refl
     true refl
     true refl
     false refl
