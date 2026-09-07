@@ -10,6 +10,8 @@ import DASHI.Core.SequentialOutcomeBackpropagationBidiExact
 -- Diagnosis-fibre debugging: keep multiple causal/representational explanations
 -- live after an adverse or indeterminate result, then select the next debugging
 -- observation by strict diagnosis-fibre narrowing rather than raw magnitude.
+-- Dependency weighting is separate again: priority is current consumer/graph
+-- consequence, not signal size, confidence, probability, or authority.
 import DASHI.Core.DiagnosisFibreSalienceSchedulerBidiExact
 import DASHI.Core.DiagnosisExperimentPortfolioBidiExact
 import DASHI.Core.DependencyWeightedDiagnosisSchedulerBidiExact
