@@ -12,7 +12,10 @@ import DASHI.Wikimedia.IdentifierExact
 import DASHI.Wikimedia.NativeStatementExact
 import DASHI.Wikimedia.SourceProvenanceExact
 import DASHI.Wikimedia.ConceptEntityAlignmentExact
+import DASHI.Wikimedia.NativeSnakPNFLogicalForceExact
 import DASHI.Wikimedia.NativeEpistemicProjectionExact
 import DASHI.Wikimedia.WikidataPNFPredicateBridgeExact
 import DASHI.Wikimedia.SensibLawWikipediaIngestContractExact
+import DASHI.Wikimedia.NativeConcreteQidGraphProjectionExact
 import DASHI.Wikimedia.MaboNativeWikimediaBridgeExact
+import DASHI.Wikimedia.MaboConcreteQidGraphProjectionExact
