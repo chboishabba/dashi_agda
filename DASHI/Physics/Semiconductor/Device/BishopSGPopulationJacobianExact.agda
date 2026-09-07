@@ -36,12 +36,8 @@ faceAt :
   Unit.PositiveUnitIntervalPoint drop →
   BishopReal.ℝ → BishopReal.ℝ →
   SG.ConcreteBishopFaceState
-faceAt drop chart left right = record
-  { SG.leftPopulation = left
-  ; SG.rightPopulation = right
-  ; SG.drop = drop
-  ; SG.dropInPositiveUnitInterval = chart
-  }
+faceAt drop chart left right =
+  SG.concreteBishopFaceState left right drop chart
 
 forwardCoefficient :
   ∀ {drop} → Unit.PositiveUnitIntervalPoint drop → BishopReal.ℝ
@@ -153,12 +149,11 @@ open PopulationJacobianRow public
 exactPopulationJacobianRow :
   ∀ {drop} (chart : Unit.PositiveUnitIntervalPoint drop) →
   PopulationJacobianRow drop chart
-exactPopulationJacobianRow chart = record
-  { dJdLeftPopulation = forwardCoefficient chart
-  ; dJdRightPopulation = rightJacobianCoefficient chart
-  ; leftCoefficientExact = BishopP.≃-refl
-  ; rightCoefficientExact = BishopP.≃-refl
-  }
+exactPopulationJacobianRow chart = populationJacobianRow
+  (forwardCoefficient chart)
+  (rightJacobianCoefficient chart)
+  BishopP.≃-refl
+  BishopP.≃-refl
 
 ------------------------------------------------------------------------
 -- Firewalls / remaining nonlinear block.
