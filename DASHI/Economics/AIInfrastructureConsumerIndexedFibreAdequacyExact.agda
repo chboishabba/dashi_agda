@@ -4,6 +4,9 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact as Fibre
+import DASHI.Core.SituatedActionabilityFibreExact as ActionFibre
+import DASHI.Core.TrajectoryRecoveryFibreExact as RecoveryFibre
+import DASHI.Core.MultiaxialIncidenceFibreExact as IncidenceFibre
 import DASHI.Economics.DashiTradeAIInfrastructureMarketCrossPollinationExact as Market
 import DASHI.Economics.AIInfrastructureGenericFibreAdaptersExact as Generic
 
@@ -44,10 +47,7 @@ observeAIInfra impairedRecovery = recoveredCapacitySurface
 observeAIInfra publicLossRecovery = recoveredCapacitySurface
 
 answerAIInfra : AIInfraConsumer → AIInfraState → AIInfraAnswer
-answerAIInfra headlineDemandConsumer cleanExpansion = demandStrongAnswer
-answerAIInfra headlineDemandConsumer crowdedExpansion = demandStrongAnswer
-answerAIInfra headlineDemandConsumer impairedRecovery = demandStrongAnswer
-answerAIInfra headlineDemandConsumer publicLossRecovery = demandStrongAnswer
+answerAIInfra headlineDemandConsumer _ = demandStrongAnswer
 answerAIInfra refinancingConsumer cleanExpansion = refinanceAvailableAnswer
 answerAIInfra refinancingConsumer crowdedExpansion = refinanceUnavailableAnswer
 answerAIInfra refinancingConsumer impairedRecovery = refinanceUnavailableAnswer
@@ -71,11 +71,6 @@ aiInfrastructureFibreSystem =
     AIInfraState AIInfraObservation AIInfraConsumer AIInfraAnswer
     observeAIInfra answerAIInfra
     "AI infrastructure consumers ask distinct questions over the same situated state fibre: headline demand, refinancing, capital recovery, future cone and incidence do not collapse."
-
-------------------------------------------------------------------------
--- Same observation is adequate for headline demand but inadequate for richer
--- consumers.
-------------------------------------------------------------------------
 
 headlineDemandAdequate :
   Fibre.AdequateForConsumer aiInfrastructureFibreSystem headlineDemandConsumer
@@ -121,13 +116,13 @@ sameRecoveredCapacityDoesNotPayIncidence =
 -- Existing application donors remain visible but are no longer theorem owners.
 ------------------------------------------------------------------------
 
-marketActionabilityFibre : DASHI.Core.SituatedActionabilityFibreExact.SituatedActionabilityFibre
+marketActionabilityFibre : ActionFibre.SituatedActionabilityFibre
 marketActionabilityFibre = Market.infrastructureActionabilityFibre
 
-genericRecoveryFibre : DASHI.Core.TrajectoryRecoveryFibreExact.TrajectoryRecoveryFibre
+genericRecoveryFibre : RecoveryFibre.TrajectoryRecoveryFibre
 genericRecoveryFibre = Generic.aiInfrastructureRecoveryFibre
 
-genericIncidenceFibre : DASHI.Core.MultiaxialIncidenceFibreExact.MultiaxialIncidenceFibre
+genericIncidenceFibre : IncidenceFibre.MultiaxialIncidenceFibre
 genericIncidenceFibre = Generic.aiInfrastructureIncidenceFibre
 
 ------------------------------------------------------------------------
@@ -148,10 +143,6 @@ missingCoordinateFor refinancingConsumer = refinancingContextCoordinate
 missingCoordinateFor capitalRecoveryConsumer = financingHistoryCoordinate
 missingCoordinateFor futureConeConsumer = futureOptionalityCoordinate
 missingCoordinateFor incidenceConsumer = lossIncidenceCoordinate
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
 
 data HeadlineDemandAdequacyImpliesEconomicAdequacyPermission : Set where
 
