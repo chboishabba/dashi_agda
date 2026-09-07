@@ -21,7 +21,7 @@ rustBranch : String
 rustBranch = "agent/governed-online-r6-v2"
 
 rustSourceHead : String
-rustSourceHead = "cbbf323e8a882a41b8aae46c5fb4e44874a919d4"
+rustSourceHead = "9c3007be97f7e4a1e9a8bc9c7c85b92368515935"
 
 ------------------------------------------------------------------------
 -- Preferred acquisition order.
