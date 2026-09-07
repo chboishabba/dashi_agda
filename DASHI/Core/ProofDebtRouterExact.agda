@@ -162,7 +162,7 @@ record ProofDebtRoutingReceipt : Set where
     mathematicalStatus : MathematicalStatus
     statementStatus : StatementStatus
     certificationStatus : CertificationStatus
-    preferredBackend : PreferredBackend
+    scheduledBackend : PreferredBackend
     routedDebt : DebtClass
     routingExact : routedDebt ≡ routeDebt claimKind mathematicalStatus statementStatus certificationStatus
 
