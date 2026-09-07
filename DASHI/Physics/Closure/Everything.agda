@@ -99,18 +99,20 @@ import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Ex
 import DASHI.Physics.Closure.NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
 
--- R487-R489 return to the canonical direct R423 Clay consumer on current
--- master.  R487 closes the compiler from theorem-bearing fixed-output signed
--- payments plus one cutoff-uniform sum-of-budgets theorem into the exact R423
--- QuadraticCompanionSignedPayment.  R488 applies first-missing scheduling inside
--- that sufficient producer: local fixed-output payments precede global budget
--- aggregation.  R489 then resolves the local producer dependency: R295/R440
--- already own the finite swap-invariant and same-object algebra, so the first
--- missing prerequisite is the standard analytic Laplace/heat realization;
--- after that, the genuine physical leaf is the same-scale signed spacetime
--- estimate.  R423 itself remains the terminal consumer throughout.
+-- R487-R491 return to the canonical direct R423 Clay consumer on current
+-- master. R487 compiles theorem-bearing fixed-output signed payments plus one
+-- cutoff-uniform sum-of-budgets theorem into the exact R423 payment. R488 makes
+-- local payments the first missing producer. R489 then orders the local leaf.
+-- R490 isolates the positive-rate Laplace identity as standard analysis
+-- authority, and R491 shows that any such scalar realization for R443's literal
+-- cauchyEntry specializes directly to the R446 physical cell kernel. Thus no
+-- extra Navier--Stokes kernel-identification theorem remains between standard
+-- Laplace authority and the genuine same-output/same-scale signed spacetime
+-- estimate. R423 remains the terminal consumer throughout.
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPaymentsToR423Round487Exact
 import DASHI.Physics.Closure.NSTriadKNR423FixedOutputProducerProofSearchRound488Exact
+import DASHI.Physics.Closure.NSTriadKNPositiveRateLaplaceAuthorityRound490Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact
 import DASHI.Physics.Closure.NSTriadKNR423LocalPaymentPrerequisiteRound489Exact
 
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
