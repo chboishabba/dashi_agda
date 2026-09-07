@@ -127,6 +127,8 @@ record GriffithsCustodialOutcomeBoundary : Set where
     outcomePaymentAdvancesToAuthorityResidualIsTrue :
       outcomePaymentAdvancesToAuthorityResidual ≡ true
 
+open GriffithsCustodialOutcomeBoundary public
+
 canonicalGriffithsCustodialOutcomeBoundary : GriffithsCustodialOutcomeBoundary
 canonicalGriffithsCustodialOutcomeBoundary = griffiths-custodial-outcome-boundary
   true refl
