@@ -153,6 +153,11 @@ currentFirstModeExact = refl
 
 ------------------------------------------------------------------------
 -- Assessment -> recomputation bridge.
+--
+-- Candidate acquisition is weaker than payment.  A community-originating
+-- proposition can narrow the outcome search while leaving the same outcome
+-- residual live.  Only a separately admitted, consumer-matched community
+-- outcome may advance the first residual to community authority/capacity.
 ------------------------------------------------------------------------
 
 data CountryV02RecomputeAction : Set where
@@ -175,22 +180,38 @@ communityOutcomeCandidateDeltaV02 : Assessment.SearchFrontierDelta
 communityOutcomeCandidateDeltaV02 = Assessment.searchFrontierDelta
   "Country realised-repair V02 consumer"
   "affected-community outcome residual open"
-  "community-originating outcome candidate assessed; authority/capacity still separate"
+  "community-originating outcome candidate assessed; consumer-specific payment not yet admitted"
   Assessment.frontierNarrowed
   "affectedCommunityOutcomeResidualV02"
-  "communityAuthorityCapacityResidualV02"
-  "community-originating outcome proposition with preserved provenance"
-  "country-realised-repair-v02/community-outcome-delta/v1"
+  "affectedCommunityOutcomeResidualV02"
+  "community-originating candidate with preserved provenance; outcome payment still live"
+  "country-realised-repair-v02/community-outcome-candidate-delta/v1"
 
 communityOutcomeCandidateTriggersRecompute :
   recomputeActionFor (Assessment.change communityOutcomeCandidateDeltaV02)
   ≡ recomputeV02Calibration
 communityOutcomeCandidateTriggersRecompute = refl
 
-communityOutcomeCandidateDoesNotSkipAuthority :
+communityOutcomeCandidateKeepsOutcomeResidualLive :
   Assessment.firstResidualAfterReference communityOutcomeCandidateDeltaV02
+  ≡ "affectedCommunityOutcomeResidualV02"
+communityOutcomeCandidateKeepsOutcomeResidualLive = refl
+
+communityOutcomeAdmittedDeltaV02 : Assessment.SearchFrontierDelta
+communityOutcomeAdmittedDeltaV02 = Assessment.searchFrontierDelta
+  "Country realised-repair V02 consumer"
+  "affected-community outcome residual open"
+  "consumer-matched affected-community-defined outcome admitted; authority/capacity remains separate"
+  Assessment.frontierClosed
+  "affectedCommunityOutcomeResidualV02"
+  "communityAuthorityCapacityResidualV02"
+  "admitted community-defined outcome receipt with source, consumer and provenance correspondence"
+  "country-realised-repair-v02/community-outcome-admitted-delta/v1"
+
+admittedCommunityOutcomeAdvancesToAuthority :
+  Assessment.firstResidualAfterReference communityOutcomeAdmittedDeltaV02
   ≡ "communityAuthorityCapacityResidualV02"
-communityOutcomeCandidateDoesNotSkipAuthority = refl
+admittedCommunityOutcomeAdvancesToAuthority = refl
 
 ------------------------------------------------------------------------
 -- No-collapse laws.
@@ -199,6 +220,7 @@ communityOutcomeCandidateDoesNotSkipAuthority = refl
 data StructuralConstraintMappedMeansCoordinatePaid : Set where
 data StateReviewDefinesAffectedCommunityOutcome : Set where
 data CommunityPropositionAutomaticallyCarriesCommunityAuthority : Set where
+data CommunityOriginatingCandidatePaysConsumerOutcome : Set where
 data DeterminationCoveragePaysLandCountryControl : Set where
 data SearchCompletionPaysRealisedRepair : Set where
 data FormalFrontierClosureEqualsWorldRepair : Set where
@@ -214,6 +236,10 @@ stateReviewDoesNotDefineAffectedCommunityOutcome ()
 communityPropositionDoesNotCreateAuthority :
   CommunityPropositionAutomaticallyCarriesCommunityAuthority → ⊥
 communityPropositionDoesNotCreateAuthority ()
+
+communityOriginatingCandidateDoesNotPayConsumerOutcome :
+  CommunityOriginatingCandidatePaysConsumerOutcome → ⊥
+communityOriginatingCandidateDoesNotPayConsumerOutcome ()
 
 determinationCoverageDoesNotPayControl : DeterminationCoveragePaysLandCountryControl → ⊥
 determinationCoverageDoesNotPayControl ()
@@ -231,6 +257,8 @@ record CountryV02ProofSearchBoundary : Set where
     firstResidualIsCommunityOutcomeIsTrue : firstResidualIsCommunityOutcome ≡ true
     residualPrecedesProviderSelection : Bool
     residualPrecedesProviderSelectionIsTrue : residualPrecedesProviderSelection ≡ true
+    communityCandidateMayRemainSameResidual : Bool
+    communityCandidateMayRemainSameResidualIsTrue : communityCandidateMayRemainSameResidual ≡ true
     communityAuthorityRemainsNonLegalAuthorityDomain : Bool
     communityAuthorityRemainsNonLegalAuthorityDomainIsTrue :
       communityAuthorityRemainsNonLegalAuthorityDomain ≡ true
@@ -244,6 +272,7 @@ record CountryV02ProofSearchBoundary : Set where
 
 canonicalCountryV02ProofSearchBoundary : CountryV02ProofSearchBoundary
 canonicalCountryV02ProofSearchBoundary = country-v02-proof-search-boundary
+  true refl
   true refl
   true refl
   true refl
