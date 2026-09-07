@@ -15,16 +15,19 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --     leaf A remains first, and the signed network normal form is admitted only
 --     for the exact leaf-B residual it can attack.
 --
---   * IntrospectiveCriticalLeafObserver through DyadicCriticalNormEquivalence
---     audit the INTERNAL adequacy of leaf B.  They expose missing consumer
---     coordinates that the older two-bit observer omitted: physical realization
---     of the critical scalars, a separate uniform initial-critical ceiling, and
---     positive retained viscosity.  The physical-realization search then
---     reduces to the standard cutoff-uniform dyadic H^(1/2)/H^(3/2) norm
---     equivalence seam after finite packet/shell arithmetic is reused.
+--   * IntrospectiveCriticalLeafObserver through the dyadic/root refinement
+--     audit the INTERNAL adequacy of leaf B. They expose missing consumer
+--     coordinates, then reduce physical critical-weight realization through:
 --
--- Neither tranche manufactures an analytic payment.  Clay promotion remains
--- fail-closed.
+--       R517: dyadic Sobolev boundary;
+--       R518: exact canonical dyadic/Euclidean squared annulus;
+--       R519: constructed Bishop Nat root + semantic square boundary;
+--       R520: finite/rational monotonicity of every canonical root approximant.
+--
+-- The remaining scalar representation seam is now only the standard Bishop
+-- realization rule taking pointwise ordered regular approximants to Bishop-real
+-- order. Neither tranche manufactures an analytic payment. Clay promotion
+-- remains fail-closed.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact
@@ -58,3 +61,6 @@ import DASHI.Physics.Closure.NSTriadKNRetainedViscosityPositivityNoGoRound514Exa
 import DASHI.Physics.Closure.NSTriadKNStrictLiteralR406CriticalLeafRound515Exact
 import DASHI.Physics.Closure.NSTriadKNCriticalRadialRealizationProofSearchRound516Exact
 import DASHI.Physics.Closure.NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound517Exact
+import DASHI.Physics.Closure.NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exact
+import DASHI.Physics.Closure.NSTriadKNBishopNatRootCriticalMultiplierBoundaryRound519Exact
+import DASHI.Physics.Closure.NSTriadKNBishopNatRootApproximationMonotonicityRound520Exact
