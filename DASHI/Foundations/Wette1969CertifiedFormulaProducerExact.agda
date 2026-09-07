@@ -11,6 +11,8 @@ module DASHI.Foundations.Wette1969CertifiedFormulaProducerExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Relation.Binary.PropositionalEquality using (subst)
+
 
 import DASHI.Core.ProofCarryingRuleApplicationExact as PCRA
 import DASHI.Foundations.Wette1969HistoricalSignatureExact as Signature
@@ -60,10 +62,15 @@ appendProducerTrace :
   (producer : CertifiedFormulaProducer initial formula) →
   (tail : PCRA.CertifiedRuleTrace historicalSystem (producerTarget producer)) →
   CertifiedFormulaProducer initial formula
-appendProducerTrace producer tail =
+appendProducerTrace {formula = formula} producer tail =
   certifiedFormulaProducer
     (PCRA.appendCertifiedTrace (trace producer) tail)
-    (transportProducedAcrossTrace producer tail)
+    (subst
+      (formula Finite.∈Context_)
+      (sym (PCRA.runAppendCertifiedTrace (trace producer) tail))
+      (transportProducedAcrossTrace producer tail))
+
+
 
 record Wette1969CertifiedFormulaProducerBoundary : Set where
   constructor wette1969CertifiedFormulaProducerBoundary

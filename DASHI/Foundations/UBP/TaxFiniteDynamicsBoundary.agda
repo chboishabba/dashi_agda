@@ -111,7 +111,10 @@ record TaxDynamicsStatus : Set where
       continuousNumericalCollocationRequiredForFirstFiniteModel ≡ false
     reading : String
 
+open TaxDynamicsStatus public
+
 canonicalTaxDynamicsStatus : TaxDynamicsStatus
+
 canonicalTaxDynamicsStatus =
   taxDynamicsStatus
     "Peter Giesl, Zachary Langhorne, Carlos Argáez, and Sigurdur Hafstein"

@@ -29,7 +29,7 @@ record AdditiveLattice : Set₁ where
 
 open AdditiveLattice public
 
-record CertifiedMove (lattice : AdditiveLattice) : Set where
+record CertifiedMove (lattice : AdditiveLattice) : Set₁ where
   constructor certifiedMove
   field
     displacement : Point lattice
@@ -60,7 +60,8 @@ record MoveClosureReceipt
 open MoveClosureReceipt public
 
 data Path (lattice : AdditiveLattice) :
-  Point lattice → Point lattice → Set where
+  Point lattice → Point lattice → Set₁ where
+
   identityPath :
     (point : Point lattice) →
     Path lattice point point

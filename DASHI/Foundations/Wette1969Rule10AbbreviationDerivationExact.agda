@@ -56,17 +56,17 @@ rule10-1 body =
     (Judgment.abbreviates (generalize emptyWord body) body)
 
 rule10-2 :
-  (variable tuple body expanded : WordTerm) → RuleBody.HistoricalRuleBody
-rule10-2 variable tuple body expanded =
+  (varTerm tuple body expanded : WordTerm) → RuleBody.HistoricalRuleBody
+rule10-2 varTerm tuple body expanded =
   RuleBody.historicalRuleBody
     rule10-2Address
     2
-    ( Judgment.naturalVariable variable
+    ( Judgment.naturalVariable varTerm
     ∷ᵥ Judgment.abbreviates (generalize tuple body) expanded
     ∷ᵥ []ᵥ )
     (Judgment.abbreviates
-      (generalize (juxtapose tuple variable) body)
-      (generalize variable expanded))
+      (generalize (juxtapose tuple varTerm) body)
+      (generalize varTerm expanded))
 
 emptyPremisesHold :
   (context : Context) → (body : WordTerm) →
@@ -86,31 +86,31 @@ selectRule101 context body =
       (emptyPremisesHold context body))
 
 rule102PremisesHold :
-  (context : Context) → (variable tuple body expanded : WordTerm) →
-  Judgment.naturalVariable variable Finite.∈Context context →
+  (context : Context) → (varTerm tuple body expanded : WordTerm) →
+  Judgment.naturalVariable varTerm Finite.∈Context context →
   Judgment.abbreviates (generalize tuple body) expanded Finite.∈Context context →
   Historical.PremisesHold Finite.finiteHistoricalContextSystem context
-    (rule10-2 variable tuple body expanded)
-rule102PremisesHold context variable tuple body expanded variableEvidence abbreviationEvidence
+    (rule10-2 varTerm tuple body expanded)
+rule102PremisesHold context varTerm tuple body expanded variableEvidence abbreviationEvidence
   Fin.zero = variableEvidence
-rule102PremisesHold context variable tuple body expanded variableEvidence abbreviationEvidence
+rule102PremisesHold context varTerm tuple body expanded variableEvidence abbreviationEvidence
   (Fin.suc Fin.zero) = abbreviationEvidence
 
 selectRule102 :
-  (context : Context) → (variable tuple body expanded : WordTerm) →
-  Judgment.naturalVariable variable Finite.∈Context context →
+  (context : Context) → (varTerm tuple body expanded : WordTerm) →
+  Judgment.naturalVariable varTerm Finite.∈Context context →
   Judgment.abbreviates (generalize tuple body) expanded Finite.∈Context context →
   PCRA.SelectedRuleApplication
     (Historical.historicalRuleApplicationSystem Finite.finiteHistoricalContextSystem)
     context
-selectRule102 context variable tuple body expanded variableEvidence abbreviationEvidence =
+selectRule102 context varTerm tuple body expanded variableEvidence abbreviationEvidence =
   PCRA.selectedRuleApplication
-    (rule10-2 variable tuple body expanded)
+    (rule10-2 varTerm tuple body expanded)
     (Historical.certifyHistoricalRule
       Finite.finiteHistoricalContextSystem context
-      (rule10-2 variable tuple body expanded)
+      (rule10-2 varTerm tuple body expanded)
       (rule102PremisesHold
-        context variable tuple body expanded variableEvidence abbreviationEvidence))
+        context varTerm tuple body expanded variableEvidence abbreviationEvidence))
 
 record Wette1969Rule10AbbreviationBoundary : Set where
   constructor wette1969Rule10AbbreviationBoundary

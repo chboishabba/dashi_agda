@@ -100,7 +100,10 @@ record KAbsMigrationDecision : Set where
     generalRebuildDivisionLemmaRequiredBeforeRetestIsFalse :
       generalRebuildDivisionLemmaRequiredBeforeRetest ≡ false
 
+open KAbsMigrationDecision public
+
 canonicalKAbsMigrationDecision : KAbsMigrationDecision
+
 canonicalKAbsMigrationDecision =
   kAbsMigrationDecision
     true refl
@@ -164,7 +167,10 @@ record ExactRealArchitectureStatus : Set where
     constructivePiIntervalInstantiatedIsFalse :
       constructivePiIntervalInstantiated ≡ false
 
+open ExactRealArchitectureStatus public
+
 canonicalExactRealArchitectureStatus : ExactRealArchitectureStatus
+
 canonicalExactRealArchitectureStatus =
   exactRealArchitectureStatus
     false refl

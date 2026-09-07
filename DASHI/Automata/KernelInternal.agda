@@ -104,8 +104,5 @@ record ClassicalContainmentReceipt (K : KernelSystem) : Set₁ where
 
 kernelInternalStatement : String
 kernelInternalStatement =
-  "A kernel-internal automaton is an endomorphism of the admissible shell: "
-  ++ "every generator preserves zero scalar defect. Classical CA and SFT "
-  ++ "dynamics are recovered as finite-radius special cases; phasic and "
-  ++ "lift-closed dynamics require extra state or loss of structure when "
-  ++ "compiled to a base-alphabet CA."
+  "A kernel-internal automaton is an endomorphism of the admissible shell: every generator preserves zero scalar defect. Classical CA and SFT dynamics are recovered as finite-radius special cases; phasic and lift-closed dynamics require extra state or loss of structure when compiled to a base-alphabet CA."
+

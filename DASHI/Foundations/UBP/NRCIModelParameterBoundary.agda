@@ -3,10 +3,24 @@ module DASHI.Foundations.UBP.NRCIModelParameterBoundary where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Rational using (ℚ; _+_; _/_; _<_; 0ℚ)
+open import Data.Integer.Base using (ℤ; +0; +[1+_]; -[1+_]; +_)
+open import Data.Rational using (ℚ; _+_; _*_; _/_; _<_; 0ℚ)
+open import Data.Rational.Base using (mkℚ)
+open import Data.Nat.Coprimality as Coprime using ()
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.ExternalRepositoryProvenance as Provenance
+
+10ℚ : ℚ
+10ℚ = + 10 / 1
+
+invℚ : ℚ → ℚ
+invℚ (mkℚ +0 d prf) = 0ℚ
+invℚ (mkℚ +[1+ n ] d prf) = mkℚ +[1+ d ] n (Coprime.sym prf)
+invℚ (mkℚ -[1+ n ] d prf) = mkℚ -[1+ d ] n (Coprime.sym prf)
+
+_÷_ : ℚ → ℚ → ℚ
+p ÷ q = p * invℚ q
 
 ------------------------------------------------------------------------
 -- NRCI normalization parameter boundary.
@@ -29,14 +43,14 @@ open PositiveModelParameter public
 
 nrciWith : PositiveModelParameter → ℚ → ℚ
 nrciWith parameter tax =
-  tau parameter / (tau parameter + tax)
+  tau parameter ÷ (tau parameter + tax)
 
 record NRCIHalfThresholdCertificate
     (parameter : PositiveModelParameter) : Set where
   constructor nrciHalfThresholdCertificate
   field
     cancellationReceipt :
-      nrciWith parameter (tau parameter) ≡ 1 / 2
+      nrciWith parameter (tau parameter) ≡ + 1 / 2
     normalizationReading : String
 
 open NRCIHalfThresholdCertificate public
@@ -48,7 +62,7 @@ record NRCIParameterStatus : Set where
     repositoryAuthor : String
     implementationPath : String
     sourceTau : ℚ
-    sourceTauIsTen : sourceTau ≡ 10
+    sourceTauIsTen : sourceTau ≡ 10ℚ
     tauIsExplicitModelParameter : Bool
     tauIsExplicitModelParameterIsTrue : tauIsExplicitModelParameter ≡ true
     halfPointIsNormalizationIdentity : Bool
@@ -70,7 +84,7 @@ canonicalNRCIParameterStatus =
     Provenance.ubpRepositoryURL
     Provenance.ubpAuthorName
     "core_studio_v4.0/core/ubp_unified_v5.py"
-    10 refl
+    10ℚ refl
     true refl
     true refl
     false refl
