@@ -53,7 +53,9 @@ import DASHI.Biology.SoTLEpistemicQuotientPipeline
 import DASHI.Biology.CrossPaperDialecticalDevelopment
 import DASHI.Biology.AliceBrownCorpusLoom
 
--- Plural-progress / diagnosis / temporal dependency-lineage return.
+-- Plural-progress / diagnosis / temporal dependency-lineage / selective
+-- invalidation / recursive Pareto truth-maintenance return.
 import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact
 import DASHI.Biology.AliceBrownSelectiveInvalidationParetoBidiExact
+import DASHI.Biology.AliceBrownRecursiveParetoTruthMaintenanceBidiExact
