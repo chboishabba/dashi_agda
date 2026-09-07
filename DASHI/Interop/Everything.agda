@@ -21,3 +21,4 @@ import DASHI.Interop.GodsEyeViewWorldEpistemicSourceAtlasExtendedExact
 import DASHI.Interop.GodsEyeViewHighestAlphaObservationChoiceExact
 import DASHI.Interop.SourceDiligenceProofSearchBridgeExact
 import DASHI.Interop.FormalisationGovernanceAttributedSourceMigrationExact
+import DASHI.Interop.SourceAttributionShapePolicyExact
