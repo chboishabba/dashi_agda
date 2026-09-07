@@ -2,17 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalHHAndNestedRadiusCompilerRound468E
 
 ------------------------------------------------------------------------
 -- ROUND468 / ONE R467 GEOMETRY OWNER -> R177 + R431
---
--- R467 proves the literal normalized-direction complement.  This module does
--- not add another estimate.  It compiles that one theorem into both historical
--- consumers:
---
---   * R177 unconditional pointwise HH low-output gain;
---   * R431 literal nested outer-slot radius calibration.
---
--- The only extra representation datum is the orientation of the selected
--- helical radius scalar: modeNorm >= 0.  Its square and reciprocal laws are
--- already supplied by the R464 MHD/NS calibration package.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,7 +19,11 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
+import DASHI.Physics.Closure.NSTriadKNHHDualDefectScalarCompilerRound175Exact as R175
+import DASHI.Physics.Closure.NSTriadKNHHDualDefectLeftAnchorRound176Exact as R176
 import DASHI.Physics.Closure.NSTriadKNHHDualDefectUnconditionalPointwiseRound177Exact as R177
+import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact as R455
+import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNStrongLowLiteralNestedKernelRound329Exact as R329
@@ -95,8 +88,6 @@ toR177SymmetricDualDefectData {E} {I} {S} {p} {q} {k} D a b transverse = record
   ; R177.transverse = transverse
   ; R177.complement = R467.physicalNormalizedComplementIdentity D
   }
-  where
-  import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact as R455
 
 physicalHHPointwiseOutputBound :
   ∀ {E I S p q k} →
@@ -105,11 +96,11 @@ physicalHHPointwiseOutputBound :
   (transverse : R145.TransverseHighPair
     (R167.normalizedDirection E S p)
     (R167.normalizedDirection E S q) a b) →
-  R177.R176.norm
+  R176.norm
     (R177.rawKernel (toR177SymmetricDualDefectData D a b transverse))
-  ≤ R177.R175.twentyFour
-      * R177.R176.square (Helical.modeNorm S k)
-      * (R177.R176.norm a * R177.R176.norm b)
+  ≤ R175.twentyFour
+      * R176.square (Helical.modeNorm S k)
+      * (R176.norm a * R176.norm b)
 physicalHHPointwiseOutputBound D a b transverse =
   R177.unconditionalPointwiseHHOutputBound
     (toR177SymmetricDualDefectData D a b transverse)
@@ -176,8 +167,6 @@ literalOuterSlotDivisionFreeLowOutputBoundFromPhysicalCalibration
     E I O system S L H W C
     (toR431LiteralOuterRadiusCalibration
       E I O system S L H W C calibration orientation)
-  where
-  import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
 
 round468R177PhysicalPointwiseHHCompilerClosed : Bool
 round468R177PhysicalPointwiseHHCompilerClosed = true
