@@ -6,10 +6,13 @@ on:
     paths:
       - 'DASHI/Core/PluralEpistemicOperationalClosureExact.agda'
       - 'DASHI/Core/PluralOperationalEvidenceBraidBidiExact.agda'
+      - 'DASHI/Core/PluralOperationalRealisationDiscrepancyExact.agda'
       - 'DASHI/Core/PluralOperationalResidualActionLoopExact.agda'
       - 'DASHI/Core/PluralOperationalEverything.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryPluralEpistemicOperationalAuditExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityFirstCorrectionExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryOperationalRevisionParaconsistentExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawTerraNulliusOperationalJuridicalNonHumanityExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalEpistemicEverything.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalAdaptiveEverything.agda'
       - '.github/workflows/sensiblaw-country-two-eyed-operational.yml'
@@ -30,9 +33,12 @@ jobs:
           sources=(
             DASHI/Core/PluralEpistemicOperationalClosureExact.agda
             DASHI/Core/PluralOperationalEvidenceBraidBidiExact.agda
+            DASHI/Core/PluralOperationalRealisationDiscrepancyExact.agda
             DASHI/Core/PluralOperationalResidualActionLoopExact.agda
             DASHI/Cognition/PNF/SensibLawCountryPluralEpistemicOperationalAuditExact.agda
+            DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityFirstCorrectionExact.agda
             DASHI/Cognition/PNF/SensibLawCountryOperationalRevisionParaconsistentExact.agda
+            DASHI/Cognition/PNF/SensibLawTerraNulliusOperationalJuridicalNonHumanityExact.agda
             DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalEpistemicEverything.agda
             DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalAdaptiveEverything.agda
           )
@@ -52,6 +58,16 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Cognition/PNF/SensibLawCountryPluralEpistemicOperationalAuditExact.agda
+
+      - name: Type-check community-authority-first correction
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityFirstCorrectionExact.agda
+
+      - name: Type-check terra-nullius operational juridical non-humanity
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawTerraNulliusOperationalJuridicalNonHumanityExact.agda
 
       - name: Type-check Country temporal/paraconsistent revision
         run: >-
