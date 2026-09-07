@@ -22,11 +22,12 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using (_++_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; Positive; NonNegative; nonNegative; _+_; _*_; _-_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -40,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
+import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
 import DASHI.Physics.Closure.NSTriadKNFiniteWeightedGramFluxAggregationRound385Exact as R385
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
 import DASHI.Physics.Closure.NSTriadKNFibreLocalR378GlobalInstantaneousGramFluxRound398Exact as R398
@@ -59,8 +61,8 @@ F : C3.RealField _
 F = Rational.rationalRealField
 
 sumWeightedFluxAppend :
-  (left right : List R385.R290.DampedGramPair) →
-  R385.sumWeightedFlux (left Cube.++ right)
+  (left right : List R290.DampedGramPair) →
+  R385.sumWeightedFlux (left ++ right)
   ≡ R385.sumWeightedFlux left + R385.sumWeightedFlux right
 sumWeightedFluxAppend [] right = refl
 sumWeightedFluxAppend (pair ∷ rest) right
@@ -90,6 +92,7 @@ module GlobalTerminalEndpoint
   outputs = Canonical.nonzeroCutoffModes cutoff
 
   module Global = R398.GlobalFluxLocal physicalSystem S L H Pdata
+  module Local = R396.LocalEnumerate physicalSystem S
   module Rate = R400.PhysicalRate physicalSystem S viscosityPositive
   module Floor = R450.PhysicalCellRateFloor
     physicalSystem S viscosityPositive unitGap
@@ -133,14 +136,14 @@ module GlobalTerminalEndpoint
   outputFlux :
     (output : Z3.FourierMode) →
     Z3.NonZeroMode output →
-    Global.O.Local.PairRatePositiveOn (Output.physicalOutputFiber cutoff output) → ℚ
+    Local.PairRatePositiveOn (Output.physicalOutputFiber cutoff output) → ℚ
   outputFlux output outputNonzero positive =
     R385.sumWeightedFlux (Global.O.outputPairs cutoff output positive)
 
   outputNegativeFluxBelowCeilingMass :
     (output : Z3.FourierMode) →
     (outputNonzero : Z3.NonZeroMode output) →
-    (positive : Global.O.Local.PairRatePositiveOn
+    (positive : Local.PairRatePositiveOn
       (Output.physicalOutputFiber cutoff output)) →
     0ℚ - outputFlux output outputNonzero positive
     ≤ W * R456.sumDoubleMixedMass S velocity
@@ -227,10 +230,10 @@ module GlobalTerminalEndpoint
 
       fluxAppend = sumWeightedFluxAppend headPairs tailPairs
       lhsMeaning :
-        0ℚ - R385.sumWeightedFlux (headPairs Cube.++ tailPairs)
+        0ℚ - R385.sumWeightedFlux (headPairs ++ tailPairs)
         ≡ (0ℚ - headFlux) + (0ℚ - tailFlux)
       lhsMeaning = trans
-        (cong (0ℚ -_) fluxAppend)
+        (congLocal (0ℚ -_) fluxAppend)
         (solve (headFlux ∷ tailFlux ∷ []))
 
       rhsMeaning :
@@ -244,8 +247,8 @@ module GlobalTerminalEndpoint
         ((0ℚ - headFlux) + (0ℚ - tailFlux) ≤_)
         rhsMeaning added)
     where
-    cong : ∀ {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ f y
-    cong f refl = refl
+    congLocal : ∀ {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ y |> f
+    congLocal f refl = refl
 
   globalNegativeFluxBelowSelectedMass :
     0ℚ - globalFlux ≤ W * Mass.selectedMass
