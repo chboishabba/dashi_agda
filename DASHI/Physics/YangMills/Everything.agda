@@ -94,11 +94,13 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredR171AlignedPrintedSour
 -- Newest canonical status surface for the source-correct preferred route.
 import DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact
 
--- Preferred M7 operator route: Kato closed semibounded form representation
--- jointly produces the genuine operator domain and self-adjoint associated
--- Hamiltonian. Physical closed-form realization and common invariant core stay
--- explicit fail-closed inputs.
+-- Preferred M7 operator route: Kato closed semibounded form representation.
 import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact
+
+-- Least-privilege T5 continuum/OS/gap boundary. Reconstructed theory and
+-- physical interlacing are derived from their producer maps; historical
+-- agreement equalities are refl rather than independent physical payments.
+import DASHI.Physics.YangMills.BalabanClayT5PreferredContinuumOSGapExact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
