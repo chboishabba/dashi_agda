@@ -11,25 +11,13 @@ import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact 
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Papers.CoreTheoremInterfaces as Core
 
-------------------------------------------------------------------------
--- GRAVITATIONAL OBSERVATION / ANTIGRAVITY / UNIFICATION CROSS-POLLINATION
-------------------------------------------------------------------------
-
 data CrossPollinationLane : Set where
-  observationEvidenceLane : CrossPollinationLane
-  grTheoryLane : CrossPollinationLane
-  navierStokesConfounderLane : CrossPollinationLane
-  yangMillsSourceLane : CrossPollinationLane
-  riemannMethodLane : CrossPollinationLane
-  unificationConsumerLane : CrossPollinationLane
+  observationEvidenceLane grTheoryLane navierStokesConfounderLane
+    yangMillsSourceLane riemannMethodLane unificationConsumerLane : CrossPollinationLane
 
 data CrossPollinationRole : Set where
-  acquireEvidence : CrossPollinationRole
-  compareGravityTheory : CrossPollinationRole
-  closeOrdinaryMomentum : CrossPollinationRole
-  constrainGaugeSource : CrossPollinationRole
-  borrowProofDisciplineOnly : CrossPollinationRole
-  registerCrossSectorResidual : CrossPollinationRole
+  acquireEvidence compareGravityTheory closeOrdinaryMomentum constrainGaugeSource
+    borrowProofDisciplineOnly registerCrossSectorResidual : CrossPollinationRole
 
 roleForLane : CrossPollinationLane → CrossPollinationRole
 roleForLane observationEvidenceLane = acquireEvidence
@@ -89,6 +77,7 @@ laneForMultiScaleResidual Multi.missingObservationScaleContext = observationEvid
 laneForMultiScaleResidual Multi.missingExactScaleSlotReceipt = observationEvidenceLane
 laneForMultiScaleResidual Multi.missingSameTheoryIdentityReceipt = grTheoryLane
 laneForMultiScaleResidual Multi.missingSameTheoryFamilyReceipt = grTheoryLane
+laneForMultiScaleResidual Multi.missingEvaluationFingerprintWeld = grTheoryLane
 laneForMultiScaleResidual Multi.missingLaboratoryFreeFallComparison = observationEvidenceLane
 laneForMultiScaleResidual Multi.missingLaboratoryClockComparison = observationEvidenceLane
 laneForMultiScaleResidual Multi.missingOrbitalTimingComparison = observationEvidenceLane
@@ -103,6 +92,7 @@ producerForMultiScaleResidual Multi.missingObservationScaleContext = Search.disc
 producerForMultiScaleResidual Multi.missingExactScaleSlotReceipt = Search.identityProducer
 producerForMultiScaleResidual Multi.missingSameTheoryIdentityReceipt = Search.identityProducer
 producerForMultiScaleResidual Multi.missingSameTheoryFamilyReceipt = Search.identityProducer
+producerForMultiScaleResidual Multi.missingEvaluationFingerprintWeld = Search.identityProducer
 producerForMultiScaleResidual Multi.missingLaboratoryFreeFallComparison = Search.empiricalEvidenceProducer
 producerForMultiScaleResidual Multi.missingLaboratoryClockComparison = Search.empiricalEvidenceProducer
 producerForMultiScaleResidual Multi.missingOrbitalTimingComparison = Search.empiricalEvidenceProducer
@@ -128,23 +118,16 @@ record GravitationalCrossPollinationBoundary : Set where
 
 canonicalGravitationalCrossPollinationBoundary : GravitationalCrossPollinationBoundary
 canonicalGravitationalCrossPollinationBoundary =
-  gravitational-cross-pollination-boundary
-    true false false false false false false true true true
+  gravitational-cross-pollination-boundary true false false false false false false true true true
 
 existingCoreTheoremInterfaces : Core.CoreTheoremInterfaces
 existingCoreTheoremInterfaces = Core.canonicalCoreTheoremInterfaces
-
 existingMultiScaleBoundary : Multi.MultiScaleTheoryBoundary
 existingMultiScaleBoundary = Multi.canonicalMultiScaleTheoryBoundary
 
-navierStokesTerminalStillFalse :
-  Core.coreNavierStokesTerminalFalse ≡ Core.coreNavierStokesTerminalFalse
+navierStokesTerminalStillFalse : Core.coreNavierStokesTerminalFalse ≡ Core.coreNavierStokesTerminalFalse
 navierStokesTerminalStillFalse = refl
-
-yangMillsTerminalStillFalse :
-  Core.coreYangMillsTerminalFalse ≡ Core.coreYangMillsTerminalFalse
+yangMillsTerminalStillFalse : Core.coreYangMillsTerminalFalse ≡ Core.coreYangMillsTerminalFalse
 yangMillsTerminalStillFalse = refl
-
-unificationTerminalStillFalse :
-  Core.coreUnificationTerminalFalse ≡ Core.coreUnificationTerminalFalse
+unificationTerminalStillFalse : Core.coreUnificationTerminalFalse ≡ Core.coreUnificationTerminalFalse
 unificationTerminalStillFalse = refl
