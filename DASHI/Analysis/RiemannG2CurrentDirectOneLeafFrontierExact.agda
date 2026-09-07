@@ -7,6 +7,8 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Target
 import DASHI.Analysis.RiemannG2DirectIndependentComplementMarginExact as Margin
 import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as High
+import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as NearObserver
+import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 import DASHI.Analysis.RiemannPlattTrudgianLowCompletionAdapterExact as Low
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
 import DASHI.Analysis.RiemannG2ExistingScalarDonorInventoryExact as Donor
@@ -19,6 +21,15 @@ import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 -- Historical allowance and analytic-core routes remain sufficient interfaces,
 -- but they are not prerequisites of the shortest current Clay path.
 --
+-- INTROSPECTIVE PRECONDITION TO THE HIGH ANALYTIC WALL
+--
+-- The terminal one-leaf theorem consumes `nearResponseAt J`, but the final
+-- transport exposes that object only as a scalar plus an opaque
+-- `sameFiniteNearCarrier : Set` receipt.  Existing phase-sensitive machinery
+-- needs the target-relative gaps, multiplicities and reflection-paired finite
+-- summands.  Therefore the first representation refinement is to identify the
+-- exact final near scalar with its literal phase-visible finite sum.
+--
 -- HIGH-SIDE ANALYTIC WALL
 --
 -- For every arbitrary high nontrivial zero rho, assuming rho is off the critical
@@ -29,30 +40,31 @@ import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 --     + cast(D_Gamma(g_pole))
 --       < cast(M_cluster).
 --
--- The near scalar is signed and target-centred; B_far is the already-owned
--- transported far-shell budget.  Gamma is kept literal, so the theorem may use
--- joint zero/Gamma cancellation rather than proving a sharp Gamma envelope in
--- isolation.
---
 -- LOW-SIDE REPRESENTATION WALL
 --
 -- Transport the published Platt--Trudgian verified-height theorem onto the same
 -- completed-zeta carrier and prove the chosen Low partition lies in that region.
 --
--- After these two families plus the existing Low/High cover and critical-line
--- stability interface, RiemannHypothesisFor is compiler output.
+-- LOGICAL/CARRIER WALL
+--
+-- The high contradiction yields double-negated criticality.  Since the current
+-- AnalyticSubstrate stores `criticalLine` as an arbitrary predicate, refine that
+-- exact predicate to a concrete stable predicate; naked CriticalLineStable is no
+-- longer a primitive terminal premise.
 ------------------------------------------------------------------------
 
 data FrontierCoordinate : Set where
+  finalNearLiteralPhaseRealisation : FrontierCoordinate
   highIndependentJointComplementMargin : FrontierCoordinate
   lowPublishedHeightCarrierTransport : FrontierCoordinate
   lowHighCover : FrontierCoordinate
-  criticalLineStability : FrontierCoordinate
+  criticalLinePredicateRefinement : FrontierCoordinate
   quarterPeriodCrossingAdmission : FrontierCoordinate
   checkedFarShellTransport : FrontierCoordinate
   finalScalarOrderTaperClusterAttachment : FrontierCoordinate
   separateFiniteNearEnvelope : FrontierCoordinate
   separateGammaEnvelope : FrontierCoordinate
+  nakedCriticalLineStability : FrontierCoordinate
   consumerAssignedAllowanceLayer : FrontierCoordinate
   determinantDirectPayment : FrontierCoordinate
   exactExistingScalarDonor : FrontierCoordinate
@@ -62,21 +74,24 @@ data FrontierCoordinate : Set where
 data FrontierClass : Set where
   analyticWall : FrontierClass
   representationWall : FrontierClass
+  logicalCarrierWall : FrontierClass
   existingInterface : FrontierClass
   compilerOutput : FrontierClass
   pruned : FrontierClass
   absentDonor : FrontierClass
 
 frontierClass : FrontierCoordinate -> FrontierClass
+frontierClass finalNearLiteralPhaseRealisation = representationWall
 frontierClass highIndependentJointComplementMargin = analyticWall
 frontierClass lowPublishedHeightCarrierTransport = representationWall
 frontierClass lowHighCover = representationWall
-frontierClass criticalLineStability = existingInterface
+frontierClass criticalLinePredicateRefinement = logicalCarrierWall
 frontierClass quarterPeriodCrossingAdmission = existingInterface
 frontierClass checkedFarShellTransport = representationWall
 frontierClass finalScalarOrderTaperClusterAttachment = representationWall
 frontierClass separateFiniteNearEnvelope = pruned
 frontierClass separateGammaEnvelope = pruned
+frontierClass nakedCriticalLineStability = pruned
 frontierClass consumerAssignedAllowanceLayer = pruned
 frontierClass determinantDirectPayment = pruned
 frontierClass exactExistingScalarDonor = absentDonor
@@ -100,6 +115,16 @@ narrowWindowRouteRejected :
   Growth.CutoffGrowthBidiBoundary.narrowFixedCutoffCancellationRoutePruned
     Growth.canonicalCutoffGrowthBidiBoundary ≡ true
 narrowWindowRouteRejected = refl
+
+finalNearPhaseRealisationIsFirstObserverRefinement :
+  NearObserver.FinalPoleNearObserverRefinementBoundary.targetRelativePhaseIsFirstMissingCoordinate
+    NearObserver.canonicalFinalPoleNearObserverRefinementBoundary ≡ true
+finalNearPhaseRealisationIsFirstObserverRefinement = refl
+
+finalNearLiteralModelDoesNotPayMargin :
+  NearObserver.FinalPoleNearObserverRefinementBoundary.literalModelAutomaticallyPaysJointMargin
+    NearObserver.canonicalFinalPoleNearObserverRefinementBoundary ≡ false
+finalNearLiteralModelDoesNotPayMargin = refl
 
 oneHighScalarLeaf :
   Margin.DirectIndependentComplementMarginBoundary.oneIndependentJointMarginIsScalarLeaf
@@ -126,6 +151,16 @@ lowCarrierTransportStillRequired :
     Low.canonicalPlattTrudgianLowCompletionBoundary ≡ true
 lowCarrierTransportStillRequired = refl
 
+criticalPredicateRefinementCompilesStability :
+  Stability.CriticalLineStabilityRefinementBoundary.exactPredicateRefinementPlusStabilityCompilesConsumerReceipt
+    Stability.canonicalCriticalLineStabilityRefinementBoundary ≡ true
+criticalPredicateRefinementCompilesStability = refl
+
+actualCriticalPredicateRefinementStillOpen :
+  Stability.CriticalLineStabilityRefinementBoundary.canonicalActualZetaPredicateRefinementInhabitedHere
+    Stability.canonicalCriticalLineStabilityRefinementBoundary ≡ false
+actualCriticalPredicateRefinementStillOpen = refl
+
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
     Donor.canonicalExistingScalarDonorInventoryBoundary ≡ false
@@ -142,6 +177,10 @@ record CurrentDirectOneLeafFrontierBoundary : Set where
     highSideHasOnePrimitiveScalarAnalyticFamily : Bool
     highSideHasOnePrimitiveScalarAnalyticFamilyIsTrue :
       highSideHasOnePrimitiveScalarAnalyticFamily ≡ true
+
+    finalNearLiteralPhaseRealisationStillRequiredForPhaseRoute : Bool
+    finalNearLiteralPhaseRealisationStillRequiredForPhaseRouteIsTrue :
+      finalNearLiteralPhaseRealisationStillRequiredForPhaseRoute ≡ true
 
     highLeafMustBeUniformOverArbitraryHighOffLineZeros : Bool
     highLeafMustBeUniformOverArbitraryHighOffLineZerosIsTrue :
@@ -163,6 +202,14 @@ record CurrentDirectOneLeafFrontierBoundary : Set where
     lowPublishedTheoremNeedsCarrierTransportIsTrue :
       lowPublishedTheoremNeedsCarrierTransport ≡ true
 
+    nakedCriticalLineStabilityStillPrimitive : Bool
+    nakedCriticalLineStabilityStillPrimitiveIsFalse :
+      nakedCriticalLineStabilityStillPrimitive ≡ false
+
+    exactCriticalLinePredicateRefinementStillRequired : Bool
+    exactCriticalLinePredicateRefinementStillRequiredIsTrue :
+      exactCriticalLinePredicateRefinementStillRequired ≡ true
+
     finalClayCompilerClosed : Bool
     finalClayCompilerClosedIsTrue : finalClayCompilerClosed ≡ true
 
@@ -173,7 +220,8 @@ record CurrentDirectOneLeafFrontierBoundary : Set where
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
 
-    firstGenuineWall : String
+    firstObserverRefinement : String
+    firstGenuineAnalyticWall : String
     highestAlphaReading : String
 
 canonicalCurrentDirectOneLeafFrontierBoundary :
@@ -182,12 +230,16 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
   current-direct-one-leaf-frontier-boundary
     true refl
     true refl
+    true refl
     false refl
     false refl
+    false refl
+    true refl
     false refl
     true refl
     true refl
     false refl
     false refl
-    "Uniformly for every arbitrary high off-line nontrivial zero on the exact quarter-period crossing pole-quotient taper, independently prove cast(D_near(J)+B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster)."
-    "All downstream high-side algebra is compiler output on the direct allowance-free route. The signed finite-near phase and Gamma term are intentionally kept together, permitting joint cancellation that the old separate-budget scheduler forbade. The far shell is already quantitatively controlled and crossing is a necessary admission constraint. Repository donor inventory finds no theorem already inhabiting the exact literal target-centred cancellation carrier. Low ordinates reduce separately to same-completed-zeta transport of the published Platt--Trudgian verified region. Exact-head Agda CI is still unavailable because GitHub Actions has produced no run. RH is not derived."
+    "Identify final nearResponseAt(chosen crossing J) proof-relevantly with the literal reflection-paired finite near-zero sum exposing target-relative gap, multiplicity and the universal pole-quotient kernel."
+    "Uniformly for every arbitrary high off-line nontrivial zero on that exact crossing carrier, independently prove cast(D_near(J)+B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster)."
+    "The introspective loop now separates observer inadequacy from analytic payment. Before reusing phase-sensitive harmonic machinery, expose the literal target-relative phase hidden by the final nearResponseAt scalar. This refinement does not itself pay the joint margin. The only high scalar analytic family remains the independent joint complement inequality; the far shell and quarter-period admission are already controlled/typed. Low ordinates still need same-completed-zeta transport of Platt--Trudgian. The abstract criticalLine predicate also needs an exact stable refinement; the canonical Clay compiler derives CriticalLineStable from that refinement rather than assuming it nakedly. Exact-head Agda CI remains unavailable and RH is not derived."
