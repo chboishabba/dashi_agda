@@ -8,6 +8,7 @@ import DASHI.Core.DominantChartEpistemicCompressionExact
 import DASHI.Core.ObserverVisibilityExistenceNoncollapseExact
 import DASHI.Core.OperationalSystemBehaviourSemanticsExact
 import DASHI.Core.PluralObserverCorrectionRealisationExact
+import DASHI.Core.CounterfactualRealisedRepairExact
 import DASHI.Core.SelfSealingCorrectionLoopExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.CategoryAuthorityAuditExact
