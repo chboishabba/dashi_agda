@@ -29,6 +29,8 @@ FILES=(
   DASHI/Analysis/RiemannG2UniformBudgetNormalizedHighProducerExact.agda
   DASHI/Analysis/RiemannG2LiteralResponseNormalizedAnalyticCoresExact.agda
   DASHI/Analysis/RiemannG2IndependentComplementMarginFinalExact.agda
+  DASHI/Analysis/RiemannG2LiteralComplementDirectTargetExact.agda
+  DASHI/Analysis/RiemannG2DirectIndependentComplementMarginExact.agda
   DASHI/Analysis/RiemannG2UniformIndependentComplementHighProducerExact.agda
   DASHI/Analysis/RiemannPlattTrudgianLowCompletionAdapterExact.agda
   DASHI/Analysis/RiemannG2ClayTerminalOneLeafCutExact.agda
@@ -39,6 +41,7 @@ FILES=(
   DASHI/Analysis/RiemannG2FinalPoleQuotientAnalyticCoreExact.agda
   DASHI/Analysis/RiemannG2FinalPoleQuotientAnalyticCoreRegression.agda
   DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda
+  DASHI/Analysis/Everything.agda
 )
 
 for f in "${FILES[@]}"; do
