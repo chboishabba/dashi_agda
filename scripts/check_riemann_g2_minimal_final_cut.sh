@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+FILES=(
+  DASHI/Core/TwoChannelAllowanceCompositionExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientOffCoreAllowanceBridgeExact.agda
+  DASHI/Analysis/RiemannG2SelectedFiniteNearBudgetMinimalConsumerExact.agda
+  DASHI/Analysis/RiemannG2MinimalNearBudgetFinalOffSlackCompilerExact.agda
+  DASHI/Analysis/RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientOffChosenCutoffCompilerExact.agda
+  DASHI/Analysis/RiemannG2WindowBudgetToTransportedNearUpperExact.agda
+  DASHI/Analysis/RiemannG2TransportedChosenCutoffOffAllowanceCompilerExact.agda
+  DASHI/Analysis/RiemannG2FinalOffMinimalCutRegression.agda
+  DASHI/Analysis/RiemannG2FreshSameTaperGammaEnvelopeCompilerExact.agda
+  DASHI/Analysis/RiemannG2FreshSameTaperGammaEnvelopeRegression.agda
+  DASHI/Analysis/RiemannG2FinalSplitComplementOrderTransportCompilerExact.agda
+  DASHI/Analysis/RiemannG2FinalPoleQuotientMinimalAnalyticCutExact.agda
+  DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda
+)
+
+for f in "${FILES[@]}"; do
+  if grep -nE '(^|[^A-Za-z])(postulate|{-# *TERMINATING|{-# *NON_TERMINATING)' "$f"; then
+    echo "trust-scan failure in $f" >&2
+    exit 1
+  fi
+done
+
+if command -v agda >/dev/null 2>&1; then
+  for f in "${FILES[@]}"; do
+    agda "$f"
+  done
+else
+  echo "agda executable not present; trust scan only" >&2
+fi
