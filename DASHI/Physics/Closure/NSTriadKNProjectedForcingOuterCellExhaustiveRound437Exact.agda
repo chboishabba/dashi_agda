@@ -34,7 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
-import DASHI.Physics.Closure/NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
+import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNForcingHelicityCommutatorRound306Exact as R306
 import DASHI.Physics.Closure.NSTriadKNForcingSlotKernelRound307Exact as R307
