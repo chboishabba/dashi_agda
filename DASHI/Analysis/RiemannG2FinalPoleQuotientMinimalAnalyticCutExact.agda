@@ -103,12 +103,12 @@ finalOffPaymentCompiles :
 finalOffPaymentCompiles = refl
 
 freshGammaRouteHasNoHistoricalIdentityPrerequisite :
-  Gamma.FreshSameTaperGammaEnvelopeBoundary.historical8889ProducerIdentityRequired
+  Gamma.FreshSameTaperGammaEnvelopeBoundary.historical8889IdentityRequiredForFreshEnvelope
     Gamma.canonicalFreshSameTaperGammaEnvelopeBoundary ≡ false
 freshGammaRouteHasNoHistoricalIdentityPrerequisite = refl
 
 freshGammaPaymentCompiles :
-  Gamma.FreshSameTaperGammaEnvelopeBoundary.finalGammaAllowancePaymentCompiles
+  Gamma.FreshSameTaperGammaEnvelopeBoundary.freshEnvelopeAllowanceFitCompilesFinalPayment
     Gamma.canonicalFreshSameTaperGammaEnvelopeBoundary ≡ true
 freshGammaPaymentCompiles = refl
 
