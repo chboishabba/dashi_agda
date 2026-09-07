@@ -30,8 +30,11 @@ grep -q '^constrainedHeavyEstablishedReplayGoesToAristotle :' DASHI/Core/ProofDe
 grep -q '^constrainedMachineCannotReclassifyNovelMathematics :' DASHI/Core/ProofDebtRouterExact.agda
 grep -q '^unAlignedCertificationCannotBeDelegatedAsProofReplay :' DASHI/Core/ProofDebtRouterExact.agda
 
+grep -q '^rhLowVerifiedHeightSource :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^osReconstructionSourceI :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^coordinateRoute :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^cutClass :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^constrainedAction :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^rhHighRemainsMathematical :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^rhLowIsNotMathematicalDebt :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^nsR406EstimateRemainsMathematical :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
@@ -39,6 +42,9 @@ grep -q '^nsDyadicEquivalenceIsAlignmentDebt :' DASHI/Core/ClayProofDebtFrontier
 grep -q '^ymOSReconstructionIsAlignmentDebt :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^ymClusteringRemainsMathematical :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 grep -q '^exactHeadValidationIsCertificationDebt :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^rhLowFirstActionIsAlignment :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^nsDyadicFirstActionIsAlignment :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^ymOSFirstActionIsAlignment :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Core/ProofDebtRouterExact.agda \
