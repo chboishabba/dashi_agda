@@ -14,3 +14,4 @@ import DASHI.Interop.GodsEyeViewProofCarryingWorldOntologyExact
 import DASHI.Interop.GodsEyeViewWorldOntologyCrossDomainExact
 import DASHI.Interop.GodsEyeViewPublicInterestWorldResidualExact
 import DASHI.Interop.GodsEyeViewActivistThreatAtlasExact
+import DASHI.Interop.GodsEyeViewDiagnosisDrivenActivistRollupExact
