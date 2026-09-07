@@ -6,6 +6,7 @@ on:
     paths:
       - 'DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchBridgeV02Exact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeCandidateV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityAdmissibilityV02Exact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchV02Everything.agda'
       - '.github/workflows/sensiblaw-country-v02-proof-search.yml'
 
@@ -25,6 +26,7 @@ jobs:
           sources=(
             DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchBridgeV02Exact.agda
             DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeCandidateV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityAdmissibilityV02Exact.agda
             DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchV02Everything.agda
           )
           for source in "${sources[@]}"; do
@@ -43,6 +45,11 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeCandidateV02Exact.agda
+
+      - name: Type-check community authority admissibility packet
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityAdmissibilityV02Exact.agda
 
       - name: Type-check V02 proof-search capstone
         run: >-
