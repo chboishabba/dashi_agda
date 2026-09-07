@@ -6,3 +6,8 @@ import DASHI.Biology.DrosophilaPluralEpistemicProgressBidiExact
 import DASHI.Governance.PluralEpistemicRepairMethodologyBidiExact
 import DASHI.Cognition.PNF.SensibLawPluralEpistemicRepairMethodologyBidiExact
 import DASHI.Core.RuntimePluralEpistemicProgressBidiExact
+
+-- Reverse/result-sensitive half: terminal closure is revisable through typed
+-- dependency backpropagation without identifying negative orientation with the
+-- logical/geometric opposite conclusion.
+import DASHI.Core.PluralEpistemicRevisionBackpropagationEverything
