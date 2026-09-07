@@ -11,7 +11,9 @@ import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statut
 import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Elements
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyRequirementSalienceExact as DutySalience
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyGenericParetoFrontierExact as DutyPareto
 import DASHI.Cognition.PNF.SensibLawWrongTypeRequirementSalienceFrontierExact as Frontier
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as Residual
 import DASHI.Cognition.PNF.SensibLawLegalGraphRefinementReopeningExact as Refinement
@@ -104,6 +106,27 @@ statutoryCoherenceMayBecomeSalientAfterPolicyClosure :
     Climate.statutoryCoherence
 statutoryCoherenceMayBecomeSalientAfterPolicyClosure =
   DutySalience.statutoryCoherenceBecomesSalientAfterPolicyClosure
+
+------------------------------------------------------------------------
+-- Generic finite Pareto frontier now computes the current question set.
+------------------------------------------------------------------------
+
+currentDutyParetoFrontierSelectsCorePolicy :
+  Pareto.paretoFrontier DutyPareto.currentDutyPortfolio
+  ≡ DutyPareto.currentCorePolicyCell ∷ []
+currentDutyParetoFrontierSelectsCorePolicy =
+  DutyPareto.currentDutyParetoFrontierIsCorePolicyOnly
+
+postPolicyParetoFrontierSelectsStatutoryCoherence :
+  Pareto.paretoFrontier DutyPareto.postPolicyPortfolio
+  ≡ DutyPareto.postPolicyStatutoryCoherenceCell ∷ []
+postPolicyParetoFrontierSelectsStatutoryCoherence =
+  DutyPareto.postPolicyParetoFrontierIsStatutoryCoherenceOnly
+
+foreseeabilityRemainsRequiredWhileOffParetoFrontier :
+  Pareto.requiredForConsumer DutyPareto.currentForeseeabilityCell ≡ true
+foreseeabilityRemainsRequiredWhileOffParetoFrontier =
+  DutyPareto.foreseeabilityRequiredButOffCurrentParetoFrontier
 
 ------------------------------------------------------------------------
 -- Reverse epistemic path.
