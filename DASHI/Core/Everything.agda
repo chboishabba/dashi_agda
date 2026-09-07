@@ -107,6 +107,8 @@ import DASHI.Core.ResidualObligationPropagationExact
 import DASHI.Core.TranslationRealisationCrossPollinationExact
 import DASHI.Core.DialecticalStageSpectrumExact
 import DASHI.Core.ContextualDialecticRoleExact
+import DASHI.Core.DialecticalMaterialRevisionExact
+import DASHI.Core.DialecticalMaterialFutureSafetyExact
 import DASHI.Core.EpistemicSuspensionExact
 import DASHI.Core.StageTransitionBarrierExact
 import DASHI.Core.DialecticStageMotifBridgeExact
