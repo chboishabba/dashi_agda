@@ -12,8 +12,12 @@ module DASHI.Physics.Closure.NSTriadKNFiniteKernelRankOneQuadraticSplitRound444E
 --
 --   Q_K(z) = beta (sum_i u(i) z(i))^2 + Q_R(z).
 --
+-- The second compiler records diagonal scaling:
+--
+--   Q_{d K d}(z) = Q_K(d z).
+--
 -- No positivity, topology, matrix library, spectral theorem or infinite series
--- is used.  It is list induction plus rational ring normalization.
+-- is used.  Both proofs are list induction plus rational ring normalization.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -116,8 +120,62 @@ quadraticRankOneSplit K R u z beta pointwise (head ∷ rest) =
       ∷ rowSum R z head rest
       ∷ quadraticForm R z rest ∷ []))
 
+scaledKernel :
+  ∀ {A : Set} →
+  (A → A → ℚ) →
+  (A → ℚ) →
+  A → A → ℚ
+scaledKernel K d left right = d left * K left right * d right
+
+scaledCoefficient :
+  ∀ {A : Set} →
+  (A → ℚ) →
+  (A → ℚ) →
+  A → ℚ
+scaledCoefficient d z cell = d cell * z cell
+
+rowDiagonalScaling :
+  ∀ {A : Set}
+    (K : A → A → ℚ)
+    (d z : A → ℚ)
+    (head : A) (items : List A) →
+  rowSum (scaledKernel K d) z head items
+  ≡ d head * rowSum K (scaledCoefficient d z) head items
+rowDiagonalScaling K d z head [] = solve (d head ∷ [])
+rowDiagonalScaling K d z head (cell ∷ rest) =
+  trans
+    (cong₂ _+_ refl (rowDiagonalScaling K d z head rest))
+    (solve
+      ( d head ∷ d cell ∷ K head cell ∷ z cell
+      ∷ rowSum K (scaledCoefficient d z) head rest ∷ []))
+
+quadraticDiagonalScaling :
+  ∀ {A : Set}
+    (K : A → A → ℚ)
+    (d z : A → ℚ)
+    (items : List A) →
+  quadraticForm (scaledKernel K d) z items
+  ≡ quadraticForm K (scaledCoefficient d z) items
+quadraticDiagonalScaling K d z [] = refl
+quadraticDiagonalScaling K d z (head ∷ rest) =
+  trans
+    (cong₂ _+_
+      (cong₂ _+_
+        refl
+        (cong₂ _*_
+          (cong₂ _*_ refl refl)
+          (rowDiagonalScaling K d z head rest)))
+      (quadraticDiagonalScaling K d z rest))
+    (solve
+      ( d head ∷ z head ∷ K head head
+      ∷ rowSum K (scaledCoefficient d z) head rest
+      ∷ quadraticForm K (scaledCoefficient d z) rest ∷ []))
+
 round444FiniteRankOneQuadraticSplitClosed : Bool
 round444FiniteRankOneQuadraticSplitClosed = true
+
+round444FiniteDiagonalScalingClosed : Bool
+round444FiniteDiagonalScalingClosed = true
 
 round444InfiniteSeriesUsed : Bool
 round444InfiniteSeriesUsed = false
@@ -128,3 +186,7 @@ round444MatrixSpectralTheoremUsed = false
 round444FiniteRankOneQuadraticSplitClosedIsTrue :
   round444FiniteRankOneQuadraticSplitClosed ≡ true
 round444FiniteRankOneQuadraticSplitClosedIsTrue = refl
+
+round444FiniteDiagonalScalingClosedIsTrue :
+  round444FiniteDiagonalScalingClosed ≡ true
+round444FiniteDiagonalScalingClosedIsTrue = refl
