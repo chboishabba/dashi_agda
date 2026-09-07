@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Law.ColonialJurisdictionalTotalisationAuthorityCrossPollinationExact as Total
 import DASHI.Law.AustralianColonialPrimarySourceAttributionExact as Primary
+import DASHI.Cognition.PNF.SensibLawApplicabilityPrerequisiteMeetExact as Meet
 
 cooperReachIsTotalisedInsideModel :
   Total.reach Total.cooperJurisdictionalTotalisation ≡ Total.assertedTotalReach
@@ -43,5 +44,9 @@ neverCededAttributionRemainsFirstNations :
 neverCededAttributionRemainsFirstNations = refl
 
 jurisdictionStillNeedsAuthorityForApplicability :
-  Total.applicabilityRequiresAuthority ≡ refl
+  Meet.legalSourceAuthorityRequired Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
 jurisdictionStillNeedsAuthorityForApplicability = refl
+
+jurisdictionStillNeedsResolvedJurisdictionForApplicability :
+  Meet.resolvedJurisdictionRequired Meet.canonicalApplicabilityPrerequisiteMeetBoundary ≡ true
+jurisdictionStillNeedsResolvedJurisdictionForApplicability = refl
