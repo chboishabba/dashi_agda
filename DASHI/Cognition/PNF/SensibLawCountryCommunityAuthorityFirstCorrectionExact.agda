@@ -4,7 +4,7 @@ module DASHI.Cognition.PNF.SensibLawCountryCommunityAuthorityFirstCorrectionExac
 -- COUNTRY COMMUNITY-AUTHORITY-FIRST CORRECTION
 --
 -- Application compiler over the current Country/Mabo/Billy operational state.
--- The first corrective step is not another State-authored success report.  It
+-- The first corrective step is not another State-authored success report. It
 -- is an affected-community-defined outcome/authority receipt, preserving Two-
 -- Eyed nonfusion and the existing Human Rights Committee remedy coordinates.
 --
@@ -14,6 +14,7 @@ module DASHI.Cognition.PNF.SensibLawCountryCommunityAuthorityFirstCorrectionExac
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.PluralEpistemicOperationalClosureExact as Operational
 import DASHI.Core.PluralOperationalResidualActionLoopExact as Adaptive
 import DASHI.Core.PluralOperationalRealisationDiscrepancyExact as Discrepancy
@@ -121,8 +122,7 @@ coordinationDoesNotRequireFusion :
 coordinationDoesNotRequireFusion = refl
 
 extractedPropositionCannotRecoverCommunityAuthority :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    IK.extractedProposition IK.authority → ⊥
+  INF.FactorsThrough IK.extractedProposition IK.authority → ⊥
 extractedPropositionCannotRecoverCommunityAuthority = IK.propositionCannotRecoverAuthority
 
 communityOutcomeEvidenceUsesCommunityStrand :
