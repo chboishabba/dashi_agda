@@ -4,17 +4,13 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13PreferredR171AlignedPrintedSour
 ------------------------------------------------------------------------
 -- PATH13 EQ. (119): LEAST-PRIVILEGE R171-ALIGNED PRINTED-ROLE SOURCE
 --
--- T3 is a useful producer of the corrected printed operator semantics, but the
--- Eq. (119) consumer does not require the whole T3 data set.  The actual
--- differential payment is only:
+-- Independent payments:
+--   * R171-aligned physical Path13 source;
+--   * minimal printed dexpPlus/Jplus/Ad(exp) semantics + chart weld;
+--   * direct literal 74-link budget inclusion 37/1024 <= selected cut radius;
+--   * rational -> legacy-real ring embedding.
 --
---   PrintedSemanticOperators
---   + PrintedOperatorChartWeld.
---
--- This owner composes that minimal semantic payment with the R171-aligned
--- physical source, the cut threshold, and the rational->legacy-real ring
--- embedding.  T3 therefore becomes a compatibility producer, not a primitive
--- source requirement.
+-- T3 and the older 1/24 cut are compatibility producers, not primitive inputs.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -24,6 +20,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPath13R171AlignedVariationalRouteExact as Aligned
 import DASHI.Physics.YangMills.BalabanPath13SplitPhysicalStandardOperatorCutExact as Split
 import DASHI.Physics.YangMills.BalabanPath13SplitPhysicalPrincipalImageRouteExact as Principal
+import DASHI.Physics.YangMills.BalabanPath13DirectRelative74CutExact as Direct74
 import DASHI.Physics.YangMills.BalabanCMP98Path13ReducedFamilyGeometryExact as Reduced
 import DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact as Family
 import DASHI.Physics.YangMills.BalabanCMP98Path13PrintedSemanticOperatorsExact as Printed
@@ -62,7 +59,7 @@ record PreferredR171AlignedPrintedPath13Inputs
     physical : Aligned.R171AlignedPath13PhysicalInputs CoarseField
     scalarEmbedding : R208.RationalRealRingEmbedding
     printedSemantics : R171AlignedSelectedPrintedSemantics physical
-    cutThreshold : Principal.SplitPath13CutThreshold
+    relative74CutThreshold : Direct74.SplitPath13Relative74CutThreshold
       (splitRepresentation physical)
 open PreferredR171AlignedPrintedPath13Inputs public
 
@@ -75,8 +72,8 @@ asPrintedRoleInputs inputs =
     representation = splitRepresentation (physical inputs)
     geometry = selectedGeometry (physical inputs)
     ops = operators (printedSemantics inputs)
-    admission = Principal.relativeContourInPrincipalImage
-      representation (cutThreshold inputs)
+    admission = Direct74.directRelative74InPrincipalImage
+      representation (relative74CutThreshold inputs)
   in record
     { Source.PrintedRolePath13SourceFamilyInputs.geometry = geometry
     ; Source.PrintedRolePath13SourceFamilyInputs.scalarEmbedding =
@@ -113,8 +110,5 @@ preferredR171AlignedPrintedPath13Equation119QPrimeExact inputs step perturbation
 preferredR171AlignedPrintedSourceCompilerLevel : ProofLevel
 preferredR171AlignedPrintedSourceCompilerLevel = machineChecked
 
--- Remaining independent payments are exactly the aligned physical source,
--- minimal printed semantics/chart weld, scalar cut threshold, and R208 scalar
--- embedding.  T3 is optional producer authority above this cut.
 literalPreferredR171AlignedPrintedSourceInputsLevel : ProofLevel
 literalPreferredR171AlignedPrintedSourceInputsLevel = conditional
