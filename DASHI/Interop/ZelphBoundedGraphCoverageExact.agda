@@ -9,17 +9,21 @@ import DASHI.Interop.ExternalContextSafetyBoundary as Safety
 ------------------------------------------------------------------------
 -- Zelph/Hugging Face bounded graph transport and query coverage.
 --
--- A successful manifest/shard fetch proves only that the requested transport
--- objects were obtained.  It does not prove that every graph fact relevant to
--- a semantic claim was inspected.  Coverage is always relative to a declared
--- query policy and graph revision.
+-- Runtime parity: SensibLaw coverage states are observed, incomplete,
+-- uninspected, invalid.  A successful manifest/shard fetch proves only that
+-- requested transport objects were obtained; query completeness is always
+-- relative to a declared policy and revision.
 ------------------------------------------------------------------------
 
 data TransportStatus : Set where
   transportComplete transportPartial transportFailed : TransportStatus
 
 data QueryCoverageStatus : Set where
-  queryCoverageComplete queryCoverageIncomplete queryCoverageInvalid : QueryCoverageStatus
+  queryCoverageComplete
+  queryCoverageIncomplete
+  queryCoverageUninspected
+  queryCoverageInvalid
+  : QueryCoverageStatus
 
 record ZelphTransportReceipt : Set where
   constructor zelph-transport-receipt
@@ -64,12 +68,18 @@ open QueryCoverageReceipt public
 safetyCoverage : QueryCoverageStatus → Safety.CoverageStatus
 safetyCoverage queryCoverageComplete = Safety.coverageComplete
 safetyCoverage queryCoverageIncomplete = Safety.coverageIncomplete
+safetyCoverage queryCoverageUninspected = Safety.propertyNotInspected
 safetyCoverage queryCoverageInvalid = Safety.observationInvalid
 
 incompleteQueryCoverageAbstains :
   Safety.dispositionForCoverage (safetyCoverage queryCoverageIncomplete)
   ≡ Safety.abstainForCoverage
 incompleteQueryCoverageAbstains = refl
+
+uninspectedQueryCoverageAbstains :
+  Safety.dispositionForCoverage (safetyCoverage queryCoverageUninspected)
+  ≡ Safety.abstainForCoverage
+uninspectedQueryCoverageAbstains = refl
 
 invalidQueryCoverageAbstains :
   Safety.dispositionForCoverage (safetyCoverage queryCoverageInvalid)
@@ -82,8 +92,8 @@ invalidQueryCoverageAbstains = refl
 
 data ShardFetchImpliesQueryCoverageComplete : Set where
 data PartialNonObservationImpliesGlobalAbsence : Set where
+data UninspectedPropertyImpliesPropertyAbsent : Set where
 data QueryCoverageCompleteMeansWholeWikidataComplete : Set where
-
 data QueryCoverageReceiptCreatesTruth : Set where
 
 shardFetchDoesNotProveQueryCoverage :
@@ -93,6 +103,10 @@ shardFetchDoesNotProveQueryCoverage ()
 partialNonObservationDoesNotProveGlobalAbsence :
   PartialNonObservationImpliesGlobalAbsence → ⊥
 partialNonObservationDoesNotProveGlobalAbsence ()
+
+uninspectedPropertyDoesNotProveAbsence :
+  UninspectedPropertyImpliesPropertyAbsent → ⊥
+uninspectedPropertyDoesNotProveAbsence ()
 
 queryCoverageIsPolicyRelative :
   QueryCoverageCompleteMeansWholeWikidataComplete → ⊥
@@ -109,15 +123,17 @@ record ZelphBoundedGraphCoverageBoundary : Set where
     partialViewIsReadOnly : Bool
     partialViewHasInferenceAuthority : Bool
     incompleteCoverageAbstains : Bool
+    uninspectedCoverageAbstains : Bool
     nonObservationCreatesGlobalAbsence : Bool
+    uninspectedCreatesPropertyAbsence : Bool
     coverageIsDeclaredPolicyRelative : Bool
     coverageCreatesTruth : Bool
 
 canonicalZelphBoundedGraphCoverageBoundary : ZelphBoundedGraphCoverageBoundary
 canonicalZelphBoundedGraphCoverageBoundary =
   zelph-bounded-graph-coverage-boundary
-    true true false true false true false
+    true true false true true false false true false
 
 zelphBoundedGraphCoverageStatement : String
 zelphBoundedGraphCoverageStatement =
-  "A successful Zelph/HF shard fetch is transport evidence, not semantic completeness. Query coverage is revision- and policy-relative; incomplete or invalid coverage abstains, partial non-observation is not global absence, and no coverage receipt creates truth or promotion authority."
+  "A successful Zelph/HF shard fetch is transport evidence, not semantic completeness. Query coverage is revision- and policy-relative with distinct complete, incomplete, uninspected and invalid states. Incomplete/uninspected/invalid coverage abstains; partial or uninspected non-observation is not property absence; no coverage receipt creates truth or promotion authority."
