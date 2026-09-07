@@ -15,11 +15,13 @@ module DASHI.Physics.Closure.NSTriadKNProjectedForcingOuterCellExhaustiveRound43
 --
 -- Thus the old R307 orientation exception is removed without ever evaluating
 -- normalizedDirection at the zero mode. No estimate or absolute value is used.
+-- This is a cellwise same-object classification only: aggregation under R294's
+-- heat/resolvent weight and the R423 spacetime signed budget remain open.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -32,8 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
-import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
-import DASHI.Physics.Closure.NSTriadKNMixedHelicityQuadraticKernelRound223Exact as R223
+import DASHI.Physics.Closure/NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNForcingHelicityCommutatorRound306Exact as R306
 import DASHI.Physics.Closure.NSTriadKNForcingSlotKernelRound307Exact as R307
@@ -255,7 +256,7 @@ classifyProjectedForcingOuterCell :
       Helical.Transverse E mode (Audit.velocity system mode))
     (tau : Physical.PhysicalTriadIncidence) →
   ProjectedForcingOuterCellCase S system tau
-classifyProjectedForcingOuterCell {E = E} {S = S}
+classifyProjectedForcingOuterCell {S = S}
     system velocityTransverse tau
   with Output.modeEqual (Physical.p tau) Z3.zeroMode in pDecision
 ... | true =
