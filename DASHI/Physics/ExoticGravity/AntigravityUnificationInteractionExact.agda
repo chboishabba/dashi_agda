@@ -10,14 +10,15 @@ import DASHI.Papers.CoreTheoremInterfaces as Core
 import DASHI.Analysis.RiemannZetaProgramBoundary as RH
 import DASHI.Physics.GR.StressEnergyCompatibility as GR
 import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
+import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 import DASHI.Physics.Laws.PhysicalLawRecoveryBoundary as Laws
 
 ------------------------------------------------------------------------
 -- ANTIGRAVITY x YM / NS / RH / GR / OBSERVATION / UNIFICATION
 --
 -- Cross-domain relevance is typed.  A shared mathematical or experimental
--- coordinate is not a proof transfer.  Gravitational observations now provide
--- the empirical GR-facing comparator layer between local anomaly claims and
+-- coordinate is not a proof transfer.  Gravitational observations provide the
+-- empirical GR-facing comparator layer between local anomaly claims and
 -- theory/unification residuals.
 ------------------------------------------------------------------------
 
@@ -89,6 +90,10 @@ observationChannelForClaim Anti.engineeredMetricResponse = Obs.clockOrRedshift
 
 ------------------------------------------------------------------------
 -- Observation-theory comparison hierarchy.
+--
+-- The old Boolean "same observable compared" is deliberately replaced by two
+-- literal prediction-observation welds.  GR and alternative predictions must
+-- independently match the exact observation channel and observable.
 ------------------------------------------------------------------------
 
 data ObservationTheoryStatus : Set where
@@ -101,11 +106,12 @@ record ObservationTheoryComparison : Set where
   constructor observation-theory-comparison
   field
     observation : Obs.GravitationalObservationReceipt
-    ordinaryGRPredictionCarrier : String
-    modifiedGravityPredictionCarrier : String
+    ordinaryGRPrediction : Pred.GravitationalPredictionReceipt
+    modifiedGravityPrediction : Pred.GravitationalPredictionReceipt
+    ordinaryGRWeld : Pred.PredictionObservationWeld ordinaryGRPrediction observation
+    modifiedGravityWeld : Pred.PredictionObservationWeld modifiedGravityPrediction observation
     ordinaryResidualClosed : Bool
     modifiedResidualSmaller : Bool
-    sameObservableCompared : Bool
     status : ObservationTheoryStatus
 
 open ObservationTheoryComparison public
@@ -151,6 +157,9 @@ existingGravitationalObservationBoundary = Obs.canonicalGravitationalObservation
 
 existingCurrentObservationalStatus : Obs.CurrentObservationalStatusBoundary
 existingCurrentObservationalStatus = Obs.canonicalCurrentObservationalStatusBoundary
+
+existingPredictionObservationBoundary : Pred.PredictionObservationBoundary
+existingPredictionObservationBoundary = Pred.canonicalPredictionObservationBoundary
 
 ------------------------------------------------------------------------
 -- Explicit promotion firewall.
