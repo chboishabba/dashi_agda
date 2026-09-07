@@ -22,6 +22,9 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNDirectResolventSignedCrossToR415Round503Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNResidenceBandVariationNoGoRound506Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
   workflow_dispatch:
@@ -96,6 +99,21 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact.agda
+
+      - name: Type-check R506 residence variation firewall
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNResidenceBandVariationNoGoRound506Exact.agda
+
+      - name: Type-check R507 Round104 to literal R406 slice
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact.agda
+
+      - name: Type-check R508 critical-production scheduler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact.agda
 
       - name: Type-check focused R505 aggregate
         run: >-
