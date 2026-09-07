@@ -85,6 +85,15 @@ import DASHI.Physics.YangMills.BalabanPath13Eq119SplitPhysicalStandardProvenance
 import DASHI.Physics.YangMills.BalabanPath13VariationalSpecializationExact
 import DASHI.Physics.YangMills.BalabanPath13VariationalRadiusFromSpecializationExact
 
+-- Align the selected/cut defect algebra with the R171 operator kernel itself.
+-- The old pointwise selected-cut/operator same-object weld is then definitional.
+import DASHI.Physics.YangMills.BalabanR171OperatorKernelGroupDefectAdapterExact
+import DASHI.Physics.YangMills.BalabanPath13R171AlignedVariationalRouteExact
+
+-- Least-privilege current source: T3 is now only one possible producer of the
+-- corrected printed semantic operators/chart weld, not a primitive payment.
+import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredR171AlignedPrintedSourceExact
+
 -- Newest canonical status surface for the source-correct preferred route.
 import DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact
 
