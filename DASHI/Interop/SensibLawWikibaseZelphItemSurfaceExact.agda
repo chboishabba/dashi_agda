@@ -6,23 +6,21 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Zelph
+import DASHI.Interop.ZelphPrunedArtifactQueryPreservationExact as Preservation
 import DASHI.Interop.SensibLawWikidataItemPropertyEvidenceExact as ItemEvidence
 import DASHI.Interop.AristotleSnakStatementPresenceBoundaryExact as Snaks
 import DASHI.Interop.AristotleConservativeTypeModuleBoundaryExact as Modules
+import DASHI.Interop.AristotleEvidenceSurfaceIdentityBoundaryExact as Identity
 
 ------------------------------------------------------------------------
 -- Runtime parity owner for SensibLaw src/policy/wikibase_zelph_item_surface.py.
 --
 -- Two evidence planes are joined but not collapsed:
+--   native Wikibase owns GUID / snak / rank / qualifiers / references;
+--   bounded Zelph owns adjacency / derived graph context / type module.
 --
---   native revision-pinned Wikibase entity
---     owns GUID / snak / rank / qualifiers / references
---
---   bounded Zelph graph view
---     owns bounded adjacency / graph relation context / derived relations
---
--- A graph artifact revision and an entity lastrevid may be different identifier
--- systems.  When they differ, the join requires an explicit alignment receipt.
+-- Pruned-graph query preservation, Q/P statement-family coverage, constraint
+-- profile coverage and revision alignment remain separate receipts.
 ------------------------------------------------------------------------
 
 record NativeWikibaseStatementPlane : Set where
@@ -51,6 +49,7 @@ record ZelphGraphContextPlane : Set where
     boundedAdjacencyReference : String
     derivedRelationReference : String
     typeModule : Modules.TypeClosureModuleReceipt
+    queryPreservation : Preservation.QueryFamilySoundnessReceipt
     ownsNativeStatementBundle : Bool
     ownsNativeStatementBundleIsFalse : ownsNativeStatementBundle ≡ false
 open ZelphGraphContextPlane public
@@ -72,6 +71,7 @@ record WikibaseZelphItemSurface : Set where
     graphPlane : ZelphGraphContextPlane
     revisionAlignment : RevisionAlignmentReceipt
     itemSurface : ItemEvidence.ItemPropertyEvidenceSurface
+    contentIdentity : Identity.EvidenceSurfaceIdentityReceipt
     authorityIsDiagnosticOnly : Bool
     authorityIsDiagnosticOnlyIsTrue : authorityIsDiagnosticOnly ≡ true
     promotionEvaluated : Bool
@@ -85,16 +85,22 @@ open WikibaseZelphItemSurface public
 ------------------------------------------------------------------------
 
 data CompleteGraphViewImpliesNativePropertyFamilyComplete : Set where
+data SoundOnlyPrunedGraphSupportsNegativeAnswer : Set where
 data ZelphAdjacencyReconstructsNativeRank : Set where
 data ZelphAdjacencyReconstructsNativeQualifiers : Set where
 data ZelphAdjacencyReconstructsNativeReferences : Set where
 data NativeEntityExportCreatesConservativeTypeClosure : Set where
 data DifferentRevisionIdentifiersNeedNoAlignmentReceipt : Set where
+data ContentIdentityCreatesRevisionAlignment : Set where
 data JoinedSurfaceCreatesMigrationAuthority : Set where
 
 completeGraphDoesNotCertifyNativePropertyFamily :
   CompleteGraphViewImpliesNativePropertyFamilyComplete → ⊥
 completeGraphDoesNotCertifyNativePropertyFamily ()
+
+soundOnlyPrunedGraphDoesNotSupportNegativeAnswer :
+  SoundOnlyPrunedGraphSupportsNegativeAnswer → ⊥
+soundOnlyPrunedGraphDoesNotSupportNegativeAnswer ()
 
 zelphAdjacencyDoesNotReconstructNativeRank :
   ZelphAdjacencyReconstructsNativeRank → ⊥
@@ -116,6 +122,10 @@ differentRevisionIdentifiersRequireAlignment :
   DifferentRevisionIdentifiersNeedNoAlignmentReceipt → ⊥
 differentRevisionIdentifiersRequireAlignment ()
 
+contentIdentityDoesNotCreateRevisionAlignment :
+  ContentIdentityCreatesRevisionAlignment → ⊥
+contentIdentityDoesNotCreateRevisionAlignment ()
+
 joinedSurfaceDoesNotCreateMigrationAuthority :
   JoinedSurfaceCreatesMigrationAuthority → ⊥
 joinedSurfaceDoesNotCreateMigrationAuthority ()
@@ -126,15 +136,18 @@ record WikibaseZelphJoinBoundary : Set where
     nativeAndGraphPlanesRemainDistinct : Bool
     nativePlaneOwnsStatementBundleSemantics : Bool
     graphPlaneOwnsBoundedRelationContext : Bool
+    prunedGraphNeedsQueryFamilyPreservation : Bool
     graphCompletenessCertifiesNativeFamilyCoverage : Bool
     differentRevisionIdentifiersNeedAlignment : Bool
+    joinedSurfaceHasContentIdentity : Bool
+    contentIdentityCreatesRevisionAlignment : Bool
     joinedSurfaceCreatesPromotion : Bool
     joinedSurfaceCreatesEdit : Bool
 
 canonicalWikibaseZelphJoinBoundary : WikibaseZelphJoinBoundary
 canonicalWikibaseZelphJoinBoundary =
-  wikibase-zelph-join-boundary true true true false true false false
+  wikibase-zelph-join-boundary true true true true false true true false false false
 
 wikibaseZelphJoinStatement : String
 wikibaseZelphJoinStatement =
-  "SensibLaw joins a revision-pinned native Wikibase statement plane with a bounded Zelph graph-context plane without collapsing their authority or information content. Native Wikibase owns GUID/snak/rank/qualifier/reference semantics; Zelph owns bounded adjacency and derived graph context. Complete graph coverage does not certify native Q/P statement-family completeness, different revision identifiers require an explicit alignment receipt, and the joined surface creates neither promotion nor edit authority."
+  "SensibLaw joins a revision-pinned native Wikibase statement plane with a bounded Zelph graph-context plane without collapsing their authority or information content. Native Wikibase owns GUID/snak/rank/qualifier/reference semantics; Zelph owns bounded adjacency and derived graph context. A pruned graph needs a query-family preservation receipt, complete graph coverage does not certify native Q/P statement-family completeness, different revision identifiers require an explicit alignment receipt, and canonical content identity is replay-only. The joined surface creates neither promotion nor edit authority."
