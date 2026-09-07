@@ -22,11 +22,12 @@ import DASHI.Core.RuntimeDiagnosisRepairSchedulerBidiExact
 import DASHI.Cognition.PNF.SensibLawDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.DrosophilaDiagnosisRepairSchedulerBidiExact
 
--- Temporal provenance return: diagnosis history is append-only authority while
--- the current live diagnosis fibre is a rebuildable hot projection.  A diagnosis
--- may be eliminated and later reactivated without deleting the prior event;
+-- Temporal provenance return: append-only diagnosis-event history is the
+-- authority; the current live diagnosis fibre is a rebuildable projection.
+-- Events carry typed result/debug-move triggers.  A diagnosis may be eliminated
+-- and later reactivated without deleting the prior elimination or activation;
 -- salience is recomputed against the current projection and an old debugger may
--- become eligible again.
+-- therefore become eligible again.
 import DASHI.Core.TemporalDiagnosisProvenanceHistoryBidiExact
 import DASHI.Core.TemporalDiagnosisFibreProjectionBidiExact
 import DASHI.Core.TemporalDiagnosisHotColdProjectionBidiExact
