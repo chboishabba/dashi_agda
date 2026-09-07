@@ -27,7 +27,9 @@ record RecomputeFrontier
 open RecomputeFrontier public
 
 frontierFromLineage :
-  ∀ {Artifact Depends diagnosis} →
+  ∀ {Artifact : Set}
+    {Depends : Artifact → Artifact → Set}
+    {diagnosis : Outcome.OutcomeDiagnosis} →
   Lineage.DiagnosisLineageEvent {Artifact} Depends diagnosis →
   RecomputeFrontier Depends diagnosis
 frontierFromLineage event =
@@ -52,12 +54,6 @@ record IncrementalRevisionReceipt
     revisionReference : String
 
 open IncrementalRevisionReceipt public
-
-------------------------------------------------------------------------
--- Finite fixture: observation -> model -> consumer is the changed branch;
--- frame -> consumer is an independent branch. Recomputing model diagnosis does
--- not require deleting the frame certificate.
-------------------------------------------------------------------------
 
 data Artifact : Set where
   observation model frame consumer : Artifact
