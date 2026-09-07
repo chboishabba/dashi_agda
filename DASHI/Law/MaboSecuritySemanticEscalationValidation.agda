@@ -1,0 +1,34 @@
+module DASHI.Law.MaboSecuritySemanticEscalationValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Law.SecuritySemanticEscalationDistanceExact as Esc
+import DASHI.Law.MaboSecuritySemanticEscalationCrossPollinationExact as Cross
+
+syntheticEscalationIsMonotone :
+  Esc.monotoneNonDecreasing Esc.syntheticEscalationPath ≡ true
+syntheticEscalationIsMonotone = refl
+
+syntheticEscalationStrictlyIncreases :
+  Esc.strictIncreaseObserved Esc.syntheticEscalationPath ≡ true
+syntheticEscalationStrictlyIncreases = refl
+
+strongerLanguageDoesNotProveSameObjectPath :
+  Esc.strongerLaterLanguageProvesSameObjectEscalation Esc.canonicalEscalationBoundary ≡ false
+strongerLanguageDoesNotProveSameObjectPath = refl
+
+monotoneEscalationDoesNotProveAdequacy :
+  Esc.monotoneEscalationProvesEvidenceAdequacy Esc.canonicalEscalationBoundary ≡ false
+monotoneEscalationDoesNotProveAdequacy = refl
+
+sharedCompressionDoesNotMergeHistories :
+  Cross.sharedCompressionMeansSameColonialHistory Cross.canonicalMaboEscalationBoundary ≡ false
+sharedCompressionDoesNotMergeHistories = refl
+
+semanticEscalationDoesNotProveColonialIntent :
+  Cross.semanticEscalationProvesColonialIntent Cross.canonicalMaboEscalationBoundary ≡ false
+semanticEscalationDoesNotProveColonialIntent = refl
+
+countryErasureNeedsBeforeAfterReceipts :
+  Cross.countryErasureCanBeInferredWithoutBeforeAfterReceipts Cross.canonicalMaboEscalationBoundary ≡ false
+countryErasureNeedsBeforeAfterReceipts = refl
