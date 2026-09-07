@@ -27,6 +27,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as PathTarget
+import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
 import DASHI.Physics.YangMills.BalabanPath13SelectedBackgroundRadiusFibreExact as BackgroundRadius
 import DASHI.Physics.YangMills.BalabanCMP98Path13ReducedFamilyGeometryExact as Geometry
 import DASHI.Physics.YangMills.BalabanCMP98Path13RelativeContourPrincipalImageExact as Principal
@@ -37,10 +38,6 @@ import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Ex
 import DASHI.Physics.YangMills.BalabanCMP98Equation119FederbushCalculusReuseRound177Exact as R177
 import DASHI.Physics.YangMills.BalabanCMP98Path13PerturbationCarrierWeldExact as Perturbation
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
-
-------------------------------------------------------------------------
--- Compatibility reduced input: retains an explicit reduced geometry object.
-------------------------------------------------------------------------
 
 record ReducedPath13TwoCarrierSourceFamilyInputs
     (CoarseField : Set) : Set₁ where
@@ -88,10 +85,6 @@ reducedPath13Equation119QPrimeAtBondExact :
       (asFullPath13TwoCarrierSourceFamilyInputs inputs)
       step perturbation bond
 reducedPath13Equation119QPrimeAtBondExact inputs step perturbation bond = refl
-
-------------------------------------------------------------------------
--- Canonical compact route: geometry is generated from selectedPhysical.
-------------------------------------------------------------------------
 
 record CanonicalPath13TwoCarrierSourceFamilyInputs
     (CoarseField : Set) : Set₁ where
@@ -154,10 +147,6 @@ canonicalSourceGeometryBackgroundExact :
   ≡ selectedPhysical inputs
 canonicalSourceGeometryBackgroundExact inputs = refl
 
-------------------------------------------------------------------------
--- Provenance-separated native-radius route.
-------------------------------------------------------------------------
-
 record RadiusNativePath13TwoCarrierSourceFamilyInputs
     (CoarseField : Set) : Set₁ where
   field
@@ -188,7 +177,7 @@ selectedPhysicalRadius inputs =
 nativeInverseLinkRadius :
   ∀ {CoarseField}
     (inputs : RadiusNativePath13TwoCarrierSourceFamilyInputs CoarseField) →
-  DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact.SelectedInverseLinkRadius13
+  Background.SelectedInverseLinkRadius13
     (PathTarget.path13Background (selectedPhysicalRadius inputs))
 nativeInverseLinkRadius inputs =
   BackgroundRadius.nativeInverseLinkRadius (selectedBackgroundRadius inputs)
@@ -271,9 +260,5 @@ cmp98Path13RadiusNativeSameObjectOwnershipLevel : ProofLevel
 cmp98Path13RadiusNativeSameObjectOwnershipLevel =
   BackgroundRadius.cmp98Path13SelectedBackgroundRadiusFibreLevel
 
--- The compact four-input route remains the fewest top-level fields.  The
--- radius-native route is retained because it separates physical smallness from
--- standard representation and chart recognition, and now makes the selected
--- physical background/radius dependency structural.
 literalCMP98Path13ReducedSourceFamilyInputsLevel : ProofLevel
 literalCMP98Path13ReducedSourceFamilyInputsLevel = conditional
