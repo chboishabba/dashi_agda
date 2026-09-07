@@ -29,6 +29,15 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalMeaningSignedCancellationRound510Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNSignedNetworkBudgetCompilerRound511Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNResidualIndexedProducerAdmissionRound512Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNIntrospectiveCriticalLeafObserverRound509Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNIntrospectiveCriticalProductionSchedulerRound510Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCommonInitialDatumCriticalCeilingNoGoRound511Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNInitialCriticalRealizationToR421Round512Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR414CriticalObservableRealizationNoGoRound513Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNRetainedViscosityPositivityNoGoRound514Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNStrictLiteralR406CriticalLeafRound515Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCriticalRadialRealizationProofSearchRound516Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound517Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
   workflow_dispatch:
@@ -50,101 +59,71 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@v3
 
       - name: Type-check R493 strict historical scheduler
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNStrictR423ProofSearchRound493Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNStrictR423ProofSearchRound493Exact.agda
 
       - name: Type-check R494 exact companion normalization
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNR299NormalizedCompanionSameObjectRound494Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNR299NormalizedCompanionSameObjectRound494Exact.agda
 
       - name: Type-check R495 integration transport authority
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNIntegrationTransportAuthorityRound495Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNIntegrationTransportAuthorityRound495Exact.agda
 
       - name: Type-check R496 direct pair companion
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNDirectResolventPairCompanionRound496Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectResolventPairCompanionRound496Exact.agda
 
       - name: Type-check R497 fibre companion
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNDirectResolventFibreCompanionRound497Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectResolventFibreCompanionRound497Exact.agda
 
       - name: Type-check R498 global companion
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNDirectResolventGlobalCompanionRound498Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectResolventGlobalCompanionRound498Exact.agda
 
       - name: Type-check R499 live trajectory specialization
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNDirectResolventTrajectoryCompanionRound499Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectResolventTrajectoryCompanionRound499Exact.agda
 
       - name: Type-check R500 integrated direct companion
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNDirectResolventIntegratedCompanionRound500Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectResolventIntegratedCompanionRound500Exact.agda
 
       - name: Type-check R502 off-diagonal boundary
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNDirectResolventOffDiagonalBoundaryRound502Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectResolventOffDiagonalBoundaryRound502Exact.agda
 
       - name: Type-check R503 direct R415 compiler
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNDirectResolventSignedCrossToR415Round503Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectResolventSignedCrossToR415Round503Exact.agda
 
       - name: Type-check R504 terminal cutset
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact.agda
 
       - name: Type-check R506 residence variation firewall
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNResidenceBandVariationNoGoRound506Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNResidenceBandVariationNoGoRound506Exact.agda
 
       - name: Type-check R507 Round104 to literal R406 slice
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact.agda
 
       - name: Type-check R508 critical-production scheduler
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact.agda
 
-      - name: Type-check R509 residual introspection
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNClayResidualIntrospectionRound509Exact.agda
+      - name: Type-check global residual introspection tranche
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNClayResidualIntrospectionRound509Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNPhysicalMeaningSignedCancellationRound510Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNSignedNetworkBudgetCompilerRound511Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNResidualIndexedProducerAdmissionRound512Exact.agda
 
-      - name: Type-check R510 physical meaning
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNPhysicalMeaningSignedCancellationRound510Exact.agda
+      - name: Type-check strict leaf-B introspection R509-R512
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNIntrospectiveCriticalLeafObserverRound509Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNIntrospectiveCriticalProductionSchedulerRound510Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNCommonInitialDatumCriticalCeilingNoGoRound511Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNInitialCriticalRealizationToR421Round512Exact.agda
 
-      - name: Type-check R511 signed network budget compiler
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNSignedNetworkBudgetCompilerRound511Exact.agda
-
-      - name: Type-check R512 residual-indexed producer admission
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNResidualIndexedProducerAdmissionRound512Exact.agda
+      - name: Type-check strict leaf-B realization R513-R517
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNR414CriticalObservableRealizationNoGoRound513Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNRetainedViscosityPositivityNoGoRound514Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNStrictLiteralR406CriticalLeafRound515Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNCriticalRadialRealizationProofSearchRound516Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound517Exact.agda
 
       - name: Type-check focused R505 aggregate
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact.agda
 
       - name: Type-check authoritative closure rollup
-        run: >-
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Physics/Closure/Everything.agda
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/Everything.agda
