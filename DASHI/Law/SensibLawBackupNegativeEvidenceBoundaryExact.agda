@@ -11,14 +11,6 @@ import DASHI.Law.SensibLawTemporalHealthEvidenceWrongTypeExact as TemporalHealth
 
 ------------------------------------------------------------------------
 -- SOURCE-SCOPED BACKUP NEGATIVE EVIDENCE
---
--- DASHI-original epistemic/provenance boundary.
---
--- A read-only backup search can independently corroborate carriers that are
--- present in that backup.  Failure to find another carrier in the searched
--- backup is source-scoped negative evidence only.  It cannot silently become
--- a proof that the carrier never existed, was never stored elsewhere, or was
--- never submitted through another route.
 ------------------------------------------------------------------------
 
 data BackupSearchOutcome : Set where
@@ -34,6 +26,12 @@ data CrossSourceSupport : Set where
   contradictedByIndependentSource : CrossSourceSupport
   crossSourceSupportUnresolved : CrossSourceSupport
 
+
+data SubmissionStatus : Set where
+  submissionEstablished : SubmissionStatus
+  submissionNotEstablished : SubmissionStatus
+  submissionRefuted : SubmissionStatus
+  submissionStatusUnresolved : SubmissionStatus
 
 record BackupSearchScope : Set₁ where
   constructor backupSearchScope
@@ -56,10 +54,6 @@ record BackupCarrierFinding (scope : BackupSearchScope) : Set₁ where
 
 open BackupCarrierFinding public
 
-------------------------------------------------------------------------
--- Same-object corroboration across duplicate backup copies.
-------------------------------------------------------------------------
-
 record HashIdentityCorroboration : Set₁ where
   constructor hashIdentityCorroboration
   field
@@ -73,31 +67,21 @@ record HashIdentityCorroboration : Set₁ where
 
 open HashIdentityCorroboration public
 
-------------------------------------------------------------------------
--- Backup support for a temporal-health evidence claim.
-------------------------------------------------------------------------
-
 record TemporalHealthBackupSupport : Set₁ where
   constructor temporalHealthBackupSupport
   field
     finalBundleFinding : BackupSearchOutcome
     supportingArchiveFindings : List String
     laterMedicalCarrierFindings : List String
-
     recordingsSpreadsheetFinding : BackupSearchOutcome
     separateBloodPressureCarrierFinding : BackupSearchOutcome
-
     finalBundleSupport : CrossSourceSupport
     specificBloodPressureEntrySupport : CrossSourceSupport
     separateSpreadsheetSubmissionSupport : CrossSourceSupport
-
+    separateSpreadsheetSubmissionStatus : SubmissionStatus
     supportReference : String
 
 open TemporalHealthBackupSupport public
-
-------------------------------------------------------------------------
--- Promotion boundary.
-------------------------------------------------------------------------
 
 record BackupNegativeEvidenceBoundary : Set where
   constructor backupNegativeEvidenceBoundary
@@ -105,47 +89,34 @@ record BackupNegativeEvidenceBoundary : Set where
     notFoundInBackupMeansNeverExisted : Bool
     notFoundInBackupMeansNeverExistedIsFalse :
       notFoundInBackupMeansNeverExisted ≡ false
-
     notFoundInBackupMeansNeverSubmitted : Bool
     notFoundInBackupMeansNeverSubmittedIsFalse :
       notFoundInBackupMeansNeverSubmitted ≡ false
-
     foundFinalBundleConfirmsEmbeddedPages : Bool
     foundFinalBundleConfirmsEmbeddedPagesIsTrue :
       foundFinalBundleConfirmsEmbeddedPages ≡ true
-
     missingSeparateCarrierCancelsEmbeddedEvidence : Bool
     missingSeparateCarrierCancelsEmbeddedEvidenceIsFalse :
       missingSeparateCarrierCancelsEmbeddedEvidence ≡ false
-
     crossSourceSupportMustRemainClaimSpecific : Bool
     crossSourceSupportMustRemainClaimSpecificIsTrue :
       crossSourceSupportMustRemainClaimSpecific ≡ true
 
 canonicalBackupNegativeEvidenceBoundary : BackupNegativeEvidenceBoundary
 canonicalBackupNegativeEvidenceBoundary =
-  backupNegativeEvidenceBoundary
-    false refl
-    false refl
-    true refl
-    false refl
-    true refl
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
+  backupNegativeEvidenceBoundary false refl false refl true refl false refl true refl
 
 data BackupNonHitAutomaticallyNonExistence : Set where
 data BackupNonHitAutomaticallyNonSubmission : Set where
 data MissingSpreadsheetAutomaticallyNegatesEmbeddedCharts : Set where
 data FinalBundlePresenceAutomaticallyConfirmsSpecificExternalSpreadsheetRow : Set where
 
-backupNonHitDoesNotProveNonExistence :
-  BackupNonHitAutomaticallyNonExistence → ⊥
+data SubmissionNotEstablishedAutomaticallySubmissionRefuted : Set where
+
+backupNonHitDoesNotProveNonExistence : BackupNonHitAutomaticallyNonExistence → ⊥
 backupNonHitDoesNotProveNonExistence ()
 
-backupNonHitDoesNotProveNonSubmission :
-  BackupNonHitAutomaticallyNonSubmission → ⊥
+backupNonHitDoesNotProveNonSubmission : BackupNonHitAutomaticallyNonSubmission → ⊥
 backupNonHitDoesNotProveNonSubmission ()
 
 missingSpreadsheetDoesNotNegateEmbeddedCharts :
@@ -156,21 +127,12 @@ finalBundleDoesNotAutoConfirmExternalSpreadsheetRow :
   FinalBundlePresenceAutomaticallyConfirmsSpecificExternalSpreadsheetRow → ⊥
 finalBundleDoesNotAutoConfirmExternalSpreadsheetRow ()
 
+submissionNotEstablishedDoesNotMeanRefuted :
+  SubmissionNotEstablishedAutomaticallySubmissionRefuted → ⊥
+submissionNotEstablishedDoesNotMeanRefuted ()
+
 ------------------------------------------------------------------------
 -- Russell / QCAT 0096/22 bounded regression.
---
--- This fixture encodes only the corrected source-support topology:
---
--- * the TrueNAS backup independently contains the final annotated QCAT bundle
---   and related Russell/QCAT recording/archive material;
--- * the final QCAT carrier contains the embedded health tables/charts already
---   represented by TemporalHealth.qcat0096HealthPages;
--- * the searched backup did not yield the separate Recordings and
---   Transcriptions spreadsheet or a standalone blood-pressure carrier;
--- * therefore the specific 14-Feb spreadsheet row remains source-dependent on
---   the separately recovered spreadsheet carrier;
--- * absence from this backup does not prove that such a carrier did not exist
---   elsewhere or was not submitted by another route.
 ------------------------------------------------------------------------
 
 russellBackupRoot : String
@@ -208,18 +170,15 @@ record RussellBackupCorrectionFixture : Set₁ where
     duplicateBundleReference : String
     relatedArchiveReferences : List String
     laterMedicalReference : String
-
     duplicateBundleSameHashReceipt : Set
     finalBundlePresentReceipt : Set
     relatedArchivesPresentReceipt : Set
-
     recordingsAndTranscriptionsNotFoundInSearchedBackup : Set
     standaloneBloodPressureCarrierNotFoundInSearchedBackup : Set
-
     finalBundleIndependentlyCorroborated : CrossSourceSupport
     specific14FebSpreadsheetEntryIndependentlyCorroborated : CrossSourceSupport
     separateSpreadsheetSubmissionIndependentlyCorroborated : CrossSourceSupport
-
+    separateSpreadsheetSubmissionStatus : SubmissionStatus
     embeddedHealthPagesReference : String
     embeddedHealthPagesRemainConfirmed : Bool
     embeddedHealthPagesRemainConfirmedIsTrue :
@@ -234,12 +193,7 @@ russellBackupCorrectionFixture :
   (spreadsheetNonHitReceipt : Set) →
   (bpCarrierNonHitReceipt : Set) →
   RussellBackupCorrectionFixture
-russellBackupCorrectionFixture
-  sameHashReceipt
-  bundleReceipt
-  archivesReceipt
-  spreadsheetNonHitReceipt
-  bpCarrierNonHitReceipt =
+russellBackupCorrectionFixture sameHashReceipt bundleReceipt archivesReceipt spreadsheetNonHitReceipt bpCarrierNonHitReceipt =
   russellBackupCorrectionFixture
     russellBackupRoot
     russellFinalBundleBackupReference
@@ -257,5 +211,6 @@ russellBackupCorrectionFixture
     independentlyCorroborated
     sourceDependent
     sourceDependent
+    submissionNotEstablished
     TemporalHealth.qcat0096HealthPages
     true refl
