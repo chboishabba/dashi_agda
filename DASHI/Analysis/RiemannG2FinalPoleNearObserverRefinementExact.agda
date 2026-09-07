@@ -48,8 +48,8 @@ record FinalPoleNearLiteralModel
 
     -- Only the operations used by the reflection-paired target-centred kernel
     -- are exposed.  No unrelated analytic structure is required here.
-    zero four : Scalar
-    add mul : Scalar -> Scalar -> Scalar
+    four : Scalar
+    mul : Scalar -> Scalar -> Scalar
     cosh cos : Scalar -> Scalar
     poleTaperValue : Scalar -> Scalar
     integrate : (Scalar -> Scalar) -> Scalar
@@ -126,9 +126,10 @@ coarseCountEnvelopeDoesNotPayJointMargin ()
 ------------------------------------------------------------------------
 -- Existing collision witness reused directly.
 --
--- Two cells have the same multiplicity and absolute envelope, yet opposite
--- signed contributions.  Therefore a count/envelope observer cannot be the
--- final sufficient statistic for the phase-sensitive near response.
+-- The historical owner already proves that two cells can have the same
+-- multiplicity and absolute envelope while their signed contributions have
+-- opposite sign.  Reuse the collision itself here; do not duplicate its
+-- rational arithmetic in the final-carrier observer module.
 ------------------------------------------------------------------------
 
 coarseObserverCollisionAlreadyOwned :
@@ -136,14 +137,6 @@ coarseObserverCollisionAlreadyOwned :
     Historical.positivePhaseCell
     Historical.negativePhaseCell
 coarseObserverCollisionAlreadyOwned = Historical.sameCountAndEnvelope
-
-positiveCellContributionIsPositive :
-  Historical.cellContribution Historical.positivePhaseCell ≡ (+ 1 / 1)
-positiveCellContributionIsPositive = Historical.positiveContribution
-
-negativeCellContributionIsNegative :
-  Historical.cellContribution Historical.negativePhaseCell ≡ (- (+ 1 / 1))
-negativeCellContributionIsNegative = Historical.negativeContribution
 
 ------------------------------------------------------------------------
 -- Search classification.
