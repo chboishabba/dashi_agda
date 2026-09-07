@@ -6,6 +6,7 @@ cd "$ROOT"
 
 FILES=(
   DASHI/Core/ProofDebtRouterExact.agda
+  DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
 )
 
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
@@ -25,4 +26,16 @@ grep -q '^record SourceAlignedDeferredTheorem' DASHI/Core/ProofDebtRouterExact.a
 grep -q '^ConditionalDevelopment :' DASHI/Core/ProofDebtRouterExact.agda
 grep -q '^certifyDeferred :' DASHI/Core/ProofDebtRouterExact.agda
 
-scripts/run_agda29_parallel_check.sh DASHI/Core/ProofDebtRouterExact.agda
+grep -q '^coordinateRoute :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^cutClass :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^rhHighRemainsMathematical :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^rhLowIsNotMathematicalDebt :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^nsR406EstimateRemainsMathematical :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^nsDyadicEquivalenceIsAlignmentDebt :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^ymOSReconstructionIsAlignmentDebt :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^ymClusteringRemainsMathematical :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+grep -q '^exactHeadValidationIsCertificationDebt :' DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
+
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Core/ProofDebtRouterExact.agda \
+  DASHI/Core/ClayProofDebtFrontierAtlasExact.agda
