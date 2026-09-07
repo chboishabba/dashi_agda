@@ -38,3 +38,19 @@ import DASHI.Core.RuntimeTemporalDiagnosisHistoryBidiExact
 import DASHI.Governance.GovernanceTemporalDiagnosisHistoryBidiExact
 import DASHI.Cognition.PNF.SensibLawTemporalDiagnosisHistoryBidiExact
 import DASHI.Biology.DrosophilaTemporalDiagnosisHistoryBidiExact
+
+-- Dependency-directed truth maintenance: every temporal diagnosis event may
+-- carry the exact upstream affected-closure path that made it relevant. A later
+-- reactivation localizes recomputation to that subgraph without deleting prior
+-- lineage, invalidating unrelated certificates, or transferring authority.
+import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact
+import DASHI.Core.IncrementalDiagnosisTruthMaintenanceBidiExact
+
+-- Brown-lane x-pollination: source-bound Alice Brown epistemic-agency/observer
+-- distinctions and John Anthony Brown H1-H5/reception audit paths consume the
+-- same diagnosis, temporal and dependency-lineage methodology without merging
+-- their source fibres or authorship/authority boundaries.
+import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact
+import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact
+import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact
+import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact
