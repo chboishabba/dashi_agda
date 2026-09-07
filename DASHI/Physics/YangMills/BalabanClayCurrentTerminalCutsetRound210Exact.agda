@@ -37,6 +37,8 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakExpectationClosureExact 
 import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakGramReflectionClosureExact as Gram
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSExact as OS
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSGapBridgeExact as Gap
+import DASHI.Physics.YangMills.BalabanClayT1PhysicalMeaningRound211Exact
+import DASHI.Physics.YangMills.BalabanClayT1SelectedCoerciveContainmentRound212Exact
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact as Frontier
 
 data T5PreferredContinuumLeaf210 : Set where
