@@ -10,6 +10,7 @@ module DASHI.Physics.YangMills.BalabanClayT5SelectedCompactUniqueFullSequenceExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact as Legacy
@@ -18,7 +19,7 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedSequentialConvergenceExact a
 record SelectedCompactUniqueData (Object : Set) : Set₁ where
   field
     convergence : Selected.SequentialConvergence Object
-    sequence : Agda.Builtin.Nat.Nat → Object
+    sequence : Nat → Object
     target : Object
 
     extractFurther :
