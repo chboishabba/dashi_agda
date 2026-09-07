@@ -15,9 +15,9 @@ module DASHI.Physics.YangMills.BalabanPath13RadiusOperatorDefectRouteExact where
 -- variational defect when all that the path argument needs is the physical
 -- 1/2048 per-link operator bound.
 --
--- The only standard representation input is source-independent: the rational
--- quaternion carrier must be interpreted in the intended SU(2) operator norm,
--- with exact identity/product coordinates and conjugation-invariant defect.
+-- The standard rational SU(2) operator representation is owned by R171.  Its
+-- identity/product/conjugation laws are source-independent representation
+-- facts and are not repaid in this Path13 specialization.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -30,7 +30,6 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
-import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as Word
 import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
 import DASHI.Physics.YangMills.BalabanCMP98SU2OperatorDefectFromPhysicalRadiusRound171Exact as R171
 import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Op
@@ -52,26 +51,14 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33CMP109MinimalPathStageBudgetExact as PathBudget
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralRelativeDefectRound164Exact as R164
 
-record ExactRationalSU2OperatorDefectRepresentation : Set₁ where
-  field
-    base : R171.RationalSU2OperatorDefectRepresentation
-
-    kernelIdentityIsQuaternionIdentity :
-      Op.identity (R171.kernel base) ≡ Q.oneQ
-
-    kernelMultiplyIsQuaternionMultiply : ∀ left right →
-      Op.multiply (R171.kernel base) left right ≡ left Q.*q right
-
-    kernelDefectConjugateInvariant : ∀ value →
-      Op.defect (R171.kernel base) (Quaternion.quaternionConjugate value)
-      ≡ Op.defect (R171.kernel base) value
-
-open ExactRationalSU2OperatorDefectRepresentation public
+ExactRationalSU2OperatorDefectRepresentation : Set₁
+ExactRationalSU2OperatorDefectRepresentation =
+  R171.RationalSU2OperatorDefectRepresentation
 
 operatorKernel :
   ExactRationalSU2OperatorDefectRepresentation →
   Op.UnitaryOperatorDefectKernel Q.RationalQuaternion
-operatorKernel representation = R171.kernel (base representation)
+operatorKernel = R171.kernel
 
 path13PositiveLinkNormSqBelowRadius :
   ∀ background → Background.SelectedInverseLinkRadius13 background →
@@ -85,9 +72,7 @@ path13PositiveLinkNormSqBelowRadius background radius axis site =
     sameNorm = AdjointNorm.inverseDifferenceNormSqExact
       (Background.link background axis site)
   in
-  subst
-    (λ lower → lower ≤ Relaxed.fourRhoSquare)
-    sameNorm inverseBound
+  subst (λ lower → lower ≤ Relaxed.fourRhoSquare) sameNorm inverseBound
 
 path13PositiveLinkQuaternionL1BelowOne2048 :
   ∀ background → Background.SelectedInverseLinkRadius13 background →
@@ -119,7 +104,7 @@ path13PositiveLinkOperatorDefectBelowOne2048 :
   ≤ Budget.perLinkDefectMajorant
 path13PositiveLinkOperatorDefectBelowOne2048 representation background radius axis site =
   ℚP.≤-trans
-    (R171.operatorDefectBelowQuaternionL1 (base representation)
+    (R171.operatorDefectBelowQuaternionL1 representation
       (Background.link background axis site))
     (path13PositiveLinkQuaternionL1BelowOne2048 background radius axis site)
 
@@ -172,7 +157,7 @@ rawOrientedFactorDefectSmallFromRadius representation background radius site
     conjugateBound =
       subst
         (λ lower → lower ≤ Budget.perLinkDefectMajorant)
-        (sym (kernelDefectConjugateInvariant representation positive))
+        (sym (R171.kernelDefectConjugateInvariant representation positive))
         (path13PositiveLinkOperatorDefectBelowOne2048
           representation background radius axis predecessor)
   in
@@ -197,7 +182,7 @@ rawPathDefectBelowLengthBudgetFromRadius representation background radius site [
     (λ selectedValue →
       Op.defect (operatorKernel representation) selectedValue
       ≤ Sums.natAsRational bound * Budget.perLinkDefectMajorant)
-    (kernelIdentityIsQuaternionIdentity representation)
+    (R171.kernelIdentityIsQuaternionIdentity representation)
     (subst
       (λ lower → lower
         ≤ Sums.natAsRational bound * Budget.perLinkDefectMajorant)
@@ -252,7 +237,7 @@ rawPathDefectBelowLengthBudgetFromRadius representation background radius site
     (λ selectedValue →
       Op.defect (operatorKernel representation) selectedValue
       ≤ Sums.natAsRational (suc bound) * Budget.perLinkDefectMajorant)
-    (kernelMultiplyIsQuaternionMultiply representation head tail)
+    (R171.kernelMultiplyIsQuaternionMultiply representation head tail)
     successorBound
 
 path13NativeRadiusToOperatorDefectLevel : ProofLevel
@@ -261,6 +246,6 @@ path13NativeRadiusToOperatorDefectLevel = machineChecked
 path13NativeRadiusRawPathTelescopeLevel : ProofLevel
 path13NativeRadiusRawPathTelescopeLevel = machineChecked
 
--- This is the source-independent standard matrix representation boundary.
 path13ExactRationalSU2OperatorRepresentationLevel : ProofLevel
-path13ExactRationalSU2OperatorRepresentationLevel = standardImported
+path13ExactRationalSU2OperatorRepresentationLevel =
+  R171.cmp98RationalSU2OperatorRepresentationRound171Level
