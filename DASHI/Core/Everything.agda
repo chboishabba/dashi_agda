@@ -139,6 +139,7 @@ import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
 import DASHI.Core.SituatedClaimAuthoritySystemExact
 import DASHI.Core.KnowledgeContentAuthoritySeparationExact
+import DASHI.Core.TerminalRealisationValidationExact
 
 -- Proof-carrying physical execution / shared-state coalition / proof-search
 -- least-privilege closure.
