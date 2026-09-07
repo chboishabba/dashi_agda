@@ -6,3 +6,14 @@ import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact
 import DASHI.Core.DependencySensitiveClosureReopeningBidiExact
 import DASHI.Core.DependencyGraphResultBackpropagationBidiExact
 import DASHI.Core.SequentialOutcomeBackpropagationBidiExact
+
+-- Diagnosis-fibre debugging: keep multiple causal/representational explanations
+-- live after an adverse or indeterminate result, then select the next debugging
+-- observation by strict diagnosis-fibre narrowing rather than raw magnitude.
+import DASHI.Core.DiagnosisFibreSalienceSchedulerBidiExact
+import DASHI.Core.DiagnosisExperimentPortfolioBidiExact
+import DASHI.Core.SequentialDiagnosisDebugLoopBidiExact
+import DASHI.Core.ArgumentDiagnosisDebuggingBidiExact
+import DASHI.Governance.GovernanceDiagnosisRepairSchedulerBidiExact
+import DASHI.Core.RuntimeDiagnosisRepairSchedulerBidiExact
+import DASHI.Cognition.PNF.SensibLawDiagnosisRepairSchedulerBidiExact
