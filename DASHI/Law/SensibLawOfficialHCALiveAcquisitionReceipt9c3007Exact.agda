@@ -124,7 +124,8 @@ data LiveFetchAutomaticallyLegalAuthority : Set where
 data ArtifactDigestAutomaticallyPropositionCorrespondence : Set where
 data EmbeddedGitHeadAutomaticallyCleanProducer : Set where
 data ProviderSourceLineageAutomaticallyByteIdenticalBuild : Set where
-\liveFetchDoesNotBecomeSemanticPayment :
+
+liveFetchDoesNotBecomeSemanticPayment :
   LiveFetchAutomaticallySemanticPayment → ⊥
 liveFetchDoesNotBecomeSemanticPayment ()
 
