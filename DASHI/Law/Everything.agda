@@ -74,3 +74,4 @@ import DASHI.Law.HerzogFascismAntifascistAmalekCrossPollinationExact
 import DASHI.Law.HerzogBodycamFascismAmalekValidation
 import DASHI.Law.HerzogIncidentFascismComparatorValidation
 import DASHI.Law.CoerciveContactAuditValidation
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything
