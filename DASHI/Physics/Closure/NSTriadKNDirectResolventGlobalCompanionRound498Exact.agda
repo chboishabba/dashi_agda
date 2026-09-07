@@ -15,6 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNDirectResolventGlobalCompanionRound498Exac
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -23,6 +24,7 @@ open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
@@ -47,14 +49,13 @@ module DirectGlobal
       (Field30.physicalEmbedding physicalSystem)
       (Field30.physicalInverseSquare physicalSystem)
       S L H
-      (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.velocityAt
-        (Field30.finiteSystem physicalSystem))) where
+      (Audit.velocityAt (Field30.finiteSystem physicalSystem))) where
 
   module Global = R398.GlobalFluxLocal physicalSystem S L H P
   module Fibre = R497.DirectFibre physicalSystem S
 
   globalDirectCompanion :
-    (cutoff : Agda.Builtin.Nat.Nat) →
+    (cutoff : Nat) →
     (outputs : List Z3.FourierMode) →
     Global.OutputFibresPositiveOn cutoff outputs → ℚ
   globalDirectCompanion cutoff [] Global.positiveOutputsNil = 0ℚ
@@ -65,7 +66,7 @@ module DirectGlobal
     + globalDirectCompanion cutoff outputs tailPositive
 
   globalRemainderIsFourDirectCompanion :
-    (cutoff : Agda.Builtin.Nat.Nat) →
+    (cutoff : Nat) →
     (outputs : List Z3.FourierMode) →
     (positive : Global.OutputFibresPositiveOn cutoff outputs) →
     R385.sumWeightedRemainder (Global.globalPairs cutoff outputs positive)
