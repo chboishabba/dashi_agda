@@ -16,6 +16,8 @@ import DASHI.Wikimedia.NativeSnakPNFLogicalForceExact
 import DASHI.Wikimedia.NativeEpistemicProjectionExact
 import DASHI.Wikimedia.WikidataPNFPredicateBridgeExact
 import DASHI.Wikimedia.SensibLawWikipediaIngestContractExact
+import DASHI.Wikimedia.NativePropertyTripleProjectionExact
 import DASHI.Wikimedia.NativeConcreteQidGraphProjectionExact
 import DASHI.Wikimedia.MaboNativeWikimediaBridgeExact
+import DASHI.Wikimedia.MaboPropertyTripleProjectionExact
 import DASHI.Wikimedia.MaboConcreteQidGraphProjectionExact
