@@ -103,6 +103,10 @@ open import DASHI.Core.Prelude
 -- Historical 8889 identity is required only for the historical precision-repair
 -- route, not for this fresh theorem-interface route.
 --
+-- RiemannG2FinalPoleQuotientMinimalAnalyticCutExact is the authoritative compact
+-- classification of the remaining high-ordinate coordinates: analytic,
+-- cross-prover/representation, downstream, or pruned.
+--
 -- Existing representation machinery is reused rather than re-searched.
 -- Uninhabited adapter/transport records remain obligations, not fabricated proof
 -- terms. Low-ordinate/global coverage and RH remain open. No theorem here derives
@@ -153,6 +157,7 @@ import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact
 import DASHI.Analysis.RiemannG2PoleQuotientOffChosenCutoffCompilerExact
 import DASHI.Analysis.RiemannG2WindowBudgetToTransportedNearUpperExact
 import DASHI.Analysis.RiemannG2TransportedChosenCutoffOffAllowanceCompilerExact
+import DASHI.Analysis.RiemannG2FinalOffMinimalCutRegression
 import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact
 import DASHI.Analysis.RiemannG2GammaCandidateSourceLineageRecoveryExact
 import DASHI.Analysis.RiemannG2GammaLineageHighestAlphaReconciliationExact
@@ -162,6 +167,7 @@ import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeCompilerExact
 import DASHI.Analysis.RiemannG2FreshSameTaperGammaEnvelopeRegression
 import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact
 import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact
+import DASHI.Analysis.RiemannG2FinalPoleQuotientMinimalAnalyticCutExact
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
