@@ -219,9 +219,10 @@ guessGammaDigammaLossNoLongerLive :
   GammaSource.SearchRelevant GammaSource.guessDigammaLossWithoutProducer -> ⊥
 guessGammaDigammaLossNoLongerLive = GammaSource.guessDigammaLossWithoutProducerPruned
 
-gammaSourceRecoveryStageIsArtifactRequired :
-  GammaSource.currentGammaProducerRecoveryStage ≡ GammaSource.producerArtifactRequired
-gammaSourceRecoveryStageIsArtifactRequired = refl
+gammaSourceRecoveryStageIsFinalProducerIdentityRequired :
+  GammaSource.currentGammaProducerRecoveryStage ≡
+  GammaSource.finalProducerIdentityRequired
+gammaSourceRecoveryStageIsFinalProducerIdentityRequired = refl
 
 adaptiveInverseWidthStillLogicallyOpen :
   Gap.densityCutRefutesEveryAdaptiveInverseWidthRoute
@@ -315,4 +316,4 @@ canonicalHighestAlphaAfter8894Boundary =
     false refl
     false refl
     false refl
-    "After the checked §35-§38 audit, do not confuse an obstruction condition with a forward RH theorem. Low-gap clustering is necessary only for positivity of the gap-split lower-bound no-go; it is not the signed-cancellation payment. The highest-alpha forward zero-side theorem is now explicit: recover DirectSignedConsumerPayment = AcceptableForG2Consumer(totalSignedResponse) on the canonical LiteralTargetCenteredScalarProblem, packaged by DirectFinitePoleNearProducer. Canonical carrier fields, phase statistic and evaluation surface are compiler output. Selected-window/budget transport is downstream. Gamma producer precision remains the independent live branch. RH remains open."
+    "Historical post-8894 compatibility scheduler. Its determinant DirectSignedConsumerPayment lane remains diagnostic/intermediate relative to the newer universal pole-quotient final-carrier scheduler. Gamma generic source discovery is no longer live: a concrete candidate family is recovered and the current source stage is finalProducerIdentityRequired. The authoritative terminal high-ordinate leaves are now the pole-quotient Off and Gamma assigned-allowance payments; see RiemannAristotleRHFinalAllowanceLeafSchedulerExact. RH remains open."
