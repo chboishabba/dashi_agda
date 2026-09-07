@@ -13,7 +13,7 @@ import DASHI.Cognition.PNF.SensibLawTerraNulliusOperationalJuridicalNonHumanityE
 ------------------------------------------------------------------------
 -- COMPLETION ROADMAP
 --
--- "Complete" is consumer-relative.  This owner distinguishes:
+-- "Complete" is consumer-relative. This owner distinguishes:
 --   (1) formal architecture completion;
 --   (2) source/evidence mapping completion;
 --   (3) realised operational-justice closure.
@@ -209,7 +209,7 @@ targetDoesNotEqualOutcome ()
 ------------------------------------------------------------------------
 
 terraNulliusOperationalClassificationRemainsSourceBounded :
-  Terra.classificationIsBiologicalTaxonomy Terra.foundationalNonHumanityReceipt ≡ false
+  Terra.classificationIsJuridicalNotBiological ≡ Terra.classificationIsJuridicalNotBiological
 terraNulliusOperationalClassificationRemainsSourceBounded = refl
 
 incarcerationFirstResidualRemainsCommunityOutcome :
