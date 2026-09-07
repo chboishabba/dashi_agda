@@ -13,8 +13,10 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- R507 reuses Round104 critical slices on the literal R406 carrier with exactly
 -- one remainder same-object receipt, R508 sharpens proof search for that second
 -- critical-production leaf, R509 binds introspection to the exact live residuals,
--- R510 attaches the physical meaning, and R511 compiles actual signed boundary
--- and forcing budgets through the exact R106 whole-network normal form.
+-- R510 attaches the physical meaning, R511 compiles actual signed boundary
+-- and forcing budgets through the exact R106 whole-network normal form, and
+-- R512 indexes producer admission by the exact residual so the R511 leaf-B
+-- compiler cannot masquerade as payment of leaf A.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact
@@ -34,3 +36,4 @@ import DASHI.Physics.Closure.NSTriadKNLiteralR406CriticalProductionProofSearchRo
 import DASHI.Physics.Closure.NSTriadKNClayResidualIntrospectionRound509Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalMeaningSignedCancellationRound510Exact
 import DASHI.Physics.Closure.NSTriadKNSignedNetworkBudgetCompilerRound511Exact
+import DASHI.Physics.Closure.NSTriadKNResidualIndexedProducerAdmissionRound512Exact
