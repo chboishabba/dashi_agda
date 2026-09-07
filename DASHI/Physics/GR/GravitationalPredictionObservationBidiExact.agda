@@ -11,7 +11,8 @@ import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
 --
 -- A gravity theory does not compare directly to a detector label.  It must
 -- predict the exact observable carried by the calibrated observation channel.
--- The comparison is therefore same-channel and same-observable by construction.
+-- The prediction claim scope is explicit because attribution to a theory
+-- carrier is weaker than attribution to the exact prediction claim consumed.
 ------------------------------------------------------------------------
 
 data GravityTheoryFamily : Set where
@@ -31,6 +32,7 @@ record GravitationalPredictionReceipt : Set where
   field
     theoryFamily : GravityTheoryFamily
     theoryCarrier : String
+    predictionClaimScope : String
     channel : Obs.GravitationalObservationChannel
     observable : Obs.GravitationalObservable
     observableMatchesChannel : Obs.observableFor channel ≡ observable
@@ -63,6 +65,7 @@ open PredictionObservationWeld public
 
 data PredictionObservationResidual : Set where
   missingTheoryCarrier : PredictionObservationResidual
+  missingPredictionClaimScope : PredictionObservationResidual
   missingSourceModel : PredictionObservationResidual
   missingPropagationModel : PredictionObservationResidual
   missingDetectorResponse : PredictionObservationResidual
@@ -77,6 +80,8 @@ record PredictionObservationBoundary : Set where
   constructor prediction-observation-boundary
   field
     detectorLabelEqualsTheoryPrediction : Bool
+    predictionClaimScopeRequired : Bool
+    theoryCarrierIdentityAlonePaysPredictionScope : Bool
     sameChannelRequired : Bool
     sameObservableRequired : Bool
     detectorResponseRequired : Bool
@@ -88,7 +93,7 @@ record PredictionObservationBoundary : Set where
 canonicalPredictionObservationBoundary : PredictionObservationBoundary
 canonicalPredictionObservationBoundary =
   prediction-observation-boundary
-    false true true true true false false true
+    false true false true true true true false false true
 
 ------------------------------------------------------------------------
 -- Finite non-collapse witness.
