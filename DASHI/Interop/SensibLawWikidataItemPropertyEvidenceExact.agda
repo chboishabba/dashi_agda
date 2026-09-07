@@ -4,17 +4,11 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Interop.AristotleRankQualifierPropertyEngineBoundary as Aristotle
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Zelph
 import DASHI.Interop.SensibLawWikidataRequiredPropertyCoverageExact as Required
-
-------------------------------------------------------------------------
--- Runtime parity owner for SensibLaw item_property_evidence v0_2.
---
--- item -> required/observed property family -> statement -> native bundle.
--- Peer coordinates are conditioned projections of that carrier.
-------------------------------------------------------------------------
 
 data StatementRank : Set where
   preferredRank normalRank deprecatedRank : StatementRank
@@ -111,10 +105,6 @@ record ItemPropertyEvidenceSurface : Set where
     editEffectIsFalse : editEffect ≡ false
 open ItemPropertyEvidenceSurface public
 
-------------------------------------------------------------------------
--- Aristotle parity.
-------------------------------------------------------------------------
-
 rankSourceContract : Aristotle.AristotleExecutableContract
 rankSourceContract = Aristotle.truthyItemStatementContract
 
@@ -171,16 +161,6 @@ observedMissingRequiredPropertyIsAbsence = refl
 uninspectedMissingRequiredPropertyIsUnresolved :
   propertyPresenceOwner Zelph.queryCoverageUninspected false ≡ Required.propertyPresenceUnresolved
 uninspectedMissingRequiredPropertyIsUnresolved = refl
-
-------------------------------------------------------------------------
--- Condition references retain exact Wikidata location:
---   property_family_coverage | P14143
---   property_presence        | P14143
---   statement_rank           | P5991|<GUID>
---   statement_visibility     | P5991|<GUID>
---   property_scope           | P459:qualifier
---   property_relation        | P31->Q783794
-------------------------------------------------------------------------
 
 data SameSerializedValueImpliesSameEvidenceSurface : Set where
 data SameRankForcesSameVisibility : Set where
