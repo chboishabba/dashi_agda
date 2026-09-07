@@ -6,7 +6,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as NS
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as R477
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact as NS
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact as RH
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
@@ -20,15 +21,16 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
 -- by producer motif, which prevents wasting search on already-owned compiler
 -- infrastructure.
 --
--- NS UPDATE (R477)
+-- NS UPDATE (R478)
 -- ----------------
--- The older R442 direct signed-companion frontier exposed resolvent->heat and
--- signed-spacetime leaves.  R477 installs the nonseparable Cauchy kernel
--- directly on the fixed-output Gram quadratic form and proves the exact helical
--- +/- split.  On the currently preferred projected route the terminal NS leaves
--- are therefore the two scalar resolved GramOperatorBounds, not a separate
--- Laplace-realization seam.  The older direct signed route remains a fallback,
--- not the cross-domain scheduler's preferred NS frontier.
+-- R477 installs the literal nonseparable Cauchy kernel and proves an exact
+-- helical +/- split.  It also proves that two same-helicity scalar resolved
+-- GramOperatorBounds are a sufficient producer for the total physical bound.
+-- R471's least-privilege consumer contract, however, asks only for the TOTAL
+-- resolved GramOperatorBound.  R478 therefore makes that one direct bound the
+-- preferred terminal coordinate.  The +/- pair remains an optional stronger
+-- producer route; the scheduler must not require it and thereby throw away
+-- compensation that may be visible only in the summed signed quadratic form.
 ------------------------------------------------------------------------
 
 data TerminalProducerMotif : Set where
@@ -44,8 +46,7 @@ data TerminalProducerMotif : Set where
 data Programme : Set where navierStokes yangMills riemannZeta : Programme
 
 data TerminalCoordinate : Set where
-  nsPlusResolvedGram : TerminalCoordinate
-  nsMinusResolvedGram : TerminalCoordinate
+  nsDirectResolvedGram : TerminalCoordinate
   ymRound108Semantics : TerminalCoordinate
   ymRound108BC1SameObject : TerminalCoordinate
   rhOffAllowance : TerminalCoordinate
@@ -53,49 +54,51 @@ data TerminalCoordinate : Set where
 
 
 coordinateProgramme : TerminalCoordinate → Programme
-coordinateProgramme nsPlusResolvedGram = navierStokes
-coordinateProgramme nsMinusResolvedGram = navierStokes
+coordinateProgramme nsDirectResolvedGram = navierStokes
 coordinateProgramme ymRound108Semantics = yangMills
 coordinateProgramme ymRound108BC1SameObject = yangMills
 coordinateProgramme rhOffAllowance = riemannZeta
 coordinateProgramme rhGammaAllowance = riemannZeta
 
 primaryMotif : TerminalCoordinate → TerminalProducerMotif
-primaryMotif nsPlusResolvedGram = resolvedGramOperatorBound
-primaryMotif nsMinusResolvedGram = resolvedGramOperatorBound
+primaryMotif nsDirectResolvedGram = resolvedGramOperatorBound
 primaryMotif ymRound108Semantics = sourceSemanticsRecovery
 primaryMotif ymRound108BC1SameObject = sameObjectRepresentation
 primaryMotif rhOffAllowance = assignedAllowancePayment
 primaryMotif rhGammaAllowance = assignedAllowancePayment
 
 coordinateReference : TerminalCoordinate → String
-coordinateReference nsPlusResolvedGram =
-  "NS: R477 physical plus-polarization Cauchy-resolved fixed-output GramOperatorBound"
-coordinateReference nsMinusResolvedGram =
-  "NS: R477 physical minus-polarization Cauchy-resolved fixed-output GramOperatorBound"
+coordinateReference nsDirectResolvedGram =
+  "NS: R478 direct total Cauchy-resolved fixed-output GramOperatorBound"
 coordinateReference ymRound108Semantics = "YM: source-fixed Round108 density semantics"
 coordinateReference ymRound108BC1SameObject = "YM: selected potential = BC1 same-object representation weld"
 coordinateReference rhOffAllowance = "RH/zeta: universal pole-quotient Off budget <= assigned A_off"
 coordinateReference rhGammaAllowance = "RH/zeta: same-taper Gamma budget <= assigned A_Gamma"
 
 ------------------------------------------------------------------------
--- Exact pins to current terminality.
+-- Exact pins to current terminality / producer hierarchy.
 ------------------------------------------------------------------------
 
-nsPlusResolvedGramStillOpen : NS.round477PhysicalPlusResolvedBoundClosed ≡ false
-nsPlusResolvedGramStillOpen = NS.round477PhysicalPlusResolvedBoundClosedIsFalse
+nsDirectResolvedGramStillOpen : NS.round478PhysicalDirectResolvedBoundClosed ≡ false
+nsDirectResolvedGramStillOpen = NS.round478PhysicalDirectResolvedBoundClosedIsFalse
 
-nsMinusResolvedGramStillOpen : NS.round477PhysicalMinusResolvedBoundClosed ≡ false
-nsMinusResolvedGramStillOpen = NS.round477PhysicalMinusResolvedBoundClosedIsFalse
+nsDirectResolvedConsumerPreferred : NS.round478DirectResolvedConsumerPreferred ≡ true
+nsDirectResolvedConsumerPreferred = refl
 
-nsResolvedHelicalCompilerAlreadyOwned : NS.round477TwoScalarResolvedBoundsCompile ≡ true
+nsSplitScalarPairSufficient : NS.round478SplitScalarPairIsSufficientProducer ≡ true
+nsSplitScalarPairSufficient = refl
+
+nsSplitScalarPairNotMandatory : NS.round478SplitScalarPairIsMandatory ≡ false
+nsSplitScalarPairNotMandatory = NS.round478SplitScalarPairIsMandatoryIsFalse
+
+nsResolvedHelicalCompilerAlreadyOwned : R477.round477TwoScalarResolvedBoundsCompile ≡ true
 nsResolvedHelicalCompilerAlreadyOwned = refl
 
-nsCauchyKernelAlreadyExplicit : NS.round477CauchyPairKernelExplicit ≡ true
+nsCauchyKernelAlreadyExplicit : R477.round477CauchyPairKernelExplicit ≡ true
 nsCauchyKernelAlreadyExplicit = refl
 
 nsResolventNormalizationAlreadyDivisionFree :
-  NS.round477ResolventNormalizationDivisionFree ≡ true
+  R477.round477ResolventNormalizationDivisionFree ≡ true
 nsResolventNormalizationAlreadyDivisionFree = refl
 
 ymDirectRouteRemainsAND :
@@ -161,11 +164,10 @@ canonicalCrossDomainSearchPolicy =
 -- 3. Let existing downstream compilers fire; do not rebuild them.
 --
 -- YM's source/same-object children remain natural early representation targets.
--- NS no longer schedules the old resolvent->heat representation seam on the
--- preferred projected route: R477 carries the Cauchy kernel directly and leaves
--- exactly two scalar resolved Gram bounds.  RH/zeta's two allowance payments
--- remain irreducible analytic leaves.  This does NOT assert that any of these
--- theorems has been proved.
+-- NS has no preferred resolvent->heat seam and no mandatory +/- pair at the
+-- terminal boundary: R478 leaves one direct total Cauchy-resolved Gram bound.
+-- RH/zeta's two allowance payments remain irreducible analytic leaves.  This
+-- does NOT assert that any of these theorems has been proved.
 ------------------------------------------------------------------------
 
 data ClosurePhase : Set where
@@ -176,8 +178,7 @@ data ClosurePhase : Set where
 
 
 phase : TerminalCoordinate → ClosurePhase
-phase nsPlusResolvedGram = terminalOperatorBound
-phase nsMinusResolvedGram = terminalOperatorBound
+phase nsDirectResolvedGram = terminalOperatorBound
 phase ymRound108Semantics = representationOrSource
 phase ymRound108BC1SameObject = representationOrSource
 phase rhOffAllowance = terminalAnalyticPayment
