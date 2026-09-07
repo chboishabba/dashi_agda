@@ -15,6 +15,9 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawTerraNulliusOperationalJuridicalNonHumanityExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalEpistemicEverything.agda'
       - 'DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalAdaptiveEverything.agda'
+      - 'DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationSourceAtlasExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationOperationalDiscrepancyExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationTwoEyedPOSIWIDEverything.agda'
       - '.github/workflows/sensiblaw-country-two-eyed-operational.yml'
 
 concurrency:
@@ -41,6 +44,9 @@ jobs:
             DASHI/Cognition/PNF/SensibLawTerraNulliusOperationalJuridicalNonHumanityExact.agda
             DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalEpistemicEverything.agda
             DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalAdaptiveEverything.agda
+            DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationSourceAtlasExact.agda
+            DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationOperationalDiscrepancyExact.agda
+            DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationTwoEyedPOSIWIDEverything.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -83,3 +89,18 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalAdaptiveEverything.agda
+
+      - name: Type-check First Nations incarceration source atlas
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationSourceAtlasExact.agda
+
+      - name: Type-check First Nations incarceration operational discrepancy
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationOperationalDiscrepancyExact.agda
+
+      - name: Type-check First Nations incarceration Two-Eyed POSIWID capstone
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawFirstNationsIncarcerationTwoEyedPOSIWIDEverything.agda
