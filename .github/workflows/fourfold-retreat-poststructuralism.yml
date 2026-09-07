@@ -6,6 +6,9 @@ on:
     paths:
       - 'DASHI/Culture/RockhillFosterFourfoldRetreatSourceBoundaryExact.agda'
       - 'DASHI/Culture/PoststructuralismFourfoldRetreatCrossPollinationExact.agda'
+      - 'DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda'
+      - 'DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda'
+      - 'DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda'
       - 'DASHI/Culture/Everything.agda'
       - '.github/workflows/fourfold-retreat-poststructuralism.yml'
 
@@ -31,6 +34,9 @@ jobs:
           sources=(
             DASHI/Culture/RockhillFosterFourfoldRetreatSourceBoundaryExact.agda
             DASHI/Culture/PoststructuralismFourfoldRetreatCrossPollinationExact.agda
+            DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda
+            DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda
+            DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -39,16 +45,31 @@ jobs:
             fi
           done
 
-      - name: Kernel-check source attribution boundary
+      - name: Kernel-check Rockhill-Foster source boundary
         run: |
           agda --version
           agda -i . -l standard-library \
             DASHI/Culture/RockhillFosterFourfoldRetreatSourceBoundaryExact.agda
 
-      - name: Kernel-check poststructuralism cross-pollination
+      - name: Kernel-check poststructuralism generic cross-pollination
         run: |
           agda -i . -l standard-library \
             DASHI/Culture/PoststructuralismFourfoldRetreatCrossPollinationExact.agda
+
+      - name: Kernel-check Foucault primary-source lane
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/FoucaultFourfoldRetreatPrimarySourceBoundaryExact.agda
+
+      - name: Kernel-check Derrida primary-source lane
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/DerridaFourfoldRetreatPrimarySourceBoundaryExact.agda
+
+      - name: Kernel-check named-thinker axis cross-pollination
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Culture/FoucaultDerridaFourfoldRetreatAxisCrossPollinationExact.agda
 
       - name: Kernel-check Culture aggregate
         run: |
