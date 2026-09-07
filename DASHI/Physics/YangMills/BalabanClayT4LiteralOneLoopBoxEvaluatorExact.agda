@@ -19,10 +19,15 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data AxisIndex : Set where
-  axis0 axis1 axis2 axis3 : AxisIndex
+  axis0 : AxisIndex
+  axis1 : AxisIndex
+  axis2 : AxisIndex
+  axis3 : AxisIndex
 
 data MomentumRole : Set where
-  loopMomentum externalMomentum shiftedMomentum : MomentumRole
+  loopMomentum : MomentumRole
+  externalMomentum : MomentumRole
+  shiftedMomentum : MomentumRole
 
 data TrigAtom : Set where
   sineHalf : MomentumRole → AxisIndex → TrigAtom
@@ -205,7 +210,9 @@ record CertifiedExpressionEvaluation
 open CertifiedExpressionEvaluation public
 
 data QuadratureRule : Set where
-  directIntervalRule midpointHessianRule tensorSimpsonRule : QuadratureRule
+  directIntervalRule : QuadratureRule
+  midpointHessianRule : QuadratureRule
+  tensorSimpsonRule : QuadratureRule
 
 record CertifiedBoxQuadrature
     (environment : BoxTrigEnvironment)

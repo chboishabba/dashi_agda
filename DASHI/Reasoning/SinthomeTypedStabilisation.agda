@@ -16,7 +16,9 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 ------------------------------------------------------------------------
 
 data StabilisationMode : Set where
-  eraseMode suppressMode sinthomaticIntegrationMode : StabilisationMode
+  eraseMode : StabilisationMode
+  suppressMode : StabilisationMode
+  sinthomaticIntegrationMode : StabilisationMode
 
 record StabilisationPath : Set where
   field

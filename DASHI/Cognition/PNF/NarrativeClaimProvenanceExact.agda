@@ -21,10 +21,18 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data ClaimModality : Set where
-  alleged denied corroborated refuted unresolved interpreted : ClaimModality
+  alleged : ClaimModality
+  denied : ClaimModality
+  corroborated : ClaimModality
+  refuted : ClaimModality
+  unresolved : ClaimModality
+  interpreted : ClaimModality
 
 data NarrativePlane : Set where
-  factual rhetorical cultural institutional : NarrativePlane
+  factual : NarrativePlane
+  rhetorical : NarrativePlane
+  cultural : NarrativePlane
+  institutional : NarrativePlane
 
 record ClaimEdge
     (Subject Proposition Source Evidence Provenance : Set) : Set₁ where

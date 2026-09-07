@@ -18,7 +18,10 @@ open import DASHI.Ontology.LeanWikidataTheoremSurfaceBridge
 ------------------------------------------------------------------------
 
 data LeanEvidenceSlice : Set where
-  assertedSlice sourcedSlice reliableSlice temporalSlice : LeanEvidenceSlice
+  assertedSlice : LeanEvidenceSlice
+  sourcedSlice : LeanEvidenceSlice
+  reliableSlice : LeanEvidenceSlice
+  temporalSlice : LeanEvidenceSlice
 
 record LeanContextWitness : Set where
   constructor leanContextWitness

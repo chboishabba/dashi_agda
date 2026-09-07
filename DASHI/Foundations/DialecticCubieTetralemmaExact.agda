@@ -6,7 +6,8 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Sheet
 
 data SupportBit : Set where
-  unsupported supported : SupportBit
+  unsupported : SupportBit
+  supported : SupportBit
 
 record SupportCounterSquare : Set where
   constructor supportCounterSquare
@@ -53,7 +54,9 @@ supportSquareCardinalityIsFour : supportSquareCardinality ≡ 4
 supportSquareCardinalityIsFour = refl
 
 data Axis3 : Set where
-  low middle high : Axis3
+  low : Axis3
+  middle : Axis3
+  high : Axis3
 
 axis3Cardinality : Nat
 axis3Cardinality = 3
@@ -127,7 +130,8 @@ decisionPoliciesDifferOnNegative :
 decisionPoliciesDifferOnNegative ()
 
 data PolicyName : Set where
-  positiveOnlyName nonzeroName : PolicyName
+  positiveOnlyName : PolicyName
+  nonzeroName : PolicyName
 
 record DeclaredDecisionPolicy : Set where
   constructor declaredDecisionPolicy
@@ -155,7 +159,9 @@ record Hyperfabric (Cell : Set) : Set₁ where
 open Hyperfabric public
 
 data CubieFrameName : Set where
-  localCubieFrame contextualCubieFrame promotedCubieFrame : CubieFrameName
+  localCubieFrame : CubieFrameName
+  contextualCubieFrame : CubieFrameName
+  promotedCubieFrame : CubieFrameName
 
 record CubieWithFrame : Set where
   constructor cubieWithFrame

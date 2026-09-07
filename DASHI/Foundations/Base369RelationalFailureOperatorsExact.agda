@@ -99,10 +99,16 @@ record PromotionWitness
 -- No generic coercion between representational types is provided.
 
 data BehaviourObservation : Set where
-  performed silent withdrew froze : BehaviourObservation
+  performed : BehaviourObservation
+  silent : BehaviourObservation
+  withdrew : BehaviourObservation
+  froze : BehaviourObservation
 
 data LatentChoiceState : Set where
-  willing complyingUnderPressure submitted frozenWithoutChoice : LatentChoiceState
+  willing : LatentChoiceState
+  complyingUnderPressure : LatentChoiceState
+  submitted : LatentChoiceState
+  frozenWithoutChoice : LatentChoiceState
 
 observeChoice : LatentChoiceState → BehaviourObservation
 observeChoice willing = performed

@@ -45,7 +45,9 @@ cuspDiscriminantClass r h =
     (discriminantRight h)
 
 data EquilibriumTopology : Set where
-  oneReal criticalFold threeReal : EquilibriumTopology
+  oneReal : EquilibriumTopology
+  criticalFold : EquilibriumTopology
+  threeReal : EquilibriumTopology
 
 interpretDiscriminant : Trit → EquilibriumTopology
 interpretDiscriminant neg = oneReal

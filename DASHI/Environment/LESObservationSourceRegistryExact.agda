@@ -19,10 +19,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceKind : Set where
-  book existingTypedOwner : SourceKind
+  book : SourceKind
+  existingTypedOwner : SourceKind
 
 data SourceRole : Set where
-  observeInteractCalibration provenancePreservingKnowledgeBoundary : SourceRole
+  observeInteractCalibration : SourceRole
+  provenancePreservingKnowledgeBoundary : SourceRole
 
 record SourceReference : Set where
   constructor sourceReference

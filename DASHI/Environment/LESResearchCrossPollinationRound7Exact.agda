@@ -37,19 +37,23 @@ lesPathDependenceGapIsExplicitlyOpen = refl
 ------------------------------------------------------------------------
 
 data ManagementHistory : Set where
-  shortHorizonConfiguration longHorizonConfiguration : ManagementHistory
+  shortHorizonConfiguration : ManagementHistory
+  longHorizonConfiguration : ManagementHistory
 
 data CoarsePresentSummary : Set where
   sameCurrentSuitabilitySummary : CoarsePresentSummary
 
 data RelationalPattern : Set where
-  readilyReconfigurablePattern committedLongHorizonPattern : RelationalPattern
+  readilyReconfigurablePattern : RelationalPattern
+  committedLongHorizonPattern : RelationalPattern
 
 data PlanningChoice : Set where
-  rapidReconfigurationChoice stagedTransitionChoice : PlanningChoice
+  rapidReconfigurationChoice : PlanningChoice
+  stagedTransitionChoice : PlanningChoice
 
 data ContinuationConeCode : Set where
-  rapidBranchingCone delayedTransitionCone : ContinuationConeCode
+  rapidBranchingCone : ContinuationConeCode
+  delayedTransitionCone : ContinuationConeCode
 
 observeManagementHistory : ManagementHistory → CoarsePresentSummary
 observeManagementHistory _ = sameCurrentSuitabilitySummary

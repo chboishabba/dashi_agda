@@ -20,7 +20,10 @@ import DASHI.Core.TypedDependencyCore as Dependency
 ------------------------------------------------------------------------
 
 data ParentDecisionState : Set where
-  donorNow adoptiveNow donorResolved adoptiveResolved : ParentDecisionState
+  donorNow : ParentDecisionState
+  adoptiveNow : ParentDecisionState
+  donorResolved : ParentDecisionState
+  adoptiveResolved : ParentDecisionState
 
 data ParentDecisionAction : Set where
   resolveCurrentAuthority : ParentDecisionAction
@@ -83,10 +86,13 @@ adoptiveResolutionExecutes =
 ------------------------------------------------------------------------
 
 data ParentDecisionObservation : Set where
-  publicP8810 noCurrentLegalAuthority currentLegalAuthority : ParentDecisionObservation
+  publicP8810 : ParentDecisionObservation
+  noCurrentLegalAuthority : ParentDecisionObservation
+  currentLegalAuthority : ParentDecisionObservation
 
 data ParentDecisionConsumer : Set where
-  publicRegistryConsumer authorityDecisionConsumer : ParentDecisionConsumer
+  publicRegistryConsumer : ParentDecisionConsumer
+  authorityDecisionConsumer : ParentDecisionConsumer
 
 parentDecisionProject :
   ParentDecisionConsumer → ParentDecisionState → ParentDecisionObservation

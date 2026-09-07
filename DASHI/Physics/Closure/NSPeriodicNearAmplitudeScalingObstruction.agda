@@ -16,7 +16,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data ScalingDegree : Set where
-  quadratic cubic : ScalingDegree
+  quadratic : ScalingDegree
+  cubic : ScalingDegree
 
 powTwo : Nat → Nat
 powTwo zero = 1

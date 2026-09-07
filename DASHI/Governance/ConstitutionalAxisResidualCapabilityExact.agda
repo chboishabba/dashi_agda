@@ -57,7 +57,9 @@ canonicalConstitutionalCoverage =
 ------------------------------------------------------------------------
 
 data ApplicationConsumer : Set where
-  engagementOnly administrativeEligibility missionPerformance : ApplicationConsumer
+  engagementOnly : ApplicationConsumer
+  administrativeEligibility : ApplicationConsumer
+  missionPerformance : ApplicationConsumer
 
 data ConsumerAdequate : ApplicationConsumer → Set where
   engagementAdequate : ConsumerAdequate engagementOnly
@@ -81,10 +83,13 @@ canonicalEngagementHighImpactAdmission =
 ------------------------------------------------------------------------
 
 data CriticalResidual : Set where
-  criticalResolved criticalUnresolved : CriticalResidual
+  criticalResolved : CriticalResidual
+  criticalUnresolved : CriticalResidual
 
 data CapabilityClass : Set where
-  refineObserve reversibleLowImpact irreversibleHighImpact : CapabilityClass
+  refineObserve : CapabilityClass
+  reversibleLowImpact : CapabilityClass
+  irreversibleHighImpact : CapabilityClass
 
 data CapabilityAvailable : CriticalResidual → CapabilityClass → Set where
   resolvedRefine : CapabilityAvailable criticalResolved refineObserve
@@ -102,7 +107,8 @@ unresolvedCriticalResidualBlocksIrreversibleCapability ()
 ------------------------------------------------------------------------
 
 data ClaimSource : Set where
-  agentSelfClaim independentExternalClaim : ClaimSource
+  agentSelfClaim : ClaimSource
+  independentExternalClaim : ClaimSource
 
 data EmergencyEvidence : ClaimSource → Set where
   independentlyGroundedEmergency : EmergencyEvidence independentExternalClaim

@@ -120,13 +120,15 @@ realizationCannotAutoPromoteNormativeAuthority ()
 ------------------------------------------------------------------------
 
 data FineRelation : Set where
-  capitalCountryRelation foodCountryRelation : FineRelation
+  capitalCountryRelation : FineRelation
+  foodCountryRelation : FineRelation
 
 data CoarsePropertyCode : Set where
   countryOfXProperty : CoarsePropertyCode
 
 data PreciseRelationKind : Set where
-  capitalOfKind foodOriginKind : PreciseRelationKind
+  capitalOfKind : PreciseRelationKind
+  foodOriginKind : PreciseRelationKind
 
 propertyCode : FineRelation → CoarsePropertyCode
 propertyCode capitalCountryRelation = countryOfXProperty
@@ -156,12 +158,14 @@ propertyCodeCannotRealizePreciseRelation =
 ------------------------------------------------------------------------
 
 data SituatedUtterance : Set where
-  sameCodeRepairingContext sameCodeHostileContext : SituatedUtterance
+  sameCodeRepairingContext : SituatedUtterance
+  sameCodeHostileContext : SituatedUtterance
 
 data CompactRelationCode : Set where compactCode : CompactRelationCode
 
 data SituatedMeaning : Set where
-  reparativeMeaning hostileMeaning : SituatedMeaning
+  reparativeMeaning : SituatedMeaning
+  hostileMeaning : SituatedMeaning
 
 compactRelation : SituatedUtterance → CompactRelationCode
 compactRelation _ = compactCode

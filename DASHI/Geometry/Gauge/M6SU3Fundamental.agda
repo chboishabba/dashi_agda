@@ -31,10 +31,14 @@ singlet1 = dynkin 0 0
 
 -- The three weights of the defining representation and their mirrors.
 data FundamentalWeight : Set where
-  epsilon1 epsilon2 epsilon3 : FundamentalWeight
+  epsilon1 : FundamentalWeight
+  epsilon2 : FundamentalWeight
+  epsilon3 : FundamentalWeight
 
 data AntiFundamentalWeight : Set where
-  barEpsilon1 barEpsilon2 barEpsilon3 : AntiFundamentalWeight
+  barEpsilon1 : AntiFundamentalWeight
+  barEpsilon2 : AntiFundamentalWeight
+  barEpsilon3 : AntiFundamentalWeight
 
 -- Difference weights in 3 ⊗ 3*. The zero weight occurs three times in the
 -- tensor basis; each of the six roots occurs once.

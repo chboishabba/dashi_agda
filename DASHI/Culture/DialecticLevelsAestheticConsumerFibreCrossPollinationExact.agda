@@ -85,7 +85,8 @@ contradictionAloneCannotRecoverResidualArchitecture =
 ------------------------------------------------------------------------
 
 data DevelopmentProfileState : Set where
-  sameLevelLineLow sameLevelLineHigh : DevelopmentProfileState
+  sameLevelLineLow : DevelopmentProfileState
+  sameLevelLineHigh : DevelopmentProfileState
 
 data SimplifiedLevelLabel : Set where sameSimplifiedLevel : SimplifiedLevelLabel
 

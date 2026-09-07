@@ -13,20 +13,30 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data ActionScope : Set where
-  observeOnly collectMaterial initialResearch downstreamReuse publishResult : ActionScope
+  observeOnly : ActionScope
+  collectMaterial : ActionScope
+  initialResearch : ActionScope
+  downstreamReuse : ActionScope
+  publishResult : ActionScope
   commercialise interveneDeploy : ActionScope
 
 data ConsentStatus : Set where
-  consentNotSought consentGranted consentWithheld consentWithdrawn : ConsentStatus
+  consentNotSought : ConsentStatus
+  consentGranted : ConsentStatus
+  consentWithheld : ConsentStatus
+  consentWithdrawn : ConsentStatus
 
 data PermissionStatus : Set where
-  protocolPermissionAbsent protocolPermissionPresent : PermissionStatus
+  protocolPermissionAbsent : PermissionStatus
+  protocolPermissionPresent : PermissionStatus
 
 data AuthorityStatus : Set where
-  authorityAbsent authorityPresent : AuthorityStatus
+  authorityAbsent : AuthorityStatus
+  authorityPresent : AuthorityStatus
 
 data BenefitSharingStatus : Set where
-  benefitSharingAbsent benefitSharingPresent : BenefitSharingStatus
+  benefitSharingAbsent : BenefitSharingStatus
+  benefitSharingPresent : BenefitSharingStatus
 
 record ScopedConsentState : Set where
   constructor scopedConsentState
@@ -134,7 +144,8 @@ consentCannotRecoverBenefitSharing =
 ------------------------------------------------------------------------
 
 data TemporalTrajectory : Set where
-  benefitNowLowLaterBurden benefitNowHighLaterBurden : TemporalTrajectory
+  benefitNowLowLaterBurden : TemporalTrajectory
+  benefitNowHighLaterBurden : TemporalTrajectory
 
 data PresentBenefit : Set where samePresentBenefit : PresentBenefit
 
@@ -143,7 +154,8 @@ data LaterBurden : Set where lowerLaterBurden higherLaterBurden : LaterBurden
 data PresentVoice : Set where samePresentVoice : PresentVoice
 
 data FutureRepresentation : Set where
-  futureInterestRepresented futureInterestUnrepresented : FutureRepresentation
+  futureInterestRepresented : FutureRepresentation
+  futureInterestUnrepresented : FutureRepresentation
 
 presentBenefit : TemporalTrajectory → PresentBenefit
 presentBenefit _ = samePresentBenefit
@@ -179,7 +191,8 @@ presentVoiceCannotRecoverFutureRepresentation =
 ------------------------------------------------------------------------
 
 data TemporalStanding : Set where
-  presentlyAffected futureAffected : TemporalStanding
+  presentlyAffected : TemporalStanding
+  futureAffected : TemporalStanding
 
 data ConsentEvidence : TemporalStanding → Set where
   presentPartyConsentEvidence : ConsentEvidence presentlyAffected

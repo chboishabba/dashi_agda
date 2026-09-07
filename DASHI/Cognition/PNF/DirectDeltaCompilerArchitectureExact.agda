@@ -31,20 +31,30 @@ import DASHI.Cognition.PNF.RelationDeltaReconciliationExact
 ------------------------------------------------------------------------
 
 data RuntimeDomain : Set where
-  executionDomain durableDomain referenceDomain diagnosticDomain : RuntimeDomain
+  executionDomain : RuntimeDomain
+  durableDomain : RuntimeDomain
+  referenceDomain : RuntimeDomain
+  diagnosticDomain : RuntimeDomain
 
 data RuntimeObjectClass : Set where
-  executionInterior durableNonAuthority semanticAuthority : RuntimeObjectClass
+  executionInterior : RuntimeObjectClass
+  durableNonAuthority : RuntimeObjectClass
+  semanticAuthority : RuntimeObjectClass
 
 data PersistenceCut : Set where
-  immutableInputCut recoveryArtifactCut semanticStagingCut authorityPublicationCut : PersistenceCut
+  immutableInputCut : PersistenceCut
+  recoveryArtifactCut : PersistenceCut
+  semanticStagingCut : PersistenceCut
+  authorityPublicationCut : PersistenceCut
 
 data PostgreSQLRole : Set where
   durableAuthorityRole globalIdentityRole globalReconciliationRole
     recoveryMetadataRole referenceAuditRole : PostgreSQLRole
 
 data ParserProjectionMode : Set where
-  productionDirect parityReference auditDebug : ParserProjectionMode
+  productionDirect : ParserProjectionMode
+  parityReference : ParserProjectionMode
+  auditDebug : ParserProjectionMode
 
 record PersistenceClassification : Set where
   constructor persistenceClassification

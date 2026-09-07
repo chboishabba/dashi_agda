@@ -102,7 +102,10 @@ open RetainedPhysicalTriad public
 ------------------------------------------------------------------------
 
 data Stage3Class : Set where
-  forcedTail transition adversarial residual : Stage3Class
+  forcedTail : Stage3Class
+  transition : Stage3Class
+  adversarial : Stage3Class
+  residual : Stage3Class
 
 record Stage3GeometricPredicates
     {carrier : TriadStateCarrier}

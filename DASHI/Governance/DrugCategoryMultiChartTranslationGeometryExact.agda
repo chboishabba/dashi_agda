@@ -150,7 +150,9 @@ indigenousToCommercialNotAuthorityPreserving (authorityPreserving ())
 ------------------------------------------------------------------------
 
 data TranslationContext : Set where
-  stateContext clinicalContext livedContext : TranslationContext
+  stateContext : TranslationContext
+  clinicalContext : TranslationContext
+  livedContext : TranslationContext
 
 translationLineage :
   Lineage.ContextCoordinateLineage TranslationContext TranslationCoordinate

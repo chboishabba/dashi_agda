@@ -19,13 +19,15 @@ import DASHI.Core.TrajectoryResidueExact as Residue
 ------------------------------------------------------------------------
 
 data TransferSchedule : Set where
-  rapidPulse distributedTransfer : TransferSchedule
+  rapidPulse : TransferSchedule
+  distributedTransfer : TransferSchedule
 
 cumulativeMovedCarbon : TransferSchedule → Nat
 cumulativeMovedCarbon _ = 4
 
 data PeakRateClass : Set where
-  highPeak lowerPeak : PeakRateClass
+  highPeak : PeakRateClass
+  lowerPeak : PeakRateClass
 
 peakRateClass : TransferSchedule → PeakRateClass
 peakRateClass rapidPulse = highPeak
@@ -40,7 +42,8 @@ peakRatesDiffer :
 peakRatesDiffer ()
 
 data ExposureHistoryClass : Set where
-  abruptExposure gradualExposure : ExposureHistoryClass
+  abruptExposure : ExposureHistoryClass
+  gradualExposure : ExposureHistoryClass
 
 exposureHistory : TransferSchedule → ExposureHistoryClass
 exposureHistory rapidPulse = abruptExposure

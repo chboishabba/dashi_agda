@@ -43,7 +43,10 @@ supportSquare = Four.assess
 ------------------------------------------------------------------------
 
 data SupportState : Set where
-  positiveOnly negativeOnly conflictingState missingState : SupportState
+  positiveOnly : SupportState
+  negativeOnly : SupportState
+  conflictingState : SupportState
+  missingState : SupportState
 
 supportState : SupportSquare → SupportState
 supportState (Four.assess true false) = positiveOnly
@@ -227,7 +230,8 @@ positiveSupportOnAnotherAxisCannotFillMissingRequiredAxis
 ------------------------------------------------------------------------
 
 data DemoAxis : Set where
-  sourceAxis targetAxis : DemoAxis
+  sourceAxis : DemoAxis
+  targetAxis : DemoAxis
 
 demoEvidence : DemoAxis → SupportSquare
 demoEvidence sourceAxis = supportSquare true false

@@ -49,7 +49,9 @@ canonicalIrreducibleRSIDependency = record
 ------------------------------------------------------------------------
 
 data RSIVertex : Set where
-  imaginaryVertex symbolicVertex realVertex : RSIVertex
+  imaginaryVertex : RSIVertex
+  symbolicVertex : RSIVertex
+  realVertex : RSIVertex
 
 data RSIEdge : Set where
   rsiJointEdge : RSIEdge

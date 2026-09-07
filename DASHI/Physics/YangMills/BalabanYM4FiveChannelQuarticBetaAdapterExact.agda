@@ -44,7 +44,11 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Beta
 
 data PhysicalBetaChannel : Set where
-  determinant interaction chart gauge localization : PhysicalBetaChannel
+  determinant : PhysicalBetaChannel
+  interaction : PhysicalBetaChannel
+  chart : PhysicalBetaChannel
+  gauge : PhysicalBetaChannel
+  localization : PhysicalBetaChannel
 
 channels : List PhysicalBetaChannel
 channels = determinant ∷ interaction ∷ chart ∷ gauge ∷ localization ∷ []

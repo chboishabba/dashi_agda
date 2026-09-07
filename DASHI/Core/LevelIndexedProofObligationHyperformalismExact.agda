@@ -92,7 +92,8 @@ data DemoAxis : Set where
   demoAxis : DemoAxis
 
 data DemoLevel : Set where
-  level0 level1 : DemoLevel
+  level0 : DemoLevel
+  level1 : DemoLevel
 
 data DemoProvenance : Set where
   retainedSource : DemoProvenance
@@ -181,13 +182,15 @@ scopeTransportKeepsProvenance =
 ------------------------------------------------------------------------
 
 data FineDecisionState : Set where
-  currentlyApplicable currentlyOutOfScope : FineDecisionState
+  currentlyApplicable : FineDecisionState
+  currentlyOutOfScope : FineDecisionState
 
 data FlatEvidenceSurface : Set where
   positiveSurface : FlatEvidenceSurface
 
 data LocalDecision : Set where
-  decideHere rechartBeforeDecision : LocalDecision
+  decideHere : LocalDecision
+  rechartBeforeDecision : LocalDecision
 
 flattenEvidence : FineDecisionState → FlatEvidenceSurface
 flattenEvidence currentlyApplicable = positiveSurface

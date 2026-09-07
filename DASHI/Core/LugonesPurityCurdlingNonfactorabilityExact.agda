@@ -27,7 +27,8 @@ import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
 ------------------------------------------------------------------------
 
 data MultiplicityAspect : Set where
-  aspectA aspectB : MultiplicityAspect
+  aspectA : MultiplicityAspect
+  aspectB : MultiplicityAspect
 
 curdledResponse : MultiplicityAspect → MultiplicityAspect → Nat
 curdledResponse aspectA aspectA = 0

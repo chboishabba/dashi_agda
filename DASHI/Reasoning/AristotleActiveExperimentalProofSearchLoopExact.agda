@@ -40,10 +40,14 @@ import DASHI.Reasoning.AristotleMergeGovernanceCrossPollinationExact as Governan
 ------------------------------------------------------------------------
 
 data ProbeControl : Set where
-  inspectDependency inspectProvenance inspectBoth : ProbeControl
+  inspectDependency : ProbeControl
+  inspectProvenance : ProbeControl
+  inspectBoth : ProbeControl
 
 data CoordinateId : Set where
-  visibleCoordinate dependencyCoordinate provenanceCoordinate : CoordinateId
+  visibleCoordinate : CoordinateId
+  dependencyCoordinate : CoordinateId
+  provenanceCoordinate : CoordinateId
 
 data CoordinateValue : Set where
   visibleValue : Merge.Surface → CoordinateValue
@@ -51,7 +55,9 @@ data CoordinateValue : Set where
   provenanceValue : Merge.ProvenanceCode → CoordinateValue
 
 data CoordinateDimension : Set where
-  proofSurfaceDimension dependencyDimension provenanceDimension : CoordinateDimension
+  proofSurfaceDimension : CoordinateDimension
+  dependencyDimension : CoordinateDimension
+  provenanceDimension : CoordinateDimension
 
 applyProbe : ProbeControl → Experiment.BranchWorld → Experiment.BranchWorld
 applyProbe control world = world

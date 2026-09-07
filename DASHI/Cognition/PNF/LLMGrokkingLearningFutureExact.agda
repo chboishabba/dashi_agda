@@ -29,7 +29,10 @@ nandaGrokkingTitle : String
 nandaGrokkingTitle = "Progress measures for grokking via mechanistic interpretability"
 
 data LearningState : Set where
-  memorizerBefore structuredBefore memorizerAfter structuredAfter : LearningState
+  memorizerBefore : LearningState
+  structuredBefore : LearningState
+  memorizerAfter : LearningState
+  structuredAfter : LearningState
 
 data LearningAction : Set where
   continueTraining : LearningAction

@@ -28,7 +28,8 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369InteractionAppraisalCubeExact as Cube
 
 data Orientation2 : Set where
-  direct counter : Orientation2
+  direct : Orientation2
+  counter : Orientation2
 
 OrientationResidual27 : Orbit.AntipodalClass27 → Set
 OrientationResidual27 Orbit.centre27 = ⊤

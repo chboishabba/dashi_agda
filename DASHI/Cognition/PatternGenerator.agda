@@ -47,16 +47,26 @@ generatedPercept generator parameter topology symmetry time seed =
 -- Finite exact witness family for recurring visual motifs.
 
 data Gain : Set where
-  lowGain highGain : Gain
+  lowGain : Gain
+  highGain : Gain
 
 data VisualTopology : Set where
-  planar cylindrical radial : VisualTopology
+  planar : VisualTopology
+  cylindrical : VisualTopology
+  radial : VisualTopology
 
 data VisualSymmetry : Set where
-  translational hexagonal rotational tunnelSymmetry : VisualSymmetry
+  translational : VisualSymmetry
+  hexagonal : VisualSymmetry
+  rotational : VisualSymmetry
+  tunnelSymmetry : VisualSymmetry
 
 data Motif : Set where
-  blankMotif stripeMotif latticeMotif spiralMotif tunnelMotif : Motif
+  blankMotif : Motif
+  stripeMotif : Motif
+  latticeMotif : Motif
+  spiralMotif : Motif
+  tunnelMotif : Motif
 
 highGainPattern :
   VisualTopology →

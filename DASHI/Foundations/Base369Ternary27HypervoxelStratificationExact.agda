@@ -26,7 +26,8 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 ------------------------------------------------------------------------
 
 data SupportBit : Set where
-  centralBit outerBit : SupportBit
+  centralBit : SupportBit
+  outerBit : SupportBit
 
 supportBit : SSP.SSPTrit → SupportBit
 supportBit SSP.sspNegOne = outerBit

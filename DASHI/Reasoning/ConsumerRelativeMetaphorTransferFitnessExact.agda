@@ -79,7 +79,8 @@ secondaryConsumerCannotDescendThroughMetaphor fitness =
 ------------------------------------------------------------------------
 
 data FitnessJudgement : Set where
-  usefulForDeclaredTask insufficientForDeclaredTask : FitnessJudgement
+  usefulForDeclaredTask : FitnessJudgement
+  insufficientForDeclaredTask : FitnessJudgement
 
 record ContextIndexedFitness
     (Metaphor Context : Set) : Set₁ where
@@ -111,19 +112,25 @@ record SameMetaphorDifferentContextFitness
 ------------------------------------------------------------------------
 
 data ToyFineState : Set where
-  unresolvedRelational unresolvedIgnorance resolvedState : ToyFineState
+  unresolvedRelational : ToyFineState
+  unresolvedIgnorance : ToyFineState
+  resolvedState : ToyFineState
 
 data ToyMetaphorCode : Set where
-  unresolvedCode resolvedCode : ToyMetaphorCode
+  unresolvedCode : ToyMetaphorCode
+  resolvedCode : ToyMetaphorCode
 
 data ToyPrimaryTask : Set where
   resolvedQuestion : ToyPrimaryTask
 
 data ToyPrimaryAnswer : Set where
-  unresolvedAnswer resolvedAnswer : ToyPrimaryAnswer
+  unresolvedAnswer : ToyPrimaryAnswer
+  resolvedAnswer : ToyPrimaryAnswer
 
 data ToySecondaryAnswer : Set where
-  relationalResidual ignoranceResidual resolvedResidual : ToySecondaryAnswer
+  relationalResidual : ToySecondaryAnswer
+  ignoranceResidual : ToySecondaryAnswer
+  resolvedResidual : ToySecondaryAnswer
 
 encodeToy : ToyFineState → ToyMetaphorCode
 encodeToy unresolvedRelational = unresolvedCode
@@ -181,7 +188,8 @@ data ToyMetaphor : Set where
   coarseUncertaintyMetaphor : ToyMetaphor
 
 data ToyContext : Set where
-  coarsePedagogy richerStructureQuestion : ToyContext
+  coarsePedagogy : ToyContext
+  richerStructureQuestion : ToyContext
 
 toyContextFitness : ContextIndexedFitness ToyMetaphor ToyContext
 toyContextFitness =

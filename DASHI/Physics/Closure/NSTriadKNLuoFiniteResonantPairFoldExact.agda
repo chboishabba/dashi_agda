@@ -130,7 +130,9 @@ resonantPairFoldIdentity
             system leftCoefficient rightCoefficient output pairs = refl
 
 data PhysicalPairPiece : Set where
-  rp1Piece rp2Piece hardTailPiece : PhysicalPairPiece
+  rp1Piece : PhysicalPairPiece
+  rp2Piece : PhysicalPairPiece
+  hardTailPiece : PhysicalPairPiece
 
 record ClassifiedResonantPair
     (system : Character.FiniteCharacterSystem)

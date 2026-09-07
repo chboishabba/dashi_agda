@@ -16,22 +16,29 @@ import DASHI.Reasoning.SemanticCandidateResidualBidiExact as Semantic
 ------------------------------------------------------------------------
 
 data Time : Set where
-  t0 t1 t2 : Time
+  t0 : Time
+  t1 : Time
+  t2 : Time
 
 data History : Set where
-  historyAlpha historyBeta : History
+  historyAlpha : History
+  historyBeta : History
 
 data ConsumerVersion : Set where
-  consumerV0 consumerV1 : ConsumerVersion
+  consumerV0 : ConsumerVersion
+  consumerV1 : ConsumerVersion
 
 data ConsumerProvenance : Set where
-  externallyFrozen authorisedRevision producerLocalRevision : ConsumerProvenance
+  externallyFrozen : ConsumerProvenance
+  authorisedRevision : ConsumerProvenance
+  producerLocalRevision : ConsumerProvenance
 
 data RevisionAuthority : Set where
   externalRevisionAuthority : RevisionAuthority
 
 data RequirementStrength : Set where
-  strongRequirement weakRequirement : RequirementStrength
+  strongRequirement : RequirementStrength
+  weakRequirement : RequirementStrength
 
 record TemporalConsumer : Set where
   constructor temporalConsumer

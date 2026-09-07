@@ -87,13 +87,17 @@ splitterRefutesAnyFamilyContainingIt splitter included equivalent =
 ------------------------------------------------------------------------
 
 data DemoModel : Set where
-  upstreamSource localSource : DemoModel
+  upstreamSource : DemoModel
+  localSource : DemoModel
 
 data DemoExperiment : Set where
-  baselineSample diagnosticTracer : DemoExperiment
+  baselineSample : DemoExperiment
+  diagnosticTracer : DemoExperiment
 
 data DemoResult : Set where
-  sameLoad upstreamSignature localSignature : DemoResult
+  sameLoad : DemoResult
+  upstreamSignature : DemoResult
+  localSignature : DemoResult
 
 observeDemo : DemoExperiment → DemoModel → DemoResult
 observeDemo baselineSample upstreamSource = sameLoad
@@ -135,7 +139,8 @@ diagnosticDistinguishes = distinguishingExperiment diagnosticTracer impossible
 ------------------------------------------------------------------------
 
 data ManagementAction : Set where
-  treatUpstream treatLocal : ManagementAction
+  treatUpstream : ManagementAction
+  treatLocal : ManagementAction
 
 requiredAction : DemoModel → ManagementAction
 requiredAction upstreamSource = treatUpstream

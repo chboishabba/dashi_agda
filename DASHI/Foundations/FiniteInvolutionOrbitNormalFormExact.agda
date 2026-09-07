@@ -27,7 +27,8 @@ open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 
 data Bit2 : Set where
-  bit0 bit1 : Bit2
+  bit0 : Bit2
+  bit1 : Bit2
 
 flipBit : Bit2 → Bit2
 flipBit bit0 = bit1

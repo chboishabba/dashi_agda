@@ -126,13 +126,15 @@ rawCounterfactualOrderChangesGate ()
 ------------------------------------------------------------------------
 
 data CounterfactualOrder : Set where
-  pluralThenCloseOrder closeThenPluralOrder : CounterfactualOrder
+  pluralThenCloseOrder : CounterfactualOrder
+  closeThenPluralOrder : CounterfactualOrder
 
 data CoarseCounterfactualSurface : Set where
   samePresentVocabularySurface : CoarseCounterfactualSurface
 
 data FineCounterfactualEndpoint : Set where
-  pluralThenCloseEndpoint closeThenPluralEndpoint : FineCounterfactualEndpoint
+  pluralThenCloseEndpoint : FineCounterfactualEndpoint
+  closeThenPluralEndpoint : FineCounterfactualEndpoint
 
 coarseCounterfactualSurface : CounterfactualOrder → CoarseCounterfactualSurface
 coarseCounterfactualSurface _ = samePresentVocabularySurface
@@ -159,7 +161,8 @@ coarseSurfaceCannotRecoverCounterfactualOrder =
 ------------------------------------------------------------------------
 
 data SameStratumRelationState : Set where
-  detachedAtCanon institutionalAtCanon : SameStratumRelationState
+  detachedAtCanon : SameStratumRelationState
+  institutionalAtCanon : SameStratumRelationState
 
 data SameStratumCode : Set where sameCanonStratum : SameStratumCode
 

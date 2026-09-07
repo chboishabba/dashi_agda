@@ -21,13 +21,19 @@ import DASHI.Core.ContextualDialecticRoleExact as Dialectic
 ------------------------------------------------------------------------
 
 data TensionState : Set where
-  latentTension activeTension transformedTension : TensionState
+  latentTension : TensionState
+  activeTension : TensionState
+  transformedTension : TensionState
 
 data MaterialCondition : Set where
-  lowPressure highPressure reorganisedCondition : MaterialCondition
+  lowPressure : MaterialCondition
+  highPressure : MaterialCondition
+  reorganisedCondition : MaterialCondition
 
 data CurrentPosition : Set where
-  stablePosition contestedPosition transformedPosition : CurrentPosition
+  stablePosition : CurrentPosition
+  contestedPosition : CurrentPosition
+  transformedPosition : CurrentPosition
 
 record MaterialRevisionSystem : Set₁ where
   constructor material-revision-system
@@ -67,7 +73,9 @@ open MaterialContradictionActivation public
 ------------------------------------------------------------------------
 
 data FixtureHistory : Set where
-  lowPressureHistory highPressureHistory reorganisedHistory : FixtureHistory
+  lowPressureHistory : FixtureHistory
+  highPressureHistory : FixtureHistory
+  reorganisedHistory : FixtureHistory
 
 appendFixture : FixtureHistory → MaterialCondition → FixtureHistory
 appendFixture lowPressureHistory lowPressure = lowPressureHistory

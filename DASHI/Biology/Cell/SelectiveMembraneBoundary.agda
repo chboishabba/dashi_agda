@@ -1,10 +1,14 @@
 module DASHI.Biology.Cell.SelectiveMembraneBoundary where
 
 data Side : Set where
-  inside outside : Side
+  inside : Side
+  outside : Side
 
 data TransportMode : Set where
-  simpleDiffusion facilitatedDiffusion activePump vesicular : TransportMode
+  simpleDiffusion : TransportMode
+  facilitatedDiffusion : TransportMode
+  activePump : TransportMode
+  vesicular : TransportMode
 
 -- A membrane establishes an oriented compartment and context-dependent selective
 -- transport.  Enclosure alone is not promoted to cellular life.

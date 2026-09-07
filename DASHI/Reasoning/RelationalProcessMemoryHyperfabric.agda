@@ -30,32 +30,53 @@ data _∈_ {A : Set} (x : A) : List A → Set where
 ------------------------------------------------------------------------
 
 data BranchKind : Set where
-  purePossibility deliberativeBranch goalProcessBranch : BranchKind
+  purePossibility : BranchKind
+  deliberativeBranch : BranchKind
+  goalProcessBranch : BranchKind
 
 data OutcomeStatus : Set where
-  outcomeAbsent outcomePartial outcomeAchieved outcomeFailed : OutcomeStatus
+  outcomeAbsent : OutcomeStatus
+  outcomePartial : OutcomeStatus
+  outcomeAchieved : OutcomeStatus
+  outcomeFailed : OutcomeStatus
 
 data LivenessLayer : Set where
-  logicalLiveness institutionalLiveness economicLiveness : LivenessLayer
+  logicalLiveness : LivenessLayer
+  institutionalLiveness : LivenessLayer
+  economicLiveness : LivenessLayer
   agentLiveness capacityLiveness temporalLiveness : LivenessLayer
 
 data BranchStatus : Set where
-  unstarted searching pending blocked expiredUnselected : BranchStatus
+  unstarted : BranchStatus
+  searching : BranchStatus
+  pending : BranchStatus
+  blocked : BranchStatus
+  expiredUnselected : BranchStatus
   handoverPending abandoned failed selected executed : BranchStatus
 
 data InertiaKind : Set where
-  effectInertia processInertia searchInertia handoverInertia : InertiaKind
+  effectInertia : InertiaKind
+  processInertia : InertiaKind
+  searchInertia : InertiaKind
+  handoverInertia : InertiaKind
   switchingInertia windowInertia capacityInertia : InertiaKind
 
 data AttractorAlignment : Set where
-  alignedWithAttractor orthogonalToAttractor opposedToAttractor : AttractorAlignment
+  alignedWithAttractor : AttractorAlignment
+  orthogonalToAttractor : AttractorAlignment
+  opposedToAttractor : AttractorAlignment
   unknownAlignment : AttractorAlignment
 
 data PhaseRelation : Set where
-  inPhase quadraturePhase oppositePhase incoherentPhase : PhaseRelation
+  inPhase : PhaseRelation
+  quadraturePhase : PhaseRelation
+  oppositePhase : PhaseRelation
+  incoherentPhase : PhaseRelation
 
 data InterferenceKind : Set where
-  constructiveInterference neutralInterference destructiveInterference : InterferenceKind
+  constructiveInterference : InterferenceKind
+  neutralInterference : InterferenceKind
+  destructiveInterference : InterferenceKind
   undeterminedInterference : InterferenceKind
 
 record SearchState : Set where

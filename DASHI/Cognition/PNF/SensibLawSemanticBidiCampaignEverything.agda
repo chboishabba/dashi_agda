@@ -27,7 +27,9 @@ import DASHI.Cognition.PNF.SensibLawPdfActiveRequirementPlannerLiveExact as PdfP
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 
 data BidiCampaign : Set where
-  attributionPropositionCampaign occurrenceCampaign antecedentIdentityCampaign : BidiCampaign
+  attributionPropositionCampaign : BidiCampaign
+  occurrenceCampaign : BidiCampaign
+  antecedentIdentityCampaign : BidiCampaign
   scopeCompositionCampaign participantLegalRoleCampaign legalApplicabilityCampaign : BidiCampaign
   documentWorldContextCampaign consumerQueryDemandCampaign : BidiCampaign
   activeRequirementPlannerCampaign requirementProducerRoutingCampaign : BidiCampaign
@@ -36,7 +38,9 @@ data BidiCampaign : Set where
   resolvedScopePlannerCampaign pdfPlannerRegressionCampaign : BidiCampaign
 
 data CampaignReadiness : Set where
-  typeOwnerPresent runtimeProducerNeeded consumerMaySkip : CampaignReadiness
+  typeOwnerPresent : CampaignReadiness
+  runtimeProducerNeeded : CampaignReadiness
+  consumerMaySkip : CampaignReadiness
 
 campaignReadiness : BidiCampaign → CampaignReadiness
 campaignReadiness attributionPropositionCampaign = typeOwnerPresent

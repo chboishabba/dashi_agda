@@ -34,10 +34,12 @@ data FormalRightSurface : Set where
   formallyPermitted : FormalRightSurface
 
 data EffectiveChoiceSurface : Set where
-  effectivelyRestricted effectivelyAvailable : EffectiveChoiceSurface
+  effectivelyRestricted : EffectiveChoiceSurface
+  effectivelyAvailable : EffectiveChoiceSurface
 
 data ConceivedChoiceSurface : Set where
-  notConceived conceivedAsPossible : ConceivedChoiceSurface
+  notConceived : ConceivedChoiceSurface
+  conceivedAsPossible : ConceivedChoiceSurface
 
 data FineChoiceState : Set where
   formalButInaccessible : FineChoiceState
@@ -93,10 +95,14 @@ formalRightCannotRecoverConceivedChoice =
 ------------------------------------------------------------------------
 
 data ChoiceState : Set where
-  formallyFreeLowResources formallyFreeAdequateResources : ChoiceState
+  formallyFreeLowResources : ChoiceState
+  formallyFreeAdequateResources : ChoiceState
 
 data ChoiceOption : Set where
-  remainInInstitution exitInstitution independentHousing dissentPublicly : ChoiceOption
+  remainInInstitution : ChoiceOption
+  exitInstitution : ChoiceOption
+  independentHousing : ChoiceOption
+  dissentPublicly : ChoiceOption
 
 data Available : ChoiceState → ChoiceOption → Set where
   lowRemain : Available formallyFreeLowResources remainInInstitution

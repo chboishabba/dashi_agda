@@ -42,7 +42,8 @@ twoStepRecovery = refl
 ------------------------------------------------------------------------
 
 data Perturbation : Set where
-  mild severe : Perturbation
+  mild : Perturbation
+  severe : Perturbation
 
 perturbTarget : Perturbation → Defect
 perturbTarget mild = 1
@@ -71,7 +72,8 @@ severeBasin = basinWitness 2 refl
 ------------------------------------------------------------------------
 
 data LocalPolicy : Set where
-  direct staged : LocalPolicy
+  direct : LocalPolicy
+  staged : LocalPolicy
 
 policyOutcome : LocalPolicy → Defect → Defect
 policyOutcome direct x = repairStep x

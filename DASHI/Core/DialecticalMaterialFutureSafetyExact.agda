@@ -15,13 +15,15 @@ import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
 ------------------------------------------------------------------------
 
 data World : Set where
-  lowPressureWorld highPressureWorld : World
+  lowPressureWorld : World
+  highPressureWorld : World
 
 data Surface : Set where
   sameDeclaredSurface : Surface
 
 data Outcome : Set where
-  stableOutcome contestedOutcome : Outcome
+  stableOutcome : Outcome
+  contestedOutcome : Outcome
 
 observe : World → Surface
 observe _ = sameDeclaredSurface

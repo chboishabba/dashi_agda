@@ -19,7 +19,9 @@ open import DASHI.Ontology.LeanWikidataTheoremSurfaceBridge
 ------------------------------------------------------------------------
 
 data ObjectVerdict : Set where
-  notObserved certifiedHolds certifiedRefuted : ObjectVerdict
+  notObserved : ObjectVerdict
+  certifiedHolds : ObjectVerdict
+  certifiedRefuted : ObjectVerdict
 
 record LeanCertifiedVerdict : Set where
   constructor leanCertifiedVerdict

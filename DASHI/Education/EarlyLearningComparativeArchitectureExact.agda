@@ -18,28 +18,42 @@ import DASHI.Education.EarlyLearningIntersectionalCapabilityExact as Capability
 ------------------------------------------------------------------------
 
 data DeliverySite : Set where
-  centreDelivery homeDelivery hybridDelivery : DeliverySite
+  centreDelivery : DeliverySite
+  homeDelivery : DeliverySite
+  hybridDelivery : DeliverySite
 
 data ProfessionalRelation : Set where
-  noQualifiedRelation periodicQualifiedRelation continuousQualifiedRelation : ProfessionalRelation
+  noQualifiedRelation : ProfessionalRelation
+  periodicQualifiedRelation : ProfessionalRelation
+  continuousQualifiedRelation : ProfessionalRelation
 
 data PedagogicalStructure : Set where
-  lowExplicitStructure guidedFlexibleStructure formalStructuredProgramme : PedagogicalStructure
+  lowExplicitStructure : PedagogicalStructure
+  guidedFlexibleStructure : PedagogicalStructure
+  formalStructuredProgramme : PedagogicalStructure
 
 data QualityState : Set where
-  qualityUnknown qualityConstrained highQualityCapacity : QualityState
+  qualityUnknown : QualityState
+  qualityConstrained : QualityState
+  highQualityCapacity : QualityState
 
 data RolloutState : Set where
-  rapidScaleUp matureCapacityBuild : RolloutState
+  rapidScaleUp : RolloutState
+  matureCapacityBuild : RolloutState
 
 data CounterfactualHomeState : Set where
-  lowerOpportunityCounterfactual higherOpportunityCounterfactual : CounterfactualHomeState
+  lowerOpportunityCounterfactual : CounterfactualHomeState
+  higherOpportunityCounterfactual : CounterfactualHomeState
 
 data LabourEffectRisk : Set where
-  labourEffectUnknown maternalExitRisk labourParticipationGain : LabourEffectRisk
+  labourEffectUnknown : LabourEffectRisk
+  maternalExitRisk : LabourEffectRisk
+  labourParticipationGain : LabourEffectRisk
 
 data AutonomyState : Set where
-  lowAutonomy developmentallyAppropriateAutonomy highUnstructuredAutonomy : AutonomyState
+  lowAutonomy : AutonomyState
+  developmentallyAppropriateAutonomy : AutonomyState
+  highUnstructuredAutonomy : AutonomyState
 
 record ComparativeLearningArchitecture : Set where
   constructor comparativeLearningArchitecture

@@ -29,10 +29,13 @@ import DASHI.Chemistry.RegulatoryAnalyteCoverageBidiExact as Coverage
 ------------------------------------------------------------------------
 
 data PanelStage : Set where
-  requiredPanel expandedPanel : PanelStage
+  requiredPanel : PanelStage
+  expandedPanel : PanelStage
 
 data PanelObservation : Set where
-  requiredPass expandedPass expandedOffPanelHit : PanelObservation
+  requiredPass : PanelObservation
+  expandedPass : PanelObservation
+  expandedOffPanelHit : PanelObservation
 
 observeAt : PanelStage → Coverage.FineBatch → PanelObservation
 observeAt requiredPanel Coverage.cleanPassingBatch = requiredPass

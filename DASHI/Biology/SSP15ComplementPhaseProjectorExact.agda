@@ -233,7 +233,8 @@ laneProjectorReverseCovariant selected actual
   rewrite laneEqualReverseCovariant selected actual = refl
 
 data ComplementPhasePolicy : Set where
-  preserveBalancedPhase reverseBalancedPhasePolicy : ComplementPhasePolicy
+  preserveBalancedPhase : ComplementPhasePolicy
+  reverseBalancedPhasePolicy : ComplementPhasePolicy
 
 record StageSymmetryPhaseState : Set where
   constructor stage-symmetry-phase-state

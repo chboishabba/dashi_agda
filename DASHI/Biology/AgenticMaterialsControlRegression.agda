@@ -10,13 +10,19 @@ open import DASHI.Biology.AgenticMaterialsControlCore
 
 -- damaged2 -> damaged1 -> viable0, while viable0 is fixed.
 data TissueState : Set where
-  viable0 damaged1 damaged2 : TissueState
+  viable0 : TissueState
+  damaged1 : TissueState
+  damaged2 : TissueState
 
 data TissueAction : Set where
-  hold repairOne repairTwo : TissueAction
+  hold : TissueAction
+  repairOne : TissueAction
+  repairTwo : TissueAction
 
 data TissueDefect : Set where
-  d0 d1 d2 : TissueDefect
+  d0 : TissueDefect
+  d1 : TissueDefect
+  d2 : TissueDefect
 
 data BetterDefect : TissueDefect → TissueDefect → Set where
   zeroFixed : BetterDefect d0 d0
@@ -132,7 +138,8 @@ canonicalNoGlobalEntropyDecreaseClaim =
 -- A prion-like templating witness remains outside the agency gate.
 
 data FoldState : Set where
-  native misfolded : FoldState
+  native : FoldState
+  misfolded : FoldState
 
 prionTemplate : FoldState → FoldState → FoldState
 prionTemplate native x = x

@@ -23,7 +23,9 @@ import DASHI.Core.SourceExactFrontierBidiCrossPollination2026 as SourceFrontier
 ------------------------------------------------------------------------
 
 data Crop : Set where
-  soybean maize wheat : Crop
+  soybean : Crop
+  maize : Crop
+  wheat : Crop
 
 data MicrobialRoute : Set where
   bradyrhizobiumSymbiosis : MicrobialRoute
@@ -35,7 +37,9 @@ data NitrogenOutcome : Set where
   noUniversalNitrogenReplacementClaim : NitrogenOutcome
 
 data EvidenceScope : Set where
-  fieldExperiment synthesis retrospective : EvidenceScope
+  fieldExperiment : EvidenceScope
+  synthesis : EvidenceScope
+  retrospective : EvidenceScope
 
 record SourceBoundedBNFClaim : Set where
   constructor sourceBoundedClaim

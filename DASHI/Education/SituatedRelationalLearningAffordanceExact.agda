@@ -39,16 +39,24 @@ import DASHI.Reasoning.DevelopmentalAttunementPNFBridge as Attunement
 ------------------------------------------------------------------------
 
 data ReachabilityState : Set where
-  unavailable availableButBlocked reachable : ReachabilityState
+  unavailable : ReachabilityState
+  availableButBlocked : ReachabilityState
+  reachable : ReachabilityState
 
 data ContestabilityState : Set where
-  adultDirectedOnly acceptOrDecline acceptDeclineOrModify : ContestabilityState
+  adultDirectedOnly : ContestabilityState
+  acceptOrDecline : ContestabilityState
+  acceptDeclineOrModify : ContestabilityState
 
 data DevelopmentalMeasurementHorizon : Set where
-  immediateSnapshot intermediateHorizon longitudinalHorizon : DevelopmentalMeasurementHorizon
+  immediateSnapshot : DevelopmentalMeasurementHorizon
+  intermediateHorizon : DevelopmentalMeasurementHorizon
+  longitudinalHorizon : DevelopmentalMeasurementHorizon
 
 data HistoricalAccessibility : Set where
-  historyUnspecified historyBarrierRetained historyRevisionRouteRetained : HistoricalAccessibility
+  historyUnspecified : HistoricalAccessibility
+  historyBarrierRetained : HistoricalAccessibility
+  historyRevisionRouteRetained : HistoricalAccessibility
 
 reachabilityBool : ReachabilityState → Bool
 reachabilityBool unavailable = false

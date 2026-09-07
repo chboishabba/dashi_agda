@@ -244,7 +244,8 @@ zeroModeTwiceStrain =
     0ℚ 0ℚ 0ℚ
 
 data PeriodicModeKind : Set where
-  zeroMode nonzeroMode : PeriodicModeKind
+  zeroMode : PeriodicModeKind
+  nonzeroMode : PeriodicModeKind
 
 record PeriodicBiotSavartBoundary : Set where
   constructor periodicBiotSavartBoundary

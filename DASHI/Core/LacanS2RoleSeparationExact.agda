@@ -32,10 +32,15 @@ fregeS2≠discourseS2 : fregeGenesisSecond ≡ discourseKnowledgeS2 → ⊥
 fregeS2≠discourseS2 ()
 
 data FregeGenesisRole : Set where
-  zeroStart unaryCount secondCount : FregeGenesisRole
+  zeroStart : FregeGenesisRole
+  unaryCount : FregeGenesisRole
+  secondCount : FregeGenesisRole
 
 data DiscourseRole : Set where
-  masterSignifierS1 knowledgeBatteryS2 dividedSubject surplusObject : DiscourseRole
+  masterSignifierS1 : DiscourseRole
+  knowledgeBatteryS2 : DiscourseRole
+  dividedSubject : DiscourseRole
+  surplusObject : DiscourseRole
 
 fregeRole : Ternary.TernaryRoleCode → FregeGenesisRole
 fregeRole Ternary.code0 = zeroStart

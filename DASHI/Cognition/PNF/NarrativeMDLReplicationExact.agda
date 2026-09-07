@@ -50,10 +50,14 @@ reopeningDoesNotFitSameBudget (MDL.withinResidualBudget slack ())
 ------------------------------------------------------------------------
 
 data TruthCoordinate : Set where
-  supported refuted unresolved : TruthCoordinate
+  supported : TruthCoordinate
+  refuted : TruthCoordinate
+  unresolved : TruthCoordinate
 
 data CompressionWinner : Set where
-  shorter longer tie : CompressionWinner
+  shorter : CompressionWinner
+  longer : CompressionWinner
+  tie : CompressionWinner
 
 data CompressionSettlesTruth : CompressionWinner → TruthCoordinate → Set where
 

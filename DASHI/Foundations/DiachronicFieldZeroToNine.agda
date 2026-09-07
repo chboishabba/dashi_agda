@@ -12,7 +12,11 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv; inv-invol)
 ------------------------------------------------------------------------
 
 data Stage : Set where
-  stage0 stage1 stage2 stage3 stage4 : Stage
+  stage0 : Stage
+  stage1 : Stage
+  stage2 : Stage
+  stage3 : Stage
+  stage4 : Stage
   stage5 stage6 stage7 stage8 stage9 : Stage
 
 previous : Stage → Stage
@@ -39,7 +43,10 @@ data IdentityClaim : Set where
   bothConditionally : IdentityClaim
 
 data Viewpoint : Set where
-  embodiedSelf rememberedSelf anticipatedSelf socialOther : Viewpoint
+  embodiedSelf : Viewpoint
+  rememberedSelf : Viewpoint
+  anticipatedSelf : Viewpoint
+  socialOther : Viewpoint
 
 data TransStageMeaning : Stage → Set where
   presemanticAffect : TransStageMeaning stage0
@@ -166,7 +173,11 @@ record LocalStabiliser (A : Set) : Set₁ where
 ------------------------------------------------------------------------
 
 data NineTensorKind : Set where
-  selfHistory societyForm societyThought physicalLaw externalCausality : NineTensorKind
+  selfHistory : NineTensorKind
+  societyForm : NineTensorKind
+  societyThought : NineTensorKind
+  physicalLaw : NineTensorKind
+  externalCausality : NineTensorKind
 
 record NineTensor : Set where
   constructor tensor

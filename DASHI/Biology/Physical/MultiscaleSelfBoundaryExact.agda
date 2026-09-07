@@ -19,10 +19,14 @@ _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
 
 data Scale : Set where
-  cell tissue organism : Scale
+  cell : Scale
+  tissue : Scale
+  organism : Scale
 
 data BodyPart : Set where
-  hand heart skin : BodyPart
+  hand : BodyPart
+  heart : BodyPart
+  skin : BodyPart
 
 record SelfBoundary : Set where
   constructor selfBoundary

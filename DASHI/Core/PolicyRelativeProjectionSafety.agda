@@ -116,10 +116,14 @@ policyDefectContradictsPolicySafety safety defect =
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  leftNow rightNow leftRevealed rightRevealed : DemoState
+  leftNow : DemoState
+  rightNow : DemoState
+  leftRevealed : DemoState
+  rightRevealed : DemoState
 
 data DemoAction : Set where
-  hold reveal : DemoAction
+  hold : DemoAction
+  reveal : DemoAction
 
 data DemoPrecondition : DemoState → DemoAction → Set where
   holdReady : ∀ {state} → DemoPrecondition state hold

@@ -14,11 +14,19 @@ import DASHI.Core.InverseProblemIdentifiabilityBidiExact as Inv
 ------------------------------------------------------------------------
 
 data QITStage : Set where
-  particleEncounter sampleCapture ionProduction ionTrap massAnalysis speciesInference : QITStage
+  particleEncounter : QITStage
+  sampleCapture : QITStage
+  ionProduction : QITStage
+  ionTrap : QITStage
+  massAnalysis : QITStage
+  speciesInference : QITStage
 
 
 data QITObservable : Set where
-  massToCharge peakIntensity peakWidth fragmentationPattern : QITObservable
+  massToCharge : QITObservable
+  peakIntensity : QITObservable
+  peakWidth : QITObservable
+  fragmentationPattern : QITObservable
 
 record PlanetaryQITExperiment : Set where
   constructor planetary-qit-experiment

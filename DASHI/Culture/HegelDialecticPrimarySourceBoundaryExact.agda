@@ -24,7 +24,10 @@ hegelScienceOfLogicSource =
     Source.publicAttribution
 
 data SourceLayer : Set where
-  primaryHegelProposition accessTranscription secondaryInterpretation dashiComparison : SourceLayer
+  primaryHegelProposition : SourceLayer
+  accessTranscription : SourceLayer
+  secondaryInterpretation : SourceLayer
+  dashiComparison : SourceLayer
 
 record HegelDialecticReceipt : Set where
   constructor hegel-dialectic-receipt
@@ -75,7 +78,12 @@ reasonContradictionReceipt = hegel-dialectic-receipt
   primaryHegelProposition true false false
 
 data HegelDialecticMoment : Set where
-  identityMoment differenceMoment oppositionMoment contradictionMoment transitionMoment selfMovementMoment : HegelDialecticMoment
+  identityMoment : HegelDialecticMoment
+  differenceMoment : HegelDialecticMoment
+  oppositionMoment : HegelDialecticMoment
+  contradictionMoment : HegelDialecticMoment
+  transitionMoment : HegelDialecticMoment
+  selfMovementMoment : HegelDialecticMoment
 
 data HegelDialecticRelation : HegelDialecticMoment → HegelDialecticMoment → Set where
   identityToDifference : HegelDialecticRelation identityMoment differenceMoment

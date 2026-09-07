@@ -78,13 +78,15 @@ formalArrowCompositionStillAssociative = FormalPath.associativeComposition
 ------------------------------------------------------------------------
 
 data BracketedHistory : Set where
-  leftBracketHistory rightBracketHistory : BracketedHistory
+  leftBracketHistory : BracketedHistory
+  rightBracketHistory : BracketedHistory
 
 data ResidualInventorySurface : Set where
   samePowerSymbolicNetworkInventory : ResidualInventorySurface
 
 data EffectiveRepairOutcome : Set where
-  relationalExpansionOutcome pluralUnresolvedOutcome : EffectiveRepairOutcome
+  relationalExpansionOutcome : EffectiveRepairOutcome
+  pluralUnresolvedOutcome : EffectiveRepairOutcome
 
 residualInventory : BracketedHistory → ResidualInventorySurface
 residualInventory _ = samePowerSymbolicNetworkInventory
@@ -209,7 +211,8 @@ data BranchMeasurement : Set where
 
 
 data BranchMeasurementValue : Set where
-  leftBracketSeen rightBracketSeen : BranchMeasurementValue
+  leftBracketSeen : BranchMeasurementValue
+  rightBracketSeen : BranchMeasurementValue
   expansionConeSeen reactionConeSeen pluralConeSeen : BranchMeasurementValue
   compatibleSeen unresolvedCompatibility : BranchMeasurementValue
 

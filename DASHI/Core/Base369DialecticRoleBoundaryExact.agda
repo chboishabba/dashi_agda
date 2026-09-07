@@ -80,7 +80,9 @@ motifM9PolicyIsProhibit = refl
 ------------------------------------------------------------------------
 
 data Dialectic369Role : Set where
-  distinctionRole relationOrTensionRole closureRole : Dialectic369Role
+  distinctionRole : Dialectic369Role
+  relationOrTensionRole : Dialectic369Role
+  closureRole : Dialectic369Role
 
 historicalRole : Nat → Dialectic369Role
 historicalRole 3 = distinctionRole

@@ -19,10 +19,12 @@ open import DASHI.Ontology.LeanWikidataSourceSnapshot
 ------------------------------------------------------------------------
 
 data DashiOntologyRepresentation : Set where
-  abstractSemanticWorld concreteQidGraph : DashiOntologyRepresentation
+  abstractSemanticWorld : DashiOntologyRepresentation
+  concreteQidGraph : DashiOntologyRepresentation
 
 data JamesKernelEligibility : Set where
-  requiresConcreteTranslation eligibleForExecution : JamesKernelEligibility
+  requiresConcreteTranslation : JamesKernelEligibility
+  eligibleForExecution : JamesKernelEligibility
 
 kernelEligibility : DashiOntologyRepresentation → JamesKernelEligibility
 kernelEligibility abstractSemanticWorld = requiresConcreteTranslation

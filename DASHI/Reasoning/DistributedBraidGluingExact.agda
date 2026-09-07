@@ -12,7 +12,9 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data Agent : Set where
-  agentA agentB agentC : Agent
+  agentA : Agent
+  agentB : Agent
+  agentC : Agent
 
 data CoherentSection : Set where
   section000 : CoherentSection

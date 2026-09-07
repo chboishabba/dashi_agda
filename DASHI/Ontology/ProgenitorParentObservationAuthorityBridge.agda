@@ -10,7 +10,8 @@ open import DASHI.Ontology.ProgenitorParentProjectionFibre
 open import DASHI.Ontology.ProgenitorParentObserverDynamicsBridge
 
 data DisclosureVariant : Set where
-  hiddenDonor disclosedDonor : DisclosureVariant
+  hiddenDonor : DisclosureVariant
+  disclosedDonor : DisclosureVariant
 
 variantCarrier : DisclosureVariant → ParentCarrier
 variantCarrier hiddenDonor = anonymousDonorCarrier

@@ -11,10 +11,12 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data HelicitySign : Set where
-  helicityPlus helicityMinus : HelicitySign
+  helicityPlus : HelicitySign
+  helicityMinus : HelicitySign
 
 data ElsasserOrientation : Set where
-  elsasserPlus elsasserMinus : ElsasserOrientation
+  elsasserPlus : ElsasserOrientation
+  elsasserMinus : ElsasserOrientation
 
 record HelicalElsasserSector : Set where
   constructor helical-elsasser-sector

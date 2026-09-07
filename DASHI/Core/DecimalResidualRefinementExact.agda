@@ -34,7 +34,16 @@ pow base zero = 1
 pow base (suc exponent) = base * pow base exponent
 
 data DecimalDigit : Set where
-  d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 : DecimalDigit
+  d0 : DecimalDigit
+  d1 : DecimalDigit
+  d2 : DecimalDigit
+  d3 : DecimalDigit
+  d4 : DecimalDigit
+  d5 : DecimalDigit
+  d6 : DecimalDigit
+  d7 : DecimalDigit
+  d8 : DecimalDigit
+  d9 : DecimalDigit
 
 digitValue : DecimalDigit → Nat
 digitValue d0 = 0

@@ -49,7 +49,9 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 
 data Orientation : Set where
-  negativeOrientation zeroOrientation positiveOrientation : Orientation
+  negativeOrientation : Orientation
+  zeroOrientation : Orientation
+  positiveOrientation : Orientation
 
 flipOrientation : Orientation → Orientation
 flipOrientation negativeOrientation = positiveOrientation

@@ -18,13 +18,22 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.D4NineCellOrbitCompressionExact as D4
 
 data Half5 : Set where
-  h0 h1 h2 h3 h4 : Half5
+  h0 : Half5
+  h1 : Half5
+  h2 : Half5
+  h3 : Half5
+  h4 : Half5
 
 data Orientation2 : Set where
-  direct reflected : Orientation2
+  direct : Orientation2
+  reflected : Orientation2
 
 data Unfolded10 : Set where
-  d0 d1 d2 d3 d4 : Unfolded10
+  d0 : Unfolded10
+  d1 : Unfolded10
+  d2 : Unfolded10
+  d3 : Unfolded10
+  d4 : Unfolded10
   r0 r1 r2 r3 r4 : Unfolded10
 
 data Quotient9 : Set where

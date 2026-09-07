@@ -10,7 +10,8 @@ data SU2Signed : Set where
   plus : SU2Gen → SU2Signed
 
 data LatticeSite : Set where
-  s0 s1 : LatticeSite
+  s0 : LatticeSite
+  s1 : LatticeSite
 
 data LatticeEdge : Set where
   e01 : LatticeEdge

@@ -56,7 +56,10 @@ open ComparableRange public
 open StrictHighRange public
 
 data TriadicInteractionClass : Set where
-  highHigh lowHigh highLow comparable : TriadicInteractionClass
+  highHigh : TriadicInteractionClass
+  lowHigh : TriadicInteractionClass
+  highLow : TriadicInteractionClass
+  comparable : TriadicInteractionClass
 
 data SupportedTriadRange
     (collar leftInput rightInput output : Nat) : Set where
@@ -122,7 +125,11 @@ data FilteredInteractionRange
     FilteredInteractionRange collar leftInput rightInput output
 
 data FiveInteractionClass : Set where
-  HH LH HL CC Com : FiveInteractionClass
+  HH : FiveInteractionClass
+  LH : FiveInteractionClass
+  HL : FiveInteractionClass
+  CC : FiveInteractionClass
+  Com : FiveInteractionClass
 
 classifyFilteredInteraction :
   ∀ {collar leftInput rightInput output} →

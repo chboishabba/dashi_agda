@@ -6,7 +6,8 @@ open import Data.Fin using (Fin; zero; suc)
 
 -- The sign of each diagonal axis of a non-degenerate quadratic form.
 data AxisSign : Set where
-  spacelike timelike : AxisSign
+  spacelike : AxisSign
+  timelike : AxisSign
 
 -- The canonical (d,1) diagonal signature: axis zero is the arrow, the
 -- remaining d axes are spatial and isotropic.

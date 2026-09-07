@@ -7,7 +7,8 @@ open import DASHI.Cognition.PNF.ProducerCertifiedReferenceAdmissionExact
 
 
 data TinyItem : Set where
-  first second : TinyItem
+  first : TinyItem
+  second : TinyItem
 
 data TinyAuthority : Set where
   admitted : TinyAuthority

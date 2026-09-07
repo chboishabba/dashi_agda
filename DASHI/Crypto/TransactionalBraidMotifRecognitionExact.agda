@@ -14,10 +14,15 @@ import DASHI.Core.ActionCrossingMotifExact as Motif
 ------------------------------------------------------------------------
 
 data Asset : Set where
-  origin relay sink : Asset
+  origin : Asset
+  relay : Asset
+  sink : Asset
 
 data AssetAction : Set where
-  transferAction splitAction mergeAction returnAction : AssetAction
+  transferAction : AssetAction
+  splitAction : AssetAction
+  mergeAction : AssetAction
+  returnAction : AssetAction
 
 originToRelay : AssetAction → Trace.CrossingEvent Asset AssetAction
 originToRelay action = Trace.crossing-event origin relay action

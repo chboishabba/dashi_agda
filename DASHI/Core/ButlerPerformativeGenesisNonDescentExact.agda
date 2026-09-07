@@ -17,7 +17,8 @@ open import DASHI.Core.Prelude
 import DASHI.Core.IntersectionalNonFactorability as INF
 
 data ConstitutiveHistory : Set where
-  repeatedNormativeActs divergentIterativeActs : ConstitutiveHistory
+  repeatedNormativeActs : ConstitutiveHistory
+  divergentIterativeActs : ConstitutiveHistory
 
 data PresentCategory : Set where samePresentCategory : PresentCategory
 

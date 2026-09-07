@@ -16,12 +16,17 @@ data PositionId : Set where
   positionId : Nat → PositionId
 
 data SpreadRole : Set where
-  inheritanceRole presentConstraintRole possibleDevelopmentRole : SpreadRole
+  inheritanceRole : SpreadRole
+  presentConstraintRole : SpreadRole
+  possibleDevelopmentRole : SpreadRole
   resourceRole obstacleRole actionRole consequenceRole synthesisRole : SpreadRole
   customRole : String → SpreadRole
 
 data StructuralScale : Set where
-  inheritedScale presentScale emergingScale atemporalScale : StructuralScale
+  inheritedScale : StructuralScale
+  presentScale : StructuralScale
+  emergingScale : StructuralScale
+  atemporalScale : StructuralScale
 
 record SpreadPosition : Set where
   constructor spreadPosition
@@ -34,7 +39,12 @@ record SpreadPosition : Set where
 open SpreadPosition public
 
 data RelationType : Set where
-  precedes supports obstructs qualifies contrastsWith developsInto : RelationType
+  precedes : RelationType
+  supports : RelationType
+  obstructs : RelationType
+  qualifies : RelationType
+  contrastsWith : RelationType
+  developsInto : RelationType
 
 record SpreadRelation : Set where
   constructor spreadRelation

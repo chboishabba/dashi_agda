@@ -59,7 +59,11 @@ record DemandId : Set where
   field demandValue : Nat
 
 data SymbolKind : Set where
-  orthSymbol lemmaSymbol posSymbol tagSymbol dependencySymbol : SymbolKind
+  orthSymbol : SymbolKind
+  lemmaSymbol : SymbolKind
+  posSymbol : SymbolKind
+  tagSymbol : SymbolKind
+  dependencySymbol : SymbolKind
   morphFeatureSymbol morphValueSymbol entityTypeSymbol : SymbolKind
   factorTypeSymbol predicateSymbol roleSymbol residualTypeSymbol : SymbolKind
   objectKindSymbol : SymbolKind

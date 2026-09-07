@@ -183,7 +183,9 @@ movementResiduePersistsAfterReconvergence trace =
 ------------------------------------------------------------------------
 
 data ReconvergedLedgerCase : Set where
-  closureCase archivePluralCase movementAuthorityCase : ReconvergedLedgerCase
+  closureCase : ReconvergedLedgerCase
+  archivePluralCase : ReconvergedLedgerCase
+  movementAuthorityCase : ReconvergedLedgerCase
 
 data SameReconvergedPresent : Set where samePresent : SameReconvergedPresent
 
@@ -270,7 +272,9 @@ movementRouteAuthorityEdgeExists = refl
 ------------------------------------------------------------------------
 
 data LedgerCode : Set where
-  closureOnlyCode archivePlusPluralCode movementPlusAuthorityCode : LedgerCode
+  closureOnlyCode : LedgerCode
+  archivePlusPluralCode : LedgerCode
+  movementPlusAuthorityCode : LedgerCode
 
 ledgerCode : ReconvergedLedgerCase → LedgerCode
 ledgerCode closureCase = closureOnlyCode

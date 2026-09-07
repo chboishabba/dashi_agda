@@ -10,19 +10,35 @@ import DASHI.Law.QueenslandWandingReachabilityBidiExact as Wand
 ------------------------------------------------------------------------
 
 data OccurrenceState : Set where
-  occurred didNotOccur occurrenceUnresolved : OccurrenceState
+  occurred : OccurrenceState
+  didNotOccur : OccurrenceState
+  occurrenceUnresolved : OccurrenceState
 
 data AuthorityState : Set where
-  authorityPresent authorityAbsent authorityUnresolved : AuthorityState
+  authorityPresent : AuthorityState
+  authorityAbsent : AuthorityState
+  authorityUnresolved : AuthorityState
 
 data LawfulnessState : Set where
-  lawful unlawful lawfulnessUnresolved notApplicable : LawfulnessState
+  lawful : LawfulnessState
+  unlawful : LawfulnessState
+  lawfulnessUnresolved : LawfulnessState
+  notApplicable : LawfulnessState
 
 data EvidenceState : Set where
-  positiveReceipt negativeReceipt conflictingReceipts missingReceipt inadmissibleReceipt : EvidenceState
+  positiveReceipt : EvidenceState
+  negativeReceipt : EvidenceState
+  conflictingReceipts : EvidenceState
+  missingReceipt : EvidenceState
+  inadmissibleReceipt : EvidenceState
 
 data SafeguardKind : Set where
-  identityNotice purposeNotice nonComplianceNotice leastInvasive detentionDuration separateSearchPredicate : SafeguardKind
+  identityNotice : SafeguardKind
+  purposeNotice : SafeguardKind
+  nonComplianceNotice : SafeguardKind
+  leastInvasive : SafeguardKind
+  detentionDuration : SafeguardKind
+  separateSearchPredicate : SafeguardKind
 
 record LegalTransitionFibre : Set where
   constructor legalTransitionFibre
@@ -71,10 +87,12 @@ data OccurrenceSurface : Set where
   occurredSurface : OccurrenceSurface
 
 data LegalOutcome : Set where
-  legalOutcome lawfulOutcome : LegalOutcome
+  legalOutcome : LegalOutcome
+  lawfulOutcome : LegalOutcome
 
 data LawfulnessWitnessState : Set where
-  happenedUnlawfully happenedLawfully : LawfulnessWitnessState
+  happenedUnlawfully : LawfulnessWitnessState
+  happenedLawfully : LawfulnessWitnessState
 
 occurrenceProjection : LawfulnessWitnessState → OccurrenceSurface
 occurrenceProjection happenedUnlawfully = occurredSurface
@@ -131,7 +149,9 @@ open SafeguardClosure public
 ------------------------------------------------------------------------
 
 data ReachabilityState : Set where
-  unreachable reachable lawfullyReachable : ReachabilityState
+  unreachable : ReachabilityState
+  reachable : ReachabilityState
+  lawfullyReachable : ReachabilityState
 
 record ReachabilityLawfulnessWitness : Set where
   constructor reachabilityLawfulnessWitness
@@ -154,7 +174,11 @@ canonicalReachableButNotLawfullyClosed =
 ------------------------------------------------------------------------
 
 data RemedyState : Set where
-  exclusion suppression civilRemedy disciplinaryRemedy criminalConsequence : RemedyState
+  exclusion : RemedyState
+  suppression : RemedyState
+  civilRemedy : RemedyState
+  disciplinaryRemedy : RemedyState
+  criminalConsequence : RemedyState
   noAvailableRemedy remedyUnresolved : RemedyState
 
 record RemedyConsumer : Set where
@@ -172,7 +196,11 @@ open RemedyConsumer public
 ------------------------------------------------------------------------
 
 data ClosureState : Set where
-  closed openMissing openConflict openInadmissible openNegative : ClosureState
+  closed : ClosureState
+  openMissing : ClosureState
+  openConflict : ClosureState
+  openInadmissible : ClosureState
+  openNegative : ClosureState
 
 closureOf : EvidenceState → ClosureState
 closureOf positiveReceipt = closed

@@ -35,7 +35,10 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 data WilsonDiagonalSlot4 : Set where
-  diagonal0 diagonal1 diagonal2 diagonal3 : WilsonDiagonalSlot4
+  diagonal0 : WilsonDiagonalSlot4
+  diagonal1 : WilsonDiagonalSlot4
+  diagonal2 : WilsonDiagonalSlot4
+  diagonal3 : WilsonDiagonalSlot4
 
 wilsonDiagonalSlots4 : List WilsonDiagonalSlot4
 wilsonDiagonalSlots4 =

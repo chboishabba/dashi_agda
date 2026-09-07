@@ -31,7 +31,8 @@ record InvariantDecomposition {ℓ : Level}
 open InvariantDecomposition public
 
 data PlaceholderStatus : Set where
-  effectiveLorentz preferredFrame : PlaceholderStatus
+  effectiveLorentz : PlaceholderStatus
+  preferredFrame : PlaceholderStatus
 
 record PlaceholderSafety {ℓ : Level}
   (A : O3InvariantRank2Ansatz ℓ) : Set (lsuc ℓ) where

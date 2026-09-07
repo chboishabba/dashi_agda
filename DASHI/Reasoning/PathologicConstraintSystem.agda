@@ -19,10 +19,18 @@ import DASHI.Core.TypedDependencyCore as Dependency
 ------------------------------------------------------------------------
 
 data Doctor : Set where
-  bachelor haruspex changeling : Doctor
+  bachelor : Doctor
+  haruspex : Doctor
+  changeling : Doctor
 
 data PathologicAction : Set where
-  walk converse trade fight rest readLetters investigate : PathologicAction
+  walk : PathologicAction
+  converse : PathologicAction
+  trade : PathologicAction
+  fight : PathologicAction
+  rest : PathologicAction
+  readLetters : PathologicAction
+  investigate : PathologicAction
   laboratoryInference dissectCorpse miracleHeal treatInfected : PathologicAction
 
 record ActionCost : Set where
@@ -179,7 +187,9 @@ canonicalBachelorWalkDependency = record
 ------------------------------------------------------------------------
 
 data CoreMechanic : Set where
-  mailMechanic inventoryCapacityMechanic dialogueExitMechanic : CoreMechanic
+  mailMechanic : CoreMechanic
+  inventoryCapacityMechanic : CoreMechanic
+  dialogueExitMechanic : CoreMechanic
 
 record OpaqueMechanicDependency : Set where
   field
@@ -208,7 +218,8 @@ mailDependencyReceipt = record
 ------------------------------------------------------------------------
 
 data EconomyPhase : Set where
-  ordinaryExchange scarcityShock : EconomyPhase
+  ordinaryExchange : EconomyPhase
+  scarcityShock : EconomyPhase
 
 priceMultiplier : EconomyPhase → Nat
 priceMultiplier ordinaryExchange = 1
@@ -219,10 +230,17 @@ dayTwoPriceMultiplierIsTen :
 dayTwoPriceMultiplierIsTen = refl
 
 data Mechanic : Set where
-  moneyMechanic foodMechanic walkingMechanic combatMechanic dialogueMechanic : Mechanic
+  moneyMechanic : Mechanic
+  foodMechanic : Mechanic
+  walkingMechanic : Mechanic
+  combatMechanic : Mechanic
+  dialogueMechanic : Mechanic
 
 data MechanicReading : Set where
-  ordinaryAffordance survivalConstraint moralPressure epistemicTrap : MechanicReading
+  ordinaryAffordance : MechanicReading
+  survivalConstraint : MechanicReading
+  moralPressure : MechanicReading
+  epistemicTrap : MechanicReading
 
 record RecontextualisedMechanic : Set where
   field
@@ -245,7 +263,10 @@ canonicalMoneyRecontextualisation = record
   }
 
 data FrictionOrigin : Set where
-  authoredConstraint implementationDefect budgetCompromise unresolvedFriction : FrictionOrigin
+  authoredConstraint : FrictionOrigin
+  implementationDefect : FrictionOrigin
+  budgetCompromise : FrictionOrigin
+  unresolvedFriction : FrictionOrigin
 
 record FrictionClassification : Set where
   field

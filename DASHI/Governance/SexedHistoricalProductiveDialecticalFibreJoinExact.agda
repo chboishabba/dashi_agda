@@ -37,10 +37,12 @@ data GrammarContribution : Set where
 
 
 data TransportOrder : Set where
-  lacanThenRechart rechartThenLacan : TransportOrder
+  lacanThenRechart : TransportOrder
+  rechartThenLacan : TransportOrder
 
 data OrderResidual : Set where
-  residualLR residualRL : OrderResidual
+  residualLR : OrderResidual
+  residualRL : OrderResidual
 
 data JoinState : Set where
   oneSidedLacan : JoinState
@@ -116,7 +118,9 @@ data RelationalOption : Set where
 
 
 data RelationalWorld : Set where
-  lacanWorld rechartWorld joinedWorld : RelationalWorld
+  lacanWorld : RelationalWorld
+  rechartWorld : RelationalWorld
+  joinedWorld : RelationalWorld
 
 data Available : RelationalWorld → RelationalOption → Set where
   lacanInherited : Available lacanWorld inheritedIdentification
@@ -183,7 +187,9 @@ productiveJoinDoesNotEraseTransportOrder =
 ------------------------------------------------------------------------
 
 data CandidateJoinStatus : Set where
-  rejectedJoin unresolvedJoin productiveJoin : CandidateJoinStatus
+  rejectedJoin : CandidateJoinStatus
+  unresolvedJoin : CandidateJoinStatus
+  productiveJoin : CandidateJoinStatus
 
 joinDisposition : CandidateJoinStatus → Suspension.EpistemicDisposition
 joinDisposition rejectedJoin = Suspension.rejectHere

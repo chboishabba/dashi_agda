@@ -11,7 +11,10 @@ open import Data.Product using (_×_; _,_; proj₁)
 -- CAGT carrier and canonical involutions.
 
 data Base : Set where
-  A C G T : Base
+  A : Base
+  C : Base
+  G : Base
+  T : Base
 
 complement : Base → Base
 complement A = T
@@ -43,7 +46,9 @@ reverseComplement xs = map complement (reverse xs)
 -- Geometry: line, sheet/voxel, six-sheet slab, and 27-cube.
 
 data Axis3 : Set where
-  axis0 axis1 axis2 : Axis3
+  axis0 : Axis3
+  axis1 : Axis3
+  axis2 : Axis3
 
 Line3 : Set
 Line3 = Axis3 → Base

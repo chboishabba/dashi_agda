@@ -18,7 +18,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 data VortexCriterionRole : Set where
-  diagnostic analyticEstimate : VortexCriterionRole
+  diagnostic : VortexCriterionRole
+  analyticEstimate : VortexCriterionRole
 
 objectiveQCriterionRole : VortexCriterionRole
 objectiveQCriterionRole = diagnostic

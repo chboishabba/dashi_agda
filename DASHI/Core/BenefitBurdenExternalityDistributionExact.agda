@@ -36,7 +36,8 @@ open DistributionGeometry public
 ------------------------------------------------------------------------
 
 data DemoParty : Set where
-  contributingBeneficiary affectedLowVoiceParty : DemoParty
+  contributingBeneficiary : DemoParty
+  affectedLowVoiceParty : DemoParty
 
 data DemoAggregate : Set where sameAggregateSuccess : DemoAggregate
 
@@ -129,7 +130,8 @@ canonicalDistributionalCoverage =
 ------------------------------------------------------------------------
 
 data ResearchStrategy : Set where
-  institutionCentredStrategy distributionAwareStrategy : ResearchStrategy
+  institutionCentredStrategy : ResearchStrategy
+  distributionAwareStrategy : ResearchStrategy
 
 strategyMove : ResearchStrategy → Choice.InformationMove
 strategyMove institutionCentredStrategy =
@@ -151,13 +153,16 @@ strategyCost : ResearchStrategy → Nat
 strategyCost strategy = Choice.cost (strategyMove strategy)
 
 data StrategyBenefitRoute : Set where
-  concentratedBenefitRoute sharedBenefitRoute : StrategyBenefitRoute
+  concentratedBenefitRoute : StrategyBenefitRoute
+  sharedBenefitRoute : StrategyBenefitRoute
 
 data StrategyExternalBurden : Set where
-  highExternalBurden lowExternalBurden : StrategyExternalBurden
+  highExternalBurden : StrategyExternalBurden
+  lowExternalBurden : StrategyExternalBurden
 
 data StrategyAffectedVoice : Set where
-  affectedVoiceMissing affectedVoiceRepresented : StrategyAffectedVoice
+  affectedVoiceMissing : StrategyAffectedVoice
+  affectedVoiceRepresented : StrategyAffectedVoice
 
 strategyBenefitRoute : ResearchStrategy → StrategyBenefitRoute
 strategyBenefitRoute institutionCentredStrategy = concentratedBenefitRoute
@@ -204,10 +209,17 @@ costCannotRecoverAffectedVoice =
 ------------------------------------------------------------------------
 
 data DistributionDomain : Set where
-  climate industrialisation education formalisation research : DistributionDomain
+  climate : DistributionDomain
+  industrialisation : DistributionDomain
+  education : DistributionDomain
+  formalisation : DistributionDomain
+  research : DistributionDomain
 
 data DistributionQuestion : Set where
-  whoContributed whoBenefits whoBearsBurden whoHasVoice : DistributionQuestion
+  whoContributed : DistributionQuestion
+  whoBenefits : DistributionQuestion
+  whoBearsBurden : DistributionQuestion
+  whoHasVoice : DistributionQuestion
 
 domainQuestion : DistributionDomain → DistributionQuestion → String
 domainQuestion climate whoContributed = "climate contribution/responsibility distribution"

@@ -29,13 +29,15 @@ import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
 ------------------------------------------------------------------------
 
 data ServiceState : Set where
-  concentratedService distributedService : ServiceState
+  concentratedService : ServiceState
+  distributedService : ServiceState
 
 data ServiceSurface : Set where
   sameEnergyMobilityCommunication : ServiceSurface
 
 data PowerTopology : Set where
-  concentratedPower distributedPower : PowerTopology
+  concentratedPower : PowerTopology
+  distributedPower : PowerTopology
 
 serviceSurface : ServiceState → ServiceSurface
 serviceSurface _ = sameEnergyMobilityCommunication
@@ -67,13 +69,19 @@ serviceCannotRecoverPowerTopology =
 ------------------------------------------------------------------------
 
 data GenreState : Set where
-  solarCommons solarCentralised cyberCorporate cyberCommons : GenreState
+  solarCommons : GenreState
+  solarCentralised : GenreState
+  cyberCorporate : GenreState
+  cyberCommons : GenreState
 
 data GenreLabel : Set where
-  solarpunk cyberpunk : GenreLabel
+  solarpunk : GenreLabel
+  cyberpunk : GenreLabel
 
 data GovernanceForm : Set where
-  commonsGovernance centralisedGovernance corporateGovernance : GovernanceForm
+  commonsGovernance : GovernanceForm
+  centralisedGovernance : GovernanceForm
+  corporateGovernance : GovernanceForm
 
 genreLabel : GenreState → GenreLabel
 genreLabel solarCommons = solarpunk
@@ -109,16 +117,19 @@ solarpunkLabelCannotRecoverGovernance =
 ------------------------------------------------------------------------
 
 data MechanisedState : Set where
-  workerSharedGain ownerConcentratedGain : MechanisedState
+  workerSharedGain : MechanisedState
+  ownerConcentratedGain : MechanisedState
 
 data MachinerySurface : Set where
   sameMechanisedProduction : MachinerySurface
 
 data LabourPower : Set where
-  bargainingExpanded bargainingContracted : LabourPower
+  bargainingExpanded : LabourPower
+  bargainingContracted : LabourPower
 
 data SurplusRoute : Set where
-  sharedSurplus concentratedSurplus : SurplusRoute
+  sharedSurplus : SurplusRoute
+  concentratedSurplus : SurplusRoute
 
 machinerySurface : MechanisedState → MachinerySurface
 machinerySurface _ = sameMechanisedProduction
@@ -154,13 +165,15 @@ machineryCannotRecoverLabourPower =
 ------------------------------------------------------------------------
 
 data LabourPoliticalState : Set where
-  industrialWorkerDisenfranchised industrialWorkerEnfranchised : LabourPoliticalState
+  industrialWorkerDisenfranchised : LabourPoliticalState
+  industrialWorkerEnfranchised : LabourPoliticalState
 
 data LabourParticipation : Set where
   participatesInProduction : LabourParticipation
 
 data PoliticalVoice : Set where
-  franchiseAbsent franchisePresent : PoliticalVoice
+  franchiseAbsent : PoliticalVoice
+  franchisePresent : PoliticalVoice
 
 labourParticipation : LabourPoliticalState → LabourParticipation
 labourParticipation _ = participatesInProduction
@@ -195,13 +208,15 @@ labourParticipationCannotRecoverPoliticalVoice =
 ------------------------------------------------------------------------
 
 data TransplantedPlanState : Set where
-  locallyCompatible ecologyMismatch : TransplantedPlanState
+  locallyCompatible : TransplantedPlanState
+  ecologyMismatch : TransplantedPlanState
 
 data IndustrialPlan : Set where
   samePlantationPlan : IndustrialPlan
 
 data EcologicalAdmissibility : Set where
-  ecologyAdmitted ecologyBlocked : EcologicalAdmissibility
+  ecologyAdmitted : EcologicalAdmissibility
+  ecologyBlocked : EcologicalAdmissibility
 
 industrialPlan : TransplantedPlanState → IndustrialPlan
 industrialPlan _ = samePlantationPlan
@@ -235,13 +250,15 @@ industrialPlanCannotRecoverEcologicalAdmissibility =
 ------------------------------------------------------------------------
 
 data MarketState : Set where
-  broadRetailConcentratedRouting broadRetailDistributedRouting : MarketState
+  broadRetailConcentratedRouting : MarketState
+  broadRetailDistributedRouting : MarketState
 
 data ParticipationSurface : Set where
   broadParticipation : ParticipationSurface
 
 data MarketMediation : Set where
-  concentratedMediation distributedMediation : MarketMediation
+  concentratedMediation : MarketMediation
+  distributedMediation : MarketMediation
 
 participationSurface : MarketState → ParticipationSurface
 participationSurface _ = broadParticipation
@@ -275,13 +292,15 @@ participationCannotRecoverMediation =
 ------------------------------------------------------------------------
 
 data MarketEconomyState : Set where
-  lowSocialFloor highSocialFloor : MarketEconomyState
+  lowSocialFloor : MarketEconomyState
+  highSocialFloor : MarketEconomyState
 
 data MarketEconomyLabel : Set where
   marketEconomy : MarketEconomyLabel
 
 data MaterialExitCone : Set where
-  narrowExitCone widerExitCone : MaterialExitCone
+  narrowExitCone : MaterialExitCone
+  widerExitCone : MaterialExitCone
 
 marketEconomyLabel : MarketEconomyState → MarketEconomyLabel
 marketEconomyLabel _ = marketEconomy

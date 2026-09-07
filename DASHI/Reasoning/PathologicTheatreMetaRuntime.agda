@@ -23,7 +23,12 @@ import DASHI.Reasoning.PathologicConstraintSystem as Constraint
 ------------------------------------------------------------------------
 
 data PerformanceAgent : Set where
-  developers player gameSystem children powersThatBe executors : PerformanceAgent
+  developers : PerformanceAgent
+  player : PerformanceAgent
+  gameSystem : PerformanceAgent
+  children : PerformanceAgent
+  powersThatBe : PerformanceAgent
+  executors : PerformanceAgent
   avatar : Constraint.Doctor → PerformanceAgent
 
 data Controls : PerformanceAgent → PerformanceAgent → Set where
@@ -66,7 +71,12 @@ canonicalBachelorMutualPlay = record
 ------------------------------------------------------------------------
 
 data PerformanceLayer : Set where
-  developerLayer playerLayer theatreLayer characterLayer townLayer childGameLayer : PerformanceLayer
+  developerLayer : PerformanceLayer
+  playerLayer : PerformanceLayer
+  theatreLayer : PerformanceLayer
+  characterLayer : PerformanceLayer
+  townLayer : PerformanceLayer
+  childGameLayer : PerformanceLayer
 
 data LayerDependsOn : PerformanceLayer → PerformanceLayer → Set where
   gameDependsOnDevelopers : LayerDependsOn playerLayer developerLayer
@@ -96,10 +106,12 @@ canonicalTheatreDependencyChain = record
   }
 
 data OntologicalStatus : Set where
-  enactedFiction disclosedConstruction : OntologicalStatus
+  enactedFiction : OntologicalStatus
+  disclosedConstruction : OntologicalStatus
 
 data TraceStatus : Set where
-  causalTraceRetained causalTraceErased : TraceStatus
+  causalTraceRetained : TraceStatus
+  causalTraceErased : TraceStatus
 
 retainedTraceIsNotErased :
   causalTraceRetained ≡ causalTraceErased → ⊥

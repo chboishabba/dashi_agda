@@ -28,7 +28,9 @@ record ASRLattice : Set where
 open ASRLattice public
 
 data TranslationResidual : Set where
-  evidentialityLost honorificShift aspectUnderspecified : TranslationResidual
+  evidentialityLost : TranslationResidual
+  honorificShift : TranslationResidual
+  aspectUnderspecified : TranslationResidual
   legalTermNonCoextensive agentOmitted numberOrGenderAmbiguous : TranslationResidual
   noRecordedTranslationResidual : TranslationResidual
 

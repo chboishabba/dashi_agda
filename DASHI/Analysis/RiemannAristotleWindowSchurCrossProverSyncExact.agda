@@ -52,7 +52,10 @@ import DASHI.Analysis.RiemannG21DeterminantMarginTransferExact as Margin
 ------------------------------------------------------------------------
 
 data ProofOwner : Set where
-  agdaOwner leanAristotleOwner sourceAuditOwner openObligation : ProofOwner
+  agdaOwner : ProofOwner
+  leanAristotleOwner : ProofOwner
+  sourceAuditOwner : ProofOwner
+  openObligation : ProofOwner
 
 record CrossProverTheoremStatus : Set where
   constructor cross-prover-theorem-status

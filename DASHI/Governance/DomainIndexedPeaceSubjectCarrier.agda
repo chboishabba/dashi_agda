@@ -49,7 +49,8 @@ domainPeaceDoesNotAutomaticallyGlobalise ()
 ------------------------------------------------------------------------
 
 data PolicyStanding : Set where
-  negotiatingSubject threatCarrier : PolicyStanding
+  negotiatingSubject : PolicyStanding
+  threatCarrier : PolicyStanding
 
 record StandingSystem : Set₁ where
   field

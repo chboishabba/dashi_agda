@@ -22,7 +22,8 @@ import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 ------------------------------------------------------------------------
 
 data ModeGeometry : Set where
-  sourceLike rotationalLike : ModeGeometry
+  sourceLike : ModeGeometry
+  rotationalLike : ModeGeometry
 
 record IntermediateModeSection : Set where
   constructor intermediateModeSection

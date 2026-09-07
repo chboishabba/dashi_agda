@@ -15,7 +15,10 @@ import Ontology.DNA.FixedPointTernaryAndTetration as ExistingTetration
 -- field of such labels, not one globally collapsed four-way answer.
 
 data LocalGate : Set where
-  retainGate approachGate departGate branchGate : LocalGate
+  retainGate : LocalGate
+  approachGate : LocalGate
+  departGate : LocalGate
+  branchGate : LocalGate
 
 data TransitionKind : Set where
   retainCurrentChart : TransitionKind

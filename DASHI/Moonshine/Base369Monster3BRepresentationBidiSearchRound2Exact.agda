@@ -86,7 +86,11 @@ data Round2Leaf : Set where
   structuredFiftyThreeResidual : Round2Leaf
 
 data LeafState : Set where
-  outsourced closed open generated blocked : LeafState
+  outsourced : LeafState
+  closed : LeafState
+  open : LeafState
+  generated : LeafState
+  blocked : LeafState
 
 leafState : Round2Leaf → LeafState
 leafState ordinarySchrodingerIrreducibility = outsourced

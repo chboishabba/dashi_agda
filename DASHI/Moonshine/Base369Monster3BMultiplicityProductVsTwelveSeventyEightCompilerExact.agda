@@ -81,7 +81,8 @@ blockAfterCompleted attachment state =
 ------------------------------------------------------------------------
 
 data ProductBlockTag : Set where
-  twelveRegion seventyEightRegion : ProductBlockTag
+  twelveRegion : ProductBlockTag
+  seventyEightRegion : ProductBlockTag
 
 productBlockTag :
   ∀ {source : Action.ActualMonster3BActionRecognition} →

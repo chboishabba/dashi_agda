@@ -15,7 +15,9 @@ import DASHI.Governance.SafeJustIndicatorSystemExact as Indicators
 ------------------------------------------------------------------------
 
 data FitFamily : Set where
-  linearFit linearLogFit saturationFit : FitFamily
+  linearFit : FitFamily
+  linearLogFit : FitFamily
+  saturationFit : FitFamily
 
 fitEquation : FitFamily → String
 fitEquation linearFit = "y = a1 + b1 x"
@@ -68,10 +70,12 @@ canonicalProtocol = regressionProtocol
 ------------------------------------------------------------------------
 
 data ClaimScope : Set where
-  observedDataset universalSocietySpace : ClaimScope
+  observedDataset : ClaimScope
+  universalSocietySpace : ClaimScope
 
 data ClaimKind : Set where
-  noObservedCountrySafeAndJust universalSafeAndJustImpossible : ClaimKind
+  noObservedCountrySafeAndJust : ClaimKind
+  universalSafeAndJustImpossible : ClaimKind
 
 record EmpiricalClaim : Set where
   constructor empiricalClaim

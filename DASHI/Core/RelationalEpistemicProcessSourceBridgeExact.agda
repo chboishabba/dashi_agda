@@ -29,7 +29,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data RelationalPhase : Set where
-  contextualisePhase relatePhase reflectPhase actPhase : RelationalPhase
+  contextualisePhase : RelationalPhase
+  relatePhase : RelationalPhase
+  reflectPhase : RelationalPhase
+  actPhase : RelationalPhase
 
 contextualise≠act : contextualisePhase ≡ actPhase → ⊥
 contextualise≠act ()
@@ -55,7 +58,8 @@ open RelationalEpistemicProcess public
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
-  relationalPatternSource reciprocityAndMoreThanHumanRelationSource : SourceRole
+  relationalPatternSource : SourceRole
+  reciprocityAndMoreThanHumanRelationSource : SourceRole
 
 record SourceEntry : Set where
   constructor source-entry

@@ -50,7 +50,9 @@ data IrreducibilityRoute : Set where
   commutingProjectorRoute : IrreducibilityRoute
 
 data RouteState : Set where
-  MonsterSpecificClosed ordinaryAttachmentOpen consumerBlocked : RouteState
+  MonsterSpecificClosed : RouteState
+  ordinaryAttachmentOpen : RouteState
+  consumerBlocked : RouteState
 
 routeState : IrreducibilityRoute → RouteState
 routeState finiteDeltaSynthesisRoute = ordinaryAttachmentOpen

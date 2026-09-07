@@ -48,7 +48,11 @@ gamma1IsMinusZetaModQ : gamma1 + zeta ≡ q
 gamma1IsMinusZetaModQ = refl
 
 data CBD2Digit : Set where
-  d0 d1 d2 d3 d4 : CBD2Digit
+  d0 : CBD2Digit
+  d1 : CBD2Digit
+  d2 : CBD2Digit
+  d3 : CBD2Digit
+  d4 : CBD2Digit
 
 digit : CBD2Digit → Nat
 digit d0 = 0

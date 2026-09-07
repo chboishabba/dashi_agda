@@ -21,7 +21,8 @@ import DASHI.Biology.Levin.ObserverRelativePolycomputation as LevinObserver
 ------------------------------------------------------------------------
 
 data TheoryWorld : Set where
-  topologySufficient substrateSensitive : TheoryWorld
+  topologySufficient : TheoryWorld
+  substrateSensitive : TheoryWorld
 
 -- Both theories can agree on the same behaviour / nominal computational
 -- surface while disagreeing over whether an additional physical coordinate is
@@ -41,7 +42,8 @@ canonicalTheoryCollision = Disc.currentObserverCollision topologySufficient subs
 ------------------------------------------------------------------------
 
 data PhysicalCoordinateObservation : Set where
-  topologyOnlyResponse substrateSensitiveResponse : PhysicalCoordinateObservation
+  topologyOnlyResponse : PhysicalCoordinateObservation
+  substrateSensitiveResponse : PhysicalCoordinateObservation
 
 physicalCoordinateObservation : TheoryWorld → PhysicalCoordinateObservation
 physicalCoordinateObservation topologySufficient = topologyOnlyResponse

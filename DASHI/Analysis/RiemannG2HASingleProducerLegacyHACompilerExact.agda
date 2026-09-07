@@ -111,7 +111,9 @@ data PostSingleProducerSearchAction : Set where
 
 
 data SearchStatus : Set where
-  live pruned downstream : SearchStatus
+  live : SearchStatus
+  pruned : SearchStatus
+  downstream : SearchStatus
 
 searchStatus : PostSingleProducerSearchAction → SearchStatus
 searchStatus recoverActualSingleSourceProducer = live

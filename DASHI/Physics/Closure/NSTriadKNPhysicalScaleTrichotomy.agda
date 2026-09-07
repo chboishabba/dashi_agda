@@ -21,7 +21,10 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 ------------------------------------------------------------------------
 
 data ScaleRegime : Set where
-  lowHigh highLow highHigh comparable : ScaleRegime
+  lowHigh : ScaleRegime
+  highLow : ScaleRegime
+  highHigh : ScaleRegime
+  comparable : ScaleRegime
 
 record PhysicalShellPolicy : Set₁ where
   constructor shell-policy

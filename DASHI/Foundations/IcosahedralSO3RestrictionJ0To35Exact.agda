@@ -54,7 +54,11 @@ goldenConjugate = phi-int (+ 1) (-[1+ 0 ])
 phiMinusOne = phi-int (-[1+ 0 ]) (+ 1)
 
 data IcosahedralIrrep : Set where
-  I1 I3 I3Prime I4 I5 : IcosahedralIrrep
+  I1 : IcosahedralIrrep
+  I3 : IcosahedralIrrep
+  I3Prime : IcosahedralIrrep
+  I4 : IcosahedralIrrep
+  I5 : IcosahedralIrrep
 
 icosahedralIrrepDimension : IcosahedralIrrep → Nat
 icosahedralIrrepDimension I1 = 1
@@ -75,7 +79,11 @@ icosahedralFamily =
     "rotational icosahedral group I ~= A5; irreps 1,3,3',4,5"
 
 data IcosahedralClass : Set where
-  identityClass halfTurnClass thirdTurnClass fifthTurnClass fifthTurnSquaredClass : IcosahedralClass
+  identityClass : IcosahedralClass
+  halfTurnClass : IcosahedralClass
+  thirdTurnClass : IcosahedralClass
+  fifthTurnClass : IcosahedralClass
+  fifthTurnSquaredClass : IcosahedralClass
 
 irrepCharacter : IcosahedralIrrep → IcosahedralClass → PhiInt
 irrepCharacter I1 identityClass = phi-int (+ 1) (+ 0)
@@ -222,7 +230,12 @@ addSpectrum left right =
     (multiplicityI5 left + multiplicityI5 right)
 
 data LowJ0To5 : Set where
-  lowJ0 lowJ1 lowJ2 lowJ3 lowJ4 lowJ5 : LowJ0To5
+  lowJ0 : LowJ0To5
+  lowJ1 : LowJ0To5
+  lowJ2 : LowJ0To5
+  lowJ3 : LowJ0To5
+  lowJ4 : LowJ0To5
+  lowJ5 : LowJ0To5
 
 embedLowJ : LowJ0To5 → Spin.AngularMomentum0To35
 embedLowJ lowJ0 = Spin.j0

@@ -95,10 +95,14 @@ eia20260827Close =
 ------------------------------------------------------------------------
 
 data MarketPosition : Set where
-  upstreamProducer refiner consumerTransportUser : MarketPosition
+  upstreamProducer : MarketPosition
+  refiner : MarketPosition
+  consumerTransportUser : MarketPosition
 
 data PositionInterest : Set where
-  crudeRevenue refineryMargin retailAffordability : PositionInterest
+  crudeRevenue : PositionInterest
+  refineryMargin : PositionInterest
+  retailAffordability : PositionInterest
 
 positionInterest : MarketPosition → PositionInterest
 positionInterest upstreamProducer = crudeRevenue
@@ -118,13 +122,19 @@ refinerAndConsumerInterestsAreDistinct ()
 ------------------------------------------------------------------------
 
 data EnergyNarrative : Set where
-  domesticAbundance cheapEnergyForConsumers : EnergyNarrative
+  domesticAbundance : EnergyNarrative
+  cheapEnergyForConsumers : EnergyNarrative
 
 data MarketLayer : Set where
-  crudeLayer refiningLayer retailLayer : MarketLayer
+  crudeLayer : MarketLayer
+  refiningLayer : MarketLayer
+  retailLayer : MarketLayer
 
 data BindingConstraint : Set where
-  crudeSupplyConstraint refiningCapacityConstraint transportConstraint mixedConstraint : BindingConstraint
+  crudeSupplyConstraint : BindingConstraint
+  refiningCapacityConstraint : BindingConstraint
+  transportConstraint : BindingConstraint
+  mixedConstraint : BindingConstraint
 
 record ProductMarketState : Set where
   constructor product-market-state

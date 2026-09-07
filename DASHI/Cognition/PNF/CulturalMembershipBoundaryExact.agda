@@ -44,7 +44,8 @@ data ActionProjection : Set where
   stateCoercion : ActionProjection
 
 data CoarseBoundarySign : Set where
-  inside outside : CoarseBoundarySign
+  inside : CoarseBoundarySign
+  outside : CoarseBoundarySign
 
 record BoundaryOperator : Set where
   constructor boundaryOperator
@@ -127,7 +128,9 @@ coarseBoundaryCannotDetermineAllActions factorisation =
 ------------------------------------------------------------------------
 
 data EnforcementState : Set where
-  threatened planned actual : EnforcementState
+  threatened : EnforcementState
+  planned : EnforcementState
+  actual : EnforcementState
 
 threatenedIsNotPlanned : threatened ≡ planned → ⊥
 threatenedIsNotPlanned ()
@@ -145,7 +148,8 @@ threatenedIsNotActual ()
 ------------------------------------------------------------------------
 
 data AmericaDomain : Set where
-  nationOnly hemisphericPlural : AmericaDomain
+  nationOnly : AmericaDomain
+  hemisphericPlural : AmericaDomain
 
 expandAmerica : AmericaDomain → AmericaDomain
 expandAmerica nationOnly = hemisphericPlural

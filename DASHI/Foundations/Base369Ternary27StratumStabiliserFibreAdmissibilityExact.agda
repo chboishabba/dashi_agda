@@ -106,7 +106,8 @@ mixedSignCornerSector = refl
 ------------------------------------------------------------------------
 
 data EdgeFineState : Set where
-  edgeSameSign edgeOppositeSign : EdgeFineState
+  edgeSameSign : EdgeFineState
+  edgeOppositeSign : EdgeFineState
 
 edgePoint : EdgeFineState → Geometry.Ternary27Point
 edgePoint edgeSameSign = sameSignEdge
@@ -125,7 +126,8 @@ edgeStratumCannotRecoverSectorClass =
     (INF.nonFactorabilityWitness edgeSameSign edgeOppositeSign refl (λ ()))
 
 data CornerFineState : Set where
-  cornerUniform cornerMixed : CornerFineState
+  cornerUniform : CornerFineState
+  cornerMixed : CornerFineState
 
 cornerPoint : CornerFineState → Geometry.Ternary27Point
 cornerPoint cornerUniform = Geometry.positiveCorner

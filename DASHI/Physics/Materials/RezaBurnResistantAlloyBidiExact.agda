@@ -68,7 +68,10 @@ carbonGrainBoundaryStrength = alloy-role carbon "minor-element grain-boundary st
 
 
 data ProcessStage : Set where
-  vacuumInductionMelting vacuumArcRemelting mechanicalWorking finalProductForm : ProcessStage
+  vacuumInductionMelting : ProcessStage
+  vacuumArcRemelting : ProcessStage
+  mechanicalWorking : ProcessStage
+  finalProductForm : ProcessStage
 
 record ProcessChain : Set where
   constructor process-chain

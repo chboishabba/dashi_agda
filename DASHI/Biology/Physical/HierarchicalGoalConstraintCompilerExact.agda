@@ -20,16 +20,28 @@ data OrganismGoal : Set where
   viableBody : OrganismGoal
 
 data OrganGoal : Set where
-  leftHand rightHand heart : OrganGoal
+  leftHand : OrganGoal
+  rightHand : OrganGoal
+  heart : OrganGoal
 
 data TissueGoal : Set where
-  digitField tendonInterface vascularInterface cardiacWall : TissueGoal
+  digitField : TissueGoal
+  tendonInterface : TissueGoal
+  vascularInterface : TissueGoal
+  cardiacWall : TissueGoal
 
 data CellGoal : Set where
-  divide migrate differentiate adhere quiesce : CellGoal
+  divide : CellGoal
+  migrate : CellGoal
+  differentiate : CellGoal
+  adhere : CellGoal
+  quiesce : CellGoal
 
 data MolecularGoal : Set where
-  expressChannel expressAdhesion remodelCytoskeleton maintainATP : MolecularGoal
+  expressChannel : MolecularGoal
+  expressAdhesion : MolecularGoal
+  remodelCytoskeleton : MolecularGoal
+  maintainATP : MolecularGoal
 
 data OrganRefines : OrganGoal → OrganismGoal → Set where
   leftHandSupportsBody : OrganRefines leftHand viableBody

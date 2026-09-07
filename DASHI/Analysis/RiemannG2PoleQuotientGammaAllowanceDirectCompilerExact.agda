@@ -72,7 +72,11 @@ data GammaAllowancePayment : Set where
 
 
 data PaymentState : Set where
-  owned live blocked downstream pruned : PaymentState
+  owned : PaymentState
+  live : PaymentState
+  blocked : PaymentState
+  downstream : PaymentState
+  pruned : PaymentState
 
 paymentState : GammaAllowancePayment → PaymentState
 paymentState findAnyGammaBound = pruned

@@ -26,10 +26,12 @@ true≢false : true ≢ false
 true≢false ()
 
 data OrganKind : Set where
-  hand foot : OrganKind
+  hand : OrganKind
+  foot : OrganKind
 
 data Side : Set where
-  leftSide rightSide : Side
+  leftSide : Side
+  rightSide : Side
 
 record DevelopmentalGoal : Set where
   constructor developmentalGoal

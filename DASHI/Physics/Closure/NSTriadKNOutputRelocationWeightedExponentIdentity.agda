@@ -41,7 +41,8 @@ open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 ------------------------------------------------------------------------
 
 data Sign : Set where
-  positive negative : Sign
+  positive : Sign
+  negative : Sign
 
 record SignedMagnitude : Set where
   constructor signed

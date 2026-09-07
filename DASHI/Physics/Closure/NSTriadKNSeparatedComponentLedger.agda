@@ -33,7 +33,9 @@ open Geometry using
    comparableTag; transitionTag; residualTag)
 
 data DerivativeOwner : Set where
-  derivativeLeft derivativeRight derivativeOutput : DerivativeOwner
+  derivativeLeft : DerivativeOwner
+  derivativeRight : DerivativeOwner
+  derivativeOutput : DerivativeOwner
   derivativeOnLow derivativeOnHigh mixedDerivativeOwner : DerivativeOwner
 
 data AnalyticArchetype : Set where

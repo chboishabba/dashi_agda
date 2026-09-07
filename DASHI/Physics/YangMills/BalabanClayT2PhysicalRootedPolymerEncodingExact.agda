@@ -82,7 +82,11 @@ filterLengthAtMost predicate (value ∷ values) with predicate value
 ------------------------------------------------------------------------
 
 data PhysicalPatchRegime : Set where
-  interior boundary scaleInterface corner nested : PhysicalPatchRegime
+  interior : PhysicalPatchRegime
+  boundary : PhysicalPatchRegime
+  scaleInterface : PhysicalPatchRegime
+  corner : PhysicalPatchRegime
+  nested : PhysicalPatchRegime
 
 record BoundaryDirectionMask (Root : Set) : Set₁ where
   field

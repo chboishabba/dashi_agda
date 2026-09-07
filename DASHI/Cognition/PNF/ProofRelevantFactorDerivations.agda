@@ -15,7 +15,8 @@ open import DASHI.Cognition.PNF.ProofRelevantIdentityFibres
 ------------------------------------------------------------------------
 
 data DerivationKind : Set where
-  identitySubstitution factorComposition : DerivationKind
+  identitySubstitution : DerivationKind
+  factorComposition : DerivationKind
 
 data DerivationState : Set where
   derivationCandidate derivationAdmitted derivationRejected derivationSuperseded :

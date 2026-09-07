@@ -9,7 +9,9 @@ open import Data.Empty using (⊥)
 -- separates the state order from any particular floating-point score.
 
 data SurfelState : Set where
-  grounded plateau ascended : SurfelState
+  grounded : SurfelState
+  plateau : SurfelState
+  ascended : SurfelState
 
 infix 4 _⊑_
 

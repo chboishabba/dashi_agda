@@ -34,7 +34,8 @@ import DASHI.Core.FibrePreservingDynamicsExact as Dynamics
 import DASHI.Core.IntersectionalNonFactorability as NF
 
 data UpdateOrder : Set where
-  firstAfterSecond secondAfterFirst : UpdateOrder
+  firstAfterSecond : UpdateOrder
+  secondAfterFirst : UpdateOrder
 
 orderedEndpoint :
   ∀ {core : Fibre.FibreRestrictionCore} →

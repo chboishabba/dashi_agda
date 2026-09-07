@@ -22,7 +22,10 @@ data IndicatorRole : Set where
   socialRole : SocialSeries → IndicatorRole
 
 data DatumAuthority : Set where
-  observedDatum projectedMedian projectedLower66 projectedUpper66 : DatumAuthority
+  observedDatum : DatumAuthority
+  projectedMedian : DatumAuthority
+  projectedLower66 : DatumAuthority
+  projectedUpper66 : DatumAuthority
 
 record CountryYearDatum : Set where
   constructor countryYearDatum

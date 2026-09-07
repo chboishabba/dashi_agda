@@ -99,13 +99,16 @@ sameQueryOrbitIsObservationEquivalent S q x y orbit =
 ------------------------------------------------------------------------
 
 data ExampleWorld : Set where
-  canonicalReferent impersonatorReferent : ExampleWorld
+  canonicalReferent : ExampleWorld
+  impersonatorReferent : ExampleWorld
 
 data ExampleQuery : Set where
-  coarseIdentityQuery provenanceQuery : ExampleQuery
+  coarseIdentityQuery : ExampleQuery
+  provenanceQuery : ExampleQuery
 
 data CoarseSymmetry : Set where
-  coarseIdentity coarseSwap : CoarseSymmetry
+  coarseIdentity : CoarseSymmetry
+  coarseSwap : CoarseSymmetry
 
 data ProvenanceSymmetry : Set where
   provenanceIdentity : ProvenanceSymmetry

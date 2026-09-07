@@ -66,11 +66,15 @@ lawfulEdgeHasPositiveProducer = positiveProducerReceipt
 ------------------------------------------------------------------------
 
 data LawfulnessCoordinate : Set where
-  occurrenceCoordinate authorityCoordinate triggerCoordinate scopeCoordinate : LawfulnessCoordinate
+  occurrenceCoordinate : LawfulnessCoordinate
+  authorityCoordinate : LawfulnessCoordinate
+  triggerCoordinate : LawfulnessCoordinate
+  scopeCoordinate : LawfulnessCoordinate
   procedureCoordinate safeguardCoordinate temporalCoordinate evidenceCoordinate : LawfulnessCoordinate
 
 data CoordinateState : Set where
-  coordinateClosed coordinateOpen : CoordinateState
+  coordinateClosed : CoordinateState
+  coordinateOpen : CoordinateState
 
 record LawfulnessObligationVector : Set where
   constructor lawfulnessObligationVector

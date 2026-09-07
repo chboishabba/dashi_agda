@@ -22,7 +22,8 @@ open import Data.Rational.Tactic.RingSolver using (solve-∀)
 ------------------------------------------------------------------------
 
 data Fibre2 : Set where
-  leftFibre rightFibre : Fibre2
+  leftFibre : Fibre2
+  rightFibre : Fibre2
 
 weight : Fibre2 → ℚ
 weight leftFibre = ½

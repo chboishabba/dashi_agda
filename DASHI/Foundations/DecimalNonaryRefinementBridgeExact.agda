@@ -34,7 +34,16 @@ import DASHI.Foundations.StageValuationBundleAtlas as Stage
 ------------------------------------------------------------------------
 
 data Digit0To9 : Set where
-  d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 : Digit0To9
+  d0 : Digit0To9
+  d1 : Digit0To9
+  d2 : Digit0To9
+  d3 : Digit0To9
+  d4 : Digit0To9
+  d5 : Digit0To9
+  d6 : Digit0To9
+  d7 : Digit0To9
+  d8 : Digit0To9
+  d9 : Digit0To9
 
 digitValue : Digit0To9 → Nat
 digitValue d0 = 0

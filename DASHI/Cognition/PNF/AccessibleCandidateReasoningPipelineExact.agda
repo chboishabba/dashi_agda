@@ -16,10 +16,12 @@ import DASHI.Reasoning.FallacyObstructionCatalogue as Fallacy
 ------------------------------------------------------------------------
 
 data Candidate : Set where
-  supportingCandidate counterCandidate : Candidate
+  supportingCandidate : Candidate
+  counterCandidate : Candidate
 
 data AccessMode : Set where
-  narrowedAccess broadenedAccess : AccessMode
+  narrowedAccess : AccessMode
+  broadenedAccess : AccessMode
 
 data AuditStatus : Set where
   cleanAudit : AuditStatus

@@ -62,19 +62,33 @@ printingPressOrganization =
 -- Artifact states and their independent orders.
 
 data ArtifactStage : Set where
-  raw normalized indexed summarized published : ArtifactStage
+  raw : ArtifactStage
+  normalized : ArtifactStage
+  indexed : ArtifactStage
+  summarized : ArtifactStage
+  published : ArtifactStage
 
 data Visibility : Set where
-  private trustedPeers reviewedPublic : Visibility
+  private : Visibility
+  trustedPeers : Visibility
+  reviewedPublic : Visibility
 
 data TrustClass : Set where
-  untrusted vouched trusted reviewer : TrustClass
+  untrusted : TrustClass
+  vouched : TrustClass
+  trusted : TrustClass
+  reviewer : TrustClass
 
 data Recoverability : Set where
-  reversible policyDeclaredLossy : Recoverability
+  reversible : Recoverability
+  policyDeclaredLossy : Recoverability
 
 data TransformKind : Set where
-  normalize index summarize redact publish : TransformKind
+  normalize : TransformKind
+  index : TransformKind
+  summarize : TransformKind
+  redact : TransformKind
+  publish : TransformKind
 
 -- These are intentionally inductive orders.  They document exactly which
 -- promotions are permitted instead of relying on accidental Nat encodings.
@@ -216,7 +230,21 @@ record WidenedRegime (τ : Transmutation) : Set where
 -- equations are witnesses; no subtraction or saturating arithmetic is hidden.
 
 data PrimeLane : Set where
-  p2 p3 p5 p7 p11 p13 p17 p19 p23 p29 p31 p41 p47 p59 p71 : PrimeLane
+  p2 : PrimeLane
+  p3 : PrimeLane
+  p5 : PrimeLane
+  p7 : PrimeLane
+  p11 : PrimeLane
+  p13 : PrimeLane
+  p17 : PrimeLane
+  p19 : PrimeLane
+  p23 : PrimeLane
+  p29 : PrimeLane
+  p31 : PrimeLane
+  p41 : PrimeLane
+  p47 : PrimeLane
+  p59 : PrimeLane
+  p71 : PrimeLane
 
 record PairedPrimeMacro : Set where
   constructor pairedPrimeMacro
@@ -247,7 +275,8 @@ data ClosedFamilyMember : Set where
     : ClosedFamilyMember
 
 data Regime : Set where
-  conservativeRegime widenedRegimeValid : Regime
+  conservativeRegime : Regime
+  widenedRegimeValid : Regime
 
 regimeOf : ClosedFamilyMember → Regime
 regimeOf physics1  = conservativeRegime

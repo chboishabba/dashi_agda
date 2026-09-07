@@ -9,7 +9,12 @@ import DASHI.Core.RuntimeEventExecutionBridgeExact as Runtime
 import DASHI.Cognition.PNF.SensibLawBillyEffectiveRemedyTwoEyedSeeingExact as Billy
 
 data OperationalStage : Set where
-  declaredStage authorisedStage emittedStage executedStage observedStage consumerAcceptedStage : OperationalStage
+  declaredStage : OperationalStage
+  authorisedStage : OperationalStage
+  emittedStage : OperationalStage
+  executedStage : OperationalStage
+  observedStage : OperationalStage
+  consumerAcceptedStage : OperationalStage
 
 record OperationalTransition : Set where
   constructor operational-transition

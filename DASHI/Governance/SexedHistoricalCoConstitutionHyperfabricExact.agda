@@ -84,12 +84,17 @@ constructionTensorAt epoch = coConstructs epoch
 ------------------------------------------------------------------------
 
 data PowerAxis : Set where
-  legalPower economicPower religiousPower familyPower : PowerAxis
+  legalPower : PowerAxis
+  economicPower : PowerAxis
+  religiousPower : PowerAxis
+  familyPower : PowerAxis
   sexualNormPower epistemicPower politicalRepresentationPower : PowerAxis
 
 
 data PowerLevel : Set where
-  lowPower mediumPower highPower : PowerLevel
+  lowPower : PowerLevel
+  mediumPower : PowerLevel
+  highPower : PowerLevel
 
 powerAt : HistoricalEpoch → Position → PowerAxis → PowerLevel
 powerAt witchTrialOrder masculine legalPower = highPower
@@ -166,7 +171,8 @@ constructionModeCannotRecoverLegalPower =
 ------------------------------------------------------------------------
 
 data PublicGenderSurface : Set where
-  publiclyMasculine publiclyFeminine : PublicGenderSurface
+  publiclyMasculine : PublicGenderSurface
+  publiclyFeminine : PublicGenderSurface
 
 publicGender : RelationalPoint → PublicGenderSurface
 publicGender p with constructedPosition p

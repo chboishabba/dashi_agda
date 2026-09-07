@@ -51,7 +51,8 @@ record IssueAdjudicativeFrame (issue : Issue.LegalIssue) : Set where
 open IssueAdjudicativeFrame public
 
 data RemedyEligibilityStatus : Set where
-  remedyEligibilityUnresolved remedyEligibilityCandidate : RemedyEligibilityStatus
+  remedyEligibilityUnresolved : RemedyEligibilityStatus
+  remedyEligibilityCandidate : RemedyEligibilityStatus
   remedyEligibleAdmitted remedyIneligibleAdmitted : RemedyEligibilityStatus
 
 data LiabilityRemedyUse : Status.LiabilityStatus → RemedyEligibilityStatus → Set where

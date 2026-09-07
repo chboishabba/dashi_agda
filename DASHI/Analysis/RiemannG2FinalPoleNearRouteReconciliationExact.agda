@@ -43,7 +43,10 @@ data FinalPoleNearRoutePayment : Set where
 
 
 data PaymentState : Set where
-  live downstream compatibility conditional : PaymentState
+  live : PaymentState
+  downstream : PaymentState
+  compatibility : PaymentState
+  conditional : PaymentState
 
 paymentState : FinalPoleNearRoutePayment → PaymentState
 paymentState recoverCarrierNeutralFiniteNearProducer = live

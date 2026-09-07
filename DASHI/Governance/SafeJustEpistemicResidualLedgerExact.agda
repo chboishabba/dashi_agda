@@ -12,7 +12,8 @@ import DASHI.Governance.Fanning2022TemporalIndicatorExact as Temporal
 ------------------------------------------------------------------------
 
 data PhenomenonResidual : Set where
-  socialShortfallResidual ecologicalOvershootResidual : PhenomenonResidual
+  socialShortfallResidual : PhenomenonResidual
+  ecologicalOvershootResidual : PhenomenonResidual
 
 data EpistemicResidual : Set where
   missingNationalBlueWaterSeries : EpistemicResidual

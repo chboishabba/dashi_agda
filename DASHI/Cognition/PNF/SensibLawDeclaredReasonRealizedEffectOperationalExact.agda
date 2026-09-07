@@ -32,10 +32,12 @@ data RealizedDistribution : Set where
 
 
 data LegalBehaviour : Set where
-  closesRemedyRoute opensRemedyRoute : LegalBehaviour
+  closesRemedyRoute : LegalBehaviour
+  opensRemedyRoute : LegalBehaviour
 
 data LegalCorrectionResponse : Set where
-  reopensOnEvidence preservesGateAgainstChallenge : LegalCorrectionResponse
+  reopensOnEvidence : LegalCorrectionResponse
+  preservesGateAgainstChallenge : LegalCorrectionResponse
 
 declaredLegalRationale : LegalSystemState → DeclaredLegalRationale
 declaredLegalRationale _ = sameInstitutionalNeutralityRationale
@@ -94,13 +96,16 @@ data DeclaredRemedySurface : Set where
   sameCollaborationFundingCommitment : DeclaredRemedySurface
 
 data RealizedRemedyState : Set where
-  partialRepair fullRepair : RealizedRemedyState
+  partialRepair : RealizedRemedyState
+  fullRepair : RealizedRemedyState
 
 data RemedyBehaviour : Set where
-  activityWithoutFullClosure activityWithFullClosure : RemedyBehaviour
+  activityWithoutFullClosure : RemedyBehaviour
+  activityWithFullClosure : RemedyBehaviour
 
 data RemedyCorrection : Set where
-  correctionResidualOpen correctionResidualClosed : RemedyCorrection
+  correctionResidualOpen : RemedyCorrection
+  correctionResidualClosed : RemedyCorrection
 
 declaredRemedySurface : RemedySystemState → DeclaredRemedySurface
 declaredRemedySurface _ = sameCollaborationFundingCommitment

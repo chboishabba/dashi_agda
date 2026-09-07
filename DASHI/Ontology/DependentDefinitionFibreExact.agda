@@ -30,10 +30,13 @@ import Base369 as Base
 import DASHI.Foundations.Base369SignedMembershipExact as Signed
 
 data Make : Set where
-  ford toyota : Make
+  ford : Make
+  toyota : Make
 
 data FlatModel : Set where
-  fiestaTag focusTag corollaTag : FlatModel
+  fiestaTag : FlatModel
+  focusTag : FlatModel
+  corollaTag : FlatModel
 
 FlatVehicle : Set
 FlatVehicle = Make × FlatModel
@@ -60,7 +63,8 @@ flatCombinationCountIsSix : flatCombinationCount ≡ 6
 flatCombinationCountIsSix = refl
 
 data FordModel : Set where
-  fiesta focus : FordModel
+  fiesta : FordModel
+  focus : FordModel
 
 data ToyotaModel : Set where
   corolla : ToyotaModel

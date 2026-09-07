@@ -75,7 +75,8 @@ safePruneRefutesImprovement order {actual = actual} prune actualImproves =
 ------------------------------------------------------------------------
 
 data FidelityDecision : Set where
-  prune materialise : FidelityDecision
+  prune : FidelityDecision
+  materialise : FidelityDecision
 
 record FidelityAllocationBoundary : Set where
   constructor fidelityAllocationBoundary

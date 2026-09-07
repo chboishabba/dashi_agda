@@ -21,7 +21,12 @@ import DASHI.Core.ReopenableHypothesisForestExact as Forest
 ------------------------------------------------------------------------
 
 data QualitativeDirection : Set where
-  stronglyDown down unchanged up stronglyUp unresolvedDirection : QualitativeDirection
+  stronglyDown : QualitativeDirection
+  down : QualitativeDirection
+  unchanged : QualitativeDirection
+  up : QualitativeDirection
+  stronglyUp : QualitativeDirection
+  unresolvedDirection : QualitativeDirection
 
 
 data ResidualClass : Set where

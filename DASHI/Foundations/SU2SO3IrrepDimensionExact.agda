@@ -60,7 +60,42 @@ spinHalfDimensionIsTwo : su2Dimension 1 ≡ 2
 spinHalfDimensionIsTwo = refl
 
 data AngularMomentum0To35 : Set where
-  j0 j1 j2 j3 j4 j5 j6 j7 j8 j9 j10 j11 j12 j13 j14 j15 j16 j17 j18 j19 j20 j21 j22 j23 j24 j25 j26 j27 j28 j29 j30 j31 j32 j33 j34 j35 : AngularMomentum0To35
+  j0 : AngularMomentum0To35
+  j1 : AngularMomentum0To35
+  j2 : AngularMomentum0To35
+  j3 : AngularMomentum0To35
+  j4 : AngularMomentum0To35
+  j5 : AngularMomentum0To35
+  j6 : AngularMomentum0To35
+  j7 : AngularMomentum0To35
+  j8 : AngularMomentum0To35
+  j9 : AngularMomentum0To35
+  j10 : AngularMomentum0To35
+  j11 : AngularMomentum0To35
+  j12 : AngularMomentum0To35
+  j13 : AngularMomentum0To35
+  j14 : AngularMomentum0To35
+  j15 : AngularMomentum0To35
+  j16 : AngularMomentum0To35
+  j17 : AngularMomentum0To35
+  j18 : AngularMomentum0To35
+  j19 : AngularMomentum0To35
+  j20 : AngularMomentum0To35
+  j21 : AngularMomentum0To35
+  j22 : AngularMomentum0To35
+  j23 : AngularMomentum0To35
+  j24 : AngularMomentum0To35
+  j25 : AngularMomentum0To35
+  j26 : AngularMomentum0To35
+  j27 : AngularMomentum0To35
+  j28 : AngularMomentum0To35
+  j29 : AngularMomentum0To35
+  j30 : AngularMomentum0To35
+  j31 : AngularMomentum0To35
+  j32 : AngularMomentum0To35
+  j33 : AngularMomentum0To35
+  j34 : AngularMomentum0To35
+  j35 : AngularMomentum0To35
 
 jNat : AngularMomentum0To35 → Nat
 jNat j0 = 0

@@ -84,7 +84,8 @@ allCube3-has-27-states = refl
 -- This quotient does not identify the underlying Trit values.
 
 data Act : Set where
-  blocked proceed : Act
+  blocked : Act
+  proceed : Act
 
 decide : Trit → Act
 decide neg = blocked

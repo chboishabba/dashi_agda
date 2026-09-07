@@ -36,7 +36,15 @@ nineTowerOne = refl
 ------------------------------------------------------------------------
 
 data Nonary : Set where
-  n0 n1 n2 n3 n4 n5 n6 n7 n8 : Nonary
+  n0 : Nonary
+  n1 : Nonary
+  n2 : Nonary
+  n3 : Nonary
+  n4 : Nonary
+  n5 : Nonary
+  n6 : Nonary
+  n7 : Nonary
+  n8 : Nonary
 
 ------------------------------------------------------------------------
 -- Cartesian products and genuine power towers are different constructions.

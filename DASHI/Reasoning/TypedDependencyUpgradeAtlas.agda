@@ -27,7 +27,10 @@ forgetWitnessBearingFlag : WitnessBearingFlag → Bool
 forgetWitnessBearingFlag wrapped = flag wrapped
 
 data UpgradeDomain : Set where
-  rsiDomain gluingDomain memoryDomain verificationDomain : UpgradeDomain
+  rsiDomain : UpgradeDomain
+  gluingDomain : UpgradeDomain
+  memoryDomain : UpgradeDomain
+  verificationDomain : UpgradeDomain
   capabilityDomain authorityDomain pathologicDomain stageDomain : UpgradeDomain
 
 record DependencyUpgradeSite : Set where

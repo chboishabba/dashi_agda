@@ -25,7 +25,8 @@ record BoundedEnumeration : Set where
 open BoundedEnumeration public
 
 data EnumerationCoverage : Set where
-  completeEnumeration boundedRepresentativeEnumeration : EnumerationCoverage
+  completeEnumeration : EnumerationCoverage
+  boundedRepresentativeEnumeration : EnumerationCoverage
 
 record BoundedExecutionCarrier (Candidate : Set) : Set where
   constructor boundedExecutionCarrier

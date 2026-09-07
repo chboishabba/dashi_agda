@@ -31,7 +31,10 @@ data PlacementOrbit : Set where
     tripleOrbit quarticOrbit : PlacementOrbit
 
 data BackgroundDefectOrder : Set where
-  firstOrder secondOrder thirdOrder fourthOrder : BackgroundDefectOrder
+  firstOrder : BackgroundDefectOrder
+  secondOrder : BackgroundDefectOrder
+  thirdOrder : BackgroundDefectOrder
+  fourthOrder : BackgroundDefectOrder
 
 data DependencyStatus : Set where
   eulerLagrangeOpen finiteYoungClosed deepRemainderClosed

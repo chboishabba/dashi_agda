@@ -3,7 +3,13 @@ module DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound18Exact wher
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 data SearchClass : Set where
-  SOURCEBACKED OWNED GENERATED LIVE DOWNSTREAM REJECTED PARALLEL : SearchClass
+  SOURCEBACKED : SearchClass
+  OWNED : SearchClass
+  GENERATED : SearchClass
+  LIVE : SearchClass
+  DOWNSTREAM : SearchClass
+  REJECTED : SearchClass
+  PARALLEL : SearchClass
 
 record Round18Status : Set where
   constructor round18Status

@@ -77,7 +77,8 @@ pointMinusOneChecked = liesOnCurve pointMinusOne
 ------------------------------------------------------------------------
 
 data Bit : Set where
-  bit0 bit1 : Bit
+  bit0 : Bit
+  bit1 : Bit
 
 xor : Bit → Bit → Bit
 xor bit0 right = right
@@ -186,7 +187,13 @@ discriminantMagnitudeIsTwoPowerSix : twoPowerSix ≡ 64
 discriminantMagnitudeIsTwoPowerSix = refl
 
 data SelectedOddPrime : Set where
-  prime3 prime5 prime7 prime11 prime13 prime17 prime19 : SelectedOddPrime
+  prime3 : SelectedOddPrime
+  prime5 : SelectedOddPrime
+  prime7 : SelectedOddPrime
+  prime11 : SelectedOddPrime
+  prime13 : SelectedOddPrime
+  prime17 : SelectedOddPrime
+  prime19 : SelectedOddPrime
 
 selectedPrimeValue : SelectedOddPrime → Nat
 selectedPrimeValue prime3 = 3

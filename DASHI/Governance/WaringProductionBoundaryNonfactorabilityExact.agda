@@ -22,13 +22,15 @@ import DASHI.Governance.FeministClimateJusticeSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data Activity : Set where
-  absentActivity unpaidCareActivity : Activity
+  absentActivity : Activity
+  unpaidCareActivity : Activity
 
 data AccountStatus : Set where
   outsideCoreProductionBoundary : AccountStatus
 
 data ProvisioningContribution : Set where
-  noProvisioningContribution careProvisioningContribution : ProvisioningContribution
+  noProvisioningContribution : ProvisioningContribution
+  careProvisioningContribution : ProvisioningContribution
 
 accountObserver : Activity → AccountStatus
 accountObserver _ = outsideCoreProductionBoundary

@@ -22,14 +22,18 @@ import DASHI.Culture.IntellectualReceptionActionVoxelGovernedSymmetryExact as Ac
 ------------------------------------------------------------------------
 
 data NonIdentityMode4 : Set where
-  modeA2 modeB1 modeB2 modeE : NonIdentityMode4
+  modeA2 : NonIdentityMode4
+  modeB1 : NonIdentityMode4
+  modeB2 : NonIdentityMode4
+  modeE : NonIdentityMode4
 
 ReducedNonary8 : Set
 ReducedNonary8 = NonIdentityMode4 × Stable.Orientation2
 
 -- Geometric corner signs of the 3x3x3 ternary voxel.
 data OuterSign2 : Set where
-  negativeOuter positiveOuter : OuterSign2
+  negativeOuter : OuterSign2
+  positiveOuter : OuterSign2
 
 record Corner8 : Set where
   constructor corner8

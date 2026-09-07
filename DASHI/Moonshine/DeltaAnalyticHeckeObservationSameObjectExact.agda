@@ -45,7 +45,9 @@ import DASHI.Moonshine.RamanujanTauHecke23Exact as Tau
 ------------------------------------------------------------------------
 
 data ThreePowerObservation : Set where
-  at3 at9 at27 : ThreePowerObservation
+  at3 : ThreePowerObservation
+  at9 : ThreePowerObservation
+  at27 : ThreePowerObservation
 
 tauThreePowerReadout : ThreePowerObservation → ℤ
 tauThreePowerReadout at3 = Tau.tau3

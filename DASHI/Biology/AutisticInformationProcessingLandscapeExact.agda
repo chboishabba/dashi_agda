@@ -94,22 +94,28 @@ landscapeSources =
 ------------------------------------------------------------------------
 
 data DiagnosticCategory : Set where
-  autistic nonAutistic : DiagnosticCategory
+  autistic : DiagnosticCategory
+  nonAutistic : DiagnosticCategory
 
 data MemoryResidue : Set where
-  weakTrace strongTrace : MemoryResidue
+  weakTrace : MemoryResidue
+  strongTrace : MemoryResidue
 
 data ProcessingPolicy : Set where
-  rapidCommit detailPreserving : ProcessingPolicy
+  rapidCommit : ProcessingPolicy
+  detailPreserving : ProcessingPolicy
 
 data LearningRule : Set where
-  conservativeUpdate rapidUpdate : LearningRule
+  conservativeUpdate : LearningRule
+  rapidUpdate : LearningRule
 
 data DevelopmentalStage : Set where
-  earlierStage laterStage : DevelopmentalStage
+  earlierStage : DevelopmentalStage
+  laterStage : DevelopmentalStage
 
 data SituatedContext : Set where
-  supportiveContext highDemandContext : SituatedContext
+  supportiveContext : SituatedContext
+  highDemandContext : SituatedContext
 
 record InformationProcessingState : Set where
   constructor informationProcessingState
@@ -134,7 +140,8 @@ data PresentInput : Set where
   sameInput : PresentInput
 
 data ProcessingDisposition : Set where
-  commitNow holdForMoreEvidence : ProcessingDisposition
+  commitNow : ProcessingDisposition
+  holdForMoreEvidence : ProcessingDisposition
 
 processingDisposition :
   InformationProcessingState → PresentInput → ProcessingDisposition
@@ -231,7 +238,8 @@ postLearningProcessingDispositionDiffers ()
 ------------------------------------------------------------------------
 
 data SituatedResponse : Set where
-  regulatedResponse overloadedResponse : SituatedResponse
+  regulatedResponse : SituatedResponse
+  overloadedResponse : SituatedResponse
 
 diagnosticProjection : InformationProcessingState → DiagnosticCategory
 diagnosticProjection = diagnosis

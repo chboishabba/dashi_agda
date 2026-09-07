@@ -195,7 +195,8 @@ strongAdmissionImpliesAdditiveNonseparability admission =
 ------------------------------------------------------------------------
 
 data BitPoint : Set where
-  bit0 bit1 : BitPoint
+  bit0 : BitPoint
+  bit1 : BitPoint
 
 mismatchCode : BitPoint → BitPoint → Nat
 mismatchCode bit0 bit0 = 0

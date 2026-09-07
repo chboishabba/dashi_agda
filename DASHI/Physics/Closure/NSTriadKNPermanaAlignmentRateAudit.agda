@@ -41,10 +41,13 @@ import Data.Integer.Base as Int
 open import Data.Integer.Base using (+_)
 
 data ManuscriptVersion : Set where
-  ssrnApril11 zenodoApril17 : ManuscriptVersion
+  ssrnApril11 : ManuscriptVersion
+  zenodoApril17 : ManuscriptVersion
 
 data ClaimStatus : Set where
-  represented unverified falsifiedOnFiniteCarrier : ClaimStatus
+  represented : ClaimStatus
+  unverified : ClaimStatus
+  falsifiedOnFiniteCarrier : ClaimStatus
 
 record ExactRational : Set where
   constructor ratio

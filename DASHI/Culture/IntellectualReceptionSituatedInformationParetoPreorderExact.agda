@@ -13,7 +13,8 @@ import DASHI.Culture.IntellectualReceptionIntersectionalInformationGeometryExact
 ------------------------------------------------------------------------
 
 data AxisLevel : Set where
-  weak strong : AxisLevel
+  weak : AxisLevel
+  strong : AxisLevel
 
 data AtMostAxis : AxisLevel → AxisLevel → Set where
   weak-weak : AtMostAxis weak weak

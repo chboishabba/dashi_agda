@@ -106,7 +106,8 @@ extinctionReceiptUsesExistingLearningKind m = refl
 ------------------------------------------------------------------------
 
 data AccessFormalState : Set where
-  blockedButFormallyExact accessibleAndPartial : AccessFormalState
+  blockedButFormallyExact : AccessFormalState
+  accessibleAndPartial : AccessFormalState
 
 accessSurface : AccessFormalState → Bool
 accessSurface blockedButFormallyExact = false

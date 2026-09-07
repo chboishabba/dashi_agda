@@ -68,7 +68,9 @@ canonicalSolisProjectSource = solisProjectSource
 ------------------------------------------------------------------------
 
 data HalfGrid : Set where
-  zeroScore halfScore oneScore : HalfGrid
+  zeroScore : HalfGrid
+  halfScore : HalfGrid
+  oneScore : HalfGrid
 
 complementScore : HalfGrid → HalfGrid
 complementScore zeroScore = oneScore
@@ -86,7 +88,8 @@ atOrBelowHalf halfScore = true
 atOrBelowHalf oneScore = false
 
 data SCNDecision : Set where
-  continueDecision flagAndBifurcateDecision : SCNDecision
+  continueDecision : SCNDecision
+  flagAndBifurcateDecision : SCNDecision
 
 scnDecisionFromIncoherence : HalfGrid → SCNDecision
 scnDecisionFromIncoherence zeroScore = continueDecision
@@ -117,7 +120,9 @@ scnThresholdSoundness oneScore = refl
 ------------------------------------------------------------------------
 
 data SCNAction : Set where
-  continueAction bifurcateAction quarantineAction : SCNAction
+  continueAction : SCNAction
+  bifurcateAction : SCNAction
+  quarantineAction : SCNAction
 
 scnAction : Exception.ExceptionalSignal → HalfGrid → SCNAction
 scnAction (Exception.exceptionalSignal mode Exception.paradoxState) integrity =
@@ -190,7 +195,8 @@ sameDeclaredAccessButDifferentSCNAction ()
 ------------------------------------------------------------------------
 
 data ResidualRole : Set where
-  decimalComplementResidual situatedIntegrityResidual : ResidualRole
+  decimalComplementResidual : ResidualRole
+  situatedIntegrityResidual : ResidualRole
 
 residualRolesAreDistinct :
   decimalComplementResidual ≡ situatedIntegrityResidual → ⊥

@@ -30,7 +30,9 @@ open import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
 ------------------------------------------------------------------------
 
 data SU2Component : Set where
-  component1 component2 component3 : SU2Component
+  component1 : SU2Component
+  component2 : SU2Component
+  component3 : SU2Component
 
 PhysicalSU2Tangent4 : Set
 PhysicalSU2Tangent4 = SU2Component → ConfiguredRationalBondField

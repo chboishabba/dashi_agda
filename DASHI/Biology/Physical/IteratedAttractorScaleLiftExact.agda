@@ -15,7 +15,8 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data MolecularState : Set where
-  damagedProtein functionalProtein : MolecularState
+  damagedProtein : MolecularState
+  functionalProtein : MolecularState
 
 molecularRepair : MolecularState → MolecularState
 molecularRepair damagedProtein = functionalProtein
@@ -27,7 +28,8 @@ molecularRepairIdempotent damagedProtein = refl
 molecularRepairIdempotent functionalProtein = refl
 
 data CellularRegime : Set where
-  lowFunction highFunction : CellularRegime
+  lowFunction : CellularRegime
+  highFunction : CellularRegime
 
 observeCell : MolecularState → CellularRegime
 observeCell damagedProtein = lowFunction
@@ -44,7 +46,8 @@ molecularAttractorLiftsToHighCellRegime functionalProtein = refl
 ------------------------------------------------------------------------
 
 data TissueState : Set where
-  disconnected connected : TissueState
+  disconnected : TissueState
+  connected : TissueState
 
 cellToTissueDrive : CellularRegime → TissueState → TissueState
 cellToTissueDrive lowFunction tissue = tissue
@@ -60,7 +63,8 @@ highCellRegimeStabilizesConnectedTissue disconnected = refl
 highCellRegimeStabilizesConnectedTissue connected = refl
 
 data OrganRegime : Set where
-  incompleteOrgan integratedOrgan : OrganRegime
+  incompleteOrgan : OrganRegime
+  integratedOrgan : OrganRegime
 
 observeOrgan : TissueState → OrganRegime
 observeOrgan disconnected = incompleteOrgan

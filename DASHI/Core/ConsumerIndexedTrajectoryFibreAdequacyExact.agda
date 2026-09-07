@@ -191,16 +191,20 @@ asConsumerIndexedSystem surface =
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  demoLeft demoRight : DemoState
+  demoLeft : DemoState
+  demoRight : DemoState
 
 data DemoObservation : Set where
   demoSame : DemoObservation
 
 data DemoConsumer : Set where
-  coarseConsumer pathSensitiveConsumer : DemoConsumer
+  coarseConsumer : DemoConsumer
+  pathSensitiveConsumer : DemoConsumer
 
 data DemoAnswer : Set where
-  coarseAnswer leftPathAnswer rightPathAnswer : DemoAnswer
+  coarseAnswer : DemoAnswer
+  leftPathAnswer : DemoAnswer
+  rightPathAnswer : DemoAnswer
 
 demoObserve : DemoState → DemoObservation
 demoObserve _ = demoSame

@@ -145,13 +145,15 @@ commentaryOnlyCannotPromote : PromotionRelevant commentaryOnly → ⊥
 commentaryOnlyCannotPromote ()
 
 data FineExample : Set where
-  leftExample rightExample : FineExample
+  leftExample : FineExample
+  rightExample : FineExample
 
 data OldExample : Set where
   oldCollapsed : OldExample
 
 data NewExample : Set where
-  newLeft newRight : NewExample
+  newLeft : NewExample
+  newRight : NewExample
 
 oldExampleObserve : FineExample → OldExample
 oldExampleObserve leftExample = oldCollapsed

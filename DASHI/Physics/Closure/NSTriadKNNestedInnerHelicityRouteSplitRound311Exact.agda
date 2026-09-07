@@ -26,7 +26,8 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Admission
 
 data HelicitySign : Set where
-  plus minus : HelicitySign
+  plus : HelicitySign
+  minus : HelicitySign
 
 signedRadius : HelicitySign → ℚ → ℚ
 signedRadius plus r = r

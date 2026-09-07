@@ -109,16 +109,23 @@ protocolSource =
 ------------------------------------------------------------------------
 
 data DiagnosticGroup : Set where
-  autisticGroup nonAutisticGroup : DiagnosticGroup
+  autisticGroup : DiagnosticGroup
+  nonAutisticGroup : DiagnosticGroup
 
 data Dose : Set where
-  placebo twoMg fiveMg : Dose
+  placebo : Dose
+  twoMg : Dose
+  fiveMg : Dose
 
 data NetworkPair : Set where
-  defaultModeFrontoparietal dorsalVentralAttention : NetworkPair
+  defaultModeFrontoparietal : NetworkPair
+  dorsalVentralAttention : NetworkPair
 
 data ConnectivitySummary : Set where
-  referenceLevel relativeIncrease relativeDecrease effectNotPromoted : ConnectivitySummary
+  referenceLevel : ConnectivitySummary
+  relativeIncrease : ConnectivitySummary
+  relativeDecrease : ConnectivitySummary
+  effectNotPromoted : ConnectivitySummary
 
 summaryConnectivity : DiagnosticGroup → Dose → NetworkPair → ConnectivitySummary
 summaryConnectivity group placebo pair = referenceLevel
@@ -148,7 +155,10 @@ observeConnectivity (groupSummaryState group pair dose) =
 ------------------------------------------------------------------------
 
 data ConnectivityShift : Set where
-  noShift shiftUp shiftDown unresolvedShift : ConnectivityShift
+  noShift : ConnectivityShift
+  shiftUp : ConnectivityShift
+  shiftDown : ConnectivityShift
+  unresolvedShift : ConnectivityShift
 
 connectivityContrast : ConnectivitySummary → ConnectivitySummary → ConnectivityShift
 connectivityContrast referenceLevel referenceLevel = noShift

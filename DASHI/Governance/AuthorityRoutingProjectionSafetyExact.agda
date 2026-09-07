@@ -72,7 +72,8 @@ ObserverInsufficiencyBlocksSoundAuthorityRouting defect factor =
 ------------------------------------------------------------------------
 
 data FineIncident : Set where
-  distressIncident imminentThreatIncident : FineIncident
+  distressIncident : FineIncident
+  imminentThreatIncident : FineIncident
 
 data CoarseIncident : Set where
   disturbanceSurface : CoarseIncident

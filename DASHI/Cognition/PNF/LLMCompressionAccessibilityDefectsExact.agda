@@ -9,7 +9,8 @@ import DASHI.Cognition.PNF.MultiResolutionAttentionFutureSufficiencyExact as Mul
 ------------------------------------------------------------------------
 
 data Query : Set where
-  askRemote askLocal : Query
+  askRemote : Query
+  askLocal : Query
 
 record FineContext : Set where
   constructor fineContext

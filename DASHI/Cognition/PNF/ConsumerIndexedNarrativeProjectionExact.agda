@@ -25,16 +25,24 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data FactStatus : Set where
-  factSupported factRefuted factUnresolved : FactStatus
+  factSupported : FactStatus
+  factRefuted : FactStatus
+  factUnresolved : FactStatus
 
 data RhetoricalStatus : Set where
-  lowImpact highImpact contestedImpact : RhetoricalStatus
+  lowImpact : RhetoricalStatus
+  highImpact : RhetoricalStatus
+  contestedImpact : RhetoricalStatus
 
 data CulturalStatus : Set where
-  localArtifact membershipClassifier replicatedAnthem : CulturalStatus
+  localArtifact : CulturalStatus
+  membershipClassifier : CulturalStatus
+  replicatedAnthem : CulturalStatus
 
 data InstitutionalStatus : Set where
-  noDisposition nonActionableOpinion actionableStatement : InstitutionalStatus
+  noDisposition : InstitutionalStatus
+  nonActionableOpinion : InstitutionalStatus
+  actionableStatement : InstitutionalStatus
 
 record ConsumerProjection (Fine : Set) : Set₁ where
   constructor consumerProjection

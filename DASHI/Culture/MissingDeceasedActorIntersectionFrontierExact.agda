@@ -139,7 +139,9 @@ rivalProgrammeState = A.actor-case-evidence-state
 ------------------------------------------------------------------------
 
 data FrontierPriority : Set where
-  firstPriority secondPriority downstreamPriority : FrontierPriority
+  firstPriority : FrontierPriority
+  secondPriority : FrontierPriority
+  downstreamPriority : FrontierPriority
 
 record ActorFrontierTarget : Set where
   constructor actor-frontier-target

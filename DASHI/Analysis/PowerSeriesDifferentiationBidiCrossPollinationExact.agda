@@ -16,7 +16,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data Lane : Set where
-  yangMills casimir : Lane
+  yangMills : Lane
+  casimir : Lane
 
 record PowerSeriesDerivativeProblem : Set₁ where
   field

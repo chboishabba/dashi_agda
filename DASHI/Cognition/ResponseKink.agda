@@ -55,7 +55,10 @@ profile-shape profile =
 -- suppression definitionally inspectable.
 
 data DriveStage : Set where
-  insufficient recruited selected overloaded : DriveStage
+  insufficient : DriveStage
+  recruited : DriveStage
+  selected : DriveStage
+  overloaded : DriveStage
 
 sampledResponse : DriveStage → Nat
 sampledResponse insufficient = 0

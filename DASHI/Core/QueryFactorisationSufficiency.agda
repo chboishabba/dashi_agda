@@ -77,7 +77,8 @@ staticSufficiencyCannotManufactureWorldCoverage ()
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  visibleLeft visibleRight : DemoState
+  visibleLeft : DemoState
+  visibleRight : DemoState
 
 data DemoSurface : Set where
   sameSurface : DemoSurface

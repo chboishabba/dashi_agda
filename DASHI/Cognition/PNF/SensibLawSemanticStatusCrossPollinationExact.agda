@@ -14,14 +14,20 @@ import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admis
 import DASHI.Cognition.PNF.ContextualFractranDirectDeltaAdapterExact as Contextual
 
 data ProducerClass : Set where
-  parserShapeProducer structuralCompositionProducer bindingAccessibilityProducer : ProducerClass
+  parserShapeProducer : ProducerClass
+  structuralCompositionProducer : ProducerClass
+  bindingAccessibilityProducer : ProducerClass
   attributionProducer evidenceProducer legalEvidenceResolutionProducer temporalProducer : ProducerClass
   scopeResolutionProducer documentContextProducer legalJurisdictionProducer : ProducerClass
   legalSourceAuthorityProducer legalRoleResolutionProducer legalTypedMeetProducer : ProducerClass
   governedAdmissionProducer : ProducerClass
 
 data StatusAxis : Set where
-  participantRoleAxis referentKindAxis identityAxis antecedentAxis occurrenceAxis : StatusAxis
+  participantRoleAxis : StatusAxis
+  referentKindAxis : StatusAxis
+  identityAxis : StatusAxis
+  antecedentAxis : StatusAxis
+  occurrenceAxis : StatusAxis
   propositionAxis attributionAxis evidenceCandidateAxis resolvedLegalEvidenceAxis : StatusAxis
   modalityAxis temporalAxis conditionAxis scopeCandidateAxis resolvedScopeAxis : StatusAxis
   documentContextAxis jurisdictionCandidateAxis resolvedLegalJurisdictionAxis : StatusAxis

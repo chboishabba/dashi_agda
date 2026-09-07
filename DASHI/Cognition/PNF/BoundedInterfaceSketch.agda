@@ -17,7 +17,9 @@ open import DASHI.Cognition.PNF.BoundedMDLPlanner using
 ------------------------------------------------------------------------
 
 data SketchStorage : Set where
-  unboundedExactKeys boundedExactKeys constantSummary : SketchStorage
+  unboundedExactKeys : SketchStorage
+  boundedExactKeys : SketchStorage
+  constantSummary : SketchStorage
 
 sketchJoinWork : Nat → Nat
 sketchJoinWork capacity = capacity +ᶜ (capacity +ᶜ capacity)

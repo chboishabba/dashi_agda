@@ -196,13 +196,17 @@ canonicalDestructiveCrossIsMinusOne = refl
 ------------------------------------------------------------------------
 
 data Occupancy : Set where
-  vacant occupied : Occupancy
+  vacant : Occupancy
+  occupied : Occupancy
 
 data PhaseOrientation : Set where
-  positive negative : PhaseOrientation
+  positive : PhaseOrientation
+  negative : PhaseOrientation
 
 data TernaryPoint : Set where
-  zeroPoint zetaPoint zetaSquaredPoint : TernaryPoint
+  zeroPoint : TernaryPoint
+  zetaPoint : TernaryPoint
+  zetaSquaredPoint : TernaryPoint
 
 contractSquare : Occupancy → PhaseOrientation → TernaryPoint
 contractSquare vacant positive = zeroPoint

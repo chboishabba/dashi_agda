@@ -8,19 +8,38 @@ open import DASHI.Core.IndexedRoleEvidence
 -- A bounded PNF/ITIR instance.  These are source-local formal objects, not
 -- verdicts about the truth of the underlying narrative.
 data PNFState : Set where
-  raw captured normalized compared promoted blocked : PNFState
+  raw : PNFState
+  captured : PNFState
+  normalized : PNFState
+  compared : PNFState
+  promoted : PNFState
+  blocked : PNFState
 
 data PNFOperation : Set where
-  ingest anchor normalize extract compare gate : PNFOperation
+  ingest : PNFOperation
+  anchor : PNFOperation
+  normalize : PNFOperation
+  extract : PNFOperation
+  compare : PNFOperation
+  gate : PNFOperation
 
 data PNFObservable : Set where
-  sourceSpan proposition provenanceLink disagreement omission : PNFObservable
+  sourceSpan : PNFObservable
+  proposition : PNFObservable
+  provenanceLink : PNFObservable
+  disagreement : PNFObservable
+  omission : PNFObservable
 
 data PNFEvidenceToken : Set where
-  sourceLocalReceipt corroboratedReceipt reviewerReceipt : PNFEvidenceToken
+  sourceLocalReceipt : PNFEvidenceToken
+  corroboratedReceipt : PNFEvidenceToken
+  reviewerReceipt : PNFEvidenceToken
 
 data PNFResidual : Set where
-  unresolvedSupport contextDrift incompatibleNarrative missingSource : PNFResidual
+  unresolvedSupport : PNFResidual
+  contextDrift : PNFResidual
+  incompatibleNarrative : PNFResidual
+  missingSource : PNFResidual
 
 PNFRole : FormalRole → Set
 PNFRole carrierSpaceRole    = PNFState

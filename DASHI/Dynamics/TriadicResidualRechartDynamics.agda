@@ -13,10 +13,16 @@ import DASHI.Topology.TetrationalGateField as Gates
 -- Remainder classification drives refinement rather than being discarded.
 
 data ResidualKind : Set where
-  negligibleResidual harmonicResidual fineScaleResidual gluingFailureResidual : ResidualKind
+  negligibleResidual : ResidualKind
+  harmonicResidual : ResidualKind
+  fineScaleResidual : ResidualKind
+  gluingFailureResidual : ResidualKind
 
 data ResidualAction : Set where
-  acceptCurrentModel openSpectralBlock deepenQuotient rechartModel : ResidualAction
+  acceptCurrentModel : ResidualAction
+  openSpectralBlock : ResidualAction
+  deepenQuotient : ResidualAction
+  rechartModel : ResidualAction
 
 residualAction : ResidualKind → ResidualAction
 residualAction negligibleResidual = acceptCurrentModel

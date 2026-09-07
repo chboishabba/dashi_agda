@@ -22,7 +22,9 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.IndexedJExternalGluingExact as Gluing
 
 data LiftedSeam : Set where
-  seamDepth0 seamDepth1 seamDepth2 : LiftedSeam
+  seamDepth0 : LiftedSeam
+  seamDepth1 : LiftedSeam
+  seamDepth2 : LiftedSeam
 
 projectSeam : LiftedSeam → Gluing.NineRing0
 projectSeam seamDepth0 = Gluing.r0
@@ -49,7 +51,10 @@ depthOneAndTwoDistinct : seamDepth1 ≡ seamDepth2 → ⊥
 depthOneAndTwoDistinct ()
 
 data SpiralAddress : Set where
-  address0 address1 address10 address11 : SpiralAddress
+  address0 : SpiralAddress
+  address1 : SpiralAddress
+  address10 : SpiralAddress
+  address11 : SpiralAddress
 
 projectAddress : SpiralAddress → Gluing.NineRing0
 projectAddress address0 = Gluing.r0

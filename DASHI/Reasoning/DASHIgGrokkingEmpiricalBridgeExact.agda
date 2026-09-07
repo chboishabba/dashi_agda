@@ -66,7 +66,8 @@ canonicalDASHIgPhase2Source =
 ------------------------------------------------------------------------
 
 data AttributionStatus : Set where
-  secondaryCitationClaim primaryAttributionVerified : AttributionStatus
+  secondaryCitationClaim : AttributionStatus
+  primaryAttributionVerified : AttributionStatus
 
 record UpstreamImplementationAttribution : Set where
   constructor upstreamImplementationAttribution
@@ -106,7 +107,8 @@ mirrorDoesNotConferAuthorship = refl
 ------------------------------------------------------------------------
 
 data Architecture : Set where
-  geometryVariantLambdaZero plainTransformer : Architecture
+  geometryVariantLambdaZero : Architecture
+  plainTransformer : Architecture
 
 record PrelimGrokRow : Set where
   constructor prelimGrokRow

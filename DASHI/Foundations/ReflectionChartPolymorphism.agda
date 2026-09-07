@@ -11,7 +11,17 @@ open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope
 -- Decimal reflection around five.
 
 data DecimalPhase11 : Set where
-  d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 : DecimalPhase11
+  d0 : DecimalPhase11
+  d1 : DecimalPhase11
+  d2 : DecimalPhase11
+  d3 : DecimalPhase11
+  d4 : DecimalPhase11
+  d5 : DecimalPhase11
+  d6 : DecimalPhase11
+  d7 : DecimalPhase11
+  d8 : DecimalPhase11
+  d9 : DecimalPhase11
+  d10 : DecimalPhase11
 
 reflect10 : DecimalPhase11 → DecimalPhase11
 reflect10 d0 = d10
@@ -46,7 +56,15 @@ decimalFiveFixed = refl
 -- Additive inverse on C9.  This is the chart where 3 and 6 are paired.
 
 data Phase9 : Set where
-  p0 p1 p2 p3 p4 p5 p6 p7 p8 : Phase9
+  p0 : Phase9
+  p1 : Phase9
+  p2 : Phase9
+  p3 : Phase9
+  p4 : Phase9
+  p5 : Phase9
+  p6 : Phase9
+  p7 : Phase9
+  p8 : Phase9
 
 reflect9 : Phase9 → Phase9
 reflect9 p0 = p0

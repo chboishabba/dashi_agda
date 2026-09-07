@@ -12,7 +12,8 @@ import DASHI.Cognition.PredictiveInverseAttractor as Attractor
 import DASHI.Empirical.PNFMeasurementIdentifiability as Measurement
 
 data HiddenFixture : Set where
-  hiddenBalancedConflict hiddenPhaseCancellation : HiddenFixture
+  hiddenBalancedConflict : HiddenFixture
+  hiddenPhaseCancellation : HiddenFixture
 
 data ObservableFixture : Set where
   publicZero : ObservableFixture

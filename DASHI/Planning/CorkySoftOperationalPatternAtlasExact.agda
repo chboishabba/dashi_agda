@@ -95,10 +95,16 @@ executionStillDiffers ()
 ------------------------------------------------------------------------
 
 data CustodyState : Set where
-  depotCustody stagedCustody vehicleCustody transitCustody destinationCustody exceptionCustody : CustodyState
+  depotCustody : CustodyState
+  stagedCustody : CustodyState
+  vehicleCustody : CustodyState
+  transitCustody : CustodyState
+  destinationCustody : CustodyState
+  exceptionCustody : CustodyState
 
 data HandoffEvidence : Set where
-  noHandoffEvidence recordedHandoffEvidence : HandoffEvidence
+  noHandoffEvidence : HandoffEvidence
+  recordedHandoffEvidence : HandoffEvidence
 
 record OperationalHandoff : Set where
   constructor operational-handoff

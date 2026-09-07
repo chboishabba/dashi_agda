@@ -158,7 +158,10 @@ twoGeneratorEven left right =
 
 
 data UnitGenerator : Set where
-  unitT unitX unitY unitZ : UnitGenerator
+  unitT : UnitGenerator
+  unitX : UnitGenerator
+  unitY : UnitGenerator
+  unitZ : UnitGenerator
 
 unitAxis : UnitGenerator → Axis4
 unitAxis unitT = timeAxis

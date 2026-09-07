@@ -19,10 +19,15 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data MNTSPhase : Set where
-  preHaltPhase haltedPhase resumedPhase : MNTSPhase
+  preHaltPhase : MNTSPhase
+  haltedPhase : MNTSPhase
+  resumedPhase : MNTSPhase
 
 data TapeEvent : Set where
-  preHaltTrade haltStatus resumeStatus postResumeTrade : TapeEvent
+  preHaltTrade : TapeEvent
+  haltStatus : TapeEvent
+  resumeStatus : TapeEvent
+  postResumeTrade : TapeEvent
 
 sourceTime : TapeEvent → String
 sourceTime preHaltTrade = "14:26:05.848700631"

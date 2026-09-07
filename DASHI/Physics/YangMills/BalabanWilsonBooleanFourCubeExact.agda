@@ -29,7 +29,10 @@ open import Data.List.Base using (length)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 data BondSlot4 : Set where
-  slot0 slot1 slot2 slot3 : BondSlot4
+  slot0 : BondSlot4
+  slot1 : BondSlot4
+  slot2 : BondSlot4
+  slot3 : BondSlot4
 
 bondSlots4 : List BondSlot4
 bondSlots4 = slot0 ∷ slot1 ∷ slot2 ∷ slot3 ∷ []

@@ -91,7 +91,10 @@ strictlyStrongerObligationForcesResidualDistinction
 ------------------------------------------------------------------------
 
 data ReconstructionLevel : Set where
-  computeLevel semanticLevel provenanceLevel exactLevel : ReconstructionLevel
+  computeLevel : ReconstructionLevel
+  semanticLevel : ReconstructionLevel
+  provenanceLevel : ReconstructionLevel
+  exactLevel : ReconstructionLevel
 
 record ReconstructionHierarchy
     (State : Set)

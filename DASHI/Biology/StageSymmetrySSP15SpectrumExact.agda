@@ -30,19 +30,28 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 ------------------------------------------------------------------------
 
 data OrbitType : Set where
-  fullTriadOrbit pairOpenOrbit distinguishedLineOrbit : OrbitType
+  fullTriadOrbit : OrbitType
+  pairOpenOrbit : OrbitType
+  distinguishedLineOrbit : OrbitType
 
 data LaneVisibility : Set where
-  laneVisible laneLatent : LaneVisibility
+  laneVisible : LaneVisibility
+  laneLatent : LaneVisibility
 
 data LaneTransport : Set where
-  transportAdmissible transportBlocked transportUnresolved : LaneTransport
+  transportAdmissible : LaneTransport
+  transportBlocked : LaneTransport
+  transportUnresolved : LaneTransport
 
 data LaneOrientation : Set where
-  directOrientation inverseOrientation unresolvedOrientation : LaneOrientation
+  directOrientation : LaneOrientation
+  inverseOrientation : LaneOrientation
+  unresolvedOrientation : LaneOrientation
 
 data EvidenceStatus : Set where
-  evidenceAffirmed evidenceOpen evidenceCountered : EvidenceStatus
+  evidenceAffirmed : EvidenceStatus
+  evidenceOpen : EvidenceStatus
+  evidenceCountered : EvidenceStatus
 
 record RichSymmetryLaneReading : Set where
   constructor richSymmetryLaneReading

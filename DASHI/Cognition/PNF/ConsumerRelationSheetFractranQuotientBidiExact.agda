@@ -15,7 +15,9 @@ import DASHI.Cognition.PNF.ContextualFractranOccurrenceHyperfabricExact as Conte
 ------------------------------------------------------------------------
 
 data Role3 : Set where
-  roleA roleB roleC : Role3
+  roleA : Role3
+  roleB : Role3
+  roleC : Role3
 
 record RelationSheet3 : Set where
   constructor relationSheet3

@@ -39,16 +39,20 @@ data InformationSituation : Set where
 
 
 data SupportClass : Set where
-  presentFutureSupportClass authoritySupportClass : SupportClass
+  presentFutureSupportClass : SupportClass
+  authoritySupportClass : SupportClass
 
 data DemandClass : Set where
-  stage2DemandClass beyondFiltrationDemandClass : DemandClass
+  stage2DemandClass : DemandClass
+  beyondFiltrationDemandClass : DemandClass
 
 data ProvenanceClass : Set where
-  inheritedProvenance introducedProvenance : ProvenanceClass
+  inheritedProvenance : ProvenanceClass
+  introducedProvenance : ProvenanceClass
 
 data AuthorityClass : Set where
-  authorityAbsent authorityPresent : AuthorityClass
+  authorityAbsent : AuthorityClass
+  authorityPresent : AuthorityClass
 
 data SituatedInformationCode : Set where
   pfInheritedCode : SituatedInformationCode

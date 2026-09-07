@@ -20,7 +20,8 @@ import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Decision
 ------------------------------------------------------------------------
 
 data Attention : Set where
-  attended unattended : Attention
+  attended : Attention
+  unattended : Attention
 
 storedValue : Pre.Candidate → Nat
 storedValue Pre.supportingCandidate = 2

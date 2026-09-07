@@ -25,31 +25,41 @@ open import Agda.Builtin.Nat using (Nat)
 -- Named lineage carriers and governance coordinates.
 
 data PermacultureTradition : Set where
-  holmgrenian mollisonian newtonian : PermacultureTradition
+  holmgrenian : PermacultureTradition
+  mollisonian : PermacultureTradition
+  newtonian : PermacultureTradition
 
 -- Compatibility alias for the initial diagram formalisation.
 PermacultureLane : Set
 PermacultureLane = PermacultureTradition
 
 data ScaleBand : Set where
-  microScale macroScale megaScale : ScaleBand
+  microScale : ScaleBand
+  macroScale : ScaleBand
+  megaScale : ScaleBand
 
 data GovernanceStyle : Set where
   domesticDefensive commercialCompetitor sovereignFoundational :
     GovernanceStyle
 
 data CoreDirective : Set where
-  decoupleAndHide replaceAndCompete commandTheBedrock : CoreDirective
+  decoupleAndHide : CoreDirective
+  replaceAndCompete : CoreDirective
+  commandTheBedrock : CoreDirective
 
 data StrategicVector : Set where
-  defensive aggressiveReplacement dominantSovereign : StrategicVector
+  defensive : StrategicVector
+  aggressiveReplacement : StrategicVector
+  dominantSovereign : StrategicVector
 
 data AuthoritySurface : Set where
   householdOrBlock farmOrCommercialOperator sovereignTerritory :
     AuthoritySurface
 
 data SubstrateBinding : Set where
-  domesticPatch productiveLandscape territorialBedrock : SubstrateBinding
+  domesticPatch : SubstrateBinding
+  productiveLandscape : SubstrateBinding
+  territorialBedrock : SubstrateBinding
 
 record GovernanceProfile : Set where
   constructor governanceProfile
@@ -146,7 +156,8 @@ data DiagramSource : Set where
   suppliedPermacultureEvolutionDiagram : DiagramSource
 
 data DiagramPanel : Set where
-  evolutionPanel splitPanel : DiagramPanel
+  evolutionPanel : DiagramPanel
+  splitPanel : DiagramPanel
 
 record DiagramProjection : Set where
   constructor diagramProjection
@@ -250,14 +261,16 @@ data EvolutionEdge : PermacultureTradition -> Set where
   sovereignSubstrateProjection : EvolutionEdge newtonian
 
 data SplitLane : Set where
-  mollisonianSplit newtonianSplit : SplitLane
+  mollisonianSplit : SplitLane
+  newtonianSplit : SplitLane
 
 splitEmbedding : SplitLane -> PermacultureTradition
 splitEmbedding mollisonianSplit = mollisonian
 splitEmbedding newtonianSplit   = newtonian
 
 data ConflictTarget : Set where
-  incumbentProductionLayer foundationalSubstrateLayer : ConflictTarget
+  incumbentProductionLayer : ConflictTarget
+  foundationalSubstrateLayer : ConflictTarget
 
 splitTarget : SplitLane -> ConflictTarget
 splitTarget mollisonianSplit = incumbentProductionLayer

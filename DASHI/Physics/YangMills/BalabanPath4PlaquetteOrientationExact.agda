@@ -18,7 +18,12 @@ open import DASHI.Physics.YangMills.BalabanFiniteEnumerationDistinctExact using
 ------------------------------------------------------------------------
 
 data PositivePlaquettePlane4 : Set where
-  plane01 plane02 plane03 plane12 plane13 plane23 : PositivePlaquettePlane4
+  plane01 : PositivePlaquettePlane4
+  plane02 : PositivePlaquettePlane4
+  plane03 : PositivePlaquettePlane4
+  plane12 : PositivePlaquettePlane4
+  plane13 : PositivePlaquettePlane4
+  plane23 : PositivePlaquettePlane4
 
 positivePlaquettePlanes4 : List PositivePlaquettePlane4
 positivePlaquettePlanes4 =

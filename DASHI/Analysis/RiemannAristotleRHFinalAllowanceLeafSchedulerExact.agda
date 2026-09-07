@@ -37,7 +37,9 @@ data FinalRHAnalyticLeaf : Set where
 
 
 data FinalLeafState : Set where
-  open downstream pruned : FinalLeafState
+  open : FinalLeafState
+  downstream : FinalLeafState
+  pruned : FinalLeafState
 
 finalLeafState : FinalRHAnalyticLeaf → FinalLeafState
 finalLeafState proveUniversalPoleQuotientOffAllowancePayment = open

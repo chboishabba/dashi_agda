@@ -50,7 +50,10 @@ data HaloPosition : Set where
   wellAboveHalo : HaloPosition
 
 data HaloAction : Set where
-  retainAction inspectAction refineAction branchAction : HaloAction
+  retainAction : HaloAction
+  inspectAction : HaloAction
+  refineAction : HaloAction
+  branchAction : HaloAction
 
 haloPolicy : HaloPosition → HaloAction
 haloPolicy wellBelowHalo = retainAction

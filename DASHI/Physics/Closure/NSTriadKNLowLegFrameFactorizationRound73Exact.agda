@@ -38,7 +38,8 @@ import DASHI.Physics.Closure.NSTriadKNFactorizedEffectiveComplexityCauchyRound72
 
 
 data LowLegRole : Set where
-  lowFromP lowFromQ : LowLegRole
+  lowFromP : LowLegRole
+  lowFromQ : LowLegRole
 
 record LowLegPhysicalFactorization
     (pairing : Shell.StaticPhysicalShellPairing) : Set where

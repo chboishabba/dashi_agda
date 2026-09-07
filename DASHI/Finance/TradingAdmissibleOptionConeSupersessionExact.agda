@@ -15,13 +15,19 @@ import DASHI.Trading.PermissionKernel as Legacy
 ------------------------------------------------------------------------
 
 data Exposure : Set where
-  shortExposure flatExposure longExposure : Exposure
+  shortExposure : Exposure
+  flatExposure : Exposure
+  longExposure : Exposure
 
 data RiskRegime : Set where
-  riskClear riskCaution riskBlocked : RiskRegime
+  riskClear : RiskRegime
+  riskCaution : RiskRegime
+  riskBlocked : RiskRegime
 
 data ControlAction : Set where
-  reduceAction holdAction increaseAction : ControlAction
+  reduceAction : ControlAction
+  holdAction : ControlAction
+  increaseAction : ControlAction
 
 record TradeState : Set where
   constructor tradeState
@@ -168,7 +174,9 @@ blockedFlatCannotReduce ()
 ------------------------------------------------------------------------
 
 data CanonicalConeShape : Set where
-  holdOnlyCone reduceOrHoldCone increaseCapableCone : CanonicalConeShape
+  holdOnlyCone : CanonicalConeShape
+  reduceOrHoldCone : CanonicalConeShape
+  increaseCapableCone : CanonicalConeShape
 
 coneShape : TradeState → CanonicalConeShape
 coneShape (tradeState flatExposure riskBlocked) = holdOnlyCone
@@ -190,7 +198,9 @@ blockedFlatConeShape = refl
 ------------------------------------------------------------------------
 
 data LegacyProjectionResult : Set where
-  legacyACT legacyHOLD legacyUnrepresentable : LegacyProjectionResult
+  legacyACT : LegacyProjectionResult
+  legacyHOLD : LegacyProjectionResult
+  legacyUnrepresentable : LegacyProjectionResult
 
 projectConeToLegacy : CanonicalConeShape → LegacyProjectionResult
 projectConeToLegacy increaseCapableCone = legacyACT

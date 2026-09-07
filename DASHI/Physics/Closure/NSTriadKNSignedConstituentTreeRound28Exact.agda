@@ -42,7 +42,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 
 data BoundaryStatus : Set where
-  lowerCut upperCut : BoundaryStatus
+  lowerCut : BoundaryStatus
+  upperCut : BoundaryStatus
 
 data ExtendedSource : Set where
   physicalSource : Support.FiveSourceCell → ExtendedSource

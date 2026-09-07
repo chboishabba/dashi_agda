@@ -223,28 +223,34 @@ historyPropagationBlocksCoarseFutureDescent witness =
 ------------------------------------------------------------------------
 
 data ToySituatedState : Set where
-  sameNowOpenHistory sameNowClosedHistory : ToySituatedState
+  sameNowOpenHistory : ToySituatedState
+  sameNowClosedHistory : ToySituatedState
 
 data ToyObservation : Set where
   sameNow : ToyObservation
 
 data ToyHistoryCode : Set where
-  flexibleHistory committedHistory : ToyHistoryCode
+  flexibleHistory : ToyHistoryCode
+  committedHistory : ToyHistoryCode
 
 data ToyRelationCode : Set where
   sameRelation : ToyRelationCode
 
 data ToyGateCode : Set where
-  openGate closedGate : ToyGateCode
+  openGate : ToyGateCode
+  closedGate : ToyGateCode
 
 data ToyReachableCode : Set where
-  broadReachable contractedReachable : ToyReachableCode
+  broadReachable : ToyReachableCode
+  contractedReachable : ToyReachableCode
 
 data ToyAffordanceCode : Set where
-  broadAffordance contractedAffordance : ToyAffordanceCode
+  broadAffordance : ToyAffordanceCode
+  contractedAffordance : ToyAffordanceCode
 
 data ToyFutureConeCode : Set where
-  broadFutureCone contractedFutureCone : ToyFutureConeCode
+  broadFutureCone : ToyFutureConeCode
+  contractedFutureCone : ToyFutureConeCode
 
 toyFabric : RelationalHistoryFabric
 toyFabric =

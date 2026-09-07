@@ -55,7 +55,8 @@ data Gap : Set where
   unresolved-morphology : Gap
 
 data Promotion : Set where
-  accepted needs-more-evidence : Promotion
+  accepted : Promotion
+  needs-more-evidence : Promotion
 
 record ProtocolResult (Mesh Metric : Set) : Set where
   field

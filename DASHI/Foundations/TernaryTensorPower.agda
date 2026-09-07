@@ -12,7 +12,9 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 ------------------------------------------------------------------------
 
 data Trit : Set where
-  negative neutral positive : Trit
+  negative : Trit
+  neutral : Trit
+  positive : Trit
 
 TPower : Nat → Set
 TPower zero    = ⊤

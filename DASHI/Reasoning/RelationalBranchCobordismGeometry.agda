@@ -370,7 +370,9 @@ recombineJ = recombinedWave
 ------------------------------------------------------------------------
 
 data AlignmentTrit : Set where
-  towardAttractor orthogonalToAttractor awayFromAttractor : AlignmentTrit
+  towardAttractor : AlignmentTrit
+  orthogonalToAttractor : AlignmentTrit
+  awayFromAttractor : AlignmentTrit
 
 alignmentScalar : AlignmentTrit → ℤ
 alignmentScalar towardAttractor = + 1
@@ -463,7 +465,8 @@ twoOpposedFluxIsMinusTwo = refl
 ------------------------------------------------------------------------
 
 data PathMarkerRelation : Set where
-  indistinguishablePaths distinguishablePaths : PathMarkerRelation
+  indistinguishablePaths : PathMarkerRelation
+  distinguishablePaths : PathMarkerRelation
 
 retainedCrossTerm :
   PathMarkerRelation →

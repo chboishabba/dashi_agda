@@ -110,7 +110,9 @@ TriadOf surface = FiniteCarrier.Carrier (triadCarrier surface)
 ------------------------------------------------------------------------
 
 data PairSlot : Set where
-  firstPair secondPair thirdPair : PairSlot
+  firstPair : PairSlot
+  secondPair : PairSlot
+  thirdPair : PairSlot
 
 record PairEdge (Mode : Set) : Set where
   constructor mkPairEdge

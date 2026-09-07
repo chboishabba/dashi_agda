@@ -31,10 +31,15 @@ import DASHI.Physics.Semiconductor.Device.ComputedFiniteDeviceCellExact as Cell
 ------------------------------------------------------------------------
 
 data SGNode : Set where
-  node0 node1 node2 node3 : SGNode
+  node0 : SGNode
+  node1 : SGNode
+  node2 : SGNode
+  node3 : SGNode
 
 data SGFace : Set where
-  face01 face12 face23 : SGFace
+  face01 : SGFace
+  face12 : SGFace
+  face23 : SGFace
 
 leftNode : SGFace → SGNode
 leftNode face01 = node0

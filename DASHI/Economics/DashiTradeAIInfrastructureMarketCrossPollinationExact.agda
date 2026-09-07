@@ -84,7 +84,8 @@ sameDemandSignal : signal cleanDemandState ≡ signal crowdedDemandState
 sameDemandSignal = refl
 
 data RefinanceViability : Set where
-  refinanceAvailable refinanceUnavailable : RefinanceViability
+  refinanceAvailable : RefinanceViability
+  refinanceUnavailable : RefinanceViability
 
 refinanceViability : InfrastructureMarketFabric → RefinanceViability
 refinanceViability state with liquidity state

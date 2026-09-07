@@ -53,7 +53,8 @@ copiedPathPayloadStep : ∀ n beam →
 copiedPathPayloadStep n beam = refl
 
 data PathStorage : Set where
-  copiedFullPaths constantBackpointers : PathStorage
+  copiedFullPaths : PathStorage
+  constantBackpointers : PathStorage
 
 record BackpointerState : Set where
   constructor backpointerState

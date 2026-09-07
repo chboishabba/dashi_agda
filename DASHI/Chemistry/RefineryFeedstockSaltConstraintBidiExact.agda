@@ -37,19 +37,24 @@ data NominalCrudeSurface : Set where
   sameCrudeGradeLabel : NominalCrudeSurface
 
 data SaltWaterBurden : Set where
-  lowerSaltWaterBurden higherSaltWaterBurden : SaltWaterBurden
+  lowerSaltWaterBurden : SaltWaterBurden
+  higherSaltWaterBurden : SaltWaterBurden
 
 data DesalterState : Set where
-  desalterAdequate desalterConstrained : DesalterState
+  desalterAdequate : DesalterState
+  desalterConstrained : DesalterState
 
 data ReliabilityBurden : Set where
-  lowerReliabilityBurden higherReliabilityBurden : ReliabilityBurden
+  lowerReliabilityBurden : ReliabilityBurden
+  higherReliabilityBurden : ReliabilityBurden
 
 data EffectiveThroughput : Set where
-  throughputAvailable throughputConstrained : EffectiveThroughput
+  throughputAvailable : EffectiveThroughput
+  throughputConstrained : EffectiveThroughput
 
 data ProductYieldState : Set where
-  productYieldAvailable productYieldConstrained : ProductYieldState
+  productYieldAvailable : ProductYieldState
+  productYieldConstrained : ProductYieldState
 
 nominalCrudeSurface : FeedstockState → NominalCrudeSurface
 nominalCrudeSurface _ = sameCrudeGradeLabel

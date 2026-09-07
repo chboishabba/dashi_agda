@@ -26,7 +26,8 @@ data InterventionPhase : Set where
     InterventionPhase
 
 data PhaseAuthorityRole : Set where
-  responseAuthorityRole adjudicationAuthorityRole : PhaseAuthorityRole
+  responseAuthorityRole : PhaseAuthorityRole
+  adjudicationAuthorityRole : PhaseAuthorityRole
   sentencingAuthorityRole repairAuthorityRole : PhaseAuthorityRole
 
 data CoarseAuthoritySurface : Set where

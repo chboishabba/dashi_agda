@@ -24,10 +24,13 @@ deepSeekV4ArXiv : String
 deepSeekV4ArXiv = "arXiv:2606.19348v1"
 
 data RepresentationResolution : Set where
-  fineResolution mediumResolution coarseResolution : RepresentationResolution
+  fineResolution : RepresentationResolution
+  mediumResolution : RepresentationResolution
+  coarseResolution : RepresentationResolution
 
 data AccessibilityBreadth : Set where
-  narrowAccessibility broadAccessibility : AccessibilityBreadth
+  narrowAccessibility : AccessibilityBreadth
+  broadAccessibility : AccessibilityBreadth
 
 record AttentionProfile : Set where
   constructor attentionProfile

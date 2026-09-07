@@ -43,7 +43,11 @@ open import Relation.Binary.PropositionalEquality using
   (_≡_; cong; cong₂; trans)
 
 data FilteredInteractionClass : Set where
-  highHigh lowHigh highLow comparable commutator : FilteredInteractionClass
+  highHigh : FilteredInteractionClass
+  lowHigh : FilteredInteractionClass
+  highLow : FilteredInteractionClass
+  comparable : FilteredInteractionClass
+  commutator : FilteredInteractionClass
 
 record DyadicFilteredShell : Set where
   constructor dyadicFilteredShell

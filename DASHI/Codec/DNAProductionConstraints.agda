@@ -33,7 +33,10 @@ data Last : Set where
   last : Base → Last
 
 data Run : Set where
-  run0 run1 run2 run3 : Run
+  run0 : Run
+  run1 : Run
+  run2 : Run
+  run3 : Run
 
 runAllows : Last → Run → Base → Bool
 runAllows noLast r b = true
@@ -54,7 +57,11 @@ nextRun (last x) run3 b with baseEq x b
 nextRun (last x) run0 b = run1
 
 data Debt : Set where
-  debtM2 debtM1 debt0 debtP1 debtP2 : Debt
+  debtM2 : Debt
+  debtM1 : Debt
+  debt0 : Debt
+  debtP1 : Debt
+  debtP2 : Debt
 
 debtAllows : Debt → Base → Bool
 debtAllows debtM2 b = isGC b

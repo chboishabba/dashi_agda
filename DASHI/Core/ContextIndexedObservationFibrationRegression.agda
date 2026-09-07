@@ -18,7 +18,8 @@ import DASHI.Core.TopDownObservationCalculusExact as Top
 ------------------------------------------------------------------------
 
 data DemoContext : Set where
-  publicContext situatedContext : DemoContext
+  publicContext : DemoContext
+  situatedContext : DemoContext
 
 data DemoHom : DemoContext → DemoContext → Set where
   publicId : DemoHom publicContext publicContext

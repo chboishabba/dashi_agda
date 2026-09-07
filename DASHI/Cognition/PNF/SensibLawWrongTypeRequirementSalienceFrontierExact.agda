@@ -91,10 +91,12 @@ data ToyRequirement : Set where
 
 
 data ToyInterpretation : Set where
-  interpretationA interpretationB : ToyInterpretation
+  interpretationA : ToyInterpretation
+  interpretationB : ToyInterpretation
 
 data ToyObservation : Set where
-  observationNo observationYes : ToyObservation
+  observationNo : ToyObservation
+  observationYes : ToyObservation
 
 toyLive : Live.LiveSet ToyInterpretation
 toyLive interpretationA = ⊤

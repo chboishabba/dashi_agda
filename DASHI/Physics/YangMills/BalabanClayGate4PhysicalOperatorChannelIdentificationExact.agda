@@ -37,7 +37,11 @@ data PhysicalAnalyticFamily : Set where
   randomWalkLocalization : PhysicalAnalyticFamily
 
 data T3Channel : Set where
-  curvature transport chart gauge constraint : T3Channel
+  curvature : T3Channel
+  transport : T3Channel
+  chart : T3Channel
+  gauge : T3Channel
+  constraint : T3Channel
 
 data HRBetaChannel : Set where
   determinant interaction chartRemainder gaugeRemainder localization :

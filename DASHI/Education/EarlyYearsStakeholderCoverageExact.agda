@@ -19,13 +19,22 @@ import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Join
 ------------------------------------------------------------------------
 
 data StakeholderAxis : Set where
-  professionalAxis familyAxis childAxis communityAxis : StakeholderAxis
+  professionalAxis : StakeholderAxis
+  familyAxis : StakeholderAxis
+  childAxis : StakeholderAxis
+  communityAxis : StakeholderAxis
 
 data EvidenceStage : Set where
-  professionalPilot familyJoined childJoined communityJoined : EvidenceStage
+  professionalPilot : EvidenceStage
+  familyJoined : EvidenceStage
+  childJoined : EvidenceStage
+  communityJoined : EvidenceStage
 
 data EarlyYearsClaim : Set where
-  professionalPracticeClaim familyExperienceClaim childExperienceClaim communityExperienceClaim : EarlyYearsClaim
+  professionalPracticeClaim : EarlyYearsClaim
+  familyExperienceClaim : EarlyYearsClaim
+  childExperienceClaim : EarlyYearsClaim
+  communityExperienceClaim : EarlyYearsClaim
 
 data Never : Set where
 
@@ -109,7 +118,8 @@ childJoinedResolvesChildExperience communityAxis ()
 ------------------------------------------------------------------------
 
 data FamilySituation : Set where
-  situationA situationB : FamilySituation
+  situationA : FamilySituation
+  situationB : FamilySituation
 
 professionalSummary : FamilySituation → Bool
 professionalSummary situationA = true

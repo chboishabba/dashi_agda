@@ -41,7 +41,8 @@ record CertifiedMaassForm (Γ : MFC.ΓMaass) : Set where
     certificateReading : String
 
 data MaassObject : Set where
-  candidateObject certifiedObject : MaassObject
+  candidateObject : MaassObject
+  certifiedObject : MaassObject
 
 Underlying : MaassObject → Set
 Underlying candidateObject = ∀ Γ → CandidateMaassForm Γ

@@ -19,13 +19,18 @@ import DASHI.Core.RobustInterventionAcrossHypothesesExact as Robust
 ------------------------------------------------------------------------
 
 data Hypothesis : Set where
-  hA hB : Hypothesis
+  hA : Hypothesis
+  hB : Hypothesis
 
 data Intervention : Set where
-  baseline actionA actionB : Intervention
+  baseline : Intervention
+  actionA : Intervention
+  actionB : Intervention
 
 data Utility : Set where
-  bad neutral good : Utility
+  bad : Utility
+  neutral : Utility
+  good : Utility
 
 data NoWorse : Utility → Utility → Set where
   neutralNoWorseNeutral : NoWorse neutral neutral
@@ -47,7 +52,8 @@ Authority : Intervention → Set
 Authority _ = ⊤
 
 data ModelState : Set where
-  coarse rich : ModelState
+  coarse : ModelState
+  rich : ModelState
 
 DecisionAdequate : ModelState → Intervention → Set
 DecisionAdequate coarse baseline = ⊤
@@ -58,7 +64,8 @@ DecisionAdequate rich actionA = ⊤
 DecisionAdequate rich actionB = ⊤
 
 data Measurement : Set where
-  observedA observedB : Measurement
+  observedA : Measurement
+  observedB : Measurement
 
 measure : Hypothesis → Measurement
 measure hA = observedA

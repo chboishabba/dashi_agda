@@ -14,16 +14,21 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
 ------------------------------------------------------------------------
 
 data ResourceLevel : Set where
-  lowResource mediumResource highResource : ResourceLevel
+  lowResource : ResourceLevel
+  mediumResource : ResourceLevel
+  highResource : ResourceLevel
 
 data PhysicalProvisioning : Set where
-  inefficientInfrastructure efficientInfrastructure : PhysicalProvisioning
+  inefficientInfrastructure : PhysicalProvisioning
+  efficientInfrastructure : PhysicalProvisioning
 
 data SocialProvisioning : Set where
-  exclusionaryProvisioning inclusiveProvisioning : SocialProvisioning
+  exclusionaryProvisioning : SocialProvisioning
+  inclusiveProvisioning : SocialProvisioning
 
 data NeedOutcome : Set where
-  unmetNeed metNeed : NeedOutcome
+  unmetNeed : NeedOutcome
+  metNeed : NeedOutcome
 
 record ProvisioningSystem : Set where
   constructor provisioningSystem

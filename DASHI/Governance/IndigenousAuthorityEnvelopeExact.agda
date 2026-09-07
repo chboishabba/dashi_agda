@@ -12,19 +12,29 @@ import DASHI.Governance.IndigenousAuthoritySourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data ProvenanceRole : Set where
-  communityOrigin communityCoAuthorship institutionalCustodianship externalDescription : ProvenanceRole
+  communityOrigin : ProvenanceRole
+  communityCoAuthorship : ProvenanceRole
+  institutionalCustodianship : ProvenanceRole
+  externalDescription : ProvenanceRole
 
 data GovernanceRole : Set where
-  communityControlled sharedGovernance externalGovernance : GovernanceRole
+  communityControlled : GovernanceRole
+  sharedGovernance : GovernanceRole
+  externalGovernance : GovernanceRole
 
 data ProtocolRole : Set where
-  protocolSpecified protocolUnspecified : ProtocolRole
+  protocolSpecified : ProtocolRole
+  protocolUnspecified : ProtocolRole
 
 data PermissionRole : Set where
-  studyPermitted collaborationPermitted interventionPermitted permissionUnspecified : PermissionRole
+  studyPermitted : PermissionRole
+  collaborationPermitted : PermissionRole
+  interventionPermitted : PermissionRole
+  permissionUnspecified : PermissionRole
 
 data SovereignStanding : Set where
-  originatingAuthority externalObserverStanding : SovereignStanding
+  originatingAuthority : SovereignStanding
+  externalObserverStanding : SovereignStanding
 
 record AuthorityEnvelope : Set where
   constructor authorityEnvelope

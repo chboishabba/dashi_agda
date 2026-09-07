@@ -42,7 +42,9 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as N
 ------------------------------------------------------------------------
 
 data LawlerSokalKernelRegime : Set where
-  reversible nonreversible killed : LawlerSokalKernelRegime
+  reversible : LawlerSokalKernelRegime
+  nonreversible : LawlerSokalKernelRegime
+  killed : LawlerSokalKernelRegime
 
 record LiteralRGLawlerSokalRegime : Set where
   field

@@ -28,10 +28,12 @@ actionabilityWitness = Market.infrastructureSameSignalDifferentActionability
 ------------------------------------------------------------------------
 
 data CapitalRecoveryStatus : Set where
-  capitalRecovered capitalImpaired : CapitalRecoveryStatus
+  capitalRecovered : CapitalRecoveryStatus
+  capitalImpaired : CapitalRecoveryStatus
 
 data CapitalFutureCone : Set where
-  broadCapitalFuture constrainedCapitalFuture : CapitalFutureCone
+  broadCapitalFuture : CapitalFutureCone
+  constrainedCapitalFuture : CapitalFutureCone
 
 capitalRecoveryStatus : Transition.InfrastructureTransitionState → CapitalRecoveryStatus
 capitalRecoveryStatus Transition.preBuild = capitalRecovered
@@ -95,7 +97,8 @@ data ResponsibilityResidual : Set where privateLoss publicLoss : ResponsibilityR
 data CategoryResidual : Set where sameCategoryResidual : CategoryResidual
 
 data IncidenceState : Set where
-  privateAbsorption publicRiskTransfer : IncidenceState
+  privateAbsorption : IncidenceState
+  publicRiskTransfer : IncidenceState
 
 incidenceFibre : Incidence.MultiaxialIncidenceFibre
 incidenceFibre = record

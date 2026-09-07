@@ -17,10 +17,12 @@ import DASHI.Physics.Closure.TemporalSheafProofObligations as Temporal
 -- temporal PNF sections.
 
 data Time2 : Set where
-  before after : Time2
+  before : Time2
+  after : Time2
 
 data Space2 : Set where
-  soilPoint wormPoint : Space2
+  soilPoint : Space2
+  wormPoint : Space2
 
 data Value1 : Set where
   presentValue : Value1
@@ -208,10 +210,12 @@ canonicalQITSheafificationApplicationBoundary =
 -- A small explicit non-gluability witness for exclusive temporal claims.
 
 data ExclusiveLocation : Set where
-  locationA locationB : ExclusiveLocation
+  locationA : ExclusiveLocation
+  locationB : ExclusiveLocation
 
 data LocationClaim : Set where
-  claimsA claimsB : LocationClaim
+  claimsA : LocationClaim
+  claimsB : LocationClaim
 
 claimValue : LocationClaim → ExclusiveLocation
 claimValue claimsA = locationA

@@ -63,7 +63,10 @@ data SourceAttribution : Set where
   repositoryOriginalSubdivision : SourceAttribution
 
 data ShellClass : Set where
-  lowHigh highLow highHighToLow nearDiagonal : ShellClass
+  lowHigh : ShellClass
+  highLow : ShellClass
+  highHighToLow : ShellClass
+  nearDiagonal : ShellClass
   farLow farHigh transition residual : ShellClass
 
 classAttribution : ShellClass → SourceAttribution

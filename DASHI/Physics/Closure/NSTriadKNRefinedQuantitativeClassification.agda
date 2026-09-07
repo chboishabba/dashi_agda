@@ -19,17 +19,27 @@ data LocalityRegime : Set where
     LocalityRegime
 
 data AngularRegime : Set where
-  angularGeneric angularSmall nearParallel nearAntiparallel : AngularRegime
+  angularGeneric : AngularRegime
+  angularSmall : AngularRegime
+  nearParallel : AngularRegime
+  nearAntiparallel : AngularRegime
 
 data PolarisationRegime : Set where
-  polarisationGeneric inputNullSuppressed outputOrthogonal : PolarisationRegime
+  polarisationGeneric : PolarisationRegime
+  inputNullSuppressed : PolarisationRegime
+  outputOrthogonal : PolarisationRegime
   helicalSelectionSuppressed : PolarisationRegime
 
 data CancellationOrbit : Set where
-  orderedSingleton swapPair realityPair completeTriadOrbit : CancellationOrbit
+  orderedSingleton : CancellationOrbit
+  swapPair : CancellationOrbit
+  realityPair : CancellationOrbit
+  completeTriadOrbit : CancellationOrbit
 
 data MultiplicityRegime : Set where
-  uniformlyBounded surfaceOrder volumeOrder : MultiplicityRegime
+  uniformlyBounded : MultiplicityRegime
+  surfaceOrder : MultiplicityRegime
+  volumeOrder : MultiplicityRegime
 
 record RefinedStage3Class : Set where
   constructor refined-class

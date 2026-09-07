@@ -22,7 +22,9 @@ import DASHI.Cognition.PNF.RuntimeThroughputConstitution as Throughput
 ------------------------------------------------------------------------
 
 data MeasuredPerformanceTier : Set where
-  architectural2x production1_5x production1_2x : MeasuredPerformanceTier
+  architectural2x : MeasuredPerformanceTier
+  production1_5x : MeasuredPerformanceTier
+  production1_2x : MeasuredPerformanceTier
 
 record RuntimeTimingBreakdown : Set where
   constructor runtimeTimingBreakdown

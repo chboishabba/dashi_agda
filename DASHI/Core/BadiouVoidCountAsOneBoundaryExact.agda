@@ -21,7 +21,8 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data PresentedMultiplicity : Set where
-  voidPresentation pluralPresentation : PresentedMultiplicity
+  voidPresentation : PresentedMultiplicity
+  pluralPresentation : PresentedMultiplicity
 
 data CountedPresentation : Set where
   countedAsOne : CountedPresentation

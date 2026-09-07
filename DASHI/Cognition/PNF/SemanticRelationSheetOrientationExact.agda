@@ -16,7 +16,9 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv; inv-invol)
 ------------------------------------------------------------------------
 
 data SemanticPosition3 : Set where
-  leftEntity rightEntity contextualEntity : SemanticPosition3
+  leftEntity : SemanticPosition3
+  rightEntity : SemanticPosition3
+  contextualEntity : SemanticPosition3
 
 record SemanticRelationSheet3 : Set where
   constructor semanticRelationSheet3

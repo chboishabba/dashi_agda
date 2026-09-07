@@ -31,13 +31,15 @@ import DASHI.Interop.PNFHyperfabric369 as Hyperfabric
 ------------------------------------------------------------------------
 
 data ArgumentState : Set where
-  professionallyValidatedArgument aiPseudoArgument : ArgumentState
+  professionallyValidatedArgument : ArgumentState
+  aiPseudoArgument : ArgumentState
 
 data FormalSurface : Set where
   polishedLegalSurface : FormalSurface
 
 data ValidationSurface : Set where
-  validatedSurface invalidSurface : ValidationSurface
+  validatedSurface : ValidationSurface
+  invalidSurface : ValidationSurface
 
 formalSurfaceObserver : Observer.Observer ArgumentState FormalSurface
 formalSurfaceObserver _ = polishedLegalSurface
@@ -73,7 +75,8 @@ validationStrictlyRefinesFormalSurface =
 ------------------------------------------------------------------------
 
 data ProfessionalGate : Set where
-  productionGate validationGate : ProfessionalGate
+  productionGate : ProfessionalGate
+  validationGate : ProfessionalGate
 
 record ClosureConfiguration : Set where
   constructor closureConfiguration

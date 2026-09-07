@@ -4,7 +4,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; -[1+_]) renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 
 data SU2Gen : Set where
-  T1 T2 T3 : SU2Gen
+  T1 : SU2Gen
+  T2 : SU2Gen
+  T3 : SU2Gen
 
 data SU2Signed : Set where
   zero : SU2Signed
@@ -29,4 +31,3 @@ canonicalSU2LieAlgebra =
     ; antisymmWitness = λ _ _ _ → refl
     ; jacobiWitness = λ _ _ _ → refl
     }
-

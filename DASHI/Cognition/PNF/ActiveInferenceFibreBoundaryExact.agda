@@ -23,10 +23,12 @@ import DASHI.Cognition.PNF.DecisionPotentialFibreExact as Potential
 ------------------------------------------------------------------------
 
 data Policy : Set where
-  remain withdraw : Policy
+  remain : Policy
+  withdraw : Policy
 
 data PolicyObserver : Set where
-  person institution : PolicyObserver
+  person : PolicyObserver
+  institution : PolicyObserver
 
 -- Distinct policy-pressure components.  Keeping them separate matters: equal
 -- total pressure need not mean equal epistemic/pragmatic structure.

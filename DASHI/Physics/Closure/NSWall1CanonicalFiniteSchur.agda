@@ -21,10 +21,14 @@ open import DASHI.Analysis.FiniteWeightedKernelSums
 ------------------------------------------------------------------------
 
 data LowMode : Set where
-  low100 low010 low001 : LowMode
+  low100 : LowMode
+  low010 : LowMode
+  low001 : LowMode
 
 data HighMode : Set where
-  high110 high101 high011 : HighMode
+  high110 : HighMode
+  high101 : HighMode
+  high011 : HighMode
 
 lowModes : List LowMode
 lowModes = low100 ∷ low010 ∷ low001 ∷ []

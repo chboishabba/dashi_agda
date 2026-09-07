@@ -148,7 +148,10 @@ classIndexMatchesFourSubsetCount = refl
 ------------------------------------------------------------------------
 
 data PrimeStep : Set where
-  times2 times3 times5 times11 : PrimeStep
+  times2 : PrimeStep
+  times3 : PrimeStep
+  times5 : PrimeStep
+  times11 : PrimeStep
 
 applyStep : PrimeStep → Nat → Nat
 applyStep times2 value = 2 * value

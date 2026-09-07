@@ -186,7 +186,8 @@ data ProjectionOperatorTag : Set where
   coarseProjectionP : ProjectionOperatorTag
 
 data ComplexityClassTag : Set where
-  polynomialTimeP nondeterministicPolynomialTimeNP : ComplexityClassTag
+  polynomialTimeP : ComplexityClassTag
+  nondeterministicPolynomialTimeNP : ComplexityClassTag
 
 record ComplexityBridgeClaimScope : Set where
   constructor complexityBridgeClaimScope

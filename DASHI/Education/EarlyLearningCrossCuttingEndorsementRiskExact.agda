@@ -25,13 +25,17 @@ import DASHI.Education.EarlyLearningReappropriationBoundaryExact as Existing
 ------------------------------------------------------------------------
 
 data SourceCredibility : Set where
-  lowCredibility domainRelevantCredibility : SourceCredibility
+  lowCredibility : SourceCredibility
+  domainRelevantCredibility : SourceCredibility
 
 data IdeologicalRelation : Set where
-  expectedAlignment crossCuttingUnexpected : IdeologicalRelation
+  expectedAlignment : IdeologicalRelation
+  crossCuttingUnexpected : IdeologicalRelation
 
 data QuoteSurface : Set where
-  fullConditionalStatement atomOnlyExcerpt headlineEndorsement : QuoteSurface
+  fullConditionalStatement : QuoteSurface
+  atomOnlyExcerpt : QuoteSurface
+  headlineEndorsement : QuoteSurface
 
 record EndorsementRiskSurface : Set where
   constructor endorsementRiskSurface

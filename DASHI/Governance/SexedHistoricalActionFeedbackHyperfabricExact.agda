@@ -45,7 +45,12 @@ data FeedbackChannel : Set where
 
 
 data FeedbackStatus : Set where
-  expands contracts revises persists contested unresolved : FeedbackStatus
+  expands : FeedbackStatus
+  contracts : FeedbackStatus
+  revises : FeedbackStatus
+  persists : FeedbackStatus
+  contested : FeedbackStatus
+  unresolved : FeedbackStatus
 
 record ActionFeedbackReceipt : Set where
   constructor action-feedback-receipt

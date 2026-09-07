@@ -56,7 +56,8 @@ sharedStageMatchesPriorCoverageOwner = refl
 ------------------------------------------------------------------------
 
 data CoverageProbe : Set where
-  sharedContextProbe closureResidualProbe : CoverageProbe
+  sharedContextProbe : CoverageProbe
+  closureResidualProbe : CoverageProbe
 
 probeMove : CoverageProbe → Actionability.InformationMove
 probeMove sharedContextProbe =
@@ -79,7 +80,10 @@ probeMove closureResidualProbe =
 ------------------------------------------------------------------------
 
 data CoverageStage : Set where
-  startStage sharedStage closureStage terminalStage : CoverageStage
+  startStage : CoverageStage
+  sharedStage : CoverageStage
+  closureStage : CoverageStage
+  terminalStage : CoverageStage
 
 stageChart : CoverageStage → Synthesis.SynthesisChoice27
 stageChart startStage = initialCoverage
@@ -116,10 +120,12 @@ sameTerminalCoverage = refl
 ------------------------------------------------------------------------
 
 data ProbeOrderResidue : Set where
-  sharedThenClosureResidue closureThenSharedResidue : ProbeOrderResidue
+  sharedThenClosureResidue : ProbeOrderResidue
+  closureThenSharedResidue : ProbeOrderResidue
 
 data CoverageHistory : Set where
-  historySharedThenClosure historyClosureThenShared : CoverageHistory
+  historySharedThenClosure : CoverageHistory
+  historyClosureThenShared : CoverageHistory
 
 terminalObserver : CoverageHistory → Synthesis.SynthesisChoice27
 terminalObserver historySharedThenClosure = fullyClosedCoverage

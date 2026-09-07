@@ -7,25 +7,41 @@ open import DASHI.Core.ProofLens
 -- Minimal concrete carriers show that the role grammar is generated from the
 -- domain parameter rather than hand-authored as QiOperator, DonkeyOperator, …
 data DonkeyState : Set where
-  resting working recovering : DonkeyState
+  resting : DonkeyState
+  working : DonkeyState
+  recovering : DonkeyState
 
 data DonkeyAction : Set where
-  feed rest move groom : DonkeyAction
+  feed : DonkeyAction
+  rest : DonkeyAction
+  move : DonkeyAction
+  groom : DonkeyAction
 
 data DonkeyObservation : Set where
-  gait hydration load stress : DonkeyObservation
+  gait : DonkeyObservation
+  hydration : DonkeyObservation
+  load : DonkeyObservation
+  stress : DonkeyObservation
 
 data QiState : Set where
-  openFlow blockedFlow balancedFlow : QiState
+  openFlow : QiState
+  blockedFlow : QiState
+  balancedFlow : QiState
 
 data QiAction : Set where
-  redirect soften openThreshold : QiAction
+  redirect : QiAction
+  soften : QiAction
+  openThreshold : QiAction
 
 data QiObservation : Set where
-  circulation pressure boundary : QiObservation
+  circulation : QiObservation
+  pressure : QiObservation
+  boundary : QiObservation
 
 data EvidenceToken : Set where
-  observed modelled historical : EvidenceToken
+  observed : EvidenceToken
+  modelled : EvidenceToken
+  historical : EvidenceToken
 
 DonkeyRole : FormalRole → Set
 DonkeyRole carrierSpaceRole    = DonkeyState

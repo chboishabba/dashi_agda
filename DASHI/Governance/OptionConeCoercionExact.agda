@@ -99,7 +99,9 @@ EverySafeRefusalPathPenalisedWitnessesCoerciveControl
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  beforeResponse coerciveOutcome communityOutcome : DemoState
+  beforeResponse : DemoState
+  coerciveOutcome : DemoState
+  communityOutcome : DemoState
 
 data DemoOption : Set where
   immediatePhysicalSafety housingContinuity kinParticipation futureHelpSeeking :

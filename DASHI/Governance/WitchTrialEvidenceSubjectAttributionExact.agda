@@ -39,13 +39,15 @@ massachusettsArchiveReceipt =
 ------------------------------------------------------------------------
 
 data FineSpectralState : Set where
-  endogenousExperience externallyCausedExperience : FineSpectralState
+  endogenousExperience : FineSpectralState
+  externallyCausedExperience : FineSpectralState
 
 data SpectralReportSurface : Set where
   sameApparitionReport : SpectralReportSurface
 
 data CausalMechanismClass : Set where
-  internalOrUnresolvedMechanism identifiedExternalMechanism : CausalMechanismClass
+  internalOrUnresolvedMechanism : CausalMechanismClass
+  identifiedExternalMechanism : CausalMechanismClass
 
 spectralReport : FineSpectralState → SpectralReportSurface
 spectralReport endogenousExperience = sameApparitionReport

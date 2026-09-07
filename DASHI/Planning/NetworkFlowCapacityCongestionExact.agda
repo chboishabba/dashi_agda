@@ -12,7 +12,13 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 ------------------------------------------------------------------------
 
 data NetworkKind : Set where
-  road transit water power communications ecologicalCorridor spatialRouting : NetworkKind
+  road : NetworkKind
+  transit : NetworkKind
+  water : NetworkKind
+  power : NetworkKind
+  communications : NetworkKind
+  ecologicalCorridor : NetworkKind
+  spatialRouting : NetworkKind
 
 record Demand : Set where
   constructor demand

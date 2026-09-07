@@ -36,7 +36,10 @@ data CutoffWindowPayment : Set where
 
 
 data PaymentStatus : Set where
-  ownedExternally live pruned optional : PaymentStatus
+  ownedExternally : PaymentStatus
+  live : PaymentStatus
+  pruned : PaymentStatus
+  optional : PaymentStatus
 
 paymentStatus : CutoffWindowPayment → PaymentStatus
 paymentStatus reproveFarShellDecay = pruned

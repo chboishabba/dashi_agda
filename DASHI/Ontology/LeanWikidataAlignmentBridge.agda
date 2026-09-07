@@ -18,7 +18,9 @@ import DASHI.Core.AuthorityNonPromotionCore as Authority
 ------------------------------------------------------------------------
 
 data AlignmentWitnessKind : Set where
-  subclassAlignment instanceAlignment disjointnessAlignment : AlignmentWitnessKind
+  subclassAlignment : AlignmentWitnessKind
+  instanceAlignment : AlignmentWitnessKind
+  disjointnessAlignment : AlignmentWitnessKind
 
 record LeanAlignmentWitness : Set where
   constructor leanAlignmentWitness

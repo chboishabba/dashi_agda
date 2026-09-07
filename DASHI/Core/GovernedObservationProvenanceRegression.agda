@@ -19,13 +19,15 @@ import DASHI.Core.GovernedObservationProvenanceExact as Governed
 ------------------------------------------------------------------------
 
 data KnowledgeState : Set where
-  restrictedCarrier openCarrier : KnowledgeState
+  restrictedCarrier : KnowledgeState
+  openCarrier : KnowledgeState
 
 data ValueSurface : Set where
   sameValue : ValueSurface
 
 data Permission : Set where
-  restrictedUse openUse : Permission
+  restrictedUse : Permission
+  openUse : Permission
 
 knowledgeValue : KnowledgeState → ValueSurface
 knowledgeValue restrictedCarrier = sameValue
@@ -51,13 +53,15 @@ knowledgeValueCannotBePermissionSafe =
 ------------------------------------------------------------------------
 
 data ReleaseState : Set where
-  unverifiedRelease verifiedRelease : ReleaseState
+  unverifiedRelease : ReleaseState
+  verifiedRelease : ReleaseState
 
 data ReleaseSurface : Set where
   sameRelease : ReleaseSurface
 
 data Verification : Set where
-  unverified verified : Verification
+  unverified : Verification
+  verified : Verification
 
 releaseSurface : ReleaseState → ReleaseSurface
 releaseSurface unverifiedRelease = sameRelease
@@ -83,13 +87,15 @@ releaseSurfaceCannotBeEpistemicallySafe =
 ------------------------------------------------------------------------
 
 data EventState : Set where
-  causeA causeB : EventState
+  causeA : EventState
+  causeB : EventState
 
 data EventSurface : Set where
   sameEvent : EventSurface
 
 data CauseAttribution : Set where
-  firstCause secondCause : CauseAttribution
+  firstCause : CauseAttribution
+  secondCause : CauseAttribution
 
 eventSurface : EventState → EventSurface
 eventSurface causeA = sameEvent

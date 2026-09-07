@@ -27,7 +27,10 @@ import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 ------------------------------------------------------------------------
 
 data ProtectedGroupKind : Set where
-  nationalGroup ethnicalGroup racialGroup religiousGroup : ProtectedGroupKind
+  nationalGroup : ProtectedGroupKind
+  ethnicalGroup : ProtectedGroupKind
+  racialGroup : ProtectedGroupKind
+  religiousGroup : ProtectedGroupKind
 
 data ConventionAct : Set where
   killingMembers : ConventionAct

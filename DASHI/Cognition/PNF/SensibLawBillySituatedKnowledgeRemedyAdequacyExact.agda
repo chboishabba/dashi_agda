@@ -92,10 +92,12 @@ data ConsultationSurface : Set where
   statementRecorded : ConsultationSurface
 
 data AuthorityBearingParticipation : Set where
-  authorityErased authorityPreserved : AuthorityBearingParticipation
+  authorityErased : AuthorityBearingParticipation
+  authorityPreserved : AuthorityBearingParticipation
 
 data ReciprocalImplementation : Set where
-  oneWayExtraction reciprocalFeedback : ReciprocalImplementation
+  oneWayExtraction : ReciprocalImplementation
+  reciprocalFeedback : ReciprocalImplementation
 
 consultationSurface : ConsultationSurfaceState → ConsultationSurface
 consultationSurface _ = statementRecorded

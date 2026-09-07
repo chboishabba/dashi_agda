@@ -20,7 +20,16 @@ open import DASHI.Core.Prelude
 import DASHI.Foundations.Wette1969RuleRevisionExact as Revision
 
 data Rule93Candidate : Set where
-  r931 r932 r933 r934 r935 r936 r937 r938 r939 r9310 : Rule93Candidate
+  r931 : Rule93Candidate
+  r932 : Rule93Candidate
+  r933 : Rule93Candidate
+  r934 : Rule93Candidate
+  r935 : Rule93Candidate
+  r936 : Rule93Candidate
+  r937 : Rule93Candidate
+  r938 : Rule93Candidate
+  r939 : Rule93Candidate
+  r9310 : Rule93Candidate
   r9311 r9312 r9313 r9314 r9315 r9316 r9317 r9318 r9319 r9320 : Rule93Candidate
   r9321 r9322 r9323 r9324 r9325 r9326 r9327 r9328 r9329 r9330 : Rule93Candidate
 

@@ -33,7 +33,10 @@ import DASHI.Reasoning.Spacy369CoverageHyperfabricMonsterBoundaryExact as Monste
 ------------------------------------------------------------------------
 
 data ParetoKind4 : Set where
-  leftStrictKind rightStrictKind incomparableKind equivalentKind : ParetoKind4
+  leftStrictKind : ParetoKind4
+  rightStrictKind : ParetoKind4
+  incomparableKind : ParetoKind4
+  equivalentKind : ParetoKind4
 
 data ParetoFourWay
     (left right : Pareto.SituatedInformationProfile) : Set where
@@ -129,7 +132,8 @@ ternaryParetoProjectionCannotRecoverFullFourWayKind =
 ------------------------------------------------------------------------
 
 data ParetoResidualBit : Set where
-  nonEquivalentResidual equivalentResidual : ParetoResidualBit
+  nonEquivalentResidual : ParetoResidualBit
+  equivalentResidual : ParetoResidualBit
 
 record ParetoTritResidualCode : Set where
   constructor paretoTritResidualCode
@@ -174,7 +178,8 @@ ssspThreeByTwoResidualPrecedent = SSSP.canonicalBinaryTernaryFactorBoundary
 ------------------------------------------------------------------------
 
 data RoutedRevision : Set where
-  forwardFirst backwardFirst : RoutedRevision
+  forwardFirst : RoutedRevision
+  backwardFirst : RoutedRevision
 
 revisionHistory : RoutedRevision → Square.RevisionHistory
 revisionHistory forwardFirst = Square.historyForwardThenBackward

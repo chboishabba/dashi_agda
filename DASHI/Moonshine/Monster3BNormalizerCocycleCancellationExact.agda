@@ -28,7 +28,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 ------------------------------------------------------------------------
 
 data Phase3 : Set where
-  phaseOne phaseZeta phaseZetaSquared : Phase3
+  phaseOne : Phase3
+  phaseZeta : Phase3
+  phaseZetaSquared : Phase3
 
 infixl 7 _mulPhase_
 

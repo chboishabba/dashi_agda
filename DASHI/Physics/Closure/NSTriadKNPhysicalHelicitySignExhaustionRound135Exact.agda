@@ -31,7 +31,8 @@ import DASHI.Physics.Closure.NSTriadKNHeterochiralMinorityLegFieldRound102Exact 
 import DASHI.Physics.Closure.NSTriadKNPhysicalHeterochiralMinorityWaleffeWeldRound134Exact as R134
 
 data HelicitySign : Set where
-  plus minus : HelicitySign
+  plus : HelicitySign
+  minus : HelicitySign
 
 signedRadius :
   ∀ {r} {F : C3.RealField r} →

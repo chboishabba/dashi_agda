@@ -52,7 +52,10 @@ data FinalHighOrdinateLeaf : Set where
 
 
 data FinalLeafState : Set where
-  live downstream diagnostic pruned : FinalLeafState
+  live : FinalLeafState
+  downstream : FinalLeafState
+  diagnostic : FinalLeafState
+  pruned : FinalLeafState
 
 finalLeafState : FinalHighOrdinateLeaf -> FinalLeafState
 finalLeafState universalPoleQuotientSignedOff = live

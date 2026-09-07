@@ -26,7 +26,9 @@ two : Nat
 two = suc one
 
 data SurveyRegion : Set where
-  cohortRegion respondentRegion nonresponseRegion : SurveyRegion
+  cohortRegion : SurveyRegion
+  respondentRegion : SurveyRegion
+  nonresponseRegion : SurveyRegion
 
 data CohortConsumer : Set where
   cohortConsumer : CohortConsumer

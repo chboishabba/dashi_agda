@@ -29,15 +29,20 @@ x ≢ y = x ≡ y → ⊥
 ------------------------------------------------------------------------
 
 data NameProductionStage : Set where
-  conceptualActivation lemmaSelection phonologicalEncoding : NameProductionStage
+  conceptualActivation : NameProductionStage
+  lemmaSelection : NameProductionStage
+  phonologicalEncoding : NameProductionStage
   articulation monitoring correction : NameProductionStage
 
 data IntrusionKind : Set where
-  semanticAssociateIntrusion sharedFeatureIntrusion phonologicalIntrusion : IntrusionKind
+  semanticAssociateIntrusion : IntrusionKind
+  sharedFeatureIntrusion : IntrusionKind
+  phonologicalIntrusion : IntrusionKind
   familyAssociationIntrusion undeterminedIntrusion : IntrusionKind
 
 data InterpretationStatus : Set where
-  historicalFreudianReading modernLexicalCompetitionReading : InterpretationStatus
+  historicalFreudianReading : InterpretationStatus
+  modernLexicalCompetitionReading : InterpretationStatus
   contextualHypothesisOnly noMotiveInference : InterpretationStatus
 
 record NameCandidate : Set where

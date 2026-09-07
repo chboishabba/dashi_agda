@@ -24,7 +24,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data OddResponseTerm : Set where
-  linearTerm cubicTerm remainderTerm : OddResponseTerm
+  linearTerm : OddResponseTerm
+  cubicTerm : OddResponseTerm
+  remainderTerm : OddResponseTerm
 
 radiusDegree : OddResponseTerm → Nat
 radiusDegree linearTerm = 1

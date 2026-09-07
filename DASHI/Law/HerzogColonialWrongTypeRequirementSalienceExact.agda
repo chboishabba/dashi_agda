@@ -25,7 +25,9 @@ data HerzogInterpretation : Set where
 
 
 data RequirementObservation : Set where
-  unsupported unresolved supported : RequirementObservation
+  unsupported : RequirementObservation
+  unresolved : RequirementObservation
+  supported : RequirementObservation
 
 currentLiveInterpretations : HerzogInterpretation → Set
 currentLiveInterpretations securityClassificationOnly = ⊤

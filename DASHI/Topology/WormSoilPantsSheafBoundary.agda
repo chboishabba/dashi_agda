@@ -16,7 +16,13 @@ data SupportRole : Set where
   soilNegative : SupportRole
 
 data CellStatus : Set where
-  activeCell latentCell forbiddenCell unresolvedCell unobservedCell incompatibleCell collapsedCell : CellStatus
+  activeCell : CellStatus
+  latentCell : CellStatus
+  forbiddenCell : CellStatus
+  unresolvedCell : CellStatus
+  unobservedCell : CellStatus
+  incompatibleCell : CellStatus
+  collapsedCell : CellStatus
 
 record ClopenCell : Set where
   constructor clopenCell
@@ -46,7 +52,11 @@ record WormSoilPartition (Cell : Set) : Set₁ where
 -- disconnected p-adic fibre is itself a connected real surface.
 
 data TubeEvent : Set where
-  continueTube splitTube mergeTube reconnectTube dieBackTube : TubeEvent
+  continueTube : TubeEvent
+  splitTube : TubeEvent
+  mergeTube : TubeEvent
+  reconnectTube : TubeEvent
+  dieBackTube : TubeEvent
 
 record PantsJunction : Set where
   constructor pantsJunction
@@ -89,7 +99,9 @@ rigidDryBundleProfile =
     "parallel dry strands retain identity but do not yet carry enough deformation data to realise a braid"
 
 data GluingOutcome : Set where
-  gluesExactly needsFinerCover persistentObstruction : GluingOutcome
+  gluesExactly : GluingOutcome
+  needsFinerCover : GluingOutcome
+  persistentObstruction : GluingOutcome
 
 record NoodleGluingReceipt : Set where
   constructor noodleGluingReceipt

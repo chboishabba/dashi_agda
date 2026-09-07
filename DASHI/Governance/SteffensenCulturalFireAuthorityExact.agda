@@ -17,10 +17,13 @@ import DASHI.Governance.IndigenousEnvironmentalJusticeSourceRegistryExact as Sou
 ------------------------------------------------------------------------
 
 data Agent : Set where
-  traditionalCustodian trainedExternalPractitioner externalReader : Agent
+  traditionalCustodian : Agent
+  trainedExternalPractitioner : Agent
+  externalReader : Agent
 
 data Country : Set where
-  homeCountry otherCountry : Country
+  homeCountry : Country
+  otherCountry : Country
 
 data FireKnowledge : Set where
   culturalBurning : FireKnowledge

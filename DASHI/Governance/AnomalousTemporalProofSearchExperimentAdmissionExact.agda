@@ -28,7 +28,9 @@ data CandidateExperiment : Set where
 
 
 data ExperimentalValue : Set where
-  supportsDistinction doesNotSupportDistinction unresolvedOutcome : ExperimentalValue
+  supportsDistinction : ExperimentalValue
+  doesNotSupportDistinction : ExperimentalValue
+  unresolvedOutcome : ExperimentalValue
 
 data ExperimentalDimension : Set where
   informationalDimension : ExperimentalDimension

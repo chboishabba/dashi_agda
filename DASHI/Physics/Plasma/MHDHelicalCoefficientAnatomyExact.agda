@@ -25,7 +25,8 @@ import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 ------------------------------------------------------------------------
 
 data BinarySign : Set where
-  positive negative : BinarySign
+  positive : BinarySign
+  negative : BinarySign
 
 data MHDAmplitudeChannel : Set where
   velocityVelocity : MHDAmplitudeChannel

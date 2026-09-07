@@ -302,13 +302,16 @@ psilocybinEvidencePath = Temporal.pathStep psilocybinMetaTransition Temporal.pat
 ------------------------------------------------------------------------
 
 data PresentHistory : Set where
-  presentimentHistory ganzfeldHistory : PresentHistory
+  presentimentHistory : PresentHistory
+  ganzfeldHistory : PresentHistory
 
 data PresentPattern : Set where
-  repeatedPhysiologyMetaPath longstandingFreeResponsePath : PresentPattern
+  repeatedPhysiologyMetaPath : PresentPattern
+  longstandingFreeResponsePath : PresentPattern
 
 data NextExperiment : Set where
-  preregisteredPhysiologyReplication adversarialGanzfeldReplication : NextExperiment
+  preregisteredPhysiologyReplication : NextExperiment
+  adversarialGanzfeldReplication : NextExperiment
 
 historyChoiceSurface : HistoryChoice.HistoryConditionedChoiceSurface
 historyChoiceSurface = record

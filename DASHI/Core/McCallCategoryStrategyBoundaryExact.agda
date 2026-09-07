@@ -16,7 +16,9 @@ module DASHI.Core.McCallCategoryStrategyBoundaryExact where
 open import DASHI.Core.Prelude
 
 data CategoryStrategy : Set where
-  anticategorical intracategorical intercategorical : CategoryStrategy
+  anticategorical : CategoryStrategy
+  intracategorical : CategoryStrategy
+  intercategorical : CategoryStrategy
 
 data FixedAxisModel : Set where fixedAxisModel : FixedAxisModel
 data AnticategoricalConclusion : Set where categoryRefusalConclusion : AnticategoricalConclusion

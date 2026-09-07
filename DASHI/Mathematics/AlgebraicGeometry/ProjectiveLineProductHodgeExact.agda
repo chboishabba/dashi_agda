@@ -42,7 +42,8 @@ bidegreeExtensionality : ∀ {left right} →
 bidegreeExtensionality {bidegree _ _} {bidegree _ _} refl refl = refl
 
 data P1HodgeBasis : Set where
-  p1Unit p1PointClass : P1HodgeBasis
+  p1Unit : P1HodgeBasis
+  p1PointClass : P1HodgeBasis
 
 p1Bidegree : P1HodgeBasis → Bidegree
 p1Bidegree p1Unit = bidegree 0 0

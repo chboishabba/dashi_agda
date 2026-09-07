@@ -53,10 +53,12 @@ localValidityDoesNotAutoPromoteToGlobalRoutability ()
 ------------------------------------------------------------------------
 
 data ToyComponent : Set where
-  componentA componentB : ToyComponent
+  componentA : ToyComponent
+  componentB : ToyComponent
 
 data ToySite : Set where
-  siteA siteB : ToySite
+  siteA : ToySite
+  siteB : ToySite
 
 data ToyRelation : Set where
   sharedCorridor : ToyRelation

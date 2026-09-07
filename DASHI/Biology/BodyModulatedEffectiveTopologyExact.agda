@@ -15,7 +15,8 @@ import DASHI.Biology.Levin.CrossFrequencyEffectiveTopologyExact as Cross
 ------------------------------------------------------------------------
 
 data BodyTopologyContext : Set where
-  regulatedTopology mobilisedTopology : BodyTopologyContext
+  regulatedTopology : BodyTopologyContext
+  mobilisedTopology : BodyTopologyContext
 
 bodyAt : BodyTopologyContext → Body.BodyState
 bodyAt regulatedTopology = Body.regulatedBody

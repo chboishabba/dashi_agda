@@ -15,7 +15,8 @@ open import DASHI.Cognition.PNF.SetBasedDemandPlanning
 open import DASHI.Cognition.PNF.SpacyNumericProjection
 
 data ExampleDigest : Set where
-  digestA digestB : ExampleDigest
+  digestA : ExampleDigest
+  digestB : ExampleDigest
 
 exampleNumericSymbol : NumericSymbol ExampleDigest
 exampleNumericSymbol =

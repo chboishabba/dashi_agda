@@ -16,7 +16,10 @@ import DASHI.Law.EvidenceProvenanceDependencyDagExact as Dag
 ------------------------------------------------------------------------
 
 data FieldState : Set where
-  observedTrue observedFalse fieldMissing fieldConflict : FieldState
+  observedTrue : FieldState
+  observedFalse : FieldState
+  fieldMissing : FieldState
+  fieldConflict : FieldState
 
 record EncounterFixture : Set where
   constructor encounterFixture

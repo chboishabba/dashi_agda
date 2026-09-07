@@ -137,7 +137,8 @@ quantityTransportCompositionExact
   congQuantity refl = refl
 
 data D4ActionKind : Set where
-  geometricSlotPermutation covariantBackgroundTransport : D4ActionKind
+  geometricSlotPermutation : D4ActionKind
+  covariantBackgroundTransport : D4ActionKind
 
 geometricIsNotCovariant :
   geometricSlotPermutation ≡ covariantBackgroundTransport → ⊥

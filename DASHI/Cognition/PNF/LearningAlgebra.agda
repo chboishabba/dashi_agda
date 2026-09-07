@@ -10,7 +10,9 @@ import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 
 data LearningKind : Set where
-  revaluationLearning habituationLearning reinforcementLearning : LearningKind
+  revaluationLearning : LearningKind
+  habituationLearning : LearningKind
+  reinforcementLearning : LearningKind
   extinctionLearning trustFormationLearning contextGeneralisationLearning : LearningKind
   contextSpecificInhibitionLearning phaseRealignmentLearning : LearningKind
 

@@ -25,7 +25,9 @@ import DASHI.Physics.Semiconductor.Device.DriftDiffusionContinuityExact as Trans
 ------------------------------------------------------------------------
 
 data DeviceIterate : Set where
-  farIterate nearIterate fixedIterate : DeviceIterate
+  farIterate : DeviceIterate
+  nearIterate : DeviceIterate
+  fixedIterate : DeviceIterate
 
 potentialCode : DeviceIterate → Nat
 potentialCode farIterate = 2
@@ -112,7 +114,9 @@ canonicalDependencies = record
 ------------------------------------------------------------------------
 
 data BasinDistance : Set where
-  d0 d1 d2 : BasinDistance
+  d0 : BasinDistance
+  d1 : BasinDistance
+  d2 : BasinDistance
 
 distance : DeviceIterate → DeviceIterate → BasinDistance
 distance farIterate farIterate = d0

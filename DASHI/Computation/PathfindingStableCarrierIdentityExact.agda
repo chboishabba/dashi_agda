@@ -31,19 +31,23 @@ open CarrierIso public
 -- BFS: two same-layer queue presentations.  This is not a generic Bit2 and is
 -- not the Base369 binary-orientation carrier.
 data BFSWithinLayerOrder2 : Set where
-  bfsLeftThenRight bfsRightThenLeft : BFSWithinLayerOrder2
+  bfsLeftThenRight : BFSWithinLayerOrder2
+  bfsRightThenLeft : BFSWithinLayerOrder2
 
 -- Dijkstra: two tie representatives for equal current minimum key.
 data DijkstraEqualMinTie2 : Set where
-  dijkstraFirstA dijkstraFirstB : DijkstraEqualMinTie2
+  dijkstraFirstA : DijkstraEqualMinTie2
+  dijkstraFirstB : DijkstraEqualMinTie2
 
 -- A*: two representatives in one equal-f plateau.
 data AStarEqualFPlateau2 : Set where
-  aStarPlateauAFirst aStarPlateauBFirst : AStarEqualFPlateau2
+  aStarPlateauAFirst : AStarEqualFPlateau2
+  aStarPlateauBFirst : AStarEqualFPlateau2
 
 -- Bellman-Ford: two schedules in a finite commuting/confluent regression.
 data BellmanFordSchedule2 : Set where
-  bellmanFordScheduleAB bellmanFordScheduleBA : BellmanFordSchedule2
+  bellmanFordScheduleAB : BellmanFordSchedule2
+  bellmanFordScheduleBA : BellmanFordSchedule2
 
 -- Bidirectional search carries two independent frontier-tail choices.
 record BidirectionalTailPair : Set where
@@ -57,7 +61,9 @@ open BidirectionalTailPair public
 -- Three abstract observation roles that occur in a tiny frontier consumer.
 -- The names are algorithmic, not phase labels.
 data FrontierObservation3 : Set where
-  frontierNegative frontierNeutral frontierPositive : FrontierObservation3
+  frontierNegative : FrontierObservation3
+  frontierNeutral : FrontierObservation3
+  frontierPositive : FrontierObservation3
 
 -- A six-state pathfinding chart: one ternary consumer coordinate and one
 -- binary residual coordinate.  The product is literal; no cyclic C6 action is

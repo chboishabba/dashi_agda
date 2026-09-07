@@ -17,7 +17,8 @@ import DASHI.Biology.Levin.CrossFrequencyEffectiveTopologyExact as CrossFrequenc
 ------------------------------------------------------------------------
 
 data TriggerContext : Set where
-  firstControlContext secondControlContext : TriggerContext
+  firstControlContext : TriggerContext
+  secondControlContext : TriggerContext
 
 contextTick : TriggerContext → Miller.Tick2
 contextTick firstControlContext = Miller.firstTick

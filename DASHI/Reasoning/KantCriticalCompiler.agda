@@ -14,16 +14,20 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data KantCategory : Set where
-  unity plurality totality : KantCategory
+  unity : KantCategory
+  plurality : KantCategory
+  totality : KantCategory
   reality negation limitation : KantCategory
   substance causality community : KantCategory
   possibility existence necessity : KantCategory
 
 data JudgmentMode : Set where
-  determiningJudgment reflectiveJudgment : JudgmentMode
+  determiningJudgment : JudgmentMode
+  reflectiveJudgment : JudgmentMode
 
 data IdeaUse : Set where
-  regulativeUse constitutiveUse : IdeaUse
+  regulativeUse : IdeaUse
+  constitutiveUse : IdeaUse
 
 data CriticalBoundary : Set where
   thingInItselfBoundary : CriticalBoundary

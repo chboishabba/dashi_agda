@@ -14,7 +14,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data CrossProverAuthority : Set where
-  checkedLeanReturn openAgdaObligation : CrossProverAuthority
+  checkedLeanReturn : CrossProverAuthority
+  openAgdaObligation : CrossProverAuthority
 
 data WindowRegime : Set where
   narrowQuarterPeriod : WindowRegime

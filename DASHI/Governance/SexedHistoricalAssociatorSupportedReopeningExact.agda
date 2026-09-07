@@ -29,7 +29,12 @@ import DASHI.Governance.SexedHistoricalDistributedCompatibilityReopeningExact as
 ------------------------------------------------------------------------
 
 data SignatureLine : Set where
-  line1 line2 line3 line4 line5 line6 : SignatureLine
+  line1 : SignatureLine
+  line2 : SignatureLine
+  line3 : SignatureLine
+  line4 : SignatureLine
+  line5 : SignatureLine
+  line6 : SignatureLine
 
 data InAssociatorSupport : SignatureLine → Set where
   line1Supported : InAssociatorSupport line1

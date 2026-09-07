@@ -23,13 +23,16 @@ data InterventionLabel : Set where
   expandedSubsidisedECEC : InterventionLabel
 
 data ObservedFamilyPosition : Set where
-  observedHigherResource observedLowerResource : ObservedFamilyPosition
+  observedHigherResource : ObservedFamilyPosition
+  observedLowerResource : ObservedFamilyPosition
 
 data HiddenCounterfactual : Set where
-  strongerAlternativeCare weakerAlternativeCare : HiddenCounterfactual
+  strongerAlternativeCare : HiddenCounterfactual
+  weakerAlternativeCare : HiddenCounterfactual
 
 data EffectDirection : Set where
-  adverseDirection beneficialDirection : EffectDirection
+  adverseDirection : EffectDirection
+  beneficialDirection : EffectDirection
 
 record SituatedExposure : Set where
   constructor situatedExposure
@@ -88,7 +91,8 @@ data CommonObservedGroup : Set where
   sameObservedGroup : CommonObservedGroup
 
 data WithinGroupState : Set where
-  groupBetterCounterfactual groupWorseCounterfactual : WithinGroupState
+  groupBetterCounterfactual : WithinGroupState
+  groupWorseCounterfactual : WithinGroupState
 
 observedGroupProjection : WithinGroupState → CommonObservedGroup
 observedGroupProjection groupBetterCounterfactual = sameObservedGroup

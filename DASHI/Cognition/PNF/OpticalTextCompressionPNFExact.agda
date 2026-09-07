@@ -43,13 +43,16 @@ textOrPixelsDOI = "10.18653/v1/2025.findings-emnlp.558"
 ------------------------------------------------------------------------
 
 data RepresentationModality : Set where
-  textModality visualModality latentModality : RepresentationModality
+  textModality : RepresentationModality
+  visualModality : RepresentationModality
+  latentModality : RepresentationModality
 
 data SurfaceText : Set where
   sameRenderedSentence : SurfaceText
 
 data Provenance : Set where
-  sourceA sourceB : Provenance
+  sourceA : Provenance
+  sourceB : Provenance
 
 record FineTextState : Set where
   constructor fineTextState
@@ -92,10 +95,13 @@ provenanceDistinguishesFineStates ()
 ------------------------------------------------------------------------
 
 data ConsumerQuery : Set where
-  askSurface askProvenance : ConsumerQuery
+  askSurface : ConsumerQuery
+  askProvenance : ConsumerQuery
 
 data ConsumerObservation : Set where
-  surfaceObserved sourceAObserved sourceBObserved : ConsumerObservation
+  surfaceObserved : ConsumerObservation
+  sourceAObserved : ConsumerObservation
+  sourceBObserved : ConsumerObservation
 
 observeFine : ConsumerQuery → FineTextState → ConsumerObservation
 observeFine askSurface state = surfaceObserved

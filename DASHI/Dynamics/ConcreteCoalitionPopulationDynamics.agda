@@ -10,10 +10,12 @@ data _⊎_ (X Y : Set) : Set where
   inj₂ : Y → X ⊎ Y
 
 data Competitor : Set where
-  A B : Competitor
+  A : Competitor
+  B : Competitor
 
 data PartnerState : Set where
-  unpaired paired : PartnerState
+  unpaired : PartnerState
+  paired : PartnerState
 
 record PopulationProfile : Set where
   constructor profile
@@ -78,7 +80,8 @@ competitorMutationInvolutive BA = refl
 competitorMutationInvolutive BB = refl
 
 data OrbitClass : Set where
-  fixedA fixedB : OrbitClass
+  fixedA : OrbitClass
+  fixedB : OrbitClass
 
 classifySelectionOrbit : PopulationProfile → OrbitClass
 classifySelectionOrbit AA = fixedA
@@ -95,7 +98,9 @@ selectionReachesRepresentative BA = inj₂ refl
 selectionReachesRepresentative BB = inj₂ refl
 
 data SelectionTrit : Set where
-  negative neutral positive : SelectionTrit
+  negative : SelectionTrit
+  neutral : SelectionTrit
+  positive : SelectionTrit
 
 encodeSelectionTrit : PopulationProfile → SelectionTrit
 encodeSelectionTrit AA = negative

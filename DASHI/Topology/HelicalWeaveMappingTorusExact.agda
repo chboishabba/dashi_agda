@@ -10,7 +10,9 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data Phase3 : Set where
-  phase0 phase1 phase2 : Phase3
+  phase0 : Phase3
+  phase1 : Phase3
+  phase2 : Phase3
 
 rotatePhase : Phase3 → Phase3
 rotatePhase phase0 = phase1

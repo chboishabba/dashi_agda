@@ -35,13 +35,19 @@ transitionSpan : Nat
 transitionSpan = 2
 
 data PhysicalLeg : Set where
-  leftLeg rightLeg outputLeg : PhysicalLeg
+  leftLeg : PhysicalLeg
+  rightLeg : PhysicalLeg
+  outputLeg : PhysicalLeg
 
 data FrozenView : Set where
-  outputView firstAdjointView secondAdjointView : FrozenView
+  outputView : FrozenView
+  firstAdjointView : FrozenView
+  secondAdjointView : FrozenView
 
 data OrderedPiece : Set where
-  unsplitPiece directPiece swappedPiece : OrderedPiece
+  unsplitPiece : OrderedPiece
+  directPiece : OrderedPiece
+  swappedPiece : OrderedPiece
 
 data GeometryTag : Set where
   leftLowTag rightLowTag outputLowTag comparableTag transitionTag residualTag :

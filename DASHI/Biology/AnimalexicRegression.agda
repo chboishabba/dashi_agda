@@ -10,13 +10,18 @@ import DASHI.Core.AssumptionIndexedReopeningExact as Reopen
 import DASHI.Core.GenericFuturePartitionRefinementExact as Future
 
 data TinyState : Set where
-  left right afterLeft afterRight : TinyState
+  left : TinyState
+  right : TinyState
+  afterLeft : TinyState
+  afterRight : TinyState
 
 data TinyAction : Set where
   probe : TinyAction
 
 data TinyObservation : Set where
-  same leftResponse rightResponse : TinyObservation
+  same : TinyObservation
+  leftResponse : TinyObservation
+  rightResponse : TinyObservation
 
 observeTiny : TinyState → TinyObservation
 observeTiny left = same
@@ -52,7 +57,8 @@ data TinyChange : Set where
   cameraFailure : TinyChange
 
 data TinyRoute : Set where
-  visualRoute acousticRoute : TinyRoute
+  visualRoute : TinyRoute
+  acousticRoute : TinyRoute
 
 HitsTiny : TinyChange → TinyRoute → Set
 HitsTiny cameraFailure visualRoute = ⊤

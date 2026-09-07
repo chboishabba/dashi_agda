@@ -45,7 +45,9 @@ open OverlapReceipt public
 ------------------------------------------------------------------------
 
 data RobustDisparityConclusion : Set where
-  robustPositive robustNegative unidentified : RobustDisparityConclusion
+  robustPositive : RobustDisparityConclusion
+  robustNegative : RobustDisparityConclusion
+  unidentified : RobustDisparityConclusion
 
 record RobustDisparitySurface : Set where
   constructor robustDisparitySurface
@@ -89,10 +91,14 @@ canonicalMalformedFailsClosed = refl
 ------------------------------------------------------------------------
 
 data RobustClaim : Set where
-  disparityExists disparityDirection pointMagnitude : RobustClaim
+  disparityExists : RobustClaim
+  disparityDirection : RobustClaim
+  pointMagnitude : RobustClaim
 
 data RobustProducer : Set where
-  boundSurfaceProducer exactArithmeticSeparatorProducer completeObservationProducer : RobustProducer
+  boundSurfaceProducer : RobustProducer
+  exactArithmeticSeparatorProducer : RobustProducer
+  completeObservationProducer : RobustProducer
 
 reverseRobustClaim : RobustClaim → RobustProducer
 reverseRobustClaim disparityExists = exactArithmeticSeparatorProducer
@@ -110,7 +116,10 @@ record RobustPromotionCutset : Set where
 open RobustPromotionCutset public
 
 data RobustResidual : Set where
-  boundSurfaceResidual exactArithmeticResidual completeObservationResidual robustClosed : RobustResidual
+  boundSurfaceResidual : RobustResidual
+  exactArithmeticResidual : RobustResidual
+  completeObservationResidual : RobustResidual
+  robustClosed : RobustResidual
 
 firstRobustResidual : RobustClaim → RobustPromotionCutset → RobustResidual
 firstRobustResidual disparityExists c with boundSurfaceClosed c

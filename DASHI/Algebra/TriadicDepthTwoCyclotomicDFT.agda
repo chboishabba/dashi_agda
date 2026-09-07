@@ -19,7 +19,15 @@ import DASHI.Algebra.TriadicFiniteIrrep as Irrep
 -- Nine cyclic indices and exact modular arithmetic tables.
 
 data Index9 : Set where
-  i0 i1 i2 i3 i4 i5 i6 i7 i8 : Index9
+  i0 : Index9
+  i1 : Index9
+  i2 : Index9
+  i3 : Index9
+  i4 : Index9
+  i5 : Index9
+  i6 : Index9
+  i7 : Index9
+  i8 : Index9
 
 addIndex : Index9 → Index9 → Index9
 addIndex i0 i0 = i0

@@ -11,13 +11,20 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data Project : Set where
-  housingProject aiDataCentre : Project
+  housingProject : Project
+  aiDataCentre : Project
 
 data Resource : Set where
-  land electricity water infrastructure labour capital : Resource
+  land : Resource
+  electricity : Resource
+  water : Resource
+  infrastructure : Resource
+  labour : Resource
+  capital : Resource
 
 data Location : Set where
-  housingSite industrialSite : Location
+  housingSite : Location
+  industrialSite : Location
 
 Demand : Project → Resource → Set
 Demand housingProject land = ⊤
@@ -60,7 +67,11 @@ noSpatialOverlapDoesNotImplyNoPlanningConflict =
 ------------------------------------------------------------------------
 
 data Observer : Set where
-  operator grid city climate community : Observer
+  operator : Observer
+  grid : Observer
+  city : Observer
+  climate : Observer
+  community : Observer
 
 data ProjectView : Set where
   computeCapacity gridLoad infrastructureBurden emissionsTrajectory localAmenity :

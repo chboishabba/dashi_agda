@@ -42,7 +42,8 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 data DissipationRegime : Set where
-  lowMode viscousHighMode : DissipationRegime
+  lowMode : DissipationRegime
+  viscousHighMode : DissipationRegime
 
 data RegimeCertificate
     (eta transfer diffusion reservoir : ℚ) :

@@ -9,7 +9,9 @@ open import Data.List.Base using (List)
 import DASHI.Cognition.PNF.EventAlgebra as PNF
 
 data InvalidationGround : Set where
-  missingSpan incompatibleRole impossibleTemporalScope : InvalidationGround
+  missingSpan : InvalidationGround
+  incompatibleRole : InvalidationGround
+  impossibleTemporalScope : InvalidationGround
   incompatibleEntityType wrongJurisdiction excessAuthority : InvalidationGround
   failedTypedMeet invalidTranslationTransport : InvalidationGround
 

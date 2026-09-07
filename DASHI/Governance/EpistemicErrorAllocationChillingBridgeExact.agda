@@ -26,7 +26,8 @@ data ComprehensionState : Set where
   unresolvedDecisionFibre : ComprehensionState
 
 data ErrorAllocation : Set where
-  repairAsSafetyInformation attributeFaultToSubject : ErrorAllocation
+  repairAsSafetyInformation : ErrorAllocation
+  attributeFaultToSubject : ErrorAllocation
 
 record EpistemicErrorRouting : Set where
   constructor epistemicErrorRouting
@@ -69,7 +70,8 @@ canonicalEpistemicErrorAllocationWitness =
 ------------------------------------------------------------------------
 
 data LearnedOutcome : Set where
-  learnedFineDistinction learnedAvoidInstitution : LearnedOutcome
+  learnedFineDistinction : LearnedOutcome
+  learnedAvoidInstitution : LearnedOutcome
 
 sanctionLearningOutcome : LearnedOutcome
 sanctionLearningOutcome = learnedAvoidInstitution

@@ -16,7 +16,9 @@ import DASHI.Governance.OppositionInterfaceAntiDomesticationExact as Opposition
 ------------------------------------------------------------------------
 
 data PlanningParticipant : Set where
-  planningAuthority affectedResident exteriorCommunity : PlanningParticipant
+  planningAuthority : PlanningParticipant
+  affectedResident : PlanningParticipant
+  exteriorCommunity : PlanningParticipant
 
 data PlanningDatum : Set where
   consultationSubmission : PlanningDatum

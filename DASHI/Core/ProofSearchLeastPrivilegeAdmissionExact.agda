@@ -162,7 +162,8 @@ promote exactConsumerReceipt = authoritativeProgress
 ------------------------------------------------------------------------
 
 data SearchState : Set where
-  manyLemmasNoClosure fewerLemmasTrueClosure : SearchState
+  manyLemmasNoClosure : SearchState
+  fewerLemmasTrueClosure : SearchState
 
 lemmaCount : SearchState → Nat
 lemmaCount manyLemmasNoClosure = suc (suc (suc zero))

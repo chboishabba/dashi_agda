@@ -38,7 +38,10 @@ depthEquivalentMonotone {depth = suc depth} equivalent =
 ------------------------------------------------------------------------
 
 data State : Set where
-  source memo twin accepting : State
+  source : State
+  memo : State
+  twin : State
+  accepting : State
 
 data Action : Set where
   advance : Action

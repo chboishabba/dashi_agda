@@ -6,10 +6,24 @@ open import Agda.Builtin.String using (String)
 -- NASA FSP I&C source-shaped qualification matrix.
 
 data QualificationAxis : Set where
-  temperature neutronFlux neutronFluence gammaDose pressure massFlow vibration lifetime autonomy : QualificationAxis
+  temperature : QualificationAxis
+  neutronFlux : QualificationAxis
+  neutronFluence : QualificationAxis
+  gammaDose : QualificationAxis
+  pressure : QualificationAxis
+  massFlow : QualificationAxis
+  vibration : QualificationAxis
+  lifetime : QualificationAxis
+  autonomy : QualificationAxis
 
 data QualificationEvidence : Set where
-  literatureOnly databaseEntry benchTest acceleratedTest radiationTest integratedSubsystemTest flightLikeDemonstration : QualificationEvidence
+  literatureOnly : QualificationEvidence
+  databaseEntry : QualificationEvidence
+  benchTest : QualificationEvidence
+  acceleratedTest : QualificationEvidence
+  radiationTest : QualificationEvidence
+  integratedSubsystemTest : QualificationEvidence
+  flightLikeDemonstration : QualificationEvidence
 
 data QualificationState : Set where uninspected candidate screened qualifiedForEnvelope integrated : QualificationState
 

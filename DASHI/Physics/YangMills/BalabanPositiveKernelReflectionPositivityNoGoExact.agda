@@ -32,7 +32,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data TwoState : Set where
-  state0 state1 : TwoState
+  state0 : TwoState
+  state1 : TwoState
 
 positiveKernelWeight : TwoState → TwoState → Nat
 positiveKernelWeight state0 state0 = 1

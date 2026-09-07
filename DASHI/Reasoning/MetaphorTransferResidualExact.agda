@@ -23,7 +23,8 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data ResidualKind : Set where
-  missingTargetStructure spuriousSourceTransfer : ResidualKind
+  missingTargetStructure : ResidualKind
+  spuriousSourceTransfer : ResidualKind
 
 record TransferResidualProfile : Set₁ where
   field
@@ -45,13 +46,18 @@ open TransferResidualProfile public
 ------------------------------------------------------------------------
 
 data ToySourceFeature : Set where
-  multiplicity relation recurrence : ToySourceFeature
+  multiplicity : ToySourceFeature
+  relation : ToySourceFeature
+  recurrence : ToySourceFeature
 
 data ToyTargetFeature : Set where
-  severalItems reciprocalRelation recoverableReturn : ToyTargetFeature
+  severalItems : ToyTargetFeature
+  reciprocalRelation : ToyTargetFeature
+  recoverableReturn : ToyTargetFeature
 
 data ToyRequirement : Set where
-  askReciprocity askRecoverability : ToyRequirement
+  askReciprocity : ToyRequirement
+  askRecoverability : ToyRequirement
 
 sourceTransferredForMiss : ToySourceFeature → Bool
 sourceTransferredForMiss multiplicity = true

@@ -55,10 +55,12 @@ innerOptimalityDoesNotAutoPromoteToOuterAdmissibility ()
 ------------------------------------------------------------------------
 
 data OuterState : Set where
-  gridSpareCapacity gridCommitted : OuterState
+  gridSpareCapacity : OuterState
+  gridCommitted : OuterState
 
 data InnerState : Set where
-  computeUnbuilt computeBuilt : InnerState
+  computeUnbuilt : InnerState
+  computeBuilt : InnerState
 
 data ResourceCode : Set where
   electricity : ResourceCode

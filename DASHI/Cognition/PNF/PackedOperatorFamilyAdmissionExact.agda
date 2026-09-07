@@ -12,10 +12,14 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data OperatorFamily : Set where
-  normative condition exception transition : OperatorFamily
+  normative : OperatorFamily
+  condition : OperatorFamily
+  exception : OperatorFamily
+  transition : OperatorFamily
 
 data FamilyAdmission : Set where
-  rejected admitted : FamilyAdmission
+  rejected : FamilyAdmission
+  admitted : FamilyAdmission
 
 record PackedOperatorFamilyArchitecture (Input Delta : Set) : Set₁ where
   field

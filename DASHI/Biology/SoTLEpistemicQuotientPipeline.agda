@@ -25,16 +25,20 @@ import DASHI.Core.ReopenableProjectionComposition as Reopenable
 ------------------------------------------------------------------------
 
 data ExpressedResponse : Set where
-  expressedZero expressedOne : ExpressedResponse
+  expressedZero : ExpressedResponse
+  expressedOne : ExpressedResponse
 
 data CodedResponse : Set where
-  codedZero codedOne : CodedResponse
+  codedZero : CodedResponse
+  codedOne : CodedResponse
 
 data AggregateFinding : Set where
-  aggregateZero aggregateOne : AggregateFinding
+  aggregateZero : AggregateFinding
+  aggregateOne : AggregateFinding
 
 data PedagogicalRecommendation : Set where
-  recommendationZero recommendationOne : PedagogicalRecommendation
+  recommendationZero : PedagogicalRecommendation
+  recommendationOne : PedagogicalRecommendation
 
 expressedBit : ExpressedResponse → Bool
 expressedBit expressedZero = false

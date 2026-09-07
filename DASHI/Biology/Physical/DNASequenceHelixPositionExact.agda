@@ -15,7 +15,10 @@ import DASHI.Biology.DNAChemistryCarrier as DNA
 import DASHI.Biology.Physical.DNAHelixDihedralExact as Helix
 
 data Position4 : Set where
-  n0 n1 n2 n3 : Position4
+  n0 : Position4
+  n1 : Position4
+  n2 : Position4
+  n3 : Position4
 
 nextPosition : Position4 → Position4
 nextPosition n0 = n1

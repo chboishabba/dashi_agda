@@ -9,7 +9,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data DependencyState : Set where
-  depends doesNotDepend dependencyUnresolved : DependencyState
+  depends : DependencyState
+  doesNotDepend : DependencyState
+  dependencyUnresolved : DependencyState
 
 record MissingnessMechanismFibre : Set where
   constructor missingnessMechanismFibre

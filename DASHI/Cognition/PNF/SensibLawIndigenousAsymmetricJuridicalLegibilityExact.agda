@@ -102,13 +102,15 @@ nonStateProviderDidNotPossessWholeSovereignAuthority = refl
 ------------------------------------------------------------------------
 
 data RelationIndexedState : Set where
-  samePeopleLandRelation samePeopleCoerciveRelation : RelationIndexedState
+  samePeopleLandRelation : RelationIndexedState
+  samePeopleCoerciveRelation : RelationIndexedState
 
 data CoarseHumanPresence : Set where
   humanPopulationPresent : CoarseHumanPresence
 
 data RelationSpecificStanding : Set where
-  sovereigntyConstitutiveStandingDenied coerciveGovernabilityImposed : RelationSpecificStanding
+  sovereigntyConstitutiveStandingDenied : RelationSpecificStanding
+  coerciveGovernabilityImposed : RelationSpecificStanding
 
 humanPresenceObserver : RelationIndexedState → CoarseHumanPresence
 humanPresenceObserver _ = humanPopulationPresent

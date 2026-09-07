@@ -14,7 +14,11 @@ open import Data.Fin using (Fin)
 -- (1989), 423-429, DOI 10.1017/S0305004100068158.
 
 data SporadicGroup : Set where
-  M11 M12 M22 M23 M24 : SporadicGroup
+  M11 : SporadicGroup
+  M12 : SporadicGroup
+  M22 : SporadicGroup
+  M23 : SporadicGroup
+  M24 : SporadicGroup
   J2 HS McL Suz Co1 Co2 Co3 : SporadicGroup
   Fi22 Fi23 Fi24Prime He HN Th BabyMonster Monster : SporadicGroup
   J1 J3 J4 ONean Ru Ly : SporadicGroup
@@ -97,7 +101,9 @@ familyCountsSumToTwentySix : 5 + 7 + 8 + 6 ≡ 26
 familyCountsSumToTwentySix = refl
 
 data ConwaySporadic : Set where
-  conwayOne conwayTwo conwayThree : ConwaySporadic
+  conwayOne : ConwaySporadic
+  conwayTwo : ConwaySporadic
+  conwayThree : ConwaySporadic
 
 conwaySporadics : List ConwaySporadic
 conwaySporadics = conwayOne ∷ conwayTwo ∷ conwayThree ∷ []
@@ -106,7 +112,10 @@ conwaySporadicCountIsThree : listCount conwaySporadics ≡ 3
 conwaySporadicCountIsThree = refl
 
 data ConwayCardLabel : Set where
-  Co1Card Co2Card Co3Card Co4SyntheticCard : ConwayCardLabel
+  Co1Card : ConwayCardLabel
+  Co2Card : ConwayCardLabel
+  Co3Card : ConwayCardLabel
+  Co4SyntheticCard : ConwayCardLabel
 
 conwayCardReferent : ConwayCardLabel → Optional ConwaySporadic
 conwayCardReferent Co1Card = some conwayOne
@@ -119,7 +128,11 @@ co4HasNoConwaySporadicReferent :
 co4HasNoConwaySporadicReferent = refl
 
 data MathieuGroup : Set where
-  mathieu11 mathieu12 mathieu22 mathieu23 mathieu24 : MathieuGroup
+  mathieu11 : MathieuGroup
+  mathieu12 : MathieuGroup
+  mathieu22 : MathieuGroup
+  mathieu23 : MathieuGroup
+  mathieu24 : MathieuGroup
 
 naturalPermutationDegree : MathieuGroup → Nat
 naturalPermutationDegree mathieu11 = 11

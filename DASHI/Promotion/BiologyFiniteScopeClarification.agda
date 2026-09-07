@@ -28,7 +28,9 @@ data AminoAcid : Set where
     Val : AminoAcid
 
 data StopSignal : Set where
-  ochre amber opal : StopSignal
+  ochre : StopSignal
+  amber : StopSignal
+  opal : StopSignal
 
 data ProteinSymbol : Set where
   aminoAcid : AminoAcid → ProteinSymbol

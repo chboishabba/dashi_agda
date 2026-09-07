@@ -126,7 +126,8 @@ directForbidden ()
 ------------------------------------------------------------------------
 
 data DecisionConditionIntegrity : Set where
-  conditionsIndependent conditionsAgentManipulated : DecisionConditionIntegrity
+  conditionsIndependent : DecisionConditionIntegrity
+  conditionsAgentManipulated : DecisionConditionIntegrity
 
 data EffectiveAuthority : DecisionConditionIntegrity → Set where
   authorityFromIndependentConditions : EffectiveAuthority conditionsIndependent

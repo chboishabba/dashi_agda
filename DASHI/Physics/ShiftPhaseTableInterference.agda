@@ -16,7 +16,10 @@ open import DASHI.Physics.SchrodingerGapPhaseWaveShiftInstance as SPWSI
 -- structured phase-wave carrier.
 
 data Phase4 : Set where
-  φ0 φ1 φ2 φ3 : Phase4
+  φ0 : Phase4
+  φ1 : Phase4
+  φ2 : Phase4
+  φ3 : Phase4
 
 phaseDifference4 : Phase4 → Phase4 → Phase4
 phaseDifference4 φ0 φ0 = φ0

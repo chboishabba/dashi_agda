@@ -91,7 +91,8 @@ data DemoVisibility : Set where
   notVisible : DemoVisibility
 
 data DemoExistence : Set where
-  absent present : DemoExistence
+  absent : DemoExistence
+  present : DemoExistence
 
 demoVisibility : DemoState → DemoVisibility
 demoVisibility invisibleAbsent = notVisible

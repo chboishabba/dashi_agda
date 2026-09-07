@@ -59,7 +59,9 @@ createdFeedback =
 ------------------------------------------------------------------------
 
 data Artifact : Set where
-  observation certificate decision : Artifact
+  observation : Artifact
+  certificate : Artifact
+  decision : Artifact
 
 data Depends : Artifact → Artifact → Set where
   observationCertificate : Depends observation certificate

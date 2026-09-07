@@ -110,13 +110,15 @@ canonicalCoalitionAssociator = retainedCoalitionAssociator
 ------------------------------------------------------------------------
 
 data CoalitionBracketHistory : Set where
-  leftBracketHistory rightBracketHistory : CoalitionBracketHistory
+  leftBracketHistory : CoalitionBracketHistory
+  rightBracketHistory : CoalitionBracketHistory
 
 data ParticipantInventory : Set where
   sameFeminineMasculineInstitutionInventory : ParticipantInventory
 
 data CoalitionGlobalOutcome : Set where
-  reciprocalInstitutionalOutcome pluralMediatedOutcome : CoalitionGlobalOutcome
+  reciprocalInstitutionalOutcome : CoalitionGlobalOutcome
+  pluralMediatedOutcome : CoalitionGlobalOutcome
 
 participantInventory : CoalitionBracketHistory → ParticipantInventory
 participantInventory _ = sameFeminineMasculineInstitutionInventory

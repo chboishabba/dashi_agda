@@ -49,7 +49,9 @@ supportedIsNotContradicted ()
 ------------------------------------------------------------------------
 
 data EvidenceVerdict : Set where
-  notObserved certifiedHolds certifiedRefuted : EvidenceVerdict
+  notObserved : EvidenceVerdict
+  certifiedHolds : EvidenceVerdict
+  certifiedRefuted : EvidenceVerdict
 
 interpretPositiveProposition : EvidenceVerdict → Epistemic.EpistemicTrit
 interpretPositiveProposition notObserved = Epistemic.unresolved

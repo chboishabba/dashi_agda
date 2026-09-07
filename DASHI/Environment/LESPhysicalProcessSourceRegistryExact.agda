@@ -13,10 +13,14 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceKind : Set where
-  standard journalArticle scholarlyBook : SourceKind
+  standard : SourceKind
+  journalArticle : SourceKind
+  scholarlyBook : SourceKind
 
 data SourceRole : Set where
-  siMetrology electrodiffusionArchitecture rootWaterArchitecture : SourceRole
+  siMetrology : SourceRole
+  electrodiffusionArchitecture : SourceRole
+  rootWaterArchitecture : SourceRole
   rootNutrientArchitecture mycorrhizalNutritionArchitecture soilCNArchitecture : SourceRole
   xylemHydraulicArchitecture c3PhotosynthesisArchitecture : SourceRole
   stomatalWaterEconomyArchitecture spacArchitecture unsaturatedFlowEquation : SourceRole

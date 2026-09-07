@@ -28,7 +28,10 @@ import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 ------------------------------------------------------------------------
 
 data GeometryClass : Set where
-  planarGeometry sourceSinkGeometry rotationalGeometry spiralGeometry : GeometryClass
+  planarGeometry : GeometryClass
+  sourceSinkGeometry : GeometryClass
+  rotationalGeometry : GeometryClass
+  spiralGeometry : GeometryClass
 
 record SymmetryResolvedMode : Set where
   constructor symmetryResolvedMode

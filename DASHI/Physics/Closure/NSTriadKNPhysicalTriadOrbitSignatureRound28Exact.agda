@@ -33,7 +33,10 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadPluckerInvariantRound27Exact 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadConjugationOrbitRound28Exact as Conjugation
 
 data TriadOrbitAction : Set where
-  identity swap conjugate swapConjugate : TriadOrbitAction
+  identity : TriadOrbitAction
+  swap : TriadOrbitAction
+  conjugate : TriadOrbitAction
+  swapConjugate : TriadOrbitAction
 
 act :
   TriadOrbitAction →
@@ -46,7 +49,8 @@ act swapConjugate triad =
   Symmetry.swapTriad (Symmetry.conjugateTriad triad)
 
 data OrientationParity : Set where
-  preserves reverses : OrientationParity
+  preserves : OrientationParity
+  reverses : OrientationParity
 
 orientationParity : TriadOrbitAction → OrientationParity
 orientationParity identity = preserves

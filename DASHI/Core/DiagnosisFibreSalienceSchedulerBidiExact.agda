@@ -106,7 +106,8 @@ largeDebugObservationIsInert receipt with eliminated receipt
 ... | Backprop.insufficientResolution , (() , _)
 
 data DebugSchedulerChoice : Set where
-  chooseLargeRepeat chooseSmallFrameControl : DebugSchedulerChoice
+  chooseLargeRepeat : DebugSchedulerChoice
+  chooseSmallFrameControl : DebugSchedulerChoice
 
 magnitudeGreedyDebugChoice : DebugSchedulerChoice
 magnitudeGreedyDebugChoice = chooseLargeRepeat

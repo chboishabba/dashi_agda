@@ -48,7 +48,9 @@ data ViabilityLayer : Set where
 
 
 data ParameterRegionStatus : Set where
-  viable unresolved nonviable : ParameterRegionStatus
+  viable : ParameterRegionStatus
+  unresolved : ParameterRegionStatus
+  nonviable : ParameterRegionStatus
 
 record ParameterPerturbationReceipt : Set where
   constructor parameter-perturbation-receipt

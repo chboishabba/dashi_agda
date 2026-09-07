@@ -44,7 +44,8 @@ data FineLegalState : Set where
   wrongFactualTypingState : FineLegalState
 
 data LegalDecision : Set where
-  withdrawDecision persistDecision : LegalDecision
+  withdrawDecision : LegalDecision
+  persistDecision : LegalDecision
 
 decision : FineLegalState → LegalDecision
 decision fatalThresholdState = withdrawDecision
@@ -59,7 +60,9 @@ data DiagnosticObservation : Set where
     DiagnosticObservation
 
 data FineObservation : Set where
-  fatalObservation savingBranchObservation wrongTypingObservation : FineObservation
+  fatalObservation : FineObservation
+  savingBranchObservation : FineObservation
+  wrongTypingObservation : FineObservation
 
 layObserver : Observer.Observer FineLegalState CoarseObservation
 layObserver _ = threeDaysShortObservation
@@ -462,10 +465,13 @@ canonicalClosedFibreDefianceWitness =
 ------------------------------------------------------------------------
 
 data Party : Set where
-  individualParty institutionalParty : Party
+  individualParty : Party
+  institutionalParty : Party
 
 data FormalRight : Set where
-  selfRepresentRight seekCostsRight obtainAdviceRight : FormalRight
+  selfRepresentRight : FormalRight
+  seekCostsRight : FormalRight
+  obtainAdviceRight : FormalRight
 
 data HasFineRefinementAccess : Party → Set where
   institutionalFineAccess : HasFineRefinementAccess institutionalParty
@@ -500,7 +506,8 @@ canonicalFormalEqualityCapabilityGap =
 ------------------------------------------------------------------------
 
 data HarmLevel : Set where
-  lowMaterialImpact severeMaterialImpact : HarmLevel
+  lowMaterialImpact : HarmLevel
+  severeMaterialImpact : HarmLevel
 
 sanctionAmount : Party → Nat
 sanctionAmount _ = 3

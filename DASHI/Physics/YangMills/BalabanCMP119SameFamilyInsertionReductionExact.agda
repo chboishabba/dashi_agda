@@ -33,7 +33,8 @@ import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 
 data ResponseKind : Set where
-  ordinary characteristic : ResponseKind
+  ordinary : ResponseKind
+  characteristic : ResponseKind
 
 record SameFamilyCMP119InsertionReduction
     (source : Source.CMP119AnchoredNormalizedExpectationSource) : Set₁ where

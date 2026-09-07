@@ -16,10 +16,12 @@ record ⊤ : Set where
   constructor tt
 
 data Support : Set where
-  inactive active : Support
+  inactive : Support
+  active : Support
 
 data Sign : Set where
-  negative positive : Sign
+  negative : Sign
+  positive : Sign
 
 GatedSign : Support → Set
 GatedSign inactive = ⊤

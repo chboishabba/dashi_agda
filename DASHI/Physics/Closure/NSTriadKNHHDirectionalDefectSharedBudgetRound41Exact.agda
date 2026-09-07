@@ -62,7 +62,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact as Thre
 import DASHI.Physics.Closure.NSTriadKNAdmissibleOwnerTaxLanguageRound28Exact as Owner
 
 data DirectionalRegion : Set where
-  goodRegion badRegion : DirectionalRegion
+  goodRegion : DirectionalRegion
+  badRegion : DirectionalRegion
 
 RegionEvidence :
   Threshold.PositiveThreshold →

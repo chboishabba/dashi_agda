@@ -52,7 +52,11 @@ data TheoremPattern : Set where
 
 
 data SourceRegister : Set where
-  irigarayRegister cixousRegister lordeRegister wittigRegister crenshawRegister : SourceRegister
+  irigarayRegister : SourceRegister
+  cixousRegister : SourceRegister
+  lordeRegister : SourceRegister
+  wittigRegister : SourceRegister
+  crenshawRegister : SourceRegister
   moretonRobinsonRegister smithRegister whyteRegister : SourceRegister
 
 record CrossPollinationRole : Set where

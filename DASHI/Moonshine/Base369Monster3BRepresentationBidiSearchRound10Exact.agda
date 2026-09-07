@@ -43,7 +43,12 @@ canonicalRound10Status =
 ------------------------------------------------------------------------
 
 data SearchClass : Set where
-  OWNED GENERATED LIVE DOWNSTREAM PRUNED PARALLEL : SearchClass
+  OWNED : SearchClass
+  GENERATED : SearchClass
+  LIVE : SearchClass
+  DOWNSTREAM : SearchClass
+  PRUNED : SearchClass
+  PARALLEL : SearchClass
 
 characterC3DecompositionClass : SearchClass
 characterC3DecompositionClass = OWNED

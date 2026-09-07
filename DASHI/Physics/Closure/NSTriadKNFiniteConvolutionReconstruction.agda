@@ -392,7 +392,8 @@ orderedPairSymmetrisation {S = S} {C = C} I A u
 ------------------------------------------------------------------------
 
 data SwapOrbitKind : Set where
-  diagonal offDiagonal : SwapOrbitKind
+  diagonal : SwapOrbitKind
+  offDiagonal : SwapOrbitKind
 
 orderedPairMultiplicity : SwapOrbitKind → Nat
 orderedPairMultiplicity diagonal = 1

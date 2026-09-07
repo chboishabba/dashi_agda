@@ -60,13 +60,22 @@ aecHouseCountReceipt = electoralSourceReceipt
 ------------------------------------------------------------------------
 
 data FirstPreference : Set where
-  laborFirst coalitionFirst greensFirst independentFirst otherFirst : FirstPreference
+  laborFirst : FirstPreference
+  coalitionFirst : FirstPreference
+  greensFirst : FirstPreference
+  independentFirst : FirstPreference
+  otherFirst : FirstPreference
 
 data MajorBloc : Set where
-  laborBloc coalitionBloc : MajorBloc
+  laborBloc : MajorBloc
+  coalitionBloc : MajorBloc
 
 data PreferenceHistory : Set where
-  greensToLabor independentToLabor laborDirect coalitionDirect otherToCoalition : PreferenceHistory
+  greensToLabor : PreferenceHistory
+  independentToLabor : PreferenceHistory
+  laborDirect : PreferenceHistory
+  coalitionDirect : PreferenceHistory
+  otherToCoalition : PreferenceHistory
 
 firstPreference : PreferenceHistory → FirstPreference
 firstPreference greensToLabor = greensFirst

@@ -191,7 +191,8 @@ data CoarseSupportSurface : Set where
   onePersistentCentreResidual : CoarseSupportSurface
 
 data FineSupportHistoryCode : Set where
-  repairBeforeCounterformation counterformationBeforeRepair : FineSupportHistoryCode
+  repairBeforeCounterformation : FineSupportHistoryCode
+  counterformationBeforeRepair : FineSupportHistoryCode
 
 coarseSupportSurface : SupportHistoryFine → CoarseSupportSurface
 coarseSupportSurface _ = onePersistentCentreResidual

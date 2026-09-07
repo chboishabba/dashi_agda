@@ -32,7 +32,13 @@ import DASHI.Foundations.Wette1969RuleRevisionExact as Revision
 ------------------------------------------------------------------------
 
 data Premise915 : Set where
-  p01 p02 p03 p04 p05 p06 p07 : Premise915
+  p01 : Premise915
+  p02 : Premise915
+  p03 : Premise915
+  p04 : Premise915
+  p05 : Premise915
+  p06 : Premise915
+  p07 : Premise915
   p08 p09 p10 p11 p12 p13 p14 p15 : Premise915
   p16 p17 p18 : Premise915
   p19 p20 p21 p22 p23 p24 p25 : Premise915

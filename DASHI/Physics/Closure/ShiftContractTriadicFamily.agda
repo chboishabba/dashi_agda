@@ -30,7 +30,9 @@ private
   x ≢ y = x ≡ y → ⊥
 
 data TriadicIndex : Set where
-  i0 i1 i2 : TriadicIndex
+  i0 : TriadicIndex
+  i1 : TriadicIndex
+  i2 : TriadicIndex
 
 triadicGen : TriadicIndex → ShiftContractState
 triadicGen i0 = oneHot0

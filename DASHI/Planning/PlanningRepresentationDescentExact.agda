@@ -53,13 +53,15 @@ representationLossBlocksDescent = INF.witnessRulesOutEveryFlatFactorisation
 ------------------------------------------------------------------------
 
 data Design : Set where
-  shadedCourtyard exposedCourtyard : Design
+  shadedCourtyard : Design
+  exposedCourtyard : Design
 
 data PlanningEnvelope : Set where
   sameHeightSetbackCoverage : PlanningEnvelope
 
 data HeatExposure : Set where
-  lowerExposure higherExposure : HeatExposure
+  lowerExposure : HeatExposure
+  higherExposure : HeatExposure
 
 planningProjection : Design → PlanningEnvelope
 planningProjection shadedCourtyard = sameHeightSetbackCoverage

@@ -45,7 +45,10 @@ layerOwner valuesRemedies = SensibLaw
 -- Constructors denote schema roles, not physical SQL naming requirements.
 
 data OntologyTable : Set where
-  coreActor actorAlias actorClass roleMarker : OntologyTable
+  coreActor : OntologyTable
+  actorAlias : OntologyTable
+  actorClass : OntologyTable
+  roleMarker : OntologyTable
   relationshipBasis relationshipShape relationshipIntensity actorRelation : OntologyTable
   coreEvent eventClass eventParticipant : OntologyTable
   evidenceItem evidenceDerivation eventEvidence : OntologyTable
@@ -174,7 +177,13 @@ record Principle : Set where
 -- Faceted abstract wrong ontology.
 
 data InterestSubjectKind : Set where
-  individual child group community state environment ancestors : InterestSubjectKind
+  individual : InterestSubjectKind
+  child : InterestSubjectKind
+  group : InterestSubjectKind
+  community : InterestSubjectKind
+  state : InterestSubjectKind
+  environment : InterestSubjectKind
+  ancestors : InterestSubjectKind
 
 data InterestObjectKind : Set where
   body mind property data reputation relationship culture territory ecosystem
@@ -195,7 +204,11 @@ record ProtectedInterestType : Set where
 
 
 data Culpability : Set where
-  strict negligent reckless intentional mixed : Culpability
+  strict : Culpability
+  negligent : Culpability
+  reckless : Culpability
+  intentional : Culpability
+  mixed : Culpability
 
 record WrongType : Set where
   constructor wrongTypeRecord
@@ -216,7 +229,10 @@ record WrongType : Set where
 -- One event can therefore carry several non-collapsed interpretations.
 
 data ClassificationStatus : Set where
-  suggested contested confirmed rejected : ClassificationStatus
+  suggested : ClassificationStatus
+  contested : ClassificationStatus
+  confirmed : ClassificationStatus
+  rejected : ClassificationStatus
 
 record WrongTypeInterpretation : Set where
   constructor interpretation

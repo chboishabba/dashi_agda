@@ -29,17 +29,30 @@ import DASHI.Governance.EffectiveInstitutionalChoiceExact as Choice
 ------------------------------------------------------------------------
 
 data ServiceDomain : Set where
-  educationService healthcareService outOfHomeCareService counsellingService : ServiceDomain
+  educationService : ServiceDomain
+  healthcareService : ServiceDomain
+  outOfHomeCareService : ServiceDomain
+  counsellingService : ServiceDomain
   housingService disabilityService detentionAdministrationService : ServiceDomain
 
 data ProviderGovernance : Set where
-  publicProvider privateProvider religiousProvider communityControlledProvider : ProviderGovernance
+  publicProvider : ProviderGovernance
+  privateProvider : ProviderGovernance
+  religiousProvider : ProviderGovernance
+  communityControlledProvider : ProviderGovernance
 
 data DelegationSurface : Set where
-  noDelegation publicFunding publicContract statutoryPlacement publicReferral : DelegationSurface
+  noDelegation : DelegationSurface
+  publicFunding : DelegationSurface
+  publicContract : DelegationSurface
+  statutoryPlacement : DelegationSurface
+  publicReferral : DelegationSurface
 
 data Essentiality : Set where
-  optional important essential lifePreserving : Essentiality
+  optional : Essentiality
+  important : Essentiality
+  essential : Essentiality
+  lifePreserving : Essentiality
 
 record DelegatedServiceProvider : Set where
   constructor delegatedServiceProvider

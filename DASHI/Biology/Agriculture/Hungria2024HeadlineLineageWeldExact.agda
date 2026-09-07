@@ -38,7 +38,8 @@ data LineageCoordinate : Set where
   publicationAttribution : LineageCoordinate
 
 data WeldStatus : Set where
-  sourceBacked openWeld : WeldStatus
+  sourceBacked : WeldStatus
+  openWeld : WeldStatus
 
 weldStatus : LineageCoordinate → WeldStatus
 weldStatus modelEquationIdentity = openWeld

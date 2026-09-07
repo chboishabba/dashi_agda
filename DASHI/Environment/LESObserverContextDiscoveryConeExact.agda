@@ -74,16 +74,19 @@ successfulExpansionCannotFactorThroughOldObserver expansion fromCoarse factors =
 ------------------------------------------------------------------------
 
 data SoilWorld : Set where
-  inertSubstrate livingRelationalSoil : SoilWorld
+  inertSubstrate : SoilWorld
+  livingRelationalSoil : SoilWorld
 
 data DirtReading : Set where
   brownEarth : DirtReading
 
 data SoilDistinction : Set where
-  inertMaterial livingSystem : SoilDistinction
+  inertMaterial : SoilDistinction
+  livingSystem : SoilDistinction
 
 data SoilObserverContext : Set where
-  dirtFrame soilFrame : SoilObserverContext
+  dirtFrame : SoilObserverContext
+  soilFrame : SoilObserverContext
 
 soilLanguage : SoilObserverContext → Set
 soilLanguage dirtFrame = DirtReading

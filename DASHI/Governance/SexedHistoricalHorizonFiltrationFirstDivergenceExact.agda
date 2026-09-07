@@ -27,7 +27,9 @@ import DASHI.Governance.SexedHistoricalStratifiedFutureConeQuotientExact as Futu
 ------------------------------------------------------------------------
 
 data Horizon : Set where
-  shortHorizon mediumHorizon longHorizon : Horizon
+  shortHorizon : Horizon
+  mediumHorizon : Horizon
+  longHorizon : Horizon
 
 data HorizonLe : Horizon → Horizon → Set where
   shortRefl : HorizonLe shortHorizon shortHorizon
@@ -106,7 +108,9 @@ canonicalFirstForecastDivergence =
 ------------------------------------------------------------------------
 
 data HorizonObservation : Set where
-  shortObservation mediumObservation longObservation : HorizonObservation
+  shortObservation : HorizonObservation
+  mediumObservation : HorizonObservation
+  longObservation : HorizonObservation
 
 observeAtHorizon : Horizon → Future.FuturePathHistory → HorizonObservation × HorizonConeCode
 observeAtHorizon shortHorizon h = shortObservation , coneAt shortHorizon h

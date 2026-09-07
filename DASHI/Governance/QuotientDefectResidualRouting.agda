@@ -45,7 +45,12 @@ open PropositionRelevantReopening public
 ------------------------------------------------------------------------
 
 data ResidualKind : Set where
-  historical causal identity authority counterevidence trauma : ResidualKind
+  historical : ResidualKind
+  causal : ResidualKind
+  identity : ResidualKind
+  authority : ResidualKind
+  counterevidence : ResidualKind
+  trauma : ResidualKind
 
 record ResidualFamily (Q : QuotientReceiptSystem) : Set₁ where
   field

@@ -15,10 +15,15 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data Scalar3 : Set where
-  negative scalarZero positive : Scalar3
+  negative : Scalar3
+  scalarZero : Scalar3
+  positive : Scalar3
 
 data Wave4 : Set where
-  negativeOne negativeZero positiveZero positiveOne : Wave4
+  negativeOne : Wave4
+  negativeZero : Wave4
+  positiveZero : Wave4
+  positiveOne : Wave4
 
 scalar : Wave4 → Scalar3
 scalar negativeOne = negative
@@ -142,7 +147,8 @@ leaveToPositiveOneBit = oneBitTransition true
 ------------------------------------------------------------------------
 
 data ZeroOrientation : Set where
-  approachingZero leavingZero : ZeroOrientation
+  approachingZero : ZeroOrientation
+  leavingZero : ZeroOrientation
 
 data AdaptiveResidual : Scalar3 → Set where
   nonzeroReceipt : AdaptiveResidual negative

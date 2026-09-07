@@ -18,15 +18,22 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data PlacementObject : Set where
-  sensor actuator sensorActuatorPair : PlacementObject
+  sensor : PlacementObject
+  actuator : PlacementObject
+  sensorActuatorPair : PlacementObject
 
 
 data FailureMode : Set where
-  sensorFailure actuatorFailure multipleComponentFailure : FailureMode
+  sensorFailure : FailureMode
+  actuatorFailure : FailureMode
+  multipleComponentFailure : FailureMode
 
 
 data ControlProperty : Set where
-  controllability observability faultCoverage reconfigurability : ControlProperty
+  controllability : ControlProperty
+  observability : ControlProperty
+  faultCoverage : ControlProperty
+  reconfigurability : ControlProperty
 
 record FlexibleStructureControlModel : Set₁ where
   constructor flexible-structure-control-model

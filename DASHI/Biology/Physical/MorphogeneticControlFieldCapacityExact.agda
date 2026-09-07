@@ -46,7 +46,14 @@ decodeEncodeExact (targetConstraint3 a d j) = refl
 ------------------------------------------------------------------------
 
 data Target8 : Set where
-  t000 t001 t010 t011 t100 t101 t110 t111 : Target8
+  t000 : Target8
+  t001 : Target8
+  t010 : Target8
+  t011 : Target8
+  t100 : Target8
+  t101 : Target8
+  t110 : Target8
+  t111 : Target8
 
 target8ToConstraint : Target8 → TargetConstraint3
 target8ToConstraint t000 = targetConstraint3 false false false

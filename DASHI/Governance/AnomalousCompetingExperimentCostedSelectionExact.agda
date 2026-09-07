@@ -21,7 +21,9 @@ import DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact as 
 ------------------------------------------------------------------------
 
 data PresentimentObservation : Set where
-  anomalyReadout artifactReadout collapsedReadout : PresentimentObservation
+  anomalyReadout : PresentimentObservation
+  artifactReadout : PresentimentObservation
+  collapsedReadout : PresentimentObservation
 
 cheapObserve : Trajectory.Interpretation → PresentimentObservation
 cheapObserve Trajectory.anticipatoryPhysiologyAnomaly = anomalyReadout

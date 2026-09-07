@@ -29,10 +29,18 @@ open import Relation.Nullary.Decidable.Core using (toWitness)
 ------------------------------------------------------------------------
 
 data State8 : Set where
-  s0 s1 s2 s3 s4 s5 s6 s7 : State8
+  s0 : State8
+  s1 : State8
+  s2 : State8
+  s3 : State8
+  s4 : State8
+  s5 : State8
+  s6 : State8
+  s7 : State8
 
 data Branch : Set where
-  branch3x branch3xMinus1 : Branch
+  branch3x : Branch
+  branch3xMinus1 : Branch
 
 step : State8 → Branch → State8
 step s0 branch3x = s0

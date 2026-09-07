@@ -80,7 +80,8 @@ open ContextSwapWitness public
 ------------------------------------------------------------------------
 
 data ClassicalChannelState : Set where
-  authenticated unauthenticated : ClassicalChannelState
+  authenticated : ClassicalChannelState
+  unauthenticated : ClassicalChannelState
 
 data QKDClassicalChannelReady : ClassicalChannelState → Set where
   authenticatedReady : QKDClassicalChannelReady authenticated

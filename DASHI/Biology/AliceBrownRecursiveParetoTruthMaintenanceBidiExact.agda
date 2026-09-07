@@ -17,7 +17,10 @@ import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
 ------------------------------------------------------------------------
 
 data AliceRoundCandidate : Set where
-  voiceAgency parentObserver consumerReview authorityReview : AliceRoundCandidate
+  voiceAgency : AliceRoundCandidate
+  parentObserver : AliceRoundCandidate
+  consumerReview : AliceRoundCandidate
+  authorityReview : AliceRoundCandidate
 
 aliceCertificate : AliceRoundCandidate → Pareto.CertificateCandidate
 aliceCertificate voiceAgency = Alice.voiceAgencyCertificate

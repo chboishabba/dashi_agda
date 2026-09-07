@@ -30,7 +30,10 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 data RemainderClass : Set where
-  dataControlled timeIntegrable smallRemainder telescoping : RemainderClass
+  dataControlled : RemainderClass
+  timeIntegrable : RemainderClass
+  smallRemainder : RemainderClass
+  telescoping : RemainderClass
 
 record RemainderAtom : Set where
   constructor remainder-atom

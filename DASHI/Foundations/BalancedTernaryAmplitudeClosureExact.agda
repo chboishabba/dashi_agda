@@ -12,7 +12,13 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 ------------------------------------------------------------------------
 
 data Amplitude7 : Set where
-  ampNeg3 ampNeg2 ampNeg1 ampZero ampPos1 ampPos2 ampPos3 : Amplitude7
+  ampNeg3 : Amplitude7
+  ampNeg2 : Amplitude7
+  ampNeg1 : Amplitude7
+  ampZero : Amplitude7
+  ampPos1 : Amplitude7
+  ampPos2 : Amplitude7
+  ampPos3 : Amplitude7
 
 amplitudeCode : Amplitude7 → Nat
 amplitudeCode ampNeg3 = 0

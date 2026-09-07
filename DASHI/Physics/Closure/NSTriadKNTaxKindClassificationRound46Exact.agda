@@ -40,7 +40,9 @@ import DASHI.Physics.Closure.NSTriadKNHHGoodYoungSoftTaxRound45Exact as Soft
 import DASHI.Physics.Closure.NSTriadKNBoundaryZeroTaxOwnerRound45Exact as Boundary
 
 data TaxKind : Set where
-  ZeroTax YoungSoftTax HardTax : TaxKind
+  ZeroTax : TaxKind
+  YoungSoftTax : TaxKind
+  HardTax : TaxKind
 
 record ZeroTaxCertificate
     (environment : Owner.TaxEnvironment)

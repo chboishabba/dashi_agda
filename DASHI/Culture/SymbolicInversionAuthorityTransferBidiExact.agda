@@ -22,7 +22,10 @@ import DASHI.Culture.ReligiousSanctionFeministWiccaCrossPollinationExact as Cros
 ------------------------------------------------------------------------
 
 data SymbolToken : Set where
-  witchToken hereticToken sinfulWomanToken deviantToken : SymbolToken
+  witchToken : SymbolToken
+  hereticToken : SymbolToken
+  sinfulWomanToken : SymbolToken
+  deviantToken : SymbolToken
 
 data SymbolicUse : Set where
   imposedCondemnation : SymbolicUse
@@ -34,7 +37,10 @@ data SymbolicUse : Set where
 
 
 data SymbolicValence : Set where
-  negativeValence contestedValence positiveValence mixedValence : SymbolicValence
+  negativeValence : SymbolicValence
+  contestedValence : SymbolicValence
+  positiveValence : SymbolicValence
+  mixedValence : SymbolicValence
 
 data AuthorityLocation : Set where
   familyAuthority : AuthorityLocation
@@ -151,7 +157,9 @@ sharedTokenDoesNotPromoteSharedFormationHistory ()
 ------------------------------------------------------------------------
 
 data SymbolFormation : Set where
-  imposedSymbolPosition reclaimedSymbolPosition reconstitutedSymbolPosition : SymbolFormation
+  imposedSymbolPosition : SymbolFormation
+  reclaimedSymbolPosition : SymbolFormation
+  reconstitutedSymbolPosition : SymbolFormation
 
 data CoarseSymbolChart : Set where sameWitchLabel : CoarseSymbolChart
 
@@ -185,10 +193,16 @@ symbolicPositiveRecharting =
 ------------------------------------------------------------------------
 
 data SymbolicFrame : Set where
-  condemnationFrame reclamationFrame genealogyFrame contemporaryUseFrame : SymbolicFrame
+  condemnationFrame : SymbolicFrame
+  reclamationFrame : SymbolicFrame
+  genealogyFrame : SymbolicFrame
+  contemporaryUseFrame : SymbolicFrame
 
 data SymbolicPosition : Set where
-  condemningAuthority reclaimedSymbol historicalTarget contemporaryUser : SymbolicPosition
+  condemningAuthority : SymbolicPosition
+  reclaimedSymbol : SymbolicPosition
+  historicalTarget : SymbolicPosition
+  contemporaryUser : SymbolicPosition
 
 symbolicRoleSystem : Dialectic.ContextualRoleSystem SymbolicFrame SymbolicPosition
 symbolicRoleSystem = record { roleIn = role }

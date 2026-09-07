@@ -33,10 +33,21 @@ open Aristotle using
 ------------------------------------------------------------------------
 
 data State : Set where
-  S0 S1 S1p S2 S3 S4 : State
+  S0 : State
+  S1 : State
+  S1p : State
+  S2 : State
+  S3 : State
+  S4 : State
 
 data Action : Set where
-  A0 A1 A2 T1 T1p T2 T3 : Action
+  A0 : Action
+  A1 : Action
+  A2 : Action
+  T1 : Action
+  T1p : Action
+  T2 : Action
+  T3 : Action
 
 source : Action → State
 source A0  = S0
@@ -112,7 +123,11 @@ a2Unproved (allTargets (s4 all∷ all[])) = s4Unproved s4
 ------------------------------------------------------------------------
 
 data Observable : Set where
-  Q0 Q1 Q2 Q3 Q4 : Observable
+  Q0 : Observable
+  Q1 : Observable
+  Q2 : Observable
+  Q3 : Observable
+  Q4 : Observable
 
 observe : State → Observable
 observe S0  = Q0

@@ -26,7 +26,8 @@ import DASHI.Governance.SituatedAuthorityRoutingExact as Routing
 
 
 data IncidentQuery : Set where
-  publicSurfaceQuery responderRoutingQuery : IncidentQuery
+  publicSurfaceQuery : IncidentQuery
+  responderRoutingQuery : IncidentQuery
 
 data IncidentQueryAnswer : Set where
   surfaceAnswer : Projection.CoarseIncident → IncidentQueryAnswer
