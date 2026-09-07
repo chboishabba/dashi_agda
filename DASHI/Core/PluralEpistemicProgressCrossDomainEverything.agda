@@ -6,6 +6,9 @@ import DASHI.Core.PluralEpistemicProgressMethodologyBidiExact
 -- Science / sequential experimental planning.
 import DASHI.Core.SequentialPlannerPluralClosureBidiExact
 
+-- Concrete biology / provenance-dependence consumer.
+import DASHI.Biology.DrosophilaPluralEpistemicProgressBidiExact
+
 -- Governance / intervention and residual repair.
 import DASHI.Governance.PluralEpistemicRepairMethodologyBidiExact
 
