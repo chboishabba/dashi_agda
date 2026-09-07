@@ -37,6 +37,11 @@ import DASHI.Cognition.PNF.SensibLawAuthorityTransformationMinimalCutExact as Cu
 import DASHI.Cognition.PNF.SensibLawInternationalObligationDomesticRemedyTranslationExact as Intl
 import DASHI.Cognition.PNF.SensibLawRecognitionObligationRemedyLayerCrossPollinationExact as Layers
 import DASHI.Cognition.PNF.SensibLawMaboKirbyAttributionCorrectionExact as Attribution
+import DASHI.Cognition.PNF.SensibLawUniversalLegalReopeningEverything as UniversalReopen
+import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as LegalResidual
+import DASHI.Cognition.PNF.SensibLawLegalGraphRefinementReopeningExact as LegalRefinement
+import DASHI.Cognition.PNF.SensibLawRemedyUniversalLegalAlgebraBridgeExact as UniversalRemedy
+import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 
 ------------------------------------------------------------------------
 -- EXISTING SELECTIVE COMPILER PATH.
@@ -170,7 +175,7 @@ canonicalCompilerRetainsNoDutyNoInterventionFirewall =
 canonicalCompilerRetainsClimateReopenability :
   ThreadClimate.PabaiNoDutyClosesEveryPossibleClimateDuty → ⊥
 canonicalCompilerRetainsClimateReopenability =
-  Thread.pabaiNoDutyDoesNotCloseAllClimateReformulations
+  Thread.pabaiDoesNotCloseAllClimateReformulations
 
 canonicalCompilerConsumesConcreteConsensusFixture :
   ThreadRel.empiricalInstantiation ThreadHaud.haudenosauneeProcedure ≡ true
@@ -207,6 +212,43 @@ canonicalCompilerCorrectsMaboKirbyAttribution :
   Attribution.LaterCommentaryIsOriginalJudgmentAuthorship → ⊥
 canonicalCompilerCorrectsMaboKirbyAttribution =
   Attribution.laterKirbyCommentaryDoesNotRewriteAuthorship
+
+------------------------------------------------------------------------
+-- UNIVERSAL OBSERVER-REFINEMENT / LEGAL-ALGEBRA BIDI CONSUMPTION.
+------------------------------------------------------------------------
+
+canonicalForeseeabilityResidualRoutesToEvidence :
+  LegalResidual.preferredRoute
+    (LegalResidual.dutyResidualKind Climate.reasonableForeseeability)
+  ≡ LegalResidual.obtainFactualEvidence
+canonicalForeseeabilityResidualRoutesToEvidence = refl
+
+canonicalStatutoryCoherenceResidualRoutesToStatute :
+  LegalResidual.preferredRoute
+    (LegalResidual.dutyResidualKind Climate.statutoryCoherence)
+  ≡ LegalResidual.inspectStatutoryText
+canonicalStatutoryCoherenceResidualRoutesToStatute = refl
+
+canonicalCorePolicyResidualRoutesToReasons :
+  LegalResidual.preferredRoute
+    (LegalResidual.dutyResidualKind Climate.coreGovernmentPolicy)
+  ≡ LegalResidual.inspectJudicialReasons
+canonicalCorePolicyResidualRoutesToReasons = refl
+
+canonicalLegalGraphRefinementIsNonMonotone :
+  LegalRefinement.NewFactCanOnlyOpenAndNeverDefeat → ⊥
+canonicalLegalGraphRefinementIsNonMonotone =
+  LegalRefinement.newFactsMayActivateExceptionsOrDefeaters
+
+canonicalCutMustBeRecomputedAfterRefinement :
+  LegalRefinement.OldMinimalCutRemainsMinimalAfterRefinement → ⊥
+canonicalCutMustBeRecomputedAfterRefinement =
+  LegalRefinement.minimalCutMustBeRechecked
+
+canonicalUniversalReopeningStillSeparatesAvailabilityFromRealisation :
+  UniversalRemedy.LegalAvailabilityAutomaticallyMeansRealisedRemedy → ⊥
+canonicalUniversalReopeningStillSeparatesAvailabilityFromRealisation =
+  UniversalReopen.legalAvailabilityStillNotRealisedRemedy
 
 ------------------------------------------------------------------------
 -- Aggregate import is not a kernel receipt.
