@@ -2,9 +2,6 @@ module DASHI.Cognition.PNF.SensibLawUniversalLegalReopeningEverything where
 
 ------------------------------------------------------------------------
 -- UNIVERSAL LEGAL ALGEBRA / OBSERVER REFINEMENT / REALISED REMEDY ROLLUP
---
--- Structural aggregate. External claims remain attributed in source-owning
--- modules; importing them here does not strengthen their proposition type.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -22,6 +19,8 @@ import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as
 import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statute
 import DASHI.Cognition.PNF.SensibLawAuthorityTransformationUniversalCutBridgeExact as CutBridge
 import DASHI.Cognition.PNF.SensibLawCullenPublicAuthorityDutyCalibrationExact as Cullen
+import DASHI.Cognition.PNF.SensibLawCullenClimateDistinguishingPromotionExact as CullenDistinction
+import DASHI.Cognition.PNF.SensibLawPabaiTransformationPromotionExact as PabaiTransform
 import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as Search
 import DASHI.Cognition.PNF.SensibLawFiniteLegalSearchRegressionExact as Regression
 
@@ -67,7 +66,7 @@ cullenDoesNotAutoCompileToClimate :
 cullenDoesNotAutoCompileToClimate = Cullen.cullenDoesNotAutoCompileToClimateDuty
 
 ------------------------------------------------------------------------
--- Executable search now runs on the three calibration surfaces.
+-- Executable search on calibration surfaces.
 ------------------------------------------------------------------------
 
 maboFiniteSearchFindsPositiveRoute :
@@ -107,6 +106,32 @@ cullenClimateFeatureFitRemainsNegative :
 cullenClimateFeatureFitRemainsNegative = Regression.cullenClimateFeatureFitFails
 
 ------------------------------------------------------------------------
+-- New BIDI promotions: precedent distinction and transformed legal graph.
+------------------------------------------------------------------------
+
+cullenClimatePolicyDistinctionIsProofRelevant :
+  Precedent.PolicyMinimalDistinguishingSet
+    CullenDistinction.cullenClimatePolicy
+cullenClimatePolicyDistinctionIsProofRelevant =
+  CullenDistinction.cullenClimateMinimalDistinguishingSet
+
+cullenPolicyDistinctionDoesNotBecomeBindingClimateRule :
+  CullenDistinction.FixtureCorrespondencePolicyIsBindingHighCourtLaw → ⊥
+cullenPolicyDistinctionDoesNotBecomeBindingClimateRule =
+  CullenDistinction.fixturePolicyDoesNotBecomeBindingLaw
+
+pabaiTypedTransformationReopensCounterfactualGraph :
+  Search.TransformationPromotion
+    1 Negligence.dutyProposition Regression.pabaiReformulationCandidate
+pabaiTypedTransformationReopensCounterfactualGraph =
+  PabaiTransform.pabaiTransformationPromotion
+
+pabaiTypedTransformationStillNeedsAuthority :
+  PabaiTransform.PabaiTransformationAvailableUnderControllingAuthorities → ⊥
+pabaiTypedTransformationStillNeedsAuthority =
+  PabaiTransform.pabaiLegalAvailabilityStillOpen
+
+------------------------------------------------------------------------
 -- Search result / legal proof separation remains explicit.
 ------------------------------------------------------------------------
 
@@ -139,6 +164,11 @@ oldCutMustBeRecomputedAfterRefinement = Refinement.minimalCutMustBeRechecked
 factSimilarityStillDoesNotApplyPrecedent :
   Precedent.SimilarFactsAutomaticallyApplyPrecedent → ⊥
 factSimilarityStillDoesNotApplyPrecedent = Precedent.similarityDoesNotProveApplication
+
+legacyFeatureMapStillNotSafeSearchPromotion :
+  Precedent.LegacyFeatureMapSupportsExecutablePromotionByItself → ⊥
+legacyFeatureMapStillNotSafeSearchPromotion =
+  Precedent.legacyFeatureMapDoesNotSupportSafeSearchPromotion
 
 statutoryDefinitionStillScoped :
   Statute.DefinitionIsGlobalDictionaryMeaning → ⊥
