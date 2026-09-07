@@ -7,8 +7,6 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannExplicitFormula as Explicit
 import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as Window
-import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
-import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Selected
 import DASHI.Analysis.RiemannAristotlePoleQuotientFiniteNearEvaluationBidiExact as Eval
 import DASHI.Analysis.RiemannG2FinalSplitComplementSameObjectAssemblyExact as Cast
 
@@ -16,16 +14,21 @@ import DASHI.Analysis.RiemannG2FinalSplitComplementSameObjectAssemblyExact as Ca
 -- MINIMAL FINAL-CARRIER FINITE-NEAR BUDGET CONSUMER
 --
 -- The final Off consumer does not care which historical route label produced a
--- signed finite-near evaluation.  Once an evaluation and its theorem-bearing
--- budget are attached to the SAME selected finitePoleNearSigned value, route
--- classification/preservation metadata is no longer a logical prerequisite.
+-- signed finite-near evaluation, nor does it require an upstream source-orbit
+-- attachment once the theorem is attached to the exact target window itself.
+--
+-- The smallest theorem-bearing object is therefore indexed directly by one
+-- PoleNearTargetWindow and contains:
+--   * one signed finite-near evaluation;
+--   * one theorem-bearing budget extraction;
+--   * scalar identity;
+--   * exact identity with that window's finitePoleNearSigned coordinate.
 ------------------------------------------------------------------------
 
 record SelectedFiniteNearBudgetPayment
     (space : Weil.WeilTestSpace)
     (formula : Explicit.RiemannExplicitFormula space)
-    (orbit : Orbit.SourceFkOrbit)
-    (selected : Selected.ActualSelectedPoleNearProducer space formula orbit)
+    (window : Window.PoleNearTargetWindow space formula)
     : Set₁ where
   field
     evaluation : Eval.SignedFiniteNearEvaluationSurface
@@ -38,8 +41,7 @@ record SelectedFiniteNearBudgetPayment
     signedNearValueIsSelectedFiniteNear :
       Cast.cast scalarCarrierIdentity
         (Eval.SignedFiniteNearEvaluationSurface.signedNearValue evaluation)
-      ≡ Window.PoleNearTargetWindow.finitePoleNearSigned
-          (Selected.ActualSelectedPoleNearProducer.targetWindow selected)
+      ≡ Window.PoleNearTargetWindow.finitePoleNearSigned window
 
     budgetToSelectedScalar :
       Eval.EvaluationProducesBudget.Budget budget ->
@@ -57,8 +59,7 @@ record SelectedFiniteNearBudgetPayment
         (Eval.EvaluationProducesBudget.nearBudget budget)
       ->
       SelectedUpper
-        (Window.PoleNearTargetWindow.finitePoleNearSigned
-          (Selected.ActualSelectedPoleNearProducer.targetWindow selected))
+        (Window.PoleNearTargetWindow.finitePoleNearSigned window)
         (budgetToSelectedScalar
           (Eval.EvaluationProducesBudget.nearBudget budget))
 
@@ -67,19 +68,18 @@ record SelectedFiniteNearBudgetPayment
 open SelectedFiniteNearBudgetPayment public
 
 selectedNearBudget :
-  forall {space formula orbit selected} ->
-  SelectedFiniteNearBudgetPayment space formula orbit selected ->
+  forall {space formula window} ->
+  SelectedFiniteNearBudgetPayment space formula window ->
   Weil.WeilTestSpace.Scalar space
 selectedNearBudget payment =
   budgetToSelectedScalar payment
     (Eval.EvaluationProducesBudget.nearBudget (budget payment))
 
 selectedFiniteNearUpper :
-  forall {space formula orbit selected} ->
-  (payment : SelectedFiniteNearBudgetPayment space formula orbit selected) ->
+  forall {space formula window} ->
+  (payment : SelectedFiniteNearBudgetPayment space formula window) ->
   SelectedUpper payment
-    (Window.PoleNearTargetWindow.finitePoleNearSigned
-      (Selected.ActualSelectedPoleNearProducer.targetWindow selected))
+    (Window.PoleNearTargetWindow.finitePoleNearSigned window)
     (selectedNearBudget payment)
 selectedFiniteNearUpper payment =
   evaluatorUpperBecomesSelectedUpper payment
@@ -87,16 +87,15 @@ selectedFiniteNearUpper payment =
 
 ------------------------------------------------------------------------
 -- Existing FiniteNearProducer packages compile into the minimal payment once
--- the selected same-object/budget transport receipts are supplied.  This keeps
--- the older richer route as a lawful compatibility source without making its
--- route metadata part of the final consumer API.
+-- the exact target-window identity/budget transport receipts are supplied.
+-- Their route metadata remains audit information rather than a final-consumer
+-- prerequisite.
 ------------------------------------------------------------------------
 
 record FiniteProducerToMinimalPaymentBridge
     (space : Weil.WeilTestSpace)
     (formula : Explicit.RiemannExplicitFormula space)
-    (orbit : Orbit.SourceFkOrbit)
-    (selected : Selected.ActualSelectedPoleNearProducer space formula orbit)
+    (window : Window.PoleNearTargetWindow space formula)
     (finite : Eval.FiniteNearProducer) : Set₁ where
   private
     evaluation0 = Eval.FiniteNearProducer.evaluation finite
@@ -109,8 +108,7 @@ record FiniteProducerToMinimalPaymentBridge
     signedNearValueIsSelectedFiniteNear :
       Cast.cast scalarCarrierIdentity
         (Eval.SignedFiniteNearEvaluationSurface.signedNearValue evaluation0)
-      ≡ Window.PoleNearTargetWindow.finitePoleNearSigned
-          (Selected.ActualSelectedPoleNearProducer.targetWindow selected)
+      ≡ Window.PoleNearTargetWindow.finitePoleNearSigned window
 
     budgetToSelectedScalar :
       Eval.EvaluationProducesBudget.Budget budget0 ->
@@ -126,8 +124,7 @@ record FiniteProducerToMinimalPaymentBridge
         budget0 evaluation0 (Eval.EvaluationProducesBudget.nearBudget budget0)
       ->
       SelectedUpper
-        (Window.PoleNearTargetWindow.finitePoleNearSigned
-          (Selected.ActualSelectedPoleNearProducer.targetWindow selected))
+        (Window.PoleNearTargetWindow.finitePoleNearSigned window)
         (budgetToSelectedScalar
           (Eval.EvaluationProducesBudget.nearBudget budget0))
 
@@ -136,10 +133,10 @@ record FiniteProducerToMinimalPaymentBridge
 open FiniteProducerToMinimalPaymentBridge public
 
 compileMinimalPaymentFromFiniteProducer :
-  forall {space formula orbit selected finite} ->
+  forall {space formula window finite} ->
   FiniteProducerToMinimalPaymentBridge
-    space formula orbit selected finite ->
-  SelectedFiniteNearBudgetPayment space formula orbit selected
+    space formula window finite ->
+  SelectedFiniteNearBudgetPayment space formula window
 compileMinimalPaymentFromFiniteProducer {finite = finite} bridge = record
   { evaluation = Eval.FiniteNearProducer.evaluation finite
   ; budget = Eval.FiniteNearProducer.budget finite
@@ -163,6 +160,10 @@ record SelectedFiniteNearMinimalConsumerBoundary : Set where
     routeClassificationRequiredByFinalOffConsumer : Bool
     routeClassificationRequiredByFinalOffConsumerIsFalse :
       routeClassificationRequiredByFinalOffConsumer ≡ false
+
+    sourceOrbitAttachmentRequiredAfterExactWindowAttachment : Bool
+    sourceOrbitAttachmentRequiredAfterExactWindowAttachmentIsFalse :
+      sourceOrbitAttachmentRequiredAfterExactWindowAttachment ≡ false
 
     finiteProducerPreservationMetadataRequiredAfterSameObjectAttachment : Bool
     finiteProducerPreservationMetadataRequiredAfterSameObjectAttachmentIsFalse :
@@ -191,8 +192,9 @@ canonicalSelectedFiniteNearMinimalConsumerBoundary =
   selected-finite-near-minimal-consumer-boundary
     false refl
     false refl
+    false refl
     true refl
     true refl
     true refl
     false refl
-    "For the authoritative final pole-quotient Off consumer, the minimal finite-near theorem-bearing object is one SignedFiniteNearEvaluationSurface plus its EvaluationProducesBudget, attached by exact scalar/signed-value identity to the selected finitePoleNearSigned coordinate. Historical route classification and preservation metadata remain useful audit information but are not final-consumer prerequisites after same-object attachment. Any richer FiniteNearProducer can compile into this minimal payment. RH is not derived."
+    "For the authoritative final pole-quotient Off consumer, index the finite-near payment directly by the exact PoleNearTargetWindow. The minimal theorem-bearing object is one SignedFiniteNearEvaluationSurface plus its EvaluationProducesBudget, attached by exact scalar/signed-value identity to window.finitePoleNearSigned. Historical route classification, source-orbit attachment and preservation metadata remain useful provenance/audit information but are not terminal scalar-consumer prerequisites after exact window attachment. Any richer FiniteNearProducer can compile into this minimal payment. RH is not derived."
