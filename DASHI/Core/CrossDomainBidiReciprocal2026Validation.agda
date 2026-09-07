@@ -47,3 +47,9 @@ import DASHI.Core.HistoricalResponsibilityLineageTraceBidiExact
 
 -- Sixth-order residual -> producer -> action compiler.
 import DASHI.Core.HistoricalProducerNextBestActionCompilerBidiExact
+
+-- Archive-informed checked-Lean return layer.
+import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact
+import DASHI.Core.ReformulationClosureWithoutFibreRefinementBidiExact
+import DASHI.Core.ProvenanceQuorumAdequacyBidiExact
+import DASHI.Core.PairIndexedInformationLossLocusBidiExact
