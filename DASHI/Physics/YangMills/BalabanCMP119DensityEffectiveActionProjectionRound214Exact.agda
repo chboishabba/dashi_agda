@@ -12,29 +12,19 @@ module DASHI.Physics.YangMills.BalabanCMP119DensityEffectiveActionProjectionRoun
 -- DOI: 10.1007/BF01217741.
 --
 -- Sect.2 states that the k-th effective density rho_k(V_k) is represented by the
--- expansion (2.18), parametrized by the localization-domain data, and that this
--- representation contains an effective action A_k.  Equation (2.23) then gives
--- the source decomposition of A_k, while (2.25)--(2.27) give the localized
--- analytic decomposition of its regular E_k part.
+-- expansion (2.18), parametrized by localization-domain data, and that this
+-- representation contains an effective action A_k.  Equation (2.23) gives the
+-- source decomposition of A_k; (2.25)--(2.27) give the localized analytic
+-- decomposition of its regular E_k part.
 --
 -- IMPORTANT SOURCE DISCIPLINE
 --
--- The durable repository text is an OCR/search extract.  It is adequate for
--- identifying the source carrier and equation locators, but not for certifying
--- every coefficient/sign in (2.23).  This module therefore does NOT transcribe
--- the OCR-damaged algebraic formula as a machine theorem.  Instead it records
--- the least source-facing representation contract needed by the current
--- consumer: the action projection is part of the pre-existing CMP119 density
--- representation, before R108 or BC1 is constructed.
---
--- This removes the circular choice
---
---     choose Density -> Potential after seeing BC1
---
--- and replaces it by
---
---     source-represented density -> its own CMP119 A_k projection
---        -> R108 -> BC1.
+-- The durable repository text is an OCR/search extract.  It identifies the
+-- source carrier and equation locators but is not authority for every damaged
+-- coefficient/sign in (2.23).  We therefore do not transcribe that OCR algebra
+-- as a machine theorem here.  Instead we formalize the exact representation
+-- coordinate required by the consumer: each complete-density object carries its
+-- own source effective-action projection before R108 or BC1 is constructed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -55,21 +45,20 @@ record CMP119CompleteDensityActionRepresentation
   field
     Background : Set
 
-    -- The action coordinate belonging to the Sect.2 representation of the SAME
-    -- complete density.  It is not selected relative to a downstream target.
+    -- Source meaning of a complete density.  The scale is NOT an argument of
+    -- this map: a density object denotes its own action.  Scale appears only in
+    -- the witness below saying that the selected densityAt scale is the Sect.2
+    -- rho_k whose action coordinate is A_k.
     effectiveActionOfDensity :
-      Nat → Flow.Density inputs → Background → ℝ
+      Flow.Density inputs → Background → ℝ
 
-    -- Source authority predicate: this projection is the A_k coordinate in the
-    -- CMP119 Sect.2 representation (2.18), with its action structure located at
-    -- (2.23) and regular localization at (2.25)--(2.27).
     IsCMP119Sect2EffectiveActionProjection :
       Nat → Flow.Density inputs → (Background → ℝ) → Set
 
     selectedDensityActionIsSourceProjection : ∀ scale →
       IsCMP119Sect2EffectiveActionProjection scale
         (Flow.densityAt inputs scale)
-        (effectiveActionOfDensity scale (Flow.densityAt inputs scale))
+        (effectiveActionOfDensity (Flow.densityAt inputs scale))
 
 open CMP119CompleteDensityActionRepresentation public
 
@@ -86,24 +75,16 @@ asFixedR108EffectiveDensitySemantics representation = record
   { Fixed.FixedR108EffectiveDensitySemantics.Background =
       Background representation
   ; Fixed.FixedR108EffectiveDensitySemantics.interpretDensity =
-      λ density background →
-        -- A complete density belongs to a definite scale in the beta-driven
-        -- sequence when consumed below.  The selected scale is supplied by the
-        -- R108 family; the scale-indexed preferred semantics below avoids any
-        -- post-hoc BC1 choice.
-        effectiveActionOfDensity representation 0 density background
+      effectiveActionOfDensity representation
   }
 
--- The general scale-indexed projection is the actual preferred consumer.  It is
--- kept separate from the compatibility semantics above so no theorem silently
--- claims that all density values are represented at scale zero.
 selectedEffectiveAction :
   ∀ {trajectory split inputs} →
   CMP119CompleteDensityActionRepresentation
     {trajectory = trajectory} {split = split} inputs →
   Nat → Background _ → ℝ
 selectedEffectiveAction {inputs = inputs} representation scale =
-  effectiveActionOfDensity representation scale (Flow.densityAt inputs scale)
+  effectiveActionOfDensity representation (Flow.densityAt inputs scale)
 
 selectedEffectiveActionHasCMP119SourceAuthority :
   ∀ {trajectory split inputs}
@@ -116,6 +97,16 @@ selectedEffectiveActionHasCMP119SourceAuthority :
 selectedEffectiveActionHasCMP119SourceAuthority representation scale =
   selectedDensityActionIsSourceProjection representation scale
 
+fixedR108SemanticsIsCMP119EffectiveAction :
+  ∀ {trajectory split inputs}
+    (representation : CMP119CompleteDensityActionRepresentation
+      {trajectory = trajectory} {split = split} inputs) →
+  ∀ density background →
+  Fixed.interpretDensity (asFixedR108EffectiveDensitySemantics representation)
+      density background
+  ≡ effectiveActionOfDensity representation density background
+fixedR108SemanticsIsCMP119EffectiveAction representation density background = refl
+
 ------------------------------------------------------------------------
 -- AUTHORITY BOUNDARY
 ------------------------------------------------------------------------
@@ -123,11 +114,10 @@ selectedEffectiveActionHasCMP119SourceAuthority representation scale =
 cmp119DensityActionProjectionPackagingLevel : ProofLevel
 cmp119DensityActionProjectionPackagingLevel = machineChecked
 
--- Published source authority for the existence/meaning of A_k inside the Sect.2
--- density representation.  Exact repository instantiation must bind the literal
--- source density carrier and verify the equation/formula against the source PDF.
 cmp119Sect2DensityContainsEffectiveActionLevel : ProofLevel
 cmp119Sect2DensityContainsEffectiveActionLevel = standardImported
 
+-- Physical/source leaf: instantiate this projection on the literal CMP119/122
+-- complete-density carrier and check the source formula against the source PDF.
 literalCMP119DensityEffectiveActionProjectionLevel : ProofLevel
 literalCMP119DensityEffectiveActionProjectionLevel = conditional
