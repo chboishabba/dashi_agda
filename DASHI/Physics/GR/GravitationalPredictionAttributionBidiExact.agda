@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.GR.GravitationalObservationBidiExact as Obs
+import DASHI.Physics.GR.GravitationalObservationSourceAtlasExact as Sources
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 import DASHI.Physics.GR.GravitationalEpistemicLineageExact as Lineage
 
@@ -43,6 +44,47 @@ record AttributedGravitationalPrediction : Set where
 
 open AttributedGravitationalPrediction public
 
+------------------------------------------------------------------------
+-- Derived-comparison lineage bindings.
+--
+-- A DASHI-derived comparison must identify the exact source and authority
+-- carriers consumed by that comparison.  A generic lineage record is not
+-- sufficient merely because it names plausible upstream sources.
+------------------------------------------------------------------------
+
+record SinglePredictionComparisonLineage
+    (attributedPrediction : AttributedGravitationalPrediction)
+    (observation : Obs.GravitationalObservationReceipt) : Set where
+  constructor single-prediction-comparison-lineage
+  field
+    derivedLineage : Lineage.DASHIDerivedComparisonLineage
+    consumedObservationSource : Sources.ObservationAttributedSource
+    consumedObservationSourceMatches :
+      consumedObservationSource ≡ Obs.attributedObservationSource observation
+    consumedPredictionAuthority : PredictionAuthority
+    consumedPredictionAuthorityMatches :
+      consumedPredictionAuthority ≡ authority attributedPrediction
+
+open SinglePredictionComparisonLineage public
+
+record PairedPredictionComparisonLineage
+    (leftPrediction rightPrediction : AttributedGravitationalPrediction)
+    (observation : Obs.GravitationalObservationReceipt) : Set where
+  constructor paired-prediction-comparison-lineage
+  field
+    derivedLineage : Lineage.DASHIDerivedComparisonLineage
+    consumedObservationSource : Sources.ObservationAttributedSource
+    consumedObservationSourceMatches :
+      consumedObservationSource ≡ Obs.attributedObservationSource observation
+    consumedLeftAuthority : PredictionAuthority
+    consumedLeftAuthorityMatches :
+      consumedLeftAuthority ≡ authority leftPrediction
+    consumedRightAuthority : PredictionAuthority
+    consumedRightAuthorityMatches :
+      consumedRightAuthority ≡ authority rightPrediction
+
+open PairedPredictionComparisonLineage public
+
 record AttributedPredictionObservationComparison : Set where
   constructor attributed-prediction-observation-comparison
   field
@@ -52,7 +94,8 @@ record AttributedPredictionObservationComparison : Set where
       Pred.PredictionObservationWeld
         (prediction attributedPrediction)
         observation
-    derivedComparisonLineage : Lineage.DASHIDerivedComparisonLineage
+    comparisonLineage :
+      SinglePredictionComparisonLineage attributedPrediction observation
 
 open AttributedPredictionObservationComparison public
 
@@ -93,6 +136,7 @@ record PredictionAttributionBoundary : Set where
     internalTheoremNeedsProofLineageInsteadOfFakeBibliography : Bool
     authorityCarrierMatchAlonePaysClaimScope : Bool
     exactAuthorityScopeMustMatchPredictionClaim : Bool
+    derivedComparisonMustBindExactConsumedInputs : Bool
     attributedPredictionAutomaticallyMatchesObservation : Bool
     predictionObservationWeldAutomaticallyMakesSourceClaim : Bool
     derivedComparisonMustRemainDASHIInference : Bool
@@ -100,4 +144,5 @@ record PredictionAttributionBoundary : Set where
 
 canonicalPredictionAttributionBoundary : PredictionAttributionBoundary
 canonicalPredictionAttributionBoundary =
-  prediction-attribution-boundary true true false true false false true false
+  prediction-attribution-boundary
+    true true false true true false false true false
