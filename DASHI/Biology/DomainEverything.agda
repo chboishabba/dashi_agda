@@ -57,7 +57,8 @@ import DASHI.Biology.NeurodivergentHoldingTensionBridgeExact
 -- adapter once draft ancestry is reconciled.  No cross-draft owners are copied.
 import DASHI.Biology.EmbodiedSocialEcologyRelationalHistoryObligationExact
 
--- Same-trial multimodal diagnosis/debugging return.
+-- Same-trial multimodal diagnosis/debugging return, including append-only
+-- temporal diagnosis elimination/reactivation history.
 import DASHI.Biology.DrosophilaPluralEpistemicProgressBidiExact
 import DASHI.Biology.DrosophilaDiagnosisRepairSchedulerBidiExact
 import DASHI.Biology.DrosophilaTemporalDiagnosisHistoryBidiExact
