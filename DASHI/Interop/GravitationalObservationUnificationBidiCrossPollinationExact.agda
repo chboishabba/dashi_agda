@@ -50,6 +50,7 @@ roleForLane unificationConsumerLane = registerCrossSectorResidual
 
 laneForPredictionResidual : Pred.PredictionObservationResidual → CrossPollinationLane
 laneForPredictionResidual Pred.missingTheoryCarrier = grTheoryLane
+laneForPredictionResidual Pred.missingPredictionClaimScope = grTheoryLane
 laneForPredictionResidual Pred.missingSourceModel = grTheoryLane
 laneForPredictionResidual Pred.missingPropagationModel = grTheoryLane
 laneForPredictionResidual Pred.missingDetectorResponse = observationEvidenceLane
@@ -62,6 +63,7 @@ laneForPredictionResidual Pred.residualRequiresTheoryRevision = unificationConsu
 
 producerForPredictionResidual : Pred.PredictionObservationResidual → Search.ProducerClass
 producerForPredictionResidual Pred.missingTheoryCarrier = Search.propositionSourceProducer
+producerForPredictionResidual Pred.missingPredictionClaimScope = Search.discriminatorProducer
 producerForPredictionResidual Pred.missingSourceModel = Search.propositionSourceProducer
 producerForPredictionResidual Pred.missingPropagationModel = Search.propositionSourceProducer
 producerForPredictionResidual Pred.missingDetectorResponse = Search.empiricalEvidenceProducer
