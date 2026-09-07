@@ -116,22 +116,28 @@ import DASHI.Physics.YangMills.BalabanClayT5PreferredOSGramFromExpectationExact
 -- from the mature quantitative package; only analytic closure laws survive.
 import DASHI.Physics.YangMills.BalabanClayT5QuantitativeContinuumClosureCompilerExact
 
--- Standard compact-unique topology route upgrading literal subsequential
--- compactness + unique cluster point to full selected-sequence convergence.
+-- Legacy compactness/Prokhorov topology route retained for compatibility.
 import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact
-
--- Typed Prokhorov route: literal subsequence tightness -> convergent further
--- literal subsequence. Historical Set-valued compactness receipts are not used
--- as substitutes for this theorem.
 import DASHI.Physics.YangMills.BalabanClayT5SubsequenceProkhorovExtractionExact
-
--- Uniform tightness restricts definitionally to every literal subsequence, so
--- only one selected-sequence uniform-tightness theorem remains physical.
 import DASHI.Physics.YangMills.BalabanClayT5UniformTightnessSubsequenceInheritanceExact
-
--- Existing typed cutoff-uniform diagonal moments are converted to uniform
--- tightness once their compact-containment interpretation is supplied.
 import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact
+
+-- Legacy weak-topology compilers retained as compatibility surfaces.
+import DASHI.Physics.YangMills.BalabanClayT5WeakExpectationPropertyClosureExact
+import DASHI.Physics.YangMills.BalabanClayT5WeakTopologyClusterCylinderAgreementExact
+import DASHI.Physics.YangMills.BalabanClayT5WeakExpectationGramReflectionClosureExact
+
+-- Preferred selected-convergence route.  It carries only a convergence relation
+-- and one selected physical limit theorem; no total limit operator is required.
+import DASHI.Physics.YangMills.BalabanClayT5SelectedSequentialConvergenceExact
+import DASHI.Physics.YangMills.BalabanClayT5SelectedMomentCompactContainmentExact
+import DASHI.Physics.YangMills.BalabanClayT5SelectedUniformTightnessBridgeExact
+import DASHI.Physics.YangMills.BalabanClayT5SelectedProkhorovExtractionExact
+import DASHI.Physics.YangMills.BalabanClayT5SelectedCompactUniqueFullSequenceExact
+import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakExpectationClosureExact
+import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakGramReflectionClosureExact
+import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSExact
+import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSGapBridgeExact
 
 -- Compatibility / optional local coercive-observable routes. These do not
 -- replace the global selected-measure compact-containment theorem.
@@ -176,6 +182,7 @@ import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound207Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound208Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound209Exact
 import DASHI.Physics.YangMills.BalabanClayT1ResidualIntrospectionRound210Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound210Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
