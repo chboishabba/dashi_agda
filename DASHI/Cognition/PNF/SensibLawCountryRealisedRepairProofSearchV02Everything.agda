@@ -41,10 +41,15 @@ assessedCommunityOutcomeCandidateRecomputesCalibration :
   ≡ Bridge.recomputeV02Calibration
 assessedCommunityOutcomeCandidateRecomputesCalibration = refl
 
-communityOutcomeCandidateDoesNotSkipAuthority :
+communityOutcomeCandidateKeepsOutcomeResidualLive :
   Assessment.firstResidualAfterReference Bridge.communityOutcomeCandidateDeltaV02
+  ≡ "affectedCommunityOutcomeResidualV02"
+communityOutcomeCandidateKeepsOutcomeResidualLive = refl
+
+admittedCommunityOutcomeAdvancesToAuthority :
+  Assessment.firstResidualAfterReference Bridge.communityOutcomeAdmittedDeltaV02
   ≡ "communityAuthorityCapacityResidualV02"
-communityOutcomeCandidateDoesNotSkipAuthority = refl
+admittedCommunityOutcomeAdvancesToAuthority = refl
 
 ------------------------------------------------------------------------
 -- Existing V02 positive evidence remains visible and bounded.
