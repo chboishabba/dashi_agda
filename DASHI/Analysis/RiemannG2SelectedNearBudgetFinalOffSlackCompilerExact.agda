@@ -8,6 +8,7 @@ import DASHI.Analysis.WeilTestSpace as Weil
 import DASHI.Analysis.RiemannExplicitFormula as Explicit
 import DASHI.Analysis.RiemannG2FkOrbitConsumerAttachmentExact as Orbit
 import DASHI.Analysis.RiemannG2SelectedPoleNearSingleProducerBidiExact as Selected
+import DASHI.Analysis.RiemannAristotlePoleNearExplicitFormulaBridgeExact as Window
 import DASHI.Analysis.RiemannAristotlePoleQuotientFiniteNearEvaluationBidiExact as Eval
 import DASHI.Analysis.RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact as SameObject
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
@@ -85,11 +86,6 @@ record SelectedNearBudgetFinalOffSlackBridge
 
 open SelectedNearBudgetFinalOffSlackBridge public
 
-------------------------------------------------------------------------
--- The evaluator's existing selected upper transports mechanically to the final
--- near response/budget presentation. It is a reuse receipt, not a fresh bound.
-------------------------------------------------------------------------
-
 compiledSelectedUpperInFinalOrder :
   ∀ {space formula orbit selected finite attachment transport S d assigned} →
   (bridge :
@@ -97,18 +93,13 @@ compiledSelectedUpperInFinalOrder :
       space formula orbit selected finite attachment transport S d assigned) →
   NearFar._≤_ S
     (Cast.cast (selectedScalarIdentity bridge)
-      (SameObject.Window.PoleNearTargetWindow.finitePoleNearSigned
+      (Window.PoleNearTargetWindow.finitePoleNearSigned
         (Selected.ActualSelectedPoleNearProducer.targetWindow selected)))
     (Cast.cast (selectedScalarIdentity bridge)
       (SameObject.selectedNearBudget transport))
 compiledSelectedUpperInFinalOrder {transport = transport} bridge =
   selectedOrderTransport bridge
     (SameObject.selectedFiniteNearUpper transport)
-
-------------------------------------------------------------------------
--- Equality-local conversion of the selected epsilon-slack theorem into the exact
--- final near-budget statement required by IntermediateNearFarAllowanceFit.
-------------------------------------------------------------------------
 
 compiledFinalNearPlusIntermediateBelowAssigned :
   ∀ {space formula orbit selected finite attachment transport S d assigned} →
@@ -151,10 +142,6 @@ compiledFinalNearPlusFarBelowAssigned :
 compiledFinalNearPlusFarBelowAssigned {S = S} {d = d} {assigned = assigned} bridge =
   Intermediate.compiledNearPlusFarBelowAssigned
     S d assigned (compileIntermediateAllowanceFit bridge)
-
-------------------------------------------------------------------------
--- Frontier / non-promotion boundary.
-------------------------------------------------------------------------
 
 record SelectedNearBudgetFinalOffSlackBoundary : Set where
   constructor selected-near-budget-final-off-slack-boundary
