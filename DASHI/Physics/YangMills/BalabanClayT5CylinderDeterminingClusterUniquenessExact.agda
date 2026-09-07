@@ -11,6 +11,7 @@ module DASHI.Physics.YangMills.BalabanClayT5CylinderDeterminingClusterUniqueness
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact as Compact
@@ -28,7 +29,7 @@ open CylinderDeterminingAuthority public
 record ExtractedClusterCylinderAgreement
     (Measure Test Scalar : Set)
     (expectation : Measure → Test → Scalar)
-    (sequence : _)
+    (sequence : Nat → Measure)
     (clusterLimit : (subsequence : Compact.SubsequenceWitness sequence) → Measure)
     (target : Measure) : Set₁ where
   field
@@ -43,7 +44,7 @@ open ExtractedClusterCylinderAgreement public
 everyExtractedClusterPointIsTarget :
   ∀ {Measure Test Scalar}
     {expectation : Measure → Test → Scalar}
-    {sequence : _}
+    {sequence : Nat → Measure}
     {clusterLimit :
       (subsequence : Compact.SubsequenceWitness sequence) → Measure}
     {target : Measure} →
@@ -54,7 +55,7 @@ everyExtractedClusterPointIsTarget :
   clusterLimit subsequence ≡ target
 everyExtractedClusterPointIsTarget authority agreement subsequence =
   cylinderExpectationsDetermineMeasure authority
-    _ _
+    (clusterLimit subsequence) target
     (everyExtractedClusterAgreesOnCylinderTests agreement subsequence)
 
 cylinderDeterminingClusterUniquenessCompilerLevel : ProofLevel
