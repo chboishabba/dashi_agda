@@ -7,19 +7,9 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
--- Provider access/rate governance parity for the Rust online engine.
---
--- Rust is primary.  This module mirrors the implemented policy distinction:
---   provider-published guidance != SensibLaw self-imposed pacing != authority.
---
--- Inspection of the current HCA Terms of Use and FCA robots policy did not
--- disclose a numeric request-rate allowance.  That absence is represented as
--- unknown, not zero and not unlimited.  SensibLaw therefore retains its stricter
--- historical floor of one request per four seconds, burst one, unless a provider
--- publishes a stricter rule.
---
--- OALC is a bulk-snapshot/local-first lane.  AustLII ordinary automated case-law
--- access and JADE are not default live lanes in the current runtime.
+-- Provider access/rate/reuse governance parity for the Rust online engine.
+-- Rust is primary. Provider-published guidance, SensibLaw pacing, reuse duties,
+-- and semantic/legal authority remain distinct coordinates.
 ------------------------------------------------------------------------
 
 rustRepository : String
@@ -29,13 +19,16 @@ rustBranch : String
 rustBranch = "agent/governed-online-r6-v2"
 
 rustSourceHead : String
-rustSourceHead = "b530816215f0f437d46fab90827cc61d951cf727"
+rustSourceHead = "d7ace6ec19bd44f7b6395702a5f0bdbd867d8f48"
 
 hcaPolicySource : String
 hcaPolicySource = "https://www.hcourt.gov.au/terms-use"
 
-fcaPolicySource : String
-fcaPolicySource = "https://www.fedcourt.gov.au/robots.txt"
+fcaAccessPolicySource : String
+fcaAccessPolicySource = "https://www.fedcourt.gov.au/robots.txt"
+
+fcaReusePolicySource : String
+fcaReusePolicySource = "https://www.fedcourt.gov.au/copyright"
 
 oalcPolicySource : String
 oalcPolicySource = "https://huggingface.co/datasets/isaacus/open-australian-legal-corpus"
@@ -88,9 +81,39 @@ record ProviderAccessPolicyParityBoundary : Set where
     jadeDefaultLiveLaneEnabled : Bool
     jadeDefaultLiveLaneEnabledIsFalse : jadeDefaultLiveLaneEnabled ≡ false
 
+    hcaAttributionRequired : Bool
+    hcaAttributionRequiredIsTrue : hcaAttributionRequired ≡ true
+
+    hcaOriginalSourceURLRequired : Bool
+    hcaOriginalSourceURLRequiredIsTrue : hcaOriginalSourceURLRequired ≡ true
+
+    hcaAccuracyOrUnalteredCopyRequired : Bool
+    hcaAccuracyOrUnalteredCopyRequiredIsTrue :
+      hcaAccuracyOrUnalteredCopyRequired ≡ true
+
+    hcaNonMisleadingUseRequired : Bool
+    hcaNonMisleadingUseRequiredIsTrue : hcaNonMisleadingUseRequired ≡ true
+
+    fcaAttributionRequired : Bool
+    fcaAttributionRequiredIsTrue : fcaAttributionRequired ≡ true
+
+    fcaOriginalSourceURLRequired : Bool
+    fcaOriginalSourceURLRequiredIsTrue : fcaOriginalSourceURLRequired ≡ true
+
+    fcaAccuracyOrUnalteredCopyRequired : Bool
+    fcaAccuracyOrUnalteredCopyRequiredIsTrue :
+      fcaAccuracyOrUnalteredCopyRequired ≡ true
+
+    thirdPartyRightsMayApply : Bool
+    thirdPartyRightsMayApplyIsTrue : thirdPartyRightsMayApply ≡ true
+
     providerPermissionAutomaticallySemanticAuthority : Bool
     providerPermissionAutomaticallySemanticAuthorityIsFalse :
       providerPermissionAutomaticallySemanticAuthority ≡ false
+
+    reusePermissionAutomaticallyCurrentAuthority : Bool
+    reusePermissionAutomaticallyCurrentAuthorityIsFalse :
+      reusePermissionAutomaticallyCurrentAuthority ≡ false
 
 canonicalProviderAccessPolicyParityBoundary : ProviderAccessPolicyParityBoundary
 canonicalProviderAccessPolicyParityBoundary =
@@ -107,6 +130,15 @@ canonicalProviderAccessPolicyParityBoundary =
     true refl
     false refl
     false refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
     false refl
 
 ------------------------------------------------------------------------
@@ -115,13 +147,17 @@ canonicalProviderAccessPolicyParityBoundary =
 
 data MissingRateMeansUnlimitedAccess : Set where
 data ProviderPermissionMeansLegalAuthority : Set where
+data ReusePermissionMeansCurrentAuthority : Set where
 data RobotsAllowanceMeansSemanticPayment : Set where
 
-aMissingRateDoesNotMeanUnlimitedAccess : MissingRateMeansUnlimitedAccess → ⊥
-aMissingRateDoesNotMeanUnlimitedAccess ()
+missingRateDoesNotMeanUnlimitedAccess : MissingRateMeansUnlimitedAccess → ⊥
+missingRateDoesNotMeanUnlimitedAccess ()
 
 providerPermissionDoesNotMeanLegalAuthority : ProviderPermissionMeansLegalAuthority → ⊥
 providerPermissionDoesNotMeanLegalAuthority ()
+
+reusePermissionDoesNotMeanCurrentAuthority : ReusePermissionMeansCurrentAuthority → ⊥
+reusePermissionDoesNotMeanCurrentAuthority ()
 
 robotsAllowanceDoesNotMeanSemanticPayment : RobotsAllowanceMeansSemanticPayment → ⊥
 robotsAllowanceDoesNotMeanSemanticPayment ()
