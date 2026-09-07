@@ -11,8 +11,8 @@ import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 -- MULTI-SCALE GRAVITY THEORY FINGERPRINT
 --
 -- A candidate gravity theory is not characterized by one successful channel.
--- It exposes predictions across independent observational scales.  Each scale
--- has its own required channel, observable, calibration, and comparison weld.
+-- It exposes predictions across independent observational scales.  Every scale
+-- prediction must belong to the same exact theory carrier and family.
 ------------------------------------------------------------------------
 
 data GravityScale : Set where
@@ -68,6 +68,32 @@ record MultiScaleTheoryFingerprint : Set where
     nanohertzTimingPrediction : ScalePrediction
     cosmologicalPropagationPrediction : ScalePrediction
 
+    freeFallTheoryIdentityMatches :
+      Pred.theoryCarrier (prediction laboratoryFreeFallPrediction) ≡ theoryIdentity
+    clockTheoryIdentityMatches :
+      Pred.theoryCarrier (prediction laboratoryClockPrediction) ≡ theoryIdentity
+    orbitalTheoryIdentityMatches :
+      Pred.theoryCarrier (prediction orbitalTimingPrediction) ≡ theoryIdentity
+    compactBinaryTheoryIdentityMatches :
+      Pred.theoryCarrier (prediction compactBinaryPrediction) ≡ theoryIdentity
+    nanohertzTheoryIdentityMatches :
+      Pred.theoryCarrier (prediction nanohertzTimingPrediction) ≡ theoryIdentity
+    cosmologicalTheoryIdentityMatches :
+      Pred.theoryCarrier (prediction cosmologicalPropagationPrediction) ≡ theoryIdentity
+
+    freeFallTheoryFamilyMatches :
+      Pred.theoryFamily (prediction laboratoryFreeFallPrediction) ≡ theoryFamily
+    clockTheoryFamilyMatches :
+      Pred.theoryFamily (prediction laboratoryClockPrediction) ≡ theoryFamily
+    orbitalTheoryFamilyMatches :
+      Pred.theoryFamily (prediction orbitalTimingPrediction) ≡ theoryFamily
+    compactBinaryTheoryFamilyMatches :
+      Pred.theoryFamily (prediction compactBinaryPrediction) ≡ theoryFamily
+    nanohertzTheoryFamilyMatches :
+      Pred.theoryFamily (prediction nanohertzTimingPrediction) ≡ theoryFamily
+    cosmologicalTheoryFamilyMatches :
+      Pred.theoryFamily (prediction cosmologicalPropagationPrediction) ≡ theoryFamily
+
 open MultiScaleTheoryFingerprint public
 
 ------------------------------------------------------------------------
@@ -75,6 +101,8 @@ open MultiScaleTheoryFingerprint public
 ------------------------------------------------------------------------
 
 data MultiScaleResidual : Set where
+  missingSameTheoryIdentityReceipt : MultiScaleResidual
+  missingSameTheoryFamilyReceipt : MultiScaleResidual
   missingLaboratoryFreeFallComparison : MultiScaleResidual
   missingLaboratoryClockComparison : MultiScaleResidual
   missingOrbitalTimingComparison : MultiScaleResidual
@@ -91,12 +119,14 @@ record MultiScaleTheoryBoundary : Set where
     laboratoryAnomalyAutomaticallyInvalidatesGWAgreement : Bool
     gwAgreementAutomaticallyClosesLaboratoryResidual : Bool
     sameTheoryIdentityRequiredAcrossScaleComparisons : Bool
+    sameTheoryFamilyRequiredAcrossScaleComparisons : Bool
+    mixedTheoryPredictionsCountAsOneFingerprint : Bool
     crossScaleTensionMayOpenTheoryRevision : Bool
     completeFingerprintAutomaticallyPromotesUnification : Bool
 
 canonicalMultiScaleTheoryBoundary : MultiScaleTheoryBoundary
 canonicalMultiScaleTheoryBoundary =
-  multi-scale-theory-boundary false false false true true false
+  multi-scale-theory-boundary false false false true true false true false
 
 ------------------------------------------------------------------------
 -- Exact scale non-collapse witnesses.
