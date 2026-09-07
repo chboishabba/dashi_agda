@@ -6,7 +6,6 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.GR.GravitationalMultiScaleTheoryFingerprintBidiExact as Multi
 import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
-import DASHI.Physics.GR.GravitationalEpistemicLineageExact as Lineage
 
 ------------------------------------------------------------------------
 -- ATTRIBUTION-PRESERVING MULTI-SCALE FINGERPRINT
@@ -35,7 +34,10 @@ record AttributedScaleComparison : Set where
     sameScalePrediction :
       scalePrediction attributedScalePrediction
         ≡ Multi.scalePrediction scaleComparison
-    derivedComparisonLineage : Lineage.DASHIDerivedComparisonLineage
+    comparisonLineage :
+      Attr.SinglePredictionComparisonLineage
+        (attributedPrediction attributedScalePrediction)
+        (Multi.observation scaleComparison)
 
 open AttributedScaleComparison public
 
@@ -76,9 +78,10 @@ record MultiScaleAttributionBoundary : Set where
     aggregationMayDropSourceLineage : Bool
     oneScaleSourceMayBeReusedAsAuthorityForDifferentClaimWithoutReceipt : Bool
     internalTheoremMayBeRelabelledAsExternalPaper : Bool
+    genericComparisonLineageMayFloatAcrossScaleInputs : Bool
     derivedCrossScaleComparisonIsExternalSourceClaim : Bool
     exactPredictionIdentityRequiredAtEveryScale : Bool
 
 canonicalMultiScaleAttributionBoundary : MultiScaleAttributionBoundary
 canonicalMultiScaleAttributionBoundary =
-  multi-scale-attribution-boundary false false false false true
+  multi-scale-attribution-boundary false false false false false true
