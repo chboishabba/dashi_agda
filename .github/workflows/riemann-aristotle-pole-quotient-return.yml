@@ -6,6 +6,7 @@ on:
       - 'DASHI/Analysis/RiemannAristotlePoleQuotientComplementMarginCompilerExact.agda'
       - 'DASHI/Analysis/RiemannAristotlePoleQuotientBidiMeetingExact.agda'
       - 'DASHI/Analysis/RiemannAristotlePoleQuotientSplitComplementBudgetExact.agda'
+      - 'DASHI/Analysis/RiemannG2PoleQuotientProducerReconciliation8889Exact.agda'
       - 'DASHI/Analysis/RiemannG2PoleQuotientProducerAllowanceTargetExact.agda'
       - 'DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda'
       - 'DASHI/Analysis/RiemannG2PoleQuotientOffAllowanceDirectCompilerExact.agda'
