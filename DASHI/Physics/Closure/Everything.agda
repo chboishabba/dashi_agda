@@ -39,6 +39,31 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432E
 import DASHI.Physics.Closure.NSTriadKNFixedOutputNestedBonyCrossRound433Exact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact
 
+-- Finite rational Cauchy completion / diagonal endpoint tranche.  This keeps
+-- the full positive Cauchy form, literal R397 off-diagonal flux, normalized
+-- double-mixed mass, fixed-output energy-square routing, and temporal endpoint
+-- orientation on the same physical carrier.  The chain closes the negative
+-- terminal-flux endpoint conditional on the explicit Fourier/radius
+-- calibrations; Package A remains open at the initial positive-flux and
+-- integrated nonlinear-remainder leaves.
+import DASHI.Physics.Closure.NSTriadKNRationalCauchySchurComplementRound443Exact
+import DASHI.Physics.Closure.NSTriadKNFiniteKernelRankOneQuadraticSplitRound444Exact
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteCauchyPSDCompilerRound445Exact
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3CauchyPSDRound446Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyResolventCompletionRound447Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyOffDiagonalR397WeldRound448Exact
+import DASHI.Physics.Closure.NSTriadKNDiagonalResolventRateFloorRound449Exact
+import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalDiagonalR298WeldRound451Exact
+import DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact
+import DASHI.Physics.Closure.NSTriadKNSelectedPairEnergySquareRound453Exact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputEnergySquareRoutingRound454Exact
+import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedDoubleMixedMassRound456Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalDiagonalEnergySquareEndpointRound457Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyTerminalFluxEndpointRound458Exact
+import DASHI.Physics.Closure.NSTriadKNTerminalFluxPaidTemporalReductionRound459Exact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
