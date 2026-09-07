@@ -12,8 +12,10 @@ import DASHI.Core.SequentialOutcomeBackpropagationBidiExact
 -- observation by strict diagnosis-fibre narrowing rather than raw magnitude.
 import DASHI.Core.DiagnosisFibreSalienceSchedulerBidiExact
 import DASHI.Core.DiagnosisExperimentPortfolioBidiExact
+import DASHI.Core.DependencyWeightedDiagnosisSchedulerBidiExact
 import DASHI.Core.SequentialDiagnosisDebugLoopBidiExact
 import DASHI.Core.ArgumentDiagnosisDebuggingBidiExact
 import DASHI.Governance.GovernanceDiagnosisRepairSchedulerBidiExact
 import DASHI.Core.RuntimeDiagnosisRepairSchedulerBidiExact
 import DASHI.Cognition.PNF.SensibLawDiagnosisRepairSchedulerBidiExact
+import DASHI.Biology.DrosophilaDiagnosisRepairSchedulerBidiExact
