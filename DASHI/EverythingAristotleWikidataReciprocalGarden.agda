@@ -11,3 +11,4 @@ import DASHI.Interop.AristotleCoverageResidualSalienceBidiExact
 import DASHI.Interop.AristotleWorklistDeliberativeMovesBidiExact
 import DASHI.Interop.AristotleContentIdentityRevisionSyncBidiExact
 import DASHI.Interop.AristotleWikibaseZelphBraidedPromotionBidiExact
+import DASHI.Interop.SensibLawNatCoverageAcquisitionDemandExact
