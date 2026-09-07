@@ -14,6 +14,7 @@ on:
       - 'DASHI/Culture/HegelDialecticPrimarySourceBoundaryExact.agda'
       - 'DASHI/Culture/HoeMathLevelsSourceBoundaryExact.agda'
       - 'DASHI/Culture/AestheticPerceptionEyeTrackingSourceBoundaryExact.agda'
+      - 'DASHI/Culture/DialecticLevelsAestheticConsumerFibreCrossPollinationExact.agda'
       - 'DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda'
       - 'DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda'
       - 'DASHI/Culture/Everything.agda'
@@ -49,6 +50,7 @@ jobs:
             DASHI/Culture/HegelDialecticPrimarySourceBoundaryExact.agda
             DASHI/Culture/HoeMathLevelsSourceBoundaryExact.agda
             DASHI/Culture/AestheticPerceptionEyeTrackingSourceBoundaryExact.agda
+            DASHI/Culture/DialecticLevelsAestheticConsumerFibreCrossPollinationExact.agda
             DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda
             DASHI/Culture/DialecticPluralismRepresentationFourfoldCrossPollinationExact.agda
           )
@@ -90,6 +92,9 @@ jobs:
 
       - name: Kernel-check aesthetic eye-tracking source boundary
         run: agda -i . -l standard-library DASHI/Culture/AestheticPerceptionEyeTrackingSourceBoundaryExact.agda
+
+      - name: Kernel-check dialectic/levels/aesthetic consumer fibre
+        run: agda -i . -l standard-library DASHI/Culture/DialecticLevelsAestheticConsumerFibreCrossPollinationExact.agda
 
       - name: Kernel-check dialectic pluralism representation sources
         run: agda -i . -l standard-library DASHI/Culture/DialecticPluralismRepresentationSourceAtlasExact.agda
