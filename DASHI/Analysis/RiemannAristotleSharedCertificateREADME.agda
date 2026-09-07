@@ -28,18 +28,18 @@ open import DASHI.Core.Prelude
 -- also owns quantitative cluster-margin mathematics, leaving only same-object
 -- attachment for that coordinate.
 --
--- Consumer adequacy is now concrete on the final common ordered-additive carrier:
+-- Consumer adequacy is concrete on the final common ordered-additive carrier:
 --
 --   B_off <= A_off
 --   B_Gamma <= A_Gamma
---   A_off + A_Gamma < M_cluster
+--   A_off + A_Gamma < M_cluster.
 --
--- implies the required strict combined budget. This reuses the allowance pattern
--- already present in the Riemann near/far and finite-Schur lanes and requires no
--- subtraction, division, or synthetic half-margin operation. The allowance-aware
--- same-object assembly then compiles literal Off/Gamma/Cluster producers and those
--- allowance receipts directly into the existing contradiction consumer; the
--- strict combined-budget theorem is not a separate research leaf.
+-- The allowance-aware final assembly consumes the actual producer-payment
+-- records, so A_off/A_Gamma are literal transports of the allowances paid by
+-- the analytic theorems. The newer order-transport compiler compresses four
+-- downstream inequality transports into one relation-level order transport per
+-- Off/Gamma/Cluster source carrier. After those relation transports, the source
+-- upper/lower theorems and producer allowance fits compile automatically.
 --
 -- The Off leaf is further decomposed on one common quarter-period cutoff J:
 --
@@ -53,8 +53,9 @@ open import DASHI.Core.Prelude
 --
 -- Gamma has no cutoff coordinate. Its terminal theorem is simply the same-taper
 -- assigned allowance fit B_Gamma(g_pole) <= A_Gamma. A concrete epsGamma /
--- gammaConeEnvelope lineage is recovered historically, but lineage recovery is
--- a proof route, not part of the terminal consumer API.
+-- gammaConeEnvelope lineage is recovered historically. Generic Gamma-source
+-- discovery is therefore pruned; same-consumer identity with the 8889 producer
+-- remains the live source/provenance payment before precision-loss localization.
 --
 -- Existing representation machinery is reused rather than re-searched.
 -- Uninhabited adapter records remain infrastructure obligations, not fabricated
@@ -89,8 +90,11 @@ import DASHI.Analysis.RiemannG2HighestAlphaAfter8894Exact
 import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact
 import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact
 import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact
+import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact
+import DASHI.Analysis.RiemannG2GammaCandidateSourceLineageRecoveryExact
 import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact
 import DASHI.Analysis.RiemannG2FinalSplitComplementAllowanceAssemblyExact
+import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact
