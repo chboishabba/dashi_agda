@@ -4,16 +4,15 @@ module DASHI.Physics.YangMills.BalabanPath13RadiusPrincipalImageRouteExact where
 ------------------------------------------------------------------------
 -- PATH13 NATIVE RADIUS -> RELATIVE-CONTOUR PRINCIPAL IMAGE
 --
--- This is the radius-driven sibling of the older selected-defect weld.
 -- Geometry and the literal 74-link same-object contour remain exactly the same.
--- The per-link estimate now comes from the already-native
--- `SelectedInverseLinkRadius13` instead of re-routing physical smallness through
--- an abstract variational defect.
+-- Physical per-link smallness comes from the native `SelectedInverseLinkRadius13`.
 --
--- Therefore only three selected-chart recognition facts remain here:
---   * the selected cut order is rational order;
---   * the selected cut defect is the standard operator defect;
---   * the fixed source threshold 1/24 lies inside the selected chart radius.
+-- The compatibility recognition record retains three fields.  The preferred
+-- route factors the first two into `SelectedPath13OperatorChartRepresentation`,
+-- where they belong as physical representation identifications.  The genuinely
+-- cut-specific residual is then only
+--
+--   1/24 <= selected cut radius.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -24,6 +23,8 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
 import DASHI.Physics.YangMills.BalabanPath13SelectedPhysicalBackgroundTargetExact as PathTarget
+import DASHI.Physics.YangMills.BalabanPath13SelectedBackgroundRadiusFibreExact as Fibre
+import DASHI.Physics.YangMills.BalabanPath13SelectedBackgroundOperatorChartExact as OperatorChart
 import DASHI.Physics.YangMills.BalabanCMP98Path13ReducedFamilyGeometryExact as Reduced
 import DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact as Family
 import DASHI.Physics.YangMills.BalabanCMP98Path13RelativeContourPrincipalImageExact as Existing
@@ -40,9 +41,11 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13PhysicalPeriodicRealizationRoun
 import DASHI.Physics.YangMills.BalabanCMP109QuaternionPathTransportTelescopeExact as RawPath
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
 import DASHI.Physics.YangMills.BalabanCMP98UnitaryOperatorDefectTelescopeExact as Op
-import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
-import DASHI.Physics.YangMills.BalabanCMP98MinimalContourSourceChartBudgetExact as Budget
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as Lie
+
+------------------------------------------------------------------------
+-- Compatibility recognition surface.
+------------------------------------------------------------------------
 
 record Path13RadiusCutRecognition
     {CoarseField : Set}
@@ -67,6 +70,45 @@ record Path13RadiusCutRecognition
       ≤ Path.chartRadius (Selected.cutData (PathTarget.bridge13 selected))
 
 open Path13RadiusCutRecognition public
+
+------------------------------------------------------------------------
+-- Preferred cut residual: only the scalar inclusion remains cut-specific.
+------------------------------------------------------------------------
+
+record Path13RadiusCutThreshold
+    {CoarseField : Set}
+    (representation : OperatorChart.SelectedPath13OperatorChartRepresentation
+      CoarseField) : Set where
+  field
+    sourceThresholdInsideSelectedCut :
+      Chart.sourceDefectThreshold
+      ≤ Path.chartRadius
+          (Selected.cutData
+            (PathTarget.bridge13
+              (OperatorChart.selectedPhysical representation)))
+
+open Path13RadiusCutThreshold public
+
+asPath13RadiusCutRecognition :
+  ∀ {CoarseField}
+    (representation : OperatorChart.SelectedPath13OperatorChartRepresentation
+      CoarseField) →
+  Path13RadiusCutThreshold representation →
+  Path13RadiusCutRecognition
+    (OperatorChart.selectedPhysical representation)
+    (OperatorChart.operatorRepresentation representation)
+asPath13RadiusCutRecognition representation threshold = record
+  { selectedCutOrderIsRationalOrder =
+      OperatorChart.selectedCutOrderIsRationalOrder representation
+  ; selectedCutDefectIsOperatorDefect =
+      OperatorChart.selectedCutDefectIsOperatorDefect representation
+  ; sourceThresholdBelowSelectedCut =
+      sourceThresholdInsideSelectedCut threshold
+  }
+
+------------------------------------------------------------------------
+-- Radius-driven 74-link bound on the exact erased relative contour.
+------------------------------------------------------------------------
 
 relativeContourDefectBelowSourceThresholdFromRadius :
   ∀ {CoarseField}
@@ -201,15 +243,52 @@ path13RelativeContourInPrincipalImageFromRadius
     (relativeContourDefectBelowSourceThresholdFromRadius
       reduced radius representation bond step point)
 
+------------------------------------------------------------------------
+-- Preferred end-to-end principal-image theorem from the representation
+-- extension plus the one scalar cut threshold.
+------------------------------------------------------------------------
+
+path13RelativeContourInPrincipalImageFromOperatorChart :
+  ∀ {CoarseField}
+    (representation : OperatorChart.SelectedPath13OperatorChartRepresentation
+      CoarseField)
+    (threshold : Path13RadiusCutThreshold representation)
+    bond step point →
+  let selected = OperatorChart.selectedPhysical representation
+      reduced = Reduced.canonicalReducedPath13FamilyGeometry selected
+  in
+  Log.InPrincipalImage
+    (Family.path13PrincipalChart (Reduced.asPath13FamilyGeometry reduced))
+    (Family.erasedRelativeContour
+      (Reduced.asPath13FamilyGeometry reduced) bond step point)
+path13RelativeContourInPrincipalImageFromOperatorChart
+    representation threshold bond step point =
+  let
+    fibre = OperatorChart.backgroundRadius representation
+    selected = OperatorChart.selectedPhysical representation
+    reduced = Reduced.canonicalReducedPath13FamilyGeometry selected
+    radius = Fibre.nativeInverseLinkRadius fibre
+    recognition = asPath13RadiusCutRecognition representation threshold
+  in
+  path13RelativeContourInPrincipalImageFromRadius
+    reduced radius
+    (OperatorChart.operatorRepresentation representation)
+    recognition bond step point
+
 cmp98Path13RadiusRelative74TelescopeLevel : ProofLevel
 cmp98Path13RadiusRelative74TelescopeLevel = machineChecked
 
 cmp98Path13RadiusPrincipalImageCompilerLevel : ProofLevel
 cmp98Path13RadiusPrincipalImageCompilerLevel = machineChecked
 
--- The old seven-field selected cut/defect weld is no longer required on this
--- route.  Physical per-link smallness lives in SelectedInverseLinkRadius13;
--- standard SU(2) operator representation and selected chart recognition remain
--- separately attributed interfaces.
+cmp98Path13OperatorChartCutThresholdAdapterLevel : ProofLevel
+cmp98Path13OperatorChartCutThresholdAdapterLevel = machineChecked
+
+-- Compatibility three-field recognition remains available, but the preferred
+-- route pays only one cut-specific scalar receipt after the selected physical
+-- norm/representation extension is supplied.
 literalCMP98Path13RadiusCutRecognitionLevel : ProofLevel
 literalCMP98Path13RadiusCutRecognitionLevel = conditional
+
+literalCMP98Path13RadiusCutThresholdLevel : ProofLevel
+literalCMP98Path13RadiusCutThresholdLevel = conditional
