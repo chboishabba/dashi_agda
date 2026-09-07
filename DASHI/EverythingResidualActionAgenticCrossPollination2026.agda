@@ -11,7 +11,7 @@ import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact
 import DASHI.Core.ExpectedFibreReductionCostExact
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact
 import DASHI.Core.ActionFibreClosureStoppingExact
-import DASHI.Core.LiveSetParetoExperimentSchedulerExact
+import DASHI.Core.LiveSetParetoExperimentSchedulerBidiExact
 import DASHI.Core.NDimParetoHyperfabricExact
 import DASHI.Core.ParetoSymmetryQuotientAdmissionExact
 import DASHI.Core.RecursiveParetoFrontierLiftingExact
@@ -48,6 +48,8 @@ import DASHI.Biology.Microbiology.BaldEyesalveAssayLiteralFrontierSchedulerBidiE
 
 import DASHI.Analysis.RiemannZetaLiteralFrontierSchedulerExact
 import DASHI.Analysis.RiemannZetaTerminalPaymentCompressionExact
+import DASHI.Analysis.RiemannZetaDirectTerminalCompilerExact
+import DASHI.Analysis.RiemannZetaDirectTerminalCompilerRegression
 
 import DASHI.Physics.ProofSearchExperimentalParetoFrontierNSYMExact
 import DASHI.Physics.NSYMLiteralFrontierSchedulerExact
