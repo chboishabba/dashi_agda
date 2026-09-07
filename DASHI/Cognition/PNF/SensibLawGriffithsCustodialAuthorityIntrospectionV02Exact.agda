@@ -1,7 +1,7 @@
 module DASHI.Cognition.PNF.SensibLawGriffithsCustodialAuthorityIntrospectionV02Exact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -28,9 +28,12 @@ record BoundPresentMandateDemandV02 : Set where
     coordinateIsCurrent : paymentCoordinate ≡ Cut.nextSearchCoordinate
     producer : Search.ProducerClass
     producerIsCurrent : producer ≡ Acquisition.producerForPaymentCoordinate paymentCoordinate
-    exactConsumerPreserved : Set
-    presentTemporalEnvelopePreserved : Set
-    mandateScopePreserved : Set
+    exactConsumerPreserved : Bool
+    exactConsumerPreservedIsTrue : exactConsumerPreserved ≡ true
+    presentTemporalEnvelopePreserved : Bool
+    presentTemporalEnvelopePreservedIsTrue : presentTemporalEnvelopePreserved ≡ true
+    mandateScopePreserved : Bool
+    mandateScopePreservedIsTrue : mandateScopePreserved ≡ true
     sourceRoutePaysPresentMandate : Bool
     sourceRoutePaysPresentMandateIsFalse : sourceRoutePaysPresentMandate ≡ false
 
@@ -45,9 +48,12 @@ currentBoundPresentMandateDemandV02 =
     refl
     Search.attributionProducer
     refl
-    Set
-    Set
-    Set
+    true
+    refl
+    true
+    refl
+    true
+    refl
     false
     refl
 
