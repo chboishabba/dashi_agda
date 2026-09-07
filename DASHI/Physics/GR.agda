@@ -9,6 +9,7 @@ import DASHI.Physics.GR.GravitationalObservationSourceAtlasExact
 import DASHI.Physics.GR.GravitationalObservationBidiExact
 import DASHI.Physics.GR.GravitationalWaveTheoryTestBidiExact
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact
+import DASHI.Physics.GR.GravitationalMultiScaleTheoryFingerprintBidiExact
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
