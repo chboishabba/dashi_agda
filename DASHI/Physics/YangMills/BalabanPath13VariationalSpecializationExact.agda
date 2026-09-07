@@ -81,11 +81,11 @@ record Path13VariationalSpecialization
 open Path13VariationalSpecialization public
 
 selectedBondValue :
-  ∀ {CoarseField Lie} →
-  Path13VariationalSpecialization CoarseField Lie →
+  ∀ {CoarseField Lie}
+    (specialization : Path13VariationalSpecialization CoarseField Lie) →
   (coarse : CoarseField) →
   Variational.CoarseSmallField
-    (sourceTheorem _) coarse →
+    (sourceTheorem specialization) coarse →
   Target.Path13PositiveBond → Q.RationalQuaternion
 selectedBondValue specialization coarse small (pair site axis) =
   Background.link
