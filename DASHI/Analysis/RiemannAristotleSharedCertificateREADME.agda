@@ -24,10 +24,6 @@ open import DASHI.Core.Prelude
 --   Gamma <= B_Gamma
 --   B_off + B_Gamma < M_cluster.
 --
--- The final split-complement compiler is owned. The 8889 checked-Lean return
--- also owns quantitative cluster-margin mathematics, leaving only same-object
--- attachment for that coordinate.
---
 -- Consumer adequacy is concrete on the final common ordered-additive carrier:
 --
 --   B_off <= A_off
@@ -35,65 +31,85 @@ open import DASHI.Core.Prelude
 --   A_off + A_Gamma < M_cluster.
 --
 -- The allowance-aware final assembly consumes the actual producer-payment
--- records, so A_off/A_Gamma are literal transports of the allowances paid by
--- the analytic theorems. The newer order-transport compiler compresses four
--- downstream inequality transports into one relation-level order transport per
--- Off/Gamma/Cluster source carrier. After those relation transports, the source
--- upper/lower theorems and producer allowance fits compile automatically.
+-- records. The order-transport compiler compresses downstream relation transport
+-- into one source-order transport per Off/Gamma/Cluster carrier; after those
+-- transports, the channel inequalities and allowance fits compile automatically.
 --
--- The Off leaf is further decomposed on one common quarter-period cutoff J:
+-- FINAL OFF, CURRENT MINIMAL CUT
 --
---   D_off <= D_near(J) + D_far(J)
---         <= B_near(J) + B_far(J)
---         <= A_off.
+-- The old direct input over-quantified the source as
 --
--- The joint allowance fit is no longer opaque. The intermediate-allowance
--- compiler factors it through epsilon on the same weak ordered-additive carrier:
+--   nearFarAt : Cutoff -> NearFarOffOrdinateBudget.
+--
+-- It used that family only at chosenCutoff. The preferred chosen-cutoff compiler
+-- therefore carries exactly one NearFarOffOrdinateBudget at the one crossing J
+-- consumed by the final proof.
+--
+-- The checked Lean cutoff return owns, in Lean, the literal every-J split/far
+-- theorem and explicit far-shell formula. That status record does NOT transport
+-- Lean proof terms into Agda. The proof-bearing Agda seam is now explicit:
+--
+--   checked Lean split/far theorem
+--     -- proof transport --> final Agda ordered carrier.
+--
+-- Once that transport is supplied, one chosen budget object compiles from:
+--
+--   D_near(J) <= B_near(J)             -- fresh finite-near upper
+--   D_far(J)  <= B_far(J)              -- transported checked far theorem
+--   D_off <= D_near(J) + D_far(J)      -- transported checked split theorem.
+--
+-- The remaining allowance composition is generic Core machinery:
 --
 --   B_far(J) <= epsilon
---   B_near(J) <= B_near(J)
+--   B_near(J) <= B_near(J)             -- concrete self-order receipt only
 --   B_near(J) + epsilon <= A_off
 --   --------------------------------
 --   B_near(J) + B_far(J) <= A_off.
 --
--- No global reflexivity axiom is added; the concrete near self-order receipt is
--- explicit. Far-tail decay is owned, but J still cannot be selected from the far
--- channel alone because the signed near core changes with J.
+-- No global reflexivity axiom is added. The generic two-channel theorem is owned
+-- by DASHI.Core.TwoChannelAllowanceCompositionExact; Riemann is an instance.
 --
--- The preferred direct near-side producer is now the carrier-neutral
--- FiniteNearProducer: one signed evaluation plus one budget. The older
--- DirectFinitePoleNearProducer also bundles the determinant-q literal consumer,
--- so it is compatibility/diagnostic infrastructure rather than a prerequisite
--- of the universal pole-quotient final carrier. After selected same-object budget
--- transport, the live scalar theorem is exactly
+-- The finite-near consumer is also minimized. The terminal scalar consumer does
+-- not require a historical route label, determinant DirectSignedConsumerPayment,
+-- source-orbit attachment, or a FiniteNearProducer package. Its smallest current
+-- theorem-bearing source is indexed directly by the exact PoleNearTargetWindow:
 --
---   cast(B_near_selected) + epsilon <= A_off.
+--   SignedFiniteNearEvaluationSurface
+--   + EvaluationProducesBudget
+--   + exact identity with window.finitePoleNearSigned.
 --
--- If the explicit-formula target-window route is used, its source-native typed J
--- already lives in PoleNearTargetModulation.cutoff. Same-selected-test identity
--- connects the theorem-bearing target window to that f_{t,J}; do not mint another
--- selected cutoff. The final Off input already owns the crossing receipt.
+-- A same-object/order bridge then identifies that value and budget with the
+-- transported nearResponse(J) and nearBudget(J), producing FiniteNearUpperAt J
+-- without re-evaluating the finite sum.
 --
--- Gamma has no cutoff coordinate. Its terminal theorem is simply the same-taper
+-- If the explicit-formula target-window route is used, PoleNearTargetModulation
+-- already owns a typed source-native cutoff J in the construction f_{t,J}. The
+-- exact theorem-bearing modulation producer itself remains conditional: generic
+-- modulation capability is not the same as the same-formula admissibility/shift
+-- payment. Route B therefore still has more prerequisites than direct finite
+-- evaluation and is not promoted ahead of the direct near-upper theorem.
+--
+-- FINAL GAMMA
+--
+-- Gamma has no cutoff coordinate. The terminal theorem is simply the same-taper
 -- assigned allowance fit B_Gamma(g_pole) <= A_Gamma. A concrete epsGamma /
--- gammaConeEnvelope lineage is recovered historically. Generic Gamma-source
--- discovery is pruned. Exact 8889 producer identity remains mandatory only on
--- the historical precision-repair route, before attributing/localising a loss
--- inside that producer. It is NOT a prerequisite for a fresh theorem proving
--- the same final Gamma allowance directly on the literal g_pole.
+-- gammaConeEnvelope lineage is recovered historically, but the retained Lean
+-- source file is not present in the current tree and no Agda theorem term is
+-- manufactured from provenance strings.
 --
--- The fresh route is now an explicit compiler too: a theorem-bearing envelope
+-- The fresh route is an explicit compiler: a theorem-bearing envelope
 -- GammaResponse(g_pole) <= B_Gamma(g_pole) constructs the final Gamma target,
--- and B_Gamma(g_pole) <= A_Gamma then constructs the final Gamma allowance
--- payment. Historical identity is absent from that interface by construction.
+-- and B_Gamma(g_pole) <= A_Gamma constructs the final Gamma allowance payment.
+-- Historical 8889 identity is required only for the historical precision-repair
+-- route, not for this fresh theorem-interface route.
 --
 -- Existing representation machinery is reused rather than re-searched.
--- Uninhabited adapter records remain infrastructure obligations, not fabricated
--- proof terms and not new harmonic-analysis programmes.
---
--- Low-ordinate/global coverage and RH remain open. No theorem here derives RH.
+-- Uninhabited adapter/transport records remain obligations, not fabricated proof
+-- terms. Low-ordinate/global coverage and RH remain open. No theorem here derives
+-- RH.
 ------------------------------------------------------------------------
 
+import DASHI.Core.TwoChannelAllowanceCompositionExact
 import DASHI.Analysis.RiemannAristotleSharedWindowCertificateExact
 import DASHI.Analysis.CertifiedFiniteCarrierReindexExact
 import DASHI.Analysis.RiemannAristotleSharedCertificateReturnExact
@@ -115,6 +131,8 @@ import DASHI.Analysis.RiemannG2SelectedTargetLocalMomentSameObjectExact
 import DASHI.Analysis.RiemannG2SelectedDirectFiniteMomentBidiExact
 import DASHI.Analysis.RiemannAristotlePoleNearPhaseStatisticExact
 import DASHI.Analysis.RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact
+import DASHI.Analysis.RiemannG2SelectedFiniteNearBudgetMinimalConsumerExact
+import DASHI.Analysis.RiemannG2MinimalNearBudgetFinalOffSlackCompilerExact
 import DASHI.Analysis.RiemannG2SelectedNearBudgetFinalOffSlackCompilerExact
 import DASHI.Analysis.RiemannG2SelectedNearBudgetFinalOffSlackRegression
 import DASHI.Analysis.RiemannG2SelectedDirectCutoffFinalOffSameObjectExact
@@ -129,7 +147,12 @@ import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact
 import DASHI.Analysis.RiemannG2PoleQuotientChannelAllowanceExact
 import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact
 import DASHI.Analysis.RiemannG2PoleQuotientOffIntermediateAllowanceCompilerExact
+import DASHI.Analysis.RiemannG2PoleQuotientOffCoreAllowanceBridgeExact
 import DASHI.Analysis.RiemannG2FinalOffAllowanceFactorizationRegression
+import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact
+import DASHI.Analysis.RiemannG2PoleQuotientOffChosenCutoffCompilerExact
+import DASHI.Analysis.RiemannG2WindowBudgetToTransportedNearUpperExact
+import DASHI.Analysis.RiemannG2TransportedChosenCutoffOffAllowanceCompilerExact
 import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact
 import DASHI.Analysis.RiemannG2GammaCandidateSourceLineageRecoveryExact
 import DASHI.Analysis.RiemannG2GammaLineageHighestAlphaReconciliationExact
