@@ -99,15 +99,19 @@ import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Ex
 import DASHI.Physics.Closure.NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
 
--- R487-R488 return to the canonical direct R423 Clay consumer on current
+-- R487-R489 return to the canonical direct R423 Clay consumer on current
 -- master.  R487 closes the compiler from theorem-bearing fixed-output signed
 -- payments plus one cutoff-uniform sum-of-budgets theorem into the exact R423
 -- QuadraticCompanionSignedPayment.  R488 applies first-missing scheduling inside
--- that sufficient producer: local fixed-output payments come first and are
--- routed to same-scale summed cancellation; only afterwards does the uniform
--- budget aggregation become live.  R423 itself remains the terminal consumer.
+-- that sufficient producer: local fixed-output payments precede global budget
+-- aggregation.  R489 then resolves the local producer dependency: R295/R440
+-- already own the finite swap-invariant and same-object algebra, so the first
+-- missing prerequisite is the standard analytic Laplace/heat realization;
+-- after that, the genuine physical leaf is the same-scale signed spacetime
+-- estimate.  R423 itself remains the terminal consumer throughout.
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPaymentsToR423Round487Exact
 import DASHI.Physics.Closure.NSTriadKNR423FixedOutputProducerProofSearchRound488Exact
+import DASHI.Physics.Closure.NSTriadKNR423LocalPaymentPrerequisiteRound489Exact
 
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
