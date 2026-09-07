@@ -11,7 +11,6 @@ import DASHI.Wikimedia.IdentifierExact as Id
 import DASHI.Wikimedia.NativeStatementExact as WD
 import DASHI.Wikimedia.NativeReferenceSemanticsExact as Ref
 import DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact as Handoff
-import DASHI.Wikimedia.SourceProvenanceExact as Source
 
 ------------------------------------------------------------------------
 -- SENSIBLAW NAT / CLIMATE P5991 -> P14143 HANDOFF CALIBRATION
@@ -21,9 +20,6 @@ import DASHI.Wikimedia.SourceProvenanceExact as Source
 --   docs/planning/wikidata_climate_change_property_migration_protocol_20260327.md
 --   schemas/sl.source_unit.v1.schema.yaml
 --   docs/planning/wikidata_review_packet_contract_20260401.md
---
--- The handoff is a governed review workflow, not a theorem that every P5991
--- statement should migrate to P14143.
 ------------------------------------------------------------------------
 
 carbonFootprintP5991 : Id.PropertyId
@@ -34,16 +30,12 @@ annualGreenhouseGasEmissionsP14143 = Id.propertyId "P14143"
 
 qualifierP3831 : Id.PropertyId
 qualifierP3831 = Id.propertyId "P3831"
-
 qualifierP459 : Id.PropertyId
 qualifierP459 = Id.propertyId "P459"
-
 qualifierP518 : Id.PropertyId
 qualifierP518 = Id.propertyId "P518"
-
 qualifierP580 : Id.PropertyId
 qualifierP580 = Id.propertyId "P580"
-
 qualifierP582 : Id.PropertyId
 qualifierP582 = Id.propertyId "P582"
 
@@ -97,14 +89,9 @@ checkedSafeSubsetStillAbsent :
   checkedSafeSubsetPresent currentNatClimateState ≡ false
 checkedSafeSubsetStillAbsent = refl
 
-------------------------------------------------------------------------
--- P854 reference shape cross-pollinates directly into native reference
--- semantics, but remains only a source candidate.
-------------------------------------------------------------------------
-
 natExampleReferenceSnak : WD.ReferenceSnak
 natExampleReferenceSnak =
-  WD.referenceSnak Ref.p854 (WD.stringValue "bounded-reference-url")
+  WD.referenceSnak Ref.p854 (WD.valueSnak (WD.stringValue "bounded-reference-url"))
 
 natP854IsSourceCandidate : Ref.ClassifiedReferenceSnak
 natP854IsSourceCandidate = Ref.p854SourceCandidate natExampleReferenceSnak refl
@@ -112,10 +99,6 @@ natP854IsSourceCandidate = Ref.p854SourceCandidate natExampleReferenceSnak refl
 natReferenceRoleExact :
   Ref.role natP854IsSourceCandidate ≡ Ref.sourceCandidate
 natReferenceRoleExact = refl
-
-------------------------------------------------------------------------
--- Routing and authority boundaries from the handoff.
-------------------------------------------------------------------------
 
 data P5991AlwaysMigratesToP14143 : Set where
 data SplitRequiredMeansDirectRewrite : Set where
@@ -125,16 +108,12 @@ data WikiProjectConsensusMeansDashiPromotion : Set where
 
 p5991DoesNotAlwaysMigrate : P5991AlwaysMigratesToP14143 → ⊥
 p5991DoesNotAlwaysMigrate ()
-
 splitRequiredDoesNotMeanDirectRewrite : SplitRequiredMeansDirectRewrite → ⊥
 splitRequiredDoesNotMeanDirectRewrite ()
-
 cleanShapeDoesNotMeanSemanticEquivalence : CleanQualifierShapeMeansSemanticEquivalence → ⊥
 cleanShapeDoesNotMeanSemanticEquivalence ()
-
 p854PresenceDoesNotVerifyReference : P854PresenceMeansReferenceVerified → ⊥
 p854PresenceDoesNotVerifyReference ()
-
 wikiProjectConsensusDoesNotCreateDashiPromotion : WikiProjectConsensusMeansDashiPromotion → ⊥
 wikiProjectConsensusDoesNotCreateDashiPromotion ()
 
