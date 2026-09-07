@@ -12,11 +12,8 @@ open import Data.Empty using (⊥)
 -- The live execution is pinned to Rust head 516867c....  The later repair head
 -- acd6a25... changes only the escaped-JSON source-contract checker; compare
 -- audit shows no runtime/provider/materializer/review implementation change.
---
--- The conversation supplied the canonical-text digest only as the prefix
--- 53f4037c..., so this owner deliberately does NOT invent the remaining digest.
--- Exact digest pinning remains an explicit open receipt coordinate until the
--- complete retained JSON receipt is imported.
+-- The complete retained JSON receipt now supplies both carrier and canonical-
+-- text digests exactly, so no digest coordinate remains guessed or truncated.
 ------------------------------------------------------------------------
 
 rustRepository : String
@@ -49,17 +46,32 @@ propositionRef = "prop:cullen-positive-operational-duty"
 scheduledProducerRef : String
 scheduledProducerRef = "producer:exact-primary-authority"
 
-hypothesisKind : String
-hypothesisKind = "support"
+hypothesisRef : String
+hypothesisRef = "hyp:residual:cullen-positive-operational-act:support"
 
-canonicalTextDigestKnownPrefix : String
-canonicalTextDigestKnownPrefix = "53f4037c"
+documentSourceIdentityRef : String
+documentSourceIdentityRef = "document:hca:[2026]-HCA-19:docx"
+
+documentBytesDigest : String
+documentBytesDigest =
+  "sha256:f171fcaa304de4e1a8be9b7e2a200a181025a81456fa89dec18516805cad15b9"
+
+sourceRevisionRef : String
+sourceRevisionRef =
+  "source-revision:sha256:f171fcaa304de4e1a8be9b7e2a200a181025a81456fa89dec18516805cad15b9"
+
+canonicalTextDigest : String
+canonicalTextDigest =
+  "sha256:53f4037cbb6a254634b43e5747bf398f44519a8eea1c9a904d146f7674564b5a"
 
 record ObservedFullJudgmentLiveReceipt : Set where
   constructor observedFullJudgmentLiveReceipt
   field
     landingNetworkRequests : Nat
     landingNetworkRequestsIsZero : landingNetworkRequests ≡ 0
+
+    resourceDiscoveryNetworkRequests : Nat
+    resourceDiscoveryNetworkRequestsIsZero : resourceDiscoveryNetworkRequests ≡ 0
 
     documentNetworkRequests : Nat
     documentNetworkRequestsIsOne : documentNetworkRequests ≡ 1
@@ -88,8 +100,14 @@ record ObservedFullJudgmentLiveReceipt : Set where
     acquisitionClaimedLegalAuthority : Bool
     acquisitionClaimedLegalAuthorityIsFalse : acquisitionClaimedLegalAuthority ≡ false
 
+    acquisitionClaimedConsumerClosure : Bool
+    acquisitionClaimedConsumerClosureIsFalse : acquisitionClaimedConsumerClosure ≡ false
+
+    exactDocumentDigestPinnedHere : Bool
+    exactDocumentDigestPinnedHereIsTrue : exactDocumentDigestPinnedHere ≡ true
+
     exactCanonicalTextDigestPinnedHere : Bool
-    exactCanonicalTextDigestPinnedHereIsFalse : exactCanonicalTextDigestPinnedHere ≡ false
+    exactCanonicalTextDigestPinnedHereIsTrue : exactCanonicalTextDigestPinnedHere ≡ true
 
     runtimeImplementationChangedBetweenReceiptAndRepairHead : Bool
     runtimeImplementationChangedBetweenReceiptAndRepairHeadIsFalse :
@@ -103,6 +121,7 @@ canonicalObservedFullJudgmentLiveReceipt : ObservedFullJudgmentLiveReceipt
 canonicalObservedFullJudgmentLiveReceipt =
   observedFullJudgmentLiveReceipt
     0 refl
+    0 refl
     1 refl
     0 refl
     202 refl
@@ -113,6 +132,8 @@ canonicalObservedFullJudgmentLiveReceipt =
     false refl
     false refl
     false refl
+    true refl
+    true refl
     false refl
     false refl
 
@@ -124,7 +145,7 @@ data FullJudgmentFetchAutomaticallySemanticPayment : Set where
 data CanonicalTextAutomaticallyPropositionCorrespondence : Set where
 data CanonicalTextAutomaticallyRatio : Set where
 data BoundSourceRouteAutomaticallyConsumerClosure : Set where
-data DigestPrefixAutomaticallyExactDigest : Set where
+data ExactDigestAutomaticallySemanticAuthority : Set where
 
 fullJudgmentFetchDoesNotBecomeSemanticPayment :
   FullJudgmentFetchAutomaticallySemanticPayment → ⊥
@@ -141,5 +162,6 @@ boundSourceRouteDoesNotCloseConsumer :
   BoundSourceRouteAutomaticallyConsumerClosure → ⊥
 boundSourceRouteDoesNotCloseConsumer ()
 
-digestPrefixDoesNotBecomeExactDigest : DigestPrefixAutomaticallyExactDigest → ⊥
-digestPrefixDoesNotBecomeExactDigest ()
+exactDigestDoesNotBecomeSemanticAuthority :
+  ExactDigestAutomaticallySemanticAuthority → ⊥
+exactDigestDoesNotBecomeSemanticAuthority ()
