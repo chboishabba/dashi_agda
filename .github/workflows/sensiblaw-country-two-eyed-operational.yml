@@ -1,0 +1,69 @@
+name: SensibLaw Country two-eyed operational closure
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Core/PluralEpistemicOperationalClosureExact.agda'
+      - 'DASHI/Core/PluralOperationalEvidenceBraidBidiExact.agda'
+      - 'DASHI/Core/PluralOperationalResidualActionLoopExact.agda'
+      - 'DASHI/Core/PluralOperationalEverything.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryPluralEpistemicOperationalAuditExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryOperationalRevisionParaconsistentExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalEpistemicEverything.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalAdaptiveEverything.agda'
+      - '.github/workflows/sensiblaw-country-two-eyed-operational.yml'
+
+concurrency:
+  group: sensiblaw-country-two-eyed-operational-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject trust escapes
+        run: |
+          sources=(
+            DASHI/Core/PluralEpistemicOperationalClosureExact.agda
+            DASHI/Core/PluralOperationalEvidenceBraidBidiExact.agda
+            DASHI/Core/PluralOperationalResidualActionLoopExact.agda
+            DASHI/Cognition/PNF/SensibLawCountryPluralEpistemicOperationalAuditExact.agda
+            DASHI/Cognition/PNF/SensibLawCountryOperationalRevisionParaconsistentExact.agda
+            DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalEpistemicEverything.agda
+            DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalAdaptiveEverything.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Type-check plural operational core
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Core/PluralOperationalEverything.agda
+
+      - name: Type-check Country operational audit
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryPluralEpistemicOperationalAuditExact.agda
+
+      - name: Type-check Country temporal/paraconsistent revision
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryOperationalRevisionParaconsistentExact.agda
+
+      - name: Type-check Country epistemic capstone
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalEpistemicEverything.agda
+
+      - name: Type-check adaptive capstone
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryTwoEyedOperationalAdaptiveEverything.agda
