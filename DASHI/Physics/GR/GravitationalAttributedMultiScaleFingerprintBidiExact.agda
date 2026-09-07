@@ -53,11 +53,6 @@ record AttributedMultiScaleTheoryFingerprint : Set where
       scalePrediction cosmologicalPropagationAttribution ≡ Multi.cosmologicalPropagationPrediction fingerprint
 open AttributedMultiScaleTheoryFingerprint public
 
-------------------------------------------------------------------------
--- Attributed evaluated fingerprint.  The raw six-comparison evaluation and
--- the six lineage-bearing comparisons must refer to the same exact objects.
-------------------------------------------------------------------------
-
 record AttributedMultiScaleTheoryEvaluation : Set where
   constructor attributed-multi-scale-theory-evaluation
   field
@@ -91,6 +86,25 @@ record AttributedMultiScaleTheoryEvaluation : Set where
     cosmologicalComparisonMatchesEvaluation :
       scaleComparison cosmologicalPropagationComparison
         ≡ Multi.cosmologicalPropagationComparison evaluation
+
+    freeFallAttributionMatchesFingerprint :
+      attributedScalePrediction laboratoryFreeFallComparison
+        ≡ laboratoryFreeFallAttribution attributedFingerprint
+    clockAttributionMatchesFingerprint :
+      attributedScalePrediction laboratoryClockComparison
+        ≡ laboratoryClockAttribution attributedFingerprint
+    orbitalAttributionMatchesFingerprint :
+      attributedScalePrediction orbitalTimingComparison
+        ≡ orbitalTimingAttribution attributedFingerprint
+    compactBinaryAttributionMatchesFingerprint :
+      attributedScalePrediction compactBinaryComparison
+        ≡ compactBinaryAttribution attributedFingerprint
+    nanohertzAttributionMatchesFingerprint :
+      attributedScalePrediction nanohertzTimingComparison
+        ≡ nanohertzTimingAttribution attributedFingerprint
+    cosmologicalAttributionMatchesFingerprint :
+      attributedScalePrediction cosmologicalPropagationComparison
+        ≡ cosmologicalPropagationAttribution attributedFingerprint
 open AttributedMultiScaleTheoryEvaluation public
 
 record MultiScaleAttributionBoundary : Set where
@@ -105,8 +119,10 @@ record MultiScaleAttributionBoundary : Set where
     scaleContextMayBeDroppedDuringAttribution : Bool
     rawEvaluationAutomaticallyCarriesAttributedLineage : Bool
     attributedEvaluationMustMatchRawEvaluationExactly : Bool
+    sameRawPredictionAllowsSilentAttributionSwap : Bool
+    attributedComparisonsMustMatchFingerprintAttributions : Bool
 
 canonicalMultiScaleAttributionBoundary : MultiScaleAttributionBoundary
 canonicalMultiScaleAttributionBoundary =
   multi-scale-attribution-boundary
-    false false false false false true false false true
+    false false false false false true false false true false true
