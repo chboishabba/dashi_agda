@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ViewpointProvenanceBidiExact as V
 import DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact as Amy
+import DASHI.Culture.AmyEskridgeMechanismAssociationProvenanceExact as Assoc
 import DASHI.Physics.ExoticGravity.EngineeredInertialGravitationalBidiExact as Gravity
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Physics.ExoticGravity.AntigravityUnificationInteractionExact as Unified
@@ -51,6 +52,14 @@ mechanismForConsumer chart persistentImpulseConsumer =
 mechanismForConsumer chart metricResponseConsumer =
   Amy.EskridgeMechanismChart.negativeMassOrMetricLane chart
 
+associationForConsumer : ReverseConsumer → Assoc.MechanismAssociationReceipt
+associationForConsumer passiveWeightConsumer = Assoc.podkletnovAssociation
+associationForConsumer freeFallConsumer = Assoc.liTorrAssociation
+associationForConsumer remoteFieldConsumer = Assoc.liTorrAssociation
+associationForConsumer inertialResponseConsumer = Assoc.woodwardAssociation
+associationForConsumer persistentImpulseConsumer = Assoc.impulsiveAssociation
+associationForConsumer metricResponseConsumer = Assoc.metricAssociation
+
 observationChannelForConsumer :
   ReverseConsumer → Obs.GravitationalObservationChannel
 observationChannelForConsumer consumer =
@@ -76,6 +85,14 @@ record AmyGravityReverseSearchProjection : Set where
     mechanismMatchesConsumer :
       mechanismForConsumer mechanismChart consumer ≡ historicalMechanism
 
+    associationReceipt : Assoc.MechanismAssociationReceipt
+    associationReceiptMatchesConsumer :
+      associationForConsumer consumer ≡ associationReceipt
+    associationMechanismMatches :
+      Assoc.mechanism associationReceipt ≡ historicalMechanism
+    associationIsContextualReconstruction :
+      Assoc.status associationReceipt ≡ Assoc.dashiContextualReconstruction
+
     derivedClaim : Anti.AntigravityClaim
     claimMatchesConsumer :
       claimForConsumer consumer ≡ derivedClaim
@@ -98,7 +115,7 @@ record AmyGravityReverseSearchProjection : Set where
 open AmyGravityReverseSearchProjection public
 
 ------------------------------------------------------------------------
--- Concrete Li-Torr/coherent-superconductor projections.  The same historical
+-- Concrete Li-Torr/coherent-superconductor projections.  The same contextual
 -- mechanism coordinate reaches two different consumers and therefore two
 -- different physical observation channels.
 ------------------------------------------------------------------------
@@ -110,12 +127,13 @@ amyLiTorrFreeFallProjection =
     Amy.canonicalEskridgeMechanismChart refl
     freeFallConsumer
     Gravity.liTorrCoherentGravity refl
+    Assoc.liTorrAssociation refl refl refl
     Anti.changedFreeFallResponse refl
     Anti.coherentRegime
     (Anti.antigravity-bidi-request
       Anti.changedFreeFallResponse
       Anti.coherentRegime
-      "Amy-associated coherent-superconductor historical lane; DASHI reverse projection for a free-fall consumer"
+      "Amy-associated coherent-superconductor contextual lane; DASHI reverse projection for a free-fall consumer"
       Anti.freeFallDiscriminator
       refl)
     refl refl
@@ -130,12 +148,13 @@ amyLiTorrRemoteFieldProjection =
     Amy.canonicalEskridgeMechanismChart refl
     remoteFieldConsumer
     Gravity.liTorrCoherentGravity refl
+    Assoc.liTorrAssociation refl refl refl
     Anti.remoteRepulsiveField refl
     Anti.coherentRegime
     (Anti.antigravity-bidi-request
       Anti.remoteRepulsiveField
       Anti.coherentRegime
-      "Amy-associated coherent-superconductor historical lane; DASHI reverse projection for a remote-field consumer"
+      "Amy-associated coherent-superconductor contextual lane; DASHI reverse projection for a remote-field consumer"
       Anti.externalTestMassDiscriminator
       refl)
     refl refl
@@ -163,8 +182,8 @@ freeFallAndRemoteObservationChannelsDistinct ()
 
 ------------------------------------------------------------------------
 -- Ordinary-confounder lane stays outside antigravity promotion.  The existing
--- Amy chart's high-voltage/electrohydrodynamic family is retained as an
--- ordinary momentum/EM alternative, not coerced into an AntigravityClaim.
+-- chart's high-voltage/electrohydrodynamic family remains a contextual ordinary
+-- momentum/EM alternative, not an Amy-source-entitled antigravity claim.
 ------------------------------------------------------------------------
 
 amyHighVoltageOrdinaryConfounder : Gravity.MechanismFamily
@@ -172,9 +191,16 @@ amyHighVoltageOrdinaryConfounder =
   Amy.EskridgeMechanismChart.highVoltageMomentumAlternative
     Amy.canonicalEskridgeMechanismChart
 
+amyHighVoltageAssociation : Assoc.MechanismAssociationReceipt
+amyHighVoltageAssociation = Assoc.electrohydrodynamicAssociation
+
 highVoltageConfounderIsElectrohydrodynamic :
   amyHighVoltageOrdinaryConfounder ≡ Gravity.electrohydrodynamicForce
 highVoltageConfounderIsElectrohydrodynamic = refl
+
+highVoltageAssociationIsContextual :
+  Assoc.status amyHighVoltageAssociation ≡ Assoc.dashiContextualReconstruction
+highVoltageAssociationIsContextual = refl
 
 ------------------------------------------------------------------------
 -- Attribution / promotion boundary.
@@ -184,6 +210,7 @@ record AmyAntigravityObservationBoundary : Set where
   constructor amy-antigravity-observation-boundary
   field
     amyViewpointReceiptIsPhysicalObservation : Bool
+    chartMembershipEqualsAmySourceEntitlement : Bool
     historicalMechanismFamilyUniquelyDeterminesModernClaim : Bool
     dashiReverseProjectionIsAmySourceEntitledClaim : Bool
     sourceReferenceStringIsFullyMigratedAttributedSource : Bool
@@ -191,9 +218,9 @@ record AmyAntigravityObservationBoundary : Set where
     typedObservationChannelRequired : Bool
     ordinaryHighVoltageConfounderMayBePromotedToAntigravity : Bool
     successfulModernExperimentRetroactivelyProvesAmyViewpoint : Bool
-    amyHistoricalContextMayNominateReverseSearchRoute : Bool
+    contextualHistoricalAssociationMayNominateReverseSearchRoute : Bool
 
 canonicalAmyAntigravityObservationBoundary : AmyAntigravityObservationBoundary
 canonicalAmyAntigravityObservationBoundary =
   amy-antigravity-observation-boundary
-    false false false false true true false false true
+    false false false false false true true false false true
