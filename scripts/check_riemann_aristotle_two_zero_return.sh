@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Core/TwoChannelAllowanceCompositionExact.agda
   DASHI/Analysis/RiemannAristotleWindowSchurCrossProverSyncExact.agda
   DASHI/Analysis/RiemannAristotleWindowSchurCrossProverRegression.agda
   DASHI/Analysis/RiemannAristotleSharedWindowCertificateExact.agda
@@ -44,6 +45,8 @@ FILES=(
   DASHI/Analysis/RiemannG2SelectedDirectFiniteMomentBidiExact.agda
   DASHI/Analysis/RiemannAristotlePoleNearPhaseStatisticExact.agda
   DASHI/Analysis/RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact.agda
+  DASHI/Analysis/RiemannG2SelectedFiniteNearBudgetMinimalConsumerExact.agda
+  DASHI/Analysis/RiemannG2MinimalNearBudgetFinalOffSlackCompilerExact.agda
   DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
   DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
@@ -51,7 +54,25 @@ FILES=(
   DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
   DASHI/Analysis/RiemannG2PoleQuotientOffAllowanceDirectCompilerExact.agda
   DASHI/Analysis/RiemannG2PoleQuotientOffIntermediateAllowanceCompilerExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientOffCoreAllowanceBridgeExact.agda
   DASHI/Analysis/RiemannG2FinalOffAllowanceFactorizationRegression.agda
+  DASHI/Analysis/RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientOffChosenCutoffCompilerExact.agda
+  DASHI/Analysis/RiemannG2WindowBudgetToTransportedNearUpperExact.agda
+  DASHI/Analysis/RiemannG2TransportedChosenCutoffOffAllowanceCompilerExact.agda
+  DASHI/Analysis/RiemannG2SelectedNearBudgetFinalOffSlackCompilerExact.agda
+  DASHI/Analysis/RiemannG2SelectedNearBudgetFinalOffSlackRegression.agda
+  DASHI/Analysis/RiemannG2SelectedDirectCutoffFinalOffSameObjectExact.agda
+  DASHI/Analysis/RiemannG2TargetModulationFinalOffCutoffCompilerExact.agda
+  DASHI/Analysis/RiemannG2FinalPoleNearRouteReconciliationExact.agda
+  DASHI/Analysis/RiemannG2FinalPoleNearRouteRegression.agda
+  DASHI/Analysis/RiemannG2GammaProducerSourceAcquisitionExact.agda
+  DASHI/Analysis/RiemannG2GammaCandidateSourceLineageRecoveryExact.agda
+  DASHI/Analysis/RiemannG2GammaLineageHighestAlphaReconciliationExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact.agda
+  DASHI/Analysis/RiemannG2FinalGammaRouteSchedulerRegression.agda
+  DASHI/Analysis/RiemannG2FreshSameTaperGammaEnvelopeCompilerExact.agda
+  DASHI/Analysis/RiemannG2FreshSameTaperGammaEnvelopeRegression.agda
   DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
@@ -69,6 +90,7 @@ for f in "${FILES[@]}"; do
 done
 
 if command -v agda >/dev/null 2>&1; then
+  agda DASHI/Core/TwoChannelAllowanceCompositionExact.agda
   agda DASHI/Analysis/RiemannAristotleWindowSchurCrossProverRegression.agda
   agda DASHI/Analysis/RiemannAristotleTwoZeroThreeTaperReturnRegression.agda
   agda DASHI/Analysis/ExactSelectedEliminationFarTailCompilerExact.agda
@@ -102,13 +124,18 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannG2SelectedDirectFiniteMomentBidiExact.agda
   agda DASHI/Analysis/RiemannAristotlePoleNearPhaseStatisticExact.agda
   agda DASHI/Analysis/RiemannG2SelectedPoleNearFiniteEvaluationSameObjectExact.agda
-  agda DASHI/Analysis/RiemannG2AdaptiveJLambdaConstantWindowExact.agda
-  agda DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
-  agda DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
-  agda DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
-  agda DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
+  agda DASHI/Analysis/RiemannG2SelectedFiniteNearBudgetMinimalConsumerExact.agda
+  agda DASHI/Analysis/RiemannG2MinimalNearBudgetFinalOffSlackCompilerExact.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientOffIntermediateAllowanceCompilerExact.agda
+  agda DASHI/Analysis/RiemannG2PoleQuotientOffCoreAllowanceBridgeExact.agda
   agda DASHI/Analysis/RiemannG2FinalOffAllowanceFactorizationRegression.agda
+  agda DASHI/Analysis/RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact.agda
+  agda DASHI/Analysis/RiemannG2PoleQuotientOffChosenCutoffCompilerExact.agda
+  agda DASHI/Analysis/RiemannG2WindowBudgetToTransportedNearUpperExact.agda
+  agda DASHI/Analysis/RiemannG2TransportedChosenCutoffOffAllowanceCompilerExact.agda
+  agda DASHI/Analysis/RiemannG2SelectedNearBudgetFinalOffSlackRegression.agda
+  agda DASHI/Analysis/RiemannG2FinalPoleNearRouteRegression.agda
+  agda DASHI/Analysis/RiemannG2FreshSameTaperGammaEnvelopeRegression.agda
   agda DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
   agda DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   agda DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
