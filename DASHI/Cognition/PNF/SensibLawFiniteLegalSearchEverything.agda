@@ -18,6 +18,9 @@ import DASHI.Cognition.PNF.SensibLawFiniteLegalCutGuardRegressionExact as CutReg
 import DASHI.Cognition.PNF.SensibLawFiniteLegalIssueProjectionRegressionExact as IssueRegression
 import DASHI.Cognition.PNF.SensibLawAuthorityTransformationUniversalCutBridgeExact as CutBridge
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
+import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as Precedent
+import DASHI.Cognition.PNF.SensibLawCullenClimateDistinguishingPromotionExact as CullenDistinction
+import DASHI.Cognition.PNF.SensibLawPabaiTransformationPromotionExact as PabaiTransform
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawCullenPublicAuthorityDutyCalibrationExact as Cullen
 
@@ -79,7 +82,28 @@ maboIssueProjectionCanBlockRouteWithoutDeletingUniversalRule =
   IssueRegression.maboIssueBlockedWhenRadicalTitleRuleProjectedOut
 
 ------------------------------------------------------------------------
--- Negative route / repair search.
+-- Precedent distinguishing promotion.
+------------------------------------------------------------------------
+
+cullenClimateExecutableMismatch :
+  Search.minimalDistinguishingCandidate
+    Cullen.cullenDutyHolding Regression.climateComparatorCase
+  ≡ Search.found Cullen.positiveOperationalAct
+cullenClimateExecutableMismatch = CullenDistinction.executableFirstMissingFeature
+
+cullenClimatePolicyDistinction :
+  Precedent.PolicyMinimalDistinguishingSet
+    CullenDistinction.cullenClimatePolicy
+cullenClimatePolicyDistinction =
+  CullenDistinction.cullenClimateMinimalDistinguishingSet
+
+cullenClimateDistinctionStillPolicyIndexed :
+  CullenDistinction.FixtureCorrespondencePolicyIsBindingHighCourtLaw → ⊥
+cullenClimateDistinctionStillPolicyIndexed =
+  CullenDistinction.fixturePolicyDoesNotBecomeBindingLaw
+
+------------------------------------------------------------------------
+-- Negative current route / typed repair promotion.
 ------------------------------------------------------------------------
 
 pabaiCurrentRouteStillUnreachable :
@@ -99,9 +123,19 @@ pabaiRepairCandidateFound :
   ≡ Search.found Regression.pabaiReformulationCandidate
 pabaiRepairCandidateFound = Regression.pabaiTransformationSearch
 
+pabaiRepairCandidateTypedAndProofRelevant :
+  Search.TransformationPromotion
+    1 Negligence.dutyProposition Regression.pabaiReformulationCandidate
+pabaiRepairCandidateTypedAndProofRelevant =
+  PabaiTransform.pabaiTransformationPromotion
+
+pabaiTransformationStillNeedsLegalAvailability :
+  PabaiTransform.PabaiTransformationAvailableUnderControllingAuthorities → ⊥
+pabaiTransformationStillNeedsLegalAvailability =
+  PabaiTransform.pabaiLegalAvailabilityStillOpen
+
 ------------------------------------------------------------------------
--- Computation status now distinguishes positive proof promotion from Pabai's
--- executable-negative / counterfactual lane.
+-- Computation status.
 ------------------------------------------------------------------------
 
 maboCutSearchStatus :
@@ -118,7 +152,7 @@ pabaiCutSearchStatus = refl
 
 pabaiTransformationSearchStatus :
   CutBridge.pabaiTransformationStatus
-  ≡ CutBridge.transformationCandidateReopensGoal
+  ≡ CutBridge.typedTransformationReopensGoal
 pabaiTransformationSearchStatus = refl
 
 ------------------------------------------------------------------------
@@ -128,6 +162,8 @@ pabaiTransformationSearchStatus = refl
 data FiniteSearchAggregateMeansCorpusComplete : Set where
 data ExecutableCounterfactualMeansLegallyAvailable : Set where
 
+data PolicyDistinctionMeansUniversalDistinction : Set where
+
 finiteSearchDoesNotClaimCorpusCompleteness :
   FiniteSearchAggregateMeansCorpusComplete → ⊥
 finiteSearchDoesNotClaimCorpusCompleteness ()
@@ -135,3 +171,7 @@ finiteSearchDoesNotClaimCorpusCompleteness ()
 counterfactualSearchDoesNotCreateLegalAvailability :
   ExecutableCounterfactualMeansLegallyAvailable → ⊥
 counterfactualSearchDoesNotCreateLegalAvailability ()
+
+policyDistinctionDoesNotBecomeUniversal :
+  PolicyDistinctionMeansUniversalDistinction → ⊥
+policyDistinctionDoesNotBecomeUniversal ()
