@@ -10,10 +10,12 @@ import DASHI.Moonshine.JInvariantLambdaOrbitBase369BridgeExact
 import DASHI.Moonshine.JInvariantIntrospectiveCrossPollinationExact
 
 -- BIDI colour-wheel unrolling: six-state phase/orientation chart, exact
--- three-sector spectral observer, signed-FRACTRAN conjugation, and first
--- analytic residual before theta/j/Monster promotion.
+-- three-sector spectral observer, signed-FRACTRAN conjugation, finite
+-- polyphase/spectral weld, and cyclotomic advance to the first genuinely
+-- analytic same-object residual.
 import DASHI.Moonshine.JInvariantColourWheelWaveSignedBidiExact
 import DASHI.Moonshine.JInvariantColourWheelPolyphaseSpectralBidiExact
+import DASHI.Moonshine.JInvariantColourWheelCyclotomicBidiAdvanceExact
 import DASHI.Moonshine.JInvariantColourWheelWaveSignedValidation
 
 -- Existing exact in-repo carriers consumed by the bridge.
@@ -24,3 +26,5 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact
+import DASHI.Moonshine.C3FourierConjugationExact
+import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact
