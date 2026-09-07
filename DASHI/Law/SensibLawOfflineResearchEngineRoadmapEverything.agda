@@ -19,6 +19,7 @@ import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as Prefer
 import DASHI.Law.SensibLawOfficialAcquisitionResearchHandoffExact as OfficialHandoff
 import DASHI.Law.SensibLawOfficialHCALiveAcquisitionReceipt9c3007Exact as HCALive
 import DASHI.Law.SensibLawOfficialJudgmentResourceDiscoveryExact as JudgmentResource
+import DASHI.Law.SensibLawOfficialJudgmentCanonicalTextMaterializationExact as CanonicalText
 
 ------------------------------------------------------------------------
 -- OFFLINE / GOVERNED-ONLINE RESEARCH ENGINE CAPSTONE
@@ -30,23 +31,22 @@ import DASHI.Law.SensibLawOfficialJudgmentResourceDiscoveryExact as JudgmentReso
 --   -> persisted/OALC/official/sanctioned acquisition order
 --   -> local landing-page ingestion
 --   -> zero-network official judgment resource discovery
---   -> bounded full-judgment fetch
+--   -> bounded full-judgment DOCX fetch
 --   -> immutable source revision
+--   -> deterministic canonical text materialization
 --   -> PNF + proposition-level citation/reasoning/condition extraction
 --   -> append-only world/research memory
 --   -> frontier delta
 --   -> next search
 --
--- The validated Rust f93740f offline receipts remain pinned as bounded runtime
--- evidence, never as Agda/kernel certification. OnlineR6 records the historical
--- first live-provider contract. PreferredAU mirrors the newer Rust-led provider
--- order and typed provider failures. OfficialHandoff mirrors the concrete return
--- seam from locally-ingested provider material back into the ordinary research
--- world/reasoning/frontier machinery. HCALive pins the observed successful HCA
--- landing acquisition: first network=1, SHA256-bound local ingestion, replay=0.
--- JudgmentResource mirrors the next Rust step: reuse the local landing bytes,
--- discover DOCX/PDF with zero network, prefer DOCX, then permit one bounded full
--- judgment fetch whose live receipt remains unvalidated until actually run.
+-- HCALive pins the observed successful HCA landing acquisition: first network=1,
+-- SHA256-bound local ingestion, replay=0. JudgmentResource mirrors reuse of those
+-- local landing bytes to discover DOCX/PDF with zero network and prefer DOCX.
+-- CanonicalText mirrors the current Rust carrier transformation: DOCX bytes and
+-- canonical text retain separate hashes; word/document.xml is materialized
+-- locally with deterministic paragraph/newline structure. The current Rust head
+-- and the full-DOCX live receipt remain explicitly unvalidated until local CI and
+-- the one-request opt-in run succeed.
 ------------------------------------------------------------------------
 
 record OfflineResearchEngineBoundary : Set where
@@ -76,6 +76,9 @@ record OfflineResearchEngineBoundary : Set where
     officialJudgmentResourceDiscoveryImplemented : Bool
     officialJudgmentResourceDiscoveryImplementedIsTrue :
       officialJudgmentResourceDiscoveryImplemented ≡ true
+    canonicalDocxTextMaterializationImplemented : Bool
+    canonicalDocxTextMaterializationImplementedIsTrue :
+      canonicalDocxTextMaterializationImplemented ≡ true
     fullJudgmentLiveAcquisitionObserved : Bool
     fullJudgmentLiveAcquisitionObservedIsFalse :
       fullJudgmentLiveAcquisitionObserved ≡ false
@@ -103,7 +106,7 @@ canonicalOfflineResearchEngineBoundary =
     true refl
     true refl
     true refl
-    false refl
+    true refl
     false refl
     false refl
     false refl
@@ -177,6 +180,9 @@ selectedOfficialJudgmentResourceDiscoveryBoundary :
   JudgmentResource.OfficialJudgmentResourceDiscoveryBoundary
 selectedOfficialJudgmentResourceDiscoveryBoundary =
   JudgmentResource.canonicalOfficialJudgmentResourceDiscoveryBoundary
+
+selectedCanonicalJudgmentTextBoundary : CanonicalText.CanonicalJudgmentTextBoundary
+selectedCanonicalJudgmentTextBoundary = CanonicalText.canonicalCanonicalJudgmentTextBoundary
 
 ------------------------------------------------------------------------
 -- Capstone firewalls.
