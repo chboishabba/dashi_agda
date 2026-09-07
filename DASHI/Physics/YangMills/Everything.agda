@@ -78,6 +78,13 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13SplitT3SelectedSemanticsExact
 import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredSplitPhysicalT3SourceFamilyExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119SplitPhysicalStandardProvenanceExact
 
+-- Direct source-theorem specialization to the literal Path13 carrier.  The
+-- selected background and selected-link same-object equalities become refl;
+-- the historical variational-radius record is then a compiler output from the
+-- smaller source-normalization cut.
+import DASHI.Physics.YangMills.BalabanPath13VariationalSpecializationExact
+import DASHI.Physics.YangMills.BalabanPath13VariationalRadiusFromSpecializationExact
+
 -- Newest canonical status surface for the source-correct preferred route.
 import DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact
 
