@@ -39,7 +39,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact as R477
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact as R478
@@ -94,14 +94,13 @@ signedResidualProducerToDirectResolvedBound {family = family} {A = A} producer =
       residualPaid = residualAllowance producer coefficient
 
       shifted : base * mass + rem ≤ base * mass + room * mass
-      shifted = ℚP.+-monoˡ-≤ (base * mass) residualPaid
+      shifted = ℚP.+-mono-≤ ℚP.≤-refl residualPaid
 
       regroup : base * mass + room * mass ≡ (base + room) * mass
       regroup = solve (base ∷ room ∷ mass ∷ [])
 
       endpoint : (base + room) * mass ≡ A * mass
-      endpoint = subst (λ selected → selected * mass ≡ A * mass)
-        (allowanceFit producer) refl
+      endpoint = cong (λ selected → selected * mass) (allowanceFit producer)
 
       paid : base * mass + rem ≤ A * mass
       paid = subst
