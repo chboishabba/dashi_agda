@@ -44,7 +44,15 @@ record FinalPoleNearLiteralModel
     nearIndex : ZeroIndex -> Set
     multiplicity : ZeroIndex -> Scalar
     horizontalDisplacement : ZeroIndex -> Scalar
+
+    -- The target-relative gap is proof-relevant, not a semantic Set label.
+    ordinate : ZeroIndex -> Scalar
+    target : Scalar
+    subtract : Scalar -> Scalar -> Scalar
     targetRelativeGap : ZeroIndex -> Scalar
+    targetRelativeGapIsOrdinateMinusTarget :
+      (sigma : ZeroIndex) ->
+      targetRelativeGap sigma ≡ subtract (ordinate sigma) target
 
     -- Only the operations used by the reflection-paired target-centred kernel
     -- are exposed.  No unrelated analytic structure is required here.
@@ -87,10 +95,6 @@ record FinalPoleNearLiteralModel
     exactMultiplicityIsZetaMultiplicityReceipt :
       exactMultiplicityIsZetaMultiplicity
 
-    exactGapIsOrdinateMinusTarget : Set
-    exactGapIsOrdinateMinusTargetReceipt :
-      exactGapIsOrdinateMinusTarget
-
     exactHorizontalDisplacementIsOffLineRealPart : Set
     exactHorizontalDisplacementIsOffLineRealPartReceipt :
       exactHorizontalDisplacementIsOffLineRealPart
@@ -125,11 +129,6 @@ coarseCountEnvelopeDoesNotPayJointMargin ()
 
 ------------------------------------------------------------------------
 -- Existing collision witness reused directly.
---
--- The historical owner already proves that two cells can have the same
--- multiplicity and absolute envelope while their signed contributions have
--- opposite sign.  Reuse the collision itself here; do not duplicate its
--- rational arithmetic in the final-carrier observer module.
 ------------------------------------------------------------------------
 
 coarseObserverCollisionAlreadyOwned :
@@ -146,6 +145,7 @@ data FinalNearObservationCoordinate : Set where
   scalarNearResponseOnly : FinalNearObservationCoordinate
   countAndAbsoluteEnvelope : FinalNearObservationCoordinate
   literalTargetRelativePhase : FinalNearObservationCoordinate
+  proofRelevantTargetTranslationModulation : FinalNearObservationCoordinate
   fullWeilTargetWindow : FinalNearObservationCoordinate
   jointComplementPayment : FinalNearObservationCoordinate
 
@@ -160,6 +160,7 @@ coordinateState : FinalNearObservationCoordinate -> CoordinateState
 coordinateState scalarNearResponseOnly = inadequateObserver
 coordinateState countAndAbsoluteEnvelope = inadequateObserver
 coordinateState literalTargetRelativePhase = requiredRefinement
+coordinateState proofRelevantTargetTranslationModulation = requiredRefinement
 coordinateState fullWeilTargetWindow = optionalStrongerRefinement
 coordinateState jointComplementPayment = analyticPayment
 
@@ -178,9 +179,17 @@ record FinalPoleNearObserverRefinementBoundary : Set where
     targetRelativePhaseIsFirstMissingCoordinateIsTrue :
       targetRelativePhaseIsFirstMissingCoordinate ≡ true
 
+    targetRelativeGapEqualityIsProofRelevant : Bool
+    targetRelativeGapEqualityIsProofRelevantIsTrue :
+      targetRelativeGapEqualityIsProofRelevant ≡ true
+
     finalNearResponseNeedsProofRelevantLiteralIdentification : Bool
     finalNearResponseNeedsProofRelevantLiteralIdentificationIsTrue :
       finalNearResponseNeedsProofRelevantLiteralIdentification ≡ true
+
+    proofRelevantTranslationModulationStillRequiresAnalyticRealisation : Bool
+    proofRelevantTranslationModulationStillRequiresAnalyticRealisationIsTrue :
+      proofRelevantTranslationModulationStillRequiresAnalyticRealisation ≡ true
 
     fullWeilTargetWindowIsPrimitiveRequirementOfOneLeafConsumer : Bool
     fullWeilTargetWindowIsPrimitiveRequirementOfOneLeafConsumerIsFalse :
@@ -211,9 +220,11 @@ canonicalFinalPoleNearObserverRefinementBoundary =
     false refl
     true refl
     true refl
+    true refl
+    true refl
     false refl
     false refl
     true refl
     false refl
     false refl
-    "The introspective collision is now localized inside the one-leaf high theorem. The final transport exposes nearResponseAt(J) only as a scalar, while count/envelope data provably identify cells with opposite signed contributions. The first missing observation coordinate is therefore a proof-relevant same-object model exposing the literal target-relative phase, multiplicity, near family and reflection-paired kernel whose finite sum equals that exact final nearResponseAt(J). A full Weil target-window object is stronger than the primitive one-leaf consumer requires. Supplying this literal model enables phase-sensitive analysis but does not itself prove the joint complement margin or RH."
+    "The introspective collision is localized inside the one-leaf high theorem. The final transport exposes nearResponseAt(J) only as a scalar, while count/envelope data can identify cells with opposite signed contributions. The first missing observation coordinate is therefore a proof-relevant same-object model of the literal target-relative phase. In that model delta_sigma is now an actual equality ordinate(sigma)-target, not an opaque Set label, and the final near scalar is exactly the finite reflection-paired sum. The next representation subleaf is an analytic realization of the proof-relevant target-translation/modulation law on this same universal pole-quotient carrier. A full Weil target-window object is stronger than the primitive consumer requires. These refinements enable phase-sensitive analysis but do not themselves prove the joint complement margin or RH."
