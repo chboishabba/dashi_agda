@@ -10,6 +10,10 @@ import DASHI.Cognition.PNF.SensibLawPrecedentApplicabilityDistinguishingExact as
 import DASHI.Cognition.PNF.SensibLawStatutoryRuleStructureAlgebraExact as Statute
 import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Elements
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyRequirementSalienceExact as DutySalience
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyGenericParetoFrontierExact as DutyPareto
+import DASHI.Cognition.PNF.SensibLawWrongTypeRequirementSalienceFrontierExact as Frontier
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as Residual
 import DASHI.Cognition.PNF.SensibLawLegalGraphRefinementReopeningExact as Refinement
@@ -65,7 +69,7 @@ legacyElementReferenceIsNotElementDerivation :
 legacyElementReferenceIsNotElementDerivation = Elements.stringReferenceDoesNotProveElement
 
 ------------------------------------------------------------------------
--- Duty-coordinate stratification from the prior climate owner is preserved.
+-- Duty-coordinate stratification and live salience are separate coordinates.
 ------------------------------------------------------------------------
 
 foreseeabilityClassIsFactual :
@@ -83,8 +87,49 @@ causationClassIsDownstreamElement :
   ≡ Negligence.downstreamNegligenceElement
 causationClassIsDownstreamElement = refl
 
+foreseeabilityMayRemainRequiredWithoutBeingCurrentSplitter :
+  Frontier.NecessaryButCurrentlyNonDiscriminating
+    DutySalience.currentDutyProblem
+    Climate.reasonableForeseeability
+foreseeabilityMayRemainRequiredWithoutBeingCurrentSplitter =
+  DutySalience.foreseeabilityRequiredButCurrentlyNonDiscriminating
+
+corePolicyMayBeCurrentDutySplitter :
+  Frontier.SalientRequirement
+    DutySalience.currentDutyProblem
+    Climate.coreGovernmentPolicy
+corePolicyMayBeCurrentDutySplitter = DutySalience.corePolicyCurrentlySplitsDutyFibre
+
+statutoryCoherenceMayBecomeSalientAfterPolicyClosure :
+  Frontier.SalientRequirement
+    DutySalience.postPolicyProblem
+    Climate.statutoryCoherence
+statutoryCoherenceMayBecomeSalientAfterPolicyClosure =
+  DutySalience.statutoryCoherenceBecomesSalientAfterPolicyClosure
+
 ------------------------------------------------------------------------
--- NEW: the universal algebra now owns the reverse epistemic path too.
+-- Generic finite Pareto frontier now computes the current question set.
+------------------------------------------------------------------------
+
+currentDutyParetoFrontierSelectsCorePolicy :
+  Pareto.paretoFrontier DutyPareto.currentDutyPortfolio
+  ≡ DutyPareto.currentCorePolicyCell ∷ []
+currentDutyParetoFrontierSelectsCorePolicy =
+  DutyPareto.currentDutyParetoFrontierIsCorePolicyOnly
+
+postPolicyParetoFrontierSelectsStatutoryCoherence :
+  Pareto.paretoFrontier DutyPareto.postPolicyPortfolio
+  ≡ DutyPareto.postPolicyStatutoryCoherenceCell ∷ []
+postPolicyParetoFrontierSelectsStatutoryCoherence =
+  DutyPareto.postPolicyParetoFrontierIsStatutoryCoherenceOnly
+
+foreseeabilityRemainsRequiredWhileOffParetoFrontier :
+  Pareto.requiredForConsumer DutyPareto.currentForeseeabilityCell ≡ true
+foreseeabilityRemainsRequiredWhileOffParetoFrontier =
+  DutyPareto.foreseeabilityRequiredButOffCurrentParetoFrontier
+
+------------------------------------------------------------------------
+-- Reverse epistemic path.
 ------------------------------------------------------------------------
 
 statutoryCoherenceMissingnessRoutesToStatutoryText :
