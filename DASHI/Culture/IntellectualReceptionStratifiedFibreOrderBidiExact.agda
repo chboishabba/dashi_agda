@@ -267,7 +267,7 @@ currentUseDoesNotPromoteUniqueReceptionHistory ()
 -- 7. Canonical cross-pollination weld.
 ------------------------------------------------------------------------
 
-record IntellectualReceptionStratifiedFibreWeld : Set where
+record IntellectualReceptionStratifiedFibreWeld : Set₁ where
   constructor intellectual-reception-stratified-fibre-weld
   field
     philosophyBoundary : Philosophy.PhilosophyClaimProvenanceHistoryBoundary
@@ -317,3 +317,7 @@ canonicalIntellectualReceptionStratifiedFibreBoundary :
 canonicalIntellectualReceptionStratifiedFibreBoundary =
   intellectual-reception-stratified-fibre-boundary
     false false false false false false false false true true
+
+open IntellectualReceptionStratifiedFibreWeld public
+open IntellectualReceptionStratifiedFibreBoundary public
+

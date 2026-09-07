@@ -131,6 +131,6 @@ trustCategoryDoesNotEqualStewardshipValue ()
 marketPriceDoesNotEqualSocialValue : CarbonMarketPriceEqualsSocialCarbonValue → ⊥
 marketPriceDoesNotEqualSocialValue ()
 nonAssetClassificationDoesNotMeanNoValue : AgencyNonAssetClassificationMeansNoEconomicValue → ⊥
-nonAssetClassificationDoesNotMeanNoEconomicValue ()
+nonAssetClassificationDoesNotMeanNoValue ()
 storageValueDoesNotRequireExtractionFrame : StoredCarbonValueRequiresExtractionFrame → ⊥
 storageValueDoesNotRequireExtractionFrame ()

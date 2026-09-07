@@ -258,7 +258,7 @@ canonicalFourfoldRetreatCrossPollinationWeld =
     Source.canonicalFourfoldRetreatSourceBoundary
     Philosophy.canonicalPhilosophyClaimProvenanceHistoryBoundary
     Critical.canonicalHistoricalTotalityCriticalTheoryBoundary
-    true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- 8. Explicit no-promotion gates.

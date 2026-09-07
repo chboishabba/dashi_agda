@@ -309,29 +309,29 @@ liftedFieldVisibility :
   ∀ {rank depth Value} →
   LiftedField rank depth Value →
   CentreVisibility
-liftedFieldVisibility (centre-blind-field field) = centreBlind
-liftedFieldVisibility (centre-sensitive-field field) = centreSensitive
+liftedFieldVisibility (centre-blind-field fld) = centreBlind
+liftedFieldVisibility (centre-sensitive-field fld) = centreSensitive
 
 liftedFieldValue :
   ∀ {rank depth Value} →
   LiftedField rank depth Value →
   LiftedAddress rank depth →
   Value
-liftedFieldValue (centre-blind-field field) =
-  CentreBlindField.blindValue field
-liftedFieldValue (centre-sensitive-field field) =
-  CentreSensitiveField.sensitiveValue field
+liftedFieldValue (centre-blind-field fld) =
+  CentreBlindField.blindValue fld
+liftedFieldValue (centre-sensitive-field fld) =
+  CentreSensitiveField.sensitiveValue fld
 
 centreBlindFieldCarriesInvariance :
   ∀ {rank depth Value}
-    (field : LiftedField rank depth Value) →
-  liftedFieldVisibility field ≡ centreBlind →
+    (fld : LiftedField rank depth Value) →
+  liftedFieldVisibility fld ≡ centreBlind →
   ∀ x →
-  liftedFieldValue field (centralFlip x)
-  ≡ liftedFieldValue field x
-centreBlindFieldCarriesInvariance (centre-blind-field field) refl =
-  CentreBlindField.centralFlipInvisible field
-centreBlindFieldCarriesInvariance (centre-sensitive-field field) ()
+  liftedFieldValue fld (centralFlip x)
+  ≡ liftedFieldValue fld x
+centreBlindFieldCarriesInvariance (centre-blind-field fld) refl =
+  CentreBlindField.centralFlipInvisible fld
+centreBlindFieldCarriesInvariance (centre-sensitive-field fld) ()
 
 ------------------------------------------------------------------------
 -- Boundary receipt.
@@ -345,6 +345,8 @@ record HypervoxelAuthorityBoundary : Set where
     aggregationLawIsDomainIndependentClaimed : Bool
     baseAndFibreAreExplicit : Bool
     centreBlindRequiresInvarianceProof : Bool
+
+open HypervoxelAuthorityBoundary public
 
 canonicalHypervoxelAuthorityBoundary : HypervoxelAuthorityBoundary
 canonicalHypervoxelAuthorityBoundary = record

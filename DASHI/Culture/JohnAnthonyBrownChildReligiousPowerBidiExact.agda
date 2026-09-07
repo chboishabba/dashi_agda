@@ -227,12 +227,13 @@ data FormalObligation : Set where
   jurisdictionSpecificLegalReceipt : FormalObligation
 
 paperToPrimaryObligation : BrownPaperClaim → FormalObligation
-paperToPrimaryObligation earlyGodSatanFormationClaim = developmentalCapacityReceipt
-paperToPrimaryObligation hellDamnationFearClaim = fearMechanismReceipt
-paperToPrimaryObligation familyAuthorityClaim = familyBelongingExitReceipt
-paperToPrimaryObligation institutionalHegemonyClaim = institutionalPowerReceipt
-paperToPrimaryObligation colonialDispossessionClaim = colonialHistoryReceipt
-paperToPrimaryObligation melbourneResponseClaim = transparencyContestabilityReceipt
+paperToPrimaryObligation (brown-paper-claim developmentalVulnerability _ _ _) = developmentalCapacityReceipt
+paperToPrimaryObligation (brown-paper-claim hellDamnationThreat _ _ _) = fearMechanismReceipt
+paperToPrimaryObligation (brown-paper-claim familyDynamics _ _ _) = familyBelongingExitReceipt
+paperToPrimaryObligation (brown-paper-claim institutionalPower _ _ _) = institutionalPowerReceipt
+paperToPrimaryObligation (brown-paper-claim indigenousCulturalDispossession _ _ _) = colonialHistoryReceipt
+paperToPrimaryObligation (brown-paper-claim survivorAccessToJustice _ _ _) = transparencyContestabilityReceipt
+paperToPrimaryObligation _ = empiricalOutcomeReceipt
 
 data PaperRevisionAction : Set where
   preserveAsResearchQuestion : PaperRevisionAction

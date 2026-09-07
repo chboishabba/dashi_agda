@@ -179,7 +179,7 @@ imposedAndReconstitutedResidualsDiffer :
   symbolResidual imposedSymbolPosition ≡ symbolResidual reconstitutedSymbolPosition → ⊥
 imposedAndReconstitutedResidualsDiffer ()
 
-symbolicPositiveRecharting : Feminist.PositiveRecharting coarseSymbolChart
+symbolicPositiveRecharting : Feminist.PositiveRecharting {Residual = SymbolResidual} coarseSymbolChart
 symbolicPositiveRecharting =
   Feminist.positive-recharting
     symbolResidual
@@ -233,11 +233,11 @@ reclaimedSymbolRoleChanges =
 -- 6. Cross-pollination weld and final boundary.
 ------------------------------------------------------------------------
 
-record SymbolicInversionAuthorityTransferWeld : Set where
+record SymbolicInversionAuthorityTransferWeld : Set₁ where
   constructor symbolic-inversion-authority-transfer-weld
   field
     sanctionFeministWiccaBoundary : Cross.ReligiousSanctionFeministWiccaBoundary
-    positiveRechart : Feminist.PositiveRecharting coarseSymbolChart
+    positiveRechart : Feminist.PositiveRecharting {Residual = SymbolResidual} coarseSymbolChart
     tokenDoesNotRecoverUse : INF.FactorsThrough witchSurfaceOf witchUseCode → ⊥
 
 canonicalSymbolicInversionAuthorityTransferWeld : SymbolicInversionAuthorityTransferWeld

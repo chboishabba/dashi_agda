@@ -68,7 +68,8 @@ lateAcquireNotInT1Prefix :
   Structural.EdgeOccurs
     Structural.LateAcquireEdge
     Paths.lateAuthorityPath01 → ⊥
-lateAcquireNotInT1Prefix ()
+lateAcquireNotInT1Prefix (Structural.occursHere ())
+lateAcquireNotInT1Prefix (Structural.occursLater ())
 
 lateAcquireOccursAtT2Whole :
   Structural.EdgeOccurs
@@ -163,6 +164,8 @@ record PrefixIncidenceMonotonicity : Set where
         Structural.EarlyAcquireEdge
         Paths.earlyAuthorityPath02
 
+open PrefixIncidenceMonotonicity public
+
 canonicalPrefixIncidenceMonotonicity : PrefixIncidenceMonotonicity
 canonicalPrefixIncidenceMonotonicity =
   prefix-incidence-monotonicity
@@ -203,6 +206,8 @@ record IntellectualReceptionTemporalPrefixCertificateReopeningBoundary : Set whe
     prefixLocalityIsLiteralPAdicIdentity : Bool
     prefixLocalityIsFloatingPointEquality : Bool
     sourceAttributionBoundarySurvivesPrefixReopening : Bool
+
+open IntellectualReceptionTemporalPrefixCertificateReopeningBoundary public
 
 canonicalIntellectualReceptionTemporalPrefixCertificateReopeningBoundary :
   IntellectualReceptionTemporalPrefixCertificateReopeningBoundary

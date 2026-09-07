@@ -53,6 +53,7 @@ ryanEtAl2020 = quantitative-bridge-source
   "depression, suicidal thoughts, suicide attempts, educational attainment, weekly income"
   "cross-sectional young-adult survey with retrospective adolescent exposure"
   "paper reports adverse outcome associations; exact coefficient vector should be recovered from full tables before numeric theorem installation"
+  "retrospective adolescent recall in young adulthood; unadjusted and demographic/SES-adjusted models reported without full prospective baseline"
   "bounded to parent-initiated adolescent sexual-orientation change efforts; unusually close family-authority/developmental evidence but not ordinary religious upbringing and not Catholic-specific"
   true true false false
 

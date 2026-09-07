@@ -38,6 +38,8 @@ record EntrapmentSourceRole : Set where
     identifier : String
     boundedRole : String
 
+open EntrapmentSourceRole public
+
 landenburgerSource : EntrapmentSourceRole
 landenburgerSource =
   entrapmentSourceRole
@@ -67,7 +69,7 @@ crcSource =
 -- dependence, low exit capacity and several mechanism witnesses.
 ------------------------------------------------------------------------
 
-record DependentReligiousEntrapmentCandidate : Set where
+record DependentReligiousEntrapmentCandidate : Set₁ where
   constructor dependentReligiousEntrapmentCandidate
   field
     developmentalState : Coercion.DevelopmentalState
@@ -132,6 +134,8 @@ record EntrapmentResearchCoordinates : Set where
     requiresExitRestriction : Bool
     requiresRefusalPenalty : Bool
 
+open EntrapmentResearchCoordinates public
+
 canonicalEntrapmentResearchCoordinates : EntrapmentResearchCoordinates
 canonicalEntrapmentResearchCoordinates =
   entrapmentResearchCoordinates
@@ -154,6 +158,8 @@ record DependentReligiousEntrapmentBoundary : Set where
     divinePunishmentCanBeRelevantMechanism : Bool
     legalFalseImprisonmentAutomaticallyFollows : Bool
     legalSlaveryAutomaticallyFollows : Bool
+
+open DependentReligiousEntrapmentBoundary public
 
 canonicalDependentReligiousEntrapmentBoundary :
   DependentReligiousEntrapmentBoundary

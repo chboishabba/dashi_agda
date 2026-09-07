@@ -1,6 +1,7 @@
 module DASHI.Culture.HegelDialecticPrimarySourceBoundaryExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Source
 
 ------------------------------------------------------------------------
@@ -133,6 +134,8 @@ record HegelDialecticPrimarySourceBoundary : Set where
     selectedPassagesExhaustSystem : Bool
     dashiIdentityEstablished : Bool
     strongerComparisonRequiresIndependentReceipt : Bool
+
+open HegelDialecticPrimarySourceBoundary public
 
 canonicalHegelDialecticPrimarySourceBoundary : HegelDialecticPrimarySourceBoundary
 canonicalHegelDialecticPrimarySourceBoundary =

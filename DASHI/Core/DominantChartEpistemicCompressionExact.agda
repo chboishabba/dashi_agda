@@ -236,6 +236,8 @@ record DominantChartEpistemicCompressionBoundary : Set where
     terminalisationHasExtraCorrectionClosureRiskIsTrue :
       terminalisationHasExtraCorrectionClosureRisk ≡ true
 
+open DominantChartEpistemicCompressionBoundary public
+
 canonicalDominantChartEpistemicCompressionBoundary :
   DominantChartEpistemicCompressionBoundary
 canonicalDominantChartEpistemicCompressionBoundary =

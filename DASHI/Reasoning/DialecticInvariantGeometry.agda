@@ -10,6 +10,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 Predicate : Set → Set
 Predicate X = X → Bool
 
+infix  30 ¬_
+infixr 25 _∧_
+infixr 20 _∨_
+
 _∧_ : Bool → Bool → Bool
 true ∧ b = b
 false ∧ _ = false
@@ -85,12 +89,12 @@ common-swap-invariant F x = ∧-comm (antithesis F x) (thesis F x)
 ------------------------------------------------------------------------
 
 corridor : ∀ {X} → DialecticField X → Predicate X
-corridor F x = (thesis F x ∨ antithesis F x) ∧ ¬ common F x
+corridor F x = (thesis F x ∨ antithesis F x) ∧ (¬ common F x)
 
 disagreement : ∀ {X} → DialecticField X → Predicate X
 disagreement F x =
-  (thesis F x ∧ ¬ antithesis F x) ∨
-  (antithesis F x ∧ ¬ thesis F x)
+  (thesis F x ∧ (¬ antithesis F x)) ∨
+  (antithesis F x ∧ (¬ thesis F x))
 
 corridor-is-disagreement :
   ∀ {X} (F : DialecticField X) (x : X) →

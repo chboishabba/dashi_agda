@@ -24,6 +24,7 @@ module DASHI.Culture.ReligiousPowerChildFearClaimBidiExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject

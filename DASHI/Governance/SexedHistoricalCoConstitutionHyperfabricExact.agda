@@ -35,11 +35,8 @@ data HistoricalEpoch : Set where
 Position : Set
 Position = Dialectic.HistoricalGenderedPosition
 
-masculine : Position
-masculine = Dialectic.masculineCoded
-
-feminine : Position
-feminine = Dialectic.feminineCoded
+pattern masculine = Dialectic.masculineCoded
+pattern feminine = Dialectic.feminineCoded
 
 data ConstructionMode : Set where
   imposedNorm : ConstructionMode
@@ -188,7 +185,7 @@ publicGenderCannotRecoverRelationalSignature =
   INF.witnessRulesOutEveryFlatFactorisation
     (INF.nonFactorabilityWitness
       witchMasculineSelf
-      relational-point suffrageRearticulation masculine masculine
+      (relational-point suffrageRearticulation masculine masculine)
       refl
       (λ ()))
 
@@ -210,21 +207,21 @@ data HistoricalProvenance : Set where courtArchive suffrageArchive movementArchi
 sexedHistoricalHyperfabric : Hyper.CulturalHyperfabric
 sexedHistoricalHyperfabric =
   record
-    { Hyper.Base = HistoricalEpoch
-    ; Hyper.Point = λ _ → Position
-    ; Hyper.Memory = λ _ _ → HistoricalMemory
-    ; Hyper.Practice = λ _ _ → HistoricalPractice
-    ; Hyper.Relation = λ _ _ → ConstructionTensor
-    ; Hyper.Knowledge = λ _ _ → HistoricalKnowledge
-    ; Hyper.MaterialRelation = λ _ _ → HistoricalMaterialRelation
-    ; Hyper.Provenance = λ _ _ → HistoricalProvenance
+    { Base = HistoricalEpoch
+    ; Point = λ _ → Position
+    ; Memory = λ _ _ → HistoricalMemory
+    ; Practice = λ _ _ → HistoricalPractice
+    ; Relation = λ _ _ → ConstructionTensor
+    ; Knowledge = λ _ _ → HistoricalKnowledge
+    ; MaterialRelation = λ _ _ → HistoricalMaterialRelation
+    ; Provenance = λ _ _ → HistoricalProvenance
     }
 
 publicPositionProjection : Hyper.PublicProjection sexedHistoricalHyperfabric
 publicPositionProjection =
   record
-    { Hyper.Surface = PublicGenderSurface
-    ; Hyper.project = λ _ position →
+    { Surface = PublicGenderSurface
+    ; project = λ _ position →
         casePosition position
     }
   where
@@ -270,6 +267,8 @@ record SexedHistoricalHyperfabricBoundary : Set where
     reciprocalFrameIsInevitableSynthesis : Bool
     fourConstructionDirectionsRemainDistinct : Bool
     powerRemainsIndependentFibre : Bool
+
+open SexedHistoricalHyperfabricBoundary public
 
 canonicalSexedHistoricalHyperfabricBoundary : SexedHistoricalHyperfabricBoundary
 canonicalSexedHistoricalHyperfabricBoundary =

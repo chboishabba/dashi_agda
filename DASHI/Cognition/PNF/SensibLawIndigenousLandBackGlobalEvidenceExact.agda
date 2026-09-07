@@ -335,7 +335,7 @@ landBackGlobalEvidenceHypothesis = landBackGlobalHypothesis
 ------------------------------------------------------------------------
 
 record BiodiversityStatisticBoundary : Set where
-  constructor biodiversityStatisticBoundary
+  constructor mkBiodiversityStatisticBoundary
   field
     eightyPercentClaimUsedAsExactEmpiricalPremise : Bool
     eightyPercentClaimUsedAsExactEmpiricalPremiseIsFalse : eightyPercentClaimUsedAsExactEmpiricalPremise ≡ false
@@ -344,7 +344,7 @@ record BiodiversityStatisticBoundary : Set where
 open BiodiversityStatisticBoundary public
 
 biodiversityStatisticBoundary : BiodiversityStatisticBoundary
-biodiversityStatisticBoundary = biodiversityStatisticBoundary false refl true refl
+biodiversityStatisticBoundary = mkBiodiversityStatisticBoundary false refl true refl
 
 ------------------------------------------------------------------------
 -- No-collapse laws.

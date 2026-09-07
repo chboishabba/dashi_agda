@@ -64,6 +64,8 @@ record MasterModelOperationBoundary : Set where
     presenceOfOneOperationImpliesAllOthersIsFalse :
       presenceOfOneOperationImpliesAllOthers ≡ false
 
+open MasterModelOperationBoundary public
+
 canonicalMasterModelOperationBoundary : MasterModelOperationBoundary
 canonicalMasterModelOperationBoundary =
   master-model-operation-boundary false refl false refl false refl

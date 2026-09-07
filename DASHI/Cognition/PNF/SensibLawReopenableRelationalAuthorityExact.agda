@@ -77,7 +77,7 @@ data RelationalCoordinate : Set where
   useObligation : RelationalCoordinate
   kinshipResponsibility : RelationalCoordinate
   careForCountryOrPlace : RelationalCoordinate
-  repair : RelationalCoordinate
+  repairCoordinate : RelationalCoordinate
   continuingRelationship : RelationalCoordinate
   intergenerationalObligation : RelationalCoordinate
 
@@ -103,7 +103,7 @@ open RelationalResolution public
 ------------------------------------------------------------------------
 
 data DeliberationState : Set where
-  open : DeliberationState
+  deliberationOpen : DeliberationState
   objectionRaised : DeliberationState
   reopened : DeliberationState
   consensusReached : DeliberationState
@@ -112,7 +112,7 @@ data DeliberationState : Set where
 
 
 reopenOnObjection : DeliberationState → DeliberationState
-reopenOnObjection open = open
+reopenOnObjection deliberationOpen = deliberationOpen
 reopenOnObjection objectionRaised = reopened
 reopenOnObjection reopened = reopened
 reopenOnObjection consensusReached = consensusReached

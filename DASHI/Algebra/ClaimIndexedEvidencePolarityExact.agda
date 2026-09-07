@@ -120,6 +120,8 @@ record ClaimIndexedEvidencePolarityBoundary : Set where
     conflictRetainedBeforeProjection : Bool
     ignoranceRetainedBeforeProjection : Bool
 
+open ClaimIndexedEvidencePolarityBoundary public
+
 canonicalClaimIndexedEvidencePolarityBoundary : ClaimIndexedEvidencePolarityBoundary
 canonicalClaimIndexedEvidencePolarityBoundary = record
   { poolingRequiresCommonTypedFibre = true

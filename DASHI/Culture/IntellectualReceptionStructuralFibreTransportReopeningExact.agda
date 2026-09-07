@@ -108,7 +108,7 @@ earlyAcquireOccursInPrefix = occursHere earlyAcquire01
 earlyAcquireOccursInComposedPath :
   EdgeOccurs EarlyAcquireEdge Paths.earlyAuthorityPath02
 earlyAcquireOccursInComposedPath =
-  occursInLeftAfterAppend earlyAcquireOccursInPrefix
+  occursInLeftAfterAppend {right = Paths.earlyAuthorityPath12} earlyAcquireOccursInPrefix
 
 lateAcquireOccursInSuffix :
   EdgeOccurs LateAcquireEdge Paths.lateAuthorityPath12
@@ -117,7 +117,7 @@ lateAcquireOccursInSuffix = occursHere lateAcquire12
 lateAcquireOccursInComposedPath :
   EdgeOccurs LateAcquireEdge Paths.lateAuthorityPath02
 lateAcquireOccursInComposedPath =
-  occursInRightAfterAppend lateAcquireOccursInSuffix
+  occursInRightAfterAppend {left = Paths.lateAuthorityPath01} lateAcquireOccursInSuffix
 
 ------------------------------------------------------------------------
 -- 5. Certificates are indexed by the path whose structure justified them.
@@ -259,6 +259,8 @@ record IntellectualReceptionStructuralFibreTransportReopeningBoundary : Set wher
     crossRouteDependencyIsManufacturedBySameEdgeKind : Bool
     reopeningMeansRefutation : Bool
     sourceAttributionBoundarySurvivesStructuralReopening : Bool
+
+open IntellectualReceptionStructuralFibreTransportReopeningBoundary public
 
 canonicalIntellectualReceptionStructuralFibreTransportReopeningBoundary :
   IntellectualReceptionStructuralFibreTransportReopeningBoundary

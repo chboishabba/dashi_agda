@@ -30,6 +30,8 @@ record SituatedFormalisationBoundary : Set where
     domainNeutralityImpliesViewFromNowhereIsFalse :
       domainNeutralityImpliesViewFromNowhere ≡ false
 
+open SituatedFormalisationBoundary public
+
 canonicalSituatedFormalisationBoundary : SituatedFormalisationBoundary
 canonicalSituatedFormalisationBoundary =
   situated-formalisation-boundary true refl false refl false refl false refl

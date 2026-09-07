@@ -24,7 +24,7 @@ data RepairAxis : Set where
 
 
 data RepairStatus : Set where
-  open : RepairStatus
+  unrepaired : RepairStatus
   repaired : RepairStatus
 
 record ReparativeBundle : Set where
@@ -37,28 +37,28 @@ apologyOnly = reparativeBundle apologyStatus
   where
   apologyStatus : RepairAxis → RepairStatus
   apologyStatus acknowledgementAxis = repaired
-  apologyStatus truthAxis = open
-  apologyStatus restitutionAxis = open
-  apologyStatus landReturnAxis = open
-  apologyStatus compensationAxis = open
-  apologyStatus institutionalReformAxis = open
-  apologyStatus authorityRestorationAxis = open
-  apologyStatus decisionRightsAxis = open
-  apologyStatus nonRepetitionAxis = open
+  apologyStatus truthAxis = unrepaired
+  apologyStatus restitutionAxis = unrepaired
+  apologyStatus landReturnAxis = unrepaired
+  apologyStatus compensationAxis = unrepaired
+  apologyStatus institutionalReformAxis = unrepaired
+  apologyStatus authorityRestorationAxis = unrepaired
+  apologyStatus decisionRightsAxis = unrepaired
+  apologyStatus nonRepetitionAxis = unrepaired
 
 compensationOnly : ReparativeBundle
 compensationOnly = reparativeBundle compensationStatus
   where
   compensationStatus : RepairAxis → RepairStatus
-  compensationStatus acknowledgementAxis = open
-  compensationStatus truthAxis = open
-  compensationStatus restitutionAxis = open
-  compensationStatus landReturnAxis = open
+  compensationStatus acknowledgementAxis = unrepaired
+  compensationStatus truthAxis = unrepaired
+  compensationStatus restitutionAxis = unrepaired
+  compensationStatus landReturnAxis = unrepaired
   compensationStatus compensationAxis = repaired
-  compensationStatus institutionalReformAxis = open
-  compensationStatus authorityRestorationAxis = open
-  compensationStatus decisionRightsAxis = open
-  compensationStatus nonRepetitionAxis = open
+  compensationStatus institutionalReformAxis = unrepaired
+  compensationStatus authorityRestorationAxis = unrepaired
+  compensationStatus decisionRightsAxis = unrepaired
+  compensationStatus nonRepetitionAxis = unrepaired
 
 apologyDoesNotRepairLandReturn :
   ReparativeBundle.status apologyOnly landReturnAxis ≡ repaired → ⊥

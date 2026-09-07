@@ -104,6 +104,8 @@ record KimmererTwoEyedSeeingBoundary : Set where
     dashiBridgeIsInterpretiveFormalExtensionIsTrue :
       dashiBridgeIsInterpretiveFormalExtension ≡ true
 
+open KimmererTwoEyedSeeingBoundary public
+
 canonicalKimmererTwoEyedSeeingBoundary : KimmererTwoEyedSeeingBoundary
 canonicalKimmererTwoEyedSeeingBoundary =
   kimmererTwoEyedSeeingBoundary

@@ -45,5 +45,7 @@ record CategoryStrategyBoundary : Set where
     strategyTranslationRequiresExplicitWitnessIsTrue :
       strategyTranslationRequiresExplicitWitness ≡ true
 
+open CategoryStrategyBoundary public
+
 canonicalCategoryStrategyBoundary : CategoryStrategyBoundary
 canonicalCategoryStrategyBoundary = category-strategy-boundary false refl false refl true refl

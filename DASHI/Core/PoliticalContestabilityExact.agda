@@ -56,6 +56,8 @@ record PoliticalAuthorityBoundary : Set where
     democraticContestabilityEqualsLegitimacyIsFalse :
       democraticContestabilityEqualsLegitimacy ≡ false
 
+open PoliticalAuthorityBoundary public
+
 canonicalPoliticalAuthorityBoundary : PoliticalAuthorityBoundary
 canonicalPoliticalAuthorityBoundary =
   politicalAuthorityBoundary false refl false refl false refl false refl
