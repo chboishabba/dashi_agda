@@ -13,11 +13,6 @@ import DASHI.Law.SensibLawProofSearchParetoSaturationExact as Pareto
 
 ------------------------------------------------------------------------
 -- COSTED PROOF-SEARCH SCHEDULER
---
--- The scheduler chooses among admissible legal research moves only after a
--- consumer declares the minimum useful proof-frontier reduction. Execution
--- strategy costs remain multi-axis; a scalar projection is optional and must be
--- declared separately.
 ------------------------------------------------------------------------
 
 record MeetsProofReductionThreshold
@@ -48,10 +43,6 @@ record CostedLegalSearchChoice
 
 open CostedLegalSearchChoice public
 
-------------------------------------------------------------------------
--- Search iteration weld.
-------------------------------------------------------------------------
-
 record CostedSearchIteration : Set₁ where
   constructor costedSearchIteration
   field
@@ -67,11 +58,6 @@ record CostedSearchIteration : Set₁ where
     iterationReference : String
 
 open CostedSearchIteration public
-
-------------------------------------------------------------------------
--- Escalation policy: local/persisted work is preferred operationally when it
--- remains Pareto-competitive, but no theorem says offline is always superior.
-------------------------------------------------------------------------
 
 data ExecutionEscalationStage : Set where
   inspectLocalFixture
@@ -99,10 +85,6 @@ record EscalationDecision : Set₁ where
 
 open EscalationDecision public
 
-------------------------------------------------------------------------
--- Saturation and cost remain distinct.
-------------------------------------------------------------------------
-
 record CostedStoppingDecision : Set₁ where
   constructor costedStoppingDecision
   field
@@ -114,10 +96,6 @@ record CostedStoppingDecision : Set₁ where
     stoppingReference : String
 
 open CostedStoppingDecision public
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
 
 data ZeroNetworkCostForcesSelection : Set where
 data GainThresholdMeansProofClosed : Set where
@@ -135,8 +113,8 @@ gainThresholdDoesNotMeanClosed ()
 cheapestDoesNotAutomaticallyWin : CheapestAdmissibleMoveMustBeSelected → ⊥
 cheapestDoesNotAutomaticallyWin ()
 
-liveEscalationRequiresGovernance : LiveEscalationAllowedWithoutGovernance → ⊥
-liveEscalationRequiresGovernance ()
+liveEscalationWithoutGovernanceImpossible : LiveEscalationAllowedWithoutGovernance → ⊥
+liveEscalationWithoutGovernanceImpossible ()
 
 budgetExhaustionDoesNotMeanFalse : ExhaustedBudgetMeansPropositionFalse → ⊥
 budgetExhaustionDoesNotMeanFalse ()
