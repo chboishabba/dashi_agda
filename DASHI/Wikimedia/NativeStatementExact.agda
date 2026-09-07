@@ -66,6 +66,13 @@ record Statement : Set where
     statementReferences : List ReferenceBlock
 open Statement public
 
+record LocalizedLabel : Set where
+  constructor localizedLabel
+  field
+    labelLanguage : String
+    labelText : String
+open LocalizedLabel public
+
 record Sitelink : Set where
   constructor sitelink
   field
@@ -84,7 +91,7 @@ record EntitySnapshot : Set where
   constructor entitySnapshot
   field
     snapshotItem : Id.ItemId
-    snapshotLabels : List (String × String)
+    snapshotLabels : List LocalizedLabel
     snapshotStatements : List Statement
     snapshotSitelinks : List EntitySitelink
     snapshotReference : String
