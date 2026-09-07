@@ -3,20 +3,13 @@ module DASHI.Interop.SensibLawNatZelphPeerCohortExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Interop.ExternalContextSafetyBoundary as Safety
 import DASHI.Interop.GovernedResidualOntologyLearning as Learning
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Zelph
 import DASHI.Interop.SensibLawWikidataItemPropertyEvidenceExact as ItemEvidence
 import DASHI.Interop.SensibLawWikidataRequiredPropertyCoverageExact as Required
-
-------------------------------------------------------------------------
--- Nat P5991 -> P14143 peer-cohort residual.
---
--- Runtime parity:
---   ItemPropertyEvidenceSurface + DomainInvariantSnapshot
---     -> conditioned peer-cohort residual.
-------------------------------------------------------------------------
 
 data PeerResidualState : Set where
   peerExact peerPartial peerContradictory peerUnresolved : PeerResidualState
@@ -82,10 +75,6 @@ uninspectedRequiredPropertyCannotBecomeObservedAbsence :
   ≡ Required.propertyPresenceUnresolved
 uninspectedRequiredPropertyCannotBecomeObservedAbsence = refl
 
-------------------------------------------------------------------------
--- Governed cohort admission is inherited from the generic learning owner.
-------------------------------------------------------------------------
-
 heldMemberDoesNotTrainNatInvariant :
   Learning.contributesToEmpiricalInvariant Learning.held ≡ false
 heldMemberDoesNotTrainNatInvariant = Learning.heldDoesNotTrainInvariant
@@ -98,10 +87,6 @@ coverageIncompleteMemberDoesNotTrainNatInvariant :
   Learning.contributesToEmpiricalInvariant Learning.coverageIncomplete ≡ false
 coverageIncompleteMemberDoesNotTrainNatInvariant =
   Learning.coverageIncompleteDoesNotTrainInvariant
-
-------------------------------------------------------------------------
--- Item/property provenance cannot be discarded before peer comparison.
-------------------------------------------------------------------------
 
 data FlattenedPeerLabelsReplaceItemEvidence : Set where
 data ExactPeerResidualImpliesMigrationSafe : Set where
