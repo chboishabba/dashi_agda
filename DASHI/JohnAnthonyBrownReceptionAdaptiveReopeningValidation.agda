@@ -8,6 +8,8 @@ import DASHI.Foundations.Base369Ternary27StabiliserOperatorHolonomyExact as Oper
 import DASHI.Governance.ReceptionEvidenceSelectiveReopeningExact as Reception
 import DASHI.Culture.JohnAnthonyBrownReceptionEvidenceReopeningBridgeExact as Brown
 import DASHI.Culture.JohnAnthonyBrownPaperSectionHypothesisManifestExact as Manifest
+import DASHI.Culture.JohnAnthonyBrownDiagnosisRepairSchedulerBidiExact as Diagnosis
+import DASHI.Culture.JohnAnthonyBrownTemporalDiagnosisDependencyLineageBidiExact as TemporalLineage
 
 ------------------------------------------------------------------------
 -- Base-path admissibility dynamics.
@@ -83,3 +85,25 @@ wholePaperDoesNotAutoInvalidate = Brown.oneChangedSourceDoesNotInvalidateWholePa
 
 staleClaimDoesNotAutoRefute : Brown.StaleBrownClaimIsRefuted → ⊥
 staleClaimDoesNotAutoRefute = Brown.staleBrownClaimIsReopenableNotRefuted
+
+------------------------------------------------------------------------
+-- Diagnosis scheduler + temporal dependency-lineage return.
+------------------------------------------------------------------------
+
+receptionFrameRequestsRechart :
+  Diagnosis.brownRevision DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact.frameConflict
+  ≡ DASHI.Core.SequentialOutcomeBackpropagationBidiExact.rechartRepresentation
+receptionFrameRequestsRechart = Diagnosis.receptionFrameConflictRequestsRechart
+
+receptionReactivationLocalizedToH2 :
+  DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact.LocalizedReactivation
+    Brown.BrownDepends
+    DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact.frameConflict
+receptionReactivationLocalizedToH2 = TemporalLineage.localizedReceptionReactivation
+
+h1ObservationReactivationMayUseDifferentUpstreamMeasurement :
+  DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact.LocalizedReactivation
+    Brown.BrownDepends
+    DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact.observationConflict
+h1ObservationReactivationMayUseDifferentUpstreamMeasurement =
+  TemporalLineage.localizedH1ObservationReactivation
