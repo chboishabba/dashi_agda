@@ -78,20 +78,17 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13SplitT3SelectedSemanticsExact
 import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredSplitPhysicalT3SourceFamilyExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119SplitPhysicalStandardProvenanceExact
 
--- Direct source-theorem specialization to the literal Path13 carrier.  The
--- selected background and selected-link same-object equalities become refl;
--- the historical variational-radius record is then a compiler output from the
--- smaller source-normalization cut.
+-- Direct source-theorem specialization to the literal Path13 carrier.
 import DASHI.Physics.YangMills.BalabanPath13VariationalSpecializationExact
 import DASHI.Physics.YangMills.BalabanPath13VariationalRadiusFromSpecializationExact
 
 -- Align the selected/cut defect algebra with the R171 operator kernel itself.
--- The old pointwise selected-cut/operator same-object weld is then definitional.
 import DASHI.Physics.YangMills.BalabanR171OperatorKernelGroupDefectAdapterExact
 import DASHI.Physics.YangMills.BalabanPath13R171AlignedVariationalRouteExact
 
--- Least-privilege current source: T3 is now only one possible producer of the
--- corrected printed semantic operators/chart weld, not a primitive payment.
+-- Least-privilege current source: minimal printed semantics plus direct 74-link
+-- cut budget (37/1024 <= selected radius). T3 and 1/24 are compatibility paths.
+import DASHI.Physics.YangMills.BalabanPath13DirectRelative74CutExact
 import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredR171AlignedPrintedSourceExact
 
 -- Newest canonical status surface for the source-correct preferred route.
@@ -110,9 +107,7 @@ import DASHI.Physics.YangMills.BalabanOSExponentialClusteringImpliesHamiltonianG
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaReuseExact
 import DASHI.Physics.YangMills.BalabanClayMassGapGatePackageExact
 
--- Receipt-vs-theorem terminal audit. These modules preserve historical status
--- coordinates while preventing them from superseding the constructive M7--M9
--- frontier without actual operator/domain/recovery/reconstruction objects.
+-- Receipt-vs-theorem terminal audit.
 import DASHI.Physics.YangMills.BalabanCMP98Equation119ClayTerminalBidiRound186Exact
 import DASHI.Physics.YangMills.BalabanCMP98TerminalHamiltonianBidiRound188Exact
 import DASHI.Physics.YangMills.BalabanCMP98ClayBoundarySupersessionRound190Exact
