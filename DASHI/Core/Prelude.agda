@@ -9,7 +9,9 @@ open import Data.Product public using (Σ; _,_; _×_; proj₁; proj₂)
 open import Data.Sum public using (_⊎_; inj₁; inj₂)
 open import Data.Empty public using (⊥; ⊥-elim)
 open import Data.Unit public using (⊤; tt)
-open import Relation.Binary.PropositionalEquality public using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.String public using (String)
+open import Relation.Binary.PropositionalEquality public using (_≡_; refl; cong; cong₂; sym; trans; subst)
+
 
 ¬_ : Set → Set
 ¬ A = A → ⊥

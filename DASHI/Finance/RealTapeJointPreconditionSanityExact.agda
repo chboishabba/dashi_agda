@@ -47,7 +47,7 @@ tradingResumedTape : TapeState
 tradingResumedTape = tapeState tradingResumedPhase 0 5
 
 askDepthDrop : Nat
-askDepthDrop = displayedAskDepth normalBefore - displayedAskDepth normalAfter100Delete
+askDepthDrop = displayedAskDepth normalBefore ∸ displayedAskDepth normalAfter100Delete
 
 askDepthDropIs100 : askDepthDrop ≡ 100
 askDepthDropIs100 = refl
