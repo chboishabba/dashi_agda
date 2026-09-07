@@ -27,7 +27,7 @@ module DASHI.Physics.YangMills.BalabanSelectedCorrelatedSingletonCertifiedCoreEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
@@ -182,13 +182,14 @@ certifiedCoreToLiteralWitness :
   CertifiedCorrelatedSingletonCore background bondField plaquette →
   Plaquette.LiteralSelectedPlaquetteWitness background bondField plaquette
 certifiedCoreToLiteralWitness data =
-  Producer.correlatedSingletonWithSlackToLiteralWitness record
-    { Producer.CorrelatedSingletonWithSlack.extraction =
-        certifiedCoreToHistoricalExtraction data
-    ; Producer.CorrelatedSingletonWithSlack.ownerBounds =
-        EnvelopeBridge.intervalCertificateToSlackBounds
-          (intervalCertificate data)
-    }
+  Producer.correlatedSingletonWithSlackToLiteralWitness
+    (record
+      { Producer.CorrelatedSingletonWithSlack.extraction =
+          certifiedCoreToHistoricalExtraction data
+      ; Producer.CorrelatedSingletonWithSlack.ownerBounds =
+          EnvelopeBridge.intervalCertificateToSlackBounds
+            (intervalCertificate data)
+      })
 
 record CertifiedCorrelatedSingletonCoreFamily
     (background : Physical.RationalSU2Background4)
