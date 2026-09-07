@@ -13,3 +13,4 @@ import DASHI.Cognition.PNF.SensibLawCountryJuridicalHumanityOperationalRemedyEve
 -- Plural epistemic-progress / remedy methodology and result-sensitive diagnosis.
 import DASHI.Cognition.PNF.SensibLawPluralEpistemicRepairMethodologyBidiExact
 import DASHI.Cognition.PNF.SensibLawDiagnosisRepairSchedulerBidiExact
+import DASHI.Cognition.PNF.SensibLawTemporalDiagnosisHistoryBidiExact
