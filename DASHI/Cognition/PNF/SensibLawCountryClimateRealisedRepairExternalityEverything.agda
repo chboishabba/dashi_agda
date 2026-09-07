@@ -3,13 +3,14 @@ module DASHI.Cognition.PNF.SensibLawCountryClimateRealisedRepairExternalityEvery
 ------------------------------------------------------------------------
 -- COUNTRY / CLIMATE / REALISED REPAIR / EXTERNALITY CAPSTONE
 --
--- Preferred surface for this tranche.  All external-source propositions remain
--- owned by their existing source-bounded modules.  This file only composes the
+-- Preferred surface for this tranche. All external-source propositions remain
+-- owned by their existing source-bounded modules. This file only composes the
 -- theorem surfaces and pins no-collapse boundaries.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.TerminalRealisationValidationExact as Terminal
 import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 import DASHI.Environment.LESCountryExternalityRealisationExact as LESCountry
@@ -92,7 +93,7 @@ fullReparationStillResidual :
 fullReparationStillResidual = refl
 
 consultationObserverCannotRecoverCommunityOutcome :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  INF.FactorsThrough
     BillyRealised.administrativeConsultationObserver
     BillyRealised.communityConsultationOutcome → ⊥
 consultationObserverCannotRecoverCommunityOutcome =
@@ -149,8 +150,7 @@ communityAuthorityIsNotPropertyRightByDefault :
 communityAuthorityIsNotPropertyRightByDefault = refl
 
 lesCoarseObservationStillCannotRecoverPlanningSignature :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    LES.fullCoarseObservation LES.fullPlanningSignature → ⊥
+  INF.FactorsThrough LES.fullCoarseObservation LES.fullPlanningSignature → ⊥
 lesCoarseObservationStillCannotRecoverPlanningSignature =
   LES.fullCoarseSummaryCannotRecoverFullPlanningSignature
 
