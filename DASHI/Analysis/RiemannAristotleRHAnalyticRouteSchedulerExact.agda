@@ -10,9 +10,12 @@ module DASHI.Analysis.RiemannAristotleRHAnalyticRouteSchedulerExact where
 --   H_off^pole finite-near evaluation
 --   H_Gamma precision repair.
 --
--- The finite-near node has two currently admissible route families:
---   direct signed finite evaluation;
---   construct a literal target-centred explicit-formula bridge.
+-- Two zero-side route classes remain logically admissible, but the reconciled
+-- finite-near audit now gives a structural prerequisite ordering: the direct
+-- signed finite evaluation attacks the terminal finite value immediately,
+-- whereas the explicit-formula fallback still requires uninhabited target
+-- modulation/window and lawful extraction producers first. This is not an
+-- invented theorem-difficulty score; it is dependency-graph dominance.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -53,7 +56,7 @@ experimentFeeds absoluteMajorizeNearSum = finiteNearProducer
 experimentFeeds namedHardySearchWithoutBridge = finiteNearProducer
 
 ------------------------------------------------------------------------
--- Admissibility is proof-relevant, not a label or score.
+-- Logical admissibility remains proof-relevant.
 ------------------------------------------------------------------------
 
 data RHAnalyticSchedulable : RHAnalyticExperiment → Set where
@@ -102,7 +105,35 @@ wrongCarrierHermitianRouteDoesNotFeedFiniteNear =
   Route.reuseHermitianG3WithoutBridgeDoesNotFeed
 
 ------------------------------------------------------------------------
--- Cost/order only after RH admissibility.
+-- Current structural precedence. The historical generic cost selector remains
+-- below for compatibility, but must not be interpreted as permission to make a
+-- dependency-dominated fallback outrank the direct route merely by declaring a
+-- smaller arbitrary Nat cost.
+------------------------------------------------------------------------
+
+data CurrentHighestAlphaRoute : RHAnalyticExperiment → Set where
+  directOffRouteHighestAlpha :
+    CurrentHighestAlphaRoute directPoleNearEvaluation
+  gammaRouteHighestAlpha :
+    CurrentHighestAlphaRoute repairGammaPrecision
+
+explicitFormulaFallbackNotCurrentHighestAlpha :
+  CurrentHighestAlphaRoute buildPoleNearExplicitFormulaBridge → ⊥
+explicitFormulaFallbackNotCurrentHighestAlpha ()
+
+directAuditPrecedencePin :
+  Route.directRouteIsCurrentHighestAlphaZeroSideRoute ≡ true
+directAuditPrecedencePin =
+  Route.directRouteIsCurrentHighestAlphaZeroSideRouteIsTrue
+
+explicitFormulaStillLogicallyAdmissible :
+  RHAnalyticSchedulable buildPoleNearExplicitFormulaBridge
+explicitFormulaStillLogicallyAdmissible = explicitFormulaBridgeIsSchedulable
+
+------------------------------------------------------------------------
+-- Historical cost/order only after RH admissibility. This interface is retained
+-- for compatibility; current highest-alpha selection additionally respects the
+-- structural precedence above.
 ------------------------------------------------------------------------
 
 record RHAnalyticCostSurface : Set₁ where
@@ -128,6 +159,16 @@ record SelectedRHAnalyticExperiment (surface : RHAnalyticCostSurface) : Set₁ w
     selectionReference : String
 
 open SelectedRHAnalyticExperiment public
+
+record SelectedCurrentHighestAlphaExperiment
+    (surface : RHAnalyticCostSurface) : Set₁ where
+  constructor selected-current-highest-alpha-experiment
+  field
+    historicalSelection : SelectedRHAnalyticExperiment surface
+    respectsCurrentStructuralPrecedence :
+      CurrentHighestAlphaRoute (SelectedRHAnalyticExperiment.selected historicalSelection)
+
+open SelectedCurrentHighestAlphaExperiment public
 
 ------------------------------------------------------------------------
 -- Boundary.
@@ -176,3 +217,10 @@ canonicalRHAnalyticRouteSchedulerBoundary =
     false refl
     false refl
     false refl
+
+currentDirectRouteStructurallyPrecedesExplicitFormulaFallback : Bool
+currentDirectRouteStructurallyPrecedesExplicitFormulaFallback = true
+
+currentDirectRouteStructurallyPrecedesExplicitFormulaFallbackIsTrue :
+  currentDirectRouteStructurallyPrecedesExplicitFormulaFallback ≡ true
+currentDirectRouteStructurallyPrecedesExplicitFormulaFallbackIsTrue = refl

@@ -46,6 +46,8 @@ FILES=(
   DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
   DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
+  DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
   DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
   DASHI/Analysis/RiemannAristotleNearCoreDensityReturnRegression.agda
@@ -98,6 +100,8 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannG2QuarterPeriodAnalyticRouteReconciliationExact.agda
   agda DASHI/Analysis/RiemannG2HighestAlphaAfter369Exact.agda
   agda DASHI/Analysis/RiemannG2HighestAlphaAfter8894Exact.agda
+  agda DASHI/Analysis/RiemannG2PoleQuotientChannelAllowanceExact.agda
+  agda DASHI/Analysis/RiemannG2PoleQuotientFinalCutReconciliationExact.agda
   agda DASHI/Analysis/RiemannAristotleRHBidiSearchSchedulerExact.agda
   agda DASHI/Analysis/RiemannAristotleRHAnalyticLeafSchedulerExact.agda
   agda DASHI/Analysis/RiemannAristotleNearCoreDensityReturnRegression.agda

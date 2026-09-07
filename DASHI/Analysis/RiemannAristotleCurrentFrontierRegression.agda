@@ -73,7 +73,6 @@ zetaLongWindowLowerDensityOpen :
     F.canonicalAristotleCurrentFrontier ≡ false
 zetaLongWindowLowerDensityOpen = refl
 
--- The theorem is still unproved, but no longer misclassified as a forward RH leaf.
 zetaClusteringUnproved :
   F.AristotleCurrentFrontier.actualZetaClusteringClosed
     F.canonicalAristotleCurrentFrontier ≡ false
@@ -134,7 +133,7 @@ alpogeFurmanNotDirectLocalClosure :
     F.canonicalAristotleCurrentFrontier ≡ false
 alpogeFurmanNotDirectLocalClosure = refl
 
--- Forward direct theorem boundary.
+-- Determinant compiler remains useful internally, but is not the final carrier.
 directPaymentCompilerClosed :
   F.directSignedConsumerPaymentCompilerClosedInAgda ≡ true
 directPaymentCompilerClosed =
@@ -148,6 +147,37 @@ genericWithinDoesNotCloseLiteralG2 :
   F.genericWithinReceiptAloneClosesLiteralG2 ≡ false
 genericWithinDoesNotCloseLiteralG2 =
   F.genericWithinReceiptAloneClosesLiteralG2IsFalse
+
+-- Final pole-quotient precedence must not regress.
+determinantNotFinalCarrier :
+  F.FinalCut.PoleQuotientFinalCutBoundary.determinantLaneIsFinalPoleQuotientCarrier
+    F.FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
+determinantNotFinalCarrier = F.determinantLaneIsNotFinalPoleQuotientCarrier
+
+determinantPaymentNotFinalOffPayment :
+  F.FinalCut.PoleQuotientFinalCutBoundary.determinantDirectPaymentAutomaticallyPaysFinalOffSocket
+    F.FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
+determinantPaymentNotFinalOffPayment = F.determinantPaymentDoesNotAutoPayFinalOffSocket
+
+universalPoleQuotientOffForward :
+  F.FinalCut.PoleQuotientFinalCutBoundary.literalUniversalPoleQuotientSignedOffIsForwardLeaf
+    F.FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ true
+universalPoleQuotientOffForward = F.universalPoleQuotientSignedOffIsForwardLeaf
+
+gammaPrecisionForward :
+  F.FinalCut.PoleQuotientFinalCutBoundary.sameTaperGammaPrecisionIsForwardLeaf
+    F.FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ true
+gammaPrecisionForward = F.sameTaperGammaPrecisionIsForwardLeaf
+
+clusterFreshAnalysisPruned :
+  F.FinalCut.PoleQuotientFinalCutBoundary.freshClusterMarginAnalysisRequired
+    F.FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
+clusterFreshAnalysisPruned = F.freshClusterMarginAnalysisNotRequired
+
+finalCompilerRebuildPruned :
+  F.FinalCut.PoleQuotientFinalCutBoundary.finalContradictionCompilerNeedsRebuilding
+    F.FinalCut.canonicalPoleQuotientFinalCutBoundary ≡ false
+finalCompilerRebuildPruned = F.finalContradictionCompilerRebuildNotRequired
 
 nearFarCompilerClosed :
   F.AristotleCurrentFrontier.nearFarShellCompositionCompilerClosedInAgda
