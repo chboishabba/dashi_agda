@@ -1,0 +1,8 @@
+module DASHI.Core.PluralEpistemicProgressCrossDomainEverything where
+
+import DASHI.Core.PluralEpistemicProgressMethodologyBidiExact
+import DASHI.Core.SequentialPlannerPluralClosureBidiExact
+import DASHI.Biology.DrosophilaPluralEpistemicProgressBidiExact
+import DASHI.Governance.PluralEpistemicRepairMethodologyBidiExact
+import DASHI.Cognition.PNF.SensibLawPluralEpistemicRepairMethodologyBidiExact
+import DASHI.Core.RuntimePluralEpistemicProgressBidiExact
