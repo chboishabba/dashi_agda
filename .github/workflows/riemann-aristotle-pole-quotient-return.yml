@@ -12,6 +12,7 @@ on:
       - 'DASHI/Analysis/RiemannG2*.agda'
       - 'scripts/check_riemann_aristotle_pole_quotient_return.sh'
       - 'scripts/check_riemann_aristotle_two_zero_return.sh'
+      - 'scripts/check_riemann_g2_minimal_final_cut.sh'
       - '.github/workflows/riemann-aristotle-pole-quotient-return.yml'
   workflow_dispatch:
 
@@ -20,5 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Trust scan and focused Agda check when toolchain is available
+      - name: Trust scan and legacy pole-quotient check
         run: bash scripts/check_riemann_aristotle_pole_quotient_return.sh
+      - name: Trust scan and minimal final-cut check
+        run: bash scripts/check_riemann_g2_minimal_final_cut.sh
