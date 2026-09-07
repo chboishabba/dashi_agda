@@ -26,6 +26,7 @@ import DASHI.Moonshine.Monster369NDimParetoTetrationBridgeExact
 
 import DASHI.Cognition.RecursiveFibreTower
 import DASHI.Reasoning.SensibLawEncyclopediaCorpusClaimReceiptExact
+import DASHI.Reasoning.SensibLawEncyclopediaAttributedSourceBridgeExact
 
 import DASHI.Biology.AgenticMaterialsControlCore
 import DASHI.Biology.Levin.LevinBioelectricAgencyCore
