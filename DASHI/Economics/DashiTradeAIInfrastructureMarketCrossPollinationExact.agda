@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.SituatedActionabilityFibreExact as ActionFibre
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Finance.DashiTradeFibreBridgeExact as TradeBridge
 import DASHI.Trading.DashiTradeDreamOptionConeExact as Dream
 import DASHI.Trading.TradingDeclaredRealizedViabilityBridgeExact as Viability
@@ -127,7 +128,7 @@ infrastructureSameSignalDifferentActionability = record
   }
 
 infrastructureSignalCannotDecodeRefinancing :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  NF.FactorsThrough
     (ActionFibre.signalOf infrastructureActionabilityFibre)
     (ActionFibre.actionabilityOf infrastructureActionabilityFibre) → ⊥
 infrastructureSignalCannotDecodeRefinancing =
