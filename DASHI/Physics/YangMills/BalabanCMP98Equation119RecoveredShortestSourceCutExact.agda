@@ -8,26 +8,24 @@ module DASHI.Physics.YangMills.BalabanCMP98Equation119RecoveredShortestSourceCut
 -- realization, signed perturbation projection, local scalar action, two-carrier
 -- selected-bond Eq.(119), and positive-bond field assembly are constructed.
 --
--- The current shortest source route also removes two formerly pointwise
--- families of authority:
+-- The current shortest source route removes two formerly pointwise families of
+-- authority: independently selected radius-six embeddings per coarse bond and
+-- independently supplied principal-image proofs per bond/fine point.
 --
---   * one independently selected radius-six embedding per coarse bond;
---   * one independently supplied principal-image proof per bond/fine point.
+-- The radius-six centred-torus walk agreement is now itself constructed by a
+-- direct finite side-13 theorem.  Hence every bond-centred embedding is generated
+-- once the selected Path13 background exists; no geometry receipt remains.
+-- Principal-image admission is generated from one global selected-cut/operator-
+-- defect weld by the literal erased 74-link relative-contour telescope.
 --
--- Bond-centred embeddings are generated from ONE radius-six centred-torus
--- walk-agreement certificate.  Principal-image admission is generated from ONE
--- global selected-cut/operator-defect weld by the literal erased 74-link
--- relative-contour telescope.
---
--- Therefore the surviving source-facing frontier is now exactly:
+-- Therefore the surviving source-facing frontier is exactly four payments:
 --
 --   1. selected variational/physical Path13 background;
---   2. one radius-six centred-torus walk-agreement certificate;
---   3. one rational-real ring embedding;
---   4. one ExistingFederbushConventionFamily inhabitant;
---   5. one global Path13 selected-cut/defect representation weld.
+--   2. one rational-real ring embedding;
+--   3. one ExistingFederbushConventionFamily inhabitant;
+--   4. one global Path13 selected-cut/defect representation weld.
 --
--- These are still uninhabited here.  Full physical Eq.(119) remains open.
+-- These four remain uninhabited here.  Full physical Eq.(119) remains open.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -123,9 +121,9 @@ record RecoveredEq119ShortestSourceStatus : Set where
     path13PointwisePrincipalImageReceiptPrunedIsTrue : path13PointwisePrincipalImageReceiptPruned ≡ true
     path13ReducedSourceFamilyAdapterClosedIsTrue : path13ReducedSourceFamilyAdapterClosed ≡ true
     path13ReducedFieldDerivativeCompilerClosedIsTrue : path13ReducedFieldDerivativeCompilerClosed ≡ true
+    path13RadiusSixWalkAgreementConstructedIsTrue : path13RadiusSixWalkAgreementConstructed ≡ true
 
     path13SelectedPhysicalBackground13ConstructedIsFalse : path13SelectedPhysicalBackground13Constructed ≡ false
-    path13RadiusSixWalkAgreementConstructedIsFalse : path13RadiusSixWalkAgreementConstructed ≡ false
     rationalRealRingEmbeddingConstructedIsFalse : rationalRealRingEmbeddingConstructed ≡ false
     federbushConventionFamilyConstructedIsFalse : federbushConventionFamilyConstructed ≡ false
     path13SelectedCutDefectWeldConstructedIsFalse : path13SelectedCutDefectWeldConstructed ≡ false
@@ -166,7 +164,7 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13ReducedSourceFamilyAdapterClosed = true
   ; path13ReducedFieldDerivativeCompilerClosed = true
   ; path13SelectedPhysicalBackground13Constructed = false
-  ; path13RadiusSixWalkAgreementConstructed = false
+  ; path13RadiusSixWalkAgreementConstructed = true
   ; rationalRealRingEmbeddingConstructed = false
   ; federbushConventionFamilyConstructed = false
   ; path13SelectedCutDefectWeldConstructed = false
@@ -201,8 +199,8 @@ canonicalRecoveredEq119ShortestSourceStatus = record
   ; path13PointwisePrincipalImageReceiptPrunedIsTrue = refl
   ; path13ReducedSourceFamilyAdapterClosedIsTrue = refl
   ; path13ReducedFieldDerivativeCompilerClosedIsTrue = refl
+  ; path13RadiusSixWalkAgreementConstructedIsTrue = refl
   ; path13SelectedPhysicalBackground13ConstructedIsFalse = refl
-  ; path13RadiusSixWalkAgreementConstructedIsFalse = refl
   ; rationalRealRingEmbeddingConstructedIsFalse = refl
   ; federbushConventionFamilyConstructedIsFalse = refl
   ; path13SelectedCutDefectWeldConstructedIsFalse = refl
