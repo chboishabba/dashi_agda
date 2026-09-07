@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.SequentialConsumerExperimentPlannerExact as Planner
 import DASHI.Core.SequentialPlannerPluralClosureBidiExact as Plural
 import DASHI.Core.SequentialOutcomeBackpropagationBidiExact as Backprop
+import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
 import DASHI.Core.DiagnosisFibreSalienceSchedulerBidiExact as Diagnosis
 import DASHI.Core.DiagnosisExperimentPortfolioBidiExact as Portfolio
 import DASHI.Core.ReformulationClosureWithoutFibreRefinementBidiExact as Reform
@@ -33,7 +34,7 @@ canonicalDebuggableTerminal =
     Portfolio.frameControlSalientMove
 
 canonicalTerminalHasLiveDiagnosisAmbiguity :
-  liveDiagnoses canonicalDebuggableTerminal Backprop.Backprop.modelConflict
+  liveDiagnoses canonicalDebuggableTerminal Outcome.modelConflict
 canonicalTerminalHasLiveDiagnosisAmbiguity = tt
 
 canonicalTerminalDebugMoveStrictlyNarrows :
@@ -45,8 +46,6 @@ canonicalTerminalDebugMoveStrictlyNarrows =
 
 ------------------------------------------------------------------------
 -- A terminal answer and a live diagnosis fibre coexist legitimately.
--- Terminal means 'enough for the declared consumer now', not 'all explanation
--- uncertainty has vanished forever'.
 ------------------------------------------------------------------------
 
 data TerminalPlanRequiresEmptyDiagnosisFibre : Set where
