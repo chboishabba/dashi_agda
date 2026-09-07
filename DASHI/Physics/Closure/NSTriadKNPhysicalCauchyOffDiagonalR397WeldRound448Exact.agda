@@ -26,7 +26,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (_++_)
-open import Data.Rational.Base using (ℚ; 1ℚ; Positive; _+_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; Positive; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
@@ -49,6 +49,7 @@ import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396E
 import DASHI.Physics.Closure.NSTriadKNFibreLocalR378InstantaneousGramFluxRound397Exact as R397
 import DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400Exact as R400
 import DASHI.Physics.Closure.NSTriadKNRationalCauchySchurComplementRound443Exact as R443
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3CauchyPSDRound446Exact as R446
 import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyResolventCompletionRound447Exact as R447
 
 F : C3.RealField _
@@ -119,12 +120,12 @@ module PhysicalOffDiagonalWeld
   headPhysicalOffDiagonal :
     Physical.PhysicalTriadIncidence →
     List Physical.PhysicalTriadIncidence → ℚ
-  headPhysicalOffDiagonal alpha [] = 0
+  headPhysicalOffDiagonal alpha [] = 0ℚ
   headPhysicalOffDiagonal alpha (beta ∷ rest) =
     physicalPairCross alpha beta + headPhysicalOffDiagonal alpha rest
 
   physicalOffDiagonal : List Physical.PhysicalTriadIncidence → ℚ
-  physicalOffDiagonal [] = 0
+  physicalOffDiagonal [] = 0ℚ
   physicalOffDiagonal (alpha ∷ rest) =
     headPhysicalOffDiagonal alpha rest + physicalOffDiagonal rest
 
@@ -169,6 +170,14 @@ module PhysicalOffDiagonalWeld
         (headR290WeightedFluxExact alpha rest headPositive)
         (allR290WeightedFluxExact rest tailPositive))
 
+  weakenAcrossSkippedSecond :
+    ∀ {alpha beta selected rest} →
+    selected R396.OccursIn (alpha ∷ rest) →
+    selected R396.OccursIn (alpha ∷ beta ∷ rest)
+  weakenAcrossSkippedSecond R396.here = R396.here
+  weakenAcrossSkippedSecond (R396.there member) =
+    R396.there (R396.there member)
+
   builtHeadRowExact :
     (alpha : Physical.PhysicalTriadIncidence) →
     (rest : List Physical.PhysicalTriadIncidence) →
@@ -176,7 +185,7 @@ module PhysicalOffDiagonalWeld
       (tau : Physical.PhysicalTriadIncidence) →
       tau R396.OccursIn (alpha ∷ rest) → Physical.k tau ≡ output) →
     R447.offDiagonalRow
-      (R447.R446.positive-rate-complex3-cell
+      (R446.positive-rate-complex3-cell
         (Pair.D.Pair.cellRate alpha)
         (R225.doubleMixedCell S Pair.D.Pair.velocity alpha)
         (Rate.cellRatePositiveFromNonzeroOutput
@@ -189,14 +198,7 @@ module PhysicalOffDiagonalWeld
     cong₂ _+_ refl
       (builtHeadRowExact alpha rest
         (λ selected member →
-          allOutput selected
-            (R396.there
-              (case member of λ where
-                R396.here → R396.here
-                (R396.there tail) → R396.there tail))))
-    where
-    case : ∀ {A B : Set} → A → (A → B) → B
-    case x f = f x
+          allOutput selected (weakenAcrossSkippedSecond member)))
 
   builtOffDiagonalExact :
     (items : List Physical.PhysicalTriadIncidence) →
