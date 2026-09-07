@@ -4,24 +4,20 @@ module DASHI.Physics.Closure.NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound
 -- ROUND517 / DYADIC CRITICAL NORM EQUIVALENCE BOUNDARY
 --
 -- The introspective route to R515's physical critical-observable realization
--- has now been reduced to one standard-analysis seam.
+-- begins here as a standard-analysis seam.  Later R518-R520 refine this seam:
 --
--- FINITE / OWNED:
---   * canonical dyadic shellIndex on the literal Z^3 mode carrier;
---   * exact upper-packet selectors from |k|^2_Nat;
---   * selected projected pairing = normalized packet-boundary flux;
---   * finite radial Abel layer-cake;
---   * ||k||_infinity^2 <= |k|_2^2 <= 3 ||k||_infinity^2;
---   * exact dyadic shell power arithmetic.
+--   R518 closes the canonical dyadic/Euclidean SQUARED annulus;
+--   R519 reuses the constructed Bishop Nat root, nonnegativity and semantic
+--        square law;
+--   R520 proves finite floor-root and every canonical rational approximant are
+--        monotone in the radicand.
 --
--- STILL REQUIRED:
---   one cutoff-uniform theorem that the chosen dyadic critical shell norm is
---   quantitatively equivalent to the physical Sobolev H^(1/2) norm (and the
---   corresponding dissipation norm to H^(3/2)) on the literal Galerkin family.
+-- Thus this file remains the historical whole-norm boundary, while the current
+-- first missing coordinate is narrower: realize pointwise order of the regular
+-- root approximants as order of the corresponding Bishop reals, then lift the
+-- resulting modewise multiplier comparison through the finite Fourier sum.
 --
--- This is standard harmonic analysis, not a new Navier--Stokes cancellation
--- estimate.  It is nevertheless a typed receipt and therefore cannot be
--- inferred from shell arithmetic or from documentation alone.
+-- No Navier--Stokes cancellation estimate is introduced here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -81,6 +77,9 @@ round517UniformDyadicHOneHalfEquivalenceClosed = false
 round517UniformDyadicHThreeHalfEquivalenceClosed : Bool
 round517UniformDyadicHThreeHalfEquivalenceClosed = false
 
+round517LaterRoundsReduceThisToBishopOrderRealization : Bool
+round517LaterRoundsReduceThisToBishopOrderRealization = true
+
 round517ThisResidualIsStandardAnalysisNotNSCancellation : Bool
 round517ThisResidualIsStandardAnalysisNotNSCancellation = true
 
@@ -109,6 +108,10 @@ round517UniformDyadicHOneHalfEquivalenceClosedIsFalse = refl
 round517UniformDyadicHThreeHalfEquivalenceClosedIsFalse :
   round517UniformDyadicHThreeHalfEquivalenceClosed ≡ false
 round517UniformDyadicHThreeHalfEquivalenceClosedIsFalse = refl
+
+round517LaterRoundsReduceThisToBishopOrderRealizationIsTrue :
+  round517LaterRoundsReduceThisToBishopOrderRealization ≡ true
+round517LaterRoundsReduceThisToBishopOrderRealizationIsTrue = refl
 
 round517ClayPromotionIsFalse : round517ClayPromotion ≡ false
 round517ClayPromotionIsFalse = refl
