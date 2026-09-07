@@ -130,12 +130,22 @@ import DASHI.Physics.YangMills.BalabanClayT5SubsequenceProkhorovExtractionExact
 import DASHI.Physics.YangMills.BalabanClayT5UniformTightnessSubsequenceInheritanceExact
 
 -- Existing typed cutoff-uniform diagonal moments are converted to uniform
--- tightness once their coercive compact-containment interpretation is supplied.
+-- tightness once their compact-containment interpretation is supplied.
 import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact
 
--- Markov/sublevel compiler: only exact physical same-object coercivity and
--- compactness of the selected observable's sublevel witnesses remain physical.
+-- Compatibility / optional local coercive-observable routes.  These do not
+-- replace the global selected-measure compact-containment theorem.
 import DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
+import DASHI.Physics.YangMills.BalabanClayT5PreferredPhysicalCoerciveMomentBridgeExact
+import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyObservableRealizationExact
+import DASHI.Physics.YangMills.BalabanClayT5FunctionalPath4GaugeEnergyObservableExact
+import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyMarkovBridgeExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredGaugeFixedEnergyNonnegativeExact
+import DASHI.Physics.YangMills.BalabanPath4SU2RealCoercivityExtensionExact
+
+-- Cluster uniqueness is compiled from determining-cylinder expectation
+-- agreement rather than required as primitive equality of measures.
+import DASHI.Physics.YangMills.BalabanClayT5CylinderDeterminingClusterUniquenessExact
 
 -- Historical compatibility weld for arbitrary expectation producers.
 import DASHI.Physics.YangMills.BalabanClayT5DiagonalFiniteVolumeSameObjectExact
@@ -156,6 +166,13 @@ import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound197Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound198Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound199Exact
 import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound200Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound201Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound202Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound203Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound204Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound205Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound206Exact
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound207Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
