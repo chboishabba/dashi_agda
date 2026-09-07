@@ -10,10 +10,9 @@ import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 ------------------------------------------------------------------------
 -- MULTI-SCALE GRAVITY THEORY FINGERPRINT
 --
--- A candidate gravity theory is not characterized by one successful channel.
--- It exposes predictions across independent observational scales.  Every named
--- slot must carry the exact scale it claims to represent and every prediction
--- must belong to the same exact theory carrier and family.
+-- Detector channel is not the scale coordinate: compact-binary and
+-- cosmological-propagation tests can both consume laser-interferometric strain.
+-- A scale-context receipt therefore refines the observation before comparison.
 ------------------------------------------------------------------------
 
 data GravityScale : Set where
@@ -42,14 +41,28 @@ record ScalePrediction : Set where
 
 open ScalePrediction public
 
+record ScaleIndexedObservation : Set where
+  constructor scale-indexed-observation
+  field
+    observationScale : GravityScale
+    observation : Obs.GravitationalObservationReceipt
+    observationChannelMatchesScale :
+      Obs.channel observation ≡ requiredChannelForScale observationScale
+    scaleContextCarrier : String
+
+open ScaleIndexedObservation public
+
 record ScaleComparison : Set where
   constructor scale-comparison
   field
     scalePrediction : ScalePrediction
-    observation : Obs.GravitationalObservationReceipt
-    observationChannelMatchesScale :
-      Obs.channel observation ≡ requiredChannelForScale (scale scalePrediction)
-    weld : Pred.PredictionObservationWeld (prediction scalePrediction) observation
+    scaleObservation : ScaleIndexedObservation
+    sameScale :
+      scale scalePrediction ≡ observationScale scaleObservation
+    weld :
+      Pred.PredictionObservationWeld
+        (prediction scalePrediction)
+        (observation scaleObservation)
 
 open ScaleComparison public
 
@@ -115,6 +128,7 @@ open MultiScaleTheoryFingerprint public
 ------------------------------------------------------------------------
 
 data MultiScaleResidual : Set where
+  missingObservationScaleContext : MultiScaleResidual
   missingExactScaleSlotReceipt : MultiScaleResidual
   missingSameTheoryIdentityReceipt : MultiScaleResidual
   missingSameTheoryFamilyReceipt : MultiScaleResidual
@@ -130,6 +144,8 @@ data MultiScaleResidual : Set where
 record MultiScaleTheoryBoundary : Set where
   constructor multi-scale-theory-boundary
   field
+    detectorChannelAloneDeterminesScale : Bool
+    observationScaleContextRequired : Bool
     namedSlotAutomaticallyFixesScale : Bool
     exactScaleIdentityRequiredForEverySlot : Bool
     oneScaleAgreementEstablishesAllScaleAgreement : Bool
@@ -144,11 +160,20 @@ record MultiScaleTheoryBoundary : Set where
 canonicalMultiScaleTheoryBoundary : MultiScaleTheoryBoundary
 canonicalMultiScaleTheoryBoundary =
   multi-scale-theory-boundary
-    false true false false false true true false true false
+    false true false true false false false true true false true false
 
 ------------------------------------------------------------------------
--- Exact scale non-collapse witnesses.
+-- Exact introspective collision: same detector channel, different scale.
 ------------------------------------------------------------------------
+
+compactBinaryAndCosmologicalChannelsCollide :
+  requiredChannelForScale compactBinaryScale
+    ≡ requiredChannelForScale cosmologicalPropagationScale
+compactBinaryAndCosmologicalChannelsCollide = refl
+
+compactBinaryAndCosmologicalScalesDistinct :
+  compactBinaryScale ≡ cosmologicalPropagationScale → ⊥
+compactBinaryAndCosmologicalScalesDistinct ()
 
 laboratoryAndCompactBinaryChannelsDistinct :
   requiredChannelForScale laboratoryFreeFallScale
