@@ -22,8 +22,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _+_; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
+open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _*_; _≤_)
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -33,12 +34,16 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
+import DASHI.Physics.Closure.NSTriadKNDoubleMixedGramPairToResolventRound389Exact as R389
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
+import DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400Exact as R400
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3CauchyPSDRound446Exact as R446
 import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyResolventCompletionRound447Exact as R447
 import DASHI.Physics.Closure.NSTriadKNDiagonalResolventRateFloorRound449Exact as R449
 import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
 import DASHI.Physics.Closure.NSTriadKNResolventDiagonalNoCardinalityRound298Exact as R298
+import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quotient
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -75,6 +80,8 @@ module PhysicalDiagonalWeld
     (output : Z3.FourierMode)
     (outputNonzero : Z3.NonZeroMode output) where
 
+  module Pair = R389.DoubleMixedPair physicalSystem S
+  module Rate = R400.PhysicalRate physicalSystem S viscosityPositive
   module Floor = R450.PhysicalCellRateFloor
     physicalSystem S viscosityPositive normalization
   module Completion = R447.PhysicalOutputCauchy
@@ -86,16 +93,8 @@ module PhysicalDiagonalWeld
   fibre : List Physical.PhysicalTriadIncidence
   fibre = Output.physicalOutputFiber cutoff output
 
-  physicalValue : Physical.PhysicalTriadIncidence → C3.Complex3 F
-  physicalValue tau =
-    R446.value
-      (R447.R446.positive-rate-complex3-cell
-        (Completion.P.D.Pair.cellRate tau)
-        (R447.R225.doubleMixedCell S Completion.P.D.Pair.velocity tau)
-        (R447.R400.PhysicalRate.cellRatePositiveFromNonzeroOutput
-          physicalSystem S viscosityPositive
-          output outputNonzero tau
-          (Completion.Rate.allElementsHaveOutput cutoff output tau R396.here)))
+  doubleMixedValue : Physical.PhysicalTriadIncidence → C3.Complex3 F
+  doubleMixedValue tau = R225.doubleMixedCell S Pair.D.Pair.velocity tau
 
   buildRateFloorCells :
     (items : List Physical.PhysicalTriadIncidence) →
@@ -106,17 +105,14 @@ module PhysicalDiagonalWeld
   buildRateFloorCells (tau ∷ rest) allOutput =
     Floor.rateFloorCell
       output outputNonzero tau (allOutput tau R396.here)
-      (R179.realHermitianCross
-        (R447.R225.doubleMixedCell S Completion.P.D.Pair.velocity tau)
-        (R447.R225.doubleMixedCell S Completion.P.D.Pair.velocity tau))
-      (selfHermitianNonnegative
-        (R447.R225.doubleMixedCell S Completion.P.D.Pair.velocity tau))
+      (R179.realHermitianCross (doubleMixedValue tau) (doubleMixedValue tau))
+      (selfHermitianNonnegative (doubleMixedValue tau))
     ∷ buildRateFloorCells rest
         (λ selected member → allOutput selected (R396.there member))
 
   rateFloorCells : List (R449.DiagonalRateFloorCell nu)
   rateFloorCells =
-    buildRateFloorCells fibre (Completion.Rate.allElementsHaveOutput cutoff output)
+    buildRateFloorCells fibre (Rate.allElementsHaveOutput cutoff output)
 
   rateFloorFamily : R449.DiagonalRateFloorFamily nu
   rateFloorFamily = R449.diagonal-rate-floor-family
@@ -134,23 +130,58 @@ module PhysicalDiagonalWeld
   weightedDiagonal : ℚ
   weightedDiagonal = R298.sumWeightedMass r298Cells
 
+  ceilingNonnegative :
+    0ℚ ≤ R449.diagonalCeilingAt nu Floor.nuPositive
+  ceilingNonnegative =
+    ℚP.<⇒≤
+      (Quotient.positiveReciprocalPositive
+        (R449.two * nu) (R449.twicePositive Floor.nuPositive))
+
   weightedDiagonalBelowCeilingMass :
     weightedDiagonal
     ≤ R449.diagonalCeilingAt nu Floor.nuPositive * massSum
   weightedDiagonalBelowCeilingMass =
     R298.weightedDiagonalBelowCeilingMass
       (R449.diagonalCeilingAt nu Floor.nuPositive)
-      (QuotientNN)
+      ceilingNonnegative
       r298Cells
-    where
-    QuotientNN : 0ℚ ≤ R449.diagonalCeilingAt nu Floor.nuPositive
-    QuotientNN =
-      Data.Rational.Properties.<⇒≤
-        (DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact.positiveReciprocalPositive
-          (R449.two * nu) (R449.twicePositive Floor.nuPositive))
+
+  builtWeightedDiagonalExact :
+    (items : List Physical.PhysicalTriadIncidence) →
+    (allOutput :
+      (tau : Physical.PhysicalTriadIncidence) →
+      tau R396.OccursIn items → Physical.k tau ≡ output) →
+    R298.sumWeightedMass
+      (R449.compileCells Floor.nuPositive
+        (buildRateFloorCells items allOutput))
+    ≡ R447.diagonalForm (Completion.buildCells items allOutput)
+  builtWeightedDiagonalExact [] allOutput = refl
+  builtWeightedDiagonalExact (tau ∷ rest) allOutput =
+    cong₂ _+_ refl
+      (builtWeightedDiagonalExact rest
+        (λ selected member → allOutput selected (R396.there member)))
+
+  weightedDiagonalIsR447Diagonal :
+    weightedDiagonal ≡ Completion.diagonal
+  weightedDiagonalIsR447Diagonal =
+    builtWeightedDiagonalExact
+      fibre (Rate.allElementsHaveOutput cutoff output)
+
+  r447DiagonalBelowCeilingMass :
+    Completion.diagonal
+    ≤ R449.diagonalCeilingAt nu Floor.nuPositive * massSum
+  r447DiagonalBelowCeilingMass =
+    subst
+      (λ selected → selected
+        ≤ R449.diagonalCeilingAt nu Floor.nuPositive * massSum)
+      weightedDiagonalIsR447Diagonal
+      weightedDiagonalBelowCeilingMass
 
 round451PhysicalR447DiagonalCompilesToR298 : Bool
 round451PhysicalR447DiagonalCompilesToR298 = true
+
+round451LiteralWeightedDiagonalEqualsR447Diagonal : Bool
+round451LiteralWeightedDiagonalEqualsR447Diagonal = true
 
 round451SelfHermitianMassNonnegativeClosed : Bool
 round451SelfHermitianMassNonnegativeClosed = true
