@@ -42,7 +42,7 @@ reactivatedDiagnosisDoesNotRefuteConclusion ()
 
 laterReactivationDoesNotEraseEarlierAudit :
   LaterReactivationErasesEarlierCounterargumentAudit → ⊥
-laterReactivationDoesNotEraseEarlierCounterargumentAudit ()
+laterReactivationDoesNotEraseEarlierAudit ()
 
 record ArgumentTemporalDiagnosisBoundary : Set where
   constructor argument-temporal-diagnosis-boundary
