@@ -52,3 +52,7 @@ import DASHI.Biology.BrownKimberGovernanceProfileBridge
 import DASHI.Biology.SoTLEpistemicQuotientPipeline
 import DASHI.Biology.CrossPaperDialecticalDevelopment
 import DASHI.Biology.AliceBrownCorpusLoom
+
+-- Plural-progress / diagnosis / temporal dependency-lineage return.
+import DASHI.Biology.AliceBrownDiagnosisRepairSchedulerBidiExact
+import DASHI.Biology.AliceBrownTemporalDiagnosisDependencyLineageBidiExact
