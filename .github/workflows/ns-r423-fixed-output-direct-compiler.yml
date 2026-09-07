@@ -25,6 +25,10 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNResidenceBandVariationNoGoRound506Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClayResidualIntrospectionRound509Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalMeaningSignedCancellationRound510Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNSignedNetworkBudgetCompilerRound511Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNResidualIndexedProducerAdmissionRound512Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
   workflow_dispatch:
@@ -114,6 +118,26 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact.agda
+
+      - name: Type-check R509 residual introspection
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNClayResidualIntrospectionRound509Exact.agda
+
+      - name: Type-check R510 physical meaning
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNPhysicalMeaningSignedCancellationRound510Exact.agda
+
+      - name: Type-check R511 signed network budget compiler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNSignedNetworkBudgetCompilerRound511Exact.agda
+
+      - name: Type-check R512 residual-indexed producer admission
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNResidualIndexedProducerAdmissionRound512Exact.agda
 
       - name: Type-check focused R505 aggregate
         run: >-
