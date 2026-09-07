@@ -8,6 +8,7 @@ import DASHI.Interop.ExternalContextSafetyBoundary as Safety
 import DASHI.Interop.GovernedResidualOntologyLearning as Learning
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Zelph
 import DASHI.Interop.SensibLawWikidataItemPropertyEvidenceExact as ItemEvidence
+import DASHI.Interop.SensibLawWikidataRequiredPropertyCoverageExact as Required
 
 ------------------------------------------------------------------------
 -- Nat P5991 -> P14143 peer-cohort residual.
@@ -15,10 +16,6 @@ import DASHI.Interop.SensibLawWikidataItemPropertyEvidenceExact as ItemEvidence
 -- Runtime parity:
 --   ItemPropertyEvidenceSurface + DomainInvariantSnapshot
 --     -> conditioned peer-cohort residual.
---
--- The item surface retains actual property inventory, property-family coverage,
--- statement GUID/rank/visibility, qualifier/scope receipts and asserted/derived
--- relation origin before cohort comparison occurs.
 ------------------------------------------------------------------------
 
 data PeerResidualState : Set where
@@ -58,20 +55,32 @@ record NatPeerCohortAssessment : Set where
     editEffectIsFalse : editEffect ≡ false
 open NatPeerCohortAssessment public
 
-peerStateForCoverage :
-  Zelph.QueryCoverageStatus →
-  PeerResidualState
+peerStateForCoverage : Zelph.QueryCoverageStatus → PeerResidualState
 peerStateForCoverage Zelph.queryCoverageComplete = peerPartial
 peerStateForCoverage Zelph.queryCoverageIncomplete = peerUnresolved
+peerStateForCoverage Zelph.queryCoverageUninspected = peerUnresolved
 peerStateForCoverage Zelph.queryCoverageInvalid = peerUnresolved
 
 incompleteCoverageKeepsPeerUnresolved :
   peerStateForCoverage Zelph.queryCoverageIncomplete ≡ peerUnresolved
 incompleteCoverageKeepsPeerUnresolved = refl
 
+uninspectedCoverageKeepsPeerUnresolved :
+  peerStateForCoverage Zelph.queryCoverageUninspected ≡ peerUnresolved
+uninspectedCoverageKeepsPeerUnresolved = refl
+
 invalidCoverageKeepsPeerUnresolved :
   peerStateForCoverage Zelph.queryCoverageInvalid ≡ peerUnresolved
 invalidCoverageKeepsPeerUnresolved = refl
+
+requiredPropertyPresenceOwner :
+  Zelph.QueryCoverageStatus → Bool → Required.PropertyPresence
+requiredPropertyPresenceOwner = Required.presenceFromCoverageAndRows
+
+uninspectedRequiredPropertyCannotBecomeObservedAbsence :
+  requiredPropertyPresenceOwner Zelph.queryCoverageUninspected false
+  ≡ Required.propertyPresenceUnresolved
+uninspectedRequiredPropertyCannotBecomeObservedAbsence = refl
 
 ------------------------------------------------------------------------
 -- Governed cohort admission is inherited from the generic learning owner.
@@ -124,8 +133,10 @@ record NatPeerCohortBoundary : Set where
   constructor nat-peer-cohort-boundary
   field
     itemEvidencePrecedesPeerComparison : Bool
+    requiredPropertyFamiliesGatePeerComparison : Bool
     propertyConditionsPreservedIntoPeerFeatures : Bool
     incompleteCoverageKeepsResidualUnresolved : Bool
+    uninspectedCoverageKeepsResidualUnresolved : Bool
     trustedMembersRequireGovernedAdmission : Bool
     flattenedLabelsReplaceItemEvidence : Bool
     exactResidualCreatesMigrationSafety : Bool
@@ -135,8 +146,8 @@ record NatPeerCohortBoundary : Set where
 
 canonicalNatPeerCohortBoundary : NatPeerCohortBoundary
 canonicalNatPeerCohortBoundary =
-  nat-peer-cohort-boundary true true true true false false false false false
+  nat-peer-cohort-boundary true true true true true true false false false false false
 
 natPeerCohortStatement : String
 natPeerCohortStatement =
-  "Nat peer-cohort comparison consumes revision-bound item/property evidence rather than detached peer labels. Actual property inventory, per-property coverage, statement GUID/rank/visibility, qualifier/scope state and relation origin remain conditioned coordinates. Incomplete coverage remains unresolved; governed reviewed members alone train the empirical invariant. Even exact peer agreement is diagnostic only and does not prove migration safety, equate P5991 with P14143, create policy authority, or edit Wikidata."
+  "Nat peer-cohort comparison consumes revision-bound item/property evidence rather than detached labels. Required Q/P families gate admission: incomplete, uninspected or invalid required-family coverage keeps the peer residual unresolved, and only complete policy-relative Q/P coverage can support observed property absence or rank visibility. Governed reviewed members alone train the empirical invariant. Even exact peer agreement is diagnostic only and does not prove migration safety, equate P5991 with P14143, create policy authority, or edit Wikidata."
