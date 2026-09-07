@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Interop.AristotleRankQualifierPropertyEngineBoundary as Aristotle
 import DASHI.Interop.AristotleSnakStatementPresenceBoundaryExact as Snaks
+import DASHI.Interop.AristotleConstraintTableCoverageExact as Constraints
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Zelph
 import DASHI.Interop.SensibLawWikidataRequiredPropertyCoverageExact as Required
 
@@ -18,7 +19,7 @@ data StatementVisibility : Set where
   truthyVisibility nonTruthyVisibility unresolvedVisibility : StatementVisibility
 
 data ConstraintState : Set where
-  validConstraint invalidConstraint uninspectedConstraint : ConstraintState
+  validConstraint invalidConstraint unconstrainedConstraint uninspectedConstraint : ConstraintState
 
 data PropertySlot : Set where
   mainSlot qualifierSlot : PropertySlot
@@ -32,6 +33,8 @@ data ConditionedFeatureKind : Set where
   statementSnakTypeFeature
   statementRankFeature
   statementVisibilityFeature
+  qualifierProfileCoverageFeature
+  scopeProfileCoverageFeature
   qualifierConstraintFeature
   propertyScopeFeature
   propertyRelationFeature
@@ -43,6 +46,15 @@ record PropertyFamilyCoverage : Set where
     coveredPropertyReference : String
     familyCoverageStatus : Zelph.QueryCoverageStatus
 open PropertyFamilyCoverage public
+
+record ConstraintProfileCoverageReceipt : Set where
+  constructor constraint-profile-coverage-receipt
+  field
+    qualifierProfileCoverage : Constraints.ConstraintProfileCoverage
+    scopeProfileCoverage : Constraints.ConstraintProfileCoverage
+    qualifierProfileReference : String
+    scopeProfileReference : String
+open ConstraintProfileCoverageReceipt public
 
 record QualifierObservation : Set where
   constructor qualifier-observation
@@ -98,6 +110,7 @@ record ItemPropertyEvidenceSurface : Set where
     subjectQid : String
     sourceRevisionReference : String
     graphCoverage : Zelph.QueryCoverageReceipt
+    constraintProfileCoverage : ConstraintProfileCoverageReceipt
     inventory : PropertyInventory
     statements : List StatementEvidence
     peerFeatures : List ConditionedPeerFeature
@@ -128,6 +141,20 @@ relationSoundnessSourceContract = Aristotle.propertyDerivabilitySoundnessContrac
 novalueSourceContract : Snaks.AristotleSnakContract
 novalueSourceContract = Snaks.novalueEntailmentContract
 
+coveredMissingConstraintProfile : ConstraintState
+coveredMissingConstraintProfile = unconstrainedConstraint
+
+uninspectedMissingConstraintProfile : ConstraintState
+uninspectedMissingConstraintProfile = uninspectedConstraint
+
+coveredProfileAbsenceIsUnconstrained :
+  coveredMissingConstraintProfile ≡ unconstrainedConstraint
+coveredProfileAbsenceIsUnconstrained = refl
+
+uninspectedProfileAbsenceRemainsUninspected :
+  uninspectedMissingConstraintProfile ≡ uninspectedConstraint
+uninspectedProfileAbsenceRemainsUninspected = refl
+
 record RankVisibilityCoordinate : Set where
   constructor rank-visibility-coordinate
   field
@@ -148,28 +175,11 @@ visibilityForFamilyCoverage Zelph.queryCoverageIncomplete _ = unresolvedVisibili
 visibilityForFamilyCoverage Zelph.queryCoverageUninspected _ = unresolvedVisibility
 visibilityForFamilyCoverage Zelph.queryCoverageInvalid _ = unresolvedVisibility
 
-incompleteFamilyCoverageMakesVisibilityUnresolved :
-  (visibility : StatementVisibility) →
-  visibilityForFamilyCoverage Zelph.queryCoverageIncomplete visibility ≡ unresolvedVisibility
-incompleteFamilyCoverageMakesVisibilityUnresolved visibility = refl
-
-uninspectedFamilyCoverageMakesVisibilityUnresolved :
-  (visibility : StatementVisibility) →
-  visibilityForFamilyCoverage Zelph.queryCoverageUninspected visibility ≡ unresolvedVisibility
-uninspectedFamilyCoverageMakesVisibilityUnresolved visibility = refl
-
 propertyStatementPresenceOwner :
   Zelph.QueryCoverageStatus → Bool → Required.PropertyStatementPresence
 propertyStatementPresenceOwner = Required.presenceFromCoverageAndRows
 
-observedMissingRequiredPropertyHasNoStatementObserved :
-  propertyStatementPresenceOwner Zelph.queryCoverageComplete false ≡ Required.noStatementObserved
-observedMissingRequiredPropertyHasNoStatementObserved = refl
-
-uninspectedMissingRequiredPropertyIsUnresolved :
-  propertyStatementPresenceOwner Zelph.queryCoverageUninspected false ≡ Required.statementPresenceUnresolved
-uninspectedMissingRequiredPropertyIsUnresolved = refl
-
+data MissingFromUninspectedConstraintTableMeansUnconstrained : Set where
 data SameSerializedValueImpliesSameEvidenceSurface : Set where
 data SameRankForcesSameVisibility : Set where
 data IncompleteFamilyCoverageCanAssertTruthyVisibility : Set where
@@ -179,6 +189,10 @@ data ItemPropertyPresenceImpliesLocalRole : Set where
 data DerivedRelationIsDirectAssertion : Set where
 data TruthyStatementImpliesMigrationSafe : Set where
 data ItemSurfaceCreatesEditAuthority : Set where
+
+missingFromUninspectedTableDoesNotMeanUnconstrained :
+  MissingFromUninspectedConstraintTableMeansUnconstrained → ⊥
+missingFromUninspectedTableDoesNotMeanUnconstrained ()
 
 sameSerializedValueDoesNotCollapseEvidence :
   SameSerializedValueImpliesSameEvidenceSurface → ⊥
@@ -224,10 +238,11 @@ record ItemPropertyEvidenceBoundary : Set where
     propertyFamilyCoverageIsFirstClass : Bool
     statementPresenceRequiresFamilyCoverage : Bool
     nativeSnakAndStatementPresenceRemainSeparate : Bool
+    constraintProfileCoverageIsFirstClass : Bool
+    coveredAbsentProfileMayBeUnconstrained : Bool
+    uninspectedAbsentProfileIsUnconstrained : Bool
     statementsRemainPropertyAndGuidConditioned : Bool
     rankAndVisibilityRemainSeparate : Bool
-    incompleteFamilyLeavesVisibilityUnresolved : Bool
-    uninspectedFamilyLeavesVisibilityUnresolved : Bool
     qualifierAndScopeReceiptsRemainSeparate : Bool
     assertedAndDerivedRelationsRemainSeparate : Bool
     equalSerializedValuesCollapseEvidence : Bool
@@ -238,8 +253,8 @@ record ItemPropertyEvidenceBoundary : Set where
 canonicalItemPropertyEvidenceBoundary : ItemPropertyEvidenceBoundary
 canonicalItemPropertyEvidenceBoundary =
   item-property-evidence-boundary
-    true true true true true true true true true true true false false false false
+    true true true true true true true false true true true true false false false false
 
 itemPropertyEvidenceStatement : String
 itemPropertyEvidenceStatement =
-  "SensibLaw peer evidence is projected from the revision-bound Wikidata item itself. Required property families, per-family coverage, statement-family presence, native snak type, statement GUIDs, ranks, computed truthy visibility, qualifiers, property-slot constraints, references, and asserted/derived relation origin remain distinct conditioned coordinates. Only complete Q/P coverage can establish noStatementObserved or rank visibility; noStatementObserved is not native novalue. The carrier is diagnostic only and creates no local role, migration safety, promotion, or edit authority."
+  "SensibLaw peer evidence is projected from the revision-bound Wikidata item itself. Required Q/P coverage, native snak type, statement-family presence, rank visibility, qualifier/scope constraints, constraint-table coverage, references and asserted/derived relation origin remain distinct. A property missing from a covered constraint table may be unconstrained; missing from an uninspected table remains uninspected. noStatementObserved is not native novalue. The carrier creates no migration, promotion or edit authority."
