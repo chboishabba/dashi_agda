@@ -4,23 +4,28 @@ module DASHI.Physics.YangMills.BalabanClayT1PhysicalMeaningRound211Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Physics.YangMills.BalabanClayT1ResidualIntrospectionRound210Exact as R210
-import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact as Moment
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound210Exact as Current
+import DASHI.Physics.YangMills.BalabanClayT5SelectedMomentCompactContainmentExact as SelectedMoment
 
 ------------------------------------------------------------------------
--- ROUND211 / PHYSICAL MEANING OF THE GLOBAL T1 WALL
+-- ROUND211 / PHYSICAL MEANING OF THE PREFERRED GLOBAL T1 WALL
 --
--- Finite moments say large field excursions are statistically expensive.
--- Tightness says something stronger and geometric: for every tolerated leakage
--- epsilon there is ONE admissible compact region that captures almost all of
--- every selected cutoff measure.  The missing theorem is the bridge from the
--- already-owned moment inequality to that global escape-control statement.
+-- The preferred route is now stated on the literal selected diagonal measure
+-- sequence.  No total limit operator is needed here.
+--
+-- Physical meaning:
+--   * the existing moment theorem says very large excursions are statistically
+--     expensive;
+--   * compact containment says more: for every tolerated leakage epsilon, one
+--     admissible compact region captures essentially all of EVERY cutoff measure;
+--   * the missing theorem is therefore geometry-of-escape on the selected
+--     physical carrier, not another abstract moment estimate.
 ------------------------------------------------------------------------
 
 data PhysicalQuestion211 : Set where
   largeExcursionsAreMomentExpensive : PhysicalQuestion211
-  oneCompactRegionCapturesAllCutoffs : PhysicalQuestion211
-  localChartControlsGlobalSupport : PhysicalQuestion211
+  oneCompactRegionCapturesAllSelectedCutoffs : PhysicalQuestion211
+  localChartControlsGlobalSelectedSupport : PhysicalQuestion211
 
 data SearchRoute211 : Set where
   directSelectedMeasureContainment : SearchRoute211
@@ -41,20 +46,26 @@ routeDisposition selectedMeasureSupportGlobalization = conditionalProducer
 routeDisposition localPath4CoercivityAlone = insufficientWithoutBridge
 routeDisposition finiteMomentBoundAlone = insufficientWithoutBridge
 
-physicalQuestionFor : R210.T1Residual210 → PhysicalQuestion211
-physicalQuestionFor R210.globalMomentToEscapeControl =
-  oneCompactRegionCapturesAllCutoffs
-physicalQuestionFor R210.t1Closed =
-  oneCompactRegionCapturesAllCutoffs
+currentPhysicalQuestion211 : PhysicalQuestion211
+currentPhysicalQuestion211 = oneCompactRegionCapturesAllSelectedCutoffs
 
--- The existing compiler identifies exactly the semantic bridge still needed:
--- a moment inequality must imply control of the complement of the selected
--- compact witness on the literal diagonal measure sequence.
-round211MomentCompilerAlreadyMachineChecked : Bool
-round211MomentCompilerAlreadyMachineChecked = true
+-- Cross-check the current canonical scheduler rather than an older compatibility
+-- carrier: the first selected-convergence T1 wall is still global containment.
+currentT1WallStillGlobalContainment :
+  Current.preferredCurrentT1Status210 ≡ Current.missingGlobalMomentCompactContainment
+currentT1WallStillGlobalContainment = refl
 
-round211RemainingInputIsGlobalEscapeSemantics : Bool
-round211RemainingInputIsGlobalEscapeSemantics = true
+-- The selected compiler already removes the old convergence-carrier inflation.
+-- Its remaining physical input is exactly the selected compact-complement
+-- control on the literal diagonal sequence.
+round211SelectedMomentCompilerAlreadyMachineChecked : Bool
+round211SelectedMomentCompilerAlreadyMachineChecked = true
+
+round211RemainingInputIsSelectedGlobalEscapeSemantics : Bool
+round211RemainingInputIsSelectedGlobalEscapeSemantics = true
+
+round211LegacyTotalLimitRequiredForT1 : Bool
+round211LegacyTotalLimitRequiredForT1 = false
 
 round211LocalChartAlonePaysGlobalT1 : Bool
 round211LocalChartAlonePaysGlobalT1 = false
@@ -71,9 +82,13 @@ round211SearchSpaceStrictlyPruned = true
 round211ClayPromotion : Bool
 round211ClayPromotion = false
 
-round211RemainingInputIsGlobalEscapeSemanticsIsTrue :
-  round211RemainingInputIsGlobalEscapeSemantics ≡ true
-round211RemainingInputIsGlobalEscapeSemanticsIsTrue = refl
+round211RemainingInputIsSelectedGlobalEscapeSemanticsIsTrue :
+  round211RemainingInputIsSelectedGlobalEscapeSemantics ≡ true
+round211RemainingInputIsSelectedGlobalEscapeSemanticsIsTrue = refl
+
+round211LegacyTotalLimitRequiredForT1IsFalse :
+  round211LegacyTotalLimitRequiredForT1 ≡ false
+round211LegacyTotalLimitRequiredForT1IsFalse = refl
 
 round211SearchSpaceStrictlyPrunedIsTrue :
   round211SearchSpaceStrictlyPruned ≡ true
