@@ -45,16 +45,16 @@ holoChronReportedDissolution = reported-dissolution-surface
   "A secondary registry-derived surface reports post-death dissolution. This creates an acquisition target for the primary filing and winding-up records; it does not establish why the company dissolved or what happened to any technical assets."
 
 data HoloChronDissolutionReverseTarget : Set where
-  acquirePrimaryDissolutionFiling
-  acquireFilingSignatory
-  acquireMemberManagerState
-  acquireWindingUpTerms
-  acquireTechnicalIPDisposition
-  acquireApparatusDisposition
-  acquireRepositoryAccountDisposition
-  acquireNotebookArchiveDisposition
-  acquireCreditorOrAssigneeSurface
-  : HoloChronDissolutionReverseTarget
+  acquirePrimaryDissolutionFiling : HoloChronDissolutionReverseTarget
+  acquireFilingSignatory : HoloChronDissolutionReverseTarget
+  acquireMemberManagerState : HoloChronDissolutionReverseTarget
+  acquireWindingUpTerms : HoloChronDissolutionReverseTarget
+  acquireTechnicalIPDisposition : HoloChronDissolutionReverseTarget
+  acquireApparatusDisposition : HoloChronDissolutionReverseTarget
+  acquireRepositoryAccountDisposition : HoloChronDissolutionReverseTarget
+  acquireNotebookArchiveDisposition : HoloChronDissolutionReverseTarget
+  acquireCreditorOrAssigneeSurface : HoloChronDissolutionReverseTarget
+
 
 record HoloChronDissolutionBoundary : Set where
   constructor holochron-dissolution-boundary

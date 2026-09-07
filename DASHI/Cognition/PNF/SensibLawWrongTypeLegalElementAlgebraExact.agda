@@ -24,19 +24,19 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExa
 ------------------------------------------------------------------------
 
 data LegalElementKind : Set where
-  dutyElement
-  breachElement
-  causationElement
-  damageElement
-  mentalStateElement
-  statutoryElement
-  jurisdictionElement
-  standingElement
-  limitationElement
-  defenceElement
-  remedyElement
-  otherElement
-  : LegalElementKind
+  dutyElement : LegalElementKind
+  breachElement : LegalElementKind
+  causationElement : LegalElementKind
+  damageElement : LegalElementKind
+  mentalStateElement : LegalElementKind
+  statutoryElement : LegalElementKind
+  jurisdictionElement : LegalElementKind
+  standingElement : LegalElementKind
+  limitationElement : LegalElementKind
+  defenceElement : LegalElementKind
+  remedyElement : LegalElementKind
+  otherElement : LegalElementKind
+
 
 record LegalElement (wrong : Ontology.WrongType) : Set where
   constructor legal-element

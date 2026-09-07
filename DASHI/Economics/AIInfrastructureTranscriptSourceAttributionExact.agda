@@ -117,20 +117,20 @@ asmlSecondaryJoin = Attribution.independentVerificationReceipt
 ------------------------------------------------------------------------
 
 data TranscriptResidualClaim : Set where
-  fivePercentChinaChipShare
-  exactEightDayOpenWeightCausalSequence
-  macroPolo38Percent
-  macroPolo24Percent
-  macroPolo72Percent
-  ferrariGasolineQuotationSpeakerIdentity
-  : TranscriptResidualClaim
+  fivePercentChinaChipShare : TranscriptResidualClaim
+  exactEightDayOpenWeightCausalSequence : TranscriptResidualClaim
+  macroPolo38Percent : TranscriptResidualClaim
+  macroPolo24Percent : TranscriptResidualClaim
+  macroPolo72Percent : TranscriptResidualClaim
+  ferrariGasolineQuotationSpeakerIdentity : TranscriptResidualClaim
+
 
 data TranscriptResidualProducer : Set where
-  patronusInterviewPrimaryProducer
-  moonshotReleaseTimelineProducer
-  macroPoloPrimaryTrackerProducer
-  speakerIdentityProducer
-  : TranscriptResidualProducer
+  patronusInterviewPrimaryProducer : TranscriptResidualProducer
+  moonshotReleaseTimelineProducer : TranscriptResidualProducer
+  macroPoloPrimaryTrackerProducer : TranscriptResidualProducer
+  speakerIdentityProducer : TranscriptResidualProducer
+
 
 requiredResidualProducer : TranscriptResidualClaim → TranscriptResidualProducer
 requiredResidualProducer fivePercentChinaChipShare = patronusInterviewPrimaryProducer

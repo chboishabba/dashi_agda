@@ -19,22 +19,22 @@ import DASHI.Cognition.PNF.SensibLawMaboRecognitionCreationFootholdExact as Mabo
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 
 data AuthorityLevel : Set where
-  constitutionalSupremacy
-  statute
-  bindingCase
-  persuasiveCase
-  commonLawRule
-  judicialPolicy
-  factualFinding
-  interpretiveInput
-  : AuthorityLevel
+  constitutionalSupremacy : AuthorityLevel
+  statute : AuthorityLevel
+  bindingCase : AuthorityLevel
+  persuasiveCase : AuthorityLevel
+  commonLawRule : AuthorityLevel
+  judicialPolicy : AuthorityLevel
+  factualFinding : AuthorityLevel
+  interpretiveInput : AuthorityLevel
+
 
 data TemporalScope : Set where
-  historical
-  current
-  prospective
-  sourceSpecific
-  : TemporalScope
+  historical : TemporalScope
+  current : TemporalScope
+  prospective : TemporalScope
+  sourceSpecific : TemporalScope
+
 
 record AuthorityTransformation : Set where
   constructor authority-transformation
@@ -77,15 +77,15 @@ open AuthorityInteraction public
 ------------------------------------------------------------------------
 
 data TransformationClass : Set where
-  newLegislationRequired
-  existingStatuteAlternativeConstruction
-  existingCommonLawCategoryExtension
-  precedentDistinctionUnstable
-  constitutionalConstraintChangesResult
-  internationalInterpretiveInputOnly
-  newCognisableHarmCategoryRequired
-  noChangeNeededExistingPath
-  : TransformationClass
+  newLegislationRequired : TransformationClass
+  existingStatuteAlternativeConstruction : TransformationClass
+  existingCommonLawCategoryExtension : TransformationClass
+  precedentDistinctionUnstable : TransformationClass
+  constitutionalConstraintChangesResult : TransformationClass
+  internationalInterpretiveInputOnly : TransformationClass
+  newCognisableHarmCategoryRequired : TransformationClass
+  noChangeNeededExistingPath : TransformationClass
+
 
 record MinimalCutResult : Set where
   constructor minimal-cut-result

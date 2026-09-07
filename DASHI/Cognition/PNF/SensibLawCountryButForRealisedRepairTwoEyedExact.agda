@@ -58,14 +58,14 @@ terraNulliusDeniedConstitutiveLegalHumanity = refl
 ------------------------------------------------------------------------
 
 data CountryCorrectedWorld : Set where
-  correctedOrderWithLandAuthority
-  correctedOrderWithoutMaterialTransfer
-  : CountryCorrectedWorld
+  correctedOrderWithLandAuthority : CountryCorrectedWorld
+  correctedOrderWithoutMaterialTransfer : CountryCorrectedWorld
+
 
 data CountryRepairOutcome : Set where
-  communityAuthorityAndCountryControlRealised
-  juridicalRecognitionWithoutMaterialCountryControl
-  : CountryRepairOutcome
+  communityAuthorityAndCountryControlRealised : CountryRepairOutcome
+  juridicalRecognitionWithoutMaterialCountryControl : CountryRepairOutcome
+
 
 data CountryWorldAdmissible : CountryCorrectedWorld → Set where
   landAuthorityWorldAdmissible : CountryWorldAdmissible correctedOrderWithLandAuthority
@@ -133,14 +133,14 @@ billyRemedyCorrection = RepairCF.corrective-intervention-meaning
   true refl
 
 data BillyCorrectedWorld : Set where
-  fullyActuatedCommunityAdequate
-  formalImplementationWithoutCommunityAdequacy
-  : BillyCorrectedWorld
+  fullyActuatedCommunityAdequate : BillyCorrectedWorld
+  formalImplementationWithoutCommunityAdequacy : BillyCorrectedWorld
+
 
 data BillyRealisedOutcome : Set where
-  fullReparationRealised
-  declaredOrChannelUseWithoutFullReparation
-  : BillyRealisedOutcome
+  fullReparationRealised : BillyRealisedOutcome
+  declaredOrChannelUseWithoutFullReparation : BillyRealisedOutcome
+
 
 data BillyWorldAdmissible : BillyCorrectedWorld → Set where
   fullActuationWorldAdmissible : BillyWorldAdmissible fullyActuatedCommunityAdequate
@@ -239,9 +239,9 @@ operationDoesNotProveIntent = refl
 ------------------------------------------------------------------------
 
 data CountryCounterfactualQuestion : Set where
-  butForJuridicalNonConstitution
-  butForFailureToActuateBillyRemedy
-  : CountryCounterfactualQuestion
+  butForJuridicalNonConstitution : CountryCounterfactualQuestion
+  butForFailureToActuateBillyRemedy : CountryCounterfactualQuestion
+
 
 needs : CountryCounterfactualQuestion → List RepairCF.CounterfactualRepairNeed
 needs butForJuridicalNonConstitution =

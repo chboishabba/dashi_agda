@@ -36,21 +36,21 @@ import DASHI.Cognition.PNF.SensibLawIndigenousCarbonValueProjectionNonFactorabil
 ------------------------------------------------------------------------
 
 data BNFClimateArtifact : Set where
-  nitrogenaseMechanismCertificate
-  soybeanBNFFieldCertificate
-  fertilizerCounterfactualCertificate
-  fertilizerPriceCertificate
-  avoidedCostCertificate
-  fertilizerEmissionFactorCertificate
-  avoidedEmissionCertificate
-  atmosphericForcingInterpretationCertificate
-  localClimateHydrologyCertificate
-  soybeanYieldResponseCertificate
-  farmUnitEconomicsCertificate
-  countryAuthorityCertificate
-  communityConsentCertificate
-  unrelatedMolecularIdentityCertificate
-  : BNFClimateArtifact
+  nitrogenaseMechanismCertificate : BNFClimateArtifact
+  soybeanBNFFieldCertificate : BNFClimateArtifact
+  fertilizerCounterfactualCertificate : BNFClimateArtifact
+  fertilizerPriceCertificate : BNFClimateArtifact
+  avoidedCostCertificate : BNFClimateArtifact
+  fertilizerEmissionFactorCertificate : BNFClimateArtifact
+  avoidedEmissionCertificate : BNFClimateArtifact
+  atmosphericForcingInterpretationCertificate : BNFClimateArtifact
+  localClimateHydrologyCertificate : BNFClimateArtifact
+  soybeanYieldResponseCertificate : BNFClimateArtifact
+  farmUnitEconomicsCertificate : BNFClimateArtifact
+  countryAuthorityCertificate : BNFClimateArtifact
+  communityConsentCertificate : BNFClimateArtifact
+  unrelatedMolecularIdentityCertificate : BNFClimateArtifact
+
 
 data Depends : BNFClimateArtifact → BNFClimateArtifact → Set where
   fieldToCounterfactual :
@@ -157,14 +157,14 @@ data CountryPlanningObserver : Set where
   sameCarbonAndEconomicSurface : CountryPlanningObserver
 
 data CountryAuthorityOutcome : Set where
-  authorityConstraintLow
-  authorityConstraintHigh
-  : CountryAuthorityOutcome
+  authorityConstraintLow : CountryAuthorityOutcome
+  authorityConstraintHigh : CountryAuthorityOutcome
+
 
 data SituatedCountryPlanningState : Set where
-  sameMetricsDifferentAuthorityLow
-  sameMetricsDifferentAuthorityHigh
-  : SituatedCountryPlanningState
+  sameMetricsDifferentAuthorityLow : SituatedCountryPlanningState
+  sameMetricsDifferentAuthorityHigh : SituatedCountryPlanningState
+
 
 countryPlanningObserver : SituatedCountryPlanningState → CountryPlanningObserver
 countryPlanningObserver sameMetricsDifferentAuthorityLow = sameCarbonAndEconomicSurface
@@ -239,25 +239,25 @@ carbonMarketPriceStillNotStewardshipValue :
 carbonMarketPriceStillNotStewardshipValue = CarbonValue.marketPriceDoesNotEqualSocialValue
 
 data LESRuntimeResponsibility : Set where
-  gisStateConstruction
-  weatherClimateForcingExecution
-  soilHydrologyExecution
-  plantGrowthExecution
-  nutrientFlowExecution
-  interventionSimulation
-  calibrationExecution
-  optimisationExecution
-  evidenceSerialization
-  : LESRuntimeResponsibility
+  gisStateConstruction : LESRuntimeResponsibility
+  weatherClimateForcingExecution : LESRuntimeResponsibility
+  soilHydrologyExecution : LESRuntimeResponsibility
+  plantGrowthExecution : LESRuntimeResponsibility
+  nutrientFlowExecution : LESRuntimeResponsibility
+  interventionSimulation : LESRuntimeResponsibility
+  calibrationExecution : LESRuntimeResponsibility
+  optimisationExecution : LESRuntimeResponsibility
+  evidenceSerialization : LESRuntimeResponsibility
+
 
 data DASHISemanticResponsibility : Set where
-  variableMeaningContract
-  invariantMeaningContract
-  sourceAuthorityGate
-  sameObjectPromotionGate
-  attributionGate
-  countryAuthorityNoncollapseGate
-  : DASHISemanticResponsibility
+  variableMeaningContract : DASHISemanticResponsibility
+  invariantMeaningContract : DASHISemanticResponsibility
+  sourceAuthorityGate : DASHISemanticResponsibility
+  sameObjectPromotionGate : DASHISemanticResponsibility
+  attributionGate : DASHISemanticResponsibility
+  countryAuthorityNoncollapseGate : DASHISemanticResponsibility
+
 
 record LESPlanningReceiptSurface : Set₁ where
   constructor lesPlanningReceiptSurface

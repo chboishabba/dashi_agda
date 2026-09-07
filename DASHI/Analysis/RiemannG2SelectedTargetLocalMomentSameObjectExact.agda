@@ -100,12 +100,12 @@ selectedProducerSuppliesNearFamilyReceipt =
 ------------------------------------------------------------------------
 
 data SelectedMomentPayment : Set where
-  recoverSecondSelectedTarget
-  recoverSecondNearZeroFamily
-  recoverSecondMultiplicityCarrier
-  proveSelectedWindowLocalMoment
-  transportMomentRatioToExactPiCoefficient
-  : SelectedMomentPayment
+  recoverSecondSelectedTarget : SelectedMomentPayment
+  recoverSecondNearZeroFamily : SelectedMomentPayment
+  recoverSecondMultiplicityCarrier : SelectedMomentPayment
+  proveSelectedWindowLocalMoment : SelectedMomentPayment
+  transportMomentRatioToExactPiCoefficient : SelectedMomentPayment
+
 
 data PaymentState : Set where
   pruned live downstream : PaymentState

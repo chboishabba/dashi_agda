@@ -81,13 +81,13 @@ open NearestOutcomeComparator public
 ------------------------------------------------------------------------
 
 data StatisticKind : Set where
-  propositionAdoptionStatistic
-  argumentOutcomeStatistic
-  doctrinalTransitionStatistic
-  lexicalRealisationStatistic
-  authorityTreatmentStatistic
-  separatorFrequencyStatistic
-  : StatisticKind
+  propositionAdoptionStatistic : StatisticKind
+  argumentOutcomeStatistic : StatisticKind
+  doctrinalTransitionStatistic : StatisticKind
+  lexicalRealisationStatistic : StatisticKind
+  authorityTreatmentStatistic : StatisticKind
+  separatorFrequencyStatistic : StatisticKind
+
 
 record DescriptiveLegalStatistic : Set₁ where
   constructor descriptiveLegalStatistic
@@ -137,12 +137,12 @@ open LexicalFibre public
 ------------------------------------------------------------------------
 
 data DoctrinalTransitionKind : Set where
-  ruleToException
-  exceptionToDistinction
-  distinctionToNewRule
-  authorityTreatmentShift
-  lexicalShiftWithoutDoctrinalProof
-  : DoctrinalTransitionKind
+  ruleToException : DoctrinalTransitionKind
+  exceptionToDistinction : DoctrinalTransitionKind
+  distinctionToNewRule : DoctrinalTransitionKind
+  authorityTreatmentShift : DoctrinalTransitionKind
+  lexicalShiftWithoutDoctrinalProof : DoctrinalTransitionKind
+
 
 record DoctrinalTransitionCandidate : Set where
   constructor doctrinalTransitionCandidate

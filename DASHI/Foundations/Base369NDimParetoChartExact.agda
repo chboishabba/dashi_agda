@@ -18,10 +18,10 @@ import DASHI.Core.NDimParetoHyperfabricExact as NDim
 ------------------------------------------------------------------------
 
 data SchedulerAxis9 : Set where
-  gainAxis relevanceAxis splitAxis
-  costAxis authorityAxis permissionAxis
-  targetAxis pathAxis closureAxis
-  : SchedulerAxis9
+  gainAxis relevanceAxis splitAxis : SchedulerAxis9
+  costAxis authorityAxis permissionAxis : SchedulerAxis9
+  targetAxis pathAxis closureAxis : SchedulerAxis9
+
 
 schedulerAxisCount : Nat
 schedulerAxisCount = 9

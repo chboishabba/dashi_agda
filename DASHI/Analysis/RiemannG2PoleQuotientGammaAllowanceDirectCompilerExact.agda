@@ -62,14 +62,14 @@ compilePoleQuotientGammaAllowancePayment input = record
 ------------------------------------------------------------------------
 
 data GammaAllowancePayment : Set where
-  findAnyGammaBound
-  recoverAnyGammaSourceFamily
-  proveRecoveredCandidateIsFinal8889Producer
-  localizeFirstPrecisionLoss
-  proveGammaBudgetBelowAssignedAllowance
-  inventCutoffDependentGammaLaw
-  compileFinalGammaAllowancePayment
-  : GammaAllowancePayment
+  findAnyGammaBound : GammaAllowancePayment
+  recoverAnyGammaSourceFamily : GammaAllowancePayment
+  proveRecoveredCandidateIsFinal8889Producer : GammaAllowancePayment
+  localizeFirstPrecisionLoss : GammaAllowancePayment
+  proveGammaBudgetBelowAssignedAllowance : GammaAllowancePayment
+  inventCutoffDependentGammaLaw : GammaAllowancePayment
+  compileFinalGammaAllowancePayment : GammaAllowancePayment
+
 
 data PaymentState : Set where
   owned live blocked downstream pruned : PaymentState

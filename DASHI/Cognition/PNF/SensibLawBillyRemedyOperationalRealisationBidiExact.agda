@@ -25,15 +25,15 @@ import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as IK
 ------------------------------------------------------------------------
 
 data RemedyExecutionCapability : Set where
-  canAuthorizePayment
-  canAppropriateFunds
-  canNegotiateCommunityAgreement
-  canConstructOrMaintainProtectiveMeasures
-  canMonitorOutcome
-  canCorrectDeficiency
-  canApplyInternationalFollowUpPressure
-  canCreateSeparateDomesticCauseOfAction
-  : RemedyExecutionCapability
+  canAuthorizePayment : RemedyExecutionCapability
+  canAppropriateFunds : RemedyExecutionCapability
+  canNegotiateCommunityAgreement : RemedyExecutionCapability
+  canConstructOrMaintainProtectiveMeasures : RemedyExecutionCapability
+  canMonitorOutcome : RemedyExecutionCapability
+  canCorrectDeficiency : RemedyExecutionCapability
+  canApplyInternationalFollowUpPressure : RemedyExecutionCapability
+  canCreateSeparateDomesticCauseOfAction : RemedyExecutionCapability
+
 
 record ImplementationChannelReceipt : Set where
   constructor implementation-channel-receipt
@@ -92,13 +92,13 @@ separateDomesticRoute = implementation-channel-receipt
 ------------------------------------------------------------------------
 
 data RealisationLayer : Set where
-  declaredCommitmentLayer
-  lawfulAuthorityLayer
-  executedMeasureLayer
-  observedOutcomeLayer
-  communityDefinedSuccessLayer
-  feedbackCorrectionLayer
-  : RealisationLayer
+  declaredCommitmentLayer : RealisationLayer
+  lawfulAuthorityLayer : RealisationLayer
+  executedMeasureLayer : RealisationLayer
+  observedOutcomeLayer : RealisationLayer
+  communityDefinedSuccessLayer : RealisationLayer
+  feedbackCorrectionLayer : RealisationLayer
+
 
 record RemedyRealisationContract : Set where
   constructor remedy-realisation-contract
@@ -142,27 +142,27 @@ monitoringRealisation = remedy-realisation-contract
 ------------------------------------------------------------------------
 
 data RemedySystemState : Set where
-  declaredEffectiveRemedyOnly
-  declaredAndRealisedEffectiveRemedy
-  : RemedySystemState
+  declaredEffectiveRemedyOnly : RemedySystemState
+  declaredAndRealisedEffectiveRemedy : RemedySystemState
+
 
 data RemedyDeclaredPurpose : Set where
   effectiveRemedyDeclared : RemedyDeclaredPurpose
 
 data RemedyOperationalBehaviour : Set where
-  declarationWithoutFullExecution
-  coordinatedExecutionAndCorrection
-  : RemedyOperationalBehaviour
+  declarationWithoutFullExecution : RemedyOperationalBehaviour
+  coordinatedExecutionAndCorrection : RemedyOperationalBehaviour
+
 
 data RemedyRealizedEffect : Set where
-  fullReparationResidualStillLive
-  fullReparationRealised
-  : RemedyRealizedEffect
+  fullReparationResidualStillLive : RemedyRealizedEffect
+  fullReparationRealised : RemedyRealizedEffect
+
 
 data RemedyCorrectionResponse : Set where
-  reportWithoutClosingResidual
-  communityFeedbackCorrectsDeficiency
-  : RemedyCorrectionResponse
+  reportWithoutClosingResidual : RemedyCorrectionResponse
+  communityFeedbackCorrectsDeficiency : RemedyCorrectionResponse
+
 
 remedyDeclaredPurpose : RemedySystemState → RemedyDeclaredPurpose
 remedyDeclaredPurpose _ = effectiveRemedyDeclared
@@ -211,17 +211,17 @@ remedyDeclarationCannotRecoverRealizedEffect =
 ------------------------------------------------------------------------
 
 data ConsultationProcessState : Set where
-  extractiveMeetingState
-  authorityBearingCoDesignState
-  : ConsultationProcessState
+  extractiveMeetingState : ConsultationProcessState
+  authorityBearingCoDesignState : ConsultationProcessState
+
 
 data AdministrativeConsultationSurface : Set where
   consultationRecorded : AdministrativeConsultationSurface
 
 data CommunityConsultationOutcome : Set where
-  provenanceAuthorityObligationErased
-  provenanceAuthorityObligationPreserved
-  : CommunityConsultationOutcome
+  provenanceAuthorityObligationErased : CommunityConsultationOutcome
+  provenanceAuthorityObligationPreserved : CommunityConsultationOutcome
+
 
 administrativeConsultationObserver :
   ConsultationProcessState → AdministrativeConsultationSurface
@@ -319,12 +319,12 @@ safeExistenceProspect = practical-prospect-receipt
 ------------------------------------------------------------------------
 
 data RemedyNextProducer : Set where
-  recoverCompensationExecutionReceipt
-  recoverCommunityDefinedNeedsReceipt
-  recoverCommunityOutcomeAssessment
-  recoverCorrectionLoopReceipt
-  recoverPreventionOutcomeReceipt
-  : RemedyNextProducer
+  recoverCompensationExecutionReceipt : RemedyNextProducer
+  recoverCommunityDefinedNeedsReceipt : RemedyNextProducer
+  recoverCommunityOutcomeAssessment : RemedyNextProducer
+  recoverCorrectionLoopReceipt : RemedyNextProducer
+  recoverPreventionOutcomeReceipt : RemedyNextProducer
+
 
 nextProducer : Billy.RemedyCoordinate → RemedyNextProducer
 nextProducer Billy.adequateCompensation = recoverCompensationExecutionReceipt

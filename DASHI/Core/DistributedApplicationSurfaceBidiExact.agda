@@ -4,22 +4,22 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 data DistributionSurface : Set where
-  multiAuthorPublication
-  multiLabProgramme
-  multiLeadOrganisation
-  documentedProcedure
-  sharedDatabase
-  configurationManagement
-  successorRole
-  crossTrainedTeam
-  : DistributionSurface
+  multiAuthorPublication : DistributionSurface
+  multiLabProgramme : DistributionSurface
+  multiLeadOrganisation : DistributionSurface
+  documentedProcedure : DistributionSurface
+  sharedDatabase : DistributionSurface
+  configurationManagement : DistributionSurface
+  successorRole : DistributionSurface
+  crossTrainedTeam : DistributionSurface
+
 
 data CarrierDistributionStatus : Set where
-  distributedSourceBacked
-  concentratedSourceBacked
-  mixedOrPartial
-  notLocated
-  : CarrierDistributionStatus
+  distributedSourceBacked : CarrierDistributionStatus
+  concentratedSourceBacked : CarrierDistributionStatus
+  mixedOrPartial : CarrierDistributionStatus
+  notLocated : CarrierDistributionStatus
+
 
 record CarrierDistributionReceipt : Set where
   constructor carrier-distribution-receipt
@@ -51,13 +51,12 @@ canonicalDistributionBoundary : DistributionBoundary
 canonicalDistributionBoundary = distribution-boundary false refl false refl false refl false refl true refl
 
 data DistributionReverseTarget : Set where
-  acquireTaskAllocation
-  acquireAccessRoster
-  acquireConfigurationOwnership
-  acquireCrossTraining
-  acquireHandoverRecord
-  acquireSuccessorIdentity
-  acquireProcedureCoverage
-  acquireTacitResidualEvidence
-  acquirePostDepartureRework
-  : DistributionReverseTarget
+  acquireTaskAllocation : DistributionReverseTarget
+  acquireAccessRoster : DistributionReverseTarget
+  acquireConfigurationOwnership : DistributionReverseTarget
+  acquireCrossTraining : DistributionReverseTarget
+  acquireHandoverRecord : DistributionReverseTarget
+  acquireSuccessorIdentity : DistributionReverseTarget
+  acquireProcedureCoverage : DistributionReverseTarget
+  acquireTacitResidualEvidence : DistributionReverseTarget
+  acquirePostDepartureRework : DistributionReverseTarget

@@ -19,13 +19,13 @@ import DASHI.Core.RecursiveParetoFrontierLiftingExact as Recursive
 ------------------------------------------------------------------------
 
 data RefinementProducerKind : Set where
-  repositoryReuse
-  sourceReconstruction
-  symbolicProofRoute
-  numericalExperiment
-  physicalMeasurement
-  derivedExperimentalCoordinate
-  : RefinementProducerKind
+  repositoryReuse : RefinementProducerKind
+  sourceReconstruction : RefinementProducerKind
+  symbolicProofRoute : RefinementProducerKind
+  numericalExperiment : RefinementProducerKind
+  physicalMeasurement : RefinementProducerKind
+  derivedExperimentalCoordinate : RefinementProducerKind
+
 
 producerAuthority : RefinementProducerKind → ProofSearch.TheoremAuthority
 producerAuthority repositoryReuse = ProofSearch.derivedRepositoryTheorem

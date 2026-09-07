@@ -14,17 +14,17 @@ import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as MaboC
 ------------------------------------------------------------------------
 
 data AuthorityVisibility : Set where
-  authorityExplicit
-  authorityPartiallyVisible
-  authorityAdministrativelySubordinated
+  authorityExplicit : AuthorityVisibility
+  authorityPartiallyVisible : AuthorityVisibility
+  authorityAdministrativelySubordinated : AuthorityVisibility
   authorityErasedFromObserver : AuthorityVisibility
 
 data ColonialAdministrativeLevel : Set where
-  antecedentPoliticalOrder
-  unrecognisedPoliticalOrder
-  settledColonySubject
-  protectedPopulation
-  assimilablePopulation
+  antecedentPoliticalOrder : ColonialAdministrativeLevel
+  unrecognisedPoliticalOrder : ColonialAdministrativeLevel
+  settledColonySubject : ColonialAdministrativeLevel
+  protectedPopulation : ColonialAdministrativeLevel
+  assimilablePopulation : ColonialAdministrativeLevel
   administrativeResidual : ColonialAdministrativeLevel
 
 record ColonialSemanticState : Set where
@@ -64,19 +64,19 @@ assimilationProjectionState = colonialSemanticState
 ------------------------------------------------------------------------
 
 data ColonialSemanticClaim : Set where
-  semanticDowngradingOperationallyEnabledColonialAdministration
-  semanticDowngradingWasConstitutiveOfSettledColonyLogic
-  semanticDowngradingProvesEveryColonialActorSubjectivelyIntendedErasure
-  sovereigntyNeverCededAsFirstNationsPoliticalPosition
-  sovereigntyNeverCededAsHighCourtHolding
+  semanticDowngradingOperationallyEnabledColonialAdministration : ColonialSemanticClaim
+  semanticDowngradingWasConstitutiveOfSettledColonyLogic : ColonialSemanticClaim
+  semanticDowngradingProvesEveryColonialActorSubjectivelyIntendedErasure : ColonialSemanticClaim
+  sovereigntyNeverCededAsFirstNationsPoliticalPosition : ColonialSemanticClaim
+  sovereigntyNeverCededAsHighCourtHolding : ColonialSemanticClaim
   modernSecurityClassificationRepeatsColonialMechanism : ColonialSemanticClaim
 
 data ColonialSemanticProducer : Set where
-  doctrineAndAdministrationCorpusProducer
-  settledColonyLegalLogicProducer
-  actorSpecificIntentProducer
-  uluruPoliticalStatementProducer
-  highCourtHoldingProducer
+  doctrineAndAdministrationCorpusProducer : ColonialSemanticProducer
+  settledColonyLegalLogicProducer : ColonialSemanticProducer
+  actorSpecificIntentProducer : ColonialSemanticProducer
+  uluruPoliticalStatementProducer : ColonialSemanticProducer
+  highCourtHoldingProducer : ColonialSemanticProducer
   modernSameMechanismLineageProducer : ColonialSemanticProducer
 
 reverseColonialSemantic : ColonialSemanticClaim → ColonialSemanticProducer
@@ -92,9 +92,9 @@ reverseColonialSemantic modernSecurityClassificationRepeatsColonialMechanism = m
 ------------------------------------------------------------------------
 
 data JointTrajectoryPoint : Set where
-  authorityVisibleLowThreat
-  authorityPartialGroupThreat
-  authorityErasedCollectiveThreat
+  authorityVisibleLowThreat : JointTrajectoryPoint
+  authorityPartialGroupThreat : JointTrajectoryPoint
+  authorityErasedCollectiveThreat : JointTrajectoryPoint
   authorityErasedTerminalThreat : JointTrajectoryPoint
 
 threatLevel : JointTrajectoryPoint → Escalation.EscalationLevel

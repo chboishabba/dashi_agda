@@ -19,13 +19,13 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ProteinClass : Set where
-  translationFactor
-  metabolicEnzyme
-  redoxEnzyme
-  transcriptionalRegulator
-  antioxidantEnzyme
-  detoxificationProtein
-  : ProteinClass
+  translationFactor : ProteinClass
+  metabolicEnzyme : ProteinClass
+  redoxEnzyme : ProteinClass
+  transcriptionalRegulator : ProteinClass
+  antioxidantEnzyme : ProteinClass
+  detoxificationProtein : ProteinClass
+
 
 record ProteinTargetReceipt : Set where
   constructor proteinTargetReceipt

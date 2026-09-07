@@ -18,17 +18,17 @@ import DASHI.Economics.UnitEconomicsMarginExact as Unit
 ------------------------------------------------------------------------
 
 data CapitalAnalysisCoordinate : Set where
-  ownershipOfProductiveInfrastructure
-  labourPowerPurchase
-  labourTimeAndIntensity
-  cooperativeProduction
-  capitalProvision
-  realisedCustomerRevenue
-  markedValuationGain
-  debtAndFinancing
-  depreciationAndReplacement
-  terminalPayer
-  : CapitalAnalysisCoordinate
+  ownershipOfProductiveInfrastructure : CapitalAnalysisCoordinate
+  labourPowerPurchase : CapitalAnalysisCoordinate
+  labourTimeAndIntensity : CapitalAnalysisCoordinate
+  cooperativeProduction : CapitalAnalysisCoordinate
+  capitalProvision : CapitalAnalysisCoordinate
+  realisedCustomerRevenue : CapitalAnalysisCoordinate
+  markedValuationGain : CapitalAnalysisCoordinate
+  debtAndFinancing : CapitalAnalysisCoordinate
+  depreciationAndReplacement : CapitalAnalysisCoordinate
+  terminalPayer : CapitalAnalysisCoordinate
+
 
 record CapitalAnalysisCoordinateReceipt : Set where
   constructor capitalAnalysisCoordinateReceipt

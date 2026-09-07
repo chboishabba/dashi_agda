@@ -19,17 +19,17 @@ import DASHI.Cognition.PNF.SensibLawJuridicalPersonhoodRemedyOperationalCrossPol
 ------------------------------------------------------------------------
 
 data LegalSystemState : Set where
-  declaredNeutralEffectClaimant
-  declaredNeutralEffectController
-  : LegalSystemState
+  declaredNeutralEffectClaimant : LegalSystemState
+  declaredNeutralEffectController : LegalSystemState
+
 
 data DeclaredLegalRationale : Set where
   sameInstitutionalNeutralityRationale : DeclaredLegalRationale
 
 data RealizedDistribution : Set where
-  lossRemainsWithClaimant
-  lossTransferredToController
-  : RealizedDistribution
+  lossRemainsWithClaimant : RealizedDistribution
+  lossTransferredToController : RealizedDistribution
+
 
 data LegalBehaviour : Set where
   closesRemedyRoute opensRemedyRoute : LegalBehaviour
@@ -86,9 +86,9 @@ declaredRationaleCannotRecoverDistribution =
 ------------------------------------------------------------------------
 
 data RemedySystemState : Set where
-  declaredCommitmentPartialRepair
-  declaredCommitmentFullRepair
-  : RemedySystemState
+  declaredCommitmentPartialRepair : RemedySystemState
+  declaredCommitmentFullRepair : RemedySystemState
+
 
 data DeclaredRemedySurface : Set where
   sameCollaborationFundingCommitment : DeclaredRemedySurface

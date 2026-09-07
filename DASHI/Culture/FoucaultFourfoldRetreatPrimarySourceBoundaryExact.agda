@@ -21,11 +21,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
-  primaryJournalArticle
-  primaryBookPassage
-  primaryLectureInterview
-  accessArchive
-  : SourceRole
+  primaryJournalArticle : SourceRole
+  primaryBookPassage : SourceRole
+  primaryLectureInterview : SourceRole
+  accessArchive : SourceRole
+
 
 record FoucaultSourceReceipt : Set where
   constructor foucault-source-receipt
@@ -134,10 +134,10 @@ truthPowerReceipt =
 ------------------------------------------------------------------------
 
 data AxisEvidenceStatus : Set where
-  directCounterevidenceToSimpleRetreat
-  critiquePresentButRetreatUnclosed
-  openNeedsBroaderPrimaryCorpus
-  : AxisEvidenceStatus
+  directCounterevidenceToSimpleRetreat : AxisEvidenceStatus
+  critiquePresentButRetreatUnclosed : AxisEvidenceStatus
+  openNeedsBroaderPrimaryCorpus : AxisEvidenceStatus
+
 
 data FourfoldAxis : Set where
   classAxis imperialismAxis materialismScienceAxis reasonAxis : FourfoldAxis

@@ -19,17 +19,17 @@ import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact as RH
 ------------------------------------------------------------------------
 
 data TerminalSubleaf : Set where
-  offSignedNearAtCommonCutoff
-  offNearPlusFarFitsAssignedAllowance
-  gammaCandidateEqualsFinalProducer
-  gammaBudgetFitsAssignedAllowance
-  : TerminalSubleaf
+  offSignedNearAtCommonCutoff : TerminalSubleaf
+  offNearPlusFarFitsAssignedAllowance : TerminalSubleaf
+  gammaCandidateEqualsFinalProducer : TerminalSubleaf
+  gammaBudgetFitsAssignedAllowance : TerminalSubleaf
+
 
 data SubleafKind : Set where
-  sameObjectOrProvenance
-  signedAnalyticPayment
-  assignedAllowanceFit
-  : SubleafKind
+  sameObjectOrProvenance : SubleafKind
+  signedAnalyticPayment : SubleafKind
+  assignedAllowanceFit : SubleafKind
+
 
 subleafKind : TerminalSubleaf → SubleafKind
 subleafKind offSignedNearAtCommonCutoff = signedAnalyticPayment
@@ -106,9 +106,9 @@ rhStillNotDerived = refl
 ------------------------------------------------------------------------
 
 data TerminalPhase : Set where
-  representationFirst
-  analyticPayment
-  : TerminalPhase
+  representationFirst : TerminalPhase
+  analyticPayment : TerminalPhase
+
 
 phase : TerminalSubleaf → TerminalPhase
 phase gammaCandidateEqualsFinalProducer = representationFirst

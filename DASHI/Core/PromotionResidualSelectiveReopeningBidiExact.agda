@@ -15,11 +15,11 @@ import DASHI.Core.QueryPromotionResidualBidiExact as QueryPromotion
 ------------------------------------------------------------------------
 
 data PromotionCoordinate : Set where
-  artifactCoordinate
-  correspondenceCoordinate
-  transportCoordinate
-  inhabitanceCoordinate
-  : PromotionCoordinate
+  artifactCoordinate : PromotionCoordinate
+  correspondenceCoordinate : PromotionCoordinate
+  transportCoordinate : PromotionCoordinate
+  inhabitanceCoordinate : PromotionCoordinate
+
 
 data ReopenTarget : Set where
   reopen : PromotionCoordinate → ReopenTarget

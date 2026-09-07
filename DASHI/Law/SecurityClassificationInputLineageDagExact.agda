@@ -13,41 +13,41 @@ import DASHI.Law.ZionistInstitutionalCarrierGraphBidiExact as Carrier
 ------------------------------------------------------------------------
 
 data InputSourceActor : Set where
-  nswPoliceIntelligence
-  nswPoliceCommand
-  protectedPersonSecurity
-  federalSecurityAgency
-  foreignDiplomaticActor
-  israeliSecurityDetail
-  privateSecurityLiaison
-  politicalExecutive
-  mediaNarrative
+  nswPoliceIntelligence : InputSourceActor
+  nswPoliceCommand : InputSourceActor
+  protectedPersonSecurity : InputSourceActor
+  federalSecurityAgency : InputSourceActor
+  foreignDiplomaticActor : InputSourceActor
+  israeliSecurityDetail : InputSourceActor
+  privateSecurityLiaison : InputSourceActor
+  politicalExecutive : InputSourceActor
+  mediaNarrative : InputSourceActor
   sourceUnknown : InputSourceActor
 
 data InputAtomKind : Set where
-  threatReport
-  intelligenceAssessment
-  protectedPersonConcern
-  protestPoliticalContent
-  crowdBehaviourObservation
-  foreignLiaisonStatement
-  privateSecurityStatement
-  weaponsIntelligence
-  counterProtestInformation
+  threatReport : InputAtomKind
+  intelligenceAssessment : InputAtomKind
+  protectedPersonConcern : InputAtomKind
+  protestPoliticalContent : InputAtomKind
+  crowdBehaviourObservation : InputAtomKind
+  foreignLiaisonStatement : InputAtomKind
+  privateSecurityStatement : InputAtomKind
+  weaponsIntelligence : InputAtomKind
+  counterProtestInformation : InputAtomKind
   postHocNarrative : InputAtomKind
 
 data LineageStage : Set where
-  rawInput
-  intelligenceProduct
-  riskAssessment
-  securityClassification
-  operationalOrder
-  unitBriefing
+  rawInput : LineageStage
+  intelligenceProduct : LineageStage
+  riskAssessment : LineageStage
+  securityClassification : LineageStage
+  operationalOrder : LineageStage
+  unitBriefing : LineageStage
   fieldTactic : LineageStage
 
 data LineageClosure : Set where
-  stageClosed
-  stageOpen
+  stageClosed : LineageClosure
+  stageOpen : LineageClosure
   stageConflict : LineageClosure
 
 record ClassificationInputAtom : Set where
@@ -117,19 +117,19 @@ canonicalHerzogOpenLineage = classificationLineage
 ------------------------------------------------------------------------
 
 data LineageClaim : Set where
-  foreignInputReachedRiskAssessment
-  privateSecurityInputReachedRiskAssessment
-  zionistRepertoireReachedClassification
-  classificationProducedOperationalOrder
-  operationalOrderProducedFieldTactic
+  foreignInputReachedRiskAssessment : LineageClaim
+  privateSecurityInputReachedRiskAssessment : LineageClaim
+  zionistRepertoireReachedClassification : LineageClaim
+  classificationProducedOperationalOrder : LineageClaim
+  operationalOrderProducedFieldTactic : LineageClaim
   completeThreatLineage : LineageClaim
 
 data LineageProducer : Set where
-  foreignInputDocumentProducer
-  privateSecurityInputDocumentProducer
-  classificationContentAndCarrierProducer
-  classificationOrderLinkProducer
-  orderFieldTransmissionProducer
+  foreignInputDocumentProducer : LineageProducer
+  privateSecurityInputDocumentProducer : LineageProducer
+  classificationContentAndCarrierProducer : LineageProducer
+  classificationOrderLinkProducer : LineageProducer
+  orderFieldTransmissionProducer : LineageProducer
   completeLineageProducer : LineageProducer
 
 reverseLineage : LineageClaim → LineageProducer
@@ -154,12 +154,12 @@ record LineageCutset : Set where
 open LineageCutset public
 
 data LineageResidual : Set where
-  foreignInputResidual
-  privateSecurityInputResidual
-  classificationContentResidual
-  carrierContentResidual
-  orderLinkResidual
-  fieldTransmissionResidual
+  foreignInputResidual : LineageResidual
+  privateSecurityInputResidual : LineageResidual
+  classificationContentResidual : LineageResidual
+  carrierContentResidual : LineageResidual
+  orderLinkResidual : LineageResidual
+  fieldTransmissionResidual : LineageResidual
   lineageClosed : LineageResidual
 
 firstLineageResidual : LineageClaim → LineageCutset → LineageResidual

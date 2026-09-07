@@ -17,15 +17,15 @@ import DASHI.Core.SequentialOutcomeBackpropagationBidiExact as Sequential
 ------------------------------------------------------------------------
 
 data DebugMoveKind : Set where
-  repeatObservation
-  frameControl
-  premiseAudit
-  ruleAudit
-  modelPerturbation
-  consumerReformulationCheck
-  provenanceAudit
-  authorityAudit
-  : DebugMoveKind
+  repeatObservation : DebugMoveKind
+  frameControl : DebugMoveKind
+  premiseAudit : DebugMoveKind
+  ruleAudit : DebugMoveKind
+  modelPerturbation : DebugMoveKind
+  consumerReformulationCheck : DebugMoveKind
+  provenanceAudit : DebugMoveKind
+  authorityAudit : DebugMoveKind
+
 
 record DebugMove : Set₁ where
   constructor debug-move

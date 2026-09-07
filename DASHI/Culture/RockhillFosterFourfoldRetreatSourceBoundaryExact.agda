@@ -35,27 +35,27 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data RetreatAxis : Set where
-  classRetreat
-  imperialismCritiqueRetreat
-  natureMaterialismScienceRetreat
-  reasonRetreat
-  : RetreatAxis
+  classRetreat : RetreatAxis
+  imperialismCritiqueRetreat : RetreatAxis
+  natureMaterialismScienceRetreat : RetreatAxis
+  reasonRetreat : RetreatAxis
+
 
 ------------------------------------------------------------------------
 -- Source roles are explicit rather than being inferred from a URL.
 ------------------------------------------------------------------------
 
 data SourceCarrierRole : Set where
-  canonicalPublicationCarrier
-  authorHostedAccessCarrier
-  : SourceCarrierRole
+  canonicalPublicationCarrier : SourceCarrierRole
+  authorHostedAccessCarrier : SourceCarrierRole
+
 
 data AttributionLayer : Set where
-  sourceOwnedArgument
-  dashIBoundedInterpretation
-  dashIFormalConstruction
-  empiricalPopulationClaim
-  : AttributionLayer
+  sourceOwnedArgument : AttributionLayer
+  dashIBoundedInterpretation : AttributionLayer
+  dashIFormalConstruction : AttributionLayer
+  empiricalPopulationClaim : AttributionLayer
+
 
 record SourceReceipt : Set where
   constructor source-receipt

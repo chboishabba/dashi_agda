@@ -19,13 +19,13 @@ import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact as Lineage
 ------------------------------------------------------------------------
 
 data AliceAuditArtifact : Set where
-  surveyFeedbackSurface
-  studentVoiceSurface
-  participationAgencyConsumer
-  parentObserverEvidence
-  institutionObserverEvidence
-  multiObserverConsumer
-  : AliceAuditArtifact
+  surveyFeedbackSurface : AliceAuditArtifact
+  studentVoiceSurface : AliceAuditArtifact
+  participationAgencyConsumer : AliceAuditArtifact
+  parentObserverEvidence : AliceAuditArtifact
+  institutionObserverEvidence : AliceAuditArtifact
+  multiObserverConsumer : AliceAuditArtifact
+
 
 data AliceDepends : AliceAuditArtifact → AliceAuditArtifact → Set where
   surveyFeedsVoiceAudit : AliceDepends surveyFeedbackSurface studentVoiceSurface

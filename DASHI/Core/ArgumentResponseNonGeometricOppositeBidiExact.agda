@@ -18,16 +18,16 @@ import DASHI.Interop.InspectionRelativeNoTypedMeet as Inspect
 ------------------------------------------------------------------------
 
 data ResponseKind : Set where
-  denyPremise
-  challengeEvidence
-  challengeRule
-  disputeCausation
-  disputeCharacterisation
-  addContext
-  alternativeExplanation
-  acceptWithQualification
-  suspendJudgement
-  : ResponseKind
+  denyPremise : ResponseKind
+  challengeEvidence : ResponseKind
+  challengeRule : ResponseKind
+  disputeCausation : ResponseKind
+  disputeCharacterisation : ResponseKind
+  addContext : ResponseKind
+  alternativeExplanation : ResponseKind
+  acceptWithQualification : ResponseKind
+  suspendJudgement : ResponseKind
+
 
 responseReopens : ResponseKind → Backprop.ReopenCoordinate
 responseReopens denyPremise = Backprop.reopenPremise

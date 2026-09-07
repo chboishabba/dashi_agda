@@ -142,11 +142,11 @@ canonicalGammaLineageHighestAlphaBoundary =
 ------------------------------------------------------------------------
 
 data FinalGammaProofRoute : Set where
-  freshFinalSameTaperTheorem
-  repairHistorical8889Producer
-  sourceFreeHistoricalLossGuess
-  unrelatedGammaBound
-  : FinalGammaProofRoute
+  freshFinalSameTaperTheorem : FinalGammaProofRoute
+  repairHistorical8889Producer : FinalGammaProofRoute
+  sourceFreeHistoricalLossGuess : FinalGammaProofRoute
+  unrelatedGammaBound : FinalGammaProofRoute
+
 
 data FinalGammaRouteState : Set where
   finalLive historicalLive prunedRoute : FinalGammaRouteState

@@ -22,9 +22,9 @@ import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
 ------------------------------------------------------------------------
 
 data JuridicalHumanStanding : Set where
-  fullConstitutiveStanding
-  deniedConstitutiveStanding
-  : JuridicalHumanStanding
+  fullConstitutiveStanding : JuridicalHumanStanding
+  deniedConstitutiveStanding : JuridicalHumanStanding
+
 
 record JuridicalNonPersonhoodReceipt : Set where
   constructor juridical-non-personhood-receipt
@@ -76,14 +76,14 @@ terraNulliusLegalOperationWasNotMerelyRhetorical = refl
 ------------------------------------------------------------------------
 
 data RemedyCompulsionClass : Set where
-  stateControlledDirect
-  negotiatedDirect
-  parliamentaryDirect
-  externalTreatyFollowUp
-  domesticLitigationSeparate
-  politicalAccountabilityIndirect
-  unavailableDirectExecution
-  : RemedyCompulsionClass
+  stateControlledDirect : RemedyCompulsionClass
+  negotiatedDirect : RemedyCompulsionClass
+  parliamentaryDirect : RemedyCompulsionClass
+  externalTreatyFollowUp : RemedyCompulsionClass
+  domesticLitigationSeparate : RemedyCompulsionClass
+  politicalAccountabilityIndirect : RemedyCompulsionClass
+  unavailableDirectExecution : RemedyCompulsionClass
+
 
 record RemedyRouteAssessment : Set where
   constructor remedy-route-assessment

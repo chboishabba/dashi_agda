@@ -22,13 +22,13 @@ import DASHI.Core.ResidualActionSalienceExact as Salience
 ------------------------------------------------------------------------
 
 data ActionOutcomeClass : Set where
-  noExecution
-  observationProduced
-  perturbationApplied
-  consumerClosed
-  modelRefuted
-  inconclusiveOutcome
-  : ActionOutcomeClass
+  noExecution : ActionOutcomeClass
+  observationProduced : ActionOutcomeClass
+  perturbationApplied : ActionOutcomeClass
+  consumerClosed : ActionOutcomeClass
+  modelRefuted : ActionOutcomeClass
+  inconclusiveOutcome : ActionOutcomeClass
+
 
 record PostActionObservation : Set where
   constructor postActionObservation

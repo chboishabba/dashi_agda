@@ -19,11 +19,11 @@ import DASHI.Core.ReopenableHypothesisForestExact as Forest
 ------------------------------------------------------------------------
 
 data SalienceClass : Set where
-  dormantSalience
-  relevantSalience
-  discriminatingForConsumer
-  actionCriticalSalience
-  : SalienceClass
+  dormantSalience : SalienceClass
+  relevantSalience : SalienceClass
+  discriminatingForConsumer : SalienceClass
+  actionCriticalSalience : SalienceClass
+
 
 record SalienceContext : Set where
   constructor salienceContext
@@ -64,14 +64,14 @@ open SalienceConditionedAction public
 ------------------------------------------------------------------------
 
 data FixtureConsumer : Set where
-  mechanismConsumer
-  operationalConsumer
-  : FixtureConsumer
+  mechanismConsumer : FixtureConsumer
+  operationalConsumer : FixtureConsumer
+
 
 data FixtureAction : Set where
-  measureForMechanism
-  holdForOperation
-  : FixtureAction
+  measureForMechanism : FixtureAction
+  holdForOperation : FixtureAction
+
 
 fixtureAction : FixtureConsumer → FixtureAction
 fixtureAction mechanismConsumer = measureForMechanism

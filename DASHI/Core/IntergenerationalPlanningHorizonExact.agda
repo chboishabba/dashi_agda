@@ -22,11 +22,11 @@ data Generation : Set where
   generation1 generation2 generation3 generation4 generation5 generation6 generation7 : Generation
 
 data HorizonKind : Set where
-  oneSeason
-  multiSeason
-  sevenGenerationHorizon
-  openEndedIntergenerationalHorizon
-  : HorizonKind
+  oneSeason : HorizonKind
+  multiSeason : HorizonKind
+  sevenGenerationHorizon : HorizonKind
+  openEndedIntergenerationalHorizon : HorizonKind
+
 
 record IntergenerationalHorizon : Set₁ where
   constructor intergenerational-horizon

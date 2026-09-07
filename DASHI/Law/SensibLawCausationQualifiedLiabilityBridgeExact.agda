@@ -60,10 +60,10 @@ open CausationQualifiedLiabilityReceipt public
 ------------------------------------------------------------------------
 
 data CausationGateRequirement : Set where
-  causationRequired
-  causationNotRequired
-  causationRequirementUnresolved
-  : CausationGateRequirement
+  causationRequired : CausationGateRequirement
+  causationNotRequired : CausationGateRequirement
+  causationRequirementUnresolved : CausationGateRequirement
+
 
 record LiabilityConsumerCausationPolicy : Set where
   constructor liabilityConsumerCausationPolicy

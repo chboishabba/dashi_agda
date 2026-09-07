@@ -95,11 +95,11 @@ open CounterfactualRepairUnderidentification public
 ------------------------------------------------------------------------
 
 data CounterfactualRepairStatus : Set where
-  robustRepairIdentified
-  selectedRepairOnly
-  counterfactualRepairUnderidentified
-  causalIdentificationNotYetPaid
-  : CounterfactualRepairStatus
+  robustRepairIdentified : CounterfactualRepairStatus
+  selectedRepairOnly : CounterfactualRepairStatus
+  counterfactualRepairUnderidentified : CounterfactualRepairStatus
+  causalIdentificationNotYetPaid : CounterfactualRepairStatus
+
 
 ------------------------------------------------------------------------
 -- Compatibility with the generic counterfactual contract.
@@ -128,13 +128,13 @@ open RealisedRepairCounterfactualContract public
 ------------------------------------------------------------------------
 
 data CounterfactualRepairNeed : Set where
-  acquireAdmissibleCorrectedWorlds
-  acquireHeldFixedJustification
-  acquireOutcomeComparison
-  acquireCausalIdentification
-  acquireAffectedCommunityOutcomeReceipt
-  acquireIndependentComparatorReceipt
-  : CounterfactualRepairNeed
+  acquireAdmissibleCorrectedWorlds : CounterfactualRepairNeed
+  acquireHeldFixedJustification : CounterfactualRepairNeed
+  acquireOutcomeComparison : CounterfactualRepairNeed
+  acquireCausalIdentification : CounterfactualRepairNeed
+  acquireAffectedCommunityOutcomeReceipt : CounterfactualRepairNeed
+  acquireIndependentComparatorReceipt : CounterfactualRepairNeed
+
 
 ------------------------------------------------------------------------
 -- Boundary.

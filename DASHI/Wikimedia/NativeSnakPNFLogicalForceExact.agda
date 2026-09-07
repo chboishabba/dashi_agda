@@ -23,10 +23,10 @@ import DASHI.Wikimedia.AristotleNativeModelSourceExact as Aristotle
 ------------------------------------------------------------------------
 
 data SnakLogicalForce : Set where
-  concreteValueForce
-  existentialUnknownValueForce
-  explicitNoValueForce
-  : SnakLogicalForce
+  concreteValueForce : SnakLogicalForce
+  existentialUnknownValueForce : SnakLogicalForce
+  explicitNoValueForce : SnakLogicalForce
+
 
 logicalForce : WD.Snak → SnakLogicalForce
 logicalForce (WD.valueSnak value) = concreteValueForce
@@ -34,9 +34,9 @@ logicalForce WD.someValue = existentialUnknownValueForce
 logicalForce WD.noValue = explicitNoValueForce
 
 data PNFQuantifierDisposition : Set where
-  noAutomaticQuantifier
-  existentialQuantifierCandidate
-  : PNFQuantifierDisposition
+  noAutomaticQuantifier : PNFQuantifierDisposition
+  existentialQuantifierCandidate : PNFQuantifierDisposition
+
 
 quantifierDisposition : WD.Snak → PNFQuantifierDisposition
 quantifierDisposition (WD.valueSnak value) = noAutomaticQuantifier
@@ -44,10 +44,10 @@ quantifierDisposition WD.someValue = existentialQuantifierCandidate
 quantifierDisposition WD.noValue = noAutomaticQuantifier
 
 data SnakPolarity : Set where
-  positiveValuePolarity
-  existentialPositivePolarity
-  explicitNegativePolarity
-  : SnakPolarity
+  positiveValuePolarity : SnakPolarity
+  existentialPositivePolarity : SnakPolarity
+  explicitNegativePolarity : SnakPolarity
+
 
 snakPolarity : WD.Snak → SnakPolarity
 snakPolarity (WD.valueSnak value) = positiveValuePolarity

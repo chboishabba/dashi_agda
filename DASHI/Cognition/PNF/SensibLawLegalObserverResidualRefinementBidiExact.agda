@@ -27,22 +27,22 @@ import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 ------------------------------------------------------------------------
 
 data LegalResidualKind : Set where
-  missingFactualFeature
-  missingRelationalFeature
-  missingDoctrinalPredicate
-  missingInstitutionalConstraint
-  missingAuthorityRole
-  missingPrecedentApplicability
-  missingPrecedentDistinction
-  missingStatutoryPredicate
-  missingJurisdiction
-  missingTemporalScope
-  missingExceptionOrDefeater
-  missingCommunityAuthority
-  missingProvenanceOrPermission
-  missingRemedyExecution
-  missingCommunityOutcome
-  : LegalResidualKind
+  missingFactualFeature : LegalResidualKind
+  missingRelationalFeature : LegalResidualKind
+  missingDoctrinalPredicate : LegalResidualKind
+  missingInstitutionalConstraint : LegalResidualKind
+  missingAuthorityRole : LegalResidualKind
+  missingPrecedentApplicability : LegalResidualKind
+  missingPrecedentDistinction : LegalResidualKind
+  missingStatutoryPredicate : LegalResidualKind
+  missingJurisdiction : LegalResidualKind
+  missingTemporalScope : LegalResidualKind
+  missingExceptionOrDefeater : LegalResidualKind
+  missingCommunityAuthority : LegalResidualKind
+  missingProvenanceOrPermission : LegalResidualKind
+  missingRemedyExecution : LegalResidualKind
+  missingCommunityOutcome : LegalResidualKind
+
 
 ------------------------------------------------------------------------
 -- Acquisition is typed by the kind of information/authority that is missing.
@@ -51,19 +51,19 @@ data LegalResidualKind : Set where
 ------------------------------------------------------------------------
 
 data LegalAcquisitionRoute : Set where
-  recoverPrimaryLegalSource
-  inspectJudicialReasons
-  inspectPrecedentTreatment
-  inspectStatutoryText
-  obtainFactualEvidence
-  resolveJurisdictionAndTime
-  inspectExceptionOrDefeater
-  askSituatedHolder
-  listenToAffectedCommunity
-  deliberateWithAuthorityBearer
-  inspectExecutionEvidence
-  inspectCommunityOutcomeEvidence
-  : LegalAcquisitionRoute
+  recoverPrimaryLegalSource : LegalAcquisitionRoute
+  inspectJudicialReasons : LegalAcquisitionRoute
+  inspectPrecedentTreatment : LegalAcquisitionRoute
+  inspectStatutoryText : LegalAcquisitionRoute
+  obtainFactualEvidence : LegalAcquisitionRoute
+  resolveJurisdictionAndTime : LegalAcquisitionRoute
+  inspectExceptionOrDefeater : LegalAcquisitionRoute
+  askSituatedHolder : LegalAcquisitionRoute
+  listenToAffectedCommunity : LegalAcquisitionRoute
+  deliberateWithAuthorityBearer : LegalAcquisitionRoute
+  inspectExecutionEvidence : LegalAcquisitionRoute
+  inspectCommunityOutcomeEvidence : LegalAcquisitionRoute
+
 
 preferredRoute : LegalResidualKind → LegalAcquisitionRoute
 preferredRoute missingFactualFeature = obtainFactualEvidence

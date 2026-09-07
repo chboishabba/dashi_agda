@@ -86,8 +86,8 @@ constantBandDataInsufficient =
     R183.betweenDebtOfTwoAlignedBlocksIsTwo
 
 data PostLocalizationGramProducer : Set where
-  absoluteDataSchur
-  blockOperatorCotlarStein
+  absoluteDataSchur : PostLocalizationGramProducer
+  blockOperatorCotlarStein : PostLocalizationGramProducer
   directSignedResolvent : PostLocalizationGramProducer
 
 firstPostLocalizationProducer : PostLocalizationGramProducer

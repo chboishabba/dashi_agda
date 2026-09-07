@@ -12,16 +12,16 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data EconomicWorkCoordinate : Set where
-  computePerSuccessfulTask
-  revenuePerSuccessfulTask
-  fullyLoadedCostPerSuccessfulTask
-  inferenceComputePerToken
-  tokensPerSuccessfulTask
-  agentStepsPerSuccessfulTask
-  acceleratorPricePerformance
-  acceleratorResidualRentalValue
-  acceleratorUtilisation
-  : EconomicWorkCoordinate
+  computePerSuccessfulTask : EconomicWorkCoordinate
+  revenuePerSuccessfulTask : EconomicWorkCoordinate
+  fullyLoadedCostPerSuccessfulTask : EconomicWorkCoordinate
+  inferenceComputePerToken : EconomicWorkCoordinate
+  tokensPerSuccessfulTask : EconomicWorkCoordinate
+  agentStepsPerSuccessfulTask : EconomicWorkCoordinate
+  acceleratorPricePerformance : EconomicWorkCoordinate
+  acceleratorResidualRentalValue : EconomicWorkCoordinate
+  acceleratorUtilisation : EconomicWorkCoordinate
+
 
 record TimeSeriesObservation : Set₁ where
   constructor timeSeriesObservation
@@ -74,11 +74,11 @@ open UsefulWorkDerivativePair public
 ------------------------------------------------------------------------
 
 data UsefulWorkFutureClass : Set where
-  efficiencyDemandMarginExpansion
-  efficiencyDemandMarginCompression
-  efficiencyDemandIncumbentAssetImpairment
-  efficiencyDemandDeclineWithOvercapacity
-  : UsefulWorkFutureClass
+  efficiencyDemandMarginExpansion : UsefulWorkFutureClass
+  efficiencyDemandMarginCompression : UsefulWorkFutureClass
+  efficiencyDemandIncumbentAssetImpairment : UsefulWorkFutureClass
+  efficiencyDemandDeclineWithOvercapacity : UsefulWorkFutureClass
+
 
 record UsefulWorkFutureClassification : Set₁ where
   constructor usefulWorkFutureClassification

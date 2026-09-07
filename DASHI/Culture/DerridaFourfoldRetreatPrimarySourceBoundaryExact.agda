@@ -19,12 +19,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
-  primaryEssay
-  primaryInterview
-  publisherMetadata
-  accessTranscript
-  accessReproduction
-  : SourceRole
+  primaryEssay : SourceRole
+  primaryInterview : SourceRole
+  publisherMetadata : SourceRole
+  accessTranscript : SourceRole
+  accessReproduction : SourceRole
+
 
 record DerridaSourceReceipt : Set where
   constructor derrida-source-receipt
@@ -119,10 +119,10 @@ reasonNotIrrationalismReceipt =
 ------------------------------------------------------------------------
 
 data AxisEvidenceStatus : Set where
-  directCounterevidenceToSimpleRetreat
-  critiquePresentButRetreatUnclosed
-  openNeedsBroaderPrimaryCorpus
-  : AxisEvidenceStatus
+  directCounterevidenceToSimpleRetreat : AxisEvidenceStatus
+  critiquePresentButRetreatUnclosed : AxisEvidenceStatus
+  openNeedsBroaderPrimaryCorpus : AxisEvidenceStatus
+
 
 data FourfoldAxis : Set where
   classAxis imperialismAxis materialismScienceAxis reasonAxis : FourfoldAxis

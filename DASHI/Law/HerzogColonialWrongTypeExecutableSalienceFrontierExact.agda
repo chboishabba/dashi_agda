@@ -19,11 +19,11 @@ import DASHI.Law.HerzogColonialWrongTypeElementRequirementExact as Element
 ------------------------------------------------------------------------
 
 data AnalyticalSaliencePhase : Set where
-  initialAuthorityMeaningPhase
-  afterAuthorityMeaningPhase
-  afterPowerPrerequisitePhase
-  afterAnalyticalMechanismPhase
-  : AnalyticalSaliencePhase
+  initialAuthorityMeaningPhase : AnalyticalSaliencePhase
+  afterAuthorityMeaningPhase : AnalyticalSaliencePhase
+  afterPowerPrerequisitePhase : AnalyticalSaliencePhase
+  afterAnalyticalMechanismPhase : AnalyticalSaliencePhase
+
 
 record RequirementFrontierCell : Set where
   constructor requirement-frontier-cell
@@ -75,11 +75,11 @@ isFrontierCell cell =
    (authorityAdmissible cell && splitsCurrentLiveFibre cell))
 
 data AnalyticalFrontier : Set where
-  authorityMeaningFrontier
-  powerPrerequisiteFrontier
-  incidentWeldFrontier
-  analyticalFrontierClosed
-  : AnalyticalFrontier
+  authorityMeaningFrontier : AnalyticalFrontier
+  powerPrerequisiteFrontier : AnalyticalFrontier
+  incidentWeldFrontier : AnalyticalFrontier
+  analyticalFrontierClosed : AnalyticalFrontier
+
 
 selectFrontier : AnalyticalSaliencePhase → AnalyticalFrontier
 selectFrontier phase with isFrontierCell (cellAt phase Element.requiresAuthorityMeaningErasure)

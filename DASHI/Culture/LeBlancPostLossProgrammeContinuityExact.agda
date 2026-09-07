@@ -60,10 +60,9 @@ canonicalLeBlancContinuityBoundary = leblanc-continuity-boundary
   true refl
 
 data LeBlancContinuityReverseTarget : Set where
-  acquireNamedTechMatSuccessor
-  acquireQualificationArchiveTransfer
-  acquireFailureHistoryTransfer
-  acquireCalibrationTransfer
-  acquireRequalificationOrRebuildEvidence
-  acquireMilestoneDelayEvidence
-  : LeBlancContinuityReverseTarget
+  acquireNamedTechMatSuccessor : LeBlancContinuityReverseTarget
+  acquireQualificationArchiveTransfer : LeBlancContinuityReverseTarget
+  acquireFailureHistoryTransfer : LeBlancContinuityReverseTarget
+  acquireCalibrationTransfer : LeBlancContinuityReverseTarget
+  acquireRequalificationOrRebuildEvidence : LeBlancContinuityReverseTarget
+  acquireMilestoneDelayEvidence : LeBlancContinuityReverseTarget

@@ -4,9 +4,9 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 data IdentityCoordinate : Set where
-  fullLegalOrPublishedName middleNameOrInitial dateOrAge institution roleTitle
-  technicalField education location familyOrAlias sourcePersistentIdentifier
-  : IdentityCoordinate
+  fullLegalOrPublishedName middleNameOrInitial dateOrAge institution roleTitle : IdentityCoordinate
+  technicalField education location familyOrAlias sourcePersistentIdentifier : IdentityCoordinate
+
 
 data IdentityStatus : Set where
   identitySourceBacked identityPartial identityNotLocated identityContradicted : IdentityStatus
@@ -41,6 +41,5 @@ canonicalIdentityAttributionBoundary : IdentityAttributionBoundary
 canonicalIdentityAttributionBoundary = identity-attribution-boundary false refl false refl false refl false refl false refl true refl
 
 data IdentityReverseTarget : Set where
-  acquireFullNameWeld acquireAliasOrFormerNameWeld acquireDateOrAgeWeld
-  acquireInstitutionRoleWeld acquirePersistentIdentifierWeld acquirePrimarySamePersonStatement
-  : IdentityReverseTarget
+  acquireFullNameWeld acquireAliasOrFormerNameWeld acquireDateOrAgeWeld : IdentityReverseTarget
+  acquireInstitutionRoleWeld acquirePersistentIdentifierWeld acquirePrimarySamePersonStatement : IdentityReverseTarget

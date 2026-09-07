@@ -19,27 +19,27 @@ import DASHI.Law.SensibLawCitationUsePropositionExact as CitationUse
 ------------------------------------------------------------------------
 
 data ResultAttributionStatus : Set where
-  resultAttributionUnresolved
-  resultAttributedToCourt
-  resultAttributedToJudge
-  resultAttributedToParty
-  resultAttributedToExternalSource
-  : ResultAttributionStatus
+  resultAttributionUnresolved : ResultAttributionStatus
+  resultAttributedToCourt : ResultAttributionStatus
+  resultAttributedToJudge : ResultAttributionStatus
+  resultAttributedToParty : ResultAttributionStatus
+  resultAttributedToExternalSource : ResultAttributionStatus
+
 
 data ConsumerApplicabilityAssessment : Set where
-  consumerApplicabilityUnresolved
-  consumerApplicabilityCandidate
-  consumerApplicabilityAdmitted
-  consumerInapplicabilityAdmitted
-  : ConsumerApplicabilityAssessment
+  consumerApplicabilityUnresolved : ConsumerApplicabilityAssessment
+  consumerApplicabilityCandidate : ConsumerApplicabilityAssessment
+  consumerApplicabilityAdmitted : ConsumerApplicabilityAssessment
+  consumerInapplicabilityAdmitted : ConsumerApplicabilityAssessment
+
 
 data ProofPaymentAssessment : Set where
-  proofPaymentUnresolved
-  proofPaymentCandidate
-  proofPaymentAdmitted
-  proofPaymentRejected
-  proofPaymentContested
-  : ProofPaymentAssessment
+  proofPaymentUnresolved : ProofPaymentAssessment
+  proofPaymentCandidate : ProofPaymentAssessment
+  proofPaymentAdmitted : ProofPaymentAssessment
+  proofPaymentRejected : ProofPaymentAssessment
+  proofPaymentContested : ProofPaymentAssessment
+
 
 record RetrievedPassage : Set₁ where
   constructor retrievedPassage
@@ -89,22 +89,22 @@ open SearchResultProofAssessment public
 ------------------------------------------------------------------------
 
 data FrontierChange : Set where
-  frontierUnchanged
-  frontierNarrowed
-  frontierReopened
-  frontierClosed
-  frontierContradicted
-  frontierUnderidentified
-  : FrontierChange
+  frontierUnchanged : FrontierChange
+  frontierNarrowed : FrontierChange
+  frontierReopened : FrontierChange
+  frontierClosed : FrontierChange
+  frontierContradicted : FrontierChange
+  frontierUnderidentified : FrontierChange
+
 
 data NonProgressReason : Set where
-  duplicateResult
-  dominatedResult
-  sameProofContribution
-  authorityInferiorResult
-  wrongConsumerResult
-  wrongPropositionShapeResult
-  : NonProgressReason
+  duplicateResult : NonProgressReason
+  dominatedResult : NonProgressReason
+  sameProofContribution : NonProgressReason
+  authorityInferiorResult : NonProgressReason
+  wrongConsumerResult : NonProgressReason
+  wrongPropositionShapeResult : NonProgressReason
+
 
 record SearchFrontierDelta : Set₁ where
   constructor searchFrontierDelta

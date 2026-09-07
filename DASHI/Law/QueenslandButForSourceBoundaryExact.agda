@@ -20,10 +20,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
-  primaryQueenslandLegislation
-  highCourtCalibration
-  dashiOriginalAbstraction
-  : SourceRole
+  primaryQueenslandLegislation : SourceRole
+  highCourtCalibration : SourceRole
+  dashiOriginalAbstraction : SourceRole
+
 
 record LegalSourceAttribution : Set where
   constructor legalSourceAttribution

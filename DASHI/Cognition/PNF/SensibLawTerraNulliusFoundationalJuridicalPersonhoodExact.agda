@@ -29,16 +29,16 @@ import DASHI.Core.OperationalSystemBehaviourSemanticsExact as POSIWID
 ------------------------------------------------------------------------
 
 data FoundationalRelation : Set where
-  crownAcquisitionRelation
-  sovereigntyConstitutivityRelation
-  originalLandTitleRelation
-  : FoundationalRelation
+  crownAcquisitionRelation : FoundationalRelation
+  sovereigntyConstitutivityRelation : FoundationalRelation
+  originalLandTitleRelation : FoundationalRelation
+
 
 data JuridicalPersonhoodState : Set where
-  constitutiveJuridicalActor
-  juridicallyPresentButNonconstitutive
-  juridicallyErasedActor
-  : JuridicalPersonhoodState
+  constitutiveJuridicalActor : JuridicalPersonhoodState
+  juridicallyPresentButNonconstitutive : JuridicalPersonhoodState
+  juridicallyErasedActor : JuridicalPersonhoodState
+
 
 record RelationIndexedJuridicalPersonhood : Set where
   constructor relation-indexed-juridical-personhood
@@ -93,11 +93,11 @@ terraNulliusFoundationalJuridicalPersonhood = relation-indexed-juridical-personh
 ------------------------------------------------------------------------
 
 data HumanityRegister : Set where
-  biologicalHumanity
-  socialHumanity
-  juridicalHumanity
-  politicalConstitutiveStanding
-  : HumanityRegister
+  biologicalHumanity : HumanityRegister
+  socialHumanity : HumanityRegister
+  juridicalHumanity : HumanityRegister
+  politicalConstitutiveStanding : HumanityRegister
+
 
 record RelationIndexedJuridicalNonHumanity : Set where
   constructor relation-indexed-juridical-nonhumanity

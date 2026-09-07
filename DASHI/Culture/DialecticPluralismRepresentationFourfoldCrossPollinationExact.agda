@@ -98,7 +98,7 @@ polyphonyDoesNotRequireFinalSynthesis = Polyphony.canonicalNoForcedFinalSynthesi
 ------------------------------------------------------------------------
 
 data RepresentationRegister : Set where
-  materialObject pictorialImage linguisticSign institutionalDesignation provenanceHistory
+  materialObject pictorialImage linguisticSign institutionalDesignation provenanceHistory : RepresentationRegister
   viewerAttention subjectiveEvaluation marketEvaluation : RepresentationRegister
 
 data ImageMeansObjectIdentity : Set where
@@ -189,7 +189,7 @@ indigenousPluralAuthorityDoesNotBecomeConceptualArt ()
 ------------------------------------------------------------------------
 
 data NoncollapseCoordinate : Set where
-  contradictionHistory materialCarrier representationRegister provenance institutionalStatus
+  contradictionHistory materialCarrier representationRegister provenance institutionalStatus : NoncollapseCoordinate
   authority unresolvedRemainder gazeProcess subjectivePreference economicValue : NoncollapseCoordinate
 
 data CoordinateTreatment : Set where

@@ -118,12 +118,12 @@ damageElement = Elements.legal-element
 ------------------------------------------------------------------------
 
 data DutyCoordinateClass : Set where
-  factualDutyFeature
-  relationalDutyFeature
-  doctrinalDutyPredicate
-  institutionalDutyConstraint
-  downstreamNegligenceElement
-  : DutyCoordinateClass
+  factualDutyFeature : DutyCoordinateClass
+  relationalDutyFeature : DutyCoordinateClass
+  doctrinalDutyPredicate : DutyCoordinateClass
+  institutionalDutyConstraint : DutyCoordinateClass
+  downstreamNegligenceElement : DutyCoordinateClass
+
 
 classifyDutyIssue : Climate.DutyIssue → DutyCoordinateClass
 classifyDutyIssue Climate.reasonableForeseeability = factualDutyFeature
@@ -197,12 +197,12 @@ edgeSourceRef source = Algebra.legal-source-ref
 ------------------------------------------------------------------------
 
 data DutyContribution : Set where
-  contributesForDuty
-  contributesAgainstDuty
-  blocksDutyWhenEstablished
-  constrainsInterpretation
-  requiresEvidenceBeforeDutyResolution
-  : DutyContribution
+  contributesForDuty : DutyContribution
+  contributesAgainstDuty : DutyContribution
+  blocksDutyWhenEstablished : DutyContribution
+  constrainsInterpretation : DutyContribution
+  requiresEvidenceBeforeDutyResolution : DutyContribution
+
 
 contribution : Edge.GateForce → DutyContribution
 contribution Edge.hardBlocker = blocksDutyWhenEstablished

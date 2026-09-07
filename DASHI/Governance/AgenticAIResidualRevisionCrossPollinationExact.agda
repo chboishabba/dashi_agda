@@ -13,8 +13,8 @@ import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact as Physical
 import DASHI.Governance.MHSButterBenchPhysicalAgentCrossPollinationExact as MHS
 
 data AgentEvidenceStage : Set where
-  initialObservation toolResult resourceTelemetry sharedStateObservation postActionObservation governanceUpdate
-  : AgentEvidenceStage
+  initialObservation toolResult resourceTelemetry sharedStateObservation postActionObservation governanceUpdate : AgentEvidenceStage
+
 
 record AgenticAIDecisionContext : Set where
   constructor agenticAIDecisionContext

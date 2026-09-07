@@ -207,22 +207,22 @@ missionStatementCannotOverrideRepeatedOutcome = refl
 ------------------------------------------------------------------------
 
 data RealisedJusticeTerminalCoordinate : Set where
-  equalSovereignStanding
-  landCountryControl
-  communityAuthority
-  compensationReparation
-  materialSafety
-  culturalContinuity
-  ecologicalClimateIntegrity
-  correctionPrevention
-  : RealisedJusticeTerminalCoordinate
+  equalSovereignStanding : RealisedJusticeTerminalCoordinate
+  landCountryControl : RealisedJusticeTerminalCoordinate
+  communityAuthority : RealisedJusticeTerminalCoordinate
+  compensationReparation : RealisedJusticeTerminalCoordinate
+  materialSafety : RealisedJusticeTerminalCoordinate
+  culturalContinuity : RealisedJusticeTerminalCoordinate
+  ecologicalClimateIntegrity : RealisedJusticeTerminalCoordinate
+  correctionPrevention : RealisedJusticeTerminalCoordinate
+
 
 data CurrentTerminalState : Set where
-  paid
-  partial
-  open
-  sourceOutcomeRequired
-  : CurrentTerminalState
+  paid : CurrentTerminalState
+  partial : CurrentTerminalState
+  open : CurrentTerminalState
+  sourceOutcomeRequired : CurrentTerminalState
+
 
 currentTerminalState : RealisedJusticeTerminalCoordinate → CurrentTerminalState
 currentTerminalState equalSovereignStanding = open

@@ -18,15 +18,15 @@ import DASHI.Law.SecurityClassificationProvenanceBidiExact as Security
 ------------------------------------------------------------------------
 
 data PoliticalAssemblySituatedState : Set where
-  sameSecurityLabelCountryAuthorityPresent
-  sameSecurityLabelCountryAuthorityErased
-  : PoliticalAssemblySituatedState
+  sameSecurityLabelCountryAuthorityPresent : PoliticalAssemblySituatedState
+  sameSecurityLabelCountryAuthorityErased : PoliticalAssemblySituatedState
+
 
 data SecurityAdministrativeSurface : Set where
   samePublicOrderClassification : SecurityAdministrativeSurface
 
 data PoliticalAuthorityOutcome : Set where
-  countryAuthorityRetained
+  countryAuthorityRetained : PoliticalAuthorityOutcome
   countryAuthorityInvisible : PoliticalAuthorityOutcome
 
 securityObserver : PoliticalAssemblySituatedState → SecurityAdministrativeSurface
@@ -93,17 +93,17 @@ sourceFirewallRetained = refl
 ------------------------------------------------------------------------
 
 data SecurityCountryClaim : Set where
-  publicOrderLabelExhaustsPoliticalMeaning
-  securityClassificationExhaustsCountryAuthority
-  securityClassificationExhaustsSovereigntyClaim
-  securityClassificationExhaustsSelfDeterminationClaim
+  publicOrderLabelExhaustsPoliticalMeaning : SecurityCountryClaim
+  securityClassificationExhaustsCountryAuthority : SecurityCountryClaim
+  securityClassificationExhaustsSovereigntyClaim : SecurityCountryClaim
+  securityClassificationExhaustsSelfDeterminationClaim : SecurityCountryClaim
   countryOrSovereigntyContentAffectedRiskClassification : SecurityCountryClaim
 
 data SecurityCountryProducer : Set where
-  completePoliticalMeaningProducer
-  countryAuthorityResidualProducer
-  sovereigntyResidualProducer
-  selfDeterminationResidualProducer
+  completePoliticalMeaningProducer : SecurityCountryProducer
+  countryAuthorityResidualProducer : SecurityCountryProducer
+  sovereigntyResidualProducer : SecurityCountryProducer
+  selfDeterminationResidualProducer : SecurityCountryProducer
   classificationInputContentProducer : SecurityCountryProducer
 
 reverseSecurityCountry : SecurityCountryClaim → SecurityCountryProducer

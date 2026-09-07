@@ -21,16 +21,16 @@ import DASHI.Law.SecurityThreatSemanticBroadeningTopologyExact as Security
 ------------------------------------------------------------------------
 
 data AdministrativePowerKind : Set where
-  receiveEnglishLawAsSettledColony
-  allocateLandAsCrownAdministration
-  governProtectedPopulation
-  assimilateAdministrativePopulation
+  receiveEnglishLawAsSettledColony : AdministrativePowerKind
+  allocateLandAsCrownAdministration : AdministrativePowerKind
+  governProtectedPopulation : AdministrativePowerKind
+  assimilateAdministrativePopulation : AdministrativePowerKind
   modernPublicOrderControl : AdministrativePowerKind
 
 data AuthorityPremise : Set where
-  antecedentAuthorityGoverning
-  antecedentAuthorityNonGoverning
-  antecedentAuthoritySubordinated
+  antecedentAuthorityGoverning : AuthorityPremise
+  antecedentAuthorityNonGoverning : AuthorityPremise
+  antecedentAuthoritySubordinated : AuthorityPremise
   premiseOpen : AuthorityPremise
 
 record InternalPowerJustification : Set where
@@ -125,15 +125,15 @@ maboAuthorityVisibilityResidual = Mabo.settledColonyLegalLogicProducer
 ------------------------------------------------------------------------
 
 data ModernColonialMechanismClaim : Set where
-  modernClassificationBroadensThreat
-  modernClassificationErasesAuthority
-  authorityErasureWasOperationalPrerequisite
+  modernClassificationBroadensThreat : ModernColonialMechanismClaim
+  modernClassificationErasesAuthority : ModernColonialMechanismClaim
+  authorityErasureWasOperationalPrerequisite : ModernColonialMechanismClaim
   modernPoliceActionInstantiatesColonialSemanticMechanism : ModernColonialMechanismClaim
 
 data ModernColonialMechanismProducer : Set where
-  semanticBroadeningProducer
-  beforeAfterAuthorityMeaningProducer
-  powerPrerequisiteRuleProducer
+  semanticBroadeningProducer : ModernColonialMechanismProducer
+  beforeAfterAuthorityMeaningProducer : ModernColonialMechanismProducer
+  powerPrerequisiteRuleProducer : ModernColonialMechanismProducer
   sameObjectProjectionPowerIncidentProducer : ModernColonialMechanismProducer
 
 reverseModernColonialMechanism : ModernColonialMechanismClaim → ModernColonialMechanismProducer

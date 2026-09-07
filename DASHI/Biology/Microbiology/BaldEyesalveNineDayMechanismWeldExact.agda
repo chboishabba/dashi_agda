@@ -15,15 +15,15 @@ import DASHI.Biology.Microbiology.QuorumSensingContextExact as QS
 ------------------------------------------------------------------------
 
 data MechanismLane : Set where
-  allicinThiolStress
-  bacillithiolRedoxShift
-  proteinSThioallylation
-  transcriptionalRegulatorPerturbation
-  quorumRelatedRegulatoryPerturbation
-  biofilmMatrixOrPenetration
-  downstreamOrganosulfurChemistry
-  detoxificationRecoveryCompetition
-  : MechanismLane
+  allicinThiolStress : MechanismLane
+  bacillithiolRedoxShift : MechanismLane
+  proteinSThioallylation : MechanismLane
+  transcriptionalRegulatorPerturbation : MechanismLane
+  quorumRelatedRegulatoryPerturbation : MechanismLane
+  biofilmMatrixOrPenetration : MechanismLane
+  downstreamOrganosulfurChemistry : MechanismLane
+  detoxificationRecoveryCompetition : MechanismLane
+
 
 record NineDayMechanismCandidate : Set where
   constructor nineDayMechanismCandidate

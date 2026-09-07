@@ -16,12 +16,12 @@ import DASHI.Core.QueryCompatibleFibreConsumerClosureBidiExact as QueryFibre
 ------------------------------------------------------------------------
 
 data PromotionResidual : Set where
-  missingArtifact
-  missingCorrespondence
-  missingTransport
-  missingTargetInhabitance
-  promotionClosed
-  : PromotionResidual
+  missingArtifact : PromotionResidual
+  missingCorrespondence : PromotionResidual
+  missingTransport : PromotionResidual
+  missingTargetInhabitance : PromotionResidual
+  promotionClosed : PromotionResidual
+
 
 record PromotionStatus : Set where
   constructor promotion-status
@@ -46,12 +46,12 @@ firstPromotionResidual (promotion-status true true true true) =
   promotionClosed
 
 data ProducerKind : Set where
-  acquireArtifact
-  establishCorrespondence
-  proveTransport
-  constructTargetInhabitant
-  noProducerNeeded
-  : ProducerKind
+  acquireArtifact : ProducerKind
+  establishCorrespondence : ProducerKind
+  proveTransport : ProducerKind
+  constructTargetInhabitant : ProducerKind
+  noProducerNeeded : ProducerKind
+
 
 producerFor : PromotionResidual → ProducerKind
 producerFor missingArtifact = acquireArtifact

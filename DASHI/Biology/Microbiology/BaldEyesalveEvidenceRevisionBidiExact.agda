@@ -21,20 +21,20 @@ import DASHI.Biology.Microbiology.BaldEyesalveMechanismDiscriminationBidiExact a
 ------------------------------------------------------------------------
 
 data EyesalveEvidenceStage : Set where
-  phenotypeStage
-  chemistryStage
-  thiolStage
-  recoveryStage
-  quorumStage
-  matrixStage
-  : EyesalveEvidenceStage
+  phenotypeStage : EyesalveEvidenceStage
+  chemistryStage : EyesalveEvidenceStage
+  thiolStage : EyesalveEvidenceStage
+  recoveryStage : EyesalveEvidenceStage
+  quorumStage : EyesalveEvidenceStage
+  matrixStage : EyesalveEvidenceStage
+
 
 data MechanismDisposition : Set where
-  unresolvedDisposition
-  candidateDisposition
-  reopenedDisposition
-  supportedForConsumerDisposition
-  : MechanismDisposition
+  unresolvedDisposition : MechanismDisposition
+  candidateDisposition : MechanismDisposition
+  reopenedDisposition : MechanismDisposition
+  supportedForConsumerDisposition : MechanismDisposition
+
 
 data StageExtension : EyesalveEvidenceStage → EyesalveEvidenceStage → Set where
   phenotypeToChemistry : StageExtension phenotypeStage chemistryStage

@@ -24,12 +24,12 @@ import DASHI.Law.LegalFactualCausationButForExact as ButFor
 ------------------------------------------------------------------------
 
 data CounterfactualCandidateKind : Set where
-  possibleActualConduct
-  possibleCompliantConduct
-  possibleParticularHarm
-  possibleCounterfactualRelation
-  unresolvedCounterfactualCandidate
-  : CounterfactualCandidateKind
+  possibleActualConduct : CounterfactualCandidateKind
+  possibleCompliantConduct : CounterfactualCandidateKind
+  possibleParticularHarm : CounterfactualCandidateKind
+  possibleCounterfactualRelation : CounterfactualCandidateKind
+  unresolvedCounterfactualCandidate : CounterfactualCandidateKind
+
 
 record ParsedButForCandidate : Set where
   constructor parsedButForCandidate

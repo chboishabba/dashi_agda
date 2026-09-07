@@ -12,12 +12,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data TemporalRelation : Set where
-  historicalOnly
-  recentPreEvent
-  eventTime
-  postEvent
-  unresolvedTime
-  : TemporalRelation
+  historicalOnly : TemporalRelation
+  recentPreEvent : TemporalRelation
+  eventTime : TemporalRelation
+  postEvent : TemporalRelation
+  unresolvedTime : TemporalRelation
+
 
 record EventTimeCapabilityReceipt : Set where
   constructor event-time-capability-receipt
@@ -31,15 +31,15 @@ record EventTimeCapabilityReceipt : Set where
 open EventTimeCapabilityReceipt public
 
 data EventTimeReverseTarget : Set where
-  acquireLastKnownActiveRole
-  acquireLastKnownAccess
-  acquireCurrentProjectAssignment
-  acquireCurrentConfigurationOwnership
-  acquireCurrentDecisionOrReviewRole
-  acquireAccessRevocationOrTransfer
-  acquireDepartureOrReassignmentDate
-  acquireEventTimeSuccessor
-  : EventTimeReverseTarget
+  acquireLastKnownActiveRole : EventTimeReverseTarget
+  acquireLastKnownAccess : EventTimeReverseTarget
+  acquireCurrentProjectAssignment : EventTimeReverseTarget
+  acquireCurrentConfigurationOwnership : EventTimeReverseTarget
+  acquireCurrentDecisionOrReviewRole : EventTimeReverseTarget
+  acquireAccessRevocationOrTransfer : EventTimeReverseTarget
+  acquireDepartureOrReassignmentDate : EventTimeReverseTarget
+  acquireEventTimeSuccessor : EventTimeReverseTarget
+
 
 record EventTimeAlignmentBoundary : Set where
   constructor event-time-alignment-boundary
