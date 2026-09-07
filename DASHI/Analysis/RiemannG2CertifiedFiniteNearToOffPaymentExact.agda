@@ -17,16 +17,6 @@ import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as Payme
 
 ------------------------------------------------------------------------
 -- CERTIFIED FINITE NEAR -> FINAL OFF PAYMENT
---
--- End-to-end producer-side compiler.  A proof-carrying finite certificate is
--- first attached to the exact target window, then transported to the exact
--- chosen cutoff in the checked split/far carrier.  The existing chosen-cutoff
--- compiler performs the near/far allowance composition and emits the terminal
--- `PoleQuotientOffAllowancePayment`.
---
--- This does not fabricate any of the live inequalities.  In particular the
--- caller must still provide the cross-prover split/far transport, the crossing
--- cutoff, far-budget fit, and selected near-budget slack.
 ------------------------------------------------------------------------
 
 record CertifiedFiniteNearOffPacket
@@ -130,6 +120,120 @@ compileCertifiedFiniteNearOffPayment packet =
   Off.compileFinalOffAllowancePayment
     (compileChosenCutoffOffInput packet)
 
+------------------------------------------------------------------------
+-- ORDERED-UPPER CERTIFICATE -> FINAL OFF PAYMENT
+--
+-- Stronger preferred route.  The finite certificate already carries its exact
+-- upper endpoint, so no second arbitrary analytic budget predicate is supplied.
+------------------------------------------------------------------------
+
+record CertifiedFiniteNearUpperOffPacket
+    (space : Weil.WeilTestSpace)
+    (formula : Explicit.RiemannExplicitFormula space)
+    (window : Window.PoleNearTargetWindow space formula)
+    (S : NearFar.OrderedAdditiveNearFarSurface)
+    (transport : Transport.ExplicitCutoffNearFarAgdaTransport S) : Set₁ where
+  field
+    certified : Certified.CertifiedSelectedFiniteNearEvaluation space formula window
+    certifiedUpper : Certified.CertifiedSelectedFiniteNearUpperInput certified
+
+    chosenCutoff : Transport.Cutoff transport
+
+    windowTransport :
+      WindowTransport.WindowBudgetTransportAttachment
+        space
+        formula
+        window
+        (Certified.compileUpperSelectedFiniteNearBudgetPayment certified certifiedUpper)
+        S
+        transport
+        chosenCutoff
+
+    CrossingCutoff : Transport.Cutoff transport → Set
+    chosenCutoffCrosses : CrossingCutoff chosenCutoff
+
+    intermediateFarAllowance : NearFar.Scalar S
+
+    nearBudgetSelfOrder :
+      NearFar._≤_ S
+        (Transport.nearBudgetAt transport chosenCutoff)
+        (Transport.nearBudgetAt transport chosenCutoff)
+
+    farBudgetBelowIntermediateAllowance :
+      NearFar._≤_ S
+        (Transport.farBudgetAt transport chosenCutoff)
+        intermediateFarAllowance
+
+    assignedOffAllowance : NearFar.Scalar S
+
+    nearBudgetPlusIntermediateBelowAssigned :
+      NearFar._≤_ S
+        (NearFar.add S
+          (Transport.nearBudgetAt transport chosenCutoff)
+          intermediateFarAllowance)
+        assignedOffAllowance
+
+    sameLiteralPoleQuotientTaperAsFinalConsumer : Set
+    sameLiteralPoleQuotientTaperAsFinalConsumerReceipt :
+      sameLiteralPoleQuotientTaperAsFinalConsumer
+
+    producerReference : String
+
+open CertifiedFiniteNearUpperOffPacket public
+
+compiledUpperSelectedPayment :
+  ∀ {space formula window S transport} →
+  (packet : CertifiedFiniteNearUpperOffPacket space formula window S transport) →
+  Minimal.SelectedFiniteNearBudgetPayment space formula window
+compiledUpperSelectedPayment packet =
+  Certified.compileUpperSelectedFiniteNearBudgetPayment
+    (CertifiedFiniteNearUpperOffPacket.certified packet)
+    (CertifiedFiniteNearUpperOffPacket.certifiedUpper packet)
+
+compiledUpperFiniteNearUpperAt :
+  ∀ {space formula window S transport} →
+  (packet : CertifiedFiniteNearUpperOffPacket space formula window S transport) →
+  Transport.FiniteNearUpperAt transport
+    (CertifiedFiniteNearUpperOffPacket.chosenCutoff packet)
+compiledUpperFiniteNearUpperAt packet =
+  WindowTransport.compileFiniteNearUpperAt
+    (CertifiedFiniteNearUpperOffPacket.windowTransport packet)
+
+compileUpperChosenCutoffOffInput :
+  ∀ {space formula window S transport} →
+  (packet : CertifiedFiniteNearUpperOffPacket space formula window S transport) →
+  Off.TransportedChosenCutoffOffAllowanceInput S transport
+compileUpperChosenCutoffOffInput packet = record
+  { Off.chosenCutoff = CertifiedFiniteNearUpperOffPacket.chosenCutoff packet
+  ; Off.CrossingCutoff = CertifiedFiniteNearUpperOffPacket.CrossingCutoff packet
+  ; Off.chosenCutoffCrosses =
+      CertifiedFiniteNearUpperOffPacket.chosenCutoffCrosses packet
+  ; Off.nearUpperAtChosen = compiledUpperFiniteNearUpperAt packet
+  ; Off.intermediateFarAllowance =
+      CertifiedFiniteNearUpperOffPacket.intermediateFarAllowance packet
+  ; Off.nearBudgetSelfOrder =
+      CertifiedFiniteNearUpperOffPacket.nearBudgetSelfOrder packet
+  ; Off.farBudgetBelowIntermediateAllowance =
+      CertifiedFiniteNearUpperOffPacket.farBudgetBelowIntermediateAllowance packet
+  ; Off.assignedOffAllowance =
+      CertifiedFiniteNearUpperOffPacket.assignedOffAllowance packet
+  ; Off.nearBudgetPlusIntermediateBelowAssigned =
+      CertifiedFiniteNearUpperOffPacket.nearBudgetPlusIntermediateBelowAssigned packet
+  ; Off.sameLiteralPoleQuotientTaperAsFinalConsumer =
+      CertifiedFiniteNearUpperOffPacket.sameLiteralPoleQuotientTaperAsFinalConsumer packet
+  ; Off.sameLiteralPoleQuotientTaperAsFinalConsumerReceipt =
+      CertifiedFiniteNearUpperOffPacket.sameLiteralPoleQuotientTaperAsFinalConsumerReceipt packet
+  ; Off.producerReference = CertifiedFiniteNearUpperOffPacket.producerReference packet
+  }
+
+compileCertifiedFiniteNearUpperOffPayment :
+  ∀ {space formula window S transport} →
+  CertifiedFiniteNearUpperOffPacket space formula window S transport →
+  Payment.PoleQuotientOffAllowancePayment
+compileCertifiedFiniteNearUpperOffPayment packet =
+  Off.compileFinalOffAllowancePayment
+    (compileUpperChosenCutoffOffInput packet)
+
 record CertifiedFiniteNearOffBoundary : Set where
   constructor certified-finite-near-off-boundary
   field
@@ -172,4 +276,36 @@ canonicalCertifiedFiniteNearOffBoundary =
     true refl
     true refl
     false refl
+    false refl
+
+record CertifiedFiniteNearUpperOffBoundary : Set where
+  constructor certified-finite-near-upper-off-boundary
+  field
+    arbitrarySecondNearUpperPredicateRequired : Bool
+    arbitrarySecondNearUpperPredicateRequiredIsFalse :
+      arbitrarySecondNearUpperPredicateRequired ≡ false
+
+    certifiedUpperEndpointCompilesTerminalOffPayment : Bool
+    certifiedUpperEndpointCompilesTerminalOffPaymentIsTrue :
+      certifiedUpperEndpointCompilesTerminalOffPayment ≡ true
+
+    selectedWindowOrderTransportStillRequired : Bool
+    selectedWindowOrderTransportStillRequiredIsTrue :
+      selectedWindowOrderTransportStillRequired ≡ true
+
+    farFitAndNearSlackStillRequired : Bool
+    farFitAndNearSlackStillRequiredIsTrue :
+      farFitAndNearSlackStillRequired ≡ true
+
+    rhDerived : Bool
+    rhDerivedIsFalse : rhDerived ≡ false
+
+canonicalCertifiedFiniteNearUpperOffBoundary :
+  CertifiedFiniteNearUpperOffBoundary
+canonicalCertifiedFiniteNearUpperOffBoundary =
+  certified-finite-near-upper-off-boundary
+    false refl
+    true refl
+    true refl
+    true refl
     false refl
