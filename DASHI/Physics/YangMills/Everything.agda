@@ -107,6 +107,9 @@ import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact
 -- agreement equalities are refl rather than independent physical payments.
 import DASHI.Physics.YangMills.BalabanClayT5PreferredContinuumOSGapExact
 
+-- Current terminal scheduler after Eq. (119), Kato-M7 and T5 minimization.
+import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound191Exact
+
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119DirectCalculusProvenanceExact
