@@ -1,0 +1,4 @@
+module DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierEverything where
+
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierRegression
