@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
-import DASHI.Analysis.RiemannPlattTrudgianLowCompletionAdapterExact as Low
+import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as High
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 
@@ -19,8 +19,9 @@ import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 --
 --   (criticalLine rho -> bottom) -> bottom,
 --
--- i.e. double-negated criticality.  Low zeros have positive criticality from the
--- verified-region transport and therefore also have double-negated criticality.
+-- i.e. double-negated criticality.  The canonical Low region is definitionally
+-- the exact Platt--Trudgian verified-region predicate; its same-carrier theorem
+-- gives positive criticality and hence double-negated criticality.
 --
 -- Package that result as the natural constructive endpoint of the analytic
 -- high/low route.  The final conversion to prize-facing positive RH is then a
@@ -45,14 +46,14 @@ DoubleNegatedRiemannHypothesisFor analytic =
 record DirectOneLeafNegativeRHInput
     (analytic : Analytic.AnalyticSubstrate) : Set₁ where
   field
-    LowRegion HighRegion : Universal.AnalyticNontrivialZero analytic -> Set
-
-    lowHighCover :
-      (rho : Universal.AnalyticNontrivialZero analytic) ->
-      LowRegion rho ⊎ HighRegion rho
-
     lowTransport :
-      Low.PlattTrudgianLowCriticalityTransport analytic LowRegion
+      Low.PlattTrudgianVerifiedRegionTransport analytic
+
+    HighRegion : Universal.AnalyticNontrivialZero analytic -> Set
+
+    verifiedOrHighCover :
+      (rho : Universal.AnalyticNontrivialZero analytic) ->
+      Low.CanonicalLowRegion lowTransport rho ⊎ HighRegion rho
 
     highProducer :
       High.UniformIndependentComplementHighProducer analytic HighRegion
@@ -65,11 +66,11 @@ lowDoubleNegCritical :
   forall {analytic} ->
   (input : DirectOneLeafNegativeRHInput analytic) ->
   (rho : Universal.AnalyticNontrivialZero analytic) ->
-  LowRegion input rho ->
+  Low.CanonicalLowRegion (lowTransport input) rho ->
   Not (Not (Universal.analyticCritical rho))
 lowDoubleNegCritical input rho low notCritical =
   notCritical
-    (Low.compileLowCertifiedCritical (lowTransport input) rho low)
+    (Low.canonicalLowCritical (lowTransport input) rho low)
 
 highDoubleNegCritical :
   forall {analytic} ->
@@ -85,7 +86,7 @@ allDoubleNegCritical :
   (input : DirectOneLeafNegativeRHInput analytic) ->
   (rho : Universal.AnalyticNontrivialZero analytic) ->
   Not (Not (Universal.analyticCritical rho))
-allDoubleNegCritical input rho with lowHighCover input rho
+allDoubleNegCritical input rho with verifiedOrHighCover input rho
 ... | inj₁ low = lowDoubleNegCritical input rho low
 ... | inj₂ high = highDoubleNegCritical input rho high
 
@@ -120,9 +121,17 @@ record ConstructiveNegativeRHBoundary : Set where
     highAnalyticContradictionNeedsCriticalPredicateStabilityIsFalse :
       highAnalyticContradictionNeedsCriticalPredicateStability ≡ false
 
-    lowPositiveCriticalityCompilesDoubleNegatedCriticality : Bool
-    lowPositiveCriticalityCompilesDoubleNegatedCriticalityIsTrue :
-      lowPositiveCriticalityCompilesDoubleNegatedCriticality ≡ true
+    arbitraryLowPredicatePrimitive : Bool
+    arbitraryLowPredicatePrimitiveIsFalse :
+      arbitraryLowPredicatePrimitive ≡ false
+
+    separateLowSubsetVerifiedRegionProofPrimitive : Bool
+    separateLowSubsetVerifiedRegionProofPrimitiveIsFalse :
+      separateLowSubsetVerifiedRegionProofPrimitive ≡ false
+
+    canonicalLowPositiveCriticalityCompilesDoubleNegatedCriticality : Bool
+    canonicalLowPositiveCriticalityCompilesDoubleNegatedCriticalityIsTrue :
+      canonicalLowPositiveCriticalityCompilesDoubleNegatedCriticality ≡ true
 
     uniformHighContradictionCompilesDoubleNegatedCriticality : Bool
     uniformHighContradictionCompilesDoubleNegatedCriticalityIsTrue :
@@ -154,6 +163,8 @@ canonicalConstructiveNegativeRHBoundary :
 canonicalConstructiveNegativeRHBoundary =
   constructive-negative-rh-boundary
     false refl
+    false refl
+    false refl
     true refl
     true refl
     true refl
@@ -161,4 +172,4 @@ canonicalConstructiveNegativeRHBoundary =
     false refl
     false refl
     false refl
-    "The analytic high/low architecture has a cleaner constructive endpoint than the old terminal API exposed. Low positive criticality and high off-line contradiction compile directly to double-negated RH without any critical-line stability premise. Only the final conversion from double-negated criticality to prize-facing positive criticality needs the exact critical-predicate refinement. This keeps the harmonic-analysis frontier independent of constructive logical closure and introduces no excluded-middle axiom. The required high analytic and low carrier inputs remain uninhabited here, so RH is not derived."
+    "The constructive endpoint is now smaller again. Low is definitionally the exact Platt--Trudgian verified-region predicate, so no arbitrary Low carrier or separate Low-subset-verification theorem remains on the canonical path. The same-carrier verified-region criticality theorem and the verified-region-or-High cover combine with the uniform high contradiction to prove double-negated RH without critical-line stability. Only the final conversion to positive RH needs the exact critical-predicate refinement. No excluded-middle axiom or substantive input is fabricated here."
