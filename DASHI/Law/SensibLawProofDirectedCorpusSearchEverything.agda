@@ -13,6 +13,8 @@ import DASHI.Law.SensibLawCorpusProducerRoutingExact as Corpus
 import DASHI.Law.SensibLawDialecticalProofSearchExact as Dialectic
 import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Result
 import DASHI.Law.SensibLawProofSearchParetoSaturationExact as Pareto
+import DASHI.Law.SensibLawSearchExecutionCostParetoExact as ExecutionCost
+import DASHI.Law.SensibLawCostedProofSearchSchedulerExact as CostScheduler
 import DASHI.Law.SensibLawSparseWorldModelAcquisitionExact as World
 import DASHI.Law.SensibLawPrecedentGeometryStatisticsExact as Geometry
 import DASHI.Law.SensibLawProofSearchExpansionBidiExact as Expansion
@@ -34,12 +36,13 @@ import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
 --   -> search intent
 --   -> support/defeater/comparator hypothesis family
 --   -> provider-neutral query algebra
+--   -> execution cost/value Pareto surface
 --   -> provider lowering or citation traversal
 --   -> bounded legal-follow / corpus acquisition
 --   -> same parser / PNF re-entry with witness lineage retained
 --   -> proposition/authority/treatment assessment
 --   -> proof payment / frontier delta
---   -> iterative Pareto continuation or saturation
+--   -> costed iterative Pareto continuation or saturation
 --   -> memoised world-model extension
 ------------------------------------------------------------------------
 
@@ -77,6 +80,13 @@ record ProofDirectedCorpusSearchContract : Set where
     iterativeFrontierSearchOwned : Bool
     iterativeFrontierSearchOwnedIsTrue : iterativeFrontierSearchOwned ≡ true
 
+    executionStrategyCostedSeparately : Bool
+    executionStrategyCostedSeparatelyIsTrue : executionStrategyCostedSeparately ≡ true
+
+    proofReductionThresholdPrecedesCostOptimisation : Bool
+    proofReductionThresholdPrecedesCostOptimisationIsTrue :
+      proofReductionThresholdPrecedesCostOptimisation ≡ true
+
     retrievalRequiresProofAssessment : Bool
     retrievalRequiresProofAssessmentIsTrue : retrievalRequiresProofAssessment ≡ true
 
@@ -99,6 +109,8 @@ record ProofDirectedCorpusSearchContract : Set where
 
 canonicalProofDirectedCorpusSearchContract : ProofDirectedCorpusSearchContract
 canonicalProofDirectedCorpusSearchContract = proofDirectedCorpusSearchContract
+  true refl
+  true refl
   true refl
   true refl
   true refl
@@ -143,6 +155,12 @@ selectedResultBoundary = Result.canonicalResultAssessmentBoundary
 
 selectedParetoBoundary : Pareto.SearchParetoRefinementBoundary
 selectedParetoBoundary = Pareto.canonicalSearchParetoRefinementBoundary
+
+selectedExecutionCostBoundary : ExecutionCost.SearchExecutionCostBoundary
+selectedExecutionCostBoundary = ExecutionCost.canonicalSearchExecutionCostBoundary
+
+selectedCostSchedulerBoundary : CostScheduler.CostedProofSearchSchedulerBoundary
+selectedCostSchedulerBoundary = CostScheduler.canonicalCostedProofSearchSchedulerBoundary
 
 selectedSaturationBoundary : Pareto.SearchSaturationBoundary
 selectedSaturationBoundary = Pareto.canonicalSearchSaturationBoundary
@@ -193,10 +211,9 @@ data MaboTopologyAutomaticallyTransfersToPabaiDoctrine : Set where
 data StatisticalSeparatorAutomaticallyLegalRule : Set where
 data MoreCasesAutomaticallyMakeArgumentWaterproof : Set where
 data RepeatedPublicationAutomaticallyIndependentTruth : Set where
-
 data HistoricalSparseSearchEqualsFinalWorldModel : Set where
-
 data ExecutableQueryCompilerMayBypassAssessment : Set where
+data CheapestExecutionAutomaticallyBestProofSearch : Set where
 
 searchResultDoesNotEqualTruth : SearchResultEqualsTruth → ⊥
 searchResultDoesNotEqualTruth ()
@@ -233,3 +250,7 @@ historicalSparseSearchDoesNotEqualFinalWorld ()
 queryCompilerDoesNotBypassAssessment :
   ExecutableQueryCompilerMayBypassAssessment → ⊥
 queryCompilerDoesNotBypassAssessment ()
+
+cheapestExecutionDoesNotAutomaticallyWin :
+  CheapestExecutionAutomaticallyBestProofSearch → ⊥
+cheapestExecutionDoesNotAutomaticallyWin ()
