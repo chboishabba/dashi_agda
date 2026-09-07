@@ -7,6 +7,7 @@ import DASHI.Biology.AliceBrownDissentGovernanceCrossPollinationExact as Dissent
 import DASHI.Governance.AliceBrownInstitutionalAgencyChoiceBridgeExact as Agency
 import DASHI.Core.AffectedDependencyClosureExact as Closure
 import DASHI.Core.ExperimentalOutcomeOrientationBackpropagationBidiExact as Outcome
+import DASHI.Core.DiagnosisExperimentPortfolioBidiExact as Portfolio
 import DASHI.Core.TemporalDiagnosisProvenanceHistoryBidiExact as Temporal
 import DASHI.Core.TemporalDiagnosisDependencyLineageBidiExact as Lineage
 
@@ -46,7 +47,7 @@ aliceFrameEliminationEvent : Temporal.DiagnosisEvent Outcome.frameConflict
 aliceFrameEliminationEvent =
   Temporal.diagnosis-event
     Temporal.eliminated 1
-    (Temporal.debugMoveTrigger DASHI.Core.DiagnosisExperimentPortfolioBidiExact.frameControl)
+    (Temporal.debugMoveTrigger Portfolio.frameControl)
     "frame control distinguishes a survey/feedback framing from the current voice/agency audit"
     "Alice Brown methodology x-pollination; not an empirical source-paper event"
 
@@ -75,9 +76,9 @@ aliceFrameReactivationLineage =
   Lineage.diagnosis-lineage-event
     aliceFrameReactivationEvent
     parentObserverEvidence
-    participationAgencyConsumer
-    (Closure.affectedStep parentFeedsMultiObserver Closure.affectedRefl)
-    "later parent-observer evidence reopens framing inspection for a consumer review"
+    multiObserverConsumer
+    parentToMultiObserverPath
+    "later parent-observer evidence -> multi-observer consumer"
     "parent observer remains situated evidence, not replacement for student voice"
 
 aliceCorpusRetained : Alice.AliceBrownCorpusLoom
@@ -93,6 +94,8 @@ data ParentObserverReplacesStudentVoice : Set where
 data ReactivatedFrameDiagnosisProvesInstitutionalWrong : Set where
 data AliceSourcePaperAuthoredTemporalDiagnosis : Set where
 
+data SameDiagnosisForcesSameConsumer : Set where
+
 parentObserverDoesNotReplaceStudentVoice : ParentObserverReplacesStudentVoice → ⊥
 parentObserverDoesNotReplaceStudentVoice ()
 
@@ -104,16 +107,20 @@ sourcePaperDoesNotAuthorDashITemporalDiagnosis :
   AliceSourcePaperAuthoredTemporalDiagnosis → ⊥
 sourcePaperDoesNotAuthorDashITemporalDiagnosis ()
 
+sameDiagnosisDoesNotForceSameConsumer : SameDiagnosisForcesSameConsumer → ⊥
+sameDiagnosisDoesNotForceSameConsumer ()
+
 record AliceBrownTemporalDiagnosisBoundary : Set where
   constructor alice-brown-temporal-diagnosis-boundary
   field
     diagnosisEventCarriesDependencyPath : Bool
     observerFibresRemainDistinct : Bool
     frameDiagnosisMayReactivate : Bool
+    sameDiagnosisForcesSameConsumer : Bool
     reactivationTransfersObserverIdentity : Bool
     reactivationProvesInstitutionalWrong : Bool
     sourcePaperAuthorshipTransfersToDashIConstruction : Bool
 
 canonicalAliceBrownTemporalDiagnosisBoundary : AliceBrownTemporalDiagnosisBoundary
 canonicalAliceBrownTemporalDiagnosisBoundary =
-  alice-brown-temporal-diagnosis-boundary true true true false false false
+  alice-brown-temporal-diagnosis-boundary true true true false false false false
