@@ -8,7 +8,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalHeatDoubleSumFactorizationRound440
 --   sum_{a,b} 2 Re <F_a,A_b> w_a w_b,
 --   sum_{a,b} 2 Re <A_a,F_b> w_a w_b.
 --
--- Put the scalar weights into the literal cells.  Finite bilinearity then
+-- Put the scalar weights into the literal cells. Finite bilinearity then
 -- gives, with A = sum w_a A_a and 2F = sum (w_b F_b + w_b F_b),
 --
 --   first half  = Re <2F,A> = Re <A,2F>,
@@ -18,7 +18,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalHeatDoubleSumFactorizationRound440
 -- R439 transports that vector identity through the rational Hermitian cross.
 -- Therefore BOTH R299 halves are the same explicit physical companion scalar.
 --
--- This closes the finite physical double-sum SAME-OBJECT identification.  It
+-- This closes the finite physical double-sum SAME-OBJECT identification. It
 -- still does not install the analytic Laplace representation of a resolvent
 -- weight and does not bound the resulting scalar in spacetime.
 ------------------------------------------------------------------------
@@ -28,7 +28,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -52,29 +52,13 @@ F = Rational.rationalRealField
 two : ℚ
 two = 2
 
-sumScalars : List ℚ → ℚ
-sumScalars [] = 0ℚ
-sumScalars (x ∷ xs) = x + sumScalars xs
-
 weightedAmplitudeCell :
-  (W : R294.SwapInvariantCellWeight F) →
-  (S : Helical.HelicalModeScalars F) →
-  (system : Audit.FiniteComplex3GalerkinSystem F
-    (Audit.integerEmbedding system) (Audit.inverseSquare system)) →
-  Physical.PhysicalTriadIncidence → C3.Complex3 F
-weightedAmplitudeCell W S system tau =
-  R294.weightedCell W
-    (R224.mixedPlusMinus S (Audit.velocity system)) tau
-
--- The preceding self-indexed type is inconvenient for callers, so use this
--- fully parametric alias below as the public API.
-weightedAmplitudeCell′ :
   ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E} →
   R294.SwapInvariantCellWeight F →
   Helical.HelicalModeScalars F →
   Audit.FiniteComplex3GalerkinSystem F E I →
   Physical.PhysicalTriadIncidence → C3.Complex3 F
-weightedAmplitudeCell′ W S system tau =
+weightedAmplitudeCell W S system tau =
   R294.weightedCell W
     (R224.mixedPlusMinus S (Audit.velocity system)) tau
 
@@ -93,7 +77,7 @@ weightedAmplitudeAggregate :
   Audit.FiniteComplex3GalerkinSystem F E I →
   List Physical.PhysicalTriadIncidence → C3.Complex3 F
 weightedAmplitudeAggregate W S system items =
-  R224.foldVector (weightedAmplitudeCell′ W S system) items
+  R224.foldVector (weightedAmplitudeCell W S system) items
 
 crossZeroLeft :
   (v : C3.Complex3 F) →
@@ -106,7 +90,10 @@ crossZeroLeft
 crossZeroRight :
   (v : C3.Complex3 F) →
   R179.realHermitianCross v (C3.complex3Zero F) ≡ 0ℚ
-crossZeroRight v = trans (R287.realHermitianCrossSymmetric v (C3.complex3Zero F)) (crossZeroLeft v)
+crossZeroRight v =
+  trans
+    (R287.realHermitianCrossSymmetric v (C3.complex3Zero F))
+    (crossZeroLeft v)
 
 twoCrossAsDoubleLeft :
   (u v : C3.Complex3 F) →
@@ -137,7 +124,7 @@ firstHalfRow W S system alpha [] = 0ℚ
 firstHalfRow W S system alpha (beta ∷ rest) =
   two * R179.realHermitianCross
     (weightedForcingCell W S system alpha)
-    (weightedAmplitudeCell′ W S system beta)
+    (weightedAmplitudeCell W S system beta)
   + firstHalfRow W S system alpha rest
 
 firstHalfRowFactors :
@@ -158,12 +145,12 @@ firstHalfRowFactors W S system alpha (beta ∷ rest) =
     (cong₂ _+_
       (twoCrossAsDoubleLeft
         (weightedForcingCell W S system alpha)
-        (weightedAmplitudeCell′ W S system beta))
+        (weightedAmplitudeCell W S system beta))
       (firstHalfRowFactors W S system alpha rest))
     (sym
       (R291.realCrossAddRight
         (R438.doubleWeightedProjectedForcingCell W S system alpha)
-        (weightedAmplitudeCell′ W S system beta)
+        (weightedAmplitudeCell W S system beta)
         (weightedAmplitudeAggregate W S system rest)))
 
 firstPairHalf :
@@ -211,7 +198,7 @@ secondHalfRow :
 secondHalfRow W S system alpha [] = 0ℚ
 secondHalfRow W S system alpha (beta ∷ rest) =
   two * R179.realHermitianCross
-    (weightedAmplitudeCell′ W S system alpha)
+    (weightedAmplitudeCell W S system alpha)
     (weightedForcingCell W S system beta)
   + secondHalfRow W S system alpha rest
 
@@ -224,20 +211,20 @@ secondHalfRowFactors :
     (betas : List Physical.PhysicalTriadIncidence) →
   secondHalfRow W S system alpha betas
   ≡ R179.realHermitianCross
-      (weightedAmplitudeCell′ W S system alpha)
+      (weightedAmplitudeCell W S system alpha)
       (R438.foldDoubleWeightedProjectedForcing W S system betas)
 secondHalfRowFactors W S system alpha [] =
-  sym (crossZeroRight (weightedAmplitudeCell′ W S system alpha))
+  sym (crossZeroRight (weightedAmplitudeCell W S system alpha))
 secondHalfRowFactors W S system alpha (beta ∷ rest) =
   trans
     (cong₂ _+_
       (twoCrossAsDoubleRight
-        (weightedAmplitudeCell′ W S system alpha)
+        (weightedAmplitudeCell W S system alpha)
         (weightedForcingCell W S system beta))
       (secondHalfRowFactors W S system alpha rest))
     (sym
       (R291.realCrossAddRight
-        (weightedAmplitudeCell′ W S system alpha)
+        (weightedAmplitudeCell W S system alpha)
         (R438.doubleWeightedProjectedForcingCell W S system beta)
         (R438.foldDoubleWeightedProjectedForcing W S system rest)))
 
@@ -272,7 +259,7 @@ secondPairHalfFactors W S system (alpha ∷ rest) betas =
       (secondPairHalfFactors W S system rest betas))
     (sym
       (R291.realCrossAddLeft
-        (weightedAmplitudeCell′ W S system alpha)
+        (weightedAmplitudeCell W S system alpha)
         (weightedAmplitudeAggregate W S system rest)
         (R438.foldDoubleWeightedProjectedForcing W S system betas)))
 
@@ -316,7 +303,8 @@ fixedOutputSecondHalfIsCommonCross :
   ≡ fixedOutputPhysicalCommonCross W S system output
 fixedOutputSecondHalfIsCommonCross W S system output =
   secondPairHalfFactors W S system fibre fibre
-  where fibre = Output.physicalOutputFiber (Audit.cutoff system) output
+  where
+  fibre = Output.physicalOutputFiber (Audit.cutoff system) output
 
 fixedOutputCommonCrossIsQuadraticCompanionCross :
   ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E}
