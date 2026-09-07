@@ -47,3 +47,4 @@ import DASHI.Biology.Microbiology.BaldEyesalveAssayLiteralFrontierSchedulerBidiE
 
 import DASHI.Physics.ProofSearchExperimentalParetoFrontierNSYMExact
 import DASHI.Physics.NSYMLiteralFrontierSchedulerExact
+import DASHI.Physics.Closure.NSTriadKNLiteralFrontierSchedulerRound443Exact
