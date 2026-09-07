@@ -5,6 +5,7 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPaymentsToR423Round487Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR423FixedOutputProducerProofSearchRound488Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR423LocalPaymentPrerequisiteRound489Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
   workflow_dispatch:
@@ -34,6 +35,11 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNR423FixedOutputProducerProofSearchRound488Exact.agda
+
+      - name: Type-check R489 local payment prerequisite scheduler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNR423LocalPaymentPrerequisiteRound489Exact.agda
 
       - name: Type-check authoritative closure rollup
         run: >-
