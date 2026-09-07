@@ -10,7 +10,6 @@ open import Data.Empty using (⊥)
 import DASHI.Core.CostedResidualInformationChoiceExact as Costed
 import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
 import DASHI.Law.SensibLawProofSearchParetoSaturationExact as SearchPareto
-import DASHI.Law.SensibLawProviderNeutralLegalQueryAlgebraExact as Query
 
 ------------------------------------------------------------------------
 -- GOVERNED EXECUTION COST SURFACE
@@ -116,10 +115,6 @@ open LegalExecutionParetoChoice public
 
 ------------------------------------------------------------------------
 -- Bridge to the existing generic residual-information cost/gain calculus.
---
--- A consumer may declare an aggregate cost projection after retaining the
--- full execution vector. The projection does not erase the source vector and
--- cannot manufacture certified gain.
 ------------------------------------------------------------------------
 
 record GenericResidualCostProjection : Set where
@@ -175,7 +170,7 @@ liveSingleFetchCost = legalExecutionCostVector
 
 boundedLiveFollowCost : Nat → Nat → Nat → LegalExecutionCostVector
 boundedLiveFollowCost requests depth breadth = legalExecutionCostVector
-  governedCitationFollowExecution requests (4 * requests) depth breadth breadth 0 1 1 0
+  governedCitationFollowExecution requests (4 ∗ requests) depth breadth breadth 0 1 1 0
   "governed citation follow: pacing and explicit depth/breadth exposed as cost coordinates"
 
 ------------------------------------------------------------------------
