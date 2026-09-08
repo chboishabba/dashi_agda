@@ -50,12 +50,10 @@ record ForcingCapabilityModel521 : Set₁ where
 
 open ForcingCapabilityModel521 public
 
-data NoSignedBudget521 : Set where
-
 smoothWithoutSignedBudget521 : ForcingCapabilityModel521
 smoothWithoutSignedBudget521 = record
   { SmoothForcingReceipt = ⊤
-  ; SignedCriticalForcingBudgetReceipt = NoSignedBudget521
+  ; SignedCriticalForcingBudgetReceipt = ⊥
   }
 
 SmoothImpliesSignedBudgetForEveryModel521 : Set₁
@@ -116,7 +114,6 @@ data NextDemand521 : Set where
   instantiateExternalForcingOnLiteralCarrier521 : NextDemand521
   identifySeparatingForcingHypothesis521 : NextDemand521
   testCandidateR406Estimate521 : NextDemand521
-  noPromotionFromComparator521 : NextDemand521
 
 nextDemandForOutcome521 : AdversarialOutcome521 → NextDemand521
 nextDemandForOutcome521 forcingSatisfiesDASHIBudget521 = testCandidateR406Estimate521
