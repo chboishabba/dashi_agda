@@ -24,10 +24,16 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --       R519: constructed Bishop Nat root + semantic square boundary;
 --       R520: finite/rational monotonicity of every canonical root approximant.
 --
+-- R521-R522 add the source-bounded smooth-forced-blowup adversarial BIDI:
+-- smoothness is separated from the signed critical forcing budget, and the
+-- external program is wired both into the literal-carrier falsification test
+-- and back out from DASHI's exact theorem quantifier scope. The reported unseen
+-- forced-NS claim is comparator-only and pays no Clay residual.
+--
 -- The remaining scalar representation seam is now only the standard Bishop
 -- realization rule taking pointwise ordered regular approximants to Bishop-real
--- order. Neither tranche manufactures an analytic payment. Clay promotion
--- remains fail-closed.
+-- order. Neither introspection nor the adversarial BIDI manufactures an
+-- analytic payment. Clay promotion remains fail-closed.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact
@@ -64,3 +70,7 @@ import DASHI.Physics.Closure.NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound
 import DASHI.Physics.Closure.NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exact
 import DASHI.Physics.Closure.NSTriadKNBishopNatRootCriticalMultiplierBoundaryRound519Exact
 import DASHI.Physics.Closure.NSTriadKNBishopNatRootApproximationMonotonicityRound520Exact
+
+-- Smooth-forced-blowup adversarial BIDI against the same live R406/forcing cone.
+import DASHI.Physics.Closure.NSTriadKNSmoothForcedBlowupAdversarialBoundaryRound521Exact
+import DASHI.Physics.Closure.NSTriadKNForcedBlowupR406BidiRound522Exact
