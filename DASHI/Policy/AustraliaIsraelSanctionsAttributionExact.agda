@@ -13,17 +13,24 @@ import DASHI.Interop.WikidataDerivationFibreBridge as Fibre
 -- This module deliberately separates:
 --   * what the UK announced;
 --   * what Penny Wong / the Australian Government said;
---   * Adam Bandt's reported characterisation of that position; and
+--   * David Shoebridge's reported characterisation of that position; and
 --   * any downstream assessment of whether the characterisation is apt.
+--
+-- Correction history:
+--   The initial user recollection named Adam Bandt.  Subsequent user correction
+--   identified Greens Senator David Shoebridge, consistent with independently
+--   sourced prior Shoebridge uses of "gaslighting" concerning Labor's Israel
+--   policy.  The exact ABC 9-Sep-2026 wording remains source-verification debt.
 --
 -- A speaker's evaluative label is evidence that the speaker used that label.
 -- It is not, by itself, evidence that the target proposition is true.
 
-speakerAxis policyAxis comparisonAxis assessmentAxis : Fibre.OntologyAxis
+speakerAxis policyAxis comparisonAxis assessmentAxis correctionAxis : Fibre.OntologyAxis
 speakerAxis = Fibre.externalAxis "speaker-attribution"
 policyAxis = Fibre.externalAxis "policy-position"
 comparisonAxis = Fibre.externalAxis "cross-government-policy-comparison"
 assessmentAxis = Fibre.externalAxis "evaluative-characterisation"
+correctionAxis = Fibre.externalAxis "attribution-correction"
 
 ------------------------------------------------------------------------
 -- Public-source carriers checked 9 September 2026.
@@ -34,8 +41,11 @@ ukSource = "UK policy, 8-9 Sep 2026: settlement-goods trade ban; new arms/export
 wongSource : String
 wongSource = "Penny Wong, 9 Sep 2026: Australia pursuing further targeted measures; concerns about blanket-ban implementation and unintended consequences for Australian businesses, Palestinians and Israelis"
 
-bandtSourceStatus : String
-bandtSourceStatus = "user-reported quotation; exact primary/public artifact for wording not yet verified"
+shoebridgePriorSource : String
+shoebridgePriorSource = "Guardian 18 Sep 2025: David Shoebridge said the Albanese government had been 'gaslighting the Australian public' about its role in the genocide and legal responsibilities; Defence Connect 30 Jul 2024 records a separate Shoebridge 'gaslighting the public' allegation concerning Australia-Israel arms trade"
+
+shoebridgeCurrentSourceStatus : String
+shoebridgeCurrentSourceStatus = "user reports seeing the exact 9-Sep-2026 quote on ABC News; current web search has not yet recovered the indexed ABC artifact containing the exact wording 'such incredible gaslighting'"
 
 ------------------------------------------------------------------------
 -- Base claims.
@@ -64,13 +74,21 @@ policyDifferenceClaim = Fibre.claimBase
   Fibre.mainValueRole
   "source-snapshot:2026-09-09"
 
-bandtGaslightingAttributionClaim : Fibre.ClaimBase
-bandtGaslightingAttributionClaim = Fibre.claimBase
-  "au-il-sanctions:bandt-gaslighting-attribution:2026-09-09"
-  "Adam Bandt described Wong/Labor's position on the UK's recent Israel sanctions as 'such incredible gaslighting'."
+initialBandtAttributionClaim : Fibre.ClaimBase
+initialBandtAttributionClaim = Fibre.claimBase
+  "au-il-sanctions:bandt-attribution-initial-recollection:2026-09-09"
+  "The speaker of the reported 'such incredible gaslighting' line was Adam Bandt."
+  (Fibre.externalClaimKind "superseded-speaker-attribution")
+  Fibre.mainValueRole
+  "superseded-by-user-correction:2026-09-09"
+
+shoebridgeGaslightingAttributionClaim : Fibre.ClaimBase
+shoebridgeGaslightingAttributionClaim = Fibre.claimBase
+  "au-il-sanctions:shoebridge-gaslighting-attribution:2026-09-09"
+  "David Shoebridge described Wong/Labor's position on the UK's recent Israel sanctions as 'such incredible gaslighting'."
   (Fibre.externalClaimKind "reported-speaker-attribution")
   Fibre.mainValueRole
-  "user-report:2026-09-09;primary-source-residual-open"
+  "user-correction:ABC-News-observation:2026-09-09;exact-source-residual-open"
 
 gaslightingAptClaim : Fibre.ClaimBase
 gaslightingAptClaim = Fibre.claimBase
@@ -81,9 +99,7 @@ gaslightingAptClaim = Fibre.claimBase
   "assessment-not-promoted"
 
 ------------------------------------------------------------------------
--- Derivations.  The verified policy claims are supporting derivations.
--- The Bandt wording remains unresolved until its primary/public artifact is
--- located.  The truth of the evaluative label remains independently unresolved.
+-- Derivations.
 
 ukBroaderMeasuresEvidence : Fibre.Derivation ukBroaderMeasuresClaim
 ukBroaderMeasuresEvidence = Fibre.derivation
@@ -91,7 +107,7 @@ ukBroaderMeasuresEvidence = Fibre.derivation
   Fibre.supporting
   (policyAxis ∷ [])
   ukSource
-  "gov.uk / Reuters / Guardian, checked 2026-09-09"
+  "public sources checked 2026-09-09"
   []
 
 wongNoBlanketBanEvidence : Fibre.Derivation wongNoBlanketBanClaim
@@ -100,7 +116,7 @@ wongNoBlanketBanEvidence = Fibre.derivation
   Fibre.supporting
   (speakerAxis ∷ policyAxis ∷ [])
   wongSource
-  "public parliamentary/media reporting, checked 2026-09-09"
+  "public parliamentary/media reporting checked 2026-09-09"
   []
 
 policyDifferenceEvidence : Fibre.Derivation policyDifferenceClaim
@@ -112,31 +128,54 @@ policyDifferenceEvidence = Fibre.derivation
   "derived only from the two bounded public-source carriers above"
   []
 
-bandtGaslightingEvidence : Fibre.Derivation bandtGaslightingAttributionClaim
-bandtGaslightingEvidence = Fibre.derivation
-  "attribution:bandt:user-report:2026-09-09"
+initialBandtAttributionRefuted : Fibre.Derivation initialBandtAttributionClaim
+initialBandtAttributionRefuted = Fibre.derivation
+  "correction:bandt-to-shoebridge:2026-09-09"
+  Fibre.contradicting
+  (speakerAxis ∷ correctionAxis ∷ [])
+  "User corrected the speaker after checking the ABC News item: the speaker was David Shoebridge, not Adam Bandt."
+  "conversation correction plus independent historical Shoebridge 'gaslighting' source context"
+  []
+
+shoebridgePriorUsageEvidence : Fibre.Derivation shoebridgeGaslightingAttributionClaim
+shoebridgePriorUsageEvidence = Fibre.derivation
+  "context:shoebridge-prior-gaslighting-usage"
   Fibre.unresolved
   (speakerAxis ∷ assessmentAxis ∷ [])
-  "User reports exact wording: 'such incredible gaslighting'."
-  bandtSourceStatus
-  ("locate primary Bandt post/video/transcript or independently archived public artifact" ∷ [])
+  "Independent sources establish that Shoebridge has previously used 'gaslighting' against Labor on Israel-related policy, but they do not establish the exact 9-Sep-2026 ABC wording."
+  shoebridgePriorSource
+  ("do not substitute prior quotations for the current ABC quotation" ∷ [])
+
+shoebridgeCurrentAttributionEvidence : Fibre.Derivation shoebridgeGaslightingAttributionClaim
+shoebridgeCurrentAttributionEvidence = Fibre.derivation
+  "attribution:shoebridge:abc-user-observation:2026-09-09"
+  Fibre.unresolved
+  (speakerAxis ∷ assessmentAxis ∷ [])
+  "User reports directly seeing Shoebridge use the exact wording 'such incredible gaslighting' on ABC News today."
+  shoebridgeCurrentSourceStatus
+  ("recover ABC video/transcript/article or archived public artifact containing the exact wording" ∷ [])
 
 gaslightingAptEvidence : Fibre.Derivation gaslightingAptClaim
 gaslightingAptEvidence = Fibre.derivation
   "assessment:gaslighting-apt:unpromoted"
   Fibre.unresolved
   (assessmentAxis ∷ [])
-  "Bandt's reported label is a political/evaluative characterisation, not a source-established truth condition."
+  "Shoebridge's reported label is a political/evaluative characterisation, not a source-established truth condition."
   "consumer-relative assessment intentionally left open"
   ("define and pay an explicit evaluative consumer before promotion" ∷ [])
 
 ------------------------------------------------------------------------
 -- Regression receipts for the non-collapse boundary.
 
-bandtAttributionStillUndetermined :
+initialBandtAttributionHasContradiction :
+  Fibre.validateRequiredSubfibre Fibre.axisRequired false true ≡
+  Fibre.fibreShape Fibre.violated
+initialBandtAttributionHasContradiction = refl
+
+shoebridgeExactQuoteStillUndetermined :
   Fibre.validateRequiredSubfibre Fibre.axisRequired false false ≡
   Fibre.fibreShape Fibre.undetermined
-bandtAttributionStillUndetermined = refl
+shoebridgeExactQuoteStillUndetermined = refl
 
 evaluativeTruthStillUndetermined :
   Fibre.validateRequiredSubfibre Fibre.axisRequired false false ≡
@@ -150,10 +189,15 @@ evaluativeTruthStillUndetermined = refl
 --       + verified Wong position
 --       -> bounded policy-difference claim
 --
---   user-reported Bandt wording
---       -> attribution residual until primary/public source is found
+--   initial Bandt recollection
+--       -> contradicted/superseded attribution
 --
---   Bandt used label
+--   corrected Shoebridge attribution
+--       + user-observed ABC source
+--       + independent prior usage context
+--       -> exact-current-quote residual remains open until ABC artifact recovered
+--
+--   Shoebridge used label
 --       != label is correct
 --
 -- This preserves the existing source -> claim -> consumer admission discipline.
