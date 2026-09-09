@@ -27,6 +27,7 @@ record SourceMeasurementProvenance : Set where
     dataRevision : String
     instrumentConfigurationCarrier : String
     calibrationCarrier : String
+    calibrationRevision : String
     sourceReconstructionCarrier : String
     inspectionOrAnalysisReceipt : String
 
@@ -63,8 +64,8 @@ record SourceAcquisitionReceipt : Set where
     probeGeometryCarrierMatchesTarget :
       probeGeometryMeasurementCarrier ≡ Source.probeGeometryCarrier target
 
-    calibrationMatchesTarget :
-      calibrationCarrier provenance ≡ Source.calibrationRevision target
+    calibrationRevisionMatchesTarget :
+      calibrationRevision provenance ≡ Source.calibrationRevision target
 
     sameApparatusIdentityMatchesTarget :
       runIdentifier provenance ≡ Source.sameApparatusIdentityCarrier target
@@ -89,7 +90,8 @@ data SourceAcquisitionCompilationResidual : Set where
   missingRunIdentity : SourceAcquisitionCompilationResidual
   missingRawDataCarrier : SourceAcquisitionCompilationResidual
   missingRawDataHash : SourceAcquisitionCompilationResidual
-  missingCalibration : SourceAcquisitionCompilationResidual
+  missingCalibrationCarrier : SourceAcquisitionCompilationResidual
+  missingCalibrationRevision : SourceAcquisitionCompilationResidual
   missingInstrumentConfiguration : SourceAcquisitionCompilationResidual
   missingSourceReconstruction : SourceAcquisitionCompilationResidual
   missingShapeMeasurement : SourceAcquisitionCompilationResidual
@@ -105,7 +107,8 @@ producerForSourceCompilationResidual missingResponsibleBody = Search.attribution
 producerForSourceCompilationResidual missingRunIdentity = Search.identityProducer
 producerForSourceCompilationResidual missingRawDataCarrier = Search.empiricalEvidenceProducer
 producerForSourceCompilationResidual missingRawDataHash = Search.identityProducer
-producerForSourceCompilationResidual missingCalibration = Search.empiricalEvidenceProducer
+producerForSourceCompilationResidual missingCalibrationCarrier = Search.empiricalEvidenceProducer
+producerForSourceCompilationResidual missingCalibrationRevision = Search.temporalProducer
 producerForSourceCompilationResidual missingInstrumentConfiguration = Search.empiricalEvidenceProducer
 producerForSourceCompilationResidual missingSourceReconstruction = Search.empiricalEvidenceProducer
 producerForSourceCompilationResidual missingShapeMeasurement = Search.empiricalEvidenceProducer
@@ -129,6 +132,7 @@ record SourceAcquisitionCompilationBoundary : Set where
   constructor source-acquisition-compilation-boundary
   field
     targetDescriptionEqualsMeasurementReceipt : Bool
+    calibrationCarrierEqualsCalibrationRevision : Bool
     localMeasurementNeedsRunHashRevisionProvenance : Bool
     sameApparatusIdentityRequired : Bool
     perConsumerBundleWitnessesRequired : Bool
@@ -140,4 +144,4 @@ canonicalSourceAcquisitionCompilationBoundary :
   SourceAcquisitionCompilationBoundary
 canonicalSourceAcquisitionCompilationBoundary =
   source-acquisition-compilation-boundary
-    false true true true true false false
+    false false true true true true false false
