@@ -10,6 +10,7 @@ import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyScopeBidiExa
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyCompilationExact as Compilation
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorCompilationExact as Comparator
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorStateBridgeExact as ComparatorState
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryBackgroundClosureExact as Background
 import DASHI.Physics.ExoticGravity.AntigravityOptimizedAcquisitionPlanExact as Plan
 import DASHI.Physics.ExoticGravity.LiTorrStandardGRComparatorBidiExact as LegacyComparator
 import DASHI.Physics.ExoticGravity.LiTorr1991CombinedFieldSourceEntitlementExact as LT1991
@@ -99,6 +100,26 @@ predictionDoesNotPayBackgroundClosure :
   ComparatorState.typedPredictionPaysBackgroundClosure
     ComparatorState.canonicalLaboratoryGRComparatorStateBridgeBoundary ≡ false
 predictionDoesNotPayBackgroundClosure = refl
+
+backgroundClosureClosesExistingComparator :
+  LegacyComparator.firstOpenGRComparatorLeaf Background.closedComparatorState
+    ≡ LegacyComparator.comparatorClosed
+backgroundClosureClosesExistingComparator = Background.closedComparatorStateIsClosed
+
+predictionAloneDoesNotCloseBackgrounds :
+  Background.ordinaryGRPredictionAlonePaysBackgroundClosure
+    Background.canonicalLaboratoryBackgroundClosureBoundary ≡ false
+predictionAloneDoesNotCloseBackgrounds = refl
+
+rfControlAloneDoesNotCloseAllBackgrounds :
+  Background.rfInstrumentationControlAlonePaysAllBackgrounds
+    Background.canonicalLaboratoryBackgroundClosureBoundary ≡ false
+rfControlAloneDoesNotCloseAllBackgrounds = refl
+
+closedComparatorDoesNotProveNegativeG :
+  Background.closedComparatorAutomaticallyProvesMaterialEffectiveNegativeG
+    Background.canonicalLaboratoryBackgroundClosureBoundary ≡ false
+closedComparatorDoesNotProveNegativeG = refl
 
 sourceDependentAdditiveCanStillMimicMultiplicative : Scaling.sourceDependentAdditiveCanMimicMultiplicativeSignature Scaling.canonicalScalingModelDiscriminatorBoundary ≡ true
 sourceDependentAdditiveCanStillMimicMultiplicative = refl
