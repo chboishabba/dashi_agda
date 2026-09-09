@@ -8,22 +8,21 @@ import DASHI.Core.ProofDebtRouterExact as Debt
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 import DASHI.Biology.CausalEstimatorMetricConsistencyExact as MetricConsistency
 import DASHI.Biology.CausalEstimatorFiniteDispersionExact as FiniteDispersion
+import DASHI.Biology.CausalEstimatorFiniteProbabilityConsistencyExact as FiniteProbability
 
 ------------------------------------------------------------------------
 -- ASYMPTOTIC FRONTIER
 --
--- The introspective search has exhausted the source-native owners currently
--- visible for this causal-estimator lane.  Ordinary metric consistency reuses
--- MetricConvergenceKernelBidiExact; finite expectation, unbiasedness, variance
--- and MSE are exact rational constructions.  No owner was found for the exact
--- application-specific probability/distribution theorem needed to promote
--- convergence in probability, weak/distributional convergence, or asymptotic
--- normality.  This module records that as proof debt rather than manufacturing
--- a Gaussian/probability layer.
+-- The bounded finite-law lane now has an exact convergence-in-probability
+-- analogue: for each estimator radius, the finite normalized probability mass
+-- outside the target ball converges to zero via the existing metric kernel.
+-- The remaining unpaid frontier is genuinely distributional: a general
+-- probability/measure owner, weak/distributional convergence, a same-estimator
+-- asymptotic-normality theorem, and standard-error limit calibration.
 ------------------------------------------------------------------------
 
 data AsymptoticResidual : Set where
-  convergenceInProbabilitySemantics : AsymptoticResidual
+  generalProbabilityMeasureSemantics : AsymptoticResidual
   distributionalConvergenceSemantics : AsymptoticResidual
   asymptoticNormalityTheorem : AsymptoticResidual
   standardErrorLimitCalibration : AsymptoticResidual
@@ -35,7 +34,7 @@ data AsymptoticProducerClass : Set where
   calibrationTheoremOwner : AsymptoticProducerClass
 
 producerForResidual : AsymptoticResidual → AsymptoticProducerClass
-producerForResidual convergenceInProbabilitySemantics = probabilityMeasureOwner
+producerForResidual generalProbabilityMeasureSemantics = probabilityMeasureOwner
 producerForResidual distributionalConvergenceSemantics = distributionConvergenceOwner
 producerForResidual asymptoticNormalityTheorem = estimatorLimitTheoremOwner
 producerForResidual standardErrorLimitCalibration = calibrationTheoremOwner
@@ -44,8 +43,9 @@ producerForResidual standardErrorLimitCalibration = calibrationTheoremOwner
 -- Current exact selected debt.
 --
 -- For an arbitrary causal estimator, asymptotic normality is not available
--- merely from finite unbiasedness, finite variance, or metric consistency.
--- Until a same-estimator theorem/source is identified and aligned, the exact
+-- merely from finite unbiasedness, finite variance, metric consistency, or the
+-- bounded finite-law convergence-in-probability bridge.  Until a same-estimator
+-- distributional theorem/source is identified and aligned, the exact
 -- application claim remains mathematical debt under the canonical router.
 ------------------------------------------------------------------------
 
@@ -87,6 +87,11 @@ finiteDispersionBoundary :
 finiteDispersionBoundary =
   FiniteDispersion.canonicalCausalEstimatorFiniteDispersionBoundary
 
+finiteProbabilityConsistencyBoundary :
+  FiniteProbability.CausalEstimatorFiniteProbabilityConsistencyBoundary
+finiteProbabilityConsistencyBoundary =
+  FiniteProbability.canonicalCausalEstimatorFiniteProbabilityConsistencyBoundary
+
 introspectiveBoundary : Introspective.IntrospectiveProofLoopBoundary
 introspectiveBoundary = Introspective.canonicalIntrospectiveProofLoopBoundary
 
@@ -94,7 +99,9 @@ introspectiveBoundary = Introspective.canonicalIntrospectiveProofLoopBoundary
 -- Firewalls.
 ------------------------------------------------------------------------
 
-data MetricConsistencyMeansProbabilityConsistencyPermission : Set where
+data FiniteProbabilityConsistencyMeansGeneralMeasurePermission : Set where
+
+data FiniteProbabilityConsistencyMeansWeakConvergencePermission : Set where
 
 data FiniteVarianceMeansAsymptoticNormalityPermission : Set where
 
@@ -104,9 +111,13 @@ data MissingOwnerMayBeReportedClosedPermission : Set where
 
 data MathematicalDebtMayBeCalledCertificationDebtPermission : Set where
 
-metricConsistencyDoesNotBecomeProbabilityConsistency :
-  MetricConsistencyMeansProbabilityConsistencyPermission → ⊥
-metricConsistencyDoesNotBecomeProbabilityConsistency ()
+finiteProbabilityConsistencyDoesNotBecomeGeneralMeasure :
+  FiniteProbabilityConsistencyMeansGeneralMeasurePermission → ⊥
+finiteProbabilityConsistencyDoesNotBecomeGeneralMeasure ()
+
+finiteProbabilityConsistencyDoesNotBecomeWeakConvergence :
+  FiniteProbabilityConsistencyMeansWeakConvergencePermission → ⊥
+finiteProbabilityConsistencyDoesNotBecomeWeakConvergence ()
 
 finiteVarianceDoesNotBecomeAsymptoticNormality :
   FiniteVarianceMeansAsymptoticNormalityPermission → ⊥
@@ -131,7 +142,8 @@ record CausalEstimatorCompletionFrontier : Set where
     finiteUnbiasednessClosed : Bool
     finiteVarianceAndMSEClosed : Bool
     metricConsistencyShapeClosed : Bool
-    convergenceInProbabilityClosed : Bool
+    finiteLawConvergenceInProbabilityClosed : Bool
+    generalProbabilityMeasureClosed : Bool
     distributionalConvergenceClosed : Bool
     asymptoticNormalityClosed : Bool
     standardErrorLimitCalibrationClosed : Bool
@@ -142,6 +154,6 @@ canonicalCausalEstimatorCompletionFrontier :
   CausalEstimatorCompletionFrontier
 canonicalCausalEstimatorCompletionFrontier =
   causal-estimator-completion-frontier
-    true true true true
+    true true true true true
     false false false false
     true false
