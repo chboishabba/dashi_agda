@@ -5,24 +5,28 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 -- ABSTRACT GÖDEL DIAGONAL / PROVABILITY CONTRACT
 --
--- This module separates the arithmetic coding substrate from the operations
--- that make diagonalisation possible.  In particular, a Nat code alone does
--- not provide numeral quotation, substitution, representability, or a proof
--- of an object-language biconditional.
+-- A natural-number code is only one coordinate.  Diagonalisation also needs
+-- terms/numerals, substitution on codes, representability inside the object
+-- theory, and an object-language biconditional which the theory proves.
 ------------------------------------------------------------------------
 
 record ArithmetisedFormalSystem : Set₁ where
   field
-    Formula : Set
+    Term : Set
+    Formula : Set          -- one distinguished free variable
+    BinaryFormula : Set    -- two distinguished free variables
     Sentence : Set
     Proof : Set
 
+    codeTerm : Term → Nat
     codeFormula : Formula → Nat
+    codeBinaryFormula : BinaryFormula → Nat
     codeSentence : Sentence → Nat
     codeProof : Proof → Nat
 
-    numeral : Nat → Formula
-    instantiate : Formula → Nat → Sentence
+    numeral : Nat → Term
+    instantiate : Formula → Term → Sentence
+    instantiate2 : BinaryFormula → Term → Term → Sentence
 
     Provable : Sentence → Set
     proves : Proof → Sentence → Set
@@ -35,7 +39,7 @@ record ArithmetisedFormalSystem : Set₁ where
 open ArithmetisedFormalSystem public
 
 ------------------------------------------------------------------------
--- Arithmetised substitution / representability.
+-- Arithmetised substitution / proof-relation representation.
 ------------------------------------------------------------------------
 
 record ArithmetisedSubstitution
@@ -46,19 +50,22 @@ record ArithmetisedSubstitution
       (formula : Formula F) →
       (n : Nat) →
       substituteCode (codeFormula F formula) n
-      ≡ codeSentence F (instantiate F formula n)
+      ≡ codeSentence F (instantiate F formula (numeral F n))
 
 open ArithmetisedSubstitution public
 
 record ProofRelationRepresentation
     (F : ArithmetisedFormalSystem) : Set₁ where
   field
-    proofPredicate : Formula F
-    proofPredicateRepresents :
+    proofRelationPredicate : BinaryFormula F
+    proofRelationRepresentsPositiveInstances :
       (proof : Proof F) →
       (sentence : Sentence F) →
       proves F proof sentence →
-      Provable F (instantiate F proofPredicate (codeSentence F sentence))
+      Provable F
+        (instantiate2 F proofRelationPredicate
+          (numeral F (codeProof F proof))
+          (numeral F (codeSentence F sentence)))
 
 open ProofRelationRepresentation public
 
@@ -69,8 +76,8 @@ open ProofRelationRepresentation public
 --
 --   F ⊢ D ↔ A(⌜D⌝)
 --
--- The biconditional is an OBJECT-LANGUAGE sentence whose provability is the
--- theorem.  It is not merely a meta-level equivalence relation.
+-- This is provability of an OBJECT-LANGUAGE biconditional, not a meta-level
+-- identification of the two sentences or their meanings.
 ------------------------------------------------------------------------
 
 record DiagonalLemmaAuthority
@@ -82,17 +89,17 @@ record DiagonalLemmaAuthority
       Provable F
         (Biconditional F
           (fixedPoint predicate)
-          (instantiate F predicate (codeSentence F (fixedPoint predicate))))
+          (instantiate F predicate
+            (numeral F (codeSentence F (fixedPoint predicate)))))
 
 open DiagonalLemmaAuthority public
 
 ------------------------------------------------------------------------
 -- GENERIC DIAGONAL CONSTRUCTION
 --
--- This is the first actual theorem seam.  A construction supplies a unary
--- formula which represents the map x ↦ A(sub(x,x)).  ArithmetisedSubstitution
--- then identifies the self-substitution code with the code of the resulting
--- sentence.  From those two coordinates we DERIVE DiagonalLemmaAuthority.
+-- A concrete arithmetic formalisation still has to represent the unary map
+-- x ↦ A(sub(x,x)).  Once it supplies that representation, the fixed-point
+-- lemma itself follows from the exact substitution-code law below.
 ------------------------------------------------------------------------
 
 record DiagonalFormulaConstruction
@@ -106,11 +113,12 @@ record DiagonalFormulaConstruction
         (Biconditional F
           (instantiate F
             (diagonalise predicate)
-            (codeFormula F (diagonalise predicate)))
+            (numeral F (codeFormula F (diagonalise predicate))))
           (instantiate F predicate
-            (substituteCode S
-              (codeFormula F (diagonalise predicate))
-              (codeFormula F (diagonalise predicate)))))
+            (numeral F
+              (substituteCode S
+                (codeFormula F (diagonalise predicate))
+                (codeFormula F (diagonalise predicate))))))
 
 open DiagonalFormulaConstruction public
 
@@ -123,7 +131,7 @@ fixedPointFromConstruction :
 fixedPointFromConstruction F S D predicate =
   instantiate F
     (diagonalise D predicate)
-    (codeFormula F (diagonalise D predicate))
+    (numeral F (codeFormula F (diagonalise D predicate)))
 
 fixedPointFromConstructionLaw :
   (F : ArithmetisedFormalSystem) →
@@ -134,7 +142,8 @@ fixedPointFromConstructionLaw :
     (Biconditional F
       (fixedPointFromConstruction F S D predicate)
       (instantiate F predicate
-        (codeSentence F (fixedPointFromConstruction F S D predicate))))
+        (numeral F
+          (codeSentence F (fixedPointFromConstruction F S D predicate)))))
 fixedPointFromConstructionLaw F S D predicate
   rewrite substitutionExact S
     (diagonalise D predicate)
@@ -190,10 +199,9 @@ open DerivabilityConditions public
 -- Named theorem-result contracts.
 ------------------------------------------------------------------------
 
--- This two-sided result is the ORIGINAL Gödel-sentence outcome and is paired
--- below with a 1-/omega-consistency coordinate.  Mere consistency is enough
--- for the unprovability half, but not for the ordinary Gödel sentence's
--- unrefutability half.
+-- Ordinary Gödel sentence: consistency suffices for the unprovability half;
+-- the classical two-sided result needs the stronger 1-/omega-consistency
+-- coordinate represented in GodelFirstPrerequisites below.
 record GodelFirstIncompletenessResult
     (F : ArithmetisedFormalSystem) : Set₁ where
   field
@@ -203,9 +211,9 @@ record GodelFirstIncompletenessResult
 
 open GodelFirstIncompletenessResult public
 
--- Rosser's modified sentence obtains both directions from simple consistency
--- under the appropriate effective/arithmetical hypotheses; keep it a distinct
--- theorem/result rather than silently strengthening Gödel's original sentence.
+-- Rosser's modified sentence is deliberately distinct: under the appropriate
+-- effective arithmetic hypotheses it obtains both sides from simple
+-- consistency rather than silently strengthening the ordinary Gödel sentence.
 record RosserFirstIncompletenessResult
     (F : ArithmetisedFormalSystem) : Set₁ where
   field
@@ -246,8 +254,6 @@ open TarskiUndefinabilityResult public
 -- Dependency bundles.
 ------------------------------------------------------------------------
 
--- Consistency-only prerequisites for the first (unprovability) half of the
--- ordinary Gödel sentence.
 record GodelFirstUnprovabilityPrerequisites
     (F : ArithmetisedFormalSystem) : Set₁ where
   field
@@ -259,9 +265,6 @@ record GodelFirstUnprovabilityPrerequisites
 
 open GodelFirstUnprovabilityPrerequisites public
 
--- The two-sided original Gödel result requires a stronger 1-/omega-consistency
--- coordinate for the refutation half.  We leave the exact chosen formulation
--- abstract until the concrete arithmetic system is source-aligned.
 record GodelFirstPrerequisites
     (F : ArithmetisedFormalSystem) : Set₁ where
   field
@@ -315,7 +318,10 @@ data DiagonalLemmaAloneImpliesGodelII : Set where
 data SearchExhaustionImpliesUnprovability : Set where
 data GodelIncompletenessImpliesTuringHalting : Set where
 data PlainConsistencyGivesOrdinaryGodelUnrefutability : Set where
-\data GodelSentenceEqualsRosserSentence : Set where
+data GodelSentenceEqualsRosserSentence : Set where
+\data TermsAreFormulas : Set where
+
+data UnaryProofPredicateIsBinaryProofRelation : Set where
 
 encodingAloneDoesNotSupplyDiagonalLemma :
   NaturalNumberEncodingAloneImpliesDiagonalLemma → ⊥
@@ -341,9 +347,18 @@ godelSentenceIsNotDefinitionallyRosserSentence :
   GodelSentenceEqualsRosserSentence → ⊥
 godelSentenceIsNotDefinitionallyRosserSentence ()
 
+termsAreNotDefinitionallyFormulas : TermsAreFormulas → ⊥
+termsAreNotDefinitionallyFormulas ()
+
+unaryPredicateDoesNotReplaceBinaryProofRelation :
+  UnaryProofPredicateIsBinaryProofRelation → ⊥
+unaryPredicateDoesNotReplaceBinaryProofRelation ()
+
 record GodelDiagonalProvabilityBoundary : Set where
   constructor godelDiagonalProvabilityBoundary
   field
+    termsSeparatedFromFormulas : Bool
+    unaryAndBinaryFormulaAritiesSeparated : Bool
     naturalNumberCodingSeparatedFromSubstitution : Bool
     substitutionSeparatedFromDiagonalLemma : Bool
     diagonalLawIsObjectLanguageProvableBiconditional : Bool
@@ -359,4 +374,4 @@ record GodelDiagonalProvabilityBoundary : Set where
 canonicalGodelDiagonalProvabilityBoundary : GodelDiagonalProvabilityBoundary
 canonicalGodelDiagonalProvabilityBoundary =
   godelDiagonalProvabilityBoundary
-    true true true true true true true true true false false
+    true true true true true true true true true true true false false
