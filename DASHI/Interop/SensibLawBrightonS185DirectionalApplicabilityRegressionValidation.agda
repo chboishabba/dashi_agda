@@ -35,10 +35,40 @@ sameEvidenceCarrierWeldRequired :
     Brighton.canonicalBrightonS185RegressionBoundary ≡ true
 sameEvidenceCarrierWeldRequired = refl
 
+sameSection185AuthorityWeldRequired :
+  Brighton.BrightonS185RegressionBoundary.sameSection185AuthorityWeldRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+sameSection185AuthorityWeldRequired = refl
+
+exactHistoricalAuthorityReceiptRequired :
+  Brighton.BrightonS185RegressionBoundary.exactHistoricalAuthorityReceiptRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+exactHistoricalAuthorityReceiptRequired = refl
+
+exactJurisdictionReceiptRequired :
+  Brighton.BrightonS185RegressionBoundary.exactJurisdictionReceiptRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+exactJurisdictionReceiptRequired = refl
+
+exactTemporalScopeReceiptRequired :
+  Brighton.BrightonS185RegressionBoundary.exactTemporalScopeReceiptRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+exactTemporalScopeReceiptRequired = refl
+
 existingApplicabilityCompilerRetained :
   Brighton.BrightonS185RegressionBoundary.existingApplicabilityCompilerRetained
     Brighton.canonicalBrightonS185RegressionBoundary ≡ true
 existingApplicabilityCompilerRetained = refl
+
+existingViolationCompilerRetained :
+  Brighton.BrightonS185RegressionBoundary.existingViolationCompilerRetained
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+existingViolationCompilerRetained = refl
+
+exactApplicabilityReceiptReusedByViolation :
+  Brighton.BrightonS185RegressionBoundary.exactApplicabilityReceiptReusedByViolation
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+exactApplicabilityReceiptReusedByViolation = refl
 
 form11DoesNotCreateBreach :
   Brighton.BrightonS185RegressionBoundary.form11AssertionCreatesBreach
@@ -55,6 +85,16 @@ legalAuthorityDoesNotCreateMatterFact :
     Brighton.canonicalBrightonS185RegressionBoundary ≡ false
 legalAuthorityDoesNotCreateMatterFact = refl
 
+nearbyCompilationDoesNotCreateHistoricalAuthority :
+  Brighton.BrightonS185RegressionBoundary.nearbyCompilationCreatesHistoricalAuthority
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ false
+nearbyCompilationDoesNotCreateHistoricalAuthority = refl
+
+unweldedSection185LabelDoesNotAuthorizeApplicability :
+  Brighton.BrightonS185RegressionBoundary.unweldedSection185LabelAuthorizesApplicability
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ false
+unweldedSection185LabelDoesNotAuthorizeApplicability = refl
+
 healthContextDoesNotCreateMedicalCausation :
   Brighton.BrightonS185RegressionBoundary.healthContextCreatesMedicalCausation
     Brighton.canonicalBrightonS185RegressionBoundary ≡ false
@@ -65,7 +105,12 @@ oneEpisodeDoesNotCreateSystemicWrongdoing :
     Brighton.canonicalBrightonS185RegressionBoundary ≡ false
 oneEpisodeDoesNotCreateSystemicWrongdoing = refl
 
-applicabilityDoesNotCreateLiability :
-  Brighton.BrightonS185RegressionBoundary.applicabilityCreatesLiability
+applicabilityDoesNotCreateViolation :
+  Brighton.BrightonS185RegressionBoundary.applicabilityCreatesViolation
     Brighton.canonicalBrightonS185RegressionBoundary ≡ false
-applicabilityDoesNotCreateLiability = refl
+applicabilityDoesNotCreateViolation = refl
+
+violationDoesNotCreateLiability :
+  Brighton.BrightonS185RegressionBoundary.violationCreatesLiability
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ false
+violationDoesNotCreateLiability = refl
