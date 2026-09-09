@@ -32,6 +32,7 @@ record SourceConditionedAtomicLegalTest
   field
     sourceReceipt : SourceRule.PropositionSourceReceipt p
     subject : Ontology.StableId
+    subjectMatchesProposition : subject ≡ Algebra.subjectReference p
 
     Fits : Set
     FailsToFit : Set
@@ -75,6 +76,7 @@ data UnresolvedGateCountsAsFailure : Set where
 data UnresolvedGateCountsAsFit : Set where
 data AtomicGateCreatesLegalAuthority : Set where
 data FailureOfOneAtomProvesAnotherAtom : Set where
+data AtomicTestMayFloatToDifferentSubject : Set where
 
 negativeGateDoesNotProveOppositeProposition :
   NegativeGateProvesOppositeProposition → ⊥
@@ -91,6 +93,9 @@ atomicGateDoesNotCreateAuthority ()
 
 failureOfOneAtomDoesNotProveAnother : FailureOfOneAtomProvesAnotherAtom → ⊥
 failureOfOneAtomDoesNotProveAnother ()
+
+atomicTestCannotFloatToDifferentSubject : AtomicTestMayFloatToDifferentSubject → ⊥
+atomicTestCannotFloatToDifferentSubject ()
 
 ------------------------------------------------------------------------
 -- Example shape only: failure of the valid-business-practice atom remains a
@@ -118,7 +123,8 @@ record AtomicLegalTestBoundary : Set where
     negativeMeansLogicalOpposite : Bool
     unresolvedPromotesEitherDirection : Bool
     sourceConditioningRequired : Bool
+    exactSubjectWeldRequired : Bool
 
 canonicalAtomicLegalTestBoundary : AtomicLegalTestBoundary
 canonicalAtomicLegalTestBoundary =
-  atomic-legal-test-boundary true true true false false true
+  atomic-legal-test-boundary true true true false false true true
