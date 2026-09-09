@@ -192,10 +192,6 @@ open MediationEstimandSurface public
 
 ------------------------------------------------------------------------
 -- Trajectory effect.
---
--- Endpoint effects and path-sensitive effects are different consumers.  A path
--- effect therefore carries the whole time-indexed outcome surface plus an
--- application-supplied trajectory contrast.
 ------------------------------------------------------------------------
 
 record TrajectoryEffectEstimand
@@ -218,10 +214,6 @@ open TrajectoryEffectEstimand public
 
 ------------------------------------------------------------------------
 -- Neural/behavioural intervention effect.
---
--- The neural intervention, neural readout, effector/behavioural readout and
--- cognitive outcome remain separate coordinates.  This is an estimand surface,
--- not a neural-state == thought identity theorem.
 ------------------------------------------------------------------------
 
 record NeuralBehaviouralEffectEstimand
@@ -245,6 +237,91 @@ record NeuralBehaviouralEffectEstimand
 open NeuralBehaviouralEffectEstimand public
 
 ------------------------------------------------------------------------
+-- Kind-indexed witness.
+--
+-- This prevents a bare tag from relabelling one estimand as another.  The
+-- proposition carried by the generic estimand is derived from the specialised
+-- witness rather than supplied independently.
+------------------------------------------------------------------------
+
+data EstimandKindWitness
+    (scope : CausalEstimandScope)
+    (algebra : EffectAlgebra scope) :
+    CausalEstimandKind → Set₁ where
+
+  averagePopulationWitness :
+    AveragePopulationEffectEstimand scope algebra →
+    EstimandKindWitness scope algebra averagePopulationEffect
+
+  averageTreatedWitness :
+    AverageTreatedEffectEstimand scope algebra →
+    EstimandKindWitness scope algebra averageTreatedEffect
+
+  individualLineageWitness :
+    IndividualLineageEffectEstimand scope algebra →
+    EstimandKindWitness scope algebra individualOrLineageEffect
+
+  controlledDirectWitness :
+    MediationEstimandSurface scope →
+    EstimandKindWitness scope algebra controlledDirectEffect
+
+  mediatedIndirectWitness :
+    MediationEstimandSurface scope →
+    EstimandKindWitness scope algebra mediatedIndirectEffect
+
+  trajectoryWitness :
+    TrajectoryEffectEstimand scope →
+    EstimandKindWitness scope algebra trajectoryEffect
+
+  neuralBehaviouralWitness :
+    NeuralBehaviouralEffectEstimand scope →
+    EstimandKindWitness scope algebra neuralBehaviouralInterventionEffect
+
+EstimandEffectProposition :
+  ∀ {scope algebra kind} →
+  EstimandKindWitness scope algebra kind → Set
+EstimandEffectProposition (averagePopulationWitness estimand) =
+  aggregate estimand
+  ≡ aggregatePopulation _
+      (population _)
+      (unitEffectAtHorizon _ _)
+EstimandEffectProposition (averageTreatedWitness estimand) =
+  aggregate estimand
+  ≡ aggregateTreated estimand
+      (treatedPopulation estimand)
+      (unitEffectAtHorizon _ _)
+EstimandEffectProposition (individualLineageWitness estimand) =
+  effect estimand
+  ≡ unitEffectAtHorizon _ _ (selectedUnit estimand)
+EstimandEffectProposition (controlledDirectWitness mediation) =
+  DirectEffect mediation
+EstimandEffectProposition (mediatedIndirectWitness mediation) =
+  IndirectEffect mediation
+EstimandEffectProposition (trajectoryWitness estimand) =
+  TrajectoryEffect estimand
+EstimandEffectProposition (neuralBehaviouralWitness estimand) =
+  Effect estimand
+
+estimandEffectReceipt :
+  ∀ {scope algebra kind}
+    (witness : EstimandKindWitness scope algebra kind) →
+  EstimandEffectProposition witness
+estimandEffectReceipt (averagePopulationWitness estimand) =
+  aggregateIsTargetPopulationContrast estimand
+estimandEffectReceipt (averageTreatedWitness estimand) =
+  aggregateIsTreatedContrast estimand
+estimandEffectReceipt (individualLineageWitness estimand) =
+  effectIsSelectedUnitContrast estimand
+estimandEffectReceipt (controlledDirectWitness mediation) =
+  directEffectReceipt mediation
+estimandEffectReceipt (mediatedIndirectWitness mediation) =
+  indirectEffectReceipt mediation
+estimandEffectReceipt (trajectoryWitness estimand) =
+  trajectoryEffectReceipt estimand
+estimandEffectReceipt (neuralBehaviouralWitness estimand) =
+  NeuralBehaviouralEffectEstimand.effectReceipt estimand
+
+------------------------------------------------------------------------
 -- Generic selected estimand.
 ------------------------------------------------------------------------
 
@@ -254,20 +331,24 @@ record CausalEffectEstimand : Set₂ where
     scope : CausalEstimandScope
     algebra : EffectAlgebra scope
     kind : CausalEstimandKind
-
-    EffectProposition : Set
-    effectReceipt : EffectProposition
+    kindWitness : EstimandKindWitness scope algebra kind
 
     estimandReference : String
     scopeReference : String
 
 open CausalEffectEstimand public
 
+EffectProposition : CausalEffectEstimand → Set
+EffectProposition estimand =
+  EstimandEffectProposition (kindWitness estimand)
+
+effectReceipt :
+  (estimand : CausalEffectEstimand) → EffectProposition estimand
+effectReceipt estimand =
+  estimandEffectReceipt (kindWitness estimand)
+
 ------------------------------------------------------------------------
 -- Bind an estimand to the already-identified cross-level causal attribution.
--- The attribution's effect proposition for this exact claim must be definitionally
--- transported to the selected estimand proposition.  Identification family and
--- estimand therefore remain orthogonal but same-claim welded.
 ------------------------------------------------------------------------
 
 record CausalAttributionEstimandBinding
@@ -316,6 +397,8 @@ data InternalEffectMeansUniversalTransportPermission : Set where
 
 data CausalEffectWithoutPopulationTimeInterventionPermission : Set where
 
+data EstimandTagWithoutMatchingWitnessPermission : Set where
+
 identificationDoesNotDetermineEstimand :
   IdentificationMeansEstimandKnownPermission → ⊥
 identificationDoesNotDetermineEstimand ()
@@ -352,11 +435,16 @@ causalEffectCannotFloatFreeOfScope :
   CausalEffectWithoutPopulationTimeInterventionPermission → ⊥
 causalEffectCannotFloatFreeOfScope ()
 
+estimandKindCannotFloatFreeOfMatchingWitness :
+  EstimandTagWithoutMatchingWitnessPermission → ⊥
+estimandKindCannotFloatFreeOfMatchingWitness ()
+
 record CausalEffectEstimandBoundary : Set where
   constructor causal-effect-estimand-boundary
   field
     identificationAndEstimandAreSeparate : Bool
     populationInterventionComparatorOutcomeTimeAreExplicit : Bool
+    estimandKindRequiresMatchingWitness : Bool
     ateAndAttRemainDistinct : Bool
     populationAndIndividualEffectsRemainDistinct : Bool
     endpointAndTrajectoryEffectsRemainDistinct : Bool
@@ -368,4 +456,4 @@ record CausalEffectEstimandBoundary : Set where
 canonicalCausalEffectEstimandBoundary : CausalEffectEstimandBoundary
 canonicalCausalEffectEstimandBoundary =
   causal-effect-estimand-boundary
-    true true true true true true true false false
+    true true true true true true true true false false
