@@ -21,17 +21,10 @@ import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact as FinalCer
 ------------------------------------------------------------------------
 -- CERTIFIED FINAL-NEAR UPPER -> DIRECT CLUSTER-RESPONSE PAYMENT
 --
--- Representation is already fixed by FinalNearLiteralKernel.  A proof-carrying
--- finite upper certificate gives
---
---   nearResponseAt(J) <= U.
---
--- Existing source monotonicity therefore gives
---
---   B_off(J) = nearResponseAt(J) + B_far(J)
---            <= U + B_far(J).
---
--- The only remaining strict producer theorem on this computational route is
+-- Representation is already fixed by FinalNearLiteralKernel. A proof-carrying
+-- finite upper certificate gives nearResponseAt(J) <= U. Existing source
+-- monotonicity then gives B_off(J) <= U + B_far(J). The only remaining strict
+-- producer theorem is
 --
 --   cast(U + B_far(J)) + cast(D_Gamma) < ClusterResponse.
 --
@@ -116,11 +109,12 @@ sourceOffBudgetBelowCertifiedEnvelope :
       (Transport.farBudgetAt transport
         (Direct.chosenCutoff (Direct.offInput targets))))
 sourceOffBudgetBelowCertifiedEnvelope
-    {S = S} {targets = targets} {orderAttachment = orderAttachment} =
+    {S = S} {transport = transport} {targets = targets}
+    {orderAttachment = orderAttachment} =
   NearFar.addMonotone S
     (certifiedNearUpperInSourceOrder orderAttachment)
     (Direct.sourceOrderReflexive (Direct.offInput targets)
-      (Transport.farBudgetAt _
+      (Transport.farBudgetAt transport
         (Direct.chosenCutoff (Direct.offInput targets))))
 
 compiledComplementBudgetBelowCertifiedEnvelope :
@@ -151,14 +145,7 @@ compiledComplementBudgetBelowCertifiedEnvelope
     (Cluster.offOrderTransport context
       (sourceOffBudgetBelowCertifiedEnvelope
         {S = S} {targets = targets} {orderAttachment = orderAttachment}))
-    (Direct.gammaInput targets |> Direct.sourceOrderReflexive
-      (Gamma.GammaBudget (Direct.directGammaTarget targets)
-        (Gamma.universalPoleQuotientTaper (Direct.directGammaTarget targets)))
-      |> Cluster.gammaOrderTransport context)
-  where
-  infixl 0 _|>_
-  _|>_ : forall {A B : Set} -> A -> (A -> B) -> B
-  x |> f = f x
+    (Cluster.compiledGammaUpper context)
 
 compileCertifiedUpperToDirectClusterPayment :
   forall {S transport targets kernel certificate upper orderAttachment context} ->
@@ -207,4 +194,4 @@ canonicalCertifiedNearUpperClusterBoundary =
     false refl
     true refl
     false refl
-    "The computational route is now acyclic: realize the evaluator-independent literal kernel, attach a proof-carrying finite upper to its exact fold, transport that upper to final nearResponseAt(J), and use source monotonicity to obtain B_off <= U+B_far. The only remaining strict theorem is cast(U+B_far)+cast(D_Gamma)<ClusterResponse on the balance-free context. No selected Weil window, determinant consumer, evaluator-indexed kernel, or downstream balance is available to manufacture the margin."
+    "The computational route is acyclic: realize the evaluator-independent literal kernel, attach a proof-carrying finite upper to its exact fold, transport that upper to final nearResponseAt(J), and use source monotonicity to obtain B_off <= U+B_far. The only remaining strict theorem is cast(U+B_far)+cast(D_Gamma)<ClusterResponse on the balance-free context. No selected Weil window, determinant consumer, evaluator-indexed kernel, or downstream balance is available to manufacture the margin."
