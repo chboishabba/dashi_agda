@@ -19,11 +19,6 @@ module DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exa
 -- endpoint calibration, the sole new PDE estimate on this direct route is a
 -- cutoff-uniform spacetime upper bound for the LIVE global sum of R567's
 -- forcing/commutator full squares.
---
--- This owner deliberately does not claim that bound. It makes the consumer
--- exact so future work cannot substitute a Schur proxy, absolute-value envelope,
--- heat-separable proxy, or cross-domain theorem without an explicit same-object
--- weld.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -82,17 +77,21 @@ module LiveCommutatorOnly
     in
     R543.fullSquareSum C.T.forcingPair items
 
+  sumOutputForcingFull :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    (cutoff : Nat) → Time → List Z3.FourierMode → ℚ
+  sumOutputForcingFull T R cutoff time [] = 0ℚ
+  sumOutputForcingFull T R cutoff time (output ∷ rest) =
+    outputForcingFull T R cutoff time output
+      + sumOutputForcingFull T R cutoff time rest
+
   globalForcingFull :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
     (R : Support.LiteralNonzeroCutoffTrajectory T) →
     (cutoff : Nat) → Time → ℚ
   globalForcingFull T R cutoff time =
-    sumOutputs (Canonical.nonzeroCutoffModes cutoff)
-    where
-    sumOutputs : List Z3.FourierMode → ℚ
-    sumOutputs [] = 0ℚ
-    sumOutputs (output ∷ rest) =
-      outputForcingFull T R cutoff time output + sumOutputs rest
+    sumOutputForcingFull T R cutoff time (Canonical.nonzeroCutoffModes cutoff)
 
   integratedGlobalForcingFull :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
@@ -113,20 +112,6 @@ module LiveCommutatorOnly
 
   open CommutatorOnlySpacetimeBudget568 public
 
-------------------------------------------------------------------------
--- Exact relationship to the R503 consumer remains a two-step compiler:
---
---   commutator budget
---     + scalar FTC / favourable diagonal drop
---     + initial self-flux endpoint
---       -> bound on literal R406 remainder integral
---       -> R500 same-object identity
---       -> R503 DirectOffDiagonalBudget.
---
--- R568 freezes the genuinely new PDE coordinate but does not fabricate those
--- standard-analysis / endpoint receipts here.
-------------------------------------------------------------------------
-
 data R568Residual : Set where
   missingConcreteScalarFTC568 : R568Residual
   missingInitialSelfFluxLiveCalibration568 : R568Residual
@@ -136,8 +121,6 @@ data R568Residual : Set where
 currentR568Residual : R568Residual
 currentR568Residual = missingConcreteScalarFTC568
 
--- Once ordinary FTC and endpoint calibration are treated as standard sourced
--- analysis/representation receipts, this is the sole NEW NS estimate.
 newNSAnalyticResidual568 : R568Residual
 newNSAnalyticResidual568 = missingCutoffUniformLiveCommutatorSpacetimeBudget568
 
