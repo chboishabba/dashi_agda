@@ -18,12 +18,17 @@ FILES=(
   DASHI/Analysis/RiemannG2LiteralPhaseDirectClusterResponseExact.agda
   DASHI/Analysis/RiemannG2MinimalStrictResponseConsumerExact.agda
   DASHI/Analysis/RiemannG2UniformLiteralPhaseHighProducerExact.agda
+  DASHI/Analysis/RiemannG2UniformHighContradictionExact.agda
+  DASHI/Analysis/RiemannG2UniformCertifiedNearUpperHighProducerExact.agda
   DASHI/Analysis/RiemannPlattTrudgianCanonicalLowRegionExact.agda
   DASHI/Analysis/RiemannCriticalLineStabilityRefinementExact.agda
+  DASHI/Analysis/RiemannAnalyticCoordinateTerminalRefinementExact.agda
   DASHI/Analysis/RiemannG2ConstructiveNegativeRHCompletionExact.agda
   DASHI/Analysis/RiemannG2ClayTerminalOneLeafCutExact.agda
+  DASHI/Analysis/RiemannG2ClayTerminalCoordinateRefinedExact.agda
   DASHI/Analysis/RiemannG2CurrentDirectOneLeafFrontierExact.agda
   DASHI/Analysis/RiemannG2FinalCutIntrospectionExact.agda
+  DASHI/Analysis/Everything.agda
 )
 
 for f in "${FILES[@]}"; do
