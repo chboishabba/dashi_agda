@@ -15,6 +15,7 @@ import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact
 import DASHI.Physics.GR.GravitationalAttributedMultiScaleFingerprintBidiExact
 import DASHI.Physics.GR.GravitationalWavePolarizationSourceAttributionExact
 import DASHI.Physics.GR.GravitationalWavePolarizationSignBidiExact
+import DASHI.Physics.GR.GravitationalWavePhaseSignBidiExact
 import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact
 import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact
 import DASHI.Physics.GR.SignedGRNormalizationBidiExact
@@ -45,9 +46,6 @@ record GRAdapter : Set₁ where
     lorentz : LorentzAdapter
 
 open GRAdapter public
-
--- Thin projections so GR can cite the canonical signature seam without
--- importing the underlying signature modules.
 
 grSignature31 : GRAdapter -> _
 grSignature31 A = LorentzAdapter.signature31Tag (GRAdapter.lorentz A)
