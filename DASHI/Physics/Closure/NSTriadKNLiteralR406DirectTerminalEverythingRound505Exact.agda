@@ -42,6 +42,15 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- Fourier-sign-quotient/fibre presentation, while continuum measure transport
 -- remains separately typed and open.
 --
+-- R531 makes that stronger R530 statement the normalized NS-side equality and
+-- advances R528's scheduler past the now-closed periodic-chart coordinate.
+-- R532 then x-pollinates the Tesla/Base369 independent-refinement null model and
+-- the Monster/Base369 signed-reflection intertwiner into the same cross-domain
+-- consumer. Both pay/refine local finite-fibre structure only. Neither can pay
+-- the lattice-sum <-> continuum-integral, cutoff, or same-object R406 theorem.
+-- After the Euclidean finite sign fibre is instantiated, spectral-measure
+-- transport is the first genuinely analytic cross-domain seam.
+--
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
 ------------------------------------------------------------------------
@@ -90,3 +99,5 @@ import DASHI.Physics.Closure.NSTriadKNClayCDDomainResidualBidiRound527Exact
 import DASHI.Physics.Closure.NSTriadKNTorusEuclideanR406MeasureBridgeBoundaryRound528Exact
 import DASHI.Physics.Closure.NSTriadKNPeriodicIntegerTernary27SignChartRound529Exact
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierTernaryTorusFibreBidiRound530Exact
+import DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531Exact
+import DASHI.Physics.Closure.NSTriadKNBase369TeslaMonsterR406CrossDomainBidiRound532Exact
