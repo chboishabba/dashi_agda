@@ -33,6 +33,7 @@ FILES=(
   DASHI/Analysis/RiemannG2DirectIndependentComplementMarginExact.agda
   DASHI/Analysis/RiemannG2DirectClusterResponseContradictionExact.agda
   DASHI/Analysis/RiemannG2LiteralPhaseDirectClusterResponseExact.agda
+  DASHI/Analysis/RiemannG2MinimalStrictResponseConsumerExact.agda
   DASHI/Analysis/RiemannG2UniformLiteralPhaseHighProducerExact.agda
   DASHI/Analysis/RiemannCriticalLineStabilityRefinementExact.agda
   DASHI/Analysis/RiemannG2ProofRelevantTargetTranslationModulationExact.agda
