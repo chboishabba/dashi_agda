@@ -79,7 +79,7 @@ attractivePositiveDensityReceiptRejectsFrozenNegativeGResponse :
   (receipt : PositiveDensityAttractionReceipt) →
   negativeGPositiveDensityPrediction ≡ observedResponse receipt → ⊥
 attractivePositiveDensityReceiptRejectsFrozenNegativeGResponse receipt equality
-  rewrite observedAttractive receipt = equality
+  rewrite observedAttractive receipt = impossible equality
   where
     impossible :
       Newton.repulsiveAwayFromPositiveSource
