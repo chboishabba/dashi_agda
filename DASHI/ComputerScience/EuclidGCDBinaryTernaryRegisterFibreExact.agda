@@ -4,15 +4,14 @@ open import DASHI.Core.Prelude
 
 import DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact as Machine
 import DASHI.ComputerScience.EuclidGCDRegisterMachineExact as Euclid
-import DASHI.ComputerScience.HelloWorldBinaryTernaryFramedWordStorageExact as WordStorage
+import DASHI.ComputerScience.FixedNineBitFramed27WordStorageExact as WordStorage
 
 ------------------------------------------------------------------------
 -- BINARY / FRAMED-27 REGISTER REALIZATIONS OF THE SAME EUCLID MACHINE
 --
--- The fixed nine-bit word codec was introduced by the Hello World fixture, but
--- its encode/decode functions are generic over Nat.  Here we reuse that exact
--- representation owner for the first nontrivial algorithm rather than create a
--- second word codec.  All values in this fixture are < 512.
+-- The fixed nine-bit word codec has a neutral representation owner.  All
+-- values in this fixture are < 512, so both register representations decode
+-- exactly to the same abstract Nat register file.
 ------------------------------------------------------------------------
 
 record BinaryRegisterStorage : Set where
@@ -59,10 +58,6 @@ decodeTernaryRegisters storage =
       (WordStorage.ternary27ToBinaryWord9 (ternaryR1 storage)))
     (WordStorage.decodeWord9
       (WordStorage.ternary27ToBinaryWord9 (ternaryR2 storage)))
-
-------------------------------------------------------------------------
--- Exact canonical input fixture.
-------------------------------------------------------------------------
 
 euclid4818InitialRegisters : Machine.RegisterFile
 euclid4818InitialRegisters = Machine.registerFile 48 18 0
@@ -125,15 +120,11 @@ binaryGcdOutputExact = refl
 ternaryGcdOutputExact : Machine.output ternaryRealizedFinal ≡ 6 ∷ []
 ternaryGcdOutputExact = refl
 
-------------------------------------------------------------------------
--- Logical register representation costs.
-------------------------------------------------------------------------
-
 binaryRegisterCellCost : Nat
-binaryRegisterCellCost = 3 * 9
+binaryRegisterCellCost = 3 * WordStorage.binaryCellsPerWord
 
 ternary27RegisterCellCost : Nat
-ternary27RegisterCellCost = 3 * 3
+ternary27RegisterCellCost = 3 * WordStorage.ternary27CellsPerWord
 
 binaryRegisterCellCostIs27 : binaryRegisterCellCost ≡ 27
 binaryRegisterCellCostIs27 = refl
@@ -153,6 +144,7 @@ record EuclidBinaryTernaryRegisterReceipt : Set where
     binaryCellCountExact : binaryLogicalRegisterCells ≡ 27
     ternaryCellCountExact : ternaryLogicalRegisterCells ≡ 9
     fewerTernaryLogicalCellsProvesLowerPhysicalCost : Bool
+    representationCodecHasGenericOwner : Bool
 
 canonicalEuclidBinaryTernaryRegisterReceipt :
   EuclidBinaryTernaryRegisterReceipt
@@ -161,4 +153,4 @@ canonicalEuclidBinaryTernaryRegisterReceipt =
     true true true true
     binaryRegisterCellCost
     ternary27RegisterCellCost
-    refl refl false
+    refl refl false true
