@@ -51,6 +51,14 @@ canonicalKleinJConstructionAlignment : KleinJConstructionAlignment
 canonicalKleinJConstructionAlignment =
   klein-j-construction-alignment true true true true false
 
+complexPlaneSourceClaimRemainsNonProof :
+  Sources.sourceEntitlesKernelProof Sources.complexPlaneCarrierClaim ≡ false
+complexPlaneSourceClaimRemainsNonProof = refl
+
+exceptionalGluingSourceClaimRemainsNonProof :
+  Sources.sourceEntitlesKernelProof Sources.exceptionalTriangleGluingClaim ≡ false
+exceptionalGluingSourceClaimRemainsNonProof = refl
+
 ------------------------------------------------------------------------
 -- 2. Boundary gluing is a fibre coordinate, not a sign bit.
 ------------------------------------------------------------------------
@@ -142,6 +150,8 @@ antiFixtureTopRightTrueIsFalse = refl
 antiFixtureLeftBottomTrueIsTrue :
   pathLeftBottom antiGluingFixture true ≡ true
 antiFixtureLeftBottomTrueIsTrue = refl
+
+data Empty : Set where
 
 trueIsNotFalse : true ≡ false → Empty
 trueIsNotFalse ()
