@@ -88,6 +88,7 @@ import DASHI.Law.CoerciveContactAuditValidation
 import DASHI.Law.SensibLawHealthRecordEvidenceExact
 import DASHI.Law.SensibLawLongitudinalHousingHealthExact
 import DASHI.Law.SensibLawGoogleHealthDaily2026FixtureExact
+import DASHI.Law.SensibLawQCATHealthPages82_83PrivateDatasetFixtureExact
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything
 import DASHI.Law.SensibLawITIRParityEverything
 import DASHI.Law.SensibLawProofDirectedCorpusSearchEverything
