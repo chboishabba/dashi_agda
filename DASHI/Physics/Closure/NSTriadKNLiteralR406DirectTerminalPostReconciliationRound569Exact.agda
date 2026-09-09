@@ -10,11 +10,9 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalPostReconciliatio
 --
 -- R578 restores that least-privilege ordering.  R579 proves a square-root-free
 -- local Hermitian envelope, and R580 instantiates it on the literal R329/R336
--- nested pair while retaining an explicit same-final-output receipt.
---
--- Thus the preferred surviving residual is NOT "prove row/column Schur".  It is
--- the shell-decaying envelope-mass theorem needed by the signed R29 pre-TT*
--- aggregation.  No cutoff-uniform decay theorem is manufactured here.
+-- nested pair while retaining an explicit same-final-output receipt.  R581
+-- freezes the surviving theorem debt as a shell-decaying envelope-mass theorem
+-- on that same signed pair carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -29,6 +27,7 @@ import DASHI.Physics.Closure.NSTriadKNModernNestedSchurToCommutatorBidiRound577E
 import DASHI.Physics.Closure.NSTriadKNModernLeafARouteReconciliationRound578Exact as R578
 import DASHI.Physics.Closure.NSTriadKNRationalHermitianYoungRound579Exact as R579
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedPairwiseMassEnvelopeRound580Exact as R580
+import DASHI.Physics.Closure.NSTriadKNSignedNestedDecayFrontierRound581Exact as R581
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
 round569TemporalGenerationsReconciled : Bool
@@ -69,7 +68,10 @@ round569SameFinalOutputExplicit =
 
 round569ShellDecayEnvelopeMassClosed : Bool
 round569ShellDecayEnvelopeMassClosed =
-  R580.round580MassEnvelopeCrossShellDecayClosed
+  R581.round581ShellDecayEnvelopeMassClosed
+
+round569FirstSignedNestedResidual : R581.SignedNestedDecayResidual
+round569FirstSignedNestedResidual = R581.currentResidual581
 
 round569CurrentGlobalFirstResidualStillLeafA :
   R504.firstTerminalResidual R504.currentTerminalStatus
@@ -101,7 +103,8 @@ round569SameFinalOutputExplicitIsTrue =
 
 round569ShellDecayEnvelopeMassClosedIsFalse :
   round569ShellDecayEnvelopeMassClosed ≡ false
-round569ShellDecayEnvelopeMassClosedIsFalse = refl
+round569ShellDecayEnvelopeMassClosedIsFalse =
+  R581.round581ShellDecayEnvelopeMassClosedIsFalse
 
 round569LiveCommutatorSpacetimeBudgetClosedIsFalse :
   round569LiveCommutatorSpacetimeBudgetClosed ≡ false
