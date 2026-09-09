@@ -1,0 +1,51 @@
+module DASHI.Interop.SensibLawGriffithsDirectionalSupportAuthorityRegressionValidation where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Cognition.PNF.SensibLawGriffithsDirectionalSupportAuthorityRegressionExact as Griffiths
+
+narrowOutcomeAlreadyPaid :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.narrowOutcomeAlreadyPaid
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ true
+narrowOutcomeAlreadyPaid = refl
+
+positiveSourceSupportMayBeRepresented :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.positiveSourceSupportMayBeRepresented
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ true
+positiveSourceSupportMayBeRepresented = refl
+
+presentMandateStillFirstResidual :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.presentMandateStillFirstResidual
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ true
+presentMandateStillFirstResidual = refl
+
+nextProducerStillAttribution :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.nextProducerStillAttribution
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ true
+nextProducerStillAttribution = refl
+
+positiveSupportDoesNotCreatePresentMandate :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.positiveSupportCreatesPresentMandate
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ false
+positiveSupportDoesNotCreatePresentMandate = refl
+
+positiveSupportDoesNotCreateAuthorityBearer :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.positiveSupportCreatesAuthorityBearer
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ false
+positiveSupportDoesNotCreateAuthorityBearer = refl
+
+positiveSupportDoesNotRenewHistoricalRepresentation :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.positiveSupportRenewsHistoricalRepresentation
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ false
+positiveSupportDoesNotRenewHistoricalRepresentation = refl
+
+positiveSupportDoesNotPayRoleScope :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.positiveSupportPaysRoleScope
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ false
+positiveSupportDoesNotPayRoleScope = refl
+
+positiveSupportDoesNotPayTemporalValidity :
+  Griffiths.GriffithsDirectionalSupportAuthorityBoundary.positiveSupportPaysTemporalValidity
+    Griffiths.canonicalGriffithsDirectionalSupportAuthorityBoundary ≡ false
+positiveSupportDoesNotPayTemporalValidity = refl
