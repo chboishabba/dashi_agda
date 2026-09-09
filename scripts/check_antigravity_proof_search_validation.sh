@@ -7,6 +7,7 @@ cd "$root"
 files=(
   DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
   DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
+  DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGBidiValidationExact.agda
@@ -53,6 +54,10 @@ grep -q 'sourceSideSignCollision' \
   DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
 grep -q 'negativeGAutomaticallyFlipsCosmologicalConstant' \
   DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
+grep -q 'constantSlotNameDeterminesCouplingSign' \
+  DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
+grep -q 'negativeGCounterfactualOverwritesMeasuredRegistryValue' \
+  DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
 grep -q 'negativeGAloneImpliesAlteredInertialMass' \
   DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
 grep -q 'negativeGAloneImpliesReactionlessPropulsion' \
