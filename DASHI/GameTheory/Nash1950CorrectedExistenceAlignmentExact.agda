@@ -2,6 +2,7 @@ module DASHI.GameTheory.Nash1950CorrectedExistenceAlignmentExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Agda.Primitive using (Level; lzero; lsuc; _⊔_)
 
 import DASHI.Core.ProofDebtRouterExact as Debt
 import DASHI.Core.ProofDebtUniverseLiftExact as Lift
@@ -130,11 +131,11 @@ nash1950HeavyReplayScheduler = refl
 ------------------------------------------------------------------------
 
 ConditionalOnNash1950 :
-  ∀ {ℓ} {Result : Set ℓ}
+  ∀ {ℓ : Level} {Result : Set ℓ}
     (G : Game.StrategicGame)
     (U : Mixed.FiniteExpectedUtilitySurface G)
     (coordinates : Nash1950ApplicationCoordinates G U) →
-  Set (lsuc ℓ)
+  Set ((lsuc lzero) ⊔ ℓ)
 ConditionalOnNash1950 {ℓ} {Result} G U coordinates =
   Lift.ConditionalDevelopmentℓ
     (Nash1950CorrectedExistenceClaim G U coordinates)
