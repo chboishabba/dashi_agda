@@ -11,6 +11,7 @@ import DASHI.ComputerScience.FibreMachineFoundation369Exact
 import DASHI.ComputerScience.TemporalStorageFibreExact
 import DASHI.ComputerScience.FibreProgramComplexityExact
 import DASHI.ComputerScience.AgdaElaborationResidencyComplexityExact
+import DASHI.ComputerScience.AgdaProfilerObservationFibreExact
 
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact
 import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact
