@@ -33,6 +33,11 @@ FILES=(
   DASHI/Biology/CausalEstimatorFiniteTestDistributionConvergenceExact.agda
   DASHI/Biology/CausalEstimatorWeakNormalLimitDebtSplitExact.agda
   DASHI/Biology/CausalEstimatorAsymptoticProofDebtExact.agda
+  DASHI/GameTheory/StrategicInteractionCoreExact.agda
+  DASHI/GameTheory/AgenticStrategicInteractionBridgeExact.agda
+  DASHI/GameTheory/EvolutionaryStrategicSelectionBridgeExact.agda
+  DASHI/GameTheory/RepeatedStrategicLearningMemoryBridgeExact.agda
+  DASHI/GameTheory/Everything.agda
   DASHI/AgenticMaterialBidiEverything.agda
   DASHI/Interop/DirectionalEvidenceProofSearchBridgeExact.agda
 )
@@ -53,4 +58,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / metabolic admissibility / proto-agency / heritable agentic organisation / open-ended repertoire / historical evidence / multiscale causal provenance / causal identification families / causal estimands / estimator-uncertainty realization / finite rational expectation / estimator guarantees / metric consistency / finite dispersion-MSE / finite probability consistency / finite test distribution convergence / weak-normal-limit debt split / asymptotic proof-debt frontier / DNA-neural-memory-trauma-Amalek cross-pollination checks passed"
+echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / metabolic admissibility / proto-agency / heritable agentic organisation / open-ended repertoire / historical evidence / multiscale causal provenance / causal identification families / causal estimands / estimator-uncertainty realization / finite rational expectation / estimator guarantees / metric consistency / finite dispersion-MSE / finite probability consistency / finite test distribution convergence / weak-normal-limit debt split / asymptotic proof-debt frontier / strategic game theory / agentic-evolutionary-repeated-learning game bridges / DNA-neural-memory-trauma-Amalek cross-pollination checks passed"
