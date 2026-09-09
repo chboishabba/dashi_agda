@@ -5,67 +5,16 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.Core.ProofDebtRouterExact as Debt
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
+import DASHI.ComputerScience.ConsumerIndexedTernarySearchKernelExact as Search
 import DASHI.ComputerScience.TernarySemanticDecisionRefinementExact as Refinement
 
 ------------------------------------------------------------------------
--- TERNARY FINITE PROOF-SEARCH STATUS × PROOF-DEBT ROUTING
+-- PROOF-SEARCH SPECIALISATION OF THE GENERIC TERNARY SEARCH KERNEL
 --
--- Search status is not theorem truth and not certification status:
---
---   pos : at least one inspected candidate pays the declared Boolean consumer;
---   neg : a typed complete finite search domain has been exhausted and no
---         admissible candidate pays that consumer;
---   zer : no paying candidate has been found in an open/incomplete scope.
---
--- This preserves the proof-debt router's existing separation between
--- mathematical status, statement alignment, certification and scheduling.
+-- The generic kernel owns finite scope, coverage and ternary aggregation.
+-- This module owns proof-search semantics: least-privilege route admission,
+-- proof-debt routing, and the exact frontier-reduction consumer.
 ------------------------------------------------------------------------
-
--- Local finite membership avoids adding an equality/decidability requirement
--- to the candidate carrier.
-data _∈_ {A : Set} (x : A) : List A → Set where
-  here : ∀ {xs} → x ∈ (x ∷ xs)
-  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
-
--- A complete finite domain must state which candidates are admissible and prove
--- that every admissible candidate occurs in the inspected list.
-record CompleteFiniteSearchDomain (A : Set) : Set₁ where
-  constructor completeFiniteSearchDomain
-  field
-    candidates : List A
-    Admissible : A → Set
-    coversEveryAdmissible : (candidate : A) → Admissible candidate → candidate ∈ candidates
-
-open CompleteFiniteSearchDomain public
-
-data SearchScope (A : Set) : Set₁ where
-  openFiniteScope : List A → SearchScope A
-  completeFiniteScope : CompleteFiniteSearchDomain A → SearchScope A
-
-scopeCandidates : ∀ {A : Set} → SearchScope A → List A
-scopeCandidates (openFiniteScope candidates) = candidates
-scopeCandidates (completeFiniteScope domain) = candidates domain
-
-anyPassing :
-  ∀ {A : Set} →
-  (A → Bool) →
-  List A →
-  Bool
-anyPassing checker [] = false
-anyPassing checker (candidate ∷ candidates) with checker candidate
-... | true = true
-... | false = anyPassing checker candidates
-
-finiteSearchDecisionTrit :
-  ∀ {A : Set} →
-  (A → Bool) →
-  SearchScope A →
-  Trit
-finiteSearchDecisionTrit checker scope with anyPassing checker (scopeCandidates scope)
-... | true = pos
-... | false with scope
-...   | openFiniteScope _ = zer
-...   | completeFiniteScope _ = neg
 
 ------------------------------------------------------------------------
 -- Existing proof-search fixture: authoritative frontier reduction rather than
@@ -84,13 +33,13 @@ allSearchStatesAdmissible _ = ⊤
 canonicalSearchCoverage :
   (candidate : ProofSearch.SearchState) →
   allSearchStatesAdmissible candidate →
-  candidate ∈ canonicalSearchCandidates
-canonicalSearchCoverage ProofSearch.manyLemmasNoClosure admissible = here
-canonicalSearchCoverage ProofSearch.fewerLemmasTrueClosure admissible = there here
+  Search._∈_ candidate canonicalSearchCandidates
+canonicalSearchCoverage ProofSearch.manyLemmasNoClosure admissible = Search.here
+canonicalSearchCoverage ProofSearch.fewerLemmasTrueClosure admissible = Search.there Search.here
 
-canonicalCompleteDomain : CompleteFiniteSearchDomain ProofSearch.SearchState
+canonicalCompleteDomain : Search.CompleteFiniteSearchDomain ProofSearch.SearchState
 canonicalCompleteDomain =
-  completeFiniteSearchDomain
+  Search.completeFiniteSearchDomain
     canonicalSearchCandidates
     allSearchStatesAdmissible
     canonicalSearchCoverage
@@ -98,9 +47,6 @@ canonicalCompleteDomain =
 nonClosingCandidateOnly : List ProofSearch.SearchState
 nonClosingCandidateOnly = ProofSearch.manyLemmasNoClosure ∷ []
 
--- This complete domain is intentionally restricted to one declared admissible
--- candidate.  Its negative result is therefore only about this bounded domain,
--- not about all possible proof routes or theorem truth.
 nonClosingOnlyAdmissible : ProofSearch.SearchState → Set
 nonClosingOnlyAdmissible ProofSearch.manyLemmasNoClosure = ⊤
 nonClosingOnlyAdmissible ProofSearch.fewerLemmasTrueClosure = ⊥
@@ -108,97 +54,117 @@ nonClosingOnlyAdmissible ProofSearch.fewerLemmasTrueClosure = ⊥
 nonClosingOnlyCoverage :
   (candidate : ProofSearch.SearchState) →
   nonClosingOnlyAdmissible candidate →
-  candidate ∈ nonClosingCandidateOnly
-nonClosingOnlyCoverage ProofSearch.manyLemmasNoClosure admissible = here
+  Search._∈_ candidate nonClosingCandidateOnly
+nonClosingOnlyCoverage ProofSearch.manyLemmasNoClosure admissible = Search.here
 nonClosingOnlyCoverage ProofSearch.fewerLemmasTrueClosure ()
 
-nonClosingCompleteDomain : CompleteFiniteSearchDomain ProofSearch.SearchState
+nonClosingCompleteDomain : Search.CompleteFiniteSearchDomain ProofSearch.SearchState
 nonClosingCompleteDomain =
-  completeFiniteSearchDomain
+  Search.completeFiniteSearchDomain
     nonClosingCandidateOnly
     nonClosingOnlyAdmissible
     nonClosingOnlyCoverage
 
 canonicalCompleteSearchFindsClosure :
-  finiteSearchDecisionTrit
+  Search.searchDecision
     ProofSearch.authoritativeFrontierReduced
-    (completeFiniteScope canonicalCompleteDomain)
+    (Search.completeFiniteScope canonicalCompleteDomain)
   ≡ pos
 canonicalCompleteSearchFindsClosure = refl
 
 completeNonClosingSearchIsNegative :
-  finiteSearchDecisionTrit
+  Search.searchDecision
     ProofSearch.authoritativeFrontierReduced
-    (completeFiniteScope nonClosingCompleteDomain)
+    (Search.completeFiniteScope nonClosingCompleteDomain)
   ≡ neg
 completeNonClosingSearchIsNegative = refl
 
 incompleteNonClosingSearchStaysUnresolved :
-  finiteSearchDecisionTrit
+  Search.searchDecision
     ProofSearch.authoritativeFrontierReduced
-    (openFiniteScope nonClosingCandidateOnly)
+    (Search.openFiniteScope nonClosingCandidateOnly)
   ≡ zer
 incompleteNonClosingSearchStaysUnresolved = refl
 
--- The same inspected candidate list can therefore refine zer -> neg only when
--- a typed finite-domain coverage receipt is supplied.
+-- Search refinement agrees with the already-established bounded semantic
+-- refinement relation, while ownership of the generic search relation stays in
+-- the new kernel.
 incompleteToCompleteNegativeRefinement : Refinement.DecisionRefines zer neg
 incompleteToCompleteNegativeRefinement = Refinement.unresolvedBecomesNegative
 
--- And adding a paying candidate can refine an unresolved search to positive.
 unresolvedToPositiveProofSearchRefinement : Refinement.DecisionRefines zer pos
 unresolvedToPositiveProofSearchRefinement = Refinement.unresolvedBecomesPositive
+
+kernelIncompleteToCompleteNegative : Search.SearchDecisionRefines zer neg
+kernelIncompleteToCompleteNegative = Search.unresolvedBecomesNegative
+
+kernelUnresolvedToPositive : Search.SearchDecisionRefines zer pos
+kernelUnresolvedToPositive = Search.unresolvedBecomesPositive
 
 ------------------------------------------------------------------------
 -- Search status is a product coordinate beside proof-debt routing.
 ------------------------------------------------------------------------
 
-record ProofSearchDecisionPacket : Set where
-  constructor proofSearchDecisionPacket
+record ProofSearchProvenance : Set where
+  constructor proofSearchProvenance
   field
-    searchDecision : Trit
     debtRoute : Debt.ProofDebtRoutingReceipt
     routeAdmission : ProofSearch.RouteAdmission
 
-open ProofSearchDecisionPacket public
+open ProofSearchProvenance public
 
--- A source-established, source-aligned theorem may remain certification debt
--- regardless of whether a local finite candidate search is unresolved,
--- successful, or exhausted within a declared bounded domain.
+ProofSearchDecisionPacket : Set₁
+ProofSearchDecisionPacket =
+  Search.SearchDecisionPacket ProofSearch.SearchState ProofSearchProvenance
+
 canonicalDeferredUnresolvedPacket : ProofSearchDecisionPacket
 canonicalDeferredUnresolvedPacket =
-  proofSearchDecisionPacket
+  Search.searchDecisionPacket
+    ProofSearch.authoritativeFrontierReduced
+    (Search.openFiniteScope nonClosingCandidateOnly)
     zer
-    Debt.canonicalEstablishedDeferredRoute
-    ProofSearch.canonicalRouteAdmission
+    refl
+    (proofSearchProvenance
+      Debt.canonicalEstablishedDeferredRoute
+      ProofSearch.canonicalRouteAdmission)
 
 canonicalDeferredPositiveSearchPacket : ProofSearchDecisionPacket
 canonicalDeferredPositiveSearchPacket =
-  proofSearchDecisionPacket
+  Search.searchDecisionPacket
+    ProofSearch.authoritativeFrontierReduced
+    (Search.completeFiniteScope canonicalCompleteDomain)
     pos
-    Debt.canonicalEstablishedDeferredRoute
-    ProofSearch.canonicalRouteAdmission
+    refl
+    (proofSearchProvenance
+      Debt.canonicalEstablishedDeferredRoute
+      ProofSearch.canonicalRouteAdmission)
 
 canonicalDeferredNegativeFiniteSearchPacket : ProofSearchDecisionPacket
 canonicalDeferredNegativeFiniteSearchPacket =
-  proofSearchDecisionPacket
+  Search.searchDecisionPacket
+    ProofSearch.authoritativeFrontierReduced
+    (Search.completeFiniteScope nonClosingCompleteDomain)
     neg
-    Debt.canonicalEstablishedDeferredRoute
-    ProofSearch.canonicalRouteAdmission
+    refl
+    (proofSearchProvenance
+      Debt.canonicalEstablishedDeferredRoute
+      ProofSearch.canonicalRouteAdmission)
 
--- All three search statuses can coexist with the same certification-debt route.
+packetDebtRoute : ProofSearchDecisionPacket → Debt.ProofDebtRoutingReceipt
+packetDebtRoute packet = debtRoute (Search.provenance packet)
+
 unresolvedPacketRemainsCertificationDebt :
-  Debt.routedDebt (debtRoute canonicalDeferredUnresolvedPacket)
+  Debt.routedDebt (packetDebtRoute canonicalDeferredUnresolvedPacket)
   ≡ Debt.certificationDebt
 unresolvedPacketRemainsCertificationDebt = refl
 
 positiveSearchPacketRemainsCertificationDebt :
-  Debt.routedDebt (debtRoute canonicalDeferredPositiveSearchPacket)
+  Debt.routedDebt (packetDebtRoute canonicalDeferredPositiveSearchPacket)
   ≡ Debt.certificationDebt
 positiveSearchPacketRemainsCertificationDebt = refl
 
 negativeFiniteSearchPacketRemainsCertificationDebt :
-  Debt.routedDebt (debtRoute canonicalDeferredNegativeFiniteSearchPacket)
+  Debt.routedDebt (packetDebtRoute canonicalDeferredNegativeFiniteSearchPacket)
   ≡ Debt.certificationDebt
 negativeFiniteSearchPacketRemainsCertificationDebt = refl
 
@@ -240,6 +206,7 @@ openSearchFailureCannotBePromotedNegative ()
 record TernaryProofSearchDecisionDebtBoundary : Set where
   constructor ternaryProofSearchDecisionDebtBoundary
   field
+    genericSearchKernelReused : Bool
     positiveMeansPayingCandidateFound : Bool
     negativeRequiresTypedFiniteCoverage : Bool
     incompleteNoCandidateStaysUnresolved : Bool
@@ -254,4 +221,4 @@ canonicalTernaryProofSearchDecisionDebtBoundary :
   TernaryProofSearchDecisionDebtBoundary
 canonicalTernaryProofSearchDecisionDebtBoundary =
   ternaryProofSearchDecisionDebtBoundary
-    true true true true true true true false false
+    true true true true true true true true false false
