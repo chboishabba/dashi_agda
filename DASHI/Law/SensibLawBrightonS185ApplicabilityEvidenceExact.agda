@@ -17,6 +17,18 @@ open import Agda.Builtin.String using (String)
 -- s 185(1).  These receipts do not establish objective unfitness or breach.
 ------------------------------------------------------------------------
 
+data BrightonTenancyContinuing24Jan2023 : Set where
+  form18a-fixed-term-contains-24jan2023 : BrightonTenancyContinuing24Jan2023
+
+data BrightonS185Applies24Jan2023 : Set where
+  form18a-general-tenancy-s185-applies : BrightonS185Applies24Jan2023
+
+brightonTenancyContinuing24Jan2023 : BrightonTenancyContinuing24Jan2023
+brightonTenancyContinuing24Jan2023 = form18a-fixed-term-contains-24jan2023
+
+brightonS185Applies24Jan2023 : BrightonS185Applies24Jan2023
+brightonS185Applies24Jan2023 = form18a-general-tenancy-s185-applies
+
 record BrightonS185ApplicabilityEvidence : Set where
   constructor brighton-s185-applicability-evidence
   field
