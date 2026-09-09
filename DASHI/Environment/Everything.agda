@@ -30,5 +30,9 @@ import DASHI.Environment.LESWaterPhotonInteractionExact
 import DASHI.Environment.LESMultiphysicsFidelityEscalationExact
 import DASHI.Environment.LESPhysicalWorldEngineRTXCrossPollinationExact
 
+-- Physically based VFX / multiphysics scene stress tests.
+import DASHI.Environment.LESVFXPhysicalOperationsExact
+import DASHI.Environment.LESGodzillaFrigateMultiphysicsSceneExact
+
 -- Deep-time/climate path-dependence bridge into the LES open research frontier.
 import DASHI.Environment.LESClimateHysteresisRecoveryCrossPollinationExact
