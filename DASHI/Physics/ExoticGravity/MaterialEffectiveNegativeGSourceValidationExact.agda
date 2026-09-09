@@ -11,6 +11,8 @@ import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyCompilationE
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorCompilationExact as Comparator
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorStateBridgeExact as ComparatorState
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryBackgroundClosureExact as Background
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryOrdinaryModelClosureWeldExact as OrdinaryWeld
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact as Ratio
 import DASHI.Physics.ExoticGravity.AntigravityOptimizedAcquisitionPlanExact as Plan
 import DASHI.Physics.ExoticGravity.LiTorrStandardGRComparatorBidiExact as LegacyComparator
 import DASHI.Physics.ExoticGravity.LiTorr1991CombinedFieldSourceEntitlementExact as LT1991
@@ -120,6 +122,56 @@ closedComparatorDoesNotProveNegativeG :
   Background.closedComparatorAutomaticallyProvesMaterialEffectiveNegativeG
     Background.canonicalLaboratoryBackgroundClosureBoundary ≡ false
 closedComparatorDoesNotProveNegativeG = refl
+
+typedComparatorClosureDoesNotCreateOrdinaryBundle :
+  OrdinaryWeld.typedComparatorClosureAloneCreatesOptimizedBundle
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ false
+typedComparatorClosureDoesNotCreateOrdinaryBundle = refl
+
+ordinaryBundleDoesNotCreateTypedBackgroundReceipt :
+  OrdinaryWeld.optimizedBundleAloneCreatesTypedBackgroundReceipt
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ false
+ordinaryBundleDoesNotCreateTypedBackgroundReceipt = refl
+
+ordinaryClosureStillLeavesConstitutiveResidual :
+  OrdinaryWeld.fullOrdinaryClosureStillLeavesConstitutiveResidual
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ true
+ordinaryClosureStillLeavesConstitutiveResidual = refl
+
+ordinaryClosureStillLeavesReproducibility :
+  OrdinaryWeld.fullOrdinaryClosureStillLeavesReproducibility
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ true
+ordinaryClosureStillLeavesReproducibility = refl
+
+ordinaryClosureStillLeavesConstitutiveRatio :
+  OrdinaryWeld.fullOrdinaryClosureStillLeavesConstitutiveRatio
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ true
+ordinaryClosureStillLeavesConstitutiveRatio = refl
+
+etaCStringDoesNotPayTypedRatio :
+  Ratio.etaCStringAlonePaysConstitutiveRatio
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ false
+etaCStringDoesNotPayTypedRatio = refl
+
+ordinaryClosureAloneDoesNotPayTypedRatio :
+  Ratio.ordinaryModelClosureAlonePaysConstitutiveRatio
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ false
+ordinaryClosureAloneDoesNotPayTypedRatio = refl
+
+typedRatioNeedsIndependentReplication :
+  Ratio.independentReplicationRequired
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ true
+typedRatioNeedsIndependentReplication = refl
+
+typedRatioMayCompileExistingNegativeGWeld :
+  Ratio.typedRatioMayCompileExistingNegativeGWeld
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ true
+typedRatioMayCompileExistingNegativeGWeld = refl
+
+compiledRatioDoesNotProveUniversalNegativeG :
+  Ratio.compiledNegativeGWeldProvesUniversalNegativeG
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ false
+compiledRatioDoesNotProveUniversalNegativeG = refl
 
 sourceDependentAdditiveCanStillMimicMultiplicative : Scaling.sourceDependentAdditiveCanMimicMultiplicativeSignature Scaling.canonicalScalingModelDiscriminatorBoundary ≡ true
 sourceDependentAdditiveCanStillMimicMultiplicative = refl
