@@ -11,11 +11,6 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- NAT Q/P COVERAGE RESIDUAL -> ACQUISITION DEMAND
---
--- Consumer-side descriptor for the exact property-family coordinate blocking a
--- Nat classification. It intentionally does not import the #823-only generic
--- BoundAcquisitionDemand/IntrospectiveProofLoop owners until that branch lands
--- on master; the dependent compatibility weld remains explicit below.
 ------------------------------------------------------------------------
 
 data NatCoverageCoordinate : Set where
@@ -62,9 +57,6 @@ record NatCoverageAcquisitionDemand (residual : NatCoverageResidual) : Set where
     acquisitionReference : String
 open NatCoverageAcquisitionDemand public
 
--- Concrete live example: an uninspected P14143 family cannot be paid by a P31
--- fetch, a peer-item fetch, a merely successful shard transport, or the truthy
--- projection of P14143. Coverage is over the native full statement family.
 p14143UninspectedResidual : NatCoverageResidual
 p14143UninspectedResidual =
   nat-coverage-residual
@@ -92,14 +84,14 @@ p14143UninspectedDemand =
     "acquire exactly the P14143 Q/P family required by the live Nat residual"
 
 ------------------------------------------------------------------------
--- Payment is downstream of acquisition. A returned row, successful transport,
--- or complete coverage for another property does not close this residual.
+-- Acquisition firewalls.
 ------------------------------------------------------------------------
 
 data ShardTransportPaysCoverageResidual : Set where
 data OtherPropertyCoveragePaysP14143 : Set where
 data ReturnedRowPaysCoverageResidual : Set where
 data TruthyProjectionPaysNativeFamilyCoverage : Set where
+data DerivedPropertyRelationPaysNativeFamilyCoverage : Set where
 data AcquisitionDemandCreatesMigrationAuthority : Set where
 
 shardTransportDoesNotPayCoverageResidual : ShardTransportPaysCoverageResidual → ⊥
@@ -114,18 +106,21 @@ returnedRowDoesNotPayCoverageResidualByExistence ()
 truthyProjectionDoesNotPayNativeFamilyCoverage : TruthyProjectionPaysNativeFamilyCoverage → ⊥
 truthyProjectionDoesNotPayNativeFamilyCoverage ()
 
+derivedPropertyRelationDoesNotPayNativeFamilyCoverage :
+  DerivedPropertyRelationPaysNativeFamilyCoverage → ⊥
+derivedPropertyRelationDoesNotPayNativeFamilyCoverage ()
+
 acquisitionDemandDoesNotCreateMigrationAuthority : AcquisitionDemandCreatesMigrationAuthority → ⊥
 acquisitionDemandDoesNotCreateMigrationAuthority ()
 
 ------------------------------------------------------------------------
 -- Native family vs native snak semantics.
 --
--- Cross-pollinated from the attached Aristotle archive:
--- * rank/truthy filtering is downstream visibility and can hide normal or
---   deprecated statements, so it cannot establish native family coverage;
--- * value / somevalue / novalue are all native statements. In particular an
---   explicit novalue is family-present and must never be conflated with the
---   property family being absent from the entity claims map.
+-- Aristotle cross-pollination:
+-- * truthy rank filtering is a visibility projection, not native-family coverage;
+-- * value / somevalue / novalue are all native statements;
+-- * qualifier conformance, property scope and property-engine derivability are
+--   separate consumers even after the native Q/P family has been observed.
 ------------------------------------------------------------------------
 
 data PropertyFamilyObservation : Set where
@@ -148,23 +143,31 @@ open NativeSnakSummary public
 data NoValueEqualsFamilyAbsent : Set where
 data SomeValueEqualsConcreteValue : Set where
 
+data CoveragePaymentPaysRankVisibility : Set where
+data CoveragePaymentPaysQualifierConstraints : Set where
+data CoveragePaymentPaysPropertyScope : Set where
+data CoveragePaymentPaysPropertyDerivability : Set where
+
 noValueDoesNotMeanFamilyAbsent : NoValueEqualsFamilyAbsent → ⊥
 noValueDoesNotMeanFamilyAbsent ()
 
 someValueDoesNotMeanConcreteValue : SomeValueEqualsConcreteValue → ⊥
 someValueDoesNotMeanConcreteValue ()
 
+coveragePaymentDoesNotPayRankVisibility : CoveragePaymentPaysRankVisibility → ⊥
+coveragePaymentDoesNotPayRankVisibility ()
+
+coveragePaymentDoesNotPayQualifierConstraints : CoveragePaymentPaysQualifierConstraints → ⊥
+coveragePaymentDoesNotPayQualifierConstraints ()
+
+coveragePaymentDoesNotPayPropertyScope : CoveragePaymentPaysPropertyScope → ⊥
+coveragePaymentDoesNotPayPropertyScope ()
+
+coveragePaymentDoesNotPayPropertyDerivability : CoveragePaymentPaysPropertyDerivability → ⊥
+coveragePaymentDoesNotPayPropertyDerivability ()
+
 ------------------------------------------------------------------------
 -- Exact recomputation receipt.
---
--- Runtime counterpart on SensibLaw #493:
---   live residual -> bound shared acquisition -> QID-local projected entity
---   snapshot -> exact native property-family recomputation.
---
--- The entity snapshot is useful only when the same Q, same P and same revision
--- are retained and the representation is certified complete for that exact
--- query family. Under those conditions both family-present and family-absent
--- are valid coverage outcomes. This pays only the coverage coordinate.
 ------------------------------------------------------------------------
 
 record ExactCoverageRecomputation
@@ -186,6 +189,9 @@ record ExactCoverageRecomputation
     truthyProjectionUsedForCoverage : Bool
     truthyProjectionUsedForCoverageIsFalse :
       truthyProjectionUsedForCoverage ≡ false
+    derivedPropertyRelationUsedForCoverage : Bool
+    derivedPropertyRelationUsedForCoverageIsFalse :
+      derivedPropertyRelationUsedForCoverage ≡ false
     representationCompleteForExactFamily : Bool
     representationCompleteForExactFamilyIsTrue :
       representationCompleteForExactFamily ≡ true
@@ -194,6 +200,14 @@ record ExactCoverageRecomputation
     recomputedCoverageStatus : Coverage.QueryCoverageStatus
     recomputedCoverageIsComplete :
       recomputedCoverageStatus ≡ Coverage.queryCoverageComplete
+    rankVisibilityEvaluated : Bool
+    rankVisibilityEvaluatedIsFalse : rankVisibilityEvaluated ≡ false
+    qualifierConstraintsEvaluated : Bool
+    qualifierConstraintsEvaluatedIsFalse : qualifierConstraintsEvaluated ≡ false
+    propertyScopeEvaluated : Bool
+    propertyScopeEvaluatedIsFalse : propertyScopeEvaluated ≡ false
+    propertyDerivabilityEvaluated : Bool
+    propertyDerivabilityEvaluatedIsFalse : propertyDerivabilityEvaluated ≡ false
     sourceSupportPaid : Bool
     sourceSupportPaidIsFalse : sourceSupportPaid ≡ false
     sourceAuthorityEvaluationRequired : Bool
@@ -214,8 +228,6 @@ coverageCoordinatePaidByExactRecomputation :
   recomputedCoverageStatus receipt ≡ Coverage.queryCoverageComplete
 coverageCoordinatePaidByExactRecomputation = recomputedCoverageIsComplete
 
--- Present and absent are both observations under a complete exact-family view;
--- neither proposition says anything about source support or migration safety.
 record CoverageCoordinatePayment
     (residual : NatCoverageResidual) : Set where
   constructor coverage-coordinate-payment
@@ -231,7 +243,6 @@ open CoverageCoordinatePayment public
 data CoveragePaymentPaysSourceSupport : Set where
 data CoveragePaymentClosesConsumer : Set where
 data CoveragePaymentCreatesMigrationAuthority : Set where
-
 data ReferencePresencePaysSourceSupport : Set where
 
 coveragePaymentDoesNotPaySourceSupport : CoveragePaymentPaysSourceSupport → ⊥
@@ -260,8 +271,13 @@ record NatCoverageAcquisitionBoundary : Set where
     anotherPropertyCanPayTargetPropertyResidual : Bool
     returnedRowEqualsCoveragePayment : Bool
     truthyProjectionEqualsNativeFamilyCoverage : Bool
+    derivedPropertyRelationEqualsNativeFamilyCoverage : Bool
     noValueEqualsFamilyAbsence : Bool
     referencePresenceEqualsSourceSupport : Bool
+    coveragePaymentPaysRankVisibility : Bool
+    coveragePaymentPaysQualifierConstraints : Bool
+    coveragePaymentPaysPropertyScope : Bool
+    coveragePaymentPaysPropertyDerivability : Bool
     demandCreatesMigrationAuthority : Bool
     recomputationStillRequiredAfterAcquisition : Bool
     exactRecomputationMayPayCoverageCoordinate : Bool
@@ -273,4 +289,4 @@ record NatCoverageAcquisitionBoundary : Set where
 canonicalNatCoverageAcquisitionBoundary : NatCoverageAcquisitionBoundary
 canonicalNatCoverageAcquisitionBoundary =
   nat-coverage-acquisition-boundary
-    true true false false false false false false false true true false false false true
+    true true false false false false false false false false false false false false true true false false false true
