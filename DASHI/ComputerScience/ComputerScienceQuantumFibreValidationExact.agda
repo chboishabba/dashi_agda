@@ -13,6 +13,7 @@ import DASHI.ComputerScience.ShorClassicalQuantumFibreComparisonExact
 import DASHI.ComputerScience.ShorOrderClassicalQuantumMachineComparisonExact
 import DASHI.ComputerScience.BalancedTernaryQutritBasisBridgeExact
 import DASHI.ComputerScience.BalancedTernaryC2C3DihedralCodecBridgeExact
+import DASHI.ComputerScience.QutritBasisClassicalCodecFibreExact
 
 import DASHI.Algebra.Quantum.FiniteQuantumRegister
 import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
