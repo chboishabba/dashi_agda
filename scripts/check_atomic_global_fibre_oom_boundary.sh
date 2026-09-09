@@ -11,8 +11,11 @@ POINCARE="DASHI/Physics/YangMills/BalabanPath4PhysicalComponentPoincareExact.agd
 PREP="DASHI/ComputerScience/AgdaProofDebtFibrePreparationExact.agda"
 ORDER="DASHI/Physics/YangMills/BalabanFiniteRationalOrderCoreExact.agda"
 REL="DASHI/Physics/YangMills/BalabanFiniteSumRelationFibreLiftExact.agda"
+BOND="DASHI/Physics/YangMills/BalabanPath4BondHodgeCoercivityExact.agda"
+THREE="DASHI/Physics/YangMills/BalabanP33ThreeComponentCoercivityExact.agda"
+GREEN="DASHI/Physics/YangMills/BalabanPath4SU2ConfiguredGreenNormExact.agda"
 
-for file in "$CORE" "$ALG" "$VAR" "$POINCARE" "$PREP" "$ORDER" "$REL"; do
+for file in "$CORE" "$ALG" "$VAR" "$POINCARE" "$PREP" "$ORDER" "$REL" "$BOND" "$THREE" "$GREEN"; do
   test -f "$file" || { echo "missing boundary file: $file" >&2; exit 2; }
 done
 
@@ -29,7 +32,7 @@ fi
 
 # The repaired physical/global consumers may instantiate pre-proved algebra,
 # but may not invoke reflection-based ring normalization themselves.
-for file in "$VAR" "$POINCARE"; do
+for file in "$VAR" "$POINCARE" "$GREEN"; do
   if grep -E 'Data\.Rational\.Tactic\.RingSolver|ℚRing\.solve|solve-∀' "$file"; then
     echo "physical consumer reopened RingSolver normalization: $file" >&2
     exit 1
@@ -62,6 +65,19 @@ if grep -q 'BalabanPath4DirectionalEnergyContractionExact' "$REL"; then
   echo "finite-sum relation lift depends upward on its physical consumer" >&2
   exit 1
 fi
+
+# Migrated consumers must use the relation observer rather than importing the
+# large directional-energy module solely for its old list helper.
+for file in "$BOND" "$THREE" "$GREEN"; do
+  grep -q 'BalabanFiniteSumRelationFibreLiftExact' "$file"
+  grep -q 'sumRationalMonotoneViaFibre' "$file"
+  if grep -q 'BalabanPath4DirectionalEnergyContractionExact' "$file"; then
+    echo "migrated consumer regressed to heavy directional helper import: $file" >&2
+    exit 1
+  fi
+done
+
+grep -q 'OpaqueAlgebra.scaleThreeSum' "$GREEN"
 
 # Proof-debt ownership is preserved: profiling may refine runLocalAgda but may
 # not reopen external or mathematical routes as local certification work.
