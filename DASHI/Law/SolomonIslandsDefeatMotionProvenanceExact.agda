@@ -145,9 +145,9 @@ data SadeForwardingMakesSadeMessageAustralianSpeech : Set where
 data AustralianFundingUpdateImpliesAustralianDefeatInstruction : Set where
 data SameThreadImpliesSharedIntent : Set where
 
-a oppositionQuoteDoesNotAuthenticateArtifact :
+oppositionQuoteDoesNotAuthenticateArtifact :
   OppositionQuoteAuthenticatesUnderlyingArtifact → ⊥
-a oppositionQuoteDoesNotAuthenticateArtifact ()
+oppositionQuoteDoesNotAuthenticateArtifact ()
 
 sadeForwardDoesNotTransferAuthorship :
   SadeForwardingMakesSadeMessageAustralianSpeech → ⊥
