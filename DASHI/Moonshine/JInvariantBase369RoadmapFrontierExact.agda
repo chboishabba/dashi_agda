@@ -7,8 +7,12 @@ import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANNormOneInvariantExact
 import DASHI.Moonshine.GoldenRatioNormOneReciprocalSquareCrossMultiplyExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANRationalDefectExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANReciprocalSquareConvergenceExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopDefectWeldExact
 import DASHI.Moonshine.GoldenRatioBishopQuadraticFactorisationBidiExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANConjugateLowerBoundExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopPhiConvergenceExact
 import DASHI.Foundations.BishopGoldenRatioCarrierExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
@@ -75,12 +79,12 @@ canonicalRoadmapState = record
   ; fibonacciDenominatorDivergenceExact = true
   ; balancedMacroNormOneInvariantExact = true
   ; denominatorClearedReciprocalSquareExact = true
-  ; unnormalisedRationalReciprocalSquareLiftExact = false
-  ; bishopReciprocalSquareLiftExact = false
+  ; unnormalisedRationalReciprocalSquareLiftExact = true
+  ; bishopReciprocalSquareLiftExact = true
   ; bishopPhiPsiFactorisationExact = true
-  ; conjugateFactorLowerBoundExact = false
+  ; conjugateFactorLowerBoundExact = true
   ; reciprocalSquareBishopConvergenceExact = true
-  ; fibonacciRatiosConvergeToBishopPhi = false
+  ; fibonacciRatiosConvergeToBishopPhi = true
 
   ; jSeamWordLkTExact = true
   ; jForwardScaleLawExact = true
@@ -124,5 +128,8 @@ data FirstLiveRoadmapResidual : Set where
 firstJMonsterResidual : FirstLiveRoadmapResidual
 firstJMonsterResidual = missingConcretePixelBoxToVisibleScale
 
+-- The mathematical/source-static phi route is now closed.  The remaining
+-- tranche-level residual is independent kernel certification of the newly
+-- composed Agda owners.
 firstPhiResidual : FirstLiveRoadmapResidual
-firstPhiResidual = missingUnnormalisedRationalReciprocalSquareLift
+firstPhiResidual = missingKernelCertification
