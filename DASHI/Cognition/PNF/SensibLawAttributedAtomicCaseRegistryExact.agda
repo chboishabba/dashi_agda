@@ -15,20 +15,13 @@ import DASHI.Cognition.PNF.SensibLawLegalClaimProvenanceLineageExact as Provenan
 -- ATTRIBUTED ATOMIC CASE REGISTRY
 --
 -- An atomic legal test has two independent attribution fibres:
---   1. the source defining/owning the legal test proposition;
---   2. the provenance of the concrete case outcome evidence.
+--   1. provenance of the repository proposition defining the legal atom;
+--   2. provenance of the concrete case outcome evidence.
 --
--- Registration/coherence must preserve both.  A gate is not a provenance tag.
+-- The first may be a DASHI reconstruction even when its source receipt is a
+-- primary judicial/statutory source. Registration/coherence preserves both.
+-- A gate is never itself a provenance tag.
 ------------------------------------------------------------------------
-
-definitionLineage :
-  (registry : Coherence.AtomicCaseRegistry) →
-  ∀ {p} →
-  (entry : Coherence.Entry registry p) →
-  Provenance.ClaimLineageReceipt p
-definitionLineage registry entry =
-  Provenance.lineageFromPropositionSourceReceipt
-    (Atomic.sourceReceipt (Coherence.canonicalTestFor registry entry))
 
 data AtomicEntryOutcomeLineage
     (registry : Coherence.AtomicCaseRegistry)
@@ -66,18 +59,33 @@ record AttributedAtomicCaseRegistry
     (registry : Coherence.AtomicCaseRegistry) : Set₁ where
   constructor attributed-atomic-case-registry
   field
+    definitionLineageFor :
+      ∀ {p} →
+      (entry : Coherence.Entry registry p) →
+      Provenance.ClaimLineageReceipt p
+
     outcomeLineageFor :
       ∀ {p} →
       (entry : Coherence.Entry registry p) →
       AtomicEntryOutcomeLineage registry entry
+
     attributionReference : String
 
 open AttributedAtomicCaseRegistry public
 
 ------------------------------------------------------------------------
 -- Lineage survives a duplicate registered test because duplication may change
--- only the test object, never the canonical registry entry or its attribution.
+-- only the test object, never the canonical entry or its attribution receipts.
 ------------------------------------------------------------------------
+
+registeredDuplicateRetainsDefinitionLineage :
+  ∀ {registry p} →
+  (attributed : AttributedAtomicCaseRegistry registry) →
+  (entry : Coherence.Entry registry p) →
+  Coherence.RegisteredAtomicTest registry entry →
+  Provenance.ClaimLineageReceipt p
+registeredDuplicateRetainsDefinitionLineage attributed entry _ =
+  definitionLineageFor attributed entry
 
 registeredDuplicateRetainsEntryOutcomeLineage :
   ∀ {registry p} →
@@ -98,6 +106,7 @@ data DefinitionSourceMayReplaceOutcomeEvidence : Set where
 data OutcomeEvidenceMayRedefineLegalTest : Set where
 data UnresolvedGateMayInventOutcomeSource : Set where
 data RepositoryInferenceMayBePromotedByRegistration : Set where
+data PrimarySourceReceiptForcesDefinitionExternalClaim : Set where
 
 sameGateDoesNotIdentifyProvenanceStage : SameGateMeansSameProvenanceStage → ⊥
 sameGateDoesNotIdentifyProvenanceStage ()
@@ -118,10 +127,15 @@ registrationDoesNotPromoteRepositoryInference :
   RepositoryInferenceMayBePromotedByRegistration → ⊥
 registrationDoesNotPromoteRepositoryInference ()
 
+primarySourceReceiptDoesNotForceDefinitionExternalClaim :
+  PrimarySourceReceiptForcesDefinitionExternalClaim → ⊥
+primarySourceReceiptDoesNotForceDefinitionExternalClaim ()
+
 record AttributedAtomicCaseRegistryBoundary : Set where
   constructor attributed-atomic-case-registry-boundary
   field
     definitionAndOutcomeAttributionSeparated : Bool
+    definitionStageIsExplicit : Bool
     everyRegisteredOutcomeCarriesLineageOrExplicitUnresolved : Bool
     sameGateIdentifiesProvenance : Bool
     registryCreatesAttribution : Bool
@@ -130,4 +144,4 @@ record AttributedAtomicCaseRegistryBoundary : Set where
 canonicalAttributedAtomicCaseRegistryBoundary :
   AttributedAtomicCaseRegistryBoundary
 canonicalAttributedAtomicCaseRegistryBoundary =
-  attributed-atomic-case-registry-boundary true true false false false
+  attributed-atomic-case-registry-boundary true true true false false false
