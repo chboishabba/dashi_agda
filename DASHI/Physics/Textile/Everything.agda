@@ -9,5 +9,7 @@ open import DASHI.Physics.Textile.FiniteTextileEquilibriumNetworkExact public
 open import DASHI.Physics.Textile.BendingTorsionTextileLawExact public
 open import DASHI.Physics.Textile.KineticSlipEvolutionExact public
 open import DASHI.Physics.Textile.DiscreteTextileFracturePropagationExact public
+open import DASHI.Physics.Textile.TextileEmpiricalCalibrationExact public
+open import DASHI.Physics.Textile.EffectiveFabricResponseExact public
 open import DASHI.Physics.Textile.JacquardPhysicalFibreBridgeExact public
 open import DASHI.Physics.Textile.StitchPhysicalFibreBridgeExact public
