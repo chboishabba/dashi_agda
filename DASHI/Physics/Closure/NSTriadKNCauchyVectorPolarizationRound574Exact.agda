@@ -3,35 +3,20 @@ module DASHI.Physics.Closure.NSTriadKNCauchyVectorPolarizationRound574Exact wher
 ------------------------------------------------------------------------
 -- ROUND574 / R446 CAUCHY PSD -> MIXED VECTOR FULL-SQUARE POLARIZATION
 --
--- R573 proved the generic finite identity
+-- A positive-rate cell stores two vectors G,D at the same rate.  R446 applied
+-- to G-D gives a nonnegative exact Cauchy quadratic.  R573 then yields
 --
---   2 Full(M) <= Full(QG) + Full(QD)
+--   2 B_K(G,D) <= Q_K(G) + Q_K(D)
 --
--- once the difference quadratic is nonnegative.  Here the difference quadratic
--- is supplied by the already-owned exact R446 rational Cauchy PSD theorem.
---
--- A cell stores one positive rate and TWO vectors G,D on that same rate.  The
--- mixed form is
---
---   M(a,b) = K(a,b) Re<G_a,D_b>.
---
--- Applying R446 to the literal difference family G-D yields
---
---   0 <= Q_K(G-D)
---
--- and therefore, exactly and without absolute values,
---
---   2 B_K(G,D) <= Q_K(G) + Q_K(D).
---
--- This owner deliberately stops before claiming that Q_K(G) or Q_K(D) has a
--- cutoff-uniform spacetime bound.  The next introspective step must audit those
--- positive majorants against the existing energy/critical consumers.
+-- on the complete finite square, without absolute values or heat/Laplace.
+-- This is finite algebra only: whether Q_K(G),Q_K(D) are cheaper analytic
+-- objects is deliberately left for the next BIDI adequacy audit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; Positive; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _+_; _*_; _-_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
@@ -64,12 +49,9 @@ kernel574 a b = R443.cauchyEntry (rate574 a) (rate574 b)
 
 leftPair574 rightPair574 mixedPair574 differencePair574 :
   CauchyVectorPairCell574 → CauchyVectorPairCell574 → ℚ
-leftPair574 a b =
-  kernel574 a b * R179.realHermitianCross (left574 a) (left574 b)
-rightPair574 a b =
-  kernel574 a b * R179.realHermitianCross (right574 a) (right574 b)
-mixedPair574 a b =
-  kernel574 a b * R179.realHermitianCross (left574 a) (right574 b)
+leftPair574 a b = kernel574 a b * R179.realHermitianCross (left574 a) (left574 b)
+rightPair574 a b = kernel574 a b * R179.realHermitianCross (right574 a) (right574 b)
+mixedPair574 a b = kernel574 a b * R179.realHermitianCross (left574 a) (right574 b)
 differencePair574 a b =
   kernel574 a b *
     R179.realHermitianCross
@@ -78,22 +60,17 @@ differencePair574 a b =
 
 crossSubtractBoth574 :
   (a b c d : C3.Complex3 F) →
-  R179.realHermitianCross
-    (C3.complex3Subtract a b) (C3.complex3Subtract c d)
-  ≡ R179.realHermitianCross a c
-    + R179.realHermitianCross b d
-    - R179.realHermitianCross a d
-    - R179.realHermitianCross b c
+  R179.realHermitianCross (C3.complex3Subtract a b) (C3.complex3Subtract c d)
+  ≡ R179.realHermitianCross a c + R179.realHermitianCross b d
+      - R179.realHermitianCross a d - R179.realHermitianCross b c
 crossSubtractBoth574
     (C3.complex3 (C3.complex ar ai) (C3.complex br bi) (C3.complex cr ci))
     (C3.complex3 (C3.complex dr di) (C3.complex er ei) (C3.complex fr fi))
     (C3.complex3 (C3.complex gr gi) (C3.complex hr hi) (C3.complex ir ii))
     (C3.complex3 (C3.complex jr ji) (C3.complex kr ki) (C3.complex lr li)) =
   solve
-    ( ar ∷ ai ∷ br ∷ bi ∷ cr ∷ ci
-    ∷ dr ∷ di ∷ er ∷ ei ∷ fr ∷ fi
-    ∷ gr ∷ gi ∷ hr ∷ hi ∷ ir ∷ ii
-    ∷ jr ∷ ji ∷ kr ∷ ki ∷ lr ∷ li ∷ [])
+    (ar ∷ ai ∷ br ∷ bi ∷ cr ∷ ci ∷ dr ∷ di ∷ er ∷ ei ∷ fr ∷ fi
+    ∷ gr ∷ gi ∷ hr ∷ hi ∷ ir ∷ ii ∷ jr ∷ ji ∷ kr ∷ ki ∷ lr ∷ li ∷ [])
 
 differencePairIsPolarized574 :
   (a b : CauchyVectorPairCell574) →
@@ -103,11 +80,41 @@ differencePairIsPolarized574 a b
   rewrite crossSubtractBoth574
     (left574 a) (right574 a) (left574 b) (right574 b) =
   solve
-    ( kernel574 a b
+    (kernel574 a b
     ∷ R179.realHermitianCross (left574 a) (left574 b)
     ∷ R179.realHermitianCross (right574 a) (right574 b)
     ∷ R179.realHermitianCross (left574 a) (right574 b)
     ∷ R179.realHermitianCross (right574 a) (left574 b) ∷ [])
+
+rowPolarizedPointwise574 :
+  (x : CauchyVectorPairCell574) (xs : List CauchyVectorPairCell574) →
+  R539.rowSum differencePair574 x xs
+  ≡ R539.rowSum
+      (R573.polarizedPair573 leftPair574 rightPair574 mixedPair574) x xs
+rowPolarizedPointwise574 x [] = refl
+rowPolarizedPointwise574 x (y ∷ ys) =
+  cong₂ _+_ (differencePairIsPolarized574 x y) (rowPolarizedPointwise574 x ys)
+
+columnPolarizedPointwise574 :
+  (xs : List CauchyVectorPairCell574) (x : CauchyVectorPairCell574) →
+  R539.columnSum differencePair574 xs x
+  ≡ R539.columnSum
+      (R573.polarizedPair573 leftPair574 rightPair574 mixedPair574) xs x
+columnPolarizedPointwise574 [] x = refl
+columnPolarizedPointwise574 (y ∷ ys) x =
+  cong₂ _+_ (differencePairIsPolarized574 y x) (columnPolarizedPointwise574 ys x)
+
+differencePairIsPolarizedFull574 :
+  (items : List CauchyVectorPairCell574) →
+  R543.fullSquareSum differencePair574 items
+  ≡ R543.fullSquareSum
+      (R573.polarizedPair573 leftPair574 rightPair574 mixedPair574) items
+differencePairIsPolarizedFull574 [] = refl
+differencePairIsPolarizedFull574 (head ∷ rest)
+  rewrite differencePairIsPolarized574 head head
+        | rowPolarizedPointwise574 head rest
+        | columnPolarizedPointwise574 rest head
+        | differencePairIsPolarizedFull574 rest = refl
 
 pairSymmetric574 :
   (values : CauchyVectorPairCell574 → C3.Complex3 F) →
@@ -128,12 +135,10 @@ toDifferenceCell574 cell =
 
 differenceCells574 : List CauchyVectorPairCell574 → List R446.PositiveRateComplex3Cell
 differenceCells574 [] = []
-differenceCells574 (cell ∷ rest) =
-  toDifferenceCell574 cell ∷ differenceCells574 rest
+differenceCells574 (cell ∷ rest) = toDifferenceCell574 cell ∷ differenceCells574 rest
 
 mappedRow574 :
-  (head : CauchyVectorPairCell574) →
-  (rest : List CauchyVectorPairCell574) →
+  (head : CauchyVectorPairCell574) (rest : List CauchyVectorPairCell574) →
   R539.rowSum differencePair574 head rest
   ≡ R446.hermitianRow (toDifferenceCell574 head) (differenceCells574 rest)
 mappedRow574 head [] = refl
@@ -141,19 +146,15 @@ mappedRow574 head (cell ∷ rest) =
   cong₂ _+_ refl (mappedRow574 head rest)
 
 mappedColumn574 :
-  (rest : List CauchyVectorPairCell574) →
-  (head : CauchyVectorPairCell574) →
+  (rest : List CauchyVectorPairCell574) (head : CauchyVectorPairCell574) →
   R539.columnSum differencePair574 rest head
   ≡ R446.hermitianRow (toDifferenceCell574 head) (differenceCells574 rest)
 mappedColumn574 [] head = refl
 mappedColumn574 (cell ∷ rest) head =
-  trans
-    (cong₂ _+_
-      (pairSymmetric574
-        (λ x → C3.complex3Subtract (left574 x) (right574 x))
-        cell head)
-      (mappedColumn574 rest head))
-    refl
+  cong₂ _+_
+    (pairSymmetric574
+      (λ x → C3.complex3Subtract (left574 x) (right574 x)) cell head)
+    (mappedColumn574 rest head)
 
 fullDifferenceIsR446574 :
   (cells : List CauchyVectorPairCell574) →
@@ -165,70 +166,32 @@ fullDifferenceIsR446574 (head ∷ rest)
         | mappedColumn574 rest head
         | fullDifferenceIsR446574 rest =
   solve
-    ( differencePair574 head head
+    (differencePair574 head head
     ∷ R446.hermitianRow (toDifferenceCell574 head) (differenceCells574 rest)
     ∷ R446.hermitianCauchyForm (differenceCells574 rest) ∷ [])
 
 differenceFullNonnegative574 :
   (cells : List CauchyVectorPairCell574) →
-  let full = R543.fullSquareSum differencePair574 cells in
-  0 Data.Rational.Base.ℚ ≤ full
+  0ℚ ≤ R543.fullSquareSum differencePair574 cells
 differenceFullNonnegative574 cells =
-  subst
-    (0 Data.Rational.Base.ℚ ≤_)
-    (sym (fullDifferenceIsR446574 cells))
+  subst (0ℚ ≤_) (sym (fullDifferenceIsR446574 cells))
     (R446.hermitianCauchyFormNonnegative (differenceCells574 cells))
+
+polarizedFullNonnegative574 :
+  (cells : List CauchyVectorPairCell574) →
+  0ℚ ≤ R543.fullSquareSum
+    (R573.polarizedPair573 leftPair574 rightPair574 mixedPair574) cells
+polarizedFullNonnegative574 cells =
+  subst (0ℚ ≤_) (differencePairIsPolarizedFull574 cells)
+    (differenceFullNonnegative574 cells)
 
 mixedCauchyPolarizationUpper574 :
   (cells : List CauchyVectorPairCell574) →
   R573.two573 * R543.fullSquareSum mixedPair574 cells
-  ≤ R543.fullSquareSum leftPair574 cells
-    + R543.fullSquareSum rightPair574 cells
+  ≤ R543.fullSquareSum leftPair574 cells + R543.fullSquareSum rightPair574 cells
 mixedCauchyPolarizationUpper574 cells =
-  let
-    polarizedNN :
-      0 Data.Rational.Base.ℚ ≤
-      R543.fullSquareSum
-        (R573.polarizedPair573 leftPair574 rightPair574 mixedPair574) cells
-    polarizedNN =
-      subst
-        (0 Data.Rational.Base.ℚ ≤_)
-        (differencePairIsPolarizedFull cells)
-        (differenceFullNonnegative574 cells)
-
-    differencePairIsPolarizedFull :
-      (items : List CauchyVectorPairCell574) →
-      R543.fullSquareSum differencePair574 items
-      ≡ R543.fullSquareSum
-        (R573.polarizedPair573 leftPair574 rightPair574 mixedPair574) items
-    differencePairIsPolarizedFull [] = refl
-    differencePairIsPolarizedFull (head ∷ rest)
-      rewrite differencePairIsPolarized574 head head
-            | rowPointwise head rest
-            | columnPointwise rest head
-            | differencePairIsPolarizedFull rest = refl
-      where
-      rowPointwise :
-        (x : CauchyVectorPairCell574) →
-        (xs : List CauchyVectorPairCell574) →
-        R539.rowSum differencePair574 x xs
-        ≡ R539.rowSum
-          (R573.polarizedPair573 leftPair574 rightPair574 mixedPair574) x xs
-      rowPointwise x [] = refl
-      rowPointwise x (y ∷ ys) =
-        cong₂ _+_ (differencePairIsPolarized574 x y) (rowPointwise x ys)
-
-      columnPointwise :
-        (xs : List CauchyVectorPairCell574) →
-        (x : CauchyVectorPairCell574) →
-        R539.columnSum differencePair574 xs x
-        ≡ R539.columnSum
-          (R573.polarizedPair573 leftPair574 rightPair574 mixedPair574) xs x
-      columnPointwise [] x = refl
-      columnPointwise (y ∷ ys) x =
-        cong₂ _+_ (differencePairIsPolarized574 y x) (columnPointwise ys x)
-  in
-  R573.polarizationUpper573 leftPair574 rightPair574 mixedPair574 cells polarizedNN
+  R573.polarizationUpper573 leftPair574 rightPair574 mixedPair574 cells
+    (polarizedFullNonnegative574 cells)
 
 round574R446DifferencePSDReused : Bool
 round574R446DifferencePSDReused = true
