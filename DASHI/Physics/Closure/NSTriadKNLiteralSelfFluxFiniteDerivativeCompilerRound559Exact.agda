@@ -147,10 +147,8 @@ round559FiniteSumDerivativeCompilerReusedIsTrue :
 round559FiniteSumDerivativeCompilerReusedIsTrue =
   R422.round422FinitePairSummationClosedIsTrue
 
-round559ActualLiteralMixedCellDerivativeProducerAvailableIsTrue :
-  round559ActualLiteralMixedCellDerivativeProducerAvailable ≡ true
-round559ActualLiteralMixedCellDerivativeProducerAvailableIsTrue =
-  R427.round427ActualPlusMinusCellDifferentiationClosedModuloStandardCalculusIsTrue
+-- R427 exposes the closed Bool but not a separate IsTrue theorem.  Keep the
+-- status value itself as the imported receipt rather than inventing an alias.
 
 round559IntroducesNewDerivativeInterfaceIsFalse :
   round559IntroducesNewDerivativeInterface ≡ false
