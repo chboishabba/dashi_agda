@@ -29,10 +29,7 @@ import DASHI.Biology.TernaryPhaseQuotientJCoarseBridgeExact as Coarse
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as Phase
 import DASHI.Moonshine.GoldenRatioFibonacci369SheetVoxelBridgeExact as Fib
-
-------------------------------------------------------------------------
--- 1. Canonical trit codec between the two already-owned ternary carriers.
-------------------------------------------------------------------------
+import DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact as Orbit
 
 kernelToBase : Triadic.KernelTrit -> Base.TriTruth
 kernelToBase Triadic.negativeTrit = Base.tri-low
@@ -72,10 +69,6 @@ nineAfterPhase :
 nineAfterPhase (left , right)
   rewrite kernelAfterBase left | kernelAfterBase right = refl
 
-------------------------------------------------------------------------
--- 2. The Fibonacci 9 comparison sheet is literally an ordinary jCoarse point.
-------------------------------------------------------------------------
-
 fibComparisonPhase : Fib.DefectLine3 -> Phase.PhaseQuotient9
 fibComparisonPhase t = nineToPhase (Fib.fibComparison t)
 
@@ -100,12 +93,6 @@ fibPositiveJCoarse :
   ≡ Harmonic.ordinaryChannel
       (Harmonic.balancedPair Harmonic.positiveTrit Harmonic.negativeTrit)
 fibPositiveJCoarse = refl
-
-------------------------------------------------------------------------
--- 3. Structured absolute j carrier and its local 27 observer.
---
--- FineFrequency is already codec-equivalent to a complete 9 -> 3 field.
-------------------------------------------------------------------------
 
 StructuredJAbsolute : Set
 StructuredJAbsolute = Phase.PhaseQuotient9 × Harmonic.FineFrequency
@@ -137,11 +124,6 @@ localVoxelAfterSection (coarse , value)
   rewrite Fine.decodeAfterEncodePhaseFinePointwise
     (constantPhaseFineField value) coarse = refl
 
-------------------------------------------------------------------------
--- 4. Exact conversion between the local phase voxel and the existing
--- Fibonacci/Base369 27-voxel carrier.
-------------------------------------------------------------------------
-
 phaseLocalToFibVoxel : LocalPhaseVoxel27 -> Fib.FibVoxel27
 phaseLocalToFibVoxel ((a , b) , c) =
   baseToKernel a , baseToKernel b , baseToKernel c
@@ -162,10 +144,6 @@ phaseAfterFibVoxel :
 phaseAfterFibVoxel (a , b , c)
   rewrite baseAfterKernel a | baseAfterKernel b | baseAfterKernel c = refl
 
-------------------------------------------------------------------------
--- 5. Fibonacci special section of the full jCoarse/jFine carrier.
-------------------------------------------------------------------------
-
 fibFineField : Fib.DefectLine3 -> Fine.PhaseFineField
 fibFineField t = constantPhaseFineField (kernelToBase t)
 
@@ -181,10 +159,6 @@ fibStructuredProjectsToFibVoxel :
 fibStructuredProjectsToFibVoxel Triadic.negativeTrit = refl
 fibStructuredProjectsToFibVoxel Triadic.zeroTrit = refl
 fibStructuredProjectsToFibVoxel Triadic.positiveTrit = refl
-
-------------------------------------------------------------------------
--- 6. Scale ownership and information boundary.
-------------------------------------------------------------------------
 
 jCoarseIsNine : Scale.jCoarseFrequency ≡ 9
 jCoarseIsNine = refl
@@ -205,14 +179,7 @@ record JCoarseFineSeamRecognizer : Set₁ where
     recognisedScale : StructuredJAbsolute -> Nat
     scaleLaw :
       (state : StructuredJAbsolute) ->
-      recognisedScale state
-      ≡
-      DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact.orbitNorm
-        (recogniseIndex state)
-
-------------------------------------------------------------------------
--- 7. Frontier.
-------------------------------------------------------------------------
+      recognisedScale state ≡ Orbit.orbitNorm (recogniseIndex state)
 
 data JCoarseFineVoxelResidual : Set where
   missingRenderedSeamToStructuredJAbsolute : JCoarseFineVoxelResidual
