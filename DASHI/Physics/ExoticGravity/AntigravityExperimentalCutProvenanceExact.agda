@@ -22,7 +22,9 @@ record BundleExecutionProvenance : Set where
     rawDataCarrier : String
     rawDataHash : String
     dataRevision : String
+    instrumentConfigurationCarrier : String
     calibrationCarrier : String
+    calibrationRevision : String
     analysisImplementationCarrier : String
     analysisRevision : String
     exactResultLocator : String
@@ -76,6 +78,9 @@ data ExperimentalCutProvenanceResidual : Set where
   missingPhaseProbeExecutionProvenance : ExperimentalCutProvenanceResidual
   missingOrdinaryModelExecutionProvenance : ExperimentalCutProvenanceResidual
   missingScalingReplicationExecutionProvenance : ExperimentalCutProvenanceResidual
+  missingInstrumentConfiguration : ExperimentalCutProvenanceResidual
+  missingCalibrationCarrier : ExperimentalCutProvenanceResidual
+  missingCalibrationRevision : ExperimentalCutProvenanceResidual
   missingSameApparatusExecutionBinding : ExperimentalCutProvenanceResidual
   missingAnomalyCutIdentity : ExperimentalCutProvenanceResidual
 
@@ -86,6 +91,9 @@ producerForExperimentalCutProvenanceResidual missingSourceExecutionProvenance = 
 producerForExperimentalCutProvenanceResidual missingPhaseProbeExecutionProvenance = Search.attributionProducer
 producerForExperimentalCutProvenanceResidual missingOrdinaryModelExecutionProvenance = Search.attributionProducer
 producerForExperimentalCutProvenanceResidual missingScalingReplicationExecutionProvenance = Search.attributionProducer
+producerForExperimentalCutProvenanceResidual missingInstrumentConfiguration = Search.empiricalEvidenceProducer
+producerForExperimentalCutProvenanceResidual missingCalibrationCarrier = Search.empiricalEvidenceProducer
+producerForExperimentalCutProvenanceResidual missingCalibrationRevision = Search.temporalProducer
 producerForExperimentalCutProvenanceResidual missingSameApparatusExecutionBinding = Search.identityProducer
 producerForExperimentalCutProvenanceResidual missingAnomalyCutIdentity = Search.identityProducer
 
@@ -104,6 +112,8 @@ record ExperimentalCutProvenanceBoundary : Set where
   field
     bundleStateWitnessAloneEqualsExecutionProvenance : Bool
     eachBundleNeedsRunDataHashRevision : Bool
+    executionNeedsInstrumentConfiguration : Bool
+    calibrationCarrierEqualsCalibrationRevision : Bool
     sourceBundleNeedsExactDataToBundleDerivation : Bool
     allBundleRunsMustBindSameApparatus : Bool
     baseComparativeAnomalyAutomaticallyCarriesTheseReceipts : Bool
@@ -111,4 +121,4 @@ record ExperimentalCutProvenanceBoundary : Set where
 
 canonicalExperimentalCutProvenanceBoundary : ExperimentalCutProvenanceBoundary
 canonicalExperimentalCutProvenanceBoundary =
-  experimental-cut-provenance-boundary false true true true false false
+  experimental-cut-provenance-boundary false true true false true true false false
