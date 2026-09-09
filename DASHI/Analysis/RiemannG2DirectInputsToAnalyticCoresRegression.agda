@@ -8,24 +8,28 @@ import DASHI.Analysis.RiemannG2DirectInputsToAnalyticCoresExact as Direct
 private
   boundary = Direct.canonicalDirectInputsToAnalyticCoresBoundary
 
-paymentDetourPruned :
-  Direct.historicalPaymentDetourRequiredForSearch boundary ≡ false
-paymentDetourPruned = refl
+historicalRouteNotIndependent :
+  Direct.historicalDirectRouteIsIndependentTerminalAPI boundary ≡ false
+historicalRouteNotIndependent = refl
 
-chosenOffCompilesCore :
-  Direct.chosenCutoffOffRouteCompilesCurrentOffCore boundary ≡ true
-chosenOffCompilesCore = refl
+offFactorsDefinitionally :
+  Direct.directOffPaymentDefinitionallyFactorsThroughCore boundary ≡ true
+offFactorsDefinitionally = refl
 
-freshGammaCompilesCore :
-  Direct.freshGammaRouteCompilesCurrentGammaCore boundary ≡ true
-freshGammaCompilesCore = refl
+gammaFactorsDefinitionally :
+  Direct.directGammaPaymentDefinitionallyFactorsThroughCore boundary ≡ true
+gammaFactorsDefinitionally = refl
 
-representationNotPromoted :
-  Direct.representationReceiptsPromotedToAnalysis boundary ≡ false
-representationNotPromoted = refl
+certifiedUpperCompilesCore :
+  Direct.certifiedFiniteUpperRouteCompilesOffAnalyticCore boundary ≡ true
+certifiedUpperCompilesCore = refl
+
+representationNotAnalysis :
+  Direct.representationReceiptsCountAsFreshAnalysis boundary ≡ false
+representationNotAnalysis = refl
 
 coresNotFabricated :
-  Direct.analyticCoresInhabitedWithoutRouteInputs boundary ≡ false
+  Direct.analyticCoreInhabitanceFabricatedHere boundary ≡ false
 coresNotFabricated = refl
 
 rhStillOpen : Direct.rhDerived boundary ≡ false
