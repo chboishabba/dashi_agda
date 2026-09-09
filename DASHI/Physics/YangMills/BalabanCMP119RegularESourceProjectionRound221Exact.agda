@@ -44,10 +44,10 @@ record CMP119RegularESourceProjection
 open CMP119RegularESourceProjection public
 
 selectedRegularE :
-  ∀ {trajectory split inputs} →
-  CMP119RegularESourceProjection
-    {trajectory = trajectory} {split = split} inputs →
-  Nat → RegularTerm _
+  ∀ {trajectory split inputs}
+    (projection : CMP119RegularESourceProjection
+      {trajectory = trajectory} {split = split} inputs) →
+  Nat → RegularTerm projection
 selectedRegularE {inputs = inputs} projection scale =
   regularEOfDensity projection scale (Beta.densityAt inputs scale)
 
