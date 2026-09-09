@@ -15,6 +15,28 @@ import DASHI.ComputerScience.GodelTuringNamedLimitsSourceStatusAtlasExact as Atl
 -- and remains a separate local-certification coordinate.
 ------------------------------------------------------------------------
 
+sourceTheoremNeedsAlignment : Debt.ProofDebtRoutingReceipt
+sourceTheoremNeedsAlignment =
+  Debt.proof-debt-routing-receipt
+    Debt.deductiveTheorem
+    Debt.sourceEstablished
+    Debt.transcribedUnaligned
+    Debt.proofDeferred
+    Debt.sourceOnly
+    Debt.transcriptionDebt
+    refl
+
+sourceMetadataAndAlignmentPending : Debt.ProofDebtRoutingReceipt
+sourceMetadataAndAlignmentPending =
+  Debt.proof-debt-routing-receipt
+    Debt.deductiveTheorem
+    Debt.sourceEstablished
+    Debt.notTranscribed
+    Debt.proofDeferred
+    Debt.sourceOnly
+    Debt.transcriptionDebt
+    refl
+
 namedLimitRoute : Atlas.NamedLimitProblem → Debt.ProofDebtRoutingReceipt
 namedLimitRoute Atlas.godelNumbering =
   Debt.proof-debt-routing-receipt
@@ -38,28 +60,6 @@ namedLimitRoute Atlas.turingHaltingUndecidability = sourceTheoremNeedsAlignment
 namedLimitRoute Atlas.kleeneRecursionFixedPoint = sourceTheoremNeedsAlignment
 namedLimitRoute Atlas.riceTheorem = sourceTheoremNeedsAlignment
 namedLimitRoute Atlas.busyBeaverNoncomputability = sourceTheoremNeedsAlignment
-
-sourceTheoremNeedsAlignment : Debt.ProofDebtRoutingReceipt
-sourceTheoremNeedsAlignment =
-  Debt.proof-debt-routing-receipt
-    Debt.deductiveTheorem
-    Debt.sourceEstablished
-    Debt.transcribedUnaligned
-    Debt.proofDeferred
-    Debt.sourceOnly
-    Debt.transcriptionDebt
-    refl
-
-sourceMetadataAndAlignmentPending : Debt.ProofDebtRoutingReceipt
-sourceMetadataAndAlignmentPending =
-  Debt.proof-debt-routing-receipt
-    Debt.deductiveTheorem
-    Debt.sourceEstablished
-    Debt.notTranscribed
-    Debt.proofDeferred
-    Debt.sourceOnly
-    Debt.transcriptionDebt
-    refl
 
 ------------------------------------------------------------------------
 -- Exact current regressions.
