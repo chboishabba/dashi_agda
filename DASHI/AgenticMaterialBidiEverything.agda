@@ -30,6 +30,7 @@ import DASHI.Biology.OpenEndedAgenticRepertoireEvolutionExact
 import DASHI.Biology.OpenEndedEvolutionHistoricalEvidenceCrossPollinationExact
 import DASHI.Biology.MultiscaleCausalProvenanceProofSearchRouterExact
 import DASHI.Biology.CausalIdentificationFamiliesExact
+import DASHI.Biology.CausalEffectEstimandExact
 
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.DeclaredRealisedInteractionTopologyExact
