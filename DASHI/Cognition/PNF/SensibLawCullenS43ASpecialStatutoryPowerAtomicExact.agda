@@ -19,8 +19,9 @@ import DASHI.Cognition.PNF.SensibLawRecentDutyCaseSourceAtlasExact as CullenSour
 ------------------------------------------------------------------------
 -- CIVIL LIABILITY ACT 2002 (NSW) s 43A x CULLEN
 --
--- Statute defines the applicability/standard atoms.  Cullen supplies separate
--- case-outcome evidence.  Procedural abandonment remains another proposition.
+-- Statute defines the applicability/standard atoms. Edelman J's separate
+-- concurrence supplies case-outcome/procedural evidence. Source-container form,
+-- proposition kind, and proposition authority role remain distinct.
 ------------------------------------------------------------------------
 
 claSource : Source.AttributedSource
@@ -113,7 +114,7 @@ s43AStandardSource : SourceRule.PropositionSourceReceipt s43AUnreasonablenessSta
 s43AStandardSource = s43AReceipt s43AUnreasonablenessStandard "s 43A(3)" "NSW-CLA-s43A-3"
 
 ------------------------------------------------------------------------
--- Cullen primary outcome evidence: Edelman J [64] and fn 103.
+-- Edelman J [64] / fn 103 source material.
 ------------------------------------------------------------------------
 
 edelman64Locator : String
@@ -144,9 +145,12 @@ cullenAuthority = Edge.source-identity
   "[2026] HCA 19, Edelman J [64] fn 103"
   Edge.bindingPrecedent
 
-cullenFactRole : String → SourceRole.SourceFormRoleReceipt
-cullenFactRole ref = SourceRole.source-form-role-receipt
-  cullenAuthority Ontology.caseLaw Algebra.adjudicatedFactRole ref true true
+-- Both propositions occur in Edelman J's separate concurring reasons. Their
+-- proposition KIND remains factual/otherLegal above; their source ROLE is
+-- concurrence, not adjudicated-fact or joint-ratio magic.
+cullenConcurrenceRole : String → SourceRole.SourceFormRoleReceipt
+cullenConcurrenceRole ref = SourceRole.source-form-role-receipt
+  cullenAuthority Ontology.caseLaw Algebra.concurrenceRole ref true true
 
 cullenLegalSourceRef : Algebra.LegalSourceRef
 cullenLegalSourceRef = Algebra.legal-source-ref
@@ -161,7 +165,7 @@ cullenEvidenceReceipt :
   SourceRule.PropositionSourceReceipt p
 cullenEvidenceReceipt p ref = SourceRule.proposition-source-receipt
   CullenSource.cullenHCA19 cullenLegalSourceRef edelman64Locator
-  SourceRule.primarySourceLayer (cullenFactRole ref)
+  SourceRule.primarySourceLayer (cullenConcurrenceRole ref)
   refl refl refl
   (Source.citationCreatesAuthorityIsFalse CullenSource.cullenHCA19) ref
 
@@ -182,15 +186,14 @@ s43ABasedOnOutcome = Atomic.atomic-outcome-source
   noStatutoryPowerEvidenceSource
   (Algebra.propositionId liabilityBasedOnExerciseOfSpecialStatutoryPower)
   refl refl
-  "Edelman [64] positively supports failure of the exact s 43A engagement atom on the retained Cullen fibre; fn 103 separately records procedural abandonment."
+  "Edelman [64] concurrence positively supports failure of the exact s 43A engagement atom on the retained Cullen fibre; fn 103 separately records procedural abandonment."
 
 cullenS43ABasedOnAtom : Atomic.SourceConditionedAtomicLegalTest liabilityBasedOnExerciseOfSpecialStatutoryPower
 cullenS43ABasedOnAtom = Atomic.source-conditioned-atomic-legal-test
   s43ABasedOnSource
   (Algebra.subjectReference liabilityBasedOnExerciseOfSpecialStatutoryPower)
   refl
-  S43ABasedOnFits
-  S43ABasedOnFails
+  S43ABasedOnFits S43ABasedOnFails
   (λ ())
   (λ ())
   (λ _ → s43ABasedOnOutcome)
@@ -202,28 +205,22 @@ cullenS43ABasedOnAtom = Atomic.source-conditioned-atomic-legal-test
 cullenS43AIsNegative : Atomic.gate cullenS43ABasedOnAtom ≡ BT.neg
 cullenS43AIsNegative = refl
 
-------------------------------------------------------------------------
--- Hard boundaries.
-------------------------------------------------------------------------
-
 data S43ANegativeMeansNoNegligence : Set where
 data AbandonedArgumentDefinesStatutoryMeaning : Set where
 data NoStatutoryPowerMeansNoPoliceFunction : Set where
 data S43ANotEngagedMeansPublicAuthorityImmune : Set where
-
 data NoPowerOutcomeEqualsAbandonment : Set where
+data ConcurrenceAutomaticallyBecomesJointRatio : Set where
 
 s43ANegativeDoesNotNegateNegligence : S43ANegativeMeansNoNegligence → ⊥
 s43ANegativeDoesNotNegateNegligence ()
-
 abandonmentDoesNotDefineS43A : AbandonedArgumentDefinesStatutoryMeaning → ⊥
 abandonmentDoesNotDefineS43A ()
-
 noStatutoryPowerDoesNotErasePoliceFunction : NoStatutoryPowerMeansNoPoliceFunction → ⊥
 noStatutoryPowerDoesNotErasePoliceFunction ()
-
 s43ANotEngagedDoesNotCreateImmunity : S43ANotEngagedMeansPublicAuthorityImmune → ⊥
 s43ANotEngagedDoesNotCreateImmunity ()
-
 noPowerOutcomeDoesNotCollapseIntoAbandonment : NoPowerOutcomeEqualsAbandonment → ⊥
 noPowerOutcomeDoesNotCollapseIntoAbandonment ()
+concurrenceDoesNotBecomeJointRatio : ConcurrenceAutomaticallyBecomesJointRatio → ⊥
+concurrenceDoesNotBecomeJointRatio ()
