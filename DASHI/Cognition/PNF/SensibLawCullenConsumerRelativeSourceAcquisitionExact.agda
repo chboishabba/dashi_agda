@@ -6,28 +6,25 @@ open import Data.Empty using (⊥)
 
 import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Cognition.PNF.SensibLawConsumerSourceAcquisitionPriorityExact as Priority
+import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
 import DASHI.Cognition.PNF.SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact as CLA
 import DASHI.Cognition.PNF.SensibLawCullenNSWCLAAtomicApplicationExact as CullenCLA
+import DASHI.Cognition.PNF.SensibLawCullenS43ASpecialStatutoryPowerAtomicExact as S43A
 import DASHI.Cognition.PNF.SensibLawCullenVicariousLiabilityFamilyAtomicExact as Family
 import DASHI.Cognition.PNF.SensibLawNSWVicariousLiabilitySourceRealisationExact as Vicarious
 
 ------------------------------------------------------------------------
 -- CULLEN CONSUMER-RELATIVE SOURCE ACQUISITION
 --
--- Same unresolved source coordinate, different consumer:
---
--- actual disposition consumer:
---   breach already fails on the retained s 5B(1)(c) atom, so selecting the
---   precise s 8(1)(a)/(b) vicarious subroute cannot repair that upstream defect.
---
--- counterfactual vicarious-route consumer:
---   conditional on an underlying police tort, the exact s 8 route IS the live
---   question, so source acquisition is admitted.
+-- Same unresolved coordinate, different consumer.  An upstream atomic failure
+-- may block a coordinate for the actual-disposition consumer without deleting
+-- that coordinate from counterfactual/source-completeness consumers.
 ------------------------------------------------------------------------
 
 data CullenConsumer : Set where
   actualLiabilityDisposition : CullenConsumer
   counterfactualVicariousRouteIfTort : CullenConsumer
+  counterfactualS43AStandardIfEngaged : CullenConsumer
 
 data CullenSourceCoordinate : Set where
   exactS8VicariousSubroute : CullenSourceCoordinate
@@ -36,6 +33,8 @@ data CullenSourceCoordinate : Set where
 data CullenLiveSensitive : CullenConsumer → CullenSourceCoordinate → Set where
   counterfactualNeedsS8Route :
     CullenLiveSensitive counterfactualVicariousRouteIfTort exactS8VicariousSubroute
+  counterfactualNeedsS43AStandard :
+    CullenLiveSensitive counterfactualS43AStandardIfEngaged s43ASpecialStandardApplication
 
 data CullenCounterfactualSensitive : CullenConsumer → CullenSourceCoordinate → Set where
   actualConsumerHasS8Counterfactual :
@@ -52,7 +51,9 @@ cullenSourcePolicy = Priority.consumer-source-policy
   "Cullen source work is scheduled relative to the selected legal consumer; unresolved downstream coordinates do not automatically consume the actual-disposition search budget."
 
 ------------------------------------------------------------------------
--- Actual disposition: s 5B(1)(c) is a sourced -1 upstream blocker.
+-- Actual disposition: s 5B(1)(c) is a sourced -1 upstream blocker for the
+-- precise vicarious subroute.  Learning route (a) versus route (b) cannot repair
+-- the already-failed breach coordinate.
 ------------------------------------------------------------------------
 
 actualS8SubrouteBlockedByBreach :
@@ -81,7 +82,32 @@ actualS8HasNoAcquireNowSensitivity =
   Priority.blockedCoordinateHasNoLiveSensitivity actualS8SubrouteBlockedByBreach
 
 ------------------------------------------------------------------------
--- Counterfactual consumer: exact s 8 route becomes live.
+-- Actual disposition: s 43A engagement itself is -1, so the downstream s 43A
+-- special unreasonableness standard is not a live acquisition target either.
+------------------------------------------------------------------------
+
+actualS43AStandardBlockedByNonEngagement :
+  Priority.UpstreamAtomicBlocker
+    cullenSourcePolicy
+    actualLiabilityDisposition
+    s43ASpecialStandardApplication
+actualS43AStandardBlockedByNonEngagement = Priority.upstream-atomic-blocker
+  S43A.liabilityBasedOnExerciseOfSpecialStatutoryPower
+  S43A.cullenS43ABasedOnAtom
+  refl
+  (λ ())
+  "The source-conditioned s 43A engagement atom is -1 on Cullen. The downstream s 43A(3) standard is therefore not a live requirement for the actual-disposition consumer."
+
+actualS43AAcquisitionDisposition :
+  Priority.SourceAcquisitionDisposition
+    cullenSourcePolicy
+    actualLiabilityDisposition
+    s43ASpecialStandardApplication
+actualS43AAcquisitionDisposition =
+  Priority.blockedDownstream actualS43AStandardBlockedByNonEngagement
+
+------------------------------------------------------------------------
+-- Counterfactual consumers deliberately reopen those coordinates.
 ------------------------------------------------------------------------
 
 counterfactualS8AcquisitionDisposition :
@@ -100,9 +126,16 @@ counterfactualS8AcquireNowPermission :
 counterfactualS8AcquireNowPermission =
   Priority.permissionFromLiveDisposition counterfactualNeedsS8Route
 
+counterfactualS43AAcquisitionDisposition :
+  Priority.SourceAcquisitionDisposition
+    cullenSourcePolicy
+    counterfactualS43AStandardIfEngaged
+    s43ASpecialStandardApplication
+counterfactualS43AAcquisitionDisposition =
+  Priority.acquireForLiveConsumer counterfactualNeedsS43AStandard
+
 ------------------------------------------------------------------------
--- The route remains unresolved in the statutory source owner.  Deferral for
--- one consumer therefore does NOT erase, solve, or deny the coordinate.
+-- Deferral/blocking does not erase source state or a separately paid family.
 ------------------------------------------------------------------------
 
 cullenS8SubrouteStillUnresolved :
@@ -110,10 +143,8 @@ cullenS8SubrouteStillUnresolved :
 cullenS8SubrouteStillUnresolved = refl
 
 familyIsAlreadyRecognised :
-  BT.Trit
-familyIsAlreadyRecognised =
-  DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact.gate
-    Family.cullenVicariousFamilyAtom
+  Atomic.gate Family.cullenVicariousFamilyAtom ≡ BT.pos
+familyIsAlreadyRecognised = refl
 
 familyRecognitionStillDoesNotMakeS8LiveForActualConsumer :
   CullenLiveSensitive actualLiabilityDisposition exactS8VicariousSubroute → ⊥
@@ -127,6 +158,7 @@ data DeferredForActualMeansGloballyIrrelevant : Set where
 data FamilyPositiveOverridesUpstreamBreachBlocker : Set where
 data CounterfactualAcquisitionChangesActualDisposition : Set where
 data UnresolvedSubrouteMeansFamilyUnresolved : Set where
+data S43ANonEngagementDeletesS43AFromOntology : Set where
 
 deferredDoesNotMeanGloballyIrrelevant : DeferredForActualMeansGloballyIrrelevant → ⊥
 deferredDoesNotMeanGloballyIrrelevant ()
@@ -142,3 +174,7 @@ counterfactualWorkDoesNotSilentlyChangeActualConsumer ()
 subrouteUnresolvedDoesNotUndoFamilyRecognition :
   UnresolvedSubrouteMeansFamilyUnresolved → ⊥
 subrouteUnresolvedDoesNotUndoFamilyRecognition ()
+
+s43ABlockedForActualDoesNotDeleteCoordinate :
+  S43ANonEngagementDeletesS43AFromOntology → ⊥
+s43ABlockedForActualDoesNotDeleteCoordinate ()
