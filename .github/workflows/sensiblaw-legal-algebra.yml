@@ -8,6 +8,7 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawSourceRealisedLegalRuleExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawLegalClaimProvenanceLineageExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawProvenanceSemanticStatusOrthogonalityExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawAtomicLegalTestBalancedTernaryExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawAtomicCaseOutcomeCoherenceExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawAttributedAtomicCaseRegistryExact.agda'
@@ -80,6 +81,7 @@ jobs:
           DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda
           DASHI/Cognition/PNF/SensibLawSourceRealisedLegalRuleExact.agda
           DASHI/Cognition/PNF/SensibLawLegalClaimProvenanceLineageExact.agda
+          DASHI/Cognition/PNF/SensibLawProvenanceSemanticStatusOrthogonalityExact.agda
           DASHI/Cognition/PNF/SensibLawAtomicLegalTestBalancedTernaryExact.agda
           DASHI/Cognition/PNF/SensibLawAtomicCaseOutcomeCoherenceExact.agda
           DASHI/Cognition/PNF/SensibLawAttributedAtomicCaseRegistryExact.agda
