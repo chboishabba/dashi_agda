@@ -43,13 +43,6 @@ module LiveReduced
   module Flux = R406.FixedLiveFlux
     Time initialTime integrateTo DerivativeOf
 
-  outputsNonzeroFromMembers :
-    ∀ {GR : Set} →
-    (buildNil : GR) →
-    (buildCons : Z3.NonZeroMode Z3.zeroMode → GR → GR) →
-    GR
-  outputsNonzeroFromMembers {GR} buildNil buildCons = buildNil
-
   module At
       (T : Dyn.PhysicalNSGalerkinTrajectory)
       (R : Support.LiteralNonzeroCutoffTrajectory T)
