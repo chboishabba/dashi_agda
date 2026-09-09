@@ -30,21 +30,23 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- and back out from DASHI's exact theorem quantifier scope. The reported unseen
 -- forced-NS claim is comparator-only and pays no Clay residual.
 --
--- R523-R525 then insert the actual Fefferman Clay C/D consumer between those
--- two ends. R523 keeps every C/D side condition typed separately; R524 aligns
--- the reported R^3/T^3 smooth-forced problem bidirectionally with C/D without
--- promoting the unseen claim; R525 closes the triangle
+-- R523-R525 insert the source-exact Fefferman Clay C/D consumer and close the
+-- external problem <-> Clay C/D <-> DASHI R406 triangle.
 --
---   external problem <-> Clay C/D <-> DASHI R406 formulation
+-- R526-R528 then factor the R^3/T^3 comparison through the existing 369/27
+-- symmetry infrastructure. R526 gives a common {-1,0,+1}^3 local frequency-sign
+-- observation interface and makes the notation firewall explicit:
+-- physical torus T^3 != Base369 ternary T3. A triad has three 27-sign views,
+-- hence a 27^3 carrier shape, but this is observation geometry only. R527
+-- factors Clay C/D into a shared NS core plus a non-erasable domain envelope.
+-- R528 identifies the first genuinely analytic cross-domain seam after common
+-- symmetry is quotiented out: lattice-counting versus continuum spectral
+-- measure/cutoff transport on the SAME literal R406 signed-cross observable.
+-- Monster 3B phase inversion remains a symmetry intertwiner/comparator, not NS
+-- sum-to-integral theorem authority.
 --
--- and exposes the new first comparison coordinate: exact inclusion/relation
--- between the Clay forcing class and the forcing class quantified by a proposed
--- DASHI R406 theorem.
---
--- The remaining scalar representation seam is still the standard Bishop
--- realization rule taking pointwise ordered regular approximants to Bishop-real
--- order. Neither introspection nor the adversarial BIDIs manufacture analytic
--- payment. Clay promotion remains fail-closed.
+-- Neither introspection nor any BIDI manufactures analytic payment. Clay
+-- promotion remains fail-closed.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact
@@ -90,3 +92,8 @@ import DASHI.Physics.Closure.NSTriadKNForcedBlowupR406BidiRound522Exact
 import DASHI.Physics.Closure.NSTriadKNClayForcedBreakdownFormulationRound523Exact
 import DASHI.Physics.Closure.NSTriadKNBuckmasterToClayBreakdownBidiRound524Exact
 import DASHI.Physics.Closure.NSTriadKNClayExternalR406TriangleBidiRound525Exact
+
+-- R^3 / T^3 common local 27 symmetry quotient + retained domain/measure fibre.
+import DASHI.Physics.Closure.NSTriadKNTorusEuclideanTernary27IntersectionRound526Exact
+import DASHI.Physics.Closure.NSTriadKNClayCDDomainResidualBidiRound527Exact
+import DASHI.Physics.Closure.NSTriadKNTorusEuclideanR406MeasureBridgeBoundaryRound528Exact
