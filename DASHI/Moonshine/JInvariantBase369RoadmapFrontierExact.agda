@@ -91,7 +91,7 @@ canonicalRoadmapState = record
   ; bishopVendorImplementationPinned = true
   ; fibonacciBishopRatioCarrierConstructed = true
   ; fibonacciDenominatorPositiveIncrementExact = true
-  ; fibonacciDenominatorDivergenceExact = false
+  ; fibonacciDenominatorDivergenceExact = true
   ; quadraticDefectToBishopErrorBoundExact = false
   ; fibonacciRatiosConvergeToBishopPhi = false
 
@@ -125,7 +125,6 @@ canonicalRoadmapState = record
   }
 
 data FirstLiveRoadmapResidual : Set where
-  missingFibonacciDenominatorDivergence : FirstLiveRoadmapResidual
   missingQuadraticDefectToBishopErrorBound : FirstLiveRoadmapResidual
   missingFibonacciRatioToBishopPhiConvergence : FirstLiveRoadmapResidual
   missingRenderedPixelToAnalyticModularCoordinate : FirstLiveRoadmapResidual
@@ -144,4 +143,4 @@ firstJMonsterResidual = missingRenderedPixelToAnalyticModularCoordinate
 
 -- Highest-alpha analytic residual for the phi lane.
 firstPhiResidual : FirstLiveRoadmapResidual
-firstPhiResidual = missingFibonacciDenominatorDivergence
+firstPhiResidual = missingQuadraticDefectToBishopErrorBound
