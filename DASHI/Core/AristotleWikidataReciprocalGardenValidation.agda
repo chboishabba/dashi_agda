@@ -15,6 +15,7 @@ import DASHI.Interop.AristotleWorklistDeliberativeMovesBidiExact
 import DASHI.Interop.AristotleContentIdentityRevisionSyncBidiExact
 import DASHI.Interop.AristotleWikibaseZelphBraidedPromotionBidiExact
 import DASHI.Interop.SensibLawNatCoverageAcquisitionDemandExact as NatDemand
+import DASHI.Interop.SensibLawWikidataReferenceRoleAuthorityExact as ReferenceRole
 
 natDemandIsExactSubjectPropertyIndexed :
   NatDemand.NatCoverageAcquisitionBoundary.demandIndexedByExactSubjectPropertyResidual
@@ -36,6 +37,31 @@ natDemandDoesNotCreateMigrationAuthority :
     NatDemand.canonicalNatCoverageAcquisitionBoundary ≡ false
 natDemandDoesNotCreateMigrationAuthority = refl
 
+natTruthyProjectionDoesNotPayNativeFamilyCoverage :
+  NatDemand.NatCoverageAcquisitionBoundary.truthyProjectionEqualsNativeFamilyCoverage
+    NatDemand.canonicalNatCoverageAcquisitionBoundary ≡ false
+natTruthyProjectionDoesNotPayNativeFamilyCoverage = refl
+
+natNoValueDoesNotMeanFamilyAbsence :
+  NatDemand.NatCoverageAcquisitionBoundary.noValueEqualsFamilyAbsence
+    NatDemand.canonicalNatCoverageAcquisitionBoundary ≡ false
+natNoValueDoesNotMeanFamilyAbsence = refl
+
+p143RemainsProvenanceOnly :
+  ReferenceRole.WikidataReferenceRoleAuthorityBoundary.p143ProvenanceOnly
+    ReferenceRole.canonicalWikidataReferenceRoleAuthorityBoundary ≡ true
+p143RemainsProvenanceOnly = refl
+
+referencePresenceDoesNotPaySourceSupport :
+  ReferenceRole.WikidataReferenceRoleAuthorityBoundary.referencePresencePaysSupport
+    ReferenceRole.canonicalWikidataReferenceRoleAuthorityBoundary ≡ false
+referencePresenceDoesNotPaySourceSupport = refl
+
+sourceCandidateDoesNotCreateAuthority :
+  ReferenceRole.WikidataReferenceRoleAuthorityBoundary.sourceCandidateCreatesAuthority
+    ReferenceRole.canonicalWikidataReferenceRoleAuthorityBoundary ≡ false
+sourceCandidateDoesNotCreateAuthority = refl
+
 validationStatement : String
 validationStatement =
-  "Focused validation root for the Aristotle/Wikidata reciprocal garden: Q/P query fibres, rank/visibility commuting provenance, snak information loss, reliable-source adequacy, pruned-graph promotion transport, schema-scoped coverage, coverage residual salience, deliberative worklists, content/revision sync, braided Wikibase-Zelph-review-policy transport, and exact Q/P residual-bound Nat acquisition demands."
+  "Focused validation root for the Aristotle/Wikidata reciprocal garden: Q/P query fibres, rank/visibility commuting provenance, snak information loss, reliable-source adequacy, pruned-graph promotion transport, schema-scoped coverage, coverage residual salience, deliberative worklists, content/revision sync, braided Wikibase-Zelph-review-policy transport, exact Q/P residual-bound Nat acquisition demands, native-family-vs-truthy/snak separation, and Wikidata reference-role-vs-source-authority separation."
