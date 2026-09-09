@@ -14,6 +14,9 @@ module DASHI.Physics.Closure.NSTriadKNNestedSlotBonyClassNormBidiRound584Exact w
 -- physicalOutputFiber N p_tau.  Thus the remaining class budgets are now on
 -- the SAME slot-transformed cells consumed by the modern weighted commutator.
 -- No substitution of the older raw-curl class carrier is made.
+--
+-- R580-R583 currently live on the exact rational C3 carrier, so this BIDI is
+-- deliberately rational too; it does not pretend to be scalar-generic.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -33,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact 
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNNestedComponentwiseInnerCommutatorRound572Exact as R572
 import DASHI.Physics.Closure.NSTriadKNWeightedNestedComponentwiseCommutatorRound573Exact as R573
+import DASHI.Physics.Closure.NSTriadKNFourSignBonyClassGramCompilerRound580Exact as R580
 import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact as R581
 import DASHI.Physics.Closure.NSTriadKNClassNormBudgetToBonyGramPaymentRound582Exact as R582
 import DASHI.Physics.Closure.NSTriadKNDirectBonyClassNormCompilerRound583Exact as R583
@@ -40,8 +44,10 @@ import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNFourHelicityVectorRecombinationRound576Exact as R576
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
+F : C3.RealField _
+F = R583.F
+
 module LiveNestedSlot584
-    {r} {F : C3.RealField r}
     {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E}
     (W : R294.SwapInvariantCellWeight F)
@@ -75,8 +81,6 @@ module LiveNestedSlot584
       (nestedSlotCell584 tau)
       (Output.physicalOutputFiber
         (Audit.cutoff system) (Physical.p tau))
-    where
-    import DASHI.Physics.Closure.NSTriadKNFourSignBonyClassGramCompilerRound580Exact as R580
 
   nestedSlotFoldIsLiteralFold584 :
     (tau : Physical.PhysicalTriadIncidence) →
