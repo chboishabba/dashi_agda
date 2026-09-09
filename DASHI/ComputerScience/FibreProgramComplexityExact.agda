@@ -91,9 +91,9 @@ open PathCostConsumer public
 
 K :
   ∀ {State : Set} →
-  PathCostConsumer State →
+  (consumer : PathCostConsumer State) →
   ExecutionFibrePath State →
-  PathCostConsumer.Outcome
+  PathCostConsumer.Outcome consumer
 K consumer path = costPath consumer path
 
 stateVisitConsumer :
