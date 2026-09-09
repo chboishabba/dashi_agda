@@ -15,6 +15,7 @@ import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact
 -- Window-free proof-carrying finite certification on the final carrier.
 import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact
 import DASHI.Analysis.RiemannG2CertifiedNearUpperClusterResponseCompilerExact
+import DASHI.Analysis.RiemannG2CertifiedClusterLowerEnvelopeCompilerExact
 
 -- Balance-free actual-ClusterResponse terminal route.
 import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact
@@ -32,4 +33,5 @@ import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact
 import DASHI.Analysis.RiemannG2ClayTerminalGenericHighCoordinateExact
 import DASHI.Analysis.RiemannG2CurrentDirectOneLeafFrontierExact
 import DASHI.Analysis.RiemannG2CurrentGenericHighFrontierRefinementExact
+import DASHI.Analysis.RiemannG2GenericHighCertifiedFollowupReadmeExact
 import DASHI.Analysis.RiemannG2FinalCutIntrospectionExact
