@@ -14,13 +14,18 @@ mkdir -p "$MATRIX_DIR"
 #   2. NS cheap control: tiny ordered-rational core after dependency-cone surgery.
 #   3. NS repaired hotspot: formerly ~17.7 GiB warm-cache eight-way normalization.
 #   4. YM side-four stressor: deep finite-sum/martingale variance decomposition.
-#   5. YM Path13 stressor: 28,561-site physical Poincare path with a 12-variable
-#      scalar LDL certificate and an explicit fibre-boundary/opaque-algebra seam.
+#   5. YM Path13 atomic/fibre lift: 13-point physical Poincare plus canonical
+#      finite-sum <= observer, before directional/four-axis composition.
+#   6. YM Path13 directional layer: predecessor norm contraction and literal
+#      multiplicity-13 transport, before the four-axis martingale consumer.
+#   7. YM Path13 global stressor: 28,561-site physical Poincare composition.
 TARGETS=(
   "DASHI/ComputerScience/ComputerScienceFibreFoundationValidationExact.agda|cs-fibre-control"
   "DASHI/Physics/Closure/NSTriadKNLuoFiniteRationalOrderCore.agda|ns-rational-control"
   "DASHI/Physics/Closure/NSTriadKNLuoFiniteEightPointSixThreeHolderBoundary.agda|ns-repaired-holder"
   "DASHI/Physics/YangMills/BalabanPath4PhysicalVarianceDecompositionExact.agda|ym-variance-stressor"
+  "DASHI/Physics/YangMills/BalabanPath13ZeroMeanFibrePoincareLiftExact.agda|ym-path13-fibre-lift"
+  "DASHI/Physics/YangMills/BalabanPath13DirectionalEnergyContractionExact.agda|ym-path13-directional"
   "DASHI/Physics/YangMills/BalabanPath13FourAxisPhysicalPoincareExact.agda|ym-poincare-13"
 )
 
@@ -87,9 +92,11 @@ Expected diagnostic classes:
   import-heavy but low residency
       dependency cone is not the causal OOM explanation.
 
-Path13 is especially useful as a split-control: the generated LDL certificate
-may take substantial CPU while remaining residency-stable, whereas a global
-solver that reopens the 13^4 carrier is an elaboration-topology defect.
+Path13 is intentionally split into three roots.  Compare fibre-lift ->
+directional -> global.  The first transition that sharply raises residency or
+conversion activity identifies the next representation boundary to repair.
+The generated LDL certificate may take substantial CPU while remaining
+residency-stable; that is analytically different from global carrier re-entry.
 
 -j is intentionally fixed at 1 here.  Parallel module scheduling is a separate
 multiplier and must not obscure single-module elaboration behaviour.
