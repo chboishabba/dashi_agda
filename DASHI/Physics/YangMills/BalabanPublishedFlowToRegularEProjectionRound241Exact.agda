@@ -15,7 +15,8 @@ module DASHI.Physics.YangMills.BalabanPublishedFlowToRegularEProjectionRound241E
 -- physical meaning and cannot be used as a source-authority shortcut.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
