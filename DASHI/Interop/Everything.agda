@@ -12,6 +12,7 @@ import DASHI.Interop.ITIRRecordingManifestSensibLawAdapterExact
 import DASHI.Interop.ITIRTemporalHealthSensibLawAdapterExact
 import DASHI.Interop.ITIRSubmittedEvidencePackageSensibLawAdapterExact
 import DASHI.Interop.ITIRHousingEpisodeSensibLawAdapterExact
+import DASHI.Interop.ITIRLaterMedicalParticularHarmSensibLawAdapterExact
 import DASHI.Interop.ArtHiddenTopologyStack
 import DASHI.Interop.PNFSpectralFieldArchitectureReceipt
 import DASHI.Interop.SeaMeInItROMKernelFormalism
