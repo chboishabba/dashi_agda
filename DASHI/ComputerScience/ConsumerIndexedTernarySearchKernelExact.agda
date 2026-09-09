@@ -4,6 +4,21 @@ open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 ------------------------------------------------------------------------
+-- GENERIC TERNARY DECISION × PROVENANCE
+--
+-- The trit is the consumer-relative decision surface.  Producer identity,
+-- certification, scope and other explanation coordinates remain in provenance.
+------------------------------------------------------------------------
+
+record TernaryDecisionPacket (Provenance : Set) : Set where
+  constructor ternaryDecisionPacket
+  field
+    decision : Trit
+    provenance : Provenance
+
+open TernaryDecisionPacket public
+
+------------------------------------------------------------------------
 -- CONSUMER-INDEXED TERNARY SEARCH KERNEL
 --
 -- This owner captures the generic finite-search semantics shared by theorem,
@@ -63,7 +78,7 @@ searchDecision checker scope with anyPassing checker (scopeCandidates scope)
 ...   | completeFiniteScope _ = neg
 
 ------------------------------------------------------------------------
--- Provenance stays orthogonal to the ternary quotient.
+-- Search provenance stays orthogonal to the ternary quotient.
 ------------------------------------------------------------------------
 
 record SearchDecisionPacket (Candidate Provenance : Set) : Set₁ where
@@ -77,8 +92,16 @@ record SearchDecisionPacket (Candidate Provenance : Set) : Set₁ where
 
 open SearchDecisionPacket public
 
+forgetSearchMechanism :
+  ∀ {Candidate Provenance} →
+  SearchDecisionPacket Candidate Provenance →
+  TernaryDecisionPacket Provenance
+forgetSearchMechanism packet =
+  ternaryDecisionPacket (SearchDecisionPacket.decision packet) (SearchDecisionPacket.provenance packet)
+
 ------------------------------------------------------------------------
--- Information refinement order used by bounded search.
+-- Information refinement order used by bounded search and other monotone
+-- ternary decision producers.
 ------------------------------------------------------------------------
 
 data SearchDecisionRefines : Trit → Trit → Set where
@@ -127,6 +150,7 @@ scopedNegativeDoesNotMeanGlobalImpossibility ()
 record ConsumerIndexedTernarySearchBoundary : Set where
   constructor consumerIndexedTernarySearchBoundary
   field
+    genericDecisionProvenanceProduct : Bool
     consumerIndexed : Bool
     openFailureRemainsUnresolved : Bool
     negativeRequiresTypedFiniteCoverage : Bool
@@ -140,4 +164,4 @@ canonicalConsumerIndexedTernarySearchBoundary :
   ConsumerIndexedTernarySearchBoundary
 canonicalConsumerIndexedTernarySearchBoundary =
   consumerIndexedTernarySearchBoundary
-    true true true true true true false false
+    true true true true true true true false false
