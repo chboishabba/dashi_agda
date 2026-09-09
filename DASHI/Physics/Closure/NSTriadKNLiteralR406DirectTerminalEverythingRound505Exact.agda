@@ -90,16 +90,16 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --
 --       FactoredFull = Diagonal + 2 * LiteralWeightedRemainder.
 --
--- R548 isolates the diagonal semantic question. R549 then resolves its first
--- exact layer by specializing the already-owned R290 weighted-flux identity to
--- self pairs:
+-- R548 isolates the diagonal semantic question. R549 resolves its first exact
+-- layer by specializing the existing R290 weighted-flux identity to self pairs:
 --
 --   Diagonal = SelfGram + WeightedGramFluxTangent.
 --
--- The self-pair positivity carrier is kept separate from R396's off-diagonal
--- positivity witnesses. No new estimate or sign is manufactured; the remaining
--- work is endpoint/time integration of the tangent and control of the self-Gram
--- term on the literal carrier.
+-- R550 then reuses R400 to construct the missing self-pair positivity on the
+-- literal nonzero output fibre and R456/R457 to identify SelfGram exactly with
+-- twice the normalized double-mixed mass. Hence SelfGram inherits the existing
+-- 48 E_N^2 control with no cardinality tax. Only the weighted Gram-flux tangent
+-- still needs endpoint/time-integration realization in the diagonal lane.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -171,3 +171,4 @@ import DASHI.Physics.Closure.NSTriadKNFullSquareAsSpectatorRowsRound546Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSemanticBoundaryRound548Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalR290FluxDecompositionRound549Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSelfGramEnergyControlRound550Exact
