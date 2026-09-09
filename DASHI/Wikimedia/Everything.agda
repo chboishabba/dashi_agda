@@ -40,3 +40,4 @@ import DASHI.Wikimedia.MaboNativeWikimediaBridgeExact
 import DASHI.Wikimedia.MaboPropertyTripleProjectionExact
 import DASHI.Wikimedia.MaboConcreteQidGraphProjectionExact
 import DASHI.Wikimedia.WikipediaFirstLinkNetworkExact
+import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact
