@@ -7,6 +7,7 @@ import DASHI.Architecture.SemiconductorBuiltEnvironmentCrossPollinationExact as 
 import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact as Calibration
 import DASHI.Environment.LESPhysicalProcessSourceRegistryExact as Sources
 import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as Plant
+import DASHI.Environment.SolarOpticalSiteFibreCrossPollinationExact as Site
 import DASHI.Physics.Optics.AsphericCausticManipulationExact as Caustic
 import DASHI.Physics.Optics.InverseCausticNumericalProducerExact as Numerical
 import DASHI.Physics.Units.SI as SI
@@ -116,6 +117,43 @@ carbonAssimilationAt {leaf = leaf} {calibration = calibration} weld state =
     (Calibration.atmosphereState calibration (plantCalibrationState weld state))
 
 ------------------------------------------------------------------------
+-- SITE FIBRE WELD
+--
+-- Reuse the existing LES solar/optical site carrier because its coordinates
+-- are exactly the environmental coordinates required here: spectrum, angle,
+-- temperature, shading, soiling, wind, humidity, support and provenance.
+-- No photovoltaic response law is inherited by this reuse.
+------------------------------------------------------------------------
+
+record SiteConditionedPhotosynthesisRealisation
+    {SiteId Spectrum AngleDistribution Temperature Shading Soiling Wind Humidity : Set}
+    {LeafPoint Wavelength PhotonFlux : Set}
+    (siteFibre : Site.SolarOpticalSiteFibre
+      SiteId Spectrum AngleDistribution Temperature Shading Soiling Wind Humidity)
+    (leaf : Plant.LeafGasExchangeReceipt)
+    (calibration : Calibration.LeafCarbonWaterCalibration leaf)
+    (field : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux)
+    (interception : LeafLightInterceptionReceipt field)
+    (weld : PhotosyntheticOpticsPlantWeld leaf calibration field interception) : Set₁ where
+  constructor site-conditioned-photosynthesis-realisation
+  field
+    retainedSiteFibre : Site.SolarOpticalSiteFibre
+      SiteId Spectrum AngleDistribution Temperature Shading Soiling Wind Humidity
+    retainedSiteFibreIsSameObject : retainedSiteFibre ≡ siteFibre
+    retainedPlantOpticsWeld : PhotosyntheticOpticsPlantWeld leaf calibration field interception
+    retainedPlantOpticsWeldIsSameObject : retainedPlantOpticsWeld ≡ weld
+    siteSpectrumToPhotonFieldReference : String
+    incidenceAngleToInterceptionReference : String
+    siteTemperatureToLeafStateReference : String
+    windHumidityToAtmosphereStateReference : String
+    shadingSoilingToPhotonFieldReference : String
+    waterAvailabilityReference : String
+    atmosphericCO2Reference : String
+    siteSpecificHeldOutValidationReference : String
+
+open SiteConditionedPhotosynthesisRealisation public
+
+------------------------------------------------------------------------
 -- OPTIONAL INVERSE-LIGHT-SHAPING CONSUMER
 --
 -- A certified inverse-caustic solution may target a photon-field objective,
@@ -194,3 +232,7 @@ asmlArchitectureIsNotPhotosynthesisAuthority ()
 data LightShapingCreatesPhotons : Set where
 lightShapingDoesNotCreatePhotons : LightShapingCreatesPhotons → ⊥
 lightShapingDoesNotCreatePhotons ()
+
+data OpticalValidationAloneClosesPlantOutcome : Set where
+opticalValidationAloneDoesNotClosePlantOutcome : OpticalValidationAloneClosesPlantOutcome → ⊥
+opticalValidationAloneDoesNotClosePlantOutcome ()
