@@ -91,7 +91,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --       FactoredFull = Diagonal + 2 * LiteralWeightedRemainder.
 --
 -- Two diagonal-audit generations are retained. The earlier semantic-boundary
--- owners keep fail-closed archaeology. The newer direct tranche R548-R560 is
+-- owners keep fail-closed archaeology. The newer direct tranche R548-R565 is
 -- the preferred leaf-A route:
 --
 --   R548  nonlinear diagonal = self-Gram + self-flux tangent;
@@ -105,17 +105,17 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --   R556  specializes to the literal live R406 trajectory slice;
 --   R557  integrates the live global identity;
 --   R558  bounds global selfFlux with no output-cardinality tax;
---   R559  reuses R416/R417/R418/R412/R422/R425/R427 for actual differentiation
---         of the finite self-flux once the literal self-pair curves are welded;
---   R560  proves from the fixed trajectory Fourier geometry and fixed viscosity
---         that each literal self-pair rate and constructive resolvent weight is
---         time-independent, producing the exact R416 fixed-resolvent curve.
+--   R559-R564 contain two compatible derivative generations. One generation
+--         isolates fixed-resolvent self-pair differentiation and finite/global
+--         aggregation; the other isolates the ordinary scalar FTC schema;
+--   R565  reconciles those authorities canonically: the global R564 derivative
+--         is fed directly to the generic scalar FTC interface on the SAME global
+--         self-flux observable. R393 remains an FTC consumer, not a producer.
 --
--- Thus the remaining diagonal temporal seam is finite same-object enumeration
--- of the actual double-mixed self-pair derivatives, followed by ordinary scalar
--- FTC. The principal analytic leaf-A wall remains the cutoff-uniform spacetime
--- upper bound for the literal global spectator-resolvent commutator/amplitude
--- expression.
+-- Thus no NS-specific temporal differentiation debt remains after R565. The
+-- only temporal authority still explicit is ordinary scalar FTC. The principal
+-- analytic leaf-A wall is the cutoff-uniform spacetime upper bound for the
+-- literal global spectator-resolvent commutator/amplitude expression.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -204,5 +204,21 @@ import DASHI.Physics.Closure.NSTriadKNGlobalDiagonalReducedNormalFormRound555Exa
 import DASHI.Physics.Closure.NSTriadKNLiveR406DiagonalReducedNormalFormRound556Exact
 import DASHI.Physics.Closure.NSTriadKNLiveIntegratedDiagonalReducedNormalFormRound557Exact
 import DASHI.Physics.Closure.NSTriadKNGlobalSelfFluxEndpointRound558Exact
+
+-- Concurrent derivative generations retained as compatible producers.
+import DASHI.Physics.Closure.NSTriadKNSelfFluxFiniteDerivativeReuseRound559Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralDoubleMixedTangentTrajectoryWeldRound560Exact
+import DASHI.Physics.Closure.NSTriadKNSelfPairFixedResolventTrajectoryRound561Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralSelfPairDerivativeItemRound562Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralSelfFluxFiniteFamilyRound563Exact
+import DASHI.Physics.Closure.NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact
+
 import DASHI.Physics.Closure.NSTriadKNLiteralSelfFluxFiniteDerivativeCompilerRound559Exact
 import DASHI.Physics.Closure.NSTriadKNLiveSelfPairFixedResolventRound560Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralLiveSelfPairDerivativeRound561Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralSelfFluxPairFamilyRound562Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralSelfFluxDerivativeClosedRound563Exact
+import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxDerivativeRound564Exact
+
+-- Canonical authority reconciliation.
+import DASHI.Physics.Closure.NSTriadKNSelfFluxTemporalReconciliationRound565Exact
