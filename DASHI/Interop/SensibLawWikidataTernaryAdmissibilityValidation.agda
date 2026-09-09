@@ -8,6 +8,7 @@ import DASHI.Interop.SensibLawNDimAdmissibilityTetrationComplexityBridgeExact as
 import DASHI.Interop.SensibLawNatDualIdentityConfirmationExact as DualIdentity
 import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as SourceSupport
 import DASHI.Interop.SensibLawNatSourcePropositionVerificationExact as SourceVerify
+import DASHI.Interop.SensibLawNatSourceMediaMaterializationExact as SourceMedia
 
 snakTripleHasBalancedCodec :
   Ternary.WikidataTernaryAdmissibilityBoundary.wikibaseSnakTripleHasExactBalancedCodec
@@ -143,3 +144,43 @@ sourceSupportStillDoesNotCreateMigrationAuthority :
   SourceVerify.NatSourcePropositionVerificationBoundary.sourceSupportCreatesMigrationAuthority
     SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
 sourceSupportStillDoesNotCreateMigrationAuthority = refl
+
+sourceBodiesMustPersistForReplay :
+  SourceMedia.NatSourceMediaMaterializationBoundary.fetchedBodiesMustBePersistedForReplay
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ true
+sourceBodiesMustPersistForReplay = refl
+
+sourceBytesAreReverifiedAgainstDigest :
+  SourceMedia.NatSourceMediaMaterializationBoundary.persistedBytesReverifiedAgainstDigest
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ true
+sourceBytesAreReverifiedAgainstDigest = refl
+
+sourceMediaReusesExistingAdapters :
+  SourceMedia.NatSourceMediaMaterializationBoundary.canonicalTextReusesExistingMediaAdapters
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ true
+sourceMediaReusesExistingAdapters = refl
+
+sourceEvidenceCandidatesAreSearchOnly :
+  SourceMedia.NatSourceMediaMaterializationBoundary.candidateSpansAreSearchOnly
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ true
+sourceEvidenceCandidatesAreSearchOnly = refl
+
+candidateSpanDoesNotPaySupport :
+  SourceMedia.NatSourceMediaMaterializationBoundary.candidateSpanPaysSupport
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ false
+candidateSpanDoesNotPaySupport = refl
+
+cueCooccurrenceDoesNotProveSupport :
+  SourceMedia.NatSourceMediaMaterializationBoundary.cueCooccurrenceProvesSupport
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ false
+cueCooccurrenceDoesNotProveSupport = refl
+
+missingQuantityAnchorDoesNotCreateNegativeEvidence :
+  SourceMedia.NatSourceMediaMaterializationBoundary.missingQuantityAnchorCreatesNegativeEvidence
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ false
+missingQuantityAnchorDoesNotCreateNegativeEvidence = refl
+
+sourceMediaMaterializationCreatesNoAuthority :
+  SourceMedia.NatSourceMediaMaterializationBoundary.materializationCreatesAuthority
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ false
+sourceMediaMaterializationCreatesNoAuthority = refl
