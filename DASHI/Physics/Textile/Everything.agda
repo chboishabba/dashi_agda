@@ -22,5 +22,6 @@ open import DASHI.Physics.Textile.TextileFiberBRDFRealisationExact public
 open import DASHI.Physics.Textile.TextileBirefringenceRetardanceExact public
 open import DASHI.Physics.Textile.TextileIridescentAppearanceExact public
 open import DASHI.Physics.Textile.TextileMechanicsOpticsCouplingExact public
+open import DASHI.Physics.Textile.TextileRefractiveOpticalTrainExact public
 open import DASHI.Physics.Textile.JacquardPhysicalFibreBridgeExact public
 open import DASHI.Physics.Textile.StitchPhysicalFibreBridgeExact public
