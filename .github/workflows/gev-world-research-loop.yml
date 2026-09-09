@@ -1,0 +1,89 @@
+name: GEV world research loop
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/BoundAcquisitionDemandExact.agda'
+      - 'DASHI/Interop/GodsEyeViewRuntimeNeutralAcquisitionABIExact.agda'
+      - 'DASHI/Interop/GodsEyeViewExecutableWorldResearchLoopExact.agda'
+      - 'DASHI/Interop/GodsEyeViewAcquisitionResultAssessmentBridgeExact.agda'
+      - 'DASHI/Interop/GodsEyeViewP854InspectionWorldAdapterExact.agda'
+      - 'DASHI/Interop/GodsEyeViewMarketAcquisitionWorldAdapterExact.agda'
+      - 'DASHI/Interop/GodsEyeViewLESSensorWorldAdapterExact.agda'
+      - 'DASHI/Interop/GodsEyeViewCommunitySourceWorldAdapterExact.agda'
+      - 'DASHI/Interop/GodsEyeViewWorldResearchFrontierActionExact.agda'
+      - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
+      - 'DASHI/Interop/Everything.agda'
+      - '.github/workflows/gev-world-research-loop.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gev-world-research-loop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check generic bound acquisition carrier
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Core/BoundAcquisitionDemandExact.agda
+
+      - name: Type-check runtime-neutral acquisition ABI
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewRuntimeNeutralAcquisitionABIExact.agda
+
+      - name: Type-check executable world research loop
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewExecutableWorldResearchLoopExact.agda
+
+      - name: Type-check acquisition assessment bridge
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewAcquisitionResultAssessmentBridgeExact.agda
+
+      - name: Type-check P854 world adapter
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewP854InspectionWorldAdapterExact.agda
+
+      - name: Type-check market world adapter
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewMarketAcquisitionWorldAdapterExact.agda
+
+      - name: Type-check LES sensor world adapter
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewLESSensorWorldAdapterExact.agda
+
+      - name: Type-check community source world adapter
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewCommunitySourceWorldAdapterExact.agda
+
+      - name: Type-check world frontier action compiler
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/GodsEyeViewWorldResearchFrontierActionExact.agda
+
+      - name: Type-check introspective proof loop
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/IntrospectiveProofLoopExact.agda
+
+      - name: Type-check Interop aggregate
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/Everything.agda
