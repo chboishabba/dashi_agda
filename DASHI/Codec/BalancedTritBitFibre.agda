@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Nat.Properties using (+-suc)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv)
 
@@ -117,8 +118,10 @@ wordBitCost-support-plus-sign :
   ∀ ts → wordBitCost ts ≡ length ts + nonZeroCount ts
 wordBitCost-support-plus-sign [] = refl
 wordBitCost-support-plus-sign (neg ∷ ts)
-  rewrite wordBitCost-support-plus-sign ts = refl
+  rewrite wordBitCost-support-plus-sign ts
+        | +-suc (length ts) (nonZeroCount ts) = refl
 wordBitCost-support-plus-sign (zer ∷ ts)
   rewrite wordBitCost-support-plus-sign ts = refl
 wordBitCost-support-plus-sign (pos ∷ ts)
-  rewrite wordBitCost-support-plus-sign ts = refl
+  rewrite wordBitCost-support-plus-sign ts
+        | +-suc (length ts) (nonZeroCount ts) = refl

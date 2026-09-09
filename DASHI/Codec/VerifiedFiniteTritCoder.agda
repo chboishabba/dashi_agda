@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Codec.VerifiedFiniteTritCoder where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
