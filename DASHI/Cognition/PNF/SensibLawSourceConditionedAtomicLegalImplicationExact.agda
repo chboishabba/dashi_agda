@@ -118,32 +118,10 @@ record SourceConditionedAtomicLegalImplication
 
 open SourceConditionedAtomicLegalImplication public
 
-premiseDerivations :
-  ∀ {graph facts Enabled r} →
-  (input : SourceConditionedAtomicLegalImplication graph facts Enabled r) →
-  Algebra.All (Algebra.Derivation graph facts Enabled) (Algebra.premises r)
-premiseDerivations {r = r} input = go (Algebra.premises r)
-  where
-    go :
-      (ps : List Algebra.LegalProposition) →
-      Algebra.All (Algebra.Derivation graph facts Enabled) ps
-    go [] = Algebra.[]
-    go (p ∷ ps) =
-      premiseDerived input Algebra.here Algebra.∷
-      goTail ps
-      where
-        goTail :
-          (rest : List Algebra.LegalProposition) →
-          Algebra.All (Algebra.Derivation graph facts Enabled) rest
-        goTail [] = Algebra.[]
-        goTail (q ∷ qs) =
-          premiseDerived input (Algebra.there Algebra.here) Algebra.∷
-          goTail qs
-
 ------------------------------------------------------------------------
--- The concrete compiler is supplied from the proof-relevant derivation
--- components.  We keep an explicit all-premises/all-negative receipt here so
--- no caller can replace atomic checks with string metadata.
+-- The proof-relevant derivation receipt stays explicit.  Atomic tests are not
+-- silently converted into graph proofs; the graph derivation remains a separate
+-- currency and both are needed to compile the legal implication.
 ------------------------------------------------------------------------
 
 record AtomicImplicationDerivationReceipt
@@ -195,6 +173,7 @@ data NegativeExceptionAtomMeansOppositeRule : Set where
 data NegativeDefeaterAtomMeansOppositeRule : Set where
 data PositivePremiseAtomAloneProvesConclusion : Set where
 data AtomicImplicationCreatesAuthority : Set where
+data AtomicFitWitnessIsGraphDerivation : Set where
 data UnsourcedConclusionAllowed : Set where
 
 negativeExceptionDoesNotMeanOppositeRule :
@@ -213,6 +192,9 @@ atomicImplicationDoesNotCreateAuthority :
   AtomicImplicationCreatesAuthority → ⊥
 atomicImplicationDoesNotCreateAuthority ()
 
+atomicFitDoesNotEqualGraphDerivation : AtomicFitWitnessIsGraphDerivation → ⊥
+atomicFitDoesNotEqualGraphDerivation ()
+
 unsourcedConclusionNotAllowed : UnsourcedConclusionAllowed → ⊥
 unsourcedConclusionNotAllowed ()
 
@@ -227,9 +209,10 @@ record SourceConditionedAtomicLegalImplicationBoundary : Set where
     negativeMeansLogicalOpposite : Bool
     jurisdictionAtomicAndSourceConditioned : Bool
     temporalAtomicAndSourceConditioned : Bool
+    atomicFitAutomaticallyCreatesDerivation : Bool
 
 canonicalSourceConditionedAtomicLegalImplicationBoundary :
   SourceConditionedAtomicLegalImplicationBoundary
 canonicalSourceConditionedAtomicLegalImplicationBoundary =
   source-conditioned-atomic-legal-implication-boundary
-    true true true true true false true true
+    true true true true true false true true false
