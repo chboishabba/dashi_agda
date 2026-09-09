@@ -17,6 +17,7 @@ import DASHI.Interop.AristotleWikibaseZelphBraidedPromotionBidiExact
 import DASHI.Interop.SensibLawNatCoverageAcquisitionDemandExact as NatDemand
 import DASHI.Interop.SensibLawWikidataReferenceRoleAuthorityExact as ReferenceRole
 import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact as Ternary
+import DASHI.Interop.SensibLawNDimAdmissibilityTetrationComplexityBridgeExact as Tetration
 
 natDemandIsExactSubjectPropertyIndexed :
   NatDemand.NatCoverageAcquisitionBoundary.demandIndexedByExactSubjectPropertyResidual
@@ -88,6 +89,21 @@ sameCarrierDoesNotCreateMonsterAction :
     Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ false
 sameCarrierDoesNotCreateMonsterAction = refl
 
+fixedNAxisProfileCountIsNotAutomaticallyTetration :
+  Tetration.AdmissibilityTetrationComplexityBoundary.fixedNAxisThreePowerNIsAutomaticallyTetration
+    Tetration.canonicalAdmissibilityTetrationComplexityBoundary ≡ false
+fixedNAxisProfileCountIsNotAutomaticallyTetration = refl
+
+selfIndexingMayDriveTetrationalAxisGrowth :
+  Tetration.AdmissibilityTetrationComplexityBoundary.selfIndexingMayProduceTetrationalAxisGrowth
+    Tetration.canonicalAdmissibilityTetrationComplexityBoundary ≡ true
+selfIndexingMayDriveTetrationalAxisGrowth = refl
+
+complexityRemainsSeparateFromAdmissibility :
+  Tetration.AdmissibilityTetrationComplexityBoundary.admissibilityAndComplexityAreSameCoordinate
+    Tetration.canonicalAdmissibilityTetrationComplexityBoundary ≡ false
+complexityRemainsSeparateFromAdmissibility = refl
+
 validationStatement : String
 validationStatement =
-  "Focused validation root for the Aristotle/Wikidata reciprocal garden: Q/P query fibres, rank/visibility commuting provenance, snak information loss, reliable-source adequacy, pruned-graph promotion transport, schema-scoped coverage, coverage residual salience, deliberative worklists, content/revision sync, braided Wikibase-Zelph-review-policy transport, exact Q/P residual-bound Nat acquisition demands, native-family-vs-truthy/snak separation, Wikidata reference-role-vs-source-authority separation, balanced-ternary snak codecs, N-dimensional admissibility fibres/braids, and an exact nine-axis Base369 carrier projection without Monster-action promotion."
+  "Focused validation root for the Aristotle/Wikidata reciprocal garden: Q/P query fibres, rank/visibility commuting provenance, snak information loss, reliable-source adequacy, pruned-graph promotion transport, schema-scoped coverage, coverage residual salience, deliberative worklists, content/revision sync, braided Wikibase-Zelph-review-policy transport, exact Q/P residual-bound Nat acquisition demands, native-family-vs-truthy/snak separation, Wikidata reference-role-vs-source-authority separation, balanced-ternary snak codecs, N-dimensional admissibility fibres/braids, exact nine-axis Base369 projection without Monster-action promotion, self-indexed tetrational axis growth, and complexity kept as a distinct consumer-indexed fibre."
