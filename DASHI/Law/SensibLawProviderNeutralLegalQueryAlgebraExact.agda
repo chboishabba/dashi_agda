@@ -106,6 +106,7 @@ data ProviderOperation : Set where
   casesCitedTraversalOperation : ProviderOperation
   legislationCitedTraversalOperation : ProviderOperation
   entityLookupOperation : ProviderOperation
+  conceptNavigationOperation : ProviderOperation
   corpusGraphLookupOperation : ProviderOperation
 
 
