@@ -39,6 +39,12 @@ import DASHI.Moonshine.JInvariantSignedFibreFractalBidiExact
 -- anti/identity/commuting gluing observations.
 import DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact
 
+-- Tesla/Base369 refinement is the commuting null model for seam transport:
+-- an independent balanced-trit fibre commutes with both 2- and 3-refinement,
+-- while explicit resolution-sensitive fixtures demonstrate the exact model
+-- distinction that the analytic Klein-j seam must now classify.
+import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
+
 -- Construct the finite Fibonacci recursion behind the recorded phi context,
 -- while keeping the ternary coordinate as a signed observer over the recursive
 -- fibre and leaving real ratio convergence explicit.
