@@ -12,6 +12,7 @@ import DASHI.ComputerScience.TemporalStorageFibreExact
 import DASHI.ComputerScience.FibreProgramComplexityExact
 import DASHI.ComputerScience.AgdaElaborationResidencyComplexityExact
 import DASHI.ComputerScience.AgdaProfilerObservationFibreExact
+import DASHI.ComputerScience.AgdaProofDebtFibrePreparationExact
 
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact
 import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact
