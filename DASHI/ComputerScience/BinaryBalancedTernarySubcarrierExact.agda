@@ -42,9 +42,13 @@ centreIsUnusedByBinaryEmbedding :
 centreIsUnusedByBinaryEmbedding false ()
 centreIsUnusedByBinaryEmbedding true ()
 
+boolComplement : Bool → Bool
+boolComplement false = true
+boolComplement true = false
+
 binaryEmbeddingPreservesBooleanComplementAsAntipode :
   (bit : Bool) →
-  embedBit (not bit) ≡ Orbit.strictAntipode (embedBit bit)
+  embedBit (boolComplement bit) ≡ Orbit.strictAntipode (embedBit bit)
 binaryEmbeddingPreservesBooleanComplementAsAntipode false = refl
 binaryEmbeddingPreservesBooleanComplementAsAntipode true = refl
 
