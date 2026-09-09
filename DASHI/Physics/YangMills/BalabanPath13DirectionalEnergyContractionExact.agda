@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.BalabanPath13DirectionalEnergyContractionExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
 open import Data.List.Base using (length)
@@ -46,6 +46,7 @@ open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact
 open import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact using
   (sumRationalConstant)
 open import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
+import DASHI.Physics.YangMills.BalabanFiniteSumRelationFibreLiftExact as SumLift
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageExact as Average
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact as Norm
 import DASHI.Physics.YangMills.BalabanPath13NormalizedAxisAverageExact as Side13
@@ -263,15 +264,13 @@ axisDirectionalEnergyAsPredecessorSum axis field =
     (λ transverse predecessor →
       sq (edgeDifferenceAtTransverse field axis predecessor transverse))
 
+-- Compatibility name retained for downstream users; the aggregate inequality
+-- is supplied by the canonical relation-preserving finite-sum fibre observer.
 sumRationalMonotone :
   ∀ {A : Set} (values : List A) (left right : A → ℚ) →
   (∀ value → left value ≤ right value) →
   sumRational values left ≤ sumRational values right
-sumRationalMonotone [] left right pointwise = ℚP.≤-refl
-sumRationalMonotone (value ∷ values) left right pointwise =
-  ℚP.+-mono-≤
-    (pointwise value)
-    (sumRationalMonotone values left right pointwise)
+sumRationalMonotone = SumLift.sumRationalMonotoneViaFibre
 
 predecessorNormSumExact : ∀ field axis →
   sumRational (allCyclicIndices side12)
