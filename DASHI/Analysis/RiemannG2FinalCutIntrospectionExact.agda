@@ -7,6 +7,8 @@ open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannG2FinalPoleQuotientMinimalAnalyticCutExact as Cut
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as NearObserver
+import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact as PhaseLaw
+import DASHI.Analysis.RiemannG2LiteralPhaseJointMarginCompilerExact as LiteralMargin
 
 ------------------------------------------------------------------------
 -- INTROSPECTIVE BINDING FOR THE CURRENT RH HIGH-ZERO SCALAR LEAF
@@ -82,37 +84,49 @@ currentRHProducerTargetsExactAnalyticLeaf = refl
 ------------------------------------------------------------------------
 -- SECOND-LEVEL INTROSPECTION: OBSERVER INSIDE THE LIVE SCALAR LEAF
 --
--- The terminal leaf mentions D_near(J), but the current final transport exposes
--- that object only through the scalar `nearResponseAt J`.  Existing count and
--- absolute-envelope observations identify states whose signed contributions
--- differ.  Therefore before a phase-sensitive proof route can be reused, the
--- observer must expose the literal target-relative phase on the exact final
--- near carrier.
+-- The terminal leaf mentions D_near(J), but the final transport exposes that
+-- object first as the scalar `nearResponseAt J`.  Count/envelope observations
+-- collapse phase-distinct states, so the first universal refinement remains a
+-- SAME-OBJECT literal model whose finite target-centred cosine sum is exactly
+-- that final scalar.
+--
+-- Once that model is supplied, proof search branches.  A direct signed-cosine
+-- theorem can act immediately on the literal sum.  A Fourier/modulation proof
+-- additionally needs the proof-relevant b -> b-t translation/modulation law.
+-- A full Weil target window is a still-stronger optional route.  None of these
+-- representation refinements is the analytic payment itself.
 ------------------------------------------------------------------------
 
 data RHInnerCoordinate : Set where
   abstractFinalNearScalar : RHInnerCoordinate
   countAndAbsoluteEnvelope : RHInnerCoordinate
-  finalNearLiteralPhaseRealisation : RHInnerCoordinate
+  finalNearLiteralSameObjectModel : RHInnerCoordinate
+  directPostCrossingSignedCosineEstimate : RHInnerCoordinate
+  proofRelevantTargetTranslationModulation : RHInnerCoordinate
+  taperRegularityForFourierOrIBP : RHInnerCoordinate
   fullWeilTargetWindowRealisation : RHInnerCoordinate
-  independentJointComplementPayment : RHInnerCoordinate
+  literalJointComplementPayment : RHInnerCoordinate
 
 
 data RHInnerState : Set where
   inadequateObservation : RHInnerState
   firstMissingCoordinate : RHInnerState
+  routeSpecificRefinement : RHInnerState
   optionalStrongerRefinement : RHInnerState
   theoremPayment : RHInnerState
 
 innerState : RHInnerCoordinate -> RHInnerState
 innerState abstractFinalNearScalar = inadequateObservation
 innerState countAndAbsoluteEnvelope = inadequateObservation
-innerState finalNearLiteralPhaseRealisation = firstMissingCoordinate
+innerState finalNearLiteralSameObjectModel = firstMissingCoordinate
+innerState directPostCrossingSignedCosineEstimate = theoremPayment
+innerState proofRelevantTargetTranslationModulation = routeSpecificRefinement
+innerState taperRegularityForFourierOrIBP = routeSpecificRefinement
 innerState fullWeilTargetWindowRealisation = optionalStrongerRefinement
-innerState independentJointComplementPayment = theoremPayment
+innerState literalJointComplementPayment = theoremPayment
 
 currentInnerMissingCoordinate : RHInnerCoordinate
-currentInnerMissingCoordinate = finalNearLiteralPhaseRealisation
+currentInnerMissingCoordinate = finalNearLiteralSameObjectModel
 
 currentInnerMissingCoordinateIsFirst :
   innerState currentInnerMissingCoordinate ≡ firstMissingCoordinate
@@ -133,6 +147,16 @@ nearObserverAgreesLiteralModelIsNotPayment :
     NearObserver.canonicalFinalPoleNearObserverRefinementBoundary ≡ false
 nearObserverAgreesLiteralModelIsNotPayment = refl
 
+proofRelevantPhaseLawIsNotInhabitedHere :
+  PhaseLaw.ProofRelevantTranslationModulationBoundary.actualPoleQuotientIntertwinerInhabitedHere
+    PhaseLaw.canonicalProofRelevantTranslationModulationBoundary ≡ false
+proofRelevantPhaseLawIsNotInhabitedHere = refl
+
+literalPhasePaymentIsTheoremBearingEndpoint :
+  LiteralMargin.LiteralPhaseJointMarginBoundary.literalPhasePaymentCompilesCanonicalOneLeafMargin
+    LiteralMargin.canonicalLiteralPhaseJointMarginBoundary ≡ true
+literalPhasePaymentIsTheoremBearingEndpoint = refl
+
 record BoundRHInnerRefinement : Set where
   constructor bound-rh-inner-refinement
   field
@@ -150,10 +174,41 @@ currentBoundRHInnerRefinement =
   bound-rh-inner-refinement
     currentBoundRHFinalDemand
     refl
-    finalNearLiteralPhaseRealisation
+    finalNearLiteralSameObjectModel
     refl
     true refl
     false refl
+
+------------------------------------------------------------------------
+-- Route admission.  Do not overconstrain the direct cosine route with Fourier
+-- structure it does not consume.
+------------------------------------------------------------------------
+
+data PhaseProofRoute : Set where
+  directCosineRoute : PhaseProofRoute
+  translationModulationRoute : PhaseProofRoute
+  integrationByPartsRoute : PhaseProofRoute
+  fullWeilWindowRoute : PhaseProofRoute
+
+routeNeedsTranslationModulation : PhaseProofRoute -> Bool
+routeNeedsTranslationModulation directCosineRoute = false
+routeNeedsTranslationModulation translationModulationRoute = true
+routeNeedsTranslationModulation integrationByPartsRoute = true
+routeNeedsTranslationModulation fullWeilWindowRoute = true
+
+routeNeedsTaperRegularity : PhaseProofRoute -> Bool
+routeNeedsTaperRegularity directCosineRoute = false
+routeNeedsTaperRegularity translationModulationRoute = false
+routeNeedsTaperRegularity integrationByPartsRoute = true
+routeNeedsTaperRegularity fullWeilWindowRoute = false
+
+directRouteDoesNotNeedTranslationModulation :
+  routeNeedsTranslationModulation directCosineRoute ≡ false
+directRouteDoesNotNeedTranslationModulation = refl
+
+ibpRouteNeedsTaperRegularity :
+  routeNeedsTaperRegularity integrationByPartsRoute ≡ true
+ibpRouteNeedsTaperRegularity = refl
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -164,6 +219,7 @@ data FinalBalancePaysAnalyticMargin : Set where
 data VisualizationPaysAnalyticMargin : Set where
 data BoundProducerPaysAnalyticMargin : Set where
 data LiteralNearRefinementPaysAnalyticMargin : Set where
+data FourierLabelPaysSignedEstimate : Set where
 
 representationTransportDoesNotPayAnalyticMargin :
   RepresentationTransportPaysAnalyticMargin → ⊥
@@ -181,3 +237,6 @@ boundProducerDoesNotPayAnalyticMargin ()
 literalNearRefinementDoesNotPayAnalyticMargin :
   LiteralNearRefinementPaysAnalyticMargin → ⊥
 literalNearRefinementDoesNotPayAnalyticMargin ()
+
+fourierLabelDoesNotPaySignedEstimate : FourierLabelPaysSignedEstimate → ⊥
+fourierLabelDoesNotPaySignedEstimate ()
