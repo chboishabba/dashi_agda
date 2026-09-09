@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.SourceAttributionShapePolicyExact as Shape
+import DASHI.Physics.GR.GravitationalEpistemicLineageExact as Lineage
 import DASHI.Physics.ExoticGravity.LiTorr1991CombinedFieldSourceEntitlementExact as LT1991
 import DASHI.Physics.ExoticGravity.LiTorr1992CoupledPotentialSourceEntitlementExact as LT1992
 import DASHI.Physics.ExoticGravity.SuperconductingConstitutiveNegativeGScopeWeldExact as EffectiveG
@@ -12,11 +13,9 @@ import DASHI.Physics.ExoticGravity.SuperconductingConstitutiveNegativeGScopeWeld
 ------------------------------------------------------------------------
 -- MODEL ORIGIN IS A FIRST-CLASS COORDINATE
 --
--- The historical Li/Torr papers source-entitle bounded coupled-field / response
--- claim shapes.  DASHI's material-effective negative-G interpretation is a
--- downstream reconstruction over a constitutive sign hypothesis.  Unless an
--- inspected source explicitly states that stronger interpretation, it remains
--- DASHI-derived rather than an imported Li/Torr theorem.
+-- Historical Li/Torr claim shapes carry external source entitlement.  DASHI's
+-- material-effective negative-G interpretation carries internal theorem/proof
+-- lineage.  Neither carrier can silently impersonate the other.
 ------------------------------------------------------------------------
 
 data ModelOrigin : Set where
@@ -59,20 +58,32 @@ liTorr1992HistoricalModelProvenance = model-provenance-receipt
   LT1992.CoupledPotentialSourceWeld
   LT1992.canonicalCoupledPotentialSourceWeld
 
-record DASHIMaterialEffectiveGModelReceipt : Set₁ where
+record DASHIMaterialEffectiveGModelReceipt : Set where
   constructor dashi-material-effective-g-model-receipt
   field
     effectiveGWeld : EffectiveG.ConstitutiveNegativeGReceipt
-    proofLineageCarrier : String
-    derivationScope : String
-    InternalDerivationReceipt : Set
-    internalDerivationReceipt : InternalDerivationReceipt
+    proofLineage : Lineage.InternalTheoremProofLineage
+    lineageModuleMatches :
+      Lineage.modulePath proofLineage
+        ≡ "DASHI/Physics/ExoticGravity/SuperconductingConstitutiveNegativeGScopeWeldExact.agda"
+    lineageScopeMatches :
+      Lineage.proofStatementScope proofLineage
+        ≡ "typed constitutive sign-reversal to material-effective negative-coupling interpretation only"
 
 open DASHIMaterialEffectiveGModelReceipt public
 
+materialEffectiveGProofLineage : Lineage.InternalTheoremProofLineage
+materialEffectiveGProofLineage =
+  Lineage.internal-theorem-proof-lineage
+    "DASHI/Physics/ExoticGravity/SuperconductingConstitutiveNegativeGScopeWeldExact.agda"
+    "ConstitutiveNegativeGReceipt"
+    "agent/antigravity-proof-search-followup"
+    "typed constitutive sign-reversal to material-effective negative-coupling interpretation only"
+    Lineage.internalTheoremLineage refl false
+
 ------------------------------------------------------------------------
--- Introspective collision: all three may be described loosely as
--- "superconducting gravity coupling" while their provenance and semantics differ.
+-- Introspective collision: all may be described loosely as superconducting
+-- gravity coupling while provenance and semantics differ.
 ------------------------------------------------------------------------
 
 data CoarseModelLabel : Set where
