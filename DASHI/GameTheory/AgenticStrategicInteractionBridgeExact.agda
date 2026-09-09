@@ -78,10 +78,11 @@ profitableDeviationImprovesAlignedDefect :
       (outcomeToState R
         (Game.deviationOutcome G profile (player R) alternative)))
     (Agentic.defect M (outcomeToState R (Game.outcome G profile)))
-profitableDeviationImprovesAlignedDefect A profile alternative profitable =
+profitableDeviationImprovesAlignedDefect {G = G} {R = R}
+  A profile alternative profitable =
   strictPreferenceImprovesDefect A
-    (Game.deviationOutcome _ profile _ alternative)
-    (Game.outcome _ profile)
+    (Game.deviationOutcome G profile (player R) alternative)
+    (Game.outcome G profile)
     profitable
 
 ------------------------------------------------------------------------
