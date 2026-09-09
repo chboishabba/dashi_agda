@@ -11,7 +11,6 @@ import DASHI.Biology.ResourceCoupledLogisticReplicationExact as Resource
 import DASHI.Biology.Cell.OpenMetabolicNetwork as OMN
 import DASHI.Biology.Cell.MetabolicStoichiometricConservation as MSC
 import DASHI.Biology.Cell.MetabolicOpenSystemBalance as MOB
-import DASHI.Biology.AgenticMaterialsControlCore as Agentic
 
 ------------------------------------------------------------------------
 -- RESOURCE-COUPLED LOGISTIC / METABOLIC OPEN-BALANCE BRIDGE
@@ -102,8 +101,8 @@ resourceBalanceCertificate :
   ∀ {S N Sto B} →
   (R : ResourceMetabolicOpenBalanceRealisation S N Sto B) →
   MOB.MetabolicOpenBalanceCertificate B
-resourceBalanceCertificate R =
-  MOB.certifyMetabolicOpenBalance _
+resourceBalanceCertificate {B = B} R =
+  MOB.certifyMetabolicOpenBalance B
 
 ------------------------------------------------------------------------
 -- Product-step receipt: population growth and chemical resource accounting
