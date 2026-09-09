@@ -3,6 +3,7 @@ module DASHI.Law.SensibLawBrightonMaintenanceChronologyEvidenceExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- BRIGHTON MAINTENANCE CHRONOLOGY: PRIVATE SOURCE RECEIPT BOUNDARY
@@ -55,20 +56,20 @@ record BrightonMaintenanceChronologyEvidence : Set where
 canonicalBrightonMaintenanceChronologyEvidence : BrightonMaintenanceChronologyEvidence
 canonicalBrightonMaintenanceChronologyEvidence =
   brighton-maintenance-chronology-evidence
-    true   -- same premises pinned
-    true   -- December condition report
-    true   -- mould quote arranged
-    true   -- agent treated matter as urgent
-    true   -- tenant's 20 Jan thread references second quote
-    true   -- agent independently apologises for delay
-    true   -- owner response/approval still outstanding
-    true   -- agent sends another urgent follow-up
-    true   -- no completed remediation established by that thread
-    true   -- 24 Jan larger/extensive issue recognition
-    true   -- narrow factual outstanding-remediation coordinate
-    false  -- statutory s 185 failure still needs legal evaluation
-    false  -- whole violation not promoted
-    false  -- raw private carriers not published here
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+    false
     "private Gmail source receipts: 2022-12-05 agent response; 2023-01-20 maintenance thread; 2023-01-24 non-liveability response"
 
 ------------------------------------------------------------------------
