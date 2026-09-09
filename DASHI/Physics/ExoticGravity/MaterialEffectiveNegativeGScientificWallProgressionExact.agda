@@ -9,10 +9,22 @@ import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallBidiE
 ------------------------------------------------------------------------
 -- SCIENTIFIC-WALL PROGRESSION
 --
--- This is only a first-open scheduler over the already-defined wall
--- discriminators. It does not create new experimental semantics and it does not
--- allow payment of one coordinate to synthesize later coordinates.
+-- Acquisition and dependency payment are deliberately distinct. Measurements
+-- may be retained out of promotion order, but first-open proof search is driven
+-- only by the dependency-payment state. This preserves append-only evidence
+-- without allowing later observations to synthesize earlier obligations.
 ------------------------------------------------------------------------
+
+record ScientificWallAcquisitionState : Set where
+  constructor scientific-wall-acquisition-state
+  field
+    massCurrentAcquired : Bool
+    stressEnergyAcquired : Bool
+    sourceMaterialAxesAcquired : Bool
+    modelClassSeparationAcquired : Bool
+    scalingReplicationIdentityAcquired : Bool
+
+open ScientificWallAcquisitionState public
 
 record ScientificWallPaymentState : Set where
   constructor scientific-wall-payment-state
@@ -127,12 +139,43 @@ closedWallProducerIsNoSearch :
 closedWallProducerIsNoSearch = refl
 
 ------------------------------------------------------------------------
+-- Append-only acquisition may run ahead of dependency payment.
+------------------------------------------------------------------------
+
+outOfOrderRetainedAcquisition : ScientificWallAcquisitionState
+outOfOrderRetainedAcquisition =
+  scientific-wall-acquisition-state false false true true true
+
+outOfOrderRetainedPayment : ScientificWallPaymentState
+outOfOrderRetainedPayment =
+  scientific-wall-payment-state false false false false false
+
+laterAxesMayAlreadyBeAcquired :
+  sourceMaterialAxesAcquired outOfOrderRetainedAcquisition ≡ true
+laterAxesMayAlreadyBeAcquired = refl
+
+modelSeparationDataMayAlreadyBeAcquired :
+  modelClassSeparationAcquired outOfOrderRetainedAcquisition ≡ true
+modelSeparationDataMayAlreadyBeAcquired = refl
+
+replicationMetadataMayAlreadyBeAcquired :
+  scalingReplicationIdentityAcquired outOfOrderRetainedAcquisition ≡ true
+replicationMetadataMayAlreadyBeAcquired = refl
+
+outOfOrderAcquisitionDoesNotSkipMassCurrentPayment :
+  firstOpenScientificWallLeaf outOfOrderRetainedPayment ≡ massCurrentLeaf
+outOfOrderAcquisitionDoesNotSkipMassCurrentPayment = refl
+
+------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
 
 record ScientificWallProgressionBoundary : Set where
   constructor scientific-wall-progression-boundary
   field
+    physicalAcquisitionMustFollowPromotionOrder : Bool
+    outOfOrderAcquisitionMayBeRetained : Bool
+    outOfOrderAcquisitionAutomaticallyPaysDependency : Bool
     paymentOrderMayBeSkippedByLabel : Bool
     payingMassCurrentAutomaticallyPaysStressEnergy : Bool
     payingStressEnergyAutomaticallyPaysSourceMaterialAxes : Bool
@@ -143,4 +186,4 @@ record ScientificWallProgressionBoundary : Set where
 
 canonicalScientificWallProgressionBoundary : ScientificWallProgressionBoundary
 canonicalScientificWallProgressionBoundary =
-  scientific-wall-progression-boundary false false false false false false false
+  scientific-wall-progression-boundary false true false false false false false false false false
