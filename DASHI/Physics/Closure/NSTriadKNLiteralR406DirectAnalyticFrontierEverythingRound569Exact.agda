@@ -26,20 +26,29 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 --   R580  refines the single signed Gram residual into four quantitative Bony
 --         class residuals and proves those payments suffice with fixed factor 4;
 --   R581  constructs the exact finite routing receipt by zero-masked pointwise
---         Bony channels and the existing foldPointwiseAdd theorem.
+--         Bony channels and the existing foldPointwiseAdd theorem;
+--   R582  proves any class norm/operator budget automatically upper-bounds the
+--         corresponding Gram residual, so a direct covariance theorem is not
+--         mandatory;
+--   R583  removes even that intermediate Gram representation when the producer
+--         already lands in class norms: four literal class norm ceilings compile
+--         directly to the routed fourSignInner norm with the same fixed factor 4;
+--   R584  instantiates that direct class-norm compiler on R573's ACTUAL nested
+--         slot-transformed inner cells, so the remaining class estimates are
+--         stated on the same object consumed by the modern commutator lane.
 --
 -- Separately, R577B reconciles the historical R328/R329 nested Schur producer
 -- with the MODERN R568 consumer.  It correctly keeps four receipts distinct:
 -- row, column, signed-response majorization, and cutoff-uniform Schur envelope.
 --
 -- The introspective result is therefore sharper than an opaque "commutator
--- estimate".  After R581 neither the helicity expansion, positive convolution,
--- literal enumeration, nor Bony routing is an analytic residual.  The remaining
--- within-fibre mathematics is quantitative cutoff-uniform payment of the four
--- classwise signed Gram residuals on the literal fourSignInner carrier.  Those
--- may be paid by Schur/Young/commutator estimates without demanding covariance
--- nonpositive.  The outer spectator-weighted spacetime passage remains
--- downstream.
+-- estimate".  After R584 neither helicity expansion, positive convolution,
+-- literal enumeration, Bony routing, direct covariance control, nor an
+-- inner-vs-outer-slot carrier mismatch is a mandatory analytic residual.  The
+-- preferred within-fibre target is now a cutoff-uniform norm/operator budget on
+-- the literal zero-masked Bony classes AFTER the actual R145 outer slot map.
+-- Existing Schur/Young/operator machinery may pay those norms directly.  The
+-- outer R294 weight and spectator-weighted spacetime passage remain downstream.
 --
 -- Ordinary scalar FTC/order and initial-energy endpoint calibration remain
 -- separately typed standard/source-realization coordinates.  Nothing in this
@@ -72,6 +81,9 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputFourSignFibreMajorantRound578Ex
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalOutputFourSignGramRound579Exact
 import DASHI.Physics.Closure.NSTriadKNFourSignBonyClassGramCompilerRound580Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact
+import DASHI.Physics.Closure.NSTriadKNClassNormBudgetToBonyGramPaymentRound582Exact
+import DASHI.Physics.Closure.NSTriadKNDirectBonyClassNormCompilerRound583Exact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyClassNormBidiRound584Exact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -91,6 +103,15 @@ round569BonyClassGramCompilerIntegrated = true
 round569LiteralBonyRoutingIntegrated : Bool
 round569LiteralBonyRoutingIntegrated = true
 
+round569ClassNormToGramCompilerIntegrated : Bool
+round569ClassNormToGramCompilerIntegrated = true
+
+round569DirectClassNormCompilerIntegrated : Bool
+round569DirectClassNormCompilerIntegrated = true
+
+round569LiveNestedSlotClassNormBidiIntegrated : Bool
+round569LiveNestedSlotClassNormBidiIntegrated = true
+
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
 
@@ -102,6 +123,12 @@ round569VariableFibreSignedGramResidualClosed = false
 
 round569ClasswiseSignedGramResidualsClosed : Bool
 round569ClasswiseSignedGramResidualsClosed = false
+
+round569LiteralNestedSlotClassNormBudgetsClosed : Bool
+round569LiteralNestedSlotClassNormBudgetsClosed = false
+
+round569OuterWeightSpectatorSpacetimeClosed : Bool
+round569OuterWeightSpectatorSpacetimeClosed = false
 
 round569ClayPromotion : Bool
 round569ClayPromotion = false
