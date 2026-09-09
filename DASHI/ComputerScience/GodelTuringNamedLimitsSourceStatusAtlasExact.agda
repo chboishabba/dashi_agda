@@ -52,6 +52,19 @@ turing1936 =
     "primary historical source identity for universal computation/undecidability; URL is a bibliographic carrier, not a proof import"
     Source.publicAttribution
 
+church1936 : Source.AttributedSource
+church1936 =
+  Source.mkDOISource
+    "Alonzo Church"
+    "An Unsolvable Problem of Elementary Number Theory"
+    "American Journal of Mathematics 58(2), 345–363"
+    "1936"
+    "10.2307/2371045"
+    "https://doi.org/10.2307/2371045"
+    Source.academicArticleSource
+    "primary source for Church's undecidability result and effective-calculability formulation"
+    Source.publicAttribution
+
 rice1953 : Source.AttributedSource
 rice1953 =
   Source.mkDOISource
@@ -88,7 +101,20 @@ kleene1936 =
     "10.1007/BF01565439"
     "https://doi.org/10.1007/BF01565439"
     Source.academicArticleSource
-    "primary source for general recursive-function machinery used by later fixed-point/recursion-theorem developments"
+    "primary source for general recursive-function machinery"
+    Source.publicAttribution
+
+kleene1938 : Source.AttributedSource
+kleene1938 =
+  Source.mkDOISource
+    "S. C. Kleene"
+    "On Notation for Ordinal Numbers"
+    "The Journal of Symbolic Logic 3(4), 150–155"
+    "1938"
+    "10.2307/2267778"
+    "https://doi.org/10.2307/2267778"
+    Source.academicArticleSource
+    "primary historical source attached to the recursion/fixed-point theorem family; theorem statement still requires local source alignment"
     Source.publicAttribution
 
 namedLimitsSourceAtlas : Source.AttributedSourceAtlas
@@ -96,8 +122,8 @@ namedLimitsSourceAtlas =
   Source.mkSourceAtlas
     "Gödel/Turing named limits source atlas"
     "DASHI.ComputerScience.GodelTuringNamedLimitsSourceStatusAtlasExact"
-    (godel1931 ∷ lob1955 ∷ turing1936 ∷ rice1953 ∷ rado1962 ∷ kleene1936 ∷ [])
-    "original-source identities for the named formal limits lane; Tarski/Church and later fixed-point source additions remain explicit acquisition extensions rather than fabricated metadata"
+    (godel1931 ∷ lob1955 ∷ turing1936 ∷ church1936 ∷ rice1953 ∷ rado1962 ∷ kleene1936 ∷ kleene1938 ∷ [])
+    "original-source identities for the named formal limits lane; Tarski primary-source metadata remains an explicit acquisition extension rather than fabricated metadata"
 
 ------------------------------------------------------------------------
 -- WHAT IS ALREADY IN-REPO?
@@ -136,8 +162,8 @@ status godelFirstIncompleteness = sourceEstablishedUnformalised
 status hilbertBernaysDerivabilityConditions = sourceEstablishedUnformalised
 status godelSecondIncompleteness = sourceEstablishedUnformalised
 status lobTheorem = sourceEstablishedUnformalised
-status tarskiUndefinability = sourceEstablishedUnformalised
-status churchEntscheidungsproblem = sourceMetadataPending
+status tarskiUndefinability = sourceMetadataPending
+status churchEntscheidungsproblem = sourceEstablishedUnformalised
 status turingHaltingUndecidability = sourceEstablishedUnformalised
 status kleeneRecursionFixedPoint = sourceEstablishedUnformalised
 status riceTheorem = sourceEstablishedUnformalised
