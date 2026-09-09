@@ -6,9 +6,14 @@ open import Agda.Builtin.Bool using (true; false)
 import DASHI.Physics.GR.GravitationalWavePolarizationSourceAttributionExact as Source
 import DASHI.Physics.GR.GravitationalWavePolarizationSignBidiExact as Polarization
 import DASHI.Physics.GR.GravitationalWavePhaseSignBidiExact as Phase
+import DASHI.Physics.GR.NegativeGGravitationalWavePhaseIdentifiabilityBidiExact as PhaseIdent
+import DASHI.Physics.GR.NegativeGGravitationalWavePhaseProofSearchExact as PhaseSearch
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingScopeBidiExact as Scope
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingScopeProofSearchExact as ScopeSearch
 import DASHI.Physics.ExoticGravity.SuperconductingResidualCouplingNegativeGInterpretationBidiExact as Interpretation
+import DASHI.Physics.ExoticGravity.SuperconductingConstitutiveNegativeGScopeWeldExact as ConstitutiveWeld
+import DASHI.Physics.ExoticGravity.SuperconductingConstitutiveNegativeGProofSearchExact as ConstitutiveSearch
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGGravitationalWaveBidiExact as MaterialWave
 
 ------------------------------------------------------------------------
 -- SOURCE ATTRIBUTION
@@ -106,6 +111,36 @@ phaseFlipIsInvolutive :
   Phase.phaseFlip (Phase.phaseFlip sign) ≡ sign
 phaseFlipIsInvolutive = Phase.phaseFlipInvolutive
 
+independentPhaseAnchorRequiredForNegativeGWaveSign :
+  PhaseIdent.independentPhaseAnchorRequired
+    PhaseIdent.canonicalNegativeGWavePhaseIdentifiabilityBoundary
+    ≡ true
+independentPhaseAnchorRequiredForNegativeGWaveSign = refl
+
+waveformSignAloneDoesNotIdentifyNegativeG :
+  PhaseIdent.negativeWaveformSignAloneIdentifiesNegativeG
+    PhaseIdent.canonicalNegativeGWavePhaseIdentifiabilityBoundary
+    ≡ false
+waveformSignAloneDoesNotIdentifyNegativeG = refl
+
+ligoPhaseSourceDoesNotProveDASHIPhaseCollision :
+  PhaseIdent.ligoPhaseSourceProvesDASHICollisionTheorem
+    PhaseIdent.canonicalNegativeGWavePhaseIdentifiabilityBoundary
+    ≡ false
+ligoPhaseSourceDoesNotProveDASHIPhaseCollision = refl
+
+phaseSearchStartsWithIndependentAnchor :
+  PhaseSearch.currentFirstNewResidualIsIndependentPhaseAnchor
+    PhaseSearch.canonicalNegativeGWaveSignProofSearchBoundary
+    ≡ true
+phaseSearchStartsWithIndependentAnchor = refl
+
+phaseAnchorAloneDoesNotCloseNegativeG :
+  PhaseSearch.phaseAnchorAloneClosesNegativeG
+    PhaseSearch.canonicalNegativeGWaveSignProofSearchBoundary
+    ≡ false
+phaseAnchorAloneDoesNotCloseNegativeG = refl
+
 ------------------------------------------------------------------------
 -- UNIVERSAL G VERSUS MATERIAL-EFFECTIVE G
 ------------------------------------------------------------------------
@@ -191,3 +226,73 @@ effectiveGInterpretationDoesNotProveUniversalNegativeG :
     Interpretation.canonicalResidualNegativeGInterpretationBoundary
     ≡ false
 effectiveGInterpretationDoesNotProveUniversalNegativeG = refl
+
+negativeFieldRatioDoesNotMeanNegativeEffectiveG :
+  ConstitutiveWeld.negativeTotalFieldRatioAutomaticallyMeansNegativeEffectiveG
+    ConstitutiveWeld.canonicalConstitutiveNegativeGBoundary
+    ≡ false
+negativeFieldRatioDoesNotMeanNegativeEffectiveG = refl
+
+fixedMeasuredSourceRequiredForConstitutiveNegativeG :
+  ConstitutiveWeld.fixedMeasuredSourceRequired
+    ConstitutiveWeld.canonicalConstitutiveNegativeGBoundary
+    ≡ true
+fixedMeasuredSourceRequiredForConstitutiveNegativeG = refl
+
+coefficientSignReversalRequiredForConstitutiveNegativeG :
+  ConstitutiveWeld.coefficientSignReversalRequired
+    ConstitutiveWeld.canonicalConstitutiveNegativeGBoundary
+    ≡ true
+coefficientSignReversalRequiredForConstitutiveNegativeG = refl
+
+internalConstitutiveWeldNeedsNoFreshCitation :
+  ConstitutiveWeld.internalWeldNeedsFreshExternalCitation
+    ConstitutiveWeld.canonicalConstitutiveNegativeGBoundary
+    ≡ false
+internalConstitutiveWeldNeedsNoFreshCitation = refl
+
+constitutiveNegativeGSearchStartsAtSourceCurrent :
+  ConstitutiveSearch.currentFirstStageIsSourceCurrent
+    ConstitutiveSearch.canonicalConstitutiveNegativeGProofSearchBoundary
+    ≡ true
+constitutiveNegativeGSearchStartsAtSourceCurrent = refl
+
+closedEnhancementSplitDoesNotMeanNegativeEffectiveG :
+  ConstitutiveSearch.closedEnhancementSplitAutomaticallyMeansNegativeEffectiveG
+    ConstitutiveSearch.canonicalConstitutiveNegativeGProofSearchBoundary
+    ≡ false
+closedEnhancementSplitDoesNotMeanNegativeEffectiveG = refl
+
+------------------------------------------------------------------------
+-- MATERIAL-EFFECTIVE G x GRAVITATIONAL WAVES
+------------------------------------------------------------------------
+
+materialEffectiveGDoesNotAutomaticallyChangeWaveGeneration :
+  MaterialWave.materialEffectiveNegativeGAutomaticallyChangesWaveGeneration
+    MaterialWave.canonicalMaterialEffectiveGWaveBoundary
+    ≡ false
+materialEffectiveGDoesNotAutomaticallyChangeWaveGeneration = refl
+
+sourceToRadiativeMappingRequired :
+  MaterialWave.explicitSourceToRadiativeMappingRequired
+    MaterialWave.canonicalMaterialEffectiveGWaveBoundary
+    ≡ true
+sourceToRadiativeMappingRequired = refl
+
+materialEffectiveGDoesNotAutomaticallyChangeVacuumPropagation :
+  MaterialWave.materialEffectiveNegativeGAutomaticallyChangesVacuumPropagation
+    MaterialWave.canonicalMaterialEffectiveGWaveBoundary
+    ≡ false
+materialEffectiveGDoesNotAutomaticallyChangeVacuumPropagation = refl
+
+materialEffectiveGDoesNotChangePolarizationBasisAutomatically :
+  MaterialWave.materialEffectiveNegativeGAutomaticallyChangesPolarizationBasis
+    MaterialWave.canonicalMaterialEffectiveGWaveBoundary
+    ≡ false
+materialEffectiveGDoesNotChangePolarizationBasisAutomatically = refl
+
+negativeWaveSampleDoesNotDetermineMaterialEffectiveCoupling :
+  MaterialWave.negativeWaveformSampleDeterminesMaterialEffectiveCoupling
+    MaterialWave.canonicalMaterialEffectiveGWaveBoundary
+    ≡ false
+negativeWaveSampleDoesNotDetermineMaterialEffectiveCoupling = refl
