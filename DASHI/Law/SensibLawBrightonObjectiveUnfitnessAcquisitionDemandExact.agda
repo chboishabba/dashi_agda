@@ -25,6 +25,15 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 --   * the agent subsequently described a larger issue requiring extensive
 --     attention and issued a non-liveability Form 12.
 --
+-- Connected-source acquisition pass:
+--   * Gmail searched for Natural Mould Removal / MouldMen / Job #13812 / quote
+--     and report carriers;
+--   * Google Drive searched for the same identifiers and Brighton mould files;
+--   * the 21-Apr-2023 QCAT consent decision was inspected and contains no
+--     premises-fitness or s 185 merits finding;
+--   * the later QCAT Housing chronology concerns the distinct Chapel Hill
+--     tenancy and does not contain the Brighton contractor report.
+--
 -- What is NOT in hand is the contractor's actual report/quote findings.  This
 -- module binds acquisition to that exact missing source rather than asking for
 -- more repetitions of the agent's characterization.
@@ -106,13 +115,18 @@ currentDemandUsesExactProducer =
   Bound.acquisitionUsesSelectedProducer currentObjectiveUnfitnessDemand
 
 ------------------------------------------------------------------------
--- Current evidence state and promotion firewall.
+-- Current evidence/acquisition state and promotion firewall.
 ------------------------------------------------------------------------
 
 record ObjectiveUnfitnessAcquisitionState : Set where
   constructor objective-unfitness-acquisition-state
   field
     contractorInspectionExistenceConfirmed : Bool
+    connectedGmailSearchCompleted : Bool
+    connectedDriveSearchCompleted : Bool
+    qcatConsentDecisionInspected : Bool
+    qcatConsentDecisionContainsFitnessFinding : Bool
+    contractorReportFoundInConnectedSources : Bool
     contractorReportInHand : Bool
     exactContractorFindingsInHand : Bool
     objectiveUnfitnessClassificationPaid : Bool
@@ -122,14 +136,21 @@ canonicalObjectiveUnfitnessAcquisitionState : ObjectiveUnfitnessAcquisitionState
 canonicalObjectiveUnfitnessAcquisitionState =
   objective-unfitness-acquisition-state
     true
+    true
+    true
+    true
     false
     false
     false
-    "MouldMen 13-Feb-2023 confirms inspection for Ray White but declines disclosure; original report/quote absent from reviewed Gmail corpus"
+    false
+    false
+    "MouldMen confirms inspection for Ray White but declines disclosure; Gmail/Drive acquisition pass found no original report; 21-Apr-2023 QCAT decision is by consent and contains no fitness merits finding"
 
 data InspectionExistencePaysReportContent : Set where
 data AgentSummaryPaysContractorFinding : Set where
 data ReportAcquisitionAutomaticallyPaysObjectiveUnfitness : Set where
+data ConnectedSourceAbsenceProvesGlobalNonexistence : Set where
+data ConsentOrderAutomaticallyPaysPremisesFitness : Set where
 
 inspectionExistenceDoesNotPayReportContent :
   InspectionExistencePaysReportContent → ⊥
@@ -142,6 +163,14 @@ agentSummaryDoesNotPayContractorFinding ()
 reportAcquisitionDoesNotAutoPayObjectiveUnfitness :
   ReportAcquisitionAutomaticallyPaysObjectiveUnfitness → ⊥
 reportAcquisitionDoesNotAutoPayObjectiveUnfitness ()
+
+connectedSourceAbsenceDoesNotProveGlobalNonexistence :
+  ConnectedSourceAbsenceProvesGlobalNonexistence → ⊥
+connectedSourceAbsenceDoesNotProveGlobalNonexistence ()
+
+consentOrderDoesNotAutoPayPremisesFitness :
+  ConsentOrderAutomaticallyPaysPremisesFitness → ⊥
+consentOrderDoesNotAutoPayPremisesFitness ()
 
 ------------------------------------------------------------------------
 -- Proof-directed search intent: acquire the missing primary artifact first.
@@ -157,7 +186,7 @@ currentObjectiveUnfitnessSearchIntent = Search.searchIntent
   "5 December 2022 through 24 January 2023"
   Search.primaryTextRequired
   "contractor inspection existence, agent summaries, Form 12 ground and photographs remain separate evidence fibres until the original report is acquired and same-object authenticated"
-  "Job #13812 assignment; 20-Jan delay thread; 24-Jan agent larger-issue/non-liveability statement; 13-Feb MouldMen inspection confirmation/refusal"
+  "Job #13812 assignment; 20-Jan delay thread; 24-Jan agent larger-issue/non-liveability statement; 13-Feb MouldMen inspection confirmation/refusal; connected Gmail/Drive search receipts"
   "original contractor report or quote must preserve inspected address, inspection date, author/company, observations, measurements if any, conclusions and recommended remediation"
   "exclude generic mould guidance, later summaries and repeated tenant/agent assertions; do not promote report acquisition itself into objective legal unfitness without evaluating the actual findings"
   (Search.searchBudget 6 12 3 "primary contractor report first; stop once original findings are acquired or their unavailability is independently established")
