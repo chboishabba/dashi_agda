@@ -1,0 +1,13 @@
+speaker	marker	weight
+# Example only. For blind evaluation, derive markers from separately sourced public statements,
+# not from the held-out ABC answer spans.
+David Shoebridge	gaslighting	6
+David Shoebridge	action	2
+David Shoebridge	settlement	2
+Ed Husic	palestine	2
+Ed Husic	state	1
+Julian Leeser	two-state	3
+Julian Leeser	sanction	-1
+Penny Wong	unintended	3
+Penny Wong	implementation	3
+Penny Wong	business	1
