@@ -9,6 +9,7 @@ import DASHI.Core.ExperimentalCoordinateDesignExact as Experiment
 import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact as Fibre
 import DASHI.Core.ConsumerFibreRefinementSchedulerExact as Scheduler
 import DASHI.Interop.DialecticalMaterialProofSearchExperimentLoopExact as Loop
+import DASHI.Interop.DialecticalMaterialSourceDiligenceReopeningExact as MaterialSource
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 
 ------------------------------------------------------------------------
@@ -45,18 +46,9 @@ record CrossLevelCausalClaim (Value : Set) : Set where
 
 open CrossLevelCausalClaim public
 
-------------------------------------------------------------------------
--- A target coordinate may be directly measured or a provenance-bearing
--- derived discriminator.  No other role is silently promoted to outcome.
-------------------------------------------------------------------------
-
 data CausalTargetRole : Experiment.CoordinateRole → Set where
   measuredTarget : CausalTargetRole Experiment.measuredObservable
   derivedTarget : CausalTargetRole Experiment.derivedDiscriminator
-
-------------------------------------------------------------------------
--- Experimental design for one causal attribution.
-------------------------------------------------------------------------
 
 record CrossLevelCausalDesign
     {Value : Set}
@@ -64,49 +56,32 @@ record CrossLevelCausalDesign
   constructor cross-level-causal-design
   field
     World Control Dimension : Set
-
-    design :
-      Experiment.ExperimentalCoordinateDesign World Control Value Dimension
-
+    design : Experiment.ExperimentalCoordinateDesign World Control Value Dimension
     sourceCoordinate targetCoordinate : Experiment.Coordinate design
-
     sourceIsControlled :
       Experiment.role design sourceCoordinate ≡ Experiment.controlledInput
-
-    targetRole :
-      CausalTargetRole (Experiment.role design targetCoordinate)
-
+    targetRole : CausalTargetRole (Experiment.role design targetCoordinate)
     baselineWorld : World
     intervention : Control
-
     sourceBefore :
-      Experiment.read design sourceCoordinate baselineWorld
-      ≡ sourceValue claim
-
+      Experiment.read design sourceCoordinate baselineWorld ≡ sourceValue claim
     sourceAfter :
       Experiment.read design sourceCoordinate
         (Experiment.applyControl design intervention baselineWorld)
       ≡ sourceValue claim → ⊥
-
     targetAfter :
       Experiment.read design targetCoordinate
         (Experiment.applyControl design intervention baselineWorld)
       ≡ targetValue claim
-
     Confounder : Set
     nuisanceCoordinate : Confounder → Experiment.Coordinate design
     nuisanceIsTyped :
       (c : Confounder) →
       Experiment.role design (nuisanceCoordinate c)
       ≡ Experiment.nuisanceCoordinate
-
     IdentificationAssumption : Set
     identificationReceipt : IdentificationAssumption
-
-    interventionReference : String
-    nuisanceReference : String
-    identificationReference : String
-    measurementReference : String
+    interventionReference nuisanceReference identificationReference measurementReference : String
 
 open CrossLevelCausalDesign public
 
@@ -118,16 +93,9 @@ record CrossLevelCausalAttribution
   field
     CausalEffect : CrossLevelCausalClaim Value → Set
     effectWitness : CausalEffect claim
-
-    chronologyReference : String
-    lineageOrSubjectReference : String
-    attributionReference : String
+    chronologyReference lineageOrSubjectReference attributionReference : String
 
 open CrossLevelCausalAttribution public
-
-------------------------------------------------------------------------
--- Experiment proof-search binding.
-------------------------------------------------------------------------
 
 record CausalExperimentProofSearchBinding
     {system : Fibre.ConsumerIndexedFibreSystem}
@@ -140,14 +108,10 @@ record CausalExperimentProofSearchBinding
     (attribution : CrossLevelCausalAttribution claim causalDesign) : Set₂ where
   constructor causal-experiment-proof-search-binding
   field
-    experimentBinding :
-      Introspective.ConsumerDefectExperimentBinding liveResidual
-
+    experimentBinding : Introspective.ConsumerDefectExperimentBinding liveResidual
     causalExperimentIsScheduledExperiment :
       interventionReference causalDesign
-      ≡ Loop.experimentReference
-          (Introspective.demand experimentBinding)
-
+      ≡ Loop.experimentReference (Introspective.demand experimentBinding)
     consumerUseReference : String
 
 open CausalExperimentProofSearchBinding public
@@ -158,21 +122,9 @@ causalExperimentPaysLiveResidual :
     CausalExperimentProofSearchBinding
       {system} {schedule} {consumer} liveResidual
       {Value} {claim} {causalDesign} attribution) →
-  Loop.residual
-    (Introspective.demand (experimentBinding binding))
-  ≡ liveResidual
+  Loop.residual (Introspective.demand (experimentBinding binding)) ≡ liveResidual
 causalExperimentPaysLiveResidual binding =
-  Introspective.demandResidualMatchesLiveResidual
-    (experimentBinding binding)
-
-------------------------------------------------------------------------
--- Source-diligence route.
---
--- Literature, database, provenance or historical-source acquisition may be the
--- highest-alpha route instead of a new experiment.  The source acquisition is
--- still bound to the same scheduled residual, and an application-supplied
--- source support predicate is required before it can support the causal claim.
-------------------------------------------------------------------------
+  Introspective.demandResidualMatchesLiveResidual (experimentBinding binding)
 
 record CausalSourceProofSearchBinding
     {system : Fibre.ConsumerIndexedFibreSystem}
@@ -184,14 +136,10 @@ record CausalSourceProofSearchBinding
     (claim : CrossLevelCausalClaim Value) : Set₁ where
   constructor causal-source-proof-search-binding
   field
-    sourceDemand :
-      Introspective.ConsumerDefectSourceDemand alignment liveResidual
-
+    sourceDemand : Introspective.ConsumerDefectSourceDemand alignment liveResidual
     SourceSupportsClaim : CrossLevelCausalClaim Value → Set
     sourceSupport : SourceSupportsClaim claim
-
-    sourceIdentificationReference : String
-    consumerUseReference : String
+    sourceIdentificationReference consumerUseReference : String
 
 open CausalSourceProofSearchBinding public
 
@@ -201,17 +149,13 @@ causalSourcePaysScheduledGap :
     CausalSourceProofSearchBinding
       {system} {schedule} {consumer}
       alignment liveResidual {Value} claim) →
-  Introspective.MaterialSource.firstMissingSourceCoordinate
+  MaterialSource.firstMissingSourceCoordinate
     (Introspective.reopening (sourceDemand binding))
   ≡
   Introspective.sourceGapFor alignment
     (Scheduler.missingCoordinate liveResidual)
 causalSourcePaysScheduledGap binding =
   Introspective.sourceRoutePaysScheduledGap (sourceDemand binding)
-
-------------------------------------------------------------------------
--- Consumer closure remains downstream.
-------------------------------------------------------------------------
 
 record CausalAttributionToConsumerClosure
     {system : Fibre.ConsumerIndexedFibreSystem}
@@ -222,18 +166,13 @@ record CausalAttributionToConsumerClosure
     {claim : CrossLevelCausalClaim Value}
     {causalDesign : CrossLevelCausalDesign claim}
     {attribution : CrossLevelCausalAttribution claim causalDesign}
-    (binding :
-      CausalExperimentProofSearchBinding liveResidual attribution) : Set₂ where
+    (binding : CausalExperimentProofSearchBinding liveResidual attribution) : Set₂ where
   constructor causal-attribution-to-consumer-closure
   field
     refinedReceipt : Fibre.ConsumerRefinementReceipt system consumer
     refinementReference : String
 
 open CausalAttributionToConsumerClosure public
-
-------------------------------------------------------------------------
--- Authority firewalls.
-------------------------------------------------------------------------
 
 data CorrelationMeansCausationPermission : Set where
 
@@ -253,40 +192,23 @@ data ExperimentAdmissionCreatesInterventionAuthorityPermission : Set where
 
 data SourceAcquisitionAutomaticallyProvesCausationPermission : Set where
 
-correlationDoesNotByItselfIdentifyCause :
-  CorrelationMeansCausationPermission → ⊥
+correlationDoesNotByItselfIdentifyCause : CorrelationMeansCausationPermission → ⊥
 correlationDoesNotByItselfIdentifyCause ()
-
-temporalOrderDoesNotByItselfIdentifyCause :
-  TemporalOrderMeansCausationPermission → ⊥
+temporalOrderDoesNotByItselfIdentifyCause : TemporalOrderMeansCausationPermission → ⊥
 temporalOrderDoesNotByItselfIdentifyCause ()
-
-dnaDifferenceDoesNotByItselfCauseMemoryDifference :
-  DNAConsumerDifferenceMeansMemoryCausePermission → ⊥
+dnaDifferenceDoesNotByItselfCauseMemoryDifference : DNAConsumerDifferenceMeansMemoryCausePermission → ⊥
 dnaDifferenceDoesNotByItselfCauseMemoryDifference ()
-
-traumaHistoryDoesNotByItselfIdentifyNeuralCause :
-  TraumaHistoryMeansNeuralCausePermission → ⊥
+traumaHistoryDoesNotByItselfIdentifyNeuralCause : TraumaHistoryMeansNeuralCausePermission → ⊥
 traumaHistoryDoesNotByItselfIdentifyNeuralCause ()
-
-learningDoesNotByItselfIdentifyHeritableChange :
-  LearningMeansHeritableChangePermission → ⊥
+learningDoesNotByItselfIdentifyHeritableChange : LearningMeansHeritableChangePermission → ⊥
 learningDoesNotByItselfIdentifyHeritableChange ()
-
-culturalPatternDoesNotBecomeBiologicalEssence :
-  CulturalPatternMeansBiologicalEssencePermission → ⊥
+culturalPatternDoesNotBecomeBiologicalEssence : CulturalPatternMeansBiologicalEssencePermission → ⊥
 culturalPatternDoesNotBecomeBiologicalEssence ()
-
-causalAttributionDoesNotAutomaticallyCloseConsumer :
-  CausalAttributionAutomaticallyClosesConsumerPermission → ⊥
+causalAttributionDoesNotAutomaticallyCloseConsumer : CausalAttributionAutomaticallyClosesConsumerPermission → ⊥
 causalAttributionDoesNotAutomaticallyCloseConsumer ()
-
-experimentAdmissionDoesNotCreateInterventionAuthority :
-  ExperimentAdmissionCreatesInterventionAuthorityPermission → ⊥
+experimentAdmissionDoesNotCreateInterventionAuthority : ExperimentAdmissionCreatesInterventionAuthorityPermission → ⊥
 experimentAdmissionDoesNotCreateInterventionAuthority ()
-
-sourceAcquisitionDoesNotAutomaticallyProveCausation :
-  SourceAcquisitionAutomaticallyProvesCausationPermission → ⊥
+sourceAcquisitionDoesNotAutomaticallyProveCausation : SourceAcquisitionAutomaticallyProvesCausationPermission → ⊥
 sourceAcquisitionDoesNotAutomaticallyProveCausation ()
 
 record MultiscaleCausalProvenanceBoundary : Set where
@@ -304,8 +226,7 @@ record MultiscaleCausalProvenanceBoundary : Set where
     sourceAcquisitionAutomaticallyProvesCausation : Bool
     culturalPatternAutomaticallyBecomesBiologicalEssence : Bool
 
-canonicalMultiscaleCausalProvenanceBoundary :
-  MultiscaleCausalProvenanceBoundary
+canonicalMultiscaleCausalProvenanceBoundary : MultiscaleCausalProvenanceBoundary
 canonicalMultiscaleCausalProvenanceBoundary =
   multiscale-causal-provenance-boundary
     true true true true true true true false false false false
