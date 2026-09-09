@@ -70,15 +70,16 @@ record BetaDrivenCMP119ResidualFamily
 open BetaDrivenCMP119ResidualFamily public
 
 completeDensityAt :
-  ∀ {trajectory split inputs} →
-  BetaDrivenCMP119ResidualFamily
-    {trajectory = trajectory} {split = split} inputs →
+  ∀ {trajectory split inputs}
+    (family : BetaDrivenCMP119ResidualFamily
+      {trajectory = trajectory} {split = split} inputs) →
   Nat →
   CMP119.CMP119Section2CompleteDensity
     ℚ (Beta.Density inputs)
-    (Operation _) (Action _) (Field _)
-    (RegularTerm _) (RTerm _) (BoundaryTerm _) (VacuumTerm _)
-    (SmallFieldScale _) (BlockRadius _) (AnalyticRadius _) (Decay _)
+    (Operation family) (Action family) (Field family)
+    (RegularTerm family) (RTerm family) (BoundaryTerm family) (VacuumTerm family)
+    (SmallFieldScale family) (BlockRadius family)
+    (AnalyticRadius family) (Decay family)
 completeDensityAt {inputs = inputs} family scale = record
   { CMP119.CMP119Section2CompleteDensity.scale = scale
   ; CMP119.CMP119Section2CompleteDensity.g =
