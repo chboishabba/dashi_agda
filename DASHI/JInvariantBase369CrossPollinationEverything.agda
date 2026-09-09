@@ -25,8 +25,9 @@ import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 -- Rendered acquisition is split into image->analytic and analytic->structured
 -- stages.  The stricter interval-valued recognizer keeps pixel uncertainty as
 -- a fibre and recognises k only after exact orbit containment and uniqueness.
--- On the currently visible k=0..7 fibre, scale uniqueness is now compiler-
--- owned because 1,3,7,13,21,31,43,57 form an exact injective code.
+-- On the currently visible k=0..7 fibre, scale uniqueness is compiler-owned:
+-- a retained box that determines one exact visible scale compiles to a unique
+-- visible k without adding a second uniqueness authority.
 -- The tri-BIDI governance owner cross-pollinates this with the existing RH
 -- hidden-residual rule and light-transport side-information firewall at exact
 -- certificate-schema strength only: no theorem is transferred between lanes.
@@ -34,6 +35,7 @@ import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 -- emits local 27, k, D_k and the L^kT word packet immediately.
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
+import DASHI.Moonshine.JInvariantRenderedVisibleScaleCompilerBidiExact
 import DASHI.Moonshine.JInvariantRenderedResidualGovernanceTriBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 
@@ -43,9 +45,9 @@ import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
 
--- Includes exact norm-one, denominator-cleared reciprocal-square, Bishop
--- phi/psi factorisation, Bishop reciprocal-square convergence, and the
--- remaining rational/Bishop/order same-object producer debt.
+-- Includes exact norm-one, rational/Bishop defect welds, Bishop phi/psi
+-- factorisation, reciprocal-square convergence, the uniform conjugate-factor
+-- lower bound and the final same-carrier Fibonacci-ratio -> Bishop-phi limit.
 import DASHI.Moonshine.QuadraticSignedApproximationEverything
 
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact
