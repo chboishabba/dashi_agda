@@ -2,6 +2,7 @@ module DASHI.Wikimedia.NativePropertyTripleProjectionExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Wikimedia.IdentifierExact as Id
