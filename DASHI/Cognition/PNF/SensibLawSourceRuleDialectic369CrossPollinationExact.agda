@@ -7,134 +7,139 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
 import Base369 as Base
+import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Reasoning.TernaryComparisonSynthesisExact as Ternary
 import DASHI.Culture.IntellectualReceptionIntersectionalTernaryDialectic369BridgeExact as Existing369
-import DASHI.Culture.PhilosophyClaimProvenanceHistoryBidiExact as Attribution
-import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
+import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
 
-------------------------------------------------------------------------
--- LEGAL SOURCE-RULE x 369 DIALECTIC CROSS-POLLINATION
---
--- The 369 carrier is used only as an audit geometry.  It does not decide legal
--- truth, authority, applicability or violation.  Its useful contribution is
--- direction-sensitive preservation: support / unresolved / defeat and the
--- ordered relation between positive and negative source branches are retained
--- when a later consumer coordinate is added.
-------------------------------------------------------------------------
+data AtomicFitDisposition : Set where
+  failsThisAtom : AtomicFitDisposition
+  unresolvedThisAtom : AtomicFitDisposition
+  fitsThisAtom : AtomicFitDisposition
 
-data LegalSourceDisposition : Set where
-  defeats : LegalSourceDisposition
-  unresolvedOrQualified : LegalSourceDisposition
-  supports : LegalSourceDisposition
+atomicFitDispositionFromGate : BT.Trit → AtomicFitDisposition
+atomicFitDispositionFromGate BT.neg = failsThisAtom
+atomicFitDispositionFromGate BT.zero = unresolvedThisAtom
+atomicFitDispositionFromGate BT.pos = fitsThisAtom
 
-dispositionTri : LegalSourceDisposition → Base.TriTruth
-dispositionTri defeats = Base.tri-low
-dispositionTri unresolvedOrQualified = Base.tri-mid
-dispositionTri supports = Base.tri-high
+atomicDispositionTri : AtomicFitDisposition → Base.TriTruth
+atomicDispositionTri failsThisAtom = Base.tri-low
+atomicDispositionTri unresolvedThisAtom = Base.tri-mid
+atomicDispositionTri fitsThisAtom = Base.tri-high
 
-record DirectedSourceRuleAudit : Set where
-  constructor directed-source-rule-audit
+atomicGateTri : BT.Trit → Base.TriTruth
+atomicGateTri gate = atomicDispositionTri (atomicFitDispositionFromGate gate)
+
+atomicGateNegIsLow : atomicGateTri BT.neg ≡ Base.tri-low
+atomicGateNegIsLow = refl
+
+atomicGateZeroIsMid : atomicGateTri BT.zero ≡ Base.tri-mid
+atomicGateZeroIsMid = refl
+
+atomicGatePosIsHigh : atomicGateTri BT.pos ≡ Base.tri-high
+atomicGatePosIsHigh = refl
+
+record DirectedAtomicRuleAudit : Set where
+  constructor directed-atomic-rule-audit
   field
-    positiveBranch : LegalSourceDisposition
-    negativeBranch : LegalSourceDisposition
-    consumerDisposition : LegalSourceDisposition
+    positiveRequirementAtom : AtomicFitDisposition
+    exceptionOrDefeaterAtom : AtomicFitDisposition
+    consumerAtom : AtomicFitDisposition
 
-open DirectedSourceRuleAudit public
+open DirectedAtomicRuleAudit public
 
-sourceComparison9 : DirectedSourceRuleAudit → Ternary.Comparison9
+sourceComparison9 : DirectedAtomicRuleAudit → Ternary.Comparison9
 sourceComparison9 audit =
-  dispositionTri (positiveBranch audit) ,
-  dispositionTri (negativeBranch audit)
+  atomicDispositionTri (positiveRequirementAtom audit) ,
+  atomicDispositionTri (exceptionOrDefeaterAtom audit)
 
-sourceSynthesis27 : DirectedSourceRuleAudit → Ternary.SynthesisChoice27
+sourceSynthesis27 : DirectedAtomicRuleAudit → Ternary.SynthesisChoice27
 sourceSynthesis27 audit =
   Ternary.makeSynthesisChoice
-    (dispositionTri (positiveBranch audit))
-    (dispositionTri (negativeBranch audit))
-    (dispositionTri (consumerDisposition audit))
+    (atomicDispositionTri (positiveRequirementAtom audit))
+    (atomicDispositionTri (exceptionOrDefeaterAtom audit))
+    (atomicDispositionTri (consumerAtom audit))
 
 sourceComparisonSurvivesConsumerSynthesis :
-  (audit : DirectedSourceRuleAudit) →
-  Ternary.comparisonOfSynthesis (sourceSynthesis27 audit)
-  ≡ sourceComparison9 audit
+  (audit : DirectedAtomicRuleAudit) →
+  Ternary.comparisonOfSynthesis (sourceSynthesis27 audit) ≡ sourceComparison9 audit
 sourceComparisonSurvivesConsumerSynthesis audit = refl
 
-------------------------------------------------------------------------
--- Direction matters: support lost and defeater lost are different moves even
--- if a coarse Boolean observer says merely "one source was removed".
-------------------------------------------------------------------------
+atomicTestsTo27 :
+  ∀ {p q r} →
+  Atomic.SourceConditionedAtomicLegalTest p →
+  Atomic.SourceConditionedAtomicLegalTest q →
+  Atomic.SourceConditionedAtomicLegalTest r →
+  Ternary.SynthesisChoice27
+atomicTestsTo27 p q r = Ternary.makeSynthesisChoice
+  (atomicGateTri (Atomic.gate p))
+  (atomicGateTri (Atomic.gate q))
+  (atomicGateTri (Atomic.gate r))
 
-supportLostAudit : DirectedSourceRuleAudit
-supportLostAudit = directed-source-rule-audit supports unresolvedOrQualified unresolvedOrQualified
+positiveRequirementLostAudit : DirectedAtomicRuleAudit
+positiveRequirementLostAudit =
+  directed-atomic-rule-audit fitsThisAtom unresolvedThisAtom unresolvedThisAtom
 
-defeaterLostAudit : DirectedSourceRuleAudit
-defeaterLostAudit = directed-source-rule-audit unresolvedOrQualified defeats supports
+negativeBranchFailsToApplyAudit : DirectedAtomicRuleAudit
+negativeBranchFailsToApplyAudit =
+  directed-atomic-rule-audit unresolvedThisAtom failsThisAtom fitsThisAtom
 
-supportLossAndDefeaterLossDiffer :
-  sourceComparison9 supportLostAudit ≡ sourceComparison9 defeaterLostAudit → ⊥
-supportLossAndDefeaterLossDiffer ()
+positiveLossAndNegativeFailureDiffer :
+  sourceComparison9 positiveRequirementLostAudit
+  ≡ sourceComparison9 negativeBranchFailsToApplyAudit → ⊥
+positiveLossAndNegativeFailureDiffer ()
 
-------------------------------------------------------------------------
--- Existing repository boundaries are reused directly.
-------------------------------------------------------------------------
-
-binaryProjectionCanEraseDirection :
-  Existing369.BinaryInteractionIsCompleteTernarySemantics → ⊥
-binaryProjectionCanEraseDirection =
-  Existing369.binaryInteractionDoesNotCompleteTernarySemantics
+binaryProjectionCanEraseDirection : Existing369.BinaryInteractionIsCompleteTernarySemantics → ⊥
+binaryProjectionCanEraseDirection = Existing369.binaryInteractionDoesNotCompleteTernarySemantics
 
 historicalOrLegalOppositionIsNotLogicalNegation :
   Existing369.BinaryInteractionIsCompleteDialecticSemantics → ⊥
-historicalOrLegalOppositionIsNotLogicalNegation =
-  Existing369.binaryInteractionDoesNotCompleteDialecticSemantics
+historicalOrLegalOppositionIsNotLogicalNegation = Existing369.binaryInteractionDoesNotCompleteDialecticSemantics
 
 sourceAttributionMustSurviveCrossPollination : Bool
 sourceAttributionMustSurviveCrossPollination =
   Existing369.IntellectualReceptionIntersectionalTernaryDialectic369Boundary.sourceAttributionBoundarySurvives
     Existing369.canonicalIntellectualReceptionIntersectionalTernaryDialectic369Boundary
 
-sourceAttributionMustSurviveCrossPollinationIsTrue :
-  sourceAttributionMustSurviveCrossPollination ≡ true
+sourceAttributionMustSurviveCrossPollinationIsTrue : sourceAttributionMustSurviveCrossPollination ≡ true
 sourceAttributionMustSurviveCrossPollinationIsTrue = refl
 
-------------------------------------------------------------------------
--- Source lineage is not recoverable from the surviving legal disposition.
-------------------------------------------------------------------------
-
-data SameLegalDispositionRestoresSourceHistory : Set where
+data SameAtomicDispositionRestoresSourceHistory : Set where
 data TernaryHighMeansLegalTruth : Set where
-data TernaryLowMeansLogicalNegation : Set where
+data TernaryLowMeansOppositeLegalProposition : Set where
 data SynthesisCoordinateCreatesLegalAuthority : Set where
-data SourceRuleAuditReplacesSourceRealisedRule : Set where
+data AtomicAuditReplacesSourceConditionedTest : Set where
 
-sameDispositionDoesNotRestoreSourceHistory :
-  SameLegalDispositionRestoresSourceHistory → ⊥
-sameDispositionDoesNotRestoreSourceHistory ()
+data HandEntered369LabelReplacesAtomicGate : Set where
 
+sameAtomicDispositionDoesNotRestoreSourceHistory : SameAtomicDispositionRestoresSourceHistory → ⊥
+sameAtomicDispositionDoesNotRestoreSourceHistory ()
 ternaryHighDoesNotMeanLegalTruth : TernaryHighMeansLegalTruth → ⊥
 ternaryHighDoesNotMeanLegalTruth ()
-
-ternaryLowDoesNotMeanLogicalNegation : TernaryLowMeansLogicalNegation → ⊥
-ternaryLowDoesNotMeanLogicalNegation ()
-
+ternaryLowDoesNotMeanOppositeLegalProposition : TernaryLowMeansOppositeLegalProposition → ⊥
+ternaryLowDoesNotMeanOppositeLegalProposition ()
 synthesisDoesNotCreateAuthority : SynthesisCoordinateCreatesLegalAuthority → ⊥
 synthesisDoesNotCreateAuthority ()
+auditDoesNotReplaceAtomicTest : AtomicAuditReplacesSourceConditionedTest → ⊥
+auditDoesNotReplaceAtomicTest ()
+handEntered369DoesNotReplaceAtomicGate : HandEntered369LabelReplacesAtomicGate → ⊥
+handEntered369DoesNotReplaceAtomicGate ()
 
-auditDoesNotReplaceSourceRealisation :
-  SourceRuleAuditReplacesSourceRealisedRule → ⊥
-auditDoesNotReplaceSourceRealisation ()
+atomicNegativeBoundaryReused : Atomic.NegativeGateProvesOppositeProposition → ⊥
+atomicNegativeBoundaryReused = Atomic.negativeGateDoesNotProveOppositeProposition
 
 record Legal369CrossPollinationBoundary : Set where
   constructor legal-369-cross-pollination-boundary
   field
-    threeWayDispositionRetained : Bool
+    canonicalAtomicGateDrives369Audit : Bool
+    threeWayAtomicFitDispositionRetained : Bool
     orderedPositiveNegativePairRetained : Bool
     consumerCoordinateDoesNotEraseSourcePair : Bool
     sourceAttributionRetained : Bool
+    negativeMeansFailureOfSameAtom : Bool
+    negativeMeansOppositeLegalProposition : Bool
     ternaryCarrierCreatesLegalAuthority : Bool
-    sourceFilteringAssumedMonotone : Bool
 
 canonicalLegal369CrossPollinationBoundary : Legal369CrossPollinationBoundary
 canonicalLegal369CrossPollinationBoundary =
-  legal-369-cross-pollination-boundary
-    true true true true false false
+  legal-369-cross-pollination-boundary true true true true true true false false
