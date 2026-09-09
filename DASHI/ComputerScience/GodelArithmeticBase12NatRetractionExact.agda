@@ -8,19 +8,12 @@ open import Data.Nat.Base using (_<_; _≤_; NonZero; nonZero; z≤n; s≤s)
 open import Data.Nat.DivMod using (_/_; _%_; m/n<m)
 open import Data.Nat.Induction using (Acc; acc; <-wellFounded-fast)
 
+import DASHI.ComputerScience.GodelArithmeticRawSyntaxExact as Syntax
 import DASHI.ComputerScience.GodelArithmeticPrefixStreamCodecExact as Stream
 import DASHI.ComputerScience.GodelArithmeticBase12StreamStepExact as Step
 
 ------------------------------------------------------------------------
 -- TOTAL NAT -> TOKEN-STREAM DECODER
---
--- The arithmetic step is already exact:
---   encoded head = code % 12
---   encoded tail = code / 12.
---
--- Here we close totality by well-founded recursion on the Nat code.  For every
--- positive n, n / 12 < n because 12 >= 2.  This is the same accessibility
--- recursion pattern already used elsewhere in DASHI for strict Nat descent.
 ------------------------------------------------------------------------
 
 baseAtLeastTwo : 2 ≤ Step.base
@@ -163,16 +156,16 @@ decodeEncodeTokenStream tokens =
 -- Formula -> Nat -> formula retraction.
 ------------------------------------------------------------------------
 
-encodeFormulaNat : Stream.Syntax.ArithmeticFormula → Nat
+encodeFormulaNat : Syntax.ArithmeticFormula → Nat
 encodeFormulaNat formula =
   Step.encodeTokenStream (Stream.encodeFormula formula)
 
-decodeFormulaNat : Nat → Stream.Syntax.ArithmeticFormula
+decodeFormulaNat : Nat → Syntax.ArithmeticFormula
 decodeFormulaNat n =
   Stream.decodeFormula (decodeTokenStream n)
 
 decodeEncodeFormulaNat :
-  (formula : Stream.Syntax.ArithmeticFormula) →
+  (formula : Syntax.ArithmeticFormula) →
   decodeFormulaNat (encodeFormulaNat formula) ≡ formula
 decodeEncodeFormulaNat formula
   rewrite decodeEncodeTokenStream (Stream.encodeFormula formula)
