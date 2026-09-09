@@ -22,6 +22,7 @@ import DASHI.Environment.PhotosyntheticLightTransportCrossPollinationExact
 import DASHI.Environment.CanopySpectralRadiativeTransferExact
 import DASHI.Environment.PhotosyntheticLightOptimizationExact
 import DASHI.Environment.PhotosyntheticAssimilationValidationExact
+import DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollinationExact
 
 -- Deep-time/climate path-dependence bridge into the LES open research frontier.
 import DASHI.Environment.LESClimateHysteresisRecoveryCrossPollinationExact
