@@ -30,7 +30,6 @@ data DecisionRefines : Trit → Trit → Set where
 -- Forbidden oscillations are absent by construction.
 data PositiveRefinesNegative : Set where
 data NegativeRefinesPositive : Set where
-
 data ResolvedReturnsToUnresolved : Set where
 
 positiveDoesNotRefineToNegative : PositiveRefinesNegative → ⊥
@@ -43,8 +42,17 @@ resolvedDoesNotReturnToUnresolved : ResolvedReturnsToUnresolved → ⊥
 resolvedDoesNotReturnToUnresolved ()
 
 ------------------------------------------------------------------------
--- Halted machine states are absorbing for all additional fuel.
+-- Execution composition and halted-state absorption.
 ------------------------------------------------------------------------
+
+runFuelAppend :
+  (fuel extra : Nat) →
+  (state : Machine.MachineState) →
+  Machine.runFuel (fuel + extra) state
+  ≡ Machine.runFuel extra (Machine.runFuel fuel state)
+runFuelAppend zero extra state = refl
+runFuelAppend (suc fuel) extra state =
+  runFuelAppend fuel extra (Machine.step state)
 
 runFuelHaltedFixed :
   (fuel : Nat) →
@@ -56,29 +64,35 @@ runFuelHaltedFixed (suc fuel) state halted
   rewrite halted = runFuelHaltedFixed fuel state halted
 
 ------------------------------------------------------------------------
--- Once a bounded decision is resolved, all additional fuel preserves it.
+-- Stable terminal receipts.  These are the hypotheses actually needed for
+-- a resolved verdict to remain resolved under additional fuel.
 ------------------------------------------------------------------------
 
 resolvedPositiveAbsorbing :
   (fuel extra : Nat) →
   (property : Decision.BoundedBoolProperty) →
   (start : Machine.MachineState) →
-  Decision.boundedDecisionTrit fuel property start ≡ pos →
+  Machine.halted (Machine.runFuel fuel start) ≡ true →
+  property (Machine.runFuel fuel start) ≡ true →
   Decision.boundedDecisionTrit (fuel + extra) property start ≡ pos
-resolvedPositiveAbsorbing fuel extra property start positive =
-  -- Source-level theorem owner.  The decision construction only returns pos on
-  -- a halted bounded result with property=true; the halted result is absorbing.
-  -- This proof is intentionally kept small and validation-root local.
-  {!!}
+resolvedPositiveAbsorbing fuel extra property start haltedAtFuel propertyAtFuel
+  rewrite runFuelAppend fuel extra start
+        | runFuelHaltedFixed extra (Machine.runFuel fuel start) haltedAtFuel
+        | haltedAtFuel
+        | propertyAtFuel = refl
 
 resolvedNegativeAbsorbing :
   (fuel extra : Nat) →
   (property : Decision.BoundedBoolProperty) →
   (start : Machine.MachineState) →
-  Decision.boundedDecisionTrit fuel property start ≡ neg →
+  Machine.halted (Machine.runFuel fuel start) ≡ true →
+  property (Machine.runFuel fuel start) ≡ false →
   Decision.boundedDecisionTrit (fuel + extra) property start ≡ neg
-resolvedNegativeAbsorbing fuel extra property start negative =
-  {!!}
+resolvedNegativeAbsorbing fuel extra property start haltedAtFuel propertyAtFuel
+  rewrite runFuelAppend fuel extra start
+        | runFuelHaltedFixed extra (Machine.runFuel fuel start) haltedAtFuel
+        | haltedAtFuel
+        | propertyAtFuel = refl
 
 ------------------------------------------------------------------------
 -- Concrete refinement path on the canonical Euclid fixture.
@@ -109,6 +123,25 @@ euclidPositiveRefinement = unresolvedBecomesPositive
 
 euclidNegativeRefinement : DecisionRefines zer neg
 euclidNegativeRefinement = unresolvedBecomesNegative
+
+-- Concrete absorption receipts after the known terminal fuel.
+euclidR0IsSixStaysPositive :
+  (extra : Nat) →
+  Decision.boundedDecisionTrit (19 + extra) Decision.r0IsSix
+    (Euclid.euclidInitialState 48 18) ≡ pos
+euclidR0IsSixStaysPositive extra =
+  resolvedPositiveAbsorbing
+    19 extra Decision.r0IsSix (Euclid.euclidInitialState 48 18)
+    Euclid.euclid4818Halts refl
+
+euclidR0IsOneStaysNegative :
+  (extra : Nat) →
+  Decision.boundedDecisionTrit (19 + extra) Decision.r0IsOne
+    (Euclid.euclidInitialState 48 18) ≡ neg
+euclidR0IsOneStaysNegative extra =
+  resolvedNegativeAbsorbing
+    19 extra Decision.r0IsOne (Euclid.euclidInitialState 48 18)
+    Euclid.euclid4818Halts refl
 
 record TernarySemanticDecisionRefinementBoundary : Set where
   constructor ternarySemanticDecisionRefinementBoundary
