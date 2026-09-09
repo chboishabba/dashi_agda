@@ -1,21 +1,14 @@
 module DASHI.Moonshine.JInvariantBase369RoadmapFrontierExact where
 
-------------------------------------------------------------------------
--- NORMALIZED ROADMAP FRONTIER
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANNormOneInvariantExact
+import DASHI.Moonshine.GoldenRatioNormOneReciprocalSquareCrossMultiplyExact
 import DASHI.Moonshine.GoldenRatioBishopQuadraticFactorisationBidiExact
-import DASHI.Moonshine.GoldenRatioFibonacci369SheetVoxelBridgeExact
-import DASHI.Moonshine.GoldenRatioFibonacci369RichFibreLiftExact
-import DASHI.Moonshine.GoldenRatioFibonacci369ArithmeticRichTrajectoryExact
-import DASHI.Moonshine.GoldenRatioFibonacci369GenericRichStepProducerExact
 import DASHI.Foundations.BishopGoldenRatioCarrierExact
-import DASHI.Physics.Closure.GoldenRatioCarrierDerivationAdvanceExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
@@ -23,58 +16,43 @@ import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
+import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
-import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
 
 record RoadmapState : Set where
   field
     balancedTernaryFRACTRANFibonacciFinite : Bool
-    quadraticDefectSignExact : Bool
-    fibOneStepSignFlipExact : Bool
-    fibTwoStepSignPreservationExact : Bool
+    fibQuadraticDefectDynamicsExact : Bool
     threeSixNineTwentySevenWeldExact : Bool
-    richDefectMagnitudeRetained : Bool
-    signedPrimeCompressionRetained : Bool
-    explicitArithmeticRichTrajectoryExact : Bool
-    genericRichStepArchitectureExact : Bool
-
     bishopPhiCarrierConstructed : Bool
-    bishopPhiMinimalPolynomialExact : Bool
     bishopVendorImplementationPinned : Bool
     fibonacciBishopRatioCarrierConstructed : Bool
-    fibonacciDenominatorPositiveIncrementExact : Bool
     fibonacciDenominatorDivergenceExact : Bool
+    balancedMacroNormOneInvariantExact : Bool
+    denominatorClearedReciprocalSquareExact : Bool
+    unnormalisedRationalReciprocalSquareLiftExact : Bool
+    bishopReciprocalSquareLiftExact : Bool
     bishopPhiPsiFactorisationExact : Bool
-    normOneReciprocalSquareWeldExact : Bool
     conjugateFactorLowerBoundExact : Bool
     reciprocalSquareBishopConvergenceExact : Bool
     fibonacciRatiosConvergeToBishopPhi : Bool
 
     jSeamWordLkTExact : Bool
     jForwardScaleLawExact : Bool
-
-    fibonacciNineSheetWeldedToOrdinaryJCoarse : Bool
     structuredJFineFieldCodecExact : Bool
     jAbsoluteToLocalTwentySevenObserverExact : Bool
-    jAbsoluteToLocalTwentySevenObserverHasSection : Bool
     localTwentySevenCannotRecoverFullJFine : Bool
-    consumerIndexedFineResidualGovernanceExact : Bool
     rhObserverResidualPatternBidiExact : Bool
-    elevenTritOnePlusTenTwoPlusNineChartShiftExact : Bool
     finiteFrickeCrossesJCoarseJFineBoundaryExact : Bool
-    finiteFrickeBoundaryExchangeTwoStepRestores : Bool
-
-    renderedToAnalyticCalibrationTyped : Bool
-    analyticToStructuredJFieldLiftTyped : Bool
-    analyticStructuredSeamCompilerExact : Bool
-    renderedPixelToAnalyticModularCoordinateExact : Bool
+    intervalValuedRenderedCalibrationTyped : Bool
+    intervalRecognitionRequiresContainmentAndUniqueness : Bool
+    concretePixelToAnalyticBoxCalibrationExact : Bool
+    symbolicOrbitToAnalyticRealisationExact : Bool
     analyticModularCoordinateToStructuredJFieldExact : Bool
-    structuredJAbsoluteToOrbitIndexRecognised : Bool
-    jRenderedScaleInverseRecognised : Bool
+    analyticStructuredSeamCompilerExact : Bool
     analyticFrickeFiniteTransportIntertwinerExact : Bool
     jActualAnalyticGluingLawExact : Bool
-    jRefinementGluingSquareClassified : Bool
 
     monsterGradeWiseSignedFibreIntertwinerExact : Bool
     codecCompressionCostTheoremExact : Bool
@@ -83,51 +61,36 @@ record RoadmapState : Set where
 canonicalRoadmapState : RoadmapState
 canonicalRoadmapState = record
   { balancedTernaryFRACTRANFibonacciFinite = true
-  ; quadraticDefectSignExact = true
-  ; fibOneStepSignFlipExact = true
-  ; fibTwoStepSignPreservationExact = true
+  ; fibQuadraticDefectDynamicsExact = true
   ; threeSixNineTwentySevenWeldExact = true
-  ; richDefectMagnitudeRetained = true
-  ; signedPrimeCompressionRetained = true
-  ; explicitArithmeticRichTrajectoryExact = true
-  ; genericRichStepArchitectureExact = true
-
   ; bishopPhiCarrierConstructed = true
-  ; bishopPhiMinimalPolynomialExact = true
   ; bishopVendorImplementationPinned = true
   ; fibonacciBishopRatioCarrierConstructed = true
-  ; fibonacciDenominatorPositiveIncrementExact = true
   ; fibonacciDenominatorDivergenceExact = true
+  ; balancedMacroNormOneInvariantExact = true
+  ; denominatorClearedReciprocalSquareExact = true
+  ; unnormalisedRationalReciprocalSquareLiftExact = false
+  ; bishopReciprocalSquareLiftExact = false
   ; bishopPhiPsiFactorisationExact = true
-  ; normOneReciprocalSquareWeldExact = false
   ; conjugateFactorLowerBoundExact = false
   ; reciprocalSquareBishopConvergenceExact = false
   ; fibonacciRatiosConvergeToBishopPhi = false
 
   ; jSeamWordLkTExact = true
   ; jForwardScaleLawExact = true
-
-  ; fibonacciNineSheetWeldedToOrdinaryJCoarse = true
   ; structuredJFineFieldCodecExact = true
   ; jAbsoluteToLocalTwentySevenObserverExact = true
-  ; jAbsoluteToLocalTwentySevenObserverHasSection = true
   ; localTwentySevenCannotRecoverFullJFine = true
-  ; consumerIndexedFineResidualGovernanceExact = true
   ; rhObserverResidualPatternBidiExact = true
-  ; elevenTritOnePlusTenTwoPlusNineChartShiftExact = true
   ; finiteFrickeCrossesJCoarseJFineBoundaryExact = true
-  ; finiteFrickeBoundaryExchangeTwoStepRestores = true
-
-  ; renderedToAnalyticCalibrationTyped = true
-  ; analyticToStructuredJFieldLiftTyped = true
-  ; analyticStructuredSeamCompilerExact = true
-  ; renderedPixelToAnalyticModularCoordinateExact = false
+  ; intervalValuedRenderedCalibrationTyped = true
+  ; intervalRecognitionRequiresContainmentAndUniqueness = true
+  ; concretePixelToAnalyticBoxCalibrationExact = false
+  ; symbolicOrbitToAnalyticRealisationExact = false
   ; analyticModularCoordinateToStructuredJFieldExact = false
-  ; structuredJAbsoluteToOrbitIndexRecognised = false
-  ; jRenderedScaleInverseRecognised = false
+  ; analyticStructuredSeamCompilerExact = true
   ; analyticFrickeFiniteTransportIntertwinerExact = false
   ; jActualAnalyticGluingLawExact = false
-  ; jRefinementGluingSquareClassified = false
 
   ; monsterGradeWiseSignedFibreIntertwinerExact = false
   ; codecCompressionCostTheoremExact = false
@@ -135,14 +98,14 @@ canonicalRoadmapState = record
   }
 
 data FirstLiveRoadmapResidual : Set where
-  missingNormOneReciprocalSquareWeld : FirstLiveRoadmapResidual
+  missingUnnormalisedRationalReciprocalSquareLift : FirstLiveRoadmapResidual
+  missingBishopReciprocalSquareLift : FirstLiveRoadmapResidual
   missingUniformConjugateFactorLowerBound : FirstLiveRoadmapResidual
   missingReciprocalSquareBishopConvergence : FirstLiveRoadmapResidual
   missingFibonacciRatioToBishopPhiConvergence : FirstLiveRoadmapResidual
-  missingRenderedPixelToAnalyticModularCoordinate : FirstLiveRoadmapResidual
+  missingConcretePixelToAnalyticBoxCalibration : FirstLiveRoadmapResidual
+  missingSymbolicOrbitToAnalyticRealisation : FirstLiveRoadmapResidual
   missingAnalyticModularCoordinateToStructuredJField : FirstLiveRoadmapResidual
-  missingStructuredJAbsoluteToOrbitIndexRecognition : FirstLiveRoadmapResidual
-  missingRenderedScaleRecognition : FirstLiveRoadmapResidual
   missingAnalyticFrickeFiniteTransportIntertwiner : FirstLiveRoadmapResidual
   missingAnalyticGluingTransport : FirstLiveRoadmapResidual
   missingMonsterGradeWiseIntertwiner : FirstLiveRoadmapResidual
@@ -150,7 +113,7 @@ data FirstLiveRoadmapResidual : Set where
   missingKernelCertification : FirstLiveRoadmapResidual
 
 firstJMonsterResidual : FirstLiveRoadmapResidual
-firstJMonsterResidual = missingRenderedPixelToAnalyticModularCoordinate
+firstJMonsterResidual = missingConcretePixelToAnalyticBoxCalibration
 
 firstPhiResidual : FirstLiveRoadmapResidual
-firstPhiResidual = missingNormOneReciprocalSquareWeld
+firstPhiResidual = missingUnnormalisedRationalReciprocalSquareLift
