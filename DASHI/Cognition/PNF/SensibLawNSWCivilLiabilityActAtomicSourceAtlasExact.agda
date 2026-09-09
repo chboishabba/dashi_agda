@@ -9,16 +9,11 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
-import DASHI.Cognition.PNF.SensibLaw.TypedLegalAuthorityEdgeExact as Dummy
 import DASHI.Cognition.PNF.SensibLawTypedLegalAuthorityEdgeExact as Edge
 import DASHI.Cognition.PNF.SensibLawSourceFormAuthorityRoleBidiExact as SourceRole
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
-
-------------------------------------------------------------------------
--- Primary source identity.
-------------------------------------------------------------------------
 
 nswCivilLiabilityActSource : Source.AttributedSource
 nswCivilLiabilityActSource = Source.mkNoDOISource
@@ -28,7 +23,7 @@ nswCivilLiabilityActSource = Source.mkNoDOISource
   "2002"
   "https://legislation.nsw.gov.au/view/html/inforce/current/act-2002-022"
   Source.governmentSource
-  "primary statutory text; section-level formalisation preserves the distinction between statutory propositions and DASHI reconstructed implications"
+  "primary statutory text; section-level formalisation preserves statutory propositions versus DASHI reconstructed implications"
   Source.publicAttribution
 
 nswCivilLiabilityActLegalSource : Ontology.LegalSource
@@ -74,10 +69,6 @@ reconstructionReceipt p system locator reference = SourceRule.proposition-source
   SourceRule.repositoryReconstructionLayer (reconstructionRole reference) system refl refl
   (Source.citationCreatesAuthorityIsFalse nswCivilLiabilityActSource) reference
 
-------------------------------------------------------------------------
--- Shared typed scope coordinates.
-------------------------------------------------------------------------
-
 nswJurisdictionPredicate : Algebra.LegalProposition
 nswJurisdictionPredicate = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:jurisdiction:NSW") Algebra.jurisdictionPredicate
@@ -100,18 +91,13 @@ nswJurisdictionSource = reconstructionReceipt nswJurisdictionPredicate refl
 nswCurrentTemporalSource : SourceRule.PropositionSourceReceipt nswCurrentTemporalPredicate
 nswCurrentTemporalSource = reconstructionReceipt nswCurrentTemporalPredicate refl
   "Civil Liability Act 2002 (NSW), point-in-time metadata"
-  "typed temporal reconstruction; current consolidation is not silently transported to historical events"
-
-------------------------------------------------------------------------
--- s 5A / s 3B: source-conditioned applicability shape.
-------------------------------------------------------------------------
+  "typed temporal reconstruction; current consolidation is not transported to another event date without proof"
 
 claimForDamagesFromNegligence : Algebra.LegalProposition
 claimForDamagesFromNegligence = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s5A:claim-for-damages-from-negligence") Algebra.doctrinalPredicate
   (Ontology.stableId "claim:current") (Ontology.stableId "part:NSW-CLA:1A")
-  Negligence.auCommonLawSystem
-  "the claim is for damages for harm resulting from negligence within s 5A(1)"
+  Negligence.auCommonLawSystem "the claim is for damages for harm resulting from negligence within s 5A(1)"
 
 section3BExclusionApplies : Algebra.LegalProposition
 section3BExclusionApplies = Algebra.legal-proposition
@@ -152,11 +138,6 @@ s5ARuleSourceRealisation = SourceRule.source-realised-legal-rule
   Negligence.auCommonLawSystem refl refl refl
   "source-realised statutory applicability rule; negative s3B branch retained"
 
-------------------------------------------------------------------------
--- s 5B: three necessary coordinates.  The derived 'threshold open' proposition
--- and rule are explicitly DASHI reconstruction, not legislative text.
-------------------------------------------------------------------------
-
 riskForeseeable : Algebra.LegalProposition
 riskForeseeable = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s5B:risk-foreseeable") Algebra.factualFeature
@@ -173,15 +154,13 @@ reasonablePersonWouldTakePrecautions : Algebra.LegalProposition
 reasonablePersonWouldTakePrecautions = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s5B:reasonable-person-would-take-precautions") Algebra.wrongElementPredicate
   (Ontology.stableId "actor:defendant") (Ontology.stableId "section:NSW-CLA:5B-1-c")
-  Negligence.auCommonLawSystem
-  "a reasonable person in the defendant's position would have taken the relevant precautions"
+  Negligence.auCommonLawSystem "a reasonable person in the defendant's position would have taken the relevant precautions"
 
 s5BThresholdOpen : Algebra.LegalProposition
 s5BThresholdOpen = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s5B:threshold-open") Algebra.wrongElementPredicate
   (Ontology.stableId "actor:defendant") (Ontology.stableId "section:NSW-CLA:5B")
-  Negligence.auCommonLawSystem
-  "DASHI reconstruction: all three s 5B(1) necessary coordinates pass; this does not establish breach"
+  Negligence.auCommonLawSystem "DASHI reconstruction: all three s 5B(1) necessary coordinates pass; this does not establish breach"
 
 s5BThresholdRule : Algebra.LegalRule
 s5BThresholdRule = Algebra.legal-rule
@@ -207,31 +186,26 @@ s5BRuleSourceRealisation = SourceRule.source-realised-legal-rule
   s5BThresholdSource
   (s5BForeseeableSource Algebra.∷ s5BNotInsignificantSource Algebra.∷ s5BReasonablePrecautionsSource Algebra.∷ Algebra.[])
   Algebra.[] Algebra.[]
-  nswJurisdictionPredicate nswJurisdictionSource refl
-  nswCurrentTemporalPredicate nswCurrentTemporalSource refl
+  nswJurisdictionPredicate nswJurisdictionSource refl nswCurrentTemporalPredicate nswCurrentTemporalSource refl
   Negligence.auCommonLawSystem refl refl refl
   "source-realised DASHI reconstruction of the s5B necessary-threshold conjunction"
 
 probabilityIfNoCare : Algebra.LegalProposition
 probabilityIfNoCare = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s5B-2-a:probability") Algebra.factualFeature
-  (Ontology.stableId "risk:current") (Ontology.stableId "factor:NSW-CLA:5B-2-a") Negligence.auCommonLawSystem
-  "probability of harm if care were not taken is a s 5B(2)(a) consideration"
+  (Ontology.stableId "risk:current") (Ontology.stableId "factor:NSW-CLA:5B-2-a") Negligence.auCommonLawSystem "probability of harm if care were not taken is a s 5B(2)(a) consideration"
 likelySeriousness : Algebra.LegalProposition
 likelySeriousness = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s5B-2-b:seriousness") Algebra.factualFeature
-  (Ontology.stableId "harm:current") (Ontology.stableId "factor:NSW-CLA:5B-2-b") Negligence.auCommonLawSystem
-  "likely seriousness of harm is a s 5B(2)(b) consideration"
+  (Ontology.stableId "harm:current") (Ontology.stableId "factor:NSW-CLA:5B-2-b") Negligence.auCommonLawSystem "likely seriousness of harm is a s 5B(2)(b) consideration"
 burdenOfPrecautions : Algebra.LegalProposition
 burdenOfPrecautions = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s5B-2-c:burden") Algebra.factualFeature
-  (Ontology.stableId "precaution:current") (Ontology.stableId "factor:NSW-CLA:5B-2-c") Negligence.auCommonLawSystem
-  "burden of taking precautions is a s 5B(2)(c) consideration"
+  (Ontology.stableId "precaution:current") (Ontology.stableId "factor:NSW-CLA:5B-2-c") Negligence.auCommonLawSystem "burden of taking precautions is a s 5B(2)(c) consideration"
 socialUtility : Algebra.LegalProposition
 socialUtility = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s5B-2-d:social-utility") Algebra.factualFeature
-  (Ontology.stableId "activity:current") (Ontology.stableId "factor:NSW-CLA:5B-2-d") Negligence.auCommonLawSystem
-  "social utility is a s 5B(2)(d) consideration"
+  (Ontology.stableId "activity:current") (Ontology.stableId "factor:NSW-CLA:5B-2-d") Negligence.auCommonLawSystem "social utility is a s 5B(2)(d) consideration"
 
 s5BProbabilitySource : SourceRule.PropositionSourceReceipt probabilityIfNoCare
 s5BProbabilitySource = sectionReceipt probabilityIfNoCare refl "Civil Liability Act 2002 (NSW), s 5B(2)(a)" "s5B probability consideration"
@@ -241,10 +215,6 @@ s5BBurdenSource : SourceRule.PropositionSourceReceipt burdenOfPrecautions
 s5BBurdenSource = sectionReceipt burdenOfPrecautions refl "Civil Liability Act 2002 (NSW), s 5B(2)(c)" "s5B burden consideration"
 s5BSocialUtilitySource : SourceRule.PropositionSourceReceipt socialUtility
 s5BSocialUtilitySource = sectionReceipt socialUtility refl "Civil Liability Act 2002 (NSW), s 5B(2)(d)" "s5B social-utility consideration"
-
-------------------------------------------------------------------------
--- s 5C: anti-shortcuts are source atoms, not absolute no-liability rules.
-------------------------------------------------------------------------
 
 avoidableDifferentWayAloneInsufficient : Algebra.LegalProposition
 avoidableDifferentWayAloneInsufficient = Algebra.legal-proposition
@@ -260,11 +230,6 @@ s5CDifferentWaySource : SourceRule.PropositionSourceReceipt avoidableDifferentWa
 s5CDifferentWaySource = sectionReceipt avoidableDifferentWayAloneInsufficient refl "Civil Liability Act 2002 (NSW), s 5C" "s5C different-way anti-shortcut"
 s5CLaterPrecautionSource : SourceRule.PropositionSourceReceipt laterPrecautionAloneInsufficient
 s5CLaterPrecautionSource = sectionReceipt laterPrecautionAloneInsufficient refl "Civil Liability Act 2002 (NSW), s 5C" "s5C later-action anti-shortcut"
-
-------------------------------------------------------------------------
--- s 5D: ordinary route.  The aggregate conclusion is a DASHI reconstruction;
--- s 5D(2) exceptional causation remains separately source-visible.
-------------------------------------------------------------------------
 
 negligenceNecessaryCondition : Algebra.LegalProposition
 negligenceNecessaryCondition = Algebra.legal-proposition
@@ -316,10 +281,6 @@ s5DOrdinaryRuleSourceRealisation = SourceRule.source-realised-legal-rule
   Negligence.auCommonLawSystem refl refl refl
   "source-realised DASHI reconstruction of ordinary s5D(1); s5D(2) remains separate"
 
-------------------------------------------------------------------------
--- s 3C propagation and s 4 Crown scope.
-------------------------------------------------------------------------
-
 underlyingTortLiabilityExcludedOrLimited : Algebra.LegalProposition
 underlyingTortLiabilityExcludedOrLimited = Algebra.legal-proposition
   (Ontology.stableId "prop:NSW-CLA:s3C:underlying-tort-excluded-or-limited") Algebra.doctrinalPredicate
@@ -360,10 +321,6 @@ actBindsNSWCrown = Algebra.legal-proposition
   "the Act binds the Crown in right of New South Wales under s 4(1)"
 s4CrownSource : SourceRule.PropositionSourceReceipt actBindsNSWCrown
 s4CrownSource = sectionReceipt actBindsNSWCrown refl "Civil Liability Act 2002 (NSW), s 4(1)" "s4 Crown-binding proposition"
-
-------------------------------------------------------------------------
--- Non-promotions.
-------------------------------------------------------------------------
 
 data S5BThresholdEstablishesBreach : Set where
 data S5CAntiShortcutIsAbsoluteNoLiability : Set where
