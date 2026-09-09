@@ -3,8 +3,8 @@ module DASHI.ComputerScience.TernaryProofCandidateStatusBridgeExact where
 open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
+import DASHI.Foundations.ElementarySingleOperator as Elementary
 import DASHI.Foundations.TernaryElementarySearchCertificate as Search
-import DASHI.ComputerScience.TernaryProofSearchDecisionDebtBridgeExact as GlobalSearch
 
 ------------------------------------------------------------------------
 -- EXISTING PROOF-CANDIDATE STATUS -> TERNARY LOCAL DECISION
@@ -31,7 +31,7 @@ candidateDecision candidate = candidateStatusTrit (Search.status candidate)
 -- The repository's known diagonal unit candidate is still symbolic until its
 -- analytic side conditions are paid, so it remains unresolved.
 diagonalUnitCandidateStillUnresolved :
-  (witness : Search.Var) →
+  (witness : Elementary.Var) →
   candidateDecision (Search.diagonalUnitSearchCandidate witness) ≡ zer
 diagonalUnitCandidateStillUnresolved witness = refl
 
@@ -88,7 +88,7 @@ refutedCandidateDoesNotExhaustSearch :
 refutedCandidateDoesNotExhaustSearch ()
 
 -- Nor does a complete bounded search refute the theorem outside its declared
--- admissible candidate domain; the global bridge already keeps that firewall.
+-- admissible candidate domain; the global bridge keeps that separate.
 data CompleteBoundedSearchMeansTheoremFalse : Set where
 
 completeBoundedSearchDoesNotMeanTheoremFalse :
