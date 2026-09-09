@@ -9,14 +9,6 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- CHARGE CURRENT != MASS CURRENT
---
--- Electrical current is charge-weighted carrier motion; the weak-field gravity
--- source coordinate is mass-current / stress-energy.  In a multi-component
--- material one cannot infer the latter from a net electrical-current scalar
--- without component/source information.
---
--- The finite fixtures below are DASHI observer tests, not claims about a
--- particular measured superconductor.
 ------------------------------------------------------------------------
 
 data SignedCurrent : Set where
@@ -47,11 +39,8 @@ netChargeCurrentDoesNotDetermineMassCurrent ()
 
 ------------------------------------------------------------------------
 -- Source reconstruction needed to pay J_m(x).
---
--- The final coordinate is deliberately only ELIGIBILITY for a downstream
--- stress-energy reconstruction.  It is not a full T_{mu nu} receipt: energy
--- density, momentum density, stresses, frame conventions and tensor assembly
--- remain downstream coordinates owned by the laboratory stress-energy layer.
+-- The final coordinate is only eligibility for downstream T_{mu nu}; it is
+-- not itself a full laboratory stress-energy receipt.
 ------------------------------------------------------------------------
 
 record MassCurrentSourceReconstructionReceipt : Set₁ where
@@ -81,10 +70,6 @@ record MassCurrentSourceReconstructionReceipt : Set₁ where
     stressEnergyEligibilityReceipt : StressEnergyEligibilityReceipt
 
 open MassCurrentSourceReconstructionReceipt public
-
-------------------------------------------------------------------------
--- Thin reverse-search residuals.
-------------------------------------------------------------------------
 
 data MassCurrentResidual : Set where
   missingComponentDensity : MassCurrentResidual
