@@ -6,27 +6,28 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAristotlePoleQuotientFiniteNearEvaluationBidiExact as Eval
-import DASHI.Analysis.RiemannG2WindowFreeFiniteNearFinalModelCompilerExact as WindowFree
+import DASHI.Analysis.RiemannG2FinalNearIndexedFiniteProducerExact as FinalFinite
+import DASHI.Analysis.RiemannG2FinalNearIndexedLiteralModelCompilerExact as FinalIndexed
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as Final
 
 ------------------------------------------------------------------------
 -- DIRECT REPRESENTATION FRONTIER BELOW THE HIGH ANALYTIC THEOREM
 --
--- Keep representation acquisition separate from the theorem
+-- Current shortest direct route:
 --
---   literalNear + far + Gamma < ClusterResponse.
+--   final-near-indexed carrier-neutral evaluation
+--   + literal universal-pole-quotient kernel
+--   + nearResponseAt(J) = finiteNearSum(cellResponse)
+--   -> existing FinalPoleNearLiteralModel.
 --
--- The carrier-neutral FiniteNearProducer owns an actual signed evaluation, but
--- it does not by itself expose the literal kernel nor identify that signed value
--- with final nearResponseAt(J).  The window-free compiler makes those exact
--- same-object debts explicit without importing the stronger target-window route.
+-- The evaluator is indexed on final nearResponseAt(J), so the older standalone
+-- signed-value/final-near same-object weld is definitionally eliminated.
 ------------------------------------------------------------------------
 
 data DirectRepresentationCoordinate : Set where
-  recoverCarrierNeutralFiniteNearProducer : DirectRepresentationCoordinate
+  recoverFinalNearIndexedFiniteEvaluation : DirectRepresentationCoordinate
   realiseLiteralPoleQuotientKernel : DirectRepresentationCoordinate
-  weldSignedEvaluationToLiteralFiniteSum : DirectRepresentationCoordinate
-  weldSignedEvaluationToFinalNearResponse : DirectRepresentationCoordinate
+  proveFinalNearEqualsLiteralFiniteSum : DirectRepresentationCoordinate
   compileFinalPoleNearLiteralModel : DirectRepresentationCoordinate
   recoverActualSelectedPoleNearProducer : DirectRepresentationCoordinate
   recoverDeterminantDirectProducer : DirectRepresentationCoordinate
@@ -38,10 +39,9 @@ data DirectRepresentationState : Set where
   compatibilityOnly : DirectRepresentationState
 
 coordinateState : DirectRepresentationCoordinate -> DirectRepresentationState
-coordinateState recoverCarrierNeutralFiniteNearProducer = live
+coordinateState recoverFinalNearIndexedFiniteEvaluation = live
 coordinateState realiseLiteralPoleQuotientKernel = live
-coordinateState weldSignedEvaluationToLiteralFiniteSum = live
-coordinateState weldSignedEvaluationToFinalNearResponse = live
+coordinateState proveFinalNearEqualsLiteralFiniteSum = live
 coordinateState compileFinalPoleNearLiteralModel = compilerOutput
 coordinateState recoverActualSelectedPoleNearProducer = optionalStrongerRoute
 coordinateState recoverDeterminantDirectProducer = compatibilityOnly
@@ -58,35 +58,30 @@ determinantProducerIsCompatibilityOnly :
   coordinateState recoverDeterminantDirectProducer ≡ compatibilityOnly
 determinantProducerIsCompatibilityOnly = refl
 
-windowFreeCompilerRejectsExplicitWindowPrerequisite :
-  WindowFree.WindowFreeFiniteNearFinalBoundary.explicitTargetWindowRequiredForDirectSameObjectWeld
-    WindowFree.canonicalWindowFreeFiniteNearFinalBoundary ≡ false
-windowFreeCompilerRejectsExplicitWindowPrerequisite = refl
+finalNearSameObjectWeldEliminated :
+  FinalFinite.FinalNearIndexedFiniteBoundary.separateSignedValueToFinalNearWeldRequired
+    FinalFinite.canonicalFinalNearIndexedFiniteBoundary ≡ false
+finalNearSameObjectWeldEliminated = refl
 
-windowFreeCompilerRejectsDeterminantPrerequisite :
-  WindowFree.WindowFreeFiniteNearFinalBoundary.determinantDirectConsumerRequired
-    WindowFree.canonicalWindowFreeFiniteNearFinalBoundary ≡ false
-windowFreeCompilerRejectsDeterminantPrerequisite = refl
+oneScalarRepresentationTheoremRemains :
+  FinalIndexed.FinalNearIndexedLiteralModelBoundary.finalNearToLiteralFiniteSumIsSingleScalarRepresentationTheorem
+    FinalIndexed.canonicalFinalNearIndexedLiteralModelBoundary ≡ true
+oneScalarRepresentationTheoremRemains = refl
 
-kernelAndScalarWeldAreDistinct :
-  WindowFree.WindowFreeFiniteNearFinalBoundary.literalKernelAndFinalScalarWeldAreDistinctDebts
-    WindowFree.canonicalWindowFreeFiniteNearFinalBoundary ≡ true
-kernelAndScalarWeldAreDistinct = refl
+explicitWindowNotRequired :
+  FinalIndexed.FinalNearIndexedLiteralModelBoundary.explicitWindowRequired
+    FinalIndexed.canonicalFinalNearIndexedLiteralModelBoundary ≡ false
+explicitWindowNotRequired = refl
 
-finiteProducerDoesNotConstructKernelAlone :
-  WindowFree.WindowFreeFiniteNearFinalBoundary.carrierNeutralFiniteProducerAloneBuildsLiteralKernel
-    WindowFree.canonicalWindowFreeFiniteNearFinalBoundary ≡ false
-finiteProducerDoesNotConstructKernelAlone = refl
+determinantConsumerNotRequired :
+  FinalIndexed.FinalNearIndexedLiteralModelBoundary.determinantConsumerRequired
+    FinalIndexed.canonicalFinalNearIndexedLiteralModelBoundary ≡ false
+determinantConsumerNotRequired = refl
 
-finiteProducerDoesNotIdentifyFinalNearAlone :
-  WindowFree.WindowFreeFiniteNearFinalBoundary.carrierNeutralFiniteProducerAloneIdentifiesFinalNearScalar
-    WindowFree.canonicalWindowFreeFiniteNearFinalBoundary ≡ false
-finiteProducerDoesNotIdentifyFinalNearAlone = refl
-
-kernelAndWeldCompileExistingFinalModel :
-  WindowFree.WindowFreeFiniteNearFinalBoundary.kernelPlusTwoSameObjectEqualitiesCompileFinalLiteralModel
-    WindowFree.canonicalWindowFreeFiniteNearFinalBoundary ≡ true
-kernelAndWeldCompileExistingFinalModel = refl
+finalLiteralModelIsCompilerOutput :
+  FinalIndexed.FinalNearIndexedLiteralModelBoundary.existingFinalLiteralModelIsCompilerOutput
+    FinalIndexed.canonicalFinalNearIndexedLiteralModelBoundary ≡ true
+finalLiteralModelIsCompilerOutput = refl
 
 finiteEvaluationStillOpen :
   Eval.FiniteNearEvaluationBoundary.finiteNearEvaluationClosed
@@ -109,21 +104,17 @@ record WindowFreeDirectRepresentationBoundary : Set where
     directRouteNeedsDeterminantConsumerPaymentIsFalse :
       directRouteNeedsDeterminantConsumerPayment ≡ false
 
-    carrierNeutralSignedEvaluationIsSufficientWithoutSameObjectWeld : Bool
-    carrierNeutralSignedEvaluationIsSufficientWithoutSameObjectWeldIsFalse :
-      carrierNeutralSignedEvaluationIsSufficientWithoutSameObjectWeld ≡ false
+    separateSignedValueToFinalNearWeldStillRequired : Bool
+    separateSignedValueToFinalNearWeldStillRequiredIsFalse :
+      separateSignedValueToFinalNearWeldStillRequired ≡ false
 
     literalKernelRealisationStillRequired : Bool
     literalKernelRealisationStillRequiredIsTrue :
       literalKernelRealisationStillRequired ≡ true
 
-    signedValueToLiteralSumEqualityStillRequired : Bool
-    signedValueToLiteralSumEqualityStillRequiredIsTrue :
-      signedValueToLiteralSumEqualityStillRequired ≡ true
-
-    signedValueToFinalNearEqualityStillRequired : Bool
-    signedValueToFinalNearEqualityStillRequiredIsTrue :
-      signedValueToFinalNearEqualityStillRequired ≡ true
+    finalNearEqualsLiteralFiniteSumStillRequired : Bool
+    finalNearEqualsLiteralFiniteSumStillRequiredIsTrue :
+      finalNearEqualsLiteralFiniteSumStillRequired ≡ true
 
     finalLiteralModelIsCompilerOutputAfterThese : Bool
     finalLiteralModelIsCompilerOutputAfterTheseIsTrue :
@@ -147,7 +138,6 @@ canonicalWindowFreeDirectRepresentationBoundary =
     true refl
     true refl
     true refl
-    true refl
     false refl
     false refl
-    "Stay window-free on the preferred direct route: recover one carrier-neutral FiniteNearProducer, realize the literal universal-pole-quotient kernel, prove signedNearValue=literalFiniteNearValue and signedNearValue=final nearResponseAt(chosen J), then compile the existing FinalPoleNearLiteralModel. ActualSelectedPoleNearProducer is an optional stronger explicit-formula route and the determinant-q DirectFinitePoleNearProducer is compatibility-only. None of these representation payments proves the post-crossing strict ClusterResponse inequality or RH."
+    "Stay window-free and index the carrier-neutral evaluator directly on final nearResponseAt(chosen J). Realize the literal universal-pole-quotient kernel and prove the single scalar representation theorem nearResponseAt(J)=finiteNearSum(cellResponse). The older signed-value/final-near weld, explicit selected Weil window and determinant-q consumer are not required. These representation payments compile the existing FinalPoleNearLiteralModel but do not prove the post-crossing strict ClusterResponse inequality or RH."
