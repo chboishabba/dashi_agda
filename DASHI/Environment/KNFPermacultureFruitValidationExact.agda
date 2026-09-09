@@ -4,3 +4,4 @@ import DASHI.Environment.PermacultureEmbodiedEnergyLandscapeBridgeExact
 import DASHI.Environment.KoreanNaturalFarmingExact
 import DASHI.Environment.KNFPermacultureEmbodiedEnergyBridgeExact
 import DASHI.Biology.FruitBoundaryResourcePaidRepairExact
+import DASHI.Environment.KNFSoilMicrobePlantFruitResourceLoopExact
