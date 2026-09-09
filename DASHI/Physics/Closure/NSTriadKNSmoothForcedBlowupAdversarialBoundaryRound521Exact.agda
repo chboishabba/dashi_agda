@@ -8,6 +8,20 @@ module DASHI.Physics.Closure.NSTriadKNSmoothForcedBlowupAdversarialBoundaryRound
 -- Tristan Buckmaster, public statement at
 --   https://cims.nyu.edu/~tristanb/statement.pdf
 --
+-- Attribution discipline:
+--   * Tristan Buckmaster is the author of the inspected public statement.
+--   * The statement presents released smooth-forced blowup work jointly with
+--     Levent Alpöge.
+--   * The statement credits Diego Córdoba and Luis Martínez-Zoroa for the
+--     underlying smooth-forcing blowup programme on which this line builds.
+--   * DASHI owns only the typed reconstruction, comparison, source-status
+--     classification and downstream seam analysis performed in this module.
+--
+-- No DOI is invented for the public statement.  The statement locator above is
+-- the exact source carrier inspected by this owner; paper-level title/DOI
+-- receipts belong to separate source owners when the released papers are
+-- acquired and verified.
+--
 -- The inspected statement reports:
 --   * public smooth-forced finite-time blowup results for IPM, Boussinesq and
 --     three-dimensional incompressible Euler;
@@ -37,6 +51,97 @@ open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 import DASHI.Physics.Closure.NSTriadKNSignedNetworkBudgetCompilerRound511Exact as R511
+
+------------------------------------------------------------------------
+-- Typed attribution.  These constructors intentionally distinguish external
+-- scientific ownership from DASHI formalisation ownership.  A shared source
+-- lineage is not theorem identity and does not transfer proof authority.
+------------------------------------------------------------------------
+
+data AttributionPrincipal521 : Set where
+  tristanBuckmaster521 : AttributionPrincipal521
+  leventAlpoge521 : AttributionPrincipal521
+  diegoCordoba521 : AttributionPrincipal521
+  luisMartinezZoroa521 : AttributionPrincipal521
+  dashiFormalisation521 : AttributionPrincipal521
+
+data AttributionContribution521 : Set where
+  publicStatementAuthorship521 : AttributionContribution521
+  releasedSmoothForcedBlowupCoauthorship521 : AttributionContribution521
+  smoothForcingProgrammeOriginCredit521 : AttributionContribution521
+  typedReconstructionAndSeamAnalysis521 : AttributionContribution521
+
+data AttributionSourceCarrier521 : Set where
+  buckmasterPublicStatementPDF521 : AttributionSourceCarrier521
+  dashiRound521SourceOwner521 : AttributionSourceCarrier521
+
+record SourceAttribution521 : Set where
+  constructor source-attribution-521
+  field
+    principal521 : AttributionPrincipal521
+    contribution521 : AttributionContribution521
+    sourceCarrier521 : AttributionSourceCarrier521
+
+open SourceAttribution521 public
+
+buckmasterStatementAttribution521 : SourceAttribution521
+buckmasterStatementAttribution521 =
+  source-attribution-521
+    tristanBuckmaster521
+    publicStatementAuthorship521
+    buckmasterPublicStatementPDF521
+
+buckmasterReleasedWorkAttribution521 : SourceAttribution521
+buckmasterReleasedWorkAttribution521 =
+  source-attribution-521
+    tristanBuckmaster521
+    releasedSmoothForcedBlowupCoauthorship521
+    buckmasterPublicStatementPDF521
+
+alpogeReleasedWorkAttribution521 : SourceAttribution521
+alpogeReleasedWorkAttribution521 =
+  source-attribution-521
+    leventAlpoge521
+    releasedSmoothForcedBlowupCoauthorship521
+    buckmasterPublicStatementPDF521
+
+cordobaProgrammeCredit521 : SourceAttribution521
+cordobaProgrammeCredit521 =
+  source-attribution-521
+    diegoCordoba521
+    smoothForcingProgrammeOriginCredit521
+    buckmasterPublicStatementPDF521
+
+martinezZoroaProgrammeCredit521 : SourceAttribution521
+martinezZoroaProgrammeCredit521 =
+  source-attribution-521
+    luisMartinezZoroa521
+    smoothForcingProgrammeOriginCredit521
+    buckmasterPublicStatementPDF521
+
+dashiFormalisationAttribution521 : SourceAttribution521
+dashiFormalisationAttribution521 =
+  source-attribution-521
+    dashiFormalisation521
+    typedReconstructionAndSeamAnalysis521
+    dashiRound521SourceOwner521
+
+-- Explicit non-laundering permissions remain uninhabited.
+data ProgrammeCreditBecomesStatementAuthorshipPermission521 : Set where
+data DASHIFormalisationBecomesExternalDiscoveryPermission521 : Set where
+data StatementAuthorshipBecomesNSProofAuthorityPermission521 : Set where
+
+programmeCreditDoesNotBecomeStatementAuthorship521 :
+  ProgrammeCreditBecomesStatementAuthorshipPermission521 → ⊥
+programmeCreditDoesNotBecomeStatementAuthorship521 ()
+
+dashiFormalisationDoesNotBecomeExternalDiscovery521 :
+  DASHIFormalisationBecomesExternalDiscoveryPermission521 → ⊥
+dashiFormalisationDoesNotBecomeExternalDiscovery521 ()
+
+statementAuthorshipDoesNotBecomeNSProofAuthority521 :
+  StatementAuthorshipBecomesNSProofAuthorityPermission521 → ⊥
+statementAuthorshipDoesNotBecomeNSProofAuthority521 ()
 
 ------------------------------------------------------------------------
 -- Minimal capability model separating regularity of a forcing function from
@@ -156,6 +261,9 @@ round521AdversarialFixtureChangesGlobalFirstResidual = false
 round521ClayPromotion : Bool
 round521ClayPromotion = false
 
+round521AttributionLineageTyped : Bool
+round521AttributionLineageTyped = true
+
 round521R511CompilerAlreadyExactIsTrue :
   round521R511CompilerAlreadyExact ≡ true
 round521R511CompilerAlreadyExactIsTrue =
@@ -175,3 +283,6 @@ round521AdversarialFixtureChangesGlobalFirstResidualIsFalse = refl
 
 round521ClayPromotionIsFalse : round521ClayPromotion ≡ false
 round521ClayPromotionIsFalse = refl
+
+round521AttributionLineageTypedIsTrue : round521AttributionLineageTyped ≡ true
+round521AttributionLineageTypedIsTrue = refl
