@@ -11,11 +11,12 @@ POINCARE="DASHI/Physics/YangMills/BalabanPath4PhysicalComponentPoincareExact.agd
 PREP="DASHI/ComputerScience/AgdaProofDebtFibrePreparationExact.agda"
 ORDER="DASHI/Physics/YangMills/BalabanFiniteRationalOrderCoreExact.agda"
 REL="DASHI/Physics/YangMills/BalabanFiniteSumRelationFibreLiftExact.agda"
+PATH13LIFT="DASHI/Physics/YangMills/BalabanPath13ZeroMeanFibrePoincareLiftExact.agda"
 BOND="DASHI/Physics/YangMills/BalabanPath4BondHodgeCoercivityExact.agda"
 THREE="DASHI/Physics/YangMills/BalabanP33ThreeComponentCoercivityExact.agda"
 GREEN="DASHI/Physics/YangMills/BalabanPath4SU2ConfiguredGreenNormExact.agda"
 
-for file in "$CORE" "$ALG" "$VAR" "$POINCARE" "$PREP" "$ORDER" "$REL" "$BOND" "$THREE" "$GREEN"; do
+for file in "$CORE" "$ALG" "$VAR" "$POINCARE" "$PREP" "$ORDER" "$REL" "$PATH13LIFT" "$BOND" "$THREE" "$GREEN"; do
   test -f "$file" || { echo "missing boundary file: $file" >&2; exit 2; }
 done
 
@@ -66,6 +67,21 @@ if grep -q 'BalabanPath4DirectionalEnergyContractionExact' "$REL"; then
   exit 1
 fi
 
+# Path13 aggregation is now a true consumer of the generic <= fibre observer.
+# The owner may mention the atomic theorem and SumLift, but must not recurse over
+# the transverse list or import the four-axis global Poincare theorem itself.
+grep -q '^sumZeroMeanFibrePoincareViaFibre :' "$PATH13LIFT"
+grep -q 'SumLift.sumRationalMonotoneViaFibre' "$PATH13LIFT"
+grep -q 'Fibre13.zeroMeanPhysicalFibrePoincare13' "$PATH13LIFT"
+if grep -q 'BalabanPath13FourAxisPhysicalPoincareExact' "$PATH13LIFT"; then
+  echo "Path13 fibre lift depends upward on the global four-axis consumer" >&2
+  exit 1
+fi
+if grep -Eq '^sumZeroMeanFibrePoincareViaFibre.*\(.*∷.*\)|sumZeroMeanFibrePoincareViaFibre.*=.*sumZeroMeanFibrePoincareViaFibre' "$PATH13LIFT"; then
+  echo "Path13 fibre aggregation regressed to local recursive replay" >&2
+  exit 1
+fi
+
 # Migrated consumers must use the relation observer rather than importing the
 # large directional-energy module solely for its old list helper.
 for file in "$BOND" "$THREE" "$GREEN"; do
@@ -92,10 +108,8 @@ grep -q 'relationPreservationReceiptStillRequired : Bool' "$PREP"
 # default because legacy syntax alone is not proof of an OOM defect.
 bash scripts/audit_agda_solver_fibre_boundaries.sh >/dev/null
 
-# Lightweight kernel surface only.  The finite-sum relation instantiation and
-# deep consumers are intentionally not pulled into this guard because their
-# current sum owner carries physical YM imports; they are checked/profiled on
-# their own targeted roots.
+# Lightweight kernel surface only.  Deep physical consumers remain targeted
+# profiler/check roots so this guard cannot recreate the OOM path itself.
 scripts/run_agda29_parallel_check.sh \
   "$CORE" \
   "$ALG" \
