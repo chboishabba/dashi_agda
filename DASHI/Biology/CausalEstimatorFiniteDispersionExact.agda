@@ -8,14 +8,10 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 import DASHI.Biology.CausalEffectEstimandExact as Estimand
 import DASHI.Biology.CausalEstimandStatisticalRealisationExact as Statistical
 import DASHI.Biology.CausalEstimatorGuaranteesExact as Guarantees
+import DASHI.Biology.FiniteRationalCausalEstimandExpectationExact as FiniteTarget
 
 ------------------------------------------------------------------------
 -- FINITE EXACT DISPERSION / MSE
---
--- Reuses the finite normalized estimator sampling law.  This is ordinary exact
--- rational algebra over a finite support; it is not an asymptotic variance,
--- standard error, Gaussian approximation, or population-representativeness
--- theorem.
 ------------------------------------------------------------------------
 
 squaredDeviation : ℚ → ℚ → ℚ
@@ -91,12 +87,6 @@ record FiniteRationalEstimatorMSE
 
 open FiniteRationalEstimatorMSE public
 
-------------------------------------------------------------------------
--- Under exact finite unbiasedness, variance about the estimator mean and MSE
--- about the target use the same centre, so they are equal.  No large-sample
--- result is needed.
-------------------------------------------------------------------------
-
 varianceEqualsMSEWhenCentresMatch :
   ∀ {estimand procedure}
     (dispersion : FiniteRationalEstimatorDispersion
@@ -124,8 +114,7 @@ unbiasednessGivesMeanTargetEquality :
     (dispersion : FiniteRationalEstimatorDispersion procedure) →
   law dispersion ≡ Guarantees.law unbiased →
   estimateToRational dispersion ≡ Guarantees.estimateToRational unbiased →
-  estimatorMean dispersion
-  ≡ DASHI.Biology.FiniteRationalCausalEstimandExpectationExact.realisedAggregate target
+  estimatorMean dispersion ≡ FiniteTarget.realisedAggregate target
 unbiasednessGivesMeanTargetEquality unbiased dispersion sameLaw sameMap
   rewrite sameLaw | sameMap =
   trans
