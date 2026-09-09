@@ -5,6 +5,9 @@ on:
     paths:
       - 'DASHI/Core/BoundAcquisitionDemandExact.agda'
       - 'DASHI/Core/Everything.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawDutyPublicAuthoritySourceLineageGraphExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawDutySourceLineageRefinementCutRerunExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawUniversalLegalAlgebraEverything.agda'
@@ -35,6 +38,13 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Core/BoundAcquisitionDemandExact.agda
+
+      - name: Type-check Cullen introspective factorisation and source routes
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda
 
       - name: Type-check source-owned duty lineage
         run: >-
