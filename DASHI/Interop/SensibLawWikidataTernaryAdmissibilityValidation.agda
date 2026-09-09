@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact as Ternary
 import DASHI.Interop.SensibLawNDimAdmissibilityTetrationComplexityBridgeExact as Tower
 import DASHI.Interop.SensibLawNatDualIdentityConfirmationExact as DualIdentity
+import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as SourceSupport
 
 snakTripleHasBalancedCodec :
   Ternary.WikidataTernaryAdmissibilityBoundary.wikibaseSnakTripleHasExactBalancedCodec
@@ -71,3 +72,38 @@ coverageStillDoesNotPaySourceSupport :
   DualIdentity.DualIdentityBoundary.nativeFamilyInspectionPaysSourceSupport
     DualIdentity.canonicalDualIdentityBoundary ≡ false
 coverageStillDoesNotPaySourceSupport = refl
+
+p854RemainsOnlySourceCandidate :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.p854IsOnlySourceCandidate
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ true
+p854RemainsOnlySourceCandidate = refl
+
+sharedURLFetchDoesNotMergeResiduals :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.sharedFetchMergesResiduals
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
+sharedURLFetchDoesNotMergeResiduals = refl
+
+fetchedContentDoesNotPaySourceSupport :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.fetchedContentPaysSourceSupport
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
+fetchedContentDoesNotPaySourceSupport = refl
+
+contentDigestDoesNotPaySourceSupport :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.contentDigestPaysSourceSupport
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
+contentDigestDoesNotPaySourceSupport = refl
+
+propositionSupportRemainsSeparate :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.propositionSupportNeedsSeparateEvaluation
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ true
+propositionSupportRemainsSeparate = refl
+
+authorityRemainsSeparate :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.authorityNeedsSeparateEvaluation
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ true
+authorityRemainsSeparate = refl
+
+sourceFetchCreatesNoSemanticPromotion :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.semanticPromotionCreatedByFetch
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
+sourceFetchCreatesNoSemanticPromotion = refl
