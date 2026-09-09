@@ -11,13 +11,17 @@ import DASHI.Core.AttributedPublicClaimExact as Public
 ------------------------------------------------------------------------
 -- "DEFEAT THIS MOTION" PROVENANCE BOUNDARY
 --
--- Public reporting now reproduces the Opposition's assertion that a subsequent
--- message stated: "Reflecting on the meaningful reforms the GREAT Coalition has
--- already begun, we need to stand together to defeat this Motion."
+-- Correction after broader source review:
+--   * the Australian High Commission -> Francis Sade communication carries
+--     treaty/funding progress and "hold steady" language;
+--   * separate reporting identifies the downstream coalition exhortation as
+--     Sade's own message / a message believed to be from Sade to another
+--     Solomon Islands MP.
 --
--- This module records that exact proposition as an Opposition-attributed claim.
--- It does NOT authenticate the underlying message, identify its sender, or prove
--- that the speaker was an Australian diplomatic actor.
+-- Therefore the phrase "stand together to defeat this Motion" must NOT be
+-- attributed to Jeffrey Roach or another Australian diplomatic actor absent a
+-- stronger primary artifact.  The live question becomes a relay/conditionality
+-- question, not a direct-Australian-instruction question.
 ------------------------------------------------------------------------
 
 oppositionStatementViaSolomonStar : Public.PublicArtifactCitation
@@ -44,12 +48,43 @@ oppositionStatementViaPacificNews = Public.public-artifact-citation
   Public.institutionallyPublished
   "the reproduced Opposition statement says a subsequent message stated that the GREAT Coalition should stand together to defeat the motion"
 
+sadeForwardingAndOwnMessageReport : Public.PublicArtifactCitation
+sadeForwardingAndOwnMessageReport = Public.public-artifact-citation
+  "Australian Associated Press, republished by National Indigenous Times"
+  "Free education in $1b sweetener for Solomons treaty"
+  "National Indigenous Times / Australian Associated Press"
+  2026
+  "https://nit.com.au/08-09-2026/26359/free-education-in-1b-sweetener-for-solomons-treaty"
+  "reporting on leaked WhatsApp chain: Sade forwarding Australian High Commission update, followed by Sade's own coalition-directed message"
+  Public.journalisticReport
+  Public.institutionallyPublished
+  "AAP reports the leaked WhatsApp message was sent by Francis Sade forwarding an Australian High Commission update, and separately characterises Sade's own message as aimed at wavering coalition MPs"
+
 exactOppositionAttributedDefeatMotionClaim : Public.AttributedPublicClaim
 exactOppositionAttributedDefeatMotionClaim = Public.attributed-public-claim
   oppositionStatementViaPacificNews
   "the Opposition publicly attributed to a subsequent message the statement that the GREAT Coalition should stand together to defeat the motion"
   true refl
   false refl
+
+sadeRelayAttributionClaim : Public.AttributedPublicClaim
+sadeRelayAttributionClaim = Public.attributed-public-claim
+  sadeForwardingAndOwnMessageReport
+  "AAP reports a two-stage communication: Sade forwarded the Australian High Commission treaty/funding update and Sade then sent his own coalition-directed political message"
+  true refl
+  false refl
+
+------------------------------------------------------------------------
+-- Sender classification.
+------------------------------------------------------------------------
+
+data ReportedSenderClass : Set where
+  australianDiplomaticActor : ReportedSenderClass
+  solomonIslandsDeputyPrimeMinister : ReportedSenderClass
+  unresolvedSender : ReportedSenderClass
+
+reportedDefeatMotionSenderClass : ReportedSenderClass
+reportedDefeatMotionSenderClass = solomonIslandsDeputyPrimeMinister
 
 ------------------------------------------------------------------------
 -- Authentication coordinates deliberately remain separate.
@@ -59,9 +94,11 @@ data DefeatMotionCoordinate : Set where
   oppositionPublishedTheAllegation : DefeatMotionCoordinate
   underlyingMessageArtifactAcquired : DefeatMotionCoordinate
   underlyingMessageAuthenticated : DefeatMotionCoordinate
-  underlyingMessageSenderIdentified : DefeatMotionCoordinate
+  downstreamSenderReportedAsSade : DefeatMotionCoordinate
+  downstreamSenderPrimaryArtifactVerified : DefeatMotionCoordinate
   senderIsAustralianDiplomaticActor : DefeatMotionCoordinate
-  messageLinkedToFundingCommunicationChain : DefeatMotionCoordinate
+  highCommissionToSadeForwardingReported : DefeatMotionCoordinate
+  exactThreadTopologyPrimaryVerified : DefeatMotionCoordinate
 
 record CurrentDefeatMotionProvenance : Set where
   constructor current-defeat-motion-provenance
@@ -70,16 +107,19 @@ record CurrentDefeatMotionProvenance : Set where
     oppositionPublicationAvailableIsTrue : oppositionPublicationAvailable ≡ true
     exactReportedSentenceAvailable : Bool
     exactReportedSentenceAvailableIsTrue : exactReportedSentenceAvailable ≡ true
+    downstreamSenderReportedAsSade : Bool
+    downstreamSenderReportedAsSadeIsTrue : downstreamSenderReportedAsSade ≡ true
+    highCommissionToSadeForwardingReported : Bool
+    highCommissionToSadeForwardingReportedIsTrue : highCommissionToSadeForwardingReported ≡ true
     underlyingArtifactAcquired : Bool
     underlyingArtifactAcquiredIsFalse : underlyingArtifactAcquired ≡ false
     underlyingArtifactAuthenticated : Bool
     underlyingArtifactAuthenticatedIsFalse : underlyingArtifactAuthenticated ≡ false
-    senderIdentityResolved : Bool
-    senderIdentityResolvedIsFalse : senderIdentityResolved ≡ false
-    australianActorAttributionResolved : Bool
-    australianActorAttributionResolvedIsFalse : australianActorAttributionResolved ≡ false
-    sameCommunicationChainResolved : Bool
-    sameCommunicationChainResolvedIsFalse : sameCommunicationChainResolved ≡ false
+    exactThreadTopologyPrimaryVerified : Bool
+    exactThreadTopologyPrimaryVerifiedIsFalse : exactThreadTopologyPrimaryVerified ≡ false
+    directAustralianDefeatMotionInstructionEstablished : Bool
+    directAustralianDefeatMotionInstructionEstablishedIsFalse :
+      directAustralianDefeatMotionInstructionEstablished ≡ false
     nextAcquisition : String
 
 open CurrentDefeatMotionProvenance public
@@ -88,28 +128,34 @@ currentDefeatMotionProvenance : CurrentDefeatMotionProvenance
 currentDefeatMotionProvenance = current-defeat-motion-provenance
   true refl
   true refl
+  true refl
+  true refl
   false refl
   false refl
   false refl
   false refl
-  false refl
-  "Acquire the original message/thread or an independently authenticated reproduction sufficient to identify sender, recipient, timestamp, and relationship to the already ABC-authenticated Roach communication"
+  "Acquire the original WhatsApp/thread artifact or an independently authenticated reproduction sufficient to establish timestamps, forwarding boundaries, exact sender/recipient identities and whether Sade's coalition exhortation was textually or conditionally linked to the Australian High Commission update"
 
 ------------------------------------------------------------------------
 -- No-collapse laws.
 ------------------------------------------------------------------------
 
 data OppositionQuoteAuthenticatesUnderlyingArtifact : Set where
-data ReportedSentenceIdentifiesAustralianSender : Set where
-data SameTopicMeansSameMessageChain : Set where
+data SadeForwardingMakesSadeMessageAustralianSpeech : Set where
+data AustralianFundingUpdateImpliesAustralianDefeatInstruction : Set where
+data SameThreadImpliesSharedIntent : Set where
 
-oppositionQuoteDoesNotAuthenticateArtifact :
+a oppositionQuoteDoesNotAuthenticateArtifact :
   OppositionQuoteAuthenticatesUnderlyingArtifact → ⊥
-oppositionQuoteDoesNotAuthenticateArtifact ()
+a oppositionQuoteDoesNotAuthenticateArtifact ()
 
-reportedSentenceDoesNotIdentifyAustralianSender :
-  ReportedSentenceIdentifiesAustralianSender → ⊥
-reportedSentenceDoesNotIdentifyAustralianSender ()
+sadeForwardDoesNotTransferAuthorship :
+  SadeForwardingMakesSadeMessageAustralianSpeech → ⊥
+sadeForwardDoesNotTransferAuthorship ()
 
-sameTopicDoesNotEstablishSameChain : SameTopicMeansSameMessageChain → ⊥
-sameTopicDoesNotEstablishSameChain ()
+fundingUpdateDoesNotBecomeDefeatInstruction :
+  AustralianFundingUpdateImpliesAustralianDefeatInstruction → ⊥
+fundingUpdateDoesNotBecomeDefeatInstruction ()
+
+sameThreadDoesNotEstablishSharedIntent : SameThreadImpliesSharedIntent → ⊥
+sameThreadDoesNotEstablishSharedIntent ()
