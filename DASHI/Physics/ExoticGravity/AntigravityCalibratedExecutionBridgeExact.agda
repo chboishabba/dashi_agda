@@ -10,24 +10,27 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- TYPED CALIBRATION -> EXECUTION PROVENANCE
+--
+-- Projection names are deliberately record-specific so no downstream consumer
+-- relies on ambiguous open-record fields.
 ------------------------------------------------------------------------
 
 record CalibratedSourceAcquisition
     (receipt : Source.SourceAcquisitionReceipt) : Set₁ where
   constructor calibrated-source-acquisition
   field
-    calibration : Calibration.ExecutionCalibrationReceipt
-    refinedEvidenceMatchesRawData :
-      Calibration.refinedEvidenceCarrier calibration
+    sourceCalibration : Calibration.ExecutionCalibrationReceipt
+    sourceRefinedEvidenceMatchesRawData :
+      Calibration.refinedEvidenceCarrier sourceCalibration
         ≡ Source.rawDataCarrier (Source.provenance receipt)
-    calibrationCarrierMatches :
-      Calibration.calibrationCarrier calibration
+    sourceCalibrationCarrierMatches :
+      Calibration.calibrationCarrier sourceCalibration
         ≡ Source.calibrationCarrier (Source.provenance receipt)
-    calibrationRevisionMatches :
-      Calibration.calibrationRevision calibration
+    sourceCalibrationRevisionMatches :
+      Calibration.calibrationRevision sourceCalibration
         ≡ Source.calibrationRevision (Source.provenance receipt)
-    instrumentConfigurationMatches :
-      Calibration.instrumentConfigurationCarrier calibration
+    sourceInstrumentConfigurationMatches :
+      Calibration.instrumentConfigurationCarrier sourceCalibration
         ≡ Source.instrumentConfigurationCarrier (Source.provenance receipt)
 
 open CalibratedSourceAcquisition public
@@ -36,18 +39,18 @@ record CalibratedBundleExecution
     (execution : Provenance.BundleExecutionProvenance) : Set₁ where
   constructor calibrated-bundle-execution
   field
-    calibration : Calibration.ExecutionCalibrationReceipt
-    refinedEvidenceMatchesRawData :
-      Calibration.refinedEvidenceCarrier calibration
+    bundleCalibration : Calibration.ExecutionCalibrationReceipt
+    bundleRefinedEvidenceMatchesRawData :
+      Calibration.refinedEvidenceCarrier bundleCalibration
         ≡ Provenance.rawDataCarrier execution
-    calibrationCarrierMatches :
-      Calibration.calibrationCarrier calibration
+    bundleCalibrationCarrierMatches :
+      Calibration.calibrationCarrier bundleCalibration
         ≡ Provenance.calibrationCarrier execution
-    calibrationRevisionMatches :
-      Calibration.calibrationRevision calibration
+    bundleCalibrationRevisionMatches :
+      Calibration.calibrationRevision bundleCalibration
         ≡ Provenance.calibrationRevision execution
-    instrumentConfigurationMatches :
-      Calibration.instrumentConfigurationCarrier calibration
+    bundleInstrumentConfigurationMatches :
+      Calibration.instrumentConfigurationCarrier bundleCalibration
         ≡ Provenance.instrumentConfigurationCarrier execution
 
 open CalibratedBundleExecution public
@@ -61,25 +64,28 @@ record SourceExecutionIdentityWeld
     (execution : Provenance.BundleExecutionProvenance) : Set where
   constructor source-execution-identity-weld
   field
-    runIdentifierMatches :
+    sourceExecutionApparatusMatches :
+      Provenance.apparatusCarrier execution
+        ≡ Source.apparatusIdentityCarrier (Source.provenance receipt)
+    sourceExecutionRunIdentifierMatches :
       Provenance.runIdentifier execution
         ≡ Source.runIdentifier (Source.provenance receipt)
-    rawDataCarrierMatches :
+    sourceExecutionRawDataCarrierMatches :
       Provenance.rawDataCarrier execution
         ≡ Source.rawDataCarrier (Source.provenance receipt)
-    rawDataHashMatches :
+    sourceExecutionRawDataHashMatches :
       Provenance.rawDataHash execution
         ≡ Source.rawDataHash (Source.provenance receipt)
-    dataRevisionMatches :
+    sourceExecutionDataRevisionMatches :
       Provenance.dataRevision execution
         ≡ Source.dataRevision (Source.provenance receipt)
-    instrumentConfigurationMatches :
+    sourceExecutionInstrumentConfigurationMatches :
       Provenance.instrumentConfigurationCarrier execution
         ≡ Source.instrumentConfigurationCarrier (Source.provenance receipt)
-    calibrationCarrierMatches :
+    sourceExecutionCalibrationCarrierMatches :
       Provenance.calibrationCarrier execution
         ≡ Source.calibrationCarrier (Source.provenance receipt)
-    calibrationRevisionMatches :
+    sourceExecutionCalibrationRevisionMatches :
       Provenance.calibrationRevision execution
         ≡ Source.calibrationRevision (Source.provenance receipt)
 
@@ -113,9 +119,10 @@ record CalibratedExecutionBridgeBoundary : Set where
     refinedEvidenceMustBeExactExecutionData : Bool
     calibrationRevisionMustMatchExecution : Bool
     instrumentConfigurationMustMatchExecution : Bool
+    apparatusIdentityAndRunIdentityAreDistinct : Bool
     sameApparatusLabelAloneWeldsSourceReceiptToExecution : Bool
     calibratedExecutionAutomaticallyValidatesMechanism : Bool
 
 canonicalCalibratedExecutionBridgeBoundary : CalibratedExecutionBridgeBoundary
 canonicalCalibratedExecutionBridgeBoundary =
-  calibrated-execution-bridge-boundary false true true true false false
+  calibrated-execution-bridge-boundary false true true true true false false
