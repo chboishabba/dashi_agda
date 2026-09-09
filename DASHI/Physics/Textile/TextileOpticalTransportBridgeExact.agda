@@ -41,11 +41,16 @@ textileTransportSystem :
   TextileOpticalModel
     OpticalState Illumination OpticalObserver Radiance topology →
   Transport.TransportSystem
-textileTransportSystem model = record
-  { Transport.State = _
-  ; Transport.Source = _
-  ; Transport.Observer = _
-  ; Transport.Sample = _
+textileTransportSystem
+  {OpticalState}
+  {Illumination}
+  {OpticalObserver}
+  {Radiance}
+  model = record
+  { Transport.State = OpticalState
+  ; Transport.Source = Illumination
+  ; Transport.Observer = OpticalObserver
+  ; Transport.Sample = Radiance
   ; Transport.advance = transportLight model
   ; Transport.observe = observeRadiance model
   }
