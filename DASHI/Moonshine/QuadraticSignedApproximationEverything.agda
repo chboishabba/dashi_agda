@@ -1,0 +1,7 @@
+module DASHI.Moonshine.QuadraticSignedApproximationEverything where
+
+import DASHI.Moonshine.QuadraticIrrationalSignedApproximationFibreExact
+import DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact
+import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
+import DASHI.Foundations.BishopNatSquareRootCanonicalApproximationExact
+import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact
