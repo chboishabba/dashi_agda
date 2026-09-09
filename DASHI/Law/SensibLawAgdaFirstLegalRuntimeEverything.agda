@@ -11,10 +11,12 @@ import DASHI.Law.SensibLawLegalResidualProducerSchedulerExact as Scheduler
 import DASHI.Law.SensibLawRuntimeWrongTypeElementFrontierExact as Frontier
 import DASHI.Law.SensibLawWrongTypeCausationElementExact as Element
 import DASHI.Law.SensibLawTemporalHealthEvidenceWrongTypeExact as TemporalHealth
+import DASHI.Law.SensibLawSubmittedEvidencePackageWrongTypeExact as SubmittedPackage
 import DASHI.Law.SensibLawBackupNegativeEvidenceBoundaryExact as BackupEvidence
 import DASHI.Law.SensibLawRecordingManifestLineageExact as RecordingLineage
 import DASHI.Interop.ITIRSuiteNormalizedCompilerParityExact as ITIRParity
 import DASHI.Interop.ITIRRecordingManifestSensibLawAdapterExact as ITIRRecording
+import DASHI.Interop.ITIRSubmittedEvidencePackageSensibLawAdapterExact as ITIRPackage
 import DASHI.Law.QueenslandWrongTypeCausationDeclarationExact as Queensland
 
 ------------------------------------------------------------------------
@@ -185,6 +187,11 @@ selectedTemporalHealthEvidenceBoundary :
 selectedTemporalHealthEvidenceBoundary =
   TemporalHealth.canonicalTemporalHealthEvidenceBoundary
 
+selectedSubmittedEvidencePackageBoundary :
+  SubmittedPackage.SubmittedEvidencePackageBoundary
+selectedSubmittedEvidencePackageBoundary =
+  SubmittedPackage.canonicalSubmittedEvidencePackageBoundary
+
 selectedBackupNegativeEvidenceBoundary :
   BackupEvidence.BackupNegativeEvidenceBoundary
 selectedBackupNegativeEvidenceBoundary =
@@ -204,6 +211,11 @@ selectedITIRRecordingSensibLawParityBoundary :
   ITIRRecording.ITIRRecordingSensibLawParityBoundary
 selectedITIRRecordingSensibLawParityBoundary =
   ITIRRecording.canonicalITIRRecordingSensibLawParityBoundary
+
+selectedITIRSubmittedEvidencePackageParityBoundary :
+  ITIRPackage.ITIRSubmittedEvidencePackageParityBoundary
+selectedITIRSubmittedEvidencePackageParityBoundary =
+  ITIRPackage.canonicalITIRSubmittedEvidencePackageParityBoundary
 
 ------------------------------------------------------------------------
 -- Firewalls.
