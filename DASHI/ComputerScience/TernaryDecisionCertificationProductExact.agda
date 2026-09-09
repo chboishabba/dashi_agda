@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.ComputerScience.FactorProducerReceiptExact as FactorReceipt
+import DASHI.ComputerScience.TernaryProofSearchDecisionDebtBridgeExact as ProofDecision
 
 ------------------------------------------------------------------------
 -- TERNARY DECISION STATUS × CERTIFICATION / PROVENANCE
@@ -43,13 +44,29 @@ unresolvedFactorCandidate : FactorReceipt.FactorProducerReceipt → FactorDecisi
 unresolvedFactorCandidate receipt = factorDecisionPacket zer receipt
 
 ------------------------------------------------------------------------
+-- Proof-search uses the same decision carrier but retains its own proof-debt,
+-- admission and finite-exhaustion semantics in the dedicated bridge.
+------------------------------------------------------------------------
+
+ProofSearchDecisionPacket : Set
+ProofSearchDecisionPacket = ProofDecision.ProofSearchDecisionPacket
+
+proofSearchUnresolved : ProofSearchDecisionPacket
+proofSearchUnresolved = ProofDecision.canonicalDeferredUnresolvedPacket
+
+proofSearchPositive : ProofSearchDecisionPacket
+proofSearchPositive = ProofDecision.canonicalDeferredPositiveSearchPacket
+
+proofSearchFiniteNegative : ProofSearchDecisionPacket
+proofSearchFiniteNegative = ProofDecision.canonicalDeferredNegativeFiniteSearchPacket
+
+------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
 
 data PositiveDecisionImpliesKernelCertification : Set where
 data PositiveDecisionIdentifiesProducer : Set where
 data UnresolvedDecisionMeansNegative : Set where
-
 data CertificationClassIsDecisionTrit : Set where
 
 positiveDoesNotImplyKernelCertification :
@@ -81,4 +98,4 @@ canonicalTernaryDecisionCertificationBoundary :
   TernaryDecisionCertificationBoundary
 canonicalTernaryDecisionCertificationBoundary =
   ternaryDecisionCertificationBoundary
-    true true true true true false false false
+    true true true true true false false true
