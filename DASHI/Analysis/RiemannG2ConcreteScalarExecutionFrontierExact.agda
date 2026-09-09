@@ -8,18 +8,23 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Reconcile
+import DASHI.Analysis.RiemannG2ConcreteCertificateFinalScalarBridgeExact as FoldBridge
 
 ------------------------------------------------------------------------
 -- CONCRETE-SCALAR EXECUTION FRONTIER
 --
--- The theorem-bearing finite certificate API is generic in the final
--- NearFar.Scalar. A runtime cannot emit a meaningful numerical certificate for
--- that carrier until a concrete exact/enclosure scalar is identified with it.
+-- A full concrete realization of the final NearFar scalar is a useful stronger
+-- producer, but it is NOT required by the certified finite-sum consumer.
 --
--- Keep this strictly below the RH mathematics. A concrete implementation may
--- choose rationals, exact algebraic values, interval endpoints, or another
--- certifiable carrier. We ask only for the additive/order transport actually
--- consumed by the finite-fold certificate path.
+-- Least privilege for the current certificate route is only:
+--   * a concrete certificate carrier;
+--   * an embedding of that carrier into the final scalar;
+--   * exact identification of the embedded certified fold with final
+--     nearResponseAt(J);
+--   * one transport of the certified upper relation.
+--
+-- `RiemannG2ConcreteCertificateFinalScalarBridgeExact` owns that smaller route.
+-- The record below is retained as an optional stronger whole-scalar producer.
 ------------------------------------------------------------------------
 
 record ConcreteFinalNearScalarRealization
@@ -33,8 +38,6 @@ record ConcreteFinalNearScalarRealization
 
     embedConcrete : ConcreteScalar -> NearFar.Scalar S
 
-    -- The final certificate chooses its fold-zero explicitly; NearFar itself
-    -- does not own a distinguished zero.
     finalFoldZero : NearFar.Scalar S
     concreteZeroIsFinalFoldZero :
       embedConcrete concreteZero ≡ finalFoldZero
@@ -53,10 +56,6 @@ record ConcreteFinalNearScalarRealization
 
 open ConcreteFinalNearScalarRealization public
 
-------------------------------------------------------------------------
--- The historical rational/direct finite lane is not an R0 payment.
-------------------------------------------------------------------------
-
 legacyDirectLaneIsFinalPoleCarrier :
   Reconcile.PoleQuotientFinalCutBoundary.determinantLaneIsFinalPoleQuotientCarrier
     Reconcile.canonicalPoleQuotientFinalCutBoundary ≡ false
@@ -67,6 +66,16 @@ legacyDirectPaymentAutomaticallyPaysFinalOff :
     Reconcile.canonicalPoleQuotientFinalCutBoundary ≡ false
 legacyDirectPaymentAutomaticallyPaysFinalOff = refl
 
+foldLocalBridgeDoesNotRequireScalarEquality :
+  FoldBridge.ConcreteCertificateFinalScalarBoundary.certificateScalarMustDefinitionallyEqualFinalAnalyticScalar
+    FoldBridge.canonicalConcreteCertificateFinalScalarBoundary ≡ false
+foldLocalBridgeDoesNotRequireScalarEquality = refl
+
+foldLocalBridgeStillRequiresExactEmbeddedFold :
+  FoldBridge.ConcreteCertificateFinalScalarBoundary.exactEmbeddedFoldIdentityStillRequired
+    FoldBridge.canonicalConcreteCertificateFinalScalarBoundary ≡ true
+foldLocalBridgeStillRequiresExactEmbeddedFold = refl
+
 record ConcreteScalarExecutionFrontierBoundary : Set where
   constructor concrete-scalar-execution-frontier-boundary
   field
@@ -74,9 +83,21 @@ record ConcreteScalarExecutionFrontierBoundary : Set where
     finalNearFarScalarConcreteByDefinitionIsFalse :
       finalNearFarScalarConcreteByDefinition ≡ false
 
-    executableCertificateNeedsConcreteScalarRealization : Bool
-    executableCertificateNeedsConcreteScalarRealizationIsTrue :
-      executableCertificateNeedsConcreteScalarRealization ≡ true
+    executableCertificateNeedsWholeScalarRealization : Bool
+    executableCertificateNeedsWholeScalarRealizationIsFalse :
+      executableCertificateNeedsWholeScalarRealization ≡ false
+
+    executableCertificateNeedsFoldLocalEmbedding : Bool
+    executableCertificateNeedsFoldLocalEmbeddingIsTrue :
+      executableCertificateNeedsFoldLocalEmbedding ≡ true
+
+    certificateScalarMayRemainConcreteAndDistinct : Bool
+    certificateScalarMayRemainConcreteAndDistinctIsTrue :
+      certificateScalarMayRemainConcreteAndDistinct ≡ true
+
+    fullConcreteScalarRealizationStillCompatible : Bool
+    fullConcreteScalarRealizationStillCompatibleIsTrue :
+      fullConcreteScalarRealizationStillCompatible ≡ true
 
     concreteRealizationIsNewRHAnalyticTheorem : Bool
     concreteRealizationIsNewRHAnalyticTheoremIsFalse :
@@ -90,17 +111,13 @@ record ConcreteScalarExecutionFrontierBoundary : Set where
     toyWeilNatCarrierPaysConcreteFinalScalarIsFalse :
       toyWeilNatCarrierPaysConcreteFinalScalar ≡ false
 
-    nearFarDistinguishedZeroRequired : Bool
-    nearFarDistinguishedZeroRequiredIsFalse :
-      nearFarDistinguishedZeroRequired ≡ false
+    exactEmbeddedFoldAndOrderTransportRemainRequired : Bool
+    exactEmbeddedFoldAndOrderTransportRemainRequiredIsTrue :
+      exactEmbeddedFoldAndOrderTransportRemainRequired ≡ true
 
-    sameObjectEmbeddingAndOrderSoundnessRemainRequired : Bool
-    sameObjectEmbeddingAndOrderSoundnessRemainRequiredIsTrue :
-      sameObjectEmbeddingAndOrderSoundnessRemainRequired ≡ true
-
-    r0RealizationInhabitedHere : Bool
-    r0RealizationInhabitedHereIsFalse :
-      r0RealizationInhabitedHere ≡ false
+    r0FoldLocalBridgeInhabitedHere : Bool
+    r0FoldLocalBridgeInhabitedHereIsFalse :
+      r0FoldLocalBridgeInhabitedHere ≡ false
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
@@ -112,12 +129,14 @@ canonicalConcreteScalarExecutionFrontierBoundary :
 canonicalConcreteScalarExecutionFrontierBoundary =
   concrete-scalar-execution-frontier-boundary
     false refl
+    false refl
+    true refl
+    true refl
     true refl
     false refl
     false refl
     false refl
-    false refl
     true refl
     false refl
     false refl
-    "For actual proof-carrying numerical execution, first realize the final universal pole-quotient NearFar scalar by a concrete certifiable scalar with proof-relevant additive and order transport. NearFar owns no distinguished zero, so the certificate's fold-zero is supplied locally rather than inflating the surface. This is execution/representation debt, not the RH analytic payment. The historical rational DirectFinitePoleNearProducer lane cannot be reused silently: its substantive endpoint is the older determinant/direct scalar problem and the repository explicitly denies automatic transport to the final pole-quotient consumer. A toy Nat Weil space is likewise not a final-carrier payment. After a genuine same-object scalar realization, R1 and the finite certificate machinery may be executed; RH is not derived here."
+    "For proof-carrying numerical execution, do not require a whole concrete realization of the final universal pole-quotient NearFar scalar unless a producer naturally supplies one. The certified consumer only needs a concrete certificate carrier, one embedding of its certified fold into final nearResponseAt(J), and one transport of the certified upper relation. This permits exact rational/interval certification without asserting that rationals are definitionally the analytic real carrier or requiring the still-unowned Fast-Cauchy quotient backend. A full additive/order-preserving scalar realization remains a compatible stronger producer. The historical determinant/direct rational lane and toy Weil carriers still do not pay the final pole-quotient same-object seam. RH is not derived here."
