@@ -15,16 +15,17 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExa
 import DASHI.Cognition.PNF.SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact as Downstream
 import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
 import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
+import DASHI.Cognition.PNF.SensibLawSourceConditionedAtomicLegalImplicationExact as AtomicImplication
 import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as SourceViolation
 
 ------------------------------------------------------------------------
 -- SOURCE-CONDITIONED TYPED LIABILITY
 --
--- `TypedLiabilityProfile` remains a useful schema, but a liability family is
--- not legally usable merely because it has been selected as a constructor.
--- Recognition of the family, its positive conditions, its limitations /
--- defeaters, temporal validity and forum-competence predicates must each be
--- source-realised.  Their case-specific application is evaluated atomically.
+-- `TypedLiabilityProfile` remains a schema.  A usable family requires a
+-- source-realised recognition proposition and rule; case-specific family
+-- recognition itself is compiled through the generic atomic legal implication
+-- kernel.  Conditions, limitations, temporal validity and forum competence are
+-- exact source-conditioned atoms on the same liability fibre.
 ------------------------------------------------------------------------
 
 liabilityFamilyId : Downstream.LiabilityFamily → Ontology.StableId
@@ -93,10 +94,10 @@ open SourceConditionedTypedLiabilityProfile public
 ------------------------------------------------------------------------
 -- CASE-SPECIFIC LIABILITY DECISION
 --
--- Each atom is the exact source proposition being tested.  In particular a
--- limitation atom at BT.neg means: positive evidence that *this limitation
--- proposition fails to apply on this fibre*.  It does not mean a proof of an
--- antonym or of some unrelated positive defence proposition.
+-- A limitation at BT.neg means a positive witness that THAT EXACT limitation
+-- proposition fails to apply.  It is never shorthand for logical negation or a
+-- different proposition.  Family recognition is itself an atomic sourced rule
+-- application rather than a constructor choice.
 ------------------------------------------------------------------------
 
 record SourceConditionedTypedLiabilityDecision
@@ -117,6 +118,16 @@ record SourceConditionedTypedLiabilityDecision
     sameViolationReceipt :
       Legal.violationReceipt (Downstream.liabilityReceipt legacyDecision)
       ≡ SourceViolation.legacyViolationProjection sourceConditionedViolation
+
+    familyRecognitionImplication :
+      AtomicImplication.SourceConditionedAtomicLegalImplication
+        liabilityGraph facts (λ _ → ⊤) (familyRecognitionRule realised)
+    familyRecognitionUsesCanonicalRuleSource :
+      AtomicImplication.sourceRealisation familyRecognitionImplication
+      ≡ familyRecognitionRuleSource realised
+    familyRecognitionDerivationReceipt :
+      AtomicImplication.AtomicImplicationDerivationReceipt
+        familyRecognitionImplication
 
     familyRecognitionAtom :
       Atomic.SourceConditionedAtomicLegalTest
@@ -180,7 +191,6 @@ record SourceConditionedTypedLiabilityDecision
         (competencePredicate realised)
 
     courtCompetence : Downstream.CourtCompetenceReceipt {state} profile
-
     decisionReference : String
 
 open SourceConditionedTypedLiabilityDecision public
@@ -195,6 +205,7 @@ data NegativeLimitationAtomProvesOppositeProposition : Set where
 data FailedConditionProvesDifferentLiabilityFamily : Set where
 data ViolationAutomaticallyChoosesLiabilityFamily : Set where
 data LiabilityFamilyAutomaticallyChoosesRemedy : Set where
+data FamilySourceMetadataAloneCountsAsRecognition : Set where
 
 typedFamilyConstructorDoesNotCreateRecognition :
   TypedFamilyConstructorCreatesLegalRecognition → ⊥
@@ -220,11 +231,15 @@ liabilityFamilyDoesNotChooseRemedy :
   LiabilityFamilyAutomaticallyChoosesRemedy → ⊥
 liabilityFamilyDoesNotChooseRemedy ()
 
+familyMetadataDoesNotCountAsRecognition :
+  FamilySourceMetadataAloneCountsAsRecognition → ⊥
+familyMetadataDoesNotCountAsRecognition ()
+
 record SourceConditionedTypedLiabilityBoundary : Set where
   constructor source-conditioned-typed-liability-boundary
   field
     typedFamilySchemaNeedsSourceRealisation : Bool
-    familyRecognitionNeedsSourceRule : Bool
+    familyRecognitionNeedsAtomicSourceConditionedImplication : Bool
     everyPositiveConditionIsAtomicAndSourceConditioned : Bool
     everyLimitationIsAtomicAndSourceConditioned : Bool
     negativeMeansFailureOfSameAtom : Bool
