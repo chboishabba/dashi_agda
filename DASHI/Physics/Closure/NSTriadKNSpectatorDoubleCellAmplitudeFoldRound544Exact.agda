@@ -29,6 +29,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as R73
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedAsSwapPairedPlusMinusRound387Exact as R387
@@ -55,8 +56,7 @@ module Fold
   weightedDoubleCell : Physical.PhysicalTriadIncidence → C3.Complex3 F
   weightedDoubleCell tau =
     C3.complex3Scale (R294.weight W tau)
-      (DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact.doubleMixedCell
-        S D.Pair.velocity tau)
+      (R225.doubleMixedCell S D.Pair.velocity tau)
 
   weightedSwapAmplitude : Physical.PhysicalTriadIncidence → C3.Complex3 F
   weightedSwapAmplitude tau =
