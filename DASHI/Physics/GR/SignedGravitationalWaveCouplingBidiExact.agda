@@ -72,7 +72,7 @@ refinedWaveFixturesDistinct :
 refinedWaveFixturesDistinct ()
 
 ------------------------------------------------------------------------
--- Reuse marker: attach to the existing wave-law carrier.
+-- Same-object reuse: consume literal objects from the existing wave law.
 ------------------------------------------------------------------------
 
 record SignedGravitationalWaveProbe
@@ -81,10 +81,25 @@ record SignedGravitationalWaveProbe
   constructor signed-gravitational-wave-probe
   field
     couplingSign : Signed.CouplingSign
+
+    backgroundMetric : Laws.GravitationalWaveLaw.BackgroundMetric wave
+    perturbation : Laws.GravitationalWaveLaw.Perturbation wave
+    waveEquation : Laws.GravitationalWaveLaw.WaveEquation wave
+    waveEquationMatches :
+      Laws.GravitationalWaveLaw.linearise wave backgroundMetric perturbation
+        ≡ waveEquation
+
+    observableStrain : Laws.GravitationalWaveLaw.ObservableStrain wave
+    observableStrainMatches :
+      Laws.GravitationalWaveLaw.strainObservable wave perturbation
+        ≡ observableStrain
+
+    weakFieldReceipt :
+      Laws.GravitationalWaveLaw.weakFieldValid wave backgroundMetric perturbation
+
     sourceGenerationCarrier : Set
     sourceGenerationReceipt : sourceGenerationCarrier
-    usesExistingWaveEquation : Laws.GravitationalWaveLaw.WaveEquation wave → Set
-    usesExistingObservableStrain : Laws.GravitationalWaveLaw.ObservableStrain wave → Set
+
     sameBackgroundForSignComparison : Bool
     samePerturbationForVacuumPropagationComparison : Bool
     sourceDynamicsReSolvedForCouplingSign : Bool
@@ -102,7 +117,8 @@ record SignedGravitationalWaveBoundary : Set where
     frozenSourceAmplitudeSignFlipEqualsSelfConsistentNegativeGBinary : Bool
     sourceDynamicsMustBeReSolvedBeforePhysicalNegativeGWavePrediction : Bool
     wavePropagationAgreementCanConstrainButNotIdentifyNegativeG : Bool
+    exactExistingWaveEquationAndStrainReceiptsRequired : Bool
 
 canonicalSignedGravitationalWaveBoundary : SignedGravitationalWaveBoundary
 canonicalSignedGravitationalWaveBoundary =
-  signed-gravitational-wave-boundary false true false false false false true true
+  signed-gravitational-wave-boundary false true false false false false true true true
