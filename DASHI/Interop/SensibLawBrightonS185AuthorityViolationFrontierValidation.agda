@@ -31,25 +31,37 @@ conditionCoordinateSatisfied :
   conditionElementSatisfied Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
 conditionCoordinateSatisfied = refl
 
-maintenanceFailureCoordinateExplicit :
-  maintenanceFailureElementExplicit Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
-maintenanceFailureCoordinateExplicit = refl
+outstandingRemediationCoordinateExplicit :
+  outstandingRemediationElementExplicit Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+outstandingRemediationCoordinateExplicit = refl
 
-maintenanceFailureStillUnresolved :
-  maintenanceFailureDispositionUnresolved Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
-maintenanceFailureStillUnresolved = refl
+outstandingRemediationCoordinateSatisfied :
+  outstandingRemediationElementSatisfied Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+outstandingRemediationCoordinateSatisfied = refl
 
-conditionAndMaintenanceSeparated :
-  conditionAndMaintenanceFailureSeparated Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
-conditionAndMaintenanceSeparated = refl
+statutoryFailureCoordinateExplicit :
+  statutoryMaintenanceFailureElementExplicit Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+statutoryFailureCoordinateExplicit = refl
 
-repairChronologyStillRequired :
-  requiresRepairChronologyForMaintenanceFailure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
-repairChronologyStillRequired = refl
+statutoryFailureStillUnresolved :
+  statutoryMaintenanceFailureDispositionUnresolved Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+statutoryFailureStillUnresolved = refl
 
-conditionBundleDoesNotPayWholeViolation :
-  conditionBundlePaysViolation Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
-conditionBundleDoesNotPayWholeViolation = refl
+factsSeparatedFromLegalConclusion :
+  factualCoordinatesSeparatedFromLegalConclusion Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+factsSeparatedFromLegalConclusion = refl
+
+chronologyPaysOutstandingRemediation :
+  Frontier.chronologyPaysOutstandingRemediation Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+chronologyPaysOutstandingRemediation = refl
+
+chronologyDoesNotPayStatutoryFailure :
+  chronologyPaysStatutoryS185Failure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+chronologyDoesNotPayStatutoryFailure = refl
+
+chronologyDoesNotPayWholeViolation :
+  chronologyPaysWholeViolation Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+chronologyDoesNotPayWholeViolation = refl
 
 nonLiveabilityNoticeDoesNotAutoPayMaintenance :
   nonLiveabilityNoticeAutomaticallyPaysMaintenanceFailure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
@@ -67,6 +79,6 @@ laterExitDoesNotAutoPayJanuaryMaintenance :
   laterExitCarrierAutomaticallyPaysJanuaryMaintenanceFailure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
 laterExitDoesNotAutoPayJanuaryMaintenance = refl
 
-conditionSatisfactionDoesNotAutoCreateViolation :
-  conditionSatisfactionAutomaticallyCreatesViolation Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
-conditionSatisfactionDoesNotAutoCreateViolation = refl
+satisfiedFactsDoNotAutoCreateViolation :
+  satisfiedFactsAutomaticallyCreateViolation Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+satisfiedFactsDoNotAutoCreateViolation = refl
