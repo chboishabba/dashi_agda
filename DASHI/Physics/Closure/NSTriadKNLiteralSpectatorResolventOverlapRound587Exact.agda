@@ -31,6 +31,7 @@ open import Data.Rational.Base using (ℚ; _+_; _≤_; ∣_∣)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
@@ -63,7 +64,7 @@ module LiteralSpectatorOverlap587
       Helical.Transverse
         (Field30.physicalEmbedding physicalSystem)
         mode
-        (Field30.velocity physicalSystem mode)) where
+        (Audit.velocityAt (Field30.finiteSystem physicalSystem) mode)) where
 
   E = Field30.physicalEmbedding physicalSystem
   I = Field30.physicalInverseSquare physicalSystem
