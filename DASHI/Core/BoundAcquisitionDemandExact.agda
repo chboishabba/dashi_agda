@@ -4,6 +4,15 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
+------------------------------------------------------------------------
+-- GENERIC EXACT-LIVE BOUND ACQUISITION DEMAND
+--
+-- A scheduler may identify a selected requirement and may also describe a
+-- plausible acquisition route.  Progress-sensitive code needs the stronger
+-- statement that the concrete acquisition attacks the residual and producer
+-- selected for that exact requirement.
+------------------------------------------------------------------------
+
 record AcquisitionAlignment
     (Requirement Residual Producer Acquisition : Set) : Set₁ where
   constructor acquisition-alignment
@@ -54,6 +63,10 @@ acquisitionUsesSelectedProducer :
   acquisitionProducer alignment (acquisition demand) ≡
   producerForRequirement alignment selected
 acquisitionUsesSelectedProducer = acquisitionProducerMatchesSelectedRequirement
+
+------------------------------------------------------------------------
+-- Firewalls.
+------------------------------------------------------------------------
 
 data BoundDemandAutomaticallyPaysRequirement : Set where
 data SameProducerIdentifiesResidual : Set where

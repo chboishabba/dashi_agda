@@ -12,6 +12,8 @@ import DASHI.Law.HerzogColonialWrongTypeElementRequirementExact as Element
 import DASHI.Law.HerzogColonialWrongTypeLiveSchedulerExact as Live
 import DASHI.Law.HerzogColonialWrongTypeRequirementSalienceExact as Salience
 import DASHI.Law.HerzogColonialWrongTypeGenericParetoFrontierBridgeExact as GenericPareto
+import DASHI.Law.HerzogColonialWrongTypeParetoProofPromotionExact as GenericParetoProof
+import DASHI.Law.HerzogColonialConcreteRefinementParetoRerunExact as Concrete
 import DASHI.Law.AustralianColonialWrongTypeAuthorityReclassificationExact as ColonialWrong
 import DASHI.Law.ColonialSemanticPrerequisiteWrongTypeCrossPollinationExact as ColonialPrereq
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
@@ -20,6 +22,7 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Element
 import DASHI.Cognition.PNF.SensibLawWrongTypeLiveResidualSchedulerExact as Scheduler
 import DASHI.Cognition.PNF.SensibLawWrongTypeRequirementSalienceFrontierExact as Frontier
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierProofPromotionExact as ParetoProof
 import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as Search
 
 ------------------------------------------------------------------------
@@ -100,7 +103,7 @@ powerPrerequisiteBecomesSalientAfterFibreUpdate =
   Salience.powerPrerequisiteBecomesSalientAfterAuthorityClosure
 
 ------------------------------------------------------------------------
--- Generic finite Pareto-frontier pins.
+-- Generic finite Pareto-frontier pins plus proof-relevant promotions.
 ------------------------------------------------------------------------
 
 currentGenericParetoFrontierIsAuthorityMeaning :
@@ -108,6 +111,12 @@ currentGenericParetoFrontierIsAuthorityMeaning :
   ≡ GenericPareto.currentAuthorityCell ∷ []
 currentGenericParetoFrontierIsAuthorityMeaning =
   GenericPareto.currentParetoFrontierIsAuthorityOnly
+
+currentAuthorityParetoHasProofPromotion :
+  ParetoProof.FrontierPromotion
+    GenericPareto.currentPortfolio
+    GenericPareto.currentAuthorityCell
+currentAuthorityParetoHasProofPromotion = GenericParetoProof.currentAuthorityPromotion
 
 powerRemainsRequiredWhileOffCurrentParetoFrontier :
   Pareto.requiredForConsumer GenericPareto.currentPowerCell ≡ true
@@ -120,11 +129,53 @@ afterAuthorityGenericParetoFrontierIsPower :
 afterAuthorityGenericParetoFrontierIsPower =
   GenericPareto.afterAuthorityParetoFrontierIsPowerOnly
 
+afterAuthorityPowerParetoHasProofPromotion :
+  ParetoProof.FrontierPromotion
+    GenericPareto.afterAuthorityPortfolio
+    GenericPareto.afterAuthorityPowerCell
+afterAuthorityPowerParetoHasProofPromotion =
+  GenericParetoProof.afterAuthorityPowerPromotion
+
 afterPowerGenericParetoFrontierIsIncident :
   Pareto.paretoFrontier GenericPareto.afterPowerPortfolio
   ≡ GenericPareto.afterPowerIncidentCell ∷ []
 afterPowerGenericParetoFrontierIsIncident =
   GenericPareto.afterPowerParetoFrontierIsIncidentOnly
+
+afterPowerIncidentParetoHasProofPromotion :
+  ParetoProof.FrontierPromotion
+    GenericPareto.afterPowerPortfolio
+    GenericPareto.afterPowerIncidentCell
+afterPowerIncidentParetoHasProofPromotion =
+  GenericParetoProof.afterPowerIncidentPromotion
+
+------------------------------------------------------------------------
+-- Concrete append-only translation-state refinements now drive the same
+-- Pareto phases rather than leaving them as manually unrelated snapshots.
+------------------------------------------------------------------------
+
+concreteAuthorityMeaningRefinementPreservesHistory :
+  Refinement.LegalRefinementReceipt.oldHistoryPreserved Concrete.stage0To1Receipt ≡ true
+concreteAuthorityMeaningRefinementPreservesHistory = refl
+
+concretePowerRefinementPreservesAuthorityMeaning :
+  Algebra._∈_ Cross.modernAuthorityErasureObserved (Algebra.facts Concrete.stage2Facts)
+concretePowerRefinementPreservesAuthorityMeaning = Concrete.authorityMeaningFactPreservedAtStage2
+
+concreteStage0FrontierIsAuthority :
+  Pareto.paretoFrontier GenericPareto.currentPortfolio
+  ≡ GenericPareto.currentAuthorityCell ∷ []
+concreteStage0FrontierIsAuthority = Concrete.stage0Frontier
+
+concreteStage1FrontierIsPower :
+  Pareto.paretoFrontier GenericPareto.afterAuthorityPortfolio
+  ≡ GenericPareto.afterAuthorityPowerCell ∷ []
+concreteStage1FrontierIsPower = Concrete.stage1Frontier
+
+concreteStage2FrontierIsIncident :
+  Pareto.paretoFrontier GenericPareto.afterPowerPortfolio
+  ≡ GenericPareto.afterPowerIncidentCell ∷ []
+concreteStage2FrontierIsIncident = Concrete.stage2Frontier
 
 analyticalWrongTypeStillDoesNotAutoApply :
   Wrong.WrongTypeInterpretationAutomaticallyApplicable → ⊥
@@ -166,6 +217,8 @@ data ZeroDiscriminationDeletesRequirement : Set where
 
 data ParetoFrontierCreatesEntailment : Set where
 
+data ParetoProofCertificateCreatesEntailment : Set where
+
 repetitionDoesNotCreateWrong : RepeatedThreatLanguageCreatesColonialWrong → ⊥
 repetitionDoesNotCreateWrong ()
 
@@ -195,6 +248,9 @@ zeroDiscriminationDoesNotDeleteRequirement ()
 
 paretoOrderDoesNotCreateLegalEntailment : ParetoFrontierCreatesEntailment → ⊥
 paretoOrderDoesNotCreateLegalEntailment ()
+
+paretoProofDoesNotCreateLegalEntailment : ParetoProofCertificateCreatesEntailment → ⊥
+paretoProofDoesNotCreateLegalEntailment ()
 
 data HerzogColonialAggregateMeansKernelValidated : Set where
 aggregateDoesNotClaimKernelValidation : HerzogColonialAggregateMeansKernelValidated → ⊥
