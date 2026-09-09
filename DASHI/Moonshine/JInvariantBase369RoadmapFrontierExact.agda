@@ -12,12 +12,14 @@ import DASHI.Moonshine.GoldenRatioBishopQuadraticFactorisationBidiExact
 import DASHI.Foundations.BishopGoldenRatioCarrierExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
+import DASHI.Moonshine.JInvariantOrderThreeVisibleScaleUniquenessBidiExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
+import DASHI.Moonshine.JInvariantRenderedResidualGovernanceTriBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
 
@@ -41,6 +43,7 @@ record RoadmapState : Set where
 
     jSeamWordLkTExact : Bool
     jForwardScaleLawExact : Bool
+    visibleEightScaleInjectiveExact : Bool
     structuredJFineFieldCodecExact : Bool
     jAbsoluteToLocalTwentySevenObserverExact : Bool
     localTwentySevenCannotRecoverFullJFine : Bool
@@ -48,6 +51,8 @@ record RoadmapState : Set where
     finiteFrickeCrossesJCoarseJFineBoundaryExact : Bool
     intervalValuedRenderedCalibrationTyped : Bool
     intervalRecognitionRequiresContainmentAndUniqueness : Bool
+    renderedResidualGovernanceTriBidiExact : Bool
+    concretePixelBoxDeterminesVisibleScaleExact : Bool
     concretePixelToAnalyticBoxCalibrationExact : Bool
     symbolicOrbitToAnalyticRealisationExact : Bool
     analyticModularCoordinateToStructuredJFieldExact : Bool
@@ -79,6 +84,7 @@ canonicalRoadmapState = record
 
   ; jSeamWordLkTExact = true
   ; jForwardScaleLawExact = true
+  ; visibleEightScaleInjectiveExact = true
   ; structuredJFineFieldCodecExact = true
   ; jAbsoluteToLocalTwentySevenObserverExact = true
   ; localTwentySevenCannotRecoverFullJFine = true
@@ -86,6 +92,8 @@ canonicalRoadmapState = record
   ; finiteFrickeCrossesJCoarseJFineBoundaryExact = true
   ; intervalValuedRenderedCalibrationTyped = true
   ; intervalRecognitionRequiresContainmentAndUniqueness = true
+  ; renderedResidualGovernanceTriBidiExact = true
+  ; concretePixelBoxDeterminesVisibleScaleExact = false
   ; concretePixelToAnalyticBoxCalibrationExact = false
   ; symbolicOrbitToAnalyticRealisationExact = false
   ; analyticModularCoordinateToStructuredJFieldExact = false
@@ -103,6 +111,7 @@ data FirstLiveRoadmapResidual : Set where
   missingBishopReciprocalSquareLift : FirstLiveRoadmapResidual
   missingUniformConjugateFactorLowerBound : FirstLiveRoadmapResidual
   missingFibonacciRatioToBishopPhiConvergence : FirstLiveRoadmapResidual
+  missingConcretePixelBoxToVisibleScale : FirstLiveRoadmapResidual
   missingConcretePixelToAnalyticBoxCalibration : FirstLiveRoadmapResidual
   missingSymbolicOrbitToAnalyticRealisation : FirstLiveRoadmapResidual
   missingAnalyticModularCoordinateToStructuredJField : FirstLiveRoadmapResidual
@@ -113,7 +122,7 @@ data FirstLiveRoadmapResidual : Set where
   missingKernelCertification : FirstLiveRoadmapResidual
 
 firstJMonsterResidual : FirstLiveRoadmapResidual
-firstJMonsterResidual = missingConcretePixelToAnalyticBoxCalibration
+firstJMonsterResidual = missingConcretePixelBoxToVisibleScale
 
 firstPhiResidual : FirstLiveRoadmapResidual
 firstPhiResidual = missingUnnormalisedRationalReciprocalSquareLift
