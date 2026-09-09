@@ -6,6 +6,9 @@ on:
       - 'DASHI/Core/BoundAcquisitionDemandExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSourceRealisedLegalRuleExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSourceConditionedApplicabilityViolationExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda'
@@ -46,10 +49,13 @@ jobs:
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Core/BoundAcquisitionDemandExact.agda
 
-      - name: Type-check source attribution and downstream WrongType discipline
+      - name: Type-check source-realised legal rule and 369 audit
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda
+          DASHI/Cognition/PNF/SensibLawSourceRealisedLegalRuleExact.agda
+          DASHI/Cognition/PNF/SensibLawSourceConditionedApplicabilityViolationExact.agda
+          DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda
           DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda
 
       - name: Type-check Cullen introspective and source-attributed spine
