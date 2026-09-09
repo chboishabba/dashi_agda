@@ -14,6 +14,7 @@ import DASHI.Cognition.PNF.SensibLawViolationPrerequisiteMeetExact as ViolationM
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as Source
 import DASHI.Interop.SensibLawNatSourcePropositionVerificationExact as Verify
+import DASHI.Interop.SensibLawBrightonForm11SourceSpanVerificationExact as Form11Source
 import DASHI.Law.SensibLawHousingEpisodeEvidenceLineageExact as Housing
 
 ------------------------------------------------------------------------
@@ -70,11 +71,22 @@ rtaForm11GuidanceSource =
 
 brightonForm11SourceResidualReference : String
 brightonForm11SourceResidualReference =
-  "Brighton 24-Jan-2023 Form11 unresolved-condition factual support residual"
+  Source.residualReference Form11Source.form11Residual
 
 brightonForm11SourceArtifactReceiptReference : String
 brightonForm11SourceArtifactReceiptReference =
-  "RTA Form 11.pdf exact matter-source artifact receipt"
+  Form11Source.form11ArtifactReceiptReference
+
+brightonForm11TargetClaimDigest : String
+brightonForm11TargetClaimDigest = Form11Source.form11TargetClaimDigest
+
+canonicalForm11SourceSupportPaid :
+  Verify.sourceSupportPaid Form11Source.form11Admission ≡ true
+canonicalForm11SourceSupportPaid = Form11Source.form11SourceSupportPaid
+
+canonicalForm11SourceSupportPositive :
+  Verify.supportTrit Form11Source.form11Admission ≡ Trit.pos
+canonicalForm11SourceSupportPositive = Form11Source.form11SupportTritPositive
 
 record BrightonS185MatterProposition : Set₁ where
   constructor brightonS185MatterProposition
@@ -109,6 +121,8 @@ record BrightonS185RegressionInput
       Source.residualReference residual ≡ brightonForm11SourceResidualReference
     sourceVerificationTargetsExactMatterProposition :
       Verify.targetClaimDigest demand ≡ propositionReference matter
+    sourceVerificationTargetMatchesPaidForm11Claim :
+      Verify.targetClaimDigest demand ≡ brightonForm11TargetClaimDigest
     sourceVerificationUsesExactForm11ArtifactReceipt :
       Verify.sourceArtifactReceiptReference demand
       ≡ brightonForm11SourceArtifactReceiptReference
@@ -116,6 +130,7 @@ record BrightonS185RegressionInput
       Verify.disposition receipt ≡ Verify.supported
     sourceAdmissionIsCanonical :
       admission ≡ Verify.admitSourceSupport receipt
+    sourceSpanPaymentReference : String
 
     sourceConditionedApplicability :
       Directional.SourceConditionedApplicabilityMeetInput
@@ -273,6 +288,7 @@ record BrightonS185RegressionBoundary : Set where
     canonicalSourceAdmissionRequired : Bool
     positiveSupportPaidByCanonicalAdmission : Bool
     positiveTritPaidByCanonicalAdmission : Bool
+    exactPrivateSourceSpanReceiptAvailable : Bool
     section185IsIndependentLegalAuthority : Bool
     positiveSourceSupportRequiredBeforeBridge : Bool
     sameMatterPropositionWeldRequired : Bool
@@ -297,5 +313,5 @@ record BrightonS185RegressionBoundary : Set where
 canonicalBrightonS185RegressionBoundary : BrightonS185RegressionBoundary
 canonicalBrightonS185RegressionBoundary =
   brighton-s185-regression-boundary
-    true true true true true true true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true
     false false false false false false false false false
