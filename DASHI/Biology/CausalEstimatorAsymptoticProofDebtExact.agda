@@ -10,18 +10,18 @@ import DASHI.Biology.CausalEstimatorMetricConsistencyExact as MetricConsistency
 import DASHI.Biology.CausalEstimatorFiniteDispersionExact as FiniteDispersion
 import DASHI.Biology.CausalEstimatorFiniteProbabilityConsistencyExact as FiniteProbability
 import DASHI.Biology.CausalEstimatorFiniteTestDistributionConvergenceExact as FiniteDistribution
+import DASHI.Biology.CausalEstimatorWeakNormalLimitDebtSplitExact as DebtSplit
 
 ------------------------------------------------------------------------
 -- ASYMPTOTIC FRONTIER
 --
--- The bounded finite-law lane now owns two genuine distributional precursors:
+-- The bounded finite-law lane owns two genuine distributional precursors:
 -- (1) outside-ball probability mass -> 0, and (2) convergence of exact finite
 -- expectations for every declared test function to an explicit finite target
--- law.  The second still requires a test-class adequacy receipt and is not
--- promoted to general weak convergence.  The remaining unpaid frontier is a
--- general probability/measure owner, a determining test-class/weak-convergence
--- theorem, a same-estimator asymptotic-normality theorem, and standard-error
--- limit calibration.
+-- law.  Standard weak-convergence / CLT / calibration theorem families are
+-- established mathematics but remain untranscribed in this lane; their next
+-- action is source/transcription audit.  The same-estimator normal-limit bridge
+-- is separately application-specific mathematical debt.
 ------------------------------------------------------------------------
 
 data AsymptoticResidual : Set where
@@ -41,6 +41,10 @@ producerForResidual generalProbabilityMeasureSemantics = probabilityMeasureOwner
 producerForResidual generalWeakConvergenceSemantics = weakConvergenceOwner
 producerForResidual asymptoticNormalityTheorem = estimatorLimitTheoremOwner
 producerForResidual standardErrorLimitCalibration = calibrationTheoremOwner
+
+------------------------------------------------------------------------
+-- Application-specific selected debt remains mathematical.
+------------------------------------------------------------------------
 
 selectedAsymptoticDebtRoute : Debt.ProofDebtRoutingReceipt
 selectedAsymptoticDebtRoute =
@@ -66,6 +70,53 @@ selectedAsymptoticSchedulerAction :
   ≡ Debt.researchMathematics
 selectedAsymptoticSchedulerAction = refl
 
+------------------------------------------------------------------------
+-- Standard theorem families have a different next action: transcription.
+------------------------------------------------------------------------
+
+standardWeakConvergenceRoute : Debt.ProofDebtRoutingReceipt
+standardWeakConvergenceRoute =
+  DebtSplit.standardTheoremRoute DebtSplit.determiningClassWeakConvergence
+
+standardCLTRoute : Debt.ProofDebtRoutingReceipt
+standardCLTRoute =
+  DebtSplit.standardTheoremRoute DebtSplit.classicalCentralLimit
+
+standardCalibrationRoute : Debt.ProofDebtRoutingReceipt
+standardCalibrationRoute =
+  DebtSplit.standardTheoremRoute DebtSplit.limitingStandardErrorCalibration
+
+standardWeakConvergenceSchedulerAction :
+  Debt.scheduleAction
+    (Debt.routedDebt standardWeakConvergenceRoute)
+    (Debt.statementStatus standardWeakConvergenceRoute)
+    Debt.constrained32GB
+    Debt.heavyReplay
+  ≡ Debt.auditTranscription
+standardWeakConvergenceSchedulerAction = refl
+
+standardCLTSchedulerAction :
+  Debt.scheduleAction
+    (Debt.routedDebt standardCLTRoute)
+    (Debt.statementStatus standardCLTRoute)
+    Debt.constrained32GB
+    Debt.heavyReplay
+  ≡ Debt.auditTranscription
+standardCLTSchedulerAction = refl
+
+standardCalibrationSchedulerAction :
+  Debt.scheduleAction
+    (Debt.routedDebt standardCalibrationRoute)
+    (Debt.statementStatus standardCalibrationRoute)
+    Debt.constrained32GB
+    Debt.heavyReplay
+  ≡ Debt.auditTranscription
+standardCalibrationSchedulerAction = refl
+
+------------------------------------------------------------------------
+-- Closed-coordinate witnesses.
+------------------------------------------------------------------------
+
 metricConsistencyBoundary :
   MetricConsistency.CausalEstimatorMetricConsistencyBoundary
 metricConsistencyBoundary =
@@ -86,8 +137,15 @@ finiteTestDistributionBoundary :
 finiteTestDistributionBoundary =
   FiniteDistribution.canonicalCausalEstimatorFiniteTestDistributionBoundary
 
+weakNormalDebtSplitBoundary : DebtSplit.WeakNormalLimitDebtSplitBoundary
+weakNormalDebtSplitBoundary = DebtSplit.canonicalWeakNormalLimitDebtSplitBoundary
+
 introspectiveBoundary : Introspective.IntrospectiveProofLoopBoundary
 introspectiveBoundary = Introspective.canonicalIntrospectiveProofLoopBoundary
+
+------------------------------------------------------------------------
+-- Firewalls.
+------------------------------------------------------------------------
 
 data FiniteProbabilityConsistencyMeansGeneralMeasurePermission : Set where
 
@@ -96,6 +154,8 @@ data FiniteTestConvergenceMeansGeneralWeakConvergencePermission : Set where
 data FiniteTargetLawMeansNormalLawPermission : Set where
 
 data FiniteVarianceMeansAsymptoticNormalityPermission : Set where
+
+data StandardCLTClosesApplicationEstimatorPermission : Set where
 
 data MissingOwnerMayBeReportedClosedPermission : Set where
 
@@ -117,6 +177,10 @@ finiteVarianceDoesNotBecomeAsymptoticNormality :
   FiniteVarianceMeansAsymptoticNormalityPermission → ⊥
 finiteVarianceDoesNotBecomeAsymptoticNormality ()
 
+standardCLTDoesNotCloseArbitraryEstimator :
+  StandardCLTClosesApplicationEstimatorPermission → ⊥
+standardCLTDoesNotCloseArbitraryEstimator ()
+
 missingAsymptoticOwnerCannotBeReportedClosed :
   MissingOwnerMayBeReportedClosedPermission → ⊥
 missingAsymptoticOwnerCannotBeReportedClosed ()
@@ -134,11 +198,14 @@ record CausalEstimatorCompletionFrontier : Set where
     metricConsistencyShapeClosed : Bool
     finiteLawConvergenceInProbabilityClosed : Bool
     finiteTestFunctionDistributionConvergenceClosed : Bool
+    standardWeakConvergenceTheoremNeedsTranscription : Bool
+    standardCLTNeedsTranscription : Bool
+    standardCalibrationNeedsTranscription : Bool
     generalProbabilityMeasureClosed : Bool
     generalWeakConvergenceClosed : Bool
-    asymptoticNormalityClosed : Bool
+    applicationAsymptoticNormalityClosed : Bool
     standardErrorLimitCalibrationClosed : Bool
-    currentDebtIsMathematicalOrSourceTheoremOwnership : Bool
+    applicationDebtStillMathematical : Bool
     certificationDebtClaimedForMissingMathematics : Bool
 
 canonicalCausalEstimatorCompletionFrontier :
@@ -146,5 +213,6 @@ canonicalCausalEstimatorCompletionFrontier :
 canonicalCausalEstimatorCompletionFrontier =
   causal-estimator-completion-frontier
     true true true true true true
+    true true true
     false false false false
     true false
