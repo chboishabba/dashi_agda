@@ -3,30 +3,16 @@ module DASHI.Physics.Closure.NSTriadKNLiteralNestedShellObserverRepairRound582Ex
 ------------------------------------------------------------------------
 -- ROUND582 / INTROSPECTIVE REPAIR: R336 SHELL LABELS ARE NOT YET PHYSICAL
 --
--- R336 correctly keeps a same-final-output signed nested overlap, but its
--- `leftShell` / `rightShell` fields are free Nat labels.  Neither R336 nor R29
--- relates those labels to a literal Fourier mode of the R329 nested cell.
--- Consequently the same physical pair can currently be relabelled arbitrarily
--- without changing either vector, its signed overlap, or its local envelope.
+-- R336 keeps a same-final-output signed nested overlap, but its leftShell and
+-- rightShell fields are free Nat labels.  Neither R336 nor R29 relates them to
+-- a literal Fourier mode of the R329 nested cell.  The same physical pair can
+-- therefore be relabelled arbitrarily without changing its vectors, overlap,
+-- or local envelope.
 --
--- This is an observer defect, not an analytic theorem failure.
---
--- The canonical literal shell function already exists:
---
---   Shell.shellIndex : FourierMode -> Nat.
---
--- What is missing is the semantic choice of WHICH literal R329 mode indexes
--- the operator family whose cross-shell almost-orthogonality is being claimed.
--- A nested cell exposes at least the following source-native coordinates:
---
---   inner p, inner q, inner output = outer p, outer q, final output k.
---
--- We do not guess among them.  Instead this file makes that selector explicit,
--- realizes R336 shell labels through the canonical shell function, and defines
--- the actual separation seen by any future decay theorem.
---
--- Only after this repair does the phrase "shell-decaying local envelope" have
--- a typed same-object meaning.  No decay estimate is proved here.
+-- The canonical literal shell function already exists as Shell.shellIndex.
+-- This owner makes the missing observer coordinate explicit: which literal
+-- R329 mode indexes the operator family used by the pre-TT* shell argument?
+-- No analytic decay estimate is introduced here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -35,6 +21,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (∣_-_∣)
 open import Data.Rational.Base using (ℚ; _≤_)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
@@ -51,7 +38,7 @@ F : C3.RealField _
 F = Rational.rationalRealField
 
 ------------------------------------------------------------------------
--- Existing R336 physical overlap is invariant under arbitrary shell relabel.
+-- Exact defect witness: R336 shell relabelling changes no physical quantity.
 ------------------------------------------------------------------------
 
 relabelR336Shells :
@@ -109,7 +96,8 @@ relabelKeepsLocalEnvelope :
 relabelKeepsLocalEnvelope E I O system S L H W P leftLabel rightLabel = refl
 
 ------------------------------------------------------------------------
--- Literal source-native mode coordinates available on one R329 nested cell.
+-- Source-native candidate coordinates.  The operator-shell semantics must
+-- select one coordinate globally; this owner deliberately does not guess it.
 ------------------------------------------------------------------------
 
 data NestedOperatorShellCoordinate582 : Set where
@@ -130,7 +118,7 @@ modeAtCoordinate582 :
   (W : R294.SwapInvariantCellWeight F) →
   NestedOperatorShellCoordinate582 →
   R329.StrongLowLiteralNestedCell E I O system S L H W →
-  Physical.FourierMode
+  Z3.FourierMode
 modeAtCoordinate582 E I O system S L H W innerLeft582 C =
   Physical.p (R329.inner C)
 modeAtCoordinate582 E I O system S L H W innerRight582 C =
@@ -155,10 +143,6 @@ shellAtCoordinate582 :
   R329.StrongLowLiteralNestedCell E I O system S L H W → Nat
 shellAtCoordinate582 E I O system S L H W coordinate C =
   Shell.shellIndex (modeAtCoordinate582 E I O system S L H W coordinate C)
-
-------------------------------------------------------------------------
--- Corrected pair carrier: one fixed physical operator-shell coordinate.
-------------------------------------------------------------------------
 
 record PhysicallyRealizedNestedShellPair582
     (E : C3.IntegerEmbedding F)
@@ -200,8 +184,8 @@ realizedSeparation582 E I O system S L H W coordinate P =
       (R336.right (overlap582 P)) ∣
 
 ------------------------------------------------------------------------
--- Future local decay must be indexed by the REALIZED separation.
--- This is still only a producer interface; no decay profile is inhabited here.
+-- A future local envelope must now be indexed by the realized separation.
+-- Summability remains a separate downstream receipt.
 ------------------------------------------------------------------------
 
 record SeparationIndexedNestedEnvelope582
@@ -224,10 +208,6 @@ record SeparationIndexedNestedEnvelope582
           (realizedSeparation582 E I O system S L H W coordinate P)
 
 open SeparationIndexedNestedEnvelope582 public
-
-------------------------------------------------------------------------
--- Introspective frontier.
-------------------------------------------------------------------------
 
 data NestedShellObserverResidual582 : Set where
   missingPhysicalOperatorShellRealization582 : NestedShellObserverResidual582
