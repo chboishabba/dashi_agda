@@ -237,3 +237,13 @@ markedTemporalRealToRationalCompilerLevel = machineChecked
 
 markedTemporalScalarAnalysisLevel : ProofLevel
 markedTemporalScalarAnalysisLevel = standardImported
+
+-- Exact remaining source-facing seams of this owner.  These are deliberately
+-- separated from the older rational shell-equality receipt: one is a real
+-- pointwise Hessian majorization and the other is the exact same-density
+-- covariance majorized by the marked first-gradient debt.
+literalCMP116RealHessianMarkedShellMajorizationLevel : ProofLevel
+literalCMP116RealHessianMarkedShellMajorizationLevel = conditional
+
+literalHeatDoobCovarianceMarkedFirstGradientMajorizationLevel : ProofLevel
+literalHeatDoobCovarianceMarkedFirstGradientMajorizationLevel = conditional
