@@ -31,7 +31,6 @@ module DASHI.Physics.YangMills.BalabanPath13FourAxisPhysicalPoincareExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -48,9 +47,10 @@ import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageExact as Average
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact as Norm
 import DASHI.Physics.YangMills.BalabanNormalizedFourAxisMartingaleExact as Martingale
+import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 import DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCertificate as LDL
 import DASHI.Physics.YangMills.BalabanPath13NormalizedAxisAverageExact as Side13
-import DASHI.Physics.YangMills.BalabanPath13ZeroMeanFibrePoincareExact as Fibre13
+import DASHI.Physics.YangMills.BalabanPath13ZeroMeanFibrePoincareLiftExact as FibreLift13
 import DASHI.Physics.YangMills.BalabanPath13DirectionalEnergyContractionExact as Direction
 
 axisFibreNormSum : Axis4 → SiteField Side13.side13 → ℚ
@@ -63,22 +63,6 @@ axisFibreNormSumMatchesGlobal : ∀ axis siteField →
 axisFibreNormSumMatchesGlobal axis siteField =
   axisPartitionSumMatchesGlobal axis (λ site → sq (siteField site))
 
-sumZeroMeanFibrePoincare :
-  ∀ axis siteField (transverses : List (Triple (CyclicIndex Side13.side13))) →
-  (∀ transverse → transverse ∈ transverses →
-    physicalFibreSum siteField axis transverse ≡ Data.Rational.0ℚ) →
-  sumRational transverses
-    (λ transverse →
-      LDL.oneEighteenth * physicalFibreNormSq siteField axis transverse)
-  ≤ sumRational transverses (physicalFibreEdgeEnergy siteField axis)
-sumZeroMeanFibrePoincare axis siteField [] zeroMean = ℚP.≤-refl
-sumZeroMeanFibrePoincare axis siteField (transverse ∷ transverses) zeroMean =
-  ℚP.+-mono-≤
-    (Fibre13.zeroMeanPhysicalFibrePoincare13 siteField axis transverse
-      (zeroMean transverse here))
-    (sumZeroMeanFibrePoincare axis siteField transverses
-      (λ current membership → zeroMean current (there membership)))
-
 axisZeroMeanGlobalPoincare :
   ∀ axis siteField →
   (∀ transverse → physicalFibreSum siteField axis transverse ≡ Data.Rational.0ℚ) →
@@ -87,8 +71,8 @@ axisZeroMeanGlobalPoincare :
 axisZeroMeanGlobalPoincare axis siteField zeroMean =
   let
     transverses = physicalTransverseCoordinates Side13.side13
-    folded = sumZeroMeanFibrePoincare axis siteField transverses
-      (λ transverse membership → zeroMean transverse)
+    folded = FibreLift13.sumZeroMeanFibrePoincareViaFibre
+      axis siteField transverses zeroMean
     scaledGlobal :
       LDL.oneEighteenth * Norm.globalNormSq siteField
       ≡ sumRational transverses
