@@ -2,16 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNGlobalDiagonalReducedNormalFormRound555Exa
 
 ------------------------------------------------------------------------
 -- ROUND555 / GLOBAL OUTPUT AGGREGATION OF THE DIAGONAL-REDUCED NORMAL FORM
---
--- R398's global pair list is literally the concatenation of R397/R396 output
--- pair lists.  Consume the SAME local positivity witnesses stored by R398 and
--- aggregate the R547+R550 fixed-output identity over a finite list of nonzero
--- outputs.  No proof-irrelevance step and no analytic estimate is used.
---
--- Result:
---
---   2 * globalWeightedRemainder
---     = (globalFactoredFull - globalSelfGram) - globalSelfFluxTangent.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -24,12 +14,15 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
+import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
 import DASHI.Physics.Closure.NSTriadKNFiniteWeightedGramFluxAggregationRound385Exact as R385
 import DASHI.Physics.Closure.NSTriadKNFibreLocalR378GlobalInstantaneousGramFluxRound398Exact as R398
 import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
@@ -50,8 +43,7 @@ module GlobalReduced
       (Field30.physicalEmbedding physicalSystem)
       (Field30.physicalInverseSquare physicalSystem)
       S L H
-      (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.velocityAt
-        (Field30.finiteSystem physicalSystem)))
+      (Audit.velocityAt (Field30.finiteSystem physicalSystem)))
     (viscosityPositive : Positive (Field30.viscosity physicalSystem)) where
 
   module G = R398.GlobalFluxLocal physicalSystem S L H P
@@ -72,9 +64,7 @@ module GlobalReduced
   globalFactoredFull cutoff [] nonzeroNil = 0ℚ
   globalFactoredFull cutoff (output ∷ outputs)
       (nonzeroCons outputNonzero tailNonzero) =
-    NF.factoredFull output
-      (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
-        cutoff output)
+    NF.factoredFull output (Output.physicalOutputFiber cutoff output)
     + globalFactoredFull cutoff outputs tailNonzero
 
   globalSelfGram :
@@ -105,7 +95,7 @@ module GlobalReduced
       + globalSelfFluxTangent cutoff outputs tailNonzero
 
   globalRemainderAppend :
-    (left right : List DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact.DampedGramPair) →
+    (left right : List R290.DampedGramPair) →
     R385.sumWeightedRemainder (left ++ right)
     ≡ R385.sumWeightedRemainder left + R385.sumWeightedRemainder right
   globalRemainderAppend [] right = refl
@@ -178,8 +168,12 @@ module GlobalReduced
               ∷ globalSelfFluxTangent cutoff outputs tailNonzero
               ∷ []))))
     where
-    cong : ∀ {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ f y
+    cong : ∀ {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ y |> f
     cong f refl = refl
+
+    infixl 0 _|>_
+    _|>_ : ∀ {A B : Set} → A → (A → B) → B
+    x |> f = f x
 
 round555GlobalOutputAggregationClosed : Bool
 round555GlobalOutputAggregationClosed = true
