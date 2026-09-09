@@ -2,14 +2,9 @@ module DASHI.Moonshine.JInvariantBase369RoadmapFrontierExact where
 
 ------------------------------------------------------------------------
 -- NORMALIZED ROADMAP FRONTIER
---
--- This owner records only whether a coordinate has an exact in-repo owner on
--- the current tranche.  It deliberately distinguishes finite structural
--- closure from analytic same-object closure and from kernel certification.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 import DASHI.Moonshine.GoldenRatioFibonacci369SheetVoxelBridgeExact
@@ -20,6 +15,8 @@ import DASHI.Foundations.BishopGoldenRatioCarrierExact
 import DASHI.Physics.Closure.GoldenRatioCarrierDerivationAdvanceExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
+import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
+import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
 
@@ -41,6 +38,15 @@ record RoadmapState : Set where
 
     jSeamWordLkTExact : Bool
     jForwardScaleLawExact : Bool
+
+    fibonacciNineSheetWeldedToOrdinaryJCoarse : Bool
+    structuredJFineFieldCodecExact : Bool
+    jAbsoluteToLocalTwentySevenObserverExact : Bool
+    jAbsoluteToLocalTwentySevenObserverHasSection : Bool
+    elevenTritOnePlusTenTwoPlusNineChartShiftExact : Bool
+
+    renderedSeamAcquiredAsStructuredJAbsolute : Bool
+    structuredJAbsoluteToOrbitIndexRecognised : Bool
     jRenderedScaleInverseRecognised : Bool
     jActualAnalyticGluingLawExact : Bool
     jRefinementGluingSquareClassified : Bool
@@ -67,6 +73,15 @@ canonicalRoadmapState = record
 
   ; jSeamWordLkTExact = true
   ; jForwardScaleLawExact = true
+
+  ; fibonacciNineSheetWeldedToOrdinaryJCoarse = true
+  ; structuredJFineFieldCodecExact = true
+  ; jAbsoluteToLocalTwentySevenObserverExact = true
+  ; jAbsoluteToLocalTwentySevenObserverHasSection = true
+  ; elevenTritOnePlusTenTwoPlusNineChartShiftExact = true
+
+  ; renderedSeamAcquiredAsStructuredJAbsolute = false
+  ; structuredJAbsoluteToOrbitIndexRecognised = false
   ; jRenderedScaleInverseRecognised = false
   ; jActualAnalyticGluingLawExact = false
   ; jRefinementGluingSquareClassified = false
@@ -78,6 +93,8 @@ canonicalRoadmapState = record
 
 data FirstLiveRoadmapResidual : Set where
   missingFibonacciRatioToBishopPhiConvergence : FirstLiveRoadmapResidual
+  missingRenderedSeamToStructuredJAbsolute : FirstLiveRoadmapResidual
+  missingStructuredJAbsoluteToOrbitIndexRecognition : FirstLiveRoadmapResidual
   missingRenderedScaleRecognition : FirstLiveRoadmapResidual
   missingAnalyticGluingTransport : FirstLiveRoadmapResidual
   missingMonsterGradeWiseIntertwiner : FirstLiveRoadmapResidual
@@ -86,7 +103,7 @@ data FirstLiveRoadmapResidual : Set where
 
 -- Highest-alpha geometric residual for the j/Monster lane.
 firstJMonsterResidual : FirstLiveRoadmapResidual
-firstJMonsterResidual = missingRenderedScaleRecognition
+firstJMonsterResidual = missingRenderedSeamToStructuredJAbsolute
 
 -- Highest-alpha analytic residual for the phi lane.
 firstPhiResidual : FirstLiveRoadmapResidual
