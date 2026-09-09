@@ -28,6 +28,7 @@ FILES=(
   DASHI/Analysis/RiemannG2ClayTerminalCoordinateRefinedExact.agda
   DASHI/Analysis/RiemannG2ClayTerminalGenericHighCoordinateExact.agda
   DASHI/Analysis/RiemannG2CurrentDirectOneLeafFrontierExact.agda
+  DASHI/Analysis/RiemannG2CurrentGenericHighFrontierRefinementExact.agda
   DASHI/Analysis/RiemannG2FinalCutIntrospectionExact.agda
   DASHI/Analysis/Everything.agda
 )
