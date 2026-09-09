@@ -61,6 +61,12 @@ import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 -- completion-j coordinate is what crosses the fibre boundary.
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 
+-- Conjugating the existing finite complement/Fricke involution through the
+-- 1+10 <-> 2+9 chart shift exchanges the second coarse trit with the q00 fine
+-- coordinate.  This is an exact finite scale/context-coupled fibre transport,
+-- while the analytic Fricke/Klein-j intertwiner remains explicit proof debt.
+import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
+
 -- Tesla/Base369 refinement is the commuting null model for seam transport:
 -- an independent balanced-trit fibre commutes with both 2- and 3-refinement,
 -- while explicit resolution-sensitive fixtures demonstrate the exact model
