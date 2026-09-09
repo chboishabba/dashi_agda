@@ -48,19 +48,9 @@ data MechanismClass : Set where
   nonIgnorableOrUnresolvedMissingness : MechanismClass
 
 allNoObservedDependencies : MissingnessMechanismFibre → Bool
-allNoObservedDependencies m with dependsOnGroup m
-... | doesNotDepend with dependsOnSelection m
-...   | doesNotDepend with dependsOnOutcome m
-...     | doesNotDepend with dependsOnOfficer m
-...       | doesNotDepend with dependsOnDeployment m
-...         | doesNotDepend with dependsOnObservedCovariates m
-...           | doesNotDepend = true
-...           | _ = false
-...         | _ = false
-...       | _ = false
-...     | _ = false
-...   | _ = false
-... | _ = false
+allNoObservedDependencies m with dependsOnGroup m | dependsOnSelection m | dependsOnOutcome m | dependsOnOfficer m | dependsOnDeployment m | dependsOnObservedCovariates m
+... | doesNotDepend | doesNotDepend | doesNotDepend | doesNotDepend | doesNotDepend | doesNotDepend = true
+... | _ | _ | _ | _ | _ | _ = false
 
 classifyMechanism : MissingnessMechanismFibre → MechanismClass
 classifyMechanism m with allNoObservedDependencies m | unobservedDependencyPossible m

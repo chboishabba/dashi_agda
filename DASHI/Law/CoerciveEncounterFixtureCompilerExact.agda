@@ -76,17 +76,9 @@ closedWhenTrue fieldMissing = Product.coordinateOpen
 closedWhenTrue fieldConflict = Product.coordinateOpen
 
 allSafeguardsClosed : EncounterFixture → Product.CoordinateState
-allSafeguardsClosed f with identityNotice f
-... | observedTrue with purposeNotice f
-...   | observedTrue with nonComplianceNotice f
-...     | observedTrue with leastInvasiveExercise f
-...       | observedTrue with detentionDurationSatisfied f
-...         | observedTrue = Product.coordinateClosed
-...         | _ = Product.coordinateOpen
-...       | _ = Product.coordinateOpen
-...     | _ = Product.coordinateOpen
-...   | _ = Product.coordinateOpen
-... | _ = Product.coordinateOpen
+allSafeguardsClosed f with identityNotice f | purposeNotice f | nonComplianceNotice f | leastInvasiveExercise f | detentionDurationSatisfied f
+... | observedTrue | observedTrue | observedTrue | observedTrue | observedTrue = Product.coordinateClosed
+... | _ | _ | _ | _ | _ = Product.coordinateOpen
 
 compileLawfulnessVector : EncounterFixture → Product.LawfulnessObligationVector
 compileLawfulnessVector f =
@@ -171,8 +163,6 @@ canonicalMissingSafeguardFixture = encounterFixture
   observedTrue
   observedFalse
   fieldMissing
-  fieldMissing
-  observedFalse
   fieldMissing
   observedFalse
   "abstract Queensland wanding regression fixture; not a real-person event"

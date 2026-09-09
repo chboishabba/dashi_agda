@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Cognition.PNF.SensibLawMaboCrownRecognitionProjectionNonFactorabilityExact as Mabo
+import DASHI.Cognition.PNF.SensibLawNativeTitleRecognitionDominationEverything as NativeTitle
 import DASHI.Law.SecurityClassificationInputLineageDagExact as Lineage
 import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as Cross
 
@@ -16,8 +17,8 @@ securityClassificationNonfactorabilityOwned :
 securityClassificationNonfactorabilityOwned = Cross.securityClassificationCannotFactorAuthority
 
 nativeTitleDoesNotResolveCession :
-  Cross.NativeTitle.sovereigntyCessionResolvedByNativeTitleDoctrine
-    Cross.NativeTitle.canonicalNativeTitleRecognitionDominationCapstone ≡ false
+  NativeTitle.sovereigntyCessionResolvedByNativeTitleDoctrine
+    NativeTitle.canonicalNativeTitleRecognitionDominationCapstone ≡ false
 nativeTitleDoesNotResolveCession = refl
 
 criticalLensDoesNotCreatePoliceIntent :

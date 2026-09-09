@@ -107,6 +107,8 @@ record ProvenanceDagBoundary : Set where
     derivedInstitutionalSummaryCreatesNewUnderlyingObservationIsFalse :
       derivedInstitutionalSummaryCreatesNewUnderlyingObservation ≡ false
 
+open ProvenanceDagBoundary public
+
 canonicalProvenanceDagBoundary : ProvenanceDagBoundary
 canonicalProvenanceDagBoundary =
   provenanceDagBoundary false refl false refl false refl

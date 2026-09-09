@@ -53,8 +53,8 @@ data CommandAuthorityCoordinate : Set where
   issuerCompetenceCoordinate phaseCoordinate scopeCoordinate : CommandAuthorityCoordinate
 
 data CoordinateState : Set where
-  closed : CoordinateState
-  open : CoordinateState
+  coordinateClosed : CoordinateState
+  coordinateOpen : CoordinateState
 
 record CommandAuthorityVector : Set where
   constructor commandAuthorityVector
@@ -68,19 +68,14 @@ data CommandAuthorityResult : Set where
   firstOpenCommandAuthority : CommandAuthorityCoordinate → CommandAuthorityResult
 
 firstOpenCommandAuthorityCoordinate : CommandAuthorityVector → CommandAuthorityResult
-firstOpenCommandAuthorityCoordinate v with powerState v
-... | open = firstOpenCommandAuthority powerCoordinate
-... | closed with applicableLawState v
-...   | open = firstOpenCommandAuthority applicableLawCoordinate
-...   | closed with validityState v
-...     | open = firstOpenCommandAuthority constitutionalValidityCoordinate
-...     | closed with issuerState v
-...       | open = firstOpenCommandAuthority issuerCompetenceCoordinate
-...       | closed with phaseState v
-...         | open = firstOpenCommandAuthority phaseCoordinate
-...         | closed with scopeStateVector v
-...           | open = firstOpenCommandAuthority scopeCoordinate
-...           | closed = commandAuthorityAllClosed
+firstOpenCommandAuthorityCoordinate v with powerState v | applicableLawState v | validityState v | issuerState v | phaseState v | scopeStateVector v
+... | coordinateOpen | _ | _ | _ | _ | _ = firstOpenCommandAuthority powerCoordinate
+... | coordinateClosed | coordinateOpen | _ | _ | _ | _ = firstOpenCommandAuthority applicableLawCoordinate
+... | coordinateClosed | coordinateClosed | coordinateOpen | _ | _ | _ = firstOpenCommandAuthority constitutionalValidityCoordinate
+... | coordinateClosed | coordinateClosed | coordinateClosed | coordinateOpen | _ | _ = firstOpenCommandAuthority issuerCompetenceCoordinate
+... | coordinateClosed | coordinateClosed | coordinateClosed | coordinateClosed | coordinateOpen | _ = firstOpenCommandAuthority phaseCoordinate
+... | coordinateClosed | coordinateClosed | coordinateClosed | coordinateClosed | coordinateClosed | coordinateOpen = firstOpenCommandAuthority scopeCoordinate
+... | coordinateClosed | coordinateClosed | coordinateClosed | coordinateClosed | coordinateClosed | coordinateClosed = commandAuthorityAllClosed
 
 ------------------------------------------------------------------------
 -- Jarrett regression: text/power/applicability may be known while the
@@ -89,7 +84,7 @@ firstOpenCommandAuthorityCoordinate v with powerState v
 
 jarrettCommandAuthorityVector : CommandAuthorityVector
 jarrettCommandAuthorityVector =
-  commandAuthorityVector closed closed open open open open
+  commandAuthorityVector coordinateClosed coordinateClosed coordinateOpen coordinateOpen coordinateOpen coordinateOpen
 
 jarrettCommandStopsAtValidity :
   firstOpenCommandAuthorityCoordinate jarrettCommandAuthorityVector

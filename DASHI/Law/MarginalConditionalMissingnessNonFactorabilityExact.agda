@@ -25,7 +25,7 @@ record StratifiedMissingnessPopulation : Set where
     totalMissing : ℕ
     missingAfterSearch : ℕ
     missingWithoutSearch : ℕ
-    pattern : MissingnessPattern
+    missingnessPattern : MissingnessPattern
     populationReference : String
 
 open StratifiedMissingnessPopulation public
@@ -34,7 +34,7 @@ marginalMissingnessObserver : StratifiedMissingnessPopulation → ℕ
 marginalMissingnessObserver = totalMissing
 
 conditionalMissingnessStructure : StratifiedMissingnessPopulation → MissingnessPattern
-conditionalMissingnessStructure = pattern
+conditionalMissingnessStructure = missingnessPattern
 
 searchedConcentratedPopulation : StratifiedMissingnessPopulation
 searchedConcentratedPopulation = stratifiedMissingnessPopulation

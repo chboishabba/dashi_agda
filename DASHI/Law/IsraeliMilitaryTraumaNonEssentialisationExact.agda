@@ -71,6 +71,8 @@ record TraumaPopulationBoundary : Set where
     jewishIdentityCarriesMilitaryTrauma : Bool
     jewishIdentityCarriesMilitaryTraumaIsFalse : jewishIdentityCarriesMilitaryTrauma ≡ false
 
+open TraumaPopulationBoundary public
+
 canonicalTraumaPopulationBoundary : TraumaPopulationBoundary
 canonicalTraumaPopulationBoundary =
   traumaPopulationBoundary false refl false refl false refl false refl false refl

@@ -22,7 +22,7 @@ data CorroborationState : Set where
 
 data AcquisitionMode : Set where
   officerReport : AcquisitionMode
-  bodyCamera : AcquisitionMode
+  bodyCameraVideo : AcquisitionMode
   deviceTelemetry : AcquisitionMode
   medicalRecord : AcquisitionMode
   civilianVideo : AcquisitionMode

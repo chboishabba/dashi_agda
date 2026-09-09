@@ -68,7 +68,7 @@ uluruCrossSystemClaim = framedAuthorityClaim
 -- Totalisation prerequisites.
 ------------------------------------------------------------------------
 
-record JurisdictionalTotalisationReceipt : Set where
+record JurisdictionalTotalisationReceipt : Set₁ where
   constructor jurisdictionalTotalisationReceipt
   field
     reach : JurisdictionalReach
@@ -99,7 +99,7 @@ cooperJurisdictionalTotalisation = jurisdictionalTotalisationReceipt
 ------------------------------------------------------------------------
 
 record TotalReachRequiresAuthorityReclassification
-    (t : JurisdictionalTotalisationReceipt) : Set where
+    (t : JurisdictionalTotalisationReceipt) : Set₁ where
   constructor totalReachRequiresAuthorityReclassification
   field
     reachIsTotal : reach t ≡ assertedTotalReach
@@ -198,6 +198,9 @@ canonicalJurisdictionalTotalisationBoundary =
     false refl
     false refl
     false refl
+
+open JurisdictionalTotalisationBoundary public
+
 
 ------------------------------------------------------------------------
 -- Mabo/Country residual remains outside the Crown administrative chart.

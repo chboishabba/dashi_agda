@@ -98,5 +98,8 @@ canonicalMaboEscalationBoundary : MaboEscalationBoundary
 canonicalMaboEscalationBoundary =
   maboEscalationBoundary false refl false refl false refl false refl false refl
 
+open MaboEscalationBoundary public
+
+
 escalationProducer : Esc.EscalationProducer
 escalationProducer = Esc.orderedSameObjectPathProducer

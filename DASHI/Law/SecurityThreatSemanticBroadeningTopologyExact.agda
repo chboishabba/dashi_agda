@@ -200,6 +200,9 @@ canonicalBroadeningBoundary : BroadeningBoundary
 canonicalBroadeningBoundary =
   broadeningBoundary false refl false refl false refl false refl false refl
 
+open BroadeningBoundary public
+
+
 ------------------------------------------------------------------------
 -- Multi-source join remains orthogonal to scope broadening.
 ------------------------------------------------------------------------

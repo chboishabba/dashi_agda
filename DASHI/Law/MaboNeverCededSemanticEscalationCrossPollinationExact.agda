@@ -99,7 +99,7 @@ data JointTrajectoryPoint : Set where
 
 threatLevel : JointTrajectoryPoint → Escalation.EscalationLevel
 threatLevel authorityVisibleLowThreat = Escalation.preservedLevel
-threatLevel authorityPartialGroupThreat = Escalation.scopeBroadenedLevel
+threatLevel authorityPartialGroupThreat = Escalation.broadenedScopeLevel
 threatLevel authorityErasedCollectiveThreat = Escalation.collectiveEnemyLevel
 threatLevel authorityErasedTerminalThreat = Escalation.terminalEnemyLevel
 
@@ -126,6 +126,9 @@ record ColonialEscalationBoundary : Set where
 canonicalColonialEscalationBoundary : ColonialEscalationBoundary
 canonicalColonialEscalationBoundary =
   colonialEscalationBoundary false refl false refl false refl false refl false refl
+
+open ColonialEscalationBoundary public
+
 
 ------------------------------------------------------------------------
 -- Pins to sourced donor propositions.

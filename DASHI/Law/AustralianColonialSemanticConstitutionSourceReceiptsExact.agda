@@ -108,3 +108,6 @@ record ColonialSemanticBoundary : Set where
 canonicalColonialSemanticBoundary : ColonialSemanticBoundary
 canonicalColonialSemanticBoundary =
   colonialSemanticBoundary false refl false refl false refl false refl
+
+open ColonialSemanticBoundary public
+

@@ -91,6 +91,7 @@ herzogComparator = securityRoutingHypervoxel
   supportOpen
   supportReported
   supportReported
+  supportReported
   coerciveDominant
   highSecurityIntensity
   "Legal Observers NSW final report; ABC verified/reporting; NSW Police public account; LECC Operation Makalu. Underlying pre-action risk/intelligence documents remain open."
@@ -293,6 +294,8 @@ record ComparatorCrossPollinationBoundary : Set where
     protectiveRoutingIsNecessarilyLawfulIsFalse : protectiveRoutingIsNecessarilyLawful ≡ false
     coerciveRoutingIsNecessarilyUnlawful : Bool
     coerciveRoutingIsNecessarilyUnlawfulIsFalse : coerciveRoutingIsNecessarilyUnlawful ≡ false
+
+open ComparatorCrossPollinationBoundary public
 
 canonicalComparatorCrossPollinationBoundary : ComparatorCrossPollinationBoundary
 canonicalComparatorCrossPollinationBoundary =

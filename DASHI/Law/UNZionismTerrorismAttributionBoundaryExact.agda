@@ -80,6 +80,8 @@ record UNDesignationBoundary : Set where
     formalUNTerroristSympathyGroupDesignationRecovered : Bool
     formalUNTerroristSympathyGroupDesignationRecoveredIsFalse : formalUNTerroristSympathyGroupDesignationRecovered ≡ false
 
+open UNDesignationBoundary public
+
 canonicalUNDesignationBoundary : UNDesignationBoundary
 canonicalUNDesignationBoundary =
   unDesignationBoundary false refl false refl false refl false refl false refl
