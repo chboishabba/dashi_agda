@@ -14,9 +14,8 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as LES
 ------------------------------------------------------------------------
 -- NITROGEN DELIVERY -> ROOT-ZONE -> UPTAKE -> ALLOCATION -> OUTCOME
 --
--- This closes the next seam requested by the prior nitrogen tranche.  Each
--- arrow is an explicit receipt; plant-available N in the delivery packet is not
--- silently promoted to root uptake, biomass, fruit, yield or soil return.
+-- Each arrow is an explicit receipt; plant-available N in the delivery packet
+-- is not silently promoted to root uptake, biomass, fruit, yield or soil return.
 ------------------------------------------------------------------------
 
 data NitrogenTransitionCoordinate : Set where
@@ -63,7 +62,8 @@ record NitrogenLESStateTransition
 open NitrogenLESStateTransition public
 
 record NitrogenCausalTransitionBinding
-    (transition : NitrogenLESStateTransition _ ) : Set₂ where
+    {weld : NitrogenSPACTransitionWeld}
+    (transition : NitrogenLESStateTransition weld) : Set₂ where
   constructor nitrogen-causal-transition-binding
   field
     estimand : Estimand.CausalEffectEstimand
