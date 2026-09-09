@@ -8,7 +8,9 @@ import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Target
 import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact as ClusterDirect
 import DASHI.Analysis.RiemannG2LiteralPhaseDirectClusterResponseExact as PhaseDirect
 import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as High
-import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as NearObserver
+import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as LiteralKernel
+import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact as FinalCert
+import DASHI.Analysis.RiemannG2CertifiedNearUpperClusterResponseCompilerExact as Certified
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
@@ -17,25 +19,18 @@ import DASHI.Analysis.RiemannG2ExistingScalarDonorInventoryExact as Donor
 import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 
 ------------------------------------------------------------------------
--- CURRENT DIRECT CLUSTER-RESPONSE FRONTIER
+-- CURRENT DIRECT FRONTIER
 --
--- Canonical high case:
---
---   exact crossing cutoff / literal pole-quotient targets
---   + balance-free actual ClusterResponse context
---   + exact final-near literal phase model
---   + literalNear + far + Gamma < ClusterResponse
---   + downstream cluster = Off + Gamma attachment
---   -> contradiction.
---
--- No consumer allowance, separate near/Gamma envelope, intermediate M_cluster,
--- M_cluster <= ClusterResponse theorem, or final balance is available to the
--- analytic payment.
+-- The preferred high route now has one evaluator-independent representation
+-- theorem and one primitive strict analytic family. A proof-carrying finite
+-- certificate is an optional sufficient producer between those two layers.
 ------------------------------------------------------------------------
 
 data FrontierCoordinate : Set where
-  finalNearLiteralPhaseRealisation : FrontierCoordinate
-  highLiteralPhaseBelowActualClusterResponse : FrontierCoordinate
+  finalNearLiteralRepresentation : FrontierCoordinate
+  proofCarryingFiniteUpperCertificate : FrontierCoordinate
+  certifiedEnvelopeBelowActualClusterResponse : FrontierCoordinate
+  directLiteralPhaseBelowActualClusterResponse : FrontierCoordinate
   finalClusterBalanceAttachment : FrontierCoordinate
   lowPublishedHeightCarrierTransport : FrontierCoordinate
   verifiedRegionOrHighCover : FrontierCoordinate
@@ -49,19 +44,21 @@ data FrontierCoordinate : Set where
   finalBalanceAsAnalyticInput : FrontierCoordinate
   exactExistingScalarDonor : FrontierCoordinate
 
-
 data FrontierClass : Set where
   analyticWall : FrontierClass
   representationWall : FrontierClass
+  certificateProducer : FrontierClass
   logicalCarrierWall : FrontierClass
   existingInterface : FrontierClass
   compilerOutput : FrontierClass
   pruned : FrontierClass
   absentDonor : FrontierClass
 
-frontierClass : FrontierCoordinate → FrontierClass
-frontierClass finalNearLiteralPhaseRealisation = representationWall
-frontierClass highLiteralPhaseBelowActualClusterResponse = analyticWall
+frontierClass : FrontierCoordinate -> FrontierClass
+frontierClass finalNearLiteralRepresentation = representationWall
+frontierClass proofCarryingFiniteUpperCertificate = certificateProducer
+frontierClass certifiedEnvelopeBelowActualClusterResponse = analyticWall
+frontierClass directLiteralPhaseBelowActualClusterResponse = analyticWall
 frontierClass finalClusterBalanceAttachment = representationWall
 frontierClass lowPublishedHeightCarrierTransport = representationWall
 frontierClass verifiedRegionOrHighCover = representationWall
@@ -75,10 +72,6 @@ frontierClass separateGammaEnvelope = pruned
 frontierClass finalBalanceAsAnalyticInput = pruned
 frontierClass exactExistingScalarDonor = absentDonor
 
-------------------------------------------------------------------------
--- Exact pins.
-------------------------------------------------------------------------
-
 crossingAdmissionRequired :
   Target.DirectLiteralComplementTargetBoundary.quarterPeriodCrossingAdmissionRequired
     Target.canonicalDirectLiteralComplementTargetBoundary ≡ true
@@ -89,10 +82,45 @@ narrowWindowRouteRejected :
     Growth.canonicalCutoffGrowthBidiBoundary ≡ true
 narrowWindowRouteRejected = refl
 
-finalNearPhaseRealisationIsFirstObserverRefinement :
-  NearObserver.FinalPoleNearObserverRefinementBoundary.targetRelativePhaseIsFirstMissingCoordinate
-    NearObserver.canonicalFinalPoleNearObserverRefinementBoundary ≡ true
-finalNearPhaseRealisationIsFirstObserverRefinement = refl
+literalKernelIsEvaluatorIndependent :
+  LiteralKernel.FinalNearLiteralKernelBoundary.evaluatorRequiredToStateLiteralKernel
+    LiteralKernel.canonicalFinalNearLiteralKernelBoundary ≡ false
+literalKernelIsEvaluatorIndependent = refl
+
+oneLiteralRepresentationEqualityRemains :
+  LiteralKernel.FinalNearLiteralKernelBoundary.oneFinalNearToLiteralSumEqualityRequired
+    LiteralKernel.canonicalFinalNearLiteralKernelBoundary ≡ true
+oneLiteralRepresentationEqualityRemains = refl
+
+literalKernelCompilesExistingObserver :
+  LiteralKernel.FinalNearLiteralKernelBoundary.existingFinalObserverModelIsCompilerOutput
+    LiteralKernel.canonicalFinalNearLiteralKernelBoundary ≡ true
+literalKernelCompilesExistingObserver = refl
+
+certificateNeedsNoSelectedWindow :
+  FinalCert.FinalCarrierFiniteSumCertificateBoundary.selectedWeilWindowRequired
+    FinalCert.canonicalFinalCarrierFiniteSumCertificateBoundary ≡ false
+certificateNeedsNoSelectedWindow = refl
+
+certificateUpperTransportsToFinalNear :
+  FinalCert.FinalCarrierFiniteSumCertificateBoundary.orderedUpperCertificateTransportsToFinalNear
+    FinalCert.canonicalFinalCarrierFiniteSumCertificateBoundary ≡ true
+certificateUpperTransportsToFinalNear = refl
+
+certifiedRouteNeedsNoEvaluatorIndexedKernel :
+  Certified.CertifiedNearUpperClusterBoundary.evaluatorIndexedKernelRequired
+    Certified.canonicalCertifiedNearUpperClusterBoundary ≡ false
+certifiedRouteNeedsNoEvaluatorIndexedKernel = refl
+
+certifiedUpperFeedsCanonicalHighPayment :
+  Certified.CertifiedNearUpperClusterBoundary.finiteUpperCertificateCanFeedCanonicalHighPayment
+    Certified.canonicalCertifiedNearUpperClusterBoundary ≡ true
+certifiedUpperFeedsCanonicalHighPayment = refl
+
+certifiedStrictMarginStillRequired :
+  Certified.CertifiedNearUpperClusterBoundary.strictCertifiedEnvelopeBelowClusterStillRequired
+    Certified.canonicalCertifiedNearUpperClusterBoundary ≡ true
+certifiedStrictMarginStillRequired = refl
 
 intermediateClusterMarginPruned :
   ClusterDirect.DirectClusterResponseBoundary.intermediateQuantitativeClusterMarginRequired
@@ -118,16 +146,6 @@ literalPhaseTargetsActualClusterResponse :
   PhaseDirect.LiteralPhaseDirectClusterBoundary.literalPhaseTheoremTargetsActualClusterResponse
     PhaseDirect.canonicalLiteralPhaseDirectClusterBoundary ≡ true
 literalPhaseTargetsActualClusterResponse = refl
-
-literalPhaseHasNoIntermediateMargin :
-  PhaseDirect.LiteralPhaseDirectClusterBoundary.intermediateClusterMarginPrimitive
-    PhaseDirect.canonicalLiteralPhaseDirectClusterBoundary ≡ false
-literalPhaseHasNoIntermediateMargin = refl
-
-uniformHighHasNoIntermediateMargin :
-  High.UniformLiteralPhaseHighBoundary.intermediateClusterMarginPrimitivePerCase
-    High.canonicalUniformLiteralPhaseHighBoundary ≡ false
-uniformHighHasNoIntermediateMargin = refl
 
 uniformHighFamilyMatchesPrizeQuantifier :
   High.UniformLiteralPhaseHighBoundary.literalPhaseTheoremFamilyMatchesPrizeHighQuantifier
@@ -162,6 +180,22 @@ terminalCompilerOwned = refl
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
+    oneRepresentationEqualityBeforeDirectAnalysis : Bool
+    oneRepresentationEqualityBeforeDirectAnalysisIsTrue :
+      oneRepresentationEqualityBeforeDirectAnalysis ≡ true
+
+    evaluatorIndependentKernelOwnedAsInterface : Bool
+    evaluatorIndependentKernelOwnedAsInterfaceIsTrue :
+      evaluatorIndependentKernelOwnedAsInterface ≡ true
+
+    certifiedFiniteUpperIsValidOptionalProducer : Bool
+    certifiedFiniteUpperIsValidOptionalProducerIsTrue :
+      certifiedFiniteUpperIsValidOptionalProducer ≡ true
+
+    certifiedRouteStillNeedsStrictClusterResponseMargin : Bool
+    certifiedRouteStillNeedsStrictClusterResponseMarginIsTrue :
+      certifiedRouteStillNeedsStrictClusterResponseMargin ≡ true
+
     highSideHasOnePrimitiveScalarAnalyticFamily : Bool
     highSideHasOnePrimitiveScalarAnalyticFamilyIsTrue :
       highSideHasOnePrimitiveScalarAnalyticFamily ≡ true
@@ -173,10 +207,6 @@ record CurrentDirectOneLeafFrontierBoundary : Set where
     intermediateQuantitativeClusterMarginStillPrimitive : Bool
     intermediateQuantitativeClusterMarginStillPrimitiveIsFalse :
       intermediateQuantitativeClusterMarginStillPrimitive ≡ false
-
-    quantitativeClusterMarginLowerStillPrimitive : Bool
-    quantitativeClusterMarginLowerStillPrimitiveIsFalse :
-      quantitativeClusterMarginLowerStillPrimitive ≡ false
 
     analyticPaymentCanSeeFinalBalance : Bool
     analyticPaymentCanSeeFinalBalanceIsFalse :
@@ -195,15 +225,22 @@ record CurrentDirectOneLeafFrontierBoundary : Set where
       doubleNegatedRHIsCompilerOutputBeforeStability ≡ true
 
     exactCriticalLinePredicateRefinementStillRequiredForPositiveRH : Bool
-    exactCriticalLinePredicateRefinementStillRequiredForPositiveRHIsTrue : exactCriticalLinePredicateRefinementStillRequiredForPositiveRH ≡ true
+    exactCriticalLinePredicateRefinementStillRequiredForPositiveRHIsTrue :
+      exactCriticalLinePredicateRefinementStillRequiredForPositiveRH ≡ true
+
     finalClayCompilerClosed : Bool
     finalClayCompilerClosedIsTrue : finalClayCompilerClosed ≡ true
+
     exactHeadAgdaKernelValidationOwned : Bool
-    exactHeadAgdaKernelValidationOwnedIsFalse : exactHeadAgdaKernelValidationOwned ≡ false
+    exactHeadAgdaKernelValidationOwnedIsFalse :
+      exactHeadAgdaKernelValidationOwned ≡ false
+
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
-    firstObserverRefinement : String
-    firstGenuineAnalyticWall : String
+
+    firstRepresentationWall : String
+    preferredCertifiedAnalyticWall : String
+    directAnalyticWall : String
     highestAlphaReading : String
 
 canonicalCurrentDirectOneLeafFrontierBoundary : CurrentDirectOneLeafFrontierBoundary
@@ -211,7 +248,10 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
   current-direct-one-leaf-frontier-boundary
     true refl
     true refl
-    false refl
+    true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     true refl
@@ -221,6 +261,7 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     true refl
     false refl
     false refl
-    "Identify final nearResponseAt(chosen crossing J) proof-relevantly with the literal reflection-paired finite near-zero sum exposing the target-relative phase."
-    "Uniformly for every arbitrary high off-line nontrivial zero, independently of the final balance, prove cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
-    "The current high route is literal, balance-free and smaller than the former one-leaf margin API: the intermediate quantitative M_cluster and its lower-bound theorem are pruned. The analytic theorem targets the actual same-ordinate ClusterResponse and cannot access cluster=Off+Gamma through its input type. Only afterward is that balance attached to compile contradiction. Low-source transport and critical-predicate refinement remain separate terminal coordinates. Exact-head Agda validation is still unavailable and RH is not derived."
+    "Realize the exact universal pole-quotient finite kernel and prove nearResponseAt(chosen crossing J) = finiteNearSum(cellResponse). The checked Lean status owner does not transport this equality into Agda."
+    "After a proof-carrying upper certificate nearResponseAt(J) <= U, independently prove cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
+    "Alternatively prove directly cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
+    "The preferred direct route has one exact representation seam followed by one strict high analytic family. A proof-carrying finite upper is a valid window-free computational producer between them. Intermediate M_cluster, separate near/Gamma envelopes, determinant-q payment, and final balance as analytic input are pruned. Low-source transport and critical-predicate refinement remain independent terminal coordinates. Exact-head Agda validation is not claimed and RH is not derived."
