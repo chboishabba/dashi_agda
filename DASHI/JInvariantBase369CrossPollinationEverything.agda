@@ -75,6 +75,12 @@ import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 -- observer.  No RH theorem is transported to the j-invariant problem.
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 
+-- Split rendered acquisition into two same-object obligations: image/rendering
+-- calibration to an analytic modular coordinate, then analytic coordinate to
+-- the full structured jCoarse/jFine field.  Local 27 remains downstream and
+-- may only replace the full field under a consumer-sufficiency proof.
+import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
+
 -- Tesla/Base369 refinement is the commuting null model for seam transport:
 -- an independent balanced-trit fibre commutes with both 2- and 3-refinement,
 -- while explicit resolution-sensitive fixtures demonstrate the exact model
@@ -91,9 +97,10 @@ import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 
 -- The positive ratio sequence is now realized directly on the repository's
 -- vendored Bishop real carrier.  Positivity is definitionally retained in the
--- pair type; only convergence of that sequence to the already-constructed
--- bishopPhi remains open.
+-- pair type; exact positive denominator growth is also wired below.  Only the
+-- quantified divergence/error-bound/convergence chain remains open.
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
 
 -- Quadratic approximation / codec / prime-compression tranche.  This includes
 -- the exact Fibonacci defect involution on the existing 3/6/9/27 carriers,
