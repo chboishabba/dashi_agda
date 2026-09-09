@@ -232,7 +232,7 @@ ordinalUtilityDoesNotAutomaticallySupportExpectation ()
 
 finiteMixedLawDoesNotCreateGeneralMeasureSpace :
   FiniteMixedLawMeansGeneralProbabilityMeasurePermission → ⊥
-finiteMixedLawDoesNotCreateGeneralProbabilityMeasurePermission = λ ()
+finiteMixedLawDoesNotCreateGeneralMeasureSpace ()
 
 pureNashDoesNotAutomaticallyGiveMixedNash : PureNashMeansMixedNashPermission → ⊥
 pureNashDoesNotAutomaticallyGiveMixedNash ()
