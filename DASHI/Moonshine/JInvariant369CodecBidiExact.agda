@@ -25,6 +25,7 @@ import DASHI.Codec.VerifiedFiniteTritCoder as Coder
 import DASHI.Codec.TriadicPAdicCodec369Bridge as Codec369
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
+import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Repair
 
@@ -192,7 +193,7 @@ open Encoded369ObserverFibre public
 encodeObserverFibreAt :
   (R : Render.JPhaseRenderingAlgebra) →
   (F : Repair.SamePointFibreObservers R) →
-  (z : Render.Point (Render.klein R)) →
+  (z : Klein.Point (Render.klein R)) →
   Encoded369ObserverFibre R F
 encodeObserverFibreAt R F z =
   encoded369-observer-fibre
@@ -202,7 +203,7 @@ encodeObserverFibreAt R F z =
 observer9CodecRoundtripAt :
   (R : Render.JPhaseRenderingAlgebra) →
   (F : Repair.SamePointFibreObservers R) →
-  (z : Render.Point (Render.klein R)) →
+  (z : Klein.Point (Render.klein R)) →
   decodeNine (observer9Code (encodeObserverFibreAt R F z))
   ≡ just (Repair.observer9At F z)
 observer9CodecRoundtripAt R F z = decodeEncodeNine (Repair.observer9At F z)
@@ -210,7 +211,7 @@ observer9CodecRoundtripAt R F z = decodeEncodeNine (Repair.observer9At F z)
 observer27CodecRoundtripAt :
   (R : Render.JPhaseRenderingAlgebra) →
   (F : Repair.SamePointFibreObservers R) →
-  (z : Render.Point (Render.klein R)) →
+  (z : Klein.Point (Render.klein R)) →
   decode27 (observer27Code (encodeObserverFibreAt R F z))
   ≡ just (Repair.observer27At F z)
 observer27CodecRoundtripAt R F z = decodeEncode27 (Repair.observer27At F z)
