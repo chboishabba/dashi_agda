@@ -9,6 +9,7 @@ import DASHI.Interop.ITIRRecordingManifestSensibLawAdapterExact as RecordingPari
 import DASHI.Interop.ITIRTemporalHealthSensibLawAdapterExact as HealthParity
 import DASHI.Interop.ITIRSubmittedEvidencePackageSensibLawAdapterExact as PackageParity
 import DASHI.Interop.ITIRHousingEpisodeSensibLawAdapterExact as HousingParity
+import DASHI.Interop.ITIRLaterMedicalParticularHarmSensibLawAdapterExact as LaterMedicalParity
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -41,3 +42,8 @@ selectedSubmittedEvidencePackageParity =
 
 selectedHousingEpisodeParity : HousingParity.ITIRHousingEpisodeParityBoundary
 selectedHousingEpisodeParity = HousingParity.canonicalITIRHousingEpisodeParityBoundary
+
+selectedLaterMedicalParticularHarmParity :
+  LaterMedicalParity.ITIRLaterMedicalParticularHarmParityBoundary
+selectedLaterMedicalParticularHarmParity =
+  LaterMedicalParity.canonicalITIRLaterMedicalParticularHarmParityBoundary
