@@ -27,6 +27,19 @@ godel1931 =
     "primary source for arithmetisation and the incompleteness results; citation does not instantiate the local theorem contracts"
     Source.publicAttribution
 
+rosser1936 : Source.AttributedSource
+rosser1936 =
+  Source.mkDOISource
+    "Barkley Rosser"
+    "Extensions of Some Theorems of Gödel and Church"
+    "The Journal of Symbolic Logic 1(3), 87–91"
+    "1936"
+    "10.2307/2269028"
+    "https://doi.org/10.2307/2269028"
+    Source.academicArticleSource
+    "primary source for the Rosser strengthening; its consistency hypotheses and modified sentence remain distinct from the ordinary Gödel sentence"
+    Source.publicAttribution
+
 lob1955 : Source.AttributedSource
 lob1955 =
   Source.mkDOISource
@@ -38,6 +51,18 @@ lob1955 =
     "https://doi.org/10.2307/2266895"
     Source.academicArticleSource
     "primary source for the provability theorem now called Löb's theorem"
+    Source.publicAttribution
+
+tarski1936 : Source.AttributedSource
+tarski1936 =
+  Source.mkNoDOISource
+    "Alfred Tarski"
+    "Der Wahrheitsbegriff in den formalisierten Sprachen"
+    "Studia Philosophica 1, 261–405"
+    "1936"
+    ""
+    Source.academicArticleSource
+    "primary publication carrier for the formal-truth work; the German publication is in volume 1 (1936), with a reprint/offprint dated 1935; no DOI is asserted here"
     Source.publicAttribution
 
 turing1936 : Source.AttributedSource
@@ -122,8 +147,8 @@ namedLimitsSourceAtlas =
   Source.mkSourceAtlas
     "Gödel/Turing named limits source atlas"
     "DASHI.ComputerScience.GodelTuringNamedLimitsSourceStatusAtlasExact"
-    (godel1931 ∷ lob1955 ∷ turing1936 ∷ church1936 ∷ rice1953 ∷ rado1962 ∷ kleene1936 ∷ kleene1938 ∷ [])
-    "original-source identities for the named formal limits lane; Tarski primary-source metadata remains an explicit acquisition extension rather than fabricated metadata"
+    (godel1931 ∷ rosser1936 ∷ lob1955 ∷ tarski1936 ∷ turing1936 ∷ church1936 ∷ rice1953 ∷ rado1962 ∷ kleene1936 ∷ kleene1938 ∷ [])
+    "original-source identities for the named formal-limits lane; source identity does not transport theorem proof or exact local hypotheses"
 
 ------------------------------------------------------------------------
 -- WHAT IS ALREADY IN-REPO?
@@ -131,6 +156,7 @@ namedLimitsSourceAtlas =
 
 data FormalisationStatus : Set where
   implementedExecutableSubstrate
+  implementedGenericCompiler
   implementedFiniteAnalogue
   typedContractOnly
   sourceEstablishedUnformalised
@@ -143,6 +169,7 @@ data NamedLimitProblem : Set where
   representabilityOfProofRelation
   diagonalFixedPointLemma
   godelFirstIncompleteness
+  rosserFirstIncompleteness
   hilbertBernaysDerivabilityConditions
   godelSecondIncompleteness
   lobTheorem
@@ -155,14 +182,15 @@ data NamedLimitProblem : Set where
 
 status : NamedLimitProblem → FormalisationStatus
 status godelNumbering = implementedExecutableSubstrate
-status arithmetisedSubstitution = sourceEstablishedUnformalised
+status arithmetisedSubstitution = implementedGenericCompiler
 status representabilityOfProofRelation = sourceEstablishedUnformalised
-status diagonalFixedPointLemma = sourceEstablishedUnformalised
-status godelFirstIncompleteness = sourceEstablishedUnformalised
-status hilbertBernaysDerivabilityConditions = sourceEstablishedUnformalised
-status godelSecondIncompleteness = sourceEstablishedUnformalised
-status lobTheorem = sourceEstablishedUnformalised
-status tarskiUndefinability = sourceMetadataPending
+status diagonalFixedPointLemma = implementedGenericCompiler
+status godelFirstIncompleteness = typedContractOnly
+status rosserFirstIncompleteness = typedContractOnly
+status hilbertBernaysDerivabilityConditions = typedContractOnly
+status godelSecondIncompleteness = typedContractOnly
+status lobTheorem = typedContractOnly
+status tarskiUndefinability = typedContractOnly
 status churchEntscheidungsproblem = sourceEstablishedUnformalised
 status turingHaltingUndecidability = sourceEstablishedUnformalised
 status kleeneRecursionFixedPoint = sourceEstablishedUnformalised
@@ -174,8 +202,10 @@ status busyBeaverNoncomputability = sourceEstablishedUnformalised
 --
 -- GodelLattice already owns abstract Text -> Nat/factor-vector contracts.
 -- GodelScalarization owns an executable prime-exponent FactorVec -> Nat map.
--- Neither module supplies arithmetised substitution, a proof predicate, or a
--- diagonal/fixed-point theorem.  Those are separate required coordinates.
+-- The current branch additionally owns generic compilers from a concrete
+-- formula-code retraction to ArithmetisedSubstitution and from a concrete
+-- DiagonalFormulaConstruction to DiagonalLemmaAuthority.  Concrete arithmetic
+-- inhabitants remain open.
 ------------------------------------------------------------------------
 
 record ExistingGodelSubstrateReceipt : Set where
@@ -183,15 +213,17 @@ record ExistingGodelSubstrateReceipt : Set where
   field
     abstractTextEncodingContractExists : Bool
     executableFactorVectorScalarisationExists : Bool
-    substitutionOperationExistsHere : Bool
+    genericSubstitutionCompilerExists : Bool
+    concreteFormulaCodeRetractionExists : Bool
+    genericDiagonalCompilerExists : Bool
+    concreteSelfSubstitutionRepresentabilityExists : Bool
     proofPredicateExistsHere : Bool
-    diagonalLemmaExistsHere : Bool
     incompletenessTheoremExistsHere : Bool
 
 canonicalExistingGodelSubstrateReceipt : ExistingGodelSubstrateReceipt
 canonicalExistingGodelSubstrateReceipt =
   existingGodelSubstrateReceipt
-    true true false false false false
+    true true true false true false false false
 
 ------------------------------------------------------------------------
 -- DEPENDENCY COORDINATES
@@ -200,14 +232,19 @@ canonicalExistingGodelSubstrateReceipt =
 data RequiredCoordinate : Set where
   syntaxCarrier
   godelCode
+  formulaCodeRetraction
   numeralQuotation
   substitutionOnCodes
+  selfSubstitutionRepresentability
   proofRelation
   proofRelationRepresentability
   provabilityPredicate
   diagonalFixedPoint
   consistencyHypothesis
+  strongerOrdinaryGodelUnrefutabilityHypothesis
+  rosserSentenceConstruction
   derivabilityConditions
+  truthDefinitionCandidate
   universalComputationEncoding
   selfApplicationEncoding
   nontrivialSemanticProperty
@@ -222,17 +259,30 @@ record ProblemDependency : Set where
 
 open ProblemDependency public
 
+arithmetisedSubstitutionDependency : ProblemDependency
+arithmetisedSubstitutionDependency =
+  problemDependency arithmetisedSubstitution
+    (syntaxCarrier ∷ godelCode ∷ formulaCodeRetraction ∷ numeralQuotation ∷ [])
+
 diagonalDependency : ProblemDependency
 diagonalDependency =
   problemDependency diagonalFixedPointLemma
-    (syntaxCarrier ∷ godelCode ∷ numeralQuotation ∷ substitutionOnCodes ∷ [])
+    (syntaxCarrier ∷ godelCode ∷ formulaCodeRetraction ∷ numeralQuotation ∷
+     substitutionOnCodes ∷ selfSubstitutionRepresentability ∷ [])
 
 godelIDependency : ProblemDependency
 godelIDependency =
   problemDependency godelFirstIncompleteness
     (syntaxCarrier ∷ godelCode ∷ substitutionOnCodes ∷ proofRelation ∷
      proofRelationRepresentability ∷ provabilityPredicate ∷ diagonalFixedPoint ∷
-     consistencyHypothesis ∷ [])
+     consistencyHypothesis ∷ strongerOrdinaryGodelUnrefutabilityHypothesis ∷ [])
+
+rosserIDependency : ProblemDependency
+rosserIDependency =
+  problemDependency rosserFirstIncompleteness
+    (syntaxCarrier ∷ godelCode ∷ substitutionOnCodes ∷ proofRelation ∷
+     proofRelationRepresentability ∷ provabilityPredicate ∷ diagonalFixedPoint ∷
+     consistencyHypothesis ∷ rosserSentenceConstruction ∷ [])
 
 godelIIDependency : ProblemDependency
 godelIIDependency =
@@ -244,6 +294,11 @@ lobDependency : ProblemDependency
 lobDependency =
   problemDependency lobTheorem
     (provabilityPredicate ∷ diagonalFixedPoint ∷ derivabilityConditions ∷ [])
+
+tarskiDependency : ProblemDependency
+tarskiDependency =
+  problemDependency tarskiUndefinability
+    (syntaxCarrier ∷ godelCode ∷ diagonalFixedPoint ∷ truthDefinitionCandidate ∷ [])
 
 turingDependency : ProblemDependency
 turingDependency =
@@ -266,6 +321,8 @@ busyBeaverDependency =
 ------------------------------------------------------------------------
 
 data GodelNumberingImpliesDiagonalLemma : Set where
+data FormulaRetractionImpliesRepresentability : Set where
+data OrdinaryGodelSentenceEqualsRosserSentence : Set where
 data FiniteBusyBeaverImpliesUniversalBusyBeaver : Set where
 data BoundedHaltingDeciderImpliesUniversalHaltingDecider : Set where
 data TernaryDecisionCarrierImpliesIncompleteness : Set where
@@ -273,6 +330,14 @@ data TernaryDecisionCarrierImpliesIncompleteness : Set where
 godelNumberingDoesNotSupplyDiagonalLemma :
   GodelNumberingImpliesDiagonalLemma → ⊥
 godelNumberingDoesNotSupplyDiagonalLemma ()
+
+formulaRetractionDoesNotSupplyInternalRepresentability :
+  FormulaRetractionImpliesRepresentability → ⊥
+formulaRetractionDoesNotSupplyInternalRepresentability ()
+
+ordinaryGodelSentenceIsNotDefinitionallyRosserSentence :
+  OrdinaryGodelSentenceEqualsRosserSentence → ⊥
+ordinaryGodelSentenceIsNotDefinitionallyRosserSentence ()
 
 finiteBusyBeaverDoesNotSupplyUniversalBusyBeaver :
   FiniteBusyBeaverImpliesUniversalBusyBeaver → ⊥
@@ -291,12 +356,18 @@ record GodelTuringNamedLimitsBoundary : Set where
   field
     godelNumberingAlreadyPresent : Bool
     executableScalarisationAlreadyPresent : Bool
-    diagonalLemmaAlreadyPresent : Bool
+    genericSubstitutionCompilerPresent : Bool
+    concreteFormulaRetractionPresent : Bool
+    genericDiagonalCompilerPresent : Bool
+    concreteDiagonalRepresentabilityPresent : Bool
     godelIAlreadyPresent : Bool
+    rosserKeptDistinctFromOrdinaryGodel : Bool
+    tarskiSourceMetadataPresent : Bool
     universalHaltingAlreadyPresent : Bool
     finiteAnaloguesMayBeReused : Bool
     theoremSourcesAreNotProofImports : Bool
 
 canonicalGodelTuringNamedLimitsBoundary : GodelTuringNamedLimitsBoundary
 canonicalGodelTuringNamedLimitsBoundary =
-  godelTuringNamedLimitsBoundary true true false false false true true
+  godelTuringNamedLimitsBoundary
+    true true true false true false false true true false true true
