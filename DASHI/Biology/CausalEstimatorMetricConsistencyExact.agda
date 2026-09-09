@@ -82,10 +82,6 @@ record MetricConsistencyGuarantee
 
 open MetricConsistencyGuarantee public
 
-------------------------------------------------------------------------
--- Exact tail theorem inherited from the generic metric convergence owner.
-------------------------------------------------------------------------
-
 metricConsistencyTail :
   ∀ {estimand procedure surface}
     (guarantee : MetricConsistencyGuarantee
@@ -111,20 +107,18 @@ metricConsistencyTail guarantee ε positive index afterThreshold =
     afterThreshold
 
 ------------------------------------------------------------------------
--- Compatibility adapter into the earlier generic guarantee carrier.  The
--- generic ConsistencyProperty is instantiated by this exact metric-convergence
--- theorem rather than by an unrelated application-local label.
+-- Compatibility adapter into the earlier generic guarantee carrier.
 ------------------------------------------------------------------------
 
 asGenericConsistencyGuarantee :
   ∀ {estimand procedure surface} →
   MetricConsistencyGuarantee {estimand} procedure surface →
   Guarantees.ConsistencyGuarantee procedure
-asGenericConsistencyGuarantee guarantee = record
+asGenericConsistencyGuarantee {surface = surface} guarantee = record
   { Index = SingleEstimandParameter
   ; ConsistencyProperty = λ _ →
       Metric.PointwiseMetricConvergence
-        (asMetricLimitProblem _)
+        (asMetricLimitProblem surface)
   ; consistencyReceipt = λ _ → convergence guarantee
   ; limitOrRefinementReference =
       "DASHI.Analysis.MetricConvergenceKernelBidiExact.PointwiseMetricConvergence"
