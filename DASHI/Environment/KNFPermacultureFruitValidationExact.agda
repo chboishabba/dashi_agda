@@ -8,3 +8,5 @@ import DASHI.Environment.KNFSoilMicrobePlantFruitResourceLoopExact
 import DASHI.Environment.KNFPlantSoilReturnFlowLoopExact
 import DASHI.Environment.KNFSituatedSiteResponseFibreExact
 import DASHI.Environment.KNFSourceAttributionLineageExact
+import DASHI.Environment.SustainableAgricultureManagementSourceRegistryExact
+import DASHI.Environment.SustainableAgricultureManagementExact
