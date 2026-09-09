@@ -17,6 +17,7 @@ import DASHI.Analysis.RiemannG2FinalSplitComplementSameObjectAssemblyExact as Ex
 import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact as Cluster
 import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as Literal
 import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact as FinalCert
+import DASHI.Analysis.RiemannG2ConcreteCertificateFinalScalarBridgeExact as Concrete
 
 record CertifiedNearUpperOrderAttachment
     {S : NearFar.OrderedAdditiveNearFarSurface}
@@ -147,6 +148,116 @@ compileCertifiedUpperToDirectClusterPayment
   ; Cluster.paymentReference = marginReference margin
   }
 
+------------------------------------------------------------------------
+-- CONCRETE CERTIFICATE CARRIER ROUTE
+--
+-- The machine-facing certificate carrier need not be definitionally equal to
+-- `NearFar.Scalar S`.  A single embedded-fold theorem plus one order transport
+-- is sufficient to obtain the final near upper.
+------------------------------------------------------------------------
+
+record ConcreteCertifiedNearUpperClusterMargin
+    {S : NearFar.OrderedAdditiveNearFarSurface}
+    {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
+    (targets : Direct.DirectLiteralComplementTargets S transport)
+    {carrier : Cert.FiniteAdditiveCarrier}
+    {certificate : Cert.ProofCarryingFiniteSumEnclosure carrier}
+    (bridge : Concrete.ConcreteCertificateFinalScalarBridge
+      (Direct.offInput targets) carrier certificate)
+    (upperBridge : Concrete.ConcreteCertificateFinalUpperBridge bridge)
+    (context : Cluster.BalanceFreeClusterResponseContext targets) : Set₁ where
+  private
+    offInput = Direct.offInput targets
+    gamma = Direct.directGammaTarget targets
+    sourceUpper = Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper
+      (Concrete.upperCertificate upperBridge)
+    finalUpper = Concrete.embed bridge sourceUpper
+  field
+    concreteCertifiedEnvelopeStrictBelowCluster :
+      Order._<_ (Split.order (Cluster.surface context))
+        (Split.add (Cluster.surface context)
+          (Existing.cast (Cluster.offScalarIdentity context)
+            (NearFar.add S finalUpper
+              (Transport.farBudgetAt transport
+                (Direct.chosenCutoff offInput))))
+          (Existing.cast (Cluster.gammaScalarIdentity context)
+            (Gamma.GammaBudget gamma
+              (Gamma.universalPoleQuotientTaper gamma))))
+        (Existing.cast (Cluster.clusterScalarIdentity context)
+          (Cluster.ClusterResponse context
+            (Cluster.clusterUniversalPoleQuotientTaper context)))
+    concreteMarginReference : String
+
+open ConcreteCertifiedNearUpperClusterMargin public
+
+concreteSourceOffBudgetBelowCertifiedEnvelope :
+  forall {S transport targets carrier certificate bridge upperBridge} ->
+  NearFar._≤_ S
+    (Direct.directOffBudget (Direct.offInput targets)
+      (Transport.universalPoleQuotientTaper transport))
+    (NearFar.add S
+      (Concrete.embed bridge
+        (Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper
+          (Concrete.upperCertificate upperBridge)))
+      (Transport.farBudgetAt transport
+        (Direct.chosenCutoff (Direct.offInput targets))))
+concreteSourceOffBudgetBelowCertifiedEnvelope
+    {S = S} {transport = transport} {targets = targets}
+    {upperBridge = upperBridge} =
+  NearFar.addMonotone S
+    (Concrete.compiledFinalNearBelowEmbeddedUpper upperBridge)
+    (Direct.sourceOrderReflexive (Direct.offInput targets)
+      (Transport.farBudgetAt transport
+        (Direct.chosenCutoff (Direct.offInput targets))))
+
+compiledComplementBudgetBelowConcreteCertifiedEnvelope :
+  forall {S transport targets carrier certificate bridge upperBridge context} ->
+  let gamma = Direct.directGammaTarget targets
+      U = Concrete.embed bridge
+        (Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper
+          (Concrete.upperCertificate upperBridge))
+  in Order._≤_ (Split.order (Cluster.surface context))
+      (Split.add (Cluster.surface context)
+        (Existing.cast (Cluster.offScalarIdentity context)
+          (Off.OffOrdinateBudget (Direct.directOffTarget targets)
+            (Off.universalPoleQuotientTaper (Direct.directOffTarget targets))))
+        (Existing.cast (Cluster.gammaScalarIdentity context)
+          (Gamma.GammaBudget gamma
+            (Gamma.universalPoleQuotientTaper gamma))))
+      (Split.add (Cluster.surface context)
+        (Existing.cast (Cluster.offScalarIdentity context)
+          (NearFar.add S U
+            (Transport.farBudgetAt transport
+              (Direct.chosenCutoff (Direct.offInput targets)))))
+        (Existing.cast (Cluster.gammaScalarIdentity context)
+          (Gamma.GammaBudget gamma
+            (Gamma.universalPoleQuotientTaper gamma))))
+compiledComplementBudgetBelowConcreteCertifiedEnvelope
+    {S = S} {targets = targets} {bridge = bridge}
+    {upperBridge = upperBridge} {context = context} =
+  Split.addMonotone (Cluster.surface context)
+    (Cluster.offOrderTransport context
+      (concreteSourceOffBudgetBelowCertifiedEnvelope
+        {S = S} {targets = targets} {bridge = bridge}
+        {upperBridge = upperBridge}))
+    (Cluster.compiledGammaUpper context)
+
+compileConcreteCertifiedUpperToDirectClusterPayment :
+  forall {S transport targets carrier certificate bridge upperBridge context} ->
+  ConcreteCertifiedNearUpperClusterMargin
+    {S = S} {transport = transport} targets
+    {carrier = carrier} {certificate = certificate}
+    bridge upperBridge context ->
+  Cluster.DirectClusterResponsePayment context
+compileConcreteCertifiedUpperToDirectClusterPayment
+    {context = context} margin = record
+  { Cluster.complementBudgetStrictBelowClusterResponse =
+      Order.leLtTrans (Split.order (Cluster.surface context))
+        (compiledComplementBudgetBelowConcreteCertifiedEnvelope)
+        (concreteCertifiedEnvelopeStrictBelowCluster margin)
+  ; Cluster.paymentReference = concreteMarginReference margin
+  }
+
 record CertifiedNearUpperClusterBoundary : Set where
   constructor certified-near-upper-cluster-boundary
   field
@@ -155,6 +266,12 @@ record CertifiedNearUpperClusterBoundary : Set where
     finiteUpperCertificateCanFeedCanonicalHighPayment : Bool
     finiteUpperCertificateCanFeedCanonicalHighPaymentIsTrue :
       finiteUpperCertificateCanFeedCanonicalHighPayment ≡ true
+    certificateScalarMustEqualFinalScalar : Bool
+    certificateScalarMustEqualFinalScalarIsFalse :
+      certificateScalarMustEqualFinalScalar ≡ false
+    concreteCertificateBridgeFeedsCanonicalHighPayment : Bool
+    concreteCertificateBridgeFeedsCanonicalHighPaymentIsTrue :
+      concreteCertificateBridgeFeedsCanonicalHighPayment ≡ true
     selectedWeilWindowRequired : Bool
     selectedWeilWindowRequiredIsFalse : selectedWeilWindowRequired ≡ false
     determinantConsumerRequired : Bool
@@ -175,8 +292,10 @@ canonicalCertifiedNearUpperClusterBoundary =
     false refl
     true refl
     false refl
+    true refl
+    false refl
     false refl
     false refl
     true refl
     false refl
-    "The computational route is acyclic: realize the evaluator-independent literal kernel, attach a proof-carrying finite upper to its exact fold, transport that upper to final nearResponseAt(J), and use source monotonicity to obtain B_off <= U+B_far. The only remaining strict theorem is cast(U+B_far)+cast(D_Gamma)<ClusterResponse on the balance-free context. No selected Weil window, determinant consumer, evaluator-indexed kernel, or downstream balance is available to manufacture the margin."
+    "The computational route need not identify its concrete certificate scalar definitionally with the final analytic scalar. Either use the legacy final-scalar certificate route, or keep an exact rational/interval backend concrete and supply one embedded-fold equality plus one upper-order transport. Both compile to B_off <= U+B_far and then the same balance-free strict ClusterResponse payment. Certification alone still does not prove the strict margin or RH."
