@@ -5,23 +5,23 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Physics.ExoticGravity.AntigravityResearchPromotionCutExact as Legacy
-import DASHI.Physics.ExoticGravity.AntigravityCalibratedFullyDerivedExperimentalCutExact as Strong
+import DASHI.Physics.ExoticGravity.AntigravityClaimScopedComparativeAnomalyExact as Strong
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- STRONG PROMOTION FACADE
 --
--- The merged legacy ComparativeAnomalyReceipt remains available for backwards
--- compatibility.  New consumers must enter through the calibrated,
--- provenance-bound, fully-derived receipt.  No legacy -> strong upgrade is
--- supplied.
+-- New consumers require the exact claim-scoped calibration/comparison weld.
+-- Thus provenance, derivation, calibration, consumer adequacy, and comparison
+-- all remain attached to the same antigravity claim.  No legacy -> strong
+-- automatic upgrade exists.
 ------------------------------------------------------------------------
 
 record StrongComparativeAnomaly
     (claim : Anti.AntigravityClaim) : Set₁ where
   constructor strong-comparative-anomaly
   field
-    receipt : Strong.CalibratedFullyDerivedComparativeAnomalyReceipt claim
+    receipt : Strong.ClaimScopedComparativeAnomalyReceipt claim
 
 open StrongComparativeAnomaly public
 
@@ -50,8 +50,7 @@ legacyReceiptCannotAutoUpgrade :
 legacyReceiptCannotAutoUpgrade legacy ()
 
 ------------------------------------------------------------------------
--- Strong post-comparison residuals remain ordinary research obligations, not a
--- declaration of a new universal law.
+-- Strong post-comparison residuals remain ordinary research obligations.
 ------------------------------------------------------------------------
 
 data StrongPostComparisonResidual : Set where
@@ -76,6 +75,8 @@ record StrongPromotionBoundary : Set where
   field
     newConsumersRequireFullyDerivedReceipt : Bool
     newConsumersRequireTypedCalibration : Bool
+    newConsumersRequireConsumerScopedCalibration : Bool
+    exactClaimScopedCutIdentityRequired : Bool
     calibrationStringAloneSufficient : Bool
     legacyComparativeReceiptAutomaticallyUpgrades : Bool
     fullyDerivedComparativeTensionEqualsUniqueMechanism : Bool
@@ -84,4 +85,4 @@ record StrongPromotionBoundary : Set where
 
 canonicalStrongPromotionBoundary : StrongPromotionBoundary
 canonicalStrongPromotionBoundary =
-  strong-promotion-boundary true true false false false false true
+  strong-promotion-boundary true true true true false false false false true
