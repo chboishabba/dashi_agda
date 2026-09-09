@@ -17,8 +17,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Data.Rational.Base using (ℚ; Positive)
+open import Relation.Binary.PropositionalEquality using (cong₂)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -26,10 +26,10 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
 import DASHI.Physics.Closure.NSTriadKNFixedOutputFluxFiniteDerivativeCompilerRound412Exact as R412
-import DASHI.Physics.Closure.NSTriadKNR290PairFluxDerivativeCompilerRound416Exact as R416
 import DASHI.Physics.Closure.NSTriadKNR418FinitePairFamilyToR409Round422Exact as R422
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
@@ -79,14 +79,11 @@ module LiteralSelfFluxFamily
 
   S = Literal.Base.S (Literal.stateTrajectory (Literal.support D))
 
-  PS : Time → _
+  PS : Time → Field30.PhysicalFiniteComplex3GalerkinSystem F
   PS time = Live.physicalSystemAt T support cutoff time
 
   viscosityPositiveAt :
-    (time : Time) →
-    Data.Rational.Base.Positive
-      (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.viscosity
-        (PS time))
+    (time : Time) → Positive (Field30.viscosity (PS time))
   viscosityPositiveAt time = Live.stateViscosityPositive T support cutoff time
 
   fibre : List Physical.PhysicalTriadIncidence
@@ -151,12 +148,6 @@ module LiteralSelfFluxFamily
       (λ alpha member → itemOutput alpha member)
   fluxSumExact [] itemOutput time = refl
   fluxSumExact (alpha ∷ rest) itemOutput time =
-    let
-      module One = R561.LiteralSelfPairDerivative
-        Time initialTime integrateTo DerivativeOf
-        crossCalculus vectorAlgebra D R cutoff output outputNonzero
-        alpha (itemOutput alpha R396.here)
-    in
     cong₂ _+_ refl
       (fluxSumExact rest
         (λ beta member → itemOutput beta (R396.there member)) time)
@@ -176,12 +167,6 @@ module LiteralSelfFluxFamily
       (λ alpha member → itemOutput alpha member)
   tangentSumExact [] itemOutput time = refl
   tangentSumExact (alpha ∷ rest) itemOutput time =
-    let
-      module One = R561.LiteralSelfPairDerivative
-        Time initialTime integrateTo DerivativeOf
-        crossCalculus vectorAlgebra D R cutoff output outputNonzero
-        alpha (itemOutput alpha R396.here)
-    in
     cong₂ _+_ refl
       (tangentSumExact rest
         (λ beta member → itemOutput beta (R396.there member)) time)
