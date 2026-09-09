@@ -10,21 +10,6 @@ import DASHI.Algebra.Trit as Trit
 import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact as Ternary
 import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as Source
 
-------------------------------------------------------------------------
--- PROVIDER-NEUTRAL SOURCE DISCOVERY
---
--- Runtime counterpart:
---   failed/stale locator
---     -> exact source-discovery demand
---     -> Tavily / Google / Exa / MCP / human producer
---     -> locator candidates
---     -> separate same-source identity admission
---     -> existing source fetch transport
---
--- Search rank/snippet/title are discovery metadata only.  Discovery does not
--- pay same-source identity, proposition support, authority, or promotion.
-------------------------------------------------------------------------
-
 record SourceDiscoveryDemand
     (residual : Source.NatSourceSupportResidual) : Set where
   constructor sourceDiscoveryDemand
@@ -140,12 +125,9 @@ admitAlternateLocator {candidate = candidate} identity refl =
   alternateLocatorFetchAdmission
     (candidateLocator candidate)
     refl
-    true
-    refl
-    true
-    refl
-    false
-    refl
+    true refl
+    true refl
+    false refl
 
 sameSourceMapsPositive : sourceIdentityTrit sameSource ≡ Trit.pos
 sameSourceMapsPositive = refl
