@@ -21,8 +21,8 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalFluxEndpointReuseRound5
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Rational.Base using (ℚ; _-_)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLiteralR378TemporalIntegrationBoundaryRound393Exact as R393
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalR290FluxDecompositionRound549Exact as R549
@@ -71,9 +71,6 @@ selfFluxEndpointFundamentalTheorem551
       (cong₂ _-_
         (sym (selfFluxIsR393Flux551 weld (R393.finalTime temporal)))
         (sym (selfFluxIsR393Flux551 weld (R393.initialTime temporal)))))
-  where
-  open import Data.Rational.Base using (_-_)
-  open import Relation.Binary.PropositionalEquality using (cong₂)
 
 ------------------------------------------------------------------------
 -- 3. What remains after reuse.
