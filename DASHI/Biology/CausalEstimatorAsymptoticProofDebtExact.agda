@@ -9,45 +9,38 @@ import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 import DASHI.Biology.CausalEstimatorMetricConsistencyExact as MetricConsistency
 import DASHI.Biology.CausalEstimatorFiniteDispersionExact as FiniteDispersion
 import DASHI.Biology.CausalEstimatorFiniteProbabilityConsistencyExact as FiniteProbability
+import DASHI.Biology.CausalEstimatorFiniteTestDistributionConvergenceExact as FiniteDistribution
 
 ------------------------------------------------------------------------
 -- ASYMPTOTIC FRONTIER
 --
--- The bounded finite-law lane now has an exact convergence-in-probability
--- analogue: for each estimator radius, the finite normalized probability mass
--- outside the target ball converges to zero via the existing metric kernel.
--- The remaining unpaid frontier is genuinely distributional: a general
--- probability/measure owner, weak/distributional convergence, a same-estimator
--- asymptotic-normality theorem, and standard-error limit calibration.
+-- The bounded finite-law lane now owns two genuine distributional precursors:
+-- (1) outside-ball probability mass -> 0, and (2) convergence of exact finite
+-- expectations for every declared test function to an explicit finite target
+-- law.  The second still requires a test-class adequacy receipt and is not
+-- promoted to general weak convergence.  The remaining unpaid frontier is a
+-- general probability/measure owner, a determining test-class/weak-convergence
+-- theorem, a same-estimator asymptotic-normality theorem, and standard-error
+-- limit calibration.
 ------------------------------------------------------------------------
 
 data AsymptoticResidual : Set where
   generalProbabilityMeasureSemantics : AsymptoticResidual
-  distributionalConvergenceSemantics : AsymptoticResidual
+  generalWeakConvergenceSemantics : AsymptoticResidual
   asymptoticNormalityTheorem : AsymptoticResidual
   standardErrorLimitCalibration : AsymptoticResidual
 
 data AsymptoticProducerClass : Set where
   probabilityMeasureOwner : AsymptoticProducerClass
-  distributionConvergenceOwner : AsymptoticProducerClass
+  weakConvergenceOwner : AsymptoticProducerClass
   estimatorLimitTheoremOwner : AsymptoticProducerClass
   calibrationTheoremOwner : AsymptoticProducerClass
 
 producerForResidual : AsymptoticResidual → AsymptoticProducerClass
 producerForResidual generalProbabilityMeasureSemantics = probabilityMeasureOwner
-producerForResidual distributionalConvergenceSemantics = distributionConvergenceOwner
+producerForResidual generalWeakConvergenceSemantics = weakConvergenceOwner
 producerForResidual asymptoticNormalityTheorem = estimatorLimitTheoremOwner
 producerForResidual standardErrorLimitCalibration = calibrationTheoremOwner
-
-------------------------------------------------------------------------
--- Current exact selected debt.
---
--- For an arbitrary causal estimator, asymptotic normality is not available
--- merely from finite unbiasedness, finite variance, metric consistency, or the
--- bounded finite-law convergence-in-probability bridge.  Until a same-estimator
--- distributional theorem/source is identified and aligned, the exact
--- application claim remains mathematical debt under the canonical router.
-------------------------------------------------------------------------
 
 selectedAsymptoticDebtRoute : Debt.ProofDebtRoutingReceipt
 selectedAsymptoticDebtRoute =
@@ -73,10 +66,6 @@ selectedAsymptoticSchedulerAction :
   ≡ Debt.researchMathematics
 selectedAsymptoticSchedulerAction = refl
 
-------------------------------------------------------------------------
--- Existing closed coordinates retained as witnesses to the introspective cut.
-------------------------------------------------------------------------
-
 metricConsistencyBoundary :
   MetricConsistency.CausalEstimatorMetricConsistencyBoundary
 metricConsistencyBoundary =
@@ -92,20 +81,21 @@ finiteProbabilityConsistencyBoundary :
 finiteProbabilityConsistencyBoundary =
   FiniteProbability.canonicalCausalEstimatorFiniteProbabilityConsistencyBoundary
 
+finiteTestDistributionBoundary :
+  FiniteDistribution.CausalEstimatorFiniteTestDistributionBoundary
+finiteTestDistributionBoundary =
+  FiniteDistribution.canonicalCausalEstimatorFiniteTestDistributionBoundary
+
 introspectiveBoundary : Introspective.IntrospectiveProofLoopBoundary
 introspectiveBoundary = Introspective.canonicalIntrospectiveProofLoopBoundary
 
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
-
 data FiniteProbabilityConsistencyMeansGeneralMeasurePermission : Set where
 
-data FiniteProbabilityConsistencyMeansWeakConvergencePermission : Set where
+data FiniteTestConvergenceMeansGeneralWeakConvergencePermission : Set where
+
+data FiniteTargetLawMeansNormalLawPermission : Set where
 
 data FiniteVarianceMeansAsymptoticNormalityPermission : Set where
-
-data FiniteUnbiasednessMeansCLTPermission : Set where
 
 data MissingOwnerMayBeReportedClosedPermission : Set where
 
@@ -115,17 +105,17 @@ finiteProbabilityConsistencyDoesNotBecomeGeneralMeasure :
   FiniteProbabilityConsistencyMeansGeneralMeasurePermission → ⊥
 finiteProbabilityConsistencyDoesNotBecomeGeneralMeasure ()
 
-finiteProbabilityConsistencyDoesNotBecomeWeakConvergence :
-  FiniteProbabilityConsistencyMeansWeakConvergencePermission → ⊥
-finiteProbabilityConsistencyDoesNotBecomeWeakConvergence ()
+finiteTestConvergenceDoesNotBecomeGeneralWeakConvergence :
+  FiniteTestConvergenceMeansGeneralWeakConvergencePermission → ⊥
+finiteTestConvergenceDoesNotBecomeGeneralWeakConvergence ()
+
+finiteTargetLawDoesNotBecomeNormalLaw :
+  FiniteTargetLawMeansNormalLawPermission → ⊥
+finiteTargetLawDoesNotBecomeNormalLaw ()
 
 finiteVarianceDoesNotBecomeAsymptoticNormality :
   FiniteVarianceMeansAsymptoticNormalityPermission → ⊥
 finiteVarianceDoesNotBecomeAsymptoticNormality ()
-
-finiteUnbiasednessDoesNotBecomeCLT :
-  FiniteUnbiasednessMeansCLTPermission → ⊥
-finiteUnbiasednessDoesNotBecomeCLT ()
 
 missingAsymptoticOwnerCannotBeReportedClosed :
   MissingOwnerMayBeReportedClosedPermission → ⊥
@@ -143,8 +133,9 @@ record CausalEstimatorCompletionFrontier : Set where
     finiteVarianceAndMSEClosed : Bool
     metricConsistencyShapeClosed : Bool
     finiteLawConvergenceInProbabilityClosed : Bool
+    finiteTestFunctionDistributionConvergenceClosed : Bool
     generalProbabilityMeasureClosed : Bool
-    distributionalConvergenceClosed : Bool
+    generalWeakConvergenceClosed : Bool
     asymptoticNormalityClosed : Bool
     standardErrorLimitCalibrationClosed : Bool
     currentDebtIsMathematicalOrSourceTheoremOwnership : Bool
@@ -154,6 +145,6 @@ canonicalCausalEstimatorCompletionFrontier :
   CausalEstimatorCompletionFrontier
 canonicalCausalEstimatorCompletionFrontier =
   causal-estimator-completion-frontier
-    true true true true true
+    true true true true true true
     false false false false
     true false
