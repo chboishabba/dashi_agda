@@ -1,0 +1,62 @@
+module DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact where
+
+------------------------------------------------------------------------
+-- OPAQUE GLOBAL ALGEBRA LEAF
+--
+-- This module is intentionally forbidden from importing physical lattice,
+-- martingale, Fourier, block, or field constructors.  Solver work happens only
+-- on abstract rational coordinates.  Deep YM modules instantiate these lemmas
+-- after their fibre/observer layers have already produced scalar equalities.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
+
+sixTermSumZero :
+  ∀ {a b c d e f : ℚ} →
+  a ≡ 0ℚ → b ≡ 0ℚ → c ≡ 0ℚ →
+  d ≡ 0ℚ → e ≡ 0ℚ → f ≡ 0ℚ →
+  a + (b + (c + (d + (e + f)))) ≡ 0ℚ
+sixTermSumZero {a} {b} {c} {d} {e} {f}
+  a0 b0 c0 d0 e0 f0
+  rewrite a0 | b0 | c0 | d0 | e0 | f0 =
+  solve-∀
+
+dropScaledZero :
+  ∀ (x scale : ℚ) →
+  x + scale * 0ℚ ≡ x
+dropScaledZero x scale = solve-∀
+
+scaleThreeSum :
+  ∀ (scale a b c : ℚ) →
+  scale * (a + (b + c))
+  ≡ scale * a + (scale * b + scale * c)
+scaleThreeSum scale a b c = solve-∀
+
+scaleFourSum :
+  ∀ (scale a b c d : ℚ) →
+  scale * (a + (b + (c + d)))
+  ≡ scale * a + (scale * b + (scale * c + scale * d))
+scaleFourSum scale a b c d = solve-∀
+
+subtractSelfZero :
+  ∀ (x : ℚ) →
+  x - x ≡ 0ℚ
+subtractSelfZero x = solve-∀
+
+subtractAddCancel :
+  ∀ (x y : ℚ) →
+  (x - y) + y ≡ x
+subtractAddCancel x y = solve-∀
+
+swapSum :
+  ∀ (x y : ℚ) →
+  x + y ≡ y + x
+swapSum x y = solve-∀
+
+dropTerminalZero4 :
+  ∀ (a b c d : ℚ) →
+  a + (b + (c + (d + 0ℚ)))
+  ≡ a + (b + (c + d))
+dropTerminalZero4 a b c d = solve-∀
