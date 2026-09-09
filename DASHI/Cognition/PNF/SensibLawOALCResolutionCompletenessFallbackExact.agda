@@ -29,6 +29,10 @@ data OALCFilterCompleteness : Set where
   completeIndex : OALCFilterCompleteness
   partialIndex : OALCFilterCompleteness
 
+data OALCFilterRows : Set where
+  zeroRows : OALCFilterRows
+  oneOrMoreRows : OALCFilterRows
+
 data OALCResolutionPath : Set where
   filterExact : OALCResolutionPath
   revisionPinnedStreaming : OALCResolutionPath
@@ -42,7 +46,7 @@ record OALCFilterObservation
     (demand : OALC.OALCLegislationSourceDemand) : Set where
   constructor oalc-filter-observation
   field
-    rowCountRef : String
+    rows : OALCFilterRows
     completeness : OALCFilterCompleteness
     exactDemandMatchRef : String
     observedDatasetRevisionRef : String
@@ -54,10 +58,10 @@ filterDisposition :
   ∀ {demand} →
   OALCFilterObservation demand →
   OALCResolutionOutcome
-filterDisposition observation with rowCountRef observation | completeness observation
-... | "0" | completeIndex = explicitSourceResidual
-... | "0" | partialIndex = fallbackRequired
-... | _   | _ = resolvedExactDocument
+filterDisposition observation with rows observation | completeness observation
+... | zeroRows | completeIndex = explicitSourceResidual
+... | zeroRows | partialIndex = fallbackRequired
+... | oneOrMoreRows | _ = resolvedExactDocument
 
 record RevisionPinnedStreamingDemand
     (demand : OALC.OALCLegislationSourceDemand)
@@ -93,7 +97,6 @@ data MissingStreamingDependencyMeansSourceAbsent : Set where
 data StreamingFailureMeansNegativeLegalEvidence : Set where
 data FilterExactOnPartialIndexMustFallback : Set where
 data CompleteZeroCreatesNegativeLegalEvidence : Set where
-
 data SourceResidualClosesLegalFollowFrontier : Set where
 
 partialZeroDoesNotMeanSourceAbsent : PartialZeroMeansSourceAbsent → ⊥
