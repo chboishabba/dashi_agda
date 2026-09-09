@@ -7,6 +7,7 @@ import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANNormOneInvariantExact
 import DASHI.Moonshine.GoldenRatioNormOneReciprocalSquareCrossMultiplyExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANReciprocalSquareConvergenceExact
 import DASHI.Moonshine.GoldenRatioBishopQuadraticFactorisationBidiExact
 import DASHI.Foundations.BishopGoldenRatioCarrierExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
@@ -73,7 +74,7 @@ canonicalRoadmapState = record
   ; bishopReciprocalSquareLiftExact = false
   ; bishopPhiPsiFactorisationExact = true
   ; conjugateFactorLowerBoundExact = false
-  ; reciprocalSquareBishopConvergenceExact = false
+  ; reciprocalSquareBishopConvergenceExact = true
   ; fibonacciRatiosConvergeToBishopPhi = false
 
   ; jSeamWordLkTExact = true
@@ -101,7 +102,6 @@ data FirstLiveRoadmapResidual : Set where
   missingUnnormalisedRationalReciprocalSquareLift : FirstLiveRoadmapResidual
   missingBishopReciprocalSquareLift : FirstLiveRoadmapResidual
   missingUniformConjugateFactorLowerBound : FirstLiveRoadmapResidual
-  missingReciprocalSquareBishopConvergence : FirstLiveRoadmapResidual
   missingFibonacciRatioToBishopPhiConvergence : FirstLiveRoadmapResidual
   missingConcretePixelToAnalyticBoxCalibration : FirstLiveRoadmapResidual
   missingSymbolicOrbitToAnalyticRealisation : FirstLiveRoadmapResidual
