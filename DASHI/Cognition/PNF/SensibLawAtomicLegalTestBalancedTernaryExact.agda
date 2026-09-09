@@ -13,48 +13,30 @@ import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
 ------------------------------------------------------------------------
 -- ATOMIC BALANCED-TERNARY LEGAL TEST
 --
--- Two source roles are independent:
---   * sourceReceipt defines/owns the legal test proposition itself;
---   * outcome evidence explains why this case fits or fails that exact test.
+-- The trit is an admissibility / sufficiency / fit coordinate for ONE atomic
+-- legal test.  It is not a three-valued truth semantics and `neg` is not the
+-- logical or lexical opposite of the proposition.
 --
--- A case disposition can therefore establish failure of a test without
--- silently becoming the source that defines the general legal test.
+--   pos  = positive witness that this atom fits / passes
+--   zero = the atom remains unresolved on the present evidence fibre
+--   neg  = positive witness that this atom fails to fit / pass
+--
+-- Thus, for example, failure of an atom `validBusinessPractice` does not by
+-- itself establish a different proposition `corruption`.  Such an implication
+-- requires its own sourced legal rule.
 ------------------------------------------------------------------------
-
-record AtomicOutcomeSource
-    (testProposition : Algebra.LegalProposition) : Set₁ where
-  constructor atomic-outcome-source
-  field
-    evidenceProposition : Algebra.LegalProposition
-    evidenceSource : SourceRule.PropositionSourceReceipt evidenceProposition
-    testAtom : Ontology.StableId
-    testAtomIsExact : testAtom ≡ Algebra.propositionId testProposition
-    evidenceSystemMatchesTest :
-      Algebra.legalSystem evidenceProposition
-      ≡ Algebra.legalSystem testProposition
-    evidenceRelation : String
-
-open AtomicOutcomeSource public
 
 record SourceConditionedAtomicLegalTest
     (p : Algebra.LegalProposition) : Set₁ where
   constructor source-conditioned-atomic-legal-test
   field
-    -- Source that defines/owns this exact legal test.
     sourceReceipt : SourceRule.PropositionSourceReceipt p
-
     subject : Ontology.StableId
     subjectMatchesProposition : subject ≡ Algebra.subjectReference p
 
     Fits : Set
     FailsToFit : Set
     fitAndFailureExclusive : Fits → FailsToFit → ⊥
-
-    -- Every concrete fit/failure witness retains independently attributed
-    -- outcome evidence.  In particular `neg` is a positive sourced failure
-    -- witness, not the logical opposite of p.
-    fitOutcomeSource : Fits → AtomicOutcomeSource p
-    failureOutcomeSource : FailsToFit → AtomicOutcomeSource p
 
     gate : BT.Trit
     positiveGateHasFitWitness : gate ≡ BT.pos → Fits
@@ -63,6 +45,11 @@ record SourceConditionedAtomicLegalTest
     testReference : String
 
 open SourceConditionedAtomicLegalTest public
+
+------------------------------------------------------------------------
+-- Gate-specific witness projections.  `zero` deliberately has no constructor
+-- that manufactures either a fit or a failure witness.
+------------------------------------------------------------------------
 
 positiveWitness :
   ∀ {p} (test : SourceConditionedAtomicLegalTest p) →
@@ -74,23 +61,14 @@ negativeFailureWitness :
   gate test ≡ BT.neg → FailsToFit test
 negativeFailureWitness test = negativeGateHasFailureWitness test
 
-positiveOutcomeEvidence :
-  ∀ {p} (test : SourceConditionedAtomicLegalTest p) →
-  Fits test → AtomicOutcomeSource p
-positiveOutcomeEvidence test = fitOutcomeSource test
-
-negativeOutcomeEvidence :
-  ∀ {p} (test : SourceConditionedAtomicLegalTest p) →
-  FailsToFit test → AtomicOutcomeSource p
-negativeOutcomeEvidence test = failureOutcomeSource test
-
 positiveAndNegativeWitnessesConflict :
   ∀ {p} (test : SourceConditionedAtomicLegalTest p) →
   Fits test → FailsToFit test → ⊥
 positiveAndNegativeWitnessesConflict test = fitAndFailureExclusive test
 
 ------------------------------------------------------------------------
--- Atomicity / attribution firewalls.
+-- Atomicity boundary: a negative gate stays indexed to the same proposition.
+-- There is no generic operation that manufactures an opposite proposition.
 ------------------------------------------------------------------------
 
 data NegativeGateProvesOppositeProposition : Set where
@@ -99,8 +77,6 @@ data UnresolvedGateCountsAsFit : Set where
 data AtomicGateCreatesLegalAuthority : Set where
 data FailureOfOneAtomProvesAnotherAtom : Set where
 data AtomicTestMayFloatToDifferentSubject : Set where
-data DefinitionSourceAloneDeterminesOutcome : Set where
-data FailureOutcomeSourceDefinesGeneralLegalTest : Set where
 
 negativeGateDoesNotProveOppositeProposition :
   NegativeGateProvesOppositeProposition → ⊥
@@ -121,16 +97,9 @@ failureOfOneAtomDoesNotProveAnother ()
 atomicTestCannotFloatToDifferentSubject : AtomicTestMayFloatToDifferentSubject → ⊥
 atomicTestCannotFloatToDifferentSubject ()
 
-definitionSourceDoesNotDetermineCaseOutcome :
-  DefinitionSourceAloneDeterminesOutcome → ⊥
-definitionSourceDoesNotDetermineCaseOutcome ()
-
-caseFailureDoesNotDefineGeneralTest :
-  FailureOutcomeSourceDefinesGeneralLegalTest → ⊥
-caseFailureDoesNotDefineGeneralTest ()
-
 ------------------------------------------------------------------------
--- Example requested by the corruption / business-practice axis.
+-- Example shape only: failure of the valid-business-practice atom remains a
+-- failure witness for that axis.  No corruption proposition is produced here.
 ------------------------------------------------------------------------
 
 validBusinessPracticeAxis : Ontology.StableId
@@ -155,10 +124,7 @@ record AtomicLegalTestBoundary : Set where
     unresolvedPromotesEitherDirection : Bool
     sourceConditioningRequired : Bool
     exactSubjectWeldRequired : Bool
-    testDefinitionSourceSeparatedFromOutcomeSource : Bool
-    negativeOutcomeRequiresPositiveSourcedFailureEvidence : Bool
 
 canonicalAtomicLegalTestBoundary : AtomicLegalTestBoundary
 canonicalAtomicLegalTestBoundary =
-  atomic-legal-test-boundary
-    true true true false false true true true true
+  atomic-legal-test-boundary true true true false false true true

@@ -12,6 +12,15 @@ import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 import DASHI.Cognition.PNF.SensibLawSourceFormAuthorityRoleBidiExact as SourceRole
 
+------------------------------------------------------------------------
+-- SOURCE-REALISED LEGAL RULES
+--
+-- Canonical rule shape remains Algebra.LegalRule.  This layer pays source
+-- identity, exact locator, proposition role, conclusion, premises, negative
+-- clauses, jurisdiction and temporal scope without promoting a citation into
+-- authority.
+------------------------------------------------------------------------
+
 data LegalAttributionLayer : Set where
   primarySourceLayer : LegalAttributionLayer
   secondaryInterpretationLayer : LegalAttributionLayer
@@ -165,6 +174,10 @@ laterCitationDoesNotRestoreErasedPrimaryLineage ()
 unsourcedConclusionCannotBeProducedBySourcedRule : UnsourcedConclusionMayBeProducedBySourcedRule → ⊥
 unsourcedConclusionCannotBeProducedBySourcedRule ()
 
+unsourcedConclusionCannotBeProducedBySourcedRule :
+  UnsourcedConclusionMayBeProducedBySourcedRule → ⊥
+unsourcedConclusionCannotBeProducedBySourcedRule ()
+
 record SourceRealisedLegalRuleBoundary : Set where
   constructor source-realised-legal-rule-boundary
   field
@@ -181,4 +194,5 @@ record SourceRealisedLegalRuleBoundary : Set where
 
 canonicalSourceRealisedLegalRuleBoundary : SourceRealisedLegalRuleBoundary
 canonicalSourceRealisedLegalRuleBoundary =
-  source-realised-legal-rule-boundary true true true true true true true true false false
+  source-realised-legal-rule-boundary
+    true true true true true true true true false false

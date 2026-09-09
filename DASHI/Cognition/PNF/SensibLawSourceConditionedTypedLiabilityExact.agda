@@ -18,14 +18,31 @@ import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomi
 import DASHI.Cognition.PNF.SensibLawSourceConditionedAtomicLegalImplicationExact as AtomicImplication
 import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as SourceViolation
 
+------------------------------------------------------------------------
+-- SOURCE-CONDITIONED TYPED LIABILITY
+--
+-- `TypedLiabilityProfile` remains a schema.  A usable family requires a
+-- source-realised recognition proposition and rule; case-specific family
+-- recognition itself is compiled through the generic atomic legal implication
+-- kernel.  Conditions, limitations, temporal validity and forum competence are
+-- exact source-conditioned atoms on the same liability fibre.
+------------------------------------------------------------------------
+
 liabilityFamilyId : Downstream.LiabilityFamily → Ontology.StableId
-liabilityFamilyId Downstream.directWrongTypeLiability = Ontology.stableId "liability-family:direct-wrongtype"
-liabilityFamilyId Downstream.vicariousLiability = Ontology.stableId "liability-family:vicarious"
-liabilityFamilyId Downstream.statutoryLiability = Ontology.stableId "liability-family:statutory"
-liabilityFamilyId Downstream.contributionLiability = Ontology.stableId "liability-family:contribution"
-liabilityFamilyId Downstream.indemnityLiability = Ontology.stableId "liability-family:indemnity"
-liabilityFamilyId Downstream.publicAuthorityLiability = Ontology.stableId "liability-family:public-authority"
-liabilityFamilyId (Downstream.namedLiabilityFamily name) = Ontology.stableId name
+liabilityFamilyId Downstream.directWrongTypeLiability =
+  Ontology.stableId "liability-family:direct-wrongtype"
+liabilityFamilyId Downstream.vicariousLiability =
+  Ontology.stableId "liability-family:vicarious"
+liabilityFamilyId Downstream.statutoryLiability =
+  Ontology.stableId "liability-family:statutory"
+liabilityFamilyId Downstream.contributionLiability =
+  Ontology.stableId "liability-family:contribution"
+liabilityFamilyId Downstream.indemnityLiability =
+  Ontology.stableId "liability-family:indemnity"
+liabilityFamilyId Downstream.publicAuthorityLiability =
+  Ontology.stableId "liability-family:public-authority"
+liabilityFamilyId (Downstream.namedLiabilityFamily name) =
+  Ontology.stableId name
 
 record SourceConditionedTypedLiabilityProfile
     {wrong : Ontology.WrongType}
@@ -33,29 +50,55 @@ record SourceConditionedTypedLiabilityProfile
   constructor source-conditioned-typed-liability-profile
   field
     familyRecognitionProposition : Algebra.LegalProposition
-    familyRecognitionSource : SourceRule.PropositionSourceReceipt familyRecognitionProposition
+    familyRecognitionSource :
+      SourceRule.PropositionSourceReceipt familyRecognitionProposition
     familyRecognitionTargetsFamily :
-      Algebra.objectReference familyRecognitionProposition ≡ liabilityFamilyId (Downstream.family profile)
+      Algebra.objectReference familyRecognitionProposition
+      ≡ liabilityFamilyId (Downstream.family profile)
     familyRecognitionSystemMatchesWrongType :
-      Algebra.legalSystem familyRecognitionProposition ≡ Ontology.WrongType.definingSystem wrong
+      Algebra.legalSystem familyRecognitionProposition
+      ≡ Ontology.WrongType.definingSystem wrong
+
     familyRecognitionRule : Algebra.LegalRule
-    familyRecognitionRuleSource : SourceRule.SourceRealisedLegalRule familyRecognitionRule
-    familyRecognitionRuleConclusion : Algebra.conclusion familyRecognitionRule ≡ familyRecognitionProposition
+    familyRecognitionRuleSource :
+      SourceRule.SourceRealisedLegalRule familyRecognitionRule
+    familyRecognitionRuleConclusion :
+      Algebra.conclusion familyRecognitionRule ≡ familyRecognitionProposition
+
     conditionSource :
-      ∀ {p} → p Algebra.∈ Downstream.conditions profile → SourceRule.PropositionSourceReceipt p
+      ∀ {p} →
+      p Algebra.∈ Downstream.conditions profile →
+      SourceRule.PropositionSourceReceipt p
+
     limitationSource :
-      ∀ {p} → p Algebra.∈ Downstream.limitationsAndDefeaters profile → SourceRule.PropositionSourceReceipt p
+      ∀ {p} →
+      p Algebra.∈ Downstream.limitationsAndDefeaters profile →
+      SourceRule.PropositionSourceReceipt p
+
     temporalPredicate : Algebra.LegalProposition
     temporalSource : SourceRule.PropositionSourceReceipt temporalPredicate
-    temporalPredicateKind : Algebra.propositionKind temporalPredicate ≡ Algebra.temporalPredicate
+    temporalPredicateKind :
+      Algebra.propositionKind temporalPredicate ≡ Algebra.temporalPredicate
+
     competencePredicate : Algebra.LegalProposition
     competenceSource : SourceRule.PropositionSourceReceipt competencePredicate
-    competencePredicateKind : Algebra.propositionKind competencePredicate ≡ Algebra.jurisdictionPredicate
+    competencePredicateKind :
+      Algebra.propositionKind competencePredicate ≡ Algebra.jurisdictionPredicate
+
     profileSystemMatchesFamilyRecognition :
       Downstream.profileSystem profile ≡ Algebra.legalSystem familyRecognitionProposition
     profileReference : String
 
 open SourceConditionedTypedLiabilityProfile public
+
+------------------------------------------------------------------------
+-- CASE-SPECIFIC LIABILITY DECISION
+--
+-- A limitation at BT.neg means a positive witness that THAT EXACT limitation
+-- proposition fails to apply.  It is never shorthand for logical negation or a
+-- different proposition.  Family recognition is itself an atomic sourced rule
+-- application rather than a constructor choice.
+------------------------------------------------------------------------
 
 record SourceConditionedTypedLiabilityDecision
     {state : Status.SemanticCommitmentState}
@@ -67,8 +110,11 @@ record SourceConditionedTypedLiabilityDecision
     (realised : SourceConditionedTypedLiabilityProfile profile) : Set₁ where
   constructor source-conditioned-typed-liability-decision
   field
-    sourceConditionedViolation : SourceViolation.SourceConditionedViolation {state} wrong bundle facts
-    legacyDecision : Downstream.SourceAttributedLiabilityDecision {state} profile
+    sourceConditionedViolation :
+      SourceViolation.SourceConditionedViolation {state} wrong bundle facts
+
+    legacyDecision :
+      Downstream.SourceAttributedLiabilityDecision {state} profile
     sameViolationReceipt :
       Legal.violationReceipt (Downstream.liabilityReceipt legacyDecision)
       ≡ SourceViolation.legacyViolationProjection sourceConditionedViolation
@@ -77,53 +123,81 @@ record SourceConditionedTypedLiabilityDecision
       AtomicImplication.SourceConditionedAtomicLegalImplication
         liabilityGraph facts (λ _ → ⊤) (familyRecognitionRule realised)
     familyRecognitionUsesCanonicalRuleSource :
-      AtomicImplication.sourceRealisation familyRecognitionImplication ≡ familyRecognitionRuleSource realised
+      AtomicImplication.sourceRealisation familyRecognitionImplication
+      ≡ familyRecognitionRuleSource realised
     familyRecognitionDerivationReceipt :
-      AtomicImplication.AtomicImplicationDerivationReceipt familyRecognitionImplication
+      AtomicImplication.AtomicImplicationDerivationReceipt
+        familyRecognitionImplication
 
-    familyRecognitionAtom : Atomic.SourceConditionedAtomicLegalTest (familyRecognitionProposition realised)
-    familyAtomUsesCanonicalSource : Atomic.sourceReceipt familyRecognitionAtom ≡ familyRecognitionSource realised
+    familyRecognitionAtom :
+      Atomic.SourceConditionedAtomicLegalTest
+        (familyRecognitionProposition realised)
+    familyAtomUsesCanonicalSource :
+      Atomic.sourceReceipt familyRecognitionAtom
+      ≡ familyRecognitionSource realised
     familyRecognized : Atomic.gate familyRecognitionAtom ≡ BT.pos
     familyRecognitionDerived :
-      Algebra.Derivation liabilityGraph facts (λ _ → ⊤) (familyRecognitionProposition realised)
+      Algebra.Derivation liabilityGraph facts (λ _ → ⊤)
+        (familyRecognitionProposition realised)
 
     conditionAtom :
-      ∀ {p} → (membership : p Algebra.∈ Downstream.conditions profile) → Atomic.SourceConditionedAtomicLegalTest p
+      ∀ {p} →
+      (membership : p Algebra.∈ Downstream.conditions profile) →
+      Atomic.SourceConditionedAtomicLegalTest p
     conditionAtomUsesCanonicalSource :
       ∀ {p} (membership : p Algebra.∈ Downstream.conditions profile) →
-      Atomic.sourceReceipt (conditionAtom membership) ≡ conditionSource realised membership
+      Atomic.sourceReceipt (conditionAtom membership)
+      ≡ conditionSource realised membership
     conditionPasses :
       ∀ {p} (membership : p Algebra.∈ Downstream.conditions profile) →
       Atomic.gate (conditionAtom membership) ≡ BT.pos
     conditionDerived :
-      ∀ {p} → p Algebra.∈ Downstream.conditions profile → Algebra.Derivation liabilityGraph facts (λ _ → ⊤) p
+      ∀ {p} →
+      p Algebra.∈ Downstream.conditions profile →
+      Algebra.Derivation liabilityGraph facts (λ _ → ⊤) p
 
     limitationAtom :
-      ∀ {p} → (membership : p Algebra.∈ Downstream.limitationsAndDefeaters profile) → Atomic.SourceConditionedAtomicLegalTest p
+      ∀ {p} →
+      (membership : p Algebra.∈ Downstream.limitationsAndDefeaters profile) →
+      Atomic.SourceConditionedAtomicLegalTest p
     limitationAtomUsesCanonicalSource :
       ∀ {p} (membership : p Algebra.∈ Downstream.limitationsAndDefeaters profile) →
-      Atomic.sourceReceipt (limitationAtom membership) ≡ limitationSource realised membership
+      Atomic.sourceReceipt (limitationAtom membership)
+      ≡ limitationSource realised membership
     limitationFailsToApply :
       ∀ {p} (membership : p Algebra.∈ Downstream.limitationsAndDefeaters profile) →
       Atomic.gate (limitationAtom membership) ≡ BT.neg
     limitationNotDerived :
-      ∀ {p} → p Algebra.∈ Downstream.limitationsAndDefeaters profile →
+      ∀ {p} →
+      p Algebra.∈ Downstream.limitationsAndDefeaters profile →
       Algebra.Derivation liabilityGraph facts (λ _ → ⊤) p → ⊥
 
-    temporalAtom : Atomic.SourceConditionedAtomicLegalTest (temporalPredicate realised)
-    temporalAtomUsesCanonicalSource : Atomic.sourceReceipt temporalAtom ≡ temporalSource realised
+    temporalAtom :
+      Atomic.SourceConditionedAtomicLegalTest (temporalPredicate realised)
+    temporalAtomUsesCanonicalSource :
+      Atomic.sourceReceipt temporalAtom ≡ temporalSource realised
     temporalPasses : Atomic.gate temporalAtom ≡ BT.pos
-    temporalDerived : Algebra.Derivation liabilityGraph facts (λ _ → ⊤) (temporalPredicate realised)
+    temporalDerived :
+      Algebra.Derivation liabilityGraph facts (λ _ → ⊤)
+        (temporalPredicate realised)
 
-    competenceAtom : Atomic.SourceConditionedAtomicLegalTest (competencePredicate realised)
-    competenceAtomUsesCanonicalSource : Atomic.sourceReceipt competenceAtom ≡ competenceSource realised
+    competenceAtom :
+      Atomic.SourceConditionedAtomicLegalTest (competencePredicate realised)
+    competenceAtomUsesCanonicalSource :
+      Atomic.sourceReceipt competenceAtom ≡ competenceSource realised
     competencePasses : Atomic.gate competenceAtom ≡ BT.pos
-    competenceDerived : Algebra.Derivation liabilityGraph facts (λ _ → ⊤) (competencePredicate realised)
+    competenceDerived :
+      Algebra.Derivation liabilityGraph facts (λ _ → ⊤)
+        (competencePredicate realised)
 
     courtCompetence : Downstream.CourtCompetenceReceipt {state} profile
     decisionReference : String
 
 open SourceConditionedTypedLiabilityDecision public
+
+------------------------------------------------------------------------
+-- Hard non-promotions.
+------------------------------------------------------------------------
 
 data TypedFamilyConstructorCreatesLegalRecognition : Set where
 data SourceAttributedProfileIsSourceConditionedProfile : Set where
@@ -133,19 +207,32 @@ data ViolationAutomaticallyChoosesLiabilityFamily : Set where
 data LiabilityFamilyAutomaticallyChoosesRemedy : Set where
 data FamilySourceMetadataAloneCountsAsRecognition : Set where
 
-typedFamilyConstructorDoesNotCreateRecognition : TypedFamilyConstructorCreatesLegalRecognition → ⊥
+typedFamilyConstructorDoesNotCreateRecognition :
+  TypedFamilyConstructorCreatesLegalRecognition → ⊥
 typedFamilyConstructorDoesNotCreateRecognition ()
-sourceAttributedProfileDoesNotEqualSourceConditionedProfile : SourceAttributedProfileIsSourceConditionedProfile → ⊥
+
+sourceAttributedProfileDoesNotEqualSourceConditionedProfile :
+  SourceAttributedProfileIsSourceConditionedProfile → ⊥
 sourceAttributedProfileDoesNotEqualSourceConditionedProfile ()
-negativeLimitationAtomDoesNotProveOpposite : NegativeLimitationAtomProvesOppositeProposition → ⊥
+
+negativeLimitationAtomDoesNotProveOpposite :
+  NegativeLimitationAtomProvesOppositeProposition → ⊥
 negativeLimitationAtomDoesNotProveOpposite ()
-failedConditionDoesNotChooseDifferentFamily : FailedConditionProvesDifferentLiabilityFamily → ⊥
+
+failedConditionDoesNotChooseDifferentFamily :
+  FailedConditionProvesDifferentLiabilityFamily → ⊥
 failedConditionDoesNotChooseDifferentFamily ()
-violationDoesNotChooseLiabilityFamily : ViolationAutomaticallyChoosesLiabilityFamily → ⊥
+
+violationDoesNotChooseLiabilityFamily :
+  ViolationAutomaticallyChoosesLiabilityFamily → ⊥
 violationDoesNotChooseLiabilityFamily ()
-liabilityFamilyDoesNotChooseRemedy : LiabilityFamilyAutomaticallyChoosesRemedy → ⊥
+
+liabilityFamilyDoesNotChooseRemedy :
+  LiabilityFamilyAutomaticallyChoosesRemedy → ⊥
 liabilityFamilyDoesNotChooseRemedy ()
-familyMetadataDoesNotCountAsRecognition : FamilySourceMetadataAloneCountsAsRecognition → ⊥
+
+familyMetadataDoesNotCountAsRecognition :
+  FamilySourceMetadataAloneCountsAsRecognition → ⊥
 familyMetadataDoesNotCountAsRecognition ()
 
 record SourceConditionedTypedLiabilityBoundary : Set where
@@ -162,6 +249,8 @@ record SourceConditionedTypedLiabilityBoundary : Set where
     violationChoosesLiabilityFamily : Bool
     liabilityFamilyChoosesRemedy : Bool
 
-canonicalSourceConditionedTypedLiabilityBoundary : SourceConditionedTypedLiabilityBoundary
+canonicalSourceConditionedTypedLiabilityBoundary :
+  SourceConditionedTypedLiabilityBoundary
 canonicalSourceConditionedTypedLiabilityBoundary =
-  source-conditioned-typed-liability-boundary true true true true true false true true false false
+  source-conditioned-typed-liability-boundary
+    true true true true true false true true false false

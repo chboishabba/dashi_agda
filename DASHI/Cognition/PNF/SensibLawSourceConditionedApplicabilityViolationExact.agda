@@ -16,6 +16,13 @@ import DASHI.Cognition.PNF.SensibLawViolationPrerequisiteMeetExact as Violation
 import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
 import DASHI.Cognition.PNF.SensibLawSourceConditionedAtomicLegalImplicationExact as AtomicImplication
 
+------------------------------------------------------------------------
+-- SOURCE-CONDITIONED APPLICABILITY
+--
+-- Applicability keeps the semantic/same-object meet, but every legal implication
+-- is now consumed through the generic source-conditioned atomic rule kernel.
+------------------------------------------------------------------------
+
 record SourceConditionedApplicability
     {state : Status.SemanticCommitmentState}
     (graph : Algebra.LegalGraph)
@@ -25,13 +32,15 @@ record SourceConditionedApplicability
   constructor source-conditioned-applicability
   field
     atomicRuleApplication :
-      AtomicImplication.SourceConditionedAtomicLegalImplication graph facts Enabled r
+      AtomicImplication.SourceConditionedAtomicLegalImplication
+        graph facts Enabled r
     atomicRuleDerivationReceipt :
       AtomicImplication.AtomicImplicationDerivationReceipt atomicRuleApplication
     semanticMeet : Meet.ApplicabilityMeetInput state
     wrongTypeSystemMatchesRule :
       Ontology.WrongType.definingSystem (Meet.wrongType semanticMeet)
-      ≡ SourceRule.ruleSystem (AtomicImplication.sourceRealisation atomicRuleApplication)
+      ≡ SourceRule.ruleSystem
+          (AtomicImplication.sourceRealisation atomicRuleApplication)
     applicabilityReference : String
 
 open SourceConditionedApplicability public
@@ -52,6 +61,14 @@ semanticApplicabilityProjection :
 semanticApplicabilityProjection applicable =
   Meet.compileApplicabilityMeet (semanticMeet applicable)
 
+------------------------------------------------------------------------
+-- SOURCE-CONDITIONED ELEMENT REQUIREMENTS
+--
+-- An ElementRequirement is usable downstream only when its authority rule is
+-- applied through the same atomic source-conditioned implication kernel and the
+-- rule conclusion is exactly the element proposition being paid.
+------------------------------------------------------------------------
+
 record SourceConditionedElementRequirement
     {wrong : Ontology.WrongType}
     (bundle : Elements.WrongTypeRuleBundle wrong)
@@ -62,7 +79,9 @@ record SourceConditionedElementRequirement
     requirement : Elements.ElementRequirement element
     authorityRuleApplication :
       AtomicImplication.SourceConditionedAtomicLegalImplication
-        (Elements.ruleGraph bundle) facts (λ _ → ⊤)
+        (Elements.ruleGraph bundle)
+        facts
+        (λ _ → ⊤)
         (Elements.authorityRule requirement)
     authorityRuleDerivationReceipt :
       AtomicImplication.AtomicImplicationDerivationReceipt authorityRuleApplication
@@ -74,6 +93,42 @@ record SourceConditionedElementRequirement
     requirementReference : String
 
 open SourceConditionedElementRequirement public
+
+sourceConditionedElementConclusion :
+  ∀ {wrong bundle facts element} →
+  SourceConditionedElementRequirement {wrong} bundle facts element →
+  Elements.ElementDerivation bundle facts element
+sourceConditionedElementConclusion {bundle = bundle} {facts = facts} {element = element} input =
+  Elements.element-derivation proofOfElement
+  where
+    proofOfRuleConclusion :
+      Algebra.Derivation
+        (Elements.ruleGraph bundle)
+        facts
+        (λ _ → ⊤)
+        (Algebra.conclusion (Elements.authorityRule (requirement input)))
+    proofOfRuleConclusion =
+      AtomicImplication.compileAtomicLegalImplication
+        (authorityRuleApplication input)
+        (authorityRuleDerivationReceipt input)
+
+    proofOfRequired :
+      Algebra.Derivation
+        (Elements.ruleGraph bundle)
+        facts
+        (λ _ → ⊤)
+        (Elements.requiredProposition (requirement input))
+    proofOfRequired rewrite authorityRuleConclusionIsRequiredProposition input =
+      proofOfRuleConclusion
+
+    proofOfElement :
+      Algebra.Derivation
+        (Elements.ruleGraph bundle)
+        facts
+        (λ _ → ⊤)
+        (Elements.proposition element)
+    proofOfElement rewrite requiredPropositionIsExactElement input =
+      proofOfRequired
 
 sourceConditionedElementConclusion :
   ∀ {wrong bundle facts element} →
@@ -115,21 +170,29 @@ record SourceConditionedViolation
     applicabilityRule : Algebra.LegalRule
     applicability :
       SourceConditionedApplicability
-        (Elements.ruleGraph bundle) facts (λ _ → ⊤) applicabilityRule
-    applicabilityWrongTypeMatches : Meet.wrongType (semanticMeet applicability) ≡ wrong
+        (Elements.ruleGraph bundle)
+        facts
+        (λ _ → ⊤)
+        applicabilityRule
+    applicabilityWrongTypeMatches :
+      Meet.wrongType (semanticMeet applicability) ≡ wrong
+
     sourceConditionedRequirements :
       ∀ {element} →
       element Algebra.∈ Elements.elements bundle →
       SourceConditionedElementRequirement bundle facts element
+
     elementDerivations :
       ∀ {element} →
       element Algebra.∈ Elements.elements bundle →
       Elements.ElementDerivation bundle facts element
+
     legacyViolationMeet : Violation.ViolationMeetInput state
     legacyViolationWrongTypeMatches :
       Legal.wrongType
         (Violation.receipt (Violation.applicability (Violation.prerequisites legacyViolationMeet)))
       ≡ wrong
+
     violationReference : String
 
 open SourceConditionedViolation public
@@ -152,12 +215,16 @@ semanticMeetDoesNotAloneProveLegalApplicability : SemanticMeetAloneProvesLegalAp
 semanticMeetDoesNotAloneProveLegalApplicability ()
 sameWrongTypeEvaluationsDoNotDefineRequiredElements : SameWrongTypeEvaluationsDefineRequiredElements → ⊥
 sameWrongTypeEvaluationsDoNotDefineRequiredElements ()
+
 elementSourceMetadataDoesNotPayElement : ElementSourceMetadataAlonePaysElement → ⊥
 elementSourceMetadataDoesNotPayElement ()
-allElementsDoNotEraseExceptionsDefences : AllElementsProvedIgnoresExceptionsDefences → ⊥
+
+allElementsDoNotEraseExceptionsDefences :
+  AllElementsProvedIgnoresExceptionsDefences → ⊥
 allElementsDoNotEraseExceptionsDefences ()
 sourceRealisedWrongTypeDoesNotAutoViolate : SourceRealisedWrongTypeAutomaticallyViolated → ⊥
 sourceRealisedWrongTypeDoesNotAutoViolate ()
+
 atomicFitDoesNotEqualDerivation : AtomicFitAutomaticallyEqualsDerivation → ⊥
 atomicFitDoesNotEqualDerivation ()
 
@@ -174,4 +241,5 @@ record SourceConditionedApplicabilityViolationBoundary : Set where
 
 canonicalSourceConditionedApplicabilityViolationBoundary : SourceConditionedApplicabilityViolationBoundary
 canonicalSourceConditionedApplicabilityViolationBoundary =
-  source-conditioned-applicability-violation-boundary true true true true true true true
+  source-conditioned-applicability-violation-boundary
+    true true true true true true true
