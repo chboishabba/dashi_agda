@@ -4,25 +4,22 @@ module DASHI.Physics.Closure.NSTriadKNLiveSelfPairFixedResolventRound560Exact wh
 -- ROUND560 / LIVE SELF-PAIR RATE AND RESOLVENT WEIGHT ARE TIME-FIXED
 --
 -- R559 reduces actual self-flux differentiation to a finite family of R418
--- same-pair curves.  R416 requires each resolvent weight to be fixed in time.
--- On the live R240 trajectory this is not a new assumption:
+-- same-pair curves. R416 requires each resolvent weight to be fixed in time.
+-- On the live R240 trajectory this follows from existing same-object data:
 --
---   * the Fourier embedding/inverse-square data are fields of the trajectory,
---     hence fixed across time;
---   * R240 owns one physical viscosity and proves every state viscosity equals
---     it;
+--   * the Fourier embedding/inverse-square data are trajectory fields;
+--   * R240 owns one physical viscosity and every state viscosity equals it;
 --   * the physical triad indices are fixed.
 --
--- Therefore rho(mode)=nu |mode|^2, the self-pair rate 2(rho_p+rho_q), and its
--- constructive reciprocal are all time-independent.  This owner constructs the
--- exact R416 FixedResolventPairCurve for one literal self pair.
+-- Thus rho(mode)=nu |mode|^2, the self-pair rate 2(rho_p+rho_q), and its
+-- constructive reciprocal are time-independent. No analytic estimate appears.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational using (ℚ; Positive; _+_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -31,6 +28,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNPhysicalTrajectoryRetainedGlobalFluxRound403Exact as R403
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinWaleffeAmplitudeTangentRound94Exact as R94
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
@@ -72,7 +70,7 @@ module LiveSelfPair
   S = Dyn.Base.S (Dyn.forgetDynamics T)
   I = Dyn.Base.I (Dyn.forgetDynamics T)
 
-  physicalSystem : Time → _
+  physicalSystem : Time → Field30.PhysicalFiniteComplex3GalerkinSystem F
   physicalSystem time = Live.physicalSystemAt T support cutoff time
 
   rhoAt : Time → Z3.FourierMode → ℚ
@@ -117,36 +115,18 @@ module LiveSelfPair
   pairRateAtIsFixed time =
     cong₂ _+_ (cellRateAtIsFixed time) (cellRateAtIsFixed time)
 
-  viscosityPositiveAt :
-    (time : Time) → Positive
-      (R403.LiveTrajectoryFlux.physicalSystemAt
-        Time initialTime integrateTo DerivativeOf T support cutoff time
-        |> λ ps →
-          DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.viscosity ps)
-  viscosityPositiveAt time = Live.stateViscosityPositive T support cutoff time
-    where
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    x |> f = f x
-
-  cellRatePositiveAt :
-    (time : Time) →
-    Positive
-      (R389.DoubleMixedPair.D.Pair.cellRate
-        (physicalSystem time) S alpha)
-  cellRatePositiveAt time =
-    R400.PhysicalRate.cellRatePositiveFromNonzeroOutput
-      (physicalSystem time) S
-      (Live.stateViscosityPositive T support cutoff time)
-      output outputNonzero alpha outputExact
-
-  selfPairPositiveAt :
-    (time : Time) → Positive (pairRateAt time)
+  selfPairPositiveAt : (time : Time) → Positive (pairRateAt time)
   selfPairPositiveAt time =
+    let
+      viscosityPositive = Live.stateViscosityPositive T support cutoff time
+      cellPositive =
+        R400.PhysicalRate.cellRatePositiveFromNonzeroOutput
+          (physicalSystem time) S viscosityPositive
+          output outputNonzero alpha outputExact
+    in
     R400.PhysicalRate.pairRatePositiveFromCellRates
-      (physicalSystem time) S
-      (Live.stateViscosityPositive T support cutoff time)
-      alpha alpha (cellRatePositiveAt time) (cellRatePositiveAt time)
+      (physicalSystem time) S viscosityPositive
+      alpha alpha cellPositive cellPositive
 
   selfR290At : Time → R290.DampedGramPair
   selfR290At time =
