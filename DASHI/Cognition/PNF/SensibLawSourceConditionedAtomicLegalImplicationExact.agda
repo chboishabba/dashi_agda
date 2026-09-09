@@ -11,6 +11,19 @@ import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
 import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
 
+------------------------------------------------------------------------
+-- GENERIC SOURCE-CONDITIONED ATOMIC LEGAL IMPLICATION
+--
+-- This is the legal implication kernel shared by legislation, delegated rules,
+-- precedent reconstructions and later liability/remedy consumers.
+--
+-- Positive premise:     BT.pos = this exact sourced atom fits/passes.
+-- Exception/defeater:   BT.neg = this exact exception/defeater atom fails to
+--                                apply on the present fibre.
+--
+-- BT.neg is NOT logical negation and never creates an antonym proposition.
+------------------------------------------------------------------------
+
 lookupAll :
   ∀ {A : Set} {P : A → Set} {x xs} →
   Algebra.All P xs →
@@ -105,6 +118,12 @@ record SourceConditionedAtomicLegalImplication
 
 open SourceConditionedAtomicLegalImplication public
 
+------------------------------------------------------------------------
+-- The proof-relevant derivation receipt stays explicit.  Atomic tests are not
+-- silently converted into graph proofs; the graph derivation remains a separate
+-- currency and both are needed to compile the legal implication.
+------------------------------------------------------------------------
+
 record AtomicImplicationDerivationReceipt
     {graph : Algebra.LegalGraph}
     {facts : Algebra.FactSet}
@@ -146,6 +165,10 @@ conclusionRemainsSourceAttributed :
 conclusionRemainsSourceAttributed input =
   SourceRule.conclusionSource (sourceRealisation input)
 
+------------------------------------------------------------------------
+-- Hard non-promotions.
+------------------------------------------------------------------------
+
 data NegativeExceptionAtomMeansOppositeRule : Set where
 data NegativeDefeaterAtomMeansOppositeRule : Set where
 data PositivePremiseAtomAloneProvesConclusion : Set where
@@ -153,16 +176,20 @@ data AtomicImplicationCreatesAuthority : Set where
 data AtomicFitWitnessIsGraphDerivation : Set where
 data UnsourcedConclusionAllowed : Set where
 
-negativeExceptionDoesNotMeanOppositeRule : NegativeExceptionAtomMeansOppositeRule → ⊥
+negativeExceptionDoesNotMeanOppositeRule :
+  NegativeExceptionAtomMeansOppositeRule → ⊥
 negativeExceptionDoesNotMeanOppositeRule ()
 
-negativeDefeaterDoesNotMeanOppositeRule : NegativeDefeaterAtomMeansOppositeRule → ⊥
+negativeDefeaterDoesNotMeanOppositeRule :
+  NegativeDefeaterAtomMeansOppositeRule → ⊥
 negativeDefeaterDoesNotMeanOppositeRule ()
 
-onePositivePremiseDoesNotProveConclusion : PositivePremiseAtomAloneProvesConclusion → ⊥
+onePositivePremiseDoesNotProveConclusion :
+  PositivePremiseAtomAloneProvesConclusion → ⊥
 onePositivePremiseDoesNotProveConclusion ()
 
-atomicImplicationDoesNotCreateAuthority : AtomicImplicationCreatesAuthority → ⊥
+atomicImplicationDoesNotCreateAuthority :
+  AtomicImplicationCreatesAuthority → ⊥
 atomicImplicationDoesNotCreateAuthority ()
 
 atomicFitDoesNotEqualGraphDerivation : AtomicFitWitnessIsGraphDerivation → ⊥
@@ -184,7 +211,8 @@ record SourceConditionedAtomicLegalImplicationBoundary : Set where
     temporalAtomicAndSourceConditioned : Bool
     atomicFitAutomaticallyCreatesDerivation : Bool
 
-canonicalSourceConditionedAtomicLegalImplicationBoundary : SourceConditionedAtomicLegalImplicationBoundary
+canonicalSourceConditionedAtomicLegalImplicationBoundary :
+  SourceConditionedAtomicLegalImplicationBoundary
 canonicalSourceConditionedAtomicLegalImplicationBoundary =
   source-conditioned-atomic-legal-implication-boundary
     true true true true true false true true false
