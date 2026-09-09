@@ -141,22 +141,27 @@ module LiveThreeClass587
     (pNonzero : Z3.NonZeroMode (Physical.p outer)) →
     (budgets : ThreeClassNormBudgets587 outer) →
     L2.complex3NormSquared
-      ((R573.WeightedNested W S L H system velocityTransverse).nestedSlotFold outer)
+      (R224.foldVector
+        (Slot.nestedSlotCell584 outer)
+        (Output.physicalOutputFiber
+          (Audit.cutoff system) (Physical.p outer)))
     ≤ R576.four *
         R583.fourClassNormEnvelope583
           (cells587 outer)
           (fourBudgetsFromThree587 outer pNonzero budgets)
   nestedSlotFoldBelowThreeClassNorms587 outer pNonzero budgets =
-    Slot.nestedSlotFoldBelowClassNorms584 outer
-      (R584.nested-slot-class-norm-payment-584
-        (fourBudgetsFromThree587 outer pNonzero budgets))
+    R583.literalRoutedFourSignBound583
+      (Slot.nestedSlotCell584 outer)
+      (Output.physicalOutputFiber
+        (Audit.cutoff system) (Physical.p outer))
+      (fourBudgetsFromThree587 outer pNonzero budgets)
 
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
 
-round587PreferredLiveInnerClassCount : Bool
-round587PreferredLiveInnerClassCount = true
+round587PreferredLiveInnerClassCountIsThree : Bool
+round587PreferredLiveInnerClassCountIsThree = true
 
 round587FourIndependentClassNormTheoremsRequired : Bool
 round587FourIndependentClassNormTheoremsRequired = false
