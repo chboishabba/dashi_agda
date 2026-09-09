@@ -2,147 +2,87 @@ module DASHI.Statistics.DirectionalInferenceDesignExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import DASHI.Algebra.Trit using (neg; zer; pos)
+open import Data.Empty using (⊥)
 
-import DASHI.Core.ExperimentalCoordinateDesignExact as Experiment
-import DASHI.Statistics.DirectionalEvidenceTritExact as Evidence
+import DASHI.Statistics.DirectionalEvidenceTritExact as Directional
+import DASHI.Statistics.Vec15Inference as Vec15
 
 ------------------------------------------------------------------------
--- DIRECTIONAL INFERENCE DESIGN
+-- DESIGN-RELATIVE DIRECTIONAL INFERENCE
 --
--- A statistical / experimental result may be interpreted directionally only
--- relative to an explicit design and an explicit interpretation rule.  This
--- prevents a test decision such as `failToReject` from being silently promoted
--- into evidence for the opposite scientific proposition.
+-- A negative conclusion is not the complement of failing a positive test.
+-- It requires a declared negative claim/region and a design-relative witness
+-- that the observation lies in the corresponding support region.
 ------------------------------------------------------------------------
 
-record DirectionalInferenceDesign
-    (World Control Value Dimension Result Hypothesis : Set) : Set₁ where
-  constructor directional-inference-design
+record DirectionalDesign : Set₁ where
+  constructor directionalDesign
   field
-    experimentDesign :
-      Experiment.ExperimentalCoordinateDesign World Control Value Dimension
+    Result Hypothesis ClaimRegion : Set
+    positiveRegion : Hypothesis → ClaimRegion
+    negativeRegion : Hypothesis → ClaimRegion
+    unresolvedRegion : Hypothesis → ClaimRegion
+    observationRegion : Result → ClaimRegion
+    SupportsPositive : Result → Hypothesis → Set
+    SupportsNegative : Result → Hypothesis → Set
+    Underdetermined : Result → Hypothesis → Set
+    nuisanceHandled : Result → Set
+    calibrationValid : Result → Set
+    designReference : String
+open DirectionalDesign public
 
-    semantics : Evidence.DirectionalEvidenceSemantics Result Hypothesis
+semanticsFromDesign : (design : DirectionalDesign) →
+  Directional.DirectionalInferenceSemantics (Result design) (Hypothesis design)
+semanticsFromDesign design =
+  Directional.directionalInferenceSemantics
+    (SupportsPositive design)
+    (Underdetermined design)
+    (SupportsNegative design)
+    (designReference design)
 
-    PositiveRegion : Result → Hypothesis → Set
-    NegativeRegion : Result → Hypothesis → Set
-    UnderdeterminedRegion : Result → Hypothesis → Set
+record NegativeDesignReceipt
+    (design : DirectionalDesign)
+    (result : Result design)
+    (hypothesis : Hypothesis design) : Set where
+  constructor negativeDesignReceipt
+  field
+    supportsNegative : SupportsNegative design result hypothesis
+    nuisanceReceipt : nuisanceHandled design result
+    calibrationReceipt : calibrationValid design result
+    receiptReference : String
+open NegativeDesignReceipt public
 
-    positiveRegionSound :
-      ∀ {result hypothesis} →
-      PositiveRegion result hypothesis →
-      Evidence.SupportsPositive semantics result hypothesis
-
-    negativeRegionSound :
-      ∀ {result hypothesis} →
-      NegativeRegion result hypothesis →
-      Evidence.SupportsNegative semantics result hypothesis
-
-    underdeterminedRegionSound :
-      ∀ {result hypothesis} →
-      UnderdeterminedRegion result hypothesis →
-      Evidence.Underdetermined semantics result hypothesis
-
-    hypothesisReference : Hypothesis → String
-    decisionRuleReference : String
-    calibrationReference : String
-    nuisanceHandlingReference : String
-
-open DirectionalInferenceDesign public
+compileNegativeDesignReceipt :
+  ∀ {design result hypothesis} →
+  NegativeDesignReceipt design result hypothesis →
+  Directional.NegativeEvidenceReceipt
+    (semanticsFromDesign design) result hypothesis
+compileNegativeDesignReceipt receipt =
+  Directional.negativeEvidenceReceipt (supportsNegative receipt)
 
 ------------------------------------------------------------------------
--- Positive and negative interpretations are proof-bearing receipts.  Neither
--- can be obtained merely from failure of the opposite direction.
+-- EXISTING VEC15 DECISION SURFACE IS NOT DIRECTIONAL EVIDENCE
 ------------------------------------------------------------------------
 
-record PositiveEvidenceReceipt
-    {World Control Value Dimension Result Hypothesis : Set}
-    (design : DirectionalInferenceDesign
-      World Control Value Dimension Result Hypothesis)
-    (result : Result)
-    (hypothesis : Hypothesis) : Set₁ where
-  constructor positive-evidence-receipt
+data Vec15NegativePromotionPermission : Vec15.Decision → Set where
+  rejectMayNeedDirectionalInterpretation :
+    Vec15NegativePromotionPermission Vec15.reject
+
+failToRejectDoesNotCarryNegativePromotion :
+  Vec15NegativePromotionPermission Vec15.failToReject → ⊥
+failToRejectDoesNotCarryNegativePromotion ()
+
+record DirectionalInferenceDesignBoundary : Set where
+  constructor directionalInferenceDesignBoundary
   field
-    inPositiveRegion : PositiveRegion design result hypothesis
+    failToRejectAutomaticallyMeansNegativeEvidence : Bool
+    negativeEvidenceRequiresDeclaredNegativeRegion : Bool
+    negativeEvidenceRequiresDesignReceipt : Bool
+    testDecisionEqualsDirectionalInterpretation : Bool
+    equivalenceClaimEqualsNegativeDirectionClaim : Bool
 
-open PositiveEvidenceReceipt public
-
-record NegativeEvidenceReceipt
-    {World Control Value Dimension Result Hypothesis : Set}
-    (design : DirectionalInferenceDesign
-      World Control Value Dimension Result Hypothesis)
-    (result : Result)
-    (hypothesis : Hypothesis) : Set₁ where
-  constructor negative-evidence-receipt
-  field
-    inNegativeRegion : NegativeRegion design result hypothesis
-
-open NegativeEvidenceReceipt public
-
-record UnderdeterminedEvidenceReceipt
-    {World Control Value Dimension Result Hypothesis : Set}
-    (design : DirectionalInferenceDesign
-      World Control Value Dimension Result Hypothesis)
-    (result : Result)
-    (hypothesis : Hypothesis) : Set₁ where
-  constructor underdetermined-evidence-receipt
-  field
-    inUnderdeterminedRegion : UnderdeterminedRegion design result hypothesis
-
-open UnderdeterminedEvidenceReceipt public
-
-positiveReceiptDisposition :
-  ∀ {World Control Value Dimension Result Hypothesis : Set}
-    {design : DirectionalInferenceDesign
-      World Control Value Dimension Result Hypothesis}
-    {result : Result} {hypothesis : Hypothesis} →
-  PositiveEvidenceReceipt design result hypothesis →
-  Evidence.DirectionalEvidenceDisposition
-    (semantics design) result hypothesis pos
-positiveReceiptDisposition receipt =
-  Evidence.positiveEvidence
-    (positiveRegionSound _ (inPositiveRegion receipt))
-
-negativeReceiptDisposition :
-  ∀ {World Control Value Dimension Result Hypothesis : Set}
-    {design : DirectionalInferenceDesign
-      World Control Value Dimension Result Hypothesis}
-    {result : Result} {hypothesis : Hypothesis} →
-  NegativeEvidenceReceipt design result hypothesis →
-  Evidence.DirectionalEvidenceDisposition
-    (semantics design) result hypothesis neg
-negativeReceiptDisposition receipt =
-  Evidence.negativeEvidence
-    (negativeRegionSound _ (inNegativeRegion receipt))
-
-underdeterminedReceiptDisposition :
-  ∀ {World Control Value Dimension Result Hypothesis : Set}
-    {design : DirectionalInferenceDesign
-      World Control Value Dimension Result Hypothesis}
-    {result : Result} {hypothesis : Hypothesis} →
-  UnderdeterminedEvidenceReceipt design result hypothesis →
-  Evidence.DirectionalEvidenceDisposition
-    (semantics design) result hypothesis zer
-underdeterminedReceiptDisposition receipt =
-  Evidence.unresolvedEvidence
-    (underdeterminedRegionSound _ (inUnderdeterminedRegion receipt))
-
-------------------------------------------------------------------------
--- Test-decision adapter boundary.  This record is intentionally generic rather
--- than importing one concrete statistics implementation: a decision procedure
--- must separately state which, if any, directional evidence receipt it earns.
-------------------------------------------------------------------------
-
-record DecisionInterpretationBoundary : Set where
-  constructor decision-interpretation-boundary
-  field
-    failToRejectAutomaticallySupportsOpposite : Bool
-    rejectingOneNullAutomaticallyProvesEveryOppositeClaim : Bool
-    directionalMeaningDependsOnDeclaredHypothesis : Bool
-    nuisanceAndCalibrationRemainSeparateCoordinates : Bool
-
-canonicalDecisionInterpretationBoundary : DecisionInterpretationBoundary
-canonicalDecisionInterpretationBoundary =
-  decision-interpretation-boundary false false true true
+canonicalDirectionalInferenceDesignBoundary : DirectionalInferenceDesignBoundary
+canonicalDirectionalInferenceDesignBoundary =
+  directionalInferenceDesignBoundary false true true false false

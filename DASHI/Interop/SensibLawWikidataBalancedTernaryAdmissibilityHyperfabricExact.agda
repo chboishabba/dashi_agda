@@ -14,16 +14,61 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 import DASHI.Moonshine.Base369MonsterFineCarrierEquivarianceAuditExact as MonsterAudit
 
 ------------------------------------------------------------------------
--- WIKIBASE SNAK SEMANTICS -> BALANCED TERNARY CODECS
+-- CONVENTIONAL THREE-VALUED TRUTHINESS PRESENTATIONS
 --
--- Wikibase supplies three semantic constructors:
---   noValue       : the property has no value;
---   someValue     : a value exists but is unknown;
---   concreteValue : a value is supplied.
+-- Balanced Kleene-style presentation:
+--   false = -1, unknown/indeterminate = 0, true = +1.
+-- Ordinary unsigned/unbalanced ternary uses digits 0,1,2 in the same order.
+-- This owner keeps those conventional logic/numeric presentations distinct
+-- from Wikibase snak semantics.
+------------------------------------------------------------------------
+
+data ThreeTruth : Set where
+  falseTruth : ThreeTruth
+  unknownTruth : ThreeTruth
+  trueTruth : ThreeTruth
+
+balancedTruth : ThreeTruth → Trit.Trit
+balancedTruth falseTruth = Trit.neg
+balancedTruth unknownTruth = Trit.zer
+balancedTruth trueTruth = Trit.pos
+
+truthFromBalanced : Trit.Trit → ThreeTruth
+truthFromBalanced Trit.neg = falseTruth
+truthFromBalanced Trit.zer = unknownTruth
+truthFromBalanced Trit.pos = trueTruth
+
+balancedTruthRoundTrip :
+  (truth : ThreeTruth) → truthFromBalanced (balancedTruth truth) ≡ truth
+balancedTruthRoundTrip falseTruth = refl
+balancedTruthRoundTrip unknownTruth = refl
+balancedTruthRoundTrip trueTruth = refl
+
+data UnsignedTernaryDigit : Set where
+  digit0 digit1 digit2 : UnsignedTernaryDigit
+
+unsignedTruth : ThreeTruth → UnsignedTernaryDigit
+unsignedTruth falseTruth = digit0
+unsignedTruth unknownTruth = digit1
+unsignedTruth trueTruth = digit2
+
+truthFromUnsigned : UnsignedTernaryDigit → ThreeTruth
+truthFromUnsigned digit0 = falseTruth
+truthFromUnsigned digit1 = unknownTruth
+truthFromUnsigned digit2 = trueTruth
+
+unsignedTruthRoundTrip :
+  (truth : ThreeTruth) → truthFromUnsigned (unsignedTruth truth) ≡ truth
+unsignedTruthRoundTrip falseTruth = refl
+unsignedTruthRoundTrip unknownTruth = refl
+unsignedTruthRoundTrip trueTruth = refl
+
+------------------------------------------------------------------------
+-- WIKIBASE SNAK PRESENTATION CODECS
 --
--- The numeric/trit assignment below is an encoding choice, not Wikibase truth
--- semantics. Two total bijective balanced charts are retained because different
--- consumers may want either the epistemic middle or literal absence at zero.
+-- Wikibase has distinct no-value / some-value / concrete-value constructors.
+-- The mappings below are explicit presentation choices over the same ternary
+-- carrier. They are not claimed to be Wikibase's native truth semantics.
 ------------------------------------------------------------------------
 
 data WikibaseSnakMeaning : Set where
@@ -73,22 +118,15 @@ tritSnakRoundTrip absenceCentred Trit.neg = refl
 tritSnakRoundTrip absenceCentred Trit.zer = refl
 tritSnakRoundTrip absenceCentred Trit.pos = refl
 
-------------------------------------------------------------------------
--- Unbalanced three-symbol presentation.  Digits are labels only.
-------------------------------------------------------------------------
+encodeUnbalancedSnak : WikibaseSnakMeaning → UnsignedTernaryDigit
+encodeUnbalancedSnak noValueMeaning = digit0
+encodeUnbalancedSnak someValueMeaning = digit1
+encodeUnbalancedSnak concreteValueMeaning = digit2
 
-data UnbalancedSnakDigit : Set where
-  digit1 digit2 digit3 : UnbalancedSnakDigit
-
-encodeUnbalancedSnak : WikibaseSnakMeaning → UnbalancedSnakDigit
-encodeUnbalancedSnak noValueMeaning = digit1
-encodeUnbalancedSnak someValueMeaning = digit2
-encodeUnbalancedSnak concreteValueMeaning = digit3
-
-decodeUnbalancedSnak : UnbalancedSnakDigit → WikibaseSnakMeaning
-decodeUnbalancedSnak digit1 = noValueMeaning
-decodeUnbalancedSnak digit2 = someValueMeaning
-decodeUnbalancedSnak digit3 = concreteValueMeaning
+decodeUnbalancedSnak : UnsignedTernaryDigit → WikibaseSnakMeaning
+decodeUnbalancedSnak digit0 = noValueMeaning
+decodeUnbalancedSnak digit1 = someValueMeaning
+decodeUnbalancedSnak digit2 = concreteValueMeaning
 
 unbalancedSnakRoundTrip :
   (meaning : WikibaseSnakMeaning) →
@@ -97,11 +135,6 @@ unbalancedSnakRoundTrip noValueMeaning = refl
 unbalancedSnakRoundTrip someValueMeaning = refl
 unbalancedSnakRoundTrip concreteValueMeaning = refl
 
-------------------------------------------------------------------------
--- Binary presentation is a representation fibre, not Boolean semantics.
--- The existing support/sign codec is injective/round-tripping over Trit.
-------------------------------------------------------------------------
-
 snakBitView :
   SnakTritOrientation → WikibaseSnakMeaning → Bits.BitStreamView
 snakBitView orientation meaning = Bits.bitStreamView (encodeSnakTrit orientation meaning)
@@ -109,13 +142,8 @@ snakBitView orientation meaning = Bits.bitStreamView (encodeSnakTrit orientation
 ------------------------------------------------------------------------
 -- GENERIC N-DIMENSIONAL ADMISSIBILITY FIBRE
 --
--- A consumer coordinate is not Boolean while it remains live.  We retain the
--- three states rejected/open/admitted on the canonical balanced carrier:
---
---   rejected -> -1, open -> 0, admitted -> +1.
---
--- This is a three-way refinement around the classical admitted/rejected edge;
--- it is not a claim that Wikibase snaks themselves are truth values.
+-- This follows the same conventional balanced ordering:
+--   rejected/blocked = -1, open = 0, admitted = +1.
 ------------------------------------------------------------------------
 
 data AdmissibilityState : Set where
@@ -163,11 +191,6 @@ record AdmissibilityBraid (fibre : NDimAdmissibilityFibre) : Set₁ where
     braidReference : String
 open AdmissibilityBraid public
 
-------------------------------------------------------------------------
--- Representation / execution complexity over the same fibre.
--- No scalar complexity is privileged: consumers choose explicit cost axes.
-------------------------------------------------------------------------
-
 record FibreComplexityProfile (fibre : NDimAdmissibilityFibre) : Set₁ where
   constructor fibreComplexityProfile
   field
@@ -189,10 +212,6 @@ nineTritNominalStateCountIs19683 = refl
 
 ------------------------------------------------------------------------
 -- EXACT NINE-AXIS BASE369 CARRIER CHART
---
--- A selected nine-coordinate admissibility projection can live literally on
--- the existing Base369 NineTrits/T^9 carrier.  Axis semantics remain external;
--- same carrier/cardinality does not create Monster action/equivariance.
 ------------------------------------------------------------------------
 
 data NatNineAxis : Set where
@@ -245,12 +264,14 @@ natNineAxisToHyperformal state =
   Geometry.nineTritsToFabric (toBase369NineTrits state)
 
 ------------------------------------------------------------------------
--- Boundary / epistemic firewall.
+-- BOUNDARY / EPISTEMIC FIREWALL
 ------------------------------------------------------------------------
 
 record WikidataTernaryAdmissibilityBoundary : Set where
   constructor wikidataTernaryAdmissibilityBoundary
   field
+    conventionalBalancedTruthUsesMinusZeroPlus : Bool
+    conventionalUnsignedTruthUsesZeroOneTwo : Bool
     wikibaseSnakTripleHasExactBalancedCodec : Bool
     balancedCodecIsWikibaseTruthSemantics : Bool
     zeroTritMeansBooleanFalse : Bool
@@ -266,7 +287,7 @@ canonicalWikidataTernaryAdmissibilityBoundary :
   WikidataTernaryAdmissibilityBoundary
 canonicalWikidataTernaryAdmissibilityBoundary =
   wikidataTernaryAdmissibilityBoundary
-    true false false false true true true true false true
+    true true true false false false true true true true false true
 
 monsterBoundaryRetained : MonsterAudit.FineCarrierBidiBoundary
 monsterBoundaryRetained = MonsterAudit.canonicalFineCarrierBidiBoundary
