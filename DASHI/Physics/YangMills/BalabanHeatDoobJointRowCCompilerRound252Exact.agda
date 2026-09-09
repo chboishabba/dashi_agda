@@ -29,7 +29,6 @@ record JointHeatDoobRowCInputs
 
     covariance : Joint.JointHeatDoobFirstGradientCovariance Site
 
-    -- Temporal/static side of the exact log-heat Hessian split.
     staticHessianDebt actualNegativeHessianDebt : Nat → ℚ
     staticHessianDebtNonnegative : ∀ depth → 0ℚ ≤ staticHessianDebt depth
     actualNegativeHessianDebtNonnegative : ∀ depth →
@@ -43,7 +42,6 @@ record JointHeatDoobRowCInputs
       staticHessianDebt depth
       ≤ Shared.hessianInfluenceShell shared scale volume root depth
 
-    -- Spatial/static side of the same log-heat derivative generator.
     dynamicInfluence staticInfluence : Site → Site → ℚ
     dynamicInfluenceNonnegative : ∀ x y → 0ℚ ≤ dynamicInfluence x y
     staticInfluenceNonnegative : ∀ x y → 0ℚ ≤ staticInfluence x y
@@ -77,28 +75,17 @@ asTemporalHeatDoobDebt dataSet =
     ; Temporal.HeatDoobHessianCovarianceDebt.scale = scale dataSet
     ; Temporal.HeatDoobHessianCovarianceDebt.volume = volume dataSet
     ; Temporal.HeatDoobHessianCovarianceDebt.root = root dataSet
-    ; Temporal.HeatDoobHessianCovarianceDebt.staticHessianDebt =
-        staticHessianDebt dataSet
-    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceDebt =
-        Joint.temporalCovarianceDebt cov
-    ; Temporal.HeatDoobHessianCovarianceDebt.actualNegativeHessianDebt =
-        actualNegativeHessianDebt dataSet
-    ; Temporal.HeatDoobHessianCovarianceDebt.staticNonnegative =
-        staticHessianDebtNonnegative dataSet
-    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceNonnegative =
-        Joint.temporalCovarianceDebtNonnegative cov
-    ; Temporal.HeatDoobHessianCovarianceDebt.actualNonnegative =
-        actualNegativeHessianDebtNonnegative dataSet
-    ; Temporal.HeatDoobHessianCovarianceDebt.heatDoobSplit =
-        heatDoobTemporalSplit dataSet
-    ; Temporal.HeatDoobHessianCovarianceDebt.staticBelowMarkedHessian =
-        staticTemporalBelowMarkedHessian dataSet
-    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceAmplitude =
-        Cov.temporalCovarianceAmplitude temporal
-    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceAmplitudeNonnegative =
-        Cov.temporalCovarianceAmplitudeNonnegative temporal
-    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceGeometricHalf =
-        Joint.temporalCovarianceGeometricHalf cov
+    ; Temporal.HeatDoobHessianCovarianceDebt.staticHessianDebt = staticHessianDebt dataSet
+    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceDebt = Joint.temporalCovarianceDebt cov
+    ; Temporal.HeatDoobHessianCovarianceDebt.actualNegativeHessianDebt = actualNegativeHessianDebt dataSet
+    ; Temporal.HeatDoobHessianCovarianceDebt.staticNonnegative = staticHessianDebtNonnegative dataSet
+    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceNonnegative = Joint.temporalCovarianceDebtNonnegative cov
+    ; Temporal.HeatDoobHessianCovarianceDebt.actualNonnegative = actualNegativeHessianDebtNonnegative dataSet
+    ; Temporal.HeatDoobHessianCovarianceDebt.heatDoobSplit = heatDoobTemporalSplit dataSet
+    ; Temporal.HeatDoobHessianCovarianceDebt.staticBelowMarkedHessian = staticTemporalBelowMarkedHessian dataSet
+    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceAmplitude = Cov.temporalCovarianceAmplitude temporal
+    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceAmplitudeNonnegative = Cov.temporalCovarianceAmplitudeNonnegative temporal
+    ; Temporal.HeatDoobHessianCovarianceDebt.covarianceGeometricHalf = Joint.temporalCovarianceGeometricHalf cov
     }
 
 asSpatialHeatDoobSplit :
@@ -115,29 +102,18 @@ asSpatialHeatDoobSplit dataSet =
     ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.root = root dataSet
     ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.sites = Joint.sites cov
     ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.metric = Joint.metric cov
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.dynamicInfluence =
-        dynamicInfluence dataSet
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.staticInfluence =
-        staticInfluence dataSet
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceInfluence =
-        Joint.spatialCovarianceInfluence cov
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.dynamicNonnegative =
-        dynamicInfluenceNonnegative dataSet
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.staticNonnegative =
-        staticInfluenceNonnegative dataSet
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceNonnegative =
-        Joint.spatialCovarianceInfluenceNonnegative cov
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.generatorSplit =
-        heatDoobSpatialSplit dataSet
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.dynamicInfluence = dynamicInfluence dataSet
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.staticInfluence = staticInfluence dataSet
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceInfluence = Joint.spatialCovarianceInfluence cov
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.dynamicNonnegative = dynamicInfluenceNonnegative dataSet
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.staticNonnegative = staticInfluenceNonnegative dataSet
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceNonnegative = Joint.spatialCovarianceInfluenceNonnegative cov
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.generatorSplit = heatDoobSpatialSplit dataSet
     ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.rowDepth = rowDepth dataSet
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.staticRowIsMarkedHessianPartial =
-        staticSpatialRowIsMarkedHessianPartial dataSet
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceRowMass =
-        Cov.spatialCovarianceRowMass spatial
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceRowMassNonnegative =
-        Cov.spatialCovarianceRowMassNonnegative spatial
-    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceWeightedRowBound =
-        Joint.spatialCovarianceWeightedRowBound cov
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.staticRowIsMarkedHessianPartial = staticSpatialRowIsMarkedHessianPartial dataSet
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceRowMass = Cov.spatialCovarianceRowMass spatial
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceRowMassNonnegative = Cov.spatialCovarianceRowMassNonnegative spatial
+    ; Spatial.HeatDoobWeightedGeneratorCovarianceSplit.covarianceWeightedRowBound = Joint.spatialCovarianceWeightedRowBound cov
     }
 
 jointRowCTemporalCompilerLevel : ProofLevel
@@ -146,9 +122,5 @@ jointRowCTemporalCompilerLevel = machineChecked
 jointRowCSpatialCompilerLevel : ProofLevel
 jointRowCSpatialCompilerLevel = machineChecked
 
--- The stochastic covariance estimate is one shared physical/source leaf after
--- this compiler.  The remaining non-stochastic Row-C work is the literal
--- Heat/Doob static/dynamic split and identification of the static response with
--- the SAME CMP116 hessian mark in temporal and spatial projections.
 literalJointHeatDoobRowCInputsLevel : ProofLevel
 literalJointHeatDoobRowCInputsLevel = conditional
