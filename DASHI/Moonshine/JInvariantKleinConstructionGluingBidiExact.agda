@@ -151,8 +151,6 @@ antiFixtureLeftBottomTrueIsTrue :
   pathLeftBottom antiGluingFixture true ≡ true
 antiFixtureLeftBottomTrueIsTrue = refl
 
-data Empty : Set where
-
 trueIsNotFalse : true ≡ false → Empty
 trueIsNotFalse ()
 
