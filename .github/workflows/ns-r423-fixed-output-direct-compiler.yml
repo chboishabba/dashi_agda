@@ -143,6 +143,21 @@ jobs:
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DiagonalSemanticBoundaryRound548Exact.agda
 
+      - name: Type-check direct leaf-A diagonal reduction R548-R559
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDiagonalWeightedRemainderDecompositionRound548Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDiagonalSelfFluxToR447Round549Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralDiagonalSumDecompositionRound550Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DiagonalReducedNormalFormRound551Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNIntegratedDiagonalReducedNormalFormRound552Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNFavorableDiagonalTemporalUpperRound553Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDiagonalSelfFluxEndpointCompilerRound554Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNGlobalDiagonalReducedNormalFormRound555Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiveR406DiagonalReducedNormalFormRound556Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiveIntegratedDiagonalReducedNormalFormRound557Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNGlobalSelfFluxEndpointRound558Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralSelfFluxFiniteDerivativeCompilerRound559Exact.agda
+
       - name: Type-check focused R505 aggregate
         run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact.agda
 
