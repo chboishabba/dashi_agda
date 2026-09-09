@@ -83,14 +83,19 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalHHAndNestedRadiusCompilerRound468E
 import DASHI.Physics.Closure.NSTriadKNSelectedPairPhysicalTriadRoutingRound469Exact
 import DASHI.Physics.Closure.NSTriadKNOutputIndexedEDProvenanceRound470Exact
 
--- R471-R477 Lean<->Agda Gram-operator return.  The weakest fixed-output
--- consumer is the signed l2->l2 Gram quadratic-form bound; absolute Schur,
--- block Schur, and operator-Schur are producers rather than mandatory
--- intermediates.  R473/R474/R475 reuse the literal R180/R383 signed Gram and
--- the existing helical +/- decomposition.  R476 keeps the fully projected
--- outer-cell lane distinct from R440's unprojected direct signed companion.
--- R477 installs the nonseparable Cauchy pair kernel explicitly, so the live
--- analytic frontier is two scalar same-helicity resolved-form bounds.
+-- R471-R481 Lean<->Agda Gram-operator return, terminal minimization, and
+-- first-missing proof-search routing.  R471 identifies the weakest uniform
+-- Gram-operator consumer.  R477 installs the literal nonseparable Cauchy pair
+-- kernel.  R478 removes the unnecessary requirement to prove separate +/-
+-- scalar bounds by preferring the total resolved all-coefficient bound.  R479
+-- isolates a signed residual allowance producer so paid diagonal structure can
+-- be reused without absolute values.  R480 follows the actual R472/R432
+-- downstream type one step further: the final physical consumer needs only the
+-- selected physical coefficient snapshot, not a theorem for every hypothetical
+-- coefficient vector.  R481 applies the repository first-missing discipline:
+-- construct the physical same-object snapshot first; only then admit the
+-- selected resolved inequality as the live analytic search.  Uniform R478 and
+-- split R477 remain sufficient producer routes only.
 import DASHI.Physics.Closure.NSTriadKNGramOperatorBoundConsumerRound471Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramOperatorPaymentRound472Exact
 import DASHI.Physics.Closure.NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact
@@ -98,6 +103,11 @@ import DASHI.Physics.Closure.NSTriadKNHelicalSignedGramSplitRound474Exact
 import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Exact
 import DASHI.Physics.Closure.NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedDirectConsumerRound478Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedSignedResidualRound479Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedProofSearchRound481Exact
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedTerminalEverythingRound479Exact
 
 -- R487-R493 return to the canonical direct R423 Clay consumer while restoring
 -- the same-object firewall. R487 compiles theorem-bearing fixed-output signed
