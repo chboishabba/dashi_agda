@@ -7,6 +7,8 @@ FILES=(
   DASHI/Statistics/BinaryTestDecisionDirectionalEvidenceExact.agda
   DASHI/Statistics/HypothesisRegionGeometryExact.agda
   DASHI/Statistics/StandardBinaryTestRegionAdaptersExact.agda
+  DASHI/Statistics/ConfidenceIntervalRegionEvidenceExact.agda
+  DASHI/Statistics/StandardConfidenceIntervalInterpretationExact.agda
   DASHI/Statistics/Vec15BinaryDecisionDirectionalEvidenceBridgeExact.agda
   DASHI/Statistics/DirectionalEvidenceEverything.agda
   DASHI/Interop/DirectionalEvidenceProofSearchBridgeExact.agda
@@ -28,4 +30,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence trit / binary test / region geometry checks passed"
+echo "directional evidence trit / binary test / region / confidence-interval checks passed"
