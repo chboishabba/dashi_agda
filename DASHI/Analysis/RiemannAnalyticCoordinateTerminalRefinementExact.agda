@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Unit using (⊤; tt)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
@@ -44,10 +45,6 @@ record AnalyticCoordinateTerminalRefinement
     exactPublishedHeightIs3000175332800Receipt :
       exactPublishedHeightIs3000175332800
 
-    sameCompletedZetaPredicateReceipt : Set
-    sameCompletedZetaPredicateReceiptWitness :
-      sameCompletedZetaPredicateReceipt
-
     sourceReference : String
     refinementReference : String
 
@@ -73,6 +70,16 @@ compilePlattTrudgianVerifiedRegionTransport refinement = record
   ; Low.transportReference = refinementReference refinement
   }
 
+------------------------------------------------------------------------
+-- Compatibility adapter to the older generic predicate-refinement record.
+--
+-- That record carries an opaque same-predicate receipt, but its stability
+-- compiler does not consume the receipt. Because this package is already
+-- indexed by one exact `analytic`, the completed-zeta predicate is fixed by the
+-- type. The compatibility receipt is therefore definitionally trivial rather
+-- than a separate proof obligation.
+------------------------------------------------------------------------
+
 compileCriticalLinePredicateRefinement :
   forall {analytic} ->
   AnalyticCoordinateTerminalRefinement analytic ->
@@ -92,10 +99,8 @@ compileCriticalLinePredicateRefinement {analytic} refinement = record
         equalityToHalfStable refinement
           (Analytic.ComplexAnalyticCarrier.realPart
             (Analytic.AnalyticSubstrate.carrier analytic) s)
-  ; Stability.CriticalLinePredicateRefinement.sameCompletedZetaPredicateReceipt =
-      sameCompletedZetaPredicateReceipt refinement
-  ; Stability.CriticalLinePredicateRefinement.sameCompletedZetaPredicateReceiptWitness =
-      sameCompletedZetaPredicateReceiptWitness refinement
+  ; Stability.CriticalLinePredicateRefinement.sameCompletedZetaPredicateReceipt = ⊤
+  ; Stability.CriticalLinePredicateRefinement.sameCompletedZetaPredicateReceiptWitness = tt
   ; Stability.CriticalLinePredicateRefinement.refinementReference =
       refinementReference refinement
   }
@@ -123,6 +128,9 @@ record AnalyticCoordinateTerminalRefinementBoundary : Set where
     equalityStabilityCompilesCriticalLineStable : Bool
     equalityStabilityCompilesCriticalLineStableIsTrue :
       equalityStabilityCompilesCriticalLineStable ≡ true
+    separateOpaqueSamePredicateReceiptRequired : Bool
+    separateOpaqueSamePredicateReceiptRequiredIsFalse :
+      separateOpaqueSamePredicateReceiptRequired ≡ false
     sourceMetadataAloneInhabitsThisPackage : Bool
     sourceMetadataAloneInhabitsThisPackageIsFalse :
       sourceMetadataAloneInhabitsThisPackage ≡ false
@@ -144,4 +152,5 @@ canonicalAnalyticCoordinateTerminalRefinementBoundary =
     false refl
     false refl
     false refl
-    "Use one theorem-bearing same-AnalyticSubstrate coordinate refinement for both terminal seams. Prove criticalLine(s) iff realPart(s)=half, constructive stability of equality-to-half, and the Platt--Trudgian verified-region theorem as realPart(point rho)=half on that same carrier. Those compile the canonical low transport and CriticalLineStable. Source citations, rational toy carriers, or whole-carrier identity alone do not inhabit this package, and RH is not derived here."
+    false refl
+    "Use one theorem-bearing same-AnalyticSubstrate coordinate refinement for both terminal seams. Prove criticalLine(s) iff realPart(s)=half, constructive stability of equality-to-half, and the Platt--Trudgian verified-region theorem as realPart(point rho)=half on that same carrier. Because this package is already indexed by one exact AnalyticSubstrate, no separate opaque same-completed-zeta predicate receipt is required; the older compatibility receipt compiles as unit. Source citations, rational toy carriers, or the predicate name alone do not inhabit the substantive coordinate theorems, and RH is not derived here."
