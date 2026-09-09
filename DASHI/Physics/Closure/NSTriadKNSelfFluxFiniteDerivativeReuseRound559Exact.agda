@@ -20,7 +20,7 @@ module DASHI.Physics.Closure.NSTriadKNSelfFluxFiniteDerivativeReuseRound559Exact
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -30,7 +30,6 @@ import DASHI.Physics.Closure.NSTriadKNR290PairFluxDerivativeCompilerRound416Exac
 import DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Exact as R417
 import DASHI.Physics.Closure.NSTriadKNR291R290SamePairDerivativeRound418Exact as R418
 import DASHI.Physics.Closure.NSTriadKNR418FinitePairFamilyToR409Round422Exact as R422
-import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalFluxEndpointReuseRound551Exact as R551
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -54,8 +53,14 @@ module SelfFluxFinite
     (items : List (R422.PairCurveDerivativeData Time VectorDerivativeOf)) →
     R412.AllDerivatives ScalarDerivativeOf
       (R422.fluxTerms items) (R422.tangentTerms items)
-  allPairDerivatives = R422.FiniteFamily.allPairDerivatives
-    Time _ _ VectorDerivativeOf ScalarDerivativeOf H C A
+  allPairDerivatives [] = R412.derivativesNil
+  allPairDerivatives (P ∷ rest) =
+    R412.derivativesCons
+      (Pair.cellDerivativesBuildExactR290WeightedFluxDerivative
+        (R422.pairCurve P)
+        (R422.cellADerivative P)
+        (R422.cellBDerivative P))
+      (allPairDerivatives rest)
 
   record LiteralSelfFluxPairFamily559 : Set₁ where
     field
