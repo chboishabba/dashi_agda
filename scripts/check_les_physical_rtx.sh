@@ -28,5 +28,9 @@ check DASHI/Environment/LESWaterPhotonInteractionExact.agda
 check DASHI/Environment/LESMultiphysicsFidelityEscalationExact.agda
 check DASHI/Environment/LESPhysicalWorldEngineRTXCrossPollinationExact.agda
 
+# Physically based VFX / coupled impact scene.
+check DASHI/Environment/LESVFXPhysicalOperationsExact.agda
+check DASHI/Environment/LESGodzillaFrigateMultiphysicsSceneExact.agda
+
 # Aggregate integration surface.
 check DASHI/Environment/Everything.agda
