@@ -39,3 +39,4 @@ import DASHI.Wikimedia.NativeConcreteQidGraphProjectionExact
 import DASHI.Wikimedia.MaboNativeWikimediaBridgeExact
 import DASHI.Wikimedia.MaboPropertyTripleProjectionExact
 import DASHI.Wikimedia.MaboConcreteQidGraphProjectionExact
+import DASHI.Wikimedia.WikipediaFirstLinkNetworkExact
