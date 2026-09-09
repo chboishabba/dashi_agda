@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Product using (Σ; _,_)
 
 import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
@@ -14,13 +15,15 @@ import DASHI.Cognition.PNF.SensibLawLegalClaimProvenanceLineageExact as Provenan
 ------------------------------------------------------------------------
 -- ATTRIBUTED ATOMIC CASE REGISTRY
 --
--- An atomic legal test has two independent attribution fibres:
+-- An atomic legal test has three independent attribution fibres:
 --   1. provenance of the repository proposition defining the legal atom;
---   2. provenance of the concrete case outcome evidence.
+--   2. provenance of the concrete case outcome evidence proposition;
+--   3. provenance of the repository evaluation that maps those materials to a
+--      balanced-ternary fit/failure/unresolved gate.
 --
--- The first may be a DASHI reconstruction even when its source receipt is a
--- primary judicial/statutory source. Registration/coherence preserves both.
--- A gate is never itself a provenance tag.
+-- The first two may be DASHI reconstructions even when their source receipts
+-- point to primary judicial/statutory material. The third is not silently
+-- attributed back to the source merely because the source supports the inputs.
 ------------------------------------------------------------------------
 
 data AtomicEntryOutcomeLineage
@@ -55,6 +58,34 @@ data AtomicEntryOutcomeLineage
             negative))) →
     AtomicEntryOutcomeLineage registry entry
 
+data AtomicEvaluationLineage
+    (registry : Coherence.AtomicCaseRegistry)
+    {p}
+    (entry : Coherence.Entry registry p) :
+    Provenance.LegalClaimProvenanceStage → Set where
+
+  repositoryEvaluationInference :
+    String →
+    AtomicEvaluationLineage registry entry Provenance.crossSourceInference
+
+  repositoryEvaluationTheorem :
+    String →
+    String →
+    AtomicEvaluationLineage registry entry Provenance.repositoryTheoremExtension
+
+  externallyAdjudicatedEvaluation :
+    String →
+    String →
+    AtomicEvaluationLineage registry entry Provenance.promotionOrExternalAdjudication
+
+AtomicEvaluationLineageReceipt :
+  (registry : Coherence.AtomicCaseRegistry) →
+  ∀ {p} →
+  Coherence.Entry registry p → Set
+AtomicEvaluationLineageReceipt registry entry =
+  Σ Provenance.LegalClaimProvenanceStage λ stage →
+    AtomicEvaluationLineage registry entry stage
+
 record AttributedAtomicCaseRegistry
     (registry : Coherence.AtomicCaseRegistry) : Set₁ where
   constructor attributed-atomic-case-registry
@@ -68,6 +99,11 @@ record AttributedAtomicCaseRegistry
       ∀ {p} →
       (entry : Coherence.Entry registry p) →
       AtomicEntryOutcomeLineage registry entry
+
+    evaluationLineageFor :
+      ∀ {p} →
+      (entry : Coherence.Entry registry p) →
+      AtomicEvaluationLineageReceipt registry entry
 
     attributionReference : String
 
@@ -96,6 +132,15 @@ registeredDuplicateRetainsEntryOutcomeLineage :
 registeredDuplicateRetainsEntryOutcomeLineage attributed entry _ =
   outcomeLineageFor attributed entry
 
+registeredDuplicateRetainsEvaluationLineage :
+  ∀ {registry p} →
+  (attributed : AttributedAtomicCaseRegistry registry) →
+  (entry : Coherence.Entry registry p) →
+  Coherence.RegisteredAtomicTest registry entry →
+  AtomicEvaluationLineageReceipt registry entry
+registeredDuplicateRetainsEvaluationLineage attributed entry _ =
+  evaluationLineageFor attributed entry
+
 ------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
@@ -107,6 +152,7 @@ data OutcomeEvidenceMayRedefineLegalTest : Set where
 data UnresolvedGateMayInventOutcomeSource : Set where
 data RepositoryInferenceMayBePromotedByRegistration : Set where
 data PrimarySourceReceiptForcesDefinitionExternalClaim : Set where
+data SourceEvidenceOwnsRepositoryGate : Set where
 
 sameGateDoesNotIdentifyProvenanceStage : SameGateMeansSameProvenanceStage → ⊥
 sameGateDoesNotIdentifyProvenanceStage ()
@@ -131,12 +177,17 @@ primarySourceReceiptDoesNotForceDefinitionExternalClaim :
   PrimarySourceReceiptForcesDefinitionExternalClaim → ⊥
 primarySourceReceiptDoesNotForceDefinitionExternalClaim ()
 
+sourceEvidenceDoesNotOwnRepositoryGate : SourceEvidenceOwnsRepositoryGate → ⊥
+sourceEvidenceDoesNotOwnRepositoryGate ()
+
 record AttributedAtomicCaseRegistryBoundary : Set where
   constructor attributed-atomic-case-registry-boundary
   field
-    definitionAndOutcomeAttributionSeparated : Bool
+    definitionOutcomeAndEvaluationAttributionSeparated : Bool
     definitionStageIsExplicit : Bool
     everyRegisteredOutcomeCarriesLineageOrExplicitUnresolved : Bool
+    everyRegisteredEvaluationCarriesTypedLineage : Bool
+    sourceEvidenceOwnsRepositoryGate : Bool
     sameGateIdentifiesProvenance : Bool
     registryCreatesAttribution : Bool
     registrationPromotesInference : Bool
@@ -144,4 +195,5 @@ record AttributedAtomicCaseRegistryBoundary : Set where
 canonicalAttributedAtomicCaseRegistryBoundary :
   AttributedAtomicCaseRegistryBoundary
 canonicalAttributedAtomicCaseRegistryBoundary =
-  attributed-atomic-case-registry-boundary true true true false false false
+  attributed-atomic-case-registry-boundary
+    true true true true false false false false
