@@ -32,16 +32,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as Admission
-import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNRationalHeatWeightEnvelopeRound333Exact as R333
 import DASHI.Physics.Closure.NSTriadKNPreTTStarReuseCorrectionRound335Exact as R335
-import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedPreTTStarAdapterRound336Exact as R336
 import DASHI.Physics.Closure.NSTriadKNRationalHermitianYoungRound579Exact as R579
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedPairwiseMassEnvelopeRound580Exact as R580
-
-------------------------------------------------------------------------
--- Route dispositions.
-------------------------------------------------------------------------
 
 signedPairwiseDecayDisposition : Admission.RouteDisposition
 signedPairwiseDecayDisposition = Admission.admitted
@@ -57,10 +51,6 @@ heatRealizationDisposition = Admission.admitted
 
 physicalAlmostOrthogonalityDisposition : Admission.RouteDisposition
 physicalAlmostOrthogonalityDisposition = Admission.admitted
-
-------------------------------------------------------------------------
--- Canonical residual.
-------------------------------------------------------------------------
 
 data SignedNestedDecayResidual : Set where
   missingLiteralNestedShellDecayEnvelopeMass581 : SignedNestedDecayResidual
@@ -101,8 +91,7 @@ round581ClayPromotion = false
 
 round581SignedPairwiseRoutePreferredIsTrue :
   round581SignedPairwiseRoutePreferred ≡ true
-round581SignedPairwiseRoutePreferredIsTrue =
-  R335.round335HeatWeightedNestedPairwiseOverlapHighestAlphaIsTrue
+round581SignedPairwiseRoutePreferredIsTrue = refl
 
 round581LocalHermitianEnvelopeClosedIsTrue :
   round581LocalHermitianEnvelopeClosed ≡ true
