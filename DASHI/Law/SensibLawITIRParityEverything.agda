@@ -11,6 +11,7 @@ import DASHI.Interop.ITIRSubmittedEvidencePackageSensibLawAdapterExact as Packag
 import DASHI.Interop.ITIRHousingEpisodeSensibLawAdapterExact as HousingParity
 import DASHI.Interop.ITIRLaterMedicalParticularHarmSensibLawAdapterExact as LaterMedicalParity
 import DASHI.Interop.ITIRHealthRecordSensibLawAdapterExact as GenericHealthParity
+import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorParity
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -53,3 +54,8 @@ selectedGenericHealthRecordParity :
   GenericHealthParity.ITIRHealthRecordParityBoundary
 selectedGenericHealthRecordParity =
   GenericHealthParity.canonicalITIRHealthRecordParityBoundary
+
+selectedHealthEvidenceProcessorParity :
+  ProcessorParity.HealthEvidenceProcessorParityBoundary
+selectedHealthEvidenceProcessorParity =
+  ProcessorParity.canonicalHealthEvidenceProcessorParityBoundary
