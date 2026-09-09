@@ -16,8 +16,9 @@ import DASHI.Cognition.PNF.SensibLawSourceFormAuthorityRoleBidiExact as SourceRo
 -- SOURCE-REALISED LEGAL RULES
 --
 -- Canonical rule shape remains Algebra.LegalRule.  This layer pays source
--- identity, exact locator, proposition role, premises, negative clauses,
--- jurisdiction and temporal scope without promoting a citation into authority.
+-- identity, exact locator, proposition role, conclusion, premises, negative
+-- clauses, jurisdiction and temporal scope without promoting a citation into
+-- authority.
 ------------------------------------------------------------------------
 
 data LegalAttributionLayer : Set where
@@ -61,6 +62,7 @@ record SourceRealisedLegalRule (r : Algebra.LegalRule) : Set₁ where
     ruleCitationStillDoesNotCreateAuthority :
       Source.citationCreatesAuthority ruleAttributedSource ≡ false
 
+    conclusionSource : PropositionSourceReceipt (Algebra.conclusion r)
     premiseSources : Algebra.All PropositionSourceReceipt (Algebra.premises r)
     exceptionSources : Algebra.All PropositionSourceReceipt (Algebra.exceptions r)
     defeaterSources : Algebra.All PropositionSourceReceipt (Algebra.defeaters r)
@@ -199,6 +201,7 @@ data RuleStringScopePaysJurisdiction : Set where
 data RuleStringScopePaysTemporalValidity : Set where
 data SourceFilteringAlwaysMonotoneWithDefeaters : Set where
 data LaterCitationRestoresErasedPrimaryLineage : Set where
+data UnsourcedConclusionMayBeProducedBySourcedRule : Set where
 
 citationAloneDoesNotRealiseLegalRule : CitationAloneRealisesLegalRule → ⊥
 citationAloneDoesNotRealiseLegalRule ()
@@ -217,10 +220,15 @@ laterCitationDoesNotRestoreErasedPrimaryLineage :
   LaterCitationRestoresErasedPrimaryLineage → ⊥
 laterCitationDoesNotRestoreErasedPrimaryLineage ()
 
+unsourcedConclusionCannotBeProducedBySourcedRule :
+  UnsourcedConclusionMayBeProducedBySourcedRule → ⊥
+unsourcedConclusionCannotBeProducedBySourcedRule ()
+
 record SourceRealisedLegalRuleBoundary : Set where
   constructor source-realised-legal-rule-boundary
   field
     primarySourcePropositionSeparatedFromReconstruction : Bool
+    conclusionSourceRequired : Bool
     premiseSourcesRequired : Bool
     exceptionSourcesRequired : Bool
     defeaterSourcesRequired : Bool
@@ -233,4 +241,4 @@ record SourceRealisedLegalRuleBoundary : Set where
 canonicalSourceRealisedLegalRuleBoundary : SourceRealisedLegalRuleBoundary
 canonicalSourceRealisedLegalRuleBoundary =
   source-realised-legal-rule-boundary
-    true true true true true true true false false
+    true true true true true true true true false false
