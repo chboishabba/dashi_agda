@@ -3,20 +3,19 @@ module DASHI.Analysis.RiemannG2ConcreteCertificateFinalScalarBridgeExact where
 ------------------------------------------------------------------------
 -- CONCRETE CERTIFICATE CARRIER -> FINAL RH SCALAR
 --
--- The canonical final Near/Far scalar is intentionally abstract.  A machine-
--- checkable finite certificate therefore must not be forced to use that scalar
--- definitionally.  The least-privilege bridge is instead:
+-- A machine-checkable certificate may live on a concrete scalar distinct from
+-- the final analytic Near/Far scalar.  Least privilege is:
 --
---   concrete certificate fold
---          | exact same-object embedding theorem
---          v
---   final nearResponseAt(J)
+--   R1: final nearResponseAt(J) = literal finite near sum
+--   C0: embed(concrete certified fold) = that same literal finite near sum
 --
--- together with one transport of the certificate's ordered upper relation into
--- the final Near/Far order.
+-- then equality transitivity compiles
 --
--- This permits an exact rational / interval backend to remain concrete without
--- asserting that rationals are definitionally the analytic real carrier.
+--   final nearResponseAt(J) = embed(concrete certified fold).
+--
+-- One order transport then moves the proof-carrying certified upper into the
+-- final Near/Far order.  No whole-scalar equality or quotient realization is
+-- required.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -28,6 +27,7 @@ import DASHI.Core.ProofCarryingFiniteSumEnclosureExact as Cert
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
+import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as Literal
 
 record ConcreteCertificateFinalScalarBridge
     {S : NearFar.OrderedAdditiveNearFarSurface}
@@ -53,6 +53,60 @@ record ConcreteCertificateFinalScalarBridge
     bridgeReference : String
 
 open ConcreteCertificateFinalScalarBridge public
+
+------------------------------------------------------------------------
+-- R1-FACTORED CONSTRUCTION OF THE BRIDGE
+------------------------------------------------------------------------
+
+record ConcreteCertificateLiteralFoldAttachment
+    {S : NearFar.OrderedAdditiveNearFarSurface}
+    {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
+    (offInput : Direct.DirectLiteralOffTargetInput S transport)
+    (kernel : Literal.FinalNearLiteralKernel offInput)
+    (carrier : Cert.FiniteAdditiveCarrier)
+    (certificate : Cert.ProofCarryingFiniteSumEnclosure carrier) : Set₁ where
+  private
+    finalScalar = NearFar.Scalar S
+    sourceScalar = Cert.Scalar carrier
+  field
+    embedLiteralFold : sourceScalar -> finalScalar
+
+    embeddedCertifiedFoldIsLiteralFiniteSum :
+      embedLiteralFold
+        (Cert.foldScalars carrier
+          (Cert.mapValues
+            (Cert.ProofCarryingFiniteSumEnclosure.evaluateTerm certificate)
+            (Cert.ProofCarryingFiniteSumEnclosure.terms certificate)))
+      ≡ Literal.finiteNearSum kernel (Literal.cellResponse kernel)
+
+    attachmentReference : String
+
+open ConcreteCertificateLiteralFoldAttachment public
+
+compileConcreteCertificateFinalScalarBridge :
+  forall {S transport offInput kernel carrier certificate} ->
+  ConcreteCertificateLiteralFoldAttachment
+    {S = S} {transport = transport}
+    offInput kernel carrier certificate ->
+  ConcreteCertificateFinalScalarBridge offInput carrier certificate
+compileConcreteCertificateFinalScalarBridge {kernel = kernel} attachment = record
+  { embed = embedLiteralFold attachment
+  ; finalNearIsEmbeddedCertifiedFold =
+      trans
+        (Literal.finalNearResponseIsLiteralFiniteSum kernel)
+        (sym (embeddedCertifiedFoldIsLiteralFiniteSum attachment))
+  ; bridgeReference = attachmentReference attachment
+  }
+  where
+  sym : forall {A : Set} {x y : A} -> x ≡ y -> y ≡ x
+  sym refl = refl
+
+  trans : forall {A : Set} {x y z : A} -> x ≡ y -> y ≡ z -> x ≡ z
+  trans refl yz = yz
+
+------------------------------------------------------------------------
+-- CERTIFIED UPPER TRANSPORT
+------------------------------------------------------------------------
 
 record ConcreteCertificateFinalUpperBridge
     {S : NearFar.OrderedAdditiveNearFarSurface}
@@ -106,9 +160,13 @@ record ConcreteCertificateFinalScalarBoundary : Set where
     certificateScalarMustDefinitionallyEqualFinalAnalyticScalarIsFalse :
       certificateScalarMustDefinitionallyEqualFinalAnalyticScalar ≡ false
 
-    exactEmbeddedFoldIdentityStillRequired : Bool
-    exactEmbeddedFoldIdentityStillRequiredIsTrue :
-      exactEmbeddedFoldIdentityStillRequired ≡ true
+    independentSecondFinalNearIdentityRequiredAfterR1 : Bool
+    independentSecondFinalNearIdentityRequiredAfterR1IsFalse :
+      independentSecondFinalNearIdentityRequiredAfterR1 ≡ false
+
+    embeddedConcreteFoldToLiteralSumStillRequired : Bool
+    embeddedConcreteFoldToLiteralSumStillRequiredIsTrue :
+      embeddedConcreteFoldToLiteralSumStillRequired ≡ true
 
     oneCertificateOrderTransportStillRequired : Bool
     oneCertificateOrderTransportStillRequiredIsTrue :
@@ -117,6 +175,10 @@ record ConcreteCertificateFinalScalarBoundary : Set where
     rationalCertificateBackendMayRemainConcrete : Bool
     rationalCertificateBackendMayRemainConcreteIsTrue :
       rationalCertificateBackendMayRemainConcrete ≡ true
+
+    r1PlusEmbeddedFoldCompilesFinalBridge : Bool
+    r1PlusEmbeddedFoldCompilesFinalBridgeIsTrue :
+      r1PlusEmbeddedFoldCompilesFinalBridge ≡ true
 
     concreteCertificateAloneProvesStrictClusterResponseMargin : Bool
     concreteCertificateAloneProvesStrictClusterResponseMarginIsFalse :
@@ -132,9 +194,11 @@ canonicalConcreteCertificateFinalScalarBoundary :
 canonicalConcreteCertificateFinalScalarBoundary =
   concrete-certificate-final-scalar-boundary
     false refl
+    false refl
+    true refl
     true refl
     true refl
     true refl
     false refl
     false refl
-    "Do not require a machine certificate scalar to be definitionally equal to the final analytic NearFar scalar. Keep the certificate backend concrete (for example exact rational/interval arithmetic), provide one proof-relevant embedding of the certified fold into final nearResponseAt(J), and transport the certified upper relation once. This removes an unnecessary concrete-real quotient prerequisite while preserving the genuine same-object representation theorem and the independent strict ClusterResponse margin."
+    "Keep the certificate backend concrete and distinct from the final analytic scalar. Do not require a second independent theorem saying final nearResponseAt(J)=embed(certifiedFold): reuse canonical R1, final nearResponseAt(J)=literal finite sum, and prove only that the embedded concrete certified fold is that same literal sum. Equality transitivity compiles the final bridge. One source-upper order transport is still required, and the strict ClusterResponse margin remains independent mathematics."
