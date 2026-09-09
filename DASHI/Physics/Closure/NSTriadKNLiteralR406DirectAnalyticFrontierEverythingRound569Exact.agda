@@ -22,19 +22,24 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 --   R577G welds those actual cells to R180's exact signed finite Gram ledger;
 --   R578  on a common output, the positive cell-mass part factors exactly as
 --         36 |k|^2 times the finite input-energy convolution;
---   R579  instantiates that statement on the literal physicalOutputFiber.
+--   R579  instantiates that statement on the literal physicalOutputFiber;
+--   R580  refines the single signed Gram residual into four quantitative Bony
+--         class residuals and proves those payments suffice with fixed factor 4;
+--   R581  constructs the exact finite routing receipt by zero-masked pointwise
+--         Bony channels and the existing foldPointwiseAdd theorem.
 --
 -- Separately, R577B reconciles the historical R328/R329 nested Schur producer
 -- with the MODERN R568 consumer.  It correctly keeps four receipts distinct:
 -- row, column, signed-response majorization, and cutoff-uniform Schur envelope.
 --
 -- The introspective result is therefore sharper than an opaque "commutator
--- estimate".  After R579 the positive local component is already on the exact
--- low-output finite convolution carrier with no variable multiplicity factor.
--- The live within-fibre analytic obstruction is the quantitative SIGNED Gram
--- residual of those literal fourSignInner cells.  A producer may pay it by a
--- Bony/Schur/commutator estimate; it need not prove covariance nonpositive.
--- The outer spectator-weighted spacetime passage remains downstream.
+-- estimate".  After R581 neither the helicity expansion, positive convolution,
+-- literal enumeration, nor Bony routing is an analytic residual.  The remaining
+-- within-fibre mathematics is quantitative cutoff-uniform payment of the four
+-- classwise signed Gram residuals on the literal fourSignInner carrier.  Those
+-- may be paid by Schur/Young/commutator estimates without demanding covariance
+-- nonpositive.  The outer spectator-weighted spacetime passage remains
+-- downstream.
 --
 -- Ordinary scalar FTC/order and initial-energy endpoint calibration remain
 -- separately typed standard/source-realization coordinates.  Nothing in this
@@ -65,6 +70,8 @@ import DASHI.Physics.Closure.NSTriadKNFourHelicityVectorRecombinationRound576Exa
 import DASHI.Physics.Closure.NSTriadKNFourSignInnerFibreGramBoundaryRound577Exact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputFourSignFibreMajorantRound578Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalOutputFourSignGramRound579Exact
+import DASHI.Physics.Closure.NSTriadKNFourSignBonyClassGramCompilerRound580Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -78,6 +85,12 @@ round569ComponentwiseNestedLowOutputConeIntegrated = true
 round569ExactVariableFibreGramBoundaryIntegrated : Bool
 round569ExactVariableFibreGramBoundaryIntegrated = true
 
+round569BonyClassGramCompilerIntegrated : Bool
+round569BonyClassGramCompilerIntegrated = true
+
+round569LiteralBonyRoutingIntegrated : Bool
+round569LiteralBonyRoutingIntegrated = true
+
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
 
@@ -86,6 +99,9 @@ round569NovelCommutatorSpacetimeBudgetClosed = false
 
 round569VariableFibreSignedGramResidualClosed : Bool
 round569VariableFibreSignedGramResidualClosed = false
+
+round569ClasswiseSignedGramResidualsClosed : Bool
+round569ClasswiseSignedGramResidualsClosed = false
 
 round569ClayPromotion : Bool
 round569ClayPromotion = false
