@@ -62,6 +62,13 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --     -> literal same-object R406 weld
 --     -> cutoff-uniform constant transport.
 --
+-- R536 applies the same least-privilege rule one level higher: even that
+-- T^3 <-> R^3 cross-domain transport is comparison/reuse structure, not a
+-- mandatory prerequisite for proving the literal R406 payment directly on one
+-- selected Clay domain. Inside the cross-domain lane its first residual is to
+-- choose a sourced transport mode (Poisson/periodisation, scaled-lattice limit,
+-- or another explicit normalization theorem); globally leaf A remains first.
+--
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
 ------------------------------------------------------------------------
@@ -116,3 +123,4 @@ import DASHI.Physics.Closure.NSTriadKNEuclideanTernary27SignChartBoundaryRound53
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignFibreOptionalForR406Round534Exact
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignCoverageDependencyReconciliationRound535Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406LatticeContinuumTransportConsumerRound535Exact
+import DASHI.Physics.Closure.NSTriadKNCrossDomainMeasureBridgeOptionalForClayRound536Exact
