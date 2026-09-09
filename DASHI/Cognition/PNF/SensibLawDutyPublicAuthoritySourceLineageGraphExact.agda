@@ -11,27 +11,23 @@ import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as Search
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
-import DASHI.Cognition.PNF.SensibLawCullenPublicAuthorityDutyCalibrationExact as Cullen
+import DASHI.Cognition.PNF.SensibLawCullenSourceCorrectDutyRoutesExact as Cullen
 import DASHI.Cognition.PNF.SensibLawDoctrinalGateInterventionDistributionExact as Gate
 import DASHI.Cognition.PNF.SensibLawTypedLegalAuthorityEdgeExact as Edge
 
 ------------------------------------------------------------------------
 -- SOURCE-OWNED DUTY / PUBLIC-AUTHORITY LINEAGE GRAPH
 --
--- This replaces a one-case calibration carrier with a finite graph whose rules
--- retain three distinct authority sources and proposition families:
+-- Mallonland, Cullen and Pabai remain distinct source/proposition families.
+-- Cullen now contributes TWO source-correct reasoning fibres rather than the
+-- old synthetic "statutory police functions/powers" premise bundle:
 --
---   Mallonland [2024] HCA 25
---     -> salient-features / foreseeability-insufficiency constraint;
---   Cullen [2026] HCA 19
---     -> positive operational public-authority duty holding;
---   Pabai [2025] FCA 796
---     -> current pleaded climate-policy obstruction surface.
+--   Joint reasons: positive conduct + foreseeable injury + police-function context
+--   Edelman: positive risk-creating acts + ordinary common-law duty analysis
+--            + no requirement that the intervention invoke statutory power.
 --
--- The source-specific propositions are calibrated to existing source owners.
--- Whenever this file turns a source proposition/gate into an implication for
--- executable graph search, that implication is marked dashReconstructionRole
--- unless the upstream owner already identifies the proposition as ratio.
+-- The implication-shaped graph edges are DASHI reconstruction unless an
+-- upstream source owner separately certifies a more specific authority role.
 ------------------------------------------------------------------------
 
 mallonlandSource : Algebra.LegalSourceRef
@@ -41,8 +37,7 @@ pabaiSource : Algebra.LegalSourceRef
 pabaiSource = Negligence.edgeSourceRef Edge.pabaiAuthority
 
 ------------------------------------------------------------------------
--- Mallonland: foreseeability is relevant but does not exhaust novel-duty
--- analysis; further salient relational/doctrinal features remain material.
+-- Mallonland.
 ------------------------------------------------------------------------
 
 mallonlandForeseeability : Algebra.LegalProposition
@@ -67,27 +62,21 @@ mallonlandSalientFeaturesRule = Algebra.legal-rule
   "Australia / High Court negligence duty analysis"
 
 ------------------------------------------------------------------------
--- Cullen: the upstream owner already identifies the specific public-authority
--- duty proposition as ratio with the three material features below.
+-- Cullen source-correct route aliases.
+--
+-- Compatibility name retained because downstream cut/reachability modules use
+-- it, but its premise list is now the Joint-reasons route and NOT the legacy
+-- bundled statutory-functions/powers carrier.
 ------------------------------------------------------------------------
 
 cullenPositiveOperationalDutyRule : Algebra.LegalRule
-cullenPositiveOperationalDutyRule = Algebra.legal-rule
-  (Ontology.stableId "rule:Cullen:source-lineage-positive-operational-duty")
-  (Cullen.positiveOperationalAct ∷
-   Cullen.foreseeablePhysicalInjuryRisk ∷
-   Cullen.statutoryPoliceFunction ∷ [])
-  Cullen.cullenDutyProposition
-  [] []
-  Cullen.cullenSource
-  Algebra.bindingRatioRole
-  "from 2026-06-17"
-  "Australia / High Court / NSW police operational conduct"
+cullenPositiveOperationalDutyRule = Cullen.jointReasonsDutyRule
+
+cullenEdelmanDutyRule : Algebra.LegalRule
+cullenEdelmanDutyRule = Cullen.edelmanDutyRule
 
 ------------------------------------------------------------------------
--- Pabai: this is a source-calibrated obstruction proposition. The edge below
--- remains DASHI reconstruction; it is deliberately not a universal rule that
--- every core-government-policy classification defeats every negligence duty.
+-- Pabai.
 ------------------------------------------------------------------------
 
 pabaiCoreGovernmentPolicy : Algebra.LegalProposition
@@ -112,13 +101,15 @@ pabaiPolicyObstructionRule = Algebra.legal-rule
   "Australia / Federal Court / pleaded Commonwealth climate-duty route"
 
 ------------------------------------------------------------------------
--- One richer authority graph. Distinct sources remain distinct graph objects.
+-- One richer authority graph.  Distinct Cullen routes remain distinct graph
+-- rules even though they share a source and conclusion.
 ------------------------------------------------------------------------
 
 dutyPublicAuthoritySourceLineageGraph : Algebra.LegalGraph
 dutyPublicAuthoritySourceLineageGraph = Algebra.legal-graph
   (mallonlandSalientFeaturesRule ∷
    cullenPositiveOperationalDutyRule ∷
+   cullenEdelmanDutyRule ∷
    pabaiPolicyObstructionRule ∷ [])
   (mallonlandSource ∷ Cullen.cullenSource ∷ pabaiSource ∷ [])
 
@@ -133,7 +124,13 @@ cullenHoldingFacts : Algebra.FactSet
 cullenHoldingFacts = Algebra.fact-set
   (Cullen.positiveOperationalAct ∷
    Cullen.foreseeablePhysicalInjuryRisk ∷
-   Cullen.statutoryPoliceFunction ∷ [])
+   Cullen.policeFunctionContext ∷ [])
+
+cullenEdelmanFacts : Algebra.FactSet
+cullenEdelmanFacts = Algebra.fact-set
+  (Cullen.positiveRiskCreatingActs ∷
+   Cullen.ordinaryCommonLawDutyAnalysis ∷
+   Cullen.statutoryPowerNotRequiredOnEdelmanRoute ∷ [])
 
 pabaiPolicyFacts : Algebra.FactSet
 pabaiPolicyFacts = Algebra.fact-set (pabaiCoreGovernmentPolicy ∷ [])
@@ -146,7 +143,7 @@ climateComparatorFacts = Algebra.fact-set
    pabaiCoreGovernmentPolicy ∷ [])
 
 ------------------------------------------------------------------------
--- Executable regressions on the richer source lineage.
+-- Executable regressions.
 ------------------------------------------------------------------------
 
 mallonlandConstraintReachable :
@@ -159,6 +156,11 @@ cullenSpecificDutyReachable :
     Cullen.cullenDutyProposition ≡ true
 cullenSpecificDutyReachable = refl
 
+cullenEdelmanDutyReachable :
+  Search.reachable 1 dutyPublicAuthoritySourceLineageGraph cullenEdelmanFacts
+    Cullen.cullenDutyProposition ≡ true
+cullenEdelmanDutyReachable = refl
+
 pabaiCurrentObstructionReachable :
   Search.reachable 1 dutyPublicAuthoritySourceLineageGraph pabaiPolicyFacts
     pabaiCurrentPleadedClimateDutyUnavailable ≡ true
@@ -166,9 +168,6 @@ pabaiCurrentObstructionReachable = refl
 
 ------------------------------------------------------------------------
 -- Cross-case non-transfer on the same graph.
---
--- Climate comparator facts do not manufacture Cullen's police/crowd-control
--- ratio, while Cullen facts do not manufacture the Pabai climate obstruction.
 ------------------------------------------------------------------------
 
 climateFactsDoNotReachCullenSpecificDuty :
@@ -207,11 +206,24 @@ cullenSpecificDutyProof = Algebra.byRule
         Algebra.[])))
   Algebra.[] Algebra.[]
 
+cullenEdelmanDutyProof :
+  Algebra.Reachable dutyPublicAuthoritySourceLineageGraph cullenEdelmanFacts
+    Cullen.cullenDutyProposition
+cullenEdelmanDutyProof = Algebra.byRule
+  (Algebra.there (Algebra.there Algebra.here))
+  tt
+  (Algebra._∷_ (Algebra.fromFact Algebra.here)
+    (Algebra._∷_ (Algebra.fromFact (Algebra.there Algebra.here))
+      (Algebra._∷_
+        (Algebra.fromFact (Algebra.there (Algebra.there Algebra.here)))
+        Algebra.[])))
+  Algebra.[] Algebra.[]
+
 pabaiCurrentObstructionProof :
   Algebra.Reachable dutyPublicAuthoritySourceLineageGraph pabaiPolicyFacts
     pabaiCurrentPleadedClimateDutyUnavailable
 pabaiCurrentObstructionProof = Algebra.byRule
-  (Algebra.there (Algebra.there Algebra.here))
+  (Algebra.there (Algebra.there (Algebra.there Algebra.here)))
   tt
   (Algebra._∷_ (Algebra.fromFact Algebra.here) Algebra.[])
   Algebra.[] Algebra.[]
@@ -224,6 +236,7 @@ data MallonlandGraphEdgeIsVerbatimJudicialTest : Set where
 data PabaiGraphEdgeIsUniversalCorePolicyNoDutyRule : Set where
 data CullenSpecificDutyAutomaticallyTransfersToClimate : Set where
 data SharedAuthorityGraphCollapsesSourceRoles : Set where
+data CullenJointAndEdelmanRoutesAreOnePremiseBundle : Set where
 
 mallonlandImplicationRemainsReconstruction :
   MallonlandGraphEdgeIsVerbatimJudicialTest → ⊥
@@ -239,3 +252,6 @@ cullenStillRequiresMaterialFit ()
 
 sharedGraphDoesNotFlattenAuthority : SharedAuthorityGraphCollapsesSourceRoles → ⊥
 sharedGraphDoesNotFlattenAuthority ()
+
+cullenRoutesRemainSeparate : CullenJointAndEdelmanRoutesAreOnePremiseBundle → ⊥
+cullenRoutesRemainSeparate ()
