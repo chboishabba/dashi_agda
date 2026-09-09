@@ -95,7 +95,8 @@ refinedNewtonianFixturesDistinct :
 refinedNewtonianFixturesDistinct ()
 
 ------------------------------------------------------------------------
--- Reuse marker: attach the sign probe to the existing GR weak-field limit.
+-- Same-object reuse: the sign probe consumes literal objects and a literal
+-- Poisson receipt from the existing WeakFieldNewtonianLimit carrier.
 ------------------------------------------------------------------------
 
 record SignedNewtonianLimitProbe
@@ -108,10 +109,15 @@ record SignedNewtonianLimitProbe
     poissonOrientation : PoissonSourceOrientation
     poissonOrientationMatches :
       poissonOrientation ≡ poissonSourceOrientation couplingSign densitySign
-    usesExistingNewtonianPotential :
-      Laws.WeakFieldNewtonianLimit.NewtonianPotential limit → Set
-    usesExistingSourceDensity :
-      Laws.WeakFieldNewtonianLimit.SourceDensity limit → Set
+
+    newtonianPotential :
+      Laws.WeakFieldNewtonianLimit.NewtonianPotential limit
+    sourceDensity :
+      Laws.WeakFieldNewtonianLimit.SourceDensity limit
+    poissonReceipt :
+      Laws.WeakFieldNewtonianLimit.poissonEquation
+        limit newtonianPotential sourceDensity
+
     SignedLimitAdequacy : Set
     signedLimitAdequacy : SignedLimitAdequacy
 
@@ -127,7 +133,8 @@ record SignedNewtonianLimitBoundary : Set where
     negativeGAutomaticallyPreservesBoundOrbits : Bool
     negativeGAutomaticallyProvesAntigravity : Bool
     fullNegativeGLimitRequiresReSolvedPotentialAndTrajectories : Bool
+    exactExistingPoissonReceiptRequired : Bool
 
 canonicalSignedNewtonianLimitBoundary : SignedNewtonianLimitBoundary
 canonicalSignedNewtonianLimitBoundary =
-  signed-newtonian-limit-boundary true false false false false false true
+  signed-newtonian-limit-boundary true false false false false false true true
