@@ -1,6 +1,7 @@
 module DASHI.GameTheory.Everything where
 
 import DASHI.GameTheory.StrategicInteractionCoreExact
+import DASHI.GameTheory.FiniteMixedStrategyExpectedUtilityExact
 import DASHI.GameTheory.AgenticStrategicInteractionBridgeExact
 import DASHI.GameTheory.EvolutionaryStrategicSelectionBridgeExact
 import DASHI.GameTheory.RepeatedStrategicLearningMemoryBridgeExact
