@@ -7,11 +7,13 @@ import DASHI.Law.SensibLawBrightonS185HistoricalAuthoritySourceExact as Historic
 import DASHI.Cognition.PNF.SensibLawBrightonS185HistoricalAuthorityWeldExact as Weld
 import DASHI.Cognition.PNF.SensibLawBrightonS185ViolationElementFrontierExact as Frontier
 import DASHI.Cognition.PNF.SensibLawBrightonS185Subsection3aCompilerExact as Compiler
+import DASHI.Law.SensibLawBrightonObjectiveUnfitnessAcquisitionDemandExact as Acquisition
 
 open Historical.HistoricalS185SourceVersionBoundary
 open Weld.BrightonHistoricalAuthorityWeldBoundary
 open Frontier.BrightonS185ViolationElementFrontierBoundary
 open Compiler.BrightonS185Subsection3aCompilerBoundary
+open Acquisition.ObjectiveUnfitnessAcquisitionState
 
 historicalVersionPinned :
   exactVersionIdentityPinned Historical.canonicalHistoricalS185SourceVersionBoundary ≡ true
@@ -60,6 +62,26 @@ objectiveUnfitnessIsFirstOpen = refl
 objectiveUnfitnessStillUnresolved :
   Frontier.firstOpenElementDispositionUnresolved Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
 objectiveUnfitnessStillUnresolved = refl
+
+contractorInspectionExistenceConfirmed :
+  Acquisition.contractorInspectionExistenceConfirmed
+    Acquisition.canonicalObjectiveUnfitnessAcquisitionState ≡ true
+contractorInspectionExistenceConfirmed = refl
+
+contractorReportStillMissing :
+  Acquisition.contractorReportInHand
+    Acquisition.canonicalObjectiveUnfitnessAcquisitionState ≡ false
+contractorReportStillMissing = refl
+
+contractorFindingsStillMissing :
+  Acquisition.exactContractorFindingsInHand
+    Acquisition.canonicalObjectiveUnfitnessAcquisitionState ≡ false
+contractorFindingsStillMissing = refl
+
+objectiveClassificationStillUnpaid :
+  Acquisition.objectiveUnfitnessClassificationPaid
+    Acquisition.canonicalObjectiveUnfitnessAcquisitionState ≡ false
+objectiveClassificationStillUnpaid = refl
 
 agentWordsDoNotAutoPayObjectiveUnfitness :
   agentCharacterisationAutomaticallyPaysObjectiveUnfitness Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
