@@ -8,15 +8,15 @@ open import Data.Empty using (⊥)
 import DASHI.Analysis.RiemannG2FinalPoleQuotientMinimalAnalyticCutExact as Cut
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as NearObserver
 import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact as PhaseLaw
-import DASHI.Analysis.RiemannG2LiteralPhaseJointMarginCompilerExact as LiteralMargin
+import DASHI.Analysis.RiemannG2LiteralPhaseDirectClusterResponseExact as PhaseDirect
 
 ------------------------------------------------------------------------
 -- INTROSPECTIVE BINDING FOR THE CURRENT RH HIGH-ZERO SCALAR LEAF
 --
--- The final cut has already pruned the separate near/Gamma allowance leaves.
--- The surviving analytic theorem is exactly the independent literal complement
--- margin.  This owner prevents adjacent representation/downstream coordinates
--- or a visually compelling decomposition from being counted as payment.
+-- The historical minimal cut still names the independent complement-margin
+-- coordinate. The refined consumer beneath it is now strictly smaller: the
+-- literal phase-visible complement is compared directly with the actual final
+-- ClusterResponse. Intermediate M_cluster is pruned.
 ------------------------------------------------------------------------
 
 data RHFinalProducer : Set where
@@ -83,18 +83,6 @@ currentRHProducerTargetsExactAnalyticLeaf = refl
 
 ------------------------------------------------------------------------
 -- SECOND-LEVEL INTROSPECTION: OBSERVER INSIDE THE LIVE SCALAR LEAF
---
--- The terminal leaf mentions D_near(J), but the final transport exposes that
--- object first as the scalar `nearResponseAt J`.  Count/envelope observations
--- collapse phase-distinct states, so the first universal refinement remains a
--- SAME-OBJECT literal model whose finite target-centred cosine sum is exactly
--- that final scalar.
---
--- Once that model is supplied, proof search branches.  A direct signed-cosine
--- theorem can act immediately on the literal sum.  A Fourier/modulation proof
--- additionally needs the proof-relevant b -> b-t translation/modulation law.
--- A full Weil target window is a still-stronger optional route.  None of these
--- representation refinements is the analytic payment itself.
 ------------------------------------------------------------------------
 
 data RHInnerCoordinate : Set where
@@ -105,7 +93,7 @@ data RHInnerCoordinate : Set where
   proofRelevantTargetTranslationModulation : RHInnerCoordinate
   taperRegularityForFourierOrIBP : RHInnerCoordinate
   fullWeilTargetWindowRealisation : RHInnerCoordinate
-  literalJointComplementPayment : RHInnerCoordinate
+  literalBelowActualClusterResponsePayment : RHInnerCoordinate
 
 
 data RHInnerState : Set where
@@ -123,7 +111,7 @@ innerState directPostCrossingSignedCosineEstimate = theoremPayment
 innerState proofRelevantTargetTranslationModulation = routeSpecificRefinement
 innerState taperRegularityForFourierOrIBP = routeSpecificRefinement
 innerState fullWeilTargetWindowRealisation = optionalStrongerRefinement
-innerState literalJointComplementPayment = theoremPayment
+innerState literalBelowActualClusterResponsePayment = theoremPayment
 
 currentInnerMissingCoordinate : RHInnerCoordinate
 currentInnerMissingCoordinate = finalNearLiteralSameObjectModel
@@ -152,10 +140,20 @@ proofRelevantPhaseLawIsNotInhabitedHere :
     PhaseLaw.canonicalProofRelevantTranslationModulationBoundary ≡ false
 proofRelevantPhaseLawIsNotInhabitedHere = refl
 
-literalPhasePaymentIsTheoremBearingEndpoint :
-  LiteralMargin.LiteralPhaseJointMarginBoundary.literalPhasePaymentCompilesCanonicalOneLeafMargin
-    LiteralMargin.canonicalLiteralPhaseJointMarginBoundary ≡ true
-literalPhasePaymentIsTheoremBearingEndpoint = refl
+literalPhaseEndpointTargetsActualClusterResponse :
+  PhaseDirect.LiteralPhaseDirectClusterBoundary.literalPhaseTheoremTargetsActualClusterResponse
+    PhaseDirect.canonicalLiteralPhaseDirectClusterBoundary ≡ true
+literalPhaseEndpointTargetsActualClusterResponse = refl
+
+intermediateClusterMarginNotRequiredByEndpoint :
+  PhaseDirect.LiteralPhaseDirectClusterBoundary.intermediateClusterMarginPrimitive
+    PhaseDirect.canonicalLiteralPhaseDirectClusterBoundary ≡ false
+intermediateClusterMarginNotRequiredByEndpoint = refl
+
+endpointCannotSeeFinalBalance :
+  PhaseDirect.LiteralPhaseDirectClusterBoundary.analyticPaymentCanAccessFinalBalance
+    PhaseDirect.canonicalLiteralPhaseDirectClusterBoundary ≡ false
+endpointCannotSeeFinalBalance = refl
 
 record BoundRHInnerRefinement : Set where
   constructor bound-rh-inner-refinement
@@ -180,7 +178,7 @@ currentBoundRHInnerRefinement =
     false refl
 
 ------------------------------------------------------------------------
--- Route admission.  Do not overconstrain the direct cosine route with Fourier
+-- Route admission. Do not overconstrain the direct cosine route with Fourier
 -- structure it does not consume.
 ------------------------------------------------------------------------
 
