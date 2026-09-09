@@ -7,6 +7,7 @@ import DASHI.Interop.ITIRSuiteNormalizedCompilerParityExact as ITIRParity
 import DASHI.Interop.ITIRSuiteNormalizedCompilerStageParityWitnessExact as StageParity
 import DASHI.Interop.ITIRRecordingManifestSensibLawAdapterExact as RecordingParity
 import DASHI.Interop.ITIRTemporalHealthSensibLawAdapterExact as HealthParity
+import DASHI.Interop.ITIRSubmittedEvidencePackageSensibLawAdapterExact as PackageParity
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current Russell / ITIR / SensibLaw tranche.
@@ -31,3 +32,8 @@ selectedRecordingParity = RecordingParity.canonicalITIRRecordingSensibLawParityB
 
 selectedTemporalHealthParity : HealthParity.ITIRTemporalHealthSensibLawParityBoundary
 selectedTemporalHealthParity = HealthParity.canonicalITIRTemporalHealthSensibLawParityBoundary
+
+selectedSubmittedEvidencePackageParity :
+  PackageParity.ITIRSubmittedEvidencePackageParityBoundary
+selectedSubmittedEvidencePackageParity =
+  PackageParity.canonicalITIRSubmittedEvidencePackageParityBoundary
