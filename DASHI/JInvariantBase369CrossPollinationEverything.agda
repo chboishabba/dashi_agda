@@ -45,6 +45,11 @@ import DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact
 -- observer distinct from the exact sqrt(3)/2 analytic height.
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 
+-- Exact forward scale law for that same seam: k |-> k^2+k+1.  The remaining
+-- geometric debt is the inverse same-object recognition from the rendered or
+-- refinement-scale carrier back to this modular-word index.
+import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
+
 -- Tesla/Base369 refinement is the commuting null model for seam transport:
 -- an independent balanced-trit fibre commutes with both 2- and 3-refinement,
 -- while explicit resolution-sensitive fixtures demonstrate the exact model
@@ -56,13 +61,14 @@ import DASHI.Moonshine.GoldenRatioBinaryTernaryFibreConstructionExact
 
 -- Preferred repo-native phi path: the signed-FRACTRAN word [-,+] acts as
 -- exactly two Fibonacci updates on a two-register fibre.  Repeated macros give
--- 2/1, 5/3, 13/8, 34/21,... while the real phi limit remains explicit debt.
+-- 2/1, 5/3, 13/8, 34/21,... while the ratio-to-limit theorem remains debt.
 import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 
 -- Quadratic approximation / codec / prime-compression tranche.  This includes
 -- the exact Fibonacci defect involution on the existing 3/6/9/27 carriers,
--- the rich defect-magnitude + signed-prime fibre lift, and an explicit
--- same-object arithmetic trajectory 2/1 -> 3/2 -> 5/3.
+-- the rich defect-magnitude + signed-prime fibre lift, an explicit arithmetic
+-- trajectory 2/1 -> 3/2 -> 5/3, and a proof-bearing construction of phi on the
+-- existing Bishop real carrier.
 import DASHI.Moonshine.QuadraticSignedApproximationEverything
 
 -- Same-object Klein-j construction shape g2^3/Delta plus source-described
