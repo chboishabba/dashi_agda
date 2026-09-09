@@ -28,24 +28,17 @@ data CausalEstimandKind : Set where
   trajectoryEffect : CausalEstimandKind
   neuralBehaviouralInterventionEffect : CausalEstimandKind
 
-------------------------------------------------------------------------
--- Common estimand scope.
-------------------------------------------------------------------------
-
 record CausalEstimandScope : Set₁ where
   constructor causal-estimand-scope
   field
     Unit Population Intervention Comparator Outcome Time : Set
-
     inPopulation : Unit → Population → Set
     interventionOutcome : Unit → Intervention → Time → Outcome
     comparatorOutcome : Unit → Comparator → Time → Outcome
-
     population : Population
     intervention : Intervention
     comparator : Comparator
     horizon : Time
-
     populationReference : String
     interventionReference : String
     comparatorReference : String
@@ -54,24 +47,16 @@ record CausalEstimandScope : Set₁ where
 
 open CausalEstimandScope public
 
-------------------------------------------------------------------------
--- Domain-supplied contrast and aggregation semantics.
-------------------------------------------------------------------------
-
 record EffectAlgebra (scope : CausalEstimandScope) : Set₁ where
   constructor effect-algebra
   field
     EffectValue : Set
-
-    unitContrast :
-      Unit scope → Outcome scope → Outcome scope → EffectValue
-
+    unitContrast : Unit scope → Outcome scope → Outcome scope → EffectValue
     PopulationAggregate : Set
     aggregatePopulation :
       Population scope →
       (Unit scope → EffectValue) →
       PopulationAggregate
-
     aggregationReference : String
     contrastReference : String
 
@@ -83,15 +68,8 @@ unitEffectAtHorizon :
   Unit scope → EffectValue algebra
 unitEffectAtHorizon scope algebra unit =
   unitContrast algebra unit
-    (interventionOutcome scope unit
-      (intervention scope) (horizon scope))
-    (comparatorOutcome scope unit
-      (comparator scope) (horizon scope))
-
-------------------------------------------------------------------------
--- Population-average effect.  The owner names the population and aggregation
--- but does not identify PopulationAggregate with a real-valued expectation.
-------------------------------------------------------------------------
+    (interventionOutcome scope unit (intervention scope) (horizon scope))
+    (comparatorOutcome scope unit (comparator scope) (horizon scope))
 
 record AveragePopulationEffectEstimand
     (scope : CausalEstimandScope)
@@ -104,15 +82,9 @@ record AveragePopulationEffectEstimand
       ≡ aggregatePopulation algebra
           (population scope)
           (unitEffectAtHorizon scope algebra)
-
     estimandReference : String
 
 open AveragePopulationEffectEstimand public
-
-------------------------------------------------------------------------
--- Effect among treated/exposed units.  Treated membership is explicit; ATT is
--- not definitionally the same object as a population-average effect.
-------------------------------------------------------------------------
 
 record AverageTreatedEffectEstimand
     (scope : CausalEstimandScope)
@@ -120,30 +92,22 @@ record AverageTreatedEffectEstimand
   constructor average-treated-effect-estimand
   field
     Treated : Unit scope → Set
-
     TreatedPopulation : Set
     treatedPopulation : TreatedPopulation
-
     aggregateTreated :
       TreatedPopulation →
       (Unit scope → EffectValue algebra) →
       PopulationAggregate algebra
-
     aggregate : PopulationAggregate algebra
     aggregateIsTreatedContrast :
       aggregate
       ≡ aggregateTreated
           treatedPopulation
           (unitEffectAtHorizon scope algebra)
-
     treatedDefinitionReference : String
     estimandReference : String
 
 open AverageTreatedEffectEstimand public
-
-------------------------------------------------------------------------
--- Individual / lineage-specific effect.
-------------------------------------------------------------------------
 
 record IndividualLineageEffectEstimand
     (scope : CausalEstimandScope)
@@ -151,24 +115,14 @@ record IndividualLineageEffectEstimand
   constructor individual-lineage-effect-estimand
   field
     selectedUnit : Unit scope
-    selectedUnitInPopulation :
-      inPopulation scope selectedUnit (population scope)
-
+    selectedUnitInPopulation : inPopulation scope selectedUnit (population scope)
     effect : EffectValue algebra
     effectIsSelectedUnitContrast :
       effect ≡ unitEffectAtHorizon scope algebra selectedUnit
-
     lineageOrSubjectReference : String
     estimandReference : String
 
 open IndividualLineageEffectEstimand public
-
-------------------------------------------------------------------------
--- Mediation estimands.
---
--- Direct and indirect effects require an explicit mediator carrier and separate
--- domain-supplied effect propositions.  No additive decomposition is assumed.
-------------------------------------------------------------------------
 
 record MediationEstimandSurface
     (scope : CausalEstimandScope) : Set₁ where
@@ -177,58 +131,39 @@ record MediationEstimandSurface
     Mediator : Set
     mediatorUnderIntervention : Unit scope → Intervention scope → Time scope → Mediator
     mediatorUnderComparator : Unit scope → Comparator scope → Time scope → Mediator
-
     DirectEffect : Set
     IndirectEffect : Set
-
     directEffectReceipt : DirectEffect
     indirectEffectReceipt : IndirectEffect
-
     mediatorReference : String
     directEffectReference : String
     indirectEffectReference : String
 
 open MediationEstimandSurface public
 
-------------------------------------------------------------------------
--- Trajectory effect.
-------------------------------------------------------------------------
-
 record TrajectoryEffectEstimand
     (scope : CausalEstimandScope) : Set₁ where
   constructor trajectory-effect-estimand
   field
     TrajectoryEffect : Set
-
-    interventionTrajectory :
-      Unit scope → Time scope → Outcome scope
-    comparatorTrajectory :
-      Unit scope → Time scope → Outcome scope
-
+    interventionTrajectory : Unit scope → Time scope → Outcome scope
+    comparatorTrajectory : Unit scope → Time scope → Outcome scope
     trajectoryEffectReceipt : TrajectoryEffect
-
     pathReference : String
     estimandReference : String
 
 open TrajectoryEffectEstimand public
-
-------------------------------------------------------------------------
--- Neural/behavioural intervention effect.
-------------------------------------------------------------------------
 
 record NeuralBehaviouralEffectEstimand
     (scope : CausalEstimandScope) : Set₁ where
   constructor neural-behavioural-effect-estimand
   field
     NeuralReadout BehaviourReadout CognitiveReadout : Set
-
     neuralReadout : Unit scope → Intervention scope → Time scope → NeuralReadout
     behaviourReadout : Unit scope → Intervention scope → Time scope → BehaviourReadout
     cognitiveReadout : Unit scope → Intervention scope → Time scope → CognitiveReadout
-
     Effect : Set
     effectReceipt : Effect
-
     neuralReference : String
     behaviourReference : String
     cognitiveReference : String
@@ -236,43 +171,28 @@ record NeuralBehaviouralEffectEstimand
 
 open NeuralBehaviouralEffectEstimand public
 
-------------------------------------------------------------------------
--- Kind-indexed witness.
---
--- This prevents a bare tag from relabelling one estimand as another.  The
--- proposition carried by the generic estimand is derived from the specialised
--- witness rather than supplied independently.
-------------------------------------------------------------------------
-
 data EstimandKindWitness
     (scope : CausalEstimandScope)
     (algebra : EffectAlgebra scope) :
     CausalEstimandKind → Set₁ where
-
   averagePopulationWitness :
     AveragePopulationEffectEstimand scope algebra →
     EstimandKindWitness scope algebra averagePopulationEffect
-
   averageTreatedWitness :
     AverageTreatedEffectEstimand scope algebra →
     EstimandKindWitness scope algebra averageTreatedEffect
-
   individualLineageWitness :
     IndividualLineageEffectEstimand scope algebra →
     EstimandKindWitness scope algebra individualOrLineageEffect
-
   controlledDirectWitness :
     MediationEstimandSurface scope →
     EstimandKindWitness scope algebra controlledDirectEffect
-
   mediatedIndirectWitness :
     MediationEstimandSurface scope →
     EstimandKindWitness scope algebra mediatedIndirectEffect
-
   trajectoryWitness :
     TrajectoryEffectEstimand scope →
     EstimandKindWitness scope algebra trajectoryEffect
-
   neuralBehaviouralWitness :
     NeuralBehaviouralEffectEstimand scope →
     EstimandKindWitness scope algebra neuralBehaviouralInterventionEffect
@@ -280,19 +200,22 @@ data EstimandKindWitness
 EstimandEffectProposition :
   ∀ {scope algebra kind} →
   EstimandKindWitness scope algebra kind → Set
-EstimandEffectProposition (averagePopulationWitness estimand) =
+EstimandEffectProposition {scope} {algebra}
+  (averagePopulationWitness estimand) =
   aggregate estimand
-  ≡ aggregatePopulation _
-      (population _)
-      (unitEffectAtHorizon _ _)
-EstimandEffectProposition (averageTreatedWitness estimand) =
+  ≡ aggregatePopulation algebra
+      (population scope)
+      (unitEffectAtHorizon scope algebra)
+EstimandEffectProposition {scope} {algebra}
+  (averageTreatedWitness estimand) =
   aggregate estimand
   ≡ aggregateTreated estimand
       (treatedPopulation estimand)
-      (unitEffectAtHorizon _ _)
-EstimandEffectProposition (individualLineageWitness estimand) =
+      (unitEffectAtHorizon scope algebra)
+EstimandEffectProposition {scope} {algebra}
+  (individualLineageWitness estimand) =
   effect estimand
-  ≡ unitEffectAtHorizon _ _ (selectedUnit estimand)
+  ≡ unitEffectAtHorizon scope algebra (selectedUnit estimand)
 EstimandEffectProposition (controlledDirectWitness mediation) =
   DirectEffect mediation
 EstimandEffectProposition (mediatedIndirectWitness mediation) =
@@ -321,10 +244,6 @@ estimandEffectReceipt (trajectoryWitness estimand) =
 estimandEffectReceipt (neuralBehaviouralWitness estimand) =
   NeuralBehaviouralEffectEstimand.effectReceipt estimand
 
-------------------------------------------------------------------------
--- Generic selected estimand.
-------------------------------------------------------------------------
-
 record CausalEffectEstimand : Set₂ where
   constructor causal-effect-estimand
   field
@@ -332,24 +251,17 @@ record CausalEffectEstimand : Set₂ where
     algebra : EffectAlgebra scope
     kind : CausalEstimandKind
     kindWitness : EstimandKindWitness scope algebra kind
-
     estimandReference : String
     scopeReference : String
 
 open CausalEffectEstimand public
 
 EffectProposition : CausalEffectEstimand → Set
-EffectProposition estimand =
-  EstimandEffectProposition (kindWitness estimand)
+EffectProposition estimand = EstimandEffectProposition (kindWitness estimand)
 
 effectReceipt :
   (estimand : CausalEffectEstimand) → EffectProposition estimand
-effectReceipt estimand =
-  estimandEffectReceipt (kindWitness estimand)
-
-------------------------------------------------------------------------
--- Bind an estimand to the already-identified cross-level causal attribution.
-------------------------------------------------------------------------
+effectReceipt estimand = estimandEffectReceipt (kindWitness estimand)
 
 record CausalAttributionEstimandBinding
     {Value : Set}
@@ -361,80 +273,53 @@ record CausalAttributionEstimandBinding
   constructor causal-attribution-estimand-binding
   field
     effectTypeMatchesEstimand :
-      Router.CausalEffect attribution claim
-      ≡ EffectProposition estimand
-
+      Router.CausalEffect attribution claim ≡ EffectProposition estimand
     attributedEffectIsEstimandEffect :
       subst (λ Effect → Effect)
         effectTypeMatchesEstimand
         (Router.effectWitness attribution)
       ≡ effectReceipt estimand
-
     consumerReference : String
     bindingReference : String
 
 open CausalAttributionEstimandBinding public
 
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
-
 data IdentificationMeansEstimandKnownPermission : Set where
-
 data PopulationEffectMeansIndividualEffectPermission : Set where
-
 data IndividualEffectMeansPopulationEffectPermission : Set where
-
 data ATTMeansATEPermission : Set where
-
 data EndpointEffectMeansTrajectoryEffectPermission : Set where
-
 data DirectEffectMeansIndirectEffectPermission : Set where
-
 data NeuralEffectMeansThoughtIdentityPermission : Set where
-
 data InternalEffectMeansUniversalTransportPermission : Set where
-
 data CausalEffectWithoutPopulationTimeInterventionPermission : Set where
-
 data EstimandTagWithoutMatchingWitnessPermission : Set where
 
 identificationDoesNotDetermineEstimand :
   IdentificationMeansEstimandKnownPermission → ⊥
 identificationDoesNotDetermineEstimand ()
-
 populationEffectDoesNotDetermineIndividualEffect :
   PopulationEffectMeansIndividualEffectPermission → ⊥
 populationEffectDoesNotDetermineIndividualEffect ()
-
 individualEffectDoesNotDeterminePopulationEffect :
   IndividualEffectMeansPopulationEffectPermission → ⊥
 individualEffectDoesNotDeterminePopulationEffect ()
-
-attDoesNotDefinitionallyEqualAte :
-  ATTMeansATEPermission → ⊥
+attDoesNotDefinitionallyEqualAte : ATTMeansATEPermission → ⊥
 attDoesNotDefinitionallyEqualAte ()
-
 endpointEffectDoesNotDetermineTrajectoryEffect :
   EndpointEffectMeansTrajectoryEffectPermission → ⊥
 endpointEffectDoesNotDetermineTrajectoryEffect ()
-
 directEffectDoesNotDetermineIndirectEffect :
   DirectEffectMeansIndirectEffectPermission → ⊥
 directEffectDoesNotDetermineIndirectEffect ()
-
-neuralEffectDoesNotIdentifyThought :
-  NeuralEffectMeansThoughtIdentityPermission → ⊥
+neuralEffectDoesNotIdentifyThought : NeuralEffectMeansThoughtIdentityPermission → ⊥
 neuralEffectDoesNotIdentifyThought ()
-
 internalEffectDoesNotAutomaticallyTransport :
   InternalEffectMeansUniversalTransportPermission → ⊥
 internalEffectDoesNotAutomaticallyTransport ()
-
 causalEffectCannotFloatFreeOfScope :
   CausalEffectWithoutPopulationTimeInterventionPermission → ⊥
 causalEffectCannotFloatFreeOfScope ()
-
 estimandKindCannotFloatFreeOfMatchingWitness :
   EstimandTagWithoutMatchingWitnessPermission → ⊥
 estimandKindCannotFloatFreeOfMatchingWitness ()
