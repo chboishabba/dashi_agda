@@ -16,7 +16,7 @@ import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingReplicationI
 --
 -- Forward direction: a promoted interpretation needs explicit same-object
 -- receipts. Reverse direction: every absent receipt is justified by a concrete
--- observer collision that it must discriminate.  This is a scheduler over
+-- observer collision that it must discriminate. This is a scheduler over
 -- existing owners, not a new experimental ontology.
 ------------------------------------------------------------------------
 
@@ -105,6 +105,13 @@ currentScientificWallDiscriminator = requiredDiscriminator currentScientificWall
 currentScientificWallStartsAtMassCurrent :
   currentScientificWallDiscriminator ≡ componentResolvedMassCurrent
 currentScientificWallStartsAtMassCurrent = refl
+
+currentScientificWallProducer : Search.ProducerClass
+currentScientificWallProducer = producerForScientificWall currentScientificWallDiscriminator
+
+currentScientificWallProducerIsEmpiricalEvidence :
+  currentScientificWallProducer ≡ Search.empiricalEvidenceProducer
+currentScientificWallProducerIsEmpiricalEvidence = refl
 
 ------------------------------------------------------------------------
 -- Attribution shape.
