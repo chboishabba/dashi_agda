@@ -42,3 +42,4 @@ import DASHI.Wikimedia.MaboConcreteQidGraphProjectionExact
 import DASHI.Wikimedia.WikipediaFirstLinkNetworkExact
 import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact
 import DASHI.Wikimedia.IbrahimEnglishParentCoverageGapAtlasExact
+import DASHI.Wikimedia.IbrahimEnglishSocialScienceFunnelBridgeExact
