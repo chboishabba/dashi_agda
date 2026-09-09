@@ -15,6 +15,7 @@ files=(
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryBackgroundClosureExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryOrdinaryModelClosureWeldExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact.agda
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1991CombinedFieldSourceEntitlementExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1992CoupledPotentialSourceEntitlementExact.agda
 )
@@ -38,6 +39,9 @@ grep -q 'fullOrdinaryClosureStillLeavesConstitutiveRatio' DASHI/Physics/ExoticGr
 grep -q 'etaCStringAlonePaysConstitutiveRatio' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact.agda
 grep -q 'independentReplicationRequired' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact.agda
 grep -q 'compileConstitutiveNegativeGReceipt' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact.agda
+grep -q 'sameReplicationCarrier' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
+grep -q 'sameScalingSweepCarrier' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
+grep -q 'closedScalingStateAutomaticallyProvesNegativeEffectiveG' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
 grep -q 'authorityClosurePaysSourceCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
@@ -45,4 +49,4 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda
 
-echo "Material-effective negative-G source/provenance/GR/background/constitutive validation checks passed"
+echo "Material-effective negative-G source/provenance/GR/background/constitutive/replication validation checks passed"
