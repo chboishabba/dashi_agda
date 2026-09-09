@@ -36,10 +36,12 @@ FILES=(
   DASHI/GameTheory/GameTheorySourceAtlasExact.agda
   DASHI/GameTheory/StrategicInteractionCoreExact.agda
   DASHI/GameTheory/FiniteMixedStrategyExpectedUtilityExact.agda
+  DASHI/GameTheory/FiniteMixedNashProductCorrectionExact.agda
   DASHI/GameTheory/FiniteIncompleteInformationBayesianExact.agda
   DASHI/GameTheory/SequentialExtensiveFormExact.agda
   DASHI/GameTheory/SequentialGameFractranWolframCrossPollinationExact.agda
   DASHI/GameTheory/GameComputationSourceAttributionExact.agda
+  DASHI/GameTheory/TernaryLifeStrategicKernelBridgeExact.agda
   DASHI/GameTheory/AgenticStrategicInteractionBridgeExact.agda
   DASHI/GameTheory/EvolutionaryStrategicSelectionBridgeExact.agda
   DASHI/GameTheory/EvolutionaryInvasionStabilityExact.agda
@@ -71,4 +73,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / metabolic admissibility / proto-agency / heritable agentic organisation / open-ended repertoire / historical evidence / multiscale causal provenance / causal identification families / causal estimands / estimator-uncertainty realization / finite rational expectation / estimator guarantees / metric consistency / finite dispersion-MSE / finite probability consistency / finite test distribution convergence / weak-normal-limit debt split / asymptotic proof-debt frontier / attributed pure-mixed-Bayesian-sequential game theory / FRACTRAN-Wolfram strategic computation / agentic-evolutionary ESS-replicator-memory-cooperative-mechanism-identification game bridges / DNA-neural-memory-trauma-Amalek cross-pollination checks passed"
+echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / metabolic admissibility / proto-agency / heritable agentic organisation / open-ended repertoire / historical evidence / multiscale causal provenance / causal identification families / causal estimands / estimator-uncertainty realization / finite rational expectation / estimator guarantees / metric consistency / finite dispersion-MSE / finite probability consistency / finite test distribution convergence / weak-normal-limit debt split / asymptotic proof-debt frontier / corrected product-law mixed Nash / ternary-Life pure-Nash fixture / attributed pure-mixed-Bayesian-sequential game theory / FRACTRAN-Wolfram strategic computation / agentic-evolutionary ESS-replicator-memory-cooperative-mechanism-identification game bridges / DNA-neural-memory-trauma-Amalek cross-pollination checks passed"
