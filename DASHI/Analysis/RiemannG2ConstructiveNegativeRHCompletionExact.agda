@@ -2,28 +2,16 @@ module DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
-import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as High
+import DASHI.Analysis.RiemannG2UniformHighContradictionExact as High
+import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as LiteralHigh
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
-
-------------------------------------------------------------------------
--- CONSTRUCTIVE NEGATIVE RH COMPLETION
---
--- The direct high contradiction does not need double-negation elimination.  The
--- canonical high input is now the literal phase-visible theorem family itself:
--- for each arbitrary high off-line zero, an unpaid final context, exact literal
--- near model, and independent phase+far+Gamma strict margin.
---
--- The canonical Low region is definitionally the exact Platt--Trudgian
--- verified-region predicate.  Low positive criticality and high contradiction
--- compile to double-negated RH.  Only the final conversion to prize-facing
--- positive RH consumes the critical-predicate refinement.
-------------------------------------------------------------------------
 
 Not : Set -> Set
 Not P = P -> ⊥
@@ -39,6 +27,65 @@ DoubleNegatedRiemannHypothesisFor analytic =
     (Analytic.CompletedRiemannZeta.criticalLine
       (Analytic.AnalyticSubstrate.completed analytic) s))
 
+------------------------------------------------------------------------
+-- CANONICAL GENERIC HIGH INPUT
+------------------------------------------------------------------------
+
+record GenericHighNegativeRHInput
+    (analytic : Analytic.AnalyticSubstrate) : Set₁ where
+  field
+    genericLowTransport : Low.PlattTrudgianVerifiedRegionTransport analytic
+    GenericHighRegion : Universal.AnalyticNontrivialZero analytic -> Set
+    genericVerifiedOrHighCover :
+      (rho : Universal.AnalyticNontrivialZero analytic) ->
+      Low.CanonicalLowRegion genericLowTransport rho ⊎ GenericHighRegion rho
+    genericHighProducer :
+      High.UniformHighContradictionProducer analytic GenericHighRegion
+    genericCompletionReference : String
+
+open GenericHighNegativeRHInput public
+
+genericLowDoubleNegCritical :
+  forall {analytic} ->
+  (input : GenericHighNegativeRHInput analytic) ->
+  (rho : Universal.AnalyticNontrivialZero analytic) ->
+  Low.CanonicalLowRegion (genericLowTransport input) rho ->
+  Not (Not (Universal.analyticCritical rho))
+genericLowDoubleNegCritical input rho low notCritical =
+  notCritical (Low.canonicalLowCritical (genericLowTransport input) rho low)
+
+genericHighDoubleNegCritical :
+  forall {analytic} ->
+  (input : GenericHighNegativeRHInput analytic) ->
+  (rho : Universal.AnalyticNontrivialZero analytic) ->
+  GenericHighRegion input rho ->
+  Not (Not (Universal.analyticCritical rho))
+genericHighDoubleNegCritical input rho high =
+  High.contradictionForOffLineHigh (genericHighProducer input) rho high
+
+genericAllDoubleNegCritical :
+  forall {analytic} ->
+  (input : GenericHighNegativeRHInput analytic) ->
+  (rho : Universal.AnalyticNontrivialZero analytic) ->
+  Not (Not (Universal.analyticCritical rho))
+genericAllDoubleNegCritical input rho with genericVerifiedOrHighCover input rho
+... | inj₁ low = genericLowDoubleNegCritical input rho low
+... | inj₂ high = genericHighDoubleNegCritical input rho high
+
+compileGenericHighNegativeRH :
+  forall {analytic} ->
+  GenericHighNegativeRHInput analytic ->
+  DoubleNegatedRiemannHypothesisFor analytic
+compileGenericHighNegativeRH input s hz =
+  genericAllDoubleNegCritical input (Universal.analytic-nontrivial-zero s hz)
+
+------------------------------------------------------------------------
+-- LITERAL-PHASE COMPATIBILITY INPUT
+--
+-- Preserve the existing public field/projection names so downstream Clay and
+-- regression owners remain source-compatible.
+------------------------------------------------------------------------
+
 record DirectOneLeafNegativeRHInput
     (analytic : Analytic.AnalyticSubstrate) : Set₁ where
   field
@@ -47,13 +94,22 @@ record DirectOneLeafNegativeRHInput
     verifiedOrHighCover :
       (rho : Universal.AnalyticNontrivialZero analytic) ->
       Low.CanonicalLowRegion lowTransport rho ⊎ HighRegion rho
-
-    highProducer :
-      High.UniformLiteralPhaseHighProducer analytic HighRegion
-
+    highProducer : LiteralHigh.UniformLiteralPhaseHighProducer analytic HighRegion
     completionReference : String
 
 open DirectOneLeafNegativeRHInput public
+
+compileLiteralInputToGeneric :
+  forall {analytic} ->
+  DirectOneLeafNegativeRHInput analytic ->
+  GenericHighNegativeRHInput analytic
+compileLiteralInputToGeneric input = record
+  { genericLowTransport = lowTransport input
+  ; GenericHighRegion = HighRegion input
+  ; genericVerifiedOrHighCover = verifiedOrHighCover input
+  ; genericHighProducer = High.fromLiteralPhaseProducer (highProducer input)
+  ; genericCompletionReference = completionReference input
+  }
 
 lowDoubleNegCritical :
   forall {analytic} ->
@@ -61,8 +117,8 @@ lowDoubleNegCritical :
   (rho : Universal.AnalyticNontrivialZero analytic) ->
   Low.CanonicalLowRegion (lowTransport input) rho ->
   Not (Not (Universal.analyticCritical rho))
-lowDoubleNegCritical input rho low notCritical =
-  notCritical (Low.canonicalLowCritical (lowTransport input) rho low)
+lowDoubleNegCritical input =
+  genericLowDoubleNegCritical (compileLiteralInputToGeneric input)
 
 highDoubleNegCritical :
   forall {analytic} ->
@@ -70,25 +126,23 @@ highDoubleNegCritical :
   (rho : Universal.AnalyticNontrivialZero analytic) ->
   HighRegion input rho ->
   Not (Not (Universal.analyticCritical rho))
-highDoubleNegCritical input rho high =
-  High.uniformLiteralPhaseHighContradiction
-    (highProducer input) rho high
+highDoubleNegCritical input =
+  genericHighDoubleNegCritical (compileLiteralInputToGeneric input)
 
 allDoubleNegCritical :
   forall {analytic} ->
   (input : DirectOneLeafNegativeRHInput analytic) ->
   (rho : Universal.AnalyticNontrivialZero analytic) ->
   Not (Not (Universal.analyticCritical rho))
-allDoubleNegCritical input rho with verifiedOrHighCover input rho
-... | inj₁ low = lowDoubleNegCritical input rho low
-... | inj₂ high = highDoubleNegCritical input rho high
+allDoubleNegCritical input =
+  genericAllDoubleNegCritical (compileLiteralInputToGeneric input)
 
 compileDirectOneLeafNegativeRH :
   forall {analytic} ->
   DirectOneLeafNegativeRHInput analytic ->
   DoubleNegatedRiemannHypothesisFor analytic
-compileDirectOneLeafNegativeRH input s hz =
-  allDoubleNegCritical input (Universal.analytic-nontrivial-zero s hz)
+compileDirectOneLeafNegativeRH input =
+  compileGenericHighNegativeRH (compileLiteralInputToGeneric input)
 
 negativeRHPlusPredicateRefinementImpliesRH :
   forall {analytic} ->
@@ -104,11 +158,22 @@ record ConstructiveNegativeRHBoundary : Set where
     highAnalyticContradictionNeedsCriticalPredicateStability : Bool
     highAnalyticContradictionNeedsCriticalPredicateStabilityIsFalse :
       highAnalyticContradictionNeedsCriticalPredicateStability ≡ false
+
+    terminalNegativeRHCompilerRequiresLiteralPhaseImplementation : Bool
+    terminalNegativeRHCompilerRequiresLiteralPhaseImplementationIsFalse :
+      terminalNegativeRHCompilerRequiresLiteralPhaseImplementation ≡ false
+
+    literalPhaseProducerCompilesGenericHighInput : Bool
+    literalPhaseProducerCompilesGenericHighInputIsTrue :
+      literalPhaseProducerCompilesGenericHighInput ≡ true
+
     arbitraryLowPredicatePrimitive : Bool
     arbitraryLowPredicatePrimitiveIsFalse : arbitraryLowPredicatePrimitive ≡ false
+
     separateLowSubsetVerifiedRegionProofPrimitive : Bool
     separateLowSubsetVerifiedRegionProofPrimitiveIsFalse :
       separateLowSubsetVerifiedRegionProofPrimitive ≡ false
+
     canonicalLowPositiveCriticalityCompilesDoubleNegatedCriticality : Bool
     canonicalLowPositiveCriticalityCompilesDoubleNegatedCriticalityIsTrue :
       canonicalLowPositiveCriticalityCompilesDoubleNegatedCriticality ≡ true
@@ -117,6 +182,10 @@ record ConstructiveNegativeRHBoundary : Set where
     uniformLiteralPhaseContradictionCompilesDoubleNegatedCriticalityIsTrue :
       uniformLiteralPhaseContradictionCompilesDoubleNegatedCriticality ≡ true
 
+    genericUniformHighContradictionCompilesDoubleNegatedCriticality : Bool
+    genericUniformHighContradictionCompilesDoubleNegatedCriticalityIsTrue :
+      genericUniformHighContradictionCompilesDoubleNegatedCriticality ≡ true
+
     opaqueCanonicalMarginProducerPrimitiveAtClayBoundary : Bool
     opaqueCanonicalMarginProducerPrimitiveAtClayBoundaryIsFalse :
       opaqueCanonicalMarginProducerPrimitiveAtClayBoundary ≡ false
@@ -124,16 +193,25 @@ record ConstructiveNegativeRHBoundary : Set where
     directHighLowRouteCompilesDoubleNegatedRH : Bool
     directHighLowRouteCompilesDoubleNegatedRHIsTrue :
       directHighLowRouteCompilesDoubleNegatedRH ≡ true
+
+    genericHighLowRouteCompilesDoubleNegatedRH : Bool
+    genericHighLowRouteCompilesDoubleNegatedRHIsTrue :
+      genericHighLowRouteCompilesDoubleNegatedRH ≡ true
+
     positiveRHRequiresExactCriticalPredicateRefinement : Bool
     positiveRHRequiresExactCriticalPredicateRefinementIsTrue :
       positiveRHRequiresExactCriticalPredicateRefinement ≡ true
+
     globalExcludedMiddleIntroducedHere : Bool
     globalExcludedMiddleIntroducedHereIsFalse :
       globalExcludedMiddleIntroducedHere ≡ false
+
     negativeRHInputInhabitedHere : Bool
     negativeRHInputInhabitedHereIsFalse : negativeRHInputInhabitedHere ≡ false
+
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
+
     highestAlphaReading : String
 
 canonicalConstructiveNegativeRHBoundary : ConstructiveNegativeRHBoundary
@@ -141,13 +219,17 @@ canonicalConstructiveNegativeRHBoundary =
   constructive-negative-rh-boundary
     false refl
     false refl
-    false refl
-    true refl
-    true refl
-    false refl
-    true refl
     true refl
     false refl
     false refl
+    true refl
+    true refl
+    true refl
     false refl
-    "The constructive Clay-strength endpoint now consumes the literal phase-visible high theorem family directly. For each arbitrary high off-line zero, the high input exposes the unpaid final context, exact literal near model, and independent phase+far+Gamma strict margin; that compiles to contradiction and hence double-negated criticality. Low is definitionally the Platt--Trudgian verified region. Verified-region transport plus the verified-or-High cover and the literal high family compile to double-negated RH with no critical-line stability. Only positive RH needs the exact critical-predicate refinement. No opaque canonical-margin producer, excluded-middle axiom, or substantive theorem is fabricated here."
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    "The canonical high/low compiler consumes only a uniform high contradiction family, not a literal-phase implementation. Existing literal-phase callers retain their original DirectOneLeafNegativeRHInput field names and compile through a compatibility adapter. Low verified-region transport plus the verified-or-High cover and any same-carrier uniform high contradiction producer compile to double-negated RH without critical-line stability. Certified finite-upper and direct phase routes can therefore share one terminal spine. Only positive RH needs the exact critical-predicate refinement; no excluded-middle axiom or RH theorem is fabricated here."
