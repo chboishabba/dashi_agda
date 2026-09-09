@@ -47,6 +47,11 @@ netChargeCurrentDoesNotDetermineMassCurrent ()
 
 ------------------------------------------------------------------------
 -- Source reconstruction needed to pay J_m(x).
+--
+-- The final coordinate is deliberately only ELIGIBILITY for a downstream
+-- stress-energy reconstruction.  It is not a full T_{mu nu} receipt: energy
+-- density, momentum density, stresses, frame conventions and tensor assembly
+-- remain downstream coordinates owned by the laboratory stress-energy layer.
 ------------------------------------------------------------------------
 
 record MassCurrentSourceReconstructionReceipt : Set₁ where
@@ -72,8 +77,8 @@ record MassCurrentSourceReconstructionReceipt : Set₁ where
     MassCurrentDerivationReceipt : Set
     massCurrentDerivationReceipt : MassCurrentDerivationReceipt
 
-    StressEnergyCompatibilityReceipt : Set
-    stressEnergyCompatibilityReceipt : StressEnergyCompatibilityReceipt
+    StressEnergyEligibilityReceipt : Set
+    stressEnergyEligibilityReceipt : StressEnergyEligibilityReceipt
 
 open MassCurrentSourceReconstructionReceipt public
 
@@ -88,7 +93,7 @@ data MassCurrentResidual : Set where
   missingComponentVelocity : MassCurrentResidual
   missingSpatialDistribution : MassCurrentResidual
   missingMassCurrentDerivation : MassCurrentResidual
-  missingStressEnergyCompatibility : MassCurrentResidual
+  missingStressEnergyEligibility : MassCurrentResidual
   chargeMassCurrentContradictionOpen : MassCurrentResidual
 
 producerForMassCurrentResidual : MassCurrentResidual → Search.ProducerClass
@@ -98,7 +103,7 @@ producerForMassCurrentResidual missingComponentCharge = Search.propositionSource
 producerForMassCurrentResidual missingComponentVelocity = Search.empiricalEvidenceProducer
 producerForMassCurrentResidual missingSpatialDistribution = Search.empiricalEvidenceProducer
 producerForMassCurrentResidual missingMassCurrentDerivation = Search.discriminatorProducer
-producerForMassCurrentResidual missingStressEnergyCompatibility = Search.identityProducer
+producerForMassCurrentResidual missingStressEnergyEligibility = Search.identityProducer
 producerForMassCurrentResidual chargeMassCurrentContradictionOpen = Search.contradictionProducer
 
 existingNegativeGFirstStage : NegativeGSearch.ConstitutiveNegativeGStage
@@ -116,9 +121,10 @@ record ChargeMassCurrentBoundary : Set where
     measuredSupercurrentAlonePaysSourceCurrentLeaf : Bool
     componentResolvedSourceReconstructionRequired : Bool
     spatialDistributionRequired : Bool
-    stressEnergyCompatibilityRequired : Bool
+    stressEnergyEligibilityRequired : Bool
+    massCurrentReceiptAutomaticallyConstructsFullStressEnergy : Bool
     massCurrentReceiptAutomaticallyProvesConstitutiveNegativeG : Bool
 
 canonicalChargeMassCurrentBoundary : ChargeMassCurrentBoundary
 canonicalChargeMassCurrentBoundary =
-  charge-mass-current-boundary false false false true true true false
+  charge-mass-current-boundary false false false true true true false false
