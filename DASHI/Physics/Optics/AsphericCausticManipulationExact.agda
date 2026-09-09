@@ -6,6 +6,8 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Foundations.TrajectoryProjectionCausticExact as Caustic
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
 import DASHI.Physics.Optics.CausticFreeformSourceAtlasExact as Sources
+import DASHI.Physics.Optics.AsphericSagSurfaceNormalExact as Sag
+import DASHI.Physics.Optics.CatastropheDiffractionNormalFormExact as Diffraction
 
 ------------------------------------------------------------------------
 -- ANALYSIS / DESIGN BOUNDARY
@@ -88,6 +90,37 @@ record DesignedCausticManipulation
     validationOrResidualEvidence : String
 
 open DesignedCausticManipulation public
+
+------------------------------------------------------------------------
+-- Same-object welds to explicit asphere geometry and local diffraction.
+------------------------------------------------------------------------
+
+record AsphericDesignGeometryWeld
+    {Scalar SurfacePoint Normal : Set}
+    {algebra : Sag.AsphericSagAlgebra Scalar}
+    (sag : Sag.RotationalAsphereSagReceipt algebra)
+    (normal : Sag.AsphereNormalReceipt sag)
+    (surface : OpticalSurfaceGeometry SurfacePoint Normal) : Set₁ where
+  constructor aspheric-design-geometry-weld
+  field
+    surfacePointForSag : SurfacePoint
+    surfaceIsAspheric : surfaceClass surface ≡ asphericSurface
+    normalIsSameObject : normalAt surface surfacePointForSag ≡ Sag.surfaceNormal normal
+    sagGeometryRealisation : String
+
+open AsphericDesignGeometryWeld public
+
+record GeometricToWaveCausticWeld
+    {History Observation Scalar : Set}
+    {project : History → Observation}
+    (analytic : AnalyticCausticReceipt {Scalar = Scalar} project) : Set₁ where
+  constructor geometric-to-wave-caustic-weld
+  field
+    geometricClass : Diffraction.GeometricCausticClassification
+    sameCriticalityReading : String
+    waveReceipt : Diffraction.CatastropheDiffractionReceipt geometricClass
+
+open GeometricToWaveCausticWeld public
 
 ------------------------------------------------------------------------
 -- Non-promotion boundaries.
