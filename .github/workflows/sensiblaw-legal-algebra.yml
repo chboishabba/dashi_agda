@@ -5,6 +5,10 @@ on:
     paths:
       - 'DASHI/Core/BoundAcquisitionDemandExact.agda'
       - 'DASHI/Core/Everything.agda'
+      - 'DASHI/Cognition/PNF/SensibLawOALCLegislationParserInputContractExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawOALCResolutionCompletenessFallbackExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawOALCSectionPNFSemanticAdmissionBridgeExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenOALCPNFInputParityExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawSourceRealisedLegalRuleExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawLegalClaimProvenanceLineageExact.agda'
@@ -75,10 +79,18 @@ jobs:
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Core/BoundAcquisitionDemandExact.agda
 
+      - name: Type-check OALC source to PNF admission spine
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawOALCLegislationParserInputContractExact.agda
+          DASHI/Cognition/PNF/SensibLawOALCResolutionCompletenessFallbackExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenOALCPNFInputParityExact.agda
+          DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda
+          DASHI/Cognition/PNF/SensibLawOALCSectionPNFSemanticAdmissionBridgeExact.agda
+
       - name: Type-check attributed registered legal spine
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
-          DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda
           DASHI/Cognition/PNF/SensibLawSourceRealisedLegalRuleExact.agda
           DASHI/Cognition/PNF/SensibLawLegalClaimProvenanceLineageExact.agda
           DASHI/Cognition/PNF/SensibLawProvenanceSemanticStatusOrthogonalityExact.agda
