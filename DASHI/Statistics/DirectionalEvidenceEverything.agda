@@ -9,5 +9,7 @@ module DASHI.Statistics.DirectionalEvidenceEverything where
 import DASHI.Statistics.DirectionalEvidenceTritExact
 import DASHI.Statistics.DirectionalInferenceDesignExact
 import DASHI.Statistics.BinaryTestDecisionDirectionalEvidenceExact
+import DASHI.Statistics.HypothesisRegionGeometryExact
+import DASHI.Statistics.StandardBinaryTestRegionAdaptersExact
 import DASHI.Statistics.Vec15Inference
 import DASHI.Statistics.Vec15BinaryDecisionDirectionalEvidenceBridgeExact
