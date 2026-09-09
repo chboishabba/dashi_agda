@@ -6,42 +6,37 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 -- R505 remains the large historical aggregate.  This smaller extension freezes
 -- the current direct analytic frontier without rewriting that history again.
 --
--- The reconciled direct route now contains:
+-- The reconciled direct route contains the modern R568 commutator consumer,
+-- R570's bridge into the canonical historical factored-full consumer, the
+-- self-flux endpoint/tangent/order reductions, and R572's direct R503 compiler.
 --
---   R565  canonical self-flux temporal reconciliation;
---   R566  heat/Laplace is optional on the direct R547 route;
---   R566T full-square transpose symmetry removes an independent amplitude half;
---   R567C factoredFull = 4 * one forcing/commutator full square;
---   R568C freezes the live cutoff-uniform commutator-only spacetime budget;
---   R567B keeps the theorem-facing literal factoredFull budget as the canonical
---         A1 consumer;
---   R570B proves the commutator-only budget inhabits that existing consumer;
---   R568E welds the global initial self-flux to the no-cardinality endpoint;
---   R570T welds the R564 derivative tangent to the exact R557 tangent;
---   R571  isolates standard integral-order monotonicity after proving the
---         pointwise self-Gram/self-flux signs on the live carriers;
---   R572  composes those exact coordinates into the PRE-EXISTING R503 direct
---         off-diagonal budget once scalar FTC/order, a cutoff-uniform initial
---         endpoint ceiling, and the novel commutator spacetime budget are paid;
---   R577  reconciles the historical literal nested R328/R329 Schur route with
---         the MODERN R568 commutator consumer.  It keeps row, column,
---         signed-response majorization and cutoff-uniform Schur envelope as
---         four distinct receipts and compiles them into the existing R568
---         budget rather than introducing another leaf-A consumer.
+-- The nested inward BIDI is now also integrated:
 --
--- The live novel PDE frontier is therefore below the R568 consumer:
+--   R571  raw inner pair = four exact helical multiplier-difference channels;
+--   R572N complete inner fibre pushes those four channels through the outer slot;
+--   R573N actual weighted R294 commutator reaches that nested carrier pre-norm;
+--   R574  every one of the four channels has the R178 low-output cell bound;
+--   R575  the FOUR component majorants collapse exactly by helical Pythagoras;
+--   R576  fixed four-channel Gram interference costs only the universal factor 4,
+--         giving a 36 |k|^2 E_p E_q bound for one literal fourSignInner cell;
+--   R577G welds those actual cells to R180's exact signed finite Gram ledger;
+--   R578  on a common output, the positive cell-mass part factors exactly as
+--         36 |k|^2 times the finite input-energy convolution;
+--   R579  instantiates that statement on the literal physicalOutputFiber.
 --
---   literal weighted nested row budget
---   -> literal numerical column envelope
---   -> signed modern response <= nonnegative Schur output
---   -> cutoff-uniform spacetime Schur envelope
---   -> existing R568 commutator budget.
+-- Separately, R577B reconciles the historical R328/R329 nested Schur producer
+-- with the MODERN R568 consumer.  It correctly keeps four receipts distinct:
+-- row, column, signed-response majorization, and cutoff-uniform Schur envelope.
 --
--- In particular, the existence of the older abstract SC1--SC9/full-shell Schur
--- interfaces is not itself an inhabitant of these literal receipts.  Their
--- carrier/majorization weld remains proof-relevant.
+-- The introspective result is therefore sharper than an opaque "commutator
+-- estimate".  After R579 the positive local component is already on the exact
+-- low-output finite convolution carrier with no variable multiplicity factor.
+-- The live within-fibre analytic obstruction is the quantitative SIGNED Gram
+-- residual of those literal fourSignInner cells.  A producer may pay it by a
+-- Bony/Schur/commutator estimate; it need not prove covariance nonpositive.
+-- The outer spectator-weighted spacetime passage remains downstream.
 --
--- Ordinary scalar FTC/order and the initial-energy endpoint calibration remain
+-- Ordinary scalar FTC/order and initial-energy endpoint calibration remain
 -- separately typed standard/source-realization coordinates.  Nothing in this
 -- aggregate asserts analytic payment or Clay closure.
 ------------------------------------------------------------------------
@@ -61,6 +56,15 @@ import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact
 import DASHI.Physics.Closure.NSTriadKNLiveSelfGramAndFluxOrderRound571Exact
 import DASHI.Physics.Closure.NSTriadKNDirectLeafACompilerRound572Exact
 import DASHI.Physics.Closure.NSTriadKNModernNestedSchurToCommutatorBidiRound577Exact
+import DASHI.Physics.Closure.NSTriadKNInnerHelicalComponentCommutatorRound571Exact
+import DASHI.Physics.Closure.NSTriadKNNestedComponentwiseInnerCommutatorRound572Exact
+import DASHI.Physics.Closure.NSTriadKNWeightedNestedComponentwiseCommutatorRound573Exact
+import DASHI.Physics.Closure.NSTriadKNR106ComponentLowOutputBoundRound574Exact
+import DASHI.Physics.Closure.NSTriadKNFourHelicityComponentMassCollapseRound575Exact
+import DASHI.Physics.Closure.NSTriadKNFourHelicityVectorRecombinationRound576Exact
+import DASHI.Physics.Closure.NSTriadKNFourSignInnerFibreGramBoundaryRound577Exact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputFourSignFibreMajorantRound578Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalOutputFourSignGramRound579Exact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -68,11 +72,20 @@ round569DirectAnalyticFrontierIntegrated = true
 round569ModernNestedSchurBidiIntegrated : Bool
 round569ModernNestedSchurBidiIntegrated = true
 
+round569ComponentwiseNestedLowOutputConeIntegrated : Bool
+round569ComponentwiseNestedLowOutputConeIntegrated = true
+
+round569ExactVariableFibreGramBoundaryIntegrated : Bool
+round569ExactVariableFibreGramBoundaryIntegrated = true
+
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
 
 round569NovelCommutatorSpacetimeBudgetClosed : Bool
 round569NovelCommutatorSpacetimeBudgetClosed = false
+
+round569VariableFibreSignedGramResidualClosed : Bool
+round569VariableFibreSignedGramResidualClosed = false
 
 round569ClayPromotion : Bool
 round569ClayPromotion = false
