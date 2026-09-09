@@ -4,8 +4,10 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Environment.CanopySpectralRadiativeTransferExact as Canopy
+import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact as Calibration
 import DASHI.Environment.PhotosyntheticLightTransportCrossPollinationExact as Photo
 import DASHI.Environment.PhotosyntheticLightOptimizationExact as Optimisation
+import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as Plant
 import DASHI.Physics.Optics.DashiRTXAdaptiveTransportSourceAtlasExact as RTXSource
 
 ------------------------------------------------------------------------
@@ -108,8 +110,8 @@ open AdaptiveCanopyTransportWeld public
 
 record AdaptivePhotosyntheticOptimisationWeld
     {LeafPoint Wavelength PhotonFlux ObjectiveValue Scalar Cell : Set}
-    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
-    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {leaf : Plant.LeafGasExchangeReceipt}
+    {calibration : Calibration.LeafCarbonWaterCalibration leaf}
     {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt field}
     {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
