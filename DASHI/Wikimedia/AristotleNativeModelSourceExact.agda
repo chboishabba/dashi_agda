@@ -15,7 +15,8 @@ open import Agda.Builtin.String using (String)
 --
 -- Recheck found exactly 189 RequestProject/*.lean modules.  High-value native
 -- donors include Engine, PropertyEngine, Snaks, Ranks, Qualifiers, Provenance,
--- Sitelinks, Lexemes, ExternalIds, Rdf, CompilerPipeline, Corpus*, Cli/*, Wiki/*.
+-- Sitelinks, Lexemes, ExternalIds, Rdf, Publish, CompilerPipeline, Corpus*,
+-- Cli/* and Wiki/*.
 --
 -- Source boundary: this record pins methodology/data-model provenance and exact
 -- declaration names inspected in the uploaded source.  It does not transport
@@ -75,6 +76,18 @@ sitelinkRoundTripContract = aristotle-declaration-contract
   "Wikidata.SiteKB.pageOf_eq_some_iff_itemOf_eq_some"
   "under functional/page-injective hypotheses, item-to-page and page-to-item lookup agree"
 
+importedFromReliabilityContract : AristotleDeclarationContract
+importedFromReliabilityContract = aristotle-declaration-contract
+  "RequestProject.Provenance"
+  "Wikidata.RefKind.reliable"
+  "importedFrom is provenance-only and evaluates false as a reliable source kind; statedIn/referenceURL are source-bearing"
+
+publishRenderIdentityContract : AristotleDeclarationContract
+publishRenderIdentityContract = aristotle-declaration-contract
+  "RequestProject.Publish"
+  "Wikidata.Publish.eq_of_renderKB_eq"
+  "for clean executable KBs, equality of canonical renderings determines equality of the represented KB"
+
 compiledInstancePreservationContract : AristotleDeclarationContract
 compiledInstancePreservationContract = aristotle-declaration-contract
   "RequestProject.CompilerPipeline"
@@ -87,6 +100,8 @@ recheckedContracts =
   ∷ propertyEngineContract
   ∷ snakSatisfiabilityContract
   ∷ sitelinkRoundTripContract
+  ∷ importedFromReliabilityContract
+  ∷ publishRenderIdentityContract
   ∷ compiledInstancePreservationContract
   ∷ []
 
