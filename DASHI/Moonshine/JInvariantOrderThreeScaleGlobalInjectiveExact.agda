@@ -93,11 +93,11 @@ seamScaleInjective :
   left ≡ right
 seamScaleInjective left right same
   with NatP.<-cmp left right
-... | tri≈ left≡right _ _ = left≡right
+... | tri≈ _ left≡right _ = left≡right
 ... | tri< left<right _ _ =
   ⊥-elim
     (NatP.<-irrefl
-      (Scale.seamScale right)
+      refl
       (subst
         (λ x → x < Scale.seamScale right)
         same
@@ -105,7 +105,7 @@ seamScaleInjective left right same
 ... | tri> _ _ right<left =
   ⊥-elim
     (NatP.<-irrefl
-      (Scale.seamScale right)
+      refl
       (subst
         (λ x → Scale.seamScale right < x)
         same
