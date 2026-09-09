@@ -11,6 +11,7 @@ import DASHI.ComputerScience.FibreProgramComplexityExact
 import DASHI.ComputerScience.QuantumExecutionFibreAdapterExact
 import DASHI.ComputerScience.ShorClassicalQuantumFibreComparisonExact
 import DASHI.ComputerScience.BalancedTernaryQutritBasisBridgeExact
+import DASHI.ComputerScience.BalancedTernaryC2C3DihedralCodecBridgeExact
 
 import DASHI.Algebra.Quantum.FiniteQuantumRegister
 import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
