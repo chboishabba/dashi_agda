@@ -15,6 +15,7 @@ import DASHI.ComputerScience.FibreProgramComplexityExact
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact
 import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact
 import DASHI.ComputerScience.BinaryThreeBitTrit27FibreLiftExact
+import DASHI.ComputerScience.FixedNineBitFramed27WordStorageExact
 
 import DASHI.ComputerScience.HelloWorldFibreExact
 import DASHI.ComputerScience.HelloWorldStoredProgramMachineExact
@@ -32,3 +33,5 @@ import DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact
 import DASHI.ComputerScience.CountdownExecutionPathComplexityExact
 import DASHI.ComputerScience.EuclidGCDRegisterMachineExact
 import DASHI.ComputerScience.EuclidGCDBinaryTernaryRegisterFibreExact
+
+import DASHI.ComputerScience.QuantumExecutionFibreAdapterExact
