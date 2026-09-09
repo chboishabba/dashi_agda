@@ -18,6 +18,7 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64WrongTypeSourceRealisationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenDownstreamElementSourceAtlasExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenAtomicSourceConditionedDutyBreachExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawDutyPublicAuthoritySourceLineageGraphExact.agda'
@@ -64,7 +65,7 @@ jobs:
           DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda
           DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda
 
-      - name: Type-check Cullen introspective and source-attributed spine
+      - name: Type-check Cullen introspective and atomic source-conditioned spine
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda
@@ -72,6 +73,7 @@ jobs:
           DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda
           DASHI/Cognition/PNF/SensibLawCullenEdelman64WrongTypeSourceRealisationExact.agda
           DASHI/Cognition/PNF/SensibLawCullenDownstreamElementSourceAtlasExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenAtomicSourceConditionedDutyBreachExact.agda
           DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda
           DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda
 
