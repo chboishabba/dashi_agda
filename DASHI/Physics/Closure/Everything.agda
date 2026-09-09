@@ -99,6 +99,34 @@ import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Ex
 import DASHI.Physics.Closure.NSTriadKNProjectedVsDirectSignedGramBoundaryRound476Exact
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedGramOperatorRound477Exact
 
+-- R487-R493 return to the canonical direct R423 Clay consumer while restoring
+-- the same-object firewall. R487 compiles theorem-bearing fixed-output signed
+-- payments plus one cutoff-uniform sum-of-budgets theorem into the scalar R423
+-- shape. R488 makes local payments the first producer. R489 records that direct
+-- signed payment is the canonical physical route and that Laplace is optional.
+-- R490/R491 retain the standard positive-rate Laplace producer lane without
+-- making it mandatory. R492 then requires an external theorem identifying the
+-- fixed-output scalar aggregate with the literal integrated R420/R439
+-- quadratic-companion observable before constructing the Clay-facing R423
+-- payment. R493 preserves that historical strict audit.
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPaymentsToR423Round487Exact
+import DASHI.Physics.Closure.NSTriadKNR423FixedOutputProducerProofSearchRound488Exact
+import DASHI.Physics.Closure.NSTriadKNR423LocalPaymentPrerequisiteRound489Exact
+import DASHI.Physics.Closure.NSTriadKNPositiveRateLaplaceAuthorityRound490Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyLaplaceWeldRound491Exact
+import DASHI.Physics.Closure.NSTriadKNStrictFixedOutputCompanionToR423Round492Exact
+import DASHI.Physics.Closure.NSTriadKNStrictR423ProofSearchRound493Exact
+
+-- R494-R505 sharpen the live route onto the literal R406 off-diagonal carrier.
+-- R494 fixes the factor-two R299/R439 normalization; R495 records optional
+-- integration transport. R496-R500 construct the exact nonseparable rational
+-- resolvent signed cross pair->fibre->global->trajectory->integrated. R502
+-- prevents conflation of that off-diagonal object with R439's full square form.
+-- R503 targets the exact R415 consumer instead, R504 exposes the two independent
+-- Clay-facing analytic leaves, and R505 aggregates the whole direct terminal
+-- cone for focused validation.
+import DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
