@@ -11,15 +11,6 @@ import DASHI.Core.ConsumerIndexedTrajectoryFibreAdequacyExact as Fibre
 import DASHI.Core.ConsumerFibreRefinementSchedulerExact as Scheduler
 import DASHI.Cognition.PNF.SensibLawConsumerSourceAcquisitionPriorityExact as Priority
 
-------------------------------------------------------------------------
--- CONSUMER-SOURCE PRIORITY <-> EXISTING REFINEMENT SCHEDULER
---
--- The generic refinement scheduler may identify an exact missing coordinate for
--- an exact consumer.  For legal/source acquisition, that scheduled residual is
--- necessary but not sufficient: the coordinate must also be live-sensitive for
--- the selected consumer under a ConsumerSourcePolicy.
-------------------------------------------------------------------------
-
 record PrioritySchedulerAlignment
     {system : Fibre.ConsumerIndexedFibreSystem}
     (schedule : Scheduler.RefinementSchedule system)
@@ -51,15 +42,6 @@ record SchedulerSourceAdmission
 
 open SchedulerSourceAdmission public
 
-------------------------------------------------------------------------
--- Exact bound-demand adapter.
---
--- BoundAcquisitionDemand already proves that an acquisition attacks the exact
--- selected residual and producer.  This wrapper adds the missing legal/source
--- condition: the selected scheduler coordinate is admitted for acquisition NOW
--- for the exact selected consumer.
-------------------------------------------------------------------------
-
 record PriorityAdmittedBoundSourceDemand
     {system : Fibre.ConsumerIndexedFibreSystem}
     {schedule : Scheduler.RefinementSchedule system}
@@ -89,11 +71,13 @@ record PriorityAdmittedBoundSourceDemand
 open PriorityAdmittedBoundSourceDemand public
 
 admittedDemandTargetsScheduledCoordinate :
-  ∀ {system schedule policy}
+  ∀ {system : Fibre.ConsumerIndexedFibreSystem}
+    {schedule : Scheduler.RefinementSchedule system}
+    {policy : Priority.ConsumerSourcePolicy}
     {priorityAlignment : PrioritySchedulerAlignment schedule policy}
     {consumer : Fibre.Consumer system}
     {schedulerResidual : Scheduler.ConsumerRefinementResidual schedule consumer}
-    {Residual Producer Acquisition}
+    {Residual Producer Acquisition : Set}
     {acquisitionAlignment :
       Bound.AcquisitionAlignment
         (Scheduler.MissingCoordinate schedule)
@@ -110,11 +94,13 @@ admittedDemandTargetsScheduledCoordinate demand =
   Bound.acquisitionPaysSelectedResidual (boundDemand demand)
 
 admittedDemandUsesScheduledCoordinateProducer :
-  ∀ {system schedule policy}
+  ∀ {system : Fibre.ConsumerIndexedFibreSystem}
+    {schedule : Scheduler.RefinementSchedule system}
+    {policy : Priority.ConsumerSourcePolicy}
     {priorityAlignment : PrioritySchedulerAlignment schedule policy}
     {consumer : Fibre.Consumer system}
     {schedulerResidual : Scheduler.ConsumerRefinementResidual schedule consumer}
-    {Residual Producer Acquisition}
+    {Residual Producer Acquisition : Set}
     {acquisitionAlignment :
       Bound.AcquisitionAlignment
         (Scheduler.MissingCoordinate schedule)
@@ -129,12 +115,6 @@ admittedDemandUsesScheduledCoordinateProducer :
       (Scheduler.missingCoordinate schedulerResidual)
 admittedDemandUsesScheduledCoordinateProducer demand =
   Bound.acquisitionUsesSelectedProducer (boundDemand demand)
-
-------------------------------------------------------------------------
--- A blocked/deferred coordinate can remain a perfectly real scheduled residual;
--- what is denied is only permission to turn it into the present source-demand
--- work item for this consumer.
-------------------------------------------------------------------------
 
 data ScheduledResidualAutomaticallyAdmittedForSourceWork : Set where
 data BoundDemandAloneSuppliesAcquireNowPermission : Set where
