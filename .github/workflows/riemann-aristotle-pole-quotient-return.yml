@@ -11,6 +11,7 @@ on:
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
       - 'DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda'
       - 'DASHI/Analysis/RiemannG2*.agda'
+      - 'DASHI/Analysis/RiemannAnalyticCoordinateTerminalRefinementExact.agda'
       - 'scripts/check_riemann_aristotle_pole_quotient_return.sh'
       - 'scripts/check_riemann_aristotle_two_zero_return.sh'
       - 'scripts/check_riemann_g2_minimal_final_cut.sh'
@@ -18,8 +19,7 @@ on:
       - '.github/workflows/riemann-aristotle-pole-quotient-return.yml'
   push:
     branches:
-      - agent/rh-direct-combined-off-cut
-      - agent/rh-direct-cluster-response-cut
+      - agent/rh-generic-high-certified-followup
     paths:
       - 'DASHI/Core/TwoChannelAllowanceCompositionExact.agda'
       - 'DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda'
@@ -29,6 +29,7 @@ on:
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
       - 'DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda'
       - 'DASHI/Analysis/RiemannG2*.agda'
+      - 'DASHI/Analysis/RiemannAnalyticCoordinateTerminalRefinementExact.agda'
       - 'scripts/check_riemann_aristotle_pole_quotient_return.sh'
       - 'scripts/check_riemann_aristotle_two_zero_return.sh'
       - 'scripts/check_riemann_g2_minimal_final_cut.sh'
@@ -46,7 +47,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y agda
           agda --version
-      - name: Current direct Clay cut
+      - name: Current direct/generic-high Clay cut
         run: bash scripts/check_riemann_g2_current_direct_cut.sh
       - name: Legacy pole-quotient regression
         run: bash scripts/check_riemann_aristotle_pole_quotient_return.sh

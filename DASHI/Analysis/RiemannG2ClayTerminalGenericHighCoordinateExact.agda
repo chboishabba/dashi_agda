@@ -12,38 +12,18 @@ import DASHI.Analysis.RiemannAnalyticCoordinateTerminalRefinementExact as Coordi
 import DASHI.Analysis.RiemannG2UniformHighContradictionExact as High
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 
-------------------------------------------------------------------------
--- GENERIC-HIGH + SHARED-COORDINATE CLAY TERMINAL
---
--- This is the least implementation-aware prize-facing wrapper currently needed:
---
---   one same-AnalyticSubstrate coordinate refinement
---   + verified-region-or-High cover
---   + implementation-neutral uniform high contradiction
---   -> double-negated RH
---   -> positive RH through the same coordinate refinement.
---
--- The terminal wrapper does not know whether the high contradiction came from
--- a direct literal-phase theorem, a certified finite upper, or another future
--- same-object producer.
-------------------------------------------------------------------------
-
 record GenericHighCoordinateClayInput
     (analytic : Analytic.AnalyticSubstrate) : Set₁ where
   field
     coordinate : Coordinate.AnalyticCoordinateTerminalRefinement analytic
-
     HighRegion : Universal.AnalyticNontrivialZero analytic -> Set
-
     verifiedOrHighCover :
       (rho : Universal.AnalyticNontrivialZero analytic) ->
       Low.CanonicalLowRegion
         (Coordinate.compilePlattTrudgianVerifiedRegionTransport coordinate)
         rho
       ⊎ HighRegion rho
-
     highProducer : High.UniformHighContradictionProducer analytic HighRegion
-
     terminalReference : String
 
 open GenericHighCoordinateClayInput public
@@ -83,37 +63,28 @@ record GenericHighCoordinateClayBoundary : Set where
     terminalClayWrapperRequiresLiteralPhaseImplementation : Bool
     terminalClayWrapperRequiresLiteralPhaseImplementationIsFalse :
       terminalClayWrapperRequiresLiteralPhaseImplementation ≡ false
-
     terminalClayWrapperRequiresCertifiedUpperImplementation : Bool
     terminalClayWrapperRequiresCertifiedUpperImplementationIsFalse :
       terminalClayWrapperRequiresCertifiedUpperImplementation ≡ false
-
     oneSameCarrierCoordinateRefinementCompilesLowAndStability : Bool
     oneSameCarrierCoordinateRefinementCompilesLowAndStabilityIsTrue :
       oneSameCarrierCoordinateRefinementCompilesLowAndStability ≡ true
-
     verifiedRegionOrHighCoverStillRequired : Bool
     verifiedRegionOrHighCoverStillRequiredIsTrue :
       verifiedRegionOrHighCoverStillRequired ≡ true
-
     genericUniformHighContradictionStillRequired : Bool
     genericUniformHighContradictionStillRequiredIsTrue :
       genericUniformHighContradictionStillRequired ≡ true
-
     highLowCompilesDoubleNegatedRHBeforeStability : Bool
     highLowCompilesDoubleNegatedRHBeforeStabilityIsTrue :
       highLowCompilesDoubleNegatedRHBeforeStability ≡ true
-
     theseInputsCompileRiemannHypothesisFor : Bool
     theseInputsCompileRiemannHypothesisForIsTrue :
       theseInputsCompileRiemannHypothesisFor ≡ true
-
     inputsInhabitedHere : Bool
     inputsInhabitedHereIsFalse : inputsInhabitedHere ≡ false
-
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
-
     highestAlphaReading : String
 
 canonicalGenericHighCoordinateClayBoundary : GenericHighCoordinateClayBoundary
