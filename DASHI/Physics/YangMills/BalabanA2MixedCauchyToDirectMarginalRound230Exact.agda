@@ -10,6 +10,7 @@ module DASHI.Physics.YangMills.BalabanA2MixedCauchyToDirectMarginalRound230Exact
 -- L_int, the physical positive-beta cubic telescope, and the contraction gate.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanA2MixedCauchyCubicMarginalRound112Exact as R112
 import DASHI.Physics.YangMills.BalabanA2DirectMarginalDerivativeRound229Exact as R229
@@ -45,8 +46,7 @@ mixedCauchyMarginalPaysDirectContract :
     (asDirectMarginalBetaDerivativeData dataSet)
   ≡ R229.marginalFullPrefixBelowOne
     (asDirectMarginalBetaDerivativeData dataSet)
-mixedCauchyMarginalPaysDirectContract dataSet =
-  Agda.Builtin.Equality.refl
+mixedCauchyMarginalPaysDirectContract dataSet = refl
 
 mixedCauchyToDirectMarginalCompilerLevel : ProofLevel
 mixedCauchyToDirectMarginalCompilerLevel = machineChecked
