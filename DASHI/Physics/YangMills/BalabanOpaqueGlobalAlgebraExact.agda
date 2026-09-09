@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 sixTermSumZero :
@@ -33,3 +33,24 @@ scaleFourSum :
   scale * (a + (b + (c + d)))
   ≡ scale * a + (scale * b + (scale * c + scale * d))
 scaleFourSum scale a b c d = solve-∀
+
+subtractSelfZero :
+  ∀ (x : ℚ) →
+  x - x ≡ 0ℚ
+subtractSelfZero x = solve-∀
+
+subtractAddCancel :
+  ∀ (x y : ℚ) →
+  (x - y) + y ≡ x
+subtractAddCancel x y = solve-∀
+
+swapSum :
+  ∀ (x y : ℚ) →
+  x + y ≡ y + x
+swapSum x y = solve-∀
+
+dropTerminalZero4 :
+  ∀ (a b c d : ℚ) →
+  a + (b + (c + (d + 0ℚ)))
+  ≡ a + (b + (c + d))
+dropTerminalZero4 a b c d = solve-∀
