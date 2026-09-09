@@ -34,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Ex
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
 import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
+import DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact as R452
 import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedDoubleMixedMassRound456Exact as R456
 import DASHI.Physics.Closure.NSTriadKNGlobalSelfFluxEndpointRound558Exact as R558
 import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxDerivativeRound564Exact as R564
@@ -125,14 +126,11 @@ module LiveEndpointWeld
 
     globalInitialSelfFluxEnergySquareEndpoint568 :
       Global.globalSelfFlux initialTime
-      ≤ Endpoint.twoW *
-          (DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact.fortyEight
-            * Endpoint.Mass.energySquare)
+      ≤ Endpoint.twoW * (R452.fortyEight * Endpoint.Mass.energySquare)
     globalInitialSelfFluxEnergySquareEndpoint568 =
       subst
-        (λ selected → selected ≤ Endpoint.twoW *
-          (DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact.fortyEight
-            * Endpoint.Mass.energySquare))
+        (λ selected →
+          selected ≤ Endpoint.twoW * (R452.fortyEight * Endpoint.Mass.energySquare))
         (sym globalInitialSelfFluxIsEndpoint568)
         Endpoint.globalSelfFluxEnergySquareEndpoint
 
