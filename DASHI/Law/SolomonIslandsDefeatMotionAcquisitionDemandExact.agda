@@ -13,22 +13,25 @@ import DASHI.Law.SolomonIslandsDefeatMotionProvenanceExact as Provenance
 import DASHI.Law.SolomonIslandsForeignInterferenceSourceLegalWeldExact as Weld
 
 ------------------------------------------------------------------------
--- DEFEAT-MOTION PRIMARY-ARTIFACT ACQUISITION DEMAND
+-- PRIMARY-THREAD / RELAY-TOPOLOGY ACQUISITION DEMAND
 --
--- This module pays the introspective routing step only.  It binds the exact
--- live residual to the exact repository-native producer class.  Retrieval of
--- another report repeating the Opposition statement cannot pay this demand.
+-- Broader reporting identifies the downstream political exhortation as Sade's
+-- own message after forwarding the Australian High Commission update.  The
+-- exact live residual is therefore primary verification of the thread topology,
+-- not proof that an Australian actor authored the defeat-motion sentence.
 ------------------------------------------------------------------------
 
 data MessageRequirement : Set where
-  acquireOriginalDefeatMotionArtifact : MessageRequirement
-  establishSenderRecipientThreadIdentity : MessageRequirement
-  authenticateArtifactContent : MessageRequirement
+  acquireOriginalWhatsAppThread : MessageRequirement
+  establishForwardingSenderRecipientTopology : MessageRequirement
+  authenticateThreadContentAndOrder : MessageRequirement
+  testAustralianConditionality : MessageRequirement
 
 requirementGap : MessageRequirement → Diligence.SourceDiligenceGap
-requirementGap acquireOriginalDefeatMotionArtifact = Diligence.primarySourceNotSearched
-requirementGap establishSenderRecipientThreadIdentity = Diligence.sameObjectUnresolved
-requirementGap authenticateArtifactContent = Diligence.propositionSupportUnresolved
+requirementGap acquireOriginalWhatsAppThread = Diligence.primarySourceNotSearched
+requirementGap establishForwardingSenderRecipientTopology = Diligence.sameObjectUnresolved
+requirementGap authenticateThreadContentAndOrder = Diligence.propositionSupportUnresolved
+requirementGap testAustralianConditionality = Diligence.interpretationBoundaryOpen
 
 requiredProducer : MessageRequirement → Search.ProducerClass
 requiredProducer r = Diligence.producerForSourceDiligenceGap (requirementGap r)
@@ -61,70 +64,72 @@ messageAcquisitionAlignment = Bound.acquisition-alignment
   acquisitionGap
   acquisitionProducer
 
-originalArtifactAcquisition : MessageAcquisition
-originalArtifactAcquisition = message-acquisition
-  acquireOriginalDefeatMotionArtifact
+originalThreadAcquisition : MessageAcquisition
+originalThreadAcquisition = message-acquisition
+  acquireOriginalWhatsAppThread
   Diligence.primarySourceNotSearched
   Search.propositionSourceProducer
-  "Acquire the original message/thread artifact containing 'stand together to defeat this Motion', preserving sender, recipient, timestamp, message order and surrounding messages"
+  "Acquire the original WhatsApp thread/screenshots/export preserving forwarding markers, sender, recipient, timestamps, message order and surrounding context"
 
-currentOriginalArtifactDemand :
+currentOriginalThreadDemand :
   Bound.BoundAcquisitionDemand
     messageAcquisitionAlignment
-    acquireOriginalDefeatMotionArtifact
+    acquireOriginalWhatsAppThread
     Diligence.primarySourceNotSearched
-currentOriginalArtifactDemand = Bound.bound-acquisition-demand
-  originalArtifactAcquisition
+currentOriginalThreadDemand = Bound.bound-acquisition-demand
+  originalThreadAcquisition
   refl
   refl
   refl
 
 currentDemandPaysExactResidual :
   Bound.acquisitionResidual messageAcquisitionAlignment
-    (Bound.acquisition currentOriginalArtifactDemand)
-  ≡ requirementGap acquireOriginalDefeatMotionArtifact
+    (Bound.acquisition currentOriginalThreadDemand)
+  ≡ requirementGap acquireOriginalWhatsAppThread
 currentDemandPaysExactResidual =
-  Bound.acquisitionPaysSelectedResidual currentOriginalArtifactDemand
+  Bound.acquisitionPaysSelectedResidual currentOriginalThreadDemand
 
 currentDemandUsesExactProducer :
   Bound.acquisitionProducer messageAcquisitionAlignment
-    (Bound.acquisition currentOriginalArtifactDemand)
-  ≡ requiredProducer acquireOriginalDefeatMotionArtifact
+    (Bound.acquisition currentOriginalThreadDemand)
+  ≡ requiredProducer acquireOriginalWhatsAppThread
 currentDemandUsesExactProducer =
-  Bound.acquisitionUsesSelectedProducer currentOriginalArtifactDemand
+  Bound.acquisitionUsesSelectedProducer currentOriginalThreadDemand
 
 ------------------------------------------------------------------------
 -- Evidence ladder.
 ------------------------------------------------------------------------
 
 data MessageEvidenceStage : Set where
-  oppositionReportedSentence : MessageEvidenceStage
-  originalArtifactAcquired : MessageEvidenceStage
-  artifactAuthenticated : MessageEvidenceStage
-  senderRecipientThreadWelded : MessageEvidenceStage
+  twoStageRelayReported : MessageEvidenceStage
+  originalThreadAcquired : MessageEvidenceStage
+  threadAuthenticated : MessageEvidenceStage
+  relayTopologyPrimaryWelded : MessageEvidenceStage
+  conditionalityReviewEligible : MessageEvidenceStage
   legalFitEligible : MessageEvidenceStage
 
 record CurrentMessageEvidenceState : Set where
   constructor current-message-evidence-state
   field
     stage : MessageEvidenceStage
-    oppositionSentencePublished : Bool
-    oppositionSentencePublishedIsTrue : oppositionSentencePublished ≡ true
-    originalArtifactInHand : Bool
-    originalArtifactInHandIsFalse : originalArtifactInHand ≡ false
-    artifactAuthenticationPaid : Bool
-    artifactAuthenticationPaidIsFalse : artifactAuthenticationPaid ≡ false
-    australianSenderSameObjectPaid : Bool
-    australianSenderSameObjectPaidIsFalse : australianSenderSameObjectPaid ≡ false
-    conditionalityCoercionAnalysisEligible : Bool
-    conditionalityCoercionAnalysisEligibleIsFalse :
-      conditionalityCoercionAnalysisEligible ≡ false
+    twoStageRelayReportedByNamedSources : Bool
+    twoStageRelayReportedByNamedSourcesIsTrue :
+      twoStageRelayReportedByNamedSources ≡ true
+    originalThreadInHand : Bool
+    originalThreadInHandIsFalse : originalThreadInHand ≡ false
+    threadAuthenticationPaid : Bool
+    threadAuthenticationPaidIsFalse : threadAuthenticationPaid ≡ false
+    relayTopologyPrimaryPaid : Bool
+    relayTopologyPrimaryPaidIsFalse : relayTopologyPrimaryPaid ≡ false
+    australianConditionalityAnalysisEligible : Bool
+    australianConditionalityAnalysisEligibleIsFalse :
+      australianConditionalityAnalysisEligible ≡ false
 
 open CurrentMessageEvidenceState public
 
 currentMessageEvidenceState : CurrentMessageEvidenceState
 currentMessageEvidenceState = current-message-evidence-state
-  oppositionReportedSentence
+  twoStageRelayReported
   true refl
   false refl
   false refl
@@ -135,54 +140,50 @@ currentMessageEvidenceState = current-message-evidence-state
 -- Search intent for the exact first live residual.
 ------------------------------------------------------------------------
 
-currentPrimaryArtifactSearchIntent : Search.SearchIntent
-currentPrimaryArtifactSearchIntent = Search.searchIntent
+currentPrimaryThreadSearchIntent : Search.SearchIntent
+currentPrimaryThreadSearchIntent = Search.searchIntent
   "SolomonIslandsForeignInterferenceSourceLegalWeldExact.currentSourceLegalResidual"
-  "authenticate the primary artifact underlying the Opposition-attributed defeat-motion sentence"
+  "authenticate the primary WhatsApp/thread topology connecting the High Commission update, Sade forwarding and Sade's downstream political message"
   Search.propositionSourceProducer
   Search.exploitKnownResidual
   "Solomon Islands / Australia bilateral political communication"
   "late August to 6 September 2026, centred on the no-confidence motion and treaty negotiations"
   Search.primaryTextRequired
-  "same communication chain as any message relied upon for the defeat-motion attribution"
-  "ABC-authenticated Roach treaty/funding message and Opposition-published subsequent-message allegation"
-  "primary artifact must preserve sender, recipient, timestamp, adjacency/context and content"
-  "exclude republications, paraphrases and secondary stories as substitutes for the underlying artifact"
-  (Search.searchBudget 6 10 3 "narrow acquisition budget: primary artifact first; stop when same-object provenance is paid")
-  "Solomon defeat-motion primary-artifact acquisition intent"
+  "High Commission -> Sade upstream message and Sade -> coalition downstream message must remain separately authored edges even if adjacent in one thread"
+  "ABC-authenticated Roach treaty/funding message; AAP report that Sade forwarded the update and sent his own coalition-directed message; Opposition-published defeat-motion wording"
+  "primary artifact must preserve forwarding markers, sender, recipient, timestamp, adjacency/context and exact content"
+  "exclude republications and do not treat Sade's downstream language as Australian speech without an independent authorship/agency bridge"
+  (Search.searchBudget 6 10 3 "narrow acquisition budget: primary thread first; stop when relay same-object provenance is paid")
+  "Solomon WhatsApp relay-topology primary acquisition intent"
 
 currentProducerIsPropositionSourceProducer :
-  Search.producerClass currentPrimaryArtifactSearchIntent ≡ Search.propositionSourceProducer
+  Search.producerClass currentPrimaryThreadSearchIntent ≡ Search.propositionSourceProducer
 currentProducerIsPropositionSourceProducer = refl
 
 ------------------------------------------------------------------------
 -- No-collapse laws.
 ------------------------------------------------------------------------
 
-data RepeatedSecondaryReportPaysPrimaryArtifactDemand : Set where
-data OppositionPublicationAuthenticatesUnderlyingArtifact : Set where
-data PrimaryArtifactAcquisitionProvesAustralianSender : Set where
-data SenderIdentityAutomaticallyProvesCoercion : Set where
+data RepeatedSecondaryReportPaysPrimaryThreadDemand : Set where
+data SadeForwardingTransfersAustralianAuthorship : Set where
+data PrimaryThreadAcquisitionProvesConditionality : Set where
+data DomesticUseAutomaticallyProvesForeignIntent : Set where
 
-secondaryRepetitionDoesNotPayPrimaryArtifact :
-  RepeatedSecondaryReportPaysPrimaryArtifactDemand → ⊥
-secondaryRepetitionDoesNotPayPrimaryArtifact ()
+secondaryRepetitionDoesNotPayPrimaryThread :
+  RepeatedSecondaryReportPaysPrimaryThreadDemand → ⊥
+secondaryRepetitionDoesNotPayPrimaryThread ()
 
-oppositionPublicationDoesNotAuthenticateArtifact :
-  OppositionPublicationAuthenticatesUnderlyingArtifact → ⊥
-oppositionPublicationDoesNotAuthenticateArtifact ()
+forwardingDoesNotTransferAustralianAuthorship :
+  SadeForwardingTransfersAustralianAuthorship → ⊥
+forwardingDoesNotTransferAustralianAuthorship ()
 
-acquisitionDoesNotProveSenderByExistence :
-  PrimaryArtifactAcquisitionProvesAustralianSender → ⊥
-acquisitionDoesNotProveSenderByExistence ()
+threadAcquisitionDoesNotProveConditionalityByExistence :
+  PrimaryThreadAcquisitionProvesConditionality → ⊥
+threadAcquisitionDoesNotProveConditionalityByExistence ()
 
-senderIdentityDoesNotAutoEstablishCoercion :
-  SenderIdentityAutomaticallyProvesCoercion → ⊥
-senderIdentityDoesNotAutoEstablishCoercion ()
-
-------------------------------------------------------------------------
--- Current residual remains exactly the one selected by the source/legal weld.
-------------------------------------------------------------------------
+domesticUseDoesNotAutoProveForeignIntent :
+  DomesticUseAutomaticallyProvesForeignIntent → ⊥
+domesticUseDoesNotAutoProveForeignIntent ()
 
 currentResidualReference : String
 currentResidualReference = Weld.nextExactProducer Weld.currentSourceLegalResidual
