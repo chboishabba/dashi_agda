@@ -28,6 +28,12 @@ dropScaledZero :
   x + scale * 0ℚ ≡ x
 dropScaledZero = solve-∀
 
+scaleThreeSum :
+  ∀ (scale a b c : ℚ) →
+  scale * (a + (b + c))
+  ≡ scale * a + (scale * b + scale * c)
+scaleThreeSum scale a b c = solve-∀
+
 scaleFourSum :
   ∀ (scale a b c d : ℚ) →
   scale * (a + (b + (c + d)))
