@@ -7,6 +7,7 @@ import DASHI.Environment.SolarOpticalSiteFibreCrossPollinationExact
 import DASHI.Physics.Optics.InverseCausticNumericalProducerExact
 import DASHI.Physics.Optics.OpticalSurfaceManufacturingToleranceExact
 import DASHI.Physics.Optics.LESOpticalNumericalWitnessCrossPollinationExact
+import DASHI.Physics.Optics.LESOpticalSurrogateEscalationExact
 
 ------------------------------------------------------------------------
 -- Import-only validation surface for the semiconductor / optical / LES site
