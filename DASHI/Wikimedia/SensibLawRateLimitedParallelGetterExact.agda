@@ -14,6 +14,7 @@ import DASHI.Wikimedia.SensibLawSharedAcquisitionExecutionExact as Shared
 -- Runtime counterpart:
 --   SensibLaw/src/sources/rate_limit.py::TokenBucketRateLimiter
 --   SensibLaw/src/ontology/wikidata_nat_hf_partial_read.py
+--   SensibLaw/src/ontology/wikidata_nat_hf_strict_executor.py
 --
 -- Concurrency and network-rate authority are deliberately different gates.
 -- More worker slots never manufacture more rate permits.
@@ -60,7 +61,7 @@ open ParallelGetterScheduleReceipt public
 natParallelGetterSchedule : ParallelGetterScheduleReceipt
 natParallelGetterSchedule =
   parallel-getter-schedule-receipt
-    "bounded_rate_limited_parallel"
+    "bounded_rate_limited_parallel_ordered_commit"
     4
     4
     "SensibLaw src/sources/rate_limit.py TokenBucketRateLimiter"
@@ -155,6 +156,21 @@ rateLimitedParallelRefinesSerial :
 rateLimitedParallelRefinesSerial reduce parallel serial refl = refl
 
 ------------------------------------------------------------------------
+-- Strict fail-closed execution uses ordered semantic commit.
+--
+-- A physical read beyond the current serial stopping frontier is speculative.
+-- Its failure is execution evidence only unless the ordered serial commit path
+-- actually reaches that chunk. This prevents completion timing from changing
+-- complete/partial/engine_failed/engine_unavailable classification.
+------------------------------------------------------------------------
+
+data LaterSpeculativeFailureOverridesEarlierSerialStop : Set where
+
+laterSpeculativeFailureCannotOverrideEarlierSerialStop :
+  LaterSpeculativeFailureOverridesEarlierSerialStop → ⊥
+laterSpeculativeFailureCannotOverrideEarlierSerialStop ()
+
+------------------------------------------------------------------------
 -- Shared-acquisition lineage: parallelism is an implementation strategy for
 -- the already-existing shared Nat acquisition execution, not a new authority.
 ------------------------------------------------------------------------
@@ -227,6 +243,8 @@ record RateLimitedParallelGetterContract : Set where
     workerAndRatePermitsAreDistinct : Bool
     completionOrderErasedBeforeCanonicalReduction : Bool
     earliestResolvingChunkOwnsCanonicalRouteSeed : Bool
+    strictFailureClassificationUsesOrderedCommit : Bool
+    speculativeLaterFailureOverridesEarlierSerialStop : Bool
     higherThanSerialFrontierMayBeCancelled : Bool
     reusesDashiExactBatchRealization : Bool
     sameObservationSurfaceImpliesSameConsumerResult : Bool
@@ -236,4 +254,4 @@ record RateLimitedParallelGetterContract : Set where
 canonicalRateLimitedParallelGetterContract : RateLimitedParallelGetterContract
 canonicalRateLimitedParallelGetterContract =
   rate-limited-parallel-getter-contract
-    true true true true true true true false false
+    true true true true true false true true true false false
