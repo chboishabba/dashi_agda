@@ -1,0 +1,76 @@
+module DASHI.Law.SensibLawParetoBoundProofDirectedCorpusSearchEverything where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Core.BoundAcquisitionDemandExact as CoreBound
+import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as SearchLoop
+import DASHI.Law.SensibLawParetoBoundSourceDemandExact as Bound
+import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchBidiExact as Search
+import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Intent
+import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as Residual
+import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
+import DASHI.Law.HerzogColonialWrongTypeElementRequirementExact as Herzog
+
+corePolicyBoundToExactResidual :
+  Residual.missingInstitutionalConstraint ≡
+  Residual.dutyResidualKind Climate.coreGovernmentPolicy
+corePolicyBoundToExactResidual = refl
+
+corePolicyBoundAcquisitionPaysExactResidual :
+  Bound.LegalSourceAcquisition.residual
+    (CoreBound.acquisition Bound.corePolicyBoundSourceDemand) ≡
+  Residual.dutyResidualKind Climate.coreGovernmentPolicy
+corePolicyBoundAcquisitionPaysExactResidual =
+  Bound.sourceRoutePaysSelectedResidual Bound.corePolicyBoundSourceDemand
+
+corePolicyBoundToExactProducer :
+  Search.CertifiedSearchDirective.producerClass Search.corePolicySearchDirective ≡
+  Intent.authorityTreatmentProducer
+corePolicyBoundToExactProducer =
+  Bound.sourceRouteUsesSelectedProducer Bound.corePolicyBoundSourceDemand
+
+statutoryCoherenceBoundToExactResidual :
+  Residual.missingStatutoryPredicate ≡
+  Residual.dutyResidualKind Climate.statutoryCoherence
+statutoryCoherenceBoundToExactResidual = refl
+
+statutoryCoherenceBoundToExactProducer :
+  Search.CertifiedSearchDirective.producerClass Search.statutoryCoherenceSearchDirective ≡
+  Intent.exactCitedAuthorityProducer
+statutoryCoherenceBoundToExactProducer =
+  Bound.sourceRouteUsesSelectedProducer Bound.statutoryCoherenceBoundSourceDemand
+
+herzogAuthorityMeaningBoundToExactResidual :
+  Residual.missingRelationalFeature ≡
+  Bound.herzogResidual Herzog.requiresAuthorityMeaningErasure
+herzogAuthorityMeaningBoundToExactResidual = refl
+
+herzogPowerBoundToExactProducer :
+  Search.CertifiedSearchDirective.producerClass Search.herzogPowerPrerequisiteSearchDirective ≡
+  Intent.authorityDiscoveryProducer
+herzogPowerBoundToExactProducer =
+  Bound.sourceRouteUsesSelectedProducer Bound.herzogPowerPrerequisiteBoundSourceDemand
+
+herzogIncidentBoundToExactProducer :
+  Search.CertifiedSearchDirective.producerClass Search.herzogIncidentWeldSearchDirective ≡
+  Intent.occurrenceEvidenceProducer
+herzogIncidentBoundToExactProducer =
+  Bound.sourceRouteUsesSelectedProducer Bound.herzogIncidentWeldBoundSourceDemand
+
+boundSourceDemandStillDoesNotPayRequirement :
+  CoreBound.BoundDemandAutomaticallyPaysRequirement → ⊥
+boundSourceDemandStillDoesNotPayRequirement = CoreBound.bindingDoesNotPayRequirement
+
+boundSourceDemandStillDoesNotCreateAuthority :
+  Bound.BoundSourceDemandCreatesLegalAuthority → ⊥
+boundSourceDemandStillDoesNotCreateAuthority = Bound.boundDemandDoesNotCreateAuthority
+
+oneBoundDemandDoesNotCloseSiblingRequirement :
+  Bound.BoundSourceForOneRequirementClosesSiblingRequirement → ⊥
+oneBoundDemandDoesNotCloseSiblingRequirement = Bound.boundDemandDoesNotCloseSibling
+
+looseDirectiveStillIsNotBoundProgress :
+  Bound.LooseDirectiveCountsAsBoundProgress → ⊥
+looseDirectiveStillIsNotBoundProgress = Bound.looseDirectiveIsNotBoundProgress

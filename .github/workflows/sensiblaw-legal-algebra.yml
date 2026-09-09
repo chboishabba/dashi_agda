@@ -1,0 +1,86 @@
+name: SensibLaw legal algebra
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/BoundAcquisitionDemandExact.agda'
+      - 'DASHI/Core/Everything.agda'
+      - 'DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64WrongTypeSourceRealisationExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenDownstreamElementSourceAtlasExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawDutyPublicAuthoritySourceLineageGraphExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawDutySourceLineageRefinementCutRerunExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawUniversalLegalAlgebraEverything.agda'
+      - 'DASHI/Cognition/Everything.agda'
+      - 'DASHI/Law/SensibLawParetoBoundSourceDemandExact.agda'
+      - 'DASHI/Law/SensibLawParetoBoundProofDirectedCorpusSearchEverything.agda'
+      - 'DASHI/Law/SensibLawPabaiDefeaterRefinementRerunExact.agda'
+      - 'DASHI/Law/Everything.agda'
+      - '.github/workflows/sensiblaw-legal-algebra.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sensiblaw-legal-algebra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check generic bound acquisition carrier
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Core/BoundAcquisitionDemandExact.agda
+
+      - name: Type-check source attribution and downstream WrongType discipline
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawAttributedSourcePNFCandidateWeldExact.agda
+          DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda
+
+      - name: Type-check Cullen introspective and source-attributed spine
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenEdelman64WrongTypeSourceRealisationExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenDownstreamElementSourceAtlasExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda
+
+      - name: Type-check source-owned duty lineage
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawDutyPublicAuthoritySourceLineageGraphExact.agda
+          DASHI/Cognition/PNF/SensibLawDutySourceLineageRefinementCutRerunExact.agda
+
+      - name: Type-check bound proof-directed source demand
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Law/SensibLawParetoBoundSourceDemandExact.agda
+          DASHI/Law/SensibLawParetoBoundProofDirectedCorpusSearchEverything.agda
+
+      - name: Type-check universal legal algebra aggregate
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawUniversalLegalAlgebraEverything.agda
+
+      - name: Type-check Law aggregate
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Law/Everything.agda
