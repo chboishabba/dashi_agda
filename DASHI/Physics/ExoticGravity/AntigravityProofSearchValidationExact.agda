@@ -17,14 +17,13 @@ import DASHI.Physics.ExoticGravity.AntigravitySourceBundleDerivationLineageExact
 import DASHI.Physics.ExoticGravity.AntigravityExperimentalCutProvenanceExact as Provenance
 import DASHI.Physics.ExoticGravity.AntigravityBundleExecutionDerivationExact as BundleDerivation
 import DASHI.Physics.ExoticGravity.AntigravityFullyDerivedExperimentalCutExact as FullyDerived
+import DASHI.Physics.ExoticGravity.AntigravityExecutionCalibrationExact as Calibration
+import DASHI.Physics.ExoticGravity.AntigravityCalibratedExecutionBridgeExact as Calibrated
+import DASHI.Physics.ExoticGravity.AntigravityCalibratedFullyDerivedExperimentalCutExact as CalibratedCut
 import DASHI.Physics.ExoticGravity.AntigravityStrongPromotionFacadeExact as Strong
 
 ------------------------------------------------------------------------
 -- FOCUSED VALIDATION ROOT
---
--- This owner deliberately imports only the antigravity proof-search cone added
--- after #828.  It is intended to be checked directly with the repo's Agda 2.9
--- runner rather than validating the entire ExoticGravity aggregate.
 ------------------------------------------------------------------------
 
 currentFrontierStillSourceGeometry :
@@ -91,6 +90,18 @@ sourceTargetIsNotMeasurementReceipt :
     ≡ false
 sourceTargetIsNotMeasurementReceipt = refl
 
+apparatusIdentityIsNotRunIdentity :
+  Acquisition.apparatusIdentityEqualsRunIdentifier
+    Acquisition.canonicalSourceAcquisitionCompilationBoundary
+    ≡ false
+apparatusIdentityIsNotRunIdentity = refl
+
+sourceCalibrationCarrierIsNotRevision :
+  Acquisition.calibrationCarrierEqualsCalibrationRevision
+    Acquisition.canonicalSourceAcquisitionCompilationBoundary
+    ≡ false
+sourceCalibrationCarrierIsNotRevision = refl
+
 currentRepoStillLacksPhysicalSourcePackage :
   Acquisition.currentRepoContainsCanonicalPhysicalSourcePackage
     Acquisition.canonicalSourceAcquisitionCompilationBoundary
@@ -109,6 +120,12 @@ bundleStateWitnessDoesNotEqualExecutionProvenance :
     ≡ false
 bundleStateWitnessDoesNotEqualExecutionProvenance = refl
 
+executionCalibrationCarrierIsNotRevision :
+  Provenance.calibrationCarrierEqualsCalibrationRevision
+    Provenance.canonicalExperimentalCutProvenanceBoundary
+    ≡ false
+executionCalibrationCarrierIsNotRevision = refl
+
 bundleDerivationRequiresExactOutputIdentity :
   BundleDerivation.exactOutputBundleIdentityRequired
     BundleDerivation.canonicalBundleExecutionDerivationBoundary
@@ -121,11 +138,64 @@ fullyDerivedCutStillDoesNotProveAntigravity :
     ≡ false
 fullyDerivedCutStillDoesNotProveAntigravity = refl
 
+------------------------------------------------------------------------
+-- Calibration must be typed, same-data, same-configuration, and remain weaker
+-- than mechanism/theory promotion.
+------------------------------------------------------------------------
+
+calibrationCarrierStringIsNotTypedRefinement :
+  Calibration.calibrationCarrierStringEqualsTypedRefinement
+    Calibration.canonicalExecutionCalibrationBoundary
+    ≡ false
+calibrationCarrierStringIsNotTypedRefinement = refl
+
+typedDataRefinementIsRequired :
+  Calibration.typedDataRefinementRequired
+    Calibration.canonicalExecutionCalibrationBoundary
+    ≡ true
+typedDataRefinementIsRequired = refl
+
+calibrationMustBindExactExecutionData :
+  Calibrated.refinedEvidenceMustBeExactExecutionData
+    Calibrated.canonicalCalibratedExecutionBridgeBoundary
+    ≡ true
+calibrationMustBindExactExecutionData = refl
+
+sameApparatusLabelDoesNotWeldSourceRun :
+  Calibrated.sameApparatusLabelAloneWeldsSourceReceiptToExecution
+    Calibrated.canonicalCalibratedExecutionBridgeBoundary
+    ≡ false
+sameApparatusLabelDoesNotWeldSourceRun = refl
+
+allFourStagesNeedTypedCalibration :
+  CalibratedCut.allFourStagesNeedTypedCalibration
+    CalibratedCut.canonicalCalibratedFullyDerivedBoundary
+    ≡ true
+allFourStagesNeedTypedCalibration = refl
+
+provenanceStringsDoNotPayCalibration :
+  CalibratedCut.provenanceStringsAlonePayCalibration
+    CalibratedCut.canonicalCalibratedFullyDerivedBoundary
+    ≡ false
+provenanceStringsDoNotPayCalibration = refl
+
 newConsumersRequireStrongReceipt :
   Strong.newConsumersRequireFullyDerivedReceipt
     Strong.canonicalStrongPromotionBoundary
     ≡ true
 newConsumersRequireStrongReceipt = refl
+
+newConsumersRequireTypedCalibration :
+  Strong.newConsumersRequireTypedCalibration
+    Strong.canonicalStrongPromotionBoundary
+    ≡ true
+newConsumersRequireTypedCalibration = refl
+
+calibrationStringAloneCannotPromote :
+  Strong.calibrationStringAloneSufficient
+    Strong.canonicalStrongPromotionBoundary
+    ≡ false
+calibrationStringAloneCannotPromote = refl
 
 legacyComparativeReceiptDoesNotAutoUpgrade :
   Strong.legacyComparativeReceiptAutomaticallyUpgrades
@@ -140,9 +210,7 @@ strongComparativeTensionStillNotUniversalLaw :
 strongComparativeTensionStillNotUniversalLaw = refl
 
 ------------------------------------------------------------------------
--- Theory diligence remains separately load-bearing.  Importing the candidate
--- list here ensures the validation cone includes the attribution-side residual
--- without pretending that it pays the empirical source bundle.
+-- Theory diligence remains separately load-bearing.
 ------------------------------------------------------------------------
 
 prd1991DiligenceResidualsLoad :
