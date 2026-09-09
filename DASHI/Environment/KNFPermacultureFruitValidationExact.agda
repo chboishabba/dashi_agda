@@ -5,3 +5,5 @@ import DASHI.Environment.KoreanNaturalFarmingExact
 import DASHI.Environment.KNFPermacultureEmbodiedEnergyBridgeExact
 import DASHI.Biology.FruitBoundaryResourcePaidRepairExact
 import DASHI.Environment.KNFSoilMicrobePlantFruitResourceLoopExact
+import DASHI.Environment.KNFPlantSoilReturnFlowLoopExact
+import DASHI.Environment.KNFSituatedSiteResponseFibreExact
