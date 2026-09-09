@@ -57,60 +57,146 @@ pairingStatus =
 
 ------------------------------------------------------------------------
 -- Least-privilege selected acquisition target.
+--
+-- IMPORTANT: the universal left-inverse is proof-bearing.  A target that only
+-- stores the proposition's TYPE or a Bool would forget the exact coordinate
+-- that distinguishes a real codec from an unverified candidate.
 ------------------------------------------------------------------------
 
-record FormulaRetractionAcquisitionTarget : Set where
+record FormulaRetractionAcquisitionTarget : Set₁ where
   constructor formulaRetractionAcquisitionTarget
   field
     selectedProducer : FormulaRetractionProducerKind
-    ConcreteArithmeticSystem : Set₁
     FormulaCarrier : Set
     encodeFormula : FormulaCarrier → Nat
     decodeFormula : Nat → FormulaCarrier
-    requiredLaw : Set
-    lawIsExactLeftInverse : Bool
-    lawIsExactLeftInverseIsTrue : lawIsExactLeftInverse ≡ true
+    decodeEncodeFormula :
+      (formula : FormulaCarrier) →
+      decodeFormula (encodeFormula formula) ≡ formula
 
--- The current selected theorem shape is independent of the eventual encoding
--- implementation: recover the exact left inverse on the SAME arithmetic
--- formula carrier.  No claim is made that a producer is presently inhabited.
+open FormulaRetractionAcquisitionTarget public
+
 selectedFormulaRetractionShape :
-  (System : Set₁) →
   (Formula : Set) →
   (encode : Formula → Nat) →
   (decode : Nat → Formula) →
   ((formula : Formula) → decode (encode formula) ≡ formula) →
   FormulaRetractionAcquisitionTarget
-selectedFormulaRetractionShape System Formula encode decode roundtrip =
+selectedFormulaRetractionShape Formula encode decode roundtrip =
   formulaRetractionAcquisitionTarget
     directFormulaNatCodec
-    System
     Formula
     encode
     decode
-    ((formula : Formula) → decode (encode formula) ≡ formula)
-    true
-    refl
+    roundtrip
 
 ------------------------------------------------------------------------
--- Once the target is instantiated on an ArithmetisedFormalSystem, the
--- downstream substitution and diagonal compilers are already available.
+-- Exact same-carrier payment for the formal-system code surface.
 ------------------------------------------------------------------------
 
 record ExactFormulaRetractionPayment
     (F : Godel.ArithmetisedFormalSystem) : Set₁ where
   constructor exactFormulaRetractionPayment
   field
-    retraction : Subst.FormulaCodeRetraction F
+    decodeFormula : Nat → Godel.Formula F
+    decodeCodeFormula :
+      (formula : Godel.Formula F) →
+      decodeFormula (Godel.codeFormula F formula) ≡ formula
 
 open ExactFormulaRetractionPayment public
+
+paymentAsRetraction :
+  (F : Godel.ArithmetisedFormalSystem) →
+  ExactFormulaRetractionPayment F →
+  Subst.FormulaCodeRetraction F
+paymentAsRetraction F payment =
+  Subst.formulaCodeRetraction
+    (decodeFormula payment)
+    (decodeCodeFormula payment)
 
 paymentCompilesSubstitution :
   (F : Godel.ArithmetisedFormalSystem) →
   ExactFormulaRetractionPayment F →
   Godel.ArithmetisedSubstitution F
 paymentCompilesSubstitution F payment =
-  Subst.compileArithmetisedSubstitution F (retraction payment)
+  Subst.compileArithmetisedSubstitution F (paymentAsRetraction F payment)
+
+------------------------------------------------------------------------
+-- A generic acquisition target only pays the formal-system retraction when it
+-- is welded to the EXACT `Formula F` / `codeFormula F` carrier.  Shape reuse
+-- from another codec remains insufficient.
+------------------------------------------------------------------------
+
+record SameFormulaCarrierWeld
+    (F : Godel.ArithmetisedFormalSystem)
+    (target : FormulaRetractionAcquisitionTarget) : Set₁ where
+  constructor sameFormulaCarrierWeld
+  field
+    targetFormulaToFormalFormula :
+      FormulaCarrier target → Godel.Formula F
+    formalFormulaToTargetFormula :
+      Godel.Formula F → FormulaCarrier target
+    targetFormalRoundtrip :
+      (formula : Godel.Formula F) →
+      targetFormulaToFormalFormula
+        (formalFormulaToTargetFormula formula)
+      ≡ formula
+    encodeSameObject :
+      (formula : Godel.Formula F) →
+      encodeFormula target (formalFormulaToTargetFormula formula)
+      ≡ Godel.codeFormula F formula
+    decodeSameObject :
+      (n : Nat) →
+      targetFormulaToFormalFormula (decodeFormula target n)
+      ≡ targetFormulaToFormalFormula (decodeFormula target n)
+
+open SameFormulaCarrierWeld public
+
+------------------------------------------------------------------------
+-- We deliberately DO NOT compile SameFormulaCarrierWeld to payment yet.
+-- `decodeSameObject` above is reflexive bookkeeping only; a real compiler needs
+-- the stronger commuting square that identifies formal decoding with target
+-- decoding at every formal code.  Keeping that missing coordinate visible
+-- prevents an isomorphic-but-different carrier from being promoted silently.
+------------------------------------------------------------------------
+
+data FormalDecodeCommutesWithTargetDecode : Set where
+
+record ExactFormulaRetractionWeld
+    (F : Godel.ArithmetisedFormalSystem)
+    (target : FormulaRetractionAcquisitionTarget) : Set₁ where
+  constructor exactFormulaRetractionWeld
+  field
+    targetToFormal : FormulaCarrier target → Godel.Formula F
+    formalToTarget : Godel.Formula F → FormulaCarrier target
+    targetToFormalAfterFormalToTarget :
+      (formula : Godel.Formula F) →
+      targetToFormal (formalToTarget formula) ≡ formula
+    encodeCommutes :
+      (formula : Godel.Formula F) →
+      encodeFormula target (formalToTarget formula)
+      ≡ Godel.codeFormula F formula
+    decodeEncodedFormalCommutes :
+      (formula : Godel.Formula F) →
+      targetToFormal
+        (decodeFormula target (Godel.codeFormula F formula))
+      ≡ formula
+
+open ExactFormulaRetractionWeld public
+
+weldCompilesPayment :
+  (F : Godel.ArithmetisedFormalSystem) →
+  (target : FormulaRetractionAcquisitionTarget) →
+  ExactFormulaRetractionWeld F target →
+  ExactFormulaRetractionPayment F
+weldCompilesPayment F target weld =
+  exactFormulaRetractionPayment
+    (λ n → targetToFormal weld (decodeFormula target n))
+    (decodeEncodedFormalCommutes weld)
+
+------------------------------------------------------------------------
+-- Second residual: internal self-substitution representability.
+------------------------------------------------------------------------
 
 record ExactDiagonalPayment
     (F : Godel.ArithmetisedFormalSystem) : Set₁ where
@@ -141,6 +227,9 @@ data ExactCodecOnDifferentCarrierPaysFormulaRetraction : Set where
 data CodecContractWithoutImplementationPaysFormulaRetraction : Set where
 data OneWitnessRoundtripPaysUniversalFormulaRetraction : Set where
 data FormulaRetractionPaysSelfSubstitutionRepresentability : Set where
+data PropositionTypeWithoutProofPaysFormulaRetraction : Set where
+
+data CarrierIsomorphismAloneIdentifiesGodelCode : Set where
 
 otherCarrierCodecDoesNotPayArithmeticFormulaRetraction :
   ExactCodecOnDifferentCarrierPaysFormulaRetraction → ⊥
@@ -158,21 +247,32 @@ formulaRetractionDoesNotPayInternalRepresentation :
   FormulaRetractionPaysSelfSubstitutionRepresentability → ⊥
 formulaRetractionDoesNotPayInternalRepresentation ()
 
+propositionWithoutWitnessDoesNotPay :
+  PropositionTypeWithoutProofPaysFormulaRetraction → ⊥
+propositionWithoutWitnessDoesNotPay ()
+
+carrierIsomorphismDoesNotIdentifyGodelCode :
+  CarrierIsomorphismAloneIdentifiesGodelCode → ⊥
+carrierIsomorphismDoesNotIdentifyGodelCode ()
+
 record GodelDiagonalConcreteFirstResidualBoundary : Set where
   constructor godelDiagonalConcreteFirstResidualBoundary
   field
     genericSubstitutionCompilerClosed : Bool
     genericDiagonalCompilerClosed : Bool
+    acquisitionTargetStoresUniversalProof : Bool
     directFormulaNatCodecRecovered : Bool
     exactStreamCodecImplementationRecovered : Bool
     pairingCodecRecovered : Bool
     differentCarrierRoundtripAccepted : Bool
     witnessOnlyRoundtripAccepted : Bool
+    propositionTypeWithoutProofAccepted : Bool
     firstConcreteTargetIsUniversalFormulaLeftInverse : Bool
+    sameCarrierGodelCodeWeldRequired : Bool
     secondTargetIsInternalSelfSubstitutionRepresentability : Bool
 
 canonicalGodelDiagonalConcreteFirstResidualBoundary :
   GodelDiagonalConcreteFirstResidualBoundary
 canonicalGodelDiagonalConcreteFirstResidualBoundary =
   godelDiagonalConcreteFirstResidualBoundary
-    true true false false false false false true true
+    true true true false false false false false false true true true
