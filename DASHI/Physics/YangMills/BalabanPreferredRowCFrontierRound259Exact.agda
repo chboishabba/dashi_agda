@@ -9,9 +9,11 @@ module DASHI.Physics.YangMills.BalabanPreferredRowCFrontierRound259Exact where
 -- dependency chain:
 --
 --   exact same-density compact-group Heat/Doob realization
---     + pointwise real CMP116 Hessian -> marked rational shell
+--     + source marked Hessian COMPARISON majorant
+--     + one reference/anchor Hessian majorant
 --     + exact covariance -> marked first-gradient rational majorant
---     -> rational temporal debt (R257)
+--     -> absolute static majorant by R260
+--     -> rational temporal debt (R257/R253)
 --
 --   same literal Heat/Doob generator
 --     + one weighted generator-row = CMP116 marked Hessian-row identification
@@ -22,8 +24,9 @@ module DASHI.Physics.YangMills.BalabanPreferredRowCFrontierRound259Exact where
 --     + one geometric-envelope shape payment
 --     -> explicit connected clustering (R258).
 --
--- No old temporal split inequality, spatial dynamic/static split, all-power
--- propagation theorem, or broad clustering record remains primitive here.
+-- Trust-boundary correction: CMP99/116 marked random-walk resummation controls a
+-- domain-comparison difference.  It must not be silently promoted to an
+-- absolute Hessian bound.  R260 makes the necessary anchor explicit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
@@ -32,6 +35,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanHeatDoobFromSameDensityExpectationRound108Exact as Heat
 import DASHI.Physics.YangMills.BalabanHeatDoobMarkedTemporalMajorizationRound257Exact as Temporal
+import DASHI.Physics.YangMills.BalabanCMP116AnchoredHessianMajorantRound260Exact as Anchor
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianGeneratorRowExact as Spatial
 import DASHI.Physics.YangMills.BalabanStochasticFiniteSpeedSpatialClusteringExact as Stochastic
 import DASHI.Physics.YangMills.BalabanStochasticSpatialEnvelopeToConnectedClusteringRound258Exact as Cluster
@@ -39,7 +43,8 @@ import DASHI.Physics.YangMills.BalabanStochasticSpatialEnvelopeToConnectedCluste
 
 data PreferredRowCLeaf259 : Set where
   literalSameDensityCompactGroupHeatExpectation : PreferredRowCLeaf259
-  literalRealCMP116HessianToMarkedShell : PreferredRowCLeaf259
+  literalCMP116MarkedHessianComparison : PreferredRowCLeaf259
+  literalReferenceHessianAnchorMajorant : PreferredRowCLeaf259
   literalExactCovarianceToMarkedFirstGradientMajorant : PreferredRowCLeaf259
   literalSameDensityWeightedGeneratorIsCMP116HessianRow : PreferredRowCLeaf259
   literalSameMeasureTemporalRelaxationAtBalancedTime : PreferredRowCLeaf259
@@ -52,24 +57,23 @@ data LeafState259 : Set where
 
 preferredRowCLeafState259 : PreferredRowCLeaf259 → LeafState259
 preferredRowCLeafState259 literalSameDensityCompactGroupHeatExpectation = open
-preferredRowCLeafState259 literalRealCMP116HessianToMarkedShell = open
+preferredRowCLeafState259 literalCMP116MarkedHessianComparison = open
+preferredRowCLeafState259 literalReferenceHessianAnchorMajorant = open
 preferredRowCLeafState259 literalExactCovarianceToMarkedFirstGradientMajorant = open
 preferredRowCLeafState259 literalSameDensityWeightedGeneratorIsCMP116HessianRow = open
 preferredRowCLeafState259 literalSameMeasureTemporalRelaxationAtBalancedTime = open
 preferredRowCLeafState259 literalSameGeneratorFiniteSpeedAtBalancedTime = open
 preferredRowCLeafState259 literalGeometricSpatialEnvelope = open
 
--- Exact source-level owners.  The two stochastic balanced-time inequalities are
--- distinct fields of the Round70 data record; its canonical proof-level surface
--- currently reports them jointly, so this scheduler does not invent separate
--- authority labels for them.
 sameDensityHeatExpectationLevel : ProofLevel
 sameDensityHeatExpectationLevel =
   Heat.literalCompactGroupHeatTiltExpectationRound108Level
 
-pointwiseRealHessianMarkedShellLevel : ProofLevel
-pointwiseRealHessianMarkedShellLevel =
-  Temporal.literalCMP116RealHessianMarkedShellMajorizationLevel
+markedHessianComparisonSourceLevel : ProofLevel
+markedHessianComparisonSourceLevel = Anchor.markedComparisonSourceRealizationLevel
+
+referenceHessianAnchorLevel : ProofLevel
+referenceHessianAnchorLevel = Anchor.referenceAnchorMajorizationLevel
 
 exactCovarianceMarkedFirstGradientMajorizationLevel : ProofLevel
 exactCovarianceMarkedFirstGradientMajorizationLevel =
@@ -87,6 +91,9 @@ geometricSpatialEnvelopeLevel : ProofLevel
 geometricSpatialEnvelopeLevel = Cluster.literalSameFamilyGeometricSpatialEnvelopeLevel
 
 -- Closed consequences after the leaves above are inhabited.
+anchoredAbsoluteHessianCompilerLevel : ProofLevel
+anchoredAbsoluteHessianCompilerLevel = Anchor.anchoredHessianMajorantCompilerLevel
+
 temporalRealToRationalCompilerLevel : ProofLevel
 temporalRealToRationalCompilerLevel = Temporal.markedTemporalRealToRationalCompilerLevel
 
