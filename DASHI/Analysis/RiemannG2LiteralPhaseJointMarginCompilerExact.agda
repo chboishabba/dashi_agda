@@ -3,12 +3,13 @@ module DASHI.Analysis.RiemannG2LiteralPhaseJointMarginCompilerExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as Literal
-import DASHI.Analysis.RiemannG2DirectComplementUnpaidContextExact as Context
+import DASHI.Analysis.RiemannG2BalanceFreeComplementContextExact as Context
 import DASHI.Analysis.RiemannG2DirectIndependentComplementMarginExact as Legacy
 import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamma
 import DASHI.Analysis.RiemannAristotlePoleQuotientClusterMarginTargetExact as Cluster
@@ -17,19 +18,19 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientComplementMarginCompilerExact 
 import DASHI.Analysis.RiemannG2FinalSplitComplementSameObjectAssemblyExact as Existing
 
 ------------------------------------------------------------------------
--- LITERAL PHASE-SUM -> CANONICAL ONE-LEAF MARGIN
+-- LITERAL PHASE-SUM -> BALANCE-FREE CANONICAL MARGIN
 --
--- This is now genuinely lower than the final strict-margin input.  The payment
--- is indexed only by:
+-- The analytic theorem is now dependency-level independent of the terminal
+-- balance.  Its context contains the scalar/order/taper/cluster coordinates
+-- required to STATE the inequality, but no theorem `cluster = Off + Gamma`.
 --
---   * the direct literal targets;
---   * an UNPAID same-object/order/taper/cluster context; and
---   * the final literal near model.
+-- The research theorem is therefore exactly the visible signed-phase statement:
 --
--- It does not presuppose `literalComplementStrictBelowMargin` anywhere in its
--- indices.  The analytic theorem is stated directly on the phase-visible finite
--- sum.  Rewriting the exact final-near equality creates the canonical margin
--- payment, which then compiles to the historical final input and contradiction.
+--   literalFiniteNearValue + transportedFar + literalGamma < clusterMargin.
+--
+-- Rewriting the exact final-near equality produces the canonical joint-margin
+-- payment.  Only after that payment exists may a separate final-balance
+-- attachment be supplied to compile contradiction.
 ------------------------------------------------------------------------
 
 record LiteralPhaseJointMarginPayment
@@ -37,7 +38,7 @@ record LiteralPhaseJointMarginPayment
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
     (targets : Direct.DirectLiteralComplementTargets S transport)
     (model : Literal.FinalPoleNearLiteralModel (Direct.offInput targets))
-    (context : Context.DirectComplementUnpaidContext targets) : Set₁ where
+    (context : Context.BalanceFreeComplementContext targets) : Set₁ where
   private
     gamma = Direct.directGammaTarget targets
     cluster0 = Context.cluster context
@@ -66,35 +67,41 @@ compileLiteralPhaseMarginToCanonicalPayment :
   LiteralPhaseJointMarginPayment
     {S = S} {transport = transport}
     targets model context ->
-  Context.CanonicalJointMarginPayment context
+  Context.BalanceFreeJointMarginPayment context
 compileLiteralPhaseMarginToCanonicalPayment
-  {model = model} {context = context} payment
+  {model = model} payment
   with Literal.finalNearResponseIsLiteralFiniteNear model
 ... | refl = record
-  { Context.literalComplementStrictBelowMargin =
-      literalPhaseStrictBelowMargin payment
+  { Context.strictMargin = literalPhaseStrictBelowMargin payment
   ; Context.paymentReference = paymentReference payment
   }
 
+------------------------------------------------------------------------
+-- The final balance is explicitly downstream.  There is intentionally no
+-- contradiction compiler taking only LiteralPhaseJointMarginPayment.
+------------------------------------------------------------------------
+
 compileLiteralPhasePaymentToLegacyInput :
   forall {S transport targets model context} ->
+  (balance : Context.FinalClusterBalanceAttachment context) ->
   LiteralPhaseJointMarginPayment
     {S = S} {transport = transport}
     targets model context ->
   Legacy.DirectIndependentComplementMarginInput targets
-compileLiteralPhasePaymentToLegacyInput {context = context} payment =
-  Context.compileContextAndPaymentToLegacyInput context
+compileLiteralPhasePaymentToLegacyInput balance payment =
+  Context.compileBalanceFreePaymentToLegacyInput balance
     (compileLiteralPhaseMarginToCanonicalPayment payment)
 
-literalPhasePaymentContradiction :
+literalPhasePaymentAndBalanceContradiction :
   forall {S transport targets model context} ->
+  Context.FinalClusterBalanceAttachment context ->
   LiteralPhaseJointMarginPayment
     {S = S} {transport = transport}
     targets model context ->
   ⊥
-literalPhasePaymentContradiction payment =
+literalPhasePaymentAndBalanceContradiction balance payment =
   Legacy.directIndependentComplementContradiction
-    (compileLiteralPhasePaymentToLegacyInput payment)
+    (compileLiteralPhasePaymentToLegacyInput balance payment)
 
 ------------------------------------------------------------------------
 -- Boundary.
@@ -111,6 +118,14 @@ record LiteralPhaseJointMarginBoundary : Set where
     literalPhasePaymentPresupposesCanonicalStrictMarginIsFalse :
       literalPhasePaymentPresupposesCanonicalStrictMargin ≡ false
 
+    literalPhasePaymentCanAccessFinalClusterBalance : Bool
+    literalPhasePaymentCanAccessFinalClusterBalanceIsFalse :
+      literalPhasePaymentCanAccessFinalClusterBalance ≡ false
+
+    finalBalanceRequiredOnlyAfterAnalyticPayment : Bool
+    finalBalanceRequiredOnlyAfterAnalyticPaymentIsTrue :
+      finalBalanceRequiredOnlyAfterAnalyticPayment ≡ true
+
     secondNearEnvelopeRequired : Bool
     secondNearEnvelopeRequiredIsFalse :
       secondNearEnvelopeRequired ≡ false
@@ -123,9 +138,9 @@ record LiteralPhaseJointMarginBoundary : Set where
     literalPhasePaymentCompilesCanonicalOneLeafMarginIsTrue :
       literalPhasePaymentCompilesCanonicalOneLeafMargin ≡ true
 
-    literalPhasePaymentCompilesContradiction : Bool
-    literalPhasePaymentCompilesContradictionIsTrue :
-      literalPhasePaymentCompilesContradiction ≡ true
+    paymentPlusBalanceCompilesContradiction : Bool
+    paymentPlusBalanceCompilesContradictionIsTrue :
+      paymentPlusBalanceCompilesContradiction ≡ true
 
     literalPhasePaymentInhabitedHere : Bool
     literalPhasePaymentInhabitedHereIsFalse :
@@ -143,9 +158,11 @@ canonicalLiteralPhaseJointMarginBoundary =
     true refl
     false refl
     false refl
+    true refl
+    false refl
     false refl
     true refl
     true refl
     false refl
     false refl
-    "The structural circularity is removed. LiteralPhaseJointMarginPayment is indexed only by the unpaid final context and the exact literal near model; it no longer requires a DirectIndependentComplementMarginInput that already contains the desired strict margin. Prove literalFiniteNearValue + transported far budget + literal Gamma response < quantitative cluster margin on the exact universal pole-quotient carrier. The exact final-near equality compiles that theorem into CanonicalJointMarginPayment, then into the historical final input and contradiction. The analytic inequality itself remains unproved here, so RH is not derived."
+    "The analytic dependency graph is now genuinely balance-free. LiteralPhaseJointMarginPayment is indexed by the exact literal near model and BalanceFreeComplementContext, whose type contains no final cluster=Off+Gamma theorem. Thus the phase+far+Gamma<cluster-margin theorem cannot depend on that final balance through its input context. Its exact final-near equality compiles to BalanceFreeJointMarginPayment. Only afterward is FinalClusterBalanceAttachment supplied to recover the historical final consumer and contradiction. The analytic inequality itself remains unproved and RH is not derived."
