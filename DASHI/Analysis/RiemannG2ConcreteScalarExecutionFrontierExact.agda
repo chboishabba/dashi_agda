@@ -16,15 +16,13 @@ import DASHI.Analysis.RiemannG2ConcreteCertificateFinalScalarBridgeExact as Fold
 -- A full concrete realization of the final NearFar scalar is a useful stronger
 -- producer, but it is NOT required by the certified finite-sum consumer.
 --
--- Least privilege for the current certificate route is only:
---   * a concrete certificate carrier;
---   * an embedding of that carrier into the final scalar;
---   * exact identification of the embedded certified fold with final
---     nearResponseAt(J);
---   * one transport of the certified upper relation.
+-- Least privilege is now factored through canonical R1:
 --
--- `RiemannG2ConcreteCertificateFinalScalarBridgeExact` owns that smaller route.
--- The record below is retained as an optional stronger whole-scalar producer.
+--   R1: final nearResponseAt(J) = literal finite near sum
+--   C0: embed(concrete certified fold) = literal finite near sum
+--
+-- The fold-local bridge compiles final nearResponseAt(J)=embed(certifiedFold)
+-- mechanically.  Only one upper-order transport is then required.
 ------------------------------------------------------------------------
 
 record ConcreteFinalNearScalarRealization
@@ -71,67 +69,74 @@ foldLocalBridgeDoesNotRequireScalarEquality :
     FoldBridge.canonicalConcreteCertificateFinalScalarBoundary ≡ false
 foldLocalBridgeDoesNotRequireScalarEquality = refl
 
-foldLocalBridgeStillRequiresExactEmbeddedFold :
-  FoldBridge.ConcreteCertificateFinalScalarBoundary.exactEmbeddedFoldIdentityStillRequired
+r1RemovesSecondFinalNearIdentity :
+  FoldBridge.ConcreteCertificateFinalScalarBoundary.independentSecondFinalNearIdentityRequiredAfterR1
+    FoldBridge.canonicalConcreteCertificateFinalScalarBoundary ≡ false
+r1RemovesSecondFinalNearIdentity = refl
+
+foldLocalBridgeStillRequiresEmbeddedConcreteFold :
+  FoldBridge.ConcreteCertificateFinalScalarBoundary.embeddedConcreteFoldToLiteralSumStillRequired
     FoldBridge.canonicalConcreteCertificateFinalScalarBoundary ≡ true
-foldLocalBridgeStillRequiresExactEmbeddedFold = refl
+foldLocalBridgeStillRequiresEmbeddedConcreteFold = refl
+
+r1PlusConcreteFoldCompilesFinalBridge :
+  FoldBridge.ConcreteCertificateFinalScalarBoundary.r1PlusEmbeddedFoldCompilesFinalBridge
+    FoldBridge.canonicalConcreteCertificateFinalScalarBoundary ≡ true
+r1PlusConcreteFoldCompilesFinalBridge = refl
 
 record ConcreteScalarExecutionFrontierBoundary : Set where
   constructor concrete-scalar-execution-frontier-boundary
   field
     finalNearFarScalarConcreteByDefinition : Bool
-    finalNearFarScalarConcreteByDefinitionIsFalse :
-      finalNearFarScalarConcreteByDefinition ≡ false
+    finalNearFarScalarConcreteByDefinitionIsFalse : finalNearFarScalarConcreteByDefinition ≡ false
 
     executableCertificateNeedsWholeScalarRealization : Bool
-    executableCertificateNeedsWholeScalarRealizationIsFalse :
-      executableCertificateNeedsWholeScalarRealization ≡ false
+    executableCertificateNeedsWholeScalarRealizationIsFalse : executableCertificateNeedsWholeScalarRealization ≡ false
 
     executableCertificateNeedsFoldLocalEmbedding : Bool
-    executableCertificateNeedsFoldLocalEmbeddingIsTrue :
-      executableCertificateNeedsFoldLocalEmbedding ≡ true
+    executableCertificateNeedsFoldLocalEmbeddingIsTrue : executableCertificateNeedsFoldLocalEmbedding ≡ true
 
     certificateScalarMayRemainConcreteAndDistinct : Bool
-    certificateScalarMayRemainConcreteAndDistinctIsTrue :
-      certificateScalarMayRemainConcreteAndDistinct ≡ true
+    certificateScalarMayRemainConcreteAndDistinctIsTrue : certificateScalarMayRemainConcreteAndDistinct ≡ true
+
+    secondFinalNearSameObjectTheoremAfterR1 : Bool
+    secondFinalNearSameObjectTheoremAfterR1IsFalse : secondFinalNearSameObjectTheoremAfterR1 ≡ false
+
+    embeddedConcreteFoldToLiteralSumStillRequired : Bool
+    embeddedConcreteFoldToLiteralSumStillRequiredIsTrue : embeddedConcreteFoldToLiteralSumStillRequired ≡ true
 
     fullConcreteScalarRealizationStillCompatible : Bool
-    fullConcreteScalarRealizationStillCompatibleIsTrue :
-      fullConcreteScalarRealizationStillCompatible ≡ true
+    fullConcreteScalarRealizationStillCompatibleIsTrue : fullConcreteScalarRealizationStillCompatible ≡ true
 
     concreteRealizationIsNewRHAnalyticTheorem : Bool
-    concreteRealizationIsNewRHAnalyticTheoremIsFalse :
-      concreteRealizationIsNewRHAnalyticTheorem ≡ false
+    concreteRealizationIsNewRHAnalyticTheoremIsFalse : concreteRealizationIsNewRHAnalyticTheorem ≡ false
 
     legacyRationalDirectLanePaysConcreteFinalScalar : Bool
-    legacyRationalDirectLanePaysConcreteFinalScalarIsFalse :
-      legacyRationalDirectLanePaysConcreteFinalScalar ≡ false
+    legacyRationalDirectLanePaysConcreteFinalScalarIsFalse : legacyRationalDirectLanePaysConcreteFinalScalar ≡ false
 
     toyWeilNatCarrierPaysConcreteFinalScalar : Bool
-    toyWeilNatCarrierPaysConcreteFinalScalarIsFalse :
-      toyWeilNatCarrierPaysConcreteFinalScalar ≡ false
+    toyWeilNatCarrierPaysConcreteFinalScalarIsFalse : toyWeilNatCarrierPaysConcreteFinalScalar ≡ false
 
-    exactEmbeddedFoldAndOrderTransportRemainRequired : Bool
-    exactEmbeddedFoldAndOrderTransportRemainRequiredIsTrue :
-      exactEmbeddedFoldAndOrderTransportRemainRequired ≡ true
+    oneUpperOrderTransportStillRequired : Bool
+    oneUpperOrderTransportStillRequiredIsTrue : oneUpperOrderTransportStillRequired ≡ true
 
     r0FoldLocalBridgeInhabitedHere : Bool
-    r0FoldLocalBridgeInhabitedHereIsFalse :
-      r0FoldLocalBridgeInhabitedHere ≡ false
+    r0FoldLocalBridgeInhabitedHereIsFalse : r0FoldLocalBridgeInhabitedHere ≡ false
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
 
     highestAlphaReading : String
 
-canonicalConcreteScalarExecutionFrontierBoundary :
-  ConcreteScalarExecutionFrontierBoundary
+canonicalConcreteScalarExecutionFrontierBoundary : ConcreteScalarExecutionFrontierBoundary
 canonicalConcreteScalarExecutionFrontierBoundary =
   concrete-scalar-execution-frontier-boundary
     false refl
     false refl
     true refl
     true refl
+    false refl
+    true refl
     true refl
     false refl
     false refl
@@ -139,4 +144,4 @@ canonicalConcreteScalarExecutionFrontierBoundary =
     true refl
     false refl
     false refl
-    "For proof-carrying numerical execution, do not require a whole concrete realization of the final universal pole-quotient NearFar scalar unless a producer naturally supplies one. The certified consumer only needs a concrete certificate carrier, one embedding of its certified fold into final nearResponseAt(J), and one transport of the certified upper relation. This permits exact rational/interval certification without asserting that rationals are definitionally the analytic real carrier or requiring the still-unowned Fast-Cauchy quotient backend. A full additive/order-preserving scalar realization remains a compatible stronger producer. The historical determinant/direct rational lane and toy Weil carriers still do not pay the final pole-quotient same-object seam. RH is not derived here."
+    "For proof-carrying numerical execution, do not require a whole concrete realization of the final universal pole-quotient NearFar scalar. Reuse canonical R1 for final nearResponseAt(J)=literal finite sum; the machine backend proves only embed(certifiedFold)=that same literal finite sum, and equality transitivity compiles the final-near bridge. Then transport the certified upper relation once. Exact rational/interval arithmetic may remain on a distinct concrete carrier; no Fast-Cauchy quotient backend, selected Weil window, or determinant-q carrier equality is required. RH is not derived here."
