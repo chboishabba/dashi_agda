@@ -53,6 +53,39 @@ record CalibratedBundleExecution
 open CalibratedBundleExecution public
 
 ------------------------------------------------------------------------
+-- SOURCE ACQUISITION <-> SOURCE EXECUTION SAME-OBJECT WELD
+------------------------------------------------------------------------
+
+record SourceExecutionIdentityWeld
+    (receipt : Source.SourceAcquisitionReceipt)
+    (execution : Provenance.BundleExecutionProvenance) : Set where
+  constructor source-execution-identity-weld
+  field
+    runIdentifierMatches :
+      Provenance.runIdentifier execution
+        ≡ Source.runIdentifier (Source.provenance receipt)
+    rawDataCarrierMatches :
+      Provenance.rawDataCarrier execution
+        ≡ Source.rawDataCarrier (Source.provenance receipt)
+    rawDataHashMatches :
+      Provenance.rawDataHash execution
+        ≡ Source.rawDataHash (Source.provenance receipt)
+    dataRevisionMatches :
+      Provenance.dataRevision execution
+        ≡ Source.dataRevision (Source.provenance receipt)
+    instrumentConfigurationMatches :
+      Provenance.instrumentConfigurationCarrier execution
+        ≡ Source.instrumentConfigurationCarrier (Source.provenance receipt)
+    calibrationCarrierMatches :
+      Provenance.calibrationCarrier execution
+        ≡ Source.calibrationCarrier (Source.provenance receipt)
+    calibrationRevisionMatches :
+      Provenance.calibrationRevision execution
+        ≡ Source.calibrationRevision (Source.provenance receipt)
+
+open SourceExecutionIdentityWeld public
+
+------------------------------------------------------------------------
 -- Reverse residuals.
 ------------------------------------------------------------------------
 
@@ -62,6 +95,7 @@ data CalibratedExecutionResidual : Set where
   calibrationCarrierMismatch : CalibratedExecutionResidual
   calibrationRevisionMismatch : CalibratedExecutionResidual
   instrumentConfigurationMismatch : CalibratedExecutionResidual
+  missingSourceExecutionIdentityWeld : CalibratedExecutionResidual
 
 producerForCalibratedExecutionResidual :
   CalibratedExecutionResidual → Search.ProducerClass
@@ -70,6 +104,7 @@ producerForCalibratedExecutionResidual calibrationEvidenceDoesNotMatchRawData = 
 producerForCalibratedExecutionResidual calibrationCarrierMismatch = Search.identityProducer
 producerForCalibratedExecutionResidual calibrationRevisionMismatch = Search.temporalProducer
 producerForCalibratedExecutionResidual instrumentConfigurationMismatch = Search.identityProducer
+producerForCalibratedExecutionResidual missingSourceExecutionIdentityWeld = Search.identityProducer
 
 record CalibratedExecutionBridgeBoundary : Set where
   constructor calibrated-execution-bridge-boundary
@@ -78,8 +113,9 @@ record CalibratedExecutionBridgeBoundary : Set where
     refinedEvidenceMustBeExactExecutionData : Bool
     calibrationRevisionMustMatchExecution : Bool
     instrumentConfigurationMustMatchExecution : Bool
+    sameApparatusLabelAloneWeldsSourceReceiptToExecution : Bool
     calibratedExecutionAutomaticallyValidatesMechanism : Bool
 
 canonicalCalibratedExecutionBridgeBoundary : CalibratedExecutionBridgeBoundary
 canonicalCalibratedExecutionBridgeBoundary =
-  calibrated-execution-bridge-boundary false true true true false
+  calibrated-execution-bridge-boundary false true true true false false
