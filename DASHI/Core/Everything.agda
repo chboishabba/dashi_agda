@@ -156,3 +156,6 @@ import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
 import DASHI.Core.ProofDebtRouterExact
 import DASHI.Core.ClayProofDebtFrontierAtlasExact
+
+-- Public / journalistic artifact attribution with explicit truth-promotion boundary.
+import DASHI.Core.AttributedPublicClaimExact
