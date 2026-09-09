@@ -24,9 +24,11 @@ import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
 --   new DASHI theorem / synthetic extension
 --   promotion / external adjudication
 --
--- The existing PropositionSourceReceipt remains the canonical source carrier.
--- This owner only adds the stronger lineage stage; it does not replace source,
--- authority, semantic admission, applicability, proof, or adjudication owners.
+-- SourceRule.PropositionSourceReceipt remains the canonical source carrier.
+-- Its LegalAttributionLayer describes the SOURCE ATTACHMENT.  It does not by
+-- itself decide the provenance stage of the repository proposition object.
+-- A DASHI formalisation may therefore carry a primary-source receipt while its
+-- claim-provenance stage remains repositoryReconstruction.
 ------------------------------------------------------------------------
 
 data LegalClaimProvenanceStage : Set where
@@ -74,29 +76,57 @@ ClaimLineageReceipt : Algebra.LegalProposition → Set₁
 ClaimLineageReceipt p =
   Σ LegalClaimProvenanceStage λ stage → LegalClaimLineage p stage
 
+stageOf : ∀ {p} → ClaimLineageReceipt p → LegalClaimProvenanceStage
+stageOf = proj₁
+
 ------------------------------------------------------------------------
--- Compatibility adapter from the pre-existing three-way legal source layer.
+-- Explicit constructors for the common legal-source cases.
 ------------------------------------------------------------------------
 
-lineageFromPropositionSourceReceipt :
+externalClaimFromSourceReceipt :
+  ∀ {p} →
+  SourceRule.PropositionSourceReceipt p →
+  ClaimLineageReceipt p
+externalClaimFromSourceReceipt receipt =
+  externalSourceClaim , sourceClaimLineage receipt
+
+reconstructionFromSourceReceipt :
+  ∀ {p} →
+  SourceRule.PropositionSourceReceipt p →
+  String →
+  ClaimLineageReceipt p
+reconstructionFromSourceReceipt receipt reference =
+  repositoryReconstruction , reconstructionLineage receipt reference
+
+secondaryInterpretationFromSourceReceipt :
+  ∀ {p} →
+  SourceRule.PropositionSourceReceipt p →
+  String →
+  ClaimLineageReceipt p
+secondaryInterpretationFromSourceReceipt receipt reference =
+  secondarySourceInterpretation , secondaryInterpretationLineage receipt reference
+
+------------------------------------------------------------------------
+-- Compatibility adapter from the pre-existing three-way legal SOURCE layer.
+-- This is a default rendering of that attachment layer only.  Callers that
+-- know a repository proposition is a DASHI reconstruction of a primary source
+-- should use reconstructionFromSourceReceipt instead of this adapter.
+------------------------------------------------------------------------
+
+legacyAttributionLayerDefaultLineage :
   ∀ {p} →
   (receipt : SourceRule.PropositionSourceReceipt p) →
   ClaimLineageReceipt p
-lineageFromPropositionSourceReceipt receipt
+legacyAttributionLayerDefaultLineage receipt
   with SourceRule.attributionLayer receipt
 ... | SourceRule.primarySourceLayer =
-  externalSourceClaim , sourceClaimLineage receipt
+  externalClaimFromSourceReceipt receipt
 ... | SourceRule.secondaryInterpretationLayer =
-  secondarySourceInterpretation ,
-  secondaryInterpretationLineage receipt
+  secondaryInterpretationFromSourceReceipt receipt
     "legacy secondary-interpretation attribution layer retained"
 ... | SourceRule.repositoryReconstructionLayer =
-  repositoryReconstruction ,
-  reconstructionLineage receipt
+  reconstructionFromSourceReceipt receipt
     "legacy repository-reconstruction attribution layer retained"
-
-stageOf : ∀ {p} → ClaimLineageReceipt p → LegalClaimProvenanceStage
-stageOf = proj₁
 
 ------------------------------------------------------------------------
 -- Firewalls: attribution lineage describes provenance.  It is not itself any
@@ -111,6 +141,7 @@ data AttributionCreatesAdjudicatedFact : Set where
 data ReconstructionMayBeAttributedBackToSourceAuthor : Set where
 data CrossSourceInferenceMayPretendToBeSingleSourceClaim : Set where
 data RepositoryTheoremMayPretendToBeExternalAdjudication : Set where
+data PrimarySourceLayerForcesExternalClaimStage : Set where
 
 attributionDoesNotCreateTruth : AttributionCreatesTruth → ⊥
 attributionDoesNotCreateTruth ()
@@ -139,6 +170,10 @@ repositoryTheoremDoesNotBecomeExternalAdjudication :
   RepositoryTheoremMayPretendToBeExternalAdjudication → ⊥
 repositoryTheoremDoesNotBecomeExternalAdjudication ()
 
+primarySourceAttachmentDoesNotForceExternalClaimStage :
+  PrimarySourceLayerForcesExternalClaimStage → ⊥
+primarySourceAttachmentDoesNotForceExternalClaimStage ()
+
 record LegalClaimProvenanceLineageBoundary : Set where
   constructor legal-claim-provenance-lineage-boundary
   field
@@ -146,6 +181,7 @@ record LegalClaimProvenanceLineageBoundary : Set where
     reconstructionSeparatedFromCrossSourceInference : Bool
     crossSourceInferenceSeparatedFromRepositoryTheorem : Bool
     repositoryTheoremSeparatedFromPromotion : Bool
+    sourceAttachmentLayerSeparatedFromClaimProvenanceStage : Bool
     legacySourceReceiptRetained : Bool
     provenanceCreatesTruth : Bool
     provenanceCreatesAuthority : Bool
@@ -155,4 +191,4 @@ canonicalLegalClaimProvenanceLineageBoundary :
   LegalClaimProvenanceLineageBoundary
 canonicalLegalClaimProvenanceLineageBoundary =
   legal-claim-provenance-lineage-boundary
-    true true true true true false false false
+    true true true true true true false false false
