@@ -8,6 +8,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
 import DASHI.Moonshine.GoldenRatioFibonacci369SheetVoxelBridgeExact
 import DASHI.Moonshine.GoldenRatioFibonacci369RichFibreLiftExact
 import DASHI.Moonshine.GoldenRatioFibonacci369ArithmeticRichTrajectoryExact
@@ -20,6 +21,7 @@ import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
+import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
 
@@ -39,6 +41,9 @@ record RoadmapState : Set where
     bishopPhiMinimalPolynomialExact : Bool
     bishopVendorImplementationPinned : Bool
     fibonacciBishopRatioCarrierConstructed : Bool
+    fibonacciDenominatorPositiveIncrementExact : Bool
+    fibonacciDenominatorDivergenceExact : Bool
+    quadraticDefectToBishopErrorBoundExact : Bool
     fibonacciRatiosConvergeToBishopPhi : Bool
 
     jSeamWordLkTExact : Bool
@@ -55,7 +60,10 @@ record RoadmapState : Set where
     finiteFrickeCrossesJCoarseJFineBoundaryExact : Bool
     finiteFrickeBoundaryExchangeTwoStepRestores : Bool
 
-    renderedSeamAcquiredAsStructuredJAbsolute : Bool
+    renderedToAnalyticCalibrationTyped : Bool
+    analyticToStructuredJFieldLiftTyped : Bool
+    renderedPixelToAnalyticModularCoordinateExact : Bool
+    analyticModularCoordinateToStructuredJFieldExact : Bool
     structuredJAbsoluteToOrbitIndexRecognised : Bool
     jRenderedScaleInverseRecognised : Bool
     analyticFrickeFiniteTransportIntertwinerExact : Bool
@@ -82,6 +90,9 @@ canonicalRoadmapState = record
   ; bishopPhiMinimalPolynomialExact = true
   ; bishopVendorImplementationPinned = true
   ; fibonacciBishopRatioCarrierConstructed = true
+  ; fibonacciDenominatorPositiveIncrementExact = true
+  ; fibonacciDenominatorDivergenceExact = false
+  ; quadraticDefectToBishopErrorBoundExact = false
   ; fibonacciRatiosConvergeToBishopPhi = false
 
   ; jSeamWordLkTExact = true
@@ -98,7 +109,10 @@ canonicalRoadmapState = record
   ; finiteFrickeCrossesJCoarseJFineBoundaryExact = true
   ; finiteFrickeBoundaryExchangeTwoStepRestores = true
 
-  ; renderedSeamAcquiredAsStructuredJAbsolute = false
+  ; renderedToAnalyticCalibrationTyped = true
+  ; analyticToStructuredJFieldLiftTyped = true
+  ; renderedPixelToAnalyticModularCoordinateExact = false
+  ; analyticModularCoordinateToStructuredJFieldExact = false
   ; structuredJAbsoluteToOrbitIndexRecognised = false
   ; jRenderedScaleInverseRecognised = false
   ; analyticFrickeFiniteTransportIntertwinerExact = false
@@ -111,8 +125,11 @@ canonicalRoadmapState = record
   }
 
 data FirstLiveRoadmapResidual : Set where
+  missingFibonacciDenominatorDivergence : FirstLiveRoadmapResidual
+  missingQuadraticDefectToBishopErrorBound : FirstLiveRoadmapResidual
   missingFibonacciRatioToBishopPhiConvergence : FirstLiveRoadmapResidual
-  missingRenderedSeamToStructuredJAbsolute : FirstLiveRoadmapResidual
+  missingRenderedPixelToAnalyticModularCoordinate : FirstLiveRoadmapResidual
+  missingAnalyticModularCoordinateToStructuredJField : FirstLiveRoadmapResidual
   missingStructuredJAbsoluteToOrbitIndexRecognition : FirstLiveRoadmapResidual
   missingRenderedScaleRecognition : FirstLiveRoadmapResidual
   missingAnalyticFrickeFiniteTransportIntertwiner : FirstLiveRoadmapResidual
@@ -123,8 +140,8 @@ data FirstLiveRoadmapResidual : Set where
 
 -- Highest-alpha geometric residual for the j/Monster lane.
 firstJMonsterResidual : FirstLiveRoadmapResidual
-firstJMonsterResidual = missingRenderedSeamToStructuredJAbsolute
+firstJMonsterResidual = missingRenderedPixelToAnalyticModularCoordinate
 
 -- Highest-alpha analytic residual for the phi lane.
 firstPhiResidual : FirstLiveRoadmapResidual
-firstPhiResidual = missingFibonacciRatioToBishopPhiConvergence
+firstPhiResidual = missingFibonacciDenominatorDivergence
