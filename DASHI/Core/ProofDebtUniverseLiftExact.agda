@@ -1,6 +1,6 @@
 module DASHI.Core.ProofDebtUniverseLiftExact where
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; _⊔_)
 
 import DASHI.Core.ProofDebtRouterExact as Debt
 
