@@ -7,3 +7,4 @@ import DASHI.Biology.FruitBoundaryResourcePaidRepairExact
 import DASHI.Environment.KNFSoilMicrobePlantFruitResourceLoopExact
 import DASHI.Environment.KNFPlantSoilReturnFlowLoopExact
 import DASHI.Environment.KNFSituatedSiteResponseFibreExact
+import DASHI.Environment.KNFSourceAttributionLineageExact
