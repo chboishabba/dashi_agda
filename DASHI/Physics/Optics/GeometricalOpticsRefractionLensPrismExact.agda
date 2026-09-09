@@ -10,6 +10,8 @@ open import DASHI.Core.Prelude
 --   critical-angle / total-internal-reflection condition
 --   wavelength-dependent refractive index n(lambda) for dispersion
 --   thin-lens equation 1/f = 1/do + 1/di
+--   optical power P = 1/f
+--   magnification m = -di/do = hi/ho
 --   lens-maker equation in air
 --     1/f = (n - 1) (1/R1 - 1/R2)
 --
@@ -23,6 +25,7 @@ record GeometricalOpticsAlgebra (Scalar : Set) : Set₁ where
   field
     zero one : Scalar
     add multiply divide subtract : Scalar → Scalar → Scalar
+    negate : Scalar → Scalar
     sin : Scalar → Scalar
     reciprocal : Scalar → Scalar
     _≤_ : Scalar → Scalar → Set
@@ -92,7 +95,7 @@ record PrismDispersionReceipt
 open PrismDispersionReceipt public
 
 ------------------------------------------------------------------------
--- Thin-lens image formation and lens-maker receipts.
+-- Thin-lens image formation, power, magnification and lens-maker receipts.
 ------------------------------------------------------------------------
 
 record ThinLensReceipt
@@ -110,6 +113,36 @@ record ThinLensReceipt
           (reciprocal algebra imageDistance)
 
 open ThinLensReceipt public
+
+record LensPowerReceipt
+    {Scalar : Set}
+    (algebra : GeometricalOpticsAlgebra Scalar)
+    (lens : ThinLensReceipt algebra) : Set where
+  constructor lens-power-receipt
+  field
+    opticalPower : Scalar
+    powerLaw : opticalPower ≡ reciprocal algebra (focalLength lens)
+
+open LensPowerReceipt public
+
+record ThinLensMagnificationReceipt
+    {Scalar : Set}
+    (algebra : GeometricalOpticsAlgebra Scalar)
+    (lens : ThinLensReceipt algebra) : Set where
+  constructor thin-lens-magnification-receipt
+  field
+    objectHeight : Scalar
+    imageHeight : Scalar
+    magnification : Scalar
+    distanceMagnificationLaw :
+      magnification
+      ≡ divide algebra
+          (negate algebra (imageDistance lens))
+          (objectDistance lens)
+    heightMagnificationLaw :
+      magnification ≡ divide algebra imageHeight objectHeight
+
+open ThinLensMagnificationReceipt public
 
 record LensMakerReceipt
     {Scalar : Set}
@@ -146,3 +179,8 @@ data PrismDispersionDeterminesMaterialDispersionCurve : Set where
 prismDispersionDoesNotDetermineMaterialDispersionCurve :
   PrismDispersionDeterminesMaterialDispersionCurve → ⊥
 prismDispersionDoesNotDetermineMaterialDispersionCurve ()
+
+data ImageMagnificationChangesIntrinsicSampleAppearance : Set where
+imageMagnificationDoesNotChangeIntrinsicSampleAppearance :
+  ImageMagnificationChangesIntrinsicSampleAppearance → ⊥
+imageMagnificationDoesNotChangeIntrinsicSampleAppearance ()
