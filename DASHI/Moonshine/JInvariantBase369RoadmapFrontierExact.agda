@@ -7,6 +7,7 @@ module DASHI.Moonshine.JInvariantBase369RoadmapFrontierExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioFibonacci369SheetVoxelBridgeExact
 import DASHI.Moonshine.GoldenRatioFibonacci369RichFibreLiftExact
 import DASHI.Moonshine.GoldenRatioFibonacci369ArithmeticRichTrajectoryExact
@@ -18,6 +19,7 @@ import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
+import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
 
@@ -35,6 +37,8 @@ record RoadmapState : Set where
 
     bishopPhiCarrierConstructed : Bool
     bishopPhiMinimalPolynomialExact : Bool
+    bishopVendorImplementationPinned : Bool
+    fibonacciBishopRatioCarrierConstructed : Bool
     fibonacciRatiosConvergeToBishopPhi : Bool
 
     jSeamWordLkTExact : Bool
@@ -44,6 +48,9 @@ record RoadmapState : Set where
     structuredJFineFieldCodecExact : Bool
     jAbsoluteToLocalTwentySevenObserverExact : Bool
     jAbsoluteToLocalTwentySevenObserverHasSection : Bool
+    localTwentySevenCannotRecoverFullJFine : Bool
+    consumerIndexedFineResidualGovernanceExact : Bool
+    rhObserverResidualPatternBidiExact : Bool
     elevenTritOnePlusTenTwoPlusNineChartShiftExact : Bool
     finiteFrickeCrossesJCoarseJFineBoundaryExact : Bool
     finiteFrickeBoundaryExchangeTwoStepRestores : Bool
@@ -73,6 +80,8 @@ canonicalRoadmapState = record
 
   ; bishopPhiCarrierConstructed = true
   ; bishopPhiMinimalPolynomialExact = true
+  ; bishopVendorImplementationPinned = true
+  ; fibonacciBishopRatioCarrierConstructed = true
   ; fibonacciRatiosConvergeToBishopPhi = false
 
   ; jSeamWordLkTExact = true
@@ -82,6 +91,9 @@ canonicalRoadmapState = record
   ; structuredJFineFieldCodecExact = true
   ; jAbsoluteToLocalTwentySevenObserverExact = true
   ; jAbsoluteToLocalTwentySevenObserverHasSection = true
+  ; localTwentySevenCannotRecoverFullJFine = true
+  ; consumerIndexedFineResidualGovernanceExact = true
+  ; rhObserverResidualPatternBidiExact = true
   ; elevenTritOnePlusTenTwoPlusNineChartShiftExact = true
   ; finiteFrickeCrossesJCoarseJFineBoundaryExact = true
   ; finiteFrickeBoundaryExchangeTwoStepRestores = true
