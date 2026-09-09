@@ -41,24 +41,22 @@ firstOpenScientificWallLeaf (scientific-wall-payment-state true true true false 
 firstOpenScientificWallLeaf (scientific-wall-payment-state true true true true false) = scalingReplicationIdentityLeaf
 firstOpenScientificWallLeaf (scientific-wall-payment-state true true true true true) = scientificWallClosed
 
-collisionForLeaf : ScientificWallLeaf → Wall.ScientificWallCollision
-collisionForLeaf massCurrentLeaf = Wall.chargeVsMassCurrentCollision
-collisionForLeaf stressEnergyLeaf = Wall.massCurrentVsStressEnergyCollision
-collisionForLeaf sourceMaterialAxesLeaf = Wall.sourceVsConstitutiveCollision
-collisionForLeaf modelClassSeparationLeaf = Wall.finiteScalingModelCollision
-collisionForLeaf scalingReplicationIdentityLeaf = Wall.replicationIdentityCollision
-collisionForLeaf scientificWallClosed = Wall.replicationIdentityCollision
+data ScientificWallDecision : Set where
+  acquireScientificWallDiscriminator : Wall.ScientificWallDiscriminator → ScientificWallDecision
+  noFurtherScientificWallAcquisition : ScientificWallDecision
 
-discriminatorForLeaf : ScientificWallLeaf → Wall.ScientificWallDiscriminator
-discriminatorForLeaf massCurrentLeaf = Wall.componentResolvedMassCurrent
-discriminatorForLeaf stressEnergyLeaf = Wall.fullLaboratoryStressEnergy
-discriminatorForLeaf sourceMaterialAxesLeaf = Wall.independentSourceMaterialAxes
-discriminatorForLeaf modelClassSeparationLeaf = Wall.scalingModelClassSeparation
-discriminatorForLeaf scalingReplicationIdentityLeaf = Wall.exactScalingReplicationIdentity
-discriminatorForLeaf scientificWallClosed = Wall.exactScalingReplicationIdentity
+decisionForLeaf : ScientificWallLeaf → ScientificWallDecision
+decisionForLeaf massCurrentLeaf = acquireScientificWallDiscriminator Wall.componentResolvedMassCurrent
+decisionForLeaf stressEnergyLeaf = acquireScientificWallDiscriminator Wall.fullLaboratoryStressEnergy
+decisionForLeaf sourceMaterialAxesLeaf = acquireScientificWallDiscriminator Wall.independentSourceMaterialAxes
+decisionForLeaf modelClassSeparationLeaf = acquireScientificWallDiscriminator Wall.scalingModelClassSeparation
+decisionForLeaf scalingReplicationIdentityLeaf = acquireScientificWallDiscriminator Wall.exactScalingReplicationIdentity
+decisionForLeaf scientificWallClosed = noFurtherScientificWallAcquisition
 
-producerForLeaf : ScientificWallLeaf → Search.ProducerClass
-producerForLeaf leaf = Wall.producerForScientificWall (discriminatorForLeaf leaf)
+producerForDecision : ScientificWallDecision → Search.ProducerClass
+producerForDecision (acquireScientificWallDiscriminator discriminator) =
+  Wall.producerForScientificWall discriminator
+producerForDecision noFurtherScientificWallAcquisition = Search.noSearchProducer
 
 ------------------------------------------------------------------------
 -- Canonical staged recomputation.
@@ -70,6 +68,18 @@ currentWallState = scientific-wall-payment-state false false false false false
 currentWallFirstOpen :
   firstOpenScientificWallLeaf currentWallState ≡ massCurrentLeaf
 currentWallFirstOpen = refl
+
+currentWallDecision : ScientificWallDecision
+currentWallDecision = decisionForLeaf (firstOpenScientificWallLeaf currentWallState)
+
+currentWallDecisionIsMassCurrent :
+  currentWallDecision
+    ≡ acquireScientificWallDiscriminator Wall.componentResolvedMassCurrent
+currentWallDecisionIsMassCurrent = refl
+
+currentWallProducerIsEmpiricalEvidence :
+  producerForDecision currentWallDecision ≡ Search.empiricalEvidenceProducer
+currentWallProducerIsEmpiricalEvidence = refl
 
 afterMassCurrent : ScientificWallPaymentState
 afterMassCurrent = scientific-wall-payment-state true false false false false
@@ -106,6 +116,16 @@ fullyPaidWallIsClosed :
   firstOpenScientificWallLeaf fullyPaidWall ≡ scientificWallClosed
 fullyPaidWallIsClosed = refl
 
+closedWallHasNoFurtherAcquisition :
+  decisionForLeaf (firstOpenScientificWallLeaf fullyPaidWall)
+    ≡ noFurtherScientificWallAcquisition
+closedWallHasNoFurtherAcquisition = refl
+
+closedWallProducerIsNoSearch :
+  producerForDecision (decisionForLeaf (firstOpenScientificWallLeaf fullyPaidWall))
+    ≡ Search.noSearchProducer
+closedWallProducerIsNoSearch = refl
+
 ------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
@@ -118,8 +138,9 @@ record ScientificWallProgressionBoundary : Set where
     payingStressEnergyAutomaticallyPaysSourceMaterialAxes : Bool
     payingIndependentAxesAutomaticallyPaysModelSeparation : Bool
     payingModelSeparationAutomaticallyPaysReplicationIdentity : Bool
+    closedWallSchedulesAnotherExperiment : Bool
     closedWallAutomaticallyProvesNegativeEffectiveG : Bool
 
 canonicalScientificWallProgressionBoundary : ScientificWallProgressionBoundary
 canonicalScientificWallProgressionBoundary =
-  scientific-wall-progression-boundary false false false false false false
+  scientific-wall-progression-boundary false false false false false false false
