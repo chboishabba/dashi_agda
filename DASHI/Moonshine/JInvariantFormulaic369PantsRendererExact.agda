@@ -2,15 +2,11 @@ module DASHI.Moonshine.JInvariantFormulaic369PantsRendererExact where
 
 ------------------------------------------------------------------------
 -- FORMULAIC J RENDERER WITH PANTS/GLUING ADDRESSES
---
--- Every analytic render sample retains its continuous J value/phase/colour and
--- additionally exposes the existing 9-sheet and 27 observers as depth-2 and
--- depth-3 ternary pants paths.  The pants paths are therefore observer fibres
--- over the same formulaic J sample, not a replacement for the analytic phase.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
+import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as Pants369
 import DASHI.Topology.TernaryPantsFrontierExact as Frontier
@@ -26,7 +22,7 @@ open JPantsRenderSample public
 
 renderWithPants :
   (R : Render.JPhaseRenderingAlgebra) →
-  Render.Klein.Point (Render.klein R) →
+  Klein.Point (Render.klein R) →
   JPantsRenderSample R
 renderWithPants R z =
   let s = Render.renderAt R z
@@ -37,7 +33,7 @@ renderWithPants R z =
 
 pants9RecoversRendererObserver :
   (R : Render.JPhaseRenderingAlgebra) →
-  (z : Render.Klein.Point (Render.klein R)) →
+  (z : Klein.Point (Render.klein R)) →
   Pants369.pants2ToNine (pantsCoarse9 (renderWithPants R z))
   ≡ Render.observer9 (Render.renderAt R z)
 pants9RecoversRendererObserver R z =
@@ -45,7 +41,7 @@ pants9RecoversRendererObserver R z =
 
 pants27RecoversRendererObserver :
   (R : Render.JPhaseRenderingAlgebra) →
-  (z : Render.Klein.Point (Render.klein R)) →
+  (z : Klein.Point (Render.klein R)) →
   Pants369.pants3ToVoxel27 (pantsRefinement27 (renderWithPants R z))
   ≡ Render.observer27 (Render.renderAt R z)
 pants27RecoversRendererObserver R z =
@@ -53,13 +49,13 @@ pants27RecoversRendererObserver R z =
 
 pantsRenderRetainsExactPhase :
   (R : Render.JPhaseRenderingAlgebra) →
-  (z : Render.Klein.Point (Render.klein R)) →
+  (z : Klein.Point (Render.klein R)) →
   Render.exactPhase (baseSample (renderWithPants R z)) ≡ Render.jPhase R z
 pantsRenderRetainsExactPhase R z = refl
 
 pantsRenderRetainsColour :
   (R : Render.JPhaseRenderingAlgebra) →
-  (z : Render.Klein.Point (Render.klein R)) →
+  (z : Klein.Point (Render.klein R)) →
   Render.renderedColour (baseSample (renderWithPants R z)) ≡ Render.jColour R z
 pantsRenderRetainsColour R z = refl
 
