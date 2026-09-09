@@ -39,16 +39,25 @@ import DASHI.Moonshine.JInvariantSignedFibreFractalBidiExact
 -- anti/identity/commuting gluing observations.
 import DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact
 
+-- The same order-three family is now derived as the exact modular word L^k T,
+-- with L/T controlled by the already-native negative/positive signed-FRACTRAN
+-- multiplicities.  The rendered 0.866025 coordinate is kept as a rational
+-- observer distinct from the exact sqrt(3)/2 analytic height.
+import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
+
 -- Tesla/Base369 refinement is the commuting null model for seam transport:
 -- an independent balanced-trit fibre commutes with both 2- and 3-refinement,
 -- while explicit resolution-sensitive fixtures demonstrate the exact model
 -- distinction that the analytic Klein-j seam must now classify.
 import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
 
--- Construct the finite Fibonacci recursion behind the recorded phi context,
--- while keeping the ternary coordinate as a signed observer over the recursive
--- fibre and leaving real ratio convergence explicit.
+-- Older binary/ternary phi construction remains as a compatibility surface.
 import DASHI.Moonshine.GoldenRatioBinaryTernaryFibreConstructionExact
+
+-- Preferred repo-native phi path: the signed-FRACTRAN word [-,+] acts as
+-- exactly two Fibonacci updates on a two-register fibre.  Repeated macros give
+-- 2/1, 5/3, 13/8, 34/21,... while the real phi limit remains explicit debt.
+import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 
 -- Same-object Klein-j construction shape g2^3/Delta plus source-described
 -- fundamental-domain gluing and explicit commuting/noncommuting test fixtures.
