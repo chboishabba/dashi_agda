@@ -24,6 +24,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
@@ -77,38 +78,33 @@ module LiteralDoubleMixedTrajectory
       module Stored = R382.ClosedLiteralPair
         (Live.physicalSystemAt (Live.support D) cutoff time) S
     in
-    transitive
-      (cong₂ C3.complex3Add
-        (cong
-          (λ selected →
-            DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-              (Helical.helicalProjectorPlus
-                (Live.Base.E (Live.stateTrajectory (Live.support D)))
-                (Live.Base.I (Live.stateTrajectory (Live.support D))) S
-                (Physical.p tau) selected)
-              (Helical.helicalProjectorMinus
-                (Live.Base.E (Live.stateTrajectory (Live.support D)))
-                (Live.Base.I (Live.stateTrajectory (Live.support D))) S
-                (Physical.q tau)
-                (Stored.velocity (Physical.q tau))))
-          (Stored.literalCoefficientIsDamped (Physical.p tau)))
-        (cong
-          (λ selected →
-            DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact.complex3Cross
-              (Helical.helicalProjectorPlus
-                (Live.Base.E (Live.stateTrajectory (Live.support D)))
-                (Live.Base.I (Live.stateTrajectory (Live.support D))) S
-                (Physical.p tau)
-                (Stored.velocity (Physical.p tau)))
-              (Helical.helicalProjectorMinus
-                (Live.Base.E (Live.stateTrajectory (Live.support D)))
-                (Live.Base.I (Live.stateTrajectory (Live.support D))) S
-                (Physical.q tau) selected))
-          (Stored.literalCoefficientIsDamped (Physical.q tau))))
-      refl
-    where
-    transitive : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-    transitive refl refl = refl
+    cong₂ C3.complex3Add
+      (cong
+        (λ selected →
+          Cross.complex3Cross
+            (Helical.helicalProjectorPlus
+              (Live.Base.E (Live.stateTrajectory (Live.support D)))
+              (Live.Base.I (Live.stateTrajectory (Live.support D))) S
+              (Physical.p tau) selected)
+            (Helical.helicalProjectorMinus
+              (Live.Base.E (Live.stateTrajectory (Live.support D)))
+              (Live.Base.I (Live.stateTrajectory (Live.support D))) S
+              (Physical.q tau)
+              (Stored.velocity (Physical.q tau))))
+        (Stored.literalCoefficientIsDamped (Physical.p tau)))
+      (cong
+        (λ selected →
+          Cross.complex3Cross
+            (Helical.helicalProjectorPlus
+              (Live.Base.E (Live.stateTrajectory (Live.support D)))
+              (Live.Base.I (Live.stateTrajectory (Live.support D))) S
+              (Physical.p tau)
+              (Stored.velocity (Physical.p tau)))
+            (Helical.helicalProjectorMinus
+              (Live.Base.E (Live.stateTrajectory (Live.support D)))
+              (Live.Base.I (Live.stateTrajectory (Live.support D))) S
+              (Physical.q tau) selected))
+        (Stored.literalCoefficientIsDamped (Physical.q tau)))
 
   storedDoubleTangentAt :
     (D : Live.LiteralRHSTrajectoryData) →
