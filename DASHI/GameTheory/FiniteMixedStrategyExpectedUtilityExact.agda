@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.GameTheory.StrategicInteractionCoreExact as Game
 import DASHI.Cognition.PNF.GenericExpectedFibreRateExact as Expected
@@ -73,6 +74,44 @@ record FiniteMixedProfileLaw (G : Game.StrategicGame) : Set₁ where
     lawReference : String
 
 open FiniteMixedProfileLaw public
+
+------------------------------------------------------------------------
+-- Product-law mass for unilateral mixed deviations.
+------------------------------------------------------------------------
+
+jointDeviationMass :
+  ∀ {G player} →
+  List (WeightedProfile G) →
+  List (WeightedStrategy G player) → ℚ
+jointDeviationMass [] alternatives = 0ℚ
+jointDeviationMass (profileAtom ∷ profiles) alternatives =
+  profileMass profileAtom * mixedStrategyMass alternatives
+  + jointDeviationMass profiles alternatives
+
+jointDeviationMassFactors :
+  ∀ {G player}
+    (profiles : List (WeightedProfile G))
+    (alternatives : List (WeightedStrategy G player)) →
+  jointDeviationMass profiles alternatives
+  ≡ mixedProfileMass profiles * mixedStrategyMass alternatives
+jointDeviationMassFactors [] alternatives = solve-∀
+jointDeviationMassFactors (profileAtom ∷ profiles) alternatives
+  rewrite jointDeviationMassFactors profiles alternatives = solve-∀
+
+normalizedJointDeviationMass :
+  ∀ {G player}
+    (profileLaw : FiniteMixedProfileLaw G)
+    (alternative : FiniteMixedStrategy G player) →
+  jointDeviationMass
+    (FiniteMixedProfileLaw.atoms profileLaw)
+    (FiniteMixedStrategy.atoms alternative)
+  ≡ 1ℚ
+normalizedJointDeviationMass profileLaw alternative
+  rewrite jointDeviationMassFactors
+    (FiniteMixedProfileLaw.atoms profileLaw)
+    (FiniteMixedStrategy.atoms alternative)
+    | FiniteMixedProfileLaw.normalized profileLaw
+    | FiniteMixedStrategy.normalized alternative = solve-∀
 
 ------------------------------------------------------------------------
 -- Cardinal expected-utility gate.
@@ -145,8 +184,8 @@ FiniteMixedBestResponse :
   (law : FiniteMixedProfileLaw G) →
   (player : Game.Player G) →
   Set₁
-FiniteMixedBestResponse U law player =
-  (alternative : FiniteMixedStrategy _ player) →
+FiniteMixedBestResponse {G} U law player =
+  (alternative : FiniteMixedStrategy G player) →
   mixedDeviationExpectedUtility
     U player (FiniteMixedProfileLaw.atoms law)
       (FiniteMixedStrategy.atoms alternative)
@@ -185,13 +224,15 @@ data MixedExpectedUtilityMeansEmpiricalFrequencyPermission : Set where
 
 data MixedExpectedUtilityMeansMoralValuePermission : Set where
 
+data MarginalNormalizationMeansIndependencePermission : Set where
+
 ordinalUtilityDoesNotAutomaticallySupportExpectation :
   OrdinalUtilityMeansExpectedUtilityPermission → ⊥
 ordinalUtilityDoesNotAutomaticallySupportExpectation ()
 
 finiteMixedLawDoesNotCreateGeneralMeasureSpace :
   FiniteMixedLawMeansGeneralProbabilityMeasurePermission → ⊥
-finiteMixedLawDoesNotCreateGeneralMeasureSpace ()
+finiteMixedLawDoesNotCreateGeneralProbabilityMeasurePermission = λ ()
 
 pureNashDoesNotAutomaticallyGiveMixedNash : PureNashMeansMixedNashPermission → ⊥
 pureNashDoesNotAutomaticallyGiveMixedNash ()
@@ -211,12 +252,17 @@ mixedExpectedUtilityDoesNotBecomeMoralValue :
   MixedExpectedUtilityMeansMoralValuePermission → ⊥
 mixedExpectedUtilityDoesNotBecomeMoralValue ()
 
+marginalNormalizationDoesNotAssertStatisticalIndependence :
+  MarginalNormalizationMeansIndependencePermission → ⊥
+marginalNormalizationDoesNotAssertStatisticalIndependence ()
+
 record FiniteMixedStrategyBoundary : Set where
   constructor finite-mixed-strategy-boundary
   field
     finiteProbabilityAtomsReused : Bool
     mixedStrategyNormalizationExplicit : Bool
     mixedProfileNormalizationExplicit : Bool
+    deviationProductMassNormalized : Bool
     cardinalExpectedUtilityRequiresReceipt : Bool
     mixedBestResponseExpectedUtilityBased : Bool
     generalMeasureTheoryInventedHere : Bool
@@ -224,4 +270,4 @@ record FiniteMixedStrategyBoundary : Set where
 
 canonicalFiniteMixedStrategyBoundary : FiniteMixedStrategyBoundary
 canonicalFiniteMixedStrategyBoundary =
-  finite-mixed-strategy-boundary true true true true true false false
+  finite-mixed-strategy-boundary true true true true true true false false
