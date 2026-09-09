@@ -56,23 +56,23 @@ internalDASHIModelNeedsProofLineage = refl
 ------------------------------------------------------------------------
 
 primary1991AbstractDoesNotProveEnhancement :
-  LT1991.primaryAbstractInspectionProvesEnhancement
-    LT1991.canonicalCombinedFieldAttenuationSourceBoundary ≡ false
+  LT1991.sourceEntitlementProvesSuperconductingEnhancement
+    LT1991.canonicalLiTorr1991SourceEntitlementBoundary ≡ false
 primary1991AbstractDoesNotProveEnhancement = refl
 
 primary1991AbstractDoesNotProveNegativeG :
-  LT1991.primaryAbstractInspectionProvesNegativeEffectiveG
-    LT1991.canonicalCombinedFieldAttenuationSourceBoundary ≡ false
+  LT1991.sourceEntitlementProvesMaterialEffectiveNegativeG
+    LT1991.canonicalLiTorr1991SourceEntitlementBoundary ≡ false
 primary1991AbstractDoesNotProveNegativeG = refl
 
 secondary1992CarrierIsNotPrimaryAPS :
-  LT1992.secondaryCarrierCountsAsPrimaryAPSCustody
-    LT1992.canonicalCoupledPotentialSourceBoundary ≡ false
+  LT1992.secondaryInspectionEqualsPrimaryPublisherCustody
+    LT1992.canonicalCoupledPotentialAttributionBoundary ≡ false
 secondary1992CarrierIsNotPrimaryAPS = refl
 
 secondary1992EquationShapeDoesNotProveNegativeG :
-  LT1992.sourceEntitledEquationShapeProvesNegativeEffectiveG
-    LT1992.canonicalCoupledPotentialSourceBoundary ≡ false
+  LT1992.equationShapeAttributionProvesMaterialEffectiveNegativeG
+    LT1992.canonicalCoupledPotentialAttributionBoundary ≡ false
 secondary1992EquationShapeDoesNotProveNegativeG = refl
 
 ------------------------------------------------------------------------
