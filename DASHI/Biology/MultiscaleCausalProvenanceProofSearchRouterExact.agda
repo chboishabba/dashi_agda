@@ -18,8 +18,8 @@ import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 -- developmental, neural, cognitive, learning, memory/path, environmental and
 -- cultural/institutional coordinates.  Co-presence or temporal order between
 -- two such coordinates is not a causal theorem.  A cross-level causal claim
--- needs a declared intervention/measurement design, nuisance/confounder
--- treatment, an application-supplied identification receipt, provenance, and
+-- needs a declared intervention/measurement design or source-backed
+-- identification receipt, nuisance/confounder treatment, provenance, and
 -- (when used to repair a formal consumer) binding to the same live residual.
 ------------------------------------------------------------------------
 
@@ -56,12 +56,6 @@ data CausalTargetRole : Experiment.CoordinateRole → Set where
 
 ------------------------------------------------------------------------
 -- Experimental design for one causal attribution.
---
--- `IdentificationAssumption` is intentionally application supplied.  This
--- module does not pretend that source manipulation plus outcome change alone
--- proves an identified causal effect; randomisation, adjustment, exclusion,
--- mechanistic identification, natural-experiment assumptions, etc. belong in
--- the concrete application receipt.
 ------------------------------------------------------------------------
 
 record CrossLevelCausalDesign
@@ -116,12 +110,6 @@ record CrossLevelCausalDesign
 
 open CrossLevelCausalDesign public
 
-------------------------------------------------------------------------
--- Causal attribution is stronger than design syntax.  The application states
--- the causal-effect proposition it is entitled to conclude from the declared
--- identification regime and supplies a witness of that proposition.
-------------------------------------------------------------------------
-
 record CrossLevelCausalAttribution
     {Value : Set}
     (claim : CrossLevelCausalClaim Value)
@@ -138,13 +126,7 @@ record CrossLevelCausalAttribution
 open CrossLevelCausalAttribution public
 
 ------------------------------------------------------------------------
--- Proof-search binding.
---
--- The existing introspective loop already requires the experiment demand to
--- address the concrete non-factorability witness and to bind the same live
--- residual.  This wrapper makes a causal attribution usable for that route only
--- when the experiment reference is the same experiment already scheduled for
--- the live defect.
+-- Experiment proof-search binding.
 ------------------------------------------------------------------------
 
 record CausalExperimentProofSearchBinding
@@ -184,9 +166,51 @@ causalExperimentPaysLiveResidual binding =
     (experimentBinding binding)
 
 ------------------------------------------------------------------------
--- Consumer closure remains downstream.  A causal effect can repair the live
--- causal coordinate but does not automatically prove that the target consumer
--- descends through the refined observer.
+-- Source-diligence route.
+--
+-- Literature, database, provenance or historical-source acquisition may be the
+-- highest-alpha route instead of a new experiment.  The source acquisition is
+-- still bound to the same scheduled residual, and an application-supplied
+-- source support predicate is required before it can support the causal claim.
+------------------------------------------------------------------------
+
+record CausalSourceProofSearchBinding
+    {system : Fibre.ConsumerIndexedFibreSystem}
+    {schedule : Scheduler.RefinementSchedule system}
+    {consumer : Fibre.Consumer system}
+    (alignment : Introspective.SourceRouteAlignment schedule)
+    (liveResidual : Scheduler.ConsumerRefinementResidual schedule consumer)
+    {Value : Set}
+    (claim : CrossLevelCausalClaim Value) : Set₁ where
+  constructor causal-source-proof-search-binding
+  field
+    sourceDemand :
+      Introspective.ConsumerDefectSourceDemand alignment liveResidual
+
+    SourceSupportsClaim : CrossLevelCausalClaim Value → Set
+    sourceSupport : SourceSupportsClaim claim
+
+    sourceIdentificationReference : String
+    consumerUseReference : String
+
+open CausalSourceProofSearchBinding public
+
+causalSourcePaysScheduledGap :
+  ∀ {system schedule consumer alignment liveResidual Value claim} →
+  (binding :
+    CausalSourceProofSearchBinding
+      {system} {schedule} {consumer}
+      alignment liveResidual {Value} claim) →
+  Introspective.MaterialSource.firstMissingSourceCoordinate
+    (Introspective.reopening (sourceDemand binding))
+  ≡
+  Introspective.sourceGapFor alignment
+    (Scheduler.missingCoordinate liveResidual)
+causalSourcePaysScheduledGap binding =
+  Introspective.sourceRoutePaysScheduledGap (sourceDemand binding)
+
+------------------------------------------------------------------------
+-- Consumer closure remains downstream.
 ------------------------------------------------------------------------
 
 record CausalAttributionToConsumerClosure
@@ -227,6 +251,8 @@ data CausalAttributionAutomaticallyClosesConsumerPermission : Set where
 
 data ExperimentAdmissionCreatesInterventionAuthorityPermission : Set where
 
+data SourceAcquisitionAutomaticallyProvesCausationPermission : Set where
+
 correlationDoesNotByItselfIdentifyCause :
   CorrelationMeansCausationPermission → ⊥
 correlationDoesNotByItselfIdentifyCause ()
@@ -259,6 +285,10 @@ experimentAdmissionDoesNotCreateInterventionAuthority :
   ExperimentAdmissionCreatesInterventionAuthorityPermission → ⊥
 experimentAdmissionDoesNotCreateInterventionAuthority ()
 
+sourceAcquisitionDoesNotAutomaticallyProveCausation :
+  SourceAcquisitionAutomaticallyProvesCausationPermission → ⊥
+sourceAcquisitionDoesNotAutomaticallyProveCausation ()
+
 record MultiscaleCausalProvenanceBoundary : Set where
   constructor multiscale-causal-provenance-boundary
   field
@@ -268,12 +298,14 @@ record MultiscaleCausalProvenanceBoundary : Set where
     nuisanceCoordinatesRemainExplicit : Bool
     causalIdentificationRequiresApplicationReceipt : Bool
     proofSearchMustBindSameLiveResidual : Bool
+    sourceAndExperimentRoutesRemainDistinct : Bool
     causalAttributionAutomaticallyClosesConsumer : Bool
     correlationAutomaticallyMeansCausation : Bool
+    sourceAcquisitionAutomaticallyProvesCausation : Bool
     culturalPatternAutomaticallyBecomesBiologicalEssence : Bool
 
 canonicalMultiscaleCausalProvenanceBoundary :
   MultiscaleCausalProvenanceBoundary
 canonicalMultiscaleCausalProvenanceBoundary =
   multiscale-causal-provenance-boundary
-    true true true true true true false false false
+    true true true true true true true false false false false
