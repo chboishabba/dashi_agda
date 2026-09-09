@@ -9,16 +9,6 @@ import DASHI.Physics.ExoticGravity.SuperconductingConstraintObservationRouteExac
 import DASHI.Physics.ExoticGravity.SuperconductingConstraintSourceAttributionMigrationExact as SourceMigration
 import DASHI.Physics.ExoticGravity.AntigravityResearchPromotionCutExact as Promotion
 
-------------------------------------------------------------------------
--- LEGACY CONSTRAINTS PRUNE MODEL SPACE; THEY DO NOT PAY A SAME-APPARATUS CUT
---
--- The public constraint registry contains several scientifically relevant
--- experiments, but they are distinct apparatus/configuration carriers.  Their
--- results can constrain candidate mechanisms and discriminator choice without
--- being spliced into the four same-apparatus bundle receipts required by the
--- antigravity research-promotion cut.
-------------------------------------------------------------------------
-
 data ConstraintUse : Set where
   modelSpacePruning : ConstraintUse
   artifactConfounderGuidance : ConstraintUse
@@ -47,43 +37,27 @@ open ConstraintPruningReceipt public
 
 hathawayNullPruning : ConstraintPruningReceipt
 hathawayNullPruning = constraint-pruning-receipt
-  Registry.hathawayReplication
-  modelSpacePruning
-  refl
-  Route.hathawayReplicationRoute
-  SourceMigration.hathawaySourceCandidate
+  Registry.hathawayReplication modelSpacePruning refl
+  Route.hathawayReplicationRoute SourceMigration.hathawaySourceCandidate
   "constrains Podkletnov-style weight/gravity-modification claims in the Hathaway apparatus/configuration; does not prove universal zero coupling"
 
 tajmarTransitionPruning : ConstraintPruningReceipt
 tajmarTransitionPruning = constraint-pruning-receipt
-  Registry.tajmarTransitionMismatch
-  transitionDiscriminatorGuidance
-  refl
-  Route.tajmarTransitionMismatchRoute
-  SourceMigration.tajmarTransitionSourceCandidate
+  Registry.tajmarTransitionMismatch transitionDiscriminatorGuidance refl
+  Route.tajmarTransitionMismatchRoute SourceMigration.tajmarTransitionSourceCandidate
   "constrains simple superconducting-transition-locked interpretations because the reported onset did not coincide with the superconducting transition; retained as angular-sensor guidance"
 
 tajmarMagnitudePruning : ConstraintPruningReceipt
 tajmarMagnitudePruning = constraint-pruning-receipt
-  Registry.tajmarLargeTheoryBound
-  magnitudeUpperBound
-  refl
-  Route.tajmarLargeTheoryBoundRoute
-  SourceMigration.tajmarLargeTheoryBoundSourceCandidate
+  Registry.tajmarLargeTheoryBound magnitudeUpperBound refl
+  Route.tajmarLargeTheoryBoundRoute SourceMigration.tajmarLargeTheoryBoundSourceCandidate
   "constrains theories predicting very large frame-dragging-like responses in the Tajmar configuration; does not establish exact zero coupling"
 
 nasaRFArtifactGuidance : ConstraintPruningReceipt
 nasaRFArtifactGuidance = constraint-pruning-receipt
-  Registry.nasaRFArrtifact
-  artifactConfounderGuidance
-  refl
-  Route.nasaRFArtifactRoute
-  SourceMigration.nasaRFArtifactSourceCandidate
+  Registry.nasaRFArrtifact artifactConfounderGuidance refl
+  Route.nasaRFArtifactRoute SourceMigration.nasaRFArtifactSourceCandidate
   "retains the RF/instrumentation-artifact history as a mandatory ordinary-confounder design consideration rather than a gravity detection"
-
-------------------------------------------------------------------------
--- Apparatus identity remains a first-class missing coordinate.
-------------------------------------------------------------------------
 
 data LegacyConstraintApparatus : Set where
   nasaStaticApparatus : LegacyConstraintApparatus
@@ -112,11 +86,6 @@ nasaRFAndTajmarApparatusDistinct :
   apparatusForConstraint Registry.nasaRFArrtifact
     ≡ apparatusForConstraint Registry.tajmarTransitionMismatch → ⊥
 nasaRFAndTajmarApparatusDistinct ()
-
-------------------------------------------------------------------------
--- No authority exists to concatenate heterogeneous legacy constraints into the
--- current same-apparatus experimental cut.  This is the exact no-stitch rule.
-------------------------------------------------------------------------
 
 data CrossExperimentBundleSynthesisAuthority : Set where
 
