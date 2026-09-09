@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ConsumerFibreRepairExact as Repair
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Weave
 import DASHI.Geometry.SSP369Ultrametric as SSP
 
@@ -102,15 +103,19 @@ address369AloneNotConsumerSufficientForExecutionLength =
 
 addressAndExecutionObserver :
   Weave.SignedSSPExecutionState → SSP.Address 3 × Nat
-addressAndExecutionObserver state =
-  address369Observer state , executionLengthConsumer state
+addressAndExecutionObserver =
+  Observer.pairObserver
+    address369Observer
+    executionLengthConsumer
 
 addressAndExecutionIsConsumerSufficient :
   Descent.ConsumerSufficient
     addressAndExecutionObserver
     executionLengthConsumer
-addressAndExecutionIsConsumerSufficient left right same =
-  cong proj₂ same
+addressAndExecutionIsConsumerSufficient =
+  Observer.pairRefinesRight
+    address369Observer
+    executionLengthConsumer
 
 executionLengthCoordinateRepairs369Collision :
   Repair.RefinementRepairs
@@ -144,9 +149,10 @@ record FibreMachineFoundation369Boundary : Set where
     executionLengthRepairsThis369Collision : Bool
     everyValidRepairSeparatesThisCollision : Bool
     sameCardinalityImpliesSameMachineSemantics : Bool
+    observerPairingHasSingleCanonicalOwner : Bool
 
 canonicalFibreMachineFoundation369Boundary :
   FibreMachineFoundation369Boundary
 canonicalFibreMachineFoundation369Boundary =
   fibreMachineFoundation369Boundary
-    true true false true true false
+    true true false true true false true
