@@ -22,16 +22,28 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 --         pointwise self-Gram/self-flux signs on the live carriers;
 --   R572  composes those exact coordinates into the PRE-EXISTING R503 direct
 --         off-diagonal budget once scalar FTC/order, a cutoff-uniform initial
---         endpoint ceiling, and the novel commutator spacetime budget are paid.
+--         endpoint ceiling, and the novel commutator spacetime budget are paid;
+--   R577  reconciles the historical literal nested R328/R329 Schur route with
+--         the MODERN R568 commutator consumer.  It keeps row, column,
+--         signed-response majorization and cutoff-uniform Schur envelope as
+--         four distinct receipts and compiles them into the existing R568
+--         budget rather than introducing another leaf-A consumer.
 --
--- Thus there is one leaf-A consumer and one genuinely new PDE estimate:
+-- The live novel PDE frontier is therefore below the R568 consumer:
 --
---   cutoff-uniform signed spacetime control of the literal live
---   commutator-only full square.
+--   literal weighted nested row budget
+--   -> literal numerical column envelope
+--   -> signed modern response <= nonnegative Schur output
+--   -> cutoff-uniform spacetime Schur envelope
+--   -> existing R568 commutator budget.
+--
+-- In particular, the existence of the older abstract SC1--SC9/full-shell Schur
+-- interfaces is not itself an inhabitant of these literal receipts.  Their
+-- carrier/majorization weld remains proof-relevant.
 --
 -- Ordinary scalar FTC/order and the initial-energy endpoint calibration remain
 -- separately typed standard/source-realization coordinates.  Nothing in this
--- aggregate asserts either analytic payment or Clay closure.
+-- aggregate asserts analytic payment or Clay closure.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -48,9 +60,13 @@ import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxEndpointWeldRound568Exac
 import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact
 import DASHI.Physics.Closure.NSTriadKNLiveSelfGramAndFluxOrderRound571Exact
 import DASHI.Physics.Closure.NSTriadKNDirectLeafACompilerRound572Exact
+import DASHI.Physics.Closure.NSTriadKNModernNestedSchurToCommutatorBidiRound577Exact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
+
+round569ModernNestedSchurBidiIntegrated : Bool
+round569ModernNestedSchurBidiIntegrated = true
 
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
