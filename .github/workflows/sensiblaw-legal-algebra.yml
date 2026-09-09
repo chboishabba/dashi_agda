@@ -13,12 +13,17 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawSourceConditionedTypedLiabilityExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64WrongTypeSourceRealisationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenDownstreamElementSourceAtlasExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenAtomicSourceConditionedDutyBreachExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenNSWCLAAtomicApplicationExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenS43ASpecialStatutoryPowerAtomicExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenVicariousLiabilityFamilyAtomicExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawDutyPublicAuthoritySourceLineageGraphExact.agda'
@@ -64,6 +69,8 @@ jobs:
           DASHI/Cognition/PNF/SensibLawSourceConditionedTypedLiabilityExact.agda
           DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda
           DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda
+          DASHI/Cognition/PNF/SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact.agda
+          DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact.agda
 
       - name: Type-check Cullen introspective and atomic source-conditioned spine
         run: >-
@@ -74,6 +81,9 @@ jobs:
           DASHI/Cognition/PNF/SensibLawCullenEdelman64WrongTypeSourceRealisationExact.agda
           DASHI/Cognition/PNF/SensibLawCullenDownstreamElementSourceAtlasExact.agda
           DASHI/Cognition/PNF/SensibLawCullenAtomicSourceConditionedDutyBreachExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenNSWCLAAtomicApplicationExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenS43ASpecialStatutoryPowerAtomicExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenVicariousLiabilityFamilyAtomicExact.agda
           DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda
           DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda
 
