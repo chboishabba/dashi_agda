@@ -6,9 +6,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
-import DASHI.Algebra.Trit as Trit
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawDirectionalEvidenceApplicabilityBridgeExact as Directional
+import DASHI.Cognition.PNF.SensibLawApplicabilityPrerequisiteMeetExact as Meet
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as Source
 import DASHI.Interop.SensibLawNatSourcePropositionVerificationExact as Verify
@@ -127,8 +127,8 @@ brightonApplicabilityStillUsesExistingLegalGate :
       {residual} {demand} receipt admission state) →
   Legal.resultingApplicability (compileBrightonS185Applicability input)
   ≡ Legal.SemanticLegalInputGate.resultingApplicability
-      (DASHI.Cognition.PNF.SensibLawApplicabilityPrerequisiteMeetExact.semanticInput
-        (DASHI.Cognition.PNF.SensibLawDirectionalEvidenceApplicabilityBridgeExact.applicabilityInput
+      (Meet.semanticInput
+        (Directional.applicabilityInput
           (sourceConditionedApplicability input)))
 brightonApplicabilityStillUsesExistingLegalGate input = refl
 
