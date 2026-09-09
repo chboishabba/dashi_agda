@@ -16,17 +16,6 @@ import DASHI.Law.SensibLawHousingEpisodeEvidenceLineageExact as Housing
 
 ------------------------------------------------------------------------
 -- BRIGHTON / RTRA s 185 SINGLE-EPISODE REGRESSION
---
--- This is deliberately narrower than the longitudinal housing sequence.
--- It uses the 24 January 2023 Brighton Form 11 carrier only as a source-backed
--- assertion/remedy context and tests that positive proposition support still
--- has to pass through the existing legal applicability meet.
---
--- External source roles are preserved:
---   * Queensland legislation owns the legal duty in RTRA Act 2008 s 185;
---   * Queensland RTA owns the administrative description of Form 11;
---   * the matter Form 11 owns the episode-specific assertions it contains.
--- DASHI owns only the typed reconstruction/weld below.
 ------------------------------------------------------------------------
 
 data HousingLegalSourceRole : Set where
@@ -97,6 +86,9 @@ record BrightonS185RegressionInput
     section185AuthoritySource : HousingLegalSourceAttribution
     section185AuthorityIsPrimaryLegislation :
       sourceRole section185AuthoritySource ≡ primaryLegislation
+    sameSection185AuthorityAsApplicabilityMeet : Set
+    section185AuthorityWeldReference : String
+
     form11GuidanceSource : HousingLegalSourceAttribution
     form11GuidanceIsAdministrative :
       sourceRole form11GuidanceSource ≡ administrativeFormGuidance
@@ -133,6 +125,7 @@ brightonApplicabilityStillUsesExistingLegalGate input = refl
 data Form11AssertionAutomaticallyEstablishesBreach : Set where
 data PositiveSourceSupportAutomaticallyEstablishesS185Violation : Set where
 data Section185AuthorityAutomaticallyEstablishesMatterFacts : Set where
+data UnweldedSection185LabelAuthorizesApplicability : Set where
 data HealthContextAutomaticallyEstablishesMedicalCausation : Set where
 data OneHousingEpisodeAutomaticallyEstablishesSystemicWrongdoing : Set where
 data ApplicabilityAutomaticallyEstablishesLiability : Set where
@@ -148,6 +141,10 @@ positiveSupportDoesNotEstablishS185Violation ()
 section185AuthorityDoesNotEstablishMatterFacts :
   Section185AuthorityAutomaticallyEstablishesMatterFacts → ⊥
 section185AuthorityDoesNotEstablishMatterFacts ()
+
+unweldedSection185LabelDoesNotAuthorizeApplicability :
+  UnweldedSection185LabelAuthorizesApplicability → ⊥
+unweldedSection185LabelDoesNotAuthorizeApplicability ()
 
 healthContextDoesNotEstablishMedicalCausation :
   HealthContextAutomaticallyEstablishesMedicalCausation → ⊥
@@ -170,10 +167,12 @@ record BrightonS185RegressionBoundary : Set where
     positiveSourceSupportRequiredBeforeBridge : Bool
     sameMatterPropositionWeldRequired : Bool
     sameEvidenceCarrierWeldRequired : Bool
+    sameSection185AuthorityWeldRequired : Bool
     existingApplicabilityCompilerRetained : Bool
     form11AssertionCreatesBreach : Bool
     positiveSupportCreatesViolation : Bool
     legalAuthorityCreatesMatterFact : Bool
+    unweldedSection185LabelAuthorizesApplicability : Bool
     healthContextCreatesMedicalCausation : Bool
     oneEpisodeCreatesSystemicWrongdoing : Bool
     applicabilityCreatesLiability : Bool
@@ -181,5 +180,5 @@ record BrightonS185RegressionBoundary : Set where
 canonicalBrightonS185RegressionBoundary : BrightonS185RegressionBoundary
 canonicalBrightonS185RegressionBoundary =
   brighton-s185-regression-boundary
-    true true true true true true true
-    false false false false false false
+    true true true true true true true true
+    false false false false false false false
