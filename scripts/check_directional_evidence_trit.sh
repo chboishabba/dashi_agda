@@ -21,6 +21,7 @@ FILES=(
   DASHI/Biology/HeritableAgenticOrganisationEvolutionExact.agda
   DASHI/Biology/OpenEndedAgenticRepertoireEvolutionExact.agda
   DASHI/Biology/OpenEndedEvolutionHistoricalEvidenceCrossPollinationExact.agda
+  DASHI/Biology/MultiscaleCausalProvenanceProofSearchRouterExact.agda
   DASHI/AgenticMaterialBidiEverything.agda
   DASHI/Interop/DirectionalEvidenceProofSearchBridgeExact.agda
 )
@@ -41,4 +42,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / metabolic admissibility / proto-agency / heritable agentic organisation / open-ended repertoire / historical evidence / DNA-neural-memory-trauma-Amalek cross-pollination checks passed"
+echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / metabolic admissibility / proto-agency / heritable agentic organisation / open-ended repertoire / historical evidence / multiscale causal provenance / DNA-neural-memory-trauma-Amalek cross-pollination checks passed"
