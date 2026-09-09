@@ -164,15 +164,15 @@ typedRatioNeedsIndependentReplication :
     Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ true
 typedRatioNeedsIndependentReplication = refl
 
-typedRatioMayCompileExistingNegativeGWeld :
-  Ratio.typedRatioMayCompileExistingNegativeGWeld
-    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ true
-typedRatioMayCompileExistingNegativeGWeld = refl
-
-compiledRatioDoesNotProveUniversalNegativeG :
-  Ratio.compiledNegativeGWeldProvesUniversalNegativeG
+typedRatioAloneCannotCompileNegativeGWeld :
+  Ratio.typedRatioAloneMayCompileExistingNegativeGWeld
     Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ false
-compiledRatioDoesNotProveUniversalNegativeG = refl
+typedRatioAloneCannotCompileNegativeGWeld = refl
+
+canonicalScalingReplicationIdentityStillRequired :
+  Ratio.canonicalScalingReplicationIdentityStillRequired
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ true
+canonicalScalingReplicationIdentityStillRequired = refl
 
 sameLabelDoesNotSubstituteForReplicationIdentity :
   ScalingWeld.sameLabelMaySubstituteForSameReplicationCarrier
@@ -199,10 +199,30 @@ exactScalingSweepCarrierEqualityRequired :
     ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ true
 exactScalingSweepCarrierEqualityRequired = refl
 
+ratioAloneCannotCompileAtScalingBoundary :
+  ScalingWeld.typedRatioAloneMayCompileExistingNegativeGWeld
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+ratioAloneCannotCompileAtScalingBoundary = refl
+
+identityWeldMayCompileExistingNegativeGWeld :
+  ScalingWeld.identityWeldMayCompileExistingNegativeGWeld
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ true
+identityWeldMayCompileExistingNegativeGWeld = refl
+
 closedScalingStateDoesNotProveNegativeG :
   ScalingWeld.closedScalingStateAutomaticallyProvesNegativeEffectiveG
     ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
 closedScalingStateDoesNotProveNegativeG = refl
+
+compiledNegativeGWeldDoesNotProveUniversalNegativeG :
+  ScalingWeld.compiledNegativeGWeldProvesUniversalNegativeG
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+compiledNegativeGWeldDoesNotProveUniversalNegativeG = refl
+
+compiledNegativeGWeldDoesNotProvePhysicalCorrectness :
+  ScalingWeld.compiledNegativeGWeldProvesPhysicalCorrectness
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+compiledNegativeGWeldDoesNotProvePhysicalCorrectness = refl
 
 postScalingEvidenceRemainsBoundedNoPromotion :
   ScalingWeld.postScalingEvidenceIsBounded
