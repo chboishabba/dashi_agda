@@ -102,8 +102,8 @@ postFractureEquilibrium :
     (Dim.magnitude
       (Network.externalForce (equilibriumNetwork after) vertex))
   ≡ Load.zero (Network.localAlgebra algebra)
-postFractureEquilibrium transition vertex =
-  Network.equilibriumAt (equilibriumNetwork _) vertex
+postFractureEquilibrium {after = after} transition vertex =
+  Network.equilibriumAt (equilibriumNetwork after) vertex
 
 ------------------------------------------------------------------------
 -- Non-promotion boundaries.
