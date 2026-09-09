@@ -61,9 +61,9 @@ deviationOutcome G profile player strategy =
 
 ProfitableDeviation :
   (G : StrategicGame) →
-  Profile G →
-  Player G →
-  Strategy G _ →
+  (profile : Profile G) →
+  (player : Player G) →
+  Strategy G player →
   Set
 ProfitableDeviation G profile player alternative =
   StrictlyPrefers G player
