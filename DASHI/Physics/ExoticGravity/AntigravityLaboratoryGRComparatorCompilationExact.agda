@@ -10,11 +10,11 @@ import DASHI.Physics.ExoticGravity.LiTorrStandardGRRotatingSourceKernelExact as 
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
--- LABORATORY SOURCE + CLOSED GEOMETRY -> ORDINARY-GR COMPARATOR REQUEST
+-- LABORATORY SOURCE + CLOSED GEOMETRY -> ORDINARY-GR EVALUATION REQUEST
 --
--- This compiler closes an architectural seam only.  It does not manufacture a
--- numerical field prediction: exact geometry instantiation, convention, weak-
--- field validity and evaluation remain explicit receipts.
+-- Source/geometry closure authorizes evaluation.  It does not manufacture the
+-- numerical prediction.  The prediction receipt is a separate downstream
+-- object carrying exact evaluator/output/same-input lineage.
 ------------------------------------------------------------------------
 
 record SameApparatusGRComparatorInput : Set₂ where
@@ -44,13 +44,47 @@ record SameApparatusGRComparatorInput : Set₂ where
 
 open SameApparatusGRComparatorInput public
 
-record OrdinaryGRComparatorRequest : Set₂ where
-  constructor ordinary-gr-comparator-request
+record OrdinaryGREvaluationRequest : Set₂ where
+  constructor ordinary-gr-evaluation-request
   field
     apparatusIdentity : String
     source : Stress.LaboratoryStressEnergyReceipt
     geometry : GR.RotatingSourceGeometry
     kernel : GR.WeakFieldGRKernel geometry
+
+    ExactGeometryInstantiationReceipt : Set
+    exactGeometryInstantiationReceipt : ExactGeometryInstantiationReceipt
+
+    WeakFieldValidityReceipt : Set
+    weakFieldValidityReceipt : WeakFieldValidityReceipt
+
+    ConventionNormalizationReceipt : Set
+    conventionNormalizationReceipt : ConventionNormalizationReceipt
+
+open OrdinaryGREvaluationRequest public
+
+compileOrdinaryGREvaluationRequest :
+  SameApparatusGRComparatorInput → OrdinaryGREvaluationRequest
+compileOrdinaryGREvaluationRequest input =
+  ordinary-gr-evaluation-request
+    (SameApparatusGRComparatorInput.apparatusIdentity input)
+    (SameApparatusGRComparatorInput.laboratoryStressEnergy input)
+    (SameApparatusGRComparatorInput.rotatingGeometry input)
+    (SameApparatusGRComparatorInput.weakFieldKernel input)
+    (SameApparatusGRComparatorInput.ExactGeometryInstantiationReceipt input)
+    (SameApparatusGRComparatorInput.exactGeometryInstantiationReceipt input)
+    (SameApparatusGRComparatorInput.WeakFieldValidityReceipt input)
+    (SameApparatusGRComparatorInput.weakFieldValidityReceipt input)
+    (SameApparatusGRComparatorInput.ConventionNormalizationReceipt input)
+    (SameApparatusGRComparatorInput.conventionNormalizationReceipt input)
+
+record OrdinaryGRPredictionReceipt : Set₂ where
+  constructor ordinary-gr-prediction-receipt
+  field
+    request : OrdinaryGREvaluationRequest
+    predictionCarrier : String
+    evaluatorIdentity : String
+    evaluatorRevision : String
 
     NumericalEvaluationReceipt : Set
     numericalEvaluationReceipt : NumericalEvaluationReceipt
@@ -58,12 +92,10 @@ record OrdinaryGRComparatorRequest : Set₂ where
     SameInputPredictionReceipt : Set
     sameInputPredictionReceipt : SameInputPredictionReceipt
 
-open OrdinaryGRComparatorRequest public
+open OrdinaryGRPredictionReceipt public
 
 ------------------------------------------------------------------------
--- The input is enough to authorize numerical evaluation; it is not itself the
--- evaluation.  This avoids pretending a symbolic weak-field scaling kernel is
--- already a literal same-apparatus prediction.
+-- Reverse-search residuals.
 ------------------------------------------------------------------------
 
 data ComparatorResidual : Set where
@@ -86,14 +118,16 @@ record LaboratoryGRComparatorBoundary : Set where
     genericWeakFieldKernelEqualsSameApparatusPrediction : Bool
     closedGeometryAloneEqualsNumericalPrediction : Bool
     labStressEnergyAloneEqualsNumericalPrediction : Bool
+    evaluationRequestEqualsCompletedPrediction : Bool
     exactGeometryInstantiationRequired : Bool
     weakFieldValidityRequired : Bool
     conventionNormalizationRequired : Bool
     numericalEvaluationStillRequired : Bool
+    sameInputPredictionIdentityStillRequired : Bool
     comparatorRequestAutomaticallyProvesResidualAnomaly : Bool
-    comparatorRequestAutomaticallyProvesNegativeEffectiveG : Bool
+    predictionReceiptAutomaticallyProvesNegativeEffectiveG : Bool
 
 canonicalLaboratoryGRComparatorBoundary : LaboratoryGRComparatorBoundary
 canonicalLaboratoryGRComparatorBoundary =
   laboratory-gr-comparator-boundary
-    false false false true true true true false false
+    false false false false true true true true true false false
