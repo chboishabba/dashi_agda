@@ -11,8 +11,8 @@ module DASHI.Physics.Closure.GoldenRatioCarrierDerivationAdvanceExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List.Base using (List; _∷_; [])
 
+import Real as BishopReal
 import DASHI.Physics.Closure.GoldenRatioInCarrierReceipt as Previous
 import DASHI.Foundations.BishopGoldenRatioCarrierExact as BishopPhi
 
@@ -25,9 +25,10 @@ record GoldenRatioCarrierDerivationAdvance : Set where
     bishopCarrierConstructed : Bool
     bishopCarrierConstructedIsTrue : bishopCarrierConstructed ≡ true
 
-    minimalPolynomialProvedOnSameCarrier : Bool
-    minimalPolynomialProvedOnSameCarrierIsTrue :
-      minimalPolynomialProvedOnSameCarrier ≡ true
+    carrierLaw :
+      BishopReal._≃_
+        (BishopReal._*_ BishopPhi.bishopPhi BishopPhi.bishopPhi)
+        (BishopReal._+_ BishopPhi.bishopPhi BishopPhi.one)
 
     historicalCarrierDerivationBlockerDischarged : Bool
     historicalCarrierDerivationBlockerDischargedIsTrue :
@@ -51,8 +52,7 @@ canonicalGoldenRatioCarrierDerivationAdvance = record
   ; previousReceiptIsCanonical = refl
   ; bishopCarrierConstructed = true
   ; bishopCarrierConstructedIsTrue = refl
-  ; minimalPolynomialProvedOnSameCarrier = true
-  ; minimalPolynomialProvedOnSameCarrierIsTrue = refl
+  ; carrierLaw = BishopPhi.bishopPhiMinimalPolynomial
   ; historicalCarrierDerivationBlockerDischarged = true
   ; historicalCarrierDerivationBlockerDischargedIsTrue = refl
   ; rogersRamanujanToYukawaStillOpen = true
@@ -62,9 +62,3 @@ canonicalGoldenRatioCarrierDerivationAdvance = record
   ; physicalCKMPromoted = false
   ; physicalCKMPromotedIsFalse = refl
   }
-
--- Force the proof-bearing Bishop theorem into this receipt surface so this
--- module cannot silently degrade to a Boolean-only promotion.
-carrierLawReceipt :
-  _
-carrierLawReceipt = BishopPhi.bishopPhiMinimalPolynomial
