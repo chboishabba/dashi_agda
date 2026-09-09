@@ -4,41 +4,39 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Environment.CanopySpectralRadiativeTransferExact as Canopy
-import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact as Calibration
-import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as Plant
+import DASHI.Environment.PhotosyntheticLightTransportCrossPollinationExact as Photo
 import DASHI.Physics.Optics.InverseCausticNumericalProducerExact as Numerical
 
 ------------------------------------------------------------------------
 -- PHOTOSYNTHETIC LIGHT OPTIMISATION
 --
--- This is not a new photosynthesis model. It binds a wavelength/angle-resolved
--- canopy light producer to the existing leaf-gas-exchange and calibration
--- surfaces, then exposes an optimisation objective subject to biological and
--- thermal constraints.
+-- This is not a new photosynthesis model. It consumes the canonical
+-- PhotosyntheticOpticsPlantWeld and adds a canopy-level optimisation surface.
+-- The biological objective is assimilation under independently retained
+-- thermal, hydraulic and photoinhibition constraints, not raw photon density.
 ------------------------------------------------------------------------
 
 record PhotosyntheticObjective
-    {Wavelength Direction CanopyPoint PhotonFlux ObjectiveValue : Set}
-    (canopy : Canopy.SpectralCanopyRadiationModel
-      Wavelength Direction CanopyPoint PhotonFlux)
-    (leaf : Plant.LeafGasExchangeReceipt) : Set₁ where
+    {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
+    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
+    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt field}
+    (weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception) : Set₁ where
   constructor photosynthetic-objective
   field
-    EvaluationState : Set
-    leafState : EvaluationState → Plant.LeafState leaf
-    atmosphereState : EvaluationState → Plant.AtmosphereState leaf
-    canopyPoint : EvaluationState → CanopyPoint
-    objective : EvaluationState → ObjectiveValue
-    objectiveDefinitionReference : String
+    objective : Photo.CoupledState weld → ObjectiveValue
+    objectiveIsAssimilationBased : String
     actionSpectrumReference : String
     leafAbsorptanceReference : String
-    aggregationReference : String
+    canopyAggregationReference : String
+    waterCarbonCouplingReference : String
 
 open PhotosyntheticObjective public
 
 record BiologicalLightConstraints
     {State ConstraintValue : Set}
-    (objective : State → ConstraintValue) : Set₁ where
+    (stateCarrier : State → ConstraintValue) : Set₁ where
   constructor biological-light-constraints
   field
     photoinhibitionRisk : State → ConstraintValue
@@ -54,20 +52,20 @@ record BiologicalLightConstraints
 open BiologicalLightConstraints public
 
 record PhotosyntheticLightOptimisationCandidate
-    {Wavelength Direction CanopyPoint PhotonFlux ObjectiveValue ConstraintValue : Set}
-    {leaf : Plant.LeafGasExchangeReceipt}
-    (canopy : Canopy.SpectralCanopyRadiationModel
-      Wavelength Direction CanopyPoint PhotonFlux)
-    (objective : PhotosyntheticObjective canopy leaf) : Set₁ where
+    {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
+    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
+    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt field}
+    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
+    (objective : PhotosyntheticObjective weld) : Set₁ where
   constructor photosynthetic-light-optimisation-candidate
   field
     candidateDescription : String
     opticalDesignArtifact : String
     opticalArtifactDigest : String
-    retainedCanopyModel :
-      Canopy.SpectralCanopyRadiationModel
-        Wavelength Direction CanopyPoint PhotonFlux
-    retainedCanopyModelIsSameObject : retainedCanopyModel ≡ canopy
+    retainedPlantOpticsWeld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception
+    retainedPlantOpticsWeldIsSameObject : retainedPlantOpticsWeld ≡ weld
     predictedObjective : ObjectiveValue
     optimisationMethod : String
     optimisationRunReceipt : String
@@ -75,33 +73,57 @@ record PhotosyntheticLightOptimisationCandidate
 open PhotosyntheticLightOptimisationCandidate public
 
 record PhotosyntheticLightOptimisationAdmission
-    {Wavelength Direction CanopyPoint PhotonFlux ObjectiveValue ConstraintValue : Set}
-    {leaf : Plant.LeafGasExchangeReceipt}
-    {canopy : Canopy.SpectralCanopyRadiationModel
-      Wavelength Direction CanopyPoint PhotonFlux}
-    {objective : PhotosyntheticObjective canopy leaf}
-    (candidate : PhotosyntheticLightOptimisationCandidate canopy objective) : Set₁ where
+    {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
+    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
+    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt field}
+    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
+    {objective : PhotosyntheticObjective weld}
+    (candidate : PhotosyntheticLightOptimisationCandidate objective) : Set₁ where
   constructor photosynthetic-light-optimisation-admission
   field
-    sameLeafAndCanopyGeometryEvidence : String
     farquharCalibrationEvidence : String
     stomatalCalibrationEvidence : String
     lightResponseCalibrationEvidence : String
     photoinhibitionConstraintEvidence : String
     thermalConstraintEvidence : String
     waterConstraintEvidence : String
+    siteFibreEvidence : String
     heldOutValidationPlan : String
 
 open PhotosyntheticLightOptimisationAdmission public
 
 ------------------------------------------------------------------------
--- Cross-pollination into inverse caustic design: a biological objective may
--- provide a target illumination pattern, but the numerical optical producer
--- still has to satisfy its independent geometric/residual obligations.
+-- Canopy solver weld: the canopy transport model must compile into the same
+-- canonical photon field/interception objects used by the plant weld.
+------------------------------------------------------------------------
+
+record CanopyOptimisationWeld
+    {LeafPoint Wavelength Direction PhotonFlux ObjectiveValue : Set}
+    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
+    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt field}
+    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
+    (canopy : Canopy.SpectralCanopyRadiationModel Wavelength Direction LeafPoint PhotonFlux)
+    (canopyWeld : Canopy.CanopyToPhotosyntheticPhotonFieldWeld canopy field interception) : Set₁ where
+  constructor canopy-optimisation-weld
+  field
+    samePhotonFieldReference : String
+    sameLeafGeometryReference : String
+    sameTimeSupportReference : String
+    sameSiteConditionReference : String
+
+open CanopyOptimisationWeld public
+
+------------------------------------------------------------------------
+-- Inverse-caustic x-pollination: the biological layer supplies the target;
+-- the numerical optical producer still owes all independent optical residuals.
 ------------------------------------------------------------------------
 
 record BiologicalTargetToInverseCausticWeld
-    {SourceModel TargetPattern SourceRay SurfacePoint TargetPoint Normal Flux Scalar : Set}
+    {SourceModel TargetPattern : Set}
     (problem : Numerical.InverseCausticProblem SourceModel TargetPattern) : Set₁ where
   constructor biological-target-to-inverse-caustic-weld
   field
