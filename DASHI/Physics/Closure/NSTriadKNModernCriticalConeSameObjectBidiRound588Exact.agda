@@ -29,9 +29,20 @@ module DASHI.Physics.Closure.NSTriadKNModernCriticalConeSameObjectBidiRound588Ex
 -- fixedOutputCross.  Once that equality is supplied, the old conditional
 -- compiler transports immediately; no new inequality is required here.
 --
--- This file therefore prevents two wrong turns:
+-- R440 already gives the exact finite modern signed scalar reached from R438:
+--
+--   fixedOutputPhysicalCommonCross W S system output.
+--
+-- This file therefore specializes the generic same-object weld to that literal
+-- R440 scalar.  The specialization does NOT construct the equality receipt; it
+-- merely ensures the surviving historical payment is asked on the exact modern
+-- object rather than an untyped rational placeholder.
+--
+-- This file prevents three wrong turns:
 --   * making R587's stronger three full-norm bounds mandatory;
---   * source-laundering R434's abstract scalar payment into R573 without a weld.
+--   * source-laundering R434's abstract scalar payment into R573 without a weld;
+--   * identifying R434's OUTER Bony partition with R587's INNER post-slot Bony
+--     partition merely because both use far-low/high-high/comparable names.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -39,6 +50,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
+import DASHI.Physics.Closure.NSTriadKNPhysicalHeatDoubleSumFactorizationRound440Exact as R440
 import DASHI.Physics.Closure.NSTriadKNDeepFarLowCriticalShoulderRound234Exact as R234
 import DASHI.Physics.Closure.NSTriadKNDeepHHNullCriticalShoulderRound235Exact as R235
 import DASHI.Physics.Closure.NSTriadKNParabolicCriticalFrequencyConeRound236Exact as R236
@@ -108,6 +125,29 @@ modernSignedResponseBelowHistoricalCriticalBudget588 modern weld =
       (historicalDecomposition588 weld))
 
 ------------------------------------------------------------------------
+-- Literal modern specialization: use exactly R440's finite common cross.
+------------------------------------------------------------------------
+
+liveR440CommonCrossBelowHistoricalCriticalBudget588 :
+  ∀ {E : C3.IntegerEmbedding R440.F}
+    {I : C3.ModeInverseSquare R440.F E}
+    (W : R294.SwapInvariantCellWeight R440.F)
+    (S : Helical.HelicalModeScalars R440.F)
+    (system : Audit.FiniteComplex3GalerkinSystem R440.F E I)
+    (output : Z3.FourierMode) →
+  (weld : HistoricalCriticalConeSameObjectWeld588
+    (R440.fixedOutputPhysicalCommonCross W S system output)) →
+  R440.fixedOutputPhysicalCommonCross W S system output
+  ≤ R284.theta (R434.payment (historicalDecomposition588 weld))
+      * R284.coreCompanionMass (R434.payment (historicalDecomposition588 weld))
+    + (R284.paidDeepCoefficient (R434.payment (historicalDecomposition588 weld))
+      + R284.coreEDCoefficient (R434.payment (historicalDecomposition588 weld)))
+      * R284.energyDissipation (R434.payment (historicalDecomposition588 weld))
+liveR440CommonCrossBelowHistoricalCriticalBudget588 W S system output =
+  modernSignedResponseBelowHistoricalCriticalBudget588
+    (R440.fixedOutputPhysicalCommonCross W S system output)
+
+------------------------------------------------------------------------
 -- Introspective dependency correction.
 ------------------------------------------------------------------------
 
@@ -119,6 +159,12 @@ round588HistoricalCriticalConeIsAdmissibleWeakerProducer = true
 
 round588HistoricalScalarCarrierAutomaticallySameAsLiveR573Carrier : Bool
 round588HistoricalScalarCarrierAutomaticallySameAsLiveR573Carrier = false
+
+round588ExactLiveR440SignedCommonCrossTargeted : Bool
+round588ExactLiveR440SignedCommonCrossTargeted = true
+
+round588HistoricalOuterClassEqualsModernInnerPostSlotClass : Bool
+round588HistoricalOuterClassEqualsModernInnerPostSlotClass = false
 
 round588CriticalConeStrictlyLargerThanComparableClass : Bool
 round588CriticalConeStrictlyLargerThanComparableClass =
@@ -139,8 +185,8 @@ round588CriticalConeRelativeCovarianceClosed =
 round588AllHistoricalPhysicalPaymentsClosed : Bool
 round588AllHistoricalPhysicalPaymentsClosed = false
 
-round588LiveR573ToHistoricalR434SameObjectWeldConstructed : Bool
-round588LiveR573ToHistoricalR434SameObjectWeldConstructed = false
+round588LiveR440ToHistoricalR434SameObjectWeldConstructed : Bool
+round588LiveR440ToHistoricalR434SameObjectWeldConstructed = false
 
 round588CurrentGlobalFirstResidualStillLeafA :
   R504.firstTerminalResidual R504.currentTerminalStatus
@@ -161,6 +207,14 @@ round588HistoricalCriticalConeIsAdmissibleWeakerProducerIsTrue = refl
 round588HistoricalScalarCarrierAutomaticallySameAsLiveR573CarrierIsFalse :
   round588HistoricalScalarCarrierAutomaticallySameAsLiveR573Carrier ≡ false
 round588HistoricalScalarCarrierAutomaticallySameAsLiveR573CarrierIsFalse = refl
+
+round588ExactLiveR440SignedCommonCrossTargetedIsTrue :
+  round588ExactLiveR440SignedCommonCrossTargeted ≡ true
+round588ExactLiveR440SignedCommonCrossTargetedIsTrue = refl
+
+round588HistoricalOuterClassEqualsModernInnerPostSlotClassIsFalse :
+  round588HistoricalOuterClassEqualsModernInnerPostSlotClass ≡ false
+round588HistoricalOuterClassEqualsModernInnerPostSlotClassIsFalse = refl
 
 round588ClayPromotionIsFalse : round588ClayPromotion ≡ false
 round588ClayPromotionIsFalse = refl
