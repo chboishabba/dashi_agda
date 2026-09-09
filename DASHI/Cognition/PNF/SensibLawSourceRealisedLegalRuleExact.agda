@@ -15,13 +15,9 @@ import DASHI.Cognition.PNF.SensibLawSourceFormAuthorityRoleBidiExact as SourceRo
 ------------------------------------------------------------------------
 -- SOURCE-REALISED LEGAL RULES
 --
--- The canonical legal rule remains Algebra.LegalRule.  This owner adds the
--- proof-bearing source realisation required before premises, exceptions,
--- defeaters, temporal scope, jurisdiction scope or proposition authority role
--- can be consumed as legal predicates.
---
--- Repository attribution discipline is retained:
---   citation != source support != proposition role != DASHI reconstruction.
+-- Canonical rule shape remains Algebra.LegalRule.  This layer pays source
+-- identity, exact locator, proposition role, premises, negative clauses,
+-- jurisdiction and temporal scope without promoting a citation into authority.
 ------------------------------------------------------------------------
 
 data LegalAttributionLayer : Set where
@@ -65,12 +61,9 @@ record SourceRealisedLegalRule (r : Algebra.LegalRule) : Set₁ where
     ruleCitationStillDoesNotCreateAuthority :
       Source.citationCreatesAuthority ruleAttributedSource ≡ false
 
-    premiseSources :
-      Algebra.All PropositionSourceReceipt (Algebra.premises r)
-    exceptionSources :
-      Algebra.All PropositionSourceReceipt (Algebra.exceptions r)
-    defeaterSources :
-      Algebra.All PropositionSourceReceipt (Algebra.defeaters r)
+    premiseSources : Algebra.All PropositionSourceReceipt (Algebra.premises r)
+    exceptionSources : Algebra.All PropositionSourceReceipt (Algebra.exceptions r)
+    defeaterSources : Algebra.All PropositionSourceReceipt (Algebra.defeaters r)
 
     jurisdictionPredicate : Algebra.LegalProposition
     jurisdictionSource : PropositionSourceReceipt jurisdictionPredicate
@@ -83,20 +76,15 @@ record SourceRealisedLegalRule (r : Algebra.LegalRule) : Set₁ where
       Algebra.propositionKind temporalPredicate ≡ Algebra.temporalPredicate
 
     ruleSystem : Ontology.StableId
-    ruleSystemMatchesConclusion :
-      ruleSystem ≡ Algebra.legalSystem (Algebra.conclusion r)
-    jurisdictionSystemMatchesRule :
-      Algebra.legalSystem jurisdictionPredicate ≡ ruleSystem
-    temporalSystemMatchesRule :
-      Algebra.legalSystem temporalPredicate ≡ ruleSystem
-
+    ruleSystemMatchesConclusion : ruleSystem ≡ Algebra.legalSystem (Algebra.conclusion r)
+    jurisdictionSystemMatchesRule : Algebra.legalSystem jurisdictionPredicate ≡ ruleSystem
+    temporalSystemMatchesRule : Algebra.legalSystem temporalPredicate ≡ ruleSystem
     realisationReference : String
 
 open SourceRealisedLegalRule public
 
 ------------------------------------------------------------------------
--- Candidate -> sourced -> authority-admissible is a projection discipline,
--- not an identification of the three graphs.
+-- Candidate -> sourced -> authority-admissible is a projection discipline.
 ------------------------------------------------------------------------
 
 record SourceProjectionAudit (graph : Algebra.LegalGraph) : Set₁ where
@@ -105,32 +93,27 @@ record SourceProjectionAudit (graph : Algebra.LegalGraph) : Set₁ where
     candidateRule : Algebra.LegalRule → Set
     sourcedRule : Algebra.LegalRule → Set
     authorityAdmissibleRule : Algebra.LegalRule → Set
-
-    sourcedImpliesCandidate :
-      ∀ {r} → sourcedRule r → candidateRule r
-    authorityImpliesSourced :
-      ∀ {r} → authorityAdmissibleRule r → sourcedRule r
-
+    sourcedImpliesCandidate : ∀ {r} → sourcedRule r → candidateRule r
+    authorityImpliesSourced : ∀ {r} → authorityAdmissibleRule r → sourcedRule r
     projectionReference : String
 
 open SourceProjectionAudit public
 
 ------------------------------------------------------------------------
--- Exception/defeater-aware filtering is NOT ordinarily monotone.
+-- Negative-branch preservation.
 --
--- If a stricter source projection removes a rule which could establish an
--- exception or defeater, a previously blocked conclusion may reopen.  A safe
--- lift from Strong to Weak therefore needs negative-branch reflection for the
--- exception/defeater coordinates of each rule actually used by Strong.
+-- Filtering rules can remove an exception/defeater and thereby OPEN a route.
+-- Therefore source filtering is monotone only with an explicit reflection
+-- receipt for negative clauses of each retained stronger rule.
 ------------------------------------------------------------------------
 
 data NegativeClauseOf
     (r : Algebra.LegalRule)
     (p : Algebra.LegalProposition) : Set where
   exceptionClause :
-    p Algebra.∈ Algebra.exceptions r → NegativeClauseOf r p
+    Algebra._∈_ p (Algebra.exceptions r) → NegativeClauseOf r p
   defeaterClause :
-    p Algebra.∈ Algebra.defeaters r → NegativeClauseOf r p
+    Algebra._∈_ p (Algebra.defeaters r) → NegativeClauseOf r p
 
 record SourceFilterSafety
     (graph : Algebra.LegalGraph)
@@ -138,74 +121,66 @@ record SourceFilterSafety
     (Strong Weak : Algebra.LegalRule → Set) : Set₁ where
   constructor source-filter-safety
   field
-    positiveInclusion :
-      ∀ {r} → Strong r → Weak r
-
+    positiveInclusion : ∀ {r} → Strong r → Weak r
     negativeReflection :
       ∀ {r p} →
       Strong r →
       NegativeClauseOf r p →
       Algebra.Derivation graph facts Weak p →
       Algebra.Derivation graph facts Strong p
-
     safetyReference : String
 
 open SourceFilterSafety public
 
-liftAllPositive :
-  ∀ {graph facts Strong Weak ps} →
-  SourceFilterSafety graph facts Strong Weak →
-  Algebra.All (Algebra.Derivation graph facts Strong) ps →
-  Algebra.All (Algebra.Derivation graph facts Weak) ps
-liftAllPositive safety Algebra.[] = Algebra.[]
-liftAllPositive safety (p Algebra.∷ ps) =
-  liftDerivationUnderSafeSourceFilter safety p Algebra.∷
-  liftAllPositive safety ps
+mutual
+  liftDerivationUnderSafeSourceFilter :
+    ∀ {graph facts Strong Weak p} →
+    SourceFilterSafety graph facts Strong Weak →
+    Algebra.Derivation graph facts Strong p →
+    Algebra.Derivation graph facts Weak p
+  liftDerivationUnderSafeSourceFilter safety (Algebra.fromFact fact) =
+    Algebra.fromFact fact
+  liftDerivationUnderSafeSourceFilter safety
+    (Algebra.byRule {r = r} inGraph strong premises noExceptions noDefeaters) =
+    Algebra.byRule
+      inGraph
+      (positiveInclusion safety strong)
+      (liftAllPositive safety premises)
+      (liftAllNegative safety strong exceptionMarker noExceptions)
+      (liftAllNegative safety strong defeaterMarker noDefeaters)
+    where
+      exceptionMarker :
+        ∀ {p} → Algebra._∈_ p (Algebra.exceptions r) → NegativeClauseOf r p
+      exceptionMarker membership = exceptionClause membership
 
-liftAllNegative :
-  ∀ {graph facts Strong Weak r ps} →
-  SourceFilterSafety graph facts Strong Weak →
-  Strong r →
-  (∀ {p} → p Algebra.∈ ps → NegativeClauseOf r p) →
-  Algebra.All (λ p → Algebra.Derivation graph facts Strong p → ⊥) ps →
-  Algebra.All (λ p → Algebra.Derivation graph facts Weak p → ⊥) ps
-liftAllNegative safety strong mark Algebra.[] = Algebra.[]
-liftAllNegative {ps = p ∷ ps} safety strong mark (notP Algebra.∷ notPs) =
-  (λ weakP →
-    notP (negativeReflection safety strong (mark Algebra.here) weakP))
-  Algebra.∷
-  liftAllNegative safety strong
-    (λ membership → mark (Algebra.there membership))
-    notPs
+      defeaterMarker :
+        ∀ {p} → Algebra._∈_ p (Algebra.defeaters r) → NegativeClauseOf r p
+      defeaterMarker membership = defeaterClause membership
 
-liftDerivationUnderSafeSourceFilter :
-  ∀ {graph facts Strong Weak p} →
-  SourceFilterSafety graph facts Strong Weak →
-  Algebra.Derivation graph facts Strong p →
-  Algebra.Derivation graph facts Weak p
-liftDerivationUnderSafeSourceFilter safety (Algebra.fromFact fact) =
-  Algebra.fromFact fact
-liftDerivationUnderSafeSourceFilter safety
-  (Algebra.byRule {r = r} inGraph strong premises noExceptions noDefeaters) =
-  Algebra.byRule
-    inGraph
-    (positiveInclusion safety strong)
-    (liftAllPositive safety premises)
-    (liftAllNegative safety strong exceptionMarker noExceptions)
-    (liftAllNegative safety strong defeaterMarker noDefeaters)
-  where
-    exceptionMarker :
-      ∀ {p} → p Algebra.∈ Algebra.exceptions r → NegativeClauseOf r p
-    exceptionMarker membership = exceptionClause membership
+  liftAllPositive :
+    ∀ {graph facts Strong Weak ps} →
+    SourceFilterSafety graph facts Strong Weak →
+    Algebra.All (Algebra.Derivation graph facts Strong) ps →
+    Algebra.All (Algebra.Derivation graph facts Weak) ps
+  liftAllPositive safety Algebra.[] = Algebra.[]
+  liftAllPositive safety (p Algebra.∷ ps) =
+    liftDerivationUnderSafeSourceFilter safety p Algebra.∷
+    liftAllPositive safety ps
 
-    defeaterMarker :
-      ∀ {p} → p Algebra.∈ Algebra.defeaters r → NegativeClauseOf r p
-    defeaterMarker membership = defeaterClause membership
-
-------------------------------------------------------------------------
--- Aristotle-style source filtering is therefore sound for this non-monotone
--- legal derivation only when the negative branch is preserved/reflected.
-------------------------------------------------------------------------
+  liftAllNegative :
+    ∀ {graph facts Strong Weak r ps} →
+    SourceFilterSafety graph facts Strong Weak →
+    Strong r →
+    (∀ {p} → Algebra._∈_ p ps → NegativeClauseOf r p) →
+    Algebra.All (λ p → Algebra.Derivation graph facts Strong p → ⊥) ps →
+    Algebra.All (λ p → Algebra.Derivation graph facts Weak p → ⊥) ps
+  liftAllNegative safety strong mark Algebra.[] = Algebra.[]
+  liftAllNegative {ps = p ∷ ps} safety strong mark (notP Algebra.∷ notPs) =
+    (λ weakP → notP (negativeReflection safety strong (mark Algebra.here) weakP))
+    Algebra.∷
+    liftAllNegative safety strong
+      (λ membership → mark (Algebra.there membership))
+      notPs
 
 sourceFilteringCannotCreateReachabilityWhenNegativeClosed :
   ∀ {graph facts Strong Weak p} →
@@ -216,7 +191,7 @@ sourceFilteringCannotCreateReachabilityWhenNegativeClosed =
   liftDerivationUnderSafeSourceFilter
 
 ------------------------------------------------------------------------
--- Explicit boundaries.
+-- Explicit non-promotions.
 ------------------------------------------------------------------------
 
 data CitationAloneRealisesLegalRule : Set where
