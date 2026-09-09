@@ -14,6 +14,7 @@ import DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
 import DASHI.Moonshine.JInvariantOrderThreeVisibleScaleUniquenessBidiExact
+import DASHI.Moonshine.JInvariantOrderThreeScaleGlobalInjectiveExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
@@ -23,11 +24,10 @@ import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 
 -- Rendered acquisition is split into image->analytic and analytic->structured
--- stages.  The stricter interval-valued recognizer keeps pixel uncertainty as
--- a fibre and recognises k only after exact orbit containment and uniqueness.
--- On the currently visible k=0..7 fibre, scale uniqueness is compiler-owned:
--- a retained box that determines one exact visible scale compiles to a unique
--- visible k without adding a second uniqueness authority.
+-- stages.  Pixel uncertainty remains a fibre.  Once a calibration determines
+-- an exact D_k scale, global injectivity of D_k=k^2+k+1 makes orbit uniqueness
+-- compiler-owned for all Nat.  The visible k=0..7 compiler remains as the
+-- regression/specialisation for the currently annotated beam.
 -- The tri-BIDI governance owner cross-pollinates this with the existing RH
 -- hidden-residual rule and light-transport side-information firewall at exact
 -- certificate-schema strength only: no theorem is transferred between lanes.
@@ -36,6 +36,7 @@ import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
 import DASHI.Moonshine.JInvariantRenderedVisibleScaleCompilerBidiExact
+import DASHI.Moonshine.JInvariantRenderedGlobalScaleCompilerBidiExact
 import DASHI.Moonshine.JInvariantRenderedResidualGovernanceTriBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 
@@ -45,9 +46,9 @@ import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
 
--- Includes exact norm-one, rational/Bishop defect welds, Bishop phi/psi
--- factorisation, reciprocal-square convergence, the uniform conjugate-factor
--- lower bound and the final same-carrier Fibonacci-ratio -> Bishop-phi limit.
+-- Includes the completed source/static Bishop-phi lane: norm-one, rational and
+-- Bishop defect welds, reciprocal-square convergence, phi/psi factorisation,
+-- uniform conjugate separation and final FRACTRAN Fibonacci ratio convergence.
 import DASHI.Moonshine.QuadraticSignedApproximationEverything
 
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact
