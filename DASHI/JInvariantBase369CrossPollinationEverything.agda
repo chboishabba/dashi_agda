@@ -24,10 +24,14 @@ import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 -- Rendered acquisition is split into image->analytic and analytic->structured
 -- stages.  The stricter interval-valued recognizer keeps pixel uncertainty as
 -- a fibre and recognises k only after exact orbit containment and uniqueness.
+-- The tri-BIDI governance owner cross-pollinates this with the existing RH
+-- hidden-residual rule and light-transport side-information firewall at exact
+-- certificate-schema strength only: no theorem is transferred between lanes.
 -- Once analytic structured/scale producers exist, the same-object compiler
 -- emits local 27, k, D_k and the L^kT word packet immediately.
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
+import DASHI.Moonshine.JInvariantRenderedResidualGovernanceTriBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 
 import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
@@ -37,7 +41,8 @@ import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
 
 -- Includes exact norm-one, denominator-cleared reciprocal-square, Bishop
--- phi/psi factorisation, and the remaining rational/Bishop/order producer debt.
+-- phi/psi factorisation, Bishop reciprocal-square convergence, and the
+-- remaining rational/Bishop/order same-object producer debt.
 import DASHI.Moonshine.QuadraticSignedApproximationEverything
 
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact
