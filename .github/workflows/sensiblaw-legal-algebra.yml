@@ -26,6 +26,7 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawCullenNSWCLAAtomicApplicationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenS43ASpecialStatutoryPowerAtomicExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenVicariousLiabilityFamilyAtomicExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenAtomic369AuditExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawDutyPublicAuthoritySourceLineageGraphExact.agda'
@@ -88,6 +89,7 @@ jobs:
           DASHI/Cognition/PNF/SensibLawCullenNSWCLAAtomicApplicationExact.agda
           DASHI/Cognition/PNF/SensibLawCullenS43ASpecialStatutoryPowerAtomicExact.agda
           DASHI/Cognition/PNF/SensibLawCullenVicariousLiabilityFamilyAtomicExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenAtomic369AuditExact.agda
           DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda
           DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda
 
