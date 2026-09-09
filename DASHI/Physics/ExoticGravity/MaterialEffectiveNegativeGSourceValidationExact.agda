@@ -13,6 +13,7 @@ import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorStateBridgeE
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryBackgroundClosureExact as Background
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryOrdinaryModelClosureWeldExact as OrdinaryWeld
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact as Ratio
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact as ScalingWeld
 import DASHI.Physics.ExoticGravity.AntigravityOptimizedAcquisitionPlanExact as Plan
 import DASHI.Physics.ExoticGravity.LiTorrStandardGRComparatorBidiExact as LegacyComparator
 import DASHI.Physics.ExoticGravity.LiTorr1991CombinedFieldSourceEntitlementExact as LT1991
@@ -172,6 +173,41 @@ compiledRatioDoesNotProveUniversalNegativeG :
   Ratio.compiledNegativeGWeldProvesUniversalNegativeG
     Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ false
 compiledRatioDoesNotProveUniversalNegativeG = refl
+
+sameLabelDoesNotSubstituteForReplicationIdentity :
+  ScalingWeld.sameLabelMaySubstituteForSameReplicationCarrier
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+sameLabelDoesNotSubstituteForReplicationIdentity = refl
+
+differentScalingSweepDoesNotPaySameTypedRatio :
+  ScalingWeld.differentScalingSweepMayPaySameTypedRatio
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+differentScalingSweepDoesNotPaySameTypedRatio = refl
+
+apparatusIdentityMayNotDriftAcrossReplication :
+  ScalingWeld.apparatusIdentityMayDriftBetweenRatioAndReplication
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+apparatusIdentityMayNotDriftAcrossReplication = refl
+
+exactReplicationCarrierEqualityRequired :
+  ScalingWeld.exactReplicationCarrierEqualityRequired
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ true
+exactReplicationCarrierEqualityRequired = refl
+
+exactScalingSweepCarrierEqualityRequired :
+  ScalingWeld.exactScalingSweepCarrierEqualityRequired
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ true
+exactScalingSweepCarrierEqualityRequired = refl
+
+closedScalingStateDoesNotProveNegativeG :
+  ScalingWeld.closedScalingStateAutomaticallyProvesNegativeEffectiveG
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+closedScalingStateDoesNotProveNegativeG = refl
+
+postScalingEvidenceRemainsBoundedNoPromotion :
+  ScalingWeld.postScalingEvidenceIsBounded
+    ≡ Plan.postScalingEvidenceBounded
+postScalingEvidenceRemainsBoundedNoPromotion = refl
 
 sourceDependentAdditiveCanStillMimicMultiplicative : Scaling.sourceDependentAdditiveCanMimicMultiplicativeSignature Scaling.canonicalScalingModelDiscriminatorBoundary ≡ true
 sourceDependentAdditiveCanStillMimicMultiplicative = refl
