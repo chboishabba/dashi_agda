@@ -21,14 +21,17 @@ import DASHI.Moonshine.JInvariantOrderThreeScaleGlobalInjectiveExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
+import DASHI.Moonshine.JInvariantAnalyticJCoarseFineFrickeIntertwinerExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
 import DASHI.Moonshine.JInvariantRenderedVisibleScaleCompilerBidiExact
 import DASHI.Moonshine.JInvariantRenderedGlobalScaleCompilerBidiExact
+import DASHI.Moonshine.JInvariantRenderedScaleCalibrationFixtureExact
 import DASHI.Moonshine.JInvariantRenderedResidualGovernanceTriBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
+import DASHI.Moonshine.MonsterGraded3BPhaseFibreIntertwinerExact
 
 record RoadmapState : Set where
   field
@@ -61,15 +64,22 @@ record RoadmapState : Set where
     intervalRecognitionRequiresContainmentAndUniqueness : Bool
     renderedResidualGovernanceTriBidiExact : Bool
     renderedExactScaleCompilesGlobalOrbitRecognition : Bool
+    renderedScaleCalibrationProtocolFixtureExact : Bool
     concretePixelBoxDeterminesVisibleScaleExact : Bool
     concretePixelToAnalyticBoxCalibrationExact : Bool
     symbolicOrbitToAnalyticRealisationExact : Bool
+
+    -- The theorem/compiler rows below are now exact.  Their concrete external
+    -- producer receipts are tracked separately so a conditional same-object
+    -- compiler cannot be mistaken for an acquired analytic/empirical object.
     analyticModularCoordinateToStructuredJFieldExact : Bool
     analyticStructuredSeamCompilerExact : Bool
     analyticFrickeFiniteTransportIntertwinerExact : Bool
+    concreteAnalyticJCoarseFineEquivalencePaid : Bool
     jActualAnalyticGluingLawExact : Bool
 
     monsterGradeWiseSignedFibreIntertwinerExact : Bool
+    concreteGradeWise3BRecognitionAssignmentPaid : Bool
     codecCompressionCostTheoremExact : Bool
     agdaKernelCertifiedThisTranche : Bool
 
@@ -104,44 +114,39 @@ canonicalRoadmapState = record
   ; intervalRecognitionRequiresContainmentAndUniqueness = true
   ; renderedResidualGovernanceTriBidiExact = true
   ; renderedExactScaleCompilesGlobalOrbitRecognition = true
+  ; renderedScaleCalibrationProtocolFixtureExact = true
   ; concretePixelBoxDeterminesVisibleScaleExact = false
   ; concretePixelToAnalyticBoxCalibrationExact = false
   ; symbolicOrbitToAnalyticRealisationExact = false
-  ; analyticModularCoordinateToStructuredJFieldExact = false
+
+  ; analyticModularCoordinateToStructuredJFieldExact = true
   ; analyticStructuredSeamCompilerExact = true
-  ; analyticFrickeFiniteTransportIntertwinerExact = false
+  ; analyticFrickeFiniteTransportIntertwinerExact = true
+  ; concreteAnalyticJCoarseFineEquivalencePaid = false
   ; jActualAnalyticGluingLawExact = false
 
-  ; monsterGradeWiseSignedFibreIntertwinerExact = false
+  ; monsterGradeWiseSignedFibreIntertwinerExact = true
+  ; concreteGradeWise3BRecognitionAssignmentPaid = false
   ; codecCompressionCostTheoremExact = false
   ; agdaKernelCertifiedThisTranche = false
   }
 
 data FirstLiveRoadmapResidual : Set where
-  missingUnnormalisedRationalReciprocalSquareLift : FirstLiveRoadmapResidual
-  missingBishopReciprocalSquareLift : FirstLiveRoadmapResidual
-  missingUniformConjugateFactorLowerBound : FirstLiveRoadmapResidual
-  missingFibonacciRatioToBishopPhiConvergence : FirstLiveRoadmapResidual
   missingConcretePixelBoxToVisibleScale : FirstLiveRoadmapResidual
   missingConcretePixelToAnalyticBoxCalibration : FirstLiveRoadmapResidual
   missingSymbolicOrbitToAnalyticRealisation : FirstLiveRoadmapResidual
-  missingAnalyticModularCoordinateToStructuredJField : FirstLiveRoadmapResidual
-  missingAnalyticFrickeFiniteTransportIntertwiner : FirstLiveRoadmapResidual
+  missingConcreteAnalyticJCoarseFineEquivalence : FirstLiveRoadmapResidual
   missingAnalyticGluingTransport : FirstLiveRoadmapResidual
-  missingMonsterGradeWiseIntertwiner : FirstLiveRoadmapResidual
+  missingConcreteGradeWise3BRecognitionAssignment : FirstLiveRoadmapResidual
   missingCompressionCostTheorem : FirstLiveRoadmapResidual
   missingKernelCertification : FirstLiveRoadmapResidual
 
--- Exact scale uniqueness is no longer an independent residual: D_k is
--- globally injective and a retained rendered box carrying an exact-scale
--- certificate compiles the full all-Nat orbit-recognition packet.  The first
--- j wall is therefore the concrete calibration/measurement that produces such
--- a box/scale certificate from the rendered source.
+-- All finite/theorem/compiler work from the requested table is now closed.
+-- The first remaining j-side item is an external measurement/acquisition
+-- producer: metrologically calibrate the actual raster into an analytic box
+-- and exact D_k scale.  The protocol and uniqueness compiler are already exact.
 firstJMonsterResidual : FirstLiveRoadmapResidual
 firstJMonsterResidual = missingConcretePixelBoxToVisibleScale
 
--- The mathematical/source-static phi route is now closed.  The remaining
--- tranche-level residual is independent kernel certification of the newly
--- composed Agda owners.
 firstPhiResidual : FirstLiveRoadmapResidual
 firstPhiResidual = missingKernelCertification
