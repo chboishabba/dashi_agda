@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Interop.SensibLawNatSourceDiscoveryExact as Discovery
+import DASHI.Interop.SensibLawNatSourceLineageExact as Lineage
 
 failedLocatorMayScheduleDiscovery :
   Discovery.NatSourceDiscoveryBoundary.failedLocatorMayScheduleDiscovery
@@ -74,3 +75,28 @@ admittedAlternateMayReenterTransport :
   Discovery.NatSourceDiscoveryBoundary.admittedAlternateLocatorMayReenterExistingFetch
     Discovery.canonicalNatSourceDiscoveryBoundary ≡ true
 admittedAlternateMayReenterTransport = refl
+
+differentSourceMayStillCarryLineage :
+  Lineage.NatSourceLineageBoundary.differentSourceMayStillCarryUsefulLineage
+    Lineage.canonicalNatSourceLineageBoundary ≡ true
+differentSourceMayStillCarryLineage = refl
+
+sourceOfSourceDoesNotPayIdentity :
+  Lineage.NatSourceLineageBoundary.sourceOfSourcePaysSameSourceIdentity
+    Lineage.canonicalNatSourceLineageBoundary ≡ false
+sourceOfSourceDoesNotPayIdentity = refl
+
+sourceOfSourceDoesNotReenterTransport :
+  Lineage.NatSourceLineageBoundary.sourceOfSourceMayReenterAlternateFetch
+    Lineage.canonicalNatSourceLineageBoundary ≡ false
+sourceOfSourceDoesNotReenterTransport = refl
+
+sourceLineageMayRefineQueries :
+  Lineage.NatSourceLineageBoundary.sourceLineageMayRefineDiscoveryQueries
+    Lineage.canonicalNatSourceLineageBoundary ≡ true
+sourceLineageMayRefineQueries = refl
+
+sourceLineageDoesNotPaySupport :
+  Lineage.NatSourceLineageBoundary.sourceLineagePaysSourceSupport
+    Lineage.canonicalNatSourceLineageBoundary ≡ false
+sourceLineageDoesNotPaySupport = refl
