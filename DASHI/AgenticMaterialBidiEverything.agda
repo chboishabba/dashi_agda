@@ -24,6 +24,7 @@ import DASHI.Biology.ResourceCoupledLogisticReplicationExact
 import DASHI.Biology.ResourceCoupledLogisticEvolutionBridgeExact
 import DASHI.Biology.ResourceCoupledMetabolicOpenBalanceBridgeExact
 import DASHI.Biology.ResourceCoupledMetabolicAdmissibilityExact
+import DASHI.Biology.ResourceCoupledProtoAgencyRealisationExact
 
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.DeclaredRealisedInteractionTopologyExact
