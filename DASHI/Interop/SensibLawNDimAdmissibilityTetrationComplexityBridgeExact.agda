@@ -15,23 +15,6 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Monster369NDimParetoTetrationBridgeExact as Monster369
 
-------------------------------------------------------------------------
--- N-DIMENSIONAL ADMISSIBILITY -> SELF-INDEXED TOWER
---
--- A fixed n-axis admissibility fibre has 3^n nominal balanced-trit profiles.
--- That alone is ordinary exponential profile growth, not tetration.
---
--- Genuine tetrational growth begins only when the level-n carrier itself
--- indexes the independently declared axes of level n+1. The repository's
--- SelfIndexedPareto owner already owns exactly that recurrence:
---
---   A_0 = 1
---   A_(n+1) = 9 ^ A_n.
---
--- This module does not define another tower. It reuses that owner and reads
--- each self-indexed Pareto axis as one admissibility coordinate.
-------------------------------------------------------------------------
-
 AdmissibilityAxisAt : Nat → Set
 AdmissibilityAxisAt = Tetration.ParetoAxisAt
 
@@ -58,10 +41,6 @@ levelOneAdmissibilityProfileCountMatchesBase369 :
 levelOneAdmissibilityProfileCountMatchesBase369 =
   Tetration.levelOneTernaryProfilesMatchBase369FabricCount
 
-------------------------------------------------------------------------
--- BRAID / TIME VIEW
-------------------------------------------------------------------------
-
 record SelfIndexedAdmissibilityBraid : Set₁ where
   constructor selfIndexedAdmissibilityBraid
   field
@@ -71,15 +50,6 @@ record SelfIndexedAdmissibilityBraid : Set₁ where
     stateAt : Stage → AdmissibilityAxisAt Level → Admissibility.AdmissibilityState
     braidReference : String
 open SelfIndexedAdmissibilityBraid public
-
-------------------------------------------------------------------------
--- COMPLEXITY IS A SECOND N-DIMENSIONAL FIBRE
---
--- The admissibility state and its execution/representation/proof costs are not
--- collapsed. MDL may rank only after hard admissibility and consumer adequacy.
--- Cost axes remain application-declared, exactly as the existing MDL/Pareto
--- owner requires.
-------------------------------------------------------------------------
 
 record AdmissibilityComplexityBundle : Set₁ where
   constructor admissibilityComplexityBundle
@@ -105,10 +75,6 @@ record MDLAdmissibilityCompatibility : Set₁ where
     consumerAdequacyPrecedesDescriptionRankingIsTrue :
       consumerAdequacyPrecedesDescriptionRanking ≡ true
 open MDLAdmissibilityCompatibility public
-
-------------------------------------------------------------------------
--- MONSTER / 369 BOUNDARY
-------------------------------------------------------------------------
 
 monster369LevelOneBoundary : Monster369.Monster369NDimParetoTetrationBoundary
 monster369LevelOneBoundary = Monster369.canonicalMonster369NDimParetoTetrationBoundary

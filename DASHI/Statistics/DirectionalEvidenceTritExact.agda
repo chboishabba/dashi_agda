@@ -2,119 +2,111 @@ module DASHI.Statistics.DirectionalEvidenceTritExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
-open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv)
+import DASHI.Algebra.Trit as Trit
+import DASHI.Codec.BalancedTritBitFibre as Bits
 
 ------------------------------------------------------------------------
--- DIRECTIONAL EVIDENCE TRIT
+-- DIRECTIONAL EVIDENCE OVER THE CANONICAL BALANCED TRIT
 --
--- The balanced-ternary carrier is reused as an interpretation target only:
---   pos = evidence licenses the declared positive direction;
---   zer = neither declared direction is licensed by the supplied receipt;
---   neg = evidence licenses the declared negative direction.
+-- Conventional balanced three-valued ordering:
+--   negative / false-like direction = -1
+--   unresolved / indeterminate      =  0
+--   positive / true-like direction  = +1
 --
--- `zer` is therefore an unresolved / non-directional evidential state, not a
--- synonym for falsity, refutation, or evidence for the opposite direction.
+-- The semantics are proposition- and design-indexed.  The trit is the carrier;
+-- it does not decide what counts as positive or negative evidence.
 ------------------------------------------------------------------------
 
-data Direction : Set where
-  positiveDirection : Direction
-  negativeDirection : Direction
-
-record DirectionalEvidenceSemantics (Result Hypothesis : Set) : Set₁ where
-  constructor directional-evidence-semantics
+record DirectionalInferenceSemantics (Result Hypothesis : Set) : Set₁ where
+  constructor directionalInferenceSemantics
   field
     SupportsPositive : Result → Hypothesis → Set
-    SupportsNegative : Result → Hypothesis → Set
     Underdetermined : Result → Hypothesis → Set
+    SupportsNegative : Result → Hypothesis → Set
+    semanticsReference : String
+open DirectionalInferenceSemantics public
 
-open DirectionalEvidenceSemantics public
-
-data DirectionalEvidenceDisposition
+data DirectionalEvidence
     {Result Hypothesis : Set}
-    (semantics : DirectionalEvidenceSemantics Result Hypothesis)
+    (semantics : DirectionalInferenceSemantics Result Hypothesis)
     (result : Result)
-    (hypothesis : Hypothesis) : Trit → Set where
-  positiveEvidence :
-    SupportsPositive semantics result hypothesis →
-    DirectionalEvidenceDisposition semantics result hypothesis pos
-  unresolvedEvidence :
-    Underdetermined semantics result hypothesis →
-    DirectionalEvidenceDisposition semantics result hypothesis zer
+    (hypothesis : Hypothesis) : Trit.Trit → Set where
   negativeEvidence :
     SupportsNegative semantics result hypothesis →
-    DirectionalEvidenceDisposition semantics result hypothesis neg
+    DirectionalEvidence semantics result hypothesis Trit.neg
+  underdeterminedEvidence :
+    Underdetermined semantics result hypothesis →
+    DirectionalEvidence semantics result hypothesis Trit.zer
+  positiveEvidence :
+    SupportsPositive semantics result hypothesis →
+    DirectionalEvidence semantics result hypothesis Trit.pos
 
 ------------------------------------------------------------------------
--- Failure to establish one direction is intentionally weaker than evidence for
--- the opposite direction.  The former is represented as a negative capability:
--- no positive/negative witness was obtained; it does not synthesize a witness
--- for the antipode.
+-- Failure-to-establish and counterevidence are different typed objects.
 ------------------------------------------------------------------------
 
-record FailsToEstablishPositive
+record FailToEstablishPositive
     {Result Hypothesis : Set}
-    (semantics : DirectionalEvidenceSemantics Result Hypothesis)
+    (semantics : DirectionalInferenceSemantics Result Hypothesis)
     (result : Result)
     (hypothesis : Hypothesis) : Set₁ where
-  constructor fails-to-establish-positive
+  constructor failToEstablishPositive
   field
-    noPositiveWitness : SupportsPositive semantics result hypothesis → ⊥
+    PositiveReceipt : Set
+    noPositiveReceipt : PositiveReceipt → ⊥
+    failureReference : String
+open FailToEstablishPositive public
 
-open FailsToEstablishPositive public
-
-record FailsToEstablishNegative
+record NegativeEvidenceReceipt
     {Result Hypothesis : Set}
-    (semantics : DirectionalEvidenceSemantics Result Hypothesis)
+    (semantics : DirectionalInferenceSemantics Result Hypothesis)
     (result : Result)
-    (hypothesis : Hypothesis) : Set₁ where
-  constructor fails-to-establish-negative
+    (hypothesis : Hypothesis) : Set where
+  constructor negativeEvidenceReceipt
   field
-    noNegativeWitness : SupportsNegative semantics result hypothesis → ⊥
+    negativeWitness : SupportsNegative semantics result hypothesis
+open NegativeEvidenceReceipt public
 
-open FailsToEstablishNegative public
+negativeReceiptCompilesToNeg :
+  ∀ {Result Hypothesis semantics result hypothesis} →
+  NegativeEvidenceReceipt {Result} {Hypothesis} semantics result hypothesis →
+  DirectionalEvidence semantics result hypothesis Trit.neg
+negativeReceiptCompilesToNeg receipt = negativeEvidence (negativeWitness receipt)
 
-------------------------------------------------------------------------
--- Structural firewalls: there is no generic compiler from failure of support to
--- counterevidence.  A domain-specific bridge must supply an actual opposite
--- directional witness.
-------------------------------------------------------------------------
+-- Structural firewall: no constructor inhabits this permission merely from a
+-- failed positive search.  Domain adapters must instead supply the explicit
+-- NegativeEvidenceReceipt above.
+data FailureAloneAuthorizesNegative : Set where
 
-data FailureToSupportPositiveMeansNegativePermission : Set where
-
-data FailureToSupportNegativeMeansPositivePermission : Set where
-
-failureToSupportPositiveDoesNotMeanNegative :
-  FailureToSupportPositiveMeansNegativePermission → ⊥
-failureToSupportPositiveDoesNotMeanNegative ()
-
-failureToSupportNegativeDoesNotMeanPositive :
-  FailureToSupportNegativeMeansPositivePermission → ⊥
-failureToSupportNegativeDoesNotMeanPositive ()
+failureAloneDoesNotAuthorizeNegative : FailureAloneAuthorizesNegative → ⊥
+failureAloneDoesNotAuthorizeNegative ()
 
 ------------------------------------------------------------------------
--- Balanced-ternary involution gives the expected polarity geometry while fixing
--- the unresolved centre.
+-- Existing exact ternary-in-binary fibre retained.
 ------------------------------------------------------------------------
 
-positiveInvertsToNegative : inv pos ≡ neg
-positiveInvertsToNegative = refl
+directionalBitView : Trit.Trit → Bits.BitStreamView
+directionalBitView = Bits.bitStreamView
 
-negativeInvertsToPositive : inv neg ≡ pos
-negativeInvertsToPositive = refl
-
-unresolvedIsFixedByInversion : inv zer ≡ zer
-unresolvedIsFixedByInversion = refl
+------------------------------------------------------------------------
+-- Boundary.
+------------------------------------------------------------------------
 
 record DirectionalEvidenceBoundary : Set where
-  constructor directional-evidence-boundary
+  constructor directionalEvidenceBoundary
   field
-    failureToSupportPositiveIsNegativeEvidence : Bool
-    failureToSupportNegativeIsPositiveEvidence : Bool
-    unresolvedIsDistinctFromEitherDirection : Bool
-    directionalCounterevidenceRequiresWitness : Bool
+    negativeMapsToMinusOne : Bool
+    underdeterminedMapsToZero : Bool
+    positiveMapsToPlusOne : Bool
+    zeroMeansNegativeEvidence : Bool
+    failedPositiveSearchAutomaticallyMeansNegative : Bool
+    negativePromotionRequiresNegativeWitness : Bool
+    binaryPresentationChangesDirectionalSemantics : Bool
 
 canonicalDirectionalEvidenceBoundary : DirectionalEvidenceBoundary
 canonicalDirectionalEvidenceBoundary =
-  directional-evidence-boundary false false true true
+  directionalEvidenceBoundary true true true false false true false
