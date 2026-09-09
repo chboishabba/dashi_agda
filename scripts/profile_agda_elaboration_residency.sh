@@ -36,6 +36,19 @@ if [ "${DASHI_ELAB_PROFILE_COLD:-0}" = "1" ]; then
   export DASHI_AGDA29_CLEAN=1
 fi
 
+# The Agda shadow is intentionally source-only plus persistent .agdai files.
+# Python helpers occasionally leave __pycache__ directories in an older shadow.
+# rsync --delete then quite correctly refuses to delete the directory because
+# its excluded .pyc children are protected, producing noisy "cannot delete
+# non-empty directory" diagnostics.  Python bytecode is irrelevant to Agda and
+# is safe to discard without touching the warm .agdai cache.
+DASHI_PROFILE_CACHE_ROOT="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29}"
+DASHI_PROFILE_SHADOW="$DASHI_PROFILE_CACHE_ROOT/dashi-shadow"
+if [ -d "$DASHI_PROFILE_SHADOW" ]; then
+  find "$DASHI_PROFILE_SHADOW" -type d -name '__pycache__' -prune -exec rm -rf {} + 2>/dev/null || true
+  find "$DASHI_PROFILE_SHADOW" -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete 2>/dev/null || true
+fi
+
 COMMAND=(scripts/run_agda29_parallel_check.sh "$TARGET")
 TIME_LOG="$RUN_DIR/time.txt"
 STATUS_FILE="$RUN_DIR/status.txt"
