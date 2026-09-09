@@ -11,16 +11,20 @@ files=(
   DASHI/Physics/GR/SignedNewtonianLimitBidiExact.agda
   DASHI/Physics/GR/SignedGravitationalWaveCouplingBidiExact.agda
   DASHI/Physics/GR/SignedGravitationalWaveDetectorResponseBidiExact.agda
+  DASHI/Physics/GR/GravitationalWavePolarizationSourceAttributionExact.agda
+  DASHI/Physics/GR/GravitationalWavePolarizationSignBidiExact.agda
   DASHI/Physics/GR/NegativeGGravitationalWaveTestRoutingExact.agda
   DASHI/Physics/GR/SignedCosmologicalMatterCouplingBidiExact.agda
   DASHI/Physics/GR/UniversalSignedGCrossScaleFingerprintBidiExact.agda
   DASHI/Physics/GR/NegativeGPredictionAuthorityExact.agda
   DASHI/Physics/GR/SignedGSourceDynamicsBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingScopeBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGCrossScaleProofSearchExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGBidiValidationExact.agda
+  DASHI/Physics/ExoticGravity/GravitationalWavePolarizationAndScopeValidationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityConstraintPruningVsBundlePaymentExact.agda
   DASHI/Physics/ExoticGravity/ConstraintPruningIdentityWeldExact.agda
   DASHI/Physics/ExoticGravity/AntigravityConstraintInformedBundleDesignExact.agda
@@ -75,11 +79,25 @@ grep -q 'cosmologicalMatterTermCollision' DASHI/Physics/GR/SignedCosmologicalMat
 grep -q 'exactExistingCosmologicalDynamicsObjectsRequired' DASHI/Physics/GR/SignedCosmologicalMatterCouplingBidiExact.agda
 grep -q 'universalNegativeGRequiresSameSignAcrossScales' DASHI/Physics/GR/UniversalSignedGCrossScaleFingerprintBidiExact.agda
 
+# GW polarization attribution / polarity non-collapse.
+grep -q '10.1103/PhysRevLett.119.141101' DASHI/Physics/GR/GravitationalWavePolarizationSourceAttributionExact.agda
+grep -q 'citationImportsDASHIBidiProof' DASHI/Physics/GR/GravitationalWavePolarizationSourceAttributionExact.agda
+grep -q 'plusBasisDoesNotDetermineWaveformSign' DASHI/Physics/GR/GravitationalWavePolarizationSignBidiExact.agda
+grep -q 'waveformSignDoesNotDeterminePolarizationBasis' DASHI/Physics/GR/GravitationalWavePolarizationSignBidiExact.agda
+grep -q 'readoutSignCollision' DASHI/Physics/GR/GravitationalWavePolarizationSignBidiExact.agda
+grep -q 'polarizationBasisCannotRecoverGSign' DASHI/Physics/GR/GravitationalWavePolarizationSignBidiExact.agda
+
 # Internal counterfactual attribution and sign-conditioned source dynamics.
 grep -q 'anyInternalTheoremMayAuthorizeNegativeGPrediction' DASHI/Physics/GR/NegativeGPredictionAuthorityExact.agda
 grep -q 'exactSignedGOwnerRequired' DASHI/Physics/GR/NegativeGPredictionAuthorityExact.agda
 grep -q 'sameSourceModelMeansSameSolvedSourceState' DASHI/Physics/GR/SignedGSourceDynamicsBidiExact.agda
 grep -q 'sourceSolutionDerivationRequiredPerSign' DASHI/Physics/GR/SignedGSourceDynamicsBidiExact.agda
+
+# Universal versus material/source-scoped coupling.
+grep -q 'localScopeCollision' DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingScopeBidiExact.agda
+grep -q 'localNegativeEffectiveCouplingEqualsUniversalNegativeG' DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingScopeBidiExact.agda
+grep -q 'materialEffectiveNegativeGRequiresRegimeSpecificReplication' DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingScopeBidiExact.agda
+grep -q 'rejectionOfUniversalNegativeGRejectsMaterialEffectiveNegativeG' DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingScopeBidiExact.agda
 
 # Antigravity claim / comparison / cross-scale proof-search invariants.
 grep -q 'negativeGAloneImpliesAlteredInertialMass' DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
@@ -137,6 +155,7 @@ chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.s
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/ExoticGravity/AntigravityProofSearchValidationExact.agda \
-  DASHI/Physics/ExoticGravity/AntigravityNegativeGBidiValidationExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGBidiValidationExact.agda \
+  DASHI/Physics/ExoticGravity/GravitationalWavePolarizationAndScopeValidationExact.agda
 
-echo "Antigravity proof-search and negative-G BIDI validation checks passed"
+echo "Antigravity proof-search, negative-G, GW-polarization, and coupling-scope validation checks passed"
