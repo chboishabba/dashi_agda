@@ -69,13 +69,17 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- T^3 <-> R^3 transport lane is optional relative to proving literal R406
 -- directly on one selected Clay domain. Globally leaf A remains first.
 --
--- R537 searches those producer families and reuses the existing generic
--- PoissonSummationKernelBidiExact owner. A concrete Poisson receipt compiles to
--- the R535 spectral-measure bridge, but only as one fixed singleton observable
--- instance. The literal periodic/Euclidean R406 same-object identity,
--- normalization and cutoff geometry remain explicit additional obligations.
--- Thus generic Poisson infrastructure is now wired as a lawful producer family
--- without pretending that it already proves the live R406 transport theorem.
+-- R537 reuses the generic PoissonSummationKernelBidiExact owner as a lawful
+-- producer family for the R535 measure bridge, while retaining explicit literal
+-- R406 same-object/normalization/cutoff obligations.
+--
+-- R538 then BIDI-wires that optional cross-domain producer toward the strict
+-- Clay terminal cut. A Poisson equality can contribute to leaf A only after a
+-- concrete R406 instantiation, same-object weld, cutoff correspondence,
+-- source-domain cutoff-uniform signed-cross budget, and target-domain uniform
+-- bound preservation. Even a fully paid leaf A advances R504 only to the
+-- independent phase-sensitive critical-production leaf B; it is not Clay
+-- promotion.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -133,3 +137,4 @@ import DASHI.Physics.Closure.NSTriadKNEuclideanSignCoverageDependencyReconciliat
 import DASHI.Physics.Closure.NSTriadKNLiteralR406LatticeContinuumTransportConsumerRound535Exact
 import DASHI.Physics.Closure.NSTriadKNCrossDomainMeasureBridgeOptionalForClayRound536Exact
 import DASHI.Physics.Closure.NSTriadKNPoissonKernelToLiteralR406MeasureBridgeRound537Exact
+import DASHI.Physics.Closure.NSTriadKNPoissonR406ToClayLeafABidiRound538Exact
