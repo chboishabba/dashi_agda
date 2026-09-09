@@ -16,6 +16,7 @@ FILES=(
   DASHI/Biology/ResourceCoupledLogisticReplicationExact.agda
   DASHI/Biology/ResourceCoupledLogisticEvolutionBridgeExact.agda
   DASHI/Biology/ResourceCoupledMetabolicOpenBalanceBridgeExact.agda
+  DASHI/Biology/ResourceCoupledMetabolicAdmissibilityExact.agda
   DASHI/AgenticMaterialBidiEverything.agda
   DASHI/Interop/DirectionalEvidenceProofSearchBridgeExact.agda
 )
@@ -36,4 +37,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / agentic-prebiotic checks passed"
+echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / metabolic admissibility / agentic-prebiotic checks passed"
