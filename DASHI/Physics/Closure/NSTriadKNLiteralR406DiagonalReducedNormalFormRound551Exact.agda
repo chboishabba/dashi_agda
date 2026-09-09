@@ -1,32 +1,10 @@
 module DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalReducedNormalFormRound551Exact where
 
-------------------------------------------------------------------------
--- ROUND551 / LITERAL R406 REMAINDER WITH THE DIAGONAL ELIMINATED EXACTLY
---
--- R547 gives, on one physical output fibre,
---
---   factoredFull = diagonalNonlinear + 2 * literalWeightedRemainder.
---
--- R550 gives on the SAME diagonal carrier
---
---   diagonalNonlinear = selfGram + selfFluxTangent.
---
--- Therefore exactly
---
---   2 * literalWeightedRemainder
---     = factoredFull - selfGram - selfFluxTangent.
---
--- R400 constructs all positivity witnesses needed for both the unordered
--- off-diagonal R396 list and the self-pairs, so no caller-supplied positivity
--- strengthening is introduced.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _-_; _*_)
+open import Data.Rational.Base using (ℚ; Positive; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -78,33 +56,15 @@ module Reduced
   twoRemainderIsFactoredMinusSelfTerms :
     R539.two * literalWeightedRemainder
     ≡ (factoredFull - selfGram) - selfFluxTangent
-  twoRemainderIsFactoredMinusSelfTerms =
-    let
-      normal = NF.factoredFullIsDiagonalPlusTwoLiteralRemainder
-        output offDiagonalPositive
-      diagonal = Diag.literalDiagonalSumDecomposes
-    in
-    trans
-      (sym
-        (solve
-          (NF.factoredFull output items
-            ∷ Diag.literalDiagonalSum
-            ∷ literalWeightedRemainder
-            ∷ [])))
-      (trans
-        (cong
-          (λ selectedDiagonal →
-            (NF.factoredFull output items - selectedDiagonal))
-          diagonal)
-        (solve
-          (factoredFull
-            ∷ selfGram
-            ∷ selfFluxTangent
-            ∷ [])))
-    where
-    -- The first solver step uses the exact R547 normal-form equality.
-    -- Rewriting it explicitly keeps the consumer identity visible.
-    _ = normal
+  twoRemainderIsFactoredMinusSelfTerms
+    rewrite NF.factoredFullIsDiagonalPlusTwoLiteralRemainder
+      output offDiagonalPositive
+          | Diag.literalDiagonalSumDecomposes =
+    solve
+      (selfGram
+        ∷ selfFluxTangent
+        ∷ literalWeightedRemainder
+        ∷ [])
 
 round551LiteralR406DiagonalReducedNormalFormClosed : Bool
 round551LiteralR406DiagonalReducedNormalFormClosed = true
