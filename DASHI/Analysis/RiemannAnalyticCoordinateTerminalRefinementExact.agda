@@ -41,14 +41,21 @@ record AnalyticCoordinateTerminalRefinement
       WithinPublishedVerifiedHeight rho ->
       realPart (Universal.point rho) ≡ half
 
-    exactPublishedHeightIs3000175332800 : Set
-    exactPublishedHeightIs3000175332800Receipt :
-      exactPublishedHeightIs3000175332800
-
     sourceReference : String
     refinementReference : String
 
 open AnalyticCoordinateTerminalRefinement public
+
+------------------------------------------------------------------------
+-- Compatibility adapters.
+--
+-- The older low and stability records contain unstructured Set receipts for an
+-- exact numeric-height label and same-predicate identity. Neither receipt is
+-- consumed by their theorem compilers. In this same-`analytic` package those
+-- bookkeeping fields are filled definitionally with Unit, while the real
+-- obligations remain theorem-bearing: the verified-region implication,
+-- critical-line/half equivalence, and equality stability.
+------------------------------------------------------------------------
 
 compilePlattTrudgianVerifiedRegionTransport :
   forall {analytic} ->
@@ -62,23 +69,11 @@ compilePlattTrudgianVerifiedRegionTransport refinement = record
         halfImpliesCriticalLine refinement
           (Universal.point rho)
           (publishedVerifiedHeightHasHalfRealPart refinement rho within)
-  ; Low.exactPublishedHeightIs3000175332800 =
-      exactPublishedHeightIs3000175332800 refinement
-  ; Low.exactPublishedHeightIs3000175332800Receipt =
-      exactPublishedHeightIs3000175332800Receipt refinement
+  ; Low.exactPublishedHeightIs3000175332800 = ⊤
+  ; Low.exactPublishedHeightIs3000175332800Receipt = tt
   ; Low.sourceReference = sourceReference refinement
   ; Low.transportReference = refinementReference refinement
   }
-
-------------------------------------------------------------------------
--- Compatibility adapter to the older generic predicate-refinement record.
---
--- That record carries an opaque same-predicate receipt, but its stability
--- compiler does not consume the receipt. Because this package is already
--- indexed by one exact `analytic`, the completed-zeta predicate is fixed by the
--- type. The compatibility receipt is therefore definitionally trivial rather
--- than a separate proof obligation.
-------------------------------------------------------------------------
 
 compileCriticalLinePredicateRefinement :
   forall {analytic} ->
@@ -131,6 +126,12 @@ record AnalyticCoordinateTerminalRefinementBoundary : Set where
     separateOpaqueSamePredicateReceiptRequired : Bool
     separateOpaqueSamePredicateReceiptRequiredIsFalse :
       separateOpaqueSamePredicateReceiptRequired ≡ false
+    separateOpaqueExactHeightReceiptRequired : Bool
+    separateOpaqueExactHeightReceiptRequiredIsFalse :
+      separateOpaqueExactHeightReceiptRequired ≡ false
+    numericVerifiedRegionInterpretationStillRequired : Bool
+    numericVerifiedRegionInterpretationStillRequiredIsTrue :
+      numericVerifiedRegionInterpretationStillRequired ≡ true
     sourceMetadataAloneInhabitsThisPackage : Bool
     sourceMetadataAloneInhabitsThisPackageIsFalse :
       sourceMetadataAloneInhabitsThisPackage ≡ false
@@ -151,6 +152,8 @@ canonicalAnalyticCoordinateTerminalRefinementBoundary =
     true refl
     false refl
     false refl
+    true refl
     false refl
     false refl
-    "Use one theorem-bearing same-AnalyticSubstrate coordinate refinement for both terminal seams. Prove criticalLine(s) iff realPart(s)=half, constructive stability of equality-to-half, and the Platt--Trudgian verified-region theorem as realPart(point rho)=half on that same carrier. Because this package is already indexed by one exact AnalyticSubstrate, no separate opaque same-completed-zeta predicate receipt is required; the older compatibility receipt compiles as unit. Source citations, rational toy carriers, or the predicate name alone do not inhabit the substantive coordinate theorems, and RH is not derived here."
+    false refl
+    "Use one theorem-bearing same-AnalyticSubstrate coordinate refinement for both terminal seams. Prove criticalLine(s) iff realPart(s)=half, constructive stability of equality-to-half, and the Platt--Trudgian verified-region theorem as realPart(point rho)=half on that same carrier. The older opaque same-predicate and exact-height Set receipts are not theorem inputs and compile as Unit compatibility fields. This does not solve the real numeric-height interpretation: the verified-region predicate and its half-real-part theorem must still be attached to the actual abstract Real carrier. Source citations or predicate names alone do not inhabit those theorems, and RH is not derived here."
