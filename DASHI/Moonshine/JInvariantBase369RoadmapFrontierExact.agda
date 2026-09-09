@@ -17,12 +17,15 @@ import DASHI.Foundations.BishopGoldenRatioCarrierExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
 import DASHI.Moonshine.JInvariantOrderThreeVisibleScaleUniquenessBidiExact
+import DASHI.Moonshine.JInvariantOrderThreeScaleGlobalInjectiveExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
+import DASHI.Moonshine.JInvariantRenderedVisibleScaleCompilerBidiExact
+import DASHI.Moonshine.JInvariantRenderedGlobalScaleCompilerBidiExact
 import DASHI.Moonshine.JInvariantRenderedResidualGovernanceTriBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
@@ -48,6 +51,7 @@ record RoadmapState : Set where
     jSeamWordLkTExact : Bool
     jForwardScaleLawExact : Bool
     visibleEightScaleInjectiveExact : Bool
+    jScaleInjectiveAllNatExact : Bool
     structuredJFineFieldCodecExact : Bool
     jAbsoluteToLocalTwentySevenObserverExact : Bool
     localTwentySevenCannotRecoverFullJFine : Bool
@@ -56,6 +60,7 @@ record RoadmapState : Set where
     intervalValuedRenderedCalibrationTyped : Bool
     intervalRecognitionRequiresContainmentAndUniqueness : Bool
     renderedResidualGovernanceTriBidiExact : Bool
+    renderedExactScaleCompilesGlobalOrbitRecognition : Bool
     concretePixelBoxDeterminesVisibleScaleExact : Bool
     concretePixelToAnalyticBoxCalibrationExact : Bool
     symbolicOrbitToAnalyticRealisationExact : Bool
@@ -89,6 +94,7 @@ canonicalRoadmapState = record
   ; jSeamWordLkTExact = true
   ; jForwardScaleLawExact = true
   ; visibleEightScaleInjectiveExact = true
+  ; jScaleInjectiveAllNatExact = true
   ; structuredJFineFieldCodecExact = true
   ; jAbsoluteToLocalTwentySevenObserverExact = true
   ; localTwentySevenCannotRecoverFullJFine = true
@@ -97,6 +103,7 @@ canonicalRoadmapState = record
   ; intervalValuedRenderedCalibrationTyped = true
   ; intervalRecognitionRequiresContainmentAndUniqueness = true
   ; renderedResidualGovernanceTriBidiExact = true
+  ; renderedExactScaleCompilesGlobalOrbitRecognition = true
   ; concretePixelBoxDeterminesVisibleScaleExact = false
   ; concretePixelToAnalyticBoxCalibrationExact = false
   ; symbolicOrbitToAnalyticRealisationExact = false
@@ -125,6 +132,11 @@ data FirstLiveRoadmapResidual : Set where
   missingCompressionCostTheorem : FirstLiveRoadmapResidual
   missingKernelCertification : FirstLiveRoadmapResidual
 
+-- Exact scale uniqueness is no longer an independent residual: D_k is
+-- globally injective and a retained rendered box carrying an exact-scale
+-- certificate compiles the full all-Nat orbit-recognition packet.  The first
+-- j wall is therefore the concrete calibration/measurement that produces such
+-- a box/scale certificate from the rendered source.
 firstJMonsterResidual : FirstLiveRoadmapResidual
 firstJMonsterResidual = missingConcretePixelBoxToVisibleScale
 
