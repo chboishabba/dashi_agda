@@ -50,6 +50,11 @@ positiveTritPaidByCanonicalAdmission :
     Brighton.canonicalBrightonS185RegressionBoundary ≡ true
 positiveTritPaidByCanonicalAdmission = refl
 
+exactPrivateSourceSpanReceiptAvailable :
+  Brighton.BrightonS185RegressionBoundary.exactPrivateSourceSpanReceiptAvailable
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+exactPrivateSourceSpanReceiptAvailable = refl
+
 section185IsIndependentLegalAuthority :
   Brighton.BrightonS185RegressionBoundary.section185IsIndependentLegalAuthority
     Brighton.canonicalBrightonS185RegressionBoundary ≡ true
