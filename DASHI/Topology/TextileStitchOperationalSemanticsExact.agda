@@ -30,12 +30,23 @@ knitTransitionToStep :
   KnitTransition before after →
   Stitch.StitchStep
 knitTransitionToStep
-  (replaceLiveLoop {old = old} {new = new}) =
+  (replaceLiveLoop
+    {loops = loops}
+    {anchors = anchors}
+    {old = old}
+    {new = new}
+    {restFrontier = restFrontier}) =
   Stitch.stitch-step
     Stitch.knittingFormation
-    _
+    (Stitch.stitch-state
+      loops
+      anchors
+      (Stitch.active-loop-frontier (old ∷ restFrontier)))
     (Stitch.knitThrough old new)
-    _
+    (Stitch.stitch-state
+      (new ∷ loops)
+      anchors
+      (Stitch.active-loop-frontier (new ∷ restFrontier)))
 
 record CrochetCompletedState : Set where
   constructor crochet-completed-state
@@ -74,12 +85,23 @@ crochetTransitionToStep :
   CrochetTransition before after →
   Stitch.StitchStep
 crochetTransitionToStep
-  (attachThroughAnchor {old = old} {new = new} anchor) =
+  (attachThroughAnchor
+    {loops = loops}
+    {anchors = anchors}
+    {old = old}
+    {new = new}
+    anchor) =
   Stitch.stitch-step
     Stitch.crochetFormation
-    _
+    (Stitch.stitch-state
+      loops
+      anchors
+      (Stitch.active-loop-frontier (old ∷ [])))
     (Stitch.crochetThrough old anchor new)
-    _
+    (Stitch.stitch-state
+      (new ∷ loops)
+      (anchor ∷ anchors)
+      (Stitch.active-loop-frontier (new ∷ [])))
 
 knittingFormationIsNotCrochetFormation :
   Stitch.knittingFormation ≡ Stitch.crochetFormation → ⊥
