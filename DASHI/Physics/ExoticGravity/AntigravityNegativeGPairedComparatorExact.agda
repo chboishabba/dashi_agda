@@ -8,18 +8,15 @@ import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact as Nega
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
 import DASHI.Physics.GR.NegativeGPredictionAuthorityExact as NegativeGAuthority
+import DASHI.Physics.GR.SignedGSourceDynamicsBidiExact as SourceDynamics
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
--- +G GR VERSUS -G COUNTERFACTUAL: SAME-INPUT PAIRED COMPARATOR
+-- +G GR VERSUS -G COUNTERFACTUAL: SAME-LAW / RE-SOLVED-SOURCE COMPARATOR
 --
--- The only intended theory coordinate to vary is the gravitational coupling
--- sign.  Prediction scope, observation channel, source model, propagation model
--- and detector response must remain welded.  Otherwise a better fit cannot be
--- attributed to the sign coordinate.
---
--- The -G branch constructed in this repo is a DASHI counterfactual theorem
--- carrier, not an externally sourced claim that G is physically negative.
+-- Prediction scope, observation channel, model law, propagation model and
+-- detector response are welded.  The source model law is shared, but the
+-- source trajectory/state must be solved separately under +G and -G.
 ------------------------------------------------------------------------
 
 record SignedGPairedPrediction (claim : Anti.AntigravityClaim) : Set₁ where
@@ -54,9 +51,9 @@ record SignedGPairedPrediction (claim : Anti.AntigravityClaim) : Set₁ where
       Pred.observable (Attr.prediction positiveGPrediction)
         ≡ Pred.observable (Attr.prediction negativeGPrediction)
 
-    sameSourceModel :
-      Pred.sourceModelCarrier (Attr.prediction positiveGPrediction)
-        ≡ Pred.sourceModelCarrier (Attr.prediction negativeGPrediction)
+    sourceDynamicsPair :
+      SourceDynamics.SignedGSourceDynamicsPair
+        positiveGPrediction negativeGPrediction
 
     samePropagationModel :
       Pred.propagationModelCarrier (Attr.prediction positiveGPrediction)
@@ -79,7 +76,7 @@ data SignedGComparatorResidual : Set where
   missingClaimScopeIdentity : SignedGComparatorResidual
   missingChannelIdentity : SignedGComparatorResidual
   missingObservableIdentity : SignedGComparatorResidual
-  missingSourceModelIdentity : SignedGComparatorResidual
+  missingSignConditionedSourceDynamics : SignedGComparatorResidual
   missingPropagationModelIdentity : SignedGComparatorResidual
   missingDetectorResponseIdentity : SignedGComparatorResidual
   negativePredictionNotTypedModifiedGravity : SignedGComparatorResidual
@@ -93,7 +90,7 @@ producerForSignedGComparatorResidual missingNegativeGExactSignedOwnerAuthority =
 producerForSignedGComparatorResidual missingClaimScopeIdentity = Search.identityProducer
 producerForSignedGComparatorResidual missingChannelIdentity = Search.identityProducer
 producerForSignedGComparatorResidual missingObservableIdentity = Search.identityProducer
-producerForSignedGComparatorResidual missingSourceModelIdentity = Search.identityProducer
+producerForSignedGComparatorResidual missingSignConditionedSourceDynamics = Search.propositionSourceProducer
 producerForSignedGComparatorResidual missingPropagationModelIdentity = Search.identityProducer
 producerForSignedGComparatorResidual missingDetectorResponseIdentity = Search.identityProducer
 producerForSignedGComparatorResidual negativePredictionNotTypedModifiedGravity = Search.discriminatorProducer
@@ -102,17 +99,19 @@ producerForSignedGComparatorResidual missingSignedResidualComparison = Search.co
 record SignedGPairedComparatorBoundary : Set where
   constructor signed-g-paired-comparator-boundary
   field
-    positiveAndNegativePredictionsMayUseDifferentSources : Bool
+    positiveAndNegativePredictionsMayUseDifferentSourceModelLaws : Bool
+    sameSourceModelMeansSameSolvedSourceState : Bool
+    signConditionedSourceSolutionRequired : Bool
     positiveAndNegativePredictionsMayUseDifferentClaimScopes : Bool
     positiveAndNegativePredictionsMayUseDifferentDetectorModels : Bool
     negativeGAlternativeMustBeTypedNonGR : Bool
     arbitraryInternalTheoremMayAuthorizeNegativeGPrediction : Bool
     exactSignedGOwnerAuthorityRequired : Bool
-    sameInputPairIsolatesCouplingSignBetterThanUnpairedComparison : Bool
+    sameLawReSolvedSourcePairIsolatesCouplingSignBetterThanUnpairedComparison : Bool
     betterNegativeGFitAutomaticallyEstablishesNegativeGPhysics : Bool
     betterNegativeGFitAutomaticallyProvesAntigravity : Bool
 
 canonicalSignedGPairedComparatorBoundary : SignedGPairedComparatorBoundary
 canonicalSignedGPairedComparatorBoundary =
   signed-g-paired-comparator-boundary
-    false false false true false true true false false
+    false false true false false true false true true false false
