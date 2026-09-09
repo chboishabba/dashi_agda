@@ -21,7 +21,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 -- Nothing in this aggregate asserts either analytic payment or Clay closure.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact
 import DASHI.Physics.Closure.NSTriadKNSelfFluxTemporalReconciliationRound565Exact
@@ -30,7 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFactoredFullSpacetimeBudgetRound567
 import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxEndpointWeldRound568Exact
 
 round569DirectAnalyticFrontierIntegrated : Bool
-round569DirectAnalyticFrontierIntegrated = false
+round569DirectAnalyticFrontierIntegrated = true
 
 round569ClayPromotion : Bool
 round569ClayPromotion = false
