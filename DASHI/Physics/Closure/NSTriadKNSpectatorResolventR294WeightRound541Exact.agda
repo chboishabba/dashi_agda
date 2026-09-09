@@ -22,9 +22,9 @@ module DASHI.Physics.Closure.NSTriadKNSpectatorResolventR294WeightRound541Exact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -67,8 +67,7 @@ module Spectator
 
   spectatorWeightSwapInvariant :
     (beta alpha : Physical.PhysicalTriadIncidence) →
-    R294.weight (spectatorWeight beta)
-      (DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry.swapTriad alpha)
+    R294.weight (spectatorWeight beta) (Symmetry.swapTriad alpha)
     ≡ R294.weight (spectatorWeight beta) alpha
   spectatorWeightSwapInvariant beta alpha =
     R294.swapInvariant (spectatorWeight beta) alpha
