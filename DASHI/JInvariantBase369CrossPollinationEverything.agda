@@ -67,6 +67,14 @@ import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 -- while the analytic Fricke/Klein-j intertwiner remains explicit proof debt.
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 
+-- RH cross-pollination at relation-pattern strength: RH already proves both
+-- strict fine-over-coarse observer refinement and a complementary consumer-
+-- descent case where finer 369 labels are legitimately discardable.  The j
+-- lane now has an explicit local-27 collision showing that full jFine must be
+-- retained unless a declared consumer is proved to descend through the local
+-- observer.  No RH theorem is transported to the j-invariant problem.
+import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
+
 -- Tesla/Base369 refinement is the commuting null model for seam transport:
 -- an independent balanced-trit fibre commutes with both 2- and 3-refinement,
 -- while explicit resolution-sensitive fixtures demonstrate the exact model
@@ -80,6 +88,12 @@ import DASHI.Moonshine.GoldenRatioBinaryTernaryFibreConstructionExact
 -- exactly two Fibonacci updates on a two-register fibre.  Repeated macros give
 -- 2/1, 5/3, 13/8, 34/21,... while the ratio-to-limit theorem remains debt.
 import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
+
+-- The positive ratio sequence is now realized directly on the repository's
+-- vendored Bishop real carrier.  Positivity is definitionally retained in the
+-- pair type; only convergence of that sequence to the already-constructed
+-- bishopPhi remains open.
+import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 
 -- Quadratic approximation / codec / prime-compression tranche.  This includes
 -- the exact Fibonacci defect involution on the existing 3/6/9/27 carriers,
