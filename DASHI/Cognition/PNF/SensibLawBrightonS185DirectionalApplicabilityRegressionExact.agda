@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawDirectionalEvidenceApplicabilityBridgeExact as Directional
 import DASHI.Cognition.PNF.SensibLawApplicabilityPrerequisiteMeetExact as Meet
@@ -67,6 +68,14 @@ rtaForm11GuidanceSource =
     "Form 11 records a claimed/alleged breach and a demand to remedy; issuing the form does not itself determine that the breach occurred"
     "Queensland RTA Form 11 source attribution"
 
+brightonForm11SourceResidualReference : String
+brightonForm11SourceResidualReference =
+  "Brighton 24-Jan-2023 Form11 unresolved-condition factual support residual"
+
+brightonForm11SourceArtifactReceiptReference : String
+brightonForm11SourceArtifactReceiptReference =
+  "RTA Form 11.pdf exact matter-source artifact receipt"
+
 record BrightonS185MatterProposition : Set₁ where
   constructor brightonS185MatterProposition
   field
@@ -94,6 +103,20 @@ record BrightonS185RegressionInput
   constructor brightonS185RegressionInput
   field
     matter : BrightonS185MatterProposition
+
+    -- Exact source artifact -> exact proposition -> +1 support payment.
+    sourceResidualIsBrightonForm11MatterSupport :
+      Source.residualReference residual ≡ brightonForm11SourceResidualReference
+    sourceVerificationTargetsExactMatterProposition :
+      Verify.targetClaimDigest demand ≡ propositionReference matter
+    sourceVerificationUsesExactForm11ArtifactReceipt :
+      Verify.sourceArtifactReceiptReference demand
+      ≡ brightonForm11SourceArtifactReceiptReference
+    sourceVerificationDispositionIsSupported :
+      Verify.disposition receipt ≡ Verify.supported
+    sourceAdmissionIsCanonical :
+      admission ≡ Verify.admitSourceSupport receipt
+
     sourceConditionedApplicability :
       Directional.SourceConditionedApplicabilityMeetInput
         receipt admission state
@@ -130,6 +153,24 @@ record BrightonS185RegressionInput
     noCrossEpisodeCommonCausePromotion : Set
     regressionReference : String
 open BrightonS185RegressionInput public
+
+brightonCanonicalAdmissionPaysPositive :
+  ∀ {residual demand receipt admission state}
+    (input : BrightonS185RegressionInput
+      {residual} {demand} receipt admission state) →
+  Verify.sourceSupportPaid admission ≡ true
+brightonCanonicalAdmissionPaysPositive input
+  rewrite sourceAdmissionIsCanonical input
+        | sourceVerificationDispositionIsSupported input = refl
+
+brightonCanonicalAdmissionHasPositiveTrit :
+  ∀ {residual demand receipt admission state}
+    (input : BrightonS185RegressionInput
+      {residual} {demand} receipt admission state) →
+  Verify.supportTrit admission ≡ Trit.pos
+brightonCanonicalAdmissionHasPositiveTrit input
+  rewrite sourceAdmissionIsCanonical input
+        | sourceVerificationDispositionIsSupported input = refl
 
 compileBrightonS185Applicability :
   ∀ {residual demand receipt admission state} →
@@ -225,6 +266,13 @@ record BrightonS185RegressionBoundary : Set where
   field
     oneEpisodeOnly : Bool
     form11IsMatterEvidenceCarrier : Bool
+    exactSourceResidualRequired : Bool
+    exactTargetClaimBindingRequired : Bool
+    exactSourceArtifactReceiptRequired : Bool
+    supportedDispositionRequired : Bool
+    canonicalSourceAdmissionRequired : Bool
+    positiveSupportPaidByCanonicalAdmission : Bool
+    positiveTritPaidByCanonicalAdmission : Bool
     section185IsIndependentLegalAuthority : Bool
     positiveSourceSupportRequiredBeforeBridge : Bool
     sameMatterPropositionWeldRequired : Bool
@@ -249,5 +297,5 @@ record BrightonS185RegressionBoundary : Set where
 canonicalBrightonS185RegressionBoundary : BrightonS185RegressionBoundary
 canonicalBrightonS185RegressionBoundary =
   brighton-s185-regression-boundary
-    true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true
     false false false false false false false false false
