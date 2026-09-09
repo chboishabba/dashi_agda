@@ -130,6 +130,7 @@ data SelfConsistentNegativeGResidual : Set where
   missingReSolvedMetricAndGeodesics : SelfConsistentNegativeGResidual
   missingReSolvedMatterAndSourceDynamics : SelfConsistentNegativeGResidual
   missingWeakFieldErrorControlForNegativeCoupling : SelfConsistentNegativeGResidual
+  missingActionOrEnergyStabilityReceipt : SelfConsistentNegativeGResidual
 
 record SignedEinsteinCouplingBoundary : Set where
   constructor signed-einstein-coupling-boundary
@@ -143,21 +144,23 @@ record SignedEinsteinCouplingBoundary : Set where
     negativeGAutomaticallyPreservesBoundOrbitBackground : Bool
     negativeGAutomaticallyValidatesAntigravity : Bool
     selfConsistentNegativeGRequiresReSolvingDynamics : Bool
+    selfConsistentNegativeGRequiresStabilityAnalysis : Bool
 
 canonicalSignedEinsteinCouplingBoundary : SignedEinsteinCouplingBoundary
 canonicalSignedEinsteinCouplingBoundary =
   signed-einstein-coupling-boundary
-    true false true false false false false false true
+    true false true false false false false false true true
 
 ------------------------------------------------------------------------
 -- Reuse marker: the signed fibre is attached to the existing abstract GR law;
--- no second Einstein-equation architecture is introduced here.
+-- no second Einstein-equation architecture is introduced here.  The probe now
+-- requires an actual inhabitant of that law's existing coupling carrier.
 ------------------------------------------------------------------------
 
 record SignedEinsteinLawProbe (law : Laws.EinsteinGravityLaw) : Set₁ where
   constructor signed-einstein-law-probe
   field
+    existingCoupling : Laws.EinsteinGravityLaw.Coupling law
     couplingSign : CouplingSign
-    usesExistingCouplingCarrier : Laws.EinsteinGravityLaw.Coupling law → Set
     FrozenSignAdequacy : Set
     frozenSignAdequacy : FrozenSignAdequacy
