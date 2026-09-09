@@ -28,6 +28,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
@@ -61,8 +62,7 @@ outputExact563 cutoff output tau member =
   Output.physicalOutputFiberSound (occursToCube563 member)
 
 module SelfFluxAt
-    (physicalSystem :
-      DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.PhysicalFiniteComplex3GalerkinSystem F)
+    (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F) where
 
   module D = R549.Diagonal physicalSystem S
