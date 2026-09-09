@@ -10,6 +10,7 @@ import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyScopeBidiExa
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyCompilationExact as Compilation
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorCompilationExact as Comparator
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorStateBridgeExact as ComparatorState
+import DASHI.Physics.ExoticGravity.AntigravityOptimizedAcquisitionPlanExact as Plan
 import DASHI.Physics.ExoticGravity.LiTorrStandardGRComparatorBidiExact as LegacyComparator
 import DASHI.Physics.ExoticGravity.LiTorr1991CombinedFieldSourceEntitlementExact as LT1991
 import DASHI.Physics.ExoticGravity.LiTorr1992CoupledPotentialSourceEntitlementExact as LT1992
@@ -76,9 +77,8 @@ predictionReceiptDoesNotProveNegativeEffectiveG : Comparator.predictionReceiptAu
 predictionReceiptDoesNotProveNegativeEffectiveG = refl
 
 requestStateMatchesExistingPlanningState :
-  ComparatorState.requestStageState
-    ≡ ComparatorState.requestStageState
-requestStateMatchesExistingPlanningState = refl
+  ComparatorState.requestStageState ≡ Plan.postSourceComparatorState
+requestStateMatchesExistingPlanningState = ComparatorState.requestStageMatchesExistingPlan
 
 requestStageStillNeedsWeakFieldSolver :
   LegacyComparator.firstOpenGRComparatorLeaf ComparatorState.requestStageState
