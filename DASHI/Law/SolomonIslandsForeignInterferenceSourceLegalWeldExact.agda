@@ -15,15 +15,17 @@ import DASHI.Law.LegalAuthorityCitationExact as Legal
 -- SOURCE / LEGAL WELD
 --
 -- The evidence lane and authority lane meet only through explicit consumer
--- coordinates.  A source-supported fact does not become a legal conclusion;
--- a legal proposition does not manufacture the missing facts needed to fit it.
+-- coordinates.  The current evidence supports an Australian High Commission
+-- treaty/funding communication to Sade and a separately reported Sade ->
+-- coalition political exhortation.  It does not establish a direct Australian
+-- instruction to defeat the motion.
 ------------------------------------------------------------------------
 
 record SourceLegalForeignInterferenceFibre : Set where
   constructor source-legal-foreign-interference-fibre
   field
     abcAuthenticatedMessage : Base.EventAtom
-    oppositionDefeatMotionAttribution : String
+    downstreamDefeatMotionAttribution : String
     constitutionalNoConfidenceAuthority : Legal.LegalCitation
     leadershipIntegrityAuthority : Legal.LegalCitation
     officialWithdrawalAuthority : Legal.LegalCitation
@@ -36,7 +38,7 @@ open SourceLegalForeignInterferenceFibre public
 currentSourceLegalFibre : SourceLegalForeignInterferenceFibre
 currentSourceLegalFibre = source-legal-foreign-interference-fibre
   Base.australianDiplomaticCommunicationExists
-  "Opposition publicly attributes 'stand together to defeat this Motion' language to a subsequent message; sender/authentication remain unresolved"
+  "Opposition publishes defeat-motion language; AAP separately reports the downstream political message as Sade's own coalition-directed message following his forwarding of the Australian High Commission update"
   Domestic.constitutionSection34
   Domestic.constitutionSection94
   Domestic.parliamentWithdrawalRecord
@@ -46,10 +48,6 @@ currentSourceLegalFibre = source-legal-foreign-interference-fibre
 
 ------------------------------------------------------------------------
 -- Minimum legal discriminator.
---
--- This is deliberately a question surface, not a verdict.  It reflects the
--- existing Mabo discipline: identify the exact legal proposition and prove the
--- factual hinge before promotion.
 ------------------------------------------------------------------------
 
 record NonInterventionFitCoordinates : Set where
@@ -57,11 +55,18 @@ record NonInterventionFitCoordinates : Set where
   field
     protectedDomesticChoiceIdentified : Bool
     protectedDomesticChoiceIdentifiedIsTrue : protectedDomesticChoiceIdentified ≡ true
-    allegedForeignConductIdentified : Bool
-    allegedForeignConductIdentifiedIsTrue : allegedForeignConductIdentified ≡ true
-    exactRequestByForeignActorAuthenticated : Bool
-    exactRequestByForeignActorAuthenticatedIsFalse :
-      exactRequestByForeignActorAuthenticated ≡ false
+    australianTreatyFundingCommunicationIdentified : Bool
+    australianTreatyFundingCommunicationIdentifiedIsTrue :
+      australianTreatyFundingCommunicationIdentified ≡ true
+    downstreamDomesticPoliticalUseReported : Bool
+    downstreamDomesticPoliticalUseReportedIsTrue :
+      downstreamDomesticPoliticalUseReported ≡ true
+    exactRequestByAustralianActorAuthenticated : Bool
+    exactRequestByAustralianActorAuthenticatedIsFalse :
+      exactRequestByAustralianActorAuthenticated ≡ false
+    australianConditionalityEstablished : Bool
+    australianConditionalityEstablishedIsFalse :
+      australianConditionalityEstablished ≡ false
     coerciveCharacterEstablished : Bool
     coerciveCharacterEstablishedIsFalse : coerciveCharacterEstablished ≡ false
     diplomaticArticle41FitEstablished : Bool
@@ -76,45 +81,48 @@ currentNonInterventionFit : NonInterventionFitCoordinates
 currentNonInterventionFit = non-intervention-fit-coordinates
   true refl
   true refl
+  true refl
   false refl
   false refl
   false refl
   false refl
-
-------------------------------------------------------------------------
--- Why the first two coordinates are now paid.
-------------------------------------------------------------------------
+  false refl
 
 protectedDomesticChoiceBasis : String
 protectedDomesticChoiceBasis =
   "Constitution s 34 identifies the no-confidence mechanism as a Solomon Islands parliamentary process decided by members of Parliament"
 
-allegedForeignConductBasis : String
-allegedForeignConductBasis =
-  "ABC authenticated a diplomatic communication concerning treaty/funding progress and holding steady; Opposition separately attributes defeat-motion language to a subsequent message"
+currentCommunicationBasis : String
+currentCommunicationBasis =
+  "ABC authenticates the High Commission treaty/funding communication to Sade; AAP reporting identifies Sade as forwarding that update and separately sending his own coalition-directed political message"
 
 ------------------------------------------------------------------------
 -- No legal bootstrapping.
 ------------------------------------------------------------------------
 
-data ConstitutionalProcessPlusForeignContactImpliesCoercion : Set where
-data Article41TextPlusAllegationImpliesBreach : Set where
+data DomesticRelayImpliesAustralianInstruction : Set where
+data BenefitCommunicationImpliesConditionality : Set where
+data Article41TextPlusRelayImpliesBreach : Set where
 data NicaraguaTestPlusTimingImpliesWrongfulIntervention : Set where
 
-constitutionAndContactDoNotAutoEstablishCoercion :
-  ConstitutionalProcessPlusForeignContactImpliesCoercion → ⊥
-constitutionAndContactDoNotAutoEstablishCoercion ()
+domesticRelayDoesNotBecomeAustralianInstruction :
+  DomesticRelayImpliesAustralianInstruction → ⊥
+domesticRelayDoesNotBecomeAustralianInstruction ()
 
-article41AndAllegationDoNotAutoEstablishBreach :
-  Article41TextPlusAllegationImpliesBreach → ⊥
-article41AndAllegationDoNotAutoEstablishBreach ()
+benefitCommunicationDoesNotAutoEstablishConditionality :
+  BenefitCommunicationImpliesConditionality → ⊥
+benefitCommunicationDoesNotAutoEstablishConditionality ()
+
+article41AndRelayDoNotAutoEstablishBreach :
+  Article41TextPlusRelayImpliesBreach → ⊥
+article41AndRelayDoNotAutoEstablishBreach ()
 
 nicaraguaAndTimingDoNotAutoEstablishWrongfulIntervention :
   NicaraguaTestPlusTimingImpliesWrongfulIntervention → ⊥
 nicaraguaAndTimingDoNotAutoEstablishWrongfulIntervention ()
 
 ------------------------------------------------------------------------
--- Current shortest residual.
+-- Current shortest residual after sender correction.
 ------------------------------------------------------------------------
 
 record SourceLegalResidual : Set where
@@ -123,21 +131,19 @@ record SourceLegalResidual : Set where
     domesticConstitutionalProcessMapped : Bool
     domesticConstitutionalProcessMappedIsTrue :
       domesticConstitutionalProcessMapped ≡ true
-    domesticLeadershipIntegrityMapped : Bool
-    domesticLeadershipIntegrityMappedIsTrue :
-      domesticLeadershipIntegrityMapped ≡ true
     officialWithdrawalChronologyMapped : Bool
     officialWithdrawalChronologyMappedIsTrue :
       officialWithdrawalChronologyMapped ≡ true
-    oppositionDefeatMotionSentenceMapped : Bool
-    oppositionDefeatMotionSentenceMappedIsTrue :
-      oppositionDefeatMotionSentenceMapped ≡ true
-    originalDefeatMotionArtifactAuthenticated : Bool
-    originalDefeatMotionArtifactAuthenticatedIsFalse :
-      originalDefeatMotionArtifactAuthenticated ≡ false
-    australianSenderOfDefeatMotionSentenceEstablished : Bool
-    australianSenderOfDefeatMotionSentenceEstablishedIsFalse :
-      australianSenderOfDefeatMotionSentenceEstablished ≡ false
+    australianUpstreamMessageMapped : Bool
+    australianUpstreamMessageMappedIsTrue : australianUpstreamMessageMapped ≡ true
+    sadeDownstreamPoliticalMessageMappedByReport : Bool
+    sadeDownstreamPoliticalMessageMappedByReportIsTrue :
+      sadeDownstreamPoliticalMessageMappedByReport ≡ true
+    exactThreadTopologyPrimaryAuthenticated : Bool
+    exactThreadTopologyPrimaryAuthenticatedIsFalse :
+      exactThreadTopologyPrimaryAuthenticated ≡ false
+    australianConditionalityPaid : Bool
+    australianConditionalityPaidIsFalse : australianConditionalityPaid ≡ false
     coercionHingePaid : Bool
     coercionHingePaidIsFalse : coercionHingePaid ≡ false
     nextExactProducer : String
@@ -153,4 +159,4 @@ currentSourceLegalResidual = source-legal-residual
   false refl
   false refl
   false refl
-  "original/authenticated defeat-motion message chain with sender/recipient/timestamp provenance; only after that, analyse conditionality or coercion against VCDR Article 41 and Nicaragua paragraph 205"
+  "original/authenticated WhatsApp chain with forwarding markers, sender/recipient/timestamps and adjacency; then test whether Australia conditioned funding/treaty benefits on government survival or requested political use against the no-confidence motion"
