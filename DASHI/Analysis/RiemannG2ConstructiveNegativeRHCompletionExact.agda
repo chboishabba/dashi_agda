@@ -13,20 +13,6 @@ import DASHI.Analysis.RiemannG2UniformHighContradictionExact as High
 import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as LiteralHigh
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 
-------------------------------------------------------------------------
--- CONSTRUCTIVE NEGATIVE RH COMPLETION
---
--- The direct high contradiction does not need double-negation elimination.  The
--- canonical high input is now the literal phase-visible theorem family itself:
--- for each arbitrary high off-line zero, an unpaid final context, exact literal
--- near model, and independent phase+far+Gamma strict margin.
---
--- The canonical Low region is definitionally the exact Platt--Trudgian
--- verified-region predicate.  Low positive criticality and high contradiction
--- compile to double-negated RH.  Only the final conversion to prize-facing
--- positive RH consumes the critical-predicate refinement.
-------------------------------------------------------------------------
-
 Not : Set -> Set
 Not P = P -> ⊥
 

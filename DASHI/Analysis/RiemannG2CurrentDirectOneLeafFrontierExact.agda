@@ -22,7 +22,7 @@ import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 -- CURRENT DIRECT FRONTIER
 --
 -- The preferred high route now has one evaluator-independent representation
--- theorem and one primitive strict analytic family.  A proof-carrying finite
+-- theorem and one primitive strict analytic family. A proof-carrying finite
 -- certificate is an optional sufficient producer between those two layers.
 ------------------------------------------------------------------------
 
@@ -43,7 +43,6 @@ data FrontierCoordinate : Set where
   separateGammaEnvelope : FrontierCoordinate
   finalBalanceAsAnalyticInput : FrontierCoordinate
   exactExistingScalarDonor : FrontierCoordinate
-
 
 data FrontierClass : Set where
   analyticWall : FrontierClass
@@ -72,10 +71,6 @@ frontierClass separateFiniteNearEnvelope = pruned
 frontierClass separateGammaEnvelope = pruned
 frontierClass finalBalanceAsAnalyticInput = pruned
 frontierClass exactExistingScalarDonor = absentDonor
-
-------------------------------------------------------------------------
--- Exact pins.
-------------------------------------------------------------------------
 
 crossingAdmissionRequired :
   Target.DirectLiteralComplementTargetBoundary.quarterPeriodCrossingAdmissionRequired

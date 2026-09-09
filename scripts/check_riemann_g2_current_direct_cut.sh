@@ -4,9 +4,6 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-# Canonical current RH surface only. Historical allowance/window/determinant
-# adapters remain covered by broader regression scripts, but they are not
-# prerequisites of the current direct Clay-facing cut.
 FILES=(
   DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda
   DASHI/Analysis/RiemannG2LiteralComplementDirectTargetExact.agda
@@ -14,6 +11,7 @@ FILES=(
   DASHI/Analysis/RiemannG2FinalCarrierFiniteSumCertificateExact.agda
   DASHI/Analysis/RiemannG2DirectClusterResponseContradictionExact.agda
   DASHI/Analysis/RiemannG2CertifiedNearUpperClusterResponseCompilerExact.agda
+  DASHI/Analysis/RiemannG2CertifiedClusterLowerEnvelopeCompilerExact.agda
   DASHI/Analysis/RiemannG2FinalPoleNearObserverRefinementExact.agda
   DASHI/Analysis/RiemannG2LiteralPhaseDirectClusterResponseExact.agda
   DASHI/Analysis/RiemannG2MinimalStrictResponseConsumerExact.agda
@@ -25,10 +23,10 @@ FILES=(
   DASHI/Analysis/RiemannAnalyticCoordinateTerminalRefinementExact.agda
   DASHI/Analysis/RiemannG2ConstructiveNegativeRHCompletionExact.agda
   DASHI/Analysis/RiemannG2ClayTerminalOneLeafCutExact.agda
-  DASHI/Analysis/RiemannG2ClayTerminalCoordinateRefinedExact.agda
   DASHI/Analysis/RiemannG2ClayTerminalGenericHighCoordinateExact.agda
   DASHI/Analysis/RiemannG2CurrentDirectOneLeafFrontierExact.agda
   DASHI/Analysis/RiemannG2CurrentGenericHighFrontierRefinementExact.agda
+  DASHI/Analysis/RiemannG2GenericHighCertifiedFollowupReadmeExact.agda
   DASHI/Analysis/RiemannG2FinalCutIntrospectionExact.agda
   DASHI/Analysis/Everything.agda
 )

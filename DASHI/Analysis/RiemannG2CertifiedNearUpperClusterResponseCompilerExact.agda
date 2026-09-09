@@ -18,19 +18,6 @@ import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact as Cluste
 import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as Literal
 import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact as FinalCert
 
-------------------------------------------------------------------------
--- CERTIFIED FINAL-NEAR UPPER -> DIRECT CLUSTER-RESPONSE PAYMENT
---
--- Representation is already fixed by FinalNearLiteralKernel. A proof-carrying
--- finite upper certificate gives nearResponseAt(J) <= U. Existing source
--- monotonicity then gives B_off(J) <= U + B_far(J). The only remaining strict
--- producer theorem is
---
---   cast(U + B_far(J)) + cast(D_Gamma) < ClusterResponse.
---
--- The balance ClusterResponse = Off + Gamma is not available to this theorem.
-------------------------------------------------------------------------
-
 record CertifiedNearUpperOrderAttachment
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
@@ -44,7 +31,6 @@ record CertifiedNearUpperOrderAttachment
       Cert.ProofCarryingFiniteSumUpperEnclosure.lessOrEqual
         (FinalCert.upperCertificate upper) x y ->
       NearFar._≤_ S x y
-
     orderAttachmentReference : String
 
 open CertifiedNearUpperOrderAttachment public
@@ -93,7 +79,6 @@ record CertifiedNearUpperClusterMargin
         (Existing.cast (Cluster.clusterScalarIdentity context)
           (Cluster.ClusterResponse context
             (Cluster.clusterUniversalPoleQuotientTaper context)))
-
     marginReference : String
 
 open CertifiedNearUpperClusterMargin public

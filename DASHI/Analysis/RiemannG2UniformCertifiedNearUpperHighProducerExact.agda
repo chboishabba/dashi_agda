@@ -17,59 +17,32 @@ import DASHI.Analysis.RiemannG2CertifiedNearUpperClusterResponseCompilerExact as
 import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact as Cluster
 import DASHI.Analysis.RiemannG2UniformHighContradictionExact as Generic
 
-------------------------------------------------------------------------
--- UNIFORM CERTIFIED-UPPER HIGH PRODUCER
---
--- Per arbitrary high off-line zero:
---   literal final-near representation
---   -> proof-carrying finite certificate
---   -> certified near upper U
---   -> independent U + B_far + D_Gamma < ClusterResponse
---   -> canonical direct cluster payment
---   -> downstream final balance
---   -> contradiction.
---
--- The strict certified margin remains balance-free.  This route is a second
--- producer of the SAME generic high contradiction interface, not a second Clay
--- architecture.
-------------------------------------------------------------------------
-
 record CertifiedNearUpperHighOffLineCase : Set₁ where
   field
     offSurface : NearFar.OrderedAdditiveNearFarSurface
     offTransport : Transport.ExplicitCutoffNearFarAgdaTransport offSurface
     targets : Direct.DirectLiteralComplementTargets offSurface offTransport
-
-    literalKernel :
-      Literal.FinalNearLiteralKernel (Direct.offInput targets)
-
+    literalKernel : Literal.FinalNearLiteralKernel (Direct.offInput targets)
     certificate :
       FinalCert.FinalCarrierFiniteSumCertificate
         (Direct.offInput targets) literalKernel
-
     upper :
       FinalCert.FinalCarrierFiniteSumUpper
         (Direct.offInput targets) literalKernel certificate
-
     orderAttachment :
       Certified.CertifiedNearUpperOrderAttachment
         (Direct.offInput targets) literalKernel upper
-
     analyticContext : Cluster.BalanceFreeClusterResponseContext targets
-
     certifiedMargin :
       Certified.CertifiedNearUpperClusterMargin
         targets literalKernel upper orderAttachment analyticContext
-
     finalBalance :
       Cluster.DirectClusterResponseBalanceAttachment analyticContext
-
     caseReference : String
 
 open CertifiedNearUpperHighOffLineCase public
 
-certifiedCaseContradiction :
-  CertifiedNearUpperHighOffLineCase -> ⊥
+certifiedCaseContradiction : CertifiedNearUpperHighOffLineCase -> ⊥
 certifiedCaseContradiction c =
   Cluster.directClusterResponseContradiction
     (analyticContext c)
@@ -117,33 +90,25 @@ record UniformCertifiedNearUpperHighBoundary : Set where
     certifiedRouteMatchesPrizeHighQuantifier : Bool
     certifiedRouteMatchesPrizeHighQuantifierIsTrue :
       certifiedRouteMatchesPrizeHighQuantifier ≡ true
-
     certifiedRouteCompilesGenericHighContradiction : Bool
     certifiedRouteCompilesGenericHighContradictionIsTrue :
       certifiedRouteCompilesGenericHighContradiction ≡ true
-
     selectedWeilWindowRequiredPerCase : Bool
     selectedWeilWindowRequiredPerCaseIsFalse :
       selectedWeilWindowRequiredPerCase ≡ false
-
     determinantConsumerRequiredPerCase : Bool
     determinantConsumerRequiredPerCaseIsFalse :
       determinantConsumerRequiredPerCase ≡ false
-
     finalBalanceAvailableToCertifiedMargin : Bool
     finalBalanceAvailableToCertifiedMarginIsFalse :
       finalBalanceAvailableToCertifiedMargin ≡ false
-
     fixedCertifiedCaseSuffices : Bool
     fixedCertifiedCaseSufficesIsFalse :
       fixedCertifiedCaseSuffices ≡ false
-
     producerInhabitedHere : Bool
     producerInhabitedHereIsFalse : producerInhabitedHere ≡ false
-
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
-
     highestAlphaReading : String
 
 canonicalUniformCertifiedNearUpperHighBoundary :

@@ -11,20 +11,6 @@ import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact a
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
 import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as Literal
 
-------------------------------------------------------------------------
--- FINAL-CARRIER PROOF-CARRYING FINITE-SUM CERTIFICATE
---
--- Representation comes first.  The evaluator-independent FinalNearLiteralKernel
--- owns the exact theorem
---
---   nearResponseAt(chosen J) = finiteNearSum(cellResponse).
---
--- A proof-carrying finite evaluator consumes that kernel downstream.  Its exact
--- fold is identified with the literal finite sum, and therefore with the actual
--- final nearResponseAt(J).  No selected Weil window, determinant-q consumer, or
--- evaluator-indexed representation object is required.
-------------------------------------------------------------------------
-
 record FinalCarrierFiniteSumCertificate
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
@@ -35,11 +21,9 @@ record FinalCarrierFiniteSumCertificate
   field
     zeroS : Scalar
     addS : Scalar -> Scalar -> Scalar
-
     certificate :
       Cert.ProofCarryingFiniteSumEnclosure
         (record { Cert.Scalar = Scalar ; Cert.zeroS = zeroS ; Cert.addS = addS })
-
     certificateFoldIsLiteralFiniteSum :
       Cert.foldScalars
         (record { Cert.Scalar = Scalar ; Cert.zeroS = zeroS ; Cert.addS = addS })
@@ -47,7 +31,6 @@ record FinalCarrierFiniteSumCertificate
           (Cert.ProofCarryingFiniteSumEnclosure.evaluateTerm certificate)
           (Cert.ProofCarryingFiniteSumEnclosure.terms certificate))
       ≡ Literal.finiteNearSum kernel (Literal.cellResponse kernel)
-
     certificateReference : String
 
 open FinalCarrierFiniteSumCertificate public
@@ -101,7 +84,6 @@ record CertifiedFinalNearEvaluation
         (Transport.nearResponseAt transport (Direct.chosenCutoff offInput))
         (Cert.ProofCarryingFiniteSumEnclosure.approximant cert)
         (Cert.ProofCarryingFiniteSumEnclosure.error cert)
-
     evaluationReference : String
 
 open CertifiedFinalNearEvaluation public
@@ -135,7 +117,6 @@ record FinalCarrierFiniteSumUpper
       Cert.ProofCarryingFiniteSumUpperEnclosure
         (finalCarrier input)
         (certificate input)
-
     upperReference : String
 
 open FinalCarrierFiniteSumUpper public

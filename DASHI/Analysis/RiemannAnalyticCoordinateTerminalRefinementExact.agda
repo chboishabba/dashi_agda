@@ -5,28 +5,12 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Unit using (⊤; tt)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
-
-------------------------------------------------------------------------
--- SHARED SAME-CARRIER TERMINAL COORDINATE REFINEMENT
---
--- The low verified-region theorem and the final double-negation stability seam
--- should not each invent their own interpretation of the analytic carrier.
--- Use one exact coordinate package on the SAME AnalyticSubstrate:
---
---   criticalLine(s) <-> realPart(s) = half,
---
--- together with constructive stability of equality-to-half and the published
--- verified-region theorem expressed on that same coordinate. From this single
--- package we compile both the canonical Platt--Trudgian low transport and the
--- CriticalLinePredicateRefinement used by the positive-RH compiler.
---
--- The package is theorem-bearing. Source metadata alone cannot construct it.
-------------------------------------------------------------------------
 
 record AnalyticCoordinateTerminalRefinement
     (analytic : Analytic.AnalyticSubstrate) : Set₁ where
@@ -41,19 +25,13 @@ record AnalyticCoordinateTerminalRefinement
     half : Real
 
     criticalLineImpliesHalf :
-      (s : Complex) ->
-      abstractCritical s ->
-      realPart s ≡ half
+      (s : Complex) -> abstractCritical s -> realPart s ≡ half
 
     halfImpliesCriticalLine :
-      (s : Complex) ->
-      realPart s ≡ half ->
-      abstractCritical s
+      (s : Complex) -> realPart s ≡ half -> abstractCritical s
 
     equalityToHalfStable :
-      (r : Real) ->
-      ((r ≡ half -> ⊥) -> ⊥) ->
-      r ≡ half
+      (r : Real) -> ((r ≡ half -> ⊥) -> ⊥) -> r ≡ half
 
     WithinPublishedVerifiedHeight :
       Universal.AnalyticNontrivialZero analytic -> Set
@@ -63,18 +41,21 @@ record AnalyticCoordinateTerminalRefinement
       WithinPublishedVerifiedHeight rho ->
       realPart (Universal.point rho) ≡ half
 
-    exactPublishedHeightIs3000175332800 : Set
-    exactPublishedHeightIs3000175332800Receipt :
-      exactPublishedHeightIs3000175332800
-
-    sameCompletedZetaPredicateReceipt : Set
-    sameCompletedZetaPredicateReceiptWitness :
-      sameCompletedZetaPredicateReceipt
-
     sourceReference : String
     refinementReference : String
 
 open AnalyticCoordinateTerminalRefinement public
+
+------------------------------------------------------------------------
+-- Compatibility adapters.
+--
+-- The older low and stability records contain unstructured Set receipts for an
+-- exact numeric-height label and same-predicate identity. Neither receipt is
+-- consumed by their theorem compilers. In this same-`analytic` package those
+-- bookkeeping fields are filled definitionally with Unit, while the real
+-- obligations remain theorem-bearing: the verified-region implication,
+-- critical-line/half equivalence, and equality stability.
+------------------------------------------------------------------------
 
 compilePlattTrudgianVerifiedRegionTransport :
   forall {analytic} ->
@@ -88,10 +69,8 @@ compilePlattTrudgianVerifiedRegionTransport refinement = record
         halfImpliesCriticalLine refinement
           (Universal.point rho)
           (publishedVerifiedHeightHasHalfRealPart refinement rho within)
-  ; Low.exactPublishedHeightIs3000175332800 =
-      exactPublishedHeightIs3000175332800 refinement
-  ; Low.exactPublishedHeightIs3000175332800Receipt =
-      exactPublishedHeightIs3000175332800Receipt refinement
+  ; Low.exactPublishedHeightIs3000175332800 = ⊤
+  ; Low.exactPublishedHeightIs3000175332800Receipt = tt
   ; Low.sourceReference = sourceReference refinement
   ; Low.transportReference = refinementReference refinement
   }
@@ -115,10 +94,8 @@ compileCriticalLinePredicateRefinement {analytic} refinement = record
         equalityToHalfStable refinement
           (Analytic.ComplexAnalyticCarrier.realPart
             (Analytic.AnalyticSubstrate.carrier analytic) s)
-  ; Stability.CriticalLinePredicateRefinement.sameCompletedZetaPredicateReceipt =
-      sameCompletedZetaPredicateReceipt refinement
-  ; Stability.CriticalLinePredicateRefinement.sameCompletedZetaPredicateReceiptWitness =
-      sameCompletedZetaPredicateReceiptWitness refinement
+  ; Stability.CriticalLinePredicateRefinement.sameCompletedZetaPredicateReceipt = ⊤
+  ; Stability.CriticalLinePredicateRefinement.sameCompletedZetaPredicateReceiptWitness = tt
   ; Stability.CriticalLinePredicateRefinement.refinementReference =
       refinementReference refinement
   }
@@ -137,30 +114,32 @@ record AnalyticCoordinateTerminalRefinementBoundary : Set where
     lowAndStabilityMayUseSeparateCarrierInterpretations : Bool
     lowAndStabilityMayUseSeparateCarrierInterpretationsIsFalse :
       lowAndStabilityMayUseSeparateCarrierInterpretations ≡ false
-
     oneSameCarrierHalfCharacterisationCompilesCriticalRefinement : Bool
     oneSameCarrierHalfCharacterisationCompilesCriticalRefinementIsTrue :
       oneSameCarrierHalfCharacterisationCompilesCriticalRefinement ≡ true
-
     verifiedHalfRealPartCompilesCanonicalLowCriticality : Bool
     verifiedHalfRealPartCompilesCanonicalLowCriticalityIsTrue :
       verifiedHalfRealPartCompilesCanonicalLowCriticality ≡ true
-
     equalityStabilityCompilesCriticalLineStable : Bool
     equalityStabilityCompilesCriticalLineStableIsTrue :
       equalityStabilityCompilesCriticalLineStable ≡ true
-
+    separateOpaqueSamePredicateReceiptRequired : Bool
+    separateOpaqueSamePredicateReceiptRequiredIsFalse :
+      separateOpaqueSamePredicateReceiptRequired ≡ false
+    separateOpaqueExactHeightReceiptRequired : Bool
+    separateOpaqueExactHeightReceiptRequiredIsFalse :
+      separateOpaqueExactHeightReceiptRequired ≡ false
+    numericVerifiedRegionInterpretationStillRequired : Bool
+    numericVerifiedRegionInterpretationStillRequiredIsTrue :
+      numericVerifiedRegionInterpretationStillRequired ≡ true
     sourceMetadataAloneInhabitsThisPackage : Bool
     sourceMetadataAloneInhabitsThisPackageIsFalse :
       sourceMetadataAloneInhabitsThisPackage ≡ false
-
     actualAnalyticCoordinateRefinementInhabitedHere : Bool
     actualAnalyticCoordinateRefinementInhabitedHereIsFalse :
       actualAnalyticCoordinateRefinementInhabitedHere ≡ false
-
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
-
     highestAlphaReading : String
 
 canonicalAnalyticCoordinateTerminalRefinementBoundary :
@@ -173,5 +152,8 @@ canonicalAnalyticCoordinateTerminalRefinementBoundary =
     true refl
     false refl
     false refl
+    true refl
     false refl
-    "Use one theorem-bearing same-AnalyticSubstrate coordinate refinement for both terminal seams. Prove criticalLine(s) iff realPart(s)=half, constructive stability of equality-to-half, and the Platt--Trudgian verified-region theorem as realPart(point rho)=half on that same carrier. Those compile the canonical low transport and CriticalLineStable. Source citations, rational toy carriers, or whole-carrier identity alone do not inhabit this package, and RH is not derived here."
+    false refl
+    false refl
+    "Use one theorem-bearing same-AnalyticSubstrate coordinate refinement for both terminal seams. Prove criticalLine(s) iff realPart(s)=half, constructive stability of equality-to-half, and the Platt--Trudgian verified-region theorem as realPart(point rho)=half on that same carrier. The older opaque same-predicate and exact-height Set receipts are not theorem inputs and compile as Unit compatibility fields. This does not solve the real numeric-height interpretation: the verified-region predicate and its half-real-part theorem must still be attached to the actual abstract Real carrier. Source citations or predicate names alone do not inhabit those theorems, and RH is not derived here."

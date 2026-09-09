@@ -10,16 +10,6 @@ import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as Literal
 
-------------------------------------------------------------------------
--- IMPLEMENTATION-NEUTRAL UNIFORM HIGH CONTRADICTION
---
--- The high/low and Clay-facing logical compilers do not intrinsically care
--- whether an off-line high-zero contradiction was obtained by a direct literal
--- phase theorem, a proof-carrying finite certificate, or another same-object
--- producer. Their least high-side consumer is simply the uniform contradiction
--- family below.
-------------------------------------------------------------------------
-
 record UniformHighContradictionProducer
     (analytic : Analytic.AnalyticSubstrate)
     (High : Universal.AnalyticNontrivialZero analytic -> Set) : Set₁ where
@@ -29,7 +19,6 @@ record UniformHighContradictionProducer
       High rho ->
       (Universal.analyticCritical rho -> ⊥) ->
       ⊥
-
     producerReference : String
 
 open UniformHighContradictionProducer public
@@ -51,19 +40,15 @@ record UniformHighContradictionBoundary : Set where
     terminalHighConsumerNeedsLiteralPhaseImplementation : Bool
     terminalHighConsumerNeedsLiteralPhaseImplementationIsFalse :
       terminalHighConsumerNeedsLiteralPhaseImplementation ≡ false
-
     literalPhaseProducerCompilesGenericHighContradiction : Bool
     literalPhaseProducerCompilesGenericHighContradictionIsTrue :
       literalPhaseProducerCompilesGenericHighContradiction ≡ true
-
     fixedHighCaseSufficesForUniformProducer : Bool
     fixedHighCaseSufficesForUniformProducerIsFalse :
       fixedHighCaseSufficesForUniformProducer ≡ false
-
     genericHighContradictionAloneClaimsRH : Bool
     genericHighContradictionAloneClaimsRHIsFalse :
       genericHighContradictionAloneClaimsRH ≡ false
-
     highestAlphaReading : String
 
 canonicalUniformHighContradictionBoundary : UniformHighContradictionBoundary
