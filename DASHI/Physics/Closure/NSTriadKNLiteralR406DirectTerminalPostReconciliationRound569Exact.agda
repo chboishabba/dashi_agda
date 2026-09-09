@@ -1,20 +1,20 @@
 module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalPostReconciliationRound569Exact where
 
 ------------------------------------------------------------------------
--- ROUND569 / THIN CONTINUATION AGGREGATE AFTER THE R565 RECONCILIATION
+-- ROUND569 / FOCUSED CONTINUATION ROOT FOR THE DIRECT LITERAL R406 ROUTE
 --
--- The established focused cone remains R505.  R565 reconciles the concurrent
--- self-flux derivative generations and leaves one ordinary scalar-FTC socket.
--- R566-R568 then reduce the substantive leaf-A expression further:
+-- R565--R568 reduce the live leaf-A consumer to one signed commutator
+-- spacetime budget.  R577 shows that historical row/column Schur can compile
+-- into that budget, but R335 already classifies absolute row/column Schur as a
+-- fallback once the signed pairwise carrier exists.
 --
---   amplitude full square = forcing full square,
---   factoredFull = 4 * forcingFull,
+-- R578 restores that least-privilege ordering.  R579 proves a square-root-free
+-- local Hermitian envelope, and R580 instantiates it on the literal R329/R336
+-- nested pair while retaining an explicit same-final-output receipt.
 --
--- and expose the live cutoff-uniform spacetime bound for that single signed
--- R294/R438 commutator carrier as the new NS analytic theorem debt.
---
--- This module introduces no new proof-search architecture; it is only a small
--- validation root over the existing focused aggregate plus the new reductions.
+-- Thus the preferred surviving residual is NOT "prove row/column Schur".  It is
+-- the shell-decaying envelope-mass theorem needed by the signed R29 pre-TT*
+-- aggregation.  No cutoff-uniform decay theorem is manufactured here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -25,6 +25,10 @@ import DASHI.Physics.Closure.NSTriadKNSelfFluxTemporalReconciliationRound565Exac
 import DASHI.Physics.Closure.NSTriadKNFactoredFullTransposeSymmetryRound566Exact as R566
 import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
 import DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact as R568
+import DASHI.Physics.Closure.NSTriadKNModernNestedSchurToCommutatorBidiRound577Exact as R577
+import DASHI.Physics.Closure.NSTriadKNModernLeafARouteReconciliationRound578Exact as R578
+import DASHI.Physics.Closure.NSTriadKNRationalHermitianYoungRound579Exact as R579
+import DASHI.Physics.Closure.NSTriadKNLiteralNestedPairwiseMassEnvelopeRound580Exact as R580
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
 round569TemporalGenerationsReconciled : Bool
@@ -39,13 +43,33 @@ round569FactoredFullIsSingleForcingSquare : Bool
 round569FactoredFullIsSingleForcingSquare =
   R567.round567FactoredFullIsFourForcingSquare
 
-round569NewNSAnalyticLeafIsLiveCommutatorSpacetimeBudget : Bool
-round569NewNSAnalyticLeafIsLiveCommutatorSpacetimeBudget =
-  R568.round568NewNSAnalyticLeafIsLiveCommutatorSpacetimeBudget
-
 round569LiveCommutatorSpacetimeBudgetClosed : Bool
 round569LiveCommutatorSpacetimeBudgetClosed =
   R568.round568LiveCommutatorSpacetimeBudgetClosed
+
+round569AbsoluteNestedSchurIsFallback : Bool
+round569AbsoluteNestedSchurIsFallback =
+  R578.round578AbsoluteNestedSchurHighestAlpha
+
+round569SignedPairwiseOverlapPreferred : Bool
+round569SignedPairwiseOverlapPreferred =
+  R578.round578SignedPairwiseOverlapHighestAlpha
+
+round569LocalHermitianEnvelopeClosed : Bool
+round569LocalHermitianEnvelopeClosed =
+  R579.round579LocalHermitianEnvelopeClosed
+
+round569LiteralR336LocalOverlapConstructed : Bool
+round569LiteralR336LocalOverlapConstructed =
+  R580.round580LiteralR336LocalOverlapReceiptConstructed
+
+round569SameFinalOutputExplicit : Bool
+round569SameFinalOutputExplicit =
+  R580.round580SameFinalOutputIsExplicitPremise
+
+round569ShellDecayEnvelopeMassClosed : Bool
+round569ShellDecayEnvelopeMassClosed =
+  R580.round580MassEnvelopeCrossShellDecayClosed
 
 round569CurrentGlobalFirstResidualStillLeafA :
   R504.firstTerminalResidual R504.currentTerminalStatus
@@ -60,15 +84,24 @@ round569TemporalGenerationsReconciledIsTrue :
 round569TemporalGenerationsReconciledIsTrue =
   R565.round565ConcurrentTemporalOwnersReconciledIsTrue
 
-round569FullAmplitudeHalfEliminatedIsTrue :
-  round569FullAmplitudeHalfEliminated ≡ true
-round569FullAmplitudeHalfEliminatedIsTrue =
-  R566.round566FullAmplitudeAndForcingHalvesEqualIsTrue
+round569LocalHermitianEnvelopeClosedIsTrue :
+  round569LocalHermitianEnvelopeClosed ≡ true
+round569LocalHermitianEnvelopeClosedIsTrue =
+  R579.round579LocalHermitianEnvelopeClosedIsTrue
 
-round569FactoredFullIsSingleForcingSquareIsTrue :
-  round569FactoredFullIsSingleForcingSquare ≡ true
-round569FactoredFullIsSingleForcingSquareIsTrue =
-  R567.round567FactoredFullIsFourForcingSquareIsTrue
+round569LiteralR336LocalOverlapConstructedIsTrue :
+  round569LiteralR336LocalOverlapConstructed ≡ true
+round569LiteralR336LocalOverlapConstructedIsTrue =
+  R580.round580LiteralR336LocalOverlapReceiptConstructedIsTrue
+
+round569SameFinalOutputExplicitIsTrue :
+  round569SameFinalOutputExplicit ≡ true
+round569SameFinalOutputExplicitIsTrue =
+  R580.round580SameFinalOutputIsExplicitPremiseIsTrue
+
+round569ShellDecayEnvelopeMassClosedIsFalse :
+  round569ShellDecayEnvelopeMassClosed ≡ false
+round569ShellDecayEnvelopeMassClosedIsFalse = refl
 
 round569LiveCommutatorSpacetimeBudgetClosedIsFalse :
   round569LiveCommutatorSpacetimeBudgetClosed ≡ false
