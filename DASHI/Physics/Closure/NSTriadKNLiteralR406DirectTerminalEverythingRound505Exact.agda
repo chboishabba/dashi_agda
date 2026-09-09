@@ -90,9 +90,16 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --
 --       FactoredFull = Diagonal + 2 * LiteralWeightedRemainder.
 --
--- R548 then isolates the next same-object question: whether that exact diagonal
--- is an already-owned endpoint or time-derivative observable. Nearby generic
--- endpoint/time-derivative owners do not auto-pay the literal R547 diagonal.
+-- R548 isolates the diagonal semantic question. R549 then resolves its first
+-- exact layer by specializing the already-owned R290 weighted-flux identity to
+-- self pairs:
+--
+--   Diagonal = SelfGram + WeightedGramFluxTangent.
+--
+-- The self-pair positivity carrier is kept separate from R396's off-diagonal
+-- positivity witnesses. No new estimate or sign is manufactured; the remaining
+-- work is endpoint/time integration of the tangent and control of the self-Gram
+-- term on the literal carrier.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -163,3 +170,4 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545
 import DASHI.Physics.Closure.NSTriadKNFullSquareAsSpectatorRowsRound546Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSemanticBoundaryRound548Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalR290FluxDecompositionRound549Exact
