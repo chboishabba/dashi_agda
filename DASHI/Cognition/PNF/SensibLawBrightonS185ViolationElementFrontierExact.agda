@@ -8,26 +8,48 @@ open import Data.Empty using (⊥)
 
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
+import DASHI.Law.SensibLawBrightonPremisesConditionEvidenceExact as Condition
 
 ------------------------------------------------------------------------
--- BRIGHTON s 185: FIRST SURVIVING VIOLATION-ELEMENT RESIDUAL
+-- BRIGHTON s 185: SPLIT VIOLATION-ELEMENT FRONTIER
 --
--- Paid upstream:
---   * exact private Form 11 span -> bounded assertion -> +1 source support;
---   * public historical s 185 source/version envelope;
---   * existing applicability/violation compiler interfaces.
+-- The earlier frontier combined two different questions:
+--   1. did a material premises-condition/non-liveability problem exist and was
+--      it recognised by the managing agent by 24 January 2023?
+--   2. did the lessor/agent fail the exact s 185 maintenance duty at the legally
+--      relevant time, after accounting for repair chronology and other legal
+--      conditions?
 --
--- Not paid by those receipts:
---   whether the premises-condition / maintenance-failure merits proposition is
---   established for the exact event and WrongType.  The Form 11 is a tenant
---   assertion carrier; QSTARS is professional advice; the May QCAT order trail
---   concerns rent/order mechanics and does not state an s 185 premises-condition
---   merits finding in the source material reviewed.
+-- The reviewed private source corpus now pays (1) narrowly.  It does not pay
+-- (2), and therefore does not itself pay the resulting s 185 violation.
 ------------------------------------------------------------------------
+
+conditionElementReference : String
+conditionElementReference =
+  "Brighton material premises-condition / agent non-liveability recognition"
+
+maintenanceFailureElementReference : String
+maintenanceFailureElementReference =
+  "Brighton s185 maintenance-duty non-performance at relevant time"
+
+conditionElementEvaluation :
+  (wrongTypeReference : Ontology.StableId) →
+  Legal.WrongElementEvaluation
+conditionElementEvaluation wrong =
+  Legal.wrongElementEvaluation
+    wrong
+    conditionElementReference
+    Legal.elementSatisfied
+    []
+    "paid narrowly by BrightonPremisesConditionEvidenceExact; private raw carriers excluded from public repo"
+
+conditionElementDispositionIsSatisfied :
+  ∀ wrong →
+  Legal.disposition (conditionElementEvaluation wrong) ≡ Legal.elementSatisfied
+conditionElementDispositionIsSatisfied wrong = refl
 
 firstOpenElementReference : String
-firstOpenElementReference =
-  "Brighton s185 premises-condition / maintenance-failure merits element"
+firstOpenElementReference = maintenanceFailureElementReference
 
 firstOpenElementEvaluation :
   (wrongTypeReference : Ontology.StableId) →
@@ -38,44 +60,76 @@ firstOpenElementEvaluation wrong =
     firstOpenElementReference
     Legal.elementUnresolved
     []
-    "unresolved pending same-event merits evidence; assertion/advice/order-process carriers do not substitute"
+    "condition defect is separately paid; exact s185 non-performance still requires repair/remedy chronology and legal-element evaluation"
 
 firstOpenElementDispositionIsUnresolved :
   ∀ wrong →
   Legal.disposition (firstOpenElementEvaluation wrong) ≡ Legal.elementUnresolved
 firstOpenElementDispositionIsUnresolved wrong = refl
 
-data Form11AssertionPaysMeritsElement : Set where
-data QSTARSAdvicePaysMeritsElement : Set where
-data RentOrderPaysS185ConditionElement : Set where
-data LaterExitCarrierAutomaticallyPaysJanuaryCondition : Set where
+conditionBundlePaysNarrowCoordinate :
+  Condition.narrowConditionCoordinatePaid
+    Condition.canonicalBrightonPremisesConditionEvidenceBundle ≡ true
+conditionBundlePaysNarrowCoordinate = refl
 
-form11AssertionDoesNotPayMeritsElement : Form11AssertionPaysMeritsElement → ⊥
-form11AssertionDoesNotPayMeritsElement ()
+conditionBundleDoesNotPayMaintenanceFailure :
+  Condition.statutoryMaintenanceFailurePaid
+    Condition.canonicalBrightonPremisesConditionEvidenceBundle ≡ false
+conditionBundleDoesNotPayMaintenanceFailure = refl
 
-qstarsAdviceDoesNotPayMeritsElement : QSTARSAdvicePaysMeritsElement → ⊥
-qstarsAdviceDoesNotPayMeritsElement ()
+conditionBundleDoesNotPayViolation :
+  Condition.section185ViolationPaid
+    Condition.canonicalBrightonPremisesConditionEvidenceBundle ≡ false
+conditionBundleDoesNotPayViolation = refl
 
-rentOrderDoesNotPayS185ConditionElement : RentOrderPaysS185ConditionElement → ⊥
-rentOrderDoesNotPayS185ConditionElement ()
+data Form11AssertionAlonePaysMaintenanceFailure : Set where
+data QSTARSAdvicePaysMaintenanceFailure : Set where
+data NonLiveabilityNoticeAutomaticallyPaysMaintenanceFailure : Set where
+data RentOrderPaysS185MaintenanceFailure : Set where
+data LaterExitCarrierAutomaticallyPaysJanuaryMaintenanceFailure : Set where
+data SatisfiedConditionElementAutomaticallyCreatesViolation : Set where
 
-laterExitCarrierDoesNotAutoPayJanuaryCondition :
-  LaterExitCarrierAutomaticallyPaysJanuaryCondition → ⊥
-laterExitCarrierDoesNotAutoPayJanuaryCondition ()
+form11AssertionAloneDoesNotPayMaintenanceFailure :
+  Form11AssertionAlonePaysMaintenanceFailure → ⊥
+form11AssertionAloneDoesNotPayMaintenanceFailure ()
+
+qstarsAdviceDoesNotPayMaintenanceFailure : QSTARSAdvicePaysMaintenanceFailure → ⊥
+qstarsAdviceDoesNotPayMaintenanceFailure ()
+
+nonLiveabilityNoticeDoesNotAutoPayMaintenanceFailure :
+  NonLiveabilityNoticeAutomaticallyPaysMaintenanceFailure → ⊥
+nonLiveabilityNoticeDoesNotAutoPayMaintenanceFailure ()
+
+rentOrderDoesNotPayS185MaintenanceFailure : RentOrderPaysS185MaintenanceFailure → ⊥
+rentOrderDoesNotPayS185MaintenanceFailure ()
+
+laterExitCarrierDoesNotAutoPayJanuaryMaintenanceFailure :
+  LaterExitCarrierAutomaticallyPaysJanuaryMaintenanceFailure → ⊥
+laterExitCarrierDoesNotAutoPayJanuaryMaintenanceFailure ()
+
+satisfiedConditionDoesNotAutoCreateViolation :
+  SatisfiedConditionElementAutomaticallyCreatesViolation → ⊥
+satisfiedConditionDoesNotAutoCreateViolation ()
 
 record BrightonS185ViolationElementFrontierBoundary : Set where
   constructor brighton-s185-violation-element-frontier-boundary
   field
-    firstOpenElementExplicit : Bool
-    elementDispositionUnresolved : Bool
-    requiresSameEventMeritsEvidence : Bool
-    form11AssertionPaysMerits : Bool
-    qstarsAdvicePaysMerits : Bool
-    rentOrderPaysConditionMerits : Bool
-    laterExitCarrierAutomaticallyPaysJanuaryCondition : Bool
+    conditionElementExplicit : Bool
+    conditionElementSatisfied : Bool
+    maintenanceFailureElementExplicit : Bool
+    maintenanceFailureDispositionUnresolved : Bool
+    conditionAndMaintenanceFailureSeparated : Bool
+    requiresRepairChronologyForMaintenanceFailure : Bool
+    conditionBundlePaysViolation : Bool
+    nonLiveabilityNoticeAutomaticallyPaysMaintenanceFailure : Bool
+    qstarsAdvicePaysMaintenanceFailure : Bool
+    rentOrderPaysMaintenanceFailure : Bool
+    laterExitCarrierAutomaticallyPaysJanuaryMaintenanceFailure : Bool
+    conditionSatisfactionAutomaticallyCreatesViolation : Bool
 
 canonicalBrightonS185ViolationElementFrontierBoundary :
   BrightonS185ViolationElementFrontierBoundary
 canonicalBrightonS185ViolationElementFrontierBoundary =
   brighton-s185-violation-element-frontier-boundary
-    true true true false false false false
+    true true true true true true
+    false false false false false false
