@@ -1,6 +1,7 @@
 module DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Foundations.Base369Nat using (NonZero; _%_)
 
 ------------------------------------------------------------------------
 -- RADIX-NEUTRAL TINY REGISTER MACHINE
@@ -71,6 +72,9 @@ data Instruction : Set where
   storeMemory : Register → Address → Instruction
   addRegister : Register → Register → Instruction
   subRegister : Register → Register → Instruction
+  subImmediate : Register → Nat → Instruction
+  multiplyRegister : Register → Register → Instruction
+  multiplyModulo : Register → Register → (modulus : Nat) → NonZero modulus → Instruction
   jumpIfZero : Register → Address → Instruction
   jumpIfEqual : Register → Register → Address → Instruction
   jumpIfLess : Register → Register → Address → Instruction
@@ -158,6 +162,43 @@ step state with halted state
         (output state)
         false
         (suc (cycles state))
+...   | subImmediate target value =
+      machineState
+        (suc (pc state))
+        (program state)
+        (memory state)
+        (writeRegister
+          (registers state)
+          target
+          (minus (readRegister (registers state) target) value))
+        (output state)
+        false
+        (suc (cycles state))
+...   | multiplyRegister target source =
+      machineState
+        (suc (pc state))
+        (program state)
+        (memory state)
+        (writeRegister
+          (registers state)
+          target
+          (readRegister (registers state) target * readRegister (registers state) source))
+        (output state)
+        false
+        (suc (cycles state))
+...   | multiplyModulo target source modulus modulusNonZero =
+      machineState
+        (suc (pc state))
+        (program state)
+        (memory state)
+        (writeRegister
+          (registers state)
+          target
+          ((readRegister (registers state) target * readRegister (registers state) source)
+            % modulus {{modulusNonZero}}))
+        (output state)
+        false
+        (suc (cycles state))
 ...   | jumpIfZero reg target with readRegister (registers state) reg
 ...     | zero =
         machineState target (program state) (memory state) (registers state)
@@ -207,15 +248,6 @@ runFuel (suc fuel) state = runFuel fuel (step state)
 
 ------------------------------------------------------------------------
 -- COUNTDOWN: first nontrivial control-flow fixture.
---
--- r0 = input n
--- r1 = constant 1
---
--- 0: JZ  r0 4
--- 1: OUT r0
--- 2: SUB r0 r1
--- 3: JMP 0
--- 4: HALT
 ------------------------------------------------------------------------
 
 countdownProgram : Program
@@ -282,6 +314,9 @@ record TinyMachineBoundary : Set where
     storePresent : Bool
     addPresent : Bool
     subtractPresent : Bool
+    subtractImmediatePresent : Bool
+    multiplyPresent : Bool
+    proofCarryingMultiplyModuloPresent : Bool
     zeroBranchPresent : Bool
     equalityBranchPresent : Bool
     orderBranchPresent : Bool
@@ -295,5 +330,6 @@ record TinyMachineBoundary : Set where
 canonicalTinyMachineBoundary : TinyMachineBoundary
 canonicalTinyMachineBoundary =
   tinyMachineBoundary
-    true true true true true true true true true true true
+    true true true true true true true true
+    true true true true true true
     false false false
