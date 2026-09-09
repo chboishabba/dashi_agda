@@ -14,8 +14,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; Positive; NonNegative; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -24,11 +26,14 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNRationalCauchySchurComplementRound443Exact as R443
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3CauchyPSDRound446Exact as R446
 import DASHI.Physics.Closure.NSTriadKNPhysicalCauchyResolventCompletionRound447Exact as R447
+import DASHI.Physics.Closure.NSTriadKNDiagonalResolventRateFloorRound449Exact as R449
 import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
 import DASHI.Physics.Closure.NSTriadKNPhysicalDiagonalR298WeldRound451Exact as R451
+import DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact as R452
 import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedDoubleMixedMassRound456Exact as R456
 import DASHI.Physics.Closure.NSTriadKNPhysicalDiagonalEnergySquareEndpointRound457Exact as R457
 import DASHI.Physics.Closure.NSTriadKNDiagonalSelfFluxToR447Round549Exact as R549
@@ -43,9 +48,7 @@ diagonalFormNonnegative [] = ℚP.≤-refl
 diagonalFormNonnegative (cell ∷ rest) =
   let
     entry = R446.cauchyKernel cell cell
-    cross =
-      DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact.realHermitianCross
-        (R446.value cell) (R446.value cell)
+    cross = R179.realHermitianCross (R446.value cell) (R446.value cell)
 
     entryPositive = R443.cauchyEntryPositive
       (R446.rate cell) (R446.rate cell)
@@ -93,7 +96,14 @@ module Endpoint
   diagonalNonnegative = diagonalFormNonnegative Flux.Completion.physicalCells
 
   twoNonnegative : 0ℚ ≤ R549.two
-  twoNonnegative = ℚP.<⇒≤ (ℚP.positive⁻¹ R549.two)
+  twoNonnegative =
+    let
+      summed : 0ℚ + 0ℚ ≤ 1ℚ + 1ℚ
+      summed = ℚP.+-mono-≤ ℚP.0≤1 ℚP.0≤1
+      zeroPlusZero : 0ℚ + 0ℚ ≡ 0ℚ
+      zeroPlusZero = solve []
+    in
+    subst (λ lower → lower ≤ R549.two) zeroPlusZero summed
 
   literalSelfFluxNonnegative : 0ℚ ≤ Flux.literalSelfFluxSum
   literalSelfFluxNonnegative =
@@ -106,43 +116,33 @@ module Endpoint
             twoNNI = nonNegative twoNonnegative
             diagNNI : NonNegative Flux.Completion.diagonal
             diagNNI = nonNegative diagonalNonnegative
-            productNNI = ℚP.nonNeg*nonNeg⇒nonNeg R549.two Flux.Completion.diagonal
+            productNNI = ℚP.nonNeg*nonNeg⇒nonNeg
+              R549.two Flux.Completion.diagonal
         in ℚP.nonNegative⁻¹ _
     in
     subst (0ℚ ≤_) (sym Flux.literalSelfFluxIsTwiceR447Diagonal) productNN
 
+  endpointUpper : ℚ
+  endpointUpper =
+    R449.diagonalCeilingAt Energy.Diag.nu Energy.Diag.Floor.nuPositive
+      * (R452.fortyEight * Energy.energySquare)
+
   selfFluxEnergySquareUpper :
     (P : Energy.PhysicalHelicityReceipt) →
-    Flux.literalSelfFluxSum
-    ≤ R549.two *
-      (Energy.Diag.Floor.diagonalCeilingAt
-        (Field30.viscosity physicalSystem)
-        Energy.Diag.Floor.nuPositive
-       * (DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact.fortyEight
-          * Energy.energySquare))
+    Flux.literalSelfFluxSum ≤ R549.two * endpointUpper
   selfFluxEnergySquareUpper P =
     let
+      diagonalUpper : Flux.Completion.diagonal ≤ endpointUpper
       diagonalUpper = Energy.r447DiagonalEnergySquareEndpoint P
+
       scaledUpper :
-        R549.two * Flux.Completion.diagonal
-        ≤ R549.two *
-          (Energy.Diag.Floor.diagonalCeilingAt
-            (Field30.viscosity physicalSystem)
-            Energy.Diag.Floor.nuPositive
-           * (DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact.fortyEight
-              * Energy.energySquare))
+        R549.two * Flux.Completion.diagonal ≤ R549.two * endpointUpper
       scaledUpper =
         let instance twoNN = nonNegative twoNonnegative
         in ℚP.*-monoˡ-≤-nonNeg R549.two diagonalUpper
     in
     subst
-      (λ lower → lower ≤
-        R549.two *
-          (Energy.Diag.Floor.diagonalCeilingAt
-            (Field30.viscosity physicalSystem)
-            Energy.Diag.Floor.nuPositive
-           * (DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact.fortyEight
-              * Energy.energySquare)))
+      (λ lower → lower ≤ R549.two * endpointUpper)
       Flux.literalSelfFluxIsTwiceR447Diagonal
       scaledUpper
 
