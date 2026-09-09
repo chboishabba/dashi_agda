@@ -56,6 +56,38 @@ afterModelSeparationWallAdvancesToReplicationIdentity :
     ≡ Progress.scalingReplicationIdentityLeaf
 afterModelSeparationWallAdvancesToReplicationIdentity = Progress.afterModelSeparationFirstOpen
 
+laterAxesCanBeRetainedBeforeMassCurrentPayment :
+  Progress.sourceMaterialAxesAcquired Progress.outOfOrderRetainedAcquisition ≡ true
+laterAxesCanBeRetainedBeforeMassCurrentPayment = Progress.laterAxesMayAlreadyBeAcquired
+
+modelSeparationCanBeRetainedBeforeMassCurrentPayment :
+  Progress.modelClassSeparationAcquired Progress.outOfOrderRetainedAcquisition ≡ true
+modelSeparationCanBeRetainedBeforeMassCurrentPayment = Progress.modelSeparationDataMayAlreadyBeAcquired
+
+replicationMetadataCanBeRetainedBeforeMassCurrentPayment :
+  Progress.scalingReplicationIdentityAcquired Progress.outOfOrderRetainedAcquisition ≡ true
+replicationMetadataCanBeRetainedBeforeMassCurrentPayment = Progress.replicationMetadataMayAlreadyBeAcquired
+
+outOfOrderAcquisitionDoesNotSkipDependencyPayment :
+  Progress.firstOpenScientificWallLeaf Progress.outOfOrderRetainedPayment
+    ≡ Progress.massCurrentLeaf
+outOfOrderAcquisitionDoesNotSkipDependencyPayment = Progress.outOfOrderAcquisitionDoesNotSkipMassCurrentPayment
+
+physicalAcquisitionNeedNotFollowPromotionOrder :
+  Progress.physicalAcquisitionMustFollowPromotionOrder
+    Progress.canonicalScientificWallProgressionBoundary ≡ false
+physicalAcquisitionNeedNotFollowPromotionOrder = refl
+
+outOfOrderAcquisitionMayBeRetained :
+  Progress.outOfOrderAcquisitionMayBeRetained
+    Progress.canonicalScientificWallProgressionBoundary ≡ true
+outOfOrderAcquisitionMayBeRetained = refl
+
+outOfOrderAcquisitionDoesNotAutoPayDependency :
+  Progress.outOfOrderAcquisitionAutomaticallyPaysDependency
+    Progress.canonicalScientificWallProgressionBoundary ≡ false
+outOfOrderAcquisitionDoesNotAutoPayDependency = refl
+
 fullyPaidWallStopsSchedulingAcquisition :
   Progress.decisionForLeaf (Progress.firstOpenScientificWallLeaf Progress.fullyPaidWall)
     ≡ Progress.noFurtherScientificWallAcquisition
