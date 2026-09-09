@@ -87,6 +87,7 @@ import DASHI.Law.HerzogIncidentFascismComparatorValidation
 import DASHI.Law.CoerciveContactAuditValidation
 import DASHI.Law.SensibLawHealthRecordEvidenceExact
 import DASHI.Law.SensibLawLongitudinalHousingHealthExact
+import DASHI.Law.SensibLawGenericHealthLegacyBridgeExact
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything
 import DASHI.Law.SensibLawITIRParityEverything
 import DASHI.Law.SensibLawProofDirectedCorpusSearchEverything
