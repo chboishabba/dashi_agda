@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PublishedMembershipRound22
 -- or differentiated E2/Pi package.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -77,7 +78,7 @@ cmp119PublishedDensityIsBetaDensity :
   ∀ scale →
   CMP119.rho (R219.completeDensityAt (residual dataSet) scale)
   ≡ Beta.densityAt inputs scale
-cmp119PublishedDensityIsBetaDensity dataSet scale = Agda.Builtin.Equality.refl
+cmp119PublishedDensityIsBetaDensity dataSet scale = refl
 
 betaDrivenCMP119PublishedMembershipCompilerLevel : ProofLevel
 betaDrivenCMP119PublishedMembershipCompilerLevel = machineChecked
