@@ -2,24 +2,6 @@ module DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact where
 
 ------------------------------------------------------------------------
 -- COLOUR WHEEL / 9-SHEET / TERNARY PANTS GLUING
---
--- Exact finite interpretation:
---
---   3  = coarse phase trit,
---   6  = phase trit x strict nonzero orientation/chirality,
---   9  = phase trit x balanced seam/context trit,
---   27 = phase x seam/context x one further ternary refinement.
---
--- Thus the six-state colour wheel embeds into the nine-sheet as the states
--- whose second coordinate is nonzero.  The three missing nine-sheet states
--- have second coordinate zero and are therefore the canonical neutral seam
--- fibre.  Calling that neutral fibre a visual "waist" remains an analytic
--- same-object hypothesis; the finite theorem only identifies the zero seam
--- coordinate.
---
--- The existing ternary-pants frontier gives an exact arbitrary-depth address
--- <-> pants-path equivalence.  Here depth 2 realizes the nine-sheet and depth 3
--- realizes the 27-voxel.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -28,6 +10,7 @@ open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 open import Base369 using
   ( HexTruth
   ; TriTruth
+  ; hex-0 ; hex-1 ; hex-2 ; hex-3 ; hex-4 ; hex-5
   ; tri-low ; tri-mid ; tri-high
   )
 
@@ -39,10 +22,6 @@ import DASHI.Moonshine.JInvariantColourWheelWaveSignedBidiExact as Wheel
 import DASHI.Reasoning.TernaryPantsSynthesisS3BridgeExact as PantsS3
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as Pants
 import DASHI.Topology.TernaryPantsFrontierExact as Frontier
-
-------------------------------------------------------------------------
--- 1. Canonical carrier conversions.
-------------------------------------------------------------------------
 
 triTruthToKernel : TriTruth → Triadic.KernelTrit
 triTruthToKernel tri-low = Triadic.negativeTrit
@@ -111,7 +90,7 @@ slotKernelRoundTrip Pants.slot6 = refl
 slotKernelRoundTrip Pants.slot9 = refl
 
 ------------------------------------------------------------------------
--- 2. Six-state colour wheel as the strict-nonzero part of the nine-sheet.
+-- Six-state wheel = strict-nonzero seam subset of the nine-sheet.
 ------------------------------------------------------------------------
 
 record StrictWheelSheet : Set where
@@ -133,7 +112,12 @@ strictSheetToHex (strict-wheel-sheet p o) =
   Wheel.curlSix (Wheel.uncurledSix (kernelToTriTruth p) o)
 
 hexStrictRoundTrip : (h : HexTruth) → strictSheetToHex (hexToStrictSheet h) ≡ h
-hexStrictRoundTrip h = Wheel.curlAfterUncurl h
+hexStrictRoundTrip hex-0 = refl
+hexStrictRoundTrip hex-1 = refl
+hexStrictRoundTrip hex-2 = refl
+hexStrictRoundTrip hex-3 = refl
+hexStrictRoundTrip hex-4 = refl
+hexStrictRoundTrip hex-5 = refl
 
 strictHexRoundTrip : (s : StrictWheelSheet) → hexToStrictSheet (strictSheetToHex s) ≡ s
 strictHexRoundTrip (strict-wheel-sheet Triadic.negativeTrit Mobius.positive) = refl
@@ -144,10 +128,8 @@ strictHexRoundTrip (strict-wheel-sheet Triadic.zeroTrit Mobius.negative) = refl
 strictHexRoundTrip (strict-wheel-sheet Triadic.positiveTrit Mobius.negative) = refl
 
 strictSheetToNine : StrictWheelSheet → Triadic.NineSheet
-strictSheetToNine (strict-wheel-sheet p Mobius.positive) =
-  p , Triadic.positiveTrit
-strictSheetToNine (strict-wheel-sheet p Mobius.negative) =
-  p , Triadic.negativeTrit
+strictSheetToNine (strict-wheel-sheet p Mobius.positive) = p , Triadic.positiveTrit
+strictSheetToNine (strict-wheel-sheet p Mobius.negative) = p , Triadic.negativeTrit
 
 colourWheelNine : HexTruth → Triadic.NineSheet
 colourWheelNine h = strictSheetToNine (hexToStrictSheet h)
@@ -161,37 +143,32 @@ data NonzeroSeamCoordinate : Triadic.KernelTrit → Set where
 
 colourWheelAlwaysHasNonzeroSeam :
   (h : HexTruth) → NonzeroSeamCoordinate (proj₂ (colourWheelNine h))
-colourWheelAlwaysHasNonzeroSeam h with Mobius.hexOrientationPolarity h
-... | Mobius.positive = positiveSeam
-... | Mobius.negative = negativeSeam
-
-------------------------------------------------------------------------
--- 3. Möbius half-turn preserves phase and flips only seam chirality in the
---    nine-sheet embedding.
-------------------------------------------------------------------------
+colourWheelAlwaysHasNonzeroSeam hex-0 = positiveSeam
+colourWheelAlwaysHasNonzeroSeam hex-1 = positiveSeam
+colourWheelAlwaysHasNonzeroSeam hex-2 = positiveSeam
+colourWheelAlwaysHasNonzeroSeam hex-3 = negativeSeam
+colourWheelAlwaysHasNonzeroSeam hex-4 = negativeSeam
+colourWheelAlwaysHasNonzeroSeam hex-5 = negativeSeam
 
 flipNineSeam : Triadic.NineSheet → Triadic.NineSheet
 flipNineSeam (p , s) = p , Triadic.negateTrit s
 
 mobiusWheelBecomesNineSeamFlip :
   (h : HexTruth) →
-  colourWheelNine (Mobius.mobiusTransport h) ≡
-  flipNineSeam (colourWheelNine h)
-mobiusWheelBecomesNineSeamFlip h with h
-... | Base369.hex-0 = refl
-... | Base369.hex-1 = refl
-... | Base369.hex-2 = refl
-... | Base369.hex-3 = refl
-... | Base369.hex-4 = refl
-... | Base369.hex-5 = refl
+  colourWheelNine (Mobius.mobiusTransport h) ≡ flipNineSeam (colourWheelNine h)
+mobiusWheelBecomesNineSeamFlip hex-0 = refl
+mobiusWheelBecomesNineSeamFlip hex-1 = refl
+mobiusWheelBecomesNineSeamFlip hex-2 = refl
+mobiusWheelBecomesNineSeamFlip hex-3 = refl
+mobiusWheelBecomesNineSeamFlip hex-4 = refl
+mobiusWheelBecomesNineSeamFlip hex-5 = refl
 
 neutralSeamFixedByFlip :
-  (p : Triadic.KernelTrit) →
-  flipNineSeam (neutralSeamSheet p) ≡ neutralSeamSheet p
+  (p : Triadic.KernelTrit) → flipNineSeam (neutralSeamSheet p) ≡ neutralSeamSheet p
 neutralSeamFixedByFlip p = refl
 
 ------------------------------------------------------------------------
--- 4. Nine-sheet = depth-two pants path.
+-- Nine-sheet = depth-two pants path.
 ------------------------------------------------------------------------
 
 nineToPants2 : Triadic.NineSheet → Frontier.PantsPath 2
@@ -202,30 +179,16 @@ pants2ToNine (a vcons b vcons vnil) = slotToKernel a , slotToKernel b
 
 ninePantsRoundTrip :
   (sheet : Triadic.NineSheet) → pants2ToNine (nineToPants2 sheet) ≡ sheet
-ninePantsRoundTrip (Triadic.negativeTrit , Triadic.negativeTrit) = refl
-ninePantsRoundTrip (Triadic.negativeTrit , Triadic.zeroTrit) = refl
-ninePantsRoundTrip (Triadic.negativeTrit , Triadic.positiveTrit) = refl
-ninePantsRoundTrip (Triadic.zeroTrit , Triadic.negativeTrit) = refl
-ninePantsRoundTrip (Triadic.zeroTrit , Triadic.zeroTrit) = refl
-ninePantsRoundTrip (Triadic.zeroTrit , Triadic.positiveTrit) = refl
-ninePantsRoundTrip (Triadic.positiveTrit , Triadic.negativeTrit) = refl
-ninePantsRoundTrip (Triadic.positiveTrit , Triadic.zeroTrit) = refl
-ninePantsRoundTrip (Triadic.positiveTrit , Triadic.positiveTrit) = refl
+ninePantsRoundTrip (a , b)
+  rewrite kernelSlotRoundTrip a | kernelSlotRoundTrip b = refl
 
 pantsNineRoundTrip :
   (path : Frontier.PantsPath 2) → nineToPants2 (pants2ToNine path) ≡ path
-pantsNineRoundTrip (Pants.slot3 vcons Pants.slot3 vcons vnil) = refl
-pantsNineRoundTrip (Pants.slot3 vcons Pants.slot6 vcons vnil) = refl
-pantsNineRoundTrip (Pants.slot3 vcons Pants.slot9 vcons vnil) = refl
-pantsNineRoundTrip (Pants.slot6 vcons Pants.slot3 vcons vnil) = refl
-pantsNineRoundTrip (Pants.slot6 vcons Pants.slot6 vcons vnil) = refl
-pantsNineRoundTrip (Pants.slot6 vcons Pants.slot9 vcons vnil) = refl
-pantsNineRoundTrip (Pants.slot9 vcons Pants.slot3 vcons vnil) = refl
-pantsNineRoundTrip (Pants.slot9 vcons Pants.slot6 vcons vnil) = refl
-pantsNineRoundTrip (Pants.slot9 vcons Pants.slot9 vcons vnil) = refl
+pantsNineRoundTrip (a vcons b vcons vnil)
+  rewrite slotKernelRoundTrip a | slotKernelRoundTrip b = refl
 
 ------------------------------------------------------------------------
--- 5. Ternary 27-point = depth-three pants path.
+-- Ternary 27-point = depth-three pants path.
 ------------------------------------------------------------------------
 
 voxel27ToPants3 : Fabric.Ternary27Point → Frontier.PantsPath 3
@@ -244,43 +207,23 @@ pants3ToVoxel27 (a vcons b vcons c vcons vnil) =
 
 voxelPantsRoundTrip :
   (v : Fabric.Ternary27Point) → pants3ToVoxel27 (voxel27ToPants3 v) ≡ v
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspPosOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspPosOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspZero SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspZero SSP.sspPosOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspPosOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero) = refl
-voxelPantsRoundTrip (Fabric.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne) = refl
+voxelPantsRoundTrip (Fabric.ternary27Point x y z)
+  rewrite kernelSlotRoundTrip (sspToKernel x)
+        | kernelSlotRoundTrip (sspToKernel y)
+        | kernelSlotRoundTrip (sspToKernel z)
+        | sspKernelRoundTrip x
+        | sspKernelRoundTrip y
+        | sspKernelRoundTrip z = refl
 
 pantsVoxelRoundTrip :
   (path : Frontier.PantsPath 3) → voxel27ToPants3 (pants3ToVoxel27 path) ≡ path
-pantsVoxelRoundTrip
-  (a vcons b vcons c vcons vnil)
-  rewrite slotKernelRoundTrip a | slotKernelRoundTrip b | slotKernelRoundTrip c = refl
-
-------------------------------------------------------------------------
--- 6. Promotion boundary.
-------------------------------------------------------------------------
+pantsVoxelRoundTrip (a vcons b vcons c vcons vnil)
+  rewrite kernelSSPRoundTrip (slotToKernel a)
+        | kernelSSPRoundTrip (slotToKernel b)
+        | kernelSSPRoundTrip (slotToKernel c)
+        | slotKernelRoundTrip a
+        | slotKernelRoundTrip b
+        | slotKernelRoundTrip c = refl
 
 record ColourWheelNinePantsBoundary : Set where
   constructor colour-wheel-nine-pants-boundary
@@ -295,5 +238,4 @@ record ColourWheelNinePantsBoundary : Set where
 
 canonicalColourWheelNinePantsBoundary : ColourWheelNinePantsBoundary
 canonicalColourWheelNinePantsBoundary =
-  colour-wheel-nine-pants-boundary
-    true true true true true false false
+  colour-wheel-nine-pants-boundary true true true true true false false
