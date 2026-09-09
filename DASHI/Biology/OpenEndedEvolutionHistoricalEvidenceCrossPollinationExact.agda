@@ -49,7 +49,8 @@ open GenotypeDNARealisation public
 -- Neural, thought/content, memory and learning remain distinct coordinates.
 -- A shared current bottleneck code is already known to be weaker than future
 -- neural equivalence, so no current cognitive projection is treated as a full
--- recoverable history.
+-- recoverable history.  Memory is carried in the repo-native append-only /
+-- versioned fibre rather than replacing prior states.
 ------------------------------------------------------------------------
 
 record CognitiveHistoryCoordinate : Set₁ where
@@ -59,11 +60,11 @@ record CognitiveHistoryCoordinate : Set₁ where
 
     neuralState : Neural.FineNeuralState
     thoughtContent : ThoughtContent
-    memory : Memory.MemoryFibre
+    versionedMemory : Memory.VersionedMemory
     learning : Learning.LearningReceipt
 
     learningStartsFromCurrentMemory :
-      Learning.before learning ≡ memory
+      Learning.before learning ≡ Memory.current versionedMemory
 
     neuralReference : String
     thoughtReference : String
@@ -207,11 +208,11 @@ historyToCapabilityNonStabilising :
   ∀ {E P R} →
   HistoryBearingCapabilityNonStabilising {E} {P} R →
   OpenEnded.CapabilityNonStabilising R
-historyToCapabilityNonStabilising H =
+historyToCapabilityNonStabilising {R = R} H =
   OpenEnded.capability-non-stabilising
     (λ generation →
       subst
-        (OpenEnded.LaterSelectedCapabilityNovelty _)
+        (λ earlier → OpenEnded.LaterSelectedCapabilityNovelty R earlier)
         (episodeStartsAt H generation)
         (novelty (episodeAfter H generation)))
     (evidenceProgrammeReference H)
