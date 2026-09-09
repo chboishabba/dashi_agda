@@ -24,9 +24,15 @@ open import Data.Integer.Solver renaming (module +-*-Solver to ℤSolver)
 open ℤSolver using (solve; _:+_; _:*_; con; _:=_)
 open import Data.Nat.Base using (NonZero)
 open import Data.Nat.Solver using (module +-*-Solver)
-open +-*-Solver using () renaming (solve to solveNat; _:+_ to _:+ₙ_; _:*_ to _:*ₙ_; con to conNat; _:=_ to _:=ₙ_)
+open +-*-Solver using () renaming
+  ( solve to solveNat
+  ; _:+_ to _:+ₙ_
+  ; _:*_ to _:*ₙ_
+  ; con to conNat
+  ; _:=_ to _:=ₙ_
+  )
 open import Data.Rational.Unnormalised as ℚ using
-  (ℚᵘ; _/_; _+_; _-_; _*_; _≃_; *≡*)
+  (ℚᵘ; _/_; _+_; _-_; -_; _*_; _≃_; *≡*)
 import Data.Rational.Unnormalised.Properties as ℚP
 import NonReflectiveQ as ℚSolver
 
