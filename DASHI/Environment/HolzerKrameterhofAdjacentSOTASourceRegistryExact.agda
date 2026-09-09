@@ -98,6 +98,20 @@ constructedWetlandVermifiltrationReview2026 = adjacent-sota-source
   "Planted treatment systems share candidate mechanisms with vegetated ponds but are not definitionally the same intervention and do not validate Krameterhof performance."
   Attribution.externalSourceOwner
 
+pondAquacultureTreatmentReview2024 : AdjacentSOTASource
+pondAquacultureTreatmentReview2024 = adjacent-sota-source
+  "Simon Tabrett; Ian Ramsay; Brian Paterson; Michele A. Burford"
+  "A review of the benefits and limitations of waste nutrient treatment in aquaculture pond facilities"
+  "Reviews in Aquaculture 16(4), 1766-1786"
+  2024
+  "DOI 10.1111/raq.12921"
+  constructedWetlandTreatment
+  systematicReviewOfAdjacentClass
+  review
+  "Reviews settlement ponds, constructed wetlands and other pond-aquaculture treatment routes. Constructed-wetland performance depends on hydraulic design, retention time, vegetation, microbial processes and scale; reported nutrient removal is variable and wetlands can also remobilise nutrients."
+  "Does not validate Krameterhof planted ponds or establish that vegetation, detention or repeated reuse necessarily improves a downstream pond."
+  Attribution.externalSourceOwner
+
 silvopastureSystematicReview2025 : AdjacentSOTASource
 silvopastureSystematicReview2025 = adjacent-sota-source
   "Ripamonti et al.; full author list recoverable through DOI"
@@ -145,6 +159,7 @@ canonicalKrameterhofAdjacentSources =
   freshwaterAquacultureWastewaterReview2025 ∷
   troutNatureBasedTreatment2025 ∷
   constructedWetlandVermifiltrationReview2026 ∷
+  pondAquacultureTreatmentReview2024 ∷
   silvopastureSystematicReview2025 ∷
   coolingAtlasUnderground2025 ∷
   earthCoupledPotatoStorage2022 ∷ []
