@@ -3,12 +3,17 @@ module DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallValid
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (true; false)
 
+import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallBidiExact as Wall
 
 currentWallStartsAtMassCurrent :
   Wall.currentScientificWallDiscriminator
     ≡ Wall.componentResolvedMassCurrent
 currentWallStartsAtMassCurrent = Wall.currentScientificWallStartsAtMassCurrent
+
+currentWallRequestsEmpiricalEvidence :
+  Wall.currentScientificWallProducer ≡ Search.empiricalEvidenceProducer
+currentWallRequestsEmpiricalEvidence = Wall.currentScientificWallProducerIsEmpiricalEvidence
 
 chargeCollisionSelectsMassCurrent :
   Wall.requiredDiscriminator Wall.chargeVsMassCurrentCollision
