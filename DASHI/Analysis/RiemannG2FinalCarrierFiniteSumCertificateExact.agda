@@ -9,14 +9,27 @@ import DASHI.Core.ProofCarryingFiniteSumEnclosureExact as Cert
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
-import DASHI.Analysis.RiemannG2FinalNearIndexedLiteralModelCompilerExact as Literal
+import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as Literal
+
+------------------------------------------------------------------------
+-- FINAL-CARRIER PROOF-CARRYING FINITE-SUM CERTIFICATE
+--
+-- Representation comes first.  The evaluator-independent FinalNearLiteralKernel
+-- owns the exact theorem
+--
+--   nearResponseAt(chosen J) = finiteNearSum(cellResponse).
+--
+-- A proof-carrying finite evaluator consumes that kernel downstream.  Its exact
+-- fold is identified with the literal finite sum, and therefore with the actual
+-- final nearResponseAt(J).  No selected Weil window, determinant-q consumer, or
+-- evaluator-indexed representation object is required.
+------------------------------------------------------------------------
 
 record FinalCarrierFiniteSumCertificate
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
     (offInput : Direct.DirectLiteralOffTargetInput S transport)
-    {finiteInput}
-    (kernel : Literal.FinalNearIndexedLiteralKernel offInput finiteInput) : Set₁ where
+    (kernel : Literal.FinalNearLiteralKernel offInput) : Set₁ where
   private
     Scalar = NearFar.Scalar S
   field
@@ -40,10 +53,9 @@ record FinalCarrierFiniteSumCertificate
 open FinalCarrierFiniteSumCertificate public
 
 finalCarrier :
-  forall {S transport offInput finiteInput kernel} ->
+  forall {S transport offInput kernel} ->
   FinalCarrierFiniteSumCertificate
-    {S = S} {transport = transport} offInput
-    {finiteInput = finiteInput} kernel ->
+    {S = S} {transport = transport} offInput kernel ->
   Cert.FiniteAdditiveCarrier
 finalCarrier {S = S} input = record
   { Cert.Scalar = NearFar.Scalar S
@@ -52,10 +64,9 @@ finalCarrier {S = S} input = record
   }
 
 certifiedFoldIsFinalNearResponse :
-  forall {S transport offInput finiteInput kernel} ->
+  forall {S transport offInput kernel} ->
   (input : FinalCarrierFiniteSumCertificate
-    {S = S} {transport = transport} offInput
-    {finiteInput = finiteInput} kernel) ->
+    {S = S} {transport = transport} offInput kernel) ->
   Cert.foldScalars (finalCarrier input)
     (Cert.mapValues
       (Cert.ProofCarryingFiniteSumEnclosure.evaluateTerm (certificate input))
@@ -72,12 +83,15 @@ certifiedFoldIsFinalNearResponse {kernel = kernel} input =
   trans : forall {A : Set} {x y z : A} -> x ≡ y -> y ≡ z -> x ≡ z
   trans refl yz = yz
 
+------------------------------------------------------------------------
+-- The generic Within receipt becomes a receipt on the actual final near scalar.
+------------------------------------------------------------------------
+
 record CertifiedFinalNearEvaluation
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
     (offInput : Direct.DirectLiteralOffTargetInput S transport)
-    {finiteInput}
-    (kernel : Literal.FinalNearIndexedLiteralKernel offInput finiteInput)
+    (kernel : Literal.FinalNearLiteralKernel offInput)
     (input : FinalCarrierFiniteSumCertificate offInput kernel) : Set₁ where
   private
     cert = certificate input
@@ -93,10 +107,9 @@ record CertifiedFinalNearEvaluation
 open CertifiedFinalNearEvaluation public
 
 compileCertifiedFinalNearEvaluation :
-  forall {S transport offInput finiteInput kernel} ->
+  forall {S transport offInput kernel} ->
   (input : FinalCarrierFiniteSumCertificate
-    {S = S} {transport = transport} offInput
-    {finiteInput = finiteInput} kernel) ->
+    {S = S} {transport = transport} offInput kernel) ->
   CertifiedFinalNearEvaluation offInput kernel input
 compileCertifiedFinalNearEvaluation input
   with certifiedFoldIsFinalNearResponse input
@@ -107,12 +120,15 @@ compileCertifiedFinalNearEvaluation input
   ; evaluationReference = certificateReference input
   }
 
+------------------------------------------------------------------------
+-- Ordered upper specialization.
+------------------------------------------------------------------------
+
 record FinalCarrierFiniteSumUpper
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
     (offInput : Direct.DirectLiteralOffTargetInput S transport)
-    {finiteInput}
-    (kernel : Literal.FinalNearIndexedLiteralKernel offInput finiteInput)
+    (kernel : Literal.FinalNearLiteralKernel offInput)
     (input : FinalCarrierFiniteSumCertificate offInput kernel) : Set₁ where
   field
     upperCertificate :
@@ -125,10 +141,9 @@ record FinalCarrierFiniteSumUpper
 open FinalCarrierFiniteSumUpper public
 
 certifiedFinalNearBelowUpper :
-  forall {S transport offInput finiteInput kernel input} ->
+  forall {S transport offInput kernel input} ->
   (upper : FinalCarrierFiniteSumUpper
-    {S = S} {transport = transport} offInput
-    {finiteInput = finiteInput} kernel input) ->
+    {S = S} {transport = transport} offInput kernel input) ->
   Cert.ProofCarryingFiniteSumUpperEnclosure.lessOrEqual
     (upperCertificate upper)
     (Transport.nearResponseAt transport (Direct.chosenCutoff offInput))
@@ -142,6 +157,8 @@ certifiedFinalNearBelowUpper {input = input} upper
 record FinalCarrierFiniteSumCertificateBoundary : Set where
   constructor final-carrier-finite-sum-certificate-boundary
   field
+    evaluatorIndexedKernelRequired : Bool
+    evaluatorIndexedKernelRequiredIsFalse : evaluatorIndexedKernelRequired ≡ false
     selectedWeilWindowRequired : Bool
     selectedWeilWindowRequiredIsFalse : selectedWeilWindowRequired ≡ false
     determinantDirectProducerRequired : Bool
@@ -164,9 +181,10 @@ canonicalFinalCarrierFiniteSumCertificateBoundary =
   final-carrier-finite-sum-certificate-boundary
     false refl
     false refl
+    false refl
     true refl
     true refl
     true refl
     false refl
     false refl
-    "Reuse the domain-neutral ProofCarryingFiniteSumEnclosure directly on the final NearFar scalar. Once the exact certificate fold is identified with the literal final-near sum, the existing nearResponseAt(J)=literal sum theorem transports both the Within evaluation and any ordered certified upper to the actual final near response. No selected Weil window or determinant-q producer is required. Finiteness/certification alone does not prove the post-crossing strict ClusterResponse margin or RH."
+    "Representation is evaluator-independent. Reuse ProofCarryingFiniteSumEnclosure directly on the final NearFar scalar and identify only its exact fold with the already-realized literal finite sum. The kernel theorem then transports both Within and any ordered certified upper to actual nearResponseAt(J). No selected Weil window, determinant-q producer, or evaluator-indexed kernel is required. Certification alone still does not prove the strict ClusterResponse margin or RH."
