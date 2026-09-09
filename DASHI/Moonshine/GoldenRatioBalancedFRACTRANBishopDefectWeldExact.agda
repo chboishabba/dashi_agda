@@ -7,18 +7,19 @@ module DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopDefectWeldExact where
 --
 --   r_Q^2 - r_Q - 1 ~= 1/q^2.
 --
--- This module transports that theorem through the vendored Bishop embedding.
--- No new analytic estimate is introduced: multiplication/subtraction
--- compatibility is exactly the existing RealProperties morphism surface.
+-- This module transports that theorem through the vendored Bishop embedding
+-- and then reuses the already-proved reciprocal-square convergence theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_,_)
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _-_; -_; _*_; _≃_)
 import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
 import RealProperties as BishopP
+import Sequence as BishopSequence
 
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact as Ratio
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANRationalDefectExact as RationalDefect
@@ -111,7 +112,22 @@ macroBishopDefectEqualsReciprocalSquare n =
         (ℚP.≃-reflexive (rationalReciprocalSquareAgrees n))))
 
 ------------------------------------------------------------------------
--- 4. Frontier.
+-- 4. Pointwise equality plus the existing reciprocal-square limit gives the
+--    actual Fibonacci quadratic-defect limit for free.
+------------------------------------------------------------------------
+
+macroBishopDefectConvergesZero :
+  BishopSequence._ConvergesTo_
+    macroBishopDefect BishopReal.0ℝ
+macroBishopDefectConvergesZero =
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    {xs = Reciprocal.reciprocalSquareBishop}
+    {ys = macroBishopDefect}
+    (λ n → BishopP.≃-symm (macroBishopDefectEqualsReciprocalSquare n))
+    (BishopReal.0ℝ , Reciprocal.reciprocalSquareSequenceConvergesZero)
+
+------------------------------------------------------------------------
+-- 5. Frontier.
 ------------------------------------------------------------------------
 
 record BishopDefectWeldFrontier : Set where
@@ -121,9 +137,10 @@ record BishopDefectWeldFrontier : Set where
     bishopEmbeddingPreservesDefectExpression : Bool
     sameReciprocalSquareAsConvergenceOwner : Bool
     macroBishopDefectEqualsConvergentSequence : Bool
+    macroQuadraticDefectConvergesZero : Bool
     conjugateFactorLowerBoundPaid : Bool
     finalRatioLimitPaid : Bool
 
 canonicalBishopDefectWeldFrontier : BishopDefectWeldFrontier
 canonicalBishopDefectWeldFrontier =
-  bishop-defect-weld-frontier true true true true false false
+  bishop-defect-weld-frontier true true true true true false false
