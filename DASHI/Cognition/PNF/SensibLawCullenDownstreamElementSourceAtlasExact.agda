@@ -14,14 +14,15 @@ import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact a
 import DASHI.Cognition.PNF.SensibLawRecentDutyCaseSourceAtlasExact as PrimarySources
 import DASHI.Cognition.PNF.SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact as Downstream
 import DASHI.Cognition.PNF.SensibLawCullenEdelman64WrongTypeSourceRealisationExact as Edelman64
+import DASHI.Cognition.PNF.SensibLawCullenVicariousLiabilityFamilyAtomicExact as Vicarious
 
 ------------------------------------------------------------------------
 -- CULLEN DOWNSTREAM ELEMENT SOURCE ATLAS
 --
 -- Duty and breach are different elements of the same negligence WrongType.
 -- Edelman [64] is retained for the duty route.  The joint reasons at [48] are
--- retained separately for the breach disposition.  Neither source attachment
--- silently pays the other element or a later liability classification.
+-- retained separately for the breach disposition.  The vicarious family is now
+-- independently source-paid by the 1983 Act + Cullen [100].
 ------------------------------------------------------------------------
 
 cullenPrimarySource : Source.AttributedSource
@@ -43,25 +44,29 @@ joint48BreachAttachment :
   Downstream.PrimarySourceAttachment Downstream.wrongElementEvaluationStage
 joint48BreachAttachment =
   Downstream.primary-source-attachment
-    cullenPrimarySource
-    joint48Locator
-    joint48BreachNotEstablished
-    "Joint reasons [48] are attached to the breach-element disposition only; the citation does not itself create authority or determine another element."
+    cullenPrimarySource joint48Locator joint48BreachNotEstablished
+    "Joint reasons [48] are attached to the breach-element disposition only; the citation does not itself define general breach doctrine, create authority or determine another element."
     (Source.citationCreatesAuthorityIsFalse cullenPrimarySource)
+
+------------------------------------------------------------------------
+-- Compatibility surface only.
+--
+-- This old `WrongElementPrimarySource` shape predates the atomic split between
+-- test-definition source and case-outcome source.  It remains for downstream
+-- compatibility, but is NOT the canonical source-conditioned breach definition.
+-- The canonical route is the NSW CLA atomic test-definition atlas plus Cullen
+-- case-outcome evidence.
+------------------------------------------------------------------------
 
 cullenBreachElementDefinitionSource :
   Downstream.WrongElementPrimarySource Negligence.breachElement
 cullenBreachElementDefinitionSource =
   Downstream.wrongelement-primary-source
     (Downstream.primary-source-attachment
-      cullenPrimarySource
-      joint48Locator
-      joint48BreachNotEstablished
-      "Cullen [48] is retained as a primary source relevant to the concrete breach element in this case; generic breach doctrine may require additional sources."
+      cullenPrimarySource joint48Locator joint48BreachNotEstablished
+      "LEGACY COMPATIBILITY ONLY: Cullen [48] supplies the case breach disposition, not the general breach-test definition. Use the atomic NSW CLA source atlas for governing test semantics."
       (Source.citationCreatesAuthorityIsFalse cullenPrimarySource))
-    refl
-    "element:negligence:breach"
-    joint48Locator
+    refl "element:negligence:breach" joint48Locator
 
 cullenBreachEvaluation : Legal.WrongElementEvaluation
 cullenBreachEvaluation = Legal.wrongElementEvaluation
@@ -76,17 +81,12 @@ cullenSourceAttributedBreachEvaluation :
 cullenSourceAttributedBreachEvaluation =
   Downstream.source-attributed-element-evaluation
     cullenBreachElementDefinitionSource
-    cullenBreachEvaluation
-    refl
+    cullenBreachEvaluation refl
     (joint48BreachAttachment ∷ [])
-    "Cullen breach element evaluated separately from the Edelman [64] duty route."
+    "Legacy projection of Cullen breach outcome. Canonical atomic semantics separate statutory/common-law test definition from [48] outcome evidence."
 
 ------------------------------------------------------------------------
--- Liability-family frontier.
---
--- The generic downstream discipline has typed families, but this module does
--- not guess which one pays the State/NSW liability consumer.  That must be read
--- from an exact primary source and its applicable statutory/common-law frame.
+-- Liability-family frontier is now source-paid, but merits remain independent.
 ------------------------------------------------------------------------
 
 data CullenLiabilityFamilyFrontier : Set where
@@ -94,28 +94,38 @@ data CullenLiabilityFamilyFrontier : Set where
   liabilityFamilySourcePaid : Downstream.LiabilityFamily → CullenLiabilityFamilyFrontier
 
 currentCullenLiabilityFamilyFrontier : CullenLiabilityFamilyFrontier
-currentCullenLiabilityFamilyFrontier = liabilityFamilyUnresolved
+currentCullenLiabilityFamilyFrontier =
+  liabilityFamilySourcePaid Downstream.vicariousLiability
+
+cullenFamilyPaymentReceipt : Vicarious.CullenVicariousFamilyReceipt
+cullenFamilyPaymentReceipt = Vicarious.cullenVicariousFamilyReceipt
 
 data DutySourcePaysBreach : Set where
 data BreachDispositionDeterminesLiabilityFamily : Set where
 data NoBreachFindingDefinesGeneralBreachDoctrine : Set where
 data SameJudgmentCollapsesElementSourceRoles : Set where
+data VicariousFamilyPaymentEstablishesUnderlyingTort : Set where
+data LegacyBreachDefinitionAttachmentIsCanonicalAtomicDefinition : Set where
 
 dutySourceDoesNotPayBreach : DutySourcePaysBreach → ⊥
 dutySourceDoesNotPayBreach ()
 
-breachDoesNotDetermineLiabilityFamily :
-  BreachDispositionDeterminesLiabilityFamily → ⊥
+breachDoesNotDetermineLiabilityFamily : BreachDispositionDeterminesLiabilityFamily → ⊥
 breachDoesNotDetermineLiabilityFamily ()
 
-caseDispositionDoesNotDefineAllBreachDoctrine :
-  NoBreachFindingDefinesGeneralBreachDoctrine → ⊥
+caseDispositionDoesNotDefineAllBreachDoctrine : NoBreachFindingDefinesGeneralBreachDoctrine → ⊥
 caseDispositionDoesNotDefineAllBreachDoctrine ()
 
-sameJudgmentDoesNotCollapseElementRoles :
-  SameJudgmentCollapsesElementSourceRoles → ⊥
-sameJudgmentDoesNotCollapseElementSourceRoles ()
+sameJudgmentDoesNotCollapseElementRoles : SameJudgmentCollapsesElementSourceRoles → ⊥
+sameJudgmentDoesNotCollapseElementRoles ()
+
+familyPaymentDoesNotEstablishTort : VicariousFamilyPaymentEstablishesUnderlyingTort → ⊥
+familyPaymentDoesNotEstablishTort ()
+
+legacyBreachDefinitionAttachmentIsNotCanonicalAtomicDefinition :
+  LegacyBreachDefinitionAttachmentIsCanonicalAtomicDefinition → ⊥
+legacyBreachDefinitionAttachmentIsNotCanonicalAtomicDefinition ()
 
 cullenDownstreamReading : String
 cullenDownstreamReading =
-  "Cullen now carries separate primary-source attachments for the Edelman [64] duty route and joint-reasons [48] breach disposition. Breach is unsatisfied on the encoded [48] case disposition, but liability-family classification remains unresolved until independently source-paid."
+  "Cullen retains separate [64] duty and [48] breach-outcome sources. The liability-family frontier is independently source-paid as vicarious liability by the Law Reform (Vicarious Liability) Act 1983 (NSW) plus Cullen [100]. This family classification does not establish the underlying negligence violation; the legacy breach-definition attachment is projection-only and the atomic statutory/common-law definition/outcome split is canonical."
