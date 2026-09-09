@@ -5,6 +5,14 @@ module DASHI.Physics.GR where
 import DASHI.Physics.GR.RiemannTensor
 import DASHI.Physics.GR.EinsteinTensor
 import DASHI.Physics.GR.StressEnergyCompatibility
+import DASHI.Physics.GR.GravitationalObservationSourceAtlasExact
+import DASHI.Physics.GR.GravitationalObservationBidiExact
+import DASHI.Physics.GR.GravitationalWaveTheoryTestBidiExact
+import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact
+import DASHI.Physics.GR.GravitationalMultiScaleTheoryFingerprintBidiExact
+import DASHI.Physics.GR.GravitationalEpistemicLineageExact
+import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact
+import DASHI.Physics.GR.GravitationalAttributedMultiScaleFingerprintBidiExact
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
