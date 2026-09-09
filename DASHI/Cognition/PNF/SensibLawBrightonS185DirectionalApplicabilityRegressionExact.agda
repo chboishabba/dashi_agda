@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawDirectionalEvidenceApplicabilityBridgeExact as Directional
 import DASHI.Cognition.PNF.SensibLawApplicabilityPrerequisiteMeetExact as Meet
+import DASHI.Cognition.PNF.SensibLawViolationPrerequisiteMeetExact as ViolationMeet
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as Source
 import DASHI.Interop.SensibLawNatSourcePropositionVerificationExact as Verify
@@ -16,6 +17,21 @@ import DASHI.Law.SensibLawHousingEpisodeEvidenceLineageExact as Housing
 
 ------------------------------------------------------------------------
 -- BRIGHTON / RTRA s 185 SINGLE-EPISODE REGRESSION
+--
+-- This is deliberately narrower than the longitudinal housing sequence.
+-- It uses the 24 January 2023 Brighton Form 11 carrier only as a source-backed
+-- assertion/remedy context and tests the full existing chain through
+-- applicability and then the existing violation meet.
+--
+-- External source roles are preserved:
+--   * Queensland legislation owns the legal duty in RTRA Act 2008 s 185;
+--   * Queensland RTA owns the prescribed Form 11 / s 325 procedure;
+--   * the matter Form 11 owns the episode-specific assertions it contains.
+-- DASHI owns only the typed reconstruction/weld below.
+--
+-- Historical authority at the exact matter date is an explicit receipt.  This
+-- module does not infer a 24 January 2023 in-force proposition from a nearby or
+-- current compilation merely because the wording appears stable.
 ------------------------------------------------------------------------
 
 data HousingLegalSourceRole : Set where
@@ -33,21 +49,21 @@ record HousingLegalSourceAttribution : Set where
     attributionReference : String
 open HousingLegalSourceAttribution public
 
-rtra2023Section185Source : HousingLegalSourceAttribution
-rtra2023Section185Source =
+rtraSection185Source : HousingLegalSourceAttribution
+rtraSection185Source =
   housingLegalSourceAttribution
     primaryLegislation
     "Queensland Residential Tenancies and Rooming Accommodation Act 2008"
-    "official Queensland legislation, in-force version dated 19 January 2023, s 185(3)"
-    "while the tenancy continues, the lessor must maintain the premises so they remain fit for the tenant to live in and maintain the premises/inclusions in good repair"
-    "Queensland legislation historical s 185 source attribution for 24 January 2023 Brighton consumer"
+    "official Queensland legislation, s 185; exact 24 January 2023 temporal applicability requires separate historical-authority receipt"
+    "continuing-tenancy lessor maintenance / fit-to-live-in / good-repair duty"
+    "Queensland legislation s 185 source attribution for Brighton consumer"
 
 rtaForm11GuidanceSource : HousingLegalSourceAttribution
 rtaForm11GuidanceSource =
   housingLegalSourceAttribution
     administrativeFormGuidance
     "Queensland Residential Tenancies Authority — Notice to remedy breach (Form 11)"
-    "official RTA Form 11 guidance; administrative function only"
+    "official RTA Form 11 / RTRA s 325 procedural source"
     "Form 11 records a claimed/alleged breach and a demand to remedy; issuing the form does not itself determine that the breach occurred"
     "Queensland RTA Form 11 source attribution"
 
@@ -62,6 +78,8 @@ record BrightonS185MatterProposition : Set₁ where
     matterCarrier : HousingLegalSourceAttribution
     matterCarrierRoleIsEvidence :
       sourceRole matterCarrier ≡ matterEvidenceCarrier
+    matterCarrierReferenceIsForm11 :
+      sourceIdentity matterCarrier ≡ "RTA Form 11.pdf"
     assertedConditionReference : String
     assertedConditionReceipt : Set
     propositionReference : String
@@ -87,11 +105,26 @@ record BrightonS185RegressionInput
     section185AuthorityIsPrimaryLegislation :
       sourceRole section185AuthoritySource ≡ primaryLegislation
     sameSection185AuthorityAsApplicabilityMeet : Set
+    historicalSection185AuthorityAt24Jan2023 : Set
     section185AuthorityWeldReference : String
 
     form11GuidanceSource : HousingLegalSourceAttribution
     form11GuidanceIsAdministrative :
       sourceRole form11GuidanceSource ≡ administrativeFormGuidance
+    form11ProcedureMatchesMatterForm : Set
+
+    queenslandJurisdictionReceipt : Set
+    temporalScopeIncludes24Jan2023Receipt : Set
+    sameS185IssueUsedByApplicabilityMeet : Set
+
+    violationInput : ViolationMeet.ViolationMeetInput state
+    violationUsesExactCompiledApplicability :
+      ViolationMeet.receipt
+        (ViolationMeet.applicability
+          (ViolationMeet.prerequisites violationInput))
+      ≡ Directional.compileSourceConditionedApplicability
+          sourceConditionedApplicability
+    violationDecisionIsCaseSpecific : Set
 
     noMedicalCausationPromotion : Set
     noCrossEpisodeCommonCausePromotion : Set
@@ -118,6 +151,25 @@ brightonApplicabilityStillUsesExistingLegalGate :
           (sourceConditionedApplicability input)))
 brightonApplicabilityStillUsesExistingLegalGate input = refl
 
+compileBrightonS185Violation :
+  ∀ {residual demand receipt admission state} →
+  BrightonS185RegressionInput
+    {residual} {demand} receipt admission state →
+  Legal.ViolationReceipt
+compileBrightonS185Violation input =
+  ViolationMeet.compileViolationMeet (violationInput input)
+
+brightonViolationConsumesExactCompiledApplicability :
+  ∀ {residual demand receipt admission state}
+    (input : BrightonS185RegressionInput
+      {residual} {demand} receipt admission state) →
+  ViolationMeet.receipt
+    (ViolationMeet.applicability
+      (ViolationMeet.prerequisites (violationInput input)))
+  ≡ compileBrightonS185Applicability input
+brightonViolationConsumesExactCompiledApplicability input =
+  violationUsesExactCompiledApplicability input
+
 ------------------------------------------------------------------------
 -- FIREWALLS
 ------------------------------------------------------------------------
@@ -125,10 +177,12 @@ brightonApplicabilityStillUsesExistingLegalGate input = refl
 data Form11AssertionAutomaticallyEstablishesBreach : Set where
 data PositiveSourceSupportAutomaticallyEstablishesS185Violation : Set where
 data Section185AuthorityAutomaticallyEstablishesMatterFacts : Set where
+data NearbyCompilationAutomaticallyEstablishesHistoricalAuthority : Set where
 data UnweldedSection185LabelAuthorizesApplicability : Set where
 data HealthContextAutomaticallyEstablishesMedicalCausation : Set where
 data OneHousingEpisodeAutomaticallyEstablishesSystemicWrongdoing : Set where
-data ApplicabilityAutomaticallyEstablishesLiability : Set where
+data ApplicabilityAutomaticallyEstablishesViolation : Set where
+data ViolationAutomaticallyEstablishesLiability : Set where
 
 form11AssertionDoesNotEstablishBreach :
   Form11AssertionAutomaticallyEstablishesBreach → ⊥
@@ -142,6 +196,10 @@ section185AuthorityDoesNotEstablishMatterFacts :
   Section185AuthorityAutomaticallyEstablishesMatterFacts → ⊥
 section185AuthorityDoesNotEstablishMatterFacts ()
 
+nearbyCompilationDoesNotEstablishHistoricalAuthority :
+  NearbyCompilationAutomaticallyEstablishesHistoricalAuthority → ⊥
+nearbyCompilationDoesNotEstablishHistoricalAuthority ()
+
 unweldedSection185LabelDoesNotAuthorizeApplicability :
   UnweldedSection185LabelAuthorizesApplicability → ⊥
 unweldedSection185LabelDoesNotAuthorizeApplicability ()
@@ -154,9 +212,13 @@ oneEpisodeDoesNotEstablishSystemicWrongdoing :
   OneHousingEpisodeAutomaticallyEstablishesSystemicWrongdoing → ⊥
 oneEpisodeDoesNotEstablishSystemicWrongdoing ()
 
-applicabilityDoesNotEstablishLiability :
-  ApplicabilityAutomaticallyEstablishesLiability → ⊥
-applicabilityDoesNotEstablishLiability ()
+applicabilityDoesNotEstablishViolation :
+  ApplicabilityAutomaticallyEstablishesViolation → ⊥
+applicabilityDoesNotEstablishViolation ()
+
+violationDoesNotEstablishLiability :
+  ViolationAutomaticallyEstablishesLiability → ⊥
+violationDoesNotEstablishLiability ()
 
 record BrightonS185RegressionBoundary : Set where
   constructor brighton-s185-regression-boundary
@@ -168,17 +230,24 @@ record BrightonS185RegressionBoundary : Set where
     sameMatterPropositionWeldRequired : Bool
     sameEvidenceCarrierWeldRequired : Bool
     sameSection185AuthorityWeldRequired : Bool
+    exactHistoricalAuthorityReceiptRequired : Bool
+    exactJurisdictionReceiptRequired : Bool
+    exactTemporalScopeReceiptRequired : Bool
     existingApplicabilityCompilerRetained : Bool
+    existingViolationCompilerRetained : Bool
+    exactApplicabilityReceiptReusedByViolation : Bool
     form11AssertionCreatesBreach : Bool
     positiveSupportCreatesViolation : Bool
     legalAuthorityCreatesMatterFact : Bool
+    nearbyCompilationCreatesHistoricalAuthority : Bool
     unweldedSection185LabelAuthorizesApplicability : Bool
     healthContextCreatesMedicalCausation : Bool
     oneEpisodeCreatesSystemicWrongdoing : Bool
-    applicabilityCreatesLiability : Bool
+    applicabilityCreatesViolation : Bool
+    violationCreatesLiability : Bool
 
 canonicalBrightonS185RegressionBoundary : BrightonS185RegressionBoundary
 canonicalBrightonS185RegressionBoundary =
   brighton-s185-regression-boundary
-    true true true true true true true true
-    false false false false false false false
+    true true true true true true true true true true true true true
+    false false false false false false false false false
