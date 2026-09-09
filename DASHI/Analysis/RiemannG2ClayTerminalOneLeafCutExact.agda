@@ -7,48 +7,39 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
-import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as High
+import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as High
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 
 ------------------------------------------------------------------------
 -- CLAY-FACING TERMINAL CUT
 --
--- All assembly below is exact and the canonical route is allowance-free.
--- The full same-substrate RH theorem needs:
+-- High is now the literal phase theorem family itself.  For every arbitrary
+-- High zero assumed off-line:
 --
---   L. one exact Platt--Trudgian verified-region transport on this analytic
---      completed-zeta carrier;
---   H. for every chosen High zero assumed off-line, one direct independent
---      literal complement-margin case;
---   C. a cover saying every nontrivial zero is in the verified region or High;
---   S. an exact refinement of the abstract completed-zeta criticalLine
---      predicate to a concrete stable predicate.
+--   exact final-near literal model
+--   + balance-free actual-ClusterResponse context
+--   + literalNear + transportedFar + Gamma < ClusterResponse
+--   + downstream final balance
+--   -> contradiction.
 --
--- There is no arbitrary Low predicate on the canonical path: Low is
--- definitionally the verified region supplied by L.  L+H+C compile first to
--- constructive double-negated RH.  S is used only in the final logical
--- conversion to positive prize-facing RH.
+-- The analytic payment cannot access cluster = Off + Gamma through its context.
+-- No intermediate M_cluster or M_cluster <= ClusterResponse theorem is primitive.
+-- Low remains definitionally the Platt--Trudgian verified region; high+low compile
+-- first to double-negated RH, and the exact critical-predicate refinement is used
+-- only in the final positive-RH conversion.
 ------------------------------------------------------------------------
 
 record ClayTerminalOneLeafInput
     (analytic : Analytic.AnalyticSubstrate) : Set₁ where
   field
-    lowTransport :
-      Low.PlattTrudgianVerifiedRegionTransport analytic
-
+    lowTransport : Low.PlattTrudgianVerifiedRegionTransport analytic
     HighRegion : Universal.AnalyticNontrivialZero analytic -> Set
-
     verifiedOrHighCover :
       (rho : Universal.AnalyticNontrivialZero analytic) ->
       Low.CanonicalLowRegion lowTransport rho ⊎ HighRegion rho
-
-    highProducer :
-      High.UniformIndependentComplementHighProducer analytic HighRegion
-
-    criticalLineRefinement :
-      Stability.CriticalLinePredicateRefinement analytic
-
+    highProducer : High.UniformLiteralPhaseHighProducer analytic HighRegion
+    criticalLineRefinement : Stability.CriticalLinePredicateRefinement analytic
     terminalReference : String
 
 open ClayTerminalOneLeafInput public
@@ -88,75 +79,58 @@ compileClayTerminalOneLeafToRH input =
     (criticalLineRefinement input)
     (compiledDoubleNegatedRH input)
 
-------------------------------------------------------------------------
--- BOUNDARY
-------------------------------------------------------------------------
-
 record ClayTerminalOneLeafBoundary : Set where
   constructor clay-terminal-one-leaf-boundary
   field
     consumerAssignedAllowanceLayerOnCanonicalPath : Bool
     consumerAssignedAllowanceLayerOnCanonicalPathIsFalse :
       consumerAssignedAllowanceLayerOnCanonicalPath ≡ false
-
-    extraHighOrdinatePaymentAfterUniformOneLeafProducer : Bool
-    extraHighOrdinatePaymentAfterUniformOneLeafProducerIsFalse :
-      extraHighOrdinatePaymentAfterUniformOneLeafProducer ≡ false
-
+    extraHighOrdinatePaymentAfterUniformLiteralPhaseProducer : Bool
+    extraHighOrdinatePaymentAfterUniformLiteralPhaseProducerIsFalse :
+      extraHighOrdinatePaymentAfterUniformLiteralPhaseProducer ≡ false
     separateNearEnvelopePrimitiveLeaf : Bool
     separateNearEnvelopePrimitiveLeafIsFalse :
       separateNearEnvelopePrimitiveLeaf ≡ false
-
     separateGammaEnvelopePrimitiveLeaf : Bool
     separateGammaEnvelopePrimitiveLeafIsFalse :
       separateGammaEnvelopePrimitiveLeaf ≡ false
-
-    uniformIndependentComplementMarginIsHighAnalyticFamily : Bool
-    uniformIndependentComplementMarginIsHighAnalyticFamilyIsTrue :
-      uniformIndependentComplementMarginIsHighAnalyticFamily ≡ true
-
+    uniformLiteralPhaseJointMarginIsHighAnalyticFamily : Bool
+    uniformLiteralPhaseJointMarginIsHighAnalyticFamilyIsTrue :
+      uniformLiteralPhaseJointMarginIsHighAnalyticFamily ≡ true
+    opaqueCanonicalMarginProducerPrimitiveAtClayBoundary : Bool
+    opaqueCanonicalMarginProducerPrimitiveAtClayBoundaryIsFalse :
+      opaqueCanonicalMarginProducerPrimitiveAtClayBoundary ≡ false
     arbitraryLowPredicateOnCanonicalPath : Bool
     arbitraryLowPredicateOnCanonicalPathIsFalse :
       arbitraryLowPredicateOnCanonicalPath ≡ false
-
     separateLowSubsetVerifiedRegionProofRequired : Bool
     separateLowSubsetVerifiedRegionProofRequiredIsFalse :
       separateLowSubsetVerifiedRegionProofRequired ≡ false
-
     plattTrudgianSameCarrierVerifiedRegionTheoremStillRequired : Bool
     plattTrudgianSameCarrierVerifiedRegionTheoremStillRequiredIsTrue :
       plattTrudgianSameCarrierVerifiedRegionTheoremStillRequired ≡ true
-
     verifiedRegionOrHighCoverStillRequired : Bool
     verifiedRegionOrHighCoverStillRequiredIsTrue :
       verifiedRegionOrHighCoverStillRequired ≡ true
-
     analyticHighLowRouteCompilesDoubleNegatedRHWithoutStability : Bool
     analyticHighLowRouteCompilesDoubleNegatedRHWithoutStabilityIsTrue :
       analyticHighLowRouteCompilesDoubleNegatedRHWithoutStability ≡ true
-
     nakedCriticalLineStabilityIsPrimitiveTerminalField : Bool
     nakedCriticalLineStabilityIsPrimitiveTerminalFieldIsFalse :
       nakedCriticalLineStabilityIsPrimitiveTerminalField ≡ false
-
     exactCriticalLinePredicateRefinementStillRequiredForPositiveRH : Bool
     exactCriticalLinePredicateRefinementStillRequiredForPositiveRHIsTrue :
       exactCriticalLinePredicateRefinementStillRequiredForPositiveRH ≡ true
-
     criticalLineStabilityCompilesFromRefinement : Bool
     criticalLineStabilityCompilesFromRefinementIsTrue :
       criticalLineStabilityCompilesFromRefinement ≡ true
-
     theseInputsCompileRiemannHypothesisFor : Bool
     theseInputsCompileRiemannHypothesisForIsTrue :
       theseInputsCompileRiemannHypothesisFor ≡ true
-
     inputsInhabitedHere : Bool
     inputsInhabitedHereIsFalse : inputsInhabitedHere ≡ false
-
     unconditionalRHClaimedHere : Bool
     unconditionalRHClaimedHereIsFalse : unconditionalRHClaimedHere ≡ false
-
     highestAlphaReading : String
 
 canonicalClayTerminalOneLeafBoundary : ClayTerminalOneLeafBoundary
@@ -169,13 +143,14 @@ canonicalClayTerminalOneLeafBoundary =
     true refl
     false refl
     false refl
-    true refl
-    true refl
-    true refl
     false refl
     true refl
     true refl
     true refl
     false refl
+    true refl
+    true refl
+    true refl
     false refl
-    "The prize-facing compiler is now normalized on both sides. High work is one uniform family of independent literal complement-margin cases. Low is definitionally the exact Platt--Trudgian verified-region predicate, so no arbitrary Low carrier or Low-subset theorem remains; only the same-carrier verified-region criticality theorem and verified-region-or-High cover are required. Those analytic/low inputs compile to double-negated RH without critical-line stability. Only the final conversion to positive RH consumes the exact critical-predicate refinement. No substantive input is fabricated here."
+    false refl
+    "The prize-facing compiler exposes the literal high theorem family itself. For every arbitrary high off-line zero, provide the exact final-near model, a balance-free actual ClusterResponse context, and independently prove literalNear+far+Gamma<ClusterResponse. The final cluster=Off+Gamma equality is downstream only. No intermediate M_cluster or M_cluster<=ClusterResponse theorem, arbitrary Low carrier, Low-subset theorem, allowance layer, or naked critical-line stability is primitive. These inputs compile to double-negated RH before the final critical-predicate refinement. RH is not derived here."
