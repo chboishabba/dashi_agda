@@ -39,7 +39,7 @@ for entry in "${TARGETS[@]}"; do
   mkdir -p "$run_root"
   set +e
   DASHI_ELAB_PROFILE_DIR="$run_root" \
-    scripts/profile_agda_elaboration_residency.sh "$target" "$label"
+    bash scripts/profile_agda_elaboration_residency.sh "$target" "$label"
   status=$?
   set -e
 
