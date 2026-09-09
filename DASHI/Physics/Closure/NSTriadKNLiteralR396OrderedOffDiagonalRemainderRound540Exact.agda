@@ -18,7 +18,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR396OrderedOffDiagonalRemainderRoun
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_; _++_)
-open import Data.Rational.Base using (ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; Positive; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -26,6 +26,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
 import DASHI.Physics.Closure.NSTriadKNFiniteWeightedGramFluxAggregationRound385Exact as R385
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
@@ -55,19 +56,17 @@ module LiteralOrdered
     (rest : List Physical.PhysicalTriadIncidence) →
     (positive :
       (beta : Physical.PhysicalTriadIncidence) →
-      beta E.OccursIn rest →
-      Data.Rational.Positive
-        (DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact.pairRate
-          (E.P.physicalDoubleMixedPair alpha beta))) →
+      R396._OccursIn_ beta rest →
+      Positive (R291.pairRate (Swap.Q alpha beta))) →
     R385.sumWeightedRemainder (E.headR290Pairs alpha rest positive)
     ≡ R539.rowSum Swap.symmetricWeightedRemainder alpha rest
   headWeightedRemainderExact alpha [] positive = refl
   headWeightedRemainderExact alpha (beta ∷ rest) positive =
     cong₂ _+_
       (Swap.literalR290WeightedRemainderIsSymmetricScalar
-        alpha beta (positive beta E.here))
+        alpha beta (positive beta R396.here))
       (headWeightedRemainderExact alpha rest
-        (λ gamma member → positive gamma (E.there member)))
+        (λ gamma member → positive gamma (R396.there member)))
 
   allWeightedRemainderExact :
     (items : List Physical.PhysicalTriadIncidence) →
