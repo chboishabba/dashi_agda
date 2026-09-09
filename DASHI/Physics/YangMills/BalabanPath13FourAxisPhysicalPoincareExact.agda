@@ -31,7 +31,6 @@ module DASHI.Physics.YangMills.BalabanPath13FourAxisPhysicalPoincareExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
 open import Data.Rational using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -63,20 +62,6 @@ axisFibreNormSumMatchesGlobal : ∀ axis field →
 axisFibreNormSumMatchesGlobal axis field =
   axisPartitionSumMatchesGlobal axis (λ site → sq (field site))
 
--- Compatibility name retained, but aggregation is now the canonical
--- relation-preserving fibre lift rather than a recursive replay in this global
--- consumer.
-sumZeroMeanFibrePoincare :
-  ∀ axis field (transverses : List (Triple (CyclicIndex Side13.side13))) →
-  (∀ transverse → transverse ∈ transverses →
-    physicalFibreSum field axis transverse ≡ Data.Rational.0ℚ) →
-  sumRational transverses
-    (λ transverse →
-      LDL.oneEighteenth * physicalFibreNormSq field axis transverse)
-  ≤ sumRational transverses (physicalFibreEdgeEnergy field axis)
-sumZeroMeanFibrePoincare =
-  FibreLift13.sumZeroMeanFibrePoincareViaFibre
-
 axisZeroMeanGlobalPoincare :
   ∀ axis field →
   (∀ transverse → physicalFibreSum field axis transverse ≡ Data.Rational.0ℚ) →
@@ -85,8 +70,8 @@ axisZeroMeanGlobalPoincare :
 axisZeroMeanGlobalPoincare axis field zeroMean =
   let
     transverses = physicalTransverseCoordinates Side13.side13
-    folded = sumZeroMeanFibrePoincare axis field transverses
-      (λ transverse membership → zeroMean transverse)
+    folded = FibreLift13.sumZeroMeanFibrePoincareViaFibre
+      axis field transverses zeroMean
     scaledGlobal :
       LDL.oneEighteenth * Norm.globalNormSq field
       ≡ sumRational transverses
