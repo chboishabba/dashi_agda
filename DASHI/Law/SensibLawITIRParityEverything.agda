@@ -8,9 +8,10 @@ import DASHI.Interop.ITIRSuiteNormalizedCompilerStageParityWitnessExact as Stage
 import DASHI.Interop.ITIRRecordingManifestSensibLawAdapterExact as RecordingParity
 import DASHI.Interop.ITIRTemporalHealthSensibLawAdapterExact as HealthParity
 import DASHI.Interop.ITIRSubmittedEvidencePackageSensibLawAdapterExact as PackageParity
+import DASHI.Interop.ITIRHousingEpisodeSensibLawAdapterExact as HousingParity
 
 ------------------------------------------------------------------------
--- Terminal parity surface for the current Russell / ITIR / SensibLaw tranche.
+-- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
 -- Importing this module requires all boundaries to coexist with the existing
 -- Agda-first legal runtime; none replaces another owner.
 ------------------------------------------------------------------------
@@ -37,3 +38,6 @@ selectedSubmittedEvidencePackageParity :
   PackageParity.ITIRSubmittedEvidencePackageParityBoundary
 selectedSubmittedEvidencePackageParity =
   PackageParity.canonicalITIRSubmittedEvidencePackageParityBoundary
+
+selectedHousingEpisodeParity : HousingParity.ITIRHousingEpisodeParityBoundary
+selectedHousingEpisodeParity = HousingParity.canonicalITIRHousingEpisodeParityBoundary
