@@ -3,24 +3,18 @@ module DASHI.Physics.Closure.NSTriadKNLiteralForcingCellCauchyPolarizationRound5
 ------------------------------------------------------------------------
 -- ROUND575 / LITERAL R567 FORCING SQUARE -> R446 CAUCHY POLARIZATION
 --
--- Instantiate R574 on one physical nonzero output fibre with
+-- On one physical nonzero output fibre set
 --
 --   G_tau = literal R388 doubleForcing tau,
 --   D_tau = literal R225 doubleMixedCell tau,
 --   rate_tau = physical viscous cell rate.
 --
--- The mixed Cauchy form is definitionally the forcing half used by R566/R567:
---
---   K(alpha,beta) Re<G_alpha,D_beta>.
---
--- Hence the exact R446 difference PSD gives
+-- The R574 mixed Cauchy pair is exactly R566's forcingPair.  Therefore
 --
 --   2 forcingFull_k <= forcingQuadratic_k + cellQuadratic_k.
 --
--- This is an alternative producer reduction only.  It is useful precisely if
--- both positive quadratics can be paid cutoff-uniformly without importing the
--- still-open critical barrier.  That adequacy is audited next; no promotion is
--- made here.
+-- This is an alternative producer reduction only.  The next BIDI audit must
+-- decide whether the two positive quadratics are actually cheaper to control.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,7 +22,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; Positive; _+_; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -69,6 +63,18 @@ module PhysicalPolarization
   doubleCell : Physical.PhysicalTriadIncidence → C3.Complex3 F
   doubleCell tau = R225.doubleMixedCell S D.Pair.velocity tau
 
+  cell575 :
+    (tau : Physical.PhysicalTriadIncidence) →
+    Physical.k tau ≡ output →
+    R574.CauchyVectorPairCell574
+  cell575 tau outputExact =
+    R574.cauchy-vector-pair-cell-574
+      (D.Pair.cellRate tau)
+      (D.doubleForcing tau)
+      (doubleCell tau)
+      (Rate.cellRatePositiveFromNonzeroOutput
+        output outputNonzero tau outputExact)
+
   buildCells575 :
     (items : List Physical.PhysicalTriadIncidence) →
     ((tau : Physical.PhysicalTriadIncidence) →
@@ -76,12 +82,7 @@ module PhysicalPolarization
     List R574.CauchyVectorPairCell574
   buildCells575 [] allOutput = []
   buildCells575 (tau ∷ rest) allOutput =
-    R574.cauchy-vector-pair-cell-574
-      (D.Pair.cellRate tau)
-      (D.doubleForcing tau)
-      (doubleCell tau)
-      (Rate.cellRatePositiveFromNonzeroOutput
-        output outputNonzero tau (allOutput tau R396.here))
+    cell575 tau (allOutput tau R396.here)
     ∷ buildCells575 rest
         (λ selected member → allOutput selected (R396.there member))
 
@@ -94,49 +95,49 @@ module PhysicalPolarization
   cellQuadratic575 : ℚ
   cellQuadratic575 = R543.fullSquareSum R574.rightPair574 cells575
 
-  mixedQuadratic575 : ℚ
-  mixedQuadratic575 = R543.fullSquareSum R574.mixedPair574 cells575
-
   pairMixedExact575 :
     (alpha beta : Physical.PhysicalTriadIncidence) →
-    R574.mixedPair574
-      (R574.cauchy-vector-pair-cell-574
-        (D.Pair.cellRate alpha) (D.doubleForcing alpha) (doubleCell alpha)
-        (Rate.cellRatePositiveFromNonzeroOutput
-          output outputNonzero alpha (Rate.allElementsHaveOutput cutoff output alpha R396.here)))
-      (R574.cauchy-vector-pair-cell-574
-        (D.Pair.cellRate beta) (D.doubleForcing beta) (doubleCell beta)
-        (Rate.cellRatePositiveFromNonzeroOutput
-          output outputNonzero beta (Rate.allElementsHaveOutput cutoff output beta R396.here)))
+    (alphaOutput : Physical.k alpha ≡ output) →
+    (betaOutput : Physical.k beta ≡ output) →
+    R574.mixedPair574 (cell575 alpha alphaOutput) (cell575 beta betaOutput)
     ≡ T.forcingPair alpha beta
-  pairMixedExact575 alpha beta = T.forcingPairScalarized alpha beta
+  pairMixedExact575 alpha beta alphaOutput betaOutput =
+    sym (T.forcingPairScalarized alpha beta)
 
-  -- Proof objects for positivity do not occur in the scalar pair.  The
-  -- structural recursion below therefore compares the actual built list
-  -- directly with the literal physical incidence square.
   mixedRowExact575 :
     (head : Physical.PhysicalTriadIncidence) →
+    (headOutput : Physical.k head ≡ output) →
     (rest : List Physical.PhysicalTriadIncidence) →
-    (allOutput :
+    (restOutput :
       (tau : Physical.PhysicalTriadIncidence) →
-      tau R396.OccursIn (head ∷ rest) → Physical.k tau ≡ output) →
+      tau R396.OccursIn rest → Physical.k tau ≡ output) →
     R539.rowSum R574.mixedPair574
-      (R574.cauchy-vector-pair-cell-574
-        (D.Pair.cellRate head) (D.doubleForcing head) (doubleCell head)
-        (Rate.cellRatePositiveFromNonzeroOutput
-          output outputNonzero head (allOutput head R396.here)))
-      (buildCells575 rest
-        (λ selected member → allOutput selected (R396.there member)))
+      (cell575 head headOutput) (buildCells575 rest restOutput)
     ≡ R539.rowSum T.forcingPair head rest
-  mixedRowExact575 head [] allOutput = refl
-  mixedRowExact575 head (beta ∷ rest) allOutput =
-    cong₂ _+_ refl
-      (mixedRowExact575 head rest
-        (λ selected member →
-          allOutput selected
-            (case member of λ where
-              R396.here → R396.there R396.here
-              (R396.there deeper) → R396.there (R396.there deeper))))
+  mixedRowExact575 head headOutput [] restOutput = refl
+  mixedRowExact575 head headOutput (beta ∷ rest) restOutput =
+    cong₂ _+_
+      (pairMixedExact575 head beta headOutput (restOutput beta R396.here))
+      (mixedRowExact575 head headOutput rest
+        (λ selected member → restOutput selected (R396.there member)))
+
+  mixedColumnExact575 :
+    (rest : List Physical.PhysicalTriadIncidence) →
+    (restOutput :
+      (tau : Physical.PhysicalTriadIncidence) →
+      tau R396.OccursIn rest → Physical.k tau ≡ output) →
+    (head : Physical.PhysicalTriadIncidence) →
+    (headOutput : Physical.k head ≡ output) →
+    R539.columnSum R574.mixedPair574
+      (buildCells575 rest restOutput) (cell575 head headOutput)
+    ≡ R539.columnSum T.forcingPair rest head
+  mixedColumnExact575 [] restOutput head headOutput = refl
+  mixedColumnExact575 (beta ∷ rest) restOutput head headOutput =
+    cong₂ _+_
+      (pairMixedExact575 beta head (restOutput beta R396.here) headOutput)
+      (mixedColumnExact575 rest
+        (λ selected member → restOutput selected (R396.there member))
+        head headOutput)
 
   mixedFullExact575 :
     (items : List Physical.PhysicalTriadIncidence) →
@@ -146,24 +147,26 @@ module PhysicalPolarization
     R543.fullSquareSum R574.mixedPair574 (buildCells575 items allOutput)
     ≡ R543.fullSquareSum T.forcingPair items
   mixedFullExact575 [] allOutput = refl
-  mixedFullExact575 (head ∷ rest) allOutput =
-    -- Both full-square recursions see the same pair scalar by definition of
-    -- R443.cauchyEntry and R538.pairResolvent.  The remaining tails recurse.
-    cong₂ _+_
-      (cong₂ _+_ refl
-        (cong₂ _+_ refl refl))
-      (mixedFullExact575 rest
-        (λ selected member → allOutput selected (R396.there member)))
+  mixedFullExact575 (head ∷ rest) allOutput
+    rewrite pairMixedExact575 head head
+      (allOutput head R396.here) (allOutput head R396.here)
+          | mixedRowExact575 head (allOutput head R396.here) rest
+              (λ selected member → allOutput selected (R396.there member))
+          | mixedColumnExact575 rest
+              (λ selected member → allOutput selected (R396.there member))
+              head (allOutput head R396.here)
+          | mixedFullExact575 rest
+              (λ selected member → allOutput selected (R396.there member)) = refl
 
   physicalForcingPolarizationUpper575 :
     R573.two573 * R543.fullSquareSum T.forcingPair fibre
     ≤ forcingQuadratic575 + cellQuadratic575
   physicalForcingPolarizationUpper575 =
-    let source = R574.mixedCauchyPolarizationUpper574 cells575 in
-    Relation.Binary.PropositionalEquality.subst
-      (λ mixed → R573.two573 * mixed ≤ forcingQuadratic575 + cellQuadratic575)
+    subst
+      (λ mixed →
+        R573.two573 * mixed ≤ forcingQuadratic575 + cellQuadratic575)
       (mixedFullExact575 fibre (Rate.allElementsHaveOutput cutoff output))
-      source
+      (R574.mixedCauchyPolarizationUpper574 cells575)
 
 round575LiteralForcingHalfAttachedToR446Polarization : Bool
 round575LiteralForcingHalfAttachedToR446Polarization = true
