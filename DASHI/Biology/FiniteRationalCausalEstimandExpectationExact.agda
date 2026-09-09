@@ -57,10 +57,6 @@ open NormalizedFiniteCausalEffectLaw public
 
 ------------------------------------------------------------------------
 -- Bind the finite law to one EffectAlgebra.
---
--- EffectValue and PopulationAggregate are not definitionally forced to ℚ.
--- Instead an application supplies explicit realization maps and a theorem that
--- the target aggregate maps to the same finite expected effect.
 ------------------------------------------------------------------------
 
 record FiniteRationalEffectAlgebraRealisation
@@ -87,6 +83,10 @@ open FiniteRationalEffectAlgebraRealisation public
 
 ------------------------------------------------------------------------
 -- Specialized ATE-shaped binding.
+--
+-- Only realisedAggregate = mapped ATE is stored.  Equality with the finite
+-- expectation is derived from the ATE aggregate receipt plus the realization
+-- theorem, so there is no second independent quantitative assertion.
 ------------------------------------------------------------------------
 
 record FiniteRationalAveragePopulationEffect
@@ -102,13 +102,24 @@ record FiniteRationalAveragePopulationEffect
       ≡ aggregateToRational realisation
           (Estimand.aggregate ate)
 
-    realisedAggregateIsFiniteExpectation :
-      realisedAggregate
-      ≡ finiteExpectedEffect (atoms (law realisation))
-
     estimateTargetReference : String
 
 open FiniteRationalAveragePopulationEffect public
+
+realisedATEIsFiniteExpectation :
+  ∀ {scope algebra ate realisation} →
+  (R : FiniteRationalAveragePopulationEffect
+    {scope} {algebra} ate realisation) →
+  realisedAggregate R
+  ≡ finiteExpectedEffect (atoms (law realisation))
+realisedATEIsFiniteExpectation {ate = ate} {realisation = realisation} R =
+  trans
+    (realisedAggregateIsATE R)
+    (trans
+      (cong
+        (aggregateToRational realisation)
+        (Estimand.aggregateIsTargetPopulationContrast ate))
+      (targetAggregateMatchesFiniteExpectation realisation))
 
 ------------------------------------------------------------------------
 -- Bridge to the canonical finite probability atom shape.
