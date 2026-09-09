@@ -154,8 +154,6 @@ import DASHI.Core.SituatedFibreDynamicsEverything
 import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
-import DASHI.Core.ProofDebtRouterExact
-import DASHI.Core.ClayProofDebtFrontierAtlasExact
 
--- Public / journalistic artifact attribution with explicit truth-promotion boundary.
-import DASHI.Core.AttributedPublicClaimExact
+-- Domain-neutral source/provenance/observation carrier.
+import DASHI.Core.SourceConditionedObservationExact
