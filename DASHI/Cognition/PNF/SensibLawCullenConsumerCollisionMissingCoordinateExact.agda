@@ -1,32 +1,27 @@
 module DASHI.Cognition.PNF.SensibLawCullenConsumerCollisionMissingCoordinateExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
 
-import DASHI.Core.IntersectionalNonFactorability as NonFactor
-import DASHI.Reasoning.StructuralMetaphorTaskCompressionExact as Compression
-import DASHI.Reasoning.ConsumerCollisionMissingCoordinateExact as Collision
+import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
 ------------------------------------------------------------------------
 -- CULLEN INTROSPECTIVE REGRESSION
 --
--- This module formalises only the representation lesson exposed by the source
--- audit.  It does not restate the judicial holding.
+-- Thin legal instantiation of the repository's canonical consumer-indexed
+-- residual-refinement theorem.
 --
--- The coarse legacy observation retained only:
+-- Representation lesson only:
 --
---   "police-function context"
+--   police-function context
 --
--- and thereby collapsed two fine worlds:
+-- was too coarse to stand in for the older bundled
+-- "statutory police functions/powers" premise.  The source audit distinguishes
+-- police-function context from whether statutory power was actually invoked.
 --
---   police function + no invoked statutory power
---   police function + invoked statutory power.
---
--- The legacy bundled premise consumer distinguishes those worlds.  Therefore
--- police-function context alone cannot determine whether that bundled premise
--- is paid.  `StatutoryPowerStatus` is an explicit separating coordinate for
--- this collision.
+-- This module does NOT restate Cullen's holding and does NOT promote
+-- StatutoryPowerStatus into a necessary duty element.
 ------------------------------------------------------------------------
 
 data CullenFineWorld : Set where
@@ -61,115 +56,120 @@ inspectStatutoryPower policeFunctionWithInvokedStatutoryPower =
   statutoryPowerInvoked
 
 ------------------------------------------------------------------------
--- Literal collision:
--- same coarse observation, different consumer result.
+-- Canonical collision:
+-- same upstream observation + different consumer result.
 ------------------------------------------------------------------------
 
-cullenLegacyCollisionWitness :
-  Compression.CompressionFailureWitness
+cullenLegacyConsumerCollision :
+  Consumer.ConsumerRelevantCollision
     observePoliceFunctionContext legacyBundledPremiseConsumer
-cullenLegacyCollisionWitness =
-  Compression.compressionFailureWitness
+cullenLegacyConsumerCollision =
+  Consumer.consumer-relevant-collision
     policeFunctionWithoutInvokedStatutoryPower
     policeFunctionWithInvokedStatutoryPower
     refl
     (λ ())
 
-cullenLegacyConsumerCollision :
-  Collision.ConsumerCollision
-    observePoliceFunctionContext legacyBundledPremiseConsumer
-cullenLegacyConsumerCollision =
-  Collision.consumerCollision
-    cullenLegacyCollisionWitness
-    "Police-function context is observationally identical across the two fine worlds, while the legacy bundled-premise consumer differs."
-
 policeFunctionContextCannotDetermineLegacyBundledPremise :
-  NonFactor.FactorsThrough
+  Consumer.ConsumerSufficient
     observePoliceFunctionContext legacyBundledPremiseConsumer → ⊥
 policeFunctionContextCannotDetermineLegacyBundledPremise =
-  Collision.coarseObservationCannotDetermineConsumer
-    cullenLegacyConsumerCollision
+  Consumer.coarseCollisionBlocksSufficiency cullenLegacyConsumerCollision
 
 ------------------------------------------------------------------------
--- The added coordinate repairs THIS collision.
+-- Candidate typed residual.
 --
--- This is representation adequacy only.  It does not say that invoked statutory
--- power is a necessary premise of Cullen duty.  In fact, the source audit is
--- precisely why the old bundled rule must be reconstructed instead of reused.
+-- The joint observer (police-function context, statutory-power status) is
+-- sufficient for THIS old bundled-premise consumer.  That is a representation
+-- theorem, not a duty theorem.
 ------------------------------------------------------------------------
 
-consumeRefinedCullenObservation :
-  Collision.CoarsePlusCoordinate
-    PoliceFunctionObservation StatutoryPowerStatus →
-  LegacyBundledPremiseDecision
-consumeRefinedCullenObservation
-  (Collision.coarsePlusCoordinate _ statutoryPowerNotInvoked) =
-  legacyBundledPremiseUnpaid
-consumeRefinedCullenObservation
-  (Collision.coarsePlusCoordinate _ statutoryPowerInvoked) =
-  legacyBundledPremisePaid
+jointCullenObserver :
+  CullenFineWorld → PoliceFunctionObservation × StatutoryPowerStatus
+jointCullenObserver =
+  Observer.pairObserver observePoliceFunctionContext inspectStatutoryPower
 
-cullenCoordinateRepair :
-  Collision.ConsumerAdequateRefinement
-    (Collision.addCoordinate observePoliceFunctionContext inspectStatutoryPower)
+jointCullenObserverSufficient :
+  Consumer.ConsumerSufficient jointCullenObserver legacyBundledPremiseConsumer
+jointCullenObserverSufficient
+  policeFunctionWithoutInvokedStatutoryPower
+  policeFunctionWithoutInvokedStatutoryPower
+  same = refl
+jointCullenObserverSufficient
+  policeFunctionWithInvokedStatutoryPower
+  policeFunctionWithInvokedStatutoryPower
+  same = refl
+jointCullenObserverSufficient
+  policeFunctionWithoutInvokedStatutoryPower
+  policeFunctionWithInvokedStatutoryPower
+  ()
+jointCullenObserverSufficient
+  policeFunctionWithInvokedStatutoryPower
+  policeFunctionWithoutInvokedStatutoryPower
+  ()
+
+cullenStatutoryPowerResidualRepair :
+  Consumer.ResidualRepair
+    observePoliceFunctionContext
+    inspectStatutoryPower
     legacyBundledPremiseConsumer
-cullenCoordinateRepair =
-  Collision.consumerAdequateRefinement
-    consumeRefinedCullenObservation
-    (λ
-      { policeFunctionWithoutInvokedStatutoryPower → refl
-      ; policeFunctionWithInvokedStatutoryPower → refl
-      })
-    "Adding StatutoryPowerStatus separates the collision and makes the legacy bundled-premise decision factor through the refined carrier."
-
-statutoryPowerCoordinateActuallySeparates :
-  inspectStatutoryPower policeFunctionWithoutInvokedStatutoryPower
-    ≡ inspectStatutoryPower policeFunctionWithInvokedStatutoryPower → ⊥
-statutoryPowerCoordinateActuallySeparates = λ ()
+cullenStatutoryPowerResidualRepair =
+  Consumer.residual-repair jointCullenObserverSufficient
 
 ------------------------------------------------------------------------
--- The generic theorem re-derives that every adequate one-coordinate repair
--- must distinguish these witnesses.  For this concrete candidate coordinate,
--- assuming equality is impossible.
+-- The reusable invariant instantiated literally:
+-- every sufficient repair must distinguish this collision.
 ------------------------------------------------------------------------
 
-cullenRepairCannotCollapseStatutoryPowerStatus :
-  inspectStatutoryPower
-      (Compression.leftFine cullenLegacyCollisionWitness)
-    ≡ inspectStatutoryPower
-      (Compression.rightFine cullenLegacyCollisionWitness) →
-  ⊥
-cullenRepairCannotCollapseStatutoryPowerStatus =
-  Collision.coordinateRepairMustDistinguishCollision
+statutoryPowerResidualMustSeparateCullenCollision :
+  inspectStatutoryPower (Consumer.left cullenLegacyConsumerCollision)
+    ≡ inspectStatutoryPower (Consumer.right cullenLegacyConsumerCollision) → ⊥
+statutoryPowerResidualMustSeparateCullenCollision =
+  Consumer.residualMustSeparateRelevantCollision
     cullenLegacyConsumerCollision
-    cullenCoordinateRepair
+    cullenStatutoryPowerResidualRepair
+
+cullenRepairIsStrictRefinement :
+  Observer.StrictRefinement
+    observePoliceFunctionContext
+    jointCullenObserver
+cullenRepairIsStrictRefinement =
+  Consumer.consumerRelevantResidualGivesStrictRefinement
+    cullenLegacyConsumerCollision
+    cullenStatutoryPowerResidualRepair
 
 ------------------------------------------------------------------------
--- Important non-promotions.
+-- Non-promotions.
 ------------------------------------------------------------------------
 
 data StatutoryPowerStatusIsNecessaryForCullenDuty : Set where
 
-data CoordinateRepairReinstatesLegacyDutyRule : Set where
+data ResidualRepairReinstatesLegacyDutyRule : Set where
 
 data RepresentationAdequacyIsJudicialAuthority : Set where
+
+data AnySeparatingResidualIsSourceAdmissible : Set where
 
 statutoryPowerCoordinateDoesNotBecomeDutyElement :
   StatutoryPowerStatusIsNecessaryForCullenDuty → ⊥
 statutoryPowerCoordinateDoesNotBecomeDutyElement ()
 
 repairDoesNotReinstateLegacyRule :
-  CoordinateRepairReinstatesLegacyDutyRule → ⊥
+  ResidualRepairReinstatesLegacyDutyRule → ⊥
 repairDoesNotReinstateLegacyRule ()
 
 representationTheoremIsNotAuthority :
   RepresentationAdequacyIsJudicialAuthority → ⊥
 representationTheoremIsNotAuthority ()
 
+separationAloneDoesNotProveSourceAdmissibility :
+  AnySeparatingResidualIsSourceAdmissible → ⊥
+separationAloneDoesNotProveSourceAdmissibility ()
+
 ------------------------------------------------------------------------
--- Introspective reading exported to the legal runtime.
+-- Runtime reading.
 ------------------------------------------------------------------------
 
 firstMissingCoordinateReading : String
 firstMissingCoordinateReading =
-  "When two source states are identical under the current upstream observation but a downstream legal consumer distinguishes them, the retained carrier is too coarse. Any valid repair must expose a typed coordinate that separates the colliding witnesses; source authority determines which candidate coordinate is admissible."
+  "If the current observer collapses two source states that a downstream legal consumer distinguishes, the observer is insufficient. Every consumer-sufficient residual repair must split that exact collision. The collision constrains acquisition; source/authority review decides which separating coordinate is admissible."
