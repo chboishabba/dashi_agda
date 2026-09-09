@@ -13,6 +13,7 @@ import DASHI.Moonshine.JInvariantSignedFibreFractalBidiExact
 import DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
+import DASHI.Moonshine.JInvariantOrderThreeVisibleScaleUniquenessBidiExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
@@ -24,6 +25,8 @@ import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 -- Rendered acquisition is split into image->analytic and analytic->structured
 -- stages.  The stricter interval-valued recognizer keeps pixel uncertainty as
 -- a fibre and recognises k only after exact orbit containment and uniqueness.
+-- On the currently visible k=0..7 fibre, scale uniqueness is now compiler-
+-- owned because 1,3,7,13,21,31,43,57 form an exact injective code.
 -- The tri-BIDI governance owner cross-pollinates this with the existing RH
 -- hidden-residual rule and light-transport side-information firewall at exact
 -- certificate-schema strength only: no theorem is transferred between lanes.
