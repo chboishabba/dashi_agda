@@ -130,23 +130,102 @@ campaign/submission summary of proponent material
 independent extraction from proponent final PD
 ```
 
-## 8. Current highest-value acquisition path
+## 8. Project-outline map compared with the Queensland corridor overlay
+
+A campaign-supplied aerial outline map identifies, from north to south, **Bellevue Woods**, **Springview Village 2 & 3**, **Scenic Precinct** and **Peninsular Precinct**, with Brookwater to the west and Camira / the military training area to the east. The Springview, Scenic and Peninsular polygons appear as a near-continuous wooded north–south chain rather than isolated patches.
+
+The previously supplied official Queensland Statewide Biodiversity Corridors screenshots independently show a north–south riparian corridor through the Goodna–Redbank Plains–Brookwater–Springfield landscape, together with state/regional corridor buffers in the broader Springfield area.
+
+A visual comparison therefore creates a **strong spatial acquisition lead**:
+
+```text
+campaign project-outline chain
+  +
+official Queensland corridor surface
+  ->
+candidate exact project x corridor intersection
+```
+
+The apparent relationship is strongest for the Springview / Scenic part of the chain and remains relevant to Peninsular at the southern transition into the broader Springfield corridor surface.
+
+However, these are screenshots at different scales and are not a georeferenced overlay. Therefore:
+
+```text
+visual alignment
+  !=
+exact GIS intersection
+```
+
+and:
+
+```text
+forest continuity visible in aerial imagery
+  !=
+statutory critical-habitat finding
+```
+
+The legal/ecological value comes from performing the exact join and then asking what function the intersected habitat performs for the relevant population/community.
+
+### Exact spatial work now requested
+
+For each of Springview 2 & 3, Scenic and Peninsular:
+
+1. obtain the actual project/action polygon or cadastral polygon;
+2. obtain the official Queensland corridor feature geometry, not a screenshot;
+3. calculate intersection area and identify whether the intersecting feature is riparian, terrestrial, state-buffer or regional-buffer geometry;
+4. join species observations / habitat-quality / movement data to the same polygon;
+5. preserve project identity so that evidence from 2019/8575, 2020/8651 and 2020/8629 is not merged merely because all are campaign-labelled Woogaroo Forest.
+
+This could produce the useful same-object chain:
+
+```text
+exact project polygon
+  x
+official corridor intersection
+  x
+species/population use
+  x
+fragmentation consequence
+```
+
+for the EPBC and NCA consumers.
+
+### Public-education context is supportive, not legal evidence
+
+The campaign's `Maximus's Forest — Why Habitats Matter` teaching material already introduces older students to **habitat fragmentation** and **wildlife corridors**, and frames the planning problem as whether housing/roads can coexist with habitat, green space, corridors and buffers. That makes corridor/connectivity a coherent existing campaign narrative rather than a newly invented litigation framing.
+
+But:
+
+```text
+campaign teaching material
+  !=
+ecological expert evidence
+  !=
+official GIS fact
+  !=
+legal conclusion
+```
+
+It belongs in communications/community context, while the official corridor dataset, exact project geometry and ecological evidence belong in the legal proof package.
+
+## 9. Current highest-value acquisition path
 
 The new material narrows the external wall to:
 
 1. recover the actual **2019/8575 Preliminary Documentation / Final PD bundle**, including appendices and maps;
 2. obtain exact cadastral/project-stage geometry for Lot 9999 SP292760 and relevant stage boundaries;
-3. spatially intersect that geometry with the official Queensland Statewide Biodiversity Corridors layer and other relevant state habitat layers;
-4. extract proponent habitat-area, quality, species-use, retention, avoidance and offset tables;
-5. present the same-parcel ecology to two independent consumers:
+3. obtain equivalent exact geometry for Scenic EPBC 2020/8651 and Peninsula EPBC 2020/8629 where legally useful;
+4. spatially intersect those geometries with the official Queensland Statewide Biodiversity Corridors layer and other relevant state habitat layers;
+5. extract proponent habitat-area, quality, species-use, retention, avoidance and offset tables;
+6. present the same-parcel ecology to two independent consumers:
    - EPBC Part 9 approval/refusal;
    - Queensland NCA s 13 essential-habitat analysis;
-6. then compile the s 102 interim-order and s 49 permanent-protection packages.
+7. then compile the s 102 interim-order and s 49 permanent-protection packages.
 
-## 9. Lawyer-facing question created by the new corridor evidence
+## 10. Lawyer-facing question created by the corridor comparison
 
 The useful question for counsel/ecologists is no longer merely whether the land is mapped as a corridor. It is:
 
-> **What legal and ecological weight should be given to an official Queensland state/regional biodiversity-corridor intersection with the exact Springview footprint when assessing EPBC fragmentation/cumulative impact and when building an NCA s 13 case that the habitat is essential to conservation of a viable local population/community?**
+> **If the exact Springview / Scenic / Peninsular polygons intersect the official Queensland riparian or state/regional biodiversity-corridor geometry, what legal and ecological weight should that same-object intersection carry in EPBC fragmentation/cumulative-impact analysis and in an NCA s 13 case that the affected habitat is essential to conservation of a viable local population/community?**
 
-That question keeps the corridor map in the correct role: strong, official **connectivity evidence**, but not a self-executing statutory conclusion.
+That question keeps the aerial outline and corridor screenshot in the correct role: they identify a high-value spatial hypothesis. The hypothesis becomes evidence only when the exact geometries are joined and source-receipted.
