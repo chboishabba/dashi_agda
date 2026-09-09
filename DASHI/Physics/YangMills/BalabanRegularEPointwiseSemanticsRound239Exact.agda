@@ -6,6 +6,7 @@ module DASHI.Physics.YangMills.BalabanRegularEPointwiseSemanticsRound239Exact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -37,7 +38,7 @@ record SelectedMeaningWitness
     {trajectory split inputs projection}
     (semantics : CMP119RegularEPointwiseSemantics
       {trajectory = trajectory} {split = split} {inputs = inputs} projection)
-    (scale : Agda.Builtin.Nat.Nat)
+    (scale : Nat)
     (potential : Background semantics → ℝ) : Set₁ where
   field
     regularEIsSourceCoordinate :
