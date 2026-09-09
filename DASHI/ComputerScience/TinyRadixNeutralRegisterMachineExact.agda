@@ -1,6 +1,6 @@
 module DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (NonZero; _%_)
 open import DASHI.Foundations.Base369Nat using (NonZero; _%_)
 
 data Register : Set where
@@ -183,7 +183,7 @@ stepInstr (multiplyModulo target source modulus modulusNonZero) state =
     (suc (pc state))
     (program state)
     (memory state)
-    (writeRegister (registers state) target ((readRegister (registers state) target * readRegister (registers state) source) % modulus {{modulusNonZero}}))
+    (writeRegister (registers state) target (_%_ (readRegister (registers state) target * readRegister (registers state) source) modulus {{modulusNonZero}}))
     (output state)
     false
     (suc (cycles state))
