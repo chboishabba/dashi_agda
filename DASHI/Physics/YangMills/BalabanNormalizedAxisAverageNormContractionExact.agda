@@ -21,6 +21,12 @@ module DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact 
 -- parameterized by an arbitrary finite side L and by the exact normalization
 -- witness carried by NormalizedAxisAverageData.  It is therefore directly
 -- consumable by the source-admissible L=13 Gate-I migration.
+--
+-- OOM discipline:
+--   * pointwise scalar identities may be solved locally;
+--   * the global norm is registered once as a fibre observer;
+--   * global closure algebra is discharged only through carrier-free scalar
+--     lemmas, so reflection never reopens the physical L^4 representation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -30,6 +36,9 @@ import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; subst; sym; trans)
+
+import DASHI.Core.AtomicGlobalFibreLiftExact as FibreLift
+import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
@@ -79,15 +88,31 @@ globalNormSqNonnegative {L} field =
     (λ site → sq (field site))
     (λ site → squareNonnegative (field site))
 
-globalNormRespectsPointwise :
+------------------------------------------------------------------------
+-- The finite L2 norm is literally a fibre observer.  Its concrete physical
+-- sum is opened exactly once here to prove pointwise-equality preservation.
+------------------------------------------------------------------------
+
+globalNormPreservesPointwise :
   ∀ {L} {left right : SiteField L} →
   FieldEqual left right → globalNormSq left ≡ globalNormSq right
-globalNormRespectsPointwise {L} {left} {right} equality =
+globalNormPreservesPointwise {L} {left} {right} equality =
   sumRationalCong
     (physicalBlockSites L)
     (λ site → left site * left site)
     (λ site → right site * right site)
     (λ site → cong₂ _*_ (equality site) (equality site))
+
+globalNormObserverLift :
+  ∀ {L} → FibreLift.FibreObserverLift (globalNormSq {L})
+globalNormObserverLift =
+  FibreLift.fibre-observer-lift globalNormPreservesPointwise
+
+globalNormRespectsPointwise :
+  ∀ {L} {left right : SiteField L} →
+  FieldEqual left right → globalNormSq left ≡ globalNormSq right
+globalNormRespectsPointwise equality =
+  FibreLift.atomicFamilyToGlobal globalNormObserverLift equality
 
 sumRationalSubtractLocal :
   ∀ {A : Set} (values : List A) (f g : A → ℚ) →
@@ -160,7 +185,9 @@ residualOrthogonalToAverage dataSet field axis =
             - value)
           (innerRespectsRightPointwise field
             (axisAverageFixedPointwise dataSet axis field)))
-        (ℚRing.solve-∀)))
+        (OpaqueAlgebra.subtractSelfZero
+          (globalBlockInner field
+            (Average.axisAverage dataSet field axis)))))
 
 twoFieldSquareExpansion :
   ∀ {L} (left right : SiteField L) →
@@ -208,7 +235,10 @@ residualPlusAveragePointwise :
       (axisResidual dataSet field axis)
       (Average.axisAverage dataSet field axis))
     field
-residualPlusAveragePointwise dataSet field axis site = ℚRing.solve-∀
+residualPlusAveragePointwise dataSet field axis site =
+  OpaqueAlgebra.subtractAddCancel
+    (field site)
+    (Average.axisAverage dataSet field axis site)
 
 axisAveragePythagoras :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
@@ -231,7 +261,10 @@ axisAveragePythagoras dataSet field axis =
             + globalNormSq (Average.axisAverage dataSet field axis)
             + (1ℚ + 1ℚ) * cross)
           (residualOrthogonalToAverage dataSet field axis))
-        (ℚRing.solve-∀)))
+        (OpaqueAlgebra.dropScaledZero
+          (globalNormSq (axisResidual dataSet field axis)
+            + globalNormSq (Average.axisAverage dataSet field axis))
+          (1ℚ + 1ℚ))))
 
 axisAverageNormContraction :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
@@ -245,7 +278,11 @@ axisAverageNormContraction dataSet field axis =
       ≡ globalNormSq (Average.axisAverage dataSet field axis)
         + globalNormSq (axisResidual dataSet field axis)
     pythagorasAverageFirst =
-      trans (axisAveragePythagoras dataSet field axis) (ℚRing.solve-∀)
+      trans
+        (axisAveragePythagoras dataSet field axis)
+        (OpaqueAlgebra.swapSum
+          (globalNormSq (axisResidual dataSet field axis))
+          (globalNormSq (Average.axisAverage dataSet field axis)))
   in
   subst
     (λ upper →
@@ -258,6 +295,3 @@ axisAverageNormContraction dataSet field axis =
 
 normalizedAxisAveragePythagorasLevel : ProofLevel
 normalizedAxisAveragePythagorasLevel = machineChecked
-
-normalizedAxisAverageNormContractionLevel : ProofLevel
-normalizedAxisAverageNormContractionLevel = machineChecked
