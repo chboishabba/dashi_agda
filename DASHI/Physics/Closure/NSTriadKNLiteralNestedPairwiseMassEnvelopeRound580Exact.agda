@@ -14,17 +14,14 @@ module DASHI.Physics.Closure.NSTriadKNLiteralNestedPairwiseMassEnvelopeRound580E
 -- IMPORTANT BOUNDARY:
 --   local overlap receipt != R29 cutoff-uniform decay certificate.
 --
--- The mass envelope below may still repeat a cell once for every coherent
--- partner.  R179 already proves that mass-only same-output control cannot by
--- itself eliminate such multiplicity.  Therefore this owner advances the
--- preferred signed route only from "missing local overlap inequality" to
--- "missing shell-decaying envelope mass".
+-- The same-final-output identity is an EXPLICIT premise.  It is never
+-- manufactured with refl for arbitrary left/right cells.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_)
+open import Data.Rational.Base using (ℚ; _+_; ∣_∣)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -82,24 +79,26 @@ literalNestedMassEnvelopeBound :
   (L : Helical.PeriodicHelicalProjectorLaws F E I S)
   (H : R142.HelicalHalfCalibration S)
   (W : R294.SwapInvariantCellWeight F)
-  (left right : R329.StrongLowLiteralNestedCell E I O system S L H W) →
-  let X = R329.literalWeightedNestedCell E I O system S L H W left
-      Y = R329.literalWeightedNestedCell E I O system S L H W right
+  (left right : R329.StrongLowLiteralNestedCell E I O system S L H W)
+  (leftShell rightShell : Nat)
+  (sameOutput :
+    Physical.k (R329.outer left) ≡ Physical.k (R329.outer right)) →
+  let
+    P = R336.heat-weighted-nested-pairwise-overlap
+      left right leftShell rightShell sameOutput
+      (massPairEnvelope E I O system S L H W left right)
+      (R579.rationalRealHermitianYoung
+        (R329.literalWeightedNestedCell E I O system S L H W left)
+        (R329.literalWeightedNestedCell E I O system S L H W right))
   in
-  Data.Rational.Base.∣ R336.signedNestedOverlap E I O system S L H W
-      (R336.heat-weighted-nested-pairwise-overlap
-        left right 0 0 refl
-        (massPairEnvelope E I O system S L H W left right)
-        (R579.rationalRealHermitianYoung X Y)) ∣
+  ∣ R336.signedNestedOverlap E I O system S L H W P ∣
   ≤ massPairEnvelope E I O system S L H W left right
-literalNestedMassEnvelopeBound E I O system S L H W left right =
+literalNestedMassEnvelopeBound
+    E I O system S L H W left right leftShell rightShell sameOutput =
   R579.rationalRealHermitianYoung
     (R329.literalWeightedNestedCell E I O system S L H W left)
     (R329.literalWeightedNestedCell E I O system S L H W right)
 
--- Preferred constructor: shell labels and same-final-output identity are kept
--- exactly as consumer-visible coordinates rather than inferred from the mass
--- inequality.
 literalNestedPairwiseOverlapFromMass :
   (E : C3.IntegerEmbedding F)
   (I : C3.ModeInverseSquare F E)
@@ -115,19 +114,20 @@ literalNestedPairwiseOverlapFromMass :
   R336.HeatWeightedNestedPairwiseOverlap E I O system S L H W
 literalNestedPairwiseOverlapFromMass
     E I O system S L H W left right leftShell rightShell sameOutput =
-  let
-    X = R329.literalWeightedNestedCell E I O system S L H W left
-    Y = R329.literalWeightedNestedCell E I O system S L H W right
-  in
   R336.heat-weighted-nested-pairwise-overlap
     left right
     leftShell rightShell
     sameOutput
     (massPairEnvelope E I O system S L H W left right)
-    (R579.rationalRealHermitianYoung X Y)
+    (R579.rationalRealHermitianYoung
+      (R329.literalWeightedNestedCell E I O system S L H W left)
+      (R329.literalWeightedNestedCell E I O system S L H W right))
 
 round580LiteralR336LocalOverlapReceiptConstructed : Bool
 round580LiteralR336LocalOverlapReceiptConstructed = true
+
+round580SameFinalOutputIsExplicitPremise : Bool
+round580SameFinalOutputIsExplicitPremise = true
 
 round580UsesSquareRoot : Bool
 round580UsesSquareRoot = false
@@ -138,7 +138,6 @@ round580UsesRowColumnSchur = false
 round580UsesFibreCardinality : Bool
 round580UsesFibreCardinality = false
 
--- The new local envelope is intentionally not promoted into a decay theorem.
 round580MassEnvelopeCrossShellDecayClosed : Bool
 round580MassEnvelopeCrossShellDecayClosed = false
 
@@ -154,6 +153,10 @@ round580ClayPromotion = false
 round580LiteralR336LocalOverlapReceiptConstructedIsTrue :
   round580LiteralR336LocalOverlapReceiptConstructed ≡ true
 round580LiteralR336LocalOverlapReceiptConstructedIsTrue = refl
+
+round580SameFinalOutputIsExplicitPremiseIsTrue :
+  round580SameFinalOutputIsExplicitPremise ≡ true
+round580SameFinalOutputIsExplicitPremiseIsTrue = refl
 
 round580ClayPromotionIsFalse : round580ClayPromotion ≡ false
 round580ClayPromotionIsFalse = refl
