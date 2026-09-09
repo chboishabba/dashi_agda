@@ -3,22 +3,13 @@ module DASHI.Physics.Closure.NSTriadKNUnrestrictedNestedOperatorShellNormalizati
 ------------------------------------------------------------------------
 -- ROUND585 / NORMALIZE THE UNRESTRICTED NESTED OPERATOR SHELL
 --
--- R584 deliberately exposed three outer physical coordinates before choosing
--- an operator-shell semantics.  R573's actual construction resolves the choice:
--- for an outer incidence tau, the nested block enumerates the COMPLETE inner
--- fibre with output exactly p_tau,
+-- R573 constructs each nested block by enumerating the complete inner fibre
+-- with output p_tau and then inserts that block into the outer slot against
+-- q_tau.  Therefore the source-native block/operator index is the OUTER
+-- FORCING LEG p.  The final output k cannot distinguish two R584 cells paired
+-- on the same final output.
 --
---   physicalOutputFiber cutoff (p tau),
---
--- and then inserts that block into the outer slot against the spectator q_tau.
--- Thus the source-native block/operator index is the OUTER FORCING LEG p.
---
--- The final output k cannot serve as the cross-shell index on R584 pairs because
--- SameOutputNestedPair584 already requires k_left = k_right.  The q leg remains
--- a useful spectator coordinate, but it is not the index used to select the
--- nested inner output fibre.
---
--- This is a representation normalization, not a decay estimate.
+-- This is representation normalization only; no decay estimate is added.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -26,17 +17,22 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
+import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNUnrestrictedNestedSignedOverlapRound584Exact as R584
 
 canonicalNestedOperatorCoordinate585 : R584.OuterOperatorShellCoordinate584
 canonicalNestedOperatorCoordinate585 = R584.outerForcing584
 
-canonicalNestedOperatorShell585 :
-  Physical.PhysicalTriadIncidence → Nat
-canonicalNestedOperatorShell585 tau =
-  Shell.shellIndex (Physical.p tau)
+canonicalNestedOperatorShell585 : Physical.PhysicalTriadIncidence → Nat
+canonicalNestedOperatorShell585 tau = Shell.shellIndex (Physical.p tau)
 
 canonicalCoordinateComputesForcingShell585 :
   (tau : Physical.PhysicalTriadIncidence) →
@@ -44,36 +40,40 @@ canonicalCoordinateComputesForcingShell585 :
   ≡ canonicalNestedOperatorShell585 tau
 canonicalCoordinateComputesForcingShell585 tau = refl
 
-finalOutputShellsCoincideOnSameOutputPair585 :
-  ∀ {r} {F : DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.RealField r}
-    {E : DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.IntegerEmbedding F}
-    {I : DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.ModeInverseSquare F E}
-    {O : DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras.RationalInverseNormOrder E I}
-    {system : DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.FiniteComplex3GalerkinSystem F E I}
-    {S : DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure.HelicalModeScalars F}
-    {L : DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure.PeriodicHelicalProjectorLaws F E I S}
-    {H : DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact.HelicalHalfCalibration S}
-    {W : DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact.SwapInvariantCellWeight F}
-    {velocityTransverse :
-      (mode : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode) →
-      DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure.Transverse E mode
-        (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.velocity system mode)} →
-  (pair :
-    R584.UnrestrictedNested584.SameOutputNestedPair584
-      E I O system S L H W velocityTransverse) →
-  Shell.shellIndex
-    (Physical.k
-      (R584.UnrestrictedNested584.left584 E I O system S L H W velocityTransverse pair))
-  ≡
-  Shell.shellIndex
-    (Physical.k
-      (R584.UnrestrictedNested584.right584 E I O system S L H W velocityTransverse pair))
-finalOutputShellsCoincideOnSameOutputPair585 pair =
-  cong Shell.shellIndex
-    (R584.UnrestrictedNested584.sameFinalOutput584 pair)
+module SameOutputNormalization585
+    {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E)
+    (O : Leray.RationalInverseNormOrder E I)
+    (system : Audit.FiniteComplex3GalerkinSystem F E I)
+    (S : Helical.HelicalModeScalars F)
+    (L : Helical.PeriodicHelicalProjectorLaws F E I S)
+    (H : R142.HelicalHalfCalibration S)
+    (W : R294.SwapInvariantCellWeight F)
+    (velocityTransverse :
+      (mode : Z3.FourierMode) →
+      Helical.Transverse E mode (Audit.velocity system mode)) where
 
--- The preferred R29 adapter is now normalized to the physical p-shell.
--- No caller supplies shell labels.
+  module U = R584.UnrestrictedNested584 E I O system S L H W velocityTransverse
+
+  finalOutputShellsCoincideOnSameOutputPair585 :
+    (pair : U.SameOutputNestedPair584) →
+    Shell.shellIndex (Physical.k (U.left584 pair))
+    ≡ Shell.shellIndex (Physical.k (U.right584 pair))
+  finalOutputShellsCoincideOnSameOutputPair585 pair =
+    cong Shell.shellIndex (U.sameFinalOutput584 pair)
+
+  canonicalLeftShell585 : U.SameOutputNestedPair584 → Nat
+  canonicalLeftShell585 pair =
+    U.leftShell584 canonicalNestedOperatorCoordinate585 pair
+
+  canonicalRightShell585 : U.SameOutputNestedPair584 → Nat
+  canonicalRightShell585 pair =
+    U.rightShell584 canonicalNestedOperatorCoordinate585 pair
+
+  canonicalSeparation585 : U.SameOutputNestedPair584 → Nat
+  canonicalSeparation585 pair =
+    U.shellSeparation584 canonicalNestedOperatorCoordinate585 pair
 
 round585SourceNativeNestedBlockIndexedByOuterForcing : Bool
 round585SourceNativeNestedBlockIndexedByOuterForcing = true
