@@ -37,6 +37,7 @@ import DASHI.Biology.CausalEstimatorGuaranteesExact
 import DASHI.Biology.CausalEstimatorMetricConsistencyExact
 import DASHI.Biology.CausalEstimatorFiniteDispersionExact
 import DASHI.Biology.CausalEstimatorFiniteProbabilityConsistencyExact
+import DASHI.Biology.CausalEstimatorFiniteTestDistributionConvergenceExact
 import DASHI.Biology.CausalEstimatorAsymptoticProofDebtExact
 
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
