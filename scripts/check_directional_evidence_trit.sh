@@ -13,6 +13,8 @@ FILES=(
   DASHI/Statistics/DirectionalEvidenceEverything.agda
   DASHI/Biology/LogisticPopulationDirectionalEvidenceExact.agda
   DASHI/Biology/LogisticAgenticPrebioticCrossPollinationExact.agda
+  DASHI/Biology/ResourceCoupledLogisticReplicationExact.agda
+  DASHI/Biology/ResourceCoupledLogisticEvolutionBridgeExact.agda
   DASHI/AgenticMaterialBidiEverything.agda
   DASHI/Interop/DirectionalEvidenceProofSearchBridgeExact.agda
 )
@@ -33,4 +35,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence / logistic population / agentic-prebiotic cross-pollination checks passed"
+echo "directional evidence / logistic population / resource-coupled evolution / agentic-prebiotic checks passed"
