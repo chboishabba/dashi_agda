@@ -14,6 +14,7 @@ module DASHI.Physics.Closure.NSTriadKNPoissonR406ToClayLeafABidiRound538Exact wh
 --
 --   concrete R406 Poisson instance
 --     + same-object physical weld
+--     + exact identity of the R535 bridge with that Poisson-produced bridge
 --     + cutoff correspondence
 --     + literal R406 cross-domain weld
 --     + source-domain cutoff-uniform signed-cross budget
@@ -53,6 +54,11 @@ record PoissonR406ClayLeafACompletion538
     poissonR406Producer538 : R537.LiteralR406PoissonProducer537 P
 
     measureBridge538 : Consumer.SpectralMeasureBridge535
+    measureBridgeIsProducedByPoisson538 :
+      measureBridge538
+      ≡ R537.measureBridgeFromLiteralR406PoissonProducer537
+          poissonR406Producer538
+
     cutoffCorrespondence538 : Consumer.CutoffCorrespondence535 measureBridge538
     literalCrossDomainTransport538 :
       Consumer.LiteralR406CrossDomainTransport535
@@ -103,6 +109,7 @@ poissonLeafACompletionAdvancesTerminalCut538 = refl
 data PoissonClayAuditCoordinate538 : Set where
   auditConcretePoissonR406Instance538 : PoissonClayAuditCoordinate538
   auditPoissonAnalyticHypotheses538 : PoissonClayAuditCoordinate538
+  auditPoissonProducedMeasureBridgeIdentity538 : PoissonClayAuditCoordinate538
   auditLiteralPeriodicSameObject538 : PoissonClayAuditCoordinate538
   auditLiteralEuclideanSameObject538 : PoissonClayAuditCoordinate538
   auditR406Normalization538 : PoissonClayAuditCoordinate538
@@ -128,6 +135,7 @@ open PoissonClayReverseAudit538 public
 data R538Residual : Set where
   missingConcretePoissonR406Instantiation538 : R538Residual
   missingPoissonR406SameObjectWeld538 : R538Residual
+  missingPoissonProducedMeasureBridgeIdentity538 : R538Residual
   missingR406CutoffCorrespondence538 : R538Residual
   missingSourceDomainLeafABudget538 : R538Residual
   missingUniformBoundTransport538 : R538Residual
