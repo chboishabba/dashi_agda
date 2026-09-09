@@ -44,6 +44,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 open import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
+import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageExact as Average
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact as Norm
 import DASHI.Physics.YangMills.BalabanNormalizedFourAxisMartingaleExact as Martingale
@@ -212,7 +213,16 @@ martingalePoincareBeforeEnergyContraction siteField meanZero =
         (cong (LDL.oneEighteenth *_)
           (Martingale.fourAxisVarianceDecomposition
             Side13.side13AverageData siteField meanZero))
-        (ℚRing.solve-∀)
+        (OpaqueAlgebra.scaleFourSum
+          LDL.oneEighteenth
+          (Norm.globalNormSq
+            (Martingale.martingale0 Side13.side13AverageData siteField))
+          (Norm.globalNormSq
+            (Martingale.martingale1 Side13.side13AverageData siteField))
+          (Norm.globalNormSq
+            (Martingale.martingale2 Side13.side13AverageData siteField))
+          (Norm.globalNormSq
+            (Martingale.martingale3 Side13.side13AverageData siteField)))
   in
   subst
     (λ left → left ≤ martingaleDirectionalEnergySum siteField)
