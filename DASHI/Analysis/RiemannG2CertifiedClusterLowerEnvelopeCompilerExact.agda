@@ -19,20 +19,19 @@ import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact as FinalCer
 import DASHI.Analysis.RiemannG2CertifiedNearUpperClusterResponseCompilerExact as Certified
 
 ------------------------------------------------------------------------
--- OPTIONAL PRODUCER: CERTIFIED ENVELOPE < L <= ACTUAL CLUSTER RESPONSE
+-- OPTIONAL PRODUCER: CERTIFIED ENVELOPE < L -> ACTUAL CLUSTER RESPONSE
 --
 -- The terminal consumer does not require an intermediate cluster lower L.
--- However, the checked-Lean history reports quantitative cluster-margin
--- mathematics as an existing source asset.  If that theorem is transported
--- proof-relevantly onto the SAME balance-free final carrier, we should reuse it
--- as an optional producer rather than force a new direct comparison with the
--- opaque ClusterResponse field.
+-- However, checked-Lean history reports quantitative cluster-margin mathematics
+-- as a source asset. If that theorem is transported proof-relevantly onto the
+-- SAME balance-free final carrier, it may be reused as an optional producer.
 --
--- This owner therefore separates:
---   (1) a theorem-bearing lower certificate L <= ClusterResponse;
---   (2) the still-independent strict certified envelope < L.
--- Their transitive composition pays the existing direct ClusterResponse
--- consumer.  Boolean/status provenance cannot construct (1).
+-- The repository's minimal OrderedComplementSurface intentionally exposes only
+-- <= transitivity and <=-then-< transitivity; it does NOT expose <-then-<=.
+-- Therefore this optional producer may not silently assume that stronger order
+-- law. Instead its same-object cluster attachment must explicitly transport any
+-- proof x < L to x < actual ClusterResponse. Richer source orders can compile
+-- that transport; status/provenance cannot.
 ------------------------------------------------------------------------
 
 record CertifiedClusterLower
@@ -46,6 +45,15 @@ record CertifiedClusterLower
     lowerBelowActualClusterResponse :
       Order._≤_ (Split.order (Cluster.surface context))
         lower
+        (Existing.cast (Cluster.clusterScalarIdentity context)
+          (Cluster.ClusterResponse context
+            (Cluster.clusterUniversalPoleQuotientTaper context)))
+
+    strictBelowLowerTransportsToActualCluster :
+      {x : Order.Scalar (Split.order (Cluster.surface context))} ->
+      Order._<_ (Split.order (Cluster.surface context)) x lower ->
+      Order._<_ (Split.order (Cluster.surface context))
+        x
         (Existing.cast (Cluster.clusterScalarIdentity context)
           (Cluster.ClusterResponse context
             (Cluster.clusterUniversalPoleQuotientTaper context)))
@@ -97,11 +105,10 @@ compileClusterLowerRouteToCertifiedClusterMargin :
   Certified.CertifiedNearUpperClusterMargin
     targets kernel {certificate = certificate} upper orderAttachment context
 compileClusterLowerRouteToCertifiedClusterMargin
-    {context = context} {clusterLower = clusterLower} payment = record
+    {clusterLower = clusterLower} payment = record
   { Certified.certifiedEnvelopeStrictBelowCluster =
-      Order.ltLeTrans (Split.order (Cluster.surface context))
+      strictBelowLowerTransportsToActualCluster clusterLower
         (certifiedEnvelopeStrictBelowLower payment)
-        (lowerBelowActualClusterResponse clusterLower)
   ; Certified.marginReference = strictEnvelopeReference payment
   }
 
@@ -125,6 +132,14 @@ record CertifiedClusterLowerEnvelopeBoundary : Set where
     theoremBearingClusterLowerIsValidOptionalProducer : Bool
     theoremBearingClusterLowerIsValidOptionalProducerIsTrue :
       theoremBearingClusterLowerIsValidOptionalProducer ≡ true
+
+    globalMinimalOrderProvidesLtLeTrans : Bool
+    globalMinimalOrderProvidesLtLeTransIsFalse :
+      globalMinimalOrderProvidesLtLeTrans ≡ false
+
+    localStrictTransportReceiptRequired : Bool
+    localStrictTransportReceiptRequiredIsTrue :
+      localStrictTransportReceiptRequired ≡ true
 
     checkedLeanStatusBooleanInhabitsClusterLower : Bool
     checkedLeanStatusBooleanInhabitsClusterLowerIsFalse :
@@ -150,7 +165,9 @@ canonicalCertifiedClusterLowerEnvelopeBoundary =
     false refl
     true refl
     false refl
+    true refl
+    false refl
     false refl
     true refl
     false refl
-    "Keep actual ClusterResponse as the terminal consumer. Optionally reuse an independently transported same-object quantitative cluster theorem as L <= ClusterResponse, then prove only the certified envelope U+B_far+D_Gamma < L. Transitivity compiles the existing direct ClusterResponse payment. The 8889 status Boolean/provenance does not inhabit the lower theorem, the final balance remains unavailable, and RH is not derived here."
+    "Keep actual ClusterResponse as the terminal consumer. Optionally reuse an independently transported same-object quantitative cluster theorem through a lower L, but do not assume <-then-<= transitivity absent from the minimal order surface. The producer must carry the proof-relevant transport x<L -> x<ClusterResponse on the same carrier. Then prove only the certified envelope U+B_far+D_Gamma<L; the compiler pays the actual ClusterResponse consumer. The 8889 status Boolean/provenance does not inhabit these theorem fields, the final balance remains unavailable, and RH is not derived here."
