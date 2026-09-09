@@ -7,28 +7,25 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
-import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as High
+import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as High
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 
 ------------------------------------------------------------------------
 -- CLAY-FACING TERMINAL CUT
 --
--- All assembly below is exact and the canonical route is allowance-free.
--- The full same-substrate RH theorem needs:
+-- The public high-side input is now the lowest theorem-bearing surface reached
+-- by introspection: for every arbitrary High zero assumed off-line, supply one
+-- exact literal finite-near model, one unpaid final representation context, and
+-- the independent phase-visible
 --
---   L. one exact Platt--Trudgian verified-region transport on this analytic
---      completed-zeta carrier;
---   H. for every chosen High zero assumed off-line, one direct independent
---      literal complement-margin case;
---   C. a cover saying every nontrivial zero is in the verified region or High;
---   S. an exact refinement of the abstract completed-zeta criticalLine
---      predicate to a concrete stable predicate.
+--   literalNear + transportedFar + Gamma < clusterMargin
 --
--- There is no arbitrary Low predicate on the canonical path: Low is
--- definitionally the verified region supplied by L.  L+H+C compile first to
--- constructive double-negated RH.  S is used only in the final logical
--- conversion to positive prize-facing RH.
+-- theorem.  The legacy opaque combined-margin producer is compiler output.
+--
+-- Low is definitionally the Platt--Trudgian verified region.  Low + literal High
+-- + cover compile first to constructive double-negated RH.  The exact critical
+-- predicate refinement is consumed only in the final conversion to positive RH.
 ------------------------------------------------------------------------
 
 record ClayTerminalOneLeafInput
@@ -44,7 +41,7 @@ record ClayTerminalOneLeafInput
       Low.CanonicalLowRegion lowTransport rho ⊎ HighRegion rho
 
     highProducer :
-      High.UniformIndependentComplementHighProducer analytic HighRegion
+      High.UniformLiteralPhaseHighProducer analytic HighRegion
 
     criticalLineRefinement :
       Stability.CriticalLinePredicateRefinement analytic
@@ -99,9 +96,9 @@ record ClayTerminalOneLeafBoundary : Set where
     consumerAssignedAllowanceLayerOnCanonicalPathIsFalse :
       consumerAssignedAllowanceLayerOnCanonicalPath ≡ false
 
-    extraHighOrdinatePaymentAfterUniformOneLeafProducer : Bool
-    extraHighOrdinatePaymentAfterUniformOneLeafProducerIsFalse :
-      extraHighOrdinatePaymentAfterUniformOneLeafProducer ≡ false
+    extraHighOrdinatePaymentAfterUniformLiteralPhaseProducer : Bool
+    extraHighOrdinatePaymentAfterUniformLiteralPhaseProducerIsFalse :
+      extraHighOrdinatePaymentAfterUniformLiteralPhaseProducer ≡ false
 
     separateNearEnvelopePrimitiveLeaf : Bool
     separateNearEnvelopePrimitiveLeafIsFalse :
@@ -111,9 +108,13 @@ record ClayTerminalOneLeafBoundary : Set where
     separateGammaEnvelopePrimitiveLeafIsFalse :
       separateGammaEnvelopePrimitiveLeaf ≡ false
 
-    uniformIndependentComplementMarginIsHighAnalyticFamily : Bool
-    uniformIndependentComplementMarginIsHighAnalyticFamilyIsTrue :
-      uniformIndependentComplementMarginIsHighAnalyticFamily ≡ true
+    uniformLiteralPhaseJointMarginIsHighAnalyticFamily : Bool
+    uniformLiteralPhaseJointMarginIsHighAnalyticFamilyIsTrue :
+      uniformLiteralPhaseJointMarginIsHighAnalyticFamily ≡ true
+
+    opaqueCanonicalMarginProducerPrimitiveAtClayBoundary : Bool
+    opaqueCanonicalMarginProducerPrimitiveAtClayBoundaryIsFalse :
+      opaqueCanonicalMarginProducerPrimitiveAtClayBoundary ≡ false
 
     arbitraryLowPredicateOnCanonicalPath : Bool
     arbitraryLowPredicateOnCanonicalPathIsFalse :
@@ -169,13 +170,14 @@ canonicalClayTerminalOneLeafBoundary =
     true refl
     false refl
     false refl
-    true refl
-    true refl
-    true refl
     false refl
     true refl
     true refl
     true refl
     false refl
+    true refl
+    true refl
+    true refl
     false refl
-    "The prize-facing compiler is now normalized on both sides. High work is one uniform family of independent literal complement-margin cases. Low is definitionally the exact Platt--Trudgian verified-region predicate, so no arbitrary Low carrier or Low-subset theorem remains; only the same-carrier verified-region criticality theorem and verified-region-or-High cover are required. Those analytic/low inputs compile to double-negated RH without critical-line stability. Only the final conversion to positive RH consumes the exact critical-predicate refinement. No substantive input is fabricated here."
+    false refl
+    "The prize-facing compiler now exposes the literal phase theorem family itself. High work is: for every arbitrary high off-line zero, provide the exact final near phase model, unpaid same-object context, and independent literalNear+far+Gamma<cluster margin. The opaque canonical-margin producer is downstream compiler output. Low is definitionally the exact Platt--Trudgian verified region, so no arbitrary Low carrier or Low-subset theorem remains. These inputs compile to double-negated RH without stability; only the final positive-RH conversion consumes the exact critical-predicate refinement. No substantive theorem is fabricated here."
