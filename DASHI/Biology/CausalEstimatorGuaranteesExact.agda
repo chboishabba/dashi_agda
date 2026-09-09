@@ -135,11 +135,11 @@ finiteExpectedEstimatorOutput :
     {procedure : Statistical.EstimatorProcedure estimand} →
   (estimateToRational : Statistical.Estimate procedure → ℚ) →
   List (WeightedEstimatorSample procedure) → ℚ
-finiteExpectedEstimatorOutput estimateToRational [] = 0ℚ
-finiteExpectedEstimatorOutput estimateToRational (atom ∷ atoms) =
+finiteExpectedEstimatorOutput {procedure = procedure} estimateToRational [] = 0ℚ
+finiteExpectedEstimatorOutput {procedure = procedure} estimateToRational (atom ∷ atoms) =
   sampleMass atom
     * estimateToRational
-        (Statistical.estimator _ (sample atom))
+        (Statistical.estimator procedure (sample atom))
   + finiteExpectedEstimatorOutput estimateToRational atoms
 
 ------------------------------------------------------------------------
