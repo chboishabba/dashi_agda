@@ -11,13 +11,15 @@ on:
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
       - 'DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda'
       - 'DASHI/Analysis/RiemannG2*.agda'
+      - 'DASHI/Analysis/RiemannAnalyticCoordinateTerminalRefinementExact.agda'
       - 'scripts/check_riemann_aristotle_pole_quotient_return.sh'
       - 'scripts/check_riemann_aristotle_two_zero_return.sh'
       - 'scripts/check_riemann_g2_minimal_final_cut.sh'
+      - 'scripts/check_riemann_g2_current_direct_cut.sh'
       - '.github/workflows/riemann-aristotle-pole-quotient-return.yml'
   push:
     branches:
-      - agent/rh-direct-combined-off-cut
+      - agent/rh-generic-high-certified-followup
     paths:
       - 'DASHI/Core/TwoChannelAllowanceCompositionExact.agda'
       - 'DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda'
@@ -27,9 +29,11 @@ on:
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
       - 'DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda'
       - 'DASHI/Analysis/RiemannG2*.agda'
+      - 'DASHI/Analysis/RiemannAnalyticCoordinateTerminalRefinementExact.agda'
       - 'scripts/check_riemann_aristotle_pole_quotient_return.sh'
       - 'scripts/check_riemann_aristotle_two_zero_return.sh'
       - 'scripts/check_riemann_g2_minimal_final_cut.sh'
+      - 'scripts/check_riemann_g2_current_direct_cut.sh'
       - '.github/workflows/riemann-aristotle-pole-quotient-return.yml'
   workflow_dispatch:
 
@@ -43,7 +47,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y agda
           agda --version
-      - name: Trust scan and legacy pole-quotient check
+      - name: Current direct/generic-high Clay cut
+        run: bash scripts/check_riemann_g2_current_direct_cut.sh
+      - name: Legacy pole-quotient regression
         run: bash scripts/check_riemann_aristotle_pole_quotient_return.sh
-      - name: Trust scan and minimal final-cut check
+      - name: Historical minimal-final-cut regression
         run: bash scripts/check_riemann_g2_minimal_final_cut.sh
