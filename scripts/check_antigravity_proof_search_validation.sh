@@ -5,6 +5,11 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
 
 files=(
+  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+  DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGBidiValidationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityConstraintPruningVsBundlePaymentExact.agda
   DASHI/Physics/ExoticGravity/ConstraintPruningIdentityWeldExact.agda
   DASHI/Physics/ExoticGravity/AntigravityConstraintInformedBundleDesignExact.agda
@@ -36,6 +41,26 @@ for file in "${files[@]}"; do
     exit 1
   fi
 done
+
+# Signed-G / negative-G BIDI invariants.
+grep -q 'flipCouplingSignInvolutive' \
+  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+grep -q 'negativeGReversesEveryDisplayedLeadingCorrection' \
+  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+grep -q 'frozenSignProbeEqualsSelfConsistentNegativeGTheory' \
+  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+grep -q 'sourceSideSignCollision' \
+  DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
+grep -q 'negativeGAutomaticallyFlipsCosmologicalConstant' \
+  DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
+grep -q 'negativeGAloneImpliesAlteredInertialMass' \
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
+grep -q 'negativeGAloneImpliesReactionlessPropulsion' \
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
+grep -q 'sameInputPairIsolatesCouplingSignBetterThanUnpairedComparison' \
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
+grep -q 'betterNegativeGFitAutomaticallyEstablishesNegativeGPhysics' \
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
 
 # Introspective frontier / no-stitch invariants.
 grep -q 'currentRecommendedBundle = sourceGeometryBundle' \
@@ -110,6 +135,7 @@ grep -q 'admittedMoveEqualsSuccessfulReceipt' \
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/ExoticGravity/AntigravityProofSearchValidationExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityProofSearchValidationExact.agda \
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGBidiValidationExact.agda
 
-echo "Antigravity proof-search validation checks passed"
+echo "Antigravity proof-search and negative-G BIDI validation checks passed"
