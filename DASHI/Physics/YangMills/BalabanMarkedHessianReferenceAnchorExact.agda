@@ -135,7 +135,17 @@ vanishingReferenceAsAnchor :
   {X : Marked.Localisation walkData} {x y : Marked.Cube walkData} →
   VanishingMarkedHessianReference walkData scale Ω Ω′ U history X x y →
   MarkedHessianReferenceAnchor walkData scale Ω Ω′ U history X x y
-vanishingReferenceAsAnchor vanishing =
+vanishingReferenceAsAnchor
+  {walkData = walkData}
+  {scale = scale}
+  {Ω = Ω}
+  {Ω′ = Ω′}
+  {U = U}
+  {history = history}
+  {X = X}
+  {x = x}
+  {y = y}
+  vanishing =
   marked-hessian-reference-anchor
     0ℝ
     (VanishingMarkedHessianReference.recomposition vanishing)
@@ -143,7 +153,7 @@ vanishingReferenceAsAnchor vanishing =
   where
     referenceBound :
       absℝ
-        (Marked.localisedHessian _ _ _ _ _ _ _ _ _)
+        (Marked.localisedHessian walkData scale Ω′ U history X x y)
       ≤ℝ 0ℝ
     referenceBound
       rewrite VanishingMarkedHessianReference.referenceVanishes vanishing
