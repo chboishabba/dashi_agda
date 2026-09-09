@@ -14,6 +14,27 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as 
 import DASHI.Analysis.RiemannAristotlePoleQuotientComplementMarginCompilerExact as Order
 import DASHI.Analysis.RiemannG2FinalSplitComplementSameObjectAssemblyExact as Existing
 
+------------------------------------------------------------------------
+-- DIRECT CLUSTER-RESPONSE CONTRADICTION
+--
+-- The older complement-margin compiler introduced an intermediate positive
+-- cluster margin M with
+--
+--   M <= ClusterResponse
+--   B_complement < M.
+--
+-- That is sufficient but not primitive.  The actual terminal contradiction is
+-- already available from the weaker API surface
+--
+--   ComplementResponse <= B_complement
+--   B_complement < ClusterResponse
+--   ClusterResponse = ComplementResponse.
+--
+-- Therefore the quantitative intermediate cluster-margin theorem can be
+-- removed entirely if the independent analytic theorem is stated directly
+-- against the literal final cluster response.
+------------------------------------------------------------------------
+
 record BalanceFreeClusterResponseContext
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
@@ -23,38 +44,53 @@ record BalanceFreeClusterResponseContext
     gamma = Direct.directGammaTarget targets
   field
     surface : Split.OrderedAdditiveComplementSurface
+
     ClusterTaper : Set
     ClusterScalar : Set
     ClusterResponse : ClusterTaper -> ClusterScalar
     clusterUniversalPoleQuotientTaper : ClusterTaper
-    offScalarIdentity : Off.Scalar off ≡ Order.Scalar (Split.order surface)
-    gammaScalarIdentity : Gamma.Scalar gamma ≡ Order.Scalar (Split.order surface)
-    clusterScalarIdentity : ClusterScalar ≡ Order.Scalar (Split.order surface)
+
+    offScalarIdentity :
+      Off.Scalar off ≡ Order.Scalar (Split.order surface)
+    gammaScalarIdentity :
+      Gamma.Scalar gamma ≡ Order.Scalar (Split.order surface)
+    clusterScalarIdentity :
+      ClusterScalar ≡ Order.Scalar (Split.order surface)
+
     offGammaTaperCarrierIdentity : Off.Taper off ≡ Gamma.Taper gamma
     offClusterTaperCarrierIdentity : Off.Taper off ≡ ClusterTaper
+
     sameUniversalTaperOffGamma :
       Existing.cast offGammaTaperCarrierIdentity
         (Off.universalPoleQuotientTaper off)
       ≡ Gamma.universalPoleQuotientTaper gamma
+
     sameUniversalTaperOffCluster :
       Existing.cast offClusterTaperCarrierIdentity
         (Off.universalPoleQuotientTaper off)
       ≡ clusterUniversalPoleQuotientTaper
+
     offOrderTransport :
       {x y : Off.Scalar off} ->
       Off._≤_ off x y ->
       Order._≤_ (Split.order surface)
         (Existing.cast offScalarIdentity x)
         (Existing.cast offScalarIdentity y)
+
     gammaOrderTransport :
       {x y : Gamma.Scalar gamma} ->
       Gamma._≤_ gamma x y ->
       Order._≤_ (Split.order surface)
         (Existing.cast gammaScalarIdentity x)
         (Existing.cast gammaScalarIdentity y)
+
     contextReference : String
 
 open BalanceFreeClusterResponseContext public
+
+------------------------------------------------------------------------
+-- The sole high scalar payment on this context.
+------------------------------------------------------------------------
 
 record DirectClusterResponsePayment
     {S : NearFar.OrderedAdditiveNearFarSurface}
@@ -69,14 +105,22 @@ record DirectClusterResponsePayment
       Order._<_ (Split.order (surface context))
         (Split.add (surface context)
           (Existing.cast (offScalarIdentity context)
-            (Off.OffOrdinateBudget off (Off.universalPoleQuotientTaper off)))
+            (Off.OffOrdinateBudget off
+              (Off.universalPoleQuotientTaper off)))
           (Existing.cast (gammaScalarIdentity context)
-            (Gamma.GammaBudget gamma (Gamma.universalPoleQuotientTaper gamma))))
+            (Gamma.GammaBudget gamma
+              (Gamma.universalPoleQuotientTaper gamma))))
         (Existing.cast (clusterScalarIdentity context)
-          (ClusterResponse context (clusterUniversalPoleQuotientTaper context)))
+          (ClusterResponse context
+            (clusterUniversalPoleQuotientTaper context)))
+
     paymentReference : String
 
 open DirectClusterResponsePayment public
+
+------------------------------------------------------------------------
+-- Final balance remains downstream and unavailable to the payment context.
+------------------------------------------------------------------------
 
 record DirectClusterResponseBalanceAttachment
     {S : NearFar.OrderedAdditiveNearFarSurface}
@@ -89,64 +133,96 @@ record DirectClusterResponseBalanceAttachment
   field
     clusterEqualsOffPlusGamma :
       Existing.cast (clusterScalarIdentity context)
-        (ClusterResponse context (clusterUniversalPoleQuotientTaper context))
+        (ClusterResponse context
+          (clusterUniversalPoleQuotientTaper context))
       ≡ Split.add (surface context)
           (Existing.cast (offScalarIdentity context)
-            (Off.OffOrdinateResponse off (Off.universalPoleQuotientTaper off)))
+            (Off.OffOrdinateResponse off
+              (Off.universalPoleQuotientTaper off)))
           (Existing.cast (gammaScalarIdentity context)
-            (Gamma.GammaResponse gamma (Gamma.universalPoleQuotientTaper gamma)))
+            (Gamma.GammaResponse gamma
+              (Gamma.universalPoleQuotientTaper gamma)))
+
     balanceReference : String
 
 open DirectClusterResponseBalanceAttachment public
 
+------------------------------------------------------------------------
+-- Existing channel uppers compile mechanically.
+------------------------------------------------------------------------
+
 compiledOffUpper :
   forall {S transport targets} ->
-  (context : BalanceFreeClusterResponseContext {S = S} {transport = transport} targets) ->
+  (context : BalanceFreeClusterResponseContext
+    {S = S} {transport = transport} targets) ->
   let off = Direct.directOffTarget targets
   in Order._≤_ (Split.order (surface context))
       (Existing.cast (offScalarIdentity context)
-        (Off.OffOrdinateResponse off (Off.universalPoleQuotientTaper off)))
+        (Off.OffOrdinateResponse off
+          (Off.universalPoleQuotientTaper off)))
       (Existing.cast (offScalarIdentity context)
-        (Off.OffOrdinateBudget off (Off.universalPoleQuotientTaper off)))
+        (Off.OffOrdinateBudget off
+          (Off.universalPoleQuotientTaper off)))
 compiledOffUpper {targets = targets} context =
-  offOrderTransport context (Off.signedOffOrdinateUpper (Direct.directOffTarget targets))
+  offOrderTransport context
+    (Off.signedOffOrdinateUpper (Direct.directOffTarget targets))
 
 compiledGammaUpper :
   forall {S transport targets} ->
-  (context : BalanceFreeClusterResponseContext {S = S} {transport = transport} targets) ->
+  (context : BalanceFreeClusterResponseContext
+    {S = S} {transport = transport} targets) ->
   let gamma = Direct.directGammaTarget targets
   in Order._≤_ (Split.order (surface context))
       (Existing.cast (gammaScalarIdentity context)
-        (Gamma.GammaResponse gamma (Gamma.universalPoleQuotientTaper gamma)))
+        (Gamma.GammaResponse gamma
+          (Gamma.universalPoleQuotientTaper gamma)))
       (Existing.cast (gammaScalarIdentity context)
-        (Gamma.GammaBudget gamma (Gamma.universalPoleQuotientTaper gamma)))
+        (Gamma.GammaBudget gamma
+          (Gamma.universalPoleQuotientTaper gamma)))
 compiledGammaUpper {targets = targets} context =
-  gammaOrderTransport context (Gamma.gammaResponseUpper (Direct.directGammaTarget targets))
+  gammaOrderTransport context
+    (Gamma.gammaResponseUpper (Direct.directGammaTarget targets))
+
+------------------------------------------------------------------------
+-- We need only componentwise monotonicity already owned by Split.surface.
+------------------------------------------------------------------------
 
 compiledComplementUpper :
   forall {S transport targets} ->
-  (context : BalanceFreeClusterResponseContext {S = S} {transport = transport} targets) ->
+  (context : BalanceFreeClusterResponseContext
+    {S = S} {transport = transport} targets) ->
   let off = Direct.directOffTarget targets
       gamma = Direct.directGammaTarget targets
   in Order._≤_ (Split.order (surface context))
       (Split.add (surface context)
         (Existing.cast (offScalarIdentity context)
-          (Off.OffOrdinateResponse off (Off.universalPoleQuotientTaper off)))
+          (Off.OffOrdinateResponse off
+            (Off.universalPoleQuotientTaper off)))
         (Existing.cast (gammaScalarIdentity context)
-          (Gamma.GammaResponse gamma (Gamma.universalPoleQuotientTaper gamma))))
+          (Gamma.GammaResponse gamma
+            (Gamma.universalPoleQuotientTaper gamma))))
       (Split.add (surface context)
         (Existing.cast (offScalarIdentity context)
-          (Off.OffOrdinateBudget off (Off.universalPoleQuotientTaper off)))
+          (Off.OffOrdinateBudget off
+            (Off.universalPoleQuotientTaper off)))
         (Existing.cast (gammaScalarIdentity context)
-          (Gamma.GammaBudget gamma (Gamma.universalPoleQuotientTaper gamma))))
+          (Gamma.GammaBudget gamma
+            (Gamma.universalPoleQuotientTaper gamma))))
 compiledComplementUpper context =
   Split.addMonotone (surface context)
     (compiledOffUpper context)
     (compiledGammaUpper context)
 
+------------------------------------------------------------------------
+-- Direct contradiction: after balance rewriting,
+--
+--   complement <= budget < complement.
+------------------------------------------------------------------------
+
 directClusterResponseContradiction :
   forall {S transport targets} ->
-  (context : BalanceFreeClusterResponseContext {S = S} {transport = transport} targets) ->
+  (context : BalanceFreeClusterResponseContext
+    {S = S} {transport = transport} targets) ->
   DirectClusterResponsePayment context ->
   DirectClusterResponseBalanceAttachment context ->
   ⊥
@@ -155,10 +231,15 @@ directClusterResponseContradiction context payment balance
 ... | refl =
   Order.ltIrreflexive (Split.order (surface context))
     (Existing.cast (clusterScalarIdentity context)
-      (ClusterResponse context (clusterUniversalPoleQuotientTaper context)))
+      (ClusterResponse context
+        (clusterUniversalPoleQuotientTaper context)))
     (Order.leLtTrans (Split.order (surface context))
       (compiledComplementUpper context)
       (complementBudgetStrictBelowClusterResponse payment))
+
+------------------------------------------------------------------------
+-- Boundary.
+------------------------------------------------------------------------
 
 record DirectClusterResponseBoundary : Set where
   constructor direct-cluster-response-boundary
@@ -166,22 +247,29 @@ record DirectClusterResponseBoundary : Set where
     intermediateQuantitativeClusterMarginRequired : Bool
     intermediateQuantitativeClusterMarginRequiredIsFalse :
       intermediateQuantitativeClusterMarginRequired ≡ false
+
     clusterMarginLowerTheoremRequired : Bool
     clusterMarginLowerTheoremRequiredIsFalse :
       clusterMarginLowerTheoremRequired ≡ false
+
     analyticPaymentCanAccessFinalBalance : Bool
     analyticPaymentCanAccessFinalBalanceIsFalse :
       analyticPaymentCanAccessFinalBalance ≡ false
+
     directBudgetBelowClusterResponseIsSingleScalarLeaf : Bool
     directBudgetBelowClusterResponseIsSingleScalarLeafIsTrue :
       directBudgetBelowClusterResponseIsSingleScalarLeaf ≡ true
+
     paymentPlusDownstreamBalanceCompilesContradiction : Bool
     paymentPlusDownstreamBalanceCompilesContradictionIsTrue :
       paymentPlusDownstreamBalanceCompilesContradiction ≡ true
+
     paymentInhabitedHere : Bool
     paymentInhabitedHereIsFalse : paymentInhabitedHere ≡ false
+
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
+
     highestAlphaReading : String
 
 canonicalDirectClusterResponseBoundary : DirectClusterResponseBoundary
@@ -194,4 +282,4 @@ canonicalDirectClusterResponseBoundary =
     true refl
     false refl
     false refl
-    "State the independent analytic theorem directly as complementBudget < literal ClusterResponse on a balance-free context. Existing Off/Gamma uppers compile complementResponse <= complementBudget; only afterward attach clusterResponse = complementResponse. This deletes the separate M_cluster <= ClusterResponse theorem without using the final balance to prove the analytic payment. The direct strict theorem remains unproved and RH is not derived."
+    "The intermediate quantitative cluster-margin target is not primitive. State the independent analytic theorem directly as complementBudget < literal ClusterResponse on a balance-free context. Existing Off/Gamma uppers compile complementResponse <= complementBudget; only afterward attach clusterResponse = complementResponse. Then complementResponse <= budget < complementResponse contradicts strict-order irreflexivity. This deletes the separate M_cluster <= ClusterResponse theorem without using the final balance to prove the analytic payment. The direct strict theorem remains unproved and RH is not derived."

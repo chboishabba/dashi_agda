@@ -10,9 +10,14 @@ import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as NearObser
 import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact as PhaseLaw
 import DASHI.Analysis.RiemannG2LiteralPhaseDirectClusterResponseExact as PhaseDirect
 
--- The historical outer cut still names the independent complement coordinate.
--- Introspection has refined its primitive consumer to the smaller literal theorem
--- directly against the actual final ClusterResponse.
+------------------------------------------------------------------------
+-- INTROSPECTIVE BINDING FOR THE CURRENT RH HIGH-ZERO SCALAR LEAF
+--
+-- The historical minimal cut still names the independent complement-margin
+-- coordinate. The refined consumer beneath it is now strictly smaller: the
+-- literal phase-visible complement is compared directly with the actual final
+-- ClusterResponse. Intermediate M_cluster is pruned.
+------------------------------------------------------------------------
 
 data RHFinalProducer : Set where
   independentLiteralComplementMarginProducer : RHFinalProducer
@@ -56,7 +61,10 @@ currentRHProducerTargetsExactAnalyticLeaf :
   producer currentBoundRHFinalDemand ≡ independentLiteralComplementMarginProducer
 currentRHProducerTargetsExactAnalyticLeaf = refl
 
--- Second-level observer descent.
+------------------------------------------------------------------------
+-- SECOND-LEVEL INTROSPECTION: OBSERVER INSIDE THE LIVE SCALAR LEAF
+------------------------------------------------------------------------
+
 data RHInnerCoordinate : Set where
   abstractFinalNearScalar : RHInnerCoordinate
   countAndAbsoluteEnvelope : RHInnerCoordinate
@@ -66,6 +74,7 @@ data RHInnerCoordinate : Set where
   taperRegularityForFourierOrIBP : RHInnerCoordinate
   fullWeilTargetWindowRealisation : RHInnerCoordinate
   literalBelowActualClusterResponsePayment : RHInnerCoordinate
+
 
 data RHInnerState : Set where
   inadequateObservation : RHInnerState
@@ -140,34 +149,46 @@ record BoundRHInnerRefinement : Set where
 
 currentBoundRHInnerRefinement : BoundRHInnerRefinement
 currentBoundRHInnerRefinement =
-  bound-rh-inner-refinement currentBoundRHFinalDemand refl
-    finalNearLiteralSameObjectModel refl true refl false refl
+  bound-rh-inner-refinement
+    currentBoundRHFinalDemand
+    refl
+    finalNearLiteralSameObjectModel
+    refl
+    true refl
+    false refl
 
--- Route admission: direct cosine does not require Fourier structure.
+------------------------------------------------------------------------
+-- Route admission. Do not overconstrain the direct cosine route with Fourier
+-- structure it does not consume.
+------------------------------------------------------------------------
+
 data PhaseProofRoute : Set where
   directCosineRoute : PhaseProofRoute
   translationModulationRoute : PhaseProofRoute
   integrationByPartsRoute : PhaseProofRoute
   fullWeilWindowRoute : PhaseProofRoute
 
-routeNeedsTranslationModulation : PhaseProofRoute → Bool
+routeNeedsTranslationModulation : PhaseProofRoute -> Bool
 routeNeedsTranslationModulation directCosineRoute = false
 routeNeedsTranslationModulation translationModulationRoute = true
 routeNeedsTranslationModulation integrationByPartsRoute = true
 routeNeedsTranslationModulation fullWeilWindowRoute = true
 
-routeNeedsTaperRegularity : PhaseProofRoute → Bool
+routeNeedsTaperRegularity : PhaseProofRoute -> Bool
 routeNeedsTaperRegularity directCosineRoute = false
 routeNeedsTaperRegularity translationModulationRoute = false
 routeNeedsTaperRegularity integrationByPartsRoute = true
 routeNeedsTaperRegularity fullWeilWindowRoute = false
 
-directRouteDoesNotNeedTranslationModulation : routeNeedsTranslationModulation directCosineRoute ≡ false
+directRouteDoesNotNeedTranslationModulation :
+  routeNeedsTranslationModulation directCosineRoute ≡ false
 directRouteDoesNotNeedTranslationModulation = refl
 
-ibpRouteNeedsTaperRegularity : routeNeedsTaperRegularity integrationByPartsRoute ≡ true
+ibpRouteNeedsTaperRegularity :
+  routeNeedsTaperRegularity integrationByPartsRoute ≡ true
 ibpRouteNeedsTaperRegularity = refl
 
+------------------------------------------------------------------------
 -- Firewalls.
 data RepresentationTransportPaysAnalyticMargin : Set where
 data FinalBalancePaysAnalyticMargin : Set where
@@ -186,5 +207,6 @@ boundProducerDoesNotPayAnalyticMargin : BoundProducerPaysAnalyticMargin → ⊥
 boundProducerDoesNotPayAnalyticMargin ()
 literalNearRefinementDoesNotPayAnalyticMargin : LiteralNearRefinementPaysAnalyticMargin → ⊥
 literalNearRefinementDoesNotPayAnalyticMargin ()
+
 fourierLabelDoesNotPaySignedEstimate : FourierLabelPaysSignedEstimate → ⊥
 fourierLabelDoesNotPaySignedEstimate ()
