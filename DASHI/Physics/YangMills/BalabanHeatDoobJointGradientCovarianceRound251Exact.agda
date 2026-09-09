@@ -31,7 +31,6 @@ record JointHeatDoobFirstGradientCovariance (Site : Set) : Set₁ where
     sites : List Site
     metric : Metric.NatMetricTriangle Site
 
-    -- Temporal/RG-depth projection of the same localized first-gradient response.
     localizedGradientShell : Nat → ℚ
     localizedGradientShellNonnegative : ∀ depth →
       0ℚ ≤ localizedGradientShell depth
@@ -40,7 +39,6 @@ record JointHeatDoobFirstGradientCovariance (Site : Set) : Set₁ where
     localizedGradientGeometricHalf : ∀ depth →
       localizedGradientShell depth ≤ gradientAmplitude * Geo.halfPower depth
 
-    -- Spatial projection of the same localized first-gradient response.
     localizedGradient : Site → Site → ℚ
     localizedGradientNonnegative : ∀ x y →
       0ℚ ≤ localizedGradient x y
@@ -51,9 +49,6 @@ record JointHeatDoobFirstGradientCovariance (Site : Set) : Set₁ where
         (λ y → Metric.metricWeight metric x y * localizedGradient x y)
       ≤ gradientWeightedRowMass
 
-    -- One companion-gradient bound is shared by both projections because both
-    -- covariance terms are evaluated on the same Heat/Doob density and common
-    -- CMP116 analytic polydisc.
     companionGradientBound : ℚ
     companionGradientBoundNonnegative : 0ℚ ≤ companionGradientBound
 
@@ -147,11 +142,6 @@ spatialCovarianceWeightedRowBound dataSet =
 jointHeatDoobGradientCovarianceCompilerLevel : ProofLevel
 jointHeatDoobGradientCovarianceCompilerLevel = machineChecked
 
--- Single Row-C stochastic/source leaf after the joint compilation: instantiate
--- the literal first-gradient localized response and companion-gradient bound on
--- the SAME CMP116 common analytic polydisc / Heat-Doob density, with its temporal
--- and spatial projections.  The covariance inequality and both summations are
--- already compiler/standard-analysis consequences.
 literalJointCMP116HeatDoobFirstGradientInstantiationLevel : ProofLevel
 literalJointCMP116HeatDoobFirstGradientInstantiationLevel =
   Cov.literalCMP116FirstGradientHeatDoobCovarianceInstantiationLevel
