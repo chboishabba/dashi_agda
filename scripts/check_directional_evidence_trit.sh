@@ -4,6 +4,8 @@ set -euo pipefail
 FILES=(
   DASHI/Statistics/DirectionalEvidenceTritExact.agda
   DASHI/Statistics/DirectionalInferenceDesignExact.agda
+  DASHI/Statistics/BinaryTestDecisionDirectionalEvidenceExact.agda
+  DASHI/Statistics/Vec15BinaryDecisionDirectionalEvidenceBridgeExact.agda
   DASHI/Interop/DirectionalEvidenceProofSearchBridgeExact.agda
 )
 
@@ -23,4 +25,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence trit bridge checks passed"
+echo "directional evidence trit / binary test bridge checks passed"
