@@ -12,9 +12,14 @@ import DASHI.Interop.SourceAttributionShapePolicyExact as Shape
 --
 -- Carrier-sensitive source rule:
 --   published scientific/empirical claim -> attributed source + exact scope;
---   official technical detector formula -> stable document identity + scope;
+--   official external technical detector formula -> technicalStandardSource +
+--     stable document identity + exact bounded use;
 --   DASHI sign/polarity reconstruction -> internal proof lineage, not a fresh
 --   external citation and not a claim that the source proved our BIDI theorem.
+--
+-- The generic SourceAttributionShapePolicy currently has no dedicated external
+-- technical-note constructor.  We therefore do not coerce this LIGO carrier
+-- into localArchiveOrCodeContract merely to make the policy table total.
 ------------------------------------------------------------------------
 
 gw170814PolarizationSource : Source.AttributedSource
@@ -95,16 +100,13 @@ publishedPolarizationAttributionShape : Shape.RequiredAttributionShape
 publishedPolarizationAttributionShape =
   Shape.requiredAttributionShape Shape.publishedEmpiricalClaim
 
-technicalDetectorAttributionShape : Shape.RequiredAttributionShape
-technicalDetectorAttributionShape =
-  Shape.requiredAttributionShape Shape.localArchiveOrCodeContract
-
 record GravitationalWavePolarizationAttributionBoundary : Set where
   constructor gravitational-wave-polarization-attribution-boundary
   field
     publishedPolarizationClaimUsesAttributedSource : Bool
     doiPinnedWhenAvailable : Bool
-    officialTechnicalCarrierMayUseStableDocumentIdentity : Bool
+    officialTechnicalCarrierUsesTechnicalStandardSource : Bool
+    externalTechnicalCarrierIsLocalRepoArtifact : Bool
     citationImportsDASHIBidiProof : Bool
     plusLabelMeansPositivePolarityByCitation : Bool
     crossLabelMeansNegativePolarityByCitation : Bool
@@ -115,4 +117,4 @@ canonicalGravitationalWavePolarizationAttributionBoundary :
   GravitationalWavePolarizationAttributionBoundary
 canonicalGravitationalWavePolarizationAttributionBoundary =
   gravitational-wave-polarization-attribution-boundary
-    true true true false false false false false
+    true true true false false false false false false
