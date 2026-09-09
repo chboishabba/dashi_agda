@@ -6,6 +6,7 @@ FILES=(
   DASHI/Statistics/DirectionalInferenceDesignExact.agda
   DASHI/Statistics/BinaryTestDecisionDirectionalEvidenceExact.agda
   DASHI/Statistics/Vec15BinaryDecisionDirectionalEvidenceBridgeExact.agda
+  DASHI/Statistics/DirectionalEvidenceEverything.agda
   DASHI/Interop/DirectionalEvidenceProofSearchBridgeExact.agda
 )
 
