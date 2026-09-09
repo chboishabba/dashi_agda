@@ -6,6 +6,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Law.SensibLawBrightonS185ApplicabilityEvidenceExact as Applicability
+
 ------------------------------------------------------------------------
 -- DIRECT s 185(3)(a) COMPILER
 --
@@ -21,9 +23,9 @@ open import Data.Empty using (⊥)
 -- element into s 185(3)(a).  The selected statutory proposition is an outcome
 -- obligation on the exact historical source language.
 --
--- It also does NOT promote an agent's use of the words "non-liveability" into
--- objective legal unfitness.  That remains the live evidence/classification
--- coordinate.
+-- The private Form 18a source receipt already pays the continuing-tenancy and
+-- ordinary-general-tenancy applicability inputs.  It does NOT promote an
+-- agent's use of the words "non-liveability" into objective legal unfitness.
 ------------------------------------------------------------------------
 
 data TenancyContinuingAtEvaluation : Set where
@@ -38,6 +40,26 @@ data HistoricalS185Subsection3aApplies : Set where
 data S185Subsection3aNonPerformance : Set where
   s185-subsection3a-non-performance : S185Subsection3aNonPerformance
 
+continuingTenancyFromForm18a :
+  Applicability.BrightonTenancyContinuing24Jan2023 →
+  TenancyContinuingAtEvaluation
+continuingTenancyFromForm18a Applicability.form18a-fixed-term-contains-24jan2023 =
+  tenancy-continuing-at-evaluation
+
+s185ApplicabilityFromForm18a :
+  Applicability.BrightonS185Applies24Jan2023 →
+  HistoricalS185Subsection3aApplies
+s185ApplicabilityFromForm18a Applicability.form18a-general-tenancy-s185-applies =
+  historical-s185-subsection3a-applies
+
+canonicalBrightonTenancyContinuing : TenancyContinuingAtEvaluation
+canonicalBrightonTenancyContinuing =
+  continuingTenancyFromForm18a Applicability.brightonTenancyContinuing24Jan2023
+
+canonicalBrightonS185Subsection3aApplies : HistoricalS185Subsection3aApplies
+canonicalBrightonS185Subsection3aApplies =
+  s185ApplicabilityFromForm18a Applicability.brightonS185Applies24Jan2023
+
 directS185Subsection3aCompiler :
   TenancyContinuingAtEvaluation →
   PremisesObjectivelyUnfitAtEvaluation →
@@ -48,6 +70,15 @@ directS185Subsection3aCompiler
   premises-objectively-unfit-at-evaluation
   historical-s185-subsection3a-applies =
     s185-subsection3a-non-performance
+
+brightonS185Subsection3aFromObjectiveUnfitness :
+  PremisesObjectivelyUnfitAtEvaluation →
+  S185Subsection3aNonPerformance
+brightonS185Subsection3aFromObjectiveUnfitness objectiveUnfitness =
+  directS185Subsection3aCompiler
+    canonicalBrightonTenancyContinuing
+    objectiveUnfitness
+    canonicalBrightonS185Subsection3aApplies
 
 ------------------------------------------------------------------------
 -- Evidence/status firewalls.
@@ -79,8 +110,10 @@ record BrightonS185Subsection3aCompilerBoundary : Set where
   field
     exactHistoricalProvisionPinned : Bool
     continuingTenancyRequired : Bool
+    continuingTenancyPaid : Bool
     objectiveUnfitnessRequired : Bool
     applicabilityRequired : Bool
+    applicabilityPaid : Bool
     reasonableTimeInsertedAsIndependentElement : Bool
     agentCharacterisationAutomaticallyPaysObjectiveUnfitness : Bool
     outstandingRemediationAutomaticallyPaysObjectiveUnfitness : Bool
@@ -91,5 +124,6 @@ canonicalBrightonS185Subsection3aCompilerBoundary :
   BrightonS185Subsection3aCompilerBoundary
 canonicalBrightonS185Subsection3aCompilerBoundary =
   brighton-s185-subsection3a-compiler-boundary
-    true true true true false false false false
+    true true true true true true
+    false false false false
     "direct historical RTRA 2008 (Qld) s185(3)(a) outcome-obligation compiler"
