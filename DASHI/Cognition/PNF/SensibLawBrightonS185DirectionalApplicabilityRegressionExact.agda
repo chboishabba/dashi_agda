@@ -49,16 +49,16 @@ rtra2023Section185Source =
   housingLegalSourceAttribution
     primaryLegislation
     "Queensland Residential Tenancies and Rooming Accommodation Act 2008"
-    "official Queensland legislation, version current 1 July 2023, s 185(3)"
+    "official Queensland legislation, in-force version dated 19 January 2023, s 185(3)"
     "while the tenancy continues, the lessor must maintain the premises so they remain fit for the tenant to live in and maintain the premises/inclusions in good repair"
-    "Queensland legislation s 185 source attribution"
+    "Queensland legislation historical s 185 source attribution for 24 January 2023 Brighton consumer"
 
 rtaForm11GuidanceSource : HousingLegalSourceAttribution
 rtaForm11GuidanceSource =
   housingLegalSourceAttribution
     administrativeFormGuidance
     "Queensland Residential Tenancies Authority — Notice to remedy breach (Form 11)"
-    "official RTA Form 11 guidance"
+    "official RTA Form 11 guidance; administrative function only"
     "Form 11 records a claimed/alleged breach and a demand to remedy; issuing the form does not itself determine that the breach occurred"
     "Queensland RTA Form 11 source attribution"
 
@@ -91,12 +91,9 @@ record BrightonS185RegressionInput
       Directional.SourceConditionedApplicabilityMeetInput
         receipt admission state
 
-    -- The matter assertion must be the same proposition/evidence object used
-    -- by the directional bridge; string similarity is insufficient.
     sameMatterPropositionAsDirectionalTarget : Set
     sameForm11CarrierAsResolvedLegalEvidence : Set
 
-    -- The legal source remains independently supplied to the existing meet.
     section185AuthoritySource : HousingLegalSourceAttribution
     section185AuthorityIsPrimaryLegislation :
       sourceRole section185AuthoritySource ≡ primaryLegislation
@@ -104,9 +101,6 @@ record BrightonS185RegressionInput
     form11GuidanceIsAdministrative :
       sourceRole form11GuidanceSource ≡ administrativeFormGuidance
 
-    -- This regression is intentionally applicability-scoped.  It creates no
-    -- medical-causation, violation, liability, remedy or systemic-pattern
-    -- payment by construction.
     noMedicalCausationPromotion : Set
     noCrossEpisodeCommonCausePromotion : Set
     regressionReference : String
