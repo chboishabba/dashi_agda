@@ -4,51 +4,46 @@ open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.ComputerScience.FactorProducerReceiptExact as FactorReceipt
+import DASHI.ComputerScience.ConsumerIndexedTernarySearchKernelExact as Decision
 import DASHI.ComputerScience.TernaryProofSearchDecisionDebtBridgeExact as ProofDecision
 
 ------------------------------------------------------------------------
 -- TERNARY DECISION STATUS × CERTIFICATION / PROVENANCE
 --
--- A trit says only whether the declared decision consumer is negative,
--- unresolved, or positive.  It does not by itself say how that verdict was
--- certified or produced.  Those coordinates remain in the receipt fibre.
+-- The generic decision/provenance product is now owned centrally.  This module
+-- specialises it to factor receipts and exposes the proof-search specialization.
 ------------------------------------------------------------------------
 
-record FactorDecisionPacket : Set where
-  constructor factorDecisionPacket
-  field
-    decision : Trit
-    receipt : FactorReceipt.FactorProducerReceipt
-
-open FactorDecisionPacket public
+FactorDecisionPacket : Set
+FactorDecisionPacket = Decision.TernaryDecisionPacket FactorReceipt.FactorProducerReceipt
 
 -- Small in-repo factor: positive decision with an actual kernel certificate.
 factor15KernelPositive : FactorDecisionPacket
 factor15KernelPositive =
-  factorDecisionPacket pos FactorReceipt.factor15ClassicalReceipt
+  Decision.ternaryDecisionPacket pos FactorReceipt.factor15ClassicalReceipt
 
 -- Same factor, different producer fibre: still positive, but quantum producer.
 factor15QuantumPositive : FactorDecisionPacket
 factor15QuantumPositive =
-  factorDecisionPacket pos FactorReceipt.factor15QuantumReceipt
+  Decision.ternaryDecisionPacket pos FactorReceipt.factor15QuantumReceipt
 
 -- RSA-260: positive external arithmetic verification while method/cost remain
 -- unresolved and kernel big-integer certification remains downstream.
 rsa260ExternalPositive : FactorDecisionPacket
 rsa260ExternalPositive =
-  factorDecisionPacket pos FactorReceipt.rsa260ExternalReceipt
+  Decision.ternaryDecisionPacket pos FactorReceipt.rsa260ExternalReceipt
 
 -- Unknown/source-only candidate can remain unresolved without being converted
 -- into a negative claim.
 unresolvedFactorCandidate : FactorReceipt.FactorProducerReceipt → FactorDecisionPacket
-unresolvedFactorCandidate receipt = factorDecisionPacket zer receipt
+unresolvedFactorCandidate receipt = Decision.ternaryDecisionPacket zer receipt
 
 ------------------------------------------------------------------------
--- Proof-search uses the same decision carrier but retains its own proof-debt,
--- admission and finite-exhaustion semantics in the dedicated bridge.
+-- Proof-search uses the same generic trit × provenance product underneath its
+-- more specific finite-search packet, while retaining debt/admission semantics.
 ------------------------------------------------------------------------
 
-ProofSearchDecisionPacket : Set
+ProofSearchDecisionPacket : Set₁
 ProofSearchDecisionPacket = ProofDecision.ProofSearchDecisionPacket
 
 proofSearchUnresolved : ProofSearchDecisionPacket
@@ -85,6 +80,7 @@ certificationIsNotDecisionStatus ()
 record TernaryDecisionCertificationBoundary : Set where
   constructor ternaryDecisionCertificationBoundary
   field
+    genericDecisionProvenanceProductReused : Bool
     ternaryDecisionAndCertificationSeparate : Bool
     positiveKernelFactorRepresentable : Bool
     positiveExternalFactorRepresentable : Bool
@@ -98,4 +94,4 @@ canonicalTernaryDecisionCertificationBoundary :
   TernaryDecisionCertificationBoundary
 canonicalTernaryDecisionCertificationBoundary =
   ternaryDecisionCertificationBoundary
-    true true true true true false false true
+    true true true true true true false false true
