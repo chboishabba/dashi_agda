@@ -160,9 +160,7 @@ statutoryPowerCoordinateDoesNotBecomeDutyElement ()
 
 repairDoesNotReinstateLegacyRule :
   CoordinateRepairReinstatesLegacyDutyRule → ⊥
-repairDoesNotReinstateLegacyDutyRule where
-repairDoesNotReinstateLegacyDutyRule : CoordinateRepairReinstatesLegacyDutyRule → ⊥
-repairDoesNotReinstateLegacyDutyRule ()
+repairDoesNotReinstateLegacyRule ()
 
 representationTheoremIsNotAuthority :
   RepresentationAdequacyIsJudicialAuthority → ⊥
