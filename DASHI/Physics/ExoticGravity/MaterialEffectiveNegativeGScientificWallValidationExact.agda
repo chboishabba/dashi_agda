@@ -6,6 +6,7 @@ open import Agda.Builtin.Bool using (true; false)
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallBidiExact as Wall
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallProgressionExact as Progress
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallPaymentReceiptExact as Payment
 
 currentWallStartsAtMassCurrent :
   Wall.currentScientificWallDiscriminator
@@ -87,6 +88,26 @@ outOfOrderAcquisitionDoesNotAutoPayDependency :
   Progress.outOfOrderAcquisitionAutomaticallyPaysDependency
     Progress.canonicalScientificWallProgressionBoundary ≡ false
 outOfOrderAcquisitionDoesNotAutoPayDependency = refl
+
+arbitraryAllTrueBooleansAreNotScientificPayment :
+  Payment.arbitraryAllTrueBooleansCountAsScientificPayment
+    Payment.canonicalScientificWallPaymentReceiptBoundary ≡ false
+arbitraryAllTrueBooleansAreNotScientificPayment = refl
+
+terminalPaymentRequiresActualReceipts :
+  Payment.terminalPaymentRequiresActualReceipts
+    Payment.canonicalScientificWallPaymentReceiptBoundary ≡ true
+terminalPaymentRequiresActualReceipts = refl
+
+stressEnergyMustUseExactMassCurrentReceipt :
+  Payment.stressEnergyMustUseExactPaidMassCurrent
+    Payment.canonicalScientificWallPaymentReceiptBoundary ≡ true
+stressEnergyMustUseExactMassCurrentReceipt = refl
+
+terminalInterpretationMayNotDriftAcrossReceipts :
+  Payment.terminalNegativeGInterpretationMayDriftAcrossReceipts
+    Payment.canonicalScientificWallPaymentReceiptBoundary ≡ false
+terminalInterpretationMayNotDriftAcrossReceipts = refl
 
 fullyPaidWallStopsSchedulingAcquisition :
   Progress.decisionForLeaf (Progress.firstOpenScientificWallLeaf Progress.fullyPaidWall)
