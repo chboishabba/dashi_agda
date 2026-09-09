@@ -9,6 +9,7 @@ import DASHI.Core.ProofDebtUniverseLiftExact as Lift
 import DASHI.GameTheory.StrategicInteractionCoreExact as Game
 import DASHI.GameTheory.FiniteMixedStrategyExpectedUtilityExact as Mixed
 import DASHI.GameTheory.FiniteMixedNashProductCorrectionExact as Correction
+import DASHI.GameTheory.FiniteMixedNashReceiptBindingExact as Binding
 import DASHI.GameTheory.GameTheorySourceAtlasExact as Sources
 import DASHI.Biology.ConsciousAccessRound4SourceAtlas as R4
 
@@ -17,8 +18,8 @@ import DASHI.Biology.ConsciousAccessRound4SourceAtlas as R4
 --
 -- The source atlas already attributes finite mixed-strategy equilibrium
 -- existence to Nash 1950.  This owner aligns that established theorem only to
--- the corrected product-law consumer.  It does not use the older arbitrary
--- normalized joint-profile law as the theorem target.
+-- the corrected independent-product consumer, and now binds the theorem result
+-- to the exact finite-normal-form receipt named by the application coordinates.
 ------------------------------------------------------------------------
 
 record Nash1950ApplicationCoordinates
@@ -51,10 +52,11 @@ open Nash1950ApplicationCoordinates public
 Nash1950CorrectedExistenceClaim :
   (G : Game.StrategicGame) →
   (U : Mixed.FiniteExpectedUtilitySurface G) →
-  Nash1950ApplicationCoordinates G U →
+  (coordinates : Nash1950ApplicationCoordinates G U) →
   Set₁
 Nash1950CorrectedExistenceClaim G U coordinates =
-  Correction.StandardFiniteMixedNashEquilibrium G U
+  Binding.StandardFiniteMixedNashForReceipt
+    G U (finiteNormalForm coordinates)
 
 nash1950SourceIdentity : Debt.SourceIdentity
 nash1950SourceIdentity =
@@ -73,7 +75,7 @@ nash1950Alignment :
 nash1950Alignment G U coordinates =
   Debt.statement-alignment-receipt
     "Nash 1950 finite n-person game: existence of an equilibrium point in mixed strategies"
-    "for this exact finite normal-form/product-profile game and finite expected-utility realization, inhabit StandardFiniteMixedNashEquilibrium G U"
+    "for this exact finite normal-form/product-profile game and expected-utility realization, inhabit StandardFiniteMixedNashForReceipt G U finiteNormalForm"
     true
     true
     true
@@ -151,6 +153,8 @@ data FiniteEnumerationMeansProductProfilePermission : Set where
 
 data ArbitraryJointLawMeansNash1950MixedStrategyPermission : Set where
 
+data AnyFiniteReceiptMeansAlignedFiniteReceiptPermission : Set where
+
 data NashExistenceMeansUniqueEquilibriumPermission : Set where
 
 data NashExistenceMeansParetoOptimalPermission : Set where
@@ -166,6 +170,10 @@ finiteEnumerationDoesNotCreateProfileProduct ()
 arbitraryJointLawDoesNotBecomeNash1950MixedStrategy :
   ArbitraryJointLawMeansNash1950MixedStrategyPermission → ⊥
 arbitraryJointLawDoesNotBecomeNash1950MixedStrategy ()
+
+arbitraryFiniteReceiptDoesNotBecomeAlignedReceipt :
+  AnyFiniteReceiptMeansAlignedFiniteReceiptPermission → ⊥
+arbitraryFiniteReceiptDoesNotBecomeAlignedReceipt ()
 
 nashExistenceDoesNotGiveUniqueness : NashExistenceMeansUniqueEquilibriumPermission → ⊥
 nashExistenceDoesNotGiveUniqueness ()
