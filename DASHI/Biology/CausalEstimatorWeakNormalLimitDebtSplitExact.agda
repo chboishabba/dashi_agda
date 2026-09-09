@@ -131,11 +131,37 @@ record AlignedNormalLimitTheorem (T : Set) : Set where
 
 open AlignedNormalLimitTheorem public
 
-alignedNormalLimitIsCertificationDebt :
+alignedNormalLimitRoute :
   {T : Set} →
   AlignedNormalLimitTheorem T →
-  Debt.DebtClass
-alignedNormalLimitIsCertificationDebt _ = Debt.certificationDebt
+  Debt.ProofDebtRoutingReceipt
+alignedNormalLimitRoute _ =
+  Debt.proof-debt-routing-receipt
+    Debt.deductiveTheorem
+    Debt.sourceEstablished
+    Debt.sourceAligned
+    Debt.proofDeferred
+    Debt.externalLean
+    Debt.certificationDebt
+    refl
+
+alignedNormalLimitIsCertificationDebt :
+  {T : Set} →
+  (aligned : AlignedNormalLimitTheorem T) →
+  Debt.routedDebt (alignedNormalLimitRoute aligned)
+  ≡ Debt.certificationDebt
+alignedNormalLimitIsCertificationDebt aligned = refl
+
+alignedNormalLimitSchedulerAction :
+  {T : Set} →
+  (aligned : AlignedNormalLimitTheorem T) →
+  Debt.scheduleAction
+    (Debt.routedDebt (alignedNormalLimitRoute aligned))
+    (Debt.statementStatus (alignedNormalLimitRoute aligned))
+    Debt.constrained32GB
+    Debt.heavyReplay
+  ≡ Debt.sendAristotleLean
+alignedNormalLimitSchedulerAction aligned = refl
 
 ConditionalNormalLimitConsumer : Set → Set → Set
 ConditionalNormalLimitConsumer T Result = Debt.ConditionalDevelopment T Result
@@ -195,6 +221,7 @@ record WeakNormalLimitDebtSplitBoundary : Set where
     standardCLTIsEstablishedMath : Bool
     standardTheoremTranscriptionStillRequired : Bool
     applicationSameEstimatorTheoremStillRequired : Bool
+    alignedDeferredRoutesToCertificationDebt : Bool
     finiteTestConvergenceAlreadyAvailable : Bool
     sourceAlignmentCreatesProof : Bool
     standardCitationAutoClosesApplication : Bool
@@ -202,4 +229,4 @@ record WeakNormalLimitDebtSplitBoundary : Set where
 canonicalWeakNormalLimitDebtSplitBoundary : WeakNormalLimitDebtSplitBoundary
 canonicalWeakNormalLimitDebtSplitBoundary =
   weak-normal-limit-debt-split-boundary
-    true true true true true false false
+    true true true true true true false false
