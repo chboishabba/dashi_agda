@@ -19,15 +19,8 @@ import DASHI.Cognition.PNF.SensibLawRecentDutyCaseSourceAtlasExact as CullenSour
 ------------------------------------------------------------------------
 -- CIVIL LIABILITY ACT 2002 (NSW) s 43A x CULLEN
 --
--- Source-defined engagement atoms:
---   (1) liability is based on exercise/failure to exercise a special statutory power
---   (2) the power is conferred by/under statute
---   (3) persons generally are not authorised to exercise that kind of power
---       without specific statutory authority
---
--- Cullen/Edelman [64] records that the intervention was not said in the HCA to
--- be pursuant to any statutory power and that reliance on s 43A was abandoned.
--- These remain separate atoms: merits fit != procedural abandonment.
+-- Statute defines the applicability/standard atoms.  Cullen supplies separate
+-- case-outcome evidence.  Procedural abandonment remains another proposition.
 ------------------------------------------------------------------------
 
 claSource : Source.AttributedSource
@@ -38,7 +31,7 @@ claSource = Source.mkNoDOISource
   "2002"
   "https://legislation.nsw.gov.au/view/whole/html/inforce/current/act-2002-022"
   Source.governmentSource
-  "primary statutory text for s 43A; citation does not establish that the section is engaged on Cullen facts"
+  "primary statutory text for s 43A; citation does not establish engagement on Cullen facts"
   Source.publicAttribution
 
 claLegalSource : Ontology.LegalSource
@@ -120,7 +113,7 @@ s43AStandardSource : SourceRule.PropositionSourceReceipt s43AUnreasonablenessSta
 s43AStandardSource = s43AReceipt s43AUnreasonablenessStandard "s 43A(3)" "NSW-CLA-s43A-3"
 
 ------------------------------------------------------------------------
--- Cullen primary outcome evidence.
+-- Cullen primary outcome evidence: Edelman J [64] and fn 103.
 ------------------------------------------------------------------------
 
 edelman64Locator : String
@@ -129,14 +122,11 @@ edelman64Locator = "Cullen v New South Wales [2026] HCA 19, Edelman J [64] and f
 noStatutoryPowerOutcome : Algebra.LegalProposition
 noStatutoryPowerOutcome = Algebra.legal-proposition
   (Ontology.stableId "prop:Cullen:Edelman:64:no-statutory-power-outcome")
-  Algebra.adjudicatedFactRole
+  Algebra.factualFeature
   (Ontology.stableId "activity:OSG-intervention")
   (Ontology.stableId "section:NSW-CLA:43A")
   Negligence.auCommonLawSystem
   "the intervention was not said in the High Court to be pursuant to any statutory power"
-
--- The outcome proposition above is evidentiary source material, not the test
--- definition.  We keep the procedural fact of abandonment separate again.
 
 s43AArgumentAbandoned : Algebra.LegalProposition
 s43AArgumentAbandoned = Algebra.legal-proposition
@@ -154,32 +144,32 @@ cullenAuthority = Edge.source-identity
   "[2026] HCA 19, Edelman J [64] fn 103"
   Edge.bindingPrecedent
 
-cullenOutcomeRole : String → SourceRole.SourceFormRoleReceipt
-cullenOutcomeRole ref = SourceRole.source-form-role-receipt
-  cullenAuthority Ontology.caseLaw Algebra.bindingRatioRole ref true true
+cullenFactRole : String → SourceRole.SourceFormRoleReceipt
+cullenFactRole ref = SourceRole.source-form-role-receipt
+  cullenAuthority Ontology.caseLaw Algebra.adjudicatedFactRole ref true true
 
-cullenOutcomeReceipt :
+cullenLegalSourceRef : Algebra.LegalSourceRef
+cullenLegalSourceRef = Algebra.legal-source-ref
+  (Ontology.legalSource
+    (Ontology.stableId "source:Cullen:[2026]HCA19")
+    Negligence.auCommonLawSystem Ontology.caseLaw "[2026] HCA 19"
+    "2026-06-17" "Australia / High Court")
+  "High Court of Australia" "Cullen v New South Wales" "[2026] HCA 19"
+
+cullenEvidenceReceipt :
   (p : Algebra.LegalProposition) → String →
   SourceRule.PropositionSourceReceipt p
-cullenOutcomeReceipt p ref = SourceRule.proposition-source-receipt
-  CullenSource.cullenHCA19
-  (Algebra.legal-source-ref
-    (Ontology.legalSource
-      (Ontology.stableId "source:Cullen:[2026]HCA19")
-      Negligence.auCommonLawSystem Ontology.caseLaw "[2026] HCA 19"
-      "2026-06-17" "Australia / High Court")
-    "High Court of Australia" "Cullen v New South Wales" "[2026] HCA 19")
-  edelman64Locator SourceRule.primarySourceLayer
-  (cullenOutcomeRole ref) refl refl refl
+cullenEvidenceReceipt p ref = SourceRule.proposition-source-receipt
+  CullenSource.cullenHCA19 cullenLegalSourceRef edelman64Locator
+  SourceRule.primarySourceLayer (cullenFactRole ref)
+  refl refl refl
   (Source.citationCreatesAuthorityIsFalse CullenSource.cullenHCA19) ref
 
-------------------------------------------------------------------------
--- The atomic negative branch: failure of THIS engagement atom.
---
--- We do not claim logical negation of every s 43A proposition.  The retained
--- HCA source positively supports failure of the proposition that Cullen's claim
--- was based on exercise of a special statutory power.
-------------------------------------------------------------------------
+noStatutoryPowerEvidenceSource : SourceRule.PropositionSourceReceipt noStatutoryPowerOutcome
+noStatutoryPowerEvidenceSource = cullenEvidenceReceipt noStatutoryPowerOutcome "Cullen-Edelman-64-no-power"
+
+s43AAbandonmentEvidenceSource : SourceRule.PropositionSourceReceipt s43AArgumentAbandoned
+s43AAbandonmentEvidenceSource = cullenEvidenceReceipt s43AArgumentAbandoned "Cullen-Edelman-64-fn103-abandonment"
 
 data S43ABasedOnFits : Set where
 
@@ -188,22 +178,26 @@ data S43ABasedOnFails : Set where
 
 s43ABasedOnOutcome : Atomic.AtomicOutcomeSource liabilityBasedOnExerciseOfSpecialStatutoryPower
 s43ABasedOnOutcome = Atomic.atomic-outcome-source
-  (cullenOutcomeReceipt s43AArgumentAbandoned "Cullen-s43A-abandonment")
-  "Cullen [64] fn 103 supplies procedural/outcome evidence relevant to failure of the s 43A engagement atom; it does not define s 43A."
+  noStatutoryPowerOutcome
+  noStatutoryPowerEvidenceSource
+  (Algebra.propositionId liabilityBasedOnExerciseOfSpecialStatutoryPower)
+  refl refl
+  "Edelman [64] positively supports failure of the exact s 43A engagement atom on the retained Cullen fibre; fn 103 separately records procedural abandonment."
 
 cullenS43ABasedOnAtom : Atomic.SourceConditionedAtomicLegalTest liabilityBasedOnExerciseOfSpecialStatutoryPower
 cullenS43ABasedOnAtom = Atomic.source-conditioned-atomic-legal-test
   s43ABasedOnSource
-  s43ABasedOnOutcome
   (Algebra.subjectReference liabilityBasedOnExerciseOfSpecialStatutoryPower)
   refl
   S43ABasedOnFits
   S43ABasedOnFails
   (λ ())
+  (λ ())
+  (λ _ → s43ABasedOnOutcome)
   BT.neg
   (λ ())
   (λ _ → cullenNotPursuantToStatutoryPower)
-  "Cullen s 43A engagement axis = -1: positive witness that this exact special-statutory-power applicability atom fails to fit."
+  "Cullen s 43A engagement axis = -1: positive sourced witness that this exact special-statutory-power applicability atom fails to fit."
 
 cullenS43AIsNegative : Atomic.gate cullenS43ABasedOnAtom ≡ BT.neg
 cullenS43AIsNegative = refl
@@ -217,6 +211,8 @@ data AbandonedArgumentDefinesStatutoryMeaning : Set where
 data NoStatutoryPowerMeansNoPoliceFunction : Set where
 data S43ANotEngagedMeansPublicAuthorityImmune : Set where
 
+data NoPowerOutcomeEqualsAbandonment : Set where
+
 s43ANegativeDoesNotNegateNegligence : S43ANegativeMeansNoNegligence → ⊥
 s43ANegativeDoesNotNegateNegligence ()
 
@@ -228,3 +224,6 @@ noStatutoryPowerDoesNotErasePoliceFunction ()
 
 s43ANotEngagedDoesNotCreateImmunity : S43ANotEngagedMeansPublicAuthorityImmune → ⊥
 s43ANotEngagedDoesNotCreateImmunity ()
+
+noPowerOutcomeDoesNotCollapseIntoAbandonment : NoPowerOutcomeEqualsAbandonment → ⊥
+noPowerOutcomeDoesNotCollapseIntoAbandonment ()
