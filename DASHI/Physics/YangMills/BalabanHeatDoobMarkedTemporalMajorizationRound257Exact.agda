@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.BalabanHeatDoobMarkedTemporalMajorizationRound257
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; absℝ; _≤ℝ_)
@@ -58,9 +58,6 @@ record SameDensityMarkedTemporalMajorization
     backgroundAtDepth : Nat → Source.Background (Carrier.source carrier)
     uAtDepth vAtDepth : Nat → Source.Tangent (Carrier.source carrier)
 
-    -- Physical/static source bridge: the literal real CMP116 Hessian on the
-    -- selected directions is pointwise bounded by the SAME rational hessian
-    -- shell used by the marked source response.
     pointwiseStaticHessianMajorized : ∀ depth y →
       absℝ
         (Carrier.cmp116PhysicalMarkedHessian carrier y
@@ -74,10 +71,6 @@ record SameDensityMarkedTemporalMajorization
           (FirstCov.root covarianceData)
           depth)
 
-    -- Physical/covariance same-object bridge.  The stochastic inequality and
-    -- marked shell decay are already compiler/standard-analysis consequences;
-    -- this field only says the rational covariance debt is a majorant of the
-    -- exact covariance appearing in the same-density log-Hessian identity.
     covarianceRealMajorized : ∀ depth →
       absℝ
         (LogHeat.conditionalGradientCovariance
@@ -119,8 +112,7 @@ staticPointwiseMajorantAt :
   Contract.PointwiseStaticHessianMajorant heat contraction embedding
 staticPointwiseMajorantAt dataSet depth = record
   { Contract.PointwiseStaticHessianMajorant.time = timeAtDepth dataSet depth
-  ; Contract.PointwiseStaticHessianMajorant.background =
-      backgroundAtDepth dataSet depth
+  ; Contract.PointwiseStaticHessianMajorant.background = backgroundAtDepth dataSet depth
   ; Contract.PointwiseStaticHessianMajorant.u = uAtDepth dataSet depth
   ; Contract.PointwiseStaticHessianMajorant.v = vAtDepth dataSet depth
   ; Contract.PointwiseStaticHessianMajorant.rationalBound = staticDebt dataSet depth
@@ -199,21 +191,16 @@ asLegacyTemporalDebt :
     {carrier = carrier} heat contraction embedding Scale Volume Root →
   Legacy.HeatDoobHessianCovarianceDebt Scale Volume Root
 asLegacyTemporalDebt dataSet =
-  let
-    cov = FirstCov.asTemporalGradientCovariance (covarianceData dataSet)
+  let cov = FirstCov.asTemporalGradientCovariance (covarianceData dataSet)
   in record
     { Legacy.HeatDoobHessianCovarianceDebt.shared = shared dataSet
-    ; Legacy.HeatDoobHessianCovarianceDebt.scale =
-        FirstCov.scale (covarianceData dataSet)
-    ; Legacy.HeatDoobHessianCovarianceDebt.volume =
-        FirstCov.volume (covarianceData dataSet)
-    ; Legacy.HeatDoobHessianCovarianceDebt.root =
-        FirstCov.root (covarianceData dataSet)
+    ; Legacy.HeatDoobHessianCovarianceDebt.scale = FirstCov.scale (covarianceData dataSet)
+    ; Legacy.HeatDoobHessianCovarianceDebt.volume = FirstCov.volume (covarianceData dataSet)
+    ; Legacy.HeatDoobHessianCovarianceDebt.root = FirstCov.root (covarianceData dataSet)
     ; Legacy.HeatDoobHessianCovarianceDebt.staticHessianDebt = staticDebt dataSet
     ; Legacy.HeatDoobHessianCovarianceDebt.covarianceDebt =
         FirstCov.covarianceDebt (covarianceData dataSet)
-    ; Legacy.HeatDoobHessianCovarianceDebt.actualNegativeHessianDebt =
-        actualRationalDebt dataSet
+    ; Legacy.HeatDoobHessianCovarianceDebt.actualNegativeHessianDebt = actualRationalDebt dataSet
     ; Legacy.HeatDoobHessianCovarianceDebt.staticNonnegative =
         λ depth → Shared.hessianInfluenceShellNonnegative
           (shared dataSet)
@@ -223,11 +210,9 @@ asLegacyTemporalDebt dataSet =
     ; Legacy.HeatDoobHessianCovarianceDebt.covarianceNonnegative =
         FirstCov.covarianceDebtNonnegative (covarianceData dataSet)
     ; Legacy.HeatDoobHessianCovarianceDebt.actualNonnegative =
-        λ depth → Major.actualDebtNonnegative
-          (asRationalMajorizedSplitAt dataSet depth)
+        λ depth → Major.actualDebtNonnegative (asRationalMajorizedSplitAt dataSet depth)
     ; Legacy.HeatDoobHessianCovarianceDebt.heatDoobSplit = λ depth → ℚP.≤-refl
-    ; Legacy.HeatDoobHessianCovarianceDebt.staticBelowMarkedHessian =
-        λ depth → ℚP.≤-refl
+    ; Legacy.HeatDoobHessianCovarianceDebt.staticBelowMarkedHessian = λ depth → ℚP.≤-refl
     ; Legacy.HeatDoobHessianCovarianceDebt.covarianceAmplitude =
         Cov.temporalCovarianceAmplitude cov
     ; Legacy.HeatDoobHessianCovarianceDebt.covarianceAmplitudeNonnegative =
@@ -250,14 +235,5 @@ finiteActualRationalDebtUniform dataSet =
 markedTemporalRealToRationalCompilerLevel : ProofLevel
 markedTemporalRealToRationalCompilerLevel = machineChecked
 
--- Standard ingredients: normalized expectation contraction and absolute-value
--- triangle/ordered rational embedding.  No additional YM theorem is hidden in
--- the real-to-rational assembly.
 markedTemporalScalarAnalysisLevel : ProofLevel
 markedTemporalScalarAnalysisLevel = standardImported
-
--- Remaining physical/source seams on this route are now only:
---   * literal compact-group Heat/Doob expectation on the exact BC1 carrier;
---   * pointwise real CMP116 Hessian -> marked rational shell majorization;
---   * exact covariance -> marked first-gradient rational covariance majorization.
--- The rational split and cumulative debt are compiler-owned.
