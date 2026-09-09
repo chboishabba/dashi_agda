@@ -40,6 +40,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R2
 import DASHI.Physics.Closure.NSTriadKNFiniteWeightedGramFluxAggregationRound385Exact as R385
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
 import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact as R543
 import DASHI.Physics.Closure.NSTriadKNLiteralR396OrderedOffDiagonalRemainderRound540Exact as R540
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545Exact as R545
@@ -118,8 +119,7 @@ module NormalForm
     (positive : O.E.PairRatePositiveOn items) →
     factoredFull output items
     ≡ R543.diagonalSum R.pairScalar items
-      + DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact.two
-        * R385.sumWeightedRemainder (O.E.allR290Pairs items positive)
+      + R539.two * R385.sumWeightedRemainder (O.E.allR290Pairs items positive)
   factoredFullIsDiagonalPlusTwoLiteralRemainder output positive =
     let
       items = Output.physicalOutputFiber (Audit.cutoff system) output
