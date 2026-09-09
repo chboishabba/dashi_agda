@@ -58,9 +58,9 @@ pairingStatus =
 ------------------------------------------------------------------------
 -- Least-privilege selected acquisition target.
 --
--- IMPORTANT: the universal left-inverse is proof-bearing.  A target that only
--- stores the proposition's TYPE or a Bool would forget the exact coordinate
--- that distinguishes a real codec from an unverified candidate.
+-- The universal left-inverse is proof-bearing.  Storing only the proposition
+-- type or a Bool would erase the exact coordinate that distinguishes a real
+-- codec from an unverified candidate.
 ------------------------------------------------------------------------
 
 record FormulaRetractionAcquisitionTarget : Set₁ where
@@ -122,45 +122,10 @@ paymentCompilesSubstitution F payment =
   Subst.compileArithmetisedSubstitution F (paymentAsRetraction F payment)
 
 ------------------------------------------------------------------------
--- A generic acquisition target only pays the formal-system retraction when it
--- is welded to the EXACT `Formula F` / `codeFormula F` carrier.  Shape reuse
--- from another codec remains insufficient.
+-- A generic codec target only pays the formal-system retraction when it is
+-- welded to the EXACT Formula/codeFormula carrier.  An isomorphic carrier or
+-- an exact codec elsewhere in the repo is not enough.
 ------------------------------------------------------------------------
-
-record SameFormulaCarrierWeld
-    (F : Godel.ArithmetisedFormalSystem)
-    (target : FormulaRetractionAcquisitionTarget) : Set₁ where
-  constructor sameFormulaCarrierWeld
-  field
-    targetFormulaToFormalFormula :
-      FormulaCarrier target → Godel.Formula F
-    formalFormulaToTargetFormula :
-      Godel.Formula F → FormulaCarrier target
-    targetFormalRoundtrip :
-      (formula : Godel.Formula F) →
-      targetFormulaToFormalFormula
-        (formalFormulaToTargetFormula formula)
-      ≡ formula
-    encodeSameObject :
-      (formula : Godel.Formula F) →
-      encodeFormula target (formalFormulaToTargetFormula formula)
-      ≡ Godel.codeFormula F formula
-    decodeSameObject :
-      (n : Nat) →
-      targetFormulaToFormalFormula (decodeFormula target n)
-      ≡ targetFormulaToFormalFormula (decodeFormula target n)
-
-open SameFormulaCarrierWeld public
-
-------------------------------------------------------------------------
--- We deliberately DO NOT compile SameFormulaCarrierWeld to payment yet.
--- `decodeSameObject` above is reflexive bookkeeping only; a real compiler needs
--- the stronger commuting square that identifies formal decoding with target
--- decoding at every formal code.  Keeping that missing coordinate visible
--- prevents an isomorphic-but-different carrier from being promoted silently.
-------------------------------------------------------------------------
-
-data FormalDecodeCommutesWithTargetDecode : Set where
 
 record ExactFormulaRetractionWeld
     (F : Godel.ArithmetisedFormalSystem)
@@ -228,7 +193,6 @@ data CodecContractWithoutImplementationPaysFormulaRetraction : Set where
 data OneWitnessRoundtripPaysUniversalFormulaRetraction : Set where
 data FormulaRetractionPaysSelfSubstitutionRepresentability : Set where
 data PropositionTypeWithoutProofPaysFormulaRetraction : Set where
-
 data CarrierIsomorphismAloneIdentifiesGodelCode : Set where
 
 otherCarrierCodecDoesNotPayArithmeticFormulaRetraction :
@@ -261,6 +225,7 @@ record GodelDiagonalConcreteFirstResidualBoundary : Set where
     genericSubstitutionCompilerClosed : Bool
     genericDiagonalCompilerClosed : Bool
     acquisitionTargetStoresUniversalProof : Bool
+    weakTautologicalCarrierWeldRetained : Bool
     directFormulaNatCodecRecovered : Bool
     exactStreamCodecImplementationRecovered : Bool
     pairingCodecRecovered : Bool
@@ -275,4 +240,4 @@ canonicalGodelDiagonalConcreteFirstResidualBoundary :
   GodelDiagonalConcreteFirstResidualBoundary
 canonicalGodelDiagonalConcreteFirstResidualBoundary =
   godelDiagonalConcreteFirstResidualBoundary
-    true true true false false false false false false true true true
+    true true true false false false false false false false true true true
