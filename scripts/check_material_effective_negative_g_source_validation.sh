@@ -11,6 +11,7 @@ files=(
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyScopeBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyCompilationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1991CombinedFieldSourceEntitlementExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1992CoupledPotentialSourceEntitlementExact.agda
 )
@@ -25,6 +26,9 @@ done
 grep -q 'massCurrentReceiptAutomaticallyConstructsFullStressEnergy' DASHI/Physics/ExoticGravity/SuperconductingChargeMassCurrentBidiExact.agda
 grep -q 'massCurrentAloneConstructsStressEnergy' DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyCompilationExact.agda
 grep -q 'evaluationRequestEqualsCompletedPrediction' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
+grep -q 'requestStageMatchesExistingPlan' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
+grep -q 'predictionStageFirstOpen' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
+grep -q 'typedPredictionPaysBackgroundClosure' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
 grep -q 'authorityClosurePaysSourceCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
