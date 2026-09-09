@@ -2,3 +2,4 @@ module DASHI.Biology.FruitIntegrityAdversarialFibreValidationExact where
 
 import DASHI.Biology.FruitIntegrityAdversarialFibreExact
 import DASHI.Biology.FruitIntegrityConsumerFibreRepairExact
+import DASHI.Biology.FruitLESAdversarialConsumerBridgeExact
