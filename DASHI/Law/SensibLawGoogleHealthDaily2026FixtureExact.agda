@@ -12,20 +12,23 @@ import DASHI.Law.SensibLawHealthRecordEvidenceExact as Health
 -- CONCRETE GOOGLE-HEALTH DAILY EXPORT FIXTURE
 --
 -- User-provided workbook:
---   google_health_daily_data_2026-08-10_to_2026-09-08
+--   google_health_daily_2026-08-10_to_2026-09-09
 --
--- This fixture establishes only what the export itself carries.  It is useful
--- as a provider-adapter regression and a later baseline/context carrier.  It
--- does not backfill 2022 observations and does not establish diagnosis,
--- aggravation, or legal causation.
+-- The filename advertises through 2026-09-09, but the observed data rows end
+-- on 2026-09-08.  The fixture preserves that discrepancy rather than silently
+-- manufacturing a 2026-09-09 observation.
+--
+-- This carrier is useful as a provider-adapter regression and later
+-- activity/context series.  It does not backfill 2022 observations and does
+-- not establish diagnosis, aggravation, or legal causation.
 ------------------------------------------------------------------------
 
 googleHealthDaily2026Source : Observation.SourceArtifact
 googleHealthDaily2026Source =
   Observation.sourceArtifact
-    "google-health-daily-2026-08-10--2026-09-08"
+    "google-health-daily-2026-08-10--filename-2026-09-09-observed-2026-09-08"
     Observation.externalSystemArtifact
-    "google_health_daily_data_2026-08-10_to_2026-09-08"
+    "google_health_daily_2026-08-10_to_2026-09-09"
     "Google Health / user-provided daily export"
 
 googleHealthDaily2026Provenance :
@@ -33,7 +36,7 @@ googleHealthDaily2026Provenance :
 googleHealthDaily2026Provenance =
   Observation.provenanceAnchor
     "user-provided workbook preserved as exact source carrier"
-    "daily rows 2026-08-10 through 2026-09-08"
+    "30 observed daily rows: 2026-08-10 through 2026-09-08"
     "same exported workbook / same subject context"
     ⊤
 
@@ -45,45 +48,55 @@ googleHealthDaily2026Artifact =
     "user health-record subject"
     "Google Health / connected wearable ecosystem"
     "daily observations"
-    "2026-08-10 through 2026-09-08"
+    "observed 2026-08-10 through 2026-09-08; filename extends to 2026-09-09"
     googleHealthDaily2026Provenance
 
 ------------------------------------------------------------------------
--- Exact schema observed in the workbook.
+-- Exact observed schema in the 2026-09-09-named workbook.
 ------------------------------------------------------------------------
 
 data GoogleHealthDailyMetric : Set where
   steps : GoogleHealthDailyMetric
   distanceKm : GoogleHealthDailyMetric
-  totalCaloriesKcal : GoogleHealthDailyMetric
-  lightMinutes : GoogleHealthDailyMetric
-  moderateMinutes : GoogleHealthDailyMetric
-  vigorousMinutes : GoogleHealthDailyMetric
   fatBurnZoneMinutes : GoogleHealthDailyMetric
   cardioZoneMinutes : GoogleHealthDailyMetric
   peakZoneMinutes : GoogleHealthDailyMetric
 
 metricReference : GoogleHealthDailyMetric → String
-metricReference steps = "Steps"
-metricReference distanceKm = "Distance km"
-metricReference totalCaloriesKcal = "Total calories kcal"
-metricReference lightMinutes = "Light minutes"
-metricReference moderateMinutes = "Moderate minutes"
-metricReference vigorousMinutes = "Vigorous minutes"
-metricReference fatBurnZoneMinutes = "Fat-burn zone minutes"
-metricReference cardioZoneMinutes = "Cardio zone minutes"
-metricReference peakZoneMinutes = "Peak zone minutes"
+metricReference steps = "steps"
+metricReference distanceKm = "distance_km"
+metricReference fatBurnZoneMinutes = "fat_burn_zone_minutes"
+metricReference cardioZoneMinutes = "cardio_zone_minutes"
+metricReference peakZoneMinutes = "peak_zone_minutes"
 
 record GoogleHealthDaily2026SchemaBoundary : Set where
   constructor googleHealthDaily2026SchemaBoundary
   field
     rowCount : String
-    dateRange : String
-    stepsAndDistancePresentAllRows : Bool
-    stepsAndDistancePresentAllRowsIsTrue : stepsAndDistancePresentAllRows ≡ true
-    calorieAndIntensityFieldsPartiallyPopulated : Bool
-    calorieAndIntensityFieldsPartiallyPopulatedIsTrue :
-      calorieAndIntensityFieldsPartiallyPopulated ≡ true
+    declaredFilenameRange : String
+    observedDateRange : String
+
+    stepsPresentAllRows : Bool
+    stepsPresentAllRowsIsTrue : stepsPresentAllRows ≡ true
+    distancePresentAllRows : Bool
+    distancePresentAllRowsIsTrue : distancePresentAllRows ≡ true
+
+    zoneMinutesPartiallyPopulated : Bool
+    zoneMinutesPartiallyPopulatedIsTrue : zoneMinutesPartiallyPopulated ≡ true
+    rowsWithZoneMinuteValues : String
+
+    filenameEndDateHasObservedRow : Bool
+    filenameEndDateHasObservedRowIsFalse : filenameEndDateHasObservedRow ≡ false
+
+    totalCaloriesColumnPresent : Bool
+    totalCaloriesColumnPresentIsFalse : totalCaloriesColumnPresent ≡ false
+    lightMinutesColumnPresent : Bool
+    lightMinutesColumnPresentIsFalse : lightMinutesColumnPresent ≡ false
+    moderateMinutesColumnPresent : Bool
+    moderateMinutesColumnPresentIsFalse : moderateMinutesColumnPresent ≡ false
+    vigorousMinutesColumnPresent : Bool
+    vigorousMinutesColumnPresentIsFalse : vigorousMinutesColumnPresent ≡ false
+
     heartRateColumnPresent : Bool
     heartRateColumnPresentIsFalse : heartRateColumnPresent ≡ false
     bloodPressureColumnPresent : Bool
@@ -94,6 +107,7 @@ record GoogleHealthDaily2026SchemaBoundary : Set where
     spo2ColumnPresentIsFalse : spo2ColumnPresent ≡ false
     hrvColumnPresent : Bool
     hrvColumnPresentIsFalse : hrvColumnPresent ≡ false
+
     exportCanBackfill2022 : Bool
     exportCanBackfill2022IsFalse : exportCanBackfill2022 ≡ false
     exportAutomaticallyEstablishesDiagnosis : Bool
@@ -108,9 +122,18 @@ canonicalGoogleHealthDaily2026SchemaBoundary :
 canonicalGoogleHealthDaily2026SchemaBoundary =
   googleHealthDaily2026SchemaBoundary
     "30 daily rows"
-    "2026-08-10 through 2026-09-08 inclusive"
+    "filename: 2026-08-10 through 2026-09-09"
+    "observed rows: 2026-08-10 through 2026-09-08"
     true refl
     true refl
+    true refl
+    "7 rows carry zone-minute values; 23 rows are missing all three zone-minute fields"
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
