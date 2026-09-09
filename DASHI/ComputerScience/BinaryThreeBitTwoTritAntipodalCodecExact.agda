@@ -86,7 +86,7 @@ decodeBlockStream [] = []
 decodeBlockStream (block ∷ blocks) = decode2to3 block ∷ decodeBlockStream blocks
 
 blockStreamRoundTrip : (blocks : List Bit3) → decodeBlockStream (encodeBlockStream blocks) ≡ blocks
-blockStreamRoundTrip [] = []
+blockStreamRoundTrip [] = refl
 blockStreamRoundTrip (block ∷ blocks)
   rewrite blockRoundTrip block | blockStreamRoundTrip blocks = refl
 
