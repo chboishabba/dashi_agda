@@ -16,7 +16,7 @@ import DASHI.Law.SensibLawHealthRecordEvidenceExact as Health
 --   scripts/process_sensiblaw_health_evidence.py
 --
 -- The script normalizes provider-specific health carriers and performs
--- temporal joins.  It is a witness producer only.  Agda owns the semantic
+-- temporal joins. It is a witness producer only. Agda owns the semantic
 -- admission boundary: normalization and temporal proximity do not manufacture
 -- diagnosis, particular-harm identity, factual causation, scope, or damages.
 ------------------------------------------------------------------------
@@ -25,7 +25,7 @@ processorPath : String
 processorPath = "scripts/process_sensiblaw_health_evidence.py"
 
 processorContractVersion : String
-processorContractVersion = "sensiblaw-health-evidence-v1"
+processorContractVersion = "sensiblaw-health-evidence-v2"
 
 
 data ProcessorCommand : Set where
@@ -63,8 +63,11 @@ record NormalizedObservationProjection : Set₁ where
   field
     processorReceipt : ProcessorReceipt
     sourceArtifact : Observation.SourceArtifact
+    subjectReference : String
     metricReference : String
-    timestampReference : String
+    rawTimestampReference : String
+    canonicalTimestampReference : String
+    timestampStatusReference : String
     valueReference : String
     unitReference : String
     provenance : Observation.ProvenanceAnchor sourceArtifact
@@ -78,9 +81,9 @@ asTimeSeriesObservation :
   NormalizedObservationProjection → Observation.TimeSeriesObservation
 asTimeSeriesObservation projection =
   Observation.timeSeriesObservation
-    "source-conditioned health subject"
+    (subjectReference projection)
     (metricReference projection)
-    (timestampReference projection)
+    (canonicalTimestampReference projection)
     (valueReference projection)
     (unitReference projection)
     (sourceArtifact projection)
@@ -100,13 +103,26 @@ data ProcessorTemporalRelation : Set where
   after : ProcessorTemporalRelation
   unresolved : ProcessorTemporalRelation
 
+
+data EventPrecision : Set where
+  timestampPrecision : EventPrecision
+  dayPrecision : EventPrecision
+
+
+data JoinGranularity : Set where
+  sourceRowGranularity : JoinGranularity
+  metricGranularity : JoinGranularity
+
 record ProcessorTemporalJoin : Set₁ where
   constructor processorTemporalJoin
   field
     observationReference : String
     eventReference : String
     relation : ProcessorTemporalRelation
+    eventPrecision : EventPrecision
+    joinGranularity : JoinGranularity
     deltaSecondsReference : String
+    deltaDaysReference : String
     observationSourceDigestReference : String
     eventSourceDigestReference : String
     joinReceipt : Set
@@ -132,13 +148,17 @@ record HealthEvidenceProcessorParityBoundary : Set where
     missingValuesMayBeImputedSilentlyIsFalse :
       missingValuesMayBeImputedSilently ≡ false
 
-    sourceTimestampsMayBeRepairedSilently : Bool
-    sourceTimestampsMayBeRepairedSilentlyIsFalse :
-      sourceTimestampsMayBeRepairedSilently ≡ false
+    rawSourceTimestampsMayBeMutated : Bool
+    rawSourceTimestampsMayBeMutatedIsFalse :
+      rawSourceTimestampsMayBeMutated ≡ false
 
     unsupportedProviderFieldsMayBePromoted : Bool
     unsupportedProviderFieldsMayBePromotedIsFalse :
       unsupportedProviderFieldsMayBePromoted ≡ false
+
+    dayPrecisionMayInventClockTime : Bool
+    dayPrecisionMayInventClockTimeIsFalse :
+      dayPrecisionMayInventClockTime ≡ false
 
     temporalJoinMayPayParticularHarmIdentity : Bool
     temporalJoinMayPayParticularHarmIdentityIsFalse :
@@ -164,6 +184,7 @@ canonicalHealthEvidenceProcessorParityBoundary =
     false refl
     false refl
     false refl
+    false refl
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -174,6 +195,8 @@ data NormalizationAutomaticallyCausation : Set where
 data TemporalJoinAutomaticallyParticularHarm : Set where
 data TemporalJoinAutomaticallyCausation : Set where
 data UnsupportedFieldAutomaticallyPromoted : Set where
+
+data DayPrecisionAutomaticallyExactTime : Set where
 
 normalizationDoesNotAutoDiagnose : NormalizationAutomaticallyDiagnosis → ⊥
 normalizationDoesNotAutoDiagnose ()
@@ -191,6 +214,9 @@ temporalJoinDoesNotAutoPayCausation ()
 
 unsupportedFieldDoesNotAutoPromote : UnsupportedFieldAutomaticallyPromoted → ⊥
 unsupportedFieldDoesNotAutoPromote ()
+
+dayPrecisionDoesNotInventExactTime : DayPrecisionAutomaticallyExactTime → ⊥
+dayPrecisionDoesNotInventExactTime ()
 
 ------------------------------------------------------------------------
 -- Consumer contract.
