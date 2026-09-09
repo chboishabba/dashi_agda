@@ -31,6 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
+import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNComLiteralBonyOutputFibrePartitionRound63Exact as Bony
@@ -71,10 +72,8 @@ module LiveNestedSlotSwap586
     cong
       (λ forcing →
         R145.slotKernel
-          (DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact.normalizedDirection
-            E S (Physical.p outer))
-          (DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact.normalizedDirection
-            E S (Physical.q outer))
+          (R167.normalizedDirection E S (Physical.p outer))
+          (R167.normalizedDirection E S (Physical.q outer))
           forcing
           (Audit.velocity system (Physical.q outer)))
       (InnerSwap.fourSignInnerSwapInvariant585
