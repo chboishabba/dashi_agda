@@ -70,11 +70,6 @@ record DiagonalLemmaAuthority
     (F : ArithmetisedFormalSystem) : Set₁ where
   field
     fixedPoint : Formula F → Sentence F
-    fixedPointEquivalence :
-      (predicate : Formula F) →
-      Provable F
-        (fixedPoint F predicate)
-      → Set
     fixedPointLaw :
       (predicate : Formula F) →
       Equivalent F
