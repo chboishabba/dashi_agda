@@ -1,0 +1,52 @@
+module DASHI.Interop.SensibLawWikidataTernaryAdmissibilityValidation where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact as Ternary
+import DASHI.Interop.SensibLawNDimAdmissibilityTetrationComplexityBridgeExact as Tower
+
+snakTripleHasBalancedCodec :
+  Ternary.WikidataTernaryAdmissibilityBoundary.wikibaseSnakTripleHasExactBalancedCodec
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ true
+snakTripleHasBalancedCodec = refl
+
+snakCodecIsNotTruthSemantics :
+  Ternary.WikidataTernaryAdmissibilityBoundary.balancedCodecIsWikibaseTruthSemantics
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ false
+snakCodecIsNotTruthSemantics = refl
+
+zeroTritIsNotBooleanFalseByItself :
+  Ternary.WikidataTernaryAdmissibilityBoundary.zeroTritMeansBooleanFalse
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ false
+zeroTritIsNotBooleanFalseByItself = refl
+
+openResidualIsThirdState :
+  Ternary.WikidataTernaryAdmissibilityBoundary.openResidualIsThirdAdmissibilityState
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ true
+openResidualIsThirdState = refl
+
+nineAxisUsesBase369Carrier :
+  Ternary.WikidataTernaryAdmissibilityBoundary.nineAxisProjectionUsesExistingBase369Carrier
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ true
+nineAxisUsesBase369Carrier = refl
+
+sameCarrierDoesNotCreateMonsterAction :
+  Ternary.WikidataTernaryAdmissibilityBoundary.sameCarrierCreatesMonsterAction
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ false
+sameCarrierDoesNotCreateMonsterAction = refl
+
+fixedThreePowerNIsNotAutomaticallyTetration :
+  Tower.AdmissibilityTetrationComplexityBoundary.fixedNAxisThreePowerNIsAutomaticallyTetration
+    Tower.canonicalAdmissibilityTetrationComplexityBoundary ≡ false
+fixedThreePowerNIsNotAutomaticallyTetration = refl
+
+selfIndexingMayGrowTetrationally :
+  Tower.AdmissibilityTetrationComplexityBoundary.selfIndexingMayProduceTetrationalAxisGrowth
+    Tower.canonicalAdmissibilityTetrationComplexityBoundary ≡ true
+selfIndexingMayGrowTetrationally = refl
+
+complexityIsSeparateCoordinateFamily :
+  Tower.AdmissibilityTetrationComplexityBoundary.admissibilityAndComplexityAreSameCoordinate
+    Tower.canonicalAdmissibilityTetrationComplexityBoundary ≡ false
+complexityIsSeparateCoordinateFamily = refl
