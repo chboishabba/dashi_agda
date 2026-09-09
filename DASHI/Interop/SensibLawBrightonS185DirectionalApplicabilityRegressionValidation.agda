@@ -15,6 +15,41 @@ form11IsMatterEvidenceCarrier :
     Brighton.canonicalBrightonS185RegressionBoundary ≡ true
 form11IsMatterEvidenceCarrier = refl
 
+exactSourceResidualRequired :
+  Brighton.BrightonS185RegressionBoundary.exactSourceResidualRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+exactSourceResidualRequired = refl
+
+exactTargetClaimBindingRequired :
+  Brighton.BrightonS185RegressionBoundary.exactTargetClaimBindingRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+exactTargetClaimBindingRequired = refl
+
+exactSourceArtifactReceiptRequired :
+  Brighton.BrightonS185RegressionBoundary.exactSourceArtifactReceiptRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+exactSourceArtifactReceiptRequired = refl
+
+supportedDispositionRequired :
+  Brighton.BrightonS185RegressionBoundary.supportedDispositionRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+supportedDispositionRequired = refl
+
+canonicalSourceAdmissionRequired :
+  Brighton.BrightonS185RegressionBoundary.canonicalSourceAdmissionRequired
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+canonicalSourceAdmissionRequired = refl
+
+positiveSupportPaidByCanonicalAdmission :
+  Brighton.BrightonS185RegressionBoundary.positiveSupportPaidByCanonicalAdmission
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+positiveSupportPaidByCanonicalAdmission = refl
+
+positiveTritPaidByCanonicalAdmission :
+  Brighton.BrightonS185RegressionBoundary.positiveTritPaidByCanonicalAdmission
+    Brighton.canonicalBrightonS185RegressionBoundary ≡ true
+positiveTritPaidByCanonicalAdmission = refl
+
 section185IsIndependentLegalAuthority :
   Brighton.BrightonS185RegressionBoundary.section185IsIndependentLegalAuthority
     Brighton.canonicalBrightonS185RegressionBoundary ≡ true
