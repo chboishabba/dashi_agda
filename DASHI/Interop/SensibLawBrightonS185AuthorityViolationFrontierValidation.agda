@@ -1,0 +1,48 @@
+module DASHI.Interop.SensibLawBrightonS185AuthorityViolationFrontierValidation where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Law.SensibLawBrightonS185HistoricalAuthoritySourceExact as Historical
+import DASHI.Cognition.PNF.SensibLawBrightonS185HistoricalAuthorityWeldExact as Weld
+import DASHI.Cognition.PNF.SensibLawBrightonS185ViolationElementFrontierExact as Frontier
+
+open Historical.HistoricalS185SourceVersionBoundary
+open Weld.BrightonHistoricalAuthorityWeldBoundary
+open Frontier.BrightonS185ViolationElementFrontierBoundary
+
+historicalVersionPinned :
+  exactVersionIdentityPinned Historical.canonicalHistoricalS185SourceVersionBoundary ≡ true
+historicalVersionPinned = refl
+
+historicalDatePinned :
+  exactMatterDatePinned Historical.canonicalHistoricalS185SourceVersionBoundary ≡ true
+historicalDatePinned = refl
+
+meetSourceWeldRequired :
+  exactMeetAuthoritySourceWeldRequired Weld.canonicalBrightonHistoricalAuthorityWeldBoundary ≡ true
+meetSourceWeldRequired = refl
+
+firstViolationElementExplicit :
+  firstOpenElementExplicit Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+firstViolationElementExplicit = refl
+
+firstViolationElementStillUnresolved :
+  elementDispositionUnresolved Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+firstViolationElementStillUnresolved = refl
+
+sameEventMeritsEvidenceRequired :
+  requiresSameEventMeritsEvidence Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+sameEventMeritsEvidenceRequired = refl
+
+form11DoesNotPayMerits :
+  form11AssertionPaysMerits Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+form11DoesNotPayMerits = refl
+
+qstarsDoesNotPayMerits :
+  qstarsAdvicePaysMerits Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+qstarsDoesNotPayMerits = refl
+
+rentOrderDoesNotPayS185Merits :
+  rentOrderPaysConditionMerits Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+rentOrderDoesNotPayS185Merits = refl
