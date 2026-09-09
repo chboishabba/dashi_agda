@@ -8,6 +8,7 @@ import DASHI.Physics.GR.GravitationalWavePolarizationSignBidiExact as Polarizati
 import DASHI.Physics.GR.GravitationalWavePhaseSignBidiExact as Phase
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingScopeBidiExact as Scope
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingScopeProofSearchExact as ScopeSearch
+import DASHI.Physics.ExoticGravity.SuperconductingResidualCouplingNegativeGInterpretationBidiExact as Interpretation
 
 ------------------------------------------------------------------------
 -- SOURCE ATTRIBUTION
@@ -156,3 +157,37 @@ materialScopeStartsWithSameApparatusContrast :
     ScopeSearch.canonicalNegativeGCouplingScopeProofSearchBoundary
     ≡ true
 materialScopeStartsWithSameApparatusContrast = refl
+
+------------------------------------------------------------------------
+-- RESIDUAL COUPLING != MATERIAL-EFFECTIVE NEGATIVE G
+------------------------------------------------------------------------
+
+nonzeroAlphaDoesNotMeanNegativeEffectiveG :
+  Interpretation.nonzeroAlphaAutomaticallyMeansNegativeEffectiveG
+    Interpretation.canonicalResidualNegativeGInterpretationBoundary
+    ≡ false
+nonzeroAlphaDoesNotMeanNegativeEffectiveG = refl
+
+reproducibleScalingDoesNotMeanNegativeEffectiveG :
+  Interpretation.reproducibleScalingAutomaticallyMeansNegativeEffectiveG
+    Interpretation.canonicalResidualNegativeGInterpretationBoundary
+    ≡ false
+reproducibleScalingDoesNotMeanNegativeEffectiveG = refl
+
+constitutiveMappingRequiredForEffectiveG :
+  Interpretation.explicitConstitutiveMappingRequired
+    Interpretation.canonicalResidualNegativeGInterpretationBoundary
+    ≡ true
+constitutiveMappingRequiredForEffectiveG = refl
+
+materialRegimeContrastStillRequiredForEffectiveG :
+  Interpretation.materialRegimeContrastStillRequired
+    Interpretation.canonicalResidualNegativeGInterpretationBoundary
+    ≡ true
+materialRegimeContrastStillRequiredForEffectiveG = refl
+
+effectiveGInterpretationDoesNotProveUniversalNegativeG :
+  Interpretation.effectiveGInterpretationAutomaticallyProvesUniversalNegativeG
+    Interpretation.canonicalResidualNegativeGInterpretationBoundary
+    ≡ false
+effectiveGInterpretationDoesNotProveUniversalNegativeG = refl
