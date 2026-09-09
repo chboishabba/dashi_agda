@@ -5,8 +5,9 @@ module DASHI.Physics.YangMills.BalabanHeatDoobJointRowCCompilerRound252Exact whe
 -- ROUND252 / ONE JOINT COVARIANCE PRODUCER -> TEMPORAL + SPATIAL ROW-C INPUTS
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
