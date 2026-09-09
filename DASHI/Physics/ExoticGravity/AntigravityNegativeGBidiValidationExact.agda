@@ -8,6 +8,7 @@ import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact as Signe
 import DASHI.Physics.GR.SignedGRNormalizationBidiExact as Normalization
 import DASHI.Physics.GR.SignedNewtonianLimitBidiExact as Newton
 import DASHI.Physics.GR.SignedGravitationalWaveCouplingBidiExact as SignedWave
+import DASHI.Physics.GR.GravitationalWaveTheoryTestBidiExact as WaveTest
 import DASHI.Physics.GR.NegativeGGravitationalWaveTestRoutingExact as WaveRoute
 import DASHI.Physics.GR.SignedCosmologicalMatterCouplingBidiExact as Cosmology
 import DASHI.Physics.GR.UniversalSignedGCrossScaleFingerprintBidiExact as Universal
@@ -15,10 +16,6 @@ import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact as Nega
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGPairedComparatorExact as Paired
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGClaimComparisonWeldExact as ComparisonWeld
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCrossScaleProofSearchExact as CrossScaleSearch
-
-------------------------------------------------------------------------
--- SIGN ALGEBRA
-------------------------------------------------------------------------
 
 negativeGFlipIsInvolutive :
   SignedG.flipCouplingSign
@@ -56,10 +53,6 @@ selfConsistentNegativeGNeedsStabilityAnalysis :
     ≡ true
 selfConsistentNegativeGNeedsStabilityAnalysis = refl
 
-------------------------------------------------------------------------
--- GR NORMALIZATION BIDI
-------------------------------------------------------------------------
-
 constantSlotNameCannotDetermineGSign :
   Normalization.constantSlotNameDeterminesCouplingSign
     Normalization.canonicalSignedGRNormalizationBoundary
@@ -94,10 +87,6 @@ physicalAndCounterfactualBranchSignsRemainDistinct :
     ≡ Normalization.branchSign Normalization.counterfactualNegativeGBranch → ⊥
 physicalAndCounterfactualBranchSignsRemainDistinct = Normalization.branchSignsDistinct
 
-------------------------------------------------------------------------
--- COUPLING-SIGN / SOURCE-SIGN DEGENERACY
-------------------------------------------------------------------------
-
 negativeGPositiveSourceCollidesWithPositiveGNegativeSourceAtCoarseRHS :
   SignedSource.coarseEffectiveSource SignedSource.negativeGPositiveSource
     ≡ SignedSource.coarseEffectiveSource SignedSource.positiveGNegativeSource
@@ -122,10 +111,6 @@ sameRHSSignDoesNotMeanSamePhysicalTheory :
     ≡ false
 sameRHSSignDoesNotMeanSamePhysicalTheory = refl
 
-------------------------------------------------------------------------
--- NEWTONIAN / POISSON SIGN FIBRE
-------------------------------------------------------------------------
-
 negativeGPositiveDensityIsRepulsive :
   Newton.positiveDensityRadialResponse SignedG.negativeCoupling
     ≡ Newton.repulsiveAwayFromPositiveSource
@@ -149,10 +134,6 @@ exactPoissonReceiptRequired :
     ≡ true
 exactPoissonReceiptRequired = refl
 
-------------------------------------------------------------------------
--- GRAVITATIONAL-WAVE GENERATION / PROPAGATION SPLIT
-------------------------------------------------------------------------
-
 vacuumPropagationDoesNotIdentifyGSign :
   SignedWave.vacuumPropagationObserverAloneDeterminesMatterCouplingSign
     SignedWave.canonicalSignedGravitationalWaveBoundary
@@ -172,12 +153,12 @@ exactWaveEquationAndStrainReceiptsRequired :
 exactWaveEquationAndStrainReceiptsRequired = refl
 
 inspiralNegativeGNeedsReSolvedSourceDynamics :
-  WaveRoute.negativeGRoleFor WaveRoute.WaveTest.inspiralPhaseConsistency
+  WaveRoute.negativeGRoleFor WaveTest.inspiralPhaseConsistency
     ≡ WaveRoute.requiresReSolvedSourceDynamics
 inspiralNegativeGNeedsReSolvedSourceDynamics = refl
 
 dispersionAloneDoesNotIdentifyGSign :
-  WaveRoute.negativeGRoleFor WaveRoute.WaveTest.dispersionPropagation
+  WaveRoute.negativeGRoleFor WaveTest.dispersionPropagation
     ≡ WaveRoute.propagationAloneDoesNotIdentifyGSign
 dispersionAloneDoesNotIdentifyGSign = refl
 
@@ -186,10 +167,6 @@ currentGWAgreementDoesNotRuleOutEveryNegativeGConstruction :
     WaveRoute.canonicalNegativeGWaveTestBoundary
     ≡ false
 currentGWAgreementDoesNotRuleOutEveryNegativeGConstruction = refl
-
-------------------------------------------------------------------------
--- COSMOLOGICAL MATTER-TERM SIGN FIBRE
-------------------------------------------------------------------------
 
 cosmologicalMatterTermCannotIdentifyNegativeCoordinate :
   Cosmology.friedmannMatterTermSignAloneDeterminesWhetherGOrDensityWasNegative
@@ -214,10 +191,6 @@ negativeGCosmologyNeedsReSolvedDynamics :
     Cosmology.canonicalSignedCosmologyBoundary
     ≡ true
 negativeGCosmologyNeedsReSolvedDynamics = refl
-
-------------------------------------------------------------------------
--- UNIVERSAL SIGNED-G CROSS-SCALE FINGERPRINT
-------------------------------------------------------------------------
 
 universalNegativeGFingerprintIsRepulsiveLocally :
   Universal.localPositiveDensityResponse Universal.negativeGSignFingerprint
@@ -247,10 +220,6 @@ vacuumGWPropagationDoesNotPayUniversalSignIdentity :
     ≡ false
 vacuumGWPropagationDoesNotPayUniversalSignIdentity = refl
 
-------------------------------------------------------------------------
--- UNIVERSAL NEGATIVE-G PROOF SEARCH
-------------------------------------------------------------------------
-
 universalNegativeGSearchStartsLocal :
   CrossScaleSearch.firstUniversalNegativeGStage
     ≡ CrossScaleSearch.localSignDiscriminatorStage
@@ -273,10 +242,6 @@ rejectionOfUniversalNegativeGDoesNotRejectEveryLocalEffectiveModel :
     CrossScaleSearch.canonicalNegativeGCrossScaleProofSearchBoundary
     ≡ false
 rejectionOfUniversalNegativeGDoesNotRejectEveryLocalEffectiveModel = refl
-
-------------------------------------------------------------------------
--- ANTIGRAVITY CLAIM ROUTING
-------------------------------------------------------------------------
 
 negativeGIsOnlyCounterfactualTheoryCoordinateHere :
   NegativeG.negativeGIsEstablishedPhysicalConstantSign
@@ -308,10 +273,6 @@ negativeGIsNotNegativeActiveSource :
     ≡ false
 negativeGIsNotNegativeActiveSource = refl
 
-------------------------------------------------------------------------
--- SAME-INPUT +G / -G COMPARATOR
-------------------------------------------------------------------------
-
 pairedComparatorRequiresNonGRNegativeGAlternative :
   Paired.negativeGAlternativeMustBeTypedNonGR
     Paired.canonicalSignedGPairedComparatorBoundary
@@ -335,10 +296,6 @@ betterNegativeGFitDoesNotProveAntigravity :
     Paired.canonicalSignedGPairedComparatorBoundary
     ≡ false
 betterNegativeGFitDoesNotProveAntigravity = refl
-
-------------------------------------------------------------------------
--- EXACT NEGATIVE-G SLOT WELD INTO CLAIM COMPARISON
-------------------------------------------------------------------------
 
 genericModifiedSlotDoesNotMeanNegativeG :
   ComparisonWeld.genericModifiedGravitySlotAutomaticallyMeansNegativeG
