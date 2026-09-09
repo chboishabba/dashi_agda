@@ -30,10 +30,21 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- and back out from DASHI's exact theorem quantifier scope. The reported unseen
 -- forced-NS claim is comparator-only and pays no Clay residual.
 --
--- The remaining scalar representation seam is now only the standard Bishop
+-- R523-R525 then insert the actual Fefferman Clay C/D consumer between those
+-- two ends. R523 keeps every C/D side condition typed separately; R524 aligns
+-- the reported R^3/T^3 smooth-forced problem bidirectionally with C/D without
+-- promoting the unseen claim; R525 closes the triangle
+--
+--   external problem <-> Clay C/D <-> DASHI R406 formulation
+--
+-- and exposes the new first comparison coordinate: exact inclusion/relation
+-- between the Clay forcing class and the forcing class quantified by a proposed
+-- DASHI R406 theorem.
+--
+-- The remaining scalar representation seam is still the standard Bishop
 -- realization rule taking pointwise ordered regular approximants to Bishop-real
--- order. Neither introspection nor the adversarial BIDI manufactures an
--- analytic payment. Clay promotion remains fail-closed.
+-- order. Neither introspection nor the adversarial BIDIs manufacture analytic
+-- payment. Clay promotion remains fail-closed.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNR299NormalizedCompanionSameObjectRound494Exact
@@ -74,3 +85,8 @@ import DASHI.Physics.Closure.NSTriadKNBishopNatRootApproximationMonotonicityRoun
 -- Smooth-forced-blowup adversarial BIDI against the same live R406/forcing cone.
 import DASHI.Physics.Closure.NSTriadKNSmoothForcedBlowupAdversarialBoundaryRound521Exact
 import DASHI.Physics.Closure.NSTriadKNForcedBlowupR406BidiRound522Exact
+
+-- Source-exact Clay forced-breakdown alignment and triangular BIDI.
+import DASHI.Physics.Closure.NSTriadKNClayForcedBreakdownFormulationRound523Exact
+import DASHI.Physics.Closure.NSTriadKNBuckmasterToClayBreakdownBidiRound524Exact
+import DASHI.Physics.Closure.NSTriadKNClayExternalR406TriangleBidiRound525Exact
