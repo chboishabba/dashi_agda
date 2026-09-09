@@ -10,16 +10,6 @@ import DASHI.Environment.PhotosyntheticLightOptimizationExact as Optimisation
 import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as Plant
 import DASHI.Physics.Optics.DashiRTXAdaptiveTransportSourceAtlasExact as RTXSource
 
-------------------------------------------------------------------------
--- dashiRTX / PHOTOSYNTHESIS CROSS-POLLINATION
---
--- dashiRTX supplies an adaptive allocation/refinement strategy around a light-
--- transport computation.  It does NOT replace the authoritative canopy RT
--- kernel.  For photosynthesis, the relevant error/importance signal is allowed
--- to be biological (assimilation sensitivity, photoinhibition risk, etc.) only
--- through an explicit observer/importance adapter.
-------------------------------------------------------------------------
-
 record AdaptiveTransportAlgebra (Scalar : Set) : Set₁ where
   constructor adaptive-transport-algebra
   field
@@ -102,12 +92,6 @@ record AdaptiveCanopyTransportWeld
 
 open AdaptiveCanopyTransportWeld public
 
-------------------------------------------------------------------------
--- Optimization x-pollination: use the same adaptive machinery to spend RT
--- effort where the biological objective is most sensitive, but do not identify
--- computational importance with causal biological benefit.
-------------------------------------------------------------------------
-
 record AdaptivePhotosyntheticOptimisationWeld
     {LeafPoint Wavelength PhotonFlux ObjectiveValue Scalar Cell : Set}
     {leaf : Plant.LeafGasExchangeReceipt}
@@ -127,10 +111,6 @@ record AdaptivePhotosyntheticOptimisationWeld
     heldOutAssimilationValidationReference : String
 
 open AdaptivePhotosyntheticOptimisationWeld public
-
-------------------------------------------------------------------------
--- Non-promotion boundaries.
-------------------------------------------------------------------------
 
 data DashiRTXIsAuthoritativeCanopyRadiativeTransfer : Set where
 dashiRTXIsNotAuthoritativeCanopyRadiativeTransfer :
