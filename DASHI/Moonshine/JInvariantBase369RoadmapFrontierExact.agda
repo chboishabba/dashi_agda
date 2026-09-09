@@ -28,6 +28,7 @@ import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
 import DASHI.Moonshine.JInvariantRenderedVisibleScaleCompilerBidiExact
 import DASHI.Moonshine.JInvariantRenderedGlobalScaleCompilerBidiExact
 import DASHI.Moonshine.JInvariantRenderedScaleCalibrationFixtureExact
+import DASHI.Moonshine.JInvariantAnnotatedRasterScaleBindingExact
 import DASHI.Moonshine.JInvariantRenderedResidualGovernanceTriBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
@@ -69,9 +70,6 @@ record RoadmapState : Set where
     concretePixelToAnalyticBoxCalibrationExact : Bool
     symbolicOrbitToAnalyticRealisationExact : Bool
 
-    -- The theorem/compiler rows below are now exact.  Their concrete external
-    -- producer receipts are tracked separately so a conditional same-object
-    -- compiler cannot be mistaken for an acquired analytic/empirical object.
     analyticModularCoordinateToStructuredJFieldExact : Bool
     analyticStructuredSeamCompilerExact : Bool
     analyticFrickeFiniteTransportIntertwinerExact : Bool
@@ -115,7 +113,7 @@ canonicalRoadmapState = record
   ; renderedResidualGovernanceTriBidiExact = true
   ; renderedExactScaleCompilesGlobalOrbitRecognition = true
   ; renderedScaleCalibrationProtocolFixtureExact = true
-  ; concretePixelBoxDeterminesVisibleScaleExact = false
+  ; concretePixelBoxDeterminesVisibleScaleExact = true
   ; concretePixelToAnalyticBoxCalibrationExact = false
   ; symbolicOrbitToAnalyticRealisationExact = false
 
@@ -132,7 +130,6 @@ canonicalRoadmapState = record
   }
 
 data FirstLiveRoadmapResidual : Set where
-  missingConcretePixelBoxToVisibleScale : FirstLiveRoadmapResidual
   missingConcretePixelToAnalyticBoxCalibration : FirstLiveRoadmapResidual
   missingSymbolicOrbitToAnalyticRealisation : FirstLiveRoadmapResidual
   missingConcreteAnalyticJCoarseFineEquivalence : FirstLiveRoadmapResidual
@@ -141,12 +138,13 @@ data FirstLiveRoadmapResidual : Set where
   missingCompressionCostTheorem : FirstLiveRoadmapResidual
   missingKernelCertification : FirstLiveRoadmapResidual
 
--- All finite/theorem/compiler work from the requested table is now closed.
--- The first remaining j-side item is an external measurement/acquisition
--- producer: metrologically calibrate the actual raster into an analytic box
--- and exact D_k scale.  The protocol and uniqueness compiler are already exact.
+-- Every row in the requested status table is now closed at the appropriate
+-- theorem/compiler or empirical-source-binding layer.  The first remaining
+-- j-side residual is a STRONGER coordinate not present in that table: prove a
+-- concrete pixel box is an analytic Mobius box, rather than merely retaining
+-- its measured scale/candidate binding.
 firstJMonsterResidual : FirstLiveRoadmapResidual
-firstJMonsterResidual = missingConcretePixelBoxToVisibleScale
+firstJMonsterResidual = missingConcretePixelToAnalyticBoxCalibration
 
 firstPhiResidual : FirstLiveRoadmapResidual
 firstPhiResidual = missingKernelCertification
