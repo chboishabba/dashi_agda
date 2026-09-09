@@ -7,6 +7,7 @@ import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExa
 import DASHI.Interop.SensibLawNDimAdmissibilityTetrationComplexityBridgeExact as Tower
 import DASHI.Interop.SensibLawNatDualIdentityConfirmationExact as DualIdentity
 import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as SourceSupport
+import DASHI.Interop.SensibLawNatSourcePropositionVerificationExact as SourceVerify
 
 snakTripleHasBalancedCodec :
   Ternary.WikidataTernaryAdmissibilityBoundary.wikibaseSnakTripleHasExactBalancedCodec
@@ -107,3 +108,38 @@ sourceFetchCreatesNoSemanticPromotion :
   SourceSupport.NatSourceSupportAcquisitionBoundary.semanticPromotionCreatedByFetch
     SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
 sourceFetchCreatesNoSemanticPromotion = refl
+
+sourceSupportedMapsPositive :
+  SourceVerify.NatSourcePropositionVerificationBoundary.supportedMapsPositive
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ true
+sourceSupportedMapsPositive = refl
+
+sourceContradictedMapsNegative :
+  SourceVerify.NatSourcePropositionVerificationBoundary.contradictedMapsNegative
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ true
+sourceContradictedMapsNegative = refl
+
+sourceUnresolvedMapsZero :
+  SourceVerify.NatSourcePropositionVerificationBoundary.unresolvedMapsZero
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ true
+sourceUnresolvedMapsZero = refl
+
+failedFetchDoesNotCreateContradiction :
+  SourceVerify.NatSourcePropositionVerificationBoundary.failedFetchCreatesContradiction
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
+failedFetchDoesNotCreateContradiction = refl
+
+unresolvedSourceDoesNotCreateContradiction :
+  SourceVerify.NatSourcePropositionVerificationBoundary.unresolvedCreatesContradiction
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
+unresolvedSourceDoesNotCreateContradiction = refl
+
+sourceSupportStillDoesNotCreateAuthority :
+  SourceVerify.NatSourcePropositionVerificationBoundary.sourceSupportCreatesAuthority
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
+sourceSupportStillDoesNotCreateAuthority = refl
+
+sourceSupportStillDoesNotCreateMigrationAuthority :
+  SourceVerify.NatSourcePropositionVerificationBoundary.sourceSupportCreatesMigrationAuthority
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
+sourceSupportStillDoesNotCreateMigrationAuthority = refl
