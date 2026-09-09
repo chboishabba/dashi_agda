@@ -17,6 +17,7 @@ import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as 
 import DASHI.Physics.YangMills.BalabanCMP119RegularESourceProjectionRound221Exact as ESource
 import DASHI.Physics.YangMills.BalabanSourceFixedR108EffectiveActionFamilyRound213Exact as R213
 import DASHI.Physics.YangMills.BalabanR108ToRegularERealizationRound233Exact as R233
+import DASHI.Physics.YangMills.BalabanCMP119RegularEPreferredContinuationRound222Exact as R222
 
 record SourceFixedRegularESemanticWeld
     {trajectory split}
@@ -52,7 +53,7 @@ sourceFixedPreferredRegularERealization :
   SourceFixedRegularESemanticWeld
     {trajectory = trajectory} {split = split} {inputs = inputs}
     projection semantics localized →
-  DASHI.Physics.YangMills.BalabanCMP119RegularEPreferredContinuationRound222Exact.PreferredRegularERealization projection
+  R222.PreferredRegularERealization projection
 sourceFixedPreferredRegularERealization weld =
   R233.asPreferredRegularERealization (asR233SemanticWeld weld)
 
