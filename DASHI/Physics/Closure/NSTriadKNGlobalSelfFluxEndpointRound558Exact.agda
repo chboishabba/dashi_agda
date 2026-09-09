@@ -2,18 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNGlobalSelfFluxEndpointRound558Exact where
 
 ------------------------------------------------------------------------
 -- ROUND558 / GLOBAL SELF-FLUX ENDPOINT WITHOUT OUTPUT COUNT
---
--- R549 gives, at one output,
---
---   selfFlux_k = 2 * R447.diagonal_k.
---
--- Do NOT insert the collapsed R457 48 E^2 bound independently per output.
--- Instead keep the physical mass visible:
---
---   selfFlux_k <= 2 W mass_k,
---   sum_k mass_k <= 48 E_N^2                 (R462).
---
--- This yields a global endpoint with no output-cardinality factor.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -24,10 +12,11 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; nonNegative; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -46,6 +35,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalDiagonalEnergySquareEndpointRound4
 import DASHI.Physics.Closure.NSTriadKNGlobalNormalizedCompanionMassRound462Exact as R462
 import DASHI.Physics.Closure.NSTriadKNDiagonalSelfFluxToR447Round549Exact as R549
 import DASHI.Physics.Closure.NSTriadKNDiagonalSelfFluxEndpointCompilerRound554Exact as R554
+import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quotient
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -66,9 +56,9 @@ twoNonnegative =
 module GlobalSelfFlux
     (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F)
-    (L : Helical.PeriodicHelicalProjectorLaws
-      F (Field30.physicalEmbedding physicalSystem)
-        (Field30.physicalInverseSquare physicalSystem) S)
+    (L : Helical.PeriodicHelicalProjectorLaws F
+      (Field30.physicalEmbedding physicalSystem)
+      (Field30.physicalInverseSquare physicalSystem) S)
     (H : R142.HelicalHalfCalibration S)
     (Pdata : R225.PhysicalFixedOutputHelicityData
       (Field30.physicalEmbedding physicalSystem)
@@ -97,9 +87,10 @@ module GlobalSelfFlux
   W = R449.diagonalCeilingAt nu Floor.nuPositive
 
   WNN : 0ℚ ≤ W
-  WNN = R451.PhysicalDiagonalWeld.ceilingNonnegative
-    physicalSystem S viscosityPositive unitGap cutoff Z3.zeroMode
-    (record { Z3.notZero = λ () })
+  WNN =
+    ℚP.<⇒≤
+      (Quotient.positiveReciprocalPositive
+        (R449.two * nu) (R449.twicePositive Floor.nuPositive))
 
   twoW : ℚ
   twoW = two * W
@@ -137,8 +128,7 @@ module GlobalSelfFlux
     (output : Z3.FourierMode) → (outputNonzero : Z3.NonZeroMode output) →
     outputSelfFlux output outputNonzero
     ≤ twoW * R456.sumDoubleMixedMass S velocity
-        (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
-          cutoff output)
+        (Output.physicalOutputFiber cutoff output)
   outputSelfFluxBelowMass output outputNonzero =
     let
       module Fout = R549.PhysicalSelfFlux
@@ -161,13 +151,11 @@ module GlobalSelfFlux
       physicalMassScaled :
         two * Fout.Completion.diagonal
         ≤ twoW * R456.sumDoubleMixedMass S velocity
-            (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
-              cutoff output)
+            (Output.physicalOutputFiber cutoff output)
       physicalMassScaled =
         subst
           (λ selected →
-            two * Fout.Completion.diagonal
-            ≤ twoW * selected)
+            two * Fout.Completion.diagonal ≤ twoW * selected)
           massMeaning
           (subst
             (two * Fout.Completion.diagonal ≤_)
@@ -177,8 +165,7 @@ module GlobalSelfFlux
     subst
       (λ lower →
         lower ≤ twoW * R456.sumDoubleMixedMass S velocity
-          (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
-            cutoff output))
+          (Output.physicalOutputFiber cutoff output))
       Fout.literalSelfFluxIsTwiceR447Diagonal
       physicalMassScaled
 
@@ -225,8 +212,7 @@ module GlobalSelfFlux
       (solve
         (twoW
           ∷ R456.sumDoubleMixedMass S velocity
-            (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
-              cutoff output)
+            (Output.physicalOutputFiber cutoff output)
           ∷ R462.outputMassSum S velocity cutoff rest
           ∷ []))
       added
