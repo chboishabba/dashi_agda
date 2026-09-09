@@ -5,17 +5,23 @@ module DASHI.Analysis.Everything where
 import DASHI.Analysis.Maass.Everything
 import DASHI.Analysis.RiemannLowOrdinateSourceAtlasExact
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact
+
+-- Canonical RH direct-route representation / optional harmonic refinement.
 import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact
-import DASHI.Analysis.RiemannG2WindowFreeFiniteNearFinalModelCompilerExact
-import DASHI.Analysis.RiemannG2FiniteNearIndexedLiteralKernelCompilerExact
-import DASHI.Analysis.RiemannG2FinalNearIndexedFiniteProducerExact
-import DASHI.Analysis.RiemannG2FinalNearIndexedLiteralModelCompilerExact
-import DASHI.Analysis.RiemannG2WindowFreeDirectRepresentationFrontierExact
+import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact
+
+-- Window-free proof-carrying finite certification on the final carrier.
+import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact
+import DASHI.Analysis.RiemannG2CertifiedNearUpperClusterResponseCompilerExact
+
+-- Balance-free actual-ClusterResponse terminal route.
 import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact
 import DASHI.Analysis.RiemannG2LiteralPhaseDirectClusterResponseExact
 import DASHI.Analysis.RiemannG2MinimalStrictResponseConsumerExact
 import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact
+
+-- Constructive high/low completion and current frontier.
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact
 import DASHI.Analysis.RiemannG2CurrentDirectOneLeafFrontierExact
