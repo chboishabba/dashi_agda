@@ -8,6 +8,8 @@ FILES=(
   DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda
   DASHI/Analysis/RiemannG2LiteralComplementDirectTargetExact.agda
   DASHI/Analysis/RiemannG2FinalNearLiteralKernelExact.agda
+  DASHI/Analysis/RiemannG2ConcreteCertificateFinalScalarBridgeExact.agda
+  DASHI/Analysis/RiemannG2ConcreteScalarExecutionFrontierExact.agda
   DASHI/Analysis/RiemannG2FinalCarrierFiniteSumCertificateExact.agda
   DASHI/Analysis/RiemannG2DirectClusterResponseContradictionExact.agda
   DASHI/Analysis/RiemannG2CertifiedNearUpperClusterResponseCompilerExact.agda
