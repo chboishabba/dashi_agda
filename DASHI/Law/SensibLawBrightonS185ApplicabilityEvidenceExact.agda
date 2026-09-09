@@ -3,6 +3,7 @@ module DASHI.Law.SensibLawBrightonS185ApplicabilityEvidenceExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- BRIGHTON s 185(3)(a): APPLICABILITY / CONTINUING-TENANCY SOURCE RECEIPTS
