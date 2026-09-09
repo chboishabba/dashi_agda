@@ -95,9 +95,11 @@ crossDomainTransportDoesNotGateDomainSpecificR406536 ()
 round536ClayDomainResidualRetained : Bool
 round536ClayDomainResidualRetained = R527.round527DomainResidualRetained
 
-round536CrossDomainMeasureBridgeIsCanonicalInsideCrossDomainLane : Bool
-round536CrossDomainMeasureBridgeIsCanonicalInsideCrossDomainLane =
-  R535.round535DirectMeasureBridgeClosed
+round536DirectRichCarrierMeasureRouteSelected : Bool
+round536DirectRichCarrierMeasureRouteSelected = true
+
+round536DirectMeasureBridgeClosed : Bool
+round536DirectMeasureBridgeClosed = R535.round535DirectMeasureBridgeClosed
 
 round536CrossDomainTransportMandatoryForClay : Bool
 round536CrossDomainTransportMandatoryForClay = false
@@ -116,6 +118,14 @@ round536LiveR406ResidualStillFirst = R504.currentFirstTerminalResidual
 
 round536ClayPromotion : Bool
 round536ClayPromotion = false
+
+round536DirectRichCarrierMeasureRouteSelectedIsTrue :
+  round536DirectRichCarrierMeasureRouteSelected ≡ true
+round536DirectRichCarrierMeasureRouteSelectedIsTrue = refl
+
+round536DirectMeasureBridgeClosedIsFalse :
+  round536DirectMeasureBridgeClosed ≡ false
+round536DirectMeasureBridgeClosedIsFalse = refl
 
 round536CrossDomainTransportMandatoryForClayIsFalse :
   round536CrossDomainTransportMandatoryForClay ≡ false
