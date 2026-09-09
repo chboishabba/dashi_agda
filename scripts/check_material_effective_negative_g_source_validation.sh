@@ -12,6 +12,7 @@ files=(
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyCompilationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityLaboratoryBackgroundClosureExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1991CombinedFieldSourceEntitlementExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1992CoupledPotentialSourceEntitlementExact.agda
 )
@@ -29,6 +30,9 @@ grep -q 'evaluationRequestEqualsCompletedPrediction' DASHI/Physics/ExoticGravity
 grep -q 'requestStageMatchesExistingPlan' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
 grep -q 'predictionStageFirstOpen' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
 grep -q 'typedPredictionPaysBackgroundClosure' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
+grep -q 'closedComparatorStateIsClosed' DASHI/Physics/ExoticGravity/AntigravityLaboratoryBackgroundClosureExact.agda
+grep -q 'ordinaryGRPredictionAlonePaysBackgroundClosure' DASHI/Physics/ExoticGravity/AntigravityLaboratoryBackgroundClosureExact.agda
+grep -q 'closedComparatorAutomaticallyProvesMaterialEffectiveNegativeG' DASHI/Physics/ExoticGravity/AntigravityLaboratoryBackgroundClosureExact.agda
 grep -q 'authorityClosurePaysSourceCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
@@ -36,4 +40,4 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda
 
-echo "Material-effective negative-G source/provenance/GR validation checks passed"
+echo "Material-effective negative-G source/provenance/GR/background validation checks passed"
