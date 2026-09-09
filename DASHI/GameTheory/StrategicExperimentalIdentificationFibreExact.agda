@@ -111,25 +111,40 @@ record StrategicExperimentRefinement
 
 open StrategicExperimentRefinement public
 
-refinedExperimentIdentifiesSelectedQuery :
+refinedSystem :
   ∀ {S query} →
   StrategicExperimentRefinement S query →
-  Fibre.AdequateForConsumer
-    (record
-      { State = LatentModel S
-      ; Observation = Fibre.RefinedObservation (refinement _)
-      ; Consumer = Query S
-      ; Answer = Answer S
-      ; observe = Fibre.refine (refinement _)
-      ; answer = answer S
-      ; systemReading = "experiment-refined strategic observation"
-      })
+  Fibre.ConsumerIndexedFibreSystem
+refinedSystem {S} experiment =
+  Fibre.consumerIndexedFibreSystem
+    (LatentModel S)
+    (Fibre.RefinedObservation (refinement experiment))
+    (Query S)
+    (Answer S)
+    (Fibre.refine (refinement experiment))
+    (answer S)
+    "experiment-refined strategic observation"
+
+refinedConstancyReceipt :
+  ∀ {S query} →
+  (experiment : StrategicExperimentRefinement S query) →
+  Fibre.FibreConstantForConsumer
+    (refinedSystem experiment)
     query
-refinedExperimentIdentifiesSelectedQuery {S} {query} experiment =
+refinedConstancyReceipt experiment =
+  Fibre.fibre-constant-for-consumer
+    (Fibre.refinedAnswer (refinement experiment))
+    (Fibre.targetDescendsAfterRefinement (refinement experiment))
+
+refinedExperimentIdentifiesSelectedQuery :
+  ∀ {S query} →
+  (experiment : StrategicExperimentRefinement S query) →
+  Fibre.AdequateForConsumer
+    (refinedSystem experiment)
+    query
+refinedExperimentIdentifiesSelectedQuery experiment =
   Fibre.fibreConstancyGivesConsumerAdequacy
-    (Fibre.fibre-constant-for-consumer
-      (Fibre.refinedAnswer (refinement experiment))
-      (Fibre.targetDescendsAfterRefinement (refinement experiment)))
+    (refinedConstancyReceipt experiment)
 
 ------------------------------------------------------------------------
 -- Firewalls.
