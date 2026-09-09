@@ -65,13 +65,13 @@ fullSquareIsAllSpectatorRows :
 fullSquareIsAllSpectatorRows F [] = refl
 fullSquareIsAllSpectatorRows F (x ∷ rest)
   rewrite fullSquareIsAllSpectatorRows F rest
-        | allRowsWithAddedHead F x rest =
+        | allRowsWithAddedHead F x rest
+        | spectatorRowIsColumnSum F x rest =
   solve
     (F x x
       ∷ R539.rowSum F x rest
       ∷ R539.columnSum F rest x
       ∷ allSpectatorRows F rest rest
-      ∷ spectatorRow F x rest
       ∷ [])
 
 round546FullSquareAsSpectatorRowsClosed : Bool
