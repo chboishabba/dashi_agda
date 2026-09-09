@@ -16,20 +16,10 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Element
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawCullenConsumerCollisionMissingCoordinateExact as Collision
 import DASHI.Cognition.PNF.SensibLawCullenSourceCorrectDutyRoutesExact as Routes
+import DASHI.Cognition.PNF.SensibLawCullenEdelman64WrongTypeSourceRealisationExact as Source64
 
 ------------------------------------------------------------------------
 -- CULLEN RESIDUAL ADMISSION BIDI
---
--- Thin bridge over existing owners:
---
---   collision/separation      -> ConsumerIndexedResidualRefinementExact
---   discriminator             -> DiscriminatorSynthesisExact
---   source/authority/apply    -> ApplicabilityPrerequisiteMeetExact
---   WrongType / legal element -> NegligenceDutyWrongTypeSpecializationExact
---   source-correct legal term -> SensibLawCullenSourceCorrectDutyRoutesExact
---
--- No new factorisation, authority, applicability, WrongType, legal-element or
--- proof-search calculus is introduced here.
 ------------------------------------------------------------------------
 
 record CullenAdmittedResidual
@@ -42,8 +32,10 @@ record CullenAdmittedResidual
         (Consumer.left Collision.cullenLegacyConsumerCollision)
         (Consumer.right Collision.cullenLegacyConsumerCollision)
 
-    sourceCorrectCoordinate : Routes.CullenReasoningRoute
-    coordinateIsEdelmanRoute : sourceCorrectCoordinate ≡ Routes.edelmanReasons
+    sourceRealisation : Source64.Edelman64WrongTypeDutyReceipt
+    sourceRouteIsEdelman :
+      Source64.route (Source64.sourceRoute sourceRealisation)
+      ≡ Routes.edelmanReasons
 
     applicabilityMeet : Meet.ApplicabilityMeetInput state
     legalSourceAuthority : Authority.LegalSourceAuthorityReceiptInState state
@@ -51,11 +43,16 @@ record CullenAdmittedResidual
       legalSourceAuthority ≡
       Meet.legalSourceAuthority (Meet.prerequisites applicabilityMeet)
 
-    wrongTypeIsNegligence :
-      Meet.wrongType applicabilityMeet ≡ Negligence.negligenceWrongType
+    -- The WrongType in the live applicability meet must be the same WrongType
+    -- carried by the exact source realisation, not merely equal to some generic
+    -- negligence label elsewhere in the graph.
+    meetWrongTypeMatchesSource :
+      Meet.wrongType applicabilityMeet ≡ Source64.wrongType sourceRealisation
 
     targetElement : Elements.LegalElement Negligence.negligenceWrongType
     targetIsDuty : targetElement ≡ Negligence.dutyElement
+    targetElementMatchesSource :
+      targetElement ≡ Source64.targetElement sourceRealisation
 
     wrongTypeSystemMatchesCullenSystem :
       Ontology.WrongType.definingSystem (Meet.wrongType applicabilityMeet)
@@ -71,12 +68,6 @@ record CullenAdmittedResidual
 
 open CullenAdmittedResidual public
 
-------------------------------------------------------------------------
--- Once admission exists, the generic residual repair installs the strict
--- refinement. The source/applicability/WrongType gate does not create the
--- repair; it authorises use of a repair already proved consumer-sufficient.
-------------------------------------------------------------------------
-
 admittedResidualStrictlyRefinesLegacyObserver :
   ∀ {state} →
   CullenAdmittedResidual state →
@@ -89,14 +80,17 @@ admittedResidualStrictlyRefinesLegacyObserver admitted =
     (residualRepair admitted)
 
 ------------------------------------------------------------------------
--- WrongType-target projection.
+-- WrongType-target projections.
 ------------------------------------------------------------------------
 
 admittedResidualTargetsNegligenceWrongType :
   ∀ {state} →
   (admitted : CullenAdmittedResidual state) →
   Meet.wrongType (applicabilityMeet admitted) ≡ Negligence.negligenceWrongType
-admittedResidualTargetsNegligenceWrongType = wrongTypeIsNegligence
+admittedResidualTargetsNegligenceWrongType admitted =
+  trans
+    (meetWrongTypeMatchesSource admitted)
+    (Source64.wrongTypeIsNegligence (sourceRealisation admitted))
 
 admittedResidualTargetsDutyElement :
   ∀ {state} →
@@ -113,14 +107,14 @@ installCullenResidual :
   (meet : Meet.ApplicabilityMeetInput state) →
   (authority : Authority.LegalSourceAuthorityReceiptInState state) →
   authority ≡ Meet.legalSourceAuthority (Meet.prerequisites meet) →
-  Meet.wrongType meet ≡ Negligence.negligenceWrongType →
+  Meet.wrongType meet ≡ Source64.wrongType Source64.edelman64NegligenceDutyReceipt →
   Ontology.WrongType.definingSystem (Meet.wrongType meet)
     ≡ Negligence.auCommonLawSystem →
   CullenAdmittedResidual state
 installCullenResidual meet authority sameAuthority sameWrongType sameSystem =
   cullen-admitted-residual
     Collision.statutoryPowerInspectionSeparatesCollision
-    Routes.edelmanReasons
+    Source64.edelman64NegligenceDutyReceipt
     refl
     meet
     authority
@@ -128,9 +122,10 @@ installCullenResidual meet authority sameAuthority sameWrongType sameSystem =
     sameWrongType
     Negligence.dutyElement
     refl
+    refl
     sameSystem
     Collision.cullenStatutoryPowerResidualRepair
-    "Cullen source-correct Edelman residual admitted only after the same-state applicability/source-authority meet is paid and welded to the canonical Australian negligence WrongType and duty element."
+    "Cullen residual installed only after the live applicability/authority meet is welded to the exact Edelman [64] source realisation and its canonical negligence WrongType / duty element."
 
 ------------------------------------------------------------------------
 -- Hard non-promotions.
@@ -144,6 +139,9 @@ data SeparatorDeterminesWrongType : Set where
 data LegalAuthorityDeterminesWrongTypeElement : Set where
 data NegligenceWrongTypeAutomaticallyPaysDutyElement : Set where
 data DutyResidualCanBorrowWrongTypeFromAnotherSystem : Set where
+data WrongTypeReceiptMayFloatFreeOfSourceProposition : Set where
+
+data DirectSourceFactAutomaticallyPaysReconstructedRoute : Set where
 
 separatorAloneCannotInstall : SeparatorAloneInstallsLegalResidual → ⊥
 separatorAloneCannotInstall ()
@@ -175,10 +173,14 @@ wrongTypeCannotBeBorrowedAcrossSystems :
   DutyResidualCanBorrowWrongTypeFromAnotherSystem → ⊥
 wrongTypeCannotBeBorrowedAcrossSystems ()
 
-------------------------------------------------------------------------
--- Reading exported to the legal runtime.
-------------------------------------------------------------------------
+wrongTypeCannotFloatFreeOfSource :
+  WrongTypeReceiptMayFloatFreeOfSourceProposition → ⊥
+wrongTypeCannotFloatFreeOfSource ()
+
+directSourceFactDoesNotAutoPayReconstruction :
+  DirectSourceFactAutomaticallyPaysReconstructedRoute → ⊥
+directSourceFactDoesNotAutoPayReconstruction ()
 
 cullenResidualAdmissionReading : String
 cullenResidualAdmissionReading =
-  "Separation identifies a consumer-relevant discriminator, but installation into the Cullen legal consumer fibre additionally requires the existing same-object applicability/source-authority meet AND an exact weld to the canonical Australian negligence WrongType and its duty element. Discrimination, source authority, WrongType identity, legal-element identity, applicability, and consumer sufficiency remain separate proof obligations."
+  "Separation identifies a consumer-relevant discriminator, but installation into the Cullen legal consumer fibre additionally requires the live applicability/source-authority meet to be welded to the exact Edelman [64] source realisation, the canonical Australian negligence WrongType, and its duty element. Direct source facts, DASHI reconstruction, WrongType identity, legal-element identity, applicability, and consumer sufficiency remain distinct obligations."
