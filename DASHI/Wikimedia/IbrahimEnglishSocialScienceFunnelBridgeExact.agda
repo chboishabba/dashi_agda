@@ -194,7 +194,7 @@ economicsBridgeAdmission =
   admitted-social-science-bridge economicsBridge true true true true
 
 -- These stay deliberately unadmitted as canonical child owners in this
--- tranche.  Existing material is a candidate substrate, not yet a proof that
+-- tranche. Existing material is a candidate substrate, not yet a proof that
 -- the Anthropology / Political science leaf owner itself has been paid.
 anthropologyBridgeAdmission : AdmittedSocialScienceBridge
 anthropologyBridgeAdmission =
@@ -211,7 +211,7 @@ politicalScienceBridgeAdmission =
 data SharedExternalParentMakesChildrenEquivalent : Set where
 data QidPaysMissingDashiOwner : Set where
 data WikipediaEnumerationCreatesFormalCoverage : Set where
-\data SocialScienceBridgeErasesDisciplineSpecificSources : Set where
+data SocialScienceBridgeErasesDisciplineSpecificSources : Set where
 
 sharedParentDoesNotMakeChildrenEquivalent :
   SharedExternalParentMakesChildrenEquivalent → ⊥
