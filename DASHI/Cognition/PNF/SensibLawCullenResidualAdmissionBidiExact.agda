@@ -1,30 +1,35 @@
 module DASHI.Cognition.PNF.SensibLawCullenResidualAdmissionBidiExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
 import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawApplicabilityPrerequisiteMeetExact as Meet
 import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as Authority
+import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Elements
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawCullenConsumerCollisionMissingCoordinateExact as Collision
 import DASHI.Cognition.PNF.SensibLawCullenSourceCorrectDutyRoutesExact as Routes
 
 ------------------------------------------------------------------------
 -- CULLEN RESIDUAL ADMISSION BIDI
 --
--- This is intentionally a thin bridge over existing owners:
+-- Thin bridge over existing owners:
 --
 --   collision/separation      -> ConsumerIndexedResidualRefinementExact
 --   discriminator             -> DiscriminatorSynthesisExact
 --   source/authority/apply    -> ApplicabilityPrerequisiteMeetExact
+--   WrongType / legal element -> NegligenceDutyWrongTypeSpecializationExact
 --   source-correct legal term -> SensibLawCullenSourceCorrectDutyRoutesExact
 --
--- No new factorisation, authority, applicability or proof-search calculus is
--- introduced here.
+-- No new factorisation, authority, applicability, WrongType, legal-element or
+-- proof-search calculus is introduced here.
 ------------------------------------------------------------------------
 
 record CullenAdmittedResidual
@@ -46,6 +51,16 @@ record CullenAdmittedResidual
       legalSourceAuthority ≡
       Meet.legalSourceAuthority (Meet.prerequisites applicabilityMeet)
 
+    wrongTypeIsNegligence :
+      Meet.wrongType applicabilityMeet ≡ Negligence.negligenceWrongType
+
+    targetElement : Elements.LegalElement Negligence.negligenceWrongType
+    targetIsDuty : targetElement ≡ Negligence.dutyElement
+
+    wrongTypeSystemMatchesCullenSystem :
+      Ontology.WrongType.definingSystem (Meet.wrongType applicabilityMeet)
+      ≡ Negligence.auCommonLawSystem
+
     residualRepair :
       Consumer.ResidualRepair
         Collision.observePoliceFunctionContext
@@ -58,8 +73,8 @@ open CullenAdmittedResidual public
 
 ------------------------------------------------------------------------
 -- Once admission exists, the generic residual repair installs the strict
--- refinement. The source/applicability gate does not create the repair; it
--- authorises use of a repair already proved consumer-sufficient.
+-- refinement. The source/applicability/WrongType gate does not create the
+-- repair; it authorises use of a repair already proved consumer-sufficient.
 ------------------------------------------------------------------------
 
 admittedResidualStrictlyRefinesLegacyObserver :
@@ -74,8 +89,23 @@ admittedResidualStrictlyRefinesLegacyObserver admitted =
     (residualRepair admitted)
 
 ------------------------------------------------------------------------
--- The canonical Cullen separator/repair can be lifted into this gate whenever
--- the existing legal-source/applicability meet has been paid on the same state.
+-- WrongType-target projection.
+------------------------------------------------------------------------
+
+admittedResidualTargetsNegligenceWrongType :
+  ∀ {state} →
+  (admitted : CullenAdmittedResidual state) →
+  Meet.wrongType (applicabilityMeet admitted) ≡ Negligence.negligenceWrongType
+admittedResidualTargetsNegligenceWrongType = wrongTypeIsNegligence
+
+admittedResidualTargetsDutyElement :
+  ∀ {state} →
+  (admitted : CullenAdmittedResidual state) →
+  targetElement admitted ≡ Negligence.dutyElement
+admittedResidualTargetsDutyElement = targetIsDuty
+
+------------------------------------------------------------------------
+-- Install only after exact source/applicability AND WrongType/duty welds.
 ------------------------------------------------------------------------
 
 installCullenResidual :
@@ -83,8 +113,11 @@ installCullenResidual :
   (meet : Meet.ApplicabilityMeetInput state) →
   (authority : Authority.LegalSourceAuthorityReceiptInState state) →
   authority ≡ Meet.legalSourceAuthority (Meet.prerequisites meet) →
+  Meet.wrongType meet ≡ Negligence.negligenceWrongType →
+  Ontology.WrongType.definingSystem (Meet.wrongType meet)
+    ≡ Negligence.auCommonLawSystem →
   CullenAdmittedResidual state
-installCullenResidual meet authority sameAuthority =
+installCullenResidual meet authority sameAuthority sameWrongType sameSystem =
   cullen-admitted-residual
     Collision.statutoryPowerInspectionSeparatesCollision
     Routes.edelmanReasons
@@ -92,8 +125,12 @@ installCullenResidual meet authority sameAuthority =
     meet
     authority
     sameAuthority
+    sameWrongType
+    Negligence.dutyElement
+    refl
+    sameSystem
     Collision.cullenStatutoryPowerResidualRepair
-    "Cullen source-correct Edelman residual admitted only after the existing same-state applicability/source-authority meet is paid."
+    "Cullen source-correct Edelman residual admitted only after the same-state applicability/source-authority meet is paid and welded to the canonical Australian negligence WrongType and duty element."
 
 ------------------------------------------------------------------------
 -- Hard non-promotions.
@@ -103,6 +140,10 @@ data SeparatorAloneInstallsLegalResidual : Set where
 data LegalSourceAuthorityAloneProvesConsumerSufficiency : Set where
 data ApplicabilityMeetTurnsDashReconstructionIntoRatio : Set where
 data ResidualRepairAloneEstablishesApplicability : Set where
+data SeparatorDeterminesWrongType : Set where
+data LegalAuthorityDeterminesWrongTypeElement : Set where
+data NegligenceWrongTypeAutomaticallyPaysDutyElement : Set where
+data DutyResidualCanBorrowWrongTypeFromAnotherSystem : Set where
 
 separatorAloneCannotInstall : SeparatorAloneInstallsLegalResidual → ⊥
 separatorAloneCannotInstall ()
@@ -119,10 +160,25 @@ repairAloneDoesNotEstablishApplicability :
   ResidualRepairAloneEstablishesApplicability → ⊥
 repairAloneDoesNotEstablishApplicability ()
 
+separatorDoesNotDetermineWrongType : SeparatorDeterminesWrongType → ⊥
+separatorDoesNotDetermineWrongType ()
+
+authorityDoesNotDetermineWrongTypeElement :
+  LegalAuthorityDeterminesWrongTypeElement → ⊥
+authorityDoesNotDetermineWrongTypeElement ()
+
+wrongTypeIdentityDoesNotPayDutyElement :
+  NegligenceWrongTypeAutomaticallyPaysDutyElement → ⊥
+wrongTypeIdentityDoesNotPayDutyElement ()
+
+wrongTypeCannotBeBorrowedAcrossSystems :
+  DutyResidualCanBorrowWrongTypeFromAnotherSystem → ⊥
+wrongTypeCannotBeBorrowedAcrossSystems ()
+
 ------------------------------------------------------------------------
 -- Reading exported to the legal runtime.
 ------------------------------------------------------------------------
 
 cullenResidualAdmissionReading : String
 cullenResidualAdmissionReading =
-  "Separation identifies a consumer-relevant discriminator, but installation into the legal consumer fibre additionally requires the existing same-object applicability/source-authority meet. Applicability/authority does not construct the separator, separator does not construct authority, and the compiled Cullen route remains DASHI reconstruction unless independently classified otherwise."
+  "Separation identifies a consumer-relevant discriminator, but installation into the Cullen legal consumer fibre additionally requires the existing same-object applicability/source-authority meet AND an exact weld to the canonical Australian negligence WrongType and its duty element. Discrimination, source authority, WrongType identity, legal-element identity, applicability, and consumer sufficiency remain separate proof obligations."
