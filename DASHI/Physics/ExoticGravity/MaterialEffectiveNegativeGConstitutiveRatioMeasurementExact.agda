@@ -8,12 +8,14 @@ import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact as SignedG
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorCompilationExact as GR
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryOrdinaryModelClosureWeldExact as Ordinary
 import DASHI.Physics.ExoticGravity.SuperconductingSourceVsConstitutiveEnhancementBidiExact as Split
-import DASHI.Physics.ExoticGravity.SuperconductingConstitutiveNegativeGScopeWeldExact as NegativeG
-import DASHI.Physics.ExoticGravity.SuperconductingResidualCouplingNegativeGInterpretationBidiExact as Interpretation
-import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingScopeBidiExact as Scope
 
 ------------------------------------------------------------------------
 -- TYPED PAYMENT FOR constitutiveRatioLeaf
+--
+-- This owner records the same-object measurement coordinates only.  It does
+-- not itself promote the measurement into a material-effective negative-G
+-- interpretation; that compiler lives downstream of the exact canonical
+-- scaling/replication identity weld.
 ------------------------------------------------------------------------
 
 record ConstitutiveRatioMeasurementReceipt
@@ -71,28 +73,6 @@ record ConstitutiveRatioMeasurementReceipt
 
 open ConstitutiveRatioMeasurementReceipt public
 
-compileConstitutiveNegativeGReceipt :
-  {prediction : GR.OrdinaryGRPredictionReceipt} →
-  ConstitutiveRatioMeasurementReceipt prediction →
-  NegativeG.ConstitutiveNegativeGReceipt
-compileConstitutiveNegativeGReceipt receipt =
-  NegativeG.constitutive-negative-g-receipt
-    (ConstitutiveRatioMeasurementReceipt.factorization receipt)
-    Split.constitutiveChange
-    refl
-    (ConstitutiveRatioMeasurementReceipt.FixedMeasuredSourceComparison receipt)
-    (ConstitutiveRatioMeasurementReceipt.fixedMeasuredSourceComparison receipt)
-    (ConstitutiveRatioMeasurementReceipt.standardCoefficientSign receipt)
-    (ConstitutiveRatioMeasurementReceipt.standardCoefficientIsPositive receipt)
-    (ConstitutiveRatioMeasurementReceipt.candidateCoefficientSign receipt)
-    (ConstitutiveRatioMeasurementReceipt.candidateCoefficientIsNegative receipt)
-    Interpretation.materialEffectiveGCouplingModification
-    refl
-    Scope.materialEffectiveCoupling
-    refl
-    (ConstitutiveRatioMeasurementReceipt.ConstitutiveSignMapping receipt)
-    (ConstitutiveRatioMeasurementReceipt.constitutiveSignMapping receipt)
-
 record ConstitutiveRatioMeasurementBoundary : Set where
   constructor constitutive-ratio-measurement-boundary
   field
@@ -109,12 +89,11 @@ record ConstitutiveRatioMeasurementBoundary : Set where
     scalingSweepRequired : Bool
     exactReplicationCarrierRequired : Bool
     exactScalingSweepCarrierRequired : Bool
-    typedRatioMayCompileExistingNegativeGWeld : Bool
-    compiledNegativeGWeldProvesUniversalNegativeG : Bool
-    compiledNegativeGWeldProvesPhysicalCorrectness : Bool
+    typedRatioAloneMayCompileExistingNegativeGWeld : Bool
+    canonicalScalingReplicationIdentityStillRequired : Bool
 
 canonicalConstitutiveRatioMeasurementBoundary :
   ConstitutiveRatioMeasurementBoundary
 canonicalConstitutiveRatioMeasurementBoundary =
   constitutive-ratio-measurement-boundary
-    false false false true true true true true true true true true true true false false
+    false false false true true true true true true true true true true false true
