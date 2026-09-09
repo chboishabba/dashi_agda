@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Analysis.RiemannG2CurrentDirectOneLeafFrontierExact as DirectFrontier
 import DASHI.Analysis.RiemannG2UniformHighContradictionExact as GenericHigh
 import DASHI.Analysis.RiemannG2UniformCertifiedNearUpperHighProducerExact as CertifiedHigh
+import DASHI.Analysis.RiemannG2CertifiedClusterLowerEnvelopeCompilerExact as ClusterLower
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannAnalyticCoordinateTerminalRefinementExact as Coordinate
 import DASHI.Analysis.RiemannG2ClayTerminalGenericHighCoordinateExact as Clay
@@ -31,6 +32,21 @@ certifiedRouteKeepsBalanceDownstream :
   CertifiedHigh.UniformCertifiedNearUpperHighBoundary.finalBalanceAvailableToCertifiedMargin
     CertifiedHigh.canonicalUniformCertifiedNearUpperHighBoundary ≡ false
 certifiedRouteKeepsBalanceDownstream = refl
+
+optionalClusterLowerIsNotClayPrimitive :
+  ClusterLower.CertifiedClusterLowerEnvelopeBoundary.intermediateClusterLowerPrimitiveAtClayConsumer
+    ClusterLower.canonicalCertifiedClusterLowerEnvelopeBoundary ≡ false
+optionalClusterLowerIsNotClayPrimitive = refl
+
+clusterLowerStatusDoesNotPromote :
+  ClusterLower.CertifiedClusterLowerEnvelopeBoundary.checkedLeanStatusBooleanInhabitsClusterLower
+    ClusterLower.canonicalCertifiedClusterLowerEnvelopeBoundary ≡ false
+clusterLowerStatusDoesNotPromote = refl
+
+clusterLowerNeedsOnlyLocalStrictTransport :
+  ClusterLower.CertifiedClusterLowerEnvelopeBoundary.localStrictTransportReceiptRequired
+    ClusterLower.canonicalCertifiedClusterLowerEnvelopeBoundary ≡ true
+clusterLowerNeedsOnlyLocalStrictTransport = refl
 
 negativeRHCompilerIsHighStrategyNeutral :
   Negative.ConstructiveNegativeRHBoundary.terminalNegativeRHCompilerRequiresLiteralPhaseImplementation
@@ -69,6 +85,12 @@ record CurrentGenericHighFrontierRefinementBoundary : Set where
     literalPhaseAndCertifiedUpperShareTerminalSpine : Bool
     literalPhaseAndCertifiedUpperShareTerminalSpineIsTrue :
       literalPhaseAndCertifiedUpperShareTerminalSpine ≡ true
+    optionalClusterLowerCanFeedCertifiedRoute : Bool
+    optionalClusterLowerCanFeedCertifiedRouteIsTrue :
+      optionalClusterLowerCanFeedCertifiedRoute ≡ true
+    genericStrongerOrderRequiredForClusterLower : Bool
+    genericStrongerOrderRequiredForClusterLowerIsFalse :
+      genericStrongerOrderRequiredForClusterLower ≡ false
     oneSharedCoordinateRefinementFeedsLowAndStability : Bool
     oneSharedCoordinateRefinementFeedsLowAndStabilityIsTrue :
       oneSharedCoordinateRefinementFeedsLowAndStability ≡ true
@@ -93,8 +115,10 @@ canonicalCurrentGenericHighFrontierRefinementBoundary =
     true refl
     true refl
     true refl
+    false refl
+    true refl
     true refl
     true refl
     false refl
     false refl
-    "Keep RiemannG2CurrentDirectOneLeafFrontierExact as the acquisition map: first realize nearResponseAt(J)=literal finite near sum, then prove either the direct literal strict ClusterResponse theorem or a certified upper plus strict certified envelope. Downstream, compile either producer into one implementation-neutral uniform high contradiction. One shared analytic-coordinate refinement supplies the low verified-region transport and critical-line stability. No second Clay architecture is introduced; exact-head Agda validation and RH remain unowned."
+    "Keep RiemannG2CurrentDirectOneLeafFrontierExact as the acquisition map: first realize nearResponseAt(J)=literal finite near sum, then prove either the direct literal strict ClusterResponse theorem or a certified upper plus strict certified envelope. If the checked-Lean quantitative cluster theorem is actually transported onto the same carrier, it may be reused only as an optional lower producer: prove certifiedEnvelope<L and carry the local strict transport x<L -> x<ClusterResponse. Do not inflate the global order surface merely to reuse a stronger generic lower-bound framework, and do not promote the 8889 status Boolean. Downstream, all routes compile one implementation-neutral uniform high contradiction. One shared analytic-coordinate refinement supplies low verified-region transport and critical-line stability. Exact-head Agda validation and RH remain unowned."
