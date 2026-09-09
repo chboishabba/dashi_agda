@@ -13,9 +13,11 @@ AGDA_STDLIB="${AGDA_STDLIB:-/usr/share/agda/lib/stdlib}"
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/OpticalSurfaceManufacturingToleranceExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/LESOpticalNumericalWitnessCrossPollinationExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/LESOpticalSurrogateEscalationExact.agda
-"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Architecture/ASMLSolarOpticalRealisationCrossPollinationExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Environment/SolarOpticalSiteFibreCrossPollinationExact.agda
-"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/SolarOpticalCrossPollinationValidation.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Environment/PlantHydraulicAtmosphereCarbonCouplingExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Environment/ConstitutiveHydrologyPlantCalibrationExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Environment/PhotosyntheticLightTransportCrossPollinationExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/PhotosyntheticOpticalCrossPollinationValidation.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileMechanicalDimensionExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileMechanicalFibreExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/LinearElasticTextileLawExact.agda
