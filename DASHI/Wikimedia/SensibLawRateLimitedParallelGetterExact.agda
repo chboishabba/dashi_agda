@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Cognition.PNF.IndependentFibreBatchExecutionExact as Batch
 import DASHI.Wikimedia.SensibLawSharedAcquisitionExecutionExact as Shared
 
 ------------------------------------------------------------------------
@@ -108,8 +109,43 @@ sameObservationsImplySameCanonicalResult :
   canonicalResult left ≡ canonicalResult right
 sameObservationsImplySameCanonicalResult left right same = same
 
--- Generic refinement form used when a downstream reducer maps the canonical
--- observation into a consumer-specific result.
+------------------------------------------------------------------------
+-- Reuse DASHI's existing exact physical-batch theorem rather than creating a
+-- parallel scheduler theory here. A comparison input carries the proof that
+-- the physical parallel run observed the same canonical surface as the serial
+-- authority run; ExactBatchRealization then makes that equality the required
+-- scheduler/refinement certificate.
+------------------------------------------------------------------------
+
+record SerialParallelComparison : Set where
+  constructor serial-parallel-comparison
+  field
+    parallelRun : GetterRun
+    serialRun : GetterRun
+    sameObservation : observation parallelRun ≡ observation serialRun
+open SerialParallelComparison public
+
+getterExactBatchRealization :
+  Batch.ExactBatchRealization
+    SerialParallelComparison
+    CanonicalGetterObservation
+    ParallelGetterScheduleReceipt
+getterExactBatchRealization = record
+  { sequentialAuthority = λ comparison → observation (serialRun comparison)
+  ; batchedAuthority = λ comparison → observation (parallelRun comparison)
+  ; batchExact = λ comparison → sameObservation comparison
+  ; receipt = λ comparison → scheduleReceipt (parallelRun comparison)
+  }
+
+parallelGetterPreservesSequentialAuthority :
+  (comparison : SerialParallelComparison) →
+  Batch.batchedAuthority getterExactBatchRealization comparison
+    ≡ Batch.sequentialAuthority getterExactBatchRealization comparison
+parallelGetterPreservesSequentialAuthority =
+  Batch.batchingPreservesAuthority getterExactBatchRealization
+
+-- Generic consumer-level consequence: once the canonical surfaces agree, every
+-- downstream pure reducer sees the same result as the serial authority path.
 rateLimitedParallelRefinesSerial :
   {Result : Set} →
   (reduce : CanonicalGetterObservation → Result) →
@@ -159,6 +195,8 @@ data ParallelCompletionOrderCreatesSemanticAuthority : Set where
 data GetterExecutionPaysSourceSupport : Set where
 data CanonicalResolutionCreatesPromotionAuthority : Set where
 
+data PhysicalConcurrencyAloneProvesExactBatch : Set where
+
 moreWorkersDoNotCreateMoreRateAuthority :
   MoreWorkersCreateMoreRateAuthority → ⊥
 moreWorkersDoNotCreateMoreRateAuthority ()
@@ -174,6 +212,10 @@ canonicalResolutionDoesNotCreatePromotionAuthority :
   CanonicalResolutionCreatesPromotionAuthority → ⊥
 canonicalResolutionDoesNotCreatePromotionAuthority ()
 
+physicalConcurrencyAloneDoesNotProveExactBatch :
+  PhysicalConcurrencyAloneProvesExactBatch → ⊥
+physicalConcurrencyAloneDoesNotProveExactBatch ()
+
 ------------------------------------------------------------------------
 -- Runtime/formal contract exported to the SensibLaw implementation.
 ------------------------------------------------------------------------
@@ -186,6 +228,7 @@ record RateLimitedParallelGetterContract : Set where
     completionOrderErasedBeforeCanonicalReduction : Bool
     earliestResolvingChunkOwnsCanonicalRouteSeed : Bool
     higherThanSerialFrontierMayBeCancelled : Bool
+    reusesDashiExactBatchRealization : Bool
     sameObservationSurfaceImpliesSameConsumerResult : Bool
     schedulerCreatesSourceAuthority : Bool
     schedulerCreatesPromotionAuthority : Bool
@@ -193,4 +236,4 @@ record RateLimitedParallelGetterContract : Set where
 canonicalRateLimitedParallelGetterContract : RateLimitedParallelGetterContract
 canonicalRateLimitedParallelGetterContract =
   rate-limited-parallel-getter-contract
-    true true true true true true false false
+    true true true true true true true false false
