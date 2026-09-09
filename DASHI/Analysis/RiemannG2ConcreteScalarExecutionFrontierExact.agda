@@ -7,22 +7,19 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
-import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as Literal
-import DASHI.Analysis.RiemannAristotlePoleQuotientDirectFiniteNearAttackExact as LegacyDirect
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Reconcile
 
 ------------------------------------------------------------------------
 -- CONCRETE-SCALAR EXECUTION FRONTIER
 --
 -- The theorem-bearing finite certificate API is generic in the final
--- NearFar.Scalar.  A runtime cannot emit a meaningful numerical certificate for
+-- NearFar.Scalar. A runtime cannot emit a meaningful numerical certificate for
 -- that carrier until a concrete exact/enclosure scalar is identified with it.
 --
--- Keep this strictly below the RH mathematics.  A concrete implementation may
+-- Keep this strictly below the RH mathematics. A concrete implementation may
 -- choose rationals, exact algebraic values, interval endpoints, or another
--- certifiable carrier; this module does not prescribe which one.  It requires
--- only the same-object/value/order structure consumed by the final certificate
--- route.
+-- certifiable carrier. We ask only for the additive/order transport actually
+-- consumed by the finite-fold certificate path.
 ------------------------------------------------------------------------
 
 record ConcreteFinalNearScalarRealization
@@ -32,14 +29,15 @@ record ConcreteFinalNearScalarRealization
     ConcreteScalar : Set
     concreteZero : ConcreteScalar
     concreteAdd : ConcreteScalar -> ConcreteScalar -> ConcreteScalar
-    embedConcrete : ConcreteScalar -> NearFar.Scalar S
-
     concreteOrder : ConcreteScalar -> ConcreteScalar -> Set
 
-    embedZero : embedConcrete concreteZero ≡ concreteZeroMapped
-      where
-      concreteZeroMapped : NearFar.Scalar S
-      concreteZeroMapped = embedConcrete concreteZero
+    embedConcrete : ConcreteScalar -> NearFar.Scalar S
+
+    -- The final certificate chooses its fold-zero explicitly; NearFar itself
+    -- does not own a distinguished zero.
+    finalFoldZero : NearFar.Scalar S
+    concreteZeroIsFinalFoldZero :
+      embedConcrete concreteZero ≡ finalFoldZero
 
     embedAdd :
       (x y : ConcreteScalar) ->
@@ -57,13 +55,6 @@ open ConcreteFinalNearScalarRealization public
 
 ------------------------------------------------------------------------
 -- The historical rational/direct finite lane is not an R0 payment.
---
--- It may contain rational helper cells, but its substantive producer is indexed
--- by the older LiteralTargetCenteredScalarProblem and requires the stronger
--- DirectSignedConsumerPayment.  The repository explicitly classifies the
--- determinant/direct lane as diagnostic relative to the final universal
--- pole-quotient carrier, and no same-object bridge to final NearFar.Scalar is
--- recovered on current master.
 ------------------------------------------------------------------------
 
 legacyDirectLaneIsFinalPoleCarrier :
@@ -99,6 +90,10 @@ record ConcreteScalarExecutionFrontierBoundary : Set where
     toyWeilNatCarrierPaysConcreteFinalScalarIsFalse :
       toyWeilNatCarrierPaysConcreteFinalScalar ≡ false
 
+    nearFarDistinguishedZeroRequired : Bool
+    nearFarDistinguishedZeroRequiredIsFalse :
+      nearFarDistinguishedZeroRequired ≡ false
+
     sameObjectEmbeddingAndOrderSoundnessRemainRequired : Bool
     sameObjectEmbeddingAndOrderSoundnessRemainRequiredIsTrue :
       sameObjectEmbeddingAndOrderSoundnessRemainRequired ≡ true
@@ -121,7 +116,8 @@ canonicalConcreteScalarExecutionFrontierBoundary =
     false refl
     false refl
     false refl
+    false refl
     true refl
     false refl
     false refl
-    "For actual proof-carrying numerical execution, first realize the final universal pole-quotient NearFar scalar by a concrete certifiable scalar with proof-relevant additive and order transport. This is execution/representation debt, not the RH analytic payment. The historical rational DirectFinitePoleNearProducer lane cannot be reused silently: its substantive endpoint is the older LiteralTargetCenteredScalarProblem/DirectSignedConsumerPayment and the repository explicitly denies automatic transport from the determinant/direct lane to the final pole-quotient consumer. A toy Nat Weil space is likewise not a final-carrier payment. After a genuine same-object scalar realization, R1 and the finite certificate machinery may be executed; RH is not derived here."
+    "For actual proof-carrying numerical execution, first realize the final universal pole-quotient NearFar scalar by a concrete certifiable scalar with proof-relevant additive and order transport. NearFar owns no distinguished zero, so the certificate's fold-zero is supplied locally rather than inflating the surface. This is execution/representation debt, not the RH analytic payment. The historical rational DirectFinitePoleNearProducer lane cannot be reused silently: its substantive endpoint is the older determinant/direct scalar problem and the repository explicitly denies automatic transport to the final pole-quotient consumer. A toy Nat Weil space is likewise not a final-carrier payment. After a genuine same-object scalar realization, R1 and the finite certificate machinery may be executed; RH is not derived here."
