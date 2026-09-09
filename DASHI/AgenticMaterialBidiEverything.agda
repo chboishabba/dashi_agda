@@ -5,7 +5,8 @@ module DASHI.AgenticMaterialBidiEverything where
 -- realised interaction topology, consciousness boundaries, chemistry/process
 -- state, planning/logistics, active BIDI discriminator/refinement cycles,
 -- neural/ML coarse-graining, quantum implementation, prebiotic chemistry,
--- carbon chemical suitability and cosmic-parameter viability fibres.
+-- strategic interaction, carbon chemical suitability and cosmic-parameter
+-- viability fibres.
 ------------------------------------------------------------------------
 
 import DASHI.Biology.Levin.Everything
@@ -40,6 +41,8 @@ import DASHI.Biology.CausalEstimatorFiniteProbabilityConsistencyExact
 import DASHI.Biology.CausalEstimatorFiniteTestDistributionConvergenceExact
 import DASHI.Biology.CausalEstimatorWeakNormalLimitDebtSplitExact
 import DASHI.Biology.CausalEstimatorAsymptoticProofDebtExact
+
+import DASHI.GameTheory.Everything
 
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.DeclaredRealisedInteractionTopologyExact
