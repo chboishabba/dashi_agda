@@ -11,15 +11,6 @@ import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
 
-------------------------------------------------------------------------
--- ATOMIC SAME-CASE OUTCOME COHERENCE
---
--- One atomic test object is internally exclusive, but without a cross-object
--- coherence receipt a later consumer could manufacture a fresh +1 test for a
--- proposition already sourced as -1 on the same case fibre.  This module owns
--- that missing coherence coordinate.
-------------------------------------------------------------------------
-
 record AtomicCaseOutcomeEnvironment : Set₁ where
   constructor atomic-case-outcome-environment
   field
@@ -63,34 +54,33 @@ sameCasePositiveNegativeSplitImpossible left right leftPos rightNeg =
     posNotNeg ()
 
 ------------------------------------------------------------------------
--- Finite registry surface.
+-- Atomic finite registry.
 --
--- Most legal applications should not invent an outcome for every proposition in
--- the legal universe.  A finite registry instead lists only the atoms actually
--- evaluated on the retained case fibre.  Each entry owns one canonical sourced
--- test; any consumer-created duplicate must prove gate equality to that entry.
+-- Entry is indexed by the exact proposition, so there is no separate
+-- propositionFor field/equality seam.  Each registered atom has one canonical
+-- source-conditioned test on one retained case context.
 ------------------------------------------------------------------------
 
 record AtomicCaseRegistry : Set₁ where
   constructor atomic-case-registry
   field
-    Entry : Set
-    propositionFor : Entry → Algebra.LegalProposition
-    contextFor : Entry → Ontology.StableId
+    Entry : Algebra.LegalProposition → Set
+    contextFor :
+      ∀ {p} → Entry p → Ontology.StableId
     canonicalTestFor :
-      (entry : Entry) →
-      Atomic.SourceConditionedAtomicLegalTest (propositionFor entry)
+      ∀ {p} → (entry : Entry p) →
+      Atomic.SourceConditionedAtomicLegalTest p
     registryReference : String
 
 open AtomicCaseRegistry public
 
 record RegisteredAtomicTest
     (registry : AtomicCaseRegistry)
-    (entry : Entry registry) : Set₁ where
+    {p : Algebra.LegalProposition}
+    (entry : Entry registry p) : Set₁ where
   constructor registered-atomic-test
   field
-    candidateTest :
-      Atomic.SourceConditionedAtomicLegalTest (propositionFor registry entry)
+    candidateTest : Atomic.SourceConditionedAtomicLegalTest p
     gateMatchesCanonical :
       Atomic.gate candidateTest
       ≡ Atomic.gate (canonicalTestFor registry entry)
@@ -100,7 +90,8 @@ open RegisteredAtomicTest public
 
 canonicalRegisteredAtomicTest :
   (registry : AtomicCaseRegistry) →
-  (entry : Entry registry) →
+  ∀ {p} →
+  (entry : Entry registry p) →
   RegisteredAtomicTest registry entry
 canonicalRegisteredAtomicTest registry entry =
   registered-atomic-test
@@ -109,19 +100,18 @@ canonicalRegisteredAtomicTest registry entry =
     "canonical registered atomic test"
 
 registeredTestsHaveSameGate :
-  ∀ {registry entry}
+  ∀ {registry p} {entry : Entry registry p}
     (left right : RegisteredAtomicTest registry entry) →
   Atomic.gate (candidateTest left) ≡ Atomic.gate (candidateTest right)
 registeredTestsHaveSameGate left right =
   trans (gateMatchesCanonical left) (sym (gateMatchesCanonical right))
 
 registeredNegativeCannotBeReintroducedPositive :
-  ∀ {registry entry}
-    (canonicalNegative :
-      Atomic.gate (canonicalTestFor registry entry) ≡ BT.neg) →
-    (candidate : RegisteredAtomicTest registry entry) →
-    Atomic.gate (candidateTest candidate) ≡ BT.pos →
-    ⊥
+  ∀ {registry p} {entry : Entry registry p} →
+  Atomic.gate (canonicalTestFor registry entry) ≡ BT.neg →
+  (candidate : RegisteredAtomicTest registry entry) →
+  Atomic.gate (candidateTest candidate) ≡ BT.pos →
+  ⊥
 registeredNegativeCannotBeReintroducedPositive canonicalNegative candidate candidatePositive =
   negNotPos
     (trans (sym canonicalNegative)
@@ -131,12 +121,11 @@ registeredNegativeCannotBeReintroducedPositive canonicalNegative candidate candi
     negNotPos ()
 
 registeredPositiveCannotBeReintroducedNegative :
-  ∀ {registry entry}
-    (canonicalPositive :
-      Atomic.gate (canonicalTestFor registry entry) ≡ BT.pos) →
-    (candidate : RegisteredAtomicTest registry entry) →
-    Atomic.gate (candidateTest candidate) ≡ BT.neg →
-    ⊥
+  ∀ {registry p} {entry : Entry registry p} →
+  Atomic.gate (canonicalTestFor registry entry) ≡ BT.pos →
+  (candidate : RegisteredAtomicTest registry entry) →
+  Atomic.gate (candidateTest candidate) ≡ BT.neg →
+  ⊥
 registeredPositiveCannotBeReintroducedNegative canonicalPositive candidate candidateNegative =
   posNotNeg
     (trans (sym canonicalPositive)
@@ -182,13 +171,13 @@ unregisteredDuplicateCannotOverrideByPermission ()
 record AtomicCaseOutcomeCoherenceBoundary : Set where
   constructor atomic-case-outcome-coherence-boundary
   field
+    entriesIndexedByExactLegalAtom : Bool
     oneOutcomePerRegisteredAtomPerCase : Bool
     finiteRegistryAvoidsInventedUniverseOutcomes : Bool
     separateRegisteredTestsMayContradict : Bool
     sourceReceiptStillIndependent : Bool
-    sameGateIdentifiesLegalAtom : Bool
     registryCreatesAuthority : Bool
 
 canonicalAtomicCaseOutcomeCoherenceBoundary : AtomicCaseOutcomeCoherenceBoundary
 canonicalAtomicCaseOutcomeCoherenceBoundary =
-  atomic-case-outcome-coherence-boundary true true false true false false
+  atomic-case-outcome-coherence-boundary true true true false true false
