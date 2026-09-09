@@ -9,28 +9,33 @@ open import Data.Empty using (⊥)
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Cognition.PNF.SensibLawWrongTypeApplicabilityLiabilityRemedyBidiExact as Legal
 import DASHI.Law.SensibLawBrightonPremisesConditionEvidenceExact as Condition
+import DASHI.Law.SensibLawBrightonMaintenanceChronologyEvidenceExact as Chronology
 
 ------------------------------------------------------------------------
--- BRIGHTON s 185: SPLIT VIOLATION-ELEMENT FRONTIER
+-- BRIGHTON s 185: SHRUNK VIOLATION-ELEMENT FRONTIER
 --
--- The earlier frontier combined two different questions:
---   1. did a material premises-condition/non-liveability problem exist and was
---      it recognised by the managing agent by 24 January 2023?
---   2. did the lessor/agent fail the exact s 185 maintenance duty at the legally
---      relevant time, after accounting for repair chronology and other legal
---      conditions?
+-- Paid factual coordinates:
+--   1. material premises-condition / agent non-liveability recognition;
+--   2. known remediation remained outstanding on 20 January 2023 after the
+--      December quote/work-order process and required another urgent follow-up.
 --
--- The reviewed private source corpus now pays (1) narrowly.  It does not pay
--- (2), and therefore does not itself pay the resulting s 185 violation.
+-- Still not paid:
+--   whether that factual chronology establishes the exact statutory
+--   maintenance-duty non-performance required for the selected s 185 violation
+--   under the applicable historical source and legal-element compiler.
 ------------------------------------------------------------------------
 
 conditionElementReference : String
 conditionElementReference =
   "Brighton material premises-condition / agent non-liveability recognition"
 
-maintenanceFailureElementReference : String
-maintenanceFailureElementReference =
-  "Brighton s185 maintenance-duty non-performance at relevant time"
+outstandingRemediationElementReference : String
+outstandingRemediationElementReference =
+  "Brighton known remediation remained outstanding on 20 January 2023"
+
+statutoryMaintenanceFailureElementReference : String
+statutoryMaintenanceFailureElementReference =
+  "Brighton exact s185 maintenance-duty non-performance at relevant time"
 
 conditionElementEvaluation :
   (wrongTypeReference : Ontology.StableId) →
@@ -48,8 +53,24 @@ conditionElementDispositionIsSatisfied :
   Legal.disposition (conditionElementEvaluation wrong) ≡ Legal.elementSatisfied
 conditionElementDispositionIsSatisfied wrong = refl
 
+outstandingRemediationElementEvaluation :
+  (wrongTypeReference : Ontology.StableId) →
+  Legal.WrongElementEvaluation
+outstandingRemediationElementEvaluation wrong =
+  Legal.wrongElementEvaluation
+    wrong
+    outstandingRemediationElementReference
+    Legal.elementSatisfied
+    []
+    "paid narrowly by BrightonMaintenanceChronologyEvidenceExact from the agent's 20 January delay/urgent-follow-up acknowledgement"
+
+outstandingRemediationDispositionIsSatisfied :
+  ∀ wrong →
+  Legal.disposition (outstandingRemediationElementEvaluation wrong) ≡ Legal.elementSatisfied
+outstandingRemediationDispositionIsSatisfied wrong = refl
+
 firstOpenElementReference : String
-firstOpenElementReference = maintenanceFailureElementReference
+firstOpenElementReference = statutoryMaintenanceFailureElementReference
 
 firstOpenElementEvaluation :
   (wrongTypeReference : Ontology.StableId) →
@@ -60,7 +81,7 @@ firstOpenElementEvaluation wrong =
     firstOpenElementReference
     Legal.elementUnresolved
     []
-    "condition defect is separately paid; exact s185 non-performance still requires repair/remedy chronology and legal-element evaluation"
+    "condition and outstanding-remediation facts are separately paid; exact historical-s185 legal evaluation remains open"
 
 firstOpenElementDispositionIsUnresolved :
   ∀ wrong →
@@ -72,33 +93,38 @@ conditionBundlePaysNarrowCoordinate :
     Condition.canonicalBrightonPremisesConditionEvidenceBundle ≡ true
 conditionBundlePaysNarrowCoordinate = refl
 
-conditionBundleDoesNotPayMaintenanceFailure :
-  Condition.statutoryMaintenanceFailurePaid
-    Condition.canonicalBrightonPremisesConditionEvidenceBundle ≡ false
-conditionBundleDoesNotPayMaintenanceFailure = refl
+chronologyPaysOutstandingRemediationCoordinate :
+  Chronology.narrowOutstandingRemediationCoordinatePaid
+    Chronology.canonicalBrightonMaintenanceChronologyEvidence ≡ true
+chronologyPaysOutstandingRemediationCoordinate = refl
 
-conditionBundleDoesNotPayViolation :
-  Condition.section185ViolationPaid
-    Condition.canonicalBrightonPremisesConditionEvidenceBundle ≡ false
-conditionBundleDoesNotPayViolation = refl
+chronologyDoesNotPayStatutoryS185Failure :
+  Chronology.statutoryS185FailurePaid
+    Chronology.canonicalBrightonMaintenanceChronologyEvidence ≡ false
+chronologyDoesNotPayStatutoryS185Failure = refl
 
-data Form11AssertionAlonePaysMaintenanceFailure : Set where
-data QSTARSAdvicePaysMaintenanceFailure : Set where
+chronologyDoesNotPayWholeViolation :
+  Chronology.wholeS185ViolationPaid
+    Chronology.canonicalBrightonMaintenanceChronologyEvidence ≡ false
+chronologyDoesNotPayWholeViolation = refl
+
+data OutstandingRemediationAutomaticallyEqualsS185Failure : Set where
 data NonLiveabilityNoticeAutomaticallyPaysMaintenanceFailure : Set where
+data QSTARSAdvicePaysMaintenanceFailure : Set where
 data RentOrderPaysS185MaintenanceFailure : Set where
 data LaterExitCarrierAutomaticallyPaysJanuaryMaintenanceFailure : Set where
-data SatisfiedConditionElementAutomaticallyCreatesViolation : Set where
+data SatisfiedFactsAutomaticallyCreateViolation : Set where
 
-form11AssertionAloneDoesNotPayMaintenanceFailure :
-  Form11AssertionAlonePaysMaintenanceFailure → ⊥
-form11AssertionAloneDoesNotPayMaintenanceFailure ()
-
-qstarsAdviceDoesNotPayMaintenanceFailure : QSTARSAdvicePaysMaintenanceFailure → ⊥
-qstarsAdviceDoesNotPayMaintenanceFailure ()
+outstandingRemediationDoesNotAutoEqualS185Failure :
+  OutstandingRemediationAutomaticallyEqualsS185Failure → ⊥
+outstandingRemediationDoesNotAutoEqualS185Failure ()
 
 nonLiveabilityNoticeDoesNotAutoPayMaintenanceFailure :
   NonLiveabilityNoticeAutomaticallyPaysMaintenanceFailure → ⊥
 nonLiveabilityNoticeDoesNotAutoPayMaintenanceFailure ()
+
+qstarsAdviceDoesNotPayMaintenanceFailure : QSTARSAdvicePaysMaintenanceFailure → ⊥
+qstarsAdviceDoesNotPayMaintenanceFailure ()
 
 rentOrderDoesNotPayS185MaintenanceFailure : RentOrderPaysS185MaintenanceFailure → ⊥
 rentOrderDoesNotPayS185MaintenanceFailure ()
@@ -107,29 +133,32 @@ laterExitCarrierDoesNotAutoPayJanuaryMaintenanceFailure :
   LaterExitCarrierAutomaticallyPaysJanuaryMaintenanceFailure → ⊥
 laterExitCarrierDoesNotAutoPayJanuaryMaintenanceFailure ()
 
-satisfiedConditionDoesNotAutoCreateViolation :
-  SatisfiedConditionElementAutomaticallyCreatesViolation → ⊥
-satisfiedConditionDoesNotAutoCreateViolation ()
+satisfiedFactsDoNotAutoCreateViolation :
+  SatisfiedFactsAutomaticallyCreateViolation → ⊥
+satisfiedFactsDoNotAutoCreateViolation ()
 
 record BrightonS185ViolationElementFrontierBoundary : Set where
   constructor brighton-s185-violation-element-frontier-boundary
   field
     conditionElementExplicit : Bool
     conditionElementSatisfied : Bool
-    maintenanceFailureElementExplicit : Bool
-    maintenanceFailureDispositionUnresolved : Bool
-    conditionAndMaintenanceFailureSeparated : Bool
-    requiresRepairChronologyForMaintenanceFailure : Bool
-    conditionBundlePaysViolation : Bool
+    outstandingRemediationElementExplicit : Bool
+    outstandingRemediationElementSatisfied : Bool
+    statutoryMaintenanceFailureElementExplicit : Bool
+    statutoryMaintenanceFailureDispositionUnresolved : Bool
+    factualCoordinatesSeparatedFromLegalConclusion : Bool
+    chronologyPaysOutstandingRemediation : Bool
+    chronologyPaysStatutoryS185Failure : Bool
+    chronologyPaysWholeViolation : Bool
     nonLiveabilityNoticeAutomaticallyPaysMaintenanceFailure : Bool
     qstarsAdvicePaysMaintenanceFailure : Bool
     rentOrderPaysMaintenanceFailure : Bool
     laterExitCarrierAutomaticallyPaysJanuaryMaintenanceFailure : Bool
-    conditionSatisfactionAutomaticallyCreatesViolation : Bool
+    satisfiedFactsAutomaticallyCreateViolation : Bool
 
 canonicalBrightonS185ViolationElementFrontierBoundary :
   BrightonS185ViolationElementFrontierBoundary
 canonicalBrightonS185ViolationElementFrontierBoundary =
   brighton-s185-violation-element-frontier-boundary
-    true true true true true true
-    false false false false false false
+    true true true true true true true true
+    false false false false false false false
