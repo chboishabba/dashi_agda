@@ -3,6 +3,7 @@ module DASHI.Statistics.DirectionalInferenceDesignExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import DASHI.Algebra.Trit using (neg; zer; pos)
 
 import DASHI.Core.ExperimentalCoordinateDesignExact as Experiment
 import DASHI.Statistics.DirectionalEvidenceTritExact as Evidence
@@ -99,7 +100,7 @@ positiveReceiptDisposition :
     {result : Result} {hypothesis : Hypothesis} →
   PositiveEvidenceReceipt design result hypothesis →
   Evidence.DirectionalEvidenceDisposition
-    (semantics design) result hypothesis DASHI.Algebra.Trit.pos
+    (semantics design) result hypothesis pos
 positiveReceiptDisposition receipt =
   Evidence.positiveEvidence
     (positiveRegionSound _ (inPositiveRegion receipt))
@@ -111,7 +112,7 @@ negativeReceiptDisposition :
     {result : Result} {hypothesis : Hypothesis} →
   NegativeEvidenceReceipt design result hypothesis →
   Evidence.DirectionalEvidenceDisposition
-    (semantics design) result hypothesis DASHI.Algebra.Trit.neg
+    (semantics design) result hypothesis neg
 negativeReceiptDisposition receipt =
   Evidence.negativeEvidence
     (negativeRegionSound _ (inNegativeRegion receipt))
@@ -123,7 +124,7 @@ underdeterminedReceiptDisposition :
     {result : Result} {hypothesis : Hypothesis} →
   UnderdeterminedEvidenceReceipt design result hypothesis →
   Evidence.DirectionalEvidenceDisposition
-    (semantics design) result hypothesis DASHI.Algebra.Trit.zer
+    (semantics design) result hypothesis zer
 underdeterminedReceiptDisposition receipt =
   Evidence.unresolvedEvidence
     (underdeterminedRegionSound _ (inUnderdeterminedRegion receipt))
