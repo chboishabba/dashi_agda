@@ -50,6 +50,17 @@ import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 -- refinement-scale carrier back to this modular-word index.
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
 
+-- Existing jCoarse/jFine content now meets the Fibonacci/Base369 hierarchy
+-- exactly: the Fibonacci 9-sheet is an ordinary jCoarse point, structured
+-- jFine is a ternary field over those nine points, and evaluation at the chosen
+-- coarse point is a local 27-voxel observer with an exact section.
+import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
+
+-- Exact rebracketing of the two existing eleven-trit address presentations:
+-- 1 coarse + 10 fine  <->  2 coarse + 9 relative fine.  The distinguished
+-- completion-j coordinate is what crosses the fibre boundary.
+import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
+
 -- Tesla/Base369 refinement is the commuting null model for seam transport:
 -- an independent balanced-trit fibre commutes with both 2- and 3-refinement,
 -- while explicit resolution-sensitive fixtures demonstrate the exact model
