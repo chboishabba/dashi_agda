@@ -11,7 +11,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (_++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
@@ -167,13 +167,6 @@ module GlobalReduced
               ∷ globalSelfGram cutoff outputs tailNonzero
               ∷ globalSelfFluxTangent cutoff outputs tailNonzero
               ∷ []))))
-    where
-    cong : ∀ {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ y |> f
-    cong f refl = refl
-
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    x |> f = f x
 
 round555GlobalOutputAggregationClosed : Bool
 round555GlobalOutputAggregationClosed = true
