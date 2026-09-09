@@ -87,6 +87,8 @@ record FiniteBayesianGame (G : Game.StrategicGame) : Set₁ where
       contingentStrategyAt (deviatePlan plans player alternative) player signal
       ≡ alternative signal
 
+    DifferentPlayer : Game.Player G → Game.Player G → Set
+
     OtherPlayerPlanUnchanged :
       PlanProfile → PlanProfile → Game.Player G → Set
 
@@ -95,6 +97,7 @@ record FiniteBayesianGame (G : Game.StrategicGame) : Set₁ where
       (player : Game.Player G) →
       (alternative : Signal player → Game.Strategy G player) →
       (other : Game.Player G) →
+      DifferentPlayer player other →
       OtherPlayerPlanUnchanged
         plans
         (deviatePlan plans player alternative)
@@ -135,7 +138,7 @@ BayesianBestResponseAt :
   (U : Mixed.FiniteExpectedUtilitySurface G) →
   PlanProfile B →
   Game.Player G → Set₁
-BayesianBestResponseAt B U plans player =
+BayesianBestResponseAt {G} B U plans player =
   (alternative : Signal B player → Game.Strategy G player) →
   worldExpectedUtility B U player
     (deviatePlan B plans player alternative)
