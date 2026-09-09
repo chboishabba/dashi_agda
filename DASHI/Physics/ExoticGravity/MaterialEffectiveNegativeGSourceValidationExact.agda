@@ -8,6 +8,7 @@ import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGModelProvenanceBidi
 import DASHI.Physics.ExoticGravity.SuperconductingChargeMassCurrentBidiExact as Current
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyScopeBidiExact as Scope
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyCompilationExact as Compilation
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorCompilationExact as Comparator
 import DASHI.Physics.ExoticGravity.LiTorr1991CombinedFieldSourceEntitlementExact as LT1991
 import DASHI.Physics.ExoticGravity.LiTorr1992CoupledPotentialSourceEntitlementExact as LT1992
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingModelDiscriminatorExact as Scaling
@@ -156,6 +157,40 @@ compiledLabStressEnergyDoesNotProveNegativeG :
   Compilation.compiledLabStressEnergyProvesNegativeEffectiveG
     Compilation.canonicalLaboratoryStressEnergyCompilationBoundary ≡ false
 compiledLabStressEnergyDoesNotProveNegativeG = refl
+
+------------------------------------------------------------------------
+-- SOURCE + GEOMETRY -> REQUEST != PREDICTION
+------------------------------------------------------------------------
+
+genericKernelDoesNotEqualSameApparatusPrediction :
+  Comparator.genericWeakFieldKernelEqualsSameApparatusPrediction
+    Comparator.canonicalLaboratoryGRComparatorBoundary ≡ false
+genericKernelDoesNotEqualSameApparatusPrediction = refl
+
+closedGeometryAloneDoesNotEqualPrediction :
+  Comparator.closedGeometryAloneEqualsNumericalPrediction
+    Comparator.canonicalLaboratoryGRComparatorBoundary ≡ false
+closedGeometryAloneDoesNotEqualPrediction = refl
+
+evaluationRequestIsNotCompletedPrediction :
+  Comparator.evaluationRequestEqualsCompletedPrediction
+    Comparator.canonicalLaboratoryGRComparatorBoundary ≡ false
+evaluationRequestIsNotCompletedPrediction = refl
+
+numericalEvaluationStillRequired :
+  Comparator.numericalEvaluationStillRequired
+    Comparator.canonicalLaboratoryGRComparatorBoundary ≡ true
+numericalEvaluationStillRequired = refl
+
+sameInputPredictionIdentityStillRequired :
+  Comparator.sameInputPredictionIdentityStillRequired
+    Comparator.canonicalLaboratoryGRComparatorBoundary ≡ true
+sameInputPredictionIdentityStillRequired = refl
+
+predictionReceiptDoesNotProveNegativeEffectiveG :
+  Comparator.predictionReceiptAutomaticallyProvesNegativeEffectiveG
+    Comparator.canonicalLaboratoryGRComparatorBoundary ≡ false
+predictionReceiptDoesNotProveNegativeEffectiveG = refl
 
 ------------------------------------------------------------------------
 -- MODEL IDENTIFIABILITY STILL OPEN
