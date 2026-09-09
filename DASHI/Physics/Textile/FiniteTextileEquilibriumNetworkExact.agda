@@ -1,7 +1,7 @@
 module DASHI.Physics.Textile.FiniteTextileEquilibriumNetworkExact where
 
 open import DASHI.Core.Prelude
-open import Data.Fin using (Fin; zero; suc)
+import Data.Fin as Fin
 open import Data.List.Membership.Propositional using (_∈_)
 
 import DASHI.Physics.Units.MechanicalDimensionExact as Dim
@@ -33,13 +33,13 @@ sumFin :
   {Scalar : Set} →
   (algebra : Local.ScalarMechanicalAlgebra Scalar) →
   (n : Nat) →
-  (Fin n → Scalar) →
+  (Fin.Fin n → Scalar) →
   Scalar
 sumFin algebra zero values = Local.zero algebra
 sumFin algebra (suc n) values =
   Local.add algebra
-    (values zero)
-    (sumFin algebra n (λ i → values (suc i)))
+    (values Fin.zero)
+    (sumFin algebra n (λ i → values (Fin.suc i)))
 
 record FiniteTextileEquilibriumNetwork
     {Scalar : Set}
@@ -47,35 +47,35 @@ record FiniteTextileEquilibriumNetwork
     (vertexCount edgeCount : Nat) : Set₁ where
   constructor finite-textile-equilibrium-network
   field
-    source : Fin edgeCount → Fin vertexCount
-    target : Fin edgeCount → Fin vertexCount
+    source : Fin.Fin edgeCount → Fin.Fin vertexCount
+    target : Fin.Fin edgeCount → Fin.Fin vertexCount
 
-    edgeForce : Fin edgeCount → Local.Force Scalar
-    externalForce : Fin vertexCount → Local.Force Scalar
+    edgeForce : Fin.Fin edgeCount → Local.Force Scalar
+    externalForce : Fin.Fin vertexCount → Local.Force Scalar
 
     signedContribution :
-      Fin vertexCount → Fin edgeCount → Scalar
+      Fin.Fin vertexCount → Fin.Fin edgeCount → Scalar
 
     sourceContribution :
-      (edge : Fin edgeCount) →
+      (edge : Fin.Fin edgeCount) →
       signedContribution (source edge) edge
       ≡ Dim.magnitude (edgeForce edge)
 
     targetContribution :
-      (edge : Fin edgeCount) →
+      (edge : Fin.Fin edgeCount) →
       signedContribution (target edge) edge
       ≡ negate algebra (Dim.magnitude (edgeForce edge))
 
     nonEndpointContributionIsZero :
-      (vertex : Fin vertexCount) →
-      (edge : Fin edgeCount) →
+      (vertex : Fin.Fin vertexCount) →
+      (edge : Fin.Fin edgeCount) →
       (vertex ≡ source edge → ⊥) →
       (vertex ≡ target edge → ⊥) →
       signedContribution vertex edge
       ≡ Local.zero (localAlgebra algebra)
 
     equilibriumAt :
-      (vertex : Fin vertexCount) →
+      (vertex : Fin.Fin vertexCount) →
       Local.add (localAlgebra algebra)
         (sumFin (localAlgebra algebra) edgeCount
           (signedContribution vertex))
@@ -89,7 +89,7 @@ edgeActionReaction :
   {vertexCount edgeCount : Nat}
   (algebra : OrientedMechanicalAlgebra Scalar) →
   (network : FiniteTextileEquilibriumNetwork algebra vertexCount edgeCount) →
-  (edge : Fin edgeCount) →
+  (edge : Fin.Fin edgeCount) →
   Local.add (localAlgebra algebra)
     (signedContribution network (source network edge) edge)
     (signedContribution network (target network edge) edge)
@@ -122,22 +122,22 @@ record WholeStitchEquilibriumReceipt
     network :
       FiniteTextileEquilibriumNetwork algebra vertexCount edgeCount
 
-    siteAtVertex : Fin vertexCount → MechanicalSite
+    siteAtVertex : Fin.Fin vertexCount → MechanicalSite
 
     everyStoredLoopCovered :
       (loop : Stitch.LoopId) →
       loop ∈ Stitch.loops topology →
-      Σ (Fin vertexCount) (λ vertex → siteAtVertex vertex ≡ loopSite loop)
+      Σ (Fin.Fin vertexCount) (λ vertex → siteAtVertex vertex ≡ loopSite loop)
 
     everyAnchorCovered :
       (anchor : Stitch.AnchorId) →
       anchor ∈ Stitch.anchors topology →
-      Σ (Fin vertexCount) (λ vertex → siteAtVertex vertex ≡ anchorSite anchor)
+      Σ (Fin.Fin vertexCount) (λ vertex → siteAtVertex vertex ≡ anchorSite anchor)
 
     everyLiveLoopCovered :
       (loop : Stitch.LoopId) →
       loop ∈ Stitch.liveLoops (Stitch.frontier topology) →
-      Σ (Fin vertexCount) (λ vertex → siteAtVertex vertex ≡ loopSite loop)
+      Σ (Fin.Fin vertexCount) (λ vertex → siteAtVertex vertex ≡ loopSite loop)
 
 open WholeStitchEquilibriumReceipt public
 
