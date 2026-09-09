@@ -40,6 +40,7 @@ data ProducerClass : Set where
   contradictionProducer : ProducerClass
   counterexampleProducer : ProducerClass
   discriminatorProducer : ProducerClass
+  noSearchProducer : ProducerClass
 
 
 data SearchMode : Set where
@@ -49,6 +50,7 @@ data SearchMode : Set where
   compareAuthorities : SearchMode
   seekDefeater : SearchMode
   seekCounterexample : SearchMode
+  noSearchRequired : SearchMode
 
 
 data RequiredAuthorityClass : Set where

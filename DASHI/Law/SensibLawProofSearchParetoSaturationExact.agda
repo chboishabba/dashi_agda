@@ -14,10 +14,6 @@ import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Result
 
 ------------------------------------------------------------------------
 -- LEGAL SEARCH PARETO SURFACE
---
--- Search is not ranked by one confidence/relevance scalar. The legal search
--- consumer keeps separate proof-reduction, discrimination, authority fitness,
--- novelty, coverage gain and cost coordinates.
 ------------------------------------------------------------------------
 
 record SearchValueVector : Set where
@@ -43,7 +39,7 @@ record SearchCandidate : Set₁ where
 
 open SearchCandidate public
 
-record SearchDominates (left right : SearchCandidate) : Set where
+record SearchDominates (left right : SearchCandidate) : Set₁ where
   constructor searchDominates
   field
     noLessProofReduction :
@@ -158,7 +154,6 @@ data MostRelevantSearchAutomaticallyAuthorityFit : Set where
 data FrontierUnchangedOnceMeansSaturated : Set where
 data SaturatedSearchMeansLegalPropositionFalse : Set where
 data SaturatedSearchMeansConsumerProofClosed : Set where
-
 data LargeCorpusAutomaticallyHighInformationGain : Set where
 
 cheapestDoesNotMeanBest : CheapestSearchAutomaticallyBestSearch → ⊥
