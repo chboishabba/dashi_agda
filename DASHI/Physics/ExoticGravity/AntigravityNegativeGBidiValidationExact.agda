@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (true; false)
 
 import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact as SignedG
 import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact as SignedSource
+import DASHI.Physics.GR.SignedGRNormalizationBidiExact as Normalization
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact as NegativeG
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGPairedComparatorExact as Paired
 
@@ -41,6 +42,44 @@ negativeGDoesNotAutomaticallyPreserveBoundOrbitBackground :
     SignedG.canonicalSignedEinsteinCouplingBoundary
     ≡ false
 negativeGDoesNotAutomaticallyPreserveBoundOrbitBackground = refl
+
+------------------------------------------------------------------------
+-- GR NORMALIZATION BIDI
+------------------------------------------------------------------------
+
+constantSlotNameCannotDetermineGSign :
+  Normalization.constantSlotNameDeterminesCouplingSign
+    Normalization.canonicalSignedGRNormalizationBoundary
+    ≡ false
+constantSlotNameCannotDetermineGSign = refl
+
+negativeGCounterfactualReusesNormalizationShape :
+  Normalization.negativeGCounterfactualMayReuseExistingNormalizationShape
+    Normalization.canonicalSignedGRNormalizationBoundary
+    ≡ true
+negativeGCounterfactualReusesNormalizationShape = refl
+
+negativeGCounterfactualDoesNotOverwriteMeasuredG :
+  Normalization.negativeGCounterfactualOverwritesMeasuredRegistryValue
+    Normalization.canonicalSignedGRNormalizationBoundary
+    ≡ false
+negativeGCounterfactualDoesNotOverwriteMeasuredG = refl
+
+negativeGCounterfactualIsNotMeasuredNegativeG :
+  Normalization.negativeGCounterfactualEqualsMeasuredNegativeG
+    Normalization.canonicalSignedGRNormalizationBoundary
+    ≡ false
+negativeGCounterfactualIsNotMeasuredNegativeG = refl
+
+physicalAndCounterfactualBranchesShareGSlot :
+  Normalization.constantSlotName Normalization.physicalPositiveGBranch
+    ≡ Normalization.constantSlotName Normalization.counterfactualNegativeGBranch
+physicalAndCounterfactualBranchesShareGSlot = Normalization.constantSlotCollision
+
+physicalAndCounterfactualBranchSignsRemainDistinct :
+  Normalization.branchSign Normalization.physicalPositiveGBranch
+    ≡ Normalization.branchSign Normalization.counterfactualNegativeGBranch → ⊥
+physicalAndCounterfactualBranchSignsRemainDistinct = Normalization.branchSignsDistinct
 
 ------------------------------------------------------------------------
 -- COUPLING-SIGN / SOURCE-SIGN DEGENERACY
