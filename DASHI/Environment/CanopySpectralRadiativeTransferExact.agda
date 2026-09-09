@@ -3,7 +3,7 @@ module DASHI.Environment.CanopySpectralRadiativeTransferExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as Plant
+import DASHI.Environment.PhotosyntheticLightTransportCrossPollinationExact as Photo
 
 ------------------------------------------------------------------------
 -- CANOPY SPECTRAL RADIATIVE-TRANSFER INTERFACE
@@ -13,9 +13,9 @@ import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as Plant
 -- distinction between sunlit and shaded canopy fractions rather than reducing
 -- a canopy to one homogeneous big leaf.
 --
--- This owner is an admission interface for an external canopy radiative-
--- transfer producer. It does not choose Beer-Lambert, two-stream, ray tracing,
--- Monte Carlo, or another numerical scheme.
+-- This owner does NOT define another photosynthetic photon/interception model.
+-- It is a canopy-level producer that must compile into the canonical
+-- PhotosyntheticLightTransportCrossPollinationExact owner.
 ------------------------------------------------------------------------
 
 mccreeActionSpectrumDOI : String
@@ -47,22 +47,25 @@ record SpectralCanopyRadiationModel
 
 open SpectralCanopyRadiationModel public
 
-record LeafLightInterceptionReceipt
+record CanopyToPhotosyntheticPhotonFieldWeld
     {Wavelength Direction CanopyPoint PhotonFlux : Set}
-    (model : SpectralCanopyRadiationModel Wavelength Direction CanopyPoint PhotonFlux)
-    (leaf : Plant.LeafGasExchangeReceipt) : Set₁ where
-  constructor leaf-light-interception-receipt
+    (canopy : SpectralCanopyRadiationModel
+      Wavelength Direction CanopyPoint PhotonFlux)
+    (field : Photo.PhotosyntheticPhotonField CanopyPoint Wavelength PhotonFlux)
+    (interception : Photo.LeafLightInterceptionReceipt field) : Set₁ where
+  constructor canopy-to-photosynthetic-photon-field-weld
   field
-    LeafOpticalState : Set
-    canopyPointFor : LeafOpticalState → CanopyPoint
-    leafStateFor : LeafOpticalState → Plant.LeafState leaf
-    absorbedSpectrumAt : LeafOpticalState → Wavelength → PhotonFlux
-    absorptionRealisationReference : String
-    sameLeafGeometryReference : String
+    directionalReductionReference : String
+    canopyIncidentToPhotonFieldReference : String
+    canopyAbsorbedToPhotonFieldReference : String
+    canopyPointIsLeafPointReference : String
+    sunlitShadedClassificationReference : String
+    sameGeometryReference : String
     sameTimeSupportReference : String
-    mcCreeWeightingReference : String
+    sameSpectralCalibrationReference : String
+    numericalCanopyResidualReference : String
 
-open LeafLightInterceptionReceipt public
+open CanopyToPhotosyntheticPhotonFieldWeld public
 
 record CanopyRadiativeTransferBoundary : Set where
   constructor canopy-radiative-transfer-boundary
@@ -79,7 +82,10 @@ record CanopyRadiativeTransferBoundary : Set where
     sunlitAndShadedStatesRemainDistinct : Bool
     sunlitAndShadedStatesRemainDistinctIsTrue :
       sunlitAndShadedStatesRemainDistinct ≡ true
+    canopyProducerMustCompileIntoCanonicalPhotosyntheticOwner : Bool
+    canopyProducerMustCompileIntoCanonicalPhotosyntheticOwnerIsTrue :
+      canopyProducerMustCompileIntoCanonicalPhotosyntheticOwner ≡ true
 
 canonicalCanopyRadiativeTransferBoundary : CanopyRadiativeTransferBoundary
 canonicalCanopyRadiativeTransferBoundary =
-  canopy-radiative-transfer-boundary false refl false refl false refl true refl
+  canopy-radiative-transfer-boundary false refl false refl false refl true refl true refl
