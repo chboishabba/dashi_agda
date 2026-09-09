@@ -22,6 +22,7 @@ module DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
@@ -60,7 +61,7 @@ record CertifiedFiniteEisensteinPoint
   (F : Polar.ComplexFieldAuthority
         (Real.real (Complex.realPackage C)) D)
   (kernel : Q.DivisorPowerKernel)
-  (terms : Agda.Builtin.Nat.Nat)
+  (terms : Nat)
   (normalization : EisensteinNormalizationData C D F) : Set where
   constructor certified-finite-eisenstein-point
   field
@@ -86,7 +87,7 @@ normalizedDelta :
   (F : Polar.ComplexFieldAuthority
         (Real.real (Complex.realPackage C)) D) →
   (kernel : Q.DivisorPowerKernel) →
-  (terms : Agda.Builtin.Nat.Nat) →
+  (terms : Nat) →
   (normalization : EisensteinNormalizationData C D F) →
   CertifiedFiniteEisensteinPoint C D F kernel terms normalization →
   ComplexCarrier C
@@ -103,7 +104,7 @@ eisensteinKleinData :
   (F : Polar.ComplexFieldAuthority
         (Real.real (Complex.realPackage C)) D) →
   (kernel : Q.DivisorPowerKernel) →
-  (terms : Agda.Builtin.Nat.Nat) →
+  (terms : Nat) →
   (normalization : EisensteinNormalizationData C D F) →
   CKlein.ConstructedComplexKleinData C D F
 eisensteinKleinData C D F kernel terms normalization =
@@ -125,7 +126,7 @@ eisensteinKlein :
   (F : Polar.ComplexFieldAuthority
         (Real.real (Complex.realPackage C)) D) →
   (kernel : Q.DivisorPowerKernel) →
-  (terms : Agda.Builtin.Nat.Nat) →
+  (terms : Nat) →
   (normalization : EisensteinNormalizationData C D F) →
   Klein.ProofRelevantKleinJAlgebra
 eisensteinKlein C D F kernel terms normalization =
@@ -143,7 +144,7 @@ directJTruncated :
   (F : Polar.ComplexFieldAuthority
         (Real.real (Complex.realPackage C)) D) →
   (kernel : Q.DivisorPowerKernel) →
-  (terms : Agda.Builtin.Nat.Nat) →
+  (terms : Nat) →
   (normalization : EisensteinNormalizationData C D F) →
   CertifiedFiniteEisensteinPoint C D F kernel terms normalization →
   ComplexCarrier C
@@ -161,7 +162,7 @@ record EisensteinKleinNormalizationAgreement
   (F : Polar.ComplexFieldAuthority
         (Real.real (Complex.realPackage C)) D)
   (kernel : Q.DivisorPowerKernel)
-  (terms : Agda.Builtin.Nat.Nat)
+  (terms : Nat)
   (normalization : EisensteinNormalizationData C D F) : Set₁ where
   constructor eisenstein-klein-normalization-agreement
   field
