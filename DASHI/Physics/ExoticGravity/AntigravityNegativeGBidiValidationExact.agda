@@ -8,10 +8,13 @@ import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact as Signe
 import DASHI.Physics.GR.SignedGRNormalizationBidiExact as Normalization
 import DASHI.Physics.GR.SignedNewtonianLimitBidiExact as Newton
 import DASHI.Physics.GR.SignedGravitationalWaveCouplingBidiExact as SignedWave
+import DASHI.Physics.GR.SignedGravitationalWaveDetectorResponseBidiExact as WaveDetector
 import DASHI.Physics.GR.GravitationalWaveTheoryTestBidiExact as WaveTest
 import DASHI.Physics.GR.NegativeGGravitationalWaveTestRoutingExact as WaveRoute
 import DASHI.Physics.GR.SignedCosmologicalMatterCouplingBidiExact as Cosmology
 import DASHI.Physics.GR.UniversalSignedGCrossScaleFingerprintBidiExact as Universal
+import DASHI.Physics.GR.NegativeGPredictionAuthorityExact as PredictionAuthority
+import DASHI.Physics.GR.SignedGSourceDynamicsBidiExact as SourceDynamics
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact as NegativeG
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGPairedComparatorExact as Paired
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGClaimComparisonWeldExact as ComparisonWeld
@@ -152,6 +155,18 @@ exactWaveEquationAndStrainReceiptsRequired :
     ≡ true
 exactWaveEquationAndStrainReceiptsRequired = refl
 
+rawGWReadoutDoesNotDetermineSourceStrainSign :
+  WaveDetector.rawReadoutSignAloneDeterminesSourceStrainSign
+    WaveDetector.canonicalSignedWaveDetectorBoundary
+    ≡ false
+rawGWReadoutDoesNotDetermineSourceStrainSign = refl
+
+sameDetectorResponseRequiredForSignedPair :
+  WaveDetector.sameDetectorResponseRequiredForSignedGPair
+    WaveDetector.canonicalSignedWaveDetectorBoundary
+    ≡ true
+sameDetectorResponseRequiredForSignedPair = refl
+
 inspiralNegativeGNeedsReSolvedSourceDynamics :
   WaveRoute.negativeGRoleFor WaveTest.inspiralPhaseConsistency
     ≡ WaveRoute.requiresReSolvedSourceDynamics
@@ -191,6 +206,12 @@ negativeGCosmologyNeedsReSolvedDynamics :
     Cosmology.canonicalSignedCosmologyBoundary
     ≡ true
 negativeGCosmologyNeedsReSolvedDynamics = refl
+
+exactCosmologicalDynamicsObjectsRequired :
+  Cosmology.exactExistingCosmologicalDynamicsObjectsRequired
+    Cosmology.canonicalSignedCosmologyBoundary
+    ≡ true
+exactCosmologicalDynamicsObjectsRequired = refl
 
 universalNegativeGFingerprintIsRepulsiveLocally :
   Universal.localPositiveDensityResponse Universal.negativeGSignFingerprint
@@ -243,6 +264,30 @@ rejectionOfUniversalNegativeGDoesNotRejectEveryLocalEffectiveModel :
     ≡ false
 rejectionOfUniversalNegativeGDoesNotRejectEveryLocalEffectiveModel = refl
 
+anyInternalTheoremDoesNotAuthorizeNegativeG :
+  PredictionAuthority.anyInternalTheoremMayAuthorizeNegativeGPrediction
+    PredictionAuthority.canonicalNegativeGPredictionAuthorityBoundary
+    ≡ false
+anyInternalTheoremDoesNotAuthorizeNegativeG = refl
+
+exactSignedGOwnerAuthorityRequired :
+  PredictionAuthority.exactSignedGOwnerRequired
+    PredictionAuthority.canonicalNegativeGPredictionAuthorityBoundary
+    ≡ true
+exactSignedGOwnerAuthorityRequired = refl
+
+sameSourceModelDoesNotMeanSameSolvedState :
+  SourceDynamics.sameSourceModelMeansSameSolvedSourceState
+    SourceDynamics.canonicalSignedGSourceDynamicsBoundary
+    ≡ false
+sameSourceModelDoesNotMeanSameSolvedState = refl
+
+signConditionedSourceSolutionRequired :
+  SourceDynamics.signConditionedSourceSolutionRequired
+    SourceDynamics.canonicalSignedGSourceDynamicsBoundary
+    ≡ true
+signConditionedSourceSolutionRequired = refl
+
 negativeGIsOnlyCounterfactualTheoryCoordinateHere :
   NegativeG.negativeGIsEstablishedPhysicalConstantSign
     NegativeG.canonicalNegativeGAntigravityBoundary
@@ -279,11 +324,17 @@ pairedComparatorRequiresNonGRNegativeGAlternative :
     ≡ true
 pairedComparatorRequiresNonGRNegativeGAlternative = refl
 
-sameInputPairIsolatesCouplingSign :
-  Paired.sameInputPairIsolatesCouplingSignBetterThanUnpairedComparison
+sameLawReSolvedSourcePairIsolatesCouplingSign :
+  Paired.sameLawReSolvedSourcePairIsolatesCouplingSignBetterThanUnpairedComparison
     Paired.canonicalSignedGPairedComparatorBoundary
     ≡ true
-sameInputPairIsolatesCouplingSign = refl
+sameLawReSolvedSourcePairIsolatesCouplingSign = refl
+
+pairedComparatorDoesNotReuseSameSolvedSourceState :
+  Paired.sameSourceModelMeansSameSolvedSourceState
+    Paired.canonicalSignedGPairedComparatorBoundary
+    ≡ false
+pairedComparatorDoesNotReuseSameSolvedSourceState = refl
 
 betterNegativeGFitDoesNotEstablishNegativeGPhysics :
   Paired.betterNegativeGFitAutomaticallyEstablishesNegativeGPhysics
