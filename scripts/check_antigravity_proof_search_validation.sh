@@ -8,9 +8,18 @@ files=(
   DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
   DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
   DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
+  DASHI/Physics/GR/SignedNewtonianLimitBidiExact.agda
+  DASHI/Physics/GR/SignedGravitationalWaveCouplingBidiExact.agda
+  DASHI/Physics/GR/SignedGravitationalWaveDetectorResponseBidiExact.agda
+  DASHI/Physics/GR/NegativeGGravitationalWaveTestRoutingExact.agda
+  DASHI/Physics/GR/SignedCosmologicalMatterCouplingBidiExact.agda
+  DASHI/Physics/GR/UniversalSignedGCrossScaleFingerprintBidiExact.agda
+  DASHI/Physics/GR/NegativeGPredictionAuthorityExact.agda
+  DASHI/Physics/GR/SignedGSourceDynamicsBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGCrossScaleProofSearchExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGBidiValidationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityConstraintPruningVsBundlePaymentExact.agda
   DASHI/Physics/ExoticGravity/ConstraintPruningIdentityWeldExact.agda
@@ -45,104 +54,84 @@ for file in "${files[@]}"; do
 done
 
 # Signed-G / negative-G BIDI invariants.
-grep -q 'flipCouplingSignInvolutive' \
-  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
-grep -q 'negativeGReversesEveryDisplayedLeadingCorrection' \
-  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
-grep -q 'frozenSignProbeEqualsSelfConsistentNegativeGTheory' \
-  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
-grep -q 'selfConsistentNegativeGRequiresStabilityAnalysis' \
-  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
-grep -q 'sourceSideSignCollision' \
-  DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
-grep -q 'negativeGAutomaticallyFlipsCosmologicalConstant' \
-  DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
-grep -q 'constantSlotNameDeterminesCouplingSign' \
-  DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
-grep -q 'negativeGCounterfactualOverwritesMeasuredRegistryValue' \
-  DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
-grep -q 'negativeGAloneImpliesAlteredInertialMass' \
-  DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
-grep -q 'negativeGAloneImpliesReactionlessPropulsion' \
-  DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
-grep -q 'sameInputPairIsolatesCouplingSignBetterThanUnpairedComparison' \
-  DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
-grep -q 'betterNegativeGFitAutomaticallyEstablishesNegativeGPhysics' \
-  DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
-grep -q 'positiveGIsOrdinaryComparisonPrediction' \
-  DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
-grep -q 'negativeGIsAlternativeComparisonPrediction' \
-  DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
+grep -q 'flipCouplingSignInvolutive' DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+grep -q 'negativeGReversesEveryDisplayedLeadingCorrection' DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+grep -q 'frozenSignProbeEqualsSelfConsistentNegativeGTheory' DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+grep -q 'selfConsistentNegativeGRequiresStabilityAnalysis' DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+grep -q 'sourceSideSignCollision' DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
+grep -q 'negativeGAutomaticallyFlipsCosmologicalConstant' DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
+grep -q 'constantSlotNameDeterminesCouplingSign' DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
+grep -q 'negativeGCounterfactualOverwritesMeasuredRegistryValue' DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
+
+# Newtonian / GW / cosmology cross-scale sign fibres.
+grep -q 'exactExistingPoissonReceiptRequired' DASHI/Physics/GR/SignedNewtonianLimitBidiExact.agda
+grep -q 'poissonSignCollision' DASHI/Physics/GR/SignedNewtonianLimitBidiExact.agda
+grep -q 'vacuumPropagationCollision' DASHI/Physics/GR/SignedGravitationalWaveCouplingBidiExact.agda
+grep -q 'exactExistingWaveEquationAndStrainReceiptsRequired' DASHI/Physics/GR/SignedGravitationalWaveCouplingBidiExact.agda
+grep -q 'readoutSignCollision' DASHI/Physics/GR/SignedGravitationalWaveDetectorResponseBidiExact.agda
+grep -q 'rawReadoutSignAloneDeterminesSourceStrainSign' DASHI/Physics/GR/SignedGravitationalWaveDetectorResponseBidiExact.agda
+grep -q 'currentGWAgreementAutomaticallyRulesOutEveryNegativeGConstruction' DASHI/Physics/GR/NegativeGGravitationalWaveTestRoutingExact.agda
+grep -q 'cosmologicalMatterTermCollision' DASHI/Physics/GR/SignedCosmologicalMatterCouplingBidiExact.agda
+grep -q 'exactExistingCosmologicalDynamicsObjectsRequired' DASHI/Physics/GR/SignedCosmologicalMatterCouplingBidiExact.agda
+grep -q 'universalNegativeGRequiresSameSignAcrossScales' DASHI/Physics/GR/UniversalSignedGCrossScaleFingerprintBidiExact.agda
+
+# Internal counterfactual attribution and sign-conditioned source dynamics.
+grep -q 'anyInternalTheoremMayAuthorizeNegativeGPrediction' DASHI/Physics/GR/NegativeGPredictionAuthorityExact.agda
+grep -q 'exactSignedGOwnerRequired' DASHI/Physics/GR/NegativeGPredictionAuthorityExact.agda
+grep -q 'sameSourceModelMeansSameSolvedSourceState' DASHI/Physics/GR/SignedGSourceDynamicsBidiExact.agda
+grep -q 'sourceSolutionDerivationRequiredPerSign' DASHI/Physics/GR/SignedGSourceDynamicsBidiExact.agda
+
+# Antigravity claim / comparison / cross-scale proof-search invariants.
+grep -q 'negativeGAloneImpliesAlteredInertialMass' DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
+grep -q 'negativeGAloneImpliesReactionlessPropulsion' DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
+grep -q 'sameLawReSolvedSourcePairIsolatesCouplingSignBetterThanUnpairedComparison' DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
+grep -q 'exactSignedGOwnerAuthorityRequired' DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
+grep -q 'betterNegativeGFitAutomaticallyEstablishesNegativeGPhysics' DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
+grep -q 'positiveGIsOrdinaryComparisonPrediction' DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
+grep -q 'negativeGIsAlternativeComparisonPrediction' DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
+grep -q 'firstUniversalNegativeGStage' DASHI/Physics/ExoticGravity/AntigravityNegativeGCrossScaleProofSearchExact.agda
+grep -q 'positiveDensityAttractionCanDiscriminateFrozenNegativeGSign' DASHI/Physics/ExoticGravity/AntigravityNegativeGCrossScaleProofSearchExact.agda
 
 # Introspective frontier / no-stitch invariants.
-grep -q 'currentRecommendedBundle = sourceGeometryBundle' \
-  DASHI/Physics/ExoticGravity/AntigravityJointProofSearchFrontierExact.agda
-grep -q 'currentMicroscopicFirstOpenIsSourceDistribution' \
-  DASHI/Physics/ExoticGravity/AntigravityMicroscopicBulkProofSearchBridgeExact.agda
-grep -q 'sourceShapeEqualsSourceDistribution' \
-  DASHI/Physics/ExoticGravity/AntigravityFirstIrreducibleSourceResidualExact.agda
-grep -q 'heterogeneousExperimentsMayBeStitchedIntoOneApparatusReceipt' \
-  DASHI/Physics/ExoticGravity/AntigravityConstraintPruningVsBundlePaymentExact.agda
-grep -q 'ConstraintPruningIdentityWeld' \
-  DASHI/Physics/ExoticGravity/ConstraintPruningIdentityWeldExact.agda
+grep -q 'currentRecommendedBundle = sourceGeometryBundle' DASHI/Physics/ExoticGravity/AntigravityJointProofSearchFrontierExact.agda
+grep -q 'currentMicroscopicFirstOpenIsSourceDistribution' DASHI/Physics/ExoticGravity/AntigravityMicroscopicBulkProofSearchBridgeExact.agda
+grep -q 'sourceShapeEqualsSourceDistribution' DASHI/Physics/ExoticGravity/AntigravityFirstIrreducibleSourceResidualExact.agda
+grep -q 'heterogeneousExperimentsMayBeStitchedIntoOneApparatusReceipt' DASHI/Physics/ExoticGravity/AntigravityConstraintPruningVsBundlePaymentExact.agda
+grep -q 'ConstraintPruningIdentityWeld' DASHI/Physics/ExoticGravity/ConstraintPruningIdentityWeldExact.agda
 
 # Attribution / lane-separation invariants.
-grep -q '10.1103/PhysRevD.43.457' \
-  DASHI/Physics/ExoticGravity/LiTorrTheorySourceDiligenceProofSearchExact.agda
-grep -q '10.1103/PhysRevB.46.5489' \
-  DASHI/Physics/ExoticGravity/LiTorrTheorySourceDiligenceProofSearchExact.agda
-grep -q 'physicalSourceAndTheorySourceAreSameCoordinate' \
-  DASHI/Physics/ExoticGravity/AntigravityEmpiricalTheoryDiligenceBidiExact.agda
+grep -q '10.1103/PhysRevD.43.457' DASHI/Physics/ExoticGravity/LiTorrTheorySourceDiligenceProofSearchExact.agda
+grep -q '10.1103/PhysRevB.46.5489' DASHI/Physics/ExoticGravity/LiTorrTheorySourceDiligenceProofSearchExact.agda
+grep -q 'physicalSourceAndTheorySourceAreSameCoordinate' DASHI/Physics/ExoticGravity/AntigravityEmpiricalTheoryDiligenceBidiExact.agda
 
 # Execution/provenance/derivation invariants.
-grep -q 'apparatusIdentityEqualsRunIdentifier' \
-  DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
-grep -q 'calibrationCarrierEqualsCalibrationRevision' \
-  DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
-grep -q 'rawDataHash' \
-  DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
-grep -q 'outputBundleMatches' \
-  DASHI/Physics/ExoticGravity/AntigravitySourceBundleDerivationLineageExact.agda
-grep -q 'eachBundleNeedsRunDataHashRevision' \
-  DASHI/Physics/ExoticGravity/AntigravityExperimentalCutProvenanceExact.agda
-grep -q 'exactOutputBundleIdentityRequired' \
-  DASHI/Physics/ExoticGravity/AntigravityBundleExecutionDerivationExact.agda
-grep -q 'fullyDerivedCutAutomaticallyProvesAntigravity' \
-  DASHI/Physics/ExoticGravity/AntigravityFullyDerivedExperimentalCutExact.agda
+grep -q 'apparatusIdentityEqualsRunIdentifier' DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
+grep -q 'calibrationCarrierEqualsCalibrationRevision' DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
+grep -q 'rawDataHash' DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
+grep -q 'outputBundleMatches' DASHI/Physics/ExoticGravity/AntigravitySourceBundleDerivationLineageExact.agda
+grep -q 'eachBundleNeedsRunDataHashRevision' DASHI/Physics/ExoticGravity/AntigravityExperimentalCutProvenanceExact.agda
+grep -q 'exactOutputBundleIdentityRequired' DASHI/Physics/ExoticGravity/AntigravityBundleExecutionDerivationExact.agda
+grep -q 'fullyDerivedCutAutomaticallyProvesAntigravity' DASHI/Physics/ExoticGravity/AntigravityFullyDerivedExperimentalCutExact.agda
 
 # Typed calibration / same-object execution invariants.
-grep -q 'ExecutionCalibrationReceipt' \
-  DASHI/Physics/ExoticGravity/AntigravityExecutionCalibrationExact.agda
-grep -q 'SourceExecutionIdentityWeld' \
-  DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
-grep -q 'sourceExecutionApparatusMatches' \
-  DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
-grep -q 'allFourStagesNeedTypedCalibration' \
-  DASHI/Physics/ExoticGravity/AntigravityCalibratedFullyDerivedExperimentalCutExact.agda
+grep -q 'ExecutionCalibrationReceipt' DASHI/Physics/ExoticGravity/AntigravityExecutionCalibrationExact.agda
+grep -q 'SourceExecutionIdentityWeld' DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
+grep -q 'sourceExecutionApparatusMatches' DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
+grep -q 'allFourStagesNeedTypedCalibration' DASHI/Physics/ExoticGravity/AntigravityCalibratedFullyDerivedExperimentalCutExact.agda
 
 # Consumer-scoped calibration / final comparison identity.
-grep -q 'ConsumerScopedCalibration' \
-  DASHI/Physics/ExoticGravity/AntigravityConsumerScopedCalibrationExact.agda
-grep -q 'coarseCalibrationDoesNotDetermineDiscriminator' \
-  DASHI/Physics/ExoticGravity/AntigravityConsumerScopedCalibrationExact.agda
-grep -q 'allFourStagesMustMatchSameClaimConsumer' \
-  DASHI/Physics/ExoticGravity/AntigravityClaimScopedExperimentalCutExact.agda
-grep -q 'sameCalibratedCut' \
-  DASHI/Physics/ExoticGravity/AntigravityClaimScopedComparativeAnomalyExact.agda
-grep -q 'newConsumersRequireConsumerScopedCalibration' \
-  DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
-grep -q 'exactClaimScopedCutIdentityRequired' \
-  DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
-grep -q 'calibrationStringAloneSufficient' \
-  DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
-grep -q 'legacyComparativeReceiptAutomaticallyUpgrades' \
-  DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
+grep -q 'ConsumerScopedCalibration' DASHI/Physics/ExoticGravity/AntigravityConsumerScopedCalibrationExact.agda
+grep -q 'coarseCalibrationDoesNotDetermineDiscriminator' DASHI/Physics/ExoticGravity/AntigravityConsumerScopedCalibrationExact.agda
+grep -q 'allFourStagesMustMatchSameClaimConsumer' DASHI/Physics/ExoticGravity/AntigravityClaimScopedExperimentalCutExact.agda
+grep -q 'sameCalibratedCut' DASHI/Physics/ExoticGravity/AntigravityClaimScopedComparativeAnomalyExact.agda
+grep -q 'newConsumersRequireConsumerScopedCalibration' DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
+grep -q 'exactClaimScopedCutIdentityRequired' DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
+grep -q 'calibrationStringAloneSufficient' DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
+grep -q 'legacyComparativeReceiptAutomaticallyUpgrades' DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
 
 # Least privilege must remain upstream of execution/success.
-grep -q 'admittedMoveEqualsExecutedExperiment' \
-  DASHI/Physics/ExoticGravity/AntigravityProofSearchLeastPrivilegeAdmissionExact.agda
-grep -q 'admittedMoveEqualsSuccessfulReceipt' \
-  DASHI/Physics/ExoticGravity/AntigravityProofSearchLeastPrivilegeAdmissionExact.agda
+grep -q 'admittedMoveEqualsExecutedExperiment' DASHI/Physics/ExoticGravity/AntigravityProofSearchLeastPrivilegeAdmissionExact.agda
+grep -q 'admittedMoveEqualsSuccessfulReceipt' DASHI/Physics/ExoticGravity/AntigravityProofSearchLeastPrivilegeAdmissionExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
