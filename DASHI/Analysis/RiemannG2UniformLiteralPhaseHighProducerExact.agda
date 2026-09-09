@@ -10,7 +10,7 @@ import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
-import DASHI.Analysis.RiemannG2DirectComplementUnpaidContextExact as Context
+import DASHI.Analysis.RiemannG2BalanceFreeComplementContextExact as Context
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as Literal
 import DASHI.Analysis.RiemannG2LiteralPhaseJointMarginCompilerExact as Phase
 import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as Existing
@@ -18,14 +18,16 @@ import DASHI.Analysis.RiemannG2UniformIndependentComplementHighProducerExact as 
 ------------------------------------------------------------------------
 -- UNIFORM LITERAL-PHASE HIGH PRODUCER
 --
--- The existing uniform producer is phrased in terms of a final combined input.
--- The introspective route now has a strictly lower theorem surface: for each
--- arbitrary high off-line zero, expose the exact literal finite-near phase model
--- and prove its joint phase+far+Gamma margin in the unpaid final context.
+-- For each arbitrary high off-line zero, the ANALYTIC input is now:
 --
--- This module compiles that literal theorem family to the existing prize-facing
--- high producer.  No fixed-case certificate is promoted to the universal
--- quantifier and no canonical strict margin is assumed in the input case.
+--   balance-free final context
+--   + exact literal finite-near phase model
+--   + literal phase+far+Gamma strict margin.
+--
+-- The terminal equality `cluster = Off + Gamma` is carried separately as a
+-- downstream attachment.  Thus the analytic payment cannot depend on the final
+-- balance through its input type, while the full case still compiles to the
+-- existing prize-facing contradiction.
 ------------------------------------------------------------------------
 
 record LiteralPhaseHighOffLineCase : Set₁ where
@@ -34,13 +36,16 @@ record LiteralPhaseHighOffLineCase : Set₁ where
     offTransport : Transport.ExplicitCutoffNearFarAgdaTransport offSurface
     targets : Direct.DirectLiteralComplementTargets offSurface offTransport
 
-    context : Context.DirectComplementUnpaidContext targets
+    analyticContext : Context.BalanceFreeComplementContext targets
     literalNearModel :
       Literal.FinalPoleNearLiteralModel (Direct.offInput targets)
 
     phasePayment :
       Phase.LiteralPhaseJointMarginPayment
-        targets literalNearModel context
+        targets literalNearModel analyticContext
+
+    finalBalance :
+      Context.FinalClusterBalanceAttachment analyticContext
 
     caseReference : String
 
@@ -48,7 +53,9 @@ open LiteralPhaseHighOffLineCase public
 
 literalPhaseCaseContradiction : LiteralPhaseHighOffLineCase -> ⊥
 literalPhaseCaseContradiction c =
-  Phase.literalPhasePaymentContradiction (phasePayment c)
+  Phase.literalPhasePaymentAndBalanceContradiction
+    (finalBalance c)
+    (phasePayment c)
 
 compileLiteralPhaseCaseToExistingCase :
   LiteralPhaseHighOffLineCase ->
@@ -58,7 +65,9 @@ compileLiteralPhaseCaseToExistingCase c = record
   ; Existing.offTransport = offTransport c
   ; Existing.targets = targets c
   ; Existing.finalInput =
-      Phase.compileLiteralPhasePaymentToLegacyInput (phasePayment c)
+      Phase.compileLiteralPhasePaymentToLegacyInput
+        (finalBalance c)
+        (phasePayment c)
   ; Existing.caseReference = caseReference c
   }
 
@@ -115,6 +124,14 @@ record UniformLiteralPhaseHighBoundary : Set where
     canonicalStrictMarginPresupposedPerCaseIsFalse :
       canonicalStrictMarginPresupposedPerCase ≡ false
 
+    analyticPaymentCanAccessFinalBalanceThroughContext : Bool
+    analyticPaymentCanAccessFinalBalanceThroughContextIsFalse :
+      analyticPaymentCanAccessFinalBalanceThroughContext ≡ false
+
+    finalBalanceIsSeparateDownstreamCaseAttachment : Bool
+    finalBalanceIsSeparateDownstreamCaseAttachmentIsTrue :
+      finalBalanceIsSeparateDownstreamCaseAttachment ≡ true
+
     literalPhaseFamilyCompilesExistingHighProducer : Bool
     literalPhaseFamilyCompilesExistingHighProducerIsTrue :
       literalPhaseFamilyCompilesExistingHighProducer ≡ true
@@ -137,8 +154,10 @@ canonicalUniformLiteralPhaseHighBoundary =
     true refl
     false refl
     false refl
+    false refl
+    true refl
     true refl
     true refl
     false refl
     false refl
-    "The prize-facing high theorem can now be stated directly on the phase-visible carrier: for every arbitrary high off-line nontrivial zero, supply the same-object literal near model, the unpaid final context, and the independent literal phase+far+Gamma strict margin. That family compiles mechanically to the existing UniformIndependentComplementHighProducer and contradiction. No canonical margin is presupposed and no fixed case is generalized. The literal phase inequality family remains uninhabited here, so RH is not derived."
+    "The prize-facing high theorem family is now dependency-level balance-free. For every arbitrary high off-line nontrivial zero, prove the literal phase+far+Gamma strict margin using only BalanceFreeComplementContext and the exact final-near model. The final cluster=Off+Gamma theorem is a separate downstream case attachment and is unavailable to the analytic payment through its context type. Payment plus balance compiles mechanically to the existing high producer and contradiction. No fixed case or canonical margin is presupposed; the analytic family remains uninhabited and RH is not derived."
