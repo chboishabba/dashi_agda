@@ -28,6 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531E
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as G
 import DASHI.Moonshine.Base369PeriodicTernaryTorusPathRestrictionBidiExact as Periodic
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -72,14 +73,8 @@ Base369PeriodicTorusAdjacent531 = Periodic.TorusVoxelAdjacent
 
 periodicWraparoundLivesOnNormalizedCarrier531 :
   Base369PeriodicTorusAdjacent531
-    (G.ternary27Point
-      (let open import DASHI.Foundations.SSPTritCarrier in sspPosOne)
-      (let open import DASHI.Foundations.SSPTritCarrier in sspZero)
-      (let open import DASHI.Foundations.SSPTritCarrier in sspZero))
-    (G.ternary27Point
-      (let open import DASHI.Foundations.SSPTritCarrier in sspNegOne)
-      (let open import DASHI.Foundations.SSPTritCarrier in sspZero)
-      (let open import DASHI.Foundations.SSPTritCarrier in sspZero))
+    (G.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero)
+    (G.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero)
 periodicWraparoundLivesOnNormalizedCarrier531 = R530.periodicWraparound530
 
 ------------------------------------------------------------------------
