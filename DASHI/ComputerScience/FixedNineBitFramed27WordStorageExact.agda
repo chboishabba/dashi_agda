@@ -101,9 +101,9 @@ binaryWordToTernaryRoundTrip :
   ternary27ToBinaryWord9 (binaryWord9ToTernary27 word) ≡ word
 binaryWordToTernaryRoundTrip
   (binaryWord9 a0 a1 a2 b0 b1 b2 c0 c1 c2)
-  rewrite Block.blockRoundTrip (Block.bits3 a0 a1 a2)
-        | Block.blockRoundTrip (Block.bits3 b0 b1 b2)
-        | Block.blockRoundTrip (Block.bits3 c0 c1 c2) = refl
+  rewrite Lift27.bit3LiftRoundTrip (Block.bits3 a0 a1 a2)
+        | Lift27.bit3LiftRoundTrip (Block.bits3 b0 b1 b2)
+        | Lift27.bit3LiftRoundTrip (Block.bits3 c0 c1 c2) = refl
 
 mapList : ∀ {A B : Set} → (A → B) → List A → List B
 mapList f [] = []
