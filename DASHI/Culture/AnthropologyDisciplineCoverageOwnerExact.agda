@@ -45,8 +45,8 @@ socioculturalStatus =
 linguisticStatus : AnthropologyBranchStatus
 linguisticStatus =
   anthropology-branch-status linguisticAnthropology
-    "general language/use machinery exists, but focused audit found no linguistic-anthropology producer"
-    true false false
+    "DASHI/Culture/LinguisticAnthropologyTlureyPragmaticsBridgeExact.agda; Tlurey relational protocol; governed language-use machinery"
+    true false true
 
 archaeologyStatus : AnthropologyBranchStatus
 archaeologyStatus =
