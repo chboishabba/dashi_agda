@@ -99,8 +99,8 @@ sourceNativeFlowCouplingIsBetaHistory :
   ∀ scale →
   Published.couplingAt (Entry.flow (asSourceNativePublishedFlow dataSet)) scale
   ≡ History.couplingAt (Beta.betaHistory inputs) scale
-sourceNativeFlowCouplingIsBetaHistory dataSet scale =
-  Beta.sourceCouplingIsBetaHistoryCoupling _ scale
+sourceNativeFlowCouplingIsBetaHistory {inputs = inputs} dataSet scale =
+  Beta.sourceCouplingIsBetaHistoryCoupling inputs scale
 
 sourceNativeFlowDensityIsBetaDensity :
   ∀ {trajectory split inputs}
