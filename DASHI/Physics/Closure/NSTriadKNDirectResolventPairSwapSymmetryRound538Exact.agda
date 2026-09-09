@@ -30,6 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedGramPairToResolventRound389Exact as R389
@@ -65,26 +66,20 @@ module PairSwap
   pairBracketSymmetric alpha beta =
     let
       qab = Q alpha beta
-      qba = Q beta alpha
-      leftSwap =
+      leftToReverseSecond =
         R287.realHermitianCrossSymmetric
           (R291.forcingA qab) (R291.cellB qab)
-      rightSwap =
+      rightToReverseFirst =
         R287.realHermitianCrossSymmetric
           (R291.cellA qab) (R291.forcingB qab)
     in
-    cong (R291.two *_)
-      (trans
-        (cong₂ _+_ leftSwap rightSwap)
+    trans
+      (cong (R291.two *_)
+        (cong₂ _+_ leftToReverseSecond rightToReverseFirst))
+      (cong (R291.two *_)
         (ℚP.+-comm
-          (R287.realHermitianCrossSymmetric
-            (R291.cellA qab) (R291.forcingB qab)
-            |> λ _ → R291.realHermitianCross (R291.forcingB qab) (R291.cellA qab))
-          (R291.realHermitianCross (R291.cellB qab) (R291.forcingA qab))))
-    where
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    x |> f = f x
+          (R179.realHermitianCross (R291.cellB qab) (R291.forcingA qab))
+          (R179.realHermitianCross (R291.forcingB qab) (R291.cellA qab))))
 
   pairResolvent :
     Physical.PhysicalTriadIncidence → Physical.PhysicalTriadIncidence → ℚ
