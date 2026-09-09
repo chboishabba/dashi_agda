@@ -1,0 +1,105 @@
+name: Antigravity proof search validation
+
+on:
+  push:
+    paths:
+      - 'DASHI/Physics/ExoticGravity/**'
+      - 'DASHI/Physics/GR.agda'
+      - 'DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedNewtonianLimitBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedGravitationalWaveCouplingBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedGravitationalWaveDetectorResponseBidiExact.agda'
+      - 'DASHI/Physics/GR/GravitationalWavePolarizationSourceAttributionExact.agda'
+      - 'DASHI/Physics/GR/GravitationalWavePolarizationSignBidiExact.agda'
+      - 'DASHI/Physics/GR/GravitationalWavePhaseSignBidiExact.agda'
+      - 'DASHI/Physics/GR/NegativeGGravitationalWavePhaseIdentifiabilityBidiExact.agda'
+      - 'DASHI/Physics/GR/NegativeGGravitationalWavePhaseProofSearchExact.agda'
+      - 'DASHI/Physics/GR/NegativeGGravitationalWaveTestRoutingExact.agda'
+      - 'DASHI/Physics/GR/SignedCosmologicalMatterCouplingBidiExact.agda'
+      - 'DASHI/Physics/GR/UniversalSignedGCrossScaleFingerprintBidiExact.agda'
+      - 'DASHI/Physics/GR/NegativeGPredictionAuthorityExact.agda'
+      - 'DASHI/Physics/GR/SignedGSourceDynamicsBidiExact.agda'
+      - 'DASHI/Culture/AmyEskridgeMaterialEffectiveNegativeGCrossPollinationExact.agda'
+      - 'DASHI/Culture/AmyEskridgeEvidenceEverything.agda'
+      - 'scripts/check_antigravity_proof_search_validation.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'scripts/agda29_without_k_wrapper.sh'
+      - '.github/workflows/antigravity-proof-search-validation.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/ExoticGravity/**'
+      - 'DASHI/Physics/GR.agda'
+      - 'DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedNewtonianLimitBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedGravitationalWaveCouplingBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedGravitationalWaveDetectorResponseBidiExact.agda'
+      - 'DASHI/Physics/GR/GravitationalWavePolarizationSourceAttributionExact.agda'
+      - 'DASHI/Physics/GR/GravitationalWavePolarizationSignBidiExact.agda'
+      - 'DASHI/Physics/GR/GravitationalWavePhaseSignBidiExact.agda'
+      - 'DASHI/Physics/GR/NegativeGGravitationalWavePhaseIdentifiabilityBidiExact.agda'
+      - 'DASHI/Physics/GR/NegativeGGravitationalWavePhaseProofSearchExact.agda'
+      - 'DASHI/Physics/GR/NegativeGGravitationalWaveTestRoutingExact.agda'
+      - 'DASHI/Physics/GR/SignedCosmologicalMatterCouplingBidiExact.agda'
+      - 'DASHI/Physics/GR/UniversalSignedGCrossScaleFingerprintBidiExact.agda'
+      - 'DASHI/Physics/GR/NegativeGPredictionAuthorityExact.agda'
+      - 'DASHI/Physics/GR/SignedGSourceDynamicsBidiExact.agda'
+      - 'DASHI/Culture/AmyEskridgeMaterialEffectiveNegativeGCrossPollinationExact.agda'
+      - 'DASHI/Culture/AmyEskridgeEvidenceEverything.agda'
+      - 'scripts/check_antigravity_proof_search_validation.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'scripts/agda29_without_k_wrapper.sh'
+      - '.github/workflows/antigravity-proof-search-validation.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: antigravity-proof-search-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: antigravity-proof-search-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh', 'scripts/check_antigravity_proof_search_validation.sh') }}
+      - name: Check antigravity proof-search cone
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-antigravity-proof-search.log"
+            export AGDA_JOBS=2
+            bash scripts/check_antigravity_proof_search_validation.sh
+          ) > agda-antigravity-proof-search.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 240 agda-antigravity-proof-search.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: antigravity-proof-search-agda-log
+          path: agda-antigravity-proof-search.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1

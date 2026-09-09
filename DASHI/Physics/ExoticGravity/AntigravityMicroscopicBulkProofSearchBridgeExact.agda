@@ -8,15 +8,6 @@ import DASHI.Physics.ExoticGravity.LiTorrMicroscopicToBulkGravitomagneticSumBidi
 import DASHI.Physics.ExoticGravity.AntigravityOptimizedAcquisitionPlanExact as Plan
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
-------------------------------------------------------------------------
--- MICROSCOPIC LI/TORR PRIOR -> LIVE SOURCE-BUNDLE RESIDUAL
---
--- The literature-side microscopic router already owns the single-ion formula
--- and ion count.  It does not own the actual apparatus source distribution,
--- alignment, probe geometry, vector sum, or same-apparatus GR comparator.
--- Those remain physical/source-model acquisition coordinates.
-------------------------------------------------------------------------
-
 currentMicroscopicFirstOpenIsSourceDistribution :
   Micro.currentFirstOpenMicroscopicBulkLeaf ≡ Micro.sourceDistributionLeaf
 currentMicroscopicFirstOpenIsSourceDistribution = refl
@@ -57,11 +48,6 @@ producerForMicroscopicBundleResidual missingVectorSourceSum =
   Search.discriminatorProducer
 producerForMicroscopicBundleResidual missingSameApparatusGRComparison =
   Search.propositionSourceProducer
-
-------------------------------------------------------------------------
--- The full source/geometry bundle is exactly the consumer that can eventually
--- pay the physical coordinates, but the literature prior cannot construct it.
-------------------------------------------------------------------------
 
 data MicroscopicPriorToSourceBundleAuthority : Set where
 

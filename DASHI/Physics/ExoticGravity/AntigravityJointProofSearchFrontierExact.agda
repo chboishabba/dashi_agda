@@ -10,13 +10,6 @@ import DASHI.Physics.ExoticGravity.LiTorrGeometryAcquisitionBidiExact as Geometr
 import DASHI.Physics.ExoticGravity.SuperconductingSourceVsConstitutiveEnhancementBidiExact as Enhancement
 import DASHI.Physics.ExoticGravity.AntigravityOptimizedAcquisitionPlanExact as Plan
 
-------------------------------------------------------------------------
--- JOINT FRONTIER VIEW
---
--- This is not a new planner.  It packages the exact states already owned by
--- five existing BIDI routers so proof search can see their shared live cut.
-------------------------------------------------------------------------
-
 record JointFrontier : Set where
   constructor joint-frontier
   field
@@ -35,10 +28,6 @@ currentJointFrontier = joint-frontier
   GRComparator.currentGRComparatorFrontier
   Geometry.currentHistoricalGeometryState
   Enhancement.currentEnhancementFrontier
-
-------------------------------------------------------------------------
--- Exact current first-open vector.
-------------------------------------------------------------------------
 
 currentEvidenceFirstOpen :
   Evidence.firstOpenEvidenceLeaf (evidenceState currentJointFrontier)
@@ -65,10 +54,6 @@ currentEnhancementFirstOpen :
     ≡ Enhancement.sourceCurrentLeaf
 currentEnhancementFirstOpen = refl
 
-------------------------------------------------------------------------
--- Bundle stages are the already-defined optimized payment targets.
-------------------------------------------------------------------------
-
 data JointBundleStage : Set where
   sourceGeometryBundle : JointBundleStage
   phaseProbeBundle : JointBundleStage
@@ -82,11 +67,6 @@ currentRecommendedBundle = sourceGeometryBundle
 currentRecommendationIsSourceGeometry :
   currentRecommendedBundle ≡ sourceGeometryBundle
 currentRecommendationIsSourceGeometry = refl
-
-------------------------------------------------------------------------
--- Hypothetical post-payment joint frontiers.  These reuse Plan's states exactly;
--- they are not claims that the empirical receipts already exist.
-------------------------------------------------------------------------
 
 postSourceJointFrontier : JointFrontier
 postSourceJointFrontier = joint-frontier
@@ -119,10 +99,6 @@ postScalingJointFrontier = joint-frontier
   Plan.postOrdinaryComparatorState
   Plan.postSourceGeometryState
   Plan.postScalingEnhancementState
-
-------------------------------------------------------------------------
--- Exact stage recomputation.
-------------------------------------------------------------------------
 
 postSourceNextEvidence :
   Evidence.firstOpenEvidenceLeaf (evidenceState postSourceJointFrontier)
@@ -209,11 +185,6 @@ postScalingEnhancementClosed :
     ≡ Enhancement.closedEnhancementSplit
 postScalingEnhancementClosed = refl
 
-------------------------------------------------------------------------
--- Boundary: joint visibility changes scheduling only; it does not merge owners
--- or turn hypothetical post-payment states into current empirical facts.
-------------------------------------------------------------------------
-
 record JointFrontierBoundary : Set where
   constructor joint-frontier-boundary
   field
@@ -227,5 +198,4 @@ record JointFrontierBoundary : Set where
 
 canonicalJointFrontierBoundary : JointFrontierBoundary
 canonicalJointFrontierBoundary =
-  joint-frontier-boundary
-    false true true false false false true
+  joint-frontier-boundary false true true false false false true

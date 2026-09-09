@@ -10,16 +10,6 @@ import DASHI.Physics.ExoticGravity.AntigravityJointProofSearchFrontierExact as J
 import DASHI.Physics.ExoticGravity.AntigravityConstraintPruningVsBundlePaymentExact as Pruning
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
-------------------------------------------------------------------------
--- FIRST IRREDUCIBLE SOURCE RESIDUAL
---
--- The joint proof frontier selects the source/geometry bundle.  Inside that
--- bundle two different coordinates remain open:
---   * literal apparatus shape/geometry;
---   * physical source distribution / mass-current structure.
--- Owning one does not definitionally own the other.
-------------------------------------------------------------------------
-
 currentJointBundleIsSourceGeometry :
   Joint.currentRecommendedBundle ≡ Joint.sourceGeometryBundle
 currentJointBundleIsSourceGeometry = refl
@@ -59,10 +49,6 @@ noCurrentCanonicalSourceAcquisitionTarget :
   CurrentSourceAcquisitionAuthority → SourceAcquisitionTarget
 noCurrentCanonicalSourceAcquisitionTarget ()
 
-------------------------------------------------------------------------
--- Reverse search routing.
-------------------------------------------------------------------------
-
 data SourceResidual : Set where
   missingLiteralSourceShape : SourceResidual
   missingPhysicalSourceDistribution : SourceResidual
@@ -79,10 +65,6 @@ producerForSourceResidual missingStressEnergyReconstruction = Search.empiricalEv
 producerForSourceResidual missingProbeGeometry = Search.empiricalEvidenceProducer
 producerForSourceResidual missingSameApparatusIdentity = Search.identityProducer
 
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
-
 record FirstIrreducibleSourceBoundary : Set where
   constructor first-irreducible-source-boundary
   field
@@ -96,5 +78,4 @@ record FirstIrreducibleSourceBoundary : Set where
 
 canonicalFirstIrreducibleSourceBoundary : FirstIrreducibleSourceBoundary
 canonicalFirstIrreducibleSourceBoundary =
-  first-irreducible-source-boundary
-    false false false false true true false
+  first-irreducible-source-boundary false false false false true true false
