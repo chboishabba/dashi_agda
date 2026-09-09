@@ -11,6 +11,7 @@ FILES=(
   DASHI/Analysis/RiemannG2FinalCarrierFiniteSumCertificateExact.agda
   DASHI/Analysis/RiemannG2DirectClusterResponseContradictionExact.agda
   DASHI/Analysis/RiemannG2CertifiedNearUpperClusterResponseCompilerExact.agda
+  DASHI/Analysis/RiemannG2CertifiedClusterLowerEnvelopeCompilerExact.agda
   DASHI/Analysis/RiemannG2FinalPoleNearObserverRefinementExact.agda
   DASHI/Analysis/RiemannG2LiteralPhaseDirectClusterResponseExact.agda
   DASHI/Analysis/RiemannG2MinimalStrictResponseConsumerExact.agda
@@ -25,6 +26,7 @@ FILES=(
   DASHI/Analysis/RiemannG2ClayTerminalGenericHighCoordinateExact.agda
   DASHI/Analysis/RiemannG2CurrentDirectOneLeafFrontierExact.agda
   DASHI/Analysis/RiemannG2CurrentGenericHighFrontierRefinementExact.agda
+  DASHI/Analysis/RiemannG2GenericHighCertifiedFollowupReadmeExact.agda
   DASHI/Analysis/RiemannG2FinalCutIntrospectionExact.agda
   DASHI/Analysis/Everything.agda
 )
