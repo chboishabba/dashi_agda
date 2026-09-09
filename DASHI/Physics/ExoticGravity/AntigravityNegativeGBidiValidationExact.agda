@@ -6,9 +6,15 @@ open import Agda.Builtin.Bool using (true; false)
 import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact as SignedG
 import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact as SignedSource
 import DASHI.Physics.GR.SignedGRNormalizationBidiExact as Normalization
+import DASHI.Physics.GR.SignedNewtonianLimitBidiExact as Newton
+import DASHI.Physics.GR.SignedGravitationalWaveCouplingBidiExact as SignedWave
+import DASHI.Physics.GR.NegativeGGravitationalWaveTestRoutingExact as WaveRoute
+import DASHI.Physics.GR.SignedCosmologicalMatterCouplingBidiExact as Cosmology
+import DASHI.Physics.GR.UniversalSignedGCrossScaleFingerprintBidiExact as Universal
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact as NegativeG
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGPairedComparatorExact as Paired
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGClaimComparisonWeldExact as ComparisonWeld
+import DASHI.Physics.ExoticGravity.AntigravityNegativeGCrossScaleProofSearchExact as CrossScaleSearch
 
 ------------------------------------------------------------------------
 -- SIGN ALGEBRA
@@ -115,6 +121,158 @@ sameRHSSignDoesNotMeanSamePhysicalTheory :
     SignedSource.canonicalSignedEinsteinSourceBoundary
     ≡ false
 sameRHSSignDoesNotMeanSamePhysicalTheory = refl
+
+------------------------------------------------------------------------
+-- NEWTONIAN / POISSON SIGN FIBRE
+------------------------------------------------------------------------
+
+negativeGPositiveDensityIsRepulsive :
+  Newton.positiveDensityRadialResponse SignedG.negativeCoupling
+    ≡ Newton.repulsiveAwayFromPositiveSource
+negativeGPositiveDensityIsRepulsive = refl
+
+poissonSignCannotIdentifyNegativeCoordinate :
+  Newton.poissonRHSSignDeterminesWhetherGOrDensityWasNegative
+    Newton.canonicalSignedNewtonianLimitBoundary
+    ≡ false
+poissonSignCannotIdentifyNegativeCoordinate = refl
+
+poissonNegativeGIsNotSolvedNegativeGLimit :
+  Newton.frozenPoissonSignProbeEqualsSolvedNegativeGNewtonianLimit
+    Newton.canonicalSignedNewtonianLimitBoundary
+    ≡ false
+poissonNegativeGIsNotSolvedNegativeGLimit = refl
+
+exactPoissonReceiptRequired :
+  Newton.exactExistingPoissonReceiptRequired
+    Newton.canonicalSignedNewtonianLimitBoundary
+    ≡ true
+exactPoissonReceiptRequired = refl
+
+------------------------------------------------------------------------
+-- GRAVITATIONAL-WAVE GENERATION / PROPAGATION SPLIT
+------------------------------------------------------------------------
+
+vacuumPropagationDoesNotIdentifyGSign :
+  SignedWave.vacuumPropagationObserverAloneDeterminesMatterCouplingSign
+    SignedWave.canonicalSignedGravitationalWaveBoundary
+    ≡ false
+vacuumPropagationDoesNotIdentifyGSign = refl
+
+waveSourceGenerationMayDependOnGSign :
+  SignedWave.sourceGenerationMayDependOnCouplingSign
+    SignedWave.canonicalSignedGravitationalWaveBoundary
+    ≡ true
+waveSourceGenerationMayDependOnGSign = refl
+
+exactWaveEquationAndStrainReceiptsRequired :
+  SignedWave.exactExistingWaveEquationAndStrainReceiptsRequired
+    SignedWave.canonicalSignedGravitationalWaveBoundary
+    ≡ true
+exactWaveEquationAndStrainReceiptsRequired = refl
+
+inspiralNegativeGNeedsReSolvedSourceDynamics :
+  WaveRoute.negativeGRoleFor WaveRoute.WaveTest.inspiralPhaseConsistency
+    ≡ WaveRoute.requiresReSolvedSourceDynamics
+inspiralNegativeGNeedsReSolvedSourceDynamics = refl
+
+dispersionAloneDoesNotIdentifyGSign :
+  WaveRoute.negativeGRoleFor WaveRoute.WaveTest.dispersionPropagation
+    ≡ WaveRoute.propagationAloneDoesNotIdentifyGSign
+dispersionAloneDoesNotIdentifyGSign = refl
+
+currentGWAgreementDoesNotRuleOutEveryNegativeGConstruction :
+  WaveRoute.currentGWAgreementAutomaticallyRulesOutEveryNegativeGConstruction
+    WaveRoute.canonicalNegativeGWaveTestBoundary
+    ≡ false
+currentGWAgreementDoesNotRuleOutEveryNegativeGConstruction = refl
+
+------------------------------------------------------------------------
+-- COSMOLOGICAL MATTER-TERM SIGN FIBRE
+------------------------------------------------------------------------
+
+cosmologicalMatterTermCannotIdentifyNegativeCoordinate :
+  Cosmology.friedmannMatterTermSignAloneDeterminesWhetherGOrDensityWasNegative
+    Cosmology.canonicalSignedCosmologyBoundary
+    ≡ false
+cosmologicalMatterTermCannotIdentifyNegativeCoordinate = refl
+
+negativeGDoesNotAutomaticallyEqualLambda :
+  Cosmology.negativeGAutomaticallyEqualsPositiveCosmologicalConstant
+    Cosmology.canonicalSignedCosmologyBoundary
+    ≡ false
+negativeGDoesNotAutomaticallyEqualLambda = refl
+
+negativeGDoesNotAutomaticallyExplainAcceleration :
+  Cosmology.negativeGAutomaticallyExplainsAcceleratedExpansion
+    Cosmology.canonicalSignedCosmologyBoundary
+    ≡ false
+negativeGDoesNotAutomaticallyExplainAcceleration = refl
+
+negativeGCosmologyNeedsReSolvedDynamics :
+  Cosmology.selfConsistentNegativeGCosmologyRequiresReSolvedDynamics
+    Cosmology.canonicalSignedCosmologyBoundary
+    ≡ true
+negativeGCosmologyNeedsReSolvedDynamics = refl
+
+------------------------------------------------------------------------
+-- UNIVERSAL SIGNED-G CROSS-SCALE FINGERPRINT
+------------------------------------------------------------------------
+
+universalNegativeGFingerprintIsRepulsiveLocally :
+  Universal.localPositiveDensityResponse Universal.negativeGSignFingerprint
+    ≡ Newton.repulsiveAwayFromPositiveSource
+universalNegativeGFingerprintIsRepulsiveLocally = refl
+
+universalNegativeGFingerprintHasNegativeCosmologicalMatterTerm :
+  Universal.cosmologicalPositiveDensityMatterTerm Universal.negativeGSignFingerprint
+    ≡ Cosmology.negativeMatterContribution
+universalNegativeGFingerprintHasNegativeCosmologicalMatterTerm = refl
+
+localRepulsionDoesNotDetermineUniversalNegativeG :
+  Universal.localRepulsiveObservationAutomaticallyMeansUniversalNegativeG
+    Universal.canonicalUniversalSignedGCrossScaleBoundary
+    ≡ false
+localRepulsionDoesNotDetermineUniversalNegativeG = refl
+
+universalNegativeGRequiresSameSignAcrossScales :
+  Universal.universalNegativeGRequiresSameSignAcrossScales
+    Universal.canonicalUniversalSignedGCrossScaleBoundary
+    ≡ true
+universalNegativeGRequiresSameSignAcrossScales = refl
+
+vacuumGWPropagationDoesNotPayUniversalSignIdentity :
+  Universal.vacuumGWPropagationAlonePaysUniversalSignIdentity
+    Universal.canonicalUniversalSignedGCrossScaleBoundary
+    ≡ false
+vacuumGWPropagationDoesNotPayUniversalSignIdentity = refl
+
+------------------------------------------------------------------------
+-- UNIVERSAL NEGATIVE-G PROOF SEARCH
+------------------------------------------------------------------------
+
+universalNegativeGSearchStartsLocal :
+  CrossScaleSearch.firstUniversalNegativeGStage
+    ≡ CrossScaleSearch.localSignDiscriminatorStage
+universalNegativeGSearchStartsLocal = refl
+
+localRepulsiveAnomalyDoesNotPayUniversalNegativeG :
+  CrossScaleSearch.localRepulsiveAnomalyPaysUniversalNegativeG
+    CrossScaleSearch.canonicalNegativeGCrossScaleProofSearchBoundary
+    ≡ false
+localRepulsiveAnomalyDoesNotPayUniversalNegativeG = refl
+
+positiveDensityAttractionCanDiscriminateFrozenNegativeG :
+  CrossScaleSearch.positiveDensityAttractionCanDiscriminateFrozenNegativeGSign
+    CrossScaleSearch.canonicalNegativeGCrossScaleProofSearchBoundary
+    ≡ true
+positiveDensityAttractionCanDiscriminateFrozenNegativeG = refl
+
+rejectionOfUniversalNegativeGDoesNotRejectEveryLocalEffectiveModel :
+  CrossScaleSearch.rejectionOfUniversalNegativeGRejectsEveryLocalEffectiveRepulsionModel
+    CrossScaleSearch.canonicalNegativeGCrossScaleProofSearchBoundary
+    ≡ false
+rejectionOfUniversalNegativeGDoesNotRejectEveryLocalEffectiveModel = refl
 
 ------------------------------------------------------------------------
 -- ANTIGRAVITY CLAIM ROUTING
