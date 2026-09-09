@@ -7,6 +7,7 @@ import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact 
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact as NegativeG
 import DASHI.Physics.GR.GravitationalPredictionObservationBidiExact as Pred
 import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact as Attr
+import DASHI.Physics.GR.GravitationalEpistemicLineageExact as Lineage
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
@@ -16,7 +17,15 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 -- sign.  Prediction scope, observation channel, source model, propagation model
 -- and detector response must remain welded.  Otherwise a better fit cannot be
 -- attributed to the sign coordinate.
+--
+-- The -G branch constructed in this repo is a DASHI counterfactual theorem
+-- carrier, not an externally sourced claim that G is physically negative.
 ------------------------------------------------------------------------
+
+data IsInternalPredictionAuthority : Attr.PredictionAuthority → Set where
+  internal-prediction-authority :
+    (lineage : Lineage.InternalTheoremProofLineage) →
+    IsInternalPredictionAuthority (Attr.internalTheoremAuthority lineage)
 
 record SignedGPairedPrediction (claim : Anti.AntigravityClaim) : Set where
   constructor signed-g-paired-prediction
@@ -33,6 +42,9 @@ record SignedGPairedPrediction (claim : Anti.AntigravityClaim) : Set where
     negativeFamilyIsModifiedGravity :
       Pred.theoryFamily (Attr.prediction negativeGPrediction)
         ≡ Pred.modifiedGravityTheory
+
+    negativeAuthorityIsInternalProofLineage :
+      IsInternalPredictionAuthority (Attr.authority negativeGPrediction)
 
     sameClaimScope :
       Pred.predictionClaimScope (Attr.prediction positiveGPrediction)
@@ -67,6 +79,7 @@ open SignedGPairedPrediction public
 data SignedGComparatorResidual : Set where
   missingPositiveGAttributedPrediction : SignedGComparatorResidual
   missingNegativeGAttributedPrediction : SignedGComparatorResidual
+  missingNegativeGInternalProofLineage : SignedGComparatorResidual
   missingClaimScopeIdentity : SignedGComparatorResidual
   missingChannelIdentity : SignedGComparatorResidual
   missingObservableIdentity : SignedGComparatorResidual
@@ -80,6 +93,7 @@ producerForSignedGComparatorResidual :
   SignedGComparatorResidual → Search.ProducerClass
 producerForSignedGComparatorResidual missingPositiveGAttributedPrediction = Search.propositionSourceProducer
 producerForSignedGComparatorResidual missingNegativeGAttributedPrediction = Search.propositionSourceProducer
+producerForSignedGComparatorResidual missingNegativeGInternalProofLineage = Search.attributionProducer
 producerForSignedGComparatorResidual missingClaimScopeIdentity = Search.identityProducer
 producerForSignedGComparatorResidual missingChannelIdentity = Search.identityProducer
 producerForSignedGComparatorResidual missingObservableIdentity = Search.identityProducer
@@ -96,10 +110,13 @@ record SignedGPairedComparatorBoundary : Set where
     positiveAndNegativePredictionsMayUseDifferentClaimScopes : Bool
     positiveAndNegativePredictionsMayUseDifferentDetectorModels : Bool
     negativeGAlternativeMustBeTypedNonGR : Bool
+    negativeGCounterfactualMayUseExternalSourceAuthority : Bool
+    negativeGCounterfactualRequiresInternalProofLineage : Bool
     sameInputPairIsolatesCouplingSignBetterThanUnpairedComparison : Bool
     betterNegativeGFitAutomaticallyEstablishesNegativeGPhysics : Bool
     betterNegativeGFitAutomaticallyProvesAntigravity : Bool
 
 canonicalSignedGPairedComparatorBoundary : SignedGPairedComparatorBoundary
 canonicalSignedGPairedComparatorBoundary =
-  signed-g-paired-comparator-boundary false false false true true false false
+  signed-g-paired-comparator-boundary
+    false false false true false true true false false
