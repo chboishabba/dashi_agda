@@ -10,6 +10,7 @@ import DASHI.Physics.GR.SignedGravitationalWaveCouplingBidiExact
 import DASHI.Physics.GR.NegativeGGravitationalWaveTestRoutingExact
 import DASHI.Physics.GR.SignedCosmologicalMatterCouplingBidiExact
 import DASHI.Physics.GR.UniversalSignedGCrossScaleFingerprintBidiExact
+import DASHI.Physics.GR.NegativeGPredictionAuthorityExact
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGPairedComparatorExact
