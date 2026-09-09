@@ -11,16 +11,15 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 ------------------------------------------------------------------------
 -- EMPIRICAL SOURCE PACKAGE -> FULL SOURCE/GEOMETRY BUNDLE
 --
--- This is the final adapter before the physical acquisition wall.  A source
--- target is only a request.  To compile into bundle one, the actual measurement
--- package must carry exact same-apparatus identity plus carrier-sensitive data
--- provenance and the per-consumer witnesses already required by Plan.
+-- Apparatus identity and run identity are distinct coordinates.  The apparatus
+-- persists across runs; a run identifies one execution on that apparatus.
 ------------------------------------------------------------------------
 
 record SourceMeasurementProvenance : Set where
   constructor source-measurement-provenance
   field
     responsibleBody : String
+    apparatusIdentityCarrier : String
     runIdentifier : String
     rawDataCarrier : String
     rawDataHash : String
@@ -42,6 +41,8 @@ record SourceAcquisitionReceipt : Set where
       Source.apparatusCarrier target ≡ apparatusCarrier
 
     provenance : SourceMeasurementProvenance
+    provenanceApparatusMatchesReceipt :
+      apparatusIdentityCarrier provenance ≡ apparatusCarrier
 
     shapeMeasurementCarrier : String
     shapeCarrierMatchesTarget :
@@ -68,7 +69,7 @@ record SourceAcquisitionReceipt : Set where
       calibrationRevision provenance ≡ Source.calibrationRevision target
 
     sameApparatusIdentityMatchesTarget :
-      runIdentifier provenance ≡ Source.sameApparatusIdentityCarrier target
+      apparatusIdentityCarrier provenance ≡ Source.sameApparatusIdentityCarrier target
 
     compiledBundle : Plan.FullSourceGeometryBundleReceipt
     compiledBundleCarrierMatches :
@@ -87,6 +88,7 @@ compileSourceAcquisition receipt = compiledBundle receipt
 
 data SourceAcquisitionCompilationResidual : Set where
   missingResponsibleBody : SourceAcquisitionCompilationResidual
+  missingApparatusIdentity : SourceAcquisitionCompilationResidual
   missingRunIdentity : SourceAcquisitionCompilationResidual
   missingRawDataCarrier : SourceAcquisitionCompilationResidual
   missingRawDataHash : SourceAcquisitionCompilationResidual
@@ -104,6 +106,7 @@ data SourceAcquisitionCompilationResidual : Set where
 producerForSourceCompilationResidual :
   SourceAcquisitionCompilationResidual → Search.ProducerClass
 producerForSourceCompilationResidual missingResponsibleBody = Search.attributionProducer
+producerForSourceCompilationResidual missingApparatusIdentity = Search.identityProducer
 producerForSourceCompilationResidual missingRunIdentity = Search.identityProducer
 producerForSourceCompilationResidual missingRawDataCarrier = Search.empiricalEvidenceProducer
 producerForSourceCompilationResidual missingRawDataHash = Search.identityProducer
@@ -132,6 +135,7 @@ record SourceAcquisitionCompilationBoundary : Set where
   constructor source-acquisition-compilation-boundary
   field
     targetDescriptionEqualsMeasurementReceipt : Bool
+    apparatusIdentityEqualsRunIdentifier : Bool
     calibrationCarrierEqualsCalibrationRevision : Bool
     localMeasurementNeedsRunHashRevisionProvenance : Bool
     sameApparatusIdentityRequired : Bool
@@ -144,4 +148,4 @@ canonicalSourceAcquisitionCompilationBoundary :
   SourceAcquisitionCompilationBoundary
 canonicalSourceAcquisitionCompilationBoundary =
   source-acquisition-compilation-boundary
-    false false true true true true false false
+    false false false true true true true false false
