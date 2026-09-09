@@ -1,11 +1,10 @@
 module DASHI.ComputerScience.ComputerScienceFibreFoundationValidationExact where
 
 ------------------------------------------------------------------------
--- SMALL VALIDATION ROOT FOR THE FIBRE-FIRST CS SPINE
+-- SMALL VALIDATION ROOT FOR THE CLASSICAL / REPRESENTATION CS SPINE
 --
--- This is intentionally an import-only validation surface, not a new semantic
--- owner.  It keeps the current CS fibre tranche checkable without pulling a
--- broad repository aggregate into the Agda elaboration cone.
+-- Quantum execution has a separate validation root so this module does not
+-- pull the substantially broader quantum import cone into ordinary CS checks.
 ------------------------------------------------------------------------
 
 import DASHI.ComputerScience.FibreMachineFoundation369Exact
@@ -33,5 +32,3 @@ import DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact
 import DASHI.ComputerScience.CountdownExecutionPathComplexityExact
 import DASHI.ComputerScience.EuclidGCDRegisterMachineExact
 import DASHI.ComputerScience.EuclidGCDBinaryTernaryRegisterFibreExact
-
-import DASHI.ComputerScience.QuantumExecutionFibreAdapterExact
