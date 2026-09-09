@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
 import Base369 as Base
+import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Reasoning.TernaryComparisonSynthesisExact as Ternary
 import DASHI.Culture.IntellectualReceptionIntersectionalTernaryDialectic369BridgeExact as Existing369
 import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
@@ -16,10 +17,27 @@ data AtomicFitDisposition : Set where
   unresolvedThisAtom : AtomicFitDisposition
   fitsThisAtom : AtomicFitDisposition
 
+atomicFitDispositionFromGate : BT.Trit → AtomicFitDisposition
+atomicFitDispositionFromGate BT.neg = failsThisAtom
+atomicFitDispositionFromGate BT.zero = unresolvedThisAtom
+atomicFitDispositionFromGate BT.pos = fitsThisAtom
+
 atomicDispositionTri : AtomicFitDisposition → Base.TriTruth
 atomicDispositionTri failsThisAtom = Base.tri-low
 atomicDispositionTri unresolvedThisAtom = Base.tri-mid
 atomicDispositionTri fitsThisAtom = Base.tri-high
+
+atomicGateTri : BT.Trit → Base.TriTruth
+atomicGateTri gate = atomicDispositionTri (atomicFitDispositionFromGate gate)
+
+atomicGateNegIsLow : atomicGateTri BT.neg ≡ Base.tri-low
+atomicGateNegIsLow = refl
+
+atomicGateZeroIsMid : atomicGateTri BT.zero ≡ Base.tri-mid
+atomicGateZeroIsMid = refl
+
+atomicGatePosIsHigh : atomicGateTri BT.pos ≡ Base.tri-high
+atomicGatePosIsHigh = refl
 
 record DirectedAtomicRuleAudit : Set where
   constructor directed-atomic-rule-audit
@@ -46,6 +64,17 @@ sourceComparisonSurvivesConsumerSynthesis :
   (audit : DirectedAtomicRuleAudit) →
   Ternary.comparisonOfSynthesis (sourceSynthesis27 audit) ≡ sourceComparison9 audit
 sourceComparisonSurvivesConsumerSynthesis audit = refl
+
+atomicTestsTo27 :
+  ∀ {p q r} →
+  Atomic.SourceConditionedAtomicLegalTest p →
+  Atomic.SourceConditionedAtomicLegalTest q →
+  Atomic.SourceConditionedAtomicLegalTest r →
+  Ternary.SynthesisChoice27
+atomicTestsTo27 p q r = Ternary.makeSynthesisChoice
+  (atomicGateTri (Atomic.gate p))
+  (atomicGateTri (Atomic.gate q))
+  (atomicGateTri (Atomic.gate r))
 
 positiveRequirementLostAudit : DirectedAtomicRuleAudit
 positiveRequirementLostAudit =
@@ -81,6 +110,8 @@ data TernaryLowMeansOppositeLegalProposition : Set where
 data SynthesisCoordinateCreatesLegalAuthority : Set where
 data AtomicAuditReplacesSourceConditionedTest : Set where
 
+data HandEntered369LabelReplacesAtomicGate : Set where
+
 sameAtomicDispositionDoesNotRestoreSourceHistory : SameAtomicDispositionRestoresSourceHistory → ⊥
 sameAtomicDispositionDoesNotRestoreSourceHistory ()
 ternaryHighDoesNotMeanLegalTruth : TernaryHighMeansLegalTruth → ⊥
@@ -91,6 +122,8 @@ synthesisDoesNotCreateAuthority : SynthesisCoordinateCreatesLegalAuthority → �
 synthesisDoesNotCreateAuthority ()
 auditDoesNotReplaceAtomicTest : AtomicAuditReplacesSourceConditionedTest → ⊥
 auditDoesNotReplaceAtomicTest ()
+handEntered369DoesNotReplaceAtomicGate : HandEntered369LabelReplacesAtomicGate → ⊥
+handEntered369DoesNotReplaceAtomicGate ()
 
 atomicNegativeBoundaryReused : Atomic.NegativeGateProvesOppositeProposition → ⊥
 atomicNegativeBoundaryReused = Atomic.negativeGateDoesNotProveOppositeProposition
@@ -98,6 +131,7 @@ atomicNegativeBoundaryReused = Atomic.negativeGateDoesNotProveOppositePropositio
 record Legal369CrossPollinationBoundary : Set where
   constructor legal-369-cross-pollination-boundary
   field
+    canonicalAtomicGateDrives369Audit : Bool
     threeWayAtomicFitDispositionRetained : Bool
     orderedPositiveNegativePairRetained : Bool
     consumerCoordinateDoesNotEraseSourcePair : Bool
@@ -108,4 +142,4 @@ record Legal369CrossPollinationBoundary : Set where
 
 canonicalLegal369CrossPollinationBoundary : Legal369CrossPollinationBoundary
 canonicalLegal369CrossPollinationBoundary =
-  legal-369-cross-pollination-boundary true true true true true false false
+  legal-369-cross-pollination-boundary true true true true true true false false
