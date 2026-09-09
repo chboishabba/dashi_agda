@@ -6,20 +6,9 @@ import DASHI.Physics.Textile.TextileMechanicalFibreExact as Mechanics
 import DASHI.Topology.TextileStitchHyperfabricExact as Stitch
 import DASHI.Topology.TextileStitchOperationalSemanticsExact as Operational
 
-------------------------------------------------------------------------
--- Physical realization of stitch topology.
---
--- Topology and mechanics remain separate coordinates.  A stitch state does
--- not manufacture material constants, loads, friction or failure data; those
--- are supplied by an explicit physical fibre over its loops and anchors.
-------------------------------------------------------------------------
-
 StitchMechanicalFibre : Set → Set₁
 StitchMechanicalFibre Scalar =
-  Mechanics.PhysicalTextileFibre
-    Scalar
-    Stitch.LoopId
-    Stitch.AnchorId
+  Mechanics.PhysicalTextileFibre Scalar Stitch.LoopId Stitch.AnchorId
 
 record PhysicalStitchState (Scalar : Set) : Set₁ where
   constructor physical-stitch-state
@@ -71,12 +60,6 @@ sameTopologyDoesNotEraseMechanicalResidual :
     (physical-stitch-state state second)
 sameTopologyDoesNotEraseMechanicalResidual state first second differ =
   same-topology-different-mechanical-fibre refl differ
-
-------------------------------------------------------------------------
--- No constitutive update law is guessed here.  The topology transition and
--- the before/after material states are both retained so a later sourced
--- mechanics law can relate them without changing the construction semantics.
-------------------------------------------------------------------------
 
 data TopologyAloneDeterminesMechanicalUpdate : Set where
 
