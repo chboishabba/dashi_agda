@@ -14,9 +14,11 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 -- MATERIAL-EFFECTIVE NEGATIVE-G DISCRIMINATOR CUTSET
 --
 -- A single signed field sample cannot identify whether the negative coordinate
--- came from source, additive residual, or constitutive response.  The minimum
+-- came from source, additive residual, or constitutive response.  A necessary
 -- experimental geometry therefore keeps source and material-regime variations
--- as independent axes.
+-- as independent axes.  This is not by itself a uniqueness theorem: finite
+-- additive and multiplicative model classes can still collide unless their
+-- scaling laws are constrained strongly enough.
 ------------------------------------------------------------------------
 
 data CandidateInterpretation : Set where
@@ -57,7 +59,7 @@ singlePointCannotIdentifyAdditiveVsConstitutive :
 singlePointCannotIdentifyAdditiveVsConstitutive ()
 
 ------------------------------------------------------------------------
--- Minimum two-axis cutset.
+-- Necessary two-axis acquisition surface.
 ------------------------------------------------------------------------
 
 data DiscriminatorAxis : Set where
@@ -82,13 +84,14 @@ record MaterialEffectiveNegativeGCutset : Set where
     coefficientSignMappingRequired : Bool
     independentReplicationRequired : Bool
     singleOperatingPointSufficient : Bool
+    twoAxisSweepAutomaticallyIdentifiesInterpretation : Bool
 
 open MaterialEffectiveNegativeGCutset public
 
 canonicalMaterialEffectiveNegativeGCutset : MaterialEffectiveNegativeGCutset
 canonicalMaterialEffectiveNegativeGCutset =
   material-effective-negative-g-cutset
-    true true true true true true true true true false
+    true true true true true true true true true false false
 
 producerForAxis : DiscriminatorAxis → Search.ProducerClass
 producerForAxis sourceAmplitudeAxis = Search.discriminatorProducer
@@ -133,6 +136,9 @@ record MaterialEffectiveNegativeGDiscriminationReceipt : Set₁ where
     IndependentReplicationReceipt : Set
     independentReplicationReceipt : IndependentReplicationReceipt
 
+    ModelClassSeparationReceipt : Set
+    modelClassSeparationReceipt : ModelClassSeparationReceipt
+
 open MaterialEffectiveNegativeGDiscriminationReceipt public
 
 ------------------------------------------------------------------------
@@ -147,9 +153,11 @@ record MaterialEffectiveNegativeGDiscriminatorBoundary : Set where
   field
     singleNegativeFieldSampleIdentifiesConstitutiveNegativeG : Bool
     sourceAndMaterialAxesMustBeVariedIndependently : Bool
+    twoAxisSweepAloneProvesUniqueInterpretation : Bool
     sourceIdentityCanBeInferredFromFieldSign : Bool
     additiveResidualAutomaticallyEqualsConstitutiveChange : Bool
     coefficientSignRequiresExplicitMapping : Bool
+    modelClassSeparationStillRequired : Bool
     independentReplicationRequiredBeforeInterpretation : Bool
     cutsetItselfProvesPhysicalNegativeG : Bool
     internalCutsetNeedsFreshExternalCitation : Bool
@@ -158,4 +166,4 @@ canonicalMaterialEffectiveNegativeGDiscriminatorBoundary :
   MaterialEffectiveNegativeGDiscriminatorBoundary
 canonicalMaterialEffectiveNegativeGDiscriminatorBoundary =
   material-effective-negative-g-discriminator-boundary
-    false true false false true true false false
+    false true false false false true true true false false
