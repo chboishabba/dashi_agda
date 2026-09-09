@@ -16,6 +16,9 @@ import DASHI.GameTheory.EvolutionaryInvasionStabilityExact as Invasion
 import DASHI.GameTheory.SymmetricEvolutionaryStableStrategyExact as ESS
 import DASHI.GameTheory.FiniteTwoStrategyReplicatorExact as Replicator
 import DASHI.GameTheory.RepeatedStrategicLearningMemoryBridgeExact as Repeated
+import DASHI.GameTheory.CooperativeCoalitionBargainingCoreExact as Cooperative
+import DASHI.GameTheory.MechanismDesignIncentiveCompatibilityExact as Mechanism
+import DASHI.GameTheory.StrategicExperimentalIdentificationFibreExact as Identification
 import DASHI.GameTheory.GameTheorySourceAtlasExact as Sources
 
 ------------------------------------------------------------------------
@@ -23,10 +26,10 @@ import DASHI.GameTheory.GameTheorySourceAtlasExact as Sources
 --
 -- Definitions/carriers are not existence theorems.  We now own bounded pure,
 -- finite mixed, finite common-prior Bayesian, sequential/extensive, invasion,
--- classic symmetric ESS-shape, finite replicator, agentic/evolutionary, memory,
--- FRACTRAN and Wolfram-residual bridges.  Existence, posterior hierarchies,
--- cooperative/mechanism theory and empirical identification remain separately
--- receipted.
+-- classic symmetric ESS-shape, finite replicator, cooperative/core/bargaining,
+-- mechanism-design, experimental-identification, agentic/evolutionary, memory,
+-- FRACTRAN and Wolfram-residual bridges.  Existence, characterization,
+-- posterior hierarchies and empirical application receipts remain separate.
 ------------------------------------------------------------------------
 
 data StandardGameTheoremFamily : Set where
@@ -78,10 +81,10 @@ data GameTheoryResidual : Set where
   perfectRecallBehaviouralEquivalence
   generalReplicatorODEAndStability
   empiricalEvolutionaryFixation
-  coalitionalCooperativeStability
-  bargainingAndAllocationSemantics
-  mechanismDesignIncentiveCompatibility
-  empiricalStrategicModelIdentification : GameTheoryResidual
+  cooperativeCoreExistenceOrNonemptiness
+  bargainingSolutionCharacterization
+  mechanismDesignNamedTruthfulnessTheorems
+  empiricalStrategicApplicationReceipt : GameTheoryResidual
 
 ------------------------------------------------------------------------
 -- Existing closed boundaries retained explicitly.
@@ -120,6 +123,15 @@ replicatorBoundary = Replicator.canonicalFiniteReplicatorBoundary
 repeatedLearningBoundary : Repeated.RepeatedStrategicLearningBoundary
 repeatedLearningBoundary = Repeated.canonicalRepeatedStrategicLearningBoundary
 
+cooperativeBoundary : Cooperative.CooperativeBargainingBoundary
+cooperativeBoundary = Cooperative.canonicalCooperativeBargainingBoundary
+
+mechanismBoundary : Mechanism.MechanismDesignBoundary
+mechanismBoundary = Mechanism.canonicalMechanismDesignBoundary
+
+identificationBoundary : Identification.StrategicExperimentalIdentificationBoundary
+identificationBoundary = Identification.canonicalStrategicExperimentalIdentificationBoundary
+
 sourceAtlasCount : Sources.canonicalGameTheorySourceCount ≡ 8
 sourceAtlasCount = Sources.canonicalGameTheorySourceCountIsEight
 
@@ -143,9 +155,15 @@ data ReplicatorStepMeansConvergencePermission : Set where
 
 data NashMeansCoalitionalStabilityPermission : Set where
 
-data RepeatedLearningMeansFolkTheoremPermission : Set where
+data CooperativeCarrierMeansCoreNonemptyPermission : Set where
 
-data UtilityMeansMechanismTruthfulnessPermission : Set where
+data BargainingCarrierMeansCharacterizationTheoremPermission : Set where
+
+data DSICCarrierMeansNamedMechanismTheoremPermission : Set where
+
+data IdentifiedQueryMeansAllStrategicCoordinatesPermission : Set where
+
+data RepeatedLearningMeansFolkTheoremPermission : Set where
 
 data FractranTraceMeansStrategicEquilibriumPermission : Set where
 
@@ -179,13 +197,25 @@ nashDoesNotBecomeCoalitionalStability :
   NashMeansCoalitionalStabilityPermission → ⊥
 nashDoesNotBecomeCoalitionalStability ()
 
+cooperativeCarrierDoesNotProveCoreNonempty :
+  CooperativeCarrierMeansCoreNonemptyPermission → ⊥
+cooperativeCarrierDoesNotProveCoreNonempty ()
+
+bargainingCarrierDoesNotProveCharacterization :
+  BargainingCarrierMeansCharacterizationTheoremPermission → ⊥
+bargainingCarrierDoesNotProveCharacterization ()
+
+DSICCarrierDoesNotProveNamedMechanismTheorem :
+  DSICCarrierMeansNamedMechanismTheoremPermission → ⊥
+DSICCarrierDoesNotProveNamedMechanismTheorem ()
+
+oneIdentifiedQueryDoesNotIdentifyEverything :
+  IdentifiedQueryMeansAllStrategicCoordinatesPermission → ⊥
+oneIdentifiedQueryDoesNotIdentifyEverything ()
+
 repeatedLearningDoesNotManufactureFolkTheorem :
   RepeatedLearningMeansFolkTheoremPermission → ⊥
 repeatedLearningDoesNotManufactureFolkTheorem ()
-
-utilityDoesNotManufactureTruthfulMechanism :
-  UtilityMeansMechanismTruthfulnessPermission → ⊥
-utilityDoesNotManufactureTruthfulMechanism ()
 
 fractranExecutionDoesNotCreateEquilibrium :
   FractranTraceMeansStrategicEquilibriumPermission → ⊥
@@ -216,6 +246,10 @@ record GameTheoryCompletionFrontier : Set where
     classicSymmetricESSCriterionClosed : Bool
     finiteReplicatorReweightingClosed : Bool
     repeatedLearningMemoryBridgeClosed : Bool
+    coalitionalCooperativeCarrierClosed : Bool
+    bargainingCarrierClosed : Bool
+    mechanismDesignDSICCarrierClosed : Bool
+    strategicExperimentalIdentificationClosed : Bool
 
     finiteMixedNashExistenceNeedsSourceTranscription : Bool
     finiteBayesianNashExistenceNeedsSourceTranscription : Bool
@@ -226,10 +260,10 @@ record GameTheoryCompletionFrontier : Set where
     perfectRecallBehaviouralEquivalenceClosed : Bool
     generalReplicatorODEClosed : Bool
     historicalFixationProved : Bool
-    coalitionalCooperativeClosed : Bool
-    bargainingAllocationClosed : Bool
-    mechanismDesignClosed : Bool
-    empiricalStrategicIdentificationClosed : Bool
+    cooperativeCoreNonemptyProved : Bool
+    bargainingCharacterizationProved : Bool
+    namedMechanismTruthfulnessTheoremProved : Bool
+    empiricalStrategicApplicationReceipted : Bool
 
 canonicalGameTheoryCompletionFrontier : GameTheoryCompletionFrontier
 canonicalGameTheoryCompletionFrontier =
@@ -242,5 +276,6 @@ canonicalGameTheoryCompletionFrontier =
     true true
     true true true
     true
+    true true true true
     true true
     false false false false false false false false false false
