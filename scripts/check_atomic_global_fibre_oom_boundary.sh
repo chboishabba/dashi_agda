@@ -9,9 +9,10 @@ ALG="DASHI/Physics/YangMills/BalabanOpaqueGlobalAlgebraExact.agda"
 VAR="DASHI/Physics/YangMills/BalabanPath4PhysicalVarianceDecompositionExact.agda"
 POINCARE="DASHI/Physics/YangMills/BalabanPath4PhysicalComponentPoincareExact.agda"
 PREP="DASHI/ComputerScience/AgdaProofDebtFibrePreparationExact.agda"
+ORDER="DASHI/Physics/YangMills/BalabanFiniteRationalOrderCoreExact.agda"
 REL="DASHI/Physics/YangMills/BalabanFiniteSumRelationFibreLiftExact.agda"
 
-for file in "$CORE" "$ALG" "$VAR" "$POINCARE" "$PREP" "$REL"; do
+for file in "$CORE" "$ALG" "$VAR" "$POINCARE" "$PREP" "$ORDER" "$REL"; do
   test -f "$file" || { echo "missing boundary file: $file" >&2; exit 2; }
 done
 
@@ -51,9 +52,16 @@ grep -q 'OpaqueAlgebra.sixTermSumZero' "$VAR"
 grep -q 'OpaqueAlgebra.dropScaledZero' "$VAR"
 grep -q 'OpaqueAlgebra.scaleFourSum' "$POINCARE"
 
-# The real inequality consumer is registered through the generic relation API.
+# Finite-sum order ownership must be acyclic:
+# scalar recursive theorem -> relation observer -> physical consumer.
+grep -q '^sumRationalMonotone :' "$ORDER"
+grep -q 'OrderCore.sumRationalMonotone' "$REL"
 grep -q 'FibreLift.FibreRelationLift _≤_ _≤_ (sumObserver values)' "$REL"
 grep -q 'FibreLift.atomicRelationFamilyToGlobal' "$REL"
+if grep -q 'BalabanPath4DirectionalEnergyContractionExact' "$REL"; then
+  echo "finite-sum relation lift depends upward on its physical consumer" >&2
+  exit 1
+fi
 
 # Proof-debt ownership is preserved: profiling may refine runLocalAgda but may
 # not reopen external or mathematical routes as local certification work.
@@ -68,8 +76,10 @@ grep -q 'relationPreservationReceiptStillRequired : Bool' "$PREP"
 # default because legacy syntax alone is not proof of an OOM defect.
 bash scripts/audit_agda_solver_fibre_boundaries.sh >/dev/null
 
-# Lightweight kernel surface only.  Deep consumers are profiled separately so
-# this guard does not itself recreate the OOM path.
+# Lightweight kernel surface only.  The finite-sum relation instantiation and
+# deep consumers are intentionally not pulled into this guard because their
+# current sum owner carries physical YM imports; they are checked/profiled on
+# their own targeted roots.
 scripts/run_agda29_parallel_check.sh \
   "$CORE" \
   "$ALG" \
