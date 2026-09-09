@@ -67,8 +67,9 @@ import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 -- Quadratic approximation / codec / prime-compression tranche.  This includes
 -- the exact Fibonacci defect involution on the existing 3/6/9/27 carriers,
 -- the rich defect-magnitude + signed-prime fibre lift, an explicit arithmetic
--- trajectory 2/1 -> 3/2 -> 5/3, and a proof-bearing construction of phi on the
--- existing Bishop real carrier.
+-- trajectory 2/1 -> 3/2 -> 5/3, a generic rich-step compiler over explicit
+-- authorities, and a proof-bearing construction of phi on the existing Bishop
+-- real carrier.
 import DASHI.Moonshine.QuadraticSignedApproximationEverything
 
 -- Same-object Klein-j construction shape g2^3/Delta plus source-described
@@ -78,6 +79,10 @@ import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact
 -- Put signed/gluing observers over homogeneous representation grades without
 -- collapsing grade dimension, trace, fibre state or Monster semantics.
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
+
+-- Canonical current roadmap state so downstream work does not rely on stale
+-- prose summaries.
+import DASHI.Moonshine.JInvariantBase369RoadmapFrontierExact
 
 -- Existing exact in-repo carriers consumed by the bridge.
 import DASHI.Foundations.Base369MobiusTransport
