@@ -6,6 +6,8 @@ AGDA_STDLIB="${AGDA_STDLIB:-/usr/share/agda/lib/stdlib}"
 
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/GeometricalOpticsRefractionLensPrismExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/CausticFreeformSourceAtlasExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/AsphericSagSurfaceNormalExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/CatastropheDiffractionNormalFormExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/AsphericCausticManipulationExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileMechanicalDimensionExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileMechanicalFibreExact.agda
