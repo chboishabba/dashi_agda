@@ -73,13 +73,26 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- producer family for the R535 measure bridge, while retaining explicit literal
 -- R406 same-object/normalization/cutoff obligations.
 --
--- R538 then BIDI-wires that optional cross-domain producer toward the strict
--- Clay terminal cut. A Poisson equality can contribute to leaf A only after a
--- concrete R406 instantiation, same-object weld, cutoff correspondence,
--- source-domain cutoff-uniform signed-cross budget, and target-domain uniform
--- bound preservation. Even a fully paid leaf A advances R504 only to the
--- independent phase-sensitive critical-production leaf B; it is not Clay
--- promotion.
+-- R538 (Poisson/Clay) BIDI-wires that optional cross-domain producer toward the
+-- strict Clay terminal cut. Even a fully paid leaf A advances R504 only to the
+-- independent phase-sensitive critical-production leaf B.
+--
+-- A separate finite-algebra tranche R538-R547 returns to leaf A directly:
+--   * R538 proves the literal pair scalar is swap symmetric;
+--   * R539 converts symmetric unordered pairs to ordered off-diagonal with the
+--     exact factor two;
+--   * R540 welds that ordered sum back to the literal R396/R385 remainder;
+--   * R541-R542 push the nonseparable spectator resolvent through the existing
+--     R294 swap-invariant cancellation before norms;
+--   * R543-R546 decompose full-square = diagonal + off-diagonal and factor each
+--     spectator row through commutator/amplitude folds;
+--   * R547 composes the exact fixed-output normal form
+--
+--       FactoredFull = Diagonal + 2 * LiteralWeightedRemainder.
+--
+-- R548 then isolates the next same-object question: whether that exact diagonal
+-- is an already-owned endpoint or time-derivative observable. Nearby generic
+-- endpoint/time-derivative owners do not auto-pay the literal R547 diagonal.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -138,3 +151,15 @@ import DASHI.Physics.Closure.NSTriadKNLiteralR406LatticeContinuumTransportConsum
 import DASHI.Physics.Closure.NSTriadKNCrossDomainMeasureBridgeOptionalForClayRound536Exact
 import DASHI.Physics.Closure.NSTriadKNPoissonKernelToLiteralR406MeasureBridgeRound537Exact
 import DASHI.Physics.Closure.NSTriadKNPoissonR406ToClayLeafABidiRound538Exact
+
+import DASHI.Physics.Closure.NSTriadKNDirectResolventPairSwapSymmetryRound538Exact
+import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralR396OrderedOffDiagonalRemainderRound540Exact
+import DASHI.Physics.Closure.NSTriadKNSpectatorResolventR294WeightRound541Exact
+import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleForcingCommutatorFoldRound542Exact
+import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact
+import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Exact
+import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545Exact
+import DASHI.Physics.Closure.NSTriadKNFullSquareAsSpectatorRowsRound546Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSemanticBoundaryRound548Exact
