@@ -8,6 +8,8 @@ import DASHI.Physics.GR.SignedGRNormalizationBidiExact
 import DASHI.Physics.GR.SignedNewtonianLimitBidiExact
 import DASHI.Physics.GR.SignedGravitationalWaveCouplingBidiExact
 import DASHI.Physics.GR.SignedGravitationalWaveDetectorResponseBidiExact
+import DASHI.Physics.GR.GravitationalWavePolarizationSourceAttributionExact
+import DASHI.Physics.GR.GravitationalWavePolarizationSignBidiExact
 import DASHI.Physics.GR.NegativeGGravitationalWaveTestRoutingExact
 import DASHI.Physics.GR.SignedCosmologicalMatterCouplingBidiExact
 import DASHI.Physics.GR.UniversalSignedGCrossScaleFingerprintBidiExact
@@ -15,6 +17,7 @@ import DASHI.Physics.GR.NegativeGPredictionAuthorityExact
 import DASHI.Physics.GR.SignedGSourceDynamicsBidiExact
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact
+import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingScopeBidiExact
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGPairedComparatorExact
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGClaimComparisonWeldExact
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCrossScaleProofSearchExact
