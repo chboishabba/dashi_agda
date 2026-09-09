@@ -11,16 +11,6 @@ import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact a
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
 import DASHI.Analysis.RiemannG2FinalNearIndexedLiteralModelCompilerExact as Literal
 
-------------------------------------------------------------------------
--- FINAL-CARRIER PROOF-CARRYING FINITE-SUM CERTIFICATE
---
--- The generic Core certificate does not intrinsically depend on a selected Weil
--- window.  Instantiate its additive carrier directly in the final NearFar scalar
--- and identify its exact finite fold with the literal final-near sum.  The
--- certificate's Within receipt then evaluates the actual final nearResponseAt(J)
--- by rewriting, with no selected-window or determinant-q bridge.
-------------------------------------------------------------------------
-
 record FinalCarrierFiniteSumCertificate
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
@@ -55,15 +45,11 @@ finalCarrier :
     {S = S} {transport = transport} offInput
     {finiteInput = finiteInput} kernel ->
   Cert.FiniteAdditiveCarrier
-finalCarrier input = record
-  { Cert.Scalar = _
+finalCarrier {S = S} input = record
+  { Cert.Scalar = NearFar.Scalar S
   ; Cert.zeroS = zeroS input
   ; Cert.addS = addS input
   }
-
-------------------------------------------------------------------------
--- Exact fold = final near response.
-------------------------------------------------------------------------
 
 certifiedFoldIsFinalNearResponse :
   forall {S transport offInput finiteInput kernel} ->
@@ -85,10 +71,6 @@ certifiedFoldIsFinalNearResponse {kernel = kernel} input =
 
   trans : forall {A : Set} {x y z : A} -> x ≡ y -> y ≡ z -> x ≡ z
   trans refl yz = yz
-
-------------------------------------------------------------------------
--- Transport the generic Within certificate to the actual final near scalar.
-------------------------------------------------------------------------
 
 record CertifiedFinalNearEvaluation
     {S : NearFar.OrderedAdditiveNearFarSurface}
@@ -116,7 +98,7 @@ compileCertifiedFinalNearEvaluation :
     {S = S} {transport = transport} offInput
     {finiteInput = finiteInput} kernel) ->
   CertifiedFinalNearEvaluation offInput kernel input
-compileCertifiedFinalNearEvaluation {kernel = kernel} input
+compileCertifiedFinalNearEvaluation input
   with certifiedFoldIsFinalNearResponse input
 ... | refl = record
   { finalNearWithinApproximant =
@@ -124,12 +106,6 @@ compileCertifiedFinalNearEvaluation {kernel = kernel} input
         (certificate input)
   ; evaluationReference = certificateReference input
   }
-
-------------------------------------------------------------------------
--- Ordered upper specialization: a certified upper on the exact fold becomes an
--- upper on final nearResponseAt(J) by the same equality.  This is useful for a
--- computational sufficient producer, but not itself the terminal strict margin.
-------------------------------------------------------------------------
 
 record FinalCarrierFiniteSumUpper
     {S : NearFar.OrderedAdditiveNearFarSurface}
@@ -168,29 +144,18 @@ record FinalCarrierFiniteSumCertificateBoundary : Set where
   field
     selectedWeilWindowRequired : Bool
     selectedWeilWindowRequiredIsFalse : selectedWeilWindowRequired ≡ false
-
     determinantDirectProducerRequired : Bool
-    determinantDirectProducerRequiredIsFalse :
-      determinantDirectProducerRequired ≡ false
-
+    determinantDirectProducerRequiredIsFalse : determinantDirectProducerRequired ≡ false
     exactFiniteFoldIdentityRequired : Bool
     exactFiniteFoldIdentityRequiredIsTrue : exactFiniteFoldIdentityRequired ≡ true
-
     genericWithinReceiptTransportsToFinalNear : Bool
-    genericWithinReceiptTransportsToFinalNearIsTrue :
-      genericWithinReceiptTransportsToFinalNear ≡ true
-
+    genericWithinReceiptTransportsToFinalNearIsTrue : genericWithinReceiptTransportsToFinalNear ≡ true
     orderedUpperCertificateTransportsToFinalNear : Bool
-    orderedUpperCertificateTransportsToFinalNearIsTrue :
-      orderedUpperCertificateTransportsToFinalNear ≡ true
-
+    orderedUpperCertificateTransportsToFinalNearIsTrue : orderedUpperCertificateTransportsToFinalNear ≡ true
     finiteEnumerationAloneProvesStrictClusterMargin : Bool
-    finiteEnumerationAloneProvesStrictClusterMarginIsFalse :
-      finiteEnumerationAloneProvesStrictClusterMargin ≡ false
-
+    finiteEnumerationAloneProvesStrictClusterMarginIsFalse : finiteEnumerationAloneProvesStrictClusterMargin ≡ false
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
-
     highestAlphaReading : String
 
 canonicalFinalCarrierFiniteSumCertificateBoundary :
