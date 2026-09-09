@@ -68,14 +68,15 @@ finiteBoundaryExchangeToAnalyticFricke :
   ≡ Modular.fricke system (fromStructured bridge state)
 finiteBoundaryExchangeToAnalyticFricke {system} bridge state =
   let point = fromStructured bridge state
+      chartRoundTrip = toAfterFrom bridge state
   in
   trans
     (cong (fromStructured bridge)
-      (sym (frickeIntertwines bridge point)))
+      (cong Finite.transportedFiniteFricke (sym chartRoundTrip)))
     (trans
-      (fromAfterTo bridge (Modular.fricke system point))
-      (cong (Modular.fricke system)
-        (sym (fromAfterTo bridge point))))
+      (cong (fromStructured bridge)
+        (sym (frickeIntertwines bridge point)))
+      (fromAfterTo bridge (Modular.fricke system point)))
 
 record AnalyticFrickeBoundaryExchangeReceipt
   {system : Modular.ModularJFrickeSystem}
