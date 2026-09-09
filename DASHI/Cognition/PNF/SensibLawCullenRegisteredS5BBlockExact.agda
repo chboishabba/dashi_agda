@@ -7,19 +7,11 @@ open import Data.Empty using (⊥)
 import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
+import DASHI.Cognition.PNF.SensibLawAtomicCaseOutcomeCoherenceExact as Coherence
 import DASHI.Cognition.PNF.SensibLawSourceConditionedAtomicLegalImplicationExact as Implication
 import DASHI.Cognition.PNF.SensibLawRegisteredAtomicLegalImplicationExact as Registered
 import DASHI.Cognition.PNF.SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact as CLA
 import DASHI.Cognition.PNF.SensibLawCullenAtomicCaseRegistryExact as CullenRegistry
-
-------------------------------------------------------------------------
--- CULLEN REGISTERED s 5B BLOCK
---
--- CLA.s5BThresholdRule is the source-realised DASHI conjunction of the three
--- source-defined s 5B(1) necessary atoms.  On the retained Cullen case fibre,
--- the third atom is canonically registered -1.  A registered implication cannot
--- manufacture a fresh +1 copy of that same atom, so the conjunction cannot run.
-------------------------------------------------------------------------
 
 reasonablePrecautionsMembership :
   CLA.reasonablePersonWouldTakePrecautions
@@ -29,13 +21,14 @@ reasonablePrecautionsMembership = Algebra.there (Algebra.there Algebra.here)
 anyRegisteredReasonablePrecautionsEntryIsNegative :
   (entry : CullenRegistry.CullenAtomicEntry CLA.reasonablePersonWouldTakePrecautions) →
   Atomic.gate
-    (DASHI.Cognition.PNF.SensibLawAtomicCaseOutcomeCoherenceExact.canonicalTestFor
-      CullenRegistry.cullenAtomicRegistry entry)
+    (Coherence.canonicalTestFor CullenRegistry.cullenAtomicRegistry entry)
   ≡ BT.neg
 anyRegisteredReasonablePrecautionsEntryIsNegative CullenRegistry.s5BReasonablePrecautionsEntry = refl
 
 cullenRegisteredS5BThresholdRuleImpossible :
-  ∀ {graph facts Enabled} →
+  ∀ {graph : Algebra.LegalGraph}
+    {facts : Algebra.FactSet}
+    {Enabled : Algebra.LegalRule → Set} →
   (input :
     Implication.SourceConditionedAtomicLegalImplication
       graph facts Enabled CLA.s5BThresholdRule) →
@@ -51,12 +44,6 @@ cullenRegisteredS5BThresholdRuleImpossible input registered =
     reasonablePrecautionsMembership
     (anyRegisteredReasonablePrecautionsEntryIsNegative
       (Registered.premiseEntry registered reasonablePrecautionsMembership))
-
-------------------------------------------------------------------------
--- The blocker is specifically the exact third s 5B atom.  It does not erase
--- the two positive coordinates, change WrongType, negate duty, or determine the
--- vicarious-liability family.
-------------------------------------------------------------------------
 
 data RegisteredS5BBlockerNegatesForeseeability : Set where
 data RegisteredS5BBlockerNegatesNotInsignificant : Set where
