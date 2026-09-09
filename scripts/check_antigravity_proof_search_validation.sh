@@ -10,6 +10,7 @@ files=(
   DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGCouplingBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
   DASHI/Physics/ExoticGravity/AntigravityNegativeGBidiValidationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityConstraintPruningVsBundlePaymentExact.agda
   DASHI/Physics/ExoticGravity/ConstraintPruningIdentityWeldExact.agda
@@ -50,6 +51,8 @@ grep -q 'negativeGReversesEveryDisplayedLeadingCorrection' \
   DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
 grep -q 'frozenSignProbeEqualsSelfConsistentNegativeGTheory' \
   DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
+grep -q 'selfConsistentNegativeGRequiresStabilityAnalysis' \
+  DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda
 grep -q 'sourceSideSignCollision' \
   DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda
 grep -q 'negativeGAutomaticallyFlipsCosmologicalConstant' \
@@ -66,6 +69,10 @@ grep -q 'sameInputPairIsolatesCouplingSignBetterThanUnpairedComparison' \
   DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
 grep -q 'betterNegativeGFitAutomaticallyEstablishesNegativeGPhysics' \
   DASHI/Physics/ExoticGravity/AntigravityNegativeGPairedComparatorExact.agda
+grep -q 'positiveGIsOrdinaryComparisonPrediction' \
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
+grep -q 'negativeGIsAlternativeComparisonPrediction' \
+  DASHI/Physics/ExoticGravity/AntigravityNegativeGClaimComparisonWeldExact.agda
 
 # Introspective frontier / no-stitch invariants.
 grep -q 'currentRecommendedBundle = sourceGeometryBundle' \
