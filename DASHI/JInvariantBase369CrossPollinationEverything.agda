@@ -22,10 +22,12 @@ import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 
 -- Rendered acquisition is split into image->analytic and analytic->structured
--- stages.  Once the analytic coordinate supplies both a full structured field
--- and a seam-scale recognizer, the same-object compiler immediately emits the
--- local 27 observer, orbit index, orbit scale and modular-word index packet.
+-- stages.  The stricter interval-valued recognizer keeps pixel uncertainty as
+-- a fibre and recognises k only after exact orbit containment and uniqueness.
+-- Once analytic structured/scale producers exist, the same-object compiler
+-- emits local 27, k, D_k and the L^kT word packet immediately.
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
+import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 
 import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
@@ -34,8 +36,8 @@ import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
 
--- Includes exact Bishop phi/psi quadratic factorisation and the remaining
--- reciprocal-square / conjugate-factor analytic producer boundary.
+-- Includes exact norm-one, denominator-cleared reciprocal-square, Bishop
+-- phi/psi factorisation, and the remaining rational/Bishop/order producer debt.
 import DASHI.Moonshine.QuadraticSignedApproximationEverything
 
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact
