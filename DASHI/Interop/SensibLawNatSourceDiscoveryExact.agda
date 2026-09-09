@@ -129,8 +129,6 @@ record AlternateLocatorFetchAdmission
     sourceSupportPaidIsFalse : sourceSupportPaid ≡ false
 open AlternateLocatorFetchAdmission public
 
--- Admission back into transport is available only when the supplied identity
--- receipt actually carries the same-source disposition.
 admitAlternateLocator :
   {residual : Source.NatSourceSupportResidual} →
   {demand : SourceDiscoveryDemand residual} →
@@ -157,10 +155,6 @@ differentSourceMapsNegative = refl
 
 identityUnresolvedMapsZero : sourceIdentityTrit identityUnresolved ≡ Trit.zer
 identityUnresolvedMapsZero = refl
-
-------------------------------------------------------------------------
--- FIREWALLS
-------------------------------------------------------------------------
 
 data DiscoveryCandidatePaysSameSourceIdentity : Set where
 data SearchRankPaysSourceSupport : Set where
@@ -222,17 +216,4 @@ record NatSourceDiscoveryBoundary : Set where
 canonicalNatSourceDiscoveryBoundary : NatSourceDiscoveryBoundary
 canonicalNatSourceDiscoveryBoundary =
   nat-source-discovery-boundary
-    true
-    false
-    false
-    false
-    false
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    false
-    true
+    true false false false false true true true true false false false false true
