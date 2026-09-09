@@ -10,6 +10,11 @@ import DASHI.Law.SensibLawProductionLegalRuntimeABIExact as Runtime
 import DASHI.Law.SensibLawLegalResidualProducerSchedulerExact as Scheduler
 import DASHI.Law.SensibLawRuntimeWrongTypeElementFrontierExact as Frontier
 import DASHI.Law.SensibLawWrongTypeCausationElementExact as Element
+import DASHI.Law.SensibLawTemporalHealthEvidenceWrongTypeExact as TemporalHealth
+import DASHI.Law.SensibLawBackupNegativeEvidenceBoundaryExact as BackupEvidence
+import DASHI.Law.SensibLawRecordingManifestLineageExact as RecordingLineage
+import DASHI.Interop.ITIRSuiteNormalizedCompilerParityExact as ITIRParity
+import DASHI.Interop.ITIRRecordingManifestSensibLawAdapterExact as ITIRRecording
 import DASHI.Law.QueenslandWrongTypeCausationDeclarationExact as Queensland
 
 ------------------------------------------------------------------------
@@ -51,7 +56,6 @@ data CoordinateRequirement : Set where
   conditionallyRequiredCoordinate : CoordinateRequirement
   downstreamCoordinate : CoordinateRequirement
 
-
 coordinateRequirement : LegalRuntimeCoordinate → CoordinateRequirement
 coordinateRequirement runtimePNFCoordinate = requiredCoordinate
 coordinateRequirement legalResidualCoordinate = requiredCoordinate
@@ -66,10 +70,6 @@ coordinateRequirement consumerClosureCoordinate = downstreamCoordinate
 
 ------------------------------------------------------------------------
 -- Queensland causation golden vertical.
---
--- These are definitional pins into the source-specific declarations already
--- owned on this branch.  They make the first runtime consumer concrete without
--- manufacturing database ids or case facts in the formal layer.
 ------------------------------------------------------------------------
 
 ordinaryQueenslandDeclarationKind :
@@ -167,8 +167,7 @@ canonicalAgdaFirstLegalRuntimeContract =
     false refl
 
 ------------------------------------------------------------------------
--- Cross-owner pinning.  These values make accidental replacement of the
--- selected formal owners visible at the capstone import surface.
+-- Cross-owner pinning.
 ------------------------------------------------------------------------
 
 selectedRuntimeBoundary : Runtime.AgdaFirstRuntimeBoundary
@@ -180,6 +179,31 @@ selectedResidualSchedulerBoundary =
 
 selectedElementBoundary : Frontier.RuntimeWrongTypeElementBoundary
 selectedElementBoundary = Frontier.canonicalRuntimeWrongTypeElementBoundary
+
+selectedTemporalHealthEvidenceBoundary :
+  TemporalHealth.TemporalHealthEvidenceBoundary
+selectedTemporalHealthEvidenceBoundary =
+  TemporalHealth.canonicalTemporalHealthEvidenceBoundary
+
+selectedBackupNegativeEvidenceBoundary :
+  BackupEvidence.BackupNegativeEvidenceBoundary
+selectedBackupNegativeEvidenceBoundary =
+  BackupEvidence.canonicalBackupNegativeEvidenceBoundary
+
+selectedRecordingManifestLineageBoundary :
+  RecordingLineage.RecordingManifestLineageBoundary
+selectedRecordingManifestLineageBoundary =
+  RecordingLineage.canonicalRecordingManifestLineageBoundary
+
+selectedITIRNormalizedCompilerParityBoundary :
+  ITIRParity.ITIRSuiteNormalizedParityBoundary
+selectedITIRNormalizedCompilerParityBoundary =
+  ITIRParity.canonicalITIRSuiteNormalizedParityBoundary
+
+selectedITIRRecordingSensibLawParityBoundary :
+  ITIRRecording.ITIRRecordingSensibLawParityBoundary
+selectedITIRRecordingSensibLawParityBoundary =
+  ITIRRecording.canonicalITIRRecordingSensibLawParityBoundary
 
 ------------------------------------------------------------------------
 -- Firewalls.
