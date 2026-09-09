@@ -12,11 +12,13 @@ PREP="DASHI/ComputerScience/AgdaProofDebtFibrePreparationExact.agda"
 ORDER="DASHI/Physics/YangMills/BalabanFiniteRationalOrderCoreExact.agda"
 REL="DASHI/Physics/YangMills/BalabanFiniteSumRelationFibreLiftExact.agda"
 PATH13LIFT="DASHI/Physics/YangMills/BalabanPath13ZeroMeanFibrePoincareLiftExact.agda"
+PATH13GLOBAL="DASHI/Physics/YangMills/BalabanPath13FourAxisPhysicalPoincareExact.agda"
+PATH13DIRECTION="DASHI/Physics/YangMills/BalabanPath13DirectionalEnergyContractionExact.agda"
 BOND="DASHI/Physics/YangMills/BalabanPath4BondHodgeCoercivityExact.agda"
 THREE="DASHI/Physics/YangMills/BalabanP33ThreeComponentCoercivityExact.agda"
 GREEN="DASHI/Physics/YangMills/BalabanPath4SU2ConfiguredGreenNormExact.agda"
 
-for file in "$CORE" "$ALG" "$VAR" "$POINCARE" "$PREP" "$ORDER" "$REL" "$PATH13LIFT" "$BOND" "$THREE" "$GREEN"; do
+for file in "$CORE" "$ALG" "$VAR" "$POINCARE" "$PREP" "$ORDER" "$REL" "$PATH13LIFT" "$PATH13GLOBAL" "$PATH13DIRECTION" "$BOND" "$THREE" "$GREEN"; do
   test -f "$file" || { echo "missing boundary file: $file" >&2; exit 2; }
 done
 
@@ -67,9 +69,7 @@ if grep -q 'BalabanPath4DirectionalEnergyContractionExact' "$REL"; then
   exit 1
 fi
 
-# Path13 aggregation is now a true consumer of the generic <= fibre observer.
-# The owner may mention the atomic theorem and SumLift, but must not recurse over
-# the transverse list or import the four-axis global Poincare theorem itself.
+# Path13 aggregation is a true consumer of the generic <= fibre observer.
 grep -q '^sumZeroMeanFibrePoincareViaFibre :' "$PATH13LIFT"
 grep -q 'SumLift.sumRationalMonotoneViaFibre' "$PATH13LIFT"
 grep -q 'Fibre13.zeroMeanPhysicalFibrePoincare13' "$PATH13LIFT"
@@ -79,6 +79,30 @@ if grep -q 'BalabanPath13FourAxisPhysicalPoincareExact' "$PATH13LIFT"; then
 fi
 if grep -Eq '^sumZeroMeanFibrePoincareViaFibre.*\(.*∷.*\)|sumZeroMeanFibrePoincareViaFibre.*=.*sumZeroMeanFibrePoincareViaFibre' "$PATH13LIFT"; then
   echo "Path13 fibre aggregation regressed to local recursive replay" >&2
+  exit 1
+fi
+
+# The global Path13 consumer must use the stronger all-transverse zero-mean
+# premise directly.  Do not reconstruct the old membership-indexed recursion.
+grep -q 'FibreLift13.sumZeroMeanFibrePoincareViaFibre' "$PATH13GLOBAL"
+if grep -q '^sumZeroMeanFibrePoincare :' "$PATH13GLOBAL"; then
+  echo "global Path13 consumer reintroduced a local aggregate theorem" >&2
+  exit 1
+fi
+grep -q 'OpaqueAlgebra.scaleFourSum' "$PATH13GLOBAL"
+if grep -A45 '^martingalePoincareBeforeEnergyContraction :' "$PATH13GLOBAL" | grep -q 'ℚRing\.solve\|solve-∀'; then
+  echo "Path13 post-variance consumer reopened RingSolver" >&2
+  exit 1
+fi
+# One local solver family remains legitimate: the pointwise centering identity.
+grep -A18 '^axisCenteringEdgeDifferenceExact :' "$PATH13GLOBAL" | grep -q 'ℚRing.solve-∀'
+
+# Directional Path13 contraction must lift the predecessor-indexed <= family
+# through the canonical observer rather than recurse over the predecessor list.
+grep -q 'BalabanFiniteSumRelationFibreLiftExact as SumLift' "$PATH13DIRECTION"
+grep -q '^sumRationalMonotone = SumLift.sumRationalMonotoneViaFibre' "$PATH13DIRECTION"
+if grep -Eq '^sumRationalMonotone \[\]|^sumRationalMonotone \(.*∷.*\)' "$PATH13DIRECTION"; then
+  echo "Path13 directional contraction regressed to local sum recursion" >&2
   exit 1
 fi
 
