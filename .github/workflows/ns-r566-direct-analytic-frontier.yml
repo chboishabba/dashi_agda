@@ -1,0 +1,43 @@
+name: NS R406 direct analytic frontier R565-R569
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNSelfFluxTemporalReconciliationRound565Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFactoredFullAnalyticFrontierRound566Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralFactoredFullSpacetimeBudgetRound567Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiveGlobalSelfFluxEndpointWeldRound568Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralR406DirectAnalyticFrontierEverythingRound569Exact.agda'
+      - '.github/workflows/ns-r566-direct-analytic-frontier.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  direct-analytic-frontier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check temporal reconciliation R565
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNSelfFluxTemporalReconciliationRound565Exact.agda
+
+      - name: Type-check direct analytic frontier R566
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNFactoredFullAnalyticFrontierRound566Exact.agda
+
+      - name: Type-check exact factored-full budget R567
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralFactoredFullSpacetimeBudgetRound567Exact.agda
+
+      - name: Type-check global self-flux endpoint weld R568
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiveGlobalSelfFluxEndpointWeldRound568Exact.agda
+
+      - name: Type-check focused analytic frontier aggregate R569
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DirectAnalyticFrontierEverythingRound569Exact.agda
