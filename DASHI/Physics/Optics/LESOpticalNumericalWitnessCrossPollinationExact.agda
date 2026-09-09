@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Environment.CertifiedValidationGovernanceExact as LESGovernance
+import DASHI.Physics.Optics.AsphericCausticManipulationExact as CausticDesign
 import DASHI.Physics.Optics.InverseCausticNumericalProducerExact as Numerical
 
 ------------------------------------------------------------------------
@@ -32,8 +33,8 @@ open LESStyleNumericalWitnessContract public
 record GovernedOpticalNumericalWitness
     {SourceModel TargetPattern SourceRay SurfacePoint TargetPoint Normal Flux Scalar : Set}
     {problem : Numerical.InverseCausticProblem SourceModel TargetPattern}
-    {surface : DASHI.Physics.Optics.AsphericCausticManipulationExact.OpticalSurfaceGeometry SurfacePoint Normal}
-    {rayMap : DASHI.Physics.Optics.AsphericCausticManipulationExact.CausticRayMap SourceRay SurfacePoint TargetPoint Flux}
+    {surface : CausticDesign.OpticalSurfaceGeometry SurfacePoint Normal}
+    {rayMap : CausticDesign.CausticRayMap SourceRay SurfacePoint TargetPoint Flux}
     {algebra : Numerical.ResidualAlgebra Scalar}
     {candidate : Numerical.NumericalInverseCausticCandidate {Scalar = Scalar} problem surface rayMap}
     {thresholds : Numerical.NumericalAdmissionThresholds algebra}
