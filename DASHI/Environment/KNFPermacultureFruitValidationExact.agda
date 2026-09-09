@@ -10,3 +10,4 @@ import DASHI.Environment.KNFSituatedSiteResponseFibreExact
 import DASHI.Environment.KNFSourceAttributionLineageExact
 import DASHI.Environment.SustainableAgricultureManagementSourceRegistryExact
 import DASHI.Environment.SustainableAgricultureManagementExact
+import DASHI.Environment.PluralSustainableLandManagementTraditionsExact
