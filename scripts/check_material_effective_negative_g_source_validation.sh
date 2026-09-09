@@ -5,6 +5,8 @@ cd "$root"
 
 files=(
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGModelProvenanceBidiExact.agda
   DASHI/Physics/ExoticGravity/SuperconductingChargeMassCurrentBidiExact.agda
@@ -44,11 +46,15 @@ grep -q 'sameScalingSweepCarrier' DASHI/Physics/ExoticGravity/MaterialEffectiveN
 grep -q 'compileConstitutiveNegativeGReceipt' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
 grep -q 'identityWeldMayCompileExistingNegativeGWeld' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
 grep -q 'closedScalingStateAutomaticallyProvesNegativeEffectiveG' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
+grep -q 'currentScientificWallStartsAtMassCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
+grep -q 'eachMissingReceiptNeedsCollisionJustification' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
+grep -q 'empiricalPaymentsStillNeedCarrierSensitiveProvenance' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
 grep -q 'authorityClosurePaysSourceCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda \
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda
 
-echo "Material-effective negative-G source/provenance/GR/background/constitutive/replication validation checks passed"
+echo "Material-effective negative-G source/provenance/GR/background/constitutive/replication/scientific-wall BIDI validation checks passed"
