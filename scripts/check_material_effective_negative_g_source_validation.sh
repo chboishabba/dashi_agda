@@ -11,6 +11,7 @@ files=(
   DASHI/Physics/ExoticGravity/SuperconductingChargeMassCurrentBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyScopeBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyCompilationExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1991CombinedFieldSourceEntitlementExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1992CoupledPotentialSourceEntitlementExact.agda
 )
@@ -29,6 +30,10 @@ grep -q 'sameTensorNameMeansSameConsumer' \
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyScopeBidiExact.agda
 grep -q 'massCurrentAloneConstructsStressEnergy' \
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyCompilationExact.agda
+grep -q 'evaluationRequestEqualsCompletedPrediction' \
+  DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
+grep -q 'numericalEvaluationStillRequired' \
+  DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
 grep -q 'authorityClosurePaysSourceCurrent' \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
 grep -q 'liTorrHistoricalClaimEqualsDASHIEffectiveGInterpretation' \
