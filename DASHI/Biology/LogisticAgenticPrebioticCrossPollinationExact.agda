@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import DASHI.Algebra.Trit using (Trit)
 
 import DASHI.Biology.LogisticPopulationDirectionalEvidenceExact as Logistic
 import DASHI.Biology.NaturalSystemsHyperfabricExact as Natural
@@ -37,7 +38,7 @@ record ReplicationEnvironmentState : Set where
 
 open ReplicationEnvironmentState public
 
-populationDirection : ReplicationEnvironmentState → DASHI.Algebra.Trit.Trit
+populationDirection : ReplicationEnvironmentState → Trit
 populationDirection state = Logistic.growthDirection (population state)
 
 ------------------------------------------------------------------------
