@@ -32,11 +32,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanHeatDoobFromSameDensityExpectationRound108Exact as Heat
 import DASHI.Physics.YangMills.BalabanHeatDoobMarkedTemporalMajorizationRound257Exact as Temporal
-import DASHI.Physics.YangMills.BalabanCMP116FirstGradientCovarianceInstantiationRound102Exact as FirstCov
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianGeneratorRowExact as Spatial
 import DASHI.Physics.YangMills.BalabanStochasticFiniteSpeedSpatialClusteringExact as Stochastic
 import DASHI.Physics.YangMills.BalabanStochasticSpatialEnvelopeToConnectedClusteringRound258Exact as Cluster
-import DASHI.Physics.YangMills.BalabanCMP116PhysicalCompositeHessianMarkedShellRound103Exact as HessianShell
 
 
 data PreferredRowCLeaf259 : Set where
@@ -61,25 +59,28 @@ preferredRowCLeafState259 literalSameMeasureTemporalRelaxationAtBalancedTime = o
 preferredRowCLeafState259 literalSameGeneratorFiniteSpeedAtBalancedTime = open
 preferredRowCLeafState259 literalGeometricSpatialEnvelope = open
 
--- The key compiler/source levels are referenced from their canonical owners so
--- this frontier cannot drift into a second authority.
+-- Exact source-level owners.  The two stochastic balanced-time inequalities are
+-- distinct fields of the Round70 data record; its canonical proof-level surface
+-- currently reports them jointly, so this scheduler does not invent separate
+-- authority labels for them.
 sameDensityHeatExpectationLevel : ProofLevel
-sameDensityHeatExpectationLevel = Heat.sameDensityHeatExpectationPhysicalLevel
+sameDensityHeatExpectationLevel =
+  Heat.literalCompactGroupHeatTiltExpectationRound108Level
 
-pointwiseHessianMarkedShellLevel : ProofLevel
-pointwiseHessianMarkedShellLevel =
-  HessianShell.literalCMP116PhysicalCompositeHessianShellIdentificationLevel
+pointwiseRealHessianMarkedShellLevel : ProofLevel
+pointwiseRealHessianMarkedShellLevel =
+  Temporal.literalCMP116RealHessianMarkedShellMajorizationLevel
 
-exactCovarianceMarkedFirstGradientLevel : ProofLevel
-exactCovarianceMarkedFirstGradientLevel =
-  FirstCov.literalCMP116FirstGradientHeatDoobIdentificationLevel
+exactCovarianceMarkedFirstGradientMajorizationLevel : ProofLevel
+exactCovarianceMarkedFirstGradientMajorizationLevel =
+  Temporal.literalHeatDoobCovarianceMarkedFirstGradientMajorizationLevel
 
 weightedGeneratorMarkedHessianRowLevel : ProofLevel
 weightedGeneratorMarkedHessianRowLevel =
   Spatial.literalHeatDoobGeneratorIsCMP116HessianRowLevel
 
-stochasticTemporalFiniteSpeedLevel : ProofLevel
-stochasticTemporalFiniteSpeedLevel =
+stochasticTemporalAndFiniteSpeedLevel : ProofLevel
+stochasticTemporalAndFiniteSpeedLevel =
   Stochastic.physicalYMStochasticFiniteSpeedClusteringLevel
 
 geometricSpatialEnvelopeLevel : ProofLevel
@@ -95,8 +96,6 @@ spatialAllDysonPowersCompilerLevel = Spatial.sameObjectGeneratorRowToAllDysonPow
 connectedClusteringCompilerLevel : ProofLevel
 connectedClusteringCompilerLevel = Cluster.stochasticEnvelopeToRound108ClusteringCompilerLevel
 
--- Historical broad objects remain available for compatibility, but are no
--- longer the preferred acquisition units.
 round259RowCPhysicalClosure : Bool
 round259RowCPhysicalClosure = false
 
