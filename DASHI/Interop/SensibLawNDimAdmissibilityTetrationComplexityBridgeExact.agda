@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact as Admissibility
 import DASHI.Biology.SelfIndexedParetoHyperfabricTetrationExact as Tetration
+import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Core.NDimParetoHyperfabricExact as NDim
 import DASHI.Foundations.SSPTritCarrier as SSP
@@ -21,7 +22,7 @@ import DASHI.Moonshine.Monster369NDimParetoTetrationBridgeExact as Monster369
 -- That alone is ordinary exponential profile growth, not tetration.
 --
 -- Genuine tetrational growth begins only when the level-n carrier itself
--- indexes the independently declared axes of level n+1.  The repository's
+-- indexes the independently declared axes of level n+1. The repository's
 -- SelfIndexedPareto owner already owns exactly that recurrence:
 --
 --   A_0 = 1
@@ -49,8 +50,7 @@ admissibilityAxisCountOne = Tetration.paretoAxisCountOne
 admissibilityAxisCountRecurrence :
   (n : Nat) →
   admissibilityAxisCount (suc n) ≡
-  DASHI.Biology.TernaryHypercubeHyperfabricExact.powNat 9
-    (admissibilityAxisCount n)
+  Hyper.powNat 9 (admissibilityAxisCount n)
 admissibilityAxisCountRecurrence = Tetration.paretoAxisCountRecurrence
 
 levelOneAdmissibilityProfileCountMatchesBase369 :
@@ -60,9 +60,6 @@ levelOneAdmissibilityProfileCountMatchesBase369 =
 
 ------------------------------------------------------------------------
 -- BRAID / TIME VIEW
---
--- A proof-search/acquisition history is a stage-indexed trajectory through the
--- same axis family. No state is erased merely because a later stage admits it.
 ------------------------------------------------------------------------
 
 record SelfIndexedAdmissibilityBraid : Set₁ where
@@ -111,11 +108,6 @@ open MDLAdmissibilityCompatibility public
 
 ------------------------------------------------------------------------
 -- MONSTER / 369 BOUNDARY
---
--- Level one has nine axes and 3^9 profiles, hence the exact Base369 carrier
--- count. The existing Monster369 bridge permits this chart seam but explicitly
--- refuses to turn signed/carrier symmetry into semantic Pareto automorphism or
--- authority without a further receipt.
 ------------------------------------------------------------------------
 
 monster369LevelOneBoundary : Monster369.Monster369NDimParetoTetrationBoundary
