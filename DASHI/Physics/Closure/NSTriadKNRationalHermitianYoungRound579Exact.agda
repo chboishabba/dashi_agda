@@ -61,12 +61,12 @@ realCrossNegRight
     ( ux ∷ uxi ∷ uy ∷ uyi ∷ uz ∷ uzi
     ∷ vx ∷ vxi ∷ vy ∷ vyi ∷ vz ∷ vzi ∷ [])
 
--- The two directed inequalities needed by the absolute-value case split.
-realCrossUpper :
+-- Nonnegativity of ||u-v||^2 gives 2 Re<u,v> <= ||u||^2+||v||^2.
+twoRealCrossUpper :
   (u v : C3.Complex3 F) →
-  R179.realHermitianCross u v
+  two * R179.realHermitianCross u v
   ≤ L2.complex3NormSquared u + L2.complex3NormSquared v
-realCrossUpper u v =
+twoRealCrossUpper u v =
   let
     x = L2.complex3NormSquared u
     y = L2.complex3NormSquared v
@@ -88,85 +88,57 @@ realCrossUpper u v =
             (negVectorNormSquared v))
           (cong (λ cn → x + y + two * cn) (realCrossNegRight u v)))
 
-    directed : two * c ≤ x + y
-    directed =
-      let
-        base : 0ℚ ≤ x + y + two * (- c)
-        base = subst (0ℚ ≤_) minusMeaning minusNN
-        shifted = ℚP.+-monoʳ-≤ (two * c) base
-      in
-      subst
-        (two * c ≤_)
-        (solve (x ∷ y ∷ c ∷ []))
-        shifted
+    base : 0ℚ ≤ x + y + two * (- c)
+    base = subst (0ℚ ≤_) minusMeaning minusNN
 
-    cNNFromAbs : 0ℚ ≤ c → c ≤ two * c
-    cNNFromAbs cNN =
-      let
-        added : c + 0ℚ ≤ c + c
-        added = ℚP.+-monoˡ-≤ c cNN
-      in
-      subst (c ≤_) (solve (c ∷ [])) added
+    shifted : two * c + 0ℚ ≤ two * c + (x + y + two * (- c))
+    shifted = ℚP.+-monoʳ-≤ (two * c) base
   in
-  -- If c<0 the desired upper bound is automatic from nonnegative x+y; if
-  -- c>=0, c<=2c and the stronger directed estimate applies.
-  case ℚP.0≤? c of λ where
-    (yes cNN) → ℚP.≤-trans (cNNFromAbs cNN) directed
-    (no notCNN) →
-      let
-        cNonPos : c ≤ 0ℚ
-        cNonPos = ℚP.≰⇒≥ notCNN
-        sumNN = ℚP.+-mono-≤
-          (Separation.complex3NormSquaredNonnegative u)
-          (Separation.complex3NormSquaredNonnegative v)
-      in ℚP.≤-trans cNonPos sumNN
-  where
-  open import Relation.Nullary.Decidable.Core using (yes; no)
-  case : ∀ {a b : Set} → a → (a → b) → b
-  case x f = f x
+  subst
+    (two * c ≤_)
+    (solve (x ∷ y ∷ c ∷ []))
+    shifted
 
-negRealCrossUpper :
+-- Nonnegativity of ||u+v||^2 gives -2 Re<u,v> <= ||u||^2+||v||^2.
+negTwoRealCrossUpper :
   (u v : C3.Complex3 F) →
-  - (R179.realHermitianCross u v)
+  - (two * R179.realHermitianCross u v)
   ≤ L2.complex3NormSquared u + L2.complex3NormSquared v
-negRealCrossUpper u v =
+negTwoRealCrossUpper u v =
   let
     x = L2.complex3NormSquared u
     y = L2.complex3NormSquared v
     c = R179.realHermitianCross u v
+
     plusNN : 0ℚ ≤ L2.complex3NormSquared (C3.complex3Add u v)
     plusNN = Separation.complex3NormSquaredNonnegative _
+
     plusMeaning :
       L2.complex3NormSquared (C3.complex3Add u v)
       ≡ x + y + two * c
     plusMeaning = R179.complex3Polarization u v
+
     base : 0ℚ ≤ x + y + two * c
     base = subst (0ℚ ≤_) plusMeaning plusNN
-    shifted = ℚP.+-monoʳ-≤ (-(two * c)) base
-    directed : -(two * c) ≤ x + y
-    directed = subst (_≤ x + y) (solve (c ∷ [])) shifted
 
-    negCNN : 0ℚ ≤ - c → - c ≤ -(two * c)
-    negCNN ncNN =
-      let
-        added : (- c) + 0ℚ ≤ (- c) + (- c)
-        added = ℚP.+-monoˡ-≤ (- c) ncNN
-      in subst ((- c) ≤_) (solve (c ∷ [])) added
+    shifted : (-(two * c)) + 0ℚ ≤ (-(two * c)) + (x + y + two * c)
+    shifted = ℚP.+-monoʳ-≤ (-(two * c)) base
   in
-  case ℚP.0≤? (- c) of λ where
-    (yes ncNN) → ℚP.≤-trans (negCNN ncNN) directed
-    (no notNCNN) →
-      let
-        negCNonPos : - c ≤ 0ℚ
-        negCNonPos = ℚP.≰⇒≥ notNCNN
-        sumNN = ℚP.+-mono-≤
-          (Separation.complex3NormSquaredNonnegative u)
-          (Separation.complex3NormSquaredNonnegative v)
-      in ℚP.≤-trans negCNonPos sumNN
-  where
-  open import Relation.Nullary.Decidable.Core using (yes; no)
-  case : ∀ {a b : Set} → a → (a → b) → b
-  case x f = f x
+  subst
+    ((-(two * c)) ≤_)
+    (solve (x ∷ y ∷ c ∷ []))
+    shifted
+
+-- If z is nonnegative then z <= 2z.  Kept explicit so no division by two is
+-- needed anywhere in the final Young envelope.
+nonnegativeBelowDouble :
+  (z : ℚ) → 0ℚ ≤ z → z ≤ two * z
+nonnegativeBelowDouble z zNN =
+  let
+    added : z + 0ℚ ≤ z + z
+    added = ℚP.+-monoʳ-≤ z zNN
+  in
+  subst (z ≤_) (solve (z ∷ [])) added
 
 rationalRealHermitianYoung :
   (u v : C3.Complex3 F) →
@@ -175,15 +147,43 @@ rationalRealHermitianYoung :
 rationalRealHermitianYoung u v
   with ℚP.∣p∣≡p∨∣p∣≡-p (R179.realHermitianCross u v)
 ... | inj₁ absIsPositive =
+  let
+    c = R179.realHermitianCross u v
+    absNN : 0ℚ ≤ ∣ c ∣
+    absNN = ℚP.0≤∣p∣ c
+    cNN : 0ℚ ≤ c
+    cNN = subst (0ℚ ≤_) absIsPositive absNN
+    cBelowTwo = nonnegativeBelowDouble c cNN
+    cBelowMass = ℚP.≤-trans cBelowTwo (twoRealCrossUpper u v)
+  in
   subst
     (_≤ L2.complex3NormSquared u + L2.complex3NormSquared v)
     (sym absIsPositive)
-    (realCrossUpper u v)
+    cBelowMass
 ... | inj₂ absIsNegative =
+  let
+    c = R179.realHermitianCross u v
+    absNN : 0ℚ ≤ ∣ c ∣
+    absNN = ℚP.0≤∣p∣ c
+    negCNN : 0ℚ ≤ - c
+    negCNN = subst (0ℚ ≤_) absIsNegative absNN
+    negCBelowDouble : - c ≤ two * (- c)
+    negCBelowDouble = nonnegativeBelowDouble (- c) negCNN
+    doubleMeaning : two * (- c) ≡ - (two * c)
+    doubleMeaning = solve (c ∷ [])
+    negCBelowMass : - c ≤ L2.complex3NormSquared u + L2.complex3NormSquared v
+    negCBelowMass =
+      ℚP.≤-trans
+        negCBelowDouble
+        (subst
+          (_≤ L2.complex3NormSquared u + L2.complex3NormSquared v)
+          doubleMeaning
+          (negTwoRealCrossUpper u v))
+  in
   subst
     (_≤ L2.complex3NormSquared u + L2.complex3NormSquared v)
     (sym absIsNegative)
-    (negRealCrossUpper u v)
+    negCBelowMass
 
 round579SquareRootUsed : Bool
 round579SquareRootUsed = false
