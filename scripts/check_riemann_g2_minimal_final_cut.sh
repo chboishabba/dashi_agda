@@ -39,6 +39,9 @@ FILES=(
   DASHI/Analysis/RiemannG2ProofRelevantTargetTranslationModulationExact.agda
   DASHI/Analysis/RiemannG2FinalPoleNearObserverRefinementExact.agda
   DASHI/Analysis/RiemannG2WindowFreeFiniteNearFinalModelCompilerExact.agda
+  DASHI/Analysis/RiemannG2FiniteNearIndexedLiteralKernelCompilerExact.agda
+  DASHI/Analysis/RiemannG2FinalNearIndexedFiniteProducerExact.agda
+  DASHI/Analysis/RiemannG2FinalNearIndexedLiteralModelCompilerExact.agda
   DASHI/Analysis/RiemannG2WindowFreeDirectRepresentationFrontierExact.agda
   DASHI/Analysis/RiemannG2LiteralPhaseJointMarginCompilerExact.agda
   DASHI/Analysis/RiemannPlattTrudgianLowCompletionAdapterExact.agda
