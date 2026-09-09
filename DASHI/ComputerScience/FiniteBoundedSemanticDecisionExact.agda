@@ -2,6 +2,7 @@ module DASHI.ComputerScience.FiniteBoundedSemanticDecisionExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Foundations.Base369Nat as B369
 import DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact as Machine
 import DASHI.ComputerScience.EuclidGCDRegisterMachineExact as Euclid
 import DASHI.ComputerScience.ClassicalOrderFindingRegisterMachineExact as Order
@@ -69,8 +70,8 @@ canonicalFiniteStarts : List Machine.MachineState
 canonicalFiniteStarts =
   Machine.countdownInitialState 3
   ∷ Euclid.euclidInitialState 48 18
-  ∷ Order.orderInitialState 2 15 _
-  ∷ Order.orderInitialState 2 21 _
+  ∷ Order.orderInitialState 2 15 B369.nonZero
+  ∷ Order.orderInitialState 2 21 B369.nonZero
   ∷ []
 
 -- Fuel 25 is at least the exact terminating fuel of all four canonical runs.
