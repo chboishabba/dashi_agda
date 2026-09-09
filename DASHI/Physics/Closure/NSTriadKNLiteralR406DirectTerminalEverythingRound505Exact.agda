@@ -49,17 +49,17 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- consumer. Both pay/refine local finite-fibre structure only. Neither can pay
 -- the lattice-sum <-> continuum-integral, cutoff, or same-object R406 theorem.
 --
--- R533-R534 refine the Euclidean side rather than overclaiming a total sign
--- decision on constructive reals. R533 proves that ONE scalar authority
---
---   classify : Scalar -> {-1,0,+1},  classify(-x) = -classify(x)
---
--- compiles the whole R^3 product chart and reflection covariance. R534 then
--- separates that generic chart compiler from concrete raw-continuum coverage:
--- a backend still has to show that its actual Euclidean Fourier scalar carrier
--- supplies the exact sign authority. Once that receipt is present, the next
--- cross-domain residual is precisely spectral-measure normalization, followed
--- by cutoff and literal same-object R406 transport.
+-- R533-R535 audit the Euclidean side and then reconcile two scheduler readings.
+-- R533 proves that ONE scalar exact ternary-sign authority compiles the whole
+-- R^3 product chart and reflection covariance. One R534 keeps concrete scalar
+-- sign coverage explicit as a sufficient route into the local C3^3 comparison;
+-- the other R534 observes that the actual R406 sum/integral consumer may stay on
+-- the rich Z^3/R^3 frequency carriers and therefore need not quotient every
+-- continuum point first. R535 makes the dependency distinction canonical:
+-- exact Euclidean C3^3 coverage is useful optional comparison structure, not a
+-- mandatory Clay prerequisite. The canonical cross-domain analytic frontier is
+-- therefore the direct lattice-counting <-> continuum-measure bridge, followed
+-- by cutoff correspondence and literal same-object R406 transport.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -113,3 +113,5 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531E
 import DASHI.Physics.Closure.NSTriadKNBase369TeslaMonsterR406CrossDomainBidiRound532Exact
 import DASHI.Physics.Closure.NSTriadKNEuclideanTernary27SignChartBoundaryRound533Exact
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignCoverageMeasureBidiRound534Exact
+import DASHI.Physics.Closure.NSTriadKNEuclideanSignFibreOptionalForR406Round534Exact
+import DASHI.Physics.Closure.NSTriadKNEuclideanSignCoverageDependencyReconciliationRound535Exact
