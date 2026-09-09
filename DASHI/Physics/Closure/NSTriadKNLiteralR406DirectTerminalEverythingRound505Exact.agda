@@ -24,26 +24,23 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --       R519: constructed Bishop Nat root + semantic square boundary;
 --       R520: finite/rational monotonicity of every canonical root approximant.
 --
--- R521-R522 add the source-bounded smooth-forced-blowup adversarial BIDI:
--- smoothness is separated from the signed critical forcing budget, and the
--- external program is wired both into the literal-carrier falsification test
--- and back out from DASHI's exact theorem quantifier scope. The reported unseen
--- forced-NS claim is comparator-only and pays no Clay residual.
---
+-- R521-R522 add the source-bounded smooth-forced-blowup adversarial BIDI.
 -- R523-R525 insert the source-exact Fefferman Clay C/D consumer and close the
 -- external problem <-> Clay C/D <-> DASHI R406 triangle.
 --
--- R526-R528 then factor the R^3/T^3 comparison through the existing 369/27
--- symmetry infrastructure. R526 gives a common {-1,0,+1}^3 local frequency-sign
--- observation interface and makes the notation firewall explicit:
--- physical torus T^3 != Base369 ternary T3. A triad has three 27-sign views,
--- hence a 27^3 carrier shape, but this is observation geometry only. R527
--- factors Clay C/D into a shared NS core plus a non-erasable domain envelope.
--- R528 identifies the first genuinely analytic cross-domain seam after common
--- symmetry is quotiented out: lattice-counting versus continuum spectral
--- measure/cutoff transport on the SAME literal R406 signed-cross observable.
--- Monster 3B phase inversion remains a symmetry intertwiner/comparator, not NS
--- sum-to-integral theorem authority.
+-- R526-R529 factor the R^3/T^3 comparison through existing 369/27 symmetry.
+-- R526 exposes a common {-1,0,+1}^3 frequency-sign observation and the strict
+-- notation firewall physical torus T^3 != Base369 ternary T3. A triad therefore
+-- has three 27-sign observations, hence a 27^3 carrier shape, without importing
+-- Base369 appraisal semantics. R527 factors Clay C/D into a common NS core plus
+-- a non-erasable domain envelope. R528 isolates lattice-counting vs continuum
+-- spectral measure/cutoff transport on the SAME literal R406 signed cross.
+-- R529 then pays the periodic side of the local observation seam exactly on the
+-- repo's existing integer FourierMode Z^3 carrier, including covariance under
+-- all three coordinate sign reflections. The next representation demand is the
+-- literal Euclidean R^3 frequency chart; after both charts, the genuine analytic
+-- cross-domain wall is the sum/integral measure + cutoff + R406 same-object
+-- transport. Monster 3B phase inversion remains only a symmetry intertwiner.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -64,13 +61,11 @@ import DASHI.Physics.Closure.NSTriadKNResidenceBandVariationNoGoRound506Exact
 import DASHI.Physics.Closure.NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact
 
--- Global residual-indexed introspection tranche.
 import DASHI.Physics.Closure.NSTriadKNClayResidualIntrospectionRound509Exact
 import DASHI.Physics.Closure.NSTriadKNPhysicalMeaningSignedCancellationRound510Exact
 import DASHI.Physics.Closure.NSTriadKNSignedNetworkBudgetCompilerRound511Exact
 import DASHI.Physics.Closure.NSTriadKNResidualIndexedProducerAdmissionRound512Exact
 
--- Strict leaf-B consumer-adequacy introspection tranche.
 import DASHI.Physics.Closure.NSTriadKNIntrospectiveCriticalLeafObserverRound509Exact
 import DASHI.Physics.Closure.NSTriadKNIntrospectiveCriticalProductionSchedulerRound510Exact
 import DASHI.Physics.Closure.NSTriadKNCommonInitialDatumCriticalCeilingNoGoRound511Exact
@@ -84,16 +79,13 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exa
 import DASHI.Physics.Closure.NSTriadKNBishopNatRootCriticalMultiplierBoundaryRound519Exact
 import DASHI.Physics.Closure.NSTriadKNBishopNatRootApproximationMonotonicityRound520Exact
 
--- Smooth-forced-blowup adversarial BIDI against the same live R406/forcing cone.
 import DASHI.Physics.Closure.NSTriadKNSmoothForcedBlowupAdversarialBoundaryRound521Exact
 import DASHI.Physics.Closure.NSTriadKNForcedBlowupR406BidiRound522Exact
-
--- Source-exact Clay forced-breakdown alignment and triangular BIDI.
 import DASHI.Physics.Closure.NSTriadKNClayForcedBreakdownFormulationRound523Exact
 import DASHI.Physics.Closure.NSTriadKNBuckmasterToClayBreakdownBidiRound524Exact
 import DASHI.Physics.Closure.NSTriadKNClayExternalR406TriangleBidiRound525Exact
 
--- R^3 / T^3 common local 27 symmetry quotient + retained domain/measure fibre.
 import DASHI.Physics.Closure.NSTriadKNTorusEuclideanTernary27IntersectionRound526Exact
 import DASHI.Physics.Closure.NSTriadKNClayCDDomainResidualBidiRound527Exact
 import DASHI.Physics.Closure.NSTriadKNTorusEuclideanR406MeasureBridgeBoundaryRound528Exact
+import DASHI.Physics.Closure.NSTriadKNPeriodicIntegerTernary27SignChartRound529Exact
