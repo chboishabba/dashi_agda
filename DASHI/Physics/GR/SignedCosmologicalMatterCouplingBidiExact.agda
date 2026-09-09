@@ -71,7 +71,9 @@ refinedCosmologyFixturesDistinct :
 refinedCosmologyFixturesDistinct ()
 
 ------------------------------------------------------------------------
--- Reuse marker for the existing cosmological dynamics carrier.
+-- Same-object reuse: consume literal objects from the existing cosmological
+-- dynamics carrier.  The sign fibre is extra structure, not a replacement for
+-- the actual scale-factor, density, pressure, curvature or equation objects.
 ------------------------------------------------------------------------
 
 record SignedCosmologyProbe (cosmology : Laws.CosmologicalDynamics) : Set₁ where
@@ -82,12 +84,44 @@ record SignedCosmologyProbe (cosmology : Laws.CosmologicalDynamics) : Set₁ whe
     matterOrientation : CosmologicalMatterTermOrientation
     matterOrientationMatches :
       matterOrientation ≡ matterTermOrientation couplingSign densitySign
-    usesExistingScaleFactor : Laws.CosmologicalDynamics.ScaleFactor cosmology → Set
-    usesExistingEnergyDensity : Laws.CosmologicalDynamics.EnergyDensity cosmology → Set
-    usesExistingPressure : Laws.CosmologicalDynamics.Pressure cosmology → Set
-    usesExistingCurvature : Laws.CosmologicalDynamics.Curvature cosmology → Set
-    usesExistingCosmologicalConstant :
-      Laws.CosmologicalDynamics.CosmologicalConstant cosmology → Set
+
+    cosmicTime : Laws.CosmologicalDynamics.CosmicTime cosmology
+    scaleFactorAtTime : Laws.CosmologicalDynamics.ScaleFactor cosmology
+    scaleFactorMatches :
+      Laws.CosmologicalDynamics.scaleFactor cosmology cosmicTime
+        ≡ scaleFactorAtTime
+
+    energyDensityAtTime : Laws.CosmologicalDynamics.EnergyDensity cosmology
+    energyDensityMatches :
+      Laws.CosmologicalDynamics.density cosmology cosmicTime
+        ≡ energyDensityAtTime
+
+    pressureAtTime : Laws.CosmologicalDynamics.Pressure cosmology
+    pressureMatches :
+      Laws.CosmologicalDynamics.pressure cosmology cosmicTime
+        ≡ pressureAtTime
+
+    curvature : Laws.CosmologicalDynamics.Curvature cosmology
+    cosmologicalConstant :
+      Laws.CosmologicalDynamics.CosmologicalConstant cosmology
+
+    friedmannEquation : Laws.CosmologicalDynamics.Equation cosmology
+    friedmannEquationMatches :
+      Laws.CosmologicalDynamics.friedmannEquation
+        cosmology curvature cosmologicalConstant
+        ≡ friedmannEquation
+
+    accelerationEquation : Laws.CosmologicalDynamics.Equation cosmology
+    accelerationEquationMatches :
+      Laws.CosmologicalDynamics.accelerationEquation
+        cosmology cosmologicalConstant
+        ≡ accelerationEquation
+
+    continuityEquation : Laws.CosmologicalDynamics.Equation cosmology
+    continuityEquationMatches :
+      Laws.CosmologicalDynamics.continuityEquation cosmology
+        ≡ continuityEquation
+
     SignedCosmologyAdequacy : Set
     signedCosmologyAdequacy : SignedCosmologyAdequacy
 
@@ -104,7 +138,8 @@ record SignedCosmologyBoundary : Set where
     curvatureAndLambdaRemainIndependentCoordinates : Bool
     selfConsistentNegativeGCosmologyRequiresReSolvedDynamics : Bool
     cosmologicalObservationMayConstrainButNotUniquelyIdentifyGSign : Bool
+    exactExistingCosmologicalDynamicsObjectsRequired : Bool
 
 canonicalSignedCosmologyBoundary : SignedCosmologyBoundary
 canonicalSignedCosmologyBoundary =
-  signed-cosmology-boundary false false false false true true true true
+  signed-cosmology-boundary false false false false true true true true true
