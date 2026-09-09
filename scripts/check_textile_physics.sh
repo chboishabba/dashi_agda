@@ -21,6 +21,10 @@ AGDA_STDLIB="${AGDA_STDLIB:-/usr/share/agda/lib/stdlib}"
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileColourAppearanceBridgeExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileAngularAppearanceExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileSpectralReflectanceTransmittanceExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextilePolarisationTransportExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileFiberBRDFRealisationExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileBirefringenceRetardanceExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileIridescentAppearanceExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileMechanicsOpticsCouplingExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Topology/TextileStitchHyperfabricExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Topology/TextileStitchOperationalSemanticsExact.agda
