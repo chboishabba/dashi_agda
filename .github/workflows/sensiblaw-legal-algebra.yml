@@ -12,6 +12,7 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawSourceConditionedApplicabilityViolationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawSourceConditionedTypedLiabilityExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawConsumerSourceAcquisitionPriorityExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact.agda'
@@ -27,6 +28,7 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawCullenS43ASpecialStatutoryPowerAtomicExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenVicariousLiabilityFamilyAtomicExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenAtomic369AuditExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenConsumerRelativeSourceAcquisitionExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawDutyPublicAuthoritySourceLineageGraphExact.agda'
@@ -71,6 +73,7 @@ jobs:
           DASHI/Cognition/PNF/SensibLawSourceConditionedApplicabilityViolationExact.agda
           DASHI/Cognition/PNF/SensibLawSourceConditionedTypedLiabilityExact.agda
           DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda
+          DASHI/Cognition/PNF/SensibLawConsumerSourceAcquisitionPriorityExact.agda
           DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda
           DASHI/Cognition/PNF/SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact.agda
           DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact.agda
@@ -90,6 +93,7 @@ jobs:
           DASHI/Cognition/PNF/SensibLawCullenS43ASpecialStatutoryPowerAtomicExact.agda
           DASHI/Cognition/PNF/SensibLawCullenVicariousLiabilityFamilyAtomicExact.agda
           DASHI/Cognition/PNF/SensibLawCullenAtomic369AuditExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenConsumerRelativeSourceAcquisitionExact.agda
           DASHI/Cognition/PNF/SensibLawCullenEdelman64SemanticStateCompilerExact.agda
           DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda
 
