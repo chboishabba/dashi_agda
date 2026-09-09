@@ -28,13 +28,16 @@ module DASHI.Physics.Closure.NSTriadKNDirectBonyClassNormCompilerRound583Exact w
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNFourHelicityVectorRecombinationRound576Exact as R576
 import DASHI.Physics.Closure.NSTriadKNFourSignBonyClassGramCompilerRound580Exact as R580
 import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact as R581
@@ -104,16 +107,15 @@ literalBoundFromDirectClassNorms583 literalVector cells routing budgets =
     (fourClassNormBudgetsBoundRouted583 cells budgets)
 
 literalRoutedFourSignBound583 :
-  (value : DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration.PhysicalTriadIncidence → C3.Complex3 F) →
-  (items : Agda.Builtin.List.List DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration.PhysicalTriadIncidence) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (items : List Physical.PhysicalTriadIncidence) →
   (budgets : R582.FourBonyClassNormBudgets582 (R581.bonyClassCells581 value items)) →
-  L2.complex3NormSquared
-    (DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.foldVector value items)
+  L2.complex3NormSquared (R224.foldVector value items)
   ≤ R576.four *
       fourClassNormEnvelope583 (R581.bonyClassCells581 value items) budgets
 literalRoutedFourSignBound583 value items budgets =
   literalBoundFromDirectClassNorms583
-    (DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.foldVector value items)
+    (R224.foldVector value items)
     (R581.bonyClassCells581 value items)
     (R581.literalRouting581 value items)
     budgets
