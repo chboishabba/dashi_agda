@@ -20,6 +20,9 @@ import DASHI.Physics.ExoticGravity.AntigravityFullyDerivedExperimentalCutExact a
 import DASHI.Physics.ExoticGravity.AntigravityExecutionCalibrationExact as Calibration
 import DASHI.Physics.ExoticGravity.AntigravityCalibratedExecutionBridgeExact as Calibrated
 import DASHI.Physics.ExoticGravity.AntigravityCalibratedFullyDerivedExperimentalCutExact as CalibratedCut
+import DASHI.Physics.ExoticGravity.AntigravityConsumerScopedCalibrationExact as ConsumerCalibration
+import DASHI.Physics.ExoticGravity.AntigravityClaimScopedExperimentalCutExact as ClaimCut
+import DASHI.Physics.ExoticGravity.AntigravityClaimScopedComparativeAnomalyExact as ClaimComparison
 import DASHI.Physics.ExoticGravity.AntigravityStrongPromotionFacadeExact as Strong
 
 ------------------------------------------------------------------------
@@ -139,8 +142,7 @@ fullyDerivedCutStillDoesNotProveAntigravity :
 fullyDerivedCutStillDoesNotProveAntigravity = refl
 
 ------------------------------------------------------------------------
--- Calibration must be typed, same-data, same-configuration, and remain weaker
--- than mechanism/theory promotion.
+-- Calibration must be typed, same-data, same-configuration, and consumer scoped.
 ------------------------------------------------------------------------
 
 calibrationCarrierStringIsNotTypedRefinement :
@@ -161,6 +163,12 @@ calibrationMustBindExactExecutionData :
     ≡ true
 calibrationMustBindExactExecutionData = refl
 
+apparatusAndRunRemainDistinctInExecutionWeld :
+  Calibrated.apparatusIdentityAndRunIdentityAreDistinct
+    Calibrated.canonicalCalibratedExecutionBridgeBoundary
+    ≡ true
+apparatusAndRunRemainDistinctInExecutionWeld = refl
+
 sameApparatusLabelDoesNotWeldSourceRun :
   Calibrated.sameApparatusLabelAloneWeldsSourceReceiptToExecution
     Calibrated.canonicalCalibratedExecutionBridgeBoundary
@@ -179,6 +187,42 @@ provenanceStringsDoNotPayCalibration :
     ≡ false
 provenanceStringsDoNotPayCalibration = refl
 
+genericCalibrationDoesNotEqualConsumerAdequacy :
+  ConsumerCalibration.genericCalibrationAdequacyEqualsConsumerAdequacy
+    ConsumerCalibration.canonicalConsumerScopedCalibrationBoundary
+    ≡ false
+genericCalibrationDoesNotEqualConsumerAdequacy = refl
+
+claimDiscriminatorBindingRequiredForCalibration :
+  ConsumerCalibration.exactClaimDiscriminatorBindingRequired
+    ConsumerCalibration.canonicalConsumerScopedCalibrationBoundary
+    ≡ true
+claimDiscriminatorBindingRequiredForCalibration = refl
+
+staticLoadCalibrationDoesNotPayFreeFall :
+  ConsumerCalibration.staticLoadCalibrationAutomaticallyPaysFreeFallCalibration
+    ConsumerCalibration.canonicalConsumerScopedCalibrationBoundary
+    ≡ false
+staticLoadCalibrationDoesNotPayFreeFall = refl
+
+allStagesMustMatchSameClaimConsumer :
+  ClaimCut.allFourStagesMustMatchSameClaimConsumer
+    ClaimCut.canonicalClaimScopedCutBoundary
+    ≡ true
+allStagesMustMatchSameClaimConsumer = refl
+
+consumerCalibrationCannotBeDroppedAtComparison :
+  ClaimComparison.consumerCalibrationMayBeDroppedAtComparison
+    ClaimComparison.canonicalClaimScopedComparisonBoundary
+    ≡ false
+consumerCalibrationCannotBeDroppedAtComparison = refl
+
+exactClaimScopedCutIdentityRequired :
+  Strong.exactClaimScopedCutIdentityRequired
+    Strong.canonicalStrongPromotionBoundary
+    ≡ true
+exactClaimScopedCutIdentityRequired = refl
+
 newConsumersRequireStrongReceipt :
   Strong.newConsumersRequireFullyDerivedReceipt
     Strong.canonicalStrongPromotionBoundary
@@ -190,6 +234,12 @@ newConsumersRequireTypedCalibration :
     Strong.canonicalStrongPromotionBoundary
     ≡ true
 newConsumersRequireTypedCalibration = refl
+
+newConsumersRequireConsumerScopedCalibration :
+  Strong.newConsumersRequireConsumerScopedCalibration
+    Strong.canonicalStrongPromotionBoundary
+    ≡ true
+newConsumersRequireConsumerScopedCalibration = refl
 
 calibrationStringAloneCannotPromote :
   Strong.calibrationStringAloneSufficient
