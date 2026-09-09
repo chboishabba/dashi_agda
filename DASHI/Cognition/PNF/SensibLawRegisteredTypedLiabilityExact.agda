@@ -7,7 +7,9 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
+import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
+import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Elements
 import DASHI.Cognition.PNF.SensibLawAtomicLegalTestBalancedTernaryExact as Atomic
 import DASHI.Cognition.PNF.SensibLawAtomicCaseOutcomeCoherenceExact as Coherence
 import DASHI.Cognition.PNF.SensibLawRegisteredAtomicLegalImplicationExact as RegisteredImplication
@@ -15,18 +17,11 @@ import DASHI.Cognition.PNF.SensibLawRegisteredApplicabilityViolationExact as Reg
 import DASHI.Cognition.PNF.SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact as Downstream
 import DASHI.Cognition.PNF.SensibLawSourceConditionedTypedLiabilityExact as Typed
 
-------------------------------------------------------------------------
--- REGISTERED SOURCE-CONDITIONED TYPED LIABILITY
---
--- One finite case registry spans the entire executable liability chain:
--- violation, family recognition, family conditions, limitations/defeaters,
--- temporal validity and forum competence.  Source attribution and derivation
--- remain owned by the underlying source-conditioned decision; registration only
--- prevents conflicting same-case atomic outcomes from being substituted later.
-------------------------------------------------------------------------
-
 record RegisteredSourceConditionedTypedLiabilityDecision
-    {state wrong bundle facts}
+    {state : Status.SemanticCommitmentState}
+    {wrong : Ontology.WrongType}
+    {bundle : Elements.WrongTypeRuleBundle wrong}
+    {facts : Algebra.FactSet}
     {liabilityGraph : Algebra.LegalGraph}
     {profile : Downstream.TypedLiabilityProfile wrong}
     {realised : Typed.SourceConditionedTypedLiabilityProfile profile}
@@ -99,17 +94,21 @@ record RegisteredSourceConditionedTypedLiabilityDecision
 open RegisteredSourceConditionedTypedLiabilityDecision public
 
 registeredTypedLiabilityProjectsBase :
-  ∀ {state wrong bundle facts liabilityGraph profile realised registry caseContext}
+  ∀ {state : Status.SemanticCommitmentState}
+    {wrong : Ontology.WrongType}
+    {bundle : Elements.WrongTypeRuleBundle wrong}
+    {facts : Algebra.FactSet}
+    {liabilityGraph : Algebra.LegalGraph}
+    {profile : Downstream.TypedLiabilityProfile wrong}
+    {realised : Typed.SourceConditionedTypedLiabilityProfile profile}
+    {registry : Coherence.AtomicCaseRegistry}
+    {caseContext : Ontology.StableId}
     {base : Typed.SourceConditionedTypedLiabilityDecision {state} {wrong} {bundle} {facts}
               liabilityGraph profile realised} →
   RegisteredSourceConditionedTypedLiabilityDecision registry caseContext base →
   Typed.SourceConditionedTypedLiabilityDecision {state} {wrong} {bundle} {facts}
     liabilityGraph profile realised
 registeredTypedLiabilityProjectsBase {base = base} _ = base
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
 
 data LiabilityRegistrationCreatesUnderlyingViolation : Set where
 data LiabilityRegistrationCreatesFamilyAuthority : Set where
