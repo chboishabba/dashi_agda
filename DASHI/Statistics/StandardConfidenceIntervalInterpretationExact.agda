@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Statistics.BinaryTestDecisionDirectionalEvidenceExact as Binary
 import DASHI.Statistics.ConfidenceIntervalRegionEvidenceExact as CI
 import DASHI.Statistics.HypothesisRegionGeometryExact as Region
 import DASHI.Statistics.StandardBinaryTestRegionAdaptersExact as BinaryRegion
@@ -92,14 +93,12 @@ record TestIntervalDualityReceipt
     rejectSound :
       ∀ {result} →
       RejectCharacterisation result →
-      BinaryRegion.decision test result
-      ≡ DASHI.Statistics.BinaryTestDecisionDirectionalEvidenceExact.rejectNull
+      BinaryRegion.decision test result ≡ Binary.rejectNull
 
     failSound :
       ∀ {result} →
       FailCharacterisation result →
-      BinaryRegion.decision test result
-      ≡ DASHI.Statistics.BinaryTestDecisionDirectionalEvidenceExact.failToRejectNull
+      BinaryRegion.decision test result ≡ Binary.failToRejectNull
 
     dualityReference : String
 
