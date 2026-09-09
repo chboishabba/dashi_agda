@@ -9,6 +9,8 @@ import DASHI.Physics.ExoticGravity.SuperconductingChargeMassCurrentBidiExact as 
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyScopeBidiExact as Scope
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyCompilationExact as Compilation
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorCompilationExact as Comparator
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorStateBridgeExact as ComparatorState
+import DASHI.Physics.ExoticGravity.LiTorrStandardGRComparatorBidiExact as LegacyComparator
 import DASHI.Physics.ExoticGravity.LiTorr1991CombinedFieldSourceEntitlementExact as LT1991
 import DASHI.Physics.ExoticGravity.LiTorr1992CoupledPotentialSourceEntitlementExact as LT1992
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingModelDiscriminatorExact as Scaling
@@ -72,6 +74,31 @@ numericalEvaluationStillRequired = refl
 
 predictionReceiptDoesNotProveNegativeEffectiveG : Comparator.predictionReceiptAutomaticallyProvesNegativeEffectiveG Comparator.canonicalLaboratoryGRComparatorBoundary ≡ false
 predictionReceiptDoesNotProveNegativeEffectiveG = refl
+
+requestStateMatchesExistingPlanningState :
+  ComparatorState.requestStageState
+    ≡ ComparatorState.requestStageState
+requestStateMatchesExistingPlanningState = refl
+
+requestStageStillNeedsWeakFieldSolver :
+  LegacyComparator.firstOpenGRComparatorLeaf ComparatorState.requestStageState
+    ≡ LegacyComparator.weakFieldSolverLeaf
+requestStageStillNeedsWeakFieldSolver = ComparatorState.requestStageFirstOpen
+
+predictionStageStillNeedsBackgroundClosure :
+  LegacyComparator.firstOpenGRComparatorLeaf ComparatorState.predictionStageState
+    ≡ LegacyComparator.backgroundClosureLeaf
+predictionStageStillNeedsBackgroundClosure = ComparatorState.predictionStageFirstOpen
+
+requestDoesNotPayWeakFieldPrediction :
+  ComparatorState.typedRequestPaysWeakFieldPrediction
+    ComparatorState.canonicalLaboratoryGRComparatorStateBridgeBoundary ≡ false
+requestDoesNotPayWeakFieldPrediction = refl
+
+predictionDoesNotPayBackgroundClosure :
+  ComparatorState.typedPredictionPaysBackgroundClosure
+    ComparatorState.canonicalLaboratoryGRComparatorStateBridgeBoundary ≡ false
+predictionDoesNotPayBackgroundClosure = refl
 
 sourceDependentAdditiveCanStillMimicMultiplicative : Scaling.sourceDependentAdditiveCanMimicMultiplicativeSignature Scaling.canonicalScalingModelDiscriminatorBoundary ≡ true
 sourceDependentAdditiveCanStillMimicMultiplicative = refl
