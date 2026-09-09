@@ -52,7 +52,7 @@ cooperReceptionJustification = internalPowerJustification
   "applicable English law received and land transactions governed within that colonial legal frame"
   Primary.privyCouncilHolding
 
-record SemanticPrerequisiteReceipt (j : InternalPowerJustification) : Set where
+record SemanticPrerequisiteReceipt (j : InternalPowerJustification) : Set₁ where
   constructor semanticPrerequisiteReceipt
   field
     projection : ColonialWrong.AuthorityReclassification
@@ -105,6 +105,9 @@ record WrongTypePrerequisiteBoundary : Set where
 canonicalWrongTypePrerequisiteBoundary : WrongTypePrerequisiteBoundary
 canonicalWrongTypePrerequisiteBoundary =
   wrongTypePrerequisiteBoundary false refl false refl false refl false refl false refl
+
+open WrongTypePrerequisiteBoundary public
+
 
 ------------------------------------------------------------------------
 -- Mabo / sovereignty pin.

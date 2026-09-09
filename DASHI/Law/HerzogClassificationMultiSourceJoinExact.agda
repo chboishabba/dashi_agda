@@ -9,6 +9,7 @@ import DASHI.Law.IndependentEvidenceProvenanceExact as Independent
 import DASHI.Law.EvidenceProvenanceDependencyDagExact as Dag
 import DASHI.Law.HerzogIncidentClassificationLineageWeldExact as IncidentWeld
 import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as MaboCross
+import DASHI.Law.SecurityClassificationInputLineageDagExact as Lineage
 
 ------------------------------------------------------------------------
 -- Multi-source join for disclosed threat/classification propositions.
@@ -74,7 +75,7 @@ syntheticOrigin : Atom.DisclosureInputAtom
 syntheticOrigin = Atom.disclosureInputAtom
   "SYNTHETIC-THREAT-ORIGIN"
   Atom.policeIntelligenceDocument
-  Atom.Lineage.nswPoliceIntelligence
+  Lineage.nswPoliceIntelligence
   "synthetic origin intelligence note"
   "synthetic paragraph 1"
   "synthetic threat proposition"
@@ -84,7 +85,7 @@ syntheticOrigin = Atom.disclosureInputAtom
 
 syntheticCopy : String → JoinSourceKind → JoinedAtomReceipt
 syntheticCopy ident kind = joinedAtomReceipt
-  (Atom.disclosureInputAtom ident Atom.operationalBriefing Atom.Lineage.nswPoliceCommand
+  (Atom.disclosureInputAtom ident Atom.operationalBriefing Lineage.nswPoliceCommand
     "synthetic derivative document" "synthetic location"
     "synthetic threat proposition" "T1" "operations" "T1"
     Atom.atomSourceBacked "calibration derivative")

@@ -2,6 +2,8 @@ module DASHI.Core.Prelude where
 
 open import Data.Nat public
   renaming (ℕ to Nat)
+ℕ : Set
+ℕ = Nat
 open import Data.Nat.Properties public
 open import Data.Bool public using (Bool; true; false)
 open import Data.List public using (List; []; _∷_)

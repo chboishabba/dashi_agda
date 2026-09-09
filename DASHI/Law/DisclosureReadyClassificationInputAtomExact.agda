@@ -167,6 +167,8 @@ record DisclosureAtomBoundary : Set where
     missingDocumentMeansNoInputExisted : Bool
     missingDocumentMeansNoInputExistedIsFalse : missingDocumentMeansNoInputExisted ≡ false
 
+open DisclosureAtomBoundary public
+
 canonicalDisclosureAtomBoundary : DisclosureAtomBoundary
 canonicalDisclosureAtomBoundary =
   disclosureAtomBoundary false refl false refl false refl false refl false refl

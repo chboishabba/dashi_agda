@@ -53,7 +53,7 @@ open LegalElement public
 record ElementRequirement
   {wrong : Ontology.WrongType}
   (element : LegalElement wrong)
-  : Set where
+  : Set₁ where
   constructor element-requirement
   field
     requirementId : Ontology.StableId
@@ -63,7 +63,7 @@ record ElementRequirement
 
 open ElementRequirement public
 
-record WrongTypeRuleBundle (wrong : Ontology.WrongType) : Set where
+record WrongTypeRuleBundle (wrong : Ontology.WrongType) : Set₁ where
   constructor wrong-type-rule-bundle
   field
     elements : List (LegalElement wrong)

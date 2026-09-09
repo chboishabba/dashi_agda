@@ -203,6 +203,8 @@ record AuthorisedButNotReceived : Set where
     fieldReceiptKnownIsFalse : fieldReceiptKnown ≡ false
     gapReference : String
 
+open AuthorisedButNotReceived public
+
 canonicalAuthorisedButNotReceived : AuthorisedButNotReceived
 canonicalAuthorisedButNotReceived = authorisedButNotReceived
   true refl false refl

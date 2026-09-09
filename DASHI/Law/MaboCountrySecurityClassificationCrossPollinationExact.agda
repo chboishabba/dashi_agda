@@ -130,6 +130,9 @@ record SecurityCountryBoundary : Set where
 canonicalSecurityCountryBoundary : SecurityCountryBoundary
 canonicalSecurityCountryBoundary = securityCountryBoundary false refl false refl false refl false refl false refl
 
+open SecurityCountryBoundary public
+
+
 ------------------------------------------------------------------------
 -- Lineage bridge: if Country/self-determination content is alleged to have
 -- affected a risk classification, the required producer is the actual input

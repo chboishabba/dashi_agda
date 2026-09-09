@@ -172,5 +172,8 @@ canonicalColonialWrongTypeBoundary : ColonialWrongTypeBoundary
 canonicalColonialWrongTypeBoundary =
   colonialWrongTypeBoundary false refl false refl false refl false refl false refl
 
+open ColonialWrongTypeBoundary public
+
+
 sourceSynthesisRole : Source.ColonialSourceRole
 sourceSynthesisRole = Source.dashiAnalyticalSynthesis

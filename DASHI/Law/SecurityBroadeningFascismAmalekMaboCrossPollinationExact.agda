@@ -53,6 +53,9 @@ record AmalekBroadeningBoundary : Set where
 canonicalAmalekBroadeningBoundary : AmalekBroadeningBoundary
 canonicalAmalekBroadeningBoundary = amalekBroadeningBoundary false refl false refl false refl
 
+open AmalekBroadeningBoundary public
+
+
 ------------------------------------------------------------------------
 -- Mabo/Country adapter.
 -- Broadening can erase political/Country authority in the same way a dominant
@@ -78,6 +81,8 @@ record MaboBroadeningBoundary : Set where
 
 canonicalMaboBroadeningBoundary : MaboBroadeningBoundary
 canonicalMaboBroadeningBoundary = maboBroadeningBoundary false refl false refl false refl
+
+open MaboBroadeningBoundary public
 
 ------------------------------------------------------------------------
 -- Antifascist repair is a transformation constraint, not a rival population
@@ -117,3 +122,6 @@ record CrossPollinationBoundary : Set where
 
 canonicalCrossPollinationBoundary : CrossPollinationBoundary
 canonicalCrossPollinationBoundary = crossPollinationBoundary false refl true refl false refl false refl
+
+open CrossPollinationBoundary public
+

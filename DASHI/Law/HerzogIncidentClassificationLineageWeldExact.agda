@@ -109,6 +109,8 @@ record IncidentLineageBoundary : Set where
     repeatedIncidentPatternProvesIdeologicalMotive : Bool
     repeatedIncidentPatternProvesIdeologicalMotiveIsFalse : repeatedIncidentPatternProvesIdeologicalMotive ≡ false
 
+open IncidentLineageBoundary public
+
 canonicalIncidentLineageBoundary : IncidentLineageBoundary
 canonicalIncidentLineageBoundary =
   incidentLineageBoundary false refl false refl false refl false refl false refl

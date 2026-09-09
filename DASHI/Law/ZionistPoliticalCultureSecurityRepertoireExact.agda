@@ -96,6 +96,8 @@ record ZionismIdentityBoundary : Set where
     allZionistsShareAllRepertoireCoordinates : Bool
     allZionistsShareAllRepertoireCoordinatesIsFalse : allZionistsShareAllRepertoireCoordinates ≡ false
 
+open ZionismIdentityBoundary public
+
 canonicalZionismIdentityBoundary : ZionismIdentityBoundary
 canonicalZionismIdentityBoundary =
   zionismIdentityBoundary false refl false refl false refl false refl false refl

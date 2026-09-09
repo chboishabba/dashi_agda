@@ -292,6 +292,8 @@ record InstitutionalCarrierBoundary : Set where
     foreignSecurityContextProvesNSWClassificationMotive : Bool
     foreignSecurityContextProvesNSWClassificationMotiveIsFalse : foreignSecurityContextProvesNSWClassificationMotive ≡ false
 
+open InstitutionalCarrierBoundary public
+
 canonicalInstitutionalCarrierBoundary : InstitutionalCarrierBoundary
 canonicalInstitutionalCarrierBoundary =
   institutionalCarrierBoundary false refl false refl false refl false refl false refl false refl

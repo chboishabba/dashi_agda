@@ -70,6 +70,8 @@ record GlobalJewryBoundary : Set where
     criticismOfZionismAutomaticallyTargetsJews : Bool
     criticismOfZionismAutomaticallyTargetsJewsIsFalse : criticismOfZionismAutomaticallyTargetsJews ≡ false
 
+open GlobalJewryBoundary public
+
 canonicalGlobalJewryBoundary : GlobalJewryBoundary
 canonicalGlobalJewryBoundary =
   globalJewryBoundary false refl false refl false refl false refl

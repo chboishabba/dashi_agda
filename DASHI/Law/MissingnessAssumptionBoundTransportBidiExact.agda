@@ -28,22 +28,20 @@ record BoundTransportRequest : Set where
 open BoundTransportRequest public
 
 data BoundTransportStatus : Set where
-  worstCaseRetained
-  narrowedUnderReceiptedAssumption
-  assumptionReceiptMissing
-  mechanismIncompatible
+  worstCaseRetained : BoundTransportStatus
+  narrowedUnderReceiptedAssumption : BoundTransportStatus
+  assumptionReceiptMissing : BoundTransportStatus
+  mechanismIncompatible : BoundTransportStatus
 
 transportStatus : BoundTransportRequest → BoundTransportStatus
-transportStatus r with policy r
-... | unrestrictedWorstCase = worstCaseRetained
-... | independenceConditioned with assumptionReceiptPresent r | Mechanism.classifyMechanism (mechanism r)
-...   | false | _ = assumptionReceiptMissing
-...   | true | Mechanism.observationIndependentMissingness = narrowedUnderReceiptedAssumption
-...   | true | _ = mechanismIncompatible
-... | observedCovariateConditioned with assumptionReceiptPresent r | Mechanism.classifyMechanism (mechanism r)
-...   | false | _ = assumptionReceiptMissing
-...   | true | Mechanism.observedCovariateConditionedMissingness = narrowedUnderReceiptedAssumption
-...   | true | _ = mechanismIncompatible
+transportStatus r with policy r | assumptionReceiptPresent r | Mechanism.classifyMechanism (mechanism r)
+... | unrestrictedWorstCase | _ | _ = worstCaseRetained
+... | independenceConditioned | false | _ = assumptionReceiptMissing
+... | independenceConditioned | true | Mechanism.observationIndependentMissingness = narrowedUnderReceiptedAssumption
+... | independenceConditioned | true | _ = mechanismIncompatible
+... | observedCovariateConditioned | false | _ = assumptionReceiptMissing
+... | observedCovariateConditioned | true | Mechanism.observedCovariateConditionedMissingness = narrowedUnderReceiptedAssumption
+... | observedCovariateConditioned | true | _ = mechanismIncompatible
 
 ------------------------------------------------------------------------
 -- BIDI promotion: stronger consumers require mechanism-specific producers.

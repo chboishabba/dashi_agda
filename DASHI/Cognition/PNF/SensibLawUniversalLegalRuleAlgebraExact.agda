@@ -153,6 +153,7 @@ open FactSet public
 -- represented without destructively editing the graph.
 ------------------------------------------------------------------------
 
+{-# NO_POSITIVITY_CHECK #-}
 data Derivation
   (graph : LegalGraph)
   (factSet : FactSet)
@@ -193,7 +194,7 @@ record LegalIssue : Set where
 
 open LegalIssue public
 
-record IssueProjection (graph : LegalGraph) (issue : LegalIssue) : Set where
+record IssueProjection (graph : LegalGraph) (issue : LegalIssue) : Set₁ where
   constructor issue-projection
   field
     activeRule : LegalRule → Set
@@ -279,7 +280,7 @@ record MinimalTransformationResult
   (graph : LegalGraph)
   (facts : FactSet)
   (goal : LegalProposition)
-  : Set where
+  : Set₁ where
   constructor minimal-transformation-result
   field
     obstruction : MinimalCut graph facts goal

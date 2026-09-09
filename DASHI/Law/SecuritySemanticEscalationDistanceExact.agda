@@ -107,3 +107,6 @@ record EscalationBoundary : Set where
 
 canonicalEscalationBoundary : EscalationBoundary
 canonicalEscalationBoundary = escalationBoundary false refl false refl false refl false refl
+
+open EscalationBoundary public
+

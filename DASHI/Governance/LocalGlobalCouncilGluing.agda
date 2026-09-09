@@ -164,6 +164,8 @@ record CouncilGluingBoundary : Set where
     sheafAnalogyCreatesPoliticalAuthority : Bool
     actualConstituencyCompatibilityEstablished : Bool
 
+open CouncilGluingBoundary public
+
 canonicalCouncilGluingBoundary : CouncilGluingBoundary
 canonicalCouncilGluingBoundary =
   councilGluingBoundary

@@ -193,6 +193,9 @@ canonicalHerzogLegalStoppingBoundary : HerzogLegalStoppingBoundary
 canonicalHerzogLegalStoppingBoundary =
   herzogLegalStoppingBoundary true refl false refl false refl
 
+open HerzogLegalStoppingBoundary public
+
+
 ------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------

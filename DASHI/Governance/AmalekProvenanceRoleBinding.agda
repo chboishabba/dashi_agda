@@ -213,6 +213,8 @@ record AmalekBoundary : Set where
     commandTransportRequiresSeparateEvidenceIsTrue :
       commandTransportRequiresSeparateEvidence ≡ true
 
+open AmalekBoundary public
+
 canonicalAmalekBoundary : AmalekBoundary
 canonicalAmalekBoundary =
   amalekBoundary false refl false refl true refl

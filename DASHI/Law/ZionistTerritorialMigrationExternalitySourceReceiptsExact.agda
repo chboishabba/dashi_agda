@@ -104,6 +104,8 @@ record TerritorialExternalityBoundary : Set where
     oneHistoricalSchemeProvesGlobalBehaviouralTrait : Bool
     oneHistoricalSchemeProvesGlobalBehaviouralTraitIsFalse : oneHistoricalSchemeProvesGlobalBehaviouralTrait ≡ false
 
+open TerritorialExternalityBoundary public
+
 canonicalTerritorialExternalityBoundary : TerritorialExternalityBoundary
 canonicalTerritorialExternalityBoundary =
   territorialExternalityBoundary false refl false refl false refl false refl

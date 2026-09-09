@@ -8,7 +8,9 @@ open import Agda.Builtin.String using (String)
 -- traffic/exposure and the eligible exposure set are separate coordinates.
 ------------------------------------------------------------------------
 
-data Closure : Set where open closed : Closure
+data Closure : Set where
+  openClosure : Closure
+  closedClosure : Closure
 
 data DeploymentCoordinate : Set where
   authorisationCoordinate : DeploymentCoordinate
@@ -41,19 +43,14 @@ data DeploymentReverseResult : Set where
   firstOpenDeploymentCoordinate : DeploymentCoordinate → DeploymentReverseResult
 
 firstOpenDeployment : OperationDeployment → DeploymentReverseResult
-firstOpenDeployment d with authorisation d
-... | open = firstOpenDeploymentCoordinate authorisationCoordinate
-... | closed with place d
-...   | open = firstOpenDeploymentCoordinate placeCoordinate
-...   | closed with timeWindow d
-...     | open = firstOpenDeploymentCoordinate timeCoordinate
-...     | closed with officerDeployment d
-...       | open = firstOpenDeploymentCoordinate officerDeploymentCoordinate
-...       | closed with publicTrafficObserved d
-...         | open = firstOpenDeploymentCoordinate publicTrafficCoordinate
-...         | closed with eligibleExposureSetConstructed d
-...           | open = firstOpenDeploymentCoordinate exposureSetCoordinate
-...           | closed = deploymentClosed
+firstOpenDeployment d with authorisation d | place d | timeWindow d | officerDeployment d | publicTrafficObserved d | eligibleExposureSetConstructed d
+... | openClosure | _ | _ | _ | _ | _ = firstOpenDeploymentCoordinate authorisationCoordinate
+... | closedClosure | openClosure | _ | _ | _ | _ = firstOpenDeploymentCoordinate placeCoordinate
+... | closedClosure | closedClosure | openClosure | _ | _ | _ = firstOpenDeploymentCoordinate timeCoordinate
+... | closedClosure | closedClosure | closedClosure | openClosure | _ | _ = firstOpenDeploymentCoordinate officerDeploymentCoordinate
+... | closedClosure | closedClosure | closedClosure | closedClosure | openClosure | _ = firstOpenDeploymentCoordinate publicTrafficCoordinate
+... | closedClosure | closedClosure | closedClosure | closedClosure | closedClosure | openClosure = firstOpenDeploymentCoordinate exposureSetCoordinate
+... | closedClosure | closedClosure | closedClosure | closedClosure | closedClosure | closedClosure = deploymentClosed
 
 ------------------------------------------------------------------------
 -- The exposure set is not just the resident population.  It represents people
@@ -95,7 +92,7 @@ selectedGivenOpportunityEligibility x = conditionalSelectionCount
 canonicalDeployment : OperationDeployment
 canonicalDeployment = operationDeployment
   "deployment-qld-synthetic-001"
-  closed closed closed closed closed open
+  closedClosure closedClosure closedClosure closedClosure closedClosure openClosure
   "synthetic authorisation receipt"
   "synthetic place receipt"
   "synthetic time-window receipt"
