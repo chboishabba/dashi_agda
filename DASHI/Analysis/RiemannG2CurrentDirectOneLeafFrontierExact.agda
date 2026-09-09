@@ -6,7 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Target
 import DASHI.Analysis.RiemannG2DirectIndependentComplementMarginExact as Margin
-import DASHI.Analysis.RiemannG2DirectComplementUnpaidContextExact as Context
+import DASHI.Analysis.RiemannG2BalanceFreeComplementContextExact as Context
 import DASHI.Analysis.RiemannG2LiteralPhaseJointMarginCompilerExact as PhaseMargin
 import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as High
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as NearObserver
@@ -20,25 +20,26 @@ import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 ------------------------------------------------------------------------
 -- CURRENT DIRECT ONE-LEAF FRONTIER
 --
--- The canonical prize path is now literal and acyclic:
+-- The canonical prize path is now literal, acyclic, and balance-free at the
+-- analytic payment boundary:
 --
 --   verified-region transport
 --   + verified-region-or-High cover
 --   + for every arbitrary High off-line zero:
---       unpaid final context
+--       balance-free representation/order/taper/cluster context
 --       + exact literal final-near phase model
 --       + literalNear + far + Gamma < cluster margin
+--       + downstream final-balance attachment
 --       -> contradiction
 --   -> double-negated RH
 --   + exact critical-predicate refinement
 --   -> positive RH.
---
--- The strict margin theorem is not hidden inside the context that indexes it.
 ------------------------------------------------------------------------
 
 data FrontierCoordinate : Set where
   finalNearLiteralPhaseRealisation : FrontierCoordinate
   highLiteralPhaseJointComplementMargin : FrontierCoordinate
+  finalClusterBalanceAttachment : FrontierCoordinate
   lowPublishedHeightCarrierTransport : FrontierCoordinate
   verifiedRegionOrHighCover : FrontierCoordinate
   constructiveDoubleNegatedRH : FrontierCoordinate
@@ -69,6 +70,7 @@ data FrontierClass : Set where
 frontierClass : FrontierCoordinate -> FrontierClass
 frontierClass finalNearLiteralPhaseRealisation = representationWall
 frontierClass highLiteralPhaseJointComplementMargin = analyticWall
+frontierClass finalClusterBalanceAttachment = representationWall
 frontierClass lowPublishedHeightCarrierTransport = representationWall
 frontierClass verifiedRegionOrHighCover = representationWall
 frontierClass constructiveDoubleNegatedRH = compilerOutput
@@ -115,15 +117,30 @@ finalNearLiteralModelDoesNotPayMargin :
     NearObserver.canonicalFinalPoleNearObserverRefinementBoundary ≡ false
 finalNearLiteralModelDoesNotPayMargin = refl
 
-unpaidContextDoesNotContainMargin :
-  Context.UnpaidContextBoundary.representationContextContainsStrictMarginPayment
-    Context.canonicalUnpaidContextBoundary ≡ false
-unpaidContextDoesNotContainMargin = refl
+analyticContextDoesNotExposeFinalBalance :
+  Context.BalanceFreeContextBoundary.analyticContextExposesFinalClusterBalance
+    Context.canonicalBalanceFreeContextBoundary ≡ false
+analyticContextDoesNotExposeFinalBalance = refl
+
+strictMarginTypedWithoutFinalBalance :
+  Context.BalanceFreeContextBoundary.strictMarginPaymentCanBeTypedWithoutFinalBalance
+    Context.canonicalBalanceFreeContextBoundary ≡ true
+strictMarginTypedWithoutFinalBalance = refl
+
+finalBalanceIsDownstream :
+  Context.BalanceFreeContextBoundary.finalBalanceIsDownstreamAttachment
+    Context.canonicalBalanceFreeContextBoundary ≡ true
+finalBalanceIsDownstream = refl
 
 literalPhasePaymentDoesNotPresupposeCanonicalMargin :
   PhaseMargin.LiteralPhaseJointMarginBoundary.literalPhasePaymentPresupposesCanonicalStrictMargin
     PhaseMargin.canonicalLiteralPhaseJointMarginBoundary ≡ false
 literalPhasePaymentDoesNotPresupposeCanonicalMargin = refl
+
+literalPhasePaymentCannotAccessFinalBalance :
+  PhaseMargin.LiteralPhaseJointMarginBoundary.literalPhasePaymentCanAccessFinalClusterBalance
+    PhaseMargin.canonicalLiteralPhaseJointMarginBoundary ≡ false
+literalPhasePaymentCannotAccessFinalBalance = refl
 
 literalPhasePaymentCompilesCanonicalMargin :
   PhaseMargin.LiteralPhaseJointMarginBoundary.literalPhasePaymentCompilesCanonicalOneLeafMargin
@@ -149,6 +166,11 @@ uniformLiteralHighFamilyStillRequired :
   High.UniformLiteralPhaseHighBoundary.literalPhaseTheoremFamilyMatchesPrizeHighQuantifier
     High.canonicalUniformLiteralPhaseHighBoundary ≡ true
 uniformLiteralHighFamilyStillRequired = refl
+
+uniformAnalyticPaymentCannotAccessBalance :
+  High.UniformLiteralPhaseHighBoundary.analyticPaymentCanAccessFinalBalanceThroughContext
+    High.canonicalUniformLiteralPhaseHighBoundary ≡ false
+uniformAnalyticPaymentCannotAccessBalance = refl
 
 fixedLiteralCaseDoesNotSuffice :
   High.UniformLiteralPhaseHighBoundary.fixedLiteralPhaseCaseSuffices
@@ -204,6 +226,10 @@ record CurrentDirectOneLeafFrontierBoundary : Set where
     literalHighPaymentPresupposesFinalMargin : Bool
     literalHighPaymentPresupposesFinalMarginIsFalse :
       literalHighPaymentPresupposesFinalMargin ≡ false
+
+    literalHighPaymentCanSeeFinalBalance : Bool
+    literalHighPaymentCanSeeFinalBalanceIsFalse :
+      literalHighPaymentCanSeeFinalBalance ≡ false
 
     highLeafMustBeUniformOverArbitraryHighOffLineZeros : Bool
     highLeafMustBeUniformOverArbitraryHighOffLineZerosIsTrue :
@@ -266,6 +292,7 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     true refl
     true refl
     false refl
+    false refl
     true refl
     false refl
     false refl
@@ -280,5 +307,5 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     false refl
     false refl
     "Identify final nearResponseAt(chosen crossing J) proof-relevantly with the literal reflection-paired finite near-zero sum exposing target-relative gap, multiplicity and the universal pole-quotient kernel."
-    "Uniformly for every arbitrary high off-line nontrivial zero, on that exact crossing carrier and independently of the final balance, prove: cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster)."
-    "The current Clay path is now literal and acyclic. The same-object/order/taper/cluster context contains no strict margin theorem, and the literal phase payment is indexed only by that unpaid context plus the exact final-near model. Its theorem rewrites to the canonical one-leaf margin, compiles to the existing contradiction, and is quantified directly over every arbitrary high off-line zero at the Clay boundary. Narrow windows, final-balance circularity, determinant-taper payment, separate near/Gamma envelopes, arbitrary Low partitions and naked critical-line stability are all off the canonical path. No exact same-object harmonic donor has been found; exact-head Agda validation is still unavailable and RH is not derived."
+    "Uniformly for every arbitrary high off-line nontrivial zero, using a BalanceFreeComplementContext that contains no cluster=Off+Gamma theorem, independently prove: cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster). Only afterward attach the final balance to compile contradiction."
+    "The current Clay path is now literal, acyclic and dependency-level balance-free. The analytic payment context does not contain the final cluster balance, so independence from cluster=Off+Gamma is enforced by the type dependency graph rather than an opaque provenance label. The literal phase theorem rewrites to the canonical margin; a separate downstream balance attachment then compiles contradiction. This theorem family is quantified directly over every arbitrary high off-line zero at the Clay boundary. Narrow windows, determinant payment, separate near/Gamma envelopes, arbitrary Low partitions and naked critical-line stability are all off the canonical path. No exact same-object harmonic donor has been found; exact-head Agda validation is still unavailable and RH is not derived."
