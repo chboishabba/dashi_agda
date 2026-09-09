@@ -16,15 +16,17 @@ import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 --
 -- The public high-side input is now the lowest theorem-bearing surface reached
 -- by introspection: for every arbitrary High zero assumed off-line, supply one
--- exact literal finite-near model, one unpaid final representation context, and
--- the independent phase-visible
+-- exact literal finite-near model, one balance-free actual-cluster-response
+-- context, and the independent phase-visible theorem
 --
---   literalNear + transportedFar + Gamma < clusterMargin
+--   literalNear + transportedFar + Gamma < ClusterResponse.
 --
--- theorem.  The legacy opaque combined-margin producer is compiler output.
+-- The final balance cluster = Off + Gamma is a separate downstream attachment.
+-- There is no primitive intermediate M_cluster or M_cluster <= ClusterResponse
+-- theorem on the canonical high path.
 --
--- Low is definitionally the Platt--Trudgian verified region.  Low + literal High
--- + cover compile first to constructive double-negated RH.  The exact critical
+-- Low is definitionally the Platt--Trudgian verified region. Low + literal High
+-- + cover compile first to constructive double-negated RH. The exact critical
 -- predicate refinement is consumed only in the final conversion to positive RH.
 ------------------------------------------------------------------------
 
@@ -156,7 +158,8 @@ record ClayTerminalOneLeafBoundary : Set where
     inputsInhabitedHereIsFalse : inputsInhabitedHere ≡ false
 
     unconditionalRHClaimedHere : Bool
-    unconditionalRHClaimedHereIsFalse : unconditionalRHClaimedHere ≡ false
+    unconditionalRHClaimedHereIsFalse :
+      unconditionalRHClaimedHere ≡ false
 
     highestAlphaReading : String
 
@@ -180,4 +183,4 @@ canonicalClayTerminalOneLeafBoundary =
     true refl
     false refl
     false refl
-    "The prize-facing compiler now exposes the literal phase theorem family itself. High work is: for every arbitrary high off-line zero, provide the exact final near phase model, unpaid same-object context, and independent literalNear+far+Gamma<cluster margin. The opaque canonical-margin producer is downstream compiler output. Low is definitionally the exact Platt--Trudgian verified region, so no arbitrary Low carrier or Low-subset theorem remains. These inputs compile to double-negated RH without stability; only the final positive-RH conversion consumes the exact critical-predicate refinement. No substantive theorem is fabricated here."
+    "The prize-facing compiler exposes the literal high theorem family itself: for every arbitrary high off-line zero, provide the exact final near phase model, a balance-free actual ClusterResponse context, and independently prove literalNear+far+Gamma<ClusterResponse. The final cluster=Off+Gamma equality is downstream only. No intermediate M_cluster or M_cluster<=ClusterResponse theorem, arbitrary Low carrier, Low-subset theorem, allowance layer, or naked critical-line stability is primitive. These inputs compile to double-negated RH before the final critical-predicate refinement. No substantive theorem is fabricated here."
