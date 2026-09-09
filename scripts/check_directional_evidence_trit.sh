@@ -11,6 +11,9 @@ FILES=(
   DASHI/Statistics/StandardConfidenceIntervalInterpretationExact.agda
   DASHI/Statistics/Vec15BinaryDecisionDirectionalEvidenceBridgeExact.agda
   DASHI/Statistics/DirectionalEvidenceEverything.agda
+  DASHI/Biology/LogisticPopulationDirectionalEvidenceExact.agda
+  DASHI/Biology/LogisticAgenticPrebioticCrossPollinationExact.agda
+  DASHI/AgenticMaterialBidiEverything.agda
   DASHI/Interop/DirectionalEvidenceProofSearchBridgeExact.agda
 )
 
@@ -30,4 +33,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence trit / binary test / region / confidence-interval checks passed"
+echo "directional evidence / logistic population / agentic-prebiotic cross-pollination checks passed"
