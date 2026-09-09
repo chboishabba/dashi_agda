@@ -6,25 +6,13 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.WikidataDerivationFibreBridge as Fibre
+import DASHI.Policy.ABC730WestBankSanctionsTranscriptClaimsExact as Transcript
 
 ------------------------------------------------------------------------
--- Source-conditioned political attribution fixture.
---
--- This module deliberately separates:
---   * what the UK announced;
---   * what Penny Wong / the Australian Government said;
---   * the ABC 7.30 broadcast wording;
---   * the identity of the speaker at that broadcast cut; and
---   * any downstream assessment of whether the characterisation is apt.
---
--- Correction history:
---   The initial user recollection named Adam Bandt. A subsequent search raised
---   David Shoebridge as a plausible speaker, but the recovered ABC 7.30
---   transcript does not label the speaker at the relevant cut. The exact words
---   are now source-backed; the speaker identity remains unresolved.
---
--- A speaker's evaluative label is evidence that the speaker used that label.
--- It is not, by itself, evidence that the target proposition is true.
+-- Consumer-facing sanctions attribution module.
+-- Canonical transcript extraction is owned by Transcript; this module only
+-- consumes selected transcript coordinates and keeps policy comparison,
+-- speaker attribution, and evaluative truth as separate fibres.
 
 speakerAxis policyAxis comparisonAxis assessmentAxis correctionAxis transcriptAxis : Fibre.OntologyAxis
 speakerAxis = Fibre.externalAxis "speaker-attribution"
@@ -35,46 +23,47 @@ correctionAxis = Fibre.externalAxis "attribution-correction"
 transcriptAxis = Fibre.externalAxis "broadcast-transcript"
 
 ------------------------------------------------------------------------
--- Public/source carriers checked 9 September 2026.
+-- Canonical transcript handles.  No duplicate transcript prose is authoritative
+-- here: these values point back to the source-native ledger.
 
-ukSource : String
-ukSource = "UK policy, 8-9 Sep 2026: settlement-goods trade ban; new arms/export restrictions; individual sanctions; public reporting"
+canonicalABCWords : Transcript.TranscriptClaim
+canonicalABCWords = Transcript.abcLaborGaslightingClaim
 
-wongSource : String
-wongSource = "Penny Wong, 9 Sep 2026: Australia pursuing further targeted measures; concerns about blanket-ban implementation and unintended consequences for Australian businesses, Palestinians and Israelis"
+canonicalAustraliaNoBlanketBan : Transcript.TranscriptClaim
+canonicalAustraliaNoBlanketBan = Transcript.abcAustraliaNoBlanketBanClaim
 
-abc730TranscriptSource : String
-abc730TranscriptSource = "ABC 7.30 broadcast transcript supplied by user, 9 Sep 2026: after Wong/Labor rationale, transcript contains 'This is unbelievable gaslighting from labour'."
+canonicalAustraliaRationale : Transcript.TranscriptClaim
+canonicalAustraliaRationale = Transcript.abcAustraliaUnintendedConsequencesRationale
 
-speakerStatus : String
-speakerStatus = "speaker not labelled in recovered transcript at the relevant cut; Bandt and Shoebridge attributions must not be promoted from wording alone"
+canonicalUKImportBan : Transcript.TranscriptClaim
+canonicalUKImportBan = Transcript.abcUKImportBanClaim
 
 ------------------------------------------------------------------------
--- Base claims.
+-- Base claims for downstream consumers.
 
 ukBroaderMeasuresClaim : Fibre.ClaimBase
 ukBroaderMeasuresClaim = Fibre.claimBase
   "au-il-sanctions:uk-broader-measures:2026-09-09"
-  "The UK adopted a settlement-goods trade ban together with additional arms/export restrictions and individual sanctions concerning Israeli settlement activity."
+  "The UK adopted an import ban concerning settlement goods; other UK measures must be sourced independently before being bundled into this consumer."
   (Fibre.externalClaimKind "public-policy-source-claim")
   Fibre.mainValueRole
-  "source-snapshot:2026-09-09"
+  "ABC730-2026-09-09-C017-plus-independent-source-residuals"
 
 wongNoBlanketBanClaim : Fibre.ClaimBase
 wongNoBlanketBanClaim = Fibre.claimBase
   "au-il-sanctions:wong-no-blanket-ban:2026-09-09"
-  "Penny Wong said Australia was pursuing further targeted measures but was not adopting the UK-style blanket settlement-goods ban, citing implementation and unintended-consequence concerns."
+  "Australia was not at that time pursuing a blanket-style import ban and cited implementation/unintended-consequence concerns."
   (Fibre.externalClaimKind "speaker-policy-position")
   Fibre.mainValueRole
-  "source-snapshot:2026-09-09"
+  "ABC730-2026-09-09-C028-C029"
 
 policyDifferenceClaim : Fibre.ClaimBase
 policyDifferenceClaim = Fibre.claimBase
   "au-il-sanctions:uk-australia-policy-difference:2026-09-09"
-  "On the verified 9 September 2026 source surface, the UK policy package is broader than the Australian position stated by Wong because the UK includes a settlement-goods trade ban that Australia is not presently adopting."
+  "On the transcript source surface, the UK includes an import ban that Australia was not at that time pursuing."
   (Fibre.externalClaimKind "bounded-cross-source-comparison")
   Fibre.mainValueRole
-  "source-snapshot:2026-09-09"
+  "ABC730-2026-09-09-C017-C028"
 
 abcGaslightingWordsClaim : Fibre.ClaimBase
 abcGaslightingWordsClaim = Fibre.claimBase
@@ -82,7 +71,7 @@ abcGaslightingWordsClaim = Fibre.claimBase
   "The 9 September 2026 ABC 7.30 segment contains the words 'This is unbelievable gaslighting from labour'."
   (Fibre.externalClaimKind "broadcast-transcript-claim")
   Fibre.mainValueRole
-  "user-supplied-transcript:2026-09-09"
+  "ABC730-2026-09-09-C032"
 
 bandtSpeakerClaim : Fibre.ClaimBase
 bandtSpeakerClaim = Fibre.claimBase
@@ -109,42 +98,42 @@ gaslightingAptClaim = Fibre.claimBase
   "assessment-not-promoted"
 
 ------------------------------------------------------------------------
--- Derivations.
+-- Derivations paid by transcript-native coordinates.
 
 ukBroaderMeasuresEvidence : Fibre.Derivation ukBroaderMeasuresClaim
 ukBroaderMeasuresEvidence = Fibre.derivation
-  "source:uk-policy:2026-09-08/09"
+  "transcript-consumer:ABC730-C017"
   Fibre.supporting
-  (policyAxis ∷ [])
-  ukSource
-  "public sources checked 2026-09-09"
-  []
+  (policyAxis ∷ transcriptAxis ∷ [])
+  "Canonical transcript claim C017 records Britain's move to impose an import ban on settlement goods."
+  "DASHI.Policy.ABC730WestBankSanctionsTranscriptClaimsExact.C017"
+  ("Do not infer every separately reported UK restriction from C017 alone." ∷ [])
 
 wongNoBlanketBanEvidence : Fibre.Derivation wongNoBlanketBanClaim
 wongNoBlanketBanEvidence = Fibre.derivation
-  "source:wong-policy:2026-09-09"
+  "transcript-consumer:ABC730-C028-C029"
   Fibre.supporting
-  (speakerAxis ∷ policyAxis ∷ [])
-  wongSource
-  "public parliamentary/media reporting checked 2026-09-09"
+  (speakerAxis ∷ policyAxis ∷ transcriptAxis ∷ [])
+  "Canonical transcript claims C028-C029 record no blanket-style Australian ban and the implementation/unintended-consequence rationale."
+  "DASHI.Policy.ABC730WestBankSanctionsTranscriptClaimsExact.C028-C029"
   []
 
 policyDifferenceEvidence : Fibre.Derivation policyDifferenceClaim
 policyDifferenceEvidence = Fibre.derivation
-  "comparison:uk-v-australia:2026-09-09"
+  "comparison:ABC730-C017-v-C028"
   Fibre.supporting
-  (comparisonAxis ∷ policyAxis ∷ [])
-  "UK source includes settlement-goods trade ban; Wong source expressly declines a blanket ban while proposing targeted measures."
-  "derived only from the two bounded public-source carriers above"
+  (comparisonAxis ∷ policyAxis ∷ transcriptAxis ∷ [])
+  "C017 records the UK import ban; C028 records Australia not pursuing a blanket-style import ban at that time."
+  "bounded comparison over canonical transcript claims only"
   []
 
 abcGaslightingWordsEvidence : Fibre.Derivation abcGaslightingWordsClaim
 abcGaslightingWordsEvidence = Fibre.derivation
-  "source:abc-730-transcript:2026-09-09"
+  "transcript-consumer:ABC730-C032"
   Fibre.supporting
   (transcriptAxis ∷ assessmentAxis ∷ [])
-  abc730TranscriptSource
-  "user-supplied ABC 7.30 transcript, relevant span around lines 22-24"
+  "Canonical transcript claim C032 contains the exact wording 'This is unbelievable gaslighting from labour'."
+  "DASHI.Policy.ABC730WestBankSanctionsTranscriptClaimsExact.C032"
   []
 
 bandtSpeakerEvidence : Fibre.Derivation bandtSpeakerClaim
@@ -152,30 +141,30 @@ bandtSpeakerEvidence = Fibre.derivation
   "attribution:bandt:unresolved-after-transcript"
   Fibre.unresolved
   (speakerAxis ∷ correctionAxis ∷ [])
-  "Recovered transcript proves the words but does not label the speaker at the relevant cut."
-  speakerStatus
-  ("recover labelled video frame, caption, lower-third, or transcript with speaker identity" ∷ [])
+  "C032 marks the speaker unresolved."
+  "ABC730-2026-09-09-C032"
+  ("recover labelled video frame, caption, lower-third, or speaker-labelled transcript" ∷ [])
 
 shoebridgeSpeakerEvidence : Fibre.Derivation shoebridgeSpeakerClaim
 shoebridgeSpeakerEvidence = Fibre.derivation
   "attribution:shoebridge:unresolved-after-transcript"
   Fibre.unresolved
   (speakerAxis ∷ correctionAxis ∷ [])
-  "Shoebridge is independently source-backed as a critic of Labor's Israel policy, but the recovered ABC transcript alone does not identify him as the speaker of this line."
-  speakerStatus
-  ("recover labelled video frame, caption, lower-third, or transcript with speaker identity" ∷ [])
+  "C032 marks the speaker unresolved."
+  "ABC730-2026-09-09-C032"
+  ("recover labelled video frame, caption, lower-third, or speaker-labelled transcript" ∷ [])
 
 gaslightingAptEvidence : Fibre.Derivation gaslightingAptClaim
 gaslightingAptEvidence = Fibre.derivation
   "assessment:gaslighting-apt:unpromoted"
   Fibre.unresolved
   (assessmentAxis ∷ [])
-  "The broadcast's evaluative label is not by itself a source-established truth condition."
-  "consumer-relative assessment intentionally left open"
+  "C032 is evaluative rhetoric; its presence does not establish that the evaluation is correct."
+  "ABC730-2026-09-09-C032"
   ("define and pay an explicit evaluative consumer before promotion" ∷ [])
 
 ------------------------------------------------------------------------
--- Regression receipts for the non-collapse boundary.
+-- Non-collapse receipts.
 
 abcWordsSupported :
   Fibre.validateRequiredSubfibre Fibre.axisRequired true false ≡
@@ -196,21 +185,3 @@ evaluativeTruthStillUndetermined :
   Fibre.validateRequiredSubfibre Fibre.axisRequired false false ≡
   Fibre.fibreShape Fibre.undetermined
 evaluativeTruthStillUndetermined = refl
-
-------------------------------------------------------------------------
--- Intended interpretation:
---
---   verified UK action
---       + verified Wong position
---       -> bounded policy-difference claim
---
---   recovered ABC 7.30 transcript
---       -> exact words supported
---       -> speaker identity still unresolved
---
---   exact words supported
---       != Bandt was speaker
---       != Shoebridge was speaker
---       != evaluative label is correct
---
--- This preserves the existing source -> claim -> consumer admission discipline.
