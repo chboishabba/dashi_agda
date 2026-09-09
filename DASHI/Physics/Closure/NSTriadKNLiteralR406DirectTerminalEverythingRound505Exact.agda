@@ -48,8 +48,18 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- the Monster/Base369 signed-reflection intertwiner into the same cross-domain
 -- consumer. Both pay/refine local finite-fibre structure only. Neither can pay
 -- the lattice-sum <-> continuum-integral, cutoff, or same-object R406 theorem.
--- After the Euclidean finite sign fibre is instantiated, spectral-measure
--- transport is the first genuinely analytic cross-domain seam.
+--
+-- R533-R534 refine the Euclidean side rather than overclaiming a total sign
+-- decision on constructive reals. R533 proves that ONE scalar authority
+--
+--   classify : Scalar -> {-1,0,+1},  classify(-x) = -classify(x)
+--
+-- compiles the whole R^3 product chart and reflection covariance. R534 then
+-- separates that generic chart compiler from concrete raw-continuum coverage:
+-- a backend still has to show that its actual Euclidean Fourier scalar carrier
+-- supplies the exact sign authority. Once that receipt is present, the next
+-- cross-domain residual is precisely spectral-measure normalization, followed
+-- by cutoff and literal same-object R406 transport.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -101,3 +111,5 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicIntegerTernary27SignChartRound529E
 import DASHI.Physics.Closure.NSTriadKNPeriodicFourierTernaryTorusFibreBidiRound530Exact
 import DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531Exact
 import DASHI.Physics.Closure.NSTriadKNBase369TeslaMonsterR406CrossDomainBidiRound532Exact
+import DASHI.Physics.Closure.NSTriadKNEuclideanTernary27SignChartBoundaryRound533Exact
+import DASHI.Physics.Closure.NSTriadKNEuclideanSignCoverageMeasureBidiRound534Exact
