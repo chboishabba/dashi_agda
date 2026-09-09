@@ -13,7 +13,7 @@ import DASHI.Law.SensibLawQCATHealthPages82_83PrivateDatasetFixtureExact as Priv
 --
 -- Privacy-safe regression over the complete 89-row private transcription of
 -- QCAT pp.82-83 and source-native court-bundle events dated 24 and 28 February
--- 2022.  Only aggregate relation receipts are public here; no physiological
+-- 2022. Only aggregate relation receipts are public here; no physiological
 -- values or private note text are committed.
 --
 -- Processing owner:
@@ -112,11 +112,11 @@ record RussellHealthEventJoinReceipt : Set₁ where
 
 open RussellHealthEventJoinReceipt public
 
-russellHealthEventJoinReceipt :
+canonicalRussellHealthEventJoinReceipt :
   (processorExecutionReceipt : Set) →
   (eventSourceReceipt : Set) →
   RussellHealthEventJoinReceipt
-russellHealthEventJoinReceipt processorExecutionReceipt eventSourceReceipt =
+canonicalRussellHealthEventJoinReceipt processorExecutionReceipt eventSourceReceipt =
   russellHealthEventJoinReceipt
     processorContract
     privateDatasetDigest
