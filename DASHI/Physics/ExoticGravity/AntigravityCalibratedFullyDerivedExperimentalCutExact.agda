@@ -39,8 +39,8 @@ record CalibratedFullyDerivedSameApparatusExperimentalCut : Set₁ where
           (FullyDerived.provenancedCut fullyDerivedCut))
 
     sourceTypedCalibrationIsSame :
-      Calibrated.calibration sourceAcquisitionCalibration
-        ≡ Calibrated.calibration sourceExecutionCalibration
+      Calibrated.sourceCalibration sourceAcquisitionCalibration
+        ≡ Calibrated.bundleCalibration sourceExecutionCalibration
 
     phaseProbeCalibration :
       Calibrated.CalibratedBundleExecution
