@@ -31,7 +31,9 @@ FILES=(
   DASHI/Analysis/RiemannG2IndependentComplementMarginFinalExact.agda
   DASHI/Analysis/RiemannG2LiteralComplementDirectTargetExact.agda
   DASHI/Analysis/RiemannG2DirectIndependentComplementMarginExact.agda
-  DASHI/Analysis/RiemannG2UniformIndependentComplementHighProducerExact.agda
+  DASHI/Analysis/RiemannG2DirectClusterResponseContradictionExact.agda
+  DASHI/Analysis/RiemannG2LiteralPhaseDirectClusterResponseExact.agda
+  DASHI/Analysis/RiemannG2UniformLiteralPhaseHighProducerExact.agda
   DASHI/Analysis/RiemannCriticalLineStabilityRefinementExact.agda
   DASHI/Analysis/RiemannG2ProofRelevantTargetTranslationModulationExact.agda
   DASHI/Analysis/RiemannG2FinalPoleNearObserverRefinementExact.agda
