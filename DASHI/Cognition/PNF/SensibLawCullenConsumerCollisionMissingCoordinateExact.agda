@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Reasoning.StructuralMetaphorTaskCompressionExact as Compression
 import DASHI.Reasoning.ConsumerCollisionMissingCoordinateExact as Collision
 
@@ -83,7 +84,7 @@ cullenLegacyConsumerCollision =
     "Police-function context is observationally identical across the two fine worlds, while the legacy bundled-premise consumer differs."
 
 policeFunctionContextCannotDetermineLegacyBundledPremise :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+  NonFactor.FactorsThrough
     observePoliceFunctionContext legacyBundledPremiseConsumer → ⊥
 policeFunctionContextCannotDetermineLegacyBundledPremise =
   Collision.coarseObservationCannotDetermineConsumer
@@ -159,7 +160,9 @@ statutoryPowerCoordinateDoesNotBecomeDutyElement ()
 
 repairDoesNotReinstateLegacyRule :
   CoordinateRepairReinstatesLegacyDutyRule → ⊥
-repairDoesNotReinstateLegacyRule ()
+repairDoesNotReinstateLegacyDutyRule where
+repairDoesNotReinstateLegacyDutyRule : CoordinateRepairReinstatesLegacyDutyRule → ⊥
+repairDoesNotReinstateLegacyDutyRule ()
 
 representationTheoremIsNotAuthority :
   RepresentationAdequacyIsJudicialAuthority → ⊥
