@@ -7,51 +7,75 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
--- OALC LEGISLATION PARSER INPUT CONTRACT
+-- OALC LEGISLATION SOURCE / PARSER CONTRACT
 --
--- Runtime parity target for SLR's local Open Australian Legal Corpus path.
--- The two supplied operator inputs are:
---   1. local corpus.jsonl path;
---   2. pinned immutable corpus revision reference.
+-- corpus.jsonl is an optional provider implementation detail, not an ITIR
+-- semantic input.  LegalFollow identifies the exact source demand; a governed
+-- OALC provider resolves and retains the document; only that retained receipt
+-- is eligible for source-preserving section slicing and spaCy/PNF.
 --
--- Exact legislation records are then retained as source observations and may
--- be section-sliced for spaCy/PNF.  OALC's latest-known NSW legislation text is
--- parser-admissible, but it does not by itself establish that the same text was
--- in force on Cullen's historical date 2017-01-26.
+--   LegalFollow source demand
+--     -> governed OALC resolution
+--     -> retained exact document receipt
+--     -> section slice receipt
+--     -> PNF handoff.
+--
+-- OALC latest-known text remains parser-admissible while historical equivalence
+-- to Cullen's 2017 date remains an independent source coordinate.
 ------------------------------------------------------------------------
 
 data OALCTemporalCoverage : Set where
   latestKnownOnly : OALCTemporalCoverage
   historicallyVerified : OALCTemporalCoverage
 
-record PinnedOALCCorpusInput : Set where
-  constructor pinned-oalc-corpus-input
+record OALCDatasetSelection : Set where
+  constructor oalc-dataset-selection
   field
-    corpusJSONLRef : String
+    datasetRef : String
+    configRef : String
+    splitRef : String
     corpusRevisionRef : String
-    immutableRevisionEvidenceRef : String
+    revisionPinEvidenceRef : String
 
-open PinnedOALCCorpusInput public
+open OALCDatasetSelection public
 
-record OALCLegislationDocumentReceipt
-    (input : PinnedOALCCorpusInput) : Set where
-  constructor oalc-legislation-document-receipt
+record OALCLegislationSourceDemand : Set where
+  constructor oalc-legislation-source-demand
   field
+    legalFollowDemandRef : String
+    consumerRef : String
     citation : String
+    jurisdictionRef : String
+    sourceRoleRef : String
+    authorityLevelRef : String
+    providerProfileRef : String
+    requestedTemporalRef : String
+
+open OALCLegislationSourceDemand public
+
+record OALCResolvedDocumentReceipt
+    (dataset : OALCDatasetSelection)
+    (demand : OALCLegislationSourceDemand) : Set where
+  constructor oalc-resolved-document-receipt
+  field
+    resolvedCitation : String
     versionId : String
     sourceRef : String
-    jurisdictionRef : String
+    resolvedJurisdictionRef : String
     documentTypeRef : String
     canonicalTextDigest : String
     localArtifactRef : String
     temporalCoverage : OALCTemporalCoverage
+    networkRequestCountRef : String
     receiptAuthority : String
+    exactDemandRelationshipRef : String
 
-open OALCLegislationDocumentReceipt public
+open OALCResolvedDocumentReceipt public
 
 record OALCSectionSliceReceipt
-    {input : PinnedOALCCorpusInput}
-    (parent : OALCLegislationDocumentReceipt input) : Set where
+    {dataset : OALCDatasetSelection}
+    {demand : OALCLegislationSourceDemand}
+    (parent : OALCResolvedDocumentReceipt dataset demand) : Set where
   constructor oalc-section-slice-receipt
   field
     sectionRef : String
@@ -65,11 +89,13 @@ record OALCSectionSliceReceipt
 open OALCSectionSliceReceipt public
 
 record OALCParserHandoff
-    {input : PinnedOALCCorpusInput}
-    {parent : OALCLegislationDocumentReceipt input}
+    {dataset : OALCDatasetSelection}
+    {demand : OALCLegislationSourceDemand}
+    {parent : OALCResolvedDocumentReceipt dataset demand}
     (slice : OALCSectionSliceReceipt parent) : Set where
   constructor oalc-parser-handoff
   field
+    legalFollowDemandRetained : String
     corpusRevisionRetained : String
     parentVersionRetained : String
     parentDigestRetained : String
@@ -79,12 +105,13 @@ record OALCParserHandoff
 open OALCParserHandoff public
 
 ------------------------------------------------------------------------
--- Historical equivalence is a distinct source coordinate.
+-- Historical equivalence remains distinct.
 ------------------------------------------------------------------------
 
 record HistoricalTextEquivalenceReceipt
-    {input : PinnedOALCCorpusInput}
-    (parent : OALCLegislationDocumentReceipt input)
+    {dataset : OALCDatasetSelection}
+    {demand : OALCLegislationSourceDemand}
+    (parent : OALCResolvedDocumentReceipt dataset demand)
     (dateRef : String) : Set where
   constructor historical-text-equivalence-receipt
   field
@@ -116,19 +143,26 @@ cullenVicariousLiabilitySections = "6,7,8"
 -- Firewalls.
 ------------------------------------------------------------------------
 
-data CorpusPathCreatesSourceAuthority : Set where
-data PinnedRevisionCreatesLegalAuthority : Set where
+data LocalCorpusPathIsSemanticRequirement : Set where
+data LegalFollowDemandCreatesSourceAuthority : Set where
+data ProviderResolutionCreatesLegalAuthority : Set where
 data OALCRecordCreatesHistoricalEquivalence : Set where
 data LatestKnownOnlyPaysHistoricalDate : Set where
 data ParserHandoffCreatesAtomicGate : Set where
 data PNFObservationCreatesLegalApplicability : Set where
 data CurrentTextMaySilentlyReplaceHistoricalText : Set where
 
-corpusPathDoesNotCreateAuthority : CorpusPathCreatesSourceAuthority → ⊥
-corpusPathDoesNotCreateAuthority ()
+localCorpusPathIsNotSemanticRequirement :
+  LocalCorpusPathIsSemanticRequirement → ⊥
+localCorpusPathIsNotSemanticRequirement ()
 
-pinnedRevisionDoesNotCreateAuthority : PinnedRevisionCreatesLegalAuthority → ⊥
-pinnedRevisionDoesNotCreateAuthority ()
+legalFollowDemandDoesNotCreateAuthority :
+  LegalFollowDemandCreatesSourceAuthority → ⊥
+legalFollowDemandDoesNotCreateAuthority ()
+
+providerResolutionDoesNotCreateAuthority :
+  ProviderResolutionCreatesLegalAuthority → ⊥
+providerResolutionDoesNotCreateAuthority ()
 
 oalcRecordDoesNotCreateHistoricalEquivalence :
   OALCRecordCreatesHistoricalEquivalence → ⊥
@@ -153,7 +187,9 @@ record OALCLegislationParserInputBoundary : Set where
   constructor oalc-legislation-parser-input-boundary
   field
     localCorpusPathRequired : Bool
-    pinnedRevisionRequired : Bool
+    legalFollowDemandRequired : Bool
+    governedResolutionReceiptRequired : Bool
+    pinnedObservedRevisionRequired : Bool
     exactLegislationRecordRequired : Bool
     sourcePreservingSliceRequired : Bool
     latestKnownTextParserAdmissible : Bool
@@ -165,4 +201,4 @@ canonicalOALCLegislationParserInputBoundary :
   OALCLegislationParserInputBoundary
 canonicalOALCLegislationParserInputBoundary =
   oalc-legislation-parser-input-boundary
-    true true true true true false false false
+    false true true true true true true false false false
