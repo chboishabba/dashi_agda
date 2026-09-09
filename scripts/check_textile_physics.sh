@@ -4,6 +4,7 @@ set -euo pipefail
 AGDA_BIN="${AGDA_BIN:-agda}"
 AGDA_STDLIB="${AGDA_STDLIB:-/usr/share/agda/lib/stdlib}"
 
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Optics/GeometricalOpticsRefractionLensPrismExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileMechanicalDimensionExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileMechanicalFibreExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/LinearElasticTextileLawExact.agda
@@ -26,6 +27,7 @@ AGDA_STDLIB="${AGDA_STDLIB:-/usr/share/agda/lib/stdlib}"
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileBirefringenceRetardanceExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileIridescentAppearanceExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileMechanicsOpticsCouplingExact.agda
+"$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Physics/Textile/TextileRefractiveOpticalTrainExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Topology/TextileStitchHyperfabricExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Topology/TextileStitchOperationalSemanticsExact.agda
 "$AGDA_BIN" -i . -i "$AGDA_STDLIB" DASHI/Topology/CircularKnittingHelicalLoopBridgeExact.agda
