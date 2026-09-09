@@ -3,6 +3,10 @@ module DASHI.JInvariantBase369CrossPollinationEverything where
 -- Revision-pinned external statement atlas and proof-debt boundary.
 import DASHI.Moonshine.JInvariantSourceAtlasExact
 
+-- Source-aligned image descriptions: modular self-similarity, triple phase
+-- winding, and explicit non-promotion of incidental String-theory page usage.
+import DASHI.Moonshine.JInvariantImageFractalSourceAtlasExact
+
 -- Exact finite six-label / three-pair / two-orientation bridge.
 import DASHI.Moonshine.JInvariantLambdaOrbitBase369BridgeExact
 
@@ -22,6 +26,11 @@ import DASHI.Moonshine.JInvariantColourWheelWaveSignedValidation
 -- 3/6/9/27, tied to the existing C3-C9-C27 phase tower and kept semantically
 -- distinct from the 27-hypervoxel/Monster layers until an actual bridge pays it.
 import DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact
+
+-- Source-described fractal self-similarity lifted to a signed-fibre,
+-- scale-indexed BIDI observer.  Sign/orientation, boundary openness/closure and
+-- scale are retained as distinct coordinates over the richer continuous fibre.
+import DASHI.Moonshine.JInvariantSignedFibreFractalBidiExact
 
 -- Existing exact in-repo carriers consumed by the bridge.
 import DASHI.Foundations.Base369MobiusTransport
