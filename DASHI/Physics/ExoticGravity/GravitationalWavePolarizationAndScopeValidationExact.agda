@@ -14,6 +14,10 @@ import DASHI.Physics.ExoticGravity.SuperconductingResidualCouplingNegativeGInter
 import DASHI.Physics.ExoticGravity.SuperconductingConstitutiveNegativeGScopeWeldExact as ConstitutiveWeld
 import DASHI.Physics.ExoticGravity.SuperconductingConstitutiveNegativeGProofSearchExact as ConstitutiveSearch
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGGravitationalWaveBidiExact as MaterialWave
+import DASHI.Physics.ExoticGravity.SuperconductingTransitionOrderParameterLockBidiExact as Transition
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGDiscriminatorCutsetExact as Cutset
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingModelDiscriminatorExact as Scaling
+import DASHI.Physics.ExoticGravity.LiTorrScalingModelSourceEntitlementBridgeExact as ModelSource
 
 ------------------------------------------------------------------------
 -- SOURCE ATTRIBUTION
@@ -262,6 +266,85 @@ closedEnhancementSplitDoesNotMeanNegativeEffectiveG :
     ConstitutiveSearch.canonicalConstitutiveNegativeGProofSearchBoundary
     ≡ false
 closedEnhancementSplitDoesNotMeanNegativeEffectiveG = refl
+
+------------------------------------------------------------------------
+-- TRANSITION / ORDER-PARAMETER LOCK
+------------------------------------------------------------------------
+
+belowTcDoesNotAutomaticallyMeanCoherentState :
+  Transition.belowNominalTcAutomaticallyMeansCoherentState
+    Transition.canonicalTransitionOrderParameterBoundary
+    ≡ false
+belowTcDoesNotAutomaticallyMeanCoherentState = refl
+
+temperatureCrossingAloneDoesNotPayTransitionLock :
+  Transition.temperatureCrossingAlonePaysTransitionLock
+    Transition.canonicalTransitionOrderParameterBoundary
+    ≡ false
+temperatureCrossingAloneDoesNotPayTransitionLock = refl
+
+orderParameterMeasurementRequiredForTransitionLock :
+  Transition.orderParameterMeasurementRequired
+    Transition.canonicalTransitionOrderParameterBoundary
+    ≡ true
+orderParameterMeasurementRequiredForTransitionLock = refl
+
+transitionLockDoesNotProveNegativeEffectiveG :
+  Transition.transitionLockAutomaticallyProvesConstitutiveNegativeG
+    Transition.canonicalTransitionOrderParameterBoundary
+    ≡ false
+transitionLockDoesNotProveNegativeEffectiveG = refl
+
+postSourceEvidenceActuallyOpensTransitionLock :
+  Transition.postSourceFirstOpenIsTransitionLock
+    ≡ refl
+postSourceEvidenceActuallyOpensTransitionLock = refl
+
+------------------------------------------------------------------------
+-- MODEL IDENTIFIABILITY / SOURCE ENTITLEMENT
+------------------------------------------------------------------------
+
+twoAxisSweepIsNotSufficientForUniqueConstitutiveModel :
+  Scaling.twoAxisFiniteSweepUniquelyIdentifiesConstitutiveModel
+    Scaling.canonicalScalingModelDiscriminatorBoundary
+    ≡ false
+twoAxisSweepIsNotSufficientForUniqueConstitutiveModel = refl
+
+sourceDependentAdditiveCanMimicMultiplicative :
+  Scaling.sourceDependentAdditiveCanMimicMultiplicativeSignature
+    Scaling.canonicalScalingModelDiscriminatorBoundary
+    ≡ true
+sourceDependentAdditiveCanMimicMultiplicative = refl
+
+independentOrderParameterAxisRequired :
+  Scaling.independentOrderParameterAxisRequiredForStrongerSeparation
+    Scaling.canonicalScalingModelDiscriminatorBoundary
+    ≡ true
+independentOrderParameterAxisRequired = refl
+
+externalModelFormNeedsSourceEntitlement :
+  Scaling.externalModelFormNeedsSeparateSourceEntitlement
+    Scaling.canonicalScalingModelDiscriminatorBoundary
+    ≡ true
+externalModelFormNeedsSourceEntitlement = refl
+
+doiIdentityAloneDoesNotEntitleScalingLaw :
+  ModelSource.doiIdentityAloneEntitlesExactScalingLaw
+    ModelSource.canonicalLiTorrScalingModelSourceBoundary
+    ≡ false
+doiIdentityAloneDoesNotEntitleScalingLaw = refl
+
+exactLocatorRequiredForImportedModelForm :
+  ModelSource.exactLocatorRequired
+    ModelSource.canonicalLiTorrScalingModelSourceBoundary
+    ≡ true
+exactLocatorRequiredForImportedModelForm = refl
+
+sourceEntitlementDoesNotProveNegativeEffectiveG :
+  ModelSource.sourceEntitlementProvesNegativeEffectiveG
+    ModelSource.canonicalLiTorrScalingModelSourceBoundary
+    ≡ false
+sourceEntitlementDoesNotProveNegativeEffectiveG = refl
 
 ------------------------------------------------------------------------
 -- MATERIAL-EFFECTIVE G x GRAVITATIONAL WAVES
