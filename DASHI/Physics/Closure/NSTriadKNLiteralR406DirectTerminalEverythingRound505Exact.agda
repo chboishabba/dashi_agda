@@ -95,11 +95,15 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --
 --   Diagonal = SelfGram + WeightedGramFluxTangent.
 --
--- R550 then reuses R400 to construct the missing self-pair positivity on the
--- literal nonzero output fibre and R456/R457 to identify SelfGram exactly with
--- twice the normalized double-mixed mass. Hence SelfGram inherits the existing
--- 48 E_N^2 control with no cardinality tax. Only the weighted Gram-flux tangent
--- still needs endpoint/time-integration realization in the diagonal lane.
+-- R550 reuses R400 to construct self-pair positivity and R456/R457 to identify
+-- SelfGram exactly with twice the normalized double-mixed mass, hence inheriting
+-- the existing 48 E_N^2 control with no cardinality tax.
+--
+-- R551 then reuses the already-owned R393 temporal integration/FTC authority.
+-- No second FTC interface is introduced: once the time-indexed literal self flux
+-- and tangent are welded to R393's flux/tangent slots, the integral of the
+-- tangent is exactly final-minus-initial endpoint flux. The remaining diagonal
+-- debt is therefore a same-object trajectory weld, not a new integration theory.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -172,3 +176,4 @@ import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRou
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSemanticBoundaryRound548Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalR290FluxDecompositionRound549Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSelfGramEnergyControlRound550Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalFluxEndpointReuseRound551Exact
