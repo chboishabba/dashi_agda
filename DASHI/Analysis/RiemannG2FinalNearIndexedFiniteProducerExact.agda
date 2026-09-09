@@ -36,6 +36,7 @@ record FinalNearIndexedFiniteInput
     error : Error
     Within : Scalar -> Scalar -> Error -> Set
     withinEvaluation : Within finalNear approximant error
+    evaluationReference : String
 
     Budget : Set
     nearBudget : Budget
@@ -49,7 +50,6 @@ record FinalNearIndexedFiniteInput
           withinEvaluation evaluationReference)
         nearBudget
 
-    evaluationReference : String
     budgetReference : String
 
 open FinalNearIndexedFiniteInput public
