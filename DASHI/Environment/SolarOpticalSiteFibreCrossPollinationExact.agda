@@ -5,7 +5,6 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Environment.ValidationGovernance as Governance
 import DASHI.Environment.CertifiedValidationGovernanceExact as Certified
-import DASHI.Physics.Optics.OpticalSurfaceManufacturingToleranceExact as Manufacturing
 
 ------------------------------------------------------------------------
 -- LES / SOLAR / OPTICAL SITE FIBRE
@@ -78,7 +77,7 @@ record GovernedSolarOpticalDeployment
   field
     retainedSiteFibre : SolarOpticalSiteFibre Site Spectrum AngleDistribution Temperature Shading Soiling Wind Humidity
     retainedSiteFibreIsSameObject : retainedSiteFibre ≡ fibre
-    retainedObservation : SiteConditionedOpticalEnergyObservation fibre
+    retainedObservation : SiteConditionedOpticalEnergyObservation {Output = Output} fibre
     retainedObservationIsSameObject : retainedObservation ≡ observation
     certifiedDeployment : Certified.CertifiedDeploymentGate gate
 
