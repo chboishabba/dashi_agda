@@ -122,6 +122,48 @@ complementAntipodeEquivariant (bits3 true true false) = refl
 complementAntipodeEquivariant (bits3 true true true) = refl
 
 ------------------------------------------------------------------------
+-- Block streams.  Word framing/padding belongs to a higher representation
+-- fibre; once bits are partitioned into Bit3 blocks this stream codec is exact.
+------------------------------------------------------------------------
+
+encodeBlockStream : List Bit3 → List Trit2
+encodeBlockStream [] = []
+encodeBlockStream (block ∷ blocks) =
+  encode3to2 block ∷ encodeBlockStream blocks
+
+decodeBlockStream : List Trit2 → List Bit3
+decodeBlockStream [] = []
+decodeBlockStream (block ∷ blocks) =
+  decode2to3 block ∷ decodeBlockStream blocks
+
+blockStreamRoundTrip :
+  (blocks : List Bit3) →
+  decodeBlockStream (encodeBlockStream blocks) ≡ blocks
+blockStreamRoundTrip [] = refl
+blockStreamRoundTrip (block ∷ blocks)
+  rewrite blockRoundTrip block
+        | blockStreamRoundTrip blocks = refl
+
+complementBlockStream : List Bit3 → List Bit3
+complementBlockStream [] = []
+complementBlockStream (block ∷ blocks) =
+  complementBit3 block ∷ complementBlockStream blocks
+
+antipodeTritStream : List Trit2 → List Trit2
+antipodeTritStream [] = []
+antipodeTritStream (block ∷ blocks) =
+  antipodeTrit2 block ∷ antipodeTritStream blocks
+
+blockStreamComplementAntipodeEquivariant :
+  (blocks : List Bit3) →
+  encodeBlockStream (complementBlockStream blocks)
+  ≡ antipodeTritStream (encodeBlockStream blocks)
+blockStreamComplementAntipodeEquivariant [] = refl
+blockStreamComplementAntipodeEquivariant (block ∷ blocks)
+  rewrite complementAntipodeEquivariant block
+        | blockStreamComplementAntipodeEquivariant blocks = refl
+
+------------------------------------------------------------------------
 -- Exact cardinal/orbit receipt from the canonical 369 owner.
 ------------------------------------------------------------------------
 
@@ -135,10 +177,12 @@ record BinaryThreeBitTwoTritBoundary : Set where
     allEightBinaryBlocksRecoverExactly : Bool
     ternaryCentreUnused : Bool
     complementAndAntipodeCommute : Bool
+    blockStreamsRecoverExactly : Bool
+    wordFramingIsSeparateCoordinate : Bool
     codeIsIntegerBaseConversion : Bool
     binaryAndTernaryCarriersIdentified : Bool
 
 canonicalBinaryThreeBitTwoTritBoundary :
   BinaryThreeBitTwoTritBoundary
 canonicalBinaryThreeBitTwoTritBoundary =
-  binaryThreeBitTwoTritBoundary true true true false false
+  binaryThreeBitTwoTritBoundary true true true true true false false
