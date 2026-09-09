@@ -3,56 +3,26 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 ------------------------------------------------------------------------
 -- ROUND569 / FOCUSED EXTENSION OF THE R505 DIRECT TERMINAL CONE
 --
--- R505 remains the large historical aggregate.  This smaller extension freezes
--- the current direct analytic frontier without rewriting that history again.
+-- The nested inward BIDI now reaches:
+--   R585 exact LH/HL inner symmetry;
+--   R586 the same symmetry after the actual R145 outer slot map;
+--   R587 three independent live class-norm coordinates, not four;
+--   R588 the weaker historical R434 critical-cone route on the exact R440 cross;
+--   R589 elimination of the opaque historical-decomposition producer socket.
 --
--- The reconciled direct route contains the modern R568 commutator consumer,
--- R570's bridge into the canonical historical factored-full consumer, the
--- self-flux endpoint/tangent/order reductions, and R572's direct R503 compiler.
+-- After R589, a live R284 payment P needs only the exact same-object identity
 --
--- The nested inward BIDI is now also integrated:
+--   R440.fixedOutputPhysicalCommonCross
+--     = R284.paidDeepMass P + R284.coreGramDebt P.
 --
---   R571  raw inner pair = four exact helical multiplier-difference channels;
---   R572N complete inner fibre pushes those four channels through the outer slot;
---   R573N actual weighted R294 commutator reaches that nested carrier pre-norm;
---   R574  every one of the four channels has the R178 low-output cell bound;
---   R575  the FOUR component majorants collapse exactly by helical Pythagoras;
---   R576  fixed four-channel Gram interference costs only the universal factor 4,
---         giving a 36 |k|^2 E_p E_q bound for one literal fourSignInner cell;
---   R577G welds those actual cells to R180's exact signed finite Gram ledger;
---   R578  on a common output, the positive cell-mass part factors exactly as
---         36 |k|^2 times the finite input-energy convolution;
---   R579  instantiates that statement on the literal physicalOutputFiber;
---   R580  refines the single signed Gram residual into four quantitative Bony
---         class residuals and proves those payments suffice with fixed factor 4;
---   R581  constructs the exact finite routing receipt by zero-masked pointwise
---         Bony channels and the existing foldPointwiseAdd theorem;
---   R582  proves any class norm/operator budget automatically upper-bounds the
---         corresponding Gram residual, so a direct covariance theorem is not
---         mandatory;
---   R583  removes even that intermediate Gram representation when the producer
---         already lands in class norms: four literal class norm ceilings compile
---         directly to the routed fourSignInner norm with the same fixed factor 4;
---   R584  instantiates that direct class-norm compiler on R573's ACTUAL nested
---         slot-transformed inner cells, so the remaining class estimates are
---         stated on the same object consumed by the modern commutator lane.
+-- R434 decomposition construction and R588 same-object welding are compiler-owned.
+-- The remaining theorem-bearing work is therefore the actual physical payment:
+-- deep-FL Bernstein/convolution, deep-HH null/convolution, critical-core signed
+-- covariance (or another admissible route), plus the live scalar decomposition
+-- identity and downstream outer spectator/weight spacetime transport.
 --
--- Separately, R577B reconciles the historical R328/R329 nested Schur producer
--- with the MODERN R568 consumer.  It correctly keeps four receipts distinct:
--- row, column, signed-response majorization, and cutoff-uniform Schur envelope.
---
--- The introspective result is therefore sharper than an opaque "commutator
--- estimate".  After R584 neither helicity expansion, positive convolution,
--- literal enumeration, Bony routing, direct covariance control, nor an
--- inner-vs-outer-slot carrier mismatch is a mandatory analytic residual.  The
--- preferred within-fibre target is now a cutoff-uniform norm/operator budget on
--- the literal zero-masked Bony classes AFTER the actual R145 outer slot map.
--- Existing Schur/Young/operator machinery may pay those norms directly.  The
--- outer R294 weight and spectator-weighted spacetime passage remain downstream.
---
--- Ordinary scalar FTC/order and initial-energy endpoint calibration remain
--- separately typed standard/source-realization coordinates.  Nothing in this
--- aggregate asserts analytic payment or Clay closure.
+-- R587 remains a stronger optional norm/operator producer.  Nothing here asserts
+-- analytic payment or Clay closure.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -84,6 +54,11 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact
 import DASHI.Physics.Closure.NSTriadKNClassNormBudgetToBonyGramPaymentRound582Exact
 import DASHI.Physics.Closure.NSTriadKNDirectBonyClassNormCompilerRound583Exact
 import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyClassNormBidiRound584Exact
+import DASHI.Physics.Closure.NSTriadKNFourSignInnerBonyLHHLNormSymmetryRound585Exact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyLHHLNormSymmetryRound586Exact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact
+import DASHI.Physics.Closure.NSTriadKNModernCriticalConeSameObjectBidiRound588Exact
+import DASHI.Physics.Closure.NSTriadKNLiveCriticalConePaymentCompilerRound589Exact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -111,6 +86,30 @@ round569DirectClassNormCompilerIntegrated = true
 
 round569LiveNestedSlotClassNormBidiIntegrated : Bool
 round569LiveNestedSlotClassNormBidiIntegrated = true
+
+round569LiveInnerLHHLNormSymmetryIntegrated : Bool
+round569LiveInnerLHHLNormSymmetryIntegrated = true
+
+round569LiveNestedSlotLHHLNormSymmetryIntegrated : Bool
+round569LiveNestedSlotLHHLNormSymmetryIntegrated = true
+
+round569ThreeClassNormConsumerIntegrated : Bool
+round569ThreeClassNormConsumerIntegrated = true
+
+round569HistoricalCriticalConeSignedBidiIntegrated : Bool
+round569HistoricalCriticalConeSignedBidiIntegrated = true
+
+round569LiveCriticalConeMinimalWeldCompilerIntegrated : Bool
+round569LiveCriticalConeMinimalWeldCompilerIntegrated = true
+
+round569R587AbsoluteNormRouteMandatory : Bool
+round569R587AbsoluteNormRouteMandatory = false
+
+round569OpaqueR434DecompositionProducerMandatory : Bool
+round569OpaqueR434DecompositionProducerMandatory = false
+
+round569LiveR440CriticalScalarDecompositionClosed : Bool
+round569LiveR440CriticalScalarDecompositionClosed = false
 
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
