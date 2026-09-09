@@ -5,22 +5,23 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Physics.ExoticGravity.AntigravityResearchPromotionCutExact as Legacy
-import DASHI.Physics.ExoticGravity.AntigravityFullyDerivedExperimentalCutExact as Strong
+import DASHI.Physics.ExoticGravity.AntigravityCalibratedFullyDerivedExperimentalCutExact as Strong
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
 -- STRONG PROMOTION FACADE
 --
 -- The merged legacy ComparativeAnomalyReceipt remains available for backwards
--- compatibility, but new follow-up consumers must enter through the fully
--- derived/provenanced receipt.  No automatic legacy -> strong promotion exists.
+-- compatibility.  New consumers must enter through the calibrated,
+-- provenance-bound, fully-derived receipt.  No legacy -> strong upgrade is
+-- supplied.
 ------------------------------------------------------------------------
 
 record StrongComparativeAnomaly
-    (claim : Anti.AntigravityClaim) : Set where
+    (claim : Anti.AntigravityClaim) : Set₁ where
   constructor strong-comparative-anomaly
   field
-    receipt : Strong.FullyDerivedComparativeAnomalyReceipt claim
+    receipt : Strong.CalibratedFullyDerivedComparativeAnomalyReceipt claim
 
 open StrongComparativeAnomaly public
 
@@ -74,6 +75,8 @@ record StrongPromotionBoundary : Set where
   constructor strong-promotion-boundary
   field
     newConsumersRequireFullyDerivedReceipt : Bool
+    newConsumersRequireTypedCalibration : Bool
+    calibrationStringAloneSufficient : Bool
     legacyComparativeReceiptAutomaticallyUpgrades : Bool
     fullyDerivedComparativeTensionEqualsUniqueMechanism : Bool
     fullyDerivedComparativeTensionEqualsUniversalAntigravityLaw : Bool
@@ -81,4 +84,4 @@ record StrongPromotionBoundary : Set where
 
 canonicalStrongPromotionBoundary : StrongPromotionBoundary
 canonicalStrongPromotionBoundary =
-  strong-promotion-boundary true false false false true
+  strong-promotion-boundary true true false false false false true
