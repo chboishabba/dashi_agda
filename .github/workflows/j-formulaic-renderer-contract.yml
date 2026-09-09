@@ -1,0 +1,43 @@
+name: j formulaic renderer contract
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/cm_j_alpha_scan.py'
+      - 'scripts/j_invariant_formulaic_raster_compare.py'
+      - 'scripts/check_j_formulaic_renderer_contract.py'
+      - 'DASHI/Moonshine/JInvariantCanonicalAnnotatedViewportExact.agda'
+      - 'DASHI/Moonshine/JInvariantFormulaicRasterRuntimeContractExact.agda'
+      - 'DASHI/Moonshine/JInvariantHomannMathematicaSourceCalibrationExact.agda'
+      - 'DASHI/Moonshine/JInvariantEisensteinFiniteQSeriesExact.agda'
+      - 'DASHI/Moonshine/JInvariantEisensteinConstructedKleinJExact.agda'
+      - '.github/workflows/j-formulaic-renderer-contract.yml'
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  renderer-contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile renderer scripts
+        run: |
+          python -m py_compile \
+            scripts/cm_j_alpha_scan.py \
+            scripts/j_invariant_formulaic_raster_compare.py \
+            scripts/check_j_formulaic_renderer_contract.py
+      - name: Run formulaic renderer contract audit
+        run: |
+          mkdir -p /tmp/j-formulaic-renderer
+          python scripts/check_j_formulaic_renderer_contract.py \
+            | tee /tmp/j-formulaic-renderer/contract.json
+      - name: Upload renderer receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: j-formulaic-renderer-contract
+          path: /tmp/j-formulaic-renderer/contract.json
