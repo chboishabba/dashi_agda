@@ -13,8 +13,7 @@ open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate using
   (oneSixteenth)
 open import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact using
   (globalNormSq; GlobalMeanZero4)
-open import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact using
-  (sumRationalMonotone)
+import DASHI.Physics.YangMills.BalabanFiniteSumRelationFibreLiftExact as SumLift
 open import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact using
   (globalDirectionalEnergy; path4GlobalPoincare)
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
@@ -24,6 +23,9 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
 -- Componentwise lift from scalar site fields to the repository's literal
 -- positive-axis bond carrier.  The four bond directions are not encoded by an
 -- ad-hoc tuple: they are the existing Axis4-indexed representation of BondField.
+-- The componentwise <= family is lifted through the canonical finite-sum
+-- relation observer; this module no longer imports directional-energy machinery
+-- merely to obtain a recursive list theorem.
 ------------------------------------------------------------------------
 
 RationalBondField4 : Set
@@ -52,7 +54,7 @@ componentwisePath4Poincare :
     (λ axis → oneSixteenth * globalNormSq (bondComponent field axis))
   ≤ bondReferenceDifferenceEnergy field
 componentwisePath4Poincare field meanZero =
-  sumRationalMonotone
+  SumLift.sumRationalMonotoneViaFibre
     (allCyclicIndices four)
     (λ axis → oneSixteenth * globalNormSq (bondComponent field axis))
     (λ axis → globalDirectionalEnergy (bondComponent field axis))
