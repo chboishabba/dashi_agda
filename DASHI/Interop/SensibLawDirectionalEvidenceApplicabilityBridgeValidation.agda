@@ -1,0 +1,66 @@
+module DASHI.Interop.SensibLawDirectionalEvidenceApplicabilityBridgeValidation where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Cognition.PNF.SensibLawDirectionalEvidenceApplicabilityBridgeExact as Bridge
+
+positiveSourceSupportRequired :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.positiveSourceSupportRequired
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ true
+positiveSourceSupportRequired = refl
+
+positiveDirectionalTritRequired :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.positiveDirectionalTritRequired
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ true
+positiveDirectionalTritRequired = refl
+
+propositionIdentityReceiptRequired :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.propositionIdentityReceiptRequired
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ true
+propositionIdentityReceiptRequired = refl
+
+sourceArtifactEvidenceWeldRequired :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.sourceArtifactEvidenceWeldRequired
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ true
+sourceArtifactEvidenceWeldRequired = refl
+
+exactResolvedEvidenceReusedByLegalMeet :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.exactResolvedEvidenceReusedByLegalMeet
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ true
+exactResolvedEvidenceReusedByLegalMeet = refl
+
+existingApplicabilityMeetRetained :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.existingApplicabilityMeetRetained
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ true
+existingApplicabilityMeetRetained = refl
+
+sourceSupportDoesNotCreateLegalAuthority :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.sourceSupportCreatesLegalAuthority
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ false
+sourceSupportDoesNotCreateLegalAuthority = refl
+
+sourceSupportDoesNotCreateJurisdiction :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.sourceSupportCreatesJurisdiction
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ false
+sourceSupportDoesNotCreateJurisdiction = refl
+
+sourceSupportDoesNotCreateApplicability :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.sourceSupportCreatesApplicability
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ false
+sourceSupportDoesNotCreateApplicability = refl
+
+digestIsNotSemanticReferenceByConstruction :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.digestEqualsSemanticReferenceByConstruction
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ false
+digestIsNotSemanticReferenceByConstruction = refl
+
+sourceSupportDoesNotCreateViolation :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.sourceSupportCreatesViolation
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ false
+sourceSupportDoesNotCreateViolation = refl
+
+sourceSupportDoesNotCreateLiability :
+  Bridge.DirectionalEvidenceApplicabilityBridgeBoundary.sourceSupportCreatesLiability
+    Bridge.canonicalDirectionalEvidenceApplicabilityBridgeBoundary ≡ false
+sourceSupportDoesNotCreateLiability = refl
