@@ -3,14 +3,10 @@ module DASHI.Physics.YangMills.BalabanFiniteSumRelationFibreLiftExact where
 ------------------------------------------------------------------------
 -- FINITE-SUM RELATION OBSERVER
 --
--- Reuse the already-proved finite rational monotonicity theorem as a genuine
--- relation-preserving fibre observer.  This is the inequality analogue of the
--- global-norm equality lifts used by the variance decomposition.
---
--- No new inequality is proved here.  The existing recursive finite-sum proof
--- is registered once as the preservation receipt required by Core's generic
--- FibreRelationLift, after which consumers may lift pointwise <= facts without
--- reopening the list/fibre representation.
+-- Register the lower finite-rational monotonicity theorem as a genuine
+-- relation-preserving fibre observer.  This module sits below physical energy
+-- consumers: it depends only on the scalar finite-sum order core, never on a
+-- theorem that is itself supposed to consume the lift.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List)
@@ -19,8 +15,7 @@ open import Data.Rational using (ℚ; _≤_)
 import DASHI.Core.AtomicGlobalFibreLiftExact as FibreLift
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRational)
-open import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact using
-  (sumRationalMonotone)
+import DASHI.Physics.YangMills.BalabanFiniteRationalOrderCoreExact as OrderCore
 
 sumObserver : ∀ {A : Set} → List A → (A → ℚ) → ℚ
 sumObserver values field = sumRational values field
@@ -30,7 +25,7 @@ sumObserverPreservesPointwiseOrder :
   (∀ value → left value ≤ right value) →
   sumObserver values left ≤ sumObserver values right
 sumObserverPreservesPointwiseOrder values {left} {right} pointwise =
-  sumRationalMonotone values left right pointwise
+  OrderCore.sumRationalMonotone values left right pointwise
 
 sumOrderFibreLift :
   ∀ {A : Set} (values : List A) →
