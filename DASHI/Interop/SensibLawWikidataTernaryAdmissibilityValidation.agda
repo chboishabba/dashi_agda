@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact as Ternary
 import DASHI.Interop.SensibLawNDimAdmissibilityTetrationComplexityBridgeExact as Tower
+import DASHI.Interop.SensibLawNatDualIdentityConfirmationExact as DualIdentity
 
 snakTripleHasBalancedCodec :
   Ternary.WikidataTernaryAdmissibilityBoundary.wikibaseSnakTripleHasExactBalancedCodec
@@ -50,3 +51,23 @@ complexityIsSeparateCoordinateFamily :
   Tower.AdmissibilityTetrationComplexityBoundary.admissibilityAndComplexityAreSameCoordinate
     Tower.canonicalAdmissibilityTetrationComplexityBoundary ≡ false
 complexityIsSeparateCoordinateFamily = refl
+
+cleanZelphMissIsNotWikidataAbsence :
+  DualIdentity.DualIdentityBoundary.cleanZelphMissMeansWikidataEntityAbsent
+    DualIdentity.canonicalDualIdentityBoundary ≡ false
+cleanZelphMissIsNotWikidataAbsence = refl
+
+wikidataConfirmationDoesNotPayZelphRoute :
+  DualIdentity.DualIdentityBoundary.wikidataEntityConfirmationPaysZelphRouteResidual
+    DualIdentity.canonicalDualIdentityBoundary ≡ false
+wikidataConfirmationDoesNotPayZelphRoute = refl
+
+wikidataConfirmationMaySupportNativeCoverage :
+  DualIdentity.DualIdentityBoundary.wikidataEntityConfirmationMaySupportNativeFamilyInspection
+    DualIdentity.canonicalDualIdentityBoundary ≡ true
+wikidataConfirmationMaySupportNativeCoverage = refl
+
+coverageStillDoesNotPaySourceSupport :
+  DualIdentity.DualIdentityBoundary.nativeFamilyInspectionPaysSourceSupport
+    DualIdentity.canonicalDualIdentityBoundary ≡ false
+coverageStillDoesNotPaySourceSupport = refl
