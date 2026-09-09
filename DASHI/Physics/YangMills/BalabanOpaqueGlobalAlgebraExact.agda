@@ -32,7 +32,7 @@ scaleThreeSum :
   ∀ (scale a b c : ℚ) →
   scale * (a + (b + c))
   ≡ scale * a + (scale * b + scale * c)
-scaleThreeSum scale a b c = solve-∀
+scaleThreeSum = solve-∀
 
 scaleFourSum :
   ∀ (scale a b c d : ℚ) →
