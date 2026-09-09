@@ -10,16 +10,10 @@ import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawUniversalLegalRuleAlgebraExact as Algebra
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact as Downstream
+import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as SourceRule
 import DASHI.Cognition.PNF.SensibLawSourceConditionedTypedLiabilityExact as Typed
 import DASHI.Cognition.PNF.SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact as Act
 import DASHI.Cognition.PNF.SensibLawNSWVicariousLiabilitySourceRealisationExact as Realised
-
-------------------------------------------------------------------------
--- SOURCE-CONDITIONED TYPED PROFILES FOR THE TWO s 8 ROUTES.
---
--- These are jurisdictional/statutory schemas. They do not assert that either
--- route is established on Cullen facts, nor that the underlying tort exists.
-------------------------------------------------------------------------
 
 familyAttachment : Downstream.PrimarySourceAttachment Downstream.liabilityClassificationStage
 familyAttachment = Downstream.primary-source-attachment
@@ -73,35 +67,29 @@ routeBProfile = Downstream.typed-liability-profile
   Negligence.auCommonLawSystem refl
   "NSW Law Reform (Vicarious Liability) Act 1983 s 8(1)(b) source-conditioned typed profile"
 
-------------------------------------------------------------------------
--- Membership-indexed source functions.  Pattern matching keeps source identity
--- aligned with the exact condition/limitation position rather than using a
--- parallel list index.
-------------------------------------------------------------------------
-
 routeAConditionSource :
   ∀ {p} → p Algebra.∈ Downstream.conditions routeAProfile →
-  DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact.PropositionSourceReceipt p
+  SourceRule.PropositionSourceReceipt p
 routeAConditionSource Algebra.here = Act.s6ServiceSource
 routeAConditionSource (Algebra.there Algebra.here) = Act.s8TortSource
 routeAConditionSource (Algebra.there (Algebra.there Algebra.here)) = Act.s8RouteASource
 
 routeBConditionSource :
   ∀ {p} → p Algebra.∈ Downstream.conditions routeBProfile →
-  DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact.PropositionSourceReceipt p
+  SourceRule.PropositionSourceReceipt p
 routeBConditionSource Algebra.here = Act.s6ServiceSource
 routeBConditionSource (Algebra.there Algebra.here) = Act.s8TortSource
 routeBConditionSource (Algebra.there (Algebra.there Algebra.here)) = Act.s8RouteBSource
 
 routeALimitationSource :
   ∀ {p} → p Algebra.∈ Downstream.limitationsAndDefeaters routeAProfile →
-  DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact.PropositionSourceReceipt p
+  SourceRule.PropositionSourceReceipt p
 routeALimitationSource Algebra.here = Act.s8OwnAccountSource
 routeALimitationSource (Algebra.there Algebra.here) = Act.s8PartnershipSource
 
 routeBLimitationSource :
   ∀ {p} → p Algebra.∈ Downstream.limitationsAndDefeaters routeBProfile →
-  DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact.PropositionSourceReceipt p
+  SourceRule.PropositionSourceReceipt p
 routeBLimitationSource Algebra.here = Act.s8OwnAccountSource
 routeBLimitationSource (Algebra.there Algebra.here) = Act.s8PartnershipSource
 
@@ -110,8 +98,7 @@ routeASourceConditionedProfile = Typed.source-conditioned-typed-liability-profil
   Act.crownVicariousLiabilityRecognised
   Act.s8FamilySource refl refl
   Act.s8RouteARule Realised.s8RouteARealised refl
-  routeAConditionSource
-  routeALimitationSource
+  routeAConditionSource routeALimitationSource
   Realised.actTemporalApplicability Realised.temporalSource refl
   Realised.nswVicariousJurisdiction Realised.jurisdictionSource refl
   refl
@@ -122,16 +109,11 @@ routeBSourceConditionedProfile = Typed.source-conditioned-typed-liability-profil
   Act.crownVicariousLiabilityRecognised
   Act.s8FamilySource refl refl
   Act.s8RouteBRule Realised.s8RouteBRealised refl
-  routeBConditionSource
-  routeBLimitationSource
+  routeBConditionSource routeBLimitationSource
   Realised.actTemporalApplicability Realised.temporalSource refl
   Realised.nswVicariousJurisdiction Realised.jurisdictionSource refl
   refl
   "source-conditioned typed vicarious-liability profile for statutory route s 8(1)(b)"
-
-------------------------------------------------------------------------
--- Boundary: knowing the source-conditioned family does not resolve the OR.
-------------------------------------------------------------------------
 
 data EitherProfileMeansBothRoutesApply : Set where
 data SourceConditionedProfileProvesUnderlyingTort : Set where
