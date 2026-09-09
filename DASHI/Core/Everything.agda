@@ -154,5 +154,6 @@ import DASHI.Core.SituatedFibreDynamicsEverything
 import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
-import DASHI.Core.ProofDebtRouterExact
-import DASHI.Core.ClayProofDebtFrontierAtlasExact
+
+-- Domain-neutral source/provenance/observation carrier.
+import DASHI.Core.SourceConditionedObservationExact

@@ -31,11 +31,21 @@ FILES=(
   DASHI/Analysis/RiemannG2IndependentComplementMarginFinalExact.agda
   DASHI/Analysis/RiemannG2LiteralComplementDirectTargetExact.agda
   DASHI/Analysis/RiemannG2DirectIndependentComplementMarginExact.agda
+  DASHI/Analysis/RiemannG2DirectComplementUnpaidContextExact.agda
+  DASHI/Analysis/RiemannG2BalanceFreeComplementContextExact.agda
+  DASHI/Analysis/RiemannG2DirectClusterResponseContradictionExact.agda
   DASHI/Analysis/RiemannG2UniformIndependentComplementHighProducerExact.agda
   DASHI/Analysis/RiemannCriticalLineStabilityRefinementExact.agda
   DASHI/Analysis/RiemannG2ProofRelevantTargetTranslationModulationExact.agda
   DASHI/Analysis/RiemannG2FinalPoleNearObserverRefinementExact.agda
+  DASHI/Analysis/RiemannG2WindowFreeFiniteNearFinalModelCompilerExact.agda
+  DASHI/Analysis/RiemannG2FiniteNearIndexedLiteralKernelCompilerExact.agda
+  DASHI/Analysis/RiemannG2FinalNearIndexedFiniteProducerExact.agda
+  DASHI/Analysis/RiemannG2FinalNearIndexedLiteralModelCompilerExact.agda
+  DASHI/Analysis/RiemannG2WindowFreeDirectRepresentationFrontierExact.agda
   DASHI/Analysis/RiemannG2LiteralPhaseJointMarginCompilerExact.agda
+  DASHI/Analysis/RiemannG2LiteralPhaseDirectClusterResponseExact.agda
+  DASHI/Analysis/RiemannG2UniformLiteralPhaseHighProducerExact.agda
   DASHI/Analysis/RiemannPlattTrudgianLowCompletionAdapterExact.agda
   DASHI/Analysis/RiemannPlattTrudgianCanonicalLowRegionExact.agda
   DASHI/Analysis/RiemannG2ConstructiveNegativeRHCompletionExact.agda

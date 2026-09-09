@@ -1,0 +1,186 @@
+module DASHI.Interop.SensibLawWikidataTernaryAdmissibilityValidation where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact as Ternary
+import DASHI.Interop.SensibLawNDimAdmissibilityTetrationComplexityBridgeExact as Tower
+import DASHI.Interop.SensibLawNatDualIdentityConfirmationExact as DualIdentity
+import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as SourceSupport
+import DASHI.Interop.SensibLawNatSourcePropositionVerificationExact as SourceVerify
+import DASHI.Interop.SensibLawNatSourceMediaMaterializationExact as SourceMedia
+
+snakTripleHasBalancedCodec :
+  Ternary.WikidataTernaryAdmissibilityBoundary.wikibaseSnakTripleHasExactBalancedCodec
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ true
+snakTripleHasBalancedCodec = refl
+
+snakCodecIsNotTruthSemantics :
+  Ternary.WikidataTernaryAdmissibilityBoundary.balancedCodecIsWikibaseTruthSemantics
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ false
+snakCodecIsNotTruthSemantics = refl
+
+zeroTritIsNotBooleanFalseByItself :
+  Ternary.WikidataTernaryAdmissibilityBoundary.zeroTritMeansBooleanFalse
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ false
+zeroTritIsNotBooleanFalseByItself = refl
+
+openResidualIsThirdState :
+  Ternary.WikidataTernaryAdmissibilityBoundary.openResidualIsThirdAdmissibilityState
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ true
+openResidualIsThirdState = refl
+
+nineAxisUsesBase369Carrier :
+  Ternary.WikidataTernaryAdmissibilityBoundary.nineAxisProjectionUsesExistingBase369Carrier
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ true
+nineAxisUsesBase369Carrier = refl
+
+sameCarrierDoesNotCreateMonsterAction :
+  Ternary.WikidataTernaryAdmissibilityBoundary.sameCarrierCreatesMonsterAction
+    Ternary.canonicalWikidataTernaryAdmissibilityBoundary ≡ false
+sameCarrierDoesNotCreateMonsterAction = refl
+
+fixedThreePowerNIsNotAutomaticallyTetration :
+  Tower.AdmissibilityTetrationComplexityBoundary.fixedNAxisThreePowerNIsAutomaticallyTetration
+    Tower.canonicalAdmissibilityTetrationComplexityBoundary ≡ false
+fixedThreePowerNIsNotAutomaticallyTetration = refl
+
+selfIndexingMayGrowTetrationally :
+  Tower.AdmissibilityTetrationComplexityBoundary.selfIndexingMayProduceTetrationalAxisGrowth
+    Tower.canonicalAdmissibilityTetrationComplexityBoundary ≡ true
+selfIndexingMayGrowTetrationally = refl
+
+complexityIsSeparateCoordinateFamily :
+  Tower.AdmissibilityTetrationComplexityBoundary.admissibilityAndComplexityAreSameCoordinate
+    Tower.canonicalAdmissibilityTetrationComplexityBoundary ≡ false
+complexityIsSeparateCoordinateFamily = refl
+
+cleanZelphMissIsNotWikidataAbsence :
+  DualIdentity.DualIdentityBoundary.cleanZelphMissMeansWikidataEntityAbsent
+    DualIdentity.canonicalDualIdentityBoundary ≡ false
+cleanZelphMissIsNotWikidataAbsence = refl
+
+wikidataConfirmationDoesNotPayZelphRoute :
+  DualIdentity.DualIdentityBoundary.wikidataEntityConfirmationPaysZelphRouteResidual
+    DualIdentity.canonicalDualIdentityBoundary ≡ false
+wikidataConfirmationDoesNotPayZelphRoute = refl
+
+wikidataConfirmationMaySupportNativeCoverage :
+  DualIdentity.DualIdentityBoundary.wikidataEntityConfirmationMaySupportNativeFamilyInspection
+    DualIdentity.canonicalDualIdentityBoundary ≡ true
+wikidataConfirmationMaySupportNativeCoverage = refl
+
+coverageStillDoesNotPaySourceSupport :
+  DualIdentity.DualIdentityBoundary.nativeFamilyInspectionPaysSourceSupport
+    DualIdentity.canonicalDualIdentityBoundary ≡ false
+coverageStillDoesNotPaySourceSupport = refl
+
+p854RemainsOnlySourceCandidate :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.p854IsOnlySourceCandidate
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ true
+p854RemainsOnlySourceCandidate = refl
+
+sharedURLFetchDoesNotMergeResiduals :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.sharedFetchMergesResiduals
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
+sharedURLFetchDoesNotMergeResiduals = refl
+
+fetchedContentDoesNotPaySourceSupport :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.fetchedContentPaysSourceSupport
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
+fetchedContentDoesNotPaySourceSupport = refl
+
+contentDigestDoesNotPaySourceSupport :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.contentDigestPaysSourceSupport
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
+contentDigestDoesNotPaySourceSupport = refl
+
+propositionSupportRemainsSeparate :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.propositionSupportNeedsSeparateEvaluation
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ true
+propositionSupportRemainsSeparate = refl
+
+authorityRemainsSeparate :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.authorityNeedsSeparateEvaluation
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ true
+authorityRemainsSeparate = refl
+
+sourceFetchCreatesNoSemanticPromotion :
+  SourceSupport.NatSourceSupportAcquisitionBoundary.semanticPromotionCreatedByFetch
+    SourceSupport.canonicalNatSourceSupportAcquisitionBoundary ≡ false
+sourceFetchCreatesNoSemanticPromotion = refl
+
+sourceSupportedMapsPositive :
+  SourceVerify.NatSourcePropositionVerificationBoundary.supportedMapsPositive
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ true
+sourceSupportedMapsPositive = refl
+
+sourceContradictedMapsNegative :
+  SourceVerify.NatSourcePropositionVerificationBoundary.contradictedMapsNegative
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ true
+sourceContradictedMapsNegative = refl
+
+sourceUnresolvedMapsZero :
+  SourceVerify.NatSourcePropositionVerificationBoundary.unresolvedMapsZero
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ true
+sourceUnresolvedMapsZero = refl
+
+failedFetchDoesNotCreateContradiction :
+  SourceVerify.NatSourcePropositionVerificationBoundary.failedFetchCreatesContradiction
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
+failedFetchDoesNotCreateContradiction = refl
+
+unresolvedSourceDoesNotCreateContradiction :
+  SourceVerify.NatSourcePropositionVerificationBoundary.unresolvedCreatesContradiction
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
+unresolvedSourceDoesNotCreateContradiction = refl
+
+sourceSupportStillDoesNotCreateAuthority :
+  SourceVerify.NatSourcePropositionVerificationBoundary.sourceSupportCreatesAuthority
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
+sourceSupportStillDoesNotCreateAuthority = refl
+
+sourceSupportStillDoesNotCreateMigrationAuthority :
+  SourceVerify.NatSourcePropositionVerificationBoundary.sourceSupportCreatesMigrationAuthority
+    SourceVerify.canonicalNatSourcePropositionVerificationBoundary ≡ false
+sourceSupportStillDoesNotCreateMigrationAuthority = refl
+
+sourceBodiesMustPersistForReplay :
+  SourceMedia.NatSourceMediaMaterializationBoundary.fetchedBodiesMustBePersistedForReplay
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ true
+sourceBodiesMustPersistForReplay = refl
+
+sourceBytesAreReverifiedAgainstDigest :
+  SourceMedia.NatSourceMediaMaterializationBoundary.persistedBytesReverifiedAgainstDigest
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ true
+sourceBytesAreReverifiedAgainstDigest = refl
+
+sourceMediaReusesExistingAdapters :
+  SourceMedia.NatSourceMediaMaterializationBoundary.canonicalTextReusesExistingMediaAdapters
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ true
+sourceMediaReusesExistingAdapters = refl
+
+sourceEvidenceCandidatesAreSearchOnly :
+  SourceMedia.NatSourceMediaMaterializationBoundary.candidateSpansAreSearchOnly
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ true
+sourceEvidenceCandidatesAreSearchOnly = refl
+
+candidateSpanDoesNotPaySupport :
+  SourceMedia.NatSourceMediaMaterializationBoundary.candidateSpanPaysSupport
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ false
+candidateSpanDoesNotPaySupport = refl
+
+cueCooccurrenceDoesNotProveSupport :
+  SourceMedia.NatSourceMediaMaterializationBoundary.cueCooccurrenceProvesSupport
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ false
+cueCooccurrenceDoesNotProveSupport = refl
+
+missingQuantityAnchorDoesNotCreateNegativeEvidence :
+  SourceMedia.NatSourceMediaMaterializationBoundary.missingQuantityAnchorCreatesNegativeEvidence
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ false
+missingQuantityAnchorDoesNotCreateNegativeEvidence = refl
+
+sourceMediaMaterializationCreatesNoAuthority :
+  SourceMedia.NatSourceMediaMaterializationBoundary.materializationCreatesAuthority
+    SourceMedia.canonicalNatSourceMediaMaterializationBoundary ≡ false
+sourceMediaMaterializationCreatesNoAuthority = refl
