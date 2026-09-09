@@ -19,20 +19,6 @@ import DASHI.Cognition.PNF.SensibLawSourceConditionedTypedLiabilityExact as Type
 import DASHI.Cognition.PNF.SensibLawRecentDutyCaseSourceAtlasExact as CullenSource
 import DASHI.Cognition.PNF.SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact as Act
 
-------------------------------------------------------------------------
--- CULLEN — SOURCE-CONDITIONED LIABILITY FAMILY IDENTIFICATION
---
--- Definition source:
---   Law Reform (Vicarious Liability) Act 1983 (NSW), especially ss 6 and 8.
---
--- Case-outcome source:
---   Cullen v New South Wales [2026] HCA 19, Edelman J [100].
---
--- This closes only the family-classification coordinate:
---   family = vicariousLiability.
--- It does not establish that the underlying negligence tort was committed.
-------------------------------------------------------------------------
-
 cullen100Locator : String
 cullen100Locator = "Cullen v New South Wales [2026] HCA 19, Edelman J [100]"
 
@@ -52,9 +38,12 @@ cullen100Authority = Edge.source-identity
   "[2026] HCA 19, Edelman J [100]"
   Edge.bindingPrecedent
 
+-- Edelman J wrote separately in concurrence.  The case source remains High
+-- Court primary material, but this proposition-level role is not flattened into
+-- the joint-reasons binding-ratio fibre.
 cullen100Role : SourceRole.SourceFormRoleReceipt
 cullen100Role = SourceRole.source-form-role-receipt
-  cullen100Authority Ontology.caseLaw Algebra.bindingRatioRole
+  cullen100Authority Ontology.caseLaw Algebra.concurrenceRole
   "Cullen-Edelman-100-vicarious-characterisation" true true
 
 cullen100LegalSourceRef : Algebra.LegalSourceRef
@@ -68,14 +57,9 @@ cullen100LegalSourceRef = Algebra.legal-source-ref
 cullen100SourceReceipt : SourceRule.PropositionSourceReceipt cullenVicariousCharacterisation
 cullen100SourceReceipt = SourceRule.proposition-source-receipt
   CullenSource.cullenHCA19 cullen100LegalSourceRef cullen100Locator
-  SourceRule.primarySourceLayer cullen100Role
-  refl refl refl
+  SourceRule.primarySourceLayer cullen100Role refl refl refl
   (Source.citationCreatesAuthorityIsFalse CullenSource.cullenHCA19)
   "Cullen-Edelman-100"
-
-------------------------------------------------------------------------
--- +1 outcome on the exact family-recognition atom.
-------------------------------------------------------------------------
 
 data CullenVicariousFits : Set where
   cullen100IdentifiesVicariousFamily : CullenVicariousFits
@@ -84,8 +68,7 @@ data CullenVicariousFails : Set where
 
 cullenVicariousOutcome : Atomic.AtomicOutcomeSource Act.crownVicariousLiabilityRecognised
 cullenVicariousOutcome = Atomic.atomic-outcome-source
-  cullenVicariousCharacterisation
-  cullen100SourceReceipt
+  cullenVicariousCharacterisation cullen100SourceReceipt
   (Algebra.propositionId Act.crownVicariousLiabilityRecognised)
   refl refl
   "Edelman [100] positively identifies the State's police-tort attribution route as true vicarious liability; the statute remains the definition/recognition source."
@@ -95,8 +78,7 @@ cullenVicariousFamilyAtom = Atomic.source-conditioned-atomic-legal-test
   Act.s8FamilySource
   (Algebra.subjectReference Act.crownVicariousLiabilityRecognised)
   refl
-  CullenVicariousFits
-  CullenVicariousFails
+  CullenVicariousFits CullenVicariousFails
   (λ _ ())
   (λ _ → cullenVicariousOutcome)
   (λ ())
@@ -107,12 +89,6 @@ cullenVicariousFamilyAtom = Atomic.source-conditioned-atomic-legal-test
 
 cullenVicariousFamilyIsPositive : Atomic.gate cullenVicariousFamilyAtom ≡ BT.pos
 cullenVicariousFamilyIsPositive = refl
-
-------------------------------------------------------------------------
--- Family classification receipt.  This is deliberately weaker than a complete
--- SourceConditionedTypedLiabilityDecision, because Cullen's underlying
--- negligence violation is not established: breach failed on the encoded fibre.
-------------------------------------------------------------------------
 
 record CullenVicariousFamilyReceipt : Set₁ where
   constructor cullen-vicarious-family-receipt
@@ -139,30 +115,24 @@ cullenVicariousFamilyReceipt = cullen-vicarious-family-receipt
   Act.s8FamilySource
   cullenVicariousFamilyAtom refl refl
   true
-  "Cullen [100] + NSW Law Reform (Vicarious Liability) Act 1983 source-weld family=vicarious; underlying tort/violation remains an independent prerequisite."
-
-------------------------------------------------------------------------
--- Procedural and merits firewalls.
-------------------------------------------------------------------------
+  "Cullen [100] concurrence + NSW Law Reform (Vicarious Liability) Act 1983 source-weld family=vicarious; underlying tort/violation remains an independent prerequisite."
 
 data FamilyRecognitionProvesUnderlyingTort : Set where
 data S9BClaimRoutingCreatesFamily : Set where
 data S9EAntiCreationNegatesFamily : Set where
 data VicariousFamilyMeansPublicAuthorityLiabilityFamily : Set where
 data FamilyRecognitionProvesDamagesEntitlement : Set where
+data ConcurrenceAutomaticallyBecomesJointRatio : Set where
 
 familyRecognitionDoesNotProveTort : FamilyRecognitionProvesUnderlyingTort → ⊥
 familyRecognitionDoesNotProveTort ()
-
 s9BDoesNotCreateFamily : S9BClaimRoutingCreatesFamily → ⊥
 s9BDoesNotCreateFamily ()
-
 s9EDoesNotNegateFamily : S9EAntiCreationNegatesFamily → ⊥
 s9EDoesNotNegateFamily ()
-
-vicariousDoesNotCollapseToPublicAuthorityFamily :
-  VicariousFamilyMeansPublicAuthorityLiabilityFamily → ⊥
+vicariousDoesNotCollapseToPublicAuthorityFamily : VicariousFamilyMeansPublicAuthorityLiabilityFamily → ⊥
 vicariousDoesNotCollapseToPublicAuthorityFamily ()
-
 familyDoesNotProveDamages : FamilyRecognitionProvesDamagesEntitlement → ⊥
 familyDoesNotProveDamages ()
+concurrenceDoesNotBecomeJointRatio : ConcurrenceAutomaticallyBecomesJointRatio → ⊥
+concurrenceDoesNotBecomeJointRatio ()
