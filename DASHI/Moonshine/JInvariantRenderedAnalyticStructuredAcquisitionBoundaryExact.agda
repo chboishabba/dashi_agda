@@ -19,12 +19,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.JInvariantImageFractalSourceAtlasExact as Source
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact as Residual
-import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact as Local
 import DASHI.Core.FrontierRelationStrengthBidiExact as Relation
-
-------------------------------------------------------------------------
--- 1. Generic two-stage acquisition.
-------------------------------------------------------------------------
 
 record RenderedAnalyticCalibration (Rendered Analytic : Set) : Set₁ where
   field
@@ -54,10 +49,6 @@ acquireRenderedStructured acquisition rendered =
   acquireStructured (analyticToStructured acquisition)
     (calibrate (renderedToAnalytic acquisition) rendered)
 
-------------------------------------------------------------------------
--- 2. The local 27 observer remains downstream of the full structured state.
-------------------------------------------------------------------------
-
 structuredToLocal27 : Residual.StructuredJField → Residual.LocalJ27
 structuredToLocal27 = Residual.localJObserver
 
@@ -69,7 +60,7 @@ renderedToLocal27 acquisition rendered =
   structuredToLocal27 (acquireRenderedStructured acquisition rendered)
 
 ------------------------------------------------------------------------
--- 3. Source alignment and theorem boundary.
+-- Source alignment and theorem boundary.
 ------------------------------------------------------------------------
 
 sourceDescribesModularFractalCarrier : Bool
@@ -78,13 +69,13 @@ sourceDescribesModularFractalCarrier = true
 sourceDescribesExceptionalBoundaryGluing : Bool
 sourceDescribesExceptionalBoundaryGluing = true
 
-sourceClaimsDoNotConstructCalibration : Bool
-sourceClaimsDoNotConstructCalibration =
-  not (Source.sourceEntitlesKernelProof Source.modularFractalClaim)
+modularFractalSourceDoesNotEntitleKernelProof :
+  Source.sourceEntitlesKernelProof Source.modularFractalClaim ≡ false
+modularFractalSourceDoesNotEntitleKernelProof = refl
 
-sourceClaimsDoNotConstructStructuredAcquisition : Bool
-sourceClaimsDoNotConstructStructuredAcquisition =
-  not (Source.sourceEntitlesKernelProof Source.exceptionalTriangleGluingClaim)
+exceptionalGluingSourceDoesNotEntitleKernelProof :
+  Source.sourceEntitlesKernelProof Source.exceptionalTriangleGluingClaim ≡ false
+exceptionalGluingSourceDoesNotEntitleKernelProof = refl
 
 renderedAcquisitionRelation : Relation.RelationKind
 renderedAcquisitionRelation = Relation.exactSameObjectRealisation
@@ -95,10 +86,7 @@ renderedAcquisitionHasNoAutomaticTheoremTransfer =
   Relation.sameObjectAloneCannotDirectlyTransferTheorem
 
 ------------------------------------------------------------------------
--- 4. Consumer governance inherited from the RH/j residual BIDI.
---
--- Even after successful acquisition, the full field is retained by default.
--- A later consumer may quotient to local 27 only after a sufficiency proof.
+-- Consumer governance inherited from the RH/j residual BIDI.
 ------------------------------------------------------------------------
 
 fullStructuredFieldRetainedByDefault : Bool
@@ -108,7 +96,7 @@ localTwentySevenIsNotGloballyReconstructive : Bool
 localTwentySevenIsNotGloballyReconstructive = true
 
 ------------------------------------------------------------------------
--- 5. Frontier.
+-- Frontier.
 ------------------------------------------------------------------------
 
 data RenderedAnalyticAcquisitionResidual : Set where
