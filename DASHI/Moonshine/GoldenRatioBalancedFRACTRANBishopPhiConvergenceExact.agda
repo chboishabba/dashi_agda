@@ -211,14 +211,24 @@ balancedFRACTRANRatiosConvergeToBishopPhi =
     in
     Npred , λ n nLarge →
       let
+        productMinusZeroIsProduct :
+          BishopReal._≃_
+            (BishopReal._-_ (factorProduct n) BishopReal.0ℝ)
+            (factorProduct n)
+        productMinusZeroIsProduct =
+          let open BishopP.ℝ-Solver
+          in solve 1
+            (λ p → p ⊖ Κ (+ 0 / 1) ⊜ p)
+            BishopP.≃-refl (factorProduct n)
+
         productMagnitudeBound :
           BishopReal._≤_
             (BishopReal.∣ factorProduct n ∣)
             (BishopReal._⋆ (+ 1 / precision))
         productMagnitudeBound =
           BishopP.≤-respˡ-≃
-            (BishopP.∣-∣-cong
-              (BishopP.+-identityʳ (factorProduct n)))
+            (BishopP.≃-symm
+              (BishopP.∣-∣-cong productMinusZeroIsProduct))
             (productBound n nLarge)
 
         cancelled :
