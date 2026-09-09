@@ -26,7 +26,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -154,7 +154,6 @@ module Row
         (doubleCell beta)
   forcingHalfFactors beta [] =
     sym (R440.crossZeroLeft (doubleCell beta))
-    where open import Relation.Binary.PropositionalEquality using (sym)
   forcingHalfFactors beta (alpha ∷ rest) =
     trans
       (cong₂ _+_ refl (forcingHalfFactors beta rest))
@@ -163,7 +162,6 @@ module Row
           (Weighted.Force.weightedDouble beta alpha)
           (R224.foldVector (Weighted.Force.weightedDouble beta) rest)
           (doubleCell beta)))
-    where open import Relation.Binary.PropositionalEquality using (sym)
 
   amplitudeHalfFactors :
     (beta : Physical.PhysicalTriadIncidence) →
@@ -174,7 +172,6 @@ module Row
         (D.doubleForcing beta)
   amplitudeHalfFactors beta [] =
     sym (R440.crossZeroLeft (D.doubleForcing beta))
-    where open import Relation.Binary.PropositionalEquality using (sym)
   amplitudeHalfFactors beta (alpha ∷ rest) =
     trans
       (cong₂ _+_ refl (amplitudeHalfFactors beta rest))
@@ -183,7 +180,6 @@ module Row
           (Weighted.Amp.weightedDoubleCell beta alpha)
           (R224.foldVector (Weighted.Amp.weightedDoubleCell beta) rest)
           (D.doubleForcing beta)))
-    where open import Relation.Binary.PropositionalEquality using (sym)
 
   spectatorRowFactors :
     (beta : Physical.PhysicalTriadIncidence) →
