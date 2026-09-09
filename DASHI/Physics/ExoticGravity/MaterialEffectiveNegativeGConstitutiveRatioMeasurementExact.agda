@@ -14,10 +14,6 @@ import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingScopeBidiExact as
 
 ------------------------------------------------------------------------
 -- TYPED PAYMENT FOR constitutiveRatioLeaf
---
--- The historical eta_C formula is string-valued.  This owner supplies the
--- same-object measurement carrier required before its sign can feed the
--- existing material-effective negative-G interpretation weld.
 ------------------------------------------------------------------------
 
 record ConstitutiveRatioMeasurementReceipt
@@ -28,6 +24,8 @@ record ConstitutiveRatioMeasurementReceipt
 
     apparatusIdentity : String
     observableChannel : String
+    replicationCarrier : String
+    scalingSweepCarrier : String
     factorization : Split.SourceConstitutiveFactorization
 
     OrdinaryRegimeResponseReceipt : Set
@@ -62,6 +60,9 @@ record ConstitutiveRatioMeasurementReceipt
     IndependentReplicationReceipt : Set
     independentReplicationReceipt : IndependentReplicationReceipt
 
+    ScalingSweepReceipt : Set
+    scalingSweepReceipt : ScalingSweepReceipt
+
     ConstitutiveSignMapping : Set
     constitutiveSignMapping : ConstitutiveSignMapping
 
@@ -69,10 +70,6 @@ record ConstitutiveRatioMeasurementReceipt
     samePredictionIdentityReceipt : SamePredictionIdentityReceipt
 
 open ConstitutiveRatioMeasurementReceipt public
-
-------------------------------------------------------------------------
--- Direct compiler into the existing negative-G interpretation carrier.
-------------------------------------------------------------------------
 
 compileConstitutiveNegativeGReceipt :
   {prediction : GR.OrdinaryGRPredictionReceipt} →
@@ -96,10 +93,6 @@ compileConstitutiveNegativeGReceipt receipt =
     (ConstitutiveRatioMeasurementReceipt.ConstitutiveSignMapping receipt)
     (ConstitutiveRatioMeasurementReceipt.constitutiveSignMapping receipt)
 
-------------------------------------------------------------------------
--- Non-collapse / promotion firewall.
-------------------------------------------------------------------------
-
 record ConstitutiveRatioMeasurementBoundary : Set where
   constructor constitutive-ratio-measurement-boundary
   field
@@ -113,6 +106,9 @@ record ConstitutiveRatioMeasurementBoundary : Set where
     nonzeroStandardCoefficientRequired : Bool
     coefficientSignReceiptRequired : Bool
     independentReplicationRequired : Bool
+    scalingSweepRequired : Bool
+    exactReplicationCarrierRequired : Bool
+    exactScalingSweepCarrierRequired : Bool
     typedRatioMayCompileExistingNegativeGWeld : Bool
     compiledNegativeGWeldProvesUniversalNegativeG : Bool
     compiledNegativeGWeldProvesPhysicalCorrectness : Bool
@@ -121,4 +117,4 @@ canonicalConstitutiveRatioMeasurementBoundary :
   ConstitutiveRatioMeasurementBoundary
 canonicalConstitutiveRatioMeasurementBoundary =
   constitutive-ratio-measurement-boundary
-    false false false true true true true true true true true false false
+    false false false true true true true true true true true true true true false false
