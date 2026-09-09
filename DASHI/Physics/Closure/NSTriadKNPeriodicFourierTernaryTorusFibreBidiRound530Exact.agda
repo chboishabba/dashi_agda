@@ -108,9 +108,8 @@ representativeRecoversObservedFibre530 :
   SamePeriodicSignFibre530
     (periodicModeRepresentative530 (R529.observePeriodicMode529 k))
     k
-representativeRecoversObservedFibre530 (Z3.mode (+ zero) (+ zero) (+ zero)) = refl
-representativeRecoversObservedFibre530 (Z3.mode x y z) =
-  periodicSignObservationSection530 (R529.observePeriodicMode529 (Z3.mode x y z))
+representativeRecoversObservedFibre530 k =
+  periodicSignObservationSection530 (R529.observePeriodicMode529 k)
 
 ------------------------------------------------------------------------
 -- 4. The finite sign quotient already carries exact periodic C3^3 adjacency.
@@ -146,8 +145,7 @@ PeriodicTriadHyperformalAdjacent530 = Periodic.TorusHyperformalAdjacent
 
 sameNineTritCarrier530 : Bool
 sameNineTritCarrier530 =
-  Periodic.PeriodicPathRestrictionBoundary.sameNineTritCarrier
-    Periodic.canonicalPeriodicPathRestrictionBoundary
+  Periodic.sameNineTritCarrier Periodic.canonicalPeriodicPathRestrictionBoundary
 
 sameNineTritCarrier530IsTrue : sameNineTritCarrier530 ≡ true
 sameNineTritCarrier530IsTrue = refl
