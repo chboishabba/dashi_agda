@@ -209,6 +209,22 @@ import DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontierRound216Exact
 import DASHI.Physics.YangMills.BalabanCMP119RawSourceRealizationSplitRound217Exact
 import DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontierRound217Exact
 
+-- Row-C continuation after same-density introspection.  Existing Round102/108
+-- covariance, marked-shell, weighted-influence and stochastic-clustering
+-- compilers are reused rather than replayed.  R257 makes the exact real
+-- Heat/Doob Hessian -> rational debt bridge explicit; R258 compiles the existing
+-- stochastic spatial envelope into the old geometric-clustering consumer; R259
+-- records the least-privilege physical frontier.
+import DASHI.Physics.YangMills.BalabanHeatDoobJointGradientCovarianceRound251Exact
+import DASHI.Physics.YangMills.BalabanHeatDoobJointRowCCompilerRound252Exact
+import DASHI.Physics.YangMills.BalabanHeatDoobRationalCurvatureMajorantRound253Exact
+import DASHI.Physics.YangMills.BalabanHeatDoobExpectationContractionRound254Exact
+import DASHI.Physics.YangMills.BalabanCMP116FirstGradientLocalizationRound255Exact
+import DASHI.Physics.YangMills.BalabanCMP116SharedFirstVariationCoordinateRound256Exact
+import DASHI.Physics.YangMills.BalabanHeatDoobMarkedTemporalMajorizationRound257Exact
+import DASHI.Physics.YangMills.BalabanStochasticSpatialEnvelopeToConnectedClusteringRound258Exact
+import DASHI.Physics.YangMills.BalabanPreferredRowCFrontierRound259Exact
+
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119DirectCalculusProvenanceExact
