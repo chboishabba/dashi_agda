@@ -13,6 +13,17 @@ import DASHI.Physics.GR.GravitationalMultiScaleTheoryFingerprintBidiExact
 import DASHI.Physics.GR.GravitationalEpistemicLineageExact
 import DASHI.Physics.GR.GravitationalPredictionAttributionBidiExact
 import DASHI.Physics.GR.GravitationalAttributedMultiScaleFingerprintBidiExact
+import DASHI.Physics.GR.GravitationalWavePolarizationSourceAttributionExact
+import DASHI.Physics.GR.GravitationalWavePolarizationSignBidiExact
+import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact
+import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact
+import DASHI.Physics.GR.SignedGRNormalizationBidiExact
+import DASHI.Physics.GR.SignedNewtonianLimitBidiExact
+import DASHI.Physics.GR.SignedGravitationalWaveCouplingBidiExact
+import DASHI.Physics.GR.SignedCosmologicalMatterCouplingBidiExact
+import DASHI.Physics.GR.UniversalSignedGCrossScaleFingerprintBidiExact
+import DASHI.Physics.GR.NegativeGPredictionAuthorityExact
+import DASHI.Physics.GR.SignedGSourceDynamicsBidiExact
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
