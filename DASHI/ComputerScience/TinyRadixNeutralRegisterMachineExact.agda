@@ -53,6 +53,18 @@ minus n zero = n
 minus zero (suc m) = zero
 minus (suc n) (suc m) = minus n m
 
+equalNat : Nat → Nat → Bool
+equalNat zero zero = true
+equalNat zero (suc n) = false
+equalNat (suc n) zero = false
+equalNat (suc n) (suc m) = equalNat n m
+
+lessNat : Nat → Nat → Bool
+lessNat zero zero = false
+lessNat zero (suc n) = true
+lessNat (suc n) zero = false
+lessNat (suc n) (suc m) = lessNat n m
+
 data Instruction : Set where
   loadImmediate : Register → Nat → Instruction
   loadMemory : Register → Address → Instruction
@@ -60,6 +72,8 @@ data Instruction : Set where
   addRegister : Register → Register → Instruction
   subRegister : Register → Register → Instruction
   jumpIfZero : Register → Address → Instruction
+  jumpIfEqual : Register → Register → Address → Instruction
+  jumpIfLess : Register → Register → Address → Instruction
   jump : Address → Instruction
   outputRegister : Register → Instruction
   halt : Instruction
@@ -149,6 +163,20 @@ step state with halted state
         machineState target (program state) (memory state) (registers state)
           (output state) false (suc (cycles state))
 ...     | suc n =
+        machineState (suc (pc state)) (program state) (memory state) (registers state)
+          (output state) false (suc (cycles state))
+...   | jumpIfEqual left right target with equalNat (readRegister (registers state) left) (readRegister (registers state) right)
+...     | true =
+        machineState target (program state) (memory state) (registers state)
+          (output state) false (suc (cycles state))
+...     | false =
+        machineState (suc (pc state)) (program state) (memory state) (registers state)
+          (output state) false (suc (cycles state))
+...   | jumpIfLess left right target with lessNat (readRegister (registers state) left) (readRegister (registers state) right)
+...     | true =
+        machineState target (program state) (memory state) (registers state)
+          (output state) false (suc (cycles state))
+...     | false =
         machineState (suc (pc state)) (program state) (memory state) (registers state)
           (output state) false (suc (cycles state))
 ...   | jump target =
@@ -254,7 +282,9 @@ record TinyMachineBoundary : Set where
     storePresent : Bool
     addPresent : Bool
     subtractPresent : Bool
-    conditionalBranchPresent : Bool
+    zeroBranchPresent : Bool
+    equalityBranchPresent : Bool
+    orderBranchPresent : Bool
     jumpPresent : Bool
     haltPresent : Bool
     outputPresent : Bool
@@ -265,5 +295,5 @@ record TinyMachineBoundary : Set where
 canonicalTinyMachineBoundary : TinyMachineBoundary
 canonicalTinyMachineBoundary =
   tinyMachineBoundary
-    true true true true true true true true true
+    true true true true true true true true true true true
     false false false
