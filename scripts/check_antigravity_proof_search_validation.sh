@@ -19,6 +19,9 @@ files=(
   DASHI/Physics/ExoticGravity/AntigravityExperimentalCutProvenanceExact.agda
   DASHI/Physics/ExoticGravity/AntigravityBundleExecutionDerivationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityFullyDerivedExperimentalCutExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityExecutionCalibrationExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityCalibratedFullyDerivedExperimentalCutExact.agda
   DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
   DASHI/Physics/ExoticGravity/AntigravityProofSearchValidationExact.agda
 )
@@ -52,6 +55,10 @@ grep -q 'physicalSourceAndTheorySourceAreSameCoordinate' \
   DASHI/Physics/ExoticGravity/AntigravityEmpiricalTheoryDiligenceBidiExact.agda
 
 # Execution/provenance/derivation invariants.
+grep -q 'apparatusIdentityEqualsRunIdentifier' \
+  DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
+grep -q 'calibrationCarrierEqualsCalibrationRevision' \
+  DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
 grep -q 'rawDataHash' \
   DASHI/Physics/ExoticGravity/AntigravitySourceAcquisitionCompilationExact.agda
 grep -q 'outputBundleMatches' \
@@ -62,6 +69,20 @@ grep -q 'exactOutputBundleIdentityRequired' \
   DASHI/Physics/ExoticGravity/AntigravityBundleExecutionDerivationExact.agda
 grep -q 'fullyDerivedCutAutomaticallyProvesAntigravity' \
   DASHI/Physics/ExoticGravity/AntigravityFullyDerivedExperimentalCutExact.agda
+
+# Typed calibration / same-object execution invariants.
+grep -q 'ExecutionCalibrationReceipt' \
+  DASHI/Physics/ExoticGravity/AntigravityExecutionCalibrationExact.agda
+grep -q 'SourceExecutionIdentityWeld' \
+  DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
+grep -q 'sourceExecutionApparatusMatches' \
+  DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
+grep -q 'allFourStagesNeedTypedCalibration' \
+  DASHI/Physics/ExoticGravity/AntigravityCalibratedFullyDerivedExperimentalCutExact.agda
+grep -q 'newConsumersRequireTypedCalibration' \
+  DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
+grep -q 'calibrationStringAloneSufficient' \
+  DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
 grep -q 'legacyComparativeReceiptAutomaticallyUpgrades' \
   DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
 
