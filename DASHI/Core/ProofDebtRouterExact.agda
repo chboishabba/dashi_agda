@@ -182,3 +182,100 @@ canonicalEstablishedDeferredRoute =
 canonicalEstablishedDeferredRouteNotNovel :
   routedDebt canonicalEstablishedDeferredRoute ≡ certificationDebt
 canonicalEstablishedDeferredRouteNotNovel = refl
+
+------------------------------------------------------------------------
+-- MACHINE-AWARE CERTIFICATION SCHEDULER
+--
+-- Resource pressure is a scheduling coordinate, never an epistemic one.
+-- In particular, a 32 GB workstation may justify external proof replay, but it
+-- cannot turn mathematical debt into certification debt or waive alignment.
+------------------------------------------------------------------------
+
+data LocalResourceClass : Set where
+  constrained32GB standardWorkstation largeLocalMachine : LocalResourceClass
+
+data ProofWorkload : Set where
+  tinyGlue moderateReplay heavyReplay : ProofWorkload
+
+data SchedulerAction : Set where
+  researchMathematics
+  auditTranscription
+  verifyEmpiricalEvidence
+  runLocalAgda
+  sendExternalLean
+  sendAristotleLean
+  alreadyClosed : SchedulerAction
+
+scheduleAction :
+  DebtClass -> StatementStatus -> LocalResourceClass -> ProofWorkload -> SchedulerAction
+scheduleAction mathematicalDebt _ _ _ = researchMathematics
+scheduleAction transcriptionDebt _ _ _ = auditTranscription
+scheduleAction empiricalEvidenceDebt _ _ _ = verifyEmpiricalEvidence
+scheduleAction noDebt _ _ _ = alreadyClosed
+scheduleAction certificationDebt notTranscribed _ _ = auditTranscription
+scheduleAction certificationDebt transcribedUnaligned _ _ = auditTranscription
+scheduleAction certificationDebt sourceAligned constrained32GB tinyGlue = runLocalAgda
+scheduleAction certificationDebt sourceAligned constrained32GB moderateReplay = sendExternalLean
+scheduleAction certificationDebt sourceAligned constrained32GB heavyReplay = sendAristotleLean
+scheduleAction certificationDebt sourceAligned standardWorkstation tinyGlue = runLocalAgda
+scheduleAction certificationDebt sourceAligned standardWorkstation moderateReplay = runLocalAgda
+scheduleAction certificationDebt sourceAligned standardWorkstation heavyReplay = sendExternalLean
+scheduleAction certificationDebt sourceAligned largeLocalMachine _ = runLocalAgda
+
+-- A constrained machine changes only the certifier choice after alignment.
+constrainedHeavyEstablishedReplayGoesToAristotle :
+  scheduleAction certificationDebt sourceAligned constrained32GB heavyReplay ≡ sendAristotleLean
+constrainedHeavyEstablishedReplayGoesToAristotle = refl
+
+constrainedModerateEstablishedReplayGoesToExternalLean :
+  scheduleAction certificationDebt sourceAligned constrained32GB moderateReplay ≡ sendExternalLean
+constrainedModerateEstablishedReplayGoesToExternalLean = refl
+
+smallGlueStaysLocal :
+  scheduleAction certificationDebt sourceAligned constrained32GB tinyGlue ≡ runLocalAgda
+smallGlueStaysLocal = refl
+
+-- Most importantly, resource constraints do not hide a genuine theorem gap.
+constrainedMachineCannotReclassifyNovelMathematics :
+  scheduleAction mathematicalDebt sourceAligned constrained32GB heavyReplay ≡ researchMathematics
+constrainedMachineCannotReclassifyNovelMathematics = refl
+
+-- Nor can Aristotle/Lean be scheduled before the statement is aligned.
+unAlignedCertificationCannotBeDelegatedAsProofReplay :
+  scheduleAction certificationDebt transcribedUnaligned constrained32GB heavyReplay ≡ auditTranscription
+unAlignedCertificationCannotBeDelegatedAsProofReplay = refl
+
+------------------------------------------------------------------------
+-- DELEGATION RECEIPT
+--
+-- This record is the handoff gate for an external proof backend.  Its input is
+-- already a SourceAlignedDeferredTheorem, so an Aristotle/Lean job can never be
+-- created from a merely cited or unaligned statement through this API.
+------------------------------------------------------------------------
+
+record ExternalCertificationDemand (T : Set) : Set where
+  constructor external-certification-demand
+  field
+    alignedDeferred : SourceAlignedDeferredTheorem T
+    workload : ProofWorkload
+    backend : PreferredBackend
+
+open ExternalCertificationDemand public
+
+scheduleExternalCertification :
+  {T : Set} ->
+  SourceAlignedDeferredTheorem T ->
+  ProofWorkload ->
+  ExternalCertificationDemand T
+scheduleExternalCertification receipt tinyGlue =
+  external-certification-demand receipt tinyGlue localAgda
+scheduleExternalCertification receipt moderateReplay =
+  external-certification-demand receipt moderateReplay externalLean
+scheduleExternalCertification receipt heavyReplay =
+  external-certification-demand receipt heavyReplay aristotleLean
+
+heavyAlignedDemandUsesAristotle :
+  {T : Set} -> (receipt : SourceAlignedDeferredTheorem T) ->
+  ExternalCertificationDemand.backend
+    (scheduleExternalCertification receipt heavyReplay) ≡ aristotleLean
+heavyAlignedDemandUsesAristotle receipt = refl

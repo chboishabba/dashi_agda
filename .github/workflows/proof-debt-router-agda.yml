@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Core/ProofDebtRouterExact.agda'
+      - 'DASHI/Core/ClayProofDebtFrontierAtlasExact.agda'
       - 'DASHI/Core/Everything.agda'
       - 'scripts/check_proof_debt_router.sh'
       - '.github/workflows/proof-debt-router-agda.yml'
