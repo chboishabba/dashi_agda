@@ -14,22 +14,49 @@ import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact as Cluste
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as Literal
 import DASHI.Analysis.RiemannG2LiteralPhaseDirectClusterResponseExact as Phase
 
+------------------------------------------------------------------------
+-- UNIFORM LITERAL-PHASE HIGH PRODUCER
+--
+-- The canonical arbitrary-high-zero theorem now targets the actual cluster
+-- response directly.  Per high off-line zero, the ANALYTIC input is:
+--
+--   balance-free cluster-response context
+--   + exact literal finite-near phase model
+--   + literalNear + far + Gamma < ClusterResponse.
+--
+-- There is no intermediate quantitative M_cluster target and no final balance in
+-- the analytic context.  The balance equality is a separate downstream
+-- attachment used only after the strict theorem has been supplied.
+------------------------------------------------------------------------
+
 record LiteralPhaseHighOffLineCase : Set₁ where
   field
     offSurface : NearFar.OrderedAdditiveNearFarSurface
     offTransport : Transport.ExplicitCutoffNearFarAgdaTransport offSurface
     targets : Direct.DirectLiteralComplementTargets offSurface offTransport
-    analyticContext : ClusterDirect.BalanceFreeClusterResponseContext targets
-    literalNearModel : Literal.FinalPoleNearLiteralModel (Direct.offInput targets)
-    phasePayment : Phase.LiteralPhaseDirectClusterPayment targets literalNearModel analyticContext
-    finalBalance : ClusterDirect.DirectClusterResponseBalanceAttachment analyticContext
+
+    analyticContext :
+      ClusterDirect.BalanceFreeClusterResponseContext targets
+
+    literalNearModel :
+      Literal.FinalPoleNearLiteralModel (Direct.offInput targets)
+
+    phasePayment :
+      Phase.LiteralPhaseDirectClusterPayment
+        targets literalNearModel analyticContext
+
+    finalBalance :
+      ClusterDirect.DirectClusterResponseBalanceAttachment analyticContext
+
     caseReference : String
 
 open LiteralPhaseHighOffLineCase public
 
 literalPhaseCaseContradiction : LiteralPhaseHighOffLineCase -> ⊥
 literalPhaseCaseContradiction c =
-  Phase.literalPhaseDirectClusterContradiction (phasePayment c) (finalBalance c)
+  Phase.literalPhaseDirectClusterContradiction
+    (phasePayment c)
+    (finalBalance c)
 
 record UniformLiteralPhaseHighProducer
     (analytic : Analytic.AnalyticSubstrate)
@@ -54,33 +81,47 @@ uniformLiteralPhaseHighContradiction producer rho high offLine =
   literalPhaseCaseContradiction
     (literalCaseForOffLineHigh producer rho high offLine)
 
+------------------------------------------------------------------------
+-- Boundary.
+------------------------------------------------------------------------
+
 record UniformLiteralPhaseHighBoundary : Set where
   constructor uniform-literal-phase-high-boundary
   field
     literalPhaseTheoremFamilyMatchesPrizeHighQuantifier : Bool
     literalPhaseTheoremFamilyMatchesPrizeHighQuantifierIsTrue :
       literalPhaseTheoremFamilyMatchesPrizeHighQuantifier ≡ true
+
     fixedLiteralPhaseCaseSuffices : Bool
-    fixedLiteralPhaseCaseSufficesIsFalse : fixedLiteralPhaseCaseSuffices ≡ false
+    fixedLiteralPhaseCaseSufficesIsFalse :
+      fixedLiteralPhaseCaseSuffices ≡ false
+
     intermediateClusterMarginPrimitivePerCase : Bool
     intermediateClusterMarginPrimitivePerCaseIsFalse :
       intermediateClusterMarginPrimitivePerCase ≡ false
+
     quantitativeClusterMarginLowerPrimitivePerCase : Bool
     quantitativeClusterMarginLowerPrimitivePerCaseIsFalse :
       quantitativeClusterMarginLowerPrimitivePerCase ≡ false
+
     analyticPaymentCanAccessFinalBalanceThroughContext : Bool
     analyticPaymentCanAccessFinalBalanceThroughContextIsFalse :
       analyticPaymentCanAccessFinalBalanceThroughContext ≡ false
+
     finalBalanceIsSeparateDownstreamCaseAttachment : Bool
     finalBalanceIsSeparateDownstreamCaseAttachmentIsTrue :
       finalBalanceIsSeparateDownstreamCaseAttachment ≡ true
+
     literalPhaseFamilyCompilesContradiction : Bool
     literalPhaseFamilyCompilesContradictionIsTrue :
       literalPhaseFamilyCompilesContradiction ≡ true
+
     producerInhabitedHere : Bool
     producerInhabitedHereIsFalse : producerInhabitedHere ≡ false
+
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
+
     highestAlphaReading : String
 
 canonicalUniformLiteralPhaseHighBoundary : UniformLiteralPhaseHighBoundary
@@ -95,4 +136,4 @@ canonicalUniformLiteralPhaseHighBoundary =
     true refl
     false refl
     false refl
-    "For every arbitrary high off-line nontrivial zero, prove literalNear+far+Gamma < actual ClusterResponse using a balance-free context and exact final-near model. The final cluster=Off+Gamma equality is downstream only. No intermediate M_cluster or M_cluster<=ClusterResponse theorem is primitive."
+    "The prize-facing high theorem family now targets the literal final ClusterResponse directly. For every arbitrary high off-line nontrivial zero, prove literalNear+far+Gamma < ClusterResponse using only a balance-free context and the exact final-near model. No intermediate M_cluster or M_cluster<=ClusterResponse theorem is primitive. The final cluster=Off+Gamma equality is a separate downstream attachment, unavailable to the analytic payment. Payment plus balance compiles directly to contradiction. The family remains uninhabited and RH is not derived."

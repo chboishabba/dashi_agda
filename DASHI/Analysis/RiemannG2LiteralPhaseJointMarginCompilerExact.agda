@@ -3,13 +3,14 @@ module DASHI.Analysis.RiemannG2LiteralPhaseJointMarginCompilerExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as Literal
-import DASHI.Analysis.RiemannG2DirectIndependentComplementMarginExact as Margin
-import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateBudgetTargetExact as Off
+import DASHI.Analysis.RiemannG2BalanceFreeComplementContextExact as Context
+import DASHI.Analysis.RiemannG2DirectIndependentComplementMarginExact as Legacy
 import DASHI.Analysis.RiemannAristotlePoleQuotientGammaBudgetTargetExact as Gamma
 import DASHI.Analysis.RiemannAristotlePoleQuotientClusterMarginTargetExact as Cluster
 import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as Split
@@ -17,13 +18,19 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientComplementMarginCompilerExact 
 import DASHI.Analysis.RiemannG2FinalSplitComplementSameObjectAssemblyExact as Existing
 
 ------------------------------------------------------------------------
--- LITERAL PHASE-SUM -> CANONICAL ONE-LEAF MARGIN
+-- LITERAL PHASE-SUM -> BALANCE-FREE CANONICAL MARGIN
 --
--- The canonical consumer is phrased using the final transport scalar
--- `nearResponseAt chosenJ`.  The introspective observer refinement instead
--- exposes the literal phase-visible finite sum.  Once those are identified on
--- the same object, the research theorem should be stated directly on the
--- literal sum; rewriting then produces the canonical one-leaf margin.
+-- The analytic theorem is now dependency-level independent of the terminal
+-- balance.  Its context contains the scalar/order/taper/cluster coordinates
+-- required to STATE the inequality, but no theorem `cluster = Off + Gamma`.
+--
+-- The research theorem is therefore exactly the visible signed-phase statement:
+--
+--   literalFiniteNearValue + transportedFar + literalGamma < clusterMargin.
+--
+-- Rewriting the exact final-near equality produces the canonical joint-margin
+-- payment.  Only after that payment exists may a separate final-balance
+-- attachment be supplied to compile contradiction.
 ------------------------------------------------------------------------
 
 record LiteralPhaseJointMarginPayment
@@ -31,24 +38,23 @@ record LiteralPhaseJointMarginPayment
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
     (targets : Direct.DirectLiteralComplementTargets S transport)
     (model : Literal.FinalPoleNearLiteralModel (Direct.offInput targets))
-    (input : Margin.DirectIndependentComplementMarginInput targets) : Set₁ where
+    (context : Context.BalanceFreeComplementContext targets) : Set₁ where
   private
-    off = Direct.directOffTarget targets
     gamma = Direct.directGammaTarget targets
-    cluster0 = Margin.cluster input
+    cluster0 = Context.cluster context
   field
     literalPhaseStrictBelowMargin :
-      Complement._<_ (Split.order (Margin.surface input))
-        (Split.add (Margin.surface input)
-          (Existing.cast (Margin.offScalarIdentity input)
+      Complement._<_ (Split.order (Context.surface context))
+        (Split.add (Context.surface context)
+          (Existing.cast (Context.offScalarIdentity context)
             (NearFar.add S
               (Literal.literalFiniteNearValue model)
               (Transport.farBudgetAt transport
                 (Direct.chosenCutoff (Direct.offInput targets)))))
-          (Existing.cast (Margin.gammaScalarIdentity input)
+          (Existing.cast (Context.gammaScalarIdentity context)
             (Gamma.GammaBudget gamma
               (Gamma.universalPoleQuotientTaper gamma))))
-        (Existing.cast (Margin.clusterScalarIdentity input)
+        (Existing.cast (Context.clusterScalarIdentity context)
           (Cluster.ClusterMargin cluster0
             (Cluster.universalPoleQuotientTaper cluster0)))
 
@@ -56,17 +62,46 @@ record LiteralPhaseJointMarginPayment
 
 open LiteralPhaseJointMarginPayment public
 
-compileLiteralPhaseMarginToCanonicalMargin :
-  forall {S transport targets model input} ->
+compileLiteralPhaseMarginToCanonicalPayment :
+  forall {S transport targets model context} ->
   LiteralPhaseJointMarginPayment
     {S = S} {transport = transport}
-    targets model input ->
-  Margin.literalComplementStrictBelowMargin input
-compileLiteralPhaseMarginToCanonicalMargin
-  {S = S} {transport = transport} {targets = targets}
-  {model = model} {input = input} payment
+    targets model context ->
+  Context.BalanceFreeJointMarginPayment context
+compileLiteralPhaseMarginToCanonicalPayment
+  {model = model} payment
   with Literal.finalNearResponseIsLiteralFiniteNear model
-... | refl = literalPhaseStrictBelowMargin payment
+... | refl = record
+  { Context.strictMargin = literalPhaseStrictBelowMargin payment
+  ; Context.paymentReference = paymentReference payment
+  }
+
+------------------------------------------------------------------------
+-- The final balance is explicitly downstream.  There is intentionally no
+-- contradiction compiler taking only LiteralPhaseJointMarginPayment.
+------------------------------------------------------------------------
+
+compileLiteralPhasePaymentToLegacyInput :
+  forall {S transport targets model context} ->
+  (balance : Context.FinalClusterBalanceAttachment context) ->
+  LiteralPhaseJointMarginPayment
+    {S = S} {transport = transport}
+    targets model context ->
+  Legacy.DirectIndependentComplementMarginInput targets
+compileLiteralPhasePaymentToLegacyInput balance payment =
+  Context.compileBalanceFreePaymentToLegacyInput balance
+    (compileLiteralPhaseMarginToCanonicalPayment payment)
+
+literalPhasePaymentAndBalanceContradiction :
+  forall {S transport targets model context} ->
+  Context.FinalClusterBalanceAttachment context ->
+  LiteralPhaseJointMarginPayment
+    {S = S} {transport = transport}
+    targets model context ->
+  ⊥
+literalPhasePaymentAndBalanceContradiction balance payment =
+  Legacy.directIndependentComplementContradiction
+    (compileLiteralPhasePaymentToLegacyInput balance payment)
 
 ------------------------------------------------------------------------
 -- Boundary.
@@ -79,6 +114,18 @@ record LiteralPhaseJointMarginBoundary : Set where
     analyticTheoremMayBeStatedOnLiteralPhaseSumIsTrue :
       analyticTheoremMayBeStatedOnLiteralPhaseSum ≡ true
 
+    literalPhasePaymentPresupposesCanonicalStrictMargin : Bool
+    literalPhasePaymentPresupposesCanonicalStrictMarginIsFalse :
+      literalPhasePaymentPresupposesCanonicalStrictMargin ≡ false
+
+    literalPhasePaymentCanAccessFinalClusterBalance : Bool
+    literalPhasePaymentCanAccessFinalClusterBalanceIsFalse :
+      literalPhasePaymentCanAccessFinalClusterBalance ≡ false
+
+    finalBalanceRequiredOnlyAfterAnalyticPayment : Bool
+    finalBalanceRequiredOnlyAfterAnalyticPaymentIsTrue :
+      finalBalanceRequiredOnlyAfterAnalyticPayment ≡ true
+
     secondNearEnvelopeRequired : Bool
     secondNearEnvelopeRequiredIsFalse :
       secondNearEnvelopeRequired ≡ false
@@ -90,6 +137,10 @@ record LiteralPhaseJointMarginBoundary : Set where
     literalPhasePaymentCompilesCanonicalOneLeafMargin : Bool
     literalPhasePaymentCompilesCanonicalOneLeafMarginIsTrue :
       literalPhasePaymentCompilesCanonicalOneLeafMargin ≡ true
+
+    paymentPlusBalanceCompilesContradiction : Bool
+    paymentPlusBalanceCompilesContradictionIsTrue :
+      paymentPlusBalanceCompilesContradiction ≡ true
 
     literalPhasePaymentInhabitedHere : Bool
     literalPhasePaymentInhabitedHereIsFalse :
@@ -110,4 +161,8 @@ canonicalLiteralPhaseJointMarginBoundary =
     true refl
     false refl
     false refl
-    "After the final near observer is proof-relevantly identified with its literal reflection-paired phase sum, state the remaining high theorem directly as literalFiniteNearValue + transported far budget + literal Gamma response < quantitative cluster margin on the exact universal pole-quotient carrier. The exact final-near equality rewrites this into the canonical direct one-leaf margin; no second near envelope or additional harmonic theorem is introduced. The literal phase inequality itself remains unproved here, so RH is not derived."
+    true refl
+    true refl
+    false refl
+    false refl
+    "The analytic dependency graph is now genuinely balance-free. LiteralPhaseJointMarginPayment is indexed by the exact literal near model and BalanceFreeComplementContext, whose type contains no final cluster=Off+Gamma theorem. Thus the phase+far+Gamma<cluster-margin theorem cannot depend on that final balance through its input context. Its exact final-near equality compiles to BalanceFreeJointMarginPayment. Only afterward is FinalClusterBalanceAttachment supplied to recover the historical final consumer and contradiction. The analytic inequality itself remains unproved and RH is not derived."

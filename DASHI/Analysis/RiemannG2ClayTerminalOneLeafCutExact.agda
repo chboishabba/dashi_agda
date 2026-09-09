@@ -14,20 +14,20 @@ import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 ------------------------------------------------------------------------
 -- CLAY-FACING TERMINAL CUT
 --
--- High is now the literal phase theorem family itself.  For every arbitrary
--- High zero assumed off-line:
+-- The public high-side input is now the lowest theorem-bearing surface reached
+-- by introspection: for every arbitrary High zero assumed off-line, supply one
+-- exact literal finite-near model, one balance-free actual-cluster-response
+-- context, and the independent phase-visible theorem
 --
---   exact final-near literal model
---   + balance-free actual-ClusterResponse context
---   + literalNear + transportedFar + Gamma < ClusterResponse
---   + downstream final balance
---   -> contradiction.
+--   literalNear + transportedFar + Gamma < ClusterResponse.
 --
--- The analytic payment cannot access cluster = Off + Gamma through its context.
--- No intermediate M_cluster or M_cluster <= ClusterResponse theorem is primitive.
--- Low remains definitionally the Platt--Trudgian verified region; high+low compile
--- first to double-negated RH, and the exact critical-predicate refinement is used
--- only in the final positive-RH conversion.
+-- The final balance cluster = Off + Gamma is a separate downstream attachment.
+-- There is no primitive intermediate M_cluster or M_cluster <= ClusterResponse
+-- theorem on the canonical high path.
+--
+-- Low is definitionally the Platt--Trudgian verified region. Low + literal High
+-- + cover compile first to constructive double-negated RH. The exact critical
+-- predicate refinement is consumed only in the final conversion to positive RH.
 ------------------------------------------------------------------------
 
 record ClayTerminalOneLeafInput
@@ -38,8 +38,13 @@ record ClayTerminalOneLeafInput
     verifiedOrHighCover :
       (rho : Universal.AnalyticNontrivialZero analytic) ->
       Low.CanonicalLowRegion lowTransport rho ⊎ HighRegion rho
-    highProducer : High.UniformLiteralPhaseHighProducer analytic HighRegion
-    criticalLineRefinement : Stability.CriticalLinePredicateRefinement analytic
+
+    highProducer :
+      High.UniformLiteralPhaseHighProducer analytic HighRegion
+
+    criticalLineRefinement :
+      Stability.CriticalLinePredicateRefinement analytic
+
     terminalReference : String
 
 open ClayTerminalOneLeafInput public
@@ -85,21 +90,26 @@ record ClayTerminalOneLeafBoundary : Set where
     consumerAssignedAllowanceLayerOnCanonicalPath : Bool
     consumerAssignedAllowanceLayerOnCanonicalPathIsFalse :
       consumerAssignedAllowanceLayerOnCanonicalPath ≡ false
+
     extraHighOrdinatePaymentAfterUniformLiteralPhaseProducer : Bool
     extraHighOrdinatePaymentAfterUniformLiteralPhaseProducerIsFalse :
       extraHighOrdinatePaymentAfterUniformLiteralPhaseProducer ≡ false
+
     separateNearEnvelopePrimitiveLeaf : Bool
     separateNearEnvelopePrimitiveLeafIsFalse :
       separateNearEnvelopePrimitiveLeaf ≡ false
     separateGammaEnvelopePrimitiveLeaf : Bool
     separateGammaEnvelopePrimitiveLeafIsFalse :
       separateGammaEnvelopePrimitiveLeaf ≡ false
+
     uniformLiteralPhaseJointMarginIsHighAnalyticFamily : Bool
     uniformLiteralPhaseJointMarginIsHighAnalyticFamilyIsTrue :
       uniformLiteralPhaseJointMarginIsHighAnalyticFamily ≡ true
+
     opaqueCanonicalMarginProducerPrimitiveAtClayBoundary : Bool
     opaqueCanonicalMarginProducerPrimitiveAtClayBoundaryIsFalse :
       opaqueCanonicalMarginProducerPrimitiveAtClayBoundary ≡ false
+
     arbitraryLowPredicateOnCanonicalPath : Bool
     arbitraryLowPredicateOnCanonicalPathIsFalse :
       arbitraryLowPredicateOnCanonicalPath ≡ false
@@ -130,7 +140,9 @@ record ClayTerminalOneLeafBoundary : Set where
     inputsInhabitedHere : Bool
     inputsInhabitedHereIsFalse : inputsInhabitedHere ≡ false
     unconditionalRHClaimedHere : Bool
-    unconditionalRHClaimedHereIsFalse : unconditionalRHClaimedHere ≡ false
+    unconditionalRHClaimedHereIsFalse :
+      unconditionalRHClaimedHere ≡ false
+
     highestAlphaReading : String
 
 canonicalClayTerminalOneLeafBoundary : ClayTerminalOneLeafBoundary
@@ -153,4 +165,4 @@ canonicalClayTerminalOneLeafBoundary =
     true refl
     false refl
     false refl
-    "The prize-facing compiler exposes the literal high theorem family itself. For every arbitrary high off-line zero, provide the exact final-near model, a balance-free actual ClusterResponse context, and independently prove literalNear+far+Gamma<ClusterResponse. The final cluster=Off+Gamma equality is downstream only. No intermediate M_cluster or M_cluster<=ClusterResponse theorem, arbitrary Low carrier, Low-subset theorem, allowance layer, or naked critical-line stability is primitive. These inputs compile to double-negated RH before the final critical-predicate refinement. RH is not derived here."
+    "The prize-facing compiler exposes the literal high theorem family itself: for every arbitrary high off-line zero, provide the exact final near phase model, a balance-free actual ClusterResponse context, and independently prove literalNear+far+Gamma<ClusterResponse. The final cluster=Off+Gamma equality is downstream only. No intermediate M_cluster or M_cluster<=ClusterResponse theorem, arbitrary Low carrier, Low-subset theorem, allowance layer, or naked critical-line stability is primitive. These inputs compile to double-negated RH before the final critical-predicate refinement. No substantive theorem is fabricated here."
