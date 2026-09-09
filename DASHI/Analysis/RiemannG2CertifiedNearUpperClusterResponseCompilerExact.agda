@@ -15,34 +15,34 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as 
 import DASHI.Analysis.RiemannAristotlePoleQuotientComplementMarginCompilerExact as Order
 import DASHI.Analysis.RiemannG2FinalSplitComplementSameObjectAssemblyExact as Existing
 import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact as Cluster
-import DASHI.Analysis.RiemannG2FinalNearIndexedLiteralModelCompilerExact as Literal
+import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as Literal
 import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact as FinalCert
 
 ------------------------------------------------------------------------
 -- CERTIFIED FINAL-NEAR UPPER -> DIRECT CLUSTER-RESPONSE PAYMENT
 --
--- A proof-carrying finite upper certificate is useful only after its order is
--- attached to the final NearFar order.  Once attached, monotonicity compiles
+-- Representation is already fixed by FinalNearLiteralKernel.  A proof-carrying
+-- finite upper certificate gives
 --
---   nearResponse(J) <= U
+--   nearResponseAt(J) <= U.
 --
--- into
+-- Existing source monotonicity therefore gives
 --
---   B_complement <= cast(U + B_far(J)) + cast(D_Gamma).
+--   B_off(J) = nearResponseAt(J) + B_far(J)
+--            <= U + B_far(J).
 --
--- The only remaining strict producer theorem is then
+-- The only remaining strict producer theorem on this computational route is
 --
 --   cast(U + B_far(J)) + cast(D_Gamma) < ClusterResponse.
 --
--- This theorem remains independent of the downstream cluster=Off+Gamma balance.
+-- The balance ClusterResponse = Off + Gamma is not available to this theorem.
 ------------------------------------------------------------------------
 
 record CertifiedNearUpperOrderAttachment
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
     (offInput : Direct.DirectLiteralOffTargetInput S transport)
-    {finiteInput}
-    (kernel : Literal.FinalNearIndexedLiteralKernel offInput finiteInput)
+    (kernel : Literal.FinalNearLiteralKernel offInput)
     {certificate : FinalCert.FinalCarrierFiniteSumCertificate offInput kernel}
     (upper : FinalCert.FinalCarrierFiniteSumUpper offInput kernel certificate) : Set₁ where
   field
@@ -57,10 +57,9 @@ record CertifiedNearUpperOrderAttachment
 open CertifiedNearUpperOrderAttachment public
 
 certifiedNearUpperInSourceOrder :
-  forall {S transport offInput finiteInput kernel certificate upper} ->
+  forall {S transport offInput kernel certificate upper} ->
   CertifiedNearUpperOrderAttachment
-    {S = S} {transport = transport} offInput
-    {finiteInput = finiteInput} kernel
+    {S = S} {transport = transport} offInput kernel
     {certificate = certificate} upper ->
   NearFar._≤_ S
     (Transport.nearResponseAt transport (Direct.chosenCutoff offInput))
@@ -70,17 +69,11 @@ certifiedNearUpperInSourceOrder attachment =
   certifiedOrderToNearFarOrder attachment
     (FinalCert.certifiedFinalNearBelowUpper _)
 
-------------------------------------------------------------------------
--- Per-target strict certificate margin.
-------------------------------------------------------------------------
-
 record CertifiedNearUpperClusterMargin
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
     (targets : Direct.DirectLiteralComplementTargets S transport)
-    {finiteInput}
-    (kernel : Literal.FinalNearIndexedLiteralKernel
-      (Direct.offInput targets) finiteInput)
+    (kernel : Literal.FinalNearLiteralKernel (Direct.offInput targets))
     {certificate : FinalCert.FinalCarrierFiniteSumCertificate
       (Direct.offInput targets) kernel}
     (upper : FinalCert.FinalCarrierFiniteSumUpper
@@ -112,13 +105,8 @@ record CertifiedNearUpperClusterMargin
 
 open CertifiedNearUpperClusterMargin public
 
-------------------------------------------------------------------------
--- Existing monotonicity compiles the certified envelope to the canonical
--- complement budget.
-------------------------------------------------------------------------
-
 sourceOffBudgetBelowCertifiedEnvelope :
-  forall {S transport targets finiteInput kernel certificate upper orderAttachment} ->
+  forall {S transport targets kernel certificate upper orderAttachment} ->
   NearFar._≤_ S
     (Direct.directOffBudget (Direct.offInput targets)
       (Transport.universalPoleQuotientTaper transport))
@@ -136,7 +124,7 @@ sourceOffBudgetBelowCertifiedEnvelope
         (Direct.chosenCutoff (Direct.offInput targets))))
 
 compiledComplementBudgetBelowCertifiedEnvelope :
-  forall {S transport targets finiteInput kernel certificate upper orderAttachment context} ->
+  forall {S transport targets kernel certificate upper orderAttachment context} ->
   let gamma = Direct.directGammaTarget targets
       U = Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper
         (FinalCert.upperCertificate upper)
@@ -163,13 +151,19 @@ compiledComplementBudgetBelowCertifiedEnvelope
     (Cluster.offOrderTransport context
       (sourceOffBudgetBelowCertifiedEnvelope
         {S = S} {targets = targets} {orderAttachment = orderAttachment}))
-    (Cluster.compiledGammaUpper context)
+    (Direct.gammaInput targets |> Direct.sourceOrderReflexive
+      (Gamma.GammaBudget (Direct.directGammaTarget targets)
+        (Gamma.universalPoleQuotientTaper (Direct.directGammaTarget targets)))
+      |> Cluster.gammaOrderTransport context)
+  where
+  infixl 0 _|>_
+  _|>_ : forall {A B : Set} -> A -> (A -> B) -> B
+  x |> f = f x
 
 compileCertifiedUpperToDirectClusterPayment :
-  forall {S transport targets finiteInput kernel certificate upper orderAttachment context} ->
+  forall {S transport targets kernel certificate upper orderAttachment context} ->
   CertifiedNearUpperClusterMargin
-    {S = S} {transport = transport} targets
-    {finiteInput = finiteInput} kernel
+    {S = S} {transport = transport} targets kernel
     {certificate = certificate} upper orderAttachment context ->
   Cluster.DirectClusterResponsePayment context
 compileCertifiedUpperToDirectClusterPayment
@@ -184,36 +178,33 @@ compileCertifiedUpperToDirectClusterPayment
 record CertifiedNearUpperClusterBoundary : Set where
   constructor certified-near-upper-cluster-boundary
   field
+    evaluatorIndexedKernelRequired : Bool
+    evaluatorIndexedKernelRequiredIsFalse : evaluatorIndexedKernelRequired ≡ false
     finiteUpperCertificateCanFeedCanonicalHighPayment : Bool
     finiteUpperCertificateCanFeedCanonicalHighPaymentIsTrue :
       finiteUpperCertificateCanFeedCanonicalHighPayment ≡ true
-
     selectedWeilWindowRequired : Bool
     selectedWeilWindowRequiredIsFalse : selectedWeilWindowRequired ≡ false
-
     determinantConsumerRequired : Bool
     determinantConsumerRequiredIsFalse : determinantConsumerRequired ≡ false
-
     finalBalanceAvailableToCertifiedMargin : Bool
     finalBalanceAvailableToCertifiedMarginIsFalse :
       finalBalanceAvailableToCertifiedMargin ≡ false
-
     strictCertifiedEnvelopeBelowClusterStillRequired : Bool
     strictCertifiedEnvelopeBelowClusterStillRequiredIsTrue :
       strictCertifiedEnvelopeBelowClusterStillRequired ≡ true
-
     finiteCertificateAloneProvesRH : Bool
     finiteCertificateAloneProvesRHIsFalse : finiteCertificateAloneProvesRH ≡ false
-
     highestAlphaReading : String
 
 canonicalCertifiedNearUpperClusterBoundary : CertifiedNearUpperClusterBoundary
 canonicalCertifiedNearUpperClusterBoundary =
   certified-near-upper-cluster-boundary
-    true refl
-    false refl
-    false refl
     false refl
     true refl
     false refl
-    "A proof-carrying upper certificate on the exact final near sum is a valid computational producer once its order is attached to the NearFar order. Monotonicity then compiles near<=U into the canonical complement budget. The remaining theorem is the independent strict certificate margin cast(U+B_far)+cast(D_Gamma)<ClusterResponse. No selected Weil window, determinant consumer, or downstream final balance is used to prove that margin. The certificate alone does not prove RH."
+    false refl
+    false refl
+    true refl
+    false refl
+    "The computational route is now acyclic: realize the evaluator-independent literal kernel, attach a proof-carrying finite upper to its exact fold, transport that upper to final nearResponseAt(J), and use source monotonicity to obtain B_off <= U+B_far. The only remaining strict theorem is cast(U+B_far)+cast(D_Gamma)<ClusterResponse on the balance-free context. No selected Weil window, determinant consumer, evaluator-indexed kernel, or downstream balance is available to manufacture the margin."
