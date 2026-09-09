@@ -4,7 +4,9 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Environment.CanopySpectralRadiativeTransferExact as Canopy
+import DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact as Calibration
 import DASHI.Environment.PhotosyntheticLightTransportCrossPollinationExact as Photo
+import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as Plant
 import DASHI.Physics.Optics.InverseCausticNumericalProducerExact as Numerical
 
 ------------------------------------------------------------------------
@@ -18,8 +20,8 @@ import DASHI.Physics.Optics.InverseCausticNumericalProducerExact as Numerical
 
 record PhotosyntheticObjective
     {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
-    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
-    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {leaf : Plant.LeafGasExchangeReceipt}
+    {calibration : Calibration.LeafCarbonWaterCalibration leaf}
     {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt field}
     (weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception) : Set₁ where
@@ -53,8 +55,8 @@ open BiologicalLightConstraints public
 
 record PhotosyntheticLightOptimisationCandidate
     {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
-    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
-    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {leaf : Plant.LeafGasExchangeReceipt}
+    {calibration : Calibration.LeafCarbonWaterCalibration leaf}
     {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt field}
     {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
@@ -74,8 +76,8 @@ open PhotosyntheticLightOptimisationCandidate public
 
 record PhotosyntheticLightOptimisationAdmission
     {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
-    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
-    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {leaf : Plant.LeafGasExchangeReceipt}
+    {calibration : Calibration.LeafCarbonWaterCalibration leaf}
     {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt field}
     {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
@@ -100,9 +102,9 @@ open PhotosyntheticLightOptimisationAdmission public
 ------------------------------------------------------------------------
 
 record CanopyOptimisationWeld
-    {LeafPoint Wavelength Direction PhotonFlux ObjectiveValue : Set}
-    {leaf : DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact.LeafGasExchangeReceipt}
-    {calibration : DASHI.Environment.ConstitutiveHydrologyPlantCalibrationExact.LeafCarbonWaterCalibration leaf}
+    {LeafPoint Wavelength Direction PhotonFlux : Set}
+    {leaf : Plant.LeafGasExchangeReceipt}
+    {calibration : Calibration.LeafCarbonWaterCalibration leaf}
     {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt field}
     {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
