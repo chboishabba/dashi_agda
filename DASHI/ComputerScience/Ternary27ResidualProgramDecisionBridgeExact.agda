@@ -2,6 +2,8 @@ module DASHI.ComputerScience.Ternary27ResidualProgramDecisionBridgeExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Algebra.Trit as Trit
+import DASHI.Core.DependentRecoverableProjectionExact as Dependent
 import DASHI.Core.TopDownObservationCalculusExact as TopDown
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Foundations.SSPTritCarrier as SSP
@@ -21,7 +23,7 @@ import DASHI.ComputerScience.EuclidGCDRegisterMachineExact as Euclid
 -- sufficient for every declared consumer of the fine ternary diagnostic state.
 ------------------------------------------------------------------------
 
-statusToSSP : DASHI.Algebra.Trit.Trit → SSP.SSPTrit
+statusToSSP : Trit.Trit → SSP.SSPTrit
 statusToSSP = SSP.fromTrit
 
 programDiagnosticTriple :
@@ -39,8 +41,7 @@ programDiagnosticTriple fuel p q r start =
 
 ternary27ExactCodeObserver :
   Orbit.TritTriple →
-  DASHI.Core.DependentRecoverableProjectionExact.DependentCode
-    Recoverable27.canonicalAntipodalDependentProjection
+  Dependent.DependentCode Recoverable27.canonicalAntipodalDependentProjection
 ternary27ExactCodeObserver =
   TopDown.dependentCodeObserver Recoverable27.canonicalAntipodalDependentProjection
 
