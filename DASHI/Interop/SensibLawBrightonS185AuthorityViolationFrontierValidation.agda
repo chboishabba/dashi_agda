@@ -23,26 +23,50 @@ meetSourceWeldRequired :
   exactMeetAuthoritySourceWeldRequired Weld.canonicalBrightonHistoricalAuthorityWeldBoundary ≡ true
 meetSourceWeldRequired = refl
 
-firstViolationElementExplicit :
-  firstOpenElementExplicit Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
-firstViolationElementExplicit = refl
+conditionCoordinateExplicit :
+  conditionElementExplicit Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+conditionCoordinateExplicit = refl
 
-firstViolationElementStillUnresolved :
-  elementDispositionUnresolved Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
-firstViolationElementStillUnresolved = refl
+conditionCoordinateSatisfied :
+  conditionElementSatisfied Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+conditionCoordinateSatisfied = refl
 
-sameEventMeritsEvidenceRequired :
-  requiresSameEventMeritsEvidence Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
-sameEventMeritsEvidenceRequired = refl
+maintenanceFailureCoordinateExplicit :
+  maintenanceFailureElementExplicit Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+maintenanceFailureCoordinateExplicit = refl
 
-form11DoesNotPayMerits :
-  form11AssertionPaysMerits Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
-form11DoesNotPayMerits = refl
+maintenanceFailureStillUnresolved :
+  maintenanceFailureDispositionUnresolved Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+maintenanceFailureStillUnresolved = refl
 
-qstarsDoesNotPayMerits :
-  qstarsAdvicePaysMerits Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
-qstarsDoesNotPayMerits = refl
+conditionAndMaintenanceSeparated :
+  conditionAndMaintenanceFailureSeparated Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+conditionAndMaintenanceSeparated = refl
 
-rentOrderDoesNotPayS185Merits :
-  rentOrderPaysConditionMerits Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
-rentOrderDoesNotPayS185Merits = refl
+repairChronologyStillRequired :
+  requiresRepairChronologyForMaintenanceFailure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+repairChronologyStillRequired = refl
+
+conditionBundleDoesNotPayWholeViolation :
+  conditionBundlePaysViolation Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+conditionBundleDoesNotPayWholeViolation = refl
+
+nonLiveabilityNoticeDoesNotAutoPayMaintenance :
+  nonLiveabilityNoticeAutomaticallyPaysMaintenanceFailure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+nonLiveabilityNoticeDoesNotAutoPayMaintenance = refl
+
+qstarsDoesNotPayMaintenance :
+  qstarsAdvicePaysMaintenanceFailure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+qstarsDoesNotPayMaintenance = refl
+
+rentOrderDoesNotPayMaintenance :
+  rentOrderPaysMaintenanceFailure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+rentOrderDoesNotPayMaintenance = refl
+
+laterExitDoesNotAutoPayJanuaryMaintenance :
+  laterExitCarrierAutomaticallyPaysJanuaryMaintenanceFailure Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+laterExitDoesNotAutoPayJanuaryMaintenance = refl
+
+conditionSatisfactionDoesNotAutoCreateViolation :
+  conditionSatisfactionAutomaticallyCreatesViolation Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+conditionSatisfactionDoesNotAutoCreateViolation = refl
