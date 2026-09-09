@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as Source
 import DASHI.Interop.SensibLawNatSourceDiscoveryExact as Discovery
 
 ------------------------------------------------------------------------
@@ -13,7 +14,7 @@ import DASHI.Interop.SensibLawNatSourceDiscoveryExact as Discovery
 --
 -- A candidate may fail the exact same-source identity question while still
 -- being a useful source-of-source or sibling that sharpens subsequent
--- discovery.  Such lineage never admits the candidate into alternate fetch.
+-- discovery. Such lineage never admits the candidate into alternate fetch.
 ------------------------------------------------------------------------
 
 data SourceLineageRelation : Set where
@@ -24,9 +25,9 @@ data SourceLineageRelation : Set where
   lineageUnresolved : SourceLineageRelation
 
 record SourceLineageReceipt
-    {residual : _}
-    {demand : _}
-    {candidate : _}
+    {residual : Source.NatSourceSupportResidual}
+    {demand : Discovery.SourceDiscoveryDemand residual}
+    {candidate : Discovery.LocatorCandidate demand}
     (identity : Discovery.SameSourceIdentityReceipt candidate) : Set where
   constructor sourceLineageReceipt
   field
@@ -43,9 +44,9 @@ open SourceLineageReceipt public
 -- A source-of-source is explicitly not an alternate realization of the exact
 -- historical source, even though it may produce better discovery queries.
 canonicalSourceOfSourceReceipt :
-  {residual : _} →
-  {demand : _} →
-  {candidate : _} →
+  {residual : Source.NatSourceSupportResidual} →
+  {demand : Discovery.SourceDiscoveryDemand residual} →
+  {candidate : Discovery.LocatorCandidate demand} →
   (identity : Discovery.SameSourceIdentityReceipt candidate) →
   Discovery.disposition identity ≡ Discovery.differentSource →
   String →
