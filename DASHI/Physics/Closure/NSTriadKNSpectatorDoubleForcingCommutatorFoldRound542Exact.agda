@@ -31,6 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as R73
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
@@ -38,52 +39,28 @@ import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Ex
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedAsSwapPairedPlusMinusRound387Exact as R387
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedPhysicalDampedTangentRound388Exact as R388
 
-weightedDoubleForcing :
-  ∀ {r} {F : C3.RealField r}
-    {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E} →
-  R294.SwapInvariantCellWeight F →
-  Helical.HelicalModeScalars F →
-  Audit.FiniteComplex3GalerkinSystem F E I →
-  Physical.PhysicalTriadIncidence → C3.Complex3 F
-weightedDoubleForcing W S system tau =
-  let
-    physicalSystem = record
-      { DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.finiteSystem = system
-      ; DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.physicalEmbedding = _
-      ; DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.physicalInverseSquare = _
-      ; DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.viscosityPositive = _
-      ; DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.literalViscousQuadraticCoefficient = _
-      }
-  in C3.complex3Scale (R294.weight W tau)
-       (R388.PhysicalDoubleMixed.doubleForcing physicalSystem S tau)
-
-------------------------------------------------------------------------
--- The concrete physical-system constructor above is intentionally NOT used as
--- a theorem authority.  The actual useful theorem is stated inside a module
--- parameterized by the repository's literal physical system.
-------------------------------------------------------------------------
-
 module Fold
     {r} {F : C3.RealField r}
-    {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E}
-    (physicalSystem :
-      DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.PhysicalFiniteComplex3GalerkinSystem F)
+    (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F)
     (W : R294.SwapInvariantCellWeight F) where
 
+  E = Field30.physicalEmbedding physicalSystem
+  I = Field30.physicalInverseSquare physicalSystem
+
   module D = R388.PhysicalDoubleMixed physicalSystem S
 
-  system =
-    DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.finiteSystem physicalSystem
+  system : Audit.FiniteComplex3GalerkinSystem F E I
+  system = Field30.finiteSystem physicalSystem
 
   velocity = Audit.velocity system
   forcing = Audit.projectedNonlinearity system
 
   product : Physical.PhysicalTriadIncidence → C3.Complex3 F
-  product = R294.weightedProductRuleCell W S velocity forcing
+  product = R294.weightedProductRuleCell {E = E} {I = I} W S velocity forcing
 
   commutator : Physical.PhysicalTriadIncidence → C3.Complex3 F
-  commutator = R294.weightedCommutatorCell W S velocity forcing
+  commutator = R294.weightedCommutatorCell {E = E} {I = I} W S velocity forcing
 
   weightedDouble : Physical.PhysicalTriadIncidence → C3.Complex3 F
   weightedDouble tau =
@@ -218,9 +195,9 @@ module Fold
     ≡ C3.complex3Add (C3.complex3Add C C) (C3.complex3Add C C)
   fixedOutputWeightedDoubleIsFourCommutatorFolds output =
     let
-      items = Output.physicalOutputFiber (Audit.cutoff system) output
       productToCommutator =
         R294.fixedOutputWeightedProductRuleIsCommutator
+          {E = E} {I = I}
           W S velocity forcing (Audit.cutoff system) output
     in
     trans
