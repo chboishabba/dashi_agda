@@ -15,6 +15,8 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilitySourceRealisationExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityTypedProfilesExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda'
@@ -71,6 +73,8 @@ jobs:
           DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda
           DASHI/Cognition/PNF/SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact.agda
           DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact.agda
+          DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilitySourceRealisationExact.agda
+          DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityTypedProfilesExact.agda
 
       - name: Type-check Cullen introspective and atomic source-conditioned spine
         run: >-
