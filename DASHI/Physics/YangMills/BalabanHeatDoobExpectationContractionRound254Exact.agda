@@ -56,11 +56,14 @@ conditionalStaticHessianMajorized :
       (Heat.asRound103HeatDoobCalculus heat)
       (time dataSet) (background dataSet) (u dataSet) (v dataSet))
   ≤ℝ Embed.embed embedding (rationalBound dataSet)
-conditionalStaticHessianMajorized {heat = heat} {contraction = contraction} dataSet =
+conditionalStaticHessianMajorized
+  {carrier = carrier} {heat = heat} {contraction = contraction}
+  {embedding = embedding} dataSet =
   expectationAbsoluteContraction contraction
     (time dataSet) (background dataSet)
-    (λ y → Carrier.cmp116PhysicalMarkedHessian _ y (u dataSet) (v dataSet))
-    (Embed.embed _ (rationalBound dataSet))
+    (λ y → Carrier.cmp116PhysicalMarkedHessian
+      carrier y (u dataSet) (v dataSet))
+    (Embed.embed embedding (rationalBound dataSet))
     (pointwiseStaticHessianBound dataSet)
 
 normalizedHeatExpectationContractionLevel : ProofLevel
@@ -68,7 +71,3 @@ normalizedHeatExpectationContractionLevel = standardImported
 
 staticHessianExpectationMajorantCompilerLevel : ProofLevel
 staticHessianExpectationMajorantCompilerLevel = machineChecked
-
--- No independent YM leaf is introduced here.  The literal compact-group heat
--- expectation is already the BC2 physical instantiation, and the pointwise
--- CMP116 Hessian/source majorant remains a source-coordinate identification.
