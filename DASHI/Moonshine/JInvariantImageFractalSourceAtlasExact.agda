@@ -74,6 +74,13 @@ realImageModularFractalClaim =
     "independent image-description cross-check of the modular self-similarity coordinate"
     false
 
+exceptionalTriangleGluingClaim : JImageClaim
+exceptionalTriangleGluingClaim =
+  j-image-claim realImageSource
+    "The exceptional tiny fundamental triangle around q=0 has a pair of edges zipped together from q=0 to -exp(-pi*sqrt(3)); its third edge circles the origin and is shared with the exceptional tongue."
+    "source-described boundary-gluing coordinate for a same-object modular-domain gluing test"
+    false
+
 complexPlaneCarrierClaim : JImageClaim
 complexPlaneCarrierClaim =
   j-image-claim kleinComplexImageSource
@@ -86,6 +93,7 @@ record JImageAttributionBoundary : Set where
   field
     fractalSelfSimilaritySourceDescribed : Bool
     triplePhaseWindingSourceDescribed : Bool
+    exceptionalBoundaryGluingSourceDescribed : Bool
     imageUsedOnStringTheoryPage : Bool
     imageUsageImpliesStringTheoryBridge : Bool
     sourceDescriptionImpliesBase369Bridge : Bool
@@ -94,7 +102,7 @@ record JImageAttributionBoundary : Set where
 canonicalJImageAttributionBoundary : JImageAttributionBoundary
 canonicalJImageAttributionBoundary =
   j-image-attribution-boundary
-    true true true false false false
+    true true true true false false false
 
 stringTheoryUsageDoesNotPromoteBridge :
   JImageAttributionBoundary.imageUsageImpliesStringTheoryBridge
