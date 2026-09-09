@@ -29,8 +29,8 @@ sumObserverPreservesPointwiseOrder :
   ∀ {A : Set} (values : List A) {left right : A → ℚ} →
   (∀ value → left value ≤ right value) →
   sumObserver values left ≤ sumObserver values right
-sumObserverPreservesPointwiseOrder values pointwise =
-  sumRationalMonotone values _ _ pointwise
+sumObserverPreservesPointwiseOrder values {left} {right} pointwise =
+  sumRationalMonotone values left right pointwise
 
 sumOrderFibreLift :
   ∀ {A : Set} (values : List A) →
