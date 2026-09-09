@@ -22,6 +22,9 @@ files=(
   DASHI/Physics/ExoticGravity/AntigravityExecutionCalibrationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
   DASHI/Physics/ExoticGravity/AntigravityCalibratedFullyDerivedExperimentalCutExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityConsumerScopedCalibrationExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityClaimScopedExperimentalCutExact.agda
+  DASHI/Physics/ExoticGravity/AntigravityClaimScopedComparativeAnomalyExact.agda
   DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
   DASHI/Physics/ExoticGravity/AntigravityProofSearchValidationExact.agda
 )
@@ -79,7 +82,19 @@ grep -q 'sourceExecutionApparatusMatches' \
   DASHI/Physics/ExoticGravity/AntigravityCalibratedExecutionBridgeExact.agda
 grep -q 'allFourStagesNeedTypedCalibration' \
   DASHI/Physics/ExoticGravity/AntigravityCalibratedFullyDerivedExperimentalCutExact.agda
-grep -q 'newConsumersRequireTypedCalibration' \
+
+# Consumer-scoped calibration / final comparison identity.
+grep -q 'ConsumerScopedCalibration' \
+  DASHI/Physics/ExoticGravity/AntigravityConsumerScopedCalibrationExact.agda
+grep -q 'coarseCalibrationDoesNotDetermineDiscriminator' \
+  DASHI/Physics/ExoticGravity/AntigravityConsumerScopedCalibrationExact.agda
+grep -q 'allFourStagesMustMatchSameClaimConsumer' \
+  DASHI/Physics/ExoticGravity/AntigravityClaimScopedExperimentalCutExact.agda
+grep -q 'sameCalibratedCut' \
+  DASHI/Physics/ExoticGravity/AntigravityClaimScopedComparativeAnomalyExact.agda
+grep -q 'newConsumersRequireConsumerScopedCalibration' \
+  DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
+grep -q 'exactClaimScopedCutIdentityRequired' \
   DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
 grep -q 'calibrationStringAloneSufficient' \
   DASHI/Physics/ExoticGravity/AntigravityStrongPromotionFacadeExact.agda
