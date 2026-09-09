@@ -5,9 +5,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Target
-import DASHI.Analysis.RiemannG2DirectIndependentComplementMarginExact as Margin
-import DASHI.Analysis.RiemannG2BalanceFreeComplementContextExact as Context
-import DASHI.Analysis.RiemannG2LiteralPhaseJointMarginCompilerExact as PhaseMargin
+import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact as ClusterDirect
+import DASHI.Analysis.RiemannG2LiteralPhaseDirectClusterResponseExact as PhaseDirect
 import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as High
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as NearObserver
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
@@ -18,44 +17,37 @@ import DASHI.Analysis.RiemannG2ExistingScalarDonorInventoryExact as Donor
 import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 
 ------------------------------------------------------------------------
--- CURRENT DIRECT ONE-LEAF FRONTIER
+-- CURRENT DIRECT CLUSTER-RESPONSE FRONTIER
 --
--- The canonical prize path is now literal, acyclic, and balance-free at the
--- analytic payment boundary:
+-- Canonical high case:
 --
---   verified-region transport
---   + verified-region-or-High cover
---   + for every arbitrary High off-line zero:
---       balance-free representation/order/taper/cluster context
---       + exact literal final-near phase model
---       + literalNear + far + Gamma < cluster margin
---       + downstream final-balance attachment
---       -> contradiction
---   -> double-negated RH
---   + exact critical-predicate refinement
---   -> positive RH.
+--   exact crossing cutoff / literal pole-quotient targets
+--   + balance-free actual ClusterResponse context
+--   + exact final-near literal phase model
+--   + literalNear + far + Gamma < ClusterResponse
+--   + downstream cluster = Off + Gamma attachment
+--   -> contradiction.
+--
+-- No consumer allowance, separate near/Gamma envelope, intermediate M_cluster,
+-- M_cluster <= ClusterResponse theorem, or final balance is available to the
+-- analytic payment.
 ------------------------------------------------------------------------
 
 data FrontierCoordinate : Set where
   finalNearLiteralPhaseRealisation : FrontierCoordinate
-  highLiteralPhaseJointComplementMargin : FrontierCoordinate
+  highLiteralPhaseBelowActualClusterResponse : FrontierCoordinate
   finalClusterBalanceAttachment : FrontierCoordinate
   lowPublishedHeightCarrierTransport : FrontierCoordinate
   verifiedRegionOrHighCover : FrontierCoordinate
   constructiveDoubleNegatedRH : FrontierCoordinate
   criticalLinePredicateRefinement : FrontierCoordinate
   quarterPeriodCrossingAdmission : FrontierCoordinate
-  checkedFarShellTransport : FrontierCoordinate
-  finalScalarOrderTaperClusterAttachment : FrontierCoordinate
-  arbitraryLowPredicate : FrontierCoordinate
-  separateLowSubsetVerifiedRegionProof : FrontierCoordinate
+  intermediateQuantitativeClusterMargin : FrontierCoordinate
+  quantitativeClusterMarginLower : FrontierCoordinate
   separateFiniteNearEnvelope : FrontierCoordinate
   separateGammaEnvelope : FrontierCoordinate
-  nakedCriticalLineStability : FrontierCoordinate
-  consumerAssignedAllowanceLayer : FrontierCoordinate
-  determinantDirectPayment : FrontierCoordinate
+  finalBalanceAsAnalyticInput : FrontierCoordinate
   exactExistingScalarDonor : FrontierCoordinate
-  rebuildFinalContradiction : FrontierCoordinate
 
 
 data FrontierClass : Set where
@@ -69,24 +61,19 @@ data FrontierClass : Set where
 
 frontierClass : FrontierCoordinate -> FrontierClass
 frontierClass finalNearLiteralPhaseRealisation = representationWall
-frontierClass highLiteralPhaseJointComplementMargin = analyticWall
+frontierClass highLiteralPhaseBelowActualClusterResponse = analyticWall
 frontierClass finalClusterBalanceAttachment = representationWall
 frontierClass lowPublishedHeightCarrierTransport = representationWall
 frontierClass verifiedRegionOrHighCover = representationWall
 frontierClass constructiveDoubleNegatedRH = compilerOutput
 frontierClass criticalLinePredicateRefinement = logicalCarrierWall
 frontierClass quarterPeriodCrossingAdmission = existingInterface
-frontierClass checkedFarShellTransport = representationWall
-frontierClass finalScalarOrderTaperClusterAttachment = representationWall
-frontierClass arbitraryLowPredicate = pruned
-frontierClass separateLowSubsetVerifiedRegionProof = pruned
+frontierClass intermediateQuantitativeClusterMargin = pruned
+frontierClass quantitativeClusterMarginLower = pruned
 frontierClass separateFiniteNearEnvelope = pruned
 frontierClass separateGammaEnvelope = pruned
-frontierClass nakedCriticalLineStability = pruned
-frontierClass consumerAssignedAllowanceLayer = pruned
-frontierClass determinantDirectPayment = pruned
+frontierClass finalBalanceAsAnalyticInput = pruned
 frontierClass exactExistingScalarDonor = absentDonor
-frontierClass rebuildFinalContradiction = compilerOutput
 
 ------------------------------------------------------------------------
 -- Exact pins.
@@ -96,11 +83,6 @@ crossingAdmissionRequired :
   Target.DirectLiteralComplementTargetBoundary.quarterPeriodCrossingAdmissionRequired
     Target.canonicalDirectLiteralComplementTargetBoundary ≡ true
 crossingAdmissionRequired = refl
-
-crossingCutoffSameObjectRequired :
-  Target.DirectLiteralComplementTargetBoundary.exactCrossingCutoffIdentifiedWithOffCutoff
-    Target.canonicalDirectLiteralComplementTargetBoundary ≡ true
-crossingCutoffSameObjectRequired = refl
 
 narrowWindowRouteRejected :
   Growth.CutoffGrowthBidiBoundary.narrowFixedCutoffCancellationRoutePruned
@@ -112,80 +94,50 @@ finalNearPhaseRealisationIsFirstObserverRefinement :
     NearObserver.canonicalFinalPoleNearObserverRefinementBoundary ≡ true
 finalNearPhaseRealisationIsFirstObserverRefinement = refl
 
-finalNearLiteralModelDoesNotPayMargin :
-  NearObserver.FinalPoleNearObserverRefinementBoundary.literalModelAutomaticallyPaysJointMargin
-    NearObserver.canonicalFinalPoleNearObserverRefinementBoundary ≡ false
-finalNearLiteralModelDoesNotPayMargin = refl
+intermediateClusterMarginPruned :
+  ClusterDirect.DirectClusterResponseBoundary.intermediateQuantitativeClusterMarginRequired
+    ClusterDirect.canonicalDirectClusterResponseBoundary ≡ false
+intermediateClusterMarginPruned = refl
 
-analyticContextDoesNotExposeFinalBalance :
-  Context.BalanceFreeContextBoundary.analyticContextExposesFinalClusterBalance
-    Context.canonicalBalanceFreeContextBoundary ≡ false
-analyticContextDoesNotExposeFinalBalance = refl
+clusterMarginLowerTheoremPruned :
+  ClusterDirect.DirectClusterResponseBoundary.clusterMarginLowerTheoremRequired
+    ClusterDirect.canonicalDirectClusterResponseBoundary ≡ false
+clusterMarginLowerTheoremPruned = refl
 
-strictMarginTypedWithoutFinalBalance :
-  Context.BalanceFreeContextBoundary.strictMarginPaymentCanBeTypedWithoutFinalBalance
-    Context.canonicalBalanceFreeContextBoundary ≡ true
-strictMarginTypedWithoutFinalBalance = refl
+analyticPaymentCannotSeeFinalBalance :
+  ClusterDirect.DirectClusterResponseBoundary.analyticPaymentCanAccessFinalBalance
+    ClusterDirect.canonicalDirectClusterResponseBoundary ≡ false
+analyticPaymentCannotSeeFinalBalance = refl
 
-finalBalanceIsDownstream :
-  Context.BalanceFreeContextBoundary.finalBalanceIsDownstreamAttachment
-    Context.canonicalBalanceFreeContextBoundary ≡ true
-finalBalanceIsDownstream = refl
+actualClusterResponseIsSingleHighScalarLeaf :
+  ClusterDirect.DirectClusterResponseBoundary.directBudgetBelowClusterResponseIsSingleScalarLeaf
+    ClusterDirect.canonicalDirectClusterResponseBoundary ≡ true
+actualClusterResponseIsSingleHighScalarLeaf = refl
 
-literalPhasePaymentDoesNotPresupposeCanonicalMargin :
-  PhaseMargin.LiteralPhaseJointMarginBoundary.literalPhasePaymentPresupposesCanonicalStrictMargin
-    PhaseMargin.canonicalLiteralPhaseJointMarginBoundary ≡ false
-literalPhasePaymentDoesNotPresupposeCanonicalMargin = refl
+literalPhaseTargetsActualClusterResponse :
+  PhaseDirect.LiteralPhaseDirectClusterBoundary.literalPhaseTheoremTargetsActualClusterResponse
+    PhaseDirect.canonicalLiteralPhaseDirectClusterBoundary ≡ true
+literalPhaseTargetsActualClusterResponse = refl
 
-literalPhasePaymentCannotAccessFinalBalance :
-  PhaseMargin.LiteralPhaseJointMarginBoundary.literalPhasePaymentCanAccessFinalClusterBalance
-    PhaseMargin.canonicalLiteralPhaseJointMarginBoundary ≡ false
-literalPhasePaymentCannotAccessFinalBalance = refl
+literalPhaseHasNoIntermediateMargin :
+  PhaseDirect.LiteralPhaseDirectClusterBoundary.intermediateClusterMarginPrimitive
+    PhaseDirect.canonicalLiteralPhaseDirectClusterBoundary ≡ false
+literalPhaseHasNoIntermediateMargin = refl
 
-literalPhasePaymentCompilesCanonicalMargin :
-  PhaseMargin.LiteralPhaseJointMarginBoundary.literalPhasePaymentCompilesCanonicalOneLeafMargin
-    PhaseMargin.canonicalLiteralPhaseJointMarginBoundary ≡ true
-literalPhasePaymentCompilesCanonicalMargin = refl
+uniformHighHasNoIntermediateMargin :
+  High.UniformLiteralPhaseHighBoundary.intermediateClusterMarginPrimitivePerCase
+    High.canonicalUniformLiteralPhaseHighBoundary ≡ false
+uniformHighHasNoIntermediateMargin = refl
 
-oneHighScalarLeaf :
-  Margin.DirectIndependentComplementMarginBoundary.oneIndependentJointMarginIsScalarLeaf
-    Margin.canonicalDirectIndependentComplementMarginBoundary ≡ true
-oneHighScalarLeaf = refl
-
-allowanceLayerNotCanonical :
-  Margin.DirectIndependentComplementMarginBoundary.consumerAssignedAllowanceLayerRequired
-    Margin.canonicalDirectIndependentComplementMarginBoundary ≡ false
-allowanceLayerNotCanonical = refl
-
-finalBalanceCannotPayLeaf :
-  Margin.DirectIndependentComplementMarginBoundary.finalBalanceMayManufactureJointMargin
-    Margin.canonicalDirectIndependentComplementMarginBoundary ≡ false
-finalBalanceCannotPayLeaf = refl
-
-uniformLiteralHighFamilyStillRequired :
+uniformHighFamilyMatchesPrizeQuantifier :
   High.UniformLiteralPhaseHighBoundary.literalPhaseTheoremFamilyMatchesPrizeHighQuantifier
     High.canonicalUniformLiteralPhaseHighBoundary ≡ true
-uniformLiteralHighFamilyStillRequired = refl
-
-uniformAnalyticPaymentCannotAccessBalance :
-  High.UniformLiteralPhaseHighBoundary.analyticPaymentCanAccessFinalBalanceThroughContext
-    High.canonicalUniformLiteralPhaseHighBoundary ≡ false
-uniformAnalyticPaymentCannotAccessBalance = refl
-
-fixedLiteralCaseDoesNotSuffice :
-  High.UniformLiteralPhaseHighBoundary.fixedLiteralPhaseCaseSuffices
-    High.canonicalUniformLiteralPhaseHighBoundary ≡ false
-fixedLiteralCaseDoesNotSuffice = refl
+uniformHighFamilyMatchesPrizeQuantifier = refl
 
 canonicalLowHasNoSeparateSubsetProof :
   Low.CanonicalLowRegionBoundary.separateLowSubsetVerifiedRegionProofRequired
     Low.canonicalLowRegionBoundary ≡ false
 canonicalLowHasNoSeparateSubsetProof = refl
-
-lowExactSameCarrierTheoremStillRequired :
-  Low.CanonicalLowRegionBoundary.exactSameCarrierCriticalityTheoremStillRequired
-    Low.canonicalLowRegionBoundary ≡ true
-lowExactSameCarrierTheoremStillRequired = refl
 
 negativeRHCompilerOwned :
   Negative.ConstructiveNegativeRHBoundary.directHighLowRouteCompilesDoubleNegatedRH
@@ -196,11 +148,6 @@ criticalPredicateRefinementCompilesStability :
   Stability.CriticalLineStabilityRefinementBoundary.exactPredicateRefinementPlusStabilityCompilesConsumerReceipt
     Stability.canonicalCriticalLineStabilityRefinementBoundary ≡ true
 criticalPredicateRefinementCompilesStability = refl
-
-actualCriticalPredicateRefinementStillOpen :
-  Stability.CriticalLineStabilityRefinementBoundary.canonicalActualZetaPredicateRefinementInhabitedHere
-    Stability.canonicalCriticalLineStabilityRefinementBoundary ≡ false
-actualCriticalPredicateRefinementStillOpen = refl
 
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
@@ -219,53 +166,33 @@ record CurrentDirectOneLeafFrontierBoundary : Set where
     highSideHasOnePrimitiveScalarAnalyticFamilyIsTrue :
       highSideHasOnePrimitiveScalarAnalyticFamily ≡ true
 
-    finalNearLiteralPhaseRealisationStillRequiredForPhaseRoute : Bool
-    finalNearLiteralPhaseRealisationStillRequiredForPhaseRouteIsTrue :
-      finalNearLiteralPhaseRealisationStillRequiredForPhaseRoute ≡ true
+    highLeafTargetsActualClusterResponse : Bool
+    highLeafTargetsActualClusterResponseIsTrue :
+      highLeafTargetsActualClusterResponse ≡ true
 
-    literalHighPaymentPresupposesFinalMargin : Bool
-    literalHighPaymentPresupposesFinalMarginIsFalse :
-      literalHighPaymentPresupposesFinalMargin ≡ false
+    intermediateQuantitativeClusterMarginStillPrimitive : Bool
+    intermediateQuantitativeClusterMarginStillPrimitiveIsFalse :
+      intermediateQuantitativeClusterMarginStillPrimitive ≡ false
 
-    literalHighPaymentCanSeeFinalBalance : Bool
-    literalHighPaymentCanSeeFinalBalanceIsFalse :
-      literalHighPaymentCanSeeFinalBalance ≡ false
+    quantitativeClusterMarginLowerStillPrimitive : Bool
+    quantitativeClusterMarginLowerStillPrimitiveIsFalse :
+      quantitativeClusterMarginLowerStillPrimitive ≡ false
+
+    analyticPaymentCanSeeFinalBalance : Bool
+    analyticPaymentCanSeeFinalBalanceIsFalse :
+      analyticPaymentCanSeeFinalBalance ≡ false
 
     highLeafMustBeUniformOverArbitraryHighOffLineZeros : Bool
     highLeafMustBeUniformOverArbitraryHighOffLineZerosIsTrue :
       highLeafMustBeUniformOverArbitraryHighOffLineZeros ≡ true
 
-    highLeafMayUseNarrowSubcriticalCutoff : Bool
-    highLeafMayUseNarrowSubcriticalCutoffIsFalse :
-      highLeafMayUseNarrowSubcriticalCutoff ≡ false
-
-    highLeafMayBeDerivedFromFinalClusterBalance : Bool
-    highLeafMayBeDerivedFromFinalClusterBalanceIsFalse :
-      highLeafMayBeDerivedFromFinalClusterBalance ≡ false
-
     exactSameObjectHarmonicDonorAlreadyFound : Bool
     exactSameObjectHarmonicDonorAlreadyFoundIsFalse :
       exactSameObjectHarmonicDonorAlreadyFound ≡ false
 
-    arbitraryLowPredicateStillCanonical : Bool
-    arbitraryLowPredicateStillCanonicalIsFalse :
-      arbitraryLowPredicateStillCanonical ≡ false
-
-    separateLowSubsetProofStillCanonical : Bool
-    separateLowSubsetProofStillCanonicalIsFalse :
-      separateLowSubsetProofStillCanonical ≡ false
-
-    lowPublishedTheoremNeedsSameCarrierTransport : Bool
-    lowPublishedTheoremNeedsSameCarrierTransportIsTrue :
-      lowPublishedTheoremNeedsSameCarrierTransport ≡ true
-
     doubleNegatedRHIsCompilerOutputBeforeStability : Bool
     doubleNegatedRHIsCompilerOutputBeforeStabilityIsTrue :
       doubleNegatedRHIsCompilerOutputBeforeStability ≡ true
-
-    nakedCriticalLineStabilityStillPrimitive : Bool
-    nakedCriticalLineStabilityStillPrimitiveIsFalse :
-      nakedCriticalLineStabilityStillPrimitive ≡ false
 
     exactCriticalLinePredicateRefinementStillRequiredForPositiveRH : Bool
     exactCriticalLinePredicateRefinementStillRequiredForPositiveRHIsTrue :
@@ -293,19 +220,14 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     true refl
     false refl
     false refl
-    true refl
     false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    true refl
     true refl
     false refl
     true refl
     true refl
+    true refl
     false refl
     false refl
-    "Identify final nearResponseAt(chosen crossing J) proof-relevantly with the literal reflection-paired finite near-zero sum exposing target-relative gap, multiplicity and the universal pole-quotient kernel."
-    "Uniformly for every arbitrary high off-line nontrivial zero, using a BalanceFreeComplementContext that contains no cluster=Off+Gamma theorem, independently prove: cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(M_cluster). Only afterward attach the final balance to compile contradiction."
-    "The current Clay path is now literal, acyclic and dependency-level balance-free. The analytic payment context does not contain the final cluster balance, so independence from cluster=Off+Gamma is enforced by the type dependency graph rather than an opaque provenance label. The literal phase theorem rewrites to the canonical margin; a separate downstream balance attachment then compiles contradiction. This theorem family is quantified directly over every arbitrary high off-line zero at the Clay boundary. Narrow windows, determinant payment, separate near/Gamma envelopes, arbitrary Low partitions and naked critical-line stability are all off the canonical path. No exact same-object harmonic donor has been found; exact-head Agda validation is still unavailable and RH is not derived."
+    "Identify final nearResponseAt(chosen crossing J) proof-relevantly with the literal reflection-paired finite near-zero sum exposing the target-relative phase."
+    "Uniformly for every arbitrary high off-line nontrivial zero, independently of the final balance, prove cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
+    "The current high route is literal, balance-free and smaller than the former one-leaf margin API: the intermediate quantitative M_cluster and its lower-bound theorem are pruned. The analytic theorem targets the actual same-ordinate ClusterResponse and cannot access cluster=Off+Gamma through its input type. Only afterward is that balance attached to compile contradiction. Low-source transport and critical-predicate refinement remain separate terminal coordinates. Exact-head Agda validation is still unavailable and RH is not derived."
