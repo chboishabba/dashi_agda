@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact as Signed
+import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact as Source
 import DASHI.Physics.GR.SignedNewtonianLimitBidiExact as Newton
 import DASHI.Physics.GR.SignedGravitationalWaveCouplingBidiExact as Wave
 import DASHI.Physics.GR.SignedCosmologicalMatterCouplingBidiExact as Cosmology
@@ -53,8 +54,7 @@ record UniversalSignedGFingerprint : Set where
       cosmologicalPositiveDensityMatterTerm
         ≡ Cosmology.matterTermOrientation
              cosmologicalMatterCouplingSign
-             (let open import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact
-              in positiveSource)
+             Source.positiveSource
 
 open UniversalSignedGFingerprint public
 
