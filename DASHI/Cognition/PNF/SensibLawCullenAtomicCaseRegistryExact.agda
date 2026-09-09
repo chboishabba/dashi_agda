@@ -15,30 +15,24 @@ import DASHI.Cognition.PNF.SensibLawCullenS43ASpecialStatutoryPowerAtomicExact a
 import DASHI.Cognition.PNF.SensibLawCullenVicariousLiabilityFamilyAtomicExact as Vicarious
 import DASHI.Cognition.PNF.SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact as VicariousAct
 
-------------------------------------------------------------------------
--- CULLEN FINITE ATOMIC CASE REGISTRY
-------------------------------------------------------------------------
-
 cullenCaseContext : Ontology.StableId
 cullenCaseContext = Ontology.stableId "case:Cullen:[2026]HCA19:retained-fibre"
 
-data CullenAtomicEntry : Set where
-  s5BForeseeableEntry : CullenAtomicEntry
-  s5BNotInsignificantEntry : CullenAtomicEntry
-  s5BReasonablePrecautionsEntry : CullenAtomicEntry
-  s43AEngagementEntry : CullenAtomicEntry
-  vicariousFamilyEntry : CullenAtomicEntry
+------------------------------------------------------------------------
+-- Entry is indexed by the exact legal proposition.  There is no lookup from an
+-- untyped tag back into a proposition and therefore no proposition-identity seam.
+------------------------------------------------------------------------
 
-cullenPropositionFor : CullenAtomicEntry → Algebra.LegalProposition
-cullenPropositionFor s5BForeseeableEntry = CLA.riskForeseeable
-cullenPropositionFor s5BNotInsignificantEntry = CLA.riskNotInsignificant
-cullenPropositionFor s5BReasonablePrecautionsEntry = CLA.reasonablePersonWouldTakePrecautions
-cullenPropositionFor s43AEngagementEntry = S43A.liabilityBasedOnExerciseOfSpecialStatutoryPower
-cullenPropositionFor vicariousFamilyEntry = VicariousAct.crownVicariousLiabilityRecognised
+data CullenAtomicEntry : Algebra.LegalProposition → Set where
+  s5BForeseeableEntry : CullenAtomicEntry CLA.riskForeseeable
+  s5BNotInsignificantEntry : CullenAtomicEntry CLA.riskNotInsignificant
+  s5BReasonablePrecautionsEntry : CullenAtomicEntry CLA.reasonablePersonWouldTakePrecautions
+  s43AEngagementEntry : CullenAtomicEntry S43A.liabilityBasedOnExerciseOfSpecialStatutoryPower
+  vicariousFamilyEntry : CullenAtomicEntry VicariousAct.crownVicariousLiabilityRecognised
 
 cullenCanonicalTestFor :
-  (entry : CullenAtomicEntry) →
-  Atomic.SourceConditionedAtomicLegalTest (cullenPropositionFor entry)
+  ∀ {p} → CullenAtomicEntry p →
+  Atomic.SourceConditionedAtomicLegalTest p
 cullenCanonicalTestFor s5BForeseeableEntry = CullenCLA.cullenForeseeableAtom
 cullenCanonicalTestFor s5BNotInsignificantEntry = CullenCLA.cullenNotInsignificantAtom
 cullenCanonicalTestFor s5BReasonablePrecautionsEntry = CullenCLA.cullenReasonablePrecautionsAtom
@@ -48,14 +42,9 @@ cullenCanonicalTestFor vicariousFamilyEntry = Vicarious.cullenVicariousFamilyAto
 cullenAtomicRegistry : Coherence.AtomicCaseRegistry
 cullenAtomicRegistry = Coherence.atomic-case-registry
   CullenAtomicEntry
-  cullenPropositionFor
   (λ _ → cullenCaseContext)
   cullenCanonicalTestFor
-  "Finite Cullen atomic registry: joint-reasons s 5B outcomes, Edelman concurrence s 43A non-engagement, and source-conditioned vicarious-family recognition."
-
-------------------------------------------------------------------------
--- Literal registered gates.
-------------------------------------------------------------------------
+  "Finite proposition-indexed Cullen atomic registry: joint-reasons s 5B outcomes, Edelman concurrence s 43A non-engagement, and source-conditioned vicarious-family recognition."
 
 cullenRegisteredForeseeablePositive :
   Atomic.gate (Coherence.canonicalTestFor cullenAtomicRegistry s5BForeseeableEntry) ≡ BT.pos
@@ -78,10 +67,7 @@ cullenRegisteredVicariousFamilyPositive :
 cullenRegisteredVicariousFamilyPositive = refl
 
 ------------------------------------------------------------------------
--- Non-bypass theorems. A downstream consumer may build a fresh test object,
--- but if it claims to evaluate one of these registered atoms on this retained
--- Cullen fibre, it must carry a RegisteredAtomicTest receipt and therefore
--- cannot flip the canonical sourced outcome.
+-- Non-bypass theorems.
 ------------------------------------------------------------------------
 
 cullenBreachAtomCannotBeReintroducedPositive :
@@ -115,8 +101,7 @@ cullenVicariousFamilyCannotBeReintroducedNegative =
     cullenRegisteredVicariousFamilyPositive
 
 ------------------------------------------------------------------------
--- Same gate still does not collapse semantics: the two registered negatives
--- remain different entries with different propositions and source histories.
+-- Same sign remains only same sign.
 ------------------------------------------------------------------------
 
 data RegisteredBreachNegativeEqualsRegisteredS43ANegative : Set where
