@@ -44,3 +44,4 @@ import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact
 import DASHI.Wikimedia.IbrahimEnglishParentCoverageGapAtlasExact
 import DASHI.Wikimedia.IbrahimEnglishSocialScienceFunnelBridgeExact
 import DASHI.Wikimedia.IbrahimEnglishPoliticalSciencePoliticsBridgeExact
+import DASHI.Wikimedia.IbrahimEnglishAnthropologyHumanityBridgeExact
