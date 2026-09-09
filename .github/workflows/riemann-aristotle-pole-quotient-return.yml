@@ -4,6 +4,23 @@ on:
   pull_request:
     paths:
       - 'DASHI/Core/TwoChannelAllowanceCompositionExact.agda'
+      - 'DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda'
+      - 'DASHI/Analysis/RiemannAristotlePoleQuotient*.agda'
+      - 'DASHI/Analysis/RiemannAristotleRHFinalAllowanceLeafSchedulerExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda'
+      - 'DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda'
+      - 'DASHI/Analysis/RiemannAristotleSharedCertificateREADME.agda'
+      - 'DASHI/Analysis/RiemannG2*.agda'
+      - 'scripts/check_riemann_aristotle_pole_quotient_return.sh'
+      - 'scripts/check_riemann_aristotle_two_zero_return.sh'
+      - 'scripts/check_riemann_g2_minimal_final_cut.sh'
+      - '.github/workflows/riemann-aristotle-pole-quotient-return.yml'
+  push:
+    branches:
+      - agent/rh-direct-combined-off-cut
+    paths:
+      - 'DASHI/Core/TwoChannelAllowanceCompositionExact.agda'
+      - 'DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda'
       - 'DASHI/Analysis/RiemannAristotlePoleQuotient*.agda'
       - 'DASHI/Analysis/RiemannAristotleRHFinalAllowanceLeafSchedulerExact.agda'
       - 'DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda'
@@ -21,6 +38,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Agda
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda
+          agda --version
       - name: Trust scan and legacy pole-quotient check
         run: bash scripts/check_riemann_aristotle_pole_quotient_return.sh
       - name: Trust scan and minimal final-cut check
