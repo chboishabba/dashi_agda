@@ -17,6 +17,7 @@ import DASHI.Moonshine.JInvariantOrderThreeSeamModularWordExact
 import DASHI.Moonshine.JInvariantOrderThreeSeamScaleRecognitionBidiExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
+import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
 
@@ -44,10 +45,13 @@ record RoadmapState : Set where
     jAbsoluteToLocalTwentySevenObserverExact : Bool
     jAbsoluteToLocalTwentySevenObserverHasSection : Bool
     elevenTritOnePlusTenTwoPlusNineChartShiftExact : Bool
+    finiteFrickeCrossesJCoarseJFineBoundaryExact : Bool
+    finiteFrickeBoundaryExchangeTwoStepRestores : Bool
 
     renderedSeamAcquiredAsStructuredJAbsolute : Bool
     structuredJAbsoluteToOrbitIndexRecognised : Bool
     jRenderedScaleInverseRecognised : Bool
+    analyticFrickeFiniteTransportIntertwinerExact : Bool
     jActualAnalyticGluingLawExact : Bool
     jRefinementGluingSquareClassified : Bool
 
@@ -79,10 +83,13 @@ canonicalRoadmapState = record
   ; jAbsoluteToLocalTwentySevenObserverExact = true
   ; jAbsoluteToLocalTwentySevenObserverHasSection = true
   ; elevenTritOnePlusTenTwoPlusNineChartShiftExact = true
+  ; finiteFrickeCrossesJCoarseJFineBoundaryExact = true
+  ; finiteFrickeBoundaryExchangeTwoStepRestores = true
 
   ; renderedSeamAcquiredAsStructuredJAbsolute = false
   ; structuredJAbsoluteToOrbitIndexRecognised = false
   ; jRenderedScaleInverseRecognised = false
+  ; analyticFrickeFiniteTransportIntertwinerExact = false
   ; jActualAnalyticGluingLawExact = false
   ; jRefinementGluingSquareClassified = false
 
@@ -96,6 +103,7 @@ data FirstLiveRoadmapResidual : Set where
   missingRenderedSeamToStructuredJAbsolute : FirstLiveRoadmapResidual
   missingStructuredJAbsoluteToOrbitIndexRecognition : FirstLiveRoadmapResidual
   missingRenderedScaleRecognition : FirstLiveRoadmapResidual
+  missingAnalyticFrickeFiniteTransportIntertwiner : FirstLiveRoadmapResidual
   missingAnalyticGluingTransport : FirstLiveRoadmapResidual
   missingMonsterGradeWiseIntertwiner : FirstLiveRoadmapResidual
   missingCompressionCostTheorem : FirstLiveRoadmapResidual
