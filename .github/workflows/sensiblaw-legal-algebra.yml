@@ -8,6 +8,7 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCullenEdelman64WrongTypeSourceRealisationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawDutyPublicAuthoritySourceLineageGraphExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawDutySourceLineageRefinementCutRerunExact.agda'
@@ -46,6 +47,7 @@ jobs:
           DASHI/Cognition/PNF/SensibLawCullenConsumerCollisionMissingCoordinateExact.agda
           DASHI/Cognition/PNF/SensibLawCullenQueryIndexedFactorisationExact.agda
           DASHI/Cognition/PNF/SensibLawCullenSourceCorrectDutyRoutesExact.agda
+          DASHI/Cognition/PNF/SensibLawCullenEdelman64WrongTypeSourceRealisationExact.agda
           DASHI/Cognition/PNF/SensibLawCullenResidualAdmissionBidiExact.agda
 
       - name: Type-check source-owned duty lineage
