@@ -3,21 +3,12 @@ module DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact where
 open import DASHI.Core.Prelude
 open import DASHI.Foundations.Base369Nat using (NonZero; _%_)
 
-------------------------------------------------------------------------
--- RADIX-NEUTRAL TINY REGISTER MACHINE
---
--- Instruction semantics operate on Nat words.  Binary, balanced ternary,
--- Jacquard, or later hardware carriers are representation fibres below this
--- machine rather than distinct instruction semantics.
-------------------------------------------------------------------------
-
 data Register : Set where
   r0 r1 r2 : Register
 
 record RegisterFile : Set where
   constructor registerFile
-  field
-    reg0 reg1 reg2 : Nat
+  field reg0 reg1 reg2 : Nat
 
 open RegisterFile public
 
@@ -33,7 +24,6 @@ writeRegister regs r2 value = registerFile (reg0 regs) (reg1 regs) value
 
 Address : Set
 Address = Nat
-
 Memory : Set
 Memory = List Nat
 
@@ -71,12 +61,14 @@ data Instruction : Set where
   loadMemory : Register → Address → Instruction
   storeMemory : Register → Address → Instruction
   addRegister : Register → Register → Instruction
+  addImmediate : Register → Nat → Instruction
   subRegister : Register → Register → Instruction
   subImmediate : Register → Nat → Instruction
   multiplyRegister : Register → Register → Instruction
   multiplyModulo : Register → Register → (modulus : Nat) → NonZero modulus → Instruction
   jumpIfZero : Register → Address → Instruction
   jumpIfEqual : Register → Register → Address → Instruction
+  jumpIfEqualImmediate : Register → Nat → Address → Instruction
   jumpIfLess : Register → Register → Address → Instruction
   jump : Address → Instruction
   outputRegister : Register → Instruction
@@ -111,157 +103,40 @@ step : MachineState → MachineState
 step state with halted state
 ... | true = state
 ... | false with fetchInstruction (program state) (pc state)
-...   | loadImmediate reg value =
-      machineState
-        (suc (pc state))
-        (program state)
-        (memory state)
-        (writeRegister (registers state) reg value)
-        (output state)
-        false
-        (suc (cycles state))
-...   | loadMemory reg address =
-      machineState
-        (suc (pc state))
-        (program state)
-        (memory state)
-        (writeRegister (registers state) reg (lookupNat address (memory state)))
-        (output state)
-        false
-        (suc (cycles state))
-...   | storeMemory reg address =
-      machineState
-        (suc (pc state))
-        (program state)
-        (updateNat address (readRegister (registers state) reg) (memory state))
-        (registers state)
-        (output state)
-        false
-        (suc (cycles state))
-...   | addRegister target source =
-      machineState
-        (suc (pc state))
-        (program state)
-        (memory state)
-        (writeRegister
-          (registers state)
-          target
-          (readRegister (registers state) target + readRegister (registers state) source))
-        (output state)
-        false
-        (suc (cycles state))
-...   | subRegister target source =
-      machineState
-        (suc (pc state))
-        (program state)
-        (memory state)
-        (writeRegister
-          (registers state)
-          target
-          (minus (readRegister (registers state) target) (readRegister (registers state) source)))
-        (output state)
-        false
-        (suc (cycles state))
-...   | subImmediate target value =
-      machineState
-        (suc (pc state))
-        (program state)
-        (memory state)
-        (writeRegister
-          (registers state)
-          target
-          (minus (readRegister (registers state) target) value))
-        (output state)
-        false
-        (suc (cycles state))
-...   | multiplyRegister target source =
-      machineState
-        (suc (pc state))
-        (program state)
-        (memory state)
-        (writeRegister
-          (registers state)
-          target
-          (readRegister (registers state) target * readRegister (registers state) source))
-        (output state)
-        false
-        (suc (cycles state))
-...   | multiplyModulo target source modulus modulusNonZero =
-      machineState
-        (suc (pc state))
-        (program state)
-        (memory state)
-        (writeRegister
-          (registers state)
-          target
-          ((readRegister (registers state) target * readRegister (registers state) source)
-            % modulus {{modulusNonZero}}))
-        (output state)
-        false
-        (suc (cycles state))
+...   | loadImmediate reg value = machineState (suc (pc state)) (program state) (memory state) (writeRegister (registers state) reg value) (output state) false (suc (cycles state))
+...   | loadMemory reg address = machineState (suc (pc state)) (program state) (memory state) (writeRegister (registers state) reg (lookupNat address (memory state))) (output state) false (suc (cycles state))
+...   | storeMemory reg address = machineState (suc (pc state)) (program state) (updateNat address (readRegister (registers state) reg) (memory state)) (registers state) (output state) false (suc (cycles state))
+...   | addRegister target source = machineState (suc (pc state)) (program state) (memory state) (writeRegister (registers state) target (readRegister (registers state) target + readRegister (registers state) source)) (output state) false (suc (cycles state))
+...   | addImmediate target value = machineState (suc (pc state)) (program state) (memory state) (writeRegister (registers state) target (readRegister (registers state) target + value)) (output state) false (suc (cycles state))
+...   | subRegister target source = machineState (suc (pc state)) (program state) (memory state) (writeRegister (registers state) target (minus (readRegister (registers state) target) (readRegister (registers state) source))) (output state) false (suc (cycles state))
+...   | subImmediate target value = machineState (suc (pc state)) (program state) (memory state) (writeRegister (registers state) target (minus (readRegister (registers state) target) value)) (output state) false (suc (cycles state))
+...   | multiplyRegister target source = machineState (suc (pc state)) (program state) (memory state) (writeRegister (registers state) target (readRegister (registers state) target * readRegister (registers state) source)) (output state) false (suc (cycles state))
+...   | multiplyModulo target source modulus modulusNonZero = machineState (suc (pc state)) (program state) (memory state) (writeRegister (registers state) target ((readRegister (registers state) target * readRegister (registers state) source) % modulus {{modulusNonZero}})) (output state) false (suc (cycles state))
 ...   | jumpIfZero reg target with readRegister (registers state) reg
-...     | zero =
-        machineState target (program state) (memory state) (registers state)
-          (output state) false (suc (cycles state))
-...     | suc n =
-        machineState (suc (pc state)) (program state) (memory state) (registers state)
-          (output state) false (suc (cycles state))
+...     | zero = machineState target (program state) (memory state) (registers state) (output state) false (suc (cycles state))
+...     | suc n = machineState (suc (pc state)) (program state) (memory state) (registers state) (output state) false (suc (cycles state))
 ...   | jumpIfEqual left right target with equalNat (readRegister (registers state) left) (readRegister (registers state) right)
-...     | true =
-        machineState target (program state) (memory state) (registers state)
-          (output state) false (suc (cycles state))
-...     | false =
-        machineState (suc (pc state)) (program state) (memory state) (registers state)
-          (output state) false (suc (cycles state))
+...     | true = machineState target (program state) (memory state) (registers state) (output state) false (suc (cycles state))
+...     | false = machineState (suc (pc state)) (program state) (memory state) (registers state) (output state) false (suc (cycles state))
+...   | jumpIfEqualImmediate reg value target with equalNat (readRegister (registers state) reg) value
+...     | true = machineState target (program state) (memory state) (registers state) (output state) false (suc (cycles state))
+...     | false = machineState (suc (pc state)) (program state) (memory state) (registers state) (output state) false (suc (cycles state))
 ...   | jumpIfLess left right target with lessNat (readRegister (registers state) left) (readRegister (registers state) right)
-...     | true =
-        machineState target (program state) (memory state) (registers state)
-          (output state) false (suc (cycles state))
-...     | false =
-        machineState (suc (pc state)) (program state) (memory state) (registers state)
-          (output state) false (suc (cycles state))
-...   | jump target =
-      machineState target (program state) (memory state) (registers state)
-        (output state) false (suc (cycles state))
-...   | outputRegister reg =
-      machineState
-        (suc (pc state))
-        (program state)
-        (memory state)
-        (registers state)
-        (appendNat (output state) (readRegister (registers state) reg))
-        false
-        (suc (cycles state))
-...   | halt =
-      machineState
-        (pc state)
-        (program state)
-        (memory state)
-        (registers state)
-        (output state)
-        true
-        (suc (cycles state))
+...     | true = machineState target (program state) (memory state) (registers state) (output state) false (suc (cycles state))
+...     | false = machineState (suc (pc state)) (program state) (memory state) (registers state) (output state) false (suc (cycles state))
+...   | jump target = machineState target (program state) (memory state) (registers state) (output state) false (suc (cycles state))
+...   | outputRegister reg = machineState (suc (pc state)) (program state) (memory state) (registers state) (appendNat (output state) (readRegister (registers state) reg)) false (suc (cycles state))
+...   | halt = machineState (pc state) (program state) (memory state) (registers state) (output state) true (suc (cycles state))
 
 runFuel : Nat → MachineState → MachineState
 runFuel zero state = state
 runFuel (suc fuel) state = runFuel fuel (step state)
 
-------------------------------------------------------------------------
--- COUNTDOWN: first nontrivial control-flow fixture.
-------------------------------------------------------------------------
-
 countdownProgram : Program
-countdownProgram =
-  jumpIfZero r0 4
-  ∷ outputRegister r0
-  ∷ subRegister r0 r1
-  ∷ jump 0
-  ∷ halt
-  ∷ []
+countdownProgram = jumpIfZero r0 4 ∷ outputRegister r0 ∷ subRegister r0 r1 ∷ jump 0 ∷ halt ∷ []
 
 countdownInitialState : Nat → MachineState
-countdownInitialState n =
-  machineState 0 countdownProgram [] (registerFile n 1 0) [] false 0
+countdownInitialState n = machineState 0 countdownProgram [] (registerFile n 1 0) [] false 0
 
 countdownFuel : Nat → Nat
 countdownFuel n = 4 * n + 2
@@ -271,40 +146,26 @@ countdownFinal n = runFuel (countdownFuel n) (countdownInitialState n)
 
 countdownZeroOutput : output (countdownFinal 0) ≡ []
 countdownZeroOutput = refl
-
 countdownZeroCycles : cycles (countdownFinal 0) ≡ 2
 countdownZeroCycles = refl
-
 countdownZeroHalts : halted (countdownFinal 0) ≡ true
 countdownZeroHalts = refl
-
 countdownOneOutput : output (countdownFinal 1) ≡ 1 ∷ []
 countdownOneOutput = refl
-
 countdownOneCycles : cycles (countdownFinal 1) ≡ 6
 countdownOneCycles = refl
-
 countdownOneHalts : halted (countdownFinal 1) ≡ true
 countdownOneHalts = refl
-
 countdownThreeOutput : output (countdownFinal 3) ≡ 3 ∷ 2 ∷ 1 ∷ []
 countdownThreeOutput = refl
-
 countdownThreeCycles : cycles (countdownFinal 3) ≡ 14
 countdownThreeCycles = refl
-
 countdownThreeHalts : halted (countdownFinal 3) ≡ true
 countdownThreeHalts = refl
-
 countdownThreeTerminalPC : pc (countdownFinal 3) ≡ 4
 countdownThreeTerminalPC = refl
-
 countdownThreeTerminalR0 : reg0 (registers (countdownFinal 3)) ≡ 0
 countdownThreeTerminalR0 = refl
-
-------------------------------------------------------------------------
--- Exact instruction availability / semantic boundaries.
-------------------------------------------------------------------------
 
 record TinyMachineBoundary : Set where
   constructor tinyMachineBoundary
@@ -313,12 +174,14 @@ record TinyMachineBoundary : Set where
     loadPresent : Bool
     storePresent : Bool
     addPresent : Bool
+    addImmediatePresent : Bool
     subtractPresent : Bool
     subtractImmediatePresent : Bool
     multiplyPresent : Bool
     proofCarryingMultiplyModuloPresent : Bool
     zeroBranchPresent : Bool
     equalityBranchPresent : Bool
+    equalityImmediateBranchPresent : Bool
     orderBranchPresent : Bool
     jumpPresent : Bool
     haltPresent : Bool
@@ -328,8 +191,7 @@ record TinyMachineBoundary : Set where
     genericCountdownCostTheoremClosed : Bool
 
 canonicalTinyMachineBoundary : TinyMachineBoundary
-canonicalTinyMachineBoundary =
-  tinyMachineBoundary
-    true true true true true true true true
-    true true true true true true
-    false false false
+canonicalTinyMachineBoundary = tinyMachineBoundary
+  true true true true true true true true true
+  true true true true true true true
+  false false false
