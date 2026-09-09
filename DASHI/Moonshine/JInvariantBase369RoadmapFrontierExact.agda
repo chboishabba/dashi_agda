@@ -9,6 +9,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact
+import DASHI.Moonshine.GoldenRatioBishopQuadraticFactorisationBidiExact
 import DASHI.Moonshine.GoldenRatioFibonacci369SheetVoxelBridgeExact
 import DASHI.Moonshine.GoldenRatioFibonacci369RichFibreLiftExact
 import DASHI.Moonshine.GoldenRatioFibonacci369ArithmeticRichTrajectoryExact
@@ -22,6 +23,7 @@ import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
+import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 import DASHI.Moonshine.JInvariantTeslaPolyphaseSeamRefinementBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
 
@@ -43,7 +45,10 @@ record RoadmapState : Set where
     fibonacciBishopRatioCarrierConstructed : Bool
     fibonacciDenominatorPositiveIncrementExact : Bool
     fibonacciDenominatorDivergenceExact : Bool
-    quadraticDefectToBishopErrorBoundExact : Bool
+    bishopPhiPsiFactorisationExact : Bool
+    normOneReciprocalSquareWeldExact : Bool
+    conjugateFactorLowerBoundExact : Bool
+    reciprocalSquareBishopConvergenceExact : Bool
     fibonacciRatiosConvergeToBishopPhi : Bool
 
     jSeamWordLkTExact : Bool
@@ -62,6 +67,7 @@ record RoadmapState : Set where
 
     renderedToAnalyticCalibrationTyped : Bool
     analyticToStructuredJFieldLiftTyped : Bool
+    analyticStructuredSeamCompilerExact : Bool
     renderedPixelToAnalyticModularCoordinateExact : Bool
     analyticModularCoordinateToStructuredJFieldExact : Bool
     structuredJAbsoluteToOrbitIndexRecognised : Bool
@@ -92,7 +98,10 @@ canonicalRoadmapState = record
   ; fibonacciBishopRatioCarrierConstructed = true
   ; fibonacciDenominatorPositiveIncrementExact = true
   ; fibonacciDenominatorDivergenceExact = true
-  ; quadraticDefectToBishopErrorBoundExact = false
+  ; bishopPhiPsiFactorisationExact = true
+  ; normOneReciprocalSquareWeldExact = false
+  ; conjugateFactorLowerBoundExact = false
+  ; reciprocalSquareBishopConvergenceExact = false
   ; fibonacciRatiosConvergeToBishopPhi = false
 
   ; jSeamWordLkTExact = true
@@ -111,6 +120,7 @@ canonicalRoadmapState = record
 
   ; renderedToAnalyticCalibrationTyped = true
   ; analyticToStructuredJFieldLiftTyped = true
+  ; analyticStructuredSeamCompilerExact = true
   ; renderedPixelToAnalyticModularCoordinateExact = false
   ; analyticModularCoordinateToStructuredJFieldExact = false
   ; structuredJAbsoluteToOrbitIndexRecognised = false
@@ -125,7 +135,9 @@ canonicalRoadmapState = record
   }
 
 data FirstLiveRoadmapResidual : Set where
-  missingQuadraticDefectToBishopErrorBound : FirstLiveRoadmapResidual
+  missingNormOneReciprocalSquareWeld : FirstLiveRoadmapResidual
+  missingUniformConjugateFactorLowerBound : FirstLiveRoadmapResidual
+  missingReciprocalSquareBishopConvergence : FirstLiveRoadmapResidual
   missingFibonacciRatioToBishopPhiConvergence : FirstLiveRoadmapResidual
   missingRenderedPixelToAnalyticModularCoordinate : FirstLiveRoadmapResidual
   missingAnalyticModularCoordinateToStructuredJField : FirstLiveRoadmapResidual
@@ -137,10 +149,8 @@ data FirstLiveRoadmapResidual : Set where
   missingCompressionCostTheorem : FirstLiveRoadmapResidual
   missingKernelCertification : FirstLiveRoadmapResidual
 
--- Highest-alpha geometric residual for the j/Monster lane.
 firstJMonsterResidual : FirstLiveRoadmapResidual
 firstJMonsterResidual = missingRenderedPixelToAnalyticModularCoordinate
 
--- Highest-alpha analytic residual for the phi lane.
 firstPhiResidual : FirstLiveRoadmapResidual
-firstPhiResidual = missingQuadraticDefectToBishopErrorBound
+firstPhiResidual = missingNormOneReciprocalSquareWeld
