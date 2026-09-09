@@ -28,19 +28,19 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 -- R523-R525 insert the source-exact Fefferman Clay C/D consumer and close the
 -- external problem <-> Clay C/D <-> DASHI R406 triangle.
 --
--- R526-R529 factor the R^3/T^3 comparison through existing 369/27 symmetry.
--- R526 exposes a common {-1,0,+1}^3 frequency-sign observation and the strict
--- notation firewall physical torus T^3 != Base369 ternary T3. A triad therefore
--- has three 27-sign observations, hence a 27^3 carrier shape, without importing
--- Base369 appraisal semantics. R527 factors Clay C/D into a common NS core plus
--- a non-erasable domain envelope. R528 isolates lattice-counting vs continuum
--- spectral measure/cutoff transport on the SAME literal R406 signed cross.
--- R529 then pays the periodic side of the local observation seam exactly on the
--- repo's existing integer FourierMode Z^3 carrier, including covariance under
--- all three coordinate sign reflections. The next representation demand is the
--- literal Euclidean R^3 frequency chart; after both charts, the genuine analytic
--- cross-domain wall is the sum/integral measure + cutoff + R406 same-object
--- transport. Monster 3B phase inversion remains only a symmetry intertwiner.
+-- R526-R530 factor the R^3/T^3 comparison through existing 369/27 symmetry.
+-- R526 exposes a common {-1,0,+1}^3 frequency-sign observation and keeps raw
+-- continuum-manifold identity separate from the finite carrier. R527 factors
+-- Clay C/D into a common NS core plus a non-erasable domain envelope. R528
+-- isolates lattice-counting vs continuum spectral measure/cutoff transport on
+-- the SAME literal R406 signed cross. R529 pays the periodic Z^3 sign chart and
+-- reflection covariance. R530 then consumes the older periodic-ternary-torus
+-- hyperfabric owner: it proves the Z^3 sign observation is onto the 27-point
+-- carrier by an explicit integer section, equips that SAME carrier with C3^3
+-- wraparound adjacency, and lifts physical triads to the SAME C3^9 nine-trit
+-- hyperfabric carrier. Thus the useful torus/Base369 identity is exact at the
+-- Fourier-sign-quotient/fibre presentation, while continuum measure transport
+-- remains separately typed and open.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -89,3 +89,4 @@ import DASHI.Physics.Closure.NSTriadKNTorusEuclideanTernary27IntersectionRound52
 import DASHI.Physics.Closure.NSTriadKNClayCDDomainResidualBidiRound527Exact
 import DASHI.Physics.Closure.NSTriadKNTorusEuclideanR406MeasureBridgeBoundaryRound528Exact
 import DASHI.Physics.Closure.NSTriadKNPeriodicIntegerTernary27SignChartRound529Exact
+import DASHI.Physics.Closure.NSTriadKNPeriodicFourierTernaryTorusFibreBidiRound530Exact
