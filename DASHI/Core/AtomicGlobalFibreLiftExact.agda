@@ -12,6 +12,7 @@ module DASHI.Core.AtomicGlobalFibreLiftExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
 
 record FibreObserverLift
   {Index Atomic Global : Set}
@@ -59,8 +60,6 @@ record AtomicGlobalFibreBoundary : Set where
     observerPreservationReceiptRequired : Bool
     globalObserverMustReopenAtomicRepresentation : Bool
     pointwiseProofMayRemainOpaqueAfterLift : Bool
-
-open import Agda.Builtin.Bool using (Bool; true; false)
 
 canonicalAtomicGlobalFibreBoundary : AtomicGlobalFibreBoundary
 canonicalAtomicGlobalFibreBoundary =
