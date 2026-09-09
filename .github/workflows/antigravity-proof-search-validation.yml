@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'DASHI/Physics/ExoticGravity/**'
+      - 'DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda'
       - 'scripts/check_antigravity_proof_search_validation.sh'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'scripts/agda29_without_k_wrapper.sh'
@@ -11,6 +14,9 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/ExoticGravity/**'
+      - 'DASHI/Physics/GR/SignedEinsteinCouplingBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedEinsteinCouplingSourceDegeneracyBidiExact.agda'
+      - 'DASHI/Physics/GR/SignedGRNormalizationBidiExact.agda'
       - 'scripts/check_antigravity_proof_search_validation.sh'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'scripts/agda29_without_k_wrapper.sh'
