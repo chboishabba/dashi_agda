@@ -31,7 +31,7 @@ module DASHI.Physics.YangMills.BalabanPath13FourAxisPhysicalPoincareExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Data.Rational using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -47,9 +47,10 @@ open import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageExact as Average
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact as Norm
 import DASHI.Physics.YangMills.BalabanNormalizedFourAxisMartingaleExact as Martingale
+import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 import DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCertificate as LDL
 import DASHI.Physics.YangMills.BalabanPath13NormalizedAxisAverageExact as Side13
-import DASHI.Physics.YangMills.BalabanPath13ZeroMeanFibrePoincareExact as Fibre13
+import DASHI.Physics.YangMills.BalabanPath13ZeroMeanFibrePoincareLiftExact as FibreLift13
 import DASHI.Physics.YangMills.BalabanPath13DirectionalEnergyContractionExact as Direction
 
 axisFibreNormSum : Axis4 → SiteField Side13.side13 → ℚ
@@ -62,6 +63,9 @@ axisFibreNormSumMatchesGlobal : ∀ axis field →
 axisFibreNormSumMatchesGlobal axis field =
   axisPartitionSumMatchesGlobal axis (λ site → sq (field site))
 
+-- Compatibility name retained, but aggregation is now the canonical
+-- relation-preserving fibre lift rather than a recursive replay in this global
+-- consumer.
 sumZeroMeanFibrePoincare :
   ∀ axis field (transverses : List (Triple (CyclicIndex Side13.side13))) →
   (∀ transverse → transverse ∈ transverses →
@@ -70,13 +74,8 @@ sumZeroMeanFibrePoincare :
     (λ transverse →
       LDL.oneEighteenth * physicalFibreNormSq field axis transverse)
   ≤ sumRational transverses (physicalFibreEdgeEnergy field axis)
-sumZeroMeanFibrePoincare axis field [] zeroMean = ℚP.≤-refl
-sumZeroMeanFibrePoincare axis field (transverse ∷ transverses) zeroMean =
-  ℚP.+-mono-≤
-    (Fibre13.zeroMeanPhysicalFibrePoincare13 field axis transverse
-      (zeroMean transverse here))
-    (sumZeroMeanFibrePoincare axis field transverses
-      (λ current membership → zeroMean current (there membership)))
+sumZeroMeanFibrePoincare =
+  FibreLift13.sumZeroMeanFibrePoincareViaFibre
 
 axisZeroMeanGlobalPoincare :
   ∀ axis field →
@@ -212,7 +211,16 @@ martingalePoincareBeforeEnergyContraction field meanZero =
         (cong (LDL.oneEighteenth *_)
           (Martingale.fourAxisVarianceDecomposition
             Side13.side13AverageData field meanZero))
-        (ℚRing.solve-∀)
+        (OpaqueAlgebra.scaleFourSum
+          LDL.oneEighteenth
+          (Norm.globalNormSq
+            (Martingale.martingale0 Side13.side13AverageData field))
+          (Norm.globalNormSq
+            (Martingale.martingale1 Side13.side13AverageData field))
+          (Norm.globalNormSq
+            (Martingale.martingale2 Side13.side13AverageData field))
+          (Norm.globalNormSq
+            (Martingale.martingale3 Side13.side13AverageData field)))
   in
   subst
     (λ left → left ≤ martingaleDirectionalEnergySum field)
