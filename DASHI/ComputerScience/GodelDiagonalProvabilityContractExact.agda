@@ -319,8 +319,7 @@ data SearchExhaustionImpliesUnprovability : Set where
 data GodelIncompletenessImpliesTuringHalting : Set where
 data PlainConsistencyGivesOrdinaryGodelUnrefutability : Set where
 data GodelSentenceEqualsRosserSentence : Set where
-\data TermsAreFormulas : Set where
-
+data TermsAreFormulas : Set where
 data UnaryProofPredicateIsBinaryProofRelation : Set where
 
 encodingAloneDoesNotSupplyDiagonalLemma :
