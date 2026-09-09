@@ -41,6 +41,7 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNBishopNatRootCriticalMultiplierBoundaryRound519Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNBishopNatRootApproximationMonotonicityRound520Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKN*Round5*Exact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/ns-r423-fixed-output-direct-compiler.yml'
   workflow_dispatch:
@@ -127,6 +128,20 @@ jobs:
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNBishopNatRootCriticalMultiplierBoundaryRound519Exact.agda
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNBishopNatRootApproximationMonotonicityRound520Exact.agda
+
+      - name: Type-check leaf-A finite normal form R538-R548
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectResolventPairSwapSymmetryRound538Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR396OrderedOffDiagonalRemainderRound540Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNSpectatorResolventR294WeightRound541Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNSpectatorDoubleForcingCommutatorFoldRound542Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNSpectatorResolventRowFactorizationRound545Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNFullSquareAsSpectatorRowsRound546Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DiagonalSemanticBoundaryRound548Exact.agda
 
       - name: Type-check focused R505 aggregate
         run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact.agda
