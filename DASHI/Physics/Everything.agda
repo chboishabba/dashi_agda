@@ -16,6 +16,7 @@ import DASHI.Physics.Unification.Everything
 import DASHI.Physics.Foundations.Everything
 import DASHI.Physics.StandardModel.Everything
 import DASHI.Physics.Semiconductor.Everything
+import DASHI.Physics.VFX.Everything
 
 -- Heavy Clay lanes are deliberately isolated behind their own rollups.
 -- import DASHI.Physics.YangMills.Everything
