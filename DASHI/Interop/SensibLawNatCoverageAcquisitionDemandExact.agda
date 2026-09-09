@@ -55,11 +55,16 @@ record NatCoverageAcquisitionDemand (residual : NatCoverageResidual) : Set where
     exactSubjectReference : String
     exactPropertyReference : String
     requiredRepresentationReference : String
+    requiresNativeFullStatementFamily : Bool
+    requiresNativeFullStatementFamilyIsTrue : requiresNativeFullStatementFamily ≡ true
+    truthyProjectionSufficesForCoverage : Bool
+    truthyProjectionSufficesForCoverageIsFalse : truthyProjectionSufficesForCoverage ≡ false
     acquisitionReference : String
 open NatCoverageAcquisitionDemand public
 
 -- Concrete live example: an uninspected P14143 family cannot be paid by a P31
--- fetch, a peer-item fetch, or a merely successful shard transport.
+-- fetch, a peer-item fetch, a merely successful shard transport, or the truthy
+-- projection of P14143. Coverage is over the native full statement family.
 p14143UninspectedResidual : NatCoverageResidual
 p14143UninspectedResidual =
   nat-coverage-residual
@@ -79,7 +84,11 @@ p14143UninspectedDemand =
     refl
     "the same Nat subject QID"
     "P14143"
-    "native statement-family coverage or a certified representation complete for the P14143 query family"
+    "native full statement-family coverage including every rank and native snak kind, or a certified representation complete for the P14143 query family"
+    true
+    refl
+    false
+    refl
     "acquire exactly the P14143 Q/P family required by the live Nat residual"
 
 ------------------------------------------------------------------------
@@ -90,6 +99,7 @@ p14143UninspectedDemand =
 data ShardTransportPaysCoverageResidual : Set where
 data OtherPropertyCoveragePaysP14143 : Set where
 data ReturnedRowPaysCoverageResidual : Set where
+data TruthyProjectionPaysNativeFamilyCoverage : Set where
 data AcquisitionDemandCreatesMigrationAuthority : Set where
 
 shardTransportDoesNotPayCoverageResidual : ShardTransportPaysCoverageResidual → ⊥
@@ -101,25 +111,61 @@ otherPropertyDoesNotPayP14143Residual ()
 returnedRowDoesNotPayCoverageResidualByExistence : ReturnedRowPaysCoverageResidual → ⊥
 returnedRowDoesNotPayCoverageResidualByExistence ()
 
+truthyProjectionDoesNotPayNativeFamilyCoverage : TruthyProjectionPaysNativeFamilyCoverage → ⊥
+truthyProjectionDoesNotPayNativeFamilyCoverage ()
+
 acquisitionDemandDoesNotCreateMigrationAuthority : AcquisitionDemandCreatesMigrationAuthority → ⊥
 acquisitionDemandDoesNotCreateMigrationAuthority ()
+
+------------------------------------------------------------------------
+-- Native family vs native snak semantics.
+--
+-- Cross-pollinated from the attached Aristotle archive:
+-- * rank/truthy filtering is downstream visibility and can hide normal or
+--   deprecated statements, so it cannot establish native family coverage;
+-- * value / somevalue / novalue are all native statements. In particular an
+--   explicit novalue is family-present and must never be conflated with the
+--   property family being absent from the entity claims map.
+------------------------------------------------------------------------
+
+data PropertyFamilyObservation : Set where
+  familyPresent : PropertyFamilyObservation
+  familyAbsent : PropertyFamilyObservation
+
+data NativeSnakKind : Set where
+  concreteValue : NativeSnakKind
+  someValue : NativeSnakKind
+  noValue : NativeSnakKind
+
+record NativeSnakSummary : Set where
+  constructor native-snak-summary
+  field
+    concreteValueObserved : Bool
+    someValueObserved : Bool
+    noValueObserved : Bool
+open NativeSnakSummary public
+
+data NoValueEqualsFamilyAbsent : Set where
+data SomeValueEqualsConcreteValue : Set where
+
+noValueDoesNotMeanFamilyAbsent : NoValueEqualsFamilyAbsent → ⊥
+noValueDoesNotMeanFamilyAbsent ()
+
+someValueDoesNotMeanConcreteValue : SomeValueEqualsConcreteValue → ⊥
+someValueDoesNotMeanConcreteValue ()
 
 ------------------------------------------------------------------------
 -- Exact recomputation receipt.
 --
 -- Runtime counterpart on SensibLaw #493:
 --   live residual -> bound shared acquisition -> QID-local projected entity
---   snapshot -> exact property-family recomputation.
+--   snapshot -> exact native property-family recomputation.
 --
 -- The entity snapshot is useful only when the same Q, same P and same revision
 -- are retained and the representation is certified complete for that exact
 -- query family. Under those conditions both family-present and family-absent
 -- are valid coverage outcomes. This pays only the coverage coordinate.
 ------------------------------------------------------------------------
-
-data PropertyFamilyObservation : Set where
-  familyPresent : PropertyFamilyObservation
-  familyAbsent : PropertyFamilyObservation
 
 record ExactCoverageRecomputation
     (residual : NatCoverageResidual) : Set where
@@ -134,15 +180,25 @@ record ExactCoverageRecomputation
     observedRevisionReference : String
     observedRevisionIsExact :
       observedRevisionReference ≡ graphRevisionReference residual
+    coverageUsesNativeFullStatementFamily : Bool
+    coverageUsesNativeFullStatementFamilyIsTrue :
+      coverageUsesNativeFullStatementFamily ≡ true
+    truthyProjectionUsedForCoverage : Bool
+    truthyProjectionUsedForCoverageIsFalse :
+      truthyProjectionUsedForCoverage ≡ false
     representationCompleteForExactFamily : Bool
     representationCompleteForExactFamilyIsTrue :
       representationCompleteForExactFamily ≡ true
     familyObservation : PropertyFamilyObservation
+    snakSummary : NativeSnakSummary
     recomputedCoverageStatus : Coverage.QueryCoverageStatus
     recomputedCoverageIsComplete :
       recomputedCoverageStatus ≡ Coverage.queryCoverageComplete
     sourceSupportPaid : Bool
     sourceSupportPaidIsFalse : sourceSupportPaid ≡ false
+    sourceAuthorityEvaluationRequired : Bool
+    sourceAuthorityEvaluationRequiredIsTrue :
+      sourceAuthorityEvaluationRequired ≡ true
     consumerVerificationPerformed : Bool
     consumerVerificationPerformedIsFalse :
       consumerVerificationPerformed ≡ false
@@ -176,6 +232,8 @@ data CoveragePaymentPaysSourceSupport : Set where
 data CoveragePaymentClosesConsumer : Set where
 data CoveragePaymentCreatesMigrationAuthority : Set where
 
+data ReferencePresencePaysSourceSupport : Set where
+
 coveragePaymentDoesNotPaySourceSupport : CoveragePaymentPaysSourceSupport → ⊥
 coveragePaymentDoesNotPaySourceSupport ()
 
@@ -185,6 +243,9 @@ coveragePaymentDoesNotCloseConsumer ()
 coveragePaymentDoesNotCreateMigrationAuthority :
   CoveragePaymentCreatesMigrationAuthority → ⊥
 coveragePaymentDoesNotCreateMigrationAuthority ()
+
+referencePresenceDoesNotPaySourceSupport : ReferencePresencePaysSourceSupport → ⊥
+referencePresenceDoesNotPaySourceSupport ()
 
 ------------------------------------------------------------------------
 -- Runtime/formal boundary summary.
@@ -198,6 +259,9 @@ record NatCoverageAcquisitionBoundary : Set where
     transportEqualsCoveragePayment : Bool
     anotherPropertyCanPayTargetPropertyResidual : Bool
     returnedRowEqualsCoveragePayment : Bool
+    truthyProjectionEqualsNativeFamilyCoverage : Bool
+    noValueEqualsFamilyAbsence : Bool
+    referencePresenceEqualsSourceSupport : Bool
     demandCreatesMigrationAuthority : Bool
     recomputationStillRequiredAfterAcquisition : Bool
     exactRecomputationMayPayCoverageCoordinate : Bool
@@ -209,4 +273,4 @@ record NatCoverageAcquisitionBoundary : Set where
 canonicalNatCoverageAcquisitionBoundary : NatCoverageAcquisitionBoundary
 canonicalNatCoverageAcquisitionBoundary =
   nat-coverage-acquisition-boundary
-    true true false false false false true true false false false true
+    true true false false false false false false false true true false false false true
