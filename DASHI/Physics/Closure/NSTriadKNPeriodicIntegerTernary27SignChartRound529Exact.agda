@@ -3,24 +3,25 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicIntegerTernary27SignChartRound529E
 ------------------------------------------------------------------------
 -- ROUND529 / EXACT PERIODIC Z^3 FOURIER-MODE -> TERNARY-27 SIGN CHART
 --
--- R528 correctly scheduled the periodic sign chart first.  The repo already
+-- R528 correctly scheduled the periodic sign chart first. The repo already
 -- owns the literal periodic Fourier carrier `NSIntegerFourierLattice.FourierMode`
 -- with integer coordinates, so this coordinate does not require new analysis.
 -- We classify each integer coordinate by negative / zero / positive and prove
 -- exact covariance under the three coordinate reflections.
 --
--- This pays only the local sign-observation coordinate.  It does not identify
+-- This pays only the local sign-observation coordinate. It does not identify
 -- Z^3 counting measure with the R^3 continuum measure and does not transport
 -- the literal R406 signed-cross functional between domains.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Integer.Base using (ℤ; +_; -[1+_]; -_)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as G
+import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNTorusEuclideanTernary27IntersectionRound526Exact as R526
 import DASHI.Physics.Closure.NSTriadKNTorusEuclideanR406MeasureBridgeBoundaryRound528Exact as R528
@@ -30,8 +31,8 @@ integerSign529 (+ zero) = SSP.sspZero
 integerSign529 (+ (suc n)) = SSP.sspPosOne
 integerSign529 (-[1+ n ]) = SSP.sspNegOne
 
-integerSignNeg529 : (z : ℤ) → integerSign529 (- z) ≡
-  (let open import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact in negateTrit (integerSign529 z))
+integerSignNeg529 : (z : ℤ) →
+  integerSign529 (- z) ≡ Signed.negateTrit (integerSign529 z)
 integerSignNeg529 (+ zero) = refl
 integerSignNeg529 (+ (suc n)) = refl
 integerSignNeg529 (-[1+ n ]) = refl
@@ -48,8 +49,6 @@ reflectPeriodicY529 (Z3.mode x y z) = Z3.mode x (- y) z
 
 reflectPeriodicZ529 : Z3.FourierMode → Z3.FourierMode
 reflectPeriodicZ529 (Z3.mode x y z) = Z3.mode x y (- z)
-
-import DASHI.Moonshine.Base369Ternary27SignedSymmetryMonsterIntertwinerExact as Signed
 
 reflectPeriodicXObserved529 : (k : Z3.FourierMode) →
   observePeriodicMode529 (reflectPeriodicX529 k)
