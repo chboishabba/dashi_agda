@@ -15,6 +15,8 @@ open import DASHI.Physics.Textile.FabricDrapeCalibrationExact public
 open import DASHI.Physics.Textile.TextileOpticalTransportBridgeExact public
 open import DASHI.Physics.Textile.TextileLustreObservationExact public
 open import DASHI.Physics.Textile.TextileColourAppearanceBridgeExact public
+open import DASHI.Physics.Textile.TextileAngularAppearanceExact public
+open import DASHI.Physics.Textile.TextileSpectralReflectanceTransmittanceExact public
 open import DASHI.Physics.Textile.TextileMechanicsOpticsCouplingExact public
 open import DASHI.Physics.Textile.JacquardPhysicalFibreBridgeExact public
 open import DASHI.Physics.Textile.StitchPhysicalFibreBridgeExact public
