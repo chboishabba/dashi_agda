@@ -15,17 +15,18 @@ module DASHI.Physics.YangMills.BalabanLangevinHessianBidirectionalWeldRound262Ex
 -- with a neighbouring Hessian object.
 --
 -- This module removes that duplication.  One physical dataset owns ONE shared
--- marked CMP109/CMP116 Hessian carrier and projects it in both directions:
+-- marked CMP109/CMP116 Hessian carrier and ONE literal Langevin frame.  The
+-- spatial site type is definitionally `Langevin.Site langevin`; it cannot be
+-- supplied independently.  The same source object then projects both ways:
 --
 --   same Hessian -> spatial weighted generator row -> all Dyson rows;
 --   same Hessian -> temporal negative-curvature shell -> uniform debt.
 --
--- It does NOT manufacture C4a/C4b.  The two source-realisation maps below are
--- exactly the remaining physical obligations, now forced to share the same
--- source/density/scale/volume/root carrier.
+-- It does NOT manufacture C4a/C4b.  The source-realisation maps below are the
+-- remaining physical obligations, now forced to share the same carrier.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
@@ -48,10 +49,9 @@ import DASHI.Physics.YangMills.BalabanUnifiedSeventeenThirtySecondTailModulusExa
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact as Geom
 
 record LiteralLangevinHessianBidirectionalWeld
-    (Scale Volume Root Site : Set) : Set₁ where
+    (Scale Volume Root : Set) : Set₁ where
   field
-    -- ONE literal source carrier.  Both consumers below are indexed by these
-    -- exact coordinates, so a neighbouring density/scale cannot silently pay.
+    -- ONE literal CMP109/CMP116 source carrier.
     shared : Shared.SharedMarkedAnalyticShellControl Scale Volume Root
     scale : Scale
     volume : Volume
@@ -65,12 +65,14 @@ record LiteralLangevinHessianBidirectionalWeld
     literalConnectionIsOnsiteAd :
       Langevin.connectionIsOnsiteAdTerm langevin
 
-    -- Spatial realization of the SAME symmetric Hessian.
-    sites : List Site
-    metric : Metric.NatMetricTriangle Site
-    influence : Site → Site → ℚ
+    -- Spatial realization of the SAME symmetric Hessian.  Crucially there is
+    -- no free Site parameter: this is the exact Site carried by `langevin`.
+    sites : List (Langevin.Site langevin)
+    metric : Metric.NatMetricTriangle (Langevin.Site langevin)
+    influence :
+      Langevin.Site langevin → Langevin.Site langevin → ℚ
     influenceNonnegative : ∀ x y → 0ℚ ≤ influence x y
-    rowDepth : Site → Nat
+    rowDepth : Langevin.Site langevin → Nat
 
     symmetricLangevinRowIsCMP109116Hessian : ∀ x →
       Sums.sumRational sites
@@ -93,9 +95,10 @@ open LiteralLangevinHessianBidirectionalWeld public
 ------------------------------------------------------------------------
 
 asSpatialIdentification :
-  ∀ {Scale Volume Root Site} →
-  LiteralLangevinHessianBidirectionalWeld Scale Volume Root Site →
-  Spatial.LiteralHessianGeneratorRowIdentification Scale Volume Root Site
+  ∀ {Scale Volume Root}
+    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root) →
+  Spatial.LiteralHessianGeneratorRowIdentification
+    Scale Volume Root (Langevin.Site (langevin dataSet))
 asSpatialIdentification dataSet = record
   { Spatial.LiteralHessianGeneratorRowIdentification.shared = shared dataSet
   ; Spatial.LiteralHessianGeneratorRowIdentification.scale = scale dataSet
@@ -112,8 +115,8 @@ asSpatialIdentification dataSet = record
   }
 
 spatialWeightedRowBound :
-  ∀ {Scale Volume Root Site}
-    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root Site)
+  ∀ {Scale Volume Root}
+    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root)
     x →
   Sums.sumRational (sites dataSet)
     (λ y → Metric.metricWeight (metric dataSet) x y * influence dataSet x y)
@@ -122,8 +125,8 @@ spatialWeightedRowBound dataSet =
   Spatial.weightedGeneratorRowBound (asSpatialIdentification dataSet)
 
 spatialAllDysonRowsBound :
-  ∀ {Scale Volume Root Site}
-    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root Site)
+  ∀ {Scale Volume Root}
+    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root)
     n x →
   Weighted.weightedPowerRow
     (WeightedBridge.asWeightedFiniteInfluence
@@ -141,8 +144,8 @@ spatialAllDysonRowsBound dataSet =
 ------------------------------------------------------------------------
 
 asTemporalIdentification :
-  ∀ {Scale Volume Root Site} →
-  LiteralLangevinHessianBidirectionalWeld Scale Volume Root Site →
+  ∀ {Scale Volume Root} →
+  LiteralLangevinHessianBidirectionalWeld Scale Volume Root →
   Temporal.LiteralCurvatureHessianShellIdentification Scale Volume Root
 asTemporalIdentification dataSet = record
   { Temporal.LiteralCurvatureHessianShellIdentification.shared = shared dataSet
@@ -158,8 +161,8 @@ asTemporalIdentification dataSet = record
   }
 
 temporalUniformCurvatureDebt :
-  ∀ {Scale Volume Root Site}
-    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root Site)
+  ∀ {Scale Volume Root}
+    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root)
     count →
   Debt.finiteCurvatureDebt
     (Curv.asGeometricNegativeCurvatureDebt
@@ -171,12 +174,12 @@ temporalUniformCurvatureDebt dataSet =
   Temporal.sameObjectCurvatureUniformDebt (asTemporalIdentification dataSet)
 
 ------------------------------------------------------------------------
--- Exact connection cancellation is paid from the SAME literal Langevin frame.
+-- Exact connection cancellation is now attached to the same literal frame.
 ------------------------------------------------------------------------
 
 literalConnectionCancellationAvailable :
-  ∀ {Scale Volume Root Site}
-    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root Site) →
+  ∀ {Scale Volume Root}
+    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root) →
   Langevin.connectionIsOnsiteAdTerm (langevin dataSet)
 literalConnectionCancellationAvailable dataSet =
   literalConnectionIsOnsiteAd dataSet
