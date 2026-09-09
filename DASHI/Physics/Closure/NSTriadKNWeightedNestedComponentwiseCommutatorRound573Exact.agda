@@ -44,6 +44,7 @@ import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact a
 import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as R73
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
+import DASHI.Physics.Closure.NSTriadKNNestedProjectedForcingSlotExpansionRound309Exact as R309
 import DASHI.Physics.Closure.NSTriadKNWeightedProjectedForcingOuterFoldRound438Exact as R438
 import DASHI.Physics.Closure.NSTriadKNNestedComponentwiseInnerCommutatorRound572Exact as R572
 
@@ -145,8 +146,7 @@ module WeightedNested
         C3.complex3Add slot slot
         ≡ R145.slotKernel P Q (C3.complex3Add Np Np) uq
       slotAdd =
-        sym (DASHI.Physics.Closure.NSTriadKNNestedProjectedForcingSlotExpansionRound309Exact.slotKernelAdditiveFirstAmplitude
-          P Q Np Np uq)
+        sym (R309.slotKernelAdditiveFirstAmplitude P Q Np Np uq)
 
       nested :
         R145.slotKernel P Q (C3.complex3Add Np Np) uq
@@ -169,10 +169,6 @@ module WeightedNested
               C3.complex3Scale w
                 (C3.complex3Scale (C3.complexI F) value))
             nested)))
-
-  ----------------------------------------------------------------------
-  -- R438's actual weighted R294 cell enters by its exact exhaustive weld.
-  ----------------------------------------------------------------------
 
   fourWeightedR294CellIsNested :
     (tau : Physical.PhysicalTriadIncidence) →
@@ -216,10 +212,6 @@ module WeightedNested
   fixedOutputFourWeightedR294IsNested output =
     foldFourWeightedR294IsNested
       (Output.physicalOutputFiber (Audit.cutoff system) output)
-
-------------------------------------------------------------------------
--- Status.
-------------------------------------------------------------------------
 
 round573R438WeightedCommutatorNestedSameObjectWeldClosed : Bool
 round573R438WeightedCommutatorNestedSameObjectWeldClosed = true
