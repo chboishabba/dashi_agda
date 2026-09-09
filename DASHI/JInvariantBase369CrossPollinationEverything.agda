@@ -4,7 +4,8 @@ module DASHI.JInvariantBase369CrossPollinationEverything where
 import DASHI.Moonshine.JInvariantSourceAtlasExact
 
 -- Source-aligned image descriptions: modular self-similarity, triple phase
--- winding, and explicit non-promotion of incidental String-theory page usage.
+-- winding, exceptional fundamental-domain gluing, and explicit non-promotion
+-- of incidental String-theory page usage.
 import DASHI.Moonshine.JInvariantImageFractalSourceAtlasExact
 
 -- Exact finite six-label / three-pair / two-orientation bridge.
@@ -31,6 +32,19 @@ import DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact
 -- scale-indexed BIDI observer.  Sign/orientation, boundary openness/closure and
 -- scale are retained as distinct coordinates over the richer continuous fibre.
 import DASHI.Moonshine.JInvariantSignedFibreFractalBidiExact
+
+-- Construct the finite Fibonacci recursion behind the recorded phi context,
+-- while keeping the ternary coordinate as a signed observer over the recursive
+-- fibre and leaving real ratio convergence explicit.
+import DASHI.Moonshine.GoldenRatioBinaryTernaryFibreConstructionExact
+
+-- Same-object Klein-j construction shape g2^3/Delta plus source-described
+-- fundamental-domain gluing and explicit commuting/noncommuting test fixtures.
+import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact
+
+-- Put signed/gluing observers over homogeneous representation grades without
+-- collapsing grade dimension, trace, fibre state or Monster semantics.
+import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
 
 -- Existing exact in-repo carriers consumed by the bridge.
 import DASHI.Foundations.Base369MobiusTransport
