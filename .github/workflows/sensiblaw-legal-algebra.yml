@@ -13,6 +13,7 @@ on:
       - 'DASHI/Cognition/PNF/SensibLawSourceConditionedTypedLiabilityExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawConsumerSourceAcquisitionPriorityExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawConsumerSourcePrioritySchedulerBridgeExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact.agda'
@@ -74,6 +75,7 @@ jobs:
           DASHI/Cognition/PNF/SensibLawSourceConditionedTypedLiabilityExact.agda
           DASHI/Cognition/PNF/SensibLawSourceRuleDialectic369CrossPollinationExact.agda
           DASHI/Cognition/PNF/SensibLawConsumerSourceAcquisitionPriorityExact.agda
+          DASHI/Cognition/PNF/SensibLawConsumerSourcePrioritySchedulerBridgeExact.agda
           DASHI/Cognition/PNF/SensibLawWrongTypeDownstreamPrimarySourceDisciplineExact.agda
           DASHI/Cognition/PNF/SensibLawNSWCivilLiabilityActAtomicSourceAtlasExact.agda
           DASHI/Cognition/PNF/SensibLawNSWVicariousLiabilityActAtomicSourceAtlasExact.agda
