@@ -33,6 +33,12 @@ import DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact
 -- scale are retained as distinct coordinates over the richer continuous fibre.
 import DASHI.Moonshine.JInvariantSignedFibreFractalBidiExact
 
+-- Exact order-three modular-orbit family behind the visible dark tri-corners,
+-- including the seven-member |Re tau| >= 0.15 threshold witnesses and one
+-- balanced-ternary carrier for converging/identity/diverging seam dynamics and
+-- anti/identity/commuting gluing observations.
+import DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact
+
 -- Construct the finite Fibonacci recursion behind the recorded phi context,
 -- while keeping the ternary coordinate as a signed observer over the recursive
 -- fibre and leaving real ratio convergence explicit.
