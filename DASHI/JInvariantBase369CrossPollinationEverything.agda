@@ -59,6 +59,12 @@ import DASHI.Moonshine.GoldenRatioBinaryTernaryFibreConstructionExact
 -- 2/1, 5/3, 13/8, 34/21,... while the real phi limit remains explicit debt.
 import DASHI.Moonshine.GoldenRatioBalancedTernaryFRACTRANModularPathExact
 
+-- Quadratic approximation / codec / prime-compression tranche.  This includes
+-- the exact Fibonacci defect involution on the existing 3/6/9/27 carriers,
+-- the rich defect-magnitude + signed-prime fibre lift, and an explicit
+-- same-object arithmetic trajectory 2/1 -> 3/2 -> 5/3.
+import DASHI.Moonshine.QuadraticSignedApproximationEverything
+
 -- Same-object Klein-j construction shape g2^3/Delta plus source-described
 -- fundamental-domain gluing and explicit commuting/noncommuting test fixtures.
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact
