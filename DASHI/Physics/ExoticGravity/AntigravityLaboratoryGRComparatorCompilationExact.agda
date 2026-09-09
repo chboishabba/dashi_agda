@@ -9,36 +9,21 @@ import DASHI.Physics.ExoticGravity.LiTorrGeometryAcquisitionBidiExact as Geometr
 import DASHI.Physics.ExoticGravity.LiTorrStandardGRRotatingSourceKernelExact as GR
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
-------------------------------------------------------------------------
--- LABORATORY SOURCE + CLOSED GEOMETRY -> ORDINARY-GR EVALUATION REQUEST
---
--- Source/geometry closure authorizes evaluation.  It does not manufacture the
--- numerical prediction.  The prediction receipt is a separate downstream
--- object carrying exact evaluator/output/same-input lineage.
-------------------------------------------------------------------------
-
 record SameApparatusGRComparatorInput : Set₂ where
   constructor same-apparatus-gr-comparator-input
   field
     apparatusIdentity : String
     laboratoryStressEnergy : Stress.LaboratoryStressEnergyReceipt
-
     geometryState : Geometry.GeometryClosureState
-    geometryIsClosed :
-      Geometry.firstOpenGeometryLeaf geometryState ≡ Geometry.closedGeometry
-
+    geometryIsClosed : Geometry.firstOpenGeometryLeaf geometryState ≡ Geometry.closedGeometry
     rotatingGeometry : GR.RotatingSourceGeometry
     weakFieldKernel : GR.WeakFieldGRKernel rotatingGeometry
-
     SameApparatusStressGeometryReceipt : Set
     sameApparatusStressGeometryReceipt : SameApparatusStressGeometryReceipt
-
     ExactGeometryInstantiationReceipt : Set
     exactGeometryInstantiationReceipt : ExactGeometryInstantiationReceipt
-
     WeakFieldValidityReceipt : Set
     weakFieldValidityReceipt : WeakFieldValidityReceipt
-
     ConventionNormalizationReceipt : Set
     conventionNormalizationReceipt : ConventionNormalizationReceipt
 
@@ -51,13 +36,10 @@ record OrdinaryGREvaluationRequest : Set₂ where
     source : Stress.LaboratoryStressEnergyReceipt
     geometry : GR.RotatingSourceGeometry
     kernel : GR.WeakFieldGRKernel geometry
-
     ExactGeometryInstantiationReceipt : Set
     exactGeometryInstantiationReceipt : ExactGeometryInstantiationReceipt
-
     WeakFieldValidityReceipt : Set
     weakFieldValidityReceipt : WeakFieldValidityReceipt
-
     ConventionNormalizationReceipt : Set
     conventionNormalizationReceipt : ConventionNormalizationReceipt
 
@@ -85,18 +67,12 @@ record OrdinaryGRPredictionReceipt : Set₂ where
     predictionCarrier : String
     evaluatorIdentity : String
     evaluatorRevision : String
-
     NumericalEvaluationReceipt : Set
     numericalEvaluationReceipt : NumericalEvaluationReceipt
-
     SameInputPredictionReceipt : Set
     sameInputPredictionReceipt : SameInputPredictionReceipt
 
 open OrdinaryGRPredictionReceipt public
-
-------------------------------------------------------------------------
--- Reverse-search residuals.
-------------------------------------------------------------------------
 
 data ComparatorResidual : Set where
   missingExactGeometryInstantiation : ComparatorResidual
@@ -129,5 +105,4 @@ record LaboratoryGRComparatorBoundary : Set where
 
 canonicalLaboratoryGRComparatorBoundary : LaboratoryGRComparatorBoundary
 canonicalLaboratoryGRComparatorBoundary =
-  laboratory-gr-comparator-boundary
-    false false false false true true true true true false false
+  laboratory-gr-comparator-boundary false false false false true true true true true false false

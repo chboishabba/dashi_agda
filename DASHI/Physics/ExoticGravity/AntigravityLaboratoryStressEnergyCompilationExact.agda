@@ -8,36 +8,21 @@ import DASHI.Physics.ExoticGravity.SuperconductingChargeMassCurrentBidiExact as 
 import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyScopeBidiExact as Stress
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
-------------------------------------------------------------------------
--- MASS-CURRENT -> LABORATORY STRESS-ENERGY COMPILER
---
--- J_m is a necessary source coordinate, but it is not by itself a full
--- apparatus stress-energy tensor.  A downstream compilation must still bind
--- energy density, momentum density, stress components, frame/conventions, and
--- exact same-apparatus identity.
-------------------------------------------------------------------------
-
 record LaboratoryStressEnergyCompilationInput : Set₁ where
   constructor laboratory-stress-energy-compilation-input
   field
     apparatusIdentity : String
     massCurrent : Current.MassCurrentSourceReconstructionReceipt
-
     EnergyDensityReceipt : Set
     energyDensityReceipt : EnergyDensityReceipt
-
     MomentumDensityReceipt : Set
     momentumDensityReceipt : MomentumDensityReceipt
-
     StressComponentReceipt : Set
     stressComponentReceipt : StressComponentReceipt
-
     FrameAndConventionReceipt : Set
     frameAndConventionReceipt : FrameAndConventionReceipt
-
     TensorAssemblyReceipt : Set
     tensorAssemblyReceipt : TensorAssemblyReceipt
-
     SameApparatusIdentityReceipt : Set
     sameApparatusIdentityReceipt : SameApparatusIdentityReceipt
 
@@ -61,10 +46,6 @@ compileLaboratoryStressEnergy input =
     (LaboratoryStressEnergyCompilationInput.tensorAssemblyReceipt input)
     (LaboratoryStressEnergyCompilationInput.SameApparatusIdentityReceipt input)
     (LaboratoryStressEnergyCompilationInput.sameApparatusIdentityReceipt input)
-
-------------------------------------------------------------------------
--- Reverse-search residuals after J_m is known.
-------------------------------------------------------------------------
 
 data PostMassCurrentStressEnergyResidual : Set where
   missingEnergyDensityAfterMassCurrent : PostMassCurrentStressEnergyResidual
@@ -96,8 +77,6 @@ record LaboratoryStressEnergyCompilationBoundary : Set where
     compiledLabStressEnergyPaysW4Interface : Bool
     compiledLabStressEnergyProvesNegativeEffectiveG : Bool
 
-canonicalLaboratoryStressEnergyCompilationBoundary :
-  LaboratoryStressEnergyCompilationBoundary
+canonicalLaboratoryStressEnergyCompilationBoundary : LaboratoryStressEnergyCompilationBoundary
 canonicalLaboratoryStressEnergyCompilationBoundary =
-  laboratory-stress-energy-compilation-boundary
-    false true true true true true true false false
+  laboratory-stress-energy-compilation-boundary false true true true true true true false false
