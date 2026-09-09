@@ -20,6 +20,11 @@ module DASHI.Physics.YangMills.BalabanNormalizedFourAxisMartingaleExact where
 -- no new orthogonality postulate is needed.  For a globally mean-zero field,
 -- the terminal four-axis conditional expectation vanishes and the global L2
 -- norm is exactly the sum of the four martingale norms.
+--
+-- OOM discipline:
+-- once the terminal fibre observation is reduced to the scalar coordinate 0,
+-- the final global simplification is delegated to the carrier-free algebra
+-- leaf.  Physical norm terms are never normalized by reflection at that stage.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -28,6 +33,8 @@ open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
+
+import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -153,7 +160,7 @@ fourAxisVarianceDecomposition dataSet field meanZero =
           + (Norm.globalNormSq (martingale2 dataSet field)
           + (Norm.globalNormSq (martingale3 dataSet field) + terminal))))
         (terminalNormZero dataSet field meanZero))
-      (ℚRing.solve-∀
+      (OpaqueAlgebra.dropTerminalZero4
         (Norm.globalNormSq (martingale0 dataSet field))
         (Norm.globalNormSq (martingale1 dataSet field))
         (Norm.globalNormSq (martingale2 dataSet field))
