@@ -12,16 +12,39 @@ import DASHI.ComputerScience.TernarySemanticDecisionRefinementExact as Refinemen
 --
 -- Search status is not theorem truth and not certification status:
 --
---   pos : at least one candidate in the inspected list pays the declared
---         Boolean proof-search consumer;
---   neg : the declared candidate space is complete and every inspected
---         candidate fails that consumer;
---   zer : no paying candidate has been found, but the search space is not
---         certified complete/exhausted.
+--   pos : at least one inspected candidate pays the declared Boolean consumer;
+--   neg : a typed complete finite search domain has been exhausted and no
+--         admissible candidate pays that consumer;
+--   zer : no paying candidate has been found in an open/incomplete scope.
 --
 -- This preserves the proof-debt router's existing separation between
 -- mathematical status, statement alignment, certification and scheduling.
 ------------------------------------------------------------------------
+
+-- Local finite membership avoids adding an equality/decidability requirement
+-- to the candidate carrier.
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here : ∀ {xs} → x ∈ (x ∷ xs)
+  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
+
+-- A complete finite domain must state which candidates are admissible and prove
+-- that every admissible candidate occurs in the inspected list.
+record CompleteFiniteSearchDomain (A : Set) : Set₁ where
+  constructor completeFiniteSearchDomain
+  field
+    candidates : List A
+    Admissible : A → Set
+    coversEveryAdmissible : (candidate : A) → Admissible candidate → candidate ∈ candidates
+
+open CompleteFiniteSearchDomain public
+
+data SearchScope (A : Set) : Set₁ where
+  openFiniteScope : List A → SearchScope A
+  completeFiniteScope : CompleteFiniteSearchDomain A → SearchScope A
+
+scopeCandidates : ∀ {A : Set} → SearchScope A → List A
+scopeCandidates (openFiniteScope candidates) = candidates
+scopeCandidates (completeFiniteScope domain) = candidates domain
 
 anyPassing :
   ∀ {A : Set} →
@@ -36,15 +59,13 @@ anyPassing checker (candidate ∷ candidates) with checker candidate
 finiteSearchDecisionTrit :
   ∀ {A : Set} →
   (A → Bool) →
-  List A →
-  Bool →
+  SearchScope A →
   Trit
-finiteSearchDecisionTrit checker candidates searchSpaceComplete
-  with anyPassing checker candidates
+finiteSearchDecisionTrit checker scope with anyPassing checker (scopeCandidates scope)
 ... | true = pos
-... | false with searchSpaceComplete
-...   | true = neg
-...   | false = zer
+... | false with scope
+...   | openFiniteScope _ = zer
+...   | completeFiniteScope _ = neg
 
 ------------------------------------------------------------------------
 -- Existing proof-search fixture: authoritative frontier reduction rather than
@@ -57,40 +78,74 @@ canonicalSearchCandidates =
   ∷ ProofSearch.fewerLemmasTrueClosure
   ∷ []
 
+allSearchStatesAdmissible : ProofSearch.SearchState → Set
+allSearchStatesAdmissible _ = ⊤
+
+canonicalSearchCoverage :
+  (candidate : ProofSearch.SearchState) →
+  allSearchStatesAdmissible candidate →
+  candidate ∈ canonicalSearchCandidates
+canonicalSearchCoverage ProofSearch.manyLemmasNoClosure admissible = here
+canonicalSearchCoverage ProofSearch.fewerLemmasTrueClosure admissible = there here
+
+canonicalCompleteDomain : CompleteFiniteSearchDomain ProofSearch.SearchState
+canonicalCompleteDomain =
+  completeFiniteSearchDomain
+    canonicalSearchCandidates
+    allSearchStatesAdmissible
+    canonicalSearchCoverage
+
 nonClosingCandidateOnly : List ProofSearch.SearchState
-nonClosingCandidateOnly =
-  ProofSearch.manyLemmasNoClosure ∷ []
+nonClosingCandidateOnly = ProofSearch.manyLemmasNoClosure ∷ []
+
+-- This complete domain is intentionally restricted to one declared admissible
+-- candidate.  Its negative result is therefore only about this bounded domain,
+-- not about all possible proof routes or theorem truth.
+nonClosingOnlyAdmissible : ProofSearch.SearchState → Set
+nonClosingOnlyAdmissible ProofSearch.manyLemmasNoClosure = ⊤
+nonClosingOnlyAdmissible ProofSearch.fewerLemmasTrueClosure = ⊥
+
+nonClosingOnlyCoverage :
+  (candidate : ProofSearch.SearchState) →
+  nonClosingOnlyAdmissible candidate →
+  candidate ∈ nonClosingCandidateOnly
+nonClosingOnlyCoverage ProofSearch.manyLemmasNoClosure admissible = here
+nonClosingOnlyCoverage ProofSearch.fewerLemmasTrueClosure ()
+
+nonClosingCompleteDomain : CompleteFiniteSearchDomain ProofSearch.SearchState
+nonClosingCompleteDomain =
+  completeFiniteSearchDomain
+    nonClosingCandidateOnly
+    nonClosingOnlyAdmissible
+    nonClosingOnlyCoverage
 
 canonicalCompleteSearchFindsClosure :
   finiteSearchDecisionTrit
     ProofSearch.authoritativeFrontierReduced
-    canonicalSearchCandidates
-    true
+    (completeFiniteScope canonicalCompleteDomain)
   ≡ pos
 canonicalCompleteSearchFindsClosure = refl
 
 completeNonClosingSearchIsNegative :
   finiteSearchDecisionTrit
     ProofSearch.authoritativeFrontierReduced
-    nonClosingCandidateOnly
-    true
+    (completeFiniteScope nonClosingCompleteDomain)
   ≡ neg
 completeNonClosingSearchIsNegative = refl
 
 incompleteNonClosingSearchStaysUnresolved :
   finiteSearchDecisionTrit
     ProofSearch.authoritativeFrontierReduced
-    nonClosingCandidateOnly
-    false
+    (openFiniteScope nonClosingCandidateOnly)
   ≡ zer
 incompleteNonClosingSearchStaysUnresolved = refl
 
--- The same candidate evidence can therefore refine zer -> neg solely when an
--- explicit completeness/exhaustion coordinate becomes available.
+-- The same inspected candidate list can therefore refine zer -> neg only when
+-- a typed finite-domain coverage receipt is supplied.
 incompleteToCompleteNegativeRefinement : Refinement.DecisionRefines zer neg
 incompleteToCompleteNegativeRefinement = Refinement.unresolvedBecomesNegative
 
--- And adding the paying candidate refines an unresolved search to positive.
+-- And adding a paying candidate can refine an unresolved search to positive.
 unresolvedToPositiveProofSearchRefinement : Refinement.DecisionRefines zer pos
 unresolvedToPositiveProofSearchRefinement = Refinement.unresolvedBecomesPositive
 
@@ -108,7 +163,8 @@ record ProofSearchDecisionPacket : Set where
 open ProofSearchDecisionPacket public
 
 -- A source-established, source-aligned theorem may remain certification debt
--- regardless of whether a local finite candidate search is still unresolved.
+-- regardless of whether a local finite candidate search is unresolved,
+-- successful, or exhausted within a declared bounded domain.
 canonicalDeferredUnresolvedPacket : ProofSearchDecisionPacket
 canonicalDeferredUnresolvedPacket =
   proofSearchDecisionPacket
@@ -155,8 +211,7 @@ data PositiveSearchMeansKernelCertified : Set where
 data UnresolvedSearchMeansMathematicalDebt : Set where
 data SearchDecisionReplacesDebtRouting : Set where
 data TheoremNameIsSearchWitness : Set where
-
-data IncompleteSearchFailureMayBeNegative : Set where
+data OpenSearchFailureMayBeNegative : Set where
 
 negativeFiniteSearchDoesNotMeanTheoremFalse :
   NegativeFiniteSearchMeansTheoremFalse → ⊥
@@ -178,15 +233,15 @@ theoremNameDoesNotBecomeSearchWitness :
   TheoremNameIsSearchWitness → ⊥
 theoremNameDoesNotBecomeSearchWitness ()
 
-incompleteFailureCannotBePromotedNegative :
-  IncompleteSearchFailureMayBeNegative → ⊥
-incompleteFailureCannotBePromotedNegative ()
+openSearchFailureCannotBePromotedNegative :
+  OpenSearchFailureMayBeNegative → ⊥
+openSearchFailureCannotBePromotedNegative ()
 
 record TernaryProofSearchDecisionDebtBoundary : Set where
   constructor ternaryProofSearchDecisionDebtBoundary
   field
     positiveMeansPayingCandidateFound : Bool
-    negativeRequiresCompleteFiniteSearch : Bool
+    negativeRequiresTypedFiniteCoverage : Bool
     incompleteNoCandidateStaysUnresolved : Bool
     searchStatusSeparateFromTheoremTruth : Bool
     searchStatusSeparateFromCertification : Bool
