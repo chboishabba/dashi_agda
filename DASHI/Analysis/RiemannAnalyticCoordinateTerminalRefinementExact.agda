@@ -2,6 +2,7 @@ module DASHI.Analysis.RiemannAnalyticCoordinateTerminalRefinementExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -20,11 +21,11 @@ import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 --   criticalLine(s) <-> realPart(s) = half,
 --
 -- together with constructive stability of equality-to-half and the published
--- verified-region theorem expressed on that same coordinate.  From this single
+-- verified-region theorem expressed on that same coordinate. From this single
 -- package we compile both the canonical Platt--Trudgian low transport and the
 -- CriticalLinePredicateRefinement used by the positive-RH compiler.
 --
--- The package is theorem-bearing.  Source metadata alone cannot construct it.
+-- The package is theorem-bearing. Source metadata alone cannot construct it.
 ------------------------------------------------------------------------
 
 record AnalyticCoordinateTerminalRefinement
@@ -75,10 +76,6 @@ record AnalyticCoordinateTerminalRefinement
 
 open AnalyticCoordinateTerminalRefinement public
 
-------------------------------------------------------------------------
--- Shared coordinate -> canonical low transport.
-------------------------------------------------------------------------
-
 compilePlattTrudgianVerifiedRegionTransport :
   forall {analytic} ->
   AnalyticCoordinateTerminalRefinement analytic ->
@@ -87,7 +84,7 @@ compilePlattTrudgianVerifiedRegionTransport refinement = record
   { Low.WithinPublishedVerifiedHeight =
       WithinPublishedVerifiedHeight refinement
   ; Low.publishedVerifiedHeightCritical =
-      lambda rho within ->
+      λ rho within ->
         halfImpliesCriticalLine refinement
           (Universal.point rho)
           (publishedVerifiedHeightHasHalfRealPart refinement rho within)
@@ -99,17 +96,13 @@ compilePlattTrudgianVerifiedRegionTransport refinement = record
   ; Low.transportReference = refinementReference refinement
   }
 
-------------------------------------------------------------------------
--- Shared coordinate -> exact critical-line predicate refinement/stability.
-------------------------------------------------------------------------
-
 compileCriticalLinePredicateRefinement :
   forall {analytic} ->
   AnalyticCoordinateTerminalRefinement analytic ->
   Stability.CriticalLinePredicateRefinement analytic
 compileCriticalLinePredicateRefinement {analytic} refinement = record
   { Stability.CriticalLinePredicateRefinement.RefinedCritical =
-      lambda s ->
+      λ s ->
         Analytic.ComplexAnalyticCarrier.realPart
           (Analytic.AnalyticSubstrate.carrier analytic) s
         ≡ half refinement
@@ -118,7 +111,7 @@ compileCriticalLinePredicateRefinement {analytic} refinement = record
   ; Stability.CriticalLinePredicateRefinement.refinedImpliesAbstract =
       halfImpliesCriticalLine refinement
   ; Stability.CriticalLinePredicateRefinement.refinedCriticalStable =
-      lambda s ->
+      λ s ->
         equalityToHalfStable refinement
           (Analytic.ComplexAnalyticCarrier.realPart
             (Analytic.AnalyticSubstrate.carrier analytic) s)
@@ -137,10 +130,6 @@ compileCriticalLineStable :
 compileCriticalLineStable refinement =
   Stability.compileCriticalLineStable
     (compileCriticalLinePredicateRefinement refinement)
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
 
 record AnalyticCoordinateTerminalRefinementBoundary : Set where
   constructor analytic-coordinate-terminal-refinement-boundary
