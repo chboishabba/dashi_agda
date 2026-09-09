@@ -18,6 +18,8 @@ import DASHI.Biology.Levin.ProblemSpaceAgency
 import DASHI.Biology.Levin.ConstitutiveInteractiveAutonomy
 import DASHI.Biology.Levin.BiologicalComputationalConsciousnessBoundary
 import DASHI.Biology.PrebioticChemistryLifeInevitabilityBidiExact
+import DASHI.Biology.LogisticPopulationDirectionalEvidenceExact
+import DASHI.Biology.LogisticAgenticPrebioticCrossPollinationExact
 
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.DeclaredRealisedInteractionTopologyExact
