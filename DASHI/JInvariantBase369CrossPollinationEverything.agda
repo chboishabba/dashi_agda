@@ -18,25 +18,23 @@ import DASHI.Moonshine.JInvariantOrderThreeScaleGlobalInjectiveExact
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
+import DASHI.Moonshine.JInvariantAnalyticJCoarseFineFrickeIntertwinerExact
 
 -- RH relation-pattern reuse: retain full fine residual by default and quotient
 -- only under a declared consumer-sufficiency proof.
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 
 -- Rendered acquisition is split into image->analytic and analytic->structured
--- stages.  Pixel uncertainty remains a fibre.  Once a calibration determines
--- an exact D_k scale, global injectivity of D_k=k^2+k+1 makes orbit uniqueness
--- compiler-owned for all Nat.  The visible k=0..7 compiler remains as the
--- regression/specialisation for the currently annotated beam.
--- The tri-BIDI governance owner cross-pollinates this with the existing RH
--- hidden-residual rule and light-transport side-information firewall at exact
--- certificate-schema strength only: no theorem is transferred between lanes.
--- Once analytic structured/scale producers exist, the same-object compiler
--- emits local 27, k, D_k and the L^kT word packet immediately.
+-- stages. Pixel uncertainty remains a fibre. Once a calibration determines an
+-- exact D_k scale, global injectivity of D_k=k^2+k+1 makes orbit uniqueness
+-- compiler-owned for all Nat. The concrete rendered-scale fixture closes the
+-- executable protocol without pretending that an external raster has itself
+-- been metrologically calibrated in Agda.
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
 import DASHI.Moonshine.JInvariantRenderedVisibleScaleCompilerBidiExact
 import DASHI.Moonshine.JInvariantRenderedGlobalScaleCompilerBidiExact
+import DASHI.Moonshine.JInvariantRenderedScaleCalibrationFixtureExact
 import DASHI.Moonshine.JInvariantRenderedResidualGovernanceTriBidiExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredSeamCompilerBidiExact
 
@@ -53,6 +51,7 @@ import DASHI.Moonshine.QuadraticSignedApproximationEverything
 
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact
 import DASHI.Moonshine.MonsterGradedSignedFibreBidiExact
+import DASHI.Moonshine.MonsterGraded3BPhaseFibreIntertwinerExact
 import DASHI.Moonshine.JInvariantBase369RoadmapFrontierExact
 
 import DASHI.Foundations.Base369MobiusTransport
