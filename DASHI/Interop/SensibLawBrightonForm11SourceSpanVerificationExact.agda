@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Algebra.Trit as Trit
 import DASHI.Interop.SensibLawNatSourceSupportAcquisitionExact as Source
 import DASHI.Interop.SensibLawNatSourcePropositionVerificationExact as Verify
+import DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact as Ternary
 
 ------------------------------------------------------------------------
 -- BRIGHTON FORM 11 PRIVATE-SOURCE SPAN VERIFICATION
@@ -30,7 +31,7 @@ form11ArtifactSha256 =
 
 form11ArtifactReceiptReference : String
 form11ArtifactReceiptReference =
-  "private Brighton completed Form11 artifact @ " <> form11ArtifactSha256
+  "private Brighton completed Form11 artifact @ sha256:bb998cb9c2777165d19339db91db798e00e66e838a162a14e2fe8de67599e982"
 
 form11EvidenceLocator : String
 form11EvidenceLocator =
@@ -90,8 +91,7 @@ form11SupportTritPositive :
 form11SupportTritPositive = refl
 
 form11AuthorityStillOpen :
-  Verify.authorityState form11Admission
-  ≡ DASHI.Interop.SensibLawWikidataBalancedTernaryAdmissibilityHyperfabricExact.open
+  Verify.authorityState form11Admission ≡ Ternary.open
 form11AuthorityStillOpen = refl
 
 ------------------------------------------------------------------------
