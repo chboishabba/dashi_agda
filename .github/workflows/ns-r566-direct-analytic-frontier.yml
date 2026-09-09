@@ -1,0 +1,63 @@
+name: NS R406 direct analytic frontier R565-R572
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNSelfFluxTemporalReconciliationRound565Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFactoredFullAnalyticFrontierRound566Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFactoredFullTransposeSymmetryRound566Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFactoredFullCommutatorOnlyRound567Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralFactoredFullSpacetimeBudgetRound567Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFactoredFullCommutatorBudgetBidiRound570Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiveGlobalSelfFluxEndpointWeldRound568Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiveSelfGramAndFluxOrderRound571Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNDirectLeafACompilerRound572Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLiteralR406DirectAnalyticFrontierEverythingRound569Exact.agda'
+      - '.github/workflows/ns-r566-direct-analytic-frontier.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  direct-analytic-frontier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check temporal reconciliation R565
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNSelfFluxTemporalReconciliationRound565Exact.agda
+
+      - name: Type-check direct analytic and transpose reductions R566-R567
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNFactoredFullAnalyticFrontierRound566Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNFactoredFullTransposeSymmetryRound566Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNFactoredFullCommutatorOnlyRound567Exact.agda
+
+      - name: Type-check exact factored and commutator-only budget surfaces
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralFactoredFullSpacetimeBudgetRound567Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNFactoredFullCommutatorBudgetBidiRound570Exact.agda
+
+      - name: Type-check self-flux endpoint and tangent welds
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiveGlobalSelfFluxEndpointWeldRound568Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact.agda
+
+      - name: Type-check live order boundary and direct R503 compiler
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiveSelfGramAndFluxOrderRound571Exact.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNDirectLeafACompilerRound572Exact.agda
+
+      - name: Type-check focused analytic frontier aggregate R569
+        run: nix develop .# --command bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNLiteralR406DirectAnalyticFrontierEverythingRound569Exact.agda
