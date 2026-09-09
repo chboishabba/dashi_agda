@@ -8,6 +8,7 @@ import DASHI.Physics.GR.SignedEinsteinCouplingSourceDegeneracyBidiExact as Signe
 import DASHI.Physics.GR.SignedGRNormalizationBidiExact as Normalization
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingBidiExact as NegativeG
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGPairedComparatorExact as Paired
+import DASHI.Physics.ExoticGravity.AntigravityNegativeGClaimComparisonWeldExact as ComparisonWeld
 
 ------------------------------------------------------------------------
 -- SIGN ALGEBRA
@@ -42,6 +43,12 @@ negativeGDoesNotAutomaticallyPreserveBoundOrbitBackground :
     SignedG.canonicalSignedEinsteinCouplingBoundary
     ≡ false
 negativeGDoesNotAutomaticallyPreserveBoundOrbitBackground = refl
+
+selfConsistentNegativeGNeedsStabilityAnalysis :
+  SignedG.selfConsistentNegativeGRequiresStabilityAnalysis
+    SignedG.canonicalSignedEinsteinCouplingBoundary
+    ≡ true
+selfConsistentNegativeGNeedsStabilityAnalysis = refl
 
 ------------------------------------------------------------------------
 -- GR NORMALIZATION BIDI
@@ -170,3 +177,37 @@ betterNegativeGFitDoesNotProveAntigravity :
     Paired.canonicalSignedGPairedComparatorBoundary
     ≡ false
 betterNegativeGFitDoesNotProveAntigravity = refl
+
+------------------------------------------------------------------------
+-- EXACT NEGATIVE-G SLOT WELD INTO CLAIM COMPARISON
+------------------------------------------------------------------------
+
+genericModifiedSlotDoesNotMeanNegativeG :
+  ComparisonWeld.genericModifiedGravitySlotAutomaticallyMeansNegativeG
+    ComparisonWeld.canonicalNegativeGClaimComparisonBoundary
+    ≡ false
+genericModifiedSlotDoesNotMeanNegativeG = refl
+
+positiveGOrdinarySlotIdentityRequired :
+  ComparisonWeld.exactPositiveGOrdinarySlotIdentityRequired
+    ComparisonWeld.canonicalNegativeGClaimComparisonBoundary
+    ≡ true
+positiveGOrdinarySlotIdentityRequired = refl
+
+negativeGAlternativeSlotIdentityRequired :
+  ComparisonWeld.exactNegativeGAlternativeSlotIdentityRequired
+    ComparisonWeld.canonicalNegativeGClaimComparisonBoundary
+    ≡ true
+negativeGAlternativeSlotIdentityRequired = refl
+
+negativeGComparisonCannotReuseUnrelatedModifiedPrediction :
+  ComparisonWeld.negativeGComparisonMayReuseUnrelatedModifiedPrediction
+    ComparisonWeld.canonicalNegativeGClaimComparisonBoundary
+    ≡ false
+negativeGComparisonCannotReuseUnrelatedModifiedPrediction = refl
+
+negativeGComparisonStillDoesNotProveAntigravity :
+  ComparisonWeld.negativeGComparisonAutomaticallyProvesAntigravity
+    ComparisonWeld.canonicalNegativeGClaimComparisonBoundary
+    ≡ false
+negativeGComparisonStillDoesNotProveAntigravity = refl
