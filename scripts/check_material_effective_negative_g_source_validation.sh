@@ -6,6 +6,7 @@ cd "$root"
 files=(
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGModelProvenanceBidiExact.agda
@@ -47,8 +48,9 @@ grep -q 'compileConstitutiveNegativeGReceipt' DASHI/Physics/ExoticGravity/Materi
 grep -q 'identityWeldMayCompileExistingNegativeGWeld' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
 grep -q 'closedScalingStateAutomaticallyProvesNegativeEffectiveG' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
 grep -q 'currentScientificWallStartsAtMassCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
-grep -q 'eachMissingReceiptNeedsCollisionJustification' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
-grep -q 'empiricalPaymentsStillNeedCarrierSensitiveProvenance' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
+grep -q 'currentScientificWallProducerIsEmpiricalEvidence' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
+grep -q 'closedWallHasNoFurtherAcquisition' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
+grep -q 'closedWallProducerIsNoSearch' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
 grep -q 'authorityClosurePaysSourceCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
