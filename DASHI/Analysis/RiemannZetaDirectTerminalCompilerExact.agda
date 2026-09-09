@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2PoleQuotientOffAllowanceDirectCompilerExact as Off
 import DASHI.Analysis.RiemannG2PoleQuotientGammaAllowanceDirectCompilerExact as Gamma
+import DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact as Payment
 import DASHI.Analysis.RiemannAristotlePoleQuotientSplitComplementBudgetExact as Split
 import DASHI.Analysis.RiemannAristotlePoleQuotientClusterMarginTargetExact as Cluster
 import DASHI.Analysis.RiemannG2FinalSplitComplementOrderTransportCompilerExact as Final
@@ -43,14 +44,12 @@ record DirectTerminalRHPacket : Set₂ where
 open DirectTerminalRHPacket public
 
 compiledOffPayment :
-  (packet : DirectTerminalRHPacket) →
-  DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact.PoleQuotientOffAllowancePayment
+  DirectTerminalRHPacket → Payment.PoleQuotientOffAllowancePayment
 compiledOffPayment packet =
   Off.compilePoleQuotientOffAllowancePayment (offInput packet)
 
 compiledGammaPayment :
-  (packet : DirectTerminalRHPacket) →
-  DASHI.Analysis.RiemannG2PoleQuotientProducerAllowanceTargetExact.PoleQuotientGammaAllowancePayment
+  DirectTerminalRHPacket → Payment.PoleQuotientGammaAllowancePayment
 compiledGammaPayment packet =
   Gamma.compilePoleQuotientGammaAllowancePayment (gammaInput packet)
 
