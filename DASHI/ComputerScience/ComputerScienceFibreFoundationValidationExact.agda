@@ -59,4 +59,5 @@ import DASHI.ComputerScience.TernaryDecisionCertificationProductExact
 
 import DASHI.ComputerScience.GodelTuringNamedLimitsSourceStatusAtlasExact
 import DASHI.ComputerScience.GodelDiagonalProvabilityContractExact
+import DASHI.ComputerScience.GodelArithmetisedSubstitutionCompilerExact
 import DASHI.ComputerScience.GodelNamedLimitsProofDebtBridgeExact
