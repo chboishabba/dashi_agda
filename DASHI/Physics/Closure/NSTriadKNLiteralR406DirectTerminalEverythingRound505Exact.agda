@@ -90,20 +90,29 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --
 --       FactoredFull = Diagonal + 2 * LiteralWeightedRemainder.
 --
--- R548 isolates the diagonal semantic question. R549 resolves its first exact
--- layer by specializing the existing R290 weighted-flux identity to self pairs:
+-- Two diagonal-audit generations are retained. The earlier semantic-boundary
+-- owners keep fail-closed archaeology. The newer direct tranche R548-R559 is
+-- the preferred leaf-A route:
 --
---   Diagonal = SelfGram + WeightedGramFluxTangent.
+--   R548  nonlinear diagonal = self-Gram + self-flux tangent;
+--   R549  self flux = 2 * the already-owned R447 Cauchy diagonal;
+--   R550  finite diagonal sum = self-Gram sum + self-flux-tangent sum;
+--   R551  2R = factoredFull - selfGram - selfFluxTangent;
+--   R552  R495 integrates that identity without adding a second integration API;
+--   R553  FTC + nonnegativity make selfGram and terminal selfFlux favourable;
+--   R554  per-output selfFlux is nonnegative and energy-square controlled;
+--   R555  aggregates across outputs using the SAME R398 positivity witnesses;
+--   R556  specializes to the literal live R406 trajectory slice;
+--   R557  integrates the live global identity;
+--   R558  bounds global selfFlux with no output-cardinality tax;
+--   R559  reuses R416/R417/R418/R412/R422/R425/R427 for actual differentiation
+--         of the finite self-flux once the literal self-pair curves are welded.
 --
--- R550 reuses R400 to construct self-pair positivity and R456/R457 to identify
--- SelfGram exactly with twice the normalized double-mixed mass, hence inheriting
--- the existing 48 E_N^2 control with no cardinality tax.
---
--- R551 then reuses the already-owned R393 temporal integration/FTC authority.
--- No second FTC interface is introduced: once the time-indexed literal self flux
--- and tangent are welded to R393's flux/tangent slots, the integral of the
--- tangent is exactly final-minus-initial endpoint flux. The remaining diagonal
--- debt is therefore a same-object trajectory weld, not a new integration theory.
+-- Thus the remaining diagonal temporal seam is not new calculus. It is the
+-- same-object enumeration of fixed-resolvent self-pair curves on the live R408
+-- trajectory, followed by ordinary scalar FTC. The principal analytic leaf-A
+-- wall remains the cutoff-uniform spacetime upper bound for the literal global
+-- spectator-resolvent commutator/amplitude expression.
 --
 -- Neither introspection nor any BIDI manufactures analytic payment. Clay
 -- promotion remains fail-closed.
@@ -173,7 +182,23 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Ex
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545Exact
 import DASHI.Physics.Closure.NSTriadKNFullSquareAsSpectatorRowsRound546Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact
+
+-- Retained first-generation diagonal audit owners.
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSemanticBoundaryRound548Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalR290FluxDecompositionRound549Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSelfGramEnergyControlRound550Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalFluxEndpointReuseRound551Exact
+
+-- Preferred direct diagonal reduction and live temporal path.
+import DASHI.Physics.Closure.NSTriadKNDiagonalWeightedRemainderDecompositionRound548Exact
+import DASHI.Physics.Closure.NSTriadKNDiagonalSelfFluxToR447Round549Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralDiagonalSumDecompositionRound550Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalReducedNormalFormRound551Exact
+import DASHI.Physics.Closure.NSTriadKNIntegratedDiagonalReducedNormalFormRound552Exact
+import DASHI.Physics.Closure.NSTriadKNFavorableDiagonalTemporalUpperRound553Exact
+import DASHI.Physics.Closure.NSTriadKNDiagonalSelfFluxEndpointCompilerRound554Exact
+import DASHI.Physics.Closure.NSTriadKNGlobalDiagonalReducedNormalFormRound555Exact
+import DASHI.Physics.Closure.NSTriadKNLiveR406DiagonalReducedNormalFormRound556Exact
+import DASHI.Physics.Closure.NSTriadKNLiveIntegratedDiagonalReducedNormalFormRound557Exact
+import DASHI.Physics.Closure.NSTriadKNGlobalSelfFluxEndpointRound558Exact
+import DASHI.Physics.Closure.NSTriadKNLiteralSelfFluxFiniteDerivativeCompilerRound559Exact
