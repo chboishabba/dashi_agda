@@ -45,7 +45,9 @@ macroStepHiGeLo :
   (pair : Ratio.PositiveFibPair) →
   Ratio.positiveLo (Ratio.positiveFibTwoStep pair)
   ≤ Ratio.positiveHi (Ratio.positiveFibTwoStep pair)
-macroStepHiGeLo pair =
+macroStepHiGeLo pair
+  rewrite Norm.twoStepLoFormula pair
+        | Norm.twoStepHiFormula pair =
   let
     p = Ratio.positiveHi pair
     q = Ratio.positiveLo pair
@@ -57,32 +59,15 @@ macroStepHiGeLo pair =
         (λ p q → (p :+ q) :+ p := (p :+ p) :+ q)
         refl p q
   in
-  NatP.≤-trans
-    raw
-    (NatP.≤-reflexive rearrange)
-  where
-  open Norm using (twoStepHiFormula; twoStepLoFormula)
+  NatP.≤-trans raw (NatP.≤-reflexive rearrange)
 
 macroHiGeLo :
   (n : Nat) →
   Ratio.positiveLo (Ratio.iteratePositiveMacro n)
   ≤ Ratio.positiveHi (Ratio.iteratePositiveMacro n)
 macroHiGeLo zero = s≤s z≤n
-macroHiGeLo (suc n)
-  rewrite Norm.twoStepLoFormula (Ratio.iteratePositiveMacro n)
-        | Norm.twoStepHiFormula (Ratio.iteratePositiveMacro n) =
-  let
-    p = Ratio.positiveHi (Ratio.iteratePositiveMacro n)
-    q = Ratio.positiveLo (Ratio.iteratePositiveMacro n)
-    raw : p + q ≤ (p + q) + p
-    raw = NatP.m≤m+n (p + q) p
-    rearrange : (p + q) + p ≡ p + p + q
-    rearrange =
-      solve 2
-        (λ p q → (p :+ q) :+ p := (p :+ p) :+ q)
-        refl p q
-  in
-  NatP.≤-trans raw (NatP.≤-reflexive rearrange)
+macroHiGeLo (suc n) =
+  macroStepHiGeLo (Ratio.iteratePositiveMacro n)
 
 ------------------------------------------------------------------------
 -- 2. Therefore one <= every rational/Bishop macro ratio.
