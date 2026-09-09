@@ -1,12 +1,5 @@
 module DASHI.Moonshine.GoldenRatioBalancedFRACTRANReciprocalSquareConvergenceExact where
 
-------------------------------------------------------------------------
--- 1/q_n^2 -> 0 ON THE VENDORED BISHOP CARRIER
---
--- Reuse the exact denominator lower bound q_n >= n+1 and the same rational
--- order/embedding pattern already used by the Bishop Basel owner.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Integer.Base using (+_)
 import Data.Nat.Properties as NatP
@@ -21,11 +14,6 @@ import Sequence as BishopSequence
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANBishopRatioCarrierExact as Ratio
 import DASHI.Moonshine.GoldenRatioBalancedFRACTRANDenominatorGrowthExact as Growth
 
-------------------------------------------------------------------------
--- 1. Write the denominator definitionally as a successor, so NonZero is
---    available to the unnormalised rational constructor.
-------------------------------------------------------------------------
-
 denominatorPred : Nat → Nat
 denominatorPred n = Ratio.loPred (Ratio.iteratePositiveMacro n)
 
@@ -37,30 +25,20 @@ denominatorAgrees :
 denominatorAgrees n = refl
 
 reciprocalSquareRational : Nat → ℚᵘ
-reciprocalSquareRational n =
-  + 1 / (denominatorNat n * denominatorNat n)
+reciprocalSquareRational n = + 1 / (denominatorNat n * denominatorNat n)
 
 reciprocalSquareBishop : Nat → BishopReal.ℝ
 reciprocalSquareBishop n = BishopReal._⋆ (reciprocalSquareRational n)
 
-------------------------------------------------------------------------
--- 2. Elementary denominator comparison.
-------------------------------------------------------------------------
-
-oneLeDenominator : (n : Nat) → 1 NatP.≤ denominatorNat n
-oneLeDenominator n = NatP.0<⇒1≤n NatP.0<1+n
-
+-- q_n is definitionally positive, so the standard positive-factor lemma gives
+-- q_n <= q_n*q_n directly.
 denominatorLeSquare :
   (n : Nat) → denominatorNat n NatP.≤ denominatorNat n * denominatorNat n
 denominatorLeSquare n =
-  NatP.≤-trans
-    (NatP.*-identityʳ (denominatorNat n) NatP.≡⇒≤)
-    (NatP.*-monoʳ-≤ (denominatorNat n) (oneLeDenominator n))
+  NatP.m≤m*n (denominatorNat n) (denominatorNat n)
 
--- At any sequence index n >= k, the squared denominator is at least k.
 precisionBoundToDenominatorSquare :
-  (k n : Nat) →
-  k NatP.≤ n →
+  (k n : Nat) → k NatP.≤ n →
   k NatP.≤ denominatorNat n * denominatorNat n
 precisionBoundToDenominatorSquare k n k≤n =
   NatP.≤-trans
@@ -70,10 +48,6 @@ precisionBoundToDenominatorSquare k n k≤n =
       (NatP.≤-trans
         (Growth.linearDenominatorLowerBound n)
         (denominatorLeSquare n)))
-
-------------------------------------------------------------------------
--- 3. Positivity/absolute value and Bishop convergence.
-------------------------------------------------------------------------
 
 reciprocalSquareNonnegative :
   (n : Nat) → BishopReal.NonNegative (reciprocalSquareBishop n)
@@ -128,10 +102,6 @@ reciprocalSquareSequenceConvergesZero =
             (BishopP.+-identityʳ (reciprocalSquareBishop n)))
           (absoluteReciprocalSquare n))
         embeddedOrder }}
-
-------------------------------------------------------------------------
--- 4. Frontier.
-------------------------------------------------------------------------
 
 record ReciprocalSquareConvergenceFrontier : Set where
   constructor reciprocal-square-convergence-frontier
