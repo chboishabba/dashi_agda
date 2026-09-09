@@ -32,6 +32,7 @@ FILES=(
   DASHI/Analysis/RiemannG2LiteralComplementDirectTargetExact.agda
   DASHI/Analysis/RiemannG2DirectIndependentComplementMarginExact.agda
   DASHI/Analysis/RiemannG2DirectComplementUnpaidContextExact.agda
+  DASHI/Analysis/RiemannG2BalanceFreeComplementContextExact.agda
   DASHI/Analysis/RiemannG2UniformIndependentComplementHighProducerExact.agda
   DASHI/Analysis/RiemannCriticalLineStabilityRefinementExact.agda
   DASHI/Analysis/RiemannG2ProofRelevantTargetTranslationModulationExact.agda
