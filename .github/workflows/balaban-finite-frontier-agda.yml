@@ -54,6 +54,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanLangevinPhysicalHessianSourceRecutRound263Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP109LangevinTypedSecondVariationRound267Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanLangevinAnchoredInfluenceRound268Exact.agda'
+      - 'DASHI/Physics/YangMills/Everything.agda'
       - '.github/workflows/balaban-finite-frontier-agda.yml'
 
 concurrency:
@@ -83,6 +84,7 @@ jobs:
             DASHI/Physics/YangMills/BalabanLangevinPhysicalHessianSourceRecutRound263Exact.agda \
             DASHI/Physics/YangMills/BalabanCMP109LangevinTypedSecondVariationRound267Exact.agda \
             DASHI/Physics/YangMills/BalabanLangevinAnchoredInfluenceRound268Exact.agda \
+            DASHI/Physics/YangMills/Everything.agda \
             DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda \
             DASHI/Physics/YangMills/BalabanGeometricPowerVanishing.agda \
             DASHI/Physics/YangMills/BalabanUniformResidualMajorant.agda \
