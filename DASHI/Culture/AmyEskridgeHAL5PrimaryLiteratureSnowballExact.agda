@@ -13,9 +13,10 @@ import DASHI.Culture.AmyEskridgeMechanismAssociationProvenanceExact as Assoc
 --   (1) what Amy's official HAL5 deck actually mentions;
 --   (2) an independently attributable primary publication for that historical
 --       mechanism family when one has been identified;
---   (3) whether DASHI has inspected an exact theorem/equation carrier.
+--   (3) whether DASHI has inspected only bibliographic identity, a publisher /
+--       author abstract, or an exact theorem/equation/full-text carrier.
 --
--- A source row may be accumulated before all downstream physics debts are paid.
+-- A source row may accumulate before downstream physics debts are paid.
 -- Amy's deck does not become the primary paper, and the primary paper does not
 -- become an Amy-authored result.
 ------------------------------------------------------------------------
@@ -39,8 +40,10 @@ record AmyPrimaryLiteratureSnowballAtom : Set where
     primaryTitle : String
     primaryPublication : String
     primaryDOI : String
+    primaryLocator : String
     relation : PrimaryRelation
     inspectionStatus : PrimaryInspectionStatus
+    boundedPrimaryClaim : String
     sourceRoleBoundary : String
 
 open AmyPrimaryLiteratureSnowballAtom public
@@ -54,8 +57,10 @@ liTorr1991Atom =
     "Effects of a gravitomagnetic field on pure superconductors"
     "Physical Review D 43, 457 (1991)"
     "10.1103/PhysRevD.43.457"
+    "APS DOI landing page / published abstract"
     historicalMechanismPrimarySource
     abstractInspected
+    "Primary abstract studies effects of a pure superconductor on external gravitomagnetic and magnetic fields and their mutual induced perturbation fields"
     "Amy discusses Li-Torr historically; Li and Torr own the primary paper; DASHI owns any modern source/mass-current reconstruction"
 
 liTorr1992Atom : AmyPrimaryLiteratureSnowballAtom
@@ -67,8 +72,10 @@ liTorr1992Atom =
     "Gravitational effects on the magnetic attenuation of superconductors"
     "Physical Review B 46, 5489 (1992)"
     "10.1103/PhysRevB.46.5489"
+    "APS DOI landing page / published abstract"
     historicalMechanismPrimarySource
     abstractInspected
+    "Primary abstract studies gravitational effects in a theoretical sigma-mu superconducting model and their possible importance"
     "Amy discussion != Li/Torr authorship transfer; primary theory != experimental validation"
 
 podkletnov1992Atom : AmyPrimaryLiteratureSnowballAtom
@@ -80,9 +87,11 @@ podkletnov1992Atom =
     "A possibility of gravitational force shielding by bulk YBa2Cu3O7-x superconductor"
     "Physica C 203 (1992) 441-444"
     "10.1016/0921-4534(92)90055-H"
+    "ScienceDirect primary article landing page / published abstract"
     historicalMechanismPrimarySource
     abstractInspected
-    "Records the published shielding/weight-loss claim as Podkletnov/Nieminen's result; Amy's slide is evidence only that she discussed that claim"
+    "Publisher abstract: dense bulk YBCO below 77 K; 5.48 g nonconducting nonmagnetic test sample above a levitating superconducting disk; electro-optical balance; authors report 0.05-0.3 percent apparent weight loss depending on disk rotation speed"
+    "Published shielding/weight-loss claim belongs to Podkletnov/Nieminen; Amy's slide is evidence only that she discussed that historical claim"
 
 woodward1992Atom : AmyPrimaryLiteratureSnowballAtom
 woodward1992Atom =
@@ -93,9 +102,11 @@ woodward1992Atom =
     "A stationary apparent weight shift from a transient Machian mass fluctuation"
     "Foundations of Physics Letters 5 (1992) 425-442"
     "10.1007/BF00690424"
+    "DOI-indexed publication record plus author-hosted abstract surface"
     historicalMechanismPrimarySource
-    bibliographicIdentityOnly
-    "Amy's Woodward/Mach slide seeds this primary-source route; no exact equation or experimental claim is imported until the paper carrier is inspected"
+    abstractInspected
+    "Available abstract states that a transient mass fluctuation predicted by Lorentz-invariant gravitational theories with gravitationally induced inertia can be combined with synchronous thrust to produce a stationary apparent-weight change; it states the detailed derivation is in an appendix"
+    "Amy's Woodward/Mach slide seeds the primary-source route; abstract inspection does not import the appendix derivation or any equation into DASHI"
 
 ------------------------------------------------------------------------
 -- Snowball semantics: bibliographic/source atoms may accumulate before a
@@ -108,11 +119,13 @@ record AmyPrimaryLiteratureSnowballBoundary : Set where
     amyDeckMentionEqualsPrimaryPaperAuthorship : Bool
     primaryPaperEqualsAmyEndorsement : Bool
     bibliographicIdentityEqualsExactEquationInspection : Bool
+    abstractInspectionEqualsFullTextInspection : Bool
     abstractInspectionEqualsExperimentalReplication : Bool
+    reportedPrimaryAnomalyEqualsEstablishedPhysicalEffect : Bool
     laterConstraintMayRewriteOriginalClaim : Bool
     atomsMayAccumulateOutOfDependencyOrder : Bool
     sourceRolesRemainDistinctDuringSnowball : Bool
 
 canonicalAmyPrimaryLiteratureSnowballBoundary : AmyPrimaryLiteratureSnowballBoundary
 canonicalAmyPrimaryLiteratureSnowballBoundary =
-  amy-primary-literature-snowball-boundary false false false false false true true
+  amy-primary-literature-snowball-boundary false false false false false false false true true
