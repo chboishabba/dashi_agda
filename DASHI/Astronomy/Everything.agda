@@ -5,13 +5,4 @@ open import DASHI.Astronomy.LocalGroupObservationFrameProvenanceExact public
 open import DASHI.Astronomy.LocalGroupFirstLightScientificClaimsExact public
 open import DASHI.Astronomy.LocalGroupFirstLightBenchmarkReceiptExact public
 open import DASHI.Astronomy.LocalGroupDigitalTwinBoundaryExact public
-open import DASHI.Astronomy.LocalGroupPaperScopeFirewallsExact public
-open import DASHI.Astronomy.LocalGroupAttributionRelationshipExact public
 open import DASHI.Astronomy.LocalGroupFrameMeasurementModelBidiExact public
-open import DASHI.Astronomy.LocalGroupPaperClaimAtlasExact public
-open import DASHI.Astronomy.LocalGroupFirstLightClaimGraphExact public
-open import DASHI.Astronomy.LocalGroupSourcePaperRegistryExact public
-open import DASHI.Astronomy.LocalGroupVerificationStatusExact public
-open import DASHI.Astronomy.LocalGroupFirstLightVerificationFrontierExact public
-open import DASHI.Astronomy.LocalGroupNoPromotionExact public
-open import DASHI.Astronomy.LocalGroupFirstLightStatusNote public
