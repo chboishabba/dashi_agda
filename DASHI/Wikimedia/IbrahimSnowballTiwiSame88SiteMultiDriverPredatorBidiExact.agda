@@ -19,7 +19,7 @@ import DASHI.Wikimedia.IbrahimSnowballTiwiBidiPrimarySourceDoiAttributionLedgerE
 --
 -- The 2015 Melville survey network is reused across several primary analyses.
 -- This pays a same-survey-network relation, not automatic row/sample identity
--- and not causal mediation.  Fire severity and feral-herbivore activity are
+-- and not causal mediation. Fire severity and feral-herbivore activity are
 -- treated as distinct upstream drivers of cat activity/abundance.
 ------------------------------------------------------------------------
 
@@ -46,8 +46,16 @@ same88SiteCoordinate = Traversal.dashi-knowledge-coordinate
   "DASHI/Wikimedia/IbrahimSnowballTiwiSame88SiteMultiDriverPredatorBidiExact.agda"
   "Melville 2015 88-site disturbance/predator/mammal survey network"
   "577.4 — savanna ecology; classification coordinate only"
-  "Q45874067; Q146; Q303877"
-  "DOI 10.1111/ddi.12522; DOI 10.1111/aec.12596; DOI 10.1071/WR19198; DOI 10.3389/fevo.2021.739550"
+  "Q45874067; Q146; Q303877; Q42710; Q10758650"
+  "DOI 10.1111/ddi.12522; DOI 10.1111/aec.12596; DOI 10.1071/WR19198; DOI 10.3389/fevo.2021.739550; DOI 10.1002/ece3.71622"
+
+same88AnimalEcologyCoordinate : Traversal.DashiKnowledgeCoordinate
+same88AnimalEcologyCoordinate = Traversal.dashi-knowledge-coordinate
+  "DASHI/Wikimedia/IbrahimSnowballTiwiSame88SiteMultiDriverPredatorBidiExact.agda"
+  "Melville mammal/predator environment consumer"
+  "591.7 — animal ecology, animals characteristic of specific environments"
+  "Q146; Q303877; Q42710; Q10758650; Q45874067"
+  "DOI 10.1071/WR19198; DOI 10.1111/ddi.12522; DOI 10.3389/fevo.2021.739550; DOI 10.1002/ece3.71622"
 
 record Same88SitePrimarySource : Set where
   constructor same-88-site-primary-source
@@ -59,6 +67,7 @@ record Same88SitePrimarySource : Set where
     identifier : String
     boundedClaim : String
     excludedPromotion : String
+    sourceStrength : Attribution.SourceStrength
     sourceOwner : Attribution.ClaimOwner
     sourceRemainsExternal : sourceOwner ≡ Attribution.externalSourceOwner
 
@@ -73,7 +82,7 @@ daviesEtAl2020 = same-88-site-primary-source
   "DOI 10.1071/WR19198"
   "Primary Melville analysis of existing 2015 data from 88 sites; feral-cat activity and abundance were highest under severe disturbance regimes characterised by high frequency of severe fire and high feral-herbivore activity."
   "Observational disturbance correlates and authors' mechanism interpretation do not by themselves prove fire->understorey->cat mediation, herbivore->understorey mediation, prey mortality, or management benefit."
-  Attribution.externalSourceOwner refl
+  Attribution.primaryPublicationRecord Attribution.externalSourceOwner refl
 
 daviesEtAl2018Decline : Same88SitePrimarySource
 daviesEtAl2018Decline = same-88-site-primary-source
@@ -84,7 +93,7 @@ daviesEtAl2018Decline = same-88-site-primary-source
   "DOI 10.1111/aec.12596"
   "Primary Melville resurvey: 88 sites revisited in 2015, 82 with both live- and camera-trapping, reporting substantial 2000-2002 to 2015 mammal declines and species-specific responses."
   "Population decline does not identify a unique causal driver and does not make all 88 site-level measurements interchangeable across papers."
-  Attribution.externalSourceOwner refl
+  Attribution.primaryPublicationRecord Attribution.externalSourceOwner refl
 
 ------------------------------------------------------------------------
 -- Same-network is stronger than same island, weaker than same row/sample.
@@ -172,6 +181,8 @@ data ManagementImplicationMeansBenefit : Set where
 data QidMeansLocalMeasurement : Set where
 data DOISetMeansJointModel : Set where
 
+data DeweyMeansEcologicalEvidence : Set where
+
 fireOnlyDoesNotRecoverPredatorState : FireOnlyRecoversPredatorState → ⊥
 fireOnlyDoesNotRecoverPredatorState ()
 
@@ -195,6 +206,9 @@ qidDoesNotMeanLocalMeasurement ()
 
 doiSetDoesNotMeanJointModel : DOISetMeansJointModel → ⊥
 doiSetDoesNotMeanJointModel ()
+
+deweyDoesNotMeanEcologicalEvidence : DeweyMeansEcologicalEvidence → ⊥
+deweyDoesNotMeanEcologicalEvidence ()
 
 ------------------------------------------------------------------------
 -- Snowball: acquisition may strengthen carrier identity out of order, but
