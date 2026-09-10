@@ -1,72 +1,73 @@
 module DASHI.Physics.Closure.NSPreOpenAIReleasePriorityAuditBidiExact where
 
 ------------------------------------------------------------------------
--- PRE-RELEASE PRIORITY AUDIT, REVISED FOR EXECUTION/CERTIFICATION STATUS
+-- PRE-RELEASE PRIORITY AUDIT / SOURCE-TERM ARCHAEOLOGY
 --
--- Critical correction:
---   a contemporaneous `...Closed = false` ledger bit is NOT a proof of the
---   mathematical negation of the corresponding theorem.  In this repository
---   such flags may encode promotion / verification / execution state.  In
---   particular, absence of a successful kernel run (including resource failure)
---   leaves source-level inhabitation undecided unless the source term itself is
---   inspected.
+-- Priority is tracked on three independent coordinates:
 --
--- Therefore priority has three independent coordinates:
+--   1. exact Clay statement present;
+--   2. theorem source inhabited on that exact carrier;
+--   3. certification / independent checking.
 --
---   1. Statement status: was the exact Clay theorem surface present?
---   2. Source inhabitation: did pre-release source already contain terms paying
---      every decisive analytic leaf on that exact carrier?
---   3. Certification status: was that source successfully checked by the
---      relevant kernel / CI?
+-- A false promotion bit does not prove mathematical non-inhabitation, while a
+-- true summary bit does not manufacture a theorem term.  We therefore inspect
+-- tempting historical artefacts at source level.
 --
--- A false promotion/closed flag can establish (3) was not promoted.  It cannot
--- by itself establish that (2) was false.
+-- DIRECTLY AUDITED PRE-2026-09-08 CANDIDATES
+-- ------------------------------------------
+-- * 2026-06-13 b009e8e... NSFinalStateReceipt:
+--   a local `globalRegularityClosed = true` summary bit coexists with an
+--   imported candidate passage whose theorem-facing global regularity/BKM/
+--   continuum coordinates are false.  Not a Clay proof term.
 --
--- Historical checkpoints:
---   2026-07-26 e8b4993... provides an exact compiler from a
---   GalerkinGlobalCompletion package to periodic Clay regularity.  The package
---   carries the difficult analytic coordinates as fields, so that compiler by
---   itself does not establish source inhabitation of those fields.
+-- * 2026-07-26 e8b4993... GalerkinCompletionEndpoint:
+--   exact compiler from a completed Galerkin package to periodic Clay B, but
+--   the package carries the hard analytic completion facts as fields.
 --
---   2026-09-08 05:05 +10 67831b2... records the R406 two-leaf terminal cutset
---   and has false closure/promotion ledger bits.  Those bits establish lack of
---   contemporaneous promotion/certification, not mathematical non-inhabitation.
---   The exact source terms upstream of those leaves must be audited separately.
+-- * 2026-08-05 044a3c0... finite Zeno cascade:
+--   finite total cascade time with bounded energy is proved as mechanism
+--   arithmetic; the source explicitly says it is not genuine-NS blowup.
 --
--- SOURCE-TERM ARCHAEOLOGY ADDED IN THIS REVISION
--- ----------------------------------------------
--- We inspected several tempting pre-release candidates directly rather than
--- inferring from their filenames or summary booleans:
+-- * 2026-08-07 95a5761... restart contradiction:
+--   final finite-maximal-time contradiction once Fujita--Kato restart,
+--   bounded approach and time-continuity inputs are supplied.  Conditional.
 --
--- * 2026-06-13 b009e8e... NSFinalStateReceipt sets a local summary bit
---   `globalRegularityClosed = true`, but the same historical state imports an
---   explicit candidate passage whose theorem-facing coordinates remain false:
---   global smooth regularity, BKM vorticity control, uniform L-infinity
---   vorticity control, continuum BKM passage and Clay closure.  Therefore the
---   summary bit is not a proof term for Clay A/B.
+-- * Round85 literal Fefferman-B proof-search root (pre-release):
+--   writes the end-to-end theorem term, but deliberately uses
+--   `--allow-unsolved-metas` and contains explicit `{!!}` holes in
+--   `standardGlobalContinuationSearch` and
+--   `finiteMaximalTimeContradictionSearch`.  Strong theorem architecture,
+--   not completed source inhabitation.
 --
--- * 2026-08-05 044a3c0... proves finite Zeno cascade time/energy arithmetic,
---   while explicitly stating that it is NOT a blowup construction for the
---   genuine Navier--Stokes equations.  It is genuine mechanism-priority
---   evidence, not a C/D witness.
+-- * 2026-08-20 Round105 phase-damping lane:
+--   genuinely proves the adverse heterochiral cell payment
+--       nu P <= 2 gamma A_+
+--   and its finite integrated consequence
+--       nu integral P <= 2 A_+(0) + 2 integral F_network,+.
+--   This is substantive pre-release analytic progress.  The same frontier
+--   explicitly leaves the complete physical weighted network-forcing budget
+--   open, so it is a PARTIAL physical payment rather than Clay A/B.
 --
--- * 2026-08-07 95a5761... proves the final finite-maximal-time restart
---   contradiction, but its authority boundary leaves Fujita--Kato restart,
---   bounded approach sequence and time-continuity producers absent.  It is a
---   conditional endpoint compiler, not an A/B proof.
+-- * 2026-09-01 b832530... full-data Clay theorem language:
+--   exact theorem language, explicitly no PDE proof.
 --
--- * 2026-09-01 b832530... defines the full-data Clay theorem language and
---   explicitly states that no PDE theorem is proved there.
+-- * 2026-09-02 a49e8d5... R423:
+--   exact signed quadratic-companion consumer; the cutoff-uniform signed
+--   companion budget remains the novel producer field.
 --
--- * 2026-09-02 a49e8d5... R423 identifies the cutoff-uniform signed quadratic-
---   companion budget as the remaining novel producer; that budget is a field of
---   the payment record rather than a constructed theorem.
+-- * 2026-09-08 05:05 +10 67831b2... R504:
+--   exact terminal two-leaf cutset with unpromoted closure ledger state.
 --
--- These audits refute those PARTICULAR artefacts as completed Clay proofs.
--- They do not prove that no other pre-release source term exists elsewhere.
+-- CONCLUSION BOUNDARY
+-- -------------------
+-- These inspections establish substantial pre-release mechanism, architecture,
+-- partial-analytic and conditional-endpoint priority evidence.  They refute
+-- THESE PARTICULAR artefacts as completed Clay proofs.  They do not prove that
+-- no other pre-release source term exists elsewhere, so the global historical
+-- priority question remains open to further source archaeology.
 --
--- Attribution firewall:
---   no later OpenAI source may be back-projected into a pre-release DASHI term.
+-- Attribution firewall: no post-release OpenAI theorem may be back-projected
+-- into a pre-release DASHI source term.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -79,7 +80,7 @@ import DASHI.Physics.Closure.NSTriadKNGalerkinCompletionEndpoint as Endpoint
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
 ------------------------------------------------------------------------
--- 1. Separate mathematical/source status from certification/promotion.
+-- 1. Mathematical/source status versus certification.
 ------------------------------------------------------------------------
 
 data SourceInhabitationStatus : Set where
@@ -113,10 +114,6 @@ priorityDecision
   (priority-evidence true true sourceNotInhabited cert) = priorityRefuted
 priorityDecision _ = priorityUnresolved
 
-------------------------------------------------------------------------
--- 2. July endpoint: exact conditional compiler, source payment unresolved.
-------------------------------------------------------------------------
-
 julyEndpointCompilerPresent : Bool
 julyEndpointCompilerPresent = Endpoint.galerkinToClayEndpointCompositionClosed
 
@@ -133,10 +130,6 @@ julyPriorityEvidence = priority-evidence
 julyPriorityCurrentlyUnresolved :
   priorityDecision julyPriorityEvidence ≡ priorityUnresolved
 julyPriorityCurrentlyUnresolved = refl
-
-------------------------------------------------------------------------
--- 3. R504: false closure bits are ledger state, not theorem negations.
-------------------------------------------------------------------------
 
 preReleaseR504SignedCrossClosureBit : Bool
 preReleaseR504SignedCrossClosureBit = R504.round504SignedCrossPaymentClosed
@@ -156,19 +149,22 @@ r504PriorityCurrentlyUnresolved :
 r504PriorityCurrentlyUnresolved = refl
 
 ------------------------------------------------------------------------
--- 4. Directly audited pre-release candidate artefacts.
+-- 2. Source-level candidate classification.
 ------------------------------------------------------------------------
 
 data HistoricalCandidateRole : Set where
   summaryReceipt : HistoricalCandidateRole
-  mechanismPrecursor : HistoricalCandidateRole
   conditionalEndpointCompiler : HistoricalCandidateRole
+  mechanismPrecursor : HistoricalCandidateRole
+  proofSearchWithExplicitHoles : HistoricalCandidateRole
+  partialPhysicalAnalyticPayment : HistoricalCandidateRole
   theoremLanguageOnly : HistoricalCandidateRole
   openAnalyticConsumer : HistoricalCandidateRole
 
 data HistoricalCandidateDecision : Set where
   notCompletedClayProof : HistoricalCandidateDecision
   mechanismPriorityEvidenceOnly : HistoricalCandidateDecision
+  partialAnalyticPriorityEvidenceOnly : HistoricalCandidateDecision
   stillRequiresSeparateSourceAudit : HistoricalCandidateDecision
 
 record AuditedHistoricalCandidate : Set where
@@ -186,6 +182,10 @@ june13GlobalRegularitySummaryAudit : AuditedHistoricalCandidate
 june13GlobalRegularitySummaryAudit = audited-historical-candidate
   true false true summaryReceipt notCompletedClayProof
 
+july26ConditionalEndpointAudit : AuditedHistoricalCandidate
+july26ConditionalEndpointAudit = audited-historical-candidate
+  true false true conditionalEndpointCompiler notCompletedClayProof
+
 august5ZenoCascadeAudit : AuditedHistoricalCandidate
 august5ZenoCascadeAudit = audited-historical-candidate
   true false true mechanismPrecursor mechanismPriorityEvidenceOnly
@@ -193,6 +193,14 @@ august5ZenoCascadeAudit = audited-historical-candidate
 august7RestartContradictionAudit : AuditedHistoricalCandidate
 august7RestartContradictionAudit = audited-historical-candidate
   true false true conditionalEndpointCompiler notCompletedClayProof
+
+round85LiteralClayProofSearchAudit : AuditedHistoricalCandidate
+round85LiteralClayProofSearchAudit = audited-historical-candidate
+  true false true proofSearchWithExplicitHoles notCompletedClayProof
+
+round105HeterochiralPhasePaymentAudit : AuditedHistoricalCandidate
+round105HeterochiralPhasePaymentAudit = audited-historical-candidate
+  true false true partialPhysicalAnalyticPayment partialAnalyticPriorityEvidenceOnly
 
 september1ClayLanguageAudit : AuditedHistoricalCandidate
 september1ClayLanguageAudit = audited-historical-candidate
@@ -202,48 +210,36 @@ september2R423SignedCompanionAudit : AuditedHistoricalCandidate
 september2R423SignedCompanionAudit = audited-historical-candidate
   true false true openAnalyticConsumer notCompletedClayProof
 
-allFiveAuditedCandidatesPreRelease : Bool
-allFiveAuditedCandidatesPreRelease = true
+allAuditedCandidatesPreRelease : Bool
+allAuditedCandidatesPreRelease = true
 
-noneOfFiveAuditedCandidatesIsCompletedClayProof : Bool
-noneOfFiveAuditedCandidatesIsCompletedClayProof = true
+noneOfAuditedCandidatesIsCompletedClayProof : Bool
+noneOfAuditedCandidatesIsCompletedClayProof = true
 
 preReleaseMechanismPriorityEvidenceSubstantial : Bool
 preReleaseMechanismPriorityEvidenceSubstantial = true
 
-noneOfFiveAuditedCandidatesIsCompletedClayProofIsTrue :
-  noneOfFiveAuditedCandidatesIsCompletedClayProof ≡ true
-noneOfFiveAuditedCandidatesIsCompletedClayProofIsTrue = refl
+preReleasePartialAnalyticPaymentEvidenceSubstantial : Bool
+preReleasePartialAnalyticPaymentEvidenceSubstantial = true
 
-preReleaseMechanismPriorityEvidenceSubstantialIsTrue :
-  preReleaseMechanismPriorityEvidenceSubstantial ≡ true
-preReleaseMechanismPriorityEvidenceSubstantialIsTrue = refl
+noneOfAuditedCandidatesIsCompletedClayProofIsTrue :
+  noneOfAuditedCandidatesIsCompletedClayProof ≡ true
+noneOfAuditedCandidatesIsCompletedClayProofIsTrue = refl
+
+preReleasePartialAnalyticPaymentEvidenceSubstantialIsTrue :
+  preReleasePartialAnalyticPaymentEvidenceSubstantial ≡ true
+preReleasePartialAnalyticPaymentEvidenceSubstantialIsTrue = refl
 
 ------------------------------------------------------------------------
--- 5. What would actually decide historical priority.
+-- 3. WrongType / priority firewalls.
 ------------------------------------------------------------------------
 
-data PriorityResidual : Set where
-  inspectPreReleaseSignedCrossSourceTerm : PriorityResidual
-  inspectPreReleaseCriticalProductionSourceTerm : PriorityResidual
-  inspectAnyOtherPreReleaseABProofTerm : PriorityResidual
-  inspectAnyOtherPreReleaseCDWitness : PriorityResidual
-  establishExactABEndpointComposition : PriorityResidual
-  recoverPreReleaseKernelOrIndependentCheckReceipt : PriorityResidual
-  priorityAuditComplete : PriorityResidual
-
-firstPriorityResidual : PriorityResidual
-firstPriorityResidual = inspectPreReleaseSignedCrossSourceTerm
-
--- Certification is stronger evidence, but absence of certification does not
--- imply absence of a source proof term.
 data NoCertificationImpliesNoProofTermPermission : Set where
-
 data FalsePromotionBitImpliesMathematicalNegationPermission : Set where
-
 data SummaryBooleanImpliesProofTermPermission : Set where
-
 data MechanismPrecursorImpliesClayWitnessPermission : Set where
+data ExplicitHoleImpliesCompletedProofPermission : Set where
+data PartialPhysicalPaymentImpliesWholeNetworkPaymentPermission : Set where
 
 noCertificationDoesNotImplyNoProofTerm :
   NoCertificationImpliesNoProofTermPermission → ⊥
@@ -261,14 +257,22 @@ mechanismPrecursorDoesNotCreateClayWitness :
   MechanismPrecursorImpliesClayWitnessPermission → ⊥
 mechanismPrecursorDoesNotCreateClayWitness ()
 
+explicitHoleDoesNotCreateCompletedProof :
+  ExplicitHoleImpliesCompletedProofPermission → ⊥
+explicitHoleDoesNotCreateCompletedProof ()
+
+partialPhysicalPaymentDoesNotPayWholeNetwork :
+  PartialPhysicalPaymentImpliesWholeNetworkPaymentPermission → ⊥
+partialPhysicalPaymentDoesNotPayWholeNetwork ()
+
 ------------------------------------------------------------------------
--- 6. Four-alternative historical status remains conservative.
+-- 4. Four-alternative historical status remains conservative.
 ------------------------------------------------------------------------
 
 data PreReleaseAlternativeStatus : Clay4.ClayAlternative4 → Set where
-  aPriorityUnresolvedAfterCandidateAudit :
+  aPriorityUnresolvedAfterSourceAudit :
     PreReleaseAlternativeStatus Clay4.A-euclidean-unforced-global
-  bPriorityUnresolvedAfterCandidateAudit :
+  bPriorityUnresolvedAfterSourceAudit :
     PreReleaseAlternativeStatus Clay4.B-periodic-unforced-global
   cNoLocatedPreReleaseForcedWitnessYet :
     PreReleaseAlternativeStatus Clay4.C-euclidean-forced-breakdown
@@ -278,17 +282,28 @@ data PreReleaseAlternativeStatus : Clay4.ClayAlternative4 → Set where
 preReleaseStatusFor :
   (a : Clay4.ClayAlternative4) → PreReleaseAlternativeStatus a
 preReleaseStatusFor Clay4.A-euclidean-unforced-global =
-  aPriorityUnresolvedAfterCandidateAudit
+  aPriorityUnresolvedAfterSourceAudit
 preReleaseStatusFor Clay4.B-periodic-unforced-global =
-  bPriorityUnresolvedAfterCandidateAudit
+  bPriorityUnresolvedAfterSourceAudit
 preReleaseStatusFor Clay4.C-euclidean-forced-breakdown =
   cNoLocatedPreReleaseForcedWitnessYet
 preReleaseStatusFor Clay4.D-periodic-forced-breakdown =
   dNoLocatedPreReleaseForcedWitnessYet
 
 ------------------------------------------------------------------------
--- 7. Compact corrected ledger.
+-- 5. Residual search and compact ledger.
 ------------------------------------------------------------------------
+
+data PriorityResidual : Set where
+  inspectPreReleaseSignedCrossSourceTerm : PriorityResidual
+  inspectPreReleaseCriticalProductionSourceTerm : PriorityResidual
+  inspectAnyOtherPreReleaseABProofTerm : PriorityResidual
+  inspectAnyOtherPreReleaseCDWitness : PriorityResidual
+  recoverPreReleaseKernelOrIndependentCheckReceipt : PriorityResidual
+  priorityAuditComplete : PriorityResidual
+
+firstPriorityResidual : PriorityResidual
+firstPriorityResidual = inspectPreReleaseSignedCrossSourceTerm
 
 preReleaseArchitectureSubstantial : Bool
 preReleaseArchitectureSubstantial = true
