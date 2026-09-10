@@ -19,11 +19,13 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data PrimaryDependencyDomain : Set where
+  fireToFuel
   grazingToFuel
   nitrogenToCropSoil
   hydraulicHeadToWaterService : PrimaryDependencyDomain
 
 data PrimaryEvidenceDesign : Set where
+  prescribedFireFieldExperiment
   replicatedFactorialFieldExperiment
   isotopeTracerFieldExperiment
   hydraulicPerformanceExperiment : PrimaryEvidenceDesign
@@ -44,6 +46,20 @@ record PrimaryDependencySource : Set where
     claimOwner : Attribution.ClaimOwner
 
 open PrimaryDependencySource public
+
+prescribedFireFuel2024 : PrimaryDependencySource
+prescribedFireFuel2024 = primary-dependency-source
+  "Valaire Séraphin Ouehoudja Yaro; Loyapin Bondé; Pawend-taoré Christian Bougma; Issoufou Sedgo; Reginald Tang Guuroh; Amanuel Woldeselassie Gebremichael; Tiga Neya; Anja Linstädter; Oumarou Ouédraogo"
+  "Greenhouse gas emission from prescribed fires is influenced by vegetation types in West African Savannas"
+  "Scientific Reports 14:23754"
+  2024
+  "DOI 10.1038/s41598-024-73753-6; PMID 39390052"
+  fireToFuel
+  prescribedFireFieldExperiment
+  "Experimental prescribed fires in 80 plots directly measured pre-fire biomass fuel and post-fire unburned/residual biomass while estimating carbon emissions across vegetation types and climate zones."
+  "Does not establish a universal fuel-reduction magnitude, wildfire-risk reduction, cultural-burning effect, or transport to other fuel complexes, seasons or climates."
+  Attribution.primaryPublicationRecord
+  Attribution.externalSourceOwner
 
 targetedCattleFuel2024 : PrimaryDependencySource
 targetedCattleFuel2024 = primary-dependency-source
@@ -89,7 +105,10 @@ gravityDripHead2024 = primary-dependency-source
 
 canonicalWholeLandscapePrimarySources : List PrimaryDependencySource
 canonicalWholeLandscapePrimarySources =
-  targetedCattleFuel2024 ∷ wheat15N2025 ∷ gravityDripHead2024 ∷ []
+  prescribedFireFuel2024 ∷
+  targetedCattleFuel2024 ∷
+  wheat15N2025 ∷
+  gravityDripHead2024 ∷ []
 
 ------------------------------------------------------------------------
 -- Non-laundering barriers.
