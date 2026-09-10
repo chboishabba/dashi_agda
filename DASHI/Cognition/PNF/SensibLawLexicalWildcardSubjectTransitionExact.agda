@@ -96,6 +96,7 @@ record LexicalCounterfactualEnvelopeReceipt : Set where
     mayFibreReference : String
     invariantMembershipReference : String
     ambiguityResidualReference : String
+    wildcardOwnerReference : String
     candidateOnly : Bool
 
 open LexicalCounterfactualEnvelopeReceipt public
@@ -103,13 +104,16 @@ open LexicalCounterfactualEnvelopeReceipt public
 ------------------------------------------------------------------------
 -- Existing wildcard owner is the mathematical anchor.
 --
--- The runtime's intersection/union of Pareto membership across role
--- realizations is the finite diagnostic analogue of MUST/MAY membership. Only
--- invariant membership can be compressed safely; disagreement remains residual.
+-- AmbiguityPreservingBoundedWildcardExact owns the MUST/MAY rule: only
+-- membership invariant over every admissible realization can be compressed;
+-- disagreement remains an explicit ambiguity residual. The runtime
+-- intersection/union over bounded lexical-role realizations is a finite
+-- diagnostic consumer of that rule, not a replacement formalism.
 ------------------------------------------------------------------------
 
-wildcardSemanticOwner : Set₁
-wildcardSemanticOwner = Wildcard.AmbiguityPreservingBoundedWildcard Set Set Set Set
+wildcardOwnerReference : String
+wildcardOwnerReference =
+  "DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardExact:MembershipEnvelope/InvariantTopK/ambiguousResidual"
 
 record LexicalWildcardBoundary : Set where
   constructor lexicalWildcardBoundary
