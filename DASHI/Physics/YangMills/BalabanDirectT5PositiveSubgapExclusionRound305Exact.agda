@@ -13,6 +13,7 @@ module DASHI.Physics.YangMills.BalabanDirectT5PositiveSubgapExclusionRound305Exa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -28,7 +29,7 @@ import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 
 record DirectT5PositiveSubgapExclusionPayment
     {Measure TestObservable Energy Vector : Set}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.Base.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {tests : R278.SelectedConnectedCovarianceTests dataSet}
     {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
@@ -47,7 +48,7 @@ open DirectT5PositiveSubgapExclusionPayment public
 
 asRound303Payment :
   ∀ {Measure TestObservable Energy Vector}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.Base.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {tests : R278.SelectedConnectedCovarianceTests dataSet}
     {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
@@ -62,13 +63,12 @@ asRound303Payment payment = record
   { R303.DirectPositiveSubgapExclusionPayment.modeRatioWeld = modeRatioWeld payment
   ; R303.DirectPositiveSubgapExclusionPayment.continuumUpper =
       R304.continuumSelectedUpper (directUpperPayment payment)
-  ; R303.DirectPositiveSubgapExclusionPayment.geometricDominance =
-      geometricDominance payment
+  ; R303.DirectPositiveSubgapExclusionPayment.geometricDominance = geometricDominance payment
   }
 
 noPositiveSubgapMode :
   ∀ {Measure TestObservable Energy Vector}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.Base.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {tests : R278.SelectedConnectedCovarianceTests dataSet}
     {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
@@ -82,18 +82,15 @@ noPositiveSubgapMode :
   Rate302.PositiveEnergy coordinate energy →
   Rate302.StrictlyBelow coordinate energy (Rate302.candidateEnergy coordinate) →
   Gap.Empty
-noPositiveSubgapMode payment =
-  R303.noPositiveSubgapMode (asRound303Payment payment)
+noPositiveSubgapMode payment = R303.noPositiveSubgapMode (asRound303Payment payment)
 
 record Round305Boundary : Set where
   constructor round305-boundary
   field
     continuumUpperIndependentPhysicalLeaf : Bool
-    continuumUpperIndependentPhysicalLeafIsFalse :
-      continuumUpperIndependentPhysicalLeaf ≡ false
+    continuumUpperIndependentPhysicalLeafIsFalse : continuumUpperIndependentPhysicalLeaf ≡ false
     fullSpectrumRequiredToPropagateB1Upper : Bool
-    fullSpectrumRequiredToPropagateB1UpperIsFalse :
-      fullSpectrumRequiredToPropagateB1Upper ≡ false
+    fullSpectrumRequiredToPropagateB1UpperIsFalse : fullSpectrumRequiredToPropagateB1Upper ≡ false
     directT5ToPositiveSubgapExclusionCompilerOwned : Bool
     directT5ToPositiveSubgapExclusionCompilerOwnedIsTrue :
       directT5ToPositiveSubgapExclusionCompilerOwned ≡ true
@@ -111,5 +108,4 @@ round305SameHamiltonianSpectralDecompositionLevel : ProofLevel
 round305SameHamiltonianSpectralDecompositionLevel = R303.round303SpectralDecompositionLevel
 
 round305PhysicalTransferEnergyDecayCoordinateLevel : ProofLevel
-round305PhysicalTransferEnergyDecayCoordinateLevel =
-  R303.round303TransferEnergyDecayCoordinateLevel
+round305PhysicalTransferEnergyDecayCoordinateLevel = R303.round303TransferEnergyDecayCoordinateLevel
