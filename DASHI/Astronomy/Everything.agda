@@ -8,3 +8,4 @@ open import DASHI.Astronomy.LocalGroupDigitalTwinBoundaryExact public
 open import DASHI.Astronomy.LocalGroupFrameMeasurementModelBidiExact public
 open import DASHI.Astronomy.LocalGroupPrimaryPaperDetailExact public
 open import DASHI.Astronomy.LocalGroupFirstLightArtifactObservationExact public
+open import DASHI.Astronomy.McConnachie2012FrameDerivationExact public
