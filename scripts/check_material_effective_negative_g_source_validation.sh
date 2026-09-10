@@ -11,6 +11,7 @@ files=(
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGModelProvenanceBidiExact.agda
   DASHI/Physics/ExoticGravity/SuperconductingChargeMassCurrentBidiExact.agda
+  DASHI/Physics/ExoticGravity/SuperconductingGravityExperimentalConstraintRegistryExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyScopeBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyCompilationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
@@ -21,6 +22,12 @@ files=(
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1991CombinedFieldSourceEntitlementExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1992CoupledPotentialSourceEntitlementExact.agda
+  DASHI/Culture/AmyEskridgeHAL5AntigravitySourceEntitlementExact.agda
+  DASHI/Culture/AmyEskridgeHAL5PrimaryLiteratureSnowballExact.agda
+  DASHI/Culture/AmyEskridgeHistoricalMechanismBidiSourceWeldExact.agda
+  DASHI/Culture/AmyEskridgeMechanismAssociationProvenanceExact.agda
+  DASHI/Culture/AmyEskridgeForensicAcquisitionPriorityExact.agda
+  DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 )
 for file in "${files[@]}"; do
   test -f "$file"
@@ -53,10 +60,20 @@ grep -q 'closedWallHasNoFurtherAcquisition' DASHI/Physics/ExoticGravity/Material
 grep -q 'closedWallProducerIsNoSearch' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
 grep -q 'authorityClosurePaysSourceCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
 
+# Amy memorial source-attribution / snowball boundaries.
+grep -q 'hostAuthenticatedDeckEqualsIndependentPhysicsValidation' DASHI/Culture/AmyEskridgeHAL5AntigravitySourceEntitlementExact.agda
+grep -q 'reportedPrimaryAnomalyEqualsEstablishedPhysicalEffect' DASHI/Culture/AmyEskridgeHAL5PrimaryLiteratureSnowballExact.agda
+grep -q 'abstractClaimCreatesObservationReceipt' DASHI/Culture/AmyEskridgeHistoricalMechanismBidiSourceWeldExact.agda
+grep -q 'amyDiscussionEqualsAmyEndorsement' DASHI/Culture/AmyEskridgeMechanismAssociationProvenanceExact.agda
+grep -q 'outOfOrderForensicAcquisitionMayBeRetained' DASHI/Culture/AmyEskridgeForensicAcquisitionPriorityExact.agda
+grep -q 'podkletnovNieminen1992ReportedSignal' DASHI/Physics/ExoticGravity/SuperconductingGravityExperimentalConstraintRegistryExact.agda
+grep -q 'reportedSignalEqualsEstablishedEffect' DASHI/Physics/ExoticGravity/SuperconductingGravityExperimentalConstraintRegistryExact.agda
+
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda \
-  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda \
+  DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 
-echo "Material-effective negative-G source/provenance/GR/background/constitutive/replication/scientific-wall BIDI validation checks passed"
+echo "Material-effective negative-G + Amy memorial source/provenance/snowball validation checks passed"
