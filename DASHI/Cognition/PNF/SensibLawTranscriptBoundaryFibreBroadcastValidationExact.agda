@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.SensibLawTranscriptBoundaryFibreBroadcastValidationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawTranscriptBoundaryFibreClassifierExact as Fibre
 import DASHI.Cognition.PNF.SensibLawTranscriptBoundaryFibreBroadcastGraphExact as Broadcast
@@ -44,5 +45,5 @@ classifierBoundaryRetained = Fibre.canonicalFibreClassifierBoundary
 broadcastBoundaryRetained : Broadcast.FibreBroadcastBoundary
 broadcastBoundaryRetained = Broadcast.canonicalFibreBroadcastBoundary
 
-attributionTruthFirewall : Attribution.ClaimAssertionIsTruthProof → Data.Empty.⊥
+attributionTruthFirewall : Attribution.ClaimAssertionIsTruthProof → ⊥
 attributionTruthFirewall = Attribution.claimAssertionDoesNotProveTruth
