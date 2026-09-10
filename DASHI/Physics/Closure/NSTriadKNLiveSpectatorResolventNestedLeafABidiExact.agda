@@ -22,7 +22,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
@@ -35,6 +35,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNFixedOutputLiveGlobalFluxRound406Exact as R406
 import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact as R543
+import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
 import DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact as R568
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventNestedForcingSquareBidiExact as NestedFixed
@@ -129,16 +130,9 @@ module LiveNested
   sumOutputsForcingIsNested T R cutoff time [] = refl
   sumOutputsForcingIsNested T R cutoff time (output ∷ rest) =
     let module A = At T R cutoff time in
-    cong
-      (λ tail → A.nestedOutputForcingFull output + tail)
+    cong₂ _+_
+      (A.outputForcingFullIsNested output)
       (sumOutputsForcingIsNested T R cutoff time rest)
-      |> trans (cong
-          (λ head → head + Comm.sumOutputForcingFull T R cutoff time rest)
-          (A.outputForcingFullIsNested output))
-    where
-    infixl 0 _|>_
-    _|>_ : ∀ {a b c : ℚ} → a ≡ b → (a ≡ b → b ≡ c) → a ≡ c
-    p |> f = trans p (f p)
 
   globalForcingIsNested :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
@@ -177,7 +171,7 @@ module LiveNested
       cutoffIndependentNestedBound : Time → ℚ
       nestedSpectatorBudget :
         (cutoff : Nat) (terminal : Time) →
-        R568.R567.four567 *
+        R567.four567 *
           integratedNestedGlobalForcingFull T R cutoff terminal
         ≤ cutoffIndependentNestedBound terminal
 
@@ -193,8 +187,9 @@ module LiveNested
     ; Comm.liveCommutatorOnlyBudget568 = λ cutoff terminal →
         subst
           (λ lhs → lhs ≤ cutoffIndependentNestedBound P terminal)
-          (cong (R568.R567.four567 *_)
-            (integratedForcingIsNested T R cutoff terminal))
+          (sym
+            (cong (R567.four567 *_)
+              (integratedForcingIsNested T R cutoff terminal)))
           (nestedSpectatorBudget P cutoff terminal)
     }
 
