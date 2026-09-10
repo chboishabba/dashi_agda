@@ -1,9 +1,9 @@
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::env;
 use std::fs;
 use std::path::PathBuf;
 
-const SCHEMA: &str = "slr-discourse-spans-v1";
+const SCHEMA: &str = "slr-discourse-spans-v2";
 
 #[derive(Clone, Debug)]
 struct Config { graph: PathBuf, parser: PathBuf, source: PathBuf, ledger: PathBuf, reconstructed: PathBuf }
@@ -78,6 +78,23 @@ fn parse_graph(text:&str)->Result<HashMap<usize,Vec<Boundary>>,String>{
 fn char_to_byte_map(s:&str)->Vec<usize>{let mut v=s.char_indices().map(|(i,_)|i).collect::<Vec<_>>();v.push(s.len());v}
 fn char_slice<'a>(s:&'a str,m:&[usize],a:usize,b:usize)->&'a str{&s[m[a.min(m.len()-1)]..m[b.min(m.len()-1)]]}
 
+fn render_projection(source: &str, cmap: &[usize], hard_cut_positions: &BTreeSet<usize>) -> String {
+    let mut out = String::with_capacity(source.len() + hard_cut_positions.len());
+    let mut last_byte = 0usize;
+    for char_pos in hard_cut_positions {
+        let byte = cmap[(*char_pos).min(cmap.len().saturating_sub(1))];
+        if byte < last_byte || byte > source.len() { continue; }
+        out.push_str(&source[last_byte..byte]);
+        // Candidate segmentation is represented by one inserted newline only.
+        // All source bytes before/after it, including original blank-line paragraph
+        // separators, remain untouched and in their original order.
+        if !out.ends_with('\n') { out.push('\n'); }
+        last_byte = byte;
+    }
+    out.push_str(&source[last_byte..]);
+    out
+}
+
 fn main()->Result<(),Box<dyn std::error::Error>>{
     let cfg=args();
     let source=fs::read_to_string(&cfg.source)?;
@@ -86,7 +103,7 @@ fn main()->Result<(),Box<dyn std::error::Error>>{
     let graph=parse_graph(&fs::read_to_string(&cfg.graph)?).map_err(|e|format!("graph: {e}"))?;
 
     let mut ledger=String::from("schema\tspan_id\tsentence\tsegment_index\tchar_start\tchar_end\tboundary_before\tboundary_projection\tpareto_fibres\tresidual_fibres\tcandidate_only\n");
-    let mut reconstructed=String::new();
+    let mut hard_cut_positions:BTreeSet<usize>=BTreeSet::new();
     let mut span_count=0usize; let mut hard_cut_count=0usize; let mut unresolved_count=0usize;
 
     for s in sentences {
@@ -101,15 +118,19 @@ fn main()->Result<(),Box<dyn std::error::Error>>{
             }
         }
         let mut starts=vec![(0usize,s.start,None::<Boundary>)];
-        for (split,b) in cuts { starts.push((split,s.token_starts[split],Some(b))); hard_cut_count+=1; }
+        for (split,b) in cuts {
+            let cut_pos=s.token_starts[split];
+            hard_cut_positions.insert(cut_pos);
+            starts.push((split,cut_pos,Some(b)));
+            hard_cut_count+=1;
+        }
         starts.sort_by_key(|x|x.1);
         for idx in 0..starts.len() {
             let (_tok,start,before)=&starts[idx];
             let end=if idx+1<starts.len(){starts[idx+1].1}else{s.end};
             if end <= *start {continue}
-            let text=char_slice(&source,&cmap,*start,end).trim(); if text.is_empty(){continue}
-            if !reconstructed.is_empty(){reconstructed.push('\n')}
-            reconstructed.push_str(text);
+            let text=char_slice(&source,&cmap,*start,end);
+            if text.trim().is_empty(){continue}
             let (proj,pareto,residual,anchor)=match before {
                 Some(b)=>(b.projection.as_str(),b.pareto.as_str(),b.residual.as_str(),b.anchor.as_str()),
                 None=>("original-sentence-start","","","")
@@ -118,8 +139,10 @@ fn main()->Result<(),Box<dyn std::error::Error>>{
             span_count+=1;
         }
     }
+
+    let reconstructed=render_projection(&source,&cmap,&hard_cut_positions);
     fs::write(&cfg.ledger,ledger)?;
     fs::write(&cfg.reconstructed,reconstructed)?;
-    eprintln!("SLR_DISCOURSE_SPAN_RECEIPT schema={} graph={} spans={} hard_candidate_cuts={} unresolved_rank1={} hard_cut_rule=rank1-singleton-speaker-or-quote candidate_only=true source_preserved=true",SCHEMA,cfg.graph.display(),span_count,hard_cut_count,unresolved_count);
+    eprintln!("SLR_DISCOURSE_SPAN_RECEIPT schema={} graph={} spans={} hard_candidate_cuts={} unresolved_rank1={} hard_cut_rule=rank1-singleton-speaker-or-quote candidate_only=true source_bytes_preserved=true original_separator_topology_preserved=true projection_adds_boundary_newlines_only=true",SCHEMA,cfg.graph.display(),span_count,hard_cut_count,unresolved_count);
     Ok(())
 }
