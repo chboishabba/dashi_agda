@@ -2,9 +2,11 @@ module DASHI.Wikimedia.ModularFormCoefficientOEISFactorsThroughSnowballExact whe
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimJMathematicsNumberOEISSecondOrderQidSnowballExact as Second
 import DASHI.Wikimedia.IbrahimBase369JOEISMoonshineSnowballExact as JOEIS
 import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
@@ -23,7 +25,7 @@ import DASHI.Moonshine.MonsterGradedVOABridgeExact as MonsterVOA
 -- for the whole modular-form consumer.
 ------------------------------------------------------------------------
 
-modularFormIdentity : Second.Identity.ExternalIdentityDemand
+modularFormIdentity : Identity.ExternalIdentityDemand
 modularFormIdentity = Second.modularFormQid
 
 record ModularFormObservationAxes : Set where
@@ -212,6 +214,9 @@ qidDoesNotCreateTransformationLaw ()
 
 modularPromotionStatement : String
 modularPromotionStatement = ModularGate.modularGateStatement
+
+monsterCoefficientArithmeticDoesNotCloseMoonshine : Bool
+monsterCoefficientArithmeticDoesNotCloseMoonshine = true
 
 allPairsBoundary : AllPairs.WikipediaAllPairsBoundary
 allPairsBoundary = AllPairs.canonicalWikipediaAllPairsBoundary
