@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Source
+
 ------------------------------------------------------------------------
 -- NCA ss 12, 102-103 SPATIAL-RELATION CORRECTION
 --
@@ -153,20 +155,38 @@ offSiteCapacityDoesNotEraseEffectRelation : S103OffSiteCapacityEqualsNoCausalCon
 offSiteCapacityDoesNotEraseEffectRelation ()
 
 ------------------------------------------------------------------------
--- Source-attribution note for a future statute-lineage owner.
+-- Canonical attributed primary-legislation source receipt.
 ------------------------------------------------------------------------
+
+ncaCurrentStatuteSource : Source.AttributedSource
+ncaCurrentStatuteSource = Source.mkNoDOISource
+  "Queensland Parliamentary Counsel"
+  "Nature Conservation Act 1992"
+  "Queensland Legislation — current in-force text"
+  "2026"
+  "https://www.legislation.qld.gov.au/view/whole/html/current/act-1992-020"
+  Source.governmentSource
+  "Primary statutory source for ss 12, 13, 102, 103, 105 and 107. Used to type the threatening-process predicate, alternative s 102 qualifying objects, off-site order capacity, duration and possible suspension of inconsistent statutory authorities."
+  Source.publicAttribution
+
+ncaS102SourceAtlas : Source.AttributedSourceAtlas
+ncaS102SourceAtlas = Source.mkSourceAtlas
+  "Woogaroo NCA s 102 statutory source atlas"
+  "DASHI.Law.SensibLawWoogarooS102StatutorySpatialRelationExact"
+  (ncaCurrentStatuteSource ∷ [])
+  "Primary legislation only; statutory text does not by itself determine application to Woogaroo facts, procedure, discretion, reviewability or outcome."
 
 record CurrentStatutorySourceReceipt : Set where
   constructor current-statutory-source-receipt
   field
-    source : String
+    source : Source.AttributedSource
     provisions : String
     sourceRole : String
     interpretationBoundary : String
 
 currentNCAStatutorySourceReceipt : CurrentStatutorySourceReceipt
 currentNCAStatutorySourceReceipt = current-statutory-source-receipt
-  "Queensland Legislation — Nature Conservation Act 1992, current in-force text"
+  ncaCurrentStatuteSource
   "ss 12, 13, 102, 103, 105, 107"
-  "primary legislation; s 12 defines threatening process, s 102 states the Ministerial interim-order predicate, s 103 defines possible order effects/spatial reach, s 105 duration and s 107 authority suspension"
+  "primary legislation; s 12 defines threatening process, s 13 defines critical habitat, s 102 states the Ministerial interim-order predicate, s 103 defines possible order effects/spatial reach, s 105 duration and s 107 authority suspension"
   "Textual statutory reconstruction does not determine how the Minister, tribunal or court would apply the provisions to Woogaroo facts; counsel should validate procedure, discretion, reviewability and any regulations/conservation plans bearing on the route."
