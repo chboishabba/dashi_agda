@@ -13,19 +13,20 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact 
 --
 --   (1) a SOURCE authority on the literal declared CMP116 J carrier;
 --   (2) a SAME-OBJECT/APPLICABILITY weld identifying the selected physical T5
---       observables, mixed derivative, support distance and connecting root with
---       that source carrier.
+--       mixed derivative, support distance and connecting root with that source
+--       carrier.
 --
--- Their composition constructs the exact R296 presentation.  Therefore a
--- published/source-localization theorem must not be charged again as new 4D YM
--- analysis merely because its selected physical application is still open.
+-- The source authority is indexed by the exact T5 scale/volume/root/J carrier
+-- and its exact shellData.  Therefore carrier-type equality is not enough to
+-- pay G1: a theorem on a neighbouring shell presentation cannot be transported
+-- silently into the selected physical consumer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; ∣_∣; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -37,60 +38,63 @@ import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as Source
 
 ------------------------------------------------------------------------
--- Source theorem carrier.
+-- Typed published/source localization on the EXACT selected-T5 carrier.
 ------------------------------------------------------------------------
 
-record PublishedTwoJLocalization
-    (Scale Volume Root SourceDirection : Set) : Set₁ where
-  field
-    shellData : Shell.TraversalShellData Scale Volume Root
-
-    sourceMagnitude :
-      Scale → Volume → SourceDirection → SourceDirection → ℚ
-
-    sourceRoot :
-      Scale → Volume → SourceDirection → SourceDirection → Root
-
-    sourceDistance : SourceDirection → SourceDirection → Nat
-
-    localized : ∀ scale volume left right →
-      sourceMagnitude scale volume left right
-      ≤ Shell.rootedShell shellData scale volume
-          (sourceRoot scale volume left right)
-          (sourceDistance left right)
-
-open PublishedTwoJLocalization public
-
-------------------------------------------------------------------------
--- Same-object selected-T5 applicability.
-------------------------------------------------------------------------
-
-record SelectedT5JApplicability
-    {Measure TestObservable Scale Volume Root SourceDirection : Set}
+record PublishedTwoJLocalizationForT5
+    {Measure TestObservable : Set}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     (presentation : R295.DirectT5StateFamilyJPresentation dataSet extension)
-    (published : PublishedTwoJLocalization Scale Volume Root SourceDirection)
     : Set₁ where
   field
-    -- The selected source carrier is literally the one used by the finite T5
-    -- source presentation.
-    sourceDirectionSame : SourceDirection ≡ R295.SourceDirection presentation
-    scaleSame : Scale ≡ R295.Scale presentation
-    volumeSame : Volume ≡ R295.Volume presentation
-    rootSame : Root ≡ R295.Root presentation
+    sourceMagnitude :
+      R295.Scale presentation →
+      R295.Volume presentation →
+      R295.SourceDirection presentation →
+      R295.SourceDirection presentation → ℚ
 
-    -- Pointwise same-object application.  These are representation/applicability
-    -- equalities; none is a fresh decay inequality.
+    sourceRoot :
+      R295.Scale presentation →
+      R295.Volume presentation →
+      R295.SourceDirection presentation →
+      R295.SourceDirection presentation →
+      R295.Root presentation
+
+    sourceDistance :
+      R295.SourceDirection presentation →
+      R295.SourceDirection presentation → Nat
+
+    -- This is the source theorem on its declared J directions.  No selected-T5
+    -- applicability is hidden in this field.
+    localized : ∀ scale volume left right →
+      sourceMagnitude scale volume left right
+      ≤ Shell.rootedShell (R295.shellData presentation)
+          scale volume
+          (sourceRoot scale volume left right)
+          (sourceDistance left right)
+
+open PublishedTwoJLocalizationForT5 public
+
+------------------------------------------------------------------------
+-- Same-object selected-T5 applicability only.
+------------------------------------------------------------------------
+
+record SelectedT5JApplicability
+    {Measure TestObservable : Set}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    (presentation : R295.DirectT5StateFamilyJPresentation dataSet extension)
+    (published : PublishedTwoJLocalizationForT5 presentation)
+    : Set₁ where
+  field
     sourceMagnitudeIsSelectedMixedDerivativeAbsolute :
       ∀ cutoff left right →
       sourceMagnitude published
-        (subst (λ X → X) (sym scaleSame) (R295.scaleOf presentation cutoff))
-        (subst (λ X → X) (sym volumeSame) (R295.volumeOf presentation cutoff))
-        (subst (λ X → X) (sym sourceDirectionSame)
-          (Cumulant.sourceDirectionOf (R295.meaning presentation) left))
-        (subst (λ X → X) (sym sourceDirectionSame)
-          (Cumulant.sourceDirectionOf (R295.meaning presentation) right))
+        (R295.scaleOf presentation cutoff)
+        (R295.volumeOf presentation cutoff)
+        (Cumulant.sourceDirectionOf (R295.meaning presentation) left)
+        (Cumulant.sourceDirectionOf (R295.meaning presentation) right)
       ≡
       ∣ Cumulant.literalMixedSecondLogDerivative
           (R295.meaning presentation)
@@ -100,23 +104,18 @@ record SelectedT5JApplicability
 
     sourceRootIsSelectedConnectingRoot :
       ∀ cutoff left right →
-      subst (λ X → X) rootSame
-        (sourceRoot published
-          (subst (λ X → X) (sym scaleSame) (R295.scaleOf presentation cutoff))
-          (subst (λ X → X) (sym volumeSame) (R295.volumeOf presentation cutoff))
-          (subst (λ X → X) (sym sourceDirectionSame)
-            (Cumulant.sourceDirectionOf (R295.meaning presentation) left))
-          (subst (λ X → X) (sym sourceDirectionSame)
-            (Cumulant.sourceDirectionOf (R295.meaning presentation) right)))
+      sourceRoot published
+        (R295.scaleOf presentation cutoff)
+        (R295.volumeOf presentation cutoff)
+        (Cumulant.sourceDirectionOf (R295.meaning presentation) left)
+        (Cumulant.sourceDirectionOf (R295.meaning presentation) right)
       ≡ R295.connectingRoot presentation cutoff left right
 
     sourceDistanceIsSelectedPhysicalDistance :
       ∀ left right →
       sourceDistance published
-        (subst (λ X → X) (sym sourceDirectionSame)
-          (Cumulant.sourceDirectionOf (R295.meaning presentation) left))
-        (subst (λ X → X) (sym sourceDirectionSame)
-          (Cumulant.sourceDirectionOf (R295.meaning presentation) right))
+        (Cumulant.sourceDirectionOf (R295.meaning presentation) left)
+        (Cumulant.sourceDirectionOf (R295.meaning presentation) right)
       ≡ R295.physicalDistance presentation left right
 
 open SelectedT5JApplicability public
@@ -126,11 +125,11 @@ open SelectedT5JApplicability public
 ------------------------------------------------------------------------
 
 selectedT5AbsoluteLocalization :
-  ∀ {Measure TestObservable Scale Volume Root SourceDirection}
+  ∀ {Measure TestObservable}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {presentation : R295.DirectT5StateFamilyJPresentation dataSet extension}
-    {published : PublishedTwoJLocalization Scale Volume Root SourceDirection} →
+    {published : PublishedTwoJLocalizationForT5 presentation} →
   SelectedT5JApplicability presentation published →
   ∀ cutoff left right →
   ∣ Cumulant.literalMixedSecondLogDerivative
@@ -143,39 +142,63 @@ selectedT5AbsoluteLocalization :
       (R295.volumeOf presentation cutoff)
       (R295.connectingRoot presentation cutoff left right)
       (R295.physicalDistance presentation left right)
-selectedT5AbsoluteLocalization applicability cutoff left right =
+selectedT5AbsoluteLocalization {presentation = presentation}
+    {published = published} applicability cutoff left right =
   let
-    -- The only inequality is the already supplied source theorem.
-    sourceBound = localized _ _ _ _ _
-  in
-  -- The remaining steps are same-object transports.  Keeping them explicit
-  -- prevents a source theorem on the wrong J/support carrier from paying G1.
-  subst
-    (λ lower → lower ≤ Shell.rootedShell
-      (R295.shellData _)
-      (R295.scaleOf _ cutoff)
-      (R295.volumeOf _ cutoff)
-      (R295.connectingRoot _ cutoff left right)
-      (R295.physicalDistance _ left right))
-    (sourceMagnitudeIsSelectedMixedDerivativeAbsolute applicability cutoff left right)
-    (subst
+    leftJ = Cumulant.sourceDirectionOf (R295.meaning presentation) left
+    rightJ = Cumulant.sourceDirectionOf (R295.meaning presentation) right
+    scale = R295.scaleOf presentation cutoff
+    volume = R295.volumeOf presentation cutoff
+
+    sourceBound = localized published scale volume leftJ rightJ
+
+    distanceTransported = subst
+      (λ distance →
+        sourceMagnitude published scale volume leftJ rightJ
+        ≤ Shell.rootedShell (R295.shellData presentation)
+            scale volume
+            (sourceRoot published scale volume leftJ rightJ)
+            distance)
+      (sourceDistanceIsSelectedPhysicalDistance applicability left right)
+      sourceBound
+
+    rootTransported = subst
       (λ root →
-        sourceMagnitude _ _ _ _ _
-        ≤ Shell.rootedShell (R295.shellData _)
-            (R295.scaleOf _ cutoff)
-            (R295.volumeOf _ cutoff)
-            root
-            (R295.physicalDistance _ left right))
+        sourceMagnitude published scale volume leftJ rightJ
+        ≤ Shell.rootedShell (R295.shellData presentation)
+            scale volume root
+            (R295.physicalDistance presentation left right))
       (sourceRootIsSelectedConnectingRoot applicability cutoff left right)
-      (subst
-        (λ distance →
-          sourceMagnitude _ _ _ _ _
-          ≤ Shell.rootedShell (R295.shellData _)
-              (R295.scaleOf _ cutoff)
-              (R295.volumeOf _ cutoff)
-              _ distance)
-        (sourceDistanceIsSelectedPhysicalDistance applicability left right)
-        sourceBound))
+      distanceTransported
+  in
+  subst
+    (λ lower → lower ≤ Shell.rootedShell (R295.shellData presentation)
+      scale volume
+      (R295.connectingRoot presentation cutoff left right)
+      (R295.physicalDistance presentation left right))
+    (sourceMagnitudeIsSelectedMixedDerivativeAbsolute
+      applicability cutoff left right)
+    rootTransported
+
+-- Once the applicability weld and the ordinary rational-absolute presentation
+-- are supplied, the exact R296 G1 package is compiler output.
+toExactT5JMagnitudePresentation :
+  ∀ {Measure TestObservable}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {presentation : R295.DirectT5StateFamilyJPresentation dataSet extension}
+    {published : PublishedTwoJLocalizationForT5 presentation} →
+  SelectedT5JApplicability presentation published →
+  (∀ value → R278.magnitude extension value ≡ ∣ value ∣) →
+  R296.ExactT5JMagnitudePresentation dataSet extension
+toExactT5JMagnitudePresentation {presentation = presentation}
+    applicability magnitudeIsAbsolute = record
+  { R296.ExactT5JMagnitudePresentation.source = presentation
+  ; R296.ExactT5JMagnitudePresentation.t5MagnitudeIsRationalAbsolute =
+      magnitudeIsAbsolute
+  ; R296.ExactT5JMagnitudePresentation.literalTwoJMagnitudeBelowConnectingShell =
+      selectedT5AbsoluteLocalization applicability
+  }
 
 ------------------------------------------------------------------------
 -- Boundary / search classification.
@@ -187,8 +210,8 @@ publishedDifferentiatedLocalizationIsNewYMAnalysis = false
 selectedJApplicabilityStillRequired : Bool
 selectedJApplicabilityStillRequired = true
 
-supportRootGeometryMayBeDropped : Bool
-supportRootGeometryMayBeDropped = false
+shellCarrierMayBeChangedByTypeEqualityAlone : Bool
+shellCarrierMayBeChangedByTypeEqualityAlone = false
 
 selectedJApplicabilityCompilerLevel : ProofLevel
 selectedJApplicabilityCompilerLevel = machineChecked
@@ -208,6 +231,6 @@ selectedJApplicabilityStillRequiredIsTrue :
   selectedJApplicabilityStillRequired ≡ true
 selectedJApplicabilityStillRequiredIsTrue = refl
 
-supportRootGeometryMayBeDroppedIsFalse :
-  supportRootGeometryMayBeDropped ≡ false
-supportRootGeometryMayBeDroppedIsFalse = refl
+shellCarrierMayBeChangedByTypeEqualityAloneIsFalse :
+  shellCarrierMayBeChangedByTypeEqualityAlone ≡ false
+shellCarrierMayBeChangedByTypeEqualityAloneIsFalse = refl
