@@ -13,8 +13,8 @@ import DASHI.Wikimedia.IbrahimSnowballStateAnthropologyArchaeologyExact as Prior
 -- IBRAHIM SNOWBALL FRONTIER: GEOGRAPHY / PLACE / TERRITORY
 --
 -- Current EN/Wikidata observations inspected 2026-09-10:
---   Geography          Q1071
---   Human geography    Q12831143
+--   Geography           Q1071
+--   Human geography     Q12831143
 --   Political geography Q191320
 --
 -- Current EN describes geography as a bridge between natural and social
@@ -164,8 +164,8 @@ canonicalGeographySnowballBoundary : GeographySnowballBoundary
 canonicalGeographySnowballBoundary = geography-snowball-boundary
   true false false false false false true false true
 
-countryAuthorityPrior : CountryBridge.CountryCommunityKnowledgeAuthorityBoundary
-countryAuthorityPrior = CountryBridge.canonicalCountryCommunityKnowledgeAuthorityBoundary
+countryAuthorityPrior : CountryBridge.CountryCommunityKnowledgeAuthorityBridgeReceipt
+countryAuthorityPrior = CountryBridge.canonicalCountryCommunityKnowledgeAuthorityBridgeReceipt
 
 priorGraphBoundary : Prior.StateAnthropologyArchaeologySnowballBoundary
 priorGraphBoundary = Prior.canonicalStateAnthropologyArchaeologySnowballBoundary
