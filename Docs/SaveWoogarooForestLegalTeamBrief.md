@@ -24,7 +24,9 @@ EPBC 2019/8575 decision
 
 with the planning/koala exemption audit running in parallel and enforcement/judicial relief conditional on an exact legal trigger.
 
-The major change in this version is that the Springview/EPBC 2019/8575 file itself now pays several atoms that previously depended on neighbouring-project analogies. The newly supplied 2019 referral and Saunders Havill Group MNES technical report provide same-project, same-parcel evidence for the referral geometry, impact area, Koala habitat score, direct/indirect habitat impact, habitat connectivity and the consultant's significant-impact conclusion. These are 2019 referral-era proponent/consultant propositions and must be compared with the 2026 final Preliminary Documentation rather than silently assumed unchanged.
+The major change in this version is that the Springview/EPBC 2019/8575 file itself now pays several atoms that previously depended on neighbouring-project analogies. The newly supplied 2019 referral and Saunders Havill Group MNES technical report provide same-project, same-parcel evidence for the referral geometry, impact area, Koala habitat score, direct/indirect habitat impact, habitat connectivity and the consultant's significant-impact conclusion. These are 2019 referral-era proponent/consultant propositions and must be compared with the 2026 substantive Preliminary Documentation rather than silently assumed unchanged.
+
+A second important correction is now explicit: the uploaded file named `2019-8575-Final-PD.pdf` is **not the substantive final Preliminary Documentation report**. It is a one-page s 95B(2) publication/information notice. It proves that the Preliminary Documentation and a summary of public comments were made available and that **1,786 comments** were received, but it does not itself contain the final habitat, avoidance, residual-impact, offset or response-to-comments analysis.
 
 ---
 
@@ -59,16 +61,36 @@ The Saunders Havill Group MNES assessment then records:
 - a Plan 5 habitat-connectivity map placing the referral site within a mapped **>500 ha habitat-connectivity** landscape;
 - direct clearing impact of approximately **136 ha** of native Koala habitat plus an additional **26 ha indirect impact**;
 - a rendered Plan 6 mapping the **136 ha critical-habitat impact area**;
-- the consultant's conclusion that clearing/functional loss of the 136 ha would constitute a **significant impact on Koala habitat critical to survival**.
+- the consultant's conclusion that clearing/functional loss of the 136 ha would constitute a **significant impact on Koala habitat critical to survival**;
+- approximately **136 ha of Grey-headed Flying-fox foraging habitat** proposed for removal, with the same consultant assessment stating that this is likely to adversely impact habitat critical to survival of the species, while separately arguing that broader population decline/recovery effects are unlikely.
 
-This is a substantial change to the previous atom state. The federal case is no longer missing the historical impact quantity or historical same-project critical-habitat proposition.
+This is a substantial change to the previous atom state. The federal case is no longer missing the historical impact quantity or historical same-project critical-habitat propositions.
+
+### What the uploaded 2026 `Final-PD` carrier actually pays
+
+The one-page s 95B(2) notice pays only the following procedural/publication atoms:
+
+- public comments were sought from 13 February to 12 March 2026;
+- **1,786 comments** were received;
+- a copy of the Preliminary Documentation and a summary of comments was made available for viewing from 23 July to 20 August 2026;
+- the notice names additional listed taxa, including White-throated Needletail and Collared Delma, beyond those expressly named in the earlier public-comment notice.
+
+The last point is an acquisition clue only. The notices use an “including” list, so:
+
+```text
+notice taxon-list delta != proof of a newly added controlling provision
+```
+
+and the substantive 2026 record is needed to determine what changed and why.
 
 ### Still decisive for the live 2026 federal decision
 
 ```text
 2019 referral-era geometry / ecology
 x
-2026 final-PD action / clearing geometry
+substantive 2026 final-PD carrier
+x
+2026 action / clearing geometry
 x
 retained habitat
 x
@@ -79,15 +101,20 @@ x
 final offset package
 x
 conservation-advice / recovery-plan treatment
+x
+actual response to 1,786 public comments
 ```
 
-The most important remaining federal task is therefore a **2019 -> 2026 delta audit**, not simply “find the project polygon”.
+The most important remaining federal task is therefore a **2019 -> 2026 delta audit**, but the first acquisition in that audit is now more precise: obtain the substantive final-PD volumes/attachments rather than mistaking the publication notice for them.
 
 WrongType boundaries:
 
 ```text
+publication notice != substantive final-PD record
+comment count != response adequacy
+notice taxon-list delta != new controlling provision
 2019 referral state != automatically unchanged 2026 final-PD state
-significant impact on Koala critical habitat != automatic Part 9 refusal
+significant impact on Koala/GHFF critical habitat != automatic Part 9 refusal
 EPBC Koala-guideline 'critical habitat' != Queensland NCA s 13 critical habitat
 ```
 
@@ -117,17 +144,26 @@ For **ss 102–107**, `9281/2024/OW` remains the concrete approved operational-w
 - food-tree vegetation;
 - habitat-connectivity score 2;
 - >500 ha connectivity map;
-- consultant significant-impact conclusion for 136 ha of Koala critical habitat.
+- consultant significant-impact conclusion for 136 ha of Koala critical habitat;
+- 136 ha GHFF foraging-habitat removal proposition and consultant adverse-critical-habitat conclusion.
 
-**Still requires 2026 final-PD payment:**
+**Source-paid at 2026 notice/procedural stage:**
 
+- publication under s 95B(2);
+- 1,786 public comments received;
+- existence of a summary of comments;
+- a later publication window for the PD and comments summary.
+
+**Still requires substantive 2026 final-PD payment:**
+
+- actual final Preliminary Documentation carrier/volumes;
 - final action/clearing polygon and any delta from 2019;
 - retained habitat quantity and final conservation areas;
 - avoidance / alternatives actually relied on;
 - complete residual impact analysis;
 - current offset package and offset-site maps;
 - conservation-advice / recovery-plan consistency;
-- response-to-submissions treatment and any final revision after the 1,786 public comments.
+- actual response-to-submissions treatment and any final revision after the 1,786 public comments.
 
 ### Queensland s 13 atoms
 
@@ -178,7 +214,7 @@ Still mostly open:
 
 ### Planning/exemption atoms
 
-The 2019 referral itself now adds a primary proponent statement that approximately 154.65 ha was mapped Category B regulated vegetation and that an urban-purpose/urban-area vegetation-clearing exemption was considered applicable for least-concern/of-concern vegetation under the Planning Regulation 2017. It also says public notification was not required under the Development Assessment Rules.
+The 2019 referral itself adds a primary proponent statement that approximately 154.65 ha was mapped Category B regulated vegetation and that an urban-purpose/urban-area vegetation-clearing exemption was considered applicable for least-concern/of-concern vegetation under the Planning Regulation 2017. It also says public notification was not required under the Development Assessment Rules.
 
 That is useful historical legal-position evidence, but it does **not** pay current scope. Counsel still needs:
 
@@ -196,6 +232,9 @@ Treat the following as hard evidence/legal firewalls:
 
 ```text
 controlled action != refusal
+publication notice != substantive final-PD record
+comment count != response adequacy
+notice taxon-list delta != new controlling provision
 2019 referral ecology != automatically unchanged 2026 final-PD ecology
 significant EPBC habitat impact != automatic Part 9 refusal
 EPBC Koala-guideline critical habitat != NCA s 13 critical habitat
@@ -234,35 +273,45 @@ The referral and MNES assessment materially narrow the federal dispute. The cons
 2. the site has Koala food trees and scat evidence;
 3. the site is assigned habitat-connectivity score 2;
 4. it forms part of a >500 ha connected-habitat landscape;
-5. approximately 136 ha is proposed to be directly cleared and 26 ha indirectly affected;
-6. the 136 ha clearing/functional loss is a significant impact on Koala habitat critical to survival.
+5. approximately 136 ha is proposed to be directly cleared and 26 ha indirectly affected for Koala habitat;
+6. the 136 ha clearing/functional loss is a significant impact on Koala habitat critical to survival;
+7. approximately 136 ha of GHFF foraging habitat would be removed;
+8. that GHFF removal is assessed by SHG as likely to adversely impact habitat critical to survival, notwithstanding SHG's separate view that broader population/recovery effects are unlikely.
 
-The consultant then relies on retention of western riparian vegetation, existing disturbance, surrounding urban barriers and mitigation to argue against some recovery-pathway residual impacts and to assign recovery value 0.
+The consultant then relies on retention of western riparian vegetation, existing disturbance, surrounding urban barriers and mitigation to argue against some recovery-pathway residual impacts and to assign Koala recovery value 0.
 
 That creates a real **for/against legal-evidence issue**, not just a campaign disagreement.
 
-### Internal tension counsel/ecologists should stress-test
+### Internal tensions counsel/ecologists should stress-test
 
 The same report says the site is part of a >500 ha connected landscape and that existing/future development will cause further fragmentation and fewer movement opportunities, while also reasoning that the site is too isolated / compromised to be important to Koala recovery.
 
-Counsel should ask whether the decision-maker must square:
+For GHFF, the report says 136 ha removal is likely to adversely impact habitat critical to survival, but also says surrounding foraging habitat, retained western vegetation and the lack of an on-site camp mean wider population decline or recovery interference is unlikely.
+
+Counsel should ask whether the decision-maker must square these distinct propositions rather than allowing one to silently substitute for another:
 
 ```text
+Koala:
 >500 ha connectivity + score 7 + significant 136 ha habitat loss
 against
 recovery value 0 + claimed isolation + mitigation/retention
-```
 
-and whether later evidence, changed surrounding development, current corridor mapping or current occurrence data materially alters the assumptions used in 2019.
+GHFF:
+136 ha critical-foraging-habitat adverse impact
+against
+claimed absence of population/recovery-level effect
+```
 
 ### Immediate federal work
 
-1. Compare the 2019 Figure 2 / Plan 6 geometry against the 2026 final-PD geometry.
-2. Extract the final retained-habitat and avoidance design.
-3. Extract the complete final residual-impact analysis.
-4. Extract the final offset package and offset-site identities.
-5. Identify whether the 2019 fragmentation/connectivity assumptions were updated for subsequent development approvals and loss around the site.
-6. Identify how conservation advice/recovery planning and public submissions were treated.
+1. Acquire the **substantive** 2026 final Preliminary Documentation volumes/attachments.
+2. Compare the 2019 Figure 2 / Plan 6 geometry against the substantive 2026 geometry.
+3. Extract the final retained-habitat and avoidance design.
+4. Extract the complete final residual-impact analysis for Koala and GHFF separately.
+5. Extract the final offset package and offset-site identities.
+6. Identify whether the 2019 fragmentation/connectivity assumptions were updated for subsequent development approvals and loss around the site.
+7. Acquire the actual summary/response to the 1,786 comments and identify which comments changed the proposal, evidence or reasoning.
+8. Identify how conservation advice/recovery planning was treated.
 
 ---
 
@@ -374,6 +423,8 @@ species/function equivalence to Woogaroo impact habitat
 
 The impact-side comparison is now stronger because the Springview primary material itself says the impact site contains habitat score 7 and a 136 ha significant critical-habitat impact. Any offset-equivalence analysis should therefore compare against that exact impact-side baseline, not a generic hectares-only description.
 
+The substantive 2026 final-PD/offset carrier is still missing from the uploaded set; the one-page `Final-PD` notice does not pay these atoms.
+
 ---
 
 ## 9. Planning / koala exemption audit
@@ -463,7 +514,7 @@ The newly supplied 2019/8575 set includes:
 - referral;
 - project locality/aerial figures;
 - four-part MNES ecological technical report;
-- Preliminary Documentation public-comment notices;
+- Preliminary Documentation publication/public-comment notices;
 - extension notice;
 - Cherish Enterprises environmental policy.
 
@@ -474,34 +525,40 @@ Attribution remains:
 ```text
 SHG consultant conclusion
 != Commonwealth finding
-!= 2026 final-PD conclusion unless carried forward
+!= 2026 substantive final-PD conclusion unless carried forward
 != NCA s 13 legal conclusion
+
+s 95B publication notice
+!= substantive Preliminary Documentation
+
+1,786 comments received
+!= adequate response to those comments
 ```
 
 ---
 
 ## 14. Highest-value acquisitions now
 
-The order has changed:
+The order is now:
 
-1. **2026 final Preliminary Documentation delta audit** against the now-source-paid 2019 baseline — especially final action/clearing polygon, retained habitat, avoidance, residual impacts and offsets;
-2. **9281/2024/OW approved vegetation-clearing drawing**, conditions and works chronology;
-3. exact lot/plan + GIS polygons for proposed offset sites;
-4. existing-protection / prior-offset / restoration obligations for those offset parcels;
-5. exact GIS join between Springview Plan 5/6, Scenic/Peninsula landscape carriers and official Queensland corridor geometry;
-6. ecologist/counsel stress-test of the s 13 essentiality question, including the SHG recovery-value-0 reasoning;
-7. exact Springview exemption/grandfathering instrument and transition/stage/variation coverage;
-8. current amphibian survey/validation evidence for Opossum/Woogaroo Creek where relevant;
-9. commencement/pre-construction evidence if works become imminent;
-10. Commonwealth request/response and final assessment material showing how cumulative fragmentation, alternatives, public submissions and offsets were treated.
+1. **Substantive 2026 Preliminary Documentation volumes/attachments and comments summary/response** — because the uploaded `Final-PD` file is only the s 95B publication notice;
+2. **2019 -> 2026 delta audit** — especially final action/clearing polygon, retained habitat, avoidance, residual impacts, Koala/GHFF reasoning and offsets;
+3. **9281/2024/OW approved vegetation-clearing drawing**, conditions and works chronology;
+4. exact lot/plan + GIS polygons for proposed offset sites;
+5. existing-protection / prior-offset / restoration obligations for those offset parcels;
+6. exact GIS join between Springview Plan 5/6, Scenic/Peninsula landscape carriers and official Queensland corridor geometry;
+7. ecologist/counsel stress-test of the s 13 essentiality question, including the SHG recovery-value-0 reasoning;
+8. exact Springview exemption/grandfathering instrument and transition/stage/variation coverage;
+9. current amphibian survey/validation evidence for Opossum/Woogaroo Creek where relevant;
+10. commencement/pre-construction evidence if works become imminent.
 
-The central bottleneck is no longer “find historical Springview habitat evidence.” We now have it. The bottleneck is **current/final-state comparison, legal sufficiency, and exact operational geometry**.
+The central bottleneck is no longer “find historical Springview habitat evidence.” We now have it. The bottleneck is **obtaining the actual current/final decision record, comparing it to the paid historical baseline, testing legal sufficiency, and binding current works to exact geometry and timing**.
 
 ---
 
 ## 15. Suggested handoff to pro-bono counsel
 
-> We have organised the Woogaroo preservation matter by legal consumer and evidentiary element. The immediate live matter is EPBC 2019/8575, with the approval/refusal decision period ending 1 October 2026. We now have the project's own 2019 referral-era ecology: Lot 9999 SP292760, a 162 ha referral area, 136 ha impact area, Koala habitat score 7, Koala scat/food-tree evidence, a >500 ha habitat-connectivity analysis, and Saunders Havill's conclusion that clearing/functional loss of 136 ha would significantly impact Koala habitat critical to survival. The same report also argues recovery value 0 and relative isolation, so we want that internal for/against evidence stress-tested rather than selectively presented. The immediate federal task is to compare those 2019 propositions with the 2026 final Preliminary Documentation, especially the final geometry, retention, avoidance, residual impacts and offsets. In parallel, the Queensland s 13 lane now has strong same-parcel habitat-function evidence but still needs the statutory essentiality case, and ss 102–107 has a specific approved vegetation-clearing works object (`9281/2024/OW`) but still needs its exact clearing footprint and timing. We would value counsel's view on legal sufficiency, procedure, and the smallest remaining evidence package that could change the outcome before irreversible clearing.
+> We have organised the Woogaroo preservation matter by legal consumer and evidentiary element. The immediate live matter is EPBC 2019/8575, with the approval/refusal decision period ending 1 October 2026. We now have the project's own 2019 referral-era ecology: Lot 9999 SP292760, a 162 ha referral area, 136 ha impact area, Koala habitat score 7, Koala scat/food-tree evidence, a >500 ha habitat-connectivity analysis, Saunders Havill's conclusion that clearing/functional loss of 136 ha would significantly impact Koala habitat critical to survival, and a separate finding that removal of approximately 136 ha of GHFF foraging habitat is likely to adversely impact habitat critical to survival of that species. The same report also argues Koala recovery value 0 and limited broader GHFF population/recovery effect, so we want those internal for/against propositions stress-tested rather than selectively presented. The file supplied to us as `2019-8575-Final-PD.pdf` is only the one-page s 95B publication notice; it proves that 1,786 comments were received and that the PD/comments summary was republished, but it does not contain the substantive final record. The immediate federal acquisition is therefore the actual 2026 Preliminary Documentation volumes/attachments and comments response, followed by an exact 2019-to-2026 delta audit. In parallel, the Queensland s 13 lane now has strong same-parcel habitat-function evidence but still needs the statutory essentiality case, and ss 102–107 has a specific approved vegetation-clearing works object (`9281/2024/OW`) but still needs its exact clearing footprint and timing. We would value counsel's view on legal sufficiency, procedure, and the smallest remaining evidence package that could change the outcome before irreversible clearing.
 
 The ask remains:
 
@@ -512,7 +569,11 @@ The ask remains:
 ## 16. Current roadmap summary
 
 ```text
-URGENT
+URGENT ACQUISITION
+  substantive 2026 Preliminary Documentation + attachments
+  actual summary/response to 1,786 comments
+
+URGENT ANALYSIS AFTER ACQUISITION
   2019 -> 2026 EPBC 2019/8575 delta audit
   final geometry + retention + avoidance + residual impacts + offsets
 
@@ -524,6 +585,7 @@ NOW STRONGLY SOURCE-PAID AT 2019 BASELINE
   Koala scat and food-tree evidence
   >500 ha habitat-connectivity analysis
   SHG significant-impact conclusion
+  136 ha GHFF foraging-habitat removal + adverse-critical-habitat conclusion
 
 LIVE IN PARALLEL
   NCA s 13 essentiality stress-test
@@ -548,7 +610,9 @@ The present legal state is best summarised as:
 
 ```text
 historical Springview habitat/impact atoms are now substantially paid;
-the live task is to compare them to the 2026 final state,
+the apparent final-PD carrier is only a publication notice;
+the live task is to obtain the substantive 2026 record,
+compare it to the paid 2019 baseline,
 stress-test the legal inferences,
 and bind current works to exact geometry and timing.
 ```
