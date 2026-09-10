@@ -4,20 +4,19 @@ module DASHI.Physics.Closure.NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound
 -- ROUND517 / DYADIC CRITICAL NORM EQUIVALENCE BOUNDARY
 --
 -- The introspective route to R515's physical critical-observable realization
--- begins here as a standard-analysis seam.  Later R518-R520 refine this seam:
+-- began here as a standard-analysis seam.  The downstream refinement now
+-- closes that finite-carrier seam without adding Navier--Stokes analysis:
 --
---   R518 closes the canonical dyadic/Euclidean SQUARED annulus;
---   R519 reuses the constructed Bishop Nat root, nonnegativity and semantic
---        square law;
---   R520 proves finite floor-root and every canonical rational approximant are
---        monotone in the radicand.
+--   R518: exact canonical dyadic/Euclidean squared annulus;
+--   R519: constructed Bishop Nat root + nonnegativity + semantic square law;
+--   Foundations: pointwise ordered regular rational approximants induce the
+--                corresponding pinned Bishop-real order;
+--   finite Fourier owner: modewise root and cubic-root-weight comparisons lift
+--                through arbitrary finite lists against nonnegative modal mass.
 --
--- Thus this file remains the historical whole-norm boundary, while the current
--- first missing coordinate is narrower: realize pointwise order of the regular
--- root approximants as order of the corresponding Bishop reals, then lift the
--- resulting modewise multiplier comparison through the finite Fourier sum.
---
--- No Navier--Stokes cancellation estimate is introduced here.
+-- Thus both H^(1/2) and H^(3/2) multiplier transports are now theorem-backed
+-- on the finite Galerkin carrier.  This does NOT prove the phase-sensitive
+-- signed-production estimate or R503 cancellation bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -27,6 +26,7 @@ import DASHI.Physics.Closure.NSTriadKNDyadicEuclideanShellMarginRound88Exact as 
 import DASHI.Physics.Closure.NSTriadKNConcreteUpperSquaredPacketRound104Exact as Packet
 import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104Exact as LayerCake
 import DASHI.Physics.Closure.NSTriadKNCriticalRadialRealizationProofSearchRound516Exact as R516
+import DASHI.Physics.Closure.NSTriadKNDyadicCriticalFiniteFourierOrderExact as Finite
 
 data DyadicCriticalNormResidual : Set where
   missingUniformDyadicHOneHalfEquivalence : DyadicCriticalNormResidual
@@ -50,10 +50,10 @@ firstMissing (dyadic-critical-norm-status true true) =
   dyadicCriticalNormRealizationClosed
 
 currentStatus : DyadicCriticalNormStatus
-currentStatus = dyadic-critical-norm-status false false
+currentStatus = dyadic-critical-norm-status true true
 
 currentFirstMissing :
-  firstMissing currentStatus ≡ missingUniformDyadicHOneHalfEquivalence
+  firstMissing currentStatus ≡ dyadicCriticalNormRealizationClosed
 currentFirstMissing = refl
 
 round517InfinityEuclideanSquareComparisonClosed : Bool
@@ -72,16 +72,21 @@ round517DyadicProducerSelectedAsShortestFiniteRoute : Bool
 round517DyadicProducerSelectedAsShortestFiniteRoute = true
 
 round517UniformDyadicHOneHalfEquivalenceClosed : Bool
-round517UniformDyadicHOneHalfEquivalenceClosed = false
+round517UniformDyadicHOneHalfEquivalenceClosed =
+  Finite.roundFiniteHOneHalfMultiplierTransportClosed
 
 round517UniformDyadicHThreeHalfEquivalenceClosed : Bool
-round517UniformDyadicHThreeHalfEquivalenceClosed = false
+round517UniformDyadicHThreeHalfEquivalenceClosed =
+  Finite.roundFiniteHThreeHalfMultiplierTransportClosed
 
-round517LaterRoundsReduceThisToBishopOrderRealization : Bool
-round517LaterRoundsReduceThisToBishopOrderRealization = true
+round517FiniteCarrierCriticalNormRealizationClosed : Bool
+round517FiniteCarrierCriticalNormRealizationClosed = true
 
-round517ThisResidualIsStandardAnalysisNotNSCancellation : Bool
-round517ThisResidualIsStandardAnalysisNotNSCancellation = true
+round517RequiresNewNSCancellationEstimate : Bool
+round517RequiresNewNSCancellationEstimate = false
+
+round517ThisResidualWasStandardAnalysisNotNSCancellation : Bool
+round517ThisResidualWasStandardAnalysisNotNSCancellation = true
 
 round517ClayPromotion : Bool
 round517ClayPromotion = false
@@ -101,17 +106,19 @@ round517FiniteRadialLayerCakeClosedIsTrue :
 round517FiniteRadialLayerCakeClosedIsTrue =
   LayerCake.round104FiniteRadialAbelLayerCakeClosedIsTrue
 
-round517UniformDyadicHOneHalfEquivalenceClosedIsFalse :
-  round517UniformDyadicHOneHalfEquivalenceClosed ≡ false
-round517UniformDyadicHOneHalfEquivalenceClosedIsFalse = refl
+round517UniformDyadicHOneHalfEquivalenceClosedIsTrue :
+  round517UniformDyadicHOneHalfEquivalenceClosed ≡ true
+round517UniformDyadicHOneHalfEquivalenceClosedIsTrue =
+  Finite.roundFiniteHOneHalfMultiplierTransportClosedIsTrue
 
-round517UniformDyadicHThreeHalfEquivalenceClosedIsFalse :
-  round517UniformDyadicHThreeHalfEquivalenceClosed ≡ false
-round517UniformDyadicHThreeHalfEquivalenceClosedIsFalse = refl
+round517UniformDyadicHThreeHalfEquivalenceClosedIsTrue :
+  round517UniformDyadicHThreeHalfEquivalenceClosed ≡ true
+round517UniformDyadicHThreeHalfEquivalenceClosedIsTrue =
+  Finite.roundFiniteHThreeHalfMultiplierTransportClosedIsTrue
 
-round517LaterRoundsReduceThisToBishopOrderRealizationIsTrue :
-  round517LaterRoundsReduceThisToBishopOrderRealization ≡ true
-round517LaterRoundsReduceThisToBishopOrderRealizationIsTrue = refl
+round517FiniteCarrierCriticalNormRealizationClosedIsTrue :
+  round517FiniteCarrierCriticalNormRealizationClosed ≡ true
+round517FiniteCarrierCriticalNormRealizationClosedIsTrue = refl
 
 round517ClayPromotionIsFalse : round517ClayPromotion ≡ false
 round517ClayPromotionIsFalse = refl
