@@ -7,17 +7,16 @@ import DASHI.ComputerScience.RSA260NDimSymmetryProductionRoadmapExact as Prior
 import DASHI.ComputerScience.RSA260FractalPadicHyperfabricBatchGluingExact as Gluing
 import DASHI.ComputerScience.RSA260AdaptiveReducerHyperfabricExact as Adaptive
 import DASHI.ComputerScience.RSA260DataDrivenReducerInferenceExact as DataDriven
+import DASHI.ComputerScience.RSA260InferredCandidateReducerHyperfabricExact as Candidates
 import DASHI.ComputerScience.RSA260ReducerHyperfabricSourceDiligenceExact as Sources
 
 ------------------------------------------------------------------------
--- CONSOLIDATED ROADMAP AFTER DATA-DRIVEN ADAPTIVE HYPERFABRIC INFERENCE
+-- CONSOLIDATED ROADMAP AFTER DATA-DRIVEN CANDIDATE + HYPERFABRIC INFERENCE
 --
--- Conclusion payment remains acquisition-first.  The middle replay-preparation
--- lane now distinguishes:
---   declared synthetic benchmark structure,
---   inferred synthetic reducer structure,
---   exact executable receipt,
---   production same-object application.
+-- Conclusion payment remains acquisition-first.  The synthetic middle lane now
+-- infers candidate local actions before inferring co-requirement/conflict
+-- structure.  Execution identity and production same-object application remain
+-- distinct snowball coordinates.
 ------------------------------------------------------------------------
 
 priorRoadmap : Prior.ConsolidatedRSA260RoadmapBoundary
@@ -31,6 +30,9 @@ adaptiveRoadmap = Adaptive.currentRSA260AdaptiveHyperfabricRoadmapBoundary
 
 dataDrivenBoundary : DataDriven.DataDrivenInferencePromotionBoundary
 dataDrivenBoundary = DataDriven.currentDataDrivenInferencePromotionBoundary
+
+candidateBoundary : Candidates.CandidateInferencePromotionBoundary
+candidateBoundary = Candidates.canonicalCandidateInferencePromotionBoundary
 
 sourceBoundary : Sources.SnowballAttributionBoundary
 sourceBoundary = Sources.canonicalSnowballAttributionBoundary
@@ -74,9 +76,12 @@ record AdaptiveHyperfabricProductionBoundary : Set where
     primaryColouringSourceAttributed : Bool
     conceptQIDsRecordedWithoutPromotion : Bool
     irrelevantOEISIdentifierRejected : Bool
+    localReducerCandidatesInferredFromNDimRefinement : Bool
+    genericCandidateInferenceFailsClosed : Bool
     operatorDerivedRequirementInferenceImplemented : Bool
     observerDerivedConflictInferenceImplemented : Bool
     dataDrivenClosedBatchSelectionImplemented : Bool
+    exactCandidateRuntimeBlobExecutionPaid : Bool
     exactDataDrivenRuntimeBlobExecutionPaid : Bool
     productionBytesPaid : Bool
     productionRecursiveRefinementPaid : Bool
@@ -94,35 +99,33 @@ currentAdaptiveHyperfabricProductionBoundary =
   adaptive-hyperfabric-production-boundary
     true true true true true true true true
     true true true true
-    true true true false
+    true true
+    true true true
+    false false
     false false false false false false false false false
 
 ------------------------------------------------------------------------
 -- Operational order after bytes arrive.
---
--- A recursive dimension is admitted only while it changes a consumer-relevant
--- partition or reducer relation.  Requirement inference/closure happens before
--- consumer-relative conflict inference and batch optimisation.  Failure of the
--- optional reduction path falls back to full-width CPU replay.
 ------------------------------------------------------------------------
 
 record AdaptiveReplayPolicy : Set where
   constructor adaptive-replay-policy
   field
     addAxisOnlyOnObservedGain : Bool
+    inferCandidatesBeforeRequirements : Bool
     inferRequirementsBeforeOptimisingBatch : Bool
     closeRequirementsBeforeInferringClosedComponentConflicts : Bool
     conflictsRemainConsumerRelative : Bool
     rejectBatchesContainingConflict : Bool
     requireGlobalMPEqualsPM : Bool
     requireObserverCovariance : Bool
-    failedSymmetrySearchFallsBackToFullWidth : Bool
+    failedCandidateOrSymmetrySearchFallsBackToFullWidth : Bool
     quotientReplayEliminatesUpstairsVerification : Bool
 open AdaptiveReplayPolicy public
 
 canonicalAdaptiveReplayPolicy : AdaptiveReplayPolicy
 canonicalAdaptiveReplayPolicy = adaptive-replay-policy
-  true true true true true true true true false
+  true true true true true true true true true false
 
 ------------------------------------------------------------------------
 -- Snowball/source order is orthogonal to mathematical dependency order.
@@ -148,6 +151,7 @@ canonicalRoadmapSourcePaymentBoundary = roadmap-source-payment-boundary
 ------------------------------------------------------------------------
 
 data MoreRecursiveDepthImpliesMoreReduction : Set where
+data CandidateClassImpliesAutomorphism : Set where
 data RequirementClosureImpliesAdmissibleBatch : Set where
 data LargestClosedBatchImpliesEquivariance : Set where
 data SyntheticHyperformImpliesProductionHyperform : Set where
@@ -155,6 +159,9 @@ data SourceIdentityImpliesExecution : Set where
 
 moreDepthDoesNotGuaranteeReduction : MoreRecursiveDepthImpliesMoreReduction → ⊥
 moreDepthDoesNotGuaranteeReduction ()
+
+candidateClassDoesNotCreateAutomorphism : CandidateClassImpliesAutomorphism → ⊥
+candidateClassDoesNotCreateAutomorphism ()
 
 closureDoesNotGuaranteeAdmissibility : RequirementClosureImpliesAdmissibleBatch → ⊥
 closureDoesNotGuaranteeAdmissibility ()
