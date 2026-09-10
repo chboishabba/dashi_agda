@@ -2,7 +2,7 @@ use std::env;
 use std::fs;
 use std::path::{Path,PathBuf};
 
-const SCHEMA:&str="slr-lexical-counterfactual-v1";
+const SCHEMA:&str="slr-lexical-counterfactual-v2";
 #[derive(Clone,Debug)] struct Config{parser:PathBuf,source:PathBuf,sentence:usize,token:usize,out_dir:PathBuf}
 #[derive(Clone,Debug)] struct Tok{ordinal:usize,start:usize,end:usize,text:String,lemma:String,pos:String,dep:String,head:usize}
 fn usage()->!{eprintln!("usage: slr-lexical-counterfactual --parser parser.tsv --source source.txt --sentence N --token N --out-dir DIR");std::process::exit(2)}
@@ -11,4 +11,14 @@ fn tokens(text:&str,sid:usize)->Result<Vec<Tok>,String>{let mut active=false;let
 fn charmap(s:&str)->Vec<usize>{let mut v=s.char_indices().map(|(i,_)|i).collect::<Vec<_>>();v.push(s.len());v}
 fn replaced(src:&str,map:&[usize],t:&Tok,repl:&str)->String{let a=map[t.start.min(map.len()-1)];let b=map[t.end.min(map.len()-1)];format!("{}{}{}",&src[..a],repl,&src[b..])}
 fn safe_dir(p:&Path)->Result<(),std::io::Error>{if p.exists(){fs::remove_dir_all(p)?}fs::create_dir_all(p)}
-fn main()->Result<(),Box<dyn std::error::Error>>{let c=args();let parser=fs::read_to_string(&c.parser)?;let src=fs::read_to_string(&c.source)?;let ts=tokens(&parser,c.sentence).map_err(|e|format!("parser: {e}"))?;let t=ts.iter().find(|x|x.ordinal==c.token).ok_or("target token not found")?;let next=ts.iter().find(|x|x.ordinal==c.token+1).map(|x|x.text.as_str()).unwrap_or("");let variants=[("observed",t.text.as_str()),("wildcard-lower","x"),("wildcard-upper","X"),("proper-noun","Alex"),("common-noun","person"),("verb","acts"),("punctuation",",")];safe_dir(&c.out_dir)?;let map=charmap(&src);let mut manifest=String::from("schema\tvariant\treplacement\toriginal_surface\toriginal_lemma\toriginal_pos\toriginal_dep\toriginal_head\tsentence\ttoken\tnext_surface\tvariant_source\tcandidate_only\n");for(name,repl)in variants{let d=c.out_dir.join(name);fs::create_dir_all(&d)?;let path=d.join("source.txt");fs::write(&path,replaced(&src,&map,t,repl))?;manifest.push_str(&format!("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\ttrue\n",SCHEMA,name,repl,t.text,t.lemma,t.pos,t.dep,t.head,c.sentence,c.token,next,path.display()));}fs::write(c.out_dir.join("manifest.tsv"),manifest)?;eprintln!("SLR_LEXICAL_COUNTERFACTUAL_RECEIPT schema={} sentence={} token={} original={} pos={} dep={} variants=7 candidate_only=true semantic_promotion=false",SCHEMA,c.sentence,c.token,t.text,t.pos,t.dep);Ok(())}
+fn main()->Result<(),Box<dyn std::error::Error>>{let c=args();let parser=fs::read_to_string(&c.parser)?;let src=fs::read_to_string(&c.source)?;let ts=tokens(&parser,c.sentence).map_err(|e|format!("parser: {e}"))?;let t=ts.iter().find(|x|x.ordinal==c.token).ok_or("target token not found")?;let next=ts.iter().find(|x|x.ordinal==c.token+1).map(|x|x.text.as_str()).unwrap_or("");
+let variants=[
+("observed","lexical",t.text.as_str()),
+("wildcard-lower","lexical","x"),
+("wildcard-upper","lexical","X"),
+("proper-noun","lexical","Alex"),
+("common-noun","lexical","person"),
+("verb-surface","lexical","acts"),
+("punctuation-boundary","structural",",")
+];
+safe_dir(&c.out_dir)?;let map=charmap(&src);let mut manifest=String::from("schema\tvariant\tperturbation_class\treplacement\toriginal_surface\toriginal_lemma\toriginal_pos\toriginal_dep\toriginal_head\tsentence\ttoken\tnext_surface\tvariant_source\tcandidate_only\n");for(name,class,repl)in variants{let d=c.out_dir.join(name);fs::create_dir_all(&d)?;let path=d.join("source.txt");fs::write(&path,replaced(&src,&map,t,repl))?;manifest.push_str(&format!("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\ttrue\n",SCHEMA,name,class,repl,t.text,t.lemma,t.pos,t.dep,t.head,c.sentence,c.token,next,path.display()));}fs::write(c.out_dir.join("manifest.tsv"),manifest)?;eprintln!("SLR_LEXICAL_COUNTERFACTUAL_RECEIPT schema={} sentence={} token={} original={} pos={} dep={} lexical_realizations=6 structural_realizations=1 candidate_only=true semantic_promotion=false",SCHEMA,c.sentence,c.token,t.text,t.pos,t.dep);Ok(())}
