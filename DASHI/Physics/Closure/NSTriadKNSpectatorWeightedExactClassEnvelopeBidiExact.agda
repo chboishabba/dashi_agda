@@ -127,7 +127,7 @@ module ExactEnvelope
             (Audit.cutoff SB.system) (Physical.p tau))
     highLowSumIsFold tau =
       R581.sumCellsMapAsFold581
-        (R581.highLowCell581 (Live.nestedSlotCellCell584 tau))
+        (R581.highLowCell581 (Live.nestedSlotCell584 tau))
         (Output.physicalOutputFiber
           (Audit.cutoff SB.system) (Physical.p tau))
 
@@ -212,6 +212,7 @@ lhHlPaletteOrbitQuotientConsumerPaidIsTrue = refl
 
 arbitraryClassBudgetChoiceStillOnCriticalPathIsFalse :
   arbitraryClassBudgetChoiceStillOnCriticalPath ≡ false
+
 arbitraryClassBudgetChoiceStillOnCriticalPathIsFalse = refl
 
 r503ClosedHereIsFalse : r503ClosedHere ≡ false
