@@ -17,7 +17,7 @@ firstLightPostSource =
   mkNoDOISource
     "Poppie / NOUS"
     "Virtual Observatory first-light Local Group rendering and summary"
-    "private community/social post, visible 2026-09-07 23:38"
+    "private community/social post, displayed 2026-09-07 23:38; timezone not asserted"
     "2026"
     ""
     communitySource
@@ -28,7 +28,7 @@ firstLightAttribution : AttributionProjection firstLightPostSource
 firstLightAttribution =
   mkControlledAttributionProjection
     firstLightPostSource
-    "Poppie / NOUS — private post, 2026-09-07 23:38"
+    "Poppie / NOUS — private post, displayed 2026-09-07 23:38"
 
 record FirstLightPrivateSourceReceipt : Set where
   constructor firstLightPrivateSourceReceipt
@@ -36,6 +36,8 @@ record FirstLightPrivateSourceReceipt : Set where
     displayIdentity : String
     visibleDate : String
     visibleTime : String
+    visibleTimezoneKnown : Bool
+    visibleTimezoneKnownIsFalse : visibleTimezoneKnown ≡ false
     attachedArtifact : String
     privateServerKnownToContributor : Bool
     privateServerLocatorPublished : Bool
@@ -51,6 +53,8 @@ originReceipt =
     "Poppie / NOUS"
     "2026-09-07"
     "23:38"
+    false
+    refl
     "first-light.png"
     true
     false
@@ -60,14 +64,21 @@ originReceipt =
     false
     refl
 
-postDoesNotImportPaperAuthorship : Bool
-postDoesNotImportPaperAuthorship = false
+postImportsPaperAuthorship : Bool
+postImportsPaperAuthorship = false
 
-postDoesNotImportPaperAuthorshipIsFalse : postDoesNotImportPaperAuthorship ≡ false
-postDoesNotImportPaperAuthorshipIsFalse = refl
+postImportsPaperAuthorshipIsFalse : postImportsPaperAuthorship ≡ false
+postImportsPaperAuthorshipIsFalse = refl
 
-postDoesNotImportIndependentVerification : Bool
-postDoesNotImportIndependentVerification = false
+postImportsIndependentVerification : Bool
+postImportsIndependentVerification = false
 
-postDoesNotImportIndependentVerificationIsFalse : postDoesNotImportIndependentVerification ≡ false
-postDoesNotImportIndependentVerificationIsFalse = refl
+postImportsIndependentVerificationIsFalse : postImportsIndependentVerification ≡ false
+postImportsIndependentVerificationIsFalse = refl
+
+privateSourceAttributionImpliesPermissionToPublishLocator : Bool
+privateSourceAttributionImpliesPermissionToPublishLocator = false
+
+privateSourceAttributionImpliesPermissionToPublishLocatorIsFalse :
+  privateSourceAttributionImpliesPermissionToPublishLocator ≡ false
+privateSourceAttributionImpliesPermissionToPublishLocatorIsFalse = refl
