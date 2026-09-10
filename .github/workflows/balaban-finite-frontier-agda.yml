@@ -56,6 +56,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCMP109LangevinTypedSecondVariationRound267Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanLangevinAnchoredInfluenceRound268Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayCanonicalBCurrentExact.agda'
+      - 'DASHI/Physics/YangMills/Balaban*Round29*.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteRGExpectationCovarianceSameObjectRound280Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanContinuumCovarianceSpectrumConstructorRound281Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayCanonicalBFrontierRound282Exact.agda'
