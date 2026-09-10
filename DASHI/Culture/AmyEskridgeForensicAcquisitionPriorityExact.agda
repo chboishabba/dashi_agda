@@ -82,6 +82,29 @@ exPartnerPriority =
     "independent voluntary first-person witness account"
     secondBand intrusionOccurrence true true true
 
+record ExistingAcquisitionLink : Set where
+  constructor existing-acquisition-link
+  field
+    existingTargetName : String
+    priorityTargetName : String
+    sameTargetByConstruction : Bool
+
+open ExistingAcquisitionLink public
+
+autopsyExistingAcquisitionLink : ExistingAcquisitionLink
+autopsyExistingAcquisitionLink =
+  existing-acquisition-link
+    "autopsy / postmortem examination record"
+    "autopsy / postmortem examination record"
+    true
+
+policeExistingAcquisitionLink : ExistingAcquisitionLink
+policeExistingAcquisitionLink =
+  existing-acquisition-link
+    "police incident / calls-for-service records"
+    "police incident / calls-for-service records"
+    true
+
 record ForensicPriorityBoundary : Set where
   constructor forensic-priority-boundary
   field
@@ -91,14 +114,8 @@ record ForensicPriorityBoundary : Set where
     antigravityNoveltyAutomaticallyCreatesResearchLink : Bool
     lawfulPrimaryRecordAcquisitionPreferred : Bool
     knownAbsentClosesOnlyExactBranch : Bool
+    existingAcquisitionOwnerRemainsAuthoritative : Bool
 
 canonicalForensicPriorityBoundary : ForensicPriorityBoundary
 canonicalForensicPriorityBoundary =
-  forensic-priority-boundary false true false false true true
-
--- Keep this owner explicitly coupled to the existing acquisition targets.
-autopsyTargetIsExistingTarget : Acquire.Acquisition.AcquisitionTarget
-autopsyTargetIsExistingTarget = Acquire.autopsyTarget
-
-policeTargetIsExistingTarget : Acquire.Acquisition.AcquisitionTarget
-policeTargetIsExistingTarget = Acquire.policeReportTarget
+  forensic-priority-boundary false true false false true true true
