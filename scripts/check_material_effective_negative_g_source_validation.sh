@@ -31,6 +31,7 @@ files=(
   DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
   DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
   DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+  DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 )
 for file in "${files[@]}"; do
@@ -79,21 +80,24 @@ grep -q 'federalReviewContextEqualsCaseConnection' DASHI/Culture/AmyEskridgeDemi
 grep -q 'scientificNoveltyEqualsDeathCausation' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
 grep -q 'notPubliclyLocatedEqualsKnownAbsent' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
 
-# Amy OSINT boundaries: public discovery is append-only evidence acquisition,
-# never automatic truth/corroboration/forensic promotion.
+# Amy OSINT boundaries.
 grep -q 'osintChangesAcquisitionRouteNotTruthStandard' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
 grep -q 'repeatedReportingEqualsIndependentCorroboration' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
 grep -q 'reportedScreenshotEqualsAuthenticatedNativeMessage' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
 grep -q 'preDeathStatementAloneDeterminesDeathManner' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
 grep -q 'osintAtomMayCreateCulpritByAccumulation' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
 
-# Message provenance backtrace and dated chronology remain non-promoting.
+# Message provenance, chronology, and corroboration remain non-promoting.
 grep -q 'closerToOriginEqualsAuthenticated' DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
 grep -q 'authenticatedPreDeathStatementDeterminesDeathManner' DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
 grep -q 'temporalOrderingCreatesCausation' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
 grep -q 'exactReportedDateEqualsNativeMessageAuthentication' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
 grep -q 'reportedDirectedEnergyClaimEstablishesDirectedEnergyAttack' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
 grep -q 'unresolvedDatesRemainExplicit' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+grep -q 'outletCountEqualsIndependentOriginCount' DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
+grep -q 'metadataContradictionCreatesDeathTheory' DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
+grep -q 'independentHouseInquiryCorroboratesAmySpecificCause' DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
+grep -q 'contradictionMayCreateNewAcquisitionTarget' DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
@@ -102,4 +106,4 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda \
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 
-echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT chronology snowball validation checks passed"
+echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT chronology/corroboration snowball validation checks passed"
