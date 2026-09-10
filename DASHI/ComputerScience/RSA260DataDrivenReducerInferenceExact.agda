@@ -120,17 +120,13 @@ data OperatorCouplingImpliesRequirement : Set where
 data SameObserverSignatureImpliesUniversalConflict : Set where
 data SyntheticInferenceImpliesProductionStructure : Set where
 data SourceDiligenceImpliesExecution : Set where
-
 data ExactBlobIdentityImpliesSuccessfulExecution : Set where
 
 operatorCouplingAloneDoesNotUniversallyCreateRequirement : OperatorCouplingImpliesRequirement → ⊥
 operatorCouplingAloneDoesNotUniversallyCreateRequirement ()
 
 observerCollisionIsConsumerRelativeNotUniversal : SameObserverSignatureImpliesUniversalConflict → ⊥
-observerCollisionIsConsumerRelativeNotUniversalConflict ()
-  where
-    universalConflict : SameObserverSignatureImpliesUniversalConflict → ⊥
-    universalConflict ()
+observerCollisionIsConsumerRelativeNotUniversal ()
 
 syntheticInferenceDoesNotCreateProductionStructure : SyntheticInferenceImpliesProductionStructure → ⊥
 syntheticInferenceDoesNotCreateProductionStructure ()
