@@ -2,20 +2,14 @@
 module DASHI.Physics.YangMills.BalabanLangevinHessianBidirectionalWeldRound262Exact where
 
 ------------------------------------------------------------------------
--- ROUND262/R264 / ROW-C BIDIRECTIONAL SAME-HESSIAN WELD
+-- ROUND262/R264/R266 / ROW-C BIDIRECTIONAL SAME-HESSIAN WELD
 --
--- R262 forced the spatial and temporal Row-C consumers onto ONE literal
--- Langevin/source carrier.  R264 now removes one remaining overcharge:
---
---   weighted generator row = one CMP116 weighted partial
---
--- was stronger than the downstream finite-speed/Dyson consumer needs.
--- The existing least-privilege metric influence compiler requires only
---
---   weighted generator row <= shared CMP116 Hessian constant.
---
--- So this owner now stores exactly that one-sided same-object domination.
--- No rowDepth and no exact partial-sum equality remain on the preferred path.
+-- R262: one literal Langevin/source carrier feeds spatial and temporal users.
+-- R264: weaken exact weighted-partial equality to the one-sided row bound the
+--       propagation consumer actually needs.
+-- R266: remove the remaining adjacency loophole: the rational influence matrix
+--       must majorize the absolute REAL action-Hessian entries of the exact
+--       typed Langevin commutator carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -23,8 +17,10 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
 
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; absℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact as Langevin
+import DASHI.Physics.YangMills.BalabanA2RationalShellBudgetToRealRound108Exact as Embed
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanThreeHalvesMetricWeightExact as Metric
@@ -46,25 +42,32 @@ record LiteralLangevinHessianBidirectionalWeld
     volume : Volume
     root : Root
 
-    langevin : Langevin.CompactLieLangevinFrameData
-    literalDifferentiatedCommutator :
-      Langevin.LangevinCommutatorIdentity langevin
-    literalConnectionIsOnsiteAd :
-      Langevin.connectionIsOnsiteAdTerm langevin
+    -- Typed real-coefficient commutator: C4a decomposition and C4b
+    -- symmetric=action-Hessian are now proof-relevant fields of this object.
+    langevin : Langevin.TypedLangevinCommutatorData ℝ
 
-    -- No independent Site parameter: the influence row is definitionally on
-    -- the exact site carrier of the literal Langevin frame.
-    sites : List (Langevin.Site langevin)
-    metric : Metric.NatMetricTriangle (Langevin.Site langevin)
+    -- No independent Site parameter: all spatial data live on the exact site
+    -- carrier of the typed literal Langevin frame.
+    sites : List (Langevin.Site (Langevin.frame langevin))
+    metric : Metric.NatMetricTriangle (Langevin.Site (Langevin.frame langevin))
     influence :
-      Langevin.Site langevin → Langevin.Site langevin → ℚ
+      Langevin.Site (Langevin.frame langevin) →
+      Langevin.Site (Langevin.frame langevin) → ℚ
     influenceNonnegative : ∀ x y → 0ℚ ≤ influence x y
 
-    -- Least-privilege spatial source payment.  The finite-speed/Dyson compiler
-    -- needs only this domination, not equality with a chosen finite shell
-    -- partial sum.  It must still concern the SAME literal derivative generator
-    -- represented by `langevin` and the SAME marked source represented by
-    -- `shared`; that physical identification remains the live source seam.
+    -- Exact rational-to-real bridge used to compare the physical Hessian entry
+    -- with the nonnegative rational influence majorant.
+    embedding : Embed.OrderedRationalRealRingEmbedding
+
+    -- SAME-OBJECT condition: the finite influence matrix is not merely near a
+    -- Hessian-named object; it majorizes the actual action-Hessian entries of
+    -- this exact typed differentiated Langevin commutator.
+    actionHessianAbsBelowInfluence : ∀ x y →
+      absℝ (Langevin.actionHessianEntry langevin x y)
+      ≤ℝ Embed.embed embedding (influence x y)
+
+    -- Least-privilege weighted row payment.  Downstream all-power estimates are
+    -- compiler-owned and require no exact shell-partial equality.
     symmetricLangevinWeightedRowBelowSharedHessian : ∀ x →
       Sums.sumRational sites
         (λ y → Metric.metricWeight metric x y * influence x y)
@@ -80,6 +83,21 @@ record LiteralLangevinHessianBidirectionalWeld
 open LiteralLangevinHessianBidirectionalWeld public
 
 ------------------------------------------------------------------------
+-- Typed commutator consequence: no opaque C4a/C4b socket remains here.
+------------------------------------------------------------------------
+
+literalCommutatorIsHessianPlusConnection :
+  ∀ {Scale Volume Root}
+    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root) →
+  ∀ x y →
+  Langevin.commutatorEntry (langevin dataSet) x y
+  ≡ Langevin.add (langevin dataSet)
+      (Langevin.actionHessianEntry (langevin dataSet) x y)
+      (Langevin.connectionEntry (langevin dataSet) x y)
+literalCommutatorIsHessianPlusConnection dataSet =
+  Langevin.commutatorEntryIsHessianPlusConnection (langevin dataSet)
+
+------------------------------------------------------------------------
 -- Projection 1: same literal source -> least-privilege spatial compiler.
 ------------------------------------------------------------------------
 
@@ -87,7 +105,7 @@ asMetricInfluenceBridge :
   ∀ {Scale Volume Root}
     (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root) →
   Influence.SharedMarkedMetricInfluenceBridge
-    Scale Volume Root (Langevin.Site (langevin dataSet))
+    Scale Volume Root (Langevin.Site (Langevin.frame (langevin dataSet)))
 asMetricInfluenceBridge dataSet = record
   { Influence.SharedMarkedMetricInfluenceBridge.shared = shared dataSet
   ; Influence.SharedMarkedMetricInfluenceBridge.scale = scale dataSet
@@ -157,9 +175,10 @@ temporalUniformCurvatureDebt dataSet =
 literalConnectionCancellationAvailable :
   ∀ {Scale Volume Root}
     (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root) →
-  Langevin.connectionIsOnsiteAdTerm (langevin dataSet)
+  Langevin.connectionIsOnsiteAdTerm
+    (Langevin.frame (langevin dataSet))
 literalConnectionCancellationAvailable dataSet =
-  literalConnectionIsOnsiteAd dataSet
+  Langevin.connectionEntryIsOnsiteAd (langevin dataSet)
 
 round262BidiCompilerLevel : ProofLevel
 round262BidiCompilerLevel = machineChecked
@@ -168,9 +187,13 @@ round264LeastPrivilegeSpatialCompilerLevel : ProofLevel
 round264LeastPrivilegeSpatialCompilerLevel =
   Influence.sharedMarkedMetricToAllWeightedPowerRowsLevel
 
--- Still physical/source debt: instantiate one literal source object satisfying
--- the differentiated commutator, its symmetric-Hessian identification, the one
--- least-privilege weighted-row domination, and the temporal same-density shell.
+round266TypedSameObjectInfluenceCompilerLevel : ProofLevel
+round266TypedSameObjectInfluenceCompilerLevel =
+  Langevin.typedLangevinCommutatorCompilerLevel
+
+-- Still physical/source debt: instantiate the typed real commutator on the
+-- literal Balaban effective density and prove its actual Hessian entries admit
+-- the same rational weighted majorant used by the shared source shell.
 round262LiteralSourceRealizationLevel : ProofLevel
 round262LiteralSourceRealizationLevel = conditional
 
