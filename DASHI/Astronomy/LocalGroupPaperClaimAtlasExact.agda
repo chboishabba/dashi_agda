@@ -19,8 +19,12 @@ localGroupPaperClaims =
   ∷ mcConnachieCensusScope
   ∷ []
 
+claimCount : List SourceBoundScientificClaim → Nat
+claimCount [] = zero
+claimCount (_ ∷ xs) = suc (claimCount xs)
+
 paperClaimCount : Nat
-paperClaimCount = length localGroupPaperClaims
+paperClaimCount = claimCount localGroupPaperClaims
 
 paperClaimCountIsEight : paperClaimCount ≡ 8
 paperClaimCountIsEight = refl
