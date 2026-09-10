@@ -20,8 +20,8 @@ record AttributionEdge : Set where
   constructor attributionEdge
   field
     relation : AttributionRelation
-    from : String
-    to : String
+    edgeSourceLabel : String
+    edgeTargetLabel : String
     note : String
 
 open AttributionEdge public
