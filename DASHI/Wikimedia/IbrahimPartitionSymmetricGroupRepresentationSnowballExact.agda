@@ -9,6 +9,7 @@ import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimEtaPartitionGeneratingFunctionOEISSnowballExact as Partition
 import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
 import DASHI.Moonshine.GradedRepresentation as GR
+import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
 
 ------------------------------------------------------------------------
 -- INTEGER PARTITION -> SYMMETRIC GROUP / REPRESENTATION SNOWBALL
@@ -69,10 +70,6 @@ youngTableauQid = Identity.mkOptionalIdentityDemand
   "Young tableau"
   Identity.wikidataQid
   (Identity.verified "Q2166280" "Wikidata oldid 2440388593 inspected 2026-09-11")
-
-------------------------------------------------------------------------
--- Typed navigation / mathematical roles.
-------------------------------------------------------------------------
 
 data EdgeRole : Set where
   currentFirstBody combinatorialIndexing conjugacyClassIndexing
@@ -139,18 +136,13 @@ repoGenericRepresentationAPI = typed-edge
   "repo already has action-first finite-dimensional representation API with group action and trace"
   false false false
 
-------------------------------------------------------------------------
--- Explicit repository reuse: we reuse the generic API shape, but do not
--- manufacture an S_n carrier, partition-indexed irreducible family, Specht
--- module, or character table.
-------------------------------------------------------------------------
-
 record SymmetricRepresentationFrontier : Set where
   constructor symmetric-representation-frontier
   field
     genericGroupAPIExists : Bool
     genericFiniteDimensionalRepresentationAPIExists : Bool
     genericTraceCharacterSubstrateExists : Bool
+    equalCardinalityStructureBoundaryReusable : Bool
     symmetricGroupCarrierConstructed : Bool
     permutationActionConstructed : Bool
     partitionCycleTypeBijectionConstructed : Bool
@@ -165,14 +157,10 @@ open SymmetricRepresentationFrontier public
 
 currentSymmetricRepresentationFrontier : SymmetricRepresentationFrontier
 currentSymmetricRepresentationFrontier = symmetric-representation-frontier
-  true true true
+  true true true true
   false false false false false false false
   true true
-  "specialize the existing finite-group representation API to S_n: construct permutations/group law, prove conjugacy classes are indexed by cycle-type partitions, then add partition/Young-diagram indexed irreducibles; do not infer any of these from the equality of counts alone"
-
-------------------------------------------------------------------------
--- All-pairs / FactorsThrough consequences.
-------------------------------------------------------------------------
+  "specialize the existing finite-group representation API to S_n: construct permutations/group law, prove conjugacy classes are indexed by cycle-type partitions, then add partition/Young-diagram indexed irreducibles; equality of the A000041 counts is not an equivariant or canonical identification"
 
 record PartitionRepresentationProjection : Set where
   constructor partition-representation-projection
@@ -183,16 +171,13 @@ record PartitionRepresentationProjection : Set where
     partitionShapeMayCarryMoreInformationThanCount : Bool
     YoungDiagramMayCarryMoreInformationThanPartitionNumber : Bool
     MonsterCharacterAPIImpliesSymmetricSpecificConstruction : Bool
+    equalCardinalitySelectsCanonicalStructuralMap : Bool
     failedCountFactorisationMaySnowballIndexingAxis : Bool
 open PartitionRepresentationProjection public
 
 canonicalPartitionRepresentationProjection : PartitionRepresentationProjection
 canonicalPartitionRepresentationProjection = partition-representation-projection
-  true false false true true false true
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
+  true false false true true false false true
 
 data SameCountCreatesSameObjects : Set where
 data PartitionCreatesRepresentationWithoutConstruction : Set where
@@ -217,6 +202,9 @@ currentFirstLinkDoesNotBackdate ()
 
 partitionBoundary : Partition.PartitionGeneratingFunctionProjection
 partitionBoundary = Partition.canonicalPartitionGeneratingFunctionProjection
+
+equalCardinalityBoundary : EqualCardinality.EqualCardinalityBoundary
+equalCardinalityBoundary = EqualCardinality.canonicalEqualCardinalityBoundary
 
 allPairsBoundary : AllPairs.WikipediaAllPairsBoundary
 allPairsBoundary = AllPairs.canonicalWikipediaAllPairsBoundary
