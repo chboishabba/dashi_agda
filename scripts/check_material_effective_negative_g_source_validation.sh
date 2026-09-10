@@ -28,6 +28,7 @@ files=(
   DASHI/Culture/AmyEskridgeMechanismAssociationProvenanceExact.agda
   DASHI/Culture/AmyEskridgeForensicAcquisitionPriorityExact.agda
   DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
+  DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 )
 for file in "${files[@]}"; do
@@ -70,12 +71,19 @@ grep -q 'outOfOrderForensicAcquisitionMayBeRetained' DASHI/Culture/AmyEskridgeFo
 grep -q 'podkletnovNieminen1992ReportedSignal' DASHI/Physics/ExoticGravity/SuperconductingGravityExperimentalConstraintRegistryExact.agda
 grep -q 'reportedSignalEqualsEstablishedEffect' DASHI/Physics/ExoticGravity/SuperconductingGravityExperimentalConstraintRegistryExact.agda
 
-# Amy circumstances-of-demise boundaries: public non-location and current
-# oversight context cannot manufacture forensic conclusions.
+# Amy circumstances-of-demise boundaries.
 grep -q 'secondaryReportedSuicideEqualsInspectedPrimaryForensicRecord' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
 grep -q 'federalReviewContextEqualsCaseConnection' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
 grep -q 'scientificNoveltyEqualsDeathCausation' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
 grep -q 'notPubliclyLocatedEqualsKnownAbsent' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
+
+# Amy OSINT boundaries: public discovery is append-only evidence acquisition,
+# never automatic truth/corroboration/forensic promotion.
+grep -q 'osintChangesAcquisitionRouteNotTruthStandard' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+grep -q 'repeatedReportingEqualsIndependentCorroboration' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+grep -q 'reportedScreenshotEqualsAuthenticatedNativeMessage' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+grep -q 'preDeathStatementAloneDeterminesDeathManner' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+grep -q 'osintAtomMayCreateCulpritByAccumulation' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
@@ -84,4 +92,4 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda \
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 
-echo "Material-effective negative-G + Amy memorial source/provenance/demise snowball validation checks passed"
+echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT snowball validation checks passed"
