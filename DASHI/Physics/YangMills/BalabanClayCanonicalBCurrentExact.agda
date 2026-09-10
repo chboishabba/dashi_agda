@@ -66,6 +66,12 @@ import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Ex
 import DASHI.Physics.YangMills.BalabanPairwiseClusteringStandardMassGapRound305Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact
 
+-- R309 makes G1 proof-bearing at the correct cut: the published/source
+-- localization authority is indexed by the exact selected-T5 shell carrier;
+-- the only local payment is same-object applicability of the selected J pair,
+-- connecting root and physical support distance.
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact
+
 -- Older producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
 import DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound272Exact
