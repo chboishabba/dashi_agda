@@ -2,6 +2,7 @@ module DASHI.ComputerScience.TriadicCodecSWARPortableKernelCrossPollinationExact
 
 open import DASHI.Core.Prelude
 open import Data.Empty using (⊥)
+open import DASHI.Algebra.Trit using (Trit)
 
 import DASHI.Codec.BalancedTritBitFibre as BitFibre
 import DASHI.Codec.TriadicMaskSignFactorization as MaskSign
@@ -109,7 +110,7 @@ codecGPUPlaneCandidate =
 ------------------------------------------------------------------------
 
 supportSignWordCostLaw :
-  (ts : List DASHI.Algebra.Trit.Trit) →
+  (ts : List Trit) →
   BitFibre.wordBitCost ts ≡ BitFibre.length ts + BitFibre.nonZeroCount ts
 supportSignWordCostLaw = BitFibre.wordBitCost-support-plus-sign
 
