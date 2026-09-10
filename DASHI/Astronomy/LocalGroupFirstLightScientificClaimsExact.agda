@@ -1,6 +1,7 @@
 module DASHI.Astronomy.LocalGroupFirstLightScientificClaimsExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Core.AttributedSourceCore using (AttributedSource)
 open import DASHI.Astronomy.LocalGroupObservationFrameProvenanceExact
 open import Agda.Builtin.String using (String)
 
