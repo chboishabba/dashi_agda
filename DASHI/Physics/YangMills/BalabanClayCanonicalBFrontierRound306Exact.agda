@@ -20,6 +20,19 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact where
 --   G3. same reconstructed Hamiltonian: the concrete q=1/2 decay bound means
 --       exponential decay at one strictly positive physical mass m*.
 --
+-- Introspective refinement:
+--
+--   * G1 is the first theorem-sized source/application leaf that actually
+--     manufactures the quantitative decay information consumed by B.
+--   * G2 is a same-object / physical-semantics weld.  It is mandatory for
+--     correctness, but it does not create a stronger decay inequality.
+--   * G3 is a same-Hamiltonian rate/energy normalization weld.  The ordered
+--     lattice/physical exponent algebra is already compiler-owned elsewhere;
+--     this coordinate gives the concrete q=1/2 bound its physical mass meaning.
+--
+-- Thus "three mandatory physical coordinates" must not be misread as
+-- "three independent new YM analytic estimates".
+--
 -- Standard-library payment (not new 4D YM analysis):
 --
 --   S1. exponential connected clustering at m*>0 implies spectral separation
@@ -41,6 +54,26 @@ record Round306Boundary : Set where
     ymSpecificPhysicalCutHasThreeCoordinatesIsTrue :
       ymSpecificPhysicalCutHasThreeCoordinates ≡ true
 
+    g1ManufacturesNewAnalyticDecayInformation : Bool
+    g1ManufacturesNewAnalyticDecayInformationIsTrue :
+      g1ManufacturesNewAnalyticDecayInformation ≡ true
+
+    g2ManufacturesNewAnalyticDecayInformation : Bool
+    g2ManufacturesNewAnalyticDecayInformationIsFalse :
+      g2ManufacturesNewAnalyticDecayInformation ≡ false
+
+    g3ManufacturesNewAnalyticDecayInformation : Bool
+    g3ManufacturesNewAnalyticDecayInformationIsFalse :
+      g3ManufacturesNewAnalyticDecayInformation ≡ false
+
+    g2IsMandatorySameObjectPhysicalSemantics : Bool
+    g2IsMandatorySameObjectPhysicalSemanticsIsTrue :
+      g2IsMandatorySameObjectPhysicalSemantics ≡ true
+
+    g3IsMandatorySameHamiltonianRateSemantics : Bool
+    g3IsMandatorySameHamiltonianRateSemanticsIsTrue :
+      g3IsMandatorySameHamiltonianRateSemantics ≡ true
+
     detailedSubgapSpectralRouteMandatory : Bool
     detailedSubgapSpectralRouteMandatoryIsFalse :
       detailedSubgapSpectralRouteMandatory ≡ false
@@ -59,7 +92,17 @@ record Round306Boundary : Set where
 
 canonicalRound306Boundary : Round306Boundary
 canonicalRound306Boundary =
-  round306-boundary true refl false refl true refl true refl false refl
+  round306-boundary
+    true refl
+    true refl
+    false refl
+    false refl
+    true refl
+    true refl
+    false refl
+    true refl
+    true refl
+    false refl
 
 round306G1LiteralAbsoluteTwoJLocalizationLevel : ProofLevel
 round306G1LiteralAbsoluteTwoJLocalizationLevel =
