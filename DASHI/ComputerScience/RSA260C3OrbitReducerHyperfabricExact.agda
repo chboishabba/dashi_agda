@@ -176,7 +176,7 @@ data SizeThreeClassImpliesC3Automorphism : Set where
 data TernaryCarrierImpliesZ3Operator : Set where
 data MonsterC3ImpliesRSAC3 : Set where
 data DOIImpliesStructuredReducerValidity : Set where
-\data FourCoordinateTailMayBeDiscarded : Set where
+data FourCoordinateTailMayBeDiscarded : Set where
 
 sizeThreeClassDoesNotCreateC3Automorphism : SizeThreeClassImpliesC3Automorphism → ⊥
 sizeThreeClassDoesNotCreateC3Automorphism ()
