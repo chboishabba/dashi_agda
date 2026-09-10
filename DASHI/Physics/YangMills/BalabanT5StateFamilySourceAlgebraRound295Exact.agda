@@ -33,10 +33,6 @@ import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRo
 import DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound291Exact as R291
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 
-------------------------------------------------------------------------
--- Exact T5 finite expectation algebra as the source moment algebra.
-------------------------------------------------------------------------
-
 t5FiniteExpectationAlgebra :
   ∀ {Measure Observable}
     (dataSet : Gram.PhysicalMeasureConvergenceData Measure Observable ℚ)
@@ -69,10 +65,6 @@ sourceConnectedCovarianceIsExactFiniteT5 :
       (Gram.measureSequence dataSet cutoff) left right
 sourceConnectedCovarianceIsExactFiniteT5 dataSet extension left right cutoff = refl
 
-------------------------------------------------------------------------
--- Canonical direct physical presentation.
-------------------------------------------------------------------------
-
 record DirectT5StateFamilyJPresentation
     {Measure TestObservable : Set}
     (dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ)
@@ -94,9 +86,6 @@ record DirectT5StateFamilyJPresentation
     ConnectingClusterMeetsBothSupports :
       Nat → TestObservable → TestObservable → Set
 
-    -- Single source-facing analytic payment: the MAGNITUDE of the literal mixed
-    -- log-J response obeys the imported CMP116 rooted-shell localization on the
-    -- exact T5 finite expectation carrier.
     differentiatedSourceMagnitudeBoundOnSelectedDirections :
       ∀ cutoff left right →
       R278.magnitude extension
@@ -137,7 +126,7 @@ asR290Presentation :
   R290.TwoPhysicalJInsertionSourcePresentation
     (Scale presentation) (Volume presentation) (Root presentation)
     Nat TestObservable (SourceDirection presentation)
-asR290Presentation {extension = extension} presentation = record
+asR290Presentation {dataSet = dataSet} {extension = extension} presentation = record
   { R290.TwoPhysicalJInsertionSourcePresentation.shellData = shellData presentation
   ; R290.TwoPhysicalJInsertionSourcePresentation.scaleOf = scaleOf presentation
   ; R290.TwoPhysicalJInsertionSourcePresentation.volumeOf = volumeOf presentation
@@ -155,7 +144,7 @@ asR290Presentation {extension = extension} presentation = record
   ; R290.TwoPhysicalJInsertionSourcePresentation.connectedCovarianceMagnitude =
       λ cutoff left right →
         R278.connectedCovarianceMagnitude extension
-          (Gram.measureSequence _) left right
+          (Gram.measureSequence dataSet cutoff) left right
   ; R290.TwoPhysicalJInsertionSourcePresentation.secondLogDerivativeIsConnectedCovariance =
       mixedLogMagnitudeIsExactFiniteT5CovarianceMagnitude presentation
   ; R290.TwoPhysicalJInsertionSourcePresentation.differentiatedSourceBoundOnSelectedDirections =
@@ -190,9 +179,5 @@ round295LogCovarianceMagnitudeCompilerLevel = machineChecked
 round295SourceCovarianceSelectedT5SameObjectLevel : ProofLevel
 round295SourceCovarianceSelectedT5SameObjectLevel = machineChecked
 
--- Single remaining D1 physical/source seam on this canonical presentation:
--- instantiate the actual CMP116/CMP119 normalized source calculus/J directions
--- and the published differentiated rooted-shell MAGNITUDE estimate on the exact
--- T5 finite expectation carrier.
 round295LiteralT5JDirectionLocalizationLevel : ProofLevel
 round295LiteralT5JDirectionLocalizationLevel = conditional
