@@ -31,9 +31,60 @@ rezaDistributionSurface = D.carrier-distribution-receipt
   "US20030053926A1; US20040208777A1 and USPTO assignment lineage"
   "The public record establishes co-invention and institutional IP transfer, but does not close distribution of exact heat-treatment, microstructure, manufacturing tolerances, qualification evidence or tacit process knowledge."
 
+------------------------------------------------------------------------
+-- Loureiro continuation surface.
+--
+-- PPPL's 2026 Intro Course explicitly replays Loureiro's 2018 magnetic-
+-- reconnection lecture and names former students/colleagues Muni Zhou and
+-- Suying Jin to lead the surrounding discussion.  This is a primary public
+-- carrier for pedagogical/intellectual continuation only.  It does not identify
+-- a new Loureiro Group PI, a grant reassignment, repository ownership, active
+-- simulation configuration, notebook custody, or same-application handover.
+------------------------------------------------------------------------
+
+loureiroPedagogicalContinuationSurface : D.CarrierDistributionReceipt
+loureiroPedagogicalContinuationSurface = D.carrier-distribution-receipt
+  "Nuno F. G. Loureiro magnetic-reconnection teaching lineage"
+  "public lecture/pedagogical continuation after loss"
+  (D.documentedProcedure ∷ D.multiAuthorPublication ∷ [])
+  D.distributedSourceBacked
+  "Princeton Plasma Physics Laboratory 2026 Intro Course; Loureiro 2018 Reconnection lecture replay with Q&A led by Prof. Muni Zhou and Dr. Suying Jin"
+  "This closes public pedagogical/intellectual continuation. It does not close Loureiro Group PI succession, student/grant reassignment, Viriato/KREHM repository custody, target-specific simulation state, notebooks, or same-carrier application handover."
+
 record SuccessionSearchStatus : Set where
   constructor succession-search-status
-  field chavezNamedSameCarrierSuccessorLocated : Bool; chavezNamedSameCarrierSuccessorLocatedIsFalse : chavezNamedSameCarrierSuccessorLocated ≡ false; leblancNamedSameCarrierSuccessorLocated : Bool; leblancNamedSameCarrierSuccessorLocatedIsFalse : leblancNamedSameCarrierSuccessorLocated ≡ false; rezaNamedSameCarrierSuccessorLocated : Bool; rezaNamedSameCarrierSuccessorLocatedIsFalse : rezaNamedSameCarrierSuccessorLocated ≡ false; absencePromotedToNoSuccessor : Bool; absencePromotedToNoSuccessorIsFalse : absencePromotedToNoSuccessor ≡ false
-canonicalSuccessionSearchStatus = succession-search-status false refl false refl false refl false refl
+  field
+    chavezNamedSameCarrierSuccessorLocated : Bool
+    chavezNamedSameCarrierSuccessorLocatedIsFalse : chavezNamedSameCarrierSuccessorLocated ≡ false
+    leblancNamedSameCarrierSuccessorLocated : Bool
+    leblancNamedSameCarrierSuccessorLocatedIsFalse : leblancNamedSameCarrierSuccessorLocated ≡ false
+    rezaNamedSameCarrierSuccessorLocated : Bool
+    rezaNamedSameCarrierSuccessorLocatedIsFalse : rezaNamedSameCarrierSuccessorLocated ≡ false
+    loureiroPedagogicalContinuationLocated : Bool
+    loureiroPedagogicalContinuationLocatedIsTrue : loureiroPedagogicalContinuationLocated ≡ true
+    loureiroSameCarrierSuccessorLocated : Bool
+    loureiroSameCarrierSuccessorLocatedIsFalse : loureiroSameCarrierSuccessorLocated ≡ false
+    absencePromotedToNoSuccessor : Bool
+    absencePromotedToNoSuccessorIsFalse : absencePromotedToNoSuccessor ≡ false
 
-data SuccessionReverseTarget : Set where chavezSameCarrierTaskAllocation chavezNamedSuccessorOrHandover chavezPostDepartureRework leblancTechMatTaskAllocation leblancNamedSuccessorOrHandover leblancQualificationContinuity rezaProcessWindowTaskAllocation rezaNamedSuccessorOrHandover rezaManufacturingRequalification : SuccessionReverseTarget
+canonicalSuccessionSearchStatus : SuccessionSearchStatus
+canonicalSuccessionSearchStatus = succession-search-status
+  false refl false refl false refl true refl false refl false refl
+
+data SuccessionReverseTarget : Set where
+  chavezSameCarrierTaskAllocation
+  chavezNamedSuccessorOrHandover
+  chavezPostDepartureRework
+  leblancTechMatTaskAllocation
+  leblancNamedSuccessorOrHandover
+  leblancQualificationContinuity
+  rezaProcessWindowTaskAllocation
+  rezaNamedSuccessorOrHandover
+  rezaManufacturingRequalification
+  loureiroStudentAndGrantReassignment
+  loureiroRepositoryAndNotebookCustody
+  loureiroTargetSpecificSimulationContinuation
+  loureiroNamedSameCarrierSuccessorOrHandover : SuccessionReverseTarget
+
+firstLoureiroSameCarrierTarget : SuccessionReverseTarget
+firstLoureiroSameCarrierTarget = loureiroStudentAndGrantReassignment
