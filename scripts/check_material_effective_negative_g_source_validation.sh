@@ -29,6 +29,8 @@ files=(
   DASHI/Culture/AmyEskridgeForensicAcquisitionPriorityExact.agda
   DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
   DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+  DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
+  DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 )
 for file in "${files[@]}"; do
@@ -85,6 +87,14 @@ grep -q 'reportedScreenshotEqualsAuthenticatedNativeMessage' DASHI/Culture/AmyEs
 grep -q 'preDeathStatementAloneDeterminesDeathManner' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
 grep -q 'osintAtomMayCreateCulpritByAccumulation' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
 
+# Message provenance backtrace and dated chronology remain non-promoting.
+grep -q 'closerToOriginEqualsAuthenticated' DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
+grep -q 'authenticatedPreDeathStatementDeterminesDeathManner' DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
+grep -q 'temporalOrderingCreatesCausation' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+grep -q 'exactReportedDateEqualsNativeMessageAuthentication' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+grep -q 'reportedDirectedEnergyClaimEstablishesDirectedEnergyAttack' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+grep -q 'unresolvedDatesRemainExplicit' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
@@ -92,4 +102,4 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda \
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 
-echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT snowball validation checks passed"
+echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT chronology snowball validation checks passed"
