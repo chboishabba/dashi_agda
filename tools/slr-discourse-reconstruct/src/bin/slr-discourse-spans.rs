@@ -106,8 +106,8 @@ fn main()->Result<(),Box<dyn std::error::Error>>{
         for idx in 0..starts.len() {
             let (_tok,start,before)=&starts[idx];
             let end=if idx+1<starts.len(){starts[idx+1].1}else{s.end};
-            if *end<=*start {continue}
-            let text=char_slice(&source,&cmap,*start,*end).trim(); if text.is_empty(){continue}
+            if end <= *start {continue}
+            let text=char_slice(&source,&cmap,*start,end).trim(); if text.is_empty(){continue}
             if !reconstructed.is_empty(){reconstructed.push('\n')}
             reconstructed.push_str(text);
             let (proj,pareto,residual,anchor)=match before {
