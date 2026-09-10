@@ -102,3 +102,4 @@ import DASHI.Physics.ExoticGravity.LiTorrComponentResolvedMassCurrentReverseSear
 import DASHI.Physics.ExoticGravity.LiTorrStaticNullBoundBidiExact
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGSIMetrologyBridgeExact
 import DASHI.Physics.ExoticGravity.LiTorrSIVelocityGeometryIdentityWeldExact
+import DASHI.Physics.ExoticGravity.LiTorrSignedSIMassCurrentCompilerExact
