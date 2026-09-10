@@ -34,9 +34,6 @@ import DASHI.Physics.Closure.NSTriadKNDirectResolventGlobalCompanionRound498Exac
 import DASHI.Physics.Closure.NSTriadKNDirectResolventTrajectoryCompanionRound499Exact as R499
 import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500Exact as R500
 import DASHI.Physics.Closure.NSTriadKNDirectResolventSignedCrossToR415Round503Exact as R503
-import DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact as R568
-import DASHI.Physics.Closure.NSTriadKNLiveCriticalConeRegionPaymentRound590Exact as R590
-import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact as R591
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
 round592PairSameObjectClosed : Bool
