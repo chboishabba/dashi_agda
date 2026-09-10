@@ -135,7 +135,7 @@ data AcronymCreatesIdentity : Set where
 data Q281854CreatesDashiPNFIdentity : Set where
 data PrenexNormalisationCreatesEvidenceAdmissibility : Set where
 data PredicateNormalFormCreatesPrenexEquivalence : Set where
-\data WikipediaPNFCreatesDashiAuthority : Set where
+data WikipediaPNFCreatesDashiAuthority : Set where
 
 acronymDoesNotCreateIdentity : AcronymCreatesIdentity → ⊥
 acronymDoesNotCreateIdentity ()
