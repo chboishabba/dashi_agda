@@ -8,19 +8,23 @@ module DASHI.Physics.Closure.NSSystematicProvenancePathAuditProtocolExact where
 --
 -- DATE DISCIPLINE
 -- Commit/source-first-appearance, PR-open/public exposure, merge, publication,
--- and external release are different events.  We record only recovered events.
+-- and external release are different events. We record only recovered events.
 -- A missing PR/publication surface is written as not recovered; commit time is
 -- never silently promoted to publication time.
 --
 -- CURRENT CLASSIFICATION
 -- * 2026-06-12/13: whole-problem candidate/global-regularity roadmap receipts.
--- * 2026-06-20/22: earlier formal sign-sensitive Wall-1/BKM candidate routes.
+-- * 2026-06-20/23: sign-sensitive Wall-1/BKM/operator candidate routes,
+--   culminating in amplitude-weighted K_N(A) and an energy/dissipation fork.
+-- * 2026-07-22/23: complete typed theorem-facing completion spine and exact
+--   strict-dissipation / diffuse-charging compilers, but concrete cutoff-
+--   uniform analytic payments are still explicit inputs.
 -- * 2026-07-26: earliest recovered assembly of the LATER EXACT SIGNED,
 --   PHYSICAL, CUTOFF-UNIFORM ANALYTIC PROBLEM and its global consumer.
 --
--- Thus June is real priority/provenance, but does not by chronology become the
--- same R423/R503 signed-resolvent carrier.  July 26 remains the current first
--- recovered same-problem assembly pending still-earlier same-carrier evidence.
+-- Thus the older work already contains the whole problem grammar, signed
+-- operator experimentation, and dissipation-consumer architecture. It does
+-- not by chronology alone become the later literal R423/R503 carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -36,7 +40,7 @@ data AuditScope : Set where provenancePathTracing buildEnvironmentArchaeology : 
 data MatchBasis : Set where exactName semanticAlias sameCarrierEquality sameConsumerShape : MatchBasis
 data EvidenceGrade : Set where
   chronologyOnly structuralPrecursor candidateWholeProblem signedCandidateRoute
-  problemShape exactCarrier exactEqualityWeld canonicalConsumer : EvidenceGrade
+  completionSpine problemShape exactCarrier exactEqualityWeld canonicalConsumer : EvidenceGrade
 data AuditDisposition : Set where include defer rejectAsIdentity : AuditDisposition
 
 currentDirection : AuditDirection
@@ -73,7 +77,7 @@ record DatedPublicSurface : Set where
 open DatedPublicSurface public
 
 ------------------------------------------------------------------------
--- JUNE: WHOLE-PROBLEM ROADMAP + SIGN-SENSITIVE CANDIDATE ROUTES
+-- JUNE: WHOLE-PROBLEM ROADMAP + SIGN/OPERATOR CANDIDATE ROUTES
 ------------------------------------------------------------------------
 
 jun12FinalStateSurface : DatedPublicSurface
@@ -116,6 +120,16 @@ jun20DeterminantSignSurface = dated-public-surface
   "not separately recovered" "not separately recovered"
   "sign-sensitive near-blow-up route under explicit BKM/blow-up assumptions; strict H_B/area gates and Clay promotion remain open"
 
+jun22CycleSchurSurface : DatedPublicSurface
+jun22CycleSchurSurface = dated-public-surface
+  "Wall-1 cycle-family / Schur-complement frame-gap target"
+  "fa912fa9843635b328d654911e5518488d85e4bb"
+  "2026-06-22T05:30:15Z" "2026-06-22T15:30:15+10:00"
+  noSeparatePublicSurfaceRecovered
+  "NSTriadCycleFamilyLowerBoundBoundary; NSSchurComplementFrameGapBoundary"
+  "not separately recovered" "not separately recovered"
+  "already names S_N=(I-K11)-K10(I-K00)^-1K01 and a uniform frame-gap target, but K01/non-adversarial coupling and uniform gap remain unproved"
+
 jun22SignedWall1Surface : DatedPublicSurface
 jun22SignedWall1Surface = dated-public-surface
   "NS Wall-1 signed-XOR / signed-spectrum correction tranche"
@@ -126,8 +140,48 @@ jun22SignedWall1Surface = dated-public-surface
   "not separately recovered" "not separately recovered"
   "candidate signed operator/spectrum route; active telemetry says proposed signed-Laplacian proxy is not the same operator as I-K_N; theorem/full-NS/Clay promotion remain false"
 
+jun22CarrierReconciliationSurface : DatedPublicSurface
+jun22CarrierReconciliationSurface = dated-public-surface
+  "signed Wall-1 carrier reconciliation / identification boundary"
+  "484ec7d70ecdbae92ad87c0ae53b8a01b0526f48"
+  "2026-06-22T13:39:30Z" "2026-06-22T23:39:30+10:00"
+  noSeparatePublicSurfaceRecovered
+  "NSTriadSignedCarrierReconciliationBoundary; NSTriadWall1CarrierIdentificationBoundary"
+  "not separately recovered" "not separately recovered"
+  "explicitly recognizes that the old signed chart, cycle-family, raw signed-XOR and signed-spectral candidates do not yet identify the correct Wall-1 carrier"
+
+jun23ContinuousCoherenceSurface : DatedPublicSurface
+jun23ContinuousCoherenceSurface = dated-public-surface
+  "continuous coherence / coherence-deficit Wall-1 candidate"
+  "f2a61621229630fb3cddf61ff23022ff31c9632b"
+  "2026-06-22T14:34:03Z" "2026-06-23T00:34:03+10:00"
+  noSeparatePublicSurfaceRecovered
+  "NSTriadContinuousCoherenceCarrierBoundary; NSTriadCoherenceDeficitFloorBoundary"
+  "not separately recovered" "not separately recovered"
+  "records cap_N <= kappa < 1 -> Wall-1 floor >= (1-kappa)/2 as theorem shape only; proof and promotion remain false"
+
+jun23KNIdentitySurface : DatedPublicSurface
+jun23KNIdentitySurface = dated-public-surface
+  "K_N exact-identity / negative-frame Wall-1 candidate"
+  "a48db609b61565c0b4242699a8725cdbcd675538"
+  "2026-06-22T15:40:02Z" "2026-06-23T01:40:02+10:00"
+  noSeparatePublicSurfaceRecovered
+  "NSTriadKNExactIdentityReceipt; NSTriadBSNegativeFrameCoercivityBoundary; NSTriadBSSpanningLemmaReceipt; NSTriadBSFrameEquidistributionBoundary"
+  "not separately recovered" "not separately recovered"
+  "retires raw signed-XOR as primary carrier and records corrected positive-subspace identity L_signed_norm = I - 2 K_N; theorem remains candidate-only"
+
+jun23AmplitudeForkSurface : DatedPublicSurface
+jun23AmplitudeForkSurface = dated-public-surface
+  "amplitude-weighted K_N(A) / energy-budgeted Wall-1/2 fork"
+  "815292afe6694abad551cd310b66a539f2209100"
+  "2026-06-22T16:46:11Z" "2026-06-23T02:46:11+10:00"
+  noSeparatePublicSurfaceRecovered
+  "NSAmplitudeWeightedNegativeFrameBoundary; NSTriadEnergyBudgetedCoherenceForkBoundary; NSPointwiseTriadCloudBoundary"
+  "not separately recovered" "not separately recovered"
+  "candidate fork already separates frame-coercive, low-band bounded and high-dissipation residence-limited mechanisms; uniform genuine-Biot-Savart theorem remains open"
+
 ------------------------------------------------------------------------
--- JULY PUBLIC PR SURFACES: OPEN DATE != MERGE DATE != SOURCE-FIRST DATE
+-- JULY: PUBLIC COMPLETION SPINES AND EXACT SIGNED PHYSICAL ASSEMBLY
 ------------------------------------------------------------------------
 
 pr140Surface = dated-public-surface
@@ -161,6 +215,33 @@ pr255Surface = dated-public-surface
   publicPRSurface "pull/255"
   "2026-07-20T14:52:19Z" "2026-07-20T15:09:40Z"
   "public far-low commutator and far-high tail theorem surfaces"
+
+pr320Surface : DatedPublicSurface
+pr320Surface = dated-public-surface
+  "PR #320 official-norm -> expenditure -> all-data cutoff -> continuum BKM completion spine"
+  "cc241eb8bc12dec879323ae4c55d8bd67cbf942b"
+  "2026-07-24T08:00:07Z" "2026-07-24T18:00:07+10:00"
+  publicPRSurface "pull/320"
+  "2026-07-22T05:52:23Z" "2026-07-24T08:00:07Z"
+  "complete proof-relevant theorem-facing spine is public here; genuine cutoff-uniform PDE estimates remain explicit conditional inhabitants"
+
+jul23StrictMarginSurface : DatedPublicSurface
+jul23StrictMarginSurface = dated-public-surface
+  "exact strict Wall-I/II dissipation-margin compiler"
+  "105d654be4f3f0840df1543339df0ecae8ce40ba"
+  "2026-07-23T09:56:04Z" "2026-07-23T19:56:04+10:00"
+  publicPRSurface "pull/320"
+  "2026-07-22T05:52:23Z" "2026-07-24T08:00:07Z"
+  "machine-checked scalar compiler: near+farLow+farHigh+strictMargin <= viscosity once three concrete payments and positive margin are supplied; concrete cutoff-uniform payments remain analytic"
+
+jul23DiffuseChargingSurface : DatedPublicSurface
+jul23DiffuseChargingSurface = dated-public-surface
+  "diffuse-spectrum dissipation charging -> finite vorticity/BKM compiler"
+  "292748be805e593506970c2b4bc6b093c2b5116e"
+  "2026-07-23T09:57:37Z" "2026-07-23T19:57:37+10:00"
+  publicPRSurface "pull/320"
+  "2026-07-22T05:52:23Z" "2026-07-24T08:00:07Z"
+  "exact endpoint compiler; frontier remains concrete cutoff-independent diffuse charge plus finite remainder"
 
 pr336Surface = dated-public-surface
   "PR #336 exact Wall-I signed multiplier-difference commutator frontier"
@@ -201,9 +282,12 @@ pr825Surface = dated-public-surface
 publicSurfaceChronology : List DatedPublicSurface
 publicSurfaceChronology =
   jun12FinalStateSurface ∷ jun12CandidateBKMSurface ∷ jun13CandidateClosureSurface ∷
-  jun20DeterminantSignSurface ∷ jun22SignedWall1Surface ∷ pr140Surface ∷
-  pr145Surface ∷ pr227Surface ∷ pr255Surface ∷ pr336Surface ∷ pr338Surface ∷
-  pr820Surface ∷ pr825Surface ∷ []
+  jun20DeterminantSignSurface ∷ jun22CycleSchurSurface ∷ jun22SignedWall1Surface ∷
+  jun22CarrierReconciliationSurface ∷ jun23ContinuousCoherenceSurface ∷
+  jun23KNIdentitySurface ∷ jun23AmplitudeForkSurface ∷ pr140Surface ∷
+  pr145Surface ∷ pr227Surface ∷ pr255Surface ∷ pr320Surface ∷
+  jul23StrictMarginSurface ∷ jul23DiffuseChargingSurface ∷ pr336Surface ∷
+  pr338Surface ∷ pr820Surface ∷ pr825Surface ∷ []
 
 ------------------------------------------------------------------------
 -- SYSTEMATIC STEPS / CLASSIFICATION
@@ -225,19 +309,26 @@ janToJune = audit-step
   "methodological ancestry only; no same-object theorem identity"
 
 juneWholeProblem = audit-step
-  "Jun12/13 whole-problem candidate receipts" "Jun20/22 sign-sensitive formal routes"
+  "Jun12/13 whole-problem candidate receipts" "Jun20/23 sign-sensitive formal routes"
   semanticAlias candidateWholeProblem include
   "whole-problem grammar precedes sign-sensitive Wall-1 routes but does not itself construct the later signed physical operator"
 
 juneSignedRoutes = audit-step
-  "Jun20 determinant/BKM + Jun22 signed Wall-1 candidate routes" "Jul20 signed-response/majorant correction"
+  "Jun20 determinant/BKM -> Jun22 cycle/Schur -> signed carrier reconciliation -> Jun23 K_N(A) energy fork"
+  "Jul20 signed-response/majorant correction"
   semanticAlias signedCandidateRoute include
-  "June already explores sign-sensitive mechanisms, but Jun22 explicitly records a same-operator failure; Jul20 later formalizes the response-vs-majorant representation boundary"
+  "June already searches sign, Schur/frame gaps, corrected carrier identity, amplitude weighting and dissipation charging; all remain candidate/fail-closed and several old carriers are explicitly rejected"
+
+julyCompletionSpine = audit-step
+  "Jul20 signed-response/majorant and harmonic architecture"
+  "Jul22/23 PR320 complete theorem-facing spine + strict dissipation/diffuse BKM compilers"
+  sameConsumerShape completionSpine include
+  "before Jul26 the repository already owns the complete typed consumer path from harmonic estimates through strict viscosity payment and cutoff-uniform continuum BKM; the missing concrete PDE producers remain explicit"
 
 julyAssembly = audit-step
-  "Jul20-Jul25 signed/resolvent/commutator architecture" "Jul26 exact signed physical cutoff-uniform problem"
+  "Jul22/23 complete typed consumer spine" "Jul26 exact signed physical cutoff-uniform problem"
   sameConsumerShape problemShape include
-  "Jul26 is current earliest recovered simultaneous assembly of exact signed physical coefficient, cutoff-uniform signed target, dissipation comparison and global consumer"
+  "Jul26 remains current earliest recovered simultaneous assembly of exact signed physical coefficient, cancellation-aware route, cutoff-uniform signed target, dissipation comparison and global consumer"
 
 augustPhysicalization = audit-step
   "Jul26 signed analytic problem" "Aug08-Aug31 physical/signed/resolvent maturation"
@@ -266,8 +357,9 @@ handoff = audit-step
 
 systematicAuditSteps : List AuditStep
 systematicAuditSteps =
-  janToJune ∷ juneWholeProblem ∷ juneSignedRoutes ∷ julyAssembly ∷
-  augustPhysicalization ∷ r375SameObject ∷ r406Critical ∷ r423Canonical ∷ handoff ∷ []
+  janToJune ∷ juneWholeProblem ∷ juneSignedRoutes ∷ julyCompletionSpine ∷
+  julyAssembly ∷ augustPhysicalization ∷ r375SameObject ∷ r406Critical ∷
+  r423Canonical ∷ handoff ∷ []
 
 ------------------------------------------------------------------------
 -- FIREWALLS
@@ -278,6 +370,7 @@ data AliasCreatesIdentity : Set where
 data SameConsumerShapeCreatesEquality : Set where
 data ProblemSpecificationCreatesProof : Set where
 data CandidateWholeProblemCreatesSignedCarrier : Set where
+data CompletionSpineCreatesAnalyticProducer : Set where
 data LaterRoundMeansNewProblem : Set where
 data PublicRepositoryCreatesExternalInfluence : Set where
 data CommitDateCreatesPublicationDate : Set where
@@ -292,6 +385,8 @@ problemSpecificationDoesNotCreateProof : ProblemSpecificationCreatesProof → �
 problemSpecificationDoesNotCreateProof ()
 candidateWholeProblemDoesNotCreateSignedCarrier : CandidateWholeProblemCreatesSignedCarrier → ⊥
 candidateWholeProblemDoesNotCreateSignedCarrier ()
+completionSpineDoesNotCreateAnalyticProducer : CompletionSpineCreatesAnalyticProducer → ⊥
+completionSpineDoesNotCreateAnalyticProducer ()
 laterRoundDoesNotMeanNewProblem : LaterRoundMeansNewProblem → ⊥
 laterRoundDoesNotMeanNewProblem ()
 publicRepoDoesNotCreateInfluenceClaim : PublicRepositoryCreatesExternalInfluence → ⊥
@@ -314,8 +409,17 @@ earliestRecoveredWholeProblemRoadmapPredatesJuly = true
 earlyJuneSignedCandidateRoutesRecovered : Bool
 earlyJuneSignedCandidateRoutesRecovered = true
 
+juneAmplitudeDissipationForkRecovered : Bool
+juneAmplitudeDissipationForkRecovered = true
+
 juneSignedCandidateIsLiteralLaterR423R503Carrier : Bool
 juneSignedCandidateIsLiteralLaterR423R503Carrier = false
+
+july23CompleteTypedConsumerSpineRecovered : Bool
+july23CompleteTypedConsumerSpineRecovered = true
+
+july23ConcreteCutoffUniformAnalyticPaymentsRecovered : Bool
+july23ConcreteCutoffUniformAnalyticPaymentsRecovered = false
 
 earliestRecoveredAssemblyIsJuly26 : Bool
 earliestRecoveredAssemblyIsJuly26 = Lineage.earliestRecoveredFinalProblemSpecificationIsJuly26
@@ -347,11 +451,11 @@ currentMeetingRegion =
 
 currentHistoricalHypothesis : String
 currentHistoricalHypothesis =
-  "Whole-problem roadmap receipts exist by 2026-06-12 and sign-sensitive candidate routes by 2026-06-20/22. The earliest recovered assembly of the later exact signed physical cutoff-uniform analytic problem remains 2026-07-26. Later tranches primarily physicalize, repair same-object provenance, remove lossy majorants/plumbing, or re-express that same missing estimate."
+  "Whole-problem roadmap receipts exist by 2026-06-12; sign-sensitive operator, Schur/frame-gap, carrier-reconciliation and amplitude/dissipation candidate routes are explicit by 2026-06-23; a complete typed harmonic-to-BKM consumer spine is public by 2026-07-22 and has exact strict-dissipation/diffuse-charging compilers by 2026-07-23. The earliest recovered assembly of the later exact signed physical cutoff-uniform analytic problem remains 2026-07-26. Later tranches primarily physicalize, repair same-object provenance, remove lossy majorants/plumbing, or re-express that same missing estimate."
 
 nextOldestForwardObligation : String
 nextOldestForwardObligation =
-  "Search Jun22->Jul20 forward by semantic object (signed operator, commutator, gap, dissipation, shell/Schur/resolvent), recording source commit and independent PR/public surface where recoverable; then reconcile with the R423/R486/R492/R501 reverse pass."
+  "Continue Jul23->Jul26 semantic archaeology for normalized boundary signs, strict margin, signed triad/cancellation and global-scalar aliases; determine whether any pre-Jul26 source simultaneously owns the literal physical signed coefficient and the cutoff-uniform producer, otherwise preserve Jul26 as first exact assembly."
 
 systematicAuditIsAppendOnly : Bool
 systematicAuditIsAppendOnly = true
@@ -374,8 +478,14 @@ prOpenDateEqualsMergeDateByDefaultIsFalse : prOpenDateEqualsMergeDateByDefault �
 prOpenDateEqualsMergeDateByDefaultIsFalse = refl
 earlyJuneSignedCandidateRoutesRecoveredIsTrue : earlyJuneSignedCandidateRoutesRecovered ≡ true
 earlyJuneSignedCandidateRoutesRecoveredIsTrue = refl
+juneAmplitudeDissipationForkRecoveredIsTrue : juneAmplitudeDissipationForkRecovered ≡ true
+juneAmplitudeDissipationForkRecoveredIsTrue = refl
 juneSignedCandidateIsLiteralLaterR423R503CarrierIsFalse : juneSignedCandidateIsLiteralLaterR423R503Carrier ≡ false
 juneSignedCandidateIsLiteralLaterR423R503CarrierIsFalse = refl
+july23CompleteTypedConsumerSpineRecoveredIsTrue : july23CompleteTypedConsumerSpineRecovered ≡ true
+july23CompleteTypedConsumerSpineRecoveredIsTrue = refl
+july23ConcreteCutoffUniformAnalyticPaymentsRecoveredIsFalse : july23ConcreteCutoffUniformAnalyticPaymentsRecovered ≡ false
+july23ConcreteCutoffUniformAnalyticPaymentsRecoveredIsFalse = refl
 earliestRecoveredAssemblyIsJuly26IsTrue : earliestRecoveredAssemblyIsJuly26 ≡ true
 earliestRecoveredAssemblyIsJuly26IsTrue = Lineage.earliestRecoveredFinalProblemSpecificationIsJuly26IsTrue
 july26IsClaimedSolvedIsFalse : july26IsClaimedSolved ≡ false
