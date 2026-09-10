@@ -26,6 +26,9 @@ import DASHI.Physics.YangMills.BalabanDirectCanonicalBCompletionRound286Exact
 import DASHI.Physics.YangMills.BalabanCyclicContinuumCovarianceSpectrumRound287Exact
 import DASHI.Physics.YangMills.BalabanSubgapSeparatingTimeRound288Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound289Exact
+import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRound290Exact
+import DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound291Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound292Exact
 
 -- Optional producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
