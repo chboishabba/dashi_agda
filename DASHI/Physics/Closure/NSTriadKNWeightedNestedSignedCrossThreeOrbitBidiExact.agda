@@ -222,7 +222,7 @@ module SignedThreeOrbit
   nestedWeightedCrossIsFourClassCross :
     (tau : Physical.PhysicalTriadIncidence) →
     (test : C3.Complex3 F) →
-    R179.realHermitianCross Live.Weighted.nestedWeightedCompanionCell tau test
+    R179.realHermitianCross (Live.Weighted.nestedWeightedCompanionCell tau) test
     ≡ fourClassSignedCross tau test
   nestedWeightedCrossIsFourClassCross tau test =
     trans
@@ -255,7 +255,7 @@ module SignedThreeOrbit
   nestedWeightedCrossIsThreeOrbitCross :
     (tau : Physical.PhysicalTriadIncidence) →
     (test : C3.Complex3 F) →
-    R179.realHermitianCross Live.Weighted.nestedWeightedCompanionCell tau test
+    R179.realHermitianCross (Live.Weighted.nestedWeightedCompanionCell tau) test
     ≡ threeOrbitSignedCross tau test
   nestedWeightedCrossIsThreeOrbitCross tau test =
     trans
