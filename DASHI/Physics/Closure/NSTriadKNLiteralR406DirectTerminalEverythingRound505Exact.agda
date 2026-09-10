@@ -90,6 +90,13 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound50
 --
 --       FactoredFull = Diagonal + 2 * LiteralWeightedRemainder.
 --
+-- The later nested-composition weld keeps that same consumer and reuses the
+-- existing R541 spectator resolvent with the R573 four-sign inner commutator.
+-- It rewrites the force-side spectator aggregate before norms, then composes
+-- through R538/R496 and R497 so the nested signed carrier lands on the same
+-- canonical direct-fibre route.  The diagonal, time integration, cutoff-uniform
+-- R503 estimate and Clay promotion remain explicit/open.
+--
 -- Two diagonal-audit generations are retained. The earlier semantic-boundary
 -- owners keep fail-closed archaeology. The newer direct tranche R548-R565 is
 -- the preferred leaf-A route:
@@ -185,6 +192,13 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Ex
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545Exact
 import DASHI.Physics.Closure.NSTriadKNFullSquareAsSpectatorRowsRound546Exact
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact
+
+-- Signed-first nested composition, retained as an optional producer identity
+-- for the same canonical R497/R500/R503 consumer.
+import DASHI.Physics.Closure.NSTriadKNSpectatorResolventNestedCommutatorBidiExact
+import DASHI.Physics.Closure.NSTriadKNSpectatorNestedRowFactorizationBidiExact
+import DASHI.Physics.Closure.NSTriadKNDirectCompanionSpectatorNestedRowBidiExact
+import DASHI.Physics.Closure.NSTriadKNNestedFactoredFullToDirectFibreBidiExact
 
 -- Retained first-generation diagonal audit owners.
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DiagonalSemanticBoundaryRound548Exact
