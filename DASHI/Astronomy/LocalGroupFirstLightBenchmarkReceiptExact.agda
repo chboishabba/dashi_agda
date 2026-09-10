@@ -10,6 +10,11 @@ open import Agda.Builtin.String using (String)
 -- any receipt has yet been paid.
 ------------------------------------------------------------------------
 
+infixr 6 _&&_
+_&&_ : Bool → Bool → Bool
+true && b = b
+false && _ = false
+
 record BenchmarkReproductionReceipt (claim : BenchmarkClaim) : Set where
   constructor benchmarkReproductionReceipt
   field
