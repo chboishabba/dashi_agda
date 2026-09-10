@@ -34,6 +34,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
@@ -90,18 +91,16 @@ module GlobalOrdered
     + globalOrderedOrientedForce cutoff outputs tailPositive
 
   twiceDirectFibreIsOrdered :
-    (items : List _) →
+    (items : List Physical.PhysicalTriadIncidence) →
     (positive : O.Local.PairRatePositiveOn items) →
     two * O.Fibre.directFibreCompanion items positive
     ≡ R539.orderedOffDiagonalSum O.orientedForceCross items
   twiceDirectFibreIsOrdered items positive =
     let
-      direct = O.Fibre.directFibreCompanion items positive
       ordered = R539.orderedOffDiagonalSum O.orientedForceCross items
-      halfIdentity = O.directFibreIsHalfOrderedOrientedForce items positive
     in
     trans
-      (cong (two *_) halfIdentity)
+      (cong (two *_) (O.directFibreIsHalfOrderedOrientedForce items positive))
       (solve (ordered ∷ []))
 
   twiceGlobalDirectIsOrdered :
@@ -117,16 +116,12 @@ module GlobalOrdered
       fibre = Output.physicalOutputFiber cutoff output
       headDirect = O.Fibre.directFibreCompanion fibre headPositive
       tailDirect = Direct.globalDirectCompanion cutoff outputs tailPositive
-      headOrdered = R539.orderedOffDiagonalSum O.orientedForceCross fibre
-      tailOrdered = globalOrderedOrientedForce cutoff outputs tailPositive
     in
     trans
       (solve (headDirect ∷ tailDirect ∷ []))
-      (trans
-        (cong₂ _+_
-          (twiceDirectFibreIsOrdered fibre headPositive)
-          (twiceGlobalDirectIsOrdered cutoff outputs tailPositive))
-        refl)
+      (cong₂ _+_
+        (twiceDirectFibreIsOrdered fibre headPositive)
+        (twiceGlobalDirectIsOrdered cutoff outputs tailPositive))
 
 module LiveOrdered
     (Time : Set)
@@ -222,11 +217,11 @@ module IntegratedOrdered
       toCopies =
         R495.integrateCongruent integration
           (λ t → two * f t) twice pointwise terminal
-
-      add = R495.integrateAdd integration f f terminal
     in
     trans toCopies
-      (trans add (solve (integrateTo f terminal ∷ [])))
+      (trans
+        (R495.integrateAdd integration f f terminal)
+        (solve (integrateTo f terminal ∷ [])))
 
   integratedOrderedIsTwiceDirect :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
@@ -259,15 +254,9 @@ module IntegratedOrdered
     (cutoff : Nat) (terminal : Time) →
     R299.four * Direct.integratedDirectCompanion T R cutoff terminal
     ≡ two * integratedOrderedOrientedForce T R cutoff terminal
-  fourIntegratedDirectIsTwoOrdered T R cutoff terminal =
-    let
-      d = Direct.integratedDirectCompanion T R cutoff terminal
-      o = integratedOrderedOrientedForce T R cutoff terminal
-      meaning = integratedOrderedIsTwiceDirect T R cutoff terminal
-    in
-    trans
-      (solve (d ∷ []))
-      (sym (trans (cong (two *_) meaning) (solve (d ∷ []))))
+  fourIntegratedDirectIsTwoOrdered T R cutoff terminal
+      rewrite integratedOrderedIsTwiceDirect T R cutoff terminal =
+    solve (Direct.integratedDirectCompanion T R cutoff terminal ∷ [])
 
 ------------------------------------------------------------------------
 -- Status / delayed-lossy-observer boundary.
@@ -303,4 +292,3 @@ externalSameObjectCompanionReceiptStillRequiredOnDirectRouteIsFalse :
 externalSameObjectCompanionReceiptStillRequiredOnDirectRouteIsFalse = refl
 
 clayPromotionIsFalse : clayPromotion ≡ false
-clayPromotionIsFalse = refl
