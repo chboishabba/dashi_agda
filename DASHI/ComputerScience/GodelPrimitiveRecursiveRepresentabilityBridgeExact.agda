@@ -12,7 +12,7 @@ import DASHI.ComputerScience.GodelDiagonalProvabilityContractExact as Godel
 -- functions, and every downstream theorem must use that SAME predicate.
 ------------------------------------------------------------------------
 
-record PrimitiveRecursiveTheory : Set₂ where
+record PrimitiveRecursiveTheory : Set₁ where
   constructor primitiveRecursiveTheory
   field
     PrimitiveRecursiveUnary : (Nat → Nat) → Set
@@ -170,7 +170,6 @@ data ArbitraryCertificateImpliesPrimitiveRecursive : Set where
 data MetaLevelComputableImpliesObjectLanguageRepresentable : Set where
 data PrimitiveRecursiveStatusAloneImpliesDiagonalLemma : Set where
 data RepresentationAuthorityAloneSuppliesPrecomposition : Set where
-
 data DifferentPrimitiveRecursiveAuthoritiesAreInterchangeable : Set where
 
 arbitraryCertificateDoesNotCreatePRStatus :
