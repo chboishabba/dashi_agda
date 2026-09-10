@@ -20,6 +20,7 @@ import DASHI.Culture.AmyEskridgeDemiseCircumstancesSnowballExact as Demise
 data AmyOSINTProposition : Set where
   deathDate : AmyOSINTProposition
   amyReportedApartmentIntrusions : AmyOSINTProposition
+  reportedPreDeathNonSuicideStatement : AmyOSINTProposition
   reportedOfficialSuicideCharacterization : AmyOSINTProposition
   amyIncludedIn2026ReviewReporting : AmyOSINTProposition
   broaderFederalInquiryExists : AmyOSINTProposition
@@ -80,6 +81,17 @@ archivedAmyInterviewSource = Attribution.mkNoDOISource
   "https://blockedepistemology.substack.com/p/archive-amy-eskridge-zoom"
   Attribution.archivalSource
   "speaker-attributed carrier for what Amy publicly reported about apartment intrusions; not independent event verification"
+  Attribution.publicAttribution
+
+hindustanMilburnReportSource : Attribution.AttributedSource
+hindustanMilburnReportSource = Attribution.mkNoDOISource
+  "Shamik Banerjee"
+  "Amy Eskridge update: UFO scientist's old texts cast doubt on cause of death; would never kill myself"
+  "Hindustan Times"
+  "2026"
+  "https://www.hindustantimes.com/world-news/us-news/amy-eskridge-update-ufo-scientists-old-texts-cast-doubt-on-cause-of-death-would-never-kill-myself-101776897906208.html"
+  Attribution.newsSource
+  "secondary report of text messages attributed to Amy and supplied by Franc Milburn; useful as a source-of-source lead until native message export, metadata, or independently authenticated carrier is inspected"
   Attribution.publicAttribution
 
 foxReviewSource : Attribution.AttributedSource
@@ -149,6 +161,16 @@ amyIntrusionOSINTAtom = amy-osint-atom
   independentOrigin
   "Amy publicly reported repeated apartment entries while she and her then-partner were absent and described a cut micro-USB charger"
   false true false false false
+
+reportedNonSuicideMessageLeadAtom : AmyOSINTAtom
+reportedNonSuicideMessageLeadAtom = amy-osint-atom
+  hindustanMilburnReportSource
+  reportedPreDeathNonSuicideStatement
+  discoveryLeadOnly
+  "milburn-reported-message-origin"
+  independenceUnresolved
+  "secondary reporting says Franc Milburn supplied May 2022 messages attributed to Amy in which she denied that a future suicide/overdose report would be genuine; no native message export or metadata carrier is presently authenticated here"
+  true true false false false
 
 reportedSuicideCharacterizationAtom : AmyOSINTAtom
 reportedSuicideCharacterizationAtom = amy-osint-atom
@@ -229,6 +251,8 @@ record AmyOSINTBoundary : Set where
     federalInquiryEqualsAmyCaseConnection : Bool
     reportedSuicideEqualsInspectedForensicFinding : Bool
     intrusionSelfReportEqualsIndependentIntrusionProof : Bool
+    reportedScreenshotEqualsAuthenticatedNativeMessage : Bool
+    preDeathStatementAloneDeterminesDeathManner : Bool
     scientificNoveltyMayPayDeathCausation : Bool
     osintAtomMayCreateCulpritByAccumulation : Bool
 
@@ -236,4 +260,4 @@ open AmyOSINTBoundary public
 
 canonicalAmyOSINTBoundary : AmyOSINTBoundary
 canonicalAmyOSINTBoundary = amy-osint-boundary
-  true true false false false false false false false false false false
+  true true false false false false false false false false false false false false
