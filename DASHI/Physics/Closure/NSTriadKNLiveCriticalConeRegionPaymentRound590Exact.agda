@@ -1,15 +1,11 @@
 module DASHI.Physics.Closure.NSTriadKNLiveCriticalConeRegionPaymentRound590Exact where
 
 ------------------------------------------------------------------------
--- ROUND590 / LIVE REGION PAYMENT IS THE PRIMITIVE PRODUCER
+-- ROUND590 / ONE LIVE CRITICAL-CONE PRODUCER
 --
 -- R589 reduced historical R434/R588 packaging to one R284 payment plus one
--- live-scalar decomposition equality.  The remaining scheduler still exposed
--- those as two independent sockets even though the decomposition belongs to the
--- same physical region payment.
---
--- This round makes the least-privilege producer one LIVE record indexed by the
--- literal R440 fixed-output scalar.  It carries exactly:
+-- live-scalar decomposition equality.  This round packages those coordinates
+-- as one LIVE record indexed by the literal R440 fixed-output scalar:
 --
 --   liveCross = (deep FL + deep HH) + critical-core Gram debt,
 --   deep FL <= C_FL E D,
@@ -17,9 +13,10 @@ module DASHI.Physics.Closure.NSTriadKNLiveCriticalConeRegionPaymentRound590Exact
 --   critical core <= theta Q_core + C_core E D, theta < 1.
 --
 -- From that record both the historical R284 payment and the R589 same-object
--- payment are compiler output.  Thus the same-object split is no longer a
--- fourth independently schedulable theorem after the three physical region
--- payments; it is part of constructing the exact live payment object itself.
+-- payment are compiler output.  R592 subsequently establishes that this whole
+-- critical-cone strategy is OPTIONAL relative to the canonical R503 direct
+-- signed-cross consumer.  This file is therefore a minimized sufficient
+-- producer tactic, not a mandatory leaf-A prerequisite.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -137,6 +134,9 @@ round590R284HistoricalPaymentCompilerOwned = true
 round590R589LivePaymentCompilerOwned : Bool
 round590R589LivePaymentCompilerOwned = true
 
+round590CriticalConeStrategyCanonicalPrerequisite : Bool
+round590CriticalConeStrategyCanonicalPrerequisite = false
+
 round590LiveRegionPaymentConstructed : Bool
 round590LiveRegionPaymentConstructed = false
 
@@ -151,6 +151,10 @@ round590ClayPromotion = false
 round590R589SeparateScalarWeldIsIndependentSchedulerDebtIsFalse :
   round590R589SeparateScalarWeldIsIndependentSchedulerDebt ≡ false
 round590R589SeparateScalarWeldIsIndependentSchedulerDebtIsFalse = refl
+
+round590CriticalConeStrategyCanonicalPrerequisiteIsFalse :
+  round590CriticalConeStrategyCanonicalPrerequisite ≡ false
+round590CriticalConeStrategyCanonicalPrerequisiteIsFalse = refl
 
 round590ClayPromotionIsFalse : round590ClayPromotion ≡ false
 round590ClayPromotionIsFalse = refl
