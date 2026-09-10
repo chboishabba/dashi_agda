@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 sixTermSumZero :
@@ -26,37 +26,71 @@ sixTermSumZero {a} {b} {c} {d} {e} {f}
 dropScaledZero :
   ∀ (x scale : ℚ) →
   x + scale * 0ℚ ≡ x
-dropScaledZero x scale = solve-∀
+dropScaledZero = solve-∀
 
 scaleThreeSum :
   ∀ (scale a b c : ℚ) →
   scale * (a + (b + c))
   ≡ scale * a + (scale * b + scale * c)
-scaleThreeSum scale a b c = solve-∀
+scaleThreeSum = solve-∀
 
 scaleFourSum :
   ∀ (scale a b c d : ℚ) →
   scale * (a + (b + (c + d)))
   ≡ scale * a + (scale * b + (scale * c + scale * d))
-scaleFourSum scale a b c d = solve-∀
+scaleFourSum = solve-∀
 
 subtractSelfZero :
   ∀ (x : ℚ) →
   x - x ≡ 0ℚ
-subtractSelfZero x = solve-∀
+subtractSelfZero = solve-∀
 
 subtractAddCancel :
   ∀ (x y : ℚ) →
   (x - y) + y ≡ x
-subtractAddCancel x y = solve-∀
+subtractAddCancel = solve-∀
 
 swapSum :
   ∀ (x y : ℚ) →
   x + y ≡ y + x
-swapSum x y = solve-∀
+swapSum = solve-∀
 
 dropTerminalZero4 :
   ∀ (a b c d : ℚ) →
   a + (b + (c + (d + 0ℚ)))
   ≡ a + (b + (c + d))
-dropTerminalZero4 a b c d = solve-∀
+dropTerminalZero4 = solve-∀
+
+zeroSubtractSelf :
+  0ℚ ≡ 0ℚ - 0ℚ
+zeroSubtractSelf = solve-∀
+
+sumSubtractStep :
+  ∀ (a b c d : ℚ) →
+  (a - b) + (c - d) ≡ (a + c) - (b + d)
+sumSubtractStep = solve-∀
+
+distribSubRight :
+  ∀ (a b c : ℚ) →
+  (a - b) * c ≡ a * c - b * c
+distribSubRight = solve-∀
+
+squareBinomial :
+  ∀ (x y : ℚ) →
+  (x + y) * (x + y) ≡ x * x + (y * y + (1ℚ + 1ℚ) * (x * y))
+squareBinomial = solve-∀
+
+reassocPlusThree :
+  ∀ (a b c : ℚ) →
+  a + (b + c) ≡ (a + b) + c
+reassocPlusThree = solve-∀
+
+scaleSubFactor :
+  ∀ (w a b : ℚ) →
+  w * a - w * b ≡ w * (a - b)
+scaleSubFactor = solve-∀
+
+subtractShiftCancel :
+  ∀ (a b c : ℚ) →
+  (a - c) - (b - c) ≡ a - b
+subtractShiftCancel = solve-∀
