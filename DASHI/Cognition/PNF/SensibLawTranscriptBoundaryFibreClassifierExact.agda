@@ -115,7 +115,7 @@ sentence45ExpectedFamily =
 
 sentence117ExpectedFamily : String
 sentence117ExpectedFamily =
-  "sentence 117 adversative but-pivot should prefer rhetoricalPivot over speakerCut despite high v2 cut score"
+  "sentence 117 split 32 should prefer reporterQuoteHandoff, retain attributionNesting as the nearest competing frame, and suppress speakerCut; believes marks quoted/epistemic stance rather than a speaker boundary"
 
 sentence118ExpectedFamily : String
 sentence118ExpectedFamily =
