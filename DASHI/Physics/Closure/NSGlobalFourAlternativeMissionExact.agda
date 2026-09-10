@@ -71,18 +71,13 @@ open AlternativeMissionStatus public
 statusA : AlternativeMissionStatus
 statusA = alternative-mission-status
   A-euclidean-unforced-global feffermanOfficialStatement true internallyOpen
-
 statusB : AlternativeMissionStatus
 statusB = alternative-mission-status
   B-periodic-unforced-global dashiTypedReconstruction
   BSurface.submissionTheoremStatementConstructed internallyOpen
-
--- Public 2026-09-08 C/D formal-proof release is source evidence only here.
--- External theorem -> DASHI same-object payment is a separate obligation.
 statusC : AlternativeMissionStatus
 statusC = alternative-mission-status
   C-euclidean-forced-breakdown externalReleasedFormalProofSource true internallyOpen
-
 statusD : AlternativeMissionStatus
 statusD = alternative-mission-status
   D-periodic-forced-breakdown externalReleasedFormalProofSource true internallyOpen
@@ -92,20 +87,16 @@ externalCDReleaseDate = "2026-09-08"
 
 cMapsToRound523 : CD.ClayBreakdownAlternative523
 cMapsToRound523 = CD.clayAlternativeC523
-
 dMapsToRound523 : CD.ClayBreakdownAlternative523
 dMapsToRound523 = CD.clayAlternativeD523
 
 unforcedLeafAIsCanonicalSingleR503Budget : Bool
 unforcedLeafAIsCanonicalSingleR503Budget =
   LeafA.round592CanonicalLeafAIsSingleDirectOffDiagonalBudget
-
 unforcedLeafAPaid : Bool
 unforcedLeafAPaid = LeafA.round592CanonicalLeafAClosed
-
 unforcedLeafBIndependent : Bool
 unforcedLeafBIndependent = true
-
 unforcedLeafBPaid : Bool
 unforcedLeafBPaid = Cut.round504CriticalProductionSliceClosed
 
