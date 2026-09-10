@@ -10,6 +10,8 @@ import DASHI.Cognition.PNF.SensibLawTranscriptBoundaryPNFWorldManifoldExact as M
 
 ------------------------------------------------------------------------
 -- Provenance-bearing graph compilation from boundary manifolds.
+-- Runtime v2 keeps PNF structural topology on each boundary node so downstream
+-- consumers can veto a projection without recomputing or scalarising it.
 ------------------------------------------------------------------------
 
 data SpeakerCertainty : Set where
@@ -32,6 +34,18 @@ record DiscourseSpanNode : Set where
 
 open DiscourseSpanNode public
 
+record BoundaryPNFTopology : Set where
+  constructor boundaryPNFTopology
+  field
+    subjectCrossings : Nat
+    objectCrossings : Nat
+    clauseCrossings : Nat
+    coordinationCrossings : Nat
+    negationSideShiftReference : String
+    modalitySideShiftReference : String
+
+open BoundaryPNFTopology public
+
 record BoundaryNode : Set where
   constructor boundaryNode
   field
@@ -43,6 +57,7 @@ record BoundaryNode : Set where
     selectedProjectionReference : String
     residualFibreReference : String
     pnfResidualReference : String
+    pnfTopology : BoundaryPNFTopology
     candidateOnly : Bool
 
 open BoundaryNode public
@@ -80,8 +95,9 @@ record BroadcastDiscourseGraph : Set where
 open BroadcastDiscourseGraph public
 
 ------------------------------------------------------------------------
--- Projection is allowed only after the manifold layer.  A singleton Pareto
--- front may propose one edge kind, but it still cannot verify speaker identity.
+-- Projection is allowed only after the manifold layer. A singleton Pareto
+-- front may propose one edge kind, but later consumers retain the independent
+-- PNF topology and may reject that proposal for their own obligation.
 ------------------------------------------------------------------------
 
 data SingletonParetoFront : Set where
@@ -110,6 +126,10 @@ data GraphCompilerErasesResidual : Set where
 graphCompilerDoesNotEraseResidual : GraphCompilerErasesResidual → ⊥
 graphCompilerDoesNotEraseResidual ()
 
+data GraphProjectionOverridesPNFTopology : Set where
+graphProjectionDoesNotOverridePNFTopology : GraphProjectionOverridesPNFTopology → ⊥
+graphProjectionDoesNotOverridePNFTopology ()
+
 data ReconstructedSpanCreatesClaimTruth : Set where
 reconstructedSpanDoesNotCreateClaimTruth : ReconstructedSpanCreatesClaimTruth → ⊥
 reconstructedSpanDoesNotCreateClaimTruth ()
@@ -121,13 +141,15 @@ record BroadcastGraphCompilerBoundary : Set where
     singletonFrontMayProposeEdge : Bool
     multiPointFrontRemainsUnresolved : Bool
     residualFibresRetained : Bool
+    pnfTopologyRetainedOnBoundary : Bool
+    downstreamConsumerMayVetoProjection : Bool
     speakerCertaintyIndependent : Bool
     graphMayFeedReconstructedPNF : Bool
     graphCreatesWorldTruth : Bool
 
 canonicalBroadcastGraphCompilerBoundary : BroadcastGraphCompilerBoundary
 canonicalBroadcastGraphCompilerBoundary =
-  broadcastGraphCompilerBoundary true true true true true true false
+  broadcastGraphCompilerBoundary true true true true true true true true false
 
 manifoldBoundaryAnchor : Manifold.PNFWorldManifoldBoundary
 manifoldBoundaryAnchor = Manifold.canonicalPNFWorldManifoldBoundary
