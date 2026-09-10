@@ -2,7 +2,18 @@
 module DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound261Exact where
 
 ------------------------------------------------------------------------
--- ROUND261 / ROW-C SPATIAL FRONTIER AFTER COMPACT-LIE GEOMETRY AUDIT
+-- ROUND261/R269 / CURRENT ROW-C SPATIAL FRONTIER
+--
+-- Introspection has now removed the broad generator-row equality and the opaque
+-- commutator socket from the preferred path.  The exact spatial source cut is:
+--
+--   S1 literal CMP109 finite-density Langevin differentiation;
+--   S2 same-object R260 marked comparison + reference anchor;
+--   S3 weighted row of the resulting rational anchored debts.
+--
+-- CMP109=CMP116, symmetric-action-Hessian typing, absolute-entry->influence,
+-- compact-Lie connection cancellation, and all weighted Dyson powers are
+-- compiler/standard-geometry consequences once S1-S3 are paid.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
@@ -10,53 +21,57 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact as Langevin
-import DASHI.Physics.YangMills.BalabanSharedMarkedHessianGeneratorRowExact as GeneratorRow
+import DASHI.Physics.YangMills.BalabanCMP109LangevinTypedSecondVariationRound267Exact as CMP
+import DASHI.Physics.YangMills.BalabanLangevinAnchoredInfluenceRound268Exact as Anchor
 import DASHI.Physics.YangMills.BalabanLangevinHessianBidirectionalWeldRound262Exact as Bidi
 
 
 data PreferredRowCSpatialLeaf261 : Set where
-  literalDifferentiatedLangevinCommutator : PreferredRowCSpatialLeaf261
-  literalSymmetricPartIsCMP109116HessianRow : PreferredRowCSpatialLeaf261
+  literalCMP109LangevinDifferentiation : PreferredRowCSpatialLeaf261
+  literalSameObjectMarkedComparisonAndReferenceAnchor : PreferredRowCSpatialLeaf261
+  literalWeightedAnchoredDebtRow : PreferredRowCSpatialLeaf261
 
 
 data LeafState261 : Set where
   open closed : LeafState261
 
 preferredRowCSpatialLeafState261 : PreferredRowCSpatialLeaf261 → LeafState261
-preferredRowCSpatialLeafState261 literalDifferentiatedLangevinCommutator = open
-preferredRowCSpatialLeafState261 literalSymmetricPartIsCMP109116HessianRow = open
+preferredRowCSpatialLeafState261 literalCMP109LangevinDifferentiation = open
+preferredRowCSpatialLeafState261 literalSameObjectMarkedComparisonAndReferenceAnchor = open
+preferredRowCSpatialLeafState261 literalWeightedAnchoredDebtRow = open
 
-literalDifferentiatedLangevinCommutatorLevel : ProofLevel
-literalDifferentiatedLangevinCommutatorLevel =
-  Langevin.physicalLiteralLangevinCommutatorIdentificationLevel
+literalCMP109LangevinDifferentiationLevel : ProofLevel
+literalCMP109LangevinDifferentiationLevel =
+  CMP.round267LiteralLangevinDifferentiationInstantiationLevel
 
-literalSymmetricPartCMP109116HessianRowLevel : ProofLevel
-literalSymmetricPartCMP109116HessianRowLevel = conditional
+literalSameObjectMarkedComparisonAndReferenceAnchorLevel : ProofLevel
+literalSameObjectMarkedComparisonAndReferenceAnchorLevel =
+  Anchor.round268SameObjectAnchoredSourceLevel
 
--- Preferred current source cut: pay C4a/C4b with ONE source inhabitant.  R262
--- binds the spatial site carrier to the literal Langevin frame and exports the
--- same CMP109/CMP116 Hessian to both spatial and temporal consumers.
-preferredUnifiedC4SourceRealizationLevel : ProofLevel
-preferredUnifiedC4SourceRealizationLevel =
-  Bidi.round262LiteralSourceRealizationLevel
+literalWeightedAnchoredDebtRowLevel : ProofLevel
+literalWeightedAnchoredDebtRowLevel =
+  Anchor.round268WeightedAnchoredDebtRowLevel
+
+-- Closed consequences.
+typedCommutatorCompilerLevel : ProofLevel
+typedCommutatorCompilerLevel = Langevin.typedLangevinCommutatorCompilerLevel
+
+cmp109TypedLangevinCompilerLevel : ProofLevel
+cmp109TypedLangevinCompilerLevel = CMP.round267TypedCMP109LangevinCompilerLevel
+
+anchoredEntryInfluenceCompilerLevel : ProofLevel
+anchoredEntryInfluenceCompilerLevel =
+  Anchor.round268AnchoredEntryToInfluenceCompilerLevel
+
+bidirectionalSpatialTemporalCompilerLevel : ProofLevel
+bidirectionalSpatialTemporalCompilerLevel = Bidi.round262BidiCompilerLevel
 
 connectionQuadraticCancellationLevel : ProofLevel
 connectionQuadraticCancellationLevel =
   Langevin.compactLieSkewQuadraticCancellationLevel
 
-weightedGeneratorRowCompilerLevel : ProofLevel
-weightedGeneratorRowCompilerLevel =
-  GeneratorRow.sameObjectGeneratorRowToUniformWeightedBoundLevel
+round269SpatialPhysicalClosure : Bool
+round269SpatialPhysicalClosure = false
 
-weightedAllDysonPowersCompilerLevel : ProofLevel
-weightedAllDysonPowersCompilerLevel =
-  GeneratorRow.sameObjectGeneratorRowToAllDysonPowerRowsLevel
-
-bidirectionalSameHessianCompilerLevel : ProofLevel
-bidirectionalSameHessianCompilerLevel = Bidi.round262BidiCompilerLevel
-
-round261SpatialPhysicalClosure : Bool
-round261SpatialPhysicalClosure = false
-
-round261SpatialPhysicalClosureIsFalse : round261SpatialPhysicalClosure ≡ false
-round261SpatialPhysicalClosureIsFalse = refl
+round269SpatialPhysicalClosureIsFalse : round269SpatialPhysicalClosure ≡ false
+round269SpatialPhysicalClosureIsFalse = refl
