@@ -2,46 +2,48 @@
 module DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound275Exact where
 
 ------------------------------------------------------------------------
--- ROUND275 / CANONICAL B FRONTIER, RE-MINIMIZED THROUGH R277
+-- ROUND275 / CANONICAL B FRONTIER, RE-MINIMIZED THROUGH R277 + ARCHAEOLOGY
 --
 -- Primitive theorem content is defined by the lowest consumer, not by a
 -- currently preferred proof architecture.
 --
--- The live T5 clustering->gap owner contains a later least-privilege reduction:
--- the contradiction only evaluates clustering on the observable selected by a
--- hypothetical positive subgap mode.  Therefore the canonical B clustering
--- payment is now `SubgapModeClusteringUpper`, not the stronger global
--- `ClusteringUpperBound`.
+-- The live T5 clustering->gap owner contains the R277 least-privilege reduction:
+-- the contradiction evaluates clustering only on the observable selected by a
+-- hypothetical positive subgap mode.  Therefore the canonical clustering
+-- payment is `SubgapModeClusteringUpper`, not global `ClusteringUpperBound`.
 --
--- Canonical B content:
---   * quantitative clustering upper on subgap-selected reconstructed observables;
---   * positivity of the selected gap threshold.
+-- On the direct same-rate OS route, the positive gap threshold is also not an
+-- independent Yang--Mills estimate: the older physical decay carrier already
+-- stores a positive `mStar`, and the spectrum-gap compiler uses exactly this
+-- same `mStar` as the gap.  The generic spectrum API still requires positivity,
+-- but `BalabanClusteringRateSameGapCandidateWeldExact` compiles it directly from
+-- `mStarPositive` once same-object identification is chosen.
 --
--- Stronger optional producers include:
---   * global all-observable continuum clustering;
---   * Heat/Doob -> Langevin -> weighted Dyson -> clustering;
---   * unified polymer/Schwinger norm -> correlation-decay trajectory;
---   * source-native Step-V / multiscale cluster expansion;
---   * uniform finite-cutoff spectral gaps + continuum survival.
---
--- STEP-V ARCHAEOLOGY
--- ------------------
--- The historical Step-V chain
+-- STEP-V PRODUCER ARCHAEOLOGY
+-- ---------------------------
+-- The historical chain
 --
 --   KP -> cluster expansion -> cluster-weight decay -> connected correlations
 --
 -- is not itself a completed physical proof: the final analytic arrows are stored
--- as theorem fields in the Step-V estimate packages.  The new two-mark audit
--- sharpens the source-native producer further.  Its physical leaves are:
+-- as theorem fields in the Step-V estimate packages.  The two-mark audit sharpens
+-- the source-native producer to:
 --
---   (1) a same-carrier two-source connected-cluster expansion / support bridge;
---   (2) an absolute connecting-cluster weight sum bounded by the configured
---       rooted tail;
---   (3) terminal lattice-to-physical scale/rate transport;
---   (4) same-family continuum/OS transport.
+--   (1) same-carrier two-source connected-cluster expansion/support bridge;
+--   (2) absolute connecting-cluster weight sum <= configured rooted tail;
+--   (3) subgap-selected Euclidean-time support/separation weld;
+--   (4) physical rate floor m_* <= a^{-1} mu_StepV;
+--   (5) same-family continuum/OS transport.
 --
--- The 8/16 -> 1/2 rooted-shell arithmetic is already compiler-owned.  None of
--- these optional producer details are promoted into the canonical B consumer.
+-- What is already compiler-owned:
+--   * 8 extensions x 1/16 activity -> 1/2 shell contraction;
+--   * rootedShell(d) <= (1/4) 2^{-d};
+--   * m_phys*a <= m_lat -> physical exponent transport;
+--   * the exact dyadic spacing/separation identity;
+--   * clustering-rate positivity -> same gap-candidate positivity;
+--   * clustering + standard OS spectral inputs -> no positive subgap mode.
+--
+-- None of the producer tactics below are promoted into the canonical consumer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -59,18 +61,24 @@ import DASHI.Physics.YangMills.BalabanLargeFieldStepV as StepV
 import DASHI.Physics.YangMills.BalabanTerminalScalePhysicalClustering as Terminal
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.BalabanMarkedLogPartitionConnectedCorrelationCompilerExact as Marked
+import DASHI.Physics.YangMills.BalabanClayPhysicalScaleExponentExact as Scale
+import DASHI.Physics.YangMills.BalabanClayDyadicPhysicalClusteringExponentExact as Dyadic
+import DASHI.Physics.YangMills.BalabanClusteringRateSameGapCandidateWeldExact as SameRate
 
 
 data BSearchObject275 : Set where
   subgapModeQuantitativeClusteringUpper : BSearchObject275
-  positiveGapCandidate : BSearchObject275
+  genericPositiveGapCandidateCoordinate : BSearchObject275
+  sameRateGapCandidateWeld : BSearchObject275
   globalAllObservableClusteringUpper : BSearchObject275
   heatDoobLangevinDysonRoute : BSearchObject275
   unifiedPolymerNormRoute : BSearchObject275
   sourceNativeStepVRoute : BSearchObject275
   stepVTwoMarkedConnectedExpansionLeaf : BSearchObject275
   stepVConnectingWeightTailLeaf : BSearchObject275
-  terminalPhysicalScaleComparisonLeaf : BSearchObject275
+  subgapEuclideanTimeSupportWeldLeaf : BSearchObject275
+  physicalRateSpacingFloorLeaf : BSearchObject275
+  physicalExponentTransport : BSearchObject275
   continuumSameFamilyTransportLeaf : BSearchObject275
   finiteCutoffGapSurvivalRoute : BSearchObject275
   genericT5ClusteredField : BSearchObject275
@@ -79,8 +87,10 @@ data BSearchObject275 : Set where
 searchRole275 : BSearchObject275 → Introspective.ProofSearchTargetRole
 searchRole275 subgapModeQuantitativeClusteringUpper =
   Introspective.canonicalConsumerResidual
-searchRole275 positiveGapCandidate =
+searchRole275 genericPositiveGapCandidateCoordinate =
   Introspective.canonicalConsumerResidual
+searchRole275 sameRateGapCandidateWeld =
+  Introspective.compilerConsequence
 searchRole275 globalAllObservableClusteringUpper =
   Introspective.optionalProducerTactic
 searchRole275 heatDoobLangevinDysonRoute =
@@ -93,8 +103,12 @@ searchRole275 stepVTwoMarkedConnectedExpansionLeaf =
   Introspective.optionalProducerTactic
 searchRole275 stepVConnectingWeightTailLeaf =
   Introspective.optionalProducerTactic
-searchRole275 terminalPhysicalScaleComparisonLeaf =
+searchRole275 subgapEuclideanTimeSupportWeldLeaf =
   Introspective.optionalProducerTactic
+searchRole275 physicalRateSpacingFloorLeaf =
+  Introspective.optionalProducerTactic
+searchRole275 physicalExponentTransport =
+  Introspective.compilerConsequence
 searchRole275 continuumSameFamilyTransportLeaf =
   Introspective.optionalProducerTactic
 searchRole275 finiteCutoffGapSurvivalRoute =
@@ -122,8 +136,6 @@ compileCanonicalBPaymentCore {spectrum = spectrum} payment =
     (subgapClusteringUpper payment)
     (candidatePositive payment)
 
--- Stronger global clustering is retained as a compatibility producer, not as
--- canonical theorem debt.
 globalUpperBuildsCanonicalSubgapPayment :
   ∀ {Observable Energy Bound}
     {spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound} →
@@ -135,9 +147,7 @@ globalUpperBuildsCanonicalSubgapPayment {spectrum = spectrum} upper positive = r
   ; candidatePositive = positive
   }
 
--- Historical Step-V assembly is compiler output from stored analytic theorem
--- fields.  Keeping this visible prevents the function name from being mistaken
--- for a new proof of connected-correlation decay.
+-- Historical Step-V assembly is compiler output from stored theorem fields.
 stepVConnectedCorrelationsFromStoredProducer :
   ∀ {Site Polymer Configuration Bound : Set}
     (estimates : StepV.LargeFieldStepVEstimates Site Polymer Configuration Bound) →
@@ -155,6 +165,14 @@ record Round275Boundary : Set where
     subgapModeClusteringIsCanonical : Bool
     subgapModeClusteringIsCanonicalIsTrue :
       subgapModeClusteringIsCanonical ≡ true
+
+    positiveGapCoordinateRequiredByGenericSpectrum : Bool
+    positiveGapCoordinateRequiredByGenericSpectrumIsTrue :
+      positiveGapCoordinateRequiredByGenericSpectrum ≡ true
+
+    positiveGapIndependentYMAnalyticLeafOnSameRateRoute : Bool
+    positiveGapIndependentYMAnalyticLeafOnSameRateRouteIsFalse :
+      positiveGapIndependentYMAnalyticLeafOnSameRateRoute ≡ false
 
     rowCRouteMandatory : Bool
     rowCRouteMandatoryIsFalse : rowCRouteMandatory ≡ false
@@ -177,9 +195,17 @@ record Round275Boundary : Set where
     stepVConnectingWeightTailOpenIsTrue :
       stepVConnectingWeightTailOpen ≡ true
 
-    terminalPhysicalScaleComparisonOpen : Bool
-    terminalPhysicalScaleComparisonOpenIsTrue :
-      terminalPhysicalScaleComparisonOpen ≡ true
+    subgapEuclideanTimeSupportWeldOpen : Bool
+    subgapEuclideanTimeSupportWeldOpenIsTrue :
+      subgapEuclideanTimeSupportWeldOpen ≡ true
+
+    physicalRateSpacingFloorOpen : Bool
+    physicalRateSpacingFloorOpenIsTrue :
+      physicalRateSpacingFloorOpen ≡ true
+
+    physicalExponentUnitConversionClosed : Bool
+    physicalExponentUnitConversionClosedIsTrue :
+      physicalExponentUnitConversionClosed ≡ true
 
     continuumSameFamilyTransportOpen : Bool
     continuumSameFamilyTransportOpenIsTrue :
@@ -196,14 +222,13 @@ record Round275Boundary : Set where
     subgapQuantitativeClusteringOpenIsTrue :
       subgapQuantitativeClusteringOpen ≡ true
 
-    positiveGapCandidateOpen : Bool
-    positiveGapCandidateOpenIsTrue : positiveGapCandidateOpen ≡ true
-
 canonicalRound275Boundary : Round275Boundary
 canonicalRound275Boundary =
   round275-boundary
     false refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
@@ -212,9 +237,10 @@ canonicalRound275Boundary =
     true refl
     true refl
     true refl
-    false refl
-    false refl
     true refl
+    true refl
+    false refl
+    false refl
     true refl
 
 round275CanonicalBCompilerLevel : ProofLevel
@@ -223,8 +249,13 @@ round275CanonicalBCompilerLevel = machineChecked
 round275QuantitativeClusteringLevel : ProofLevel
 round275QuantitativeClusteringLevel = R274.round274PhysicalQuantitativeClusteringLevel
 
-round275PositiveGapCandidateLevel : ProofLevel
-round275PositiveGapCandidateLevel = conditional
+-- Generic carrier coordinate remains conditional, but the same-rate physical
+-- route has an exact compiler from the already-positive clustering exponent.
+round275GenericPositiveGapCoordinateLevel : ProofLevel
+round275GenericPositiveGapCoordinateLevel = conditional
+
+round275SameRateGapCandidateWeldLevel : ProofLevel
+round275SameRateGapCandidateWeldLevel = machineChecked
 
 round275StepVHistoricalAssemblyLevel : ProofLevel
 round275StepVHistoricalAssemblyLevel = StepV.largeFieldStepVBridgeLevel
@@ -232,5 +263,11 @@ round275StepVHistoricalAssemblyLevel = StepV.largeFieldStepVBridgeLevel
 round275StepVPhysicalProducerLevel : ProofLevel
 round275StepVPhysicalProducerLevel = StepV.largeFieldStepVAnalyticEstimatesLevel
 
-round275TerminalPhysicalScaleProducerLevel : ProofLevel
-round275TerminalPhysicalScaleProducerLevel = Terminal.terminalPhysicalScaleComparisonInputLevel
+round275PhysicalExponentTransportLevel : ProofLevel
+round275PhysicalExponentTransportLevel = Scale.physicalScaleExponentTransportLevel
+
+round275DyadicExponentTransportLevel : ProofLevel
+round275DyadicExponentTransportLevel = Dyadic.exactDyadicPhysicalExponentLevel
+
+round275TerminalPhysicalRateFloorLevel : ProofLevel
+round275TerminalPhysicalRateFloorLevel = Scale.uniformPhysicalMassScaleBridgeInputsLevel
