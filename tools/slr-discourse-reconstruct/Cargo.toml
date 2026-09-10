@@ -3,6 +3,7 @@ name = "slr-discourse-reconstruct"
 version = "0.1.0"
 edition = "2021"
 publish = false
+default-run = "slr-discourse-reconstruct"
 
 [dependencies]
 vader-parity = "=0.1.0"
