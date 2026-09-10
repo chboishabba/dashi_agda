@@ -12,9 +12,12 @@ import DASHI.Reasoning.SemanticCandidateResidualBidiExact as Residual
 ------------------------------------------------------------------------
 -- Broadcast discourse span reconstruction.
 --
--- This owner is downstream of the PNF/world boundary manifold.  It does not
--- rewrite the source transcript.  It emits a separate candidate segmentation
+-- This owner is downstream of the PNF/world boundary manifold. It does not
+-- rewrite the source transcript. It emits a separate candidate segmentation
 -- plus a provenance ledger, keeping unresolved manifold boundaries intact.
+-- Runtime v2 additionally preserves the source separator/paragraph topology:
+-- candidate segmentation may insert boundary newlines, but it may not replace
+-- or collapse existing source separators.
 ------------------------------------------------------------------------
 
 data SpanBoundaryDisposition : Set where
@@ -42,6 +45,18 @@ record ReconstructedDiscourseSpan : Set where
 
 open ReconstructedDiscourseSpan public
 
+record ParagraphTopologyReceipt : Set where
+  constructor paragraphTopologyReceipt
+  field
+    sourceParagraphReference : String
+    reconstructedParagraphReference : String
+    originalSeparatorCountReference : String
+    insertedBoundaryCountReference : String
+    originalSeparatorsPreserved : Bool
+    reconstructionOnlyAddsBoundarySeparators : Bool
+
+open ParagraphTopologyReceipt public
+
 record SpanReconstructionReceipt : Set where
   constructor spanReconstructionReceipt
   field
@@ -52,6 +67,7 @@ record SpanReconstructionReceipt : Set where
     hardCutRuleReference : String
     unresolvedBoundaryReference : String
     sourceCoverageReference : String
+    paragraphTopologyReference : String
     replayReference : String
 
 open SpanReconstructionReceipt public
@@ -59,8 +75,8 @@ open SpanReconstructionReceipt public
 ------------------------------------------------------------------------
 -- Narrow executable policy.
 --
--- Runtime v1 permits a candidate hard cut only for a rank-1 singleton Pareto
--- projection whose discourse kind is speaker or quote.  This is an engineering
+-- Runtime permits a candidate hard cut only for a rank-1 singleton Pareto
+-- projection whose discourse kind is speaker or quote. This is an engineering
 -- projection for the comparison experiment, not a semantic theorem.
 ------------------------------------------------------------------------
 
@@ -89,6 +105,7 @@ record PNFRunSummary : Set where
   field
     runReference : String
     sentenceRowCount : Nat
+    paragraphRowCount : Nat
     residualRowCount : Nat
     residualTotal : Nat
     candidateRowCount : Nat
@@ -103,6 +120,7 @@ record RawReconstructedPNFComparison : Set where
   field
     rawRun : PNFRunSummary
     reconstructedRun : PNFRunSummary
+    paragraphTopologyDeltaReference : String
     residualDeltaReference : String
     residualDensityDeltaReference : String
     attributionAmbiguityDeltaReference : String
@@ -132,6 +150,16 @@ data ReconstructionMayEraseUnresolvedBoundary : Set where
 reconstructionMayNotEraseUnresolvedBoundary : ReconstructionMayEraseUnresolvedBoundary → ⊥
 reconstructionMayNotEraseUnresolvedBoundary ()
 
+data ReconstructionMayCollapseSourceParagraphTopology : Set where
+reconstructionMayNotCollapseSourceParagraphTopology :
+  ReconstructionMayCollapseSourceParagraphTopology → ⊥
+reconstructionMayNotCollapseSourceParagraphTopology ()
+
+data ParagraphCountEqualityProvesSemanticEquivalence : Set where
+paragraphCountEqualityDoesNotProveSemanticEquivalence :
+  ParagraphCountEqualityProvesSemanticEquivalence → ⊥
+paragraphCountEqualityDoesNotProveSemanticEquivalence ()
+
 data ComparisonMayPromoteWorldClaim : Set where
 comparisonMayNotPromoteWorldClaim : ComparisonMayPromoteWorldClaim → ⊥
 comparisonMayNotPromoteWorldClaim ()
@@ -154,12 +182,15 @@ record SpanReconstructionBoundary : Set where
   field
     sourceTranscriptRemainsImmutable : Bool
     reconstructedTextIsSeparateProjection : Bool
+    originalParagraphTopologyPreserved : Bool
+    candidateCutsOnlyAddSeparators : Bool
     unresolvedParetoFrontsRemainUnsplit : Bool
     speakerIdentityIndependentOfCutProjection : Bool
     rerunPNFIsRequiredForComparison : Bool
     lowerResidualIsDiagnosticNotTruth : Bool
+    paragraphEqualityIsDiagnosticNotTruth : Bool
     claimGraphRepairIsDownstream : Bool
 
 canonicalSpanReconstructionBoundary : SpanReconstructionBoundary
 canonicalSpanReconstructionBoundary =
-  spanReconstructionBoundary true true true true true true true
+  spanReconstructionBoundary true true true true true true true true true true
