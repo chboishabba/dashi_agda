@@ -12,19 +12,34 @@ import DASHI.Reasoning.SemanticCandidateResidualBidiExact as Residual
 ------------------------------------------------------------------------
 -- Broadcast discourse span reconstruction.
 --
--- This owner is downstream of the PNF/world boundary manifold. It does not
--- rewrite the source transcript. It emits a separate candidate segmentation
--- plus a provenance ledger, keeping unresolved manifold boundaries intact.
--- Runtime v2 preserves source byte order and source separator/paragraph
--- topology: candidate segmentation may insert boundary newlines, but it may
--- not replace, delete, or reorder source bytes.
+-- The runtime projection is downstream of the PNF/world manifold. A Pareto
+-- singleton is necessary but not sufficient for a hard cut: the selected cut
+-- must also preserve the core PNF role relations appropriate to its discourse
+-- kind. Speaker cuts may not sever subject/object/clause relations. Quote
+-- handoffs may retain a clause/content attachment, but may not sever actor or
+-- patient relations. This keeps parser topology as a typed veto rather than a
+-- scalar penalty.
 ------------------------------------------------------------------------
 
 data SpanBoundaryDisposition : Set where
   preserveOriginalSentence : SpanBoundaryDisposition
   candidateSpeakerCut : SpanBoundaryDisposition
   candidateQuoteHandoff : SpanBoundaryDisposition
+  pnfStructuralVeto : SpanBoundaryDisposition
   unresolvedBoundary : SpanBoundaryDisposition
+
+record PNFStructuralCutReceipt : Set where
+  constructor pnfStructuralCutReceipt
+  field
+    subjectCrossings : Nat
+    objectCrossings : Nat
+    clauseCrossings : Nat
+    coordinationCrossings : Nat
+    projectionReference : String
+    structuralRuleReference : String
+    admissibleReference : String
+
+open PNFStructuralCutReceipt public
 
 record ReconstructedDiscourseSpan : Set where
   constructor reconstructedDiscourseSpan
@@ -38,6 +53,7 @@ record ReconstructedDiscourseSpan : Set where
     boundaryDisposition : SpanBoundaryDisposition
     paretoFrontReference : String
     retainedResidualReference : String
+    pnfStructuralReceiptReference : String
     speakerCandidateReference : String
     speakerStatusReference : String
     claimReference : String
@@ -80,6 +96,7 @@ record SpanReconstructionReceipt : Set where
     reconstructionSchema : String
     spans : List ReconstructedDiscourseSpan
     hardCutRuleReference : String
+    pnfStructuralGateReference : String
     unresolvedBoundaryReference : String
     sourceCoverageReference : String
     paragraphTopologyReference : String
@@ -90,10 +107,6 @@ open SpanReconstructionReceipt public
 
 ------------------------------------------------------------------------
 -- Narrow executable policy.
---
--- Runtime permits a candidate hard cut only for a rank-1 singleton Pareto
--- projection whose discourse kind is speaker or quote. This is an engineering
--- projection for the comparison experiment, not a semantic theorem.
 ------------------------------------------------------------------------
 
 record CandidateHardCutPolicy : Set where
@@ -101,6 +114,12 @@ record CandidateHardCutPolicy : Set where
   field
     requiresRankOne : Bool
     requiresSingletonPareto : Bool
+    speakerRequiresZeroSubjectCrossings : Bool
+    speakerRequiresZeroObjectCrossings : Bool
+    speakerRequiresZeroClauseCrossings : Bool
+    quoteRequiresZeroSubjectCrossings : Bool
+    quoteRequiresZeroObjectCrossings : Bool
+    quoteMayRetainClauseCrossing : Bool
     permitsSpeakerProjection : Bool
     permitsQuoteProjection : Bool
     permitsNestingProjection : Bool
@@ -110,7 +129,11 @@ record CandidateHardCutPolicy : Set where
 
 canonicalCandidateHardCutPolicy : CandidateHardCutPolicy
 canonicalCandidateHardCutPolicy =
-  candidateHardCutPolicy true true true true false false false false
+  candidateHardCutPolicy
+    true true
+    true true true
+    true true true
+    true true false false false false
 
 ------------------------------------------------------------------------
 -- Raw versus reconstructed PNF comparison.
@@ -158,6 +181,18 @@ data SingletonParetoVerifiesSpeaker : Set where
 singletonParetoDoesNotVerifySpeaker : SingletonParetoVerifiesSpeaker → ⊥
 singletonParetoDoesNotVerifySpeaker ()
 
+data SingletonParetoOverridesPNFStructure : Set where
+singletonParetoDoesNotOverridePNFStructure : SingletonParetoOverridesPNFStructure → ⊥
+singletonParetoDoesNotOverridePNFStructure ()
+
+data SpeakerCutMaySeverCorePNFRole : Set where
+speakerCutMayNotSeverCorePNFRole : SpeakerCutMaySeverCorePNFRole → ⊥
+speakerCutMayNotSeverCorePNFRole ()
+
+data QuoteClauseCrossingMeansSpeakerCut : Set where
+quoteClauseCrossingDoesNotMeanSpeakerCut : QuoteClauseCrossingMeansSpeakerCut → ⊥
+quoteClauseCrossingDoesNotMeanSpeakerCut ()
+
 data LowerResidualDensityProvesSemanticTruth : Set where
 lowerResidualDensityDoesNotProveSemanticTruth : LowerResidualDensityProvesSemanticTruth → ⊥
 lowerResidualDensityDoesNotProveSemanticTruth ()
@@ -167,8 +202,7 @@ reconstructionMayNotEraseUnresolvedBoundary : ReconstructionMayEraseUnresolvedBo
 reconstructionMayNotEraseUnresolvedBoundary ()
 
 data ReconstructionMayCollapseSourceParagraphTopology : Set where
-reconstructionMayNotCollapseSourceParagraphTopology :
-  ReconstructionMayCollapseSourceParagraphTopology → ⊥
+reconstructionMayNotCollapseSourceParagraphTopology : ReconstructionMayCollapseSourceParagraphTopology → ⊥
 reconstructionMayNotCollapseSourceParagraphTopology ()
 
 data NonNewlineMutationMayPassIntegrityGate : Set where
@@ -180,8 +214,7 @@ staleSchemaMayNotPassIntegrityGate : StaleSchemaMayPassIntegrityGate → ⊥
 staleSchemaMayNotPassIntegrityGate ()
 
 data ParagraphCountEqualityProvesSemanticEquivalence : Set where
-paragraphCountEqualityDoesNotProveSemanticEquivalence :
-  ParagraphCountEqualityProvesSemanticEquivalence → ⊥
+paragraphCountEqualityDoesNotProveSemanticEquivalence : ParagraphCountEqualityProvesSemanticEquivalence → ⊥
 paragraphCountEqualityDoesNotProveSemanticEquivalence ()
 
 data ComparisonMayPromoteWorldClaim : Set where
@@ -212,6 +245,9 @@ record SpanReconstructionBoundary : Set where
     staleSchemaFailsClosed : Bool
     nonNewlineMutationFailsClosed : Bool
     unresolvedParetoFrontsRemainUnsplit : Bool
+    singletonParetoStillNeedsPNFStructuralAdmission : Bool
+    speakerCorePNFRelationsAreHardVetoes : Bool
+    quoteClauseAttachmentMayRemainLive : Bool
     speakerIdentityIndependentOfCutProjection : Bool
     rerunPNFIsRequiredForComparison : Bool
     lowerResidualIsDiagnosticNotTruth : Bool
@@ -220,4 +256,6 @@ record SpanReconstructionBoundary : Set where
 
 canonicalSpanReconstructionBoundary : SpanReconstructionBoundary
 canonicalSpanReconstructionBoundary =
-  spanReconstructionBoundary true true true true true true true true true true true true true
+  spanReconstructionBoundary
+    true true true true true true true true
+    true true true true true true true true
