@@ -27,6 +27,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; Positive; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -37,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
@@ -77,8 +79,7 @@ module UnitGapAmplitudeMass
 
   modalEnergy : R453.ModalEnergy Z3.FourierMode
   modalEnergy = R453.modal-energy energy
-    (λ mode → DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation.complex3NormSquaredNonnegative
-      (velocity mode))
+    (λ mode → Separation.complex3NormSquaredNonnegative (velocity mode))
 
   ceilingNN : 0ℚ ≤ C.ceiling
   ceilingNN =
@@ -96,8 +97,7 @@ module UnitGapAmplitudeMass
   pairResolventNN output outputNonzero alpha beta alphaK betaK =
     let
       denomPositive = C.pairRatePositive output outputNonzero alpha beta alphaK betaK
-      asPositive = R449.safeReciprocalIsPositiveReciprocal
-        _ denomPositive
+      asPositive = R449.safeReciprocalIsPositiveReciprocal _ denomPositive
     in
     subst
       (0ℚ ≤_)
@@ -143,26 +143,38 @@ module UnitGapAmplitudeMass
   weightedMajorantBelowCeilingPairs output outputNonzero beta betaK
       (alpha ∷ rest) (same∷ alphaK restK) =
     let
+      c2 = C.ceiling * C.ceiling
       w2Below = resolventSquareBelowCeilingSquare
         output outputNonzero alpha beta alphaK betaK
       pairEnergy = energy (Physical.p alpha) * energy (Physical.q alpha)
+      restPairs = R454.triadEnergyProductSum energy rest
       pairNN = Rational.productNonnegative
-        (DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation.complex3NormSquaredNonnegative
-          (velocity (Physical.p alpha)))
-        (DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation.complex3NormSquaredNonnegative
-          (velocity (Physical.q alpha)))
+        (Separation.complex3NormSquaredNonnegative (velocity (Physical.p alpha)))
+        (Separation.complex3NormSquaredNonnegative (velocity (Physical.q alpha)))
       headBound :
         (C.Pair.pairResolvent alpha beta * C.Pair.pairResolvent alpha beta) * pairEnergy
-        ≤ (C.ceiling * C.ceiling) * pairEnergy
+        ≤ c2 * pairEnergy
       headBound =
         let instance pairNNI = nonNegative pairNN
         in ℚP.*-monoʳ-≤-nonNeg pairEnergy w2Below
       tailBound = weightedMajorantBelowCeilingPairs
         output outputNonzero beta betaK rest restK
+      summed :
+        (C.Pair.pairResolvent alpha beta * C.Pair.pairResolvent alpha beta) * pairEnergy
+          + A.weightedEnergyMajorant beta rest
+        ≤ c2 * pairEnergy + c2 * restPairs
+      summed = ℚP.+-mono-≤ headBound tailBound
+      distribute : c2 * pairEnergy + c2 * restPairs ≡ c2 * (pairEnergy + restPairs)
+      distribute = solve (c2 ∷ pairEnergy ∷ restPairs ∷ [])
     in
-    ℚP.+-mono-≤ headBound tailBound
+    subst
+      (λ upper →
+        (C.Pair.pairResolvent alpha beta * C.Pair.pairResolvent alpha beta) * pairEnergy
+          + A.weightedEnergyMajorant beta rest
+        ≤ upper)
+      distribute
+      summed
 
-  -- Membership-to-All compiler, used only to instantiate the literal output fibre.
   allSameFromMembership :
     (output : Z3.FourierMode) →
     (items : List Physical.PhysicalTriadIncidence) →
