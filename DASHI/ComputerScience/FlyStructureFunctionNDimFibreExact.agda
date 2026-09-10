@@ -5,8 +5,12 @@ module DASHI.ComputerScience.FlyStructureFunctionNDimFibreExact where
 -- This owner internalises the graph-colouring / RSA NDim lesson without
 -- importing those branch-local modules: keep structurally distinct local
 -- candidates separate, build a compatibility relation before composition, and
--- require the global consumer to validate the composed family.  More axes are
+-- require the global consumer to validate the composed family. More axes are
 -- candidate discrimination, not automatic predictive improvement.
+--
+-- A second boundary is now explicit: held-out PAIRS are not the same as held-
+-- out REGIONS. If the same neuropil participates in both train and test pairs,
+-- pairwise prediction does not establish generalization to unseen regions.
 
 open import DASHI.Core.Prelude
 open import Data.Empty using (⊥)
@@ -74,6 +78,8 @@ data StructureFunctionStage : Set where
   fitCompositionOnTrainingPairs : StructureFunctionStage
   freezeComposition : StructureFunctionStage
   evaluateHeldOutPairs : StructureFunctionStage
+  evaluateHeldOutRegions : StructureFunctionStage
+  refitInsideNullReplicate : StructureFunctionStage
   compareAgainstNulls : StructureFunctionStage
 
 firstStructureFunctionStage : StructureFunctionStage
@@ -88,9 +94,13 @@ record FlyNDimStructureFunctionBoundary : Set where
     signedFibresKeptDistinctUntilComposition : Bool
     compatibilitySelectionUsesHeldOutOutcomes : Bool
     compositionFitUsesHeldOutOutcomes : Bool
+    pairHoldoutEquivalentToRegionHoldout : Bool
+    heldOutRegionAppearsInRegionHoldoutTrainingPairs : Bool
+    nullMayReuseObservedFitWithoutRefitting : Bool
     moreFibresAutomaticallyImprovePrediction : Bool
     pairwiseCompatibilityAutomaticallyImpliesHeldOutImprovement : Bool
     globalHeldOutEvaluationStillRequired : Bool
+    unseenRegionEvaluationStillRequired : Bool
     nullComparisonStillRequired : Bool
 open FlyNDimStructureFunctionBoundary public
 
@@ -105,6 +115,10 @@ canonicalFlyNDimStructureFunctionBoundary =
     false
     false
     false
+    false
+    false
+    false
+    true
     true
     true
 
@@ -121,6 +135,10 @@ data LocalCompatibilityImpliesGlobalImprovement : Set where
 data TrainingFitImpliesNullRejection : Set where
 
 data SharedRegionImpliesSameNeuronIdentity : Set where
+
+data PairHoldoutImpliesUnseenRegionGeneralization : Set where
+
+data FrozenObservedFitIsValidPermutationNull : Set where
 
 directedEdgeDoesNotCreateSymmetricCorrelation :
   DirectedEdgeEqualsSymmetricCorrelation → ⊥
@@ -142,14 +160,23 @@ sharedRegionDoesNotCreateSameNeuronIdentity :
   SharedRegionImpliesSameNeuronIdentity → ⊥
 sharedRegionDoesNotCreateSameNeuronIdentity ()
 
+pairHoldoutDoesNotCreateUnseenRegionGeneralization :
+  PairHoldoutImpliesUnseenRegionGeneralization → ⊥
+pairHoldoutDoesNotCreateUnseenRegionGeneralization ()
+
+frozenObservedFitDoesNotCreateValidPermutationNull :
+  FrozenObservedFitIsValidPermutationNull → ⊥
+frozenObservedFitDoesNotCreateValidPermutationNull ()
+
 ------------------------------------------------------------------------
 -- Current empirical interpretation boundary.
 --
--- Existing first real run:
---   path-aware residual < fixed three-weight DASHI residual < direct residual.
--- This record states only the architectural consequence: retain path signal,
--- replace pre-collapse by fibre-family evaluation, and require a fresh held-out
--- run before any predictive promotion.
+-- Existing real pair-held-out run:
+--   NDim fibre residual << path-aware residual < fixed three-weight residual
+--   < direct residual.
+-- This is retained as a real pair-level observation, not yet as unseen-region
+-- generalization or null rejection. Region-blocked evaluation and refitted null
+-- comparison remain separate consumers.
 ------------------------------------------------------------------------
 
 record CurrentFlyNDimInterpretation : Set where
@@ -159,7 +186,11 @@ record CurrentFlyNDimInterpretation : Set where
     pathAwareCurrentlyImprovesOnDirect : Bool
     fixedThreeWeightMixtureCurrentlyBeatsPath : Bool
     fixedThreeWeightMixtureIsCanonicalDASHI : Bool
-    ndimFibreFamilyRequiresFreshHeldoutEvaluation : Bool
+    pairHeldoutNDimCurrentlyImprovesOnPath : Bool
+    pairHeldoutImprovementEstablishesUnseenRegionGeneralization : Bool
+    pairHeldoutImprovementEstablishesNullRejection : Bool
+    ndimFibreFamilyRequiresRegionBlockedEvaluation : Bool
+    ndimFibreFamilyRequiresRefittedNullEvaluation : Bool
 open CurrentFlyNDimInterpretation public
 
 currentFlyNDimInterpretation : CurrentFlyNDimInterpretation
@@ -169,4 +200,8 @@ currentFlyNDimInterpretation =
     true
     false
     false
+    true
+    false
+    false
+    true
     true
