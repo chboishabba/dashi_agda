@@ -110,11 +110,11 @@ record DirectTypedHessianInfluencePayment
 open DirectTypedHessianInfluencePayment public
 
 asMetricInfluenceBridge :
-  ∀ {Scale Volume Root} →
-  DirectTypedHessianInfluencePayment Scale Volume Root →
+  ∀ {Scale Volume Root}
+    (dataSet : DirectTypedHessianInfluencePayment Scale Volume Root) →
   Influence.SharedMarkedMetricInfluenceBridge
     Scale Volume Root
-    (Langevin.Site (frame (hessian _)))
+    (Langevin.Site (frame (hessian dataSet)))
 asMetricInfluenceBridge dataSet = record
   { Influence.SharedMarkedMetricInfluenceBridge.shared = shared dataSet
   ; Influence.SharedMarkedMetricInfluenceBridge.scale = scale dataSet
