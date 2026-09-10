@@ -66,6 +66,52 @@ new abstraction that the paper itself does not state, cite the paper as the
 motivation/source calibration and label the new result as a **DASHI extension**.
 Do not attribute repository mathematics back to the external authors.
 
+## Temporal provenance and repository priority
+
+For repository-native priority or chronology questions, record the **first
+implementation date** separately from all later validation/publication dates.
+The preferred first-implementation receipt is the earliest recoverable Git
+commit that actually contains the relevant definition, theorem body, proof
+surface, compiler, or exact object. Record:
+
+- the exact commit SHA;
+- the Git timestamp in UTC;
+- the same timestamp in the explicitly named local timezone when useful;
+- what kind of implementation existed at that commit (for example theorem
+  statement, exact representation, compiler, open consumer, candidate receipt,
+  or completed proof);
+- the validation state actually evidenced at that time.
+
+Do **not** collapse these chronology events:
+
+```text
+first source implementation
+        !=
+first successful type-check
+        !=
+first exact-head CI/kernel receipt
+        !=
+first pull request
+        !=
+first merge
+        !=
+first publication / external release.
+```
+
+A source commit can establish that an artefact was in the repository at a given
+time even when it had not yet been type-checked. It does **not** establish that
+the artefact was mathematically correct or kernel-certified. Conversely, a later
+type-check does not erase or redefine an earlier source-implementation date.
+
+When a later refactor is provably the same mathematical object, retain the
+original first-implementation timestamp and separately record the refactor. If
+same-object identity is not established, give the new object its own timestamp.
+Do not backdate from comments, plans, filenames, issue prose, or similarity of
+intent alone.
+
+The typed repository-neutral carrier for these distinctions is
+`DASHI.Core.FirstImplementationTimestampExact`.
+
 ## Missing or uncertain metadata
 
 Do not fabricate bibliographic metadata. If a DOI or canonical identifier is
@@ -78,6 +124,10 @@ improve attribution later when a more stable identifier is found.
 Purely repository-native definitions and theorems do not need an invented
 external citation. When provenance could otherwise be ambiguous, label the
 work as repo-native, synthetic, derived internally, or a DASHI extension.
+
+For substantial repository-native theorem work, especially priority-sensitive
+research, prefer adding the first-implementation commit/timestamp receipt as
+well as ordinary source attribution for any external mathematical inputs.
 
 ## Review expectation
 
