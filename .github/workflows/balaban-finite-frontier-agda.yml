@@ -50,6 +50,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCMP98Path13Equation120DerivedQSourceRound216Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP98Equation120SelectedSemanticsRound217Exact.agda'
       - 'DASHI/Physics/YangMills/CompactLieLangevinSkewConnectionCancellationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanPreferredRowCSpatialFrontierRound261Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanLangevinHessianBidirectionalWeldRound262Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanLangevinPhysicalHessianSourceRecutRound263Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP109LangevinTypedSecondVariationRound267Exact.agda'
@@ -80,6 +81,7 @@ jobs:
           export AGDA_JOBS=4
           scripts/run_agda29_parallel_check.sh \
             DASHI/Physics/YangMills/CompactLieLangevinSkewConnectionCancellationExact.agda \
+            DASHI/Physics/YangMills/BalabanPreferredRowCSpatialFrontierRound261Exact.agda \
             DASHI/Physics/YangMills/BalabanLangevinHessianBidirectionalWeldRound262Exact.agda \
             DASHI/Physics/YangMills/BalabanLangevinPhysicalHessianSourceRecutRound263Exact.agda \
             DASHI/Physics/YangMills/BalabanCMP109LangevinTypedSecondVariationRound267Exact.agda \
