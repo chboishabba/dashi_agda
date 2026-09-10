@@ -3,3 +3,4 @@ module DASHI.Physics.Propulsion.Everything where
 import DASHI.Physics.Propulsion.JetEngineFlowArchitectureExact
 import DASHI.Physics.Propulsion.JetEngineIndustrialEnergyBidiExact
 import DASHI.Physics.Propulsion.JetEngineCanonicalMissionEnergyBidiExact
+import DASHI.Physics.Propulsion.QualifiedHotSectionManufacturingBidiExact
