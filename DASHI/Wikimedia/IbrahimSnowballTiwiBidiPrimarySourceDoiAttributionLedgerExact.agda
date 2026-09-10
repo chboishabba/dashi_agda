@@ -36,6 +36,7 @@ data EmpiricalEdgeKind : Set where
   hollowUnderstoreyMultiTaxonResponse
   fireGroundCoverPredationMechanism
   fireScarPredatorMovement
+  megaherbivoreTrailPredatorMovement
   longFireExclusionVegetationFauna
   longTermCarbonStock : EmpiricalEdgeKind
 
@@ -165,6 +166,20 @@ mcGregorMovementPayment = primary-edge-source-payment
   "Predator movement does not equal prey mortality and does not pay Tiwi same-carrier mediation."
   true refl Attribution.externalSourceOwner refl Attribution.dashiFormalisationOwner refl
 
+neaveMegaherbivoreMicrocorridorPayment : PrimaryEdgeSourcePayment
+neaveMegaherbivoreMicrocorridorPayment = primary-edge-source-payment
+  megaherbivoreTrailPredatorMovement
+  "Neave et al. 2025 Melville Island paired-camera game-trail study"
+  "Georgina Neave; Brett P. Murphy; Tiwi Rangers; Hugh F. Davies"
+  "Exotic Megaherbivores as Ecosystem Engineers in Australian Savannas: Do They Facilitate Predator Movement?"
+  "Ecology and Evolution 15(7):e71622"
+  2025
+  "DOI 10.1002/ece3.71622; Dryad DOI 10.5061/dryad.0zpc86776"
+  MelvilleIslandLocal
+  "Primary Melville Island paired-camera study: at 52 sites, cameras on megaherbivore game trails were paired with cameras in adjacent undisturbed vegetation; dingoes and cats were much more likely to be detected on trails. Tiwi Rangers are named collective authors and are credited with conceptualization and investigation."
+  "Predator trail use does not equal prey mortality; game trails do not establish fire-to-shrub mediation; megaherbivore control is not thereby proven to benefit native mammals; collective authorship does not create whole-Country authority."
+  true refl Attribution.externalSourceOwner refl Attribution.dashiFormalisationOwner refl
+
 woinarskiComparisonPayment : PrimaryEdgeSourcePayment
 woinarskiComparisonPayment = primary-edge-source-payment
   longFireExclusionVegetationFauna
@@ -194,6 +209,34 @@ ngCarbonPayment = primary-edge-source-payment
   true refl Attribution.externalSourceOwner refl Attribution.dashiFormalisationOwner refl
 
 ------------------------------------------------------------------------
+-- QID snowball for the new Melville-local predator-access carrier.
+------------------------------------------------------------------------
+
+waterBuffaloQid : Identity.ExternalIdentityDemand
+waterBuffaloQid = Identity.mkOptionalIdentityDemand
+  "Tiwi predator microcorridor continuation" "external taxon identity"
+  "Bubalus bubalis / water buffalo" Identity.wikidataQid
+  (Identity.verified "Q42710" "Wikidata water-buffalo taxon inspected 2026-09-11; taxon identity does not establish Melville trail creation or ecological impact")
+
+horseQid : Identity.ExternalIdentityDemand
+horseQid = Identity.mkOptionalIdentityDemand
+  "Tiwi predator microcorridor continuation" "external taxon identity"
+  "Equus caballus / domestic or feral horse" Identity.wikidataQid
+  (Identity.verified "Q10758650" "Wikidata Equus caballus taxon inspected 2026-09-11; identity does not establish local abundance or trail effect")
+
+dingoQid : Identity.ExternalIdentityDemand
+dingoQid = Identity.mkOptionalIdentityDemand
+  "Tiwi predator microcorridor continuation" "external taxon/common-name identity"
+  "dingo / Canis familiaris dingo" Identity.wikidataQid
+  (Identity.verified "Q38584" "Wikidata dingo item inspected 2026-09-11; identity does not establish local predator activity")
+
+gameTrailQid : Identity.ExternalIdentityDemand
+gameTrailQid = Identity.mkOptionalIdentityDemand
+  "Tiwi predator microcorridor continuation" "external ecological/landscape-feature identity"
+  "game trail / animal trail" Identity.wikidataQid
+  (Identity.unresolved "No safely verified exact Wikidata concept item promoted in this tranche; similarly named media/article items are not ecological-feature identities")
+
+------------------------------------------------------------------------
 -- Snowball completeness is consumer-relative.  Every currently *paid external
 -- empirical edge* above has an explicit primary source/identifier.  The
 -- unpaid cross-source mediation remains owned by DASHI inference and cannot be
@@ -211,6 +254,7 @@ record TiwiBidiSourceCoverageReceipt : Set where
     MelvilleUnderstoreyHasPrimarySource : Bool
     groundCoverPredationDonorHasPrimarySource : Bool
     catMovementDonorHasPrimarySource : Bool
+    MelvilleMicrocorridorPredatorMovementHasPrimarySource : Bool
     longFireComparisonHasPrimarySource : Bool
     longTermCarbonHasPrimarySource : Bool
     everyPaidExternalEmpiricalEdgeHasPrimarySource : Bool
@@ -222,7 +266,7 @@ open TiwiBidiSourceCoverageReceipt public
 
 canonicalTiwiBidiSourceCoverageReceipt : TiwiBidiSourceCoverageReceipt
 canonicalTiwiBidiSourceCoverageReceipt = tiwi-bidi-source-coverage-receipt
-  true true true true true true true true true
+  true true true true true true true true true true
   true false false true
 
 ------------------------------------------------------------------------
@@ -233,6 +277,8 @@ record TiwiBidiIdentityProvenanceSnowball : Set where
   constructor tiwi-bidi-identity-provenance-snowball
   field
     resolvedTaxonQidsRetained : Bool
+    megaherbivoreTaxonQidsRetained : Bool
+    unresolvedGameTrailQidRetained : Bool
     unresolvedFireEcologyQidRetained : Bool
     unresolvedGroundCoverQidRetained : Bool
     DeweyCoordinatesRetained : Bool
@@ -249,13 +295,16 @@ open TiwiBidiIdentityProvenanceSnowball public
 
 canonicalTiwiBidiIdentityProvenanceSnowball : TiwiBidiIdentityProvenanceSnowball
 canonicalTiwiBidiIdentityProvenanceSnowball = tiwi-bidi-identity-provenance-snowball
-  true true true true true true true true
+  true true true true true true true true true true
   false false false false
 
 data QidCreatesEmpiricalEdge : Set where
 data DOICompletenessCreatesCausality : Set where
 data PrimarySourcesAroundPathCreateMediation : Set where
 data CitationCreatesCountryAuthority : Set where
+data GameTrailUseMeansPredationMortality : Set where
+data PredatorDetectionMeansPreyDemography : Set where
+data MegaherbivoreControlMeansNativeBenefit : Set where
 
 qidDoesNotCreateEmpiricalEdge : QidCreatesEmpiricalEdge → ⊥
 qidDoesNotCreateEmpiricalEdge ()
@@ -269,6 +318,15 @@ primarySourcesAroundPathDoNotCreateMediation ()
 citationDoesNotCreateCountryAuthority : CitationCreatesCountryAuthority → ⊥
 citationDoesNotCreateCountryAuthority ()
 
+gameTrailUseDoesNotCreatePredationMortality : GameTrailUseMeansPredationMortality → ⊥
+gameTrailUseDoesNotCreatePredationMortality ()
+
+predatorDetectionDoesNotCreatePreyDemography : PredatorDetectionMeansPreyDemography → ⊥
+predatorDetectionDoesNotCreatePreyDemography ()
+
+megaherbivoreControlDoesNotCreateNativeBenefit : MegaherbivoreControlMeansNativeBenefit → ⊥
+megaherbivoreControlDoesNotCreateNativeBenefit ()
+
 ------------------------------------------------------------------------
 -- Canonical first unpaid source-bearing discriminator.
 ------------------------------------------------------------------------
@@ -276,6 +334,10 @@ citationDoesNotCreateCountryAuthority ()
 firstUnpaidEmpiricalDiscriminator : String
 firstUnpaidEmpiricalDiscriminator =
   "Exact Tiwi/Melville fire-treatment -> measured shrub/understorey-density source on a carrier joinable to the Davies/Penton fauna-predator observations"
+
+newPaidMelvillePredatorAccessDiscriminator : String
+newPaidMelvillePredatorAccessDiscriminator =
+  "Melville Island megaherbivore game-trail versus adjacent-vegetation -> cat/dingo activity/detection, Neave et al. 2025 DOI 10.1002/ece3.71622; predator access only, not predation mortality"
 
 firstUnpaidCompositionDiscriminator : String
 firstUnpaidCompositionDiscriminator =
