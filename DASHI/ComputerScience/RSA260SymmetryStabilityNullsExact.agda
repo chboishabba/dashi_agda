@@ -53,13 +53,14 @@ record SymmetryNullExecutionReceipt : Set where
     columnDegreesPreservedExactly : Bool
     fineIncidenceScrambled : Bool
     sourceEquivalentExecutionPassed : Bool
+    exactGitBlobExecuted : Bool
     productionRSA260MatrixUsed : Bool
 open SymmetryNullExecutionReceipt public
 
 currentSymmetryNullExecutionReceipt : SymmetryNullExecutionReceipt
 currentSymmetryNullExecutionReceipt = symmetry-null-execution-receipt
   256 3 64 20000 0 0 0 0 0 1 65
-  true true true true false
+  true true true true true false
 
 record SymmetryNullInterpretationBoundary : Set where
   constructor symmetry-null-interpretation-boundary
@@ -76,8 +77,8 @@ canonicalSymmetryNullInterpretationBoundary : SymmetryNullInterpretationBoundary
 canonicalSymmetryNullInterpretationBoundary = symmetry-null-interpretation-boundary
   true true true false false false
 
-mixedActionBoundary : Mixed.MixedActionInferenceBoundary
-mixedActionBoundary = Mixed.canonicalMixedActionInferenceBoundary
+mixedCandidateFibrePolicy : Mixed.CandidateFibrePolicy
+mixedCandidateFibrePolicy = Mixed.canonicalCandidateFibrePolicy
 
 snowballBoundary : Sources.SnowballAttributionBoundary
 snowballBoundary = Sources.canonicalSnowballAttributionBoundary
