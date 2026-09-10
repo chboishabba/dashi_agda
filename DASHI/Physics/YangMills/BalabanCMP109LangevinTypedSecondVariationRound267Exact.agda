@@ -12,13 +12,9 @@ module DASHI.Physics.YangMills.BalabanCMP109LangevinTypedSecondVariationRound267
 -- in the typed Langevin commutator is definitionally chosen to be the literal
 -- CMP116 physical Hessian evaluated on site-indexed physical tangents.  The
 -- existing Round103 theorem then also identifies it with CMP109 E^(2)/Pi.
---
--- No new Hessian estimate is asserted here.  The remaining source work is the
--- literal differentiated-generator decomposition and the physical site/tangent
--- realization on the actual Balaban finite density.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_)
@@ -36,7 +32,6 @@ record LiteralCMP109LangevinSecondVariationWeld : Set₁ where
     siteTangent :
       Langevin.Site frame → Source.Tangent (Carrier.source carrier)
 
-    -- Literal differentiated-generator coefficients on the same finite sites.
     commutatorEntry : Langevin.Site frame → Langevin.Site frame → ℝ
     symmetricNonlocalEntry : Langevin.Site frame → Langevin.Site frame → ℝ
     connectionEntry : Langevin.Site frame → Langevin.Site frame → ℝ
@@ -45,8 +40,6 @@ record LiteralCMP109LangevinSecondVariationWeld : Set₁ where
       commutatorEntry x y
       ≡ symmetricNonlocalEntry x y +ℝ connectionEntry x y
 
-    -- THIS is the only C4b same-object source identification retained here.
-    -- CMP109<->CMP116 is already theorem/compiler-owned downstream.
     symmetricNonlocalIsCMP116PhysicalHessian : ∀ x y →
       symmetricNonlocalEntry x y
       ≡ Carrier.cmp116PhysicalMarkedHessian carrier background
@@ -55,10 +48,6 @@ record LiteralCMP109LangevinSecondVariationWeld : Set₁ where
     connectionEntryIsOnsiteAd : Langevin.connectionIsOnsiteAdTerm frame
 
 open LiteralCMP109LangevinSecondVariationWeld public
-
-------------------------------------------------------------------------
--- Build the exact typed commutator consumed by R266.
-------------------------------------------------------------------------
 
 asTypedLangevinCommutator :
   LiteralCMP109LangevinSecondVariationWeld →
@@ -84,10 +73,6 @@ asTypedLangevinCommutator dataSet = record
       connectionEntryIsOnsiteAd dataSet
   }
 
-------------------------------------------------------------------------
--- Bidirectional identity: same typed entry is CMP116 and CMP109 E^(2)/Pi.
-------------------------------------------------------------------------
-
 typedActionHessianIsCMP116 :
   (dataSet : LiteralCMP109LangevinSecondVariationWeld) →
   ∀ x y →
@@ -95,7 +80,7 @@ typedActionHessianIsCMP116 :
   ≡ Carrier.cmp116PhysicalMarkedHessian
       (carrier dataSet) (background dataSet)
       (siteTangent dataSet x) (siteTangent dataSet y)
-typedActionHessianIsCMP116 dataSet x y = Agda.Builtin.Equality.refl
+typedActionHessianIsCMP116 dataSet x y = refl
 
 typedActionHessianIsCMP109Polarization :
   (dataSet : LiteralCMP109LangevinSecondVariationWeld) →
@@ -118,8 +103,5 @@ round267TypedCMP109LangevinCompilerLevel = machineChecked
 round267CMP109CMP116IdentityLevel : ProofLevel
 round267CMP109CMP116IdentityLevel = Carrier.cmp109CMP116PhysicalHessianIdentityLevel
 
--- Remaining physical seam: instantiate the actual differentiated Langevin
--- coefficients and the site->physical-tangent map on the literal Balaban
--- effective density.  No second CMP109/CMP116 Hessian theorem is requested.
 round267LiteralLangevinDifferentiationInstantiationLevel : ProofLevel
 round267LiteralLangevinDifferentiationInstantiationLevel = conditional
