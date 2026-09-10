@@ -12,6 +12,7 @@ import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisPeerReviewConflictIndepen
 import DASHI.Wikimedia.IbrahimSnowballDependencyNDimLocalGlobalProofSearchBidiExact as NDim
 import DASHI.Wikimedia.IbrahimSnowballAtomicClaimIntentExperimentAdequacyBidiExact as Atomic
 import DASHI.Wikimedia.IbrahimSnowballEthnographyParticipantObservationFieldworkBidiExact as Fieldwork
+import DASHI.Wikimedia.IbrahimSnowballGeologyStratigraphyDeepTimeCarbonConsumerBidiExact as Geology
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSymbolicVerificationDeweyQidDoiBidiExact as Dewey
 
@@ -42,7 +43,7 @@ independenceConsensusNowPaid = live-roadmap-target
   completeAsParent
   "LearningMemoryTraumaReplicationConsensus; MemoryRepetitionSourceDependencyConsensus; EvidenceSynthesisPeerReviewConflictIndependence"
   "only consumer-specific source-dependency calculations remain"
-  "reproducibility Q1425625; scientific consensus Q316748; systematic review Q1504425; peer review Q215028; conflict of interest Q211067"
+  "reproducibility Q1425625; scientific consensus Q316748; systematic review Q1504425; meta-analysis Q815382; peer review Q215028; conflict of interest Q211067"
   "unresolved where no exact inspected DDC is paid"
   "DOI-bounded independence/evidence-synthesis sources travel with local owners"
   "future work must exhibit a concrete dependence structure not representable by the shared provenance grammar"
@@ -71,21 +72,21 @@ ethnographyParticipantObservation = live-roadmap-target
   "Roque et al. DOI 10.1177/1525822X231198989; Seim DOI 10.1177/0049124120986209; Brear-Tsotetsi DOI 10.1177/14687941211004417"
   "future work must exhibit an observer/participant/consent/authority/source-provenance distinction not representable by the canonical fieldwork receipt"
 
-geologyBreadth : LiveRoadmapTarget
-geologyBreadth = live-roadmap-target
-  1
-  "First concrete geology breadth consumer"
-  concreteConsumerNeeded
-  "Geology/Environment/DeepTimeCarbon plus archaeology and Tiwi ecological joins"
-  "identify a downstream claim requiring stratigraphy, sedimentology, tectonics, geomorphology, petrology or geophysics that current owners cannot express"
-  "geology Q1069; Earth science Q8008"
-  "geology Q1069 carries inspected DDC 550 and 551; retain both rather than manufacture one semantic parent"
-  "attach process/method DOI or primary survey only for the selected consumer"
-  "a real downstream consumer reveals the missing geological coordinate before any taxonomy expansion"
+geologyBreadthNowPaid : LiveRoadmapTarget
+geologyBreadthNowPaid = live-roadmap-target
+  0
+  "Geology / stratigraphy concrete deep-time-carbon consumer"
+  completeAsParent
+  "GeologyStratigraphyDeepTimeCarbonConsumerBidiExact plus DeepTimeCarbonReservoirFluxBalance and LESDomainBasisBidiFrontier"
+  "only consumer-specific petrology/geophysics/weathering/tectonic calculations remain; do not expand taxonomy without a real downstream consumer"
+  "geology Q1069; Earth science Q8008; stratigraphy Q134783; sedimentology Q205768; geomorphology Q52109; tectonics Q193343; stratigraphic unit Q3694119"
+  "geology Q1069 carries inspected DDC 550 and 551; subdiscipline DDCs remain unresolved until individually inspected"
+  "Leithold-Blair-Wegmann DOI 10.1016/j.earscirev.2015.10.011; Romans-Graham DOI 10.1146/annurev-marine-121211-172426; Liang et al. DOI 10.1016/j.earscirev.2025.105312"
+  "future geology work must exhibit a concrete distinction not representable by stock/source/transport/deposition/preservation/stratigraphic-context grammar"
 
 healthcareBreadth : LiveRoadmapTarget
 healthcareBreadth = live-roadmap-target
-  2
+  1
   "First concrete healthcare/public-health consumer"
   concreteConsumerNeeded
   "Healthcare equality/access/governance owners"
@@ -97,7 +98,7 @@ healthcareBreadth = live-roadmap-target
 
 petrochemistryParentAudit : LiveRoadmapTarget
 petrochemistryParentAudit = live-roadmap-target
-  3
+  2
   "Petrochemistry / petroleum / refining / materials / emissions parent audit"
   residualOnly
   "SaltPetroleumIndustrialChemistryNetwork; IndustrialChemistryLogistics; DeepTimeCarbonBiosphereFossilFuel; climate branches"
@@ -142,3 +143,6 @@ atomicBoundary = Atomic.canonicalAtomicClaimIntentExperimentAdequacyBoundary
 
 fieldworkBoundary : Fieldwork.EthnographyParticipantObservationBoundary
 fieldworkBoundary = Fieldwork.canonicalEthnographyParticipantObservationBoundary
+
+geologyBoundary : Geology.GeologyStratigraphyDeepTimeCarbonBoundary
+geologyBoundary = Geology.canonicalGeologyStratigraphyDeepTimeCarbonBoundary
