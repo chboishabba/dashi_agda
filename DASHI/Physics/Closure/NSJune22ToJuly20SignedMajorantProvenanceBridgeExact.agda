@@ -22,8 +22,20 @@ module DASHI.Physics.Closure.NSJune22ToJuly20SignedMajorantProvenanceBridgeExact
 -- 2026-06-22 08:17:20Z / 18:17:20 Australia/Brisbane
 --   48b0c1918e8f615488f6efc29db8ed8f0d499893
 --   Signed Wall-1 / signed-spectrum candidate tranche already retained by the
---   canonical systematic provenance protocol.  Its signed-Laplacian candidate
+--   canonical systematic provenance protocol. Its signed-Laplacian candidate
 --   is explicitly not silently identified with the actual I-K_N operator.
+--
+-- 2026-07-19 14:07:02Z / 2026-07-20 00:07:02 Australia/Brisbane
+--   a781d4a316cd19b7c1fafff927f1d98615ff5fc0
+--   "Bridge pair-incidence sums to weighted Schur certificate"
+--   This is the first recovered source event in the Jul-19/20 burst tying the
+--   finite pair-incidence fold directly to the weighted Schur consumer.
+--
+-- 2026-07-19 14:08:43Z / 2026-07-20 00:08:43 Australia/Brisbane
+--   PR #130 becomes public.  It then carries exact Z^3 Fourier modes,
+--   resonant Biot-Savart pair incidences, Wall-1 shell data and a scale-indexed
+--   weighted-Schur theorem surface.  Its own authority boundary still says the
+--   Fourier kernel is a nonnegative majorant and claims no sign cancellation.
 --
 -- 2026-07-19 15:36:26Z / 2026-07-20 01:36:26 Australia/Brisbane
 --   PR #140 becomes a public surface for the compact-Gamma off-packet
@@ -35,18 +47,18 @@ module DASHI.Physics.Closure.NSJune22ToJuly20SignedMajorantProvenanceBridgeExact
 --
 --   This is the decisive representation correction recovered in this pass:
 --   the signed compact-Gamma response is NOT identified entrywise with the
---   nonnegative pair-incidence kernel.  The lawful bridge is one-way:
+--   nonnegative pair-incidence kernel. The lawful bridge is one-way:
 --
 --     signed/absolute response <= outputEnergy(nonnegative majorant action).
 --
---   The commit is associated with public PR #140.  The PR later merged at
+--   The commit is associated with public PR #140. The PR later merged at
 --   2026-07-20 06:17:05Z / 16:17:05 Australia/Brisbane.
 --
 -- The July correction is therefore stronger than the June candidate surface:
 -- it attaches sign/majorant separation to the exact Fourier pair-incidence
--- representation.  It is still NOT the later Jul-26 simultaneous assembly of
+-- representation. It is still NOT the later Jul-26 simultaneous assembly of
 -- the exact signed physical cutoff-uniform analytic problem and global
--- consumer.  Chronology and structural ancestry do not manufacture that
+-- consumer. Chronology and structural ancestry do not manufacture that
 -- same-object equality.
 ------------------------------------------------------------------------
 
@@ -58,6 +70,7 @@ open import Data.Empty using (⊥)
 data BridgeGrade : Set where
   candidateSchurArchitecture : BridgeGrade
   signedCarrierCorrection : BridgeGrade
+  exactPairIncidenceMajorantCarrier : BridgeGrade
   exactSignedMajorantFirewall : BridgeGrade
   exactPhysicalCutoffUniformAssembly : BridgeGrade
 
@@ -94,6 +107,16 @@ jun22SignedCarrier = provenance-bridge-event
   signedCarrierCorrection
   "Sign-sensitive operator search is explicit, while the candidate signed-Laplacian proxy is not identified with the actual I-K_N carrier."
 
+jul20PairIncidenceSchurBridge : ProvenanceBridgeEvent
+jul20PairIncidenceSchurBridge = provenance-bridge-event
+  "exact pair-incidence fold -> weighted Schur certificate"
+  "a781d4a316cd19b7c1fafff927f1d98615ff5fc0"
+  "2026-07-19T14:07:02Z"
+  "2026-07-20T00:07:02+10:00"
+  "PR #130 opened 2026-07-19T14:08:43Z; merged 2026-07-20T01:20:20Z"
+  exactPairIncidenceMajorantCarrier
+  "The nonnegative majorant becomes an exact pair-incidence/weighted-Schur carrier; the PR explicitly claims no sign or phase cancellation."
+
 jul20SignedMajorantFirewall : ProvenanceBridgeEvent
 jul20SignedMajorantFirewall = provenance-bridge-event
   "signed response separated from nonnegative pair-majorant kernel"
@@ -108,11 +131,20 @@ jul20SignedMajorantFirewall = provenance-bridge-event
 -- Typed historical classification.
 ------------------------------------------------------------------------
 
-june22SchurArchitecturePredatesSignedMajorantFirewall : Bool
-june22SchurArchitecturePredatesSignedMajorantFirewall = true
+june22SchurArchitecturePredatesPairIncidenceCarrier : Bool
+june22SchurArchitecturePredatesPairIncidenceCarrier = true
+
+pairIncidenceCarrierPredatesSignedMajorantFirewall : Bool
+pairIncidenceCarrierPredatesSignedMajorantFirewall = true
 
 june22SignedOperatorSearchPredatesSignedMajorantFirewall : Bool
 june22SignedOperatorSearchPredatesSignedMajorantFirewall = true
+
+pr130PublicBeforePr140 : Bool
+pr130PublicBeforePr140 = true
+
+pr130ClaimsSignCancellation : Bool
+pr130ClaimsSignCancellation = false
 
 jul20FirewallWasOnPublicPRSurface : Bool
 jul20FirewallWasOnPublicPRSurface = true
@@ -132,6 +164,7 @@ jul26RemainsEarliestRecoveredFullAssemblyAfterThisPass = true
 
 data ChronologyCreatesSameObject : Set where
 data CandidateSchurTargetCreatesUniformGap : Set where
+data ExactMajorantCreatesSignedCancellation : Set where
 data MajorantCreatesSignedEntrywiseIdentity : Set where
 data PublicPRCreatesClayProof : Set where
 
@@ -140,6 +173,9 @@ chronologyDoesNotCreateSameObject ()
 
 candidateTargetDoesNotCreateUniformGap : CandidateSchurTargetCreatesUniformGap → ⊥
 candidateTargetDoesNotCreateUniformGap ()
+
+exactMajorantDoesNotCreateSignedCancellation : ExactMajorantCreatesSignedCancellation → ⊥
+exactMajorantDoesNotCreateSignedCancellation ()
 
 majorantDoesNotCreateSignedEntrywiseIdentity : MajorantCreatesSignedEntrywiseIdentity → ⊥
 majorantDoesNotCreateSignedEntrywiseIdentity ()
@@ -156,11 +192,18 @@ noIntermediateSameCarrierBridgeRecoveredBetweenJun23AndJul19 = true
 
 nextOldestForwardCut : String
 nextOldestForwardCut =
-  "Jul19/20 generic Schur -> weighted Schur -> exact pair incidences -> integer Z3 Wall-1 -> signed-response/majorant firewall -> Jul20/21 far-tail commutator -> Jul22/23 completion spine -> Jul26 exact signed physical cutoff-uniform assembly."
+  "Jun22 Schur/sign architecture -> Jul19/20 generic Schur -> exact pair incidences -> integer Z3 Wall-1 -> signed-response/majorant firewall -> Jul20/21 far-tail commutator -> Jul22/23 completion spine -> Jul26 exact signed physical cutoff-uniform assembly."
 
-june22SchurArchitecturePredatesSignedMajorantFirewallIsTrue :
-  june22SchurArchitecturePredatesSignedMajorantFirewall ≡ true
-june22SchurArchitecturePredatesSignedMajorantFirewallIsTrue = refl
+june22SchurArchitecturePredatesPairIncidenceCarrierIsTrue :
+  june22SchurArchitecturePredatesPairIncidenceCarrier ≡ true
+june22SchurArchitecturePredatesPairIncidenceCarrierIsTrue = refl
+
+pairIncidenceCarrierPredatesSignedMajorantFirewallIsTrue :
+  pairIncidenceCarrierPredatesSignedMajorantFirewall ≡ true
+pairIncidenceCarrierPredatesSignedMajorantFirewallIsTrue = refl
+
+pr130ClaimsSignCancellationIsFalse : pr130ClaimsSignCancellation ≡ false
+pr130ClaimsSignCancellationIsFalse = refl
 
 jul20FirewallIdentifiesSignedResponseWithPositiveKernelIsFalse :
   jul20FirewallIdentifiesSignedResponseWithPositiveKernel ≡ false
