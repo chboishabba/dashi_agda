@@ -21,6 +21,12 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406SpectatorWeightedClassNormEvery
 -- correct global transpose quotient through R566/R567; the amplitude half is
 -- therefore not an independent spacetime leaf.
 --
+-- The delayed-lossy-observer owner now makes operation ordering explicit:
+-- sign-forgetting / aggregate observers may move before a signed/coherence
+-- consumer only after that consumer is proved to descend through the observer.
+-- This is a consumer-indexed firewall, not a global ban on norms/absolute
+-- values/means.
+--
 -- No cutoff-uniform PDE or spacetime payment is manufactured here.
 ------------------------------------------------------------------------
 
@@ -34,6 +40,7 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorWeightedExactClassEnvelopeBidiExa
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterGramGluingBidiExact
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterCellMassThreeOrbitBidiExact
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterSwapGluingBoundaryExact
+import DASHI.Physics.Closure.NSDelayedLossyObserverConsumerDescentBidiExact
 import DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact
 
 outerSpectatorWeightStructuralWeldClosed : Bool
@@ -59,6 +66,15 @@ independentAmplitudeSpacetimeLeafStillRequired = false
 
 localOrbitQuotientAutomaticallyPaysGlobalGluing : Bool
 localOrbitQuotientAutomaticallyPaysGlobalGluing = false
+
+lossyObserverDelayDisciplineIntegrated : Bool
+lossyObserverDelayDisciplineIntegrated = true
+
+normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent : Bool
+normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent = false
+
+aggregateCanMoveBeforeDirectionConsumerWithoutDescent : Bool
+aggregateCanMoveBeforeDirectionConsumerWithoutDescent = false
 
 forensicEarliestForwardLedgerIntegrated : Bool
 forensicEarliestForwardLedgerIntegrated = true
@@ -106,6 +122,18 @@ independentAmplitudeSpacetimeLeafStillRequiredIsFalse = refl
 localOrbitQuotientAutomaticallyPaysGlobalGluingIsFalse :
   localOrbitQuotientAutomaticallyPaysGlobalGluing ≡ false
 localOrbitQuotientAutomaticallyPaysGlobalGluingIsFalse = refl
+
+lossyObserverDelayDisciplineIntegratedIsTrue :
+  lossyObserverDelayDisciplineIntegrated ≡ true
+lossyObserverDelayDisciplineIntegratedIsTrue = refl
+
+normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescentIsFalse :
+  normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent ≡ false
+normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescentIsFalse = refl
+
+aggregateCanMoveBeforeDirectionConsumerWithoutDescentIsFalse :
+  aggregateCanMoveBeforeDirectionConsumerWithoutDescent ≡ false
+aggregateCanMoveBeforeDirectionConsumerWithoutDescentIsFalse = refl
 
 forensicEarliestForwardLedgerIntegratedIsTrue :
   forensicEarliestForwardLedgerIntegrated ≡ true
