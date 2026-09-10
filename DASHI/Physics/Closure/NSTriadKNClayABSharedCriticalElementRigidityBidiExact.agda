@@ -39,7 +39,7 @@ module DASHI.Physics.Closure.NSTriadKNClayABSharedCriticalElementRigidityBidiExa
 -- finite-Agda proof of its own Set-valued PDE fields.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -76,7 +76,7 @@ mapsToClayAlternative periodicB = Clay4.B-periodic-unforced-global
 ------------------------------------------------------------------------
 
 SharedRigidityConsumer :
-  ∀ {ℓ : Level} → Set ℓ → Set _
+  ∀ {ℓ : Level} → Set ℓ → Set (lsuc ℓ)
 SharedRigidityConsumer CriticalElement =
   R257.CriticalElementRigidityAuthority CriticalElement
 
@@ -91,7 +91,7 @@ sharedRigidityContradiction = R257.criticalElementImpossible
 
 record PeriodicProfileProducer
     {ℓ : Level}
-    (TorusState EuclideanState : Set ℓ) : Set (Level.suc ℓ) where
+    (TorusState EuclideanState : Set ℓ) : Set (lsuc ℓ) where
   field
     dichotomy : R255.TorusToProfileCarrier TorusState EuclideanState
     fractionalProfile :
@@ -100,7 +100,7 @@ record PeriodicProfileProducer
 open PeriodicProfileProducer public
 
 record SharedMixedDefectProducer
-    {ℓ : Level} (Profile : Set ℓ) : Set (Level.suc ℓ) where
+    {ℓ : Level} (Profile : Set ℓ) : Set (lsuc ℓ) where
   field
     nonlinearProfileTheorem : R261.NonlinearMixedDefectProfileTheorem Profile
 
@@ -111,7 +111,7 @@ open SharedMixedDefectProducer public
 ------------------------------------------------------------------------
 
 record RigiditySourceRealization
-    {ℓ : Level} (CriticalElement : Set ℓ) : Set (Level.suc ℓ) where
+    {ℓ : Level} (CriticalElement : Set ℓ) : Set (lsuc ℓ) where
   field
     publishedRigidityPayload : R262.ESSCriticalElementRigidity CriticalElement
     executableRigidityConsumer : SharedRigidityConsumer CriticalElement
