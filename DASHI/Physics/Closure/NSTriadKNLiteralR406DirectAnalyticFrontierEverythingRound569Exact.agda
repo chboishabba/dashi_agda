@@ -65,7 +65,7 @@ import DASHI.Physics.Closure.NSTriadKNModernCriticalConeSameObjectBidiRound588Ex
 import DASHI.Physics.Closure.NSTriadKNLiveCriticalConePaymentCompilerRound589Exact
 import DASHI.Physics.Closure.NSTriadKNLiveCriticalConeRegionPaymentRound590Exact
 import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact
-import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact
+import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact as R592
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -134,10 +134,11 @@ round569LaplaceRouteMandatory : Bool
 round569LaplaceRouteMandatory = false
 
 round569CanonicalLeafAIsSingleDirectR503Budget : Bool
-round569CanonicalLeafAIsSingleDirectR503Budget = true
+round569CanonicalLeafAIsSingleDirectR503Budget =
+  R592.round592CanonicalLeafAIsSingleDirectOffDiagonalBudget
 
 round569CanonicalDirectR503BudgetClosed : Bool
-round569CanonicalDirectR503BudgetClosed = false
+round569CanonicalDirectR503BudgetClosed = R592.round592CanonicalLeafAClosed
 
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
