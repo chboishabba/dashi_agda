@@ -44,13 +44,7 @@ scientificConsensusQid : Identity.ExternalIdentityDemand
 scientificConsensusQid = MemoryReplication.scientificConsensusQid
 
 metaAnalysisQid : Identity.ExternalIdentityDemand
-metaAnalysisQid = Identity.mkOptionalIdentityDemand
-  "Ibrahim evidence-synthesis/peer-review/independence BIDI"
-  "external concept identity"
-  "meta-analysis"
-  Identity.wikidataQid
-  (Identity.unresolved
-    "no exact meta-analysis concept QID promoted in this pass; systematic review Q1504425 remains distinct")
+metaAnalysisQid = mkQid "meta-analysis" "Q815382"
 
 evidenceSynthesisQid : Identity.ExternalIdentityDemand
 evidenceSynthesisQid = Identity.mkOptionalIdentityDemand
@@ -262,7 +256,7 @@ record EvidenceSynthesisPeerReviewIndependenceBoundary : Set where
   constructor evidence-synthesis-peer-review-independence-boundary
   field
     qidsAttachedWhenSafelyResolved : Bool
-    unresolvedMetaAnalysisQidRetained : Bool
+    metaAnalysisQidResolved : Bool
     deweyUnresolvedStatesRetained : Bool
     doiAndSourceRoleRetained : Bool
     systematicReviewSeparatedFromCorpusIndependence : Bool
