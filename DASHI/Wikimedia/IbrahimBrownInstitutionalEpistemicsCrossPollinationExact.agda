@@ -9,6 +9,8 @@ import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as John
 import DASHI.Governance.AliceBrownInstitutionalAgencyChoiceBridgeExact as Alice
 import DASHI.Biology.AliceBrownDissentGovernanceCrossPollinationExact as AliceDissent
 import DASHI.Biology.BrownKimberGovernanceProfileBridge as BrownKimber
+import DASHI.Biology.StudentVoiceEpistemicAgencyBridge as Voice
+import DASHI.Core.EpistemicInquiryGovernance as Governance
 import DASHI.Wikimedia.IbrahimCountryCommunityKnowledgeAuthorityBridgeExact as Funnel
 
 ------------------------------------------------------------------------
@@ -198,12 +200,12 @@ aliceFeedbackStillNotEpistemicAgency :
 aliceFeedbackStillNotEpistemicAgency = refl
 
 feedbackHasNoConstitutiveAuthority :
-  (coordinate : DASHI.Core.EpistemicInquiryGovernance.InquiryCoordinate) →
-  DASHI.Core.EpistemicInquiryGovernance.authorityLevel
+  (coordinate : Governance.InquiryCoordinate) →
+  Governance.authorityLevel
     BrownKimber.brownKimberAuthorityProfile
-    DASHI.Biology.StudentVoiceEpistemicAgencyBridge.feedbackSourceStage
+    Voice.feedbackSourceStage
     coordinate
-  ≡ DASHI.Core.EpistemicInquiryGovernance.noAuthority
+  ≡ Governance.noAuthority
 feedbackHasNoConstitutiveAuthority = BrownKimber.feedbackAuthorityLevelIsZero
 
 ------------------------------------------------------------------------
