@@ -72,10 +72,10 @@ qldInterimCounselIssue = counsel-handoff-issue
   Roadmap.qldInterim
   identifyProceduralVehicle
   highAlphaParallel
-  "NCA ss 102-107: assess an interim conservation-order request directed at the concrete Springview clearing/works sequence."
-  "9281/2024/OW is an approved operational-works object expressly covering vegetation clearing, earthworks and stormwater. The same Springview project now has a 2019 proponent ecology surface mapping 136 ha of habitat-score-7 Koala impact, food trees/scats and >500 ha connectivity; this is a strong candidate affected-habitat carrier but is not yet the 9281 works polygon."
-  "Advise who may request action, required form/evidence, whether threatened wildlife can engage s 102 without prior s 13 identification, whether approved but uncommenced clearing can be the relevant threatening process, and what evidence is sufficient for likely significant detrimental effect."
-  "Exact approved 9281 clearing drawing/polygon and conditions; current commencement/works chronology; exact intersection with current habitat/species/corridor evidence; current likely-effect evidence."
+  "NCA ss 102-107: assess an interim conservation-order request directed at the concrete Springview/Kalina Village 2 clearing and works sequence."
+  "A user-supplied Ipswich City Council application export now directly records 9281/2024/OW as Kalina Village 2 Stages 1 to 16 - Earthworks, Clearing Vegetation and Stormwater; Progress 'Decided'; Stage/Decision 'Approved - Negotiated Decision Approved'; Application Type 'Operational Works'; uses including Operational Works - Civil, Operational Works - Environment, Earthworks, Stormwater Drainage and Vegetation Clearing; Assessment Officer Philip Tian; submitted 20 August 2024; decided 20 March 2026; Public Notification Required 'No'. It associates the application with 30 Parkside Drive, 7001 Mur Boulevard, 7006 Panorama Drive and 1 Telopea Way, Springfield. The assessment-stage table records confirmation, information-request/response and change-representation stages, with change representations completed on 20 March 2026. The same Springview project has a 2019 proponent ecology surface mapping 136 ha of habitat-score-7 Koala impact, food trees/scats and >500 ha connectivity."
+  "Advise who may request action, required form/evidence, whether threatened wildlife can engage s 102 without prior s 13 identification, whether an approved but not proved-commenced clearing entitlement can be the relevant threatening process, what evidence is sufficient for likely significant detrimental effect, and whether any significance attaches to the planning record showing Public Notification Required 'No'."
+  "The one-page Council export still does not expose the negotiated approved vegetation-clearing polygon, retained-tree/open-space geometry, conditions or commencement prerequisites. Acquire the 20 March 2026 negotiated approved plans/decision notice and current works chronology, then intersect exact works geometry with current habitat/species/corridor evidence."
   "before vegetation clearing or other irreversible works commence"
   false
 
@@ -97,9 +97,9 @@ planningExemptionCounselIssue = counsel-handoff-issue
   obtainPrimaryMaterial
   highAlphaParallel
   "Identify the exact Springview planning/vegetation/koala exemption or grandfathering instrument and its present scope across the actual approval chain."
-  "The 2019 referral states the proponent's then-understood Planning Regulation 2017 urban-purpose/urban-area clearing exemption theory for least-concern/of-concern regulated vegetation; it also records a high-risk protected-plants trigger area and no public-notification requirement. Later Council material and the LAP/ADP/OW chain record approved/exempted outcomes."
-  "Identify exact historical/current statutory instruments, transition provisions, vegetation-class predicates, approval dates, parcel/stage scope, lapse/change/variation rules, and whether later operational works inherit the same exemption. Treat the proponent's 2019 legal characterisation as evidence of its position, not as an adjudicated current conclusion."
-  "Primary state/local approval instruments and reasons; exact exemption/grandfathering authority; transition instruments; variations/extensions; stage-specific plans and conditions."
+  "The 2019 referral states the proponent's then-understood Planning Regulation 2017 urban-purpose/urban-area clearing exemption theory for least-concern/of-concern regulated vegetation. The 9281/2024/OW Council export now directly records an Operational Works approval including Vegetation Clearing, a negotiated approval decision dated 20 March 2026 and Public Notification Required 'No', together with the associated Springfield properties. Later Council material and the LAP/ADP/OW chain record approved/exempted outcomes."
+  "Identify exact historical/current statutory instruments, transition provisions, vegetation-class predicates, approval dates, parcel/stage scope, lapse/change/variation rules, the legal basis for Public Notification Required 'No', and whether later operational works inherit the same exemption. Treat the proponent's 2019 legal characterisation and the Council application-status export as evidence of their respective records, not as a judicial determination of current exemption validity."
+  "Primary state/local approval instruments and reasons; exact exemption/grandfathering authority; transition instruments; negotiated decision notice; approved plans/conditions; variations/extensions; stage-specific plans."
   "before relying on ordinary planning/koala prohibition arguments or any enforcement theory that assumes local invalidity"
   false
 
@@ -133,7 +133,7 @@ enforcementCounselIssue = counsel-handoff-issue
   identifyEnforcementRoute
   conditionalBackstop
   "Map any imminent or proposed conduct to an exact EPBC/NCA contravention before seeking injunction/enforcement relief."
-  "EPBC s 475 and Queensland NCA enforcement-order machinery exist as statutory routes; local works approvals, federal chronology and same-project ecology are separately preserved."
+  "EPBC s 475 and Queensland NCA enforcement-order machinery exist as statutory routes; local works approvals, federal chronology and same-project ecology are separately preserved. The Council export proves 9281/2024/OW is decided/negotiated-approved but does not prove commencement."
   "Advise standing, exact cause/contravention, evidentiary preservation, urgency, costs/undertaking risks, and whether judicial review/declaratory relief is more appropriate."
   "Exact threatened conduct; exact legal obligation/condition/prohibition; commencement chronology; approval status; proof of breach or threatened breach."
   "activate only if facts satisfy the legal trigger"
@@ -172,6 +172,8 @@ data EPBCCriticalHabitatEqualsNCA13CriticalHabitat : Set where
 data ReferralStateEqualsFinalPDState : Set where
 data PublicationNoticeEqualsSubstantiveFinalPD : Set where
 data CommentCountEqualsResponseAdequacy : Set where
+data ApplicationLocationMapEqualsApprovedClearingPolygon : Set where
+data PublicNotificationNotRequiredEqualsNoConsultationOccurred : Set where
 
 dashReconstructionDoesNotBecomeLegalAdvice : DashReconstructionEqualsLegalAdvice → ⊥
 dashReconstructionDoesNotBecomeLegalAdvice ()
@@ -205,6 +207,12 @@ publicationNoticeDoesNotBecomeFinalPD ()
 
 commentCountDoesNotPayResponseAdequacy : CommentCountEqualsResponseAdequacy → ⊥
 commentCountDoesNotPayResponseAdequacy ()
+
+applicationMapDoesNotBecomeClearingPolygon : ApplicationLocationMapEqualsApprovedClearingPolygon → ⊥
+applicationMapDoesNotBecomeClearingPolygon ()
+
+noNotificationFlagDoesNotProveNoConsultation : PublicNotificationNotRequiredEqualsNoConsultationOccurred → ⊥
+noNotificationFlagDoesNotProveNoConsultation ()
 
 record CounselHandoffBoundary : Set where
   constructor counsel-handoff-boundary
