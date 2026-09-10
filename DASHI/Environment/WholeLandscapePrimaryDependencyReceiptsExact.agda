@@ -121,16 +121,16 @@ nitrogenToCropSoilPrimaryEdge receipt =
   Landscape.landscape-dependency-edge
     "primary-15N-delivery-to-crop-soil-fate"
     (Landscape.nitrogen ∷ [])
-    (Landscape.soil ∷ Landscape.livestock ∷ [])
+    (Landscape.soil ∷ [])
     Landscape.conservationDependency
     Landscape.causalIdentificationReceipt
     (NitrogenToCropSoilPrimaryReceipt.exactFieldReference receipt)
     (NitrogenToCropSoilPrimaryReceipt.totalNitrogenPartitionReference receipt)
-    (NitrogenToCropSoilPrimaryReceipt.fertiliserDerivedCropUptakeReference receipt)
+    (NitrogenToCropSoilPrimaryReceipt.soilResidualNitrogenReference receipt)
     "external primary 15N tracer study; DASHI edge reconstruction"
     []
-    "The isotope tracer distinguishes fertilizer-derived crop uptake, soil residual and loss in the exact studied wheat-soil system."
-    "Does not make delivered nitrogen identical to uptake, and does not transport fertilizer partitioning to PAW, compost, BNF, aquaponics, KNF, another crop or another site."
+    "The isotope tracer distinguishes fertilizer-derived crop uptake, soil residual and loss in the exact studied wheat-soil system; the whole-landscape edge targets the represented soil fate only."
+    "Crop uptake remains in the exact tracer receipt until welded to the existing plant/SPAC owner; this does not transport fertilizer partitioning to PAW, compost, BNF, aquaponics, KNF, another crop or another site."
 
 ------------------------------------------------------------------------
 -- Existing nitrogen packets may only use the primary tracer result as an
