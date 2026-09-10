@@ -23,20 +23,12 @@ open import Data.List.Base using (List)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.CompactLieBiInvariantSkewLangevinExact as Skew
 
-------------------------------------------------------------------------
--- Exact basis-free cancellation inherited from the Ad-invariant metric core.
-------------------------------------------------------------------------
-
 connectionPairedEnergyCancels = Skew.connectionPairedEnergyCancels
 connectionQuadraticEnergyCancels = Skew.connectionQuadraticEnergyCancels
 finiteLatticeConnectionEnergyCancels = Skew.finiteLatticeConnectionEnergyCancels
 
 compactLieSkewQuadraticCancellationLevel : ProofLevel
 compactLieSkewQuadraticCancellationLevel = machineChecked
-
-------------------------------------------------------------------------
--- Literal lattice-Langevin carrier retained for compatibility.
-------------------------------------------------------------------------
 
 record CompactLieLangevinFrameData : Set₁ where
   field
@@ -48,8 +40,7 @@ record CompactLieLangevinFrameData : Set₁ where
     derivativeVector : Site → Field → Skew.Lie metric
     laplacianCommutesWithFrame : Set
 
-    -- Legacy source sockets.  R265 no longer permits downstream Row-C code to
-    -- treat these opaque propositions as a typed symmetric-Hessian weld.
+    -- Legacy source sockets retained for backwards compatibility only.
     LangevinCommutatorIdentity : Set
     connectionIsOnsiteAdTerm : Set
 
@@ -73,12 +64,6 @@ literalConnectionQuadraticEnergyCancels D field =
 
 ------------------------------------------------------------------------
 -- R265: typed replacement for the opaque commutator producer socket.
---
--- This does not assert the Yang--Mills source theorem.  It fixes the exact data
--- a physical proof must return: the literal commutator matrix entry, its
--- symmetric nonlocal part, the connection entry, the action-Hessian entry, and
--- proof-relevant equalities between them.  A neighbouring Hessian can no longer
--- pay the source seam merely because both propositions inhabit Set.
 ------------------------------------------------------------------------
 
 record TypedLangevinCommutatorData : Set₁ where
@@ -92,18 +77,16 @@ record TypedLangevinCommutatorData : Set₁ where
     connectionEntry : Site frame → Site frame → Coefficient
     actionHessianEntry : Site frame → Site frame → Coefficient
 
-    -- Literal differentiated generator decomposition.
     commutatorDecomposition : ∀ x y →
       commutatorEntry x y
       ≡ add (symmetricNonlocalEntry x y) (connectionEntry x y)
 
-    -- C4b in its correctly typed form.
     symmetricNonlocalIsActionHessian : ∀ x y →
       symmetricNonlocalEntry x y ≡ actionHessianEntry x y
 
-    -- The connection coefficient belongs to the same onsite adjoint term whose
-    -- quadratic energy vanishes by the basis-free theorem above.
-    connectionEntryIsOnsiteAd : Set
+    -- This is not a fresh untyped proposition: it is exactly the connection
+    -- identification carried by the same literal frame.
+    connectionEntryIsOnsiteAd : connectionIsOnsiteAdTerm frame
 
 open TypedLangevinCommutatorData public
 
@@ -118,9 +101,6 @@ commutatorEntryIsHessianPlusConnection dataSet x y
   rewrite symmetricNonlocalIsActionHessian dataSet x y =
   commutatorDecomposition dataSet x y
 
--- The compiler above is purely typed algebra.  The physical source theorem is
--- exactly the construction of one `TypedLangevinCommutatorData` on the literal
--- finite Yang--Mills density.
 typedLangevinCommutatorCompilerLevel : ProofLevel
 typedLangevinCommutatorCompilerLevel = machineChecked
 
