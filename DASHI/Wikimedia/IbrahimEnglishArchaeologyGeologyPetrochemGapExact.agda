@@ -33,6 +33,7 @@ import DASHI.Wikimedia.IbrahimEnglishAnthropologyHumanityBridgeExact as Anthropo
 --   geology          Q1069
 --   natural science  Q7991
 --   petrochemistry   Q493630
+--   chemistry        Q2329
 --
 -- Current EN Archaeology describes the discipline as study of human activity
 -- through material culture and locates it among social science/humanities,
@@ -85,9 +86,9 @@ petrochemistryCoordinate =
     "petrochemistry"
     "Q493630"
     "chemistry"
-    "qid-to-be-reused-from-canonical-Wikimedia-layer"
+    "Q2329"
     "2026-09-10"
-    "Wikidata identifies petrochemistry as a branch of chemistry related to petroleum"
+    "Wikidata identifies petrochemistry as a branch of chemistry related to petroleum; chemistry parent QID resolved through the canonical Wikimedia entity layer"
 
 ------------------------------------------------------------------------
 -- Repository-side introspection.
