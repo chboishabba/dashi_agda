@@ -54,10 +54,6 @@ partitionNumbersOEIS = oeis-coordinate
   "partition numbers p(n): number of integer partitions of n"
   true false
 
-------------------------------------------------------------------------
--- Typed navigation / relation roles.
-------------------------------------------------------------------------
-
 data EdgeRole : Set where
   currentFirstBody combinatorialDefinition generatingFunctionRelation oeisIdentifier analyticProductRelation : EdgeRole
 
@@ -112,10 +108,6 @@ etaProductToPartitionGeneratingFunction = typed-edge
   "same q-product syntax appears reciprocally in partition generating functions; this is a structural relation, not identity of analytic obligations"
   false false
 
-------------------------------------------------------------------------
--- Consumer-relative factorisation / WrongType.
-------------------------------------------------------------------------
-
 record PartitionGeneratingFunctionProjection : Set where
   constructor partition-generating-function-projection
   field
@@ -131,10 +123,6 @@ open PartitionGeneratingFunctionProjection public
 canonicalPartitionGeneratingFunctionProjection : PartitionGeneratingFunctionProjection
 canonicalPartitionGeneratingFunctionProjection = partition-generating-function-projection
   true true false false false false true
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
 
 data FormalGeneratingSeriesCreatesAnalyticConvergence : Set where
 data PartitionCountsCreateEtaZeroFree : Set where
@@ -163,5 +151,5 @@ etaProductBoundary = EtaProduct.canonicalEtaProductSnowballBoundary
 allPairsBoundary : AllPairs.WikipediaAllPairsBoundary
 allPairsBoundary = AllPairs.canonicalWikipediaAllPairsBoundary
 
-recurrenceBoundary : Recurrence.IntegerSequenceTetrationBoundary
-recurrenceBoundary = Recurrence.canonicalIntegerSequenceTetrationBoundary
+recurrenceBoundary : Recurrence.SequenceTetrationSnowballBoundary
+recurrenceBoundary = Recurrence.canonicalSequenceTetrationSnowballBoundary
