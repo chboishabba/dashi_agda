@@ -137,3 +137,32 @@ politicalAlignmentDoesNotCreateStatutoryPayment ()
 
 celebrityAttentionDoesNotCreatePreservationOutcome : CelebrityAttentionCreatesPreservationOutcome → ⊥
 celebrityAttentionDoesNotCreatePreservationOutcome ()
+
+------------------------------------------------------------------------
+-- CURRENT CORPUS VERIFICATION — 11 SEPTEMBER 2026
+--
+-- This is a bounded inventory statement, not a claim that an absent carrier
+-- does not exist publicly. It records only what is present in the supplied
+-- conversation/library corpus after a fresh title/content search.
+------------------------------------------------------------------------
+
+record CurrentCorpusVerification : Set where
+  constructor current-corpus-verification
+  field
+    finalPDPublicationNoticePresent : Bool
+    substantive2026PDPresent : Bool
+    actual1786CommentResponsePresent : Bool
+    negotiated9281DecisionPresent : Bool
+    negotiated9281ApprovedPlansPresent : Bool
+    negotiated9281PlanGeometryRead : Bool
+    verificationNote : String
+
+currentCorpusVerification : CurrentCorpusVerification
+currentCorpusVerification = current-corpus-verification
+  true
+  false
+  false
+  true
+  true
+  true
+  "Fresh conversation+Library search confirms that 2019-8575-Final-PD.pdf is the one-page s 95B(2) publication notice, not the substantive 2026 Preliminary Documentation. The actual 1,786-comment summary/response is not present in the supplied corpus. By contrast, A12705835 and A12705838 are present and have already been read as the 20 March 2026 negotiated 9281 decision notice and negotiated approved plan set."
