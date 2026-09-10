@@ -47,11 +47,11 @@ federal8575Priority = legal-priority-coordinate
   immediateFederalDecision
   consumerPaymentOpen
   "EPBC 2019/8575 Part 9 approval/refusal decision due 1 October 2026"
-  "controlled-action identity; ss 18/18A matters; delegate/deadline; Lot 9999 SP292760; 162 ha referral area; 136 ha impact area; SHG 136 ha direct plus 26 ha indirect Koala-habitat impact; habitat score 7; Koala scat/food-tree evidence; connectivity score 2; >500 ha connectivity map; 136 ha critical-habitat impact map; SHG significant-impact conclusion"
-  "2026 final-PD delta: final action/clearing geometry; retained habitat; avoidance/alternatives; complete residual-impact treatment; final offsets; conservation-advice/recovery-plan treatment; response to submissions and any changed assumptions since 2019"
-  "SHG consultant conclusion is not a Commonwealth finding; 2019 referral state is not automatically unchanged 2026 final-PD state; significant habitat impact is not automatic Part 9 refusal"
-  "historical significant-impact and habitat facts materially pay the merits input but cannot by themselves determine the current approval/refusal answer without the final-state statutory record"
-  "perform a 2019-to-2026 final-PD delta audit and compile the atom-level Part 9 refusal/conditions/offset matrix"
+  "controlled-action identity; ss 18/18A matters; delegate/deadline; Lot 9999 SP292760; 162 ha referral area; 136 ha impact area; SHG 136 ha direct plus 26 ha indirect Koala-habitat impact; habitat score 7; Koala scat/food-tree evidence; connectivity score 2; >500 ha connectivity map; 136 ha critical-habitat impact map; SHG Koala significant-impact conclusion; SHG proposition that approximately 136 ha GHFF foraging-habitat removal is likely to adversely impact habitat critical to survival; s 95B publication notice proving 1,786 comments and later publication of the PD/comments summary"
+  "substantive 2026 Preliminary Documentation carrier/attachments; final action/clearing geometry; retained habitat; avoidance/alternatives; complete Koala/GHFF residual-impact treatment; final offsets; conservation-advice/recovery-plan treatment; actual summary/response to 1,786 submissions; any changed assumptions since 2019"
+  "publication notice is not substantive final PD; comment count is not response adequacy; SHG consultant conclusion is not a Commonwealth finding; 2019 referral state is not automatically unchanged 2026 state; significant habitat impact is not automatic Part 9 refusal"
+  "historical habitat/significant-impact propositions and publication facts materially pay merits inputs but cannot determine the live approval/refusal answer without the substantive final-state record and consumer-specific statutory reasoning"
+  "first obtain the substantive final-PD/comment-response carriers, then perform the 2019-to-2026 atom-level Part 9 refusal/conditions/offset delta audit"
 
 qldS13Priority : LegalPriorityCoordinate
 qldS13Priority = legal-priority-coordinate
