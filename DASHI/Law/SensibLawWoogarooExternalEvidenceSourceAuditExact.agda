@@ -10,9 +10,9 @@ open import Data.Empty using (⊥)
 -- EXTERNAL EVIDENCE SOURCE AUDIT
 --
 -- This module records source-classification results from the current Woogaroo
--- legal-evidence tranche.  It is deliberately conservative: a useful map,
--- register, metadata record, portal label or submission does not silently
--- become the statutory conclusion sought by a different consumer.
+-- legal-evidence tranche. It is deliberately conservative: a useful map,
+-- register, metadata record, portal label, council index or submission does
+-- not silently become the statutory conclusion sought by another consumer.
 ------------------------------------------------------------------------
 
 data EvidenceSourceClass : Set where
@@ -22,6 +22,7 @@ data EvidenceSourceClass : Set where
   primaryFederalPortalStatus : EvidenceSourceClass
   primaryFederalFOIAdministrativeContext : EvidenceSourceClass
   primaryCouncilApplicationDocumentIndex : EvidenceSourceClass
+  primaryCouncilWorksProgression : EvidenceSourceClass
   primaryLibraryLegalDepositMetadata : EvidenceSourceClass
   primaryQueenslandSpatialDataset : EvidenceSourceClass
   primaryFederalCriticalHabitatRegister : EvidenceSourceClass
@@ -112,6 +113,36 @@ council9281DocumentIndexAudit = source-audit-receipt
   "download/read the 20 March 2026 negotiated approved plans and decision notice, then extract the exact vegetation-clearing polygon, retained-tree/open-space geometry, conditions and any commencement prerequisites. The index proves the exact carriers exist but does not itself reveal their plan geometry."
   false refl
 
+council9281ExactObjectIdsAudit : SourceAuditReceipt
+council9281ExactObjectIdsAudit = source-audit-receipt
+  primaryCouncilApplicationDocumentIndex
+  "Objective document-object identifiers for 9281/2024/OW"
+  "Following the Council index download links exposes stable Objective object IDs even though automated retrieval is blocked: A12705838 = 20 March 2026 DA Approved Plans - Negotiated Decision; A12705835 = 20 March 2026 Negotiated Decision Notice; A11954489 = 29 August 2025 DA Approved Plans; A11816663 = 21 July 2025 Response to Information Request; A11816668 = 21 July 2025 Updated Drawings; A10552668 = 21 August 2024 Tree Retention and Removal Plan; A10552665 = 21 August 2024 Desktop Assessment; A10552664 = 21 August 2024 Rehabilitation to Bulk Earthworks Areas Plan."
+  sourcePaid
+  "exact carrier identity / acquisition routing for 9281 works geometry and environmental conditions"
+  "the Council download endpoint returns 403/cache/timeout failures to automated retrieval. Human/browser acquisition can now target exact object IDs instead of rediscovering documents; contents and geometry remain unpaid until the PDFs are actually acquired."
+  false refl
+
+council9293WorksAudit : SourceAuditReceipt
+council9293WorksAudit = source-audit-receipt
+  primaryCouncilWorksProgression
+  "Ipswich City Council 9293/2024/OW — Kalina Village 2 Stages 1 to 4A"
+  "Development.i records 9293/2024/OW as decided/approved operational works for road work, drainage, stormwater, earthworks and signage over the same associated Springview/Kalina properties. The Council document index exposes 24 carriers, including 20 March 2026 DA Approved Plans (16.81 MB; Objective object A12705434) and Decision Notice (A12705429), plus 21 July 2025 updated civil drawings."
+  relevantButConsumerOpen
+  "works-progression / timing-risk context for the s 102 and evidence-preservation consumers"
+  "acquire the approved plans only where their geometry/timing helps identify the physical implementation sequence. Approval of civil works is not proof of commencement and does not substitute for the 9281 vegetation-clearing plan."
+  false refl
+
+council2082LandscapingAudit : SourceAuditReceipt
+council2082LandscapingAudit = source-audit-receipt
+  primaryCouncilWorksProgression
+  "Ipswich City Council 2082/2025/OW — Kalina Village 2 Stage 1-4A landscaping"
+  "Current Development.i records this landscaping operational-works application as decided/approved over 7001 Mur Boulevard and 7006 Panorama Drive. Its document index exposes approved plans (22.18 MB; Objective object A11503353) and decision notice (A11503372). An older generated Development.i snapshot displayed 'In Progress' while also recording an approval/date, so current live status should control unless a primary decision instrument says otherwise."
+  relevantButConsumerOpen
+  "implementation-progression / chronology context"
+  "landscaping approval is downstream-context evidence only. It does not prove vegetation clearing commenced, that Stage 1-4A equals the full 9281 footprint, or that any threatened legal trigger has occurred."
+  false refl
+
 slqLegalDepositMetadataAudit : SourceAuditReceipt
 slqLegalDepositMetadataAudit = source-audit-receipt
   primaryLibraryLegalDepositMetadata
@@ -175,6 +206,9 @@ data PortalPublishedStatusEqualsFinalPart9Decision : Set where
 data HousingProgramContextEqualsPredeterminedApproval : Set where
 data HousingProgramContextEqualsStrikeTeamMembership : Set where
 data CouncilDocumentIndexEqualsApprovedPlanGeometry : Set where
+data CouncilObjectIdEqualsDocumentContents : Set where
+data RelatedWorksApprovalEqualsClearingCommencement : Set where
+data LandscapingApprovalEqualsClearingCommencement : Set where
 data LegalDepositMetadataEqualsSubstantiveVolumeContents : Set where
 data CommentCountEqualsResponseAdequacy : Set where
 data ForeignJurisdictionDatasetEqualsQueenslandEvidence : Set where
@@ -207,6 +241,15 @@ housingContextDoesNotCreateStrikeTeamMembership ()
 councilDocumentIndexDoesNotCreatePlanGeometry : CouncilDocumentIndexEqualsApprovedPlanGeometry → ⊥
 councilDocumentIndexDoesNotCreatePlanGeometry ()
 
+councilObjectIdDoesNotCreateDocumentContents : CouncilObjectIdEqualsDocumentContents → ⊥
+councilObjectIdDoesNotCreateDocumentContents ()
+
+relatedWorksApprovalDoesNotCreateCommencement : RelatedWorksApprovalEqualsClearingCommencement → ⊥
+relatedWorksApprovalDoesNotCreateCommencement ()
+
+landscapingApprovalDoesNotCreateClearingCommencement : LandscapingApprovalEqualsClearingCommencement → ⊥
+landscapingApprovalDoesNotCreateClearingCommencement ()
+
 legalDepositMetadataDoesNotCreateContents : LegalDepositMetadataEqualsSubstantiveVolumeContents → ⊥
 legalDepositMetadataDoesNotCreateContents ()
 
@@ -234,8 +277,14 @@ record CurrentExternalWall : Set where
     exactFinalPart9DecisionInstrumentStillMissingIsTrue : exactFinalPart9DecisionInstrumentStillMissing ≡ true
     exact9281ApprovedPlanCarrierLocated : Bool
     exact9281ApprovedPlanCarrierLocatedIsTrue : exact9281ApprovedPlanCarrierLocated ≡ true
+    exact9281ApprovedPlanObjectIdKnown : Bool
+    exact9281ApprovedPlanObjectIdKnownIsTrue : exact9281ApprovedPlanObjectIdKnown ≡ true
     exact9281ClearingPolygonStillMissing : Bool
     exact9281ClearingPolygonStillMissingIsTrue : exact9281ClearingPolygonStillMissing ≡ true
+    relatedStage1to4AWorksCarriersLocated : Bool
+    relatedStage1to4AWorksCarriersLocatedIsTrue : relatedStage1to4AWorksCarriersLocated ≡ true
+    worksCommencementStillNotProved : Bool
+    worksCommencementStillNotProvedIsTrue : worksCommencementStillNotProved ≡ true
     exactParcelCorridorJoinStillMissing : Bool
     exactParcelCorridorJoinStillMissingIsTrue : exactParcelCorridorJoinStillMissing ≡ true
     exactOffsetParcelsStillMissing : Bool
@@ -243,6 +292,9 @@ record CurrentExternalWall : Set where
 
 currentExternalWall : CurrentExternalWall
 currentExternalWall = current-external-wall
+  true refl
+  true refl
+  true refl
   true refl
   true refl
   true refl
