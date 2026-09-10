@@ -34,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorResolventR294WeightRound541Exact 
 import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Exact as R544
 import DASHI.Physics.Closure.NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact as R473
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNSpectatorWeightedMixedAmplitudeCellEnergyBidiExact as Cell
 import DASHI.Physics.Closure.NSTriadKNSpectatorAmplitudeToWeightedGramCarrierBidiExact as Gram
 
@@ -124,9 +125,7 @@ module AmplitudeFrontier
   amplitudeAggregateLedger :
     (beta : Physical.PhysicalTriadIncidence) →
     (items : List Physical.PhysicalTriadIncidence) →
-    L2.complex3NormSquared (R544.Fold.amplitude
-      physicalSystem S (Spec.spectatorWeight beta)
-      |> (λ value → DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.foldVector value items))
+    L2.complex3NormSquared (R224.foldVector (Amp.amplitude beta) items)
     ≡ R473.weightedCellMass
         (G.mixedCells items)
         (G.spectatorCoefficients beta items)
@@ -157,10 +156,7 @@ selectedGramUpperBoundsAmplitude :
   (beta : Physical.PhysicalTriadIncidence) →
   (items : List Physical.PhysicalTriadIncidence) →
   (B : SelectedGramUpper beta items) →
-  let A = R544.Fold.amplitude physicalSystem S (Spec.spectatorWeight beta)
-  in
-  L2.complex3NormSquared
-    (DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.foldVector A items)
+  L2.complex3NormSquared (R224.foldVector (Amp.amplitude beta) items)
   ≤ weightedEnergyMajorant beta items + gramCeiling B
 selectedGramUpperBoundsAmplitude beta items B =
   let
@@ -170,7 +166,7 @@ selectedGramUpperBoundsAmplitude beta items B =
   in
   subst
     (λ lower → lower ≤ weightedEnergyMajorant beta items + gramCeiling B)
-    (amplitudeAggregateLedger beta items)
+    (sym (amplitudeAggregateLedger beta items))
     combined
 
 ------------------------------------------------------------------------
