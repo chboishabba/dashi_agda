@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.BalabanClayOneSidedCorrelationLimitRound276Exact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
@@ -83,8 +84,8 @@ record SameSpectrumFiniteCorrelationUpper
         (finiteConnectedCorrelation cutoff observable time)
         (Gap.clusteringEnvelope spectrum observable time)
 
-    -- The order relation used to close the limit is literally the spectral
-    -- consumer's order, not a neighbouring carrier with an unproved transport.
+    -- The order proposition used to close the limit is literally the spectral
+    -- consumer's order at the same two endpoints.
     orderIsSpectrumOrder : ∀ left right →
       LessEqual orderLimit left right ≡ Gap.LessEqual spectrum left right
 
@@ -114,9 +115,7 @@ continuumClusteringUpperPointwise {spectrum = spectrum} payment observable time 
         (λ cutoff → finiteUniformClusteringUpper payment cutoff observable time)
   in
   subst
-    (λ relation → relation
-      (Gap.connectedCorrelation spectrum observable time)
-      (Gap.clusteringEnvelope spectrum observable time))
+    (λ proposition → proposition)
     (orderIsSpectrumOrder payment
       (Gap.connectedCorrelation spectrum observable time)
       (Gap.clusteringEnvelope spectrum observable time))
