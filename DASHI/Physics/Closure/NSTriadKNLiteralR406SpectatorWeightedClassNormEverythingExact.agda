@@ -9,21 +9,38 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406SpectatorWeightedClassNormEvery
 --
 -- DELAYED-LOSSY-OBSERVER / HOMOGENEITY CORRECTION
 -- ------------------------------------------------
--- The outer Gram route is now explicitly OPTIONAL rather than terminal.
+-- The outer Gram route is explicitly OPTIONAL rather than terminal.
 -- `nestedWeightedCompanionCell` is already the cubic forcing-side object.  A
 -- norm-square / Gram of that forcing is sextic, and differentiating it opens a
 -- degree-seven nonlinear remainder.  R503's literal terminal consumer instead
 -- asks for the integrated signed cross of that cubic forcing with the quadratic
--- companion: degree five.  Therefore the highest-alpha route preserves the
--- R541/R573/R584 structure INSIDE the forcing factor, pairs it with the literal
--- quadratic companion, aggregates/cancels while signed, and only then applies
--- a lossy majorant if the scalar consumer is proved to descend through it.
+-- companion: degree five.
 --
--- The outer Gram ledger and its positive three-orbit envelope remain useful
--- diagnostics / optional sufficient producers.  They are not prerequisites for
--- R503, and their damped-pair tangent is not scheduled as the first residual.
+-- SIGNED THREE-ORBIT / TRANSPOSE COMPLETION
+-- -----------------------------------------
+-- The live R581/R584 LH=HL vector equality has now been pushed through the
+-- actual R541-weighted R573 companion and through the Hermitian scalar consumer
+-- BEFORE norm.  Hence the forcing cross has three independent signed Bony
+-- channels: {LH,HL}, {HH->low}, {comparable}.
 --
--- No cutoff-uniform PDE or spacetime payment is manufactured here.
+-- R496's apparent second product-rule/amplitude channel is also not an
+-- independent analytic leaf after complete pair aggregation.  It is the
+-- transpose completion of the first oriented kernel
+--
+--   H(alpha,beta) = w(alpha,beta) Re<G_alpha,D_beta>.
+--
+-- Therefore on the exact R497 fibre
+--
+--   DirectFibreCompanion = 1/2 * OrderedOffDiagonalSum(H),
+--
+-- and R547 becomes
+--
+--   FactoredFull = Diagonal + 4 * OrderedOffDiagonalSum(H).
+--
+-- The first analytic residual is consequently the cutoff-uniform spacetime
+-- upper bound for this ONE signed ordered oriented kernel (equivalently R503's
+-- direct off-diagonal budget), with the three-orbit forcing decomposition
+-- available upstream.  No cutoff-uniform payment is manufactured here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -38,6 +55,11 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterCellMassThreeOrbitBidi
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterSwapGluingBoundaryExact
 import DASHI.Physics.Closure.NSDelayedLossyObserverConsumerDescentBidiExact
 import DASHI.Physics.Closure.NSSignedCrossBeforeForcingNormHomogeneityBidiExact
+import DASHI.Physics.Closure.NSTriadKNWeightedNestedSignedCrossThreeOrbitBidiExact
+import DASHI.Physics.Closure.NSTriadKNDirectCompanionThreeOrbitSignedRowBidiExact
+import DASHI.Physics.Closure.NSTriadKNSymmetrizedHalfUnorderedOrderedExact
+import DASHI.Physics.Closure.NSTriadKNDirectCompanionOrientedForceTransposeCompletionBidiExact
+import DASHI.Physics.Closure.NSTriadKNNestedFactoredFullToOrderedOrientedForceBidiExact
 import DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact
 
 outerSpectatorWeightStructuralWeldClosed : Bool
@@ -46,32 +68,11 @@ outerSpectatorWeightStructuralWeldClosed = true
 localLHHLConsumerOrbitQuotientClosed : Bool
 localLHHLConsumerOrbitQuotientClosed = true
 
+signedHermitianConsumerThreeOrbitReductionClosed : Bool
+signedHermitianConsumerThreeOrbitReductionClosed = true
+
 outerSelectedGramGluingExposed : Bool
 outerSelectedGramGluingExposed = true
-
-outerPositiveCellMassRoutedToThreeOrbitEnvelope : Bool
-outerPositiveCellMassRoutedToThreeOrbitEnvelope = true
-
-outerSwapAutomaticallyPromotesLocalQuotient : Bool
-outerSwapAutomaticallyPromotesLocalQuotient = false
-
-completeScalarTransposeQuotientClosed : Bool
-completeScalarTransposeQuotientClosed = true
-
-independentAmplitudeSpacetimeLeafStillRequired : Bool
-independentAmplitudeSpacetimeLeafStillRequired = false
-
-localOrbitQuotientAutomaticallyPaysGlobalGluing : Bool
-localOrbitQuotientAutomaticallyPaysGlobalGluing = false
-
-lossyObserverDelayDisciplineIntegrated : Bool
-lossyObserverDelayDisciplineIntegrated = true
-
-normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent : Bool
-normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent = false
-
-aggregateCanMoveBeforeDirectionConsumerWithoutDescent : Bool
-aggregateCanMoveBeforeDirectionConsumerWithoutDescent = false
 
 outerGramRouteRetainedAsOptionalDiagnostic : Bool
 outerGramRouteRetainedAsOptionalDiagnostic = true
@@ -85,6 +86,21 @@ selectedNestedOuterDampedPairTangentIsMandatoryFirstResidual = false
 signedNestedForcingPairedBeforeNorm : Bool
 signedNestedForcingPairedBeforeNorm = true
 
+amplitudeHalfIndependentAnalyticLeaf : Bool
+amplitudeHalfIndependentAnalyticLeaf = false
+
+directFibreOneOrientedOrderedKernelExact : Bool
+directFibreOneOrientedOrderedKernelExact = true
+
+factoredFullDiagonalPlusFourOrderedKernelExact : Bool
+factoredFullDiagonalPlusFourOrderedKernelExact = true
+
+normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent : Bool
+normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent = false
+
+cutoffUniformOrderedOrientedKernelBudgetClosed : Bool
+cutoffUniformOrderedOrientedKernelBudgetClosed = false
+
 r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeaf : Bool
 r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeaf = true
 
@@ -97,49 +113,9 @@ r503ClosedHere = false
 clayPromotion : Bool
 clayPromotion = false
 
-outerSpectatorWeightStructuralWeldClosedIsTrue :
-  outerSpectatorWeightStructuralWeldClosed ≡ true
-outerSpectatorWeightStructuralWeldClosedIsTrue = refl
-
-localLHHLConsumerOrbitQuotientClosedIsTrue :
-  localLHHLConsumerOrbitQuotientClosed ≡ true
-localLHHLConsumerOrbitQuotientClosedIsTrue = refl
-
-outerSelectedGramGluingExposedIsTrue :
-  outerSelectedGramGluingExposed ≡ true
-outerSelectedGramGluingExposedIsTrue = refl
-
-outerPositiveCellMassRoutedToThreeOrbitEnvelopeIsTrue :
-  outerPositiveCellMassRoutedToThreeOrbitEnvelope ≡ true
-outerPositiveCellMassRoutedToThreeOrbitEnvelopeIsTrue = refl
-
-outerSwapAutomaticallyPromotesLocalQuotientIsFalse :
-  outerSwapAutomaticallyPromotesLocalQuotient ≡ false
-outerSwapAutomaticallyPromotesLocalQuotientIsFalse = refl
-
-completeScalarTransposeQuotientClosedIsTrue :
-  completeScalarTransposeQuotientClosed ≡ true
-completeScalarTransposeQuotientClosedIsTrue = refl
-
-independentAmplitudeSpacetimeLeafStillRequiredIsFalse :
-  independentAmplitudeSpacetimeLeafStillRequired ≡ false
-independentAmplitudeSpacetimeLeafStillRequiredIsFalse = refl
-
-localOrbitQuotientAutomaticallyPaysGlobalGluingIsFalse :
-  localOrbitQuotientAutomaticallyPaysGlobalGluing ≡ false
-localOrbitQuotientAutomaticallyPaysGlobalGluingIsFalse = refl
-
-lossyObserverDelayDisciplineIntegratedIsTrue :
-  lossyObserverDelayDisciplineIntegrated ≡ true
-lossyObserverDelayDisciplineIntegratedIsTrue = refl
-
-normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescentIsFalse :
-  normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent ≡ false
-normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescentIsFalse = refl
-
-aggregateCanMoveBeforeDirectionConsumerWithoutDescentIsFalse :
-  aggregateCanMoveBeforeDirectionConsumerWithoutDescent ≡ false
-aggregateCanMoveBeforeDirectionConsumerWithoutDescentIsFalse = refl
+signedHermitianConsumerThreeOrbitReductionClosedIsTrue :
+  signedHermitianConsumerThreeOrbitReductionClosed ≡ true
+signedHermitianConsumerThreeOrbitReductionClosedIsTrue = refl
 
 outerGramRouteMandatoryForR503IsFalse :
   outerGramRouteMandatoryForR503 ≡ false
@@ -152,6 +128,26 @@ selectedNestedOuterDampedPairTangentIsMandatoryFirstResidualIsFalse = refl
 signedNestedForcingPairedBeforeNormIsTrue :
   signedNestedForcingPairedBeforeNorm ≡ true
 signedNestedForcingPairedBeforeNormIsTrue = refl
+
+amplitudeHalfIndependentAnalyticLeafIsFalse :
+  amplitudeHalfIndependentAnalyticLeaf ≡ false
+amplitudeHalfIndependentAnalyticLeafIsFalse = refl
+
+directFibreOneOrientedOrderedKernelExactIsTrue :
+  directFibreOneOrientedOrderedKernelExact ≡ true
+directFibreOneOrientedOrderedKernelExactIsTrue = refl
+
+factoredFullDiagonalPlusFourOrderedKernelExactIsTrue :
+  factoredFullDiagonalPlusFourOrderedKernelExact ≡ true
+factoredFullDiagonalPlusFourOrderedKernelExactIsTrue = refl
+
+normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescentIsFalse :
+  normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent ≡ false
+normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescentIsFalse = refl
+
+cutoffUniformOrderedOrientedKernelBudgetClosedIsFalse :
+  cutoffUniformOrderedOrientedKernelBudgetClosed ≡ false
+cutoffUniformOrderedOrientedKernelBudgetClosedIsFalse = refl
 
 r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeafIsTrue :
   r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeaf ≡ true
