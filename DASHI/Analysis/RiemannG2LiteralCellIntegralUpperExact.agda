@@ -1,19 +1,17 @@
 module DASHI.Analysis.RiemannG2LiteralCellIntegralUpperExact where
 
 ------------------------------------------------------------------------
--- POINTWISE / INTEGRAL MAJORANTS -> LITERAL CELL UPPERS
+-- PAIR-SPECIFIC INTEGRAL MAJORANTS -> LITERAL CELL UPPERS
 --
--- The RH consumer does not require a particular quadrature algorithm.  For one
--- literal zero cell it only needs a theorem that the exact cell response is
--- below a chosen upper.  The least-privilege integration seam is therefore:
+-- The RH consumer does not require a global integration theory or a particular
+-- quadrature algorithm.  For each literal zero cell it needs only:
 --
 --   literal integrand <= majorant                       (pointwise)
---   integral literal integrand <= integral majorant    (one monotonicity receipt)
+--   that pointwise proof -> integral literal <= integral majorant
 --   integral majorant <= cellUpper                     (backend certificate)
 --
--- This compiles the cellwise upper consumed by
--- RiemannG2LiteralCellwiseNearUpperExact.  Taylor/interval/quadrature machinery
--- may live below this interface without becoming a Clay prerequisite.
+-- The second arrow is deliberately pair-specific: requiring monotonicity for
+-- every function pair would inflate the RH hypotheses.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -64,12 +62,15 @@ record LiteralCellIntegralUpperAuthority
         (literalIntegrand kernel sigma u)
         (majorant sigma u)
 
-    integrateMonotone :
-      (f g : NearFar.Scalar S -> NearFar.Scalar S) ->
-      ((u : NearFar.Scalar S) -> NearFar._≤_ S (f u) (g u)) ->
+    integrateMonotoneForMajorant :
+      (sigma : Literal.ZeroIndex kernel) ->
+      ((u : NearFar.Scalar S) ->
+        NearFar._≤_ S
+          (literalIntegrand kernel sigma u)
+          (majorant sigma u)) ->
       NearFar._≤_ S
-        (Literal.integrate kernel f)
-        (Literal.integrate kernel g)
+        (Literal.integrate kernel (literalIntegrand kernel sigma))
+        (Literal.integrate kernel (majorant sigma))
 
     integratedMajorantBelowUpper :
       (sigma : Literal.ZeroIndex kernel) ->
@@ -95,9 +96,7 @@ literalCellBelowIntegralUpper
     (λ exactCell -> NearFar._≤_ S exactCell (cellUpper authority sigma))
     (sym (Literal.cellResponseIsLiteralReflectionPair kernel sigma))
     (NearFar.≤-trans S
-      (integrateMonotone authority
-        (literalIntegrand kernel sigma)
-        (majorant authority sigma)
+      (integrateMonotoneForMajorant authority sigma
         (literalIntegrandBelowMajorant authority sigma))
       (integratedMajorantBelowUpper authority sigma))
 
@@ -120,9 +119,13 @@ record LiteralCellIntegralUpperBoundary : Set where
     specificQuadratureAlgorithmRequiredByRHIsFalse :
       specificQuadratureAlgorithmRequiredByRH ≡ false
 
-    pointwiseMajorantPlusIntegrationMonotonicitySuffices : Bool
-    pointwiseMajorantPlusIntegrationMonotonicitySufficesIsTrue :
-      pointwiseMajorantPlusIntegrationMonotonicitySuffices ≡ true
+    globalIntegrationMonotonicityRequiredByRH : Bool
+    globalIntegrationMonotonicityRequiredByRHIsFalse :
+      globalIntegrationMonotonicityRequiredByRH ≡ false
+
+    pairSpecificMajorantTransportSuffices : Bool
+    pairSpecificMajorantTransportSufficesIsTrue :
+      pairSpecificMajorantTransportSuffices ≡ true
 
     exactTranscendentalIntegralEqualityRequired : Bool
     exactTranscendentalIntegralEqualityRequiredIsFalse :
@@ -145,9 +148,10 @@ canonicalLiteralCellIntegralUpperBoundary : LiteralCellIntegralUpperBoundary
 canonicalLiteralCellIntegralUpperBoundary =
   literal-cell-integral-upper-boundary
     false refl
-    true refl
     false refl
     true refl
     false refl
+    true refl
     false refl
-    "Do not make one numerical quadrature implementation a Clay prerequisite. For each literal reflection-paired cell, provide a pointwise majorant, one theorem that integration is monotone for that pair, and a certified upper on the majorant integral. This compiles the one-sided cell upper consumed by the finite cellwise route. The actual majorant/integration certificate and the downstream strict ClusterResponse margin remain theorem-bearing obligations; RH is not derived here."
+    false refl
+    "Do not make a global integration theory or one quadrature implementation a Clay prerequisite. For each literal reflection-paired cell, provide a pointwise majorant, only the monotonicity transport for that exact integrand/majorant pair, and a certified upper on the majorant integral. This compiles the one-sided cell upper consumed by the finite cellwise route. The actual backend certificate and downstream strict ClusterResponse margin remain theorem-bearing obligations; RH is not derived here."
