@@ -127,7 +127,7 @@ import DASHI.Physics.YangMills.BalabanClayT5WeakExpectationPropertyClosureExact
 import DASHI.Physics.YangMills.BalabanClayT5WeakTopologyClusterCylinderAgreementExact
 import DASHI.Physics.YangMills.BalabanClayT5WeakExpectationGramReflectionClosureExact
 
--- Preferred selected-convergence route.  It carries only a convergence relation
+-- Preferred selected-convergence route. It carries only a convergence relation
 -- and one selected physical limit theorem; no total limit operator is required.
 import DASHI.Physics.YangMills.BalabanClayT5SelectedSequentialConvergenceExact
 import DASHI.Physics.YangMills.BalabanClayT5SelectedMomentCompactContainmentExact
@@ -139,14 +139,11 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakGramReflectionClosureExa
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSExact
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSGapBridgeExact
 
--- Preferred expectation-linked continuum route: the thermodynamic producer
--- already carries the continuum target and bounded-test expectation convergence
--- to that exact target. Prokhorov is therefore compatibility-only here.
+-- Preferred expectation-linked continuum route.
 import DASHI.Physics.YangMills.BalabanClayT5DirectExpectationPropertyClosureExact
 import DASHI.Physics.YangMills.BalabanClayT5ExpectationLinkedContinuumOSExact
 
--- Compatibility / optional local coercive-observable routes. These do not
--- replace the global selected-measure compact-containment theorem.
+-- Compatibility / optional local coercive-observable routes.
 import DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
 import DASHI.Physics.YangMills.BalabanClayT5PreferredPhysicalCoerciveMomentBridgeExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyObservableRealizationExact
@@ -155,16 +152,13 @@ import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyMarkovBridgeExact
 import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredGaugeFixedEnergyNonnegativeExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RealCoercivityExtensionExact
 
--- Cluster uniqueness is compiled from determining-cylinder expectation
--- agreement rather than required as primitive equality of measures.
+-- Cluster uniqueness compiler.
 import DASHI.Physics.YangMills.BalabanClayT5CylinderDeterminingClusterUniquenessExact
 
 -- Historical compatibility weld for arbitrary expectation producers.
 import DASHI.Physics.YangMills.BalabanClayT5DiagonalFiniteVolumeSameObjectExact
 
--- Preferred expectation producer defines the diagonal sequence literally as the
--- selected finite-volume family, making that same-object weld and expectation
--- transport definitional (`refl`) on the shortest Clay route.
+-- Preferred diagonal expectation producer.
 import DASHI.Physics.YangMills.BalabanClayT5PreferredDiagonalExpectationProducerExact
 
 -- Current terminal schedulers after Eq. (119), Kato-M7 and T5 minimization.
@@ -196,10 +190,7 @@ import DASHI.Physics.YangMills.BalabanClayCurrentTerminalCutsetRound211Exact
 import DASHI.Physics.YangMills.BalabanR108BackedPresentCutActionExact
 import DASHI.Physics.YangMills.BalabanPreferredSourceRealizationFrontierRound212Exact
 
--- Preferred CMP119-native source route.  The raw source state carries the
--- literal rho/U/E/R/B/A family; its running coupling is the finite beta-history
--- coupling by construction. CMP122 supplies active Sect.-2 predicates, and BC1
--- is built directly from the regular E_k sector rather than the whole A_k.
+-- Preferred CMP119-native source route.
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact
 import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact
 import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact
@@ -209,12 +200,7 @@ import DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontierRound216Exact
 import DASHI.Physics.YangMills.BalabanCMP119RawSourceRealizationSplitRound217Exact
 import DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontierRound217Exact
 
--- Row-C continuation after same-density introspection.  Existing Round102/108
--- covariance, marked-shell, weighted-influence and stochastic-clustering
--- compilers are reused rather than replayed.  R257 makes the exact real
--- Heat/Doob Hessian -> rational debt bridge explicit; R258 compiles the existing
--- stochastic spatial envelope into the old geometric-clustering consumer; R259
--- records the least-privilege physical frontier.
+-- Row-C continuation after same-density introspection.
 import DASHI.Physics.YangMills.BalabanHeatDoobJointGradientCovarianceRound251Exact
 import DASHI.Physics.YangMills.BalabanHeatDoobJointRowCCompilerRound252Exact
 import DASHI.Physics.YangMills.BalabanHeatDoobRationalCurvatureMajorantRound253Exact
@@ -224,6 +210,17 @@ import DASHI.Physics.YangMills.BalabanCMP116SharedFirstVariationCoordinateRound2
 import DASHI.Physics.YangMills.BalabanHeatDoobMarkedTemporalMajorizationRound257Exact
 import DASHI.Physics.YangMills.BalabanStochasticSpatialEnvelopeToConnectedClusteringRound258Exact
 import DASHI.Physics.YangMills.BalabanPreferredRowCFrontierRound259Exact
+
+-- R261-R269: typed same-carrier Langevin/Hessian recut.  The latest route removes
+-- opaque commutator sockets, binds the action Hessian to literal CMP109/CMP116,
+-- compiles R260 anchored entry debts into the physical influence matrix, and
+-- leaves only actual source realization / anchor / weighted-debt payments open.
+import DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound261Exact
+import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact
+import DASHI.Physics.YangMills.BalabanLangevinHessianBidirectionalWeldRound262Exact
+import DASHI.Physics.YangMills.BalabanLangevinPhysicalHessianSourceRecutRound263Exact
+import DASHI.Physics.YangMills.BalabanCMP109LangevinTypedSecondVariationRound267Exact
+import DASHI.Physics.YangMills.BalabanLangevinAnchoredInfluenceRound268Exact
 
 import DASHI.Physics.YangMills.BalabanPath13Eq119SourceRouteProvenanceExact
 import DASHI.Physics.YangMills.BalabanPath13Eq119BishopBridgeProvenanceExact
