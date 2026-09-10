@@ -3,26 +3,30 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 ------------------------------------------------------------------------
 -- ROUND569 / FOCUSED EXTENSION OF THE R505 DIRECT TERMINAL CONE
 --
--- The nested inward BIDI now reaches:
+-- The inward BIDI through R589 remains useful producer archaeology:
 --   R585 exact LH/HL inner symmetry;
 --   R586 the same symmetry after the actual R145 outer slot map;
 --   R587 three independent live class-norm coordinates, not four;
---   R588 the weaker historical R434 critical-cone route on the exact R440 cross;
---   R589 elimination of the opaque historical-decomposition producer socket.
+--   R588 historical R434 only through an exact live R440 same-object weld;
+--   R589 eliminates the opaque R434-decomposition producer socket;
+--   R590 packages the exact live partition + three R284 region payments as one
+--        optional physical producer rather than four independent scheduler debts;
+--   R591 removes duplicated R572 sign receipts using already-owned R571 signs.
 --
--- After R589, a live R284 payment P needs only the exact same-object identity
+-- R592 then performs the decisive least-privilege correction: none of the
+-- R284/R434/R590 critical-cone route, the R568/R572 temporal-commutator route,
+-- Laplace factorisation, Schur, or class-norm routes are mandatory for leaf A.
+-- R496-R500 already construct the exact live direct off-diagonal nonseparable
+-- resolvent companion and R503 consumes precisely one analytic theorem:
 --
---   R440.fixedOutputPhysicalCommonCross
---     = R284.paidDeepMass P + R284.coreGramDebt P.
+--   forall N,T, 4 * integratedDirectCompanion(N,T) <= B(T),
 --
--- R434 decomposition construction and R588 same-object welding are compiler-owned.
--- The remaining theorem-bearing work is therefore the actual physical payment:
--- deep-FL Bernstein/convolution, deep-HH null/convolution, critical-core signed
--- covariance (or another admissible route), plus the live scalar decomposition
--- identity and downstream outer spectator/weight spacetime transport.
+-- with B independent of N.
 --
--- R587 remains a stronger optional norm/operator producer.  Nothing here asserts
--- analytic payment or Clay closure.
+-- Therefore all decompositions below R503 are producer tactics.  The canonical
+-- global first residual remains the literal R406 signed-cross payment; after it,
+-- the independent phase-sensitive critical-production leaf remains.  No analytic
+-- payment or Clay closure is asserted here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -59,6 +63,9 @@ import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyLHHLNormSymmetryRound586Exac
 import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact
 import DASHI.Physics.Closure.NSTriadKNModernCriticalConeSameObjectBidiRound588Exact
 import DASHI.Physics.Closure.NSTriadKNLiveCriticalConePaymentCompilerRound589Exact
+import DASHI.Physics.Closure.NSTriadKNLiveCriticalConeRegionPaymentRound590Exact
+import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact
+import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -102,29 +109,41 @@ round569HistoricalCriticalConeSignedBidiIntegrated = true
 round569LiveCriticalConeMinimalWeldCompilerIntegrated : Bool
 round569LiveCriticalConeMinimalWeldCompilerIntegrated = true
 
+round569LiveCriticalConeRegionPaymentIntegrated : Bool
+round569LiveCriticalConeRegionPaymentIntegrated = true
+
+round569DirectTemporalLeastPrivilegeIntegrated : Bool
+round569DirectTemporalLeastPrivilegeIntegrated = true
+
+round569CanonicalDirectR503FrontierIntegrated : Bool
+round569CanonicalDirectR503FrontierIntegrated = true
+
 round569R587AbsoluteNormRouteMandatory : Bool
 round569R587AbsoluteNormRouteMandatory = false
 
 round569OpaqueR434DecompositionProducerMandatory : Bool
 round569OpaqueR434DecompositionProducerMandatory = false
 
-round569LiveR440CriticalScalarDecompositionClosed : Bool
-round569LiveR440CriticalScalarDecompositionClosed = false
+round569R284CriticalConeRouteMandatory : Bool
+round569R284CriticalConeRouteMandatory = false
+
+round569R568TemporalCommutatorRouteMandatory : Bool
+round569R568TemporalCommutatorRouteMandatory = false
+
+round569LaplaceRouteMandatory : Bool
+round569LaplaceRouteMandatory = false
+
+round569CanonicalLeafAIsSingleDirectR503Budget : Bool
+round569CanonicalLeafAIsSingleDirectR503Budget = true
+
+round569CanonicalDirectR503BudgetClosed : Bool
+round569CanonicalDirectR503BudgetClosed = false
 
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
 
 round569NovelCommutatorSpacetimeBudgetClosed : Bool
 round569NovelCommutatorSpacetimeBudgetClosed = false
-
-round569VariableFibreSignedGramResidualClosed : Bool
-round569VariableFibreSignedGramResidualClosed = false
-
-round569ClasswiseSignedGramResidualsClosed : Bool
-round569ClasswiseSignedGramResidualsClosed = false
-
-round569LiteralNestedSlotClassNormBudgetsClosed : Bool
-round569LiteralNestedSlotClassNormBudgetsClosed = false
 
 round569OuterWeightSpectatorSpacetimeClosed : Bool
 round569OuterWeightSpectatorSpacetimeClosed = false
