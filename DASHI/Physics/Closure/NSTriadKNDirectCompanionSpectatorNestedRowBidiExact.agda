@@ -24,16 +24,20 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact as R299
 import DASHI.Physics.Closure.NSTriadKNDirectResolventPairCompanionRound496Exact as R496
 import DASHI.Physics.Closure.NSTriadKNDirectResolventPairSwapSymmetryRound538Exact as R538
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545Exact as R545
@@ -68,8 +72,7 @@ module DirectNestedRow
     (alpha beta : Physical.PhysicalTriadIncidence) →
     (positive : Positive (R291.pairRate (Swap.Q alpha beta))) →
     Swap.symmetricWeightedRemainder alpha beta
-    ≡ R291.two * R291.two *
-        Direct.directResolventPairCompanion alpha beta positive
+    ≡ R299.four * Direct.directResolventPairCompanion alpha beta positive
   pairScalarIsFourDirectCompanion alpha beta positive =
     trans
       (sym
@@ -98,7 +101,7 @@ module DirectNestedRow
     (items : List Physical.PhysicalTriadIncidence) →
     (positives : PositiveAgainst beta items) →
     Row.spectatorRow beta items
-    ≡ R291.two * R291.two * directCompanionRow beta items positives
+    ≡ R299.four * directCompanionRow beta items positives
   spectatorRowIsFourDirectCompanionRow beta [] positives = refl
   spectatorRowIsFourDirectCompanionRow beta (alpha ∷ rest) positives
     rewrite pairScalarIsFourDirectCompanion alpha beta (positives alpha)
@@ -117,18 +120,15 @@ module DirectNestedRow
       (Output.physicalOutputFiber (Audit.cutoff system) output)) →
     let items = Output.physicalOutputFiber (Audit.cutoff system) output
         module N = Spectator.Nested beta
-        nestedForce =
-          R545.R224.foldVector N.nestedWeightedCompanionCell items
-        A = R545.R224.foldVector (Row.Weighted.Amp.amplitude beta) items
-        fourA =
-          R545.C3.complex3Add
-            (R545.C3.complex3Add A A)
-            (R545.C3.complex3Add A A)
+        nestedForce = R224.foldVector N.nestedWeightedCompanionCell items
+        A = R224.foldVector (Row.Weighted.Amp.amplitude beta) items
+        fourA = C3.complex3Add
+          (C3.complex3Add A A) (C3.complex3Add A A)
     in
-    R291.two * R291.two * directCompanionRow beta items positives
+    R299.four * directCompanionRow beta items positives
     ≡ R291.two *
-        (R545.R179.realHermitianCross nestedForce (Row.doubleCell beta)
-        + R545.R179.realHermitianCross fourA (Row.D.doubleForcing beta))
+        (R179.realHermitianCross nestedForce (Row.doubleCell beta)
+        + R179.realHermitianCross fourA (Row.D.doubleForcing beta))
   fourDirectCompanionRowIsNestedForceScalarRow output beta positives =
     trans
       (sym
