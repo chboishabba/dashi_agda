@@ -3,188 +3,221 @@ module DASHI.Interop.TiRCorderHumourTlureyContextIndexedGrammarExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Interop.TiRCorderVoiceEditInteroceptionAntiPanopticonExact as Voice
 import DASHI.Interop.TiRCorderSpokenIntentGrammarRuddCrossPollinationExact as Rudd
 import DASHI.Biology.HumourOnlineEngagementFramework as Humour
 import DASHI.Reasoning.HumourRelationRepresentationCrossPollinationExact as HumourRR
-import DASHI.Philosophy.RelationalProtocol as Tlurey
+import LogicTlurey as TlureyTrace
+import DASHI.Cognition.TlureyNumerologyStateSpace as TlureyState
+import DASHI.Cognition.TlureyDyadicNonaryTraceReceipt as TlureyReceipt
 
 ------------------------------------------------------------------------
--- TIRCORDER x HUMOUR x TLUREY CONTEXT-INDEXED EXTENSIBLE GRAMMAR
+-- TIRCORDER x HUMOUR x ACTUAL TLUREY CORE
 --
--- Cross-pollination only.  Brown/Pryce/Pabel's humour framework is not claimed
--- to be a speech-command theory, and Tlurey is not promoted into a universal
--- command semantics.  The useful structural overlap is:
+-- Correction to the first version of this owner:
+-- the relevant Tlurey core is NOT the later RelationalProtocol reinterpretation.
+-- The in-repo Tlurey owners used here are:
 --
---   Humour: meaning/adequacy is indexed by rationale, presenter, audience and
---           context, content, technical delivery, humour type and feedback.
---   Tlurey: direct action is only constructible after a witnessed
---           Respect -> Connect -> Reflect path.
---   Rudd/TiRCorder: recognized utterances map into candidate command fibres,
---                   with admission separated from execution.
+--   LogicTlurey
+--     seed -> counter -> resonance -> overflow -> seed
+--     with periodic StageTrace and triadic stageTone compression;
 --
--- Therefore an extensible grammar is not one global String -> Action table.
--- It is a context/consumer-indexed family whose registrations may exist before
--- they are admissible for execution in the current relation/context.
+--   TlureyNumerologyStateSpace
+--     recursive hidden state, lossy binary quotient/residual structure,
+--     and private TlureyLexeme values carrying surface, intendedMeaning,
+--     contextualUse, and requiresSharedAnchor;
+--
+--   TlureyDyadicNonaryTraceReceipt
+--     promotes dyadic recursive branch structure while retaining hidden
+--     residual and keeping richer triadic/nonary interpretations candidate-only.
+--
+-- Humour contributes a separate source-bound context family (rationale,
+-- presenter, audience/context, content, delivery, humour type, feedback).
+-- The useful compound is therefore an anchor/context indexed private grammar
+-- whose public surface is a lossy projection of a richer candidate state.
 ------------------------------------------------------------------------
 
-data GrammarContextCoordinate : Set where
-  rationaleCoordinate : GrammarContextCoordinate
-  presenterCoordinate : GrammarContextCoordinate
-  audienceContextCoordinate : GrammarContextCoordinate
-  contentCoordinate : GrammarContextCoordinate
-  deliveryCoordinate : GrammarContextCoordinate
-  commandTypeCoordinate : GrammarContextCoordinate
-  feedbackHistoryCoordinate : GrammarContextCoordinate
+------------------------------------------------------------------------
+-- 1. Humour context coordinates remain source-bound context inputs.
+------------------------------------------------------------------------
 
-record GrammarContext : Set where
-  constructor grammarContext
+record GrammarUseContext : Set where
+  constructor grammarUseContext
   field
     rationaleReference : String
     presenterReference : String
     audienceContextReference : String
-    contentDomainReference : String
-    deliveryModeReference : String
-    commandTypeReference : String
-    feedbackHistoryReference : String
+    contentReference : String
+    deliveryReference : String
+    humourTypeReference : String
+    feedbackReference : String
 
-open GrammarContext public
+open GrammarUseContext public
 
-record ContextIndexedGrammarRule : Set where
-  constructor contextIndexedGrammarRule
+------------------------------------------------------------------------
+-- 2. Tlurey private lexeme becomes the direct grammar analogue.
+--
+-- A spoken shorthand is not globally meaningful.  Its surface form is paired
+-- with intended meaning, contextual use and a shared-anchor requirement.
+------------------------------------------------------------------------
+
+record SpokenPrivateLexeme : Set where
+  constructor spokenPrivateLexeme
   field
-    ruleReference : String
-    utterancePatternReference : String
-    baseRuleReference : String
-    registrationContext : GrammarContext
+    tlureyLexeme : TlureyState.TlureyLexeme
+    grammarRuleReference : String
     proposedFibre : Voice.SpokenIntentFibre
     proposedEditKind : Voice.VoiceEditKind
     sourceProvenanceReference : String
 
-open ContextIndexedGrammarRule public
+open SpokenPrivateLexeme public
 
-------------------------------------------------------------------------
--- Registration, contextual applicability, admission, and execution are four
--- distinct coordinates.
-------------------------------------------------------------------------
-
-data GrammarRegistrationStatus : Set where
-  proposedRegistration : GrammarRegistrationStatus
-  registeredRule : GrammarRegistrationStatus
-  retiredRule : GrammarRegistrationStatus
-
-record RegisteredGrammarRule : Set where
-  constructor registeredGrammarRule
+record SharedAnchorReceipt : Set where
+  constructor sharedAnchorReceipt
   field
-    rule : ContextIndexedGrammarRule
-    status : GrammarRegistrationStatus
-    registrationReceiptReference : String
-
-open RegisteredGrammarRule public
-
-record ContextApplicabilityWitness : Set where
-  constructor contextApplicabilityWitness
-  field
-    registeredRuleReference : String
-    currentContext : GrammarContext
-    satisfiedCoordinates : Nat
-    unresolvedCoordinates : Nat
-    applicabilityReceiptReference : String
-
-open ContextApplicabilityWitness public
-
-------------------------------------------------------------------------
--- Tlurey-shaped relational admission.  We deliberately reuse the existing
--- stage carriers: action is downstream of respect, connection and reflection.
-------------------------------------------------------------------------
-
-record GrammarRelationWitness : Set where
-  constructor grammarRelationWitness
-  field
-    userReference : String
-    grammarReference : String
-    trustReference : String
-    careReference : String
-    sharedHistoryReference : String
-    permissionToChallengeReference : String
-    repairCommitmentReference : String
-    recognitionReference : String
-
-open GrammarRelationWitness public
-
-record ReflectedGrammarContext : Set where
-  constructor reflectedGrammarContext
-  field
-    relationWitness : GrammarRelationWitness
-    respectedContextReference : String
-    connectedContextReference : String
-    reflectionReference : String
-    applicability : ContextApplicabilityWitness
-
-open ReflectedGrammarContext public
-
-record DirectedGrammarExecution : Set where
-  constructor directedGrammarExecution
-  field
-    reflectedContext : ReflectedGrammarContext
-    admittedCandidateReference : String
-    actionReference : String
-    actionBoundaryReference : String
-
-open DirectedGrammarExecution public
-
-------------------------------------------------------------------------
--- Feedback changes future registration/context evidence; it does not rewrite
--- the historical utterance or silently redefine old command meaning.
-------------------------------------------------------------------------
-
-record GrammarFeedbackEvent : Set where
-  constructor grammarFeedbackEvent
-  field
-    feedbackEventReference : String
-    ruleReference : String
+    lexemeSurfaceReference : String
+    speakerReference : String
+    grammarNamespaceReference : String
     contextReference : String
-    observedOutcomeReference : String
-    proposedRevisionReference : String
+    sharedAnchorReference : String
+    replayReference : String
 
-open GrammarFeedbackEvent public
-
-data FeedbackRewritesHistoricalUtterance : Set where
-feedbackDoesNotRewriteHistoricalUtterance : FeedbackRewritesHistoricalUtterance → ⊥
-feedbackDoesNotRewriteHistoricalUtterance ()
-
-data FeedbackAutomaticallyRewritesRule : Set where
-feedbackDoesNotAutomaticallyRewriteRule : FeedbackAutomaticallyRewritesRule → ⊥
-feedbackDoesNotAutomaticallyRewriteRule ()
+open SharedAnchorReceipt public
 
 ------------------------------------------------------------------------
--- Wrong-consumer and overgeneralisation firewalls.
+-- 3. Surface match is a quotient-like observation, not full meaning.
 ------------------------------------------------------------------------
 
-data RegisteredEverywhereImpliesExecutableHere : Set where
-registeredDoesNotImplyExecutableHere : RegisteredEverywhereImpliesExecutableHere → ⊥
-registeredDoesNotImplyExecutableHere ()
+record GrammarSurfaceObservation : Set where
+  constructor grammarSurfaceObservation
+  field
+    utteranceReference : String
+    matchedSurfaceReference : String
+    candidateCount : Nat
+    hiddenResidualReference : String
+    quotientReference : String
 
-data ExactPhraseMatchOverridesContext : Set where
-exactPhraseMatchDoesNotOverrideContext : ExactPhraseMatchOverridesContext → ⊥
-exactPhraseMatchDoesNotOverrideContext ()
+open GrammarSurfaceObservation public
 
-data HumourContextDeterminesCommandMeaning : Set where
-humourContextDoesNotDetermineCommandMeaning : HumourContextDeterminesCommandMeaning → ⊥
-humourContextDoesNotDetermineCommandMeaning ()
+data SurfaceMatchDeterminesIntendedMeaning : Set where
+surfaceMatchDoesNotDetermineIntendedMeaning : SurfaceMatchDeterminesIntendedMeaning → ⊥
+surfaceMatchDoesNotDetermineIntendedMeaning ()
 
-data TlureyRelationDeterminesCommandTruth : Set where
-tlureyRelationDoesNotDetermineCommandTruth : TlureyRelationDeterminesCommandTruth → ⊥
-tlureyRelationDoesNotDetermineCommandTruth ()
+data SurfaceMatchErasesResidual : Set where
+surfaceMatchDoesNotEraseResidual : SurfaceMatchErasesResidual → ⊥
+surfaceMatchDoesNotEraseResidual ()
 
-data OneConsumerAdequacyImpliesPluralGrammarSafety : Set where
-oneConsumerAdequacyDoesNotImplyPluralGrammarSafety : OneConsumerAdequacyImpliesPluralGrammarSafety → ⊥
-oneConsumerAdequacyDoesNotImplyPluralGrammarSafety ()
+data PrivateLexemePromotesToPublicTruth : Set where
+privateLexemeDoesNotPromoteToPublicTruth : PrivateLexemePromotesToPublicTruth → ⊥
+privateLexemeDoesNotPromoteToPublicTruth ()
 
 ------------------------------------------------------------------------
--- Source/owner anchors.  These establish reuse, not semantic identity.
+-- 4. Recursive branch fibre.
+--
+-- The executable candidate is one branch of a recursive hidden state-space.
+-- Other branches remain inspectable residual rather than being destroyed by
+-- selecting a winner.
 ------------------------------------------------------------------------
+
+data SpokenGrammarBranchKind : Set where
+  literalContentBranch : SpokenGrammarBranchKind
+  formattingCommandBranch : SpokenGrammarBranchKind
+  selfCorrectionBranch : SpokenGrammarBranchKind
+  discourseMarkerBranch : SpokenGrammarBranchKind
+  quotedSpeechBranch : SpokenGrammarBranchKind
+  asrArtifactBranch : SpokenGrammarBranchKind
+  unresolvedBranch : SpokenGrammarBranchKind
+
+record SpokenGrammarBranch : Set where
+  constructor spokenGrammarBranch
+  field
+    branchIndex : Nat
+    kind : SpokenGrammarBranchKind
+    candidateReference : String
+    confidenceReference : String
+    residualReference : String
+
+open SpokenGrammarBranch public
+
+record RecursiveGrammarState : Set where
+  constructor recursiveGrammarState
+  field
+    surfaceObservation : GrammarSurfaceObservation
+    recursiveDepth : Nat
+    branches : List SpokenGrammarBranch
+    selectedBranchReference : String
+    residualBranchesReference : String
+
+open RecursiveGrammarState public
+
+data SelectedBranchDeletesAlternatives : Set where
+selectedBranchDoesNotDeleteAlternatives : SelectedBranchDeletesAlternatives → ⊥
+selectedBranchDoesNotDeleteAlternatives ()
+
+------------------------------------------------------------------------
+-- 5. Tlurey stage trace as revision/search phase, not semantic authority.
+--
+-- We reuse the actual cyclic stage carrier only as a process coordinate:
+-- seed -> counter -> resonance -> overflow -> seed.
+-- No stage name is claimed to prove command meaning.
+------------------------------------------------------------------------
+
+record GrammarStageReceipt : Set where
+  constructor grammarStageReceipt
+  field
+    stage : TlureyTrace.Stage
+    stageReference : String
+    candidateSetReference : String
+    residualReference : String
+
+open GrammarStageReceipt public
+
+data StageToneDeterminesCommandMeaning : Set where
+stageToneDoesNotDetermineCommandMeaning : StageToneDeterminesCommandMeaning → ⊥
+stageToneDoesNotDetermineCommandMeaning ()
+
+canonicalFourStageTrace : List TlureyTrace.Stage
+canonicalFourStageTrace = TlureyTrace.StageTrace 4 TlureyTrace.seed
+
+------------------------------------------------------------------------
+-- 6. Context/anchor admission.
+--
+-- Registration is deliberately weaker than applicability.  A private command
+-- may exist in the lexicon but still require a shared anchor for this user,
+-- namespace and context before it can be offered for edit admission.
+------------------------------------------------------------------------
+
+record AnchoredGrammarCandidate : Set where
+  constructor anchoredGrammarCandidate
+  field
+    lexeme : SpokenPrivateLexeme
+    useContext : GrammarUseContext
+    sharedAnchor : SharedAnchorReceipt
+    candidateReference : String
+    residualReference : String
+    candidateOnly : Bool
+
+open AnchoredGrammarCandidate public
+
+data RegisteredPrivateLexemeExecutesGlobally : Set where
+registeredPrivateLexemeDoesNotExecuteGlobally :
+  RegisteredPrivateLexemeExecutesGlobally → ⊥
+registeredPrivateLexemeDoesNotExecuteGlobally ()
+
+data SharedAnchorDeterminesCorrectAction : Set where
+sharedAnchorDoesNotDetermineCorrectAction : SharedAnchorDeterminesCorrectAction → ⊥
+sharedAnchorDoesNotDetermineCorrectAction ()
+
+------------------------------------------------------------------------
+-- 7. Humour consumer-relativity applies to grammar projections too.
+------------------------------------------------------------------------
+
+data OneContextAdequacyImpliesAllContextAdequacy : Set where
+oneContextAdequacyDoesNotImplyAllContextAdequacy :
+  OneContextAdequacyImpliesAllContextAdequacy → ⊥
+oneContextAdequacyDoesNotImplyAllContextAdequacy ()
 
 humourSourceAnchor : Humour.HumourFrameworkSourceSurface
 humourSourceAnchor = Humour.canonicalHumourFrameworkSourceSurface
@@ -192,36 +225,55 @@ humourSourceAnchor = Humour.canonicalHumourFrameworkSourceSurface
 humourConsumerSafetyAnchor : HumourRR.HumourRelationRepresentationBoundary
 humourConsumerSafetyAnchor = HumourRR.canonicalHumourRelationRepresentationBoundary
 
+------------------------------------------------------------------------
+-- 8. Actual Tlurey owner anchors.
+------------------------------------------------------------------------
+
+tlureyPrivateLanguageIsPrivate : Bool
+tlureyPrivateLanguageIsPrivate = TlureyState.tlureyIsPrivateLanguage
+
+tlureyPrivateLanguageIsExternalTruth : Bool
+tlureyPrivateLanguageIsExternalTruth = TlureyState.tlureyIsExternalTruth
+
+tlureyTraceReceiptAnchor : TlureyReceipt.DyadicNonaryTraceReceipt
+tlureyTraceReceiptAnchor = TlureyReceipt.canonicalTraceReceipt
+
+------------------------------------------------------------------------
+-- 9. Integration boundary.
+------------------------------------------------------------------------
+
+record TlureyIndexedGrammarBoundary : Set where
+  constructor tlureyIndexedGrammarBoundary
+  field
+    privateLexemeCarriesContextualMeaning : Bool
+    privateLexemeRequiresSharedAnchor : Bool
+    exactSurfaceMatchDeterminesMeaning : Bool
+    exactSurfaceMatchErasesResidual : Bool
+    selectedCandidateDeletesOtherBranches : Bool
+    stageToneCreatesSemanticAuthority : Bool
+    privateLexemeCreatesPublicTruth : Bool
+    dyadicRecursiveBranchingReused : Bool
+    hiddenResidualRetained : Bool
+    humourContextRemainsConsumerRelative : Bool
+    verbatimCarrierRemainsPrior : Bool
+
+canonicalTlureyIndexedGrammarBoundary : TlureyIndexedGrammarBoundary
+canonicalTlureyIndexedGrammarBoundary =
+  tlureyIndexedGrammarBoundary
+    true
+    true
+    false
+    false
+    false
+    false
+    false
+    true
+    true
+    true
+    true
+
 voiceBoundaryAnchor : Voice.TiRCorderVoiceEditInteroceptionBoundary
 voiceBoundaryAnchor = Voice.canonicalTiRCorderVoiceEditInteroceptionBoundary
 
 ruddGrammarBoundaryAnchor : Rudd.SpokenIntentInterpreterBoundary
 ruddGrammarBoundaryAnchor = Rudd.canonicalSpokenIntentInterpreterBoundary
-
-------------------------------------------------------------------------
--- Canonical integration boundary.
-------------------------------------------------------------------------
-
-record ContextIndexedGrammarBoundary : Set where
-  constructor contextIndexedGrammarBoundary
-  field
-    grammarIsGlobalUnindexedStringToActionMap : Bool
-    registeredRuleAutomaticallyExecutes : Bool
-    exactMatchOverridesAudienceAndContext : Bool
-    feedbackAutomaticallyChangesRuleMeaning : Bool
-    actionRequiresReflectedContext : Bool
-    provenanceSurvivesGrammarExtension : Bool
-    pluralConsumerSafetyRequiresSeparateChecks : Bool
-    verbatimCarrierRemainsPriorToGrammarAction : Bool
-
-canonicalContextIndexedGrammarBoundary : ContextIndexedGrammarBoundary
-canonicalContextIndexedGrammarBoundary =
-  contextIndexedGrammarBoundary
-    false
-    false
-    false
-    false
-    true
-    true
-    true
-    true
