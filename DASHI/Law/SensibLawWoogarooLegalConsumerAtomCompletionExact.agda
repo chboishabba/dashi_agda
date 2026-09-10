@@ -9,7 +9,7 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Wrong
 ------------------------------------------------------------------------
 -- WOOGAROO LEGAL CONSUMER ATOM COMPLETION
 --
--- This is not a second legal calculus.  It completes the current Woogaroo
+-- This is not a second legal calculus. It completes the current Woogaroo
 -- execution consumers that post-date the original AFW bridge, while reusing
 -- the original AFW atoms wherever the same proposition is already owned.
 ------------------------------------------------------------------------
@@ -23,7 +23,7 @@ data LegalExecutionConsumer : Set where
   planningExemptionScopeConsumer : LegalExecutionConsumer
   enforcementRestraintConsumer : LegalExecutionConsumer
 
--- Atomic propositions required by the live legal roadmap.  Existing AFW
+-- Atomic propositions required by the live legal roadmap. Existing AFW
 -- atoms are referenced through ExistingAtomReuse below rather than copied.
 data LegalExecutionAtom : Set where
   finalPDActionPolygonAtom : LegalExecutionAtom
@@ -71,7 +71,7 @@ canonicalExistingAtomReuse = existing-atom-reuse
   AFW.authorisedEPBCDelegateAtom
 
 ------------------------------------------------------------------------
--- Atom admission is consumer indexed.  Admission means relevant input, not
+-- Atom admission is consumer indexed. Admission means relevant input, not
 -- sufficiency, FactorsThrough, authority, adjudication, or realised outcome.
 ------------------------------------------------------------------------
 
@@ -110,8 +110,10 @@ data LegalAtomAdmissibleFor : LegalExecutionAtom → LegalExecutionConsumer → 
   standingForEnforcement : LegalAtomAdmissibleFor standingProcedureAtom enforcementRestraintConsumer
 
 ------------------------------------------------------------------------
--- Current source-payment state.  These are bounded repository readings, not
--- adjudicated legal conclusions.
+-- Current source-payment state. These are bounded repository readings, not
+-- adjudicated legal conclusions. The newly acquired 2019 referral-era ecology
+-- is kept distinct from the 2026 final-PD state: historical source payment is
+-- not silently promoted into a claim that nothing changed by 2026.
 ------------------------------------------------------------------------
 
 data AtomPaymentState : Set where
@@ -131,13 +133,37 @@ record LegalAtomPayment : Set where
 
 open LegalAtomPayment public
 
+federalActionPolygonPayment : LegalAtomPayment
+federalActionPolygonPayment = legal-atom-payment
+  finalPDActionPolygonAtom
+  epbc8575MeritsConsumer
+  partiallyPaid
+  "Primary 2019 referral identifies Lot 9999 SP292760 (158.2 ha), 162 ha referral area and 136 ha impact area; SHG Attachment 1 supplies site-locality/aerial geometry and Plan 6 maps the 136 ha critical-habitat impact area."
+  "Compare these referral-era geometries with the 2026 final Preliminary Documentation action/clearing polygon and record any delta rather than assuming identity through time."
+
+federalImpactedHabitatPayment : LegalAtomPayment
+federalImpactedHabitatPayment = legal-atom-payment
+  impactedHabitatQuantityAtom
+  epbc8575MeritsConsumer
+  sourcePaid
+  "SHG's 2019 MNES report states approximately 136 ha direct clearing of native Koala habitat plus 26 ha indirect impact; habitat score 7/10; Plan 6 labels the 136 ha referral-site critical-habitat impact area."
+  "The 2019 proposition is source-paid as a proponent/consultant proposition; acquire the 2026 final-PD corresponding quantity to test persistence, revision or supersession."
+
+federalResidualImpactPayment : LegalAtomPayment
+federalResidualImpactPayment = legal-atom-payment
+  residualImpactAtom
+  epbc8575MeritsConsumer
+  partiallyPaid
+  "SHG's 2019 report concludes the clearing and functional loss of 136 ha of habitat score 7 is a significant impact on Koala habitat critical to survival, while its Table 15 separately argues some recovery-pathway impacts can be mitigated/no residual impact identified."
+  "Extract the complete 2026 final-PD residual-impact analysis and distinguish significant habitat-loss conclusion from later mitigation/offset conclusions."
+
 s102ClearingFootprintPayment : LegalAtomPayment
 s102ClearingFootprintPayment = legal-atom-payment
   approvedClearingFootprintAtom
   nca102InterimOrderConsumer
   partiallyPaid
-  "9281/2024/OW is an approved operational-works object expressly covering vegetation clearing."
-  "Acquire the approved vegetation-clearing drawing/polygon and bind it to the exact habitat/species geometry."
+  "9281/2024/OW is an approved operational-works object expressly covering vegetation clearing; the 2019 EPBC material independently maps a 136 ha Springview impact/critical-habitat footprint."
+  "Acquire the approved 9281 vegetation-clearing drawing/polygon and prove its exact intersection with the EPBC habitat geometry; one approval's footprint is not another approval's footprint."
 
 s102TimingPayment : LegalAtomPayment
 s102TimingPayment = legal-atom-payment
@@ -147,13 +173,21 @@ s102TimingPayment = legal-atom-payment
   "Approval exists, but approval is not commencement."
   "Acquire dated commencement notices, works program, site evidence or other same-object timing receipt."
 
+s102AffectedHabitatPayment : LegalAtomPayment
+s102AffectedHabitatPayment = legal-atom-payment
+  affectedWildlifeHabitatAtom
+  nca102InterimOrderConsumer
+  partiallyPaid
+  "Primary SHG ecology for the same Springview parcel maps Koala critical habitat score 7, Koala food trees, scat evidence, >500 ha connectivity analysis and Woogaroo/Opossum Creek habitat values; this identifies a strong candidate affected-habitat object."
+  "Bind the exact 9281 clearing polygon to these habitat/wildlife surfaces and update with current ecology rather than assuming every 2019 habitat feature persists unchanged."
+
 s13EssentialityPayment : LegalAtomPayment
 s13EssentialityPayment = legal-atom-payment
   habitatPopulationEssentialityAtom
   nca13EssentialityConsumer
   partiallyPaid
-  "Landscape-function evidence includes the Scenic/Peninsula 675 ha connected-landscape analysis, Woogaroo/Bellevue connectivity evidence, corridor context, historical wooded-cover evidence and current occurrence evidence."
-  "Bind that landscape function to the exact Springview parcel and the viable-population/native-wildlife-community essentiality proposition."
+  "Same-project evidence is now strong on habitat function: Lot 9999 SP292760/162 ha referral object; mostly remnant vegetation; recognised Koala food trees; scat evidence; Woogaroo/Opossum Creek connectivity; Plan 5 maps habitat connectivity >500 ha; SHG scores connectivity 2 and total habitat 7/10."
+  "The statutory essentiality proposition remains open. The same SHG report argues recovery value 0 and says the site is not viable to support a Koala population; counsel/ecology must stress-test that adverse proposition against the report's own >500 ha connectivity, planned surrounding loss, current corridor evidence and current species evidence."
 
 offsetIdentityPayment : LegalAtomPayment
 offsetIdentityPayment = legal-atom-payment
@@ -176,8 +210,8 @@ planningExemptionPayment = legal-atom-payment
   planningExemptionInstrumentAtom
   planningExemptionScopeConsumer
   partiallyPaid
-  "Council material records mapped koala habitat together with an exempted/approved Springview development outcome and the local approval chain is identified."
-  "Acquire the exact exemption/grandfathering instrument and test temporal, parcel, stage and variation scope."
+  "The 2019 referral itself identifies a Planning Regulation 2017 urban-purpose/urban-area vegetation-clearing exemption theory for least-concern/of-concern vegetation, while Council material records later mapped-koala-habitat plus approved/exempted outcomes and the LAP/ADP/OW chain is identified."
+  "Counsel should identify the exact historical and current instruments, their transition rules, vegetation classes and parcel/stage/variation scope; the proponent's 2019 legal characterisation is not an adjudicated current exemption."
 
 enforcementContraventionPayment : LegalAtomPayment
 enforcementContraventionPayment = legal-atom-payment
@@ -194,6 +228,9 @@ enforcementContraventionPayment = legal-atom-payment
 data ControlledActionEqualsRefusal : Set where
 data SpeciesPresenceEqualsS13Essentiality : Set where
 data ConnectedLandscapeEqualsExactParcelEssentiality : Set where
+data KoalaGuidelineCriticalHabitatEqualsNCA13CriticalHabitat : Set where
+data SignificantEPBCHabitatImpactEqualsPart9Refusal : Set where
+data ReferralEraGeometryEqualsFinalPDGeometry : Set where
 data WorksApprovalEqualsWorksCommenced : Set where
 data ClearingEntitlementEqualsS102DetrimentalEffect : Set where
 data VegetationClearingEqualsContravention : Set where
@@ -216,6 +253,15 @@ noSpeciesEssentialityCollapse ()
 
 noLandscapeParcelEssentialityCollapse : ConnectedLandscapeEqualsExactParcelEssentiality → ⊥
 noLandscapeParcelEssentialityCollapse ()
+
+noEPBCCriticalNCA13Collapse : KoalaGuidelineCriticalHabitatEqualsNCA13CriticalHabitat → ⊥
+noEPBCCriticalNCA13Collapse ()
+
+noSignificantImpactRefusalCollapse : SignificantEPBCHabitatImpactEqualsPart9Refusal → ⊥
+noSignificantImpactRefusalCollapse ()
+
+noReferralFinalGeometryCollapse : ReferralEraGeometryEqualsFinalPDGeometry → ⊥
+noReferralFinalGeometryCollapse ()
 
 noApprovalCommencementCollapse : WorksApprovalEqualsWorksCommenced → ⊥
 noApprovalCommencementCollapse ()
@@ -257,7 +303,7 @@ noHarmContraventionCollapse : EnvironmentalHarmEqualsEnforceableContravention �
 noHarmContraventionCollapse ()
 
 ------------------------------------------------------------------------
--- Consumer adequacy: a bundle must contain the right atom family.  This is a
+-- Consumer adequacy: a bundle must contain the right atom family. This is a
 -- compact routing surface for counsel; it is not a proof that the legal test
 -- is satisfied.
 ------------------------------------------------------------------------
@@ -275,23 +321,23 @@ open ConsumerAtomResidual public
 federalResidual : ConsumerAtomResidual
 federalResidual = consumer-atom-residual
   epbc8575MeritsConsumer
-  "controlled action; listed matters; delegate/deadline; neighbouring primary habitat/connectivity evidence"
-  "final-PD action polygon; impacted/retained habitat; avoidance; residual impact; offsets; conservation/recovery-plan correspondence"
-  "controlled action != refusal; species occurrence != significant-impact conclusion"
+  "controlled action; listed matters; delegate/deadline; Lot 9999 SP292760; 162 ha referral geometry; 136 ha impact; 136 ha direct plus 26 ha indirect Koala habitat impact; habitat score 7; SHG significant-impact conclusion; Plan 5/6 connectivity and critical-habitat maps"
+  "2026 final-PD delta: final action/clearing polygon; retained habitat; avoidance/alternatives; complete residual-impact treatment; final offsets; conservation/recovery-plan correspondence"
+  "2019 referral evidence != unchanged 2026 final-PD state; significant EPBC habitat impact != automatic Part 9 refusal"
 
 s13Residual : ConsumerAtomResidual
 s13Residual = consumer-atom-residual
   nca13EssentialityConsumer
-  "threatened-species/habitat evidence; connected-landscape and corridor-function evidence"
-  "exact Springview parcel x habitat function x viable-population/community essentiality"
-  "connected landscape != exact-parcel statutory essentiality"
+  "exact Springview parcel; mostly remnant vegetation; Koala food trees/scats; habitat score 7; SHG >500 ha connectivity surface; Woogaroo/Opossum creek function; connected-landscape and corridor evidence"
+  "viable-population/community essentiality and rebuttal/stress-test of SHG's adverse recovery-value/viability reasoning"
+  "EPBC Koala-guideline critical habitat != NCA s13 critical habitat; connectivity != statutory essentiality"
 
 s102Residual : ConsumerAtomResidual
 s102Residual = consumer-atom-residual
   nca102InterimOrderConsumer
-  "approved 9281/2024/OW vegetation-clearing works object; threatened wildlife/habitat context"
-  "approved clearing polygon; commencement timing; affected wildlife/habitat; likely significant detrimental effect"
-  "approval != commencement; clearing entitlement != statutory detrimental effect"
+  "approved 9281/2024/OW vegetation-clearing works object; exact same-parcel 2019 habitat/impact evidence; 136 ha critical-habitat impact geometry candidate"
+  "exact 9281 approved clearing polygon; commencement timing; current affected wildlife/habitat; likely significant detrimental effect"
+  "EPBC/referral impact geometry != 9281 works geometry; approval != commencement; clearing entitlement != statutory detrimental effect"
 
 offsetResidual : ConsumerAtomResidual
 offsetResidual = consumer-atom-residual
@@ -303,9 +349,9 @@ offsetResidual = consumer-atom-residual
 planningResidual : ConsumerAtomResidual
 planningResidual = consumer-atom-residual
   planningExemptionScopeConsumer
-  "mapped koala habitat; approved/exempted outcome; identified LAP/ADP/OW chain"
-  "exact exemption instrument; temporal scope; parcel/stage/variation scope"
-  "mapped habitat != prohibition; historic exemption != current scope"
+  "2019 referral's urban-clearing exemption theory; mapped koala habitat; approved/exempted outcome; identified LAP/ADP/OW chain"
+  "exact current exemption instrument; transition/temporal scope; vegetation class; parcel/stage/variation scope"
+  "proponent legal characterisation != current adjudicated scope; mapped habitat != prohibition; historic exemption != current scope"
 
 enforcementResidual : ConsumerAtomResidual
 enforcementResidual = consumer-atom-residual
