@@ -20,7 +20,6 @@ import DASHI.Core.FirstImplementationTimestampExact as Time
 -- Historical candidate/global-regularity receipt archaeology.
 ------------------------------------------------------------------------
 
--- The file existed on 12 June with globalRegularityClosed = false.
 nsFinalStateReceiptInitialSource : Time.FirstImplementationReceipt
 nsFinalStateReceiptInitialSource =
   Time.first-implementation-receipt
@@ -32,11 +31,22 @@ nsFinalStateReceiptInitialSource =
     Time.candidateReceiptImplemented
     Time.sourceCommittedOnly
 
--- On 13 June the wrapper first records globalRegularityClosed = true.  The
--- underlying NSCandidateCompleteEnstrophyBKMPassageReceipt at the same revision
--- explicitly keeps globalSmoothRegularityProved, uniform vorticity-Linf,
--- continuum BKM passage, Clay closure and promotion false.  Therefore this is
--- a candidate-receipt transition, NOT a completed-proof timestamp.
+nsCandidateCompletePassageFirstSource : Time.FirstImplementationReceipt
+nsCandidateCompletePassageFirstSource =
+  Time.first-implementation-receipt
+    "DASHI/Physics/Closure/NSCandidateCompleteEnstrophyBKMPassageReceipt.agda"
+    "f545fbf5a9cc792e3717033da0bdbd42aaa8337c"
+    "2026-06-12T06:05:55Z"
+    "2026-06-12T16:05:55+10:00"
+    "Australia/Brisbane"
+    Time.candidateReceiptImplemented
+    Time.sourceCommittedOnly
+
+-- On 13 June the wrapper records globalRegularityClosed = true.  The underlying
+-- candidate receipt still explicitly requires globalSmoothRegularityProved,
+-- uniform vorticity-Linf, continuum BKM passage, Clay closure and promotion to
+-- remain false.  Therefore this is a candidate-receipt transition, NOT a
+-- completed-proof timestamp.
 nsCandidateGlobalRegularityTrueReceipt : Time.FirstImplementationReceipt
 nsCandidateGlobalRegularityTrueReceipt =
   Time.first-implementation-receipt
