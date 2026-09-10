@@ -23,9 +23,9 @@ module DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterCellMassThreeOrbitBidi
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; NonNegative; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; Positive; NonNegative; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -39,7 +39,9 @@ import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
+import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
 import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact as R455
 import DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact as R452
@@ -65,7 +67,7 @@ module OuterMass
         (Field30.physicalEmbedding physicalSystem)
         mode
         (Audit.velocity (Field30.finiteSystem physicalSystem) mode))
-    (viscosityPositive : Data.Rational.Base.Positive (Field30.viscosity physicalSystem))
+    (viscosityPositive : Positive (Field30.viscosity physicalSystem))
     (unitGap : R450.CanonicalFourierUnitGap physicalSystem)
     (output : Z3.FourierMode)
     (outputNonzero : Z3.NonZeroMode output)
@@ -122,22 +124,22 @@ module OuterMass
   ... | false =
     let
       r = Ceiling.Pair.pairResolvent alpha beta
-      weightMeaning = O.SN.Spec.spectatorWeightMeaning beta alpha
+      weightMeaning = Outer.SN.Spec.spectatorWeightMeaning beta alpha
       scaledI = C3.complex3Scale (C3.complexI F) (N.nestedSlotFold alpha)
-      first = R174.normScale (R294.weight (O.SN.Spec.spectatorWeight beta) alpha) scaledI
+      first =
+        R174.normScale
+          (R294.weight (Outer.SN.Spec.spectatorWeight beta) alpha)
+          scaledI
       weightModulus :
         L2.complexModulusSquared
-          (R294.weight (O.SN.Spec.spectatorWeight beta) alpha)
+          (R294.weight (Outer.SN.Spec.spectatorWeight beta) alpha)
         ≡ r * r
       weightModulus =
         trans
           (cong L2.complexModulusSquared weightMeaning)
           (R455.realEmbedModulusSquared r)
     in
-    trans first
-      (trans
-        (cong₂ _*_ weightModulus (iNestedNorm alpha))
-        refl)
+    trans first (cong₂ _*_ weightModulus (iNestedNorm alpha))
 
   outerCellMassBelowEnvelope :
     (alpha : Physical.PhysicalTriadIncidence) →
@@ -157,8 +159,6 @@ module OuterMass
         output outputNonzero alpha beta alphaOutput betaOutput
       slotBound = E.nestedSlotBelowExactThreeOrbitEnvelope alpha pNonzero
       slotNN = Separation.complex3NormSquaredNonnegative (N.nestedSlotFold alpha)
-      orbitNN : 0ℚ ≤ R576.four * E.exactThreeOrbitEnvelope alpha
-      orbitNN = ℚP.≤-trans slotNN slotBound
       scaleWeight :
         (Ceiling.Pair.pairResolvent alpha beta * Ceiling.Pair.pairResolvent alpha beta)
           * L2.complex3NormSquared (N.nestedSlotFold alpha)
