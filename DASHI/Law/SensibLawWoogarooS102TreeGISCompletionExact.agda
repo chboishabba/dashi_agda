@@ -172,4 +172,4 @@ approvedEnvelopeDoesNotProveCommencement : ApprovedClearingEnvelopeEqualsCommenc
 approvedEnvelopeDoesNotProveCommencement ()
 
 frogIDPointDoesNotBecomeValidatedLegalFact : FrogIDPointEqualsValidatedLegalSpeciesFact → ⊥
-frogIDPointDoesNotBecomeValidatedLegalSpeciesFact ()
+frogIDPointDoesNotBecomeValidatedLegalFact ()
