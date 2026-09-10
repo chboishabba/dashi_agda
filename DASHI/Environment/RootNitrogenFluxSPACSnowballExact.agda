@@ -9,6 +9,7 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 import DASHI.Environment.RootNitrogenFluxPrimarySourceExact as Sources
 import DASHI.Environment.SoilPlantAtmosphereContinuumExact as SPAC
 import DASHI.Environment.Nitrogen15NTracerSPACPrimaryWeldExact as SeasonTracer
+import DASHI.Environment.WholeLandscapePrimaryDependencyReceiptsExact as Primary
 
 ------------------------------------------------------------------------
 -- SHORT-TERM ROOT 15N FLUX -> EXISTING SPAC ROOT-N UPTAKE SOCKET
@@ -100,7 +101,7 @@ snowballAcquisitionDoesNotAdvanceRootFluxPayment _ payment = payment
 record ShortFluxSeasonTracerBidi
     {spac : SPAC.SPACDomainRealization}
     (shortFlux : RootFluxSPACAdmission spac)
-    {receipt : _}
+    {receipt : Primary.NitrogenToCropSoilPrimaryReceipt}
     (season : SeasonTracer.TracerSPACAdmission receipt spac) : Set₁ where
   constructor short-flux-season-tracer-bidi
   field
