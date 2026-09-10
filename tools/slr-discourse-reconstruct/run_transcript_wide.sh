@@ -27,7 +27,7 @@ if [[ -n "$profiles" ]]; then
   args+=(--profiles "$profiles")
 fi
 
-cargo run --release -- "${args[@]}" >"$out" 2>"$err"
+cargo run --release --bin slr-discourse-reconstruct -- "${args[@]}" >"$out" 2>"$err"
 
 # Keep the header plus the three highest-ranked cut candidates in each sentence.
 awk -F '\t' 'NR==1 || ($3+0)<=3' "$out" >"$short"
