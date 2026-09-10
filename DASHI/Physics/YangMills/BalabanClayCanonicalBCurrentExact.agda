@@ -14,6 +14,8 @@ import DASHI.Physics.YangMills.BalabanClayDirectQuantitativeClusteringRound274Ex
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound275Exact
 import DASHI.Physics.YangMills.BalabanClayOneSidedCorrelationLimitRound276Exact
 import DASHI.Physics.YangMills.BalabanFiniteRGToSpectrumCorrelationRound277Exact
+import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact
+import DASHI.Physics.YangMills.BalabanExpectationCovarianceSpectrumWeldRound279Exact
 
 -- Optional producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
