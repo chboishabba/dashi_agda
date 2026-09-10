@@ -4,21 +4,22 @@ module DASHI.Physics.Closure.NSJuly26ExactSignedPhysicalCoefficientWeldAuditExac
 -- JULY 26 EXACT SIGNED PHYSICAL COEFFICIENT WELD AUDIT
 --
 -- This owner narrows the historical boundary recovered by the signed-route
--- provenance audit.  It distinguishes seven different events/grades:
+-- provenance audit.  It distinguishes eight different events/grades:
 --
 --   (1) the public PR surface already carrying the completion programme;
 --   (2) construction of the literal signed Galerkin coefficient;
 --   (3) insertion into the retained physical-triad incidence carrier;
 --   (4) instantiation on an actual Fourier velocity field u : Z3 -> Complex3;
 --   (5) exact three-leg cancellation on that actual signed transfer carrier;
---   (6) later literal global output-fibre partition/pairing completion;
---   (7) the still-separate cutoff-uniform analytic estimate downstream.
+--   (6) exact projected physical RHS = projected Galerkin ODE nonlinearity;
+--   (7) later literal global output-fibre partition/pairing completion;
+--   (8) the still-separate cutoff-uniform analytic estimate downstream.
 --
 -- Source chronology is not kernel certification.  A named positive majorant is
 -- not definitionally the signed coefficient, a physical incidence adapter whose
 -- vectors remain explicit inputs is not yet an actual-state weld, and exact
--- triad-orbit cancellation does not by itself construct the global output-fibre
--- partition used by the later literal Galerkin energy fold.
+-- triad-orbit cancellation/ODE identification does not by itself construct the
+-- global output-fibre partition used by the later literal Galerkin energy fold.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -39,6 +40,7 @@ data EventGrade : Set where
   retainedPhysicalIncidenceAdapter : EventGrade
   actualVelocityFieldWeld : EventGrade
   exactOrbitCancellation : EventGrade
+  projectedPhysicalODEWeld : EventGrade
   literalGlobalOutputPartition : EventGrade
   analyticFrontier : EventGrade
 
@@ -99,6 +101,15 @@ exactOrbitCancellationEvent = july26-event
   exactOrbitCancellation
   "Constructs the concrete Complex3 cancellation laws on the actual Fourier velocity field and proves symmetrised three-leg cancellation from the exact ordered signed transfer. This is theorem-bearing physical cancellation, but it is an orbit-local mechanism rather than the later literal global output-fibre partition."
 
+projectedPhysicalODEWeldEvent : July26Event
+projectedPhysicalODEWeldEvent = july26-event
+  "projected physical Fourier RHS = projected Galerkin ODE nonlinearity"
+  "3b7a74a2462571e4e248ec03ca4bbb2a54fbd7db"
+  "2026-07-26T06:30:44Z"
+  "2026-07-26T16:30:44+10:00"
+  projectedPhysicalODEWeld
+  "The finite free-character Fourier carrier proves product-to-convolution on the literal output fibre and structurally identifies projectedPhysicalRightHandSide with projectedNonlinearity, yielding physical-equation <-> coefficient-ODE transport in both directions. This closes the physical-vector-to-Galerkin-nonlinearity same-object seam output-by-output."
+
 literalGlobalOutputPartitionEvent : July26Event
 literalGlobalOutputPartitionEvent = july26-event
   "literal cutoff output-fibre partition -> complete projected Galerkin energy pairing fold"
@@ -153,14 +164,20 @@ retainedIncidenceAdapterPredatesActualVelocityFieldWeld = true
 actualVelocityFieldWeldPredatesExactOrbitCancellation : Bool
 actualVelocityFieldWeldPredatesExactOrbitCancellation = true
 
-exactOrbitCancellationPredatesLiteralGlobalOutputPartition : Bool
-exactOrbitCancellationPredatesLiteralGlobalOutputPartition = true
+exactOrbitCancellationPredatesProjectedPhysicalODEWeld : Bool
+exactOrbitCancellationPredatesProjectedPhysicalODEWeld = true
+
+projectedPhysicalODEWeldPredatesLiteralGlobalOutputPartition : Bool
+projectedPhysicalODEWeldPredatesLiteralGlobalOutputPartition = true
 
 secondsBetweenLiteralCoefficientAndRetainedIncidenceAdapter : String
 secondsBetweenLiteralCoefficientAndRetainedIncidenceAdapter = "138"
 
 secondsBetweenRetainedIncidenceAdapterAndActualVelocityFieldWeld : String
 secondsBetweenRetainedIncidenceAdapterAndActualVelocityFieldWeld = "4032"
+
+secondsBetweenExactOrbitCancellationAndProjectedPhysicalODEWeld : String
+secondsBetweenExactOrbitCancellationAndProjectedPhysicalODEWeld = "209"
 
 preJul26ConsumerArchitectureAlreadyRecovered : Bool
 preJul26ConsumerArchitectureAlreadyRecovered = true
@@ -179,6 +196,9 @@ jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeld = true
 
 jul26ExactActualStateThreeLegCancellationRecovered : Bool
 jul26ExactActualStateThreeLegCancellationRecovered = true
+
+jul26ProjectedPhysicalRhsIdentifiedWithGalerkinNonlinearity : Bool
+jul26ProjectedPhysicalRhsIdentifiedWithGalerkinNonlinearity = true
 
 jul26LiteralGlobalOutputFiberPartitionRecovered : Bool
 jul26LiteralGlobalOutputFiberPartitionRecovered = false
@@ -209,6 +229,7 @@ historicalSourceChronologyIsKernelCertification = false
 data PublicProgrammeCreatesLiteralCoefficient : Set where
 data IncidenceAdapterCreatesActualStateRealization : Set where
 data LocalOrbitCancellationCreatesGlobalOutputPartition : Set where
+data ProjectedODEIdentityCreatesUniformGap : Set where
 data LiteralCoefficientCreatesUniformGap : Set where
 data PositiveMajorantEqualsSignedCoefficient : Set where
 data MissingWorkflowNegatesSourceTheorem : Set where
@@ -225,6 +246,10 @@ incidenceAdapterDoesNotCreateActualState ()
 localOrbitCancellationDoesNotCreateGlobalOutputPartition :
   LocalOrbitCancellationCreatesGlobalOutputPartition → ⊥
 localOrbitCancellationDoesNotCreateGlobalOutputPartition ()
+
+projectedODEIdentityDoesNotCreateUniformGap :
+  ProjectedODEIdentityCreatesUniformGap → ⊥
+projectedODEIdentityDoesNotCreateUniformGap ()
 
 literalCoefficientDoesNotCreateUniformGap :
   LiteralCoefficientCreatesUniformGap → ⊥
@@ -248,11 +273,11 @@ publicChronologyDoesNotProveExternalAccess ()
 
 currentHistoricalBoundary : String
 currentHistoricalBoundary =
-  "By Jul21-23 the public repository already had the signed/cancellation consumer architecture. On Jul26 12:44:07 Brisbane it acquired the literal signed Galerkin coefficient; at 12:46:25 that coefficient was placed on retained physical-triad incidences while the vectors remained explicit realization inputs; at 13:53:37 signedTransferAt instantiated the exact coefficient directly on an actual Fourier velocity field; and by 16:27:15 the concrete Complex3 three-leg cancellation theorem was constructed on that same actual-state signed-transfer carrier. The later Aug11 output-fibre partition closes the literal finite global pairing combinatorics; it should be classified as a representation/combinatorics completion, not the invention of the Jul26 signed physical cancellation mechanism."
+  "By Jul21-23 the public repository already had the signed/cancellation consumer architecture. On Jul26 12:44:07 Brisbane it acquired the literal signed Galerkin coefficient; at 12:46:25 that coefficient was placed on retained physical-triad incidences while the vectors remained explicit realization inputs; at 13:53:37 signedTransferAt instantiated the exact coefficient directly on an actual Fourier velocity field; by 16:27:15 the concrete Complex3 three-leg cancellation theorem was constructed on that same actual-state signed-transfer carrier; and at 16:30:44 the projected physical Fourier RHS was structurally identified with the projected Galerkin ODE nonlinearity. The later Aug11 output-fibre partition closes the literal finite global energy-pairing combinatorics; it should be classified as a representation/combinatorics completion, not the invention of the Jul26 signed physical cancellation/nonlinearity mechanism."
 
 currentRemainingMathematicalBoundary : String
 currentRemainingMathematicalBoundary =
-  "The Jul26 actual-state coefficient and exact orbit-cancellation welds do not themselves prove a cutoff-uniform signed estimate, strict dissipation payment, arbitrary-data global scalar control, or Clay periodic regularity endpoint. The literal global output-fibre partition was only recovered on Aug11 in this audit. Those distinctions remain separate from execution certification."
+  "The Jul26 actual-state coefficient, exact orbit cancellation, and physical-RHS/Galerkin-nonlinearity same-object welds do not themselves prove a cutoff-uniform signed estimate, strict dissipation payment, arbitrary-data global scalar control, or Clay periodic regularity endpoint. The literal global output-fibre energy-pairing partition was only recovered on Aug11 in this audit. Those distinctions remain separate from execution certification."
 
 ------------------------------------------------------------------------
 -- Expected polarities.
@@ -285,6 +310,10 @@ jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeldIsTrue = refl
 jul26ExactActualStateThreeLegCancellationRecoveredIsTrue :
   jul26ExactActualStateThreeLegCancellationRecovered ≡ true
 jul26ExactActualStateThreeLegCancellationRecoveredIsTrue = refl
+
+jul26ProjectedPhysicalRhsIdentifiedWithGalerkinNonlinearityIsTrue :
+  jul26ProjectedPhysicalRhsIdentifiedWithGalerkinNonlinearity ≡ true
+jul26ProjectedPhysicalRhsIdentifiedWithGalerkinNonlinearityIsTrue = refl
 
 jul26LiteralGlobalOutputFiberPartitionRecoveredIsFalse :
   jul26LiteralGlobalOutputFiberPartitionRecovered ≡ false
