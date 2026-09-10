@@ -5,10 +5,12 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Discovery
+import DASHI.Core.EpistemicInquiryGovernance as Governance
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSocialPsychologyEthicsSecondOrderExact as Prior
 import DASHI.Governance.AliceBrownInstitutionalAgencyChoiceBridgeExact as Alice
 import DASHI.Biology.BrownKimberGovernanceProfileBridge as BrownKimber
+import DASHI.Biology.StudentVoiceEpistemicAgencyBridge as Voice
 
 ------------------------------------------------------------------------
 -- ALICE BROWN <-> SOCIAL PSYCHOLOGY / ETHICS BIDI SNOWBALL
@@ -134,9 +136,8 @@ institutionRecordStillDoesNotCreateWholeSystem =
   Alice.institutionRecordDoesNotPromoteWholeSystemView
 
 feedbackStillHasNoConstitutiveAuthority :
-  (coordinate : DASHI.Core.EpistemicInquiryGovernance.InquiryCoordinate) →
-  BrownKimber.RefinedStageAuthorises
-    DASHI.Biology.StudentVoiceEpistemicAgencyBridge.feedbackSourceStage coordinate → ⊥
+  (coordinate : Governance.InquiryCoordinate) →
+  BrownKimber.RefinedStageAuthorises Voice.feedbackSourceStage coordinate → ⊥
 feedbackStillHasNoConstitutiveAuthority =
   BrownKimber.feedbackSourceStillHasNoConstitutiveAuthority
 
