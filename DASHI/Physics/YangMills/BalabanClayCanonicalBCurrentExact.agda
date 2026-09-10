@@ -23,6 +23,8 @@ import DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283E
 import DASHI.Physics.YangMills.BalabanCMP116DirectT5ContinuumClusteringRound284Exact
 import DASHI.Physics.YangMills.BalabanClusteringDecayRatioToGapRound285Exact
 import DASHI.Physics.YangMills.BalabanDirectCanonicalBCompletionRound286Exact
+import DASHI.Physics.YangMills.BalabanCyclicContinuumCovarianceSpectrumRound287Exact
+import DASHI.Physics.YangMills.BalabanSubgapSeparatingTimeRound288Exact
 
 -- Optional producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
