@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.BalabanCMP116119NormalizedExpectationDerivativeRo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
@@ -64,11 +64,11 @@ open CMP116119PublishedTwoSourceLocalization public
 ------------------------------------------------------------------------
 
 record LiteralTwoSourceNormalizedExpectationWeld
-    {Scale Volume Root Observable Scalar : Set}
+    {Scale Volume Root Observable Scalar SourceDirection : Set}
     {algebra : Cumulant.TwoSourceMomentAlgebra Observable Scalar}
     {calculus : Cumulant.NormalizedLogSourceCalculus algebra}
     (published : CMP116119PublishedTwoSourceLocalization Scale Volume Root)
-    (meaning : Cumulant.LiteralTwoSourceInsertionMeaning calculus Scalar)
+    (meaning : Cumulant.LiteralTwoSourceInsertionMeaning calculus SourceDirection)
     : Set₁ where
   field
     rootOfPair : Observable → Observable → Root
@@ -94,11 +94,11 @@ record LiteralTwoSourceNormalizedExpectationWeld
 open LiteralTwoSourceNormalizedExpectationWeld public
 
 covarianceMagnitudeIsPublishedShell :
-  ∀ {Scale Volume Root Observable Scalar}
+  ∀ {Scale Volume Root Observable Scalar SourceDirection}
     {algebra : Cumulant.TwoSourceMomentAlgebra Observable Scalar}
     {calculus : Cumulant.NormalizedLogSourceCalculus algebra}
     {published : CMP116119PublishedTwoSourceLocalization Scale Volume Root}
-    {meaning : Cumulant.LiteralTwoSourceInsertionMeaning calculus Scalar} →
+    {meaning : Cumulant.LiteralTwoSourceInsertionMeaning calculus SourceDirection} →
   (weld : LiteralTwoSourceNormalizedExpectationWeld published meaning) →
   ∀ scale volume left right →
   connectedCovarianceMagnitude weld scale volume left right
@@ -120,11 +120,11 @@ covarianceMagnitudeIsPublishedShell
   congMagnitude refl = refl
 
 asRound279SpatialShell :
-  ∀ {Scale Volume Root Observable Scalar}
+  ∀ {Scale Volume Root Observable Scalar SourceDirection}
     {algebra : Cumulant.TwoSourceMomentAlgebra Observable Scalar}
     {calculus : Cumulant.NormalizedLogSourceCalculus algebra}
     {published : CMP116119PublishedTwoSourceLocalization Scale Volume Root}
-    {meaning : Cumulant.LiteralTwoSourceInsertionMeaning calculus Scalar} →
+    {meaning : Cumulant.LiteralTwoSourceInsertionMeaning calculus SourceDirection} →
   LiteralTwoSourceNormalizedExpectationWeld published meaning →
   R279.CMP116TwoSourceSpatialShell Scale Volume Root Observable
 asRound279SpatialShell {published = published} weld = record
