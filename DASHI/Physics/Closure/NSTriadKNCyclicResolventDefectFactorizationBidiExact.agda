@@ -23,7 +23,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; Positive; _+_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
 import DASHI.Physics.Closure.NSTriadKNPhysicalCyclicCellRateDefectBidiExact as Cycle
@@ -41,15 +41,28 @@ reciprocalDifferenceFactorization a b aPositive bPositive =
   let
     ia = inv a
     ib = inv b
+
     invA : ia * a ≡ 1
     invA = Reciprocal.safeRationalReciprocalTimesPositive a aPositive
+
     invB : ib * b ≡ 1
     invB = Reciprocal.safeRationalReciprocalTimesPositive b bPositive
 
+    leftExpanded : ib ≡ ib * (ia * a)
+    leftExpanded =
+      trans
+        (solve (ib ∷ []))
+        (cong (ib *_) (sym invA))
+
+    rightExpanded : ia ≡ (ib * b) * ia
+    rightExpanded =
+      trans
+        (solve (ia ∷ []))
+        (cong (_* ia) (sym invB))
+
     expanded :
       ib - ia ≡ ib * (ia * a) - (ib * b) * ia
-    expanded = cong₂ _-_ (cong₂ _*_ refl (sym invA))
-      (cong₂ _*_ (sym invB) refl)
+    expanded = cong₂ _-_ leftExpanded rightExpanded
   in
   trans expanded (solve (ia ∷ ib ∷ a ∷ b ∷ []))
 
