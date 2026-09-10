@@ -4,15 +4,20 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact as Acquisition
 import DASHI.Culture.AmyEskridgeAcquisitionProofSearchExact as Acquire
 
 ------------------------------------------------------------------------
 -- AMY ESKRIDGE MEMORIAL: FORENSIC ACQUISITION PRIORITY
 --
--- This is a lawful evidence-routing owner.  It prioritizes records by their
+-- This is a lawful evidence-routing owner. It prioritizes records by their
 -- ability to discriminate competing case interpretations, not by how dramatic
--- a hypothesis appears.  Absence of a publicly located record is not evidence
+-- a hypothesis appears. Absence of a publicly located record is not evidence
 -- of suppression or foul play.
+--
+-- Snowball rule: records may be found and retained opportunistically, but they
+-- re-enter the investigation only through the exact existing acquisition
+-- target and dependency graph. Acquisition order is not conclusion order.
 ------------------------------------------------------------------------
 
 data PriorityBand : Set where
@@ -67,43 +72,63 @@ policePriority =
 apartmentPriority : PrioritizedAcquisition
 apartmentPriority =
   prioritized-acquisition
-    "apartment-management / access / security records"
+    "apartment-management records"
     secondBand intrusionChronology true true true
 
 originalMediaPriority : PrioritizedAcquisition
 originalMediaPriority =
   prioritized-acquisition
-    "original media and native metadata"
+    "original media and metadata"
     secondBand intrusionChronology true true true
 
 exPartnerPriority : PrioritizedAcquisition
 exPartnerPriority =
   prioritized-acquisition
-    "independent voluntary first-person witness account"
+    "ex-partner witness account"
     secondBand intrusionOccurrence true true true
 
-record ExistingAcquisitionLink : Set where
-  constructor existing-acquisition-link
+------------------------------------------------------------------------
+-- Exact same-target weld to the already-authoritative acquisition owner.
+-- This replaces the earlier string/string + Bool compatibility shim.
+------------------------------------------------------------------------
+
+record ExactExistingAcquisitionLink
+    (existingTarget : Acquisition.AcquisitionTarget)
+    (priorityTarget : PrioritizedAcquisition) : Set where
+  constructor exact-existing-acquisition-link
   field
-    existingTargetName : String
-    priorityTargetName : String
-    sameTargetByConstruction : Bool
+    exactTargetNameIdentity :
+      Acquisition.targetName existingTarget ≡ targetName priorityTarget
 
-open ExistingAcquisitionLink public
+open ExactExistingAcquisitionLink public
 
-autopsyExistingAcquisitionLink : ExistingAcquisitionLink
-autopsyExistingAcquisitionLink =
-  existing-acquisition-link
-    "autopsy / postmortem examination record"
-    "autopsy / postmortem examination record"
-    true
+autopsyExistingAcquisitionLink :
+  ExactExistingAcquisitionLink Acquire.autopsyTarget autopsyPriority
+autopsyExistingAcquisitionLink = exact-existing-acquisition-link refl
 
-policeExistingAcquisitionLink : ExistingAcquisitionLink
-policeExistingAcquisitionLink =
-  existing-acquisition-link
-    "police incident / calls-for-service records"
-    "police incident / calls-for-service records"
-    true
+toxicologyExistingAcquisitionLink :
+  ExactExistingAcquisitionLink Acquire.toxicologyTarget toxicologyPriority
+toxicologyExistingAcquisitionLink = exact-existing-acquisition-link refl
+
+ballisticsExistingAcquisitionLink :
+  ExactExistingAcquisitionLink Acquire.ballisticsTarget ballisticsPriority
+ballisticsExistingAcquisitionLink = exact-existing-acquisition-link refl
+
+policeExistingAcquisitionLink :
+  ExactExistingAcquisitionLink Acquire.policeReportTarget policePriority
+policeExistingAcquisitionLink = exact-existing-acquisition-link refl
+
+apartmentExistingAcquisitionLink :
+  ExactExistingAcquisitionLink Acquire.apartmentManagementTarget apartmentPriority
+apartmentExistingAcquisitionLink = exact-existing-acquisition-link refl
+
+originalMediaExistingAcquisitionLink :
+  ExactExistingAcquisitionLink Acquire.originalMediaMetadataTarget originalMediaPriority
+originalMediaExistingAcquisitionLink = exact-existing-acquisition-link refl
+
+exPartnerExistingAcquisitionLink :
+  ExactExistingAcquisitionLink Acquire.exPartnerTarget exPartnerPriority
+exPartnerExistingAcquisitionLink = exact-existing-acquisition-link refl
 
 record ForensicPriorityBoundary : Set where
   constructor forensic-priority-boundary
@@ -115,7 +140,9 @@ record ForensicPriorityBoundary : Set where
     lawfulPrimaryRecordAcquisitionPreferred : Bool
     knownAbsentClosesOnlyExactBranch : Bool
     existingAcquisitionOwnerRemainsAuthoritative : Bool
+    outOfOrderForensicAcquisitionMayBeRetained : Bool
+    retainedRecordAutomaticallyPaysDependentAssessment : Bool
 
 canonicalForensicPriorityBoundary : ForensicPriorityBoundary
 canonicalForensicPriorityBoundary =
-  forensic-priority-boundary false true false false true true true
+  forensic-priority-boundary false true false false true true true true false
