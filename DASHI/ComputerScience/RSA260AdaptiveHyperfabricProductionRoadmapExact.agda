@@ -9,15 +9,17 @@ import DASHI.ComputerScience.RSA260AdaptiveReducerHyperfabricExact as Adaptive
 import DASHI.ComputerScience.RSA260DataDrivenReducerInferenceExact as DataDriven
 import DASHI.ComputerScience.RSA260InferredCandidateReducerHyperfabricExact as Candidates
 import DASHI.ComputerScience.RSA260C3OrbitReducerHyperfabricExact as C3
+import DASHI.ComputerScience.RSA260MixedActionNDimFibreInferenceExact as Mixed
+import DASHI.ComputerScience.RSA260SymmetryStabilityNullsExact as Nulls
 import DASHI.ComputerScience.RSA260ReducerHyperfabricSourceDiligenceExact as Sources
 
 ------------------------------------------------------------------------
--- CONSOLIDATED ROADMAP AFTER STRUCTURED C3 ORBIT DISCOVERY
+-- CONSOLIDATED ROADMAP AFTER MIXED-ACTION INFERENCE + STRUCTURAL NULLS
 --
--- Conclusion payment remains acquisition-first.  The synthetic middle lane now
--- infers pair and ternary cyclic candidate actions before inferring
--- co-requirement/conflict structure.  Execution identity and production
--- same-object application remain distinct snowball coordinates.
+-- Conclusion payment remains acquisition-first.  The synthetic preparation
+-- lane now infers pair/ternary/mixed action families, can intersect multiple
+-- structural fibres before freezing the family, and tests whether an observed
+-- symmetry survives a row/column-degree-preserving fine-incidence null.
 ------------------------------------------------------------------------
 
 priorRoadmap : Prior.ConsolidatedRSA260RoadmapBoundary
@@ -38,8 +40,11 @@ candidateBoundary = Candidates.canonicalCandidateInferencePromotionBoundary
 c3Boundary : C3.StructuredOrbitPromotionBoundary
 c3Boundary = C3.canonicalStructuredOrbitPromotionBoundary
 
-c3ExecutionReceipt : C3.C3OrbitReducerExecutionReceipt
-c3ExecutionReceipt = C3.currentC3OrbitReducerExecutionReceipt
+mixedFibrePolicy : Mixed.CandidateFibrePolicy
+mixedFibrePolicy = Mixed.canonicalCandidateFibrePolicy
+
+nullBoundary : Nulls.SymmetryNullInterpretationBoundary
+nullBoundary = Nulls.canonicalSymmetryNullInterpretationBoundary
 
 sourceBoundary : Sources.SnowballAttributionBoundary
 sourceBoundary = Sources.canonicalSnowballAttributionBoundary
@@ -51,6 +56,7 @@ data AdaptiveProductionResidual : Set where
   descendAmbiguousFibres : AdaptiveProductionResidual
   inferLocalReducerCandidates : AdaptiveProductionResidual
   inferStructuredOrbitGenerators : AdaptiveProductionResidual
+  intersectStructuralActionFibres : AdaptiveProductionResidual
   inferCoRequirementEdgesFromOperator : AdaptiveProductionResidual
   closeRequirementComponents : AdaptiveProductionResidual
   inferConsumerSignatures : AdaptiveProductionResidual
@@ -58,6 +64,7 @@ data AdaptiveProductionResidual : Set where
   selectConflictFreeClosedBatch : AdaptiveProductionResidual
   composeGlobalCandidateAction : AdaptiveProductionResidual
   verifyOperatorAndConsumerEquivariance : AdaptiveProductionResidual
+  evaluateStructurePreservingSymmetryNull : AdaptiveProductionResidual
   chooseQuotientOrFullWidthReplay : AdaptiveProductionResidual
   replayCPU : AdaptiveProductionResidual
   liftAndVerifyUpstairs : AdaptiveProductionResidual
@@ -90,6 +97,12 @@ record AdaptiveHyperfabricProductionBoundary : Set where
     structuredC3ResidualTailRetained : Bool
     structuredC3BothOrientationsChecked : Bool
     structuredC3ExactBlobExecutionPaid : Bool
+    mixedC2C3C4ActionOrderInferencePaid : Bool
+    multiFibreS4ToV4DisambiguationPaid : Bool
+    candidateFamilyFrozenBeforeGlobalPayoff : Bool
+    degreePreservingSymmetryNullPaid : Bool
+    degreePreservingSymmetryNullExactBlobPaid : Bool
+    fullHyperfabricReInferenceInsideEachNullPaid : Bool
     operatorDerivedRequirementInferenceImplemented : Bool
     observerDerivedConflictInferenceImplemented : Bool
     dataDrivenClosedBatchSelectionImplemented : Bool
@@ -98,6 +111,7 @@ record AdaptiveHyperfabricProductionBoundary : Set where
     productionBytesPaid : Bool
     productionRecursiveRefinementPaid : Bool
     productionReducerHyperfabricPaid : Bool
+    productionSymmetryNullPaid : Bool
     productionQuotientDecisionPaid : Bool
     productionCPUReplayPaid : Bool
     productionLiftPaid : Bool
@@ -114,8 +128,10 @@ currentAdaptiveHyperfabricProductionBoundary =
     true true
     true true true true
     true true true
+    true true false
+    true true true
     false false
-    false false false false false false false false false
+    false false false false false false false false false false
 
 ------------------------------------------------------------------------
 -- Operational order after bytes arrive.
@@ -127,6 +143,7 @@ record AdaptiveReplayPolicy : Set where
     addAxisOnlyOnObservedGain : Bool
     inferCandidatesBeforeRequirements : Bool
     allowStructuredOrbitGeneratorsBeyondPairs : Bool
+    keepAlternativeGeneratorFibresSeparateUntilCompatibility : Bool
     inferRequirementsBeforeOptimisingBatch : Bool
     closeRequirementsBeforeInferringClosedComponentConflicts : Bool
     conflictsRemainConsumerRelative : Bool
@@ -134,13 +151,15 @@ record AdaptiveReplayPolicy : Set where
     requireGlobalMPEqualsPM : Bool
     requireObserverCovariance : Bool
     retainNonconformingTailCoordinates : Bool
+    symmetryNullMayInformOptimisationConfidence : Bool
+    symmetryNullRequiredForCorrectFullWidthFallback : Bool
     failedCandidateOrSymmetrySearchFallsBackToFullWidth : Bool
     quotientReplayEliminatesUpstairsVerification : Bool
 open AdaptiveReplayPolicy public
 
 canonicalAdaptiveReplayPolicy : AdaptiveReplayPolicy
 canonicalAdaptiveReplayPolicy = adaptive-replay-policy
-  true true true true true true true true true true true false
+  true true true true true true true true true true true true false true false
 
 ------------------------------------------------------------------------
 -- Snowball/source order is orthogonal to mathematical dependency order.
@@ -156,11 +175,12 @@ record RoadmapSourcePaymentBoundary : Set where
     OEISRequiredWhenNoSequenceClaimExists : Bool
     implementationIdentityPaysExecution : Bool
     citedGroupTheorySourceCreatesRSAGroupAction : Bool
+    internalCrossRepoMethodSourceEqualsExternalPrimaryLiterature : Bool
 open RoadmapSourcePaymentBoundary public
 
 canonicalRoadmapSourcePaymentBoundary : RoadmapSourcePaymentBoundary
 canonicalRoadmapSourcePaymentBoundary = roadmap-source-payment-boundary
-  true false false false false false false
+  true false false false false false false false
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
@@ -171,6 +191,7 @@ data CandidateClassImpliesAutomorphism : Set where
 data ClassSizeImpliesGroupAction : Set where
 data RequirementClosureImpliesAdmissibleBatch : Set where
 data LargestClosedBatchImpliesEquivariance : Set where
+data LowNullPImpliesProductionMechanism : Set where
 data SyntheticHyperformImpliesProductionHyperform : Set where
 data SourceIdentityImpliesExecution : Set where
 
@@ -188,6 +209,9 @@ closureDoesNotGuaranteeAdmissibility ()
 
 largestClosedBatchDoesNotCreateEquivariance : LargestClosedBatchImpliesEquivariance → ⊥
 largestClosedBatchDoesNotCreateEquivariance ()
+
+lowNullPDoesNotCreateProductionMechanism : LowNullPImpliesProductionMechanism → ⊥
+lowNullPDoesNotCreateProductionMechanism ()
 
 syntheticHyperformDoesNotCreateProductionHyperform :
   SyntheticHyperformImpliesProductionHyperform → ⊥
