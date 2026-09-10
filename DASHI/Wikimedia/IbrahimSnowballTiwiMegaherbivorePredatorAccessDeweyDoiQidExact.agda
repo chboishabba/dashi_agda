@@ -30,6 +30,18 @@ horseQid = Identity.mkOptionalIdentityDemand
   "Equus caballus / domestic or feral horse" Identity.wikidataQid
   (Identity.verified "Q10758650" "Wikidata taxon identity verified 2026-09-11; feral status and local effect require source evidence")
 
+pigQid : Identity.ExternalIdentityDemand
+pigQid = Identity.mkOptionalIdentityDemand
+  "Tiwi megaherbivore-predator-access snowball" "taxon identity"
+  "Sus scrofa / pig / wild boar" Identity.wikidataQid
+  (Identity.verified "Q58697" "Wikidata Sus scrofa taxon identity verified 2026-09-11; Neave records pigs as contextual Melville presence, not as a measured game-trail driver in the paired-camera contrast")
+
+herbivoryQid : Identity.ExternalIdentityDemand
+herbivoryQid = Identity.mkOptionalIdentityDemand
+  "Tiwi megaherbivore-predator-access snowball" "ecological-process identity"
+  "herbivory" Identity.wikidataQid
+  (Identity.verified "Q45874067" "Wikidata herbivory concept verified 2026-09-11; concept identity does not quantify local grazing pressure")
+
 dingoQid : Identity.ExternalIdentityDemand
 dingoQid = Identity.mkOptionalIdentityDemand
   "Tiwi megaherbivore-predator-access snowball" "taxon identity"
@@ -40,14 +52,22 @@ gameTrailQid : Identity.ExternalIdentityDemand
 gameTrailQid = Identity.mkOptionalIdentityDemand
   "Tiwi megaherbivore-predator-access snowball" "habitat-structure identity"
   "game trail / animal trail" Identity.wikidataQid
-  (Identity.unresolved "No safely verified exact Wikidata ecological-feature item located; do not substitute road/path/article items")
+  (Identity.unresolved "No safely verified exact Wikidata ecological-feature item located; do not substitute road/path/article/video-game items")
 
 savannaEcologyCoordinate : Traversal.DashiKnowledgeCoordinate
 savannaEcologyCoordinate = Traversal.dashi-knowledge-coordinate
   "DASHI/Wikimedia/IbrahimSnowballTiwiMegaherbivorePredatorAccessDeweyDoiQidExact.agda"
   "savanna disturbance / predator-access consumer"
   "577.4 — grassland ecology, including savanna ecology"
-  "Q42710; Q10758650; Q38584; unresolved game-trail QID"
+  "Q42710; Q10758650; Q58697; Q45874067; Q38584; unresolved game-trail QID"
+  "DOI 10.1002/ece3.71622; Dryad DOI 10.5061/dryad.0zpc86776; DOI 10.1890/06-1599.1"
+
+animalEcologyCoordinate : Traversal.DashiKnowledgeCoordinate
+animalEcologyCoordinate = Traversal.dashi-knowledge-coordinate
+  "DASHI/Wikimedia/IbrahimSnowballTiwiMegaherbivorePredatorAccessDeweyDoiQidExact.agda"
+  "animal ecology / predator-herbivore environment consumer"
+  "591.7 — animal ecology, animals characteristic of specific environments"
+  "Q42710; Q10758650; Q58697; Q45874067; Q38584"
   "DOI 10.1002/ece3.71622; DOI 10.1890/06-1599.1"
 
 record MegaherbivorePredatorPrimarySource : Set where
@@ -60,6 +80,7 @@ record MegaherbivorePredatorPrimarySource : Set where
     identifier : String
     boundedClaim : String
     excludedPromotion : String
+    sourceStrength : Attribution.SourceStrength
     sourceOwner : Attribution.ClaimOwner
     sourceRemainsExternal : sourceOwner ≡ Attribution.externalSourceOwner
 
@@ -72,9 +93,9 @@ neaveEtAl2025 = megaherbivore-predator-primary-source
   "Ecology and Evolution 15(7):e71622"
   2025
   "DOI 10.1002/ece3.71622; Dryad DOI 10.5061/dryad.0zpc86776"
-  "Melville Island paired-camera study at 52 sites comparing megaherbivore game trails with adjacent undisturbed vegetation; cats and dingoes were detected substantially more often on trails. Tiwi Rangers are named collective authors."
-  "Predator detection is not predation mortality; game-trail preference is not native-mammal demographic effect; megaherbivore control is not a proved conservation benefit."
-  Attribution.externalSourceOwner refl
+  "Melville Island paired-camera study at 52 sites comparing megaherbivore game trails with adjacent undisturbed vegetation; cats and dingoes were detected substantially more often on trails. Tiwi Rangers are named collective authors and are credited with conceptualization and investigation."
+  "Predator detection is not predation mortality; game-trail preference is not native-mammal demographic effect; megaherbivore control is not a proved conservation benefit; pig presence in the study-area description is not a measured trail-driver result."
+  Attribution.primaryPublicationRecord Attribution.externalSourceOwner refl
 
 pettyEtAl2007 : MegaherbivorePredatorPrimarySource
 pettyEtAl2007 = megaherbivore-predator-primary-source
@@ -85,7 +106,7 @@ pettyEtAl2007 = megaherbivore-predator-primary-source
   "DOI 10.1890/06-1599.1"
   "Northern-Australian historical-ecology evidence that buffalo population expansion/removal altered ground-cover abundance and composition, competitive regimes and fuel loads, with interacting fire-regime consequences and hysteresis."
   "Kakadu historical cascades are a mechanism/context donor, not a Melville same-site receipt and not evidence that buffalo removal restores a prior state."
-  Attribution.externalSourceOwner refl
+  Attribution.primaryPublicationRecord Attribution.externalSourceOwner refl
 
 data Driver : Set where
   fireDriver
@@ -136,7 +157,10 @@ data PredatorDetectionMeansPredationMortality : Set where
 data BuffaloRemovalRestoresHistoricalState : Set where
 data PrimarySourceAdjacencyCreatesMediation : Set where
 data QidCreatesLocalPresence : Set where
+data QidCreatesDriverMagnitude : Set where
 data DeweyCreatesCausalParent : Set where
+
+data PigContextMeansGameTrailDriver : Set where
 
 fireOnlyDoesNotRecoverAllPredatorAccess : FireOnlyRepresentationRecoversAllPredatorAccess → ⊥
 fireOnlyDoesNotRecoverAllPredatorAccess ()
@@ -156,8 +180,14 @@ primarySourceAdjacencyDoesNotCreateMediation ()
 qidDoesNotCreateLocalPresence : QidCreatesLocalPresence → ⊥
 qidDoesNotCreateLocalPresence ()
 
+qidDoesNotCreateDriverMagnitude : QidCreatesDriverMagnitude → ⊥
+qidDoesNotCreateDriverMagnitude ()
+
 deweyDoesNotCreateCausalParent : DeweyCreatesCausalParent → ⊥
 deweyDoesNotCreateCausalParent ()
+
+pigContextDoesNotCreateGameTrailDriver : PigContextMeansGameTrailDriver → ⊥
+pigContextDoesNotCreateGameTrailDriver ()
 
 firstUnpaidEmpiricalDiscriminator : String
 firstUnpaidEmpiricalDiscriminator = Ledger.firstUnpaidEmpiricalDiscriminator
