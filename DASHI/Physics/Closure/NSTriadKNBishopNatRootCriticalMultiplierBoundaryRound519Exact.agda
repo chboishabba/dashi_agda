@@ -9,14 +9,18 @@ module DASHI.Physics.Closure.NSTriadKNBishopNatRootCriticalMultiplierBoundaryRou
 --
 --   sqrtNat(n) * sqrtNat(n) ~= n.
 --
--- Therefore the remaining scalar bridge is not existence of sqrt and not the
--- Euclidean/dyadic shell arithmetic.  It is exactly order transport:
+-- The formerly open scalar bridge
 --
---   m <= n  ->  sqrtNat(m) <= sqrtNat(n).
+--   m <= n  ->  sqrtNat(m) <= sqrtNat(n)
 --
--- Once that monotonicity receipt is supplied, R518's squared annulus lifts
--- modewise to the physical half-derivative multiplier.  This owner does not
--- manufacture monotonicity from the square law.
+-- is now closed by the domain-neutral Foundations theorem
+-- BishopNatSquareRootMonotonicityExact.  That theorem descends to the canonical
+-- rational floor-root approximants, proves pointwise order, and realizes that
+-- order through the pinned vendor/bishop Real representation.
+--
+-- Thus R518's squared annulus now lifts modewise to the physical
+-- half-derivative multiplier.  The remaining whole-norm work is only finite
+-- Fourier-sum transport, not square-root existence or monotonicity.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,6 +34,7 @@ import DASHI.Foundations.BishopNatSquareRootApproximationExact as Approximation
 import DASHI.Foundations.BishopNatSquareRootRegularFloorExact as Root
 import DASHI.Foundations.BishopNatSquareRootNonnegativeExact as RootNN
 import DASHI.Foundations.BishopNatSquareRootSemanticSquareExact as RootSquare
+import DASHI.Foundations.BishopNatSquareRootMonotonicityExact as RootMono
 import DASHI.Physics.Closure.NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exact as R518
 
 sqrtNat : Nat → BishopReal.ℝ
@@ -55,6 +60,10 @@ record CanonicalNatRootMonotonicity : Set where
       BishopReal._≤_ (sqrtNat m) (sqrtNat n)
 
 open CanonicalNatRootMonotonicity public
+
+canonicalNatRootMonotonicity : CanonicalNatRootMonotonicity
+canonicalNatRootMonotonicity = record
+  { monotone = RootMono.canonicalFloorSquareRootRealMonotone }
 
 record ModewiseCriticalMultiplierComparison
     (lowerSquared physicalSquared upperSquared : Nat) : Set where
@@ -83,6 +92,15 @@ monotonicityLiftsSquaredComparison M lower≤physical physical≤upper = record
   ; physicalRootBelowUpper = monotone M physical≤upper
   }
 
+canonicalModewiseCriticalMultiplierComparison :
+  ∀ {lowerSquared physicalSquared upperSquared} →
+  lowerSquared ≤ physicalSquared →
+  physicalSquared ≤ upperSquared →
+  ModewiseCriticalMultiplierComparison
+    lowerSquared physicalSquared upperSquared
+canonicalModewiseCriticalMultiplierComparison =
+  monotonicityLiftsSquaredComparison canonicalNatRootMonotonicity
+
 ------------------------------------------------------------------------
 -- Status / first missing coordinate.
 ------------------------------------------------------------------------
@@ -97,14 +115,17 @@ round519CanonicalNatRootSemanticSquareClosed : Bool
 round519CanonicalNatRootSemanticSquareClosed = true
 
 round519CanonicalNatRootMonotonicityClosed : Bool
-round519CanonicalNatRootMonotonicityClosed = false
+round519CanonicalNatRootMonotonicityClosed = true
 
 round519R518SquaredAnnulusClosed : Bool
 round519R518SquaredAnnulusClosed =
   R518.round518CanonicalDyadicEuclideanSquaredAnnulusClosed
 
 round519RemainingCoordinateIsNatRootMonotonicity : Bool
-round519RemainingCoordinateIsNatRootMonotonicity = true
+round519RemainingCoordinateIsNatRootMonotonicity = false
+
+round519RemainingCoordinateIsFiniteFourierSumTransport : Bool
+round519RemainingCoordinateIsFiniteFourierSumTransport = true
 
 round519ClayPromotion : Bool
 round519ClayPromotion = false
@@ -121,9 +142,13 @@ round519CanonicalNatRootSemanticSquareClosedIsTrue :
   round519CanonicalNatRootSemanticSquareClosed ≡ true
 round519CanonicalNatRootSemanticSquareClosedIsTrue = refl
 
-round519CanonicalNatRootMonotonicityClosedIsFalse :
-  round519CanonicalNatRootMonotonicityClosed ≡ false
-round519CanonicalNatRootMonotonicityClosedIsFalse = refl
+round519CanonicalNatRootMonotonicityClosedIsTrue :
+  round519CanonicalNatRootMonotonicityClosed ≡ true
+round519CanonicalNatRootMonotonicityClosedIsTrue = refl
+
+round519RemainingCoordinateIsNatRootMonotonicityIsFalse :
+  round519RemainingCoordinateIsNatRootMonotonicity ≡ false
+round519RemainingCoordinateIsNatRootMonotonicityIsFalse = refl
 
 round519ClayPromotionIsFalse : round519ClayPromotion ≡ false
 round519ClayPromotionIsFalse = refl
