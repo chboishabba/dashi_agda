@@ -92,11 +92,6 @@ poamsExperimentalPrototypingAgreement = poams-agreement-receipt
 
 ------------------------------------------------------------------------
 -- Identifier namespaces.
---
--- NTRS records the final memorandum's funding number as
--- MSFC-RMB-QUANTUM-SAA8-1519855-1. The active-agreement register separately
--- uses dotted child-agreement identifiers SAA8-1519855.1 and .2. The textual
--- suffixes are not silently equated: a crosswalk needs a primary carrier.
 ------------------------------------------------------------------------
 
 data POAMSIdentifierNamespace : Set where
@@ -139,11 +134,6 @@ canonicalPOAMSIdentifierNamespaceBoundary =
 
 ------------------------------------------------------------------------
 -- Source-specific temporal topology.
---
--- The .2 prototyping carrier is active across the 7-Oct-2016 NASA test described
--- by the eventual TM. This sharpens the earlier-study referent into a family of
--- exact programme carriers, but does not make .2 the unnamed object Amy said was
--- under NASA review in September 2020.
 ------------------------------------------------------------------------
 
 record POAMSAgreementTemporalTopology : Set where
@@ -173,14 +163,6 @@ canonicalPOAMSAgreementTemporalTopology =
 
 ------------------------------------------------------------------------
 -- Participant / authorship / production-stage topology.
---
--- The final TM describes the 7-Oct-2016 test as involving Richard Eskridge,
--- Michael Nelson and Quantum Machines CEO Chris Milam. The final public TM is
--- authored by Richard H. Eskridge, Michael A. Nelson and Michael P. Schoenfeld.
--- Its report metadata identifies the Propulsion Systems Department,
--- Engineering Directorate as the preparing organization and marks Eskridge as
--- retired. These are useful lineage/version discriminators, not retroactive
--- authorship or same-object receipts.
 ------------------------------------------------------------------------
 
 data POAMSProductionRole : Set where
@@ -242,6 +224,80 @@ canonicalPOAMSProductionBoundary =
   poams-production-boundary false false false false true true
 
 ------------------------------------------------------------------------
+-- NASA STI / DAA process topology contemporaneous with the POAMS manuscript.
+--
+-- NPR 2200.2C states that the DAA is NASA's compliance review for publication,
+-- dissemination and presentation of STI, and that approval is documented on
+-- NF-1676 (or the Center implementation). Appendix E states that report
+-- production may continue before DAA approval, but a report is not released
+-- without an approved DAA; the Center Technical Publications Office / STI
+-- Manager reviews manuscript conformance and produces the final copy.
+--
+-- This is exactly the kind of process Amy described in September 2020, but
+-- process-shape compatibility is still not same-object identity.
+------------------------------------------------------------------------
+
+data NASASTIReleaseStage : Set where
+  manuscriptProduction : NASASTIReleaseStage
+  technicalManagementEditorialReview : NASASTIReleaseStage
+  nf1676DAAReview : NASASTIReleaseStage
+  approvedForRelease : NASASTIReleaseStage
+  finalCopyProduction : NASASTIReleaseStage
+  externalDissemination : NASASTIReleaseStage
+
+record NASASTIProcessReceipt : Set where
+  constructor nasa-sti-process-receipt
+  field
+    stage : NASASTIReleaseStage
+    controllingSource : String
+    boundedRule : String
+    processRulePaid : Bool
+    poamsSpecificArtifactRecovered : Bool
+    identifiesAmyReviewObject : Bool
+
+open NASASTIProcessReceipt public
+
+nf1676DAAProcessReceipt : NASASTIProcessReceipt
+nf1676DAAProcessReceipt = nasa-sti-process-receipt
+  nf1676DAAReview
+  "NASA NPR 2200.2C section 4.5 and Appendix E; NF-1676 DAA"
+  "DAA review controls publication/dissemination availability and records restrictions; approval is documented on NF-1676 or its Center implementation."
+  true false false
+
+preApprovalProductionReceipt : NASASTIProcessReceipt
+preApprovalProductionReceipt = nasa-sti-process-receipt
+  manuscriptProduction
+  "NASA NPR 2200.2C Appendix E.1.7.2"
+  "Report production may continue before DAA submission/approval, but the report is not released without an approved DAA."
+  true false false
+
+finalCopyProductionReceipt : NASASTIProcessReceipt
+finalCopyProductionReceipt = nasa-sti-process-receipt
+  finalCopyProduction
+  "NASA NPR 2200.2C Appendix E.1.8"
+  "The Center Technical Publications Office or STI Manager ensures manuscript conformance and recommends/incorporates final changes to produce the final copy."
+  true false false
+
+record AmyPOAMSDAAProcessFit : Set where
+  constructor amy-poams-daa-process-fit
+  field
+    amyDescribedNASAReviewReleaseDependency : Bool
+    nasaProcessAllowsProductionBeforeDAAApproval : Bool
+    nasaProcessRequiresApprovalBeforeRelease : Bool
+    nasaProcessHasFinalCopyStageAfterManuscriptReview : Bool
+    ntrsAcquisitionAfterAmyStatement : Bool
+    processShapeCompatibleWithAmyStatement : Bool
+    processShapeDeterminesSameObject : Bool
+    ntrsAcquisitionEqualsDAAApprovalDate : Bool
+    publicTMContainsItsNF1676Identifier : Bool
+
+open AmyPOAMSDAAProcessFit public
+
+canonicalAmyPOAMSDAAProcessFit : AmyPOAMSDAAProcessFit
+canonicalAmyPOAMSDAAProcessFit = amy-poams-daa-process-fit
+  true true true true true true false false false
+
+------------------------------------------------------------------------
 -- Cross-pollination into existing Amy objects.
 ------------------------------------------------------------------------
 
@@ -261,11 +317,6 @@ existingLayeredReleaseStillRequestsSameObjectWeld = refl
 
 ------------------------------------------------------------------------
 -- Discriminator consequence.
---
--- SAA8-1519855.2 is a newly explicit primary programme identifier, but the Amy
--- identity consumer asks for an Amy-linked release/review identifier. Therefore
--- .2 is retained as a high-value narrowing receipt, not silently upgraded to a
--- paid primaryNASAReleaseIdentifier.
 ------------------------------------------------------------------------
 
 prototypingAgreementNarrowsEarlierStudyReferent : D.IdentityDiscriminatorReceipt
@@ -273,6 +324,13 @@ prototypingAgreementNarrowsEarlierStudyReferent = D.identity-discriminator-recei
   D.primaryNASAReleaseIdentifier
   D.retainedLead
   "Primary NASA SAA8-1519855.2: Advanced Propulsion Theory and Experimental Prototyping, 2016-04-08 through 2018-04-08; exact programme carrier overlapping the October-2016 test, but not an Amy-linked September-2020 release/review identifier."
+  false
+
+nf1676IsNowTheExactReleaseArtifactClass : D.IdentityDiscriminatorReceipt
+nf1676IsNowTheExactReleaseArtifactClass = D.identity-discriminator-receipt
+  D.primaryNASAReleaseIdentifier
+  D.retainedLead
+  "NASA policy identifies NF-1676 / Center DAA implementation as the approval artifact class for external NASA STI release. The POAMS-specific NF-1676/DAA remains unrecovered, so the discriminator is narrowed but unpaid."
   false
 
 ------------------------------------------------------------------------
@@ -298,7 +356,7 @@ currentPOAMSVersionLineageResidual = poams-version-lineage-residual
   "recover PAM 21453 closeout/deliverable records and any attached technical products"
   "recover SAA8-1519855.2 deliverable list, statement of work, amendments, closeout, or manuscript references"
   "recover NASA/TM-20205010911 / M-1531 draft filenames, revision history, STI submission package, or report-number assignment chronology"
-  "recover DAA/NF-1676/STI public-release routing tied to 20205010911, M-1531, POAMS, Eskridge/Nelson/Schoenfeld, or SAA8-1519855 family"
+  "recover the POAMS-specific NF-1676 / Center DAA record and its associated manuscript identity, approval routing, restrictions, approval date and release disposition"
   "recover a primary NASA record mapping MSFC-RMB-QUANTUM-SAA8-1519855-1 to a specific dotted SAA annex if such a mapping exists"
   "recover dated authorship/review metadata showing when Michael P. Schoenfeld entered the manuscript/report chain"
   ReleaseCore.sameLayerSameObjectWeld
