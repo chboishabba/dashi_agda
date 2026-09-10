@@ -11,6 +11,11 @@ STDERR="${SPECIMEN}/discourse-spans-transcript-wide.stderr"
 
 rm -f "$LEDGER" "$RECON" "$STDERR"
 
+head -n 1 "$GRAPH" | grep -q $'^schema\tnode_id.*pnf_subject_crossings.*pnf_clause_crossings' || {
+  echo 'ERROR: discourse graph is stale/non-v2; rerun run_manifold_graph.sh first' >&2
+  exit 1
+}
+
 cargo run --release --bin slr-discourse-spans -- \
   --graph "$GRAPH" \
   --parser "$PARSER" \
@@ -19,8 +24,14 @@ cargo run --release --bin slr-discourse-spans -- \
   --reconstructed "$RECON" \
   2> "$STDERR"
 
-grep -q 'schema=slr-discourse-spans-v2' "$STDERR" || {
-  echo 'ERROR: stale/non-v2 slr-discourse-spans receipt' >&2
+grep -q 'schema=slr-discourse-spans-v3' "$STDERR" || {
+  echo 'ERROR: stale/non-v3 slr-discourse-spans receipt' >&2
+  cat "$STDERR" >&2
+  exit 1
+}
+
+grep -q 'pnf_blocked_rank1_singletons=' "$STDERR" || {
+  echo 'ERROR: PNF structural gate receipt missing' >&2
   cat "$STDERR" >&2
   exit 1
 }
@@ -42,7 +53,6 @@ if rec_par < src_par:
     raise SystemExit(f'ERROR: paragraph separators lost: source={src_par} reconstructed={rec_par}')
 
 # Source-preservation check: reconstruction may insert newline bytes only.
-# Greedily skip extra reconstructed newlines while matching every source byte.
 i = j = 0
 inserted = 0
 while i < len(src) and j < len(rec):
