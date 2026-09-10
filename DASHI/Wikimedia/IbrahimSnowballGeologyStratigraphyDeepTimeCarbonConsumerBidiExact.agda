@@ -82,7 +82,7 @@ sedimentologyDewey = Dewey.mkUnresolvedDewey
 
 sourceToSinkCarbonSource : Attribution.AttributedSource
 sourceToSinkCarbonSource = Attribution.mkDOISource
-  "Robert G. Hilton; Gaël Le Hir; Jérôme Gaillardet and source authors as published"
+  "Elana L. Leithold; Neal E. Blair; Karl W. Wegmann"
   "Source-to-sink sedimentary systems and global carbon burial: A river runs through it"
   "Earth-Science Reviews 153, 30-42"
   "2016"
@@ -94,7 +94,7 @@ sourceToSinkCarbonSource = Attribution.mkDOISource
 
 deepTimeLandOceanSource : Attribution.AttributedSource
 deepTimeLandOceanSource = Attribution.mkDOISource
-  "authors as published"
+  "Brian W. Romans; Stephan A. Graham"
   "A Deep-Time Perspective of Land-Ocean Linkages in the Sedimentary Record"
   "Annual Review of Marine Science 5, 69-94"
   "2013"
@@ -106,7 +106,7 @@ deepTimeLandOceanSource = Attribution.mkDOISource
 
 lacustrineCarbonBurialSource : Attribution.AttributedSource
 lacustrineCarbonBurialSource = Attribution.mkDOISource
-  "authors as published"
+  "Chao Liang et al."
   "Lacustrine organic carbon burial in deep time: Perspectives from major geologic events and tectonic-climatic-ecological coupling"
   "Earth-Science Reviews 272, 105312"
   "2026"
