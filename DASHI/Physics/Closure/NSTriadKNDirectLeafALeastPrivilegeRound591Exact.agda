@@ -27,7 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -39,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Ex
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
+import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
 import DASHI.Physics.Closure.NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact as FTC564
 import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact as T570
 import DASHI.Physics.Closure.NSTriadKNLiveSelfGramAndFluxOrderRound571Exact as O571
@@ -113,8 +114,7 @@ module Compile
 
       combinedBoundIsTwiceLeafABound591 :
         (terminal : Time) →
-        DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact.two
-          * cutoffIndependentLeafABound591 terminal
+        R539.two * cutoffIndependentLeafABound591 terminal
         ≡ Comm.cutoffIndependentCommutatorBound568 commutatorBudget591 terminal
           + initialSelfFluxBound591
 
