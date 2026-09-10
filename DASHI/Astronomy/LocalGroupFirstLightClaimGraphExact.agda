@@ -33,8 +33,8 @@ record ClaimEdge : Set where
 postNode : ClaimNode
 postNode = claimNode privatePostNode "Poppie / NOUS private post — 2026-09-07 23:38"
 
-artefactNode : ClaimNode
-artefactNode = claimNode artefactNode "first-light.png"
+firstLightArtefactNode : ClaimNode
+firstLightArtefactNode = claimNode artefactNode "first-light.png"
 
 lmcClaimNode : ClaimNode
 lmcClaimNode = claimNode posterClaimNode "LMC <=0.03 sigma six-component reproduction claim"
