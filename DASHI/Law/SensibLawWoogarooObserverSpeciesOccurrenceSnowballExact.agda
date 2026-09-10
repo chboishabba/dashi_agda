@@ -48,9 +48,9 @@ frog948283 = observer-occurrence-receipt
   "Stream or creek"
   "Adelotus brevis / Tusked Frog"
   pendingValidation
-  "Observer confirms the recording location as -27.649945, 152.898928; supplied Google Maps screenshot displays that coordinate at the northern golf-course / Opossum Creek wooded interface. The coordinate is observer-confirmed, not yet a native FrogID coordinate export."
-  "Observer-supplied FrogID capture plus separate observer-supplied Google Maps coordinate receipt; taxon remains observer-selected while the visible FrogID status is Pending - Submitted and validator comment is absent."
-  "Acquire FrogID validator outcome and native FrogID coordinate/export; then perform exact GIS joins against the SHG 675 ha landscape, official corridor geometry and project/clearing polygons."
+  "Native FrogID capture table supplied by the observer gives Lat -27.6502, Lng 152.9000. A separate observer-confirmed Google Maps point (-27.649945, 152.898928) remains a useful field-location cross-check, but the FrogID coordinate is now the platform-native location receipt."
+  "Observer-supplied FrogID capture table; taxon remains observer-selected while the visible FrogID status is Pending - Submitted. Platform-native coordinate is source-paid separately from validator identity."
+  "Acquire FrogID validator outcome; then perform an exact GIS join of the native point against Opossum/Woogaroo Creek, official corridor geometry, SHG habitat surfaces and project/clearing polygons."
 
 frog948284 : ObserverOccurrenceReceipt
 frog948284 = observer-occurrence-receipt
@@ -59,11 +59,41 @@ frog948284 = observer-occurrence-receipt
   "Johl Brown"
   "2026-09-05 16:37 QLD"
   "Stream or creek"
-  "taxon not independently visible in supplied capture-detail screenshot"
+  "taxon not independently source-paid in the supplied table/screenshot"
   pendingValidation
-  "User-supplied FrogID screenshot maps the capture essentially co-located with 948283. Observer confirms the same recording location as -27.649945, 152.898928; native FrogID coordinates remain to be acquired."
-  "Observer-supplied FrogID capture plus separate observer location confirmation; do not transfer the 948283 taxon selection to 948284 without its own result receipt."
-  "Acquire the 948284 result/selection, validator outcome and native coordinate/export; preserve it as a distinct acoustic event."
+  "Native FrogID capture table supplied by the observer gives Lat -27.6499, Lng 152.8990. This is a distinct platform-native acoustic event approximately 2 minutes before 948283."
+  "Observer-supplied FrogID capture table; do not transfer the 948283 Adelotus brevis selection to 948284 without its own taxon/result receipt."
+  "Acquire the 948284 taxon/result and validator outcome; retain as a distinct acoustic capture even though the two points are nearby."
+
+record NativePlatformCoordinateReceipt : Set where
+  constructor native-platform-coordinate-receipt
+  field
+    platform : OccurrencePlatform
+    nativeId : String
+    latitude : String
+    longitude : String
+    provenance : String
+    boundedReading : String
+
+open NativePlatformCoordinateReceipt public
+
+frog948283NativeCoordinate : NativePlatformCoordinateReceipt
+frog948283NativeCoordinate = native-platform-coordinate-receipt
+  frogID
+  "948283"
+  "-27.6502"
+  "152.9000"
+  "FrogID Captures Data Table supplied by the observer"
+  "Platform-native coordinate for capture 948283; it is stronger than visual back-correlation but still requires a GIS intersection to establish relation to a legal parcel, habitat polygon or corridor boundary."
+
+frog948284NativeCoordinate : NativePlatformCoordinateReceipt
+frog948284NativeCoordinate = native-platform-coordinate-receipt
+  frogID
+  "948284"
+  "-27.6499"
+  "152.8990"
+  "FrogID Captures Data Table supplied by the observer"
+  "Platform-native coordinate for capture 948284; nearby location does not make it the same event or transfer the 948283 taxon selection."
 
 record ObserverCoordinateReceipt : Set where
   constructor observer-coordinate-receipt
@@ -82,7 +112,7 @@ opossumCreekObserverCoordinate = observer-coordinate-receipt
   "-27.649945, 152.898928"
   "https://maps.app.goo.gl/8At3YCvNZCjg2Xzx8"
   "Observer states they personally confirm this point as where they were standing for the FrogID recordings."
-  "Google Maps display plus first-person confirmation supports the observer-location proposition; it is not yet the native FrogID platform coordinate and is not a survey-grade project/corridor intersection."
+  "Google Maps display plus first-person confirmation is retained as an independent field-location cross-check. Native FrogID coordinates are now separately available and take priority for platform-location claims."
 
 record ObserverCollectionReceipt : Set where
   constructor observer-collection-receipt
@@ -106,20 +136,15 @@ johl1INaturalist = observer-collection-receipt
 ------------------------------------------------------------------------
 
 data ObserverSelectionIsExpertValidation : Set where
-
 data TwoCapturesAreTwoSpeciesConfirmations : Set where
-
 data NearbyMapPinIsExactProjectIntersection : Set where
-
 data VulnerableStatusPaysCriticalHabitat : Set where
-
 data INaturalistCollectionPaysIndividualObservation : Set where
-
 data FrogOccurrenceAutomaticallyPaysLegalTrigger : Set where
-
 data ObserverConfirmedCoordinateIsNativeFrogIDCoordinate : Set where
+data NativeFrogIDCoordinateIsSurveyGradeIntersection : Set where
 
-data ObserverConfirmedCoordinateIsSurveyGradeIntersection : Set where
+data NativeCoordinateTransfersTaxonBetweenCaptures : Set where
 
 noSelectionValidationCollapse : ObserverSelectionIsExpertValidation → ⊥
 noSelectionValidationCollapse ()
@@ -142,8 +167,11 @@ noOccurrenceLegalCollapse ()
 noObserverCoordinatePlatformCollapse : ObserverConfirmedCoordinateIsNativeFrogIDCoordinate → ⊥
 noObserverCoordinatePlatformCollapse ()
 
-noObserverCoordinateSurveyCollapse : ObserverConfirmedCoordinateIsSurveyGradeIntersection → ⊥
-noObserverCoordinateSurveyCollapse ()
+noNativeCoordinateSurveyCollapse : NativeFrogIDCoordinateIsSurveyGradeIntersection → ⊥
+noNativeCoordinateSurveyCollapse ()
+
+noCoordinateTaxonTransfer : NativeCoordinateTransfersTaxonBetweenCaptures → ⊥
+noCoordinateTaxonTransfer ()
 
 record OccurrenceSnowballPolicy : Set where
   constructor occurrence-snowball-policy
