@@ -33,8 +33,8 @@ horseQid = Identity.mkOptionalIdentityDemand
 dingoQid : Identity.ExternalIdentityDemand
 dingoQid = Identity.mkOptionalIdentityDemand
   "Tiwi megaherbivore-predator-access snowball" "taxon identity"
-  "dingo" Identity.wikidataQid
-  (Identity.unresolved "No direct QID re-promoted here from a secondary lookup; retain prior verified identity rather than inventing a new one")
+  "dingo / Canis familiaris dingo" Identity.wikidataQid
+  (Identity.verified "Q38584" "Wikidata dingo item directly inspected 2026-09-11; the item records disputed taxonomic treatments, and identity does not create a Melville predation or trail-use observation")
 
 gameTrailQid : Identity.ExternalIdentityDemand
 gameTrailQid = Identity.mkOptionalIdentityDemand
@@ -47,7 +47,7 @@ savannaEcologyCoordinate = Traversal.dashi-knowledge-coordinate
   "DASHI/Wikimedia/IbrahimSnowballTiwiMegaherbivorePredatorAccessDeweyDoiQidExact.agda"
   "savanna disturbance / predator-access consumer"
   "577.4 — grassland ecology, including savanna ecology"
-  "Q42710; Q10758650; unresolved game-trail QID"
+  "Q42710; Q10758650; Q38584; unresolved game-trail QID"
   "DOI 10.1002/ece3.71622; DOI 10.1890/06-1599.1"
 
 record MegaherbivorePredatorPrimarySource : Set where
