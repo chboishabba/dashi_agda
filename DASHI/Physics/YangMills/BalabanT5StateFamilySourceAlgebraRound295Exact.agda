@@ -4,38 +4,37 @@ module DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact wh
 ------------------------------------------------------------------------
 -- ROUND295 / SOURCE CALCULUS ON THE EXACT FINITE T5 EXPECTATION ALGEBRA
 --
--- R291/R294 still carried a same-object payment saying the covariance produced
--- by the source/J presentation is the selected finite T5 covariance.  Avoid the
--- post-hoc weld: instantiate the normalized source calculus on the T5 finite
--- expectation algebra itself.
+-- Instantiate normalized source calculus on the exact finite T5 expectation
+-- algebra, rather than constructing a second covariance carrier and welding it
+-- afterwards.
 --
 -- Scalar = cutoff -> Q
 -- expectation(F)(n) = E_{mu_n}[F]
--- productObservable   = the exact T5 observable product
--- multiplication      = the exact T5 scalar multiplication pointwise
+-- productObservable   = exact T5 observable product
+-- multiplication      = exact T5 scalar multiplication pointwise
 -- subtraction         = x + (-y) using the exact R278 extension
 --
--- Then `Cumulant.connectedCovariance` is definitionally the R278 connected
--- covariance value at every cutoff.  The only remaining physical source work is
--- to instantiate the literal CMP116/CMP119 J directions and differentiated
--- rooted-shell localization on this SAME finite expectation carrier.
+-- The generic mixed-log identity first gives the signed connected covariance.
+-- Applying the SAME R278 magnitude map then gives the exact finite T5 covariance
+-- magnitude consumed by R291/R284.  No positivity/sign identification is used.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
-import DASHI.Physics.YangMills.BalabanCMP116StateFamilyTwoJNormalizationRound293Exact as R293
+import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRound290Exact as R290
 import DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound291Exact as R291
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 
 ------------------------------------------------------------------------
--- Exact T5 finite expectation algebra as a state-family source algebra.
+-- Exact T5 finite expectation algebra as the source moment algebra.
 ------------------------------------------------------------------------
 
 t5FiniteExpectationAlgebra :
@@ -95,13 +94,15 @@ record DirectT5StateFamilyJPresentation
     ConnectingClusterMeetsBothSupports :
       Nat → TestObservable → TestObservable → Set
 
-    -- This is the single source-facing analytic payment.  The left side is the
-    -- literal CMP116 mixed log-J derivative selected by `meaning` on the exact
-    -- T5 state-family expectation algebra.
-    differentiatedSourceBoundOnSelectedDirections : ∀ cutoff left right →
-      Cumulant.literalMixedSecondLogDerivative meaning
-        (Cumulant.sourceDirectionOf meaning left)
-        (Cumulant.sourceDirectionOf meaning right) cutoff
+    -- Single source-facing analytic payment: the MAGNITUDE of the literal mixed
+    -- log-J response obeys the imported CMP116 rooted-shell localization on the
+    -- exact T5 finite expectation carrier.
+    differentiatedSourceMagnitudeBoundOnSelectedDirections :
+      ∀ cutoff left right →
+      R278.magnitude extension
+        (Cumulant.literalMixedSecondLogDerivative meaning
+          (Cumulant.sourceDirectionOf meaning left)
+          (Cumulant.sourceDirectionOf meaning right) cutoff)
       ≤ Shell.rootedShell shellData
           (scaleOf cutoff) (volumeOf cutoff)
           (connectingRoot cutoff left right)
@@ -109,26 +110,56 @@ record DirectT5StateFamilyJPresentation
 
 open DirectT5StateFamilyJPresentation public
 
-asR293StateFamily :
+mixedLogMagnitudeIsExactFiniteT5CovarianceMagnitude :
+  ∀ {Measure TestObservable}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    (presentation : DirectT5StateFamilyJPresentation dataSet extension)
+    cutoff left right →
+  R278.magnitude extension
+    (Cumulant.literalMixedSecondLogDerivative (meaning presentation)
+      (Cumulant.sourceDirectionOf (meaning presentation) left)
+      (Cumulant.sourceDirectionOf (meaning presentation) right) cutoff)
+  ≡ R278.connectedCovarianceMagnitude extension
+      (Gram.measureSequence dataSet cutoff) left right
+mixedLogMagnitudeIsExactFiniteT5CovarianceMagnitude
+    {extension = extension} presentation cutoff left right =
+  cong (R278.magnitude extension)
+    (cong (λ response → response cutoff)
+      (Cumulant.literalMixedLogDerivativeIsConnectedCovariance
+        (meaning presentation) left right))
+
+asR290Presentation :
   ∀ {Measure TestObservable}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet} →
   (presentation : DirectT5StateFamilyJPresentation dataSet extension) →
-  R293.StateFamilyTwoJSourcePresentation
+  R290.TwoPhysicalJInsertionSourcePresentation
     (Scale presentation) (Volume presentation) (Root presentation)
     Nat TestObservable (SourceDirection presentation)
-asR293StateFamily {dataSet = dataSet} {extension = extension} presentation = record
-  { R293.StateFamilyTwoJSourcePresentation.algebra =
-      t5FiniteExpectationAlgebra dataSet extension
-  ; R293.StateFamilyTwoJSourcePresentation.calculus = calculus presentation
-  ; R293.StateFamilyTwoJSourcePresentation.meaning = meaning presentation
-  ; R293.StateFamilyTwoJSourcePresentation.shellData = shellData presentation
-  ; R293.StateFamilyTwoJSourcePresentation.scaleOf = scaleOf presentation
-  ; R293.StateFamilyTwoJSourcePresentation.volumeOf = volumeOf presentation
-  ; R293.StateFamilyTwoJSourcePresentation.physicalDistance = physicalDistance presentation
-  ; R293.StateFamilyTwoJSourcePresentation.connectingRoot = connectingRoot presentation
-  ; R293.StateFamilyTwoJSourcePresentation.differentiatedSourceBoundOnSelectedDirections =
-      differentiatedSourceBoundOnSelectedDirections presentation
+asR290Presentation {extension = extension} presentation = record
+  { R290.TwoPhysicalJInsertionSourcePresentation.shellData = shellData presentation
+  ; R290.TwoPhysicalJInsertionSourcePresentation.scaleOf = scaleOf presentation
+  ; R290.TwoPhysicalJInsertionSourcePresentation.volumeOf = volumeOf presentation
+  ; R290.TwoPhysicalJInsertionSourcePresentation.physicalDistance =
+      physicalDistance presentation
+  ; R290.TwoPhysicalJInsertionSourcePresentation.connectingRoot =
+      connectingRoot presentation
+  ; R290.TwoPhysicalJInsertionSourcePresentation.sourceDirection =
+      Cumulant.sourceDirectionOf (meaning presentation)
+  ; R290.TwoPhysicalJInsertionSourcePresentation.secondLogSourceDerivativeMagnitude =
+      λ cutoff leftDirection rightDirection →
+        R278.magnitude extension
+          (Cumulant.literalMixedSecondLogDerivative (meaning presentation)
+            leftDirection rightDirection cutoff)
+  ; R290.TwoPhysicalJInsertionSourcePresentation.connectedCovarianceMagnitude =
+      λ cutoff left right →
+        R278.connectedCovarianceMagnitude extension
+          (Gram.measureSequence _) left right
+  ; R290.TwoPhysicalJInsertionSourcePresentation.secondLogDerivativeIsConnectedCovariance =
+      mixedLogMagnitudeIsExactFiniteT5CovarianceMagnitude presentation
+  ; R290.TwoPhysicalJInsertionSourcePresentation.differentiatedSourceBoundOnSelectedDirections =
+      differentiatedSourceMagnitudeBoundOnSelectedDirections presentation
   }
 
 asR291Presentation :
@@ -143,7 +174,7 @@ asR291Presentation presentation = record
   ; R291.DirectT5JInsertionShellPresentation.Root = Root presentation
   ; R291.DirectT5JInsertionShellPresentation.SourceDirection = SourceDirection presentation
   ; R291.DirectT5JInsertionShellPresentation.sourcePresentation =
-      R293.asRound290Presentation (asR293StateFamily presentation)
+      asR290Presentation presentation
   ; R291.DirectT5JInsertionShellPresentation.sourceCovarianceIsSelectedT5Covariance =
       λ cutoff left right → refl
   ; R291.DirectT5JInsertionShellPresentation.ConnectingClusterMeetsBothSupports =
@@ -153,12 +184,15 @@ asR291Presentation presentation = record
 round295ExactT5SourceAlgebraCompilerLevel : ProofLevel
 round295ExactT5SourceAlgebraCompilerLevel = machineChecked
 
+round295LogCovarianceMagnitudeCompilerLevel : ProofLevel
+round295LogCovarianceMagnitudeCompilerLevel = machineChecked
+
 round295SourceCovarianceSelectedT5SameObjectLevel : ProofLevel
 round295SourceCovarianceSelectedT5SameObjectLevel = machineChecked
 
 -- Single remaining D1 physical/source seam on this canonical presentation:
 -- instantiate the actual CMP116/CMP119 normalized source calculus/J directions
--- and published differentiated rooted-shell estimate on the exact T5 finite
--- expectation carrier.
+-- and the published differentiated rooted-shell MAGNITUDE estimate on the exact
+-- T5 finite expectation carrier.
 round295LiteralT5JDirectionLocalizationLevel : ProofLevel
 round295LiteralT5JDirectionLocalizationLevel = conditional
