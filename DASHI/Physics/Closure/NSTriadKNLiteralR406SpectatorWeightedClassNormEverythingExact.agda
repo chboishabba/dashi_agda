@@ -21,11 +21,17 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406SpectatorWeightedClassNormEvery
 -- correct global transpose quotient through R566/R567; the amplitude half is
 -- therefore not an independent spacetime leaf.
 --
--- The delayed-lossy-observer owner now makes operation ordering explicit:
+-- The delayed-lossy-observer owner makes operation ordering explicit:
 -- sign-forgetting / aggregate observers may move before a signed/coherence
 -- consumer only after that consumer is proved to descend through the observer.
--- This is a consumer-indexed firewall, not a global ban on norms/absolute
--- values/means.
+--
+-- Historical R373/R393/R303 then sharpen the live seam: pointwise positivity
+-- or nonpositivity of the selected outer Gram debt is NOT mandatory.  The
+-- preferred weaker route keeps that debt signed through finite aggregation and
+-- time.  R385/R393/R303 already own the generic downstream compilers once the
+-- literal selected nested outer Gram pairs have been equipped with their actual
+-- damped tangent law.  Hence the first same-object residual is now the tangent
+-- weld for the selected `nestedWeightedCompanionCell` Gram pairs.
 --
 -- No cutoff-uniform PDE or spacetime payment is manufactured here.
 ------------------------------------------------------------------------
@@ -75,6 +81,21 @@ normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent = false
 
 aggregateCanMoveBeforeDirectionConsumerWithoutDescent : Bool
 aggregateCanMoveBeforeDirectionConsumerWithoutDescent = false
+
+pointwiseNonpositiveOuterGramRequired : Bool
+pointwiseNonpositiveOuterGramRequired = false
+
+signedOuterGramMayRemainSignedThroughTime : Bool
+signedOuterGramMayRemainSignedThroughTime = true
+
+r385FiniteSignedAggregationReusableAfterTangentWeld : Bool
+r385FiniteSignedAggregationReusableAfterTangentWeld = true
+
+r393R303TemporalCompilerReusableAfterSameObjectIdentity : Bool
+r393R303TemporalCompilerReusableAfterSameObjectIdentity = true
+
+selectedNestedOuterDampedPairTangentWeldClosed : Bool
+selectedNestedOuterDampedPairTangentWeldClosed = false
 
 forensicEarliestForwardLedgerIntegrated : Bool
 forensicEarliestForwardLedgerIntegrated = true
@@ -134,6 +155,18 @@ normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescentIsFalse = refl
 aggregateCanMoveBeforeDirectionConsumerWithoutDescentIsFalse :
   aggregateCanMoveBeforeDirectionConsumerWithoutDescent ≡ false
 aggregateCanMoveBeforeDirectionConsumerWithoutDescentIsFalse = refl
+
+pointwiseNonpositiveOuterGramRequiredIsFalse :
+  pointwiseNonpositiveOuterGramRequired ≡ false
+pointwiseNonpositiveOuterGramRequiredIsFalse = refl
+
+signedOuterGramMayRemainSignedThroughTimeIsTrue :
+  signedOuterGramMayRemainSignedThroughTime ≡ true
+signedOuterGramMayRemainSignedThroughTimeIsTrue = refl
+
+selectedNestedOuterDampedPairTangentWeldClosedIsFalse :
+  selectedNestedOuterDampedPairTangentWeldClosed ≡ false
+selectedNestedOuterDampedPairTangentWeldClosedIsFalse = refl
 
 forensicEarliestForwardLedgerIntegratedIsTrue :
   forensicEarliestForwardLedgerIntegrated ≡ true
