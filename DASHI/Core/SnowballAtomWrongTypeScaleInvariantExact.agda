@@ -36,6 +36,47 @@ record WrongTypeFamily (Atom Classification : Set) : Set₁ where
     classificationCreatesTruth : Bool
 open WrongTypeFamily public
 
+------------------------------------------------------------------------
+-- ACQUISITION / PAYMENT SNOWBALL INVARIANT
+--
+-- Evidence may be acquired opportunistically and retained out of dependency
+-- order.  Acquisition is append-only with respect to the retained carrier;
+-- payment remains consumer/query-relative and receipt-gated.  Thus later
+-- evidence may already be present while the first unpaid dependency remains
+-- authoritative.  This abstracts the receipt-indexed scientific-wall pattern
+-- without making any particular wall, scheduler, or domain universal.
+------------------------------------------------------------------------
+
+record SnowballAcquisitionPaymentInvariant (Atom Receipt : Set) : Set₁ where
+  constructor snowball-acquisition-payment-invariant
+  field
+    acquired : Atom → Bool
+    paid : Atom → Bool
+    paymentReceipt : Atom → Set
+    receiptAdmitsPayment : (a : Atom) → paymentReceipt a → paid a ≡ true
+    outOfOrderAcquisitionMayBeRetained : Bool
+    acquisitionAutomaticallyCreatesPayment : Bool
+    laterAcquisitionMaySkipFirstUnpaidDependency : Bool
+    paymentRemainsConsumerRelative : Bool
+    acquisitionHistoryMayGrowWithoutConclusionPromotion : Bool
+open SnowballAcquisitionPaymentInvariant public
+
+record SnowballAcquisitionPaymentBoundary : Set where
+  constructor snowball-acquisition-payment-boundary
+  field
+    acquisitionOrderEqualsDependencyOrder : Bool
+    retainedEvidenceEqualsPaidDependency : Bool
+    observedAxisEqualsReceiptBearingPayment : Bool
+    allObservedCoordinatesCreateTerminalConclusion : Bool
+    firstUnpaidDependencyRemainsAuthoritative : Bool
+    laterEvidenceMayRemainRetained : Bool
+    paymentRequiresConsumerAdequacy : Bool
+open SnowballAcquisitionPaymentBoundary public
+
+canonicalSnowballAcquisitionPaymentBoundary : SnowballAcquisitionPaymentBoundary
+canonicalSnowballAcquisitionPaymentBoundary =
+  snowball-acquisition-payment-boundary false false false false true true true
+
 record ScaleTransportBoundary : Set where
   constructor scale-transport-boundary
   field
@@ -56,6 +97,8 @@ canonicalScaleTransportBoundary =
 data AtomAtOneScaleIsAtomAtEveryScale : Set where
 data WrongTypeAtOneSystemIsWrongTypeAtEverySystem : Set where
 data SourcePropositionAtomCreatesDownstreamClassification : Set where
+data RetainedAcquisitionCreatesPayment : Set where
+data LaterEvidenceSkipsFirstUnpaidDependency : Set where
 
 aScaleRelativeAtomNeedNotStayAtomic : AtomAtOneScaleIsAtomAtEveryScale → ⊥
 aScaleRelativeAtomNeedNotStayAtomic ()
@@ -65,3 +108,9 @@ wrongTypeRemainsSystemIndexed ()
 
 sourceAtomDoesNotCreateClassification : SourcePropositionAtomCreatesDownstreamClassification → ⊥
 sourceAtomDoesNotCreateClassification ()
+
+retainedAcquisitionDoesNotCreatePayment : RetainedAcquisitionCreatesPayment → ⊥
+retainedAcquisitionDoesNotCreatePayment ()
+
+laterEvidenceDoesNotSkipFirstUnpaidDependency : LaterEvidenceSkipsFirstUnpaidDependency → ⊥
+laterEvidenceDoesNotSkipFirstUnpaidDependency ()
