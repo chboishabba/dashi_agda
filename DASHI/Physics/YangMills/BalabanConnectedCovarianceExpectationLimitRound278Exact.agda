@@ -216,14 +216,14 @@ selectedConnectedCovarianceMagnitudeConverges :
       (Gram.continuumMeasure dataSet)
       (left tests index) (right tests index))
 selectedConnectedCovarianceMagnitudeConverges
-    extension tests index =
+    {dataSet = dataSet} extension tests index =
   magnitudeConverges extension
     (λ cutoff →
       connectedCovarianceValue extension
-        (Gram.measureSequence _ cutoff)
+        (Gram.measureSequence dataSet cutoff)
         (left tests index) (right tests index))
     (connectedCovarianceValue extension
-      (Gram.continuumMeasure _)
+      (Gram.continuumMeasure dataSet)
       (left tests index) (right tests index))
     (selectedConnectedCovarianceConverges extension tests index)
 
