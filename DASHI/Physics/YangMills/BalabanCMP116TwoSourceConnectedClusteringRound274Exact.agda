@@ -29,7 +29,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-open ℚP using (_<?_)
+open ℚP using (_<?_; _≤?_)
 open import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -54,6 +54,9 @@ halfPowerIsRationalPower (suc depth)
 
 halfStrictlyBelowOne : Geo.half < 1ℚ
 halfStrictlyBelowOne = toWitness {a? = Geo.half <? 1ℚ} _
+
+quarterNonnegative : 0ℚ ≤ Shell.quarter
+quarterNonnegative = toWitness {a? = 0ℚ ≤? Shell.quarter} _
 
 ------------------------------------------------------------------------
 -- Literal two-source connected-shell source surface.
@@ -137,13 +140,7 @@ asCorrelationDecayTrajectory dataSet = record
   ; Unified.QuantitativeCorrelationDecayTrajectory.amplitude = Shell.quarter
   ; Unified.QuantitativeCorrelationDecayTrajectory.ratio = Geo.half
   ; Unified.QuantitativeCorrelationDecayTrajectory.amplitudeNonnegative =
-      Shell.rootedShellBelowQuarterHalfPower
-        (shellData dataSet)
-        (scaleOf dataSet (stateAtScale dataSet zero))
-        (volumeOf dataSet (stateAtScale dataSet zero))
-        (connectingRoot dataSet (stateAtScale dataSet zero)
-          (dummyLeft dataSet) (dummyRight dataSet)) zero
-        |> quarterNonnegative
+      quarterNonnegative
   ; Unified.QuantitativeCorrelationDecayTrajectory.ratioNonnegative =
       Geo.halfNonnegative
   ; Unified.QuantitativeCorrelationDecayTrajectory.ratioStrictlyBelowOne =
@@ -153,17 +150,6 @@ asCorrelationDecayTrajectory dataSet = record
         connectedCovarianceGeometricBound dataSet
           (stateAtScale dataSet scale) left right
   }
-  where
-  -- These helpers are never evaluated: they exist only to avoid deriving the
-  -- positivity of 1/4 from an unrelated physical shell instance.  R275 will
-  -- replace this temporary structural witness by direct rational positivity.
-  postulate
-    dummyLeft dummyRight :
-      ∀ {Scale Volume Root State Observable} →
-      TwoSourceConnectedRootedShellData Scale Volume Root State Observable →
-      Observable
-    quarterNonnegative : ∀ {x : ℚ} → x ≤ Shell.quarter → 0ℚ ≤ Shell.quarter
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
 
 round274RootedShellToConnectedCorrelationCompilerLevel : ProofLevel
 round274RootedShellToConnectedCorrelationCompilerLevel = machineChecked
