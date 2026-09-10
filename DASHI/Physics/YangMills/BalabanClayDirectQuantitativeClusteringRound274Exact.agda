@@ -20,10 +20,9 @@ module DASHI.Physics.YangMills.BalabanClayDirectQuantitativeClusteringRound274Ex
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
-import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 
 record DirectQuantitativeContinuumClustering
@@ -45,15 +44,10 @@ compileDirectQuantitativeClusteringToTransferGap {spectrum = spectrum} payment =
     (clusteringUpper payment)
     (candidateGapPositive payment)
 
-------------------------------------------------------------------------
--- The generic T5 field is compatibility packaging, not a proof producer.
-------------------------------------------------------------------------
-
 data OpaqueT5ClusteredFieldCreatesQuantitativeClusteringPermission : Set where
 
 opaqueT5ClusteredDoesNotCreateQuantitativeClustering :
-  OpaqueT5ClusteredFieldCreatesQuantitativeClusteringPermission →
-  Data.Empty.⊥
+  OpaqueT5ClusteredFieldCreatesQuantitativeClusteringPermission → ⊥
 opaqueT5ClusteredDoesNotCreateQuantitativeClustering ()
 
 record Round274Boundary : Set where
@@ -85,6 +79,5 @@ canonicalRound274Boundary =
 round274DirectQuantitativeClusteringCompilerLevel : ProofLevel
 round274DirectQuantitativeClusteringCompilerLevel = machineChecked
 
--- Physical same-family quantitative clustering remains the live theorem.
 round274PhysicalQuantitativeClusteringLevel : ProofLevel
 round274PhysicalQuantitativeClusteringLevel = conditional
