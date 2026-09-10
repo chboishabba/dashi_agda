@@ -4,13 +4,21 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact 
 -- ROUND592 / CANONICAL LEAF-A FRONTIER = ONE R503 INEQUALITY
 --
 -- R496-R500 already construct the exact live off-diagonal nonseparable
--- resolvent companion and prove
+-- resolvent companion.  At pair level R496 defines
+--
+--   C_{alpha,beta}
+--     = (1/2) * w_{alpha,beta}
+--         * ( Re<G_alpha,D_beta> + Re<D_alpha,G_beta> ),
+--
+-- where w_{alpha,beta} is the literal positive Cauchy resolvent
+-- 1/(lambda_alpha+lambda_beta), represented division-free by R290/R389.
+-- Exact finite fibre/global aggregation and standard integration transport give
 --
 --   integral(R406 remainder) = 4 * integratedDirectCompanion.
 --
 -- R503 then says the only analytic content of leaf A is literally
 --
---   4 * integratedDirectCompanion(N,T) <= B(T)
+--   forall N,T, 4 * integratedDirectCompanion(N,T) <= B(T)
 --
 -- with B independent of N.
 --
