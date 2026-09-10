@@ -173,5 +173,5 @@ existingNDimBoundary = NDim.canonicalNDimParetoHyperfabricBoundary
 existingSymmetrySearchBoundary : Search.RSA260SymmetryResearchRoadmapBoundary
 existingSymmetrySearchBoundary = Search.currentRSA260SymmetryResearchRoadmapBoundary
 
-existingBidiReceipt : Bidi.RSA260SymmetryBidiExecutionReceipt
-existingBidiReceipt = Bidi.currentRSA260SymmetryBidiExecutionReceipt
+existingBidiRoadmap : Bidi.RSA260SymmetryExecutionRoadmapBoundary
+existingBidiRoadmap = Bidi.currentRSA260SymmetryExecutionRoadmapBoundary
