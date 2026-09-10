@@ -38,6 +38,11 @@ files=(
   DASHI/Culture/AmyEskridgeApplicationTransformationExact.agda
   DASHI/Culture/AmyEskridgeCorporateCustodySurfaceExact.agda
   DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
+  DASHI/Culture/AmyEskridgeInstituteTeamSuccessionSurfaceExact.agda
+  DASHI/Culture/AmyEskridgeHoloChronPostDeathDissolutionFrontierExact.agda
+  DASHI/Culture/MissingDeceasedFullApplicationAcquisitionExact.agda
+  DASHI/Culture/MissingDeceasedReconstructionCostMatrixExact.agda
+  DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
   DASHI/Culture/AmyEskridgeCorporateInstitutionalChronologySnowballExact.agda
   DASHI/Culture/AmyEskridgePostDeathTransitionSnowballWeldExact.agda
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
@@ -115,6 +120,14 @@ grep -q 'amyApplicationFirstMissingLeafStillDerivedObjectIdentity' DASHI/Culture
 grep -q 'currentComposedPOAMSFrontier' DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
 grep -q 'successorHandoverRequiresSameCarrierEvidence' DASHI/Culture/AmyEskridgePostDeathTransitionSnowballWeldExact.agda
 
+# Institute/HoloChron succession candidates are retained without same-carrier promotion.
+grep -q 'poamsExactIdentityStillUnpaid' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'amyApplicationAcquisitionRemainsHighestPriority' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'instituteReconstructionCostStillUnknown' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'richard2018TeamDoesNotPaySameExperimentPossession' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'holochronTechnicalAssetDispositionStillUnlocated' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'exactDerivativeIdentityStillPrecedesSameCarrierSuccession' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
@@ -122,4 +135,4 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda \
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 
-echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT/POAMS-custody snowball validation checks passed"
+echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT/POAMS/custody/succession snowball validation checks passed"
