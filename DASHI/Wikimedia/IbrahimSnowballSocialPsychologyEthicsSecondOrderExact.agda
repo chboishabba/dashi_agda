@@ -6,7 +6,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Discovery
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
-import DASHI.Wikimedia.IbrahimSnowballChildPsychologyDissentParentingSecondOrderExact as Prior
+import DASHI.Wikimedia.IbrahimSnowballChildPsychologyDissentTeachingSecondOrderExact as Prior
 
 ------------------------------------------------------------------------
 -- SECOND-ORDER BIDI WALK: SOCIAL PSYCHOLOGY <-> PSYCHOLOGY/SOCIOLOGY,
