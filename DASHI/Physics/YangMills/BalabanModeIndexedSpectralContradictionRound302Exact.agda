@@ -22,6 +22,7 @@ module DASHI.Physics.YangMills.BalabanModeIndexedSpectralContradictionRound302Ex
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Sigma using (fst; snd)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -53,36 +54,21 @@ record ModeIndexedSpectralRateData
     zeroEnergy gapCandidate : Energy
     PositiveEnergy : Energy → Set
     StrictlyBelow : Energy → Energy → Set
-
     ratioOfEnergy : Energy → ℚ
-
     candidateRatioIsHalf : ratioOfEnergy gapCandidate ≡ Geo.half
-
     ratioNonnegativeForPositiveEnergy : ∀ energy →
       PositiveEnergy energy → 0ℚ ≤ ratioOfEnergy energy
-
     positiveEnergyFromStrictDecay : ∀ energy →
-      0ℚ ≤ ratioOfEnergy energy → ratioOfEnergy energy < 1ℚ →
-      PositiveEnergy energy
-
+      0ℚ ≤ ratioOfEnergy energy → ratioOfEnergy energy < 1ℚ → PositiveEnergy energy
     positiveEnergyHasStrictDecay : ∀ energy →
       PositiveEnergy energy → ratioOfEnergy energy < 1ℚ
-
     positiveSubgapHasSlowerDecay : ∀ energy →
       PositiveEnergy energy → StrictlyBelow energy gapCandidate →
       Geo.half < ratioOfEnergy energy
-
-    -- SAME spectral rate: the positive component selected by R300 uses the
-    -- physical ratio of this exact energy, not an independently named q.
     componentRatioIsEnergyRatio : ∀ energy mode →
       R300.subgapRatio decomposition energy mode ≡ ratioOfEnergy energy
-
-    -- Direct canonical B1 upper on exactly the covariance selected by the mode.
-    -- R284/R296 are producer routes for this field; R302 does not require their
-    -- larger records once the terminal inequality is available.
     modeCorrelationBelowFastEnvelope : ∀ energy mode time →
-      let observable =
-            R297.modeObservableFromActualNonzeroFamily family energy mode
+      let observable = R297.modeObservableFromActualNonzeroFamily family energy mode
       in
       R278.connectedCovarianceMagnitude extension
         (Gram.continuumMeasure dataSet)
@@ -139,8 +125,7 @@ candidateEnergyPositive :
   PositiveEnergy rates (gapCandidate rates)
 candidateEnergyPositive rates =
   positiveEnergyFromStrictDecay rates (gapCandidate rates)
-    (candidateRatioNonnegative rates)
-    (candidateRatioStrictlyBelowOne rates)
+    (candidateRatioNonnegative rates) (candidateRatioStrictlyBelowOne rates)
 
 NoPositiveSubgapMode :
   ∀ {Measure TestObservable Energy Vector}
@@ -173,36 +158,26 @@ excludePositiveSubgapModes :
     (rates : ModeIndexedSpectralRateData
       dataSet extension tests quantitative family decomposition) →
   NoPositiveSubgapMode rates
-excludePositiveSubgapModes
-    {extension = extension} {family = family} {decomposition = decomposition}
+excludePositiveSubgapModes {family = family} {decomposition = decomposition}
     dominance rates energy positive below mode =
   let
-    observable = R297.modeObservableFromActualNonzeroFamily family energy mode
     weight = R300.selectedOverlapWeight decomposition energy mode
     componentRatio = R300.subgapRatio decomposition energy mode
-
     weightPositive = R300.selectedOverlapWeightPositive decomposition energy mode
-
     slowerEnergy = positiveSubgapHasSlowerDecay rates energy positive below
     slowerComponent : Geo.half < componentRatio
-    slowerComponent =
-      subst (λ q → Geo.half < q)
-        (sym (componentRatioIsEnergyRatio rates energy mode)) slowerEnergy
-
+    slowerComponent = subst (λ q → Geo.half < q)
+      (sym (componentRatioIsEnergyRatio rates energy mode)) slowerEnergy
     componentStrict : componentRatio < 1ℚ
-    componentStrict =
-      subst (λ q → q < 1ℚ)
-        (sym (componentRatioIsEnergyRatio rates energy mode))
-        (positiveEnergyHasStrictDecay rates energy positive)
-
+    componentStrict = subst (λ q → q < 1ℚ)
+      (sym (componentRatioIsEnergyRatio rates energy mode))
+      (positiveEnergyHasStrictDecay rates energy positive)
     witness = GeoSep.eventuallySlowDominatesFast dominance
-      Shell.quarter weight componentRatio
-      R274.quarterNonnegative weightPositive slowerComponent componentStrict
-    time = Agda.Builtin.Sigma.fst witness
-    fastBelowSlow = Agda.Builtin.Sigma.snd witness
-
-    lower = R300.spectralComponentBelowCorrelation
-      decomposition energy mode time
+      Shell.quarter weight componentRatio R274.quarterNonnegative
+      weightPositive slowerComponent componentStrict
+    time = fst witness
+    fastBelowSlow = snd witness
+    lower = R300.spectralComponentBelowCorrelation decomposition energy mode time
     upper = modeCorrelationBelowFastEnvelope rates energy mode time
   in
   GeoSep.strictSandwichImpossible lower upper fastBelowSlow
@@ -212,29 +187,19 @@ record Round302Boundary : Set where
   field
     observableToModeInverseRequired : Bool
     observableToModeInverseRequiredIsFalse : observableToModeInverseRequired ≡ false
-
     globalRatioToEnergyInverseRequired : Bool
-    globalRatioToEnergyInverseRequiredIsFalse :
-      globalRatioToEnergyInverseRequired ≡ false
-
+    globalRatioToEnergyInverseRequiredIsFalse : globalRatioToEnergyInverseRequired ≡ false
     separateSpectralLowerLeafRequired : Bool
-    separateSpectralLowerLeafRequiredIsFalse :
-      separateSpectralLowerLeafRequired ≡ false
-
+    separateSpectralLowerLeafRequiredIsFalse : separateSpectralLowerLeafRequired ≡ false
     directModeIndexedContradictionCompilerOwned : Bool
     directModeIndexedContradictionCompilerOwnedIsTrue :
       directModeIndexedContradictionCompilerOwned ≡ true
 
 canonicalRound302Boundary : Round302Boundary
-canonicalRound302Boundary =
-  round302-boundary false refl false refl false refl true refl
+canonicalRound302Boundary = round302-boundary false refl false refl false refl true refl
 
 round302ModeIndexedContradictionCompilerLevel : ProofLevel
 round302ModeIndexedContradictionCompilerLevel = machineChecked
 
--- Genuine spectral source seam after the compiler reduction: one same-Hamiltonian
--- positive-component decomposition plus local energy/ratio semantics on the exact
--- reconstructed continuum covariance carrier.  Positive-time cyclicity remains
--- an upstream physical realization of the quantitative cyclicity record.
 round302SameHamiltonianSpectralRateRealizationLevel : ProofLevel
 round302SameHamiltonianSpectralRateRealizationLevel = conditional
