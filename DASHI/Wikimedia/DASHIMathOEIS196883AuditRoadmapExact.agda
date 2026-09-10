@@ -9,11 +9,11 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Base369DecimalCompletionMonsterBulkBidiExact as Bulk
 import DASHI.Moonshine.Base369MonsterTwoComponentCompletionBidiExact as TwoComponent
 import DASHI.Wikimedia.Base369OEISWikidataTeslaSnowballExact as Power3
 import DASHI.Wikimedia.Base369Z3TriadOEISRegressionSnowballExact as Power7
-import DASHI.Wikimedia.IbrahimBase369JOEISMoonshineSnowballExact as JOEIS
 import DASHI.Wikimedia.JInvariantOEISExactPrefixSameObjectSnowballExact as JPrefix
 import DASHI.Wikimedia.IbrahimJacquardBooleanMaskOEISSnowballExact as Jacquard
 import DASHI.Wikimedia.IbrahimEtaPartitionGeneratingFunctionOEISSnowballExact as Partition
@@ -23,7 +23,7 @@ import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
 ------------------------------------------------------------------------
 -- DASHI MATH / OEIS AUDIT AROUND THE 196883 CONSTRUCTION
 --
--- This owner classifies OEIS contacts by relationship strength.  OEIS is used
+-- This owner classifies OEIS contacts by relationship strength. OEIS is used
 -- as external sequence identity/calibration, never as a constructor of DASHI
 -- semantics, Monster representation theory, Navier-Stokes physics, textile
 -- execution, or cultural attribution.
@@ -44,7 +44,7 @@ import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
 --                           ..., 65610, 196830, 590490, ...
 --
 -- Therefore 196830 is not merely an isolated local numeral: the whole
--- 10*3^n numerical family has a direct OEIS identity.  That sequence still
+-- 10*3^n numerical family has a direct OEIS identity. That sequence still
 -- does not explain the +53/+54 residual or Monster/moonshine semantics.
 ------------------------------------------------------------------------
 
@@ -74,8 +74,8 @@ open OEISAuditRow public
 -- 1. Central Base369 / Monster arithmetic is exact locally.
 ------------------------------------------------------------------------
 
-baseFineIs19683 : Bulk.JScale.jFineFrequency ≡ 19683
-baseFineIs19683 = refl
+baseFineIs19683 : Geometry.hyperfabricStateCount ≡ 19683
+baseFineIs19683 = Geometry.hyperfabricStateCountIs19683
 
 bulkIs196830 : Bulk.base369TenChannelBulk ≡ 196830
 bulkIs196830 = Bulk.base369TenChannelBulkIs196830
@@ -242,15 +242,28 @@ piContinuedFractionRow = oeis-audit-row
   "reuse as canonical OEIS falsification/provenance regression: external sequence can detect source-table drift without becoming proof authority"
 
 ------------------------------------------------------------------------
--- 3. Existing owner receipts retained directly.
+-- 3. Existing owner receipts retained directly, with explicit types.
 ------------------------------------------------------------------------
 
+powerThreeIdentity : Power3.Identity.ExternalIdentityDemand
 powerThreeIdentity = Power3.oeisA000244Id
+
+powerSevenBoundary : Power7.TriadOEISSnowballBoundary
 powerSevenBoundary = Power7.canonicalTriadOEISSnowballBoundary
+
+jPrefixFactorsBoundary : JPrefix.PrefixFactorsThroughProjection
 jPrefixFactorsBoundary = JPrefix.canonicalPrefixFactorsThroughProjection
+
+jacquardBoundary : Jacquard.JacquardMaskCardinalityFrontier
 jacquardBoundary = Jacquard.currentJacquardMaskCardinalityFrontier
+
+partitionBoundary : Partition.PartitionGeneratingFunctionProjection
 partitionBoundary = Partition.canonicalPartitionGeneratingFunctionProjection
+
+primorialBoundary : Primorial.PrimorialFactorAddressConcreteReceipt
 primorialBoundary = Primorial.primorialFactorAddressConcreteReceipt
+
+allPairsBoundary : AllPairs.WikipediaAllPairsBoundary
 allPairsBoundary = AllPairs.canonicalWikipediaAllPairsBoundary
 
 ------------------------------------------------------------------------
@@ -293,8 +306,13 @@ griessSource = Attribution.mkDOISource
   "Monster/Griess-algebra construction provenance; does not prove DASHI cross-domain interpretations"
   Attribution.publicAttribution
 
+conwayNortonAttribution : AttributionSnowball.SourceRoleSnowballReceipt conwayNortonSource
 conwayNortonAttribution = AttributionSnowball.canonicalSourceRoleSnowballReceipt conwayNortonSource
+
+flmAttribution : AttributionSnowball.SourceRoleSnowballReceipt flmSource
 flmAttribution = AttributionSnowball.canonicalSourceRoleSnowballReceipt flmSource
+
+griessAttribution : AttributionSnowball.SourceRoleSnowballReceipt griessSource
 griessAttribution = AttributionSnowball.canonicalSourceRoleSnowballReceipt griessSource
 
 ------------------------------------------------------------------------
