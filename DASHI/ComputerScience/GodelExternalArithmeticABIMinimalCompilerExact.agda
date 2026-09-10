@@ -3,6 +3,7 @@ module DASHI.ComputerScience.GodelExternalArithmeticABIMinimalCompilerExact wher
 open import DASHI.Core.Prelude
 
 import DASHI.ComputerScience.GodelDiagonalProvabilityContractExact as Godel
+import DASHI.ComputerScience.GodelArithmetisedFormalSystemShapeAuthorityExact as Shape
 
 ------------------------------------------------------------------------
 -- MINIMAL EXTERNAL-ARITHMETIC -> DASHI ABI COMPILER
@@ -11,9 +12,9 @@ import DASHI.ComputerScience.GodelDiagonalProvabilityContractExact as Godel
 -- development, or another machine-checked arithmetic may instantiate this
 -- record, but theorem names do not cross the ABI by themselves.
 --
--- The important correction is that unary formulas, binary formulas and
--- sentences are RESTRICTED FIBRES of one source formula carrier.  They are not
--- three aliases for the raw source syntax.
+-- Unary formulas, binary formulas and sentences are RESTRICTED FIBRES of one
+-- source formula carrier.  The source's actual free-variable relation is also
+-- retained, so those fibres are not merely nominal wrappers.
 ------------------------------------------------------------------------
 
 record ExternalArithmeticSource : Set₁ where
@@ -22,9 +23,27 @@ record ExternalArithmeticSource : Set₁ where
     RawFormula : Set
     Variable : Set
 
+    FreeIn : Variable → RawFormula → Set
+    distinguishedUnary : Variable
+    distinguishedBinaryLeft : Variable
+    distinguishedBinaryRight : Variable
+
     UnaryAdmissible : RawFormula → Set
     BinaryAdmissible : RawFormula → Set
     Closed : RawFormula → Set
+
+    unaryFreeOnly :
+      (φ : RawFormula) → UnaryAdmissible φ →
+      (v : Variable) → FreeIn v φ → v ≡ distinguishedUnary
+
+    binaryFreeOnly :
+      (φ : RawFormula) → BinaryAdmissible φ →
+      (v : Variable) → FreeIn v φ →
+      (v ≡ distinguishedBinaryLeft) ⊎
+      (v ≡ distinguishedBinaryRight)
+
+    binaryVariablesDistinct :
+      distinguishedBinaryLeft ≡ distinguishedBinaryRight → ⊥
 
     RawDeriv : RawFormula → Set
 
@@ -88,9 +107,6 @@ record RestrictedSentence
 
 open RestrictedSentence public
 
--- The proof carrier retains the exact source formula proved by the indexed
--- derivation.  `proves` below then asks that this source formula is exactly the
--- raw formula of the requested closed-sentence fibre.
 record RestrictedProof
     (S : ExternalArithmeticSource) : Set where
   constructor restrictedProof
@@ -153,6 +169,24 @@ compileExternalArithmeticSystem S =
         restrictedSentence (consistencyRaw S) (consistencyClosed S)
     }
 
+compileExternalShapeAuthority :
+  (S : ExternalArithmeticSource) →
+  Shape.FormulaSentenceShapeAuthority (compileExternalArithmeticSystem S)
+compileExternalShapeAuthority S =
+  record
+    { Variable = Variable S
+    ; distinguishedUnary = distinguishedUnary S
+    ; distinguishedBinaryLeft = distinguishedBinaryLeft S
+    ; distinguishedBinaryRight = distinguishedBinaryRight S
+    ; FreeInUnary = λ v φ → FreeIn S v (rawUnary φ)
+    ; FreeInBinary = λ v φ → FreeIn S v (rawBinary φ)
+    ; unaryHasNoOtherFreeVariable = λ v φ evidence →
+        unaryFreeOnly S (rawUnary φ) (unaryOK φ) v evidence
+    ; binaryHasNoOtherFreeVariable = λ v φ evidence →
+        binaryFreeOnly S (rawBinary φ) (binaryOK φ) v evidence
+    ; binaryDistinguishedVariablesDistinct = binaryVariablesDistinct S
+    }
+
 ------------------------------------------------------------------------
 -- Source substitution is deliberately a SECOND coordinate.  Merely compiling
 -- the syntax/provability ABI does not create an arithmetised substitution law.
@@ -209,6 +243,8 @@ record ExternalArithmeticABICompilerBoundary : Set where
     restrictedUnaryCarrierCompilerOwned : Bool
     restrictedBinaryCarrierCompilerOwned : Bool
     restrictedSentenceCarrierCompilerOwned : Bool
+    sourceFreeVariableRelationRetained : Bool
+    shapeAuthorityCompiledFromSourceProofs : Bool
     indexedDerivationProjectionOwned : Bool
     substitutionCompiledOnlyFromExactSourceLaw : Bool
     rawFormulaAliasesAcceptedAsShapeEvidence : Bool
@@ -218,4 +254,4 @@ canonicalExternalArithmeticABICompilerBoundary :
   ExternalArithmeticABICompilerBoundary
 canonicalExternalArithmeticABICompilerBoundary =
   externalArithmeticABICompilerBoundary
-    true true true true true false false
+    true true true true true true true false false
