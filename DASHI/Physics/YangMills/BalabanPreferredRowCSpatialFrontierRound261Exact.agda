@@ -4,8 +4,8 @@ module DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound261Exact 
 ------------------------------------------------------------------------
 -- ROUND261/R269 / CURRENT ROW-C SPATIAL FRONTIER
 --
--- Introspection has now removed the broad generator-row equality and the opaque
--- commutator socket from the preferred path.  The exact spatial source cut is:
+-- Introspection removed the broad generator-row equality and opaque commutator
+-- socket from the preferred path. The exact spatial source cut is now:
 --
 --   S1 literal CMP109 finite-density Langevin differentiation;
 --   S2 same-object R260 marked comparison + reference anchor;
@@ -52,7 +52,6 @@ literalWeightedAnchoredDebtRowLevel : ProofLevel
 literalWeightedAnchoredDebtRowLevel =
   Anchor.round268WeightedAnchoredDebtRowLevel
 
--- Closed consequences.
 typedCommutatorCompilerLevel : ProofLevel
 typedCommutatorCompilerLevel = Langevin.typedLangevinCommutatorCompilerLevel
 
