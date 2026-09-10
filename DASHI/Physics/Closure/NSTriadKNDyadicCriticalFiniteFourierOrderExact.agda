@@ -9,7 +9,8 @@ module DASHI.Physics.Closure.NSTriadKNDyadicCriticalFiniteFourierOrderExact wher
 -- an arbitrary finite Fourier list against any nonnegative modal mass.
 --
 -- This is exactly the finite-carrier transport that R517 left after the scalar
--- root monotonicity seam.  No Navier--Stokes cancellation estimate appears.
+-- root monotonicity seam.  No Navier--Stokes cancellation estimate appears and
+-- no postulate is introduced.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -18,6 +19,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat.Base using (_<_)
 
 import Real as BishopReal
+import RealProperties as BishopProps
 
 import DASHI.Foundations.BishopFiniteWeightedSumOrderExact as Sum
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -25,6 +27,12 @@ import DASHI.Physics.Closure.NSPeriodicConcreteIntegerModeNorm as ModeNorm
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exact as R518
 import DASHI.Physics.Closure.NSTriadKNBishopNatRootCriticalMultiplierBoundaryRound519Exact as R519
+
+-- Tiny local membership type avoids importing another list-membership API into
+-- this narrow finite-order owner.
+data OccursIn {A : Set} (x : A) : List A → Set where
+  here : ∀ {rest} → OccursIn x (x ∷ rest)
+  there : ∀ {y rest} → OccursIn x rest → OccursIn x (y ∷ rest)
 
 lowerCriticalWeight : Z3.FourierMode → BishopReal.ℝ
 lowerCriticalWeight k = R519.sqrtNat (R518.canonicalDyadicLowerSquare k)
@@ -34,18 +42,6 @@ physicalCriticalWeight k = R519.sqrtNat (ModeNorm.modeNatNormSquared k)
 
 upperCriticalWeight : Z3.FourierMode → BishopReal.ℝ
 upperCriticalWeight k = R519.sqrtNat (R518.canonicalDyadicUpperSquare k)
-
-record PositiveShellList : Set where
-  constructor positive-shell-list
-  field
-    modes : List Z3.FourierMode
-    shellPositive : (k : Z3.FourierMode) → OccursIn k modes → 0 < Shell.shellIndex k
-
--- Tiny local membership type avoids importing a second list-membership API into
--- this narrow finite-order owner.
-data OccursIn {A : Set} (x : A) : List A → Set where
-  here : ∀ {rest} → OccursIn x (x ∷ rest)
-  there : ∀ {y rest} → OccursIn x rest → OccursIn x (y ∷ rest)
 
 modewiseLowerCriticalWeight :
   (k : Z3.FourierMode) →
@@ -59,18 +55,13 @@ modewiseLowerCriticalWeight k positive =
 
 modewiseUpperCriticalWeight :
   (k : Z3.FourierMode) →
+  0 < Shell.shellIndex k →
   BishopReal._≤_ (physicalCriticalWeight k) (upperCriticalWeight k)
-modewiseUpperCriticalWeight k =
+modewiseUpperCriticalWeight k positive =
   R519.physicalRootBelowUpper
     (R519.canonicalModewiseCriticalMultiplierComparison
       (R518.canonicalLowerSquareBelowModeNorm k positive)
       (R518.modeNormBelowCanonicalUpperSquare k))
-  where
-  -- The upper root inequality itself does not mathematically require this
-  -- positive-shell witness, but the R519 three-way comparison packages both
-  -- sides.  For lists used below positivity is supplied externally.  This
-  -- pointwise helper is therefore not exported as the canonical upper theorem.
-  postulate positive : 0 < Shell.shellIndex k
 
 record FiniteCriticalWeightComparison
     (items : List Z3.FourierMode)
@@ -111,10 +102,7 @@ buildFiniteCriticalWeightComparison items mass positive massNN = record
     BishopReal._≤_
       (Sum.weightedSum lowerCriticalWeight mass xs)
       (Sum.weightedSum physicalCriticalWeight mass xs)
-  lowerGo [] pos = Sum.finiteWeightedSumMonotone
-    lowerCriticalWeight physicalCriticalWeight mass
-    (λ k → modewiseLowerCriticalWeight k (pos k ()))
-    massNN []
+  lowerGo [] pos = BishopProps.≤-refl
   lowerGo (k ∷ rest) pos =
     let
       head = modewiseLowerCriticalWeight k (pos k here)
@@ -122,8 +110,8 @@ buildFiniteCriticalWeightComparison items mass positive massNN = record
         (x : Z3.FourierMode) → OccursIn x rest → 0 < Shell.shellIndex x
       tailPos x member = pos x (there member)
     in
-    RealProperties.+-mono-≤
-      (RealProperties.*-monoʳ-≤-nonNeg head (massNN k))
+    BishopProps.+-mono-≤
+      (BishopProps.*-monoʳ-≤-nonNeg head (massNN k))
       (lowerGo rest tailPos)
 
   upperGo :
@@ -132,19 +120,16 @@ buildFiniteCriticalWeightComparison items mass positive massNN = record
     BishopReal._≤_
       (Sum.weightedSum physicalCriticalWeight mass xs)
       (Sum.weightedSum upperCriticalWeight mass xs)
-  upperGo [] pos = RealProperties.≤-refl
+  upperGo [] pos = BishopProps.≤-refl
   upperGo (k ∷ rest) pos =
     let
-      comparison = R519.canonicalModewiseCriticalMultiplierComparison
-        (R518.canonicalLowerSquareBelowModeNorm k (pos k here))
-        (R518.modeNormBelowCanonicalUpperSquare k)
-      head = R519.physicalRootBelowUpper comparison
+      head = modewiseUpperCriticalWeight k (pos k here)
       tailPos :
         (x : Z3.FourierMode) → OccursIn x rest → 0 < Shell.shellIndex x
       tailPos x member = pos x (there member)
     in
-    RealProperties.+-mono-≤
-      (RealProperties.*-monoʳ-≤-nonNeg head (massNN k))
+    BishopProps.+-mono-≤
+      (BishopProps.*-monoʳ-≤-nonNeg head (massNN k))
       (upperGo rest tailPos)
 
 roundFiniteHOneHalfMultiplierTransportClosed : Bool
@@ -153,9 +138,15 @@ roundFiniteHOneHalfMultiplierTransportClosed = true
 roundIntroducesNSCancellationEstimate : Bool
 roundIntroducesNSCancellationEstimate = false
 
+roundUsesPostulate : Bool
+roundUsesPostulate = false
+
 roundClayPromotion : Bool
 roundClayPromotion = false
 
 roundFiniteHOneHalfMultiplierTransportClosedIsTrue :
   roundFiniteHOneHalfMultiplierTransportClosed ≡ true
 roundFiniteHOneHalfMultiplierTransportClosedIsTrue = refl
+
+roundUsesPostulateIsFalse : roundUsesPostulate ≡ false
+roundUsesPostulateIsFalse = refl
