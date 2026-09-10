@@ -2,372 +2,139 @@
 
 ## Purpose
 
-This brief supports one bounded outreach action: a respectful private invitation routed **first through Ash Barty's authorised public management channel** for professional triage, with the aim of offering Ash or an authorised representative a factual briefing and, if appropriate, a private site walk in the Opossum Creek / Woogaroo landscape.
+This brief supports one simple, respectful outreach option: ask Ash Barty's management whether she, or an authorised representative, might be open to a short private briefing or local site walk about the Opossum Creek / Woogaroo landscape.
 
-It does **not** assert that Ash Barty supports or opposes any development proposal, and it does not treat her public profile, local history, playground legacy, Indigenous identity, sponsors, or community relationships as creating a personal obligation to help.
+This is **not part of the legal strategy** and should not delay legal work. It is an optional community-engagement step only.
 
-## Proof-directed status
+We are not asserting that Ash supports or opposes any development. Her local connection, public profile, playground involvement, Indigenous identity, sponsors or community relationships do not create any obligation to help.
 
-Companion formal owners:
+---
 
-- `DASHI/Law/SensibLawWoogarooBartyOutreachExact.agda`
-- `DASHI/Law/SensibLawWoogarooBartyStewardshipCrossPollinationExact.agda`
-- `DASHI/Law/SensibLawWoogarooBartyRepresentativeFirstOutreachExact.agda`
+## Why contact her at all?
 
-Current state:
+The reason is narrow and local.
 
-- local nexus: PAID
-- exact ecological / hydrological spatial relation: PAID at the catchment-system level
-- development provenance: PAID for Peninsula and Scenic at the EPBC-project level
-- factual outreach brief: PAID
-- representative route: PAID at the public-contact level
-- social-appropriateness gate: PAID for the proposed representative-first form
-- representative triage: OPEN
-- participation consent: OPEN
-- attributable public position: OPEN
+Ash Barty was involved in the Ash Barty Playground at Opossum Creek Parklands in Springfield. Opossum Creek forms part of the wider Woogaroo Creek catchment. Save Woogaroo Forest is working on protection of native habitat in that broader landscape.
 
-The next live event is therefore **representative triage**, not direct celebrity contact and not further inferential proof search.
+That makes a private community invitation reasonable. It does **not** mean the playground is inside a development footprint, that Ash has any responsibility for the development, or that she should be expected to take a public position.
 
-## Source-paid facts
+---
 
-### 1. Barty community nexus
+## Preferred contact route
 
-Queensland Government, 21 March 2025, states that the Ash Barty Playground was co-designed with Ash Barty and delivered through work involving the Queensland Government, Ipswich City Council, Springfield City Group and Ms Barty. The statement records Barty describing Springfield as her home/community and says she chose a playground for local children and families instead of a statue.
+Use **NC Management**, which publicly lists Ashleigh Barty as a client and provides a public contact address for talent enquiries.
 
-Carrier:
-
-- Queensland Government Ministerial Media Statement, `Ash Barty playground a grand slam for the community`, 21 March 2025.
-
-### 2. Opossum Creek Parklands
-
-Ipswich City Council locates Opossum Creek Parklands at 58 Scoparia Drive, Brookwater and identifies it as a public park with playground and recreational facilities.
-
-Carrier:
-
-- Ipswich City Council, `Opossum Creek Parklands`.
-
-### 3. Opossum / Woogaroo relationship
-
-Ipswich City Council states that the Woogaroo Creek sub-catchment includes Mountain Creek and Opossum Creek. Council's Springfield planning material identifies significant natural vegetation and wildlife linkages particularly along Woogaroo Creek and Opossum Creek.
-
-Council's Platypus Recovery Plan separately defines an Opossum Creek recovery area from the Opossum–Woogaroo confluence to Springfield Greenbank Arterial Road, records high habitat quality around Opossum Creek Parklands, and reports platypus evidence at the parklands.
-
-This pays the bounded claim:
-
-> Opossum Creek Parklands is part of an ecological and hydrological system connected through Opossum Creek to the Woogaroo Creek sub-catchment.
-
-It does **not** by itself prove that every proposed development footprint is adjacent to the playground or that every affected species moves continuously between those exact footprints.
-
-Carriers:
-
-- Ipswich City Council, `Brisbane River Catchment — Woogaroo Creek (including Mountain and Opossum creeks)`.
-- Ipswich Planning Scheme / Springfield Estate and Augustine Heights valuable-features statement.
-- City of Ipswich, `Platypus Recovery Plan 2020`, recovery areas WG2/WG3/OP1.
-
-### 4. Development provenance
-
-The federal EPBC public record identifies:
-
-- Peninsula Precinct, Springfield — EPBC 2020/8629 — under assessment.
-- Scenic Precinct, Springfield — EPBC 2020/8651 — under assessment; preliminary documentation identifies Springfield City Group Pty Ltd as the proponent and threatened species / communities as controlling provisions.
-
-The proposition that these projects form part of the campaign-defined `Woogaroo Forest` development threat is a Save Woogaroo Forest campaign classification and must remain distinguishable from the narrower federal project-status facts.
-
-Carriers:
-
-- National EPA / EPBC Act Public Portal, EPBC 2020/8629.
-- National EPA / EPBC Act Public Portal, EPBC 2020/8651 and preliminary documentation.
-- Save Woogaroo Forest development inventory for the campaign's Woogaroo classification.
-
-### 5. Representative/publicist route
-
-NC Management's current public website lists **Ashleigh Barty** as a client. The agency says its services include talent representation, contract negotiation, sponsorship, brand strategy and media/PR, and directs talent enquiries/bookings to `info@ncmanagement.com.au`.
-
-This is the preferred first contact route because the campaign's initial questions are exactly matters a manager/publicist can triage: appropriateness, brand/partner conflicts, media implications, scheduling, whether Ash or a Foundation representative should receive the brief, and what consent scope is acceptable.
-
-Carrier:
-
-- NC Management official client/contact/about pages.
-
-This route does **not** prove that NC Management has accepted the invitation or that any named employee is the correct individual recipient until the agency confirms that.
-
-## Stewardship / Two-Eyed / intersectional boundary
-
-The outreach should preserve several independent coordinates rather than collapsing Woogaroo into a single conservation metric or celebrity story:
-
-- ecological continuity;
-- place relation;
-- knowledge provenance;
-- community / custodial authority where properly sourced;
-- reciprocity and non-domination;
-- intergenerational continuity;
-- distributional burden;
-- recognition and representation;
-- material/economic effects;
-- public narrative and commercial compatibility.
-
-The campaign should coordinate scientific/ecological evidence with situated community and, where authorised, Indigenous/Country knowledge **without treating those knowledges as interchangeable or claiming authority it does not hold**.
-
-In particular:
-
-```text
-celebrity consent
-  != Indigenous/Country authority
-
-ecological evidence
-  != community mandate
-
-Indigenous identity
-  != authority to speak for a local community
-
-market/ecosystem-service value
-  != complete Country/stewardship value
-
-shared ecological observation
-  != shared provenance, permission or authority
-```
-
-## WrongType / SensibLaw firewalls
-
-The following implications are prohibited:
-
-```text
-Barty associated with Springfield City Group
-  != Barty endorses a development
-
-Barty helped create a Springfield playground
-  != Barty has a policy obligation
-
-same catchment / ecological system
-  != exact footprint adjacency
-
-message sent to management
-  != message delivered to Ash
-
-management interest
-  != Ash's consent
-
-management brand review
-  != campaign endorsement
-
-invitation sent
-  != support
-
-meeting accepted
-  != support
-
-site visit
-  != opposition to development
-
-consent to a visit
-  != consent to quote or publish photographs
-
-brand compatibility
-  != consent
-```
-
-Only a direct, claim-scoped statement from Ash Barty or an authorised representative can pay a public-attribution residual.
-
-## Social-appropriateness WrongType check — “not being weird”
-
-A contact can be factually justified and still be the **wrong social type**. The intended object is a normal professional community invitation. The campaign should actively prevent it from mutating into parasocial familiarity, moral pressure, identity leverage, sponsor pressure, persistence pressure, or an over-engineered demand.
-
-### The intended social object
-
-```text
-professional enquiry
-  + locally relevant reason for contact
-  + short factual invitation
-  + authorised public channel
-  + easy decline / no-reply path
-  + no public pressure
-  = appropriate first contact
-```
-
-### WrongType failures to avoid
-
-```text
-familiarity with a public figure
-  != personal relationship
-
-playground bearing Ash's name
-  != personal debt to the campaign
-
-local connection
-  != obligation to intervene
-
-Ash's Indigenous identity
-  != moral leverage
-  != local custodial authority
-  != campaign duty
-
-commercial sponsor relationships
-  != pressure points
-
-management contact details being public
-  != invitation to repeated pursuit
-
-no reply
-  != permission to escalate around management
-
-community urgency
-  != entitlement to Ash's time
-
-our formal/proof architecture
-  != material the publicist needs to read
-
-our full theory of stewardship
-  != appropriate first-email length
-```
-
-### Practical “normal human contact” gate
-
-Before sending, the first message should pass all of these tests:
-
-1. **Would this look normal if sent to any professionally represented community figure?**
-2. **Can the recipient understand the ask in under a minute?**
-3. **Is the reason for contacting Ash specific and factual without implying obligation?**
-4. **Can management decline, ignore, or redirect it without social penalty?**
-5. **Are sponsors mentioned only if management raises them, rather than as leverage?**
-6. **Is Ash's Indigenous identity absent from the persuasive case unless she or an authorised context makes it relevant?**
-7. **Does the email avoid our internal terminology such as WrongType, Two-Eyed Seeing, PatternMind, residuals, proof gates, or formalisation?**
-8. **Is there no threat—explicit or implicit—to publicise silence, refusal, relationships, or conflicts?**
-9. **Would a reasonable publicist read it as an invitation rather than a campaign escalation?**
-
-If any answer is no, revise before sending.
-
-### Why the publicist route improves social fit
-
-Representative-first routing is not just a provenance improvement. It is a **de-weirding mechanism**:
-
-- management expects unsolicited professional enquiries;
-- the publicist can assess fit without placing Ash in an awkward direct interaction;
-- brand/sponsor issues can be handled privately without the campaign speculating about them;
-- management can route to the Foundation if that is the better institutional home;
-- a decline can occur cleanly without creating interpersonal pressure;
-- the campaign avoids behaving as though local relevance grants personal access.
-
-## Preferred outreach routing
-
-### Stage 1 — NC Management triage
-
-Send the short covering note to:
+Preferred first contact:
 
 `info@ncmanagement.com.au`
 
-The request should ask the agency to **assess whether the invitation is appropriate and advise the correct contact/process**. It should not ask them to secure an endorsement.
+The first request should be for **management triage**, not endorsement.
 
-For the first email, **do not attach a large dossier by default**. Keep the interaction light. Offer the one-page brief and map, or attach only those two if the group prefers. The detailed source pack, stewardship framework and formal proof work are internal quality-control material unless requested.
+Ask only whether a short private briefing or optional site walk would be appropriate, and what the correct process is.
 
-Useful first-contact materials:
+Do not contact private numbers or addresses. Do not run a public tagging campaign to force attention.
 
-1. a one-page evidence brief;
-2. a simple map showing Ash Barty Playground / Opossum Creek / Woogaroo relationship;
-3. a one-paragraph description of Save Woogaroo Forest;
-4. proposed private site-walk format;
-5. explicit no-media / no-endorsement defaults.
+---
 
-The optional stewardship/context note should be held back unless useful to the conversation. If Indigenous/Country participation becomes relevant, engage the appropriate authorised people directly rather than representing their position through the campaign's own interpretive framework.
+## What to send
 
-### Stage 2 — follow the representative's routing
+Keep the first contact short.
 
-Possible valid outcomes include:
+Useful material is limited to:
 
-- NC Management requests more information;
-- NC Management forwards or routes to Ash;
-- NC Management routes to the Ash Barty Foundation;
-- NC Management suggests another authorised contact;
-- NC Management declines;
-- no response.
+- a one-page plain-language description of the issue;
+- a simple map showing Opossum Creek / Woogaroo and the relevant development areas;
+- a sentence explaining Save Woogaroo Forest;
+- an offer of a private briefing or site walk; and
+- a clear statement that there will be no media, endorsement claim or public attribution unless separately agreed.
 
-Do not treat silence as consent and do not route around management merely because the desired response was not received. A single polite follow-up after a reasonable interval may be appropriate; repeated pursuit, multi-channel escalation, or public tagging should not be the default.
+Do **not** send the full legal or technical dossier unless management asks for it.
 
-### Stage 3 — participation consent
+---
 
-Only after a representative or Ash explicitly accepts should the campaign settle:
-
-- participants;
-- location;
-- timing;
-- privacy/media conditions;
-- whether ecology/community/Country representatives are invited;
-- what, if anything, may be said publicly.
-
-## Recommended first ask
-
-The lowest-conflict, highest-fit request remains a **private site walk / factual briefing**, but the addressee is management and the first task is simply triage.
-
-Suggested framing for management:
-
-> We are not seeking an endorsement. We would be grateful if you could let us know whether a short private briefing and optional local site walk is something Ash might be open to, and if so the best way to proceed. The invitation arises from the Opossum Creek / Woogaroo landscape around the community playground Ash helped create. There would be no media or public attribution unless separately agreed.
-
-This is deliberately narrower than the internal campaign case. The first email does not need to explain the entire environmental dispute, stewardship framework, commercial analysis or formal proof search.
-
-## Initial management contact copy
+## Suggested first email
 
 **Subject:** Local community invitation for Ash Barty — Opossum Creek / Woogaroo
 
 Dear NC Management team,
 
-I'm writing on behalf of Save Woogaroo Forest, a local community group concerned with remaining native habitat in the Greater Springfield and Ipswich area.
+I'm writing on behalf of Save Woogaroo Forest, a local community group concerned about remaining native habitat in the Greater Springfield and Ipswich area.
 
-We wanted to ask whether a short private briefing and optional site walk might be appropriate for Ash Barty, and if so whether you could advise the best way to proceed.
+We wanted to ask whether a short private briefing and optional local site walk might be something Ash Barty would be open to, and if so whether you could advise the best way to proceed.
 
-The reason for reaching out is quite local: the Ash Barty Playground at Opossum Creek Parklands sits within the wider Opossum Creek / Woogaroo catchment landscape that our group is working to protect. We thought Ash may simply be interested in hearing from local residents about the area around a community place she helped create.
+The reason for reaching out is local. The Ash Barty Playground at Opossum Creek Parklands sits within the wider Opossum Creek / Woogaroo catchment landscape that our group is working to protect.
 
-We are not seeking an endorsement or asking Ash to take a predetermined position on any development. The initial invitation would be private, with no media or public attribution unless separately agreed.
+We are not seeking an endorsement and are not asking Ash to take a predetermined position on any development. The invitation would be private, with no media or public attribution unless separately agreed.
 
-If useful, we can send a one-page factual brief and simple map. We are also very happy to follow whatever contact process you consider appropriate.
+If useful, we can send a one-page factual brief and simple map. We are happy to follow whatever contact process you consider appropriate.
 
 Kind regards,
 
 Save Woogaroo Forest
 
-## Public-contact hierarchy
+---
 
-Preferred order:
+## Important boundaries
 
-1. **NC Management — public talent-management contact**;
-2. route nominated by NC Management;
-3. Ash Barty Foundation public contact if management directs there or if the inquiry is clearly Foundation-specific;
-4. direct public-facing contact only where invited/appropriate;
-5. no use of private contact information and no public social-media pressure campaign as a substitute for consent.
+The campaign should keep these points clear:
 
-## Follow-up discipline
+- Local connection does not mean personal obligation.
+- A playground bearing Ash's name does not create a debt to the campaign.
+- Sending a message to management does not mean Ash has received it.
+- Management interest does not mean Ash agrees.
+- A private meeting or site walk does not mean support for the campaign.
+- A site visit does not mean opposition to any development.
+- Consent to attend does not mean consent to quote, photograph or publicise the visit.
+- Silence is simply no response. It is not support, hostility or evidence of a conflict.
+- Ash's Indigenous identity should not be used as pressure, and it does not by itself give authority to speak for a local community or Country.
+- Sponsors should not be used as pressure points.
 
-The campaign should agree internally before sending:
+Only an explicit statement from Ash or an authorised representative should ever be treated as a public position.
 
-- who is the single contact person;
-- what counts as a reasonable follow-up interval;
-- a maximum default of one polite follow-up unless management engages;
-- no parallel emailing of multiple agency staff;
-- no simultaneous DM/tagging campaign;
-- no public statement that Ash has been approached unless there is an independent and proportionate reason;
-- no interpretation of silence as hostility, support, conflict or evidence of sponsor pressure.
+---
 
-This is both strategically sensible and part of the WrongType boundary: **non-response is non-response**.
+## If management responds
 
-## Next admissible event
+A valid response may be:
 
-The proof state cannot advance through more inference about Ash's likely views.
+- a request for more information;
+- a referral to Ash, the Ash Barty Foundation or another representative;
+- acceptance of a briefing or site walk;
+- a decline; or
+- no response.
 
-The next admissible event is one of:
+If there is no response, one polite follow-up after a reasonable interval is enough unless management engages further.
 
-- management acknowledgement / triage;
-- request for more information;
-- authorised rerouting to Ash, the Foundation, or another representative;
-- acceptance or decline;
-- no response after the campaign's bounded follow-up process;
-- a separately authorised statement defining any public position.
+Do not contact multiple staff in parallel, repeatedly message different channels or publicly pressure Ash to respond.
 
-Until then:
+---
 
-`RepresentativeRoutePaid = true`
+## If a private briefing or site walk is accepted
 
-`SocialAppropriatenessGatePaid = true`
+Before the event, agree on:
 
-`RepresentativeTriagePaid = false`
+- who will attend;
+- location and timing;
+- whether any ecologist, community or authorised Country representative should attend;
+- whether photographs are allowed;
+- whether anything may be quoted publicly; and
+- whether the meeting is entirely private.
 
-`ParticipationConsentPaid = false`
+The safest default is **private and off the record unless otherwise agreed**.
 
-`PublicAttributionPermitted = false`
+---
+
+## Current position
+
+The contact route is available and the proposed first message is ready.
+
+What has **not** happened yet:
+
+- management has not agreed to receive a briefing;
+- Ash has not agreed to participate;
+- no public position has been given;
+- no endorsement exists.
+
+There is no need for more research into what Ash might think. The only meaningful next step, if the group chooses to pursue this optional route, is to send the short professional enquiry through management and wait for their response.
+
+Meanwhile, the legal Woogaroo work remains the priority.
