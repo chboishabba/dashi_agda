@@ -26,12 +26,14 @@ data LegalExecutionConsumer : Set where
 -- Atomic propositions required by the live legal roadmap. Existing AFW
 -- atoms are referenced through ExistingAtomReuse below rather than copied.
 data LegalExecutionAtom : Set where
+  finalPDSubstantiveRecordAtom : LegalExecutionAtom
   finalPDActionPolygonAtom : LegalExecutionAtom
   impactedHabitatQuantityAtom : LegalExecutionAtom
   retainedHabitatQuantityAtom : LegalExecutionAtom
   avoidanceAlternativesAtom : LegalExecutionAtom
   residualImpactAtom : LegalExecutionAtom
   conservationAdviceConsistencyAtom : LegalExecutionAtom
+  publicCommentResponseAtom : LegalExecutionAtom
   offsetParcelIdentityAtom : LegalExecutionAtom
   offsetBaselineRiskOfLossAtom : LegalExecutionAtom
   offsetExistingProtectionAtom : LegalExecutionAtom
@@ -76,12 +78,14 @@ canonicalExistingAtomReuse = existing-atom-reuse
 ------------------------------------------------------------------------
 
 data LegalAtomAdmissibleFor : LegalExecutionAtom → LegalExecutionConsumer → Set where
+  finalPDRecordForMerits : LegalAtomAdmissibleFor finalPDSubstantiveRecordAtom epbc8575MeritsConsumer
   finalPDPolygonForMerits : LegalAtomAdmissibleFor finalPDActionPolygonAtom epbc8575MeritsConsumer
   impactedHabitatForMerits : LegalAtomAdmissibleFor impactedHabitatQuantityAtom epbc8575MeritsConsumer
   retainedHabitatForMerits : LegalAtomAdmissibleFor retainedHabitatQuantityAtom epbc8575MeritsConsumer
   avoidanceForMerits : LegalAtomAdmissibleFor avoidanceAlternativesAtom epbc8575MeritsConsumer
   residualForMerits : LegalAtomAdmissibleFor residualImpactAtom epbc8575MeritsConsumer
   adviceForMerits : LegalAtomAdmissibleFor conservationAdviceConsistencyAtom epbc8575MeritsConsumer
+  commentsForMerits : LegalAtomAdmissibleFor publicCommentResponseAtom epbc8575MeritsConsumer
 
   offsetIdentityForOffset : LegalAtomAdmissibleFor offsetParcelIdentityAtom epbc8575OffsetAdequacyConsumer
   offsetRiskForOffset : LegalAtomAdmissibleFor offsetBaselineRiskOfLossAtom epbc8575OffsetAdequacyConsumer
@@ -133,29 +137,45 @@ record LegalAtomPayment : Set where
 
 open LegalAtomPayment public
 
+finalPDSubstantiveRecordPayment : LegalAtomPayment
+finalPDSubstantiveRecordPayment = legal-atom-payment
+  finalPDSubstantiveRecordAtom
+  epbc8575MeritsConsumer
+  open
+  "The uploaded carrier named 2019-8575-Final-PD.pdf is a one-page s 95B(2) publication/information notice. It proves publication timing and that 1,786 comments were received, but it is not the substantive four-volume Preliminary Documentation record."
+  "Acquire the substantive 2026 Preliminary Documentation volumes/attachments and the public-comment summary/response material. Do not let a filename collapse notice identity into substantive-record identity."
+
 federalActionPolygonPayment : LegalAtomPayment
 federalActionPolygonPayment = legal-atom-payment
   finalPDActionPolygonAtom
   epbc8575MeritsConsumer
   partiallyPaid
   "Primary 2019 referral identifies Lot 9999 SP292760 (158.2 ha), 162 ha referral area and 136 ha impact area; SHG Attachment 1 supplies site-locality/aerial geometry and Plan 6 maps the 136 ha critical-habitat impact area."
-  "Compare these referral-era geometries with the 2026 final Preliminary Documentation action/clearing polygon and record any delta rather than assuming identity through time."
+  "Compare these referral-era geometries with the substantive 2026 Preliminary Documentation action/clearing polygon and record any delta rather than assuming identity through time."
 
 federalImpactedHabitatPayment : LegalAtomPayment
 federalImpactedHabitatPayment = legal-atom-payment
   impactedHabitatQuantityAtom
   epbc8575MeritsConsumer
   sourcePaid
-  "SHG's 2019 MNES report states approximately 136 ha direct clearing of native Koala habitat plus 26 ha indirect impact; habitat score 7/10; Plan 6 labels the 136 ha referral-site critical-habitat impact area."
-  "The 2019 proposition is source-paid as a proponent/consultant proposition; acquire the 2026 final-PD corresponding quantity to test persistence, revision or supersession."
+  "SHG's 2019 MNES report states approximately 136 ha direct clearing of native Koala habitat plus 26 ha indirect impact; habitat score 7/10; Plan 6 labels the 136 ha referral-site critical-habitat impact area. The same report separately states approximately 136 ha of Grey-headed Flying-fox foraging habitat would be removed and says that removal is likely to adversely impact habitat critical to the survival of that species."
+  "These 2019 consultant propositions are source-paid at their historical fibre; acquire the 2026 substantive Preliminary Documentation corresponding quantities to test persistence, revision or supersession."
 
 federalResidualImpactPayment : LegalAtomPayment
 federalResidualImpactPayment = legal-atom-payment
   residualImpactAtom
   epbc8575MeritsConsumer
   partiallyPaid
-  "SHG's 2019 report concludes the clearing and functional loss of 136 ha of habitat score 7 is a significant impact on Koala habitat critical to survival, while its Table 15 separately argues some recovery-pathway impacts can be mitigated/no residual impact identified."
-  "Extract the complete 2026 final-PD residual-impact analysis and distinguish significant habitat-loss conclusion from later mitigation/offset conclusions."
+  "SHG's 2019 report concludes the clearing and functional loss of 136 ha of habitat score 7 is a significant impact on Koala habitat critical to survival. For GHFF it says 136 ha of foraging habitat removal is likely to adversely impact habitat critical to survival, while also arguing broader-population decline/recovery effects are unlikely."
+  "Extract the complete 2026 substantive Preliminary Documentation residual-impact analysis and distinguish habitat-critical adverse-impact conclusions from separate population/recovery/mitigation conclusions."
+
+publicCommentResponsePayment : LegalAtomPayment
+publicCommentResponsePayment = legal-atom-payment
+  publicCommentResponseAtom
+  epbc8575MeritsConsumer
+  partiallyPaid
+  "The s 95B(2) publication notice states that 1,786 comments were received and that a summary of comments was made available with the Preliminary Documentation."
+  "Acquire the actual summary/response-to-comments carrier and determine which comments produced revisions, rebuttals, additional evidence or no change. Comment count alone does not pay response adequacy."
 
 s102ClearingFootprintPayment : LegalAtomPayment
 s102ClearingFootprintPayment = legal-atom-payment
@@ -226,6 +246,9 @@ enforcementContraventionPayment = legal-atom-payment
 ------------------------------------------------------------------------
 
 data ControlledActionEqualsRefusal : Set where
+data PublicationNoticeEqualsSubstantiveFinalPD : Set where
+data CommentCountEqualsResponseAdequacy : Set where
+data NoticeTaxonListDeltaEqualsNewControllingProvision : Set where
 data SpeciesPresenceEqualsS13Essentiality : Set where
 data ConnectedLandscapeEqualsExactParcelEssentiality : Set where
 data KoalaGuidelineCriticalHabitatEqualsNCA13CriticalHabitat : Set where
@@ -247,6 +270,15 @@ data EnvironmentalHarmEqualsEnforceableContravention : Set where
 
 noControlledActionRefusalCollapse : ControlledActionEqualsRefusal → ⊥
 noControlledActionRefusalCollapse ()
+
+noPublicationNoticeFinalPDCollapse : PublicationNoticeEqualsSubstantiveFinalPD → ⊥
+noPublicationNoticeFinalPDCollapse ()
+
+noCommentCountResponseCollapse : CommentCountEqualsResponseAdequacy → ⊥
+noCommentCountResponseCollapse ()
+
+noNoticeTaxonDeltaProvisionCollapse : NoticeTaxonListDeltaEqualsNewControllingProvision → ⊥
+noNoticeTaxonDeltaProvisionCollapse ()
 
 noSpeciesEssentialityCollapse : SpeciesPresenceEqualsS13Essentiality → ⊥
 noSpeciesEssentialityCollapse ()
@@ -321,9 +353,9 @@ open ConsumerAtomResidual public
 federalResidual : ConsumerAtomResidual
 federalResidual = consumer-atom-residual
   epbc8575MeritsConsumer
-  "controlled action; listed matters; delegate/deadline; Lot 9999 SP292760; 162 ha referral geometry; 136 ha impact; 136 ha direct plus 26 ha indirect Koala habitat impact; habitat score 7; SHG significant-impact conclusion; Plan 5/6 connectivity and critical-habitat maps"
-  "2026 final-PD delta: final action/clearing polygon; retained habitat; avoidance/alternatives; complete residual-impact treatment; final offsets; conservation/recovery-plan correspondence"
-  "2019 referral evidence != unchanged 2026 final-PD state; significant EPBC habitat impact != automatic Part 9 refusal"
+  "controlled action; listed matters; delegate/deadline; Lot 9999 SP292760; 162 ha referral geometry; 136 ha impact; 136 ha direct plus 26 ha indirect Koala habitat impact; habitat score 7; SHG significant-impact conclusion; GHFF 136 ha foraging-habitat adverse-impact proposition; Plan 5/6 connectivity and critical-habitat maps; s 95B notice proving 1,786 comments and publication"
+  "substantive 2026 Preliminary Documentation carrier; final action/clearing polygon; retained habitat; avoidance/alternatives; complete residual-impact treatment; final offsets; conservation/recovery-plan correspondence; actual public-comment summary/response"
+  "publication notice != substantive final-PD record; comment count != response adequacy; 2019 referral evidence != unchanged 2026 state; significant EPBC habitat impact != automatic Part 9 refusal"
 
 s13Residual : ConsumerAtomResidual
 s13Residual = consumer-atom-residual
