@@ -42,6 +42,38 @@ canonicalRoleSnapshotChronology = role-snapshot-chronology
   "2025-07-22" "2025-08-16" "2025-08-26"
   true false false false false
 
+------------------------------------------------------------------------
+-- Genuine post-loss programme continuity, but not TechMat-role succession.
+--
+-- Robert Okojie's public professional account says he gave the 2025-09-24 FSP
+-- Technology Maturation close-out presentation as Lead NASA FSP I&C. The August
+-- NASA webinar already names Okojie as NASA FSP I&C Lead while separately naming
+-- LeBlanc as NASA SNP I&C TechMat Team Lead. Therefore Okojie's September role is
+-- evidence that the wider I&C programme remained active after LeBlanc's death,
+-- not evidence that Okojie inherited LeBlanc's narrower TechMat responsibility.
+------------------------------------------------------------------------
+
+record PostLossProgramContinuityLead : Set where
+  constructor post-loss-program-continuity-lead
+  field
+    datedPostLossSurface : String
+    continuingLead : String
+    continuingRole : String
+    sourceReference : String
+    programmeContinuitySupported : Bool
+    exactLeBlancRoleSuccessionPaid : Bool
+    predecessorRoleAlreadyDistinctFromLeBlanc : Bool
+
+open PostLossProgramContinuityLead public
+
+okojieSeptember2025ContinuityLead : PostLossProgramContinuityLead
+okojieSeptember2025ContinuityLead = post-loss-program-continuity-lead
+  "2025-09-24 FSP Technology Maturation close-out webinar"
+  "Robert S. Okojie"
+  "Lead NASA FSP Instrumentation and Controls / NASA FSP I&C Lead"
+  "Robert Okojie public professional post describing the 2025-09-24 close-out presentation; NASA NTRS 20250008475 August recognition slide already lists Okojie as NASA FSP I&C Lead and LeBlanc separately as NASA SNP I&C TechMat Team Lead"
+  true false true
+
 record LeBlancApplicationBoundary : Set where
   constructor leblanc-application-boundary
   field
@@ -52,12 +84,14 @@ record LeBlancApplicationBoundary : Set where
     postLossPublicationImpliesPostLossActiveRole : Bool
     staleRecognitionSlideImpliesNoSuccessor : Bool
     datedPostLossGovernanceArtifactRequiredForSuccession : Bool
+    postLossProgramContinuityImpliesTechMatSuccession : Bool
+    alreadyDistinctFSPLeadMayBeCalledTechMatSuccessorWithoutReceipt : Bool
 
 open LeBlancApplicationBoundary public
 
 canonicalLeBlancApplicationBoundary : LeBlancApplicationBoundary
 canonicalLeBlancApplicationBoundary = leblanc-application-boundary
-  false false true false false false true
+  false false true false false false true false false
 
 data LeBlancApplicationReverseTarget : Set where
   acquireTechMatWorkBreakdown
@@ -66,8 +100,12 @@ data LeBlancApplicationReverseTarget : Set where
   acquireCalibrationDriftOwnership
   acquireRecognitionSlideFreezeDate
   acquireFirstPostLossICGovernanceArtifact
+  acquireExactPostLossTechMatRoleRoster
   acquireSuccessorOrHandover
   acquireRequalificationDelayOrRework : LeBlancApplicationReverseTarget
 
 firstLeBlancSuccessionTarget : LeBlancApplicationReverseTarget
 firstLeBlancSuccessionTarget = acquireRecognitionSlideFreezeDate
+
+postLossContinuityNextTarget : LeBlancApplicationReverseTarget
+postLossContinuityNextTarget = acquireExactPostLossTechMatRoleRoster
