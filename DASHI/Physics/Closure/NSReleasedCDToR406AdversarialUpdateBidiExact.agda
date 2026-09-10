@@ -1,23 +1,38 @@
 module DASHI.Physics.Closure.NSReleasedCDToR406AdversarialUpdateBidiExact where
 
 ------------------------------------------------------------------------
--- RELEASED C/D -> EXISTING R525/R406 ADVERSARIAL UPDATE
+-- RELEASED C/D -> R406 ADVERSARIAL UPDATE, WRONGTYPE-CORRECTED
 --
--- R525 was written while the external smooth-forced NS construction was still
--- source-incomplete from DASHI's perspective.  The public OpenAI release now
--- pays the external->Clay theorem-identity side exactly at the comparator
--- surface.  Therefore the live adversarial question moves one step inward:
+-- Introspective correction.
 --
---   released exact Clay C/D witness
---     -> literal released forcing identity
---     -> instantiate on the SAME DASHI forcing carrier
---     -> decide membership in the exact signed critical forcing budget
---     -> if in class, use blowup as a falsification fixture for any theorem
---        quantified over that class;
---     -> if out of class, extract the precise separating hypothesis.
+-- The earlier R522/R525 vocabulary used the word `forcing` on both sides of
+-- the comparison:
 --
--- This owner does NOT assert that the released forcing is in or out of R406's
--- class.  That is the next mathematical same-object test.
+--   (1) the EXTERNAL body force f in the forced Navier--Stokes PDE used by
+--       Clay alternatives C/D;
+--
+--   (2) the INTERNAL projected-nonlinearity / tangent / quadratic-companion
+--       objects called forcing in the R406/R420/R423 unforced Galerkin lane.
+--
+-- Those are not the same formal or physical coordinate.
+--
+-- R423 is indexed by R240.PhysicalNSGalerkinTrajectory, whose equation owner is
+-- the unforced projected Galerkin dynamics used by DASHI's A/B regularity lane.
+-- The released C/D construction instead changes the PDE by adding a smooth
+-- external body force.  Therefore the external f cannot be tested for
+-- "membership in the R406 signed companion class" as though f itself were the
+-- R406 companion.
+--
+-- Correct BIDI relation:
+--
+--   released external body force f
+--     -> forced PDE trajectory / candidate
+--     -> state-dependent internal nonlinear interactions on that trajectory
+--     -> structural comparison with R406/R423 objects.
+--
+-- This may teach us which cancellation mechanisms survive under forcing, but
+-- it is NOT a counterexample test for a theorem quantified only over the
+-- unforced A/B trajectory class.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,96 +43,122 @@ import DASHI.Physics.Closure.NSTriadKNClayExternalR406TriangleBidiRound525Exact 
 import DASHI.Physics.Closure.NSTriadKNForcedBlowupR406BidiRound522Exact as R522
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedClayCDTorus369BidiExact as Release
 import DASHI.Physics.Closure.NSOpenAI2026ComparatorClayCDSourceExactAlignment as Align
+import DASHI.Physics.Closure.NSTriadKNQuadraticCompanionSignedHeatToBarrierRound423Exact as R423
 
 ------------------------------------------------------------------------
--- 1. What changed after release.
+-- 1. Released source-to-Clay alignment really is closed.
 ------------------------------------------------------------------------
 
 externalClayCStatementAlignmentClosed : Bool
-externalClayCStatementAlignmentClosed = Align.releasedClayCExactStatementAlignment
+externalClayCStatementAlignmentClosed = Align.releasedComparatorCExactlyMatchesClayC
 
 externalClayDStatementAlignmentClosed : Bool
-externalClayDStatementAlignmentClosed = Align.releasedClayDExactStatementAlignment
+externalClayDStatementAlignmentClosed = Align.releasedComparatorDExactlyMatchesClayD
 
 releasedPublicLeanPresent : Bool
 releasedPublicLeanPresent = Release.roundOAI2026PublicLeanReleased
 
 ------------------------------------------------------------------------
--- 2. Updated residual order.
+-- 2. Distinguish the two meanings of forcing.
+------------------------------------------------------------------------
+
+data ForcingKind : Set where
+  externalPDEBodyForce : ForcingKind
+  internalStateDependentCompanion : ForcingKind
+
+releasedForceKind : ForcingKind
+releasedForceKind = externalPDEBodyForce
+
+r406CompanionKind : ForcingKind
+r406CompanionKind = internalStateDependentCompanion
+
+data ExternalBodyForceEqualsInternalCompanionPermission : Set where
+
+data ForcedTrajectoryAutomaticallyInhabitsUnforcedR240Permission : Set where
+
+data ForcedCDCounterexampleAutomaticallyRefutesUnforcedABPermission : Set where
+
+externalBodyForceDoesNotBecomeInternalCompanion :
+  ExternalBodyForceEqualsInternalCompanionPermission → ⊥
+externalBodyForceDoesNotBecomeInternalCompanion ()
+
+forcedTrajectoryDoesNotAutomaticallyBecomeUnforcedR240 :
+  ForcedTrajectoryAutomaticallyInhabitsUnforcedR240Permission → ⊥
+forcedTrajectoryDoesNotAutomaticallyBecomeUnforcedR240 ()
+
+forcedCDDoesNotAutomaticallyRefuteUnforcedAB :
+  ForcedCDCounterexampleAutomaticallyRefutesUnforcedABPermission → ⊥
+forcedCDDoesNotAutomaticallyRefuteUnforcedAB ()
+
+------------------------------------------------------------------------
+-- 3. Corrected residual order.
 ------------------------------------------------------------------------
 
 data ReleasedR406Residual : Set where
-  missingLiteralReleasedForcingInstantiation : ReleasedR406Residual
-  missingSignedBudgetMembershipDecision : ReleasedR406Residual
-  missingR406QuantifierCompatibilityDecision : ReleasedR406Residual
-  adversarialClassificationComplete : ReleasedR406Residual
+  missingLiteralReleasedExternalForceIdentity : ReleasedR406Residual
+  missingForcedTrajectorySemanticsInDASHI : ReleasedR406Residual
+  missingInternalCompanionObservationOnForcedTrajectory : ReleasedR406Residual
+  missingStructuralForcedVsUnforcedComparison : ReleasedR406Residual
+  adversarialMechanismComparisonComplete : ReleasedR406Residual
 
 data ReleasedR406Producer : Set where
-  extractExactReleasedForcing : ReleasedR406Producer
-  checkExactSignedBudgetMembership : ReleasedR406Producer
-  auditLiteralR406QuantifierScope : ReleasedR406Producer
-  compileInClassCounterexampleOrSeparator : ReleasedR406Producer
+  extractExactReleasedExternalForce : ReleasedR406Producer
+  buildTypedForcedTrajectoryExtension : ReleasedR406Producer
+  evaluateInternalNonlinearityOnForcedCandidate : ReleasedR406Producer
+  compareCancellationMechanismsWithoutTypeCollapse : ReleasedR406Producer
+  compileStructuralComparison : ReleasedR406Producer
 
 producerFor : ReleasedR406Residual → ReleasedR406Producer
-producerFor missingLiteralReleasedForcingInstantiation = extractExactReleasedForcing
-producerFor missingSignedBudgetMembershipDecision = checkExactSignedBudgetMembership
-producerFor missingR406QuantifierCompatibilityDecision = auditLiteralR406QuantifierScope
-producerFor adversarialClassificationComplete = compileInClassCounterexampleOrSeparator
+producerFor missingLiteralReleasedExternalForceIdentity =
+  extractExactReleasedExternalForce
+producerFor missingForcedTrajectorySemanticsInDASHI =
+  buildTypedForcedTrajectoryExtension
+producerFor missingInternalCompanionObservationOnForcedTrajectory =
+  evaluateInternalNonlinearityOnForcedCandidate
+producerFor missingStructuralForcedVsUnforcedComparison =
+  compareCancellationMechanismsWithoutTypeCollapse
+producerFor adversarialMechanismComparisonComplete = compileStructuralComparison
 
 firstReleasedR406Residual : ReleasedR406Residual
-firstReleasedR406Residual = missingLiteralReleasedForcingInstantiation
+firstReleasedR406Residual = missingLiteralReleasedExternalForceIdentity
 
 ------------------------------------------------------------------------
--- 3. BIDI outcomes once literal membership is known.
+-- 4. Preserve historical R522/R525 facts without inheriting their type collapse.
 ------------------------------------------------------------------------
 
-data MembershipDecision : Set where
-  releasedForcingInsideR406Class : MembershipDecision
-  releasedForcingOutsideR406Class : MembershipDecision
-
-data AdversarialOutcome : Set where
-  candidateR406TheoremFacesConcreteCounterexample : AdversarialOutcome
-  separatingHypothesisIdentified : AdversarialOutcome
-
-outcomeFor : MembershipDecision → AdversarialOutcome
-outcomeFor releasedForcingInsideR406Class =
-  candidateR406TheoremFacesConcreteCounterexample
-outcomeFor releasedForcingOutsideR406Class = separatingHypothesisIdentified
-
-------------------------------------------------------------------------
--- 4. Preserve the old triangle, but retire its obsolete source uncertainty.
-------------------------------------------------------------------------
-
-r525OldFirstMissingCoordinateWasClassInclusion :
+r525HistoricalClassInclusionQuestionRecorded :
   R525.round525FirstNewMissingCoordinateIsClassInclusion ≡ true
-r525OldFirstMissingCoordinateWasClassInclusion =
+r525HistoricalClassInclusionQuestionRecorded =
   R525.round525FirstNewMissingCoordinateIsClassInclusionIsTrue
 
-r522MissingCoordinateStillBudgetMembership :
+r522HistoricalBudgetMembershipQuestionRecorded :
   R522.round522MissingCoordinateIsSignedBudgetMembership ≡ true
-r522MissingCoordinateStillBudgetMembership =
+r522HistoricalBudgetMembershipQuestionRecorded =
   R522.round522MissingCoordinateIsSignedBudgetMembershipIsTrue
 
+-- The present owner supersedes that question as the canonical comparison:
+-- before a membership test could even be meaningful, the two objects would
+-- need to inhabit the same forcing type. R423 shows the live payment is instead
+-- an internal quadratic-companion cross indexed by an unforced R240 trajectory.
+
+round423CompanionFeedsUnforcedCriticalBarrier : Bool
+round423CompanionFeedsUnforcedCriticalBarrier =
+  R423.round423QuadraticCompanionSignedPaymentFeedsCriticalBarrier
+
 ------------------------------------------------------------------------
--- 5. No shortcut: exact Clay alignment does not answer R406 membership.
+-- 5. Correct outcomes.
 ------------------------------------------------------------------------
 
-data ClayCDAdmissibilityImpliesR406BudgetMembershipPermission : Set where
-data R406BudgetMembershipImpliesUnforcedABPaymentPermission : Set where
+data CorrectedAdversarialOutcome : Set where
+  forcedConstructionInformsMechanismSearch : CorrectedAdversarialOutcome
+  separatingEquationClassIdentified : CorrectedAdversarialOutcome
 
-data ReleasedProofImpliesHistoricalDASHIPriorityPermission : Set where
+currentCorrectedOutcome : CorrectedAdversarialOutcome
+currentCorrectedOutcome = separatingEquationClassIdentified
 
-clayCDDoesNotDetermineR406Membership :
-  ClayCDAdmissibilityImpliesR406BudgetMembershipPermission → ⊥
-clayCDDoesNotDetermineR406Membership ()
-
-r406MembershipDoesNotPayUnforcedAB :
-  R406BudgetMembershipImpliesUnforcedABPaymentPermission → ⊥
-r406MembershipDoesNotPayUnforcedAB ()
-
-releasedProofDoesNotRetroactivelyCreatePriority :
-  ReleasedProofImpliesHistoricalDASHIPriorityPermission → ⊥
-releasedProofDoesNotRetroactivelyCreatePriority ()
+-- C/D and A/B differ first at the equation class: forced versus unforced.
+-- Any deeper structural comparison is useful science, but not a logical
+-- falsification of the unforced theorem.
 
 ------------------------------------------------------------------------
 -- 6. Proof-search ledger.
@@ -126,26 +167,29 @@ releasedProofDoesNotRetroactivelyCreatePriority ()
 releasedSourceToClaySideClosed : Bool
 releasedSourceToClaySideClosed = true
 
-releasedForcingLiteralSameObjectClosed : Bool
-releasedForcingLiteralSameObjectClosed = false
+releasedExternalForceSameObjectAsR406Companion : Bool
+releasedExternalForceSameObjectAsR406Companion = false
 
-releasedForcingR406MembershipClosed : Bool
-releasedForcingR406MembershipClosed = false
+releasedForcedTrajectoryAlreadyInR240Class : Bool
+releasedForcedTrajectoryAlreadyInR240Class = false
 
-releasedR406AdversarialClassificationClosed : Bool
-releasedR406AdversarialClassificationClosed = false
+releasedCDDirectlyTestsUnforcedR406Theorem : Bool
+releasedCDDirectlyTestsUnforcedR406Theorem = false
+
+releasedForcedVsUnforcedStructuralComparisonClosed : Bool
+releasedForcedVsUnforcedStructuralComparisonClosed = false
 
 releasedSourceToClaySideClosedIsTrue : releasedSourceToClaySideClosed ≡ true
 releasedSourceToClaySideClosedIsTrue = refl
 
-releasedForcingLiteralSameObjectClosedIsFalse :
-  releasedForcingLiteralSameObjectClosed ≡ false
-releasedForcingLiteralSameObjectClosedIsFalse = refl
+releasedExternalForceSameObjectAsR406CompanionIsFalse :
+  releasedExternalForceSameObjectAsR406Companion ≡ false
+releasedExternalForceSameObjectAsR406CompanionIsFalse = refl
 
-releasedForcingR406MembershipClosedIsFalse :
-  releasedForcingR406MembershipClosed ≡ false
-releasedForcingR406MembershipClosedIsFalse = refl
+releasedForcedTrajectoryAlreadyInR240ClassIsFalse :
+  releasedForcedTrajectoryAlreadyInR240Class ≡ false
+releasedForcedTrajectoryAlreadyInR240ClassIsFalse = refl
 
-releasedR406AdversarialClassificationClosedIsFalse :
-  releasedR406AdversarialClassificationClosed ≡ false
-releasedR406AdversarialClassificationClosedIsFalse = refl
+releasedCDDirectlyTestsUnforcedR406TheoremIsFalse :
+  releasedCDDirectlyTestsUnforcedR406Theorem ≡ false
+releasedCDDirectlyTestsUnforcedR406TheoremIsFalse = refl
