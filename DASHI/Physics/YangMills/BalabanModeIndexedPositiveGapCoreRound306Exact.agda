@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.BalabanModeIndexedPositiveGapCoreRound306Exact wh
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -30,26 +31,22 @@ import DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302
 import DASHI.Physics.YangMills.BalabanDirectT5PositiveSubgapExclusionRound305Exact as R305
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 
-record ModeIndexedPositiveGapCore
-    (Energy : Set) : Set₁ where
+record ModeIndexedPositiveGapCore (Energy : Set) : Set₁ where
   field
     candidateEnergy : Energy
     PositiveEnergy : Energy → Set
     StrictlyBelow : Energy → Energy → Set
     SubgapMode : Energy → Set
-
     candidatePositive : PositiveEnergy candidateEnergy
     noPositiveSubgapMode : ∀ energy →
-      PositiveEnergy energy →
-      StrictlyBelow energy candidateEnergy →
-      SubgapMode energy →
-      Gap.Empty
+      PositiveEnergy energy → StrictlyBelow energy candidateEnergy →
+      SubgapMode energy → Gap.Empty
 
 open ModeIndexedPositiveGapCore public
 
 compileDirectT5PositiveGapCore :
   ∀ {Measure TestObservable Energy Vector}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.Base.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {tests : R278.SelectedConnectedCovarianceTests dataSet}
     {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
@@ -65,10 +62,8 @@ compileDirectT5PositiveGapCore {family = family} {coordinate = coordinate} payme
   ; ModeIndexedPositiveGapCore.PositiveEnergy = Rate302.PositiveEnergy coordinate
   ; ModeIndexedPositiveGapCore.StrictlyBelow = Rate302.StrictlyBelow coordinate
   ; ModeIndexedPositiveGapCore.SubgapMode = R297.SubgapMode family
-  ; ModeIndexedPositiveGapCore.candidatePositive =
-      Rate302.candidateEnergyPositive coordinate
-  ; ModeIndexedPositiveGapCore.noPositiveSubgapMode =
-      R305.noPositiveSubgapMode payment
+  ; ModeIndexedPositiveGapCore.candidatePositive = Rate302.candidateEnergyPositive coordinate
+  ; ModeIndexedPositiveGapCore.noPositiveSubgapMode = R305.noPositiveSubgapMode payment
   }
 
 record Round306Boundary : Set where
@@ -77,11 +72,9 @@ record Round306Boundary : Set where
     historicalEnvelopeRecordPartOfGapContent : Bool
     historicalEnvelopeRecordPartOfGapContentIsFalse :
       historicalEnvelopeRecordPartOfGapContent ≡ false
-
     positiveCandidateAndNoSubgapSufficeForGapCore : Bool
     positiveCandidateAndNoSubgapSufficeForGapCoreIsTrue :
       positiveCandidateAndNoSubgapSufficeForGapCore ≡ true
-
     modeIndexedPositiveGapAfterPaymentsCompilerOwned : Bool
     modeIndexedPositiveGapAfterPaymentsCompilerOwnedIsTrue :
       modeIndexedPositiveGapAfterPaymentsCompilerOwned ≡ true
@@ -92,9 +85,5 @@ canonicalRound306Boundary = round306-boundary false refl true refl true refl
 round306ModeIndexedPositiveGapCompilerLevel : ProofLevel
 round306ModeIndexedPositiveGapCompilerLevel = machineChecked
 
--- The next physical boundary is not another clustering theorem.  It is the
--- same-Hamiltonian spectral identification: this Energy/order/mode family must
--- be the physical reconstructed YM Hamiltonian spectrum consumed by the final
--- Clay statement.
 round306PhysicalHamiltonianSpectrumSameObjectLevel : ProofLevel
 round306PhysicalHamiltonianSpectrumSameObjectLevel = conditional
