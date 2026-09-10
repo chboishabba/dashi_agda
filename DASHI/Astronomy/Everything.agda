@@ -6,3 +6,5 @@ open import DASHI.Astronomy.LocalGroupFirstLightScientificClaimsExact public
 open import DASHI.Astronomy.LocalGroupFirstLightBenchmarkReceiptExact public
 open import DASHI.Astronomy.LocalGroupDigitalTwinBoundaryExact public
 open import DASHI.Astronomy.LocalGroupFrameMeasurementModelBidiExact public
+open import DASHI.Astronomy.LocalGroupPrimaryPaperDetailExact public
+open import DASHI.Astronomy.LocalGroupFirstLightArtifactObservationExact public
