@@ -3,22 +3,6 @@ module DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Ex
 
 ------------------------------------------------------------------------
 -- ROUND304 / ARBITRARY-PAIR FINITE T5 SHELL -> CONTINUUM CLUSTERING
---
--- The standard OS/spectral mass-gap route consumes a genuine two-observable
--- Euclidean-time clustering theorem.  Do not fake that consumer by encoding a
--- pair into one opaque spectral observable.
---
--- R296 already gives the finite shell bound for arbitrary left/right T5
--- observables.  R278 already gives covariance-magnitude convergence whenever
--- left, right and their product are bounded.  Therefore the only representation
--- work here is:
---
---   * choose the actual physical observable family;
---   * choose its Euclidean-time translate;
---   * prove the translated pair is in R278's bounded test class;
---   * prove source support distance equals the requested Euclidean time.
---
--- Closedness of <= under the selected scalar convergence is standard topology.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -26,14 +10,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
 import DASHI.Physics.YangMills.BalabanCMP116DirectT5ContinuumClusteringRound284Exact as R284
-import DASHI.Physics.YangMills.BalabanClayOneSidedCorrelationLimitRound276Exact as R276
+import DASHI.Physics.YangMills.BalabanCMP116TwoSourceConnectedClusteringRound274Exact as Direct
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
@@ -147,12 +131,8 @@ finitePairGeometricUpper :
 finitePairGeometricUpper {finite = finite} presentation cutoff left right time =
   let
     shell = R296.asDirectT5TwoSourceShell finite
-    raw =
-      R284.finiteCovarianceBelowConnectingShell shell cutoff
-        (decode presentation left)
-        (timeTranslate presentation right time)
     geometric =
-      R284.Direct.connectedCovarianceGeometricBound
+      Direct.connectedCovarianceGeometricBound
         (R284.asDirectTwoSourceData shell) cutoff
         (decode presentation left)
         (timeTranslate presentation right time)
