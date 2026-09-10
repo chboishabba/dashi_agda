@@ -34,10 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNDirectResolventGlobalCompanionRound498Exac
 import DASHI.Physics.Closure.NSTriadKNDirectResolventTrajectoryCompanionRound499Exact as R499
 import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500Exact as R500
 import DASHI.Physics.Closure.NSTriadKNDirectResolventSignedCrossToR415Round503Exact as R503
-import DASHI.Physics.Closure.NSTriadKNCanonicalClayProofSearchRound486Exact as R486
-import DASHI.Physics.Closure.NSTriadKNDirectSignedCompanionFrontierRound442Exact as R442
 import DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact as R568
-import DASHI.Physics.Closure.NSTriadKNDirectLeafACompilerRound572Exact as R572
 import DASHI.Physics.Closure.NSTriadKNLiveCriticalConeRegionPaymentRound590Exact as R590
 import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact as R591
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
@@ -61,8 +58,8 @@ round592IntegrationSameObjectClosedModuloStandardAuthority =
 round592R503CompilerClosed : Bool
 round592R503CompilerClosed = R503.round503ExactR500ToR415CompilerClosed
 
-round592HistoricalR442LaplaceCoordinateStillMandatory : Bool
-round592HistoricalR442LaplaceCoordinateStillMandatory = false
+round592HistoricalLaplaceCoordinateStillMandatory : Bool
+round592HistoricalLaplaceCoordinateStillMandatory = false
 
 round592R284CriticalConeMandatory : Bool
 round592R284CriticalConeMandatory = false
@@ -93,9 +90,9 @@ round592CurrentGlobalFirstResidualStillLeafA = R504.currentFirstTerminalResidual
 round592ClayPromotion : Bool
 round592ClayPromotion = false
 
-round592HistoricalR442LaplaceCoordinateStillMandatoryIsFalse :
-  round592HistoricalR442LaplaceCoordinateStillMandatory ≡ false
-round592HistoricalR442LaplaceCoordinateStillMandatoryIsFalse = refl
+round592HistoricalLaplaceCoordinateStillMandatoryIsFalse :
+  round592HistoricalLaplaceCoordinateStillMandatory ≡ false
+round592HistoricalLaplaceCoordinateStillMandatoryIsFalse = refl
 
 round592R284CriticalConeMandatoryIsFalse :
   round592R284CriticalConeMandatory ≡ false
