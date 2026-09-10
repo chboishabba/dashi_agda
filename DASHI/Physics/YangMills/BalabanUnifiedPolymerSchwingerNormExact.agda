@@ -1,56 +1,9 @@
 module DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact where
 
 ------------------------------------------------------------------------
--- ROUND65/R271 HIGHEST-ALPHA CONTINUUM DEVICE:
+-- ROUND65/R271/R273:
 -- ONE POLYMER/SCHWINGER NORM, THREE DOWNSTREAM PROJECTIONS
---
--- PRIMARY SOURCES / CALIBRATION
---
--- David C. Brydges, John Dimock and Thomas R. Hurd,
--- "Estimates on Renormalization Group Transformations",
--- Canadian Journal of Mathematics 50 (1998), 756--793.
--- DOI: 10.4153/CJM-1998-041-5.
---
--- David C. Brydges, P. K. Mitter and B. Scoppola,
--- "Critical (Phi^4)_{3,epsilon}", Communications in Mathematical Physics
--- 240 (2003), 281--327. DOI: 10.1007/s00220-003-0895-4.
---
--- P. K. Mitter,
--- "The Exact Renormalization Group", Encyclopedia of Mathematical Physics
--- (2006). DOI: 10.1016/B0-12-512666-2/00071-7.
---
--- Janos Polonyi and Kornel Sailer,
--- "Renormalization of Composite Operators", Physical Review D 63 (2001),
--- 105006. DOI: 10.1103/PhysRevD.63.105006.
---
--- Tadeusz Balaban, John Imbrie and Arthur Jaffe,
--- "Exact Renormalization Group for Gauge Theories", in Progress in Gauge
--- Field Theory (1984), pp. 79--103.
--- DOI: 10.1007/978-1-4757-0280-4_4.
---
--- AUTHORITY BOUNDARY
---
--- These sources motivate polymer activities, large-field regulators, field
--- derivative seminorms, decay weights and RG transport of composite operators.
--- They do not by citation prove the nonperturbative four-dimensional pure
--- Yang--Mills estimate below.
---
--- R271 CORRECTION
---
--- The old producer stored `PhysicalSeparationDecayControlled : State -> Set`.
--- That was too opaque to pay the actual mass-gap consumer: it named a property
--- without exposing the connected correlation, physical distance, amplitude,
--- ratio, or quantitative decay inequality.
---
--- The producer now carries a literal rational interpretation of its SAME
--- `correlationProjection` and a geometric bound
---
---   |Cov_s(F,G)| <= A q^(d(F,G)),   0 <= q < 1,
---
--- at every RG scale.  This compiles directly to the existing
--- `UniformGeometricConnectedClustering` carrier.  Thus the unified-norm route
--- can no longer claim "physical separation controlled" without actually
--- producing the canonical clustering-shaped theorem.
+-- + LEAST-PRIVILEGE DIRECT CORRELATION-DECAY SURFACE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
@@ -60,6 +13,10 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanRowCPostBC2PhysicalCompletionRound108Exact as R108
+
+------------------------------------------------------------------------
+-- Generic unified norm authority.
+------------------------------------------------------------------------
 
 record UnifiedPolymerSchwingerNormAuthority
     (State OrdinaryObservable CompositeObservable WeightedCorrelation Bound : Set)
@@ -171,7 +128,61 @@ correlationIncrementBound {authority = authority} control scale =
     (unifiedIncrementBound control scale)
 
 ------------------------------------------------------------------------
--- Physical content required of the actual Yang--Mills norm.
+-- R273 LEAST-PRIVILEGE B-FACING OBJECT.
+--
+-- The NS-R592 introspection forbids requiring the whole unified norm merely
+-- because it is one convenient way to prove clustering.  The canonical finite
+-- mass-gap producer needs only a correlation trajectory and its uniform
+-- geometric inequality.  No large-field, derivative, composite, or generic
+-- state-distance coordinates occur in this record.
+------------------------------------------------------------------------
+
+record QuantitativeCorrelationDecayTrajectory : Set₁ where
+  field
+    State Observable Correlation : Set
+    correlationProjection : State → Correlation
+    stateAtScale : Nat → State
+
+    physicalDistance : Observable → Observable → Nat
+    connectedCorrelationMagnitude :
+      Correlation → Observable → Observable → ℚ
+
+    amplitude ratio : ℚ
+    amplitudeNonnegative : 0ℚ ≤ amplitude
+    ratioNonnegative : 0ℚ ≤ ratio
+    ratioStrictlyBelowOne : ratio < 1ℚ
+
+    geometricDecayAtEveryScale : ∀ scale left right →
+      connectedCorrelationMagnitude
+        (correlationProjection (stateAtScale scale)) left right
+      ≤ amplitude * Power.rationalPower ratio (physicalDistance left right)
+
+open QuantitativeCorrelationDecayTrajectory public
+
+clusteringFromCorrelationTrajectoryAtScale :
+  (trajectory : QuantitativeCorrelationDecayTrajectory) →
+  Nat → R108.UniformGeometricConnectedClustering (Observable trajectory)
+clusteringFromCorrelationTrajectoryAtScale trajectory scale = record
+  { R108.UniformGeometricConnectedClustering.distance =
+      physicalDistance trajectory
+  ; R108.UniformGeometricConnectedClustering.connectedCovarianceMagnitude =
+      connectedCorrelationMagnitude trajectory
+        (correlationProjection trajectory (stateAtScale trajectory scale))
+  ; R108.UniformGeometricConnectedClustering.amplitude = amplitude trajectory
+  ; R108.UniformGeometricConnectedClustering.ratio = ratio trajectory
+  ; R108.UniformGeometricConnectedClustering.amplitudeNonnegative =
+      amplitudeNonnegative trajectory
+  ; R108.UniformGeometricConnectedClustering.ratioNonnegative =
+      ratioNonnegative trajectory
+  ; R108.UniformGeometricConnectedClustering.ratioStrictlyBelowOne =
+      ratioStrictlyBelowOne trajectory
+  ; R108.UniformGeometricConnectedClustering.connectedCovarianceBound =
+      geometricDecayAtEveryScale trajectory scale
+  }
+
+------------------------------------------------------------------------
+-- Full unified-norm tactic.  It is deliberately stronger than the B-facing
+-- trajectory above, and only ADAPTS to it.
 ------------------------------------------------------------------------
 
 record PhysicalYMUnifiedPolymerNormProducer : Set₁ where
@@ -188,7 +199,6 @@ record PhysicalYMUnifiedPolymerNormProducer : Set₁ where
 
     stateAtScale : Nat → State
 
-    -- R271 quantitative replacement for the old opaque separation predicate.
     physicalDistance : OrdinaryObservable → OrdinaryObservable → Nat
     connectedCorrelationMagnitude :
       WeightedCorrelation → OrdinaryObservable → OrdinaryObservable → ℚ
@@ -200,7 +210,8 @@ record PhysicalYMUnifiedPolymerNormProducer : Set₁ where
 
     physicalSeparationDecay : ∀ scale left right →
       connectedCorrelationMagnitude
-        (correlationProjection authority (stateAtScale scale)) left right
+        (UnifiedPolymerSchwingerNormAuthority.correlationProjection
+          authority (stateAtScale scale)) left right
       ≤ separationAmplitude
         * Power.rationalPower separationRatio (physicalDistance left right)
 
@@ -214,40 +225,45 @@ record PhysicalYMUnifiedPolymerNormProducer : Set₁ where
 
 open PhysicalYMUnifiedPolymerNormProducer public
 
-------------------------------------------------------------------------
--- Direct clustering compiler from the SAME correlation projection.
-------------------------------------------------------------------------
+correlationDecayTrajectoryFromUnifiedProducer :
+  PhysicalYMUnifiedPolymerNormProducer → QuantitativeCorrelationDecayTrajectory
+correlationDecayTrajectoryFromUnifiedProducer producer = record
+  { QuantitativeCorrelationDecayTrajectory.State = State producer
+  ; QuantitativeCorrelationDecayTrajectory.Observable = OrdinaryObservable producer
+  ; QuantitativeCorrelationDecayTrajectory.Correlation = WeightedCorrelation producer
+  ; QuantitativeCorrelationDecayTrajectory.correlationProjection =
+      UnifiedPolymerSchwingerNormAuthority.correlationProjection (authority producer)
+  ; QuantitativeCorrelationDecayTrajectory.stateAtScale = stateAtScale producer
+  ; QuantitativeCorrelationDecayTrajectory.physicalDistance = physicalDistance producer
+  ; QuantitativeCorrelationDecayTrajectory.connectedCorrelationMagnitude =
+      connectedCorrelationMagnitude producer
+  ; QuantitativeCorrelationDecayTrajectory.amplitude = separationAmplitude producer
+  ; QuantitativeCorrelationDecayTrajectory.ratio = separationRatio producer
+  ; QuantitativeCorrelationDecayTrajectory.amplitudeNonnegative =
+      separationAmplitudeNonnegative producer
+  ; QuantitativeCorrelationDecayTrajectory.ratioNonnegative =
+      separationRatioNonnegative producer
+  ; QuantitativeCorrelationDecayTrajectory.ratioStrictlyBelowOne =
+      separationRatioStrictlyBelowOne producer
+  ; QuantitativeCorrelationDecayTrajectory.geometricDecayAtEveryScale =
+      physicalSeparationDecay producer
+  }
 
 clusteringAtScale :
   (producer : PhysicalYMUnifiedPolymerNormProducer) →
-  Nat →
-  R108.UniformGeometricConnectedClustering (OrdinaryObservable producer)
-clusteringAtScale producer scale = record
-  { R108.UniformGeometricConnectedClustering.distance =
-      physicalDistance producer
-  ; R108.UniformGeometricConnectedClustering.connectedCovarianceMagnitude =
-      connectedCorrelationMagnitude producer
-        (correlationProjection
-          (authority producer) (stateAtScale producer scale))
-  ; R108.UniformGeometricConnectedClustering.amplitude =
-      separationAmplitude producer
-  ; R108.UniformGeometricConnectedClustering.ratio =
-      separationRatio producer
-  ; R108.UniformGeometricConnectedClustering.amplitudeNonnegative =
-      separationAmplitudeNonnegative producer
-  ; R108.UniformGeometricConnectedClustering.ratioNonnegative =
-      separationRatioNonnegative producer
-  ; R108.UniformGeometricConnectedClustering.ratioStrictlyBelowOne =
-      separationRatioStrictlyBelowOne producer
-  ; R108.UniformGeometricConnectedClustering.connectedCovarianceBound =
-      physicalSeparationDecay producer scale
-  }
+  Nat → R108.UniformGeometricConnectedClustering (OrdinaryObservable producer)
+clusteringAtScale producer =
+  clusteringFromCorrelationTrajectoryAtScale
+    (correlationDecayTrajectoryFromUnifiedProducer producer)
 
 unifiedNormProjectionClosureLevel : ProofLevel
 unifiedNormProjectionClosureLevel = machineChecked
 
 quantitativeCorrelationProjectionToClusteringLevel : ProofLevel
 quantitativeCorrelationProjectionToClusteringLevel = machineChecked
+
+unifiedNormToCorrelationDecayTrajectoryLevel : ProofLevel
+unifiedNormToCorrelationDecayTrajectoryLevel = machineChecked
 
 brydgesDimockHurdNormPrecedentLevel : ProofLevel
 brydgesDimockHurdNormPrecedentLevel = standardImported
@@ -258,8 +274,11 @@ brydgesMitterScoppolaNormPrecedentLevel = standardImported
 polonyiSailerCompositeRGPrecedentLevel : ProofLevel
 polonyiSailerCompositeRGPrecedentLevel = standardImported
 
--- The physical theorem is now falsifiable at the canonical clustering surface:
--- an inhabitant must expose the actual connected correlation and prove the
--- uniform geometric inequality, not merely inhabit an opaque Set.
+-- Canonical B-facing physical theorem.  A proof may come from the unified norm,
+-- a direct cluster expansion, a semigroup estimate, or any other valid route.
+physicalYMCorrelationDecayTrajectoryLevel : ProofLevel
+physicalYMCorrelationDecayTrajectoryLevel = conditional
+
+-- Stronger optional tactic, retained because it simultaneously advances A/C.
 physicalYMUnifiedPolymerNormProducerLevel : ProofLevel
 physicalYMUnifiedPolymerNormProducerLevel = conditional
