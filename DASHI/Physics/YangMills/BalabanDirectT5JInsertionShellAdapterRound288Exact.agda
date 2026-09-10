@@ -3,27 +3,19 @@ module DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound288Exac
 
 ------------------------------------------------------------------------
 -- ROUND288 / R287 SOURCE PRESENTATION -> R284 DIRECT T5 SHELL
---
--- The direct B route should not retain a monolithic "literal two-source shell"
--- obligation once its internal same-object structure is known.  This adapter
--- composes:
---
---   R287: literal CMP116 J directions + second-log derivative localization
---   exact equality: source covariance = selected finite T5 covariance
---
--- into the exact R284 `DirectT5TwoSourceShell` consumer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRound287Exact as R287
 import DASHI.Physics.YangMills.BalabanCMP116DirectT5ContinuumClusteringRound284Exact as R284
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 
 record DirectT5JInsertionShellPresentation
     {Measure TestObservable : Set}
@@ -55,8 +47,7 @@ selectedT5CovarianceBelowRootedShell :
     cutoff left right →
   R278.connectedCovarianceMagnitude extension
       (Gram.measureSequence dataSet cutoff) left right
-  R287.≤
-    R284.Shell.rootedShell
+  ≤ Shell.rootedShell
       (R287.shellData (sourcePresentation presentation))
       (R287.scaleOf (sourcePresentation presentation) cutoff)
       (R287.volumeOf (sourcePresentation presentation) cutoff)
