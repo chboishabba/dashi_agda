@@ -69,11 +69,11 @@ qldS102Priority = legal-priority-coordinate
   interimRestraint
   consumerPaymentOpen
   "Nature Conservation Act ss 102-107 interim conservation-order consumer"
-  "9281/2024/OW is an approved vegetation-clearing/earthworks/stormwater works object; the same project has a historical 136 ha habitat-score-7 Koala impact map, food-tree/scat evidence and >500 ha connectivity surface"
-  "exact approved 9281 clearing polygon and conditions; current commencement/threat chronology; exact current wildlife/habitat intersection; evidence of likely significant detrimental effect"
-  "2019 EPBC impact geometry is not 9281 works geometry; works approval is not commencement; clearing entitlement is not the s 102 detrimental-effect conclusion"
-  "approval/habitat status cannot determine the interim-order test without exact current conduct, geometry, timing and likely effect"
-  "acquire the 9281 clearing plans and works chronology now; intersect them with current same-parcel habitat/species evidence and prepare the s 102 package concurrently"
+  "9281/2024/OW is approved by negotiated decision for Kalina Village 2 Stages 1-16 and expressly covers vegetation clearing, earthworks and stormwater. Council now exposes the exact 20 March 2026 approved-plan carrier (Objective A12705838), negotiated decision notice (A12705835), Tree Retention and Removal Plan (A10552668) and desktop assessment (A10552665). Related implementation-stage approvals also exist: 9293/2024/OW for Stage 1-4A road/drainage/stormwater/earthworks (approved plans A12705434) and 2082/2025/OW for Stage 1-4A landscaping (approved plans A11503353). The same project has a historical 136 ha habitat-score-7 Koala impact map, food-tree/scat evidence and >500 ha connectivity surface."
+  "contents of the 9281 negotiated approved plans/decision notice; exact approved vegetation-clearing polygon and retained-tree/open-space geometry; current commencement/threat chronology; exact current wildlife/habitat intersection; evidence of likely significant detrimental effect"
+  "Council document/object identity is not plan geometry; related roadworks/landscaping approvals are not vegetation-clearing commencement; 2019 EPBC impact geometry is not 9281 works geometry; works approval is not commencement; clearing entitlement is not the s 102 detrimental-effect conclusion"
+  "the now-source-paid implementation stack materially narrows acquisition and may increase practical urgency, but it still cannot determine the interim-order test without the actual plan contents, exact current conduct, geometry, timing and likely effect"
+  "target Objective A12705838/A12705835 first; if browser acquisition succeeds, extract the approved clearing/retention geometry and commencement prerequisites immediately. In parallel preserve 9293/2082 as stage-progression chronology, not commencement proof."
 
 qldS49Priority : LegalPriorityCoordinate
 qldS49Priority = legal-priority-coordinate
