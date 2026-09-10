@@ -13,6 +13,7 @@ import DASHI.Wikimedia.Base369OEISWikidataTeslaSnowballExact as Snow369
 -- 3 / 6 / 9 ROLE CROSSWALK
 --
 -- External coordinates inspected 2026-09-10:
+--   3  = Wikidata Q201, natural number;
 --   6  = Wikidata Q23488, natural number;
 --   9  = Wikidata Q19108, natural number and power of three;
 --   27 = Wikidata Q433353, natural number and power of three.
@@ -22,6 +23,14 @@ import DASHI.Wikimedia.Base369OEISWikidataTeslaSnowballExact as Snow369
 -- HexTruth is a separate six-state cyclic carrier.  Therefore the cultural
 -- label "369" must not collapse the three roles into one same-object claim.
 ------------------------------------------------------------------------
+
+number3Qid : Identity.ExternalIdentityDemand
+number3Qid = Identity.mkOptionalIdentityDemand
+  "Base369 3/6/9 role crosswalk"
+  "natural number 3 identity"
+  "3"
+  Identity.wikidataQid
+  (Identity.verified "Q201" "Wikidata inspected 2026-09-10")
 
 number6Qid : Identity.ExternalIdentityDemand
 number6Qid = Identity.mkOptionalIdentityDemand
@@ -55,7 +64,7 @@ open Base369NumberRole public
 
 threeRole : Base369NumberRole
 threeRole = base369-number-role
-  "3" "power-of-three coordinate; QID for number 3 not required by this tranche"
+  "3" "Q201"
   Base.TriTruth
   "three-state truth/refinement carrier and C3 tower level"
   true false
@@ -97,7 +106,6 @@ canonicalThreeSixNineDecomposition = three-six-nine-decomposition
 data SixIsPowerOfThreeTowerLevel : Set where
 data Cultural369LabelCreatesFormalProduct : Set where
 data SameNumeralCreatesSameCarrier : Set where
-
 data TeslaAttributionUnifiesNumberRoles : Set where
 
 sixIsNotPower3TowerLevel : SixIsPowerOfThreeTowerLevel → ⊥
@@ -115,6 +123,7 @@ teslaAttributionDoesNotUnifyRoles ()
 record Base369NumberQidBoundary : Set where
   constructor base369-number-qid-boundary
   field
+    number3QidRecorded : Bool
     number6QidRecorded : Bool
     number9QidRecorded : Bool
     number27QidReused : Bool
@@ -126,4 +135,4 @@ open Base369NumberQidBoundary public
 
 canonicalBase369NumberQidBoundary : Base369NumberQidBoundary
 canonicalBase369NumberQidBoundary = base369-number-qid-boundary
-  true true true true true true false
+  true true true true true true true false
