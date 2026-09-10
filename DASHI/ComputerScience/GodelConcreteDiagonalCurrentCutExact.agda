@@ -3,14 +3,16 @@ module DASHI.ComputerScience.GodelConcreteDiagonalCurrentCutExact where
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
--- CURRENT CANONICAL DIAGONAL CUT AFTER 2026 SOTA AUDIT
+-- CURRENT CANONICAL DIAGONAL CUT AFTER 2026 SOTA + IMPORT AUDIT
 --
--- Recent machine-checked external arithmetic developments already own finished
--- diagonal/fixed-point proofs.  Therefore the shortest path is same-carrier
--- transport, not replaying a preferred local representability architecture.
+-- The mathematics is no longer the first mandatory blocker.  A finished
+-- external Agda development already owns the relevant diagonal/Lob/Godel-II
+-- machinery.  The present critical path is exact dependency intake followed by
+-- same-carrier payment construction and local kernel replay.
 ------------------------------------------------------------------------
 
 data LiveDiagonalResidual : Set where
+  coquandT4DependencyIntake
   coquandT4ArithmeticSourcePayment
   coquandT4FinishedDiagonalPayment
   localKernelReplayReceipt : LiveDiagonalResidual
@@ -38,6 +40,9 @@ record CurrentDiagonalCut : Set where
     externalArithmeticABICompilerOwned : Bool
     externalFinishedDiagonalCompilerOwned : Bool
     coquandT4PaymentTargetOwned : Bool
+    exactT4RevisionPinned : Bool
+    upstreamLicenseResolved : Bool
+    localT4DependencyPresent : Bool
     canonicalLiveResiduals : List LiveDiagonalResidual
     optionalProducerResiduals : List OptionalDiagonalProducerResidual
     representabilityRouteMandatoryForFinishedExternalProof : Bool
@@ -50,7 +55,9 @@ canonicalCurrentDiagonalCut =
   currentDiagonalCut
     true true true true true true true true
     true true true true true
-    (coquandT4ArithmeticSourcePayment ∷
+    true false false
+    (coquandT4DependencyIntake ∷
+     coquandT4ArithmeticSourcePayment ∷
      coquandT4FinishedDiagonalPayment ∷
      localKernelReplayReceipt ∷ [])
     (sourceNativeSubstitutionAndRepresentationAlignment ∷
@@ -71,6 +78,7 @@ data OptionalBase12ProducerIsMandatoryTheoremDebt : Set where
 data ExternalFormalisationAutomaticallyPaysLocalABI : Set where
 data ExistingMachineProofMeansReproveLocally : Set where
 data FinishedExternalProofRequiresLocalRepresentabilityReplay : Set where
+data PublicUpstreamMeansDependencyMayBeVendored : Set where
 
 sourceWrittenDoesNotMeanCertified :
   SourceWrittenCodecMeansKernelCertified → ⊥
@@ -99,3 +107,7 @@ machineCheckedPriorArtDoesNotForceReproof ()
 finishedExternalProofDoesNotForceRepresentabilityReplay :
   FinishedExternalProofRequiresLocalRepresentabilityReplay → ⊥
 finishedExternalProofDoesNotForceRepresentabilityReplay ()
+
+publicUpstreamDoesNotSupplyVendoringAuthority :
+  PublicUpstreamMeansDependencyMayBeVendored → ⊥
+publicUpstreamDoesNotSupplyVendoringAuthority ()
