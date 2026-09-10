@@ -118,22 +118,20 @@ module ForcedPhysicalNSDynamics
 
   open ForcedPhysicalNSGalerkinTrajectory public
 
-  forcedStateAt :
+  -- Type-safe observers reuse R228's dependent state projection directly.
+  forceAt :
     ForcedPhysicalNSGalerkinTrajectory →
-    Nat → Time →
-    Audit.FiniteComplex3GalerkinSystem
-      F
-      (Base.E ∘ stateTrajectory)
-      ?
-  forcedStateAt = {!!}
+    Nat → Time → Z3.FourierMode → C3.Complex3 F
+  forceAt = externalBodyForceAt
+
+  velocityAt :
+    (T : ForcedPhysicalNSGalerkinTrajectory) →
+    Nat → Time → Z3.FourierMode → C3.Complex3 F
+  velocityAt T cutoff time mode =
+    Audit.velocity (Base.systemAt (stateTrajectory T) cutoff time) mode
 
 ------------------------------------------------------------------------
 -- 3. WrongType firewalls.
---
--- The temporary attempted helper above is deliberately NOT the public API;
--- the public projections remain `Base.systemAt (stateTrajectory T) N t` so the
--- dependent E/I indices cannot be reconstructed incorrectly.  The helper is
--- removed below by keeping only type-safe observer functions.
 ------------------------------------------------------------------------
 
 data ExternalForceEqualsProjectedNonlinearityPermission : Set where
