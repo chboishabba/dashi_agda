@@ -5,9 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
-import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snowball
-import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.CaseyITIRNixBridge as Casey
 import DASHI.Reasoning.AristotleExperimentalBranchMergeExact as BranchMerge
 import DASHI.Wikimedia.WikipediaWholeCorpusPNFITIRSensibLawPipelineExact as Whole
@@ -19,7 +17,7 @@ import DASHI.Wikimedia.WikipediaWholeCorpusPNFITIRSensibLawPipelineExact as Whol
 --   every unordered proposition pair is globally eligible for comparison.
 --   We do NOT restrict semantic eligibility to pre-indexed neighborhoods.
 --   Instead, cheap typed gates prune or defer branches before expensive
---   PNF/SensibLaw algebra.  Every prune/defer carries a receipt so the global
+--   PNF/SensibLaw algebra. Every prune/defer carries a receipt so the global
 --   pair-space remains auditable and can be reopened after revisions.
 --
 -- Cross-pollination:
@@ -106,7 +104,7 @@ canonicalAllPairsSearchContract = all-pairs-search-contract
   true false true true true true true true true false
 
 ------------------------------------------------------------------------
--- Pairwise branch tree.  The O(N^2) pair-space is real; pruning changes the
+-- Pairwise branch tree. The O(N^2) pair-space is real; pruning changes the
 -- cost per branch, not the semantic quantification domain.
 ------------------------------------------------------------------------
 
@@ -162,7 +160,7 @@ failedFactorisationMustRemainVisible ()
 
 ------------------------------------------------------------------------
 -- PNF admissibility is an early gate, not a claim that rejected candidates are
--- deleted.  Candidate history remains available to Casey/ITIR governance.
+-- deleted. Candidate history remains available to Casey/ITIR governance.
 ------------------------------------------------------------------------
 
 record PNFAdmissibilityGateReceipt : Set where
@@ -210,21 +208,24 @@ record MergeCrossPollinationBoundary : Set where
     arbitrarySemanticStatesCRDTJoinable : Bool
     semanticMergeMayRequireConflictReview : Bool
     immutableObserverReferencesRetained : Bool
+    aristotleQuotientSoundnessNeededForProofTransport : Bool
 open MergeCrossPollinationBoundary public
 
 canonicalMergeCrossPollinationBoundary : MergeCrossPollinationBoundary
 canonicalMergeCrossPollinationBoundary = merge-cross-pollination-boundary
-  true false true false true true
-
-caseyBoundaryWitness : Casey.ObserverBoundary
-  -- concrete substrate/governance instances remain supplied by runtime;
-  -- this declaration is intentionally not instantiated here.
-  _ _
-caseyBoundaryWitness = _
+  true false true false true true true
 
 ------------------------------------------------------------------------
--- The previous neighborhood-only scheduler remains useful as an acceleration
--- index, but not as the quantification boundary.
+-- Existing boundary owners are retained as the source of the cross-pollinated
+-- rules; no concrete Casey state or observer is fabricated here.
+------------------------------------------------------------------------
+
+aristotleMergeBoundary : BranchMerge.AristotleBranchMergeBoundary
+aristotleMergeBoundary = BranchMerge.canonicalAristotleBranchMergeBoundary
+
+------------------------------------------------------------------------
+-- The previous neighborhood scheduler remains useful as an acceleration index,
+-- but not as the quantification boundary.
 ------------------------------------------------------------------------
 
 record NeighborhoodAccelerationBoundary : Set where
@@ -249,7 +250,7 @@ data PruneMeansFalseProposition : Set where
 data MergeMeansClaimsEquivalent : Set where
 data JoinMeansConflictErased : Set where
 data AdmissibleMeansTrue : Set where
-\data EveryPairNeedsFullAlgebra : Set where
+data EveryPairNeedsFullAlgebra : Set where
 
 indexMissDoesNotRemovePair : IndexMissMeansIrrelevantPair → ⊥
 indexMissDoesNotRemovePair ()
