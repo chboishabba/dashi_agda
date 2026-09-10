@@ -5,7 +5,8 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact where
 -- FOCUSED CURRENT B ROLLUP
 --
 -- This is not a second planner.  It is the minimal current import surface after
--- the NS-R592 residual-normalization correction.
+-- the NS-R592 residual-normalization correction, including the direct T5 source
+-- algebra/magnitude repair and honest reconstructed-spectral frontier.
 ------------------------------------------------------------------------
 
 import DASHI.Interop.IntrospectiveResidualNormalizationExact
@@ -29,6 +30,18 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound289Exact
 import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRound290Exact
 import DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound291Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound292Exact
+
+-- R293-R298: state-family source normalization, absolute-value correction,
+-- direct T5 same-object construction, geometric subgap separation, actual
+-- nonzero-mode construction, and the honest spectral-reconstruction min-cut.
+import DASHI.Physics.YangMills.BalabanCMP116StateFamilyTwoJNormalizationRound293Exact
+import DASHI.Physics.YangMills.BalabanSubgapGeometricSeparationRound293Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound294Exact
+import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact
+import DASHI.Physics.YangMills.BalabanCMP116TwoJMagnitudeCorrectionRound295Exact
+import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact
+import DASHI.Physics.YangMills.BalabanCyclicSubgapNonzeroByConstructionRound297Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound298Exact
 
 -- Optional producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
