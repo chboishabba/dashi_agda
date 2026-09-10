@@ -155,11 +155,14 @@ import DASHI.Core.ProofCarryingPhysicalExecutionBoundaryExact
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact
 
--- Snowball plural-lens invariant, discovery/admission, attribution and grain.
+-- Snowball plural-lens invariant, discovery/admission, attribution, grain, OSINT,
+-- and historical programme-name provenance.
 import DASHI.Core.SnowballPluralLensInvariantExact
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact
 import DASHI.Core.SnowballAtomWrongTypeScaleInvariantExact
+import DASHI.Core.SnowballOSINTAcquisitionInvariantExact
+import DASHI.Core.SnowballHistoricalProgrammeNameCollisionExact
 
 -- Domain-neutral source/provenance/observation carrier.
 import DASHI.Core.SourceConditionedObservationExact
