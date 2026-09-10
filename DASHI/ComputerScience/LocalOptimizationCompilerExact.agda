@@ -3,11 +3,12 @@ module DASHI.ComputerScience.LocalOptimizationCompilerExact where
 -- Least-privilege optimization compiler.
 --
 -- The primitive payment is local: an optimized update preserves the relation
--- connecting spec and optimized states.  Whole-fold consumer equality is then
--- compiler output.  Resource accounting is intentionally separate: semantic
+-- connecting spec and optimized states. Whole-fold consumer equality is then
+-- compiler output. Resource accounting is intentionally separate: semantic
 -- equivalence neither proves nor consumes a residency bound.
 
 open import Agda.Primitive using (Level; _⊔_)
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_)
@@ -33,7 +34,7 @@ record LocalSemanticCompiler
   (OptState  : Set ℓo)
   (Input     : Set ℓx)
   (Obs       : Set ℓq)
-  : Set (ℓs ⊔ ℓo ⊔ ℓx ⊔ ℓq) where
+  : Set (ℓs ⊔ ℓo ⊔ ℓx ⊔ ℓq ⊔ ℓr) where
   field
     specStep : SpecState → Input → SpecState
     optStep  : OptState → Input → OptState
@@ -107,10 +108,9 @@ record StreamingWorkShape : Set where
 
 open StreamingWorkShape public
 
--- This is the structural distinction needed by the Fly runs: source work may
--- grow with the number of domains/batches while the local residency theorem
--- mentions only one live stream item.  No asymptotic claim about total work is
--- manufactured from this record.
+-- Source work may grow with the number of domains/batches while the local
+-- residency theorem mentions only one live stream item. No asymptotic claim
+-- about total work is manufactured from this record.
 record StreamingResidencyCertificate : Set where
   constructor streaming-residency
   field
@@ -132,9 +132,12 @@ data OptimizationFailure : Set where
 record EmpiricalResourceWitness : Set where
   constructor empirical-resource
   field
-    completed : Set
-    -- Numeric RSS/time belong to execution receipts; this generic theorem does
-    -- not import them into semantic correctness.
+    completed : Bool
+    peakRSS   : Nat
+    elapsedMilliseconds : Nat
+
+-- Numeric RSS/time belong to execution receipts. They may validate an observed
+-- run, but are not premises of wholeFoldObservationPreserved.
 
 -- Principle carried from the RH/YM/Gödel proof-search corrections:
 -- make the smallest local source/machine fact primitive and compile the large
