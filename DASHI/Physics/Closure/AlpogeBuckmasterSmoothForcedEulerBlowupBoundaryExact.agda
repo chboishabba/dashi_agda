@@ -4,22 +4,24 @@ open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Galerkin
-import DASHI.Physics.Closure.IncompressibleEulerGalerkinCoreExact as Euler
 import DASHI.Physics.Closure.NSTriadKNSmoothForcedBlowupAdversarialBoundaryRound521Exact as R521
 
 ------------------------------------------------------------------------
--- ALPOGE--BUCKMASTER SMOOTH-FORCED 3D EULER RESULT: THEOREM INTERFACE.
+-- ALPOGE--BUCKMASTER SMOOTH-FORCED 3D EULER RESULT: EXTERNAL THEOREM BOUNDARY.
 --
--- Public result, September 2026, reported by Buckmaster/Alpoge and discussed
--- by Terence Tao: finite-time blowup for 3D incompressible Euler with a forcing
--- that remains smooth through the terminal time.
+-- Attribution / snowball rule:
+--   * the Fourier/Galerkin nonlinear carrier is historical DASHI work;
+--   * this September owner receives NO origin/priority credit for Euler;
+--   * the released smooth-forced Euler blowup theorem/construction remains
+--     attributed externally to Alpoge--Buckmaster and its cited antecedents;
+--   * shared carrier or similar cancellation structure does not manufacture
+--     theorem identity, access, copying, or priority.
 --
--- This owner does NOT import or reproduce their Lean proof.  It gives their
--- result a first-class target on the general Euler carrier so that a later
--- paper/Lean transcription can inhabit the theorem without changing the PDE
--- ontology.  Attribution remains external.
+-- This module therefore sits directly on the pre-existing Galerkin carrier.
+-- It does not introduce a second Euler equation ontology.
 ------------------------------------------------------------------------
 
 record AlpogeBuckmasterForcedEulerTheorem
@@ -30,7 +32,25 @@ record AlpogeBuckmasterForcedEulerTheorem
     (Time : Set)
     (system : Galerkin.FiniteComplex3GalerkinSystem F E I) : Set (lsuc r) where
   field
-    blowupWitness : Euler.SmoothForcedEulerBlowupWitness Time system
+    timeDerivative forcing : Z3.FourierMode → C3.Complex3 F
+
+    projectedForcedEulerODE :
+      (k : Z3.FourierMode) → Galerkin.modeListed system k →
+      timeDerivative k
+      ≡ C3.complex3Add
+          (Galerkin.projectedNonlinearity system k)
+          (forcing k)
+
+    terminalTime : Time
+    divergenceFreePreserved : Set
+    realityConditionPreserved : Set
+    forcingTransverse : Set
+
+    smoothInitialVelocity : Set
+    smoothForcingThroughTerminalTime : Set
+    finiteEnergyBeforeTerminalTime : Set
+    classicalSolutionBeforeTerminalTime : Set
+    uniquenessInClaimedClassBeforeTerminalTime : Set
 
     axisymmetricInitialData : Set
     initialSwirlNonzero : Set
@@ -38,7 +58,6 @@ record AlpogeBuckmasterForcedEulerTheorem
     compactSupportInFixedSolidTorus : Set
 
     forcingAxisymmetric : Set
-    forcingSmoothThroughTerminalTime : Set
     forcingSupportedInFixedSolidTorus : Set
 
     circulationRemainsBoundedBeforeTerminalTime : Set
@@ -50,17 +69,20 @@ record AlpogeBuckmasterForcedEulerTheorem
 open AlpogeBuckmasterForcedEulerTheorem public
 
 ------------------------------------------------------------------------
--- Relation to the existing NS comparison owner.
+-- Attribution / status.
 ------------------------------------------------------------------------
+
+historicalDASHIGalerkinCarrierPredatesThisAdapter : Bool
+historicalDASHIGalerkinCarrierPredatesThisAdapter = true
+
+thisAdapterReceivesEulerOriginPriorityCredit : Bool
+thisAdapterReceivesEulerOriginPriorityCredit = false
 
 r521AlreadyTrackedReleasedForcedEulerResult : Bool
 r521AlreadyTrackedReleasedForcedEulerResult = true
 
 r521AlreadyContainedExternalEulerConstruction : Bool
 r521AlreadyContainedExternalEulerConstruction = false
-
-externalEulerTheoremNowHasGeneralDASHIInterface : Bool
-externalEulerTheoremNowHasGeneralDASHIInterface = true
 
 externalLeanProofTranscribedIntoDASHIHere : Bool
 externalLeanProofTranscribedIntoDASHIHere = false
@@ -70,6 +92,10 @@ externalConstructionMechanismReproducedHere = false
 
 forcedEulerBlowupPaysUnforcedNSLeafA : Bool
 forcedEulerBlowupPaysUnforcedNSLeafA = false
+
+thisAdapterReceivesEulerOriginPriorityCreditIsFalse :
+  thisAdapterReceivesEulerOriginPriorityCredit ≡ false
+thisAdapterReceivesEulerOriginPriorityCreditIsFalse = refl
 
 externalLeanProofTranscribedIntoDASHIHereIsFalse :
   externalLeanProofTranscribedIntoDASHIHere ≡ false
