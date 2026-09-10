@@ -49,9 +49,9 @@ federalDecisionCounselIssue = counsel-handoff-issue
   identifyProceduralVehicle
   urgentBeforeFederalDeadline
   "EPBC 2019/8575: stress-test the live Part 9 decision using the project's own referral-era ecology and identify the legally material 2019-to-2026 delta before the current decision deadline."
-  "Controlled-action status; ss 18/18A controlling matters; delegate/deadline; Lot 9999 SP292760; 162 ha referral area; 136 ha stated impact area; SHG 136 ha direct plus 26 ha indirect Koala-habitat impact; habitat score 7/10; Koala scat and food-tree evidence; habitat-connectivity score 2; rendered >500 ha connectivity map; rendered 136 ha critical-habitat impact map; SHG conclusion that clearing/functional loss of 136 ha would significantly impact Koala habitat critical to survival."
-  "Validate operative Part 9 criteria/mandatory considerations; determine what weight attaches to the proponent consultant's own significant-impact conclusion; require/stress-test reconciliation of >500 ha connectivity and future-fragmentation evidence against SHG's recovery-value-0/isolation reasoning; identify what material may still be lodged and what review/evidence-preservation steps should occur before decision."
-  "2026 final-PD delta: final action/clearing geometry; retained habitat; avoidance/alternatives; complete residual-impact treatment; final offsets and management assumptions; conservation-advice/recovery-plan treatment; response to the 1,786 public comments and any changed ecology/assumptions since 2019."
+  "Controlled-action status; ss 18/18A controlling matters; delegate/deadline; Lot 9999 SP292760; 162 ha referral area; 136 ha stated impact area; SHG 136 ha direct plus 26 ha indirect Koala-habitat impact; habitat score 7/10; Koala scat and food-tree evidence; habitat-connectivity score 2; rendered >500 ha connectivity map; rendered 136 ha critical-habitat impact map; SHG conclusion that clearing/functional loss of 136 ha would significantly impact Koala habitat critical to survival; SHG separate conclusion that removal of approximately 136 ha GHFF foraging habitat is likely to adversely impact habitat critical to survival; s 95B(2) publication notice proving 1,786 public comments and later publication of the PD/comments summary."
+  "Validate operative Part 9 criteria/mandatory considerations; determine what weight attaches to the proponent consultant's own Koala and GHFF habitat-critical adverse-impact conclusions; require/stress-test reconciliation of >500 ha connectivity and future-fragmentation evidence against SHG's recovery-value-0/isolation reasoning; distinguish habitat-critical adverse impact from population/recovery conclusions; identify what material may still be lodged and what review/evidence-preservation steps should occur before decision."
+  "First acquire the substantive 2026 Preliminary Documentation volumes/attachments because the uploaded file named Final-PD is only the one-page publication notice; then perform the delta audit: final action/clearing geometry; retained habitat; avoidance/alternatives; complete Koala/GHFF residual-impact treatment; final offsets and management assumptions; conservation-advice/recovery-plan treatment; actual summary/response to the 1,786 public comments and any changed ecology/assumptions since 2019."
   "1 October 2026"
   false
 
@@ -109,9 +109,9 @@ offsetCounterfactualCounselIssue = counsel-handoff-issue
   testElementSufficiency
   highAlphaParallel
   "Test proposed-offset adequacy against the now-source-paid impact-side baseline, including additionality, existing protection, maturity/restoration lag and functional equivalence."
-  "The Springview impact side now has proponent evidence of habitat score 7, 136 ha direct plus 26 ha indirect Koala-habitat impact and a consultant significant-impact conclusion. Public/secondary material identifies candidate offset names/areas; Bellevue evidence supports restoration-lag analysis; regional conservation context and the Avonvale identity collision remain acquisition leads."
+  "The Springview impact side now has proponent evidence of habitat score 7, 136 ha direct plus 26 ha indirect Koala-habitat impact, a consultant significant-impact conclusion, and a separate 136 ha GHFF foraging-habitat adverse-critical-habitat proposition. Public/secondary material identifies candidate offset names/areas; Bellevue evidence supports restoration-lag analysis; regional conservation context and the Avonvale identity collision remain acquisition leads."
   "Advise which offset-policy/Part 9 propositions require exact proof and whether baseline risk of loss, prior protection/obligations, maturity, temporal lag and functional equivalence must be demonstrated against this impact-side habitat/function baseline."
-  "Exact lot/plan and GIS polygon for each final offset; existing covenants/VCAs/Land for Wildlife/EPBC obligations/restoration funding; current vegetation condition/maturity; lawful baseline risk of loss; management actions; time-to-functional-equivalence; final 2026 offset calculations and conditions."
+  "Exact lot/plan and GIS polygon for each final offset; existing covenants/VCAs/Land for Wildlife/EPBC obligations/restoration funding; current vegetation condition/maturity; lawful baseline risk of loss; management actions; time-to-functional-equivalence; substantive final 2026 offset calculations and conditions."
   "urgent enough to feed the federal merits lane before decision; otherwise preserve for review/conditions scrutiny"
   false
 
@@ -170,6 +170,8 @@ data OffsetConcernEqualsOffsetInvalidity : Set where
 data SHGConclusionEqualsCommonwealthFinding : Set where
 data EPBCCriticalHabitatEqualsNCA13CriticalHabitat : Set where
 data ReferralStateEqualsFinalPDState : Set where
+data PublicationNoticeEqualsSubstantiveFinalPD : Set where
+data CommentCountEqualsResponseAdequacy : Set where
 
 dashReconstructionDoesNotBecomeLegalAdvice : DashReconstructionEqualsLegalAdvice → ⊥
 dashReconstructionDoesNotBecomeLegalAdvice ()
@@ -197,6 +199,12 @@ epbcCriticalDoesNotBecomeNCA13 ()
 
 referralStateDoesNotBecomeFinalPDState : ReferralStateEqualsFinalPDState → ⊥
 referralStateDoesNotBecomeFinalPDState ()
+
+publicationNoticeDoesNotBecomeFinalPD : PublicationNoticeEqualsSubstantiveFinalPD → ⊥
+publicationNoticeDoesNotBecomeFinalPD ()
+
+commentCountDoesNotPayResponseAdequacy : CommentCountEqualsResponseAdequacy → ⊥
+commentCountDoesNotPayResponseAdequacy ()
 
 record CounselHandoffBoundary : Set where
   constructor counsel-handoff-boundary
