@@ -22,11 +22,11 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
-import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventR294WeightRound541Exact as R541
 import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Exact as R544
 import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
@@ -47,17 +47,16 @@ module SpectatorWeightedAmplitudeCell
       Helical.Transverse
         (Field30.physicalEmbedding physicalSystem)
         mode
-        (Field30.finiteSystem physicalSystem .DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.FiniteComplex3GalerkinSystem.velocity mode)) where
+        (Audit.velocity (Field30.finiteSystem physicalSystem) mode)) where
 
   E = Field30.physicalEmbedding physicalSystem
   I = Field30.physicalInverseSquare physicalSystem
   system = Field30.finiteSystem physicalSystem
+  velocity = Audit.velocity system
 
   module Spec = R541.Spectator physicalSystem S
   module Amp (beta : Physical.PhysicalTriadIncidence) =
     R544.Fold physicalSystem S (Spec.spectatorWeight beta)
-
-  velocity = DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.FiniteComplex3GalerkinSystem.velocity system
 
   weightedMixedAmplitudeCellBelowEnergy :
     (beta alpha : Physical.PhysicalTriadIncidence) →
@@ -79,7 +78,9 @@ module SpectatorWeightedAmplitudeCell
         L2.complex3NormSquared
           (C3.complex3Scale (C3.realEmbed F w) mixed)
         ≡ (w * w) * L2.complex3NormSquared mixed
-      exactScale = trans scaleMeaning (cong (_* L2.complex3NormSquared mixed) modulusMeaning)
+      exactScale =
+        trans scaleMeaning
+          (cong (_* L2.complex3NormSquared mixed) modulusMeaning)
       wSquareNN = Rational.squareNonnegative w
       scaled =
         let instance wNN = nonNegative wSquareNN
