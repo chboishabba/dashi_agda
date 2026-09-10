@@ -38,6 +38,7 @@ files=(
   DASHI/Culture/AmyEskridgeApplicationTransformationExact.agda
   DASHI/Culture/AmyEskridgeCorporateCustodySurfaceExact.agda
   DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
+  DASHI/Culture/AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact.agda
   DASHI/Culture/AmyEskridgeInstituteTeamSuccessionSurfaceExact.agda
   DASHI/Culture/AmyEskridgeHoloChronPostDeathDissolutionFrontierExact.agda
   DASHI/Culture/MissingDeceasedFullApplicationAcquisitionExact.agda
@@ -45,6 +46,7 @@ files=(
   DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
   DASHI/Culture/AmyEskridgeCorporateInstitutionalChronologySnowballExact.agda
   DASHI/Culture/AmyEskridgePostDeathTransitionSnowballWeldExact.agda
+  DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 )
 for file in "${files[@]}"; do
@@ -120,6 +122,18 @@ grep -q 'amyApplicationFirstMissingLeafStillDerivedObjectIdentity' DASHI/Culture
 grep -q 'currentComposedPOAMSFrontier' DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
 grep -q 'successorHandoverRequiresSameCarrierEvidence' DASHI/Culture/AmyEskridgePostDeathTransitionSnowballWeldExact.agda
 
+# Exact object identity remains discriminator-gated.
+grep -q 'firstExactIdentityDiscriminator = primaryNASAReleaseIdentifier' DASHI/Culture/AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact.agda
+grep -q 'directWitnessIdentifierLead = identity-discriminator-receipt' DASHI/Culture/AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact.agda
+grep -q 'exactIdentifierMayPayIdentityConsumer' DASHI/Culture/AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact.agda
+grep -q 'discriminatorTargetsApplicationIdentity' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'ExactIdentityPaymentReceipt' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'discriminatorIsPaid' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'discriminatorMayPromoteExactIdentity' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'firstDiscriminatorTargetsFirstApplicationLeaf' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'currentWitnessIdentifierIsRetainedLeadOnly' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'paidIdentityAutomaticallyPaysSuccession' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+
 # Institute/HoloChron succession candidates are retained without same-carrier promotion.
 grep -q 'poamsExactIdentityStillUnpaid' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
 grep -q 'amyApplicationAcquisitionRemainsHighestPriority' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
@@ -135,4 +149,4 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda \
   DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 
-echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT/POAMS/custody/succession snowball validation checks passed"
+echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT/POAMS/custody/succession/identity-payment snowball validation checks passed"
