@@ -1,6 +1,41 @@
 # Save Woogaroo Forest — EPBC 2019/8575 proposed-offset adequacy audit
 
-This note is for Save Woogaroo Forest and assisting/pro-bono lawyers. It is not legal advice. It separates (1) the Commonwealth's own offset-policy tests from (2) official landscape/vegetation context, (3) public-submission criticisms of the Springview offset proposal and (4) the still-missing primary proponent offset package.
+This note is for Save Woogaroo Forest and assisting/pro-bono lawyers. It is not legal advice. It separates (1) the Commonwealth's own offset-policy tests from (2) official landscape/vegetation context, (3) public-submission criticisms of the Springview offset proposal, (4) DASHI cross-source inferences and (5) the still-missing primary proponent offset package.
+
+## Attribution discipline
+
+All propositions in this note must retain their canonical provenance stage:
+
+```text
+external source claim
+secondary source interpretation
+repository reconstruction
+cross-source inference
+repository theorem extension
+promotion / external adjudication
+```
+
+The stage is part of the claim. It must not be erased in downstream briefs.
+
+In particular:
+
+- Commonwealth offset-policy criteria are **external source claims** attributable to the Australian Government policy/guidance, not to the proponent and not to a court;
+- Queensland vegetation/habitat/protected-estate material is **external source material** supporting general or mapped ecological/planning propositions, not a finding about the adequacy of the 2019/8575 offset;
+- allegations about distant offset sites, ecological mismatch, monitoring gaps or local genetics from a public submission remain **secondary-source/submission propositions** unless independently source-paid;
+- comparisons such as "high-pressure mature connected Woogaroo habitat may not be equivalent to lower-risk planted habitat elsewhere" are **DASHI cross-source inferences** unless a single external source expressly makes that project-specific proposition;
+- none of these stages is a counsel opinion, agency finding, adjudicated fact or legal conclusion merely because the source is authoritative.
+
+Therefore:
+
+```text
+attribution != truth
+attribution != legal authority
+attribution != applicability
+submission != project fact
+policy criterion != agency finding
+general ecology != same-parcel fact
+cross-source inference != source-author statement
+```
 
 ## Bottom line
 
