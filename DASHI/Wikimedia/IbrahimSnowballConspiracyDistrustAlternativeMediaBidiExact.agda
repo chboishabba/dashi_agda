@@ -74,7 +74,7 @@ ottoClimateDistrustSource = Attribution.mkDOISource
 
 noethZanderSource : Attribution.AttributedSource
 noethZanderSource = Attribution.mkDOISource
-  "Nöth; Zander"
+  "Linnea Nöth; Lysann Zander"
   "How Epistemic Beliefs about Climate Change Predict Climate Change Conspiracy Beliefs"
   "Frontiers in Psychology 16"
   "2025"
@@ -86,7 +86,7 @@ noethZanderSource = Attribution.mkDOISource
 
 jreEpistemicStyleSource : Attribution.AttributedSource
 jreEpistemicStyleSource = Attribution.mkDOISource
-  "Communication research authors"
+  "Dominik A. Stecuła; Dannagal G. Young; Michael W. Wagner; Dhavan V. Shah"
   "The Joe Rogan Experience: Epistemic Style Over Ideological Extremity in the Manosphere"
   "Political Communication"
   "2026"
