@@ -14,7 +14,12 @@ module DASHI.Physics.YangMills.BalabanCMP116TwoSourceTrajectoryRound280Exact whe
 --
 -- This file proves the representation-only conversion with
 --   A = C_H/4, q = 1/2.
--- No new Yang--Mills estimate is introduced.
+--
+-- R280 WRONGTYPE CORRECTION
+-- The correlation carrier is NOT the scale index.  A selected producer must
+-- expose a genuine `Correlation` snapshot at each scale and prove that its
+-- evaluated connected magnitude is the SAME finite covariance owned by R279.
+-- This lets R272 subsequently take a meaningful continuum correlation limit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -24,7 +29,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open ℚP using (_<?_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -56,22 +61,35 @@ halfStrictlyBelowOne : Geo.half < 1ℚ
 halfStrictlyBelowOne = toWitness {a? = Geo.half <? 1ℚ} _
 
 record SelectedTwoSourceSpatialTrajectory
-    (Volume Root Observable : Set) : Set₁ where
+    (Volume Root Observable Correlation : Set) : Set₁ where
   field
     spatial : R279.CMP116TwoSourceSpatialShell Nat Volume Root Observable
     volumeAtScale : Nat → Volume
 
+    -- Real correlation snapshots capable of converging in the continuum lane.
+    correlationAtScale : Nat → Correlation
+    connectedCorrelationMagnitude :
+      Correlation → Observable → Observable → ℚ
+
+    -- SAME-OBJECT finite evaluation.  This is representation identity, not a
+    -- second decay estimate.
+    correlationSnapshotMeaning : ∀ scale left right →
+      connectedCorrelationMagnitude (correlationAtScale scale) left right
+      ≡ R279.connectedCovarianceMagnitude spatial
+          scale (volumeAtScale scale) left right
+
 open SelectedTwoSourceSpatialTrajectory public
 
 twoSourceAmplitude :
-  ∀ {Volume Root Observable} →
-  SelectedTwoSourceSpatialTrajectory Volume Root Observable → ℚ
+  ∀ {Volume Root Observable Correlation} →
+  SelectedTwoSourceSpatialTrajectory Volume Root Observable Correlation → ℚ
 twoSourceAmplitude selected =
   Shared.hessianAnalyticConstant (R279.shared (spatial selected)) * StepV.quarter
 
 twoSourceAmplitudeNonnegative :
-  ∀ {Volume Root Observable}
-    (selected : SelectedTwoSourceSpatialTrajectory Volume Root Observable) →
+  ∀ {Volume Root Observable Correlation}
+    (selected : SelectedTwoSourceSpatialTrajectory
+      Volume Root Observable Correlation) →
   0ℚ ≤ twoSourceAmplitude selected
 twoSourceAmplitudeNonnegative selected =
   let
@@ -93,8 +111,9 @@ twoSourceAmplitudeNonnegative selected =
   ℚP.nonNegative⁻¹ (constant * StepV.quarter)
 
 twoSourceGeometricBoundCanonical :
-  ∀ {Volume Root Observable}
-    (selected : SelectedTwoSourceSpatialTrajectory Volume Root Observable)
+  ∀ {Volume Root Observable Correlation}
+    (selected : SelectedTwoSourceSpatialTrajectory
+      Volume Root Observable Correlation)
     scale left right →
   R279.connectedCovarianceMagnitude (spatial selected)
     scale (volumeAtScale selected scale) left right
@@ -132,22 +151,40 @@ twoSourceGeometricBoundCanonical selected scale left right =
     (trans exposePower reassociate)
     sourceBound
 
+correlationSnapshotGeometricBound :
+  ∀ {Volume Root Observable Correlation}
+    (selected : SelectedTwoSourceSpatialTrajectory
+      Volume Root Observable Correlation)
+    scale left right →
+  connectedCorrelationMagnitude selected
+      (correlationAtScale selected scale) left right
+  ≤ twoSourceAmplitude selected
+      * Power.rationalPower Geo.half
+          (R279.physicalDistance (spatial selected) left right)
+correlationSnapshotGeometricBound selected scale left right =
+  subst
+    (λ lower → lower
+      ≤ twoSourceAmplitude selected
+          * Power.rationalPower Geo.half
+              (R279.physicalDistance (spatial selected) left right))
+    (sym (correlationSnapshotMeaning selected scale left right))
+    (twoSourceGeometricBoundCanonical selected scale left right)
+
 asQuantitativeCorrelationDecayTrajectory :
-  ∀ {Volume Root Observable} →
-  SelectedTwoSourceSpatialTrajectory Volume Root Observable →
+  ∀ {Volume Root Observable Correlation} →
+  SelectedTwoSourceSpatialTrajectory Volume Root Observable Correlation →
   Unified.QuantitativeCorrelationDecayTrajectory
 asQuantitativeCorrelationDecayTrajectory selected = record
-  { Unified.QuantitativeCorrelationDecayTrajectory.State = Nat
+  { Unified.QuantitativeCorrelationDecayTrajectory.State = Correlation
   ; Unified.QuantitativeCorrelationDecayTrajectory.Observable = _
-  ; Unified.QuantitativeCorrelationDecayTrajectory.Correlation = Nat
-  ; Unified.QuantitativeCorrelationDecayTrajectory.correlationProjection = λ scale → scale
-  ; Unified.QuantitativeCorrelationDecayTrajectory.stateAtScale = λ scale → scale
+  ; Unified.QuantitativeCorrelationDecayTrajectory.Correlation = Correlation
+  ; Unified.QuantitativeCorrelationDecayTrajectory.correlationProjection = λ correlation → correlation
+  ; Unified.QuantitativeCorrelationDecayTrajectory.stateAtScale =
+      correlationAtScale selected
   ; Unified.QuantitativeCorrelationDecayTrajectory.physicalDistance =
       R279.physicalDistance (spatial selected)
   ; Unified.QuantitativeCorrelationDecayTrajectory.connectedCorrelationMagnitude =
-      λ scale left right →
-        R279.connectedCovarianceMagnitude (spatial selected)
-          scale (volumeAtScale selected scale) left right
+      connectedCorrelationMagnitude selected
   ; Unified.QuantitativeCorrelationDecayTrajectory.amplitude =
       twoSourceAmplitude selected
   ; Unified.QuantitativeCorrelationDecayTrajectory.ratio = Geo.half
@@ -158,7 +195,7 @@ asQuantitativeCorrelationDecayTrajectory selected = record
   ; Unified.QuantitativeCorrelationDecayTrajectory.ratioStrictlyBelowOne =
       halfStrictlyBelowOne
   ; Unified.QuantitativeCorrelationDecayTrajectory.geometricDecayAtEveryScale =
-      twoSourceGeometricBoundCanonical selected
+      correlationSnapshotGeometricBound selected
   }
 
 round280DyadicRepresentationCompilerLevel : ProofLevel
@@ -167,8 +204,14 @@ round280DyadicRepresentationCompilerLevel = machineChecked
 round280TwoSourceShellToCanonicalTrajectoryLevel : ProofLevel
 round280TwoSourceShellToCanonicalTrajectoryLevel = machineChecked
 
--- The only physical theorem inherited from this route is R279's literal
--- two-J-direction instantiation of CMP116 differentiated localization.
+-- Physical theorem inherited from this route: R279's literal two-J-direction
+-- instantiation of CMP116 differentiated localization.
 round280LiteralTwoJDirectionsToSpatialShellLevel : ProofLevel
 round280LiteralTwoJDirectionsToSpatialShellLevel =
   R279.round279LiteralTwoJDirectionsToSpatialShellLevel
+
+-- Same-object representation seam, deliberately separated from decay: the
+-- finite covariance calculation and the continuum-capable correlation snapshot
+-- must be two presentations of the SAME connected correlation.
+round280CorrelationSnapshotMeaningLevel : ProofLevel
+round280CorrelationSnapshotMeaningLevel = conditional
