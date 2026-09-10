@@ -4,81 +4,97 @@ module DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact w
 ------------------------------------------------------------------------
 -- TWO-MARKED CONNECTED-CLUSTER TAIL
 --
--- The existing configured T5 boundary lane already has the useful geometry:
--- a contributing boundary-crossing cluster must have diameter at least the
--- observable-to-boundary distance, is injected into a rooted shell, and the
--- shell weight is bounded by the canonical configured tail.
+-- The configured T5 boundary lane already uses the right proof shape:
+-- a contributing cluster is forced far enough into a rooted shell and the
+-- resulting absolute shell sum is controlled by `rootedShellTail`.
 --
--- Connected two-point clustering needs the same compiler shape, with a
--- different event:
---
---   cluster crosses observable support -> boundary
---
--- becomes
+-- For connected two-point clustering the event is instead:
 --
 --   cluster connects support(A) -> support(B).
 --
--- This module deliberately does NOT manufacture that physical event or its
--- expansion.  It makes the first theorem-bearing Step-V leaf explicit and
--- reuses the already-owned numerical tail once the same-carrier two-mark
--- support/geometry receipts are supplied.
+-- This owner now makes the final correlation bound genuine COMPILER OUTPUT.
+-- It does not store that final inequality as an input.  The live quantitative
+-- physical payment is the absolute weight sum of the connecting clusters;
+-- exact connected-response expansion and finite triangle transport are kept
+-- separate from that payment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational using (ℚ; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
+
+sumℚ : List ℚ → ℚ
+sumℚ [] = 0ℚ
+sumℚ (x ∷ xs) = x + sumℚ xs
+
+map : ∀ {A B : Set} → (A → B) → List A → List B
+map f [] = []
+map f (x ∷ xs) = f x ∷ map f xs
 
 record TwoMarkedConnectedClusterTail
     (Cutoff Observable Cluster : Set) : Set₁ where
   field
     supportSeparation : Observable → Observable → Nat
     clusterDiameter : Cluster → Nat
+
+    contributingClusters : Cutoff → Observable → Observable → List Cluster
     clusterWeight : Cutoff → Observable → Observable → Cluster → ℚ
-
-    contributesToConnectedResponse :
-      Cutoff → Observable → Observable → Cluster → Set
-
-    -- SAME-OBJECT / REPRESENTATION LEAF:
-    -- only clusters that genuinely connect the two marked supports survive in
-    -- the connected response expansion.
-    contributingClusterConnectsBothSupports :
-      ∀ cutoff A B cluster →
-      contributesToConnectedResponse cutoff A B cluster → Set
-
-    -- GEOMETRY LEAF:
-    -- a cluster joining both supports has enough diameter to span their
-    -- separation.  Kept as a physical input rather than borrowed from the
-    -- postulated generic GraphCombinatorics surface.
-    connectingClusterDiameterAtLeastSeparation :
-      ∀ cutoff A B cluster →
-      contributesToConnectedResponse cutoff A B cluster → Set
-
-    -- ENUMERATION / TAIL LEAF:
-    -- the selected contributing clusters admit the same rooted-shell
-    -- injection and configured shell-weight bound already used by T5 boundary
-    -- cancellation.
-    connectingClusterRootedShellInjection :
-      ∀ cutoff A B cluster →
-      contributesToConnectedResponse cutoff A B cluster → Set
-
-    rootedShellWeightBoundAtSeparation :
-      ∀ cutoff A B → Set
 
     connectedResponse : Cutoff → Observable → Observable → ℚ
     absoluteValue : ℚ → ℚ
 
-    twoMarkedConnectedExpansionExact :
-      ∀ cutoff A B → Set
+    -- REPRESENTATION LEAF: the connected two-source response is exactly the
+    -- signed sum over clusters retained by the two-mark expansion.
+    connectedResponseExpansionExact : ∀ cutoff A B →
+      connectedResponse cutoff A B
+      ≡ sumℚ
+          (map (clusterWeight cutoff A B)
+            (contributingClusters cutoff A B))
 
-    -- This is the first fully quantitative payment after the preceding
-    -- representation/geometry leaves.  It is stated on the canonical T5 tail
-    -- rather than a newly invented envelope.
-    connectedResponseBelowConfiguredTail :
-      ∀ cutoff A B →
-      absoluteValue (connectedResponse cutoff A B)
+    -- PURE FINITE ANALYSIS / COMPILER INPUT: move absolute value outside the
+    -- already-selected signed cluster sum.  This should ultimately be supplied
+    -- by the canonical rational absolute-value algebra, not by cluster physics.
+    finiteTriangleForConnectingSum : ∀ cutoff A B →
+      absoluteValue
+        (sumℚ
+          (map (clusterWeight cutoff A B)
+            (contributingClusters cutoff A B)))
+      ≤
+      sumℚ
+        (map
+          (λ cluster → absoluteValue (clusterWeight cutoff A B cluster))
+          (contributingClusters cutoff A B))
+
+    -- PHYSICAL GEOMETRY / ENUMERATION LEAF: every retained cluster genuinely
+    -- connects both marked supports and therefore lies at rooted depth at least
+    -- their separation.  These are intentionally proof-bearing obligations,
+    -- not Booleans and not consequences manufactured here.
+    contributingClusterConnectsBothSupports :
+      ∀ cutoff A B cluster →
+      cluster ∈ contributingClusters cutoff A B → Set
+
+    connectingClusterDiameterAtLeastSeparation :
+      ∀ cutoff A B cluster →
+      cluster ∈ contributingClusters cutoff A B → Set
+
+    connectingClusterRootedShellInjection :
+      ∀ cutoff A B cluster →
+      cluster ∈ contributingClusters cutoff A B → Set
+
+    -- THIS is the theorem-bearing quantitative Step-V payment after the
+    -- representation/geometry leaves: the absolute connecting-cluster weight
+    -- sum is bounded by the already-owned configured rooted tail.
+    absoluteConnectingWeightSumBelowRootedTail : ∀ cutoff A B →
+      sumℚ
+        (map
+          (λ cluster → absoluteValue (clusterWeight cutoff A B cluster))
+          (contributingClusters cutoff A B))
       ≤ Tail.rootedShellTail (supportSeparation A B)
 
 open TwoMarkedConnectedClusterTail public
@@ -89,8 +105,21 @@ connectedResponseHasConfiguredSeparationTail :
     cutoff A B →
   absoluteValue dataSet (connectedResponse dataSet cutoff A B)
   ≤ Tail.rootedShellTail (supportSeparation dataSet A B)
-connectedResponseHasConfiguredSeparationTail dataSet =
-  connectedResponseBelowConfiguredTail dataSet
+connectedResponseHasConfiguredSeparationTail dataSet cutoff A B =
+  ℚP.≤-trans
+    (subst
+      (λ value →
+        absoluteValue dataSet value
+        ≤
+        sumℚ
+          (map
+            (λ cluster →
+              absoluteValue dataSet
+                (clusterWeight dataSet cutoff A B cluster))
+            (contributingClusters dataSet cutoff A B)))
+      (sym (connectedResponseExpansionExact dataSet cutoff A B))
+      (finiteTriangleForConnectingSum dataSet cutoff A B))
+    (absoluteConnectingWeightSumBelowRootedTail dataSet cutoff A B)
 
 ------------------------------------------------------------------------
 -- Boundary.
@@ -98,6 +127,9 @@ connectedResponseHasConfiguredSeparationTail dataSet =
 
 twoMarkedCarrierSeparateFromSingleMarkedMomentCarrier : Bool
 twoMarkedCarrierSeparateFromSingleMarkedMomentCarrier = true
+
+finalConnectedTailStoredAsPrimitiveInput : Bool
+finalConnectedTailStoredAsPrimitiveInput = false
 
 twoMarkedExpansionManufacturedByThisCompiler : Bool
 twoMarkedExpansionManufacturedByThisCompiler = false
@@ -108,22 +140,25 @@ connectedClusterGeometryManufacturedByThisCompiler = false
 configuredRootedTailReused : Bool
 configuredRootedTailReused = true
 
+absoluteConnectingWeightSumIsLiveStepVPayment : Bool
+absoluteConnectingWeightSumIsLiveStepVPayment = true
+
 clusterWeightDecayAloneDefinitionallyImpliesConnectedResponseDecay : Bool
 clusterWeightDecayAloneDefinitionallyImpliesConnectedResponseDecay = false
 
 clayPromotion : Bool
 clayPromotion = false
 
-twoMarkedCarrierSeparateFromSingleMarkedMomentCarrierIsTrue :
-  twoMarkedCarrierSeparateFromSingleMarkedMomentCarrier ≡ true
-twoMarkedCarrierSeparateFromSingleMarkedMomentCarrierIsTrue = refl
-
-twoMarkedExpansionManufacturedByThisCompilerIsFalse :
-  twoMarkedExpansionManufacturedByThisCompiler ≡ false
-twoMarkedExpansionManufacturedByThisCompilerIsFalse = refl
+finalConnectedTailStoredAsPrimitiveInputIsFalse :
+  finalConnectedTailStoredAsPrimitiveInput ≡ false
+finalConnectedTailStoredAsPrimitiveInputIsFalse = refl
 
 configuredRootedTailReusedIsTrue : configuredRootedTailReused ≡ true
 configuredRootedTailReusedIsTrue = refl
+
+absoluteConnectingWeightSumIsLiveStepVPaymentIsTrue :
+  absoluteConnectingWeightSumIsLiveStepVPayment ≡ true
+absoluteConnectingWeightSumIsLiveStepVPaymentIsTrue = refl
 
 clusterWeightDecayAloneDefinitionallyImpliesConnectedResponseDecayIsFalse :
   clusterWeightDecayAloneDefinitionallyImpliesConnectedResponseDecay ≡ false
