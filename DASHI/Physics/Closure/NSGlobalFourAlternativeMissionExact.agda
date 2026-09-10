@@ -117,11 +117,6 @@ dMapsToRound523 = CD.clayAlternativeD523
 
 ------------------------------------------------------------------------
 -- A/B independent research lane.
---
--- The current exact periodic/live carrier reaches the two-leaf R504 cutset.
--- R592 shrinks leaf A to the one R503 cutoff-uniform direct-companion bound.
--- Leaf B remains the phase-sensitive critical-production slice.  This is a
--- concrete producer architecture for unforced regularity; it is not payment.
 ------------------------------------------------------------------------
 
 unforcedLeafAIsCanonicalSingleR503Budget : Bool
@@ -138,8 +133,7 @@ unforcedLeafBPaid : Bool
 unforcedLeafBPaid = Cut.round504CriticalProductionSliceClosed
 
 ------------------------------------------------------------------------
--- Typed payment tokens. There are deliberately no canonical constructors here:
--- a downstream proof must supply the exact alternative-specific receipt.
+-- Typed payment tokens. There are deliberately no canonical constructors here.
 ------------------------------------------------------------------------
 
 data PaymentA : Set where
@@ -157,10 +151,6 @@ record GlobalFourAlternativeCompletion : Set where
 
 open GlobalFourAlternativeCompletion public
 
-------------------------------------------------------------------------
--- Clay's logical criterion versus the stronger global mission.
-------------------------------------------------------------------------
-
 data AnyOneClayAlternativePayment : Set where
   paidA : PaymentA → AnyOneClayAlternativePayment
   paidB : PaymentB → AnyOneClayAlternativePayment
@@ -171,17 +161,10 @@ allFourImpliesAtLeastOneClayAlternative :
   GlobalFourAlternativeCompletion → AnyOneClayAlternativePayment
 allFourImpliesAtLeastOneClayAlternative completion = paidA (paymentA completion)
 
--- Converse is intentionally unavailable: paying one official Clay alternative
--- does not complete DASHI's stronger all-four mission.
 data OneAlternativeAutomaticallyPaysAllFour : Set where
-
 oneAlternativeDoesNotAutomaticallyPayAllFour :
   OneAlternativeAutomaticallyPaysAllFour → ⊥
 oneAlternativeDoesNotAutomaticallyPayAllFour ()
-
-------------------------------------------------------------------------
--- WrongType firewalls between alternatives.
-------------------------------------------------------------------------
 
 data ForcedPaysUnforced : Set where
 data PeriodicPaysEuclidean : Set where
@@ -190,19 +173,12 @@ data TimestampPaysMathematics : Set where
 
 forcedDoesNotPayUnforced : ForcedPaysUnforced → ⊥
 forcedDoesNotPayUnforced ()
-
 periodicDoesNotPayEuclidean : PeriodicPaysEuclidean → ⊥
 periodicDoesNotPayEuclidean ()
-
 externalSourceDoesNotPayInternalProof : ExternalSourcePaysInternalProof → ⊥
 externalSourceDoesNotPayInternalProof ()
-
 timestampDoesNotPayMathematics : TimestampPaysMathematics → ⊥
 timestampDoesNotPayMathematics ()
-
-------------------------------------------------------------------------
--- Current global mission frontier.
-------------------------------------------------------------------------
 
 data GlobalNSResidual : Set where
   proveUnforcedLeafA : GlobalNSResidual
@@ -215,19 +191,15 @@ data GlobalNSResidual : Set where
 
 currentFirstIndependentUnforcedResidual : GlobalNSResidual
 currentFirstIndependentUnforcedResidual = proveUnforcedLeafA
-
 currentFirstExternalReconstructionResidual : GlobalNSResidual
 currentFirstExternalReconstructionResidual = independentlyReconstructExternalC
 
 roundGlobalFourAlternativeMissionImplemented : Bool
 roundGlobalFourAlternativeMissionImplemented = true
-
 roundGlobalAllFourInternallyPaid : Bool
 roundGlobalAllFourInternallyPaid = false
-
 roundOfficialClayAnyOneCriterionSeparatedFromAllFourMission : Bool
 roundOfficialClayAnyOneCriterionSeparatedFromAllFourMission = true
-
 roundPriorityChronologyDoesNotPromoteNS : Bool
 roundPriorityChronologyDoesNotPromoteNS =
   Priority.r503AnalyticPaymentWasAlreadyProvedByThatConsumerCommit
@@ -235,15 +207,12 @@ roundPriorityChronologyDoesNotPromoteNS =
 roundGlobalFourAlternativeMissionImplementedIsTrue :
   roundGlobalFourAlternativeMissionImplemented ≡ true
 roundGlobalFourAlternativeMissionImplementedIsTrue = refl
-
 roundGlobalAllFourInternallyPaidIsFalse :
   roundGlobalAllFourInternallyPaid ≡ false
 roundGlobalAllFourInternallyPaidIsFalse = refl
-
 roundOfficialClayAnyOneCriterionSeparatedFromAllFourMissionIsTrue :
   roundOfficialClayAnyOneCriterionSeparatedFromAllFourMission ≡ true
 roundOfficialClayAnyOneCriterionSeparatedFromAllFourMissionIsTrue = refl
-
 roundPriorityChronologyDoesNotPromoteNSIsFalse :
   roundPriorityChronologyDoesNotPromoteNS ≡ false
 roundPriorityChronologyDoesNotPromoteNSIsFalse = refl
