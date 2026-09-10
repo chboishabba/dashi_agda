@@ -3,35 +3,25 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406SpectatorWeightedClassNormEvery
 ------------------------------------------------------------------------
 -- FOCUSED EXTENSION OF THE EXISTING R505 TERMINAL CONE
 --
--- Keep the historical R505 aggregate unchanged.  This thin extension imports
--- the R541 x R584 specialization together with the graph-colouring-inspired
--- consumer-relative LH/HL orbit quotient and the actual OUTER gluing seam.
+-- Keep the historical R505 aggregate unchanged.  This extension records the
+-- exact R541 x R584 structural specialization, the graph-colouring-inspired
+-- consumer-relative LH/HL orbit quotient, and the diagnostic outer Gram seam.
 --
--- The local Bony palette now descends from four displayed labels to three
--- independent analytic orbit coordinates only after the literal R584 slot
--- consumer is proved invariant.  That local quotient does not automatically
--- pay the outer spectator-weighted fold: R180 exposes its selected signed Gram
--- debt exactly, while the positive outer cell mass is routed through the
--- three-orbit envelope with the p=0 branch handled definitionally.
+-- DELAYED-LOSSY-OBSERVER / HOMOGENEITY CORRECTION
+-- ------------------------------------------------
+-- The outer Gram route is now explicitly OPTIONAL rather than terminal.
+-- `nestedWeightedCompanionCell` is already the cubic forcing-side object.  A
+-- norm-square / Gram of that forcing is sextic, and differentiating it opens a
+-- degree-seven nonlinear remainder.  R503's literal terminal consumer instead
+-- asks for the integrated signed cross of that cubic forcing with the quadratic
+-- companion: degree five.  Therefore the highest-alpha route preserves the
+-- R541/R573/R584 structure INSIDE the forcing factor, pairs it with the literal
+-- quadratic companion, aggregates/cancels while signed, and only then applies
+-- a lossy majorant if the scalar consumer is proved to descend through it.
 --
--- The outer p/q swap has now also been audited.  It preserves k but exchanges
--- the inner-output coordinate p with q and the outer velocity slot q with p, so
--- no selected outer-vector quotient is promoted without an additional
--- same-object transport proof.  The COMPLETE scalar square already has the
--- correct global transpose quotient through R566/R567; the amplitude half is
--- therefore not an independent spacetime leaf.
---
--- The delayed-lossy-observer owner makes operation ordering explicit:
--- sign-forgetting / aggregate observers may move before a signed/coherence
--- consumer only after that consumer is proved to descend through the observer.
---
--- Historical R373/R393/R303 then sharpen the live seam: pointwise positivity
--- or nonpositivity of the selected outer Gram debt is NOT mandatory.  The
--- preferred weaker route keeps that debt signed through finite aggregation and
--- time.  R385/R393/R303 already own the generic downstream compilers once the
--- literal selected nested outer Gram pairs have been equipped with their actual
--- damped tangent law.  Hence the first same-object residual is now the tangent
--- weld for the selected `nestedWeightedCompanionCell` Gram pairs.
+-- The outer Gram ledger and its positive three-orbit envelope remain useful
+-- diagnostics / optional sufficient producers.  They are not prerequisites for
+-- R503, and their damped-pair tangent is not scheduled as the first residual.
 --
 -- No cutoff-uniform PDE or spacetime payment is manufactured here.
 ------------------------------------------------------------------------
@@ -47,6 +37,7 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterGramGluingBidiExact
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterCellMassThreeOrbitBidiExact
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterSwapGluingBoundaryExact
 import DASHI.Physics.Closure.NSDelayedLossyObserverConsumerDescentBidiExact
+import DASHI.Physics.Closure.NSSignedCrossBeforeForcingNormHomogeneityBidiExact
 import DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact
 
 outerSpectatorWeightStructuralWeldClosed : Bool
@@ -82,29 +73,23 @@ normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent = false
 aggregateCanMoveBeforeDirectionConsumerWithoutDescent : Bool
 aggregateCanMoveBeforeDirectionConsumerWithoutDescent = false
 
-pointwiseNonpositiveOuterGramRequired : Bool
-pointwiseNonpositiveOuterGramRequired = false
+outerGramRouteRetainedAsOptionalDiagnostic : Bool
+outerGramRouteRetainedAsOptionalDiagnostic = true
 
-signedOuterGramMayRemainSignedThroughTime : Bool
-signedOuterGramMayRemainSignedThroughTime = true
+outerGramRouteMandatoryForR503 : Bool
+outerGramRouteMandatoryForR503 = false
 
-r385FiniteSignedAggregationReusableAfterTangentWeld : Bool
-r385FiniteSignedAggregationReusableAfterTangentWeld = true
+selectedNestedOuterDampedPairTangentIsMandatoryFirstResidual : Bool
+selectedNestedOuterDampedPairTangentIsMandatoryFirstResidual = false
 
-r393R303TemporalCompilerReusableAfterSameObjectIdentity : Bool
-r393R303TemporalCompilerReusableAfterSameObjectIdentity = true
+signedNestedForcingPairedBeforeNorm : Bool
+signedNestedForcingPairedBeforeNorm = true
 
-selectedNestedOuterDampedPairTangentWeldClosed : Bool
-selectedNestedOuterDampedPairTangentWeldClosed = false
+r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeaf : Bool
+r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeaf = true
 
 forensicEarliestForwardLedgerIntegrated : Bool
 forensicEarliestForwardLedgerIntegrated = true
-
-selectedOuterSignedGramPaymentClosed : Bool
-selectedOuterSignedGramPaymentClosed = false
-
-cutoffUniformThreeOrbitSpacetimeEnvelopeClosed : Bool
-cutoffUniformThreeOrbitSpacetimeEnvelopeClosed = false
 
 r503ClosedHere : Bool
 r503ClosedHere = false
@@ -156,29 +141,25 @@ aggregateCanMoveBeforeDirectionConsumerWithoutDescentIsFalse :
   aggregateCanMoveBeforeDirectionConsumerWithoutDescent ≡ false
 aggregateCanMoveBeforeDirectionConsumerWithoutDescentIsFalse = refl
 
-pointwiseNonpositiveOuterGramRequiredIsFalse :
-  pointwiseNonpositiveOuterGramRequired ≡ false
-pointwiseNonpositiveOuterGramRequiredIsFalse = refl
+outerGramRouteMandatoryForR503IsFalse :
+  outerGramRouteMandatoryForR503 ≡ false
+outerGramRouteMandatoryForR503IsFalse = refl
 
-signedOuterGramMayRemainSignedThroughTimeIsTrue :
-  signedOuterGramMayRemainSignedThroughTime ≡ true
-signedOuterGramMayRemainSignedThroughTimeIsTrue = refl
+selectedNestedOuterDampedPairTangentIsMandatoryFirstResidualIsFalse :
+  selectedNestedOuterDampedPairTangentIsMandatoryFirstResidual ≡ false
+selectedNestedOuterDampedPairTangentIsMandatoryFirstResidualIsFalse = refl
 
-selectedNestedOuterDampedPairTangentWeldClosedIsFalse :
-  selectedNestedOuterDampedPairTangentWeldClosed ≡ false
-selectedNestedOuterDampedPairTangentWeldClosedIsFalse = refl
+signedNestedForcingPairedBeforeNormIsTrue :
+  signedNestedForcingPairedBeforeNorm ≡ true
+signedNestedForcingPairedBeforeNormIsTrue = refl
+
+r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeafIsTrue :
+  r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeaf ≡ true
+r503DirectSignedOffDiagonalBudgetStillFirstAnalyticLeafIsTrue = refl
 
 forensicEarliestForwardLedgerIntegratedIsTrue :
   forensicEarliestForwardLedgerIntegrated ≡ true
 forensicEarliestForwardLedgerIntegratedIsTrue = refl
-
-selectedOuterSignedGramPaymentClosedIsFalse :
-  selectedOuterSignedGramPaymentClosed ≡ false
-selectedOuterSignedGramPaymentClosedIsFalse = refl
-
-cutoffUniformThreeOrbitSpacetimeEnvelopeClosedIsFalse :
-  cutoffUniformThreeOrbitSpacetimeEnvelopeClosed ≡ false
-cutoffUniformThreeOrbitSpacetimeEnvelopeClosedIsFalse = refl
 
 r503ClosedHereIsFalse : r503ClosedHere ≡ false
 r503ClosedHereIsFalse = refl
