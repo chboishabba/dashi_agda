@@ -12,8 +12,8 @@ module DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact w
 --
 --   cluster connects support(A) -> support(B).
 --
--- This owner now makes the final correlation bound genuine COMPILER OUTPUT.
--- It does not store that final inequality as an input.  The live quantitative
+-- This owner makes the final correlation bound genuine COMPILER OUTPUT.  It
+-- does not store that final inequality as an input.  The live quantitative
 -- physical payment is the absolute weight sum of the connecting clusters;
 -- exact connected-response expansion and finite triangle transport are kept
 -- separate from that payment.
@@ -25,6 +25,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (_∈_)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
@@ -71,10 +72,7 @@ record TwoMarkedConnectedClusterTail
           (λ cluster → absoluteValue (clusterWeight cutoff A B cluster))
           (contributingClusters cutoff A B))
 
-    -- PHYSICAL GEOMETRY / ENUMERATION LEAF: every retained cluster genuinely
-    -- connects both marked supports and therefore lies at rooted depth at least
-    -- their separation.  These are intentionally proof-bearing obligations,
-    -- not Booleans and not consequences manufactured here.
+    -- PHYSICAL GEOMETRY / ENUMERATION LEAVES.
     contributingClusterConnectsBothSupports :
       ∀ cutoff A B cluster →
       cluster ∈ contributingClusters cutoff A B → Set
