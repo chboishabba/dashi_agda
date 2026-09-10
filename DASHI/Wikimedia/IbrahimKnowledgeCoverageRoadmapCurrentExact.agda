@@ -134,7 +134,7 @@ historicalPolicy : Historical.RoadmapPolicy
 historicalPolicy = Historical.canonicalRoadmapPolicy
 
 deltaPolicy : Delta.RoadmapDeltaPolicy
-deltaPolicy = Delta.canonicalRoadmapPolicy
+deltaPolicy = Delta.canonicalRoadmapDeltaPolicy
 
 independenceBoundary : Synthesis.EvidenceSynthesisPeerReviewIndependenceBoundary
 independenceBoundary = Synthesis.canonicalEvidenceSynthesisPeerReviewIndependenceBoundary
