@@ -2,16 +2,22 @@
 module DASHI.Physics.YangMills.BalabanLangevinAnchoredInfluenceRound268Exact where
 
 ------------------------------------------------------------------------
--- ROUND268 / R260 ANCHOR -> R266 TYPED LANGEVIN INFLUENCE
+-- ROUND268/R269 / R260 ANCHOR -> R266 TYPED LANGEVIN INFLUENCE
 --
 -- R260 separates a marked CMP comparison from a reference Hessian anchor before
--- taking an absolute value.  R266 requires the rational influence matrix to
+-- taking an absolute value. R266 requires the rational influence matrix to
 -- majorize the ACTUAL typed Langevin action-Hessian entry.
 --
--- Choose each influence entry to be R260's rational `absoluteDebt`.  Then the
--- real absolute-entry bound and nonnegativity are theorem output.  Remaining
--- spatial source work is only the same-object comparison/reference realization
--- and one weighted row bound for those rational debts.
+-- Choose each influence entry to be R260's rational `absoluteDebt`. Then the
+-- real absolute-entry bound and nonnegativity are theorem output. The current
+-- repository audit found no theorem identifying the older configured T3
+-- gauge-fixed/reference Hessian with the literal CMP109 effective-action Hessian;
+-- such a substitution is therefore forbidden here.
+--
+-- Remaining spatial source work:
+--   * literal CMP109 Langevin differentiation (R267);
+--   * same-object R260 marked comparison + reference anchor;
+--   * one weighted row bound for the resulting rational debts.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -136,6 +142,8 @@ round268AnchoredEntryToInfluenceCompilerLevel = machineChecked
 round268BidirectionalConsumerCompilerLevel : ProofLevel
 round268BidirectionalConsumerCompilerLevel = Bidi.round262BidiCompilerLevel
 
+-- No same-carrier producer for these two payments was found in the current
+-- repository audit. They remain theorem-bearing physical source obligations.
 round268SameObjectAnchoredSourceLevel : ProofLevel
 round268SameObjectAnchoredSourceLevel = conditional
 
