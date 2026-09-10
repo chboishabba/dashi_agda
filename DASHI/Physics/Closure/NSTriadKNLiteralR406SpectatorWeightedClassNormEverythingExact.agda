@@ -14,9 +14,12 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406SpectatorWeightedClassNormEvery
 -- debt exactly, while the positive outer cell mass is routed through the
 -- three-orbit envelope with the p=0 branch handled definitionally.
 --
--- This is the same discipline used by the graph-colouring snowball: local
--- recolouring/reduction may simplify a carrier, but global promotion waits for
--- the real seam/gluing consumer.
+-- The outer p/q swap has now also been audited.  It preserves k but exchanges
+-- the inner-output coordinate p with q and the outer velocity slot q with p, so
+-- no selected outer-vector quotient is promoted without an additional
+-- same-object transport proof.  The COMPLETE scalar square already has the
+-- correct global transpose quotient through R566/R567; the amplitude half is
+-- therefore not an independent spacetime leaf.
 --
 -- No cutoff-uniform PDE or spacetime payment is manufactured here.
 ------------------------------------------------------------------------
@@ -30,6 +33,7 @@ import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyLHHLNormSymmetryBidiExact
 import DASHI.Physics.Closure.NSTriadKNSpectatorWeightedExactClassEnvelopeBidiExact
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterGramGluingBidiExact
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterCellMassThreeOrbitBidiExact
+import DASHI.Physics.Closure.NSTriadKNSpectatorNestedOuterSwapGluingBoundaryExact
 import DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact
 
 outerSpectatorWeightStructuralWeldClosed : Bool
@@ -43,6 +47,15 @@ outerSelectedGramGluingExposed = true
 
 outerPositiveCellMassRoutedToThreeOrbitEnvelope : Bool
 outerPositiveCellMassRoutedToThreeOrbitEnvelope = true
+
+outerSwapAutomaticallyPromotesLocalQuotient : Bool
+outerSwapAutomaticallyPromotesLocalQuotient = false
+
+completeScalarTransposeQuotientClosed : Bool
+completeScalarTransposeQuotientClosed = true
+
+independentAmplitudeSpacetimeLeafStillRequired : Bool
+independentAmplitudeSpacetimeLeafStillRequired = false
 
 localOrbitQuotientAutomaticallyPaysGlobalGluing : Bool
 localOrbitQuotientAutomaticallyPaysGlobalGluing = false
@@ -77,6 +90,18 @@ outerSelectedGramGluingExposedIsTrue = refl
 outerPositiveCellMassRoutedToThreeOrbitEnvelopeIsTrue :
   outerPositiveCellMassRoutedToThreeOrbitEnvelope ≡ true
 outerPositiveCellMassRoutedToThreeOrbitEnvelopeIsTrue = refl
+
+outerSwapAutomaticallyPromotesLocalQuotientIsFalse :
+  outerSwapAutomaticallyPromotesLocalQuotient ≡ false
+outerSwapAutomaticallyPromotesLocalQuotientIsFalse = refl
+
+completeScalarTransposeQuotientClosedIsTrue :
+  completeScalarTransposeQuotientClosed ≡ true
+completeScalarTransposeQuotientClosedIsTrue = refl
+
+independentAmplitudeSpacetimeLeafStillRequiredIsFalse :
+  independentAmplitudeSpacetimeLeafStillRequired ≡ false
+independentAmplitudeSpacetimeLeafStillRequiredIsFalse = refl
 
 localOrbitQuotientAutomaticallyPaysGlobalGluingIsFalse :
   localOrbitQuotientAutomaticallyPaysGlobalGluing ≡ false
