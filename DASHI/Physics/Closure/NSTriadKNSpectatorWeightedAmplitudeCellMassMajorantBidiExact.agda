@@ -36,21 +36,23 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
 import DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400Exact as R400
 import DASHI.Physics.Closure.NSTriadKNDiagonalResolventRateFloorRound449Exact as R449
 import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
 import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact as R455
-import DASHI.Physics.Closure.NSTriadKNHHAntiParallelQuadraticKernelNormRound174Exact as R174
 import DASHI.Physics.Closure.NSTriadKNDirectResolventPairSwapSymmetryRound538Exact as R538
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventR294WeightRound541Exact as R541
-import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityCellEnergyProductBidiExact as Cell
 import DASHI.Physics.Closure.NSTriadKNSpectatorWeightedAmplitudeGramLedgerBidiExact as LedgerOwner
 import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quotient
@@ -71,7 +73,7 @@ module Majorant
       Helical.Transverse
         (Field30.physicalEmbedding physicalSystem)
         mode
-        (Field30.Finite.velocity (Field30.finiteSystem physicalSystem) mode))
+        (Audit.velocity (Field30.finiteSystem physicalSystem) mode))
     (output : Z3.FourierMode)
     (outputNonzero : Z3.NonZeroMode output)
     (beta : Physical.PhysicalTriadIncidence)
@@ -80,7 +82,7 @@ module Majorant
   E = Field30.physicalEmbedding physicalSystem
   I = Field30.physicalInverseSquare physicalSystem
   system = Field30.finiteSystem physicalSystem
-  velocity = Field30.Finite.velocity system
+  velocity = Audit.velocity system
 
   module Rate = R400.PhysicalRate physicalSystem S viscosityPositive
   module Floor = R450.PhysicalCellRateFloor
@@ -139,7 +141,9 @@ module Majorant
     Swap.pairResolvent alpha beta ≤ ceiling
   pairResolventBelowCeiling alpha alphaOutput =
     let
-      pairPos = pairRatePositive alpha alphaOutput
+      instance pairPositiveI : Positive (pairRate alpha)
+      pairPositiveI = pairRatePositive alpha alphaOutput
+      pairStrict : 0ℚ < pairRate alpha
       pairStrict = ℚP.positive⁻¹ (pairRate alpha)
       lowerStrict = R449.twicePositive Floor.nuPositive
       asPositiveReciprocal :
@@ -164,12 +168,13 @@ module Majorant
     0ℚ < Swap.pairResolvent alpha beta
   pairResolventPositive alpha alphaOutput =
     let
+      instance pairPositiveI : Positive (pairRate alpha)
+      pairPositiveI = pairRatePositive alpha alphaOutput
+      pairStrict : 0ℚ < pairRate alpha
       pairStrict = ℚP.positive⁻¹ (pairRate alpha)
       asPositiveReciprocal :
         Swap.pairResolvent alpha beta
         ≡ Quotient.positiveReciprocal (pairRate alpha) pairStrict
-      asPositiveReciprocal =
-        R449.safeReciprocalIsPositiveReciprocal (pairRate alpha) pairStrict
       positiveReciprocal = Quotient.positiveReciprocalPositive
         (pairRate alpha) pairStrict
     in
