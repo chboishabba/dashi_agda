@@ -108,48 +108,48 @@ compileExternalArithmeticSystem :
   ExternalArithmeticSource → Godel.ArithmetisedFormalSystem
 compileExternalArithmeticSystem S =
   record
-    { Godel.Term = Term S
-    ; Godel.Formula = RestrictedUnary S
-    ; Godel.BinaryFormula = RestrictedBinary S
-    ; Godel.Sentence = RestrictedSentence S
-    ; Godel.Proof = RestrictedProof S
+    { Term = Term S
+    ; Formula = RestrictedUnary S
+    ; BinaryFormula = RestrictedBinary S
+    ; Sentence = RestrictedSentence S
+    ; Proof = RestrictedProof S
 
-    ; Godel.codeTerm = codeTerm S
-    ; Godel.codeFormula = λ φ → codeFormula S (rawUnary φ)
-    ; Godel.codeBinaryFormula = λ φ → codeFormula S (rawBinary φ)
-    ; Godel.codeSentence = λ φ → codeFormula S (rawSentence φ)
-    ; Godel.codeProof = λ p → codeFormula S (provedRaw p)
+    ; codeTerm = codeTerm S
+    ; codeFormula = λ φ → codeFormula S (rawUnary φ)
+    ; codeBinaryFormula = λ φ → codeFormula S (rawBinary φ)
+    ; codeSentence = λ φ → codeFormula S (rawSentence φ)
+    ; codeProof = λ p → codeFormula S (provedRaw p)
 
-    ; Godel.numeral = numeral S
-    ; Godel.instantiate = λ φ t →
+    ; numeral = numeral S
+    ; instantiate = λ φ t →
         restrictedSentence
           (instantiateUnaryRaw S (rawUnary φ) t)
           (unaryInstantiationClosed S (rawUnary φ) (unaryOK φ) t)
-    ; Godel.instantiate2 = λ φ s t →
+    ; instantiate2 = λ φ s t →
         restrictedSentence
           (instantiateBinaryRaw S (rawBinary φ) s t)
           (binaryInstantiationClosed S (rawBinary φ) (binaryOK φ) s t)
 
-    ; Godel.Provable = λ φ → RawDeriv S (rawSentence φ)
-    ; Godel.proves = λ p φ → provedRaw p ≡ rawSentence φ
+    ; Provable = λ φ → RawDeriv S (rawSentence φ)
+    ; proves = λ p φ → provedRaw p ≡ rawSentence φ
 
-    ; Godel.Negation = λ φ →
+    ; Negation = λ φ →
         restrictedSentence
           (NegationRaw S (rawSentence φ))
           (negationClosed S (rawSentence φ) (closedOK φ))
-    ; Godel.Implication = λ φ ψ →
+    ; Implication = λ φ ψ →
         restrictedSentence
           (ImplicationRaw S (rawSentence φ) (rawSentence ψ))
           (implicationClosed S
             (rawSentence φ) (rawSentence ψ)
             (closedOK φ) (closedOK ψ))
-    ; Godel.Biconditional = λ φ ψ →
+    ; Biconditional = λ φ ψ →
         restrictedSentence
           (BiconditionalRaw S (rawSentence φ) (rawSentence ψ))
           (biconditionalClosed S
             (rawSentence φ) (rawSentence ψ)
             (closedOK φ) (closedOK ψ))
-    ; Godel.ConsistencySentence =
+    ; ConsistencySentence =
         restrictedSentence (consistencyRaw S) (consistencyClosed S)
     }
 
@@ -176,8 +176,8 @@ compileExternalArithmetisedSubstitution :
   Godel.ArithmetisedSubstitution (compileExternalArithmeticSystem S)
 compileExternalArithmetisedSubstitution S A =
   record
-    { Godel.substituteCode = substituteCodeRaw A
-    ; Godel.substitutionExact = substituteCodeExact A
+    { substituteCode = substituteCodeRaw A
+    ; substitutionExact = substituteCodeExact A
     }
 
 ------------------------------------------------------------------------
