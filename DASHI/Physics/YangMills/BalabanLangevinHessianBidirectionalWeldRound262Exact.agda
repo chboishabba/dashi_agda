@@ -2,7 +2,20 @@
 module DASHI.Physics.YangMills.BalabanLangevinHessianBidirectionalWeldRound262Exact where
 
 ------------------------------------------------------------------------
--- ROUND262 / ROW-C BIDIRECTIONAL SAME-HESSIAN WELD
+-- ROUND262/R264 / ROW-C BIDIRECTIONAL SAME-HESSIAN WELD
+--
+-- R262 forced the spatial and temporal Row-C consumers onto ONE literal
+-- Langevin/source carrier.  R264 now removes one remaining overcharge:
+--
+--   weighted generator row = one CMP116 weighted partial
+--
+-- was stronger than the downstream finite-speed/Dyson consumer needs.
+-- The existing least-privilege metric influence compiler requires only
+--
+--   weighted generator row <= shared CMP116 Hessian constant.
+--
+-- So this owner now stores exactly that one-sided same-object domination.
+-- No rowDepth and no exact partial-sum equality remain on the preferred path.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -13,14 +26,12 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact as Langevin
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
-import DASHI.Physics.YangMills.BalabanRootedKPToExponentialWeightedHessianExact as Hess
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanThreeHalvesMetricWeightExact as Metric
-import DASHI.Physics.YangMills.BalabanSharedMarkedHessianGeneratorRowExact as Spatial
+import DASHI.Physics.YangMills.BalabanSharedMarkedMetricInfluenceExact as Influence
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianCurvatureIdentityExact as Temporal
 import DASHI.Physics.YangMills.BalabanFiniteWeightedInfluencePowerExact as Weighted
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToWeightedInfluenceExact as WeightedBridge
-import DASHI.Physics.YangMills.BalabanSharedMarkedMetricInfluenceExact as Influence
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanSharedMarkedHessianToCurvatureDebtExact as Curv
 import DASHI.Physics.YangMills.BalabanUnifiedPolchinskiCurvatureDebtExact as Debt
@@ -48,15 +59,18 @@ record LiteralLangevinHessianBidirectionalWeld
     influence :
       Langevin.Site langevin → Langevin.Site langevin → ℚ
     influenceNonnegative : ∀ x y → 0ℚ ≤ influence x y
-    rowDepth : Langevin.Site langevin → Nat
 
-    symmetricLangevinRowIsCMP109116Hessian : ∀ x →
+    -- Least-privilege spatial source payment.  The finite-speed/Dyson compiler
+    -- needs only this domination, not equality with a chosen finite shell
+    -- partial sum.  It must still concern the SAME literal derivative generator
+    -- represented by `langevin` and the SAME marked source represented by
+    -- `shared`; that physical identification remains the live source seam.
+    symmetricLangevinWeightedRowBelowSharedHessian : ∀ x →
       Sums.sumRational sites
         (λ y → Metric.metricWeight metric x y * influence x y)
-      ≡ Hess.weightedHessianPartial
-          (Shared.hessianWeightedControl shared)
-          scale volume root (rowDepth x)
+      ≤ Shared.hessianAnalyticConstant shared
 
+    -- Temporal projection from the SAME marked source object.
     curvatureDebt : Nat → ℚ
     curvatureDebtNonnegative : ∀ n → 0ℚ ≤ curvatureDebt n
     sameHessianIsHeatDoobNegativeCurvatureShell : ∀ n →
@@ -65,35 +79,28 @@ record LiteralLangevinHessianBidirectionalWeld
 
 open LiteralLangevinHessianBidirectionalWeld public
 
-asSpatialIdentification :
+------------------------------------------------------------------------
+-- Projection 1: same literal source -> least-privilege spatial compiler.
+------------------------------------------------------------------------
+
+asMetricInfluenceBridge :
   ∀ {Scale Volume Root}
     (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root) →
-  Spatial.LiteralHessianGeneratorRowIdentification
+  Influence.SharedMarkedMetricInfluenceBridge
     Scale Volume Root (Langevin.Site (langevin dataSet))
-asSpatialIdentification dataSet = record
-  { Spatial.LiteralHessianGeneratorRowIdentification.shared = shared dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.scale = scale dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.volume = volume dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.root = root dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.sites = sites dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.metric = metric dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.influence = influence dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.influenceNonnegative =
+asMetricInfluenceBridge dataSet = record
+  { Influence.SharedMarkedMetricInfluenceBridge.shared = shared dataSet
+  ; Influence.SharedMarkedMetricInfluenceBridge.scale = scale dataSet
+  ; Influence.SharedMarkedMetricInfluenceBridge.volume = volume dataSet
+  ; Influence.SharedMarkedMetricInfluenceBridge.root = root dataSet
+  ; Influence.SharedMarkedMetricInfluenceBridge.sites = sites dataSet
+  ; Influence.SharedMarkedMetricInfluenceBridge.metric = metric dataSet
+  ; Influence.SharedMarkedMetricInfluenceBridge.influence = influence dataSet
+  ; Influence.SharedMarkedMetricInfluenceBridge.influenceNonnegative =
       influenceNonnegative dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.rowDepth = rowDepth dataSet
-  ; Spatial.LiteralHessianGeneratorRowIdentification.generatorRowIsMarkedHessianPartial =
-      symmetricLangevinRowIsCMP109116Hessian dataSet
+  ; Influence.SharedMarkedMetricInfluenceBridge.weightedGeneratorRowBelowSharedHessian =
+      symmetricLangevinWeightedRowBelowSharedHessian dataSet
   }
-
-spatialWeightedRowBound :
-  ∀ {Scale Volume Root}
-    (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root)
-    x →
-  Sums.sumRational (sites dataSet)
-    (λ y → Metric.metricWeight (metric dataSet) x y * influence dataSet x y)
-  ≤ Shared.hessianAnalyticConstant (shared dataSet)
-spatialWeightedRowBound dataSet =
-  Spatial.weightedGeneratorRowBound (asSpatialIdentification dataSet)
 
 spatialAllDysonRowsBound :
   ∀ {Scale Volume Root}
@@ -101,14 +108,17 @@ spatialAllDysonRowsBound :
     n x →
   Weighted.weightedPowerRow
     (WeightedBridge.asWeightedFiniteInfluence
-      (Influence.asWeightedBridge
-        (Spatial.asMetricInfluenceBridge (asSpatialIdentification dataSet))))
+      (Influence.asWeightedBridge (asMetricInfluenceBridge dataSet)))
     n x
   ≤ Power.rationalPower
       (Shared.hessianAnalyticConstant (shared dataSet))
       (Agda.Builtin.Nat.suc n)
 spatialAllDysonRowsBound dataSet =
-  Spatial.allWeightedGeneratorPowersBound (asSpatialIdentification dataSet)
+  Influence.metricWeightedPowerRowBound (asMetricInfluenceBridge dataSet)
+
+------------------------------------------------------------------------
+-- Projection 2: same literal source -> temporal curvature-debt compiler.
+------------------------------------------------------------------------
 
 asTemporalIdentification :
   ∀ {Scale Volume Root} →
@@ -140,6 +150,10 @@ temporalUniformCurvatureDebt :
 temporalUniformCurvatureDebt dataSet =
   Temporal.sameObjectCurvatureUniformDebt (asTemporalIdentification dataSet)
 
+------------------------------------------------------------------------
+-- Exact compact-Lie connection cancellation remains downstream once identified.
+------------------------------------------------------------------------
+
 literalConnectionCancellationAvailable :
   ∀ {Scale Volume Root}
     (dataSet : LiteralLangevinHessianBidirectionalWeld Scale Volume Root) →
@@ -150,6 +164,13 @@ literalConnectionCancellationAvailable dataSet =
 round262BidiCompilerLevel : ProofLevel
 round262BidiCompilerLevel = machineChecked
 
+round264LeastPrivilegeSpatialCompilerLevel : ProofLevel
+round264LeastPrivilegeSpatialCompilerLevel =
+  Influence.sharedMarkedMetricToAllWeightedPowerRowsLevel
+
+-- Still physical/source debt: instantiate one literal source object satisfying
+-- the differentiated commutator, its symmetric-Hessian identification, the one
+-- least-privilege weighted-row domination, and the temporal same-density shell.
 round262LiteralSourceRealizationLevel : ProofLevel
 round262LiteralSourceRealizationLevel = conditional
 
