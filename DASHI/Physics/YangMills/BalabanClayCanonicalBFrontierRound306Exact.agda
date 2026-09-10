@@ -9,8 +9,9 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact where
 -- valuable optional internal reconstruction/cross-check.
 --
 -- R296 + R278 + R304 reduce arbitrary-pair continuum exponential clustering to
--- one analytic source theorem plus time/support semantics.  R305 then isolates
--- the established clustering->spectrum theorem as standard-library authority.
+-- one source/application payment plus time/support semantics.  R305 then
+-- isolates the established clustering->spectrum theorem as standard-library
+-- authority.
 --
 -- Current YM-specific payments on this route:
 --
@@ -20,18 +21,26 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact where
 --   G3. same reconstructed Hamiltonian: the concrete q=1/2 decay bound means
 --       exponential decay at one strictly positive physical mass m*.
 --
--- Introspective refinement:
+-- Introspective refinement after R299 + source archaeology:
 --
---   * G1 is the first theorem-sized source/application leaf that actually
---     manufactures the quantitative decay information consumed by B.
+--   * G1 must NOT be read as a fresh 4D YM decay theorem.  CMP116 already owns
+--     differentiated exponential localization on its declared analytic
+--     U/J/A carrier, and finite Cauchy differentiation + common-radius
+--     construction are compiler/source-owned.  The surviving payment is the
+--     SAME-OBJECT/APPLICABILITY specialization: identify the selected physical
+--     T5 observables with the literal CMP116/CMP119 J directions on the active
+--     density, preserve their support/root geometry, and instantiate the
+--     published differentiated-localization theorem on those directions.
 --   * G2 is a same-object / physical-semantics weld.  It is mandatory for
 --     correctness, but it does not create a stronger decay inequality.
 --   * G3 is a same-Hamiltonian rate/energy normalization weld.  The ordered
 --     lattice/physical exponent algebra is already compiler-owned elsewhere;
 --     this coordinate gives the concrete q=1/2 bound its physical mass meaning.
 --
--- Thus "three mandatory physical coordinates" must not be misread as
--- "three independent new YM analytic estimates".
+-- Thus the shortest B route currently contains NO newly invented generic
+-- clustering mechanism.  Its first unresolved source-facing payment is the
+-- literal selected-J specialization of an already source-owned differentiated
+-- localization theorem.
 --
 -- Standard-library payment (not new 4D YM analysis):
 --
@@ -44,6 +53,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
+import DASHI.Physics.YangMills.BalabanAbsoluteTwoJSourceMinCutRound299Exact as R299
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
 import DASHI.Physics.YangMills.BalabanPairwiseClusteringStandardMassGapRound305Exact as R305
 
@@ -54,9 +64,13 @@ record Round306Boundary : Set where
     ymSpecificPhysicalCutHasThreeCoordinatesIsTrue :
       ymSpecificPhysicalCutHasThreeCoordinates ≡ true
 
-    g1ManufacturesNewAnalyticDecayInformation : Bool
-    g1ManufacturesNewAnalyticDecayInformationIsTrue :
-      g1ManufacturesNewAnalyticDecayInformation ≡ true
+    g1DifferentiatedDecayMechanismAlreadySourceOwned : Bool
+    g1DifferentiatedDecayMechanismAlreadySourceOwnedIsTrue :
+      g1DifferentiatedDecayMechanismAlreadySourceOwned ≡ true
+
+    g1RemainingPaymentIsSelectedJSameObjectSpecialization : Bool
+    g1RemainingPaymentIsSelectedJSameObjectSpecializationIsTrue :
+      g1RemainingPaymentIsSelectedJSameObjectSpecialization ≡ true
 
     g2ManufacturesNewAnalyticDecayInformation : Bool
     g2ManufacturesNewAnalyticDecayInformationIsFalse :
@@ -95,6 +109,7 @@ canonicalRound306Boundary =
   round306-boundary
     true refl
     true refl
+    true refl
     false refl
     false refl
     true refl
@@ -104,6 +119,18 @@ canonicalRound306Boundary =
     true refl
     false refl
 
+-- G1 is split into its source theorem and its unresolved physical application.
+round306G1PublishedDifferentiatedLocalizationLevel : ProofLevel
+round306G1PublishedDifferentiatedLocalizationLevel =
+  R299.round299FiniteDerivativeLocalizationAuthorityLevel
+
+round306G1LiteralSelectedJSameObjectLocalizationLevel : ProofLevel
+round306G1LiteralSelectedJSameObjectLocalizationLevel =
+  R299.round299LiteralSelectedJSameObjectLocalizationLevel
+
+-- Compatibility name retained for downstream consumers: this is the physical
+-- selected-J specialization level, not a claim that the decay mechanism itself
+-- is fresh Yang--Mills analysis.
 round306G1LiteralAbsoluteTwoJLocalizationLevel : ProofLevel
 round306G1LiteralAbsoluteTwoJLocalizationLevel =
   R296.round296LiteralAbsoluteTwoJLocalizationLevel
