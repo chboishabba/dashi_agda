@@ -56,8 +56,6 @@ record ExpectationCovarianceSpectrumWeld
     finiteRGCovariance : Nat → SpectralObservable → Nat → ℚ
     embed : ℚ → Scalar
 
-    -- SAME finite object: the exact magnitude compiled from selected
-    -- expectations is the embedded finite RG covariance magnitude.
     expectationMagnitudeIsEmbeddedFiniteRG : ∀ cutoff observable time →
       R278.connectedCovarianceMagnitude extension
         (Gram.measureSequence dataSet cutoff)
@@ -65,8 +63,6 @@ record ExpectationCovarianceSpectrumWeld
         (R278.right tests (indexFor observable time))
       ≡ embed ∣ finiteRGCovariance cutoff observable time ∣
 
-    -- SAME continuum object: the selected expectation covariance magnitude is
-    -- exactly the correlation consumed by the reconstructed spectral theorem.
     continuumMagnitudeIsSpectrumCorrelation : ∀ observable time →
       R278.connectedCovarianceMagnitude extension
         (Gram.continuumMeasure dataSet)
@@ -110,8 +106,8 @@ embeddedFiniteRGConvergesToContinuumMagnitude
   in
   convergenceCongruent weld
     expectationSequence embeddedSequence continuumMagnitude
-    (expectationMagnitudeIsEmbeddedFiniteRG weld
-      (λ cutoff → cutoff) observable time)
+    (λ cutoff →
+      expectationMagnitudeIsEmbeddedFiniteRG weld cutoff observable time)
     base
 
 embeddedFiniteRGConvergesToSpectrumCorrelationScalar :
