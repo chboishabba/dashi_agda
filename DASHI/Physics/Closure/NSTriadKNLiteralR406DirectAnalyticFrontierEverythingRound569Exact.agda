@@ -14,8 +14,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 --   R591 removes duplicated R572 sign receipts on the optional temporal route.
 --
 -- R592 performs the decisive least-privilege correction: none of the
--- R284/R434/R590 critical-cone route, the R568/R572 temporal-commutator route,
--- Laplace factorisation, Schur, or class-norm routes are mandatory for leaf A.
+-- critical-cone/Bony/Schur or temporal-commutator/FTC routes are mandatory.
 -- R496-R500 already construct the exact live direct off-diagonal nonseparable
 -- resolvent companion and R503 consumes precisely one analytic theorem:
 --
@@ -121,17 +120,16 @@ round569CanonicalDirectR503FrontierIntegrated = true
 round569R587AbsoluteNormRouteMandatory : Bool
 round569R587AbsoluteNormRouteMandatory = false
 
-round569OpaqueR434DecompositionProducerMandatory : Bool
-round569OpaqueR434DecompositionProducerMandatory = false
+round569CriticalConeOrBonyRouteMandatory : Bool
+round569CriticalConeOrBonyRouteMandatory =
+  R592.round592CriticalConeOrBonyRouteMandatory
 
-round569R284CriticalConeRouteMandatory : Bool
-round569R284CriticalConeRouteMandatory = false
-
-round569R568TemporalCommutatorRouteMandatory : Bool
-round569R568TemporalCommutatorRouteMandatory = false
+round569TemporalCommutatorFTCRouteMandatory : Bool
+round569TemporalCommutatorFTCRouteMandatory =
+  R592.round592TemporalCommutatorFTCRouteMandatory
 
 round569LaplaceRouteMandatory : Bool
-round569LaplaceRouteMandatory = false
+round569LaplaceRouteMandatory = R592.round592LaplaceMandatory
 
 round569CanonicalLeafAIsSingleDirectR503Budget : Bool
 round569CanonicalLeafAIsSingleDirectR503Budget =
