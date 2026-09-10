@@ -6,13 +6,18 @@ open import Data.Empty using (⊥)
 import DASHI.ComputerScience.RSA260NDimSymmetryProductionRoadmapExact as Prior
 import DASHI.ComputerScience.RSA260FractalPadicHyperfabricBatchGluingExact as Gluing
 import DASHI.ComputerScience.RSA260AdaptiveReducerHyperfabricExact as Adaptive
+import DASHI.ComputerScience.RSA260DataDrivenReducerInferenceExact as DataDriven
+import DASHI.ComputerScience.RSA260ReducerHyperfabricSourceDiligenceExact as Sources
 
 ------------------------------------------------------------------------
--- CONSOLIDATED ROADMAP AFTER ADAPTIVE HYPERFABRIC BATCH SELECTION
+-- CONSOLIDATED ROADMAP AFTER DATA-DRIVEN ADAPTIVE HYPERFABRIC INFERENCE
 --
 -- Conclusion payment remains acquisition-first.  The middle replay-preparation
--- lane is now refined into recursive coordinate discrimination plus a typed
--- reducer hyperfabric with must-not-compose and must-compose relations.
+-- lane now distinguishes:
+--   declared synthetic benchmark structure,
+--   inferred synthetic reducer structure,
+--   exact executable receipt,
+--   production same-object application.
 ------------------------------------------------------------------------
 
 priorRoadmap : Prior.ConsolidatedRSA260RoadmapBoundary
@@ -24,15 +29,22 @@ gluingRoadmap = Gluing.currentHierarchicalBatchRoadmapBoundary
 adaptiveRoadmap : Adaptive.RSA260AdaptiveHyperfabricRoadmapBoundary
 adaptiveRoadmap = Adaptive.currentRSA260AdaptiveHyperfabricRoadmapBoundary
 
+dataDrivenBoundary : DataDriven.DataDrivenInferencePromotionBoundary
+dataDrivenBoundary = DataDriven.currentDataDrivenInferencePromotionBoundary
+
+sourceBoundary : Sources.SnowballAttributionBoundary
+sourceBoundary = Sources.canonicalSnowballAttributionBoundary
+
 data AdaptiveProductionResidual : Set where
   acquireProductionLAInput : AdaptiveProductionResidual
   verifySameObjectManifest : AdaptiveProductionResidual
   coarseCoordinateRefinement : AdaptiveProductionResidual
   descendAmbiguousFibres : AdaptiveProductionResidual
-  enumerateLocalReducers : AdaptiveProductionResidual
-  classifyConflictEdges : AdaptiveProductionResidual
-  classifyCoRequirementEdges : AdaptiveProductionResidual
+  inferLocalReducerCandidates : AdaptiveProductionResidual
+  inferCoRequirementEdgesFromOperator : AdaptiveProductionResidual
   closeRequirementComponents : AdaptiveProductionResidual
+  inferConsumerSignatures : AdaptiveProductionResidual
+  inferConflictEdgesFromConsumer : AdaptiveProductionResidual
   selectConflictFreeClosedBatch : AdaptiveProductionResidual
   composeGlobalCandidateAction : AdaptiveProductionResidual
   verifyOperatorAndConsumerEquivariance : AdaptiveProductionResidual
@@ -58,6 +70,14 @@ record AdaptiveHyperfabricProductionBoundary : Set where
     conflictVsCoRequirementDistinctionRepresented : Bool
     largestClosedBatchSelectionRepresented : Bool
     selectedBatchEquivarianceRepresented : Bool
+    sourceDiligencePolicyAttached : Bool
+    primaryColouringSourceAttributed : Bool
+    conceptQIDsRecordedWithoutPromotion : Bool
+    irrelevantOEISIdentifierRejected : Bool
+    operatorDerivedRequirementInferenceImplemented : Bool
+    observerDerivedConflictInferenceImplemented : Bool
+    dataDrivenClosedBatchSelectionImplemented : Bool
+    exactDataDrivenRuntimeBlobExecutionPaid : Bool
     productionBytesPaid : Bool
     productionRecursiveRefinementPaid : Bool
     productionReducerHyperfabricPaid : Bool
@@ -73,32 +93,55 @@ currentAdaptiveHyperfabricProductionBoundary : AdaptiveHyperfabricProductionBoun
 currentAdaptiveHyperfabricProductionBoundary =
   adaptive-hyperfabric-production-boundary
     true true true true true true true true
+    true true true true
+    true true true false
     false false false false false false false false false
 
 ------------------------------------------------------------------------
 -- Operational order after bytes arrive.
 --
 -- A recursive dimension is admitted only while it changes a consumer-relevant
--- partition or reducer relation.  Requirement closure happens before batch
--- optimisation.  Conflict-free selection happens before global equivariance.
--- Failure anywhere falls back to full-width CPU replay rather than blocking
--- correctness.
+-- partition or reducer relation.  Requirement inference/closure happens before
+-- consumer-relative conflict inference and batch optimisation.  Failure of the
+-- optional reduction path falls back to full-width CPU replay.
 ------------------------------------------------------------------------
 
 record AdaptiveReplayPolicy : Set where
   constructor adaptive-replay-policy
   field
     addAxisOnlyOnObservedGain : Bool
-    closeRequirementsBeforeOptimisingBatch : Bool
+    inferRequirementsBeforeOptimisingBatch : Bool
+    closeRequirementsBeforeInferringClosedComponentConflicts : Bool
+    conflictsRemainConsumerRelative : Bool
     rejectBatchesContainingConflict : Bool
     requireGlobalMPEqualsPM : Bool
+    requireObserverCovariance : Bool
     failedSymmetrySearchFallsBackToFullWidth : Bool
     quotientReplayEliminatesUpstairsVerification : Bool
 open AdaptiveReplayPolicy public
 
 canonicalAdaptiveReplayPolicy : AdaptiveReplayPolicy
 canonicalAdaptiveReplayPolicy = adaptive-replay-policy
-  true true true true true false
+  true true true true true true true true false
+
+------------------------------------------------------------------------
+-- Snowball/source order is orthogonal to mathematical dependency order.
+------------------------------------------------------------------------
+
+record RoadmapSourcePaymentBoundary : Set where
+  constructor roadmap-source-payment-boundary
+  field
+    sourceAcquisitionMaySnowballOutOfOrder : Bool
+    conclusionPaymentMaySnowballOutOfOrder : Bool
+    DOIAlonePaysTheorem : Bool
+    QIDAlonePaysConceptApplicability : Bool
+    OEISRequiredWhenNoSequenceClaimExists : Bool
+    implementationIdentityPaysExecution : Bool
+open RoadmapSourcePaymentBoundary public
+
+canonicalRoadmapSourcePaymentBoundary : RoadmapSourcePaymentBoundary
+canonicalRoadmapSourcePaymentBoundary = roadmap-source-payment-boundary
+  true false false false false false
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
@@ -108,6 +151,7 @@ data MoreRecursiveDepthImpliesMoreReduction : Set where
 data RequirementClosureImpliesAdmissibleBatch : Set where
 data LargestClosedBatchImpliesEquivariance : Set where
 data SyntheticHyperformImpliesProductionHyperform : Set where
+data SourceIdentityImpliesExecution : Set where
 
 moreDepthDoesNotGuaranteeReduction : MoreRecursiveDepthImpliesMoreReduction → ⊥
 moreDepthDoesNotGuaranteeReduction ()
@@ -121,3 +165,6 @@ largestClosedBatchDoesNotCreateEquivariance ()
 syntheticHyperformDoesNotCreateProductionHyperform :
   SyntheticHyperformImpliesProductionHyperform → ⊥
 syntheticHyperformDoesNotCreateProductionHyperform ()
+
+sourceIdentityDoesNotCreateExecution : SourceIdentityImpliesExecution → ⊥
+sourceIdentityDoesNotCreateExecution ()
