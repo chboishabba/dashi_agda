@@ -2,125 +2,111 @@
 module DASHI.Physics.YangMills.BalabanUnifiedCorrelationClusteringLimitRound272Exact where
 
 ------------------------------------------------------------------------
--- ROUND272 / SAME UNIFIED CORRELATION PROJECTION -> LIMIT CLUSTERING
+-- ROUND272/R273 / CORRELATION TRAJECTORY -> SAME-LIMIT CLUSTERING
 --
--- R270 made physical uniform exponential clustering the canonical mass-gap
--- producer.  R271 made the unified polymer norm expose that quantitative bound
--- on its literal correlation projection.  The continuum lane already owns the
--- no-splicing theorem: once the unified RG state converges, its correlation
--- projection has the SAME completed-state limit.
---
--- Therefore cutoff/scale clustering does not require a new Yang--Mills theorem
--- at the limit.  The only additional ingredient is the standard topological
--- fact that a pointwise uniform closed upper bound survives convergence of the
--- correlation object.
+-- The B-facing input is now the least-privilege quantitative correlation
+-- trajectory, not the full unified polymer norm.  Any valid producer may supply
+-- it.  The UV/continuum lane supplies convergence of that same correlation
+-- object; closedness of the common geometric upper bound then transports the
+-- finite-scale inequality to the limit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (_*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanRowCPostBC2PhysicalCompletionRound108Exact as R108
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact as Unified
 
-record SameProducerCorrelationCompletion
-    (producer : Unified.PhysicalYMUnifiedPolymerNormProducer) : Set₁ where
+record SameCorrelationTrajectoryCompletion
+    (trajectory : Unified.QuantitativeCorrelationDecayTrajectory) : Set₁ where
   field
-    correlationLimit : Unified.WeightedCorrelation producer
+    correlationLimit : Unified.Correlation trajectory
 
     CorrelationConverges :
-      (Nat → Unified.WeightedCorrelation producer) →
-      Unified.WeightedCorrelation producer → Set
+      (Nat → Unified.Correlation trajectory) →
+      Unified.Correlation trajectory → Set
 
-    sameProducerCorrelationConverges :
+    sameTrajectoryCorrelationConverges :
       CorrelationConverges
         (λ scale →
-          Unified.correlationProjection (Unified.authority producer)
-            (Unified.stateAtScale producer scale))
+          Unified.correlationProjection trajectory
+            (Unified.stateAtScale trajectory scale))
         correlationLimit
 
-    -- Standard closed-order/evaluation consequence for the chosen correlation
-    -- topology.  This is deliberately generic and source-independent.
+    -- Standard closed-order/evaluation consequence for the selected topology.
     uniformGeometricUpperClosedUnderLimit :
       ∀ left right →
       CorrelationConverges
         (λ scale →
-          Unified.correlationProjection (Unified.authority producer)
-            (Unified.stateAtScale producer scale))
+          Unified.correlationProjection trajectory
+            (Unified.stateAtScale trajectory scale))
         correlationLimit →
       (∀ scale →
-        Unified.connectedCorrelationMagnitude producer
-          (Unified.correlationProjection (Unified.authority producer)
-            (Unified.stateAtScale producer scale)) left right
-        ≤ Unified.separationAmplitude producer
-          * Power.rationalPower (Unified.separationRatio producer)
-              (Unified.physicalDistance producer left right)) →
-      Unified.connectedCorrelationMagnitude producer
+        Unified.connectedCorrelationMagnitude trajectory
+          (Unified.correlationProjection trajectory
+            (Unified.stateAtScale trajectory scale)) left right
+        ≤ Unified.amplitude trajectory
+          * Power.rationalPower (Unified.ratio trajectory)
+              (Unified.physicalDistance trajectory left right)) →
+      Unified.connectedCorrelationMagnitude trajectory
         correlationLimit left right
-      ≤ Unified.separationAmplitude producer
-        * Power.rationalPower (Unified.separationRatio producer)
-            (Unified.physicalDistance producer left right)
+      ≤ Unified.amplitude trajectory
+        * Power.rationalPower (Unified.ratio trajectory)
+            (Unified.physicalDistance trajectory left right)
 
-open SameProducerCorrelationCompletion public
+open SameCorrelationTrajectoryCompletion public
 
 limitCorrelationBound :
-  (producer : Unified.PhysicalYMUnifiedPolymerNormProducer) →
-  (completion : SameProducerCorrelationCompletion producer) →
+  (trajectory : Unified.QuantitativeCorrelationDecayTrajectory) →
+  (completion : SameCorrelationTrajectoryCompletion trajectory) →
   ∀ left right →
-  Unified.connectedCorrelationMagnitude producer
+  Unified.connectedCorrelationMagnitude trajectory
     (correlationLimit completion) left right
-  ≤ Unified.separationAmplitude producer
-    * Power.rationalPower (Unified.separationRatio producer)
-        (Unified.physicalDistance producer left right)
-limitCorrelationBound producer completion left right =
+  ≤ Unified.amplitude trajectory
+    * Power.rationalPower (Unified.ratio trajectory)
+        (Unified.physicalDistance trajectory left right)
+limitCorrelationBound trajectory completion left right =
   uniformGeometricUpperClosedUnderLimit completion left right
-    (sameProducerCorrelationConverges completion)
-    (λ scale → Unified.physicalSeparationDecay producer scale left right)
+    (sameTrajectoryCorrelationConverges completion)
+    (λ scale → Unified.geometricDecayAtEveryScale trajectory scale left right)
 
 limitClustering :
-  (producer : Unified.PhysicalYMUnifiedPolymerNormProducer) →
-  SameProducerCorrelationCompletion producer →
-  R108.UniformGeometricConnectedClustering
-    (Unified.OrdinaryObservable producer)
-limitClustering producer completion = record
+  (trajectory : Unified.QuantitativeCorrelationDecayTrajectory) →
+  SameCorrelationTrajectoryCompletion trajectory →
+  R108.UniformGeometricConnectedClustering (Unified.Observable trajectory)
+limitClustering trajectory completion = record
   { R108.UniformGeometricConnectedClustering.distance =
-      Unified.physicalDistance producer
+      Unified.physicalDistance trajectory
   ; R108.UniformGeometricConnectedClustering.connectedCovarianceMagnitude =
-      Unified.connectedCorrelationMagnitude producer
+      Unified.connectedCorrelationMagnitude trajectory
         (correlationLimit completion)
   ; R108.UniformGeometricConnectedClustering.amplitude =
-      Unified.separationAmplitude producer
-  ; R108.UniformGeometricConnectedClustering.ratio =
-      Unified.separationRatio producer
+      Unified.amplitude trajectory
+  ; R108.UniformGeometricConnectedClustering.ratio = Unified.ratio trajectory
   ; R108.UniformGeometricConnectedClustering.amplitudeNonnegative =
-      Unified.separationAmplitudeNonnegative producer
+      Unified.amplitudeNonnegative trajectory
   ; R108.UniformGeometricConnectedClustering.ratioNonnegative =
-      Unified.separationRatioNonnegative producer
+      Unified.ratioNonnegative trajectory
   ; R108.UniformGeometricConnectedClustering.ratioStrictlyBelowOne =
-      Unified.separationRatioStrictlyBelowOne producer
+      Unified.ratioStrictlyBelowOne trajectory
   ; R108.UniformGeometricConnectedClustering.connectedCovarianceBound =
-      limitCorrelationBound producer completion
+      limitCorrelationBound trajectory completion
   }
 
 round272UniformCorrelationBoundLimitCompilerLevel : ProofLevel
 round272UniformCorrelationBoundLimitCompilerLevel = machineChecked
 
--- Standard analysis/topology, not a new Yang--Mills estimate: evaluation and a
--- closed order cone preserve a common upper bound under the selected completed
--- correlation topology.
 round272ClosedUpperBoundUnderCorrelationConvergenceLevel : ProofLevel
 round272ClosedUpperBoundUnderCorrelationConvergenceLevel = standardImported
 
--- This is the already-existing same-unified-state continuum seam.  It belongs
--- to UV->continuum construction and must be reused by the mass-gap lane rather
--- than repaid there.
-round272SameUnifiedCorrelationCompletionLevel : ProofLevel
-round272SameUnifiedCorrelationCompletionLevel = conditional
+-- Reused UV/continuum content: same correlation projection converges to the
+-- completed state.  It is not a second B-specific continuum construction.
+round272SameCorrelationTrajectoryCompletionLevel : ProofLevel
+round272SameCorrelationTrajectoryCompletionLevel = conditional
 
--- After reuse of the continuum completion, the only genuinely YM-specific
--- quantitative mass-gap producer on this route is R271's physical separation
--- decay theorem on the same correlation projection.
+-- Canonical finite-scale B-facing theorem, independent of which tactic proves it.
 round272PhysicalUniformCorrelationDecayLevel : ProofLevel
 round272PhysicalUniformCorrelationDecayLevel =
-  Unified.physicalYMUnifiedPolymerNormProducerLevel
+  Unified.physicalYMCorrelationDecayTrajectoryLevel
