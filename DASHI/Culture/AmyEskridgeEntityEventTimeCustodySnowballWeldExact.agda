@@ -31,7 +31,8 @@ institute2021EntitySurfaceOwned :
 institute2021EntitySurfaceOwned = refl
 
 amy2018To2019InstitutionalContinuityPaid :
-  Role.amyPersonInstitutionalContinuity2018To2019Paid ≡ true
+  Role.personInstitutionalContinuity2018To2019Paid
+    Role.amy2018To2019InstitutionalContinuityFrontier ≡ true
 amy2018To2019InstitutionalContinuityPaid = refl
 
 amyEventTimeRoleStillPartial :
