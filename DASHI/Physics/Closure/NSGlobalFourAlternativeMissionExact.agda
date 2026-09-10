@@ -8,14 +8,8 @@ module DASHI.Physics.Closure.NSGlobalFourAlternativeMissionExact where
 -- description (2000). DOI not assigned to the official problem description.
 --
 -- This owner is deliberately STRONGER than the Clay award criterion:
---
---   official Clay mathematical resolution: any one of A/B/C/D suffices;
---   DASHI global mission: independently track/pay A AND B AND C AND D.
---
--- A/B are unforced global-regularity alternatives on R^3/T^3.
--- C/D are forced-breakdown alternatives on R^3/T^3.
--- Constructor distinction prevents a forced witness from paying an unforced
--- theorem, or a periodic theorem from silently paying the Euclidean theorem.
+-- official Clay mathematical resolution needs any one of A/B/C/D; DASHI's
+-- global research mission independently tracks A AND B AND C AND D.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,10 +22,6 @@ import DASHI.Physics.Closure.NSTriadKNClayForcedBreakdownFormulationRound523Exac
 import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact as LeafA
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as Cut
 import DASHI.Physics.Closure.NSFirstImplementationPriorityLedgerExact as Priority
-
-------------------------------------------------------------------------
--- Four source-distinct alternatives.
-------------------------------------------------------------------------
 
 data NSAlternative : Set where
   A-euclidean-unforced-global : NSAlternative
@@ -58,10 +48,6 @@ forcingOf A-euclidean-unforced-global = unforced
 forcingOf B-periodic-unforced-global = unforced
 forcingOf C-euclidean-forced-breakdown = smoothForced
 forcingOf D-periodic-forced-breakdown = smoothForced
-
-------------------------------------------------------------------------
--- Source/status is not mathematical payment.
-------------------------------------------------------------------------
 
 data StatementAuthority : Set where
   feffermanOfficialStatement : StatementAuthority
@@ -91,9 +77,8 @@ statusB = alternative-mission-status
   B-periodic-unforced-global dashiTypedReconstruction
   BSurface.submissionTheoremStatementConstructed internallyOpen
 
--- Public 2026-09-08 C/D release status is recorded only as external source
--- evidence. Exact external theorem -> DASHI same-object proof transport is a
--- separate obligation and is NOT represented by internallyPaid.
+-- Public 2026-09-08 C/D formal-proof release is source evidence only here.
+-- External theorem -> DASHI same-object payment is a separate obligation.
 statusC : AlternativeMissionStatus
 statusC = alternative-mission-status
   C-euclidean-forced-breakdown externalReleasedFormalProofSource true internallyOpen
@@ -105,19 +90,11 @@ statusD = alternative-mission-status
 externalCDReleaseDate : String
 externalCDReleaseDate = "2026-09-08"
 
-------------------------------------------------------------------------
--- Source-exact C/D mapping to the existing Round523 formulation.
-------------------------------------------------------------------------
-
 cMapsToRound523 : CD.ClayBreakdownAlternative523
 cMapsToRound523 = CD.clayAlternativeC523
 
 dMapsToRound523 : CD.ClayBreakdownAlternative523
 dMapsToRound523 = CD.clayAlternativeD523
-
-------------------------------------------------------------------------
--- A/B independent research lane.
-------------------------------------------------------------------------
 
 unforcedLeafAIsCanonicalSingleR503Budget : Bool
 unforcedLeafAIsCanonicalSingleR503Budget =
@@ -132,10 +109,8 @@ unforcedLeafBIndependent = true
 unforcedLeafBPaid : Bool
 unforcedLeafBPaid = Cut.round504CriticalProductionSliceClosed
 
-------------------------------------------------------------------------
--- Typed payment tokens. There are deliberately no canonical constructors here.
-------------------------------------------------------------------------
-
+-- No constructors: these tokens can only become inhabited after an exact
+-- alternative-specific theorem is actually connected here.
 data PaymentA : Set where
 data PaymentB : Set where
 data PaymentC : Set where
