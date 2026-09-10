@@ -8,6 +8,10 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406SpectatorWeightedClassNormEvery
 -- see that the literal spectator resolvent weight has reached the actual
 -- nested Bony class-norm carrier.
 --
+-- It also imports the earliest-forward forensic lineage ledger.  Consequently
+-- the focused validation surface checks both the live proof carriers and the
+-- typed chronology/attribution/snowball firewalls in one transitive Agda load.
+--
 -- No analytic payment is manufactured here.  The first surviving theorem is
 -- the cutoff-uniform spectator-weighted class-norm / spacetime envelope strong
 -- enough to feed R503.
@@ -18,9 +22,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact
 import DASHI.Physics.Closure.NSTriadKNSpectatorWeightedNestedBonyClassNormBidiExact
+import DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact
 
 outerSpectatorWeightStructuralWeldClosed : Bool
 outerSpectatorWeightStructuralWeldClosed = true
+
+forensicEarliestForwardLedgerIntegrated : Bool
+forensicEarliestForwardLedgerIntegrated = true
 
 cutoffUniformSpectatorWeightedClassNormSpacetimeEnvelopeClosed : Bool
 cutoffUniformSpectatorWeightedClassNormSpacetimeEnvelopeClosed = false
@@ -34,6 +42,10 @@ clayPromotion = false
 outerSpectatorWeightStructuralWeldClosedIsTrue :
   outerSpectatorWeightStructuralWeldClosed ≡ true
 outerSpectatorWeightStructuralWeldClosedIsTrue = refl
+
+forensicEarliestForwardLedgerIntegratedIsTrue :
+  forensicEarliestForwardLedgerIntegrated ≡ true
+forensicEarliestForwardLedgerIntegratedIsTrue = refl
 
 cutoffUniformSpectatorWeightedClassNormSpacetimeEnvelopeClosedIsFalse :
   cutoffUniformSpectatorWeightedClassNormSpacetimeEnvelopeClosed ≡ false
