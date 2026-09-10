@@ -33,3 +33,4 @@ import DASHI.Culture.AmyEskridgeOSINTSnowballExact
 import DASHI.Culture.AmyEskridgeMessageProvenanceBacktraceExact
 import DASHI.Culture.AmyEskridgeOSINTChronologySnowballExact
 import DASHI.Culture.AmyEskridgeOSINTChronologyCorroborationExact
+import DASHI.Culture.AmyEskridgeCorporateInstitutionalChronologySnowballExact
