@@ -98,6 +98,28 @@ secAmyOfficerDirectorAtom = institutional-chronology-atom
   "The filing records Amy Eskridge Pettigrew as president, executive officer and director; it also names Shantel Butler, Nathan Klose and Samuel Reid as directors."
   true false false false false
 
+------------------------------------------------------------------------
+-- 2020 person-role continuity lead.
+--
+-- The exact Alabama Secretary of State annual-report locator is now known and
+-- a public evidence index reports that the filing names Amy Eskridge as
+-- president.  The primary state carrier itself has not been directly inspected
+-- in this owner, so entitlement remains primaryRecordIdentified rather than
+-- exactPrimaryCarrierInspected.  This is therefore the next acquisition cut
+-- for paying the existing 2018-to-2020 role-continuity target.
+------------------------------------------------------------------------
+
+institute2020AmyPresidentAnnualReportLeadAtom : InstitutionalChronologyAtom
+institute2020AmyPresidentAnnualReportLeadAtom = institutional-chronology-atom
+  "2020 annual-report year; exact filing date not yet retained here"
+  "The Institute P.B.C., Inc. / Alabama entity 000-549-195"
+  officerDirectorRecord
+  officialStateRegistry
+  primaryRecordIdentified
+  "Alabama Secretary of State 2020 annual report: https://arc-sos.state.al.us/cgi/corpannual.mbr/annual?corp=000549195&year=2020&page=name"
+  "A public evidence index identifies this official state annual report as naming Amy Eskridge as president. Direct inspection of the state carrier remains required before this owner promotes the role receipt to exact-primary entitlement."
+  true false false false false
+
 pppLoanOneAtom : InstitutionalChronologyAtom
 pppLoanOneAtom = institutional-chronology-atom
   "pandemic-relief period; exact award date retained in official award carrier"
