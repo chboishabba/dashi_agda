@@ -1,6 +1,7 @@
 module DASHI.ComputerScience.GodelBase12SelfSubstitutionPRFrontierExact where
 
 open import DASHI.Core.Prelude
+open import Data.Nat.DivMod using (_/_; _%_)
 
 import DASHI.ComputerScience.GodelArithmeticRawSyntaxExact as Syntax
 import DASHI.ComputerScience.GodelArithmeticDeBruijnInstantiationExact as Inst
@@ -9,35 +10,30 @@ import DASHI.ComputerScience.GodelPrimitiveRecursiveRepresentabilityBridgeExact 
 
 ------------------------------------------------------------------------
 -- SAME-CODE PRIMITIVE-RECURSIVE FRONTIER FOR THE CONCRETE BASE-12 CODE
---
--- Computability of the already-owned encoder/decoder is not promoted to a
--- primitive-recursive certificate.  This module identifies the exact local
--- closure payments required for the concrete substitution/self-substitution
--- producer.
 ------------------------------------------------------------------------
 
-record Base12PrimitiveRecursivePayments : Set₁ where
+record Base12PrimitiveRecursivePayments
+    (PRT : PR.PrimitiveRecursiveTheory) : Set₁ where
   constructor base12PrimitiveRecursivePayments
   field
-    fixedBase12RemainderPR : PR.PrimitiveRecursiveUnary (λ n → n % 12)
-    fixedBase12QuotientPR  : PR.PrimitiveRecursiveUnary (λ n → n / 12)
+    fixedBase12RemainderPR :
+      PR.PrimitiveRecursiveUnary PRT (λ n → n % 12)
+    fixedBase12QuotientPR :
+      PR.PrimitiveRecursiveUnary PRT (λ n → n / 12)
 
     formulaDecoderCodePR :
-      PR.PrimitiveRecursiveUnary
+      PR.PrimitiveRecursiveUnary PRT
         (λ n → NatCodec.encodeFormulaNat (NatCodec.decodeFormulaNat n))
 
     numeralEncodingPR :
-      PR.PrimitiveRecursiveUnary
+      PR.PrimitiveRecursiveUnary PRT
         (λ n → NatCodec.encodeFormulaNat
           (Syntax.equalFormula (Inst.numeralTerm n) (Inst.numeralTerm n)))
 
 open Base12PrimitiveRecursivePayments public
 
 ------------------------------------------------------------------------
--- The exact concrete meta-level code substitution function.
---
--- We keep this separate from the abstract formal-system substituteCode until
--- a same-code weld identifies the raw arithmetic carrier with that system.
+-- Exact concrete meta-level code substitution.
 ------------------------------------------------------------------------
 
 concreteSubstituteX0Code : Nat → Nat → Nat
@@ -51,46 +47,51 @@ concreteSelfSubstituteCode : Nat → Nat
 concreteSelfSubstituteCode code = concreteSubstituteX0Code code code
 
 ------------------------------------------------------------------------
--- Exact PR closure authority needed for this repo-specific composition.
--- This is deliberately smaller than a whole primitive-recursion library.
+-- Repo-specific PR payment under one explicit PR authority.
 ------------------------------------------------------------------------
 
-record ConcreteSubstitutionPrimitiveRecursiveAuthority : Set₁ where
-  constructor concreteSubstitutionPrimitiveRecursiveAuthority
+record ConcreteSubstitutionPrimitiveRecursivePayment
+    (PRT : PR.PrimitiveRecursiveTheory) : Set₁ where
+  constructor concreteSubstitutionPrimitiveRecursivePayment
   field
-    substituteX0CodePR :
-      Set
-    substituteX0CodePRWitness : substituteX0CodePR
-
+    prerequisitePayments : Base12PrimitiveRecursivePayments PRT
     selfSubstitutionPR :
-      PR.PrimitiveRecursiveUnary concreteSelfSubstituteCode
+      PR.PrimitiveRecursiveUnary PRT concreteSelfSubstituteCode
 
-open ConcreteSubstitutionPrimitiveRecursiveAuthority public
+open ConcreteSubstitutionPrimitiveRecursivePayment public
 
 ------------------------------------------------------------------------
--- Same-code transport into the generic diagonal producer.
+-- Same-code transport.  Pointwise equality alone is not used as an implicit
+-- coercion; the SAME PR theory must provide its extensionality authority.
 ------------------------------------------------------------------------
-
-record SameCodeSelfSubstitutionWeld
-    (F : Set₁)
-    (AbstractSelfSubstitute : Nat → Nat) : Set₁ where
-  constructor sameCodeSelfSubstitutionWeld
-  field
-    concreteEqualsAbstract :
-      (n : Nat) → concreteSelfSubstituteCode n ≡ AbstractSelfSubstitute n
-
-open SameCodeSelfSubstitutionWeld public
 
 transportPrimitiveRecursiveAlongSameCode :
+  (PRT : PR.PrimitiveRecursiveTheory) →
+  PR.PrimitiveRecursiveExtensionalityAuthority PRT →
   (abstractSelf : Nat → Nat) →
-  ConcreteSubstitutionPrimitiveRecursiveAuthority →
+  ConcreteSubstitutionPrimitiveRecursivePayment PRT →
   ((n : Nat) → concreteSelfSubstituteCode n ≡ abstractSelf n) →
-  PR.PrimitiveRecursiveUnary abstractSelf
-transportPrimitiveRecursiveAlongSameCode abstractSelf authority sameCode =
-  PR.primitiveRecursiveUnary
-    ((PR.Certificate (selfSubstitutionPR authority)) ×
-      ((n : Nat) → concreteSelfSubstituteCode n ≡ abstractSelf n))
-    ((PR.certificate (selfSubstitutionPR authority)) , sameCode)
+  PR.PrimitiveRecursiveUnary PRT abstractSelf
+transportPrimitiveRecursiveAlongSameCode
+  PRT extensionality abstractSelf payment sameCode =
+  PR.transportAlongPointwiseEquality extensionality
+    concreteSelfSubstituteCode
+    abstractSelf
+    sameCode
+    (selfSubstitutionPR payment)
+
+------------------------------------------------------------------------
+-- Compiler into the generic self-substitution PR producer.
+------------------------------------------------------------------------
+
+record SameCodeFormalSubstitutionWeld
+    (F : Set₁)
+    (abstractSelf : Nat → Nat) : Set₁ where
+  constructor sameCodeFormalSubstitutionWeld
+  field
+    sameCode : (n : Nat) → concreteSelfSubstituteCode n ≡ abstractSelf n
+
+open SameCodeFormalSubstitutionWeld public
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -99,6 +100,7 @@ transportPrimitiveRecursiveAlongSameCode abstractSelf authority sameCode =
 data TotalDecoderImpliesPrimitiveRecursiveDecoder : Set where
 data StructuralSubstitutionImpliesPRSubstitution : Set where
 data DifferentGodelCodeTransfersPRCertificate : Set where
+data PointwiseEqualitySilentlyTransfersPRAuthority : Set where
 
 totalityDoesNotProvePrimitiveRecursiveness :
   TotalDecoderImpliesPrimitiveRecursiveDecoder → ⊥
@@ -112,12 +114,16 @@ differentCodeDoesNotTransportWithoutWeld :
   DifferentGodelCodeTransfersPRCertificate → ⊥
 differentCodeDoesNotTransportWithoutWeld ()
 
+pointwiseEqualityNeedsPRAuthority :
+  PointwiseEqualitySilentlyTransfersPRAuthority → ⊥
+pointwiseEqualityNeedsPRAuthority ()
+
 record GodelBase12SelfSubstitutionPRBoundary : Set where
   constructor godelBase12SelfSubstitutionPRBoundary
   field
     concreteSelfSubstitutionFunctionOwned : Bool
-    fixedBaseArithmeticPRPaymentsOwned : Bool
-    concreteSubstitutionPRAuthorityOwned : Bool
+    authorityIndexedPrerequisiteShapeOwned : Bool
+    concreteSelfSubstitutionPRPaymentOwned : Bool
     sameCodeTransportCompilerOwned : Bool
     totalityPromotedToPrimitiveRecursiveness : Bool
     localSelfSubstitutionPRLeafClosed : Bool
@@ -126,4 +132,4 @@ canonicalGodelBase12SelfSubstitutionPRBoundary :
   GodelBase12SelfSubstitutionPRBoundary
 canonicalGodelBase12SelfSubstitutionPRBoundary =
   godelBase12SelfSubstitutionPRBoundary
-    true false false true false false
+    true true false true false false
