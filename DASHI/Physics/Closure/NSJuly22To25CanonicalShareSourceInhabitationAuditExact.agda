@@ -1,15 +1,16 @@
 module DASHI.Physics.Closure.NSJuly22To25CanonicalShareSourceInhabitationAuditExact where
 
 ------------------------------------------------------------------------
--- JULY 22 -> JULY 25 CANONICAL-SHARE SOURCE-INHABITATION AUDIT
+-- JULY 22 -> JULY 26 CANONICAL-SHARE / SIGNED-PRODUCER INHABITATION AUDIT
 --
 -- Thin corrective continuation of NSJuly21To23StrictMarginSpliceAuditExact.
--- It replaces overly broad "no separate constructor" readings with dated,
--- source-level distinctions between:
+-- It distinguishes dated source-level stages:
 --   * record/package constructor,
 --   * scalar budget arithmetic,
 --   * component-share reduction,
---   * actual cutoff-uniform Fourier/PDE payment.
+--   * exact local cancellation algebra,
+--   * actual-state signed physical producer,
+--   * direct same-object producer-to-consumer splice.
 --
 -- DATE DISCIPLINE
 -- Source commit, PR-open/public exposure and PR merge are distinct clocks.
@@ -28,6 +29,9 @@ data InhabitationGrade : Set where
   exactScalarArithmetic : InhabitationGrade
   reductionWithAnalyticInputs : InhabitationGrade
   exactLocalAlgebra : InhabitationGrade
+  exactSignedPhysicalProducer : InhabitationGrade
+  exactCancellationAssembly : InhabitationGrade
+  consumerSocket : InhabitationGrade
   cutoffUniformPhysicalPayment : InhabitationGrade
 
 record DatedSourceFinding : Set where
@@ -118,6 +122,39 @@ jul25FarLowMultiplierDifference = dated-source-finding
   reductionWithAnalyticInputs
   "Proves pointwise separation once smooth-profile gradient and support-radius estimates are supplied; source commit predates PR #336 public opening; source explicitly leaves concrete profile-gradient realization and cutoff-uniform difference-kernel Schur control conditional."
 
+jul26ActualStateSignedTransfer : DatedSourceFinding
+jul26ActualStateSignedTransfer = dated-source-finding
+  "actual-state exact signed Galerkin transfer"
+  "9aa7a868251bc802dbb9cef069d50e325a1a3b09"
+  "2026-07-26T03:53:37Z" "2026-07-26T13:53:37+10:00"
+  "PR #338"
+  "2026-07-25T10:42:25Z" "2026-07-25T20:42:25+10:00"
+  "2026-07-27T05:15:48Z" "2026-07-27T15:15:48+10:00"
+  exactSignedPhysicalProducer
+  "signedTransferAt consumes a PhysicalTriadIncidence and the actual velocity field Z3.FourierMode -> Complex3, then evaluates the exact tested signed coefficient on u_p, u_q and u_k."
+
+jul26OrderedRealityThreeLegCancellation : DatedSourceFinding
+jul26OrderedRealityThreeLegCancellation = dated-source-finding
+  "ordered reality-pair cancellation -> symmetrised three-leg conservation"
+  "01cdf876c9bba62eceaa8c4f4c5ef1424fed2621"
+  "2026-07-26T05:16:41Z" "2026-07-26T15:16:41+10:00"
+  "PR #338"
+  "2026-07-25T10:42:25Z" "2026-07-25T20:42:25+10:00"
+  "2026-07-27T05:15:48Z" "2026-07-27T15:15:48+10:00"
+  exactCancellationAssembly
+  "The ordered signed transfer is kept signed and its reality mate is cancelled before assembling the three physical energy legs. This is exact additive/cancellation structure, not a classwise magnitude estimate."
+
+jul26StrictGapConsumerSocket : DatedSourceFinding
+jul26StrictGapConsumerSocket = dated-source-finding
+  "strict signed-gap consumer accepts an abstract nonlinear observable"
+  "a872ad2a4249e2d6f1056595df980000fe7472aa"
+  "2026-07-26T04:17:22Z" "2026-07-26T14:17:22+10:00"
+  "PR #338"
+  "2026-07-25T10:42:25Z" "2026-07-25T20:42:25+10:00"
+  "2026-07-27T05:15:48Z" "2026-07-27T15:15:48+10:00"
+  consumerSocket
+  "StrictGapEvolutionData requires Nonlinear(solution) <= Dissipation(solution) and does not force Nonlinear to be the classwise positive majorant."
+
 ------------------------------------------------------------------------
 -- Corrected findings.
 ------------------------------------------------------------------------
@@ -161,6 +198,24 @@ preJul26RouteArchitectureAndConsumerSpineRecovered = true
 preJul26LiteralSignedPhysicalCoefficientWeldRecovered : Bool
 preJul26LiteralSignedPhysicalCoefficientWeldRecovered = false
 
+jul26ActualStateSignedPhysicalProducerRecovered : Bool
+jul26ActualStateSignedPhysicalProducerRecovered = true
+
+jul26SignedCancellationAssemblyRecovered : Bool
+jul26SignedCancellationAssemblyRecovered = true
+
+jul26ConsumerCanAcceptDirectSignedNonlinearObservable : Bool
+jul26ConsumerCanAcceptDirectSignedNonlinearObservable = true
+
+jul26ClasswiseMagnitudeRouteIsOnlyPossibleConsumerRoute : Bool
+jul26ClasswiseMagnitudeRouteIsOnlyPossibleConsumerRoute = false
+
+jul26DirectSignedTransferToExactErrorIdentificationRecovered : Bool
+jul26DirectSignedTransferToExactErrorIdentificationRecovered = false
+
+jul26ProducerAndDirectConsumerSocketCoexist : Bool
+jul26ProducerAndDirectConsumerSocketCoexist = true
+
 jul26RemainsEarliestRecoveredSimultaneousPhysicalSignedCutoffUniformAssembly : Bool
 jul26RemainsEarliestRecoveredSimultaneousPhysicalSignedCutoffUniformAssembly = true
 
@@ -170,11 +225,15 @@ currentDecisivePreJul26Residual =
 
 currentChronologyRefinement : String
 currentChronologyRefinement =
-  "Jul21-23 already owns the consumer architecture; Jul22 owns standard harmonic package constructors; Jul24 owns exact candidate share arithmetic; Jul25 owns near/far-high canonical-share reductions and exact far-low cancellation/commutator algebra. Jul25 far-low source commits precede PR336 opening, while near/far-high adapters were already exposed through PR333. None of those audited sources constructs every remaining cutoff-uniform physical inequality on one literal signed coefficient carrier, so Jul26 remains the earliest recovered simultaneous signed-physical assembly."
+  "Jul21-23 already owns the consumer architecture; Jul22 owns standard harmonic package constructors; Jul24 owns exact candidate share arithmetic; Jul25 owns near/far-high canonical-share reductions and exact far-low cancellation/commutator algebra. On Jul26 the actual-state signed coefficient and a consumer socket capable of accepting a signed nonlinear observable coexist inside PR338, followed minutes later by exact ordered-reality/three-leg cancellation."
 
 currentJuly26BoundaryMeaning : String
 currentJuly26BoundaryMeaning =
-  "Jul26 is not the first recovered route architecture, cancellation mechanism, consumer splice, or dissipation/BKM grammar. It is currently the first recovered same-object weld of the literal exact signed physical Galerkin coefficient into that pre-existing cutoff-uniform/global architecture."
+  "Jul26 is not the first recovered route architecture, cancellation mechanism, consumer splice, or dissipation/BKM grammar. It is the first recovered tranche where the actual-state exact signed Galerkin producer and the direct signed-gap/global consumer socket coexist. The audited source still does not recover an explicit field-level theorem signedTransferAt = nonlinearContribution/exactErrorIdentification; the implemented classwise route may pass through magnitude/majorant machinery instead."
+
+nextOldestForwardCut : String
+nextOldestForwardCut =
+  "Search Jul26 -> early Aug semantic aliases for the missing same-object field splice: physical/ODE equation equivalence, ordered power, energy identity, projected equation, nonlinear contribution, exact error identification, and physical kernel identification. Distinguish a genuine equality witness from classwise magnitude majorization."
 
 ------------------------------------------------------------------------
 -- Non-inference firewalls.
@@ -184,6 +243,8 @@ data PackageConstructorCreatesInputProof : Set where
 data ScalarArithmeticCreatesFourierEstimate : Set where
 data LocalCommutatorIdentityCreatesUniformSchurBound : Set where
 data SharedConsumerArchitectureCreatesPhysicalCoefficientIdentity : Set where
+data ProducerConsumerCoexistenceCreatesEquality : Set where
+data SignedCancellationCreatesGlobalPayment : Set where
 data SourceCommitCreatesEarlierPublicPRExposure : Set where
 data SearchMissProvesHistoricalAbsence : Set where
 
@@ -195,6 +256,10 @@ localIdentityDoesNotCreateUniformSchur : LocalCommutatorIdentityCreatesUniformSc
 localIdentityDoesNotCreateUniformSchur ()
 sharedConsumerDoesNotCreatePhysicalCoefficientIdentity : SharedConsumerArchitectureCreatesPhysicalCoefficientIdentity → ⊥
 sharedConsumerDoesNotCreatePhysicalCoefficientIdentity ()
+producerConsumerCoexistenceDoesNotCreateEquality : ProducerConsumerCoexistenceCreatesEquality → ⊥
+producerConsumerCoexistenceDoesNotCreateEquality ()
+signedCancellationDoesNotCreateGlobalPayment : SignedCancellationCreatesGlobalPayment → ⊥
+signedCancellationDoesNotCreateGlobalPayment ()
 sourceCommitDoesNotCreateEarlierPublicPRExposure : SourceCommitCreatesEarlierPublicPRExposure → ⊥
 sourceCommitDoesNotCreateEarlierPublicPRExposure ()
 searchMissDoesNotProveHistoricalAbsence : SearchMissProvesHistoricalAbsence → ⊥
@@ -211,6 +276,18 @@ preJul26RouteArchitectureAndConsumerSpineRecoveredIsTrue = refl
 preJul26LiteralSignedPhysicalCoefficientWeldRecoveredIsFalse :
   preJul26LiteralSignedPhysicalCoefficientWeldRecovered ≡ false
 preJul26LiteralSignedPhysicalCoefficientWeldRecoveredIsFalse = refl
+
+jul26ActualStateSignedPhysicalProducerRecoveredIsTrue :
+  jul26ActualStateSignedPhysicalProducerRecovered ≡ true
+jul26ActualStateSignedPhysicalProducerRecoveredIsTrue = refl
+
+jul26ProducerAndDirectConsumerSocketCoexistIsTrue :
+  jul26ProducerAndDirectConsumerSocketCoexist ≡ true
+jul26ProducerAndDirectConsumerSocketCoexistIsTrue = refl
+
+jul26DirectSignedTransferToExactErrorIdentificationRecoveredIsFalse :
+  jul26DirectSignedTransferToExactErrorIdentificationRecovered ≡ false
+jul26DirectSignedTransferToExactErrorIdentificationRecoveredIsFalse = refl
 
 jul26RemainsEarliestRecoveredIsTrue :
   jul26RemainsEarliestRecoveredSimultaneousPhysicalSignedCutoffUniformAssembly ≡ true
