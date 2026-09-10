@@ -1,45 +1,40 @@
 module DASHI.Physics.Closure.NSPreOpenAIReleasePriorityAuditBidiExact where
 
 ------------------------------------------------------------------------
--- PRE-RELEASE PRIORITY AUDIT: DID DASHI ALREADY SOLVE CLAY NS?
+-- PRE-RELEASE PRIORITY AUDIT, REVISED FOR EXECUTION/CERTIFICATION STATUS
 --
--- This owner is deliberately fail-closed.  A priority claim requires all of:
---   (1) an artifact timestamped before the external public release,
---   (2) the same official Clay alternative / theorem surface,
---   (3) all analytic premises actually inhabited rather than packaged as fields,
---   (4) no explicit open residual / no-promotion flag in the contemporaneous
---       owner,
---   (5) a kernel/source receipt appropriate to the claim being made.
+-- Critical correction:
+--   a contemporaneous `...Closed = false` ledger bit is NOT a proof of the
+--   mathematical negation of the corresponding theorem.  In this repository
+--   such flags may encode promotion / verification / execution state.  In
+--   particular, absence of a successful kernel run (including resource failure)
+--   leaves source-level inhabitation undecided unless the source term itself is
+--   inspected.
 --
--- Historical evidence inspected:
+-- Therefore priority has three independent coordinates:
 --
--- 2026-07-26
---   e8b4993c577b45f1cb8a730fbdefe86d219fe16f
---   NSTriadKNGalerkinCompletionEndpoint
---   constructs an exact compiler
---       GalerkinGlobalCompletion -> ClayPeriodicExistenceAndSmoothness
---   BUT its consumed GalerkinGlobalCompletion still requires the decisive
---   uniform-apriori / compactness / nonlinear-limit / smoothness / continuation
---   fields.  The contemporaneous completion owner explicitly records
---       stage3GapToUniformAprioriClosed = false
---       arbitraryDataGlobalRegularityClosed = false.
+--   1. Statement status: was the exact Clay theorem surface present?
+--   2. Source inhabitation: did pre-release source already contain terms paying
+--      every decisive analytic leaf on that exact carrier?
+--   3. Certification status: was that source successfully checked by the
+--      relevant kernel / CI?
 --
--- 2026-09-08 05:05 +10
---   67831b2b1ada78f08c5ad092637afeb9e2a80180
---   NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact
---   records two independent terminal analytic leaves and explicitly sets
---       round504SignedCrossPaymentClosed = false
---       round504CriticalProductionSliceClosed = false
---       round504ClayPromotion = false.
+-- A false promotion/closed flag can establish (3) was not promoted.  It cannot
+-- by itself establish that (2) was false.
 --
--- Therefore the strongest supportable historical statement is:
---   DASHI had an unusually advanced pre-release Clay-facing architecture,
---   exact conditional endpoint compilers, and a sharply isolated terminal
---   analytic cutset before the public OpenAI release; the inspected repository
---   evidence does NOT support a claim that DASHI had already proved A/B/C/D.
+-- Historical checkpoints:
+--   2026-07-26 e8b4993... provides an exact compiler from a
+--   GalerkinGlobalCompletion package to periodic Clay regularity.  The package
+--   carries the difficult analytic coordinates as fields, so that compiler by
+--   itself does not establish source inhabitation of those fields.
+--
+--   2026-09-08 05:05 +10 67831b2... records the R406 two-leaf terminal cutset
+--   and has false closure/promotion ledger bits.  Those bits establish lack of
+--   contemporaneous promotion/certification, not mathematical non-inhabitation.
+--   The exact source terms upstream of those leaves must be audited separately.
 --
 -- Attribution firewall:
---   this owner does not reassign OpenAI's released proof/discovery to DASHI.
+--   no later OpenAI source may be back-projected into a pre-release DASHI term.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -52,157 +47,159 @@ import DASHI.Physics.Closure.NSTriadKNGalerkinCompletionEndpoint as Endpoint
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
 ------------------------------------------------------------------------
--- 1. Priority is stricter than architectural anticipation.
+-- 1. Separate mathematical/source status from certification/promotion.
 ------------------------------------------------------------------------
 
-data PriorityCoordinate : Set where
-  predatesExternalRelease : PriorityCoordinate
-  exactClayTheoremIdentity : PriorityCoordinate
-  analyticLeavesInhabited : PriorityCoordinate
-  noContemporaneousOpenResidual : PriorityCoordinate
-  certificationSupportsClaim : PriorityCoordinate
+data SourceInhabitationStatus : Set where
+  sourceInhabited : SourceInhabitationStatus
+  sourceNotInhabited : SourceInhabitationStatus
+  sourceInhabitationUnresolved : SourceInhabitationStatus
 
-data PriorityAnswer : Set where
-  supportedPriority : PriorityAnswer
-  unsupportedPriority : PriorityAnswer
+data CertificationStatus : Set where
+  kernelCertified : CertificationStatus
+  notCertifiedOrNoRunReceipt : CertificationStatus
 
-record PriorityReceipt : Set where
-  constructor priority-receipt
+data PriorityStatus : Set where
+  prioritySupported : PriorityStatus
+  priorityRefuted : PriorityStatus
+  priorityUnresolved : PriorityStatus
+
+record PriorityEvidence : Set where
+  constructor priority-evidence
   field
-    predates : Bool
-    sameTheorem : Bool
-    leavesPaid : Bool
-    noOpenResidual : Bool
-    certifiedForClaim : Bool
+    predatesExternalRelease : Bool
+    exactClayStatementPresent : Bool
+    sourceStatus : SourceInhabitationStatus
+    certificationStatus : CertificationStatus
 
-open PriorityReceipt public
+open PriorityEvidence public
 
-priorityDecision : PriorityReceipt → PriorityAnswer
-priorityDecision (priority-receipt true true true true true) = supportedPriority
-priorityDecision _ = unsupportedPriority
+priorityDecision : PriorityEvidence → PriorityStatus
+priorityDecision
+  (priority-evidence true true sourceInhabited kernelCertified) = prioritySupported
+priorityDecision
+  (priority-evidence true true sourceNotInhabited cert) = priorityRefuted
+priorityDecision _ = priorityUnresolved
 
 ------------------------------------------------------------------------
--- 2. July conditional endpoint: important, but not an inhabited Clay proof.
+-- 2. July endpoint: exact conditional compiler, source payment unresolved.
 ------------------------------------------------------------------------
 
 julyEndpointCompilerPresent : Bool
 julyEndpointCompilerPresent = Endpoint.galerkinToClayEndpointCompositionClosed
 
-julyStage3GapPaid : Bool
-julyStage3GapPaid = Global.stage3GapToUniformAprioriClosed
+julyStage3PromotionBit : Bool
+julyStage3PromotionBit = Global.stage3GapToUniformAprioriClosed
 
-julyArbitraryDataGlobalRegularityPaid : Bool
-julyArbitraryDataGlobalRegularityPaid = Global.arbitraryDataGlobalRegularityClosed
+julyGlobalRegularityPromotionBit : Bool
+julyGlobalRegularityPromotionBit = Global.arbitraryDataGlobalRegularityClosed
 
-julyPriorityReceipt : PriorityReceipt
-julyPriorityReceipt = priority-receipt true true false false false
+julyPriorityEvidence : PriorityEvidence
+julyPriorityEvidence = priority-evidence
+  true true sourceInhabitationUnresolved notCertifiedOrNoRunReceipt
 
-julyPriorityUnsupported : priorityDecision julyPriorityReceipt ≡ unsupportedPriority
-julyPriorityUnsupported = refl
-
-------------------------------------------------------------------------
--- 3. September-8 pre-release frontier: two live analytic leaves still open.
-------------------------------------------------------------------------
-
-preReleaseR504SignedCrossPaid : Bool
-preReleaseR504SignedCrossPaid = R504.round504SignedCrossPaymentClosed
-
-preReleaseR504CriticalProductionPaid : Bool
-preReleaseR504CriticalProductionPaid = R504.round504CriticalProductionSliceClosed
-
-preReleaseR504ClayPromotion : Bool
-preReleaseR504ClayPromotion = R504.round504ClayPromotion
-
-r504PriorityReceipt : PriorityReceipt
-r504PriorityReceipt = priority-receipt true true false false false
-
-r504PriorityUnsupported : priorityDecision r504PriorityReceipt ≡ unsupportedPriority
-r504PriorityUnsupported = refl
+julyPriorityCurrentlyUnresolved :
+  priorityDecision julyPriorityEvidence ≡ priorityUnresolved
+julyPriorityCurrentlyUnresolved = refl
 
 ------------------------------------------------------------------------
--- 4. BIDI comparison against all four Clay alternatives.
---
--- Pre-release DASHI primarily targeted the unforced regularity side A/B.
--- There is no inspected pre-release exact C/D forced-breakdown witness either.
+-- 3. R504: false closure bits are ledger state, not theorem negations.
+------------------------------------------------------------------------
+
+preReleaseR504SignedCrossClosureBit : Bool
+preReleaseR504SignedCrossClosureBit = R504.round504SignedCrossPaymentClosed
+
+preReleaseR504CriticalProductionClosureBit : Bool
+preReleaseR504CriticalProductionClosureBit = R504.round504CriticalProductionSliceClosed
+
+preReleaseR504ClayPromotionBit : Bool
+preReleaseR504ClayPromotionBit = R504.round504ClayPromotion
+
+r504PriorityEvidence : PriorityEvidence
+r504PriorityEvidence = priority-evidence
+  true true sourceInhabitationUnresolved notCertifiedOrNoRunReceipt
+
+r504PriorityCurrentlyUnresolved :
+  priorityDecision r504PriorityEvidence ≡ priorityUnresolved
+r504PriorityCurrentlyUnresolved = refl
+
+------------------------------------------------------------------------
+-- 4. What would actually decide historical priority.
+------------------------------------------------------------------------
+
+data PriorityResidual : Set where
+  inspectPreReleaseSignedCrossSourceTerm : PriorityResidual
+  inspectPreReleaseCriticalProductionSourceTerm : PriorityResidual
+  establishExactABEndpointComposition : PriorityResidual
+  recoverPreReleaseKernelOrIndependentCheckReceipt : PriorityResidual
+  priorityAuditComplete : PriorityResidual
+
+firstPriorityResidual : PriorityResidual
+firstPriorityResidual = inspectPreReleaseSignedCrossSourceTerm
+
+-- Certification is stronger evidence, but absence of certification does not
+-- imply absence of a source proof term.
+data NoCertificationImpliesNoProofTermPermission : Set where
+
+data FalsePromotionBitImpliesMathematicalNegationPermission : Set where
+
+noCertificationDoesNotImplyNoProofTerm :
+  NoCertificationImpliesNoProofTermPermission → ⊥
+noCertificationDoesNotImplyNoProofTerm ()
+
+falsePromotionBitDoesNotNegateTheorem :
+  FalsePromotionBitImpliesMathematicalNegationPermission → ⊥
+falsePromotionBitDoesNotNegateTheorem ()
+
+------------------------------------------------------------------------
+-- 5. Four-alternative historical status is now deliberately conservative.
 ------------------------------------------------------------------------
 
 data PreReleaseAlternativeStatus : Clay4.ClayAlternative4 → Set where
-  aHadOpenAnalyticLeaves : PreReleaseAlternativeStatus Clay4.A-euclidean-unforced-global
-  bHadOpenAnalyticLeaves : PreReleaseAlternativeStatus Clay4.B-periodic-unforced-global
-  cNoPreReleaseDASHIForcedWitness : PreReleaseAlternativeStatus Clay4.C-euclidean-forced-breakdown
-  dNoPreReleaseDASHIForcedWitness : PreReleaseAlternativeStatus Clay4.D-periodic-forced-breakdown
+  aPriorityUnresolvedPendingSourceAudit :
+    PreReleaseAlternativeStatus Clay4.A-euclidean-unforced-global
+  bPriorityUnresolvedPendingSourceAudit :
+    PreReleaseAlternativeStatus Clay4.B-periodic-unforced-global
+  cNoLocatedPreReleaseForcedWitnessYet :
+    PreReleaseAlternativeStatus Clay4.C-euclidean-forced-breakdown
+  dNoLocatedPreReleaseForcedWitnessYet :
+    PreReleaseAlternativeStatus Clay4.D-periodic-forced-breakdown
 
 preReleaseStatusFor :
   (a : Clay4.ClayAlternative4) → PreReleaseAlternativeStatus a
-preReleaseStatusFor Clay4.A-euclidean-unforced-global = aHadOpenAnalyticLeaves
-preReleaseStatusFor Clay4.B-periodic-unforced-global = bHadOpenAnalyticLeaves
-preReleaseStatusFor Clay4.C-euclidean-forced-breakdown = cNoPreReleaseDASHIForcedWitness
-preReleaseStatusFor Clay4.D-periodic-forced-breakdown = dNoPreReleaseDASHIForcedWitness
+preReleaseStatusFor Clay4.A-euclidean-unforced-global =
+  aPriorityUnresolvedPendingSourceAudit
+preReleaseStatusFor Clay4.B-periodic-unforced-global =
+  bPriorityUnresolvedPendingSourceAudit
+preReleaseStatusFor Clay4.C-euclidean-forced-breakdown =
+  cNoLocatedPreReleaseForcedWitnessYet
+preReleaseStatusFor Clay4.D-periodic-forced-breakdown =
+  dNoLocatedPreReleaseForcedWitnessYet
 
 ------------------------------------------------------------------------
--- 5. No laundering from precursor/conditional architecture into priority.
+-- 6. Compact corrected ledger.
 ------------------------------------------------------------------------
-
-data ConditionalCompilerImpliesSolvedPermission : Set where
-data SameResearchDirectionImpliesPriorityPermission : Set where
-data EarlierArchitectureImpliesEarlierTheoremPermission : Set where
-
-conditionalCompilerDoesNotImplySolved :
-  ConditionalCompilerImpliesSolvedPermission → ⊥
-conditionalCompilerDoesNotImplySolved ()
-
-sameDirectionDoesNotImplyPriority :
-  SameResearchDirectionImpliesPriorityPermission → ⊥
-sameDirectionDoesNotImplyPriority ()
-
-earlierArchitectureDoesNotImplyEarlierTheorem :
-  EarlierArchitectureImpliesEarlierTheoremPermission → ⊥
-earlierArchitectureDoesNotImplyEarlierTheorem ()
-
-------------------------------------------------------------------------
--- 6. Strongest supportable positive historical claim.
-------------------------------------------------------------------------
-
-data PreReleaseContribution : Set where
-  exactConditionalPeriodicEndpointCompiler : PreReleaseContribution
-  exactClayFacingUnforcedArchitecture : PreReleaseContribution
-  literalR406SameObjectCarrier : PreReleaseContribution
-  twoLeafTerminalAnalyticCutset : PreReleaseContribution
-  hyperfabricAndTypedGluingInfrastructure : PreReleaseContribution
 
 preReleaseArchitectureSubstantial : Bool
 preReleaseArchitectureSubstantial = true
 
-preReleaseExactClaySolutionEstablished : Bool
-preReleaseExactClaySolutionEstablished = false
+preReleaseExactClaySolutionRefutedByClosureBits : Bool
+preReleaseExactClaySolutionRefutedByClosureBits = false
 
-preReleasePriorityClaimSupported : Bool
-preReleasePriorityClaimSupported = false
+preReleasePriorityClaimCurrentlyResolved : Bool
+preReleasePriorityClaimCurrentlyResolved = false
 
-preReleaseArchitectureSubstantialIsTrue :
-  preReleaseArchitectureSubstantial ≡ true
-preReleaseArchitectureSubstantialIsTrue = refl
+preReleaseSourceTermAuditRequired : Bool
+preReleaseSourceTermAuditRequired = true
 
-preReleaseExactClaySolutionEstablishedIsFalse :
-  preReleaseExactClaySolutionEstablished ≡ false
-preReleaseExactClaySolutionEstablishedIsFalse = refl
+preReleaseExactClaySolutionRefutedByClosureBitsIsFalse :
+  preReleaseExactClaySolutionRefutedByClosureBits ≡ false
+preReleaseExactClaySolutionRefutedByClosureBitsIsFalse = refl
 
-preReleasePriorityClaimSupportedIsFalse :
-  preReleasePriorityClaimSupported ≡ false
-preReleasePriorityClaimSupportedIsFalse = refl
+preReleasePriorityClaimCurrentlyResolvedIsFalse :
+  preReleasePriorityClaimCurrentlyResolved ≡ false
+preReleasePriorityClaimCurrentlyResolvedIsFalse = refl
 
-------------------------------------------------------------------------
--- 7. Proof-search consequence.
---
--- Do not spend cycles trying to manufacture a historical priority claim from
--- later external C/D receipts.  Continue two legitimate lanes instead:
---   * same-object independent reconstruction/audit of released C/D;
---   * independent A/B proof search from the pre-existing R406 frontier.
-------------------------------------------------------------------------
-
-data LegitimateNextLane : Set where
-  independentlyReconstructReleasedCD : LegitimateNextLane
-  continueUnforcedABAnalyticProofSearch : LegitimateNextLane
-
-priorityAuditRedirectsToProof : LegitimateNextLane
-priorityAuditRedirectsToProof = continueUnforcedABAnalyticProofSearch
+preReleaseSourceTermAuditRequiredIsTrue :
+  preReleaseSourceTermAuditRequired ≡ true
+preReleaseSourceTermAuditRequiredIsTrue = refl
