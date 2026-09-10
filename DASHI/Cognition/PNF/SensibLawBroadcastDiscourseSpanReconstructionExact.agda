@@ -15,9 +15,9 @@ import DASHI.Reasoning.SemanticCandidateResidualBidiExact as Residual
 -- This owner is downstream of the PNF/world boundary manifold. It does not
 -- rewrite the source transcript. It emits a separate candidate segmentation
 -- plus a provenance ledger, keeping unresolved manifold boundaries intact.
--- Runtime v2 additionally preserves the source separator/paragraph topology:
--- candidate segmentation may insert boundary newlines, but it may not replace
--- or collapse existing source separators.
+-- Runtime v2 preserves source byte order and source separator/paragraph
+-- topology: candidate segmentation may insert boundary newlines, but it may
+-- not replace, delete, or reorder source bytes.
 ------------------------------------------------------------------------
 
 data SpanBoundaryDisposition : Set where
@@ -57,6 +57,21 @@ record ParagraphTopologyReceipt : Set where
 
 open ParagraphTopologyReceipt public
 
+record SourceRecoverabilityReceipt : Set where
+  constructor sourceRecoverabilityReceipt
+  field
+    sourceByteCount : Nat
+    reconstructedByteCount : Nat
+    insertedNewlineCount : Nat
+    sourceDoubleNewlineCount : Nat
+    reconstructedDoubleNewlineCount : Nat
+    runtimeSchemaReference : String
+    sourceRecoverableByDeletingInsertedNewlines : Bool
+    reconstructedDidNotShrink : Bool
+    paragraphSeparatorsDidNotDecrease : Bool
+
+open SourceRecoverabilityReceipt public
+
 record SpanReconstructionReceipt : Set where
   constructor spanReconstructionReceipt
   field
@@ -68,6 +83,7 @@ record SpanReconstructionReceipt : Set where
     unresolvedBoundaryReference : String
     sourceCoverageReference : String
     paragraphTopologyReference : String
+    sourceRecoverabilityReference : String
     replayReference : String
 
 open SpanReconstructionReceipt public
@@ -155,6 +171,14 @@ reconstructionMayNotCollapseSourceParagraphTopology :
   ReconstructionMayCollapseSourceParagraphTopology → ⊥
 reconstructionMayNotCollapseSourceParagraphTopology ()
 
+data NonNewlineMutationMayPassIntegrityGate : Set where
+nonNewlineMutationMayNotPassIntegrityGate : NonNewlineMutationMayPassIntegrityGate → ⊥
+nonNewlineMutationMayNotPassIntegrityGate ()
+
+data StaleSchemaMayPassIntegrityGate : Set where
+staleSchemaMayNotPassIntegrityGate : StaleSchemaMayPassIntegrityGate → ⊥
+staleSchemaMayNotPassIntegrityGate ()
+
 data ParagraphCountEqualityProvesSemanticEquivalence : Set where
 paragraphCountEqualityDoesNotProveSemanticEquivalence :
   ParagraphCountEqualityProvesSemanticEquivalence → ⊥
@@ -184,6 +208,9 @@ record SpanReconstructionBoundary : Set where
     reconstructedTextIsSeparateProjection : Bool
     originalParagraphTopologyPreserved : Bool
     candidateCutsOnlyAddSeparators : Bool
+    sourceRecoverabilityCheckedAtRuntime : Bool
+    staleSchemaFailsClosed : Bool
+    nonNewlineMutationFailsClosed : Bool
     unresolvedParetoFrontsRemainUnsplit : Bool
     speakerIdentityIndependentOfCutProjection : Bool
     rerunPNFIsRequiredForComparison : Bool
@@ -193,4 +220,4 @@ record SpanReconstructionBoundary : Set where
 
 canonicalSpanReconstructionBoundary : SpanReconstructionBoundary
 canonicalSpanReconstructionBoundary =
-  spanReconstructionBoundary true true true true true true true true true true
+  spanReconstructionBoundary true true true true true true true true true true true true true
