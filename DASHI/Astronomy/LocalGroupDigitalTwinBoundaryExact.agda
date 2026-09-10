@@ -9,10 +9,9 @@ open import Agda.Builtin.String using (String)
 -- time-indexed Local Group digital twin.
 ------------------------------------------------------------------------
 
-infixr 6 _&&_
-_&&_ : Bool → Bool → Bool
-true && b = b
-false && _ = false
+twinAnd : Bool → Bool → Bool
+twinAnd true b = b
+twinAnd false _ = false
 
 data TwinObligation : Set where
   stateVector : TwinObligation
@@ -25,10 +24,10 @@ data TwinObligation : Set where
   predictiveValidation : TwinObligation
 
 data PaymentState : Set where
-  unpaid : PaymentState
-  attributedClaimOnly : PaymentState
-  sourceBound : PaymentState
-  independentlyVerified : PaymentState
+  unpaidPayment : PaymentState
+  attributedClaimPayment : PaymentState
+  sourceBoundPayment : PaymentState
+  independentlyVerifiedPayment : PaymentState
 
 record TwinBoundary : Set where
   constructor twinBoundary
@@ -47,14 +46,14 @@ open TwinBoundary public
 firstLightBoundary : TwinBoundary
 firstLightBoundary =
   twinBoundary
-    sourceBound
-    unpaid
-    unpaid
-    unpaid
-    attributedClaimOnly
-    unpaid
-    unpaid
-    unpaid
+    sourceBoundPayment
+    unpaidPayment
+    unpaidPayment
+    unpaidPayment
+    attributedClaimPayment
+    unpaidPayment
+    unpaidPayment
+    unpaidPayment
 
 record TwinPromotionReceipt : Set where
   constructor twinPromotionReceipt
@@ -72,13 +71,13 @@ open TwinPromotionReceipt public
 
 validatedTwin : TwinPromotionReceipt → Bool
 validatedTwin r =
-  evolutionPaid r &&
-  potentialPaid r &&
-  uncertaintyPaid r &&
-  interactionsPaid r &&
-  updatePaid r &&
-  assimilationPaid r &&
-  validationPaid r
+  twinAnd (evolutionPaid r)
+  (twinAnd (potentialPaid r)
+  (twinAnd (uncertaintyPaid r)
+  (twinAnd (interactionsPaid r)
+  (twinAnd (updatePaid r)
+  (twinAnd (assimilationPaid r)
+           (validationPaid r))))))
 
 firstLightRenderingPaysValidatedTwin : Bool
 firstLightRenderingPaysValidatedTwin = false
