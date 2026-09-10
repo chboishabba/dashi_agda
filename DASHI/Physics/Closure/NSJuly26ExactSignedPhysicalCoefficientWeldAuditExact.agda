@@ -4,17 +4,21 @@ module DASHI.Physics.Closure.NSJuly26ExactSignedPhysicalCoefficientWeldAuditExac
 -- JULY 26 EXACT SIGNED PHYSICAL COEFFICIENT WELD AUDIT
 --
 -- This owner narrows the historical boundary recovered by the signed-route
--- provenance audit.  It distinguishes five different events:
+-- provenance audit.  It distinguishes seven different events/grades:
 --
 --   (1) the public PR surface already carrying the completion programme;
 --   (2) construction of the literal signed Galerkin coefficient;
 --   (3) insertion into the retained physical-triad incidence carrier;
 --   (4) instantiation on an actual Fourier velocity field u : Z3 -> Complex3;
---   (5) the still-separate cutoff-uniform analytic estimate downstream.
+--   (5) exact three-leg cancellation on that actual signed transfer carrier;
+--   (6) later literal global output-fibre partition/pairing completion;
+--   (7) the still-separate cutoff-uniform analytic estimate downstream.
 --
 -- Source chronology is not kernel certification.  A named positive majorant is
--- not definitionally the signed coefficient, and a physical incidence adapter
--- whose vectors remain explicit inputs is not yet an actual-state weld.
+-- not definitionally the signed coefficient, a physical incidence adapter whose
+-- vectors remain explicit inputs is not yet an actual-state weld, and exact
+-- triad-orbit cancellation does not by itself construct the global output-fibre
+-- partition used by the later literal Galerkin energy fold.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -34,6 +38,8 @@ data EventGrade : Set where
   literalSignedCoefficient : EventGrade
   retainedPhysicalIncidenceAdapter : EventGrade
   actualVelocityFieldWeld : EventGrade
+  exactOrbitCancellation : EventGrade
+  literalGlobalOutputPartition : EventGrade
   analyticFrontier : EventGrade
 
 record July26Event : Set where
@@ -84,6 +90,24 @@ actualVelocityFieldWeldEvent = july26-event
   actualVelocityFieldWeld
   "Defines signedTransferAt on a PhysicalTriadIncidence and a velocity : Z3.FourierMode -> Complex3, feeding velocity(p), velocity(q), and velocity(k) directly into the exact signed coefficient; this is the first recovered actual-state/physical-incidence instantiation in the current audit."
 
+exactOrbitCancellationEvent : July26Event
+exactOrbitCancellationEvent = july26-event
+  "actual signed transfer -> exact ordered-reality and three-leg cancellation"
+  "eb861379246e43af7260d92ec40cff742c23753f"
+  "2026-07-26T06:27:15Z"
+  "2026-07-26T16:27:15+10:00"
+  exactOrbitCancellation
+  "Constructs the concrete Complex3 cancellation laws on the actual Fourier velocity field and proves symmetrised three-leg cancellation from the exact ordered signed transfer. This is theorem-bearing physical cancellation, but it is an orbit-local mechanism rather than the later literal global output-fibre partition."
+
+literalGlobalOutputPartitionEvent : July26Event
+literalGlobalOutputPartitionEvent = july26-event
+  "literal cutoff output-fibre partition -> complete projected Galerkin energy pairing fold"
+  "3553d9bd0828b31059c37fcfbe7d5f8fea01a3bc"
+  "2026-08-11T07:18:38Z"
+  "2026-08-11T17:18:38+10:00"
+  literalGlobalOutputPartition
+  "Later source closes the finite combinatorial partition of every physical triad by literal output mode and identifies the complete projected Galerkin energy pairing with the complete ordered incidence fold. A follow-up repair at 2026-08-11T07:19:35Z keeps that result source-level."
+
 remainingAnalyticFrontier : July26Event
 remainingAnalyticFrontier = july26-event
   "cutoff-uniform signed estimate / strict dissipation / global scalar control"
@@ -126,6 +150,12 @@ literalSignedCoefficientPredatesRetainedIncidenceAdapter = true
 retainedIncidenceAdapterPredatesActualVelocityFieldWeld : Bool
 retainedIncidenceAdapterPredatesActualVelocityFieldWeld = true
 
+actualVelocityFieldWeldPredatesExactOrbitCancellation : Bool
+actualVelocityFieldWeldPredatesExactOrbitCancellation = true
+
+exactOrbitCancellationPredatesLiteralGlobalOutputPartition : Bool
+exactOrbitCancellationPredatesLiteralGlobalOutputPartition = true
+
 secondsBetweenLiteralCoefficientAndRetainedIncidenceAdapter : String
 secondsBetweenLiteralCoefficientAndRetainedIncidenceAdapter = "138"
 
@@ -147,15 +177,20 @@ jul26RetainedIncidenceAdapterIsAlreadyActualVelocityStateWeld = false
 jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeld : Bool
 jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeld = true
 
+jul26ExactActualStateThreeLegCancellationRecovered : Bool
+jul26ExactActualStateThreeLegCancellationRecovered = true
+
+jul26LiteralGlobalOutputFiberPartitionRecovered : Bool
+jul26LiteralGlobalOutputFiberPartitionRecovered = false
+
+aug11LiteralGlobalOutputFiberPartitionRecovered : Bool
+aug11LiteralGlobalOutputFiberPartitionRecovered = true
+
 jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimate : Bool
 jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimate = false
 
 ------------------------------------------------------------------------
 -- Certification status.
---
--- GitHub exposes no pull-request workflow run for the 12:44 exact coefficient
--- or 12:46 incidence-adapter commits in the current audit.  This is deliberately
--- not interpreted as mathematical negation of their source terms.
 ------------------------------------------------------------------------
 
 exactCoefficientHistoricalPRWorkflowReceiptLocated : Bool
@@ -173,6 +208,7 @@ historicalSourceChronologyIsKernelCertification = false
 
 data PublicProgrammeCreatesLiteralCoefficient : Set where
 data IncidenceAdapterCreatesActualStateRealization : Set where
+data LocalOrbitCancellationCreatesGlobalOutputPartition : Set where
 data LiteralCoefficientCreatesUniformGap : Set where
 data PositiveMajorantEqualsSignedCoefficient : Set where
 data MissingWorkflowNegatesSourceTheorem : Set where
@@ -185,6 +221,10 @@ publicProgrammeDoesNotCreateLiteralCoefficient ()
 incidenceAdapterDoesNotCreateActualState :
   IncidenceAdapterCreatesActualStateRealization → ⊥
 incidenceAdapterDoesNotCreateActualState ()
+
+localOrbitCancellationDoesNotCreateGlobalOutputPartition :
+  LocalOrbitCancellationCreatesGlobalOutputPartition → ⊥
+localOrbitCancellationDoesNotCreateGlobalOutputPartition ()
 
 literalCoefficientDoesNotCreateUniformGap :
   LiteralCoefficientCreatesUniformGap → ⊥
@@ -208,11 +248,11 @@ publicChronologyDoesNotProveExternalAccess ()
 
 currentHistoricalBoundary : String
 currentHistoricalBoundary =
-  "By Jul21-23 the public repository already had the signed/cancellation consumer architecture. On Jul26 12:44:07 Brisbane it acquired the literal signed Galerkin coefficient; at 12:46:25 that coefficient was placed on retained physical-triad incidences while the vectors remained explicit realization inputs; at 13:53:37 signedTransferAt instantiated the exact coefficient directly on an actual Fourier velocity field at a physical triad incidence.  The current earliest recovered actual-state signed-physical same-object weld is therefore 13:53:37 Brisbane on Jul26, not the invention date of the overall architecture."
+  "By Jul21-23 the public repository already had the signed/cancellation consumer architecture. On Jul26 12:44:07 Brisbane it acquired the literal signed Galerkin coefficient; at 12:46:25 that coefficient was placed on retained physical-triad incidences while the vectors remained explicit realization inputs; at 13:53:37 signedTransferAt instantiated the exact coefficient directly on an actual Fourier velocity field; and by 16:27:15 the concrete Complex3 three-leg cancellation theorem was constructed on that same actual-state signed-transfer carrier. The later Aug11 output-fibre partition closes the literal finite global pairing combinatorics; it should be classified as a representation/combinatorics completion, not the invention of the Jul26 signed physical cancellation mechanism."
 
 currentRemainingMathematicalBoundary : String
 currentRemainingMathematicalBoundary =
-  "The Jul26 actual-state coefficient weld does not itself prove a cutoff-uniform signed estimate, strict dissipation payment, arbitrary-data global scalar control, or Clay periodic regularity endpoint. Those remain separate analytic obligations."
+  "The Jul26 actual-state coefficient and exact orbit-cancellation welds do not themselves prove a cutoff-uniform signed estimate, strict dissipation payment, arbitrary-data global scalar control, or Clay periodic regularity endpoint. The literal global output-fibre partition was only recovered on Aug11 in this audit. Those distinctions remain separate from execution certification."
 
 ------------------------------------------------------------------------
 -- Expected polarities.
@@ -241,6 +281,18 @@ jul26RetainedIncidenceAdapterIsAlreadyActualVelocityStateWeldIsFalse = refl
 jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeldIsTrue :
   jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeld ≡ true
 jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeldIsTrue = refl
+
+jul26ExactActualStateThreeLegCancellationRecoveredIsTrue :
+  jul26ExactActualStateThreeLegCancellationRecovered ≡ true
+jul26ExactActualStateThreeLegCancellationRecoveredIsTrue = refl
+
+jul26LiteralGlobalOutputFiberPartitionRecoveredIsFalse :
+  jul26LiteralGlobalOutputFiberPartitionRecovered ≡ false
+jul26LiteralGlobalOutputFiberPartitionRecoveredIsFalse = refl
+
+aug11LiteralGlobalOutputFiberPartitionRecoveredIsTrue :
+  aug11LiteralGlobalOutputFiberPartitionRecovered ≡ true
+aug11LiteralGlobalOutputFiberPartitionRecoveredIsTrue = refl
 
 jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimateIsFalse :
   jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimate ≡ false
