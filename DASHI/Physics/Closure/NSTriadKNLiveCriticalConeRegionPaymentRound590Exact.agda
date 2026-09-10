@@ -43,27 +43,20 @@ record LiveCriticalConeRegionPayment590
   constructor live-critical-cone-region-payment-590
   field
     energyDissipation590 : ℚ
-
     deepFarLowMass590 deepHHMass590 : ℚ
     coreCompanionMass590 coreGramDebt590 : ℚ
-
     deepFarLowCoefficient590 deepHHCoefficient590
       coreEDCoefficient590 theta590 : ℚ
-
     energyDissipationNN590 : 0ℚ ≤ energyDissipation590
     thetaNN590 : 0ℚ ≤ theta590
     thetaStrictlyBelowOne590 : theta590 < 1
-
     liveCrossSplits590 :
       R440.fixedOutputPhysicalCommonCross W S system output
       ≡ (deepFarLowMass590 + deepHHMass590) + coreGramDebt590
-
     deepFarLowPayment590 :
       deepFarLowMass590 ≤ deepFarLowCoefficient590 * energyDissipation590
-
     deepHHPayment590 :
       deepHHMass590 ≤ deepHHCoefficient590 * energyDissipation590
-
     criticalCoreRelativeCovariance590 :
       coreGramDebt590
       ≤ theta590 * coreCompanionMass590
