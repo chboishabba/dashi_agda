@@ -83,8 +83,8 @@ protonatedValine2024Carrier = spectroscopy-publication-carrier
   "Cryogenic Ion Vibrational Spectroscopy of Protonated Valine: Messenger Tag Effects"
   "received 2024-05-29; revised 2024-08-06; accepted 2024-08-07; online 2024-08-16; issue 2024-08-29"
   "Lane M. Terry; Maddie K. Klumb; Deacon J. Nemchick; Robert Hodyss; Frank Maiwald; J. Mathias Weber"
-  "DOI 10.1021/acs.jpca.4c03552; PMID 39150465"
-  "Journal of Physical Chemistry A publication history; PubMed 39150465"
+  "ACS DOI 10.1021/acs.jpca.4c03552; PMID 39150465; ChemRxiv DOI 10.26434/chemrxiv-2024-2tvc6"
+  "Journal of Physical Chemistry A publication history; PubMed 39150465; ChemRxiv preprint"
   true true
 
 deprotonatedStates2025Carrier : SpectroscopyPublicationCarrier
@@ -93,19 +93,84 @@ deprotonatedStates2025Carrier = spectroscopy-publication-carrier
   "Probing Isomers and Conformers by Cryogenic Ion Vibrational Spectroscopy: Deprotonated States of Valine and Aminovaleric Acid"
   "received 2025-05-07; revised 2025-06-12; accepted 2025-06-13; online 2025-06-23; issue 2025-07-03"
   "Lane M. Terry; Maddie K. Klumb; Deacon J. Nemchick; Robert P. Hodyss; J. Mathias Weber"
-  "DOI 10.1021/acs.jpca.5c03141; ChemRxiv DOI 10.26434/chemrxiv-2025-xf3d2"
+  "ACS DOI 10.1021/acs.jpca.5c03141; ChemRxiv DOI 10.26434/chemrxiv-2025-xf3d2"
   "Journal of Physical Chemistry A publication history; ChemRxiv preprint; JILA publication list"
   false true
 
 ------------------------------------------------------------------------
--- Temporal split around Maiwald's death on 2024-07-04.
+-- Attribution-safe manifestation split.
 --
--- The 2024 paper was submitted before his death and revised/accepted after it,
--- while retaining him as an author. The 2025 paper first entered the journal
--- process long after his death and omits him. This gives a much cleaner boundary
--- between manuscript already in flight and a genuinely post-loss publication
--- cycle. It still does not identify when each experiment was run or when each
--- calibration/data product was produced.
+-- A title family can have multiple public manifestations.  Identifier role is
+-- therefore kept distinct from scientific lineage: ChemRxiv DOI, ACS DOI and
+-- NTRS record identity are not interchangeable identifiers even where the
+-- records clearly refer to the same title/author family.
+------------------------------------------------------------------------
+
+data PublicationManifestationKind : Set where
+  chemRxivPreprint
+  nasaAcceptedManuscriptRecord
+  acsVersionOfRecord : PublicationManifestationKind
+
+record PublicationManifestationReceipt : Set where
+  constructor publication-manifestation-receipt
+  field
+    kind : PublicationManifestationKind
+    objectTitle : String
+    manifestationIdentifier : String
+    attribution : String
+    sourceReference : String
+    exactManifestationIdentityPaid : Bool
+    titleAuthorLineageCompatible : Bool
+    sameBytesAsVersionOfRecordPaid : Bool
+    acquisitionDateIsScientificWorkDate : Bool
+
+open PublicationManifestationReceipt public
+
+protonatedChemRxivManifestation : PublicationManifestationReceipt
+protonatedChemRxivManifestation = publication-manifestation-receipt
+  chemRxivPreprint
+  "Cryogenic Ion Vibrational Spectroscopy of Protonated Valine: Messenger Tag Effects"
+  "10.26434/chemrxiv-2024-2tvc6"
+  "Terry; Klumb; Nemchick; Hodyss; Maiwald; Weber"
+  "ChemRxiv preprint PDF"
+  true true false false
+
+protonatedNASAExternalAcceptedManifestation : PublicationManifestationReceipt
+protonatedNASAExternalAcceptedManifestation = publication-manifestation-receipt
+  nasaAcceptedManuscriptRecord
+  "Cryogenic Ion Vibrational Spectroscopy of Protonated Valine: Messenger Tag Effects"
+  "NASA NTRS citation 13797709699197; NTRS DOI field points to 10.26434/chemrxiv-2024-2tvc6"
+  "Terry; Klumb; Nemchick; Hodyss; Maiwald; Weber"
+  "NASA NTRS external-source record, document type Accepted Manuscript, acquired 2026-06-15"
+  true true false false
+
+protonatedACSVersionOfRecordManifestation : PublicationManifestationReceipt
+protonatedACSVersionOfRecordManifestation = publication-manifestation-receipt
+  acsVersionOfRecord
+  "Cryogenic Ion Vibrational Spectroscopy of Protonated Valine: Messenger Tag Effects"
+  "10.1021/acs.jpca.4c03552"
+  "Terry; Klumb; Nemchick; Hodyss; Maiwald; Weber"
+  "ACS Journal of Physical Chemistry A publication record"
+  true true true false
+
+record ManifestationBoundary : Set where
+  constructor manifestation-boundary
+  field
+    chemRxivDOIEqualsACSArticleDOI : Bool
+    ntrsDOIFieldMakesNTRSRecordChemRxivObject : Bool
+    acceptedManuscriptLabelDeterminesAcceptanceDate : Bool
+    ntrsAcquisitionDateDeterminesExperimentDate : Bool
+    titleAuthorMatchMaySeedVersionLineageSearch : Bool
+    exactVersionOrByteIdentityStillRequiresReceipt : Bool
+
+open ManifestationBoundary public
+
+canonicalManifestationBoundary : ManifestationBoundary
+canonicalManifestationBoundary = manifestation-boundary
+  false false false false true true
+
+------------------------------------------------------------------------
+-- Temporal split around Maiwald's death on 2024-07-04.
 ------------------------------------------------------------------------
 
 record ManuscriptChronologyBoundary : Set where
@@ -177,6 +242,7 @@ data MaiwaldSuccessionReverseTarget : Set where
   acquireRepositoryOrNotebookContinuity : MaiwaldSuccessionReverseTarget
   acquireWorkingTitleToPublishedVersionHistory : MaiwaldSuccessionReverseTarget
   acquireExperimentAndDataProductionDates : MaiwaldSuccessionReverseTarget
+  acquirePreprintAcceptedManuscriptVersionCrosswalk : MaiwaldSuccessionReverseTarget
 
 manuscriptForkNextTarget : MaiwaldSuccessionReverseTarget
 manuscriptForkNextTarget = acquireExperimentAndDataProductionDates
