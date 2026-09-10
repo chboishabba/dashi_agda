@@ -141,7 +141,7 @@ record DerivedDistanceResidual : Set where
   constructor derivedDistanceResidual
   field
     memberIdentity : String
-    comparisonSource : AttributedSource
+    residualComparisonSource : AttributedSource
     claimant : String
     residualKpcText : String
     printedPrecisionKpcText : String
