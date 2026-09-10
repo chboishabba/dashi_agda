@@ -5,20 +5,31 @@ open import DASHI.Core.Prelude
 import DASHI.ComputerScience.GodelDiagonalProvabilityContractExact as Godel
 
 ------------------------------------------------------------------------
--- PRIMITIVE-RECURSIVE REPRESENTABILITY -> DIAGONAL CONSTRUCTION
+-- AUTHORITY-INDEXED PRIMITIVE RECURSIVENESS
 --
--- This module does NOT prove Gödel's representability theorem.  It isolates
--- the exact theorem authority and the local producer needed by the already
--- owned diagonal compiler.
+-- Primitive-recursive status is not a user-constructible wrapper around an
+-- arbitrary `Certificate : Set`.  A named authority owns the predicate on
+-- functions, and every downstream theorem must use that SAME predicate.
 ------------------------------------------------------------------------
 
-record PrimitiveRecursiveUnary (f : Nat → Nat) : Set₁ where
-  constructor primitiveRecursiveUnary
+record PrimitiveRecursiveTheory : Set₂ where
+  constructor primitiveRecursiveTheory
   field
-    Certificate : Set
-    certificate : Certificate
+    PrimitiveRecursiveUnary : (Nat → Nat) → Set
 
-open PrimitiveRecursiveUnary public
+open PrimitiveRecursiveTheory public
+
+record PrimitiveRecursiveExtensionalityAuthority
+    (PRT : PrimitiveRecursiveTheory) : Set₁ where
+  constructor primitiveRecursiveExtensionalityAuthority
+  field
+    transportAlongPointwiseEquality :
+      (f g : Nat → Nat) →
+      ((n : Nat) → f n ≡ g n) →
+      PrimitiveRecursiveUnary PRT f →
+      PrimitiveRecursiveUnary PRT g
+
+open PrimitiveRecursiveExtensionalityAuthority public
 
 record StrongUnaryGraphRepresentation
     (F : Godel.ArithmetisedFormalSystem)
@@ -44,22 +55,19 @@ record StrongUnaryGraphRepresentation
 open StrongUnaryGraphRepresentation public
 
 record PrimitiveRecursiveRepresentabilityAuthority
-    (F : Godel.ArithmetisedFormalSystem) : Set₁ where
+    (F : Godel.ArithmetisedFormalSystem)
+    (PRT : PrimitiveRecursiveTheory) : Set₁ where
   constructor primitiveRecursiveRepresentabilityAuthority
   field
     representPrimitiveRecursiveUnary :
       (f : Nat → Nat) →
-      PrimitiveRecursiveUnary f →
+      PrimitiveRecursiveUnary PRT f →
       StrongUnaryGraphRepresentation F f
 
 open PrimitiveRecursiveRepresentabilityAuthority public
 
 ------------------------------------------------------------------------
--- Object-language closure needed to compose a unary predicate A(y) with a
--- represented function y = f(x).  In an ordinary arithmetic development this
--- is discharged by the usual existential/equality construction.  Keeping it
--- explicit prevents meta-level function composition from being promoted into
--- an object-language proof.
+-- Object-language closure needed to compose A(y) with represented y=f(x).
 ------------------------------------------------------------------------
 
 record RepresentedFunctionPrecomposition
@@ -88,7 +96,8 @@ record RepresentedFunctionPrecomposition
 open RepresentedFunctionPrecomposition public
 
 ------------------------------------------------------------------------
--- Local producer: self-substitution code is primitive recursive.
+-- Local producer: self-substitution code is primitive recursive under the
+-- SAME PR authority consumed by representability.
 ------------------------------------------------------------------------
 
 selfSubstitute :
@@ -99,11 +108,12 @@ selfSubstitute F S x = Godel.substituteCode S x x
 
 record SelfSubstitutionPrimitiveRecursive
     (F : Godel.ArithmetisedFormalSystem)
-    (S : Godel.ArithmetisedSubstitution F) : Set₁ where
+    (S : Godel.ArithmetisedSubstitution F)
+    (PRT : PrimitiveRecursiveTheory) : Set₁ where
   constructor selfSubstitutionPrimitiveRecursive
   field
     primitiveRecursiveSelfSubstitution :
-      PrimitiveRecursiveUnary (selfSubstitute F S)
+      PrimitiveRecursiveUnary PRT (selfSubstitute F S)
 
 open SelfSubstitutionPrimitiveRecursive public
 
@@ -114,12 +124,13 @@ open SelfSubstitutionPrimitiveRecursive public
 compileDiagonalConstructionFromPrimitiveRecursiveRepresentation :
   (F : Godel.ArithmetisedFormalSystem) →
   (S : Godel.ArithmetisedSubstitution F) →
-  SelfSubstitutionPrimitiveRecursive F S →
-  PrimitiveRecursiveRepresentabilityAuthority F →
+  (PRT : PrimitiveRecursiveTheory) →
+  SelfSubstitutionPrimitiveRecursive F S PRT →
+  PrimitiveRecursiveRepresentabilityAuthority F PRT →
   RepresentedFunctionPrecomposition F →
   Godel.DiagonalFormulaConstruction F S
 compileDiagonalConstructionFromPrimitiveRecursiveRepresentation
-  F S selfPR authority closure =
+  F S PRT selfPR authority closure =
   record
     { diagonalise = λ predicate →
         let f = selfSubstitute F S
@@ -140,42 +151,57 @@ compileDiagonalConstructionFromPrimitiveRecursiveRepresentation
 compileDiagonalLemmaFromPrimitiveRecursiveRepresentation :
   (F : Godel.ArithmetisedFormalSystem) →
   (S : Godel.ArithmetisedSubstitution F) →
-  SelfSubstitutionPrimitiveRecursive F S →
-  PrimitiveRecursiveRepresentabilityAuthority F →
+  (PRT : PrimitiveRecursiveTheory) →
+  SelfSubstitutionPrimitiveRecursive F S PRT →
+  PrimitiveRecursiveRepresentabilityAuthority F PRT →
   RepresentedFunctionPrecomposition F →
   Godel.DiagonalLemmaAuthority F
-compileDiagonalLemmaFromPrimitiveRecursiveRepresentation F S selfPR authority closure =
+compileDiagonalLemmaFromPrimitiveRecursiveRepresentation
+  F S PRT selfPR authority closure =
   Godel.diagonalLemmaFromConstruction F S
     (compileDiagonalConstructionFromPrimitiveRecursiveRepresentation
-      F S selfPR authority closure)
+      F S PRT selfPR authority closure)
 
 ------------------------------------------------------------------------
 -- Firewalls / exact frontier.
 ------------------------------------------------------------------------
 
+data ArbitraryCertificateImpliesPrimitiveRecursive : Set where
 data MetaLevelComputableImpliesObjectLanguageRepresentable : Set where
-data PrimitiveRecursiveCertificateAloneImpliesDiagonalLemma : Set where
+data PrimitiveRecursiveStatusAloneImpliesDiagonalLemma : Set where
 data RepresentationAuthorityAloneSuppliesPrecomposition : Set where
+
+data DifferentPrimitiveRecursiveAuthoritiesAreInterchangeable : Set where
+
+arbitraryCertificateDoesNotCreatePRStatus :
+  ArbitraryCertificateImpliesPrimitiveRecursive → ⊥
+arbitraryCertificateDoesNotCreatePRStatus ()
 
 metaComputabilityDoesNotSupplyRepresentability :
   MetaLevelComputableImpliesObjectLanguageRepresentable → ⊥
 metaComputabilityDoesNotSupplyRepresentability ()
 
-primitiveRecursiveCertificateAloneDoesNotSupplyDiagonal :
-  PrimitiveRecursiveCertificateAloneImpliesDiagonalLemma → ⊥
-primitiveRecursiveCertificateAloneDoesNotSupplyDiagonal ()
+primitiveRecursiveStatusAloneDoesNotSupplyDiagonal :
+  PrimitiveRecursiveStatusAloneImpliesDiagonalLemma → ⊥
+primitiveRecursiveStatusAloneDoesNotSupplyDiagonal ()
 
 representabilityDoesNotSilentlySupplyLogicalClosure :
   RepresentationAuthorityAloneSuppliesPrecomposition → ⊥
 representabilityDoesNotSilentlySupplyLogicalClosure ()
 
+prAuthoritiesDoNotSilentlyCoerce :
+  DifferentPrimitiveRecursiveAuthoritiesAreInterchangeable → ⊥
+prAuthoritiesDoNotSilentlyCoerce ()
+
 record GodelPrimitiveRecursiveRepresentabilityBoundary : Set where
   constructor godelPrimitiveRecursiveRepresentabilityBoundary
   field
+    authorityIndexedPrimitiveRecursivePredicateOwned : Bool
     primitiveRecursiveRepresentabilityContractOwned : Bool
     representedFunctionPrecompositionContractOwned : Bool
     selfSubstitutionPrimitiveRecursiveProducerOwned : Bool
     genericDiagonalCompilerFromTheseCoordinatesOwned : Bool
+    arbitraryCertificateAcceptedAsPRStatus : Bool
     metaComputabilityPromotedToRepresentability : Bool
     diagonalLemmaCertifiedForConcreteArithmetic : Bool
 
@@ -183,4 +209,4 @@ canonicalGodelPrimitiveRecursiveRepresentabilityBoundary :
   GodelPrimitiveRecursiveRepresentabilityBoundary
 canonicalGodelPrimitiveRecursiveRepresentabilityBoundary =
   godelPrimitiveRecursiveRepresentabilityBoundary
-    true true false true false false
+    true true true false true false false false
