@@ -10,26 +10,30 @@ import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 -- Primary provenance.
 --
 -- Konrad Osterwalder and Robert Schrader,
--- "Axioms for Euclidean Green's Functions",
--- Communications in Mathematical Physics 31 (1973), 83--112.
--- DOI: 10.1007/BF01645738.
+-- "Axioms for Euclidean Green's Functions", Communications in Mathematical
+-- Physics 31 (1973), 83--112. DOI: 10.1007/BF01645738.
 --
 -- Konrad Osterwalder and Robert Schrader,
--- "Axioms for Euclidean Green's Functions II",
--- Communications in Mathematical Physics 42 (1975), 281--305.
--- DOI: 10.1007/BF01608978.
+-- "Axioms for Euclidean Green's Functions II", Communications in Mathematical
+-- Physics 42 (1975), 281--305. DOI: 10.1007/BF01608978.
 --
--- O. Penrose and J. L. Lebowitz,
--- "On the Exponential Decay of Correlation Functions",
--- Communications in Mathematical Physics 39 (1974), 165--184.
--- DOI: 10.1007/BF01614239.
+-- O. Penrose and J. Lebowitz,
+-- "On the Exponential Decay of Correlation Functions", Communications in
+-- Mathematical Physics 39 (1974), 165--184. DOI: 10.1007/BF01614239.
 --
 -- The OS papers own reconstruction of the positive transfer semigroup.  The
 -- finite contradiction below isolates the remaining spectral content: a mode
 -- strictly below the proposed gap gives a slower positive spectral contribution,
--- while OS4 supplies a faster uniform upper envelope.  Density/overlap and the
+-- while clustering supplies a faster upper envelope.  Density/overlap and the
 -- spectral lower representation are not silently inferred from the word
 -- "clustered".
+--
+-- R277 / NS-R503 MINIMIZATION
+-- The contradiction only evaluates the clustering upper at `modeObservable` for
+-- a hypothetical positive subgap mode.  A bound for EVERY observable is
+-- sufficient but stronger than the spectral consumer.  The canonical primitive
+-- is therefore `SubgapModeClusteringUpper`; global `ClusteringUpperBound` is
+-- retained as a compatibility/stronger producer.
 ------------------------------------------------------------------------
 
 data Empty : Set where
@@ -76,6 +80,24 @@ ClusteringUpperBound dataSet = ∀ observable time →
     (connectedCorrelation dataSet observable time)
     (clusteringEnvelope dataSet observable time)
 
+-- R277 least-privilege spectral consumer: only observables that actually arise
+-- from a hypothetical positive subgap mode need the fast upper envelope.
+SubgapModeClusteringUpper :
+  ∀ {Observable Energy Bound} →
+  ReconstructedClusteringSpectrum Observable Energy Bound → Set
+SubgapModeClusteringUpper dataSet = ∀ energy mode time →
+  LessEqual dataSet
+    (connectedCorrelation dataSet (modeObservable dataSet energy mode) time)
+    (clusteringEnvelope dataSet (modeObservable dataSet energy mode) time)
+
+globalClusteringUpperImpliesSubgapModeUpper :
+  ∀ {Observable Energy Bound}
+    (dataSet : ReconstructedClusteringSpectrum Observable Energy Bound) →
+  ClusteringUpperBound dataSet →
+  SubgapModeClusteringUpper dataSet
+globalClusteringUpperImpliesSubgapModeUpper dataSet upper energy mode time =
+  upper (modeObservable dataSet energy mode) time
+
 NoPositiveSubgapMode :
   ∀ {Observable Energy Bound} →
   ReconstructedClusteringSpectrum Observable Energy Bound → Set
@@ -84,17 +106,55 @@ NoPositiveSubgapMode dataSet = ∀ energy →
   StrictlyBelow dataSet energy (gapCandidate dataSet) →
   SubgapMode dataSet energy → Empty
 
+subgapModeClusteringExcludesPositiveSubgapMode :
+  ∀ {Observable Energy Bound}
+    (dataSet : ReconstructedClusteringSpectrum Observable Energy Bound) →
+  SubgapModeClusteringUpper dataSet →
+  NoPositiveSubgapMode dataSet
+subgapModeClusteringExcludesPositiveSubgapMode dataSet clusteringUpper
+  energy positive below mode =
+  slowSubgapEnvelopeContradictsFastClustering dataSet
+    energy mode positive below
+    (spectralRepresentationLowerBound dataSet energy mode)
+    (clusteringUpper energy mode)
+
 exponentialClusteringExcludesPositiveSubgapMode :
   ∀ {Observable Energy Bound}
     (dataSet : ReconstructedClusteringSpectrum Observable Energy Bound) →
   ClusteringUpperBound dataSet →
   NoPositiveSubgapMode dataSet
-exponentialClusteringExcludesPositiveSubgapMode dataSet clusteringUpper
-  energy positive below mode =
-  slowSubgapEnvelopeContradictsFastClustering dataSet
-    energy mode positive below
-    (spectralRepresentationLowerBound dataSet energy mode)
-    (clusteringUpper (modeObservable dataSet energy mode))
+exponentialClusteringExcludesPositiveSubgapMode dataSet clusteringUpper =
+  subgapModeClusteringExcludesPositiveSubgapMode dataSet
+    (globalClusteringUpperImpliesSubgapModeUpper dataSet clusteringUpper)
+
+------------------------------------------------------------------------
+-- Least-privilege positive spectral-gap core.
+--
+-- The actual spectral statement is positivity of the selected threshold plus
+-- absence of positive spectrum below it.  Storing the global clustering theorem
+-- in the result is convenient provenance but not mathematical gap content.
+------------------------------------------------------------------------
+
+record PositiveTransferGapCore
+    {Observable Energy Bound : Set}
+    (dataSet : ReconstructedClusteringSpectrum Observable Energy Bound) : Set₁ where
+  field
+    gapCandidatePositive : PositiveEnergy dataSet (gapCandidate dataSet)
+    noPositiveSubgapMode : NoPositiveSubgapMode dataSet
+
+open PositiveTransferGapCore public
+
+positiveTransferGapCoreFromModeTests :
+  ∀ {Observable Energy Bound}
+    (dataSet : ReconstructedClusteringSpectrum Observable Energy Bound) →
+  SubgapModeClusteringUpper dataSet →
+  PositiveEnergy dataSet (gapCandidate dataSet) →
+  PositiveTransferGapCore dataSet
+positiveTransferGapCoreFromModeTests dataSet upper positiveGap = record
+  { gapCandidatePositive = positiveGap
+  ; noPositiveSubgapMode =
+      subgapModeClusteringExcludesPositiveSubgapMode dataSet upper
+  }
 
 record PositiveTransferGap
     {Observable Energy Bound : Set}
@@ -117,6 +177,15 @@ positiveTransferGapFromClusteringCutset dataSet upper positiveGap = record
   ; gapCandidatePositive = positiveGap
   ; noPositiveSubgapMode =
       exponentialClusteringExcludesPositiveSubgapMode dataSet upper
+  }
+
+positiveTransferGapCoreFromFull :
+  ∀ {Observable Energy Bound}
+    {dataSet : ReconstructedClusteringSpectrum Observable Energy Bound} →
+  PositiveTransferGap dataSet → PositiveTransferGapCore dataSet
+positiveTransferGapCoreFromFull full = record
+  { gapCandidatePositive = PositiveTransferGap.gapCandidatePositive full
+  ; noPositiveSubgapMode = PositiveTransferGap.noPositiveSubgapMode full
   }
 
 record OS4SpectralInterpretation
@@ -148,6 +217,12 @@ positiveTransferGapFromOS4 {spectrum = spectrum} interpretation clustered =
 
 clusteringSpectralContradictionAssemblyLevel : ProofLevel
 clusteringSpectralContradictionAssemblyLevel = machineChecked
+
+subgapModeClusteringConsumerReductionLevel : ProofLevel
+subgapModeClusteringConsumerReductionLevel = machineChecked
+
+positiveTransferGapCoreAssemblyLevel : ProofLevel
+positiveTransferGapCoreAssemblyLevel = machineChecked
 
 positiveTransferGapAssemblyLevel : ProofLevel
 positiveTransferGapAssemblyLevel = machineChecked
