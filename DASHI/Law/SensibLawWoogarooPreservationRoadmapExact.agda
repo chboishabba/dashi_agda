@@ -47,64 +47,64 @@ federal8575 : RoadmapCoordinate
 federal8575 = roadmap-coordinate
   federalEPBC8575DecisionLane
   live
-  "EPBC 2019/8575 is a controlled action with a source-paid s 130(1A) extension notice; authorised delegate and 1 October 2026 decision deadline are identified. The wider corpus now supplies same-landscape corridor/connectivity, historical vegetation, neighbouring proponent critical-habitat/removal evidence, restoration-lag evidence, local development pressure and offset-counterfactual leads, but these do not substitute for the exact 2019/8575 final-PD consumer record."
-  "Extract the final Preliminary Documentation same-object matrix: exact action/clearing polygon, impacted and retained habitat by controlling matter, significance reasoning, avoidance/minimisation, residual impact, offsets, conservation-advice/recovery-plan correspondence and response-to-submissions; then bind those atoms to the actual Part 9 approval/refusal consumer."
+  "EPBC 2019/8575 now has a substantially source-paid 2019 referral-era baseline: controlled-action status; Lot 9999 SP292760; 162 ha referral area; 136 ha stated impact; SHG 136 ha direct plus 26 ha indirect Koala-habitat impact; habitat score 7; Koala scat/food-tree evidence; connectivity score 2; rendered >500 ha habitat-connectivity map; rendered 136 ha critical-habitat impact map; and SHG's significant-impact conclusion. The current federal question is therefore a 2019-to-2026 final-state delta, not discovery of the historical project/habitat object."
+  "Extract and compare the 2026 final Preliminary Documentation: final action/clearing geometry, retained habitat, avoidance/alternatives, complete residual-impact analysis, final offsets, conservation-advice/recovery-plan treatment and response-to-submissions; identify every material change from the 2019 baseline and bind the final atoms to the actual Part 9 consumer."
   "1 October 2026"
-  "controlled-action status, neighbouring-project evidence, corridor evidence and deadline do not equal refusal or protection; project-A facts cannot silently pay project-B atoms"
+  "SHG consultant evidence is not a Commonwealth finding; 2019 referral state is not automatically the unchanged 2026 final-PD state; a significant impact on Koala habitat does not automatically determine the Part 9 approval/refusal outcome"
 
 qldCriticalHabitat : RoadmapCoordinate
 qldCriticalHabitat = roadmap-coordinate
   queenslandCriticalHabitatLane
   live
-  "NCA s 13 rule is source-paid. The evidence graph now contains proponent-side Scenic/Peninsula use of a common approximately 675 ha contiguous-landscape carrier, Bellevue/Woogaroo Creek connectivity evidence, official broader corridor context, long-standing wooded-cover evidence, present-day observer occurrence/context evidence and project-specific critical-habitat/removal evidence at neighbouring fibres. The landscape-function case is therefore materially advanced, but the exact Springview parcel x habitat-function x essentiality join remains open."
-  "Join the exact Springview/2019/8575 and cadastral/clearing polygons to primary habitat-function evidence, the shared corridor/contiguous-landscape carriers, Queensland habitat layers and any validated same-landscape occurrence evidence; then produce the s 13 same-parcel essentiality application receipt."
+  "NCA s 13 now has strong same-Springview-parcel habitat-function evidence: Lot 9999 SP292760; mostly remnant vegetation; recognised Koala food trees; Koala scat evidence; Woogaroo/Opossum Creek function; SHG connectivity score 2 and >500 ha connectivity surface; habitat score 7; plus broader Scenic/Peninsula/Bellevue and official corridor context. The open issue is statutory viable-population/community essentiality, including stress-testing SHG's contrary recovery-value-0/site-not-viable reasoning."
+  "Build the s 13 consumer around the exact parcel and current habitat function; identify the relevant viable protected-wildlife population/native-wildlife community; obtain expert analysis of severance/loss consequences; and test whether the NCA essentiality test is satisfied notwithstanding, or differently from, the 2019 EPBC recovery-value analysis."
   "highest alpha before irreversible clearing; work concurrently with the s 102 works-threat lane"
-  "federal/proponent use of 'critical habitat', neighbouring-project critical-habitat scores, citizen-science occurrence and image-backed neighbourhood correlation do not themselves pay Queensland s 13 essentiality"
+  "EPBC Koala-guideline 'critical habitat', habitat score 7, connectivity and occurrence do not themselves equal Queensland NCA s 13 statutory critical habitat or essentiality"
 
 qldInterim : RoadmapCoordinate
 qldInterim = roadmap-coordinate
   queenslandInterimRestraintLane
   live
-  "NCA ss 102-107 mechanism is source-paid. Development pressure is no longer abstract: 9281/2024/OW is an identified approved operational-works carrier expressly covering earthworks, vegetation clearing and stormwater, and 9293/2024/OW separately covers road work, drainage, stormwater and earthworks. Same-landscape habitat/corridor evidence is materially stronger, but the exact clearing drawing, commencement chronology and same-parcel detrimental-effect join remain open."
-  "Acquire the approved 9281/2024/OW vegetation-clearing plans/drawings and current works chronology; intersect them with exact threatened-wildlife/habitat/corridor evidence and test the likely significant detrimental-effect requirements before preparing an interim conservation-order request."
+  "NCA ss 102-107 mechanism is source-paid. 9281/2024/OW gives a concrete approved vegetation-clearing/earthworks object, while the same Springview project has a 2019 candidate habitat-impact surface: 136 ha habitat-score-7 Koala impact, food trees/scats and >500 ha connectivity. The operational/legal join remains incomplete because the EPBC impact map is not the 9281 clearing map and approval is not commencement."
+  "Acquire the approved 9281 vegetation-clearing drawing/polygon, conditions and current works chronology; intersect that exact works geometry with current habitat/species/corridor evidence; then test likely significant detrimental effect and the procedural vehicle for an interim conservation order."
   "now; before physical clearing or other irreversible works commence"
-  "an approved clearing entitlement is not proof that clearing has commenced, and development pressure or habitat value alone does not establish the s 102 statutory conditions"
+  "2019 EPBC impact geometry is not the 9281 works geometry; an approved clearing entitlement is not proof of commencement or of the s 102 significant-detrimental-effect condition"
 
 qldPermanent : RoadmapCoordinate
 qldPermanent = roadmap-coordinate
   queenslandPermanentProtectionLane
   open
-  "NCA s 49 compulsory nature-refuge route is source-paid, and the ecological/corridor corpus is stronger, but the qualifying s 13/area-of-major-interest basis and executive initiation coordinates are not yet paid."
-  "Once the s 13 same-parcel function case is paid, compile exact parcels/tenure, refuge suitability, existing protection status and the ministerial/executive initiation package without waiting for every supporting advocacy lane."
-  "prepare in parallel; activate immediately after the s 13 qualifying basis is sufficiently paid"
-  "qualifying ecological evidence does not itself compel executive declaration or prove that a nature-refuge mechanism will be selected"
+  "NCA s 49 compulsory nature-refuge route is source-paid and the exact-parcel ecological case is substantially stronger, but the qualifying s 13/area-of-major-interest basis, tenure/suitability and executive-initiation coordinates remain open."
+  "Prepare exact parcels/tenure, suitability, existing protection status and initiation procedure now, then activate the permanent-protection package once the s 13/area-of-major-interest predicate is sufficiently paid."
+  "prepare in parallel; activate immediately after the qualifying basis is sufficiently paid"
+  "source-paid habitat value or even a successful s 13 evidentiary case does not itself create or compel an s 49 declaration"
 
 planningExemption : RoadmapCoordinate
 planningExemption = roadmap-coordinate
   planningExemptionAuditLane
   live
-  "Council material demonstrates mapped koala habitat can coexist with an approved/exempted development outcome. The local chain is now identified through 6243/2023/LAP, 4272/2020/ADP, 5547/2020/ADP, 7477/2022/ADP, 9281/2024/OW and 9293/2024/OW, exposing the exact approval/works objects that must be checked against the exemption history."
-  "Recover the exact statutory grandfathering/exemption instrument, temporal scope, parcel scope and approval-history basis, then test whether each current ADP/operational-works component and variation still falls within that exemption."
+  "The 2019 referral supplies a primary proponent statement of a Planning Regulation 2017 urban-purpose/urban-area vegetation-clearing exemption theory for least-concern/of-concern regulated vegetation, identifies a high-risk NCA protected-plants trigger area and states public notification was not required. Later Council material and the identified 6243/2023/LAP -> 4272/2020/ADP + 5547/2020/ADP -> 9281/2024/OW + 9293/2024/OW chain record the current approval sequence."
+  "Recover the exact historical/current exemption and transition instruments; test vegetation-class, temporal, parcel, stage and variation predicates for every current component; distinguish the proponent's 2019 legal characterisation from current legal scope."
   "parallel with federal/s 13/s 102 work; before relying on ordinary koala/planning prohibition arguments"
-  "mapped habitat, a no-public-notification pathway, or an approved local DA does not by itself establish that the exemption is valid, current, invalid or exhausted"
+  "a proponent-stated historical exemption theory, mapped habitat, no-public-notification pathway or local approval does not by itself establish current exemption validity, invalidity or scope"
 
 politicalAdvocacy : RoadmapCoordinate
 politicalAdvocacy = roadmap-coordinate
   politicalAdvocacyLane
   live
-  "Federal Labor Minister/representatives, Queensland Labor opposition representative, Queensland LNP Environment Minister, and exact federal delegate are separately typed."
-  "Keep advocacy role-correct and supporting only: evidence to delegate; portfolio escalation to Watt; electorate/community representation through Dick/Neumann/Mullen; NCA request to Powell. Do not divert evidence-acquisition effort from the legal consumers."
+  "Federal Minister/representatives, Queensland political representatives and the exact federal delegate are separately typed. The primary-evidence case is now materially stronger, so advocacy can carry a more precise evidence package without becoming a legal element itself."
+  "Keep advocacy role-correct and supporting only: decision-grade evidence to the delegate; portfolio escalation to the Minister; representation/community routing separately; state-protection requests through the appropriate Queensland route."
   "immediate through 1 October 2026 and for state-protection lane thereafter"
-  "same-party alignment, public attention or celebrity support may affect routing but do not prove coordination, legal authority or bind any decision-maker"
+  "political alignment, public attention or celebrity support may affect routing but do not prove coordination, legal authority, statutory satisfaction or bind a decision-maker"
 
 enforcementBackstop : RoadmapCoordinate
 enforcementBackstop = roadmap-coordinate
   enforcementBackstopLane
   open
-  "EPBC s 475 and NCA s 173D mechanisms are source-paid as legal routes. Local operational-works approvals and the federal pending-decision state give concrete conduct/permission objects to monitor, but no contravention is presently inferred from those facts alone."
-  "If works commence or are threatened, map the exact conduct, approval/permit/condition status and chronology to an exact statutory prohibition, condition, offence or other restraint basis before invoking court or enforcement mechanisms."
+  "EPBC s 475 and NCA enforcement mechanisms are source-paid as routes. Local works approvals, the federal pending-decision state and same-project ecology provide concrete objects to monitor, but no contravention is inferred merely from environmental harm, project benefit, habitat significance or clearing entitlement."
+  "If works commence or are threatened, bind exact conduct, geometry, timing, approval/condition status and legal obligation before selecting injunction, enforcement, declaratory or judicial-review relief."
   "activate only if conduct threatens to outrun or breach applicable legal controls"
-  "environmental harm, approval existence, project benefit or clearing entitlement alone is not automatically a statutory contravention"
+  "environmental harm, significant habitat impact, approval existence or clearing entitlement is not automatically a statutory contravention"
 
 custodianshipCommunity : RoadmapCoordinate
 custodianshipCommunity = roadmap-coordinate
