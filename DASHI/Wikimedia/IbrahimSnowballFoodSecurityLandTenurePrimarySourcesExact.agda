@@ -123,7 +123,7 @@ data DefinitionMeansLocalOutcome : Set where
 data LandUseMeansLandAuthority : Set where
 data FoodAvailabilityMeansFoodSecurity : Set where
 data FoodSecurityMeansFoodSovereignty : Set where
-\data InstitutionalDefinitionMeansCommunityAuthority : Set where
+data InstitutionalDefinitionMeansCommunityAuthority : Set where
 
 categoryDoesNotPayConceptIdentity : CategoryQidMeansConceptIdentity → ⊥
 categoryDoesNotPayConceptIdentity ()
