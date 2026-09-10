@@ -10,10 +10,9 @@ open import Agda.Builtin.String using (String)
 -- any receipt has yet been paid.
 ------------------------------------------------------------------------
 
-infixr 6 _&&_
-_&&_ : Bool → Bool → Bool
-true && b = b
-false && _ = false
+benchAnd : Bool → Bool → Bool
+benchAnd true b = b
+benchAnd false _ = false
 
 record BenchmarkReproductionReceipt (claim : BenchmarkClaim) : Set where
   constructor benchmarkReproductionReceipt
@@ -36,15 +35,15 @@ receiptComplete :
   BenchmarkReproductionReceipt claim →
   Bool
 receiptComplete r =
-  sourceRowsAcquired r &&
-  transformationVersionPinned r &&
-  unitsPinned r &&
-  frameConventionPinned r &&
-  uncertaintyConventionPinned r &&
-  executableProducerAcquired r &&
-  outputComparedAgainstSource r &&
-  independentRunCompleted r &&
-  exactArtifactHashRecorded r
+  benchAnd (sourceRowsAcquired r)
+  (benchAnd (transformationVersionPinned r)
+  (benchAnd (unitsPinned r)
+  (benchAnd (frameConventionPinned r)
+  (benchAnd (uncertaintyConventionPinned r)
+  (benchAnd (executableProducerAcquired r)
+  (benchAnd (outputComparedAgainstSource r)
+  (benchAnd (independentRunCompleted r)
+            (exactArtifactHashRecorded r))))))))
 
 record FirstLightBenchmarkFrontier : Set where
   constructor firstLightBenchmarkFrontier
@@ -54,6 +53,10 @@ record FirstLightBenchmarkFrontier : Set where
     sgrA : ClaimStatus
     mcConnachie : ClaimStatus
     kkh86 : ClaimStatus
+    sourceFormalisationIntegrated : Bool
+    sourceMetadataChecked : Bool
+    agdaKernelReceiptPresent : Bool
+    independentScienceReproductionPresent : Bool
 
 open FirstLightBenchmarkFrontier public
 
@@ -65,18 +68,22 @@ currentBenchmarkFrontier =
     attributedPosterClaim
     attributedPosterClaim
     unresolvedResidual
+    true
+    true
+    false
+    false
 
-attributedClaimCannotConstructIndependentReceipt : Bool
-attributedClaimCannotConstructIndependentReceipt = false
+attributedClaimConstructsIndependentReceipt : Bool
+attributedClaimConstructsIndependentReceipt = false
 
-attributedClaimCannotConstructIndependentReceiptIsFalse :
-  attributedClaimCannotConstructIndependentReceipt ≡ false
-attributedClaimCannotConstructIndependentReceiptIsFalse = refl
+attributedClaimConstructsIndependentReceiptIsFalse :
+  attributedClaimConstructsIndependentReceipt ≡ false
+attributedClaimConstructsIndependentReceiptIsFalse = refl
 
 record BenchmarkAcquisitionDemand : Set where
   constructor benchmarkAcquisitionDemand
   field
-    benchmark : BenchmarkKind
+    demandBenchmark : BenchmarkKind
     requiredArtifact : String
     paymentPurpose : String
 
