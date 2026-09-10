@@ -91,6 +91,41 @@ sameCarrierTransferStillDoesNotFollowFromOverlap :
     Succession.canonicalInstituteSuccessionCandidateBoundary ≡ false
 sameCarrierTransferStillDoesNotFollowFromOverlap = refl
 
+------------------------------------------------------------------------
+-- 2020 Amy role-continuity acquisition cut.
+--
+-- A concrete Alabama Secretary of State 2020 annual-report locator is now
+-- retained by the institutional chronology.  It is still only
+-- primaryRecordIdentified: direct inspection of the state carrier is required
+-- before the 2018-to-2020 institutional-role target can be marked paid.
+------------------------------------------------------------------------
+
+amy2018DisplayedNameExact :
+  Team.person Team.amyTeam ≡ "Amy Eskridge"
+amy2018DisplayedNameExact = refl
+
+amy2020AnnualReportPrimaryCarrierIdentified :
+  Chron.entitlement Chron.institute2020AmyPresidentAnnualReportLeadAtom ≡
+    Chron.primaryRecordIdentified
+amy2020AnnualReportPrimaryCarrierIdentified = refl
+
+record Amy2020RoleContinuityAcquisitionFrontier : Set where
+  constructor amy-2020-role-continuity-acquisition-frontier
+  field
+    amy2018TeamCarrierPaid : Bool
+    official2020AnnualReportLocatorIdentified : Bool
+    exact2020PrimaryCarrierInspected : Bool
+    institutionalRoleContinuityThrough2020Paid : Bool
+    sameExperimentContinuityThrough2020Paid : Bool
+    technicalCustodyThrough2020Paid : Bool
+
+open Amy2020RoleContinuityAcquisitionFrontier public
+
+amy2020RoleContinuityAcquisitionFrontier : Amy2020RoleContinuityAcquisitionFrontier
+amy2020RoleContinuityAcquisitionFrontier =
+  amy-2020-role-continuity-acquisition-frontier
+    true true false false false false
+
 roleContinuityThrough2020Target : Team.EskridgeTeamReverseTarget
 roleContinuityThrough2020Target = Team.acquire2018To2020RoleContinuity
 
