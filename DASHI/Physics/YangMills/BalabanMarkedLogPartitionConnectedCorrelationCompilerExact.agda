@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.BalabanMarkedLogPartitionConnectedCorrelationComp
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 record MarkedTwoSourceResponse
     (Observable Scalar : Set) : Set₁ where
