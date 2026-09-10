@@ -187,7 +187,7 @@ porterWoodCorrectionSource = Attribution.mkDOISource
 
 factCheckingLiteracySource : Attribution.AttributedSource
 factCheckingLiteracySource = Attribution.mkDOISource
-  "authors as published"
+  "Lara Marie Berger; Anna Kerkhof; Felix Mindl; Johannes Münster"
   "Debunking fake news on social media: Immediate and short-term effects of fact-checking and media literacy interventions"
   "Journal of Public Economics 245, 105345"
   "2025"
