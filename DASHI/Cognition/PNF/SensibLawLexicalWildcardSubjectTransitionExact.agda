@@ -35,10 +35,6 @@ record SubjectTransitionObservation : Set where
 
 open SubjectTransitionObservation public
 
--- A subject crossing can mean that the same clause continues across the
--- proposed boundary: subject on one side, governing predicate on the other.
--- A newly introduced grammatical subject is also not by itself a new speaker.
-
 data SubjectTransitionDeterminesSpeakerCut : Set where
 subjectTransitionDoesNotDetermineSpeakerCut : SubjectTransitionDeterminesSpeakerCut → ⊥
 subjectTransitionDoesNotDetermineSpeakerCut ()
@@ -53,11 +49,6 @@ predicateContinuationDoesNotPermitHardSpeakerCut ()
 
 ------------------------------------------------------------------------
 -- Counterfactual lexical-role realizations.
---
--- These are diagnostic perturbations only. They test whether local parser/PNF
--- topology and Pareto membership are invariant to uncertainty about one token's
--- lexical realization. They do not assert that any replacement is the word's
--- true part of speech, entity identity, spelling, or meaning.
 ------------------------------------------------------------------------
 
 data LexicalRoleRealization : Set where
@@ -80,9 +71,29 @@ record LexicalCounterfactualRun : Set where
     manifoldReceiptReference : String
     graphReceiptReference : String
     paretoFibreReference : String
+    subjectTransitionReference : String
     pnfTopologyReference : String
+    hardCutAdmissionReference : String
 
 open LexicalCounterfactualRun public
+
+-- Projection stability and consumer stability are intentionally separate.
+-- A discourse fibre may survive every lexical realization while a richer
+-- consumer-visible topology or admission decision changes underneath it.
+record CounterfactualConsumerEnvelope : Set where
+  constructor counterfactualConsumerEnvelope
+  field
+    mustFibreReference : String
+    mayFibreReference : String
+    projectionStable : Bool
+    subjectTransitionValuesReference : String
+    subjectTransitionStable : Bool
+    hardCutMust : Bool
+    hardCutMay : Bool
+    consumerStable : Bool
+    residualReference : String
+
+open CounterfactualConsumerEnvelope public
 
 record LexicalCounterfactualEnvelopeReceipt : Set where
   constructor lexicalCounterfactualEnvelopeReceipt
@@ -92,10 +103,7 @@ record LexicalCounterfactualEnvelopeReceipt : Set where
     tokenReference : String
     observedSurfaceReference : String
     runs : List LexicalCounterfactualRun
-    mustFibreReference : String
-    mayFibreReference : String
-    invariantMembershipReference : String
-    ambiguityResidualReference : String
+    consumerEnvelope : CounterfactualConsumerEnvelope
     wildcardOwnerReference : String
     candidateOnly : Bool
 
@@ -103,17 +111,28 @@ open LexicalCounterfactualEnvelopeReceipt public
 
 ------------------------------------------------------------------------
 -- Existing wildcard owner is the mathematical anchor.
---
--- AmbiguityPreservingBoundedWildcardExact owns the MUST/MAY rule: only
--- membership invariant over every admissible realization can be compressed;
--- disagreement remains an explicit ambiguity residual. The runtime
--- intersection/union over bounded lexical-role realizations is a finite
--- diagnostic consumer of that rule, not a replacement formalism.
 ------------------------------------------------------------------------
 
 wildcardOwnerReference : String
 wildcardOwnerReference =
   "DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardExact:MembershipEnvelope/InvariantTopK/ambiguousResidual"
+
+-- Stable membership in a coarse projection is not enough to certify a richer
+-- consumer.  This is the exact defect exposed by the Miliband perturbation:
+-- speaker remains on the Pareto front for every tested lexical realization,
+-- while the punctuation-like realization changes the subject topology.
+
+data StableProjectionDeterminesConsumerStability : Set where
+stableProjectionDoesNotDetermineConsumerStability : StableProjectionDeterminesConsumerStability → ⊥
+stableProjectionDoesNotDetermineConsumerStability ()
+
+data StableSpeakerFibreDeterminesHardCut : Set where
+stableSpeakerFibreDoesNotDetermineHardCut : StableSpeakerFibreDeterminesHardCut → ⊥
+stableSpeakerFibreDoesNotDetermineHardCut ()
+
+data LexicalReplacementDeterminesTruePOS : Set where
+lexicalReplacementDoesNotDetermineTruePOS : LexicalReplacementDeterminesTruePOS → ⊥
+lexicalReplacementDoesNotDetermineTruePOS ()
 
 record LexicalWildcardBoundary : Set where
   constructor lexicalWildcardBoundary
@@ -121,29 +140,34 @@ record LexicalWildcardBoundary : Set where
     capitalizationDeterminesEntityIdentity : Bool
     parserPOSDeterminesWorldIdentity : Bool
     oneRealizationDeterminesDiscourseRole : Bool
-    invariantAcrossRealizationsMaySupportAdmission : Bool
+    invariantProjectionDeterminesConsumerAdmission : Bool
+    invariantAcrossConsumerSurfaceMaySupportAdmission : Bool
     disagreementAcrossRealizationsRemainsResidual : Bool
     wildcardSubstitutionCreatesWorldFact : Bool
     subjectTransitionRemainsIndependentOfSpeakerTransition : Bool
 
 canonicalLexicalWildcardBoundary : LexicalWildcardBoundary
 canonicalLexicalWildcardBoundary =
-  lexicalWildcardBoundary false false false true true false true
+  lexicalWildcardBoundary false false false false true true false true
 
 ------------------------------------------------------------------------
--- ABC regression coordinate.
+-- ABC regression coordinates.
 ------------------------------------------------------------------------
 
 milibandCounterfactualRegression : String
 milibandCounterfactualRegression =
-  "ABC specimen sentence 2: observed lowercase miliband is parser-labelled NOUN/nsubj; perturb the surface across bounded lexical-role realizations and compare PNF topology/Pareto membership. The probe tests stability only and does not establish the person's identity or correct orthography."
+  "ABC specimen sentence 2: observed lowercase miliband is parser-labelled NOUN/nsubj; bounded lexical replacements keep speaker in the Pareto MUST/MAY envelope, but punctuation-like replacement changes subject topology. Therefore projection stability is strictly weaker than consumer stability."
 
 milibandBoundaryExpectation : String
 milibandBoundaryExpectation =
-  "miliband|also should be classified as predicateContinuation whenever a subject-to-governing-predicate relation crosses the boundary; predicateContinuation blocks hard speaker segmentation independently of lexical identity."
+  "miliband|also is predicateContinuation for the observed and word-like realizations because the subject-to-governing-predicate relation crosses the boundary; a punctuation realization may remove that crossing, so hard-cut admission must be computed over the richer consumer envelope rather than inferred from stable speaker Pareto membership."
 
 manifoldBoundaryAnchor : Manifold.PNFWorldManifoldBoundary
 manifoldBoundaryAnchor = Manifold.canonicalPNFWorldManifoldBoundary
 
 fibreBoundaryAnchor : Fibre.FibreClassifierBoundary
 fibreBoundaryAnchor = Fibre.canonicalFibreClassifierBoundary
+
+wildcardFormalOwnerReference : String
+wildcardFormalOwnerReference =
+  "DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardExact"
