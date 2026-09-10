@@ -13,6 +13,7 @@ import DASHI.Wikimedia.IbrahimSnowballDependencyNDimLocalGlobalProofSearchBidiEx
 import DASHI.Wikimedia.IbrahimSnowballAtomicClaimIntentExperimentAdequacyBidiExact as Atomic
 import DASHI.Wikimedia.IbrahimSnowballEthnographyParticipantObservationFieldworkBidiExact as Fieldwork
 import DASHI.Wikimedia.IbrahimSnowballGeologyStratigraphyDeepTimeCarbonConsumerBidiExact as Geology
+import DASHI.Wikimedia.IbrahimSnowballHealthcareAccessQualityEfficacyConsumerBidiExact as Healthcare
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSymbolicVerificationDeweyQidDoiBidiExact as Dewey
 
@@ -84,21 +85,21 @@ geologyBreadthNowPaid = live-roadmap-target
   "Leithold-Blair-Wegmann DOI 10.1016/j.earscirev.2015.10.011; Romans-Graham DOI 10.1146/annurev-marine-121211-172426; Liang et al. DOI 10.1016/j.earscirev.2025.105312"
   "future geology work must exhibit a concrete distinction not representable by stock/source/transport/deposition/preservation/stratigraphic-context grammar"
 
-healthcareBreadth : LiveRoadmapTarget
-healthcareBreadth = live-roadmap-target
-  1
-  "First concrete healthcare/public-health consumer"
-  concreteConsumerNeeded
-  "Healthcare equality/access/governance owners"
-  "separate clinical efficacy, public health, health services, access, institutional governance and individual evidence only when demanded by a real consumer"
-  "health care Q31207; public health Q189603"
-  "medical/library classification remains navigation only; no DDC promoted here without exact inspection"
-  "medical efficacy requires domain-appropriate evidence; governance/access source cannot pay efficacy"
-  "find one real existing DASHI consumer currently blocked by a healthcare-specific evidence distinction"
+healthcareBreadthNowPaid : LiveRoadmapTarget
+healthcareBreadthNowPaid = live-roadmap-target
+  0
+  "Healthcare / public-health concrete access-quality-efficacy consumer"
+  completeAsParent
+  "HealthcareAccessQualityEfficacyConsumerBidiExact plus HealthcareEqualityInvariant and HealthcareAccessDistortion"
+  "only consumer-specific clinical-efficacy, service-delivery, population-effect or governance calculations remain; do not collapse them into access"
+  "health care Q31207; public health Q189603; health care quality Q17003063; health equity Q1512929; health services research Q5691150; universal health care Q3274205; health service Q9353606"
+  "medical/library classification remains navigation only; DDCs unresolved until exact inspection"
+  "WHO Universal Health Coverage institutional source; Kruk et al. DOI 10.1016/S2214-109X(18)30386-3"
+  "future healthcare work must exhibit a distinction not representable by need/efficacy/access/coverage/quality/affordability/equity/population-impact grammar"
 
 petrochemistryParentAudit : LiveRoadmapTarget
 petrochemistryParentAudit = live-roadmap-target
-  2
+  1
   "Petrochemistry / petroleum / refining / materials / emissions parent audit"
   residualOnly
   "SaltPetroleumIndustrialChemistryNetwork; IndustrialChemistryLogistics; DeepTimeCarbonBiosphereFossilFuel; climate branches"
@@ -133,7 +134,7 @@ historicalPolicy : Historical.RoadmapPolicy
 historicalPolicy = Historical.canonicalRoadmapPolicy
 
 deltaPolicy : Delta.RoadmapDeltaPolicy
-deltaPolicy = Delta.canonicalRoadmapDeltaPolicy
+deltaPolicy = Delta.canonicalRoadmapPolicy
 
 independenceBoundary : Synthesis.EvidenceSynthesisPeerReviewIndependenceBoundary
 independenceBoundary = Synthesis.canonicalEvidenceSynthesisPeerReviewIndependenceBoundary
@@ -146,3 +147,6 @@ fieldworkBoundary = Fieldwork.canonicalEthnographyParticipantObservationBoundary
 
 geologyBoundary : Geology.GeologyStratigraphyDeepTimeCarbonBoundary
 geologyBoundary = Geology.canonicalGeologyStratigraphyDeepTimeCarbonBoundary
+
+healthcareBoundary : Healthcare.HealthcareAccessQualityEfficacyBoundary
+healthcareBoundary = Healthcare.canonicalHealthcareAccessQualityEfficacyBoundary
