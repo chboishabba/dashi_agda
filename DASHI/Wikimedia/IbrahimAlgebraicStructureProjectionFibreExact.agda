@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.ProjectionCategory as PC
 import DASHI.Core.ProjectionFibre as Fibre
 import DASHI.Wikimedia.IbrahimAbstractAlgebraStructureFactorsThroughSnowballExact as Algebra
 import DASHI.Wikimedia.IbrahimAlgebraicStructureNDimHyperfabricSnowballExact as Hyper
@@ -49,12 +50,12 @@ canonicalAlgebraicProjectionFibreReading = algebraic-projection-fibre-reading
 
 ------------------------------------------------------------------------
 -- Existing repo-native projection witness is retained as the abstraction
--- source.  It is intentionally the trivial canonical instance; this module is
+-- source. It is intentionally the trivial canonical instance; this module is
 -- a semantic specialization boundary, not a fabricated concrete category of
 -- all algebraic structures.
 ------------------------------------------------------------------------
 
-projectionFibreOwner : Fibre.ProjectionFibre _
+projectionFibreOwner : Fibre.ProjectionFibre PC.canonicalProjectionCategory
 projectionFibreOwner = Fibre.canonicalProjectionFibre
 
 record ConsumerFibreStatus : Set where
