@@ -23,12 +23,12 @@ import DASHI.Core.AtomicGlobalFibreLiftExact as FibreLift
 import DASHI.ComputerScience.AgdaElaborationResidencyComplexityExact as Elab
 
 data LocalAgdaPreparation : Set where
-  directLocalCheck
-  liftThroughFibreBeforeCheck
-  splitInferenceBeforeCheck
-  shareIntermediateTermsBeforeCheck
-  interfaceConeSurgeryBeforeCheck
-  notLocalAgdaAction : LocalAgdaPreparation
+  directLocalCheck                  : LocalAgdaPreparation
+  liftThroughFibreBeforeCheck       : LocalAgdaPreparation
+  splitInferenceBeforeCheck         : LocalAgdaPreparation
+  shareIntermediateTermsBeforeCheck : LocalAgdaPreparation
+  interfaceConeSurgeryBeforeCheck   : LocalAgdaPreparation
+  notLocalAgdaAction                : LocalAgdaPreparation
 
 prepareLocalAgda :
   Debt.SchedulerAction → Elab.ElaborationObservation → LocalAgdaPreparation

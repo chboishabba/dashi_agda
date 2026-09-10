@@ -17281,3 +17281,26 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+# NS R588 continuation — 2026-09-10
+
+- [x] Split literal R545 spectator forcing rows with the physical deep-FL mask;
+  do not identify the doubly weighted R440 aggregate with that row.
+- [ ] Bound R590's literal deep forcing half uniformly, retaining spectator
+  summation and its resolvent dependence; bound the complementary signed term.
+
+- [x] Construct R588's signed-cross record from R589's literal masses and
+  explicit payment inequalities, deriving the decomposition equality internally.
+
+- [x] Implement complementary physical shell masks and exact signed
+  deep/shoulder recombination for R589 FL and HH.
+
+- [x] Construct the literal R440 outer three-class signed-cross split, retaining
+  the complete amplitude aggregate in each class contribution.
+- [x] Statically review the finite-fold proof without running Agda. Local import
+  paths resolve and `git diff --check` passes; typechecking remains deferred.
+- [x] Refine the actual R589 outer FL/HH contributions into deep and shoulder
+  contributions; draft `literalCriticalConeDecomposition589` recombines them.
+- [ ] Establish the physical payment theorem on these precise masks (including
+  the conservative HH minimum-shell convention), then construct R588's record.
+- [ ] Prove physical deep-FL/deep-HH/core payments and their cutoff-uniform
+  transport; the finite split alone does not close R588 or Clay.
