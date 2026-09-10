@@ -49,6 +49,10 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCMP98Equation120QSourceRecoveryRound215Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP98Path13Equation120DerivedQSourceRound216Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP98Equation120SelectedSemanticsRound217Exact.agda'
+      - 'DASHI/Physics/YangMills/CompactLieLangevinSkewConnectionCancellationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLangevinHessianBidirectionalWeldRound262Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanLangevinPhysicalHessianSourceRecutRound263Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP109LangevinTypedSecondVariationRound267Exact.agda'
       - '.github/workflows/balaban-finite-frontier-agda.yml'
 
 concurrency:
@@ -73,6 +77,10 @@ jobs:
           export AGDA_LOG_PATH="$GITHUB_WORKSPACE/balaban-finite-frontier.log"
           export AGDA_JOBS=4
           scripts/run_agda29_parallel_check.sh \
+            DASHI/Physics/YangMills/CompactLieLangevinSkewConnectionCancellationExact.agda \
+            DASHI/Physics/YangMills/BalabanLangevinHessianBidirectionalWeldRound262Exact.agda \
+            DASHI/Physics/YangMills/BalabanLangevinPhysicalHessianSourceRecutRound263Exact.agda \
+            DASHI/Physics/YangMills/BalabanCMP109LangevinTypedSecondVariationRound267Exact.agda \
             DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda \
             DASHI/Physics/YangMills/BalabanGeometricPowerVanishing.agda \
             DASHI/Physics/YangMills/BalabanUniformResidualMajorant.agda \
