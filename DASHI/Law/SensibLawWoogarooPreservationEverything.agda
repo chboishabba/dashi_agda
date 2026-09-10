@@ -29,3 +29,4 @@ import DASHI.Law.SensibLawWoogarooPDFSnowballCorpusExact
 import DASHI.Law.SensibLawWoogarooPDFVisualSnowballExact
 import DASHI.Law.SensibLawWoogarooScenicPeninsulaVisualLandscapeExact
 import DASHI.Law.SensibLawWoogarooObserverSpeciesOccurrenceSnowballExact
+import DASHI.Law.SensibLawWoogarooINaturalistCorpusSnowballExact
