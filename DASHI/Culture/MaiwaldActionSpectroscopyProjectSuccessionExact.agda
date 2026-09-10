@@ -47,12 +47,6 @@ maiWaldActionSpectroscopySuccession = project-succession-receipt
 
 ------------------------------------------------------------------------
 -- Manuscript lineage recovered from the FY23 working-title carrier.
---
--- The FY23 JPL poster names one broad manuscript working title covering
--- protonated valine, deprotonated valine and deprotonated aminovaleric acid.
--- Public publication history later resolves this into at least two narrower
--- journal objects. This is a version/scope fork, not proof that every later
--- paper inherited every FY23 calibration, apparatus or tacit-execution carrier.
 ------------------------------------------------------------------------
 
 data ManuscriptRelation : Set where
@@ -87,21 +81,54 @@ protonatedValine2024Carrier : SpectroscopyPublicationCarrier
 protonatedValine2024Carrier = spectroscopy-publication-carrier
   publishedScopeChild
   "Cryogenic Ion Vibrational Spectroscopy of Protonated Valine: Messenger Tag Effects"
-  "2024-08-29; electronic publication 2024-08-16"
+  "received 2024-05-29; revised 2024-08-06; accepted 2024-08-07; online 2024-08-16; issue 2024-08-29"
   "Lane M. Terry; Maddie K. Klumb; Deacon J. Nemchick; Robert Hodyss; Frank Maiwald; J. Mathias Weber"
   "DOI 10.1021/acs.jpca.4c03552; PMID 39150465"
-  "Journal of Physical Chemistry A 128 (2024) 7137-7144; PubMed 39150465"
+  "Journal of Physical Chemistry A publication history; PubMed 39150465"
   true true
 
 deprotonatedStates2025Carrier : SpectroscopyPublicationCarrier
 deprotonatedStates2025Carrier = spectroscopy-publication-carrier
   publishedScopeChild
   "Probing Isomers and Conformers by Cryogenic Ion Vibrational Spectroscopy: Deprotonated States of Valine and Aminovaleric Acid"
-  "2025-07-03"
+  "received 2025-05-07; revised 2025-06-12; accepted 2025-06-13; online 2025-06-23; issue 2025-07-03"
   "Lane M. Terry; Maddie K. Klumb; Deacon J. Nemchick; Robert P. Hodyss; J. Mathias Weber"
-  "DOI 10.1021/acs.jpca.5c03141"
-  "Journal of Physical Chemistry A 129 (2025) 5837-5842; JILA Weber Group publication list"
+  "DOI 10.1021/acs.jpca.5c03141; ChemRxiv DOI 10.26434/chemrxiv-2025-xf3d2"
+  "Journal of Physical Chemistry A publication history; ChemRxiv preprint; JILA publication list"
   false true
+
+------------------------------------------------------------------------
+-- Temporal split around Maiwald's death on 2024-07-04.
+--
+-- The 2024 paper was submitted before his death and revised/accepted after it,
+-- while retaining him as an author. The 2025 paper first entered the journal
+-- process long after his death and omits him. This gives a much cleaner boundary
+-- between manuscript already in flight and a genuinely post-loss publication
+-- cycle. It still does not identify when each experiment was run or when each
+-- calibration/data product was produced.
+------------------------------------------------------------------------
+
+record ManuscriptChronologyBoundary : Set where
+  constructor manuscript-chronology-boundary
+  field
+    maiwaldDeathDate : String
+    protonatedReceivedBeforeDeath : Bool
+    protonatedRevisedAfterDeath : Bool
+    protonatedAcceptedAfterDeath : Bool
+    protonatedRetainedMaiwaldAuthorship : Bool
+    deprotonatedReceivedAfterDeath : Bool
+    deprotonatedOmitsMaiwald : Bool
+    preDeathSubmissionImpliesAllExperimentsPreDeath : Bool
+    postDeathRevisionImpliesPostDeathScientificContributionByMaiwald : Bool
+    laterOmissionImpliesCarrierTransfer : Bool
+
+open ManuscriptChronologyBoundary public
+
+canonicalManuscriptChronologyBoundary : ManuscriptChronologyBoundary
+canonicalManuscriptChronologyBoundary = manuscript-chronology-boundary
+  "2024-07-04"
+  true true true true true true
+  false false false
 
 record WorkingTitleScopeFork : Set where
   constructor working-title-scope-fork
@@ -149,6 +176,7 @@ data MaiwaldSuccessionReverseTarget : Set where
   acquireQualificationTransfer : MaiwaldSuccessionReverseTarget
   acquireRepositoryOrNotebookContinuity : MaiwaldSuccessionReverseTarget
   acquireWorkingTitleToPublishedVersionHistory : MaiwaldSuccessionReverseTarget
+  acquireExperimentAndDataProductionDates : MaiwaldSuccessionReverseTarget
 
 manuscriptForkNextTarget : MaiwaldSuccessionReverseTarget
-manuscriptForkNextTarget = acquireWorkingTitleToPublishedVersionHistory
+manuscriptForkNextTarget = acquireExperimentAndDataProductionDates
