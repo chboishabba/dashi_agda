@@ -128,7 +128,7 @@ data ReactorEfficiencyMeansLifecycleCarbonPermission : Set where
 data RenewableCompatibleMeansRenewablePoweredPermission : Set where
 data ProcessStudyMeansCommercialViabilityPermission : Set where
 data PAWEnergyMeansBestNitrogenPathwayPermission : Set where
-\data ExternalProcessOwnsDashiPacketPermission : Set where
+data ExternalProcessOwnsDashiPacketPermission : Set where
 
 fixedNPerEnergyDoesNotEqualAgronomicEfficiency :
   FixedNPerEnergyMeansAgronomicEfficiencyPermission → ⊥
