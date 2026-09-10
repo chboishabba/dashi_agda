@@ -57,6 +57,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanLangevinAnchoredInfluenceRound268Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayCanonicalBCurrentExact.agda'
       - 'DASHI/Physics/YangMills/Balaban*Round29*.agda'
+      - 'DASHI/Physics/YangMills/Balaban*Round30*.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteRGExpectationCovarianceSameObjectRound280Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanContinuumCovarianceSpectrumConstructorRound281Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayCanonicalBFrontierRound282Exact.agda'
@@ -93,6 +94,9 @@ jobs:
           export AGDA_JOBS=4
           scripts/run_agda29_parallel_check.sh \
             DASHI/Physics/YangMills/BalabanClayCanonicalBCurrentExact.agda \
+            DASHI/Physics/YangMills/BalabanClayCanonicalBFrontierRound306Exact.agda \
+            DASHI/Physics/YangMills/BalabanClayDirectGapConstructionSplitRound307Exact.agda \
+            DASHI/Physics/YangMills/BalabanClayDirectTerminalConsumerCutRound308Exact.agda \
             DASHI/Physics/YangMills/CompactLieLangevinSkewConnectionCancellationExact.agda \
             DASHI/Physics/YangMills/BalabanPreferredRowCSpatialFrontierRound261Exact.agda \
             DASHI/Physics/YangMills/BalabanLangevinHessianBidirectionalWeldRound262Exact.agda \
