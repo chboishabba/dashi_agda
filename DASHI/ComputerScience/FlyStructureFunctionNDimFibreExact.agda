@@ -8,15 +8,18 @@ module DASHI.ComputerScience.FlyStructureFunctionNDimFibreExact where
 -- require the global consumer to validate the composed family. More axes are
 -- candidate discrimination, not automatic predictive improvement.
 --
--- A second boundary is explicit: held-out PAIRS are not the same as held-out
--- REGIONS. If the same neuropil participates in both train and test pairs,
--- pairwise prediction does not establish generalization to unseen regions.
+-- Held-out PAIRS are not the same as held-out REGIONS. If the same neuropil
+-- participates in both train and test pairs, pairwise prediction does not
+-- establish generalization to unseen regions.
 --
--- A third boundary is now explicit after the first real LORO run: a low
--- leave-one-region-out residual and a suggestive permutation p-value still do
--- not establish that pair-specific connectome geometry is the source of the
--- gain. Fibre/weight stability and a null preserving coarse in/out strength and
--- source-level signed tendency are separate consumers.
+-- The first real LORO run also separates a stable predictive fibre mechanism
+-- from a topology-mechanism claim: a strength/polarity-preserving wiring null
+-- must still be beaten before pair-specific mesoscale wiring is promoted.
+--
+-- Finally, the functional atlas itself is fibred. VFB JRC2018 supplies
+-- overlapping painted domains/subdomains, so a unique-maximum atlas assignment
+-- is a lossy consumer projection rather than source identity. The runtime now
+-- retains an optional soft ROI->painted-domain carrier before any such collapse.
 
 open import DASHI.Core.Prelude
 open import Data.Empty using (⊥)
@@ -45,6 +48,35 @@ record FibreCandidate : Set where
     hasTrainingVariation : Bool
     admittedByStructuralConsumer : Bool
 open FibreCandidate public
+
+------------------------------------------------------------------------
+-- Functional atlas fibres.
+------------------------------------------------------------------------
+
+data FunctionalAtlasCarrier : Set where
+  uniqueMaximumPaintedDomain : FunctionalAtlasCarrier
+  overlappingPaintedDomainMembership : FunctionalAtlasCarrier
+
+record FunctionalAtlasBoundary : Set where
+  constructor functional-atlas-boundary
+  field
+    sourcePaintedDomainsMayOverlap : Bool
+    sourceOverlapForcesMutuallyExclusiveIdentity : Bool
+    uniqueMaximumCarrierRetainedForHistoricalComparison : Bool
+    softOverlapCarrierPreservesMultipleDomainMemberships : Bool
+    softMembershipRowsRenormalizedToPartitionUnity : Bool
+    softCarrierStillDoesNotCreateNeuronIdentity : Bool
+open FunctionalAtlasBoundary public
+
+canonicalFunctionalAtlasBoundary : FunctionalAtlasBoundary
+canonicalFunctionalAtlasBoundary =
+  functional-atlas-boundary
+    true
+    false
+    true
+    true
+    false
+    true
 
 ------------------------------------------------------------------------
 -- Compatibility is structural and precedes outcome fitting.
@@ -77,6 +109,7 @@ open CompatibleFibreFamily public
 ------------------------------------------------------------------------
 
 data StructureFunctionStage : Set where
+  preserveFunctionalAtlasFibres : StructureFunctionStage
   generateStructuralFibres : StructureFunctionStage
   restrictToTrainingCarrier : StructureFunctionStage
   buildFibreConflictGraph : StructureFunctionStage
@@ -91,7 +124,7 @@ data StructureFunctionStage : Set where
   compareAgainstStrengthPreservingWiringNull : StructureFunctionStage
 
 firstStructureFunctionStage : StructureFunctionStage
-firstStructureFunctionStage = generateStructuralFibres
+firstStructureFunctionStage = preserveFunctionalAtlasFibres
 
 record FlyNDimStructureFunctionBoundary : Set where
   constructor fly-ndim-structure-function-boundary
@@ -100,6 +133,7 @@ record FlyNDimStructureFunctionBoundary : Set where
     symmetricFunctionalConsumerAcknowledged : Bool
     commonInputOutputKeptDistinctFromDirectedPaths : Bool
     signedFibresKeptDistinctUntilComposition : Bool
+    overlappingFunctionalDomainsKeptDistinctUntilConsumer : Bool
     compatibilitySelectionUsesHeldOutOutcomes : Bool
     compositionFitUsesHeldOutOutcomes : Bool
     pairHoldoutEquivalentToRegionHoldout : Bool
@@ -117,6 +151,7 @@ open FlyNDimStructureFunctionBoundary public
 canonicalFlyNDimStructureFunctionBoundary : FlyNDimStructureFunctionBoundary
 canonicalFlyNDimStructureFunctionBoundary =
   fly-ndim-structure-function-boundary
+    true
     true
     true
     true
@@ -139,24 +174,16 @@ canonicalFlyNDimStructureFunctionBoundary =
 ------------------------------------------------------------------------
 
 data DirectedEdgeEqualsSymmetricCorrelation : Set where
-
 data MoreFibresImpliesBetterHeldoutPrediction : Set where
-
 data LocalCompatibilityImpliesGlobalImprovement : Set where
-
 data TrainingFitImpliesNullRejection : Set where
-
 data SharedRegionImpliesSameNeuronIdentity : Set where
-
 data PairHoldoutImpliesUnseenRegionGeneralization : Set where
-
 data FrozenObservedFitIsValidPermutationNull : Set where
-
 data LowLOROResidualImpliesStableFibreMechanism : Set where
-
 data RegionLabelNullTrendImpliesWiringGeometryMechanism : Set where
-
 data CoarseStrengthEqualsPairSpecificWiring : Set where
+data OverlappingAtlasDomainsImplyUniqueRegionIdentity : Set where
 
 directedEdgeDoesNotCreateSymmetricCorrelation :
   DirectedEdgeEqualsSymmetricCorrelation → ⊥
@@ -198,20 +225,25 @@ coarseStrengthDoesNotCreatePairSpecificWiring :
   CoarseStrengthEqualsPairSpecificWiring → ⊥
 coarseStrengthDoesNotCreatePairSpecificWiring ()
 
+overlappingAtlasDomainsDoNotCreateUniqueRegionIdentity :
+  OverlappingAtlasDomainsImplyUniqueRegionIdentity → ⊥
+overlappingAtlasDomainsDoNotCreateUniqueRegionIdentity ()
+
 ------------------------------------------------------------------------
 -- Current empirical interpretation boundary.
 --
--- Real observations currently retained:
---   direct residual       ~ 0.3394
---   path residual         ~ 0.3081
---   fixed mixture         ~ 0.3104
---   pair-held-out NDim    ~ 0.1430
---   leave-one-region-out  ~ 0.1224
---   refitted LORO region-label permutation p ~ 0.099
+-- Real observations currently retained in runtime outputs:
+--   direct residual                    ~ 0.3394
+--   path residual                      ~ 0.3081
+--   fixed mixture                      ~ 0.3104
+--   pair-held-out NDim                 ~ 0.1430
+--   leave-one-region-out               ~ 0.1224
+--   refitted LORO region-label p       ~ 0.0990
+--   strength-preserving wiring null p  ~ 0.2376
 --
--- The decimal values remain execution observations in the runtime JSON; this
--- Agda owner stores only the interpretation gates. In particular p < 0.10 is
--- not promoted to conventional significance or to a wiring-mechanism claim.
+-- Foldwise fibre selection/coefficients are now measured and largely stable;
+-- that pays a stability consumer, not the stronger pair-specific wiring claim.
+-- The strength-preserving null has also been executed but is not rejected.
 ------------------------------------------------------------------------
 
 record CurrentFlyNDimInterpretation : Set where
@@ -229,6 +261,9 @@ record CurrentFlyNDimInterpretation : Set where
     loroPermutationTrendEstablishesPairSpecificWiringMechanism : Bool
     foldwiseFibreStabilityPaid : Bool
     strengthPreservingWiringNullPaid : Bool
+    strengthPreservingWiringNullRejected : Bool
+    pairSpecificWiringMechanismEstablished : Bool
+    softFunctionalAtlasCarrierRequiresFreshBenchmark : Bool
 open CurrentFlyNDimInterpretation public
 
 currentFlyNDimInterpretation : CurrentFlyNDimInterpretation
@@ -244,5 +279,8 @@ currentFlyNDimInterpretation =
     false
     false
     false
+    true
+    true
     false
     false
+    true
