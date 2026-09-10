@@ -7,6 +7,7 @@ open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Algebra.TriadicDepthOneCharacters as SymbolicC3
 import DASHI.Moonshine.C3FourierConjugationExact as Fourier
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact as CycloLA
@@ -32,15 +33,20 @@ inverseZetaIsZetaSquared : Fourier.inversePhase Fourier.zeta ≡ Fourier.zetaSqu
 inverseZetaIsZetaSquared = Fourier.inverseZetaIsZetaSquared
 
 zetaTimesInverseZetaIsOne :
-  Fourier.C3.multiplyPhase Fourier.zeta (Fourier.inversePhase Fourier.zeta)
+  SymbolicC3.multiplyPhase Fourier.zeta (Fourier.inversePhase Fourier.zeta)
   ≡ Fourier.one
 zetaTimesInverseZetaIsOne = Fourier.zetaTimesInverseZetaIsOne
 
 inverseZetaTimesZetaIsOne :
-  Fourier.C3.multiplyPhase (Fourier.inversePhase Fourier.zeta) Fourier.zeta
+  SymbolicC3.multiplyPhase (Fourier.inversePhase Fourier.zeta) Fourier.zeta
   ≡ Fourier.one
 inverseZetaTimesZetaIsOne = Fourier.inverseZetaTimesZetaIsOne
 
+zetaCubedIsOne :
+  SymbolicC3.multiplyPhase
+    (SymbolicC3.multiplyPhase Fourier.zeta Fourier.zeta)
+    Fourier.zeta
+  ≡ Fourier.one
 zetaCubedIsOne = Fourier.zetaCubedIsOne
 
 conjugateZetaIsInverseZeta : C3.conjugate C3.zeta ≡ C3.zetaSquared
