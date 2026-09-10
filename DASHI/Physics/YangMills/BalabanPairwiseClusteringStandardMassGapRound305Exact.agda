@@ -4,32 +4,31 @@ module DASHI.Physics.YangMills.BalabanPairwiseClusteringStandardMassGapRound305E
 ------------------------------------------------------------------------
 -- ROUND305 / SHORTEST STANDARD-THEOREM MASS-GAP ROUTE
 --
--- `BalabanPhysicalMassGapRoutes` already exposes the established functional-
--- analytic theorem shape
+-- `BalabanPhysicalMassGapRoutes` identifies exponential clustering -> spectral
+-- gap as standardImported, but its historical input record contains an unused
+-- `vacuum : Observable` field.  Do not manufacture an observable merely to fill
+-- stale packaging.  Normalize to the fields actually consumed by the transfer.
 --
---   exponential connected clustering -> spectral gap
---
--- and classifies the transfer as standardImported.  Repo search finds no local
--- inhabitant of that authority record, so it must remain an explicit standard-
--- library payment rather than being confused with new Yang--Mills analysis.
---
--- R304 supplies the genuine arbitrary-pair continuum clustering theorem.  This
--- owner packages it for the old standard-transfer consumer while keeping the
--- physical mass/rate normalization explicit.  In particular q=1/2 is NOT
--- itself called an energy or mass.
+-- R304 supplies genuine arbitrary-pair continuum clustering.  The remaining
+-- physical representation seam is the meaning of the concrete q=1/2 bound as
+-- exponential decay at one positive physical mass/rate on the SAME reconstructed
+-- Hamiltonian.  The standard spectral transfer remains an explicit authority
+-- until a local theorem inhabitant is imported/certified.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
-import DASHI.Physics.YangMills.BalabanPhysicalMassGapRoutes as Routes
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
+import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OSGap
 
 record PairwiseClusteringMassRatePresentation
@@ -46,66 +45,19 @@ record PairwiseClusteringMassRatePresentation
     PositiveMass : Mass → Set
     massParameterPositive : PositiveMass massParameter
 
-    -- The established spectral theorem consumes an exponential-decay statement
-    -- with a physical mass parameter.  This relation binds the concrete q=1/2
-    -- geometric bound to that SAME physical rate without identifying their
-    -- carriers by name.
     ExponentialDecayBound :
       PhysicalObservable → PhysicalObservable → Nat → ℚ → Mass → Set
 
+    -- Same-rate semantic weld: the concrete q=1/2 inequality established by
+    -- R304 is exactly the exponential-decay proposition at `massParameter`.
     quarterHalfBoundHasPhysicalMassMeaning : ∀ left right time →
       R304.continuumPairCorrelation pairwise left right time
-      ℚ.≤
-        DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact.quarter
-        ℚ.*
-        DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact.rationalPower
-          DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.half time →
+        ≤ Shell.quarter * Power.rationalPower Geo.half time →
       ExponentialDecayBound left right time
-        DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact.quarter
+        (R304.continuumPairCorrelation pairwise left right time)
         massParameter
 
 open PairwiseClusteringMassRatePresentation public
-
-asExponentialTimeClusteringData :
-  ∀ {Measure TestObservable PhysicalObservable Hamiltonian Mass}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
-    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
-    {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
-    {pairwise : R304.PhysicalPairwiseTimePresentation dataSet extension finite} →
-  PairwiseClusteringMassRatePresentation pairwise →
-  Routes.ExponentialTimeClusteringData
-    PhysicalObservable Nat ℚ Mass Hamiltonian
-asExponentialTimeClusteringData {pairwise = pairwise} presentation = record
-  { Routes.ExponentialTimeClusteringData.vacuum = vacuumObservable
-  ; Routes.ExponentialTimeClusteringData.connectedCorrelation =
-      R304.continuumPairCorrelation pairwise
-  ; Routes.ExponentialTimeClusteringData.massParameter = massParameter presentation
-  ; Routes.ExponentialTimeClusteringData.correlationConstant = λ _ _ → massParameter presentation
-  ; Routes.ExponentialTimeClusteringData.Positive = PositiveMass presentation
-  ; Routes.ExponentialTimeClusteringData.positiveMassParameter = massParameterPositive presentation
-  ; Routes.ExponentialTimeClusteringData.ExponentialDecayBound =
-      ExponentialDecayBound presentation
-  ; Routes.ExponentialTimeClusteringData.exponentialTimeClustering =
-      λ left right time →
-        quarterHalfBoundHasPhysicalMassMeaning presentation left right time
-          (R304.continuumPairGeometricUpper pairwise left right time)
-  ; Routes.ExponentialTimeClusteringData.reconstructedHamiltonian =
-      reconstructedHamiltonian presentation
-  }
-  where
-  -- The old route record contains an unused `vacuum : Observable` field.  The
-  -- clustering theorem itself does not consume it, so manufacturing an arbitrary
-  -- PhysicalObservable would be wrong.  This exposes another stale interface
-  -- coordinate; the normalized compiler below avoids this old record entirely.
-  vacuumObservable : PhysicalObservable
-  vacuumObservable = vacuumObservable
-
-------------------------------------------------------------------------
--- The old `vacuum` field is unused by the standard transfer theorem but makes
--- the record impossible to instantiate for an arbitrary nonempty-unproven
--- observable type.  Do NOT fabricate it.  The normalized payment below records
--- exactly the fields actually consumed by the transfer authority.
-------------------------------------------------------------------------
 
 record NormalizedExponentialClusteringData
     (Observable Time Scalar Mass Hamiltonian : Set) : Set₁ where
@@ -120,6 +72,32 @@ record NormalizedExponentialClusteringData
     reconstructedHamiltonian : Hamiltonian
 
 open NormalizedExponentialClusteringData public
+
+asNormalizedExponentialClusteringData :
+  ∀ {Measure TestObservable PhysicalObservable Hamiltonian Mass}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
+    {pairwise : R304.PhysicalPairwiseTimePresentation dataSet extension finite} →
+  PairwiseClusteringMassRatePresentation pairwise →
+  NormalizedExponentialClusteringData
+    PhysicalObservable Nat ℚ Mass Hamiltonian
+asNormalizedExponentialClusteringData {pairwise = pairwise} presentation = record
+  { NormalizedExponentialClusteringData.connectedCorrelation =
+      R304.continuumPairCorrelation pairwise
+  ; NormalizedExponentialClusteringData.massParameter = massParameter presentation
+  ; NormalizedExponentialClusteringData.Positive = PositiveMass presentation
+  ; NormalizedExponentialClusteringData.positiveMassParameter =
+      massParameterPositive presentation
+  ; NormalizedExponentialClusteringData.ExponentialDecayBound =
+      ExponentialDecayBound presentation
+  ; NormalizedExponentialClusteringData.exponentialTimeClustering =
+      λ left right time →
+        quarterHalfBoundHasPhysicalMassMeaning presentation left right time
+          (R304.continuumPairGeometricUpper pairwise left right time)
+  ; NormalizedExponentialClusteringData.reconstructedHamiltonian =
+      reconstructedHamiltonian presentation
+  }
 
 record NormalizedExponentialClusteringSpectrumAuthority
     {Observable Time Scalar Mass Hamiltonian : Set}
@@ -156,6 +134,20 @@ compileNormalizedClusteringToMassGap dataSet authority = record
       exponentialClusteringTransfer authority (exponentialTimeClustering dataSet)
   }
 
+compilePairwiseClusteringToMassGap :
+  ∀ {Measure TestObservable PhysicalObservable Hamiltonian Mass}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
+    {pairwise : R304.PhysicalPairwiseTimePresentation dataSet extension finite}
+    (presentation : PairwiseClusteringMassRatePresentation pairwise) →
+  NormalizedExponentialClusteringSpectrumAuthority
+    (asNormalizedExponentialClusteringData presentation) →
+  OSGap.PhysicalMassGapCertificate Hamiltonian Mass
+compilePairwiseClusteringToMassGap presentation =
+  compileNormalizedClusteringToMassGap
+    (asNormalizedExponentialClusteringData presentation)
+
 record Round305Boundary : Set where
   constructor round305-boundary
   field
@@ -189,8 +181,6 @@ round305NormalizedMassGapAssemblyLevel = machineChecked
 round305PairwiseContinuumClusteringLevel : ProofLevel
 round305PairwiseContinuumClusteringLevel = R304.round304PairwiseContinuumClusteringCompilerLevel
 
--- Standard functional analysis, not new 4D Yang--Mills analysis.  No local
--- inhabitant was found in the current repository search.
 round305StandardClusteringToSpectrumTransferLevel : ProofLevel
 round305StandardClusteringToSpectrumTransferLevel = standardImported
 
