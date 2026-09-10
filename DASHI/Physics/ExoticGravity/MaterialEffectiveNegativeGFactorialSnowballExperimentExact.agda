@@ -12,11 +12,10 @@ import DASHI.Physics.ExoticGravity.LiTorrSourceAttributedOrdinaryGREvaluationExa
 ------------------------------------------------------------------------
 -- FACTORIAL EXPERIMENT + SNOWBALL ACQUISITION
 --
--- Cross-pollinates the recent scientific-wall rule:
--- out-of-order acquisition may accumulate and be retained, while dependency
--- payment remains first-open and receipt-indexed.  This owner does not mutate
--- the canonical progression scheduler and is compatible with the stronger
--- acquisition/payment split introduced in recent PR work.
+-- Experimental cells may be collected opportunistically.  This owner projects
+-- their observed coordinates into the canonical ScientificWallAcquisitionState
+-- from the receipt-indexed progression owner.  It does not define a second
+-- payment scheduler and it does not promote acquisition into payment.
 ------------------------------------------------------------------------
 
 data SourceAmplitudeLevel : Set where
@@ -59,22 +58,32 @@ record SnowballAcquisitionState : Set where
 
 open SnowballAcquisitionState public
 
-record FactorialPaymentEligibility : Set where
-  constructor factorial-payment-eligibility
-  field
-    sourceAmplitudeSweepPaid : Bool
-    materialRegimeSweepPaid : Bool
-    sameSourceIdentityPaid : Bool
-    sameGeometryPaid : Bool
-    backgroundClosurePaid : Bool
-    fieldSignPaid : Bool
-    independentReplicationPaid : Bool
-    modelClassSeparationPaid : Bool
+_boolAnd_ : Bool → Bool → Bool
+false boolAnd _ = false
+true boolAnd b = b
 
-open FactorialPaymentEligibility public
+------------------------------------------------------------------------
+-- Canonical acquisition projection.
+--
+-- The factorial surface is downstream of source reconstruction, so it cannot
+-- claim mass-current or stress-energy acquisition merely from having cells.
+-- It may retain evidence for the independent source/material axes, model-class
+-- separation, and replication/identity coordinates when the corresponding
+-- observations are actually present.
+------------------------------------------------------------------------
 
--- Deliberate firewall: a large accumulated dataset is not itself a scientific
--- wall payment.  The canonical dependency scheduler remains authoritative.
+projectToCanonicalAcquisition :
+  SnowballAcquisitionState → Progress.ScientificWallAcquisitionState
+projectToCanonicalAcquisition s =
+  Progress.scientific-wall-acquisition-state
+    false
+    false
+    (sourceAmplitudeAxisObserved s boolAnd materialRegimeAxisObserved s)
+    (modelClassSeparationObserved s)
+    (independentReplicationObserved s boolAnd
+      (sameSourceIdentityObserved s boolAnd sameGeometryObserved s))
+
+-- Deliberate firewall: acquisition does not advance the payment state by itself.
 snowballAcquisitionDoesNotAdvancePaymentByItself :
   SnowballAcquisitionState → Progress.ScientificWallPaymentState
 snowballAcquisitionDoesNotAdvancePaymentByItself _ = Progress.currentWallState
@@ -89,14 +98,15 @@ record FactorialSnowballBoundary : Set where
     factorialDatasetAutomaticallySeparatesModelClasses : Bool
     factorialDatasetAutomaticallyProvesNegativeEffectiveG : Bool
     sourceAttributionRolesSurvivePerCell : Bool
+    canonicalScientificWallAcquisitionStateReused : Bool
     canonicalScientificWallSchedulerRemainsAuthoritative : Bool
 
 canonicalFactorialSnowballBoundary : FactorialSnowballBoundary
 canonicalFactorialSnowballBoundary =
-  factorial-snowball-boundary true false false false false false true true
+  factorial-snowball-boundary true false false false false false true true true
 
 -- Alignment with the existing discriminator cutset: these are the exact
--- experiment coordinates this dataset is intended to pay when corresponding
+-- experiment coordinates this dataset is intended to inform when corresponding
 -- receipt-bearing evidence exists.
 requiredCutset : Cutset.MaterialEffectiveNegativeGCutset
 requiredCutset = Cutset.canonicalMaterialEffectiveNegativeGCutset
