@@ -109,8 +109,6 @@ unforcedLeafBIndependent = true
 unforcedLeafBPaid : Bool
 unforcedLeafBPaid = Cut.round504CriticalProductionSliceClosed
 
--- No constructors: these tokens can only become inhabited after an exact
--- alternative-specific theorem is actually connected here.
 data PaymentA : Set where
 data PaymentB : Set where
 data PaymentC : Set where
