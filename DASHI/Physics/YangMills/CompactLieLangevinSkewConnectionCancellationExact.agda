@@ -3,18 +3,6 @@ module DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact
 ------------------------------------------------------------------------
 -- ROUND72/R265: COMPACT-LIE LANGEVIN CONNECTION IS BASIS-FREE SKEW ENERGY ZERO
 --               + TYPED DIFFERENTIATED-COMMUTATOR SOURCE SURFACE
---
--- GEOMETRIC SOURCES
---
--- Brian C. Hall,
--- "Lie Groups, Lie Algebras, and Representations: An Elementary Introduction",
--- second edition, Graduate Texts in Mathematics 222, Springer (2015).
--- DOI: 10.1007/978-3-319-13467-3.
---
--- John Milnor,
--- "Curvatures of Left Invariant Metrics on Lie Groups",
--- Advances in Mathematics 21 (1976), 293--329.
--- DOI: 10.1016/S0001-8708(76)80002-3.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -64,12 +52,15 @@ literalConnectionQuadraticEnergyCancels D field =
 
 ------------------------------------------------------------------------
 -- R265: typed replacement for the opaque commutator producer socket.
+--
+-- The coefficient carrier is an INDEX, not an existential field.  Downstream
+-- source owners can therefore require the exact scalar carrier (for Row C,
+-- physical real coefficients) rather than accepting a neighbouring type.
 ------------------------------------------------------------------------
 
-record TypedLangevinCommutatorData : Set₁ where
+record TypedLangevinCommutatorData (Coefficient : Set) : Set₁ where
   field
     frame : CompactLieLangevinFrameData
-    Coefficient : Set
     add : Coefficient → Coefficient → Coefficient
 
     commutatorEntry : Site frame → Site frame → Coefficient
@@ -84,14 +75,13 @@ record TypedLangevinCommutatorData : Set₁ where
     symmetricNonlocalIsActionHessian : ∀ x y →
       symmetricNonlocalEntry x y ≡ actionHessianEntry x y
 
-    -- This is not a fresh untyped proposition: it is exactly the connection
-    -- identification carried by the same literal frame.
     connectionEntryIsOnsiteAd : connectionIsOnsiteAdTerm frame
 
 open TypedLangevinCommutatorData public
 
 commutatorEntryIsHessianPlusConnection :
-  (dataSet : TypedLangevinCommutatorData) →
+  ∀ {Coefficient}
+    (dataSet : TypedLangevinCommutatorData Coefficient) →
   ∀ x y →
   commutatorEntry dataSet x y
   ≡ add dataSet
