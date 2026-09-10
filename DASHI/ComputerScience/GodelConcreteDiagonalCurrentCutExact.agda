@@ -5,19 +5,19 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 -- CURRENT CANONICAL DIAGONAL CUT AFTER 2026 SOTA AUDIT
 --
--- The executable base-12 code remains an implementation lane.  Recent
--- machine-checked external arithmetic developments mean that re-proving
--- representability/diagonalisation from scratch is no longer the preferred
--- theorem route.  The canonical residual is same-object transport into the
--- local ABI, with syntactic-shape preservation made explicit.
+-- Recent machine-checked external arithmetic developments already own finished
+-- diagonal/fixed-point proofs.  Therefore the shortest path is same-carrier
+-- transport, not replaying a preferred local representability architecture.
 ------------------------------------------------------------------------
 
 data LiveDiagonalResidual : Set where
-  externalArithmeticSameObjectAdapter
-  sourceNativeSubstitutionAndRepresentationAlignment
-  representedFunctionPrecompositionClosure : LiveDiagonalResidual
+  coquandT4ArithmeticSourcePayment
+  coquandT4FinishedDiagonalPayment
+  localKernelReplayReceipt : LiveDiagonalResidual
 
 data OptionalDiagonalProducerResidual : Set where
+  sourceNativeSubstitutionAndRepresentationAlignment
+  representedFunctionPrecompositionClosure
   base12SelfSubstitutionPrimitiveRecursive
   base12ToSourceNativeSameCodeWeld
   fromScratchPrimitiveRecursiveLibrary : OptionalDiagonalProducerResidual
@@ -35,9 +35,12 @@ record CurrentDiagonalCut : Set where
     theoremVRelationGraphAdapterOwned : Bool
     recentExternalMachineCheckedProducersLocated : Bool
     formulaSentenceShapeAuthorityOwned : Bool
-    coquandT4AdapterFrontierOwned : Bool
+    externalArithmeticABICompilerOwned : Bool
+    externalFinishedDiagonalCompilerOwned : Bool
+    coquandT4PaymentTargetOwned : Bool
     canonicalLiveResiduals : List LiveDiagonalResidual
     optionalProducerResiduals : List OptionalDiagonalProducerResidual
+    representabilityRouteMandatoryForFinishedExternalProof : Bool
     base12PRIsMandatoryForDiagonal : Bool
     fromScratchPRLibraryIsMandatory : Bool
     concreteDiagonalLemmaKernelCertified : Bool
@@ -46,16 +49,16 @@ canonicalCurrentDiagonalCut : CurrentDiagonalCut
 canonicalCurrentDiagonalCut =
   currentDiagonalCut
     true true true true true true true true
-    true true true
-    (externalArithmeticSameObjectAdapter ∷
-     sourceNativeSubstitutionAndRepresentationAlignment ∷
-     representedFunctionPrecompositionClosure ∷ [])
-    (base12SelfSubstitutionPrimitiveRecursive ∷
+    true true true true true
+    (coquandT4ArithmeticSourcePayment ∷
+     coquandT4FinishedDiagonalPayment ∷
+     localKernelReplayReceipt ∷ [])
+    (sourceNativeSubstitutionAndRepresentationAlignment ∷
+     representedFunctionPrecompositionClosure ∷
+     base12SelfSubstitutionPrimitiveRecursive ∷
      base12ToSourceNativeSameCodeWeld ∷
      fromScratchPrimitiveRecursiveLibrary ∷ [])
-    false
-    false
-    false
+    false false false false
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -67,6 +70,7 @@ data SourceRepresentabilityMeansCustomBase12PR : Set where
 data OptionalBase12ProducerIsMandatoryTheoremDebt : Set where
 data ExternalFormalisationAutomaticallyPaysLocalABI : Set where
 data ExistingMachineProofMeansReproveLocally : Set where
+data FinishedExternalProofRequiresLocalRepresentabilityReplay : Set where
 
 sourceWrittenDoesNotMeanCertified :
   SourceWrittenCodecMeansKernelCertified → ⊥
@@ -91,3 +95,7 @@ externalFormalisationNeedsAdapter ()
 machineCheckedPriorArtDoesNotForceReproof :
   ExistingMachineProofMeansReproveLocally → ⊥
 machineCheckedPriorArtDoesNotForceReproof ()
+
+finishedExternalProofDoesNotForceRepresentabilityReplay :
+  FinishedExternalProofRequiresLocalRepresentabilityReplay → ⊥
+finishedExternalProofDoesNotForceRepresentabilityReplay ()
