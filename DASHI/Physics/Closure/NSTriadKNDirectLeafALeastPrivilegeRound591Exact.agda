@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact where
 
 ------------------------------------------------------------------------
--- ROUND591 / DIRECT LEAF-A LEAST-PRIVILEGE PRODUCER
+-- ROUND591 / R572 TEMPORAL-PRODUCER LEAST PRIVILEGE
 --
 -- R572 still asked its producer to supply two facts that R571 already proves
 -- from the literal live carrier:
@@ -11,17 +11,11 @@ module DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact whe
 --
 -- Only the standard order property "integral of a nonnegative function is
 -- nonnegative" is needed to lift the second fact through time integration.
--- This round removes both duplicated sign receipts from proof-search debt.
+-- This round removes both duplicated sign receipts from that producer tactic.
 --
--- The resulting direct producer asks for:
---   1. ordinary scalar FTC authority;
---   2. ordinary nonnegative-integration authority;
---   3. one cutoff-uniform initial self-flux upper;
---   4. the ONE novel NS theorem: R568 live commutator spacetime budget;
---   5. scalar bookkeeping selecting the final cutoff-independent bound.
---
--- R284/R434/R590 remain optional producer tactics for item (4); none is a
--- prerequisite of this canonical direct consumer.
+-- IMPORTANT: R592 subsequently shows the whole R568/R572 temporal route is
+-- optional relative to the canonical R503 direct signed-cross consumer.  This
+-- module remains a minimized compatible producer, not a Clay prerequisite.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -162,14 +156,11 @@ round591TerminalSelfFluxSignAlreadyOwned =
 round591R572ProducerSignSocketsMandatory : Bool
 round591R572ProducerSignSocketsMandatory = false
 
-round591R284CriticalConeRouteMandatory : Bool
-round591R284CriticalConeRouteMandatory = false
+round591TemporalRouteCanonicalPrerequisite : Bool
+round591TemporalRouteCanonicalPrerequisite = false
 
-round591NovelPDELeafIsOnlyLiveCommutatorSpacetimeBudget : Bool
-round591NovelPDELeafIsOnlyLiveCommutatorSpacetimeBudget = true
-
-round591LiveCommutatorSpacetimeBudgetClosed : Bool
-round591LiveCommutatorSpacetimeBudgetClosed = false
+round591TemporalProducerStillCompatible : Bool
+round591TemporalProducerStillCompatible = true
 
 round591CurrentGlobalFirstResidualStillLeafA :
   R504.firstTerminalResidual R504.currentTerminalStatus
@@ -183,9 +174,9 @@ round591R572ProducerSignSocketsMandatoryIsFalse :
   round591R572ProducerSignSocketsMandatory ≡ false
 round591R572ProducerSignSocketsMandatoryIsFalse = refl
 
-round591NovelPDELeafIsOnlyLiveCommutatorSpacetimeBudgetIsTrue :
-  round591NovelPDELeafIsOnlyLiveCommutatorSpacetimeBudget ≡ true
-round591NovelPDELeafIsOnlyLiveCommutatorSpacetimeBudgetIsTrue = refl
+round591TemporalRouteCanonicalPrerequisiteIsFalse :
+  round591TemporalRouteCanonicalPrerequisite ≡ false
+round591TemporalRouteCanonicalPrerequisiteIsFalse = refl
 
 round591ClayPromotionIsFalse : round591ClayPromotion ≡ false
 round591ClayPromotionIsFalse = refl
