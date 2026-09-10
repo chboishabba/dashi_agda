@@ -2,16 +2,16 @@
 module DASHI.Physics.YangMills.BalabanCMP109LangevinTypedSecondVariationRound267Exact where
 
 ------------------------------------------------------------------------
--- ROUND267 / C4b LITERAL CMP109 <-> TYPED LANGEVIN HESSIAN WELD
+-- ROUND267/R269 / C4b LITERAL CMP109 <-> TYPED LANGEVIN HESSIAN WELD
 --
 -- Round103 already proves that the CMP116 physical marked Hessian is the second
--- variation of the SAME CMP109 effective potential.  Round265 exposes the
+-- variation of the SAME CMP109 effective potential. Round265 exposes the
 -- differentiated Langevin commutator as a typed matrix decomposition.
 --
--- This module forces those two lanes onto ONE object: the action-Hessian entry
--- in the typed Langevin commutator is definitionally chosen to be the literal
--- CMP116 physical Hessian evaluated on site-indexed physical tangents.  The
--- existing Round103 theorem then also identifies it with CMP109 E^(2)/Pi.
+-- This module forces those lanes onto ONE object: the action-Hessian entry in
+-- the typed Langevin commutator is definitionally the literal CMP116 physical
+-- Hessian evaluated on site-indexed physical tangents. Existing Round103 then
+-- identifies that same entry with CMP109 E^(2)/Pi.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -55,22 +55,17 @@ asTypedLangevinCommutator :
 asTypedLangevinCommutator dataSet = record
   { Langevin.TypedLangevinCommutatorData.frame = frame dataSet
   ; Langevin.TypedLangevinCommutatorData.add = _+ℝ_
-  ; Langevin.TypedLangevinCommutatorData.commutatorEntry =
-      commutatorEntry dataSet
-  ; Langevin.TypedLangevinCommutatorData.symmetricNonlocalEntry =
-      symmetricNonlocalEntry dataSet
-  ; Langevin.TypedLangevinCommutatorData.connectionEntry =
-      connectionEntry dataSet
+  ; Langevin.TypedLangevinCommutatorData.commutatorEntry = commutatorEntry dataSet
+  ; Langevin.TypedLangevinCommutatorData.symmetricNonlocalEntry = symmetricNonlocalEntry dataSet
+  ; Langevin.TypedLangevinCommutatorData.connectionEntry = connectionEntry dataSet
   ; Langevin.TypedLangevinCommutatorData.actionHessianEntry =
       λ x y → Carrier.cmp116PhysicalMarkedHessian
         (carrier dataSet) (background dataSet)
         (siteTangent dataSet x) (siteTangent dataSet y)
-  ; Langevin.TypedLangevinCommutatorData.commutatorDecomposition =
-      commutatorDecomposition dataSet
+  ; Langevin.TypedLangevinCommutatorData.commutatorDecomposition = commutatorDecomposition dataSet
   ; Langevin.TypedLangevinCommutatorData.symmetricNonlocalIsActionHessian =
       symmetricNonlocalIsCMP116PhysicalHessian dataSet
-  ; Langevin.TypedLangevinCommutatorData.connectionEntryIsOnsiteAd =
-      connectionEntryIsOnsiteAd dataSet
+  ; Langevin.TypedLangevinCommutatorData.connectionEntryIsOnsiteAd = connectionEntryIsOnsiteAd dataSet
   }
 
 typedActionHessianIsCMP116 :
@@ -103,5 +98,7 @@ round267TypedCMP109LangevinCompilerLevel = machineChecked
 round267CMP109CMP116IdentityLevel : ProofLevel
 round267CMP109CMP116IdentityLevel = Carrier.cmp109CMP116PhysicalHessianIdentityLevel
 
+-- S1: actual differentiated Langevin coefficients and site->physical-tangent
+-- realization on the literal CMP109 finite effective density.
 round267LiteralLangevinDifferentiationInstantiationLevel : ProofLevel
 round267LiteralLangevinDifferentiationInstantiationLevel = conditional
