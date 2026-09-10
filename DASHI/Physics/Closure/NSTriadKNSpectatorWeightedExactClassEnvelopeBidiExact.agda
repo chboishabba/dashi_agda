@@ -26,6 +26,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -99,8 +100,6 @@ module ExactEnvelope
       lowHighNorm tau + highLowNorm tau
         + highHighToLowNorm tau + comparableNorm tau
 
-    -- The exact self budgets make R583's four ceilings definitionally equal to
-    -- the four class-fold norms themselves.
     exactFourClassEnvelopeMeaning :
       (tau : Physical.PhysicalTriadIncidence) →
       exactFourClassEnvelope tau ≡ exactFourNormSum tau
@@ -111,12 +110,12 @@ module ExactEnvelope
       R580.lowHighSum580 (cells tau)
       ≡ R224.foldVector
           (R581.lowHighCell581 (Live.nestedSlotCell584 tau))
-          (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+          (Output.physicalOutputFiber
             (Audit.cutoff SB.system) (Physical.p tau))
     lowHighSumIsFold tau =
       R581.sumCellsMapAsFold581
         (R581.lowHighCell581 (Live.nestedSlotCell584 tau))
-        (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+        (Output.physicalOutputFiber
           (Audit.cutoff SB.system) (Physical.p tau))
 
     highLowSumIsFold :
@@ -124,12 +123,12 @@ module ExactEnvelope
       R580.highLowSum580 (cells tau)
       ≡ R224.foldVector
           (R581.highLowCell581 (Live.nestedSlotCell584 tau))
-          (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+          (Output.physicalOutputFiber
             (Audit.cutoff SB.system) (Physical.p tau))
     highLowSumIsFold tau =
       R581.sumCellsMapAsFold581
-        (R581.highLowCell581 (Live.nestedSlotCell584 tau))
-        (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+        (R581.highLowCell581 (Live.nestedSlotCellCell584 tau))
+        (Output.physicalOutputFiber
           (Audit.cutoff SB.system) (Physical.p tau))
 
     lowHighNormEqualsHighLowNorm :
@@ -144,9 +143,6 @@ module ExactEnvelope
             (Sym.nestedSlotLowHighEqualsHighLow tau pNonzero)
             (sym (highLowSumIsFold tau))))
 
-    -- Orbit-normal form under the physical swap recolouring LH <-> HL.
-    -- The multiplicity two is retained; only the redundant analytic coordinate
-    -- is removed.
     exactThreeOrbitEnvelope : Physical.PhysicalTriadIncidence → ℚ
     exactThreeOrbitEnvelope tau =
       lowHighNorm tau + lowHighNorm tau
