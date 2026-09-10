@@ -61,10 +61,6 @@ evidenceSynthesisQid = Identity.mkOptionalIdentityDemand
   (Identity.unresolved
     "a recently created Wikidata item exists for evidence synthesis, but no mature exact concept identity is promoted here")
 
-------------------------------------------------------------------------
--- Dewey stays explicitly unresolved where no inspected DDC statement paid it.
-------------------------------------------------------------------------
-
 systematicReviewDewey : Dewey.DeweyCoordinate
 systematicReviewDewey = Dewey.mkUnresolvedDewey
   "systematic review"
@@ -79,10 +75,6 @@ conflictOfInterestDewey : Dewey.DeweyCoordinate
 conflictOfInterestDewey = Dewey.mkUnresolvedDewey
   "conflict of interest"
   "cross-domain legal/scientific/organizational concept; no exact DDC value promoted"
-
-------------------------------------------------------------------------
--- DOI-bounded sources paying independence and synthesis distinctions.
-------------------------------------------------------------------------
 
 glaeserResearchIndependenceSource : Attribution.AttributedSource
 glaeserResearchIndependenceSource = Attribution.mkDOISource
@@ -120,19 +112,11 @@ danchevDecentralizedReplicationSource = Attribution.mkDOISource
   "large biomedical meta-research study relating social, methodological and knowledge independence to replication; bounded to its data and design and not a theorem that decentralization always guarantees truth"
   Attribution.publicAttribution
 
-------------------------------------------------------------------------
--- Exact reuse rather than parallel provenance architecture.
-------------------------------------------------------------------------
-
 dependencyBoundary : Dependency.MemoryRepetitionSourceDependencyConsensusBoundary
 dependencyBoundary = Dependency.canonicalMemoryRepetitionSourceDependencyConsensusBoundary
 
 memoryReplicationBoundary : MemoryReplication.LearningMemoryTraumaReplicationConsensusBoundary
 memoryReplicationBoundary = MemoryReplication.canonicalLearningMemoryTraumaReplicationConsensusBoundary
-
-------------------------------------------------------------------------
--- Regression 1: systematic-review label cannot recover independence quality.
-------------------------------------------------------------------------
 
 data ReviewCase : Set where
   sameReviewLabelIndependentCorpus sameReviewLabelCommonSourceCorpus : ReviewCase
@@ -156,10 +140,6 @@ systematicReviewCannotFactorCorpusIndependence :
 systematicReviewCannotFactorCorpusIndependence =
   INF.witnessRulesOutEveryFlatFactorisation reviewIndependenceDefect
 
-------------------------------------------------------------------------
--- Regression 2: peer-review status cannot recover truth.
-------------------------------------------------------------------------
-
 data PeerReviewCase : Set where
   samePeerReviewedClaimTrue samePeerReviewedClaimFalse : PeerReviewCase
 
@@ -177,14 +157,8 @@ peerReviewTruthDefect : INF.NonFactorabilityWitness peerReviewSurface claimTruth
 peerReviewTruthDefect = INF.nonFactorabilityWitness
   samePeerReviewedClaimTrue samePeerReviewedClaimFalse refl (λ ())
 
-peerReviewCannotFactorTruth :
-  INF.FactorsThrough peerReviewSurface claimTruth → ⊥
-peerReviewCannotFactorTruth =
-  INF.witnessRulesOutEveryFlatFactorisation peerReviewTruthDefect
-
-------------------------------------------------------------------------
--- Regression 3: conflict-of-interest label cannot recover claim truth.
-------------------------------------------------------------------------
+peerReviewCannotFactorTruth : INF.FactorsThrough peerReviewSurface claimTruth → ⊥
+peerReviewCannotFactorTruth = INF.witnessRulesOutEveryFlatFactorisation peerReviewTruthDefect
 
 data ConflictCase : Set where
   sameConflictClaimTrue sameConflictClaimFalse : ConflictCase
@@ -202,20 +176,14 @@ conflictTruthDefect : INF.NonFactorabilityWitness conflictSurface conflictClaimT
 conflictTruthDefect = INF.nonFactorabilityWitness
   sameConflictClaimTrue sameConflictClaimFalse refl (λ ())
 
-conflictOfInterestCannotFactorTruth :
-  INF.FactorsThrough conflictSurface conflictClaimTruth → ⊥
-conflictOfInterestCannotFactorTruth =
-  INF.witnessRulesOutEveryFlatFactorisation conflictTruthDefect
-
-------------------------------------------------------------------------
--- Regression 4: absence of declared conflict cannot recover independence.
-------------------------------------------------------------------------
+conflictOfInterestCannotFactorTruth : INF.FactorsThrough conflictSurface conflictClaimTruth → ⊥
+conflictOfInterestCannotFactorTruth = INF.witnessRulesOutEveryFlatFactorisation conflictTruthDefect
 
 data NoConflictCase : Set where
   noDeclaredConflictIndependent noDeclaredConflictDependent : NoConflictCase
 
 data NoConflictSurface : Set where noDeclaredConflict : NoConflictSurface
-\data IndependenceStatus : Set where independent dependent : IndependenceStatus
+data IndependenceStatus : Set where independent dependent : IndependenceStatus
 
 noConflictSurface : NoConflictCase → NoConflictSurface
 noConflictSurface _ = noDeclaredConflict
@@ -232,10 +200,6 @@ absenceOfDeclaredConflictCannotFactorIndependence :
   INF.FactorsThrough noConflictSurface independenceStatus → ⊥
 absenceOfDeclaredConflictCannotFactorIndependence =
   INF.witnessRulesOutEveryFlatFactorisation noConflictIndependenceDefect
-
-------------------------------------------------------------------------
--- Reverse BIDI constraints back into Ibrahim parent nodes.
-------------------------------------------------------------------------
 
 record EvidenceSynthesisReverseConstraint : Set where
   constructor evidence-synthesis-reverse-constraint
@@ -268,10 +232,6 @@ memoryConstraint = evidence-synthesis-reverse-constraint
   "Memory / learning / social transmission"
   "repetition, common informational origin, retrieval history, social copying and independent acquisition remain distinct"
   false
-
-------------------------------------------------------------------------
--- No-promotion gates.
-------------------------------------------------------------------------
 
 data SystematicReviewCreatesIndependence : Set where
 data PeerReviewCreatesTruth : Set where
@@ -314,8 +274,7 @@ record EvidenceSynthesisPeerReviewIndependenceBoundary : Set where
     presentAxisVocabularyClaimedComplete : Bool
 open EvidenceSynthesisPeerReviewIndependenceBoundary public
 
-canonicalEvidenceSynthesisPeerReviewIndependenceBoundary :
-  EvidenceSynthesisPeerReviewIndependenceBoundary
+canonicalEvidenceSynthesisPeerReviewIndependenceBoundary : EvidenceSynthesisPeerReviewIndependenceBoundary
 canonicalEvidenceSynthesisPeerReviewIndependenceBoundary =
   evidence-synthesis-peer-review-independence-boundary
     true true true true true true true true true true false
