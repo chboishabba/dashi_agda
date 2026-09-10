@@ -100,8 +100,8 @@ rsa260ProjectionSequenceExecution = projection-sequence-execution-receipt
 packedDotReceipt : Dot.PackedGF2ExecutionReceipt
 packedDotReceipt = Dot.rsa260PackedGF2Execution
 
-dna256Boundary : DNA256.RSA260DNA256BlockStructureBoundary
-dna256Boundary = DNA256.canonicalRSA260DNA256BlockStructureBoundary
+dna256Boundary : DNA256.DNA256RSA260RoadmapBoundary
+dna256Boundary = DNA256.currentDNA256RSA260RoadmapBoundary
 
 sparseMatVecBoundary : SpMV.RSA260SparseMatVecRoadmapBoundary
 sparseMatVecBoundary = SpMV.currentRSA260SparseMatVecRoadmapBoundary
@@ -148,7 +148,6 @@ data ProjectionSequenceImpliesMinimalGenerator : Set where
 data MinimalGeneratorImpliesKernelVector : Set where
 data PackedCPUProjectionImpliesCUDA : Set where
 data DNA256BlockShapeImpliesBlockWiedemannAlgebra : Set where
-
 data SameProjectionDigestImpliesSameRun : Set where
 
 smallProjectionDoesNotCreatePublishedGeometry : SmallProjectionImpliesPublishedGeometry → ⊥
