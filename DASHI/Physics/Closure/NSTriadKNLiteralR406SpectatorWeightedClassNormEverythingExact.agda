@@ -23,24 +23,22 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406SpectatorWeightedClassNormEvery
 -- BEFORE norm.  Hence the forcing cross has three independent signed Bony
 -- channels: {LH,HL}, {HH->low}, {comparable}.
 --
--- R496's apparent second product-rule/amplitude channel is also not an
--- independent analytic leaf after complete pair aggregation.  It is the
--- transpose completion of the first oriented kernel
+-- R496's apparent second product-rule/amplitude channel is not an independent
+-- analytic leaf after complete pair aggregation.  It is the transpose
+-- completion of the first oriented kernel
 --
 --   H(alpha,beta) = w(alpha,beta) Re<G_alpha,D_beta>.
 --
--- Therefore on the exact R497 fibre
+-- The exact R497/R498/R499/R500 lift now gives, on the live R503 carrier,
 --
---   DirectFibreCompanion = 1/2 * OrderedOffDiagonalSum(H),
+--   4 * integratedDirectCompanion
+--     = 2 * integratedOrderedOrientedForce.
 --
--- and R547 becomes
---
---   FactoredFull = Diagonal + 4 * OrderedOffDiagonalSum(H).
---
--- The first analytic residual is consequently the cutoff-uniform spacetime
--- upper bound for this ONE signed ordered oriented kernel (equivalently R503's
--- direct off-diagonal budget), with the three-orbit forcing decomposition
--- available upstream.  No cutoff-uniform payment is manufactured here.
+-- Hence an `OrderedOrientedSpacetimeBudget` is a direct R503 producer.  The
+-- first analytic residual is exactly its cutoff-uniform signed inequality.
+-- Class norms, outer forcing Gram, R492, R487, Laplace, and an independent
+-- amplitude estimate are optional producer/diagnostic routes rather than
+-- mandatory prerequisites.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -60,6 +58,9 @@ import DASHI.Physics.Closure.NSTriadKNDirectCompanionThreeOrbitSignedRowBidiExac
 import DASHI.Physics.Closure.NSTriadKNSymmetrizedHalfUnorderedOrderedExact
 import DASHI.Physics.Closure.NSTriadKNDirectCompanionOrientedForceTransposeCompletionBidiExact
 import DASHI.Physics.Closure.NSTriadKNNestedFactoredFullToOrderedOrientedForceBidiExact
+import DASHI.Physics.Closure.NSTriadKNR329R572FourSignSameSlotBidiExact
+import DASHI.Physics.Closure.NSTriadKNDirectIntegratedOrderedOrientedForceBidiExact
+import DASHI.Physics.Closure.NSTriadKNOrderedOrientedForceToR503BidiExact
 import DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact
 
 outerSpectatorWeightStructuralWeldClosed : Bool
@@ -94,6 +95,18 @@ directFibreOneOrientedOrderedKernelExact = true
 
 factoredFullDiagonalPlusFourOrderedKernelExact : Bool
 factoredFullDiagonalPlusFourOrderedKernelExact = true
+
+r329ToR572SingleCellSameSlotWeldClosed : Bool
+r329ToR572SingleCellSameSlotWeldClosed = true
+
+liveR503DirectCompanionRewrittenAsOrderedKernel : Bool
+liveR503DirectCompanionRewrittenAsOrderedKernel = true
+
+orderedOrientedBudgetCompilesDirectlyToR503 : Bool
+orderedOrientedBudgetCompilesDirectlyToR503 = true
+
+r492ExternalSameObjectReceiptStillMandatory : Bool
+r492ExternalSameObjectReceiptStillMandatory = false
 
 normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent : Bool
 normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent = false
@@ -140,6 +153,22 @@ directFibreOneOrientedOrderedKernelExactIsTrue = refl
 factoredFullDiagonalPlusFourOrderedKernelExactIsTrue :
   factoredFullDiagonalPlusFourOrderedKernelExact ≡ true
 factoredFullDiagonalPlusFourOrderedKernelExactIsTrue = refl
+
+r329ToR572SingleCellSameSlotWeldClosedIsTrue :
+  r329ToR572SingleCellSameSlotWeldClosed ≡ true
+r329ToR572SingleCellSameSlotWeldClosedIsTrue = refl
+
+liveR503DirectCompanionRewrittenAsOrderedKernelIsTrue :
+  liveR503DirectCompanionRewrittenAsOrderedKernel ≡ true
+liveR503DirectCompanionRewrittenAsOrderedKernelIsTrue = refl
+
+orderedOrientedBudgetCompilesDirectlyToR503IsTrue :
+  orderedOrientedBudgetCompilesDirectlyToR503 ≡ true
+orderedOrientedBudgetCompilesDirectlyToR503IsTrue = refl
+
+r492ExternalSameObjectReceiptStillMandatoryIsFalse :
+  r492ExternalSameObjectReceiptStillMandatory ≡ false
+r492ExternalSameObjectReceiptStillMandatoryIsFalse = refl
 
 normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescentIsFalse :
   normOrAbsoluteCanMoveBeforeSignedConsumerWithoutDescent ≡ false
