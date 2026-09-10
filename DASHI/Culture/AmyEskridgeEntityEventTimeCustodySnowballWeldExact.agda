@@ -9,6 +9,7 @@ import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as Matrix
 import DASHI.Culture.AmyEskridgeInstituteTeamSECContinuitySnowballWeldExact as Role
 import DASHI.Culture.AmyEskridgePOAMSApplicationCustodySnowballWeldExact as POAMS
 import DASHI.Culture.AmyEskridgeApplicationTransformationExact as App
+import DASHI.Culture.AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact as Discriminator
 
 ------------------------------------------------------------------------
 -- AMY ESKRIDGE MEMORIAL: ENTITY / EVENT-TIME / CUSTODY SNOWBALL WELD
@@ -152,6 +153,126 @@ currentResidualRouter =
   current-residual-router
     true true true true true
     false false false false
+
+------------------------------------------------------------------------
+-- IDENTITY DISCRIMINATOR -> APPLICATION PAYMENT GATE
+--
+-- Every exact same-object discriminator is consumed by the same first
+-- application leaf. A discriminator merely being discovered or retained is not
+-- enough: it must itself be in the paid state and explicitly entitled to
+-- promote exact identity. This turns the earlier descriptive discriminator
+-- ledger into the executable payment seam for the application/custody router.
+------------------------------------------------------------------------
+
+discriminatorTargetsApplicationIdentity :
+  Discriminator.IdentityDiscriminator -> App.AmyApplicationReverseTarget
+discriminatorTargetsApplicationIdentity Discriminator.primaryNASAReleaseIdentifier =
+  App.acquireInstituteDerivedObjectIdentity
+discriminatorTargetsApplicationIdentity Discriminator.exactPaperOrAttachmentTitle =
+  App.acquireInstituteDerivedObjectIdentity
+discriminatorTargetsApplicationIdentity Discriminator.exactAttachmentOrDraftFilename =
+  App.acquireInstituteDerivedObjectIdentity
+discriminatorTargetsApplicationIdentity Discriminator.versionedDraftIdentifier =
+  App.acquireInstituteDerivedObjectIdentity
+discriminatorTargetsApplicationIdentity Discriminator.correspondenceSameObjectStatement =
+  App.acquireInstituteDerivedObjectIdentity
+discriminatorTargetsApplicationIdentity Discriminator.directWitnessCarrierWithObjectIdentifier =
+  App.acquireInstituteDerivedObjectIdentity
+discriminatorTargetsApplicationIdentity Discriminator.instituteDerivativeObjectIdentifier =
+  App.acquireInstituteDerivedObjectIdentity
+discriminatorTargetsApplicationIdentity Discriminator.apparatusOrDatasetIdentityReceipt =
+  App.acquireInstituteDerivedObjectIdentity
+
+record ExactIdentityPaymentReceipt
+  (receipt : Discriminator.IdentityDiscriminatorReceipt) : Set where
+  constructor exact-identity-payment-receipt
+  field
+    discriminatorIsPaid :
+      Discriminator.state receipt ≡ Discriminator.paid
+    discriminatorMayPromoteExactIdentity :
+      Discriminator.mayPromoteExactIdentity receipt ≡ true
+
+open ExactIdentityPaymentReceipt public
+
+identityReceiptPaysApplicationLeaf :
+  {receipt : Discriminator.IdentityDiscriminatorReceipt} ->
+  ExactIdentityPaymentReceipt receipt ->
+  App.AmyApplicationReverseTarget
+identityReceiptPaysApplicationLeaf {receipt} _ =
+  discriminatorTargetsApplicationIdentity (Discriminator.target receipt)
+
+firstDiscriminatorTargetsFirstApplicationLeaf :
+  discriminatorTargetsApplicationIdentity Discriminator.firstExactIdentityDiscriminator
+    ≡ App.firstAmyApplicationMissingLeaf
+firstDiscriminatorTargetsFirstApplicationLeaf = refl
+
+------------------------------------------------------------------------
+-- Current ledger cannot yet construct ExactIdentityPaymentReceipt.
+------------------------------------------------------------------------
+
+currentNASAReleaseDiscriminatorIsUnpaid :
+  Discriminator.state Discriminator.nasaReleaseIdentifierReceipt
+    ≡ Discriminator.unpaid
+currentNASAReleaseDiscriminatorIsUnpaid = refl
+
+currentTitleDiscriminatorIsUnpaid :
+  Discriminator.state Discriminator.exactTitleReceipt
+    ≡ Discriminator.unpaid
+currentTitleDiscriminatorIsUnpaid = refl
+
+currentWitnessIdentifierIsRetainedLeadOnly :
+  Discriminator.state Discriminator.directWitnessIdentifierLead
+    ≡ Discriminator.retainedLead
+currentWitnessIdentifierIsRetainedLeadOnly = refl
+
+currentInstituteDerivativeIdentifierIsUnpaid :
+  Discriminator.state Discriminator.instituteDerivativeIdentifierReceipt
+    ≡ Discriminator.unpaid
+currentInstituteDerivativeIdentifierIsUnpaid = refl
+
+currentApparatusDatasetIdentityIsUnpaid :
+  Discriminator.state Discriminator.apparatusDatasetIdentityReceipt
+    ≡ Discriminator.unpaid
+currentApparatusDatasetIdentityIsUnpaid = refl
+
+------------------------------------------------------------------------
+-- Once exact identity is paid, these already-retained fibres become the
+-- downstream application/custody consumers. This does not assert that any of
+-- them are currently paid, nor impose an artificial total order among them.
+------------------------------------------------------------------------
+
+postIdentityApplicationTargets : List App.AmyApplicationReverseTarget
+postIdentityApplicationTargets =
+  App.acquireApparatusGeometry ∷
+  App.acquireCalibrationProcedure ∷
+  App.acquireRawAndReducedData ∷
+  App.acquireNullAndFailureHistory ∷
+  App.acquireValidationProtocol ∷
+  App.acquireUncertaintyModel ∷
+  App.acquireLabNotebookOrVersionedWorkflow ∷
+  App.acquireSuccessorOrHandover ∷ []
+
+record IdentityPaymentUnlockBoundary : Set where
+  constructor identity-payment-unlock-boundary
+  field
+    retainedLeadAlonePaysIdentity : Bool
+    unpaidDiscriminatorPaysIdentity : Bool
+    exactPaymentReceiptMayDischargeIdentityLeaf : Bool
+    paidIdentityAutomaticallyPaysApparatus : Bool
+    paidIdentityAutomaticallyPaysData : Bool
+    paidIdentityAutomaticallyPaysNotebookRepository : Bool
+    paidIdentityAutomaticallyPaysSuccession : Bool
+    paidIdentityMayUnlockThoseConsumersForOrderedPayment : Bool
+    identityPaymentCreatesDeathCausation : Bool
+
+open IdentityPaymentUnlockBoundary public
+
+canonicalIdentityPaymentUnlockBoundary : IdentityPaymentUnlockBoundary
+canonicalIdentityPaymentUnlockBoundary =
+  identity-payment-unlock-boundary
+    false false true
+    false false false false
+    true false
 
 ------------------------------------------------------------------------
 -- Post-death source targets remain retained in parallel. They can sharpen the
