@@ -90,19 +90,14 @@ padicBoundary = Padic.canonicalPadicLODReasoningBoundary
 hyperfabricBoundary : Hyper.SelfIndexingHyperfabricBoundary
 hyperfabricBoundary = Hyper.canonicalSelfIndexingHyperfabricBoundary
 
-gluingBoundary : Gluing.RSA260FractalPadicHyperfabricBoundary
-gluingBoundary = Gluing.currentRSA260FractalPadicHyperfabricBoundary
+gluingBoundary : Gluing.HierarchicalBatchRoadmapBoundary
+gluingBoundary = Gluing.currentHierarchicalBatchRoadmapBoundary
 
 colouringBatchBoundary : ColouringBatch.NDimBatchReductionBoundary
 colouringBatchBoundary = ColouringBatch.canonicalNDimBatchReductionBoundary
 
 ------------------------------------------------------------------------
 -- Adaptive refinement policy.
---
--- The p-adic/fibre depth is an information budget.  Descend only while a
--- finer child level changes the consumer-relative reducer partition or its
--- compatibility relation.  Tetrational carrier growth is therefore potential
--- recursion capacity, never an instruction to materialise the whole tower.
 ------------------------------------------------------------------------
 
 data RefinementPayment : Set where
