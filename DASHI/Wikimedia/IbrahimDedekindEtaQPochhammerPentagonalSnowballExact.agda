@@ -61,10 +61,6 @@ pentagonalTheoremQid = Identity.mkOptionalIdentityDemand
   Identity.wikidataQid
   (Identity.verified "Q282649" "Wikidata theorem-list identity inspected 2026-09-10")
 
-------------------------------------------------------------------------
--- Typed external/source relations.
-------------------------------------------------------------------------
-
 data EdgeRole : Set where
   namedAfter definingProduct secondaryIdentity theoremRelation sourceAuthority : EdgeRole
 
@@ -110,10 +106,6 @@ apostolAuthority = typed-edge
   "repo-retained authority for the classical Dedekind-eta transformation/Delta analytic route"
   false
 
-------------------------------------------------------------------------
--- Product/nonvanishing frontier.
-------------------------------------------------------------------------
-
 record EtaProductPayment : Set where
   constructor eta-product-payment
   field
@@ -137,10 +129,6 @@ currentEtaProductPayment = eta-product-payment
   false false false false false false
   "pay a concrete upper-half-plane/complex exponential carrier, derive |q|<1, then use an established convergent-infinite-product nonvanishing theorem or source-certified equivalent to obtain eta(tau) != 0; only then transport through eta^24 to Delta"
 
-------------------------------------------------------------------------
--- All-pairs / snowball interpretation.
-------------------------------------------------------------------------
-
 record EtaProductSnowballBoundary : Set where
   constructor eta-product-snowball-boundary
   field
@@ -156,10 +144,6 @@ open EtaProductSnowballBoundary public
 canonicalEtaProductSnowballBoundary : EtaProductSnowballBoundary
 canonicalEtaProductSnowballBoundary = eta-product-snowball-boundary
   true true true false false false true
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
 
 data FiniteFactorsCreateInfiniteNonzero : Set where
 data PochhammerIdentityCreatesEtaAnalyticity : Set where
@@ -178,8 +162,8 @@ nameAttributionDoesNotCreateAuthority ()
 pentagonalDoesNotCreateConvergence : PentagonalIdentityCreatesProductConvergence → ⊥
 pentagonalDoesNotCreateConvergence ()
 
-etaDeltaBoundary : EtaDelta.JAnalyticSafetyBoundary
-etaDeltaBoundary = EtaDelta.canonicalJAnalyticSafetyBoundary
+etaDeltaFrontier : EtaDelta.JAnalyticSafetyFrontier
+etaDeltaFrontier = EtaDelta.currentJAnalyticSafetyFrontier
 
 deltaParityBoundary : DeltaNorm.DeltaAnalyticParityBoundary
 deltaParityBoundary = DeltaNorm.canonicalDeltaAnalyticParityBoundary
