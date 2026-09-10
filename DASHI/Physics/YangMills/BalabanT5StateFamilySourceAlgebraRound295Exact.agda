@@ -15,13 +15,15 @@ module DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact wh
 -- subtraction         = x + (-y) using the exact R278 extension
 --
 -- The generic mixed-log identity first gives the signed connected covariance.
--- Applying the SAME R278 magnitude map then gives the exact finite T5 covariance
--- magnitude consumed by R291/R284.  No positivity/sign identification is used.
+-- Applying the SAME R278 magnitude map gives the exact finite T5 covariance
+-- magnitude.  The historical signed R293 surface is retained only as a weaker
+-- consequence via x <= |x|/magnitude; signed and magnitude are never identified.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -29,6 +31,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
+import DASHI.Physics.YangMills.BalabanCMP116StateFamilyTwoJNormalizationRound293Exact as R293
 import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRound290Exact as R290
 import DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound291Exact as R291
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
@@ -86,6 +89,11 @@ record DirectT5StateFamilyJPresentation
     ConnectingClusterMeetsBothSupports :
       Nat → TestObservable → TestObservable → Set
 
+    -- Standard scalar-order authority for the chosen magnitude realization.
+    -- For rational absolute value this is x <= |x|; it carries no YM content.
+    signedBelowMagnitude : ∀ value → value ≤ R278.magnitude extension value
+
+    -- Single source-facing analytic payment, in the CORRECT magnitude form.
     differentiatedSourceMagnitudeBoundOnSelectedDirections :
       ∀ cutoff left right →
       R278.magnitude extension
@@ -117,6 +125,35 @@ mixedLogMagnitudeIsExactFiniteT5CovarianceMagnitude
     (cong (λ response → response cutoff)
       (Cumulant.literalMixedLogDerivativeIsConnectedCovariance
         (meaning presentation) left right))
+
+asR293StateFamily :
+  ∀ {Measure TestObservable}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet} →
+  (presentation : DirectT5StateFamilyJPresentation dataSet extension) →
+  R293.StateFamilyTwoJSourcePresentation
+    (Scale presentation) (Volume presentation) (Root presentation)
+    Nat TestObservable (SourceDirection presentation)
+asR293StateFamily {extension = extension} presentation = record
+  { R293.StateFamilyTwoJSourcePresentation.algebra =
+      t5FiniteExpectationAlgebra _ extension
+  ; R293.StateFamilyTwoJSourcePresentation.calculus = calculus presentation
+  ; R293.StateFamilyTwoJSourcePresentation.meaning = meaning presentation
+  ; R293.StateFamilyTwoJSourcePresentation.shellData = shellData presentation
+  ; R293.StateFamilyTwoJSourcePresentation.scaleOf = scaleOf presentation
+  ; R293.StateFamilyTwoJSourcePresentation.volumeOf = volumeOf presentation
+  ; R293.StateFamilyTwoJSourcePresentation.physicalDistance = physicalDistance presentation
+  ; R293.StateFamilyTwoJSourcePresentation.connectingRoot = connectingRoot presentation
+  ; R293.StateFamilyTwoJSourcePresentation.differentiatedSourceBoundOnSelectedDirections =
+      λ cutoff left right →
+        ℚP.≤-trans
+          (signedBelowMagnitude presentation
+            (Cumulant.literalMixedSecondLogDerivative (meaning presentation)
+              (Cumulant.sourceDirectionOf (meaning presentation) left)
+              (Cumulant.sourceDirectionOf (meaning presentation) right) cutoff))
+          (differentiatedSourceMagnitudeBoundOnSelectedDirections
+            presentation cutoff left right)
+  }
 
 asR290Presentation :
   ∀ {Measure TestObservable}
@@ -178,6 +215,9 @@ round295LogCovarianceMagnitudeCompilerLevel = machineChecked
 
 round295SourceCovarianceSelectedT5SameObjectLevel : ProofLevel
 round295SourceCovarianceSelectedT5SameObjectLevel = machineChecked
+
+round295SignedCompatibilityFromMagnitudeLevel : ProofLevel
+round295SignedCompatibilityFromMagnitudeLevel = machineChecked
 
 round295LiteralT5JDirectionLocalizationLevel : ProofLevel
 round295LiteralT5JDirectionLocalizationLevel = conditional
