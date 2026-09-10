@@ -8,6 +8,7 @@ import DASHI.Physics.Units.SI as SI
 import DASHI.Physics.ExoticGravity.LiTorrComponentResolvedMassCurrentReverseSearchExact as Source
 import DASHI.Physics.ExoticGravity.LiTorrGeometryAcquisitionBidiExact as Geometry
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGSIMetrologyBridgeExact as SIM
+import DASHI.Physics.ExoticGravity.SuperconductingChargeMassCurrentBidiExact as Current
 
 ------------------------------------------------------------------------
 -- LI-TORR SAME-OBJECT SI VELOCITY / GEOMETRY WELD
@@ -61,7 +62,7 @@ record SIJmEligibilityReceipt : Set where
 open SIJmEligibilityReceipt public
 
 ------------------------------------------------------------------------
--- Cross-weld to the pre-existing geometry frontier.
+-- Cross-weld to the pre-existing geometry and mass-current frontiers.
 ------------------------------------------------------------------------
 
 geometryStillOpenAtSourceShape :
@@ -69,8 +70,7 @@ geometryStillOpenAtSourceShape :
 geometryStillOpenAtSourceShape = refl
 
 velocityRemainsCurrentComponentResidual :
-  Source.currentResidual ≡
-    Source.Current.missingComponentVelocity
+  Source.currentResidual ≡ Current.missingComponentVelocity
 velocityRemainsCurrentComponentResidual = refl
 
 record LiTorrSIVelocityGeometryBoundary : Set where
