@@ -38,7 +38,7 @@ routeOwnerReference : BoundaryGraphRoute → String
 routeOwnerReference speakerResolutionRoute =
   "DASHI.Cognition.PNF.SensibLawTranscriptSpeakerResolutionExact"
 routeOwnerReference reporterQuoteFrameRoute =
-  "DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact.DisourseActCandidate"
+  "DASHI.Cognition.PNF.SensibLawConsumerIndexedDiscourseInterpretationExact.DiscourseActCandidate"
 routeOwnerReference attributionModalWrapperRoute =
   "DASHI.Cognition.PNF.SensibLawAttributionPropositionOccurrenceBidiExact"
 routeOwnerReference transcriptRepairRoute =
