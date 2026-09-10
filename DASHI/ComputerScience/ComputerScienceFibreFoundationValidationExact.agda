@@ -44,6 +44,7 @@ import DASHI.ComputerScience.TriadicFin27Byte256ABIExact
 import DASHI.ComputerScience.TriadicByteABIRoadmapWeldExact
 import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact
 import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact
+import DASHI.ComputerScience.TriadicSupportMaskSWARExecutionExact
 
 import DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact
 import DASHI.ComputerScience.CountdownExecutionPathComplexityExact
