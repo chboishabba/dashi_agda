@@ -4,22 +4,20 @@ module DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302
 ------------------------------------------------------------------------
 -- ROUND302 / ONE TRANSFER-ENERGY <-> DECAY-RATIO COORDINATE PAYS OLD F4+F5
 --
--- R298 still separates
+-- R298 separates
 --
 --   F4: E < m* -> 1/2 < q_E < 1
 --   F5: q=1/2 is the SAME reconstructed candidate energy m*.
 --
--- On a positive transfer semigroup these are not independent semantics.  One
--- order-reversing coordinate E <-> q carries both.  This owner factors that
--- shared physical normalization once and compiles the two historical consumers.
---
--- No logarithm convention or units are invented.  An application may realize
--- q(E)=exp(-aE), q(E)=lambda(E), or another source-native convention, but the
--- exact reconstructed energy/order and decay-ratio carriers must be the same.
+-- On a positive transfer semigroup these are one order-reversing coordinate.
+-- This owner factors that normalization once.  It deliberately does NOT compile
+-- the older overstrong record that demanded q_E<1 for every mode without a
+-- PositiveEnergy premise.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -32,7 +30,6 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanQuantitativePositiveTimeCyclicityRound299Exact as R299
 import DASHI.Physics.YangMills.BalabanCyclicSubgapNonzeroByConstructionRound297Exact as R297
 import DASHI.Physics.YangMills.BalabanPositiveSpectralComponentLowerRound300Exact as R300
-import DASHI.Physics.YangMills.BalabanQuantitativeSubgapSpectralCoreRound301Exact as R301
 import DASHI.Physics.YangMills.BalabanClusteringDecayRatioToGapRound285Exact as R285
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 
@@ -89,87 +86,6 @@ record ModeRatioUsesTransferCoordinate
 
 open ModeRatioUsesTransferCoordinate public
 
-asModeIndexedSubgapRateSemantics :
-  ∀ {Measure TestObservable Energy Vector}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
-    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
-    {tests : R278.SelectedConnectedCovarianceTests dataSet}
-    {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
-    {family : R297.ActualNonzeroSubgapFamily
-      (R299.asPositiveTimeVacuumCyclicity quantitative)}
-    {decomposition : R300.PositiveSpectralComponentDecomposition
-      dataSet extension tests quantitative family}
-    (coordinate : TransferEnergyDecayRatioCoordinate Energy) →
-  ModeRatioUsesTransferCoordinate decomposition coordinate →
-  R301.ModeIndexedSubgapRateSemantics
-    dataSet extension tests quantitative family decomposition
-asModeIndexedSubgapRateSemantics
-    {decomposition = decomposition} coordinate weld = record
-  { R301.ModeIndexedSubgapRateSemantics.gapCandidate = candidateEnergy coordinate
-  ; R301.ModeIndexedSubgapRateSemantics.PositiveEnergy = PositiveEnergy coordinate
-  ; R301.ModeIndexedSubgapRateSemantics.StrictlyBelow = StrictlyBelow coordinate
-  ; R301.ModeIndexedSubgapRateSemantics.positiveSubgapHasSlowerRatio =
-      λ energy mode positive below →
-        let
-          raw = strictEnergyOrderReversesDecayRatio coordinate
-            energy (candidateEnergy coordinate) below
-        in
-        ℚP.subst₂
-          (λ left right → left < right)
-          (ratioOfEnergyOfRatio coordinate Geo.half)
-          (sym (modeRatioIsEnergyRatio weld energy mode))
-          raw
-  ; R301.ModeIndexedSubgapRateSemantics.subgapRatioStrictlyBelowOne =
-      λ energy mode →
-        -- This historical field is unconditional in the old consumer.  A
-        -- physical subgap mode is only used after a PositiveEnergy witness;
-        -- therefore a truly minimal interface should carry positivity in this
-        -- premise.  R302 does not manufacture it.  The direct positive-mode
-        -- compiler below avoids this overstrong historical field.
-        subgapRatioBelowOneForMode coordinate weld energy mode
-  }
-  where
-  subgapRatioBelowOneForMode :
-    ∀ {Measure TestObservable Energy Vector}
-      {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
-      {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
-      {tests : R278.SelectedConnectedCovarianceTests dataSet}
-      {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
-      {family : R297.ActualNonzeroSubgapFamily
-        (R299.asPositiveTimeVacuumCyclicity quantitative)}
-      {d : R300.PositiveSpectralComponentDecomposition
-        dataSet extension tests quantitative family}
-      (c : TransferEnergyDecayRatioCoordinate Energy) →
-      ModeRatioUsesTransferCoordinate d c →
-      (energy : Energy) → (mode : R297.SubgapMode family energy) →
-      R300.subgapRatio d energy mode < 1ℚ
-  subgapRatioBelowOneForMode c w energy mode =
-    -- Deliberately impossible to derive without PositiveEnergy energy.  This
-    -- helper exposes the overstrong old field and must not be used as a closure
-    -- route.  The file is immediately recut below to the positive-mode consumer.
-    subgapRatioBelowOneForMode c w energy mode
-
-------------------------------------------------------------------------
--- Minimal positive-mode semantics, with positivity at the exact point of use.
-------------------------------------------------------------------------
-
-record PositiveModeTransferRateSemantics
-    {Measure TestObservable Energy Vector : Set}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
-    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
-    {tests : R278.SelectedConnectedCovarianceTests dataSet}
-    {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
-    {family : R297.ActualNonzeroSubgapFamily
-      (R299.asPositiveTimeVacuumCyclicity quantitative)}
-    (decomposition : R300.PositiveSpectralComponentDecomposition
-      dataSet extension tests quantitative family)
-    (coordinate : TransferEnergyDecayRatioCoordinate Energy) : Set₁ where
-  field
-    modeRatioUsesCoordinate :
-      ModeRatioUsesTransferCoordinate decomposition coordinate
-
-open PositiveModeTransferRateSemantics public
-
 positiveSubgapRatioBounds :
   ∀ {Measure TestObservable Energy Vector}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
@@ -181,16 +97,15 @@ positiveSubgapRatioBounds :
     {decomposition : R300.PositiveSpectralComponentDecomposition
       dataSet extension tests quantitative family}
     {coordinate : TransferEnergyDecayRatioCoordinate Energy}
-    (semantics : PositiveModeTransferRateSemantics decomposition coordinate)
+    (weld : ModeRatioUsesTransferCoordinate decomposition coordinate)
     energy (mode : R297.SubgapMode family energy) →
   PositiveEnergy coordinate energy →
   StrictlyBelow coordinate energy (candidateEnergy coordinate) →
   (Geo.half < R300.subgapRatio decomposition energy mode)
   × (R300.subgapRatio decomposition energy mode < 1ℚ)
 positiveSubgapRatioBounds {decomposition = decomposition} {coordinate = coordinate}
-    semantics energy mode positive below =
+    weld energy mode positive below =
   let
-    weld = modeRatioUsesCoordinate semantics
     slowerRaw = strictEnergyOrderReversesDecayRatio coordinate
       energy (candidateEnergy coordinate) below
     slower = ℚP.subst₂
@@ -235,7 +150,8 @@ asDecayRatioGapIdentification {spectrum = spectrum} coordinate weld = record
       λ ratio nonnegative belowOne →
         subst
           (λ proposition → proposition)
-          (sym (positiveEnergyIsCoordinatePositive weld (energyOfRatio coordinate ratio)))
+          (sym (positiveEnergyIsCoordinatePositive weld
+            (energyOfRatio coordinate ratio)))
           (strictRatioMapsToPositiveEnergy coordinate ratio nonnegative belowOne)
   ; R285.DecayRatioGapIdentification.gapCandidateIsDecayEnergy =
       gapCandidateIsCoordinateCandidate weld
