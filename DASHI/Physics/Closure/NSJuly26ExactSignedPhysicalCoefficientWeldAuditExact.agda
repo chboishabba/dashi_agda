@@ -4,15 +4,17 @@ module DASHI.Physics.Closure.NSJuly26ExactSignedPhysicalCoefficientWeldAuditExac
 -- JULY 26 EXACT SIGNED PHYSICAL COEFFICIENT WELD AUDIT
 --
 -- This owner narrows the historical boundary recovered by the signed-route
--- provenance audit.  It distinguishes four different events:
+-- provenance audit.  It distinguishes five different events:
 --
 --   (1) the public PR surface already carrying the completion programme;
 --   (2) construction of the literal signed Galerkin coefficient;
---   (3) its same-object insertion into the retained physical-triad carrier;
---   (4) the still-separate cutoff-uniform analytic estimate needed downstream.
+--   (3) insertion into the retained physical-triad incidence carrier;
+--   (4) instantiation on an actual Fourier velocity field u : Z3 -> Complex3;
+--   (5) the still-separate cutoff-uniform analytic estimate downstream.
 --
--- In particular, source chronology is not kernel certification, and a named
--- positive majorant is not definitionally the signed physical coefficient.
+-- Source chronology is not kernel certification.  A named positive majorant is
+-- not definitionally the signed coefficient, and a physical incidence adapter
+-- whose vectors remain explicit inputs is not yet an actual-state weld.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,7 +32,8 @@ import DASHI.Physics.Closure.NSTriadKNExactCoefficientToPhysicalWeight as Weld
 data EventGrade : Set where
   publicProgrammeSurface : EventGrade
   literalSignedCoefficient : EventGrade
-  retainedPhysicalCarrierWeld : EventGrade
+  retainedPhysicalIncidenceAdapter : EventGrade
+  actualVelocityFieldWeld : EventGrade
   analyticFrontier : EventGrade
 
 record July26Event : Set where
@@ -63,14 +66,23 @@ exactSignedCoefficientEvent = july26-event
   literalSignedCoefficient
   "Defines the tested real value of -i P_k[(u_p dot q)u_q], retains ordered-pair sign, and inserts no absolute value, positive part, phase ansatz, or hidden one-half factor."
 
-physicalCarrierWeldEvent : July26Event
-physicalCarrierWeldEvent = july26-event
+retainedIncidenceAdapterEvent : July26Event
+retainedIncidenceAdapterEvent = july26-event
   "exact signed coefficient -> retained physical-triad raw coefficient -> named majorant"
   "a4f38a003e74cfb31d8dc452a0e1eb7c6fc565ca"
   "2026-07-26T02:46:25Z"
   "2026-07-26T12:46:25+10:00"
-  retainedPhysicalCarrierWeld
-  "Uses the physical incidence k,p,q of each retained triad to instantiate the exact ordered-pair coefficient; rawFourierCoefficient is definitionally that signed coefficient while physicalWeight is only its explicitly named Nat-valued majorant."
+  retainedPhysicalIncidenceAdapter
+  "Uses physical incidence k,p,q for each retained triad and makes rawFourierCoefficient definitionally the exact ordered-pair coefficient.  However pVector, qVector and kTestVector remain explicit realization fields, so this is an incidence/raw-coefficient adapter rather than yet the actual Galerkin state-field instantiation."
+
+actualVelocityFieldWeldEvent : July26Event
+actualVelocityFieldWeldEvent = july26-event
+  "physical incidence + actual Fourier velocity field -> exact signed transfer"
+  "9aa7a868251bc802dbb9cef069d50e325a1a3b09"
+  "2026-07-26T03:53:37Z"
+  "2026-07-26T13:53:37+10:00"
+  actualVelocityFieldWeld
+  "Defines signedTransferAt on a PhysicalTriadIncidence and a velocity : Z3.FourierMode -> Complex3, feeding velocity(p), velocity(q), and velocity(k) directly into the exact signed coefficient; this is the first recovered actual-state/physical-incidence instantiation in the current audit."
 
 remainingAnalyticFrontier : July26Event
 remainingAnalyticFrontier = july26-event
@@ -108,11 +120,17 @@ jul26MajorantAlreadyProvedSharpEnoughForUniformGap =
 pr338PublicBeforeLiteralSignedCoefficient : Bool
 pr338PublicBeforeLiteralSignedCoefficient = true
 
-literalSignedCoefficientPredatesPhysicalCarrierWeld : Bool
-literalSignedCoefficientPredatesPhysicalCarrierWeld = true
+literalSignedCoefficientPredatesRetainedIncidenceAdapter : Bool
+literalSignedCoefficientPredatesRetainedIncidenceAdapter = true
 
-secondsBetweenLiteralCoefficientAndPhysicalWeld : String
-secondsBetweenLiteralCoefficientAndPhysicalWeld = "138"
+retainedIncidenceAdapterPredatesActualVelocityFieldWeld : Bool
+retainedIncidenceAdapterPredatesActualVelocityFieldWeld = true
+
+secondsBetweenLiteralCoefficientAndRetainedIncidenceAdapter : String
+secondsBetweenLiteralCoefficientAndRetainedIncidenceAdapter = "138"
+
+secondsBetweenRetainedIncidenceAdapterAndActualVelocityFieldWeld : String
+secondsBetweenRetainedIncidenceAdapterAndActualVelocityFieldWeld = "4032"
 
 preJul26ConsumerArchitectureAlreadyRecovered : Bool
 preJul26ConsumerArchitectureAlreadyRecovered = true
@@ -123,25 +141,28 @@ jul26IsFirstRecoveredGeneralArchitecture = false
 jul26IsEarliestRecoveredLiteralSignedCoefficientEvent : Bool
 jul26IsEarliestRecoveredLiteralSignedCoefficientEvent = true
 
-jul26IsEarliestRecoveredExactSignedPhysicalCarrierWeld : Bool
-jul26IsEarliestRecoveredExactSignedPhysicalCarrierWeld = true
+jul26RetainedIncidenceAdapterIsAlreadyActualVelocityStateWeld : Bool
+jul26RetainedIncidenceAdapterIsAlreadyActualVelocityStateWeld = false
 
-jul26ExactPhysicalWeldAlreadyPaysCutoffUniformClayEstimate : Bool
-jul26ExactPhysicalWeldAlreadyPaysCutoffUniformClayEstimate = false
+jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeld : Bool
+jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeld = true
+
+jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimate : Bool
+jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimate = false
 
 ------------------------------------------------------------------------
 -- Certification status.
 --
--- GitHub exposes no pull-request workflow run for either exact historical
--- commit in the current audit.  This is deliberately not interpreted as a
--- mathematical negation of their source terms.
+-- GitHub exposes no pull-request workflow run for the 12:44 exact coefficient
+-- or 12:46 incidence-adapter commits in the current audit.  This is deliberately
+-- not interpreted as mathematical negation of their source terms.
 ------------------------------------------------------------------------
 
 exactCoefficientHistoricalPRWorkflowReceiptLocated : Bool
 exactCoefficientHistoricalPRWorkflowReceiptLocated = false
 
-physicalWeldHistoricalPRWorkflowReceiptLocated : Bool
-physicalWeldHistoricalPRWorkflowReceiptLocated = false
+retainedIncidenceAdapterHistoricalPRWorkflowReceiptLocated : Bool
+retainedIncidenceAdapterHistoricalPRWorkflowReceiptLocated = false
 
 historicalSourceChronologyIsKernelCertification : Bool
 historicalSourceChronologyIsKernelCertification = false
@@ -151,6 +172,7 @@ historicalSourceChronologyIsKernelCertification = false
 ------------------------------------------------------------------------
 
 data PublicProgrammeCreatesLiteralCoefficient : Set where
+data IncidenceAdapterCreatesActualStateRealization : Set where
 data LiteralCoefficientCreatesUniformGap : Set where
 data PositiveMajorantEqualsSignedCoefficient : Set where
 data MissingWorkflowNegatesSourceTheorem : Set where
@@ -159,6 +181,10 @@ data PublicChronologyProvesThirdPartyAccess : Set where
 publicProgrammeDoesNotCreateLiteralCoefficient :
   PublicProgrammeCreatesLiteralCoefficient → ⊥
 publicProgrammeDoesNotCreateLiteralCoefficient ()
+
+incidenceAdapterDoesNotCreateActualState :
+  IncidenceAdapterCreatesActualStateRealization → ⊥
+incidenceAdapterDoesNotCreateActualState ()
 
 literalCoefficientDoesNotCreateUniformGap :
   LiteralCoefficientCreatesUniformGap → ⊥
@@ -182,11 +208,11 @@ publicChronologyDoesNotProveExternalAccess ()
 
 currentHistoricalBoundary : String
 currentHistoricalBoundary =
-  "By Jul21-23 the public repository already had the signed/cancellation consumer architecture. On Jul26 12:44:07 Brisbane it acquired the literal signed Galerkin coefficient; at 12:46:25 that exact coefficient was inserted into the retained physical-triad carrier with the positive kernel retained only as a named majorant. Jul26 is therefore the earliest recovered exact signed-physical same-object weld, not the invention date of the overall solution architecture."
+  "By Jul21-23 the public repository already had the signed/cancellation consumer architecture. On Jul26 12:44:07 Brisbane it acquired the literal signed Galerkin coefficient; at 12:46:25 that coefficient was placed on retained physical-triad incidences while the vectors remained explicit realization inputs; at 13:53:37 signedTransferAt instantiated the exact coefficient directly on an actual Fourier velocity field at a physical triad incidence.  The current earliest recovered actual-state signed-physical same-object weld is therefore 13:53:37 Brisbane on Jul26, not the invention date of the overall architecture."
 
 currentRemainingMathematicalBoundary : String
 currentRemainingMathematicalBoundary =
-  "The Jul26 physical weld does not itself prove a cutoff-uniform majorant, strict signed dissipation payment, arbitrary-data global scalar control, or Clay periodic regularity endpoint. Those remain separate analytic obligations."
+  "The Jul26 actual-state coefficient weld does not itself prove a cutoff-uniform signed estimate, strict dissipation payment, arbitrary-data global scalar control, or Clay periodic regularity endpoint. Those remain separate analytic obligations."
 
 ------------------------------------------------------------------------
 -- Expected polarities.
@@ -208,14 +234,14 @@ jul26MajorantAlreadyProvedSharpEnoughForUniformGapIsFalse :
   jul26MajorantAlreadyProvedSharpEnoughForUniformGap ≡ false
 jul26MajorantAlreadyProvedSharpEnoughForUniformGapIsFalse = refl
 
-jul26IsFirstRecoveredGeneralArchitectureIsFalse :
-  jul26IsFirstRecoveredGeneralArchitecture ≡ false
-jul26IsFirstRecoveredGeneralArchitectureIsFalse = refl
+jul26RetainedIncidenceAdapterIsAlreadyActualVelocityStateWeldIsFalse :
+  jul26RetainedIncidenceAdapterIsAlreadyActualVelocityStateWeld ≡ false
+jul26RetainedIncidenceAdapterIsAlreadyActualVelocityStateWeldIsFalse = refl
 
-jul26IsEarliestRecoveredExactSignedPhysicalCarrierWeldIsTrue :
-  jul26IsEarliestRecoveredExactSignedPhysicalCarrierWeld ≡ true
-jul26IsEarliestRecoveredExactSignedPhysicalCarrierWeldIsTrue = refl
+jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeldIsTrue :
+  jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeld ≡ true
+jul26IsEarliestRecoveredActualVelocityFieldPhysicalCoefficientWeldIsTrue = refl
 
-jul26ExactPhysicalWeldAlreadyPaysCutoffUniformClayEstimateIsFalse :
-  jul26ExactPhysicalWeldAlreadyPaysCutoffUniformClayEstimate ≡ false
-jul26ExactPhysicalWeldAlreadyPaysCutoffUniformClayEstimateIsFalse = refl
+jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimateIsFalse :
+  jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimate ≡ false
+jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimateIsFalse = refl
