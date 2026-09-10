@@ -326,3 +326,211 @@ aug11LiteralGlobalOutputFiberPartitionRecoveredIsTrue = refl
 jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimateIsFalse :
   jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimate ≡ false
 jul26ActualVelocityFieldWeldAlreadyPaysCutoffUniformClayEstimateIsFalse = refl
+
+------------------------------------------------------------------------
+-- Oldest-forward signed numerical-range / absorption alias migration.
+--
+-- This continuation answers the next provenance question without pretending
+-- that a downstream compiler is the missing physical theorem.  The Jul26
+-- physical same-object weld is already closed above.  The remaining historical
+-- object is the cutoff-uniform signed production / Gram / heat-cross estimate
+-- that can be absorbed by dissipation.
+------------------------------------------------------------------------
+
+round104SignedProductionCompilerCommit : String
+round104SignedProductionCompilerCommit =
+  "6c0e003012d49bf6ad0ea2b96e1533e8c51127db"
+
+round104SignedProductionCompilerUTC : String
+round104SignedProductionCompilerUTC = "2026-08-20T06:30:32Z"
+
+round104SignedProductionCompilerBrisbane : String
+round104SignedProductionCompilerBrisbane = "2026-08-20T16:30:32+10:00"
+
+round104SeparatePRSurfaceRecovered : Bool
+round104SeparatePRSurfaceRecovered = false
+
+round104CompilerAlreadyUsesSignedProductionBeforeOwnerAbsoluteValues : Bool
+round104CompilerAlreadyUsesSignedProductionBeforeOwnerAbsoluteValues = true
+
+round104CompilerProvesAbsorptionAlgebraFromSuppliedSignedEstimate : Bool
+round104CompilerProvesAbsorptionAlgebraFromSuppliedSignedEstimate = true
+
+round104ConstructsPhysicalCutoffUniformSignedProductionFamily : Bool
+round104ConstructsPhysicalCutoffUniformSignedProductionFamily = false
+
+round185SignedGramCompilerCommit : String
+round185SignedGramCompilerCommit =
+  "c028ef006c79f300ae5edd60c787c84ac5b1aaff"
+
+round185SignedGramCompilerUTC : String
+round185SignedGramCompilerUTC = "2026-08-29T02:08:25Z"
+
+round185SignedGramCompilerBrisbane : String
+round185SignedGramCompilerBrisbane = "2026-08-29T12:08:25+10:00"
+
+round185PublicPR : String
+round185PublicPR = "PR #627"
+
+round185PublicPROpenedUTC : String
+round185PublicPROpenedUTC = "2026-08-27T13:54:06Z"
+
+round185PublicPRMergedUTC : String
+round185PublicPRMergedUTC = "2026-08-29T04:15:40Z"
+
+round185CrossClassGramSignNeeded : Bool
+round185CrossClassGramSignNeeded = false
+
+round185WithinClassPhysicalGramPaymentsStillInputs : Bool
+round185WithinClassPhysicalGramPaymentsStillInputs = true
+
+round373SignedBypassCommit : String
+round373SignedBypassCommit =
+  "0001e2dce57b9c988532c24dc33af30d3567ecba"
+
+round373SignedBypassUTC : String
+round373SignedBypassUTC = "2026-08-31T15:54:53Z"
+
+round373SignedBypassBrisbane : String
+round373SignedBypassBrisbane = "2026-09-01T01:54:53+10:00"
+
+round373PublicPR : String
+round373PublicPR = "PR #673"
+
+round373PublicPROpenedUTC : String
+round373PublicPROpenedUTC = "2026-08-31T09:45:46Z"
+
+round373PublicPRMergedUTC : String
+round373PublicPRMergedUTC = "2026-09-01T05:03:38Z"
+
+round373NonnegativeCoherentMajorantRequiredBySignedRoute : Bool
+round373NonnegativeCoherentMajorantRequiredBySignedRoute = false
+
+round373SignedIntegratedGramRouteReachesPhysicalPackageAConsumer : Bool
+round373SignedIntegratedGramRouteReachesPhysicalPackageAConsumer = true
+
+round375PhysicalSignedGramCommit : String
+round375PhysicalSignedGramCommit =
+  "6fe15ef99abe96740fa4995900f165f1e2c226a9"
+
+round375PhysicalSignedGramUTC : String
+round375PhysicalSignedGramUTC = "2026-08-31T16:02:08Z"
+
+round375PhysicalSignedGramBrisbane : String
+round375PhysicalSignedGramBrisbane = "2026-09-01T02:02:08+10:00"
+
+round375PublicPR : String
+round375PublicPR = "PR #673"
+
+round375CompanionDefinitionallyPhysical : Bool
+round375CompanionDefinitionallyPhysical = true
+
+round375IntegrationDefinitionallyPhysical : Bool
+round375IntegrationDefinitionallyPhysical = true
+
+round375StillRequiresUniformSignedGramFluxPaymentInput : Bool
+round375StillRequiresUniformSignedGramFluxPaymentInput = true
+
+round379LiteralGlobalGramCommit : String
+round379LiteralGlobalGramCommit =
+  "3b9484614be1b61e67ed43b10ca3eb74f8d177e7"
+
+round379LiteralGlobalGramUTC : String
+round379LiteralGlobalGramUTC = "2026-08-31T16:10:34Z"
+
+round379LiteralGlobalGramBrisbane : String
+round379LiteralGlobalGramBrisbane = "2026-09-01T02:10:34+10:00"
+
+round379GramDebtIsLiteralPhysicalGlobalDebt : Bool
+round379GramDebtIsLiteralPhysicalGlobalDebt = true
+
+round379CallerMayChooseDifferentGramDebt : Bool
+round379CallerMayChooseDifferentGramDebt = false
+
+round379OnlyCellMassAndIntegratedSignedFluxPaymentsRemain : Bool
+round379OnlyCellMassAndIntegratedSignedFluxPaymentsRemain = true
+
+round415SignedHeatCrossCommit : String
+round415SignedHeatCrossCommit =
+  "f0b604ee450f394c4aa9fbfa191634923698c4cf"
+
+round415SignedHeatCrossUTC : String
+round415SignedHeatCrossUTC = "2026-09-01T06:37:42Z"
+
+round415SignedHeatCrossBrisbane : String
+round415SignedHeatCrossBrisbane = "2026-09-01T16:37:42+10:00"
+
+round415PreservesPreNormSignedAggregateCross : Bool
+round415PreservesPreNormSignedAggregateCross = true
+
+round415FinalWienerMajorizationRequired : Bool
+round415FinalWienerMajorizationRequired = false
+
+round415SameObjectR299R406EqualityRequired : Bool
+round415SameObjectR299R406EqualityRequired = true
+
+round415CutoffUniformSignedCrossEstimateStillNovelLeaf : Bool
+round415CutoffUniformSignedCrossEstimateStillNovelLeaf = true
+
+signedAbsorptionAliasMigrationRecovered : Bool
+signedAbsorptionAliasMigrationRecovered = true
+
+firstRecoveredPostJul26CompilerIsPhysicalPayment : Bool
+firstRecoveredPostJul26CompilerIsPhysicalPayment = false
+
+currentSignedAbsorptionLineage : String
+currentSignedAbsorptionLineage =
+  "Jul26 closes the literal signed physical coefficient, actual-state cancellation, and physical-RHS/Galerkin-nonlinearity equality. Round104 later states the correct complete signed H^(1/2) production absorption algebra before per-owner absolute values, but explicitly leaves construction of the physical cutoff-uniform signed-production family open. Round185 exposes the finite signed-Gram obstruction while retaining the three within-class physical debt payments as inputs. Round373 proves that the old nonnegative coherent-majorant route is not required by the signed integrated route. Round375 makes the companion and time integration definitionally physical, and Round379 fixes the Gram debt to the literal physical global debt, leaving only the cell-mass and integrated signed-flux payments. R415 then preserves the pre-norm signed heat cross all the way to the literal R406 consumer and isolates the cutoff-uniform signed-cross estimate as the remaining novel leaf."
+
+currentHistoricalSignedEstimateBoundary : String
+currentHistoricalSignedEstimateBoundary =
+  "The historical numerical-range/absorption object is therefore not one theorem first appearing under UniformSignedSpectralGap. It migrates through complete signed critical production, signed Gram debt, physical Package A, and signed heat-cross / quadratic-companion vocabulary. The source repeatedly has the correct consumers and exact same-object physical carriers, while the cutoff-uniform signed payment itself remains the hard analytic producer."
+
+------------------------------------------------------------------------
+-- Additional non-inference firewalls for the alias migration.
+------------------------------------------------------------------------
+
+data CompilerCreatesPhysicalSignedPayment : Set where
+data PhysicalCarrierCreatesUniformSignedBound : Set where
+data SignedBypassCreatesMissingFluxEstimate : Set where
+data SameObjectEqualityCreatesAnalyticBound : Set where
+
+compilerDoesNotCreatePhysicalSignedPayment :
+  CompilerCreatesPhysicalSignedPayment → ⊥
+compilerDoesNotCreatePhysicalSignedPayment ()
+
+physicalCarrierDoesNotCreateUniformSignedBound :
+  PhysicalCarrierCreatesUniformSignedBound → ⊥
+physicalCarrierDoesNotCreateUniformSignedBound ()
+
+signedBypassDoesNotCreateMissingFluxEstimate :
+  SignedBypassCreatesMissingFluxEstimate → ⊥
+signedBypassDoesNotCreateMissingFluxEstimate ()
+
+sameObjectEqualityDoesNotCreateAnalyticBound :
+  SameObjectEqualityCreatesAnalyticBound → ⊥
+sameObjectEqualityDoesNotCreateAnalyticBound ()
+
+round104ConstructsPhysicalCutoffUniformSignedProductionFamilyIsFalse :
+  round104ConstructsPhysicalCutoffUniformSignedProductionFamily ≡ false
+round104ConstructsPhysicalCutoffUniformSignedProductionFamilyIsFalse = refl
+
+round373NonnegativeCoherentMajorantRequiredBySignedRouteIsFalse :
+  round373NonnegativeCoherentMajorantRequiredBySignedRoute ≡ false
+round373NonnegativeCoherentMajorantRequiredBySignedRouteIsFalse = refl
+
+round375CompanionDefinitionallyPhysicalIsTrue :
+  round375CompanionDefinitionallyPhysical ≡ true
+round375CompanionDefinitionallyPhysicalIsTrue = refl
+
+round379GramDebtIsLiteralPhysicalGlobalDebtIsTrue :
+  round379GramDebtIsLiteralPhysicalGlobalDebt ≡ true
+round379GramDebtIsLiteralPhysicalGlobalDebtIsTrue = refl
+
+round415FinalWienerMajorizationRequiredIsFalse :
+  round415FinalWienerMajorizationRequired ≡ false
+round415FinalWienerMajorizationRequiredIsFalse = refl
+
+round415CutoffUniformSignedCrossEstimateStillNovelLeafIsTrue :
+  round415CutoffUniformSignedCrossEstimateStillNovelLeaf ≡ true
+round415CutoffUniformSignedCrossEstimateStillNovelLeafIsTrue = refl
