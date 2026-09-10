@@ -117,7 +117,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let all = ["speaker", "quote", "nesting", "asr", "rhetorical"];
         let residual_fibres = all
             .iter()
-            .filter(|name| !front.iter().any(|f| f.as_str() == *name))
+            .filter(|name| !front.iter().any(|f| f == *name))
             .copied()
             .collect::<Vec<_>>()
             .join(",");
