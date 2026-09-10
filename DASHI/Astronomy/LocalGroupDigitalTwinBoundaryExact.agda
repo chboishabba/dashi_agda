@@ -9,6 +9,11 @@ open import Agda.Builtin.String using (String)
 -- time-indexed Local Group digital twin.
 ------------------------------------------------------------------------
 
+infixr 6 _&&_
+_&&_ : Bool → Bool → Bool
+true && b = b
+false && _ = false
+
 data TwinObligation : Set where
   stateVector : TwinObligation
   evolutionLaw : TwinObligation
@@ -62,6 +67,8 @@ record TwinPromotionReceipt : Set where
     updatePaid : Bool
     assimilationPaid : Bool
     validationPaid : Bool
+
+open TwinPromotionReceipt public
 
 validatedTwin : TwinPromotionReceipt → Bool
 validatedTwin r =
