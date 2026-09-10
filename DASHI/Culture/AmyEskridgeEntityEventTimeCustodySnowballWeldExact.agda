@@ -8,12 +8,13 @@ import DASHI.Culture.AmyEskridgeInstitutePostDeathContinuityExact as PostDeath
 import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as Matrix
 import DASHI.Culture.AmyEskridgeInstituteTeamSECContinuitySnowballWeldExact as Role
 import DASHI.Culture.AmyEskridgePOAMSApplicationCustodySnowballWeldExact as POAMS
+import DASHI.Culture.AmyEskridgeApplicationTransformationExact as App
 
 ------------------------------------------------------------------------
 -- AMY ESKRIDGE MEMORIAL: ENTITY / EVENT-TIME / CUSTODY SNOWBALL WELD
 --
 -- Existing owners already establish a multi-year Institute entity surface and
--- a post-death corporate-entity surface.  This adapter composes those receipts
+-- a post-death corporate-entity surface. This adapter composes those receipts
 -- with the comparative custody/event-time matrix without promoting corporate
 -- continuity into technical-carrier continuity.
 ------------------------------------------------------------------------
@@ -80,15 +81,7 @@ canonicalEntityEventTimeCustodyBoundary =
     true true false false false false false false false
 
 ------------------------------------------------------------------------
--- Current composed reading:
---
---  * Institute corporate/entity continuity is source-backed across 2019-2021;
---  * a post-death Institute entity surface is retained;
---  * Amy's person/institutional continuity is paid through 2019;
---  * event-time technical role remains partial;
---  * physical/digital custody and same-carrier succession remain unlocated;
---  * exact Institute derivative identity remains the first application-carrier
---    identity leaf before custody/succession can be promoted.
+-- Current composed reading.
 ------------------------------------------------------------------------
 
 record CurrentEntityEventTimeCustodyFrontier : Set where
@@ -110,6 +103,61 @@ currentEntityEventTimeCustodyFrontier : CurrentEntityEventTimeCustodyFrontier
 currentEntityEventTimeCustodyFrontier =
   current-entity-event-time-custody-frontier
     true true true false false false false false false
+
+------------------------------------------------------------------------
+-- ORDERED PAYMENT / OUT-OF-ORDER ACQUISITION ROUTER
+--
+-- The repo may already contain later custody, archive or succession evidence.
+-- Snowball acquisition permits retaining it immediately, but the application
+-- consumer still pays the first unpaid dependency first. For the current Amy
+-- application transformation that leaf is exact Institute derivative identity.
+------------------------------------------------------------------------
+
+firstApplicationCarrierLeafIsExactDerivativeIdentity :
+  App.firstAmyApplicationMissingLeaf ≡ App.acquireInstituteDerivedObjectIdentity
+firstApplicationCarrierLeafIsExactDerivativeIdentity = refl
+
+firstApplicationCarrierTarget : App.AmyApplicationReverseTarget
+firstApplicationCarrierTarget = App.acquireInstituteDerivedObjectIdentity
+
+applicationApparatusTarget : App.AmyApplicationReverseTarget
+applicationApparatusTarget = App.acquireApparatusGeometry
+
+applicationDataTarget : App.AmyApplicationReverseTarget
+applicationDataTarget = App.acquireRawAndReducedData
+
+applicationNotebookWorkflowTarget : App.AmyApplicationReverseTarget
+applicationNotebookWorkflowTarget = App.acquireLabNotebookOrVersionedWorkflow
+
+applicationSuccessorTarget : App.AmyApplicationReverseTarget
+applicationSuccessorTarget = App.acquireSuccessorOrHandover
+
+record CurrentResidualRouter : Set where
+  constructor current-residual-router
+  field
+    exactDerivativeIdentityIsFirstUnpaid : Bool
+    laterApparatusEvidenceMayBeRetained : Bool
+    laterDataEvidenceMayBeRetained : Bool
+    laterNotebookRepositoryEvidenceMayBeRetained : Bool
+    laterSuccessorEvidenceMayBeRetained : Bool
+    laterCarrierEvidenceMaySkipExactIdentity : Bool
+    entityContinuityMayManufactureExactIdentity : Bool
+    postDeathEntitySurfaceMayManufactureExactIdentity : Bool
+    retainedLaterEvidenceAutomaticallyPaysIdentity : Bool
+
+open CurrentResidualRouter public
+
+currentResidualRouter : CurrentResidualRouter
+currentResidualRouter =
+  current-residual-router
+    true true true true true
+    false false false false
+
+------------------------------------------------------------------------
+-- Post-death source targets remain retained in parallel. They can sharpen the
+-- graph before exact application identity closes, but cannot silently leapfrog
+-- the identity dependency for same-carrier custody/succession conclusions.
+------------------------------------------------------------------------
 
 postDeathOfficersTarget : PostDeath.InstitutePostDeathReverseTarget
 postDeathOfficersTarget = PostDeath.acquirePostDeathOfficers
