@@ -94,41 +94,23 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13PreferredR171AlignedPrintedSour
 -- Newest canonical status surface for the source-correct preferred route.
 import DASHI.Physics.YangMills.BalabanCMP98Path13CurrentPreferredSourceFrontierExact
 
--- Finite P33 M7 precursor: H_P = P M P has projector-image invariant domain,
--- literal matrix representation and symmetry transport on the exact rational
--- 3072-coordinate carrier. This is not continuum self-adjointness.
+-- Finite P33 M7 precursor.
 import DASHI.Physics.YangMills.BalabanP33ProjectedHamiltonianDomainExact
 
--- Preferred M7 operator route: Kato closed semibounded form representation.
+-- Preferred M7 operator route.
 import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact
 
--- Least-privilege T5 continuum/OS/gap boundary. Reconstructed theory and
--- physical interlacing are derived from their producer maps; historical
--- agreement equalities are refl rather than independent physical payments.
+-- T5 continuum routes.
 import DASHI.Physics.YangMills.BalabanClayT5PreferredContinuumOSGapExact
-
--- Preferred T5 OS-Gram construction fixes the measure sequence and continuum
--- candidate from the expectation producer, eliminating a post-hoc identity leaf.
 import DASHI.Physics.YangMills.BalabanClayT5PreferredOSGramFromExpectationExact
-
--- Quantitative T5 -> broad continuum closure compiler. The finite diagonal
--- measure sequence, continuum candidate and complete Gram carrier are reused
--- from the mature quantitative package; only analytic closure laws survive.
 import DASHI.Physics.YangMills.BalabanClayT5QuantitativeContinuumClosureCompilerExact
-
--- Legacy compactness/Prokhorov topology route retained for compatibility.
 import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact
 import DASHI.Physics.YangMills.BalabanClayT5SubsequenceProkhorovExtractionExact
 import DASHI.Physics.YangMills.BalabanClayT5UniformTightnessSubsequenceInheritanceExact
 import DASHI.Physics.YangMills.BalabanClayT5MomentCompactContainmentExact
-
--- Legacy weak-topology compilers retained as compatibility surfaces.
 import DASHI.Physics.YangMills.BalabanClayT5WeakExpectationPropertyClosureExact
 import DASHI.Physics.YangMills.BalabanClayT5WeakTopologyClusterCylinderAgreementExact
 import DASHI.Physics.YangMills.BalabanClayT5WeakExpectationGramReflectionClosureExact
-
--- Preferred selected-convergence route. It carries only a convergence relation
--- and one selected physical limit theorem; no total limit operator is required.
 import DASHI.Physics.YangMills.BalabanClayT5SelectedSequentialConvergenceExact
 import DASHI.Physics.YangMills.BalabanClayT5SelectedMomentCompactContainmentExact
 import DASHI.Physics.YangMills.BalabanClayT5SelectedUniformTightnessBridgeExact
@@ -138,12 +120,8 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakExpectationClosureExact
 import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakGramReflectionClosureExact
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSExact
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSGapBridgeExact
-
--- Preferred expectation-linked continuum route.
 import DASHI.Physics.YangMills.BalabanClayT5DirectExpectationPropertyClosureExact
 import DASHI.Physics.YangMills.BalabanClayT5ExpectationLinkedContinuumOSExact
-
--- Compatibility / optional local coercive-observable routes.
 import DASHI.Physics.YangMills.BalabanClayT5CoerciveMomentMarkovContainmentExact
 import DASHI.Physics.YangMills.BalabanClayT5PreferredPhysicalCoerciveMomentBridgeExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyObservableRealizationExact
@@ -151,14 +129,8 @@ import DASHI.Physics.YangMills.BalabanClayT5FunctionalPath4GaugeEnergyObservable
 import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyMarkovBridgeExact
 import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredGaugeFixedEnergyNonnegativeExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RealCoercivityExtensionExact
-
--- Cluster uniqueness compiler.
 import DASHI.Physics.YangMills.BalabanClayT5CylinderDeterminingClusterUniquenessExact
-
--- Historical compatibility weld for arbitrary expectation producers.
 import DASHI.Physics.YangMills.BalabanClayT5DiagonalFiniteVolumeSameObjectExact
-
--- Preferred diagonal expectation producer.
 import DASHI.Physics.YangMills.BalabanClayT5PreferredDiagonalExpectationProducerExact
 
 -- Current terminal schedulers after Eq. (119), Kato-M7 and T5 minimization.
@@ -211,10 +183,7 @@ import DASHI.Physics.YangMills.BalabanHeatDoobMarkedTemporalMajorizationRound257
 import DASHI.Physics.YangMills.BalabanStochasticSpatialEnvelopeToConnectedClusteringRound258Exact
 import DASHI.Physics.YangMills.BalabanPreferredRowCFrontierRound259Exact
 
--- R261-R269: typed same-carrier Langevin/Hessian recut.  The latest route removes
--- opaque commutator sockets, binds the action Hessian to literal CMP109/CMP116,
--- compiles R260 anchored entry debts into the physical influence matrix, and
--- leaves only actual source realization / anchor / weighted-debt payments open.
+-- R261-R269: typed same-carrier Langevin/Hessian recut.
 import DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound261Exact
 import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact
 import DASHI.Physics.YangMills.BalabanLangevinHessianBidirectionalWeldRound262Exact
