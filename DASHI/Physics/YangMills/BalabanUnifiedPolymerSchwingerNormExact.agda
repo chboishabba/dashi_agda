@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact where
 
 ------------------------------------------------------------------------
--- ROUND65 HIGHEST-ALPHA CONTINUUM DEVICE:
+-- ROUND65/R271 HIGHEST-ALPHA CONTINUUM DEVICE:
 -- ONE POLYMER/SCHWINGER NORM, THREE DOWNSTREAM PROJECTIONS
 --
 -- PRIMARY SOURCES / CALIBRATION
@@ -35,23 +35,31 @@ module DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact where
 -- They do not by citation prove the nonperturbative four-dimensional pure
 -- Yang--Mills estimate below.
 --
--- DASHI CONTRIBUTION
+-- R271 CORRECTION
 --
--- The key mathematical design constraint is made exact: ordinary Schwinger
--- observables, renormalized composite insertions and separation-weighted
--- connected correlations are all required to be 1-Lipschitz projections of ONE
--- stronger same-family norm.  Therefore ONE RG increment/contraction estimate
--- automatically supplies the same Cauchy modulus to all three consumers.
+-- The old producer stored `PhysicalSeparationDecayControlled : State -> Set`.
+-- That was too opaque to pay the actual mass-gap consumer: it named a property
+-- without exposing the connected correlation, physical distance, amplitude,
+-- ratio, or quantitative decay inequality.
 --
--- This is the mechanism by which the seven-programme graph can potentially
--- collapse programmes P3--P6 into one strong continuum RG theorem without
--- proof-splicing unrelated limits.
+-- The producer now carries a literal rational interpretation of its SAME
+-- `correlationProjection` and a geometric bound
+--
+--   |Cov_s(F,G)| <= A q^(d(F,G)),   0 <= q < 1,
+--
+-- at every RG scale.  This compiles directly to the existing
+-- `UniformGeometricConnectedClustering` carrier.  Thus the unified-norm route
+-- can no longer claim "physical separation controlled" without actually
+-- producing the canonical clustering-shaped theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product using (_×_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
+import DASHI.Physics.YangMills.BalabanRowCPostBC2PhysicalCompletionRound108Exact as R108
 
 record UnifiedPolymerSchwingerNormAuthority
     (State OrdinaryObservable CompositeObservable WeightedCorrelation Bound : Set)
@@ -164,10 +172,6 @@ correlationIncrementBound {authority = authority} control scale =
 
 ------------------------------------------------------------------------
 -- Physical content required of the actual Yang--Mills norm.
---
--- This is intentionally one producer.  Large-field regulation, field
--- derivatives/composite insertions, polymer-size decay and physical separation
--- decay are coordinates of the SAME norm rather than independent receipts.
 ------------------------------------------------------------------------
 
 record PhysicalYMUnifiedPolymerNormProducer : Set₁ where
@@ -180,24 +184,70 @@ record PhysicalYMUnifiedPolymerNormProducer : Set₁ where
     LargeFieldRegulatorControlled : State → Set
     FieldDerivativeSeminormsControlled : State → Set
     PolymerSizeDecayControlled : State → Set
-    PhysicalSeparationDecayControlled : State → Set
     CompositeOperatorMixingControlled : State → Set
 
     stateAtScale : Nat → State
 
-    allCoordinatesControlled : ∀ scale →
+    -- R271 quantitative replacement for the old opaque separation predicate.
+    physicalDistance : OrdinaryObservable → OrdinaryObservable → Nat
+    connectedCorrelationMagnitude :
+      WeightedCorrelation → OrdinaryObservable → OrdinaryObservable → ℚ
+
+    separationAmplitude separationRatio : ℚ
+    separationAmplitudeNonnegative : 0ℚ ≤ separationAmplitude
+    separationRatioNonnegative : 0ℚ ≤ separationRatio
+    separationRatioStrictlyBelowOne : separationRatio < 1ℚ
+
+    physicalSeparationDecay : ∀ scale left right →
+      connectedCorrelationMagnitude
+        (correlationProjection authority (stateAtScale scale)) left right
+      ≤ separationAmplitude
+        * Power.rationalPower separationRatio (physicalDistance left right)
+
+    allNonSeparationCoordinatesControlled : ∀ scale →
       LargeFieldRegulatorControlled (stateAtScale scale)
       × FieldDerivativeSeminormsControlled (stateAtScale scale)
       × PolymerSizeDecayControlled (stateAtScale scale)
-      × PhysicalSeparationDecayControlled (stateAtScale scale)
       × CompositeOperatorMixingControlled (stateAtScale scale)
 
     incrementControl : UnifiedRGIncrementControl authority
 
 open PhysicalYMUnifiedPolymerNormProducer public
 
+------------------------------------------------------------------------
+-- Direct clustering compiler from the SAME correlation projection.
+------------------------------------------------------------------------
+
+clusteringAtScale :
+  (producer : PhysicalYMUnifiedPolymerNormProducer) →
+  Nat →
+  R108.UniformGeometricConnectedClustering (OrdinaryObservable producer)
+clusteringAtScale producer scale = record
+  { R108.UniformGeometricConnectedClustering.distance =
+      physicalDistance producer
+  ; R108.UniformGeometricConnectedClustering.connectedCovarianceMagnitude =
+      connectedCorrelationMagnitude producer
+        (correlationProjection
+          (authority producer) (stateAtScale producer scale))
+  ; R108.UniformGeometricConnectedClustering.amplitude =
+      separationAmplitude producer
+  ; R108.UniformGeometricConnectedClustering.ratio =
+      separationRatio producer
+  ; R108.UniformGeometricConnectedClustering.amplitudeNonnegative =
+      separationAmplitudeNonnegative producer
+  ; R108.UniformGeometricConnectedClustering.ratioNonnegative =
+      separationRatioNonnegative producer
+  ; R108.UniformGeometricConnectedClustering.ratioStrictlyBelowOne =
+      separationRatioStrictlyBelowOne producer
+  ; R108.UniformGeometricConnectedClustering.connectedCovarianceBound =
+      physicalSeparationDecay producer scale
+  }
+
 unifiedNormProjectionClosureLevel : ProofLevel
 unifiedNormProjectionClosureLevel = machineChecked
+
+quantitativeCorrelationProjectionToClusteringLevel : ProofLevel
+quantitativeCorrelationProjectionToClusteringLevel = machineChecked
 
 brydgesDimockHurdNormPrecedentLevel : ProofLevel
 brydgesDimockHurdNormPrecedentLevel = standardImported
@@ -208,5 +258,8 @@ brydgesMitterScoppolaNormPrecedentLevel = standardImported
 polonyiSailerCompositeRGPrecedentLevel : ProofLevel
 polonyiSailerCompositeRGPrecedentLevel = standardImported
 
+-- The physical theorem is now falsifiable at the canonical clustering surface:
+-- an inhabitant must expose the actual connected correlation and prove the
+-- uniform geometric inequality, not merely inhabit an opaque Set.
 physicalYMUnifiedPolymerNormProducerLevel : ProofLevel
 physicalYMUnifiedPolymerNormProducerLevel = conditional
