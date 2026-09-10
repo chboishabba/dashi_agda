@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Law.SensibLawWoogarooPreservationRoadmapExact as Roadmap
 import DASHI.Law.SensibLawWoogarooEPBC8575DecisionConsumerMatrixExact as EPBC
 import DASHI.Law.SensibLawWoogarooAdmissibleFactorsWrongTypeAtomBridgeExact as AFW
+import DASHI.Law.SensibLawWoogarooS102StatutorySpatialRelationExact as S102Statute
 
 ------------------------------------------------------------------------
 -- WOOGAROO LEGAL-ONLY PRIORITY ROADMAP
@@ -69,11 +70,11 @@ qldS102Priority = legal-priority-coordinate
   interimRestraint
   consumerPaymentOpen
   "Nature Conservation Act ss 102-107 interim conservation-order consumer"
-  "9281/2024/OW is approved by negotiated decision for Kalina Village 2 Stages 1-16 and expressly covers vegetation clearing, earthworks and stormwater. Council now exposes the exact 20 March 2026 approved-plan carrier (Objective A12705838), negotiated decision notice (A12705835), Tree Retention and Removal Plan (A10552668) and desktop assessment (A10552665). Related implementation-stage approvals also exist: 9293/2024/OW for Stage 1-4A road/drainage/stormwater/earthworks (approved plans A12705434) and 2082/2025/OW for Stage 1-4A landscaping (approved plans A11503353). The same project has a historical 136 ha habitat-score-7 Koala impact map, food-tree/scat evidence and >500 ha connectivity surface."
-  "contents of the 9281 negotiated approved plans/decision notice; exact approved vegetation-clearing polygon and retained-tree/open-space geometry; current commencement/threat chronology; exact current wildlife/habitat intersection; evidence of likely significant detrimental effect"
-  "Council document/object identity is not plan geometry; related roadworks/landscaping approvals are not vegetation-clearing commencement; 2019 EPBC impact geometry is not 9281 works geometry; works approval is not commencement; clearing entitlement is not the s 102 detrimental-effect conclusion"
-  "the now-source-paid implementation stack materially narrows acquisition and may increase practical urgency, but it still cannot determine the interim-order test without the actual plan contents, exact current conduct, geometry, timing and likely effect"
-  "target Objective A12705838/A12705835 first; if browser acquisition succeeds, extract the approved clearing/retention geometry and commencement prerequisites immediately. In parallel preserve 9293/2082 as stage-progression chronology, not commencement proof."
+  "9281/2024/OW is approved by negotiated decision for Kalina Village 2 Stages 1-16 and expressly covers vegetation clearing, earthworks and stormwater. The supplied 20 March 2026 negotiated approved-plan carrier A12705838 now pays plan-scale extent-of-work geometry, bushfire-management vegetation-clearing extents, bushland-management zone, Open Space/environmental-corridor interfaces, O'Dwyers Gully/Opossum Creek context and tree-retention/removal interface. The negotiated decision separately carries the Commonwealth/Condition 6(a) prestart dependency. Same-project ecology supplies the historical 136 ha habitat-score-7 Koala impact, food-tree/scat evidence and >500 ha connectivity surface."
+  "likely-significant-detrimental-effect evidence under the current s 102 consumer; current process/execution chronology; Condition 6(a) satisfaction and prestart records; current habitat/wildlife evidence sufficient to connect the approved threatening process to the qualifying wildlife/habitat/area. Machine-precise GIS and later LiDAR can strengthen the causal/spatial account but are not textual statutory prerequisites."
+  "perfect spatial overlap is not an s 102 element; lack of perfect overlap does not foreclose s 102; s 103(2) permits an order relating to land even when the wildlife or habitat is not within that land; prior s 13 classification is not a universal prerequisite because s 102(a) separately covers threatened or near threatened wildlife; approval is not commencement; clearing entitlement is not the significant-detrimental-effect conclusion"
+  "the relevant factorisation is process -> qualifying ecological object -> likely significant detrimental effect -> Ministerial opinion/order discretion. Geometry is evidence for process identity, causal relation, likely effect and targeting, not a freestanding statutory overlap threshold."
+  "use A12705838 now as the approved threatening-process geometry; prioritise current execution/Condition 6(a)/prestart evidence and ecological likely-effect analysis. Defer LiDAR as an evidence-refinement lane rather than a prerequisite."
 
 qldS49Priority : LegalPriorityCoordinate
 qldS49Priority = legal-priority-coordinate
