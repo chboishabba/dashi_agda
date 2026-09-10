@@ -4,18 +4,14 @@ module DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact whe
 -- ROUND591 / R572 TEMPORAL-PRODUCER LEAST PRIVILEGE
 --
 -- R572 still asked its producer to supply two facts that R571 already proves
--- from the literal live carrier:
+-- from the literal live carrier: terminal global self-flux nonnegativity and
+-- pointwise self-Gram nonnegativity.  Only the standard order property that the
+-- integral of a nonnegative function is nonnegative is needed to lift the latter.
 --
---   * terminal global self-flux is nonnegative;
---   * self-Gram is pointwise nonnegative.
---
--- Only the standard order property "integral of a nonnegative function is
--- nonnegative" is needed to lift the second fact through time integration.
 -- This round removes both duplicated sign receipts from that producer tactic.
---
--- IMPORTANT: R592 subsequently shows the whole R568/R572 temporal route is
--- optional relative to the canonical R503 direct signed-cross consumer.  This
--- module remains a minimized compatible producer, not a Clay prerequisite.
+-- R592 subsequently shows the whole R568/R572 temporal route is optional
+-- relative to the canonical R503 direct signed-cross consumer.  This module
+-- remains a minimized compatible producer, not a Clay prerequisite.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -51,8 +47,7 @@ module Compile
     (VectorDerivativeOf :
       (Time → C3.Complex3 F) →
       (Time → C3.Complex3 F) → Set)
-    (ScalarDerivativeOf :
-      (Time → ℚ) → (Time → ℚ) → Set)
+    (ScalarDerivativeOf : (Time → ℚ) → (Time → ℚ) → Set)
     (projectedCrossCalculus :
       R426.ProjectedCrossDerivativeCalculus Time VectorDerivativeOf)
     (vectorAlgebra : R425.VectorDerivativeAlgebra Time VectorDerivativeOf)
@@ -84,12 +79,9 @@ module Compile
       scalarFTC591 :
         FTC564.ScalarFundamentalTheorem564
           Time initialTime integrateTo ScalarDerivativeOf
-
       nonnegativeIntegration591 :
         O571.NonnegativeIntegrationAuthority571 Time integrateTo
-
       initialSelfFluxBound591 : ℚ
-
       initialSelfFluxUpper591 :
         (cutoff : Nat) →
         let module Tangent = T570.TangentWeld
@@ -97,15 +89,11 @@ module Compile
               VectorDerivativeOf ScalarDerivativeOf
               projectedCrossCalculus vectorAlgebra hermitianCalculus
               constantCalculus scalarAlgebra integration D R cutoff
-        in
-        Tangent.Global.globalSelfFlux initialTime ≤ initialSelfFluxBound591
-
+        in Tangent.Global.globalSelfFlux initialTime ≤ initialSelfFluxBound591
       commutatorBudget591 : Comm.CommutatorOnlySpacetimeBudget568
         (R408.LiteralDynamics.literalPhysicalTrajectory
           Time initialTime integrateTo VectorDerivativeOf D) R
-
       cutoffIndependentLeafABound591 : Time → ℚ
-
       combinedBoundIsTwiceLeafABound591 :
         (terminal : Time) →
         R539.two * cutoffIndependentLeafABound591 terminal
@@ -119,30 +107,25 @@ module Compile
   toR572Producer591 P = record
     { Old.scalarFTC572 = scalarFTC591 P
     ; Old.integratedSelfGramNonnegative572 = λ cutoff terminal →
-        let
-          module Order = O571.LiveOrder
-            Time initialTime integrateTo
-            VectorDerivativeOf ScalarDerivativeOf
-            projectedCrossCalculus vectorAlgebra hermitianCalculus
-            constantCalculus scalarAlgebra integration D R cutoff
-        in
-        Order.integratedLiveSelfGramNonnegative571
+        let module Order = O571.LiveOrder
+              Time initialTime integrateTo
+              VectorDerivativeOf ScalarDerivativeOf
+              projectedCrossCalculus vectorAlgebra hermitianCalculus
+              constantCalculus scalarAlgebra integration D R cutoff
+        in Order.integratedLiveSelfGramNonnegative571
           (nonnegativeIntegration591 P) terminal
     ; Old.terminalSelfFluxNonnegative572 = λ cutoff terminal →
-        let
-          module Order = O571.LiveOrder
-            Time initialTime integrateTo
-            VectorDerivativeOf ScalarDerivativeOf
-            projectedCrossCalculus vectorAlgebra hermitianCalculus
-            constantCalculus scalarAlgebra integration D R cutoff
-        in
-        Order.At.liveGlobalSelfFluxNonnegative571 terminal
+        let module Order = O571.LiveOrder
+              Time initialTime integrateTo
+              VectorDerivativeOf ScalarDerivativeOf
+              projectedCrossCalculus vectorAlgebra hermitianCalculus
+              constantCalculus scalarAlgebra integration D R cutoff
+        in Order.At.liveGlobalSelfFluxNonnegative571 terminal
     ; Old.initialSelfFluxBound572 = initialSelfFluxBound591 P
     ; Old.initialSelfFluxUpper572 = initialSelfFluxUpper591 P
     ; Old.commutatorBudget572 = commutatorBudget591 P
     ; Old.cutoffIndependentLeafABound572 = cutoffIndependentLeafABound591 P
-    ; Old.combinedBoundIsTwiceLeafABound572 =
-        combinedBoundIsTwiceLeafABound591 P
+    ; Old.combinedBoundIsTwiceLeafABound572 = combinedBoundIsTwiceLeafABound591 P
     }
 
 round591PointwiseSelfGramSignAlreadyOwned : Bool
