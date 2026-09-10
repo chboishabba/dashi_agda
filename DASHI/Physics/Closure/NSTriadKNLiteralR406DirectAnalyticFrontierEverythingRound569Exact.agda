@@ -142,11 +142,5 @@ round569CanonicalDirectR503BudgetClosed = false
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
 
-round569NovelCommutatorSpacetimeBudgetClosed : Bool
-round569NovelCommutatorSpacetimeBudgetClosed = false
-
-round569OuterWeightSpectatorSpacetimeClosed : Bool
-round569OuterWeightSpectatorSpacetimeClosed = false
-
 round569ClayPromotion : Bool
 round569ClayPromotion = false
