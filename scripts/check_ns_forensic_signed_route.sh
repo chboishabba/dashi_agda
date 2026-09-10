@@ -7,4 +7,4 @@ cd "$ROOT"
 TARGET="DASHI/Physics/Closure/NSForensicSignedRouteLineageAuditExact.agda"
 
 printf 'Checking earliest-forward NS forensic signed-route ledger: %s\n' "$TARGET"
-exec bash scripts/run_agda29_parallel_check.sh "$TARGET"
+exec nix develop .# --command bash scripts/run_agda29_parallel_check.sh "$TARGET"
