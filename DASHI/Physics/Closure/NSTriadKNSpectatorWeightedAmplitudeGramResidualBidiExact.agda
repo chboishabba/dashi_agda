@@ -35,6 +35,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400Exact as R400
 import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
 import DASHI.Physics.Closure.NSTriadKNSpectatorWeightedAmplitudeGramLedgerBidiExact as LedgerOwner
@@ -71,9 +72,6 @@ module Residual
 
   fibre = Output.physicalOutputFiber cutoff output
 
-  amplitudeFold =
-    LedgerOwner.Ledger.weightedAmplitudeCell physicalSystem S beta
-
   record WeightedAmplitudeGramPayment (upper : ℚ) : Set where
     constructor weighted-amplitude-gram-payment
     field
@@ -89,24 +87,11 @@ module Residual
     Mass.weightedCellMassSumBelow fibre
       (Rate.allElementsHaveOutput cutoff output)
 
-  paidAmplitudeNormBound :
-    (upper : ℚ) →
-    WeightedAmplitudeGramPayment upper →
-    L2.complex3NormSquared
-      (LedgerOwner.Ledger.weightedAmplitudeCell physicalSystem S beta
-        -- only fixes the function below; the fold itself is written explicitly
-        |>dummy)
-    ≤ upper
-  paidAmplitudeNormBound upper payment = impossible
-
-  -- The theorem above is stated below in its actual fold shape; the tiny local
-  -- aliases are intentionally avoided to keep the same-object carrier visible.
   amplitudeNormBelowEnergyConvolutionPlusGram :
     (upper : ℚ) →
     WeightedAmplitudeGramPayment upper →
     L2.complex3NormSquared
-      (DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.foldVector
-        (Ledger.weightedAmplitudeCell beta) fibre)
+      (R224.foldVector (Ledger.weightedAmplitudeCell beta) fibre)
     ≤ (Mass.ceiling * Mass.ceiling) * Mass.inputProductMassSum fibre + upper
   amplitudeNormBelowEnergyConvolutionPlusGram upper payment =
     let
