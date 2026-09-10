@@ -111,6 +111,7 @@ record Ternary27TriadRegressionReceipt : Set where
     productDimension : Nat
     rawOrderedIncidenceCount : Nat
     rawCountProof : rawOrderedIncidenceCount ≡ 343
+    existingEnumerationHasExactResonanceField : Bool
     rawResonanceAndCutoffSeparatedFromNonzero : Bool
     nonzeroTriadCountPaid : Bool
     executableEnumerationLengthEquals343Paid : Bool
@@ -125,7 +126,7 @@ canonicalTernary27TriadRegressionReceipt =
     "NSIntegerFourierLattice.FourierMode = Z^3"
     "NSTriadKNPhysicalTriadEnumeration.physicalTriadEnumeration 1"
     7 3 rawOrderedBoundedTriadCount rawOrderedBoundedTriadCountIs343
-    true false false false false
+    true true false false false false
 
 ------------------------------------------------------------------------
 -- Regression target: next payment is to identify the 343 combinatorial codes
@@ -150,6 +151,15 @@ currentTriadRegressionFrontier =
   triad-regression-frontier true true true false false false false false
 
 ------------------------------------------------------------------------
+-- Existing NS enumeration is retained as the implementation target, rather
+-- than reimplemented here. Its PhysicalTriadIncidence explicitly contains
+-- p, q, k and the proof addMode p q = k; cutoff and nonzero are separate.
+------------------------------------------------------------------------
+
+physicalTriadIncidenceCarrier : Set
+physicalTriadIncidenceCarrier = Physical.PhysicalTriadIncidence
+
+------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
 
@@ -169,9 +179,3 @@ finiteRegressionDoesNotProveUniformSchur ()
 
 oeisDoesNotCreateTriadTheorem : OEIS343CreatesTriadTheorem → ⊥
 oeisDoesNotCreateTriadTheorem ()
-
-physicalEnumerationSoundnessRetained :
-  ∀ {τ} →
-  τ Physical.∈ Physical.physicalTriadEnumeration 1 →
-  Z3.addMode (Physical.p τ) (Physical.q τ) ≡ Physical.k τ
-physicalEnumerationSoundnessRetained = Physical.physicalTriadEnumerationResonanceSound
