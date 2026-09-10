@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSJune22ToJuly20SignedMajorantProvenanceBridgeExact where
 
 ------------------------------------------------------------------------
--- JUNE 22 -> JULY 21 SIGNED / SCHUR / MAJORANT / COMMUTATOR PROVENANCE BRIDGE
+-- JUNE 22 -> JULY 23 SIGNED / SCHUR / MAJORANT / COMMUTATOR PROVENANCE BRIDGE
 --
 -- Purpose: preserve the oldest-forward chronology discovered by semantic
 -- snowballing without promoting chronology into same-object theorem identity.
@@ -65,12 +65,56 @@ module DASHI.Physics.Closure.NSJune22ToJuly20SignedMajorantProvenanceBridgeExact
 --   layer in this oldest-forward pass. PR #255 becomes the public tranche for
 --   this far-tail theorem family and merges at 2026-07-20T15:09:40Z.
 --
+-- 2026-07-21 11:06:26Z / 21:06:26 Australia/Brisbane
+--   PR #310 becomes public:
+--   "Reduce the six universal periodic-Fourier obligations to honest analytic leaves".
+--   It continues the merged compact-Gamma lane and introduces a coherent
+--   universal owner. The owner forces five-halves, Dini, official-solution,
+--   official-time, far-low and far-high packages to share one scalar/order,
+--   index and selected shell/time/state model, with explicit equality witnesses
+--   preventing the use of a theorem from one trajectory with continuation data
+--   from another. PR #310 merges at 2026-07-21 12:01:27Z / 22:01:27 Brisbane.
+--
+--   This is the missing pre-PR320 CONSUMER-ARCHITECTURE splice. It composes the
+--   concrete Fourier cancellation/tail machinery into one coherent universal
+--   periodic-Fourier owner and continuation-facing package before Jul-22/23.
+--
+--   But it does NOT move the exact signed-physical assembly date. Its own
+--   far-low route is
+--
+--     far-low -> commutator -> multiplier difference -> mean-value majorant
+--             -> R=8 separation -> normalized budget,
+--
+--   and its remaining leaves include exact decomposition/normalization and
+--   real-carrier estimates. In particular, the coherent shared carrier here is
+--   not an equality witness identifying the owner with the later literal exact
+--   signed physical Galerkin coefficient used by the Jul-26/R423 lineage.
+--
+-- 2026-07-22/23
+--   PR #320 then exposes the complete theorem-facing chain from official
+--   Fourier norms through Wall I, integrated expenditure, adaptive coverage,
+--   all-data cutoff control and continuum BKM. Its Jul-23 strict-dissipation
+--   and diffuse-charging compilers consume cutoff-independent analytic payments
+--   as inputs. Thus downstream consumer plumbing is already in place before
+--   Jul-26; what is not yet recovered is the exact signed physical coefficient
+--   welded through that entire cutoff-uniform consumer.
+--
+-- The historical classification is therefore now three-layered:
+--
+--   concrete cancellation theorem
+--     -> coherent universal consumer splice
+--     -> strict dissipation/expenditure/BKM consumer
+--
+-- all before the Jul-26 exact signed physical coefficient assembly.
+--
 -- The July correction is therefore stronger than the June candidate surface:
 -- exact pair incidences provide the positive Schur envelope; the signed object
--- is kept separate; then a concrete commutator theorem pays far-tail structure.
--- This is still NOT the later Jul-26 simultaneous assembly of the exact signed
--- physical cutoff-uniform analytic problem and global consumer. Chronology and
--- structural ancestry do not manufacture that same-object equality.
+-- is kept separate; a concrete commutator theorem recovers cancellation; and
+-- PR #310 composes that analytic family onto one coherent shell/time/state
+-- consumer model. This is still NOT the later Jul-26 simultaneous assembly of
+-- the exact signed physical cutoff-uniform analytic problem and global consumer.
+-- Chronology, shared carrier parameters and consumer coherence do not
+-- manufacture the missing same-object coefficient equality.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -84,6 +128,8 @@ data BridgeGrade : Set where
   exactPairIncidenceMajorantCarrier : BridgeGrade
   exactSignedMajorantFirewall : BridgeGrade
   concreteFarTailCommutator : BridgeGrade
+  coherentUniversalConsumerSplice : BridgeGrade
+  strictDissipationConsumerSpine : BridgeGrade
   exactPhysicalCutoffUniformAssembly : BridgeGrade
 
 record ProvenanceBridgeEvent : Set where
@@ -149,6 +195,26 @@ jul21ConcreteFarTailCommutator = provenance-bridge-event
   concreteFarTailCommutator
   "Exact divergence-free Fourier cancellation and multiplier-difference commutator identities feed far-low decay and far-high tail composition."
 
+jul21UniversalTailConsumerSplice : ProvenanceBridgeEvent
+jul21UniversalTailConsumerSplice = provenance-bridge-event
+  "coherent universal periodic-Fourier consumer splice"
+  "c6f0f1f2b8a39d8788c9e2b90f65294774020f05"
+  "2026-07-21T12:01:27Z"
+  "2026-07-21T22:01:27+10:00"
+  "PR #310 opened 2026-07-21T11:06:26Z / 21:06:26 Brisbane; merged at this commit/time"
+  coherentUniversalConsumerSplice
+  "PR #310 forces the six analytic packages onto one coherent shell/time/state model and continuation-facing owner, but its far-low path still terminates in a normalized majorant/budget rather than an equality to the later literal signed physical Galerkin coefficient."
+
+jul23StrictDissipationConsumer : ProvenanceBridgeEvent
+jul23StrictDissipationConsumer = provenance-bridge-event
+  "strict dissipation/expenditure consumer spine"
+  "105d654be4f3f0840df1543339df0ecae8ce40ba"
+  "2026-07-23T09:56:04Z"
+  "2026-07-23T19:56:04+10:00"
+  "PR #320 opened 2026-07-22T05:52:23Z; merged 2026-07-24T08:00:07Z"
+  strictDissipationConsumerSpine
+  "Near, far-low and far-high payments plus a strict margin compile below viscosity, while the concrete cutoff-uniform payments remain analytic inputs."
+
 ------------------------------------------------------------------------
 -- Typed historical classification.
 ------------------------------------------------------------------------
@@ -183,6 +249,21 @@ jul21FarTailLayerContainsConcreteCancellationTheorem = true
 jul21FarTailLayerIsAlreadyJul26ExactPhysicalAssembly : Bool
 jul21FarTailLayerIsAlreadyJul26ExactPhysicalAssembly = false
 
+preJuly26ConsumerArchitectureSpliceRecovered : Bool
+preJuly26ConsumerArchitectureSpliceRecovered = true
+
+pr310SharesShellTimeStateAcrossUniversalPackages : Bool
+pr310SharesShellTimeStateAcrossUniversalPackages = true
+
+pr310IdentifiesUniversalFarLowBudgetWithLaterExactSignedPhysicalCoefficient : Bool
+pr310IdentifiesUniversalFarLowBudgetWithLaterExactSignedPhysicalCoefficient = false
+
+preJuly26ExactSignedPhysicalCarrierSpliceRecovered : Bool
+preJuly26ExactSignedPhysicalCarrierSpliceRecovered = false
+
+jul23StrictDissipationCompilerPredatesJul26PhysicalAssembly : Bool
+jul23StrictDissipationCompilerPredatesJul26PhysicalAssembly = true
+
 jul26RemainsEarliestRecoveredFullAssemblyAfterThisPass : Bool
 jul26RemainsEarliestRecoveredFullAssemblyAfterThisPass = true
 
@@ -195,6 +276,8 @@ data CandidateSchurTargetCreatesUniformGap : Set where
 data ExactMajorantCreatesSignedCancellation : Set where
 data MajorantCreatesSignedEntrywiseIdentity : Set where
 data FarTailCommutatorCreatesGlobalCutoffUniformPayment : Set where
+data SharedShellTimeStateCreatesPhysicalCoefficientIdentity : Set where
+data ConsumerSpliceCreatesSignedPhysicalSplice : Set where
 data PublicPRCreatesClayProof : Set where
 
 chronologyDoesNotCreateSameObject : ChronologyCreatesSameObject → ⊥
@@ -212,6 +295,14 @@ majorantDoesNotCreateSignedEntrywiseIdentity ()
 farTailDoesNotCreateGlobalPayment : FarTailCommutatorCreatesGlobalCutoffUniformPayment → ⊥
 farTailDoesNotCreateGlobalPayment ()
 
+sharedCarrierDoesNotCreateCoefficientIdentity :
+  SharedShellTimeStateCreatesPhysicalCoefficientIdentity → ⊥
+sharedCarrierDoesNotCreateCoefficientIdentity ()
+
+consumerSpliceDoesNotCreateSignedPhysicalSplice :
+  ConsumerSpliceCreatesSignedPhysicalSplice → ⊥
+consumerSpliceDoesNotCreateSignedPhysicalSplice ()
+
 publicPRDoesNotCreateClayProof : PublicPRCreatesClayProof → ⊥
 publicPRDoesNotCreateClayProof ()
 
@@ -222,9 +313,13 @@ publicPRDoesNotCreateClayProof ()
 noIntermediateSameCarrierBridgeRecoveredBetweenJun23AndJul19 : Bool
 noIntermediateSameCarrierBridgeRecoveredBetweenJun23AndJul19 = true
 
+oldestForwardSpliceResult : String
+oldestForwardSpliceResult =
+  "A pre-Jul26 consumer-architecture splice is recovered: Jul21 concrete cancellation/tail machinery feeds the coherent PR #310 universal periodic-Fourier owner, and Jul22/23 provides the strict dissipation/expenditure/BKM consumer spine. The missing pre-Jul26 witness is narrower: no recovered equality identifies that composed far-low/majorant budget with the later literal exact signed physical Galerkin coefficient on the full cutoff-uniform consumer."
+
 nextOldestForwardCut : String
 nextOldestForwardCut =
-  "Jul21 concrete far-tail commutator -> Jul22/23 theorem-facing completion spine and strict dissipation/expenditure consumers; test whether those are composed on one physical signed cutoff-uniform carrier before Jul26."
+  "Search Jul21 PR #310 -> Jul23 PR #320 for an exact equality or adapter from the coherent universal far-low/commutator carrier to the literal signed physical Galerkin coefficient; absent such a witness, retain Jul26 as the earliest recovered exact signed physical cutoff-uniform assembly."
 
 june22SchurArchitecturePredatesPairIncidenceCarrierIsTrue :
   june22SchurArchitecturePredatesPairIncidenceCarrier ≡ true
@@ -252,6 +347,26 @@ jul21FarTailLayerContainsConcreteCancellationTheoremIsTrue = refl
 jul21FarTailLayerIsAlreadyJul26ExactPhysicalAssemblyIsFalse :
   jul21FarTailLayerIsAlreadyJul26ExactPhysicalAssembly ≡ false
 jul21FarTailLayerIsAlreadyJul26ExactPhysicalAssemblyIsFalse = refl
+
+preJuly26ConsumerArchitectureSpliceRecoveredIsTrue :
+  preJuly26ConsumerArchitectureSpliceRecovered ≡ true
+preJuly26ConsumerArchitectureSpliceRecoveredIsTrue = refl
+
+pr310SharesShellTimeStateAcrossUniversalPackagesIsTrue :
+  pr310SharesShellTimeStateAcrossUniversalPackages ≡ true
+pr310SharesShellTimeStateAcrossUniversalPackagesIsTrue = refl
+
+pr310IdentifiesUniversalFarLowBudgetWithLaterExactSignedPhysicalCoefficientIsFalse :
+  pr310IdentifiesUniversalFarLowBudgetWithLaterExactSignedPhysicalCoefficient ≡ false
+pr310IdentifiesUniversalFarLowBudgetWithLaterExactSignedPhysicalCoefficientIsFalse = refl
+
+preJuly26ExactSignedPhysicalCarrierSpliceRecoveredIsFalse :
+  preJuly26ExactSignedPhysicalCarrierSpliceRecovered ≡ false
+preJuly26ExactSignedPhysicalCarrierSpliceRecoveredIsFalse = refl
+
+jul23StrictDissipationCompilerPredatesJul26PhysicalAssemblyIsTrue :
+  jul23StrictDissipationCompilerPredatesJul26PhysicalAssembly ≡ true
+jul23StrictDissipationCompilerPredatesJul26PhysicalAssemblyIsTrue = refl
 
 jul26RemainsEarliestRecoveredFullAssemblyAfterThisPassIsTrue :
   jul26RemainsEarliestRecoveredFullAssemblyAfterThisPass ≡ true
