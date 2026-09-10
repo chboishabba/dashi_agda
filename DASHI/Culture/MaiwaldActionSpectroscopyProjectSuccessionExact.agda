@@ -1,6 +1,7 @@
 module DASHI.Culture.MaiwaldActionSpectroscopyProjectSuccessionExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
@@ -10,7 +11,7 @@ open import Agda.Builtin.String using (String)
 -- 2023: Frank W. Maiwald (PI), Robert P. Hodyss, Mathias Weber, Lane Terry.
 -- 2024/2025: Deacon J. Nemchick (PI), Robert P. Hodyss, Mathias Weber.
 -- This closes project-level leadership succession and overlapping-team
--- continuity.  It does not prove transfer of every calibration, qualification,
+-- continuity. It does not prove transfer of every calibration, qualification,
 -- apparatus, failure-history or tacit-execution carrier.
 ------------------------------------------------------------------------
 
@@ -44,6 +45,82 @@ maiWaldActionSpectroscopySuccession = project-succession-receipt
   true refl
   true refl
 
+------------------------------------------------------------------------
+-- Manuscript lineage recovered from the FY23 working-title carrier.
+--
+-- The FY23 JPL poster names one broad manuscript working title covering
+-- protonated valine, deprotonated valine and deprotonated aminovaleric acid.
+-- Public publication history later resolves this into at least two narrower
+-- journal objects. This is a version/scope fork, not proof that every later
+-- paper inherited every FY23 calibration, apparatus or tacit-execution carrier.
+------------------------------------------------------------------------
+
+data ManuscriptRelation : Set where
+  workingTitleCarrier : ManuscriptRelation
+  publishedScopeChild : ManuscriptRelation
+
+record SpectroscopyPublicationCarrier : Set where
+  constructor spectroscopy-publication-carrier
+  field
+    relation : ManuscriptRelation
+    title : String
+    publicationDate : String
+    authors : String
+    identifier : String
+    sourceReference : String
+    includesMaiwald : Bool
+    exactBibliographicIdentityPaid : Bool
+
+open SpectroscopyPublicationCarrier public
+
+fy23WorkingTitleCarrier : SpectroscopyPublicationCarrier
+fy23WorkingTitleCarrier = spectroscopy-publication-carrier
+  workingTitleCarrier
+  "Cryogenic Ion Vibrational Spectroscopy of Protonated and Deprotonated Valine and of Deprotonated Aminovaleric Acid"
+  "2023; in preparation"
+  "Lane M. Terry; Maddie K. Klumb; Deacon J. Nemchick; Robert P. Hodyss; Frank W. Maiwald; J. Mathias Weber"
+  "JPL SURP poster SP23012 / CL#23-5018"
+  "JPL FY23 SURP poster SP23012p, Publications item B"
+  true true
+
+protonatedValine2024Carrier : SpectroscopyPublicationCarrier
+protonatedValine2024Carrier = spectroscopy-publication-carrier
+  publishedScopeChild
+  "Cryogenic Ion Vibrational Spectroscopy of Protonated Valine: Messenger Tag Effects"
+  "2024-08-29; electronic publication 2024-08-16"
+  "Lane M. Terry; Maddie K. Klumb; Deacon J. Nemchick; Robert Hodyss; Frank Maiwald; J. Mathias Weber"
+  "DOI 10.1021/acs.jpca.4c03552; PMID 39150465"
+  "Journal of Physical Chemistry A 128 (2024) 7137-7144; PubMed 39150465"
+  true true
+
+deprotonatedStates2025Carrier : SpectroscopyPublicationCarrier
+deprotonatedStates2025Carrier = spectroscopy-publication-carrier
+  publishedScopeChild
+  "Probing Isomers and Conformers by Cryogenic Ion Vibrational Spectroscopy: Deprotonated States of Valine and Aminovaleric Acid"
+  "2025-07-03"
+  "Lane M. Terry; Maddie K. Klumb; Deacon J. Nemchick; Robert P. Hodyss; J. Mathias Weber"
+  "DOI 10.1021/acs.jpca.5c03141"
+  "Journal of Physical Chemistry A 129 (2025) 5837-5842; JILA Weber Group publication list"
+  false true
+
+record WorkingTitleScopeFork : Set where
+  constructor working-title-scope-fork
+  field
+    broadWorkingTitleOwned : Bool
+    protonatedChildPublished : Bool
+    deprotonatedChildPublished : Bool
+    maiwaldRetainedOn2024Child : Bool
+    maiwaldRetainedOn2025Child : Bool
+    laterChildWithoutMaiwaldProvesCalibrationTransfer : Bool
+    laterChildWithoutMaiwaldProvesNoMaiwaldContribution : Bool
+    scopeForkMayGuideSameCarrierTransferSearch : Bool
+
+open WorkingTitleScopeFork public
+
+canonicalWorkingTitleScopeFork : WorkingTitleScopeFork
+canonicalWorkingTitleScopeFork = working-title-scope-fork
+  true true true true false false false true
+
 record ProjectVsCarrierBoundary : Set where
   constructor project-vs-carrier-boundary
   field
@@ -56,9 +133,13 @@ record ProjectVsCarrierBoundary : Set where
     overlappingTeamSupportsContinuitySearch : Bool
     overlappingTeamSupportsContinuitySearchIsTrue :
       overlappingTeamSupportsContinuitySearch ≡ true
+    publicationContinuationImpliesSameApplicationCarrierTransferred : Bool
+    publicationContinuationImpliesSameApplicationCarrierTransferredIsFalse :
+      publicationContinuationImpliesSameApplicationCarrierTransferred ≡ false
 
 canonicalProjectVsCarrierBoundary : ProjectVsCarrierBoundary
-canonicalProjectVsCarrierBoundary = project-vs-carrier-boundary false refl false refl true refl
+canonicalProjectVsCarrierBoundary = project-vs-carrier-boundary
+  false refl false refl true refl false refl
 
 data MaiwaldSuccessionReverseTarget : Set where
   acquireApparatusConfigurationContinuity : MaiwaldSuccessionReverseTarget
@@ -67,3 +148,7 @@ data MaiwaldSuccessionReverseTarget : Set where
   acquireFailureHistoryTransfer : MaiwaldSuccessionReverseTarget
   acquireQualificationTransfer : MaiwaldSuccessionReverseTarget
   acquireRepositoryOrNotebookContinuity : MaiwaldSuccessionReverseTarget
+  acquireWorkingTitleToPublishedVersionHistory : MaiwaldSuccessionReverseTarget
+
+manuscriptForkNextTarget : MaiwaldSuccessionReverseTarget
+manuscriptForkNextTarget = acquireWorkingTitleToPublishedVersionHistory
