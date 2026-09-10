@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 ------------------------------------------------------------------------
 -- ROUND569 / FOCUSED EXTENSION OF THE R505 DIRECT TERMINAL CONE
 --
--- The inward BIDI through R589 remains useful producer archaeology:
+-- The inward BIDI through R591 remains useful producer archaeology:
 --   R585 exact LH/HL inner symmetry;
 --   R586 the same symmetry after the actual R145 outer slot map;
 --   R587 three independent live class-norm coordinates, not four;
@@ -11,9 +11,9 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 --   R589 eliminates the opaque R434-decomposition producer socket;
 --   R590 packages the exact live partition + three R284 region payments as one
 --        optional physical producer rather than four independent scheduler debts;
---   R591 removes duplicated R572 sign receipts using already-owned R571 signs.
+--   R591 removes duplicated R572 sign receipts on the optional temporal route.
 --
--- R592 then performs the decisive least-privilege correction: none of the
+-- R592 performs the decisive least-privilege correction: none of the
 -- R284/R434/R590 critical-cone route, the R568/R572 temporal-commutator route,
 -- Laplace factorisation, Schur, or class-norm routes are mandatory for leaf A.
 -- R496-R500 already construct the exact live direct off-diagonal nonseparable
