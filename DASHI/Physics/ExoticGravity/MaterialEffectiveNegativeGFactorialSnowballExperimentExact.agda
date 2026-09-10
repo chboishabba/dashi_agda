@@ -12,9 +12,9 @@ import DASHI.Physics.ExoticGravity.LiTorrSourceAttributedOrdinaryGREvaluationExa
 ------------------------------------------------------------------------
 -- FACTORIAL EXPERIMENT + SNOWBALL ACQUISITION
 --
--- Experimental cells may be collected opportunistically.  This owner projects
+-- Experimental cells may be collected opportunistically. This owner projects
 -- their observed coordinates into the canonical ScientificWallAcquisitionState
--- from the receipt-indexed progression owner.  It does not define a second
+-- from the receipt-indexed progression owner. It does not define a second
 -- payment scheduler and it does not promote acquisition into payment.
 ------------------------------------------------------------------------
 
@@ -58,9 +58,9 @@ record SnowballAcquisitionState : Set where
 
 open SnowballAcquisitionState public
 
-_boolAnd_ : Bool → Bool → Bool
-false boolAnd _ = false
-true boolAnd b = b
+boolAnd : Bool → Bool → Bool
+boolAnd false _ = false
+boolAnd true b = b
 
 ------------------------------------------------------------------------
 -- Canonical acquisition projection.
@@ -78,10 +78,10 @@ projectToCanonicalAcquisition s =
   Progress.scientific-wall-acquisition-state
     false
     false
-    (sourceAmplitudeAxisObserved s boolAnd materialRegimeAxisObserved s)
+    (boolAnd (sourceAmplitudeAxisObserved s) (materialRegimeAxisObserved s))
     (modelClassSeparationObserved s)
-    (independentReplicationObserved s boolAnd
-      (sameSourceIdentityObserved s boolAnd sameGeometryObserved s))
+    (boolAnd (independentReplicationObserved s)
+      (boolAnd (sameSourceIdentityObserved s) (sameGeometryObserved s)))
 
 -- Deliberate firewall: acquisition does not advance the payment state by itself.
 snowballAcquisitionDoesNotAdvancePaymentByItself :
