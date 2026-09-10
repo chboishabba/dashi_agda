@@ -18,6 +18,8 @@ open import Data.Empty using (⊥)
 data EvidenceSourceClass : Set where
   primaryFederalProceduralNotice : EvidenceSourceClass
   primaryFederalPublicCommentInvitation : EvidenceSourceClass
+  primaryFederalPublicationNotice : EvidenceSourceClass
+  primaryLibraryLegalDepositMetadata : EvidenceSourceClass
   primaryQueenslandSpatialDataset : EvidenceSourceClass
   primaryFederalCriticalHabitatRegister : EvidenceSourceClass
   primaryQueenslandFishHabitatRegime : EvidenceSourceClass
@@ -61,10 +63,30 @@ publicCommentInvitationAudit : SourceAuditReceipt
 publicCommentInvitationAudit = source-audit-receipt
   primaryFederalPublicCommentInvitation
   "2019-8575-Draft-PD.pdf"
-  "The uploaded file is a one-page invitation for public comment. It confirms controlled-action status, Preliminary Documentation assessment and ss 18/18A controlling species/community, and points to the Saunders Havill documentation location. It is not itself the Final Preliminary Documentation habitat bundle."
+  "The uploaded file is a one-page invitation for public comment. It confirms controlled-action status, Preliminary Documentation assessment and ss 18/18A controlling species/community, and points to the Saunders Havill documentation location. It is not itself the substantive Preliminary Documentation habitat bundle."
   sourcePaid
   "EPBC project identity / assessment pathway / controlling provisions"
   "recover the actual Preliminary Documentation and final habitat maps/tables/appendices"
+  false refl
+
+finalPDPublicationNoticeAudit : SourceAuditReceipt
+finalPDPublicationNoticeAudit = source-audit-receipt
+  primaryFederalPublicationNotice
+  "2019-8575-Final-PD.pdf"
+  "Despite its filename, the uploaded carrier is a one-page s 95B(2) publication/information notice. It records 1,786 comments and states that the Preliminary Documentation plus a summary of comments were made available from 23 July to 20 August 2026. It is not the substantive final Preliminary Documentation."
+  sourcePaid
+  "EPBC 2019/8575 publication chronology / comment-count existence / existence of comments-summary carrier"
+  "acquire the substantive 2026 Preliminary Documentation volumes/attachments and the actual summary/response to comments"
+  false refl
+
+slqLegalDepositMetadataAudit : SourceAuditReceipt
+slqLegalDepositMetadataAudit = source-audit-receipt
+  primaryLibraryLegalDepositMetadata
+  "State Library of Queensland record 99184900524002061 — Springfield residential development Mur Boulevard, Springfield Qld : preliminary documentation report"
+  "The SLQ catalogue identifies a 2026 four-volume legal-deposit set prepared by Saunders Havill Group for Cherish Enterprises, comprising Part Ai preliminary documentation report; Part Aii vegetation clearing & fauna management plan - clearing directions; Part Aiii attachment A15; and Part B referral material. The catalogue establishes carrier identity/existence and an onsite John Oxley Collection holding, not the contents of the unseen volumes."
+  relevantButConsumerOpen
+  "acquisition/provenance of the substantive EPBC 2019/8575 Preliminary Documentation corpus"
+  "obtain the volume contents from the proponent/agency or inspect/copy the SLQ legal-deposit set; catalogue metadata alone does not pay final-PD merits atoms"
   false refl
 
 qldStatewideCorridorsAudit : SourceAuditReceipt
@@ -115,6 +137,9 @@ data StatewideCorridorEqualsNCAS13CriticalHabitat : Set where
 data FederalCriticalHabitatRegisterEqualsNCAS13CriticalHabitat : Set where
 data FishHabitatAreaEqualsTerrestrialNCACriticalHabitat : Set where
 data PublicCommentInvitationEqualsFinalPD : Set where
+data PublicationNoticeEqualsSubstantiveFinalPD : Set where
+data LegalDepositMetadataEqualsSubstantiveVolumeContents : Set where
+data CommentCountEqualsResponseAdequacy : Set where
 data ForeignJurisdictionDatasetEqualsQueenslandEvidence : Set where
 data PortalExpiredLabelOverridesDatedExtensionNotice : Set where
 
@@ -130,6 +155,15 @@ fishHabitatAreaDoesNotAutoPayTerrestrialS13 ()
 commentInvitationIsNotFinalPD : PublicCommentInvitationEqualsFinalPD → ⊥
 commentInvitationIsNotFinalPD ()
 
+publicationNoticeIsNotSubstantiveFinalPD : PublicationNoticeEqualsSubstantiveFinalPD → ⊥
+publicationNoticeIsNotSubstantiveFinalPD ()
+
+legalDepositMetadataDoesNotCreateContents : LegalDepositMetadataEqualsSubstantiveVolumeContents → ⊥
+legalDepositMetadataDoesNotCreateContents ()
+
+commentCountDoesNotCreateResponseAdequacy : CommentCountEqualsResponseAdequacy → ⊥
+commentCountDoesNotCreateResponseAdequacy ()
+
 southAustralianDatasetDoesNotBecomeQueenslandEvidence : ForeignJurisdictionDatasetEqualsQueenslandEvidence → ⊥
 southAustralianDatasetDoesNotBecomeQueenslandEvidence ()
 
@@ -143,12 +177,21 @@ portalLabelDoesNotOverridePrimaryExtensionNotice ()
 record CurrentExternalWall : Set where
   constructor current-external-wall
   field
-    finalPDHabitatBundleStillMissing : Bool
-    finalPDHabitatBundleStillMissingIsTrue : finalPDHabitatBundleStillMissing ≡ true
+    substantiveFinalPDVolumesStillMissing : Bool
+    substantiveFinalPDVolumesStillMissingIsTrue : substantiveFinalPDVolumesStillMissing ≡ true
+    actualCommentSummaryResponseStillMissing : Bool
+    actualCommentSummaryResponseStillMissingIsTrue : actualCommentSummaryResponseStillMissing ≡ true
+    exact9281ClearingPolygonStillMissing : Bool
+    exact9281ClearingPolygonStillMissingIsTrue : exact9281ClearingPolygonStillMissing ≡ true
     exactParcelCorridorJoinStillMissing : Bool
     exactParcelCorridorJoinStillMissingIsTrue : exactParcelCorridorJoinStillMissing ≡ true
-    unverified128HaAndOffsetMetricsMustNotPromote : Bool
-    unverified128HaAndOffsetMetricsMustNotPromoteIsTrue : unverified128HaAndOffsetMetricsMustNotPromote ≡ true
+    exactOffsetParcelsStillMissing : Bool
+    exactOffsetParcelsStillMissingIsTrue : exactOffsetParcelsStillMissing ≡ true
 
 currentExternalWall : CurrentExternalWall
-currentExternalWall = current-external-wall true refl true refl true refl
+currentExternalWall = current-external-wall
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
