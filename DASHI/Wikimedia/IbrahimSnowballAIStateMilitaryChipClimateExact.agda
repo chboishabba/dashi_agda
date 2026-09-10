@@ -289,10 +289,7 @@ open AIStateMilitaryChipClimateBoundary public
 canonicalAIStateMilitaryChipClimateBoundary : AIStateMilitaryChipClimateBoundary
 canonicalAIStateMilitaryChipClimateBoundary =
   ai-state-military-chip-climate-boundary
-    true true true
-    (not (Palantir.PalantirCapabilityBoundary.genericCapabilityEqualsAbuse
-      Palantir.canonicalPalantirCapabilityBoundary))
-    true false true true true true false
+    true true true false true false true true true true false
 
 ------------------------------------------------------------------------
 -- Existing substrate retained rather than duplicated.
