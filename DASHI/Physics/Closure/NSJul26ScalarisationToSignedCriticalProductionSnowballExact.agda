@@ -23,6 +23,10 @@ import DASHI.Physics.Closure.NSTriadKNDirectResolventGlobalCompanionRound498Exac
 import DASHI.Physics.Closure.NSTriadKNDirectResolventTrajectoryCompanionRound499Exact as R499
 import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500Exact as R500
 import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact as R570
+import DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureCompletion as ExpPeriodic
+import DASHI.Physics.Closure.NSTriadKNHHBadOccupationCrossingRound38Exact as HHBad38
+import DASHI.Physics.Closure.NSTriadKNHHGoodSquaredBudgetRound39Exact as HHGood39
+import DASHI.Physics.Closure.NSTriadKNHHBadTelescopingForcingRound51Exact as Potential51
 
 ------------------------------------------------------------------------
 -- Snowball classification.
@@ -119,8 +123,14 @@ r352NoIntermediateRemainderOntology : Bool
 r352NoIntermediateRemainderOntology =
   R352.round352NoIntermediateRemainderOntology
 
+-- Historical name retained append-only.  The source field used here is
+-- R352.round352PackageAClosed; the corrected explicit alias follows below.
 r352SignedGramRemainderPaymentClosed : Bool
 r352SignedGramRemainderPaymentClosed =
+  R352.round352PackageAClosed
+
+r352PackageAClosedCorrectedAlias : Bool
+r352PackageAClosedCorrectedAlias =
   R352.round352PackageAClosed
 
 r301PhysicalNestedHeatKernelRowBudgetClosed : Bool
@@ -178,6 +188,68 @@ literalR378PaymentLeavesConstructorRecoveredInThisPass = false
 
 remainingOldLanguageLeafIsLiteralTemporalWeightedRemainderPayment : Bool
 remainingOldLanguageLeafIsLiteralTemporalWeightedRemainderPayment = true
+
+------------------------------------------------------------------------
+-- Lyapunov / residence / expenditure / good-bad archaeology.
+--
+-- Four older vocabularies now converge on the same producer boundary:
+--
+-- * compact-Gamma expenditure has the exact potential law
+--     D Phi + coercive = dissipation + replenishment,
+--   and integrates it to a finite expenditure once the pointwise physical law
+--   is supplied;
+-- * Round51 potential-drop forcing turns beta_q <= F_q - F_(q+1) into the
+--   cutoff-independent prefix budget F_0 by exact telescoping;
+-- * Round31/38 HH-bad residence turns bad occupation/crossing cost into a
+--   viscous payment once the physical integrated-defect/variation estimates
+--   are supplied;
+-- * Round39 HH-good has the exact squared geometric reserve criterion, while
+--   the physical unsquared PV owner estimate remains separate.
+--
+-- Thus these are not four unrelated failed planners.  They are four candidate
+-- producer presentations for a monotone/depleting physical quantity.  None of
+-- the audited owners yet derives that quantity from the live NS trajectory.
+------------------------------------------------------------------------
+
+compactGammaLyapunovPotentialArchitectureRecovered : Bool
+compactGammaLyapunovPotentialArchitectureRecovered = true
+
+compactGammaConcretePeriodicPDEInputsInhabited : Bool
+compactGammaConcretePeriodicPDEInputsInhabited =
+  ExpPeriodic.periodicConcreteExpenditureInputsInhabited
+
+potentialDropUniformisationMechanismRecovered : Bool
+potentialDropUniformisationMechanismRecovered =
+  Potential51.telescopingGeneratedLeakageClosesRawForcingRoute
+
+physicalPotentialDropProducerRecoveredInThisPass : Bool
+physicalPotentialDropProducerRecoveredInThisPass = false
+
+hhBadOccupationCrossingFiniteControlRecovered : Bool
+hhBadOccupationCrossingFiniteControlRecovered =
+  HHBad38.hhBadOccupationCrossingFiniteControlClosed
+
+physicalHHBadIntegratedDefectBoundRecovered : Bool
+physicalHHBadIntegratedDefectBoundRecovered =
+  HHBad38.physicalHHBadIntegratedDefectBoundConstructed
+
+physicalHHBadPositiveVariationBoundRecovered : Bool
+physicalHHBadPositiveVariationBoundRecovered =
+  HHBad38.physicalHHBadPositiveVariationBoundConstructed
+
+hhGoodSquaredReserveCriterionRecovered : Bool
+hhGoodSquaredReserveCriterionRecovered =
+  HHGood39.hhGoodSquaredBudgetCriterionClosed
+
+physicalUnsquaredPVHHGoodOwnerRecovered : Bool
+physicalUnsquaredPVHHGoodOwnerRecovered =
+  HHGood39.physicalUnsquaredPVHHGoodOwnerAbsorptionConstructed
+
+olderLyapunovResidenceGoodBadFamiliesConvergeOnProducerBoundary : Bool
+olderLyapunovResidenceGoodBadFamiliesConvergeOnProducerBoundary = true
+
+physicalMonotonePotentialOrEquivalentSignedBudgetRecoveredInThisPass : Bool
+physicalMonotonePotentialOrEquivalentSignedBudgetRecoveredInThisPass = false
 
 ------------------------------------------------------------------------
 -- What the snowball has actually established.
@@ -238,6 +310,10 @@ r352R300WeightedRemainderFeedsR303DirectlyIsTrue :
   r352R300WeightedRemainderFeedsR303Directly ≡ true
 r352R300WeightedRemainderFeedsR303DirectlyIsTrue = refl
 
+r352PackageAClosedCorrectedAliasIsFalse :
+  r352PackageAClosedCorrectedAlias ≡ false
+r352PackageAClosedCorrectedAliasIsFalse = refl
+
 r301PhysicalNestedHeatKernelRowBudgetClosedIsFalse :
   r301PhysicalNestedHeatKernelRowBudgetClosed ≡ false
 r301PhysicalNestedHeatKernelRowBudgetClosedIsFalse = refl
@@ -293,6 +369,38 @@ literalR378PaymentLeavesConstructorRecoveredInThisPassIsFalse = refl
 remainingOldLanguageLeafIsLiteralTemporalWeightedRemainderPaymentIsTrue :
   remainingOldLanguageLeafIsLiteralTemporalWeightedRemainderPayment ≡ true
 remainingOldLanguageLeafIsLiteralTemporalWeightedRemainderPaymentIsTrue = refl
+
+compactGammaConcretePeriodicPDEInputsInhabitedIsFalse :
+  compactGammaConcretePeriodicPDEInputsInhabited ≡ false
+compactGammaConcretePeriodicPDEInputsInhabitedIsFalse = refl
+
+potentialDropUniformisationMechanismRecoveredIsTrue :
+  potentialDropUniformisationMechanismRecovered ≡ true
+potentialDropUniformisationMechanismRecoveredIsTrue = refl
+
+hhBadOccupationCrossingFiniteControlRecoveredIsTrue :
+  hhBadOccupationCrossingFiniteControlRecovered ≡ true
+hhBadOccupationCrossingFiniteControlRecoveredIsTrue = refl
+
+physicalHHBadIntegratedDefectBoundRecoveredIsFalse :
+  physicalHHBadIntegratedDefectBoundRecovered ≡ false
+physicalHHBadIntegratedDefectBoundRecoveredIsFalse = refl
+
+physicalHHBadPositiveVariationBoundRecoveredIsFalse :
+  physicalHHBadPositiveVariationBoundRecovered ≡ false
+physicalHHBadPositiveVariationBoundRecoveredIsFalse = refl
+
+hhGoodSquaredReserveCriterionRecoveredIsTrue :
+  hhGoodSquaredReserveCriterionRecovered ≡ true
+hhGoodSquaredReserveCriterionRecoveredIsTrue = refl
+
+physicalUnsquaredPVHHGoodOwnerRecoveredIsFalse :
+  physicalUnsquaredPVHHGoodOwnerRecovered ≡ false
+physicalUnsquaredPVHHGoodOwnerRecoveredIsFalse = refl
+
+physicalMonotonePotentialOrEquivalentSignedBudgetRecoveredInThisPassIsFalse :
+  physicalMonotonePotentialOrEquivalentSignedBudgetRecoveredInThisPass ≡ false
+physicalMonotonePotentialOrEquivalentSignedBudgetRecoveredInThisPassIsFalse = refl
 
 cutoffUniformSignedSpacetimePaymentRecoveredInThisPassIsFalse :
   cutoffUniformSignedSpacetimePaymentRecoveredInThisPass ≡ false
