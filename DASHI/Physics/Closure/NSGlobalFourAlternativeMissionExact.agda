@@ -91,9 +91,9 @@ statusB = alternative-mission-status
   B-periodic-unforced-global dashiTypedReconstruction
   BSurface.submissionTheoremStatementConstructed internallyOpen
 
--- OpenAI's public 2026-09-08 C/D release is recorded here only as external
--- source status. Exact external theorem -> DASHI same-object proof transport is
--- a separate obligation and is NOT represented by internallyPaid.
+-- Public 2026-09-08 C/D release status is recorded only as external source
+-- evidence. Exact external theorem -> DASHI same-object proof transport is a
+-- separate obligation and is NOT represented by internallyPaid.
 statusC : AlternativeMissionStatus
 statusC = alternative-mission-status
   C-euclidean-forced-breakdown externalReleasedFormalProofSource true internallyOpen
@@ -186,7 +186,6 @@ oneAlternativeDoesNotAutomaticallyPayAllFour ()
 data ForcedPaysUnforced : Set where
 data PeriodicPaysEuclidean : Set where
 data ExternalSourcePaysInternalProof : Set where
-
 data TimestampPaysMathematics : Set where
 
 forcedDoesNotPayUnforced : ForcedPaysUnforced → ⊥
