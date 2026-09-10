@@ -22,15 +22,18 @@ module DASHI.Physics.Closure.NSTriadKNNestedSpectatorR547GlobalSignedComposition
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact as R547
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventNestedCommutatorBidiExact as NestedSpec
 
@@ -56,25 +59,38 @@ module GlobalNested
 
   -- R547 already is the complete signed spectator aggregation.
   existingSignedBetaSum :
-    Z3.FourierMode -> List Physical.PhysicalTriadIncidence -> Rational.ℚ
+    Z3.FourierMode -> List Physical.PhysicalTriadIncidence -> ℚ
   existingSignedBetaSum = Old.factoredFull
 
   -- The local nested carrier is already available for every beta under the
   -- literal nonseparable spectator resolvent weight.
   nestedFixedOutputCarrier :
+    Physical.PhysicalTriadIncidence -> Z3.FourierMode -> C3.Complex3 F
+  nestedFixedOutputCarrier beta output =
+    let module N = New.Nested beta in
+    R224.foldVector N.nestedWeightedCompanionCell
+      (Output.physicalOutputFiber
+        (Audit.cutoff (Field30.finiteSystem physicalSystem)) output)
+
+  -- This is the exact local same-object receipt that justifies exposing the
+  -- nested carrier above.  It is inherited from the R541 x R573 weld.
+  fixedOutputOuterToNested :
     (beta : Physical.PhysicalTriadIncidence) ->
     (output : Z3.FourierMode) ->
     let module N = New.Nested beta in
-    C3.Complex3 F
-  nestedFixedOutputCarrier beta output =
-    let module N = New.Nested beta in
-    -- `fixedOutputFourSpectatorResolvedR294IsNested` proves that this fold is
-    -- definitionally the same weighted outer object after the inner four-sign
-    -- expansion.  We expose the RHS directly as the reusable carrier.
-    let open import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact in
-    foldVector N.nestedWeightedCompanionCell
-      (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+    R224.foldVector
+      (λ alpha -> C3.complex3Add
+        (DASHI.Physics.Closure.NSTriadKNWeightedProjectedForcingOuterFoldRound438Exact.doubleWeightedProjectedForcingCell
+          (New.Spec.spectatorWeight beta) S
+          (Field30.finiteSystem physicalSystem) alpha)
+        (DASHI.Physics.Closure.NSTriadKNWeightedProjectedForcingOuterFoldRound438Exact.doubleWeightedProjectedForcingCell
+          (New.Spec.spectatorWeight beta) S
+          (Field30.finiteSystem physicalSystem) alpha))
+      (Output.physicalOutputFiber
         (Audit.cutoff (Field30.finiteSystem physicalSystem)) output)
+    ≡ nestedFixedOutputCarrier beta output
+  fixedOutputOuterToNested beta output =
+    New.fixedOutputFourSpectatorResolvedR294IsNested beta output
 
 roundNestedSpectatorR547ExistingGlobalBetaSumClosed : Bool
 roundNestedSpectatorR547ExistingGlobalBetaSumClosed = true
