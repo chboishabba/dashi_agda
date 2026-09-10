@@ -22,10 +22,11 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 --
 -- with B independent of N.
 --
--- Therefore all decompositions below R503 are producer tactics.  The canonical
--- global first residual remains the literal R406 signed-cross payment; after it,
--- the independent phase-sensitive critical-production leaf remains.  No analytic
--- payment or Clay closure is asserted here.
+-- The temporal-priority ledger now records first source implementation
+-- separately from type-check/kernel/publication status.  The global A/B/C/D
+-- owner keeps Clay's any-one criterion distinct from DASHI's stronger all-four
+-- research mission.  Neither chronology nor external C/D source status pays a
+-- missing internal theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -65,6 +66,8 @@ import DASHI.Physics.Closure.NSTriadKNLiveCriticalConePaymentCompilerRound589Exa
 import DASHI.Physics.Closure.NSTriadKNLiveCriticalConeRegionPaymentRound590Exact
 import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact
 import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact as R592
+import DASHI.Physics.Closure.NSFirstImplementationPriorityLedgerExact as Priority
+import DASHI.Physics.Closure.NSGlobalFourAlternativeMissionExact as Global4
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -117,6 +120,17 @@ round569DirectTemporalLeastPrivilegeIntegrated = true
 round569CanonicalDirectR503FrontierIntegrated : Bool
 round569CanonicalDirectR503FrontierIntegrated = true
 
+round569FirstImplementationPriorityLedgerIntegrated : Bool
+round569FirstImplementationPriorityLedgerIntegrated = true
+
+round569GlobalFourAlternativeMissionIntegrated : Bool
+round569GlobalFourAlternativeMissionIntegrated =
+  Global4.roundGlobalFourAlternativeMissionImplemented
+
+round569R503ConsumerPredatesSeptember8Release : Bool
+round569R503ConsumerPredatesSeptember8Release =
+  Priority.r503ConsumerWasInSourceBeforePublicSeptember8Release
+
 round569R587AbsoluteNormRouteMandatory : Bool
 round569R587AbsoluteNormRouteMandatory = false
 
@@ -138,8 +152,19 @@ round569CanonicalLeafAIsSingleDirectR503Budget =
 round569CanonicalDirectR503BudgetClosed : Bool
 round569CanonicalDirectR503BudgetClosed = R592.round592CanonicalLeafAClosed
 
+round569GlobalAllFourInternallyPaid : Bool
+round569GlobalAllFourInternallyPaid = Global4.roundGlobalAllFourInternallyPaid
+
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
 
 round569ClayPromotion : Bool
 round569ClayPromotion = false
+
+round569R503ConsumerPredatesSeptember8ReleaseIsTrue :
+  round569R503ConsumerPredatesSeptember8Release ≡ true
+round569R503ConsumerPredatesSeptember8ReleaseIsTrue = refl
+
+round569GlobalAllFourInternallyPaidIsFalse :
+  round569GlobalAllFourInternallyPaid ≡ false
+round569GlobalAllFourInternallyPaidIsFalse = refl
