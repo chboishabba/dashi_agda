@@ -11,18 +11,9 @@ import DASHI.Wikimedia.IbrahimSnowballMemoryRepetitionSourceDependencyConsensusB
 import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisPeerReviewConflictIndependenceBidiExact as Synthesis
 import DASHI.Wikimedia.IbrahimSnowballDependencyNDimLocalGlobalProofSearchBidiExact as NDim
 import DASHI.Wikimedia.IbrahimSnowballAtomicClaimIntentExperimentAdequacyBidiExact as Atomic
+import DASHI.Wikimedia.IbrahimSnowballEthnographyParticipantObservationFieldworkBidiExact as Fieldwork
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSymbolicVerificationDeweyQidDoiBidiExact as Dewey
-
-------------------------------------------------------------------------
--- LIVE IBRAHIM ROADMAP
---
--- Historical owns the original rank-1..10 discovery roadmap.
--- Delta records later payment/narrowing.
--- This owner records the current frontier after the newest dependency,
--- evidence-synthesis, N-dimensional proof-search and atomic-claim tranches.
--- It is intentionally a thin status/navigation surface.
-------------------------------------------------------------------------
 
 data LiveState : Set where
   completeAsParent : LiveState
@@ -43,10 +34,6 @@ record LiveRoadmapTarget : Set where
     sourceCoordinate : String
     completionTest : String
 open LiveRoadmapTarget public
-
-------------------------------------------------------------------------
--- The prior independence/consensus frontier was paid concurrently.
-------------------------------------------------------------------------
 
 independenceConsensusNowPaid : LiveRoadmapTarget
 independenceConsensusNowPaid = live-roadmap-target
@@ -72,25 +59,21 @@ atomicExperimentAdequacyNowPaid = live-roadmap-target
   "Blackwell 1953 DOI 10.1214/aoms/1177729032; Cronbach-Meehl 1955 DOI 10.1037/h0040957"
   "green tests cannot be promoted unless constructor, operationalization and tested consumer match the intended atomic claim"
 
-------------------------------------------------------------------------
--- Re-ranked live frontier.
-------------------------------------------------------------------------
-
 ethnographyParticipantObservation : LiveRoadmapTarget
 ethnographyParticipantObservation = live-roadmap-target
-  1
+  0
   "Ethnography / participant observation"
-  compositionNeeded
-  "Two-Eyed/community observer machinery; Brown observer plurality; social-influence consent/coercion; archive/source criticism; testimony/credibility"
-  "compose one canonical fieldwork receipt retaining observer relation, participant role, consent/authority, time, interpretation, source provenance, affected-subject voice and revision"
+  completeAsParent
+  "EthnographyParticipantObservationFieldworkBidiExact plus Two-Eyed/community observer, consent/coercion, archive/source criticism and testimony/credibility owners"
+  "only concrete fieldwork-specific residuals remain"
   "ethnography Q132151; participant observation Q1129049"
   "DDC unresolved until an exact inspected classification is paid"
-  "method/source citations should remain distinct from community testimony and institutional records"
-  "one thin receipt composes existing primitives and proves observation/participation cannot manufacture consent, community authority or whole-system truth"
+  "Roque et al. DOI 10.1177/1525822X231198989; Seim DOI 10.1177/0049124120986209; Brear-Tsotetsi DOI 10.1177/14687941211004417"
+  "future work must exhibit an observer/participant/consent/authority/source-provenance distinction not representable by the canonical fieldwork receipt"
 
 geologyBreadth : LiveRoadmapTarget
 geologyBreadth = live-roadmap-target
-  2
+  1
   "First concrete geology breadth consumer"
   concreteConsumerNeeded
   "Geology/Environment/DeepTimeCarbon plus archaeology and Tiwi ecological joins"
@@ -102,7 +85,7 @@ geologyBreadth = live-roadmap-target
 
 healthcareBreadth : LiveRoadmapTarget
 healthcareBreadth = live-roadmap-target
-  3
+  2
   "First concrete healthcare/public-health consumer"
   concreteConsumerNeeded
   "Healthcare equality/access/governance owners"
@@ -114,7 +97,7 @@ healthcareBreadth = live-roadmap-target
 
 petrochemistryParentAudit : LiveRoadmapTarget
 petrochemistryParentAudit = live-roadmap-target
-  4
+  3
   "Petrochemistry / petroleum / refining / materials / emissions parent audit"
   residualOnly
   "SaltPetroleumIndustrialChemistryNetwork; IndustrialChemistryLogistics; DeepTimeCarbonBiosphereFossilFuel; climate branches"
@@ -123,10 +106,6 @@ petrochemistryParentAudit = live-roadmap-target
   "Dewey unresolved in this owner; chemistry/engineering shelf choice is not semantic authority"
   "process-specific chemistry/engineering sources stay separate from climate/economic attribution"
   "add a parent only if a concrete duplicated transport survives quotienting"
-
-------------------------------------------------------------------------
--- Cross-cutting roadmap completion criterion.
-------------------------------------------------------------------------
 
 record RoadmapCompletionCriterion : Set where
   constructor roadmap-completion-criterion
@@ -160,3 +139,6 @@ independenceBoundary = Synthesis.canonicalEvidenceSynthesisPeerReviewIndependenc
 
 atomicBoundary : Atomic.AtomicClaimIntentExperimentAdequacyBoundary
 atomicBoundary = Atomic.canonicalAtomicClaimIntentExperimentAdequacyBoundary
+
+fieldworkBoundary : Fieldwork.EthnographyParticipantObservationBoundary
+fieldworkBoundary = Fieldwork.canonicalEthnographyParticipantObservationBoundary
