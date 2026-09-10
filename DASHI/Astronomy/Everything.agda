@@ -1,0 +1,5 @@
+module DASHI.Astronomy.Everything where
+
+open import DASHI.Astronomy.LocalGroupVirtualObservatoryFirstLightSourceExact public
+open import DASHI.Astronomy.LocalGroupObservationFrameProvenanceExact public
+open import DASHI.Astronomy.LocalGroupFirstLightScientificClaimsExact public
