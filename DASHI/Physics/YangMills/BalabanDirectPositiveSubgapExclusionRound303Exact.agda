@@ -3,22 +3,13 @@ module DASHI.Physics.YangMills.BalabanDirectPositiveSubgapExclusionRound303Exact
 
 ------------------------------------------------------------------------
 -- ROUND303 / DIRECT POSITIVE-SUBGAP EXCLUSION WITHOUT OLD RATE RECORDS
---
--- R301 exposed the right mode-indexed contradiction but still packaged the
--- historical unconditional q_E<1 field.  R302 shows the physical argument only
--- needs q_E<1 after a PositiveEnergy witness and derives both q-bounds from one
--- transfer-energy coordinate.
---
--- Therefore the terminal exclusion theorem consumes only:
---   * the exact positive spectral component decomposition (R300);
---   * the same transfer energy/decay-ratio coordinate (R302);
---   * the continuum q=1/2 upper bound already produced by B1;
---   * source-independent rational geometric dominance.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (fst; snd)
 open import Data.Product using (proj₁; proj₂)
+open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -37,7 +28,7 @@ import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 
 record DirectPositiveSubgapExclusionPayment
     {Measure TestObservable Energy Vector : Set}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.Base.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {tests : R278.SelectedConnectedCovarianceTests dataSet}
     {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
@@ -55,7 +46,7 @@ open DirectPositiveSubgapExclusionPayment public
 
 noPositiveSubgapMode :
   ∀ {Measure TestObservable Energy Vector}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.Base.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {tests : R278.SelectedConnectedCovarianceTests dataSet}
     {quantitative : R299.QuantitativePositiveTimeVacuumCyclicity TestObservable Vector}
@@ -85,8 +76,8 @@ noPositiveSubgapMode
       (R300.selectedOverlapWeightPositive decomposition energy mode)
       (proj₁ ratioBounds)
       (proj₂ ratioBounds)
-    time = Agda.Builtin.Sigma.fst witness
-    upperStrictlyBelowLower = Agda.Builtin.Sigma.snd witness
+    time = fst witness
+    upperStrictlyBelowLower = snd witness
     lowerBelowCorrelation =
       R300.spectralComponentBelowCorrelation decomposition energy mode time
     correlationBelowUpper = continuumUpper payment observable time
