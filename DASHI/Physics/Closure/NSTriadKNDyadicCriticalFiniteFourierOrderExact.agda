@@ -1,16 +1,17 @@
 module DASHI.Physics.Closure.NSTriadKNDyadicCriticalFiniteFourierOrderExact where
 
 ------------------------------------------------------------------------
--- DYADIC / PHYSICAL H^(1/2) MULTIPLIER COMPARISON ON FINITE FOURIER SUMS
+-- DYADIC / PHYSICAL CRITICAL MULTIPLIER COMPARISON ON FINITE FOURIER SUMS
 --
 -- R518 supplies squared-radius bounds on each positive dyadic shell.  R519 now
 -- transports those bounds through the constructed Bishop Nat square root.
--- BishopFiniteWeightedSumOrderExact then lifts the modewise comparison through
--- an arbitrary finite Fourier list against any nonnegative modal mass.
+-- BishopFiniteWeightedSumOrderExact lifts the modewise comparisons through an
+-- arbitrary finite Fourier list against any nonnegative modal mass.
 --
--- This is exactly the finite-carrier transport that R517 left after the scalar
--- root monotonicity seam.  No Navier--Stokes cancellation estimate appears and
--- no postulate is introduced.
+-- H^(1/2) uses the root multiplier.  H^(3/2) uses its cube.  Because all three
+-- root weights are nonnegative, the same modewise order transports through the
+-- cube by vendor/bishop's monotone multiplication.  No Navier--Stokes
+-- cancellation estimate or postulate is introduced.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -43,6 +44,43 @@ physicalCriticalWeight k = R519.sqrtNat (ModeNorm.modeNatNormSquared k)
 upperCriticalWeight : Z3.FourierMode → BishopReal.ℝ
 upperCriticalWeight k = R519.sqrtNat (R518.canonicalDyadicUpperSquare k)
 
+cube : BishopReal.ℝ → BishopReal.ℝ
+cube x = BishopReal._*_ (BishopReal._*_ x x) x
+
+lowerCriticalThreeHalfWeight : Z3.FourierMode → BishopReal.ℝ
+lowerCriticalThreeHalfWeight k = cube (lowerCriticalWeight k)
+
+physicalCriticalThreeHalfWeight : Z3.FourierMode → BishopReal.ℝ
+physicalCriticalThreeHalfWeight k = cube (physicalCriticalWeight k)
+
+upperCriticalThreeHalfWeight : Z3.FourierMode → BishopReal.ℝ
+upperCriticalThreeHalfWeight k = cube (upperCriticalWeight k)
+
+rootNonnegative :
+  (n : Agda.Builtin.Nat.Nat) →
+  BishopReal.NonNegative (R519.sqrtNat n)
+rootNonnegative = R519.canonicalNatRootNonnegative
+
+cubeMonotone :
+  ∀ {x y : BishopReal.ℝ} →
+  BishopReal.NonNegative x →
+  BishopReal.NonNegative y →
+  BishopReal._≤_ x y →
+  BishopReal._≤_ (cube x) (cube y)
+cubeMonotone {x} {y} xNN yNN x≤y =
+  let
+    squareNNx : BishopReal.NonNegative (BishopReal._*_ x x)
+    squareNNx = BishopProps.nonNegx,y⇒nonNegx*y xNN xNN
+
+    squareNNy : BishopReal.NonNegative (BishopReal._*_ y y)
+    squareNNy = BishopProps.nonNegx,y⇒nonNegx*y yNN yNN
+
+    squareOrder :
+      BishopReal._≤_ (BishopReal._*_ x x) (BishopReal._*_ y y)
+    squareOrder = BishopProps.*-mono-≤ xNN xNN x≤y x≤y
+  in
+  BishopProps.*-mono-≤ squareNNx xNN squareOrder x≤y
+
 modewiseLowerCriticalWeight :
   (k : Z3.FourierMode) →
   0 < Shell.shellIndex k →
@@ -63,6 +101,30 @@ modewiseUpperCriticalWeight k positive =
       (R518.canonicalLowerSquareBelowModeNorm k positive)
       (R518.modeNormBelowCanonicalUpperSquare k))
 
+modewiseLowerCriticalThreeHalfWeight :
+  (k : Z3.FourierMode) →
+  0 < Shell.shellIndex k →
+  BishopReal._≤_
+    (lowerCriticalThreeHalfWeight k)
+    (physicalCriticalThreeHalfWeight k)
+modewiseLowerCriticalThreeHalfWeight k positive =
+  cubeMonotone
+    (rootNonnegative (R518.canonicalDyadicLowerSquare k))
+    (rootNonnegative (ModeNorm.modeNatNormSquared k))
+    (modewiseLowerCriticalWeight k positive)
+
+modewiseUpperCriticalThreeHalfWeight :
+  (k : Z3.FourierMode) →
+  0 < Shell.shellIndex k →
+  BishopReal._≤_
+    (physicalCriticalThreeHalfWeight k)
+    (upperCriticalThreeHalfWeight k)
+modewiseUpperCriticalThreeHalfWeight k positive =
+  cubeMonotone
+    (rootNonnegative (ModeNorm.modeNatNormSquared k))
+    (rootNonnegative (R518.canonicalDyadicUpperSquare k))
+    (modewiseUpperCriticalWeight k positive)
+
 record FiniteCriticalWeightComparison
     (items : List Z3.FourierMode)
     (mass : Z3.FourierMode → BishopReal.ℝ) : Set where
@@ -72,14 +134,24 @@ record FiniteCriticalWeightComparison
       (k : Z3.FourierMode) → OccursIn k items → 0 < Shell.shellIndex k
     massNonnegative :
       (k : Z3.FourierMode) → BishopReal.NonNegative (mass k)
-    lowerSumBelowPhysical :
+
+    lowerHalfSumBelowPhysical :
       BishopReal._≤_
         (Sum.weightedSum lowerCriticalWeight mass items)
         (Sum.weightedSum physicalCriticalWeight mass items)
-    physicalSumBelowUpper :
+    physicalHalfSumBelowUpper :
       BishopReal._≤_
         (Sum.weightedSum physicalCriticalWeight mass items)
         (Sum.weightedSum upperCriticalWeight mass items)
+
+    lowerThreeHalfSumBelowPhysical :
+      BishopReal._≤_
+        (Sum.weightedSum lowerCriticalThreeHalfWeight mass items)
+        (Sum.weightedSum physicalCriticalThreeHalfWeight mass items)
+    physicalThreeHalfSumBelowUpper :
+      BishopReal._≤_
+        (Sum.weightedSum physicalCriticalThreeHalfWeight mass items)
+        (Sum.weightedSum upperCriticalThreeHalfWeight mass items)
 
 open FiniteCriticalWeightComparison public
 
@@ -92,18 +164,20 @@ buildFiniteCriticalWeightComparison :
 buildFiniteCriticalWeightComparison items mass positive massNN = record
   { allPositiveShell = positive
   ; massNonnegative = massNN
-  ; lowerSumBelowPhysical = lowerGo items positive
-  ; physicalSumBelowUpper = upperGo items positive
+  ; lowerHalfSumBelowPhysical = lowerHalfGo items positive
+  ; physicalHalfSumBelowUpper = upperHalfGo items positive
+  ; lowerThreeHalfSumBelowPhysical = lowerThreeHalfGo items positive
+  ; physicalThreeHalfSumBelowUpper = upperThreeHalfGo items positive
   }
   where
-  lowerGo :
+  lowerHalfGo :
     (xs : List Z3.FourierMode) →
     ((k : Z3.FourierMode) → OccursIn k xs → 0 < Shell.shellIndex k) →
     BishopReal._≤_
       (Sum.weightedSum lowerCriticalWeight mass xs)
       (Sum.weightedSum physicalCriticalWeight mass xs)
-  lowerGo [] pos = BishopProps.≤-refl
-  lowerGo (k ∷ rest) pos =
+  lowerHalfGo [] pos = BishopProps.≤-refl
+  lowerHalfGo (k ∷ rest) pos =
     let
       head = modewiseLowerCriticalWeight k (pos k here)
       tailPos :
@@ -112,16 +186,16 @@ buildFiniteCriticalWeightComparison items mass positive massNN = record
     in
     BishopProps.+-mono-≤
       (BishopProps.*-monoʳ-≤-nonNeg head (massNN k))
-      (lowerGo rest tailPos)
+      (lowerHalfGo rest tailPos)
 
-  upperGo :
+  upperHalfGo :
     (xs : List Z3.FourierMode) →
     ((k : Z3.FourierMode) → OccursIn k xs → 0 < Shell.shellIndex k) →
     BishopReal._≤_
       (Sum.weightedSum physicalCriticalWeight mass xs)
       (Sum.weightedSum upperCriticalWeight mass xs)
-  upperGo [] pos = BishopProps.≤-refl
-  upperGo (k ∷ rest) pos =
+  upperHalfGo [] pos = BishopProps.≤-refl
+  upperHalfGo (k ∷ rest) pos =
     let
       head = modewiseUpperCriticalWeight k (pos k here)
       tailPos :
@@ -130,10 +204,49 @@ buildFiniteCriticalWeightComparison items mass positive massNN = record
     in
     BishopProps.+-mono-≤
       (BishopProps.*-monoʳ-≤-nonNeg head (massNN k))
-      (upperGo rest tailPos)
+      (upperHalfGo rest tailPos)
+
+  lowerThreeHalfGo :
+    (xs : List Z3.FourierMode) →
+    ((k : Z3.FourierMode) → OccursIn k xs → 0 < Shell.shellIndex k) →
+    BishopReal._≤_
+      (Sum.weightedSum lowerCriticalThreeHalfWeight mass xs)
+      (Sum.weightedSum physicalCriticalThreeHalfWeight mass xs)
+  lowerThreeHalfGo [] pos = BishopProps.≤-refl
+  lowerThreeHalfGo (k ∷ rest) pos =
+    let
+      head = modewiseLowerCriticalThreeHalfWeight k (pos k here)
+      tailPos :
+        (x : Z3.FourierMode) → OccursIn x rest → 0 < Shell.shellIndex x
+      tailPos x member = pos x (there member)
+    in
+    BishopProps.+-mono-≤
+      (BishopProps.*-monoʳ-≤-nonNeg head (massNN k))
+      (lowerThreeHalfGo rest tailPos)
+
+  upperThreeHalfGo :
+    (xs : List Z3.FourierMode) →
+    ((k : Z3.FourierMode) → OccursIn k xs → 0 < Shell.shellIndex k) →
+    BishopReal._≤_
+      (Sum.weightedSum physicalCriticalThreeHalfWeight mass xs)
+      (Sum.weightedSum upperCriticalThreeHalfWeight mass xs)
+  upperThreeHalfGo [] pos = BishopProps.≤-refl
+  upperThreeHalfGo (k ∷ rest) pos =
+    let
+      head = modewiseUpperCriticalThreeHalfWeight k (pos k here)
+      tailPos :
+        (x : Z3.FourierMode) → OccursIn x rest → 0 < Shell.shellIndex x
+      tailPos x member = pos x (there member)
+    in
+    BishopProps.+-mono-≤
+      (BishopProps.*-monoʳ-≤-nonNeg head (massNN k))
+      (upperThreeHalfGo rest tailPos)
 
 roundFiniteHOneHalfMultiplierTransportClosed : Bool
 roundFiniteHOneHalfMultiplierTransportClosed = true
+
+roundFiniteHThreeHalfMultiplierTransportClosed : Bool
+roundFiniteHThreeHalfMultiplierTransportClosed = true
 
 roundIntroducesNSCancellationEstimate : Bool
 roundIntroducesNSCancellationEstimate = false
@@ -147,6 +260,10 @@ roundClayPromotion = false
 roundFiniteHOneHalfMultiplierTransportClosedIsTrue :
   roundFiniteHOneHalfMultiplierTransportClosed ≡ true
 roundFiniteHOneHalfMultiplierTransportClosedIsTrue = refl
+
+roundFiniteHThreeHalfMultiplierTransportClosedIsTrue :
+  roundFiniteHThreeHalfMultiplierTransportClosed ≡ true
+roundFiniteHThreeHalfMultiplierTransportClosedIsTrue = refl
 
 roundUsesPostulateIsFalse : roundUsesPostulate ≡ false
 roundUsesPostulateIsFalse = refl
