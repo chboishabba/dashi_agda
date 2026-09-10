@@ -3,14 +3,25 @@ use std::env;
 use std::fs;
 use std::path::PathBuf;
 
-const SCHEMA: &str = "slr-discourse-spans-v2";
+const SCHEMA: &str = "slr-discourse-spans-v3";
 
 #[derive(Clone, Debug)]
 struct Config { graph: PathBuf, parser: PathBuf, source: PathBuf, ledger: PathBuf, reconstructed: PathBuf }
 #[derive(Clone, Debug)]
 struct Sentence { id: usize, start: usize, end: usize, token_starts: Vec<usize> }
 #[derive(Clone, Debug)]
-struct Boundary { rank: usize, split: usize, projection: String, pareto: String, residual: String, anchor: String }
+struct Boundary {
+    rank: usize,
+    split: usize,
+    projection: String,
+    pareto: String,
+    residual: String,
+    anchor: String,
+    pnf_subject_crossings: usize,
+    pnf_object_crossings: usize,
+    pnf_clause_crossings: usize,
+    pnf_coordination_crossings: usize,
+}
 
 fn usage() -> ! {
     eprintln!("usage: slr-discourse-spans --graph discourse-graph.tsv --parser parser.tsv --source source.txt --ledger spans.tsv --reconstructed reconstructed.txt");
@@ -66,13 +77,37 @@ fn parse_graph(text:&str)->Result<HashMap<usize,Vec<Boundary>>,String>{
     let ix=|n:&str|c.iter().position(|x|*x==n).ok_or_else(||format!("missing {n}"));
     let is=ix("sentence")?; let ir=ix("within_sentence_rank")?; let isp=ix("split")?;
     let ia=ix("anchor")?; let ip=ix("projection")?; let ifr=ix("pareto_fibres")?; let ire=ix("residual_fibres")?;
+    let isu=ix("pnf_subject_crossings")?; let iob=ix("pnf_object_crossings")?;
+    let icl=ix("pnf_clause_crossings")?; let ico=ix("pnf_coordination_crossings")?;
     let mut out:HashMap<usize,Vec<Boundary>>=HashMap::new();
     for line in lines {
         let p:Vec<&str>=line.split('\t').collect(); if p.len()<c.len(){continue}
         let sid:usize=p[is].parse().map_err(|_|"bad sentence")?;
-        out.entry(sid).or_default().push(Boundary{rank:p[ir].parse().map_err(|_|"bad rank")?,split:p[isp].parse().map_err(|_|"bad split")?,anchor:p[ia].to_string(),projection:p[ip].to_string(),pareto:p[ifr].to_string(),residual:p[ire].to_string()});
+        out.entry(sid).or_default().push(Boundary{
+            rank:p[ir].parse().map_err(|_|"bad rank")?, split:p[isp].parse().map_err(|_|"bad split")?,
+            anchor:p[ia].to_string(), projection:p[ip].to_string(), pareto:p[ifr].to_string(), residual:p[ire].to_string(),
+            pnf_subject_crossings:p[isu].parse().unwrap_or(0), pnf_object_crossings:p[iob].parse().unwrap_or(0),
+            pnf_clause_crossings:p[icl].parse().unwrap_or(0), pnf_coordination_crossings:p[ico].parse().unwrap_or(0),
+        });
     }
     Ok(out)
+}
+
+fn speaker_pnf_safe(b:&Boundary)->bool {
+    b.pnf_subject_crossings==0 && b.pnf_object_crossings==0 && b.pnf_clause_crossings==0
+}
+fn quote_pnf_safe(b:&Boundary)->bool {
+    // A quote handoff may cross the clausal/content attachment that represents
+    // reporter -> quoted-content structure, but must not sever core actor/patient roles.
+    b.pnf_subject_crossings==0 && b.pnf_object_crossings==0
+}
+fn hard_cut_admissible(b:&Boundary)->bool {
+    if b.rank!=1 {return false}
+    match b.projection.as_str() {
+        "speaker" => speaker_pnf_safe(b),
+        "quote" => quote_pnf_safe(b),
+        _ => false,
+    }
 }
 
 fn char_to_byte_map(s:&str)->Vec<usize>{let mut v=s.char_indices().map(|(i,_)|i).collect::<Vec<_>>();v.push(s.len());v}
@@ -85,9 +120,6 @@ fn render_projection(source: &str, cmap: &[usize], hard_cut_positions: &BTreeSet
         let byte = cmap[(*char_pos).min(cmap.len().saturating_sub(1))];
         if byte < last_byte || byte > source.len() { continue; }
         out.push_str(&source[last_byte..byte]);
-        // Candidate segmentation is represented by one inserted newline only.
-        // All source bytes before/after it, including original blank-line paragraph
-        // separators, remain untouched and in their original order.
         if !out.ends_with('\n') { out.push('\n'); }
         last_byte = byte;
     }
@@ -102,16 +134,18 @@ fn main()->Result<(),Box<dyn std::error::Error>>{
     let sentences=parse_parser(&fs::read_to_string(&cfg.parser)?).map_err(|e|format!("parser: {e}"))?;
     let graph=parse_graph(&fs::read_to_string(&cfg.graph)?).map_err(|e|format!("graph: {e}"))?;
 
-    let mut ledger=String::from("schema\tspan_id\tsentence\tsegment_index\tchar_start\tchar_end\tboundary_before\tboundary_projection\tpareto_fibres\tresidual_fibres\tcandidate_only\n");
+    let mut ledger=String::from("schema\tspan_id\tsentence\tsegment_index\tchar_start\tchar_end\tboundary_before\tboundary_projection\tpareto_fibres\tresidual_fibres\tpnf_subject_crossings\tpnf_object_crossings\tpnf_clause_crossings\tpnf_coordination_crossings\tcandidate_only\n");
     let mut hard_cut_positions:BTreeSet<usize>=BTreeSet::new();
-    let mut span_count=0usize; let mut hard_cut_count=0usize; let mut unresolved_count=0usize;
+    let mut span_count=0usize; let mut hard_cut_count=0usize; let mut unresolved_count=0usize; let mut pnf_blocked_count=0usize;
 
     for s in sentences {
         let mut cuts:BTreeMap<usize,Boundary>=BTreeMap::new();
         if let Some(bs)=graph.get(&s.id) {
             for b in bs {
-                if b.rank==1 && (b.projection=="speaker" || b.projection=="quote") && b.split>0 && b.split<s.token_starts.len() {
+                if hard_cut_admissible(b) && b.split>0 && b.split<s.token_starts.len() {
                     cuts.insert(b.split,b.clone());
+                } else if b.rank==1 && (b.projection=="speaker" || b.projection=="quote") && !hard_cut_admissible(b) {
+                    pnf_blocked_count+=1;
                 } else if b.rank==1 && b.projection=="unresolved" {
                     unresolved_count+=1;
                 }
@@ -131,11 +165,11 @@ fn main()->Result<(),Box<dyn std::error::Error>>{
             if end <= *start {continue}
             let text=char_slice(&source,&cmap,*start,end);
             if text.trim().is_empty(){continue}
-            let (proj,pareto,residual,anchor)=match before {
-                Some(b)=>(b.projection.as_str(),b.pareto.as_str(),b.residual.as_str(),b.anchor.as_str()),
-                None=>("original-sentence-start","","","")
+            let (proj,pareto,residual,anchor,subj,obj,clause,coord)=match before {
+                Some(b)=>(b.projection.as_str(),b.pareto.as_str(),b.residual.as_str(),b.anchor.as_str(),b.pnf_subject_crossings,b.pnf_object_crossings,b.pnf_clause_crossings,b.pnf_coordination_crossings),
+                None=>("original-sentence-start","","","",0,0,0,0)
             };
-            ledger.push_str(&format!("{}\ts{}-{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\ttrue\n",SCHEMA,s.id,idx,s.id,idx,start,end,anchor,proj,pareto,residual));
+            ledger.push_str(&format!("{}\ts{}-{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\ttrue\n",SCHEMA,s.id,idx,s.id,idx,start,end,anchor,proj,pareto,residual,subj,obj,clause,coord));
             span_count+=1;
         }
     }
@@ -143,6 +177,6 @@ fn main()->Result<(),Box<dyn std::error::Error>>{
     let reconstructed=render_projection(&source,&cmap,&hard_cut_positions);
     fs::write(&cfg.ledger,ledger)?;
     fs::write(&cfg.reconstructed,reconstructed)?;
-    eprintln!("SLR_DISCOURSE_SPAN_RECEIPT schema={} graph={} spans={} hard_candidate_cuts={} unresolved_rank1={} hard_cut_rule=rank1-singleton-speaker-or-quote candidate_only=true source_bytes_preserved=true original_separator_topology_preserved=true projection_adds_boundary_newlines_only=true",SCHEMA,cfg.graph.display(),span_count,hard_cut_count,unresolved_count);
+    eprintln!("SLR_DISCOURSE_SPAN_RECEIPT schema={} graph={} spans={} hard_candidate_cuts={} pnf_blocked_rank1_singletons={} unresolved_rank1={} hard_cut_rule=rank1-singleton-speaker-or-quote+pnf-role-preservation quote_clause_crossing_permitted=true candidate_only=true source_bytes_preserved=true original_separator_topology_preserved=true projection_adds_boundary_newlines_only=true",SCHEMA,cfg.graph.display(),span_count,hard_cut_count,pnf_blocked_count,unresolved_count);
     Ok(())
 }
