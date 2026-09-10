@@ -1,300 +1,325 @@
-# Save Woogaroo Forest — legal-team handoff brief
+# Save Woogaroo Forest — legal handoff brief
 
-## Purpose and present posture
+## Purpose
 
-This brief is for Save Woogaroo Forest and lawyers assisting the group, including pro-bono counsel. It is **not legal advice**. It is a source/proof handoff organised by legal consumer: paid atoms, partial atoms, WrongTypes, non-factorability boundaries, adverse evidence and the smallest remaining evidence/action likely to change the outcome.
+This is a concise handoff for Save Woogaroo Forest and lawyers assisting the group, including pro-bono counsel. It is not legal advice. It separates:
 
-The legal critical path remains:
+- what the documents actually show;
+- what remains uncertain;
+- the strongest arguments for and against each route; and
+- the next evidence or legal question that could materially change the position.
 
-```text
-EPBC 2019/8575
-  -> Queensland NCA s 13
-  -> Queensland NCA ss 102–107
-  -> Queensland NCA s 49
-```
-
-Planning/exemption runs in parallel; enforcement is conditional on an exact conduct-to-obligation match. Public-figure outreach remains off the critical path.
+Public-figure outreach is not part of the legal critical path.
 
 ---
 
-## 1. Immediate federal lane — EPBC 2019/8575
+## 1. Immediate federal issue — EPBC 2019/8575
 
-The dated Commonwealth extension notice gives a current decision period ending **1 October 2026** and identifies Declan O'Connor-Cox as the authorised decision-maker.
+The immediate Commonwealth matter is **EPBC 2019/8575, Springfield Residential Development**.
 
-The project's own 2019 referral/MNES ecology substantially source-pays the historical Springview baseline:
+A dated Commonwealth extension notice gives a decision period ending **1 October 2026** and names **Declan O'Connor-Cox, Branch Head, Environment Assessments Queensland**, as the authorised decision-maker.
 
-- 7001 Mur Boulevard / Lot 9999 SP292760;
-- 158.2 ha parcel, 162 ha referral area, 136 ha stated impact area;
-- approximately 136 ha direct Koala-habitat clearing plus 26 ha indirect impact;
-- Koala habitat score 7/10 under the then-used guideline;
+### What the project's own 2019 ecology says
+
+The 2019 referral and Saunders Havill Group ecology material identify:
+
+- 7001 Mur Boulevard, Springfield;
+- Lot 9999 on SP292760;
+- a 158.2 ha parcel;
+- a 162 ha referral area;
+- a 136 ha stated impact area;
+- about 136 ha of direct Koala habitat clearing;
+- about 26 ha of additional indirect Koala habitat impact;
+- Koala habitat score 7/10 under the guideline then used;
 - Koala scats and recognised food trees;
-- connectivity score 2 and a >500 ha habitat-connectivity surface;
-- mapped 136 ha critical-habitat impact area;
-- SHG conclusion that clearing/functional loss of 136 ha would significantly impact Koala habitat critical to survival;
-- approximately 136 ha GHFF foraging-habitat removal and SHG's separate conclusion that this is likely to adversely impact habitat critical to survival, while also arguing broader population/recovery effects are unlikely.
+- habitat connectivity score 2;
+- a mapped habitat-connectivity area greater than 500 ha;
+- a mapped 136 ha critical-habitat impact area;
+- the consultant's conclusion that clearing and functional loss of 136 ha would significantly affect Koala habitat critical to survival;
+- about 136 ha of Grey-headed Flying-fox foraging habitat proposed for removal; and
+- the consultant's conclusion that this removal is likely to adversely affect habitat critical to survival of that species, while separately arguing that broader population and recovery effects are unlikely.
 
-The uploaded file named `2019-8575-Final-PD.pdf` is only a **s 95B(2) publication notice**, not the substantive 2026 Preliminary Documentation. It pays publication chronology, 1,786 comments received and existence of a comments-summary carrier, not final geometry, avoidance, residual impacts, offsets or response adequacy.
+These are important because they are **same-project, proponent-side evidence**. They are not Commonwealth findings and they do not by themselves determine the final approval/refusal decision.
 
-The State Library of Queensland catalogue identifies a four-volume 2026 legal-deposit set (Part Ai report; Part Aii vegetation clearing/fauna management clearing directions; Part Aiii attachment A15; Part B referral material). The contents remain an external acquisition wall.
+### What we still do not have
 
-Federal residual:
+The file in our corpus called `2019-8575-Final-PD.pdf` is only a **one-page publication notice under s 95B(2)**. It says that 1,786 public comments were received and that the Preliminary Documentation and a summary of comments were made available in July–August 2026. It is not the substantive final Preliminary Documentation.
 
-```text
-substantive 2026 PD + attachments
-x actual comments summary/response
-x final action/clearing geometry
-x retained habitat
-x avoidance/alternatives
-x final Koala/GHFF residual-impact reasoning
-x final offsets
-x recovery-plan/conservation-advice treatment
-```
+The State Library of Queensland catalogue records a four-volume 2026 set:
 
-Hard firewalls:
+1. Part Ai — Preliminary Documentation report;
+2. Part Aii — Vegetation clearing and fauna management plan / clearing directions;
+3. Part Aiii — Attachment A15;
+4. Part B — Referral material.
 
-```text
-publication notice != substantive final PD
-2019 referral state != automatically unchanged 2026 state
-SHG consultant conclusion != Commonwealth finding
-significant habitat impact != automatic Part 9 refusal
-1,786 comments received != adequate response to those comments
-```
+Those substantive volumes are still missing from our working corpus.
 
----
+### What counsel should check now
 
-## 2. Queensland s 13 — critical-habitat essentiality
+The most useful federal task is a **2019-to-2026 comparison**. We need to know whether the final 2026 material changed any of the following:
 
-The question is no longer whether Springview performs habitat/corridor functions. Same-project evidence strongly supports remnant vegetation, Koala food trees/scats, Woogaroo/Opossum Creek function, score 7 and >500 ha connectivity, with broader Scenic/Peninsula/Bellevue and official-corridor evidence as separately attributed support.
+- final clearing and disturbance area;
+- habitat retained on site;
+- avoidance and redesign measures;
+- Koala and Grey-headed Flying-fox impact conclusions;
+- offset package and offset locations;
+- treatment of conservation advice and recovery planning;
+- response to the 1,786 public comments.
 
-The remaining legal/ecological relation is:
-
-```text
-exact habitat function
-x relevant viable protected-wildlife population/community
-x essentiality to its conservation
-```
-
-Counsel/ecology must carry the strongest adverse SHG evidence too: recovery value 0, claimed isolation and claimed site non-viability. The useful stress-test is whether those propositions remain coherent with the same report's >500 ha connectivity, current corridor evidence and subsequent surrounding development/fragmentation.
-
-WrongType:
-
-```text
-EPBC Koala-guideline critical habitat != NCA s 13 critical habitat
-species occurrence != s 13 essentiality
-connectivity != statutory essentiality
-```
+The key caution is simple: **the 2019 impact evidence is strong, but it cannot be assumed to be identical to the final 2026 proposal.**
 
 ---
 
-## 3. Queensland ss 102–107 — 9281/2024/OW is now a concrete conditioned works object
+## 2. Queensland interim conservation order — Nature Conservation Act ss 102–107
 
-The newly supplied Council corpus materially advances this lane.
+This route has become much more concrete.
 
-### Approval object
+### The approved local works object
 
-The original Council decision dated 19 September 2025 approved `9281/2024/OW` for Kalina Village 2 Stages 1–16 — Earthworks, Clearing Vegetation, Stormwater and Interim Uses, over:
+`9281/2024/OW` is the Ipswich operational-works approval for **Kalina Village 2 Stages 1–16 — earthworks, vegetation clearing and stormwater**.
 
-```text
-Lot 9999 SP292760
-Lot 9002 SP292760
-Lot 9998 SP236942
-Lot 9995 SP307769
-```
+The 20 March 2026 negotiated approval and negotiated approved plans are now in the evidence set.
 
-The **20 March 2026 Negotiated Decision Notice** records a negotiated approval for Earthworks, Clearing Vegetation and Stormwater. It changes approved-plan notations and, importantly, changes the timing of the arboricultural/retained-vegetation condition from “prior to the prestart meeting” to **“prior to the commencement of any clearing within ten (10) metres of Open Space Areas.”**
+The negotiated approved plan set is `A12705838`. It shows:
 
-### Commonwealth prerequisite — high priority
+- the approved works area;
+- stage boundaries;
+- earthworks areas;
+- bushfire-management clearing areas;
+- bushland-management areas;
+- Open Space areas;
+- O'Dwyer's Gully and Opossum Creek;
+- tree-retention/removal categories at environmental interfaces; and
+- areas where clearing can extend beyond the bulk-earthworks footprint for bushfire management.
 
-Condition 6(a) is a major execution gate. Before the prestart meeting, the applicant must submit either:
+The plans also make clear that the plotted tree symbols are **not a complete inventory of every tree on the site**.
 
-```text
-(i) DCCEEW evidence that the proposed clearing works are not a controlled action; or
-(ii) a copy of the Commonwealth approval if the clearing is a controlled action.
-```
+### Important Commonwealth prerequisite in the Council approval
 
-This means the local Operational Works approval does not, by itself, make the clearing executable independently of the Commonwealth position.
+Condition 6(a) requires, before the prestart meeting, either:
 
-Critical WrongTypes:
+- evidence from DCCEEW that the proposed clearing is not a controlled action; or
+- a copy of the Commonwealth approval if the clearing is a controlled action.
 
-```text
-9281 local approval != satisfaction of Condition 6(a)
-Condition 6(a) requirement != proof it has been satisfied
-local approval != Commonwealth approval
-Commonwealth-approval prerequisite != proof Commonwealth approval already exists
-```
+This is a high-priority factual question:
 
-This is now one of the highest-value counsel questions: **has Condition 6(a) been satisfied, and if not, what is the legal consequence for prestart/clearing while EPBC 2019/8575 remains live?**
+**Has Condition 6(a) been satisfied?**
 
-### Arboriculture / retained vegetation
+We have the condition. We do not yet have evidence that it has been satisfied.
 
-Condition 8 requires a level-5-or-higher arboricultural assessment for native trees to be retained in adjacent Council open-space areas within 10 m of approved earthworks. The assessment must identify trees >20 cm DBH, species, habitat value, health, structural/tree-protection zones and retention value; demonstrate retention through micro-siting/amended design/earthworks strategies; and identify protection fencing. The negotiated timing is before clearing within 10 m of Open Space Areas.
+### Other clearing-related prerequisites
 
-Construction activity is then prohibited beyond protection fencing, including vehicle access, clearing, surface disturbance, stockpiling and earthworks; retained-tree protection is monitored through construction.
+The negotiated approval also requires, among other things:
 
-### Fauna management
+- arboricultural assessment before clearing within 10 m of Open Space Areas;
+- protection measures for retained trees;
+- a licensed fauna spotter-catcher;
+- a pre-clearance fauna management plan;
+- post-clearance fauna reporting;
+- erosion and sediment-control documentation; and
+- an Access and Works Licence before works on relevant Council-controlled land.
 
-Condition 9 requires a licensed spotter-catcher to assess the site, supervise vegetation removal and identify/relocate/discourage native fauna before habitat disturbance. A Pre-Clearance Fauna Management Plan is required before the prestart meeting. Post-clearance reporting must catalogue fauna, location/date/time/actions, address sequential clearing of Koala habitat trees and confirm no vegetation clearing occurred without spotter-catcher supervision.
+These records may become important evidence of whether clearing is imminent, has begun, or is being carried out consistently with approval conditions.
 
-This creates a concrete future evidence stream for counsel: pre-clearance plan, spotter-catcher identity/licence, clearing-stage reports and fauna observations.
+### Important correction on the legal test
 
-### Erosion / construction prerequisites
+The current Nature Conservation Act does **not** require a perfect map overlap between a clearing polygon and a wildlife or habitat point before an interim conservation order can be considered.
 
-Condition 10 requires certified erosion/sediment-control documentation before works and prohibits works without a current endorsed E&SCP. More generally, construction prerequisites must be met prior to construction.
+The important questions are whether qualifying wildlife, critical habitat, an area of major interest or a protected area is **subject to a threatening process likely to have a significant detrimental effect**, and whether the Minister is satisfied of that position.
 
-For Council-controlled land, the record also says an **Access and Works Licence Agreement** must be granted before works commence on that land.
+Section 103 also allows an order to relate to land even if the wildlife or habitat is not physically within that land.
 
-### RFI / change history
+So mapping remains valuable evidence, but it is **not the legal test itself**.
 
-Council's 2 October 2024 Information Request required, among other things:
+The practical question for counsel is therefore:
 
-- owner approval for tree removal/earthworks on Council-owned Lot 9002 SP292760;
-- the monetary contribution for a future Woogaroo Creek crossing under the Village 2 ADP;
-- arborist assessment of native trees to be retained on Council land within 10 m of earthworks.
+**Can the approved vegetation-clearing and earthworks process, together with the project ecology and current species/habitat evidence, support the required view that a qualifying ecological object is subject to a threatening process likely to have a significant detrimental effect?**
 
-The July 2025 applicant response says owner approval was obtained and the Woogaroo Creek crossing contribution had been made/accepted. It sought to manage the arborist issue through an interim 10 m buffer before waterway-interface works. The owner consent for Lot 9002 expressly says it is subject to an Access and Works Licence Agreement and **does not constitute construction approval**.
+### What is still missing for this route
 
-### Clearing geometry / ecological interfaces
+- evidence that Condition 6(a) has been satisfied or not satisfied;
+- prestart records;
+- evidence of actual or imminent commencement;
+- current ecology where useful;
+- any expert opinion needed to connect the approved process to likely significant detrimental effect.
 
-The 2024 SHG Tree Retention and Removal Plan (TRRP) is now directly available and visually important. Its overview and detailed sheets map:
-
-- Village 2 Stages 1–16 boundaries and design contours;
-- bushfire-management zone;
-- non-juvenile Koala habitat trees to retain, to remove, or retain subject to arborist assessment;
-- native trees / dead-stag trees to retain or remove;
-- trees with habitat features.
-
-SHG's covering letter states that minor tree clearing is required **within the Open Space corridor** for bulk earthworks, retaining-wall construction, stormwater outlets and trunk-sewer works in O'Dwyer's Gully; it also identifies trees of particular ecological value and proposes protection fencing/arborist supervision, with some cleared areas to be rehabilitated.
-
-The lodged engineering package also records clearing outside the village boundary and in some locations outside the earthworks footprint for bushfire management, while separately stating that the chosen trunk-sewer connection to O'Dwyer's Gully avoids a corresponding Opossum Creek vegetation-corridor clearing route.
-
-This is a useful for/against pair rather than a one-sided proposition:
-
-```text
-some Opossum-corridor clearing avoided by sewer design
-AND
-other open-space / bushfire / infrastructure clearing remains proposed.
-```
-
-However the uploaded 2024 TRRP expressly describes itself as a desktop assessment tool and warns that, unless a development approval states otherwise, it is not an approved plan. The lodged 2024 bulk-earthworks drawings likewise say `FOR APPROVAL / NOT TO BE USED FOR CONSTRUCTION`.
-
-Therefore:
-
-```text
-lodged TRRP != negotiated approved clearing plan
-lodged engineering drawing != final negotiated approved construction geometry
-```
-
-The remaining highest-value 9281 object is the **20 March 2026 negotiated approved plans (`A12705838`)**. Once supplied, compare its approved geometry against the 2024 TRRP, 2025 updated drawings, EPBC Plan 5/6 and current corridor/species evidence.
+LiDAR and exact GIS digitisation may strengthen the evidence later, but they are **not current legal prerequisites**.
 
 ---
 
-## 4. Planning / exemption audit
+## 3. Queensland critical habitat — Nature Conservation Act s 13
 
-Current local chain:
+The evidence for habitat function is now much stronger than when this work began.
 
-```text
-6243/2023/LAP
-  -> 4272/2020/ADP + 5547/2020/ADP
-  -> 9281/2024/OW + 9293/2024/OW
-```
+The same Springview project material records:
 
-The 2019 referral supplies the proponent's historical Planning Regulation urban-purpose/urban-area clearing-exemption theory. Council records now supply the later operational approval and detailed conditions. Counsel should test exact historical/current instruments, transition rules, vegetation class, stage/parcel/variation coverage and the legal significance of code assessment / no-public-notification status.
+- remnant/native vegetation;
+- Koala food trees;
+- Koala scat evidence;
+- Woogaroo Creek and Opossum Creek connectivity;
+- a habitat connectivity score of 2;
+- a mapped connected habitat area greater than 500 ha; and
+- a Koala habitat score of 7/10 under the older federal guideline.
 
-Do not infer:
+The remaining legal question is narrower:
 
-```text
-Public Notification Required: No != no consultation occurred
-No referral agencies applicable to the local DA != no Commonwealth obligations
-historical not-properly-made action notice != current invalid application
-owner consent != development/construction approval
-```
+**Is the habitat essential for conservation of a viable protected-wildlife population or native-wildlife community for the purposes of Queensland law?**
 
-The September 2024 action-notice fee defect was historical and was subsequently cured by the properly-made/assessment process; it is not presently treated as an invalidity argument.
+The strongest adverse evidence must also be carried fairly. Saunders Havill assigned a Koala recovery value of 0 and argued that the site was relatively isolated and not viable to support a Koala population.
 
----
+That creates a real issue for expert and legal review because the same report also records substantial connectivity and expected future fragmentation from surrounding development.
 
-## 5. Current FrogID occurrence lane — native coordinates now paid
+Counsel should therefore test:
 
-The FrogID capture table now directly supplies platform-native coordinates:
+- whether the s 13 test differs from the older federal Koala guideline concepts used by Saunders Havill;
+- what population or community is the relevant one for s 13;
+- whether current connectivity and later development alter the 2019 recovery-value analysis; and
+- what ecological evidence would be sufficient to support an application.
 
-```text
-948283 — 05/09/2026 16:39 — Audio — Lat -27.6502, Lng 152.9000
-948284 — 05/09/2026 16:37 — Audio — Lat -27.6499, Lng 152.8990
-```
-
-Both are `Pending - Submitted` and `Stream or creek`.
-
-For `948283`, the observer-selected identification remains **Adelotus brevis / Tusked Frog**, pending validator confirmation. The supplied table does not independently source-pay a taxon for `948284`, so no taxon is transferred between captures.
-
-These native FrogID coordinates supersede the earlier need to infer platform location from screenshots. The separately observer-confirmed Google Maps standing point (`-27.649945, 152.898928`) remains a useful independent field-location cross-check.
-
-Still:
-
-```text
-native FrogID coordinate != survey-grade legal-parcel/corridor intersection
-observer-selected taxon != expert validation
-nearby two captures != two confirmed Tusked Frog occurrences
-```
-
-The next ecological step is an exact GIS join of both native points against Opossum/Woogaroo Creek, the official corridor layer, SHG habitat surfaces and the 9281/EPBC geometries.
+A prior s 13 declaration is **not necessarily required for every s 102 route**, because s 102 also has a threatened/near-threatened wildlife pathway.
 
 ---
 
-## 6. Offset adequacy / additionality
+## 4. Planning and exemption history
 
-Still mostly open pending substantive 2026 federal material. For each final offset, require:
+The main local approval chain identified so far is:
 
-```text
-exact lot/plan + GIS polygon
-existing legal protection
-prior EPBC/offset/covenant/restoration obligations
-without-offset risk of loss
-vegetation maturity / remnant-regrowth-planted status
-restoration lag / time to functional equivalence
-species/function equivalence to Woogaroo impact habitat
-```
+- `6243/2023/LAP` — Springview Village 2 and Village 3 Precinct Plan;
+- `4272/2020/ADP` — Village 2 Area Development Plan;
+- `5547/2020/ADP` — Village 3 Area Development Plan;
+- `9281/2024/OW` — earthworks, vegetation clearing and stormwater;
+- `9293/2024/OW` — roadwork, drainage, stormwater and earthworks.
 
-Do not import the 39.75 ha Koala-clearing cap from Springview Village One EPBC 2014/7306 into EPBC 2019/8575. Different approval fibre, different consumer.
+The 2019 referral records the proponent's then-understood Planning Regulation exemption pathway for some regulated vegetation in an urban area. Later Council material also records mapped Koala habitat together with approved/exempted development outcomes.
 
----
+The legal question is not whether habitat is mapped. It is:
 
-## 7. Current lawyer action list
+**What exact exemption or transitional provision applies to each present stage, parcel and approval, and does it still apply in the form relied on?**
 
-1. **Federal:** obtain the substantive 2026 EPBC 2019/8575 PD volumes/attachments and actual 1,786-comment response; perform 2019→2026 delta audit.
-2. **9281 Condition 6(a):** determine whether the DCCEEW/no-controlled-action or Commonwealth-approval prerequisite has actually been satisfied and what follows if it has not.
-3. **9281 final geometry:** acquire/inspect `A12705838` negotiated approved plans and compare against the 2024 TRRP / later updated drawings.
-4. **9281 commencement:** obtain prestart records, Condition 6(a) material, Access and Works Licence where relevant, arboricultural assessment, fauna plan/spotter-catcher details, endorsed E&SCP and any site commencement evidence.
-5. **s 13:** have counsel/ecologist stress-test statutory essentiality against the same-project connectivity evidence and SHG recovery-value-0 reasoning.
-6. **Offsets:** exact parcels/additionality/maturity/counterfactual risk.
-7. **Planning/exemption:** exact instrument/transition/stage scope.
-8. **Occurrence:** GIS-join the native FrogID coordinates and pursue validator/current-survey evidence.
+Counsel should check the exact instruments, dates, transition provisions, vegetation categories, stage boundaries and any later changes or variations.
 
 ---
 
-## 8. Suggested pro-bono counsel handoff
+## 5. Offsets
 
-> We have organised the Woogaroo matter by legal consumer and evidentiary element. The immediate federal matter remains EPBC 2019/8575. The project's own 2019 ecology identifies Lot 9999 SP292760, 136 ha of direct Koala-habitat clearing plus 26 ha indirect impact, habitat score 7, Koala evidence and >500 ha connectivity, with SHG concluding the 136 ha functional loss would significantly impact Koala habitat critical to survival; SHG also identifies approximately 136 ha GHFF foraging-habitat removal as likely to adversely impact habitat critical to survival while separately arguing wider population/recovery effects are unlikely. The substantive 2026 Preliminary Documentation remains missing from our corpus. In parallel, we now have the negotiated 20 March 2026 Council decision notice for Operational Works 9281/2024/OW. Critically, Condition 6(a) requires, before the prestart meeting, either DCCEEW evidence that the proposed clearing is not a controlled action or a copy of the Commonwealth approval if it is controlled. The approval also imposes arboricultural, fauna-management and erosion-control prerequisites around clearing, and the RFI/Tree Retention material identifies clearing in/open-space interfaces and specific retained/removed Koala habitat trees. We want counsel to determine the legal consequence and current satisfaction state of those prerequisites, while we obtain the final negotiated plan geometry and the substantive federal record. We also have two platform-native FrogID points at -27.6502/152.9000 and -27.6499/152.8990; the Tusked Frog identification on capture 948283 remains observer-selected and pending validation.
+The offset issue is still open and should be tested factually rather than assumed.
 
-The ask:
+For each final offset site, we need:
 
-> **Stress-test the statutory construction, identify any missing procedural prerequisite, and tell us which exact evidence/action has the highest value before the federal decision or irreversible clearing.**
+- exact lot/plan and GIS polygon;
+- existing conservation protection;
+- any previous EPBC offset obligation, covenant or funded restoration program;
+- current vegetation condition;
+- whether the vegetation is remnant, regrowth or planted;
+- likely loss risk if the offset were not used;
+- time needed for restored habitat to become functionally comparable; and
+- whether the site provides the same ecological functions as the habitat being lost at Woogaroo.
+
+The important comparison is not simply hectares versus hectares. The project-side baseline includes mature connected habitat, current habitat function, development pressure and the project's own significant-impact conclusions.
+
+Do not assume an offset is invalid merely because it is remote. Do not assume it is adequate merely because the area is larger.
 
 ---
 
-## 9. Present state
+## 6. Frog and other current wildlife observations
 
-```text
-2019 federal habitat/impact baseline: substantially paid
-2026 substantive federal decision record: OPEN
-9281 negotiated decision + conditions: PAID
-9281 final negotiated approved-plan geometry: OPEN
-9281 Condition 6(a) satisfaction: OPEN and high priority
-9281 commencement: OPEN
-s 13 habitat function: strongly supported
-s 13 statutory essentiality: OPEN/PARTIAL
-offsets: mostly OPEN
-FrogID native coordinates: PAID
-FrogID 948283 Tusked Frog validation: OPEN
-```
+FrogID records supplied by the observer are:
 
-The shortest practical frontier is now **substantive federal record + A12705838 + proof of 9281 prerequisite satisfaction/commencement state**.
+- Capture 948283 — 5 September 2026, 4:39 pm — `-27.6502, 152.9000`;
+- Capture 948284 — 5 September 2026, 4:37 pm — `-27.6499, 152.8990`.
+
+Both are audio records from a stream/creek setting and remain pending.
+
+Capture 948283 was submitted by the observer as **Tusked Frog (`Adelotus brevis`)**, but that identification has not yet been validated by FrogID.
+
+The 2019 project ecology separately identifies Woogaroo and Opossum Creeks as having potential frog habitat and records that rainfall before its threatened-frog survey was not optimal for understanding some threatened frog populations.
+
+This supports a reasonable question about whether current targeted survey or expert review is warranted. It does not by itself prove Tusked Frog presence on the project site.
+
+---
+
+## 7. What we know about clearing geometry now
+
+The negotiated approved plan `A12705838` is no longer missing.
+
+It provides the approved plan-scale works and clearing surfaces. We still do not have a machine-ready GIS polygon, but that is a technical convenience rather than a threshold legal element.
+
+Future GIS/LiDAR work can help answer:
+
+- which habitat areas and tree groups fall within or near approved works;
+- how much mature canopy may be affected;
+- how clearing relates to Opossum/Woogaroo Creek and mapped corridors;
+- how current wildlife observations relate spatially to the works; and
+- whether planted/regrowth habitat differs materially from mature existing forest.
+
+That work should strengthen evidence, not replace the statutory test.
+
+---
+
+## 8. The strongest arguments on both sides
+
+### For stronger protection or restraint
+
+- The proponent's own ecology records a large area of habitat loss and significant impact on Koala habitat critical to survival.
+- The same material records a connected habitat landscape greater than 500 ha and Koala evidence on the site.
+- The Grey-headed Flying-fox analysis also records removal of habitat the consultant regarded as critical to survival.
+- The Council approval is now tied to a concrete vegetation-clearing and earthworks process with Commonwealth and pre-clearance prerequisites.
+- Later development may increase fragmentation and reduce movement opportunities.
+
+### Likely arguments against stronger intervention
+
+- The 2019 consultant gave the site a Koala recovery value of 0 and argued that urban barriers reduce its population-level importance.
+- The consultant argued that broader Grey-headed Flying-fox population and recovery effects would be limited despite local foraging-habitat loss.
+- Local planning approvals and exemptions may authorise activities that would otherwise appear inconsistent with mapped habitat protections.
+- Mitigation, retained vegetation, fauna-management conditions and offsets may be relied on to reduce or manage impacts.
+- The final 2026 federal proposal may differ from the 2019 baseline in ways we have not yet seen.
+
+Both sides need to be tested against the actual final documents and current facts.
+
+---
+
+## 9. Priority questions for pro-bono counsel
+
+1. **EPBC 2019/8575:** What material can still be put before the Commonwealth decision-maker before 1 October 2026, and what are the strongest legally relevant merits points from the project's own ecology?
+2. **Final federal record:** Can the substantive 2026 Preliminary Documentation and response to the 1,786 comments be obtained quickly, including final geometry, retained habitat, offsets and impact conclusions?
+3. **Condition 6(a):** Has the Commonwealth prerequisite in `9281/2024/OW` been satisfied? If not, what follows for prestart and clearing?
+4. **NCA ss 102–107:** Does the approved clearing/earthworks process, together with current habitat and threatened-wildlife evidence, support an interim conservation-order request? What evidence is still needed for likely significant detrimental effect?
+5. **NCA s 13:** What is needed to establish that the relevant habitat is essential to conservation of a viable population/community, and how should the 2019 recovery-value-0 analysis be treated?
+6. **Planning/exemptions:** Which exact exemptions and transition provisions apply to the present stages and works?
+7. **Offsets:** What legal and policy requirements govern additionality, existing protection, maturity, time lag and functional equivalence for the final offset package?
+8. **Enforcement/review:** If works become imminent or conditions appear unsatisfied, what are the available standing, injunction, review and evidence-preservation options?
+
+---
+
+## 10. Current status in one page
+
+**Already established from source material**
+
+- EPBC 2019/8575 is the live federal project.
+- The 2019 project ecology identifies substantial Koala habitat loss, Koala evidence, a connected habitat landscape and a significant-impact conclusion.
+- The 2019 project ecology also identifies substantial Grey-headed Flying-fox habitat loss and an adverse impact on habitat critical to survival.
+- `9281/2024/OW` is an approved vegetation-clearing/earthworks/stormwater application.
+- `A12705838` is the 20 March 2026 negotiated approved plan set and provides the current approved plan-scale works/clearing geometry.
+- Condition 6(a) requires Commonwealth-related evidence before the prestart meeting.
+- FrogID native coordinates are available for two current creek-side audio records.
+
+**Still open**
+
+- substantive 2026 federal Preliminary Documentation and response to comments;
+- final 2019-to-2026 federal proposal changes;
+- whether Condition 6(a) has been satisfied;
+- whether prestart has occurred or physical works have commenced;
+- evidence sufficient for likely significant detrimental effect under s 102;
+- evidence sufficient for s 13 essentiality;
+- final offset identities, condition, existing protection and additionality;
+- exact current exemption/transition position.
+
+**Technical work that can help but is not a legal prerequisite**
+
+- GIS digitisation of approved clearing areas;
+- LiDAR/canopy analysis;
+- tree/crown mapping;
+- current habitat overlays;
+- spatial joins to FrogID/iNaturalist records.
+
+The immediate legal focus is therefore: **obtain the final federal record, check the Commonwealth prerequisite attached to 9281, establish the current works status, and ask counsel whether the present evidence is sufficient for an interim Queensland protection route before irreversible clearing.**
