@@ -37,3 +37,4 @@ import DASHI.Environment.HolzerPondCascadeTreatmentExperimentExact
 import DASHI.Environment.HolzerPassiveStorageEnergyServiceExact
 import DASHI.Environment.MosaicFireGrazingSourceAttributionExact
 import DASHI.Environment.MosaicFireGrazingSnowballExperimentExact
+import DASHI.Environment.WholeLandscapeSnowballDependencyFabricExact
