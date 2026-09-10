@@ -4,10 +4,9 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact where
 ------------------------------------------------------------------------
 -- FOCUSED CURRENT B ROLLUP
 --
--- This is not a second planner.  It is the minimal current import surface after
--- the NS-R592 residual-normalization correction.  R304-R306 are now the shortest
--- standard-theorem mass-gap route.  R299-R303 retain the more explicit internal
--- subgap spectral reconstruction as an optional verification/producer route.
+-- R304-R306 are the preferred shortest standard-theorem mass-gap route.
+-- R299-R305 also retain the explicit mode/spectral reconstruction as an
+-- independent audit.  Both routes share the exact finite T5 source carrier.
 ------------------------------------------------------------------------
 
 import DASHI.Interop.IntrospectiveResidualNormalizationExact
@@ -32,9 +31,7 @@ import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRo
 import DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound291Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound292Exact
 
--- R293-R298: state-family source normalization, absolute-value correction,
--- direct T5 same-object construction, geometric subgap separation, actual
--- nonzero-mode construction, and the honest explicit-spectral min-cut.
+-- State-family and magnitude normalization.
 import DASHI.Physics.YangMills.BalabanCMP116StateFamilyTwoJNormalizationRound293Exact
 import DASHI.Physics.YangMills.BalabanSubgapGeometricSeparationRound293Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound294Exact
@@ -44,24 +41,27 @@ import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact
 import DASHI.Physics.YangMills.BalabanCyclicSubgapNonzeroByConstructionRound297Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound298Exact
 
--- R299-R303: optional explicit spectral reconstruction.  Quantitative cyclicity
--- makes overlap amplitude positive by construction; positive component +
--- nonnegative remainder compiles the lower bound; one transfer E<->q coordinate
--- compiles both subgap/candidate rate semantics; R303 excludes positive subgap
--- modes directly.  These are no longer mandatory if the standard spectral
--- transfer theorem is imported.
+-- F1 least-privilege source cut: generic finite differentiation and common-radius
+-- construction are not separate YM leaves; literal selected two-J absolute
+-- localization on the exact T5 carrier is the source payment.
+import DASHI.Physics.YangMills.BalabanAbsoluteTwoJSourceMinCutRound299Exact
+
+-- Optional explicit spectral audit.  Quantitative cyclicity gives a positive
+-- overlap weight; a positive spectral component supplies the lower bound; local
+-- transfer-energy/rate semantics and geometric dominance exclude subgap modes.
 import DASHI.Physics.YangMills.BalabanQuantitativePositiveTimeCyclicityRound299Exact
 import DASHI.Physics.YangMills.BalabanPositiveSpectralComponentLowerRound300Exact
 import DASHI.Physics.YangMills.BalabanQuantitativeSubgapSpectralCoreRound301Exact
+import DASHI.Physics.YangMills.BalabanLocalEnergyDecayRatioRound301Exact
 import DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302Exact
+import DASHI.Physics.YangMills.BalabanModeIndexedSpectralContradictionRound302Exact
 import DASHI.Physics.YangMills.BalabanDirectPositiveSubgapExclusionRound303Exact
+import DASHI.Physics.YangMills.BalabanModeSelectedDirectT5ContinuumUpperRound304Exact
+import DASHI.Physics.YangMills.BalabanDirectT5PositiveSubgapExclusionRound305Exact
+import DASHI.Physics.YangMills.BalabanModeIndexedPositiveGapCoreRound306Exact
 
--- R304-R306: preferred shortest route.  R304 upgrades the arbitrary finite T5
--- shell to genuine two-observable continuum Euclidean-time clustering.  R305
--- removes a stale unused vacuum field from the standard transfer ABI and keeps
--- physical mass/rate meaning separate from the q=1/2 ratio.  R306 records the
--- three YM-specific payments G1-G3; clustering->spectrum is standard library
--- debt rather than new four-dimensional YM analysis.
+-- Preferred shortest route: arbitrary physical pair continuum clustering,
+-- normalized standard clustering->gap transfer, and the three-coordinate B cut.
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact
 import DASHI.Physics.YangMills.BalabanPairwiseClusteringStandardMassGapRound305Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact
