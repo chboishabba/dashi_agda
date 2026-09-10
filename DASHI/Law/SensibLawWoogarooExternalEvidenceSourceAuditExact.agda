@@ -21,6 +21,7 @@ data EvidenceSourceClass : Set where
   primaryFederalPublicationNotice : EvidenceSourceClass
   primaryFederalPortalStatus : EvidenceSourceClass
   primaryFederalFOIAdministrativeContext : EvidenceSourceClass
+  primaryCouncilApplicationDocumentIndex : EvidenceSourceClass
   primaryLibraryLegalDepositMetadata : EvidenceSourceClass
   primaryQueenslandSpatialDataset : EvidenceSourceClass
   primaryFederalCriticalHabitatRegister : EvidenceSourceClass
@@ -101,6 +102,16 @@ federalFOIHousingContextAudit = source-audit-receipt
   "preserve snapshot dates/version differences; do not infer motive, predetermined approval, strike-team membership or legal merits from housing-program context. If counsel considers it material, acquire the exact dated source table and any 2019/8575-specific internal administrative record."
   false refl
 
+council9281DocumentIndexAudit : SourceAuditReceipt
+council9281DocumentIndexAudit = source-audit-receipt
+  primaryCouncilApplicationDocumentIndex
+  "Ipswich City Council application-document index for 9281/2024/OW"
+  "Fresh web retrieval locates 21 public application-document carriers for 9281/2024/OW. The index includes the 20 March 2026 'DA Approved Plans - Negotiated Decision' (21.55 MB), 20 March 2026 Negotiated Decision Notice, 29 August 2025 DA Approved Plans, 21 July 2025 updated drawings/information response, and the 21 August 2024 Tree Retention and Removal Plan, lodged DA plans, desktop assessment and rehabilitation plan. Development.i separately records the application as 'Approved - Negotiated Decision Approved', for Kalina Village 2 Stages 1 to 16, with Earthworks, Clearing Vegetation and Stormwater over properties including 7001 Mur Boulevard."
+  sourcePaid
+  "acquisition identity and current approval-state carrier for the NCA ss 102-107 / exact-clearing-footprint consumer"
+  "download/read the 20 March 2026 negotiated approved plans and decision notice, then extract the exact vegetation-clearing polygon, retained-tree/open-space geometry, conditions and any commencement prerequisites. The index proves the exact carriers exist but does not itself reveal their plan geometry."
+  false refl
+
 slqLegalDepositMetadataAudit : SourceAuditReceipt
 slqLegalDepositMetadataAudit = source-audit-receipt
   primaryLibraryLegalDepositMetadata
@@ -163,6 +174,7 @@ data PublicationNoticeEqualsSubstantiveFinalPD : Set where
 data PortalPublishedStatusEqualsFinalPart9Decision : Set where
 data HousingProgramContextEqualsPredeterminedApproval : Set where
 data HousingProgramContextEqualsStrikeTeamMembership : Set where
+data CouncilDocumentIndexEqualsApprovedPlanGeometry : Set where
 data LegalDepositMetadataEqualsSubstantiveVolumeContents : Set where
 data CommentCountEqualsResponseAdequacy : Set where
 data ForeignJurisdictionDatasetEqualsQueenslandEvidence : Set where
@@ -192,6 +204,9 @@ housingContextDoesNotCreatePredeterminedApproval ()
 housingContextDoesNotCreateStrikeTeamMembership : HousingProgramContextEqualsStrikeTeamMembership → ⊥
 housingContextDoesNotCreateStrikeTeamMembership ()
 
+councilDocumentIndexDoesNotCreatePlanGeometry : CouncilDocumentIndexEqualsApprovedPlanGeometry → ⊥
+councilDocumentIndexDoesNotCreatePlanGeometry ()
+
 legalDepositMetadataDoesNotCreateContents : LegalDepositMetadataEqualsSubstantiveVolumeContents → ⊥
 legalDepositMetadataDoesNotCreateContents ()
 
@@ -217,6 +232,8 @@ record CurrentExternalWall : Set where
     actualCommentSummaryResponseStillMissingIsTrue : actualCommentSummaryResponseStillMissing ≡ true
     exactFinalPart9DecisionInstrumentStillMissing : Bool
     exactFinalPart9DecisionInstrumentStillMissingIsTrue : exactFinalPart9DecisionInstrumentStillMissing ≡ true
+    exact9281ApprovedPlanCarrierLocated : Bool
+    exact9281ApprovedPlanCarrierLocatedIsTrue : exact9281ApprovedPlanCarrierLocated ≡ true
     exact9281ClearingPolygonStillMissing : Bool
     exact9281ClearingPolygonStillMissingIsTrue : exact9281ClearingPolygonStillMissing ≡ true
     exactParcelCorridorJoinStillMissing : Bool
@@ -226,6 +243,7 @@ record CurrentExternalWall : Set where
 
 currentExternalWall : CurrentExternalWall
 currentExternalWall = current-external-wall
+  true refl
   true refl
   true refl
   true refl
