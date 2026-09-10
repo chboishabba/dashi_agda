@@ -2,54 +2,80 @@
 module DASHI.Physics.YangMills.BalabanLangevinPhysicalHessianSourceRecutRound263Exact where
 
 ------------------------------------------------------------------------
--- ROUND263 / C4b SOURCE RECUT
+-- ROUND263/R269 / C4b SOURCE RECUT AFTER TYPED/ANCHORED INTROSPECTION
 --
--- Current source machinery already proves on the literal differentiated
--- carrier that the CMP116 marked Hessian is the second variation of the SAME
--- CMP109 effective potential.  Therefore C4b must not charge that identity as
--- fresh physical analysis.
+-- The open C4b claim has now been split at the correct trust boundaries:
 --
--- Remaining C4b physics is strictly:
+--   CMP109 effective potential
+--     = CMP116 physical marked Hessian                 [already compiler-owned]
+--     = typed Langevin symmetric nonlocal entry       [R267 source seam]
+--     <= R260 comparison + SAME-carrier reference     [R268 source seam]
+--     -> rational influence entry                     [compiler-owned]
+--     -> weighted row / every Dyson power             [compiler-owned]
 --
---   (1) the symmetric nonlocal part of the literal differentiated Langevin
---       commutator is this existing physical second variation;
---   (2) its finite weighted influence row realizes the existing marked shell.
---
--- R262 then sends the same object bidirectionally to spatial Dyson propagation
--- and temporal Heat/Doob curvature debt.
+-- This file is a status/frontier adapter only; it does not promote conditional
+-- source realizations to machineChecked.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
+import DASHI.Physics.YangMills.CompactLieLangevinSkewConnectionCancellationExact as Langevin
 import DASHI.Physics.YangMills.BalabanLangevinHessianBidirectionalWeldRound262Exact as Bidi
+import DASHI.Physics.YangMills.BalabanCMP109LangevinTypedSecondVariationRound267Exact as CMP
+import DASHI.Physics.YangMills.BalabanLangevinAnchoredInfluenceRound268Exact as Anchor
 
--- This is already a proved source/compiler theorem, not a new C4b leaf.
+-- Already paid: literal CMP109 E^(2)/Pi = CMP116 physical Hessian.
 cmp109CMP116SamePhysicalSecondVariationLevel : ProofLevel
 cmp109CMP116SamePhysicalSecondVariationLevel =
   Carrier.cmp109CMP116PhysicalHessianIdentityLevel
 
--- R262 already compiles a single source inhabitant into both downstream uses.
+-- Already paid once a typed commutator is inhabited: its symmetric entry is the
+-- exact action-Hessian entry by a proof-relevant equality, not an opaque Set.
+typedCommutatorDecompositionCompilerLevel : ProofLevel
+typedCommutatorDecompositionCompilerLevel =
+  Langevin.typedLangevinCommutatorCompilerLevel
+
+-- R267 compiles the typed action Hessian onto the literal CMP109/CMP116 carrier.
+typedCMP109LangevinCompilerLevel : ProofLevel
+typedCMP109LangevinCompilerLevel = CMP.round267TypedCMP109LangevinCompilerLevel
+
+-- R268 compiles a same-object R260 anchored entry into the rational influence
+-- majorant required by R266.
+anchoredEntryToInfluenceCompilerLevel : ProofLevel
+anchoredEntryToInfluenceCompilerLevel =
+  Anchor.round268AnchoredEntryToInfluenceCompilerLevel
+
 bidirectionalConsumerCompilerLevel : ProofLevel
 bidirectionalConsumerCompilerLevel = Bidi.round262BidiCompilerLevel
 
--- Live physical seam 1: identify the symmetric nonlocal part of the ACTUAL
--- differentiated compact-group Langevin commutator with the existing literal
--- physical second variation owned by `Carrier`.
-literalLangevinSymmetricPartIsExistingPhysicalSecondVariationLevel : ProofLevel
-literalLangevinSymmetricPartIsExistingPhysicalSecondVariationLevel = conditional
+------------------------------------------------------------------------
+-- CURRENT LIVE PHYSICAL SOURCE CUT
+------------------------------------------------------------------------
 
--- Live physical seam 2: realize that same bilinear Hessian as the finite
--- nonnegative weighted influence row consumed by the shared marked-shell
--- compiler.  This is representation/localization, not a second Hessian theorem.
-literalPhysicalSecondVariationToWeightedInfluenceRowLevel : ProofLevel
-literalPhysicalSecondVariationToWeightedInfluenceRowLevel = conditional
+-- C4a/C4b source geometry: instantiate the actual differentiated compact-group
+-- Langevin coefficients on the literal CMP109 effective density and its
+-- site-indexed physical tangent directions.
+literalCMP109LangevinDifferentiationLevel : ProofLevel
+literalCMP109LangevinDifferentiationLevel =
+  CMP.round267LiteralLangevinDifferentiationInstantiationLevel
 
--- The CMP109<->CMP116 identity itself is explicitly removed from the open cut.
-round263CMPIdentityIsNotOpenPhysicsLevel : ProofLevel
-round263CMPIdentityIsNotOpenPhysicsLevel = machineChecked
+-- R260 trust boundary: realize the published marked comparison AND a reference
+-- Hessian anchor on that exact same typed CMP109 action-Hessian entry.
+literalSameObjectMarkedComparisonAndReferenceAnchorLevel : ProofLevel
+literalSameObjectMarkedComparisonAndReferenceAnchorLevel =
+  Anchor.round268SameObjectAnchoredSourceLevel
 
-round263LiteralSourceClosureLevel : ProofLevel
-round263LiteralSourceClosureLevel = conditional
+-- Least-privilege aggregate spatial theorem after anchoring: the weighted row
+-- of the generated rational absolute debts is uniformly below the shared
+-- marked Hessian constant.  No exact shell-partial equality is requested.
+literalWeightedAnchoredDebtRowLevel : ProofLevel
+literalWeightedAnchoredDebtRowLevel =
+  Anchor.round268WeightedAnchoredDebtRowLevel
 
-round263ClayClosureLevel : ProofLevel
-round263ClayClosureLevel = conditional
+-- These are now the three spatial source payments; everything between/after
+-- them in this C4 subchain is compiler-owned.
+round269LiteralSpatialSourceClosureLevel : ProofLevel
+round269LiteralSpatialSourceClosureLevel = conditional
+
+round269ClayClosureLevel : ProofLevel
+round269ClayClosureLevel = conditional
