@@ -38,11 +38,11 @@ import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
-import DASHI.Physics.Closure.NSTriadKNFiniteWeightedGramFluxAggregationRound385Exact as R385
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact as R299
 import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
+import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact as R543
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545Exact as R545
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact as R547
 import DASHI.Physics.Closure.NSTriadKNDirectResolventFibreCompanionRound497Exact as R497
@@ -113,14 +113,12 @@ module NestedDirectFibre
       (factoredRowIsNestedFactoredRow output beta)
       (factoredFullIsNestedFactoredFull output rest)
 
-  -- This is the canonical finite-fibre composition.  It keeps the diagonal
-  -- visible and substitutes only existing exact equalities.
   nestedFactoredFullIsDiagonalPlusDirectFibre :
     (output : Z3.FourierMode) →
     let items = Output.physicalOutputFiber (Audit.cutoff system) output in
     (positive : Local.PairRatePositiveOn items) →
     nestedFactoredFull output items
-    ≡ R547.R543.diagonalSum Row.pairScalar items
+    ≡ R543.diagonalSum Row.pairScalar items
       + R539.two *
           (R299.four * Direct.directFibreCompanion items positive)
   nestedFactoredFullIsDiagonalPlusDirectFibre output positive =
@@ -130,7 +128,7 @@ module NestedDirectFibre
       (trans
         (Normal.factoredFullIsDiagonalPlusTwoLiteralRemainder output positive)
         (cong
-          (R547.R543.diagonalSum Row.pairScalar items +_)
+          (R543.diagonalSum Row.pairScalar items +_)
           (cong (R539.two *_)
             (Direct.allRemainderIsFourCompanion items positive))))
 
