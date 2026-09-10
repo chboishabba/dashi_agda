@@ -6,3 +6,4 @@ import DASHI.Physics.Propulsion.JetEngineCanonicalMissionEnergyBidiExact
 import DASHI.Physics.Propulsion.QualifiedHotSectionManufacturingBidiExact
 import DASHI.Physics.Propulsion.CorkySoftManufacturingMissionOperationsBidiExact
 import DASHI.Physics.Propulsion.ReliabilityCapacityResourceDemandBidiExact
+import DASHI.Physics.Propulsion.ReliabilityAdaptiveQualificationFeedbackBidiExact
