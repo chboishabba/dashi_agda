@@ -22,7 +22,7 @@ module DASHI.Physics.Closure.NSTriadKNSpectatorResolventUnitGapCeilingBidiExact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using
-  (ℚ; Positive; _+_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; Positive; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
@@ -104,7 +104,7 @@ module SameOutputResolventCeiling
     (alpha beta : Physical.PhysicalTriadIncidence) →
     Physical.k alpha ≡ output →
     Physical.k beta ≡ output →
-    0 < R291.pairRate (Pair.Q alpha beta)
+    0ℚ < R291.pairRate (Pair.Q alpha beta)
   pairRatePositive output outputNonzero alpha beta alphaK betaK =
     ℚP.<-≤-trans
       (R449.twicePositive Floor.nuPositive)
