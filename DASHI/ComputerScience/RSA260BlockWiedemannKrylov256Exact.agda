@@ -79,11 +79,11 @@ krylovExecution = krylov-execution-receipt
   false
   false false false false false false false false
 
-priorSparseMatVec : SpMV.RSA260SparseMatVec256RoadmapBoundary
-priorSparseMatVec = SpMV.currentRSA260SparseMatVec256RoadmapBoundary
+priorSparseMatVec : SpMV.RSA260SparseMatVecRoadmapBoundary
+priorSparseMatVec = SpMV.currentRSA260SparseMatVecRoadmapBoundary
 
-dna256Structure : DNA256.RSA260DNA256CrossPollinationBoundary
-dna256Structure = DNA256.currentRSA260DNA256CrossPollinationBoundary
+dna256Structure : DNA256.DNA256RSA260RoadmapBoundary
+dna256Structure = DNA256.currentDNA256RSA260RoadmapBoundary
 
 record RSA260KrylovRoadmapBoundary : Set where
   constructor rsa260-krylov-roadmap-boundary
