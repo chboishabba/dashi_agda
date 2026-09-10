@@ -15,6 +15,7 @@ import DASHI.Interop.ITIRHousingEpisodeSensibLawAdapterExact
 import DASHI.Interop.ITIRLaterMedicalParticularHarmSensibLawAdapterExact
 import DASHI.Interop.ITIRHealthRecordSensibLawAdapterExact
 import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact
+import DASHI.Interop.TiRCorderVoiceEditInteroceptionAntiPanopticonExact
 import DASHI.Interop.ArtHiddenTopologyStack
 import DASHI.Interop.PNFSpectralFieldArchitectureReceipt
 import DASHI.Interop.SeaMeInItROMKernelFormalism
