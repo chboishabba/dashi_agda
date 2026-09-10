@@ -32,6 +32,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventR294WeightRound541Exact as R541
 import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Exact as R544
+import DASHI.Physics.Closure.NSTriadKNDoubleMixedPhysicalDampedTangentRound388Exact as R388
 import DASHI.Physics.Closure.NSTriadKNWeightedPhysicalGramOperatorCarrierRound473Exact as R473
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
@@ -44,12 +45,13 @@ module SpectatorAmplitudeGram
     (S : Helical.HelicalModeScalars F) where
 
   module Spec = R541.Spectator physicalSystem S
+  module D = R388.PhysicalDoubleMixed physicalSystem S
   module Amp (beta : Physical.PhysicalTriadIncidence) =
     R544.Fold physicalSystem S (Spec.spectatorWeight beta)
 
   mixedCells :
     List Physical.PhysicalTriadIncidence → List (C3.Complex3 F)
-  mixedCells items = map Amp.D.Pair.mixedCell items
+  mixedCells items = map D.Pair.mixedCell items
 
   spectatorCoefficients :
     Physical.PhysicalTriadIncidence →
@@ -69,7 +71,7 @@ module SpectatorAmplitudeGram
     cong₂ _∷_
       (cong
         (λ selectedWeight →
-          C3.complex3Scale selectedWeight (Amp.D.Pair.mixedCell alpha))
+          C3.complex3Scale selectedWeight (D.Pair.mixedCell alpha))
         (Spec.spectatorWeightMeaning beta alpha))
       (weightedCellsAreAmplitudeCells beta rest)
 
