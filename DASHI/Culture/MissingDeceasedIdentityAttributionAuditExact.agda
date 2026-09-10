@@ -36,8 +36,8 @@ joshuaLeBlancIdentity = I.identity-receipt "Joshua Kyle LeBlanc" "Joshua LeBlanc
 monicaRezaJacintoIdentity : I.IdentityReceipt
 monicaRezaJacintoIdentity = I.identity-receipt "Monica Jacinto Reza" "Monica Andrea Jacinto / Monica A. Jacinto / Monica Jacinto"
   (I.fullLegalOrPublishedName ∷ I.middleNameOrInitial ∷ I.familyOrAlias ∷ I.technicalField ∷ []) I.identitySourceBacked
-  "California DOJ missing-person record names Monica Jacinto Reza and gives AKA Monica Andrea Jacinto; Boeing identifies Monica Jacinto as a Rocketdyne metallurgical engineer and Mondaloy co-inventor; patent records name Monica Jacinto / Monica A. Jacinto"
-  "The event identity is explicitly welded by the California DOJ to the Jacinto alias used in the professional/patent record. This establishes same-person attribution, not every later JPL-role or capability claim."
+  "California DOJ missing-person case 025-00905-1257-400 names Monica Jacinto Reza, DOB 1964-12-30, last contact 2025-06-22, LASD reporting agency, and AKA Monica Andrea Jacinto; Boeing identifies Monica Jacinto as a Rocketdyne metallurgical engineer and Mondaloy co-inventor; patent records name Monica Jacinto / Monica A. Jacinto"
+  "The event identity is explicitly welded by the California DOJ to the Jacinto alias used in the professional/patent record. This establishes same-person attribution and an exact event carrier, not every later JPL-role or capability claim."
 
 williamMcCaslandIdentity : I.IdentityReceipt
 williamMcCaslandIdentity = I.identity-receipt "William Neil McCasland" "Neil McCasland / William N. McCasland"
