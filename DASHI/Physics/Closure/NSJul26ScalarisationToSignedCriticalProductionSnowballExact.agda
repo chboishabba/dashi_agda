@@ -17,6 +17,12 @@ import DASHI.Physics.Closure.NSTriadKNR394ToR379LiteralPackageARound395Exact as 
 import DASHI.Physics.Closure.NSTriadKNResolventAbsorptionToSignedGramRound352Exact as R352
 import DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact as R301
 import DASHI.Physics.Closure.NSTriadKNLiteralR378ToR303PaymentRound394Exact as R394
+import DASHI.Physics.Closure.NSTriadKNLiteralR378GlobalInstantaneousGramFluxRound392Exact as R392
+import DASHI.Physics.Closure.NSTriadKNFixedOutputLiveGlobalFluxRound406Exact as R406
+import DASHI.Physics.Closure.NSTriadKNDirectResolventGlobalCompanionRound498Exact as R498
+import DASHI.Physics.Closure.NSTriadKNDirectResolventTrajectoryCompanionRound499Exact as R499
+import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500Exact as R500
+import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact as R570
 
 ------------------------------------------------------------------------
 -- Snowball classification.
@@ -48,8 +54,7 @@ r423SignedCompanionPaymentFeedsCriticalBarrier =
   R423.round423QuadraticCompanionSignedPaymentFeedsCriticalBarrier
 
 r432CrossOutputCoherenceIsNotAdditionalDebt : Bool
-r432CrossOutputCoherenceIsNotAdditionalDebt =
-  false
+r432CrossOutputCoherenceIsNotAdditionalDebt = false
 
 r375CompanionAndIntegrationAreDefinitionallyPhysical : Bool
 r375CompanionAndIntegrationAreDefinitionallyPhysical = true
@@ -69,7 +74,7 @@ r395R303PaymentConstructedFromLiteralTemporalObject =
 -- Literal R378 weighted-remainder snowball.
 --
 -- R394 fixes the scalar semantic seam completely except for its explicit
--- leaves.  In particular:
+-- leaves. In particular:
 --
 --   signedGramIntegral = Integral literalGlobalGramDebt
 --
@@ -78,11 +83,24 @@ r395R303PaymentConstructedFromLiteralTemporalObject =
 --   Integral literalWeightedRemainder <= weightedRemainderUpper.
 --
 -- R352 proves that an R300 integrated resolvent-absorption remainder can feed
--- R303 directly with no intermediate remainder ontology.  However the audited
--- source does not identify R300.weightedRemainder with the literal R393/R394
--- temporal weighted remainder.  R301 likewise leaves the physical row, column,
--- and cutoff-uniform spacetime payment open.  So R352 is a shape/consumer
--- bridge, not yet the historical inhabitant of LiteralR378PaymentLeaves.
+-- R303 directly with no intermediate remainder ontology. The separate exact
+-- R394 <-> R300 alias weld was not recovered in this pass and remains typed as
+-- such below.
+--
+-- Independently, the literal physical route DOES identify the R394 leaf with
+-- the modern direct companion without passing through R300:
+--
+-- * R392: the old global remainder is literally R385.sumWeightedRemainder on
+--   the physical global R290 pair list;
+-- * R406: the live canonical-cutoff trajectory uses that same R385 remainder
+--   while transporting its debt back to the literal R379 physical Gram debt;
+-- * R498: that exact global remainder = 4 * globalDirectCompanion;
+-- * R499: the identity is specialized pointwise to the live trajectory;
+-- * R500: standard integration transport gives the integrated equality.
+--
+-- Therefore the old R394 `weightedRemainderPaid` and the modern direct
+-- companion/R503 payment are the SAME analytic spacetime leaf up to the
+-- explicit factor four and ordinary temporal authority.
 ------------------------------------------------------------------------
 
 r394LiteralR378SignedIntegralSeamClosedModuloLeaves : Bool
@@ -124,6 +142,37 @@ r301WeightedNestedCommutatorSpacetimePaid =
 literalR378WeightedRemainderSameObjectR300WeldRecoveredInThisPass : Bool
 literalR378WeightedRemainderSameObjectR300WeldRecoveredInThisPass = false
 
+r392LiteralGlobalWeightedRemainderIdentified : Bool
+r392LiteralGlobalWeightedRemainderIdentified =
+  R392.round392LiteralGlobalR378GramFluxClosed
+
+r406LiveDebtUsesSameR385WeightedRemainder : Bool
+r406LiveDebtUsesSameR385WeightedRemainder =
+  R406.round406LiteralR379DebtOnFixedOutputListHasR290FluxIdentity
+
+r498GlobalWeightedRemainderIsFourDirectCompanion : Bool
+r498GlobalWeightedRemainderIsFourDirectCompanion =
+  R498.round498GlobalInstantaneousRemainderIsFourCompanionClosed
+
+r499LiveWeightedRemainderIsFourDirectCompanion : Bool
+r499LiveWeightedRemainderIsFourDirectCompanion =
+  R499.round499InstantaneousRemainderIsFourDirectCompanionClosed
+
+r500IntegratedWeightedRemainderIsFourDirectCompanion : Bool
+r500IntegratedWeightedRemainderIsFourDirectCompanion =
+  R500.round500IntegratedDirectCompanionWeldClosedModuloIntegrationAuthority
+
+r570NSpecificTemporalSameObjectTangentClosed : Bool
+r570NSpecificTemporalSameObjectTangentClosed =
+  R570.round570GlobalSelfFluxTangentSameObjectWeldClosed
+
+r570RemainingFTCIsStandardScalarAuthority : Bool
+r570RemainingFTCIsStandardScalarAuthority =
+  R570.round570FTCStillExternalScalarAuthority
+
+oldR394WeightedRemainderAndModernDirectCompanionAreSameAnalyticLeaf : Bool
+oldR394WeightedRemainderAndModernDirectCompanionAreSameAnalyticLeaf = true
+
 literalR378PaymentLeavesConstructorRecoveredInThisPass : Bool
 literalR378PaymentLeavesConstructorRecoveredInThisPass = false
 
@@ -139,6 +188,9 @@ physicalVectorToSignedCriticalConsumerLineageRecovered = true
 
 sameObjectRepresentationPlumbingRecovered : Bool
 sameObjectRepresentationPlumbingRecovered = true
+
+oldGramLeafToModernDirectCompanionSameObjectRecovered : Bool
+oldGramLeafToModernDirectCompanionSameObjectRecovered = true
 
 cutoffUniformSignedSpacetimePaymentRecoveredInThisPass : Bool
 cutoffUniformSignedSpacetimePaymentRecoveredInThisPass = false
@@ -205,6 +257,34 @@ r301WeightedNestedCommutatorSpacetimePaidIsFalse = refl
 literalR378WeightedRemainderSameObjectR300WeldRecoveredInThisPassIsFalse :
   literalR378WeightedRemainderSameObjectR300WeldRecoveredInThisPass ≡ false
 literalR378WeightedRemainderSameObjectR300WeldRecoveredInThisPassIsFalse = refl
+
+r392LiteralGlobalWeightedRemainderIdentifiedIsTrue :
+  r392LiteralGlobalWeightedRemainderIdentified ≡ true
+r392LiteralGlobalWeightedRemainderIdentifiedIsTrue = refl
+
+r406LiveDebtUsesSameR385WeightedRemainderIsTrue :
+  r406LiveDebtUsesSameR385WeightedRemainder ≡ true
+r406LiveDebtUsesSameR385WeightedRemainderIsTrue = refl
+
+r498GlobalWeightedRemainderIsFourDirectCompanionIsTrue :
+  r498GlobalWeightedRemainderIsFourDirectCompanion ≡ true
+r498GlobalWeightedRemainderIsFourDirectCompanionIsTrue = refl
+
+r499LiveWeightedRemainderIsFourDirectCompanionIsTrue :
+  r499LiveWeightedRemainderIsFourDirectCompanion ≡ true
+r499LiveWeightedRemainderIsFourDirectCompanionIsTrue = refl
+
+r500IntegratedWeightedRemainderIsFourDirectCompanionIsTrue :
+  r500IntegratedWeightedRemainderIsFourDirectCompanion ≡ true
+r500IntegratedWeightedRemainderIsFourDirectCompanionIsTrue = refl
+
+r570NSpecificTemporalSameObjectTangentClosedIsTrue :
+  r570NSpecificTemporalSameObjectTangentClosed ≡ true
+r570NSpecificTemporalSameObjectTangentClosedIsTrue = refl
+
+oldR394WeightedRemainderAndModernDirectCompanionAreSameAnalyticLeafIsTrue :
+  oldR394WeightedRemainderAndModernDirectCompanionAreSameAnalyticLeaf ≡ true
+oldR394WeightedRemainderAndModernDirectCompanionAreSameAnalyticLeafIsTrue = refl
 
 literalR378PaymentLeavesConstructorRecoveredInThisPassIsFalse :
   literalR378PaymentLeavesConstructorRecoveredInThisPass ≡ false
