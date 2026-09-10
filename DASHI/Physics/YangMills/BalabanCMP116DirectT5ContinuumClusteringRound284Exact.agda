@@ -80,10 +80,10 @@ asDirectTwoSourceData :
   ∀ {Measure TestObservable}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet} →
-  DirectT5TwoSourceShell dataSet extension →
+  (shell : DirectT5TwoSourceShell dataSet extension) →
   Direct.TwoSourceConnectedRootedShellData
-    (Scale _) (Volume _) (Root _) Nat TestObservable
-asDirectTwoSourceData shell = record
+    (Scale shell) (Volume shell) (Root shell) Nat TestObservable
+asDirectTwoSourceData {dataSet = dataSet} {extension = extension} shell = record
   { Direct.TwoSourceConnectedRootedShellData.shellData = shellData shell
   ; Direct.TwoSourceConnectedRootedShellData.stateAtScale = λ cutoff → cutoff
   ; Direct.TwoSourceConnectedRootedShellData.scaleOf = scaleAtCutoff shell
@@ -92,8 +92,8 @@ asDirectTwoSourceData shell = record
   ; Direct.TwoSourceConnectedRootedShellData.connectingRoot = connectingRoot shell
   ; Direct.TwoSourceConnectedRootedShellData.connectedCovarianceMagnitude =
       λ cutoff left right →
-        R278.connectedCovarianceMagnitude _
-          (Gram.measureSequence _ cutoff) left right
+        R278.connectedCovarianceMagnitude extension
+          (Gram.measureSequence dataSet cutoff) left right
   ; Direct.TwoSourceConnectedRootedShellData.connectedCovarianceBelowConnectingShell =
       finiteCovarianceBelowConnectingShell shell
   ; Direct.TwoSourceConnectedRootedShellData.connectingClusterMeetsBothSupports =
