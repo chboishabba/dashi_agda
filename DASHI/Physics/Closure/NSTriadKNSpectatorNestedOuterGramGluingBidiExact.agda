@@ -32,6 +32,7 @@ open import Data.List.Base using (map)
 open import Data.Rational.Base using (_+_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
@@ -55,7 +56,7 @@ module OuterGluing
       (Field30.physicalInverseSquare physicalSystem) S)
     (H : R142.HelicalHalfCalibration S)
     (velocityTransverse :
-      (mode : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode) →
+      (mode : Z3.FourierMode) →
       Helical.Transverse
         (Field30.physicalEmbedding physicalSystem)
         mode
