@@ -35,11 +35,12 @@ fn parse_parser(text: &str) -> Result<HashMap<usize, Sentence>, String> {
         match p.first().copied().unwrap_or("") {
             "S" => { if let Some(s)=cur.take(){out.insert(s.id,s);} if p.len()<4{return Err(format!("bad S row {}",ln+1));} cur=Some(Sentence{id:p[1].parse().map_err(|_|"sentence")?,tokens:vec![]}); }
             "T" => { if p.len()<10{return Err(format!("bad T row {}",ln+1));} let s=cur.as_mut().ok_or("T before S")?; s.tokens.push(Token{ordinal:p[1].parse().map_err(|_|"ordinal")?,head:p[4].parse().map_err(|_|"head")?,text:p[5].to_string(),dep:p[9].to_string()}); }
-            "E" => if let Some(s)=cur.take(){out.insert(s.id,s)},
+            "E" => { if let Some(s)=cur.take(){out.insert(s.id,s);} }
             _ => {}
         }
     }
-    if let Some(s)=cur{out.insert(s.id,s)} Ok(out)
+    if let Some(s)=cur{out.insert(s.id,s);}
+    Ok(out)
 }
 fn parse_graph(text:&str)->Result<Vec<Boundary>,String>{
     let mut ls=text.lines(); let h=ls.next().ok_or("empty graph")?; let c:Vec<&str>=h.split('\t').collect();
