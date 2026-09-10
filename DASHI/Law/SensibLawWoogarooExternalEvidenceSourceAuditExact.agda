@@ -19,6 +19,8 @@ data EvidenceSourceClass : Set where
   primaryFederalProceduralNotice : EvidenceSourceClass
   primaryFederalPublicCommentInvitation : EvidenceSourceClass
   primaryFederalPublicationNotice : EvidenceSourceClass
+  primaryFederalPortalStatus : EvidenceSourceClass
+  primaryFederalFOIAdministrativeContext : EvidenceSourceClass
   primaryLibraryLegalDepositMetadata : EvidenceSourceClass
   primaryQueenslandSpatialDataset : EvidenceSourceClass
   primaryFederalCriticalHabitatRegister : EvidenceSourceClass
@@ -77,6 +79,26 @@ finalPDPublicationNoticeAudit = source-audit-receipt
   sourcePaid
   "EPBC 2019/8575 publication chronology / comment-count existence / existence of comments-summary carrier"
   "acquire the substantive 2026 Preliminary Documentation volumes/attachments and the actual summary/response to comments"
+  false refl
+
+currentPortalStatusAudit : SourceAuditReceipt
+currentPortalStatusAudit = source-audit-receipt
+  primaryFederalPortalStatus
+  "EPBC Act Public Portal current project page for 2019/8575"
+  "Fresh web retrieval on 10 September 2026 shows Project Status 'Final Preliminary Documentation Published' and Decision Status 'Published'. The same page currently fails to expose project files, returning a SharePoint-integration/permissions error. This UI/status text is not sufficient to identify an approval/refusal instrument, especially while the separately dated s 130(1A) notice gives a decision period ending 1 October 2026."
+  ambiguousUiOnly
+  "current federal project/publication status and acquisition routing"
+  "obtain an actual approval/refusal decision instrument before asserting that 'Decision Status: Published' means a final Part 9 merits decision; use the dated extension notice for the known statutory timing unless superseded by a later exact decision instrument"
+  false refl
+
+federalFOIHousingContextAudit : SourceAuditReceipt
+federalFOIHousingContextAudit = source-audit-receipt
+  primaryFederalFOIAdministrativeContext
+  "DCCEEW FOI LEX 82498 — documents regarding housing projects under the existing EPBC Act"
+  "A 2026 FOI release places EPBC 2019/8575 in departmental housing-project status tables. One table records Springfield Residential Development as with DCCEEW and 'Considering Further Information' with a 2,000-home figure; another historical/status extract records Stockland - Cherish Enterprises Pty Ltd, 'Draft documentation published - Open for Pu', 821 and 'No active key decisions'. The same FOI corpus separately documents a Housing Strike Team intended to accelerate assessment of housing projects generally. The retrieved material does not prove that 2019/8575 itself was selected for strike-team fast-tracking, nor any improper influence on its merits."
+  relevantButConsumerOpen
+  "administrative/development-pressure context only; possible chronology and record-acquisition lead"
+  "preserve snapshot dates/version differences; do not infer motive, predetermined approval, strike-team membership or legal merits from housing-program context. If counsel considers it material, acquire the exact dated source table and any 2019/8575-specific internal administrative record."
   false refl
 
 slqLegalDepositMetadataAudit : SourceAuditReceipt
@@ -138,6 +160,9 @@ data FederalCriticalHabitatRegisterEqualsNCAS13CriticalHabitat : Set where
 data FishHabitatAreaEqualsTerrestrialNCACriticalHabitat : Set where
 data PublicCommentInvitationEqualsFinalPD : Set where
 data PublicationNoticeEqualsSubstantiveFinalPD : Set where
+data PortalPublishedStatusEqualsFinalPart9Decision : Set where
+data HousingProgramContextEqualsPredeterminedApproval : Set where
+data HousingProgramContextEqualsStrikeTeamMembership : Set where
 data LegalDepositMetadataEqualsSubstantiveVolumeContents : Set where
 data CommentCountEqualsResponseAdequacy : Set where
 data ForeignJurisdictionDatasetEqualsQueenslandEvidence : Set where
@@ -157,6 +182,15 @@ commentInvitationIsNotFinalPD ()
 
 publicationNoticeIsNotSubstantiveFinalPD : PublicationNoticeEqualsSubstantiveFinalPD → ⊥
 publicationNoticeIsNotSubstantiveFinalPD ()
+
+portalPublishedStatusDoesNotCreateFinalDecision : PortalPublishedStatusEqualsFinalPart9Decision → ⊥
+portalPublishedStatusDoesNotCreateFinalDecision ()
+
+housingContextDoesNotCreatePredeterminedApproval : HousingProgramContextEqualsPredeterminedApproval → ⊥
+housingContextDoesNotCreatePredeterminedApproval ()
+
+housingContextDoesNotCreateStrikeTeamMembership : HousingProgramContextEqualsStrikeTeamMembership → ⊥
+housingContextDoesNotCreateStrikeTeamMembership ()
 
 legalDepositMetadataDoesNotCreateContents : LegalDepositMetadataEqualsSubstantiveVolumeContents → ⊥
 legalDepositMetadataDoesNotCreateContents ()
@@ -181,6 +215,8 @@ record CurrentExternalWall : Set where
     substantiveFinalPDVolumesStillMissingIsTrue : substantiveFinalPDVolumesStillMissing ≡ true
     actualCommentSummaryResponseStillMissing : Bool
     actualCommentSummaryResponseStillMissingIsTrue : actualCommentSummaryResponseStillMissing ≡ true
+    exactFinalPart9DecisionInstrumentStillMissing : Bool
+    exactFinalPart9DecisionInstrumentStillMissingIsTrue : exactFinalPart9DecisionInstrumentStillMissing ≡ true
     exact9281ClearingPolygonStillMissing : Bool
     exact9281ClearingPolygonStillMissingIsTrue : exact9281ClearingPolygonStillMissing ≡ true
     exactParcelCorridorJoinStillMissing : Bool
@@ -190,6 +226,7 @@ record CurrentExternalWall : Set where
 
 currentExternalWall : CurrentExternalWall
 currentExternalWall = current-external-wall
+  true refl
   true refl
   true refl
   true refl
