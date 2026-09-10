@@ -1,5 +1,6 @@
 module DASHI.Moonshine.JSameWeightQuotientInvariantExact where
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
@@ -115,49 +116,22 @@ jRatioInvariant M A Q g tau scaleSafe denominatorSafe =
       scaleSafe denominatorSafe)
 
 ------------------------------------------------------------------------
--- Status boundary.
+-- Status boundary: theorem-bearing fields above carry the proofs; this record
+-- only prevents the paid/unpaid frontier from being obscured by them.
 ------------------------------------------------------------------------
 
 record JWeightZeroQuotientBoundary : Set where
   constructor j-weight-zero-quotient-boundary
   field
-    numeratorWeight12Paid : Set
-    denominatorWeight12Paid : Set
-    commonScaleCancellationInterfacePaid : Set
-    quotientInvarianceConditionalOnSafetyPaid : Set
-    automorphyScaleSafetyConcrete : Set
-    denominatorNonvanishingConcrete : Set
-    meromorphicDomainConcrete : Set
+    numeratorWeight12Paid : Bool
+    denominatorWeight12Paid : Bool
+    commonScaleCancellationInterfacePaid : Bool
+    quotientInvarianceConditionalOnSafetyPaid : Bool
+    automorphyScaleSafetyConcrete : Bool
+    denominatorNonvanishingConcrete : Bool
+    meromorphicDomainConcrete : Bool
+open JWeightZeroQuotientBoundary public
 
 canonicalJWeightZeroQuotientBoundary : JWeightZeroQuotientBoundary
 canonicalJWeightZeroQuotientBoundary =
-  j-weight-zero-quotient-boundary
-    (∀ {M : Eisenstein.EisensteinAnalyticModel}
-       {A : Delta.DiscriminantAlgebra M}
-       {g : Eisenstein.SL2Z}
-       {tau : Eisenstein.Parameter M} →
-       jNumerator M (Eisenstein.actParameter M g tau)
-       ≡ Eisenstein._*ˢ_ M
-           (Eisenstein.power M (Eisenstein.denominator M g tau) 12)
-           (jNumerator M tau))
-    (∀ {M : Eisenstein.EisensteinAnalyticModel}
-       {A : Delta.DiscriminantAlgebra M}
-       {g : Eisenstein.SL2Z}
-       {tau : Eisenstein.Parameter M} →
-       jDenominator M A (Eisenstein.actParameter M g tau)
-       ≡ Eisenstein._*ˢ_ M
-           (Eisenstein.power M (Eisenstein.denominator M g tau) 12)
-           (jDenominator M A tau))
-    (∀ {M : Eisenstein.EisensteinAnalyticModel} →
-       QuotientCancellationAlgebra M → Set)
-    (∀ {M : Eisenstein.EisensteinAnalyticModel}
-       {A : Delta.DiscriminantAlgebra M}
-       {Q : QuotientCancellationAlgebra M} →
-       ((g : Eisenstein.SL2Z) →
-        (tau : Eisenstein.Parameter M) →
-        ScalingSafe Q
-          (Eisenstein.power M (Eisenstein.denominator M g tau) 12) →
-        DenominatorSafe Q (jDenominator M A tau) →
-        jRatio M A Q (Eisenstein.actParameter M g tau)
-        ≡ jRatio M A Q tau))
-    Set Set Set
+  j-weight-zero-quotient-boundary true true true true false false false
