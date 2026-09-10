@@ -46,8 +46,8 @@ phoneticsToLinguistics =
     "Linguistics"
     "2026-09-10"
     "main body; disambiguation/hatnote links excluded, matching Ibrahim-style intent"
-    currentObservedDashiLeafMissing
-    "Linguistics parent/use substrate exists, but focused repo search found no prior canonical phonetics/IPA feature owner before this tranche"
+    currentObservedDashiParentStrong
+    "IPA phonetic feature lattice is now present; concrete event-level phonetic transcription remains empirical producer debt"
 
 phonologyToLinguistics : CurrentEnglishFirstLinkProbe
 phonologyToLinguistics =
@@ -56,14 +56,14 @@ phonologyToLinguistics =
     "Linguistics"
     "2026-09-10"
     "main body; maintenance/hatnote links excluded"
-    currentObservedDashiLeafMissing
-    "phoneme/language-specific contrast layer remains distinct from the new source-bound IPA phonetics lattice"
+    currentObservedDashiParentStrong
+    "language-relative feature-matrix/contrast owner is now present; concrete language phoneme inventory remains open"
 
 ------------------------------------------------------------------------
 -- Coverage consequence: both current probes converge immediately on the same
--- broad parent, so Ibrahim-style navigation identifies a compact sibling gap:
--- phonetics/IPA and phonology/phoneme contrast should share Linguistics as an
--- external navigation parent while remaining formally non-equivalent.
+-- broad parent.  The former architectural sibling gap is paid; the remaining
+-- phonology debt is empirical inventory/contrast evidence on a concrete
+-- language rather than another generic phonology owner.
 ------------------------------------------------------------------------
 
 record PhoneticsPhonologyCoverageQuotient : Set where
@@ -84,9 +84,9 @@ currentPhoneticsPhonologyCoverage =
     "Linguistics"
     true
     true
-    false
-    false
     true
+    false
+    false
     false
 
 ------------------------------------------------------------------------
