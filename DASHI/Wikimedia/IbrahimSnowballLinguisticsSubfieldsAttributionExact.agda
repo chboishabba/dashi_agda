@@ -11,6 +11,8 @@ import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.SourceProvenanceExact as Source
 import DASHI.Culture.IPAPhoneticFeatureLatticeExact as IPA
 import DASHI.Culture.PhonologicalFeatureMatrixContrastExact as Phonology
+import DASHI.Culture.LinguisticMorphologySourceObservationBridgeExact as Morphology
+import DASHI.Culture.NaturalLanguageSyntaxSourceObservationBridgeExact as Syntax
 import DASHI.Culture.LinguisticAnthropologyTlureyPragmaticsBridgeExact as Pragmatics
 import DASHI.Cognition.PNF.SpacyNumericProjection as Spacy
 
@@ -159,8 +161,8 @@ morphologyNode = linguistic-snowball-node
   (revisionPending "current EN/Wikidata discipline relation inspected 2026-09-10")
   "linguistic morphology is a linguistics subfield concerned with word/internal morpheme structure"
   "discipline/navigation relation; not inferred from every lexical occurrence of morphology"
-  false true false false true
-  "spaCy morphology annotations are observation substrate only; canonical linguistic morphology/source owner still open"
+  true true true false true
+  "Lieber-backed architecture and spaCy observation bridge paid; concrete language morphological analysis remains open"
 
 syntaxNode : LinguisticSnowballNode
 syntaxNode = linguistic-snowball-node
@@ -168,8 +170,8 @@ syntaxNode = linguistic-snowball-node
   (revisionPending "current EN/Wikidata discipline relation inspected 2026-09-10")
   "syntax is a linguistics subfield concerned with sentence/phrase structure"
   "discipline/navigation relation; programming-language syntax excluded"
-  false true false false true
-  "dependency-parser observations exist; canonical natural-language syntax/source owner still open"
+  true true true false true
+  "Van Valin dependency + Carnie constituency source architecture paid; concrete sentence analysis remains open"
 
 semanticsNode : LinguisticSnowballNode
 semanticsNode = linguistic-snowball-node
@@ -199,7 +201,7 @@ sociolinguisticsNode = linguistic-snowball-node
   "linguistic anthropology/social-governance substrate strong; canonical sociolinguistics/source producer remains open"
 
 ------------------------------------------------------------------------
--- Concrete reuse/status corrections.
+-- Concrete reuse/status receipts.
 ------------------------------------------------------------------------
 
 phoneticArchitectureReceipt : IPA.IPAPhoneticFeatureBoundary
@@ -207,6 +209,12 @@ phoneticArchitectureReceipt = IPA.canonicalIPAPhoneticFeatureBoundary
 
 phonologyArchitectureReceipt : Phonology.PhonologicalFeatureMatrixBoundary
 phonologyArchitectureReceipt = Phonology.canonicalPhonologicalFeatureMatrixBoundary
+
+morphologyArchitectureReceipt : Morphology.LinguisticMorphologyBoundary
+morphologyArchitectureReceipt = Morphology.canonicalLinguisticMorphologyBoundary
+
+syntaxArchitectureReceipt : Syntax.NaturalLanguageSyntaxBoundary
+syntaxArchitectureReceipt = Syntax.canonicalNaturalLanguageSyntaxBoundary
 
 pragmaticsSubstrateReceipt : Pragmatics.LinguisticAnthropologyTlureyBoundary
 pragmaticsSubstrateReceipt = Pragmatics.canonicalLinguisticAnthropologyTlureyBoundary
@@ -222,11 +230,11 @@ record LinguisticsSnowballPriority : Set where
   constructor linguistics-snowball-priority
   field
     linguisticsParentConsolidation : Bool
-    morphologyCanonicalOwner : Bool
-    syntaxCanonicalOwner : Bool
-    naturalLanguageSemanticsOwner : Bool
-    generalPragmaticsOwner : Bool
-    sociolinguisticsOwner : Bool
+    morphologyCanonicalOwnerStillMissing : Bool
+    syntaxCanonicalOwnerStillMissing : Bool
+    naturalLanguageSemanticsOwnerStillMissing : Bool
+    generalPragmaticsOwnerStillMissing : Bool
+    sociolinguisticsOwnerStillMissing : Bool
     phoneticsArchitectureStillMissing : Bool
     phonologyArchitectureStillMissing : Bool
     firstShortestLeaf : String
@@ -234,8 +242,8 @@ open LinguisticsSnowballPriority public
 
 currentLinguisticsPriority : LinguisticsSnowballPriority
 currentLinguisticsPriority = linguistics-snowball-priority
-  true true true true false true false false
-  "Morphology: reuse spaCy morphology observations but add a source-bounded linguistic morphology owner"
+  true false false true false true false false
+  "Natural-language semantics: reuse existing logical/PNF meaning machinery but add a source-bounded linguistic semantics owner"
 
 ------------------------------------------------------------------------
 -- WrongType / attribution firewalls.
