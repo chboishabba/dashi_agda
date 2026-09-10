@@ -6,11 +6,11 @@ module DASHI.ComputerScience.FlyLocalOptimizationCompilerExact where
 --   dashiBRAIN/dashi/analysis/local_optimization_compiler.py
 --   dashiBRAIN/dashi/analysis/fly_streaming_optimization_certificates.py
 --
--- Scientific carriers remain distinct from optimization tactics.  This module
+-- Scientific carriers remain distinct from optimization tactics. This module
 -- does not claim that NumPy/Arrow are proofs, nor that an empirical RSS number
 -- proves a semantic theorem.
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; _⊔_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
@@ -21,10 +21,6 @@ import DASHI.ComputerScience.LocalOptimizationCompilerExact as Opt
 private
   variable
     ℓs ℓo ℓx ℓq ℓr : Level
-    SpecState : Set ℓs
-    OptState  : Set ℓo
-    Input     : Set ℓx
-    Obs       : Set ℓq
 
 ------------------------------------------------------------------------
 -- JRC2018 painted-domain stream.
@@ -34,11 +30,12 @@ jrcPaintedDomainCount : Nat
 jrcPaintedDomainCount = 46
 
 record JRC2018PaintedDomainStreamingPayment
+  {ℓr : Level}
   (SpecState : Set ℓs)
   (OptState : Set ℓo)
   (Domain : Set ℓx)
   (ConsumerObservation : Set ℓq)
-  : Set (ℓs Opt.⊔ ℓo Opt.⊔ ℓx Opt.⊔ ℓq Opt.⊔ ℓr) where
+  : Set (ℓs ⊔ ℓo ⊔ ℓx ⊔ ℓq ⊔ ℓr) where
   field
     semanticCompiler :
       Opt.LocalSemanticCompiler {ℓr = ℓr}
@@ -99,11 +96,12 @@ maleCNSPersistentCounterCells =
   + maleCNSGraphNeuronCount
 
 record MaleCNSSynapseMembershipStreamingPayment
+  {ℓr : Level}
   (SpecState : Set ℓs)
   (OptState : Set ℓo)
   (PartnerRow : Set ℓx)
   (ConsumerObservation : Set ℓq)
-  : Set (ℓs Opt.⊔ ℓo Opt.⊔ ℓx Opt.⊔ ℓq Opt.⊔ ℓr) where
+  : Set (ℓs ⊔ ℓo ⊔ ℓx ⊔ ℓq ⊔ ℓr) where
   field
     semanticCompiler :
       Opt.LocalSemanticCompiler {ℓr = ℓr}
@@ -154,14 +152,14 @@ record FlyOptimizationExecutionCalibration : Set where
   constructor fly-calibration
   field
     oldCompilationOOMObserved : Bool
-    oldPeakRSSMiBObserved     : Nat
+    oldPeakRSSMiBObserved : Nat
     streamedCompletedObserved : Bool
     streamedPeakRSSMiBObserved : Nat
     regressionSuiteGreenObserved : Bool
     regressionTestCountObserved : Nat
 
 -- Observed on the JRC2018 painted-domain compiler run supplied by the runtime
--- executor.  These values calibrate the resource model only; none appears in
+-- executor. These values calibrate the resource model only; none appears in
 -- jrcWholeCompilationPreserved or maleCNSWholeMembershipObservationPreserved.
 currentJRCExecutionCalibration : FlyOptimizationExecutionCalibration
 currentJRCExecutionCalibration =
@@ -175,9 +173,9 @@ record FlyOptimizationBoundary : Set where
   constructor fly-optimization-boundary
   field
     semanticCorrectnessSeparateFromResidency : Bool
-    residencyBoundSeparateFromExecutionRSS   : Bool
-    resourceExhaustionNotSemanticPayment     : Bool
-    implementationTacticNotPrimitivePayment  : Bool
+    residencyBoundSeparateFromExecutionRSS : Bool
+    resourceExhaustionNotSemanticPayment : Bool
+    implementationTacticNotPrimitivePayment : Bool
 
 canonicalFlyOptimizationBoundary : FlyOptimizationBoundary
 canonicalFlyOptimizationBoundary =
