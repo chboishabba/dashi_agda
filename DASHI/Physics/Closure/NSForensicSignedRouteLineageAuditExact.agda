@@ -10,6 +10,14 @@ module DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact where
 -- surviving analytic boundary.  Chronology is evidence of source existence;
 -- chronology alone is NOT evidence of mathematical correctness, third-party
 -- access, copying, model-training ingestion, or reward hacking.
+--
+-- Current historical hypothesis, kept typed rather than silently promoted:
+-- by 2026-07-26 the repository had assembled the FINAL PROBLEM SPECIFICATION
+-- in distributed form: exact signed physical coefficient + cancellation-aware
+-- signed-gap route + cutoff-uniform target + arbitrary-data/global consumer.
+-- Later tranches progressively instantiate/rewrite that problem on stronger
+-- same-object carriers.  This does not assert that every later theorem was
+-- already proved on 2026-07-26.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -20,8 +28,24 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 
--- Formal descendants are imported transitively so this ledger is also one
--- focused source/type surface for the audited formal chain.
+-- Early and middle formal owners are imported so the ledger records the
+-- forward maturation of the problem, not only the newest round-number names.
+import DASHI.Physics.Closure.NSWall1CanonicalResolventGap as JulyResolvent
+import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as JulySigned
+import DASHI.Physics.Closure.NSTriadKNSignedUniformGapProgram as JulyGap
+import DASHI.Physics.Closure.NSTriadKNSignedGapAprioriComposition as JulyApriori
+import DASHI.Physics.Closure.NSTriadKNExactCoefficientToPhysicalWeight as JulyPhysical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram as JulyStage3
+import DASHI.Physics.Closure.NSTriadKNLuoNearWindowCommutatorDissipationClosureExact as AugCritical
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalSignedShellCellRound26Exact as AugShell
+import DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorBonyWeldRound123Exact as R123
+import DASHI.Physics.Closure.NSTriadKNMixedHelicitySpacetimeFrontierRound228Exact as R228
+import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
+import DASHI.Physics.Closure.NSTriadKNHeatWeightedCommutatorSchurRound301Exact as R301
+import DASHI.Physics.Closure.NSTriadKNHeatWeightedNestedSpacetimeToResolventRound351Exact as R351
+
+-- Newest formal descendants are imported transitively so this ledger is also
+-- one focused source/type surface for the currently audited formal chain.
 import DASHI.Physics.Closure.NSTriadKNExternalPureCommutatorPartnerRound120Exact as R120
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNFixedOutputLiveGlobalFluxRound406Exact as R406
@@ -51,8 +75,22 @@ data ArtefactRole : Set where
   signedCoherencePrecursor : ArtefactRole
   empiricalBarrier : ArtefactRole
   empiricalSignedResidual : ArtefactRole
+  signedMajorantBoundary : ArtefactRole
+  canonicalResolventBaseline : ArtefactRole
+  analyticTrancheAssembly : ArtefactRole
+  exactSignedCoefficient : ArtefactRole
+  signedUniformGapSpecification : ArtefactRole
+  globalAprioriConsumer : ArtefactRole
+  physicalSignedAssembly : ArtefactRole
+  criticalCommutatorDissipation : ArtefactRole
+  signedPhysicalShellLedger : ArtefactRole
   formalCommutator : ArtefactRole
+  exactCarrierBonyWeld : ArtefactRole
+  spacetimeFrontier : ArtefactRole
+  resolventTemporalFlux : ArtefactRole
   formalWeightedCancellation : ArtefactRole
+  sameObjectSchurFrontier : ArtefactRole
+  resolventAbsorptionAdapter : ArtefactRole
   liveSignedCarrier : ArtefactRole
   directResolventRepresentation : ArtefactRole
   terminalSignedConsumer : ArtefactRole
@@ -66,6 +104,10 @@ data ArtefactRole : Set where
 data RelationshipStrength : Set where
   broadStructuralAncestry : RelationshipStrength
   empiricalMethodPrecursor : RelationshipStrength
+  representationBoundary : RelationshipStrength
+  architectureAssembly : RelationshipStrength
+  problemSpecification : RelationshipStrength
+  physicalInstantiation : RelationshipStrength
   formalRefinement : RelationshipStrength
   exactSameObject : RelationshipStrength
   exactSpecialization : RelationshipStrength
@@ -163,6 +205,174 @@ jun04MaterialParent = forensic-receipt
   empiricalSignedResidual
   "material-parent/cross-shell carrier consumed by the signed-flip audit"
 
+jul20MajorantSeparation : ForensicReceipt
+jul20MajorantSeparation = forensic-receipt
+  dashiAgda
+  "signed response separated from pair-majorant kernel"
+  "compact-Gamma off-packet Schur/pair-incidence tranche; commit message: fix(ns): separate signed response from pair-majorant kernel"
+  "723bf33bd9bf1947eb5bbda6dd3df700b5b05e39"
+  "2026-07-20T00:00:00Z"
+  "2026-07-20T10:00:00+10:00"
+  "Johl Brown"
+  signedMajorantBoundary
+  "signed compact-Gamma response is not definitionally the nonnegative pair-incidence majorant; the required relation is majorization, preserving the representation-loss boundary"
+
+jul20CanonicalResolvent : ForensicReceipt
+jul20CanonicalResolvent = forensic-receipt
+  dashiAgda
+  "fail-closed canonical finite resolvent and strict gap baseline"
+  "DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda"
+  "d10569457f09993174e1b921935dadb1eebced05"
+  "2026-07-20T01:43:20Z"
+  "2026-07-20T11:43:20+10:00"
+  "Johl Brown"
+  canonicalResolventBaseline
+  "resolvent/gap coordinate exists, but the six-mode baseline is explicitly not identified with the physical low block without a representation theorem"
+
+jul20PR145 : ForensicReceipt
+jul20PR145 = forensic-receipt
+  dashiAgda
+  "PR #145 rational six-mode Wall1 Schur/resolvent/gap packet"
+  "pull/145: Close rational six-mode Wall1 Schur packet"
+  "8905dc5c4c3389f18698f1669040dcf5923af0c6"
+  "2026-07-20T03:02:06Z"
+  "2026-07-20T13:02:06+10:00"
+  "Johl Brown"
+  analyticTrancheAssembly
+  "finite Schur certificates + baseline low resolvent + strict packet gap assembled while physical representation remains fail-closed"
+
+jul20PR140 : ForensicReceipt
+jul20PR140 = forensic-receipt
+  dashiAgda
+  "PR #140 compact-Gamma signed-response / Schur / tail architecture"
+  "pull/140: feat(ns): audit off-packet compact-Gamma Schur-tail control"
+  "e64a38ab617cf88035555a07a223afe46480df0e"
+  "2026-07-20T06:17:05Z"
+  "2026-07-20T16:17:05+10:00"
+  "Johl Brown"
+  analyticTrancheAssembly
+  "signed near response, exact pair-incidence majorant, row/column Schur target, explicit far tail and D-log-E consumer are assembled; signed response remains distinct from nonnegative majorant"
+
+jul20PR227 : ForensicReceipt
+jul20PR227 = forensic-receipt
+  dashiAgda
+  "PR #227 cross-pollinated compact-Gamma analytic closure stack"
+  "pull/227: Cross-pollinate the compact-Gamma analytic closure stack"
+  "c2b313a0878b0281781dd7a1bf3ae851d24af8d9"
+  "2026-07-20T09:42:15Z"
+  "2026-07-20T19:42:15+10:00"
+  "Johl Brown"
+  analyticTrancheAssembly
+  "differentiated triads + exact full-shell pair incidence + quantitative tail + Galerkin passage + invariant region + BKM continuation are integrated into one proof-relevant closure architecture"
+
+jul20PR255 : ForensicReceipt
+jul20PR255 = forensic-receipt
+  dashiAgda
+  "PR #255 concrete far-tail commutator decay"
+  "pull/255: feat(ns): expose concrete far-tail commutator decay"
+  "bc9a627985cf4140ee10260f6399050aacf5cba4"
+  "2026-07-20T15:09:40Z"
+  "2026-07-21T01:09:40+10:00"
+  "Johl Brown"
+  analyticTrancheAssembly
+  "far-low Fourier cancellation + multiplier commutator + dyadic gain + far-high Sobolev tail + cutoff-uniform epsilon(R) endpoint fill the explicit tail coordinate"
+
+jul25PR336 : ForensicReceipt
+jul25PR336 = forensic-receipt
+  dashiAgda
+  "PR #336 exact signed multiplier-difference commutator frontier"
+  "pull/336: Add exact Wall-I commutator and cube-Bernstein frontier"
+  "68ab8ffbcf5c0aa791720a454dbeb1631ea933b2"
+  "2026-07-25T07:09:05Z"
+  "2026-07-25T17:09:05+10:00"
+  "Johl Brown"
+  signedMajorantBoundary
+  "owns K_raw, signed K_diff and K_absdiff separately; exact commutator identity precedes norms; absolute l1 Schur failure points explicitly toward sign-sensitive estimates"
+
+jul26ExactSignedCoefficient : ForensicReceipt
+jul26ExactSignedCoefficient = forensic-receipt
+  dashiAgda
+  "exact signed velocity-form Galerkin coefficient"
+  "DASHI/Physics/Closure/NSTriadKNExactSignedGalerkinCoefficient.agda"
+  "466c9cdea3336fb3b27fbf578887d6e619bf5953"
+  "2026-07-26T02:44:07Z"
+  "2026-07-26T12:44:07+10:00"
+  "Johl Brown"
+  exactSignedCoefficient
+  "literal tested -i P_k[(u_p.q)u_q] and ordered pair; no positive part, absolute value, phase ansatz or hidden half factor"
+
+jul26PhysicalMajorantBridge : ForensicReceipt
+jul26PhysicalMajorantBridge = forensic-receipt
+  dashiAgda
+  "exact signed coefficient connected to retained physical triads and named majorant"
+  "DASHI/Physics/Closure/NSTriadKNExactCoefficientToPhysicalWeight.agda"
+  "a4f38a003e74cfb31d8dc452a0e1eb7c6fc565ca"
+  "2026-07-26T02:46:25Z"
+  "2026-07-26T12:46:25+10:00"
+  "Johl Brown"
+  physicalSignedAssembly
+  "raw retained coefficient remains exact and signed; Nat kernel weight is explicitly only coefficientMajorant(raw coefficient)"
+
+jul26PhysicalStage3 : ForensicReceipt
+jul26PhysicalStage3 = forensic-receipt
+  dashiAgda
+  "signed physical Stage-3 frontier aggregate"
+  "DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda"
+  "5e1ae9dc413a9447bfa515a784bdeb08dab53f2e"
+  "2026-07-26T02:51:51Z"
+  "2026-07-26T12:51:51+10:00"
+  "Johl Brown"
+  physicalSignedAssembly
+  "aggregates exact signed coefficient, positive-part cancellation no-go, physical fibres, classwise envelope bookkeeping, finite-to-uniform no-go and Galerkin-to-arbitrary-data global cutset"
+
+jul26SignedGapProgram : ForensicReceipt
+jul26SignedGapProgram = forensic-receipt
+  dashiAgda
+  "signed cutoff-uniform gap program"
+  "DASHI/Physics/Closure/NSTriadKNSignedUniformGapProgram.agda"
+  "e8d8781781f825f3b27fbf578887d6e619bf5953"
+  "2026-07-26T03:25:40Z"
+  "2026-07-26T13:25:40+10:00"
+  "Johl Brown"
+  signedUniformGapSpecification
+  "Route B explicitly preserves signed blocks and asks for permutation, reality-orbit and complete-triad cancellation plus a cutoff-uniform symmetric numerical-range bound"
+
+jul26GapApriori : ForensicReceipt
+jul26GapApriori = forensic-receipt
+  dashiAgda
+  "strict signed gap to arbitrary-data uniform a-priori composition"
+  "DASHI/Physics/Closure/NSTriadKNSignedGapAprioriComposition.agda"
+  "a872ad2a4249e2d6f1056595df980000fe7472aa"
+  "2026-07-26T04:17:22Z"
+  "2026-07-26T14:17:22+10:00"
+  "Johl Brown"
+  globalAprioriConsumer
+  "strict signed nonlinearity<=dissipation plus exact energy identity feeds cutoff-independent arbitrary-data a-priori control; no smallness, symmetry, phase or helicity restriction"
+
+aug05CriticalDissipation : ForensicReceipt
+aug05CriticalDissipation = forensic-receipt
+  dashiAgda
+  "commutator criticality composed with terminal dissipation"
+  "DASHI/Physics/Closure/NSTriadKNLuoNearWindowCommutatorDissipationClosureExact.agda"
+  "8d5c3436b6fde86719b54d323113a69360adbc2d"
+  "2026-08-05T11:13:30Z"
+  "2026-08-05T21:13:30+10:00"
+  "Johl Brown"
+  criticalCommutatorDissipation
+  "critical commutator factor and independently owned terminal dissipation smallness are composed; continuum PDE estimate remains the genuine leaf"
+
+aug08SignedShell : ForensicReceipt
+aug08SignedShell = forensic-receipt
+  dashiAgda
+  "literal physical five-source fibre to signed critical shell cell"
+  "DASHI/Physics/Closure/NSTriadKNLuoPhysicalSignedShellCellRound26Exact.agda"
+  "19aa8cb1d7b373fdf74ac0674832477a94d98f5a"
+  "2026-08-08T06:50:21Z"
+  "2026-08-08T16:50:21+10:00"
+  "Johl Brown"
+  signedPhysicalShellLedger
+  "forces HH+LH+HL+CC+commutator source coordinates from the literal physical output fibre and the genuine shell energy balance"
+
 aug27R120 : ForensicReceipt
 aug27R120 = forensic-receipt
   dashiAgda "R120 physical shared-output pure commutator partner"
@@ -170,7 +380,43 @@ aug27R120 = forensic-receipt
   "7ba2a203e355f4cbb2b4888f6ae408f4c17ef58b"
   "2026-08-27T13:51:37Z" "2026-08-27T23:51:37+10:00"
   "Johl Brown" formalCommutator
-  "formal shared-output commutator identity; not retroactively equated to the empirical objects"
+  "formal shared-output commutator identity; not retroactively equated to the empirical or July objects"
+
+aug27R123 : ForensicReceipt
+aug27R123 = forensic-receipt
+  dashiAgda
+  "R123 full physical quartic fold to signed pure-commutator Bony sums"
+  "DASHI/Physics/Closure/NSTriadKNExternalPureCommutatorBonyWeldRound123Exact.agda"
+  "1ccc381d7d2b71e6add0110d1575a8d35242496c"
+  "2026-08-27T14:06:10Z"
+  "2026-08-28T00:06:10+10:00"
+  "Johl Brown"
+  exactCarrierBonyWeld
+  "end-to-end exact carrier weld: twice full physical quartic fold equals four signed Bony commutator folds with no cellwise absolute value/cardinality tax"
+
+aug29R228 : ForensicReceipt
+aug29R228 = forensic-receipt
+  dashiAgda
+  "R228 final mixed-helicity spacetime Package-A leaf"
+  "DASHI/Physics/Closure/NSTriadKNMixedHelicitySpacetimeFrontierRound228Exact.agda"
+  "2b18f2f747863c67a9274463891774a4170d8fa0"
+  "2026-08-29T13:01:57Z"
+  "2026-08-29T23:01:57+10:00"
+  "Johl Brown"
+  spacetimeFrontier
+  "after exact mixed-helicity collapse, names one remaining PDE theorem: cutoff-uniform spacetime bound for the physical mixed-helicity convolution mass"
+
+aug30R290 : ForensicReceipt
+aug30R290 = forensic-receipt
+  dashiAgda
+  "R290 resolvent-weighted temporal Gram flux compiler"
+  "DASHI/Physics/Closure/NSTriadKNWeightedGramFluxCompilerRound290Exact.agda"
+  "9bc61ac8e9b046c7bcb781fb5badba5654d1acf0"
+  "2026-08-30T11:08:41Z"
+  "2026-08-30T21:08:41+10:00"
+  "Johl Brown"
+  resolventTemporalFlux
+  "uses viscous pair-rate resolvent w*lambda=1 to rewrite coherent Gram debt as endpoint flux plus weighted nonlinear remainder"
 
 aug30R294 : ForensicReceipt
 aug30R294 = forensic-receipt
@@ -180,6 +426,30 @@ aug30R294 = forensic-receipt
   "2026-08-30T11:19:48Z" "2026-08-30T21:19:48+10:00"
   "Johl Brown" formalWeightedCancellation
   "generic swap-invariant weight preserves mixed-commutator cancellation before absolute values"
+
+aug31R301 : ForensicReceipt
+aug31R301 = forensic-receipt
+  dashiAgda
+  "R301 same-object heat-weighted R294 spacetime/Schur frontier"
+  "DASHI/Physics/Closure/NSTriadKNHeatWeightedCommutatorSchurRound301Exact.agda"
+  "489f48fac67b7effe1ffd6200c7f614ff4d60a0d"
+  "2026-08-31T10:04:17Z"
+  "2026-08-31T20:04:17+10:00"
+  "Johl Brown"
+  sameObjectSchurFrontier
+  "requires the literal heat-weighted R294 commutator remain on the SAME carrier; row/column budgets and spacetime integrability are the explicit leaves"
+
+aug31R351 : ForensicReceipt
+aug31R351 = forensic-receipt
+  dashiAgda
+  "R351 nested spacetime payment to existing resolvent absorption consumer"
+  "DASHI/Physics/Closure/NSTriadKNHeatWeightedNestedSpacetimeToResolventRound351Exact.agda"
+  "523909ea07409de82e225153572bfbc8f91b7e35"
+  "2026-08-31T14:58:10Z"
+  "2026-09-01T00:58:10+10:00"
+  "Johl Brown"
+  resolventAbsorptionAdapter
+  "paid R301 spacetime forcing mass feeds the already-owned R300 integrated resolvent Young-absorption consumer by order monotonicity only"
 
 sep01R406 : ForensicReceipt
 sep01R406 = forensic-receipt
@@ -305,7 +575,7 @@ sep10Exact584Payments = forensic-receipt
 repoSource : String → String → String → String → Source.AttributedSource
 repoSource title context url relationship =
   Source.mkNoDOISource "Johl Brown" title context "2026" url
-    (Source.namedSourceKind "GitHub repository source/commit")
+    (Source.namedSourceKind "GitHub repository source/commit/PR")
     relationship Source.publicAttribution
 
 jan24Source : Source.AttributedSource
@@ -336,12 +606,33 @@ jun04Source = repoSource
   "https://github.com/chboishabba/dashiCFD/commit/1c9ca183515e3a26988ae21785de9a45481e37d2"
   "empirical signed cross-shell/net-residue precursor"
 
+july26Source : Source.AttributedSource
+july26Source = repoSource
+  "Exact signed coefficient + signed uniform gap + arbitrary-data consumer"
+  "chboishabba/dashi_agda 2026-07-26 distributed tranche"
+  "https://github.com/chboishabba/dashi_agda/commit/e8d8781781f825f3b27fbf578887d6e619bf5953"
+  "earliest currently recovered assembled final-problem specification; not an assertion that the missing uniform signed estimate was proved"
+
+r123Source : Source.AttributedSource
+r123Source = repoSource
+  "R123 full physical quartic to signed commutator Bony weld"
+  "chboishabba/dashi_agda commit 1ccc381d7d2b71e6add0110d1575a8d35242496c"
+  "https://github.com/chboishabba/dashi_agda/commit/1ccc381d7d2b71e6add0110d1575a8d35242496c"
+  "exact physical-carrier signed Bony weld without pre-norm absolute values"
+
 r294Source : Source.AttributedSource
 r294Source = repoSource
   "R294 swap-invariant weighted commutator collapse"
   "chboishabba/dashi_agda commit 64e2a4d2b067a05c0a8cf979ea3ed74f960c56dc"
   "https://github.com/chboishabba/dashi_agda/commit/64e2a4d2b067a05c0a8cf979ea3ed74f960c56dc"
   "formal weighted cancellation before absolute values"
+
+r301Source : Source.AttributedSource
+r301Source = repoSource
+  "R301 same-object heat-weighted commutator spacetime frontier"
+  "chboishabba/dashi_agda commit 489f48fac67b7effe1ffd6200c7f614ff4d60a0d"
+  "https://github.com/chboishabba/dashi_agda/commit/489f48fac67b7effe1ffd6200c7f614ff4d60a0d"
+  "requires the literal R294 carrier for Schur/spacetime payment rather than an analogous proxy"
 
 r503Source : Source.AttributedSource
 r503Source = repoSource
@@ -382,8 +673,9 @@ forensicSourceAtlas : Source.AttributedSourceAtlas
 forensicSourceAtlas = Source.mkSourceAtlas
   "NS signed-route earliest-forward forensic source atlas"
   "DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact"
-  (jan24Source ∷ jan27Source ∷ jun03Source ∷ jun04Source ∷ r294Source
-    ∷ r503Source ∷ r541Source ∷ r573Source ∷ r584Source ∷ weldSource ∷ [])
+  (jan24Source ∷ jan27Source ∷ jun03Source ∷ jun04Source ∷ july26Source
+    ∷ r123Source ∷ r294Source ∷ r301Source ∷ r503Source ∷ r541Source
+    ∷ r573Source ∷ r584Source ∷ weldSource ∷ [])
   "public Git repository chronology and formalisation relationships; citation does not import correctness, external access, influence or authority"
 
 ------------------------------------------------------------------------
@@ -414,12 +706,92 @@ edgeJan24ToTheta = snowball-edge
   "same multiscale residual programme, but no same-object theorem claim"
   false
 
-edgeThetaToR503 : SnowballEdge
-edgeThetaToR503 = snowball-edge
-  "2026-06-03 theta barrier"
-  "2026-09-07 R503 signed cutoff-uniform consumer"
-  empiricalMethodPrecursor
-  "both seek a cutoff-uniform flux/production-vs-control barrier; R503 no longer takes the historical early absolute value"
+edgeJuneToJulyMajorantBoundary : SnowballEdge
+edgeJuneToJulyMajorantBoundary = snowball-edge
+  "June signed transfer + theta barrier experiments"
+  "2026-07-20 signed-response / majorant separation"
+  representationBoundary
+  "the formal programme explicitly distinguishes the signed response from the positive pair-majorant rather than treating magnitude as the operator"
+  false
+
+edgeJulyArchitecture : SnowballEdge
+edgeJulyArchitecture = snowball-edge
+  "2026-07-20 compact-Gamma Schur/tail tranches"
+  "2026-07-26 signed physical final-problem specification"
+  architectureAssembly
+  "near response, tail, exact pair incidence, Galerkin/BKM consumer architecture is combined with an exact signed coefficient and cutoff-uniform signed-gap target"
+  false
+
+edgeJuly26FinalProblemSpecification : SnowballEdge
+edgeJuly26FinalProblemSpecification = snowball-edge
+  "2026-07-26 exact signed physical coefficient"
+  "2026-07-26 signed uniform gap -> arbitrary-data a-priori consumer"
+  problemSpecification
+  "all principal coordinates of the later final problem are simultaneously named: exact signed physical operator, cancellation-aware gap, cutoff uniformity, dissipation comparator and global consumer; the quantitative signed estimate remains open"
+  false
+
+edgeJulyPhysicalToAugShell : SnowballEdge
+edgeJulyPhysicalToAugShell = snowball-edge
+  "2026-07-26 signed physical Stage-3 aggregate"
+  "2026-08-08 literal physical signed shell ledger"
+  physicalInstantiation
+  "abstract signed physical frontier is instantiated onto a genuine energy balance whose five source coordinates are forced by the literal physical output fibre"
+  true
+
+edgeAugShellToR123 : SnowballEdge
+edgeAugShellToR123 = snowball-edge
+  "2026-08-08 physical signed shell carrier"
+  "2026-08-27 R123 exact signed commutator/Bony carrier"
+  formalRefinement
+  "physical signed bookkeeping matures into a complete physical quartic-to-pure-commutator Bony equality before cellwise absolute value"
+  false
+
+edgeR123ToR228 : SnowballEdge
+edgeR123ToR228 = snowball-edge
+  "R123 exact signed commutator/Bony carrier"
+  "R228 mixed-helicity spacetime frontier"
+  formalRefinement
+  "finite signed cancellations and helicity decomposition reduce Package A to one cutoff-uniform physical spacetime theorem"
+  false
+
+edgeR228ToR290 : SnowballEdge
+edgeR228ToR290 = snowball-edge
+  "R228 cutoff-uniform mixed-helicity spacetime frontier"
+  "R290 resolvent-weighted temporal Gram flux"
+  formalRefinement
+  "the spacetime problem is re-expressed through viscous pair damping and a literal resolvent weight, moving Gram debt to endpoint flux plus weighted nonlinear remainder"
+  false
+
+edgeR290ToR294 : SnowballEdge
+edgeR290ToR294 = snowball-edge
+  "R290 resolvent-weighted nonlinear remainder"
+  "R294 swap-invariant weighted mixed commutator"
+  formalRefinement
+  "the weighted nonlinear remainder acquires an exact cancellation-preserving commutator carrier"
+  false
+
+edgeR294ToR301 : SnowballEdge
+edgeR294ToR301 = snowball-edge
+  "R294 weighted commutator"
+  "R301 same-object heat-weighted Schur/spacetime leaf"
+  canonicalConsumer
+  "R301 explicitly requires the actual R294 carrier and rejects analogous commutator proxies; row/column/spacetime estimates become the named payment"
+  true
+
+edgeR301ToR351 : SnowballEdge
+edgeR301ToR351 = snowball-edge
+  "R301 paid nested/commutator spacetime mass"
+  "R351 existing resolvent absorption consumer"
+  canonicalConsumer
+  "the payment plugs directly into the already-owned R300 resolvent absorption leaf by monotonicity; no new consumer architecture is introduced"
+  true
+
+edgeR351ToR503 : SnowballEdge
+edgeR351ToR503 = snowball-edge
+  "R351 resolvent-spacetime producer/consumer path"
+  "R503 direct signed resolvent terminal consumer"
+  formalRefinement
+  "later rounds replace/re-express the same overall signed-resolvent spacetime obligation on a more literal direct companion carrier"
   false
 
 edgeSignedFlipToR294 : SnowballEdge
@@ -491,7 +863,11 @@ edgeWeighted584ToCurrentWall = snowball-edge
 forensicSnowball : List SnowballEdge
 forensicSnowball =
   edgeJan24ToJan27 ∷ edgeJan27ToSignedFlip ∷ edgeJan24ToTheta ∷
-  edgeThetaToR503 ∷ edgeSignedFlipToR294 ∷ edgeR120ToR294 ∷
+  edgeJuneToJulyMajorantBoundary ∷ edgeJulyArchitecture ∷
+  edgeJuly26FinalProblemSpecification ∷ edgeJulyPhysicalToAugShell ∷
+  edgeAugShellToR123 ∷ edgeR123ToR228 ∷ edgeR228ToR290 ∷
+  edgeR290ToR294 ∷ edgeR294ToR301 ∷ edgeR301ToR351 ∷
+  edgeR351ToR503 ∷ edgeSignedFlipToR294 ∷ edgeR120ToR294 ∷
   edgeR294ToR541 ∷ edgeR294ToR573 ∷ edgeR541ToWeld ∷
   edgeR573ToWeld ∷ edgeWeldToDirect ∷ edgeDirectToR503 ∷
   edgeR584ToWeighted584 ∷ edgeWeighted584ToCurrentWall ∷ []
@@ -507,6 +883,8 @@ data ChronologyImpliesCopying : Set where
 data ChronologyImpliesRewardHacking : Set where
 data EmpiricalPrecursorImpliesFormalSameObject : Set where
 data SimilarVocabularyImpliesSameTheorem : Set where
+data ProblemSpecificationImpliesProblemSolved : Set where
+data SameProblemShapeImpliesSameCarrier : Set where
 
 sourceExistenceDoesNotImplyCorrectness : SourceExistenceImpliesMathematicalCorrectness → ⊥
 sourceExistenceDoesNotImplyCorrectness ()
@@ -522,6 +900,10 @@ empiricalPrecursorDoesNotBecomeFormalIdentityByChronology : EmpiricalPrecursorIm
 empiricalPrecursorDoesNotBecomeFormalIdentityByChronology ()
 similarVocabularyDoesNotProveSameTheorem : SimilarVocabularyImpliesSameTheorem → ⊥
 similarVocabularyDoesNotProveSameTheorem ()
+problemSpecificationDoesNotMeanSolved : ProblemSpecificationImpliesProblemSolved → ⊥
+problemSpecificationDoesNotMeanSolved ()
+sameProblemShapeDoesNotProveSameCarrier : SameProblemShapeImpliesSameCarrier → ⊥
+sameProblemShapeDoesNotProveSameCarrier ()
 
 ------------------------------------------------------------------------
 -- Audit status / current frontier.
@@ -544,6 +926,24 @@ juneEmpiricalObjectsClaimedAsFormalProofs = false
 
 priorRepositoryExistenceOfSignedAndBarrierIngredientsRecorded : Bool
 priorRepositoryExistenceOfSignedAndBarrierIngredientsRecorded = true
+
+july26EarliestRecoveredFinalProblemSpecification : Bool
+july26EarliestRecoveredFinalProblemSpecification = true
+
+july26FinalProblemSpecificationClaimedSolved : Bool
+july26FinalProblemSpecificationClaimedSolved = false
+
+julyMajorantRouteIdentifiedWithSignedOperator : Bool
+julyMajorantRouteIdentifiedWithSignedOperator = false
+
+augustPhysicalCarrierMaturationRecorded : Bool
+augustPhysicalCarrierMaturationRecorded = true
+
+r301AlreadyRequiredSameObjectR294Carrier : Bool
+r301AlreadyRequiredSameObjectR294Carrier = true
+
+r351AlreadyConnectedSpacetimePaymentToResolventConsumer : Bool
+r351AlreadyConnectedSpacetimePaymentToResolventConsumer = true
 
 thirdPartyAccessEstablishedByThisAudit : Bool
 thirdPartyAccessEstablishedByThisAudit = false
@@ -583,6 +983,24 @@ auditDirectionEarliestForwardIsTrue = refl
 priorRepositoryExistenceOfSignedAndBarrierIngredientsRecordedIsTrue :
   priorRepositoryExistenceOfSignedAndBarrierIngredientsRecorded ≡ true
 priorRepositoryExistenceOfSignedAndBarrierIngredientsRecordedIsTrue = refl
+july26EarliestRecoveredFinalProblemSpecificationIsTrue :
+  july26EarliestRecoveredFinalProblemSpecification ≡ true
+july26EarliestRecoveredFinalProblemSpecificationIsTrue = refl
+july26FinalProblemSpecificationClaimedSolvedIsFalse :
+  july26FinalProblemSpecificationClaimedSolved ≡ false
+july26FinalProblemSpecificationClaimedSolvedIsFalse = refl
+julyMajorantRouteIdentifiedWithSignedOperatorIsFalse :
+  julyMajorantRouteIdentifiedWithSignedOperator ≡ false
+julyMajorantRouteIdentifiedWithSignedOperatorIsFalse = refl
+augustPhysicalCarrierMaturationRecordedIsTrue :
+  augustPhysicalCarrierMaturationRecorded ≡ true
+augustPhysicalCarrierMaturationRecordedIsTrue = refl
+r301AlreadyRequiredSameObjectR294CarrierIsTrue :
+  r301AlreadyRequiredSameObjectR294Carrier ≡ true
+r301AlreadyRequiredSameObjectR294CarrierIsTrue = refl
+r351AlreadyConnectedSpacetimePaymentToResolventConsumerIsTrue :
+  r351AlreadyConnectedSpacetimePaymentToResolventConsumer ≡ true
+r351AlreadyConnectedSpacetimePaymentToResolventConsumerIsTrue = refl
 thirdPartyAccessEstablishedByThisAuditIsFalse : thirdPartyAccessEstablishedByThisAudit ≡ false
 thirdPartyAccessEstablishedByThisAuditIsFalse = refl
 copyingEstablishedByThisAuditIsFalse : copyingEstablishedByThisAudit ≡ false
@@ -591,7 +1009,7 @@ rewardHackingEstablishedByThisAuditIsFalse : rewardHackingEstablishedByThisAudit
 rewardHackingEstablishedByThisAuditIsFalse = refl
 r541xR573ExplicitCompositionRecordedIsTrue : r541xR573ExplicitCompositionRecorded ≡ true
 r541xR573ExplicitCompositionRecordedIsTrue =
-  Weld541x573.roundSpectatorNestedR541WeightInstantiatedIntoR573IsTrue
+  Weld541xR573.roundSpectatorNestedR541WeightInstantiatedIntoR573IsTrue
 nestedRouteLandsOnCanonicalDirectCarrierIsTrue : nestedRouteLandsOnCanonicalDirectCarrier ≡ true
 nestedRouteLandsOnCanonicalDirectCarrierIsTrue =
   NestedFibre.nestedFactoredFullToCanonicalR497CarrierClosedIsTrue
