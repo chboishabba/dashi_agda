@@ -24,7 +24,7 @@ EPBC 2019/8575 decision
 
 with the planning/koala exemption audit running in parallel and enforcement/judicial relief conditional on an exact legal trigger.
 
-The major change since the earlier version of this brief is that the case is no longer mostly at the level of general ecological value. We now have specific local approvals, proponent landscape analyses, corridor evidence, historical imagery, offset questions, and observer occurrence evidence that can be assigned to particular legal atoms.
+The major change in this version is that the Springview/EPBC 2019/8575 file itself now pays several atoms that previously depended on neighbouring-project analogies. The newly supplied 2019 referral and Saunders Havill Group MNES technical report provide same-project, same-parcel evidence for the referral geometry, impact area, Koala habitat score, direct/indirect habitat impact, habitat connectivity and the consultant's significant-impact conclusion. These are 2019 referral-era proponent/consultant propositions and must be compared with the 2026 final Preliminary Documentation rather than silently assumed unchanged.
 
 ---
 
@@ -32,104 +32,140 @@ The major change since the earlier version of this brief is that the case is no 
 
 ### Immediate federal matter
 
-**EPBC 2019/8575 — Springfield Residential Development** remains the immediate hard-clock matter. The Australian Government notice dated 2 September 2026 extends the approval/refusal decision period under s 130(1A) by 20 business days to **1 October 2026** and identifies **Declan O'Connor-Cox, Branch Head, Environment Assessments Queensland**, as the authorised decision-maker.
+**EPBC 2019/8575 — Springfield Residential Development** remains the immediate hard-clock matter. The Australian Government extension notice identifies a 20-business-day extension to **1 October 2026** and identifies **Declan O'Connor-Cox, Branch Head, Environment Assessments Queensland**, as the authorised decision-maker.
 
-Already paid:
+The controlled-action decision separately records that approval under the EPBC Act is required before the action can proceed and that listed threatened species and communities under ss 18 and 18A are the controlling provisions.
 
-- project/referral identity;
-- controlled-action status;
-- listed controlling matters;
-- preliminary-documentation pathway;
-- authorised delegate;
-- current decision deadline;
-- State Library of Queensland custody/legal deposit of the four-volume 2026 Preliminary Documentation set.
+### Newly source-paid from the 2019/8575 primary/proponent file
 
-Still decisive:
+The 2019 referral identifies:
+
+- **7001 Mur Boulevard, Springfield**;
+- **Lot 9999 on SP292760**;
+- land parcel area **158.2 ha**;
+- total referral area **162 ha**;
+- stated impact area **136 ha**;
+- a mostly intact-vegetation site with evidence of historical logging;
+- local government planning approval as applicable.
+
+The Saunders Havill Group MNES assessment then records:
+
+- mostly remnant Category B vegetation;
+- recognised Koala food-tree species in varying densities and maturity;
+- Koala scats located across the site;
+- a Koala habitat score of **7/10** under the then-used Koala guideline, above the threshold treated by that guideline as habitat critical to Koala survival;
+- habitat-connectivity score **2**;
+- connectivity opportunity associated with Woogaroo Creek, Opossum Creek and an eastern waterway;
+- a Plan 5 habitat-connectivity map placing the referral site within a mapped **>500 ha habitat-connectivity** landscape;
+- direct clearing impact of approximately **136 ha** of native Koala habitat plus an additional **26 ha indirect impact**;
+- a rendered Plan 6 mapping the **136 ha critical-habitat impact area**;
+- the consultant's conclusion that clearing/functional loss of the 136 ha would constitute a **significant impact on Koala habitat critical to survival**.
+
+This is a substantial change to the previous atom state. The federal case is no longer missing the historical impact quantity or historical same-project critical-habitat proposition.
+
+### Still decisive for the live 2026 federal decision
 
 ```text
-final-PD action / clearing polygon
+2019 referral-era geometry / ecology
 x
-impacted habitat by species/community
+2026 final-PD action / clearing geometry
 x
 retained habitat
 x
-significance
-x
 avoidance / alternatives
 x
-residual impact
+complete residual-impact treatment
 x
-offsets
+final offset package
 x
 conservation-advice / recovery-plan treatment
 ```
 
-Controlled-action status is **not** refusal, and the existence of threatened species is **not** the final significant-impact or Part 9 answer.
+The most important remaining federal task is therefore a **2019 -> 2026 delta audit**, not simply “find the project polygon”.
+
+WrongType boundaries:
+
+```text
+2019 referral state != automatically unchanged 2026 final-PD state
+significant impact on Koala critical habitat != automatic Part 9 refusal
+EPBC Koala-guideline 'critical habitat' != Queensland NCA s 13 critical habitat
+```
 
 ### Queensland lanes
 
-The s 13 and s 102 lanes have advanced materially and should now be worked **concurrently**.
+The s 13 and s 102 lanes have both advanced.
 
-For **s 13**, the landscape-function case is substantially developed, but the final same-object weld remains:
+For **s 13**, the same Springview parcel is now directly associated in the proponent's ecology with remnant vegetation, Koala food trees, Koala scat evidence, Woogaroo/Opossum Creek connectivity, habitat score 7 and a >500 ha connectivity surface. The remaining legal issue is not basic habitat function; it is the stronger statutory essentiality proposition and the treatment of adverse evidence discussed below.
 
-```text
-exact Springview parcel
-x
-habitat function
-x
-essentiality to conservation of a viable protected-wildlife population
-  or native-wildlife community
-```
-
-For **ss 102–107**, we now have a concrete local works object: **9281/2024/OW**, an approved operational-works decision covering earthworks, vegetation clearing and stormwater. The remaining s 102 weld is:
-
-```text
-exact approved clearing footprint
-x
-works commencement/timing
-x
-affected wildlife/habitat
-x
-likely significant detrimental effect
-```
-
-The s 49 permanent-protection route remains downstream of the strongest s 13/area-of-major-interest case.
+For **ss 102–107**, `9281/2024/OW` remains the concrete approved operational-works object covering vegetation clearing. We can now pair it with a strong candidate same-parcel ecological impact surface from EPBC 2019/8575, but we still need the exact 9281 clearing polygon and current timing.
 
 ---
 
 ## 2. Current legal atom ledger
 
-The handoff should be read as a set of legal atoms rather than as one undifferentiated conservation narrative.
-
 ### EPBC 2019/8575 merits atoms
 
-- final-PD action polygon;
-- impacted habitat quantity;
-- retained habitat quantity;
-- habitat quality / critical-to-survival treatment;
-- avoidance / alternatives;
-- fragmentation and cumulative impact;
-- residual impact;
-- offset package;
-- conservation-advice / recovery-plan consistency.
+**Source-paid or substantially paid at 2019 referral stage:**
+
+- project/referral identity;
+- Lot 9999 SP292760 / 162 ha referral object;
+- 136 ha stated impact area;
+- 136 ha direct Koala-habitat clearing proposition;
+- 26 ha indirect Koala-habitat impact proposition;
+- Koala habitat score 7/10;
+- Koala scat evidence;
+- food-tree vegetation;
+- habitat-connectivity score 2;
+- >500 ha connectivity map;
+- consultant significant-impact conclusion for 136 ha of Koala critical habitat.
+
+**Still requires 2026 final-PD payment:**
+
+- final action/clearing polygon and any delta from 2019;
+- retained habitat quantity and final conservation areas;
+- avoidance / alternatives actually relied on;
+- complete residual impact analysis;
+- current offset package and offset-site maps;
+- conservation-advice / recovery-plan consistency;
+- response-to-submissions treatment and any final revision after the 1,786 public comments.
 
 ### Queensland s 13 atoms
 
-- threatened/protected species or native-wildlife-community evidence;
-- exact-parcel habitat function;
-- movement / dispersal / foraging / refuge / breeding function where evidenced;
-- landscape/corridor contribution;
-- **habitat-population essentiality**.
+Now strongly supported as same-project facts:
+
+- exact Springview parcel identity;
+- remnant vegetation / Koala food trees;
+- Koala scat evidence;
+- Woogaroo/Opossum creek adjacency and connectivity;
+- mapped >500 ha connected-habitat landscape;
+- current broader corridor context from other official/proponent material.
+
+Still open:
+
+- **habitat-population essentiality** under the NCA definition;
+- identification of the relevant viable protected-wildlife population or native-wildlife community;
+- consequence of severance/loss for that population/community;
+- expert/counsel treatment of the proponent's adverse recovery-value reasoning.
 
 ### Queensland ss 102–107 atoms
 
-- exact threatening process;
-- approved clearing footprint;
+Paid/partial:
+
+- concrete vegetation-clearing works entitlement (`9281/2024/OW`);
+- same Springview parcel candidate habitat/impact surface;
+- 136 ha historical Koala critical-habitat impact geometry;
+- same-project Koala and connectivity evidence.
+
+Still open:
+
+- exact approved `9281/2024/OW` clearing footprint;
 - works timing / commencement;
-- affected wildlife/habitat;
-- likely significant detrimental effect.
+- current wildlife/habitat state;
+- likely significant detrimental effect under the NCA consumer.
 
 ### Offset atoms
+
+Still mostly open:
 
 - exact offset parcel identity / GIS polygon;
 - existing legal protection;
@@ -138,49 +174,41 @@ The handoff should be read as a set of legal atoms rather than as one undifferen
 - vegetation maturity / condition;
 - planted/regrowth/remnant status;
 - restoration lag / time to functional equivalence;
-- ecological/function equivalence to impact habitat.
+- ecological/function equivalence to the impact habitat.
 
 ### Planning/exemption atoms
 
-- exact exemption/grandfathering instrument;
-- approval-chain identity;
-- temporal scope;
-- parcel/stage scope;
-- variation/component scope;
-- lapse/change consequences.
+The 2019 referral itself now adds a primary proponent statement that approximately 154.65 ha was mapped Category B regulated vegetation and that an urban-purpose/urban-area vegetation-clearing exemption was considered applicable for least-concern/of-concern vegetation under the Planning Regulation 2017. It also says public notification was not required under the Development Assessment Rules.
 
-### s 49 atoms
+That is useful historical legal-position evidence, but it does **not** pay current scope. Counsel still needs:
 
-- parcel/tenure;
-- critical-habitat or area-of-major-interest basis;
-- suitability;
-- agreement history where relevant;
-- executive/ministerial initiation.
-
-### Enforcement atoms
-
-- exact threatened or actual conduct;
-- exact statutory contravention/offence/condition;
-- standing;
-- procedure/timing/evidence preservation.
+- exact statutory/instrument basis;
+- transition rules;
+- vegetation class applicability;
+- parcel/stage/variation coverage;
+- interaction with later approvals and later-enacted protections.
 
 ---
 
 ## 3. Canonical WrongTypes / non-factorability boundaries
 
-The following distinctions should be treated as hard legal-evidence firewalls:
+Treat the following as hard evidence/legal firewalls:
 
 ```text
 controlled action != refusal
-species occurrence != significant-impact conclusion
+2019 referral ecology != automatically unchanged 2026 final-PD ecology
+significant EPBC habitat impact != automatic Part 9 refusal
+EPBC Koala-guideline critical habitat != NCA s 13 critical habitat
 species occurrence != NCA s 13 essentiality
-connected landscape != exact-parcel essentiality
+connected landscape != statutory essentiality
 corridor map != statutory critical habitat
 local works approval != Commonwealth permission
+EPBC impact polygon != 9281 works polygon
 works approval != works commenced
 clearing entitlement != s 102 significant detrimental effect
 vegetation clearing != legal contravention
 mapped koala habitat != planning prohibition
+proponent exemption characterisation != current adjudicated exemption scope
 historic exemption != current exemption scope
 offset name != offset parcel identity
 regional conservation context != exact offset protection
@@ -194,104 +222,91 @@ political support != statutory element
 benefit to an actor != improper motive
 ```
 
-The key existing FactorsThrough defect remains:
-
-```text
-threatened-species presence
-  does not factor through to
-NCA s 13 critical-habitat essentiality
-```
-
-because two habitats can contain the same threatened species while differing in whether the habitat is essential to viable-population conservation.
-
 ---
 
 ## 4. Federal EPBC 2019/8575 — decision-grade package
 
-The federal case should now be built as an exact atom matrix rather than a general submission.
+### What the project file itself now proves as source propositions
 
-### Strong supporting material already in the corpus
+The referral and MNES assessment materially narrow the federal dispute. The consultant's own analysis simultaneously says:
 
-Across the broader Woogaroo PDF Snowball we now have:
+1. the site contains habitat score 7/10;
+2. the site has Koala food trees and scat evidence;
+3. the site is assigned habitat-connectivity score 2;
+4. it forms part of a >500 ha connected-habitat landscape;
+5. approximately 136 ha is proposed to be directly cleared and 26 ha indirectly affected;
+6. the 136 ha clearing/functional loss is a significant impact on Koala habitat critical to survival.
 
-- proponent-side habitat-removal and habitat-quality analyses from neighbouring Woogaroo projects;
-- Scenic and Peninsula Saunders Havill technical maps using the same **675 ha contiguous-landscape** carrier;
-- Bellevue / EPBC 2018/8350 proponent evidence recognising Woogaroo Creek connectivity to larger remnants and the Brisbane River system;
-- historical aerial sequences showing long-standing wooded landscapes;
-- local planning/works approvals demonstrating current development pressure;
-- offset/additionality and restoration-lag questions;
-- present-day observer occurrence evidence in the Opossum/Brookwater landscape.
+The consultant then relies on retention of western riparian vegetation, existing disturbance, surrounding urban barriers and mitigation to argue against some recovery-pathway residual impacts and to assign recovery value 0.
 
-These are useful context/cumulative-impact fibres. They are **not automatically Springview 2019/8575 facts**.
+That creates a real **for/against legal-evidence issue**, not just a campaign disagreement.
 
-### Strongest current residual
+### Internal tension counsel/ecologists should stress-test
 
-Obtain/extract the actual 2019/8575 final Preliminary Documentation maps/tables, especially:
+The same report says the site is part of a >500 ha connected landscape and that existing/future development will cause further fragmentation and fewer movement opportunities, while also reasoning that the site is too isolated / compromised to be important to Koala recovery.
 
-- action/disturbance polygon;
-- habitat-clearing table by MNES;
-- retained habitat/conservation area;
-- habitat scores/classification;
-- corridor/connectivity analysis;
-- alternatives and avoidance;
-- residual impacts;
-- offset calculations and offset-site maps;
-- response to submissions;
-- conservation advice / recovery plan treatment.
+Counsel should ask whether the decision-maker must square:
 
-### Counsel questions
+```text
+>500 ha connectivity + score 7 + significant 136 ha habitat loss
+against
+recovery value 0 + claimed isolation + mitigation/retention
+```
 
-1. Which Part 9 mandatory considerations and decision criteria are strongest on the present record?
-2. What can still validly be put before the delegate before 1 October 2026?
-3. What express treatment of cumulative impacts, fragmentation, alternatives, irreversibility, conservation advice and offsets is legally required?
-4. What reviewable-error risks arise from incomplete, stale, internally inconsistent or materially misleading habitat/offset material?
-5. What review/standing/evidence-preservation steps should be taken now rather than after the decision?
+and whether later evidence, changed surrounding development, current corridor mapping or current occurrence data materially alters the assumptions used in 2019.
+
+### Immediate federal work
+
+1. Compare the 2019 Figure 2 / Plan 6 geometry against the 2026 final-PD geometry.
+2. Extract the final retained-habitat and avoidance design.
+3. Extract the complete final residual-impact analysis.
+4. Extract the final offset package and offset-site identities.
+5. Identify whether the 2019 fragmentation/connectivity assumptions were updated for subsequent development approvals and loss around the site.
+6. Identify how conservation advice/recovery planning and public submissions were treated.
 
 ---
 
 ## 5. Queensland s 13 — same-parcel essentiality
 
-The s 13 lane is no longer merely “species present + corridor theory.”
+The s 13 lane is now materially stronger because the Springview project itself supplies exact-parcel habitat-function evidence.
 
-### Material now supporting habitat function
+### Supporting evidence
 
-- Scenic and Peninsula are separately mapped by Saunders Havill against a **675 ha contiguous landscape**, supporting a common connected-landscape object;
-- Peninsula technical material identifies 17.08 ha of critical koala habitat to be removed;
-- Scenic technical material identifies 23.52 ha of potential critical koala habitat to be removed;
-- Bellevue material expressly recognises Woogaroo Creek connectivity to larger remnant tracts and the Brisbane River riparian system;
-- official Ipswich material recognises Woogaroo/Opossum connectivity and the broader regional-corridor context;
-- historical aerial material supports persistence of wooded cover at the landscape level;
-- current observer records provide present-day biodiversity/occurrence context.
+The SHG report records:
 
-These do not yet prove Springview s 13 essentiality, but they materially narrow the missing question.
+- the majority of the project area as intact vegetation, despite historical modification;
+- more than 150 ha mapped Category B remnant vegetation in the survey description;
+- recognised Koala food-tree species;
+- Koala scat evidence;
+- habitat-connectivity score 2;
+- retained riparian vegetation along Woogaroo and Opossum Creeks;
+- the site as part of a >500 ha contiguous habitat landscape;
+- future surrounding development expected to increase fragmentation and reduce movement opportunities.
 
-### Remaining atom
+The broader Snowball adds Scenic/Peninsula connected-landscape evidence, Bellevue/Woogaroo connectivity, official corridor context, historical aerials and current observer ecology.
+
+### Strongest adverse evidence
+
+The SHG report also assigns **recovery value 0** and argues the site is relatively isolated by roads/urbanisation, is not viable to support a Koala population, and is not important to Koala recovery.
+
+That adverse proposition must be carried into the lawyer brief, not hidden.
+
+The s 13 question therefore becomes:
 
 ```text
-Springview exact polygon
-x
-same-object ecological function
-x
-what viable population/community depends on that function
-x
-consequence of severance/loss
+does current evidence support essentiality to a viable population/community
+notwithstanding the 2019 consultant's recovery-value/viability conclusion?
 ```
 
-### Counsel questions
-
-1. What is the actual procedural vehicle for advancing an s 13 case?
-2. What evidentiary threshold has been applied to “essential” and “viable population”?
-3. Should the case be species-specific, community-specific, or cumulative across multiple functions?
-4. What is the most efficient proof package: GIS + ecologist report + population/corridor evidence + conservation advice?
-5. Can the same 675-ha proponent landscape carrier and exact Springview join materially support essentiality?
+This is precisely where pro-bono counsel plus an ecologist can add value: identify whether the NCA legal test is congruent with the older EPBC Koala-guideline recovery-value analysis, and whether the report's own connectivity findings and subsequent landscape change undermine or qualify its adverse conclusion.
 
 ---
 
 ## 6. Queensland ss 102–107 — interim conservation order
 
-This lane is now **live**, not merely theoretical.
+This lane remains **live**.
 
-The local approval chain includes:
+The local approval chain is:
 
 ```text
 6243/2023/LAP
@@ -299,37 +314,52 @@ The local approval chain includes:
   -> 9281/2024/OW + 9293/2024/OW
 ```
 
-`9281/2024/OW` is especially important because the approved operational works expressly include **vegetation clearing** as well as earthworks and stormwater.
+`9281/2024/OW` expressly includes vegetation clearing. The new EPBC material gives us a candidate same-parcel habitat-loss surface: 136 ha of habitat score 7 mapped as the critical-habitat impact area.
 
-This pays the existence of a concrete clearing entitlement only partially. It does **not** establish:
+But:
 
-- exact clearing polygon;
-- imminent commencement;
-- actual clearing;
-- significant detrimental effect;
-- contravention.
+```text
+2019 EPBC impact footprint != exact 9281 approved clearing footprint
+```
 
 ### Immediate evidence request
 
-Obtain the approved `9281/2024/OW` clearing drawings, conditions and commencement/works chronology, then join them to habitat/species/corridor evidence.
+Obtain the approved `9281/2024/OW` clearing drawing and conditions and overlay it against:
 
-### Counsel questions
+- EPBC Plan 6 critical-habitat impact geometry;
+- current vegetation/corridor mapping;
+- current species/occurrence evidence;
+- creek/riparian features;
+- any retained/open-space conditions.
 
-1. Can an approved but not-yet-commenced clearing operation constitute the relevant threatening-process posture?
-2. Is prior s 13 identification necessary, or can threatened/near-threatened wildlife independently engage s 102?
-3. What evidence is sufficient for “likely significant detrimental effect”?
-4. Who can request ministerial action and in what form?
-5. What urgent review or restraint route exists if works are imminent?
+Then obtain works timing / commencement evidence.
 
 ---
 
-## 7. Offset adequacy / additionality counterfactual
+## 7. Frog/amphibian evidence and survey adequacy
+
+The Springview ecology report itself identifies Woogaroo and Opossum Creeks as having **potential frog habitat values**. It also records that rainfall before the 2019 threatened-frog survey was **not considered optimal** under the EPBC threatened-frog survey guidelines for accurately understanding acid-frog populations, so opportunistic surveys were used where possible.
+
+This should not be overread:
+
+```text
+suboptimal 2019 acid-frog survey conditions
+!= proof Tusked Frog was present in 2019
+```
+
+and the observer-selected 2026 FrogID Tusked Frog record remains pending validation.
+
+But the combination creates a legitimate acquisition question for an ecologist: whether the 2019 amphibian survey design and target species were adequate for the current state of knowledge and for the exact Opossum/Woogaroo creek habitats now under consideration.
+
+---
+
+## 8. Offset adequacy / additionality counterfactual
 
 The offset argument should not be framed simply as “remote offsets are bad.” It should be tested atom by atom.
 
 The current public/secondary material identifies candidate offset names including **Avonvale, Esk and Mt Walker West/Mt Mort**, but exact parcel identity remains open.
 
-For each candidate, counsel/ecologists should request:
+For each candidate, request:
 
 ```text
 exact lot/plan + GIS polygon
@@ -342,27 +372,13 @@ time to functional equivalence
 species/function equivalence to Woogaroo impact habitat
 ```
 
-There is a same-name collision around “Avonvale” in other offset/restoration material, but:
-
-```text
-same name != same lot != same polygon
-```
-
-so no double-counting conclusion should be made until identity is proved.
-
-The Bellevue proponent material is useful on maturity/time lag because it expressly recognises lag while restoration establishes and uses long-term milestones for restored habitat function. That supports the general proposition:
-
-```text
-existing mature/remnant function != newly planted/restored function at time zero
-```
-
-but it does not by itself invalidate the Springview offset package.
+The impact-side comparison is now stronger because the Springview primary material itself says the impact site contains habitat score 7 and a 136 ha significant critical-habitat impact. Any offset-equivalence analysis should therefore compare against that exact impact-side baseline, not a generic hectares-only description.
 
 ---
 
-## 8. Planning / koala exemption audit
+## 9. Planning / koala exemption audit
 
-Ipswich material records mapped koala habitat together with an approved/exempted development outcome. The relevant planning chain now has actual identifiers:
+The relevant planning chain has actual identifiers:
 
 - `6243/2023/LAP` — Springview Village 2 and Village 3 Precinct Plan;
 - `4272/2020/ADP` — Village 2 Area Development Plan;
@@ -370,57 +386,37 @@ Ipswich material records mapped koala habitat together with an approved/exempted
 - `9281/2024/OW` — earthworks, vegetation clearing and stormwater;
 - `9293/2024/OW` — road work, drainage, stormwater and earthworks.
 
-Counsel should identify the exact exemption/grandfathering authority and test its **temporal, parcel, stage and variation scope** against each later approval/component.
+The 2019 referral adds a primary historical statement of the proponent's then-understood vegetation-clearing exemption pathway and says public notification was not required under the Development Assessment Rules.
 
-The key firewall is:
-
-```text
-mapped koala habitat != development prohibited
-```
-
-without the approval/exemption history.
+Counsel should identify whether that historical pathway actually governs each current stage/component and whether transition/change provisions matter.
 
 ---
 
-## 9. Observer occurrence / citizen-science evidence
+## 10. Observer occurrence / citizen-science evidence
 
-Observer evidence is a supporting ecology fibre, not a replacement for expert or agency evidence.
+Observer evidence remains supporting ecology, not agency evidence.
 
-The current saved iNaturalist corpus for `johl1` contains **114 deduplicated observations**, including **76 with saved locality labels in the Brookwater/Springfield/Bellbird Park/Spring Mountain local cluster** and 25 local Research Grade observations.
+The saved iNaturalist corpus for `johl1` contains 114 deduplicated observations, including a dense Brookwater/Springfield local cluster.
 
-The strongest present conservation lead is separate FrogID capture `948283`, recorded 5 September 2026 near the northern golf-course/Opossum Creek wooded interface. The observer-selected taxon is **Adelotus brevis / Tusked Frog**, and the observer separately confirms the recording location as approximately:
+FrogID capture `948283`, recorded 5 September 2026 near the northern golf-course/Opossum Creek interface, has observer-selected taxon **Adelotus brevis / Tusked Frog** and observer-confirmed standing location approximately:
 
 ```text
 -27.649945, 152.898928
 ```
 
-The visible FrogID state remains pending validation. Therefore:
+The visible FrogID status remains pending validation.
 
-```text
-observer-selected Tusked Frog != FrogID expert validation
-```
-
-The recent image back-correlation supports a middle spatial tier for some iNaturalist records labelled `Brookwater Dr at Greg Norman Circuit`:
-
-```text
-locality label
-  < image-backed same-neighbourhood inference
-  < observer-confirmed coordinate
-  < native platform coordinate
-  < exact GIS intersection
-```
-
-Counsel should treat these records as corroborative/contextual unless an ecologist or agency adopts them into a formal occurrence/habitat analysis.
+The new Springview ecology matters because it independently identifies Opossum and Woogaroo Creeks as potential frog habitat and documents limits on the 2019 frog-survey weather conditions. That is a source-to-source acquisition edge, not confirmation of the 2026 taxon record.
 
 ---
 
-## 10. Development pressure and gains/losses
+## 11. Development pressure and gains/losses
 
 The planning/works record supports a distributional analysis, not a motive allegation.
 
-The developer/land-interest side has gained progressively more local planning/works option value through approved precinct, ADP and operational-works stages. Wildlife/habitat and the public may bear ecological or participation burdens if clearing proceeds. The local records supplied for several stages show no public notification requirement.
+The developer/land-interest side has progressively acquired local planning/works option value. The 2019 ecology itself anticipated ongoing surrounding development, further fragmentation, fewer movement opportunities and increased traffic/habitat loss. This is proponent-side evidence that future development pressure was part of the ecological baseline.
 
-This is relevant to development pressure and offset risk-of-loss analysis, but:
+Still:
 
 ```text
 benefit != motive
@@ -428,27 +424,23 @@ beneficiary != wrongdoing
 no public notification != unlawful approval
 ```
 
-The Swanbank data-centre example is useful only as a methodological warning that **public visibility and development pressure are separate variables**: code-assessable/non-notified pathways can exist. It is not a same-project fact for Springview.
-
 ---
 
-## 11. Permanent protection and enforcement
+## 12. Permanent protection and enforcement
 
 ### NCA s 49
 
 Still open:
 
-- exact parcel/tenure;
+- exact parcel/tenure and interests;
 - s 13 or area-of-major-interest basis;
 - suitability;
 - agreement/landholder pathway where relevant;
 - ministerial/executive initiation.
 
-Qualifying ecology does not itself create the declaration.
-
 ### Enforcement / judicial backstop
 
-Keep dormant until there is an exact conduct-to-obligation match:
+Keep conditional until there is an exact conduct-to-obligation match:
 
 ```text
 threatened/actual conduct
@@ -458,84 +450,84 @@ x
 standing/procedure
 ```
 
-Environmental harm alone is not the same legal object as a contravention.
+---
+
+## 13. Evidence corpus / attribution discipline
+
+All supplied PDFs are Snowballed as carrier -> author/issuer -> project -> source role -> parcel/geometry -> atoms -> cited sources -> acquisition edges -> legal consumers -> residuals.
+
+The newly supplied 2019/8575 set includes:
+
+- controlled-action/referral decision;
+- assessment approach;
+- referral;
+- project locality/aerial figures;
+- four-part MNES ecological technical report;
+- Preliminary Documentation public-comment notices;
+- extension notice;
+- Cherish Enterprises environmental policy.
+
+The file named `2019-8575-Final-PD.pdf` in this tranche is a one-page statutory/publication notice, not the four-volume Preliminary Documentation itself. The ecological technical report is nevertheless a substantive primary/proponent attachment and materially pays historical ecology atoms.
+
+Attribution remains:
+
+```text
+SHG consultant conclusion
+!= Commonwealth finding
+!= 2026 final-PD conclusion unless carried forward
+!= NCA s 13 legal conclusion
+```
 
 ---
 
-## 12. Evidence corpus / attribution discipline
+## 14. Highest-value acquisitions now
 
-The current uploaded Woogaroo corpus has been Snowballed at carrier level. The PDF corpus was deduplicated as **68 PDF carriers -> 56 unique PDFs + 12 duplicate copies** at the time of the corpus audit.
+The order has changed:
 
-Every PDF is treated as:
-
-```text
-native carrier
--> author/issuer
--> project/referral
--> source role
--> lot/plan/geometry
--> atoms/claims
--> cited attachments/sources
--> acquisition edges
--> legal consumers
--> residuals
-```
-
-PDF maps, figures, historical aerials, survey maps and scanned extracts are treated as first-class visual evidence rather than ignored in favour of parsed text.
-
-Attribution stages remain distinct:
-
-```text
-external source claim
-!= secondary interpretation
-!= repository reconstruction
-!= cross-source inference
-!= repository theorem
-!= promotion/adjudication
-```
-
-A source-of-source reference creates an acquisition edge, not automatic corroboration. A duplicate PDF does not count as an independent source.
-
----
-
-## 13. Highest-value acquisitions now
-
-The current order for counsel/research is:
-
-1. **2019/8575 final Preliminary Documentation** — exact action/clearing maps and habitat/impact tables;
-2. **9281/2024/OW approved vegetation-clearing drawings, conditions and works chronology**;
+1. **2026 final Preliminary Documentation delta audit** against the now-source-paid 2019 baseline — especially final action/clearing polygon, retained habitat, avoidance, residual impacts and offsets;
+2. **9281/2024/OW approved vegetation-clearing drawing**, conditions and works chronology;
 3. exact lot/plan + GIS polygons for proposed offset sites;
 4. existing-protection / prior-offset / restoration obligations for those offset parcels;
-5. exact Springview polygon joined to the SHG 675-ha landscape and official Queensland corridor geometry;
-6. species/habitat-function evidence sufficient to turn that spatial join into an s 13 essentiality argument;
-7. exact Springview exemption/grandfathering instrument and stage/variation coverage;
-8. commencement/pre-construction evidence if works become imminent;
-9. native FrogID validation/coordinate export for `948283` if it becomes available;
-10. any primary Commonwealth request/response material explaining how cumulative fragmentation, alternatives and offsets were treated.
+5. exact GIS join between Springview Plan 5/6, Scenic/Peninsula landscape carriers and official Queensland corridor geometry;
+6. ecologist/counsel stress-test of the s 13 essentiality question, including the SHG recovery-value-0 reasoning;
+7. exact Springview exemption/grandfathering instrument and transition/stage/variation coverage;
+8. current amphibian survey/validation evidence for Opossum/Woogaroo Creek where relevant;
+9. commencement/pre-construction evidence if works become imminent;
+10. Commonwealth request/response and final assessment material showing how cumulative fragmentation, alternatives, public submissions and offsets were treated.
 
-The central bottleneck is now **paying exact legal atoms**, not discovering additional abstract legal theories.
+The central bottleneck is no longer “find historical Springview habitat evidence.” We now have it. The bottleneck is **current/final-state comparison, legal sufficiency, and exact operational geometry**.
 
 ---
 
-## 14. Suggested handoff to pro-bono counsel
+## 15. Suggested handoff to pro-bono counsel
 
-> We have organised the Woogaroo preservation matter by legal consumer and evidentiary element rather than by general conservation concern. The immediate live matter is EPBC 2019/8575, with the current approval/refusal decision period ending 1 October 2026. The Queensland s 13 and ss 102–107 lanes are now also concrete: the former has substantial connected-landscape evidence but still needs an exact Springview parcel/function/essentiality weld; the latter now has a specific approved vegetation-clearing works object, 9281/2024/OW, but still requires its exact clearing footprint, timing and likely-effect evidence. We have also isolated an offset additionality/maturity audit, the exact local planning approval chain, permanent-protection options and conditional enforcement routes. We would value counsel's stress-test of each route, the procedural vehicle, and the minimum remaining evidence needed to make it legally actionable. We can provide a source-indexed atom/WrongType matrix and the deduplicated underlying evidence corpus.
+> We have organised the Woogaroo preservation matter by legal consumer and evidentiary element. The immediate live matter is EPBC 2019/8575, with the approval/refusal decision period ending 1 October 2026. We now have the project's own 2019 referral-era ecology: Lot 9999 SP292760, a 162 ha referral area, 136 ha impact area, Koala habitat score 7, Koala scat/food-tree evidence, a >500 ha habitat-connectivity analysis, and Saunders Havill's conclusion that clearing/functional loss of 136 ha would significantly impact Koala habitat critical to survival. The same report also argues recovery value 0 and relative isolation, so we want that internal for/against evidence stress-tested rather than selectively presented. The immediate federal task is to compare those 2019 propositions with the 2026 final Preliminary Documentation, especially the final geometry, retention, avoidance, residual impacts and offsets. In parallel, the Queensland s 13 lane now has strong same-parcel habitat-function evidence but still needs the statutory essentiality case, and ss 102–107 has a specific approved vegetation-clearing works object (`9281/2024/OW`) but still needs its exact clearing footprint and timing. We would value counsel's view on legal sufficiency, procedure, and the smallest remaining evidence package that could change the outcome before irreversible clearing.
 
-The ask is not “find a law to save the forest.” It is:
+The ask remains:
 
 > **Stress-test the identified routes; identify any incorrect statutory construction or missing procedural prerequisite; and tell us which exact evidence/action has the highest value before the federal decision or irreversible clearing.**
 
 ---
 
-## 15. Current roadmap summary
+## 16. Current roadmap summary
 
 ```text
 URGENT
-  EPBC 2019/8575 final-PD atom payment and decision package
+  2019 -> 2026 EPBC 2019/8575 delta audit
+  final geometry + retention + avoidance + residual impacts + offsets
+
+NOW STRONGLY SOURCE-PAID AT 2019 BASELINE
+  Lot 9999 SP292760 / 162 ha referral object
+  136 ha impact area
+  136 ha direct + 26 ha indirect Koala habitat impact
+  habitat score 7 / critical-habitat proposition
+  Koala scat and food-tree evidence
+  >500 ha habitat-connectivity analysis
+  SHG significant-impact conclusion
 
 LIVE IN PARALLEL
-  NCA s 13 exact same-parcel essentiality weld
-  NCA ss 102–107: 9281/2024/OW clearing footprint + timing + effect
+  NCA s 13 essentiality stress-test
+  NCA ss 102–107: 9281 clearing footprint + timing + current effect
   offset parcel/additionality/maturity audit
   planning exemption/grandfathering audit
 
@@ -545,19 +537,18 @@ PREPARE BEHIND s 13
 CONDITIONAL
   EPBC/NCA enforcement, injunction and judicial-review routes
 
-SUPPORTING ECOLOGY
-  675-ha connected-landscape evidence
-  Bellevue/Woogaroo corridor evidence
+SUPPORTING / UPDATE ECOLOGY
+  Scenic/Peninsula/Bellevue corridor Snowball
+  official corridor geometry
   historical aerials
-  iNaturalist/FrogID observer occurrences
-
-BONUS ONLY
-  public-figure / Ash Barty outreach
+  iNaturalist/FrogID occurrence and current amphibian evidence
 ```
 
 The present legal state is best summarised as:
 
 ```text
-we have largely typed the legal holes;
-the next task is to pay the remaining atoms with exact primary evidence.
+historical Springview habitat/impact atoms are now substantially paid;
+the live task is to compare them to the 2026 final state,
+stress-test the legal inferences,
+and bind current works to exact geometry and timing.
 ```
