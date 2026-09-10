@@ -6,3 +6,4 @@ module DASHI.ComputerScience.FlyLocalOptimizationValidationExact where
 
 import DASHI.ComputerScience.LocalOptimizationCompilerExact
 import DASHI.ComputerScience.FlyLocalOptimizationCompilerExact
+import DASHI.ComputerScience.FlyStructureFunctionNDimFibreExact
