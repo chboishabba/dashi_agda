@@ -15,6 +15,7 @@ open import Agda.Builtin.String using (String)
 
 data OffsetEvidenceStage : Set where
   primaryPolicy : OffsetEvidenceStage
+  officialLandscapeContext : OffsetEvidenceStage
   secondarySubmissionLead : OffsetEvidenceStage
   primaryProjectOpen : OffsetEvidenceStage
 
@@ -63,6 +64,14 @@ habitatQuality = offset-test
   secondarySubmissionLead false false
   "Extract impact-site and offset-site habitat-quality scores, starting conditions, uplift assumptions, timeframe and management commitments."
 
+forestMaturitySuccession : OffsetTest
+forestMaturitySuccession = offset-test
+  "existing mature/remnant forest versus planted/regrowth habitat"
+  "Offset quality is not hectares alone: Commonwealth guidance measures vegetation quality and time to ecological benefit. Queensland guidance likewise distinguishes mature good-quality regrowth from degraded regrowth/revegetation because successional stage affects ecological value, management burden and failure risk."
+  "Existing Woogaroo forest may provide mature canopy, food trees, structural complexity, fallen timber, shelter and connectivity immediately, while planted or young regrowth offset habitat may require years or decades to acquire comparable structure and function."
+  officialLandscapeContext false false
+  "For impact and offset sites, identify remnant/high-value-regrowth/planted status, vegetation age/successional stage, canopy structure, mature-tree abundance, hollows/fallen timber where relevant, food-tree composition, and time to equivalent protected-matter function."
+
 timeLagRisk : OffsetTest
 timeLagRisk = offset-test
   "time to ecological benefit / risk"
@@ -70,6 +79,22 @@ timeLagRisk = offset-test
   "Submissions argue mature-habitat features cannot be recreated on relevant timeframes."
   secondarySubmissionLead false false
   "Quantify ecological lag for each protected matter/attribute and compare with impact immediacy and offset calculator assumptions."
+
+developmentPressureRiskOfLoss : OffsetTest
+developmentPressureRiskOfLoss = offset-test
+  "development pressure / counterfactual risk of loss"
+  "The Commonwealth offset assessment guide defines risk of loss as the chance offset habitat would otherwise be permanently lost in the foreseeable future; risk reduction is part of the credited conservation gain."
+  "Woogaroo sits in an urban-growth landscape. By contrast, an offset parcel that is remote from development pressure or already constrained against clearing may have a low without-offset loss probability, reducing the additional conservation gain generated merely by protecting it."
+  officialLandscapeContext false false
+  "Compare impact and offset sites using zoning/PDA status, nearby approved or planned development, road/infrastructure expansion, historical clearing, development applications, tenure and legal clearing constraints. Do not assign numeric odds without a defensible source/model."
+
+protectedAreaAdjacency : OffsetTest
+protectedAreaAdjacency = offset-test
+  "proximity to existing protected land / network position"
+  "Offset benefit must be additional and improve or maintain viability of the affected protected matter; connectivity and landscape context can affect habitat quality, while pre-existing protection can reduce additionality/risk-of-loss credit."
+  "Official Ipswich material identifies White Rock-Spring Mountain Conservation Estate as a >2,500 ha core habitat area in the Flinders-Karawatha Corridor and identifies Woogaroo Creek connectivity toward the Brisbane River. The Springfield Structure Plan also describes Springfield as providing habitat connection between major core habitat areas."
+  officialLandscapeContext false false
+  "Measure exact Springview distance/connectivity to White Rock-Spring Mountain, Ric Nattrass/Woogaroo Creek and other protected/secured habitat; independently measure each offset site's adjacency to protected land. Separate connectivity benefit from low-additionality risk where the offset site is already effectively protected."
 
 additionality : OffsetTest
 additionality = offset-test
@@ -107,6 +132,10 @@ record OffsetAuditSummary : Set where
   constructor offset-audit-summary
   field
     commonwealthPolicyTestsIdentified : Bool
+    officialLandscapeContextLocated : Bool
+    matureVsPlantedDistinctionTyped : Bool
+    developmentPressureRiskTyped : Bool
+    protectedAdjacencyTyped : Bool
     detailedSecondaryOffsetCritiqueLocated : Bool
     exactProponentOffsetPackagePrimaryPaid : Bool
     offsetAdequacyProved : Bool
@@ -114,16 +143,22 @@ record OffsetAuditSummary : Set where
     refusalFromOffsetFailureProved : Bool
 
 currentOffsetAudit : OffsetAuditSummary
-currentOffsetAudit = offset-audit-summary true true false false false false
+currentOffsetAudit = offset-audit-summary
+  true true true true true true false false false false
 
 record OffsetBoundary : Set where
   constructor offset-boundary
   field
     largeOffsetAreaDoesNotProveAdequacy : Bool
     distantOffsetDoesNotAutomaticallyProveInvalidity : Bool
+    plantedAreaDoesNotEqualMatureForestFunction : Bool
+    proximityToProtectedLandDoesNotAutomaticallyIncreaseOffsetCredit : Bool
+    lowDevelopmentPressureDoesNotEqualHighAdditionality : Bool
+    highDevelopmentPressureDoesNotByItselfProveCriticalHabitat : Bool
     policyNonComplianceLeadDoesNotEqualLegalFinding : Bool
     offsetAdequacyDoesNotProveApproval : Bool
     offsetInadequacyDoesNotByItselfProveRefusal : Bool
 
 offsetBoundary : OffsetBoundary
-offsetBoundary = offset-boundary true true true true true
+offsetBoundary = offset-boundary
+  true true true true true true true true true
