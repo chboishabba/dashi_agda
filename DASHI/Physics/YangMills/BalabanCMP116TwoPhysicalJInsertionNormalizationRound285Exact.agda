@@ -4,30 +4,30 @@ module DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRo
 ------------------------------------------------------------------------
 -- ROUND285 / NORMALIZE THE LAST DIRECT-CMP116 B1 SOURCE SEAM
 --
--- R284 reduces continuum clustering to one finite source theorem.  R274 names
--- that theorem as "two literal physical J insertions obey the CMP116 rooted
--- connecting-shell bound".  CMP116 differentiated localization itself is
--- already source-owned for any finite number of declared source derivatives.
+-- R284 reduces continuum clustering to one finite source theorem. R274 names
+-- that theorem as two literal physical J insertions obeying the CMP116 rooted
+-- connecting-shell bound. CMP116 differentiated localization is already
+-- source-owned for any finite number of declared source derivatives.
 --
--- Therefore do not schedule a fresh clustering theorem.  Factor the remaining
+-- Therefore do not schedule a fresh clustering theorem. Factor the remaining
 -- physical work into exact source-coordinate semantics:
 --
---   observable F  <-> literal CMP116 J direction jF
---   observable G  <-> literal CMP116 J direction jG
+--   observable F <-> literal CMP116 J direction jF
+--   observable G <-> literal CMP116 J direction jG
 --   D^2_{jG,jF} log Z = connected covariance(F,G)
 --
--- on the SAME finite state/domain, plus the already-used common positive
--- analytic radius.  Once these are supplied, the source theorem transports its
--- existing rooted exponential majorant to the physical covariance.
+-- on the SAME finite state/domain. Once the exact selected source directions
+-- are inside the common positive analytic domain, source differentiation keeps
+-- the rooted exponential majorant.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as Source
-import DASHI.Physics.YangMills.BalabanCMP116TwoSourceConnectedClusteringRound274Exact as R274
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 
 record TwoPhysicalJInsertionSourcePresentation
@@ -36,27 +36,25 @@ record TwoPhysicalJInsertionSourcePresentation
     shellData : Shell.TraversalShellData Scale Volume Root
     scaleOf : State → Scale
     volumeOf : State → Volume
-    physicalDistance : Observable → Observable → Agda.Builtin.Nat.Nat
+    physicalDistance : Observable → Observable → Nat
     connectingRoot : State → Observable → Observable → Root
 
     sourceDirection : Observable → SourceDirection
 
-    -- Literal source-side second derivative magnitude on the same finite state.
     secondLogSourceDerivativeMagnitude :
       State → SourceDirection → SourceDirection → ℚ
 
-    -- Physical covariance carrier consumed by R274/R284.
     connectedCovarianceMagnitude : State → Observable → Observable → ℚ
 
-    -- The genuine same-object semantic payment.
+    -- Same-object semantic payment.
     secondLogDerivativeIsConnectedCovariance : ∀ state left right →
       secondLogSourceDerivativeMagnitude state
         (sourceDirection left) (sourceDirection right)
       ≡ connectedCovarianceMagnitude state left right
 
-    -- Source-localization payment instantiated on those exact two directions.
-    -- CMP116/Cauchy owns the analytic mechanism; this field binds it to the
-    -- selected physical coordinate/domain rather than promoting a status flag.
+    -- Source localization instantiated on the selected directions. The generic
+    -- analytic mechanism is imported; this proof binds it to the physical
+    -- source coordinates rather than promoting a status flag.
     differentiatedSourceBoundOnSelectedDirections : ∀ state left right →
       secondLogSourceDerivativeMagnitude state
         (sourceDirection left) (sourceDirection right)
@@ -65,47 +63,10 @@ record TwoPhysicalJInsertionSourcePresentation
           (connectingRoot state left right)
           (physicalDistance left right)
 
-    connectingClusterMeetsBothSupports : ∀ state left right → Set
-
 open TwoPhysicalJInsertionSourcePresentation public
 
-asTwoSourceConnectedRootedShellData :
-  ∀ {Scale Volume Root State Observable SourceDirection} →
-  TwoPhysicalJInsertionSourcePresentation
-    Scale Volume Root State Observable SourceDirection →
-  R274.TwoSourceConnectedRootedShellData
-    Scale Volume Root State Observable
-asTwoSourceConnectedRootedShellData presentation = record
-  { R274.TwoSourceConnectedRootedShellData.shellData = shellData presentation
-  ; R274.TwoSourceConnectedRootedShellData.stateAtScale = λ _ →
-      -- State selection is deliberately not invented here.  This adapter is
-      -- used pointwise by the direct T5 owner, which supplies its cutoff state.
-      -- A total Nat->State family belongs to that outer presentation.
-      let impossible : State
-          impossible = impossible
-      in impossible
-  ; R274.TwoSourceConnectedRootedShellData.scaleOf = scaleOf presentation
-  ; R274.TwoSourceConnectedRootedShellData.volumeOf = volumeOf presentation
-  ; R274.TwoSourceConnectedRootedShellData.physicalDistance =
-      physicalDistance presentation
-  ; R274.TwoSourceConnectedRootedShellData.connectingRoot = connectingRoot presentation
-  ; R274.TwoSourceConnectedRootedShellData.connectedCovarianceMagnitude =
-      connectedCovarianceMagnitude presentation
-  ; R274.TwoSourceConnectedRootedShellData.connectedCovarianceBelowConnectingShell =
-      λ state left right rewrite
-        secondLogDerivativeIsConnectedCovariance presentation state left right =
-          differentiatedSourceBoundOnSelectedDirections presentation state left right
-  ; R274.TwoSourceConnectedRootedShellData.connectingClusterMeetsBothSupports =
-      connectingClusterMeetsBothSupports presentation
-  }
-
-------------------------------------------------------------------------
--- IMPORTANT: the generic R274 carrier also asks for Nat -> State.  R285 must
--- not fabricate such a selector.  The actual useful normalized payment is
--- therefore the pointwise shell inequality below; R284 already owns the real
--- cutoff/state family.  Keeping this theorem prevents the accidental fake
--- recursive inhabitant above from being used as a proof-search shortcut.
-------------------------------------------------------------------------
+symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+symEq refl = refl
 
 physicalCovarianceBelowRootedShell :
   ∀ {Scale Volume Root State Observable SourceDirection}
@@ -118,11 +79,9 @@ physicalCovarianceBelowRootedShell :
       (connectingRoot presentation state left right)
       (physicalDistance presentation left right)
 physicalCovarianceBelowRootedShell presentation state left right
-  rewrite symEq (secondLogDerivativeIsConnectedCovariance presentation state left right) =
-    differentiatedSourceBoundOnSelectedDirections presentation state left right
-  where
-  symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-  symEq refl = refl
+  rewrite symEq
+    (secondLogDerivativeIsConnectedCovariance presentation state left right) =
+  differentiatedSourceBoundOnSelectedDirections presentation state left right
 
 record Round285Boundary : Set where
   constructor round285-boundary
