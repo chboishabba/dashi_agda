@@ -20,6 +20,28 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound275Exact where
 -- Generic T5 `continuumClustered` is packaging only unless it is bound to the
 -- exact quantitative clustering consumer.  PositiveTransferGap is compiler
 -- output once the two canonical B payments are present.
+--
+-- ARCHAEOLOGICAL STEP-V REFINEMENT
+-- --------------------------------
+-- The older Step-V lane already contains the exact producer topology
+--
+--   KP -> cluster expansion -> cluster-weight decay -> connected correlations.
+--
+-- But this must not be misread as a completed physical clustering proof.
+-- `BalabanLargeFieldStepV` derives KP, convergence, weight decay and then the
+-- connected-correlation object only because its `LargeFieldStepVEstimates`
+-- input already stores the source-facing theorem fields
+-- `clusterWeightDecayTheorem` and `connectedCorrelationTheorem`.
+--
+-- Consequently the first Step-V theorem-bearing physical leaf is not "do KP"
+-- again.  It is the SAME-CARRIER source/physical inhabitant of
+--
+--   ClusterWeightsExponentiallyDecay -> ConnectedCorrelationsClusterBound,
+--
+-- followed separately by the terminal lattice-to-physical decay comparison
+-- and the same-family continuum/OS identification.  This makes the buried
+-- July/August donor explicit while keeping Step V an optional producer tactic
+-- rather than promoting it to canonical B content.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -33,6 +55,8 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalMassGapConsumerRound270Exact 
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact as Unified
 import DASHI.Physics.YangMills.BalabanMassGapSurvival as Survival
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact as RowC
+import DASHI.Physics.YangMills.BalabanLargeFieldStepV as StepV
+import DASHI.Physics.YangMills.BalabanTerminalScalePhysicalClustering as Terminal
 
 
 data BSearchObject275 : Set where
@@ -40,6 +64,9 @@ data BSearchObject275 : Set where
   positiveGapCandidate : BSearchObject275
   heatDoobLangevinDysonRoute : BSearchObject275
   unifiedPolymerNormRoute : BSearchObject275
+  sourceNativeStepVRoute : BSearchObject275
+  stepVWeightDecayToConnectedCorrelationLeaf : BSearchObject275
+  terminalPhysicalScaleComparisonLeaf : BSearchObject275
   finiteCutoffGapSurvivalRoute : BSearchObject275
   genericT5ClusteredField : BSearchObject275
   positiveTransferGapObject : BSearchObject275
@@ -52,6 +79,12 @@ searchRole275 positiveGapCandidate =
 searchRole275 heatDoobLangevinDysonRoute =
   Introspective.optionalProducerTactic
 searchRole275 unifiedPolymerNormRoute =
+  Introspective.optionalProducerTactic
+searchRole275 sourceNativeStepVRoute =
+  Introspective.optionalProducerTactic
+searchRole275 stepVWeightDecayToConnectedCorrelationLeaf =
+  Introspective.optionalProducerTactic
+searchRole275 terminalPhysicalScaleComparisonLeaf =
   Introspective.optionalProducerTactic
 searchRole275 finiteCutoffGapSurvivalRoute =
   Introspective.optionalProducerTactic
@@ -78,6 +111,17 @@ compileCanonicalBPayment {spectrum = spectrum} payment =
     (clusteringUpper payment)
     (candidatePositive payment)
 
+-- Exact Step-V compiler already present in the historical lane.  This theorem
+-- is intentionally exposed here to show what is compiler output and what is
+-- still source/physical theorem content: the final application consumes the
+-- `connectedCorrelationTheorem` field already stored in `estimates`.
+stepVConnectedCorrelationsFromStoredProducer :
+  ∀ {Site Polymer Configuration Bound : Set}
+    (estimates : StepV.LargeFieldStepVEstimates Site Polymer Configuration Bound) →
+  StepV.LargeFieldStepVEstimates.ConnectedCorrelationsClusterBound estimates
+stepVConnectedCorrelationsFromStoredProducer =
+  StepV.connectedCorrelationsClusterBound
+
 record Round275Boundary : Set where
   constructor round275-boundary
   field
@@ -86,6 +130,21 @@ record Round275Boundary : Set where
 
     unifiedNormRouteMandatory : Bool
     unifiedNormRouteMandatoryIsFalse : unifiedNormRouteMandatory ≡ false
+
+    sourceNativeStepVRouteMandatory : Bool
+    sourceNativeStepVRouteMandatoryIsFalse :
+      sourceNativeStepVRouteMandatory ≡ false
+
+    stepVKPAssemblyNeedsReproof : Bool
+    stepVKPAssemblyNeedsReproofIsFalse : stepVKPAssemblyNeedsReproof ≡ false
+
+    stepVWeightDecayToConnectedCorrelationPhysicalProducerOpen : Bool
+    stepVWeightDecayToConnectedCorrelationPhysicalProducerOpenIsTrue :
+      stepVWeightDecayToConnectedCorrelationPhysicalProducerOpen ≡ true
+
+    terminalPhysicalScaleComparisonOpen : Bool
+    terminalPhysicalScaleComparisonOpenIsTrue :
+      terminalPhysicalScaleComparisonOpen ≡ true
 
     finiteCutoffGapRouteMandatory : Bool
     finiteCutoffGapRouteMandatoryIsFalse : finiteCutoffGapRouteMandatory ≡ false
@@ -103,7 +162,17 @@ record Round275Boundary : Set where
 
 canonicalRound275Boundary : Round275Boundary
 canonicalRound275Boundary =
-  round275-boundary false refl false refl false refl false refl true refl true refl
+  round275-boundary
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
+    true refl
+    false refl
+    false refl
+    true refl
+    true refl
 
 round275CanonicalBCompilerLevel : ProofLevel
 round275CanonicalBCompilerLevel = machineChecked
@@ -113,3 +182,12 @@ round275QuantitativeClusteringLevel = R274.round274PhysicalQuantitativeClusterin
 
 round275PositiveGapCandidateLevel : ProofLevel
 round275PositiveGapCandidateLevel = conditional
+
+round275StepVHistoricalAssemblyLevel : ProofLevel
+round275StepVHistoricalAssemblyLevel = StepV.largeFieldStepVBridgeLevel
+
+round275StepVPhysicalProducerLevel : ProofLevel
+round275StepVPhysicalProducerLevel = StepV.largeFieldStepVAnalyticEstimatesLevel
+
+round275TerminalPhysicalScaleProducerLevel : ProofLevel
+round275TerminalPhysicalScaleProducerLevel = Terminal.terminalPhysicalScaleComparisonInputLevel
