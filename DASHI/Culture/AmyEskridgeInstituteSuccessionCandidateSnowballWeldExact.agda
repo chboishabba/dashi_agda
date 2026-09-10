@@ -11,19 +11,16 @@ import DASHI.Culture.AmyEskridgeApplicationTransformationExact as App
 import DASHI.Culture.AmyEskridgeHoloChronPostDeathDissolutionFrontierExact as Holo
 import DASHI.Culture.MissingDeceasedFullApplicationAcquisitionExact as Acquisition
 import DASHI.Culture.MissingDeceasedReconstructionCostMatrixExact as Reconstruction
+import DASHI.Culture.MissingDeceasedCustodyEventTimeMatrixExact as EventMatrix
 import DASHI.Core.CapabilityReconstructionCostBidiExact as ReconstructionCore
 
 ------------------------------------------------------------------------
 -- AMY ESKRIDGE MEMORIAL: INSTITUTE SUCCESSION-CANDIDATE SNOWBALL WELD
 --
--- The repo already identifies a multi-person Institute/HoloChron team, a
--- multi-year Institute entity surface, a post-death corporate-continuity
--- surface, a highest-priority Amy application-acquisition target, and an
--- unknown reconstruction-cost profile with an overlapping-team receipt.  This
--- adapter composes those owners without upgrading corporate/entity continuity
--- or historical team membership into exact 2020-2022 same-experiment
--- possession, successor identity, technical-carrier custody, or post-death
--- transfer.
+-- Existing owners already provide the team, entity-continuity, post-death
+-- corporate-continuity, application-acquisition, reconstruction-cost, and
+-- comparative event-time/custody coordinates. This adapter composes them;
+-- it does not introduce another succession status model.
 ------------------------------------------------------------------------
 
 poamsExactIdentityStillUnpaid :
@@ -73,6 +70,41 @@ instituteCorporateContinuityDoesNotPayPostDeathAssetTransfer :
 instituteCorporateContinuityDoesNotPayPostDeathAssetTransfer = refl
 
 ------------------------------------------------------------------------
+-- Project onto the existing comparative custody/event-time matrix.
+-- Organisational continuity is already partial; custody and same-carrier
+-- succession remain not-located rather than absent.
+------------------------------------------------------------------------
+
+amyEventTimeRoleIsPartial :
+  EventMatrix.eventTimeRole EventMatrix.eskridgeRow ≡ EventMatrix.partial
+amyEventTimeRoleIsPartial = refl
+
+amyOrganisationalContinuityIsPartial :
+  EventMatrix.organisationalContinuity EventMatrix.eskridgeRow ≡ EventMatrix.partial
+amyOrganisationalContinuityIsPartial = refl
+
+amyPhysicalCustodyStillNotLocated :
+  EventMatrix.physicalCustody EventMatrix.eskridgeRow ≡ EventMatrix.notLocated
+amyPhysicalCustodyStillNotLocated = refl
+
+amyDigitalDataCustodyStillNotLocated :
+  EventMatrix.digitalOrDataCustody EventMatrix.eskridgeRow ≡ EventMatrix.notLocated
+amyDigitalDataCustodyStillNotLocated = refl
+
+amySameCarrierSuccessionStillNotLocated :
+  EventMatrix.sameCarrierSuccession EventMatrix.eskridgeRow ≡ EventMatrix.notLocated
+amySameCarrierSuccessionStillNotLocated = refl
+
+organisationalContinuityStillDoesNotPaySameCarrierTransfer :
+  EventMatrix.organisationalContinuityImpliesSameCarrierTransfer
+    EventMatrix.canonicalMatrixBoundary ≡ false
+organisationalContinuityStillDoesNotPaySameCarrierTransfer = refl
+
+notLocatedStillDoesNotMeanAbsent :
+  EventMatrix.notLocatedImpliesAbsent EventMatrix.canonicalMatrixBoundary ≡ false
+notLocatedStillDoesNotMeanAbsent = refl
+
+------------------------------------------------------------------------
 -- Historical team remains a candidate/witness surface, not carrier custody.
 ------------------------------------------------------------------------
 
@@ -113,7 +145,7 @@ holochronTechnicalAssetDispositionStillUnlocated :
 holochronTechnicalAssetDispositionStillUnlocated = refl
 
 ------------------------------------------------------------------------
--- Existing reverse targets, now ordered after the already-paid entity layer.
+-- Existing reverse targets, ordered after the already-paid entity layer.
 ------------------------------------------------------------------------
 
 roleContinuityTarget : Team.EskridgeTeamReverseTarget
@@ -154,6 +186,8 @@ record InstituteSuccessionCandidateBoundary : Set where
     entityContinuityAutomaticallyPaysTechnicalCarrierContinuity : Bool
     postDeathEntitySurfaceIsOwned : Bool
     postDeathEntitySurfaceAutomaticallyPaysAssetTransfer : Bool
+    organisationalContinuityIsAlreadyPartial : Bool
+    partialOrganisationalContinuityAutomaticallyPaysSameCarrierTransfer : Bool
     overlappingTeamAutomaticallyPaysLowReconstructionCost : Bool
     overlappingTeamAutomaticallyPaysSameCarrierTransfer : Bool
     postDeathDissolutionAutomaticallyPaysAssetDisposition : Bool
@@ -169,19 +203,20 @@ canonicalInstituteSuccessionCandidateBoundary =
     true false false
     true false false
     true false
+    true false
     false false false
     true true false
 
 ------------------------------------------------------------------------
 -- Current composed interpretation:
 --
---  * Institute entity continuity through 2019-2021 is already source-backed;
---  * a post-death Institute corporate-survival surface is already retained;
---  * 2018 team identities are concrete succession/witness candidates;
---  * neither entity survival nor historical team membership identifies a
---    2020-2022 same-experiment holder or a post-death technical successor;
+--  * Institute entity continuity through 2019-2021 is source-backed;
+--  * a post-death Institute corporate-survival surface is retained;
+--  * the authoritative comparative matrix already upgrades organisational
+--    continuity from wholly-open to PARTIAL;
+--  * physical custody, digital/data custody and same-carrier succession remain
+--    NOT LOCATED, which is not the same proposition as absent;
 --  * exact Institute derivative identity remains the first application leaf;
---  * once that object is identified, the same retained candidate/entity set can
---    be queried for role continuity, custody, and handover rather than
---    rediscovered.
+--  * after identity, retained team/entity surfaces can be queried directly for
+--    person-level role continuity, experiment assignment, custody and handover.
 ------------------------------------------------------------------------
