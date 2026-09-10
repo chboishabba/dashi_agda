@@ -10,13 +10,10 @@ import DASHI.Physics.ExoticGravity.LiTorrComponentResolvedMassCurrentReverseSear
 import DASHI.Physics.ExoticGravity.LiTorrSIVelocityGeometryIdentityWeldExact as Weld
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGSIMetrologyBridgeExact as SIM
 import DASHI.Physics.ExoticGravity.SuperconductingChargeMassCurrentBidiExact as Current
+import DASHI.Physics.ExoticGravity.LiTorrMicroscopicToBulkGravitomagneticSumBidiExact as Bulk
 
 ------------------------------------------------------------------------
 -- SIGNED SI MASS-CURRENT COMPILER
---
--- Preserve component identity and sign through the J_m compilation.  The
--- compiler does not infer sign from electric charge and does not collapse
--- cancellation before the component ledger is retained.
 ------------------------------------------------------------------------
 
 data SignedDirection : Set where
@@ -71,18 +68,13 @@ compileSignedSIMassCurrentField apparatus ledger result spatial rev =
 
 ------------------------------------------------------------------------
 -- Compatibility adapter toward the existing abstract mass-current owner.
---
--- This adapter remains receipt-parametric because the existing owner carries
--- abstract proof objects for density/mass/charge/velocity/distribution and the
--- derivation.  The SI compiler supplies the concrete signed field but does not
--- fabricate those proof objects.
 ------------------------------------------------------------------------
 
 record AbstractMassCurrentAdapterInput : Set₁ where
   constructor abstract-mass-current-adapter-input
   field
     signedField : SignedSIMassCurrentField
-    bulkSource : Current.Bulk.BulkSourceIntegral
+    bulkSource : Bulk.BulkSourceIntegral
     ComponentDensityReceipt : Set
     componentDensityReceipt : ComponentDensityReceipt
     ComponentMassReceipt : Set
