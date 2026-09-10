@@ -95,6 +95,45 @@ mcConnachieCensusScope =
     "2012 collated/homogenized observational catalogue and discussion"
 
 ------------------------------------------------------------------------
+-- Paper-scope firewalls.
+------------------------------------------------------------------------
+
+mcConnachieCensusImpliesIndependentCrossSurveyConfirmation : Bool
+mcConnachieCensusImpliesIndependentCrossSurveyConfirmation = false
+
+mcConnachieCensusImpliesIndependentCrossSurveyConfirmationIsFalse :
+  mcConnachieCensusImpliesIndependentCrossSurveyConfirmation ≡ false
+mcConnachieCensusImpliesIndependentCrossSurveyConfirmationIsFalse = refl
+
+kallivayalilProperMotionImpliesUniqueOrbitHistory : Bool
+kallivayalilProperMotionImpliesUniqueOrbitHistory = false
+
+kallivayalilProperMotionImpliesUniqueOrbitHistoryIsFalse :
+  kallivayalilProperMotionImpliesUniqueOrbitHistory ≡ false
+kallivayalilProperMotionImpliesUniqueOrbitHistoryIsFalse = refl
+
+vasilievCandidateMembershipImpliesCertainMembership : Bool
+vasilievCandidateMembershipImpliesCertainMembership = false
+
+vasilievCandidateMembershipImpliesCertainMembershipIsFalse :
+  vasilievCandidateMembershipImpliesCertainMembership ≡ false
+vasilievCandidateMembershipImpliesCertainMembershipIsFalse = refl
+
+vasilievTimeDependentInterpretationImpliesUniqueLMCCause : Bool
+vasilievTimeDependentInterpretationImpliesUniqueLMCCause = false
+
+vasilievTimeDependentInterpretationImpliesUniqueLMCCauseIsFalse :
+  vasilievTimeDependentInterpretationImpliesUniqueLMCCause ≡ false
+vasilievTimeDependentInterpretationImpliesUniqueLMCCauseIsFalse = refl
+
+reidBrunthalerProperMotionImpliesVirtualObservatoryFrameCorrect : Bool
+reidBrunthalerProperMotionImpliesVirtualObservatoryFrameCorrect = false
+
+reidBrunthalerProperMotionImpliesVirtualObservatoryFrameCorrectIsFalse :
+  reidBrunthalerProperMotionImpliesVirtualObservatoryFrameCorrect ≡ false
+reidBrunthalerProperMotionImpliesVirtualObservatoryFrameCorrectIsFalse = refl
+
+------------------------------------------------------------------------
 -- KKH 86: retain the first-light exception rather than quotienting it away.
 ------------------------------------------------------------------------
 
@@ -118,7 +157,7 @@ kkh86FirstLightResidual =
   derivedDistanceResidual
     "KKH 86"
     mcConnachie2012
-    "Poppie / NOUS — private post 2026-09-07 23:38"
+    "Poppie / NOUS — private post displayed 2026-09-07 23:38"
     "1.2 kpc"
     "+/-0.5 kpc printed precision claimed for the compared derived column"
     "no identifiable cause in the inputs according to the attributed post"
@@ -143,7 +182,7 @@ record LocalGroupStateReconstruction : Set where
   field
     positionStatePresent : Bool
     velocityStatePresent : Bool
-    sourceBound : Bool
+    sourceBoundState : Bool
     timeIndexedEvolutionLawPresent : Bool
     gravitationalPotentialValidated : Bool
     dataAssimilationReceiptPresent : Bool
