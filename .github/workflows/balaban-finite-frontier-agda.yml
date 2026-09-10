@@ -55,6 +55,17 @@ on:
       - 'DASHI/Physics/YangMills/BalabanLangevinPhysicalHessianSourceRecutRound263Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP109LangevinTypedSecondVariationRound267Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanLangevinAnchoredInfluenceRound268Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayCanonicalBCurrentExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteRGExpectationCovarianceSameObjectRound280Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanContinuumCovarianceSpectrumConstructorRound281Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayCanonicalBFrontierRound282Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteVolumeReopeningPresentationRound283Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116DirectT5ContinuumClusteringRound284Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClusteringDecayRatioToGapRound285Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanDirectCanonicalBCompletionRound286Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCyclicContinuumCovarianceSpectrumRound287Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanSubgapSeparatingTimeRound288Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayCanonicalBFrontierRound289Exact.agda'
       - 'DASHI/Physics/YangMills/Everything.agda'
       - '.github/workflows/balaban-finite-frontier-agda.yml'
 
@@ -80,6 +91,7 @@ jobs:
           export AGDA_LOG_PATH="$GITHUB_WORKSPACE/balaban-finite-frontier.log"
           export AGDA_JOBS=4
           scripts/run_agda29_parallel_check.sh \
+            DASHI/Physics/YangMills/BalabanClayCanonicalBCurrentExact.agda \
             DASHI/Physics/YangMills/CompactLieLangevinSkewConnectionCancellationExact.agda \
             DASHI/Physics/YangMills/BalabanPreferredRowCSpatialFrontierRound261Exact.agda \
             DASHI/Physics/YangMills/BalabanLangevinHessianBidirectionalWeldRound262Exact.agda \
