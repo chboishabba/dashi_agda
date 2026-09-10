@@ -16,6 +16,7 @@ module DASHI.Physics.Closure.NSTriadKNMixedCellLerayLongitudinalOrthogonalityBid
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (0ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
