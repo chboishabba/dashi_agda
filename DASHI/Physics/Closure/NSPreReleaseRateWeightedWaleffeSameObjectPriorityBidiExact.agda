@@ -48,11 +48,16 @@ open import Agda.Builtin.String using (String)
 open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNExternalWaleffeSelectedSwapAntisymmetryRound118Exact as R118
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNCellRateSwapInvariantWeightRound295Exact as R295
@@ -60,11 +65,6 @@ import DASHI.Physics.Closure.NSTriadKNWeightedProjectedForcingOuterFoldRound438E
 
 F : C3.RealField _
 F = Rational.rationalRealField
-
-------------------------------------------------------------------------
--- 1. Typed priority receipts.  Dates are provenance coordinates, while theorem
---    terms below remain the mathematical authority.
-------------------------------------------------------------------------
 
 record PreReleaseTheoremReceipt : Set where
   constructor pre-release-theorem-receipt
@@ -106,7 +106,7 @@ r438Priority = pre-release-theorem-receipt
   "literal weighted projected-forcing fold equals quadratic-companion fold"
 
 ------------------------------------------------------------------------
--- 2. The old R118 weight requirement is constructively paid by R295.
+-- The old R118 weight requirement is constructively paid by R295.
 ------------------------------------------------------------------------
 
 preReleasePhysicalRateWeight :
@@ -118,15 +118,14 @@ preReleasePhysicalRateWeight = R295.rateFunctionBuildsR294Weight
 preReleasePhysicalRateWeightSwapInvariant :
   (rho : Z3.FourierMode → ℚ) →
   (phi : ℚ → C3.Complex F) →
-  (tau : DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration.PhysicalTriadIncidence) →
-  R295.rateWeight rho phi
-    (DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry.swapTriad tau)
+  (tau : Physical.PhysicalTriadIncidence) →
+  R295.rateWeight rho phi (Symmetry.swapTriad tau)
   ≡ R295.rateWeight rho phi tau
 preReleasePhysicalRateWeightSwapInvariant = R295.rateWeightSwapInvariant
 
 ------------------------------------------------------------------------
--- 3. With that physical rate weight, the exact fixed-output product-rule
---    forcing is already the weighted mixed commutator before absolute values.
+-- With that physical rate weight, the exact fixed-output product-rule forcing
+-- is already the weighted mixed commutator before absolute values.
 ------------------------------------------------------------------------
 
 preReleaseRateWeightedProductRuleIsCommutator :
@@ -137,15 +136,15 @@ preReleaseRateWeightedProductRuleIsCommutator :
   (rho : Z3.FourierMode → ℚ) →
   (phi : ℚ → C3.Complex F) →
   (cutoff : Nat) (output : Z3.FourierMode) →
-  R230.R224.foldVector
+  R224.foldVector
     (R294.weightedProductRuleCell
       (preReleasePhysicalRateWeight rho phi) S velocity forcing)
-    (R230.Output.physicalOutputFiber cutoff output)
+    (Output.physicalOutputFiber cutoff output)
   ≡
-  R230.R224.foldVector
+  R224.foldVector
     (R294.weightedCommutatorCell
       (preReleasePhysicalRateWeight rho phi) S velocity forcing)
-    (R230.Output.physicalOutputFiber cutoff output)
+    (Output.physicalOutputFiber cutoff output)
 preReleaseRateWeightedProductRuleIsCommutator
     S velocity forcing rho phi cutoff output =
   R294.fixedOutputWeightedProductRuleIsCommutator
@@ -153,8 +152,8 @@ preReleaseRateWeightedProductRuleIsCommutator
     S velocity forcing cutoff output
 
 ------------------------------------------------------------------------
--- 4. R438 then carries the SAME weighted physical object into the exhaustive
---    slot-or-zero quadratic-companion fold.
+-- R438 then carries the SAME weighted physical object into the exhaustive
+-- slot-or-zero quadratic-companion fold.
 ------------------------------------------------------------------------
 
 preReleaseRateWeightedProjectedForcingIsQuadraticCompanion :
@@ -162,7 +161,7 @@ preReleaseRateWeightedProjectedForcingIsQuadraticCompanion :
   {I : C3.ModeInverseSquare F E}
   {S : Helical.HelicalModeScalars F}
   {L : Helical.PeriodicHelicalProjectorLaws F E I S}
-  {H : DASHI.Physics.Closure.NSTriadKNPhysicalHeterochiralMinorityWaleffeWeldRound134Exact.HelicalHalfCalibration S} →
+  {H : R142.HelicalHalfCalibration S} →
   (rho : Z3.FourierMode → ℚ) →
   (phi : ℚ → C3.Complex F) →
   (system : Audit.FiniteComplex3GalerkinSystem F E I) →
@@ -171,13 +170,11 @@ preReleaseRateWeightedProjectedForcingIsQuadraticCompanion :
   (output : Z3.FourierMode) →
   R438.foldDoubleWeightedProjectedForcing
     (preReleasePhysicalRateWeight rho phi) S system
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
-      (Audit.cutoff system) output)
+    (Output.physicalOutputFiber (Audit.cutoff system) output)
   ≡
   R438.foldExhaustiveWeightedCompanion
     (preReleasePhysicalRateWeight rho phi) S system
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
-      (Audit.cutoff system) output)
+    (Output.physicalOutputFiber (Audit.cutoff system) output)
 preReleaseRateWeightedProjectedForcingIsQuadraticCompanion
     rho phi system velocityTransverse output =
   R438.fixedOutputDoubleWeightedR294FoldIsQuadraticCompanion
@@ -185,7 +182,7 @@ preReleaseRateWeightedProjectedForcingIsQuadraticCompanion
     system velocityTransverse output
 
 ------------------------------------------------------------------------
--- 5. Status correction and remaining analytic firewall.
+-- Status correction and remaining analytic firewall.
 ------------------------------------------------------------------------
 
 preReleaseSelectedSwapAntisymmetryPresent : Bool
