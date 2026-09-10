@@ -40,10 +40,10 @@ open WrongTypeFamily public
 -- ACQUISITION / PAYMENT SNOWBALL INVARIANT
 --
 -- Evidence may be acquired opportunistically and retained out of dependency
--- order.  Acquisition is append-only with respect to the retained carrier;
--- payment remains consumer/query-relative and receipt-gated.  Thus later
+-- order. Acquisition is append-only with respect to the retained carrier;
+-- payment remains consumer/query-relative and receipt-gated. Thus later
 -- evidence may already be present while the first unpaid dependency remains
--- authoritative.  This abstracts the receipt-indexed scientific-wall pattern
+-- authoritative. This abstracts the receipt-indexed scientific-wall pattern
 -- without making any particular wall, scheduler, or domain universal.
 ------------------------------------------------------------------------
 
@@ -52,8 +52,8 @@ record SnowballAcquisitionPaymentInvariant (Atom Receipt : Set) : Set₁ where
   field
     acquired : Atom → Bool
     paid : Atom → Bool
-    paymentReceipt : Atom → Set
-    receiptAdmitsPayment : (a : Atom) → paymentReceipt a → paid a ≡ true
+    receiptAtom : Receipt → Atom
+    receiptAdmitsPayment : (receipt : Receipt) → paid (receiptAtom receipt) ≡ true
     outOfOrderAcquisitionMayBeRetained : Bool
     acquisitionAutomaticallyCreatesPayment : Bool
     laterAcquisitionMaySkipFirstUnpaidDependency : Bool
