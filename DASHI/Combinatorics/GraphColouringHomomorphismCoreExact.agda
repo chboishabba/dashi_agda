@@ -7,8 +7,9 @@ open import DASHI.Core.Prelude
 --
 -- A proper colouring is not a second primitive notion: it is a graph
 -- homomorphism into a palette graph.  This keeps recolouring, restriction,
--- tensor-product lift, and later pants/gluing specialisations on one transport
--- law instead of duplicating colouring-specific machinery.
+-- tensor-product lift, exponential-graph currying, and later pants/gluing
+-- specialisations on one transport law instead of duplicating
+-- colouring-specific machinery.
 ------------------------------------------------------------------------
 
 record RelGraph : Set₁ where
@@ -132,6 +133,58 @@ rightTensorColouring {G} {H} colouring =
   pullbackColouring (tensorProjRight G H) colouring
 
 ------------------------------------------------------------------------
+-- Exponential graph: the canonical carrier behind Shitov's construction.
+--
+-- Vertices of H^G are functions V(G) -> V(H).  Two such functions are
+-- adjacent when every G-edge transports crosswise to an H-edge.  With this
+-- relation, graph homomorphisms X x G -> H curry to X -> H^G and uncurry back.
+------------------------------------------------------------------------
+
+exponentialGraph : RelGraph → RelGraph → RelGraph
+exponentialGraph G H =
+  relGraph
+    (Vertex G → Vertex H)
+    (λ f g →
+      {u v : Vertex G} →
+      Adj G u v →
+      Adj H (f u) (g v))
+
+curryHom :
+  {X G H : RelGraph} →
+  GraphHom (tensorGraph X G) H →
+  GraphHom X (exponentialGraph G H)
+curryHom f =
+  graphHom
+    (λ x g → onVertex f (x , g))
+    (λ edgeX {u} {v} edgeG →
+      preservesAdj f (edgeX , edgeG))
+
+uncurryHom :
+  {X G H : RelGraph} →
+  GraphHom X (exponentialGraph G H) →
+  GraphHom (tensorGraph X G) H
+uncurryHom f =
+  graphHom
+    (λ xg → onVertex f (proj₁ xg) (proj₂ xg))
+    (λ edge → preservesAdj f (proj₁ edge) (proj₂ edge))
+
+curryUncurryVertex :
+  {X G H : RelGraph} →
+  (f : GraphHom X (exponentialGraph G H)) →
+  (x : Vertex X) →
+  (g : Vertex G) →
+  onVertex (curryHom (uncurryHom f)) x g ≡ onVertex f x g
+curryUncurryVertex f x g = refl
+
+uncurryCurryVertex :
+  {X G H : RelGraph} →
+  (f : GraphHom (tensorGraph X G) H) →
+  (x : Vertex X) →
+  (g : Vertex G) →
+  onVertex (uncurryHom (curryHom f)) (x , g) ≡ onVertex f (x , g)
+uncurryCurryVertex f x g = refl
+
+------------------------------------------------------------------------
 -- Exact boundary: this core deliberately stops before chromatic minimisation,
 -- Kempe connectivity, planarity, reducibility, or any identification of the
 -- 369 ternary carrier with a graph adjacency structure.
@@ -144,6 +197,7 @@ record GraphColouringHomomorphismCoreBoundary : Set where
     recolouringIsEndomorphismOfColouringSpace : Bool
     colouringsPullBackAlongGraphHomomorphisms : Bool
     tensorFactorColouringsLiftByProjection : Bool
+    tensorExponentialCurryingAvailable : Bool
     hedetniemiEqualityDerived : Bool
     fourColourTheoremDerived : Bool
     pantsAdjacencyInvented : Bool
@@ -152,6 +206,7 @@ canonicalGraphColouringHomomorphismCoreBoundary :
   GraphColouringHomomorphismCoreBoundary
 canonicalGraphColouringHomomorphismCoreBoundary =
   graphColouringHomomorphismCoreBoundary
+    true
     true
     true
     true
