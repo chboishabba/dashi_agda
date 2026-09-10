@@ -27,6 +27,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventR294WeightRound541Exact as R541
 import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyClassNormBidiRound584Exact as R584
 
@@ -63,7 +64,7 @@ module SpectatorWeightedNestedBony
   -- Preserve the same-object meaning of the instantiated outer weight.
   spectatorOuterWeightIsLiteralResolvent :
     (beta alpha : Physical.PhysicalTriadIncidence) →
-    R541.R294.weight (Spec.spectatorWeight beta) alpha
+    R294.weight (Spec.spectatorWeight beta) alpha
     ≡ C3.realEmbed F (Spec.Swap.pairResolvent alpha beta)
   spectatorOuterWeightIsLiteralResolvent beta alpha =
     Spec.spectatorWeightMeaning beta alpha
