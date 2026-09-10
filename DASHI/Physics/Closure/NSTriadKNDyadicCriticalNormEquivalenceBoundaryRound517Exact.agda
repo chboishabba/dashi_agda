@@ -25,7 +25,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNDyadicEuclideanShellMarginRound88Exact as R88
 import DASHI.Physics.Closure.NSTriadKNConcreteUpperSquaredPacketRound104Exact as Packet
 import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104Exact as LayerCake
-import DASHI.Physics.Closure.NSTriadKNCriticalRadialRealizationProofSearchRound516Exact as R516
 import DASHI.Physics.Closure.NSTriadKNDyadicCriticalFiniteFourierOrderExact as Finite
 
 data DyadicCriticalNormResidual : Set where
