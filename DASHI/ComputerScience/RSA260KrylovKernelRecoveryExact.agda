@@ -124,8 +124,8 @@ kernelRecoveryExecution = kernel-recovery-execution-receipt
 -- Existing generator/projection owners remain separate coordinates.
 ------------------------------------------------------------------------
 
-generatorBoundary : Generator.RSA260ProjectionMatrixGeneratorRoadmapBoundary
-generatorBoundary = Generator.currentRSA260ProjectionMatrixGeneratorRoadmapBoundary
+generatorBoundary : Generator.RSA260MatrixGeneratorRoadmapBoundary
+generatorBoundary = Generator.currentRSA260MatrixGeneratorRoadmapBoundary
 
 projectionBoundary : Projection.RSA260ProjectionSequenceRoadmapBoundary
 projectionBoundary = Projection.currentRSA260ProjectionSequenceRoadmapBoundary
