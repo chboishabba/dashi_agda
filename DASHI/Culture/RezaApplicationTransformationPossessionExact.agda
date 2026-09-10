@@ -1,6 +1,7 @@
 module DASHI.Culture.RezaApplicationTransformationPossessionExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 import DASHI.Core.ApplicationTransformationCapabilityBidiExact as T
 
@@ -16,15 +17,61 @@ jacintoAlloyDesignRole = application-role-receipt "Monica A. Jacinto"
   "US20030053926A1; US20040208777A1"
   "Named co-inventor; the public patent discloses composition ranges, element-role reasoning, example performance, and VIM/VAR plus mechanical-working process description."
 
+rezaJPLMaterialsProcessingRoleLead : ApplicationRoleReceipt
+rezaJPLMaterialsProcessingRoleLead = application-role-receipt "Monica Jacinto Reza / reported Director of the Materials Processing Group at NASA JPL"
+  (T.integrationWorkflow ∷ T.qualificationEvidence ∷ T.tacitExecutionKnowledge ∷ []) partial
+  "Contemporaneous public professional-network post by JPL colleague Allan Petre after the 2025-06-22 disappearance; 2026 House Oversight letter repeats public reporting"
+  "A JPL colleague publicly described Reza as Director of the Materials Processing Group at NASA JPL, and a later House letter repeated that role. This materially strengthens event-time role attribution but remains colleague testimony plus congressional repetition, not a primary JPL personnel/organization record."
+
 rezaValidatedProcessWindowOwnership : ApplicationRoleReceipt
 rezaValidatedProcessWindowOwnership = application-role-receipt "Monica Jacinto/Reza"
   (T.operatingWindow ∷ T.failureHistory ∷ T.qualificationEvidence ∷ T.tacitExecutionKnowledge ∷ []) notLocated
   "bounded public patent/search record"
-  "The patent does not close exact heat-treatment schedules, gamma-prime/grain-state tolerances, failed-batch history, engine/flight qualification evidence, or person-specific tacit manufacturing ownership."
+  "The patent and event-time role reporting do not close exact heat-treatment schedules, gamma-prime/grain-state tolerances, failed-batch history, engine/flight qualification evidence, or person-specific tacit manufacturing ownership."
+
+record EventTimeRoleAttributionState : Set where
+  constructor event-time-role-attribution-state
+  field
+    colleagueRoleTestimonyLocated : Bool
+    congressionalRoleRepetitionLocated : Bool
+    primaryJPLPersonnelRecordLocated : Bool
+    primaryJPLOrgChartOrDirectoryLocated : Bool
+    eventTimeRoleStrongCandidate : Bool
+    eventTimeRoleExactPrimaryReceiptPaid : Bool
+    reportedRoleEqualsMondaloyProcessOwnership : Bool
+
+open EventTimeRoleAttributionState public
+
+canonicalEventTimeRoleAttributionState : EventTimeRoleAttributionState
+canonicalEventTimeRoleAttributionState = event-time-role-attribution-state
+  true true false false true false false
 
 record RezaApplicationBoundary : Set where
   constructor reza-application-boundary
-  field coInventorImpliesSoleApplicationHolder : Bool; coInventorImpliesSoleApplicationHolderIsFalse : coInventorImpliesSoleApplicationHolder ≡ false; patentRecipeImpliesCompleteManufacturingCapability : Bool; patentRecipeImpliesCompleteManufacturingCapabilityIsFalse : patentRecipeImpliesCompleteManufacturingCapability ≡ false; constitutiveDesignRoleSourceBacked : Bool; constitutiveDesignRoleSourceBackedIsTrue : constitutiveDesignRoleSourceBacked ≡ true; validatedProcessWindowOwnershipClosed : Bool; validatedProcessWindowOwnershipClosedIsFalse : validatedProcessWindowOwnershipClosed ≡ false
-canonicalRezaApplicationBoundary = reza-application-boundary false refl false refl true refl false refl
+  field
+    coInventorImpliesSoleApplicationHolder : Bool
+    patentRecipeImpliesCompleteManufacturingCapability : Bool
+    constitutiveDesignRoleSourceBacked : Bool
+    validatedProcessWindowOwnershipClosed : Bool
+    colleagueTestimonyEqualsPrimaryJPLPersonnelRecord : Bool
+    materialsProcessingDirectorImpliesMondaloyStillInActivePortfolio : Bool
+    eventTimeRoleMayGuidePrimaryJPLAcquisition : Bool
 
-data RezaApplicationReverseTarget : Set where acquireHeatTreatmentDevelopmentRecords acquireMicrostructureAcceptanceWindow acquireProcessToleranceAndFailureHistory acquireEngineQualificationOwnership acquireManufacturingHandover acquireSuccessorRole acquireRequalificationAfterDeparture : RezaApplicationReverseTarget
+open RezaApplicationBoundary public
+
+canonicalRezaApplicationBoundary : RezaApplicationBoundary
+canonicalRezaApplicationBoundary = reza-application-boundary
+  false false true false false false true
+
+data RezaApplicationReverseTarget : Set where
+  acquirePrimaryJPLEventTimeRoleRecord
+  acquireHeatTreatmentDevelopmentRecords
+  acquireMicrostructureAcceptanceWindow
+  acquireProcessToleranceAndFailureHistory
+  acquireEngineQualificationOwnership
+  acquireManufacturingHandover
+  acquireSuccessorRole
+  acquireRequalificationAfterDeparture : RezaApplicationReverseTarget
+
+firstRezaApplicationTarget : RezaApplicationReverseTarget
+firstRezaApplicationTarget = acquirePrimaryJPLEventTimeRoleRecord
