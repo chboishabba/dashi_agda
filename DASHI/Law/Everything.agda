@@ -107,3 +107,4 @@ import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchBidiExact
 import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything
 import DASHI.Law.SensibLawParetoBoundSourceDemandExact
 import DASHI.Law.SensibLawParetoBoundProofDirectedCorpusSearchEverything
+import DASHI.Law.SensibLawWoogarooEvidenceDependencyMatrixExact
