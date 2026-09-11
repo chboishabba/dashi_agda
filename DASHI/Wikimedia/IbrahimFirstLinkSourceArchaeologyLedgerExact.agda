@@ -7,10 +7,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- IBRAHIM FIRST-LINK SOURCE ARCHAEOLOGY LEDGER
 --
--- Navigation/provenance owner only.  Mathematical/network claims remain owned
+-- Navigation/provenance owner only. Mathematical/network claims remain owned
 -- by WikipediaFirstLinkNetworkExact and DashiKnowledgeTraversalFunnelExact.
--- This ledger names the historical source manifestations and the current
--- consumer snapshot so they cannot be silently collapsed.
 ------------------------------------------------------------------------
 
 data IbrahimSourceRole : Set where
@@ -42,7 +40,7 @@ arxiv160500309 = ibrahim-source-manifestation
   "primary author preprint manifestation"
   "004 Computer science / data processing"
   "Mark Ibrahim unresolvedQid; Christopher M. Danforth Q89437200; Peter Sheridan Dodds Q42772652"
-  "Primary preprint manifestation of the first-link-network method and reported 4.7M-article snapshot. It does not identify any 2026 Wikipedia edge."
+  "Primary preprint manifestation of the method and reported historical network; not a carrier for any 2026 Wikipedia edge."
 
 authorDraft20161120 : IbrahimSourceManifestation
 authorDraft20161120 = ibrahim-source-manifestation
@@ -54,7 +52,7 @@ authorDraft20161120 = ibrahim-source-manifestation
   "primary author-hosted manuscript manifestation"
   "004 Computer science / data processing"
   "Mark Ibrahim unresolvedQid; Christopher M. Danforth Q89437200; Peter Sheridan Dodds Q42772652"
-  "A dated author-hosted manuscript carrier. Title/author lineage is compatible with the arXiv and journal objects; exact byte identity across manifestations is not inferred."
+  "Title/author lineage is compatible with arXiv/journal manifestations; byte identity is not inferred."
 
 journal2017 : IbrahimSourceManifestation
 journal2017 = ibrahim-source-manifestation
@@ -66,7 +64,7 @@ journal2017 = ibrahim-source-manifestation
   "primary peer-reviewed publication"
   "004 Computer science / data processing"
   "Mark Ibrahim unresolvedQid; Christopher M. Danforth Q89437200; Peter Sheridan Dodds Q42772652"
-  "Version-of-record publication carrier for the method, traversal-funnel measure and reported historical first-link-network findings. DOI identity does not make current Wikipedia edges historical Ibrahim edges."
+  "Version-of-record carrier for the method, traversal-funnel measure and reported historical findings; DOI identity does not identify a later Wikipedia snapshot."
 
 storyLabCodeData : IbrahimSourceManifestation
 storyLabCodeData = ibrahim-source-manifestation
@@ -78,30 +76,22 @@ storyLabCodeData = ibrahim-source-manifestation
   "primary author-hosted project/code/data surface"
   "004 Computer science / data processing"
   "Christopher M. Danforth Q89437200; Peter Sheridan Dodds Q42772652; Mark Ibrahim unresolvedQid"
-  "Provides primary routes to the 505 MB FLN map, traversal-visit/path-length/funnel JSONs and producer code. Hosting does not prove identity with every later mirror or regenerated dataset."
+  "Primary routes to the 505 MB FLN map, traversal results and producer code; hosting does not prove identity with later mirrors or regenerated datasets."
 
 currentEnglishSnapshot : IbrahimSourceManifestation
 currentEnglishSnapshot = ibrahim-source-manifestation
   currentWikipediaConsumerSnapshot
   "DASHI current-English audit"
-  "Current English Wikipedia first-qualifying-link probes"
+  "Current English Wikipedia first-link probes"
   "2026-09-10/11 audit tranche"
   "live English Wikipedia pages + Wikidata QIDs"
   "current empirical consumer snapshot"
-  "000 Computer science, information & general works / domain-specific child Dewey coordinates downstream"
+  "000 Computer science, information & general works / downstream domain coordinates"
   "per-probe verified QIDs; unresolved values remain unresolved"
-  "A new empirical consumer of the Ibrahim method. It is revision-sensitive and is not a manifestation of the 2016/2017 dataset."
+  "A new empirical consumer of the Ibrahim method, not a manifestation of the historical dataset."
 
 ------------------------------------------------------------------------
 -- PRODUCER-REPOSITORY INPUT ARCHAEOLOGY
---
--- The author's repository itself currently carries two incompatible date cues
--- for the source English-Wikipedia dump.  code/readme.md says an
--- `enwiki2015--.xml` dump; first_link_txt.py comments point to the concrete
--- Wikimedia dump URL enwiki/20141008/.  Neither cue is silently preferred.
--- The parser code, however, does pay the extraction policy actually encoded in
--- that artifact: ignore links inside templates, parentheses, ref/div tags and
--- non-article namespaces; then return the first qualifying outermost wikilink.
 ------------------------------------------------------------------------
 
 record HistoricalInputArchaeology : Set where
@@ -110,9 +100,14 @@ record HistoricalInputArchaeology : Set where
     producerRepository : String
     readmeDumpCue : String
     parserDumpCue : String
-    exactHistoricalDumpDateReconciled : Bool
+    parserCueReplicatedAcrossProducerArtifacts : Bool
+    readme2015CueUniqueInFocusedSearch : Bool
+    codeLevelCandidateDump : String
+    exactRuntimeDumpDateReconciled : Bool
     parserPolicyRecovered : Bool
     parserPolicy : String
+    currentAuditPolicy : String
+    currentAuditParserEquivalentPaid : Bool
     fullHistoricalFLNAvailable : Bool
     historicalEdgeIdentityPaidForCurrentProbes : Bool
     nextDiscriminator : String
@@ -123,13 +118,18 @@ canonicalHistoricalInputArchaeology : HistoricalInputArchaeology
 canonicalHistoricalInputArchaeology = historical-input-archaeology
   "marksibrahim/wikipedia_network"
   "code/readme.md: enwiki2015--.xml (date truncated/underspecified)"
-  "code/first_link_txt.py: https://dumps.wikimedia.org/enwiki/20141008/"
+  "code/first_link_txt.py and old parser/test copies: https://dumps.wikimedia.org/enwiki/20141008/"
+  true
+  true
+  "2014-10-08 is the stronger code-level candidate, not yet promoted to proven runtime input"
   false
   true
-  "parse article body; ignore templates, parentheses, <ref>, <div>, nested/non-article namespace links; return first qualifying outermost [[wikilink]] destination"
+  "parse page body; ignore templates, parentheses, <ref>, <div>, nested/non-article namespace links; return first qualifying outermost [[wikilink]] destination"
+  "current DASHI audit uses hand-inspected first qualifying conceptual link after hatnote/disambiguation exclusions"
+  false
   true
   false
-  "reconcile dump revision from paper/writeup/repository history or inspect the author-hosted FLN artifact metadata; only then compare targeted historical edges with the 2026 probes"
+  "pay BOTH gates: reconcile the runtime dump revision and reproduce the original parser policy for the targeted pages; then compare the historical FLN edges with current probes"
 
 ------------------------------------------------------------------------
 -- Semantic-coordinate payments recovered by the current audit.
@@ -137,22 +137,11 @@ canonicalHistoricalInputArchaeology = historical-input-archaeology
 
 record IbrahimSemanticCoordinatePayment : Set where
   constructor ibrahim-semantic-coordinate-payment
-  field
-    label : String
-    qid : String
-    qidVerified : Bool
-    deweyTraversalOnly : Bool
-    createsDashiDependency : Bool
-
+  field label : String; qid : String; qidVerified : Bool; deweyTraversalOnly : Bool; createsDashiDependency : Bool
 open IbrahimSemanticCoordinatePayment public
 
-individualCoordinate : IbrahimSemanticCoordinatePayment
-individualCoordinate = ibrahim-semantic-coordinate-payment
-  "individual" "Q795052" true true false
-
-branchOfScienceCoordinate : IbrahimSemanticCoordinatePayment
-branchOfScienceCoordinate = ibrahim-semantic-coordinate-payment
-  "branch of science" "Q2465832" true true false
+individualCoordinate = ibrahim-semantic-coordinate-payment "individual" "Q795052" true true false
+branchOfScienceCoordinate = ibrahim-semantic-coordinate-payment "branch of science" "Q2465832" true true false
 
 ------------------------------------------------------------------------
 -- Archaeology firewalls.
@@ -168,12 +157,11 @@ record IbrahimSourceArchaeologyBoundary : Set where
     qidCreatesHistoricalEdgeIdentity : Bool
     deweyCreatesSourceAuthority : Bool
     traversalFunnelRankCreatesEpistemicAuthority : Bool
-    readmeDumpCueOverridesParserDumpCue : Bool
-    parserDumpCueOverridesReadmeDumpCue : Bool
+    strongerCodeCueEqualsProvenRuntimeDump : Bool
+    currentConceptualPolicyEqualsOriginalParser : Bool
     sourceManifestationsMayGuideHistoricalRecovery : Bool
 
 open IbrahimSourceArchaeologyBoundary public
 
-canonicalIbrahimSourceArchaeologyBoundary : IbrahimSourceArchaeologyBoundary
 canonicalIbrahimSourceArchaeologyBoundary = ibrahim-source-archaeology-boundary
   false false false false false false false false false true
