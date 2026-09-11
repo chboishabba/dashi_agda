@@ -5,9 +5,9 @@
 
 This appendix keeps discovery identifiers separate from scientific authority.
 A DOI identifies a publication object; a QID supplies a semantic coordinate;
-Dewey supplies a catalogue coordinate; a repository commit supplies an
-implementation receipt. None of these fields, by itself, proves the physical
-claim represented by the source.
+Dewey supplies a catalogue coordinate; an OEIS identifier supplies an integer-
+sequence coordinate; and a repository commit supplies an implementation receipt.
+None of these fields, by itself, proves the physical claim represented by the source.
 
 \begin{longtable}{p{0.13\textwidth}p{0.20\textwidth}p{0.16\textwidth}p{0.14\textwidth}p{0.25\textwidth}}
 \toprule
@@ -28,6 +28,7 @@ Date & Object & DOI / QID & Source role & Direct locator / significance\\
 1925 & W. Pauli, \emph{Ueber den Zusammenhang des Abschlusses der Elektronengruppen im Atom mit der Komplexstruktur der Spektren} & DOI \texttt{10.1007/BF02980631}; Pauli exclusion principle Q131594 & external primary physics source & historical primary anchor for hard fermionic exclusion; it does not identify the DASHI MDL cost with a physical Hamiltonian.\\
 1928 & D. R. Hartree, \emph{The Wave Mechanics of an Atom with a Non-Coulomb Central Field. Part II} & DOI \texttt{10.1017/S0305004100011920} & external primary method source & self-consistent atomic-field method applied to atoms; acquired method authority for the scale/spectrum snowball, not payment of the DASHI same-object operator bridge.\\
 1928 & J. C. Slater, \emph{The Self Consistent Field and the Structure of Atoms} & DOI \texttt{10.1103/PhysRev.32.339} & external primary method source & analysis of Hartree self-consistent fields against the Schr\"odinger equation; method/spectral authority only.\\
+2007 & Restrepo and Pach\'on, \emph{Mathematical Aspects of the Periodic Law} & DOI \texttt{10.1007/s10698-006-9026-6}; arXiv:math/0611410 & external mathematical-chemistry source & snowballed from OEIS A093907; source for mathematical periodic-law context, not proof of the DASHI 369 mechanism.\\
 2017 & Ibrahim, Danforth, Dodds, \emph{Connecting every bit of knowledge} & DOI \texttt{10.1016/j.jocs.2016.12.001}; arXiv:1605.00309 & primary search-policy source & donor for deterministic first-link/traversal-funnel investigation; it does not turn first-link centrality into proof authority.\\
 current & atom concept & Q9121 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q9121}; Dewey 539.7.\\
 current & chemical element & Q11344 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q11344}; Dewey 546; IUPAC Gold Book C01022.\\
@@ -66,6 +67,39 @@ next scale/method coordinates, but their Dewey fields remain unresolved in the
 inspected semantic items. This walk is a search funnel, not a theorem implication:
 Dewey adjacency, QID identity and first-link centrality carry no proof authority.
 
+\paragraph{OEIS sequence weld.}
+Following the repository's earlier OEIS practice, sequence identifiers are now
+attached as non-promoting mathematical coordinates.  The strongest exact matches
+are
+\[
+\begin{aligned}
+\text{A016825}:&\quad 2,6,10,14,\ldots = 4\ell+2
+               = 2(2\ell+1),\\
+\text{A001105}:&\quad 0,2,8,18,32,\ldots = 2n^2,\\
+\text{A006331}:&\quad 0,2,10,28,60,\ldots
+               = \sum_{k=1}^{n}2k^2,\\
+\text{A093907}:&\quad 2,8,8,18,18,32,32,\ldots
+               \quad\text{(Aufbau-predicted period lengths)},\\
+\text{A018227}:&\quad 2,10,18,36,54,86,118,\ldots
+               \quad\text{(full-shell/noble closure coordinate)}.
+\end{aligned}
+\]
+Thus DASHI's exact subshell-capacity function coincides with A016825 and its
+principal-shell capacity coincides with A001105.  The historical $2,10,18$
+closure regression is a three-term prefix of A018227.  Crucially, A093907 is
+\emph{not} globally identical to $2n^2$: period length and principal-shell
+capacity are different sequence objects once the filling order is considered.
+OEIS A018227 records itself as the partial sums of A093907, which makes the
+closure/period relation a useful source coordinate without proving the DASHI MDL
+selector.  A sequence match does not establish mechanism identity, physical
+Hamiltonian authority, nuclear stability, or empirical recovery.
+
+OEIS A093907 also provides the useful literature snowball to Restrepo and
+Pach\'on, \emph{Mathematical Aspects of the Periodic Law}, DOI
+\texttt{10.1007/s10698-006-9026-6}, arXiv:math/0611410.  This pays a primary
+mathematical-chemistry literature coordinate for period-length mathematics; it
+still does not identify that paper's mechanism with DASHI's 369/kernel/MDL route.
+
 \paragraph{Archive executable snowball.}
 Inspection of the canonical \emph{DASHI Atom} archive substantially narrows the
 historical-artifact leaf. The archive contains code-shaped reconstruction of the
@@ -92,12 +126,17 @@ Lean \texttt{Base369} source contains concrete proof terms but this audit has no
 independently rebuilt the project.
 
 \paragraph{Highest-alpha snowball frontier.}
-The Ibrahim/Dewey walk changes the next move. External method provenance for the
-self-consistent-field rung is now paid by Hartree and Slater primary sources; the
-scientific leaf is therefore the \emph{same-object DASHI} operator-to-spectrum /
-calibrated-ionization bridge, not another generic SCF citation. On the historical
-side, the archive pays embedded reconstruction and run narrative, leaving the
-original standalone script/execution identity/hash unpaid. Any same-object
-pre-PR DOI/arXiv/Zenodo/public-manuscript receipt remains separately valuable.
+The Ibrahim/Dewey/OEIS walk changes the next move.  The capacity sequences are
+now paid exactly at the integer-sequence level, and the full Aufbau period target
+is externally identified as A093907.  Therefore the first unpaid mathematical
+weld is not another capacity identity: it is the same-object proof that the DASHI
+valence-recurrence/MDL selector yields the full A093907 period-length sequence,
+rather than merely matching A016825/A001105 and the first three A018227 closures.
+External method provenance for the self-consistent-field rung is already paid by
+Hartree and Slater; the physical leaf remains the same-object DASHI
+operator-to-spectrum/calibrated-ionization bridge.  On the historical side, the
+archive pays embedded reconstruction and run narrative, leaving the original
+standalone script/execution identity/hash unpaid. Any same-object pre-PR
+DOI/arXiv/Zenodo/public-manuscript receipt remains separately valuable.
 Acquisition may occur laterally and out of dependency order; conclusion payment
 may not.
