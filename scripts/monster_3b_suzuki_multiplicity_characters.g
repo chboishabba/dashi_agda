@@ -12,6 +12,13 @@
 # Irr(6.Suz) inflates to the inertia group before tensoring with the 729
 # extension and inducing to the outer group.
 #
+# COMPUTATIONAL SOURCE / IDENTIFIER LAYER
+# Thomas Breuer and CTblLib contributors, GAP Character Table Library.
+# `AtlasLabelsOfIrreducibles` supplies stable ATLAS-style semantic labels for
+# the same ordered list returned by Irr(tbl).  The numeric position remains an
+# execution coordinate; the label is an external character identity coordinate.
+# Neither one by itself proves occurrence in the Monster restriction.
+#
 # This producer identifies the faithful degree-12 and degree-78 6.Suz
 # candidates and records their central order-three phases.  It does NOT infer
 # that every candidate occurs in the Monster restriction; that same-object
@@ -28,6 +35,11 @@ if tbl = fail or outer = fail then
 fi;
 
 irr := Irr(tbl);
+labels := AtlasLabelsOfIrreducibles(tbl, "short");
+if labels = fail or Length(labels) <> Length(irr) then
+  Error("ATLAS irreducible labels for 6.Suz are unavailable or misaligned");
+fi;
+
 centre := ClassPositionsOfCentre(tbl);
 orders := OrdersClassRepresentatives(tbl);
 central3 := Filtered(centre, i -> orders[i] = 3);
@@ -44,11 +56,13 @@ faithful12 := Filtered([1..Length(irr)], i ->
 faithful78 := Filtered([1..Length(irr)], i ->
   irr[i][1] = 78 and IsFaithfulCharacter(irr[i]));
 
-if Length(faithful12) = 0 then
-  Error("no faithful degree-12 irreducible found in 6.Suz");
+# CTblLib's published 6.Suz examples use the ATLAS families 12ab and 78ab.
+# Fail closed if a future table version changes that exact candidate count.
+if Length(faithful12) <> 2 then
+  Error("expected exactly two faithful degree-12 irreducibles in 6.Suz");
 fi;
-if Length(faithful78) = 0 then
-  Error("no faithful degree-78 irreducible found in 6.Suz");
+if Length(faithful78) <> 2 then
+  Error("expected exactly two faithful degree-78 irreducibles in 6.Suz");
 fi;
 
 fusion := FusionConjugacyClasses(tbl, outer);
@@ -79,6 +93,7 @@ RowsFor := function(positions)
     chi := irr[p];
     Add(rows, rec(
       position := p,
+      atlasLabel := labels[p],
       degree := chi[1],
       firstCentralValue := chi[central3[1]],
       secondCentralValue := chi[central3[2]],
@@ -106,23 +121,38 @@ for row in Concatenation(rows12, rows78) do
   fi;
 od;
 
+# The two candidates in each degree must be separately labelled; this catches
+# accidental table-order/label collapse without guessing which member occurs in
+# the Monster restriction.
+if rows12[1].atlasLabel = rows12[2].atlasLabel then
+  Error("faithful degree-12 candidates have duplicate ATLAS labels");
+fi;
+if rows78[1].atlasLabel = rows78[2].atlasLabel then
+  Error("faithful degree-78 candidates have duplicate ATLAS labels");
+fi;
+
 output := OutputTextFile("build/monster_3b_suzuki_multiplicity_characters.json", false);
 SetPrintFormattingStatus(output, false);
 PrintTo(output,
   "{\n",
   "  \"table\": \"6.Suz\",\n",
   "  \"outer_table\": \"6.Suz.2\",\n",
+  "  \"label_source\": \"CTblLib AtlasLabelsOfIrreducibles(short)\",\n",
   "  \"central_order_three_classes\": [", central3[1], ", ", central3[2], "],\n",
   "  \"faithful_degree_12_positions\": ", faithful12, ",\n",
   "  \"faithful_degree_78_positions\": ", faithful78, ",\n",
+  "  \"faithful_degree_12_atlas_labels\": [\"", rows12[1].atlasLabel, "\", \"", rows12[2].atlasLabel, "\"],\n",
+  "  \"faithful_degree_78_atlas_labels\": [\"", rows78[1].atlasLabel, "\", \"", rows78[2].atlasLabel, "\"],\n",
   "  \"fusion_length\": ", Length(fusion), ",\n",
   "  \"source_native_729_tensor_factorisation\": true,\n",
+  "  \"atlas_label_position_alignment_paid\": true,\n",
   "  \"monster_same_object_match_paid\": false,\n",
   "  \"degree_12_rows\": [\n");
 for k in [1..Length(rows12)] do
   r := rows12[k];
   PrintTo(output,
     "    {\"position\": ", r.position,
+    ", \"atlas_label\": \"", r.atlasLabel, "\"",
     ", \"degree\": 12",
     ", \"first_central_phase\": \"", r.firstCentralPhase, "\"",
     ", \"second_central_phase\": \"", r.secondCentralPhase, "\"}"
@@ -135,6 +165,7 @@ for k in [1..Length(rows78)] do
   r := rows78[k];
   PrintTo(output,
     "    {\"position\": ", r.position,
+    ", \"atlas_label\": \"", r.atlasLabel, "\"",
     ", \"degree\": 78",
     ", \"first_central_phase\": \"", r.firstCentralPhase, "\"",
     ", \"second_central_phase\": \"", r.secondCentralPhase, "\"}"
@@ -145,5 +176,5 @@ od;
 PrintTo(output, "  ]\n}\n");
 CloseStream(output);
 
-Print("6.Suz faithful 12/78 multiplicity-character candidate receipt written.\n");
+Print("6.Suz faithful 12/78 multiplicity-character candidate receipt written with ATLAS labels.\n");
 QUIT;
