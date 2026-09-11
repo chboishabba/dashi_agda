@@ -10,8 +10,8 @@ import DASHI.Culture.MissingDeceasedIbrahimInvestigativeParetoExact as Pareto
 ------------------------------------------------------------------------
 -- IBRAHIM / DEWEY CONVERGENCE FOR SCIENTIST ACQUISITION
 --
--- Thin crosswalk only.  Ibrahim-style semantic traversal and Dewey shelving are
--- independent external routing coordinates.  Agreement between them may raise
+-- Thin crosswalk only. Ibrahim-style semantic traversal and Dewey shelving are
+-- independent external routing coordinates. Agreement between them may raise
 -- acquisition priority but cannot manufacture semantic edges, evidence
 -- authority, person identity, same-object identity, custody or succession.
 --
@@ -48,10 +48,10 @@ amyIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
   "technical report -> research/report administration -> STI/release metadata -> release-system archaeology"
   "530 Physics + NASA Subject Category 70; metadata/documentation traversal 025.3 / 005.7"
   "technical report Q3099732; research Q42240; NASA Q23548; MSFC Q618696"
-  "NTRS 20205010911; NASA/TM-20205010911; M-1531; SAA8-1519855; legacy NF-1676/NF-1676B / EDAA identity unresolved"
-  "primary NASA/MSFC STI compliance or release-authorisation object, including legacy EDAA and current STRIVES/STI archival crosswalk"
+  "NTRS 20205010911; NASA/TM-20205010911; M-1531; SAA8-1519855; NF-1676/STRIVES identity unresolved; legacy EDAA/NF-1676B retained as predecessor lineage"
+  "primary NASA/MSFC STI compliance or release-authorisation object carrying the POAMS NF-1676/STRIVES approval identity and any migrated legacy EDAA lineage"
   true true false false true
-  "Ibrahim and Dewey both route away from more POAMS topical science and toward report-series/release metadata. NASA now states that STRIVES standardizes STI submission, review and approval across all ten centers, while NPR 2200.2D retains the DAA/EDAA/NF-1676B release lineage. The exact POAMS legacy EDAA identity, its current STRIVES/STI representation and attached reviewed version remain conclusion-paying; system names are not assumed interchangeable."
+  "Ibrahim and Dewey both route away from more POAMS topical science and toward report-series/release metadata. NASA's 2020 CIO annual report says STRIVES was fully adopted agency-wide by May 2020, NTRS transitioned by July and legacy STI applications were retired by August. POAMS was acquired by NTRS on 2020-12-01. The strongest expected approval namespace is therefore NF-1676/STRIVES-era release metadata; a legacy MSFC EDAA remains relevant only as predecessor/migration lineage unless a primary record proves otherwise."
 
 rezaIbrahimDeweyConvergence : IbrahimDeweyConvergenceReceipt
 rezaIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
@@ -87,7 +87,7 @@ maiwaldIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
   "10.1021/acs.jpca.4c03552; 10.26434/chemrxiv-2024-2tvc6; NTRS 13797709699197; 10.1021/acs.jpca.5c03141"
   "primary repository/deposit or instrument/data-management record"
   true true false false true
-  "Both routes say that another publication has low marginal value. ACS Figshare is demonstrably used for adjacent Lane Terry / Weber-group cryogenic-ion-vibrational-spectroscopy work, so it is a paid repository-surface lead; targeted searches have not located a title-matched protonated/deprotonated valine deposit. That absence does not prove non-deposition. The missing conclusion-paying object remains a deposit/instrument-data manifest tying raw and reduced spectra to poster/article/SI figures."
+  "Both routes say that another publication has low marginal value. ACS exposes the supporting-information asset through Figshare-backed infrastructure, but the located SI contains calculated/derived material rather than an identified raw instrument dataset. The missing conclusion-paying object remains a deposit/instrument-data manifest tying raw and reduced spectra to poster/article/SI figures."
 
 leblancIbrahimDeweyConvergence : IbrahimDeweyConvergenceReceipt
 leblancIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
