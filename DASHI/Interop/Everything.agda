@@ -63,5 +63,7 @@ import DASHI.Interop.SLRGWBClaimRelativeSourceRoleAtlasExact
 import DASHI.Interop.SLRGWBSourceRoleAttachmentExact
 import DASHI.Interop.SLRMultilingualWikimediaParserCompatibilityExact
 import DASHI.Interop.SLRMultilingualPNFRoleCompatibilityExact
+import DASHI.Interop.SLRSemanticWorldClosureExact
+import DASHI.Interop.SLRWorldResearchTrancheConvergenceExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
