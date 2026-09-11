@@ -12,6 +12,8 @@ import DASHI.Interop.SLRSensibLawCandidateWorldAdapterExact as Adapter
 import DASHI.Interop.SLRABCGoldBenchmarkRuntimeContractExact as Gold
 import DASHI.Interop.SLRC029WorldConstraintFibreBridgeExact as World
 import DASHI.Interop.SLRReviewPromoteAbstainConsumerExact as Review
+import DASHI.Interop.SLRClaimFragmentProjectionExact as Fragment
+import DASHI.Interop.SLRClaimFragmentResidualInheritanceExact as FragmentResidual
 
 ------------------------------------------------------------------------
 -- Validation-to-roadmap promotion.
@@ -55,6 +57,21 @@ currentSLRValidationRoadmap =
     "SLRABCGoldBenchmarkRuntimeContractExact"
     "quote/nesting gold, calibrated uncertainty, aligned residual-fibre delta"
   ∷ promotedRoadmapCoordinate
+    "multi-hop labelled discourse path"
+    paid
+    "validated path artifact: sentence 42 Wong -> Greber -> Husic; sentence 45 Shoebridge -> Leeser"
+    "path adjacency does not by itself pay whole-claim source extent"
+  ∷ promotedRoadmapCoordinate
+    "claim-local fragment projection"
+    partial
+    "SLRClaimFragmentProjectionExact / slr-claim-fragment-projection-v1"
+    "dedicated runtime receipt pending; whole canonical claim extent remains unpaid"
+  ∷ promotedRoadmapCoordinate
+    "claim-local fragment residual inheritance"
+    partial
+    "SLRClaimFragmentResidualInheritanceExact / slr-claim-fragment-residual-inheritance-v1"
+    "dedicated runtime receipt pending; inherited consumer debt does not promote claim truth"
+  ∷ promotedRoadmapCoordinate
     "world-constraint fibre integration"
     partial
     "SLRC029WorldConstraintFibreBridgeExact / slr-world-constraint-fibre-v1"
@@ -82,10 +99,15 @@ record ValidationPromotionBoundary : Set where
     carrierParityPaid : Bool
     executionParityPaid : Bool
     reviewRouterImplemented : Bool
+    multiHopDiscoursePathPaid : Bool
     goldSemanticBenchmarkFullyPaid : Bool
     worldTruthPaid : Bool
     canonicalClaimProjectionImplemented : Bool
     canonicalClaimProjectionRuntimeCertified : Bool
+    claimFragmentProjectionImplemented : Bool
+    claimFragmentProjectionRuntimeCertified : Bool
+    fragmentResidualInheritanceImplemented : Bool
+    fragmentResidualInheritanceRuntimeCertified : Bool
     canonicalClaimTruthPaid : Bool
     brexitNarrativeBenchmarkPaid : Bool
 
@@ -93,7 +115,13 @@ open ValidationPromotionBoundary public
 
 canonicalValidationPromotionBoundary : ValidationPromotionBoundary
 canonicalValidationPromotionBoundary =
-  validationPromotionBoundary true true true false false true false false false
+  validationPromotionBoundary
+    true true true true
+    false false
+    true false
+    true false
+    true false
+    false false
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -102,6 +130,8 @@ canonicalValidationPromotionBoundary =
 data RuntimeParityPaysGoldSemantics : Set where
 data CarrierParityPaysClaimIdentity : Set where
 data ClaimProjectionImplementationPaysRuntimeCertification : Set where
+data FragmentProjectionImplementationPaysRuntimeCertification : Set where
+data FragmentResidualInheritancePaysRuntimeCertification : Set where
 data CanonicalClaimProjectionPaysClaimTruth : Set where
 data ReviewRouterImplementationPaysConsumerAdequacy : Set where
 data CurrentAbstentionMeansClaimFalse : Set where
@@ -116,6 +146,14 @@ carrierParityDoesNotPayClaimIdentity ()
 implementationDoesNotPayProjectionRuntime :
   ClaimProjectionImplementationPaysRuntimeCertification → ⊥
 implementationDoesNotPayProjectionRuntime ()
+
+fragmentImplementationDoesNotPayRuntime :
+  FragmentProjectionImplementationPaysRuntimeCertification → ⊥
+fragmentImplementationDoesNotPayRuntime ()
+
+fragmentResidualImplementationDoesNotPayRuntime :
+  FragmentResidualInheritancePaysRuntimeCertification → ⊥
+fragmentResidualImplementationDoesNotPayRuntime ()
 
 projectionDoesNotPayClaimTruth : CanonicalClaimProjectionPaysClaimTruth → ⊥
 projectionDoesNotPayClaimTruth ()
@@ -148,3 +186,9 @@ reviewAnchor = Review.canonicalRuntimeReviewContract
 
 worldAnchor : World.C029WorldConstraintState
 worldAnchor = World.canonicalC029WorldConstraintState
+
+fragmentAnchor : Fragment.ClaimFragmentProjectionBoundary
+fragmentAnchor = Fragment.canonicalClaimFragmentProjectionBoundary
+
+fragmentResidualAnchor : FragmentResidual.FragmentResidualRuntimeBoundary
+fragmentResidualAnchor = FragmentResidual.canonicalFragmentResidualRuntimeBoundary
