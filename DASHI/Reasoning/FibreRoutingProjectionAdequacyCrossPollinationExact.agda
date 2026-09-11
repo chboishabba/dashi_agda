@@ -17,30 +17,6 @@ import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Fibre36
 
 ------------------------------------------------------------------------
 -- FIBRE ROUTING / PROJECTION ADEQUACY CROSS-POLLINATION
---
--- This owner does not introduce another nuisance calculus.  It welds the new
--- routing carrier to repo-native results that already say:
---
---   * adequacy is query/consumer indexed;
---   * a fibre collision with distinct consumer answers refutes factorisation;
---   * recharting a lossy quotient cannot recreate an erased distinction;
---   * ranking/MDL is downstream of admissibility and consumer adequacy;
---   * repairs are typed refinements rather than silent reinterpretations;
---   * lossy projections may be valid for one consumer while the richer source
---     carrier remains authoritative;
---   * same-point/context fibres may be required when a phase-only observer is
---     insufficient;
---   * recursive/refinement geometry does not automatically assert p-adic
---     physics or definitional identity.
---
--- Fly reading:
---   hard winner / raw target / nuisance-controlled target are observation
---   surfaces.  Whether any one is sufficient is a question about a declared
---   consumer, not an intrinsic property of the surface.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- Exact Fly query-indexed adequacy specimen.
 ------------------------------------------------------------------------
 
 data FlyConsumerQuery : Set where
@@ -102,14 +78,6 @@ softOverlapAdequateForOverlapQuery =
     (λ profile → overlapProfileAnswer profile)
     (λ state → refl)
 
-------------------------------------------------------------------------
--- Intersectional/nonfactorability reuse.
---
--- The same collision is also a direct instance of the repo's situated
--- nonfactorability theorem.  Any post-map of the hard identity remains unable
--- to recover the erased overlap distinction.
-------------------------------------------------------------------------
-
 hardWinnerOverlapNonFactorability :
   NonFactor.NonFactorabilityWitness
     Fibre.hardPaintedIdentity
@@ -130,15 +98,6 @@ hardWinnerRechartCannotRecoverOverlap :
 hardWinnerRechartCannotRecoverOverlap rechart =
   NonFactor.rechartingCannotRecoverErasedPhenomenon
     rechart hardWinnerOverlapNonFactorability
-
-------------------------------------------------------------------------
--- Admissibility + consumer adequacy before ranking.
---
--- The hard carrier can be shorter yet remain ineligible for the overlap-profile
--- consumer.  The soft carrier is a local refinement that repairs this exact
--- counterexample.  No claim is made that it is universally sufficient for every
--- Fly consumer.
-------------------------------------------------------------------------
 
 data Unit : Set where unit : Unit
 
@@ -189,18 +148,20 @@ flyProjectionProblem =
     "finite illustrative code length; ranking only after admissibility and consumer adequacy"
     "Fly overlap-profile consumer"
 
+-- Keep the universe-polymorphic query defect as the proof of insufficiency, but
+-- use a first-order token for ConsumerCounterexample's Set-sized witness field.
+data HardOverlapFailureWitness : Set where
+  hardOverlapFailureWitness : HardOverlapFailureWitness
+
 hardProjectionCounterexample :
   Admissible.ConsumerCounterexample flyProjectionProblem hardWinnerModel
 hardProjectionCounterexample =
   Admissible.consumerCounterexample
-    (Query.QueryAdequacyDefect
-      Fibre.hardPaintedIdentity
-      flyConsumerSemantics
-      overlapProfileQuery)
-    hardWinnerOverlapDefect
+    HardOverlapFailureWitness
+    hardOverlapFailureWitness
     hardWinnerCannotAnswerOverlapQuery
     "hard winner identifies overlappingROI and parentOnlyROI"
-    "the overlap-profile consumer distinguishes those states"
+    "the overlap-profile consumer distinguishes those states; exact query defect retained in hardWinnerOverlapDefect"
 
 hardToSoftLocalRepair :
   Admissible.LocalRefinementRepair
@@ -219,10 +180,6 @@ softRepairIsEligible :
   Admissible.Eligible flyProjectionProblem softOverlapModel
 softRepairIsEligible =
   Admissible.repairProvidesEligibleRefinement hardToSoftLocalRepair
-
-------------------------------------------------------------------------
--- Existing donor facts: refinement, lossy projection, same-point fibre repair.
-------------------------------------------------------------------------
 
 repairRemainsConsumerIndexed :
   Repair.repairIsConsumerIndexed Repair.canonicalConsumerFibreRepairBoundary ≡ true
@@ -269,10 +226,6 @@ legacyPhaseOnlyAgreementIsNotAutomatic :
   Fibre369.legacyPhaseOnlyAgreementAutomatic
     Fibre369.canonicalFibreObserverRepairBoundary ≡ false
 legacyPhaseOnlyAgreementIsNotAutomatic = refl
-
-------------------------------------------------------------------------
--- Shared interpretation boundary.
-------------------------------------------------------------------------
 
 record ProjectionRepairCrossPollinationBoundary : Set where
   constructor projectionRepairCrossPollinationBoundary
