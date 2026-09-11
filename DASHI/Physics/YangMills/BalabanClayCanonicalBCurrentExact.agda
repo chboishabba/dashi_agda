@@ -72,6 +72,12 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact
 -- connecting root and physical support distance.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact
 
+-- R310 splits G2 so covariance-limit algebra is not confused with physical
+-- Euclidean-time semantics.  The genuine application coordinates are the
+-- physical decode/time/support meaning, bounded selected tests, and an explicit
+-- order-closed scalar convergence authority.
+import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact
+
 -- Older producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
 import DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound272Exact
