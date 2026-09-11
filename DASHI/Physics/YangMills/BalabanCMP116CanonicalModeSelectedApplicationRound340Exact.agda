@@ -19,7 +19,7 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalModeSelectedApplicationRoun
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Common
@@ -50,14 +50,8 @@ record CanonicalCMP116ModeSelectedApplication
       R276.LessEqual orderLimit left right
 
     embed : ℚ → Bound
-    sourceOrderToLimitOrder : ∀ {left right} →
-      left R276.≡? right → Set
-
-    -- The actual monotone embedding law is kept proof-bearing below.  The
-    -- dummy-looking name above is deliberately not used as authority; it only
-    -- avoids hiding the source/target carriers in prose.
     rationalOrderEmbedding : ∀ {left right} →
-      Data.Rational.Base._≤_ left right →
+      left ≤ right →
       R276.LessEqual orderLimit (embed left) (embed right)
 
     orderIsSpectrumOrder : ∀ left right →
@@ -171,13 +165,16 @@ record Round340Boundary : Set where
     modeToSourceDirectionSelectionStillRequired : Bool
     modeToSourceDirectionSelectionStillRequiredIsTrue :
       modeToSourceDirectionSelectionStillRequired ≡ true
+    rationalOrderEmbeddingStillRequiredForGenericBoundCarrier : Bool
+    rationalOrderEmbeddingStillRequiredForGenericBoundCarrierIsTrue :
+      rationalOrderEmbeddingStillRequiredForGenericBoundCarrier ≡ true
     freshYMDecayEstimateIntroduced : Bool
     freshYMDecayEstimateIntroducedIsFalse :
       freshYMDecayEstimateIntroduced ≡ false
 
 canonicalRound340Boundary : Round340Boundary
 canonicalRound340Boundary =
-  round340-boundary false refl true refl true refl true refl true refl false refl
+  round340-boundary false refl true refl true refl true refl true refl true refl false refl
 
 round340CompilerLevel : ProofLevel
 round340CompilerLevel = machineChecked
