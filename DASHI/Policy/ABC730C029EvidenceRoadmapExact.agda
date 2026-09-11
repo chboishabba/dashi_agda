@@ -5,17 +5,17 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Policy.ABC730IbrahimSnowballAttributionExact as Attribution
+import DASHI.Policy.ABC730C029IbrahimSourceAtlasExact as Atlas
 import DASHI.Policy.ABC730UnintendedConsequencesEvidenceObligationExact as Obligation
 import DASHI.Policy.ABC730UnintendedConsequencesSnowballEvidenceExact as Mechanism
 import DASHI.Policy.ABC730PalestinianIncidenceSnowballExact as Palestinian
 import DASHI.Policy.ABC730SettlementTradeMeasurementGapExact as Measurement
 import DASHI.Policy.ABC730AustralianImplementationSnowballExact as Australia
+import DASHI.Policy.ABC730AustralianOriginBaselineExact as Origin
 import DASHI.Policy.ABC730FirmDestinationExposureSnowballExact as Firm
 
 ------------------------------------------------------------------------
 -- Thin composition owner for the C029 evidence roadmap.
--- No new planner, scoring function or source authority is introduced here.
--- Existing owners remain authoritative for their own receipts.
 ------------------------------------------------------------------------
 
 data RoadmapStatus : Set where
@@ -28,12 +28,15 @@ data RoadmapStatus : Set where
 data C029RoadmapCoordinate : Set where
   transcriptObjectIdentity : C029RoadmapCoordinate
   speakerAttribution : C029RoadmapCoordinate
+  ibrahimSourceCoordinates : C029RoadmapCoordinate
   statedRationale : C029RoadmapCoordinate
   affectedClassesNamed : C029RoadmapCoordinate
   ukInstrumentIdentity : C029RoadmapCoordinate
   ukOriginDifferentiation : C029RoadmapCoordinate
   australianTargetedAlternative : C029RoadmapCoordinate
   targetedComplianceBurden : C029RoadmapCoordinate
+  australianOriginComplianceBaseline : C029RoadmapCoordinate
+  settlementSubcountryClassifier : C029RoadmapCoordinate
   palestinianSettlementEmploymentExposure : C029RoadmapCoordinate
   settlementBusinessCandidateUniverse : C029RoadmapCoordinate
   originMisclassificationRisk : C029RoadmapCoordinate
@@ -66,6 +69,11 @@ speakerAttributionEntry = roadmapEntry speakerAttribution paid
   "DASHI.Policy.ABC730PrimarySourceSpeakerResolutionExact"
   "none for C030-C033; do not reopen from parser ambiguity"
 
+ibrahimAtlasEntry : RoadmapEntry
+ibrahimAtlasEntry = roadmapEntry ibrahimSourceCoordinates paid
+  "DASHI.Policy.ABC730C029IbrahimSourceAtlasExact"
+  "continue append-only enrichment of QID/DOI/stable-ID/link coordinates without importing claim truth"
+
 statedRationaleEntry : RoadmapEntry
 statedRationaleEntry = roadmapEntry statedRationale paid
   "DASHI.Policy.ABC730UnintendedConsequencesEvidenceObligationExact"
@@ -94,7 +102,17 @@ australianTargetedEntry = roadmapEntry australianTargetedAlternative paid
 targetedComplianceEntry : RoadmapEntry
 targetedComplianceEntry = roadmapEntry targetedComplianceBurden paid
   "DASHI.Policy.ABC730AustralianImplementationSnowballExact"
-  "quantify burden only if a comparative cost consumer requires it"
+  "quantify burden only for the comparative cost consumer"
+
+originBaselineEntry : RoadmapEntry
+originBaselineEntry = roadmapEntry australianOriginComplianceBaseline paid
+  "DASHI.Policy.ABC730AustralianOriginBaselineExact"
+  "country-level import declarations/origin advice/food origin labelling are established baseline capabilities"
+
+settlementClassifierEntry : RoadmapEntry
+settlementClassifierEntry = roadmapEntry settlementSubcountryClassifier open
+  "DASHI.Policy.ABC730AustralianOriginBaselineExact"
+  "pay legal test, production-location evidence, declaration field/process, exemptions, importer burden, customs systems burden and enforcement error for settlement-place origin"
 
 palestinianExposureEntry : RoadmapEntry
 palestinianExposureEntry = roadmapEntry palestinianSettlementEmploymentExposure paid
@@ -104,7 +122,7 @@ palestinianExposureEntry = roadmapEntry palestinianSettlementEmploymentExposure 
 businessUniverseEntry : RoadmapEntry
 businessUniverseEntry = roadmapEntry settlementBusinessCandidateUniverse partial
   "DASHI.Policy.ABC730FirmDestinationExposureSnowballExact"
-  "current firm/site/product/destination weld for candidates; UN database is not an export register"
+  "current firm/site/product/destination weld; OHCHR business database is not an export register"
 
 misclassificationEntry : RoadmapEntry
 misclassificationEntry = roadmapEntry originMisclassificationRisk partial
@@ -119,12 +137,12 @@ tradeMagnitudeEntry = roadmapEntry settlementTradeMagnitude blockedByMeasurement
 australianImplementationCostEntry : RoadmapEntry
 australianImplementationCostEntry = roadmapEntry australianBlanketImplementationCost open
   "DASHI.Policy.ABC730AustralianImplementationSnowballExact"
-  "DFAT/ABF/Treasury/Attorney-General advice or released impact assessment specifying incremental costs"
+  "DFAT/ABF/Treasury/Attorney-General advice or released impact assessment specifying incremental settlement-specific costs"
 
 australianBusinessEntry : RoadmapEntry
 australianBusinessEntry = roadmapEntry australianBusinessMateriality open
   "DASHI.Policy.ABC730AustralianImplementationSnowballExact"
-  "importer/product exposure, due-diligence cost, customs classification burden and materiality"
+  "importer/product exposure, incremental due-diligence cost, customs classification burden and materiality"
 
 workerDestinationEntry : RoadmapEntry
 workerDestinationEntry = roadmapEntry palestinianDestinationWorkerLinkage open
@@ -139,12 +157,12 @@ palestinianNetEntry = roadmapEntry palestinianNetIncidence open
 israeliNetEntry : RoadmapEntry
 israeliNetEntry = roadmapEntry israeliNetIncidence open
   "DASHI.Policy.ABC730UnintendedConsequencesEvidenceObligationExact"
-  "identify which Israelis are claimed to be harmed, by what mechanism, and whether settlers/green-line producers/consumers are being conflated"
+  "identify which Israelis are claimed to be harmed, mechanism, sign, and whether settlers/green-line producers/consumers are conflated"
 
 counterfactualEntry : RoadmapEntry
 counterfactualEntry = roadmapEntry targetedVsBlanketCounterfactual open
   "DASHI.Policy.ABC730AustralianImplementationSnowballExact"
-  "compare coverage, administrative cost, evasion risk, substitution and expected settlement-support reduction"
+  "compare incremental compliance cost, coverage, evasion, substitution and expected settlement-support reduction"
 
 gaslightingEntry : RoadmapEntry
 gaslightingEntry = roadmapEntry gaslightingEvaluativeAptness downstream
@@ -155,8 +173,11 @@ record C029RoadmapSummary : Set where
   constructor c029RoadmapSummary
   field
     transcriptAndAttributionComplete : Bool
+    ibrahimAttributionSurfaceComplete : Bool
     policyObjectIdentityComplete : Bool
     mechanismCandidateLayerComplete : Bool
+    australianOriginBaselineComplete : Bool
+    settlementSpecificOriginDesignComplete : Bool
     consequenceMagnitudeComplete : Bool
     australianImplementationEvidenceComplete : Bool
     distributionalIncidenceComplete : Bool
@@ -167,16 +188,9 @@ record C029RoadmapSummary : Set where
 
 canonicalC029RoadmapSummary : C029RoadmapSummary
 canonicalC029RoadmapSummary = c029RoadmapSummary
-  true
-  true
-  true
-  false
-  false
-  false
-  false
-  false
-  "firm/destination/worker linkage plus Australia-specific incremental implementation and business-incidence evidence"
-  "pay Australian DFAT/ABF/Treasury implementation analysis and current firm->site->product->destination->worker exposure before attempting net consequence or gaslighting aptness"
+  true true true true true false false false false false false
+  "settlement-specific origin design/cost plus firm-destination-worker linkage"
+  "pay Australian settlement-place origin implementation evidence and current firm->site->product->destination->worker exposure before net consequence or evaluative aptness"
 
 ------------------------------------------------------------------------
 -- Anchors ensure this dashboard composes rather than forks the owners.
@@ -184,6 +198,9 @@ canonicalC029RoadmapSummary = c029RoadmapSummary
 
 attributionAnchor : Attribution.SnowballAttributionBoundary
 attributionAnchor = Attribution.canonicalSnowballAttributionBoundary
+
+atlasAnchor : Atlas.AtlasBoundary
+atlasAnchor = Atlas.canonicalAtlasBoundary
 
 obligationAnchor : Obligation.PolicyEvaluationRoadmap
 obligationAnchor = Obligation.canonicalPolicyEvaluationRoadmap
@@ -199,6 +216,9 @@ measurementAnchor = Measurement.canonicalSettlementTradeMeasurementState
 
 australiaAnchor : Australia.ComparativeComplianceState
 australiaAnchor = Australia.canonicalComparativeComplianceState
+
+originAnchor : Origin.AustralianOriginCapabilityState
+originAnchor = Origin.canonicalAustralianOriginCapabilityState
 
 firmAnchor : Firm.FirmDestinationWorkerState
 firmAnchor = Firm.canonicalFirmDestinationWorkerState
