@@ -11,6 +11,7 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact where
 -- subgap-selected Euclidean-time correlation and its support separation.
 ------------------------------------------------------------------------
 
+open import Data.Rational using (ℚ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact as Ursell
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
@@ -19,7 +20,7 @@ import DASHI.Physics.YangMills.BalabanUrsellToSubgapClusteringUpperBidiExact as 
 
 record CanonicalBUrsellProducer
     {UrsellObservable Observable Energy Bound : Set}
-    (ursell : Ursell.InfiniteUrsellLimit UrsellObservable Data.Rational.ℚ)
+    (ursell : Ursell.InfiniteUrsellLimit UrsellObservable ℚ)
     (spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound)
     : Set₁ where
   field
@@ -30,7 +31,7 @@ open CanonicalBUrsellProducer public
 
 ursellDonorBuildsCanonicalBPayment :
   ∀ {UrsellObservable Observable Energy Bound}
-    {ursell : Ursell.InfiniteUrsellLimit UrsellObservable Data.Rational.ℚ}
+    {ursell : Ursell.InfiniteUrsellLimit UrsellObservable ℚ}
     {spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound} →
   CanonicalBUrsellProducer ursell spectrum →
   R275.CanonicalBPayment275 spectrum
@@ -42,7 +43,7 @@ ursellDonorBuildsCanonicalBPayment producer = record
 
 ursellDonorBuildsPositiveTransferGapCore :
   ∀ {UrsellObservable Observable Energy Bound}
-    {ursell : Ursell.InfiniteUrsellLimit UrsellObservable Data.Rational.ℚ}
+    {ursell : Ursell.InfiniteUrsellLimit UrsellObservable ℚ}
     {spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Bound} →
   CanonicalBUrsellProducer ursell spectrum →
   Gap.PositiveTransferGapCore spectrum
