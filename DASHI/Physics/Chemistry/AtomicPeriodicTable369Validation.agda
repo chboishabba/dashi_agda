@@ -7,13 +7,14 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProvenanceSnowballExact as 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChronologyStatusExact as C
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AttributionLedgerExact as A
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoRegressionExact as X
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoAttributionExact as XA
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 
 ------------------------------------------------------------------------
 -- Focused validation root.  Importing this module forces the generative
 -- formalism, provenance/snowball companion, chronology/status ledger,
--- DOI/QID/primary/Dewey attribution ledger, and cross-repository regression
+-- DOI/QID/primary/Dewey attribution ledgers, and cross-repository regression
 -- ledger through the Agda checker when this file is actually checked.
 --
 -- The existence of this file is not itself a typecheck receipt.  See the
@@ -110,3 +111,13 @@ crossRepoNonCollapseRegression :
     X.canonicalCrossRepoRegressionDiscipline
   ≡ false
 crossRepoNonCollapseRegression = refl , (refl , refl)
+
+crossRepoAttributionRegression :
+  XA.CrossRepoAttributionWeld.qidPromotesGenerativeDerivation
+    XA.canonicalCrossRepoAttributionWeld
+  ≡ false
+  ×
+  XA.CrossRepoAttributionWeld.tableWideBreadthPromotesPhysicalRecovery
+    XA.canonicalCrossRepoAttributionWeld
+  ≡ false
+crossRepoAttributionRegression = refl , refl
