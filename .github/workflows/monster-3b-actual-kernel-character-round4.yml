@@ -21,9 +21,15 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMainQuotientSameObjectSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalC3QuotientOrientationSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BModernCharacterVerificationKernel20SnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BFactorCQuotientWordSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BT1ComplementClass18LambdaZeroSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact.agda'
+      - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
+      - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
@@ -62,9 +68,15 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMainQuotientSameObjectSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalC3QuotientOrientationSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BModernCharacterVerificationKernel20SnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BFactorCQuotientWordSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BT1ComplementClass18LambdaZeroSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact.agda'
+      - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
+      - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
@@ -100,6 +112,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+
+      - name: Run modern restriction degree-uniqueness checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh
 
       - name: Install Nix
         uses: cachix/install-nix-action@v31
@@ -150,6 +168,7 @@ jobs:
         with:
           name: monster-3b-actual-kernel-character-round4
           path: |
+            build/monster_3b_modern_restriction_degree_uniqueness.json
             build/monster_3b_normalizer_restriction.json
             build/monster_3b_actual_kernel_structure.json
             build/monster_3b_actual_kernel_character_certificate.json
