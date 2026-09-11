@@ -28,6 +28,7 @@ open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
@@ -51,7 +52,7 @@ record HalfRateClusteringSpectrumAuthority
     halfRateClusteringTransfer :
       (∀ left right time →
         R304.continuumPairCorrelation pairwise left right time
-        ≤ Geo.quarter * Power.rationalPower Geo.half time) →
+        ≤ Shell.quarter * Power.rationalPower Geo.half time) →
       SpectrumSeparatedBy
         (R311.reconstructedHamiltonian transfer)
         (R302.candidateEnergy (R311.coordinate transfer))
