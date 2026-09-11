@@ -25,6 +25,7 @@ module DASHI.Moonshine.GradedRepresentationLinearRealisationExact where
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
@@ -102,10 +103,10 @@ evaluatedEnd :
   ∀ {G K : Set}
     {group : GR.Group G}
     {representation : GR.FiniteDimensionalRepresentation G K group} →
-  LinearEndomorphismRealisation group representation →
+  (realisation : LinearEndomorphismRealisation group representation) →
   GR.End representation →
-  Linear.Vector (linearCarrier _) →
-  Linear.Vector (linearCarrier _)
+  Linear.Vector (linearCarrier realisation) →
+  Linear.Vector (linearCarrier realisation)
 evaluatedEnd realisation end v =
   fromRepresentationCarrier realisation
     (Eval.applyEnd (endomorphismEvaluation realisation) end
