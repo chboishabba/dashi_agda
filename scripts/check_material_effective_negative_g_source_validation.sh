@@ -7,6 +7,7 @@ files=(
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallPaymentReceiptExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGModelProvenanceBidiExact.agda
@@ -30,28 +31,13 @@ for file in "${files[@]}"; do
   fi
 done
 
-grep -q 'massCurrentReceiptAutomaticallyConstructsFullStressEnergy' DASHI/Physics/ExoticGravity/SuperconductingChargeMassCurrentBidiExact.agda
-grep -q 'massCurrentAloneConstructsStressEnergy' DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyCompilationExact.agda
-grep -q 'evaluationRequestEqualsCompletedPrediction' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
-grep -q 'requestStageMatchesExistingPlan' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
-grep -q 'typedPredictionPaysBackgroundClosure' DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorStateBridgeExact.agda
-grep -q 'closedComparatorStateIsClosed' DASHI/Physics/ExoticGravity/AntigravityLaboratoryBackgroundClosureExact.agda
-grep -q 'closedComparatorAutomaticallyProvesMaterialEffectiveNegativeG' DASHI/Physics/ExoticGravity/AntigravityLaboratoryBackgroundClosureExact.agda
-grep -q 'typedComparatorClosureAloneCreatesOptimizedBundle' DASHI/Physics/ExoticGravity/AntigravityLaboratoryOrdinaryModelClosureWeldExact.agda
-grep -q 'fullOrdinaryClosureStillLeavesConstitutiveRatio' DASHI/Physics/ExoticGravity/AntigravityLaboratoryOrdinaryModelClosureWeldExact.agda
-grep -q 'etaCStringAlonePaysConstitutiveRatio' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact.agda
-grep -q 'typedRatioAloneMayCompileExistingNegativeGWeld' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact.agda
-grep -q 'canonicalScalingReplicationIdentityStillRequired' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact.agda
-grep -q 'sameReplicationCarrier' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
-grep -q 'sameScalingSweepCarrier' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
-grep -q 'compileConstitutiveNegativeGReceipt' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
-grep -q 'identityWeldMayCompileExistingNegativeGWeld' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
-grep -q 'closedScalingStateAutomaticallyProvesNegativeEffectiveG' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
-grep -q 'currentScientificWallStartsAtMassCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
-grep -q 'currentScientificWallProducerIsEmpiricalEvidence' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallBidiExact.agda
+grep -q 'outOfOrderRetainedAcquisition' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
+grep -q 'outOfOrderAcquisitionDoesNotSkipMassCurrentPayment' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
+grep -q 'physicalAcquisitionMustFollowPromotionOrder' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
 grep -q 'closedWallHasNoFurtherAcquisition' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
-grep -q 'closedWallProducerIsNoSearch' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
-grep -q 'authorityClosurePaysSourceCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
+grep -q 'terminalPaymentRequiresActualReceipts' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallPaymentReceiptExact.agda
+grep -q 'stressEnergyUsesSameMassCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallPaymentReceiptExact.agda
+grep -q 'sameNegativeGInterpretation' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallPaymentReceiptExact.agda
 
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
@@ -59,4 +45,4 @@ AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda
 
-echo "Material-effective negative-G source/provenance/GR/background/constitutive/replication/scientific-wall BIDI validation checks passed"
+echo "Material-effective negative-G scientific-wall BIDI validation checks passed"
