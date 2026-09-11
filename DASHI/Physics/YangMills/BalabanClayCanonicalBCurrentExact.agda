@@ -92,6 +92,12 @@ import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact
 -- translation action; only physical time/support meaning remains to be paid.
 import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact
 
+-- R333 composes the repaired H2a/H2b/H2c/H3 interfaces all the way through
+-- R304/R316.  It creates no new theorem debt; H1 remains upstream in the exact
+-- finite T5 presentation, while the four downstream application coordinates are
+-- now one executable compiler route.
+import DASHI.Physics.YangMills.BalabanCanonicalBOSIndexedCompletionRound333Exact
+
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
 -- historical donor classification only; it does not promote Step-V to a
