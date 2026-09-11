@@ -6,13 +6,14 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as G
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProvenanceSnowballExact as P
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChronologyStatusExact as C
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AttributionLedgerExact as A
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoRegressionExact as X
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 
 ------------------------------------------------------------------------
 -- Focused validation root.  Importing this module forces the generative
--- formalism, provenance/snowball companion, chronology/status ledger, and
--- DOI/QID/primary/Dewey attribution ledger through the Agda checker when this
--- file is actually checked.
+-- formalism, provenance/snowball companion, chronology/status ledger,
+-- DOI/QID/primary/Dewey attribution ledger, and cross-repository regression
+-- ledger through the Agda checker when this file is actually checked.
 --
 -- The existence of this file is not itself a typecheck receipt.  See the
 -- chronology/status owner for the distinction between authored source and a
@@ -82,3 +83,29 @@ attributionDisciplineRegression :
     A.canonicalAttributionDiscipline
   ≡ false
 attributionDisciplineRegression = refl , (refl , refl)
+
+finiteHistoricalTargetRegression :
+  X.finiteTargetCount ≡ 10
+  ×
+  X.Finite.occupationElectronCount
+    (X.Finite.finiteAufbauOccupation X.Finite.hydrogen) ≡ 1
+  ×
+  X.Finite.occupationElectronCount
+    (X.Finite.finiteAufbauOccupation X.Finite.neon) ≡ 10
+finiteHistoricalTargetRegression =
+  X.finiteTargetCountIs10 ,
+  (X.hydrogenTargetElectronCountIs1 , X.neonTargetElectronCountIs10)
+
+crossRepoNonCollapseRegression :
+  X.CrossRepoRegressionDiscipline.full118VisualizationEqualsGenerativeDerivation
+    X.canonicalCrossRepoRegressionDiscipline
+  ≡ false
+  ×
+  X.CrossRepoRegressionDiscipline.firstTenFormalTargetsEqualFullPeriodicTable
+    X.canonicalCrossRepoRegressionDiscipline
+  ≡ false
+  ×
+  X.CrossRepoRegressionDiscipline.genericConstructorEqualsEmpiricalRecovery
+    X.canonicalCrossRepoRegressionDiscipline
+  ≡ false
+crossRepoNonCollapseRegression = refl , (refl , refl)
