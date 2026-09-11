@@ -22,6 +22,7 @@ import DASHI.ComputerScience.RSA260BidiCADOGridPermutationCrossValidationExact a
 import DASHI.ComputerScience.RSA260BidiFineIncidencePredictorExact as FineIncidence
 import DASHI.ComputerScience.RSA260BidiFineIncidenceInterpolationExact as FineInterpolation
 import DASHI.ComputerScience.RSA260BidiTwoHopCommonNeighbourFibreExact as TwoHop
+import DASHI.ComputerScience.RSA260BidiFineIncidenceDefectCoverageExact as DefectCoverage
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -136,6 +137,9 @@ fineInterpolationBoundary = FineInterpolation.canonicalFineIncidenceFragilityBou
 twoHopBoundary : TwoHop.TwoHopInterpretationBoundary
 twoHopBoundary = TwoHop.canonicalTwoHopInterpretationBoundary
 
+defectCoverageBoundary : DefectCoverage.DefectCoverageInterpretationBoundary
+defectCoverageBoundary = DefectCoverage.canonicalDefectCoverageInterpretationBoundary
+
 ------------------------------------------------------------------------
 -- Ordered residual routers.
 ------------------------------------------------------------------------
@@ -155,13 +159,14 @@ firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectFineIncidenceBearingLACarrierArtifact
 
 data CandidateExperimentResidual : Set where
-  fitRecurrenceComplexityFromStructuralFibrePortfolio : CandidateExperimentResidual
+  replicateDefectCoverageCurveAcrossPerturbationSeeds : CandidateExperimentResidual
+  fitCoverageAwareRecurrenceComplexityFromStructuralFibrePortfolio : CandidateExperimentResidual
   exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = fitRecurrenceComplexityFromStructuralFibrePortfolio
+firstUnpaidCandidateExperimentResidual = replicateDefectCoverageCurveAcrossPerturbationSeeds
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -218,6 +223,9 @@ record RSA260ProductionSubstitutionBoundary : Set where
     oneSwapPerRowFragilityEnsemblePaid : Bool
     oneSwapProjectionCrossPaid : Bool
     twoHopCommonNeighbourFibresPaid : Bool
+    defectCoverageCurvePaid : Bool
+    defectCoverageSeedReplicationPaid : Bool
+    broadCoverageRaisesRecurrenceComplexity : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
     fineIncidenceMeasuredOnProductionMatrix : Bool
     sameObjectFineIncidenceArtifactPaid : Bool
@@ -286,6 +294,9 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; oneSwapPerRowFragilityEnsemblePaid = true
   ; oneSwapProjectionCrossPaid = true
   ; twoHopCommonNeighbourFibresPaid = true
+  ; defectCoverageCurvePaid = true
+  ; defectCoverageSeedReplicationPaid = false
+  ; broadCoverageRaisesRecurrenceComplexity = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
   ; fineIncidenceMeasuredOnProductionMatrix = false
   ; sameObjectFineIncidenceArtifactPaid = false
@@ -308,6 +319,7 @@ data SparseKernelImpliesFactoringSpeedup : Set where
 data PythonTimingImpliesProductionPerformance : Set where
 data FormulaReconstructionImpliesExactRevision : Set where
 data SyntheticFineIncidencePredictorImpliesProductionMeasurement : Set where
+data DefectCoverageCurveImpliesUniversalThreshold : Set where
 data SameCoarseContractImpliesSameRecurrenceComplexity : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 
@@ -334,6 +346,9 @@ formulaReconstructionDoesNotCreateExactRevision ()
 
 syntheticFineIncidenceDoesNotCreateProductionMeasurement : SyntheticFineIncidencePredictorImpliesProductionMeasurement → ⊥
 syntheticFineIncidenceDoesNotCreateProductionMeasurement ()
+
+defectCoverageDoesNotCreateUniversalThreshold : DefectCoverageCurveImpliesUniversalThreshold → ⊥
+defectCoverageDoesNotCreateUniversalThreshold ()
 
 sameCoarseContractDoesNotCreateSameRecurrence : SameCoarseContractImpliesSameRecurrenceComplexity → ⊥
 sameCoarseContractDoesNotCreateSameRecurrence ()
