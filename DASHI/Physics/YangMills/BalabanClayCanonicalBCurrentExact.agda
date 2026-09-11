@@ -30,7 +30,7 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound289Exact
 import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRound290Exact
 import DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound291Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound292Exact
-import DASHI.Physics.YangMills.BalabanCMP116StateFamilyTwoJNormalizationRound293Exact
+import DASHI.Physics.YangMills/BalabanCMP116StateFamilyTwoJNormalizationRound293Exact
 import DASHI.Physics.YangMills.BalabanSubgapGeometricSeparationRound294Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound294Exact
 import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact
@@ -104,6 +104,13 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJDomainApplicationRound322Ex
 -- same-object/application debts and H2c is topology-authority debt.  This avoids
 -- counting five required coordinates as five fresh YM analytic theorems.
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound323Exact
+
+-- R324 descends H1 to the actual selected-J source min-cut.  Common-radius
+-- existence, finite Cauchy differentiation, log-source/covariance calculus and
+-- support-distance geometry are compiler/source consequences.  The surviving
+-- source-facing coordinates are finite-demand/coordinate extraction, literal
+-- observable->CMP116 J meaning, and same-state connected two-J localization.
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJSourceMinCutRound324Exact
 
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
