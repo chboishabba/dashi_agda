@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedJDomainApplicationRound322Ex
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -39,7 +40,7 @@ record CMP116SelectedJDomainApplication
     : Set₁ where
   field
     AdmissibleSelectedJPair :
-      (cutoff : Agda.Builtin.Nat.Nat) → TestObservable → TestObservable → Set
+      Nat → TestObservable → TestObservable → Set
 
     selectedJPairAdmissible :
       ∀ cutoff left right → AdmissibleSelectedJPair cutoff left right
