@@ -11,6 +11,8 @@ open import Data.List.Base using (_∷_; [])
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Interop.SensibLawOntologyTopology as WrongType
+import DASHI.Foundations.TernaryGolay.CodeBoundary as GolayBoundary
+import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Basis
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact as OldAction
 import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as CharacterWeld
@@ -53,6 +55,14 @@ import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowball
 -- Monster character calculation.  The canonical mandatory object is an actual
 -- linear multiplicity representation S_zeta; only a separate basis-preserving
 -- receipt may specialize it to a Fin90 permutation action.
+--
+-- Repo-native cross-pollination:
+--
+--   * TernaryGolay.CodeBoundary already owns the same category error:
+--       six position labels are not a six-dimensional vector space;
+--   * HilbertLorentzForcing already owns a generic HilbertLift + LinearAction
+--       carrier.  Reuse that action surface here instead of inventing another
+--       vector/action ontology.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -88,7 +98,7 @@ barracloughWilsonAttribution = Snowball.canonicalSourceRoleSnowballReceipt barra
 serreAttribution = Snowball.canonicalSourceRoleSnowballReceipt serre
 
 ------------------------------------------------------------------------
--- 2. Two distinct carriers.
+-- 2. Two distinct carriers, reusing repo-native linear action machinery.
 ------------------------------------------------------------------------
 
 MultiplicityBasisIndex : Set
@@ -99,20 +109,11 @@ basisIndexCount = 90
 
 record LinearMultiplicityRepresentation : Set₁ where
   field
-    Scalar : Set
-    Vector : Set
-    Inertia : Set
+    linearCarrier : Linear.HilbertLift
+    linearAction : Linear.LinearAction linearCarrier
 
-    zeroVector : Vector
-    addVector : Vector → Vector → Vector
-    scaleVector : Scalar → Vector → Vector
-    inertiaAct : Inertia → Vector → Vector
-
-    -- These are intentionally proof-bearing obligations rather than assumed
-    -- from the existence of a 90-element basis index.
-    actionPreservesZero : Set
-    actionPreservesAddition : Set
-    actionPreservesScaling : Set
+    -- Monster-specific obligation.  The generic Hilbert/action carrier does
+    -- not manufacture a dimension merely from Fin90 basis labels.
     vectorDimensionIsNinety : Set
 
 open LinearMultiplicityRepresentation public
@@ -120,19 +121,29 @@ open LinearMultiplicityRepresentation public
 record PermutationBasisSpecialisation
     (linear : LinearMultiplicityRepresentation) : Set₁ where
   field
-    basisVector : MultiplicityBasisIndex → Vector linear
+    basisVector : MultiplicityBasisIndex → Linear.Vector (linearCarrier linear)
     basisIsComplete : Set
     basisIsIndependent : Set
 
-    basisPermutation : Inertia linear → MultiplicityBasisIndex → MultiplicityBasisIndex
+    basisPermutation :
+      Linear.Group (linearAction linear) →
+      MultiplicityBasisIndex →
+      MultiplicityBasisIndex
 
     actionPreservesChosenBasis :
-      (g : Inertia linear) →
+      (g : Linear.Group (linearAction linear)) →
       (i : MultiplicityBasisIndex) →
-      inertiaAct linear g (basisVector i)
+      Linear.act (linearAction linear) g (basisVector i)
       ≡ basisVector (basisPermutation g i)
 
 open PermutationBasisSpecialisation public
+
+------------------------------------------------------------------------
+-- 2a. Existing internal WrongType precedent.
+------------------------------------------------------------------------
+
+golayBoundaryCrossPollination : GolayBoundary.SixRoleSeparation
+golayBoundaryCrossPollination = GolayBoundary.canonicalSixRoleSeparation
 
 ------------------------------------------------------------------------
 -- 3. Existing model ownership remains valid at basis-index level.
@@ -254,6 +265,7 @@ record MultiplicityWrongTypeFrontier : Set where
     heisenbergBasisPermutationOwned : Bool
     sourcePaidLinearCharacterTwelvePlusSeventyEight : Bool
     phaseResolvedCharacterFamilyPaid : Bool
+    repoNativeLinearActionCarrierReused : Bool
     finNinetyPermutationInertiaActionPaid : Bool
     finNinetyPermutationInertiaActionMandatory : Bool
     actualLinearMultiplicityRepresentationPaid : Bool
@@ -265,11 +277,11 @@ open MultiplicityWrongTypeFrontier public
 
 currentMultiplicityWrongTypeFrontier : MultiplicityWrongTypeFrontier
 currentMultiplicityWrongTypeFrontier = multiplicity-wrongtype-frontier
-  true true true true true
+  true true true true true true
   false false
   false false false
   true
-  "repair the Monster promotion route at the linear-representation level. The mandatory target is an actual 90-dimensional multiplicity representation S_zeta carrying the source-paid character chi_12 + chi_78, together with a same-object linear evaluation/intertwiner W_zeta ≃ H_zeta tensor S_zeta. The generic mathlib isotypic compiler can then split S_zeta into the 12 and 78 invariant blocks. The historical Fin90 basis-index action remains available only as an optional specialisation after a separate proof that the full inertia action preserves/permutates the chosen ninety basis vectors. Do not use 90 basis labels, set-level recognition, Heisenberg translation equivariance, degree occurrence, QID/Dewey/OEIS, or character equality to manufacture that permutation-basis theorem."
+  "construct the actual linear multiplicity representation S_zeta using the repo-native HilbertLift + LinearAction carrier, carrying the source-paid character chi_12 + chi_78 and a same-object linear evaluation/intertwiner W_zeta ≃ H_zeta tensor S_zeta. The generic mathlib isotypic compiler can then split S_zeta into the 12 and 78 invariant blocks. The historical Fin90 basis-index action remains only an optional specialisation after a separate proof that the full inertia action preserves/permutates the chosen ninety basis vectors. Do not use 90 basis labels, set-level recognition, Heisenberg translation equivariance, degree occurrence, QID/Dewey/OEIS, or character equality to manufacture that permutation-basis theorem."
 
 characterFrontier : CharacterWeld.PhaseCharacterWeldFrontier
 characterFrontier = CharacterWeld.currentPhaseCharacterWeldFrontier
@@ -340,6 +352,7 @@ record CanonicalLinearPromotionBoundary : Set where
   constructor canonical-linear-promotion-boundary
   field
     canonicalRouteIsLinear : Bool
+    repoNativeHilbertActionReused : Bool
     finNinetyRouteIsOptionalSpecialisation : Bool
     permutationSpecialisationRequiresBasisPreservation : Bool
     characterEvidencePaysPermutationSpecialisation : Bool
@@ -348,4 +361,4 @@ open CanonicalLinearPromotionBoundary public
 
 canonicalLinearPromotionBoundary : CanonicalLinearPromotionBoundary
 canonicalLinearPromotionBoundary = canonical-linear-promotion-boundary
-  true true true false true
+  true true true true false true
