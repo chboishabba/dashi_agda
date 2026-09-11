@@ -28,7 +28,9 @@ import DASHI.Interop.ITIRSensiBlawStreamlineArchitecture as ITIRSL
 -- * ABC proves claim-local fragment -> residual inheritance -> evidence
 --   contraction without claim-truth promotion;
 -- * GWB proves 41k-sentence CandidateWorldModel scale, replayable Wikimedia
---   graph enrichment, cache-only replay and source-identity contraction;
+--   enrichment, source identity contraction, claim-relative source-role
+--   attachment, and trained en/es/fr/de shared-QID parser compatibility;
+-- * translation equivalence and semantic equivalence remain unpaid;
 -- * live frontier is consumer-specific world residual contraction and
 --   canonical claim/evidence projection, not more boundary heuristics.
 ------------------------------------------------------------------------
@@ -204,16 +206,17 @@ slrGlobalRoadmap =
   slrRoadmapCoordinate "whole-claim span completion" partial slrRuntimeOwner "local fragments do not pay full canonical claim extents" ∷
   slrRoadmapCoordinate "GWB CandidateWorldModel corpus projection" complete slrRuntimeOwner "41,134 claims / 41,124 relations / provenance=10 / normalization_drift=false" ∷
   slrRoadmapCoordinate "reviewed Wikimedia-first world enrichment" complete dashiOwner "10 reviewed seeds -> 51 QID nodes / 850 property edges / 162 parent / 688 surrounding-related / post-follow parity" ∷
-  slrRoadmapCoordinate "replayable cache + deterministic GWB handoff" complete slrRuntimeOwner "cache-only replay: 134 hits / 0 network; tar.xz SHA manifest; no raw/projected corpus text" ∷
+  slrRoadmapCoordinate "replayable cache + deterministic GWB handoff" complete slrRuntimeOwner "cache-only replay: 134 hits / 0 network; prior tar.xz SHA manifest; v2 streaming packager pending refreshed local receipt" ∷
   slrRoadmapCoordinate "GWB source-work identity residual contraction" complete slrRuntimeOwner "paid=2 / unpaid=8 / topic anchors=8 / runtime-resolved work identities=1 / normalization_drift=false" ∷
-  slrRoadmapCoordinate "GWB claim-relative source-role atlas" implementedAwaitingRuntime dashiOwner "fixtures/slr/gwb-claim-relative-source-roles-v1.jsonl / SLRGWBClaimRelativeSourceRoleAtlasExact" ∷
+  slrRoadmapCoordinate "GWB claim-relative source-role attachment" complete dashiOwner "roles=10 / primary claim classes=11 / negative authority constraints=19 / normalization_drift=false" ∷
+  slrRoadmapCoordinate "multilingual shared-QID parser compatibility" complete slrRuntimeOwner "qids=4 / language_surfaces=13 / trained_parser_surfaces=13 / fallback=0 over en/es/fr/de; translation and semantic equivalence remain false" ∷
   slrRoadmapCoordinate "full world-constraint fibre integration" partial dashiOwner "generic fibre exists; domain consumers still attach/contract dimensions independently" ∷
-  slrRoadmapCoordinate "consumer-specific world residual contraction" active sensibLawOwner "use reviewed Q/P/source-role evidence only against declared consumer obligations" ∷
+  slrRoadmapCoordinate "consumer-specific world residual contraction" active sensibLawOwner "use reviewed Q/P/source-role/multilingual identity evidence only against declared consumer obligations" ∷
   slrRoadmapCoordinate "claim/evidence graph projection" active sensibLawOwner "candidate claims/fragments carry graph identities and append-only evidence obligations" ∷
-  slrRoadmapCoordinate "mechanism evidence snowball" active dashiOwner "Wikimedia-first, then broader Snowball only for surviving consumer debt" ∷
+  slrRoadmapCoordinate "mechanism evidence snowball" active dashiOwner "Wikimedia-first, then advisory ontologies/Snowball only for surviving consumer debt" ∷
   slrRoadmapCoordinate "review/promote/abstain routing" complete sensibLawOwner "compatibility / adequacy / residual gates remain separate" ∷
   slrRoadmapCoordinate "ABC C029 policy/evaluative consumer adequacy" active dashiOwner "source attribution paid; implementation/incidence/counterfactual residuals remain" ∷
-  slrRoadmapCoordinate "GWB canonical claim/evidence extraction" next slrRuntimeOwner "begin only after source-role attachment; adjacency/QID graph alone cannot manufacture claims" ∷
+  slrRoadmapCoordinate "GWB canonical claim/evidence extraction" next slrRuntimeOwner "source-role attachment now paid; adjacency/QID/language identity alone still cannot manufacture canonical claims" ∷
   []
 
 ------------------------------------------------------------------------
