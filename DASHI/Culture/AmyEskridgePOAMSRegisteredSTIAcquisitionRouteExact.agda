@@ -47,7 +47,7 @@ poamsRegisteredSTIRoute = registered-sti-acquisition-route
   "Q618696"
   "530 Physics / 629 Engineering traversal only"
   true false true false false
-  "request/search POAMS-specific EDAA/NF-1676B metadata through the NASA STI Information Desk and MSFC STI compliance/distribution route, keyed by M-1531, NTRS 20205010911, title, authors, SAA8-1519855 and funding MSFC-RMB-QUANTUM-SAA8-1519855-1; require attached-object/version and Amy-linked same-object receipts before promotion"
+  "request/search POAMS-specific legacy EDAA/NF-1676B identity and its current STI/STRIVES archival representation through the NASA STI Information Desk and MSFC STI compliance/distribution route, keyed by M-1531, NTRS 20205010911, title, authors, SAA8-1519855 and funding MSFC-RMB-QUANTUM-SAA8-1519855-1; require attached-object/version and Amy-linked same-object receipts before promotion"
 
 record RegisteredSTIBoundary : Set where
   constructor registered-sti-boundary
@@ -61,3 +61,60 @@ open RegisteredSTIBoundary public
 
 canonicalRegisteredSTIBoundary : RegisteredSTIBoundary
 canonicalRegisteredSTIBoundary = registered-sti-boundary false false false true
+
+------------------------------------------------------------------------
+-- Legacy EDAA / current STRIVES archaeology.
+--
+-- NASA's current STI Compliance and Distribution Services states that STRIVES
+-- standardizes STI submission, review and approval across all ten field centers.
+-- NPR 2200.2D separately documents the DAA/EDAA review and NF-1676/NF-1676B as
+-- the release-compliance mechanism, with the DAA Representative tracking,
+-- filing and transferring the DAA and associated STI to the NASA STI Program.
+-- These are system/process manifestations of one release-governance lineage;
+-- they are not assumed to expose the same identifier or bytes.
+------------------------------------------------------------------------
+
+record ReleaseSystemArchaeology : Set where
+  constructor release-system-archaeology
+  field
+    historicalReleaseMechanism : String
+    historicalFormIdentity : String
+    historicalSystemIdentity : String
+    currentSubmissionReviewSystem : String
+    currentServiceOwner : String
+    currentPublicContact : String
+    exactPOAMSLegacyEDAAIdentityPaid : Bool
+    exactPOAMSSTRIVESRecordPaid : Bool
+    legacyAndCurrentRecordSameObjectPaid : Bool
+    policyRequiresReleaseReview : Bool
+    daaRepresentativeTracksAndTransfersAssociatedSTI : Bool
+    currentSystemCanGuideLegacyAcquisition : Bool
+    systemMigrationImpliesRecordSuppression : Bool
+    acquisitionTarget : String
+
+open ReleaseSystemArchaeology public
+
+poamsReleaseSystemArchaeology : ReleaseSystemArchaeology
+poamsReleaseSystemArchaeology = release-system-archaeology
+  "Document Availability Authorization review for NASA STI"
+  "NASA Form NF-1676 / NF-1676B"
+  "Electronic Document Availability Authorization (EDAA)"
+  "Scientific, Technical and Research Information discoVEry System (STRIVES)"
+  "NASA STI Compliance and Distribution Services"
+  "NASA STI Information Desk"
+  false false false true true true false
+  "recover the POAMS legacy EDAA/NF-1676B identity and ask NASA STI/MSFC for the corresponding current STRIVES/STI archival representation, associated STI attachment/version, review-history metadata and transfer/release relationship; do not assume EDAA and STRIVES identifiers are identical"
+
+record ReleaseSystemBoundary : Set where
+  constructor release-system-boundary
+  field
+    edaaIdentifierEqualsStrivesIdentifierWithoutReceipt : Bool
+    currentStrivesSurfaceProvesLegacyEdaaNumber : Bool
+    legacyPolicyRequirementProvesSpecificRecordLocated : Bool
+    systemMigrationProvesDeletionOrSuppression : Bool
+    crossSystemIdentityMayBePaidByPrimaryNASARecord : Bool
+
+open ReleaseSystemBoundary public
+
+canonicalReleaseSystemBoundary : ReleaseSystemBoundary
+canonicalReleaseSystemBoundary = release-system-boundary false false false false true
