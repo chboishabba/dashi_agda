@@ -68,6 +68,44 @@ canonicalRoleSnapshotChronology = role-snapshot-chronology
   true false false false false
 
 ------------------------------------------------------------------------
+-- Repository-metadata archaeology.
+--
+-- The NTRS citation surface for 20250008475 was still maintained after the
+-- event: it currently records Last Modified = 2026-07-16 while the attached
+-- deck continues to contain the 2025 recognition slide naming LeBlanc as SNP
+-- I&C TechMat Team Lead.  A repository-page maintenance timestamp therefore
+-- cannot be treated as evidence that embedded programme-role content was
+-- contemporaneously refreshed.
+------------------------------------------------------------------------
+
+record RepositoryMetadataRoleStateBoundary : Set where
+  constructor repository-metadata-role-state-boundary
+  field
+    ntrsDocumentId : String
+    deathDate : String
+    ntrsAcquisitionDate : String
+    webinarDate : String
+    repositoryLastModifiedDate : String
+    embeddedRoleLabelStillPresent : Bool
+    repositoryModificationAfterDeath : Bool
+    repositoryModificationAfterWebinar : Bool
+    repositoryModificationImpliesEmbeddedRoleRefresh : Bool
+    repositoryModificationDeterminesSuccessor : Bool
+    boundedReading : String
+
+open RepositoryMetadataRoleStateBoundary public
+
+canonicalRepositoryMetadataRoleStateBoundary : RepositoryMetadataRoleStateBoundary
+canonicalRepositoryMetadataRoleStateBoundary = repository-metadata-role-state-boundary
+  "20250008475"
+  "2025-07-22"
+  "2025-08-16"
+  "2025-08-26"
+  "2026-07-16"
+  true true true false false
+  "NTRS repository metadata was modified long after LeBlanc's death and after the webinar, while the attached 2025 deck still displays his TechMat role label. This pays repository-maintenance chronology only; it does not date the slide's internal authorship/freeze state, prove that the role roster was refreshed, or identify a successor."
+
+------------------------------------------------------------------------
 -- Genuine post-loss programme continuity, but not TechMat-role succession.
 ------------------------------------------------------------------------
 
@@ -86,11 +124,11 @@ okojieSeptember2025ContinuityLead = post-loss-program-continuity-lead
 
 record LeBlancApplicationBoundary : Set where
   constructor leblanc-application-boundary
-  field techMatLeadImpliesSoleQualificationOwner : Bool; executiveCommitteeMembershipImpliesUniqueKnowledge : Bool; technologyMaturationRoleSourceBacked : Bool; failureMapOwnershipClosed : Bool; postLossPublicationImpliesPostLossActiveRole : Bool; staleRecognitionSlideImpliesNoSuccessor : Bool; datedPostLossGovernanceArtifactRequiredForSuccession : Bool; postLossProgramContinuityImpliesTechMatSuccession : Bool; alreadyDistinctFSPLeadMayBeCalledTechMatSuccessorWithoutReceipt : Bool; doiPublicationEqualsNTRSWebinarManifestation : Bool
+  field techMatLeadImpliesSoleQualificationOwner : Bool; executiveCommitteeMembershipImpliesUniqueKnowledge : Bool; technologyMaturationRoleSourceBacked : Bool; failureMapOwnershipClosed : Bool; postLossPublicationImpliesPostLossActiveRole : Bool; staleRecognitionSlideImpliesNoSuccessor : Bool; datedPostLossGovernanceArtifactRequiredForSuccession : Bool; postLossProgramContinuityImpliesTechMatSuccession : Bool; alreadyDistinctFSPLeadMayBeCalledTechMatSuccessorWithoutReceipt : Bool; doiPublicationEqualsNTRSWebinarManifestation : Bool; laterRepositoryMetadataUpdateImpliesRoleRefresh : Bool
 open LeBlancApplicationBoundary public
 
 canonicalLeBlancApplicationBoundary = leblanc-application-boundary
-  false false true false false false true false false false
+  false false true false false false true false false false false
 
 data LeBlancApplicationReverseTarget : Set where
   acquireTechMatWorkBreakdown acquireQualificationTestOwnership acquireFailureEnvelopeOwnership acquireCalibrationDriftOwnership acquireRecognitionSlideFreezeDate acquireFirstPostLossICGovernanceArtifact acquireExactPostLossTechMatRoleRoster acquireSuccessorOrHandover acquireRequalificationDelayOrRework : LeBlancApplicationReverseTarget
