@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Wikimedia.IdentifierExact as Id
 import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Ibrahim
+import DASHI.Ontology.DeweyQidCoverageQualityExact as Coverage
 import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 import DASHI.Law.SensibLawWoogarooEvidenceDependencyMatrixExact as Dependency
 import DASHI.Law.SensibLawWoogarooKoalaScienceSnowballExact as Science
@@ -16,16 +17,9 @@ import DASHI.Law.SensibLawWoogarooKoalaScienceSnowballExact as Science
 -- WOOGAROO × IBRAHIM / DEWEY / DOI / QID / LEGAL ATOM CROSS-POLLINATION
 --
 -- This owner does not invent a second knowledge graph.  It applies the
--- canonical Ibrahim-style DASHI coordinate/edge surface to the existing
--- Woogaroo source Snowball and legal-atom consumers.
---
--- Coordinates remain deliberately distinct:
---   Dewey = repository/classification coordinate
---   DOI = publication identity
---   QID = external entity identity
---   source role = provenance/evidentiary role
---   legal atom = consumer-specific proposition required by the legal route
--- None of those coordinates is proof of another.
+-- canonical Ibrahim-style DASHI coordinate/edge surface and the canonical
+-- Dewey/DOI/QID coverage boundary to the existing Woogaroo source Snowball
+-- and legal-atom consumers.
 ------------------------------------------------------------------------
 
 data EvidenceRole : Set where
@@ -101,7 +95,7 @@ ibrahimWoogarooSourceAtlas = Source.mkSourceAtlas
   "Traversal method plus current official/peer-reviewed koala science. DOI/QID/Dewey coordinates preserve identity and navigation only. General or regional science does not become same-object Springview evidence without a separate join."
 
 ------------------------------------------------------------------------
--- Knowledge coordinates.  Broad Dewey parents are reused rather than
+-- Knowledge coordinates. Broad Dewey parents are reused rather than
 -- inventing highly specific decimal classes that are not owned by the repo.
 ------------------------------------------------------------------------
 
@@ -162,51 +156,41 @@ s13EssentialityCoordinate = Ibrahim.dashi-knowledge-coordinate
   "Queensland Nature Conservation Act 1992 s 13 current text"
 
 ------------------------------------------------------------------------
--- Typed Ibrahim-style edges.  'supportedBy' never means same-object payment;
--- 'dependsOn' is reserved for a genuine consumer prerequisite.
+-- Typed Ibrahim-style edges.  supportedBy never means same-object payment;
+-- dependsOn is reserved for a genuine consumer prerequisite.
 ------------------------------------------------------------------------
 
 fragmentationSupportsS102 : Ibrahim.DashiFirstLinkEdge
 fragmentationSupportsS102 = Ibrahim.dashi-first-link-edge
-  fragmentationCoordinate
-  s102StatutoryCoordinate
-  Ibrahim.crossPollinatesWith
+  fragmentationCoordinate s102StatutoryCoordinate Ibrahim.crossPollinatesWith
   Ibrahim.canonicalDashiFirstLinkPolicy
   "Connectivity/fragmentation science supplies mechanism and expert-question structure; the s 102 legal conclusion still requires same-project/current evidence and Ministerial opinion."
   true
 
 uqMovementSupportsS102 : Ibrahim.DashiFirstLinkEdge
 uqMovementSupportsS102 = Ibrahim.dashi-first-link-edge
-  uqUrbanMovementCoordinate
-  s102StatutoryCoordinate
-  Ibrahim.supportedBy
+  uqUrbanMovementCoordinate s102StatutoryCoordinate Ibrahim.supportedBy
   Ibrahim.canonicalDashiFirstLinkPolicy
-  "Current Queensland movement evidence supports the biological plausibility that fragmented urban landscapes alter movement/use; it is not Springview-specific exposure or effect evidence."
+  "Current Queensland movement evidence supports biological plausibility that fragmented urban landscapes alter movement/use; it is not Springview-specific exposure or effect evidence."
   true
 
 genomicsSupportsS13Method : Ibrahim.DashiFirstLinkEdge
 genomicsSupportsS13Method = Ibrahim.dashi-first-link-edge
-  genomicsCoordinate
-  s13EssentialityCoordinate
-  Ibrahim.crossPollinatesWith
+  genomicsCoordinate s13EssentialityCoordinate Ibrahim.crossPollinatesWith
   Ibrahim.canonicalDashiFirstLinkPolicy
   "Population-genomic structure and gene-flow evidence help define what a viable population/connectivity inquiry should measure; the paper does not identify the Springview population."
   true
 
 projectEcologyDependsIntoS102 : Ibrahim.DashiFirstLinkEdge
 projectEcologyDependsIntoS102 = Ibrahim.dashi-first-link-edge
-  projectEcologyCoordinate
-  s102StatutoryCoordinate
-  Ibrahim.dependsOn
+  projectEcologyCoordinate s102StatutoryCoordinate Ibrahim.dependsOn
   Ibrahim.canonicalDashiFirstLinkPolicy
   "The live Woogaroo s 102 case depends on same-project ecological exposure/effect evidence rather than literature mechanism alone."
   true
 
 projectEcologyDependsIntoS13 : Ibrahim.DashiFirstLinkEdge
 projectEcologyDependsIntoS13 = Ibrahim.dashi-first-link-edge
-  projectEcologyCoordinate
-  s13EssentialityCoordinate
-  Ibrahim.dependsOn
+  projectEcologyCoordinate s13EssentialityCoordinate Ibrahim.dependsOn
   Ibrahim.canonicalDashiFirstLinkPolicy
   "The s 13 case requires same-project habitat-function evidence, but that evidence does not itself pay viable-population identity or essentiality."
   true
@@ -226,67 +210,47 @@ record KnowledgeAtomBinding : Set where
     admissibleAsInput : Bool
     sufficientForAtom : Bool
     note : String
-
 open KnowledgeAtomBinding public
 
 projectEcologyToS102Effect : KnowledgeAtomBinding
 projectEcologyToS102Effect = knowledge-atom-binding
-  projectEcologyCoordinate
-  Atom.likelySignificantDetrimentalEffectAtom
-  Atom.nca102InterimOrderConsumer
-  primaryProjectEvidence
-  sameObject
-  true
-  false
+  projectEcologyCoordinate Atom.likelySignificantDetrimentalEffectAtom Atom.nca102InterimOrderConsumer
+  primaryProjectEvidence sameObject true false
   "Strong same-project support for seriousness/exposure, but the Queensland likely-significant-detrimental-effect conclusion remains open."
 
 fragmentationScienceToS102Effect : KnowledgeAtomBinding
 fragmentationScienceToS102Effect = knowledge-atom-binding
-  fragmentationCoordinate
-  Atom.likelySignificantDetrimentalEffectAtom
-  Atom.nca102InterimOrderConsumer
-  peerReviewedMechanism
-  generalMethodOnly
-  true
-  false
+  fragmentationCoordinate Atom.likelySignificantDetrimentalEffectAtom Atom.nca102InterimOrderConsumer
+  peerReviewedMechanism generalMethodOnly true false
   "Mechanism evidence can inform an expert opinion but cannot replace current same-object effect evidence."
 
 uqMovementToAffectedHabitat : KnowledgeAtomBinding
 uqMovementToAffectedHabitat = knowledge-atom-binding
-  uqUrbanMovementCoordinate
-  Atom.affectedWildlifeHabitatAtom
-  Atom.nca102InterimOrderConsumer
-  peerReviewedMechanism
-  sameRegionNotSameObject
-  true
-  false
+  uqUrbanMovementCoordinate Atom.affectedWildlifeHabitatAtom Atom.nca102InterimOrderConsumer
+  peerReviewedMechanism sameRegionNotSameObject true false
   "Queensland urban movement evidence is regionally relevant context, not proof that the exact Springview habitat is currently used in the same way."
 
 genomicsToS13Essentiality : KnowledgeAtomBinding
 genomicsToS13Essentiality = knowledge-atom-binding
-  genomicsCoordinate
-  Atom.habitatPopulationEssentialityAtom
-  Atom.nca13EssentialityConsumer
-  regionalComparatorScience
-  sameRegionNotSameObject
-  true
-  false
+  genomicsCoordinate Atom.habitatPopulationEssentialityAtom Atom.nca13EssentialityConsumer
+  regionalComparatorScience sameRegionNotSameObject true false
   "Genomics informs population/connectivity questions but does not identify the local viable population or pay statutory essentiality."
 
 projectEcologyToS13Essentiality : KnowledgeAtomBinding
 projectEcologyToS13Essentiality = knowledge-atom-binding
-  projectEcologyCoordinate
-  Atom.habitatPopulationEssentialityAtom
-  Atom.nca13EssentialityConsumer
-  primaryProjectEvidence
-  sameObject
-  true
-  false
+  projectEcologyCoordinate Atom.habitatPopulationEssentialityAtom Atom.nca13EssentialityConsumer
+  primaryProjectEvidence sameObject true false
   "Same-object habitat function is paid strongly; viable-population identity and the without-site essentiality counterfactual remain open."
 
 ------------------------------------------------------------------------
 -- Coverage / Snowball frontier.
 ------------------------------------------------------------------------
+
+coverageQualityBoundary : Coverage.CoverageQualityBoundary
+coverageQualityBoundary = Coverage.canonicalCoverageQualityBoundary
+
+traversalBoundary : Ibrahim.DashiKnowledgeTraversalBoundary
+traversalBoundary = Ibrahim.canonicalDashiKnowledgeTraversalBoundary
 
 record WoogarooIbrahimCoverage : Set where
   constructor woogaroo-ibrahim-coverage
@@ -322,22 +286,16 @@ data SupportedByEqualsDependsOn : Set where
 
 doiDoesNotCreateScientificTruth : DoiEqualsScientificTruth → ⊥
 doiDoesNotCreateScientificTruth ()
-
 qidDoesNotCreateLegalAtom : QidEqualsLegalAtom → ⊥
 qidDoesNotCreateLegalAtom ()
-
 deweyDoesNotCreateSemanticDependence : DeweyClassEqualsSemanticDependence → ⊥
 deweyDoesNotCreateSemanticDependence ()
-
 regionalPaperDoesNotBecomeSameObjectEvidence : RegionalPaperEqualsSameObjectEvidence → ⊥
 regionalPaperDoesNotBecomeSameObjectEvidence ()
-
 primarySourceDoesNotCreateLegalConclusion : PrimarySourceEqualsLegalConclusion → ⊥
 primarySourceDoesNotCreateLegalConclusion ()
-
 citationMultiplicityDoesNotCreateIndependentCarriers : ManyCitationsEqualIndependentCarriers → ⊥
 citationMultiplicityDoesNotCreateIndependentCarriers ()
-
 supportDoesNotBecomeDependency : SupportedByEqualsDependsOn → ⊥
 supportDoesNotBecomeDependency ()
 
