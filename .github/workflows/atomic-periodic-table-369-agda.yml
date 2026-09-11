@@ -8,6 +8,8 @@ on:
       - 'DASHI/Physics/Foundations/AtomicValenceFermionBridgeExact.agda'
       - 'DASHI/Promotion/ChemistryFiniteRuleTargets.agda'
       - 'scripts/atomic_radial_identity_repair.py'
+      - 'scripts/atomic_hydrogen_nist_comparison.py'
+      - 'scripts/atomic_hydrogen_reduced_mass_nist.py'
       - 'Artifacts/atomic-periodic-table-369/**'
       - 'Docs/papers/drafts/DASHIAtomicPeriodicTable369*.tex'
       - '.github/workflows/atomic-periodic-table-369-agda.yml'
@@ -39,6 +41,10 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ArchiveHartreeRadialIdentityDefectExact.agda
       - name: Typecheck executed radial-identity repair owner
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369RadialIdentityRepairExecutionExact.agda
+      - name: Typecheck hydrogen reference and reduced-mass owners
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369HydrogenNISTComparisonExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369HydrogenReducedMassExact.agda
       - name: Typecheck physical validation root
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369PhysicalValidation.agda
 
@@ -76,4 +82,33 @@ jobs:
                   for s in rerun['states']] == \
                  [(s['n'], s['l'], s['radial_state_index'], s['observed_nodes'])
                   for s in committed['states']]
+          PY
+      - name: Re-run NIST hydrogen diagnostic and reduced-mass correction
+        run: |
+          python3 scripts/atomic_hydrogen_nist_comparison.py \
+            --receipt /tmp/hydrogen-nist-comparison-receipt.json
+          python3 scripts/atomic_hydrogen_reduced_mass_nist.py \
+            --receipt /tmp/hydrogen-reduced-mass-nist-receipt.json
+          python3 - <<'PY'
+          import hashlib, json, pathlib
+
+          pairs = [
+              ('scripts/atomic_hydrogen_nist_comparison.py',
+               'Artifacts/atomic-periodic-table-369/hydrogen-nist-comparison-receipt.json',
+               '/tmp/hydrogen-nist-comparison-receipt.json'),
+              ('scripts/atomic_hydrogen_reduced_mass_nist.py',
+               'Artifacts/atomic-periodic-table-369/hydrogen-reduced-mass-nist-receipt.json',
+               '/tmp/hydrogen-reduced-mass-nist-receipt.json'),
+          ]
+          for script, committed_path, rerun_path in pairs:
+              script_hash = hashlib.sha256(pathlib.Path(script).read_bytes()).hexdigest()
+              committed = json.loads(pathlib.Path(committed_path).read_text())
+              rerun = json.loads(pathlib.Path(rerun_path).read_text())
+              assert committed['producer_sha256'] == script_hash
+              assert rerun['producer_sha256'] == script_hash
+              assert rerun['passed'] is True
+
+          rm = json.loads(pathlib.Path('/tmp/hydrogen-reduced-mass-nist-receipt.json').read_text())
+          assert rm['residual_magnitude_improves_over_infinite_mass'] is True
+          assert abs(rm['reduced_mass_minus_nist_ev']) < abs(rm['infinite_mass_minus_nist_ev'])
           PY
