@@ -126,6 +126,34 @@ xieRingNeuronGaba = Attribution.mkDOISource
 maleCnsPrimary : JoinedSource.SnowballSourceReceipt
 maleCnsPrimary = JoinedSource.maleCnsConnectome
 
+record PublicationQidState : Set where
+  constructor publication-qid-state
+  field
+    sourceLabel : String
+    qidState : Identity.ExternalIdentityDemand
+open PublicationQidState public
+
+unresolvedPublicationQid : String → PublicationQidState
+unresolvedPublicationQid label = publication-qid-state label
+  (Identity.mkOptionalIdentityDemand
+    "Drosophila signed-fibre anatomy snowball"
+    "exact publication Wikidata identity"
+    label Identity.wikidataQid
+    (Identity.unresolved
+      "exact DOI/title search on 2026-09-11 did not yield a trustworthy same-publication QID; do not substitute author, journal, species or topic items"))
+
+ecksteinPublicationQid : PublicationQidState
+ecksteinPublicationQid = unresolvedPublicationQid "Eckstein et al. 2024 transmitter-classification article"
+
+barnstedtPublicationQid : PublicationQidState
+barnstedtPublicationQid = unresolvedPublicationQid "Barnstedt et al. 2016 Kenyon-output article"
+
+yasuyamaPublicationQid : PublicationQidState
+yasuyamaPublicationQid = unresolvedPublicationQid "Yasuyama et al. 2003 antennal-lobe relay article"
+
+xiePublicationQid : PublicationQidState
+xiePublicationQid = unresolvedPublicationQid "Xie et al. 2017 ellipsoid-body article"
+
 ------------------------------------------------------------------------
 -- Local benchmark sign convention: source code, not a universal physiology law.
 ------------------------------------------------------------------------
