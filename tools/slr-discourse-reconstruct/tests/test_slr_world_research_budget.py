@@ -48,6 +48,22 @@ class WorldResearchBudgetTests(unittest.TestCase):
         self.assertEqual(rows[0]["seed_state"], "budgeted-follow-related-qid")
         self.assertFalse(rows[0]["semantic_promotion"])
 
+    def test_missing_surface_attempt_history_prevents_infinite_retry(self) -> None:
+        obligations = [
+            {"obligation_kind": "missing-language-surface", "qid": "Q1", "language": "simple", "candidate_only": True}
+        ]
+        first = budget.plan_frontier(obligations, max_new_qids=0, max_missing_surfaces=1)
+        history = budget.updated_attempt_history(None, first, 1)
+        second = budget.plan_frontier(
+            obligations,
+            max_new_qids=0,
+            max_missing_surfaces=1,
+            attempted_missing=set(history["attempted_missing_surface_keys"]),
+        )
+        self.assertEqual(second["summary"]["actionable_missing_surfaces"], 0)
+        self.assertEqual(second["stop_reason"], "frontier-exhausted-or-already-attempted")
+        self.assertFalse(second["consumer_closure_paid"])
+
 
 if __name__ == "__main__":
     unittest.main()
