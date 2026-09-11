@@ -25,10 +25,12 @@ SOURCE_MODE="sentence-mapping-only"
 if [[ -s "$SOURCE" && -s "$SOURCE_META" ]]; then
   args+=(--source "$SOURCE" --source-metadata "$SOURCE_META")
   SOURCE_MODE="same-source-refinement"
-elif [[ -s "$SOURCE" || -s "$SOURCE_META" ]]; then
-  echo "ERROR: source/source-metadata must either both exist or both be absent" >&2
+elif [[ -s "$SOURCE_META" && ! -s "$SOURCE" ]]; then
+  echo "ERROR: source metadata exists without retained source text" >&2
   exit 1
 fi
+# A retained source without source.json is a valid sentence-mapping-only case.
+# Do not pass either refinement argument: exact phrase/offset payment remains unavailable.
 
 python3 "$HERE/slr_claim_projection.py" "${args[@]}" 2> "$ERR"
 
