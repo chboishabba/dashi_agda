@@ -82,16 +82,18 @@ serreAttribution = Snowball.canonicalSourceRoleSnowballReceipt serre
 --    proper roles.
 ------------------------------------------------------------------------
 
-record LinearShortest3BFrontierSource : Set₁ where
+record LinearShortest3BFrontierSource (Monster K : Set) : Set₁ where
   field
-    -- Historical finite-basis/appraisal compiler.  Still useful and retained.
-    historicalFiniteBasisCapstone : Set
+    -- Historical finite-basis/appraisal compiler on the exact old source.
+    historicalFiniteBasisCapstone : Historical.Shortest3BFrontierSource Monster K
 
     -- Mandatory linear theorem route.
     linearZetaSector : LinearZeta.LinearSingleActionProducer
     linearMultiplicityHomSpace : Hom.ActualLinearMultiplicityHomSpace
 
     -- Same-object payments between the previously separate compiler surfaces.
+    -- These remain explicit because the old capstone is set/basis-level while
+    -- the corrected route is linear/representation-level.
     historicalCapstoneUsesSameSelected3BAction : Set
     homSpaceUsesSameLiteralZetaSector : Set
     sourcePaidCharacterUsesSameMultiplicityCarrier : Set
