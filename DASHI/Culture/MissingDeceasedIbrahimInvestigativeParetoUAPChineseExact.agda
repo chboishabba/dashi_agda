@@ -9,10 +9,11 @@ import DASHI.Culture.ChineseStrategicScientistEventWorkRepairExact as Repair
 import DASHI.Culture.MissingDeceasedUAPAdversarialClaimDiscriminatorExact as UAP
 import DASHI.Culture.MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact as Search
 import DASHI.Culture.MissingDeceasedFullSetTechnicalIntersectionParetoExact as FullSet
+import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact as RosterExtension
+import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact as NingExperiment
 
 ------------------------------------------------------------------------
 -- EXTENSION ONLY: keep the canonical U.S. person-specific Pareto unchanged.
--- These lanes join it as non-scalarised acquisition targets.
 ------------------------------------------------------------------------
 
 chineseRosterCardinalityResolutionPareto : Base.InvestigativeParetoTarget
@@ -30,20 +31,35 @@ chineseRosterCardinalityResolutionPareto = Base.investigative-pareto-target
   false true false
   "First-front because one source-genealogy object can settle the nine-versus-at-least-ten discrepancy and prevent denominator error in downstream enrichment/control calculations. The count claim is retained, but no unnamed tenth identity is manufactured."
 
+ningLiSuperconductingGravityPareto : Base.InvestigativeParetoTarget
+ningLiSuperconductingGravityPareto = Base.investigative-pareto-target
+  Base.firstFront
+  "Ning Li superconducting-gravity reconstruction"
+  "Li/Torr theory -> 1997 static YBCO constraint -> UAH/NASA experimental lineage -> AC Gravity -> Army Other Transaction -> technical closeout/results -> later cohort same-object test"
+  "recover the primary FY2001 DoD Other Transactions report page for reported agreement DAAH01-01-9-R001, then the underlying Army AMCOM agreement/statement-of-work, technical closeout and any released results; separately recover authoritative AC Gravity corporate history and UAH/NASA apparatus lineage"
+  "Li/Torr DOI identities are paid; Physica C DOI 10.1016/S0921-4534(97)01462-7 is paid and reports <2 parts in 10^8 g acceleration change for the tested static YBCO configuration; Ning Li event/work identity is repaired by the Huntsville obituary; secondary transcriptions consistently report DAAH01-01-9-R001 and $448,970, while the primary page-66 carrier has not yet been recovered in this lane"
+  "government-programme identity; exact apparatus evolution from static YBCO constraint to proposed driven experiment; award amount/date authority; technical outcome; publication/classification disposition; any genuine Ning-Amy or Ning-NASA-fusion same-object bridge"
+  "DOI 10.1103/PhysRevD.43.457; 10.1103/PhysRevB.46.5489; 10.1007/BF00665654; 10.1016/S0921-4534(97)01462-7; reported agreement DAAH01-01-9-R001 is an acquisition key, not yet a primary-paid receipt"
+  "person QID unresolved; programme/corporate identifiers must come from primary registries"
+  "537 Electricity and electronics / 538 Magnetism / 530 Physics / 629 Aerospace traversal only"
+  "primary DoD/Army agreement and annual-report carrier, primary corporate registry, UAH/NASA programme record, technical report or apparatus/test record"
+  true true false
+  "High fan-out: one primary government agreement/closeout package can distinguish a real funded experimental programme from later lore, identify the apparatus and result state, and sharply constrain the zero-point/suppression hypothesis. The 1997 negative constraint must remain in the same search graph rather than being discarded when later claims are examined."
+
 fullSetTechnicalIntersectionPareto : Base.InvestigativeParetoTarget
 fullSetTechnicalIntersectionPareto = Base.investigative-pareto-target
   Base.secondFront
   "full-set technical intersection"
   "person work object -> source-backed domain bridge -> person/programme same-object test -> event-time succession/control"
-  "run the full U.S.+China retained roster through MissingDeceasedFullSetTechnicalIntersectionParetoExact; prioritise intersections that have a paid domain bridge but an unpaid person/programme edge: Loureiro/fusion-space, Reza/material-survivability, Amy/official NASA quantum-vacuum wording, Fang/metamaterial-propulsion, Yan/plasma-flow/propulsion, McCasland/materials-programme and Zhang/Feng autonomy-strategy continuity"
-  "NASA Fusion Driven Rocket, Direct Fusion Drive and aneutronic/TWDEC programme bridges are source-backed; Reza oxygen-rich alloy chemistry and crystal-scale gamma/gamma-prime mechanisms are source-backed; Fang active mechanical metamaterials are source-backed; NASA TechPort 12110 historically mentions a Quantum Vacuum thruster without validating it"
+  "run the full U.S.+China retained roster through MissingDeceasedFullSetTechnicalIntersectionParetoExact; prioritise intersections that have a paid domain bridge but an unpaid person/programme edge: Ning Li/Amy superconducting-gravity, Loureiro/fusion-space, Reza/material-survivability, Amy/official NASA quantum-vacuum wording, Fang/metamaterial-propulsion, Yan/plasma-flow/propulsion, McCasland/materials-programme and Zhang/Feng autonomy-strategy continuity"
+  "NASA Fusion Driven Rocket, Direct Fusion Drive and aneutronic/TWDEC programme bridges are source-backed; Reza oxygen-rich alloy chemistry and crystal-scale gamma/gamma-prime mechanisms are source-backed; Fang active mechanical metamaterials are source-backed; Ning Li has DOI-level Li/Torr theory and a strong static YBCO constraint; NASA TechPort 12110 historically mentions a Quantum Vacuum thruster without validating it"
   "named-person programme participation; exact material/object transfer; technical-custody overlap; whether post-loss capability continuation is normal, redundant or uniquely disrupted; matched-control prevalence of the same technical intersections"
-  "NASA TechPort 11570, 93869/93994, 93785, 4373 and 12110; Reza patent family US20030053926A1/US20040208777A1; Fang DOI 10.1002/advs.202102662; person-specific identifiers retained in domain owners"
+  "NASA TechPort 11570, 93869/93994, 93785, 4373 and 12110; Reza patent family US20030053926A1/US20040208777A1; Fang DOI 10.1002/advs.202102662; Ning Li DOI 10.1016/S0921-4534(97)01462-7; person-specific identifiers retained in domain owners"
   "QIDs are traversal only and cannot create person/programme or causal edges"
   "530 Physics / 620 Engineering / 629 Aerospace / 621 Applied physics / 355 Military science traversal only"
   "primary programme, contract, team, funding, procurement, repository, succession or custody record naming the person and exact technical object"
   false true false
-  "This lane prevents attractive domain overlap from being mistaken for a shared programme. It is also where material/atomic/crystal and fusion/quantum-vacuum cross-pollination becomes useful proof search: the generic domain bridge is already paid, so only person-specific or object-specific receipts can move the causal frontier."
+  "This lane prevents attractive domain overlap from being mistaken for a shared programme. Material/atomic/crystal, superconducting-gravity and fusion/quantum-vacuum cross-pollination become useful proof search only where an exact person/object/programme receipt can move the causal frontier."
 
 chineseStrategicScientistAcquisitionPareto : Base.InvestigativeParetoTarget
 chineseStrategicScientistAcquisitionPareto = Base.investigative-pareto-target
@@ -80,18 +96,24 @@ uapAdversarialDiscriminatorPareto = Base.investigative-pareto-target
   Base.secondFront
   "UAP/adversarial discriminator"
   "speculative claim -> paid scientific kernel -> missing causal bridge -> adversarial prediction -> ordinary/control prediction -> discriminating acquisition"
-  "run the zero-point-suppression, Mondaloy/S4, Maiwald-NHI, personnel-cleanup and inquiry-cover hypotheses only against acquisitions that distinguish them from ordinary/control explanations"
-  "typed antigravity/vacuum-thrust machinery; Amy mechanism reverse-search; Reza alloy owner; Maiwald action spectroscopy; Fang active mechanical metamaterials; time-indexed role-capability fibre; ternary observer fibre"
+  "run the zero-point-suppression, Mondaloy/S4, Maiwald-NHI, personnel-cleanup and inquiry-cover hypotheses only against acquisitions that distinguish them from ordinary/control explanations; include Ning Li's positive theory lineage and negative static experiment in the same hypothesis graph"
+  "typed antigravity/vacuum-thrust machinery; Amy mechanism reverse-search; Ning Li/Li-Torr theory plus 1997 YBCO constraint; Reza alloy owner; Maiwald action spectroscopy; Fang active mechanical metamaterials; time-indexed role-capability fibre; ternary observer fibre"
   "mechanism/provenance same-object bridge; classified deployment/programme carrier; pre-public tasking chronology; role-capability overlap; matched controls; narrative self-sealing detection"
   "existing science owner paths and public programme identifiers; no Area-51/S4 same-object identifier paid"
   "Area 51 / S4 / NHI QID coordinates intentionally not used as evidence authority"
   "001 Knowledge / 355 Military science / 629 Aerospace / 303.49 social-process traversal only"
   "primary programme, contract, custody, deployment, personnel-tasking, chronology and same-object records"
   false true false
-  "High value is pruning: a broad narrative that explains disappearance, death, survival and contrary testimony equally well has no discriminating observable and should lose Pareto priority. Strategic/game-theory plausibility may choose a search but cannot become statistical or historical evidence."
+  "High value is pruning: a broad narrative that explains disappearance, death, survival, contrary testimony and negative experiments equally well has no discriminating observable and should lose Pareto priority. Strategic/game-theory plausibility may choose a search but cannot become statistical or historical evidence."
 
 fullSetOwnerPresent : FullSet.canonicalFullSetIntersectionBoundary ≡ FullSet.canonicalFullSetIntersectionBoundary
 fullSetOwnerPresent = refl
+
+ningLiRosterRepairPresent : RosterExtension.ningLiRosterRepair ≡ RosterExtension.ningLiRosterRepair
+ningLiRosterRepairPresent = refl
+
+ningLiConstraintPresent : NingExperiment.staticYBCO1997Constraint ≡ NingExperiment.staticYBCO1997Constraint
+ningLiConstraintPresent = refl
 
 record ExtendedParetoBoundary : Set where
   constructor extended-pareto-boundary
@@ -104,7 +126,8 @@ record ExtendedParetoBoundary : Set where
     unresolvedRosterCardinalityMayBePromotedToNamedPerson : Bool
     repairedIdentityLeafMayRemainArtificiallyFirstFront : Bool
     technicalDomainIntersectionCreatesPersonProgrammeEdge : Bool
+    negativeExperimentMayBeDiscardedBecauseTheoryIsInteresting : Bool
 
 canonicalExtendedParetoBoundary : ExtendedParetoBoundary
 canonicalExtendedParetoBoundary = extended-pareto-boundary
-  false false false true true false false false
+  false false false true true false false false false
