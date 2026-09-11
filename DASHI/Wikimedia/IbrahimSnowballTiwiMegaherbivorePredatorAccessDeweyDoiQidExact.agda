@@ -42,6 +42,24 @@ herbivoryQid = Identity.mkOptionalIdentityDemand
   "herbivory" Identity.wikidataQid
   (Identity.verified "Q45874067" "Wikidata herbivory concept verified 2026-09-11; concept identity does not quantify local grazing pressure")
 
+ecologicalDisturbanceQid : Identity.ExternalIdentityDemand
+ecologicalDisturbanceQid = Identity.mkOptionalIdentityDemand
+  "Tiwi megaherbivore-predator-access snowball" "ecological-process identity"
+  "ecological disturbance" Identity.wikidataQid
+  (Identity.verified "Q966490" "Wikidata ecological-disturbance concept directly inspected 2026-09-11; concept identity does not establish a local disturbance effect")
+
+ecologicalConnectivityQid : Identity.ExternalIdentityDemand
+ecologicalConnectivityQid = Identity.mkOptionalIdentityDemand
+  "Tiwi megaherbivore-predator-access snowball" "landscape-ecology identity"
+  "ecological / landscape connectivity" Identity.wikidataQid
+  (Identity.verified "Q2993449" "Wikidata ecological-connectivity concept directly inspected 2026-09-11; identity does not establish measured movement or functional connectivity")
+
+habitatFragmentationQid : Identity.ExternalIdentityDemand
+habitatFragmentationQid = Identity.mkOptionalIdentityDemand
+  "Tiwi megaherbivore-predator-access snowball" "landscape-ecology identity"
+  "habitat fragmentation" Identity.wikidataQid
+  (Identity.verified "Q913302" "Wikidata habitat-fragmentation concept directly inspected 2026-09-11; concept identity does not establish local fragmentation")
+
 dingoQid : Identity.ExternalIdentityDemand
 dingoQid = Identity.mkOptionalIdentityDemand
   "Tiwi megaherbivore-predator-access snowball" "taxon identity"
@@ -54,12 +72,18 @@ gameTrailQid = Identity.mkOptionalIdentityDemand
   "game trail / animal trail" Identity.wikidataQid
   (Identity.unresolved "No safely verified exact Wikidata ecological-feature item located; do not substitute road/path/article/video-game items")
 
+ecosystemEngineerQid : Identity.ExternalIdentityDemand
+ecosystemEngineerQid = Identity.mkOptionalIdentityDemand
+  "Tiwi megaherbivore-predator-access snowball" "ecological-role identity"
+  "ecosystem engineer" Identity.wikidataQid
+  (Identity.unresolved "No safely verified exact ecosystem-engineer organism-role item promoted; ecological engineering Q3738960 is a human design discipline and is a WrongType substitute")
+
 savannaEcologyCoordinate : Traversal.DashiKnowledgeCoordinate
 savannaEcologyCoordinate = Traversal.dashi-knowledge-coordinate
   "DASHI/Wikimedia/IbrahimSnowballTiwiMegaherbivorePredatorAccessDeweyDoiQidExact.agda"
   "savanna disturbance / predator-access consumer"
   "577.4 — grassland ecology, including savanna ecology"
-  "Q42710; Q10758650; Q58697; Q45874067; Q38584; unresolved game-trail QID"
+  "Q42710; Q10758650; Q58697; Q45874067; Q966490; Q2993449; Q913302; Q38584; unresolved game-trail and ecosystem-engineer QIDs"
   "DOI 10.1002/ece3.71622; Dryad DOI 10.5061/dryad.0zpc86776; DOI 10.1890/06-1599.1"
 
 animalEcologyCoordinate : Traversal.DashiKnowledgeCoordinate
@@ -69,6 +93,14 @@ animalEcologyCoordinate = Traversal.dashi-knowledge-coordinate
   "591.7 — animal ecology, animals characteristic of specific environments"
   "Q42710; Q10758650; Q58697; Q45874067; Q38584"
   "DOI 10.1002/ece3.71622; DOI 10.1890/06-1599.1"
+
+smallMammalHabitatCoordinate : Traversal.DashiKnowledgeCoordinate
+smallMammalHabitatCoordinate = Traversal.dashi-knowledge-coordinate
+  "DASHI/Wikimedia/IbrahimSnowballTiwiMegaherbivorePredatorAccessDeweyDoiQidExact.agda"
+  "Tiwi small-mammal habitat association consumer"
+  "599 — Mammalia; exact taxon fibres remain separate"
+  "Q303877; Q52105; Q2993449; Q913302"
+  "DOI 10.1111/j.1365-2699.2006.01543.x"
 
 record MegaherbivorePredatorPrimarySource : Set where
   constructor megaherbivore-predator-primary-source
@@ -99,7 +131,7 @@ neaveEtAl2025 = megaherbivore-predator-primary-source
 
 pettyEtAl2007 : MegaherbivorePredatorPrimarySource
 pettyEtAl2007 = megaherbivore-predator-primary-source
-  "Aaron M. Petty; Patricia A. Werner; Caroline E. R. Lehmann; Jan E. Riley; Daniel S. Banfai; Louis P. Elliott"
+  "Aaron M. Petty; Patricia A. Werner; Caroline E. R. Lehmann; Jan E. Riley; Daniel S. Banfai; Lindsay P. Elliott"
   "Savanna responses to feral buffalo in Kakadu National Park, Australia"
   "Ecological Monographs 77(3):441-463"
   2007
@@ -108,15 +140,29 @@ pettyEtAl2007 = megaherbivore-predator-primary-source
   "Kakadu historical cascades are a mechanism/context donor, not a Melville same-site receipt and not evidence that buffalo removal restores a prior state."
   Attribution.primaryPublicationRecord Attribution.externalSourceOwner refl
 
+firthEtAl2006 : MegaherbivorePredatorPrimarySource
+firthEtAl2006 = megaherbivore-predator-primary-source
+  "Ronald S. C. Firth; John C. Z. Woinarski; Kym G. Brennan; Craig Hempel"
+  "Environmental relationships of the brush-tailed rabbit-rat, Conilurus penicillatus, and other small mammals on the Tiwi Islands, northern Australia"
+  "Journal of Biogeography 33(10):1820-1837"
+  2006
+  "DOI 10.1111/j.1365-2699.2006.01543.x"
+  "Primary Tiwi Islands habitat-association study: brush-tailed rabbit-rats were most likely in tall eucalypt forest away from watercourses; co-occurring small mammals showed distinct environmental associations and several were not recorded in plantation habitat."
+  "Historical habitat association does not establish a present population state, fire-treatment effect, predator-mediated causal effect, or current plantation counterfactual without a same-object/time receipt."
+  Attribution.primaryPublicationRecord Attribution.externalSourceOwner refl
+
 data Driver : Set where
   fireDriver
-  megaherbivoreDriver : Driver
+  megaherbivoreDriver
+  plantationLandUseDriver : Driver
 
 data StructuralConsumer : Set where
   groundCover
   shrubUnderstorey
   woodyStructure
-  gameTrailNetwork : StructuralConsumer
+  gameTrailNetwork
+  habitatConnectivity
+  habitatFragmentation : StructuralConsumer
 
 data PredatorConsumer : Set where
   catDetection
@@ -130,10 +176,12 @@ record MultiDriverPredatorAccessFrontier : Set where
     buffaloGroundCoverDonorAcquired : Bool
     fireStructuralEvidenceAcquired : Bool
     MelvilleShrubFaunaEvidenceAcquired : Bool
+    historicalTiwiHabitatAssociationsAcquired : Bool
     fireToShrubTiwiPaid : Bool
     megaherbivoreToTrailMelvillePaid : Bool
     trailToPredatorDetectionMelvillePaid : Bool
     megaherbivoreToGroundCoverMelvillePaid : Bool
+    historicalHabitatToCurrentPopulationPaid : Bool
     predatorDetectionToMortalityPaid : Bool
     fullMultiDriverMediationPaid : Bool
 
@@ -141,32 +189,37 @@ open MultiDriverPredatorAccessFrontier public
 
 canonicalMultiDriverPredatorAccessFrontier : MultiDriverPredatorAccessFrontier
 canonicalMultiDriverPredatorAccessFrontier = multi-driver-predator-access-frontier
-  true true true true
-  false true true false false false
+  true true true true true
+  false true true false false false false
 
 ------------------------------------------------------------------------
 -- BIDI interpretation: predator observations constrain what upstream landscape
 -- representation must retain.  A fire-only representation cannot recover a
 -- megaherbivore-created trail effect, and a megaherbivore-only representation
--- cannot recover fire history.
+-- cannot recover fire history.  Historical habitat associations add a third
+-- representation constraint but do not become current demographic receipts.
 ------------------------------------------------------------------------
 
 data FireOnlyRepresentationRecoversAllPredatorAccess : Set where
 data MegaherbivoreOnlyRepresentationRecoversAllPredatorAccess : Set where
+data HistoricalHabitatAssociationMeansCurrentPopulationEffect : Set where
 data PredatorDetectionMeansPredationMortality : Set where
 data BuffaloRemovalRestoresHistoricalState : Set where
 data PrimarySourceAdjacencyCreatesMediation : Set where
 data QidCreatesLocalPresence : Set where
 data QidCreatesDriverMagnitude : Set where
 data DeweyCreatesCausalParent : Set where
-
 data PigContextMeansGameTrailDriver : Set where
+data EcologicalEngineeringQidMeansEcosystemEngineer : Set where
 
 fireOnlyDoesNotRecoverAllPredatorAccess : FireOnlyRepresentationRecoversAllPredatorAccess → ⊥
 fireOnlyDoesNotRecoverAllPredatorAccess ()
 
 megaherbivoreOnlyDoesNotRecoverAllPredatorAccess : MegaherbivoreOnlyRepresentationRecoversAllPredatorAccess → ⊥
 megaherbivoreOnlyDoesNotRecoverAllPredatorAccess ()
+
+historicalHabitatAssociationDoesNotCreateCurrentPopulationEffect : HistoricalHabitatAssociationMeansCurrentPopulationEffect → ⊥
+historicalHabitatAssociationDoesNotCreateCurrentPopulationEffect ()
 
 predatorDetectionDoesNotMeanMortality : PredatorDetectionMeansPredationMortality → ⊥
 predatorDetectionDoesNotMeanMortality ()
@@ -189,12 +242,19 @@ deweyDoesNotCreateCausalParent ()
 pigContextDoesNotCreateGameTrailDriver : PigContextMeansGameTrailDriver → ⊥
 pigContextDoesNotCreateGameTrailDriver ()
 
+ecologicalEngineeringIsWrongTypeForEcosystemEngineer : EcologicalEngineeringQidMeansEcosystemEngineer → ⊥
+ecologicalEngineeringIsWrongTypeForEcosystemEngineer ()
+
 firstUnpaidEmpiricalDiscriminator : String
 firstUnpaidEmpiricalDiscriminator = Ledger.firstUnpaidEmpiricalDiscriminator
 
 firstUnpaidMultiDriverDiscriminator : String
 firstUnpaidMultiDriverDiscriminator =
   "Melville/Tiwi megaherbivore abundance or grazing pressure -> measured ground/shrub structural change on a carrier joinable to predator and native-mammal observations"
+
+firstUnpaidHistoricalHabitatJoin : String
+firstUnpaidHistoricalHabitatJoin =
+  "Exact temporal/spatial weld from Firth 2006 Tiwi habitat associations to a current taxon-specific population, disturbance and predator carrier; historical habitat preference cannot pay the current state by itself"
 
 attributionBoundary : AttributionSnowball.AttributionSnowballBoundary
 attributionBoundary = AttributionSnowball.canonicalAttributionSnowballBoundary
