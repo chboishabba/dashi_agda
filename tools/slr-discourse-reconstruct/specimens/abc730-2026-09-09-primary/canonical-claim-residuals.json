@@ -1,0 +1,99 @@
+{
+  "schema": "abc730-canonical-claim-residual-map-v1",
+  "source_role": "structural consumer/evidence obligation map; not empirical evidence",
+  "candidate_only": true,
+  "semantic_promotion": false,
+  "claims": {
+    "ABC730-2026-09-09-C029": {
+      "claim_role": "policyPosition",
+      "consumer_reference": "ABC730 C029 unintended-consequences comparative/evaluative consumer",
+      "current_first_residual": "settlementClassifierResidual",
+      "obligations": [
+        {
+          "obligation_id": "C029:settlementSubcountryClassifier",
+          "status": "open",
+          "owner_reference": "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact",
+          "payment_reference": "settlement-place legal test + production-location evidence + declaration/application semantics",
+          "evidence_kind_required": "application/classifier evidence"
+        },
+        {
+          "obligation_id": "C029:adviceDecisionLineage",
+          "status": "open",
+          "owner_reference": "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact",
+          "payment_reference": "same-object departmental analysis -> ministerial brief -> public rationale -> policy decision lineage",
+          "evidence_kind_required": "Atom lineage receipt"
+        },
+        {
+          "obligation_id": "C029:settlementTradeMagnitude",
+          "status": "blocked-by-measurement",
+          "owner_reference": "DASHI.Policy.ABC730SettlementTradeMeasurementGapExact",
+          "payment_reference": "origin-level customs data, firm/product reconstruction, or transparent uncertainty-bounded model",
+          "evidence_kind_required": "settlement-specific measurement"
+        },
+        {
+          "obligation_id": "C029:australianBusinessMateriality",
+          "status": "open",
+          "owner_reference": "DASHI.Policy.ABC730AustralianImplementationSnowballExact",
+          "payment_reference": "incremental importer/customs burden and materiality relative to existing targeted-sanctions regime",
+          "evidence_kind_required": "Australia-specific implementation/impact evidence"
+        },
+        {
+          "obligation_id": "C029:palestinianDestinationWorkerLinkage",
+          "status": "open",
+          "owner_reference": "DASHI.Policy.ABC730FirmDestinationExposureSnowballExact",
+          "payment_reference": "firm -> site -> product -> destination -> Palestinian worker -> output/revenue dependence",
+          "evidence_kind_required": "same-object firm/destination/worker weld"
+        },
+        {
+          "obligation_id": "C029:palestinianNetIncidence",
+          "status": "open",
+          "owner_reference": "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact",
+          "payment_reference": "worker displacement/reallocation + Palestinian producer substitution + household-income counterfactual",
+          "evidence_kind_required": "situated incidence evidence"
+        },
+        {
+          "obligation_id": "C029:israeliNetIncidence",
+          "status": "open",
+          "owner_reference": "DASHI.Policy.ABC730UnintendedConsequencesEvidenceObligationExact",
+          "payment_reference": "identify affected Israeli population, mechanism, sign and settlement/green-line distinction",
+          "evidence_kind_required": "situated incidence evidence"
+        },
+        {
+          "obligation_id": "C029:targetedVsBlanketCounterfactual",
+          "status": "open",
+          "owner_reference": "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact",
+          "payment_reference": "consumer-adequate comparison of incremental compliance cost, coverage, evasion, substitution and expected effect",
+          "evidence_kind_required": "comparative instrument evidence"
+        }
+      ]
+    },
+    "ABC730-2026-09-09-C032": {
+      "claim_role": "evaluativeRhetoric",
+      "consumer_reference": "ABC730 C032 evaluative-aptitude consumer",
+      "current_first_residual": "depends-on-C029-consumer-adequacy",
+      "obligations": [
+        {
+          "obligation_id": "C032:evaluativeAptness",
+          "status": "downstream",
+          "owner_reference": "DASHI.Policy.ABC730UnintendedConsequencesEvidenceObligationExact",
+          "payment_reference": "C029 mechanism/incidence/counterfactual gates plus separate evaluative criteria",
+          "evidence_kind_required": "reviewed evaluative consumer receipt"
+        }
+      ]
+    },
+    "ABC730-2026-09-09-C033": {
+      "claim_role": "causalOrPredictive",
+      "consumer_reference": "ABC730 C033 sanctions-effectiveness consumer",
+      "current_first_residual": "causal-effectiveness-evidence",
+      "obligations": [
+        {
+          "obligation_id": "C033:twoStateEffectiveness",
+          "status": "open",
+          "owner_reference": "DASHI.Policy.ABC730WestBankSanctionsTranscriptClaimsExact",
+          "payment_reference": "evidence that the relevant sanctions/instruments move outcomes toward or away from the stated two-state objective",
+          "evidence_kind_required": "causal/comparative effectiveness evidence"
+        }
+      ]
+    }
+  }
+}
