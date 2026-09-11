@@ -83,6 +83,7 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainWeldRound334Exact
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainSourceFactorRound335Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound336Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound337Exact
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338Exact
 
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
