@@ -14,6 +14,7 @@ import DASHI.ComputerScience.RSA260BidiCandidateGeneratorKernelExact as Candidat
 import DASHI.ComputerScience.RSA260BidiCandidateProjection256Exact as CandidateProjection256
 import DASHI.ComputerScience.RSA260BidiCandidateRobustnessExact as CandidateRobustness
 import DASHI.ComputerScience.RSA260BidiPreparationFibreSearchExact as PreparationSearch
+import DASHI.ComputerScience.RSA260BidiPreparationFrontierCrossValidationExact as PreparationFrontier
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -99,6 +100,9 @@ preparationSearchBoundary = PreparationSearch.canonicalPreparationFibreInterpret
 preparationSearchReceipt : PreparationSearch.PreparationSearchReceipt
 preparationSearchReceipt = PreparationSearch.currentPreparationSearchReceipt
 
+preparationFrontierPreference : PreparationFrontier.RobustnessAwarePreparationPreference
+preparationFrontierPreference = PreparationFrontier.currentRobustnessAwarePreparationPreference
+
 data ProductionResidual : Set where
   acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
   acquireProductionProjectionCheckpointOrGenerator : ProductionResidual
@@ -113,8 +117,7 @@ firstUnpaidProductionResidual = acquireSameObjectMemberOfDerivedLACarrierFibre
 
 data CandidateExperimentResidual : Set where
   exactByteExecutePreparationSearch : CandidateExperimentResidual
-  crossValidatePreparationFrontierAcrossSeeds : CandidateExperimentResidual
-  testPreparationFrontierAtWidth256 : CandidateExperimentResidual
+  enlargePreparationFamilyAroundRobustFrontier : CandidateExperimentResidual
   scaleGeneratorConsumerBeyondWidth8 : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
@@ -160,6 +163,10 @@ record RSA260ProductionSubstitutionBoundary : Set where
     runnableBidiCandidateAdapterRobustnessPaid : Bool
     runnableBidiCandidatePreparationFibreSearchPaid : Bool
     runnableBidiCandidatePreparationSearchExactBlobPaid : Bool
+    runnableBidiCandidateFrontierCrossSeedPaid : Bool
+    runnableBidiCandidateFrontierWidth256Paid : Bool
+    runnableBidiCandidateFrontierExactBlobPaid : Bool
+    runnableBidiCandidateRobustPreferredPreparationIdentified : Bool
     runnableBidiCandidateHistoricalIdentityPaid : Bool
     runnableBidiCandidateProductionBWCReplayPaid : Bool
     productionMatrixBytesPaid : Bool
@@ -208,6 +215,10 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; runnableBidiCandidateAdapterRobustnessPaid = true
   ; runnableBidiCandidatePreparationFibreSearchPaid = true
   ; runnableBidiCandidatePreparationSearchExactBlobPaid = false
+  ; runnableBidiCandidateFrontierCrossSeedPaid = true
+  ; runnableBidiCandidateFrontierWidth256Paid = true
+  ; runnableBidiCandidateFrontierExactBlobPaid = true
+  ; runnableBidiCandidateRobustPreferredPreparationIdentified = true
   ; runnableBidiCandidateHistoricalIdentityPaid = false
   ; runnableBidiCandidateProductionBWCReplayPaid = false
   ; productionMatrixBytesPaid = false
@@ -224,6 +235,7 @@ data BidiCarrierFibreImpliesUniqueMatrix : Set where
 data RunnableCandidateImpliesHistoricalMatrix : Set where
 data PreparationFrontierImpliesProductionAdapter : Set where
 data SparseKernelImpliesFactoringSpeedup : Set where
+data PythonTimingImpliesProductionPerformance : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 
 authorReportedShapeDoesNotCreateBytes : ProductionShapeImpliesProductionBytes → ⊥
@@ -240,6 +252,9 @@ preparationFrontierDoesNotCreateProductionAdapter ()
 
 sparseKernelDoesNotCreateFactoringSpeedup : SparseKernelImpliesFactoringSpeedup → ⊥
 sparseKernelDoesNotCreateFactoringSpeedup ()
+
+pythonTimingDoesNotCreateProductionPerformance : PythonTimingImpliesProductionPerformance → ⊥
+pythonTimingDoesNotCreateProductionPerformance ()
 
 searchMissDoesNotProveAbsence : SearchMissImpliesArtifactAbsent → ⊥
 searchMissDoesNotProveAbsence ()
