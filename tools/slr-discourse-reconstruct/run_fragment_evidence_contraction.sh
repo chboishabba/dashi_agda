@@ -4,7 +4,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 UNLABELLED="${1:-$HERE/specimens/9-sept-8-03pm-unlabelled}"
 LABELLED="${2:-$HERE/specimens/abc730-2026-09-09-primary}"
-WORLD="${UNLABELLED}/sensiblaw-candidate-world-model-with-claim-fragment-residuals.json"
+WORLD="${UNLABELLED}/sensiblaw-candidate-world-model-with-fragment-residuals.json"
 EVIDENCE_MANIFEST="${LABELLED}/source.json"
 RESIDUAL_MAP="${LABELLED}/canonical-claim-residuals.json"
 PAYMENTS="${LABELLED}/c029-evidence-payment-receipts.json"
@@ -15,7 +15,7 @@ OUT_REPORT="${UNLABELLED}/fragment-evidence-contraction-report.json"
 ERR="${UNLABELLED}/fragment-evidence-contractions.stderr"
 
 if [[ ! -s "$WORLD" ]]; then
-  bash "$HERE/run_claim_fragment_residual_inheritance.sh" "$UNLABELLED" "$LABELLED" >/dev/null
+  bash "$HERE/run_claim_fragment_residual_inheritance.sh" "$UNLABELLED" "$RESIDUAL_MAP" >/dev/null
 fi
 [[ -s "$WORLD" ]] || { echo "ERROR: missing fragment residual world $WORLD" >&2; exit 1; }
 [[ -s "$EVIDENCE_MANIFEST" ]] || { echo "ERROR: missing labelled evidence manifest $EVIDENCE_MANIFEST" >&2; exit 1; }
