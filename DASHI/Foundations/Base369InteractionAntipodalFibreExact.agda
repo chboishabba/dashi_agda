@@ -211,7 +211,7 @@ allPositiveAggregatesToNine = refl
 baseFlipAggregatesToThree : aggregateSum baseFlipped ≡ + 3
 baseFlipAggregatesToThree = refl
 
-nineIsNotThree : (+ 9 : ℤ) ≡ + 3 → ⊥
+nineIsNotThree : (+ 9) ≡ (+ 3) → ⊥
 nineIsNotThree ()
 
 blockOrientationCollisionSeparatedByAggregate :

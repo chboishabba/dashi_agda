@@ -110,12 +110,15 @@ demoSemantics = querySemantics demoAnswer
 
 surfaceQueryAdequate : AdequateFor demoProject demoSemantics surfaceQuery
 surfaceQueryAdequate =
-  factorsForQuery (λ observation → surfaceAnswer) (λ state → refl)
+  factorsForQuery
+    {semantics = demoSemantics} {query = surfaceQuery}
+    (λ observation → surfaceAnswer) (λ state → refl)
 
 distinguishingQueryDefect :
   QueryAdequacyDefect demoProject demoSemantics distinguishingQuery
 distinguishingQueryDefect =
   queryAdequacyDefect
+    {semantics = demoSemantics} {query = distinguishingQuery}
     leftState
     rightState
     refl
@@ -124,7 +127,9 @@ distinguishingQueryDefect =
 distinguishingQueryNotAdequate :
   AdequateFor demoProject demoSemantics distinguishingQuery → ⊥
 distinguishingQueryNotAdequate =
-  queryAdequacyDefectBlocksFactorisation distinguishingQueryDefect
+  queryAdequacyDefectBlocksFactorisation
+    {semantics = demoSemantics} {query = distinguishingQuery}
+    distinguishingQueryDefect
 
 record SameProjectionDifferentQueryAdequacy : Set₁ where
   constructor sameProjectionDifferentQueryAdequacy
