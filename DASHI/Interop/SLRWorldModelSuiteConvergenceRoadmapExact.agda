@@ -188,11 +188,16 @@ slrGlobalRoadmap =
   slrRoadmapCoordinate "gold-labelled discourse benchmark" partial slrRuntimeOwner "slr-abc-gold-benchmark-v1: explicit speaker-turn slice executable; quote/nesting and calibrated uncertainty remain open" ∷
   slrRoadmapCoordinate "canonical claim projection v1" complete slrRuntimeOwner "validated: 5 canonical refs / 16 candidate edges / 8 ambiguity-preserving fused edges / 2 cut constraints" ∷
   slrRoadmapCoordinate "canonical claim projection v2 same-source phrase refinement" partial slrRuntimeOwner "implemented; rerun required for exact unique-phrase offsets" ∷
-  slrRoadmapCoordinate "labelled-to-noisy exact/bounded subspan weld" active slrRuntimeOwner "slr-labelled-subspan-weld-v1" ∷
+  slrRoadmapCoordinate "labelled-to-noisy exact/bounded subspan weld" complete slrRuntimeOwner "validated source-offset weld; exact and bounded handoffs retained separately" ∷
+  slrRoadmapCoordinate "multi-hop labelled discourse path" complete slrRuntimeOwner "validated: sentence 42 Wong -> Greber -> Husic; sentence 45 Shoebridge -> Leeser" ∷
+  slrRoadmapCoordinate "claim-local fragment projection" partial slrRuntimeOwner "slr-claim-fragment-projection-v1 implemented; dedicated receipt rerun required" ∷
+  slrRoadmapCoordinate "whole-claim span completion" partial slrRuntimeOwner "local fragments do not pay full C029/C030/C032/C033 source extent" ∷
+  slrRoadmapCoordinate "claim-local fragment residual inheritance" partial slrRuntimeOwner "slr-claim-fragment-residual-inheritance-v1 implemented; explicit claim->obligation map; runtime certification pending" ∷
   slrRoadmapCoordinate "full world-constraint fibre integration" partial dashiOwner "slr-world-constraint-fibre-v1 attached append-only to CandidateWorldModel; domain/legal consumers remain open" ∷
-  slrRoadmapCoordinate "claim/evidence graph projection" active sensibLawOwner "CandidateWorldModel claims+relations+provenance" ∷
+  slrRoadmapCoordinate "claim/evidence graph projection" active sensibLawOwner "canonical claim-local fragments now carry candidate graph identity; downstream evidence obligations contract append-only" ∷
   slrRoadmapCoordinate "mechanism evidence snowball" active dashiOwner "ABC730 Ibrahim/Snowball policy owners" ∷
-  slrRoadmapCoordinate "policy/evaluative consumer" next sensibLawOwner "review/promote/abstain consumer" ∷
+  slrRoadmapCoordinate "review/promote/abstain routing" complete sensibLawOwner "slr-review-disposition-v1 implemented; compatibility/adequacy/residual gates kept separate" ∷
+  slrRoadmapCoordinate "C029 policy/evaluative consumer adequacy" active dashiOwner "current first residual remains settlementClassifierResidual" ∷
   []
 
 ------------------------------------------------------------------------
