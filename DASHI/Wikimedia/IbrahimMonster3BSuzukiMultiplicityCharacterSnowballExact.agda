@@ -26,6 +26,16 @@ import DASHI.Wikimedia.IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExa
 --
 -- Therefore the canonical multiplicity fibre is a 6.Suz representation fibre,
 -- not a bare Fin 90 and not an arbitrary partition 12+78.
+--
+-- The present snowball further separates two coordinates on a 6.Suz
+-- irreducible:
+--
+--   * CTblLib Irr-table position = execution coordinate;
+--   * CTblLib/ATLAS label        = stable semantic character coordinate.
+--
+-- Neither coordinate pays occurrence in the Monster restriction.  The final
+-- same-object payment is the Barraclough--Wilson psi*eta induction match to the
+-- paired MN3B constituents already recovered by the normalizer restriction.
 ------------------------------------------------------------------------
 
 heisenbergDegree : Nat
@@ -78,6 +88,7 @@ record SuzukiMultiplicityCharacter : Set where
   constructor suzuki-multiplicity-character
   field
     characterTablePosition : Nat
+    atlasLabel : String
     degree : Nat
     faithful : Set
     centralPhase : SelectedCentralPhase
@@ -132,16 +143,28 @@ barracloughWilson = Attribution.mkDOISource
 ctbllibSource : Attribution.AttributedSource
 ctbllibSource = Attribution.mkNoDOISource
   "Thomas Breuer and CTblLib contributors"
-  "The GAP Character Table Library: 6.Suz / 6.Suz.2 tables and stored fusion"
+  "The GAP Character Table Library: 6.Suz / 6.Suz.2 tables, ATLAS labels and stored fusion"
   "GAP package data and documentation"
   "current computational producer dependency"
   "https://www.gap-system.org/Packages/ctbllib.html"
   (Attribution.namedSourceKind "software character-table source")
-  "computational source for faithful degree-12/78 candidate enumeration and central-phase orientation; not mathematical theorem authority"
+  "computational source for exact Irr-table positions, AtlasLabelsOfIrreducibles semantic labels, faithful degree-12/78 candidate enumeration and central-phase orientation; not mathematical theorem authority"
+  Attribution.publicAttribution
+
+atlasRepSource : Attribution.AttributedSource
+atlasRepSource = Attribution.mkNoDOISource
+  "Thomas Breuer; Simon Nickerson; AtlasRep contributors"
+  "AtlasRep: Atlas of Group Representations, 6.Suz representation records"
+  "GAP package data and documentation"
+  "current computational cross-check"
+  "https://www.gap-system.org/Packages/atlasrep.html"
+  (Attribution.namedSourceKind "software representation-atlas source")
+  "cross-check that named ATLAS character labels such as 12a have concrete modular representation records; this does not identify the complex Monster multiplicity representation and no DOI is asserted for the package artifact"
   Attribution.publicAttribution
 
 barracloughWilsonAttribution = Snowball.canonicalSourceRoleSnowballReceipt barracloughWilson
 ctbllibAttribution = Snowball.canonicalSourceRoleSnowballReceipt ctbllibSource
+atlasRepAttribution = Snowball.canonicalSourceRoleSnowballReceipt atlasRepSource
 
 record SuzukiMultiplicityExternalCoordinates : Set where
   constructor suzuki-multiplicity-external-coordinates
@@ -151,6 +174,7 @@ record SuzukiMultiplicityExternalCoordinates : Set where
     finiteGroupQid : String
     groupRepresentationDewey : String
     finiteGroupDewey : String
+    atlasCharacterLabelCoordinate : String
     oeisCoordinate : String
     oeisCreatesSuzukiCharacter : Bool
 open SuzukiMultiplicityExternalCoordinates public
@@ -159,8 +183,40 @@ canonicalSuzukiMultiplicityExternalCoordinates : SuzukiMultiplicityExternalCoord
 canonicalSuzukiMultiplicityExternalCoordinates = suzuki-multiplicity-external-coordinates
   "Q1055807" "Q600043" "Q1057968"
   "512.22" "512.23"
+  "ATLAS/CTblLib irreducible labels are semantic character coordinates; numeric Irr positions remain execution coordinates"
   "A005052 is retained only for 90 = 10*3^2; it does not identify 6.Suz characters"
   false
+
+------------------------------------------------------------------------
+-- Exact candidate family discovered in the source archaeology.
+--
+-- CTblLib's published 6.Suz examples use 12ab and 78ab families.  This pays
+-- the EXPECTED FAMILY SHAPE (two faithful candidates at each degree), not the
+-- runtime table positions or the final Monster occurrence.  The GAP producer
+-- therefore fails closed unless the live CTblLib table exposes exactly two of
+-- each and binds each position to its AtlasLabelsOfIrreducibles label.
+------------------------------------------------------------------------
+
+record SuzukiCandidateFamilyShape : Set where
+  constructor suzuki-candidate-family-shape
+  field
+    degreeTwelveCandidateCount : Nat
+    degreeTwelveCandidateCountIsTwo : degreeTwelveCandidateCount ≡ 2
+    degreeSeventyEightCandidateCount : Nat
+    degreeSeventyEightCandidateCountIsTwo : degreeSeventyEightCandidateCount ≡ 2
+    expectedTwelveFamily : String
+    expectedSeventyEightFamily : String
+    runtimePositionsPaid : Bool
+    runtimeLabelsPaid : Bool
+    monsterOccurrencePaid : Bool
+open SuzukiCandidateFamilyShape public
+
+currentSuzukiCandidateFamilyShape : SuzukiCandidateFamilyShape
+currentSuzukiCandidateFamilyShape = suzuki-candidate-family-shape
+  2 refl 2 refl
+  "12a / 12b"
+  "78a / 78b"
+  false false false
 
 ------------------------------------------------------------------------
 -- Existing normalizer arithmetic remains a downstream cross-check.
@@ -183,6 +239,8 @@ data DegreeTwelveCreatesSuzukiCharacter : Set where
 data DegreeSeventyEightCreatesSuzukiCharacter : Set where
 data NinetyCreatesDirectSumRepresentation : Set where
 data FaithfulSuzukiCharacterCreatesMonsterOccurrence : Set where
+data AtlasLabelCreatesMonsterOccurrence : Set where
+data AtlasRepModularModelCreatesComplexMonsterMultiplicity : Set where
 data SourceTensorFormulaCreatesSameObjectMonsterIntertwiner : Set where
 
 degree12DoesNotCreateCharacter : DegreeTwelveCreatesSuzukiCharacter → ⊥
@@ -197,9 +255,16 @@ ninetyDoesNotCreateDirectSum ()
 faithfulnessDoesNotCreateMonsterOccurrence : FaithfulSuzukiCharacterCreatesMonsterOccurrence → ⊥
 faithfulnessDoesNotCreateMonsterOccurrence ()
 
+atlasLabelDoesNotCreateMonsterOccurrence : AtlasLabelCreatesMonsterOccurrence → ⊥
+atlasLabelDoesNotCreateMonsterOccurrence ()
+
+atlasRepModularModelDoesNotCreateComplexMonsterMultiplicity :
+  AtlasRepModularModelCreatesComplexMonsterMultiplicity → ⊥
+atlasRepModularModelDoesNotCreateComplexMonsterMultiplicity ()
+
 sourceFormulaDoesNotCreateSameObjectIntertwiner :
   SourceTensorFormulaCreatesSameObjectMonsterIntertwiner → ⊥
-sourceFormulaDoesNotCreateSameObjectIntertwiner ()
+sourceFormulaDoesNotCreateSameObjectMonsterIntertwiner ()
 
 ------------------------------------------------------------------------
 -- Highest-alpha frontier.
@@ -211,10 +276,15 @@ record SuzukiMultiplicityFrontier : Set where
     primary729ExtensionSourcePaid : Bool
     primaryTensorInductionFormulaPaid : Bool
     sixSuzTableAvailableAsProducer : Bool
+    atlasLabelAPIIdentified : Bool
+    faithfulTwelveSeventyEightPairShapeSourcePaid : Bool
+    atlasRepTwelveAModularCrossCheckLocated : Bool
     faithfulTwelveSeventyEightCandidateProducerWritten : Bool
     candidateProducerExecuted : Bool
     exactTwelveCharacterPositionPaid : Bool
     exactSeventyEightCharacterPositionPaid : Bool
+    exactTwelveAtlasLabelsPaid : Bool
+    exactSeventyEightAtlasLabelsPaid : Bool
     selectedPhaseOrientationPaid : Bool
     sameObjectMonsterRestrictionMatchPaid : Bool
     centralizerTableReconstructionStillMandatory : Bool
@@ -223,7 +293,7 @@ open SuzukiMultiplicityFrontier public
 
 currentSuzukiMultiplicityFrontier : SuzukiMultiplicityFrontier
 currentSuzukiMultiplicityFrontier = suzuki-multiplicity-frontier
-  true true true true
-  false false false false false
+  true true true true true true true
+  false false false false false false false
   false
-  "execute scripts/monster_3b_suzuki_multiplicity_characters.g to enumerate faithful degree-12 and degree-78 6.Suz irreducibles and their central C3 phases. Then match the resulting exact table positions through the Barraclough-Wilson psi*eta induction formula to the two paired MN3B constituents already isolated by monster_3b_normalizer_restriction.g. Only that same-object match pays the actual 12+78 multiplicity representation. The standalone 3^(1+12).2.Suz centralizer-table reconstruction is an optional fallback, not a prerequisite."
+  "execute scripts/monster_3b_suzuki_multiplicity_characters.g so the live CTblLib table binds the two faithful 12 and two faithful 78 candidates to exact Irr positions, ATLAS labels and central C3 phases. Then use the stored 6.Suz -> 6.Suz.2 fusion together with the Barraclough-Wilson psi*eta induction construction to match the exact 12a/12b and 78a/78b candidates to the two paired MN3B constituents already isolated by monster_3b_normalizer_restriction.g. Only that same-object character match pays the actual 12+78 multiplicity representation. AtlasRep modular 12a records are a computational existence cross-check only. The standalone 3^(1+12).2.Suz centralizer-table reconstruction remains an optional fallback, not a prerequisite."
