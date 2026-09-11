@@ -86,6 +86,11 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact
 -- proof-bearing TransferCoordinateOf relation before projecting to R311.
 import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact
 
+-- R332 removes the arbitrary time-translation function: pairwise translated
+-- tests are definitionally produced by the SAME Euclidean-covariance/OS1
+-- translation action; only physical time/support meaning remains to be paid.
+import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact
+
 -- Optional producer families retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanStepVMarkedSourceDirectClusteringProducerCurrentExact
 import DASHI.Physics.YangMills.BalabanUrsellToSubgapClusteringUpperBidiExact
