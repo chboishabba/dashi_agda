@@ -18,15 +18,14 @@ def load(path: Path) -> dict[str, Any]:
 
 
 def unresolved_dimension(fibre: dict[str, Any]) -> bool:
+    # Only genuinely open/ambiguous states block separate promotion review.
+    # Bounded provenance states such as source-date or claim-relative-primary
+    # scope are constraints that are attached, not residual debt by themselves.
     unresolved = {
         "residual-fibre",
         "residual-observed",
         "unresolved",
         "alternatives-retained",
-        "source-date-bounded",
-        "claim-relative-primary-scope-attached",
-        "carried-from-boundary",
-        "candidate",
     }
     for value in (fibre.get("dimensions") or {}).values():
         if str((value or {}).get("status", "")) in unresolved:
