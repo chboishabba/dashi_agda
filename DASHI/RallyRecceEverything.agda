@@ -2,3 +2,5 @@ module DASHI.RallyRecceEverything where
 
 import DASHI.Applied.RallyReccePaceNoteFibreOverTimeExact
 import DASHI.Applied.RallyPaceNoteDialectFixtureExact
+import DASHI.Applied.RallyTelemetryObservationNormalisationExact
+import DASHI.Applied.RallyRecceExecutionRoadmapExact
