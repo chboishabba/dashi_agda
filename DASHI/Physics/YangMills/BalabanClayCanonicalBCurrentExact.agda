@@ -73,13 +73,19 @@ import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact
 import DASHI.Physics.YangMills.BalabanHalfRateTransferCoordinateMassGapRound316Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound317Exact
 
--- R318 repairs the source-native H1 producer: its input is now the selected T5
--- J/source carrier BEFORE the H1 localization theorem.  The published source
--- payment plus same-object magnitude/root/distance applicability constructs the
--- localized R295 carrier.  R319 keeps this as an optional producer and records
--- that a source-status label does not manufacture the required theorem term.
+-- R318 repairs the general external-source H1 producer so its input no longer
+-- contains H1.  R319 keeps source theorem payment and same-object applicability
+-- separate for genuinely external presentations.
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound319Exact
+
+-- R320 is the preferred consumer-first H1 producer for proof search on the exact
+-- selected T5 carrier.  It needs only one theorem-bearing field:
+-- mixed-log-derivative magnitude <= the exact selected rooted shell.  The
+-- normalized-source -> literal-J transport is compiler-owned; R318 remains a
+-- compatibility adapter when importing differently presented source data.
+import DASHI.Physics.YangMills.BalabanT5DirectSelectedMarkedDecayRound320Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound320Exact
 
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
