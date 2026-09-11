@@ -6,6 +6,7 @@ HANDOFF_ROOT="${1:-/tmp/slr-validation-20260911}"
 SENSIBLAW_ROOT="${2:-/home/c/Documents/code/SensibLaw}"
 OUT_DIR="${3:-$HANDOFF_ROOT/gwb-world}"
 REVIEWED_OVERLAY="${4:-$HERE/../../fixtures/slr/gwb-reviewed-wikimedia-identities-v1.jsonl}"
+ARCHIVE="${5:-$HANDOFF_ROOT/gwb-world-handoff.tar.xz}"
 PROJECTION="$HANDOFF_ROOT/gwb-projection/source_projection.json"
 WORLD="$OUT_DIR/sensiblaw-gwb-candidate-world-model.json"
 SEEDS="$OUT_DIR/gwb-wikimedia-seeds.jsonl"
@@ -15,8 +16,23 @@ GRAPH="$OUT_DIR/gwb-wikimedia-world-graph.json"
 FOLLOW_ERR="$OUT_DIR/gwb-wikimedia-world-follow.stderr"
 NORMALIZED="$OUT_DIR/sensiblaw-gwb-candidate-world-model-wikimedia-followed-normalized.json"
 PARITY_ERR="$OUT_DIR/gwb-wikimedia-world-parity.stderr"
+CACHE_DIR="$OUT_DIR/wikimedia-http-cache"
 
-mkdir -p "$OUT_DIR"
+mkdir -p "$OUT_DIR" "$CACHE_DIR"
+
+package_on_exit() {
+  status=$?
+  trap - EXIT
+  set +e
+  bash "$HERE/package_gwb_world_handoff.sh" "$HANDOFF_ROOT" "$OUT_DIR" "$ARCHIVE"
+  package_status=$?
+  set -e
+  if [[ "$status" -eq 0 && "$package_status" -ne 0 ]]; then
+    status="$package_status"
+  fi
+  exit "$status"
+}
+trap package_on_exit EXIT
 
 # This also pays the base GWB SensibLaw normalization parity first.
 bash "$HERE/run_gwb_candidate_world.sh" "$HANDOFF_ROOT" "$SENSIBLAW_ROOT" "$OUT_DIR" >/dev/null
@@ -59,10 +75,15 @@ python3 "$HERE/slr_wikimedia_world_follow.py" \
   --seeds "$SEEDS" \
   --output-model "$FOLLOWED" \
   --output-graph "$GRAPH" \
+  --cache-dir "$CACHE_DIR" \
   --max-depth 2 \
   --max-seed-search-results 3 \
   --max-item-properties 80 \
   --max-wikipedia-links 30 \
+  --max-retries "${WIKIMEDIA_MAX_RETRIES:-5}" \
+  --backoff-base "${WIKIMEDIA_BACKOFF_BASE:-2}" \
+  --max-backoff "${WIKIMEDIA_MAX_BACKOFF:-60}" \
+  --min-request-interval "${WIKIMEDIA_MIN_REQUEST_INTERVAL:-0.35}" \
   2> "$FOLLOW_ERR"
 
 grep -q 'schema=slr-wikimedia-world-follow-v1' "$FOLLOW_ERR" || {
@@ -122,5 +143,5 @@ fi
 cat "$SEED_ERR"
 cat "$FOLLOW_ERR"
 [[ -s "$PARITY_ERR" ]] && cat "$PARITY_ERR"
-printf 'gwb_world=%s\nreviewed_overlay=%s\nseeds=%s\nworld_graph=%s\nfollowed_world=%s\nnormalization_parity=%s\n' \
-  "$WORLD" "$REVIEWED_OVERLAY" "$SEEDS" "$GRAPH" "$FOLLOWED" "$PARITY_STATUS"
+printf 'gwb_world=%s\nreviewed_overlay=%s\nseeds=%s\nworld_graph=%s\nfollowed_world=%s\nhttp_cache=%s\nnormalization_parity=%s\narchive=%s\n' \
+  "$WORLD" "$REVIEWED_OVERLAY" "$SEEDS" "$GRAPH" "$FOLLOWED" "$CACHE_DIR" "$PARITY_STATUS" "$ARCHIVE"
