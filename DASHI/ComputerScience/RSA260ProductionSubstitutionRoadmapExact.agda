@@ -15,6 +15,11 @@ import DASHI.ComputerScience.RSA260BidiCandidateProjection256Exact as CandidateP
 import DASHI.ComputerScience.RSA260BidiCandidateRobustnessExact as CandidateRobustness
 import DASHI.ComputerScience.RSA260BidiPreparationFibreSearchExact as PreparationSearch
 import DASHI.ComputerScience.RSA260BidiPreparationFrontierCrossValidationExact as PreparationFrontier
+import DASHI.ComputerScience.RSA260CADOBlockWiedemannArtifactSchemaSnowballExact as CADOArtifacts
+import DASHI.ComputerScience.RSA260BlockWiedemannProductionScaleReconstructionExact as ProductionScale
+import DASHI.ComputerScience.RSA260BidiRandomIncidenceCarrierCrossValidationExact as RandomIncidence
+import DASHI.ComputerScience.RSA260BidiCADOGridPermutationCrossValidationExact as CADOGrid
+import DASHI.ComputerScience.RSA260BidiFineIncidencePredictorExact as FineIncidence
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -54,6 +59,7 @@ record ProductionArtifactAcquisitionState : Set where
     generatorBytesLocated : Bool
     mksolBytesLocated : Bool
     gatheredKernelVectorBytesLocated : Bool
+    balancingPermutationBytesLocated : Bool
     exactSourceRevisionLocated : Bool
     exactExecutableDigestLocated : Bool
     targetedPublicSearchPerformed : Bool
@@ -62,7 +68,11 @@ open ProductionArtifactAcquisitionState public
 
 currentProductionArtifactAcquisitionState : ProductionArtifactAcquisitionState
 currentProductionArtifactAcquisitionState = production-artifact-acquisition-state
-  false false false false false false false true false
+  false false false false false false false false true false
+
+------------------------------------------------------------------------
+-- Existing owners remain the authoritative coordinates.
+------------------------------------------------------------------------
 
 syntheticLABoundary : SyntheticLA.RSA260KrylovKernelRecoveryRoadmapBoundary
 syntheticLABoundary = SyntheticLA.currentRSA260KrylovKernelRecoveryRoadmapBoundary
@@ -103,8 +113,34 @@ preparationSearchReceipt = PreparationSearch.currentPreparationSearchReceipt
 preparationFrontierPreference : PreparationFrontier.RobustnessAwarePreparationPreference
 preparationFrontierPreference = PreparationFrontier.currentRobustnessAwarePreparationPreference
 
+cadoArtifactSchema : CADOArtifacts.CADOBlockWiedemannArtifactSchema
+cadoArtifactSchema = CADOArtifacts.currentCADOBlockWiedemannArtifactSchema
+
+productionScaleBoundary : ProductionScale.ProductionScaleReconstructionBoundary
+productionScaleBoundary = ProductionScale.canonicalProductionScaleReconstructionBoundary
+
+randomIncidenceBoundary : RandomIncidence.RandomIncidenceInterpretationBoundary
+randomIncidenceBoundary = RandomIncidence.canonicalRandomIncidenceInterpretationBoundary
+
+cadoGridBoundary : CADOGrid.CADOGridInterpretationBoundary
+cadoGridBoundary = CADOGrid.canonicalCADOGridInterpretationBoundary
+
+fineIncidenceBoundary : FineIncidence.FineIncidencePredictorBoundary
+fineIncidenceBoundary = FineIncidence.canonicalFineIncidencePredictorBoundary
+
+------------------------------------------------------------------------
+-- Ordered residual routers.
+--
+-- The general identity route still accepts any same-object LA artifact at the
+-- deepest consumer it can pay.  For the present recurrence-complexity question,
+-- however, the highest-alpha production target is a same-object artifact that
+-- constrains fine incidence or presentation: matrix/balancing/A*/F.sols*.
+------------------------------------------------------------------------
+
 data ProductionResidual : Set where
+  acquireSameObjectFineIncidenceBearingLACarrierArtifact : ProductionResidual
   acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
+  recoverSameObjectBalancingPermutation : ProductionResidual
   acquireProductionProjectionCheckpointOrGenerator : ProductionResidual
   bindExactModifiedSourceRevision : ProductionResidual
   reproduceProductionCPUReference : ProductionResidual
@@ -113,17 +149,22 @@ data ProductionResidual : Set where
   reproduceFullRSA260LinearAlgebra : ProductionResidual
 
 firstUnpaidProductionResidual : ProductionResidual
-firstUnpaidProductionResidual = acquireSameObjectMemberOfDerivedLACarrierFibre
+firstUnpaidProductionResidual = acquireSameObjectFineIncidenceBearingLACarrierArtifact
 
 data CandidateExperimentResidual : Set where
-  exactByteExecutePreparationSearch : CandidateExperimentResidual
-  enlargePreparationFamilyAroundRobustFrontier : CandidateExperimentResidual
-  scaleGeneratorConsumerBeyondWidth8 : CandidateExperimentResidual
+  interpolateFineIncidenceBetweenCyclicAndRandom : CandidateExperimentResidual
+  addTwoHopAndCommonNeighbourFibres : CandidateExperimentResidual
+  fitRecurrenceComplexityFromStructuralFibrePortfolio : CandidateExperimentResidual
+  exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = exactByteExecutePreparationSearch
+firstUnpaidCandidateExperimentResidual = interpolateFineIncidenceBetweenCyclicAndRandom
+
+------------------------------------------------------------------------
+-- Consolidated status surface.  Named fields prevent positional status drift.
+------------------------------------------------------------------------
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -134,14 +175,23 @@ record RSA260ProductionSubstitutionBoundary : Set where
     syntheticProjectionPaid : Bool
     syntheticGeneratorPaid : Bool
     syntheticNonzeroKernelRecoveryPaid : Bool
+
     productionMatrixShapePaidByPrimarySource : Bool
     productionKrylovCountPaidByPrimarySource : Bool
     productionGeneratorLengthPaidByPrimarySource : Bool
     productionKernelVectorCountPaidByPrimarySource : Bool
     productionDependencyCountPaidByPrimarySource : Bool
+
+    cadoArtifactFilenameSchemaPaid : Bool
+    cadoBalancingPermutationShapePaid : Bool
+    productionGeneratorScaleFormulaReconstructed : Bool
+    productionKrylovEndpointFormulaReconstructed : Bool
+    exactProductionCADORevisionRecovered : Bool
+
     bidiProductionLACarrierConstraintFibreDerived : Bool
     bidiProductionLACarrierUniqueInstanceDerived : Bool
     bidiExactCarrierBytesDerived : Bool
+
     runnableBidiCandidateImplemented : Bool
     runnableBidiCandidateProductionContractPassed : Bool
     runnableBidiCandidateHeldOutStructurePassed : Bool
@@ -167,6 +217,15 @@ record RSA260ProductionSubstitutionBoundary : Set where
     runnableBidiCandidateFrontierWidth256Paid : Bool
     runnableBidiCandidateFrontierExactBlobPaid : Bool
     runnableBidiCandidateRobustPreferredPreparationIdentified : Bool
+
+    randomFineIncidenceCrossValidationPaid : Bool
+    randomFineIncidenceConsumerRecoveredAfterEscalation : Bool
+    cadoShapedBalancingCrossValidationPaid : Bool
+    fineIncidenceFamilyPredictorPaid : Bool
+    sameCoarseContractDeterminesRecurrenceComplexity : Bool
+    fineIncidenceMeasuredOnProductionMatrix : Bool
+
+    sameObjectFineIncidenceArtifactPaid : Bool
     runnableBidiCandidateHistoricalIdentityPaid : Bool
     runnableBidiCandidateProductionBWCReplayPaid : Bool
     productionMatrixBytesPaid : Bool
@@ -186,14 +245,23 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; syntheticProjectionPaid = true
   ; syntheticGeneratorPaid = true
   ; syntheticNonzeroKernelRecoveryPaid = true
+
   ; productionMatrixShapePaidByPrimarySource = true
   ; productionKrylovCountPaidByPrimarySource = true
   ; productionGeneratorLengthPaidByPrimarySource = true
   ; productionKernelVectorCountPaidByPrimarySource = true
   ; productionDependencyCountPaidByPrimarySource = true
+
+  ; cadoArtifactFilenameSchemaPaid = true
+  ; cadoBalancingPermutationShapePaid = true
+  ; productionGeneratorScaleFormulaReconstructed = true
+  ; productionKrylovEndpointFormulaReconstructed = true
+  ; exactProductionCADORevisionRecovered = false
+
   ; bidiProductionLACarrierConstraintFibreDerived = true
   ; bidiProductionLACarrierUniqueInstanceDerived = false
   ; bidiExactCarrierBytesDerived = false
+
   ; runnableBidiCandidateImplemented = true
   ; runnableBidiCandidateProductionContractPassed = true
   ; runnableBidiCandidateHeldOutStructurePassed = true
@@ -219,6 +287,15 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; runnableBidiCandidateFrontierWidth256Paid = true
   ; runnableBidiCandidateFrontierExactBlobPaid = false
   ; runnableBidiCandidateRobustPreferredPreparationIdentified = true
+
+  ; randomFineIncidenceCrossValidationPaid = true
+  ; randomFineIncidenceConsumerRecoveredAfterEscalation = true
+  ; cadoShapedBalancingCrossValidationPaid = true
+  ; fineIncidenceFamilyPredictorPaid = true
+  ; sameCoarseContractDeterminesRecurrenceComplexity = false
+  ; fineIncidenceMeasuredOnProductionMatrix = false
+
+  ; sameObjectFineIncidenceArtifactPaid = false
   ; runnableBidiCandidateHistoricalIdentityPaid = false
   ; runnableBidiCandidateProductionBWCReplayPaid = false
   ; productionMatrixBytesPaid = false
@@ -230,12 +307,19 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; fullProductionLinearAlgebraReplayPaid = false
   }
 
+------------------------------------------------------------------------
+-- WrongType firewalls.
+------------------------------------------------------------------------
+
 data ProductionShapeImpliesProductionBytes : Set where
 data BidiCarrierFibreImpliesUniqueMatrix : Set where
 data RunnableCandidateImpliesHistoricalMatrix : Set where
 data PreparationFrontierImpliesProductionAdapter : Set where
 data SparseKernelImpliesFactoringSpeedup : Set where
 data PythonTimingImpliesProductionPerformance : Set where
+data FormulaReconstructionImpliesExactRevision : Set where
+data SyntheticFineIncidencePredictorImpliesProductionMeasurement : Set where
+data SameCoarseContractImpliesSameRecurrenceComplexity : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 
 authorReportedShapeDoesNotCreateBytes : ProductionShapeImpliesProductionBytes → ⊥
@@ -255,6 +339,15 @@ sparseKernelDoesNotCreateFactoringSpeedup ()
 
 pythonTimingDoesNotCreateProductionPerformance : PythonTimingImpliesProductionPerformance → ⊥
 pythonTimingDoesNotCreateProductionPerformance ()
+
+formulaReconstructionDoesNotCreateExactRevision : FormulaReconstructionImpliesExactRevision → ⊥
+formulaReconstructionDoesNotCreateExactRevision ()
+
+syntheticFineIncidenceDoesNotCreateProductionMeasurement : SyntheticFineIncidencePredictorImpliesProductionMeasurement → ⊥
+syntheticFineIncidenceDoesNotCreateProductionMeasurement ()
+
+sameCoarseContractDoesNotCreateSameRecurrence : SameCoarseContractImpliesSameRecurrenceComplexity → ⊥
+sameCoarseContractDoesNotCreateSameRecurrence ()
 
 searchMissDoesNotProveAbsence : SearchMissImpliesArtifactAbsent → ⊥
 searchMissDoesNotProveAbsence ()
