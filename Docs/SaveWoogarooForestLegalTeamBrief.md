@@ -2,12 +2,15 @@
 
 ## Purpose
 
-This is a concise handoff for Save Woogaroo Forest and lawyers assisting the group, including pro-bono counsel. It is not legal advice. It separates:
+This is a concise handoff for Save Woogaroo Forest and lawyers assisting the group, including pro-bono counsel. It is not legal advice.
+
+It separates:
 
 - what the documents actually show;
+- what current science supports;
 - what remains uncertain;
-- the strongest arguments for and against each route; and
-- the next evidence or legal question that could materially change the position.
+- the strongest arguments for and against each legal route; and
+- the next evidence or legal question most likely to change the position.
 
 Public-figure outreach is not part of the legal critical path.
 
@@ -17,15 +20,11 @@ Public-figure outreach is not part of the legal critical path.
 
 The immediate Commonwealth matter is **EPBC 2019/8575, Springfield Residential Development**.
 
-A dated Commonwealth extension notice gives a decision period ending **1 October 2026** and names **Declan O'Connor-Cox, Branch Head, Environment Assessments Queensland**, as the authorised decision-maker.
+A dated Commonwealth extension notice in the case file gives a decision period ending **1 October 2026** and names **Declan O'Connor-Cox, Branch Head, Environment Assessments Queensland**, as the authorised decision-maker.
 
-### 2026 federal administrative change
+The National Environmental Protection Agency commenced on 1 July 2026. Government transition guidance says projects already referred when the new laws take effect continue under the existing EPBC assessment framework. The creation of the new agency should therefore not be treated as proof that a different person now decides this specific referral. Counsel should confirm the current delegation and records custodian separately.
 
-The National Environmental Protection Agency commenced on **1 July 2026**. Government transition guidance says projects already referred when the new laws take effect continue to be assessed under the current EPBC Act. Current delegation instruments dated **24 August 2026** exist both for Departmental and National EPA recipients, and the National EPA now performs project-assessment and approval-condition functions under delegation.
-
-For this project, however, the later and more specific evidence is the **2 September 2026 extension notice naming Declan O'Connor-Cox**. The creation of the National EPA should therefore **not** be treated as proof that a different person now holds the 2019/8575 decision. Counsel should confirm the current operative delegation and current records custodian separately.
-
-### What the project's own 2019 ecology says
+### What the project's own ecology says
 
 The 2019 referral and Saunders Havill Group ecology material identify:
 
@@ -38,18 +37,31 @@ The 2019 referral and Saunders Havill Group ecology material identify:
 - about 26 ha of additional indirect Koala habitat impact;
 - Koala habitat score 7/10 under the guideline then used;
 - Koala scats and recognised food trees;
-- habitat connectivity score 2;
-- a mapped habitat-connectivity area greater than 500 ha;
+- habitat-connectivity score 2;
+- a mapped connected habitat area greater than 500 ha;
 - a mapped 136 ha critical-habitat impact area;
-- the consultant's conclusion that clearing and functional loss of 136 ha would significantly affect Koala habitat critical to survival;
+- the consultant's conclusion that clearing and functional loss of about 136 ha would significantly affect Koala habitat critical to survival;
 - about 136 ha of Grey-headed Flying-fox foraging habitat proposed for removal; and
-- the consultant's conclusion that this removal is likely to adversely affect habitat critical to survival of that species, while separately arguing that broader population and recovery effects are unlikely.
+- the consultant's conclusion that this removal is likely to adversely affect habitat critical to survival of that species, while separately arguing that wider population and recovery effects are unlikely.
 
-These are important because they are **same-project, proponent-side evidence**. They are not Commonwealth findings and they do not by themselves determine the final approval/refusal decision.
+These are important because they are **same-project, proponent-side evidence**. They are not Commonwealth findings and do not decide the final approval/refusal question.
+
+### Important source-dependency point
+
+The Koala occurrence, habitat score, connectivity, fragmentation and significant-impact statements above largely come from the same project ecology lineage.
+
+They are several useful propositions, but they should **not** be counted as several independent ecological confirmations merely because they appear in different sections or documents.
+
+The strongest genuinely independent additions are:
+
+- the Queensland statutory text;
+- Queensland's current Koala threatened-species status;
+- independent peer-reviewed science on Koala connectivity, fragmentation, movement and population genetics; and
+- ideally, a current independent ecologist applying that science to this exact site and approval.
 
 ### What we still do not have
 
-The file in our corpus called `2019-8575-Final-PD.pdf` is only a **one-page publication notice under s 95B(2)**. It says that 1,786 public comments were received and that the Preliminary Documentation and a summary of comments were made available in July–August 2026. It is not the substantive final Preliminary Documentation.
+The file in the working corpus called `2019-8575-Final-PD.pdf` is only a **one-page publication notice under s 95B(2)**. It records 1,786 public comments and says the Preliminary Documentation and a summary of comments were made available in July–August 2026. It is not the substantive final Preliminary Documentation.
 
 The State Library of Queensland catalogue records a four-volume 2026 set:
 
@@ -58,39 +70,43 @@ The State Library of Queensland catalogue records a four-volume 2026 set:
 3. Part Aiii — Attachment A15;
 4. Part B — Referral material.
 
-Those substantive volumes are still missing from our working corpus.
+Those substantive volumes and the actual response/summary addressing the 1,786 comments are still missing from the working corpus.
 
-### What counsel should check now
+### Federal task for counsel
 
-The most useful federal task is a **2019-to-2026 comparison**. We need to know whether the final 2026 material changed any of the following:
+Obtain the substantive 2026 record and compare it with the 2019 baseline, especially:
 
-- final clearing and disturbance area;
+- final clearing/disturbance area;
 - habitat retained on site;
 - avoidance and redesign measures;
 - Koala and Grey-headed Flying-fox impact conclusions;
-- offset package and offset locations;
-- treatment of conservation advice and recovery planning;
-- response to the 1,786 public comments.
-
-Counsel should also confirm which 2026 transitional provisions affect a decision made after 24 August 2026, rather than assuming either that all old law or all new law applies.
-
-The key caution is simple: **the 2019 impact evidence is strong, but it cannot be assumed to be identical to the final 2026 proposal.**
+- final offsets;
+- conservation-advice/recovery-plan treatment; and
+- response to public comments.
 
 ---
 
 ## 2. Queensland interim conservation order — Nature Conservation Act ss 102–107
 
-This route has become much more concrete.
+This is currently the most developed Queensland restraint route.
 
-### The approved local works object
+### What the statute requires
+
+Section 102 permits an interim conservation order where the Minister is of the opinion that threatened or near-threatened wildlife, qualifying habitat/area, or a protected area is **subject to a threatening process likely to have a significant detrimental effect**.
+
+Section 103 allows an order relating to land even where the wildlife or habitat is not physically within that land.
+
+This means **perfect map overlap is not the legal test**. Mapping is evidence of exposure and causal connection, but the real question is likely significant detrimental effect.
+
+### The approved local works process
 
 `9281/2024/OW` is the Ipswich operational-works approval for **Kalina Village 2 Stages 1–16 — earthworks, vegetation clearing and stormwater**.
 
-The 20 March 2026 negotiated approval and negotiated approved plans are now in the evidence set.
+The 20 March 2026 negotiated decision and negotiated approved plans are in the evidence set.
 
-The negotiated approved plan set is `A12705838`. It shows:
+`A12705838` shows:
 
-- the approved works area;
+- approved works areas;
 - stage boundaries;
 - earthworks areas;
 - bushfire-management clearing areas;
@@ -98,109 +114,145 @@ The negotiated approved plan set is `A12705838`. It shows:
 - Open Space areas;
 - O'Dwyer's Gully and Opossum Creek;
 - tree-retention/removal categories at environmental interfaces; and
-- areas where clearing can extend beyond the bulk-earthworks footprint for bushfire management.
+- some clearing beyond the bulk-earthworks footprint for bushfire management.
 
-The plans also make clear that the plotted tree symbols are **not a complete inventory of every tree on the site**.
+The plotted trees are not a complete inventory of every tree on the site.
 
-### Important Commonwealth prerequisite in the Council approval
+### Condition 6(a)
 
-Condition 6(a) requires, before the prestart meeting, either:
+Before the prestart meeting, Condition 6(a) requires either:
 
 - evidence from DCCEEW that the proposed clearing is not a controlled action; or
 - a copy of the Commonwealth approval if the clearing is a controlled action.
 
-This is a high-priority factual question:
+We have the condition. We do **not** yet have evidence showing whether it has been satisfied.
 
-**Has Condition 6(a) been satisfied?**
+The same is true for prestart, pre-clearance fauna material, execution-stage arborist material and actual commencement: no such records have yet been located in the present corpus. That does not prove they do not exist.
 
-We have the condition. We do not yet have evidence that it has been satisfied.
+### Current science relevant to s 102
 
-### Other clearing-related prerequisites
+The current scientific picture strengthens the **mechanism** case, but it does not replace site-specific evidence.
 
-The negotiated approval also requires, among other things:
+- Australian Government endangered-Koala habitat guidance treats feed trees, movement ground, habitat connectivity, corridors, riparian refuges and broader landscape arrangement as habitat attributes. It expressly treats habitat as landscape-context dependent. citeturn164346search1
+- The National Koala Recovery Plan aims for resilient, connected and genetically healthy metapopulations and increased habitat extent, quality and connectivity. citeturn164346search3
+- Brunton, Hohwieler, McDonald and Cristescu's 2026 review says connectivity is central to Koala conservation but warns that maps can create false confidence when not backed by functional ecological data. DOI: `10.1002/2688-8319.70253`. citeturn440141search9
+- Frère and colleagues' 2023 Koala population-subdivision study found measurable genetic consequences from subdivision and evaluated mitigation in terms of actual dispersal/gene flow, not simply the existence of a crossing or retained strip. DOI: `10.1111/mec.16877`. citeturn559366search2
+- McLennan and colleagues' 2025 genomic analysis identified isolation/genomic-erosion concerns including coastal South East Queensland and highlighted development/infrastructure as barriers to dispersal. DOI: `10.1002/eap.3062`. citeturn440141search0
+- Dexter and colleagues' South East Queensland study found that road-strike patterns change with development pressure and cautioned against relying only on historical hotspot data when planning mitigation. DOI: `10.1111/aec.13465`. citeturn810388search0
 
-- arboricultural assessment before clearing within 10 m of Open Space Areas;
-- protection measures for retained trees;
-- a licensed fauna spotter-catcher;
-- a pre-clearance fauna management plan;
-- post-clearance fauna reporting;
-- erosion and sediment-control documentation; and
-- an Access and Works Licence before works on relevant Council-controlled land.
+These sources independently support the **plausibility and scientific importance** of fragmentation, connectivity loss, induced movement risk and population subdivision. They do not prove the magnitude of effect at Springview.
 
-These records may become important evidence of whether clearing is imminent, has begun, or is being carried out consistently with approval conditions.
+### The s 102 question now
 
-### Current public-record check
+The strongest present case is:
 
-A fresh public-web check still shows the **approval and its 21-document application file**, but no separately surfaced public record establishing Condition 6(a) satisfaction, a prestart meeting, pre-clearance fauna material, an execution-stage arborist record or commencement of clearing/earthworks.
+1. Koala is qualifying threatened wildlife under Queensland law.
+2. There is a concrete approved vegetation-clearing/earthworks process.
+3. Same-project ecology records Koala habitat, occurrence evidence, connectivity and large direct/indirect habitat impacts.
+4. The project consultant itself reached a serious significant-impact conclusion under the federal framework.
+5. Current science supports the mechanisms by which fragmentation and connectivity loss can harm Koala populations.
 
-That means only this:
+The missing bridge is still:
 
-**those execution records have not been located on the public surfaces checked.**
+**Would a suitably qualified ecologist, applying the actual Queensland s 102 wording to the current project and ecological state, conclude that the approved process is likely to have a significant detrimental effect?**
 
-It does **not** mean they do not exist. Council/property searches, compliance records or records held outside Development.i may contain them.
+That expert opinion should address:
 
-### Important correction on the legal test
+- likelihood and magnitude of effect;
+- duration and reversibility;
+- fragmentation/connectivity;
+- movement and road exposure;
+- cumulative surrounding development;
+- current habitat/population context; and
+- whether the approval's mitigation measures materially change the conclusion.
 
-The current Nature Conservation Act does **not** require a perfect map overlap between a clearing polygon and a wildlife or habitat point before an interim conservation order can be considered.
+### Strongest adverse material
 
-The important questions are whether qualifying wildlife, critical habitat, an area of major interest or a protected area is **subject to a threatening process likely to have a significant detrimental effect**, and whether the Minister is satisfied of that position.
+Counsel should carry, not hide:
 
-Section 103 also allows an order to relate to land even if the wildlife or habitat is not physically within that land.
+- SHG's recovery-value-0 / isolation reasoning;
+- retained vegetation;
+- tree-protection and fauna-management conditions;
+- any fauna crossing or corridor mitigation;
+- offsets; and
+- any evidence that the final 2026 project is materially less damaging than the 2019 baseline.
 
-So mapping remains valuable evidence, but it is **not the legal test itself**.
-
-The practical question for counsel is therefore:
-
-**Can the approved vegetation-clearing and earthworks process, together with the project ecology and current species/habitat evidence, support the required view that a qualifying ecological object is subject to a threatening process likely to have a significant detrimental effect?**
-
-### What is still missing for this route
-
-- evidence that Condition 6(a) has been satisfied or not satisfied;
-- prestart records;
-- evidence of actual or imminent commencement;
-- current ecology where useful;
-- any expert opinion needed to connect the approved process to likely significant detrimental effect.
-
-LiDAR and exact GIS digitisation may strengthen the evidence later, but they are **not current legal prerequisites**.
+The existence of mitigation does not prove it is effective; equally, the existence of serious impact evidence does not prove s 102 is satisfied.
 
 ---
 
 ## 3. Queensland critical habitat — Nature Conservation Act s 13
 
-The evidence for habitat function is now much stronger than when this work began.
+Section 13 asks whether habitat is **essential for conservation of a viable population of protected wildlife or community of native wildlife**. Present occupation is not required.
 
-The same Springview project material records:
+The Springview evidence strongly supports habitat function, but it does not yet close the essentiality question.
+
+### What is already strong
+
+The same-project material records:
 
 - remnant/native vegetation;
 - Koala food trees;
-- Koala scat evidence;
-- Woogaroo Creek and Opossum Creek connectivity;
-- a habitat connectivity score of 2;
-- a mapped connected habitat area greater than 500 ha; and
-- a Koala habitat score of 7/10 under the older federal guideline.
+- Koala scats;
+- Woogaroo/Opossum Creek connectivity;
+- habitat-connectivity score 2;
+- a connected habitat landscape greater than 500 ha;
+- habitat score 7/10; and
+- expected further fragmentation from surrounding development.
 
-The remaining legal question is narrower:
+### What current science adds
 
-**Is the habitat essential for conservation of a viable protected-wildlife population or native-wildlife community for the purposes of Queensland law?**
+Current science supports a stronger and more precise way to test essentiality:
 
-The strongest adverse evidence must also be carried fairly. Saunders Havill assigned a Koala recovery value of 0 and argued that the site was relatively isolated and not viable to support a Koala population.
+- connectivity should be tested as **functional connectivity**, not merely mapped proximity; citeturn440141search9
+- population subdivision can reduce effective population size and genetic diversity, and mitigation should be judged by realised movement/gene flow; citeturn559366search2
+- regional genomic work shows that isolation risk is a real concern for Koala populations, including coastal South East Queensland; citeturn440141search0
+- government habitat guidance treats movement links and landscape arrangement as part of Koala habitat itself. citeturn164346search1
 
-That creates a real issue for expert and legal review because the same report also records substantial connectivity and expected future fragmentation from surrounding development.
+This science does **not** identify a Springview population for us.
 
-Counsel should therefore test:
+### The two remaining s 13 questions
 
-- whether the s 13 test differs from the older federal Koala guideline concepts used by Saunders Havill;
-- what population or community is the relevant one for s 13;
-- whether current connectivity and later development alter the 2019 recovery-value analysis; and
-- what ecological evidence would be sufficient to support an application.
+1. **What is the biologically relevant viable Koala population or community?**
+2. **What happens to that population if this habitat is removed or functionally severed?**
 
-A prior s 13 declaration is **not necessarily required for every s 102 route**, because s 102 also has a threatened/near-threatened wildlife pathway.
+The second question should examine:
+
+- persistence;
+- movement and dispersal;
+- breeding/recruitment;
+- access to food/resource patches;
+- gene flow/connectivity;
+- resilience under further development; and
+- whether nearby habitat can perform the same function now, rather than after future restoration.
+
+SHG's recovery-value-0/non-viability reasoning is the strongest contrary proposition and should be tested against the same report's connectivity findings, later surrounding development and current independent science.
 
 ---
 
-## 4. Planning and exemption history
+## 4. EPBC s 43B — historical clearing exemption
 
-The main local approval chain identified so far is:
+The current EPBC Act narrows the lawful-continuation exemption for vegetation clearing where land has not been cleared for at least 15 years, subject to the statutory forestry exception. citeturn118336search4
+
+At present, however, **no actual Springview/Woogaroo record has been located showing that the proponent or agency is relying on s 43B for the clearing now in issue**.
+
+So this remains a conditional audit, not a main case.
+
+If s 43B reliance is found, counsel should reconstruct:
+
+- the exact action and polygon;
+- the claimed pre-EPBC use;
+- clearing history for at least the relevant 15-year period;
+- forestry-operation status; and
+- any specific environmental authorisation.
+
+Historical aerial imagery may be useful evidence, but mature forest or repeated uncleared appearance does not by itself answer the legal exemption question.
+
+---
+
+## 5. Planning/exemption history and offsets
+
+The principal local approval chain identified is:
 
 - `6243/2023/LAP` — Springview Village 2 and Village 3 Precinct Plan;
 - `4272/2020/ADP` — Village 2 Area Development Plan;
@@ -208,38 +260,24 @@ The main local approval chain identified so far is:
 - `9281/2024/OW` — earthworks, vegetation clearing and stormwater;
 - `9293/2024/OW` — roadwork, drainage, stormwater and earthworks.
 
-The 2019 referral records the proponent's then-understood Planning Regulation exemption pathway for some regulated vegetation in an urban area. Later Council material also records mapped Koala habitat together with approved/exempted development outcomes.
+Counsel should identify the exact planning/vegetation/Koala exemption and transition provisions that apply to each current stage and parcel.
 
-The legal question is not whether habitat is mapped. It is:
-
-**What exact exemption or transitional provision applies to each present stage, parcel and approval, and does it still apply in the form relied on?**
-
-Counsel should check the exact instruments, dates, transition provisions, vegetation categories, stage boundaries and any later changes or variations.
-
----
-
-## 5. Offsets
-
-The offset issue is still open and should be tested factually rather than assumed.
-
-For each final offset site, we need:
+For final offsets, request:
 
 - exact lot/plan and GIS polygon;
 - existing conservation protection;
-- any previous EPBC offset obligation, covenant or funded restoration program;
-- current vegetation condition;
-- whether the vegetation is remnant, regrowth or planted;
-- likely loss risk if the offset were not used;
-- time needed for restored habitat to become functionally comparable; and
-- whether the site provides the same ecological functions as the habitat being lost at Woogaroo.
+- previous EPBC/offset/covenant obligations;
+- current vegetation condition and maturity;
+- remnant/regrowth/planted status;
+- baseline risk of loss without the offset;
+- restoration lag; and
+- functional equivalence to the habitat lost at Woogaroo.
 
-The important comparison is not simply hectares versus hectares. The project-side baseline includes mature connected habitat, current habitat function, development pressure and the project's own significant-impact conclusions.
-
-Do not assume an offset is invalid merely because it is remote. Do not assume it is adequate merely because the area is larger.
+A remote offset is not automatically inadequate, and a larger number of hectares is not automatically adequate.
 
 ---
 
-## 6. Frog and other current wildlife observations
+## 6. Current wildlife observations
 
 FrogID records supplied by the observer are:
 
@@ -248,99 +286,49 @@ FrogID records supplied by the observer are:
 
 Both are audio records from a stream/creek setting and remain pending.
 
-Capture 948283 was submitted by the observer as **Tusked Frog (`Adelotus brevis`)**, but that identification has not yet been validated by FrogID.
+Capture 948283 was submitted by the observer as Tusked Frog (`Adelotus brevis`), but that identification has not yet been validated by FrogID.
 
-The 2019 project ecology separately identifies Woogaroo and Opossum Creeks as having potential frog habitat and records that rainfall before its threatened-frog survey was not optimal for understanding some threatened frog populations.
-
-This supports a reasonable question about whether current targeted survey or expert review is warranted. It does not by itself prove Tusked Frog presence on the project site.
+The 2019 project ecology separately identifies Woogaroo and Opossum Creeks as having potential frog habitat and records suboptimal weather for some threatened-frog survey work. This supports asking whether updated targeted survey is warranted; it does not prove Tusked Frog presence on the project site.
 
 ---
 
-## 7. What we know about clearing geometry now
+## 7. What is actually open now
 
-The negotiated approved plan `A12705838` is no longer missing.
-
-It provides the approved plan-scale works and clearing surfaces. We still do not have a machine-ready GIS polygon, but that is a technical convenience rather than a threshold legal element.
-
-Future GIS/LiDAR work can help answer:
-
-- which habitat areas and tree groups fall within or near approved works;
-- how much mature canopy may be affected;
-- how clearing relates to Opossum/Woogaroo Creek and mapped corridors;
-- how current wildlife observations relate spatially to the works; and
-- whether planted/regrowth habitat differs materially from mature existing forest.
-
-That work should strengthen evidence, not replace the statutory test.
-
----
-
-## 8. The strongest arguments on both sides
-
-### For stronger protection or restraint
-
-- The proponent's own ecology records a large area of habitat loss and significant impact on Koala habitat critical to survival.
-- The same material records a connected habitat landscape greater than 500 ha and Koala evidence on the site.
-- The Grey-headed Flying-fox analysis also records removal of habitat the consultant regarded as critical to survival.
-- The Council approval is now tied to a concrete vegetation-clearing and earthworks process with Commonwealth and pre-clearance prerequisites.
-- Later development may increase fragmentation and reduce movement opportunities.
-
-### Likely arguments against stronger intervention
-
-- The 2019 consultant gave the site a Koala recovery value of 0 and argued that urban barriers reduce its population-level importance.
-- The consultant argued that broader Grey-headed Flying-fox population and recovery effects would be limited despite local foraging-habitat loss.
-- Local planning approvals and exemptions may authorise activities that would otherwise appear inconsistent with mapped habitat protections.
-- Mitigation, retained vegetation, fauna-management conditions and offsets may be relied on to reduce or manage impacts.
-- The final 2026 federal proposal may differ from the 2019 baseline in ways we have not yet seen.
-
-Both sides need to be tested against the actual final documents and current facts.
-
----
-
-## 9. Priority questions for pro-bono counsel
-
-1. **EPBC 2019/8575:** What material can still be put before the Commonwealth decision-maker before 1 October 2026, and what are the strongest legally relevant merits points from the project's own ecology?
-2. **Federal transition:** Which 2026 transitional provisions and delegation instruments govern the still-pending 2019 referral, and who is the current records custodian and operative delegate for the final decision?
-3. **Final federal record:** Can the substantive 2026 Preliminary Documentation and response to the 1,786 comments be obtained quickly, including final geometry, retained habitat, offsets and impact conclusions?
-4. **Condition 6(a):** Has the Commonwealth prerequisite in `9281/2024/OW` been satisfied? If not, what follows for prestart and clearing?
-5. **NCA ss 102–107:** Does the approved clearing/earthworks process, together with current habitat and threatened-wildlife evidence, support an interim conservation-order request? What evidence is still needed for likely significant detrimental effect?
-6. **NCA s 13:** What is needed to establish that the relevant habitat is essential to conservation of a viable population/community, and how should the 2019 recovery-value-0 analysis be treated?
-7. **Planning/exemptions:** Which exact exemptions and transition provisions apply to the present stages and works?
-8. **Offsets:** What legal and policy requirements govern additionality, existing protection, maturity, time lag and functional equivalence for the final offset package?
-9. **Enforcement/review:** If works become imminent or conditions appear unsatisfied, what are the available standing, injunction, review and evidence-preservation options?
-
----
-
-## 10. Current status in one page
-
-**Already established from source material**
+### Already established
 
 - EPBC 2019/8575 is the live federal project.
-- The 2019 project ecology identifies substantial Koala habitat loss, Koala evidence, a connected habitat landscape and a significant-impact conclusion.
-- The 2019 project ecology also identifies substantial Grey-headed Flying-fox habitat loss and an adverse impact on habitat critical to survival.
-- The National EPA commenced on 1 July 2026, but existing referrals continue under the current EPBC Act transition framework; the 2 September 2026 project-specific notice still names Declan O'Connor-Cox as the authorised decision-maker for 2019/8575.
+- Same-project ecology records substantial Koala habitat impact, occurrence evidence, connectivity and serious impact conclusions.
 - `9281/2024/OW` is an approved vegetation-clearing/earthworks/stormwater application.
-- `A12705838` is the 20 March 2026 negotiated approved plan set and provides the current approved plan-scale works/clearing geometry.
-- Condition 6(a) requires Commonwealth-related evidence before the prestart meeting.
-- FrogID native coordinates are available for two current creek-side audio records.
+- `A12705838` supplies the negotiated approved plan-scale works/clearing geometry.
+- Condition 6(a) requires Commonwealth-related evidence before prestart.
+- Current independent science strongly supports fragmentation/connectivity/population-subdivision mechanisms.
 
-**Still open**
+### Still open
 
-- substantive 2026 federal Preliminary Documentation and response to comments;
-- final 2019-to-2026 federal proposal changes;
-- exact effect of the 2026 federal transition on the pending decision, beyond the source-paid general transition rules;
+- substantive 2026 federal Preliminary Documentation and response to the 1,786 comments;
 - whether Condition 6(a) has been satisfied;
-- whether prestart has occurred or physical works have commenced;
-- evidence sufficient for likely significant detrimental effect under s 102;
-- evidence sufficient for s 13 essentiality;
-- final offset identities, condition, existing protection and additionality;
-- exact current exemption/transition position.
+- whether prestart or physical works have commenced;
+- a current independent ecological opinion on likely significant detrimental effect under s 102;
+- identification of the relevant viable Koala population/community for s 13;
+- the without-site essentiality counterfactual for that population;
+- final offset identity/additionality/maturity;
+- exact current planning/exemption position;
+- any actual reliance on EPBC s 43B.
 
-**Technical work that can help but is not a legal prerequisite**
+### Supporting, not blocking
 
-- GIS digitisation of approved clearing areas;
-- LiDAR/canopy analysis;
-- tree/crown mapping;
-- current habitat overlays;
-- spatial joins to FrogID/iNaturalist records.
+GIS, LiDAR, canopy/tree mapping and precise spatial overlays can strengthen the evidence, but they are not prerequisites to asking the current s 102 or s 13 legal questions.
 
-The immediate legal focus is therefore: **obtain the final federal record, confirm the exact current federal delegation/custodian, check the Commonwealth prerequisite attached to 9281, establish the current works status, and ask counsel whether the present evidence is sufficient for an interim Queensland protection route before irreversible clearing.**
+---
+
+## 8. Priority questions for pro-bono counsel and an ecologist
+
+1. **s 102:** On the present evidence, what additional ecological opinion is needed to support or reject the proposition that the approved clearing/earthworks process is likely to have a significant detrimental effect on threatened Koalas?
+2. **s 102 execution:** Has Condition 6(a) been satisfied, has prestart occurred, and are works imminent or underway?
+3. **s 13 population:** What is the relevant viable Koala population/community for this landscape?
+4. **s 13 essentiality:** Would loss or severance of the Springview/Opossum-Woogaroo habitat materially impair conservation of that population, and is alternative habitat genuinely substitutable now?
+5. **Federal:** Can the substantive 2026 Preliminary Documentation and response to 1,786 comments be obtained before the current decision deadline?
+6. **Offsets/exemptions:** What exact legal instruments and factual assumptions govern the local exemptions and final offset package?
+7. **s 43B:** Is anyone actually relying on the lawful-continuation exemption for the clearing in issue? If not, keep it secondary.
+
+The present legal focus is therefore: **get the current execution records, obtain one genuinely independent current ecological opinion for s 102, identify the relevant Koala population for s 13, and obtain the missing final federal record.**
