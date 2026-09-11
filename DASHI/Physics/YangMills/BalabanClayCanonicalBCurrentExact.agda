@@ -133,11 +133,20 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityMinCutRound326
 -- applies on the same density/root/support carrier.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJCommonDomainRound327Exact
 
+-- R328 corrects the final H1 debt-kind classification on the source-native
+-- route.  CMP116's differentiated decay is already source-owned; once the
+-- selected T5 carrier is proved to be the source carrier, R327 compiles directly
+-- to R320.  H1 remains open as source/application debt, not a mandatory fresh
+-- YM clustering inequality.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound328Exact
+
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
 -- once the source-response identity is supplied, its first theorem-bearing
 -- field is separation decay of the mixed marked log-partition derivative.
 import DASHI.Physics.YangMills.BalabanStepVMarkedSourceDirectClusteringProducerCurrentExact
+import DASHI.Physics.YangMills.BalabanUrsellToSubgapClusteringUpperBidiExact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
 import DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound272Exact
 import DASHI.Physics.YangMills.BalabanLangevinMarkedRowInfluenceAdapterRound273Exact
