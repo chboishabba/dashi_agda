@@ -17,6 +17,11 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338E
 -- but one published localization theorem stated directly on the canonical
 -- common U,J domain manufactured by R104/R114.
 --
+-- On the selected physical carrier the bound values are rational and every
+-- downstream consumer uses the ordinary rational order.  Therefore this ABI
+-- also fixes the source order to `_≤_`; carrying a second abstract order and a
+-- one-way order interpretation would be derived-intermediate inflation.
+--
 -- This owner packages exactly that source theorem shape and compiles it into
 -- both the generic source ABI and the R335 pair-domain authority.  It adds no
 -- analytic estimate and does not manufacture the source theorem by citation.
@@ -25,7 +30,7 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338E
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Common
@@ -45,8 +50,6 @@ record CanonicalCommonDomainCMP116Source
     (demands : R104.CMP116FiniteNormalizedAnalyticDemands)
     : Set₁ where
   field
-    LessEqual : ℚ → ℚ → Set
-
     differentiatedMagnitude :
       R318.Scale base → R318.Volume base →
       R318.SourceDirection base → R318.SourceDirection base → ℚ
@@ -65,18 +68,19 @@ record CanonicalCommonDomainCMP116Source
     sourceEnvelopeHasPositiveExponentialTreeDecay :
       SourceEnvelopeHasPositiveExponentialTreeDecay
 
-    -- One source theorem payment, directly on the canonical common domain.
+    -- One source theorem payment, directly on the canonical common domain and
+    -- directly in the selected rational order.
     differentiatedLocalizationOnCanonicalCommonDomain :
       ∀ scale volume leftJ rightJ →
       Common.SourceCoordinateInside
         (R114.canonicalCMP116CommonDomain
           {R318.Scale base} {R318.Volume base} demands)
         scale volume →
-      LessEqual
-        (differentiatedMagnitude scale volume leftJ rightJ)
-        (sourceEnvelope scale volume
-          (sourceRoot scale volume leftJ rightJ)
-          (sourceDistance leftJ rightJ))
+      differentiatedMagnitude scale volume leftJ rightJ
+      ≤
+      sourceEnvelope scale volume
+        (sourceRoot scale volume leftJ rightJ)
+        (sourceDistance leftJ rightJ)
 
 open CanonicalCommonDomainCMP116Source public
 
@@ -94,8 +98,7 @@ canonicalSourceBuildsGenericPublishedSource :
     (R318.SourceDirection base)
     ℚ
 canonicalSourceBuildsGenericPublishedSource {base = base} {demands = demands} source = record
-  { Source.PublishedCMP116DifferentiatedLocalization.LessEqual =
-      LessEqual source
+  { Source.PublishedCMP116DifferentiatedLocalization.LessEqual = _≤_
   ; Source.PublishedCMP116DifferentiatedLocalization.AdmissibleSourcePair =
       λ scale volume leftJ rightJ →
         Common.SourceCoordinateInside
@@ -141,6 +144,10 @@ record Round338Boundary : Set where
     abstractPairDomainReplayMandatoryAfterCanonicalSourceAlignmentIsFalse :
       abstractPairDomainReplayMandatoryAfterCanonicalSourceAlignment ≡ false
 
+    abstractSourceOrderTransportMandatoryOnSelectedRationalCarrier : Bool
+    abstractSourceOrderTransportMandatoryOnSelectedRationalCarrierIsFalse :
+      abstractSourceOrderTransportMandatoryOnSelectedRationalCarrier ≡ false
+
     canonicalCommonDomainMembershipCompilerOwned : Bool
     canonicalCommonDomainMembershipCompilerOwnedIsTrue :
       canonicalCommonDomainMembershipCompilerOwned ≡ true
@@ -160,6 +167,7 @@ record Round338Boundary : Set where
 canonicalRound338Boundary : Round338Boundary
 canonicalRound338Boundary =
   round338-boundary
+    false refl
     false refl
     true refl
     true refl
