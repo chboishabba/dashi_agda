@@ -17,6 +17,11 @@ FOLLOW_ERR="$OUT_DIR/gwb-wikimedia-world-follow.stderr"
 NORMALIZED="$OUT_DIR/sensiblaw-gwb-candidate-world-model-wikimedia-followed-normalized.json"
 PARITY_ERR="$OUT_DIR/gwb-wikimedia-world-parity.stderr"
 CACHE_DIR="$OUT_DIR/wikimedia-http-cache"
+CONTRACTED="$OUT_DIR/sensiblaw-gwb-candidate-world-model-wikimedia-identity-contracted.json"
+CONTRACTION_SIDECAR="$OUT_DIR/gwb-wikimedia-identity-contractions.json"
+CONTRACTION_ERR="$OUT_DIR/gwb-wikimedia-identity-contraction.stderr"
+CONTRACTED_NORMALIZED="$OUT_DIR/sensiblaw-gwb-candidate-world-model-wikimedia-identity-contracted-normalized.json"
+CONTRACTION_PARITY_ERR="$OUT_DIR/gwb-wikimedia-identity-contraction-parity.stderr"
 
 mkdir -p "$OUT_DIR" "$CACHE_DIR"
 
@@ -140,8 +145,48 @@ PY
   PARITY_STATUS="passed"
 fi
 
+# Contract only the identity dimension that the reviewed/live Wikimedia graph pays.
+bash "$HERE/run_gwb_identity_residual_contraction.sh" "$HANDOFF_ROOT" "$OUT_DIR" >/dev/null
+
+CONTRACTION_PARITY_STATUS="not-run"
+if [[ -d "$SENSIBLAW_ROOT/src" ]]; then
+  PYTHONPATH="$SENSIBLAW_ROOT${PYTHONPATH:+:$PYTHONPATH}" \
+  python3 - "$CONTRACTED" "$CONTRACTED_NORMALIZED" 2> "$CONTRACTION_PARITY_ERR" <<'PY'
+import json, sys
+from pathlib import Path
+from src.policy.world_model import normalize_world_model
+src = Path(sys.argv[1])
+out = Path(sys.argv[2])
+source = json.loads(src.read_text(encoding='utf-8'))
+normalized = normalize_world_model(source)
+out.write_text(json.dumps(normalized, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+for key in (
+    'schema_version','model_id','lane_family','model_status','source_mode',
+    'entities','claims','relations','events','timelines','authority_surfaces',
+    'provenance_graph','conflicts','residuals','update_rules','projections',
+    'external_graph_views','external_bridge_candidates','external_bridge_decisions',
+    'external_pressure_results','metadata','summary','status_counts',
+):
+    assert normalized[key] == source[key], f'normalization drift in {key}'
+print(
+    'SLR_GWB_WIKIMEDIA_IDENTITY_CONTRACTION_SENSIBLAW_PARITY_RECEIPT '
+    f"target={normalized['schema_version']} provenance={len(normalized['provenance_graph'])} "
+    'normalization_drift=false candidate_only=true semantic_promotion=false',
+    file=sys.stderr,
+)
+PY
+  grep -q 'normalization_drift=false' "$CONTRACTION_PARITY_ERR" || {
+    echo 'ERROR: GWB identity-contracted model normalization parity failed' >&2
+    cat "$CONTRACTION_PARITY_ERR" >&2
+    exit 1
+  }
+  CONTRACTION_PARITY_STATUS="passed"
+fi
+
 cat "$SEED_ERR"
 cat "$FOLLOW_ERR"
 [[ -s "$PARITY_ERR" ]] && cat "$PARITY_ERR"
-printf 'gwb_world=%s\nreviewed_overlay=%s\nseeds=%s\nworld_graph=%s\nfollowed_world=%s\nhttp_cache=%s\nnormalization_parity=%s\narchive=%s\n' \
-  "$WORLD" "$REVIEWED_OVERLAY" "$SEEDS" "$GRAPH" "$FOLLOWED" "$CACHE_DIR" "$PARITY_STATUS" "$ARCHIVE"
+cat "$CONTRACTION_ERR"
+[[ -s "$CONTRACTION_PARITY_ERR" ]] && cat "$CONTRACTION_PARITY_ERR"
+printf 'gwb_world=%s\nreviewed_overlay=%s\nseeds=%s\nworld_graph=%s\nfollowed_world=%s\nidentity_contracted_world=%s\nidentity_sidecar=%s\nhttp_cache=%s\nnormalization_parity=%s\nidentity_contraction_parity=%s\narchive=%s\n' \
+  "$WORLD" "$REVIEWED_OVERLAY" "$SEEDS" "$GRAPH" "$FOLLOWED" "$CONTRACTED" "$CONTRACTION_SIDECAR" "$CACHE_DIR" "$PARITY_STATUS" "$CONTRACTION_PARITY_STATUS" "$ARCHIVE"
