@@ -3,6 +3,7 @@ set -euo pipefail
 
 SLR_ROOT="${1:-/home/c/Documents/code/slr}"
 PROFILES="${2:-speaker-profiles.example.tsv}"
+SENSIBLAW_ROOT="${SENSIBLAW_ROOT:-/home/c/Documents/code/SensibLaw}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 SPECIMEN="$HERE/specimens/abc730-2026-09-09-primary"
 
@@ -27,10 +28,18 @@ bash "$HERE/run_transcript_fibres.sh" "$SPECIMEN"
 bash "$HERE/run_manifold_graph.sh" "$SPECIMEN"
 bash "$HERE/run_span_reconstruction.sh" "$SPECIMEN"
 bash "$HERE/run_discourse_quality.sh" "$SPECIMEN"
+bash "$HERE/run_sensiblaw_world_adapter.sh" "$SPECIMEN"
 
-printf '\nABC730_PRIMARY_PIPELINE_RECEIPT specimen=%s source_role=speaker-labelled-primary programme_same_object=true semantic_promotion=false\n' "$SPECIMEN"
-printf 'Run outputs:\n  %s\n  %s\n  %s\n  %s\n' \
+PARITY_STATUS="not-run"
+if [[ -d "$SENSIBLAW_ROOT/src" ]]; then
+  bash "$HERE/run_sensiblaw_world_parity.sh" "$SPECIMEN" "$SENSIBLAW_ROOT" >/dev/null
+  PARITY_STATUS="passed"
+fi
+
+printf '\nABC730_PRIMARY_PIPELINE_RECEIPT specimen=%s source_role=speaker-labelled-primary programme_same_object=true sensiblaw_world_adapter=true sensiblaw_normalization_parity=%s semantic_promotion=false\n' "$SPECIMEN" "$PARITY_STATUS"
+printf 'Run outputs:\n  %s\n  %s\n  %s\n  %s\n  %s\n' \
   "$SPECIMEN/discourse-graph-transcript-wide.tsv" \
   "$SPECIMEN/discourse-spans-transcript-wide.tsv" \
   "$SPECIMEN/discourse-quality-transcript-wide.tsv" \
+  "$SPECIMEN/sensiblaw-candidate-world-model.json" \
   "$SPECIMEN/source-reconstructed.txt"
