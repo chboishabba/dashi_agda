@@ -196,6 +196,44 @@ protonatedValineSupplementaryAsset = supplementary-asset-state
   "recover a repository/deposit/instrument-data object that explicitly identifies the measured raw and/or reduced ion-action spectra and crosswalks them to the article/SI figures"
 
 ------------------------------------------------------------------------
+-- Publisher supplementary hosting surface.
+--
+-- The ACS supporting-information experience exposes Figshare-backed navigation
+-- for this supplementary object.  This is useful manifestation/delivery
+-- provenance, but exact-title/file searches have not located a separate citable
+-- Figshare item identifier, Figshare DOI, or version receipt for jp4c03552_si_001.
+-- The hosting surface therefore cannot be promoted to an independent research-
+-- data deposit or to custody of the measured instrument spectra.
+------------------------------------------------------------------------
+
+record SupplementaryHostingSurface : Set where
+  constructor supplementary-hosting-surface
+  field
+    parentDoi : String
+    publisherAssetIdentifier : String
+    publisherSourceLink : String
+    hostingSurface : String
+    figshareBackedNavigationVisible : Bool
+    exactFigshareItemIdLocated : Bool
+    exactFigshareDoiLocated : Bool
+    exactFigshareVersionLocated : Bool
+    hostingSurfacePaysIndependentDataDeposit : Bool
+    hostingSurfacePaysRawInstrumentData : Bool
+    hostingSurfacePaysRawDataCustody : Bool
+    boundedReading : String
+
+open SupplementaryHostingSurface public
+
+protonatedValineFigshareHostingSurface : SupplementaryHostingSurface
+protonatedValineFigshareHostingSurface = supplementary-hosting-surface
+  "10.1021/acs.jpca.4c03552"
+  "ACS SI jp4c03552_si_001"
+  "https://pubs.acs.org/doi/suppl/10.1021/acs.jpca.4c03552/suppl_file/jp4c03552_si_001.pdf"
+  "ACS supporting-information surface with Figshare-backed navigation"
+  true false false false false false false
+  "Pays publisher supplementary-delivery/hosting provenance only. No separate citable Figshare item/DOI/version or raw/reduced instrument-data deposit has been recovered, so it does not pay independent repository identity or scientific-data custody."
+
+------------------------------------------------------------------------
 -- Same-name DOI/dataset false-positive control.
 ------------------------------------------------------------------------
 
@@ -271,10 +309,12 @@ record ManifestationAttributionBoundary : Set where
     crossDomainDatasetMayBeInheritedByName : Bool
     supplementaryAssetEqualsRawInstrumentDataset : Bool
     supplementaryAssetPaysRawDataCustody : Bool
+    figshareBackedHostingEqualsIndependentDataDeposit : Bool
+    figshareHostingPaysRawDataCustody : Bool
     conflictShouldRemainNamed : Bool
 
 open ManifestationAttributionBoundary public
 
 canonicalManifestationAttributionBoundary : ManifestationAttributionBoundary
 canonicalManifestationAttributionBoundary = manifestation-attribution-boundary
-  false false false false false false false false false false false true
+  false false false false false false false false false false false false false true
