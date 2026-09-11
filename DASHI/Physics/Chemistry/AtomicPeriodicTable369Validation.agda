@@ -4,11 +4,17 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as G
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProvenanceSnowballExact as P
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChronologyStatusExact as C
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 
 ------------------------------------------------------------------------
--- Focused validation root.  Importing this module forces both the generative
--- formalism and its provenance/snowball companion through the Agda checker.
+-- Focused validation root.  Importing this module forces the generative
+-- formalism, provenance/snowball companion, and chronology/status ledger
+-- through the Agda checker when this file is actually checked.
+--
+-- The existence of this file is not itself a typecheck receipt.  See the
+-- chronology/status owner for the distinction between authored source and a
+-- recorded checker run.
 
 capacityRegression :
   G.subshellCapacity 0 ≡ 2
@@ -50,3 +56,13 @@ snowballRegression :
     P.canonicalSnowballDiscipline
   ≡ false
 snowballRegression = refl , refl
+
+publicationDisciplineRegression :
+  C.PublicationDiscipline.repoCommitEqualsExternalPublication
+    C.canonicalPublicationDiscipline
+  ≡ false
+  ×
+  C.PublicationDiscipline.historicalConversationDateEqualsPublicationDate
+    C.canonicalPublicationDiscipline
+  ≡ false
+publicationDisciplineRegression = refl , refl
