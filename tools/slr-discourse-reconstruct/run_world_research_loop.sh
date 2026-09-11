@@ -12,6 +12,7 @@ CURRENT_GRAPH="$OUT_DIR/gwb-wikimedia-world-graph.json"
 LOOP_DIR="$OUT_DIR/world-research-rounds"
 LOOP_RECEIPT="$LOOP_DIR/world-research-loop.json"
 LOOP_ERR="$LOOP_DIR/world-research-loop.stderr"
+ARCHIVE="${SLR_WORLD_HANDOFF_ARCHIVE:-$HANDOFF_ROOT/gwb-world-handoff.tar.xz}"
 
 mkdir -p "$LOOP_DIR"
 [[ -s "$CURRENT_ITERATION" ]] || { echo "ERROR: missing initial iteration $CURRENT_ITERATION" >&2; exit 1; }
@@ -27,6 +28,7 @@ rounds_run=0
 stop_reason="max-iterations"
 
 for ((i=1; i<=MAX_ITERATIONS; i++)); do
+  mkdir -p "$LOOP_DIR/round-$i"
   bash "$HERE/run_world_research_budgeted_round.sh" \
     "$HANDOFF_ROOT" "$OUT_DIR" "$i" "$CURRENT_ITERATION" "$CURRENT_GRAPH" "$LANGUAGES" \
     > "$LOOP_DIR/round-$i/runner.stdout" 2> "$LOOP_DIR/round-$i/runner.stderr"
@@ -96,5 +98,14 @@ print(
 )
 PY
 
+package_status="not-run"
+if [[ "${SLR_WORLD_PACKAGE_HANDOFF:-1}" == "1" ]]; then
+  bash "$HERE/package_gwb_world_handoff.sh" "$HANDOFF_ROOT" "$OUT_DIR" "$ARCHIVE" \
+    > "$LOOP_DIR/handoff-package.stdout" 2> "$LOOP_DIR/handoff-package.stderr"
+  package_status="passed"
+fi
+
 cat "$LOOP_ERR"
-printf 'world_research_loop=%s\nfinal_iteration=%s\nfinal_graph=%s\n' "$LOOP_RECEIPT" "$CURRENT_ITERATION" "$CURRENT_GRAPH"
+[[ -s "$LOOP_DIR/handoff-package.stderr" ]] && cat "$LOOP_DIR/handoff-package.stderr"
+printf 'world_research_loop=%s\nfinal_iteration=%s\nfinal_graph=%s\npackage_status=%s\narchive=%s\n' \
+  "$LOOP_RECEIPT" "$CURRENT_ITERATION" "$CURRENT_GRAPH" "$package_status" "$ARCHIVE"
