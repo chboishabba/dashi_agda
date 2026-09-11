@@ -10,15 +10,15 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularEActiveRound247Validation whe
 --   finite-mode beta history
 --     -> ActiveScale coupling hypothesis
 --     -> consumer-indexed CMP119 regular-E Section-2 predicate
---     -> active CMP122 Theorem-1 witness
---     -> function-valued E_k + localized composite-sum representation
+--     -> active CMP122 Theorem-1 form projection
+--     -> least-privilege active regular-E/localization witness
 --     -> CMP109/CMP116 literal effective-action continuation.
 --
 -- This root does NOT manufacture the published Theorem-1 witness or the
--- literal CMP119 predicate instantiation.  Those source-facing payments remain
--- explicit.  Its purpose is only to ensure the preferred active-scale compiler
--- path elaborates as one focused contract instead of silently falling back to
--- the legacy all-Nat wrapper.
+-- literal CMP119 predicate instantiation. Those source-facing payments remain
+-- explicit. It validates both the compatibility full-witness path and the
+-- preferred form-only consumer path without falling back to the legacy all-Nat
+-- wrapper.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -35,6 +35,10 @@ activeRegularESection2PredicateCompilerLevel : ProofLevel
 activeRegularESection2PredicateCompilerLevel =
   R246.activeRegularESection2PredicateCompilerLevel
 
+activeRegularESection2FormWitnessCompilerLevel : ProofLevel
+activeRegularESection2FormWitnessCompilerLevel =
+  R246.activeRegularESection2FormWitnessCompilerLevel
+
 activeTheorem1SourceLevel : ProofLevel
 activeTheorem1SourceLevel = Active.activeScaleCMP122Theorem1SourceLevel
 
@@ -42,9 +46,20 @@ activeRegularEContinuationCompilerLevel : ProofLevel
 activeRegularEContinuationCompilerLevel =
   R247.activeTheorem1RegularEContinuationCompilerLevel
 
--- Surviving source/repository payment.  The validator deliberately preserves
--- this as conditional rather than confusing imported bibliographic authority
--- with a theorem-bearing in-repo inhabitant of the exact active predicate.
+activeRegularEFormWitnessContinuationCompilerLevel : ProofLevel
+activeRegularEFormWitnessContinuationCompilerLevel =
+  R247.activeRegularEFormWitnessContinuationCompilerLevel
+
+-- Compatibility source/repository payment. The validator deliberately
+-- preserves this as conditional rather than confusing imported bibliographic
+-- authority with a theorem-bearing in-repo inhabitant of the exact predicate.
 literalActiveCMP119RegularESection2PredicateInstantiationLevel : ProofLevel
 literalActiveCMP119RegularESection2PredicateInstantiationLevel =
   R247.literalActiveCMP119RegularESection2PredicateInstantiationLevel
+
+-- Preferred least-privilege payment after projection: downstream BC1 consumes
+-- only the active regular-E/localization form witness, not independent Sect.-2
+-- quantitative bounds.
+literalActiveCMP119RegularESection2FormWitnessLevel : ProofLevel
+literalActiveCMP119RegularESection2FormWitnessLevel =
+  R247.literalActiveCMP119RegularESection2FormWitnessLevel
