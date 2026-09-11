@@ -45,13 +45,13 @@ amyIbrahimDeweyConvergence : IbrahimDeweyConvergenceReceipt
 amyIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
   "Amy Eskridge / POAMS"
   "Pareto.amyReleaseMetadataPareto"
-  "technical report -> research/report administration -> STI/release metadata"
+  "technical report -> research/report administration -> STI/release metadata -> release-system archaeology"
   "530 Physics + NASA Subject Category 70; metadata/documentation traversal 025.3 / 005.7"
   "technical report Q3099732; research Q42240; NASA Q23548; MSFC Q618696"
-  "NTRS 20205010911; NASA/TM-20205010911; M-1531; SAA8-1519855"
-  "primary NASA/MSFC STI compliance or release-authorisation object"
+  "NTRS 20205010911; NASA/TM-20205010911; M-1531; SAA8-1519855; legacy NF-1676/NF-1676B / EDAA identity unresolved"
+  "primary NASA/MSFC STI compliance or release-authorisation object, including legacy EDAA and current STRIVES/STI archival crosswalk"
   true true false false true
-  "Ibrahim and Dewey both route away from more POAMS topical science and toward report-series/release metadata. The exact EDAA/NF-1676B and attached reviewed version remain conclusion-paying."
+  "Ibrahim and Dewey both route away from more POAMS topical science and toward report-series/release metadata. NASA now states that STRIVES standardizes STI submission, review and approval across all ten centers, while NPR 2200.2D retains the DAA/EDAA/NF-1676B release lineage. The exact POAMS legacy EDAA identity, its current STRIVES/STI representation and attached reviewed version remain conclusion-paying; system names are not assumed interchangeable."
 
 rezaIbrahimDeweyConvergence : IbrahimDeweyConvergenceReceipt
 rezaIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
@@ -60,10 +60,10 @@ rezaIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
   "patent -> intellectual property -> assignment/inventor identity; separate personnel branch"
   "346.048 intellectual property + 620 engineering"
   "patent Q253623; intellectual property Q131257; Monica Jacinto Q139385030"
-  "US20030053926A1; US20040208777A1; AIAA 99-2754; LASD 025-00905-1257-400"
+  "US20030053926A1; US20040208777A1; AIAA 99-2754; AIAA SciTech 2023 Aerojet carrier; LASD 025-00905-1257-400"
   "primary patent/person identity record plus primary JPL/Caltech personnel record"
   true true false false true
-  "Both routing systems privilege legal/IP identity records over secondary role repetition. AIAA 99-2754 is retained as the verified paper-number coordinate; a DOI is not promoted here without an authoritative landing object."
+  "Both routing systems privilege legal/IP identity records over secondary role repetition. AIAA 99-2754 is retained as the verified paper-number coordinate; a DOI is not promoted without an authoritative landing object. The primary AIAA SciTech 2023 carrier narrows the last paid pre-JPL state to Aerojet Rocketdyne, but does not itself pay the later Reza/JPL transition."
 
 mccaslandIbrahimDeweyConvergence : IbrahimDeweyConvergenceReceipt
 mccaslandIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
@@ -75,7 +75,7 @@ mccaslandIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
   "Albuquerque address 11039 Bridgepointe NE; jurisdictional legal-entity ID unresolved"
   "primary government company-register/entity-history record"
   true true false false true
-  "Both routes converge on the jurisdictional entity record. Biographies and same-name companies remain search leads only until the New Mexico legal entity is identified exactly."
+  "Both routes converge on the jurisdictional entity record. Primary 2011/2017 carriers tie James Tegnelia and DBE Consulting to the 11039 Bridgepointe address, while current public mirrors contain other DBE-name/address surfaces and unrelated same-label firms. Biographies, addresses and name matching remain search leads until the New Mexico legal entity is identified exactly."
 
 maiwaldIbrahimDeweyConvergence : IbrahimDeweyConvergenceReceipt
 maiwaldIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
@@ -87,7 +87,7 @@ maiwaldIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
   "10.1021/acs.jpca.4c03552; 10.26434/chemrxiv-2024-2tvc6; NTRS 13797709699197; 10.1021/acs.jpca.5c03141"
   "primary repository/deposit or instrument/data-management record"
   true true false false true
-  "Both routes say that another publication has low marginal value. The missing object is a deposit/instrument-data manifest tying raw and reduced spectra to poster/article/SI figures."
+  "Both routes say that another publication has low marginal value. ACS Figshare is demonstrably used for adjacent Lane Terry / Weber-group cryogenic-ion-vibrational-spectroscopy work, so it is a paid repository-surface lead; targeted searches have not located a title-matched protonated/deprotonated valine deposit. That absence does not prove non-deposition. The missing conclusion-paying object remains a deposit/instrument-data manifest tying raw and reduced spectra to poster/article/SI figures."
 
 leblancIbrahimDeweyConvergence : IbrahimDeweyConvergenceReceipt
 leblancIbrahimDeweyConvergence = ibrahim-dewey-convergence-receipt
