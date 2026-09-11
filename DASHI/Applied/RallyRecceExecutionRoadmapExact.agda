@@ -12,14 +12,15 @@ import DASHI.Core.ConsumerIndexedModelFibreExact as ModelFibre
 ------------------------------------------------------------------------
 -- EXECUTION ROADMAP
 --
--- This is a status/navigation owner.  It does not promote a formal contract
--- into a runnable producer, fixture result or validation receipt.
+-- Status/navigation only.  Formal contracts, runnable producers, fixtures,
+-- scientific validation and transfer receipts remain distinct currencies.
 ------------------------------------------------------------------------
 
 data RoadmapStage : Set where
   paceNoteSemanticCarrier : RoadmapStage
   temporalStageStationFibre : RoadmapStage
   telemetryCanonicalAbi : RoadmapStage
+  canonicalNormalizerRuntime : RoadmapStage
   sourceClockSynchronisation : RoadmapStage
   simHubOrNativeAdapter : RoadmapStage
   traversalRecorder : RoadmapStage
@@ -34,6 +35,7 @@ data RoadmapStage : Set where
 
 data RoadmapStatus : Set where
   formalContractPresent : RoadmapStatus
+  executableFixturePresent : RoadmapStatus
   executableProducerMissing : RoadmapStatus
   validationFixtureMissing : RoadmapStatus
   empiricalReceiptMissing : RoadmapStatus
@@ -43,6 +45,7 @@ status : RoadmapStage → RoadmapStatus
 status paceNoteSemanticCarrier = formalContractPresent
 status temporalStageStationFibre = formalContractPresent
 status telemetryCanonicalAbi = formalContractPresent
+status canonicalNormalizerRuntime = executableFixturePresent
 status sourceClockSynchronisation = formalContractPresent
 status simHubOrNativeAdapter = executableProducerMissing
 status traversalRecorder = executableProducerMissing
@@ -56,13 +59,14 @@ status dirtWrcBlackBoxTransfer = empiricalReceiptMissing
 status realVehicleTransfer = deferredTransfer
 
 ------------------------------------------------------------------------
--- Typed dependency edges.  These are execution-order obligations, not merely
--- topical adjacency.
+-- Typed execution dependencies, not topical adjacency.
 ------------------------------------------------------------------------
 
 data DependsOn : RoadmapStage → RoadmapStage → Set where
+  normalizerDependsOnAbi : DependsOn canonicalNormalizerRuntime telemetryCanonicalAbi
   syncDependsOnAbi : DependsOn sourceClockSynchronisation telemetryCanonicalAbi
   adapterDependsOnAbi : DependsOn simHubOrNativeAdapter telemetryCanonicalAbi
+  adapterDependsOnNormalizer : DependsOn simHubOrNativeAdapter canonicalNormalizerRuntime
   recorderDependsOnAdapter : DependsOn traversalRecorder simHubOrNativeAdapter
   recorderDependsOnSync : DependsOn traversalRecorder sourceClockSynchronisation
   videoDependsOnRecorder : DependsOn renderedVideoAlignment traversalRecorder
@@ -82,7 +86,7 @@ data DependsOn : RoadmapStage → RoadmapStage → Set where
   realDependsOnBlackBox : DependsOn realVehicleTransfer dirtWrcBlackBoxTransfer
 
 ------------------------------------------------------------------------
--- Shortest implementation path from the current formal frontier.
+-- Shortest path from current frontier.
 ------------------------------------------------------------------------
 
 record NextExecutionTarget : Set where
@@ -99,8 +103,8 @@ firstExecutableTarget : NextExecutionTarget
 firstExecutableTarget =
   next-execution-target
     simHubOrNativeAdapter
-    "implement one real telemetry adapter into RallyTelemetryObservationNormalisationExact"
-    "record source field, source clock/frame, canonical signal, unit/representation transform and provenance for every emitted sample"
+    "connect one real SimHub or game-native source to scripts/rally_telemetry_normalize.py"
+    "every emitted sample retains source field, source clock/frame, canonical signal, representation/unit transform and provenance"
     true refl
 
 secondExecutableTarget : NextExecutionTarget
@@ -108,7 +112,7 @@ secondExecutableTarget =
   next-execution-target
     traversalRecorder
     "persist synchronized canonical observations for one complete recce traversal"
-    "replay yields the same ordered canonical observation references and preserves traversal/station/source provenance"
+    "replay preserves ordered observations plus traversal/station/source provenance; synchronization uncertainty remains explicit"
     true refl
 
 firstScientificValidationTarget : NextExecutionTarget
@@ -116,22 +120,56 @@ firstScientificValidationTarget =
   next-execution-target
     beamNGHeldOutTruthFixture
     "estimate geometry/vehicle response without privileged truth, then compare against held-out simulator truth"
-    "privileged truth is consumed only by validation comparison and never by the deployable estimator input"
+    "privileged truth is consumed only by validation comparison and never by deployable estimator input"
     true refl
+
+------------------------------------------------------------------------
+-- Runtime receipt for the bounded synthetic ABI fixture.
+------------------------------------------------------------------------
+
+record CanonicalNormalizerFixtureReceipt : Set where
+  constructor canonical-normalizer-fixture-receipt
+  field
+    producerReference : String
+    fixtureReference : String
+    checkerReference : String
+    sourceProvenanceRequired : Bool
+    sourceProvenanceRequiredIsTrue : sourceProvenanceRequired ≡ true
+    clockLineageRequired : Bool
+    clockLineageRequiredIsTrue : clockLineageRequired ≡ true
+    claimsLiveSimulatorIngestion : Bool
+    claimsLiveSimulatorIngestionIsFalse : claimsLiveSimulatorIngestion ≡ false
+    claimsScientificValidation : Bool
+    claimsScientificValidationIsFalse : claimsScientificValidation ≡ false
+
+canonicalNormalizerFixtureReceipt : CanonicalNormalizerFixtureReceipt
+canonicalNormalizerFixtureReceipt =
+  canonical-normalizer-fixture-receipt
+    "scripts/rally_telemetry_normalize.py"
+    "scripts/data/rally_recce/telemetry_normalisation_fixture.jsonl"
+    "scripts/check_rally_telemetry_normalisation.py"
+    true refl
+    true refl
+    false refl
+    false refl
 
 ------------------------------------------------------------------------
 -- Milestone firewalls.
 ------------------------------------------------------------------------
 
 data FormalContractImpliesExecutableProducerPermission : Set where
+data SyntheticFixtureImpliesLiveAdapterPermission : Set where
 data BeamNGValidationImpliesRealWorldValidityPermission : Set where
 data GeometryValidationImpliesTrajectoryOptimalityPermission : Set where
-
 data OneConsumerValidationImpliesEveryConsumerPermission : Set where
 
 formalContractDoesNotManufactureProducer :
   FormalContractImpliesExecutableProducerPermission → ⊥
 formalContractDoesNotManufactureProducer ()
+
+syntheticFixtureDoesNotManufactureLiveAdapter :
+  SyntheticFixtureImpliesLiveAdapterPermission → ⊥
+syntheticFixtureDoesNotManufactureLiveAdapter ()
 
 beamNGValidationDoesNotAutoTransferToReality :
   BeamNGValidationImpliesRealWorldValidityPermission → ⊥
@@ -163,8 +201,10 @@ record RallyRecceRoadmapBoundary : Set where
   field
     formalOntologyPaid : Bool
     formalOntologyPaidIsTrue : formalOntologyPaid ≡ true
-    executableIngestionPaid : Bool
-    executableIngestionPaidIsFalse : executableIngestionPaid ≡ false
+    boundedCanonicalNormalizerPaid : Bool
+    boundedCanonicalNormalizerPaidIsTrue : boundedCanonicalNormalizerPaid ≡ true
+    liveSimulatorIngestionPaid : Bool
+    liveSimulatorIngestionPaidIsFalse : liveSimulatorIngestionPaid ≡ false
     heldOutSimulatorValidationPaid : Bool
     heldOutSimulatorValidationPaidIsFalse : heldOutSimulatorValidationPaid ≡ false
     trajectorySolverPaid : Bool
@@ -175,6 +215,7 @@ record RallyRecceRoadmapBoundary : Set where
 canonicalRallyRecceRoadmapBoundary : RallyRecceRoadmapBoundary
 canonicalRallyRecceRoadmapBoundary =
   rally-recce-roadmap-boundary
+    true refl
     true refl
     false refl
     false refl
