@@ -42,7 +42,7 @@ import DASHI.Physics.YangMills.BalabanAbsoluteTwoJSourceMinCutRound299Exact
 import DASHI.Physics.YangMills.BalabanQuantitativePositiveTimeCyclicityRound299Exact
 import DASHI.Physics.YangMills.BalabanPositiveSpectralComponentLowerRound300Exact
 import DASHI.Physics.YangMills.BalabanQuantitativeSubgapSpectralCoreRound301Exact
-import DASHI.Physics.YangMills.BalabanLocalEnergyDecayRatioRound301Exact
+import DASHI.Physics.YangMills/BalabanLocalEnergyDecayRatioRound301Exact
 import DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302Exact
 import DASHI.Physics.YangMills.BalabanModeIndexedSpectralContradictionRound302Exact
 import DASHI.Physics.YangMills.BalabanDirectPositiveSubgapExclusionRound303Exact
@@ -80,6 +80,11 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound329Exact
 -- R330 cross-pollinates the generic NS sequential-order closure into H2c and
 -- records the source/application status of the five surviving coordinates.
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact
+
+-- R331 repairs the historical "same Hamiltonian" carrier: the preferred
+-- transfer coordinate is indexed by the actual OS reconstruction and retains a
+-- proof-bearing TransferCoordinateOf relation before projecting to R311.
+import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact
 
 -- Optional producer families retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanStepVMarkedSourceDirectClusteringProducerCurrentExact
