@@ -41,10 +41,12 @@ assert fly["channels"] == [
 assert fly["boundary"]["visual_proximity_implies_physical_or_anatomical_proximity"] is False
 PY
 
+bash scripts/check_bioacoustic_fly_si_units_static.sh
+
 if command -v agda >/dev/null 2>&1; then
   agda -i . DASHI/Biology/BioacousticFlyStateSpaceValidation.agda
 else
-  echo "Agda not found; runtime fixture checks passed, kernel check not claimed." >&2
+  echo "Agda not found; runtime/static checks may pass but kernel check is not claimed." >&2
 fi
 
 echo "bioacoustic/fly state-space checks passed"
