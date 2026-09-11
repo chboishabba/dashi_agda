@@ -253,10 +253,9 @@ canonicalSnowballDiscipline =
 -- It is intentionally not identified with any particular external manifold,
 -- fixed element count, or topological lookup table.
 
-record ProvenanceDashboard : Set₁ where
+record ProvenanceDashboard : Set where
   field
-    formalism : Set₁
-    formalismIs : formalism ≡ Atomic369.CanonicalAtomicPeriodicTableStatement
+    formalismOwner : SourceReceipt
     archive : SourceReceipt
     substrateOwner : SourceReceipt
     fermionOwner : SourceReceipt
@@ -268,8 +267,7 @@ record ProvenanceDashboard : Set₁ where
 canonicalProvenanceDashboard : ProvenanceDashboard
 canonicalProvenanceDashboard =
   record
-    { formalism = Atomic369.CanonicalAtomicPeriodicTableStatement
-    ; formalismIs = refl
+    { formalismOwner = currentGenerativeFormalism
     ; archive = historicalAtomArchive
     ; substrateOwner = currentTriadicOwner
     ; fermionOwner = currentAtomicFermionOwner
@@ -278,3 +276,8 @@ canonicalProvenanceDashboard =
     ; recoveryOwner = currentPeriodicRecoveryOwner
     ; snowballDisciplineReceipt = canonicalSnowballDiscipline
     }
+
+-- This type alias keeps the dashboard mechanically tied to the generative
+-- owner without lifting SourceReceipt itself into a higher universe.
+CanonicalFormalism : Set₁
+CanonicalFormalism = Atomic369.CanonicalAtomicPeriodicTableStatement
