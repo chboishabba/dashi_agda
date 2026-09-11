@@ -2,9 +2,8 @@ module DASHI.Physics.YangMills.BalabanTriangularQuadraticCertificateExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Integer.Base using (+_)
 open import Data.Product using (_×_; _,_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; -_; _-_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -84,7 +83,7 @@ evalAdd (qcons dl rl tl) (qcons dr rr tr) (x ∷ xs)
   = ℚRing.solve-∀
 
 twoℚ : ℚ
-twoℚ = + 2
+twoℚ = 1ℚ + 1ℚ
 
 squareLinear : List ℚ → TriQuadratic
 squareLinear [] = qnil
