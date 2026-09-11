@@ -55,8 +55,8 @@ canonicalReplayableAcquisitionBoundary =
 wikimediaPolicyAnchor : Wikimedia.WikimediaFirstAcquisitionPolicy
 wikimediaPolicyAnchor = Wikimedia.canonicalWikimediaFirstAcquisitionPolicy
 
-tieredTransportAnchor : Tiered.GWBWikimediaTransportBoundary
-tieredTransportAnchor = Tiered.canonicalGWBWikimediaTransportBoundary
+tieredTransportAnchor : Tiered.WikidataTieredTransportPolicy
+tieredTransportAnchor = Tiered.canonicalWikidataTieredTransportPolicy
 
 ------------------------------------------------------------------------
 -- Firewalls.
