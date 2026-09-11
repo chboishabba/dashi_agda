@@ -23,6 +23,8 @@ import DASHI.Interop.SLRGWBReviewedWikimediaIdentityAndTieredTransportExact as T
 -- * runner packages the available receipts on both success and failure;
 -- * handoff archive carries metadata/receipts/models/logs/cache, but no raw
 --   books or projected corpus text;
+-- * v2 streams the generated world tree directly instead of making a second
+--   full staging copy, so large replay caches do not double /tmp usage;
 -- * archive carries a per-file SHA-256 manifest plus archive SHA-256.
 ------------------------------------------------------------------------
 
@@ -41,6 +43,7 @@ record ReplayableAcquisitionBoundary : Set where
     projectedCorpusTextEmbedded : Bool
     perFileShaManifest : Bool
     archiveShaReceipt : Bool
+    fullWorldStagingCopyRequired : Bool
     candidateOnly : Bool
     semanticPromotion : Bool
 
@@ -50,7 +53,7 @@ canonicalReplayableAcquisitionBoundary : ReplayableAcquisitionBoundary
 canonicalReplayableAcquisitionBoundary =
   replayableAcquisitionBoundary
     true true true true false false
-    true true false false true true true false
+    true true false false true true false true false
 
 wikimediaPolicyAnchor : Wikimedia.WikimediaFirstAcquisitionPolicy
 wikimediaPolicyAnchor = Wikimedia.canonicalWikimediaFirstAcquisitionPolicy
@@ -67,6 +70,7 @@ data RetryCreatesTruth : Set where
 data FailedRunMayDropReceipts : Set where
 data HandoffMayEmbedRawBooks : Set where
 data HandoffMayEmbedProjectedCorpusText : Set where
+data HandoffRequiresFullWorldStagingCopy : Set where
 
 cacheHitDoesNotCreateIdentity : CacheHitCreatesIdentity → ⊥
 cacheHitDoesNotCreateIdentity ()
@@ -83,6 +87,9 @@ handoffDoesNotEmbedRawBooks ()
 handoffDoesNotEmbedProjectedCorpusText : HandoffMayEmbedProjectedCorpusText → ⊥
 handoffDoesNotEmbedProjectedCorpusText ()
 
+handoffDoesNotRequireFullWorldStagingCopy : HandoffRequiresFullWorldStagingCopy → ⊥
+handoffDoesNotRequireFullWorldStagingCopy ()
+
 record GWBWorldHandoffReceipt : Set where
   constructor gwbWorldHandoffReceipt
   field
@@ -90,12 +97,16 @@ record GWBWorldHandoffReceipt : Set where
     candidateWorldReference : String
     reviewedSeedReference : String
     wikimediaGraphReference : String
+    sourceRoleReference : String
+    multilingualReference : String
     httpCacheReference : String
     fileManifestReference : String
     archiveShaReference : String
+    packagingModeReference : String
     packageEvenWhenFollowFails : Bool
     rawBooksAbsent : Bool
     projectedCorpusTextAbsent : Bool
+    fullWorldStagingCopyAbsent : Bool
     candidateOnly : Bool
     semanticPromotion : Bool
 
@@ -104,11 +115,14 @@ open GWBWorldHandoffReceipt public
 canonicalGWBWorldHandoffReceipt : GWBWorldHandoffReceipt
 canonicalGWBWorldHandoffReceipt =
   gwbWorldHandoffReceipt
-    "slr-gwb-world-handoff-v1"
+    "slr-gwb-world-handoff-v2"
     "sl.candidate_world_model.v0_1"
     "slr-gwb-wikimedia-seed-candidates-v2"
     "slr-wikimedia-world-follow-v1"
+    "slr-gwb-source-role-attachment-v1"
+    "slr-multilingual-wikimedia-parser-compat-v1"
     "gwb-world/wikimedia-http-cache"
     "MANIFEST.sha256"
     "gwb-world-handoff.tar.xz.sha256"
-    true true true true false
+    "stream-live-world-no-full-staging-copy"
+    true true true true true false
