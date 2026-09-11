@@ -23,7 +23,9 @@ module DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact wh
 --
 -- R310 composes exactly these three coordinates into R304.  It does not demote
 -- G2a/G2b to standard analysis: they remain same-carrier physical/application
--- obligations until concrete inhabitants are supplied.
+-- obligations until concrete inhabitants are supplied.  G2c is also retained
+-- as an explicit topology authority because `Converges` is abstract in the T5
+-- carrier; order-closedness must not be inferred from the name alone.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -60,6 +62,7 @@ record PairwiseBoundedTestAdmissibility
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
     (semantics : PairwiseEuclideanTimeSemantics
+      {PhysicalObservable = PhysicalObservable}
       {dataSet = dataSet} {extension = extension} {finite = finite})
     : Set₁ where
   field
@@ -95,6 +98,7 @@ asPhysicalPairwiseTimePresentation :
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
     (semantics : PairwiseEuclideanTimeSemantics
+      {PhysicalObservable = PhysicalObservable}
       {dataSet = dataSet} {extension = extension} {finite = finite}) →
   PairwiseBoundedTestAdmissibility semantics →
   RationalUpperOrderClosure dataSet →
@@ -126,6 +130,9 @@ physicalTimeSupportSemanticsStillRequired = true
 boundedTestAdmissibilityStillRequired : Bool
 boundedTestAdmissibilityStillRequired = true
 
+abstractConvergenceImpliesOrderClosureByName : Bool
+abstractConvergenceImpliesOrderClosureByName = false
+
 covarianceLimitAlgebraIsNewYMAnalysis : Bool
 covarianceLimitAlgebraIsNewYMAnalysis = false
 
@@ -139,7 +146,7 @@ round310BoundedTestAdmissibilityLevel : ProofLevel
 round310BoundedTestAdmissibilityLevel = conditional
 
 round310ScalarOrderClosureLevel : ProofLevel
-round310ScalarOrderClosureLevel = standardImported
+round310ScalarOrderClosureLevel = conditional
 
 round310ConnectedCovarianceLimitCompilerLevel : ProofLevel
 round310ConnectedCovarianceLimitCompilerLevel =
@@ -156,6 +163,10 @@ physicalTimeSupportSemanticsStillRequiredIsTrue = refl
 boundedTestAdmissibilityStillRequiredIsTrue :
   boundedTestAdmissibilityStillRequired ≡ true
 boundedTestAdmissibilityStillRequiredIsTrue = refl
+
+abstractConvergenceImpliesOrderClosureByNameIsFalse :
+  abstractConvergenceImpliesOrderClosureByName ≡ false
+abstractConvergenceImpliesOrderClosureByNameIsFalse = refl
 
 covarianceLimitAlgebraIsNewYMAnalysisIsFalse :
   covarianceLimitAlgebraIsNewYMAnalysis ≡ false
