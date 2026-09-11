@@ -2,6 +2,11 @@
 set -euo pipefail
 JOBS="${AGDA_JOBS:-4}"
 AGDA_FLAKE="${AGDA_FLAKE:-/home/c/Documents/code/agda#debug.bin}"
+# Protect ordinary direct checks too.  A pathological elaboration should stop
+# before it can drive a 32 GiB workstation into swap thrash.  Callers may
+# override this explicitly for exceptional runs.
+DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-15360}"
+export DASHI_AGDA_RSS_LIMIT_MB
 
 SESSION_NAME="${DASHI_TMUX_SESSION:-dashi_agda_check_$$}"
 WAIT_CHANNEL="dashi_wait_$$"
@@ -25,7 +30,7 @@ if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && command -v tmux >/d
               AGDA_RTS_HEAP=\"${AGDA_RTS_HEAP:-}\" \
               AGDA_RTS_STATS=\"${AGDA_RTS_STATS:-0}\" \
               AGDA_TARGETS_FILE=\"${AGDA_TARGETS_FILE:-}\" \
-              DASHI_AGDA_RSS_LIMIT_MB=\"${DASHI_AGDA_RSS_LIMIT_MB:-}\" \
+              DASHI_AGDA_RSS_LIMIT_MB=\"${DASHI_AGDA_RSS_LIMIT_MB}\" \
               \"$0\" ${@+\"$@\"}
       rc=\$?
       printf \"%s\\n\" \"\$rc\" > \"$STATUS_FILE\"
@@ -251,6 +256,7 @@ AGDA_LOG_PATH="$(build_log_path "$AGDA_LOG_BASE_PATH" "$LOG_TARGET_SLUG" "$LOG_T
 : >"$AGDA_LOG_PATH"
 prune_old_logs "$AGDA_LOG_BASE_PATH" "$AGDA_LOG_KEEP_COUNT"
 echo "Logging Agda output to: $AGDA_LOG_PATH"
+echo "Agda RSS guard: ${DASHI_AGDA_RSS_LIMIT_MB} MiB"
 
 AGDA_PROFILE_ARGS=()
 # Optional diagnostic controls for expensive focused checks.  They are opt-in
@@ -292,11 +298,6 @@ fi
 run_agda_target() {
   local target="$1"
   local status watchdog_pid rss_kb watchdog_marker
-
-  if [ -z "${DASHI_AGDA_RSS_LIMIT_MB:-}" ]; then
-    "${AGDA_RUN[@]}" "$target"
-    return
-  fi
 
   if ! [[ "$DASHI_AGDA_RSS_LIMIT_MB" =~ ^[1-9][0-9]*$ ]]; then
     echo "DASHI_AGDA_RSS_LIMIT_MB must be a positive integer" >&2
