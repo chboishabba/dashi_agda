@@ -83,17 +83,27 @@ kirtlandCurrentMcCasland = dbe-attribution-manifestation
   "650 Management / consulting traversal only"
   "Primary organisational page pays the current displayed DBE title string, but its stale ATA body and duplicate DBE Founder/Owner/President heading on Tegnelia's Kirtland profile make the page temporally and attributionally mixed. It cannot by itself establish DBE founding date, transfer date, exclusive ownership, 2026 client portfolio, or event-time corporate status."
 
+federalDOTAtlantaDBE : DBEAttributionManifestation
+federalDOTAtlantaDBE = dbe-attribution-manifestation
+  "current U.S. DOT DOCR DBE database surface observed 2026-09"
+  primaryGovernmentRecord
+  "U.S. Department of Transportation DOCR DBE Database for Decision Appeals: DBE Consulting, LLC"
+  "https://www.transportation.gov/disadvantaged-business-enterprise/dbe-consulting-llc"
+  "Kimberly Griffin"
+  "Company Owner; applicant type Disadvantaged Business Enterprise; Atlanta, Georgia"
+  "U.S. DOT DOCR DBE database record; 325 Centennial Park Drive, Suite 1366, Atlanta, GA 30313"
+  "unresolvedQid"
+  "338.7 Enterprises / 650 Management traversal only"
+  "Primary federal government carrier paying existence, owner name and Atlanta address for a DBE Consulting, LLC distinct in place/person from the Albuquerque DBE attributed to Tegnelia. It is a negative-control entity carrier only and does not identify the New Mexico legal entity or its ownership history."
+
 ------------------------------------------------------------------------
 -- Same-label company collision control.
 --
--- Ibrahim-guided traversal from company register -> company exposed an unrelated
--- active business using essentially the same DBE Consulting LLC label: an
--- Atlanta/Georgia certification consultancy led by Kimberly Griffin and focused
--- on DBE/ACDBE certification.  It is not the Albuquerque national-security
--- company attributed to Tegnelia.  This is the corporate analogue of a same-name
--- person/DOI collision: legal-entity identity must be paid by jurisdictional
--- registry identifiers, addresses, formation records or equivalent primary
--- company carriers, not by string equality.
+-- Ibrahim/Dewey traversal from company register -> company/legal entity exposed
+-- an unrelated U.S. DOT-listed DBE Consulting, LLC in Atlanta, owned by Kimberly
+-- Griffin.  This is the corporate analogue of a same-name person/DOI collision:
+-- legal-entity identity must be paid by jurisdictional identifiers, addresses,
+-- formation records or equivalent primary company carriers, not string equality.
 ------------------------------------------------------------------------
 
 record SameLabelCompanyCollision : Set where
@@ -114,13 +124,13 @@ open SameLabelCompanyCollision public
 
 atlantaDBEConsultingCollision : SameLabelCompanyCollision
 atlantaDBEConsultingCollision = same-label-company-collision
-  "dbe Consulting LLC / DBE Consulting"
-  "AMAC PAC board + dbe Consulting public company surface"
-  "https://www.amac-org.com/pac/ ; https://capbuildernetwork.wixsite.com/dbeconsulting/about-us"
-  "Atlanta, Georgia / airport and transportation DBE-certification market"
-  "DBE/ACDBE certification consulting; Kimberly Griffin identified as CEO"
+  "DBE Consulting, LLC"
+  "U.S. Department of Transportation DOCR DBE Database for Decision Appeals"
+  "https://www.transportation.gov/disadvantaged-business-enterprise/dbe-consulting-llc"
+  "Atlanta, Georgia; 325 Centennial Park Drive, Suite 1366"
+  "Disadvantaged Business Enterprise applicant; owner Kimberly Griffin"
   "DBE Consulting LLC, Albuquerque, New Mexico"
-  "State Department PRN 2011/1166 naming James A. Tegnelia as President/Owner; 2017 Albuquerque DBE letterhead"
+  "State Department PRN 2011/1166 naming James A. Tegnelia as President/Owner; 2017 Albuquerque DBE letterhead at 11039 Bridgepointe NE"
   false
   false
   true
@@ -138,6 +148,7 @@ record DBEOwnershipArchaeologyState : Set where
     mccaslandCurrentDBEHeadingPaid : Bool
     currentKirtlandRoleLabelCollisionPaid : Bool
     unrelatedSameLabelCompanyLocated : Bool
+    unrelatedSameLabelCompanyPrimaryGovernmentPaid : Bool
     sameDBEEntityAcrossAllManifestationsPaid : Bool
     mccaslandFounderFromCompanyInceptionPaid : Bool
     ownershipTransferDatePaid : Bool
@@ -149,8 +160,8 @@ open DBEOwnershipArchaeologyState public
 
 canonicalDBEOwnershipArchaeologyState : DBEOwnershipArchaeologyState
 canonicalDBEOwnershipArchaeologyState = dbe-ownership-archaeology-state
-  true true true true true true false false false false false
-  "recover New Mexico corporate filing/history or equivalent primary company record identifying exact DBE entity, formation date, jurisdictional/entity identifier, members/managers/ownership changes, and dated McCasland role; use exact legal-entity identifiers to prevent collision with unrelated DBE/dbe Consulting companies; only then acquire primary 2025-2026 client/contract carriers"
+  true true true true true true true false false false false false
+  "recover New Mexico corporate filing/history or equivalent primary government/vendor record identifying the exact Albuquerque DBE entity, jurisdictional/entity identifier, formation date, members/managers/ownership changes and dated McCasland role; use exact identifiers to prevent collision with the U.S. DOT Atlanta DBE Consulting, LLC; only then acquire primary 2025-2026 client/contract carriers"
 
 record DBEAttributionBoundary : Set where
   constructor dbe-attribution-boundary
@@ -161,6 +172,7 @@ record DBEAttributionBoundary : Set where
     organisationBiographyEqualsCorporateFiling : Bool
     duplicateFounderHeadingsCanBothBeReadAsLiteralCorporateHistory : Bool
     unrelatedSameLabelCompanyMayBeMergedByName : Bool
+    federalDBERecordIdentifiesAlbuquerqueEntity : Bool
     secondaryClientClaimsPromoteWithoutPrimaryContract : Bool
     datedManifestationsMayGuideCorporateRecordSearch : Bool
 
@@ -168,4 +180,4 @@ open DBEAttributionBoundary public
 
 canonicalDBEAttributionBoundary : DBEAttributionBoundary
 canonicalDBEAttributionBoundary = dbe-attribution-boundary
-  false false false false false false false true
+  false false false false false false false false true
