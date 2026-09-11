@@ -49,16 +49,16 @@ leePopulationGenetics = Attribution.mkDOISource
   "primary population-genetics source: 512 koalas across ten mainland SEQ LGAs plus one island; six genetic clusters; major roads and rivers consistent with barriers to gene flow; regional population structure is not a site-specific Springview cluster assignment"
   Attribution.publicAttribution
 
-timmsFowlerGeneFlow : Attribution.AttributedSource
-timmsFowlerGeneFlow = Attribution.mkDOISource
-  "P. Timms; E. V. Fowler"
+fowlerHouldenHoebenTimmsGeneFlow : Attribution.AttributedSource
+fowlerHouldenHoebenTimmsGeneFlow = Attribution.mkDOISource
+  "E. V. Fowler; B. A. Houlden; P. Hoeben; P. Timms"
   "Genetic diversity and gene flow among southeastern Queensland koalas (Phascolarctos cinereus)"
-  "Molecular Ecology"
+  "Molecular Ecology 9(2):155-164"
   "2000"
   "10.1046/j.1365-294x.2000.00844.x"
   "https://doi.org/10.1046/j.1365-294x.2000.00844.x"
   Attribution.academicArticleSource
-  "primary genetic source over five SEQ populations; finds significant genetic heterogeneity among most populations and supports spatial structuring; does not identify the present Woogaroo/Springview population"
+  "primary genetic source over five SEQ populations; finds significant genetic heterogeneity among most populations and supports spatial structuring; PMID 10672159; does not identify the present Woogaroo/Springview population"
   Attribution.publicAttribution
 
 tkaczynskiSEQReview : Attribution.AttributedSource
