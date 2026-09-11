@@ -65,13 +65,14 @@ canonicalRegisteredSTIBoundary = registered-sti-boundary false false false true
 ------------------------------------------------------------------------
 -- Legacy EDAA / current STRIVES archaeology.
 --
--- NASA's current STI Compliance and Distribution Services states that STRIVES
+-- Historical NPR 2200.2D documents the DAA/EDAA review and NF-1676/NF-1676B
+-- lineage.  NASA marks 2200.2D obsolete.  Current NPR 2200.2E, effective
+-- 2021-12-17 and revalidated through 2031, defines STRIVES Review as NASA's
+-- dissemination/release approval process and NF-1676 as the requisite form.
+-- NASA STI Compliance and Distribution Services separately states that STRIVES
 -- standardizes STI submission, review and approval across all ten field centers.
--- NPR 2200.2D separately documents the DAA/EDAA review and NF-1676/NF-1676B as
--- the release-compliance mechanism, with the DAA Representative tracking,
--- filing and transferring the DAA and associated STI to the NASA STI Program.
--- These are system/process manifestations of one release-governance lineage;
--- they are not assumed to expose the same identifier or bytes.
+-- These are successive process/system manifestations; identifier or byte
+-- identity across them is not assumed.
 ------------------------------------------------------------------------
 
 record ReleaseSystemArchaeology : Set where
@@ -98,12 +99,45 @@ poamsReleaseSystemArchaeology : ReleaseSystemArchaeology
 poamsReleaseSystemArchaeology = release-system-archaeology
   "Document Availability Authorization review for NASA STI"
   "NASA Form NF-1676 / NF-1676B"
-  "Electronic Document Availability Authorization (EDAA)"
-  "Scientific, Technical and Research Information discoVEry System (STRIVES)"
+  "Electronic Document Availability Authorization (EDAA) documented by historical NPR 2200.2D"
+  "Scientific, Technical and Research Information discoVEry System (STRIVES) under current NPR 2200.2E"
   "NASA STI Compliance and Distribution Services"
   "NASA STI Information Desk"
   false false false true true true false
   "recover the POAMS legacy EDAA/NF-1676B identity and ask NASA STI/MSFC for the corresponding current STRIVES/STI archival representation, associated STI attachment/version, review-history metadata and transfer/release relationship; do not assume EDAA and STRIVES identifiers are identical"
+
+------------------------------------------------------------------------
+-- Current-policy / historical-policy boundary.
+------------------------------------------------------------------------
+
+record ReleasePolicyVersionState : Set where
+  constructor release-policy-version-state
+  field
+    historicalDirective : String
+    historicalDirectiveStatus : String
+    currentDirective : String
+    currentDirectiveEffectiveDate : String
+    currentDirectiveExpirationDate : String
+    currentReleaseReviewDefinition : String
+    currentRequisiteForm : String
+    currentPolicyAppliesToNASAcenters : Bool
+    historicalDirectiveMayBeUsedAsCurrentPolicy : Bool
+    historicalDirectiveMayDocumentLegacyEDAAProcess : Bool
+    currentDirectivePaysPOAMSLegacyRecordIdentity : Bool
+    currentDirectiveCanRouteArchivalCrosswalkSearch : Bool
+
+open ReleasePolicyVersionState public
+
+canonicalReleasePolicyVersionState : ReleasePolicyVersionState
+canonicalReleasePolicyVersionState = release-policy-version-state
+  "NPR 2200.2D"
+  "NASA marks this directive obsolete / no longer used; retained here only for historical DAA/EDAA archaeology"
+  "NPR 2200.2E — Requirements for Documentation, Approval and Dissemination of Scientific and Technical Information, revalidated with Change 2"
+  "2021-12-17"
+  "2031-12-17"
+  "STRIVES Review = dissemination or release approval process by which NASA determines restrictions, if any, on a document"
+  "NASA Form NF-1676"
+  true false true false true
 
 record ReleaseSystemBoundary : Set where
   constructor release-system-boundary
