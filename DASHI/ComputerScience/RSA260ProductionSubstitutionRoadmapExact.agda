@@ -19,7 +19,7 @@ import DASHI.ComputerScience.RSA260LACarrierBidiDerivationExact as BidiCarrier
 --
 -- This narrows P0 without paying same-object bytes:
 --
---   carrier schema/fibre derived  = yes
+--   carrier schema/fibre derived   = yes
 --   unique matrix instance derived = no
 --   same-object production bytes   = no
 ------------------------------------------------------------------------
@@ -205,7 +205,7 @@ cpuReferenceDoesNotCreateCUDAParity : CPUReferenceImpliesCUDAParity → ⊥
 cpuReferenceDoesNotCreateCUDAParity ()
 
 cudaParityDoesNotCreateNCCLParity : CUDAParityImpliesNCCLParity → ⊥
-ncudaParityDoesNotCreateNCCLParity = cudaParityDoesNotCreateNCCLParity
+cudaParityDoesNotCreateNCCLParity ()
 
 downstreamArtifactDoesNotCreateEarlierCarrier : DownstreamArtifactImpliesEarlierCarrier → ⊥
 downstreamArtifactDoesNotCreateEarlierCarrier ()
