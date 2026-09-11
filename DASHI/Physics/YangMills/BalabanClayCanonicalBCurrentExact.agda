@@ -66,10 +66,9 @@ import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Ex
 import DASHI.Physics.YangMills.BalabanPairwiseClusteringStandardMassGapRound305Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact
 
--- R309 makes G1 proof-bearing at the correct cut: the published/source
--- localization authority is indexed by the exact selected-T5 shell carrier;
--- the only local payment is same-object applicability of the selected J pair,
--- connecting root and physical support distance.
+-- R309 makes G1 proof-bearing at the source/applicability cut.  It remains a
+-- useful optional producer decomposition for constructing the exact R295
+-- selected-J localization payment.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact
 
 -- R310 splits G2 so covariance-limit algebra is not confused with physical
@@ -81,6 +80,14 @@ import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact
 -- R311 reuses the existing transfer-energy/decay-ratio coordinate for G3 rather
 -- than maintaining a second independent mass-rate convention.
 import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact
+
+-- R312 is the current six-coordinate B min-cut after consumer-first archaeology.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound312Exact
+
+-- R313 removes an extra downstream G1 payment: once the exact R295 presentation
+-- already carries magnitude(D^2_J log Z) <= shell and magnitude is rational
+-- absolute value, the R296 absolute shell field is equality transport.
+import DASHI.Physics.YangMills.BalabanDirectR295ToR296MagnitudeCompilerRound313Exact
 
 -- Older producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
