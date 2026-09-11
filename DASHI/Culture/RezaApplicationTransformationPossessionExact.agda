@@ -46,6 +46,54 @@ canonicalEventTimeRoleAttributionState : EventTimeRoleAttributionState
 canonicalEventTimeRoleAttributionState = event-time-role-attribution-state
   true true false false true false false
 
+------------------------------------------------------------------------
+-- Cal State LA Dean's Advisory Board historical-page snowball boundary.
+--
+-- Multiple later secondary pages repeat that the 2024-2025 Cal State LA board
+-- showed "Monica Reza — JPL NASA".  The currently recoverable PRIMARY Cal
+-- State LA board page is explicitly the 2025-2026 board and does not expose
+-- the prior year's Monica row.  Therefore the historical row remains a useful
+-- acquisition lead, but source-of-source repetition is not independent proof.
+------------------------------------------------------------------------
+
+record HistoricalBoardRoleLead : Set where
+  constructor historical-board-role-lead
+  field
+    institution : String
+    currentPrimaryPage : String
+    currentPageBoardYear : String
+    allegedHistoricalRow : String
+    historicalRowRepeatedBySecondarySources : Bool
+    exactHistoricalPrimaryPageRecovered : Bool
+    historicalPageArchiveOrSnapshotRecovered : Bool
+    historicalRowPaysJPLEmployment : Bool
+    currentPageAbsenceDisprovesHistoricalRow : Bool
+    repeatedSecondaryTextCountsAsIndependentPrimaryReceipts : Bool
+
+open HistoricalBoardRoleLead public
+
+rezaCalStateBoardHistoricalLead : HistoricalBoardRoleLead
+rezaCalStateBoardHistoricalLead = historical-board-role-lead
+  "Cal State LA College of Engineering, Computer Science, and Technology"
+  "https://www.calstatela.edu/ecst/deans-advisory-board"
+  "2025-2026"
+  "reported 2024-2025 row: Monica Reza — JPL NASA"
+  true false false false false false
+
+record HistoricalBoardBoundary : Set where
+  constructor historical-board-boundary
+  field
+    currentPrimaryPageIsEvidenceForCurrentMembership : Bool
+    currentPrimaryPageDeterminesPriorYearContents : Bool
+    historicalSecondaryRepetitionMaySeedArchiveSearch : Bool
+    historicalSecondaryRepetitionPaysPrimaryJPLRole : Bool
+    exactArchivedCalStateRowWouldPayInstitutionalAffiliationCoordinate : Bool
+    exactArchivedCalStateRowWouldByItselfPayDirectorTitle : Bool
+
+canonicalHistoricalBoardBoundary : HistoricalBoardBoundary
+canonicalHistoricalBoardBoundary = historical-board-boundary
+  true false true false true false
+
 record RezaApplicationBoundary : Set where
   constructor reza-application-boundary
   field
@@ -65,6 +113,7 @@ canonicalRezaApplicationBoundary = reza-application-boundary
 
 data RezaApplicationReverseTarget : Set where
   acquirePrimaryJPLEventTimeRoleRecord
+  acquireArchivedCalState2024To2025BoardRow
   acquireHeatTreatmentDevelopmentRecords
   acquireMicrostructureAcceptanceWindow
   acquireProcessToleranceAndFailureHistory
@@ -74,4 +123,4 @@ data RezaApplicationReverseTarget : Set where
   acquireRequalificationAfterDeparture : RezaApplicationReverseTarget
 
 firstRezaApplicationTarget : RezaApplicationReverseTarget
-firstRezaApplicationTarget = acquirePrimaryJPLEventTimeRoleRecord
+firstRezaApplicationTarget = acquireArchivedCalState2024To2025BoardRow
