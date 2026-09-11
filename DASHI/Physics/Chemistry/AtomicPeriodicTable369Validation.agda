@@ -8,6 +8,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChronologyStatusExact as C
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AttributionLedgerExact as A
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoRegressionExact as X
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
+import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 
 ------------------------------------------------------------------------
 -- Focused validation root.  Importing this module forces the generative
@@ -87,11 +88,11 @@ attributionDisciplineRegression = refl , (refl , refl)
 finiteHistoricalTargetRegression :
   X.finiteTargetCount ≡ 10
   ×
-  X.Finite.occupationElectronCount
-    (X.Finite.finiteAufbauOccupation X.Finite.hydrogen) ≡ 1
+  F.occupationElectronCount
+    (F.finiteAufbauOccupation F.hydrogen) ≡ 1
   ×
-  X.Finite.occupationElectronCount
-    (X.Finite.finiteAufbauOccupation X.Finite.neon) ≡ 10
+  F.occupationElectronCount
+    (F.finiteAufbauOccupation F.neon) ≡ 10
 finiteHistoricalTargetRegression =
   X.finiteTargetCountIs10 ,
   (X.hydrogenTargetElectronCountIs1 , X.neonTargetElectronCountIs10)
