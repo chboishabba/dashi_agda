@@ -19,6 +19,12 @@ The immediate Commonwealth matter is **EPBC 2019/8575, Springfield Residential D
 
 A dated Commonwealth extension notice gives a decision period ending **1 October 2026** and names **Declan O'Connor-Cox, Branch Head, Environment Assessments Queensland**, as the authorised decision-maker.
 
+### 2026 federal administrative change
+
+The National Environmental Protection Agency commenced on **1 July 2026**. Government transition guidance says projects already referred when the new laws take effect continue to be assessed under the current EPBC Act. Current delegation instruments dated **24 August 2026** exist both for Departmental and National EPA recipients, and the National EPA now performs project-assessment and approval-condition functions under delegation.
+
+For this project, however, the later and more specific evidence is the **2 September 2026 extension notice naming Declan O'Connor-Cox**. The creation of the National EPA should therefore **not** be treated as proof that a different person now holds the 2019/8575 decision. Counsel should confirm the current operative delegation and current records custodian separately.
+
 ### What the project's own 2019 ecology says
 
 The 2019 referral and Saunders Havill Group ecology material identify:
@@ -65,6 +71,8 @@ The most useful federal task is a **2019-to-2026 comparison**. We need to know w
 - offset package and offset locations;
 - treatment of conservation advice and recovery planning;
 - response to the 1,786 public comments.
+
+Counsel should also confirm which 2026 transitional provisions affect a decision made after 24 August 2026, rather than assuming either that all old law or all new law applies.
 
 The key caution is simple: **the 2019 impact evidence is strong, but it cannot be assumed to be identical to the final 2026 proposal.**
 
@@ -120,6 +128,16 @@ The negotiated approval also requires, among other things:
 - an Access and Works Licence before works on relevant Council-controlled land.
 
 These records may become important evidence of whether clearing is imminent, has begun, or is being carried out consistently with approval conditions.
+
+### Current public-record check
+
+A fresh public-web check still shows the **approval and its 21-document application file**, but no separately surfaced public record establishing Condition 6(a) satisfaction, a prestart meeting, pre-clearance fauna material, an execution-stage arborist record or commencement of clearing/earthworks.
+
+That means only this:
+
+**those execution records have not been located on the public surfaces checked.**
+
+It does **not** mean they do not exist. Council/property searches, compliance records or records held outside Development.i may contain them.
 
 ### Important correction on the legal test
 
@@ -281,13 +299,14 @@ Both sides need to be tested against the actual final documents and current fact
 ## 9. Priority questions for pro-bono counsel
 
 1. **EPBC 2019/8575:** What material can still be put before the Commonwealth decision-maker before 1 October 2026, and what are the strongest legally relevant merits points from the project's own ecology?
-2. **Final federal record:** Can the substantive 2026 Preliminary Documentation and response to the 1,786 comments be obtained quickly, including final geometry, retained habitat, offsets and impact conclusions?
-3. **Condition 6(a):** Has the Commonwealth prerequisite in `9281/2024/OW` been satisfied? If not, what follows for prestart and clearing?
-4. **NCA ss 102–107:** Does the approved clearing/earthworks process, together with current habitat and threatened-wildlife evidence, support an interim conservation-order request? What evidence is still needed for likely significant detrimental effect?
-5. **NCA s 13:** What is needed to establish that the relevant habitat is essential to conservation of a viable population/community, and how should the 2019 recovery-value-0 analysis be treated?
-6. **Planning/exemptions:** Which exact exemptions and transition provisions apply to the present stages and works?
-7. **Offsets:** What legal and policy requirements govern additionality, existing protection, maturity, time lag and functional equivalence for the final offset package?
-8. **Enforcement/review:** If works become imminent or conditions appear unsatisfied, what are the available standing, injunction, review and evidence-preservation options?
+2. **Federal transition:** Which 2026 transitional provisions and delegation instruments govern the still-pending 2019 referral, and who is the current records custodian and operative delegate for the final decision?
+3. **Final federal record:** Can the substantive 2026 Preliminary Documentation and response to the 1,786 comments be obtained quickly, including final geometry, retained habitat, offsets and impact conclusions?
+4. **Condition 6(a):** Has the Commonwealth prerequisite in `9281/2024/OW` been satisfied? If not, what follows for prestart and clearing?
+5. **NCA ss 102–107:** Does the approved clearing/earthworks process, together with current habitat and threatened-wildlife evidence, support an interim conservation-order request? What evidence is still needed for likely significant detrimental effect?
+6. **NCA s 13:** What is needed to establish that the relevant habitat is essential to conservation of a viable population/community, and how should the 2019 recovery-value-0 analysis be treated?
+7. **Planning/exemptions:** Which exact exemptions and transition provisions apply to the present stages and works?
+8. **Offsets:** What legal and policy requirements govern additionality, existing protection, maturity, time lag and functional equivalence for the final offset package?
+9. **Enforcement/review:** If works become imminent or conditions appear unsatisfied, what are the available standing, injunction, review and evidence-preservation options?
 
 ---
 
@@ -298,6 +317,7 @@ Both sides need to be tested against the actual final documents and current fact
 - EPBC 2019/8575 is the live federal project.
 - The 2019 project ecology identifies substantial Koala habitat loss, Koala evidence, a connected habitat landscape and a significant-impact conclusion.
 - The 2019 project ecology also identifies substantial Grey-headed Flying-fox habitat loss and an adverse impact on habitat critical to survival.
+- The National EPA commenced on 1 July 2026, but existing referrals continue under the current EPBC Act transition framework; the 2 September 2026 project-specific notice still names Declan O'Connor-Cox as the authorised decision-maker for 2019/8575.
 - `9281/2024/OW` is an approved vegetation-clearing/earthworks/stormwater application.
 - `A12705838` is the 20 March 2026 negotiated approved plan set and provides the current approved plan-scale works/clearing geometry.
 - Condition 6(a) requires Commonwealth-related evidence before the prestart meeting.
@@ -307,6 +327,7 @@ Both sides need to be tested against the actual final documents and current fact
 
 - substantive 2026 federal Preliminary Documentation and response to comments;
 - final 2019-to-2026 federal proposal changes;
+- exact effect of the 2026 federal transition on the pending decision, beyond the source-paid general transition rules;
 - whether Condition 6(a) has been satisfied;
 - whether prestart has occurred or physical works have commenced;
 - evidence sufficient for likely significant detrimental effect under s 102;
@@ -322,4 +343,4 @@ Both sides need to be tested against the actual final documents and current fact
 - current habitat overlays;
 - spatial joins to FrogID/iNaturalist records.
 
-The immediate legal focus is therefore: **obtain the final federal record, check the Commonwealth prerequisite attached to 9281, establish the current works status, and ask counsel whether the present evidence is sufficient for an interim Queensland protection route before irreversible clearing.**
+The immediate legal focus is therefore: **obtain the final federal record, confirm the exact current federal delegation/custodian, check the Commonwealth prerequisite attached to 9281, establish the current works status, and ask counsel whether the present evidence is sufficient for an interim Queensland protection route before irreversible clearing.**
