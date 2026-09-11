@@ -58,4 +58,5 @@ import DASHI.Interop.SLRGWBExecutionRoadmapExact
 import DASHI.Interop.SLRWikimediaFirstWorldAcquisitionExact
 import DASHI.Interop.SLRGWBReviewedWikimediaIdentityAndTieredTransportExact
 import DASHI.Interop.SLRGWBWikimediaReplayableHandoffExact
+import DASHI.Interop.SLRGWBWikimediaIdentityResidualContractionExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
