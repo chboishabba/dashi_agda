@@ -8,15 +8,13 @@ import DASHI.Culture.ScientificRosterWorkCoverageExact as US
 import DASHI.Culture.ChineseStrategicScientistRosterSnowballExact as China
 import DASHI.Culture.MissingDeceasedTechnicalIntersectionAcquisitionExact as Acquire
 import DASHI.Culture.NASAFusionPlasmaSpacePropulsionBridgeExact as Fusion
+import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact as RosterExtension
+import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact as NingExperiment
 import DASHI.Physics.Materials.FusionPropulsionMaterialSurvivabilityCrossPollinationExact as Materials
 import DASHI.Core.NDimParetoHyperfabricExact as Pareto
 
 ------------------------------------------------------------------------
 -- FULL-SET TECHNICAL-INTERSECTION PARETO ATLAS
---
--- This is a navigation/proof-search owner, not a common-cause theorem.  Every
--- retained person gets a row whose technical work remains source-owned by the
--- relevant domain module.  Cross-domain adjacency nominates acquisitions only.
 ------------------------------------------------------------------------
 
 data IntersectionStrength : Set where
@@ -42,7 +40,7 @@ record FullSetTechnicalIntersection : Set where
 open FullSetTechnicalIntersection public
 
 ------------------------------------------------------------------------
--- U.S. retained roster.
+-- U.S./UAP retained roster.
 ------------------------------------------------------------------------
 
 loureiroFusionPlasmaRow : FullSetTechnicalIntersection
@@ -100,8 +98,8 @@ mccaslandSystemsRow = full-set-technical-intersection
   "dated DBE/AFRL programme, award, contract or team object joining the same technical programme"
   false
 
-gillmairAstrophysicsRow : FullSetTechnicalIntersection
-gillmairAstrophysicsRow = full-set-technical-intersection
+grillmairAstrophysicsRow : FullSetTechnicalIntersection
+grillmairAstrophysicsRow = full-set-technical-intersection
   "Carl J. Grillmair" "US"
   "stellar streams and Galactic-potential inference"
   "astrophysical inverse problems <-> no paid propulsion/material intersection"
@@ -155,6 +153,17 @@ amyExoticGravityRow = full-set-technical-intersection
   "named programme/person/object lineage, apparatus receipt and validated thrust discriminator"
   false
 
+ningLiSuperconductorGravityRow : FullSetTechnicalIntersection
+ningLiSuperconductorGravityRow = full-set-technical-intersection
+  "Ning Li" "US/UAP historical"
+  "Li/Torr superconducting gravitoelectric/gravitomagnetic theory plus 1997 type-II YBCO static gravity test"
+  "superconducting-gravity theory/experiment <-> Amy-associated Li/Torr reverse-search and modern fusion HTS material class"
+  exactWorkObject
+  "three DOI-level Li/Torr theory identities plus DOI 10.1016/S0921-4534(97)01462-7; the 1997 gravimeter result constrains static acceleration change to <2 parts in 10^8 g in the tested configuration"
+  "shared superconductor vocabulary/material class does not create a Ning-Amy collaboration, fusion-propulsion mechanism, or validated antigravity device; exact 2001 AC Gravity/Army transaction and later apparatus results are not yet primary-paid here"
+  "primary UAH/AC Gravity corporate and Army Other Transaction object, award identifier, technical report/test result, exact apparatus geometry/drive regime and any named person/programme bridge to later cohort members"
+  false
+
 casiasAdminRow : FullSetTechnicalIntersection
 casiasAdminRow = full-set-technical-intersection
   "Melissa Casias" "US"
@@ -186,6 +195,17 @@ sullivanIntelligenceRow = full-set-technical-intersection
   "service-role carrier retained separately from later claims"
   "anonymous/secondary UAP claims do not pay programme participation"
   "primary event-time programme/testimony/service object if public"
+  false
+
+nickPopeUAPCivilServiceRow : FullSetTechnicalIntersection
+nickPopeUAPCivilServiceRow = full-set-technical-intersection
+  "Nicholas George Pope" "UK/UAP narrative"
+  "former UK Ministry of Defence civil servant associated with UFO investigations; later author/media commentator"
+  "UAP information/government-role visibility <-> missing-scientists narrative genealogy"
+  roleCapabilityOnly
+  "BUFORA and independent memorial sources pay event identity/date; public biography pays the UFO-investigation role at a broad level"
+  "civil-service/UFO role does not create scientific expertise, recovered-craft access, U.S. black-program participation or a common operational action with the scientist cohort"
+  "primary UK MoD service/assignment chronology, exact records handled, and any event-time disclosure/testimony obligation if relevant"
   false
 
 ------------------------------------------------------------------------
@@ -300,6 +320,14 @@ existingParetoBoundary = Pareto.canonicalNDimParetoHyperfabricBoundary
 
 existingTechnicalAcquisitionBoundary : Acquire.TechnicalIntersectionAcquisitionBoundary
 existingTechnicalAcquisitionBoundary = Acquire.canonicalTechnicalIntersectionAcquisitionBoundary
+
+ningLiRosterRepairPresent :
+  RosterExtension.ningLiRosterRepair ≡ RosterExtension.ningLiRosterRepair
+ningLiRosterRepairPresent = refl
+
+ningLiConstraintPresent :
+  NingExperiment.staticYBCO1997Constraint ≡ NingExperiment.staticYBCO1997Constraint
+ningLiConstraintPresent = refl
 
 fusionDomainBridgeExists : Fusion.fusionToPropulsionPromoted ≡ Fusion.fusionToPropulsionPromoted
 fusionDomainBridgeExists = refl
