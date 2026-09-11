@@ -11,6 +11,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoAttributionExact a
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369DashiQFirstPublicSourceExact as DQ
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369IbrahimDeweyTraversalExact as ID
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369OEISAttributionExact as OEIS
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369OEISAufbauFormulaWeldExact as OW
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 
@@ -18,8 +19,9 @@ import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 -- Focused validation root.  Importing this module forces the generative
 -- formalism, provenance/snowball companion, chronology/status ledger,
 -- DOI/QID/primary/Dewey/OEIS attribution ledgers, first-public dashiQ source,
--- Ibrahim/Dewey traversal, and cross-repository regression ledger through the
--- Agda checker when this file is actually checked.
+-- Ibrahim/Dewey traversal, OEIS Aufbau/closure arithmetic weld, and
+-- cross-repository regression ledger through the Agda checker when this file
+-- is actually checked.
 --
 -- The existence of this file is not itself a typecheck receipt.  See the
 -- chronology/status owner for the distinction between authored source and a
@@ -199,3 +201,43 @@ oeisNonPromotionRegression :
     OEIS.canonicalOEISAtomicBoundary
   ≡ false
 oeisNonPromotionRegression = refl , (refl , (refl , refl))
+
+oeisAufbauPeriodRegression :
+  OW.aufbauPeriodLength 1 ≡ 2
+  × OW.aufbauPeriodLength 2 ≡ 8
+  × OW.aufbauPeriodLength 3 ≡ 8
+  × OW.aufbauPeriodLength 4 ≡ 18
+  × OW.aufbauPeriodLength 5 ≡ 18
+  × OW.aufbauPeriodLength 6 ≡ 32
+  × OW.aufbauPeriodLength 7 ≡ 32
+oeisAufbauPeriodRegression = OW.firstSevenPeriodLengths
+
+oeisClosureRegression :
+  OW.aufbauClosure 1 ≡ 2
+  × OW.aufbauClosure 2 ≡ 10
+  × OW.aufbauClosure 3 ≡ 18
+  × OW.aufbauClosure 4 ≡ 36
+  × OW.aufbauClosure 5 ≡ 54
+  × OW.aufbauClosure 6 ≡ 86
+  × OW.aufbauClosure 7 ≡ 118
+oeisClosureRegression = OW.firstSevenClosures
+
+oeisHistoricalEmbeddingRegression :
+  G.historicalClosureZ G.heliumLikeClosure ≡ OW.aufbauClosure 1
+  × G.historicalClosureZ G.neonLikeClosure ≡ OW.aufbauClosure 2
+  × G.historicalClosureZ G.argonLikeClosure ≡ OW.aufbauClosure 3
+oeisHistoricalEmbeddingRegression = OW.historicalClosuresEmbed
+
+oeisAufbauNonPromotionRegression :
+  OW.OEISAufbauWeldBoundary.exactA093907FormulaImpliesPhysicalAufbauMechanism
+    OW.canonicalOEISAufbauWeldBoundary
+  ≡ false
+  ×
+  OW.OEISAufbauWeldBoundary.A167268CapacityTermsProveDashiSelectorOrder
+    OW.canonicalOEISAufbauWeldBoundary
+  ≡ false
+  ×
+  OW.OEISAufbauWeldBoundary.exact118ClosureCoordinateProvesElement119Impossible
+    OW.canonicalOEISAufbauWeldBoundary
+  ≡ false
+oeisAufbauNonPromotionRegression = refl , (refl , refl)
