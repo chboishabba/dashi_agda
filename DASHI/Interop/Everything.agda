@@ -49,4 +49,5 @@ import DASHI.Interop.SLRRuntimeValidationHandoffExact
 import DASHI.Interop.SLRValidationRoadmapPromotionExact
 import DASHI.Interop.SLRCanonicalClaimProjectionExact
 import DASHI.Interop.SLRLabelledSubspanWeldExact
+import DASHI.Interop.SLRLabelledDiscoursePathExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
