@@ -8,6 +8,7 @@ import DASHI.Culture.AmyEskridgePOAMSObjectLineageExact as Lineage
 import DASHI.Culture.AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact as D
 import DASHI.Culture.AmyEskridgePOAMSBoundaryCandidateExact as Candidate
 import DASHI.Core.KnowledgeBoundaryCandidateIdentityBidiExact as Identity
+import DASHI.Core.ScientificSourceCitationExact as Citation
 
 ------------------------------------------------------------------------
 -- AMY ESKRIDGE MEMORIAL: REVIEW-OBJECT REFERENT DISAMBIGUATION
@@ -58,6 +59,27 @@ instituteDerivativeLead = review-referent-lead
   "Amy September-2020 captured statement; Institute private-maturation attribution"
   "Amy distinguished later Institute-matured results from the NASA-origin foundation. The Institute derivative therefore remains a related but separately identified object, not the default referent of the NASA review object."
   false
+
+------------------------------------------------------------------------
+-- PRIMARY NASA PUBLIC-TM SOURCE CARRIER
+--
+-- This is the exact public NASA object. It pays the bibliographic identity of
+-- M-1531 / NTRS 20205010911 and its named authors only. It does not make Amy a
+-- named author and does not identify her September-2020 review object with this
+-- TM without an independent same-object receipt.
+------------------------------------------------------------------------
+
+poamsPublicTMCitation : Citation.ScientificCitation
+poamsPublicTMCitation =
+  Citation.scientific-citation
+    "R.H. Eskridge; M.A. Nelson; M.P. Schoenfeld"
+    "A Study of the Pope-Osborne Angular Momentum Synthesis Theory (POAMS) Including a Mathematical Reformulation and Validation Experiment"
+    "NASA Marshall Space Flight Center; NASA Technical Reports Server"
+    2021
+    (Citation.nasaNTRS "20205010911")
+    "NASA/TM-20205010911; report M-1531; Date Acquired 2020-12-01; publication 2021-11-01; Subject Category 70; funding MSFC-RMB-QUANTUM-SAA8-1519855-1; public distribution"
+    Citation.authorshipSource
+    "Primary NASA bibliographic carrier. Named authors are R.H. Eskridge, M.A. Nelson and M.P. Schoenfeld. The funding identifier is retained in its own namespace and does not establish identity with Space Act Agreement annex .1."
 
 ------------------------------------------------------------------------
 -- PRIMARY AUTHORSHIP ATTRIBUTION FIREWALL
