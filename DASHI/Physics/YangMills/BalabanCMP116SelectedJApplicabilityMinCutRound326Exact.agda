@@ -23,6 +23,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityMinCutRound326
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
@@ -31,6 +32,9 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJSourceMinCutRound324Exact a
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound325Exact as R325
 import DASHI.Physics.YangMills.BalabanT5DirectSelectedMarkedDecayRound320Exact as R320
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as Source
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
+import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
+import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 
 data H1AcquisitionCoordinate326 : Set where
   publishedCMP116JLocalization : H1AcquisitionCoordinate326
@@ -82,15 +86,9 @@ canonicalRound326Boundary =
 -- inserted here.
 compileSelectedJApplicationToR320 :
   ∀ {Measure TestObservable}
-    {dataSet :
-      DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact.PhysicalMeasureConvergenceData
-        Measure TestObservable Data.Rational.Base.ℚ}
-    {extension :
-      DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact.ScalarCovarianceConvergenceExtension
-        dataSet}
-    {base :
-      DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact.UnlocalizedT5StateFamilyJPresentation
-        dataSet extension} →
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension} →
   R322.CMP116SelectedJDomainApplication base →
   R320.DirectSelectedT5MarkedDecayPayment base
 compileSelectedJApplicationToR320 =
