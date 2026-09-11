@@ -8,6 +8,7 @@ import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact 
 import DASHI.Culture.AmyEskridgeAntigravityObservationBidiCrossPollinationExact as AmyAnti
 import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact as Reza
 import DASHI.Physics.Materials.RezaFangAlloyMetamaterialDiscriminationExact as MaterialDisc
+import DASHI.Physics.Materials.FusionPropulsionMaterialSurvivabilityCrossPollinationExact as FusionMaterials
 import DASHI.Physics.Spectroscopy.MaiwaldActionSpectroscopyBidiExact as Maiwald
 import DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact as Fang
 import DASHI.Culture.MissingDeceasedStrategicRoleCapabilityFibreExact as Role
@@ -15,10 +16,6 @@ import DASHI.Culture.MissingDeceasedTernaryAdversarialObserverExact as Observer
 
 ------------------------------------------------------------------------
 -- UAP / AREA-51 ADVERSARIAL CLAIM DISCRIMINATOR
---
--- Speculative narratives are retained as hypotheses with explicit paid kernels,
--- missing bridges, counter-readings and discriminating acquisitions.  Existing
--- physics/material/science owners remain authoritative for their domains.
 ------------------------------------------------------------------------
 
 data SpeculativeClaimClass : Set where
@@ -50,19 +47,19 @@ zeroPointSuppressionDiscriminator : ClaimDiscriminator
 zeroPointSuppressionDiscriminator = claim-discriminator
   zeroPointSuppression
   "operational vacuum/zero-point antigravity exists and civilian replication was intentionally suppressed"
-  "DASHI already types vacuum-regime antigravity requests, vacuum-persistent-thrust observables and Amy-associated coherent-superconductor/inertial/metric reverse-search lanes"
-  "AntigravityMaterialBidiCrossPollinationExact + AmyEskridgeAntigravityObservationBidiCrossPollinationExact"
-  "primary source establishing zero-point-energy extraction as the claimed mechanism; exact operational apparatus receipt; causal suppression action tied to the cohort"
-  "pre-public programme records, security actions, access restrictions or personnel tasking should precede and target the same technical object"
-  "vacuum/thrust/gravity research can exist as ordinary experimental science without operational zero-point extraction or coordinated suppression"
-  "acquire mechanism-specific source, apparatus record, replication history and dated security/personnel action; do not infer from the coarse word antigravity"
+  "DASHI types vacuum-regime antigravity requests and Amy-associated reverse-search lanes; independently, NASA TechPort project 12110 officially discusses aneutronic-fusion/TWDEC propulsion and historically mentions a Quantum Vacuum thruster as a possible partner technology"
+  "AntigravityMaterialBidiCrossPollinationExact + AmyEskridgeAntigravityObservationBidiCrossPollinationExact + FusionPropulsionMaterialSurvivabilityCrossPollinationExact"
+  "the TechPort wording is not a validation receipt: still need mechanism-specific zero-point extraction, operational thrust apparatus, independent replication and a causal suppression action tied to the same object/person"
+  "if suppression targeted a working device, pre-public programme/security/personnel records should converge on the same apparatus or validated effect rather than merely reuse vacuum-propulsion vocabulary"
+  "NASA can record speculative/advanced propulsion concepts and programme-planning language without demonstrating zero-point extraction or anomalous thrust"
+  "acquire project-12110 technical reports/test results and any named Q-thruster apparatus lineage; compare with Amy-linked mechanism objects only after same-object identity is paid"
   false false false
 
 mondaloyMetamaterialDiscriminator : ClaimDiscriminator
 mondaloyMetamaterialDiscriminator = claim-discriminator
   mondaloyS4Metamaterial
   "Mondaloy is a public spin-off of reverse-engineered metamaterial work associated with S4/Area 51"
-  "Reza/Jacinto burn-resistant nickel-alloy design is formalised; Fang Daining pays an independent published active-mechanical-metamaterial class; the new discrimination owner proves that alloy performance alone does not classify the Reza object as a metamaterial"
+  "Reza/Jacinto burn-resistant nickel-alloy design is formalised; Fang Daining pays an independent published active-mechanical-metamaterial class; the discrimination owner proves that alloy performance alone does not classify the Reza object as a metamaterial"
   "RezaBurnResistantAlloyBidiExact + FangDainingActiveMechanicalMetamaterialBidiExact + RezaFangAlloyMetamaterialDiscriminationExact"
   "for the same Reza/Mondaloy object: an architecture-based metamaterial classification receipt, architecture-derived effective-property receipt, and same-object provenance chain to a classified reverse-engineering programme or S4 predecessor"
   "classified programme records should contain the same alloy/material object, architecture or composition/process lineage, custody chain or predecessor artifact before public patenting"
@@ -106,12 +103,11 @@ houseCoverStoryDiscriminator = claim-discriminator
   "build event-time chronology of first media aggregation, first agency cross-case linkage, FOIA/classification actions, internal tasking and congressional requests"
   false false false
 
-------------------------------------------------------------------------
--- Named firewalls requested by the focused validation contract.
-------------------------------------------------------------------------
-
 zeroPointSuppressionIsNotVacuumThrust : Bool
 zeroPointSuppressionIsNotVacuumThrust = true
+
+nasaQuantumVacuumMentionDoesNotPayOperationalThrust : Bool
+nasaQuantumVacuumMentionDoesNotPayOperationalThrust = true
 
 mondaloyToMetamaterialBridgeUnpaid : Bool
 mondaloyToMetamaterialBridgeUnpaid = true
@@ -127,6 +123,9 @@ existingFangMetamaterialBoundary = Fang.canonicalFangMetamaterialBoundary
 
 existingAlloyMetamaterialBoundary : MaterialDisc.AlloyMetamaterialDiscriminationBoundary
 existingAlloyMetamaterialBoundary = MaterialDisc.canonicalAlloyMetamaterialDiscriminationBoundary
+
+existingFusionMaterialBoundary : FusionMaterials.FusionMaterialBoundary
+existingFusionMaterialBoundary = FusionMaterials.canonicalFusionMaterialBoundary
 
 existingRoleCapabilityBoundary : Role.RoleCapabilityBoundary
 existingRoleCapabilityBoundary = Role.canonicalRoleCapabilityBoundary
