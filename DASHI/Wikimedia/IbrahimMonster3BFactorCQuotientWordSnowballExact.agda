@@ -99,9 +99,17 @@ canonicalQuotientWordExternalCoordinates = quotient-word-external-coordinates
   "Q1057968"
   "512.22"
   "512.23"
-  "unresolved rather than guessed for the exact 1998 construction object"
+  "unresolved rather than guessed for the exact construction object in Wikidata"
   "not applicable: a quotient word in C,D,E is not an integer-sequence coordinate"
   false
+
+-- MaRDI uses a distinct QID namespace.  Keep this explicitly separate from
+-- Wikidata rather than copying the identifier into exactConstructionQid above.
+constructionMaRDIQid : String
+constructionMaRDIQid = "Q4221489"
+
+constructionMaRDIQidNamespace : String
+constructionMaRDIQidNamespace = "MaRDI portal QID (not asserted to be a Wikidata QID)"
 
 ------------------------------------------------------------------------
 -- WrongType / non-promotion boundaries.
@@ -113,6 +121,7 @@ data CompatibleGeneratorNamesCreateSameWord : Set where
 data ClassTwentyCreatesWordQ : Set where
 data DOIImportsExecutableArtifact : Set where
 data QidImportsExecutableArtifact : Set where
+data MaRDIQidImportsExecutableArtifact : Set where
 data DeweyImportsExecutableArtifact : Set where
 data OeisImportsExecutableArtifact : Set where
 
@@ -133,6 +142,9 @@ doiDoesNotImportArtifact ()
 
 qidDoesNotImportArtifact : QidImportsExecutableArtifact → ⊥
 qidDoesNotImportArtifact ()
+
+mardiQidDoesNotImportArtifact : MaRDIQidImportsExecutableArtifact → ⊥
+mardiQidDoesNotImportArtifact ()
 
 deweyDoesNotImportArtifact : DeweyImportsExecutableArtifact → ⊥
 deweyDoesNotImportArtifact ()
@@ -165,7 +177,7 @@ currentQuotientWordFrontier : QuotientWordFrontier
 currentQuotientWordFrontier = quotient-word-frontier
   true true true true true true true
   false false false false
-  "acquire the historical /monster/mop7/factor.c bytes or the exact quotient word q(C,D,E) supplied by the Linton-Parker-Walsh-Wilson construction. Then evaluate that same word in the compatible main-table/explicit-representation generators and weld its conjugacy class to primary supplement class 20. Finally crosswalk that concrete kernel generator to Bray-Wilson's <t1*t2> versus <t1*t2^-1> diagonal test. Do not manufacture q from class 20, the artifact pathname, DOI/QID/Dewey/OEIS, or generator-name compatibility alone."
+  "acquire the historical /monster/mop7/factor.c bytes or the exact quotient word q(C,D,E) supplied by the Linton-Parker-Walsh-Wilson construction. Then evaluate that same word in the compatible main-table/explicit-representation generators and weld its conjugacy class to primary supplement class 20. Finally crosswalk that concrete kernel generator to Bray-Wilson's <t1*t2> versus <t1*t2^-1> diagonal test. Do not manufacture q from class 20, the artifact pathname, DOI/Wikidata-QID/MaRDI-QID/Dewey/OEIS, or generator-name compatibility alone."
 
 supplementFrontier : Supplement.PrimarySupplementKernelFrontier
 supplementFrontier = Supplement.currentPrimarySupplementKernelFrontier
