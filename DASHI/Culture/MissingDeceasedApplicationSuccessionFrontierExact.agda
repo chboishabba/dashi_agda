@@ -110,12 +110,6 @@ loureiroLiLiuPublicationChronology = loureiro-publication-manifestation-chronolo
 
 ------------------------------------------------------------------------
 -- Data-access and repository-custody discriminator.
---
--- Cambridge's primary version-of-record says supporting data are available from
--- corresponding author Dion Li on reasonable request. The PSFC library's report
--- page says associated datasets are in Dataverse if applicable. The first pays
--- a current public data-access contact; the second is only a repository search
--- surface until an exact Dataverse object/DOI is recovered.
 ------------------------------------------------------------------------
 
 record LoureiroDataAccessReceipt : Set where
@@ -142,18 +136,67 @@ loureiroLiDataAccess = loureiro-data-access-receipt
   "MIT PSFC Library PSFC/JA-25-49: associated dataset files are located in Dataverse, if applicable"
   true false false false false false
 
+------------------------------------------------------------------------
+-- Genuine post-loss independent student scientific work.
+--
+-- APS Open Science records Dion Li as sole author of a new paper received on
+-- 2026-02-19, after Loureiro's 2025-12-16 death. This is stronger than a
+-- post-loss manifestation of a pre-loss accepted Loureiro coauthored object:
+-- it pays that a named Loureiro PhD student continued producing independent
+-- plasma-science work after the loss. It does not identify a replacement
+-- advisor, grant, repository, or same-simulation-state handover.
+------------------------------------------------------------------------
+
+record LoureiroStudentIndependentContinuation : Set where
+  constructor loureiro-student-independent-continuation
+  field
+    student : String
+    priorAdvisorRelation : String
+    title : String
+    doi : String
+    preprintId : String
+    receivedDate : String
+    acceptedDate : String
+    publishedDate : String
+    sourceClass : String
+    qid : String
+    deweyTraversal : String
+    receivedAfterLoureiroDeath : Bool
+    soleAuthorScientificOutputPaid : Bool
+    replacementAdvisorPaid : Bool
+    grantTransferPaid : Bool
+    repositoryTransferPaid : Bool
+    sameSimulationStateTransferPaid : Bool
+
+open LoureiroStudentIndependentContinuation public
+
+loureiroDionLiIndependentContinuation : LoureiroStudentIndependentContinuation
+loureiroDionLiIndependentContinuation = loureiro-student-independent-continuation
+  "Dion Li"
+  "MIT News identifies Dion Li as one of Nuno F. G. Loureiro's PhD students"
+  "Kinetic route to helicity-constrained decay"
+  "10.1103/j5p4-jj3d"
+  "arXiv:2602.17514"
+  "2026-02-19"
+  "2026-06-15"
+  "2026-07-06"
+  "primary peer-reviewed APS publication + primary arXiv preprint"
+  "unresolvedQid"
+  "530 Physics"
+  true true false false false false
+
 record LoureiroSuccessionBoundary : Set where
   constructor loureiro-succession-boundary
-  field centerDirectorSuccessionImpliesLoureiroGroupPISuccession : Bool; centerDirectorSuccessionImpliesStudentReassignment : Bool; centerDirectorSuccessionImpliesGrantReassignment : Bool; pedagogicalContinuationImpliesRepositoryTransfer : Bool; postLossStudentPublicationImpliesAdvisorReassignment : Bool; postLossStudentPublicationImpliesGrantOrRepositoryTransfer : Bool; postLossPublicationManifestationImpliesPostLossScientificWork : Bool; dataAccessContactImpliesRepositoryCustodyTransfer : Bool; conditionalDataverseLanguageImpliesDatasetExists : Bool; centerLeadershipAndPedagogyMayGuideSameCarrierSearch : Bool
+  field centerDirectorSuccessionImpliesLoureiroGroupPISuccession : Bool; centerDirectorSuccessionImpliesStudentReassignment : Bool; centerDirectorSuccessionImpliesGrantReassignment : Bool; pedagogicalContinuationImpliesRepositoryTransfer : Bool; postLossStudentPublicationImpliesAdvisorReassignment : Bool; postLossStudentPublicationImpliesGrantOrRepositoryTransfer : Bool; postLossPublicationManifestationImpliesPostLossScientificWork : Bool; dataAccessContactImpliesRepositoryCustodyTransfer : Bool; conditionalDataverseLanguageImpliesDatasetExists : Bool; independentStudentOutputImpliesAdvisorSuccession : Bool; independentStudentOutputImpliesSameCarrierHandover : Bool; centerLeadershipAndPedagogyMayGuideSameCarrierSearch : Bool
 open LoureiroSuccessionBoundary public
-canonicalLoureiroSuccessionBoundary = loureiro-succession-boundary false false false false false false false false false true
+canonicalLoureiroSuccessionBoundary = loureiro-succession-boundary false false false false false false false false false false false true
 
 record SuccessionSearchStatus : Set where
   constructor succession-search-status
-  field chavezNamedSameCarrierSuccessorLocated : Bool; chavezNamedSameCarrierSuccessorLocatedIsFalse : chavezNamedSameCarrierSuccessorLocated ≡ false; leblancNamedSameCarrierSuccessorLocated : Bool; leblancNamedSameCarrierSuccessorLocatedIsFalse : leblancNamedSameCarrierSuccessorLocated ≡ false; rezaNamedSameCarrierSuccessorLocated : Bool; rezaNamedSameCarrierSuccessorLocatedIsFalse : rezaNamedSameCarrierSuccessorLocated ≡ false; loureiroPedagogicalContinuationLocated : Bool; loureiroPedagogicalContinuationLocatedIsTrue : loureiroPedagogicalContinuationLocated ≡ true; loureiroCenterLeadershipSuccessorLocated : Bool; loureiroCenterLeadershipSuccessorLocatedIsTrue : loureiroCenterLeadershipSuccessorLocated ≡ true; loureiroStudentPublicationContinuationLocated : Bool; loureiroStudentPublicationContinuationLocatedIsTrue : loureiroStudentPublicationContinuationLocated ≡ true; loureiroSameCarrierSuccessorLocated : Bool; loureiroSameCarrierSuccessorLocatedIsFalse : loureiroSameCarrierSuccessorLocated ≡ false; absencePromotedToNoSuccessor : Bool; absencePromotedToNoSuccessorIsFalse : absencePromotedToNoSuccessor ≡ false
+  field chavezNamedSameCarrierSuccessorLocated : Bool; chavezNamedSameCarrierSuccessorLocatedIsFalse : chavezNamedSameCarrierSuccessorLocated ≡ false; leblancNamedSameCarrierSuccessorLocated : Bool; leblancNamedSameCarrierSuccessorLocatedIsFalse : leblancNamedSameCarrierSuccessorLocated ≡ false; rezaNamedSameCarrierSuccessorLocated : Bool; rezaNamedSameCarrierSuccessorLocatedIsFalse : rezaNamedSameCarrierSuccessorLocated ≡ false; loureiroPedagogicalContinuationLocated : Bool; loureiroPedagogicalContinuationLocatedIsTrue : loureiroPedagogicalContinuationLocated ≡ true; loureiroCenterLeadershipSuccessorLocated : Bool; loureiroCenterLeadershipSuccessorLocatedIsTrue : loureiroCenterLeadershipSuccessorLocated ≡ true; loureiroStudentPublicationContinuationLocated : Bool; loureiroStudentPublicationContinuationLocatedIsTrue : loureiroStudentPublicationContinuationLocated ≡ true; loureiroIndependentStudentContinuationLocated : Bool; loureiroIndependentStudentContinuationLocatedIsTrue : loureiroIndependentStudentContinuationLocated ≡ true; loureiroSameCarrierSuccessorLocated : Bool; loureiroSameCarrierSuccessorLocatedIsFalse : loureiroSameCarrierSuccessorLocated ≡ false; absencePromotedToNoSuccessor : Bool; absencePromotedToNoSuccessorIsFalse : absencePromotedToNoSuccessor ≡ false
 
 canonicalSuccessionSearchStatus : SuccessionSearchStatus
-canonicalSuccessionSearchStatus = succession-search-status false refl false refl false refl true refl true refl true refl false refl false refl
+canonicalSuccessionSearchStatus = succession-search-status false refl false refl false refl true refl true refl true refl true refl false refl false refl
 
 data SuccessionReverseTarget : Set where
   chavezSameCarrierTaskAllocation chavezNamedSuccessorOrHandover chavezPostDepartureRework leblancTechMatTaskAllocation leblancNamedSuccessorOrHandover leblancQualificationContinuity rezaProcessWindowTaskAllocation rezaNamedSuccessorOrHandover rezaManufacturingRequalification loureiroFormalAdvisorReassignment loureiroGrantReassignment loureiroRepositoryAndNotebookCustody loureiroTargetSpecificSimulationContinuation loureiroNamedSameCarrierSuccessorOrHandover loureiroExactDataverseDatasetIdentity : SuccessionReverseTarget
