@@ -2,9 +2,6 @@ module DASHI.ComputerScience.ComputerScienceFibreFoundationValidationExact where
 
 ------------------------------------------------------------------------
 -- SMALL VALIDATION ROOT FOR THE CLASSICAL / REPRESENTATION CS SPINE
---
--- Quantum execution has a separate validation root so this module does not
--- pull the substantially broader quantum import cone into ordinary CS checks.
 ------------------------------------------------------------------------
 
 import DASHI.ComputerScience.FibreMachineFoundation369Exact
@@ -13,12 +10,10 @@ import DASHI.ComputerScience.FibreProgramComplexityExact
 import DASHI.ComputerScience.AgdaElaborationResidencyComplexityExact
 import DASHI.ComputerScience.AgdaProfilerObservationFibreExact
 import DASHI.ComputerScience.AgdaProofDebtFibrePreparationExact
-
 import DASHI.ComputerScience.BinaryBalancedTernarySubcarrierExact
 import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact
 import DASHI.ComputerScience.BinaryThreeBitTrit27FibreLiftExact
 import DASHI.ComputerScience.FixedNineBitFramed27WordStorageExact
-
 import DASHI.ComputerScience.HelloWorldFibreExact
 import DASHI.ComputerScience.HelloWorldStoredProgramMachineExact
 import DASHI.ComputerScience.HelloWorldEncodedWordMachineExact
@@ -47,7 +42,6 @@ import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact
 import DASHI.ComputerScience.TriadicSupportMaskSWARExecutionExact
 import DASHI.ComputerScience.TriadicPrefixSWARExecutionExact
 import DASHI.ComputerScience.TriadicSignCompactionSWARExecutionExact
-
 import DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact
 import DASHI.ComputerScience.CountdownExecutionPathComplexityExact
 import DASHI.ComputerScience.EuclidGCDRegisterMachineExact
@@ -94,6 +88,7 @@ import DASHI.ComputerScience.RSA260C3OrbitReducerHyperfabricExact
 import DASHI.ComputerScience.RSA260MixedActionNDimFibreInferenceExact
 import DASHI.ComputerScience.RSA260SymmetryStabilityNullsExact
 import DASHI.ComputerScience.RSA260FullReInferenceSymmetryNullExact
+import DASHI.ComputerScience.RSA260PublicLAExecutionEnvelopeReconstructionExact
 import DASHI.Interop.SymmetryQuotientExecutionBidiCrossPollinationExact
 import DASHI.ComputerScience.SelfReferenceLimitsNamedPhenomenaBridgeExact
 import DASHI.ComputerScience.ExecutableHaltingCertificateFibreExact
