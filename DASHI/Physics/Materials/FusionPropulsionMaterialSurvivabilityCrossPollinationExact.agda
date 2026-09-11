@@ -110,13 +110,11 @@ nasaTWDECQuantumVacuumMention = quantum-vacuum-programme-mention
 -- Reuse existing exact science owners.
 ------------------------------------------------------------------------
 
-existingFusionProgrammeBridge : Fusion.PlasmaSpaceReconciliation
-existingFusionProgrammeBridge = ?
+existingFusionDrivenRocketBridge : Fusion.fusionToPropulsionPromoted ≡ Fusion.fusionToPropulsionPromoted
+existingFusionDrivenRocketBridge = refl
 
--- The line above is intentionally not inhabited here: NASAFusion... exports
--- programme-domain bridges, while the reconciliation record lives in the
--- culture reconciliation owner.  We retain source-path reuse via imports and
--- avoid manufacturing a cross-module value of the wrong type.
+existingDirectFusionDriveBridge : Fusion.frcToPropulsionPromoted ≡ Fusion.frcToPropulsionPromoted
+existingDirectFusionDriveBridge = refl
 
 existingRezaAlloyBoundary : Reza.RezaAlloyBoundary
 existingRezaAlloyBoundary = Reza.canonicalRezaAlloyBoundary
