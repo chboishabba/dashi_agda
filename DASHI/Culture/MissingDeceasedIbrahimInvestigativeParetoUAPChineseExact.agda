@@ -8,6 +8,7 @@ import DASHI.Culture.ChineseStrategicScientistRosterSnowballExact as China
 import DASHI.Culture.ChineseStrategicScientistEventWorkRepairExact as Repair
 import DASHI.Culture.MissingDeceasedUAPAdversarialClaimDiscriminatorExact as UAP
 import DASHI.Culture.MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact as Search
+import DASHI.Culture.MissingDeceasedFullSetTechnicalIntersectionParetoExact as FullSet
 
 ------------------------------------------------------------------------
 -- EXTENSION ONLY: keep the canonical U.S. person-specific Pareto unchanged.
@@ -28,6 +29,21 @@ chineseRosterCardinalityResolutionPareto = Base.investigative-pareto-target
   "original broadcast transcript/article, upstream reporting source, then primary institutional/event object for any newly identified person"
   false true false
   "First-front because one source-genealogy object can settle the nine-versus-at-least-ten discrepancy and prevent denominator error in downstream enrichment/control calculations. The count claim is retained, but no unnamed tenth identity is manufactured."
+
+fullSetTechnicalIntersectionPareto : Base.InvestigativeParetoTarget
+fullSetTechnicalIntersectionPareto = Base.investigative-pareto-target
+  Base.secondFront
+  "full-set technical intersection"
+  "person work object -> source-backed domain bridge -> person/programme same-object test -> event-time succession/control"
+  "run the full U.S.+China retained roster through MissingDeceasedFullSetTechnicalIntersectionParetoExact; prioritise intersections that have a paid domain bridge but an unpaid person/programme edge: Loureiro/fusion-space, Reza/material-survivability, Amy/official NASA quantum-vacuum wording, Fang/metamaterial-propulsion, Yan/plasma-flow/propulsion, McCasland/materials-programme and Zhang/Feng autonomy-strategy continuity"
+  "NASA Fusion Driven Rocket, Direct Fusion Drive and aneutronic/TWDEC programme bridges are source-backed; Reza oxygen-rich alloy chemistry and crystal-scale gamma/gamma-prime mechanisms are source-backed; Fang active mechanical metamaterials are source-backed; NASA TechPort 12110 historically mentions a Quantum Vacuum thruster without validating it"
+  "named-person programme participation; exact material/object transfer; technical-custody overlap; whether post-loss capability continuation is normal, redundant or uniquely disrupted; matched-control prevalence of the same technical intersections"
+  "NASA TechPort 11570, 93869/93994, 93785, 4373 and 12110; Reza patent family US20030053926A1/US20040208777A1; Fang DOI 10.1002/advs.202102662; person-specific identifiers retained in domain owners"
+  "QIDs are traversal only and cannot create person/programme or causal edges"
+  "530 Physics / 620 Engineering / 629 Aerospace / 621 Applied physics / 355 Military science traversal only"
+  "primary programme, contract, team, funding, procurement, repository, succession or custody record naming the person and exact technical object"
+  false true false
+  "This lane prevents attractive domain overlap from being mistaken for a shared programme. It is also where material/atomic/crystal and fusion/quantum-vacuum cross-pollination becomes useful proof search: the generic domain bridge is already paid, so only person-specific or object-specific receipts can move the causal frontier."
 
 chineseStrategicScientistAcquisitionPareto : Base.InvestigativeParetoTarget
 chineseStrategicScientistAcquisitionPareto = Base.investigative-pareto-target
@@ -74,6 +90,9 @@ uapAdversarialDiscriminatorPareto = Base.investigative-pareto-target
   false true false
   "High value is pruning: a broad narrative that explains disappearance, death, survival and contrary testimony equally well has no discriminating observable and should lose Pareto priority. Strategic/game-theory plausibility may choose a search but cannot become statistical or historical evidence."
 
+fullSetOwnerPresent : FullSet.canonicalFullSetIntersectionBoundary ≡ FullSet.canonicalFullSetIntersectionBoundary
+fullSetOwnerPresent = refl
+
 record ExtendedParetoBoundary : Set where
   constructor extended-pareto-boundary
   field
@@ -84,7 +103,8 @@ record ExtendedParetoBoundary : Set where
     existingUSFirstFrontRemainsIndependent : Bool
     unresolvedRosterCardinalityMayBePromotedToNamedPerson : Bool
     repairedIdentityLeafMayRemainArtificiallyFirstFront : Bool
+    technicalDomainIntersectionCreatesPersonProgrammeEdge : Bool
 
 canonicalExtendedParetoBoundary : ExtendedParetoBoundary
 canonicalExtendedParetoBoundary = extended-pareto-boundary
-  false false false true true false false
+  false false false true true false false false
