@@ -14,15 +14,15 @@ import DASHI.ComputerScience.RSA260SymmetryStabilityNullsExact as Nulls
 import DASHI.ComputerScience.RSA260FullReInferenceSymmetryNullExact as FullNull
 import DASHI.ComputerScience.RSA260ReducerHyperfabricSourceDiligenceExact as Sources
 import DASHI.ComputerScience.RSA260ConsumerRelativeCompressionCrossPollinationExact as Compression
+import DASHI.ComputerScience.RSA260CompressionAwareSymmetryPortfolioExact as Portfolio
 
 ------------------------------------------------------------------------
--- CONSOLIDATED ROADMAP AFTER CONSUMER-RELATIVE COMPRESSION CROSS-POLLINATION
+-- CONSOLIDATED ROADMAP AFTER COMPRESSION-AWARE SYMMETRY PORTFOLIO
 --
--- Conclusion payment remains acquisition-first.  The synthetic preparation
--- lane now infers pair/ternary/mixed action families, intersects multiple
--- structural fibres before freezing a family, reruns the whole inference
--- pipeline inside degree-preserving nulls, and ranks compression candidates
--- only inside the exact consumer-adequate stratum.
+-- Conclusion payment remains acquisition-first.  Candidate quotient/action
+-- families are retained as a portfolio, but cost/Pareto ranking happens only
+-- inside the exact consumer-adequate stratum.  Structurally strong but
+-- uncertified C3/V4 reductions remain reopenable rather than promoted.
 ------------------------------------------------------------------------
 
 priorRoadmap : Prior.ConsolidatedRSA260RoadmapBoundary
@@ -58,6 +58,12 @@ sourceBoundary = Sources.canonicalSnowballAttributionBoundary
 compressionBoundary : Compression.RSACompressionRoadmapBoundary
 compressionBoundary = Compression.currentRSACompressionRoadmapBoundary
 
+portfolioPolicy : Portfolio.CompressionAwareSearchPolicy
+portfolioPolicy = Portfolio.canonicalCompressionAwareSearchPolicy
+
+portfolioEvidence : Portfolio.PortfolioEvidenceBoundary
+portfolioEvidence = Portfolio.canonicalPortfolioEvidenceBoundary
+
 data AdaptiveProductionResidual : Set where
   acquireProductionLAInput : AdaptiveProductionResidual
   verifySameObjectManifest : AdaptiveProductionResidual
@@ -73,6 +79,7 @@ data AdaptiveProductionResidual : Set where
   selectConflictFreeClosedBatch : AdaptiveProductionResidual
   composeGlobalCandidateAction : AdaptiveProductionResidual
   verifyOperatorAndConsumerEquivariance : AdaptiveProductionResidual
+  certifyCandidateQuotientLiftKernel : AdaptiveProductionResidual
   rankConsumerAdequateCompressionCandidates : AdaptiveProductionResidual
   evaluateStructurePreservingSymmetryNull : AdaptiveProductionResidual
   chooseQuotientOrFullWidthReplay : AdaptiveProductionResidual
@@ -114,6 +121,12 @@ record AdaptiveHyperfabricProductionBoundary : Set where
     degreePreservingSymmetryNullExactBlobPaid : Bool
     fullHyperfabricReInferenceInsideEachNullPaid : Bool
     fullHyperfabricReInferenceExactBlobPaid : Bool
+    consumerRelativeCompressionLayerPaid : Bool
+    compressionAwarePortfolioRepresented : Bool
+    pairExactKernelCompressionEligible : Bool
+    c3ExactKernelCompressionEligible : Bool
+    v4ExactKernelCompressionEligible : Bool
+    uncertifiedCandidatesRemainReopenable : Bool
     operatorDerivedRequirementInferenceImplemented : Bool
     observerDerivedConflictInferenceImplemented : Bool
     dataDrivenClosedBatchSelectionImplemented : Bool
@@ -122,6 +135,7 @@ record AdaptiveHyperfabricProductionBoundary : Set where
     productionBytesPaid : Bool
     productionRecursiveRefinementPaid : Bool
     productionReducerHyperfabricPaid : Bool
+    productionCompressionPortfolioPaid : Bool
     productionSymmetryNullPaid : Bool
     productionQuotientDecisionPaid : Bool
     productionCPUReplayPaid : Bool
@@ -140,12 +154,13 @@ currentAdaptiveHyperfabricProductionBoundary =
     true true true true
     true true true
     true true true true
+    true true true false false true
     true true true
     false false
-    false false false false false false false false false false
+    false false false false false false false false false false false
 
 ------------------------------------------------------------------------
--- Consumer-relative compression insertion.
+-- Compression-aware portfolio insertion.
 ------------------------------------------------------------------------
 
 record CompressionRoadmapInsertionBoundary : Set where
@@ -158,13 +173,16 @@ record CompressionRoadmapInsertionBoundary : Set where
     exactGF2KernelCurrentlyUsesApproximateMargin : Bool
     compressionCanReplaceSameObjectAcquisition : Bool
     syntheticPairQuotientProvidesAdequateCompressionSpecimen : Bool
+    c3StructuralReductionAlreadyMeansExactKernelCompression : Bool
+    v4NullSupportedReductionAlreadyMeansExactKernelCompression : Bool
+    uncertifiedCandidateCanRemainReopenable : Bool
     productionCompressionRankingPaid : Bool
 open CompressionRoadmapInsertionBoundary public
 
 canonicalCompressionRoadmapInsertionBoundary : CompressionRoadmapInsertionBoundary
 canonicalCompressionRoadmapInsertionBoundary =
   compression-roadmap-insertion-boundary
-    true true false true false false true false
+    true true false true false false true false false true false
 
 ------------------------------------------------------------------------
 -- Operational order after bytes arrive.
@@ -183,7 +201,9 @@ record AdaptiveReplayPolicy : Set where
     rejectBatchesContainingConflict : Bool
     requireGlobalMPEqualsPM : Bool
     requireObserverCovariance : Bool
+    requireExactKernelCertificateBeforeCompressionRanking : Bool
     rankCompressionOnlyAfterConsumerAdequacy : Bool
+    retainUncertifiedCandidatesAsReopenable : Bool
     retainNonconformingTailCoordinates : Bool
     symmetryNullMayInformOptimisationConfidence : Bool
     symmetryNullRequiredForCorrectFullWidthFallback : Bool
@@ -193,7 +213,7 @@ open AdaptiveReplayPolicy public
 
 canonicalAdaptiveReplayPolicy : AdaptiveReplayPolicy
 canonicalAdaptiveReplayPolicy = adaptive-replay-policy
-  true true true true true true true true true true true true true false true false
+  true true true true true true true true true true true true true true true false true false
 
 ------------------------------------------------------------------------
 -- Snowball/source order is orthogonal to mathematical dependency order.
@@ -226,6 +246,8 @@ data ClassSizeImpliesGroupAction : Set where
 data RequirementClosureImpliesAdmissibleBatch : Set where
 data LargestClosedBatchImpliesEquivariance : Set where
 data SmallestCarrierImpliesAdequacy : Set where
+data StructuralReductionImpliesExactKernelCertificate : Set where
+data BetterNullPImpliesExactKernelCertificate : Set where
 data LowNullPImpliesProductionMechanism : Set where
 data SyntheticHyperformImpliesProductionHyperform : Set where
 data SourceIdentityImpliesExecution : Set where
@@ -247,6 +269,12 @@ largestClosedBatchDoesNotCreateEquivariance ()
 
 smallestCarrierDoesNotCreateAdequacy : SmallestCarrierImpliesAdequacy → ⊥
 smallestCarrierDoesNotCreateAdequacy ()
+
+structuralReductionDoesNotCreateKernelCertificate : StructuralReductionImpliesExactKernelCertificate → ⊥
+structuralReductionDoesNotCreateKernelCertificate ()
+
+nullEvidenceDoesNotCreateKernelCertificate : BetterNullPImpliesExactKernelCertificate → ⊥
+nullEvidenceDoesNotCreateKernelCertificate ()
 
 lowNullPDoesNotCreateProductionMechanism : LowNullPImpliesProductionMechanism → ⊥
 lowNullPDoesNotCreateProductionMechanism ()
