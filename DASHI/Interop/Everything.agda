@@ -41,4 +41,5 @@ import DASHI.Interop.IntrospectiveProofLoopExact
 import DASHI.Interop.FormalisationGovernanceAttributedSourceMigrationExact
 import DASHI.Interop.SourceAttributionShapePolicyExact
 import DASHI.Interop.SLRWorldModelSuiteConvergenceRoadmapExact
+import DASHI.Interop.SLRSensibLawCandidateWorldAdapterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
