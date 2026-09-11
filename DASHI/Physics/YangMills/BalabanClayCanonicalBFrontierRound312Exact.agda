@@ -3,30 +3,11 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound312Exact where
 
 ------------------------------------------------------------------------
 -- ROUND312 / CURRENT SHORTEST CANONICAL B PHYSICAL CUT
---
--- R306 found the preferred standard-theorem route with G1/G2/G3.
--- R309 makes G1 source/applicability separation exact.
--- R310 factors G2 into physical Euclidean semantics, bounded-test admissibility,
--- and scalar-order closure.
--- R311 removes a duplicate G3 ontology by reusing R302's transfer-energy <-
--- > decay-ratio coordinate.  Candidate mass positivity is compiler-owned once
--- that coordinate is paid.
---
--- Current physical/application coordinates:
---   H1. exact selected physical J pair/support/root is in the published CMP116
---       differentiated-localization theorem on the SAME T5 shell carrier;
---   H2a. physical observable decoding/time translation/support separation;
---   H2b. boundedness of selected left/right/product tests;
---   H2c. upper-order closedness of the exact selected rational convergence;
---   H3a. one same-Hamiltonian transfer-energy <-> decay-ratio coordinate;
---   H3b. q=1/2 bound has the exact physical exponential-decay meaning consumed
---        by the standard clustering->spectrum theorem.
---
--- Everything after these plus the standard spectral authority is compiler-owned.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact as R309
@@ -40,36 +21,25 @@ record Round312Boundary : Set where
     currentPhysicalCutHasSixTypedCoordinates : Bool
     currentPhysicalCutHasSixTypedCoordinatesIsTrue :
       currentPhysicalCutHasSixTypedCoordinates ≡ true
-
     duplicateIndependentMassRateCoordinateRequired : Bool
     duplicateIndependentMassRateCoordinateRequiredIsFalse :
       duplicateIndependentMassRateCoordinateRequired ≡ false
-
     selectedJApplicabilityStillPhysical : Bool
     selectedJApplicabilityStillPhysicalIsTrue :
       selectedJApplicabilityStillPhysical ≡ true
-
     covarianceLimitAlgebraStillNewYMAnalysis : Bool
     covarianceLimitAlgebraStillNewYMAnalysisIsFalse :
       covarianceLimitAlgebraStillNewYMAnalysis ≡ false
-
     candidateMassPositivityStillPrimitive : Bool
     candidateMassPositivityStillPrimitiveIsFalse :
       candidateMassPositivityStillPrimitive ≡ false
-
     standardSpectralTransferIsNewYMAnalysis : Bool
     standardSpectralTransferIsNewYMAnalysisIsFalse :
       standardSpectralTransferIsNewYMAnalysis ≡ false
 
 canonicalRound312Boundary : Round312Boundary
 canonicalRound312Boundary =
-  round312-boundary
-    true refl
-    false refl
-    true refl
-    false refl
-    false refl
-    false refl
+  round312-boundary true refl false refl true refl false refl false refl false refl
 
 round312H1PublishedLocalizationLevel : ProofLevel
 round312H1PublishedLocalizationLevel = R309.publishedDifferentiatedLocalizationLevel
