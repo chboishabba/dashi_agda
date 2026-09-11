@@ -16,6 +16,7 @@ SCHEMA = "slr-multilingual-wikimedia-parser-compat-v1"
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 MODEL_BY_LANG = {
     "en": "en_core_web_sm",
+    "simple": "en_core_web_sm",
     "es": "es_core_news_sm",
     "fr": "fr_core_news_sm",
     "de": "de_core_news_sm",
@@ -121,8 +122,9 @@ def parse_surface(text: str, language: str) -> dict[str, Any]:
         trained = True
         backend = "spacy-trained"
     except Exception:
+        blank_lang = "en" if language == "simple" else language
         try:
-            nlp = spacy.blank(language)
+            nlp = spacy.blank(blank_lang)
         except Exception:
             nlp = spacy.blank("xx")
             backend = "spacy-blank-xx"
@@ -149,7 +151,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--graph", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--cache-dir", type=Path, required=True)
-    p.add_argument("--languages", default="en,es,fr,de")
+    p.add_argument("--languages", default="en,es,fr,de,simple")
     p.add_argument("--max-qids", type=int, default=4)
     p.add_argument("--timeout", type=float, default=20.0)
     p.add_argument("--retries", type=int, default=5)
@@ -179,6 +181,7 @@ def main() -> int:
     shared_identity_pairs = 0
     trained_parser_surfaces = 0
     fallback_parser_surfaces = 0
+    simplewiki_surfaces = 0
     for qid in qids:
         entity = entities.get(qid) or {}
         sitelinks = entity.get("sitelinks") or {}
@@ -189,6 +192,8 @@ def main() -> int:
             if not title:
                 continue
             available_languages.append(language)
+            if language == "simple":
+                simplewiki_surfaces += 1
             text, pageid = intro_for(language, title, args.cache_dir, args.timeout, args.retries)
             digest = hashlib.sha256(text.encode("utf-8")).hexdigest() if text else ""
             parse = parse_surface(text, language)
@@ -207,6 +212,7 @@ def main() -> int:
                 "same_qid_identity_paid": True,
                 "translation_equivalence_paid": False,
                 "claim_semantic_equivalence_paid": False,
+                "simplewiki_is_presumed_subset_of_enwiki": False,
                 "candidate_only": True,
                 "semantic_promotion": False,
             })
@@ -222,6 +228,7 @@ def main() -> int:
         "summary": {
             "qids": len(qids),
             "language_surfaces": len(rows),
+            "simplewiki_surfaces": simplewiki_surfaces,
             "shared_qid_identity_pairs": shared_identity_pairs,
             "trained_parser_surfaces": trained_parser_surfaces,
             "fallback_parser_surfaces": fallback_parser_surfaces,
@@ -229,6 +236,7 @@ def main() -> int:
         "same_qid_pays_cross_language_identity": True,
         "same_qid_pays_translation_equivalence": False,
         "parser_schema_compatibility_pays_semantic_equivalence": False,
+        "simplewiki_is_presumed_subset_of_enwiki": False,
         "sensiblaw_translation_view_compatible": True,
         "sensiblaw_spacy_language_adapter_compatible": True,
         "candidate_only": True,
@@ -240,12 +248,12 @@ def main() -> int:
     print(
         "SLR_MULTILINGUAL_WIKIMEDIA_PARSER_COMPAT_RECEIPT "
         f"schema={SCHEMA} qids={s['qids']} language_surfaces={s['language_surfaces']} "
-        f"shared_qid_identity_pairs={s['shared_qid_identity_pairs']} "
+        f"simplewiki_surfaces={s['simplewiki_surfaces']} shared_qid_identity_pairs={s['shared_qid_identity_pairs']} "
         f"trained_parser_surfaces={s['trained_parser_surfaces']} "
         f"fallback_parser_surfaces={s['fallback_parser_surfaces']} "
         "same_qid_identity=true translation_equivalence=false semantic_equivalence=false "
-        "sensiblaw_translation_view_compatible=true sensiblaw_spacy_language_adapter_compatible=true "
-        "candidate_only=true semantic_promotion=false",
+        "simplewiki_subset_assumed=false sensiblaw_translation_view_compatible=true "
+        "sensiblaw_spacy_language_adapter_compatible=true candidate_only=true semantic_promotion=false",
         file=sys.stderr,
     )
     return 0
