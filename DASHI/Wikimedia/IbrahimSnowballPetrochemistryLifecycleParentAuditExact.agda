@@ -52,7 +52,7 @@ petrochemistryDewey = Dewey.mkUnresolvedDewey
 
 steamCrackingReviewSource : Attribution.AttributedSource
 steamCrackingReviewSource = Attribution.mkDOISource
-  "authors as published"
+  "Zahra Gholami; Fatemeh Gholami; Zdeněk Tišler; Mohammadtaghi Vakili"
   "A Review on the Production of Light Olefins Using Steam Cracking of Hydrocarbons"
   "Energies 14(23), 8190"
   "2021"
@@ -64,7 +64,7 @@ steamCrackingReviewSource = Attribution.mkDOISource
 
 thermalCrackingReviewSource : Attribution.AttributedSource
 thermalCrackingReviewSource = Attribution.mkDOISource
-  "authors as published"
+  "S. M. Sadrameli"
   "Thermal/catalytic cracking of hydrocarbons for the production of olefins: A state-of-the-art review I: Thermal cracking review"
   "Fuel 140, 102-115"
   "2015"
