@@ -2,6 +2,8 @@
 % Repo-native owners:
 %   DASHI/Physics/Chemistry/AtomicPeriodicTable369ArchiveHartreeRadialIdentityDefectExact.agda
 %   DASHI/Physics/Chemistry/AtomicPeriodicTable369RadialIdentityRepairExecutionExact.agda
+%   DASHI/Physics/Chemistry/AtomicPeriodicTable369HydrogenNISTComparisonExact.agda
+%   DASHI/Physics/Chemistry/AtomicPeriodicTable369HydrogenReducedMassExact.agda
 %   DASHI/Physics/Chemistry/AtomicPeriodicTable369PhysicalValidation.agda
 
 \section{Radial-state identity repair and execution receipt}
@@ -68,6 +70,67 @@ $3d$ & 0 & 0 & $-0.055555596687603834$ & $-1/18$\\
 All energy, node-count and within-$\ell$ orthogonality checks passed.  The
 largest retained Gram-matrix deviation was below $7\times10^{-16}$.
 
+\subsection{First authoritative H I reference-data diagnostic}
+
+The repaired $1s$ energy is consumed by
+\texttt{scripts/atomic\_hydrogen\_nist\_comparison.py}.  The committed receipt
+uses the 2022 CODATA conversion
+\[
+  1E_h=27.211386245981\ \mathrm{eV}
+\]
+and the NIST ASD SRD~78 H I value
+\[
+  IE_1(\mathrm H)=13.598434599702\ \mathrm{eV}
+\]
+with quoted uncertainty $1.2\times10^{-11}$ eV.  The finite-grid result gives
+\[
+  IE_1^{\rm grid}=13.604333505485517\ \mathrm{eV},
+\]
+so
+\[
+  IE_1^{\rm grid}-IE_1^{\rm NIST}=+0.005898905783517705\ \mathrm{eV}.
+\]
+The exact infinite-nuclear-mass Coulomb value represented in the same units is
+\[
+  IE_1^{\infty M}=13.6056931229905\ \mathrm{eV},
+\]
+with residual $+0.00725852328850074$ eV.  The finite-grid value is numerically
+closer to NIST, but this is not evidence of better physics: discretization error
+partially cancels physical-model error.  Both values are retained so that the
+cancellation cannot be promoted as accuracy.
+
+\subsection{Leading finite-proton-mass correction}
+
+The next source-paid one-electron correction uses the 2022 CODATA ratio
+\[
+  \frac{m_e}{m_p}=5.446170214889\times10^{-4}
+\]
+and therefore
+\[
+  \frac{\mu}{m_e}=\frac{1}{1+m_e/m_p}=0.9994556794247615.
+\]
+Applying that factor to the nonrelativistic Coulomb binding gives
+\[
+  IE_1^{\mu}=13.598287264283275\ \mathrm{eV},
+\]
+with NIST residual
+\[
+  IE_1^{\mu}-IE_1^{\rm NIST}=-0.0001473354187240261\ \mathrm{eV}.
+\]
+Thus the leading finite-nuclear-mass correction reduces the magnitude of the
+analytic infinite-mass residual by roughly two orders of magnitude.  It still
+does not reach NIST precision. Relativistic, radiative/QED, higher-order recoil,
+proton-size and related precision corrections remain explicitly unpaid.
+
+The corresponding producer and receipt are
+\[
+\texttt{scripts/atomic\_hydrogen\_reduced\_mass\_nist.py}
+\]
+and
+\[
+\texttt{Artifacts/atomic-periodic-table-369/hydrogen-reduced-mass-nist-receipt.json}.
+\]
+
 \subsection{Attribution snowball}
 
 The identifier fields remain source-role separated:
@@ -75,39 +138,66 @@ The identifier fields remain source-role separated:
 \begin{itemize}
 \item Schr\"odinger, \emph{Quantisierung als Eigenwertproblem} (1926), DOI
   \texttt{10.1002/andp.19263840404}, is retained as a primary historical
-  eigenvalue-problem source.  Semantic coordinates remain atom Q9121 and
+  eigenvalue-problem source. Semantic coordinates remain atom Q9121 and
   quantum mechanics Q944, with Dewey topic coordinates 539.7 and 530.12.
 \item NIST Atomic Spectra Database, Standard Reference Database 78, DOI
   \texttt{10.18434/T4W30F}, is the authoritative downstream comparison source
-  for atomic energy levels, ground states and ionization energies.  Ionization
-  energy remains Q483769.  Database presence is not agreement.
+  for atomic energy levels, ground states and ionization energies. Ionization
+  energy remains Q483769 / IUPAC Gold Book I03199. Database presence is not
+  agreement.
+\item The 2022 CODATA constants table supplies the Hartree/eV conversion and
+  electron-proton mass ratio. Constants provenance does not identify omitted
+  physical effects from a residual.
 \item OEIS A167268, A093907 and A018227 remain upstream structural-selector,
-  period-length and closure coordinates.  They do not validate the radial
+  period-length and closure coordinates. They do not validate the radial
   eigenproblem or quantitative atomic energies.
 \end{itemize}
 
+\subsection{Many-electron continuation}
+
+The periodic-table-facing next producer has now been authored as
+\texttt{scripts/atomic\_helium\_hartree\_scf.py}.  It is a restricted
+closed-shell spherical Hartree producer for neutral helium, with two
+opposite-spin electrons sharing a $1s$ spatial orbital.  Each electron sees the
+Coulomb field of the other electron rather than the full two-electron density,
+so the obvious one-electron self-interaction of the archived toy solver is not
+reintroduced.  Its intended total-energy bookkeeping is
+\[
+  E_{\rm He}=2\varepsilon_{1s}-J,
+\]
+followed by the same-grid ionization difference
+\[
+  IE_1(\mathrm{He})=E(\mathrm{He}^+)-E(\mathrm{He}).
+\]
+At this manuscript state the producer is \emph{authored but not yet promoted to
+an execution receipt}.  NIST ASD gives the downstream target
+$IE_1(\mathrm{He})=24.587389011$ eV with uncertainty $2.5\times10^{-8}$ eV.
+Correlation, finite nuclear mass, relativistic/QED effects and generic
+multi-orbital state tracking remain unpaid.
+
 \subsection{Promotion boundary}
 
-The newly paid statement is therefore narrow but executable:
+The paid chain is now
 \[
 \boxed{
-(n,\ell)\mapsto\text{distinct radial eigenstate}
-\quad\text{is implemented and numerically regressed in the hydrogenic limit.}
+\text{radial identity}
+\to \text{executed H numerical regression}
+\to \text{NIST H diagnostic}
+\to \text{leading reduced-mass correction}.
 }
 \]
-It does \emph{not} imply
+This does \emph{not} imply
 \[
-\text{SCF convergence},\quad
-\text{correct many-electron ground states},\quad
-\text{calibrated ionization energies},\quad
+\text{precision hydrogen theory},\quad
+\text{many-electron SCF recovery},\quad
+\text{correct empirical ground states},\quad
 \text{nuclear stability},\quad
 \text{empirical periodic-table recovery}.
 \]
-The next same-object producer must carry the repaired state identities through
-self-consistent iterations, specify self-interaction/exchange treatment, emit
-convergence diagnostics and total energies for matched neutral/cation objects,
-and only then compare
+The highest-value continuation for the periodic-table claim is now to execute
+and receipt the many-electron helium producer, then generalize state tracking to
+multiple occupied subshells before comparing neutral/cation
 \[
   IE_1(Z)=E(Z-1)-E(Z)
 \]
-against NIST ASD with uncertainty-aware residuals.
+against NIST ASD across increasing $Z$.
