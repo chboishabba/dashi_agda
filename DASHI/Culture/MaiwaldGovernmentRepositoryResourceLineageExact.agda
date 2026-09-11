@@ -71,6 +71,44 @@ protonatedValineResourceLineage = maiwald-resource-lineage
   "The manuscript explicitly acknowledges JPL/NASA contract 80NM0018D0004, JPL SURP, NSF CHE-2154271, and CU Boulder Research Computing support. These identifiers pay resource/funding lineage and route acquisition; they do not by themselves establish person-specific ownership, custody, grant transfer, or raw-data location."
 
 ------------------------------------------------------------------------
+-- Resource-scope archaeology.
+--
+-- The manuscript acknowledgement mixes identifiers at different scopes. JPL's
+-- own acquisition terms identify 80NM0018D0004 as the broad NASA-Caltech prime
+-- contract for JPL. NSF/APS/ACS publication surfaces show CHE-2154271 supporting
+-- other Weber-group cryogenic-ion spectroscopy work as well. The JPL SURP label
+-- is therefore the more project-specific programme coordinate here, but even it
+-- does not by itself pay data custody or a person-specific succession theorem.
+------------------------------------------------------------------------
+
+record ResourceScopeState : Set where
+  constructor resource-scope-state
+  field
+    jplPrimeContract : String
+    jplPrimeContractBroadInstitutionalScopePaid : Bool
+    nsfAward : String
+    nsfAwardAppearsInUnrelatedWeberGroupWork : Bool
+    surpProgrammeNamedForThisProject : Bool
+    primeContractMayBeReadAsMaiwaldSpecificGrant : Bool
+    nsfAwardMayBeReadAsMaiwaldSpecificGrant : Bool
+    surpProgrammeAutomaticallyPaysCustody : Bool
+    strongestProjectSpecificFundingCoordinate : String
+    boundedReading : String
+
+open ResourceScopeState public
+
+protonatedValineResourceScope : ResourceScopeState
+protonatedValineResourceScope = resource-scope-state
+  "80NM0018D0004"
+  true
+  "CHE-2154271"
+  true
+  true
+  false false false
+  "JPL Strategic University Research Partnership (SURP) programme"
+  "80NM0018D0004 is a broad JPL/Caltech-NASA prime-contract coordinate, not a Maiwald-specific grant. CHE-2154271 also supports other Weber-group cryogenic-ion spectroscopy work, so its reuse pays laboratory/resource continuity rather than Maiwald-specific succession. JPL SURP is the narrower project-programme coordinate, but still does not establish raw-data custody, notebook custody or post-loss handover."
+
+------------------------------------------------------------------------
 -- Figure-production / raw-data boundary.
 ------------------------------------------------------------------------
 
@@ -142,6 +180,7 @@ record GovernmentRepositoryResourceBoundary : Set where
     governmentRepositoryCopyEqualsVersionOfRecord : Bool
     fundingIdentifierCreatesCustody : Bool
     primeContractCreatesPersonSpecificOwnership : Bool
+    broadNsfAwardCreatesPersonSpecificSuccession : Bool
     rawPointsVisibleInFigurePayScanFiles : Bool
     smoothingDescriptionPaysReductionProvenanceCompletely : Bool
     graphOrDeweyRouteCreatesAuthority : Bool
@@ -151,4 +190,4 @@ open GovernmentRepositoryResourceBoundary public
 
 canonicalGovernmentRepositoryResourceBoundary : GovernmentRepositoryResourceBoundary
 canonicalGovernmentRepositoryResourceBoundary = government-repository-resource-boundary
-  false false false false false false false true
+  false false false false false false false false true
