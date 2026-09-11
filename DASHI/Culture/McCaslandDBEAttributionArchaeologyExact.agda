@@ -57,6 +57,19 @@ tegneliaLetterhead2017 = dbe-attribution-manifestation
   "650 Management / consulting traversal only"
   "Dated DBE-letterhead carrier showing Tegnelia acting through the company in 2017. It is not a corporate filing and does not itself identify every owner/member."
 
+kirtlandCurrentTegnelia : DBEAttributionManifestation
+kirtlandCurrentTegnelia = dbe-attribution-manifestation
+  "current page observed 2026-09"
+  primaryOrganisationPage
+  "Kirtland Partnership Committee board profile: Jim Tegnelia"
+  "https://kpcnm.org/jim-tegnelia/"
+  "James A. Tegnelia"
+  "heading: Founder, Owner, and President, DBE Consulting LLC"
+  "Kirtland Partnership Committee board profile"
+  "unresolvedQid"
+  "650 Management / consulting traversal only"
+  "Current organisational page independently assigns the same Founder/Owner/President DBE heading to Tegnelia. This creates a live role-label collision with the McCasland profile and therefore weakens the heading as an ownership-history carrier."
+
 kirtlandCurrentMcCasland : DBEAttributionManifestation
 kirtlandCurrentMcCasland = dbe-attribution-manifestation
   "current page observed 2026-09"
@@ -68,7 +81,7 @@ kirtlandCurrentMcCasland = dbe-attribution-manifestation
   "Kirtland Partnership Committee board profile"
   "unresolvedQid"
   "650 Management / consulting traversal only"
-  "Primary organisational page pays the current displayed DBE title string, but its stale ATA body makes the page temporally mixed. It cannot by itself establish DBE founding date, transfer date, exclusive ownership, 2026 client portfolio, or event-time corporate status."
+  "Primary organisational page pays the current displayed DBE title string, but its stale ATA body and duplicate DBE Founder/Owner/President heading on Tegnelia's Kirtland profile make the page temporally and attributionally mixed. It cannot by itself establish DBE founding date, transfer date, exclusive ownership, 2026 client portfolio, or event-time corporate status."
 
 ------------------------------------------------------------------------
 -- Conflict / payment state.
@@ -79,7 +92,9 @@ record DBEOwnershipArchaeologyState : Set where
   field
     tegneliaOwner2011Paid : Bool
     tegneliaCompanyCarrier2017Paid : Bool
+    tegneliaCurrentFounderHeadingPaid : Bool
     mccaslandCurrentDBEHeadingPaid : Bool
+    currentKirtlandRoleLabelCollisionPaid : Bool
     sameDBEEntityAcrossAllManifestationsPaid : Bool
     mccaslandFounderFromCompanyInceptionPaid : Bool
     ownershipTransferDatePaid : Bool
@@ -91,8 +106,8 @@ open DBEOwnershipArchaeologyState public
 
 canonicalDBEOwnershipArchaeologyState : DBEOwnershipArchaeologyState
 canonicalDBEOwnershipArchaeologyState = dbe-ownership-archaeology-state
-  true true true false false false false false
-  "recover New Mexico corporate filing/history or equivalent primary company record identifying exact DBE entity, formation date, members/managers/ownership changes, and dated McCasland role; only then acquire primary 2025-2026 client/contract carriers"
+  true true true true true false false false false false
+  "recover New Mexico corporate filing/history or equivalent primary company record identifying exact DBE entity, formation date, members/managers/ownership changes, and dated McCasland role; do not use either current Kirtland heading as the corporate-history authority; only then acquire primary 2025-2026 client/contract carriers"
 
 record DBEAttributionBoundary : Set where
   constructor dbe-attribution-boundary
@@ -101,6 +116,7 @@ record DBEAttributionBoundary : Set where
     tegnelia2011OwnershipExcludesLaterMcCaslandOwnership : Bool
     sameCompanyLabelProvesSameLegalEntity : Bool
     organisationBiographyEqualsCorporateFiling : Bool
+    duplicateFounderHeadingsCanBothBeReadAsLiteralCorporateHistory : Bool
     secondaryClientClaimsPromoteWithoutPrimaryContract : Bool
     datedManifestationsMayGuideCorporateRecordSearch : Bool
 
@@ -108,4 +124,4 @@ open DBEAttributionBoundary public
 
 canonicalDBEAttributionBoundary : DBEAttributionBoundary
 canonicalDBEAttributionBoundary = dbe-attribution-boundary
-  false false false false false true
+  false false false false false false true
