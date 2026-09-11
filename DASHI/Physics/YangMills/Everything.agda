@@ -204,6 +204,12 @@ import DASHI.Physics.YangMills.BalabanOSExponentialClusteringImpliesHamiltonianG
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaReuseExact
 import DASHI.Physics.YangMills.BalabanClayMassGapGatePackageExact
 
+-- Canonical B proof-search consumer after R270-R309 normalization.  This one
+-- owner imports the direct finite-T5 source route, arbitrary-pair continuum
+-- clustering, standard clustering->spectrum transfer, and the proof-bearing
+-- selected-J applicability split; Row C remains an optional producer tactic.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact
+
 -- Receipt-vs-theorem terminal audit.
 import DASHI.Physics.YangMills.BalabanCMP98Equation119ClayTerminalBidiRound186Exact
 import DASHI.Physics.YangMills.BalabanCMP98TerminalHamiltonianBidiRound188Exact
