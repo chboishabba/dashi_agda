@@ -159,14 +159,14 @@ firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectFineIncidenceBearingLACarrierArtifact
 
 data CandidateExperimentResidual : Set where
-  replicateDefectCoverageCurveAcrossPerturbationSeeds : CandidateExperimentResidual
+  crossValidateDefectCoverageCurveAcrossPreparationAndProjectionFibres : CandidateExperimentResidual
   fitCoverageAwareRecurrenceComplexityFromStructuralFibrePortfolio : CandidateExperimentResidual
   exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = replicateDefectCoverageCurveAcrossPerturbationSeeds
+firstUnpaidCandidateExperimentResidual = crossValidateDefectCoverageCurveAcrossPreparationAndProjectionFibres
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -225,6 +225,7 @@ record RSA260ProductionSubstitutionBoundary : Set where
     twoHopCommonNeighbourFibresPaid : Bool
     defectCoverageCurvePaid : Bool
     defectCoverageSeedReplicationPaid : Bool
+    defectCoverageCrossPreparationProjectionPaid : Bool
     broadCoverageRaisesRecurrenceComplexity : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
     fineIncidenceMeasuredOnProductionMatrix : Bool
@@ -295,7 +296,8 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; oneSwapProjectionCrossPaid = true
   ; twoHopCommonNeighbourFibresPaid = true
   ; defectCoverageCurvePaid = true
-  ; defectCoverageSeedReplicationPaid = false
+  ; defectCoverageSeedReplicationPaid = true
+  ; defectCoverageCrossPreparationProjectionPaid = false
   ; broadCoverageRaisesRecurrenceComplexity = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
   ; fineIncidenceMeasuredOnProductionMatrix = false
