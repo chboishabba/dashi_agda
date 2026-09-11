@@ -78,6 +78,10 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact
 -- order-closed scalar convergence authority.
 import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact
 
+-- R311 reuses the existing transfer-energy/decay-ratio coordinate for G3 rather
+-- than maintaining a second independent mass-rate convention.
+import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact
+
 -- Older producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
 import DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound272Exact
