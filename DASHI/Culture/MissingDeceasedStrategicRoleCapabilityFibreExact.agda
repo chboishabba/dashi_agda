@@ -96,7 +96,6 @@ casiasRoleCapabilityTarget = role-capability-acquisition
   "primary LANL employment/duty description and dated badge/routing scope; primary forensic/electronic-device records where releasable"
   true
 
-garciaRoleCapabilityTarget : RoleCapabilityAcquisition
 stevenGarciaRoleCapabilityTarget : RoleCapabilityAcquisition
 stevenGarciaRoleCapabilityTarget = role-capability-acquisition
   "Steven Abel Garcia"
