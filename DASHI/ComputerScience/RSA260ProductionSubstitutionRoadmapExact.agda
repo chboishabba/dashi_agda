@@ -24,6 +24,7 @@ import DASHI.ComputerScience.RSA260BidiFineIncidenceInterpolationExact as FineIn
 import DASHI.ComputerScience.RSA260BidiTwoHopCommonNeighbourFibreExact as TwoHop
 import DASHI.ComputerScience.RSA260BidiFineIncidenceDefectCoverageExact as DefectCoverage
 import DASHI.ComputerScience.RSA260BidiKrylovReachableRankExact as DynamicRank
+import DASHI.ComputerScience.RSA260BidiStructuralFibrePortfolioHeldoutExact as StructuralPortfolio
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -147,6 +148,9 @@ dynamicRankBoundary = DynamicRank.canonicalDynamicRankInterpretationBoundary
 dynamicRankReceipt : DynamicRank.KrylovReachableRankReceipt
 dynamicRankReceipt = DynamicRank.currentKrylovReachableRankReceipt
 
+structuralPortfolioBoundary : StructuralPortfolio.StructuralPortfolioInterpretationBoundary
+structuralPortfolioBoundary = StructuralPortfolio.canonicalStructuralPortfolioInterpretationBoundary
+
 ------------------------------------------------------------------------
 -- Ordered residual routers.
 ------------------------------------------------------------------------
@@ -165,8 +169,6 @@ data ProductionResidual : Set where
 firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectFineIncidenceBearingLACarrierArtifact
 
--- Acquisition may snowball out of dependency order.  This is the highest-alpha
--- current DIAGNOSTIC target, not a mandatory predecessor of every other P0 route.
 data ProductionDiagnosticTarget : Set where
   sameObjectSparseMatrixForDirectIncidence : ProductionDiagnosticTarget
   sameObjectBalancingForPreparationGeometry : ProductionDiagnosticTarget
@@ -177,13 +179,14 @@ firstHighAlphaProductionDiagnosticTarget : ProductionDiagnosticTarget
 firstHighAlphaProductionDiagnosticTarget = sameObjectKrylovAForDynamicSpan
 
 data CandidateExperimentResidual : Set where
-  fitCoverageAwareRecurrenceComplexityFromStructuralFibrePortfolio : CandidateExperimentResidual
+  repairStructuralPortfolioWithDynamicReachableRank : CandidateExperimentResidual
+  rerunHeldoutDynamicRepairAcrossPreparationFibres : CandidateExperimentResidual
   exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = fitCoverageAwareRecurrenceComplexityFromStructuralFibrePortfolio
+firstUnpaidCandidateExperimentResidual = repairStructuralPortfolioWithDynamicReachableRank
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -245,6 +248,9 @@ record RSA260ProductionSubstitutionBoundary : Set where
     defectCoverageCrossPreparationProjectionPaid : Bool
     dynamicReachableKrylovRankPaid : Bool
     dynamicReachableRankExactBlobExecuted : Bool
+    staticStructuralPortfolioHeldoutPaid : Bool
+    staticStructuralPortfolioExactBlobPaid : Bool
+    largestStaticResidualRetained : Bool
     sameObjectKrylovSequenceDynamicDiagnosticPaid : Bool
     broadCoverageRaisesRecurrenceComplexity : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
@@ -320,6 +326,9 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; defectCoverageCrossPreparationProjectionPaid = true
   ; dynamicReachableKrylovRankPaid = true
   ; dynamicReachableRankExactBlobExecuted = true
+  ; staticStructuralPortfolioHeldoutPaid = true
+  ; staticStructuralPortfolioExactBlobPaid = true
+  ; largestStaticResidualRetained = true
   ; sameObjectKrylovSequenceDynamicDiagnosticPaid = false
   ; broadCoverageRaisesRecurrenceComplexity = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
@@ -348,6 +357,7 @@ data DefectCoverageCurveImpliesUniversalThreshold : Set where
 data SameCoarseContractImpliesSameRecurrenceComplexity : Set where
 data SyntheticDynamicRankImpliesProductionReachableRank : Set where
 data KrylovSequenceImpliesMatrixBytes : Set where
+data HeldoutAverageFitImpliesNoCounterexamples : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 
 authorReportedShapeDoesNotCreateBytes : ProductionShapeImpliesProductionBytes → ⊥
@@ -385,6 +395,9 @@ syntheticDynamicRankDoesNotCreateProductionRank ()
 
 krylovSequenceDoesNotCreateMatrixBytes : KrylovSequenceImpliesMatrixBytes → ⊥
 krylovSequenceDoesNotCreateMatrixBytes ()
+
+heldoutAverageFitDoesNotEraseCounterexamples : HeldoutAverageFitImpliesNoCounterexamples → ⊥
+heldoutAverageFitDoesNotEraseCounterexamples ()
 
 searchMissDoesNotProveAbsence : SearchMissImpliesArtifactAbsent → ⊥
 searchMissDoesNotProveAbsence ()
