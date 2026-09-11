@@ -59,13 +59,6 @@ loureiroCenterLeadershipSuccession = loureiro-center-leadership-succession-recei
 
 ------------------------------------------------------------------------
 -- Named student/coauthored-output continuation.
---
--- MIT's memorial identifies Dion Li as one of Loureiro's PhD students. The PSFC
--- library subsequently lists a 2026 publication entry for "Role of ion acoustic
--- instability in magnetic reconnection" by Dion Li, Zhuo Liu and Nuno Loureiro.
--- This pays a concrete post-loss continuation of a student/coauthored scientific
--- output. It does NOT identify Li's replacement advisor, grant transfer,
--- repository custody, or who owns the underlying simulation/configuration state.
 ------------------------------------------------------------------------
 
 record LoureiroStudentPublicationContinuation : Set where
@@ -78,14 +71,54 @@ loureiroDionLiContinuation = loureiro-student-publication-continuation
   "Dion Li"
   "MIT News memorial quotes Dion Li as one of Nuno Loureiro's PhD students"
   "Role of ion acoustic instability in magnetic reconnection — Dion Li; Zhuo Liu; Nuno F. Loureiro"
-  "MIT PSFC Library PSFC/JA-25-49, public 2026 listing"
+  "DOI 10.1017/S002237782510113X; MIT PSFC Library PSFC/JA-25-49; Journal of Plasma Physics 92 E20"
   true true false false false false
+
+------------------------------------------------------------------------
+-- Publication manifestation chronology.
+--
+-- The DOI-bearing Li/Liu/Loureiro paper was received, revised and accepted
+-- before Loureiro's death.  Its 2026 PSFC/Cambridge appearance is therefore a
+-- post-loss publication manifestation of an already accepted object, not by
+-- itself evidence of post-loss scientific work, advisor reassignment, grant
+-- transfer, repository transfer or same-simulation-state handover.
+------------------------------------------------------------------------
+
+record LoureiroPublicationManifestationChronology : Set where
+  constructor loureiro-publication-manifestation-chronology
+  field
+    doi : String
+    receivedDate : String
+    revisedDate : String
+    acceptedDate : String
+    loureiroDeathDate : String
+    publicManifestation : String
+    receivedBeforeDeath : Bool
+    revisedBeforeDeath : Bool
+    acceptedBeforeDeath : Bool
+    manifestationAfterDeath : Bool
+    manifestationProvesPostLossScientificWork : Bool
+    manifestationProvesAdvisorReassignment : Bool
+    manifestationProvesGrantTransfer : Bool
+    manifestationProvesRepositoryTransfer : Bool
+
+open LoureiroPublicationManifestationChronology public
+
+loureiroLiLiuPublicationChronology : LoureiroPublicationManifestationChronology
+loureiroLiLiuPublicationChronology = loureiro-publication-manifestation-chronology
+  "10.1017/S002237782510113X"
+  "2025-05-14"
+  "2025-10-29"
+  "2025-11-25"
+  "2025-12-16"
+  "Journal of Plasma Physics 2026 vol. 92 E20; MIT PSFC report PSFC/JA-25-49 publicly listed 2026-02-27"
+  true true true true false false false false
 
 record LoureiroSuccessionBoundary : Set where
   constructor loureiro-succession-boundary
-  field centerDirectorSuccessionImpliesLoureiroGroupPISuccession : Bool; centerDirectorSuccessionImpliesStudentReassignment : Bool; centerDirectorSuccessionImpliesGrantReassignment : Bool; pedagogicalContinuationImpliesRepositoryTransfer : Bool; postLossStudentPublicationImpliesAdvisorReassignment : Bool; postLossStudentPublicationImpliesGrantOrRepositoryTransfer : Bool; centerLeadershipAndPedagogyMayGuideSameCarrierSearch : Bool
+  field centerDirectorSuccessionImpliesLoureiroGroupPISuccession : Bool; centerDirectorSuccessionImpliesStudentReassignment : Bool; centerDirectorSuccessionImpliesGrantReassignment : Bool; pedagogicalContinuationImpliesRepositoryTransfer : Bool; postLossStudentPublicationImpliesAdvisorReassignment : Bool; postLossStudentPublicationImpliesGrantOrRepositoryTransfer : Bool; postLossPublicationManifestationImpliesPostLossScientificWork : Bool; centerLeadershipAndPedagogyMayGuideSameCarrierSearch : Bool
 open LoureiroSuccessionBoundary public
-canonicalLoureiroSuccessionBoundary = loureiro-succession-boundary false false false false false false true
+canonicalLoureiroSuccessionBoundary = loureiro-succession-boundary false false false false false false false true
 
 record SuccessionSearchStatus : Set where
   constructor succession-search-status
