@@ -26,6 +26,7 @@ import DASHI.ComputerScience.RSA260BidiFineIncidenceDefectCoverageExact as Defec
 import DASHI.ComputerScience.RSA260BidiKrylovReachableRankExact as DynamicRank
 import DASHI.ComputerScience.RSA260BidiStructuralFibrePortfolioHeldoutExact as StructuralPortfolio
 import DASHI.ComputerScience.RSA260BidiDynamicRankRepairHeldoutExact as DynamicRepair
+import DASHI.ComputerScience.RSA260BidiDynamicRankRepairPresentationTransferExact as DynamicTransfer
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -154,6 +155,12 @@ dynamicRepairBoundary = DynamicRepair.canonicalDynamicRankRepairBoundary
 dynamicRepairReceipt : DynamicRepair.DynamicRankRepairReceipt
 dynamicRepairReceipt = DynamicRepair.currentDynamicRankRepairReceipt
 
+dynamicTransferBoundary : DynamicTransfer.PresentationTransferBoundary
+dynamicTransferBoundary = DynamicTransfer.canonicalPresentationTransferBoundary
+
+dynamicTransferReceipt : DynamicTransfer.PresentationTransferReceipt
+dynamicTransferReceipt = DynamicTransfer.currentPresentationTransferReceipt
+
 data ProductionResidual : Set where
   acquireSameObjectFineIncidenceBearingLACarrierArtifact : ProductionResidual
   acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
@@ -186,7 +193,7 @@ data CandidateExperimentResidual : Set where
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = rerunHeldoutDynamicRepairAcrossPreparationFibres
+firstUnpaidCandidateExperimentResidual = inspectSurvivingDynamicRepairResidual
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -256,6 +263,10 @@ record RSA260ProductionSubstitutionBoundary : Set where
     dynamicRankRepairReducesHeldoutMAE : Bool
     dynamicRankRepairReducesLargestResidual : Bool
     dynamicRankRepairEliminatesLargestResidual : Bool
+    dynamicRankRepairPresentationTransferPaid : Bool
+    dynamicRankRepairPresentationTransferExactBlobPaid : Bool
+    dynamicRankRepairTransfersAcrossPreparationFibres : Bool
+    dynamicRankRepairTransfersAcrossProjectionFibres : Bool
     sameObjectKrylovSequenceDynamicDiagnosticPaid : Bool
     broadCoverageRaisesRecurrenceComplexity : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
@@ -339,6 +350,10 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; dynamicRankRepairReducesHeldoutMAE = true
   ; dynamicRankRepairReducesLargestResidual = true
   ; dynamicRankRepairEliminatesLargestResidual = false
+  ; dynamicRankRepairPresentationTransferPaid = true
+  ; dynamicRankRepairPresentationTransferExactBlobPaid = true
+  ; dynamicRankRepairTransfersAcrossPreparationFibres = true
+  ; dynamicRankRepairTransfersAcrossProjectionFibres = true
   ; sameObjectKrylovSequenceDynamicDiagnosticPaid = false
   ; broadCoverageRaisesRecurrenceComplexity = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
@@ -367,6 +382,7 @@ data DefectCoverageCurveImpliesUniversalThreshold : Set where
 data SameCoarseContractImpliesSameRecurrenceComplexity : Set where
 data SyntheticDynamicRankImpliesProductionReachableRank : Set where
 data DynamicRankRepairImpliesExactFormula : Set where
+data DynamicRankTransferImpliesProductionBehaviour : Set where
 data KrylovSequenceImpliesMatrixBytes : Set where
 data HeldoutAverageFitImpliesNoCounterexamples : Set where
 data SearchMissImpliesArtifactAbsent : Set where
@@ -406,6 +422,9 @@ syntheticDynamicRankDoesNotCreateProductionRank ()
 
 dynamicRankRepairDoesNotCreateExactFormula : DynamicRankRepairImpliesExactFormula → ⊥
 dynamicRankRepairDoesNotCreateExactFormula ()
+
+dynamicRankTransferDoesNotCreateProductionBehaviour : DynamicRankTransferImpliesProductionBehaviour → ⊥
+dynamicRankTransferDoesNotCreateProductionBehaviour ()
 
 krylovSequenceDoesNotCreateMatrixBytes : KrylovSequenceImpliesMatrixBytes → ⊥
 krylovSequenceDoesNotCreateMatrixBytes ()
