@@ -17,12 +17,13 @@ import DASHI.ComputerScience.RSA260ConsumerRelativeCompressionCrossPollinationEx
 import DASHI.ComputerScience.RSA260CompressionAwareSymmetryPortfolioExact as Portfolio
 
 ------------------------------------------------------------------------
--- CONSOLIDATED ROADMAP AFTER COMPRESSION-AWARE SYMMETRY PORTFOLIO
+-- CONSOLIDATED ROADMAP AFTER EXACT C3/V4 COMPRESSION CERTIFICATION
 --
--- Conclusion payment remains acquisition-first.  Candidate quotient/action
--- families are retained as a portfolio, but cost/Pareto ranking happens only
--- inside the exact consumer-adequate stratum.  Structurally strong but
--- uncertified C3/V4 reductions remain reopenable rather than promoted.
+-- Conclusion payment remains acquisition-first.  The synthetic exact-kernel
+-- portfolio now contains full-256, pair-128, C3-88, and V4-76 carriers.  The
+-- raw 64-coordinate candidate remains outside the eligible stratum.  Next
+-- portfolio work is measured replay/memory/communication cost, not further
+-- semantic promotion by width alone.
 ------------------------------------------------------------------------
 
 priorRoadmap : Prior.ConsolidatedRSA260RoadmapBoundary
@@ -81,6 +82,7 @@ data AdaptiveProductionResidual : Set where
   verifyOperatorAndConsumerEquivariance : AdaptiveProductionResidual
   certifyCandidateQuotientLiftKernel : AdaptiveProductionResidual
   rankConsumerAdequateCompressionCandidates : AdaptiveProductionResidual
+  measureReplayMemoryCommunicationCosts : AdaptiveProductionResidual
   evaluateStructurePreservingSymmetryNull : AdaptiveProductionResidual
   chooseQuotientOrFullWidthReplay : AdaptiveProductionResidual
   replayCPU : AdaptiveProductionResidual
@@ -126,12 +128,14 @@ record AdaptiveHyperfabricProductionBoundary : Set where
     pairExactKernelCompressionEligible : Bool
     c3ExactKernelCompressionEligible : Bool
     v4ExactKernelCompressionEligible : Bool
+    exactPortfolioKernelCertificateBlobPaid : Bool
     uncertifiedCandidatesRemainReopenable : Bool
     operatorDerivedRequirementInferenceImplemented : Bool
     observerDerivedConflictInferenceImplemented : Bool
     dataDrivenClosedBatchSelectionImplemented : Bool
     exactCandidateRuntimeBlobExecutionPaid : Bool
     exactDataDrivenRuntimeBlobExecutionPaid : Bool
+    syntheticMeasuredCompressionCostsPaid : Bool
     productionBytesPaid : Bool
     productionRecursiveRefinementPaid : Bool
     productionReducerHyperfabricPaid : Bool
@@ -154,8 +158,9 @@ currentAdaptiveHyperfabricProductionBoundary =
     true true true true
     true true true
     true true true true
-    true true true false false true
+    true true true true true
     true true true
+    false
     false false
     false false false false false false false false false false false
 
@@ -173,16 +178,19 @@ record CompressionRoadmapInsertionBoundary : Set where
     exactGF2KernelCurrentlyUsesApproximateMargin : Bool
     compressionCanReplaceSameObjectAcquisition : Bool
     syntheticPairQuotientProvidesAdequateCompressionSpecimen : Bool
-    c3StructuralReductionAlreadyMeansExactKernelCompression : Bool
-    v4NullSupportedReductionAlreadyMeansExactKernelCompression : Bool
-    uncertifiedCandidateCanRemainReopenable : Bool
+    c3ExactKernelCompressionPaid : Bool
+    v4ExactKernelCompressionPaid : Bool
+    exactPortfolioKernelCertificateBlobPaid : Bool
+    raw64CandidateStillIneligible : Bool
+    currentCheapestEligibleWidth : Nat
+    currentCheapestEligibleIsV4x76 : Bool
     productionCompressionRankingPaid : Bool
 open CompressionRoadmapInsertionBoundary public
 
 canonicalCompressionRoadmapInsertionBoundary : CompressionRoadmapInsertionBoundary
 canonicalCompressionRoadmapInsertionBoundary =
   compression-roadmap-insertion-boundary
-    true true false true false false true false false true false
+    true true false true false false true true true true true 76 true false
 
 ------------------------------------------------------------------------
 -- Operational order after bytes arrive.
@@ -205,6 +213,7 @@ record AdaptiveReplayPolicy : Set where
     rankCompressionOnlyAfterConsumerAdequacy : Bool
     retainUncertifiedCandidatesAsReopenable : Bool
     retainNonconformingTailCoordinates : Bool
+    measureCostsBeforeProductionSelection : Bool
     symmetryNullMayInformOptimisationConfidence : Bool
     symmetryNullRequiredForCorrectFullWidthFallback : Bool
     failedCandidateOrSymmetrySearchFallsBackToFullWidth : Bool
@@ -213,7 +222,7 @@ open AdaptiveReplayPolicy public
 
 canonicalAdaptiveReplayPolicy : AdaptiveReplayPolicy
 canonicalAdaptiveReplayPolicy = adaptive-replay-policy
-  true true true true true true true true true true true true true true true false true false
+  true true true true true true true true true true true true true true true true false true false
 
 ------------------------------------------------------------------------
 -- Snowball/source order is orthogonal to mathematical dependency order.
