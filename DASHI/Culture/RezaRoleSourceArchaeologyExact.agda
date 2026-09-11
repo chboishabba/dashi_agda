@@ -7,19 +7,21 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- REZA EVENT-TIME ROLE SOURCE ARCHAEOLOGY
 --
--- Thin provenance owner only.  The application/scientific owners remain
--- authoritative.  This ledger separates primary institutional evidence from
--- direct witness/family testimony, press mediation, and congressional
--- source-of-source repetition.
+-- Thin provenance owner only. The application/scientific owners remain
+-- authoritative. This ledger separates primary institutional evidence from
+-- direct witness/family testimony, press mediation, congressional
+-- source-of-source repetition, and the earlier Monica Jacinto identity lineage.
 ------------------------------------------------------------------------
 
 data RezaRoleSourceClass : Set where
   primaryInstitutionalRoleRecord
+  primaryHistoricalIdentityRecord
   primaryCongressionalDocument
   directColleagueWitnessSurface
   directFamilyWitnessViaReporting
   secondaryPressReporting
-  sourceOfSourceRepetition : RezaRoleSourceClass
+  sourceOfSourceRepetition
+  semanticCoordinateOnly : RezaRoleSourceClass
 
 record RezaRoleSourceCarrier : Set where
   constructor reza-role-source-carrier
@@ -35,6 +37,30 @@ record RezaRoleSourceCarrier : Set where
     boundedReading : String
 
 open RezaRoleSourceCarrier public
+
+boeing2004Jacinto : RezaRoleSourceCarrier
+boeing2004Jacinto = reza-role-source-carrier
+  primaryHistoricalIdentityRecord
+  "Boeing news release: Two Boeing Employees Receive National Recognition, 2004-10-11"
+  "Boeing corporate release dated 2004-10-11"
+  "https://boeing.mediaroom.com/2004-10-11-Two-Boeing-Employees-Receive-National-Recognition"
+  "Monica Jacinto; Boeing Integrated Defense Systems engineer; Boeing Associate Technical Fellow; metallic-alloy-development expertise"
+  false
+  true
+  true
+  "Primary employer/corporate carrier for the Monica Jacinto professional identity in 2004. It does not itself contain the later surname Reza or establish the 2025 JPL role."
+
+calState2021Jacinto : RezaRoleSourceCarrier
+calState2021Jacinto = reza-role-source-carrier
+  primaryHistoricalIdentityRecord
+  "Cal State LA LAunchPad Program 2021 materials-science profile"
+  "Cal State LA institutional profile; 2021 programme object"
+  "https://www.calstatela.edu/ecst/success/launchpad-program-2021"
+  "Monica Jacinto; Technical Fellow for Materials and Processes Engineering at Aerojet Rocketdyne; Mondaloy co-inventor"
+  false
+  true
+  true
+  "Primary institutional carrier for the Monica Jacinto identity and pre-JPL Aerojet Rocketdyne role. It provides a high-confidence historical identity lineage but does not itself weld Jacinto to the later Monica Reza event-time identity."
 
 houseOversight20260420 : RezaRoleSourceCarrier
 houseOversight20260420 = reza-role-source-carrier
@@ -84,20 +110,36 @@ calStateHistoricalRowLead = reza-role-source-carrier
   false
   "The current Cal State page is primary for the current board, but the historical Reza row has not been recovered from a primary archived manifestation. Repetition of the quoted row does not pay the historical page."
 
+wikidataMonicaJacinto : RezaRoleSourceCarrier
+wikidataMonicaJacinto = reza-role-source-carrier
+  semanticCoordinateOnly
+  "Wikidata Monica Jacinto"
+  "Q139385030"
+  "https://www.wikidata.org/wiki/Q139385030"
+  "semantic item labels Monica Jacinto and aliases Monica Jacinto Reza"
+  false
+  false
+  true
+  "Verified external semantic coordinate only. The item currently carries no cited references for the alias/biographical statements, so Q139385030 must not pay the Jacinto-to-Reza identity weld or JPL role."
+
 ------------------------------------------------------------------------
--- Event-time role state.
+-- Event-time role and alias state.
 ------------------------------------------------------------------------
 
 record RezaRoleEvidenceState : Set where
   constructor reza-role-evidence-state
   field
     patentInventorshipPaid : Bool
+    historicalJacintoEmployerLineagePaid : Bool
+    verifiedSemanticQidLocated : Bool
+    semanticQidPaysAliasIdentity : Bool
     colleagueWitnessLocated : Bool
     familyEventTimeEmploymentWitnessLocated : Bool
     congressionalRepetitionLocated : Bool
     archivedCalStateHistoricalRowLocated : Bool
     primaryJPLPersonnelRecordLocated : Bool
     primaryJPLOrgChartLocated : Bool
+    exactJacintoRezaAliasWeldPaid : Bool
     exactMaterialsProcessingGroupIdentityPaid : Bool
     currentBestBoundedReading : String
     firstAcquisitionTarget : String
@@ -106,10 +148,10 @@ open RezaRoleEvidenceState public
 
 canonicalRezaRoleEvidenceState : RezaRoleEvidenceState
 canonicalRezaRoleEvidenceState = reza-role-evidence-state
-  true true true true
-  false false false false
-  "Multiple source classes support that Reza was described as an active JPL Materials Processing director around her disappearance, but no recovered JPL/Caltech personnel or organization record yet pays the exact institutional role."
-  "recover primary JPL/Caltech personnel directory, archived org chart, appointment/award/publication affiliation, or archived Cal State 2024-2025 board page naming Monica Reza and the exact role/group"
+  true true true false true true true
+  false false false false false
+  "Primary Boeing and Cal State carriers pay a long Monica Jacinto alloy/materials-engineering lineage; multiple later source classes describe Monica Reza as an active JPL Materials Processing director; Q139385030 is useful for traversal but cannot itself weld the names because its relevant statements are uncited."
+  "recover a primary record spanning Monica Jacinto and Monica Reza, or a primary JPL/Caltech personnel/directory/org-chart object naming Monica Reza and the exact Materials Processing role; archived Cal State 2024-2025 row remains a secondary route to the same join"
 
 ------------------------------------------------------------------------
 -- Snowball semantic coordinates.
@@ -121,9 +163,11 @@ record RezaRoleCoordinate : Set where
     patentPublicationId : String
     personQid : String
     personQidVerified : Bool
+    personQidReferencePaid : Bool
     deweyTraversal : String
     directSourceLinksRetained : Bool
     qidCreatesRoleReceipt : Bool
+    qidCreatesAliasWeld : Bool
     deweyCreatesRoleReceipt : Bool
 
 open RezaRoleCoordinate public
@@ -131,11 +175,12 @@ open RezaRoleCoordinate public
 canonicalRezaRoleCoordinate : RezaRoleCoordinate
 canonicalRezaRoleCoordinate = reza-role-coordinate
   "US20040208777A1; application US10/769,195; parent US20030053926A1"
-  "unresolvedQid"
+  "Q139385030"
+  true
   false
   "620 Engineering"
   true
-  false false
+  false false false
 
 ------------------------------------------------------------------------
 -- Source-dependency firewalls.
@@ -149,6 +194,8 @@ record RezaRoleSourceBoundary : Set where
     familyWitnessEqualsEmployerRecord : Bool
     colleagueWitnessEqualsEmployerRecord : Bool
     historicalPageQuoteEqualsRecoveredHistoricalPage : Bool
+    primaryHistoricalJacintoRoleAutomaticallyEqualsLaterRezaIdentity : Bool
+    uncitedWikidataAliasPaysSamePersonIdentity : Bool
     multipleNonInstitutionalCarriersMayGuidePrimarySearch : Bool
     roleEvidenceCreatesCauseOrMotive : Bool
 
@@ -156,4 +203,4 @@ open RezaRoleSourceBoundary public
 
 canonicalRezaRoleSourceBoundary : RezaRoleSourceBoundary
 canonicalRezaRoleSourceBoundary = reza-role-source-boundary
-  false false false false false true false
+  false false false false false false false true false
