@@ -16,9 +16,9 @@ import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 ------------------------------------------------------------------------
 -- LOCAL POPULATION EVIDENCE EXTENSION
 --
--- Adds newly located primary/regional population sources that sharpen the
--- s 13 population-identity question.  This extends the existing Ibrahim/
--- Snowball graph; it does not create another traversal or legal ontology.
+-- Adds primary/regional population sources that sharpen the s 13
+-- population-identity question. This extends the existing Ibrahim/Snowball
+-- graph; it does not create another traversal or legal ontology.
 ------------------------------------------------------------------------
 
 data LocalPopulationSourceRole : Set where
@@ -44,13 +44,17 @@ southEastQueenslandQid = Id.itemId "Q1894392"
 wildlifeCorridorQid : Id.ItemId
 wildlifeCorridorQid = Id.itemId "Q864912"
 
-koalaDewey ecologyDewey conservationDewey : String
+populationGeneticsQid : Id.ItemId
+populationGeneticsQid = Id.itemId "Q31151"
+
+koalaDewey ecologyDewey conservationDewey populationGeneticsDewey : String
 koalaDewey = "599.25"
 ecologyDewey = "577"
 conservationDewey = "333.95"
+populationGeneticsDewey = "576.58"
 
 ------------------------------------------------------------------------
--- Newly located sources.
+-- Located sources.
 ------------------------------------------------------------------------
 
 busseyEllis2016 : Source.AttributedSource
@@ -76,14 +80,15 @@ ipswichKoalaPlan = Source.mkNoDOISource
   Source.publicAttribution
 
 scenicRim2024 : Source.AttributedSource
-scenicRim2024 = Source.mkNoDOISource
-  "Federation University; WildDNA; QWAD Environment"
+scenicRim2024 = Source.mkDOISource
+  "Olivia Woosnam; Fiona E. Hogan"
   "Scenic Rim 2024 Koala population study"
-  "Scenic Rim Regional Council"
-  "2024"
-  "https://www.scenicrim.qld.gov.au/downloads/file/6618/scenic-rim-2024-koala-study-report"
+  "Scenic Rim Regional Council / OWAD Environment / WildDNA / Federation University technical report"
+  "2025"
+  "10.13140/RG.2.2.24954.20163"
+  "https://www.scenicrim.qld.gov.au/files/assets/public/v/1/our-environment/biodiversity/koalas/documents/scenicrim_2024koalastudyreport_final.pdf"
   (Source.namedSourceKind "primary regional genetic population study")
-  "Primary regional genetic study using Koala genotypes and spatial clustering. It identifies multiple differentiated population clusters and reports that SEQ-03 has also been detected in large parts of Ipswich LGA. Used to constrain plausible regional population identity; it does not genetically assign Springview/Woogaroo without local samples."
+  "Primary government-hosted regional genetic study using Koala genotypes and spatial clustering. It identifies five population clusters within the Scenic Rim study area and asymmetric migration toward the cluster labelled SEQ-03. It does not by itself establish that SEQ-03 is the same label as SEQ West, nor genetically assign Springview/Woogaroo."
   Source.publicAttribution
 
 localPopulationAtlas : Source.AttributedSourceAtlas
@@ -91,7 +96,7 @@ localPopulationAtlas = Source.mkSourceAtlas
   "Woogaroo Ibrahim local population evidence extension"
   "DASHI.Law.SensibLawWoogarooIbrahimLocalPopulationEvidenceExtensionExact"
   (busseyEllis2016 ∷ ipswichKoalaPlan ∷ scenicRim2024 ∷ [])
-  "Local/regional population and corridor sources. Report authorship, institutional source, geographic scope and source role are explicit. No source is promoted into an exact Springview viable-population identity without a same-object spatial/genetic join."
+  "Local/regional population and corridor sources. Report authorship, DOI state, institutional source, geographic scope and source role are explicit. No source is promoted into an exact Springview viable-population identity without a same-object spatial/genetic join."
 
 ------------------------------------------------------------------------
 -- Ibrahim Dewey / QID / source coordinates.
@@ -116,10 +121,10 @@ whiteRockCoreHabitatCoordinate = Ibrahim.dashi-knowledge-coordinate
 seq03GeneticCoordinate : Ibrahim.DashiKnowledgeCoordinate
 seq03GeneticCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooIbrahimLocalPopulationEvidenceExtensionExact.agda"
-  "SEQ-03 regional Koala genetic population cluster extending into Ipswich"
-  ecologyDewey
-  (Id.rawItemId southEastQueenslandQid)
-  "Scenic Rim 2024 Koala population study; no DOI located"
+  "SEQ-03 Scenic Rim genetic cluster / migration topology"
+  populationGeneticsDewey
+  (Id.rawItemId populationGeneticsQid)
+  "doi:10.13140/RG.2.2.24954.20163; primary: Scenic Rim Regional Council hosted report"
 
 busseyToS13 : Ibrahim.DashiFirstLinkEdge
 busseyToS13 = Ibrahim.dashi-first-link-edge
@@ -139,7 +144,7 @@ seq03ToS13 : Ibrahim.DashiFirstLinkEdge
 seq03ToS13 = Ibrahim.dashi-first-link-edge
   seq03GeneticCoordinate Canonical.s13EssentialityCoordinate Ibrahim.crossPollinatesWith
   Ibrahim.canonicalDashiFirstLinkPolicy
-  "Regional genetic evidence shows a differentiated cluster extends into large parts of Ipswich, giving the local population inquiry a concrete genetic hypothesis. Exact Springview assignment remains unresolved without local genetic data."
+  "Regional genetic evidence identifies differentiated Scenic Rim clusters and asymmetric migration toward SEQ-03, giving the population inquiry a concrete regional topology. Exact Springview assignment and any SEQ-03/SEQ-West label crosswalk remain unresolved."
   true
 
 ------------------------------------------------------------------------
@@ -192,8 +197,8 @@ seq03PopulationBinding = local-population-atom-binding
   primaryRegionalPopulationStudy
   regionalGeneticContext
   true false false
-  "Supplies a concrete modern genetic population hypothesis: SEQ-03 is detected in large parts of Ipswich."
-  "Obtain locality-appropriate samples/data or expert interpretation sufficient to determine whether Springview/Woogaroo animals are part of SEQ-03 or another population unit."
+  "Supplies a concrete modern regional genetic topology through the Scenic Rim SEQ-03 cluster and migration analysis."
+  "Do not infer an Ipswich or Springview assignment from the label alone. Resolve the SEQ-03/SEQ-West label relation, then obtain locality-appropriate samples/data or expert interpretation sufficient to identify the Springview/Woogaroo population."
 
 ------------------------------------------------------------------------
 -- Updated acquisition frontier.
@@ -205,6 +210,7 @@ record LocalPopulationFrontier : Set where
     ipswichViabilityReportLocated : Bool
     adjacentCoreHabitatPlanLocated : Bool
     modernRegionalGeneticClusterLocated : Bool
+    clusterLabelCrosswalkPaid : Bool
     exactSpringviewGeneticAssignmentPaid : Bool
     exactSpringviewViablePopulationIdentityPaid : Bool
     realisedConnectivityToWhiteRockPaid : Bool
@@ -213,8 +219,8 @@ record LocalPopulationFrontier : Set where
 currentLocalPopulationFrontier : LocalPopulationFrontier
 currentLocalPopulationFrontier = local-population-frontier
   true true true
-  false false false
-  "Highest-value next work: read/extract the Bussey-Ellis population definitions and maps; acquire the underlying Ipswich 2020/2023/2025 monitoring results already routed in ExistingLocalKoalaMonitoringSnowballExact; then ask a current ecologist whether Springview/Opossum-Woogaroo is functionally connected to White Rock-Spring Mountain and which viable/genetic population is thereby implicated. Local genetic sampling is a fallback if existing data cannot resolve population identity."
+  false false false false
+  "Highest-value next work: resolve the SEQ-03 versus SEQ-West cluster-label crosswalk; acquire the underlying Ipswich 2020/2023/2025 monitoring results already routed in ExistingLocalKoalaMonitoringSnowballExact; then ask a current ecologist whether Springview/Opossum-Woogaroo is functionally connected to White Rock-Spring Mountain and which viable/genetic population is implicated. Local genetic sampling is a fallback if existing data cannot resolve population identity."
 
 monitoringFrontier : Monitoring.ExistingMonitoringFrontier
 monitoringFrontier = Monitoring.currentExistingMonitoringFrontier
@@ -227,7 +233,7 @@ regionalAtlas = Regional.regionalPopulationSourceAtlas
 ------------------------------------------------------------------------
 
 data IpswichWideEqualsSpringviewPopulation : Set where
-data SEQ03InIpswichEqualsSpringviewSEQ03 : Set where
+data SEQ03EqualsSEQWest : Set where
 data AdjacentCoreHabitatEqualsSpringviewEssential : Set where
 data CouncilPlanEqualsIndependentFieldReplication : Set where
 data NoDOIEqualsNoSourceIdentity : Set where
@@ -235,8 +241,8 @@ data NoDOIEqualsNoSourceIdentity : Set where
 ipswichWideDoesNotFixSpringviewPopulation : IpswichWideEqualsSpringviewPopulation → ⊥
 ipswichWideDoesNotFixSpringviewPopulation ()
 
-seq03IpswichDoesNotAssignSpringview : SEQ03InIpswichEqualsSpringviewSEQ03 → ⊥
-seq03IpswichDoesNotAssignSpringview ()
+seq03DoesNotSilentlyBecomeSeqWest : SEQ03EqualsSEQWest → ⊥
+seq03DoesNotSilentlyBecomeSeqWest ()
 
 adjacentCoreHabitatDoesNotProveEssentiality : AdjacentCoreHabitatEqualsSpringviewEssential → ⊥
 adjacentCoreHabitatDoesNotProveEssentiality ()
