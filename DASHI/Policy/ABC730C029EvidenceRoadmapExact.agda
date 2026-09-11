@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.AdmissibleTransitionHyperfabricExact as Admissible
 import DASHI.Policy.ABC730IbrahimSnowballAttributionExact as Attribution
 import DASHI.Policy.ABC730C029IbrahimSourceAtlasExact as Atlas
 import DASHI.Policy.ABC730UnintendedConsequencesEvidenceObligationExact as Obligation
@@ -20,7 +21,7 @@ import DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact as LegalFabric
 -- Thin composition owner for the C029 evidence roadmap.
 --
 -- The legal-machinery hyperfabric is a structural interpretation layer, not a
--- new evidence source.  `paid` below therefore means the representation/gate
+-- new evidence source. `paid` below therefore means the representation/gate
 -- machinery exists and is wired, not that its open empirical gates are paid.
 ------------------------------------------------------------------------
 
@@ -232,7 +233,7 @@ atlasAnchor = Atlas.canonicalAtlasBoundary
 legalCutsetAnchor : LegalFabric.C029LegalEvidenceCutset
 legalCutsetAnchor = LegalFabric.canonicalC029Cutset
 
-legalTransitionAnchor : DASHI.Core.AdmissibleTransitionHyperfabricExact.AdmissibleTransitionSystem
+legalTransitionAnchor : Admissible.AdmissibleTransitionSystem
 legalTransitionAnchor = LegalFabric.c029AdmissibleTransitionSystem
 
 obligationAnchor : Obligation.PolicyEvaluationRoadmap
