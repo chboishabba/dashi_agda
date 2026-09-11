@@ -11,10 +11,10 @@ import DASHI.Interop.SLRGWBCandidateWorldProjectionExact as GWB
 ------------------------------------------------------------------------
 -- GWB EXECUTION ROADMAP
 --
--- This roadmap is updated from the validated 2026-09-11 handoff.  The SLR
--- runtime / CandidateWorldModel / replayable Wikimedia plumbing is now paid.
--- The live frontier is claim-relative source role + consumer-specific world
--- residual contraction, not more parser or transport architecture.
+-- Updated from validated 2026-09-11 handoffs.  The SLR runtime,
+-- CandidateWorldModel ABI, replayable Wikimedia graph and identity contraction
+-- are paid.  Source-role attachment and multilingual compatibility are now
+-- implemented diagnostic/runtime seams awaiting focused receipts.
 ------------------------------------------------------------------------
 
 data GWBStageState : Set where
@@ -72,15 +72,25 @@ gwbSLRRoadmap =
     "source_work_identity_paid=2; unpaid=8; topic_anchor_paid=8; runtime_resolved_work_identities=1; post-contraction normalization_drift=false"
     "eight documents retain exact source-work identity debt; claim truth remains unpaid"
   ∷ gwbRoadmapCoordinate
-    "claim-relative source-role atlas"
+    "claim-relative source-role atlas + CandidateWorldModel attachment"
     implementedAwaitingRuntime
-    "fixtures/slr/gwb-claim-relative-source-roles-v1.jsonl / SLRGWBClaimRelativeSourceRoleAtlasExact"
-    "validate role attachment without collapsing official, institutional, secondary, investigative and first-person source classes"
+    "fixtures/slr/gwb-claim-relative-source-roles-v1.jsonl / slr-gwb-source-role-attachment-v1 / SLRGWBSourceRoleAttachmentExact"
+    "validate ten provenance-role attachments and SensibLaw normalization without source-role -> truth promotion"
+  ∷ gwbRoadmapCoordinate
+    "multilingual shared-QID Wikimedia/parser compatibility"
+    implementedAwaitingRuntime
+    "slr-multilingual-wikimedia-parser-compat-v1 / SLRMultilingualWikimediaParserCompatibilityExact"
+    "measure installed trained-model vs blank fallback surfaces; shared QID pays identity only, not translation or claim-semantic equivalence"
   ∷ gwbRoadmapCoordinate
     "consumer-specific graph residual contraction"
     active
-    "reuse Q/P parent/surrounding graph only against declared consumer obligations"
-    "identify which world residual dimensions are paid by graph evidence and which survive to Snowball"
+    "reuse Q/P parent/surrounding graph and claim-relative source roles only against declared consumer obligations"
+    "identify which world residual dimensions are paid by graph/source-role evidence and which survive to Snowball"
+  ∷ gwbRoadmapCoordinate
+    "advisory external ontology fallback"
+    next
+    "Wikidata primary; DBpedia/YAGO/WordNet/Schema.org/Umbel demand-driven via SLRExternalOntologyEnrichmentRouterExact"
+    "invoke additional providers only for declared residuals that Wikimedia/source-role evidence cannot pay"
   ∷ gwbRoadmapCoordinate
     "canonical GWB claim/evidence projection"
     next
@@ -89,7 +99,7 @@ gwbSLRRoadmap =
   ∷ gwbRoadmapCoordinate
     "broader Snowball acquisition"
     next
-    "admissible only for consumer residuals surviving reviewed Wikimedia graph completion"
+    "admissible only for consumer residuals surviving reviewed Wikimedia/external-ontology completion"
     "do not broaden research merely because eight source-work identities remain unpaid unless a consumer requires them"
   ∷ gwbRoadmapCoordinate
     "broadcast speaker/path gold"
@@ -110,13 +120,15 @@ record GWBExecutionBoundary : Set where
     canonicalClaimIdentityMayBeInferredFromAdjacency : Bool
     wikimediaGraphMayPromoteClaimTruth : Bool
     topicAnchorMayBecomeSourceObjectIdentity : Bool
+    sharedQidMayPromoteTranslationEquivalence : Bool
+    parserCompatibilityMayPromoteSemanticEquivalence : Bool
     broadSnowballMayStartBeforeConsumerResidual : Bool
 
 open GWBExecutionBoundary public
 
 canonicalGWBExecutionBoundary : GWBExecutionBoundary
 canonicalGWBExecutionBoundary = gwbExecutionBoundary
-  false true true false true false false false false false
+  false true true false true false false false false false false false
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -129,6 +141,8 @@ data OfficialBiographyIsIndependentHistoricalProof : Set where
 data SecondaryBookMayBePromotedBySLRParity : Set where
 data WikimediaGraphCreatesClaimTruth : Set where
 data TopicAnchorIsSourceObjectIdentity : Set where
+data SharedQidIsTranslationEquivalence : Set where
+data ParserCompatibilityIsSemanticEquivalence : Set where
 data SnowballMayIgnoreConsumerResidual : Set where
 
 proseIsNotBroadcastTranscript : GWBProseIsBroadcastTranscript → ⊥
@@ -151,6 +165,12 @@ wikimediaGraphDoesNotCreateTruth ()
 
 topicAnchorDoesNotIdentifySourceObject : TopicAnchorIsSourceObjectIdentity → ⊥
 topicAnchorDoesNotIdentifySourceObject ()
+
+sharedQidDoesNotCreateTranslationEquivalence : SharedQidIsTranslationEquivalence → ⊥
+sharedQidDoesNotCreateTranslationEquivalence ()
+
+parserCompatibilityDoesNotCreateSemanticEquivalence : ParserCompatibilityIsSemanticEquivalence → ⊥
+parserCompatibilityDoesNotCreateSemanticEquivalence ()
 
 snowballRequiresConsumerResidual : SnowballMayIgnoreConsumerResidual → ⊥
 snowballRequiresConsumerResidual ()
