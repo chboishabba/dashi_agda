@@ -99,6 +99,12 @@ import DASHI.Physics.YangMills.BalabanCMP109SelectedT5SameObjectRound321Exact
 -- application coordinate.  Source theorem + admissibility compile to R320.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJDomainApplicationRound322Exact
 
+-- R323 keeps R317's five consumer coordinates but classifies their debt kinds.
+-- H1 is the only current B-side analytic producer debt; H2a/H2b/H3 are
+-- same-object/application debts and H2c is topology-authority debt.  This avoids
+-- counting five required coordinates as five fresh YM analytic theorems.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound323Exact
+
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
 -- once the source-response identity is supplied, its first theorem-bearing
