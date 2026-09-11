@@ -37,7 +37,6 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 -- redefining FibreAt, Incidence, Transport, LocalSection or gluing semantics.
 ------------------------------------------------------------------------
 
--- Canonical kernel surface: no replacement record is introduced here.
 TypedHyperfabricSurface : Set → Set → Set₁
 TypedHyperfabricSurface = Hyperfabric.TypedHyperfabric
 
@@ -114,13 +113,6 @@ pantsPathSensitiveSplitCanConserveCapacity :
   Pants.CapacityConservative Pants.phaseChangedJunction
 pantsPathSensitiveSplitCanConserveCapacity =
   Pants.phaseChangedCapacityConservative
-
-pantsPathSensitiveSplitRetainsResidual :
-  Pants.splitRecombineResidual Pants.phaseChangedJunction
-  ≡ DASHI.Physics.ShiftDiscreteWaveStep.mkDiscreteWave
-      (Data.Integer.-[1+ 0 ])
-      (Data.Integer.+ 1)
-pantsPathSensitiveSplitRetainsResidual = Pants.phaseChangedResidualExact
 
 braidCrossingRetainsIdentity :
   Braid.coordinationWithoutFusion Braid.canonicalBraidedEvidenceBoundary ≡ true
