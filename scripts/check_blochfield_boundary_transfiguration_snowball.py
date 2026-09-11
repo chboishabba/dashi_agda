@@ -18,8 +18,21 @@ REQUIRED = {
         '"2K"',
         '"35K"',
     ],
+    "DASHI/Culture/BlochfieldCreatorGenealogySnowballExact.agda": [
+        "module DASHI.Culture.BlochfieldCreatorGenealogySnowballExact where",
+        "creatorProfileObservation",
+        '"blochfield.com"',
+        '"South Atlantic Geomag. Anomaly"',
+        '"Q1468412"',
+        '"2026-08-28"',
+        "creatorProfileLinkDoesNotPayNativeWebsite",
+        "domainListingDoesNotProveCreatorOwnership",
+        "southAtlanticAnomalyDoesNotPayBlochfieldTheoryLineage",
+        "sameObjectTechnicalLineageStillUnpaid",
+    ],
     "DASHI/Culture/Everything.agda": [
         "import DASHI.Culture.BoundaryConservativeTransfigurationBlochfieldExact",
+        "import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact",
     ],
 }
 
