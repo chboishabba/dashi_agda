@@ -1,5 +1,5 @@
 {
-  "schema": "abc730-primary-transcript-source-v1",
+  "schema": "abc730-primary-transcript-source-v2",
   "title": "New sanctions placed on Israeli settlements",
   "publisher": "ABC News / 7.30",
   "published_date": "2026-09-09",
@@ -9,5 +9,47 @@
   "transcript_sha256": "61c86754d9cb2ca6e540d522ebfa8056a42291afa257dd6c7e54f12374408383",
   "transcript_paragraphs": 81,
   "source_role": "speaker-labelled primary programme transcript",
+  "source_role_by_claim": {
+    "primary_for": [
+      "speaker labels",
+      "utterance wording",
+      "interview questions",
+      "public policy positions as stated",
+      "speaker-attributed evaluative rhetoric"
+    ],
+    "not_automatically_primary_for": [
+      "underlying reported events",
+      "independent legal truth",
+      "casualty or perpetrator attribution",
+      "causal policy effectiveness",
+      "predicted consequences"
+    ]
+  },
+  "ibrahim": {
+    "dewey_parent": "327",
+    "dewey_role": "retrieval-coordinate-only",
+    "doi": {
+      "state": "no-doi-observed-on-this-source-object",
+      "scope": "atlas-local; do not infer global nonexistence"
+    },
+    "stable_source_id": "abc730-2026-09-09:61c86754d9cb2ca6e540d522ebfa8056a42291afa257dd6c7e54f12374408383",
+    "qid_role": "external-identity-coordinate-only",
+    "verified_qids": {
+      "Australian Broadcasting Corporation": "Q781365",
+      "ABC News": "Q4650197",
+      "7.30": "Q4642897",
+      "Penny Wong": "Q456759",
+      "Ed Husic": "Q5334974",
+      "David Shoebridge": "Q5239754",
+      "Julian Leeser": "Q24191457",
+      "Emily Thornberry": "Q272408",
+      "Sarah Ferguson": "Q17004206"
+    },
+    "unresolved_qids": [
+      "Jacob Greber"
+    ],
+    "acquisition_order_can_be_opportunistic": true,
+    "payment_order_requires_same_object_and_claim_role_weld": true
+  },
   "semantic_promotion": false
 }
