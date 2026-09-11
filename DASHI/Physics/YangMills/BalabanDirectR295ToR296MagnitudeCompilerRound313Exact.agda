@@ -21,8 +21,8 @@ module DASHI.Physics.YangMills.BalabanDirectR295ToR296MagnitudeCompilerRound313E
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; ∣_∣)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Rational.Base as ℚ using (ℚ; ∣_∣; _≤_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -30,6 +30,7 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact as R295
 import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 
 absoluteLocalizationFromR295Magnitude :
   ∀ {Measure TestObservable}
@@ -43,7 +44,7 @@ absoluteLocalizationFromR295Magnitude :
       (Cumulant.sourceDirectionOf (R295.meaning presentation) left)
       (Cumulant.sourceDirectionOf (R295.meaning presentation) right)
       cutoff ∣
-  ≤ R295.Shell.rootedShell (R295.shellData presentation)
+  ≤ Shell.rootedShell (R295.shellData presentation)
       (R295.scaleOf presentation cutoff)
       (R295.volumeOf presentation cutoff)
       (R295.connectingRoot presentation cutoff left right)
@@ -59,7 +60,7 @@ absoluteLocalizationFromR295Magnitude {extension = extension}
         cutoff
   in
   subst
-    (λ lower → lower ≤ R295.Shell.rootedShell (R295.shellData presentation)
+    (λ lower → lower ≤ Shell.rootedShell (R295.shellData presentation)
       (R295.scaleOf presentation cutoff)
       (R295.volumeOf presentation cutoff)
       (R295.connectingRoot presentation cutoff left right)
