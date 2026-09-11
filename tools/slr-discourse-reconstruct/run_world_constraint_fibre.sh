@@ -3,14 +3,14 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
 SPECIMEN="${1:-$HERE/specimens/abc730-2026-09-09-primary}"
-BASE_MODEL="${SPECIMEN}/sensiblaw-candidate-world-model.json"
+BASE_MODEL="${SPECIMEN}/sensiblaw-candidate-world-model-with-claims.json"
 MANIFEST="${SPECIMEN}/source.json"
 OUT_MODEL="${SPECIMEN}/sensiblaw-candidate-world-model-constrained.json"
 OUT_FIBRES="${SPECIMEN}/world-constraint-fibres.json"
 ERR="${SPECIMEN}/world-constraint-fibres.stderr"
 
 [[ -s "$MANIFEST" ]] || { echo "ERROR: missing source manifest $MANIFEST" >&2; exit 1; }
-[[ -s "$BASE_MODEL" ]] || bash "$HERE/run_sensiblaw_world_adapter.sh" "$SPECIMEN" >/dev/null
+[[ -s "$BASE_MODEL" ]] || bash "$HERE/run_claim_projection.sh" "$SPECIMEN" >/dev/null
 
 BASE_SHA_BEFORE="$(sha256sum "$BASE_MODEL" | awk '{print $1}')"
 python3 "$HERE/slr_world_constraint_fibre.py" \
@@ -22,7 +22,7 @@ python3 "$HERE/slr_world_constraint_fibre.py" \
 BASE_SHA_AFTER="$(sha256sum "$BASE_MODEL" | awk '{print $1}')"
 
 [[ "$BASE_SHA_BEFORE" == "$BASE_SHA_AFTER" ]] || {
-  echo "ERROR: base candidate model was rewritten" >&2
+  echo "ERROR: claim-projected candidate model was rewritten" >&2
   exit 1
 }
 
@@ -44,6 +44,7 @@ base = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
 model = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
 fibres = json.loads(Path(sys.argv[3]).read_text(encoding="utf-8"))
 assert base["schema_version"] == "sl.candidate_world_model.v0_1"
+assert "canonical_claim_projection" in base["metadata"]
 assert model["schema_version"] == base["schema_version"]
 assert model["model_id"] == base["model_id"]
 assert model["model_status"] == "candidate"
@@ -65,7 +66,7 @@ print(
     "SLR_WORLD_CONSTRAINT_VALIDATION "
     f"model_id={model['model_id']} fibres={len(fibres['constraint_fibres'])} "
     f"compatible={fibres['summary']['compatible_count']} vetoed={fibres['summary']['vetoed_count']} "
-    "base_rewritten=false scalar_score=false candidate_only=true"
+    "claim_projection_attached=true base_rewritten=false scalar_score=false candidate_only=true"
 )
 PY
 
