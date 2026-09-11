@@ -23,6 +23,7 @@ import DASHI.ComputerScience.RSA260BidiFineIncidencePredictorExact as FineIncide
 import DASHI.ComputerScience.RSA260BidiFineIncidenceInterpolationExact as FineInterpolation
 import DASHI.ComputerScience.RSA260BidiTwoHopCommonNeighbourFibreExact as TwoHop
 import DASHI.ComputerScience.RSA260BidiFineIncidenceDefectCoverageExact as DefectCoverage
+import DASHI.ComputerScience.RSA260BidiKrylovReachableRankExact as DynamicRank
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -140,6 +141,12 @@ twoHopBoundary = TwoHop.canonicalTwoHopInterpretationBoundary
 defectCoverageBoundary : DefectCoverage.DefectCoverageInterpretationBoundary
 defectCoverageBoundary = DefectCoverage.canonicalDefectCoverageInterpretationBoundary
 
+dynamicRankBoundary : DynamicRank.DynamicRankInterpretationBoundary
+dynamicRankBoundary = DynamicRank.canonicalDynamicRankInterpretationBoundary
+
+dynamicRankReceipt : DynamicRank.KrylovReachableRankReceipt
+dynamicRankReceipt = DynamicRank.currentKrylovReachableRankReceipt
+
 ------------------------------------------------------------------------
 -- Ordered residual routers.
 ------------------------------------------------------------------------
@@ -158,15 +165,25 @@ data ProductionResidual : Set where
 firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectFineIncidenceBearingLACarrierArtifact
 
+-- Acquisition may snowball out of dependency order.  This is the highest-alpha
+-- current DIAGNOSTIC target, not a mandatory predecessor of every other P0 route.
+data ProductionDiagnosticTarget : Set where
+  sameObjectSparseMatrixForDirectIncidence : ProductionDiagnosticTarget
+  sameObjectBalancingForPreparationGeometry : ProductionDiagnosticTarget
+  sameObjectKrylovAForDynamicSpan : ProductionDiagnosticTarget
+  sameObjectGeneratorFForRealizedRecurrence : ProductionDiagnosticTarget
+
+firstHighAlphaProductionDiagnosticTarget : ProductionDiagnosticTarget
+firstHighAlphaProductionDiagnosticTarget = sameObjectKrylovAForDynamicSpan
+
 data CandidateExperimentResidual : Set where
-  crossValidateDefectCoverageCurveAcrossPreparationAndProjectionFibres : CandidateExperimentResidual
   fitCoverageAwareRecurrenceComplexityFromStructuralFibrePortfolio : CandidateExperimentResidual
   exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = crossValidateDefectCoverageCurveAcrossPreparationAndProjectionFibres
+firstUnpaidCandidateExperimentResidual = fitCoverageAwareRecurrenceComplexityFromStructuralFibrePortfolio
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -226,6 +243,9 @@ record RSA260ProductionSubstitutionBoundary : Set where
     defectCoverageCurvePaid : Bool
     defectCoverageSeedReplicationPaid : Bool
     defectCoverageCrossPreparationProjectionPaid : Bool
+    dynamicReachableKrylovRankPaid : Bool
+    dynamicReachableRankExactBlobExecuted : Bool
+    sameObjectKrylovSequenceDynamicDiagnosticPaid : Bool
     broadCoverageRaisesRecurrenceComplexity : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
     fineIncidenceMeasuredOnProductionMatrix : Bool
@@ -297,7 +317,10 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; twoHopCommonNeighbourFibresPaid = true
   ; defectCoverageCurvePaid = true
   ; defectCoverageSeedReplicationPaid = true
-  ; defectCoverageCrossPreparationProjectionPaid = false
+  ; defectCoverageCrossPreparationProjectionPaid = true
+  ; dynamicReachableKrylovRankPaid = true
+  ; dynamicReachableRankExactBlobExecuted = true
+  ; sameObjectKrylovSequenceDynamicDiagnosticPaid = false
   ; broadCoverageRaisesRecurrenceComplexity = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
   ; fineIncidenceMeasuredOnProductionMatrix = false
@@ -323,6 +346,8 @@ data FormulaReconstructionImpliesExactRevision : Set where
 data SyntheticFineIncidencePredictorImpliesProductionMeasurement : Set where
 data DefectCoverageCurveImpliesUniversalThreshold : Set where
 data SameCoarseContractImpliesSameRecurrenceComplexity : Set where
+data SyntheticDynamicRankImpliesProductionReachableRank : Set where
+data KrylovSequenceImpliesMatrixBytes : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 
 authorReportedShapeDoesNotCreateBytes : ProductionShapeImpliesProductionBytes → ⊥
@@ -354,6 +379,12 @@ defectCoverageDoesNotCreateUniversalThreshold ()
 
 sameCoarseContractDoesNotCreateSameRecurrence : SameCoarseContractImpliesSameRecurrenceComplexity → ⊥
 sameCoarseContractDoesNotCreateSameRecurrence ()
+
+syntheticDynamicRankDoesNotCreateProductionRank : SyntheticDynamicRankImpliesProductionReachableRank → ⊥
+syntheticDynamicRankDoesNotCreateProductionRank ()
+
+krylovSequenceDoesNotCreateMatrixBytes : KrylovSequenceImpliesMatrixBytes → ⊥
+krylovSequenceDoesNotCreateMatrixBytes ()
 
 searchMissDoesNotProveAbsence : SearchMissImpliesArtifactAbsent → ⊥
 searchMissDoesNotProveAbsence ()
