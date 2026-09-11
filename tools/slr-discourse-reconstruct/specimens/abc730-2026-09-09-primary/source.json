@@ -1,0 +1,13 @@
+{
+  "schema": "abc730-primary-transcript-source-v1",
+  "title": "New sanctions placed on Israeli settlements",
+  "publisher": "ABC News / 7.30",
+  "published_date": "2026-09-09",
+  "requested_url": "https://www.abc.net.au/news/2026-09-09/new-sanctions-placed-on-israeli-settlements-/107135268",
+  "resolved_url": "https://www.abc.net.au/news/2026-09-09/new-sanctions-placed-on-israeli-settlements-/107135268",
+  "page_sha256": "c6fbd6dfe5c24769c7f33ba8a98b16ebf1f1d1414daf7c3500d94554fca564e4",
+  "transcript_sha256": "61c86754d9cb2ca6e540d522ebfa8056a42291afa257dd6c7e54f12374408383",
+  "transcript_paragraphs": 81,
+  "source_role": "speaker-labelled primary programme transcript",
+  "semantic_promotion": false
+}

@@ -23,7 +23,7 @@ bash "$HERE/fetch_abc730_primary_transcript.sh" \
 args=("$SPECIMEN")
 [[ -n "$PROFILES" ]] && args+=("$PROFILES")
 bash "$HERE/run_transcript_wide.sh" "${args[@]}"
-bash "$HERE/run_transcript_fibres.sh" "${args[@]}"
+bash "$HERE/run_transcript_fibres.sh" "$SPECIMEN"
 bash "$HERE/run_manifold_graph.sh" "$SPECIMEN"
 bash "$HERE/run_span_reconstruction.sh" "$SPECIMEN"
 bash "$HERE/run_discourse_quality.sh" "$SPECIMEN"

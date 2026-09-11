@@ -1,3 +1,7 @@
-# Public-source specimens are reproducibly acquired by scripts and are not
-# committed as duplicated source text.
-abc730-2026-09-09-primary/
+# Ephemeral pipeline runs and html caches
+*.html
+*.tsv
+*.stderr
+*.stdout
+parser.tsv
+source-reconstructed.txt
