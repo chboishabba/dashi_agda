@@ -10,80 +10,42 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSymbolicVerificationDeweyQidDoiBidiExact as Dewey
-import DASHI.Wikimedia.IbrahimSnowballLearningMemoryTraumaReplicationConsensusBidiExact as Prior
-import DASHI.Wikimedia.IbrahimSnowballTestimonyMemoryCredibilityCorroborationExpertBidiExact as Testimony
-import DASHI.Wikimedia.IbrahimSnowballConspiracyDistrustAlternativeMediaBidiExact as Media
+import DASHI.Wikimedia.IbrahimSnowballMemoryRepetitionSourceDependencyConsensusBidiExact as Dependency
+import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisPeerReviewConflictIndependenceBidiExact as Synthesis
 
 ------------------------------------------------------------------------
--- IBRAHIM / SNOWBALL: REPLICATION -> SOURCE GENEALOGY -> EVIDENCE SYNTHESIS
--- -> META-ANALYSIS -> CONSENSUS, with attribution/provenance retained.
+-- THIN BIDI SPECIALISATION: META-ANALYTIC OUTPUT <-> SOURCE GENEALOGY
 --
--- Counts of studies, papers, reports, citations, memories, media stories or
--- replications do not by themselves pay independence.  Evidence synthesis is
--- a consumer over source genealogy, inclusion criteria, dependence, methods,
--- uncertainty and attribution.  Consensus remains downstream of that audit and
--- is not definitionally identical to proposition truth.
+-- The general independence, peer-review, consensus and evidence-synthesis
+-- semantics already live in Synthesis/Dependency.  This owner pays only the
+-- surviving methodological gap: the same pooled/meta-analytic output can arise
+-- from evidentiary bases with different within-study/shared-sample/source
+-- dependence.  PRISMA/reporting identity and DOI/QID/Dewey attribution travel
+-- but do not manufacture independence or truth.
 ------------------------------------------------------------------------
-
-mkQid : String → String → Identity.ExternalIdentityDemand
-mkQid label qid = Identity.mkOptionalIdentityDemand
-  "Ibrahim replication/source-genealogy/evidence-synthesis BIDI"
-  "verified external identity only"
-  label Identity.wikidataQid
-  (Identity.verified qid
-    "Wikidata identity inspected 2026-09-11; identity does not create independence, methodological adequacy, consensus or truth")
 
 systematicReviewQid : Identity.ExternalIdentityDemand
-systematicReviewQid = mkQid "systematic review" "Q1504425"
+systematicReviewQid = Synthesis.systematicReviewQid
 
 metaAnalysisQid : Identity.ExternalIdentityDemand
-metaAnalysisQid = mkQid "meta-analysis" "Q815382"
-
-reproducibilityQid : Identity.ExternalIdentityDemand
-reproducibilityQid = Prior.reproducibilityQid
+metaAnalysisQid = Synthesis.metaAnalysisQid
 
 scientificConsensusQid : Identity.ExternalIdentityDemand
-scientificConsensusQid = Prior.scientificConsensusQid
+scientificConsensusQid = Synthesis.scientificConsensusQid
 
 sourceGenealogyQid : Identity.ExternalIdentityDemand
-sourceGenealogyQid = Identity.mkOptionalIdentityDemand
-  "Ibrahim replication/source-genealogy/evidence-synthesis BIDI"
-  "external concept identity"
-  "source genealogy / common-source dependence"
-  Identity.wikidataQid
-  (Identity.unresolved
-    "no exact single QID promoted for study/report source genealogy or common-source dependence; provenance relation remains typed locally")
-
-evidenceSynthesisQid : Identity.ExternalIdentityDemand
-evidenceSynthesisQid = Identity.mkOptionalIdentityDemand
-  "Ibrahim replication/source-genealogy/evidence-synthesis BIDI"
-  "external concept identity"
-  "evidence synthesis"
-  Identity.wikidataQid
-  (Identity.unresolved
-    "a 2026 Wikidata item labelled evidence synthesis exists but is not promoted here as the canonical research-method identity; systematic review Q1504425 and meta-analysis Q815382 remain the stable external coordinates")
-
-------------------------------------------------------------------------
--- Dewey: no values guessed from nearby methodology shelves.
-------------------------------------------------------------------------
+sourceGenealogyQid = Dependency.sourceIndependenceQid
 
 systematicReviewDewey : Dewey.DeweyCoordinate
-systematicReviewDewey = Dewey.mkUnresolvedDewey
-  "systematic review"
-  "no exact inspected DDC value promoted in this pass"
+systematicReviewDewey = Synthesis.systematicReviewDewey
 
 metaAnalysisDewey : Dewey.DeweyCoordinate
 metaAnalysisDewey = Dewey.mkUnresolvedDewey
   "meta-analysis"
-  "no exact inspected DDC value promoted in this pass"
-
-sourceGenealogyDewey : Dewey.DeweyCoordinate
-sourceGenealogyDewey = Dewey.mkUnresolvedDewey
-  "source genealogy / dependence"
-  "consumer-relative provenance relation; no one DDC coordinate promoted"
+  "no exact inspected DDC value promoted; Q815382 identity retained separately"
 
 ------------------------------------------------------------------------
--- DOI/source attribution.
+-- Source-paid methodological lane.
 ------------------------------------------------------------------------
 
 prisma2020Source : Attribution.AttributedSource
@@ -95,7 +57,7 @@ prisma2020Source = Attribution.mkDOISource
   "10.1136/bmj.n71"
   "https://doi.org/10.1136/bmj.n71"
   Attribution.academicArticleSource
-  "reporting guideline for transparent identification, selection, appraisal and synthesis of studies; reporting compliance does not itself prove review validity, independence or truth"
+  "reporting guidance for identifying, selecting, appraising and synthesising studies; reporting compliance does not itself establish independence, adequacy or truth"
   Attribution.publicAttribution
 
 vanDenNoortgateDependenceSource : Attribution.AttributedSource
@@ -107,7 +69,7 @@ vanDenNoortgateDependenceSource = Attribution.mkDOISource
   "10.3758/s13428-012-0261-6"
   "https://doi.org/10.3758/s13428-012-0261-6"
   Attribution.academicArticleSource
-  "methodological treatment of dependence among effect sizes within and across studies; supports explicit dependence modelling rather than treating every effect size as an independent evidentiary line"
+  "methodological treatment of dependent effect sizes within and across studies; supports explicit modelling of dependence rather than naive effect-size counting"
   Attribution.publicAttribution
 
 cheungChanDependenceSource : Attribution.AttributedSource
@@ -119,7 +81,7 @@ cheungChanDependenceSource = Attribution.mkDOISource
   "10.1037/0021-9010.89.5.780"
   "https://doi.org/10.1037/0021-9010.89.5.780"
   Attribution.academicArticleSource
-  "methodological analysis of dependent effect sizes from shared samples; same sample or common source prevents naive independence counting"
+  "analysis of dependent effect sizes from shared samples; shared sample/source means multiple effects are not automatically independent evidence lines"
   Attribution.publicAttribution
 
 pustejovskyDependenceWorkflowSource : Attribution.AttributedSource
@@ -131,47 +93,21 @@ pustejovskyDependenceWorkflowSource = Attribution.mkDOISource
   "10.1098/rsta.2024.0604"
   "https://doi.org/10.1098/rsta.2024.0604"
   Attribution.academicArticleSource
-  "current workflow for identifying and handling dependent effect sizes in meta-analysis; methodology source only, not proof that any particular synthesis is unbiased"
+  "current workflow for detecting and handling dependence in meta-analysis; methodology source only, not a truth or unbiasedness certificate for any concrete synthesis"
   Attribution.publicAttribution
 
 ------------------------------------------------------------------------
--- Exact reuse from prior owners.
+-- Exact reuse: no parallel epistemology.
 ------------------------------------------------------------------------
 
-priorBoundary : Prior.LearningMemoryTraumaReplicationConsensusBoundary
-priorBoundary = Prior.canonicalLearningMemoryTraumaReplicationConsensusBoundary
+synthesisBoundary : Synthesis.EvidenceSynthesisPeerReviewIndependenceBoundary
+synthesisBoundary = Synthesis.canonicalEvidenceSynthesisPeerReviewIndependenceBoundary
 
-testimonyBoundary : Testimony.TestimonyMemoryCredibilityBoundary
-testimonyBoundary = Testimony.canonicalTestimonyMemoryCredibilityBoundary
-
-------------------------------------------------------------------------
--- Regression 1: review/study count cannot recover independent evidence lines.
-------------------------------------------------------------------------
-
-data ReviewCountCase : Set where
-  sameIncludedCountIndependentStudies sameIncludedCountSharedGenealogy : ReviewCountCase
-
-data ReviewCountSurface : Set where sameIncludedStudyCount : ReviewCountSurface
-data EvidenceIndependence : Set where independentEvidenceLines commonSourceDependentLines : EvidenceIndependence
-
-reviewCountSurface : ReviewCountCase → ReviewCountSurface
-reviewCountSurface _ = sameIncludedStudyCount
-
-evidenceIndependence : ReviewCountCase → EvidenceIndependence
-evidenceIndependence sameIncludedCountIndependentStudies = independentEvidenceLines
-evidenceIndependence sameIncludedCountSharedGenealogy = commonSourceDependentLines
-
-reviewCountIndependenceDefect : INF.NonFactorabilityWitness reviewCountSurface evidenceIndependence
-reviewCountIndependenceDefect = INF.nonFactorabilityWitness
-  sameIncludedCountIndependentStudies sameIncludedCountSharedGenealogy refl (λ ())
-
-studyCountCannotFactorIndependentEvidence :
-  INF.FactorsThrough reviewCountSurface evidenceIndependence → ⊥
-studyCountCannotFactorIndependentEvidence =
-  INF.witnessRulesOutEveryFlatFactorisation reviewCountIndependenceDefect
+dependencyBoundary : Dependency.MemoryRepetitionSourceDependencyConsensusBoundary
+dependencyBoundary = Dependency.canonicalMemoryRepetitionSourceDependencyConsensusBoundary
 
 ------------------------------------------------------------------------
--- Regression 2: identical pooled result cannot recover source genealogy.
+-- Surviving regression: pooled output cannot recover genealogy/dependence.
 ------------------------------------------------------------------------
 
 data PooledCase : Set where
@@ -197,180 +133,110 @@ pooledEstimateCannotFactorSourceGenealogy =
   INF.witnessRulesOutEveryFlatFactorisation pooledGenealogyDefect
 
 ------------------------------------------------------------------------
--- Regression 3: systematic-review label/reporting cannot recover methodological
--- adequacy or proposition truth.
+-- Cross-domain snowball: one dependence grammar, different consumers.
 ------------------------------------------------------------------------
 
-data ReviewLabelCase : Set where
-  sameSystematicReviewLabelAdequate sameSystematicReviewLabelInadequate : ReviewLabelCase
-
-data ReviewLabelSurface : Set where sameSystematicReviewLabel : ReviewLabelSurface
-data ReviewAdequacy : Set where reviewAdequacyPaid reviewAdequacyOpen : ReviewAdequacy
-
-reviewLabelSurface : ReviewLabelCase → ReviewLabelSurface
-reviewLabelSurface _ = sameSystematicReviewLabel
-
-reviewAdequacy : ReviewLabelCase → ReviewAdequacy
-reviewAdequacy sameSystematicReviewLabelAdequate = reviewAdequacyPaid
-reviewAdequacy sameSystematicReviewLabelInadequate = reviewAdequacyOpen
-
-reviewAdequacyDefect : INF.NonFactorabilityWitness reviewLabelSurface reviewAdequacy
-reviewAdequacyDefect = INF.nonFactorabilityWitness
-  sameSystematicReviewLabelAdequate sameSystematicReviewLabelInadequate refl (λ ())
-
-systematicReviewLabelCannotFactorAdequacy :
-  INF.FactorsThrough reviewLabelSurface reviewAdequacy → ⊥
-systematicReviewLabelCannotFactorAdequacy =
-  INF.witnessRulesOutEveryFlatFactorisation reviewAdequacyDefect
-
-------------------------------------------------------------------------
--- Regression 4: consensus surface cannot recover evidentiary genealogy.
-------------------------------------------------------------------------
-
-data ConsensusGenealogyCase : Set where
-  sameConsensusIndependentBase sameConsensusCommonSourceBase : ConsensusGenealogyCase
-
-data ConsensusSurface : Set where sameConsensusPosition : ConsensusSurface
-data ConsensusEvidenceBase : Set where independentEvidenceBase commonSourceEvidenceBase : ConsensusEvidenceBase
-
-consensusSurface : ConsensusGenealogyCase → ConsensusSurface
-consensusSurface _ = sameConsensusPosition
-
-consensusEvidenceBase : ConsensusGenealogyCase → ConsensusEvidenceBase
-consensusEvidenceBase sameConsensusIndependentBase = independentEvidenceBase
-consensusEvidenceBase sameConsensusCommonSourceBase = commonSourceEvidenceBase
-
-consensusGenealogyDefect : INF.NonFactorabilityWitness consensusSurface consensusEvidenceBase
-consensusGenealogyDefect = INF.nonFactorabilityWitness
-  sameConsensusIndependentBase sameConsensusCommonSourceBase refl (λ ())
-
-consensusCannotFactorEvidenceGenealogy :
-  INF.FactorsThrough consensusSurface consensusEvidenceBase → ⊥
-consensusCannotFactorEvidenceGenealogy =
-  INF.witnessRulesOutEveryFlatFactorisation consensusGenealogyDefect
-
-------------------------------------------------------------------------
--- Cross-domain provenance grammar: testimony, memory, media, science.
-------------------------------------------------------------------------
-
-record ProvenanceFamily : Set where
-  constructor provenance-family
+record ProvenanceDependenceProjection : Set where
+  constructor provenance-dependence-projection
   field
-    familyLabel : String
-    multiplicityCarrier : String
-    independenceQuestion : String
+    consumer : String
+    repeatedSurface : String
+    hiddenDependenceCoordinate : String
     attributionMustTravel : Bool
-open ProvenanceFamily public
+open ProvenanceDependenceProjection public
 
-witnessFamily : ProvenanceFamily
-witnessFamily = provenance-family
-  "witness/testimony"
+witnessProjection : ProvenanceDependenceProjection
+witnessProjection = provenance-dependence-projection
+  "testimony"
   "multiple reports"
-  "independent observation versus interrogation/repetition/common narrative"
+  "common interrogation, shared narrative or genuinely independent observation"
   true
 
-memoryFamily : ProvenanceFamily
-memoryFamily = provenance-family
+memoryProjection : ProvenanceDependenceProjection
+memoryProjection = provenance-dependence-projection
   "memory/learning"
-  "repeated recall or repeated public remembered PNF"
-  "independent retrieval evidence versus same latent memory/update history"
+  "repeated recall / same public remembered PNF"
+  "shared latent memory/update history versus independent external corroboration"
   true
 
-scienceFamily : ProvenanceFamily
-scienceFamily = provenance-family
-  "science/replication"
-  "multiple papers/effect sizes/replications"
-  "independent samples/methods versus shared data, sample, code, lab or source genealogy"
+scienceProjection : ProvenanceDependenceProjection
+scienceProjection = provenance-dependence-projection
+  "meta-analysis/replication"
+  "multiple effects/studies/papers"
+  "shared sample, dataset, code, lab, instrument or source genealogy"
   true
 
-mediaFamily : ProvenanceFamily
-mediaFamily = provenance-family
+mediaProjection : ProvenanceDependenceProjection
+mediaProjection = provenance-dependence-projection
   "media/OSINT"
   "multiple stories/posts/citations"
-  "independent reporting versus copying, syndication or shared upstream source"
+  "copying, syndication, shared upstream source or independent firsthand reporting"
   true
 
 ------------------------------------------------------------------------
--- Reverse BIDI constraints back into Ibrahim parents.
+-- Reverse BIDI parent constraints.
 ------------------------------------------------------------------------
 
-record EvidenceSynthesisReverseConstraint : Set where
-  constructor evidence-synthesis-reverse-constraint
+record MetaAnalysisReverseConstraint : Set where
+  constructor meta-analysis-reverse-constraint
   field
     parentNode : String
     distinctionForcedUpward : String
     parentMayEraseDistinction : Bool
-open EvidenceSynthesisReverseConstraint public
+open MetaAnalysisReverseConstraint public
 
-scienceConstraint : EvidenceSynthesisReverseConstraint
-scienceConstraint = evidence-synthesis-reverse-constraint
-  "Science / evidence synthesis / consensus"
-  "study identity, sample/data/code genealogy, effect-size dependence, inclusion, appraisal, synthesis, uncertainty and consensus remain distinct"
+scienceConstraint : MetaAnalysisReverseConstraint
+scienceConstraint = meta-analysis-reverse-constraint
+  "Science / meta-analysis / consensus"
+  "effect-size identity, sample/data genealogy, dependence model, pooled estimate, uncertainty and consensus remain distinct"
   false
 
-informationConstraint : EvidenceSynthesisReverseConstraint
-informationConstraint = evidence-synthesis-reverse-constraint
-  "Library / information science / bibliography"
-  "citation multiplicity, unique work identity, source genealogy, access/inspection and evidentiary independence remain distinct"
+informationConstraint : MetaAnalysisReverseConstraint
+informationConstraint = meta-analysis-reverse-constraint
+  "Bibliography / evidence synthesis"
+  "citation/work identity, duplicate/shared source, inclusion, appraisal, dependence and synthesis output remain distinct"
   false
 
-mediaConstraint : EvidenceSynthesisReverseConstraint
-mediaConstraint = evidence-synthesis-reverse-constraint
-  "Media / OSINT / alternative media"
-  "story count, copying/syndication, common upstream source, firsthand reporting and independent corroboration remain distinct"
-  false
-
-memoryConstraint : EvidenceSynthesisReverseConstraint
-memoryConstraint = evidence-synthesis-reverse-constraint
-  "Memory / learning / trauma"
-  "repeated retrieval/report, latent memory state, contextual learning history and independent external corroboration remain distinct"
+memoryMediaConstraint : MetaAnalysisReverseConstraint
+memoryMediaConstraint = meta-analysis-reverse-constraint
+  "Memory / testimony / media"
+  "surface repetition, common informational origin, social copying and independent corroboration remain distinct"
   false
 
 ------------------------------------------------------------------------
 -- Attribution/Snowball firewalls.
 ------------------------------------------------------------------------
 
-data MorePapersMeanMoreIndependentEvidence : Set where
 data MetaAnalysisMeansIndependentInputs : Set where
-data SystematicReviewLabelMeansAdequateMethod : Set where
-data ConsensusMeansIndependentEvidenceBase : Set where
-data CitationCountMeansIndependentSources : Set where
-data QidMeansMethodologicalAdequacy : Set where
-data DOIImportsResultTruth : Set where
-
-morePapersDoNotCreateIndependence : MorePapersMeanMoreIndependentEvidence → ⊥
-morePapersDoNotCreateIndependence ()
+data PooledEstimateMeansIndependentEvidence : Set where
+data PrismaComplianceMeansTruth : Set where
+data QidMeansAdequacy : Set where
+data DOIImportsTruth : Set where
 
 metaAnalysisDoesNotCreateIndependentInputs : MetaAnalysisMeansIndependentInputs → ⊥
 metaAnalysisDoesNotCreateIndependentInputs ()
 
-systematicReviewLabelDoesNotCreateAdequacy : SystematicReviewLabelMeansAdequateMethod → ⊥
-systematicReviewLabelDoesNotCreateAdequacy ()
+pooledEstimateDoesNotCreateIndependentEvidence : PooledEstimateMeansIndependentEvidence → ⊥
+pooledEstimateDoesNotCreateIndependentEvidence ()
 
-consensusDoesNotCreateIndependentEvidenceBase : ConsensusMeansIndependentEvidenceBase → ⊥
-consensusDoesNotCreateIndependentEvidenceBase ()
+prismaComplianceDoesNotCreateTruth : PrismaComplianceMeansTruth → ⊥
+prismaComplianceDoesNotCreateTruth ()
 
-citationCountDoesNotCreateIndependentSources : CitationCountMeansIndependentSources → ⊥
-citationCountDoesNotCreateIndependentSources ()
+qidDoesNotCreateAdequacy : QidMeansAdequacy → ⊥
+qidDoesNotCreateAdequacy ()
 
-qidDoesNotCreateMethodologicalAdequacy : QidMeansMethodologicalAdequacy → ⊥
-qidDoesNotCreateMethodologicalAdequacy ()
-
-doiDoesNotImportResultTruth : DOIImportsResultTruth → ⊥
-doiDoesNotImportResultTruth ()
+doiDoesNotImportTruth : DOIImportsTruth → ⊥
+doiDoesNotImportTruth ()
 
 record ReplicationSourceGenealogyEvidenceSynthesisBoundary : Set where
   constructor replication-source-genealogy-evidence-synthesis-boundary
   field
-    qidsAttachedWhenSafelyResolved : Bool
-    unresolvedSourceGenealogyIdentityRetained : Bool
-    deweyUnknownsRetainedExplicitly : Bool
-    doiSourceAttributionTravels : Bool
-    studyCountSeparatedFromIndependence : Bool
-    pooledEstimateSeparatedFromGenealogy : Bool
-    reviewLabelSeparatedFromAdequacy : Bool
-    consensusSeparatedFromEvidenceGenealogy : Bool
-    crossDomainProvenanceFamiliesRetained : Bool
+    existingEvidenceSynthesisOwnerReused : Bool
+    existingDependencyOwnerReused : Bool
+    qidDeweyDoiAttributionTravels : Bool
+    pooledEstimateSeparatedFromSourceGenealogy : Bool
+    dependenceModelRetainedAsConsumerCoordinate : Bool
+    crossDomainProvenanceProjectionRetained : Bool
     reverseBidiConstraintsPropagateUpward : Bool
     presentAxisVocabularyClaimedComplete : Bool
 open ReplicationSourceGenealogyEvidenceSynthesisBoundary public
@@ -379,4 +245,4 @@ canonicalReplicationSourceGenealogyEvidenceSynthesisBoundary :
   ReplicationSourceGenealogyEvidenceSynthesisBoundary
 canonicalReplicationSourceGenealogyEvidenceSynthesisBoundary =
   replication-source-genealogy-evidence-synthesis-boundary
-    true true true true true true true true true true false
+    true true true true true true true false
