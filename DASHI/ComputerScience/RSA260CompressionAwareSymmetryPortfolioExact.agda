@@ -31,8 +31,8 @@ data PortfolioCandidate : Set where
 candidateReference : PortfolioCandidate → String
 candidateReference full256Candidate = "full 256-coordinate synthetic carrier"
 candidateReference pair128Candidate = "128-coordinate pair-orbit quotient with quotient/lift kernel receipt"
-candidateReference c3x88Candidate = "88-coordinate all-C3-orbit exact-kernel candidate; certification oracle implemented but execution unpaid"
-candidateReference v4x76Candidate = "76-coordinate all-V4-orbit exact-kernel candidate; certification oracle implemented but execution unpaid"
+candidateReference c3x88Candidate = "88-coordinate all-C3-orbit exact-kernel quotient"
+candidateReference v4x76Candidate = "76-coordinate all-V4-orbit exact-kernel quotient"
 candidateReference aggressive64Candidate = "64-coordinate illustrative aggressive quotient candidate"
 
 candidateWidth : PortfolioCandidate → Nat
@@ -44,15 +44,13 @@ candidateWidth aggressive64Candidate = 64
 
 ------------------------------------------------------------------------
 -- Exact-kernel consumer eligibility.
---
--- Only full256 and pair128 currently carry the required exact-kernel adequacy
--- receipt.  The 88/76 candidates now have a committed certification oracle but
--- remain outside the eligible stratum until its exact execution is bound.
 ------------------------------------------------------------------------
 
 data ExactKernelPortfolioAdequacy : PortfolioCandidate → Set where
   full256Exact : ExactKernelPortfolioAdequacy full256Candidate
   pair128Exact : ExactKernelPortfolioAdequacy pair128Candidate
+  c3x88Exact : ExactKernelPortfolioAdequacy c3x88Candidate
+  v4x76Exact : ExactKernelPortfolioAdequacy v4x76Candidate
 
 candidateAdmissible : PortfolioCandidate → Set
 candidateAdmissible candidate = ⊤
@@ -87,22 +85,20 @@ full256Eligible = tt , full256Exact
 pair128Eligible : MDL.Eligible portfolioProblem pair128Candidate
 pair128Eligible = tt , pair128Exact
 
-c3AdequacyUnpaid : ExactKernelPortfolioAdequacy c3x88Candidate → ⊥
-c3AdequacyUnpaid ()
+c3x88Eligible : MDL.Eligible portfolioProblem c3x88Candidate
+c3x88Eligible = tt , c3x88Exact
 
-v4AdequacyUnpaid : ExactKernelPortfolioAdequacy v4x76Candidate → ⊥
-v4AdequacyUnpaid ()
+v4x76Eligible : MDL.Eligible portfolioProblem v4x76Candidate
+v4x76Eligible = tt , v4x76Exact
 
 aggressiveAdequacyUnpaid : ExactKernelPortfolioAdequacy aggressive64Candidate → ⊥
 aggressiveAdequacyUnpaid ()
 
 ------------------------------------------------------------------------
--- Candidate-specific reopen fibres.
+-- Candidate-specific reopen fibre for the remaining cheapest raw candidate.
 ------------------------------------------------------------------------
 
 data MissingCertificateFibre : PortfolioCandidate → Set where
-  c3NeedsExactQuotientLiftKernel : MissingCertificateFibre c3x88Candidate
-  v4NeedsExactQuotientLiftKernel : MissingCertificateFibre v4x76Candidate
   aggressiveNeedsActionAndLift : MissingCertificateFibre aggressive64Candidate
 
 record CandidateRepairResidual (candidate : PortfolioCandidate) : Set where
@@ -113,23 +109,11 @@ record CandidateRepairResidual (candidate : PortfolioCandidate) : Set where
     residualReference : String
 open CandidateRepairResidual public
 
-c3RepairResidual : CandidateRepairResidual c3x88Candidate
-c3RepairResidual = candidate-repair-residual
-  (MissingCertificateFibre c3x88Candidate)
-  c3NeedsExactQuotientLiftKernel
-  "retain C3 action/closure evidence; execute and bind the all-orbit 88-coordinate exact quotient/lift/kernel certificate"
-
-v4RepairResidual : CandidateRepairResidual v4x76Candidate
-v4RepairResidual = candidate-repair-residual
-  (MissingCertificateFibre v4x76Candidate)
-  v4NeedsExactQuotientLiftKernel
-  "retain multifibre V4 inference and null evidence; execute and bind the 76-coordinate exact quotient/lift/kernel certificate"
-
 aggressiveRepairResidual : CandidateRepairResidual aggressive64Candidate
 aggressiveRepairResidual = candidate-repair-residual
   (MissingCertificateFibre aggressive64Candidate)
   aggressiveNeedsActionAndLift
-  "reopen action validity and lift structure before allowing the smallest raw-width candidate into the eligible stratum"
+  "reopen action validity and exact quotient/lift/kernel structure before allowing the smallest raw-width candidate into the eligible stratum"
 
 ------------------------------------------------------------------------
 -- Multi-axis portfolio costs.  These are declared ranking coordinates, not a
@@ -152,8 +136,8 @@ portfolioCost activeCarrierAxis candidate = candidateWidth candidate
 portfolioCost replayWorkAxis candidate = candidateWidth candidate
 portfolioCost exactConsumerProofDebtAxis full256Candidate = 0
 portfolioCost exactConsumerProofDebtAxis pair128Candidate = 0
-portfolioCost exactConsumerProofDebtAxis c3x88Candidate = 1
-portfolioCost exactConsumerProofDebtAxis v4x76Candidate = 1
+portfolioCost exactConsumerProofDebtAxis c3x88Candidate = 0
+portfolioCost exactConsumerProofDebtAxis v4x76Candidate = 0
 portfolioCost exactConsumerProofDebtAxis aggressive64Candidate = 2
 
 portfolioAxisReference : PortfolioCostAxis → String
@@ -186,7 +170,7 @@ record KernelCertificationOracleSource : Set where
     path : String
     commit : String
     gitBlob : String
-    sourceImplemented : Bool
+    compiler : String
     exactGitBlobExecuted : Bool
 open KernelCertificationOracleSource public
 
@@ -197,7 +181,38 @@ currentKernelCertificationOracleSource = kernel-certification-oracle-source
   "rsa260_compression_portfolio_kernel_cert_oracle.c"
   "acb49112794b7220089cf6a507690e45ede87a76"
   "72a7a951cb0d0921dd38ab7dcd7586ca17f5d846"
-  true false
+  "gcc -std=c11 -O3 -Wall -Wextra -pedantic"
+  true
+
+record KernelCertificationExecutionReceipt : Set where
+  constructor kernel-certification-execution-receipt
+  field
+    c3FullWidth : Nat
+    c3QuotientWidth : Nat
+    c3FullRank : Nat
+    c3FullNullity : Nat
+    c3QuotientRank : Nat
+    c3QuotientNullity : Nat
+    c3IntertwiningChecks : Nat
+    c3LiftedKernelWeight : Nat
+    v4FullWidth : Nat
+    v4QuotientWidth : Nat
+    v4FullRank : Nat
+    v4FullNullity : Nat
+    v4QuotientRank : Nat
+    v4QuotientNullity : Nat
+    v4IntertwiningChecks : Nat
+    v4LiftedKernelWeight : Nat
+    nullityPreservedForBoth : Bool
+    liftedKernelVerifiedForBoth : Bool
+    productionRSA260MatrixUsed : Bool
+open KernelCertificationExecutionReceipt public
+
+currentKernelCertificationExecutionReceipt : KernelCertificationExecutionReceipt
+currentKernelCertificationExecutionReceipt = kernel-certification-execution-receipt
+  256 88 252 4 84 4 22528 1
+  256 76 255 1 75 1 19456 1
+  true true false
 
 record PortfolioEvidenceBoundary : Set where
   constructor portfolio-evidence-boundary
@@ -205,17 +220,16 @@ record PortfolioEvidenceBoundary : Set where
     pairExactKernelAdequacyPaid : Bool
     c3ActionAndClosureEvidencePaid : Bool
     c3ExactKernelAdequacyPaid : Bool
-    c3AllOrbitKernelCertificateOracleImplemented : Bool
     v4ActionAndNullEvidencePaid : Bool
     v4ExactKernelAdequacyPaid : Bool
-    v4AllOrbitKernelCertificateOracleImplemented : Bool
     smallestRawWidthCandidateEligible : Bool
+    exactCertificationBlobExecuted : Bool
     nullEvidenceMayReplaceExactKernelCertificate : Bool
 open PortfolioEvidenceBoundary public
 
 canonicalPortfolioEvidenceBoundary : PortfolioEvidenceBoundary
 canonicalPortfolioEvidenceBoundary = portfolio-evidence-boundary
-  true true false true true false true false false
+  true true true true true false true false
 
 ------------------------------------------------------------------------
 -- Compression-aware search policy.
@@ -246,19 +260,37 @@ compressionBoundary : Compression.RSACompressionRoadmapBoundary
 compressionBoundary = Compression.currentRSACompressionRoadmapBoundary
 
 ------------------------------------------------------------------------
--- Next residual: execute the committed richer-candidate certificate oracle,
--- then admit whichever candidates it actually certifies.
+-- Current finite-portfolio reading.
+------------------------------------------------------------------------
+
+record CurrentPortfolioSelectionBoundary : Set where
+  constructor current-portfolio-selection-boundary
+  field
+    eligibleCandidateCount : Nat
+    cheapestEligibleWidth : Nat
+    cheapestEligibleCandidateIsV4x76 : Bool
+    aggressive64IsCheaperRawButIneligible : Bool
+    selectedCandidateClaimIsSyntheticOnly : Bool
+    productionOptimalityPaid : Bool
+open CurrentPortfolioSelectionBoundary public
+
+currentPortfolioSelectionBoundary : CurrentPortfolioSelectionBoundary
+currentPortfolioSelectionBoundary = current-portfolio-selection-boundary
+  4 76 true true true false
+
+------------------------------------------------------------------------
+-- Next residual: replace width/work proxies with measured replay, memory, and
+-- communication costs before claiming a richer production Pareto frontier.
 ------------------------------------------------------------------------
 
 data CompressionPortfolioResidual : Set where
-  executeExactPortfolioKernelCertificateOracle : CompressionPortfolioResidual
-  admitCertifiedC3AndV4Candidates : CompressionPortfolioResidual
   addMeasuredReplayMemoryCommunicationCosts : CompressionPortfolioResidual
+  computeSyntheticMeasuredParetoFrontier : CompressionPortfolioResidual
   computeProductionEligibleParetoFrontier : CompressionPortfolioResidual
   runProductionCompressionPortfolio : CompressionPortfolioResidual
 
 firstCompressionPortfolioResidual : CompressionPortfolioResidual
-firstCompressionPortfolioResidual = executeExactPortfolioKernelCertificateOracle
+firstCompressionPortfolioResidual = addMeasuredReplayMemoryCommunicationCosts
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
@@ -266,10 +298,9 @@ firstCompressionPortfolioResidual = executeExactPortfolioKernelCertificateOracle
 
 data StructuralSymmetryImpliesKernelAdequacy : Set where
 data BetterNullPImpliesExactConsumerAdequacy : Set where
-data CertificationOracleSourceImpliesSuccessfulExecution : Set where
 data PriorConsumerConflictImpliesCurrentConsumerConflict : Set where
 data ParetoCostImpliesMathematicalTruth : Set where
-data CheapestCandidateImpliesSelected : Set where
+data CheapestCandidateImpliesSelectedWithoutEligibility : Set where
 
 actionDoesNotCreateKernelAdequacy : StructuralSymmetryImpliesKernelAdequacy → ⊥
 actionDoesNotCreateKernelAdequacy ()
@@ -277,14 +308,11 @@ actionDoesNotCreateKernelAdequacy ()
 nullEvidenceDoesNotCreateKernelAdequacy : BetterNullPImpliesExactConsumerAdequacy → ⊥
 nullEvidenceDoesNotCreateKernelAdequacy ()
 
-oracleSourceDoesNotCreateExecution : CertificationOracleSourceImpliesSuccessfulExecution → ⊥
-oracleSourceDoesNotCreateExecution ()
-
 priorConsumerConflictDoesNotTransferAutomatically : PriorConsumerConflictImpliesCurrentConsumerConflict → ⊥
 priorConsumerConflictDoesNotTransferAutomatically ()
 
 paretoCostDoesNotCreateTruth : ParetoCostImpliesMathematicalTruth → ⊥
 paretoCostDoesNotCreateTruth ()
 
-cheapestDoesNotCreateSelection : CheapestCandidateImpliesSelected → ⊥
-cheapestDoesNotCreateSelection ()
+cheapestRawDoesNotCreateSelection : CheapestCandidateImpliesSelectedWithoutEligibility → ⊥
+cheapestRawDoesNotCreateSelection ()
