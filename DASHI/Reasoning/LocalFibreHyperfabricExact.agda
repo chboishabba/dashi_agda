@@ -3,7 +3,7 @@ module DASHI.Reasoning.LocalFibreHyperfabricExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -14,17 +14,11 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 ------------------------------------------------------------------------
 -- LOCAL FIBRE HYPERFABRIC
 --
--- Canonical disambiguation for the fibre-routing programme.
---
--- A fibre is not a globally time-indexed strand and fibre count is not one
--- global natural.  The primitive object is a type family FibreAt : Base ->
--- Fibre -> Set over an incidence base.  Arbitrarily many local fibre
--- coordinates may coexist at any base locality.  Incidence, transport,
--- refinement, gluing, symmetry and consumer observation are separate data.
---
--- Time, hop, phase, trial, animal, transmitter class, provenance, etc. may be
--- axes/filtrations carried by a domain instance; none is hard-coded as the
--- ontology of a fibre.
+-- A fibre is local type-family data over an incidence base.  Fibre
+-- multiplicity is therefore allowed to vary from locality to locality and is
+-- not one global cardinality.  Time, hop, phase, trial, animal, transmitter,
+-- provenance, etc. may be axes/filtrations in a domain instance; none defines
+-- the ontology of Fibre itself.
 ------------------------------------------------------------------------
 
 record LocalFibreHyperfabric
@@ -50,10 +44,6 @@ record LocalFibreHyperfabric
 
 open LocalFibreHyperfabric public
 
-------------------------------------------------------------------------
--- Sections and local gluing.
-------------------------------------------------------------------------
-
 record LocalSection
     {Base Fibre Axis Symmetry Consumer : Set}
     (H : LocalFibreHyperfabric Base Fibre Axis Symmetry Consumer) : Set₁ where
@@ -68,7 +58,7 @@ open LocalSection public
 
 record LocalGluingPatch
     {Base Fibre Axis Symmetry Consumer : Set}
-    (H : LocalFibreHyperfabric Base Fibre Axis Symmetry Consumer) : Set where
+    (H : LocalFibreHyperfabric Base Fibre Axis Symmetry Consumer) : Set₁ where
   constructor local-gluing-patch
   field
     inputs : List Base
@@ -77,10 +67,6 @@ record LocalGluingPatch
     compatibilityWitness : Set
 
 open LocalGluingPatch public
-
-------------------------------------------------------------------------
--- Symmetry does not authorize quotienting by itself.
-------------------------------------------------------------------------
 
 record ConsumerInvariantSymmetry
     {Base Fibre Axis Symmetry Consumer : Set}
@@ -97,26 +83,20 @@ record ConsumerInvariantSymmetry
 open ConsumerInvariantSymmetry public
 
 data SymmetryAutomaticallyAuthorizesQuotient : Set where
-
 symmetryNeedsConsumerInvariance : SymmetryAutomaticallyAuthorizesQuotient → ⊥
 symmetryNeedsConsumerInvariance ()
 
-------------------------------------------------------------------------
--- Local fibre growth is not globally cardinalized.
-------------------------------------------------------------------------
-
 data GlobalFixedFibreCount : Set where
-
 globalFibreCountIsNotPrimitive : GlobalFixedFibreCount → ⊥
 globalFibreCountIsNotPrimitive ()
 
 data EightIsUnderlyingFibreCardinality : Set where
-
 eightIsOnlyOneDeclaredChart : EightIsUnderlyingFibreCardinality → ⊥
 eightIsOnlyOneDeclaredChart ()
 
 ------------------------------------------------------------------------
--- Finite specimen: arbitrary local refinement at a crossing/locality.
+-- Finite specimen: three independent coordinates are exposed at crossingX,
+-- while only the retained structural coordinate exists at neighbouringY.
 ------------------------------------------------------------------------
 
 data BaseSpecimen : Set where
@@ -209,22 +189,21 @@ threeIndependentFibresCanBeAddedAtOneLocality :
 threeIndependentFibresCanBeAddedAtOneLocality =
   addDelayAtX , addPhaseAtX , addTrialAtX
 
-data DelayAutomaticallyExistsAtNeighbour : Set where
-
-localRefinementDoesNotGlobalize : DelayAutomaticallyExistsAtNeighbour → ⊥
+data LocalRefinementAutomaticallyGlobalizes : Set where
+localRefinementDoesNotGlobalize : LocalRefinementAutomaticallyGlobalizes → ⊥
 localRefinementDoesNotGlobalize ()
 
 ------------------------------------------------------------------------
--- Repo-native pants/braid/hypercube donor alignment.
+-- Repo-native donor alignment.
 ------------------------------------------------------------------------
 
 pantsOutputMultiplicityIsLocal : Pants.outputCount Pants.composedOneToThree ≡ 3
 pantsOutputMultiplicityIsLocal = Pants.composedOutputCountIsThree
 
-pantsPathMemoryCanSurviveRecombination :
-  Pants.splitRecombineResidual Pants.phaseChangedJunction
-  ≡ Pants.Wave.mkDiscreteWave (-[1+ 0 ]) (+ 1)
-pantsPathMemoryCanSurviveRecombination = Pants.phaseChangedResidualExact
+pantsCapacityMayRemainConservativeAcrossAPathSensitiveSplit :
+  Pants.CapacityConservative Pants.phaseChangedJunction
+pantsCapacityMayRemainConservativeAcrossAPathSensitiveSplit =
+  Pants.phaseChangedCapacityConservative
 
 braidCrossingRetainsIdentities :
   Braid.coordinationWithoutFusion Braid.canonicalBraidedEvidenceBoundary ≡ true
@@ -236,7 +215,7 @@ hypercubeCarrierDoesNotFixTransitionGeometry =
   Hypercube.mediatedGeometryBlocksDirectPoleJump
 
 ------------------------------------------------------------------------
--- The historical MaleCNS eight-feature family is one chart/projection.
+-- Historical MaleCNS eight-feature family = one consumer-facing chart.
 ------------------------------------------------------------------------
 
 data LegacyNDimChartCoordinate : Set where
@@ -255,27 +234,21 @@ record MaleCNSChartBoundary : Set where
     eightCoordinatesAreOneDeclaredChart : Bool
     eightCoordinatesAreOneDeclaredChartIsTrue :
       eightCoordinatesAreOneDeclaredChart ≡ true
-
     chartCoordinateCountEqualsUnderlyingFibreCount : Bool
     chartCoordinateCountEqualsUnderlyingFibreCountIsFalse :
       chartCoordinateCountEqualsUnderlyingFibreCount ≡ false
-
     localFibreMultiplicityMayVaryByBaseLocality : Bool
     localFibreMultiplicityMayVaryByBaseLocalityIsTrue :
       localFibreMultiplicityMayVaryByBaseLocality ≡ true
-
     localRefinementRequiresGlobalTimeStep : Bool
     localRefinementRequiresGlobalTimeStepIsFalse :
       localRefinementRequiresGlobalTimeStep ≡ false
-
     pantsSplitMergeMayBeNary : Bool
     pantsSplitMergeMayBeNaryIsTrue :
       pantsSplitMergeMayBeNary ≡ true
-
-    recombinationErasesPathMemory : Bool
-    recombinationErasesPathMemoryIsFalse :
-      recombinationErasesPathMemory ≡ false
-
+    recombinationAutomaticallyErasesPathMemory : Bool
+    recombinationAutomaticallyErasesPathMemoryIsFalse :
+      recombinationAutomaticallyErasesPathMemory ≡ false
     symmetryAloneCreatesQuotientAuthority : Bool
     symmetryAloneCreatesQuotientAuthorityIsFalse :
       symmetryAloneCreatesQuotientAuthority ≡ false
@@ -283,10 +256,4 @@ record MaleCNSChartBoundary : Set where
 canonicalMaleCNSChartBoundary : MaleCNSChartBoundary
 canonicalMaleCNSChartBoundary =
   malecns-chart-boundary
-    true refl
-    false refl
-    true refl
-    false refl
-    true refl
-    false refl
-    false refl
+    true refl false refl true refl false refl true refl false refl false refl
