@@ -5,14 +5,16 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369Validation as Structural
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ArchiveHartreeRadialIdentityDefectExact as Defect
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369RadialIdentityRepairExecutionExact as Repair
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369HydrogenNISTComparisonExact as HN
 
 ------------------------------------------------------------------------
 -- Focused physical validation root.
 --
 -- This composes the structural periodic-table validation root with the exact
--- archive Hartree defect and the first executed n-sensitive repair receipt.
--- Checking this module therefore keeps the defect and repair in the same
--- checker cone instead of letting a later producer silently replace history.
+-- archive Hartree defect, the executed n-sensitive radial repair receipt, and
+-- the first external NIST reference-data diagnostic. Keeping them in one cone
+-- prevents later numerical evidence from silently rewriting earlier source or
+-- implementation state.
 ------------------------------------------------------------------------
 
 archiveDefectRegression :
@@ -75,6 +77,39 @@ referenceDataBoundaryRegression :
   ≡ true
 referenceDataBoundaryRegression = refl , refl
 
+hydrogenNISTExecutionRegression :
+  HN.HydrogenReferenceComparisonReceipt.comparisonExecuted
+    HN.canonicalHydrogenReferenceComparisonReceipt
+  ≡ true
+  ×
+  HN.HydrogenComparisonBoundary.oneElectronReferenceDiagnosticPaid
+    HN.canonicalHydrogenComparisonBoundary
+  ≡ true
+hydrogenNISTExecutionRegression = refl , refl
+
+hydrogenNISTNonPromotionRegression :
+  HN.HydrogenComparisonBoundary.numericResidualCloserThanAnalyticImpliesBetterPhysics
+    HN.canonicalHydrogenComparisonBoundary
+  ≡ false
+  ×
+  HN.HydrogenComparisonBoundary.numericalDiscretizationErrorSeparatedFromModelError
+    HN.canonicalHydrogenComparisonBoundary
+  ≡ false
+  ×
+  HN.HydrogenComparisonBoundary.finiteProtonMassPaid
+    HN.canonicalHydrogenComparisonBoundary
+  ≡ false
+  ×
+  HN.HydrogenComparisonBoundary.manyElectronSCFPaid
+    HN.canonicalHydrogenComparisonBoundary
+  ≡ false
+  ×
+  HN.HydrogenComparisonBoundary.periodicTableEmpiricalRecoveryPaid
+    HN.canonicalHydrogenComparisonBoundary
+  ≡ false
+hydrogenNISTNonPromotionRegression =
+  refl , (refl , (refl , (refl , refl)))
+
 -- The Structural import is intentionally retained even though no name is used
 -- below: importing the module is what keeps the structural validation root in
--- the same Agda checker cone as this physical repair layer.
+-- the same Agda checker cone as this physical evidence layer.
