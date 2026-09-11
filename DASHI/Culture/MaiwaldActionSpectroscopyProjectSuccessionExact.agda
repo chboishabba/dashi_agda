@@ -110,13 +110,6 @@ canonicalExperimentalDataBoundary = experimental-data-boundary true true false f
 
 ------------------------------------------------------------------------
 -- Primary conference manifestation immediately before Maiwald's death.
---
--- The official 77th ISMS schedule dates P7658 to 2024-06-20 and names
--- Frank Maiwald (JPL/Caltech) as a coauthor.  The abstract explicitly says
--- "we present" cryogenic gas-phase infrared spectra of deprotonated valine and
--- deprotonated aminovaleric acid.  This pays public existence of those spectra
--- before 2024-07-04, but not exact instrument-run dates, raw bytes, notebook
--- custody, or identity with the later 2025 paper's final data products.
 ------------------------------------------------------------------------
 
 record PreLossConferenceDataReceipt : Set where
@@ -160,12 +153,70 @@ canonicalPreLossConferenceBoundary =
   pre-loss-conference-boundary true false false false true
 
 ------------------------------------------------------------------------
--- ACS SUPPORTING-INFORMATION PRODUCT SURFACES
+-- Apparatus-host and affiliation provenance.
 --
--- These are exact public derivative-product classes for the two journal
--- children. They sharpen what the dataset/version crosswalk must compare while
--- deliberately not equating supporting-information products with raw instrument
--- data, notebook state, calibration state, or the 2023 poster's plotted bytes.
+-- JPL's FY23 SURP poster says the collaboration with Weber's team enabled the
+-- investigation with an active apparatus and labels the cryogenic IR action-
+-- spectroscopy setup as located at Boulder. This pays a public apparatus-host
+-- location, not legal ownership, notebook custody, raw-data custody, or a
+-- person-specific handover. The ChemRxiv manuscript and 2024 ISMS abstract
+-- explicitly affiliate Maiwald with JPL/Caltech, while current ACS/PubMed
+-- rendered metadata maps him to JILA/CU Boulder. Preserve the disagreement
+-- rather than using one manifestation to overwrite another.
+------------------------------------------------------------------------
+
+record ApparatusHostReceipt : Set where
+  constructor apparatus-host-receipt
+  field
+    sourceObject : String
+    apparatusDescription : String
+    publicHostLocation : String
+    collaborationCarrier : String
+    apparatusHostLocationPaid : Bool
+    legalOwnershipPaid : Bool
+    rawDataCustodyPaid : Bool
+    notebookCustodyPaid : Bool
+    maiwaldPhysicalCustodyPaid : Bool
+
+open ApparatusHostReceipt public
+
+fy23BoulderApparatusHost : ApparatusHostReceipt
+fy23BoulderApparatusHost = apparatus-host-receipt
+  "JPL FY23 SURP poster SP23012p / CL#23-5018"
+  "active messenger-photodissociation action-spectroscopy apparatus including electrospray ionization, cryogenic quadrupole trap and coherent radiation sources"
+  "Boulder university / Weber-group collaboration surface"
+  "JPL SURP collaboration with J. Mathias Weber team; Lane Terry and Maddie Klumb named as graduate collaborators"
+  true false false false false
+
+record AffiliationManifestationDiscrepancy : Set where
+  constructor affiliation-manifestation-discrepancy
+  field
+    objectTitle : String
+    doi : String
+    chemRxivAffiliation : String
+    conferenceAffiliation : String
+    acsRenderedAffiliation : String
+    pubmedRenderedAffiliation : String
+    exactAuthorIdentityPaid : Bool
+    exactPublicationIdentityPaid : Bool
+    affiliationMetadataConsistentAcrossManifestations : Bool
+    affiliationDifferenceMayDetermineApparatusCustody : Bool
+    explicitNumberedManuscriptAffiliationMayGuideResolution : Bool
+
+open AffiliationManifestationDiscrepancy public
+
+protonatedValineMaiwaldAffiliationDiscrepancy : AffiliationManifestationDiscrepancy
+protonatedValineMaiwaldAffiliationDiscrepancy = affiliation-manifestation-discrepancy
+  "Cryogenic Ion Vibrational Spectroscopy of Protonated Valine: Messenger Tag Effects"
+  "10.1021/acs.jpca.4c03552"
+  "ChemRxiv PDF: Frank Maiwald affiliation 2 = Jet Propulsion Laboratory, California Institute of Technology"
+  "2024 ISMS abstract: Frank Maiwald = Jet Propulsion Laboratory, California Institute of Technology"
+  "current ACS rendered author page maps Frank Maiwald to JILA and Department of Chemistry, University of Colorado Boulder"
+  "current PubMed rendered metadata maps Frank Maiwald to affiliation 1 = JILA and Department of Chemistry, University of Colorado Boulder"
+  true true false false true
+
+------------------------------------------------------------------------
+-- ACS SUPPORTING-INFORMATION PRODUCT SURFACES
 ------------------------------------------------------------------------
 
 record SupportingInformationReceipt : Set where
@@ -220,7 +271,7 @@ record ProjectVsCarrierBoundary : Set where
 canonicalProjectVsCarrierBoundary = project-vs-carrier-boundary false refl false refl true refl false refl
 
 data MaiwaldSuccessionReverseTarget : Set where
-  acquireApparatusConfigurationContinuity acquireCalibrationTransfer acquireTagResponseModelContinuity acquireFailureHistoryTransfer acquireQualificationTransfer acquireRepositoryOrNotebookContinuity acquireWorkingTitleToPublishedVersionHistory acquireExperimentAndDataProductionDates acquirePreprintAcceptedManuscriptVersionCrosswalk acquireExactDatasetAndReductionVersionCrosswalk acquirePosterToSIProductCrosswalk : MaiwaldSuccessionReverseTarget
+  acquireApparatusConfigurationContinuity acquireCalibrationTransfer acquireTagResponseModelContinuity acquireFailureHistoryTransfer acquireQualificationTransfer acquireRepositoryOrNotebookContinuity acquireWorkingTitleToPublishedVersionHistory acquireExperimentAndDataProductionDates acquirePreprintAcceptedManuscriptVersionCrosswalk acquireExactDatasetAndReductionVersionCrosswalk acquirePosterToSIProductCrosswalk acquireApparatusOwnershipAndCustodyCrosswalk acquireAffiliationManifestationResolution : MaiwaldSuccessionReverseTarget
 
 manuscriptForkNextTarget : MaiwaldSuccessionReverseTarget
 manuscriptForkNextTarget = acquireExactDatasetAndReductionVersionCrosswalk
