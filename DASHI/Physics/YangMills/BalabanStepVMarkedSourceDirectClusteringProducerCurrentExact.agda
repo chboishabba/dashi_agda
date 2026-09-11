@@ -4,21 +4,21 @@ module DASHI.Physics.YangMills.BalabanStepVMarkedSourceDirectClusteringProducerC
 ------------------------------------------------------------------------
 -- CURRENT STEP-V / MARKED-SOURCE DIRECT CLUSTERING PRODUCER
 --
--- This owner is intentionally smaller than the historical Step-V / KP / polymer
--- programme and smaller than the canonical B consumer cut.
+-- Archaeology correction:
 --
--- Archaeology shows:
+-- * historical Step-V/KP remains an optional producer family;
+-- * the marked log-partition mixed-derivative = connected-correlation identity
+--   is compiler-owned;
+-- * CMP109/CMP116 already source-own the differentiated marked exponential
+--   decay/localisation theorem shape;
+-- * the first live source-native physical seam is therefore SAME-OBJECT
+--   APPLICABILITY: identify the published E^(2)/Pi / J-source magnitude,
+--   connecting root and distance with the selected physical T5 two-J carrier.
 --
---   * KP -> cluster expansion convergence -> cluster-weight decay is already
---     compiler-owned once the physical Step-V hypotheses are supplied;
---   * d_A d_B log Z = <AB> - <A><B> is already a representation compiler on
---     one marked source carrier;
---   * the first theorem-bearing source-native clustering producer is therefore
---     the separation decay of the mixed marked log-partition derivative itself.
---
--- This is an OPTIONAL producer for the canonical B clustering/localisation
--- consumer.  It does not replace the current H1/H2/H3 cut and does not identify
--- finite/RG spatial decay with continuum Euclidean-time spectral clustering.
+-- Once that weld is supplied, R309 compiles directly into the exact current H1
+-- localisation package.  This route remains OPTIONAL below the canonical B
+-- consumer and does not identify finite/RG spatial decay with continuum
+-- Euclidean-time spectral clustering.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -27,9 +27,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanMarkedLogPartitionConnectedCorrelationCompilerExact as Marked
 import DASHI.Physics.YangMills.BalabanLargeFieldStepV as StepV
+import DASHI.Physics.YangMills.BalabanMarkedHessianPublishedDecayBoundaryExact as CMP109
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact as R309
 
--- Re-export the literal compiler theorem under a proof-search-facing name.
-stepVMarkedSourceDecayProducesConnectedCorrelation :
+-- Generic marked-source representation compiler.
+markedSourceDecayProducesConnectedCorrelation :
   ∀ {Observable Scalar Bound Distance}
     {response : Marked.MarkedTwoSourceResponse Observable Scalar}
     (producer : Marked.SeparationDecayProducer response)
@@ -37,14 +39,11 @@ stepVMarkedSourceDecayProducesConnectedCorrelation :
   Marked.LessEqual producer
     (Marked.absoluteValue producer (Marked.connectedCorrelation response A B))
     (Marked.decayEnvelope producer (Marked.distance producer A B))
-stepVMarkedSourceDecayProducesConnectedCorrelation =
+markedSourceDecayProducesConnectedCorrelation =
   Marked.connectedCorrelationDecayFromMarkedSource
 
--- The historical Step-V chain already exposes the abstract compiler from
--- exponential cluster-weight decay to a connected-correlation cluster bound.
--- This theorem does not create that implication: it records the exact existing
--- compiler shape so the current route can distinguish it from the physical
--- marked-source decay theorem above.
+-- Historical Step-V abstract compiler.  This is retained as a producer tactic,
+-- not promoted to the canonical consumer cut.
 stepVClusterWeightDecayToCorrelationCompiler :
   ∀ {Site Polymer Configuration Bound : Set}
     (estimates : StepV.LargeFieldStepVEstimates Site Polymer Configuration Bound) →
@@ -68,9 +67,13 @@ record CurrentStepVProducerBoundary : Set where
     mixedDerivativeMeaningCompilerOwnedIsTrue :
       mixedDerivativeMeaningCompilerOwned ≡ true
 
-    markedMixedDerivativeSeparationDecayIsTheoremBearing : Bool
-    markedMixedDerivativeSeparationDecayIsTheoremBearingIsTrue :
-      markedMixedDerivativeSeparationDecayIsTheoremBearing ≡ true
+    cmp109MarkedDerivativeDecaySourceOwned : Bool
+    cmp109MarkedDerivativeDecaySourceOwnedIsTrue :
+      cmp109MarkedDerivativeDecaySourceOwned ≡ true
+
+    selectedJApplicabilityIsFirstLiveSourceSeam : Bool
+    selectedJApplicabilityIsFirstLiveSourceSeamIsTrue :
+      selectedJApplicabilityIsFirstLiveSourceSeam ≡ true
 
     stepVRouteMandatoryForCanonicalB : Bool
     stepVRouteMandatoryForCanonicalBIsFalse :
@@ -87,6 +90,7 @@ canonicalCurrentStepVProducerBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
 
@@ -96,10 +100,17 @@ stepVAbstractAssemblyLevel = machineChecked
 markedSourceCorrelationCompilerLevel : ProofLevel
 markedSourceCorrelationCompilerLevel = machineChecked
 
--- This label follows the existing repository proof-classification convention;
--- it does not assert that the physical mixed-derivative decay has been supplied.
-markedMixedDerivativeSeparationDecayLevel : ProofLevel
-markedMixedDerivativeSeparationDecayLevel = conditional
+cmp109MarkedDerivativeDecayLevel : ProofLevel
+cmp109MarkedDerivativeDecayLevel = CMP109.cmp109DifferentiatedMarkedActivityDecayLevel
+
+-- Current first physical/source seam on this producer route.
+selectedJApplicabilityPhysicalLevel : ProofLevel
+selectedJApplicabilityPhysicalLevel = R309.selectedJApplicabilityPhysicalLevel
+
+-- Once applicability is paid, the source localization -> exact H1 adapter is
+-- already compiler-owned in R309.
+selectedJApplicabilityCompilerLevel : ProofLevel
+selectedJApplicabilityCompilerLevel = R309.selectedJApplicabilityCompilerLevel
 
 clayPromotion : Bool
 clayPromotion = false
