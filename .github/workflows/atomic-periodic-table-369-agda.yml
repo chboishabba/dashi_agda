@@ -7,6 +7,7 @@ on:
       - 'DASHI/Physics/Foundations/AtomicFermionShellExact.agda'
       - 'DASHI/Physics/Foundations/AtomicValenceFermionBridgeExact.agda'
       - 'DASHI/Promotion/ChemistryFiniteRuleTargets.agda'
+      - 'DASHI/Chemistry/Everything.agda'
       - 'scripts/atomic_radial_identity_repair.py'
       - 'scripts/atomic_hydrogen_nist_comparison.py'
       - 'scripts/atomic_hydrogen_reduced_mass_nist.py'
@@ -51,6 +52,11 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369HeliumHartreeConvergenceExact.agda
       - name: Typecheck physical validation root
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369PhysicalValidation.agda
+      - name: Typecheck atomic-to-chemistry hyperfibre bridges
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ChemistryHyperfibreBridgeExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369PetrochemicalIdentityBridgeExact.agda
+          nix develop .# --command agda -i . DASHI/Chemistry/Everything.agda
 
   radial-regression:
     runs-on: ubuntu-latest
