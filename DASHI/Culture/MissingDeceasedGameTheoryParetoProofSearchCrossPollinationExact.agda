@@ -3,6 +3,7 @@ module DASHI.Culture.MissingDeceasedGameTheoryParetoProofSearchCrossPollinationE
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import DASHI.Algebra.BalancedTernary using (zero)
 
 import DASHI.Dynamics.TernaryLifeGame as Ternary
 import DASHI.GameTheory.StrategicInteractionCoreExact as Game
@@ -35,7 +36,7 @@ existingProofSearchParetoBoundary : Search.ProofSearchExperimentalParetoBoundary
 existingProofSearchParetoBoundary = Search.canonicalProofSearchExperimentalParetoBoundary
 
 existingTernaryRule : Ternary.Rule
-existingTernaryRule = Ternary.evolvingRule Ternary.zero
+existingTernaryRule = Ternary.evolvingRule zero
 
 record InvestigativeSearchAxis : Set where
   constructor investigative-search-axis
@@ -99,19 +100,14 @@ chinesePrimaryWorkProposal = Search.frontierRefinementProposal
   "source reconstruction may refine the frontier but does not establish a cross-national common cause"
 
 uapDiscriminatorProposal : Search.FrontierRefinementProposal
-uapDiscriminatorProposal = Search.sourceReconstruction
-  |> λ kind → Search.frontierRefinementProposal
-      kind
-      "UAP/Area-51 paid-kernel -> missing-bridge residual"
-      "UAP/adversarial hypothesis discriminator"
-      "causal-bridge debt + matched-control debt + adversarial-discrimination debt"
-      "prune self-sealing narratives; retain only claims with independent predicted observables"
-      "technical science object and alleged covert programme object must be independently welded"
-      "hypothesis-guided acquisition only; no theorem/evidence promotion from strategic plausibility"
-  where
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    x |> f = f x
+uapDiscriminatorProposal = Search.frontierRefinementProposal
+  Search.sourceReconstruction
+  "UAP/Area-51 paid-kernel -> missing-bridge residual"
+  "UAP/adversarial hypothesis discriminator"
+  "causal-bridge debt + matched-control debt + adversarial-discrimination debt"
+  "prune self-sealing narratives; retain only claims with independent predicted observables"
+  "technical science object and alleged covert programme object must be independently welded"
+  "hypothesis-guided acquisition only; no theorem/evidence promotion from strategic plausibility"
 
 ------------------------------------------------------------------------
 -- Ternary perspective routing over time.
