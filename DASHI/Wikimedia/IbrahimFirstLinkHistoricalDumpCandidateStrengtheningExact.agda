@@ -10,12 +10,6 @@ import DASHI.Wikimedia.IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact
 
 ------------------------------------------------------------------------
 -- THIN DELTA: STRONGEST CONCRETE HISTORICAL DUMP CANDIDATE
---
--- Existing owner already retains the November-2014 publication/blog cue and
--- the parser's explicit enwiki/20141008 directory cue without collapsing them.
--- This delta narrows the concrete acquisition target to the exact October file
--- named by contemporaneous external usage and records the producer README's
--- 112-chunk local lineage.  Candidate existence != published-input identity.
 ------------------------------------------------------------------------
 
 historicalBoundary : Historical.HistoricalSnapshotProvenanceBoundary
@@ -40,10 +34,6 @@ constructorRepositorySource = Historical.flnConstructorSource
 
 ------------------------------------------------------------------------
 -- Independent historical corroboration acquired 2026-09-11.
---
--- These sources pay only artifact/directory existence and filename plausibility.
--- They do NOT pay Ibrahim's executed-input identity, hash, split lineage or
--- result same-object relation.
 ------------------------------------------------------------------------
 
 contemporaneousUsageSource : Attribution.AttributedSource
@@ -93,22 +83,7 @@ strongestConcreteDumpCandidate = historical-dump-candidate-receipt
   "https://dumps.wikimedia.org/enwiki/20141008/"
   "enwiki-20141008-pages-articles.xml.bz2"
   "enwiki-20141008-pages-articles.xml"
-  true
-  true
-  true
-  true
-  true
-  true
-  false
-  false
-  false
-  false
-  true
-  false
-
-------------------------------------------------------------------------
--- Payment state: concrete candidate paid; execution lineage still unpaid.
-------------------------------------------------------------------------
+  true true true true true true false false false false true false
 
 data CandidateStage : Set where
   directoryCandidatePaid : CandidateStage
@@ -139,10 +114,6 @@ canonicalCandidateStrengtheningBoundary : CandidateStrengtheningBoundary
 canonicalCandidateStrengtheningBoundary = candidate-strengthening-boundary
   true false true true true true true true true true false
 
-------------------------------------------------------------------------
--- No-promotion gates.
-------------------------------------------------------------------------
-
 data CandidateFilenameMeansExecutedInput : Set where
 data ExistingArtifactMeansPublishedSameObject : Set where
 data IndependentHistoricalUseMeansIbrahimInput : Set where
@@ -168,9 +139,6 @@ producerDirectoryCommentDoesNotMeanExactHash ()
 
 chunkCountDoesNotRecoverSplitLineage : ChunkCountMeansRecoveredSplitLineage → ⊥
 chunkCountDoesNotRecoverSplitLineage ()
-
-octoberCandidateDoesNotEraseNovemberDescription : OctoberCandidateCancelsNovemberPublicationDescription → ⊥
-octoberCandidateDoesNotEraseNovemberPublicationDescription = octoberCandidateDoesNotEraseNovemberDescription
 
 octoberCandidateDoesNotEraseNovemberDescription : OctoberCandidateCancelsNovemberPublicationDescription → ⊥
 octoberCandidateDoesNotEraseNovemberDescription ()
