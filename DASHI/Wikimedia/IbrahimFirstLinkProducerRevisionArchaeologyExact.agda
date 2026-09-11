@@ -12,7 +12,7 @@ import DASHI.Wikimedia.WikipediaFirstLinkNetworkExact as FLN
 -- IBRAHIM FIRST-LINK PRODUCER REVISION ARCHAEOLOGY
 --
 -- Snowball rule: paper, producer code, released data and later code revisions
--- are separate carriers.  Acquisition may find them in any order, but a later
+-- are separate carriers. Acquisition may find them in any order, but a later
 -- artifact may not silently rewrite the historical runtime identity.
 ------------------------------------------------------------------------
 
@@ -47,7 +47,7 @@ producerRepository = producer-artifact
   "GitHub repository id 43619217"
   "https://github.com/marksibrahim/wikipedia_network"
   "first-party producer code and research-material repository"
-  "contains the extraction/parser pipeline, analysis code, writeup history and online-appendix linkage"
+  "contains extraction/parser pipeline, analysis code, writeup history and online-appendix linkage"
   "repository identity does not prove which revision generated a particular released result"
   "externalProducerOwner"
 
@@ -59,7 +59,7 @@ initialProducerCommit = producer-artifact
   "https://github.com/marksibrahim/wikipedia_network/commit/9dd11de2676860751b02c1bbb0aeee0afb7b2710"
   "producer-code chronology receipt"
   "initial public commit on 2015-10-04; contains parser/extraction code and November-2014 filename cues"
-  "public commit date is not the original execution date and does not establish exact runtime checkout"
+  "public commit date is not original execution date and does not establish exact runtime checkout"
   "externalProducerOwner"
 
 releasedFlnMap : ProducerArtifact
@@ -70,7 +70,7 @@ releasedFlnMap = producer-artifact
   "https://compstorylab.org/share/papers/ibrahim2016a/data/fln.json"
   "first-party released result data"
   "released article-to-first-link graph output associated with the paper"
-  "released output does not by itself identify the exact input dump or prove parser-equivalent regeneration"
+  "released output does not by itself identify exact input dump or prove parser-equivalent regeneration"
   "externalProducerOwner"
 
 ------------------------------------------------------------------------
@@ -103,12 +103,16 @@ novemberSixCue = dump-cue
   true
   false
 
+novemberSixArchiveObject : String
+novemberSixArchiveObject =
+  "Wikimedia enwiki/20141106 snapshot; contemporary dump-list discussion names enwiki-20141106-pages-articles-multistream.xml.bz2 (~11.3 GB)"
+
 strongestCurrentDumpCandidate : String
 strongestCurrentDumpCandidate =
-  "2014-11-06 / enwiki_20141106.xml: strongest current runtime candidate because producer XML-processing workflow names it and it agrees with the paper/blog's November-2014 statement; still not promoted to exact runtime identity"
+  "2014-11-06 / enwiki_20141106.xml: strongest current runtime candidate because producer XML-processing workflow names it and it agrees with paper/blog November-2014 statement; exact ancestry into producer chunks remains unpaid"
 
 ------------------------------------------------------------------------
--- Parser semantics paid directly by the first-party producer code.
+-- Parser semantics paid directly by first-party producer code.
 ------------------------------------------------------------------------
 
 record ParserSemanticsReceipt : Set where
@@ -131,9 +135,50 @@ producerParserSemantics = parser-semantics-receipt
 parserBlobAtCurrentMaster : String
 parserBlobAtCurrentMaster = "code/first_link_txt.py blob a830c47905d4cde90876e1097f2620f4f19a63df"
 
+------------------------------------------------------------------------
+-- Producer transformation chain.
+------------------------------------------------------------------------
+
+record ProducerTransformation : Set where
+  constructor producer-transformation
+  field
+    upstream : String
+    downstream : String
+    producerReceipt : String
+    paid : Bool
+open ProducerTransformation public
+
+novemberDumpToCleanSmall : ProducerTransformation
+novemberDumpToCleanSmall = producer-transformation
+  "enwiki_20141106.xml candidate full input"
+  "clean_small/*"
+  "no source-paid split/decompression command located in current repository archaeology"
+  false
+
+cleanSmallToFullWikiData : ProducerTransformation
+cleanSmallToFullWikiData = producer-transformation
+  "clean_small/small*"
+  "/users/m/s/msibrahi/full_wiki_data/small*.xml"
+  "old_code/process/chop_wiki.py repairs chunk boundaries at </page>, carries paths from external clean_small to cluster full_wiki_data, and renames chunks to .xml"
+  true
+
+fullWikiDataToChunkJson : ProducerTransformation
+fullWikiDataToChunkJson = producer-transformation
+  "/users/m/s/msibrahi/full_wiki_data/small*.xml"
+  "v4/results/true_flnetwork/<chunk>.json"
+  "code/create_fln.py enumerates 112 small*.xml inputs and applies first_link_txt.run_parser"
+  true
+
+chunkJsonToFln : ProducerTransformation
+chunkJsonToFln = producer-transformation
+  "112 per-chunk first-link JSON objects"
+  "combined fln.json"
+  "code/combine_fln.py merges 112 dictionaries; official appendix exposes FLN data/fln.json"
+  true
+
 producerSplitShape : String
 producerSplitShape =
-  "create_fln.py processes 112 small*.xml chunks and writes chunk JSON outputs before combine_fln.py creates fln.json"
+  "clean_small -> full_wiki_data/small*.xml -> 112 chunk JSON outputs -> combined fln.json"
 
 ------------------------------------------------------------------------
 -- Traversal-funnel algorithm has its own revision lineage.
@@ -153,7 +198,7 @@ paperEraTraversalPseudo : AlgorithmRevision
 paperEraTraversalPseudo = algorithm-revision
   "ce2f02562e71de2697051313201a761ae0266b56 -> 59433702a975c9b3a562b1027a2d5f43bb3a7150"
   "2016-11-18 -> 2016-11-21"
-  "reviewer-requested traversal-funnel pseudocode added to the paper/writeup lineage"
+  "reviewer-requested traversal-funnel pseudocode added to paper/writeup lineage"
   false
   true
 
@@ -177,7 +222,9 @@ record ProducerReproductionState : Set where
     releasedFlnMapPaid : Bool
     parserSemanticsPaid : Bool
     novemberSixCandidatePaidAsCandidate : Bool
+    cleanSmallToReleasedFlnLineagePaid : Bool
     exactInputDumpIdentityPaid : Bool
+    dumpToCleanSmallAncestryPaid : Bool
     exactExtractionRevisionPaid : Bool
     exactPaperEraFunnelRevisionPaid : Bool
     releasedFlnRegeneratedByteEquivalent : Bool
@@ -186,18 +233,18 @@ open ProducerReproductionState public
 
 currentProducerReproductionState : ProducerReproductionState
 currentProducerReproductionState = producer-reproduction-state
-  true true true true true false false false false false
+  true true true true true true false false false false false false
 
 firstUnpaidProducerJoin : String
 firstUnpaidProducerJoin =
-  "prove that enwiki_20141106.xml (or another exact dump object) is the input ancestor of the 112 XML chunks used by the v4/true_flnetwork producer run"
+  "same-object ancestry: enwiki_20141106.xml (or other exact Wikimedia dump object) -> clean_small split used by the producer pipeline"
 
 secondUnpaidProducerJoin : String
 secondUnpaidProducerJoin =
-  "identify the exact extraction-code revision that generated the released 505 MB fln.json, then distinguish paper-era traversal-funnel semantics from the 2019 cycle-start correction"
+  "identify exact extraction-code revision that generated released 505 MB fln.json, then distinguish paper-era traversal-funnel semantics from 2019 cycle-start correction"
 
 ------------------------------------------------------------------------
--- External navigation remains inherited from the primary source ledger.
+-- External navigation remains inherited from primary source ledger.
 ------------------------------------------------------------------------
 
 wikipediaQid : String
@@ -233,6 +280,7 @@ data NovemberFilenameMeansExactRuntime : Set where
 data ReleasedDataMeansReproduced : Set where
 data CurrentRepoMeansPaperCode : Set where
 data LaterFunnelFixMeansHistoricalResultUsedFix : Set where
+data DownstreamChunkLineageMeansUpstreamDumpAncestry : Set where
 
 octoberCueDoesNotFixRuntime : OctoberCodeCueMeansRuntime → ⊥
 octoberCueDoesNotFixRuntime ()
@@ -248,6 +296,9 @@ currentRepoDoesNotEqualPaperCode ()
 
 laterFixDoesNotRewriteHistoricalRun : LaterFunnelFixMeansHistoricalResultUsedFix → ⊥
 laterFixDoesNotRewriteHistoricalRun ()
+
+downstreamLineageDoesNotCreateDumpAncestry : DownstreamChunkLineageMeansUpstreamDumpAncestry → ⊥
+downstreamLineageDoesNotCreateDumpAncestry ()
 
 primaryBoundary : Primary.FirstLinkDeweyQidDoiBoundary
 primaryBoundary = Primary.canonicalFirstLinkDeweyQidDoiBoundary
