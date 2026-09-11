@@ -7,6 +7,7 @@ module DASHI.Biology.AnimalexicEverything where
 open import DASHI.Biology.AnimalexicSourceAtlas
 open import DASHI.Biology.AnimalexicFormalSystemExact
 open import DASHI.Biology.AnimalexicGeometryReuseExact
+open import DASHI.Biology.AnimalexicIssue20KnownPoseMultiViewExact
 open import DASHI.Biology.AnimalexicCrossPollinationExact
 open import DASHI.Biology.AnimalexicLexicIntegrationExact
 open import DASHI.Biology.AnimalexicRegression
