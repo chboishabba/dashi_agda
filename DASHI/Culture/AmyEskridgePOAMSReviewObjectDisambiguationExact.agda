@@ -83,15 +83,6 @@ canonicalPublicTMAuthorAttribution = public-tm-author-attribution
 
 ------------------------------------------------------------------------
 -- POLICY-REQUIRED RELEASE-AUTHORIZATION CARRIER
---
--- NASA NPR 2200.2C/2D requires NF-1676 (or the Center/EDAA equivalent) for STI
--- disseminated external to NASA and states that NASA STI is not released without
--- an approved DAA.  NTRS 20205010911 is a public NASA Technical Memorandum.
--- Therefore the public TM sits downstream of a required release-authorization
--- process.  This does NOT mean the POAMS-specific NF-1676 has been recovered,
--- nor that Amy's unnamed September-2020 review object has been identified with
--- M-1531.  It sharpens the acquisition target from 'maybe a DAA exists' to
--- 'recover the policy-required DAA/EDAA record and its associated STI object'.
 ------------------------------------------------------------------------
 
 record RequiredDAACarrier : Set where
@@ -114,6 +105,44 @@ poamsTMRequiredDAACarrier = required-daa-carrier
   "NASA NPR 2200.2C/2D STI publication/dissemination requirements"
   true true false false false
   "POAMS-specific NF-1676/EDAA or Center DAA record; routing/approval dates and restrictions; attached manuscript/version; same-object crosswalk to NTRS 20205010911; any primary correspondence tying Amy's September-2020 review object to that DAA object"
+
+------------------------------------------------------------------------
+-- MARSHALL EDAA IDENTIFIER-FAMILY DISCRIMINATOR
+--
+-- NASA's STI publication guide records Marshall as one of the Centers using the
+-- Agency Electronic Document Availability Authorization (EDAA / NF-1676B)
+-- workflow. Contemporaneous 2020 Marshall NTRS records expose report numbers in
+-- the form MSFC-E-DAA-TN##### (for example MSFC-E-DAA-TN77428 and
+-- MSFC-E-DAA-TN79181-1/-2). This pays an identifier-family search constraint,
+-- not a POAMS identifier. NTRS 20205010911 currently exposes M-1531 but not an
+-- MSFC-E-DAA number on its public citation page, so an exact number must not be
+-- guessed from the NTRS ID, M-1531, funding suffix, or neighboring records.
+------------------------------------------------------------------------
+
+record MarshallEDAAIdentifierFamily : Set where
+  constructor marshall-edaa-identifier-family
+  field
+    center : String
+    workflow : String
+    observed2020IdentifierFamily : String
+    primaryExamples : String
+    poamsExactEDAAIdentifierRecovered : Bool
+    ntrsPageExposesPOAMSEDAAIdentifier : Bool
+    identifierMayBeInferredFromM1531 : Bool
+    identifierMayBeInferredFromNTRSID : Bool
+    identifierMayBeInferredFromFundingSuffix : Bool
+    targetedSearchSurface : String
+
+open MarshallEDAAIdentifierFamily public
+
+poamsMarshallEDAAIdentifierFamily : MarshallEDAAIdentifierFamily
+poamsMarshallEDAAIdentifierFamily = marshall-edaa-identifier-family
+  "NASA Marshall Space Flight Center"
+  "Agency EDAA / NF-1676B release-authorization workflow"
+  "MSFC-E-DAA-TN##### with possible manifestation suffixes such as -1/-2"
+  "NASA STI publishing guide; NTRS 20200001187 = MSFC-E-DAA-TN77428; NTRS 20200003509/20200003510 = MSFC-E-DAA-TN79181-1/-2"
+  false false false false false
+  "Marshall EDAA/NF-1676B records around late 2020 tied to M-1531, NTRS 20205010911, R.H. Eskridge, M.A. Nelson, M.P. Schoenfeld, POAMS, SAA8-1519855, or funding MSFC-RMB-QUANTUM-SAA8-1519855-1; require attached-object/version crosswalk before identity promotion"
 
 ------------------------------------------------------------------------
 -- Existing object-lineage facts constrain the fork.
@@ -194,6 +223,8 @@ record ReviewReferentBoundary : Set where
     transitionRoleCreatesAmyAuthorship : Bool
     policyRequiredDAAImpliesAmyReviewObjectEqualsPublicTM : Bool
     policyRequiredDAAImpliesInstituteDerivativeReleased : Bool
+    marshallEDAAFamilyImpliesExactPOAMSIdentifier : Bool
+    neighboringEDAANumbersMayBeInterpolated : Bool
 
 open ReviewReferentBoundary public
 
@@ -203,3 +234,4 @@ canonicalReviewReferentBoundary =
     false false false false
     true true false false
     false false false false
+    false false
