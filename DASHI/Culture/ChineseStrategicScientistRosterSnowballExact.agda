@@ -172,8 +172,46 @@ yanHong = chinese-strategic-scientist-work
   "primary NPU faculty/project/publication carrier, then exact event/death same-person weld"
 
 ------------------------------------------------------------------------
--- The nine named cases do not license an invented tenth identity.
+-- ROSTER CARDINALITY PROVENANCE
+--
+-- NewsNation/Yahoo/AOL copy says "at least 10 scientists in China" but the
+-- repeatedly enumerated roster surfaced in Newsweek-derived and other reports
+-- names nine people.  Cardinality and identity are therefore separate source
+-- claims.  A headline/count cannot manufacture an unnamed person.
 ------------------------------------------------------------------------
+
+record RosterCardinalityClaim : Set where
+  constructor roster-cardinality-claim
+  field
+    sourceReference : String
+    claimedLowerBound : Nat
+    enumeratedNamedPeople : Nat
+    exactAdditionalIdentitySupplied : Bool
+    sourceClass : String
+    boundedReading : String
+
+open RosterCardinalityClaim public
+
+newsNationAtLeastTenClaim : RosterCardinalityClaim
+newsNationAtLeastTenClaim = roster-cardinality-claim
+  "NewsNation Morning in America 2026-04-24 as syndicated by Yahoo/AOL"
+  10
+  0
+  false
+  "secondary broadcast/reporting claim"
+  "Pays only that NewsNation reported a lower bound of at least ten; it does not identify person ten."
+
+enumeratedNineClaim : RosterCardinalityClaim
+enumeratedNineClaim = roster-cardinality-claim
+  "Newsweek-derived / India Today / NDTV / other enumerated reporting"
+  9
+  9
+  false
+  "secondary enumerated roster"
+  "Pays nine named discovery identities: Chen Shuming, Feng Yanghe, Zhou Guangyuan, Liu Donghao, Zhang Xiaoxin, Zhang Daibing, Li Minyong, Fang Daining and Yan Hong."
+
+tenthIdentityUnresolved : Bool
+tenthIdentityUnresolved = true
 
 ninthNamedCaseDoesNotCreateTenth : Bool
 ninthNamedCaseDoesNotCreateTenth = true
@@ -187,7 +225,9 @@ record ChineseRosterBoundary : Set where
     workMayBeRetainedWithoutPromotingEventCause : Bool
     usAndChinaRostersMayBeMergedByNarrative : Bool
     exactCrossNationalMechanismStillRequired : Bool
+    reportedCardinalityCreatesUnnamedPersonIdentity : Bool
+    conflictingNineVsTenReportingIsAcquisitionResidual : Bool
 
 canonicalChineseRosterBoundary : ChineseRosterBoundary
 canonicalChineseRosterBoundary = chinese-roster-boundary
-  false false true true false true
+  false false true true false true false true
