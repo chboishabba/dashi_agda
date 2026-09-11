@@ -86,7 +86,7 @@ ipacGrillmairCV =
     "Records the 2011 NASA Astrophysics Data Analysis proposal 'Stellar Debris Streams: Probing The Galactic Dark Matter Distribution with WISE and 2MASS' with PI Grillmair."
 
 grillmairPICitation : Citation.AttributionWithCitation
-grillmairPICitation =
+ipacGrillmairPICitation =
   Citation.attribution-with-citation Atlas.grillmairStreamDistancePI ipacGrillmairCV
 
 thomasVPS342014 : Citation.ScientificCitation
@@ -284,7 +284,7 @@ open SnowballAttributionBoundary public
 
 canonicalSnowballAttributionBoundary : SnowballAttributionBoundary
 canonicalSnowballAttributionBoundary = snowball-attribution-boundary
-  true true true false false false false false false
+  true true true true true true true true true
 
 record ExtendedSourceCoverageBoundary : Set where
   constructor extended-source-coverage-boundary
