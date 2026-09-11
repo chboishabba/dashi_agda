@@ -63,6 +63,16 @@ calState2021Jacinto = reza-role-source-carrier
   false true true
   "Primary institutional carrier for the Monica Jacinto identity and pre-JPL Aerojet Rocketdyne role. It provides a high-confidence historical identity lineage but does not itself weld Jacinto to the later Monica Reza event-time identity."
 
+aiaaSciTech2023Jacinto : RezaRoleSourceCarrier
+aiaaSciTech2023Jacinto = reza-role-source-carrier
+  primaryHistoricalIdentityRecord
+  "AIAA SciTech 2023 History of Materials joint special-session Call for Papers"
+  "AIAA SciTech 2023; conference 2023-01-23 through 2023-01-27"
+  "https://www.aiaa.org/docs/default-source/uploadedfiles/aiaa-scitech-forum/callforpapers/mat-adf-v2.pdf"
+  "Dr. Monica Jacinto; Aerojet Rocketdyne; organizer/contact for the History of Materials special session"
+  false true true
+  "Primary AIAA professional-society carrier placing the Monica Jacinto identity at Aerojet Rocketdyne in the 2023 SciTech cycle. It narrows the pre-JPL transition window but does not pay the later surname Reza, JPL employment, or a transition date."
+
 californiaDOJ2026Alias : RezaRoleSourceCarrier
 californiaDOJ2026Alias = reza-role-source-carrier
   primaryLawEnforcementIdentityRecord
@@ -232,7 +242,7 @@ canonicalRezaRoleEvidenceState : RezaRoleEvidenceState
 canonicalRezaRoleEvidenceState = reza-role-evidence-state
   true true true true true false true false true true true
   false false false false
-  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. Patent facsimile/assignment metadata pay Monica A. Jacinto inventorship and the 2004 assignment to Boeing; Boeing and Cal State independently pay a long Monica Jacinto materials-engineering/Mondaloy lineage. Rendered patent metadata normalises the middle initial away. The remaining identity debt is exact Monica A. Jacinto -> Monica Andrea Jacinto/Reza; independently, the JPL event-time role remains unpaid by an employer record."
+  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. Patent facsimile/assignment metadata pay Monica A. Jacinto inventorship and the 2004 assignment to Boeing; Boeing, Cal State and AIAA independently pay a long Monica Jacinto materials-engineering lineage through the 2023 SciTech cycle. Rendered patent metadata normalises the middle initial away. The remaining identity debt is exact Monica A. Jacinto -> Monica Andrea Jacinto/Reza; independently, the JPL event-time role remains unpaid by an employer record."
   "recover a primary carrier tying the patent/Mondaloy inventor identity Monica A. Jacinto to Monica Andrea Jacinto or Monica Jacinto Reza; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role"
 
 ------------------------------------------------------------------------
