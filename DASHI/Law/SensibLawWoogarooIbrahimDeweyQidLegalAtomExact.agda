@@ -44,14 +44,38 @@ koalaQid = Id.itemId "Q36101"
 habitatFragmentationQid : Id.ItemId
 habitatFragmentationQid = Id.itemId "Q913302"
 
+ecologicalConnectivityQid : Id.ItemId
+ecologicalConnectivityQid = Id.itemId "Q2993449"
+
+populationGeneticsQid : Id.ItemId
+populationGeneticsQid = Id.itemId "Q31151"
+
+geneFlowQid : Id.ItemId
+geneFlowQid = Id.itemId "Q143089"
+
+environmentalLawQid : Id.ItemId
+environmentalLawQid = Id.itemId "Q328798"
+
 queenslandQid : Id.ItemId
 queenslandQid = Id.itemId "Q36074"
 
 lawDewey : String
-lawDewey = "340.000"
+lawDewey = "344.046"
 
 biologyDewey : String
 biologyDewey = "570.000"
+
+koalaDewey : String
+koalaDewey = "599.25"
+
+fragmentationDewey : String
+fragmentationDewey = "577.27"
+
+populationGeneticsDewey : String
+populationGeneticsDewey = "576.58"
+
+conservationDewey : String
+conservationDewey = "333.95"
 
 ------------------------------------------------------------------------
 -- Attributed sources added by this cross-pollination.
@@ -59,14 +83,14 @@ biologyDewey = "570.000"
 
 ibrahim2017 : Source.AttributedSource
 ibrahim2017 = Source.mkDOISource
-  "Mostafa Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds"
-  "Wikipedia First Link Network"
-  "Journal of Computational Science 20, 118-126"
+  "Mark Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds"
+  "Connecting every bit of knowledge: The structure of Wikipedia's First Link Network"
+  "Journal of Computational Science 19, 21-30"
   "2017"
   "10.1016/j.jocs.2016.12.001"
   "https://doi.org/10.1016/j.jocs.2016.12.001"
   Source.academicArticleSource
-  "Method source for deterministic first-link/traversal analysis only; it does not supply ecological or legal evidence for Woogaroo."
+  "Primary methodological source for deterministic first-link/traversal analysis. The paper studies the English Wikipedia First Link Network built from a November 2014 snapshot. It supplies a discovery/navigation method only; it does not supply ecological or legal evidence for Woogaroo."
   Source.publicAttribution
 
 taclaEtAl2025 : Source.AttributedSource
@@ -95,8 +119,8 @@ ibrahimWoogarooSourceAtlas = Source.mkSourceAtlas
   "Traversal method plus current official/peer-reviewed koala science. DOI/QID/Dewey coordinates preserve identity and navigation only. General or regional science does not become same-object Springview evidence without a separate join."
 
 ------------------------------------------------------------------------
--- Knowledge coordinates. Broad Dewey parents are reused rather than
--- inventing highly specific decimal classes that are not owned by the repo.
+-- Knowledge coordinates. Specific Dewey/QID coordinates are used only where
+-- source-paid; unresolved granularity stays unresolved rather than inferred.
 ------------------------------------------------------------------------
 
 s102StatutoryCoordinate : Ibrahim.DashiKnowledgeCoordinate
@@ -104,14 +128,14 @@ s102StatutoryCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooS102LikelySignificantDetrimentalEffectCaseExact.agda"
   "Queensland NCA ss 12, 102-103 statutory consumer"
   lawDewey
-  (Id.rawItemId queenslandQid)
+  (Id.rawItemId environmentalLawQid)
   "Queensland Nature Conservation Act 1992 current text"
 
 koalaEntityCoordinate : Ibrahim.DashiKnowledgeCoordinate
 koalaEntityCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooS102LikelySignificantDetrimentalEffectCaseExact.agda"
   "Koala threatened-wildlife identity/status proposition"
-  biologyDewey
+  koalaDewey
   (Id.rawItemId koalaQid)
   "Queensland Government threatened-species status source"
 
@@ -119,15 +143,23 @@ fragmentationCoordinate : Ibrahim.DashiKnowledgeCoordinate
 fragmentationCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooKoalaScienceSnowballExact.agda"
   "habitat fragmentation / functional connectivity mechanism"
-  biologyDewey
+  fragmentationDewey
   (Id.rawItemId habitatFragmentationQid)
+  "doi:10.1002/2688-8319.70253"
+
+connectivityCoordinate : Ibrahim.DashiKnowledgeCoordinate
+connectivityCoordinate = Ibrahim.dashi-knowledge-coordinate
+  "DASHI/Law/SensibLawWoogarooKoalaScienceSnowballExact.agda"
+  "ecological / landscape connectivity"
+  biologyDewey
+  (Id.rawItemId ecologicalConnectivityQid)
   "doi:10.1002/2688-8319.70253"
 
 uqUrbanMovementCoordinate : Ibrahim.DashiKnowledgeCoordinate
 uqUrbanMovementCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooIbrahimDeweyQidLegalAtomExact.agda"
   "UQ urban koala movement mechanism source"
-  biologyDewey
+  koalaDewey
   (Id.rawItemId koalaQid)
   "doi:10.1071/AM24044"
 
@@ -135,15 +167,15 @@ genomicsCoordinate : Ibrahim.DashiKnowledgeCoordinate
 genomicsCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooKoalaScienceSnowballExact.agda"
   "range-wide koala genomics / population-structure source"
-  biologyDewey
-  (Id.rawItemId koalaQid)
+  populationGeneticsDewey
+  (Id.rawItemId populationGeneticsQid)
   "doi:10.1002/eap.3062"
 
 projectEcologyCoordinate : Ibrahim.DashiKnowledgeCoordinate
 projectEcologyCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooEvidenceDependencyMatrixExact.agda"
   "Springview/Woogaroo same-project SHG ecology"
-  biologyDewey
+  koalaDewey
   (Id.rawItemId koalaQid)
   "SHG 2019 project ecology / existing attributed project carrier"
 
@@ -152,7 +184,7 @@ s13EssentialityCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooS13EssentialityStressTestExact.agda"
   "Queensland NCA s 13 viable-population essentiality consumer"
   lawDewey
-  (Id.rawItemId queenslandQid)
+  (Id.rawItemId environmentalLawQid)
   "Queensland Nature Conservation Act 1992 s 13 current text"
 
 ------------------------------------------------------------------------
@@ -165,6 +197,13 @@ fragmentationSupportsS102 = Ibrahim.dashi-first-link-edge
   fragmentationCoordinate s102StatutoryCoordinate Ibrahim.crossPollinatesWith
   Ibrahim.canonicalDashiFirstLinkPolicy
   "Connectivity/fragmentation science supplies mechanism and expert-question structure; the s 102 legal conclusion still requires same-project/current evidence and Ministerial opinion."
+  true
+
+connectivitySupportsS13Method : Ibrahim.DashiFirstLinkEdge
+connectivitySupportsS13Method = Ibrahim.dashi-first-link-edge
+  connectivityCoordinate s13EssentialityCoordinate Ibrahim.crossPollinatesWith
+  Ibrahim.canonicalDashiFirstLinkPolicy
+  "The 2026 connectivity review makes realised functional connectivity and local-population validation higher-value than another unvalidated static corridor map. It does not identify the Springview population."
   true
 
 uqMovementSupportsS102 : Ibrahim.DashiFirstLinkEdge
