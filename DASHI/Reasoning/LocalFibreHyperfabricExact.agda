@@ -121,7 +121,7 @@ pantsPathSensitiveSplitCanConserveCapacity =
   Pants.phaseChangedCapacityConservative
 
 braidCrossingRetainsIdentity :
-  Braid.coordinationWithoutFusion Braid.canonicalBraidedEvidenceBoundary ≡ true
+  Braid.BraidedEvidenceBoundary.coordinationWithoutFusion Braid.canonicalBraidedEvidenceBoundary ≡ true
 braidCrossingRetainsIdentity = refl
 
 hypercubeCarrierDoesNotFixTransitionGeometry :

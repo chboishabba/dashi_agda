@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.ProofCarryingRuleApplicationExact as RuleProof
 import DASHI.Reasoning.TypedHyperfabricCore as Hyper
+open Hyper using (obstructedEdge; residual; obstructionProvenance; obstructionReceipt)
 
 data ProofMotif : Set where
   premiseMotif : ProofMotif
@@ -90,9 +91,9 @@ ruleRestrict :
   RuleIncidence vertex edge →
   ruleVertexStalk {system = system} vertex →
   ruleEdgeStalk {system = system} edge
-ruleRestrict (sourceIncidence state selected) localState =
-  localState , RuleProof.applySelected _ selected
-ruleRestrict (targetIncidence state selected) localState =
+ruleRestrict {State} {Rule} {system} (sourceIncidence state selected) localState =
+  localState , RuleProof.applySelected system selected
+ruleRestrict {State} {Rule} {system} (targetIncidence state selected) localState =
   state , localState
 
 ruleEdgeProvenance :
@@ -114,12 +115,12 @@ proofRuleHyperfabric :
   (system : RuleProof.RuleApplicationSystem State Rule) →
   Hyper.TypedHyperfabric State (RuleOccurrence system)
 proofRuleHyperfabric system = record
-  { vertexStalk = ruleVertexStalk
-  ; edgeStalk = ruleEdgeStalk
-  ; incidence = RuleIncidence
-  ; restrict = ruleRestrict
-  ; edgeProvenance = ruleEdgeProvenance
-  ; edgeSalience = ruleEdgeSalience
+  { vertexStalk = ruleVertexStalk {system = system}
+  ; edgeStalk = ruleEdgeStalk {system = system}
+  ; incidence = RuleIncidence {system = system}
+  ; restrict = ruleRestrict {system = system}
+  ; edgeProvenance = ruleEdgeProvenance {system = system}
+  ; edgeSalience = ruleEdgeSalience {system = system}
   ; fabricLabel = "proof-carrying textile rule hyperfabric"
   }
 
@@ -196,14 +197,14 @@ certifiedTraceToWellFormedFabric :
 certifiedTraceToWellFormedFabric assignment trace =
   trace , compileCertifiedTrace assignment trace
 
-wellFormedFabricCarriesCertifiedTrace :
+wellFormedFabricToCertifiedTrace :
   {State Rule : Set}
   {system : RuleProof.RuleApplicationSystem State Rule}
   {assignment : MotifAssignment Rule}
   {state : State} →
   WellFormedProofFabric system assignment state →
   RuleProof.CertifiedRuleTrace system state
-wellFormedFabricCarriesCertifiedTrace = proj₁
+wellFormedFabricToCertifiedTrace = proj₁
 
 record MotifMismatch
     {State Rule : Set}
@@ -224,14 +225,14 @@ motifMismatchObstruction :
   (assignment : MotifAssignment Rule) →
   (bad : MotifMismatch {system = system} assignment) →
   Hyper.HyperfabricObstruction
+    {Residual = MotifMismatch {system = system} assignment}
     (proofRuleHyperfabric system)
-    (MotifMismatch {system = system} assignment)
 motifMismatchObstruction assignment bad = record
-  { Hyper.obstructedEdge = occurrence bad
-  ; Hyper.residual = bad
-  ; Hyper.obstructionProvenance =
+  { obstructedEdge = occurrence bad
+  ; residual = bad
+  ; obstructionProvenance =
       "physical proof motif disagrees with the rule assigned to this proof-carrying edge" ∷ []
-  ; Hyper.obstructionReceipt =
+  ; obstructionReceipt =
       "proof-fabric local compatibility failure"
   }
 

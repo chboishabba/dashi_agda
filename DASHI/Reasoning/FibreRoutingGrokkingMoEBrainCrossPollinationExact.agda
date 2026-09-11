@@ -170,10 +170,10 @@ reflectiveRouteRemainsSparse :
 reflectiveRouteRemainsSparse = MoE.reflectiveRouteIsSparse
 
 brainMoERemainsAnalogyOnly :
-  MoE.literalBrainMoEArchitecturePromoted
+  MoE.SparseExpertCoalitionBoundary.literalBrainMoEArchitecturePromoted
     MoE.canonicalSparseExpertCoalitionBoundary ≡ false
 brainMoERemainsAnalogyOnly =
-  MoE.literalBrainMoEArchitecturePromotedIsFalse
+  MoE.SparseExpertCoalitionBoundary.literalBrainMoEArchitecturePromotedIsFalse
     MoE.canonicalSparseExpertCoalitionBoundary
 
 ------------------------------------------------------------------------

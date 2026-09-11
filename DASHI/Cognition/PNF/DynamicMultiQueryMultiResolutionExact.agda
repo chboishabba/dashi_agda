@@ -107,12 +107,6 @@ traceObservationFactorsThroughEvolvedRetainedCarrier system queries fine =
       (observeRetained system)
       (compressCommutesWithEveryQueryTrace system queries fine)
       (localResidualCommutesWithEveryQueryTrace system queries fine))
-  where
-    cong₂ :
-      ∀ {A B C : Set} (f : A → B → C)
-        {a a′ : A} {b b′ : B} →
-      a ≡ a′ → b ≡ b′ → f a b ≡ f a′ b′
-    cong₂ f refl refl = refl
 
 sameInitialRetainedCarrierImpliesSameObservationAfterEveryQueryTrace :
   ∀ {Fine Coarse Local Query Observation}
@@ -133,12 +127,6 @@ sameInitialRetainedCarrierImpliesSameObservationAfterEveryQueryTrace
         (cong (runCoarse system queries) coarseEqual)
         (cong (runLocal system queries) localEqual))
       (sym (traceObservationFactorsThroughEvolvedRetainedCarrier system queries right)))
-  where
-    cong₂ :
-      ∀ {A B C : Set} (f : A → B → C)
-        {a a′ : A} {b b′ : B} →
-      a ≡ a′ → b ≡ b′ → f a b ≡ f a′ b′
-    cong₂ f refl refl = refl
 
 ------------------------------------------------------------------------
 -- This is the state-abstraction theorem missing from one-query factorization:
