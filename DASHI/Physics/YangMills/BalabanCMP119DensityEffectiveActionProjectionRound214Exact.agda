@@ -128,8 +128,9 @@ rawInterpretationAsCompleteDensityActionRepresentation :
     {RawBackground} {Fluctuation} {Action} {WilsonTerm} {SmallFieldTerm}
     {RTerm} {BoundaryTerm} {Vacuum} source →
   CMP119CompleteDensityActionRepresentation inputs
-rawInterpretationAsCompleteDensityActionRepresentation {source = source} bridge = record
-  { CMP119CompleteDensityActionRepresentation.Background = _
+rawInterpretationAsCompleteDensityActionRepresentation
+    {RawBackground = RawBackground} {source = source} bridge = record
+  { CMP119CompleteDensityActionRepresentation.Background = RawBackground
   ; CMP119CompleteDensityActionRepresentation.effectiveActionOfDensity =
       λ density background →
         evaluateAction bridge (actionOfDensity bridge density) background
