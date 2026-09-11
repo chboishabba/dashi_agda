@@ -100,13 +100,16 @@ The same is true for prestart records, execution-stage fauna/arborist records an
 
 ### Current s 102 evidence
 
-The current case has five strong components:
+The current case has several distinct supports:
 
 1. Koala is threatened wildlife under Queensland law.
 2. A concrete vegetation-clearing/earthworks process has been approved.
 3. Same-project ecology records Koala occurrence, habitat and connectivity.
 4. The project consultant itself reached a serious habitat-impact conclusion under the federal framework.
 5. Independent science supports fragmentation, connectivity loss, movement risk and population subdivision as real Koala harm mechanisms.
+6. Ipswich City Council's Koala Conservation Plan records **high historical Koala activity at Ric Nattrass Environmental Park on Woogaroo Creek** (score 8, activity level 3 under that plan's scheme), and Council separately describes that park as providing species connectivity from White Rock–Spring Mountain to the Brisbane River corridor.
+
+The Council records are useful independent local context, but they do **not** prove current Springview occupancy or realised movement through the development site.
 
 The missing bridge is still a current, independent ecological opinion applying the **Queensland** test to this project:
 
@@ -127,52 +130,57 @@ The case should also carry:
 
 ---
 
-## 3. Queensland critical habitat — Nature Conservation Act s 13
+## 3. Queensland critical habitat — what s 13 actually does
 
-Section 13 asks whether habitat is **essential for conservation of a viable population of protected wildlife or a community of native wildlife**. Present occupation is not required.
+**Section 13 is a definition, not a standalone public application or declaration procedure.**
 
-The Springview material already provides strong habitat-function evidence. The real remaining questions are population identity and essentiality.
+It defines critical habitat as habitat **essential for conservation of a viable population of protected wildlife or a community of native wildlife**. The habitat may include land not presently occupied by the wildlife.
 
-### A significant new population lead
+That definition can matter in several operative parts of the Act, including:
 
-The **Scenic Rim 2024 Koala population study** (Olivia Woosnam and Fiona E. Hogan; Scenic Rim Regional Council / Federation University / WildDNA / OWAD Environment; DOI `10.13140/RG.2.2.24954.20163`) used non-invasive genetic sampling and identified several contemporary population clusters.
+- the Minister's opinion under s 102;
+- a conservation plan under s 120H;
+- identification by regulation; and
+- the compulsory nature-refuge route under s 49.
 
-The report identifies **SEQ-03** as a genetic reservoir of high conservation significance, records asymmetric migration toward that cluster, and describes its landscape as highly fragmented and under increasing urban/industrial development pressure, particularly in the Ipswich and Logan regions.
+So the useful task is not to prepare a fictional “s 13 application”. It is to build the **essentiality evidence** and then put it into the legal mechanism that can actually act on it.
 
-Ipswich City Council separately states that the Ipswich Koala population is regionally significant because of its size and genetic uniqueness.
+### Population identity is now the main ecological question
 
-This materially narrows the population question, but it does **not** establish that Springview/Woogaroo Koalas belong to SEQ-03.
+The Springview material already provides strong habitat-function evidence. The main remaining factual questions are:
 
-The next population question is now:
+1. what is the relevant viable Koala population or community; and
+2. is the Springview/Opossum-Woogaroo habitat essential to conserving it?
 
-> Can existing Ipswich monitoring, genetics, rescue/sighting records or other local evidence place Springview/Woogaroo Koalas within SEQ-03 or another independently characterised local/subregional population?
+The evidence should test what happens to persistence, movement/dispersal, breeding/recruitment, access to food/resource patches, gene flow and resilience if the habitat is removed or functionally severed.
 
-If that identity can be established, the next s 13 question is:
+### Regional genetic evidence — useful, but labels must not be merged casually
 
-> What happens to that population if the Springview/Opossum-Woogaroo habitat is removed or functionally severed?
+Two current source lineages use different cluster labels:
 
-The analysis should consider persistence, movement/dispersal, breeding/recruitment, access to food/resource patches, gene flow, resilience under future development and whether nearby habitat can perform the same function now.
+- the **Scenic Rim 2024 Koala population study** (Olivia Woosnam and Fiona E. Hogan; DOI `10.13140/RG.2.2.24954.20163`) identifies several contemporary Scenic Rim genetic clusters and reports asymmetric migration toward a cluster labelled **SEQ-03**;
+- the **OWAD Tarnbrae Koala survey** (Olivia Woosnam, 2023; incorporated in the government-hosted approved DEV2023/1413 assessment material) uses the label **SEQ West**. It says that this cluster had been detected in Brisbane, Lockyer Valley, Ipswich and Scenic Rim, but also expressly says that assigning an individual site to that population requires reliable local DNA profiles.
+
+The 2018 Brisbane City Council Koala Population Study (Olivia Woosnam, Alex Dudkowski, Fiona Hogan and Faye Wedrowicz; DOI `10.13140/RG.2.2.35284.12164`) is the published-map lineage cited by the Tarnbrae report. Its cluster map is landscape-scale and warns against fine-scale interpretation.
+
+At present we should **not assume SEQ-03 and SEQ West are the same cluster label** unless an authoritative crosswalk is located.
+
+And even if they are the same cluster, that would still not prove that Springview/Woogaroo Koalas belong to it.
 
 ### Existing local monitoring should be obtained before commissioning duplicate work
 
-Council's own **Koala Conservation and Habitat Management Plan** describes recurring monitoring and reporting, including:
+Council's Koala Conservation Plan and Biolink's public project descriptions establish a substantial local monitoring lineage:
 
-- detailed analysis of Koala records every two years;
-- biennial Koala-activity monitoring in Council's Natural Area Estate; and
-- monitoring/reporting of fauna-management measures where Springfield borders core Koala habitat.
+- a 2020 Ipswich baseline survey across Mount Grandchester, Flinders–Goolman and White Rock–Spring Mountain, using 63 SAT/Rapid-SAT sites;
+- a repeat 2023 round;
+- a 2025 third round using 83 permanent Council-estate sites plus 10 private conservation-agreement properties; and
+- recurring Council monitoring/reporting expectations, including Springfield-border fauna-management work.
 
-Biolink's public project descriptions confirm:
+These sources establish that relevant monitoring exists. They do not tell us the unseen results.
 
-- a 2020 Ipswich baseline survey covering Mount Grandchester, Flinders–Goolman and White Rock–Spring Mountain using 63 SAT/Rapid-SAT sites; and
-- a 2025 third monitoring round after 2020 and 2023, using 83 permanent Council-estate sites plus 10 private conservation-agreement properties and combining field results with sighting records.
+The next acquisition should therefore be the underlying 2020, 2023 and 2025 reports/data, especially any White Rock–Spring Mountain, Woogaroo/Opossum, genetic, occupancy, activity or population-change results.
 
-Council's public registers also say monitoring programs undertaken under environmental legislation or development conditions, and their results, can be requested from Council.
-
-These sources establish that relevant monitoring programs and reporting pathways exist. They do **not** establish what the unseen results show.
-
-A ready-to-use records request is in:
-
-`Docs/SaveWoogarooForestKoalaMonitoringRecordsRequest.md`
+Only if those existing records cannot resolve population identity should targeted new non-invasive genetics become the next step.
 
 ### Current s 13 position
 
@@ -181,13 +189,13 @@ Strongly supported:
 - exact-project habitat function;
 - Koala occurrence evidence;
 - >500 ha connected-landscape evidence;
-- independent local-government corridor/population context;
-- regional population-genetic structure;
-- a contemporary SEQ-03 genetic-reservoir candidate; and
-- independent science showing that realised connectivity/gene flow matters.
+- independent Council local activity/corridor evidence;
+- regional population-genetic differentiation; and
+- independent science showing that functional connectivity and gene flow matter.
 
 Still open:
 
+- whether SEQ-03 and SEQ West are the same cluster label;
 - the exact local/subregional population to which Springview/Woogaroo Koalas belong;
 - realised functional connectivity through the relevant habitat; and
 - the without-site counterfactual needed to decide whether this habitat is legally **essential**.
@@ -196,7 +204,19 @@ SHG's recovery-value-0/non-viability reasoning remains the strongest contrary pr
 
 ---
 
-## 4. EPBC s 43B — historical clearing exemption
+## 4. Permanent protection — s 49 and conservation-plan routes
+
+Section 49 is a separate route. It can support compulsory declaration of a nature refuge where, among other prerequisites, the Minister and landholders have been unable to agree and the Minister considers the area to be or include critical habitat or an area of major interest and considers it should be a nature refuge. The Governor in Council may then declare the area by regulation after objections are considered.
+
+This means a strong critical-habitat case is useful, but it is **not itself a declaration** and does not bypass the s 49 procedural requirements.
+
+Section 120H is also relevant: the Minister may prepare a conservation plan for native wildlife, habitat or an area of major interest, and a conservation plan may regulate use or development in an area it identifies as critical habitat or an area of major interest. A conservation plan only takes effect once approved by the Governor in Council.
+
+Counsel should therefore advise which of these routes is realistically available and fastest for the present facts.
+
+---
+
+## 5. EPBC s 43B — historical clearing exemption
 
 The current EPBC Act narrows the lawful-continuation exemption for vegetation clearing where land has not been cleared for at least 15 years, subject to the statutory forestry exception.
 
@@ -214,7 +234,7 @@ If actual s 43B reliance is found, reconstruct:
 
 ---
 
-## 5. Offsets and planning exemptions
+## 6. Offsets and planning exemptions
 
 The local approval chain identified includes:
 
@@ -232,7 +252,7 @@ A remote offset is not automatically inadequate, and a larger number of hectares
 
 ---
 
-## 6. Current wildlife observations
+## 7. Current wildlife observations
 
 FrogID records supplied by the observer include:
 
@@ -245,15 +265,16 @@ The project ecology separately identifies Woogaroo and Opossum Creeks as potenti
 
 ---
 
-## 7. Highest-priority actions now
+## 8. Highest-priority actions now
 
 1. **Obtain the substantive 2026 federal Preliminary Documentation and response to the 1,786 comments.**
-2. **Obtain Condition 6(a), prestart and commencement records for 9281/2024/OW.**
-3. **Obtain one independent current ecological opinion on the s 102 likely-significant-detrimental-effect question.**
+2. **Obtain one independent current ecological opinion on the s 102 likely-significant-detrimental-effect question.**
+3. **Obtain Condition 6(a), prestart and commencement records for 9281/2024/OW.**
 4. **Request the existing Ipswich/Biolink 2020, 2023 and 2025 Koala monitoring outputs and Springfield fauna-management monitoring before commissioning duplicate fieldwork.**
-5. **Use those records to test whether Springview/Woogaroo Koalas can be joined to SEQ-03 or another defensible population/subpopulation.**
-6. **If population identity can be resolved, assess the without-site persistence/connectivity counterfactual for s 13.**
-7. **Continue the offset/additionality and exact exemption audits.**
-8. **Keep s 43B secondary unless an actual reliance record appears.**
+5. **Resolve the SEQ-03 / SEQ-West terminology if possible, then use local monitoring/genetic evidence to identify the population actually relevant to Springview/Woogaroo.**
+6. **If population identity can be resolved, assess the without-site persistence/connectivity counterfactual against the s 13 definition.**
+7. **Ask counsel which operative route should carry that critical-habitat evidence: s 102, a conservation plan/regulation, s 49, or another available mechanism.**
+8. **Continue the offset/additionality and exact exemption audits.**
+9. **Keep s 43B secondary unless an actual reliance record appears.**
 
-GIS, LiDAR and tree/canopy mapping remain useful supporting evidence, especially for mature-existing versus planted/regrowth habitat and spatial quantification, but they are not prerequisites to the present s 102 or s 13 legal questions.
+GIS, LiDAR and tree/canopy mapping remain useful supporting evidence, especially for mature-existing versus planted/regrowth habitat and spatial quantification, but they are not prerequisites to the present s 102 or critical-habitat questions.
