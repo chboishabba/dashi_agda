@@ -4,12 +4,17 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
-import DASHI.ComputerScience.RSA260BidiFineIncidencePredictorExact as Predictor
+import DASHI.ComputerScience.RSA260BidiFineIncidenceInterpolationExact as Interpolation
+import DASHI.ComputerScience.RSA260BidiTwoHopCommonNeighbourFibreExact as TwoHop
 import DASHI.ComputerScience.RSA260BlockWiedemannProductionScaleReconstructionExact as Scale
 import DASHI.ComputerScience.RSA260CADOBlockWiedemannArtifactSchemaSnowballExact as CADO
 
 ------------------------------------------------------------------------
 -- FINE-INCIDENCE DEFECT-COVERAGE BIDI EXPERIMENT
+--
+-- Refinement of the existing one-swap-per-row fragility owner.  Instead of
+-- touching every row, hold the intervention strength at exactly one support
+-- replacement per touched row and vary only COVERAGE across the carrier.
 --
 -- Preserve the complete coarse executable shadow contract:
 --   924 x 512 over GF(2)
@@ -18,22 +23,23 @@ import DASHI.ComputerScience.RSA260CADOBlockWiedemannArtifactSchemaSnowballExact
 --   fixed CADO-shaped 4x4 preparation analogue
 --   fixed projection seed.
 --
--- Intervention: replace exactly one support coordinate in an increasing
--- number of rows.  The first held-out-valid shared-generator degrees are:
---
 -- touched rows : 0  1  2  4  8  16  32  64  128  256  512  924
 -- degree       :16 16 17 18 18  20  23  30   46   63   66   65
 --
--- Therefore recurrence compressibility is robust to isolated local defects
--- but degrades with defect COVERAGE across the carrier, while rank/nullity and
--- the eventual kernel consumer remain unchanged.
+-- The prior owner established that one swap in EVERY row destroys the tested
+-- low-degree presentation.  This owner resolves that transition: isolated
+-- local defects are tolerated and recurrence complexity rises with defect
+-- coverage, while rank/nullity and the eventual kernel consumer remain paid.
 --
 -- This is a synthetic candidate experiment.  It does not measure fine
 -- incidence on the historical RSA-260 matrix.
 ------------------------------------------------------------------------
 
-predictorBoundary : Predictor.FineIncidencePredictorBoundary
-predictorBoundary = Predictor.canonicalFineIncidencePredictorBoundary
+interpolationBoundary : Interpolation.FineIncidenceFragilityBoundary
+interpolationBoundary = Interpolation.canonicalFineIncidenceFragilityBoundary
+
+twoHopBoundary : TwoHop.TwoHopInterpretationBoundary
+twoHopBoundary = TwoHop.canonicalTwoHopInterpretationBoundary
 
 productionScaleAtlas : Scale.ProductionScaleSourceAtlas
 productionScaleAtlas = Scale.currentProductionScaleSourceAtlas
@@ -77,11 +83,11 @@ record DefectCoverageReceipt : Set where
     allLevelsFullRank : Bool
     allLevelsLeftNullity412 : Bool
     allLevelsRecoverConsumer : Bool
-    baselineTouchedRows : Nat
     baselineGeneratorDegree : Nat
     oneRowGeneratorDegree : Nat
     twoRowGeneratorDegree : Nat
     fourRowGeneratorDegree : Nat
+    eightRowGeneratorDegree : Nat
     sixteenRowGeneratorDegree : Nat
     thirtyTwoRowGeneratorDegree : Nat
     sixtyFourRowGeneratorDegree : Nat
@@ -98,20 +104,20 @@ currentDefectCoverageReceipt = defect-coverage-receipt
   12
   1
   true true true
-  0 16
-  16 17 18
-  20 23 30 46 63 66 65
+  16 16 17 18 18 20 23 30 46 63 66 65
   66
 
 record DefectCoverageInterpretationBoundary : Set where
   constructor defect-coverage-interpretation-boundary
   field
     isolatedSingleRowDefectDestroysCompressibility : Bool
+    oneSwapEveryRowDestroysTestedLowDegreePresentation : Bool
     broadDefectCoverageRaisesGeneratorComplexity : Bool
     coarseRankNullityExplainsObservedDegreeCurve : Bool
     consumerAdequacySurvivesEveryTestedCoverageLevel : Bool
     defectCoverageIsCandidateStructuralFibre : Bool
-    adjacencyMeanAloneIsCompleteDegreePredictor : Bool
+    oneHopAdjacencyMeanIsCompleteDegreePredictor : Bool
+    twoHopPortfolioAlreadyPaidByPriorOwner : Bool
     syntheticCoverageCurveIsProductionMeasurement : Bool
     historicalMatrixIdentityPaid : Bool
 open DefectCoverageInterpretationBoundary public
@@ -120,15 +126,17 @@ canonicalDefectCoverageInterpretationBoundary : DefectCoverageInterpretationBoun
 canonicalDefectCoverageInterpretationBoundary = defect-coverage-interpretation-boundary
   false
   true
+  true
   false
   true
   true
   false
+  true
   false
   false
 
 ------------------------------------------------------------------------
--- Snowball/identifier boundary inherited from the source-paid owners.
+-- Snowball/identifier coordinates are inherited rather than recopied.
 ------------------------------------------------------------------------
 
 scaleIdentityCoordinates : Scale.ProductionScaleIdentityCoordinates
@@ -138,13 +146,13 @@ cadoSnowballCoordinates : CADO.CADOArtifactSnowballCoordinates
 cadoSnowballCoordinates = CADO.currentCADOArtifactSnowballCoordinates
 
 ------------------------------------------------------------------------
--- Highest-alpha residuals.
+-- Highest-alpha residuals after the prior interpolation/two-hop owners.
 ------------------------------------------------------------------------
 
 data DefectCoverageResidual : Set where
   replicateCoverageCurveAcrossPerturbationSeeds : DefectCoverageResidual
-  addTwoHopAndCommonNeighbourCoverageFibres : DefectCoverageResidual
-  fitConsumerRelativeRecurrenceComplexityModel : DefectCoverageResidual
+  crossValidateCoverageCurveAcrossPreparationAndProjectionFibres : DefectCoverageResidual
+  fitCoverageAwareStructuralFibrePortfolio : DefectCoverageResidual
   measureCoverageFibresOnSameObjectProductionCarrier : DefectCoverageResidual
 
 firstDefectCoverageResidual : DefectCoverageResidual
@@ -157,6 +165,7 @@ firstDefectCoverageResidual = replicateCoverageCurveAcrossPerturbationSeeds
 data SyntheticCoverageImpliesProductionCoverage : Set where
 data OneStructuralFibreImpliesExactDegree : Set where
 data SameRankNullityImpliesSameRecurrenceComplexity : Set where
+data CoverageCurveImpliesUniversalThreshold : Set where
 data ConsumerSurvivalImpliesHistoricalIdentity : Set where
 
 syntheticCoverageDoesNotCreateProductionCoverage : SyntheticCoverageImpliesProductionCoverage → ⊥
@@ -167,6 +176,9 @@ oneStructuralFibreDoesNotCreateExactDegree ()
 
 sameRankNullityDoesNotCreateSameRecurrence : SameRankNullityImpliesSameRecurrenceComplexity → ⊥
 sameRankNullityDoesNotCreateSameRecurrence ()
+
+coverageCurveDoesNotCreateUniversalThreshold : CoverageCurveImpliesUniversalThreshold → ⊥
+coverageCurveDoesNotCreateUniversalThreshold ()
 
 consumerSurvivalDoesNotCreateHistoricalIdentity : ConsumerSurvivalImpliesHistoricalIdentity → ⊥
 consumerSurvivalDoesNotCreateHistoricalIdentity ()
