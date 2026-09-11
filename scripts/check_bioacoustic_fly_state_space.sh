@@ -42,6 +42,7 @@ assert fly["boundary"]["visual_proximity_implies_physical_or_anatomical_proximit
 PY
 
 bash scripts/check_bioacoustic_fly_si_units_static.sh
+bash scripts/check_gauthey_external_manifest_static.sh
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . DASHI/Biology/BioacousticFlyStateSpaceValidation.agda
