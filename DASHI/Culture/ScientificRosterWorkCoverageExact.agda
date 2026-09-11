@@ -6,10 +6,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- COVERAGE LEDGER, NOT A COMMON-THEOREM CLAIM
 --
--- This ledger exists to prevent roster members from being forgotten while also
--- preventing administrative/security roles from being manufactured into
--- scientific work.  Each entry points to the actual owner or to the reason no
--- science owner is admissible yet.
+-- Every retained roster identity gets a coverage row, but scientific work is
+-- attached only after person/object attribution is paid.  Similar names,
+-- institutions, programmes or later reporter groupings never manufacture an
+-- identity weld.
 ------------------------------------------------------------------------
 
 data WorkCoverageStatus : Set where
@@ -18,9 +18,9 @@ data WorkCoverageStatus : Set where
   programmeRoleImplemented : WorkCoverageStatus
   mechanismDiscriminationOwnerImplemented : WorkCoverageStatus
   nonScientificRoleNoScienceOwner : WorkCoverageStatus
+  personIdentityWeldPending : WorkCoverageStatus
   publicationIdentityWeldPending : WorkCoverageStatus
   additionalWorkSearchOpen : WorkCoverageStatus
-
 
 record WorkCoverageEntry : Set where
   constructor work-coverage-entry
@@ -39,15 +39,15 @@ loureiroCoverage = work-coverage-entry
   scientificOwnerImplemented
   "Viriato KREHM/KRMHD, Hermite hierarchy, free energy, plasmoid instability scaling"
   "DASHI.Physics.Plasma.LoureiroViriatoPlasmoidBidiExact"
-  "additional publication-specific equations only when source-acquired"
+  "student/advisor and grant reassignment, Viriato/KREHM repository custody and target-specific simulation-state continuation; center leadership and memorial teaching continuity do not pay these leaves"
 
 leblancCoverage : WorkCoverageEntry
 leblancCoverage = work-coverage-entry
-  "Joshua LeBlanc"
+  "Joshua Kyle LeBlanc"
   engineeringOwnerImplemented
   "Fission Surface Power instrumentation-and-controls technology maturation"
   "DASHI.Physics.Nuclear.LeBlancFissionSurfacePowerICBidiExact"
-  "subsystem-specific control/sensor models when source-owned"
+  "internal freeze/authorship date for the August-2025 role snapshot and first exact post-loss SNP I&C TechMat roster"
 
 maiwaldCoverage : WorkCoverageEntry
 maiwaldCoverage = work-coverage-entry
@@ -55,7 +55,7 @@ maiwaldCoverage = work-coverage-entry
   scientificOwnerImplemented
   "action spectroscopy plus planetary quadrupole-ion-trap mass spectrometry"
   "DASHI.Physics.Spectroscopy.MaiwaldActionSpectroscopyBidiExact + MaiwaldQuadrupoleIonTrapMassSpectrometryBidiExact"
-  "instrument-response equations and additional mass-spectrometry publications"
+  "crosswalk 2023 experimental spectra to exact raw/reduced datasets, calculations, figure versions and later publication manifestations"
 
 rezaCoverage : WorkCoverageEntry
 rezaCoverage = work-coverage-entry
@@ -63,7 +63,7 @@ rezaCoverage = work-coverage-entry
   engineeringOwnerImplemented
   "burn-resistant high-tensile nickel-alloy design"
   "DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact"
-  "processing/microstructure/property data from patent examples or later papers"
+  "primary JPL/Caltech event-time Materials Processing role record before person-specific process-window/succession claims"
 
 grillmairCoverage : WorkCoverageEntry
 grillmairCoverage = work-coverage-entry
@@ -71,15 +71,15 @@ grillmairCoverage = work-coverage-entry
   scientificOwnerImplemented
   "South Galactic Cap stellar-stream detection and Galactic-potential inference"
   "DASHI.Physics.Astrophysics.GrillmairStellarStreamBidiExact"
-  "stream-specific orbit/likelihood machinery when source-acquired"
+  "same-work/manuscript continuation only as a control; preserve the charged local-crime event fibre separately"
 
 hicksCoverage : WorkCoverageEntry
 hicksCoverage = work-coverage-entry
-  "Michael D. Hicks"
+  "Michael David Hicks"
   scientificOwnerImplemented
   "comet spectrophotometry, archived NEAT photometry, small-body physical inference"
   "DASHI.Physics.Planetary.HicksSmallBodyPhotometryBidiExact + HicksCometAsteroidSpecificWorksBidiExact"
-  "additional mission/publication-specific physical models"
+  "resolve 2022 JPL departure/unfinished-work transfer before treating 2023 death as a technical-removal event"
 
 mccaslandCoverage : WorkCoverageEntry
 mccaslandCoverage = work-coverage-entry
@@ -87,15 +87,27 @@ mccaslandCoverage = work-coverage-entry
   scientificOwnerImplemented
   "fault-tolerant sensor/actuator selection for flexible structures; later programme/space-system roles"
   "DASHI.Control.McCaslandFaultTolerantFlexibleStructureControlBidiExact + DASHI.Culture.McCaslandTechnicalProgrammeBidiExact"
-  "thesis algorithm details / finite-element examples if full thesis equations are acquired"
+  "date DBE Consulting role/status and recover a 2025-2026 client/programme carrier; stale ATA prose cannot pay event-time continuity"
 
-anthonyChavezCoverage : WorkCoverageEntry
-anthonyChavezCoverage = work-coverage-entry
-  "Anthony Chavez"
+------------------------------------------------------------------------
+-- Chavez identities are intentionally split.
+------------------------------------------------------------------------
+
+missingAnthonyChavezCoverage : WorkCoverageEntry
+missingAnthonyChavezCoverage = work-coverage-entry
+  "Anthony Chavez, missing Los Alamos resident, DOB 1947-01-07"
+  personIdentityWeldPending
+  "no scientific/engineering work attached to this missing-person identity yet"
+  "DASHI.Culture.ChavezApplicationTransformationPossessionExact"
+  "same-person receipt to the LANL Summer-2025 Anthony Chavez profile and/or Mark Anthony Chavez publication identity before any technical work is inherited"
+
+lanlAnthonyChavezCoverage : WorkCoverageEntry
+lanlAnthonyChavezCoverage = work-coverage-entry
+  "Anthony Chavez, LANL Summer-2025 engineering-profile identity"
   engineeringOwnerImplemented
-  "DARHT engineering and Scorpius accelerator design work"
+  "DARHT engineering and completed Scorpius accelerator design work"
   "DASHI.Physics.Accelerator.AnthonyChavezScorpiusBidiExact"
-  "publication authorship remains separate where identity is not welded"
+  "independently weld this institutional profile to the missing-person identity before event-time possession or disappearance analysis"
 
 markAnthonyChavezCoverage : WorkCoverageEntry
 markAnthonyChavezCoverage = work-coverage-entry
@@ -103,7 +115,7 @@ markAnthonyChavezCoverage = work-coverage-entry
   publicationIdentityWeldPending
   "compact permanent-magnet spectrometer calibration publication"
   "DASHI.Physics.Accelerator.AnthonyChavezPermanentMagnetSpectrometerCalibrationBidiExact"
-  "same-person receipt required before merging with Anthony Chavez roster identity"
+  "same-person receipt required before merging this publication identity with either other Chavez identity"
 
 jasonThomasCoverage : WorkCoverageEntry
 jasonThomasCoverage = work-coverage-entry
@@ -111,7 +123,7 @@ jasonThomasCoverage = work-coverage-entry
   scientificOwnerImplemented
   "STING-IRF3/NFkB chemical-biology screen and VPS34/NCOA4 ferritinophagy"
   "DASHI.Biology.JasonThomasSignallingBidiExact"
-  "publication-specific assay/kinetic detail when source-acquired"
+  "final Massachusetts medical-examiner identity/cause/manner if public; keep official preliminary no-foul-play statement distinct from final ME"
 
 amyEskridgeCoverage : WorkCoverageEntry
 amyEskridgeCoverage = work-coverage-entry
@@ -119,7 +131,7 @@ amyEskridgeCoverage = work-coverage-entry
   mechanismDiscriminationOwnerImplemented
   "engineered inertial/gravitational mechanism families discussed in her research programme"
   "DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact"
-  "attach authored experimental/paper object only when a primary work receipt is located"
+  "recover Amy-linked same-object release/transition receipt for the policy-required Marshall EDAA/STI object and exact Institute derivative; do not manufacture M-1531 authorship from transition role or surname"
 
 melissaCasiasCoverage : WorkCoverageEntry
 melissaCasiasCoverage = work-coverage-entry
@@ -127,23 +139,23 @@ melissaCasiasCoverage = work-coverage-entry
   nonScientificRoleNoScienceOwner
   "administrative LANL role"
   "DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact"
-  "do not create science owner without scientific-work receipt"
+  "primary New Mexico OMI autopsy/toxicology and law-enforcement carrier; undetermined manner does not pay homicide or suicide"
 
 stevenGarciaCoverage : WorkCoverageEntry
 stevenGarciaCoverage = work-coverage-entry
-  "Steven Garcia"
+  "Steven Abel Garcia"
   nonScientificRoleNoScienceOwner
-  "property-custodian role at Kansas City National Security Campus"
+  "reported property-custodian role associated with Kansas City National Security Campus"
   "DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact"
-  "do not create science owner without scientific-work receipt"
+  "primary employer/contract and property-accountability scope; New Mexico DPS pays missing-person identity/date only, not clearance or nuclear-secret access"
 
 matthewSullivanCoverage : WorkCoverageEntry
 matthewSullivanCoverage = work-coverage-entry
-  "Matthew Sullivan"
+  "Matthew James Sullivan"
   nonScientificRoleNoScienceOwner
-  "reported former Air Force intelligence role"
+  "former U.S. Air Force intelligence role"
   "DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact"
-  "do not create science owner without scientific-work receipt"
+  "primary cause/manner and any independently documented event-time programme/testimony obligation; anonymous later UAP/crash-retrieval claims remain separate"
 
 record CoverageBoundary : Set where
   constructor coverage-boundary
@@ -160,6 +172,12 @@ record CoverageBoundary : Set where
     separateWorksMayRemainMathematicallySeparate : Bool
     separateWorksMayRemainMathematicallySeparateIsTrue :
       separateWorksMayRemainMathematicallySeparate ≡ true
+    sameNameInstitutionAndTopicMayMergePersonIdentities : Bool
+    sameNameInstitutionAndTopicMayMergePersonIdentitiesIsFalse :
+      sameNameInstitutionAndTopicMayMergePersonIdentities ≡ false
+    transitionRoleMayCreateAuthorship : Bool
+    transitionRoleMayCreateAuthorshipIsFalse : transitionRoleMayCreateAuthorship ≡ false
 
 canonicalCoverageBoundary : CoverageBoundary
-canonicalCoverageBoundary = coverage-boundary false refl true refl false refl true refl
+canonicalCoverageBoundary = coverage-boundary
+  false refl true refl false refl true refl false refl false refl
