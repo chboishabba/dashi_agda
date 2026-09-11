@@ -61,13 +61,6 @@ instituteDerivativeLead = review-referent-lead
 
 ------------------------------------------------------------------------
 -- PRIMARY AUTHORSHIP ATTRIBUTION FIREWALL
---
--- NASA NTRS 20205010911 names R.H. Eskridge, M.A. Nelson and M.P. Schoenfeld
--- as authors of M-1531. Amy Eskridge is not a named author on the public TM.
--- Therefore even a future same-object receipt showing that this was the paper
--- Amy was transitioning/releasing would establish a transition/release role,
--- not authorship. The shared surname must never manufacture an Amy-authorship
--- edge.
 ------------------------------------------------------------------------
 
 record PublicTMAuthorAttribution : Set where
@@ -87,6 +80,40 @@ canonicalPublicTMAuthorAttribution = public-tm-author-attribution
   "NASA NTRS 20205010911 / NASA/TM-20205010911 / M-1531"
   "R.H. Eskridge; M.A. Nelson; M.P. Schoenfeld"
   false false false true
+
+------------------------------------------------------------------------
+-- POLICY-REQUIRED RELEASE-AUTHORIZATION CARRIER
+--
+-- NASA NPR 2200.2C/2D requires NF-1676 (or the Center/EDAA equivalent) for STI
+-- disseminated external to NASA and states that NASA STI is not released without
+-- an approved DAA.  NTRS 20205010911 is a public NASA Technical Memorandum.
+-- Therefore the public TM sits downstream of a required release-authorization
+-- process.  This does NOT mean the POAMS-specific NF-1676 has been recovered,
+-- nor that Amy's unnamed September-2020 review object has been identified with
+-- M-1531.  It sharpens the acquisition target from 'maybe a DAA exists' to
+-- 'recover the policy-required DAA/EDAA record and its associated STI object'.
+------------------------------------------------------------------------
+
+record RequiredDAACarrier : Set where
+  constructor required-daa-carrier
+  field
+    publicObject : String
+    governingPolicy : String
+    externalSTIRequiresDAA : Bool
+    releasedReportRequiresApprovedDAA : Bool
+    poamsSpecificDAARecovered : Bool
+    daaAttachedObjectIdentityRecovered : Bool
+    amyReviewObjectEqualsDAAObjectPaid : Bool
+    acquisitionTarget : String
+
+open RequiredDAACarrier public
+
+poamsTMRequiredDAACarrier : RequiredDAACarrier
+poamsTMRequiredDAACarrier = required-daa-carrier
+  "NASA/TM-20205010911 / M-1531 / NTRS 20205010911"
+  "NASA NPR 2200.2C/2D STI publication/dissemination requirements"
+  true true false false false
+  "POAMS-specific NF-1676/EDAA or Center DAA record; routing/approval dates and restrictions; attached manuscript/version; same-object crosswalk to NTRS 20205010911; any primary correspondence tying Amy's September-2020 review object to that DAA object"
 
 ------------------------------------------------------------------------
 -- Existing object-lineage facts constrain the fork.
@@ -165,6 +192,8 @@ record ReviewReferentBoundary : Set where
     resolvingReviewReferentCreatesDeathCausation : Bool
     sameSurnameCreatesAmyAuthorship : Bool
     transitionRoleCreatesAmyAuthorship : Bool
+    policyRequiredDAAImpliesAmyReviewObjectEqualsPublicTM : Bool
+    policyRequiredDAAImpliesInstituteDerivativeReleased : Bool
 
 open ReviewReferentBoundary public
 
@@ -173,4 +202,4 @@ canonicalReviewReferentBoundary =
   review-referent-boundary
     false false false false
     true true false false
-    false false
+    false false false false
