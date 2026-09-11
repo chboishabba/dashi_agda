@@ -190,8 +190,8 @@ jointQuotientDependsOnScaleShape = Traversal.dashi-first-link-edge
 senderBoundary : Sender.MaleCNSSenderScalarSnowballBoundary
 senderBoundary = Sender.canonicalMaleCNSSenderScalarSnowballBoundary
 
-scaleShapeBoundary : ScaleShape.MaleCNSScaleShapeSnowballBoundary
-scaleShapeBoundary = ScaleShape.canonicalMaleCNSScaleShapeSnowballBoundary
+scaleShapeBoundary : ScaleShape.MaleCNSScaleShapeBoundary
+scaleShapeBoundary = ScaleShape.canonicalMaleCNSScaleShapeBoundary
 
 causalBoundary : Causal.FibreSufficiencyCausalInterventionBoundary
 causalBoundary = Causal.canonicalFibreSufficiencyCausalInterventionBoundary
