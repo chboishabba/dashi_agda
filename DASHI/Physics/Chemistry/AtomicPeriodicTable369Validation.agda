@@ -9,15 +9,16 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AttributionLedgerExact as A
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoRegressionExact as X
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoAttributionExact as XA
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369DashiQFirstPublicSourceExact as DQ
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369IbrahimDeweyTraversalExact as ID
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 
 ------------------------------------------------------------------------
 -- Focused validation root.  Importing this module forces the generative
 -- formalism, provenance/snowball companion, chronology/status ledger,
--- DOI/QID/primary/Dewey attribution ledgers, first-public dashiQ source, and
--- cross-repository regression ledger through the Agda checker when this file
--- is actually checked.
+-- DOI/QID/primary/Dewey attribution ledgers, first-public dashiQ source,
+-- Ibrahim/Dewey traversal, and cross-repository regression ledger through the
+-- Agda checker when this file is actually checked.
 --
 -- The existence of this file is not itself a typecheck receipt.  See the
 -- chronology/status owner for the distinction between authored source and a
@@ -137,3 +138,31 @@ firstPublicSourceRegression :
     DQ.canonicalFirstPublicSourceBoundary
   ≡ false
 firstPublicSourceRegression = refl , (refl , refl)
+
+ibrahimDeweyNonPromotionRegression :
+  ID.IbrahimDeweyTraversalBoundary.deweyAdjacencyPromotesDependency
+    ID.canonicalIbrahimDeweyTraversalBoundary
+  ≡ false
+  ×
+  ID.IbrahimDeweyTraversalBoundary.qidPromotesProof
+    ID.canonicalIbrahimDeweyTraversalBoundary
+  ≡ false
+  ×
+  ID.IbrahimDeweyTraversalBoundary.firstLinkPromotesTheorem
+    ID.canonicalIbrahimDeweyTraversalBoundary
+  ≡ false
+ibrahimDeweyNonPromotionRegression = refl , (refl , refl)
+
+archiveArtifactIdentityRegression :
+  ID.IbrahimDeweyTraversalBoundary.archiveEmbeddedCodeEqualsOriginalArtifact
+    ID.canonicalIbrahimDeweyTraversalBoundary
+  ≡ false
+  ×
+  ID.ArchiveExecutableSnowballStatus.originalStandaloneScriptLocated
+    ID.canonicalArchiveExecutableSnowballStatus
+  ≡ false
+  ×
+  ID.ArchiveExecutableSnowballStatus.embeddedRunNarrativeLocated
+    ID.canonicalArchiveExecutableSnowballStatus
+  ≡ true
+archiveArtifactIdentityRegression = refl , (refl , refl)
