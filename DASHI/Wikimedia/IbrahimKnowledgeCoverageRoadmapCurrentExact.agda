@@ -16,6 +16,7 @@ import DASHI.Wikimedia.IbrahimSnowballEthnographyParticipantObservationFieldwork
 import DASHI.Wikimedia.IbrahimSnowballGeologyStratigraphyDeepTimeCarbonConsumerBidiExact as Geology
 import DASHI.Wikimedia.IbrahimSnowballHealthcareAccessQualityEfficacyConsumerBidiExact as Healthcare
 import DASHI.Wikimedia.IbrahimSnowballPetrochemistryLifecycleParentAuditExact as Petrochem
+import DASHI.Wikimedia.IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact as HistoricalFLN
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSymbolicVerificationDeweyQidDoiBidiExact as Dewey
 
@@ -38,6 +39,18 @@ record LiveRoadmapTarget : Set where
     sourceCoordinate : String
     completionTest : String
 open LiveRoadmapTarget public
+
+historicalFLNCorpusProvenance : LiveRoadmapTarget
+historicalFLNCorpusProvenance = live-roadmap-target
+  1
+  "Ibrahim historical First Link Network corpus / dump / parser / result same-object provenance"
+  residualOnly
+  "IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact; WikipediaFirstLinkNetworkExact; author paper/blog/project/data/code surfaces"
+  "exact upstream XML dump file/day and hash; same-object receipt from that dump to chopped small*.xml inputs; parser-equivalent reproduction; reproduced graph same-object match to public FLN result"
+  "Wikipedia Q52; English Wikipedia Q328; FLN research object and exact historical dump QIDs unresolved rather than substituted"
+  "English-Wikipedia historical corpus and FLN Dewey coordinates explicitly unresolved; library shelf cannot pay corpus identity"
+  "Ibrahim-Danforth-Dodds DOI 10.1016/j.jocs.2016.12.001; arXiv 1605.00309; Computational Story Lab project/data links; marksibrahim/wikipedia_network; parser blob a830c47905d4cde90876e1097f2620f4f19a63df; constructor blob 595f7f52ffc03e8a9542964b9dd3fffbfae87fca"
+  "resolve the publication/blog November-2014 cue versus parser enwiki/20141008 cue by an exact input-artifact receipt; neither cue may erase the other, and historical edges remain unpaid until parser-equivalent reproduction or exact result provenance is established"
 
 independenceConsensusNowPaid : LiveRoadmapTarget
 independenceConsensusNowPaid = live-roadmap-target
@@ -131,13 +144,16 @@ currentRoadmapCriterion = roadmap-completion-criterion
 
 roadmapMeaning : String
 roadmapMeaning =
-  "roadmap completion means the shared navigation/provenance/consumer grammar can route new concrete demands to an existing owner or expose one typed residual; no known shared-parent residual remains in the current audit. It does not mean pre-enumerating every Dewey subject, QID, DOI, discipline or empirical claim."
+  "roadmap completion means the shared navigation/provenance/consumer grammar can route new concrete demands to an existing owner or expose one typed residual; no known shared-parent residual remains in the current audit. It does not mean pre-enumerating every Dewey subject, QID, DOI, discipline or empirical claim. The current highest-alpha residual is the historical Ibrahim FLN source-object identity needed to promote historical traversal claims."
 
 historicalPolicy : Historical.RoadmapPolicy
 historicalPolicy = Historical.canonicalRoadmapPolicy
 
 deltaPolicy : Delta.RoadmapDeltaPolicy
 deltaPolicy = Delta.canonicalRoadmapDeltaPolicy
+
+historicalFLNBoundary : HistoricalFLN.HistoricalSnapshotProvenanceBoundary
+historicalFLNBoundary = HistoricalFLN.canonicalHistoricalSnapshotProvenanceBoundary
 
 independenceBoundary : Synthesis.EvidenceSynthesisPeerReviewIndependenceBoundary
 independenceBoundary = Synthesis.canonicalEvidenceSynthesisPeerReviewIndependenceBoundary
