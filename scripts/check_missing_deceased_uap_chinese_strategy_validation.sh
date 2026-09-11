@@ -50,9 +50,22 @@ grep -q 'existingParetoBoundary' DASHI/Culture/MissingDeceasedGameTheoryParetoPr
 grep -q 'existingProofSearchParetoBoundary' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
 grep -q 'gamePayoffDoesNotBecomeEvidence' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
 
+grep -q 'record FusionPropulsionMaterialIntersection' DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda
+grep -q 'oxygenRichChemicalRocketIsNotFusionPropulsion' DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda
+grep -q 'quantumVacuumMentionIsNotValidation' DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda
+grep -q 'gammaPrimeIsCrystalScaleMechanism' DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda
+
+grep -q 'record FullSetTechnicalIntersection' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'loureiroFusionPlasmaRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'rezaOxygenMaterialsRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'fangMetamaterialRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'fengStrategicGameRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'technicalAdjacencyDoesNotCreateSharedProgramme' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+
 grep -q 'Chinese strategic scientist acquisition' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'UAP/adversarial discriminator' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'Chinese roster-cardinality resolution' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'full-set technical intersection' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 
 grep -q 'MissingDeceasedTernaryAdversarialObserverExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'ChineseStrategicScientistRosterSnowballExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
@@ -60,6 +73,8 @@ grep -q 'MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact' DASHI/
 grep -q 'YanHongHypersonicFlowControlBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'FangDainingActiveMechanicalMetamaterialBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'RezaFangAlloyMetamaterialDiscriminationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'FusionPropulsionMaterialSurvivabilityCrossPollinationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedFullSetTechnicalIntersectionParetoExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'FengYangheMilitaryAIGameStatisticsBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'FengYangheMilitaryAIGameStatisticsBidiExact' DASHI/GameTheory/Everything.agda
 
