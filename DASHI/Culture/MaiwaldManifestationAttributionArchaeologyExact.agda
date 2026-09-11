@@ -161,15 +161,42 @@ protonatedValineNTRSHarvestState = ntrs-harvest-manifestation-state
   "recover Crossref/CHORUS/NASA production metadata or correction history tying the ChemRxiv manuscript DOI, ACS version-of-record DOI, affiliation mappings and NTRS harvested object into one explicit manifestation lineage"
 
 ------------------------------------------------------------------------
--- Same-name DOI/dataset false-positive control.
+-- Supporting-information asset versus raw-data boundary.
 --
--- A generic dataset search returns a 2023 Mendeley Data object entitled
--- `Transcriptome atlas of the honeybee across development stages`, DOI
--- 10.17632/7pyv3ccrzt.1, whose contributor list contains a Frank Maiwald.
--- Its domain/coauthors are insect physiology/toxicology and do not match the
--- independently paid JPL Frank W. Maiwald identity.  The object is therefore a
--- useful negative control for automated DOI/QID snowballing: same display name,
--- year proximity and a real DOI cannot manufacture person identity.
+-- ACS exposes the SI as a separately downloadable supplementary asset.  Its
+-- contents are calculated spectra/structures, photodissociation-time material,
+-- atomic coordinates and unscaled vibrational frequencies.  That is valuable
+-- scientific derivative material, but it is not an identified repository object
+-- for the underlying raw instrument spectra.
+------------------------------------------------------------------------
+
+record SupplementaryAssetState : Set where
+  constructor supplementary-asset-state
+  field
+    parentDoi : String
+    assetIdentifier : String
+    sourceLink : String
+    contentClasses : String
+    separatelyDownloadablePublisherAsset : Bool
+    containsCalculatedOrDerivedScientificMaterial : Bool
+    exactRawInstrumentDatasetIdentifierPresent : Bool
+    supplementaryAssetEqualsRawDataset : Bool
+    supplementaryAssetPaysRawDataCustody : Bool
+    acquisitionTarget : String
+
+open SupplementaryAssetState public
+
+protonatedValineSupplementaryAsset : SupplementaryAssetState
+protonatedValineSupplementaryAsset = supplementary-asset-state
+  "10.1021/acs.jpca.4c03552"
+  "ACS SI jp4c03552_si_001"
+  "https://pubs.acs.org/doi/suppl/10.1021/acs.jpca.4c03552/suppl_file/jp4c03552_si_001.pdf"
+  "calculated IR spectra; selected structures; IR photodissociation-time material; atomic coordinates; unscaled vibrational frequencies"
+  true true false false false
+  "recover a repository/deposit/instrument-data object that explicitly identifies the measured raw and/or reduced ion-action spectra and crosswalks them to the article/SI figures"
+
+------------------------------------------------------------------------
+-- Same-name DOI/dataset false-positive control.
 ------------------------------------------------------------------------
 
 record SameNameDatasetCollision : Set where
@@ -198,10 +225,7 @@ honeybeeFrankMaiwaldCollision = same-name-dataset-collision
   "insect physiology / insect toxicology / honeybee transcriptomics"
   "Frank W. Maiwald, NASA Jet Propulsion Laboratory / Caltech"
   "JPL SURP SP23012p; JPL Principal designation; DOI 10.1021/acs.analchem.4c01023 and other JPL publication carriers"
-  false
-  false
-  false
-  true
+  false false false true
 
 ------------------------------------------------------------------------
 -- Snowball coordinates: identity/search only, never authority.
@@ -245,10 +269,12 @@ record ManifestationAttributionBoundary : Set where
     harvestedPreprintDoiEqualsVersionOfRecordDoi : Bool
     sameDisplayNamePlusDoiPaysPersonIdentity : Bool
     crossDomainDatasetMayBeInheritedByName : Bool
+    supplementaryAssetEqualsRawInstrumentDataset : Bool
+    supplementaryAssetPaysRawDataCustody : Bool
     conflictShouldRemainNamed : Bool
 
 open ManifestationAttributionBoundary public
 
 canonicalManifestationAttributionBoundary : ManifestationAttributionBoundary
 canonicalManifestationAttributionBoundary = manifestation-attribution-boundary
-  false false false false false false false false false true
+  false false false false false false false false false false false true
