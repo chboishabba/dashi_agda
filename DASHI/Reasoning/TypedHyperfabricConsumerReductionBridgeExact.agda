@@ -15,17 +15,17 @@ import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as FutureCanonical
 ------------------------------------------------------------------------
 -- TYPED HYPERFABRIC GLOBAL-SECTION -> CONSUMER-RELATIVE REDUCTION BRIDGE
 --
--- No new fibre/sheaf/reduction kernel is introduced here.  A compatible
+-- No new fibre/sheaf/reduction kernel is introduced here. A compatible
 -- Hyperfabric.GlobalSection is simply used as the Fine state of the already
--- canonical ConsumerRelativeReduction kernel.  The reduced state is therefore
+-- canonical ConsumerRelativeReduction kernel. The reduced state is therefore
 -- explicitly a consumer-facing quotient/projection of compatible sections,
 -- not a claim that the physical/local fabric itself has collapsed.
 ------------------------------------------------------------------------
 
 HyperfabricSectionReduction :
-  {Vertex Edge : Set} ->
-  Hyperfabric.TypedHyperfabric Vertex Edge ->
-  Set -> Set -> Set1
+  {Vertex Edge : Set} →
+  Hyperfabric.TypedHyperfabric Vertex Edge →
+  Set → Set → Set₁
 HyperfabricSectionReduction fabric Action Observation =
   Reduction.ConsumerRelativeReduction
     (Hyperfabric.GlobalSection fabric)
@@ -33,19 +33,19 @@ HyperfabricSectionReduction fabric Action Observation =
     Observation
 
 sectionCurrentConsumerDescent :
-  forall {Vertex Edge Action Observation}
-    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} ->
-  (rom : HyperfabricSectionReduction fabric Action Observation) ->
+  ∀ {Vertex Edge Action Observation}
+    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} →
+  (rom : HyperfabricSectionReduction fabric Action Observation) →
   Consumer.ConsumerDescent
     (Reduction.encode rom)
     (Reduction.fineObserve rom)
 sectionCurrentConsumerDescent = Canonical.currentConsumerDescent
 
 sectionActionIntertwiner :
-  forall {Vertex Edge Action Observation}
-    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} ->
-  (rom : HyperfabricSectionReduction fabric Action Observation) ->
-  (action : Action) ->
+  ∀ {Vertex Edge Action Observation}
+    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} →
+  (rom : HyperfabricSectionReduction fabric Action Observation) →
+  (action : Action) →
   Consumer.Intertwiner
     (Reduction.encode rom)
     (Reduction.encode rom)
@@ -54,10 +54,10 @@ sectionActionIntertwiner :
 sectionActionIntertwiner = Canonical.actionIntertwiner
 
 sectionCanonicalFutureSafety :
-  forall {Vertex Edge Action Observation}
-    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} ->
-  (rom : HyperfabricSectionReduction fabric Action Observation) ->
-  (actionLabel : Action -> String) ->
+  ∀ {Vertex Edge Action Observation}
+    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} →
+  (rom : HyperfabricSectionReduction fabric Action Observation) →
+  (actionLabel : Action → String) →
   Future.FutureLanguageSafeProjection
     (FutureCanonical.deterministicSystem (Reduction.fineStep rom) actionLabel)
     (Reduction.fineObserve rom)
@@ -68,10 +68,10 @@ sectionCanonicalFutureSafety = Canonical.canonicalFutureSafety
 -- Finite exact specimen.
 --
 -- One compatible global section carries a visible coordinate and an extra
--- hidden/local coordinate in its vertex stalk.  The declared consumer sees
--- only the visible coordinate.  Two globally compatible sections may then
+-- hidden/local coordinate in its vertex stalk. The declared consumer sees
+-- only the visible coordinate. Two globally compatible sections may then
 -- collapse to the same consumer code while remaining distinct local-stalk
--- assignments.  This is consumer quotienting of sections, not stalk identity.
+-- assignments. This is consumer quotienting of sections, not stalk identity.
 ------------------------------------------------------------------------
 
 data SpecVertex : Set where
@@ -80,49 +80,49 @@ data SpecVertex : Set where
 data SpecEdge : Set where
   relation : SpecEdge
 
-data SpecIncidence : SpecVertex -> SpecEdge -> Set where
+data SpecIncidence : SpecVertex → SpecEdge → Set where
   regionOnRelation : SpecIncidence region relation
 
 specFabric : Hyperfabric.TypedHyperfabric SpecVertex SpecEdge
 specFabric = record
-  { vertexStalk = lambda _ -> Bool × Bool
-  ; edgeStalk = lambda _ -> Bool
+  { vertexStalk = λ _ → Bool × Bool
+  ; edgeStalk = λ _ → Bool
   ; incidence = SpecIncidence
-  ; restrict = lambda _ pair -> proj1 pair
-  ; edgeProvenance = lambda _ -> "finite section-reduction specimen" ∷ []
-  ; edgeSalience = lambda _ -> 1
+  ; restrict = λ _ pair → proj₁ pair
+  ; edgeProvenance = λ _ → "finite section-reduction specimen" ∷ []
+  ; edgeSalience = λ _ → 1
   ; fabricLabel = "finite hyperfabric section consumer-reduction specimen"
   }
 
 leftSection : Hyperfabric.GlobalSection specFabric
 leftSection = record
-  { vertexValue = lambda _ -> false , false
-  ; edgeValue = lambda _ -> false
-  ; compatible = lambda _ -> refl
+  { vertexValue = λ _ → false , false
+  ; edgeValue = λ _ → false
+  ; compatible = λ _ → refl
   ; sectionReceipt = "visible=false; hidden=false"
   }
 
 rightSection : Hyperfabric.GlobalSection specFabric
 rightSection = record
-  { vertexValue = lambda _ -> false , true
-  ; edgeValue = lambda _ -> false
-  ; compatible = lambda _ -> refl
+  { vertexValue = λ _ → false , true
+  ; edgeValue = λ _ → false
+  ; compatible = λ _ → refl
   ; sectionReceipt = "visible=false; hidden=true"
   }
 
-sectionVisible : Hyperfabric.GlobalSection specFabric -> Bool
-sectionVisible section = proj1 (Hyperfabric.vertexValue section region)
+sectionVisible : Hyperfabric.GlobalSection specFabric → Bool
+sectionVisible section = proj₁ (Hyperfabric.vertexValue section region)
 
 specReduction : HyperfabricSectionReduction specFabric ⊤ Bool
 specReduction = Reduction.consumerRelativeReduction
   Bool
   sectionVisible
-  (lambda _ section -> section)
-  (lambda _ code -> code)
+  (λ _ section → section)
+  (λ _ code → code)
   sectionVisible
-  (lambda code -> code)
-  (lambda _ _ -> refl)
-  (lambda _ -> refl)
+  (λ code → code)
+  (λ _ _ → refl)
+  (λ _ → refl)
 
 hiddenStalkDifferenceCanCollapseForDeclaredConsumer :
   Reduction.encode specReduction leftSection
@@ -139,11 +139,11 @@ finiteSectionFutureSafe :
   Future.FutureLanguageSafeProjection
     (FutureCanonical.deterministicSystem
       (Reduction.fineStep specReduction)
-      (lambda _ -> "identity section action"))
+      (λ _ → "identity section action"))
     (Reduction.fineObserve specReduction)
     (Reduction.encode specReduction)
 finiteSectionFutureSafe =
-  sectionCanonicalFutureSafety specReduction (lambda _ -> "identity section action")
+  sectionCanonicalFutureSafety specReduction (λ _ → "identity section action")
 
 ------------------------------------------------------------------------
 -- Boundary.
