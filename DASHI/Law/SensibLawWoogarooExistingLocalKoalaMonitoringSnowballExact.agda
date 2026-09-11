@@ -9,6 +9,8 @@ import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Wikimedia.IdentifierExact as Id
 import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Ibrahim
 import DASHI.Law.SensibLawWoogarooIbrahimDeweyQidLegalAtomExact as Canonical
+import DASHI.Law.SensibLawWoogarooIbrahimPopulationSourceExtensionExact as Regional
+import DASHI.Law.SensibLawWoogarooKoalaScienceSnowballExact as Science
 import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 import DASHI.Law.SensibLawWoogarooLocalKoalaPopulationNexusSnowballExact as Local
 import DASHI.Law.SensibLawWoogarooPopulationConnectivityAcquisitionExact as Acquisition
@@ -30,6 +32,7 @@ data MonitoringCarrierRole : Set where
 
 data RetrievalState : Set where
   publicReportRead : RetrievalState
+  bibliographicIdentityOnly : RetrievalState
   publicSummaryOnly : RetrievalState
   custodianKnownDataNotAcquired : RetrievalState
   exactDatasetOpen : RetrievalState
@@ -40,11 +43,26 @@ koalaQid = Id.itemId "Q36101"
 cityOfIpswichQid : Id.ItemId
 cityOfIpswichQid = Id.itemId "Q1631867"
 
+springfieldQid : Id.ItemId
+springfieldQid = Id.itemId "Q1838932"
+
+ecologicalConnectivityQid : Id.ItemId
+ecologicalConnectivityQid = Id.itemId "Q2993449"
+
+landscapeEcologyQid : Id.ItemId
+landscapeEcologyQid = Id.itemId "Q738011"
+
+conservationBiologyQid : Id.ItemId
+conservationBiologyQid = Id.itemId "Q641498"
+
 koalaDewey : String
 koalaDewey = "599.25"
 
+ecologyDewey : String
+ecologyDewey = "577"
+
 conservationDewey : String
-conservationDewey = "333.9516"
+conservationDewey = "333.95"
 
 ------------------------------------------------------------------------
 -- Attributed monitoring/custodian sources.
@@ -52,13 +70,13 @@ conservationDewey = "333.9516"
 
 ipswichBiodiversity2016 : Source.AttributedSource
 ipswichBiodiversity2016 = Source.mkNoDOISource
-  "Teresa J. Eyre; Dan Ferguson; Annie L. Kelly; Jian Wang; M. Venz; J. Rowland; M. Mathieson"
+  "Teresa J. Eyre; Dan Ferguson; Annie L. Kelly; Jian Wang; M. Venz"
   "Ipswich City Council Biodiversity Monitoring Project — Final Report"
   "Queensland Herbarium, Department of Science, Information Technology and Innovation"
   "2016"
   "https://www.researchgate.net/publication/326494130_Ipswich_City_Council_Biodiversity_Monitoring_Project_Final_Report"
   (Source.namedSourceKind "government technical monitoring report")
-  "Primary government monitoring report commissioned for Ipswich City Council. White Rock-Spring Mountain was directly surveyed; the report records Koala detections in Council reserves, including White Rock-Spring Mountain, and establishes repeatable monitoring sites/methods. Used as historical local monitoring evidence, not as current Springview occupancy or population identity."
+  "Bibliographic/source identity of the Queensland Herbarium report and its Ipswich monitoring role are retained. A direct authoritative-host report copy has not been acquired in the present Snowball, so detailed White Rock/Spring Mountain findings must not be promoted from secondary citations alone."
   Source.publicAttribution
 
 whiteRockMonitoring2021 : Source.AttributedSource
@@ -74,24 +92,24 @@ whiteRockMonitoring2021 = Source.mkNoDOISource
 
 biolink2020 : Source.AttributedSource
 biolink2020 = Source.mkNoDOISource
-  "Biolink Ecological Consultants"
+  "Biolink Ecological Consultants Pty Ltd"
   "Ipswich baseline koala survey"
   "Biolink project description for Ipswich City Council"
   "2020"
   "https://biolink.com.au/ipswich-baseline-koala-survey/"
   (Source.namedSourceKind "consultant project description")
-  "Producer description confirming an Ipswich Council baseline Koala program covering White Rock-Spring Mountain and other estates, with historical-record review and 63 SAT/Rapid-SAT survey sites intended to quantify occupancy/metapopulation configuration. It proves program scope/existence, not the unpublished site-level results."
+  "Primary producer description confirming an Ipswich Council baseline Koala program covering Mount Grandchester, Flinders-Goolman and White Rock-Spring Mountain, with review of historical records and 63 SAT/Rapid-SAT sites intended to quantify occupancy and metapopulation configuration. It proves program scope/existence, not unpublished site-level results."
   Source.publicAttribution
 
 biolink2025 : Source.AttributedSource
 biolink2025 = Source.mkNoDOISource
-  "Biolink Ecological Consultants"
+  "Biolink Ecological Consultants Pty Ltd"
   "Ipswich Biennial koala survey and Population Change Analysis"
   "Biolink project description for Ipswich City Council"
   "2025"
   "https://biolink.com.au/ipswich-biennial-koala-survey-and-population-change-analysis/"
   (Source.namedSourceKind "consultant project description")
-  "Producer description confirming a third Ipswich monitoring round after 2020 and 2023, using 83 permanent sites plus 10 private conservation properties and integrating field surveys with sighting records to assess activity/distribution change. Used as a direct acquisition lead for current local monitoring, not as a substitute for the underlying report/data."
+  "Primary producer description confirming a third Ipswich monitoring round after 2020 and 2023, using 83 permanent Council-estate sites plus 10 privately owned conservation-agreement properties and integrating field surveys with sighting records to assess activity/distribution change. Used as a direct acquisition lead, not as a substitute for the underlying report/data."
   Source.publicAttribution
 
 ipswichKoalaProtectionSociety : Source.AttributedSource
@@ -102,7 +120,7 @@ ipswichKoalaProtectionSociety = Source.mkNoDOISource
   "2026"
   "https://www.ikps.org.au/about.htm"
   (Source.namedSourceKind "community wildlife rescue data custodian")
-  "Custodian lead: IKPS states that it maintains extensive local Koala records, statistics and habitat/population mapping and rescues more than 180 Koalas per year. Used to route a request for de-identified/locality-appropriate rescue, mortality and population records; the organisation statement itself is not occurrence evidence for Springview."
+  "Primary organisational source: IKPS states that it maintains extensive local Koala records, statistics and habitat/population mapping and rescues more than 180 Koalas per year. Used to route a request for locality-appropriate rescue, mortality, sighting and release records; the organisation statement itself is not occurrence evidence for Springview."
   Source.publicAttribution
 
 localMonitoringAtlas : Source.AttributedSourceAtlas
@@ -110,7 +128,7 @@ localMonitoringAtlas = Source.mkSourceAtlas
   "Woogaroo existing local Koala monitoring Snowball"
   "DASHI.Law.SensibLawWoogarooExistingLocalKoalaMonitoringSnowballExact"
   (ipswichBiodiversity2016 ∷ whiteRockMonitoring2021 ∷ biolink2020 ∷ biolink2025 ∷ ipswichKoalaProtectionSociety ∷ [])
-  "Independent local monitoring/custodian surfaces. Primary reports, producer project summaries and record-custodian statements are kept distinct. Program existence does not import unseen results; adjacent White Rock evidence does not become Springview same-object evidence."
+  "Independent local monitoring/custodian surfaces. Primary reports, producer project summaries, bibliographic identities and record-custodian statements are kept distinct. Program existence does not import unseen results; adjacent White Rock evidence does not become Springview same-object evidence."
 
 ------------------------------------------------------------------------
 -- Ibrahim coordinates and legal-atom joins.
@@ -122,14 +140,14 @@ ipswichMonitoringCoordinate = Ibrahim.dashi-knowledge-coordinate
   "Ipswich longitudinal Koala monitoring / population-change program"
   koalaDewey
   (Id.rawItemId koalaQid)
-  "2016 Queensland Herbarium + Biolink 2020/2023/2025 monitoring lineage"
+  "2016 Queensland Herbarium bibliography + Biolink 2020/2023/2025 monitoring lineage"
 
 whiteRockMonitoringCoordinate : Ibrahim.DashiKnowledgeCoordinate
 whiteRockMonitoringCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooExistingLocalKoalaMonitoringSnowballExact.agda"
   "White Rock-Spring Mountain observed Koala activity / monitoring"
-  koalaDewey
-  (Id.rawItemId koalaQid)
+  ecologyDewey
+  (Id.rawItemId ecologicalConnectivityQid)
   "Bower Ecology 2021 monitoring plus Council/ELA historical detections"
 
 rescueRecordsCoordinate : Ibrahim.DashiKnowledgeCoordinate
@@ -183,12 +201,12 @@ biodiversity2016Acquisition : MonitoringAcquisition
 biodiversity2016Acquisition = monitoring-acquisition
   "Queensland Herbarium 2016"
   primaryGovernmentMonitoringReport
-  publicReportRead
+  bibliographicIdentityOnly
   Atom.habitatPopulationEssentialityAtom
   Atom.nca13EssentialityConsumer
-  "Historical White Rock-Spring Mountain monitoring and at least one Koala detection are source-paid, together with permanent monitoring-site design."
-  "Exact spatial relation of relevant sites/detections to Springview/Opossum and later longitudinal change."
-  "context paid; use mainly to anchor the monitoring lineage and older local state"
+  "Report identity, authorship/institution and its place in the Ipswich monitoring lineage are source-paid."
+  "Acquire the actual report body from Council/Queensland Herbarium or another authoritative/complete copy before relying on detailed White Rock-Spring Mountain site findings."
+  "medium: historical anchor; do not let a secondary citation substitute for the primary report body"
 
 whiteRock2021Acquisition : MonitoringAcquisition
 whiteRock2021Acquisition = monitoring-acquisition
@@ -208,8 +226,8 @@ biolink2025Acquisition = monitoring-acquisition
   publicSummaryOnly
   Atom.habitatPopulationEssentialityAtom
   Atom.nca13EssentialityConsumer
-  "The existence and scope of the 2025 third-round program are paid: 83 permanent sites, 10 private conservation properties, repeat 2020/2023/2025 monitoring and population-change analysis."
-  "The actual report/data, site coordinates/IDs, White Rock-Spring Mountain results, occupancy/activity trends and any population/metapopulation interpretation."
+  "The existence and scope of the 2025 third-round program are paid: 83 permanent sites, 10 private conservation-agreement properties, repeat 2020/2023/2025 monitoring and population-change analysis."
+  "The actual 2023/2025 reports/data, site coordinates/IDs, White Rock-Spring Mountain results, occupancy/activity trends and any population/metapopulation interpretation."
   "HIGHEST: request the underlying 2020, 2023 and 2025 reports/data before commissioning wholly new population fieldwork"
 
 ikpsAcquisition : MonitoringAcquisition
@@ -220,8 +238,31 @@ ikpsAcquisition = monitoring-acquisition
   Atom.likelySignificantDetrimentalEffectAtom
   Atom.nca102InterimOrderConsumer
   "A local specialist custodian publicly states that extensive Koala records/statistics/mapping are maintained."
-  "Dated de-identified records around Springfield/Woogaroo/Opossum/White Rock, especially rescue, mortality, movement/road-strike and repeated-location patterns."
+  "Dated de-identified records around Springfield/Woogaroo/Opossum/White Rock, keeping rescue, sighting, mortality and release records distinct."
   "HIGH: request an appropriate spatial/temporal extract or expert summary; do not infer occurrences from the organisation description"
+
+------------------------------------------------------------------------
+-- SOTA calibration: why local longitudinal records now outrank more generic
+-- connectivity papers in the acquisition queue.
+------------------------------------------------------------------------
+
+sotaConnectivitySource : Source.AttributedSource
+sotaConnectivitySource = Science.source Science.bruntonConnectivityReview
+
+record MonitoringSotaCalibration : Set where
+  constructor monitoring-sota-calibration
+  field
+    localPopulationInputPreferred : Bool
+    fieldValidationPreferred : Bool
+    structuralMapNotRealisedConnectivity : Bool
+    existingLocalSeriesFirst : Bool
+    thermalSurveyFallback : Bool
+    rationale : String
+
+currentMonitoringSotaCalibration : MonitoringSotaCalibration
+currentMonitoringSotaCalibration = monitoring-sota-calibration
+  true true true true true
+  "Brunton et al. 2026 reports that fewer than one quarter of reviewed koala connectivity studies used local-population data, only 30% directly validated outputs with field surveys, and none of the reviewed studies through 2024 mapped realised functional connectivity. Woogaroo therefore prioritises existing Ipswich longitudinal/local records before new generic desktop connectivity modelling; Regional.ellisThermal2026 remains a fallback if a consumer-critical local detection uncertainty survives."
 
 ------------------------------------------------------------------------
 -- Highest-alpha correction to acquisition ordering.
@@ -244,23 +285,27 @@ currentExistingMonitoringFrontier : ExistingMonitoringFrontier
 currentExistingMonitoringFrontier = existing-monitoring-frontier
   true true true true true
   false false false
-  "Before paying for a wholly new population survey, request the existing Ipswich/Biolink 2020, 2023 and 2025 Koala monitoring reports/data (especially White Rock-Spring Mountain site IDs/results and population-change analysis) and a locality-appropriate IKPS rescue/mortality mapping extract. Then give those carriers to the independent ecologist for the s 13 population/functional-connectivity analysis and s 102 movement-risk/effect opinion."
+  "Request the existing Ipswich/Biolink 2020, 2023 and 2025 Koala monitoring reports/data (especially White Rock-Spring Mountain site IDs/results and population-change analysis) and a locality-appropriate IKPS rescue/sighting/mortality/release mapping extract. Join those carriers to Springview/Opossum/Woogaroo only by explicit spatial/temporal identity. Then give the joined evidence to the independent ecologist for the s 13 population/functional-connectivity analysis and s 102 likely-effect opinion."
 
 ------------------------------------------------------------------------
 -- WrongType / attribution firewalls.
 ------------------------------------------------------------------------
 
 data ProjectSummaryEqualsUnderlyingMonitoringData : Set where
+data BibliographicIdentityEqualsReportContents : Set where
 data WhiteRockDetectionEqualsSpringviewOccurrence : Set where
 data MonitoringProgramEqualsViablePopulationIdentity : Set where
 data RescueCustodianEqualsRescueOccurrence : Set where
 data AdjacentProjectEqualsSameObject : Set where
 data LongitudinalMonitoringEqualsS13Essentiality : Set where
-
 data ProgramCountEqualsIndependentEvidenceCount : Set where
+data StructuralConnectivityEqualsRealisedFunctionalConnectivity : Set where
 
 summaryDoesNotCreateData : ProjectSummaryEqualsUnderlyingMonitoringData → ⊥
 summaryDoesNotCreateData ()
+
+bibliographyDoesNotCreateReportContents : BibliographicIdentityEqualsReportContents → ⊥
+bibliographyDoesNotCreateReportContents ()
 
 whiteRockDoesNotCreateSpringviewOccurrence : WhiteRockDetectionEqualsSpringviewOccurrence → ⊥
 whiteRockDoesNotCreateSpringviewOccurrence ()
@@ -279,6 +324,9 @@ monitoringDoesNotCreateEssentiality ()
 
 programMultiplicityDoesNotCreateIndependence : ProgramCountEqualsIndependentEvidenceCount → ⊥
 programMultiplicityDoesNotCreateIndependence ()
+
+structuralMapDoesNotBecomeRealisedConnectivity : StructuralConnectivityEqualsRealisedFunctionalConnectivity → ⊥
+structuralMapDoesNotBecomeRealisedConnectivity ()
 
 ------------------------------------------------------------------------
 -- Existing acquisition leaves remain authoritative.
