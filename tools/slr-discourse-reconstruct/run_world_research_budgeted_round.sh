@@ -25,6 +25,8 @@ MERGED_GRAPH="$ROUND_DIR/merged-wikimedia-world-graph.json"
 MERGE_ERR="$ROUND_DIR/graph-merge.stderr"
 CLOSURE="$ROUND_DIR/semantic-world-closure.json"
 CLOSURE_ERR="$ROUND_DIR/semantic-world-closure.stderr"
+GAP_FLOW="$ROUND_DIR/semantic-gap-flow.json"
+GAP_FLOW_ERR="$ROUND_DIR/semantic-gap-flow.stderr"
 NEXT_ITERATION="$ROUND_DIR/world-research-iteration.json"
 ROUND_ERR="$ROUND_DIR/world-research-round.stderr"
 WORLD="$OUT_DIR/sensiblaw-gwb-candidate-world-model-source-role-attached.json"
@@ -34,6 +36,14 @@ mkdir -p "$ROUND_DIR"
 [[ -s "$INPUT_ITERATION" ]] || { echo "ERROR: missing iteration $INPUT_ITERATION" >&2; exit 1; }
 [[ -s "$BASE_GRAPH" ]] || { echo "ERROR: missing graph $BASE_GRAPH" >&2; exit 1; }
 [[ -s "$WORLD" ]] || { echo "ERROR: missing CandidateWorldModel" >&2; exit 1; }
+
+PREVIOUS_CLOSURE="$(python3 - "$INPUT_ITERATION" <<'PY'
+import json, sys
+m=json.load(open(sys.argv[1], encoding='utf-8'))
+print(str(m.get('semantic_closure_reference','')))
+PY
+)"
+[[ -s "$PREVIOUS_CLOSURE" ]] || { echo "ERROR: previous semantic closure unavailable: $PREVIOUS_CLOSURE" >&2; exit 1; }
 
 python3 "$HERE/slr_world_research_budget.py" self-check 2> "$ROUND_DIR/budget-self-check.stderr"
 plan_args=(
@@ -50,6 +60,7 @@ plan_args=(
 python3 "$HERE/slr_world_research_budget.py" "${plan_args[@]}" 2> "$PLAN_ERR"
 
 grep -q 'frontier_rank_is_truth_rank=false' "$PLAN_ERR" || { cat "$PLAN_ERR" >&2; exit 1; }
+grep -q 'pareto_dimensions_scalarized=false' "$PLAN_ERR" || { cat "$PLAN_ERR" >&2; exit 1; }
 grep -q 'budget_exhaustion_is_consumer_closure=false' "$PLAN_ERR" || { cat "$PLAN_ERR" >&2; exit 1; }
 
 SEED_COUNT="$(grep -cve '^$' "$SEEDS" || true)"
@@ -92,9 +103,21 @@ python3 "$HERE/slr_semantic_world_closure.py" \
   2> "$CLOSURE_ERR"
 
 grep -q 'target_surface_asserted=false' "$CLOSURE_ERR" || { cat "$CLOSURE_ERR" >&2; exit 1; }
+grep -q 'pareto_dimensions_scalarized=false' "$CLOSURE_ERR" || { cat "$CLOSURE_ERR" >&2; exit 1; }
 grep -q 'semantic_promotion=false' "$CLOSURE_ERR" || { cat "$CLOSURE_ERR" >&2; exit 1; }
 
-python3 - "$INPUT_ITERATION" "$PLAN" "$BASE_GRAPH" "$MERGED_GRAPH" "$CLOSURE" "$NEXT_ITERATION" "$ITERATION_INDEX" 2> "$ROUND_ERR" <<'PY'
+python3 "$HERE/slr_world_research_gap_flow.py" --self-check 2> "$ROUND_DIR/semantic-gap-flow-self-check.stderr"
+python3 "$HERE/slr_world_research_gap_flow.py" \
+  --previous "$PREVIOUS_CLOSURE" \
+  --current "$CLOSURE" \
+  --plan "$PLAN" \
+  --output "$GAP_FLOW" \
+  2> "$GAP_FLOW_ERR"
+
+grep -q 'net_gap_growth_implies_no_contraction=false' "$GAP_FLOW_ERR" || { cat "$GAP_FLOW_ERR" >&2; exit 1; }
+grep -q 'semantic_promotion=false' "$GAP_FLOW_ERR" || { cat "$GAP_FLOW_ERR" >&2; exit 1; }
+
+python3 - "$INPUT_ITERATION" "$PLAN" "$BASE_GRAPH" "$MERGED_GRAPH" "$CLOSURE" "$GAP_FLOW" "$NEXT_ITERATION" "$ITERATION_INDEX" 2> "$ROUND_ERR" <<'PY'
 import json, sys
 from pathlib import Path
 previous = json.load(open(sys.argv[1], encoding='utf-8'))
@@ -102,7 +125,8 @@ plan = json.load(open(sys.argv[2], encoding='utf-8'))
 base_graph = json.load(open(sys.argv[3], encoding='utf-8'))
 merged_graph = json.load(open(sys.argv[4], encoding='utf-8'))
 closure = json.load(open(sys.argv[5], encoding='utf-8'))
-out = Path(sys.argv[6]); idx = int(sys.argv[7])
+flow = json.load(open(sys.argv[6], encoding='utf-8'))
+out = Path(sys.argv[7]); idx = int(sys.argv[8])
 prev_summary = previous.get('summary') or {}
 summary = closure.get('summary') or {}
 atoms_added = int(summary.get('canonical_atoms', 0)) - int(prev_summary.get('canonical_atoms', 0))
@@ -121,6 +145,7 @@ payload = {
     'budget_plan_reference': str(Path(sys.argv[2])),
     'world_graph_reference': str(Path(sys.argv[4])),
     'semantic_closure_reference': str(Path(sys.argv[5])),
+    'semantic_gap_flow_reference': str(Path(sys.argv[6])),
     'tranches': previous.get('tranches') or [],
     'summary': {
         'tranches': int(prev_summary.get('tranches', 0)),
@@ -136,9 +161,21 @@ payload = {
         'atoms_added_this_round': atoms_added,
         'qid_nodes_added_this_round': qids_added,
         'selected_actions_this_round': selected_actions,
+        'prior_gap_atoms': int(flow.get('prior_gap_atoms', 0)),
+        'contracted_gap_atoms': int(flow.get('contracted_gap_atoms', 0)),
+        'persisting_gap_atoms': int(flow.get('persisting_gap_atoms', 0)),
+        'new_gap_atoms': int(flow.get('new_gap_atoms', 0)),
+        'net_gap_delta': int(flow.get('net_gap_delta', 0)),
+        'prior_obligations': int(flow.get('prior_obligations', 0)),
+        'retired_obligations': int(flow.get('retired_obligations', 0)),
+        'persisting_obligations': int(flow.get('persisting_obligations', 0)),
+        'new_obligations': int(flow.get('new_obligations', 0)),
     },
+    'atoms_added_per_selected_qid': flow.get('atoms_added_per_selected_qid') or {},
     'next_acquisition_obligations': closure.get('acquisition_obligations') or [],
     'round_stop_reason': round_stop,
+    'pareto_dimensions_scalarized': False,
+    'net_gap_growth_implies_no_contraction': False,
     'consumer_closure_paid': False,
     'budget_exhaustion_is_consumer_closure': False,
     'frontier_rank_is_truth_rank': False,
@@ -148,13 +185,19 @@ payload = {
     'semantic_promotion': False,
 }
 out.write_text(json.dumps(payload, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+s = payload['summary']
 print(
     'SLR_WORLD_RESEARCH_BUDGETED_ROUND_RECEIPT '
     f"schema=slr-world-research-iteration-v1 iteration={idx} selected_actions={selected_actions} "
-    f"qid_nodes_added={qids_added} atoms_added={atoms_added} canonical_atoms={payload['summary']['canonical_atoms']} "
-    f"semantic_gap_atoms={payload['summary']['semantic_gap_atoms']} obligations={payload['summary']['acquisition_obligations']} "
-    f"round_stop_reason={round_stop} consumer_closure_paid=false budget_exhaustion_is_consumer_closure=false "
-    'frontier_rank_is_truth_rank=false candidate_only=true semantic_promotion=false',
+    f"qid_nodes_added={qids_added} atoms_added={atoms_added} canonical_atoms={s['canonical_atoms']} "
+    f"prior_gap_atoms={s['prior_gap_atoms']} contracted_gap_atoms={s['contracted_gap_atoms']} "
+    f"persisting_gap_atoms={s['persisting_gap_atoms']} new_gap_atoms={s['new_gap_atoms']} net_gap_delta={s['net_gap_delta']} "
+    f"prior_obligations={s['prior_obligations']} retired_obligations={s['retired_obligations']} "
+    f"persisting_obligations={s['persisting_obligations']} new_obligations={s['new_obligations']} "
+    f"semantic_gap_atoms={s['semantic_gap_atoms']} obligations={s['acquisition_obligations']} "
+    f"round_stop_reason={round_stop} pareto_dimensions_scalarized=false net_gap_growth_implies_no_contraction=false "
+    'consumer_closure_paid=false budget_exhaustion_is_consumer_closure=false frontier_rank_is_truth_rank=false '
+    'candidate_only=true semantic_promotion=false',
     file=sys.stderr,
 )
 PY
@@ -164,6 +207,7 @@ cat "$PLAN_ERR"
 [[ -s "$FOLLOW_ERR" ]] && cat "$FOLLOW_ERR"
 cat "$MERGE_ERR"
 cat "$CLOSURE_ERR"
+cat "$GAP_FLOW_ERR"
 cat "$ROUND_ERR"
-printf 'round_dir=%s\nnext_iteration=%s\nmerged_graph=%s\nmissing_surface_history=%s\n' \
-  "$ROUND_DIR" "$NEXT_ITERATION" "$MERGED_GRAPH" "$HISTORY"
+printf 'round_dir=%s\nnext_iteration=%s\nmerged_graph=%s\nsemantic_gap_flow=%s\nmissing_surface_history=%s\n' \
+  "$ROUND_DIR" "$NEXT_ITERATION" "$MERGED_GRAPH" "$GAP_FLOW" "$HISTORY"
