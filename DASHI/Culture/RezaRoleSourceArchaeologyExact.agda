@@ -9,8 +9,9 @@ open import Agda.Builtin.String using (String)
 --
 -- Thin provenance owner only. The application/scientific owners remain
 -- authoritative. This ledger separates primary institutional evidence from
--- direct witness/family testimony, press mediation, congressional
--- source-of-source repetition, and the earlier Monica Jacinto identity lineage.
+-- patent facsimiles/assignment manifestations, direct witness/family testimony,
+-- press mediation, congressional source-of-source repetition, and semantic
+-- coordinates.
 ------------------------------------------------------------------------
 
 data RezaRoleSourceClass : Set where
@@ -18,6 +19,7 @@ data RezaRoleSourceClass : Set where
   primaryHistoricalIdentityRecord
   primaryLawEnforcementIdentityRecord
   primaryPatentManifestation
+  patentAssignmentIndexManifestation
   renderedIndexManifestation
   primaryCongressionalDocument
   directColleagueWitnessSurface
@@ -91,6 +93,16 @@ patentParent2003RenderedCarrier = reza-role-source-carrier
   false false true
   "The rendered/index manifestation omits the middle initial that is present in the publication facsimile. This is retained as a manifestation-normalisation conflict, not evidence that the source patent itself used two different inventor identities."
 
+patent2004BoeingAssignmentCarrier : RezaRoleSourceCarrier
+patent2004BoeingAssignmentCarrier = reza-role-source-carrier
+  patentAssignmentIndexManifestation
+  "US20040208777A1 patent assignment timeline"
+  "US10/769,195; assignment dated 2004-01-30 to THE BOEING COMPANY"
+  "https://patents.google.com/patent/US20040208777A1/en"
+  "assignment metadata names assignors HARDWICK, DALLIS ANN and JACINTO, MONICA A.; assignee THE BOEING COMPANY"
+  false false true
+  "Exact patent-assignment metadata ties the Monica A. Jacinto inventor form to a Boeing assignment on 2004-01-30 and records later IP transfers through United Technologies / Pratt & Whitney Rocketdyne / Ruby Acquisition Enterprises. This pays an IP-transfer lineage, not the A.-to-Andrea expansion, later surname Reza, or JPL employment."
+
 houseOversight20260420 : RezaRoleSourceCarrier
 houseOversight20260420 = reza-role-source-carrier
   primaryCongressionalDocument
@@ -142,7 +154,7 @@ wikidataMonicaJacinto = reza-role-source-carrier
   "Verified external semantic coordinate only. The item currently carries no cited references for the alias/biographical statements; the primary California DOJ alias carrier, not this QID, pays the Reza/Andrea-Jacinto alias bridge."
 
 ------------------------------------------------------------------------
--- Patent-publication manifestation boundary.
+-- Patent-publication / assignment manifestation boundary.
 ------------------------------------------------------------------------
 
 record PatentNameManifestationState : Set where
@@ -154,6 +166,7 @@ record PatentNameManifestationState : Set where
     samePublicationIdentityPaid : Bool
     renderedNameDiffersFromFacsimile : Bool
     sourceTextMiddleInitialPaid : Bool
+    boeingAssignmentOfMonicaAInterestPaid : Bool
     familyLevelInitialVariationPaid : Bool
     middleInitialExpansionToAndreaPaid : Bool
     patentInventorEqualsDOJMissingPersonPaid : Bool
@@ -162,10 +175,31 @@ open PatentNameManifestationState public
 
 canonicalPatentNameManifestationState : PatentNameManifestationState
 canonicalPatentNameManifestationState = patent-name-manifestation-state
-  "US20030053926A1 / application US09/954,835 / priority 2001-09-18"
+  "US20030053926A1 / US20040208777A1 family; priority 2001-09-18"
   "Monica A. Jacinto"
   "Monica Jacinto"
-  true true true false false false
+  true true true true false false false
+
+record PatentAssignmentLineageState : Set where
+  constructor patent-assignment-lineage-state
+  field
+    publication : String
+    initialAssignment : String
+    laterTransferChain : String
+    exactInitialAssignorNamePaid : Bool
+    exactInitialAssigneePaid : Bool
+    assignmentChainPaysEmploymentContinuity : Bool
+    assignmentChainPaysPersonIdentityAcrossSurnameChange : Bool
+    assignmentChainPaysJPLRole : Bool
+
+open PatentAssignmentLineageState public
+
+canonicalPatentAssignmentLineageState : PatentAssignmentLineageState
+canonicalPatentAssignmentLineageState = patent-assignment-lineage-state
+  "US20040208777A1 / application US10/769,195"
+  "2004-01-30: HARDWICK, DALLIS ANN; JACINTO, MONICA A. -> THE BOEING COMPANY"
+  "2006 United Technologies; 2007 Pratt & Whitney Rocketdyne; 2013 corrective Ruby Acquisition Enterprises / Pratt & Whitney Rocketdyne chain"
+  true true false false false
 
 ------------------------------------------------------------------------
 -- Event-time role and alias state.
@@ -177,6 +211,7 @@ record RezaRoleEvidenceState : Set where
     patentInventorshipPaid : Bool
     historicalJacintoEmployerLineagePaid : Bool
     patentManifestationNameConflictPaid : Bool
+    patentBoeingAssignmentPaid : Bool
     verifiedSemanticQidLocated : Bool
     semanticQidPaysAliasIdentity : Bool
     primaryLegalAliasBridgePaid : Bool
@@ -195,9 +230,9 @@ open RezaRoleEvidenceState public
 
 canonicalRezaRoleEvidenceState : RezaRoleEvidenceState
 canonicalRezaRoleEvidenceState = reza-role-evidence-state
-  true true true true false true false true true true
+  true true true true true false true false true true true
   false false false false
-  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. The US20030053926A1 publication facsimile pays Monica A. Jacinto inventorship, while the rendered Google Patents page normalises that name to Monica Jacinto. Boeing and Cal State independently pay a long Monica Jacinto materials-engineering/Mondaloy lineage. The remaining identity debt is exact patent-inventor-to-DOJ-person identity; independently, the JPL event-time role remains unpaid by an employer record."
+  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. Patent facsimile/assignment metadata pay Monica A. Jacinto inventorship and the 2004 assignment to Boeing; Boeing and Cal State independently pay a long Monica Jacinto materials-engineering/Mondaloy lineage. Rendered patent metadata normalises the middle initial away. The remaining identity debt is exact Monica A. Jacinto -> Monica Andrea Jacinto/Reza; independently, the JPL event-time role remains unpaid by an employer record."
   "recover a primary carrier tying the patent/Mondaloy inventor identity Monica A. Jacinto to Monica Andrea Jacinto or Monica Jacinto Reza; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role"
 
 ------------------------------------------------------------------------
@@ -222,11 +257,11 @@ open RezaRoleCoordinate public
 
 canonicalRezaRoleCoordinate : RezaRoleCoordinate
 canonicalRezaRoleCoordinate = reza-role-coordinate
-  "US20030053926A1; US20040208777A1; US20100266442A1; priority 2001-09-18"
+  "US20030053926A1; US20040208777A1; US20100266442A1; priority 2001-09-18; 2004-01-30 Boeing assignment"
   "Q139385030"
   true false
   "California DOJ missing-person record; LASD case 025-00905-1257-400"
-  "620 Engineering"
+  "620 Engineering / 346.048 intellectual-property traversal"
   true false false false
 
 ------------------------------------------------------------------------
@@ -245,6 +280,8 @@ record RezaRoleSourceBoundary : Set where
     uncitedWikidataAliasPaysSamePersonIdentity : Bool
     renderedPatentNameOverridesPublicationFacsimile : Bool
     patentFacsimileInitialPaysAndreaExpansion : Bool
+    patentAssignmentPaysLaterSurnameIdentity : Bool
+    patentAssignmentPaysJPLRole : Bool
     dojAndreaAliasAutomaticallyPaysPatentInventorIdentity : Bool
     primaryAliasBridgeAutomaticallyPaysJPLRole : Bool
     multipleNonInstitutionalCarriersMayGuidePrimarySearch : Bool
@@ -254,4 +291,4 @@ open RezaRoleSourceBoundary public
 
 canonicalRezaRoleSourceBoundary : RezaRoleSourceBoundary
 canonicalRezaRoleSourceBoundary = reza-role-source-boundary
-  false false false false false false false false false false false true false
+  false false false false false false false false false false false false false true false
