@@ -15,7 +15,7 @@ open import Agda.Builtin.String using (String)
 
 data AttributionCarrierKind : Set where
   authorManuscript publisherSupportingInformation publisherRenderedPage
-  bibliographicIndex conferenceProgramme : AttributionCarrierKind
+  bibliographicIndex conferenceProgramme nasaNTRSChorusManifestation : AttributionCarrierKind
 
 record ManifestationAttributionCarrier : Set where
   constructor manifestation-attribution-carrier
@@ -81,6 +81,16 @@ pubmedCarrier = manifestation-attribution-carrier
   "current PubMed mapping assigns Frank Maiwald affiliation 1 = JILA and Department of Chemistry, University of Colorado Boulder"
   false false
 
+nasaNTRSChorus2026Carrier : ManifestationAttributionCarrier
+nasaNTRSChorus2026Carrier = manifestation-attribution-carrier
+  nasaNTRSChorusManifestation
+  "Cryogenic Ion Vibrational Spectroscopy of Protonated Valine: Messenger Tag Effects"
+  "NASA NTRS document 13797709699197; external source CHORUS; accepted manuscript; acquired 2026-06-15; DOI field 10.26434/chemrxiv-2024-2tvc6"
+  "https://ntrs.nasa.gov/citations/13797709699197"
+  "NASA/NTRS harvested accepted-manuscript metadata manifestation"
+  "Frank Maiwald named in author list; NTRS exposes no affiliation mapping and no downloadable file"
+  false false
+
 ------------------------------------------------------------------------
 -- Named conflict and bounded resolution state.
 ------------------------------------------------------------------------
@@ -116,7 +126,39 @@ protonatedValineMaiwaldConflict = manifestation-attribution-conflict
   true
   false
   false false false
-  "publisher/Crossref production metadata or correction history explaining why ACS rendered/PubMed mapping assigns Maiwald to JILA while the manuscript and ACS SI assign him to JPL"
+  "publisher/Crossref/CHORUS production metadata or correction history explaining why ACS rendered/PubMed mapping assigns Maiwald to JILA while manuscript and ACS SI assign him to JPL, and why NTRS harvested the ChemRxiv DOI as its accepted-manuscript identifier"
+
+------------------------------------------------------------------------
+-- NASA/CHORUS harvesting boundary.
+------------------------------------------------------------------------
+
+record NTRSHarvestManifestationState : Set where
+  constructor ntrs-harvest-manifestation-state
+  field
+    ntrsDocumentId : String
+    sourceSystem : String
+    documentType : String
+    acquiredDate : String
+    harvestedDoiField : String
+    acsVersionOfRecordDoi : String
+    downloadableNTRSFilePresent : Bool
+    ntrsManifestationPaysAuthorPresence : Bool
+    ntrsManifestationPaysRawDataCustody : Bool
+    harvestedDoiEqualsVersionOfRecordDoi : Bool
+    acquisitionTarget : String
+
+open NTRSHarvestManifestationState public
+
+protonatedValineNTRSHarvestState : NTRSHarvestManifestationState
+protonatedValineNTRSHarvestState = ntrs-harvest-manifestation-state
+  "13797709699197"
+  "CHORUS -> NASA NTRS"
+  "Accepted Manuscript"
+  "2026-06-15"
+  "10.26434/chemrxiv-2024-2tvc6"
+  "10.1021/acs.jpca.4c03552"
+  false true false false
+  "recover Crossref/CHORUS/NASA production metadata or correction history tying the ChemRxiv manuscript DOI, ACS version-of-record DOI, affiliation mappings and NTRS harvested object into one explicit manifestation lineage"
 
 ------------------------------------------------------------------------
 -- Same-name DOI/dataset false-positive control.
@@ -199,6 +241,8 @@ record ManifestationAttributionBoundary : Set where
     explicitSourceTextDeletesConflictingIndexHistory : Bool
     affiliationImpliesApparatusOwnership : Bool
     affiliationImpliesDataCustody : Bool
+    ntrsHarvestImpliesRawDataCustody : Bool
+    harvestedPreprintDoiEqualsVersionOfRecordDoi : Bool
     sameDisplayNamePlusDoiPaysPersonIdentity : Bool
     crossDomainDatasetMayBeInheritedByName : Bool
     conflictShouldRemainNamed : Bool
@@ -207,4 +251,4 @@ open ManifestationAttributionBoundary public
 
 canonicalManifestationAttributionBoundary : ManifestationAttributionBoundary
 canonicalManifestationAttributionBoundary = manifestation-attribution-boundary
-  false false false false false false false true
+  false false false false false false false false false true
