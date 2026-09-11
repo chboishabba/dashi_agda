@@ -176,7 +176,9 @@ def main() -> int:
     out = {
         "schema_version": TARGET_SCHEMA,
         "model_id": model_id,
+        "lane_family": "slr_document_corpus",
         "model_status": "candidate",
+        "source_mode": "gwb_certified_projection_receipt",
         "entities": [],
         "claims": claims,
         "relations": relations,
@@ -200,8 +202,12 @@ def main() -> int:
             "source_projection_schema": PROJECTION_SCHEMA,
             "semantic_promotion": False,
         }],
+        "external_graph_views": [],
+        "external_bridge_candidates": [],
+        "external_bridge_decisions": [],
         "external_pressure_results": [],
         "metadata": {
+            "adapter_schema": SCHEMA,
             "schema": SCHEMA,
             "profile_ref": cert.get("profile_ref", projection.get("profile_ref", "")),
             "certification_authority": cert.get("authority", ""),
