@@ -32,14 +32,12 @@ rezaDistributionSurface = D.carrier-distribution-receipt
   "The public record establishes co-invention and institutional IP transfer, but does not close distribution of exact heat-treatment, microstructure, manufacturing tolerances, qualification evidence or tacit process knowledge."
 
 ------------------------------------------------------------------------
--- Loureiro continuation surface.
+-- Loureiro continuation surfaces.
 --
--- PPPL's 2026 Intro Course explicitly replays Loureiro's 2018 magnetic-
--- reconnection lecture and names former students/colleagues Muni Zhou and
--- Suying Jin to lead the surrounding discussion.  This is a primary public
--- carrier for pedagogical/intellectual continuation only.  It does not identify
--- a new Loureiro Group PI, a grant reassignment, repository ownership, active
--- simulation configuration, notebook custody, or same-application handover.
+-- Keep center governance, pedagogy, and same-scientific-carrier succession as
+-- separate fibres. A successor to Loureiro as PSFC director is not thereby a
+-- successor to his students, grants, group repositories, KREHM/Viriato state,
+-- notebooks or target-specific simulation configurations.
 ------------------------------------------------------------------------
 
 loureiroPedagogicalContinuationSurface : D.CarrierDistributionReceipt
@@ -50,6 +48,48 @@ loureiroPedagogicalContinuationSurface = D.carrier-distribution-receipt
   D.distributedSourceBacked
   "Princeton Plasma Physics Laboratory 2026 Intro Course; Loureiro 2018 Reconnection lecture replay with Q&A led by Prof. Muni Zhou and Dr. Suying Jin"
   "This closes public pedagogical/intellectual continuation. It does not close Loureiro Group PI succession, student/grant reassignment, Viriato/KREHM repository custody, target-specific simulation state, notebooks, or same-carrier application handover."
+
+record LoureiroCenterLeadershipSuccessionReceipt : Set where
+  constructor loureiro-center-leadership-succession-receipt
+  field
+    predecessor : String
+    predecessorRole : String
+    successor : String
+    successorRole : String
+    firstLocatedPostLossCarrier : String
+    primaryInstitutionalSource : String
+    centerLeadershipSuccessionPaid : Bool
+    loureiroGroupScientificSuccessionPaid : Bool
+    studentReassignmentPaid : Bool
+    grantReassignmentPaid : Bool
+    repositoryCustodyPaid : Bool
+
+open LoureiroCenterLeadershipSuccessionReceipt public
+
+loureiroCenterLeadershipSuccession : LoureiroCenterLeadershipSuccessionReceipt
+loureiroCenterLeadershipSuccession = loureiro-center-leadership-succession-receipt
+  "Nuno F. G. Loureiro"
+  "Director, MIT Plasma Science and Fusion Center"
+  "Steve Wukitch"
+  "Interim Director, MIT Plasma Science and Fusion Center"
+  "MIT/MITEI March-April 2026 public reporting naming Steve Wukitch as PSFC Interim Director"
+  "MIT News 2026-04-21; MIT Energy Initiative 2026-03-20; PSFC mirror"
+  true false false false false
+
+record LoureiroSuccessionBoundary : Set where
+  constructor loureiro-succession-boundary
+  field
+    centerDirectorSuccessionImpliesLoureiroGroupPISuccession : Bool
+    centerDirectorSuccessionImpliesStudentReassignment : Bool
+    centerDirectorSuccessionImpliesGrantReassignment : Bool
+    pedagogicalContinuationImpliesRepositoryTransfer : Bool
+    centerLeadershipAndPedagogyMayGuideSameCarrierSearch : Bool
+
+open LoureiroSuccessionBoundary public
+
+canonicalLoureiroSuccessionBoundary : LoureiroSuccessionBoundary
+canonicalLoureiroSuccessionBoundary = loureiro-succession-boundary
+  false false false false true
 
 record SuccessionSearchStatus : Set where
   constructor succession-search-status
@@ -62,6 +102,8 @@ record SuccessionSearchStatus : Set where
     rezaNamedSameCarrierSuccessorLocatedIsFalse : rezaNamedSameCarrierSuccessorLocated ≡ false
     loureiroPedagogicalContinuationLocated : Bool
     loureiroPedagogicalContinuationLocatedIsTrue : loureiroPedagogicalContinuationLocated ≡ true
+    loureiroCenterLeadershipSuccessorLocated : Bool
+    loureiroCenterLeadershipSuccessorLocatedIsTrue : loureiroCenterLeadershipSuccessorLocated ≡ true
     loureiroSameCarrierSuccessorLocated : Bool
     loureiroSameCarrierSuccessorLocatedIsFalse : loureiroSameCarrierSuccessorLocated ≡ false
     absencePromotedToNoSuccessor : Bool
@@ -69,7 +111,7 @@ record SuccessionSearchStatus : Set where
 
 canonicalSuccessionSearchStatus : SuccessionSearchStatus
 canonicalSuccessionSearchStatus = succession-search-status
-  false refl false refl false refl true refl false refl false refl
+  false refl false refl false refl true refl true refl false refl false refl
 
 data SuccessionReverseTarget : Set where
   chavezSameCarrierTaskAllocation
