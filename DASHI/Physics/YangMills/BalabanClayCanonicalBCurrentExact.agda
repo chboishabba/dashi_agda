@@ -125,6 +125,14 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound325Exact
 -- application residual.  R322 then compiles this package directly to R320.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityMinCutRound326Exact
 
+-- R327 removes radius-existence / pair-membership inflation from that residual.
+-- Once the literal finite CMP116 demand coefficients are instantiated, the
+-- canonical R104/R114 common radius inhabits SourceCoordinateInside uniformly.
+-- What remains is the real same-object/application seam: selected physical J
+-- directions must be the source coordinates to which CMP116 localization
+-- applies on the same density/root/support carrier.
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJCommonDomainRound327Exact
+
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
 -- once the source-response identity is supplied, its first theorem-bearing
