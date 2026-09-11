@@ -12,10 +12,6 @@ import DASHI.Policy.ABC730IbrahimSnowballAttributionExact as Snowball
 
 ------------------------------------------------------------------------
 -- Palestinian-incidence snowball.
---
--- The purpose is not to infer the sign of the 2026 ban. It identifies a real
--- labour-incidence channel and records exactly what would still be required to
--- turn that channel into a policy counterfactual.
 ------------------------------------------------------------------------
 
 data IncidenceEvidenceClass : Set where
@@ -78,7 +74,7 @@ pcbsMicrodataSource = Source.mkNoDOISource
   "PCBS Microdata Catalog"
   "2026"
   "https://microdata.pcbs.gov.ps/PCBS-Metadata-en-v5.2/index.php/catalog/746"
-  Source.datasetSource
+  Source.institutionalSource
   "primary survey metadata with variables explicitly distinguishing work in Israel or settlements"
   Source.publicAttribution
 
@@ -101,7 +97,7 @@ unctad2026Source = Source.mkNoDOISource
   "UNCTAD"
   "2026"
   "https://unctad.org/publication/cumulative-economic-cost-occupation-palestinian-people-2000-2024-and-long-road-recovery"
-  Source.intergovernmentalSource
+  Source.institutionalSource
   "intergovernmental economic study of West Bank restrictions, trade/labour access and settlement economy"
   Source.publicAttribution
 
@@ -118,14 +114,14 @@ unctadDependencyContext = incidenceReceipt
   "This establishes macroeconomic asymmetry and entanglement, not the marginal effect of a settlement-import ban in Australia or the UK."
 
 maharmeh2026Source : Source.AttributedSource
-maharmeh2026Source = Source.attributedSource
+maharmeh2026Source = Source.mkDOISource
   "Ihab Maharmeh"
   "The Politics of labour: everyday practices of Palestinian workers in the settler economy"
   "journal article"
   "2026"
   "10.1080/2158379X.2025.2612489"
   "https://doi.org/10.1080/2158379X.2025.2612489"
-  Source.academicSource
+  Source.academicArticleSource
   "peer-reviewed qualitative study of Palestinian workers in the settler economy; mechanism/context, not a sanctions impact evaluation"
   Source.publicAttribution
 
@@ -142,14 +138,14 @@ maharmehLabourEntanglement = incidenceReceipt
   "The study is qualitative and is not an estimate of job losses, welfare incidence or causal effects from the 2026 UK/Australian policy counterfactual."
 
 hackl2022Source : Source.AttributedSource
-hackl2022Source = Source.attributedSource
+hackl2022Source = Source.mkDOISource
   "Andreas Hackl"
   "Occupied labour: dispossession through incorporation among Palestinian workers in Israel"
   "journal article"
   "2022"
   "10.1080/2201473X.2022.2032545"
   "https://doi.org/10.1080/2201473X.2022.2032545"
-  Source.academicSource
+  Source.academicArticleSource
   "peer-reviewed structural account of Palestinian labour incorporation; background mechanism only"
   Source.publicAttribution
 
@@ -170,10 +166,6 @@ allIncidenceReceipts =
   pcbsSettlementWorkers ∷ pcbsMicrodataStructure ∷ unctadDependencyContext ∷
   maharmehLabourEntanglement ∷ hacklIncorporationContext ∷ []
 
-------------------------------------------------------------------------
--- The exact Palestinian consequence state after this snowball.
-------------------------------------------------------------------------
-
 record PalestinianConsequenceState : Set where
   constructor palestinianConsequenceState
   field
@@ -191,10 +183,6 @@ record PalestinianConsequenceState : Set where
 canonicalPalestinianConsequenceState : PalestinianConsequenceState
 canonicalPalestinianConsequenceState =
   palestinianConsequenceState true true true true false false false false false false
-
-------------------------------------------------------------------------
--- Next snowball leaves. Acquisition can happen in parallel; payment cannot.
-------------------------------------------------------------------------
 
 record PalestinianIncidenceFrontier : Set where
   constructor palestinianIncidenceFrontier
@@ -216,10 +204,6 @@ canonicalPalestinianIncidenceFrontier = palestinianIncidenceFrontier
   "test whether reduced settlement demand displaces workers, moves production/employment, or is replaced by other labour"
   "test whether Palestinian-origin producers gain, lose or remain unaffected when settlement goods are differentiated"
   false
-
-------------------------------------------------------------------------
--- Firewalls.
-------------------------------------------------------------------------
 
 data SettlementEmploymentProvesBanHarmsPalestinians : Set where
 settlementEmploymentDoesNotProveBanHarmsPalestinians : SettlementEmploymentProvesBanHarmsPalestinians → ⊥
