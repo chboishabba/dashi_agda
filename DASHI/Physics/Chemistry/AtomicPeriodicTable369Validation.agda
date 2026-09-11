@@ -8,14 +8,16 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChronologyStatusExact as C
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AttributionLedgerExact as A
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoRegressionExact as X
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoAttributionExact as XA
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369DashiQFirstPublicSourceExact as DQ
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 
 ------------------------------------------------------------------------
 -- Focused validation root.  Importing this module forces the generative
 -- formalism, provenance/snowball companion, chronology/status ledger,
--- DOI/QID/primary/Dewey attribution ledgers, and cross-repository regression
--- ledger through the Agda checker when this file is actually checked.
+-- DOI/QID/primary/Dewey attribution ledgers, first-public dashiQ source, and
+-- cross-repository regression ledger through the Agda checker when this file
+-- is actually checked.
 --
 -- The existence of this file is not itself a typecheck receipt.  See the
 -- chronology/status owner for the distinction between authored source and a
@@ -121,3 +123,17 @@ crossRepoAttributionRegression :
     XA.canonicalCrossRepoAttributionWeld
   ≡ false
 crossRepoAttributionRegression = refl , refl
+
+firstPublicSourceRegression :
+  DQ.FirstPublicSourceChronology.periodicProgrammePredatesDashiAgdaInit
+    DQ.canonicalFirstPublicSourceChronology
+  ≡ true
+  ×
+  DQ.FirstPublicSourceBoundary.publicRepoStatementEqualsPeerReviewedPublication
+    DQ.canonicalFirstPublicSourceBoundary
+  ≡ false
+  ×
+  DQ.FirstPublicSourceBoundary.historicalWeDidEqualsKernelCheckedTheorem
+    DQ.canonicalFirstPublicSourceBoundary
+  ≡ false
+firstPublicSourceRegression = refl , (refl , refl)
