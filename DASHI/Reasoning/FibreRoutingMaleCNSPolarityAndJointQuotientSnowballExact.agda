@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Reasoning.FibreRoutingMaleCNSSenderScalarCompressionSnowballExact as Sender
 import DASHI.Reasoning.FibreRoutingMaleCNSScaleShapeEmpiricalSnowballExact as ScaleShape
 import DASHI.Reasoning.FibreRoutingJoinedObserverAdequacyExact as Joined
@@ -136,7 +137,7 @@ independentReplication = polarity-gate-state independentReplicationGate false
 ------------------------------------------------------------------------
 
 separateAxisAdequacyDoesNotPayJointQuotient :
-  DASHI.Core.IntersectionalNonFactorability.SeparateAxisSufficiencyImpliesIntersectionalSufficiencyPermission → ⊥
+  NonFactor.SeparateAxisSufficiencyImpliesIntersectionalSufficiencyPermission → ⊥
 separateAxisAdequacyDoesNotPayJointQuotient =
   Joined.intersectionalNoAutoPromotionAnchor
 
