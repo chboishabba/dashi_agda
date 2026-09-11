@@ -10,6 +10,7 @@ import DASHI.WorldModel.PredicateNormalWorldModelCore as PNW
 import DASHI.Law.SensibLawSparseWorldModelAcquisitionExact as Sparse
 import DASHI.Cognition.PNF.SensibLawDiscourseQualityAuditExact as Quality
 import DASHI.Policy.ABC730IbrahimSnowballAttributionExact as Ibrahim
+import DASHI.Interop.ITIRSensiBlawStreamlineArchitecture as ITIRSL
 
 ------------------------------------------------------------------------
 -- SLR / WORLD-MODEL SUITE CONVERGENCE ROADMAP
@@ -278,5 +279,8 @@ sparseWorldBoundaryAnchor = Sparse.canonicalSparseWorldBoundary
 discourseQualityBoundaryAnchor : Quality.DiscourseQualityBoundary
 discourseQualityBoundaryAnchor = Quality.canonicalDiscourseQualityBoundary
 
-ibrahimSourceGrammarAnchor : Ibrahim.SourceCoordinateBoundary
-ibrahimSourceGrammarAnchor = Ibrahim.canonicalSourceCoordinateBoundary
+ibrahimSourceGrammarAnchor : Ibrahim.SnowballAttributionBoundary
+ibrahimSourceGrammarAnchor = Ibrahim.canonicalSnowballAttributionBoundary
+
+suiteArchitectureBoundaryAnchor : ITIRSL.ArchitectureAuthorityBits
+suiteArchitectureBoundaryAnchor = ITIRSL.canonicalArchitectureAuthorityBits
