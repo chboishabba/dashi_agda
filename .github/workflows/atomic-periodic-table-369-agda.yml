@@ -7,6 +7,8 @@ on:
       - 'DASHI/Physics/Foundations/AtomicFermionShellExact.agda'
       - 'DASHI/Physics/Foundations/AtomicValenceFermionBridgeExact.agda'
       - 'DASHI/Promotion/ChemistryFiniteRuleTargets.agda'
+      - 'scripts/atomic_radial_identity_repair.py'
+      - 'Artifacts/atomic-periodic-table-369/**'
       - 'Docs/papers/drafts/DASHIAtomicPeriodicTable369*.tex'
       - '.github/workflows/atomic-periodic-table-369-agda.yml'
   workflow_dispatch:
@@ -35,3 +37,43 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369MadelungPhysicalSourceSnowballExact.agda
       - name: Typecheck archive Hartree radial-identity defect owner
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ArchiveHartreeRadialIdentityDefectExact.agda
+      - name: Typecheck executed radial-identity repair owner
+        run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369RadialIdentityRepairExecutionExact.agda
+      - name: Typecheck physical validation root
+        run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369PhysicalValidation.agda
+
+  radial-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install numerical dependencies
+        run: python3 -m pip install --disable-pip-version-check numpy scipy
+      - name: Re-run n-sensitive hydrogenic radial identity regression
+        run: |
+          python3 scripts/atomic_radial_identity_repair.py \
+            --receipt /tmp/radial-identity-repair-receipt.json
+          python3 - <<'PY'
+          import hashlib, json, pathlib
+
+          committed = json.loads(pathlib.Path(
+              'Artifacts/atomic-periodic-table-369/radial-identity-repair-receipt.json'
+          ).read_text())
+          rerun = json.loads(pathlib.Path('/tmp/radial-identity-repair-receipt.json').read_text())
+          script_hash = hashlib.sha256(pathlib.Path(
+              'scripts/atomic_radial_identity_repair.py'
+          ).read_bytes()).hexdigest()
+
+          assert rerun['passed'] is True
+          assert rerun['same_l_principal_identity_distinguished'] is True
+          assert rerun['all_energy_checks'] is True
+          assert rerun['all_node_checks'] is True
+          assert rerun['all_orthogonality_checks'] is True
+          assert committed['producer_sha256'] == script_hash
+          assert rerun['producer_sha256'] == script_hash
+          assert [(s['n'], s['l'], s['radial_state_index'], s['observed_nodes'])
+                  for s in rerun['states']] == \
+                 [(s['n'], s['l'], s['radial_state_index'], s['observed_nodes'])
+                  for s in committed['states']]
+          PY
