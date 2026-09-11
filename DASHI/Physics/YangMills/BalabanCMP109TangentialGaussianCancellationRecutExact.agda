@@ -22,9 +22,11 @@ module DASHI.Physics.YangMills.BalabanCMP109TangentialGaussianCancellationRecutE
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _/_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact as Matrix
 import DASHI.Physics.YangMills.BalabanFiniteRationalTraceConnectionCancellationExact as Trace
 import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact as Direct
 
@@ -55,7 +57,7 @@ cmp109TangentialLogDetContribution :
 cmp109TangentialLogDetContribution weld =
   Trace.matrixTrace
     (Trace.carrier (Trace.connection (response weld)))
-    (DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact.multiplyMatrix
+    (Matrix.multiplyMatrix
       (Trace.carrier (Trace.connection (response weld)))
       (Trace.inverseRestricted (Trace.connection (response weld)))
       (Trace.connectionVariation (Trace.connection (response weld))))
@@ -66,10 +68,7 @@ cmp109TangentialLogDetContribution weld =
 cmp109TangentialGaussianCancels :
   ∀ {Index} (weld : CMP109TangentialGaussianSameObjectWeld Index) →
   Trace.logVolumeDerivative (response weld)
-    Data.Rational.Base.-
-      (Data.Rational.Base._*_
-        (Data.Rational.Base._/_ (Data.Integer.Base.+ 1) 2)
-        (cmp109TangentialLogDetContribution weld))
+    - (+ 1 / 2) * cmp109TangentialLogDetContribution weld
   ≡ 0ℚ
 cmp109TangentialGaussianCancels weld =
   Trace.gaussianTangentialConnectionCancelsVolumeJacobian (response weld)
