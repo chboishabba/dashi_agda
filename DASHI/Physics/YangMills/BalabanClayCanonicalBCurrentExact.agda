@@ -31,6 +31,7 @@ import DASHI.Physics.YangMills.BalabanCMP116TwoPhysicalJInsertionNormalizationRo
 import DASHI.Physics.YangMills.BalabanDirectT5JInsertionShellAdapterRound291Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound292Exact
 import DASHI.Physics.YangMills.BalabanCMP116StateFamilyTwoJNormalizationRound293Exact
+import DASHI.Physics.YangMills.BalabanSubgapGeometricSeparationRound293Exact
 import DASHI.Physics.YangMills.BalabanSubgapGeometricSeparationRound294Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound294Exact
 import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact
@@ -85,6 +86,9 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound336Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound337Exact
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338Exact
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedT5ApplicationRound339Exact
+import DASHI.Physics.YangMills.BalabanModeSelectedOneSidedClusteringLimitExact
+import DASHI.Physics.YangMills.BalabanCMP116ModeSelectedSubgapClusteringBidiExact
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalModeSelectedApplicationRound340Exact
 
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
