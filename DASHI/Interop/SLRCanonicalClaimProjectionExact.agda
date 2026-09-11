@@ -9,19 +9,19 @@ open import Data.Empty using (⊥)
 import DASHI.Interop.SLRSensibLawCandidateWorldAdapterExact as Adapter
 import DASHI.Interop.SLRValidationRoadmapPromotionExact as Validation
 import DASHI.Policy.ABC730WestBankSanctionsTranscriptClaimsExact as Claims
+import DASHI.Policy.ABC730IbrahimSnowballAttributionExact as Ibrahim
 
 ------------------------------------------------------------------------
 -- Canonical claim projection from SLR CandidateWorldModel.
 --
 -- Runtime:
 --   tools/slr-discourse-reconstruct/slr_claim_projection.py
---   schema = slr-canonical-claim-projection-v1
+--   schema = slr-canonical-claim-projection-v2
 --
--- The mapping basis is an explicit repo fixture carrying canonical claim refs
--- and parser sentence ids.  It is not fuzzy text similarity.  Fused parser
--- sentences may project to more than one canonical claim; those projections
--- remain candidate/conflicted until an exact labelled alignment or cut receipt
--- pays the subspan weld.
+-- Historical parser-sentence mappings remain useful candidate coverage.  The
+-- tracked speaker-labelled primary transcript can additionally pay an exact
+-- subspan weld only when source SHA, unique bounded phrase and candidate
+-- source offsets all agree.  Neither route promotes the proposition as true.
 ------------------------------------------------------------------------
 
 data ProjectionStatus : Set where
@@ -36,57 +36,59 @@ record CanonicalClaimProjection : Set where
   field
     discourseNodeReference : String
     canonicalClaimReference : String
-    parserSentenceReference : String
-    mappingFixtureReference : String
+    mappingReference : String
+    sourceDigestReference : String
     status : ProjectionStatus
     sourcePaidClaimIdentity : Bool
+    primarySpeakerAttributionPaid : Bool
     exactSubspanWeld : Bool
-    fixtureSpeakerStatusUsedAsAuthority : Bool
+    historicalFixtureSpeakerUsedAsAuthority : Bool
+    historicalFixtureRewritten : Bool
     semanticPromotion : Bool
 
 open CanonicalClaimProjection public
 
-c029Coverage : CanonicalClaimProjection
-c029Coverage = canonicalClaimProjection
-  "SLR discourse nodes in parser sentences 41/42"
+c029Projection : CanonicalClaimProjection
+c029Projection = canonicalClaimProjection
+  "SLR candidate nodes overlapping the unique C029 primary-source phrase"
   "ABC730-2026-09-09-C029"
-  "spaCy-41,spaCy-42"
-  "fixtures/slr/abc730-west-bank-sanctions-2026-09-09-speaker-resolution.jsonl"
-  conflictedSentenceCoverage
-  true false false false
+  "fixture parser-sentence coverage + same-source unique phrase/offset weld"
+  "ABC primary transcript SHA 61c86754...408383"
+  exactSubspanWeldPaid
+  true true true false false false
 
-c030Coverage : CanonicalClaimProjection
-c030Coverage = canonicalClaimProjection
-  "SLR discourse nodes in parser sentences 42/43"
+c030Projection : CanonicalClaimProjection
+c030Projection = canonicalClaimProjection
+  "SLR candidate nodes overlapping the unique C030 primary-source phrase"
   "ABC730-2026-09-09-C030"
-  "spaCy-42,spaCy-43"
-  "fixtures/slr/abc730-west-bank-sanctions-2026-09-09-speaker-resolution.jsonl"
-  conflictedSentenceCoverage
-  true false false false
+  "historical sentence candidate -> later labelled primary source -> exact source span"
+  "ABC primary transcript SHA 61c86754...408383"
+  exactSubspanWeldPaid
+  true true true false false false
 
-c032Coverage : CanonicalClaimProjection
-c032Coverage = canonicalClaimProjection
-  "SLR discourse nodes in parser sentences 44/45"
+c032Projection : CanonicalClaimProjection
+c032Projection = canonicalClaimProjection
+  "SLR candidate nodes overlapping the unique C032 primary-source phrase"
   "ABC730-2026-09-09-C032"
-  "spaCy-44,spaCy-45"
-  "fixtures/slr/abc730-west-bank-sanctions-2026-09-09-speaker-resolution.jsonl"
-  conflictedSentenceCoverage
-  true false false false
+  "historical likely speaker -> later labelled primary source -> exact source span"
+  "ABC primary transcript SHA 61c86754...408383"
+  exactSubspanWeldPaid
+  true true true false false false
 
-c033Coverage : CanonicalClaimProjection
-c033Coverage = canonicalClaimProjection
-  "SLR discourse nodes in parser sentences 45/46"
+c033Projection : CanonicalClaimProjection
+c033Projection = canonicalClaimProjection
+  "SLR candidate nodes overlapping the unique C033 primary-source phrase"
   "ABC730-2026-09-09-C033"
-  "spaCy-45,spaCy-46"
-  "fixtures/slr/abc730-west-bank-sanctions-2026-09-09-speaker-resolution.jsonl"
-  conflictedSentenceCoverage
-  true false false false
+  "historical sentence candidate -> later labelled primary source -> exact source span"
+  "ABC primary transcript SHA 61c86754...408383"
+  exactSubspanWeldPaid
+  true true true false false false
 
 projectionFrontier : List CanonicalClaimProjection
-projectionFrontier = c029Coverage ∷ c030Coverage ∷ c032Coverage ∷ c033Coverage ∷ []
+projectionFrontier = c029Projection ∷ c030Projection ∷ c032Projection ∷ c033Projection ∷ []
 
 ------------------------------------------------------------------------
--- Runtime contract.
+-- Runtime boundary.
 ------------------------------------------------------------------------
 
 record ClaimProjectionRuntimeBoundary : Set where
@@ -94,11 +96,15 @@ record ClaimProjectionRuntimeBoundary : Set where
   field
     schemaReference : String
     targetWorldSchemaReference : String
-    mappingUsesExplicitClaimRefs : Bool
-    mappingUsesParserSentenceIds : Bool
+    historicalMappingUsesExplicitClaimRefs : Bool
+    historicalMappingUsesParserSentenceIds : Bool
+    primaryMappingRequiresSameSourceSHA : Bool
+    primaryMappingRequiresUniqueBoundedPhrase : Bool
+    primaryMappingRequiresCandidateOffsets : Bool
     fuzzyTextMatchingUsed : Bool
-    staleFixtureSpeakerStatusCreatesAuthority : Bool
-    fusedSentenceMayProjectToMultipleClaims : Bool
+    historicalFixtureSpeakerCreatesAuthority : Bool
+    laterPrimaryReceiptMayPayAttribution : Bool
+    laterPrimaryReceiptRewritesHistoricalState : Bool
     exactSubspanWeldDefaultPaid : Bool
     candidateOnly : Bool
     semanticPromotion : Bool
@@ -107,26 +113,32 @@ open ClaimProjectionRuntimeBoundary public
 
 canonicalClaimProjectionRuntimeBoundary : ClaimProjectionRuntimeBoundary
 canonicalClaimProjectionRuntimeBoundary = claimProjectionRuntimeBoundary
-  "slr-canonical-claim-projection-v1"
+  "slr-canonical-claim-projection-v2"
   "sl.candidate_world_model.v0_1"
-  true true false false true false true false
+  true true true true true false false true false false true false
 
 ------------------------------------------------------------------------
--- Firewalls.
+-- Snowball / WrongType firewalls.
 ------------------------------------------------------------------------
 
 data SentenceCoverageMeansExactSubspan : Set where
-data FixtureSpeakerCandidateMeansVerifiedSpeaker : Set where
+data HistoricalFixtureSpeakerMeansVerifiedSpeaker : Set where
+data PrimarySpeakerLabelMeansUnderlyingClaimTrue : Set where
 data ClaimReferenceMeansClaimTruth : Set where
 data TextSimilarityMayReplaceExplicitMapping : Set where
-data MultipleClaimCoverageMayBeSilentlyCollapsed : Set where
+data QIDMayPayClaimTruth : Set where
+data DeweyMayPayClaimTruth : Set where
+data DOIMayPayClaimTruth : Set where
+data LaterPrimaryReceiptMayRewriteHistoricalFixture : Set where
 
 sentenceCoverageDoesNotPayExactSubspan : SentenceCoverageMeansExactSubspan → ⊥
 sentenceCoverageDoesNotPayExactSubspan ()
 
-fixtureSpeakerCandidateDoesNotVerifySpeaker :
-  FixtureSpeakerCandidateMeansVerifiedSpeaker → ⊥
-fixtureSpeakerCandidateDoesNotVerifySpeaker ()
+historicalFixtureSpeakerDoesNotVerifySpeaker : HistoricalFixtureSpeakerMeansVerifiedSpeaker → ⊥
+historicalFixtureSpeakerDoesNotVerifySpeaker ()
+
+primarySpeakerDoesNotPromoteUnderlyingClaim : PrimarySpeakerLabelMeansUnderlyingClaimTrue → ⊥
+primarySpeakerDoesNotPromoteUnderlyingClaim ()
 
 claimReferenceDoesNotMeanTruth : ClaimReferenceMeansClaimTruth → ⊥
 claimReferenceDoesNotMeanTruth ()
@@ -134,18 +146,33 @@ claimReferenceDoesNotMeanTruth ()
 textSimilarityMayNotReplaceMapping : TextSimilarityMayReplaceExplicitMapping → ⊥
 textSimilarityMayNotReplaceMapping ()
 
-multipleCoverageMayNotCollapse : MultipleClaimCoverageMayBeSilentlyCollapsed → ⊥
-multipleCoverageMayNotCollapse ()
+qidDoesNotPayClaimTruth : QIDMayPayClaimTruth → ⊥
+qidDoesNotPayClaimTruth ()
+
+deweyDoesNotPayClaimTruth : DeweyMayPayClaimTruth → ⊥
+deweyDoesNotPayClaimTruth ()
+
+doiDoesNotPayClaimTruth : DOIMayPayClaimTruth → ⊥
+doiDoesNotPayClaimTruth ()
+
+laterPrimaryDoesNotRewriteHistoricalFixture : LaterPrimaryReceiptMayRewriteHistoricalFixture → ⊥
+laterPrimaryDoesNotRewriteHistoricalFixture ()
 
 ------------------------------------------------------------------------
 -- Existing-owner anchors.
 ------------------------------------------------------------------------
 
-adapterBoundaryAnchor : Adapter.SLRSensibLawWorldAdapterBoundary
-adapterBoundaryAnchor = Adapter.canonicalSLRSensibLawWorldAdapterBoundary
+adapterReceiptAnchor : Adapter.SLRSensibLawWorldAdapterReceipt
+adapterReceiptAnchor = Adapter.canonicalSLRSensibLawWorldAdapterReceipt
 
 validationBoundaryAnchor : Validation.ValidationPromotionBoundary
 validationBoundaryAnchor = Validation.canonicalValidationPromotionBoundary
 
-canonicalClaimLedgerReference : String
-canonicalClaimLedgerReference = "DASHI.Policy.ABC730WestBankSanctionsTranscriptClaimsExact"
+ibrahimBoundaryAnchor : Ibrahim.SnowballAttributionBoundary
+ibrahimBoundaryAnchor = Ibrahim.canonicalSnowballAttributionBoundary
+
+c029ClaimAnchor : Claims.TranscriptClaim
+c029ClaimAnchor = Claims.c029
+
+c032ClaimAnchor : Claims.TranscriptClaim
+c032ClaimAnchor = Claims.c032
