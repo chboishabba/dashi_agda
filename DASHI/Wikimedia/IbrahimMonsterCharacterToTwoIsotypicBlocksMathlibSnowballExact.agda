@@ -32,21 +32,17 @@ import DASHI.Wikimedia.IbrahimMonsterCharacterDeterminationMathlibProducerSnowba
 --   * sSupIndep_isotypicComponents;
 --   * sSup_isotypicComponents = top.
 --
--- Therefore the next cross-prover theorem is NOT a new Monster hypothesis and
--- not a general character-table engine.  It is a small assembly theorem:
+-- The first half is now source-written in dashi_lean4:
 --
---   if T,S are non-isomorphic simples,
---      char(V)=char(T)+char(S),
---      dim(V)=dim(T)+dim(S),
---   then V has exactly the T- and S-isotypic blocks, each multiplicity one,
---   those blocks are disjoint, and they exhaust V.
+--   cast_finrank_hom_left_eq_one_of_character_eq_add
+--   cast_finrank_hom_right_eq_one_of_character_eq_add
+--   cast_finrank_hom_other_eq_zero_of_character_eq_add
 --
--- This owner records the producer contract and pinned APIs.  It does NOT claim
--- that the theorem has yet been source-written or Lean-kernel checked.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- 1. Source-code producer attribution, kept distinct by file/author role.
+-- with a separate regression consumer on the normal Synthesis build path.
+-- No Lean Action / kernel receipt has yet been observed for that head.
+--
+-- The remaining generic theorem is the semisimple assembly:
+-- multiplicities 1,1,0 -> exactly two isotypic blocks -> direct sum.
 ------------------------------------------------------------------------
 
 mathlibCharacterSource : Attribution.AttributedSource
@@ -89,8 +85,17 @@ isotypicAttribution = Snowball.canonicalSourceRoleSnowballReceipt mathlibIsotypi
 mathlibExecutionVersion : String
 mathlibExecutionVersion = "v4.28.0"
 
+leanMultiplicityDonorPath : String
+leanMultiplicityDonorPath = "Synthesis/MonsterCharacterDetermination.lean"
+
+leanMultiplicityRegressionPath : String
+leanMultiplicityRegressionPath = "Synthesis/MonsterCharacterMultiplicityRegression.lean"
+
+leanMultiplicityDonorHead : String
+leanMultiplicityDonorHead = "751d58de09bcb37d1b1f3dbac2511f6cb362da5e"
+
 ------------------------------------------------------------------------
--- 2. Exact cross-prover contract.
+-- Exact cross-prover contract.
 ------------------------------------------------------------------------
 
 record TwoSimpleCharacterDecompositionProducer : Set₁ where
@@ -98,31 +103,26 @@ record TwoSimpleCharacterDecompositionProducer : Set₁ where
     GroupCarrier : Set
     FieldCarrier : Set
     V T S : Set
-
     finiteGroup : Set
     algebraicallyClosedField : Set
     groupOrderInvertible : Set
     tSimple : Set
     sSimple : Set
     tAndSNonisomorphic : Set
-
     characterOfVIsCharacterTPlusCharacterS : Set
     dimensionOfVIsDimensionTPlusDimensionS : Set
-
     tEquivariantHomMultiplicityIsOne : Set
     sEquivariantHomMultiplicityIsOne : Set
     everyOtherSimpleHomMultiplicityIsZero : Set
-
     tIsotypicBlock : Set
     sIsotypicBlock : Set
     blocksDisjoint : Set
     blocksExhaustV : Set
     directSumEquivariantIsomorphism : Set
-
 open TwoSimpleCharacterDecompositionProducer public
 
 ------------------------------------------------------------------------
--- 3. External classification coordinates remain navigation only.
+-- Classification/navigation coordinates remain non-promoting.
 ------------------------------------------------------------------------
 
 record IsotypicCompilerExternalCoordinates : Set where
@@ -146,28 +146,30 @@ canonicalIsotypicCompilerExternalCoordinates = isotypic-compiler-external-coordi
   false
 
 ------------------------------------------------------------------------
--- 4. WrongType / non-promotion boundaries.
+-- WrongType / non-promotion boundaries.
 ------------------------------------------------------------------------
 
 data CharacterEqualityCreatesDirectSumWithoutSemisimplicity : Set where
 data SourceApiExistsCreatesLeanTheorem : Set where
+data LeanSourceCreatesLeanKernelReceipt : Set where
 data LeanTheoremCreatesAgdaKernelProof : Set where
 data GenericIsotypicCompilerCreatesMonsterSameAction : Set where
 data DdcCreatesRepresentationDecomposition : Set where
 data OeisCreatesRepresentationDecomposition : Set where
 
-characterEqualityAloneDoesNotCreateDirectSum :
-  CharacterEqualityCreatesDirectSumWithoutSemisimplicity → ⊥
+characterEqualityAloneDoesNotCreateDirectSum : CharacterEqualityCreatesDirectSumWithoutSemisimplicity → ⊥
 characterEqualityAloneDoesNotCreateDirectSum ()
 
 sourceApiDoesNotCreateLeanTheorem : SourceApiExistsCreatesLeanTheorem → ⊥
 sourceApiDoesNotCreateLeanTheorem ()
 
+leanSourceDoesNotCreateKernelReceipt : LeanSourceCreatesLeanKernelReceipt → ⊥
+leanSourceDoesNotCreateKernelReceipt ()
+
 leanTheoremDoesNotCreateAgdaKernelProof : LeanTheoremCreatesAgdaKernelProof → ⊥
 leanTheoremDoesNotCreateAgdaKernelProof ()
 
-genericCompilerDoesNotCreateMonsterSameAction :
-  GenericIsotypicCompilerCreatesMonsterSameAction → ⊥
+genericCompilerDoesNotCreateMonsterSameAction : GenericIsotypicCompilerCreatesMonsterSameAction → ⊥
 genericCompilerDoesNotCreateMonsterSameAction ()
 
 ddcDoesNotCreateDecomposition : DdcCreatesRepresentationDecomposition → ⊥
@@ -177,7 +179,7 @@ oeisDoesNotCreateDecomposition : OeisCreatesRepresentationDecomposition → ⊥
 oeisDoesNotCreateDecomposition ()
 
 ------------------------------------------------------------------------
--- 5. Highest-alpha cut.
+-- Highest-alpha cut.
 ------------------------------------------------------------------------
 
 record TwoIsotypicCompilerFrontier : Set where
@@ -190,9 +192,12 @@ record TwoIsotypicCompilerFrontier : Set where
     pinnedIsotypicIndependenceAPI : Bool
     pinnedIsotypicExhaustionAPI : Bool
     monsterPhaseCharacterTwelvePlusSeventyEightPaid : Bool
-    genericTwoSimpleCompilerSourceWritten : Bool
-    genericTwoSimpleCompilerLeanKernelChecked : Bool
-    genericTwoSimpleCompilerTransportedToAgda : Bool
+    multiplicityRegressionSourceWritten : Bool
+    multiplicityLemmasSourceWritten : Bool
+    multiplicityLemmasLeanKernelChecked : Bool
+    isotypicAssemblySourceWritten : Bool
+    isotypicAssemblyLeanKernelChecked : Bool
+    fullTwoSimpleCompilerTransportedToAgda : Bool
     actualMonsterFin90SameActionAttachmentPaid : Bool
     nextResidual : String
 open TwoIsotypicCompilerFrontier public
@@ -200,8 +205,9 @@ open TwoIsotypicCompilerFrontier public
 currentTwoIsotypicCompilerFrontier : TwoIsotypicCompilerFrontier
 currentTwoIsotypicCompilerFrontier = two-isotypic-compiler-frontier
   true true true true true true true
+  true true false
   false false false false
-  "implement the generic two-simple character decomposition in the existing dashi_lean4 Synthesis lane against mathlib v4.28.0. First derive equivariant-Hom multiplicities 1,1,0 from FDRep.scalar_product_char_eq_finrank_equivariant plus char_orthonormal; then use the pinned semisimple/isotypic-component API to obtain disjoint T/S blocks exhausting V. Keep this theorem generic. After a Lean kernel receipt, transport only its result contract into Agda and apply it to the source-paid 12/78 multiplicity character. The Monster-specific remaining leaf is still the SAME actual W_zeta -> X6 x Fin90 action/intertwiner; a generic direct-sum compiler cannot manufacture that same-action weld."
+  "the generic character-to-multiplicity half is now source-written in dashi_lean4 and its regression consumer is on the default Synthesis build path, but no Lean Action run is attached to head 751d58de09bcb37d1b1f3dbac2511f6cb362da5e. Do not promote it to kernel-paid. The next generic source leaf is only the semisimple assembly from multiplicities 1,1,0 to the two isotypic blocks and a direct-sum equivariant isomorphism, using pinned mathlib v4.28.0 Maschke/isotypic APIs. After an actual Lean kernel receipt, transport the result contract into Agda. The Monster-specific final leaf remains the SAME W_zeta action/intertwiner with X6 x Fin90; generic decomposition cannot create that same-object action weld."
 
 phaseFrontier : Phase.PhaseCharacterWeldFrontier
 phaseFrontier = Phase.currentPhaseCharacterWeldFrontier
