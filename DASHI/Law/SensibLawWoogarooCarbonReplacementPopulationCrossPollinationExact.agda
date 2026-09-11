@@ -12,21 +12,6 @@ import DASHI.Law.SensibLawWoogarooIbrahimDeweyQidLegalAtomExact as WoogarooIbrah
 import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 import DASHI.Law.SensibLawWoogarooPopulationConnectivityAcquisitionExact as Population
 
-------------------------------------------------------------------------
--- WOOGAROO CARBON-REPLACEMENT × POPULATION/LOGISTIC CROSS-POLLINATION
---
--- Purpose: keep stock, flux, ecological maturity, population carrying
--- capacity and legal consumers separate.  A young or planted offset may grow
--- quickly while remaining far below the carbon stock, structural maturity,
--- hollow/resource availability, connectivity and population-support function
--- of the habitat that was removed.
---
--- This owner is an evidence/method bridge only.  It does not conclude that a
--- particular Woogaroo offset is inadequate, that an old tree always sequesters
--- more than a young tree, or that carbon equivalence is itself a statutory
--- habitat test.
-------------------------------------------------------------------------
-
 data ReplacementDimension : Set where
   standingCarbonStock
   annualCarbonAccumulation
@@ -94,16 +79,6 @@ connectivityCoordinate = replacement-coordinate
   "NCA s 13 essentiality/substitutability and s 102 causal seriousness."
   "Area or carbon parity does not imply realised connectivity or gene-flow parity."
 
-------------------------------------------------------------------------
--- Existing logistic/population machinery cross-pollination.
---
--- The canonical repo Biology owner LogisticPopulationDirectionalEvidenceExact
--- already keeps population state separate from a coarse growth-direction
--- observation and explicitly prevents a stationary observation from being
--- promoted into a unique carrying-capacity conclusion.  This legal adapter
--- mirrors that discipline without copying its implementation onto this branch.
-------------------------------------------------------------------------
-
 record LogisticCrossPollination : Set where
   constructor logistic-cross-pollination
   field
@@ -119,10 +94,6 @@ canonicalWoogarooLogisticCrossPollination : LogisticCrossPollination
 canonicalWoogarooLogisticCrossPollination = logistic-cross-pollination
   "DASHI/Biology/LogisticPopulationDirectionalEvidenceExact.agda"
   true true true true false false
-
-------------------------------------------------------------------------
--- Ibrahim / DOI / QID / Dewey coordinates.
-------------------------------------------------------------------------
 
 carbonSequestrationQid : Id.ItemId
 carbonSequestrationQid = Id.itemId "Q15305550"
@@ -150,10 +121,6 @@ populationGeneticsDewey = WoogarooIbrahim.populationGeneticsDewey
 
 conservationDewey : String
 conservationDewey = WoogarooIbrahim.conservationDewey
-
-------------------------------------------------------------------------
--- Snowball source atlas.
-------------------------------------------------------------------------
 
 stephenson2014 : Source.AttributedSource
 stephenson2014 = Source.mkDOISource
@@ -246,10 +213,6 @@ carbonReplacementSourceAtlas = Source.mkSourceAtlas
    crouzeilles2016 ∷ macintosh2024 ∷ dcceewOffsetGuide ∷ [])
   "Snowball separates individual-tree carbon accumulation, stand-level carbon stock/sink, restoration trajectory, biodiversity structure, population capacity and official offset-policy timing. General science supplies mechanism/method only; Springview/offset parity remains a same-object quantitative task."
 
-------------------------------------------------------------------------
--- Knowledge coordinates / traversal edges.
-------------------------------------------------------------------------
-
 carbonCoordinate : Ibrahim.DashiKnowledgeCoordinate
 carbonCoordinate = Ibrahim.dashi-knowledge-coordinate
   "DASHI/Law/SensibLawWoogarooCarbonReplacementPopulationCrossPollinationExact.agda"
@@ -287,10 +250,6 @@ logisticSupportsPopulationCounterfactual = Ibrahim.dashi-first-link-edge
   Ibrahim.canonicalDashiFirstLinkPolicy
   "Population/logistic machinery reinforces that growth direction, carrying capacity and population state are different variables; habitat maturation can change population-support capacity through time."
   true
-
-------------------------------------------------------------------------
--- Legal atom bindings.
-------------------------------------------------------------------------
 
 record CarbonPopulationAtomBinding : Set where
   constructor carbon-population-atom-binding
@@ -336,10 +295,6 @@ maturityToS102 = carbon-population-atom-binding
   true false
   "Long replacement time and irreversible mature-structure loss may inform duration/reversibility of effect; they do not independently satisfy s 102."
 
-------------------------------------------------------------------------
--- Current acquisition questions.
-------------------------------------------------------------------------
-
 record CarbonReplacementAcquisition : Set where
   constructor carbon-replacement-acquisition
   field
@@ -362,10 +317,6 @@ currentCarbonReplacementAcquisition = carbon-replacement-acquisition
 populationAcquisitionReuse : Population.AcquisitionLeafReceipt
 populationAcquisitionReuse = Population.counterfactualLeaf
 
-------------------------------------------------------------------------
--- WrongType / no-promotion boundaries.
-------------------------------------------------------------------------
-
 data LargeOldTreeMeansOldStandAlwaysHigherAnnualSink : Set where
 data YoungForestFastGrowthMeansCarbonStockReplaced : Set where
 data CarbonStockParityMeansHabitatParity : Set where
@@ -374,7 +325,7 @@ data PlantedForestMeansMatureForest : Set where
 data EqualAreaMeansEqualOffsetFunction : Set where
 data CarbonScienceMeansOffsetLegallyAdequate : Set where
 data PositivePopulationGrowthMeansCarryingCapacityRecovered : Set where
-\data OneReplacementTimeFitsAllDimensions : Set where
+data OneReplacementTimeFitsAllDimensions : Set where
 
 largeTreeResultDoesNotUniversaliseStandSink : LargeOldTreeMeansOldStandAlwaysHigherAnnualSink → ⊥
 largeTreeResultDoesNotUniversaliseStandSink ()
