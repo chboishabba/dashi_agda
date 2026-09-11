@@ -7,39 +7,40 @@ open import Agda.Builtin.List using (List)
 
 import DASHI.Cognition.PNF.SensibLawTranscriptBoundaryPNFWorldManifoldExact as Manifold
 import DASHI.Cognition.PNF.SensibLawBroadcastDiscourseGraphCompilerExact as Graph
+import DASHI.Cognition.PNF.SensibLawRoleTransitionManifoldExact as Role
 import DASHI.Reasoning.SemanticCandidateResidualBidiExact as Residual
 
 ------------------------------------------------------------------------
 -- Broadcast discourse span reconstruction.
 --
--- The runtime projection is downstream of the PNF/world manifold. A Pareto
--- singleton is necessary but not sufficient for a hard cut: the selected cut
--- must also preserve the core PNF role relations appropriate to its discourse
--- kind. Speaker cuts may not sever subject/object/clause relations. Quote
--- handoffs may retain a clause/content attachment, but may not sever actor or
--- patient relations. This keeps parser topology as a typed veto rather than a
--- scalar penalty.
+-- Runtime v4 consumes the independent role-transition manifold. A Pareto
+-- singleton is necessary but not sufficient for a hard cut: the selected
+-- discourse interpretation must be compatible with actor/patient/predicate/
+-- clause continuations for that consumer. Coordination remains observable but
+-- is not itself a hard veto. Quote handoffs may retain content-clause crossing.
 ------------------------------------------------------------------------
 
 data SpanBoundaryDisposition : Set where
   preserveOriginalSentence : SpanBoundaryDisposition
   candidateSpeakerCut : SpanBoundaryDisposition
   candidateQuoteHandoff : SpanBoundaryDisposition
-  pnfStructuralVeto : SpanBoundaryDisposition
+  roleCompatibilityVeto : SpanBoundaryDisposition
   unresolvedBoundary : SpanBoundaryDisposition
 
-record PNFStructuralCutReceipt : Set where
-  constructor pnfStructuralCutReceipt
+record RoleCompatibilityCutReceipt : Set where
+  constructor roleCompatibilityCutReceipt
   field
-    subjectCrossings : Nat
-    objectCrossings : Nat
-    clauseCrossings : Nat
-    coordinationCrossings : Nat
+    crossingRoleReference : String
+    actorCrossingReference : String
+    patientCrossingReference : String
+    predicateAuxCrossingReference : String
+    clauseCrossingReference : String
+    coordinationCrossingReference : String
     projectionReference : String
-    structuralRuleReference : String
+    compatibilityRuleReference : String
     admissibleReference : String
 
-open PNFStructuralCutReceipt public
+open RoleCompatibilityCutReceipt public
 
 record ReconstructedDiscourseSpan : Set where
   constructor reconstructedDiscourseSpan
@@ -53,7 +54,7 @@ record ReconstructedDiscourseSpan : Set where
     boundaryDisposition : SpanBoundaryDisposition
     paretoFrontReference : String
     retainedResidualReference : String
-    pnfStructuralReceiptReference : String
+    roleCompatibilityReceiptReference : String
     speakerCandidateReference : String
     speakerStatusReference : String
     claimReference : String
@@ -93,10 +94,11 @@ record SpanReconstructionReceipt : Set where
   field
     sourceReference : String
     graphReference : String
+    roleManifoldReference : String
     reconstructionSchema : String
     spans : List ReconstructedDiscourseSpan
     hardCutRuleReference : String
-    pnfStructuralGateReference : String
+    roleCompatibilityGateReference : String
     unresolvedBoundaryReference : String
     sourceCoverageReference : String
     paragraphTopologyReference : String
@@ -114,12 +116,15 @@ record CandidateHardCutPolicy : Set where
   field
     requiresRankOne : Bool
     requiresSingletonPareto : Bool
-    speakerRequiresZeroSubjectCrossings : Bool
-    speakerRequiresZeroObjectCrossings : Bool
-    speakerRequiresZeroClauseCrossings : Bool
-    quoteRequiresZeroSubjectCrossings : Bool
-    quoteRequiresZeroObjectCrossings : Bool
+    speakerVetoActorCrossing : Bool
+    speakerVetoPatientCrossing : Bool
+    speakerVetoPredicateAuxCrossing : Bool
+    speakerVetoClauseCrossing : Bool
+    quoteVetoActorCrossing : Bool
+    quoteVetoPatientCrossing : Bool
+    quoteVetoPredicateAuxCrossing : Bool
     quoteMayRetainClauseCrossing : Bool
+    coordinationCrossingAloneMayRemainLive : Bool
     permitsSpeakerProjection : Bool
     permitsQuoteProjection : Bool
     permitsNestingProjection : Bool
@@ -131,8 +136,9 @@ canonicalCandidateHardCutPolicy : CandidateHardCutPolicy
 canonicalCandidateHardCutPolicy =
   candidateHardCutPolicy
     true true
-    true true true
-    true true true
+    true true true true
+    true true true true
+    true
     true true false false false false
 
 ------------------------------------------------------------------------
@@ -181,13 +187,17 @@ data SingletonParetoVerifiesSpeaker : Set where
 singletonParetoDoesNotVerifySpeaker : SingletonParetoVerifiesSpeaker → ⊥
 singletonParetoDoesNotVerifySpeaker ()
 
-data SingletonParetoOverridesPNFStructure : Set where
-singletonParetoDoesNotOverridePNFStructure : SingletonParetoOverridesPNFStructure → ⊥
-singletonParetoDoesNotOverridePNFStructure ()
+data SingletonParetoOverridesRoleManifold : Set where
+singletonParetoDoesNotOverrideRoleManifold : SingletonParetoOverridesRoleManifold → ⊥
+singletonParetoDoesNotOverrideRoleManifold ()
 
-data SpeakerCutMaySeverCorePNFRole : Set where
-speakerCutMayNotSeverCorePNFRole : SpeakerCutMaySeverCorePNFRole → ⊥
-speakerCutMayNotSeverCorePNFRole ()
+data SpeakerCutMaySeverCoreRole : Set where
+speakerCutMayNotSeverCoreRole : SpeakerCutMaySeverCoreRole → ⊥
+speakerCutMayNotSeverCoreRole ()
+
+data CoordinationCrossingMustBlockSpeaker : Set where
+coordinationCrossingNeedNotBlockSpeaker : CoordinationCrossingMustBlockSpeaker → ⊥
+coordinationCrossingNeedNotBlockSpeaker ()
 
 data QuoteClauseCrossingMeansSpeakerCut : Set where
 quoteClauseCrossingDoesNotMeanSpeakerCut : QuoteClauseCrossingMeansSpeakerCut → ⊥
@@ -231,6 +241,12 @@ manifoldBoundaryAnchor = Manifold.canonicalPNFWorldManifoldBoundary
 graphBoundaryAnchor : Graph.BroadcastDiscourseGraphBoundary
 graphBoundaryAnchor = Graph.canonicalBroadcastDiscourseGraphBoundary
 
+roleBoundaryAnchor : Role.RoleTransitionBoundary
+roleBoundaryAnchor = Role.canonicalRoleTransitionBoundary
+
+roleCompatibilityAnchor : Role.DiscourseRoleCompatibility
+roleCompatibilityAnchor = Role.canonicalDiscourseRoleCompatibility
+
 residualBoundaryAnchor : Residual.SemanticResidualBoundary
 residualBoundaryAnchor = Residual.canonicalSemanticResidualBoundary
 
@@ -245,8 +261,10 @@ record SpanReconstructionBoundary : Set where
     staleSchemaFailsClosed : Bool
     nonNewlineMutationFailsClosed : Bool
     unresolvedParetoFrontsRemainUnsplit : Bool
-    singletonParetoStillNeedsPNFStructuralAdmission : Bool
-    speakerCorePNFRelationsAreHardVetoes : Bool
+    singletonParetoStillNeedsRoleCompatibility : Bool
+    speakerCoreRolesAreHardVetoes : Bool
+    predicateAuxContinuationIsHardVeto : Bool
+    coordinationAloneIsNotHardVeto : Bool
     quoteClauseAttachmentMayRemainLive : Bool
     speakerIdentityIndependentOfCutProjection : Bool
     rerunPNFIsRequiredForComparison : Bool
@@ -258,4 +276,4 @@ canonicalSpanReconstructionBoundary : SpanReconstructionBoundary
 canonicalSpanReconstructionBoundary =
   spanReconstructionBoundary
     true true true true true true true true
-    true true true true true true true true
+    true true true true true true true true true true
