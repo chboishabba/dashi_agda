@@ -63,15 +63,15 @@ amyReleaseMetadataPareto = investigative-pareto-target
   firstFront
   "Amy Eskridge / POAMS"
   "technical report Q3099732 -> research/report administration -> STI/release metadata"
-  "MSFC STI release-authorisation object: exact POAMS EDAA/NF-1676B plus attached reviewed manuscript/version"
-  "NTRS 20205010911; NASA/TM-20205010911; M-1531; SAA8-1519855; funding MSFC-RMB-QUANTUM-SAA8-1519855-1; Propulsion Systems Department / Engineering Directorate"
-  "review-object identity; release-history identity; attachment/version identity; Amy O2<->public-TM same-object test; route toward Institute derivative identity"
-  "NTRS 20205010911; NASA/TM-20205010911; M-1531; exact EDAA unresolved"
+  "MSFC STI release-authorisation object: exact POAMS EDAA/NF-1676B plus attached reviewed manuscript/version and current STRIVES/STI archival crosswalk"
+  "NTRS 20205010911; NASA/TM-20205010911; M-1531; SAA8-1519855; funding MSFC-RMB-QUANTUM-SAA8-1519855-1; Propulsion Systems Department / Engineering Directorate; historical NPR 2200.2D EDAA lineage; current NPR 2200.2E STRIVES review lineage"
+  "review-object identity; release-history identity; attachment/version identity; legacy-to-current release-record crosswalk; Amy O2<->public-TM same-object test; route toward Institute derivative identity"
+  "NTRS 20205010911; NASA/TM-20205010911; M-1531; exact legacy EDAA and current STRIVES record unresolved"
   "NASA Q23548; MSFC Q618696; report-domain QID only as traversal"
   "NASA Subject Category 70 / 530 Physics; metadata traversal 025.3 / 005.7 only"
   "primary NASA/MSFC STI compliance or release-authorisation record"
   true true false
-  "Public NTRS metadata is exhausted without the EDAA. One exact release object could join the administrative release chain, reviewed manuscript/version and the Amy same-object comparison without inventing a hidden-record conclusion from public-search failure."
+  "Public NTRS metadata is exhausted without the legacy release identity. One exact NASA cross-system release object could join EDAA/NF-1676B archaeology, current STRIVES/STI representation, reviewed manuscript/version and the Amy same-object comparison without inventing a hidden-record conclusion from public-search failure."
 
 rezaIdentityAndRolePareto : InvestigativeParetoTarget
 rezaIdentityAndRolePareto = investigative-pareto-target
@@ -79,29 +79,29 @@ rezaIdentityAndRolePareto = investigative-pareto-target
   "Monica Jacinto Reza / materials processing"
   "patent Q253623 -> intellectual property Q131257 -> assignment/inventor identity; separate JPL personnel branch"
   "primary carrier explicitly tying patent inventor Monica A. Jacinto to Monica Andrea Jacinto/Reza; independently, JPL/Caltech personnel/directory/org-chart record for Materials Processing role"
-  "US20030053926A1 facsimile = Monica A. Jacinto; US20040208777A1 2004 Boeing assignment by Monica A. Jacinto; Boeing 2004 and Cal State 2021 Monica Jacinto professional lineage; California DOJ Monica Jacinto Reza AKA Monica Andrea Jacinto"
-  "patent-person identity weld; employer lineage; event-time JPL role; eligibility for process-window/custody/succession promotion"
-  "US20030053926A1; US20040208777A1; LASD 025-00905-1257-400; Q139385030 traversal only"
+  "US20030053926A1 facsimile = Monica A. Jacinto; US20040208777A1 2004 Boeing assignment by Monica A. Jacinto; Boeing 2004, Cal State 2021 and AIAA SciTech 2023 Monica Jacinto/Aerojet lineage; California DOJ Monica Jacinto Reza AKA Monica Andrea Jacinto"
+  "patent-person identity weld; employer-transition interval; event-time JPL role; eligibility for process-window/custody/succession promotion"
+  "US20030053926A1; US20040208777A1; AIAA 99-2754; AIAA SciTech 2023 primary Aerojet carrier; LASD 025-00905-1257-400; Q139385030 traversal only"
   "Monica Jacinto Q139385030; patent Q253623; intellectual property Q131257"
   "346.048 Intellectual property / 620 Engineering traversal only"
   "primary patent/person identity record plus primary JPL/Caltech institutional personnel record"
   true true false
-  "The patent/IP route has already replaced rendered-name inference with source-text and assignment carriers. The remaining high-value join is explicit A.-to-Andrea identity, while the JPL role must remain independently institution-paid."
+  "The patent/IP route has replaced rendered-name inference with source-text and assignment carriers. AIAA SciTech 2023 narrows the last paid pre-JPL state to Aerojet Rocketdyne. The remaining high-value joins are explicit A.-to-Andrea identity and a primary JPL event-time role record."
 
 maiwaldDataPareto : InvestigativeParetoTarget
 maiwaldDataPareto = investigative-pareto-target
   secondFront
   "Frank W. Maiwald / action spectroscopy"
-  "research data Q15809982 -> data Q42848; metadata Q180160 -> repository/deposit manifestation"
-  "raw/reduced ion-action spectroscopy dataset or repository/deposit object with version/figure crosswalk to FY23 poster, ChemRxiv, ACS SI and 2025 publication"
-  "JPL FY23/FY24 project carriers; DOI 10.1021/acs.jpca.4c03552; ChemRxiv 10.26434/chemrxiv-2024-2tvc6; NTRS 13797709699197 CHORUS harvest; DOI 10.1021/acs.jpca.5c03141"
-  "raw-data identity; reduction lineage; figure provenance; data custody; manifestation-affiliation production history"
-  "ACS/ChemRxiv DOIs above; NTRS 13797709699197; person QID unresolved; JPL Q189325 institution only"
-  "research data Q15809982; data Q42848; metadata Q180160; JPL Q189325 institution only"
+  "spectroscopy Q483666 -> research data Q15809982 -> data Q42848; metadata Q180160 -> scan/deposit/instrument manifest"
+  "scan-level wavelength/intensity assets, reduced-spectrum tables or instrument/data-management manifest crosswalking the multi-day ValH+·N2 / ValH+·CH4 acquisition to Figure 3, the FY23 JPL poster and later publication manifestations"
+  "JPL FY23/FY24 project carriers; DOI 10.1021/acs.jpca.4c03552; ChemRxiv 10.26434/chemrxiv-2024-2tvc6; NSF PAR purl 10612041 full manuscript; NTRS 13797709699197 CHORUS harvest; DOI 10.1021/acs.jpca.5c03141; manuscript names raw Figure-3 points, 5-point gliding-average display lines, spectra collected across several days and at least 50 scans for the reported N2 spectrum"
+  "exact raw-scan identity; reduction lineage; Figure-3 provenance; raw/reduced data custody; poster-to-publication same-data crosswalk; manifestation-affiliation production history"
+  "NSF PAR 10612041; 10.1021/acs.jpca.4c03552; 10.26434/chemrxiv-2024-2tvc6; NTRS 13797709699197; 10.1021/acs.jpca.5c03141; JPL/NASA prime contract 80NM0018D0004; NSF CHE-2154271; CU ACI-1532235 / ACI-1532236; person QID unresolved"
+  "research data Q15809982; data Q42848; metadata Q180160; spectroscopy Q483666; JPL Q189325 institution only"
   "543.5 Spectroscopy / 540 Chemistry; metadata traversal only"
-  "primary repository/deposit or instrument/data-management record"
+  "primary scan/data repository, reduced-table deposit, instrument log or data-management manifest"
   false true false
-  "Publication and harvest manifestations are now well mapped, so another article has low marginal value. A deposit or instrument-level dataset identity would collapse the largest remaining scientific-custody subtree."
+  "NSF PAR already pays a government-repository manuscript manifestation and materially narrows the production chain: raw Figure-3 points exist in the manuscript presentation, smoothing is named, collection spans several days and the N2 spectrum aggregates at least 50 scans. Another manuscript copy or general article therefore has very low marginal value. The conclusion-paying object is now scan-level or reduced-spectrum provenance tying those measurements to Figure 3 and the FY23 poster; broad JPL/NSF resource identifiers improve routing but do not pay custody."
 
 leblancFreezePareto : InvestigativeParetoTarget
 leblancFreezePareto = investigative-pareto-target
@@ -109,14 +109,14 @@ leblancFreezePareto = investigative-pareto-target
   "Joshua LeBlanc / SNP I&C TechMat"
   "metadata Q180160 -> version/freeze/governance manifestation"
   "recognition-slide internal freeze/authorship date or first exact post-loss TechMat roster/governance artifact"
-  "NTRS 20250008475; acquired 2025-08-16; webinar 2025-08-26; WBS 658133.04.01.22.01.06; DOI 10.13182/NPICHMIT25-46370 is a distinct pre-loss publication"
-  "role-state chronology; whether stale slide label predates loss; exact successor/handover search routing"
-  "NTRS 20250008475; WBS 658133.04.01.22.01.06; DOI 10.13182/NPICHMIT25-46370"
+  "NTRS 20250008475; acquired 2025-08-16; webinar 2025-08-26; WBS 658133.04.01.22.01.06; DOI 10.13182/NPICHMIT25-46370 distinct pre-loss publication; later NTRS 20240010391 uses the same WBS for a 2026-05-27 Glenn sensor meeting"
+  "role-state chronology; same-WBS programme continuity versus person-role continuity; exact successor/handover search routing"
+  "NTRS 20250008475; WBS 658133.04.01.22.01.06; DOI 10.13182/NPICHMIT25-46370; NTRS 20240010391"
   "person QID unresolved; metadata Q180160 traversal only"
   "621 Applied physics / 629 Engineering; metadata traversal only"
   "primary NASA version/freeze metadata or dated programme roster"
   false true false
-  "The public object is already a post-loss manifestation that still names LeBlanc. Freeze/authorship metadata is narrower than the first-front targets but can decisively separate manifestation date from role-state date."
+  "The public object is a post-loss manifestation that still names LeBlanc, while the same WBS survives in a distinct 2026 Glenn-authored FSP sensor object. Programme/resource-carrier continuity is therefore paid without person-role continuity. Freeze/authorship metadata or an exact TechMat roster remains the decisive next object."
 
 loureiroFormalSuccessionPareto : InvestigativeParetoTarget
 loureiroFormalSuccessionPareto = investigative-pareto-target
