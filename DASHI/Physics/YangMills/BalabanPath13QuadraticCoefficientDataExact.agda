@@ -10,8 +10,13 @@ twoℚ : ℚ
 twoℚ = 1ℚ + 1ℚ
 
 coordinates : Path13Coordinates → List ℚ
-coordinates c = y0 c ∷ y1 c ∷ y2 c ∷ y3 c ∷ y4 c ∷ y5 c ∷ y6 c ∷ y7 c ∷ y8 c ∷ y9 c ∷ y10 c ∷ y11 c ∷ []
+coordinates c =
+  y0 c ∷ y1 c ∷ y2 c ∷ y3 c ∷ y4 c ∷ y5 c ∷
+  y6 c ∷ y7 c ∷ y8 c ∷ y9 c ∷ y10 c ∷ y11 c ∷ []
 
+energy0Coefficients energy1Coefficients energy2Coefficients energy3Coefficients : List ℚ
+energy4Coefficients energy5Coefficients energy6Coefficients energy7Coefficients : List ℚ
+energy8Coefficients energy9Coefficients energy10Coefficients energy11Coefficients : List ℚ
 energy0Coefficients = (- 1ℚ) ∷ 1ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
 energy1Coefficients = 0ℚ ∷ (- 1ℚ) ∷ 1ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
 energy2Coefficients = 0ℚ ∷ 0ℚ ∷ (- 1ℚ) ∷ 1ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
@@ -25,6 +30,9 @@ energy9Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ
 energy10Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- 1ℚ) ∷ 1ℚ ∷ []
 energy11Coefficients = (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- twoℚ) ∷ []
 
+norm0Coefficients norm1Coefficients norm2Coefficients norm3Coefficients : List ℚ
+norm4Coefficients norm5Coefficients norm6Coefficients norm7Coefficients : List ℚ
+norm8Coefficients norm9Coefficients norm10Coefficients norm11Coefficients norm12Coefficients : List ℚ
 norm0Coefficients = 1ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
 norm1Coefficients = 0ℚ ∷ 1ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
 norm2Coefficients = 0ℚ ∷ 0ℚ ∷ 1ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
@@ -39,6 +47,9 @@ norm10Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ 
 norm11Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 1ℚ ∷ []
 norm12Coefficients = (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ (- 1ℚ) ∷ []
 
+form0Coefficients form1Coefficients form2Coefficients form3Coefficients : List ℚ
+form4Coefficients form5Coefficients form6Coefficients form7Coefficients : List ℚ
+form8Coefficients form9Coefficients form10Coefficients form11Coefficients : List ℚ
 form0Coefficients = 1ℚ ∷ (- (+ 1 / 34)) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 35 / 34) ∷ []
 form1Coefficients = 0ℚ ∷ 1ℚ ∷ (- (+ 17 / 1767)) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 1225 / 1767) ∷ []
 form2Coefficients = 0ℚ ∷ 0ℚ ∷ 1ℚ ∷ (- (+ 16489 / 76856)) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 31535 / 76856) ∷ []
@@ -53,10 +64,19 @@ form10Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ 
 form11Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 1ℚ ∷ []
 
 energyFamilies : List (List ℚ)
-energyFamilies = energy0Coefficients ∷ energy1Coefficients ∷ energy2Coefficients ∷ energy3Coefficients ∷ energy4Coefficients ∷ energy5Coefficients ∷ energy6Coefficients ∷ energy7Coefficients ∷ energy8Coefficients ∷ energy9Coefficients ∷ energy10Coefficients ∷ energy11Coefficients ∷ []
+energyFamilies =
+  energy0Coefficients ∷ energy1Coefficients ∷ energy2Coefficients ∷
+  energy3Coefficients ∷ energy4Coefficients ∷ energy5Coefficients ∷
+  energy6Coefficients ∷ energy7Coefficients ∷ energy8Coefficients ∷
+  energy9Coefficients ∷ energy10Coefficients ∷ energy11Coefficients ∷ []
 
 normFamilies : List (List ℚ)
-normFamilies = norm0Coefficients ∷ norm1Coefficients ∷ norm2Coefficients ∷ norm3Coefficients ∷ norm4Coefficients ∷ norm5Coefficients ∷ norm6Coefficients ∷ norm7Coefficients ∷ norm8Coefficients ∷ norm9Coefficients ∷ norm10Coefficients ∷ norm11Coefficients ∷ norm12Coefficients ∷ []
+normFamilies =
+  norm0Coefficients ∷ norm1Coefficients ∷ norm2Coefficients ∷
+  norm3Coefficients ∷ norm4Coefficients ∷ norm5Coefficients ∷
+  norm6Coefficients ∷ norm7Coefficients ∷ norm8Coefficients ∷
+  norm9Coefficients ∷ norm10Coefficients ∷ norm11Coefficients ∷
+  norm12Coefficients ∷ []
 
 ldlFamilies : List (ℚ × List ℚ)
 ldlFamilies =
@@ -72,43 +92,3 @@ energyTri = Quad.sumSquareTri energyFamilies
 normTri = Quad.sumSquareTri normFamilies
 gapTri = Quad.addTri energyTri (Quad.scaleTri (- oneEighteenth) normTri)
 ldlTri = Quad.sumWeightedSquareTri ldlFamilies
-
-canonicalDiag0 = (+ 17 / 9)
-canonicalRow0 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag1 = (+ 26 / 9)
-canonicalRow1 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag2 = (+ 26 / 9)
-canonicalRow2 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag3 = (+ 26 / 9)
-canonicalRow3 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag4 = (+ 26 / 9)
-canonicalRow4 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag5 = (+ 26 / 9)
-canonicalRow5 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag6 = (+ 26 / 9)
-canonicalRow6 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag7 = (+ 26 / 9)
-canonicalRow7 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag8 = (+ 26 / 9)
-canonicalRow8 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag9 = (+ 26 / 9)
-canonicalRow9 = (- (+ 1 / 9)) ∷ (+ 35 / 9) ∷ []
-canonicalDiag10 = (+ 26 / 9)
-canonicalRow10 = (+ 17 / 9) ∷ []
-canonicalDiag11 = (+ 44 / 9)
-canonicalRow11 = []
-
-canonicalTail12 = Quad.qnil
-canonicalTail11 = Quad.qcons canonicalDiag11 canonicalRow11 canonicalTail12
-canonicalTail10 = Quad.qcons canonicalDiag10 canonicalRow10 canonicalTail11
-canonicalTail9 = Quad.qcons canonicalDiag9 canonicalRow9 canonicalTail10
-canonicalTail8 = Quad.qcons canonicalDiag8 canonicalRow8 canonicalTail9
-canonicalTail7 = Quad.qcons canonicalDiag7 canonicalRow7 canonicalTail8
-canonicalTail6 = Quad.qcons canonicalDiag6 canonicalRow6 canonicalTail7
-canonicalTail5 = Quad.qcons canonicalDiag5 canonicalRow5 canonicalTail6
-canonicalTail4 = Quad.qcons canonicalDiag4 canonicalRow4 canonicalTail5
-canonicalTail3 = Quad.qcons canonicalDiag3 canonicalRow3 canonicalTail4
-canonicalTail2 = Quad.qcons canonicalDiag2 canonicalRow2 canonicalTail3
-canonicalTail1 = Quad.qcons canonicalDiag1 canonicalRow1 canonicalTail2
-canonicalTail0 = Quad.qcons canonicalDiag0 canonicalRow0 canonicalTail1
-canonicalTri = canonicalTail0
