@@ -25,6 +25,7 @@ import DASHI.ComputerScience.RSA260BidiTwoHopCommonNeighbourFibreExact as TwoHop
 import DASHI.ComputerScience.RSA260BidiFineIncidenceDefectCoverageExact as DefectCoverage
 import DASHI.ComputerScience.RSA260BidiKrylovReachableRankExact as DynamicRank
 import DASHI.ComputerScience.RSA260BidiStructuralFibrePortfolioHeldoutExact as StructuralPortfolio
+import DASHI.ComputerScience.RSA260BidiDynamicRankRepairHeldoutExact as DynamicRepair
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -74,10 +75,6 @@ open ProductionArtifactAcquisitionState public
 currentProductionArtifactAcquisitionState : ProductionArtifactAcquisitionState
 currentProductionArtifactAcquisitionState = production-artifact-acquisition-state
   false false false false false false false false true false
-
-------------------------------------------------------------------------
--- Existing owners remain the authoritative coordinates.
-------------------------------------------------------------------------
 
 syntheticLABoundary : SyntheticLA.RSA260KrylovKernelRecoveryRoadmapBoundary
 syntheticLABoundary = SyntheticLA.currentRSA260KrylovKernelRecoveryRoadmapBoundary
@@ -151,9 +148,11 @@ dynamicRankReceipt = DynamicRank.currentKrylovReachableRankReceipt
 structuralPortfolioBoundary : StructuralPortfolio.StructuralPortfolioInterpretationBoundary
 structuralPortfolioBoundary = StructuralPortfolio.canonicalStructuralPortfolioInterpretationBoundary
 
-------------------------------------------------------------------------
--- Ordered residual routers.
-------------------------------------------------------------------------
+dynamicRepairBoundary : DynamicRepair.DynamicRankRepairBoundary
+dynamicRepairBoundary = DynamicRepair.canonicalDynamicRankRepairBoundary
+
+dynamicRepairReceipt : DynamicRepair.DynamicRankRepairReceipt
+dynamicRepairReceipt = DynamicRepair.currentDynamicRankRepairReceipt
 
 data ProductionResidual : Set where
   acquireSameObjectFineIncidenceBearingLACarrierArtifact : ProductionResidual
@@ -181,12 +180,13 @@ firstHighAlphaProductionDiagnosticTarget = sameObjectKrylovAForDynamicSpan
 data CandidateExperimentResidual : Set where
   repairStructuralPortfolioWithDynamicReachableRank : CandidateExperimentResidual
   rerunHeldoutDynamicRepairAcrossPreparationFibres : CandidateExperimentResidual
+  inspectSurvivingDynamicRepairResidual : CandidateExperimentResidual
   exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = repairStructuralPortfolioWithDynamicReachableRank
+firstUnpaidCandidateExperimentResidual = rerunHeldoutDynamicRepairAcrossPreparationFibres
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -251,6 +251,11 @@ record RSA260ProductionSubstitutionBoundary : Set where
     staticStructuralPortfolioHeldoutPaid : Bool
     staticStructuralPortfolioExactBlobPaid : Bool
     largestStaticResidualRetained : Bool
+    dynamicRankHeldoutRepairPaid : Bool
+    dynamicRankHeldoutRepairExactBlobPaid : Bool
+    dynamicRankRepairReducesHeldoutMAE : Bool
+    dynamicRankRepairReducesLargestResidual : Bool
+    dynamicRankRepairEliminatesLargestResidual : Bool
     sameObjectKrylovSequenceDynamicDiagnosticPaid : Bool
     broadCoverageRaisesRecurrenceComplexity : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
@@ -329,6 +334,11 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; staticStructuralPortfolioHeldoutPaid = true
   ; staticStructuralPortfolioExactBlobPaid = true
   ; largestStaticResidualRetained = true
+  ; dynamicRankHeldoutRepairPaid = true
+  ; dynamicRankHeldoutRepairExactBlobPaid = true
+  ; dynamicRankRepairReducesHeldoutMAE = true
+  ; dynamicRankRepairReducesLargestResidual = true
+  ; dynamicRankRepairEliminatesLargestResidual = false
   ; sameObjectKrylovSequenceDynamicDiagnosticPaid = false
   ; broadCoverageRaisesRecurrenceComplexity = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
@@ -356,6 +366,7 @@ data SyntheticFineIncidencePredictorImpliesProductionMeasurement : Set where
 data DefectCoverageCurveImpliesUniversalThreshold : Set where
 data SameCoarseContractImpliesSameRecurrenceComplexity : Set where
 data SyntheticDynamicRankImpliesProductionReachableRank : Set where
+data DynamicRankRepairImpliesExactFormula : Set where
 data KrylovSequenceImpliesMatrixBytes : Set where
 data HeldoutAverageFitImpliesNoCounterexamples : Set where
 data SearchMissImpliesArtifactAbsent : Set where
@@ -392,6 +403,9 @@ sameCoarseContractDoesNotCreateSameRecurrence ()
 
 syntheticDynamicRankDoesNotCreateProductionRank : SyntheticDynamicRankImpliesProductionReachableRank → ⊥
 syntheticDynamicRankDoesNotCreateProductionRank ()
+
+dynamicRankRepairDoesNotCreateExactFormula : DynamicRankRepairImpliesExactFormula → ⊥
+dynamicRankRepairDoesNotCreateExactFormula ()
 
 krylovSequenceDoesNotCreateMatrixBytes : KrylovSequenceImpliesMatrixBytes → ⊥
 krylovSequenceDoesNotCreateMatrixBytes ()
