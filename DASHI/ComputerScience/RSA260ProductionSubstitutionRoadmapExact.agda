@@ -7,17 +7,21 @@ open import Data.Empty using (⊥)
 import DASHI.ComputerScience.RSA260KrylovKernelRecoveryExact as SyntheticLA
 import DASHI.ComputerScience.RSA260GNFSRunParameterArtifactSnowballExact as RunArtifact
 import DASHI.ComputerScience.RSA260ProductionArtifactSubstituteAdmissionExact as Substitute
+import DASHI.ComputerScience.RSA260LACarrierBidiDerivationExact as BidiCarrier
 
 ------------------------------------------------------------------------
 -- RSA-260 PRODUCTION-SUBSTITUTION ROADMAP
 --
 -- The synthetic CPU Block-Wiedemann-shaped ladder is end-to-end through a
--- nonzero v with Mv=0.  The next conclusion-paying boundary is substitution
--- of a same-object RSA-260 LA artifact, followed by replay/parity.
+-- nonzero v with Mv=0.  The public production LA envelope has now also been
+-- intersected bidirectionally with downstream Block-Wiedemann/gather demands,
+-- yielding a typed sparse-GF(2) carrier CONSTRAINT FIBRE.
 --
--- A downstream artifact may pay a later entry depth without reconstructing
--- earlier carriers.  Therefore matrix/prep, checkpoint, generator, mksol and
--- gather artifacts are admitted by typed constraints rather than filename.
+-- This narrows P0 without paying same-object bytes:
+--
+--   carrier schema/fibre derived  = yes
+--   unique matrix instance derived = no
+--   same-object production bytes   = no
 ------------------------------------------------------------------------
 
 record ProductionLAObservation : Set where
@@ -64,9 +68,6 @@ rsa260ProductionLAObservation = production-la-observation
 
 ------------------------------------------------------------------------
 -- Acquisition/search state.
---
--- Public execution-envelope coordinates are known.  Same-object bytes remain
--- separately unpaid.  A search miss is not proof of artifact absence.
 ------------------------------------------------------------------------
 
 record ProductionArtifactAcquisitionState : Set where
@@ -88,7 +89,7 @@ currentProductionArtifactAcquisitionState = production-artifact-acquisition-stat
   false false false false false false false true false
 
 ------------------------------------------------------------------------
--- Prior/admission boundaries retained rather than collapsed.
+-- Prior/admission/bidi boundaries retained rather than collapsed.
 ------------------------------------------------------------------------
 
 syntheticLABoundary : SyntheticLA.RSA260KrylovKernelRecoveryRoadmapBoundary
@@ -100,12 +101,18 @@ runArtifactBoundary = RunArtifact.canonicalRSA260RunParameterArtifactBoundary
 substituteAdmissionBoundary : Substitute.SubstituteAdmissionBoundary
 substituteAdmissionBoundary = Substitute.currentSubstituteAdmissionBoundary
 
+bidiCarrierBoundary : BidiCarrier.BidiCarrierDerivationBoundary
+bidiCarrierBoundary = BidiCarrier.canonicalBidiCarrierDerivationBoundary
+
+bidiDerivedCarrier : BidiCarrier.BidiDerivedLACarrierFibre
+bidiDerivedCarrier = BidiCarrier.currentBidiDerivedLACarrierFibre
+
 ------------------------------------------------------------------------
 -- Ordered residual router.
 ------------------------------------------------------------------------
 
 data ProductionResidual : Set where
-  acquireProductionMatrixOrEquivalentLAInput : ProductionResidual
+  acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
   acquireProductionProjectionCheckpointOrGenerator : ProductionResidual
   bindExactModifiedSourceRevision : ProductionResidual
   reproduceProductionCPUReference : ProductionResidual
@@ -114,7 +121,7 @@ data ProductionResidual : Set where
   reproduceFullRSA260LinearAlgebra : ProductionResidual
 
 firstUnpaidProductionResidual : ProductionResidual
-firstUnpaidProductionResidual = acquireProductionMatrixOrEquivalentLAInput
+firstUnpaidProductionResidual = acquireSameObjectMemberOfDerivedLACarrierFibre
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -125,11 +132,17 @@ record RSA260ProductionSubstitutionBoundary : Set where
     syntheticProjectionPaid : Bool
     syntheticGeneratorPaid : Bool
     syntheticNonzeroKernelRecoveryPaid : Bool
+
     productionMatrixShapePaidByPrimarySource : Bool
     productionKrylovCountPaidByPrimarySource : Bool
     productionGeneratorLengthPaidByPrimarySource : Bool
     productionKernelVectorCountPaidByPrimarySource : Bool
     productionDependencyCountPaidByPrimarySource : Bool
+
+    bidiProductionLACarrierConstraintFibreDerived : Bool
+    bidiProductionLACarrierUniqueInstanceDerived : Bool
+    bidiExactCarrierBytesDerived : Bool
+
     productionMatrixBytesPaid : Bool
     productionCheckpointOrGeneratorBytesPaid : Bool
     exactModifiedSourceRevisionPaid : Bool
@@ -140,16 +153,36 @@ record RSA260ProductionSubstitutionBoundary : Set where
 open RSA260ProductionSubstitutionBoundary public
 
 currentRSA260ProductionSubstitutionBoundary : RSA260ProductionSubstitutionBoundary
-currentRSA260ProductionSubstitutionBoundary = rsa260-production-substitution-boundary
-  true true true true true true
-  true true true true true
-  false false false false false false false
+currentRSA260ProductionSubstitutionBoundary = record
+  { syntheticDotPaid = true
+  ; syntheticSpMVPaid = true
+  ; syntheticKrylovPaid = true
+  ; syntheticProjectionPaid = true
+  ; syntheticGeneratorPaid = true
+  ; syntheticNonzeroKernelRecoveryPaid = true
+  ; productionMatrixShapePaidByPrimarySource = true
+  ; productionKrylovCountPaidByPrimarySource = true
+  ; productionGeneratorLengthPaidByPrimarySource = true
+  ; productionKernelVectorCountPaidByPrimarySource = true
+  ; productionDependencyCountPaidByPrimarySource = true
+  ; bidiProductionLACarrierConstraintFibreDerived = true
+  ; bidiProductionLACarrierUniqueInstanceDerived = false
+  ; bidiExactCarrierBytesDerived = false
+  ; productionMatrixBytesPaid = false
+  ; productionCheckpointOrGeneratorBytesPaid = false
+  ; exactModifiedSourceRevisionPaid = false
+  ; productionCPUReplayPaid = false
+  ; cudaParityPaid = false
+  ; ncclParityPaid = false
+  ; fullProductionLinearAlgebraReplayPaid = false
+  }
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
 ------------------------------------------------------------------------
 
 data ProductionShapeImpliesProductionBytes : Set where
+data BidiCarrierFibreImpliesUniqueMatrix : Set where
 data SyntheticKernelImpliesProductionKernel : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 data CPUReferenceImpliesCUDAParity : Set where
@@ -158,6 +191,9 @@ data DownstreamArtifactImpliesEarlierCarrier : Set where
 
 authorReportedShapeDoesNotCreateBytes : ProductionShapeImpliesProductionBytes → ⊥
 authorReportedShapeDoesNotCreateBytes ()
+
+bidiCarrierFibreDoesNotCreateUniqueMatrix : BidiCarrierFibreImpliesUniqueMatrix → ⊥
+bidiCarrierFibreDoesNotCreateUniqueMatrix ()
 
 syntheticKernelDoesNotCreateProductionKernel : SyntheticKernelImpliesProductionKernel → ⊥
 syntheticKernelDoesNotCreateProductionKernel ()
@@ -169,7 +205,7 @@ cpuReferenceDoesNotCreateCUDAParity : CPUReferenceImpliesCUDAParity → ⊥
 cpuReferenceDoesNotCreateCUDAParity ()
 
 cudaParityDoesNotCreateNCCLParity : CUDAParityImpliesNCCLParity → ⊥
-cudaParityDoesNotCreateNCCLParity ()
+ncudaParityDoesNotCreateNCCLParity = cudaParityDoesNotCreateNCCLParity
 
 downstreamArtifactDoesNotCreateEarlierCarrier : DownstreamArtifactImpliesEarlierCarrier → ⊥
 downstreamArtifactDoesNotCreateEarlierCarrier ()
