@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath13QuadraticCoefficientDataExact where
 
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Integer.Base using (+_)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _/_)
 open import DASHI.Physics.YangMills.BalabanPath13GeneratedLDLDataExact public
