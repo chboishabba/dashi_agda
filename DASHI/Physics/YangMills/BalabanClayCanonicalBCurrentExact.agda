@@ -33,7 +33,7 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound292Exact
 
 -- State-family and magnitude normalization.
 import DASHI.Physics.YangMills.BalabanCMP116StateFamilyTwoJNormalizationRound293Exact
-import DASHI.Physics.YangMills.BalabanSubgapGeometricSeparationRound293Exact
+import DASHI.Physics.YangMills.BalabanSubgapGeometricSeparationRound294Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound294Exact
 import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact
 import DASHI.Physics.YangMills.BalabanCMP116TwoJMagnitudeCorrectionRound295Exact
