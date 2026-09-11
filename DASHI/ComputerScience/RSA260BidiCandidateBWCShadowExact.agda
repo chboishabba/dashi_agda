@@ -48,7 +48,7 @@ currentBWCShadowRuntimeSource = bwc-shadow-runtime-source
   "d6f12710c94bf1ba9755b12b89e7a6af9531b0de"
   "5b0a57672e074b0471c6868c836e580bc5ffc5f5"
   true
-  false
+  true
 
 record BWCShadowExecutionReceipt : Set where
   constructor bwc-shadow-execution-receipt
@@ -109,7 +109,6 @@ canonicalPreparedShadowConsumerBoundary = prepared-shadow-consumer-boundary
 ------------------------------------------------------------------------
 
 data PreparedShadowResidual : Set where
-  bindExactCommittedBWCShadowExecution : PreparedShadowResidual
   raiseShadowProjectionWidthToward256 : PreparedShadowResidual
   runMatrixGeneratorConsumerOnCandidateShadow : PreparedShadowResidual
   runKernelRecoveryThroughGeneratorConsumer : PreparedShadowResidual
@@ -117,7 +116,7 @@ data PreparedShadowResidual : Set where
   validateAgainstSameObjectProductionArtifact : PreparedShadowResidual
 
 firstPreparedShadowResidual : PreparedShadowResidual
-firstPreparedShadowResidual = bindExactCommittedBWCShadowExecution
+firstPreparedShadowResidual = raiseShadowProjectionWidthToward256
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
