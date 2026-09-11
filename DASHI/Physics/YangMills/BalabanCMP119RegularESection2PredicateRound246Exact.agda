@@ -134,12 +134,12 @@ open ActiveRegularESection2Inputs public
 
 asActiveRegularESection2Flow :
   ∀ {trajectory Mode Atom betaData history} →
-  ActiveRegularESection2Inputs
+  (dataSet : ActiveRegularESection2Inputs
     {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
-    betaData history →
+    betaData history) →
   Active.ActiveEffectiveDensityFlow
     trajectory Mode Atom
-    (ActiveRegularESection2Inputs.Density _)
+    (ActiveRegularESection2Inputs.Density dataSet)
     betaData history
 asActiveRegularESection2Flow dataSet = record
   { Active.ActiveEffectiveDensityFlow.densityAt =
