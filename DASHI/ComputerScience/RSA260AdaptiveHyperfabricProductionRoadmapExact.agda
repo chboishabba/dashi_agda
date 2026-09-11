@@ -11,15 +11,16 @@ import DASHI.ComputerScience.RSA260InferredCandidateReducerHyperfabricExact as C
 import DASHI.ComputerScience.RSA260C3OrbitReducerHyperfabricExact as C3
 import DASHI.ComputerScience.RSA260MixedActionNDimFibreInferenceExact as Mixed
 import DASHI.ComputerScience.RSA260SymmetryStabilityNullsExact as Nulls
+import DASHI.ComputerScience.RSA260FullReInferenceSymmetryNullExact as FullNull
 import DASHI.ComputerScience.RSA260ReducerHyperfabricSourceDiligenceExact as Sources
 
 ------------------------------------------------------------------------
--- CONSOLIDATED ROADMAP AFTER MIXED-ACTION INFERENCE + STRUCTURAL NULLS
+-- CONSOLIDATED ROADMAP AFTER FULL RE-INFERENCE STRUCTURAL NULLS
 --
 -- Conclusion payment remains acquisition-first.  The synthetic preparation
--- lane now infers pair/ternary/mixed action families, can intersect multiple
--- structural fibres before freezing the family, and tests whether an observed
--- symmetry survives a row/column-degree-preserving fine-incidence null.
+-- lane now infers pair/ternary/mixed action families, intersects multiple
+-- structural fibres before freezing a family, and reruns the whole inference
+-- pipeline inside degree-preserving nulls before comparing quotient strength.
 ------------------------------------------------------------------------
 
 priorRoadmap : Prior.ConsolidatedRSA260RoadmapBoundary
@@ -45,6 +46,9 @@ mixedFibrePolicy = Mixed.canonicalCandidateFibrePolicy
 
 nullBoundary : Nulls.SymmetryNullInterpretationBoundary
 nullBoundary = Nulls.canonicalSymmetryNullInterpretationBoundary
+
+fullNullBoundary : FullNull.FullReInferenceInterpretationBoundary
+fullNullBoundary = FullNull.canonicalFullReInferenceInterpretationBoundary
 
 sourceBoundary : Sources.SnowballAttributionBoundary
 sourceBoundary = Sources.canonicalSnowballAttributionBoundary
@@ -103,6 +107,7 @@ record AdaptiveHyperfabricProductionBoundary : Set where
     degreePreservingSymmetryNullPaid : Bool
     degreePreservingSymmetryNullExactBlobPaid : Bool
     fullHyperfabricReInferenceInsideEachNullPaid : Bool
+    fullHyperfabricReInferenceExactBlobPaid : Bool
     operatorDerivedRequirementInferenceImplemented : Bool
     observerDerivedConflictInferenceImplemented : Bool
     dataDrivenClosedBatchSelectionImplemented : Bool
@@ -128,7 +133,7 @@ currentAdaptiveHyperfabricProductionBoundary =
     true true
     true true true true
     true true true
-    true true false
+    true true true true
     true true true
     false false
     false false false false false false false false false false
