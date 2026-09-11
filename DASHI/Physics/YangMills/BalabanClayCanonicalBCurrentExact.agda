@@ -104,6 +104,12 @@ import DASHI.Physics.YangMills.BalabanCanonicalBOSIndexedCompletionRound333Exact
 -- is proof-relevant and remains the source/application frontier.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainWeldRound334Exact
 
+-- R335 factors that selected-pair weld through a source-native common-J pair
+-- domain authority.  This demotes the selected-T5 pair weld from an independent
+-- physical theorem: the surviving acquisition tasks are source-domain
+-- transcription/alignment plus literal physical observable -> CMP116 J meaning.
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainSourceFactorRound335Exact
+
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
 -- historical donor classification only; it does not promote Step-V to a
