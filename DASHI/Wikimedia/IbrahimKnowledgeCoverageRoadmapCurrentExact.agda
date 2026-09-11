@@ -14,6 +14,7 @@ import DASHI.Wikimedia.IbrahimSnowballAtomicClaimIntentExperimentAdequacyBidiExa
 import DASHI.Wikimedia.IbrahimSnowballEthnographyParticipantObservationFieldworkBidiExact as Fieldwork
 import DASHI.Wikimedia.IbrahimSnowballGeologyStratigraphyDeepTimeCarbonConsumerBidiExact as Geology
 import DASHI.Wikimedia.IbrahimSnowballHealthcareAccessQualityEfficacyConsumerBidiExact as Healthcare
+import DASHI.Wikimedia.IbrahimSnowballPetrochemistryLifecycleParentAuditExact as Petrochem
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSymbolicVerificationDeweyQidDoiBidiExact as Dewey
 
@@ -97,17 +98,17 @@ healthcareBreadthNowPaid = live-roadmap-target
   "WHO Universal Health Coverage institutional source; Kruk et al. DOI 10.1016/S2214-109X(18)30386-3"
   "future healthcare work must exhibit a distinction not representable by need/efficacy/access/coverage/quality/affordability/equity/population-impact grammar"
 
-petrochemistryParentAudit : LiveRoadmapTarget
-petrochemistryParentAudit = live-roadmap-target
-  1
-  "Petrochemistry / petroleum / refining / materials / emissions parent audit"
-  residualOnly
-  "SaltPetroleumIndustrialChemistryNetwork; IndustrialChemistryLogistics; DeepTimeCarbonBiosphereFossilFuel; climate branches"
-  "determine whether duplicated feedstock/refining/material/emission edges still need one parent adapter"
-  "petrochemistry Q493630"
-  "Dewey unresolved in this owner; chemistry/engineering shelf choice is not semantic authority"
-  "process-specific chemistry/engineering sources stay separate from climate/economic attribution"
-  "add a parent only if a concrete duplicated transport survives quotienting"
+petrochemistryParentNowPaid : LiveRoadmapTarget
+petrochemistryParentNowPaid = live-roadmap-target
+  0
+  "Petrochemistry / petroleum / refining / materials / emissions lifecycle"
+  completeAsParent
+  "PetrochemistryLifecycleParentAuditExact; SaltPetroleumIndustrialChemistryNetwork; DeepTimeCarbonBiosphereFossilFuel"
+  "only process- or product-specific feed identity, plant validation, material balance and quantitative emissions receipts remain"
+  "petrochemistry Q493630; petroleum Q22656; steam cracking Q2335334; cracking Q212749"
+  "petrochemistry DDC unresolved; chemistry/engineering shelf choice remains navigation only"
+  "Gholami et al. DOI 10.3390/en14238190; Sadrameli DOI 10.1016/j.fuel.2014.09.034 plus existing institutional process sources"
+  "future petrochemistry work must exhibit a lifecycle/process distinction not representable by geological reservoir -> extraction/feed -> process transformation -> product -> combustion/surface-carbon-return grammar"
 
 record RoadmapCompletionCriterion : Set where
   constructor roadmap-completion-criterion
@@ -119,16 +120,17 @@ record RoadmapCompletionCriterion : Set where
     provenanceIndependenceRepresented : Bool
     consumerAdequacyRepresented : Bool
     remainingBreadthIsConsumerDriven : Bool
+    knownSharedParentResidualsRemain : Bool
     roadmapMeansEveryPossibleTopicFormalised : Bool
 open RoadmapCompletionCriterion public
 
 currentRoadmapCriterion : RoadmapCompletionCriterion
 currentRoadmapCriterion = roadmap-completion-criterion
-  true true true true true true true false
+  true true true true true true true false false
 
 roadmapMeaning : String
 roadmapMeaning =
-  "roadmap completion means the shared navigation/provenance/consumer grammar can route new concrete demands to an existing owner or expose one typed residual; it does not mean pre-enumerating every Dewey subject, QID, DOI, discipline or empirical claim."
+  "roadmap completion means the shared navigation/provenance/consumer grammar can route new concrete demands to an existing owner or expose one typed residual; no known shared-parent residual remains in the current audit. It does not mean pre-enumerating every Dewey subject, QID, DOI, discipline or empirical claim."
 
 historicalPolicy : Historical.RoadmapPolicy
 historicalPolicy = Historical.canonicalRoadmapPolicy
@@ -150,3 +152,6 @@ geologyBoundary = Geology.canonicalGeologyStratigraphyDeepTimeCarbonBoundary
 
 healthcareBoundary : Healthcare.HealthcareAccessQualityEfficacyBoundary
 healthcareBoundary = Healthcare.canonicalHealthcareAccessQualityEfficacyBoundary
+
+petrochemistryBoundary : Petrochem.PetrochemistryParentAuditBoundary
+petrochemistryBoundary = Petrochem.canonicalPetrochemistryParentAuditBoundary
