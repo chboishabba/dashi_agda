@@ -45,12 +45,14 @@ canonicalRoleSnapshotChronology = role-snapshot-chronology
 ------------------------------------------------------------------------
 -- Genuine post-loss programme continuity, but not TechMat-role succession.
 --
--- Robert Okojie's public professional account says he gave the 2025-09-24 FSP
--- Technology Maturation close-out presentation as Lead NASA FSP I&C. The August
--- NASA webinar already names Okojie as NASA FSP I&C Lead while separately naming
--- LeBlanc as NASA SNP I&C TechMat Team Lead. Therefore Okojie's September role is
--- evidence that the wider I&C programme remained active after LeBlanc's death,
--- not evidence that Okojie inherited LeBlanc's narrower TechMat responsibility.
+-- Idaho National Laboratory's primary FSP programme page records a 2025-09-24
+-- Technology Maturation webinar with updates on Instrumentation and Control
+-- testing. Robert Okojie's public professional account additionally says he gave
+-- the close-out I&C presentation as Lead NASA FSP I&C. The August NASA webinar
+-- already names Okojie as NASA FSP I&C Lead while separately naming LeBlanc as
+-- NASA SNP I&C TechMat Team Lead. Therefore post-loss I&C programme continuity
+-- is source-backed independently of the social account, while exact succession
+-- to LeBlanc's narrower TechMat role remains unpaid.
 ------------------------------------------------------------------------
 
 record PostLossProgramContinuityLead : Set where
@@ -59,7 +61,8 @@ record PostLossProgramContinuityLead : Set where
     datedPostLossSurface : String
     continuingLead : String
     continuingRole : String
-    sourceReference : String
+    primarySourceReference : String
+    supplementarySourceReference : String
     programmeContinuitySupported : Bool
     exactLeBlancRoleSuccessionPaid : Bool
     predecessorRoleAlreadyDistinctFromLeBlanc : Bool
@@ -68,9 +71,10 @@ open PostLossProgramContinuityLead public
 
 okojieSeptember2025ContinuityLead : PostLossProgramContinuityLead
 okojieSeptember2025ContinuityLead = post-loss-program-continuity-lead
-  "2025-09-24 FSP Technology Maturation close-out webinar"
+  "2025-09-24 FSP Technology Maturation webinar / close-out"
   "Robert S. Okojie"
   "Lead NASA FSP Instrumentation and Controls / NASA FSP I&C Lead"
+  "Idaho National Laboratory Fission Surface Power programme page: Recent Updates & Events, FSP Technology Maturation Webinar held 2025-09-24 with I&C testing updates"
   "Robert Okojie public professional post describing the 2025-09-24 close-out presentation; NASA NTRS 20250008475 August recognition slide already lists Okojie as NASA FSP I&C Lead and LeBlanc separately as NASA SNP I&C TechMat Team Lead"
   true false true
 
