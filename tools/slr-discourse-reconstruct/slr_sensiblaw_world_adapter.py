@@ -248,6 +248,10 @@ def main() -> int:
         rows(args.quality), rows(args.roles), args.source_ref
     )
     claims = span_claims + boundary_claims
+    candidate_count = sum(1 for claim in claims if claim["status"] == "candidate") + sum(
+        1 for relation in relations if relation["status"] == "candidate"
+    )
+    conflicted_count = sum(1 for claim in claims if claim["status"] == "conflicted")
     model = {
         "schema_version": TARGET_SCHEMA,
         "model_id": args.model_id,
@@ -291,8 +295,8 @@ def main() -> int:
             "candidate_only": True,
         },
         "status_counts": {
-            "candidate": sum(1 for claim in claims if claim["status"] == "candidate"),
-            "conflicted": sum(1 for claim in claims if claim["status"] == "conflicted"),
+            "candidate": candidate_count,
+            "conflicted": conflicted_count,
         },
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
