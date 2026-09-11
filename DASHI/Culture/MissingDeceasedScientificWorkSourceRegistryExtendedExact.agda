@@ -86,7 +86,7 @@ ipacGrillmairCV =
     "Records the 2011 NASA Astrophysics Data Analysis proposal 'Stellar Debris Streams: Probing The Galactic Dark Matter Distribution with WISE and 2MASS' with PI Grillmair."
 
 grillmairPICitation : Citation.AttributionWithCitation
-ipacGrillmairPICitation =
+grillmairPICitation =
   Citation.attribution-with-citation Atlas.grillmairStreamDistancePI ipacGrillmairCV
 
 thomasVPS342014 : Citation.ScientificCitation
