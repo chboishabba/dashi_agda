@@ -10,6 +10,11 @@ required=(
   "linearRouteDoesNotRequirePermutationBasis"
   "oldFinNinetyRouteRequiresBasisPreservation"
   "characterEvidenceDoesNotPayPermutationReceipt"
+  "import DASHI.Foundations.TernaryGolay.CodeBoundary as GolayBoundary"
+  "import DASHI.Geometry.HilbertLorentzForcing as Linear"
+  "linearCarrier : Linear.HilbertLift"
+  "linearAction : Linear.LinearAction linearCarrier"
+  "golayBoundaryCrossPollination"
 )
 
 for needle in "${required[@]}"; do
