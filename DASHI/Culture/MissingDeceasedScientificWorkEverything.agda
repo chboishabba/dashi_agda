@@ -1,32 +1,23 @@
 module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 
 -- Focused aggregate for attribution-safe scientific-work reconstruction,
--- source-exact citation, technical-intersection proof search, independent
--- common-selector/visibility analysis, selector-discrimination search,
--- higher-order capability synthesis, capability-indexed selector salience,
--- denominator-aware matched-control enrichment, competing-hypothesis
--- discrimination, critical-knowledge BIDI acquisition, viewpoint-provenance
--- testing, open-science/knowledge-release and externalisation-boundary BIDI
--- testing, science-to-capability-carrier reconstruction, application-
+-- source-exact citation, DOI/QID/Dewey snowball bindings, technical-intersection
+-- proof search, independent common-selector/visibility analysis, selector-
+-- discrimination search, higher-order capability synthesis, capability-indexed
+-- selector salience, denominator-aware matched-control enrichment, competing-
+-- hypothesis discrimination, critical-knowledge BIDI acquisition, viewpoint-
+-- provenance testing, open-science/knowledge-release and externalisation-boundary
+-- BIDI testing, science-to-capability-carrier reconstruction, application-
 -- transformation modelling, event-time alignment, organisational/custody
 -- confounders, capability resilience and reconstruction cost, science-driven
 -- acquisition compilation, disruption-benefit evidence testing, actor
 -- benefit/visibility/effect intersection, matched disruption-impact controls,
 -- and the parallel roster role/event audit.
 --
--- The scientific formalisation is both memorial work and an investigative aid:
--- it identifies the actual capability-bearing application transformations that
--- later evidence must connect to people, access, replacement difficulty,
--- observers and events. None of those bridges are inferred from scientific
--- interest or public governing physics alone.
---
--- Amy Eskridge is kept outside the House-letter denominator but included in the
--- full memorial application-transformation atlas and acquisition compiler so she
--- is not dropped from the comparative scientific/investigative surface.
---
 -- Acquisition is intentionally parallel across the retained cohort. Each person
--- keeps an independent unpaid frontier. Event-specific alternative evidence and
--- controls are first-class and may weaken a common-work-cause hypothesis.
+-- keeps an independent unpaid frontier. External QID/Dewey coordinates are
+-- traversal aids only; evidentiary authority remains with the cited primary or
+-- bounded secondary source.
 
 import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
@@ -57,6 +48,7 @@ import DASHI.Culture.MissingDeceasedScientistWorkAttributionExact
 import DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExtendedExact
+import DASHI.Culture.MissingDeceasedScientificWorkSnowballAttributionBindingsExact
 import DASHI.Culture.MissingDeceasedTechnicalDependencyHypergraphExact
 import DASHI.Culture.MissingDeceasedTechnicalIntersectionAcquisitionExact
 import DASHI.Culture.MissingDeceasedCommonSelectorVisibilityExact
