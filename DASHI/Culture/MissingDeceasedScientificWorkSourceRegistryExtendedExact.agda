@@ -135,6 +135,18 @@ maiwaldDeprotonatedStates2025 =
     Citation.authorshipSource
     "Version-of-record omits Maiwald while the 2023 JPL poster already displayed deprotonated experimental spectra; exact dataset, reduction, figure and contribution lineage remains a separate acquisition problem."
 
+maiwaldISMS2024Deprotonated : Citation.ScientificCitation
+maiwaldISMS2024Deprotonated =
+  Citation.scientific-citation
+    "Lane M. Terry; Deacon J. Nemchick; Robert Hodyss; Frank Maiwald; J. Mathias Weber"
+    "Cryogenic Ion Vibrational Spectroscopy of Deprotonated Valine and Deprotonated Aminovaleric Acid"
+    "77th International Symposium on Molecular Spectroscopy, University of Illinois Urbana-Champaign"
+    2024
+    (Citation.canonicalURL "https://isms.illinois.edu/2024/schedule/schedule_session.php?sID=1564")
+    "P7658 / RL06; Thursday 2024-06-20, 15:15-15:30"
+    Citation.authorshipSource
+    "Official conference programme/abstract names Frank Maiwald as a JPL/Caltech coauthor and states that cryogenic gas-phase infrared spectra of deprotonated valine and deprotonated aminovaleric acid are presented. No DOI is invented for this conference object."
+
 loureiroStudentContinuation2026 : Citation.ScientificCitation
 loureiroStudentContinuation2026 =
   Citation.scientific-citation
@@ -149,10 +161,6 @@ loureiroStudentContinuation2026 =
 
 ------------------------------------------------------------------------
 -- Snowball attribution/traversal binding.
---
--- PrimarySourceClass says what kind of receipt the cited object is.  The
--- DashiKnowledgeCoordinate reuses the existing Dewey/QID traversal carrier;
--- it is deliberately not a second ontology.
 ------------------------------------------------------------------------
 
 data SourceAuthorityClass : Set where
@@ -160,6 +168,7 @@ data SourceAuthorityClass : Set where
   primaryInstitutionalRecord
   primaryGovernmentRecord
   primaryPatentRecord
+  primaryConferenceRecord
   secondaryReportingLead : SourceAuthorityClass
 
 record SnowballSourceCoordinate : Set where
@@ -203,6 +212,20 @@ maiwald2024SnowballCoordinate = snowball-source-coordinate
     "DOI 10.1021/acs.jpca.4c03552; JPL institution QID Q189325")
   false true true
   "No verified Frank Maiwald person-QID is owned here. Q189325 identifies JPL only and must not be promoted to a person identity."
+
+maiwaldISMS2024SnowballCoordinate : SnowballSourceCoordinate
+maiwaldISMS2024SnowballCoordinate = snowball-source-coordinate
+  maiwaldISMS2024Deprotonated
+  primaryConferenceRecord
+  true
+  (Traversal.dashi-knowledge-coordinate
+    "DASHI/Culture/MaiwaldActionSpectroscopyProjectSuccessionExact.agda"
+    "Frank W. Maiwald pre-loss deprotonated-spectra conference attribution"
+    "540 Chemistry"
+    "unresolvedQid"
+    "ISMS P7658/RL06; 2024-06-20; JPL institution QID Q189325")
+  false true true
+  "Official conference object pays dated pre-loss presentation/authorship of the deprotonated spectra. It has no DOI and none is fabricated; unresolved person QID remains unresolved."
 
 maiwald2025SnowballCoordinate : SnowballSourceCoordinate
 maiwald2025SnowballCoordinate = snowball-source-coordinate
@@ -248,6 +271,7 @@ record SnowballAttributionBoundary : Set where
   constructor snowball-attribution-boundary
   field
     doiAddedWhenVerified : Bool
+    noDoiInventedForNonDoiObjects : Bool
     unresolvedQidNeverGuessed : Bool
     qidCoordinateDoesNotCreatePersonWeld : Bool
     institutionQidDoesNotCreatePersonQid : Bool
@@ -260,7 +284,7 @@ open SnowballAttributionBoundary public
 
 canonicalSnowballAttributionBoundary : SnowballAttributionBoundary
 canonicalSnowballAttributionBoundary = snowball-attribution-boundary
-  true true false false false false false false
+  true true true false false false false false false
 
 record ExtendedSourceCoverageBoundary : Set where
   constructor extended-source-coverage-boundary
