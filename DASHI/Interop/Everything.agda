@@ -55,4 +55,5 @@ import DASHI.Interop.SLRClaimFragmentResidualInheritanceExact
 import DASHI.Interop.SLRFragmentEvidenceContractionExact
 import DASHI.Interop.SLRGWBCandidateWorldProjectionExact
 import DASHI.Interop.SLRGWBExecutionRoadmapExact
+import DASHI.Interop.SLRWikimediaFirstWorldAcquisitionExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
