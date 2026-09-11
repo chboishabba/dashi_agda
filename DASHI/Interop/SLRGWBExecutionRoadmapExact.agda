@@ -11,11 +11,12 @@ import DASHI.Interop.SLRGWBCandidateWorldProjectionExact as GWB
 ------------------------------------------------------------------------
 -- GWB EXECUTION ROADMAP
 --
--- Updated from validated 2026-09-11 runtime handoffs.  The SLR runtime,
--- CandidateWorldModel ABI, replayable Wikimedia graph, identity contraction,
--- claim-relative source roles, multilingual parser compatibility, and the
--- first PNF role-family experiment are paid.  The active frontier is semantic
--- closure/gap propagation and joined world-research iteration.
+-- Updated from validated 2026-09-11/12 runtime handoffs.  The SLR runtime,
+-- CandidateWorldModel ABI, replayable Wikimedia graph, identity/source-role
+-- contraction, multilingual parser/PNF compatibility, SimpleWiki peer surface,
+-- semantic closure, joined tranche iteration, and first bounded growth round
+-- are paid.  The live refinement is Pareto frontier choice + explicit gap-flow
+-- accounting before further bounded recursion.
 ------------------------------------------------------------------------
 
 data GWBStageState : Set where
@@ -67,15 +68,21 @@ gwbSLRRoadmap =
   ∷ gwbRoadmapCoordinate "multilingual PNF role-family compatibility" paid
     "qids=4 / surfaces=13 / language_pairs=18 / surfaces_with_subject_predicate_object=10 / core-compatible pairs=9"
     "role overlap remains structural evidence only; sentence alignment and claim-semantic equivalence=false"
-  ∷ gwbRoadmapCoordinate "Simple English Wikipedia peer surface" implementedAwaitingRuntime
-    "multilingual compatibility now requests simplewiki and parses it with the trained English dependency model while retaining language=simple provenance"
-    "measure actual sitelink/surface availability; do not presume simplewiki is a subset or translation of enwiki"
-  ∷ gwbRoadmapCoordinate "multilingual semantic closure + per-surface gap propagation" implementedAwaitingRuntime
-    "slr-semantic-world-closure-v1 / SLRSemanticWorldClosureExact"
-    "validate canonical QID/QP/link atoms, attributed propagation, target_surface_asserted=false, and next acquisition obligations"
-  ∷ gwbRoadmapCoordinate "joined GWB/AU/Brexit WorldResearchIteration" implementedAwaitingRuntime
-    "slr-world-research-tranche-join-v1 + slr-world-research-iteration-v1 / SLRWorldResearchTrancheConvergenceExact"
-    "GWB world-ready; AU retained-source-ready; Brexit source-unpaid until retained narrative/source acquisition"
+  ∷ gwbRoadmapCoordinate "Simple English Wikipedia peer surface" paid
+    "semantic-closure runtime: surfaces=20 / observed=16 / simplewiki_surfaces=3"
+    "simplewiki is a peer evidence surface, not presumed subset or translation of enwiki"
+  ∷ gwbRoadmapCoordinate "multilingual semantic closure + per-surface gap propagation" paid
+    "qids=4 / canonical_atoms=1540 / surface_closure_atoms=705 / semantic_gap_atoms=2476 / propagated_views=2476 / obligations=546"
+    "target_surface_asserted=false; article-link truth=false; same-QID semantic equivalence=false"
+  ∷ gwbRoadmapCoordinate "joined GWB/AU/Brexit WorldResearchIteration" paid
+    "GWB world-ready; AU retained-source-ready; Brexit source-unpaid; initial semantic closure emitted 546 bounded acquisition obligations"
+    "AU still requires world projection; Brexit still requires retained narrative/source acquisition"
+  ∷ gwbRoadmapCoordinate "bounded world-growth round 1" paid
+    "selected=4 missing surfaces + 4 related QIDs; qid_nodes_added=15; atoms_added=589; canonical_atoms=2129; gaps=3275; obligations=781; formal budget owner=156 modules"
+    "gap/obligation growth is frontier expansion, not consumer closure"
+  ∷ gwbRoadmapCoordinate "Pareto acquisition frontier + explicit gap-flow accounting" implementedAwaitingRuntime
+    "non-scalar dimensions: cross-language gap coverage / source-surface support / root-QID support / typed Wikidata target; receipt separates contracted/persisting/new gaps and obligation churn"
+    "validate that semantic payoff selection replaces lexical-QID accident while frontier rank remains non-truth-bearing"
   ∷ gwbRoadmapCoordinate "consumer-specific graph residual contraction" active
     "reuse semantic closure, Q/P parent/surrounding graph and claim-relative source roles against declared consumer obligations"
     "identify which semantic/world residuals are paid and which survive to acquisition"
