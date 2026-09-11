@@ -1,6 +1,7 @@
 module DASHI.Physics.Chemistry.AtomicPeriodicTable369Validation where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as G
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProvenanceSnowballExact as P
@@ -13,27 +14,29 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369IbrahimDeweyTraversalExact 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369OEISAttributionExact as OEIS
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369OEISAufbauFormulaWeldExact as OW
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MadelungSelectorBoundaryExact as M
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369MadelungExactSelector as MS
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369IbrahimDeweyOEISSelectorExact as IDS
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369MadelungPeriodPartitionExact as PP
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 
 ------------------------------------------------------------------------
--- Focused validation root.  Importing this module forces the generative
+-- Focused validation root. Importing this module forces the generative
 -- formalism, provenance/snowball companion, chronology/status ledger,
--- DOI/QID/primary/Dewey/OEIS attribution ledgers, first-public dashiQ source,
--- Ibrahim/Dewey traversal, OEIS Aufbau/closure arithmetic weld, the fixed-alpha
--- Madelung selector boundary, and cross-repository regression ledger through
--- the Agda checker when this file is actually checked.
+-- DOI/QID/primary/Dewey/OEIS attribution surfaces, first-public dashiQ source,
+-- Ibrahim/Dewey traversal, OEIS arithmetic weld, historical fixed-alpha
+-- boundary, exact Madelung selector, selector traversal, and first-seven-period
+-- same-object partition through the Agda checker when this file is checked.
 --
--- The existence of this file is not itself a typecheck receipt.  See the
--- chronology/status owner for the distinction between authored source and a
--- recorded checker run.
+-- The existence of this file is not itself a typecheck receipt. See the
+-- chronology/status owner for authored source versus a recorded checker run.
+------------------------------------------------------------------------
 
 capacityRegression :
   G.subshellCapacity 0 ≡ 2
   × G.subshellCapacity 1 ≡ 6
   × G.subshellCapacity 2 ≡ 10
-capacityRegression =
-  G.sCapacity , (G.pCapacity , G.dCapacity)
+capacityRegression = G.sCapacity , (G.pCapacity , G.dCapacity)
 
 shellCapacityRegression :
   G.shellCapacity 1 ≡ 2
@@ -95,12 +98,8 @@ attributionDisciplineRegression = refl , (refl , refl)
 
 finiteHistoricalTargetRegression :
   X.finiteTargetCount ≡ 10
-  ×
-  F.occupationElectronCount
-    (F.finiteAufbauOccupation F.hydrogen) ≡ 1
-  ×
-  F.occupationElectronCount
-    (F.finiteAufbauOccupation F.neon) ≡ 10
+  × F.occupationElectronCount (F.finiteAufbauOccupation F.hydrogen) ≡ 1
+  × F.occupationElectronCount (F.finiteAufbauOccupation F.neon) ≡ 10
 finiteHistoricalTargetRegression =
   X.finiteTargetCountIs10 ,
   (X.hydrogenTargetElectronCountIs1 , X.neonTargetElectronCountIs10)
@@ -147,12 +146,10 @@ ibrahimDeweyNonPromotionRegression :
   ID.IbrahimDeweyTraversalBoundary.deweyAdjacencyPromotesDependency
     ID.canonicalIbrahimDeweyTraversalBoundary
   ≡ false
-  ×
-  ID.IbrahimDeweyTraversalBoundary.qidPromotesProof
+  × ID.IbrahimDeweyTraversalBoundary.qidPromotesProof
     ID.canonicalIbrahimDeweyTraversalBoundary
   ≡ false
-  ×
-  ID.IbrahimDeweyTraversalBoundary.firstLinkPromotesTheorem
+  × ID.IbrahimDeweyTraversalBoundary.firstLinkPromotesTheorem
     ID.canonicalIbrahimDeweyTraversalBoundary
   ≡ false
 ibrahimDeweyNonPromotionRegression = refl , (refl , refl)
@@ -161,12 +158,10 @@ archiveArtifactIdentityRegression :
   ID.IbrahimDeweyTraversalBoundary.archiveEmbeddedCodeEqualsOriginalArtifact
     ID.canonicalIbrahimDeweyTraversalBoundary
   ≡ false
-  ×
-  ID.ArchiveExecutableSnowballStatus.originalStandaloneScriptLocated
+  × ID.ArchiveExecutableSnowballStatus.originalStandaloneScriptLocated
     ID.canonicalArchiveExecutableSnowballStatus
   ≡ false
-  ×
-  ID.ArchiveExecutableSnowballStatus.embeddedRunNarrativeLocated
+  × ID.ArchiveExecutableSnowballStatus.embeddedRunNarrativeLocated
     ID.canonicalArchiveExecutableSnowballStatus
   ≡ true
 archiveArtifactIdentityRegression = refl , (refl , refl)
@@ -189,16 +184,13 @@ oeisNonPromotionRegression :
   OEIS.OEISAtomicBoundary.sequenceMatchImpliesMechanismIdentity
     OEIS.canonicalOEISAtomicBoundary
   ≡ false
-  ×
-  OEIS.OEISAtomicBoundary.oeisEntryImportsProof
+  × OEIS.OEISAtomicBoundary.oeisEntryImportsProof
     OEIS.canonicalOEISAtomicBoundary
   ≡ false
-  ×
-  OEIS.OEISAtomicBoundary.threeTermClosurePrefixProvesFullPeriodicTable
+  × OEIS.OEISAtomicBoundary.threeTermClosurePrefixProvesFullPeriodicTable
     OEIS.canonicalOEISAtomicBoundary
   ≡ false
-  ×
-  OEIS.OEISAtomicBoundary.shellCapacityEqualsAufbauPeriodLengthGlobally
+  × OEIS.OEISAtomicBoundary.shellCapacityEqualsAufbauPeriodLengthGlobally
     OEIS.canonicalOEISAtomicBoundary
   ≡ false
 oeisNonPromotionRegression = refl , (refl , (refl , refl))
@@ -233,12 +225,10 @@ oeisAufbauNonPromotionRegression :
   OW.OEISAufbauWeldBoundary.exactA093907FormulaImpliesPhysicalAufbauMechanism
     OW.canonicalOEISAufbauWeldBoundary
   ≡ false
-  ×
-  OW.OEISAufbauWeldBoundary.A167268CapacityTermsProveDashiSelectorOrder
+  × OW.OEISAufbauWeldBoundary.A167268CapacityTermsProveDashiSelectorOrder
     OW.canonicalOEISAufbauWeldBoundary
   ≡ false
-  ×
-  OW.OEISAufbauWeldBoundary.exact118ClosureCoordinateProvesElement119Impossible
+  × OW.OEISAufbauWeldBoundary.exact118ClosureCoordinateProvesElement119Impossible
     OW.canonicalOEISAufbauWeldBoundary
   ≡ false
 oeisAufbauNonPromotionRegression = refl , (refl , refl)
@@ -261,12 +251,74 @@ madelungSelectorNonPromotionRegression :
   M.MadelungSelectorBoundary.earlyClosuresPromoteFixedAlphaToGlobalAufbau
     M.canonicalMadelungSelectorBoundary
   ≡ false
-  ×
-  M.MadelungSelectorBoundary.fixedThreeFifthsMatchesA167268Globally
+  × M.MadelungSelectorBoundary.fixedThreeFifthsMatchesA167268Globally
     M.canonicalMadelungSelectorBoundary
   ≡ false
-  ×
-  M.MadelungSelectorBoundary.exactLexicographicMadelungSelectorStillNeeded
+  × M.MadelungSelectorBoundary.exactLexicographicMadelungSelectorStillNeeded
     M.canonicalMadelungSelectorBoundary
   ≡ true
 madelungSelectorNonPromotionRegression = refl , (refl , refl)
+
+exactMadelungA167268Regression :
+  MS.madelungCapacityPrefix 3
+  ≡ 2 ∷ 2 ∷ 6 ∷ 2 ∷ 6 ∷ 2 ∷ 10 ∷ 6 ∷ 2 ∷ 10 ∷ 6 ∷ 2 ∷ []
+exactMadelungA167268Regression = MS.thirdLayerCapacities
+
+exactMadelungBoundaryRegression :
+  MS.ExactMadelungSelectorBoundary.structuralSelectorConstructed
+    MS.canonicalExactMadelungSelectorBoundary
+  ≡ true
+  × MS.ExactMadelungSelectorBoundary.a167268FinitePrefixesGenerated
+    MS.canonicalExactMadelungSelectorBoundary
+  ≡ true
+  × MS.ExactMadelungSelectorBoundary.historicalFixedAlphaEqualsExactSelector
+    MS.canonicalExactMadelungSelectorBoundary
+  ≡ false
+  × MS.ExactMadelungSelectorBoundary.structuralSelectorEqualsPhysicalGroundStateOrder
+    MS.canonicalExactMadelungSelectorBoundary
+  ≡ false
+exactMadelungBoundaryRegression = refl , (refl , (refl , refl))
+
+selectorTraversalRegression :
+  IDS.IbrahimDeweyOEISSelectorBoundary.exactSelectorExists
+    IDS.canonicalIbrahimDeweyOEISSelectorBoundary
+  ≡ true
+  × IDS.IbrahimDeweyOEISSelectorBoundary.a167268PrefixGenerationExists
+    IDS.canonicalIbrahimDeweyOEISSelectorBoundary
+  ≡ true
+  × IDS.IbrahimDeweyOEISSelectorBoundary.historicalProxyEqualsExactSelector
+    IDS.canonicalIbrahimDeweyOEISSelectorBoundary
+  ≡ false
+  × IDS.IbrahimDeweyOEISSelectorBoundary.oeisIdentifiesPhysicalMechanism
+    IDS.canonicalIbrahimDeweyOEISSelectorBoundary
+  ≡ false
+selectorTraversalRegression = refl , (refl , (refl , refl))
+
+periodPartitionSelectorRegression :
+  PP.firstSevenPeriodsWithNextBoundary ≡ MS.madelungBlockPrefix 4
+periodPartitionSelectorRegression = PP.selectorPrefixThroughNextBoundary
+
+periodPartitionA093907Regression :
+  PP.periodCapacity PP.period1Blocks ≡ OW.aufbauPeriodLength 1
+  × PP.periodCapacity PP.period2Blocks ≡ OW.aufbauPeriodLength 2
+  × PP.periodCapacity PP.period3Blocks ≡ OW.aufbauPeriodLength 3
+  × PP.periodCapacity PP.period4Blocks ≡ OW.aufbauPeriodLength 4
+  × PP.periodCapacity PP.period5Blocks ≡ OW.aufbauPeriodLength 5
+  × PP.periodCapacity PP.period6Blocks ≡ OW.aufbauPeriodLength 6
+  × PP.periodCapacity PP.period7Blocks ≡ OW.aufbauPeriodLength 7
+periodPartitionA093907Regression = PP.periodLengthsMatchA093907Prefix
+
+periodPartitionBoundaryRegression :
+  PP.MadelungPeriodPartitionBoundary.boundedSameObjectPeriodWeldPaid
+    PP.canonicalMadelungPeriodPartitionBoundary
+  ≡ true
+  × PP.MadelungPeriodPartitionBoundary.boundedSameObjectClosureWeldPaid
+    PP.canonicalMadelungPeriodPartitionBoundary
+  ≡ true
+  × PP.MadelungPeriodPartitionBoundary.genericAllPeriodPartitionTheoremPaid
+    PP.canonicalMadelungPeriodPartitionBoundary
+  ≡ false
+  × PP.MadelungPeriodPartitionBoundary.empiricalGroundStateOrderingPaid
+    PP.canonicalMadelungPeriodPartitionBoundary
+  ≡ false
+periodPartitionBoundaryRegression = refl , (refl , (refl , refl))
