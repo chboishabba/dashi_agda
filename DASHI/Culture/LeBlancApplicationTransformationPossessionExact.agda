@@ -122,6 +122,46 @@ okojieSeptember2025ContinuityLead = post-loss-program-continuity-lead
   "Robert Okojie public professional post describing the 2025-09-24 close-out presentation; NASA NTRS 20250008475 August recognition slide already lists Okojie as NASA FSP I&C Lead and LeBlanc separately as NASA SNP I&C TechMat Team Lead"
   true false true
 
+------------------------------------------------------------------------
+-- Same-WBS continuity across the loss boundary.
+--
+-- NTRS 20250008475 and NTRS 20240010391 both carry WBS
+-- 658133.04.01.22.01.06.  The latter is a different Glenn-authored FSP sensor
+-- presentation whose meeting date is 2026-05-27, well after LeBlanc's death.
+-- This pays continuity of the programme/WBS carrier, not continuity of
+-- LeBlanc's person-specific TechMat role or a successor identity.
+------------------------------------------------------------------------
+
+record PostLossWBSContinuityState : Set where
+  constructor post-loss-wbs-continuity-state
+  field
+    wbs : String
+    leblancNtrsObject : String
+    leblancObjectAcquired : String
+    laterNtrsObject : String
+    laterObjectAuthor : String
+    laterObjectMeetingDate : String
+    sameWbsPaid : Bool
+    laterMeetingPostLoss : Bool
+    programmeCarrierContinuityPaid : Bool
+    personRoleContinuityPaid : Bool
+    techMatSuccessorIdentityPaid : Bool
+    sameWbsImpliesSameOwner : Bool
+    boundedReading : String
+
+open PostLossWBSContinuityState public
+
+canonicalPostLossWBSContinuityState : PostLossWBSContinuityState
+canonicalPostLossWBSContinuityState = post-loss-wbs-continuity-state
+  "658133.04.01.22.01.06"
+  "NTRS 20250008475 — NASA 40 kW Fission Surface Power I&C Technology Development Path"
+  "2025-08-16"
+  "NTRS 20240010391 — Thin Film Sensors for Fission Surface Power"
+  "John D Wrbanek, NASA Glenn Research Center"
+  "2026-05-27"
+  true true true false false false
+  "The identical WBS persists in a distinct NASA FSP technical object with a 2026 meeting date, proving programme/resource-carrier continuity after LeBlanc's death. The later object has a different author and topic and therefore does not pay LeBlanc role continuity, TechMat succession, or same-owner identity."
+
 record LeBlancApplicationBoundary : Set where
   constructor leblanc-application-boundary
   field techMatLeadImpliesSoleQualificationOwner : Bool; executiveCommitteeMembershipImpliesUniqueKnowledge : Bool; technologyMaturationRoleSourceBacked : Bool; failureMapOwnershipClosed : Bool; postLossPublicationImpliesPostLossActiveRole : Bool; staleRecognitionSlideImpliesNoSuccessor : Bool; datedPostLossGovernanceArtifactRequiredForSuccession : Bool; postLossProgramContinuityImpliesTechMatSuccession : Bool; alreadyDistinctFSPLeadMayBeCalledTechMatSuccessorWithoutReceipt : Bool; doiPublicationEqualsNTRSWebinarManifestation : Bool; laterRepositoryMetadataUpdateImpliesRoleRefresh : Bool
