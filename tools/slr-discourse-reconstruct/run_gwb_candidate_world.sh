@@ -40,6 +40,19 @@ grep -q 'semantic_promotion=false' "$ERR" || {
   exit 1
 }
 
+# SensibLaw normalizes status_counts by dropping zero-valued classes. Canonicalize
+# the producer to that representation before strict parity; this changes no
+# candidate semantics and only removes empty bookkeeping coordinates.
+python3 - "$WORLD" <<'PY'
+import json, sys
+from pathlib import Path
+p = Path(sys.argv[1])
+m = json.loads(p.read_text(encoding='utf-8'))
+counts = m.get('status_counts') or {}
+m['status_counts'] = {str(k): int(v) for k, v in counts.items() if int(v) != 0}
+p.write_text(json.dumps(m, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+PY
+
 python3 - "$WORLD" <<'PY'
 import json, sys
 m = json.load(open(sys.argv[1], encoding='utf-8'))
@@ -60,12 +73,12 @@ assert m['summary']['source_family_count'] == 2
 assert len(m['claims']) == 41134
 assert len(m['relations']) == 41124
 assert len(m['provenance_graph']) == 10
-assert m['status_counts']['candidate'] == 82258
+assert m['status_counts'] == {'candidate': 82258}
 print(
     'SLR_GWB_CANDIDATE_WORLD_VALIDATION '
     f"sentences={len(m['claims'])} relations={len(m['relations'])} "
     f"provenance={len(m['provenance_graph'])} source_families={m['summary']['source_family_count']} "
-    'raw_text_embedded=false candidate_only=true semantic_promotion=false'
+    'zero_status_classes_omitted=true raw_text_embedded=false candidate_only=true semantic_promotion=false'
 )
 PY
 
@@ -95,7 +108,7 @@ print(
     'SLR_GWB_SENSIBLAW_PARITY_RECEIPT '
     f"target={normalized['schema_version']} claims={len(normalized['claims'])} "
     f"relations={len(normalized['relations'])} provenance={len(normalized['provenance_graph'])} "
-    'normalization_drift=false candidate_only=true semantic_promotion=false',
+    'normalization_drift=false zero_status_classes_omitted=true candidate_only=true semantic_promotion=false',
     file=sys.stderr,
 )
 PY
