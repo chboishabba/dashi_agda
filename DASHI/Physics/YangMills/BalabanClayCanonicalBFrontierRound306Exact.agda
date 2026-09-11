@@ -17,15 +17,14 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact where
 --
 --   G1. literal selected-J applicability of the published CMP116/CMP119
 --       differentiated localization theorem on the exact T5 state;
---   G2. physical Euclidean-time translation / bounded-observable / support-
---       distance semantics for arbitrary physical observable pairs;
+--   G2. physical Euclidean-time presentation, selected-test boundedness, and
+--       an order-closed scalar convergence authority;
 --   G3. same reconstructed Hamiltonian: the concrete q=1/2 decay bound means
 --       exponential decay at one strictly positive physical mass m*.
 --
--- R309 makes G1 proof-bearing at the correct boundary.  The source theorem is
--- indexed by the exact selected-T5 shell carrier.  The only local welds are the
--- selected mixed response, connecting root, and physical support distance.
--- Type equality of neighbouring shell carriers is deliberately insufficient.
+-- R309 makes G1 proof-bearing at the correct boundary.  R310 splits G2 so the
+-- physical time/support meaning, bounded-test applicability and topology/order
+-- closure cannot be confused with the already-checked covariance-limit algebra.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -37,6 +36,7 @@ import DASHI.Physics.YangMills.BalabanAbsoluteTwoJSourceMinCutRound299Exact as R
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
 import DASHI.Physics.YangMills.BalabanPairwiseClusteringStandardMassGapRound305Exact as R305
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact as R309
+import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact as R310
 
 record Round306Boundary : Set where
   constructor round306-boundary
@@ -60,6 +60,10 @@ record Round306Boundary : Set where
     g2ManufacturesNewAnalyticDecayInformation : Bool
     g2ManufacturesNewAnalyticDecayInformationIsFalse :
       g2ManufacturesNewAnalyticDecayInformation ≡ false
+
+    g2CovarianceLimitAlgebraIsSeparateCompiler : Bool
+    g2CovarianceLimitAlgebraIsSeparateCompilerIsTrue :
+      g2CovarianceLimitAlgebraIsSeparateCompiler ≡ true
 
     g3ManufacturesNewAnalyticDecayInformation : Bool
     g3ManufacturesNewAnalyticDecayInformationIsFalse :
@@ -97,6 +101,7 @@ canonicalRound306Boundary =
     true refl
     false refl
     false refl
+    true refl
     false refl
     true refl
     true refl
@@ -122,13 +127,32 @@ round306G1LiteralSelectedJSameObjectLocalizationLevel : ProofLevel
 round306G1LiteralSelectedJSameObjectLocalizationLevel =
   R299.round299LiteralSelectedJSameObjectLocalizationLevel
 
--- Compatibility name retained for downstream consumers: this is the physical
--- selected-J specialization level, not a claim that the decay mechanism itself
--- is fresh Yang--Mills analysis.
 round306G1LiteralAbsoluteTwoJLocalizationLevel : ProofLevel
 round306G1LiteralAbsoluteTwoJLocalizationLevel =
   R296.round296LiteralAbsoluteTwoJLocalizationLevel
 
+-- G2 split: no new decay theorem is hidden here.
+round306G2PairwisePresentationCompilerLevel : ProofLevel
+round306G2PairwisePresentationCompilerLevel =
+  R310.round310PairwisePresentationCompilerLevel
+
+round306G2PhysicalTimeSupportSemanticsLevel : ProofLevel
+round306G2PhysicalTimeSupportSemanticsLevel =
+  R310.round310PhysicalTimeSupportSemanticsLevel
+
+round306G2BoundedTestAdmissibilityLevel : ProofLevel
+round306G2BoundedTestAdmissibilityLevel =
+  R310.round310BoundedTestAdmissibilityLevel
+
+round306G2ScalarOrderClosureLevel : ProofLevel
+round306G2ScalarOrderClosureLevel =
+  R310.round310ScalarOrderClosureLevel
+
+round306G2ConnectedCovarianceLimitCompilerLevel : ProofLevel
+round306G2ConnectedCovarianceLimitCompilerLevel =
+  R310.round310ConnectedCovarianceLimitCompilerLevel
+
+-- Compatibility name retained for downstream status surfaces.
 round306G2PhysicalPairwiseTimeMeaningLevel : ProofLevel
 round306G2PhysicalPairwiseTimeMeaningLevel =
   R304.round304PhysicalTimeTranslationDistanceMeaningLevel
