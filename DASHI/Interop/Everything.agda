@@ -42,5 +42,6 @@ import DASHI.Interop.FormalisationGovernanceAttributedSourceMigrationExact
 import DASHI.Interop.SourceAttributionShapePolicyExact
 import DASHI.Interop.SLRWorldModelSuiteConvergenceRoadmapExact
 import DASHI.Interop.SLRSensibLawCandidateWorldAdapterExact
+import DASHI.Interop.SLRABCGoldBenchmarkRuntimeContractExact
 import DASHI.Interop.SLRC029WorldConstraintFibreBridgeExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
