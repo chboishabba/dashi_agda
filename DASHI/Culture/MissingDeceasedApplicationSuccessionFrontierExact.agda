@@ -76,12 +76,6 @@ loureiroDionLiContinuation = loureiro-student-publication-continuation
 
 ------------------------------------------------------------------------
 -- Publication manifestation chronology.
---
--- The DOI-bearing Li/Liu/Loureiro paper was received, revised and accepted
--- before Loureiro's death.  Its 2026 PSFC/Cambridge appearance is therefore a
--- post-loss publication manifestation of an already accepted object, not by
--- itself evidence of post-loss scientific work, advisor reassignment, grant
--- transfer, repository transfer or same-simulation-state handover.
 ------------------------------------------------------------------------
 
 record LoureiroPublicationManifestationChronology : Set where
@@ -114,11 +108,45 @@ loureiroLiLiuPublicationChronology = loureiro-publication-manifestation-chronolo
   "Journal of Plasma Physics 2026 vol. 92 E20; MIT PSFC report PSFC/JA-25-49 publicly listed 2026-02-27"
   true true true true false false false false
 
+------------------------------------------------------------------------
+-- Data-access and repository-custody discriminator.
+--
+-- Cambridge's primary version-of-record says supporting data are available from
+-- corresponding author Dion Li on reasonable request. The PSFC library's report
+-- page says associated datasets are in Dataverse if applicable. The first pays
+-- a current public data-access contact; the second is only a repository search
+-- surface until an exact Dataverse object/DOI is recovered.
+------------------------------------------------------------------------
+
+record LoureiroDataAccessReceipt : Set where
+  constructor loureiro-data-access-receipt
+  field
+    publicationDOI : String
+    correspondingAuthor : String
+    primaryDataAvailabilityStatement : String
+    psfcRepositoryStatement : String
+    dataAccessResponsibilityLocated : Bool
+    exactDataverseObjectLocated : Bool
+    repositoryDOILocated : Bool
+    rawSimulationStateCustodyPaid : Bool
+    advisorReassignmentPaid : Bool
+    grantTransferPaid : Bool
+
+open LoureiroDataAccessReceipt public
+
+loureiroLiDataAccess : LoureiroDataAccessReceipt
+loureiroLiDataAccess = loureiro-data-access-receipt
+  "10.1017/S002237782510113X"
+  "Dion Li"
+  "Journal of Plasma Physics: data supporting the findings are available from the corresponding author upon reasonable request"
+  "MIT PSFC Library PSFC/JA-25-49: associated dataset files are located in Dataverse, if applicable"
+  true false false false false false
+
 record LoureiroSuccessionBoundary : Set where
   constructor loureiro-succession-boundary
-  field centerDirectorSuccessionImpliesLoureiroGroupPISuccession : Bool; centerDirectorSuccessionImpliesStudentReassignment : Bool; centerDirectorSuccessionImpliesGrantReassignment : Bool; pedagogicalContinuationImpliesRepositoryTransfer : Bool; postLossStudentPublicationImpliesAdvisorReassignment : Bool; postLossStudentPublicationImpliesGrantOrRepositoryTransfer : Bool; postLossPublicationManifestationImpliesPostLossScientificWork : Bool; centerLeadershipAndPedagogyMayGuideSameCarrierSearch : Bool
+  field centerDirectorSuccessionImpliesLoureiroGroupPISuccession : Bool; centerDirectorSuccessionImpliesStudentReassignment : Bool; centerDirectorSuccessionImpliesGrantReassignment : Bool; pedagogicalContinuationImpliesRepositoryTransfer : Bool; postLossStudentPublicationImpliesAdvisorReassignment : Bool; postLossStudentPublicationImpliesGrantOrRepositoryTransfer : Bool; postLossPublicationManifestationImpliesPostLossScientificWork : Bool; dataAccessContactImpliesRepositoryCustodyTransfer : Bool; conditionalDataverseLanguageImpliesDatasetExists : Bool; centerLeadershipAndPedagogyMayGuideSameCarrierSearch : Bool
 open LoureiroSuccessionBoundary public
-canonicalLoureiroSuccessionBoundary = loureiro-succession-boundary false false false false false false false true
+canonicalLoureiroSuccessionBoundary = loureiro-succession-boundary false false false false false false false false false true
 
 record SuccessionSearchStatus : Set where
   constructor succession-search-status
@@ -128,7 +156,7 @@ canonicalSuccessionSearchStatus : SuccessionSearchStatus
 canonicalSuccessionSearchStatus = succession-search-status false refl false refl false refl true refl true refl true refl false refl false refl
 
 data SuccessionReverseTarget : Set where
-  chavezSameCarrierTaskAllocation chavezNamedSuccessorOrHandover chavezPostDepartureRework leblancTechMatTaskAllocation leblancNamedSuccessorOrHandover leblancQualificationContinuity rezaProcessWindowTaskAllocation rezaNamedSuccessorOrHandover rezaManufacturingRequalification loureiroFormalAdvisorReassignment loureiroGrantReassignment loureiroRepositoryAndNotebookCustody loureiroTargetSpecificSimulationContinuation loureiroNamedSameCarrierSuccessorOrHandover : SuccessionReverseTarget
+  chavezSameCarrierTaskAllocation chavezNamedSuccessorOrHandover chavezPostDepartureRework leblancTechMatTaskAllocation leblancNamedSuccessorOrHandover leblancQualificationContinuity rezaProcessWindowTaskAllocation rezaNamedSuccessorOrHandover rezaManufacturingRequalification loureiroFormalAdvisorReassignment loureiroGrantReassignment loureiroRepositoryAndNotebookCustody loureiroTargetSpecificSimulationContinuation loureiroNamedSameCarrierSuccessorOrHandover loureiroExactDataverseDatasetIdentity : SuccessionReverseTarget
 
 firstLoureiroSameCarrierTarget : SuccessionReverseTarget
 firstLoureiroSameCarrierTarget = loureiroFormalAdvisorReassignment
