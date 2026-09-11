@@ -279,3 +279,73 @@ isotypicFrontier = Isotypic.currentTwoIsotypicCompilerFrontier
 
 oldFinNinetyBoundary : OldAction.MultiplicityInertiaTwelveSeventyEightBoundary
 oldFinNinetyBoundary = OldAction.canonicalMultiplicityInertiaTwelveSeventyEightBoundary
+
+------------------------------------------------------------------------
+-- 8. Proof-bearing promotion contract.
+--
+-- This is the canonical route after the WrongType correction.  It does not
+-- inhabit the missing Monster representation; it states what must be supplied
+-- before the source-paid character can be promoted to an actual action.
+------------------------------------------------------------------------
+
+record CanonicalLinearMultiplicityRoute : Set₁ where
+  field
+    linearRepresentation : LinearMultiplicityRepresentation
+
+    -- Same-object obligations.  These are not manufactured from dimension or
+    -- character data; an actual producer must supply them.
+    sourcePaidTwelvePlusSeventyEightCharacter : Set
+    sameObjectWithChosenZetaMultiplicity : Set
+    linearEvaluationIntertwiner : Set
+
+open CanonicalLinearMultiplicityRoute public
+
+-- The old Fin90 route becomes available only after an explicit proof that the
+-- chosen basis is preserved by the full inertia action.
+record PermutationBasisPromotionReceipt
+    (route : CanonicalLinearMultiplicityRoute) : Set₁ where
+  field
+    specialisation :
+      PermutationBasisSpecialisation (linearRepresentation route)
+
+open PermutationBasisPromotionReceipt public
+
+-- A canonical linear route has no permutation-basis premise.  This empty type
+-- makes it impossible to promote basis preservation merely from the route's
+-- existence.
+data CanonicalLinearRouteRequiresPermutationBasis : Set where
+
+linearRouteDoesNotRequirePermutationBasis :
+  CanonicalLinearRouteRequiresPermutationBasis → ⊥
+linearRouteDoesNotRequirePermutationBasis ()
+
+-- The legacy Fin90 consumer is reachable only through the explicit receipt.
+-- In particular, recovering a permutation action requires the actual
+-- basis-preservation witness carried by `PermutationBasisSpecialisation`.
+oldFinNinetyRouteRequiresBasisPreservation :
+  (route : CanonicalLinearMultiplicityRoute) →
+  PermutationBasisPromotionReceipt route →
+  PermutationBasisSpecialisation (linearRepresentation route)
+oldFinNinetyRouteRequiresBasisPreservation route receipt =
+  specialisation receipt
+
+-- Character evidence already has its own firewall above.  Re-export the same
+-- impossibility at the promotion boundary so downstream consumers cannot
+-- accidentally treat chi_12 + chi_78 as a Fin90 permutation receipt.
+characterEvidenceDoesNotPayPermutationReceipt :
+  CharacterTwelvePlusSeventyEightCreatesBasisPermutation → ⊥
+characterEvidenceDoesNotPayPermutationReceipt = characterDoesNotCreateBasisPermutation
+
+record CanonicalLinearPromotionBoundary : Set where
+  constructor canonical-linear-promotion-boundary
+  field
+    canonicalRouteIsLinear : Bool
+    finNinetyRouteIsOptionalSpecialisation : Bool
+    permutationSpecialisationRequiresBasisPreservation : Bool
+    characterEvidencePaysPermutationSpecialisation : Bool
+    sourcePaidCharacterStillNeedsSameObjectLinearAction : Bool
+open CanonicalLinearPromotionBoundary public
+
+canonicalLinearPromotionBoundary : CanonicalLinearPromotionBoundary
+canonicalLinearPromotionBoundary = canonical-linear-promotion-boundary
+  true true true false true
