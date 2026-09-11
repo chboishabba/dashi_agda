@@ -35,12 +35,16 @@ data SourceNativeH1Residual319 : Set where
   sourceDifferentiatedLocalizationPayment : SourceNativeH1Residual319
   selectedT5SourceApplicability : SourceNativeH1Residual319
 
+-- Both are sub-payments of an OPTIONAL producer route relative to the canonical
+-- H1 consumer.  Their finer distinction (source/import vs same-object physical
+-- applicability) is carried by their constructors and proof-level fields, not
+-- by inventing new `ProofSearchTargetRole` constructors.
 sourceNativeH1Role319 :
   SourceNativeH1Residual319 → Introspective.ProofSearchTargetRole
 sourceNativeH1Role319 sourceDifferentiatedLocalizationPayment =
-  Introspective.sourceTranscriptionDebt
+  Introspective.optionalProducerTactic
 sourceNativeH1Role319 selectedT5SourceApplicability =
-  Introspective.representationWeld
+  Introspective.optionalProducerTactic
 
 record Round319Boundary : Set where
   constructor round319-boundary
