@@ -29,6 +29,13 @@ REQUIRED = {
         "domainListingDoesNotProveCreatorOwnership",
         "southAtlanticAnomalyDoesNotPayBlochfieldTheoryLineage",
         "sameObjectTechnicalLineageStillUnpaid",
+        "sameNameMediumCandidateObservation",
+        '"https://medium.com/@yasminanacreto/list/80f317ad2598"',
+        "crossPlatformLink3CandidateObservation",
+        '"https://link3.to/0xyasanacreto"',
+        "crossPlatformIdentityWeld",
+        "sameDisplayNameDoesNotPaySamePerson",
+        "handleStemDoesNotPaySamePerson",
     ],
     "DASHI/Culture/Everything.agda": [
         "import DASHI.Culture.BoundaryConservativeTransfigurationBlochfieldExact",
