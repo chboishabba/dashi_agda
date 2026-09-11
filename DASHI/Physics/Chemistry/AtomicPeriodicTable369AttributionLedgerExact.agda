@@ -62,6 +62,21 @@ firstAtomicSpectralTooling =
     "implementation chronology authority"
     "earliest clean atomic/spectral implementation located in the current cross-repo audit; not yet the 369 periodic-table constructor"
 
+base369AgdaInception : AttributionReceipt
+base369AgdaInception =
+  attributionReceipt
+    "Johl Brown"
+    "Base369"
+    "2026-02-16"
+    "unassigned"
+    "unassigned"
+    "primary repository formal implementation receipt"
+    "511 / 530 classification cue"
+    "https://github.com/chboishabba/dashi_agda/blob/65266f7edc1ec7bb52e59ee020209cc5cb0eecec/Base369.agda"
+    "dashi_agda init commit 65266f7edc1ec7bb52e59ee020209cc5cb0eecec; blob 8dc130c5af5a28580f729a57ea9e8ba610c0e9ad"
+    "formal substrate chronology authority"
+    "Base369 is present in the repository's init commit, with explicit 3/6/9 cyclic carriers, repeated rotation, order laws, identities, and ternary associativity"
+
 projectionPhysicsProgramme : AttributionReceipt
 projectionPhysicsProgramme =
   attributionReceipt
@@ -92,6 +107,21 @@ firstDirectAtomicClosureImplementation =
     "implementation chronology authority"
     "earliest direct repo-native atom/chemistry closure milestone located in this audit; commit explicitly states staged closure rather than finished chemistry recovery"
 
+leanBase369Mirror : AttributionReceipt
+leanBase369Mirror =
+  attributionReceipt
+    "Johl Brown"
+    "Lean mirror of Base369.agda"
+    "2026-07-07"
+    "unassigned"
+    "unassigned"
+    "primary repository cross-assistant proof-source receipt"
+    "511 / 530 classification cue"
+    "https://github.com/chboishabba/dashi_lean4/commit/55132524c2e132c0b86c17eeb60d7e39c3af08b6"
+    "commit 55132524c2e132c0b86c17eeb60d7e39c3af08b6 adds Base369.lean from zero lines; moved to AgdaMirror/Base369.lean on 2026-08-12 by commit 72734285fd83387837e0025eb51a93b63629a0b9"
+    "Lean proof-source authority for the finite 3/6/9 carrier laws only"
+    "contains concrete proof terms for spin/modular XOR agreement, rotation orders, identities, and ternary associativity; does not mirror the atom constructor"
+
 explicitPeriodicRecoveryBoundary : AttributionReceipt
 explicitPeriodicRecoveryBoundary =
   attributionReceipt
@@ -106,21 +136,6 @@ explicitPeriodicRecoveryBoundary =
     "chboishabba/dashi_agda commit 554e8f930dfee5293d75d3bb67be8098bde088d3; PR #101"
     "formal recovery-boundary authority"
     "explicit shell-recurrence / periodic-table recovery owner; physical completion remains fail-closed"
-
-leanBase369Mirror : AttributionReceipt
-leanBase369Mirror =
-  attributionReceipt
-    "Johl Brown"
-    "Lean mirror of Base369.agda"
-    "current path introduced 2026-08-12; deeper pre-reorganization file lineage not yet paid"
-    "unassigned"
-    "unassigned"
-    "primary repository cross-assistant implementation receipt"
-    "511 / 530 classification cue"
-    "https://github.com/chboishabba/dashi_lean4/blob/main/AgdaMirror/Base369.lean"
-    "chboishabba/dashi_lean4 AgdaMirror/Base369.lean; current-path commit 72734285fd83387837e0025eb51a93b63629a0b9"
-    "Lean proof-source authority for the finite 3/6/9 carrier laws only"
-    "contains concrete proof terms for spin/modular XOR agreement, rotation orders, identities, and ternary associativity; does not yet mirror the atom constructor"
 
 currentAtomicManuscript : AttributionReceipt
 currentAtomicManuscript =
@@ -183,7 +198,7 @@ periodicTableSemanticCoordinate =
     "https://www.wikidata.org/wiki/Q10693"
     "Wikidata item Q10693"
     "semantic identity coordinate"
-    "machine-readable coordinate for the periodic-table concept; Wikidata description itself encodes ordering by atomic number and recurrent properties"
+    "machine-readable coordinate for the periodic-table concept"
 
 pauliPrincipleSemanticCoordinate : AttributionReceipt
 pauliPrincipleSemanticCoordinate =
@@ -245,7 +260,7 @@ canonicalAttributionSnowballFrontier : AttributionSnowballFrontier
 canonicalAttributionSnowballFrontier =
   attributionSnowballFrontier
     "locate the original historical MDL/exclusion filling script, exact parameter schedule, executable receipt, and artifact hash"
-    "trace Base369 Lean proof source before the 2026-08-12 AgdaMirror reorganization and distinguish authored proof from later file move"
+    "paid to 2026-07-07 commit 55132524c2e132c0b86c17eeb60d7e39c3af08b6, which adds Base369.lean from zero lines; any earlier off-repository Aristotle artifact remains a distinct provenance question"
     "locate any same-object pre-PR paper, DOI, arXiv, Zenodo, release, or public manuscript receipt for the atomic constructor; otherwise retain unassigned"
     "operator-to-spectrum / scale / ionisation-energy bridge, followed by nuclear-stability and bonding validation"
     "snowball laterally across repository, archive, literature, semantic and catalogue coordinates"
