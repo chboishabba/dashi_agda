@@ -174,7 +174,7 @@ firstFineIncidenceInterpolationResidual = repeatOneSwapEnsembleAcrossProjectionS
 data LocalFragilityImpliesUniversalThreshold : Set where
 data SyntheticFragilityImpliesProductionMeasurement : Set where
 data RecurrenceFragilityImpliesConsumerFailure : Set where
-\data DOIOrQIDImpliesProof : Set where
+data DOIOrQIDImpliesProof : Set where
 
 localFragilityDoesNotCreateUniversalThreshold : LocalFragilityImpliesUniversalThreshold → ⊥
 localFragilityDoesNotCreateUniversalThreshold ()
