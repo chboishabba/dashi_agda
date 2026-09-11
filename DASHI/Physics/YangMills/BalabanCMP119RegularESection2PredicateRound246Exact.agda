@@ -174,8 +174,51 @@ activeRegularEFormFromTheorem1 :
 activeRegularEFormFromTheorem1 theorem1 scale active =
   Active.effectiveDensitiesPreserveSection2Form theorem1 scale active
 
+------------------------------------------------------------------------
+-- Least-privilege active source witness for the BC1 continuation.
+--
+-- CMP122 Theorem 1 owns more than BC1 needs.  Once the regular-E/localization
+-- field has been projected, the quantitative Section-2 bounds are no longer a
+-- primitive dependency of the CMP109/CMP116 continuation.
+------------------------------------------------------------------------
+
+record ActiveRegularESection2FormWitness
+    {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom}
+    {history : FiniteHistory.FiniteModeInverseSquareTerminalHistoryData
+      trajectory Mode Atom betaData}
+    (dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history) : Set₁ where
+  field
+    regularEFormOnActiveScale : ∀ scale →
+      FiniteHistory.ActiveScale history scale →
+      CMP119RegularESection2Form
+        (ActiveRegularESection2Inputs.Density dataSet)
+        (ActiveRegularESection2Inputs.Background dataSet)
+        (ActiveRegularESection2Inputs.Volume dataSet)
+        (ActiveRegularESection2Inputs.Component dataSet)
+        scale (ActiveRegularESection2Inputs.densityAt dataSet scale)
+
+open ActiveRegularESection2FormWitness public
+
+activeRegularESection2FormWitnessFromTheorem1 :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history} →
+  Active.ActiveBalaban1989Theorem1Witness
+    (asActiveRegularESection2Flow dataSet) →
+  ActiveRegularESection2FormWitness dataSet
+activeRegularESection2FormWitnessFromTheorem1 theorem1 = record
+  { regularEFormOnActiveScale = activeRegularEFormFromTheorem1 theorem1 }
+
 activeRegularESection2PredicateCompilerLevel : ProofLevel
 activeRegularESection2PredicateCompilerLevel = machineChecked
+
+activeRegularESection2FormWitnessCompilerLevel : ProofLevel
+activeRegularESection2FormWitnessCompilerLevel = machineChecked
 
 activeScaleCouplingHypothesisCompilerLevel : ProofLevel
 activeScaleCouplingHypothesisCompilerLevel =
@@ -196,3 +239,8 @@ cmp119RegularESection2TheoremSourceLevel = Source.balaban1989Theorem1SourceLevel
 -- required. Once the source witness is supplied, E_k is projected mechanically.
 literalCMP119RegularESection2PredicateInstantiationLevel : ProofLevel
 literalCMP119RegularESection2PredicateInstantiationLevel = conditional
+
+-- Least-privilege source payment for the BC1 continuation after projection:
+-- only the active-scale regular-E/localization form is needed downstream.
+literalActiveCMP119RegularESection2FormWitnessLevel : ProofLevel
+literalActiveCMP119RegularESection2FormWitnessLevel = conditional
