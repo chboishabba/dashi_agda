@@ -11,6 +11,8 @@ import DASHI.Law.SensibLawSparseWorldModelAcquisitionExact as Sparse
 import DASHI.Cognition.PNF.SensibLawDiscourseQualityAuditExact as Quality
 import DASHI.Policy.ABC730IbrahimSnowballAttributionExact as Ibrahim
 import DASHI.Interop.ITIRSensiBlawStreamlineArchitecture as ITIRSL
+import DASHI.Interop.SLRSemanticWorldClosureExact as SemanticClosure
+import DASHI.Interop.SLRWorldResearchTrancheConvergenceExact as Tranches
 
 ------------------------------------------------------------------------
 -- SLR / WORLD-MODEL SUITE CONVERGENCE ROADMAP
@@ -23,16 +25,16 @@ import DASHI.Interop.ITIRSensiBlawStreamlineArchitecture as ITIRSL
 --   DASHI      : typed proposal, promotion, sparse-world and proof boundaries
 --   SLR        : discourse/document reconstruction + candidate producers
 --
--- Validated 2026-09-11 state:
+-- Validated/implemented 2026-09-11 state:
 -- * parser/reconstruction/carrier plumbing is mature and largely frozen;
 -- * ABC proves claim-local fragment -> residual inheritance -> evidence
 --   contraction without claim-truth promotion;
 -- * GWB proves 41k-sentence CandidateWorldModel scale, replayable Wikimedia
---   enrichment, source identity contraction, claim-relative source-role
---   attachment, and trained en/es/fr/de shared-QID parser compatibility;
--- * translation equivalence and semantic equivalence remain unpaid;
--- * live frontier is consumer-specific world residual contraction and
---   canonical claim/evidence projection, not more boundary heuristics.
+--   enrichment, source identity, source-role attachment, multilingual trained
+--   parser compatibility and PNF role-family comparability;
+-- * semantic closure/gap propagation and the joined GWB/AU/Brexit world-
+--   research iteration are implemented awaiting runtime validation;
+-- * translation/sentence/claim semantic equivalence remain unpaid.
 ------------------------------------------------------------------------
 
 data SuiteOwner : Set where
@@ -197,27 +199,33 @@ slrGlobalRoadmap =
   slrRoadmapCoordinate "cross-corpus SLR execution parity" complete slrRuntimeOwner "GWB 41,134 + AU 19,235 sentences; parity_failed=0; published=0" ∷
   slrRoadmapCoordinate "gold-labelled discourse benchmark" partial slrRuntimeOwner "speaker-turn benchmark executable; quote/nesting and full calibration remain open" ∷
   slrRoadmapCoordinate "canonical claim projection" complete slrRuntimeOwner "validated sentence-level canonical refs with ambiguity-preserving fused edges" ∷
-  slrRoadmapCoordinate "same-source unique-phrase refinement" partial slrRuntimeOwner "available where source identity/unique phrase pays exact offsets; not required for every source" ∷
+  slrRoadmapCoordinate "same-source unique-phrase refinement" partial slrRuntimeOwner "available where source identity/unique phrase pays exact offsets" ∷
   slrRoadmapCoordinate "labelled-to-noisy subspan weld" complete slrRuntimeOwner "validated exact/bounded/unpaid distinction without forced closure" ∷
-  slrRoadmapCoordinate "multi-hop labelled discourse path" complete slrRuntimeOwner "validated sentence 42 Wong -> Greber -> Husic and sentence 45 Shoebridge -> Leeser" ∷
-  slrRoadmapCoordinate "claim-local fragment projection" complete slrRuntimeOwner "validated: 5 fragments / 4 claim-local / 1 intermediate; whole-claim extent=false" ∷
-  slrRoadmapCoordinate "claim-local fragment residual inheritance" complete slrRuntimeOwner "validated: 10 obligations; intermediate fragment inherits none" ∷
-  slrRoadmapCoordinate "fragment source/attribution evidence contraction" complete slrRuntimeOwner "validated: attribution_source_paid=4; claim truth and whole extent remain false" ∷
-  slrRoadmapCoordinate "fragment consumer-obligation payment + review recomputation" implementedAwaitingRuntime slrRuntimeOwner "slr-fragment-evidence-contraction-v2 + derived C029 gates + generic WorldConstraintFibre/review rerun; current receipts intentionally non-paying" ∷
+  slrRoadmapCoordinate "multi-hop labelled discourse path" complete slrRuntimeOwner "validated Wong -> Greber -> Husic and Shoebridge -> Leeser paths" ∷
+  slrRoadmapCoordinate "claim-local fragment projection" complete slrRuntimeOwner "5 fragments / 4 claim-local / 1 intermediate; whole-claim extent=false" ∷
+  slrRoadmapCoordinate "claim-local fragment residual inheritance" complete slrRuntimeOwner "10 obligations; intermediate inherits none" ∷
+  slrRoadmapCoordinate "fragment source/attribution evidence contraction" complete slrRuntimeOwner "attribution_source_paid=4; claim truth and whole extent remain false" ∷
+  slrRoadmapCoordinate "fragment consumer-obligation payment + review recomputation" implementedAwaitingRuntime slrRuntimeOwner "slr-fragment-evidence-contraction-v2 + generic WorldConstraintFibre/review rerun" ∷
   slrRoadmapCoordinate "whole-claim span completion" partial slrRuntimeOwner "local fragments do not pay full canonical claim extents" ∷
   slrRoadmapCoordinate "GWB CandidateWorldModel corpus projection" complete slrRuntimeOwner "41,134 claims / 41,124 relations / provenance=10 / normalization_drift=false" ∷
-  slrRoadmapCoordinate "reviewed Wikimedia-first world enrichment" complete dashiOwner "10 reviewed seeds -> 51 QID nodes / 850 property edges / 162 parent / 688 surrounding-related / post-follow parity" ∷
-  slrRoadmapCoordinate "replayable cache + deterministic GWB handoff" complete slrRuntimeOwner "cache-only replay: 134 hits / 0 network; prior tar.xz SHA manifest; v2 streaming packager pending refreshed local receipt" ∷
-  slrRoadmapCoordinate "GWB source-work identity residual contraction" complete slrRuntimeOwner "paid=2 / unpaid=8 / topic anchors=8 / runtime-resolved work identities=1 / normalization_drift=false" ∷
-  slrRoadmapCoordinate "GWB claim-relative source-role attachment" complete dashiOwner "roles=10 / primary claim classes=11 / negative authority constraints=19 / normalization_drift=false" ∷
-  slrRoadmapCoordinate "multilingual shared-QID parser compatibility" complete slrRuntimeOwner "qids=4 / language_surfaces=13 / trained_parser_surfaces=13 / fallback=0 over en/es/fr/de; translation and semantic equivalence remain false" ∷
-  slrRoadmapCoordinate "full world-constraint fibre integration" partial dashiOwner "generic fibre exists; domain consumers still attach/contract dimensions independently" ∷
-  slrRoadmapCoordinate "consumer-specific world residual contraction" active sensibLawOwner "use reviewed Q/P/source-role/multilingual identity evidence only against declared consumer obligations" ∷
+  slrRoadmapCoordinate "reviewed Wikimedia-first world enrichment" complete dashiOwner "10 reviewed seeds -> 51 QID nodes / 850 property edges / 162 parent / 688 surrounding-related" ∷
+  slrRoadmapCoordinate "replayable cache + deterministic GWB handoff v2" complete slrRuntimeOwner "streaming handoff SHA 956c92ea0e5f402b8711f76d4146a2cc870248880bf693a0549b7a42f2d75594" ∷
+  slrRoadmapCoordinate "GWB source-work identity residual contraction" complete slrRuntimeOwner "paid=2 / unpaid=8 / topic anchors=8 / runtime-resolved=1 / normalization_drift=false" ∷
+  slrRoadmapCoordinate "GWB claim-relative source-role attachment" complete dashiOwner "roles=10 / primary classes=11 / negative authority constraints=19 / normalization_drift=false" ∷
+  slrRoadmapCoordinate "multilingual shared-QID parser compatibility" complete slrRuntimeOwner "qids=4 / 13 trained en/es/fr/de surfaces / fallback=0; translation/semantic equivalence=false" ∷
+  slrRoadmapCoordinate "multilingual PNF role-family compatibility" complete slrRuntimeOwner "qids=4 / surfaces=13 / pairs=18 / subject-predicate-object surfaces=10 / core-compatible pairs=9" ∷
+  slrRoadmapCoordinate "Simple English Wikipedia peer surface" implementedAwaitingRuntime slrRuntimeOwner "simplewiki added as peer language surface; en_core_web_sm parser realization; subset/translation assumption=false" ∷
+  slrRoadmapCoordinate "multilingual semantic closure + per-surface gap propagation" implementedAwaitingRuntime slrRuntimeOwner "slr-semantic-world-closure-v1 / SLRSemanticWorldClosureExact" ∷
+  slrRoadmapCoordinate "joined GWB/AU/Brexit WorldResearchIteration" implementedAwaitingRuntime slrRuntimeOwner "GWB world-ready / AU retained-source-ready / Brexit source-unpaid; SLRWorldResearchTrancheConvergenceExact" ∷
+  slrRoadmapCoordinate "full world-constraint fibre integration" partial dashiOwner "generic fibre exists; domain consumers attach/contract dimensions independently" ∷
+  slrRoadmapCoordinate "consumer-specific world residual contraction" active sensibLawOwner "use semantic closure + reviewed Q/P/source-role evidence against declared obligations" ∷
   slrRoadmapCoordinate "claim/evidence graph projection" active sensibLawOwner "candidate claims/fragments carry graph identities and append-only evidence obligations" ∷
-  slrRoadmapCoordinate "mechanism evidence snowball" active dashiOwner "Wikimedia-first, then advisory ontologies/Snowball only for surviving consumer debt" ∷
+  slrRoadmapCoordinate "mechanism evidence snowball" active dashiOwner "gap -> Wikimedia/Ibrahim -> advisory ontology -> broader Snowball only for surviving debt" ∷
   slrRoadmapCoordinate "review/promote/abstain routing" complete sensibLawOwner "compatibility / adequacy / residual gates remain separate" ∷
   slrRoadmapCoordinate "ABC C029 policy/evaluative consumer adequacy" active dashiOwner "source attribution paid; implementation/incidence/counterfactual residuals remain" ∷
-  slrRoadmapCoordinate "GWB canonical claim/evidence extraction" next slrRuntimeOwner "source-role attachment now paid; adjacency/QID/language identity alone still cannot manufacture canonical claims" ∷
+  slrRoadmapCoordinate "GWB canonical claim/evidence extraction" next slrRuntimeOwner "semantic entity/link closure still does not manufacture source-paid canonical claims" ∷
+  slrRoadmapCoordinate "AU CandidateWorldModel/world-research projection" next slrRuntimeOwner "45 retained docs / 19,235 sentences already execution-certified; project before semantic contribution" ∷
+  slrRoadmapCoordinate "Brexit retained-source acquisition" next slrRuntimeOwner "structured intent fixture is not retained narrative/source text; source-unpaid until acquisition" ∷
   []
 
 ------------------------------------------------------------------------
@@ -256,22 +264,16 @@ data ParserHeuristicMayReopenWithoutBenchmarkFailure : Set where
 
 worldConstraintIsNotScalar : WorldConstraintIsScalarScore → ⊥
 worldConstraintIsNotScalar ()
-
 candidateWorldModelIsNotWorldTruth : CandidateWorldModelIsWorldTruth → ⊥
 candidateWorldModelIsNotWorldTruth ()
-
 statiBakerObservationIsNotSemanticAuthority : StatiBakerObservedStateIsSemanticAuthority → ⊥
 statiBakerObservationIsNotSemanticAuthority ()
-
 tircNarrativeIsNotHistoricalFact : TiRCNarrativeAlternativeIsHistoricalFact → ⊥
 tircNarrativeIsNotHistoricalFact ()
-
 benchmarkDoesNotPromoteTruth : BenchmarkImprovementPromotesClaimTruth → ⊥
 benchmarkDoesNotPromoteTruth ()
-
 externalEvidenceDoesNotRewritePriorState : ExternalEvidenceMayRewritePriorSourceState → ⊥
 externalEvidenceDoesNotRewritePriorState ()
-
 parserHeuristicRequiresBenchmarkFailureToReopen : ParserHeuristicMayReopenWithoutBenchmarkFailure → ⊥
 parserHeuristicRequiresBenchmarkFailureToReopen ()
 
@@ -297,3 +299,9 @@ ibrahimSourceGrammarAnchor = Ibrahim.canonicalSnowballAttributionBoundary
 
 suiteArchitectureBoundaryAnchor : ITIRSL.ArchitectureAuthorityBits
 suiteArchitectureBoundaryAnchor = ITIRSL.canonicalArchitectureAuthorityBits
+
+semanticClosureBoundaryAnchor : SemanticClosure.SemanticClosureBoundary
+semanticClosureBoundaryAnchor = SemanticClosure.canonicalSemanticClosureBoundary
+
+trancheConvergenceBoundaryAnchor : Tranches.WorldResearchIterationBoundary
+trancheConvergenceBoundaryAnchor = Tranches.canonicalWorldResearchIterationBoundary
