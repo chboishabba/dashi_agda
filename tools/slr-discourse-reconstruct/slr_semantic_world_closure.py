@@ -183,6 +183,31 @@ def build_closure(graph: dict[str, Any], qids: list[str], languages: list[str], 
         for aid in missing:
             propagated.append({"target_surface_id": sid, "target_language": surface["language"], "atom_id": aid, "source_surface_ids": sorted(set(evidence_surfaces.get(aid, []))), "available_to_target_consumer": True, "target_surface_asserted": False, "translation_equivalence_paid": False, "claim_semantic_equivalence_paid": False, "candidate_only": True, "semantic_promotion": False})
 
+    # Support coordinates for the next acquisition frontier.  They are kept as
+    # independent Pareto dimensions; no weighted or scalar score is produced.
+    target_surface_support: dict[str, set[str]] = defaultdict(set)
+    target_root_support: dict[str, set[str]] = defaultdict(set)
+    target_gap_surface_coverage: dict[str, set[str]] = defaultdict(set)
+    typed_property_targets: set[str] = set()
+    for aid, atom in canonical.items():
+        target = str(atom.get("object_qid", ""))
+        if not target:
+            continue
+        if atom.get("kind") == "wiki-link":
+            target_surface_support[target].update(evidence_surfaces.get(aid, []))
+            source = str(atom.get("subject_qid", ""))
+            if source:
+                target_root_support[target].add(source)
+        if atom.get("kind") == "wikidata-property":
+            typed_property_targets.add(target)
+    for gap in gaps:
+        sid = str(gap.get("surface_id", ""))
+        for aid in gap.get("missing_atom_ids") or []:
+            atom = canonical.get(str(aid)) or {}
+            target = str(atom.get("object_qid", ""))
+            if target and sid:
+                target_gap_surface_coverage[target].add(sid)
+
     node_ids = {str(n.get("node_id", "")) for n in graph.get("nodes") or [] if isinstance(n, dict)}
     obligations: list[dict[str, Any]] = []
     for surface in surfaces:
@@ -191,13 +216,23 @@ def build_closure(graph: dict[str, Any], qids: list[str], languages: list[str], 
     related_targets = sorted({str(a.get("object_qid", "")) for a in canonical.values() if a.get("kind") == "wiki-link" and a.get("object_qid")})
     for target in related_targets:
         if target not in node_ids:
-            obligations.append({"obligation_kind": "follow-related-qid", "qid": target, "routing_priority": "wikidata-properties-then-wikipedia-ibrahim-follow", "candidate_only": True})
+            obligations.append({
+                "obligation_kind": "follow-related-qid",
+                "qid": target,
+                "routing_priority": "wikidata-properties-then-wikipedia-ibrahim-follow",
+                "cross_language_gap_coverage": len(target_gap_surface_coverage.get(target, set())),
+                "source_surface_support": len(target_surface_support.get(target, set())),
+                "root_qid_support": len(target_root_support.get(target, set())),
+                "typed_wikidata_property_target": target in typed_property_targets,
+                "pareto_dimensions_scalarized": False,
+                "candidate_only": True,
+            })
 
     return {"canonical_atoms": [canonical[k] for k in sorted(canonical)], "surface_semantic_closure_atom_ids": surface_closure, "world_property_atom_ids": [a["atom_id"] for a in property_atoms], "surfaces": surfaces, "gaps": gaps, "propagated_views": propagated, "acquisition_obligations": obligations}
 
 
 def self_check() -> int:
-    graph = {"schema": "slr-wikimedia-world-follow-v1", "nodes": [{"node_id": "Q1"}, {"node_id": "Q2"}, {"node_id": "Q9"}], "item_property_edges": [{"source": "Q1", "property_id": "P1", "target": "Q2"}]}
+    graph = {"schema": "slr-wikimedia-world-follow-v1", "nodes": [{"node_id": "Q1"}, {"node_id": "Q9"}], "item_property_edges": [{"source": "Q1", "property_id": "P1", "target": "Q2"}]}
     titles = {"Q1": {"en": "A", "fr": "A-fr"}, "Q9": {"en": "B"}}
     links = {("Q1", "en"): ["Q2"], ("Q1", "fr"): [], ("Q9", "en"): []}
     result = build_closure(graph, ["Q1", "Q9"], ["en", "fr"], links, titles)
@@ -206,7 +241,13 @@ def self_check() -> int:
     assert all(p["target_surface_asserted"] is False for p in prop)
     q1_fr_gap = next(g for g in result["gaps"] if g["surface_id"] == "Q1:fr")
     assert "qid:Q9" not in q1_fr_gap["missing_atom_ids"], "cross-root atom leaked into surface gap"
-    print("SLR_SEMANTIC_WORLD_CLOSURE_SELF_CHECK schema=slr-semantic-world-closure-v1 passed=true root_scope_isolated=true target_surface_asserted=false semantic_promotion=false", file=sys.stderr)
+    q2 = next(o for o in result["acquisition_obligations"] if o.get("qid") == "Q2")
+    assert q2["cross_language_gap_coverage"] == 1
+    assert q2["source_surface_support"] == 1
+    assert q2["root_qid_support"] == 1
+    assert q2["typed_wikidata_property_target"] is True
+    assert q2["pareto_dimensions_scalarized"] is False
+    print("SLR_SEMANTIC_WORLD_CLOSURE_SELF_CHECK schema=slr-semantic-world-closure-v1 passed=true root_scope_isolated=true pareto_support_coordinates=true pareto_dimensions_scalarized=false target_surface_asserted=false semantic_promotion=false", file=sys.stderr)
     return 0
 
 
@@ -237,11 +278,12 @@ def main() -> int:
     closure = build_closure(graph, qids, languages, links_by_surface, titles)
     payload = {"schema": SCHEMA, "source_graph_schema": graph.get("schema", ""), "source_multilingual_schema": (multilingual or {}).get("schema", ""), "languages_requested": languages, "root_qids": qids, **closure,
         "summary": {"qids": len(qids), "surfaces": len(closure["surfaces"]), "observed_surfaces": sum(1 for s in closure["surfaces"] if s["status"] == "observed"), "simplewiki_surfaces": sum(1 for s in closure["surfaces"] if s["language"] == "simple" and s["status"] == "observed"), "canonical_atoms": len(closure["canonical_atoms"]), "surface_closure_atoms": len(closure["surface_semantic_closure_atom_ids"]), "semantic_gap_atoms": sum(len(g.get("missing_atom_ids") or []) for g in closure["gaps"]), "propagated_views": len(closure["propagated_views"]), "acquisition_obligations": len(closure["acquisition_obligations"])},
+        "pareto_support_coordinates_emitted": True, "pareto_dimensions_scalarized": False,
         "propagation_rewrites_target_surface": False, "article_link_creates_claim_truth": False, "same_qid_creates_semantic_equivalence": False, "candidate_only": True, "semantic_promotion": False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     s = payload["summary"]
-    print("SLR_SEMANTIC_WORLD_CLOSURE_RECEIPT " f"schema={SCHEMA} qids={s['qids']} surfaces={s['surfaces']} observed_surfaces={s['observed_surfaces']} simplewiki_surfaces={s['simplewiki_surfaces']} canonical_atoms={s['canonical_atoms']} surface_closure_atoms={s['surface_closure_atoms']} semantic_gap_atoms={s['semantic_gap_atoms']} propagated_views={s['propagated_views']} acquisition_obligations={s['acquisition_obligations']} target_surface_asserted=false article_link_creates_claim_truth=false same_qid_semantic_equivalence=false candidate_only=true semantic_promotion=false", file=sys.stderr)
+    print("SLR_SEMANTIC_WORLD_CLOSURE_RECEIPT " f"schema={SCHEMA} qids={s['qids']} surfaces={s['surfaces']} observed_surfaces={s['observed_surfaces']} simplewiki_surfaces={s['simplewiki_surfaces']} canonical_atoms={s['canonical_atoms']} surface_closure_atoms={s['surface_closure_atoms']} semantic_gap_atoms={s['semantic_gap_atoms']} propagated_views={s['propagated_views']} acquisition_obligations={s['acquisition_obligations']} pareto_support_coordinates=true pareto_dimensions_scalarized=false target_surface_asserted=false article_link_creates_claim_truth=false same_qid_semantic_equivalence=false candidate_only=true semantic_promotion=false", file=sys.stderr)
     return 0
 
 
