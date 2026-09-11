@@ -28,6 +28,7 @@ import DASHI.ComputerScience.RSA260BidiStructuralFibrePortfolioHeldoutExact as S
 import DASHI.ComputerScience.RSA260BidiDynamicRankRepairHeldoutExact as DynamicRepair
 import DASHI.ComputerScience.RSA260BidiDynamicRankRepairPresentationTransferExact as DynamicTransfer
 import DASHI.ComputerScience.RSA260BidiKrylovFiniteHorizonSaturationExact as FiniteHorizon
+import DASHI.ComputerScience.RSA260BidiIntrospectiveOffsetRepairExact as IntrospectiveOffset
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -167,6 +168,12 @@ finiteHorizonBoundary = FiniteHorizon.canonicalFiniteHorizonInterpretationBounda
 
 finiteHorizonReceipt : FiniteHorizon.FiniteHorizonReceipt
 finiteHorizonReceipt = FiniteHorizon.currentFiniteHorizonReceipt
+
+introspectiveOffsetBoundary : IntrospectiveOffset.OffsetRepairIntrospectiveBoundary
+introspectiveOffsetBoundary = IntrospectiveOffset.canonicalOffsetRepairIntrospectiveBoundary
+
+firstIntrospectiveOffsetResidual : IntrospectiveOffset.OffsetRepairResidual
+firstIntrospectiveOffsetResidual = IntrospectiveOffset.firstOffsetRepairResidual
 
 data ProductionResidual : Set where
   acquireSameObjectFineIncidenceBearingLACarrierArtifact : ProductionResidual
