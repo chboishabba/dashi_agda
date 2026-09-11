@@ -41,11 +41,11 @@ historicalDASHIAtomArchive =
     "unassigned"
     "unassigned"
     "primary internal programme source object; not external peer-reviewed literature"
-    "539.7 / 546 classification cue"
-    "attached conversation export; exact public permalink unresolved"
+    "539.7 atom / 546.8 periodic-table topic coordinates"
+    "attached conversation export; canonical archive thread id 25ec0d2e654f33ea6f524f816b4c465e86ef21cf"
     "historical source object"
-    "provenance authority for what the programme reported or attempted"
-    "records atoms-as-dictionaries, MDL/exclusion filling, noble-gas-like closures, and the Z=2,10,18 historical regression"
+    "provenance authority for what the programme reported, reconstructed, or attempted"
+    "records atoms-as-dictionaries, MDL/exclusion filling, Z=2,10,18 closures, embedded code-shaped reconstructions, reported/rerun alpha-sensitivity experiments, and toy ionization work; original standalone executable/hash remains unresolved"
 
 firstAtomicSpectralTooling : AttributionReceipt
 firstAtomicSpectralTooling =
@@ -101,7 +101,7 @@ firstDirectAtomicClosureImplementation =
     "unassigned"
     "atom Q9121; periodic table Q10693"
     "primary repository formal implementation receipt"
-    "539.7 / 546"
+    "539.7 / 546.8"
     "https://github.com/chboishabba/dashi_agda/commit/42e1d740141b0e9e1ca717ae5df79d6e31546c07"
     "chboishabba/dashi_agda commit 42e1d740141b0e9e1ca717ae5df79d6e31546c07"
     "implementation chronology authority"
@@ -131,7 +131,7 @@ explicitPeriodicRecoveryBoundary =
     "unassigned"
     "periodic table Q10693"
     "primary repository formal implementation receipt"
-    "546"
+    "546.8"
     "https://github.com/chboishabba/dashi_agda/commit/554e8f930dfee5293d75d3bb67be8098bde088d3"
     "chboishabba/dashi_agda commit 554e8f930dfee5293d75d3bb67be8098bde088d3; PR #101"
     "formal recovery-boundary authority"
@@ -146,7 +146,7 @@ currentAtomicManuscript =
     "unassigned; same-object DOI not yet located"
     "atom Q9121; periodic table Q10693; Pauli exclusion principle Q131594"
     "primary repository manuscript for the current consolidation"
-    "539.7 / 546"
+    "539.7 / 546.8"
     "https://github.com/chboishabba/dashi_agda/pull/886"
     "Docs/papers/drafts/DASHIAtomicPeriodicTable369Formalism.tex on PR #886"
     "manuscript/provenance authority; not peer-review or empirical authority"
@@ -154,6 +154,21 @@ currentAtomicManuscript =
 
 ------------------------------------------------------------------------
 -- External primary / semantic anchors.
+
+ibrahim2017 : AttributionReceipt
+ibrahim2017 =
+  attributionReceipt
+    "Mark Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds"
+    "Connecting every bit of knowledge: The structure of Wikipedia's First Link Network"
+    "2017"
+    "10.1016/j.jocs.2016.12.001"
+    "unassigned"
+    "primary source for the first-link/traversal-funnel search policy; not atomic-physics authority"
+    "unresolved for the publication object"
+    "https://doi.org/10.1016/j.jocs.2016.12.001"
+    "Journal of Computational Science 19 (2017), 21-30; arXiv:1605.00309"
+    "search-policy / network-method authority"
+    "donor for deterministic traversal from specific to typed explanatory parents; does not promote Dewey/QID adjacency into theorem implication"
 
 pauli1925 : AttributionReceipt
 pauli1925 =
@@ -164,11 +179,41 @@ pauli1925 =
     "10.1007/BF02980631"
     "Pauli exclusion principle Q131594"
     "primary historical physics paper"
-    "539.7"
+    "539.7 topic coordinate; publication-specific Dewey unresolved"
     "https://doi.org/10.1007/BF02980631"
     "Zeitschrift fuer Physik 31, 765-783"
     "primary scientific authority for the historical exclusion-principle source object"
     "external anchor for hard fermionic exclusion; citation does not identify DASHI's MDL cost with physical energy"
+
+hartree1928 : AttributionReceipt
+hartree1928 =
+  attributionReceipt
+    "D. R. Hartree"
+    "The Wave Mechanics of an Atom with a Non-Coulomb Central Field. Part II. Some Results and Discussion"
+    "1928"
+    "10.1017/S0305004100011920"
+    "unassigned publication QID"
+    "primary historical self-consistent-field atomic-structure paper"
+    "publication-specific Dewey unresolved; graph topics include atom 539.7, atomic orbital 541.28, quantum mechanics 530.12"
+    "https://doi.org/10.1017/S0305004100011920"
+    "Mathematical Proceedings of the Cambridge Philosophical Society 24(1), 111-132"
+    "primary scientific authority for Hartree's self-consistent-field method applied to atoms"
+    "external method source for the open operator-to-spectrum/scale lane; does not pay the DASHI same-object realization"
+
+slater1928 : AttributionReceipt
+slater1928 =
+  attributionReceipt
+    "J. C. Slater"
+    "The Self Consistent Field and the Structure of Atoms"
+    "1928"
+    "10.1103/PhysRev.32.339"
+    "unassigned publication QID"
+    "primary historical atomic-structure / self-consistent-field paper"
+    "publication-specific Dewey unresolved; graph topics include atom 539.7, atomic orbital 541.28, quantum mechanics 530.12"
+    "https://doi.org/10.1103/PhysRev.32.339"
+    "Physical Review 32, 339-348"
+    "primary scientific authority for analysis of Hartree self-consistent fields against the Schroedinger equation"
+    "external method source for the physical spectral bridge; not a proof that the DASHI carrier realizes Hartree-Fock"
 
 atomSemanticCoordinate : AttributionReceipt
 atomSemanticCoordinate =
@@ -179,11 +224,26 @@ atomSemanticCoordinate =
     "unassigned"
     "Q9121"
     "semantic authority only; not primary physics evidence"
-    "539.7 classification cue"
+    "539.7"
     "https://www.wikidata.org/wiki/Q9121"
     "Wikidata item Q9121"
-    "semantic identity coordinate"
+    "semantic identity/catalogue coordinate"
     "machine-readable coordinate for the concept atom"
+
+chemicalElementSemanticCoordinate : AttributionReceipt
+chemicalElementSemanticCoordinate =
+  attributionReceipt
+    "Wikidata community"
+    "chemical element"
+    "current semantic item"
+    "unassigned"
+    "Q11344"
+    "semantic authority only"
+    "546"
+    "https://www.wikidata.org/wiki/Q11344"
+    "Wikidata item Q11344; IUPAC Gold Book C01022"
+    "semantic identity/catalogue coordinate"
+    "machine-readable coordinate for chemical elements; distinct from the periodic-table object"
 
 periodicTableSemanticCoordinate : AttributionReceipt
 periodicTableSemanticCoordinate =
@@ -194,11 +254,86 @@ periodicTableSemanticCoordinate =
     "unassigned"
     "Q10693"
     "semantic authority only; not primary chemistry evidence"
-    "546"
+    "546.8"
     "https://www.wikidata.org/wiki/Q10693"
     "Wikidata item Q10693"
+    "semantic identity/catalogue coordinate"
+    "machine-readable coordinate for the periodic-table concept; Wikidata records chemical element Q11344 as the items classified"
+
+atomicOrbitalSemanticCoordinate : AttributionReceipt
+atomicOrbitalSemanticCoordinate =
+  attributionReceipt
+    "Wikidata community"
+    "atomic orbital"
+    "current semantic item"
+    "unassigned"
+    "Q53860"
+    "semantic authority only"
+    "541.28"
+    "https://www.wikidata.org/wiki/Q53860"
+    "Wikidata item Q53860; IUPAC Gold Book A00500"
+    "semantic identity/catalogue coordinate"
+    "external representation coordinate for the one-particle orbital layer"
+
+quantumMechanicsSemanticCoordinate : AttributionReceipt
+quantumMechanicsSemanticCoordinate =
+  attributionReceipt
+    "Wikidata community"
+    "quantum mechanics"
+    "current semantic item"
+    "unassigned"
+    "Q944"
+    "semantic authority only"
+    "530.12"
+    "https://www.wikidata.org/wiki/Q944"
+    "Wikidata item Q944"
+    "semantic identity/catalogue coordinate"
+    "external theory coordinate for the physical orbital/spectral semantics"
+
+carbonSemanticCoordinate : AttributionReceipt
+carbonSemanticCoordinate =
+  attributionReceipt
+    "Wikidata community"
+    "carbon"
+    "current semantic item"
+    "unassigned"
+    "Q623"
+    "semantic authority only"
+    "547"
+    "https://www.wikidata.org/wiki/Q623"
+    "Wikidata item Q623; IUPAC Gold Book C00821"
+    "semantic identity/catalogue coordinate"
+    "downstream chemistry branch used by the historical dashiQ carbon-suitability programme"
+
+ionizationEnergySemanticCoordinate : AttributionReceipt
+ionizationEnergySemanticCoordinate =
+  attributionReceipt
+    "Wikidata / IUPAC semantic sources"
+    "ionization energy"
+    "current semantic item"
+    "unassigned"
+    "Q483769"
+    "semantic/quantity authority only"
+    "unresolved in the inspected Wikidata item"
+    "https://www.wikidata.org/wiki/Q483769"
+    "Wikidata Q483769; IUPAC Gold Book I03199; IEV 113-06-39"
+    "semantic identity / quantity coordinate"
+    "first quantitative validation target after structural shell recovery; Dewey is retained unresolved rather than inferred from neighbours"
+
+hartreeFockSemanticCoordinate : AttributionReceipt
+hartreeFockSemanticCoordinate =
+  attributionReceipt
+    "Wikidata community"
+    "Hartree-Fock method"
+    "current semantic item"
+    "unassigned"
+    "Q7879841"
+    "semantic authority only"
+    "unresolved in the inspected Wikidata item"
+    "https://www.wikidata.org/wiki/Q7879841"
+    "Wikidata item Q7879841"
     "semantic identity coordinate"
-    "machine-readable coordinate for the periodic-table concept"
+    "external method coordinate for the open self-consistent operator/spectrum bridge"
 
 pauliPrincipleSemanticCoordinate : AttributionReceipt
 pauliPrincipleSemanticCoordinate =
@@ -209,7 +344,7 @@ pauliPrincipleSemanticCoordinate =
     "unassigned"
     "Q131594"
     "semantic authority only"
-    "539.7"
+    "539.7 topic coordinate"
     "https://www.wikidata.org/wiki/Q131594"
     "Wikidata item Q131594"
     "semantic identity coordinate"
@@ -217,9 +352,11 @@ pauliPrincipleSemanticCoordinate =
 
 ------------------------------------------------------------------------
 -- Classification provenance.
--- 539.7 is used as an atomic/nuclear-physics catalogue cue; 546 as inorganic
--- chemistry / periodic-law and periodic-table cue.  These are discovery/index
--- coordinates, not mathematical evidence.
+-- The inspected semantic graph gives the following exact catalogue
+-- coordinates: periodic table 546.8; chemical element 546; atom 539.7;
+-- atomic orbital 541.28; quantum mechanics 530.12; carbon 547.  Ionization
+-- energy and Hartree-Fock method have no Dewey field in the inspected items,
+-- so they remain unresolved. These are navigation/index coordinates only.
 
 record AttributionDiscipline : Set where
   constructor attributionDiscipline
@@ -259,12 +396,12 @@ record AttributionSnowballFrontier : Set where
 canonicalAttributionSnowballFrontier : AttributionSnowballFrontier
 canonicalAttributionSnowballFrontier =
   attributionSnowballFrontier
-    "locate the original historical MDL/exclusion filling script, exact parameter schedule, executable receipt, and artifact hash"
+    "the DASHI Atom archive now pays embedded code-shaped reconstruction, run narrative, n+alpha*l cost, Z=2/10/18 closure reports, alpha-sensitivity and toy ionization work; still locate the original standalone MDL/exclusion script, exact original parameter schedule, executable receipt, and artifact hash"
     "paid to 2026-07-07 commit 55132524c2e132c0b86c17eeb60d7e39c3af08b6, which adds Base369.lean from zero lines; any earlier off-repository Aristotle artifact remains a distinct provenance question"
     "locate any same-object pre-PR paper, DOI, arXiv, Zenodo, release, or public manuscript receipt for the atomic constructor; otherwise retain unassigned"
-    "operator-to-spectrum / scale / ionisation-energy bridge, followed by nuclear-stability and bonding validation"
-    "snowball laterally across repository, archive, literature, semantic and catalogue coordinates"
-    "only a dependency-satisfying receipt may promote the corresponding claim"
+    "Hartree/Slater primary self-consistent-field method sources are acquired; the unpaid leaf is the same-object DASHI operator-to-spectrum / calibrated ionisation-energy bridge, followed by nuclear-stability and bonding validation"
+    "snowball through typed Ibrahim first-link parents plus DOI, QID, Dewey, Gold Book, repository and archive coordinates; evidence may be retained out of payment order"
+    "only a dependency-satisfying same-object/source receipt may promote the corresponding conclusion"
 
 ------------------------------------------------------------------------
 -- Thin cross-owner witnesses: these imports make the chronology/provenance
