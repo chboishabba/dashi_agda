@@ -15,13 +15,17 @@ on:
       - 'DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda'
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMultiplicityCharacterSnowballExact.agda'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
       - 'scripts/monster_3b_inertia_phase_resolution.g'
       - 'scripts/render_monster_3b_certificate.py'
       - 'scripts/render_monster_3b_actual_kernel_certificate.py'
+      - 'scripts/render_monster_3b_suzuki_multiplicity_certificate.py'
       - 'scripts/render_monster_3b_inertia_phase_certificate.py'
       - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'scripts/check_monster_3b_suzuki_multiplicity_characters.sh'
       - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
@@ -41,13 +45,17 @@ on:
       - 'DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda'
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMultiplicityCharacterSnowballExact.agda'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
       - 'scripts/monster_3b_inertia_phase_resolution.g'
       - 'scripts/render_monster_3b_certificate.py'
       - 'scripts/render_monster_3b_actual_kernel_certificate.py'
+      - 'scripts/render_monster_3b_suzuki_multiplicity_certificate.py'
       - 'scripts/render_monster_3b_inertia_phase_certificate.py'
       - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'scripts/check_monster_3b_suzuki_multiplicity_characters.sh'
       - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
@@ -95,13 +103,20 @@ jobs:
           export AGDA_LOG_PATH="$RUNNER_TEMP/monster-3b-round4-agda.log"
           AGDA_JOBS=2 bash scripts/check_monster_3b_actual_kernel_character_round4.sh
 
-      - name: Run inertia phase-resolution checker
+      - name: Run source-native 6.Suz multiplicity-character checker
         shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_suzuki_multiplicity_characters.sh
+
+      - name: Run optional inertia phase-resolution fallback checker
+        shell: bash
+        continue-on-error: true
         run: |
           set -euo pipefail
           bash scripts/check_monster_3b_inertia_phase_resolution.sh
 
-      - name: Upload actual-kernel and inertia certificates
+      - name: Upload actual-kernel and multiplicity certificates
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -110,7 +125,9 @@ jobs:
             build/monster_3b_normalizer_restriction.json
             build/monster_3b_actual_kernel_structure.json
             build/monster_3b_actual_kernel_character_certificate.json
+            build/monster_3b_suzuki_multiplicity_characters.json
             build/monster_3b_inertia_phase_resolution.json
             build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
+            build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda
             build/generated/DASHI/Moonshine/Generated/Monster3BInertiaPhaseResolutionCertificate.agda
           if-no-files-found: warn
