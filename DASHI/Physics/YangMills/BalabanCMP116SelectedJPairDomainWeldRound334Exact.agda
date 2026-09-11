@@ -35,7 +35,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainWeldRound334Exact
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Common
@@ -45,6 +45,7 @@ import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExac
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanCMP116PublishedAuthoritySelectedT5ApplicationExact as Application
 
@@ -62,9 +63,6 @@ record SelectedJPairCommonDomainWeld
     (demands : R104.CMP116FiniteNormalizedAnalyticDemands)
     : Set₁ where
   field
-    -- This is the actual same-object/application theorem.  It may be proved
-    -- from literal source-norm bounds, normalized selected insertions, or a
-    -- stronger source-domain theorem; this ABI does not prescribe the tactic.
     commonSourceCoordinateInsideImpliesSelectedPairAdmissible :
       ∀ cutoff left right →
       Common.SourceCoordinateInside
@@ -124,7 +122,7 @@ record SelectedT5CMP116ApplicationFromCommonDomain
     : Set₁ where
   field
     sourceOrderToRational : ∀ {left right} →
-      Source.LessEqual source left right → left ℚ.≤ right
+      Source.LessEqual source left right → left ≤ right
 
     sourceMagnitudeIsSelectedMagnitude : ∀ cutoff left right →
       Source.differentiatedMagnitude source
@@ -152,9 +150,8 @@ record SelectedT5CMP116ApplicationFromCommonDomain
         (Source.sourceDistance source
           (Cumulant.sourceDirectionOf (R318.meaning base) left)
           (Cumulant.sourceDirectionOf (R318.meaning base) right))
-      ℚ.≤
-      DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact.rootedShell
-        (R318.shellData base)
+      ≤
+      Shell.rootedShell (R318.shellData base)
         (R318.scaleOf base cutoff)
         (R318.volumeOf base cutoff)
         (R318.connectingRoot base cutoff left right)
