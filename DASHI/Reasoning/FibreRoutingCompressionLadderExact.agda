@@ -18,13 +18,8 @@ import DASHI.Core.NDimParetoHyperfabricExact as NDim
 --
 -- This owner turns distillation / pruning / quantization / low-rank / expert
 -- merging / sparse routing into candidate compression moves over one declared
--- consumer problem.  A step is not accepted because it is smaller.  It is
+-- consumer problem. A step is not accepted because it is smaller. It is
 -- accepted only inside the admissible + consumer-adequate stratum.
---
--- The finite specimen intentionally contains a tempting shorter student that
--- matches a coarse teacher output but fails the richer relation consumer.  A
--- local joined-fibre repair restores adequacy without returning all the way to
--- the original full carrier.
 ------------------------------------------------------------------------
 
 data CompressionStage : Set where
@@ -106,18 +101,21 @@ distilledStudentNotEligibleForRichConsumer :
 distilledStudentNotEligibleForRichConsumer eligible =
   Distill.studentCannotAnswerRichRelationQuery (proj₂ eligible)
 
+-- ConsumerCounterexample's witness universe is Set, so retain the rich query
+-- defect as the insufficiency theorem and use a small first-order token as the
+-- counterexample carrier rather than trying to store the Set₁ defect itself.
+data StudentRichFailureWitness : Set where
+  studentRichFailureWitness : StudentRichFailureWitness
+
 studentRichCounterexample :
   MDL.ConsumerCounterexample richCompressionProblem distilledStudentStage
 studentRichCounterexample =
   MDL.consumerCounterexample
-    (Query.QueryAdequacyDefect
-      Distill.studentProjection
-      Distill.distillationSemantics
-      Distill.richRelationQuery)
-    Distill.studentRichRelationDefect
+    StudentRichFailureWitness
+    studentRichFailureWitness
     Distill.studentCannotAnswerRichRelationQuery
     "teacherStateA and teacherStateB collapse to the same distilled state"
-    "the rich relation consumer distinguishes the collapsed teacher states"
+    "the rich relation consumer distinguishes the collapsed teacher states; exact defect retained in Distill.studentRichRelationDefect"
 
 studentRelationRepair :
   MDL.LocalRefinementRepair
@@ -138,10 +136,6 @@ repairRestoresEligibility = MDL.repairProvidesEligibleRefinement studentRelation
 
 ------------------------------------------------------------------------
 -- Compression technique transition surface.
---
--- Technique identity is kept separate from adequacy.  The same technique may
--- be admissible for one consumer and fail another; a chain of techniques must
--- therefore carry a fresh adequacy receipt at every step.
 ------------------------------------------------------------------------
 
 record CompressionTransition (from to : CompressionStage) : Set where
@@ -165,10 +159,6 @@ studentRepairTransition =
 
 ------------------------------------------------------------------------
 -- Multi-axis deployment cost surface.
---
--- Parameter/storage/runtime/active-fibre costs are separate coordinates.  No
--- scalar cost is allowed to bypass consumer adequacy.  The numbers here are
--- deliberately finite illustrative coordinates, not empirical hardware claims.
 ------------------------------------------------------------------------
 
 data CompressionCostAxis : Set where
