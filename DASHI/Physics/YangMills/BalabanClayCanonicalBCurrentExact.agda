@@ -112,6 +112,13 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound323Exact
 -- observable->CMP116 J meaning, and same-state connected two-J localization.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJSourceMinCutRound324Exact
 
+-- R325 corrects the remaining debt-kind blur inside H1.  CMP116 differentiated
+-- localization is already source authority; J1 is source-transcription /
+-- applicability debt, J2 is a same-density observable->J semantic weld, and J3
+-- is same-state source-theorem applicability.  These remain real obligations,
+-- but they are not three independent fresh clustering inequalities.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound325Exact
+
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
 -- once the source-response identity is supplied, its first theorem-bearing
