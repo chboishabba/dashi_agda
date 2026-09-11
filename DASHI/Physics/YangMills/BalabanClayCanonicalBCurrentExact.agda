@@ -87,12 +87,17 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound319Exact
 import DASHI.Physics.YangMills.BalabanT5DirectSelectedMarkedDecayRound320Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound320Exact
 
--- R321 performs the source/status split underneath R320 without changing its
--- consumer: published CMP109/CMP116 differentiated E^(2)/Pi decay is separated
--- from the same-object weld identifying that source response with the selected
--- T5 mixed-log second derivative.  Source authority alone cannot manufacture
--- the weld; once both are supplied the R320 payment is compiler output.
+-- R321 records the conditional sufficiency of a CMP109 E^(2)/Pi same-object
+-- weld, but the source audit shows that vacuum-polarization/field-Hessian
+-- derivatives must not be identified with the selected two-J connected
+-- cumulant by notation alone.
 import DASHI.Physics.YangMills.BalabanCMP109SelectedT5SameObjectRound321Exact
+
+-- R322 is the preferred source-facing decomposition beneath R320: CMP116's
+-- differentiated localization is the correct J-analytic source family, while
+-- selected physical J-domain admissibility remains a separate physical
+-- application coordinate.  Source theorem + admissibility compile to R320.
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJDomainApplicationRound322Exact
 
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
