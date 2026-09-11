@@ -62,6 +62,8 @@ for tag,s in p.blocks[start:]:
         s=s.strip()
         if s:
             lines.append(s)
+            if s.startswith("EMILY THORNBERRY:") and "not at all" in s.lower():
+                break
 if not lines:
     raise SystemExit("ERROR: Transcript heading found but no transcript paragraphs extracted")
 
