@@ -24,21 +24,21 @@ import DASHI.ComputerScience.RSA260FullReInferenceSymmetryNullExact as Nulls
 data PortfolioCandidate : Set where
   full256Candidate : PortfolioCandidate
   pair128Candidate : PortfolioCandidate
-  c3x172Candidate : PortfolioCandidate
+  c3x88Candidate : PortfolioCandidate
   v4x76Candidate : PortfolioCandidate
   aggressive64Candidate : PortfolioCandidate
 
 candidateReference : PortfolioCandidate → String
 candidateReference full256Candidate = "full 256-coordinate synthetic carrier"
 candidateReference pair128Candidate = "128-coordinate pair-orbit quotient with quotient/lift kernel receipt"
-candidateReference c3x172Candidate = "172-coordinate C3 closed-batch quotient candidate"
-candidateReference v4x76Candidate = "76-coordinate multifibre V4/null-supported quotient candidate"
+candidateReference c3x88Candidate = "88-coordinate all-C3-orbit exact-kernel candidate; certification oracle implemented but execution unpaid"
+candidateReference v4x76Candidate = "76-coordinate all-V4-orbit exact-kernel candidate; certification oracle implemented but execution unpaid"
 candidateReference aggressive64Candidate = "64-coordinate illustrative aggressive quotient candidate"
 
 candidateWidth : PortfolioCandidate → Nat
 candidateWidth full256Candidate = 256
 candidateWidth pair128Candidate = 128
-candidateWidth c3x172Candidate = 172
+candidateWidth c3x88Candidate = 88
 candidateWidth v4x76Candidate = 76
 candidateWidth aggressive64Candidate = 64
 
@@ -46,8 +46,8 @@ candidateWidth aggressive64Candidate = 64
 -- Exact-kernel consumer eligibility.
 --
 -- Only full256 and pair128 currently carry the required exact-kernel adequacy
--- receipt.  C3/V4 results pay structural action/commutation/null information,
--- but do not yet carry the same quotient-kernel-lift certificate.
+-- receipt.  The 88/76 candidates now have a committed certification oracle but
+-- remain outside the eligible stratum until its exact execution is bound.
 ------------------------------------------------------------------------
 
 data ExactKernelPortfolioAdequacy : PortfolioCandidate → Set where
@@ -63,7 +63,7 @@ candidateExactKernelAdequate = ExactKernelPortfolioAdequacy
 data PortfolioRefines : PortfolioCandidate → PortfolioCandidate → Set where
   fullReflexive : PortfolioRefines full256Candidate full256Candidate
   pairReflexive : PortfolioRefines pair128Candidate pair128Candidate
-  c3Reflexive : PortfolioRefines c3x172Candidate c3x172Candidate
+  c3Reflexive : PortfolioRefines c3x88Candidate c3x88Candidate
   v4Reflexive : PortfolioRefines v4x76Candidate v4x76Candidate
   aggressiveReflexive : PortfolioRefines aggressive64Candidate aggressive64Candidate
   aggressiveToPair : PortfolioRefines aggressive64Candidate pair128Candidate
@@ -87,7 +87,7 @@ full256Eligible = tt , full256Exact
 pair128Eligible : MDL.Eligible portfolioProblem pair128Candidate
 pair128Eligible = tt , pair128Exact
 
-c3AdequacyUnpaid : ExactKernelPortfolioAdequacy c3x172Candidate → ⊥
+c3AdequacyUnpaid : ExactKernelPortfolioAdequacy c3x88Candidate → ⊥
 c3AdequacyUnpaid ()
 
 v4AdequacyUnpaid : ExactKernelPortfolioAdequacy v4x76Candidate → ⊥
@@ -101,7 +101,7 @@ aggressiveAdequacyUnpaid ()
 ------------------------------------------------------------------------
 
 data MissingCertificateFibre : PortfolioCandidate → Set where
-  c3NeedsExactQuotientLiftKernel : MissingCertificateFibre c3x172Candidate
+  c3NeedsExactQuotientLiftKernel : MissingCertificateFibre c3x88Candidate
   v4NeedsExactQuotientLiftKernel : MissingCertificateFibre v4x76Candidate
   aggressiveNeedsActionAndLift : MissingCertificateFibre aggressive64Candidate
 
@@ -113,17 +113,17 @@ record CandidateRepairResidual (candidate : PortfolioCandidate) : Set where
     residualReference : String
 open CandidateRepairResidual public
 
-c3RepairResidual : CandidateRepairResidual c3x172Candidate
+c3RepairResidual : CandidateRepairResidual c3x88Candidate
 c3RepairResidual = candidate-repair-residual
-  (MissingCertificateFibre c3x172Candidate)
+  (MissingCertificateFibre c3x88Candidate)
   c3NeedsExactQuotientLiftKernel
-  "retain C3 action/closure result; reopen only exact quotient operator, kernel recovery, and upstairs lift verification"
+  "retain C3 action/closure evidence; execute and bind the all-orbit 88-coordinate exact quotient/lift/kernel certificate"
 
 v4RepairResidual : CandidateRepairResidual v4x76Candidate
 v4RepairResidual = candidate-repair-residual
   (MissingCertificateFibre v4x76Candidate)
   v4NeedsExactQuotientLiftKernel
-  "retain multifibre V4 inference and null evidence; reopen only exact quotient/lift/kernel consumer certificate"
+  "retain multifibre V4 inference and null evidence; execute and bind the 76-coordinate exact quotient/lift/kernel certificate"
 
 aggressiveRepairResidual : CandidateRepairResidual aggressive64Candidate
 aggressiveRepairResidual = candidate-repair-residual
@@ -145,14 +145,14 @@ data PortfolioCostAxis : Set where
 portfolioCost : PortfolioCostAxis → PortfolioCandidate → Nat
 portfolioCost widthAxis full256Candidate = 256
 portfolioCost widthAxis pair128Candidate = 128
-portfolioCost widthAxis c3x172Candidate = 172
+portfolioCost widthAxis c3x88Candidate = 88
 portfolioCost widthAxis v4x76Candidate = 76
 portfolioCost widthAxis aggressive64Candidate = 64
 portfolioCost activeCarrierAxis candidate = candidateWidth candidate
 portfolioCost replayWorkAxis candidate = candidateWidth candidate
 portfolioCost exactConsumerProofDebtAxis full256Candidate = 0
 portfolioCost exactConsumerProofDebtAxis pair128Candidate = 0
-portfolioCost exactConsumerProofDebtAxis c3x172Candidate = 1
+portfolioCost exactConsumerProofDebtAxis c3x88Candidate = 1
 portfolioCost exactConsumerProofDebtAxis v4x76Candidate = 1
 portfolioCost exactConsumerProofDebtAxis aggressive64Candidate = 2
 
@@ -178,21 +178,44 @@ v4Execution = Mixed.currentMultiFibreV4Receipt
 nullExecution : Nulls.FullReInferenceNullReceipt
 nullExecution = Nulls.currentFullReInferenceNullReceipt
 
+record KernelCertificationOracleSource : Set where
+  constructor kernel-certification-oracle-source
+  field
+    repository : String
+    branch : String
+    path : String
+    commit : String
+    gitBlob : String
+    sourceImplemented : Bool
+    exactGitBlobExecuted : Bool
+open KernelCertificationOracleSource public
+
+currentKernelCertificationOracleSource : KernelCertificationOracleSource
+currentKernelCertificationOracleSource = kernel-certification-oracle-source
+  "chboishabba/dashiRTX"
+  "agent/triadic-u8-runtime-oracle"
+  "rsa260_compression_portfolio_kernel_cert_oracle.c"
+  "acb49112794b7220089cf6a507690e45ede87a76"
+  "72a7a951cb0d0921dd38ab7dcd7586ca17f5d846"
+  true false
+
 record PortfolioEvidenceBoundary : Set where
   constructor portfolio-evidence-boundary
   field
     pairExactKernelAdequacyPaid : Bool
     c3ActionAndClosureEvidencePaid : Bool
     c3ExactKernelAdequacyPaid : Bool
+    c3AllOrbitKernelCertificateOracleImplemented : Bool
     v4ActionAndNullEvidencePaid : Bool
     v4ExactKernelAdequacyPaid : Bool
+    v4AllOrbitKernelCertificateOracleImplemented : Bool
     smallestRawWidthCandidateEligible : Bool
     nullEvidenceMayReplaceExactKernelCertificate : Bool
 open PortfolioEvidenceBoundary public
 
 canonicalPortfolioEvidenceBoundary : PortfolioEvidenceBoundary
 canonicalPortfolioEvidenceBoundary = portfolio-evidence-boundary
-  true true false true false false false
+  true true false true true false true false false
 
 ------------------------------------------------------------------------
 -- Compression-aware search policy.
@@ -209,11 +232,12 @@ record CompressionAwareSearchPolicy : Set where
     smallestWidthAutomaticallyWins : Bool
     paretoAxesRemainApplicationDeclared : Bool
     fullWidthFallbackAlwaysRetained : Bool
+    oldConsumerConflictGraphMayBeReusedWithoutRetesting : Bool
 open CompressionAwareSearchPolicy public
 
 canonicalCompressionAwareSearchPolicy : CompressionAwareSearchPolicy
 canonicalCompressionAwareSearchPolicy = compression-aware-search-policy
-  true true true true false false true true
+  true true true true false false true true false
 
 reductionSearchBoundary : Search.ReductionSearchBoundary
 reductionSearchBoundary = Search.canonicalReductionSearchBoundary
@@ -222,19 +246,19 @@ compressionBoundary : Compression.RSACompressionRoadmapBoundary
 compressionBoundary = Compression.currentRSACompressionRoadmapBoundary
 
 ------------------------------------------------------------------------
--- Next residual: certify richer quotient candidates rather than generate ever
--- smaller uncertified carriers.
+-- Next residual: execute the committed richer-candidate certificate oracle,
+-- then admit whichever candidates it actually certifies.
 ------------------------------------------------------------------------
 
 data CompressionPortfolioResidual : Set where
-  certifyC3ExactQuotientLiftKernel : CompressionPortfolioResidual
-  certifyV4ExactQuotientLiftKernel : CompressionPortfolioResidual
+  executeExactPortfolioKernelCertificateOracle : CompressionPortfolioResidual
+  admitCertifiedC3AndV4Candidates : CompressionPortfolioResidual
   addMeasuredReplayMemoryCommunicationCosts : CompressionPortfolioResidual
   computeProductionEligibleParetoFrontier : CompressionPortfolioResidual
   runProductionCompressionPortfolio : CompressionPortfolioResidual
 
 firstCompressionPortfolioResidual : CompressionPortfolioResidual
-firstCompressionPortfolioResidual = certifyC3ExactQuotientLiftKernel
+firstCompressionPortfolioResidual = executeExactPortfolioKernelCertificateOracle
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
@@ -242,6 +266,8 @@ firstCompressionPortfolioResidual = certifyC3ExactQuotientLiftKernel
 
 data StructuralSymmetryImpliesKernelAdequacy : Set where
 data BetterNullPImpliesExactConsumerAdequacy : Set where
+data CertificationOracleSourceImpliesSuccessfulExecution : Set where
+data PriorConsumerConflictImpliesCurrentConsumerConflict : Set where
 data ParetoCostImpliesMathematicalTruth : Set where
 data CheapestCandidateImpliesSelected : Set where
 
@@ -250,6 +276,12 @@ actionDoesNotCreateKernelAdequacy ()
 
 nullEvidenceDoesNotCreateKernelAdequacy : BetterNullPImpliesExactConsumerAdequacy → ⊥
 nullEvidenceDoesNotCreateKernelAdequacy ()
+
+oracleSourceDoesNotCreateExecution : CertificationOracleSourceImpliesSuccessfulExecution → ⊥
+oracleSourceDoesNotCreateExecution ()
+
+priorConsumerConflictDoesNotTransferAutomatically : PriorConsumerConflictImpliesCurrentConsumerConflict → ⊥
+priorConsumerConflictDoesNotTransferAutomatically ()
 
 paretoCostDoesNotCreateTruth : ParetoCostImpliesMathematicalTruth → ⊥
 paretoCostDoesNotCreateTruth ()
