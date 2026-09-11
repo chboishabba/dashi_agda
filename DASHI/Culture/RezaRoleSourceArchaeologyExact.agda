@@ -164,6 +164,35 @@ wikidataMonicaJacinto = reza-role-source-carrier
   "Verified external semantic coordinate only. The item currently carries no cited references for the alias/biographical statements; the primary California DOJ alias carrier, not this QID, pays the Reza/Andrea-Jacinto alias bridge."
 
 ------------------------------------------------------------------------
+-- Current Cal State board manifestation versus unrecovered historical row.
+------------------------------------------------------------------------
+
+record CalStateBoardManifestationState : Set where
+  constructor cal-state-board-manifestation-state
+  field
+    currentPage : String
+    currentBoardLabel : String
+    currentRezaRowPresent : Bool
+    currentJplRepresentative : String
+    currentJplRole : String
+    allegedHistoricalRowRecoveredFromPrimaryArchive : Bool
+    currentAbsenceProvesHistoricalAbsence : Bool
+    currentDifferentJplMemberProvesRoleReplacement : Bool
+    boundedReading : String
+
+open CalStateBoardManifestationState public
+
+canonicalCalStateBoardManifestationState : CalStateBoardManifestationState
+canonicalCalStateBoardManifestationState = cal-state-board-manifestation-state
+  "https://www.calstatela.edu/ecst/deans-advisory-board"
+  "2025-2026 Board Members"
+  false
+  "Sergio Valdez — JPL NASA"
+  "Engineering Manager"
+  false false false
+  "The current primary Cal State LA board manifestation contains no Monica Reza row and instead lists Sergio Valdez of JPL NASA as Engineering Manager. This pays only the current 2025-2026 manifestation state. It neither disproves a reported 2024-2025 Monica Reza row nor identifies Valdez as Reza's employer-role successor. The historical primary board manifestation remains a separate acquisition target."
+
+------------------------------------------------------------------------
 -- Patent-publication / assignment manifestation boundary.
 ------------------------------------------------------------------------
 
@@ -242,8 +271,8 @@ canonicalRezaRoleEvidenceState : RezaRoleEvidenceState
 canonicalRezaRoleEvidenceState = reza-role-evidence-state
   true true true true true false true false true true true
   false false false false
-  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. Patent facsimile/assignment metadata pay Monica A. Jacinto inventorship and the 2004 assignment to Boeing; Boeing, Cal State and AIAA independently pay a long Monica Jacinto materials-engineering lineage through the 2023 SciTech cycle. Rendered patent metadata normalises the middle initial away. The remaining identity debt is exact Monica A. Jacinto -> Monica Andrea Jacinto/Reza; independently, the JPL event-time role remains unpaid by an employer record."
-  "recover a primary carrier tying the patent/Mondaloy inventor identity Monica A. Jacinto to Monica Andrea Jacinto or Monica Jacinto Reza; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role"
+  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. Patent facsimile/assignment metadata pay Monica A. Jacinto inventorship and the 2004 assignment to Boeing; Boeing, Cal State and AIAA independently pay a long Monica Jacinto materials-engineering lineage through the 2023 SciTech cycle. Rendered patent metadata normalises the middle initial away. The current 2025-2026 Cal State board does not list Reza and lists Sergio Valdez of JPL NASA instead, but that current manifestation neither disproves the reported historical row nor pays a successor relationship. The remaining identity debt is exact Monica A. Jacinto -> Monica Andrea Jacinto/Reza; independently, the JPL event-time role remains unpaid by an employer record."
+  "recover a primary carrier tying the patent/Mondaloy inventor identity Monica A. Jacinto to Monica Andrea Jacinto or Monica Jacinto Reza; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role or the archived primary 2024-2025 Cal State board manifestation"
 
 ------------------------------------------------------------------------
 -- Snowball semantic coordinates.
