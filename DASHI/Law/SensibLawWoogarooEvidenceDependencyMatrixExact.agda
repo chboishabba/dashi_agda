@@ -92,8 +92,8 @@ ncaIndependent = dependency-cell
 currentExpertUnpaid : DependencyCell
 currentExpertUnpaid = dependency-cell
   currentEcologicalExpertOpinion shg2019Ecology observationallyIndependentSource false
-  "No current independent ecological opinion applying the actual s 12/s 102 wording to the current project state is presently source-paid."
-  "This remains the cleanest new independent evidence stream for the s 102 consumer."
+  "Current independent project-specific ecological opinions are now source-paid through the 12 March 2026 QCC and QUT EPBC 2019/8575 submissions, but no independent ecological opinion explicitly applies the Queensland s 12/s 102 wording to the current project state."
+  "Generic current-project ecological opposition is no longer the residual; the unpaid consumer is the direct NCA s 102 threatening-process / likely-significant-detrimental-effect application."
 
 executionJoinUnpaid : DependencyCell
 executionJoinUnpaid = dependency-cell
@@ -104,8 +104,8 @@ executionJoinUnpaid = dependency-cell
 populationJoinUnpaid : DependencyCell
 populationJoinUnpaid = dependency-cell
   viablePopulationStudy shg2019Ecology identityUnresolved false
-  "The biologically relevant viable Koala population/community has not yet been independently identified and joined to the Springview habitat-function evidence."
-  "s 13 essentiality therefore remains open even with strong site-level habitat evidence."
+  "Regional SEQ population structure, Ipswich population context and current Woogaroo resident-koala/connectivity evidence are now source-paid; the exact Springview/Woogaroo resident animals have not yet been joined to an independently characterised genetic/demographic cluster or subpopulation."
+  "s 13 essentiality remains open because the exact site-to-population identity and without-site viability counterfactual are still unpaid."
 
 historicalS43BUnpaid : DependencyCell
 historicalS43BUnpaid = dependency-cell
@@ -115,6 +115,9 @@ historicalS43BUnpaid = dependency-cell
 
 ------------------------------------------------------------------------
 -- Consumer-specific independence accounting.
+-- Counts remain the original matrix bookkeeping classes.  Newly acquired
+-- source multiplicity is tracked in the population/connectivity snowball owner
+-- rather than inflating these historical counts without a fresh quotient pass.
 ------------------------------------------------------------------------
 
 data WoogarooConsumer : Set where
@@ -141,13 +144,13 @@ s102DependencyState : ConsumerDependencyState
 s102DependencyState = consumer-dependency-state
   likelySignificantDetrimentalEffect
   6 3 true false
-  "Obtain an independent current ecological opinion on whether the exact approved clearing/earthworks process is likely to have significant detrimental effect under the Queensland s 102 wording; do not count multiple SHG-derived propositions as multiple independent ecological producers."
+  "Apply the now-located current independent project-specific ecological evidence to the exact Queensland s 102 wording, preferably through an independent ecological opinion that explicitly addresses the exact approved clearing/earthworks threatening process and likely significant detrimental effect."
 
 s13DependencyState : ConsumerDependencyState
 s13DependencyState = consumer-dependency-state
   statutoryEssentiality
   5 3 false false
-  "Identify the viable Koala population/community independently of the development boundary, then pay the counterfactual site-essentiality join."
+  "Join the Springview/Woogaroo resident koalas to an independently characterised SEQ genetic/demographic cluster or subpopulation, then quantify the without-site persistence/movement/breeding/resource-access counterfactual."
 
 executionDependencyState : ConsumerDependencyState
 executionDependencyState = consumer-dependency-state
