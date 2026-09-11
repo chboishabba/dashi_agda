@@ -7,12 +7,17 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.WikidataDerivationFibreBridge as Fibre
 import DASHI.Policy.ABC730WestBankSanctionsTranscriptClaimsExact as Transcript
+import DASHI.Policy.ABC730PrimarySourceSpeakerResolutionExact as SpeakerSource
 
 ------------------------------------------------------------------------
 -- Consumer-facing sanctions attribution module.
 -- Canonical transcript extraction is owned by Transcript; this module only
 -- consumes selected transcript coordinates and keeps policy comparison,
 -- speaker attribution, and evaluative truth as separate fibres.
+--
+-- SpeakerSource is a later same-programme primary-source overlay.  It does not
+-- rewrite the supplied transcript ledger; it can pay or contradict named
+-- speaker hypotheses independently of transcript-wording support.
 
 speakerAxis policyAxis comparisonAxis assessmentAxis correctionAxis transcriptAxis : Fibre.OntologyAxis
 speakerAxis = Fibre.externalAxis "speaker-attribution"
@@ -23,8 +28,7 @@ correctionAxis = Fibre.externalAxis "attribution-correction"
 transcriptAxis = Fibre.externalAxis "broadcast-transcript"
 
 ------------------------------------------------------------------------
--- Canonical transcript handles.  No duplicate transcript prose is authoritative
--- here: these values point back to the source-native ledger.
+-- Canonical transcript handles.
 
 canonicalABCWords : Transcript.TranscriptClaim
 canonicalABCWords = Transcript.abcLaborGaslightingClaim
@@ -37,6 +41,9 @@ canonicalAustraliaRationale = Transcript.abcAustraliaUnintendedConsequencesRatio
 
 canonicalUKImportBan : Transcript.TranscriptClaim
 canonicalUKImportBan = Transcript.abcUKImportBanClaim
+
+canonicalPrimarySpeakerSource : SpeakerSource.PrimarySourceReceipt
+canonicalPrimarySpeakerSource = SpeakerSource.abcPublishedTranscript
 
 ------------------------------------------------------------------------
 -- Base claims for downstream consumers.
@@ -79,7 +86,7 @@ bandtSpeakerClaim = Fibre.claimBase
   "Adam Bandt was the speaker of the ABC 7.30 'unbelievable gaslighting from labour' line."
   (Fibre.externalClaimKind "speaker-attribution")
   Fibre.mainValueRole
-  "speaker-unresolved"
+  "ABC-primary-source-contradicted"
 
 shoebridgeSpeakerClaim : Fibre.ClaimBase
 shoebridgeSpeakerClaim = Fibre.claimBase
@@ -87,7 +94,7 @@ shoebridgeSpeakerClaim = Fibre.claimBase
   "David Shoebridge was the speaker of the ABC 7.30 'unbelievable gaslighting from labour' line."
   (Fibre.externalClaimKind "speaker-attribution")
   Fibre.mainValueRole
-  "speaker-unresolved"
+  "ABC-primary-source-supported"
 
 gaslightingAptClaim : Fibre.ClaimBase
 gaslightingAptClaim = Fibre.claimBase
@@ -98,7 +105,7 @@ gaslightingAptClaim = Fibre.claimBase
   "assessment-not-promoted"
 
 ------------------------------------------------------------------------
--- Derivations paid by transcript-native coordinates.
+-- Derivations.
 
 ukBroaderMeasuresEvidence : Fibre.Derivation ukBroaderMeasuresClaim
 ukBroaderMeasuresEvidence = Fibre.derivation
@@ -138,28 +145,28 @@ abcGaslightingWordsEvidence = Fibre.derivation
 
 bandtSpeakerEvidence : Fibre.Derivation bandtSpeakerClaim
 bandtSpeakerEvidence = Fibre.derivation
-  "attribution:bandt:unresolved-after-transcript"
-  Fibre.unresolved
-  (speakerAxis ∷ correctionAxis ∷ [])
-  "C032 marks the speaker unresolved."
-  "ABC730-2026-09-09-C032"
-  ("recover labelled video frame, caption, lower-third, or speaker-labelled transcript" ∷ [])
+  "attribution:bandt:ABC-primary-source-contradiction"
+  Fibre.contradicting
+  (speakerAxis ∷ correctionAxis ∷ transcriptAxis ∷ [])
+  "ABC's published speaker-labelled transcript assigns the gaslighting line to David Shoebridge, not Adam Bandt."
+  "DASHI.Policy.ABC730PrimarySourceSpeakerResolutionExact.bandtC032Resolution"
+  ("A later primary-source correction does not rewrite the historical supplied-transcript speakerUnresolved state." ∷ [])
 
 shoebridgeSpeakerEvidence : Fibre.Derivation shoebridgeSpeakerClaim
 shoebridgeSpeakerEvidence = Fibre.derivation
-  "attribution:shoebridge:unresolved-after-transcript"
-  Fibre.unresolved
-  (speakerAxis ∷ correctionAxis ∷ [])
-  "C032 marks the speaker unresolved."
-  "ABC730-2026-09-09-C032"
-  ("recover labelled video frame, caption, lower-third, or speaker-labelled transcript" ∷ [])
+  "attribution:shoebridge:ABC-primary-source-support"
+  Fibre.supporting
+  (speakerAxis ∷ correctionAxis ∷ transcriptAxis ∷ [])
+  "ABC's published speaker-labelled transcript assigns the gaslighting line to David Shoebridge, Greens Senator."
+  "DASHI.Policy.ABC730PrimarySourceSpeakerResolutionExact.c032SpeakerResolution"
+  ("Speaker attribution does not promote the evaluative claim that the characterisation is correct." ∷ [])
 
 gaslightingAptEvidence : Fibre.Derivation gaslightingAptClaim
 gaslightingAptEvidence = Fibre.derivation
   "assessment:gaslighting-apt:unpromoted"
   Fibre.unresolved
   (assessmentAxis ∷ [])
-  "C032 is evaluative rhetoric; its presence does not establish that the evaluation is correct."
+  "C032 is evaluative rhetoric; its presence and now-resolved speaker identity do not establish that the evaluation is correct."
   "ABC730-2026-09-09-C032"
   ("define and pay an explicit evaluative consumer before promotion" ∷ [])
 
@@ -171,15 +178,15 @@ abcWordsSupported :
   Fibre.fibreShape Fibre.satisfied
 abcWordsSupported = refl
 
-bandtSpeakerStillUndetermined :
-  Fibre.validateRequiredSubfibre Fibre.axisRequired false false ≡
-  Fibre.fibreShape Fibre.undetermined
-bandtSpeakerStillUndetermined = refl
+shoebridgeSpeakerSupported :
+  Fibre.validateRequiredSubfibre Fibre.axisRequired true false ≡
+  Fibre.fibreShape Fibre.satisfied
+shoebridgeSpeakerSupported = refl
 
-shoebridgeSpeakerStillUndetermined :
-  Fibre.validateRequiredSubfibre Fibre.axisRequired false false ≡
-  Fibre.fibreShape Fibre.undetermined
-shoebridgeSpeakerStillUndetermined = refl
+bandtSpeakerContradicted :
+  Fibre.validateRequiredSubfibre Fibre.axisRequired false true ≡
+  Fibre.fibreShape Fibre.contradicted
+bandtSpeakerContradicted = refl
 
 evaluativeTruthStillUndetermined :
   Fibre.validateRequiredSubfibre Fibre.axisRequired false false ≡
