@@ -13,15 +13,6 @@ import DASHI.Core.ConsumerRelativeApproximateFidelityBridgeExact as Approx
 import DASHI.Core.ExpectedFibreReductionCostExact as ReductionCost
 import DASHI.Core.NDimParetoHyperfabricExact as NDim
 
-------------------------------------------------------------------------
--- CONSUMER-RELATIVE FIBRE COMPRESSION LADDER
---
--- This owner turns distillation / pruning / quantization / low-rank / expert
--- merging / sparse routing into candidate compression moves over one declared
--- consumer problem. A step is not accepted because it is smaller. It is
--- accepted only inside the admissible + consumer-adequate stratum.
-------------------------------------------------------------------------
-
 data CompressionStage : Set where
   fullTeacherStage : CompressionStage
   distilledStudentStage : CompressionStage
@@ -44,31 +35,32 @@ identityTeacherProjection : Distill.TeacherState → Distill.TeacherState
 identityTeacherProjection state = state
 
 fullTeacherAdequateForRichRelation :
-  Query.AdequateFor
-    identityTeacherProjection
-    Distill.distillationSemantics
-    Distill.richRelationQuery
+  Query.AdequateFor identityTeacherProjection Distill.distillationSemantics Distill.richRelationQuery
 fullTeacherAdequateForRichRelation =
   Query.factorsForQuery
     (λ state → Distill.richAnswer (Distill.richTeacherConsumer state))
     (λ state → refl)
 
-stageRichAdequate : CompressionStage → Set₁
-stageRichAdequate fullTeacherStage =
-  Query.AdequateFor
-    identityTeacherProjection
-    Distill.distillationSemantics
-    Distill.richRelationQuery
-stageRichAdequate distilledStudentStage =
-  Query.AdequateFor
-    Distill.studentProjection
-    Distill.distillationSemantics
-    Distill.richRelationQuery
-stageRichAdequate distilledPlusRelationStage =
-  Query.AdequateFor
-    Distill.studentPlusRichFibre
-    Distill.distillationSemantics
-    Distill.richRelationQuery
+-- Small MDL receipts bridge Set-sized ranking to Set₁ semantic adequacy proofs.
+data RichStageAdequacy : CompressionStage → Set where
+  fullTeacherRichReceipt : RichStageAdequacy fullTeacherStage
+  repairedStudentRichReceipt : RichStageAdequacy distilledPlusRelationStage
+
+stageRichAdequate : CompressionStage → Set
+stageRichAdequate = RichStageAdequacy
+
+fullTeacherReceiptSound :
+  RichStageAdequacy fullTeacherStage →
+  Query.AdequateFor identityTeacherProjection Distill.distillationSemantics Distill.richRelationQuery
+fullTeacherReceiptSound fullTeacherRichReceipt = fullTeacherAdequateForRichRelation
+
+repairedStudentReceiptSound :
+  RichStageAdequacy distilledPlusRelationStage →
+  Query.AdequateFor Distill.studentPlusRichFibre Distill.distillationSemantics Distill.richRelationQuery
+repairedStudentReceiptSound repairedStudentRichReceipt = Distill.joinedStudentAdequateForRichRelation
+
+distilledStudentReceiptImpossible : RichStageAdequacy distilledStudentStage → ⊥
+distilledStudentReceiptImpossible ()
 
 data StageRefines : CompressionStage → CompressionStage → Set where
   teacherReflexive : StageRefines fullTeacherStage fullTeacherStage
@@ -79,64 +71,45 @@ data StageRefines : CompressionStage → CompressionStage → Set where
 richCompressionProblem : MDL.ConsumerMDLProblem
 richCompressionProblem =
   MDL.consumerMDLProblem
-    CompressionStage
-    stageAdmissible
-    stageRichAdequate
-    stageDescriptionLength
-    StageRefines
+    CompressionStage stageAdmissible stageRichAdequate stageDescriptionLength StageRefines
     stageReference
     "finite illustrative stage code length; compression is ranked only after adequacy"
     "rich teacher relation consumer"
 
 fullTeacherEligible : MDL.Eligible richCompressionProblem fullTeacherStage
-fullTeacherEligible = tt , fullTeacherAdequateForRichRelation
+fullTeacherEligible = tt , fullTeacherRichReceipt
 
-repairedStudentEligible :
-  MDL.Eligible richCompressionProblem distilledPlusRelationStage
-repairedStudentEligible =
-  tt , Distill.joinedStudentAdequateForRichRelation
+repairedStudentEligible : MDL.Eligible richCompressionProblem distilledPlusRelationStage
+repairedStudentEligible = tt , repairedStudentRichReceipt
 
 distilledStudentNotEligibleForRichConsumer :
   MDL.Eligible richCompressionProblem distilledStudentStage → ⊥
 distilledStudentNotEligibleForRichConsumer eligible =
-  Distill.studentCannotAnswerRichRelationQuery (proj₂ eligible)
+  distilledStudentReceiptImpossible (proj₂ eligible)
 
--- ConsumerCounterexample's witness universe is Set, so retain the rich query
--- defect as the insufficiency theorem and use a small first-order token as the
--- counterexample carrier rather than trying to store the Set₁ defect itself.
 data StudentRichFailureWitness : Set where
   studentRichFailureWitness : StudentRichFailureWitness
 
-studentRichCounterexample :
-  MDL.ConsumerCounterexample richCompressionProblem distilledStudentStage
+studentRichCounterexample : MDL.ConsumerCounterexample richCompressionProblem distilledStudentStage
 studentRichCounterexample =
   MDL.consumerCounterexample
-    StudentRichFailureWitness
-    studentRichFailureWitness
-    Distill.studentCannotAnswerRichRelationQuery
+    StudentRichFailureWitness studentRichFailureWitness distilledStudentReceiptImpossible
     "teacherStateA and teacherStateB collapse to the same distilled state"
-    "the rich relation consumer distinguishes the collapsed teacher states; exact defect retained in Distill.studentRichRelationDefect"
+    "the rich relation consumer distinguishes the collapsed teacher states; exact semantic defect is Distill.studentRichRelationDefect"
 
 studentRelationRepair :
-  MDL.LocalRefinementRepair
-    richCompressionProblem
-    distilledStudentStage
-    distilledPlusRelationStage
+  MDL.LocalRefinementRepair richCompressionProblem distilledStudentStage distilledPlusRelationStage
 studentRelationRepair =
   MDL.localRefinementRepair
-    studentRichCounterexample
-    studentToRepaired
-    tt
-    Distill.joinedStudentAdequateForRichRelation
+    studentRichCounterexample studentToRepaired tt repairedStudentRichReceipt
     "reattach only the missing teacher-relation fibre and re-test the declared consumer"
 
-repairRestoresEligibility :
-  MDL.Eligible richCompressionProblem distilledPlusRelationStage
+repairRestoresEligibility : MDL.Eligible richCompressionProblem distilledPlusRelationStage
 repairRestoresEligibility = MDL.repairProvidesEligibleRefinement studentRelationRepair
 
-------------------------------------------------------------------------
--- Compression technique transition surface.
-------------------------------------------------------------------------
+repairSemanticAdequacy :
+  Query.AdequateFor Distill.studentPlusRichFibre Distill.distillationSemantics Distill.richRelationQuery
+repairSemanticAdequacy = repairedStudentReceiptSound (proj₂ repairRestoresEligibility)
 
 record CompressionTransition (from to : CompressionStage) : Set where
   constructor compressionTransition
@@ -145,21 +118,12 @@ record CompressionTransition (from to : CompressionStage) : Set where
     declaredRefinement : StageRefines from to
     consumerAdequacyRecheckRequired : Bool
     transitionReference : String
-
 open CompressionTransition public
 
-studentRepairTransition :
-  CompressionTransition distilledStudentStage distilledPlusRelationStage
+studentRepairTransition : CompressionTransition distilledStudentStage distilledPlusRelationStage
 studentRepairTransition =
-  compressionTransition
-    Distill.adapterBottleneck
-    studentToRepaired
-    true
+  compressionTransition Distill.adapterBottleneck studentToRepaired true
     "local missing-fibre repair; not a claim that adapters are uniquely optimal"
-
-------------------------------------------------------------------------
--- Multi-axis deployment cost surface.
-------------------------------------------------------------------------
 
 data CompressionCostAxis : Set where
   descriptionAxis : CompressionCostAxis
@@ -188,58 +152,36 @@ compressionAxisReference deploymentAxis = "deployment resource proxy"
 compressionAxisReference precisionAxis = "numeric precision/storage proxy"
 
 compressionCostHyperfabric : MDL.CostHyperfabric richCompressionProblem
-compressionCostHyperfabric =
-  MDL.costHyperfabric CompressionCostAxis compressionCost compressionAxisReference
+compressionCostHyperfabric = MDL.costHyperfabric CompressionCostAxis compressionCost compressionAxisReference
 
 compressionParetoView : NDim.NDimParetoView compressionCostHyperfabric
 compressionParetoView =
-  NDim.ndimParetoView
-    4
-    "four explicitly declared compression/deployment cost axes"
-    compressionAxisReference
-    true
-    "no scalarized objective required"
-
-------------------------------------------------------------------------
--- Existing repo-native reduction/fidelity anchors.
-------------------------------------------------------------------------
+  NDim.ndimParetoView 4 "four explicitly declared compression/deployment cost axes"
+    compressionAxisReference true "no scalarized objective required"
 
 minimalFidelityRemainsConsumerRelative :
-  Minimal.minimalityIsConsumerAndPortfolioRelative
-    Minimal.canonicalMinimalFidelityBoundary ≡ true
+  Minimal.minimalityIsConsumerAndPortfolioRelative Minimal.canonicalMinimalFidelityBoundary ≡ true
 minimalFidelityRemainsConsumerRelative = refl
 
 lowestCostDoesNotAutomaticallySuffice :
-  Minimal.lowestCostCandidateAutomaticallySufficient
-    Minimal.canonicalMinimalFidelityBoundary ≡ false
+  Minimal.lowestCostCandidateAutomaticallySufficient Minimal.canonicalMinimalFidelityBoundary ≡ false
 lowestCostDoesNotAutomaticallySuffice =
-  Minimal.lowestCostCandidateAutomaticallySufficientIsFalse
-    Minimal.canonicalMinimalFidelityBoundary
+  Minimal.lowestCostCandidateAutomaticallySufficientIsFalse Minimal.canonicalMinimalFidelityBoundary
 
 approximateCompressionNeedsConsumerMargin :
-  Approx.approximateROMNeedsCertifiedConsumerMargin
-    Approx.canonicalConsumerApproximateFidelityBoundary ≡ true
+  Approx.approximateROMNeedsCertifiedConsumerMargin Approx.canonicalConsumerApproximateFidelityBoundary ≡ true
 approximateCompressionNeedsConsumerMargin =
-  Approx.approximateROMNeedsCertifiedConsumerMarginIsTrue
-    Approx.canonicalConsumerApproximateFidelityBoundary
+  Approx.approximateROMNeedsCertifiedConsumerMarginIsTrue Approx.canonicalConsumerApproximateFidelityBoundary
 
 approximateSafetyDoesNotIdentifyMechanism :
-  Approx.approximateDecisionSafetyImpliesMechanisticRealization
-    Approx.canonicalConsumerApproximateFidelityBoundary ≡ false
+  Approx.approximateDecisionSafetyImpliesMechanisticRealization Approx.canonicalConsumerApproximateFidelityBoundary ≡ false
 approximateSafetyDoesNotIdentifyMechanism =
-  Approx.approximateDecisionSafetyImpliesMechanisticRealizationIsFalse
-    Approx.canonicalConsumerApproximateFidelityBoundary
+  Approx.approximateDecisionSafetyImpliesMechanisticRealizationIsFalse Approx.canonicalConsumerApproximateFidelityBoundary
 
 reductionCostNeedsSeparateAdmissibility :
-  ReductionCost.admissibilityMustBeCheckedSeparately
-    ReductionCost.canonicalExpectedFibreReductionCostBoundary ≡ true
+  ReductionCost.admissibilityMustBeCheckedSeparately ReductionCost.canonicalExpectedFibreReductionCostBoundary ≡ true
 reductionCostNeedsSeparateAdmissibility =
-  ReductionCost.admissibilityMustBeCheckedSeparatelyIsTrue
-    ReductionCost.canonicalExpectedFibreReductionCostBoundary
-
-------------------------------------------------------------------------
--- Cross-domain reading for the Fly / MoE / grokking programme.
-------------------------------------------------------------------------
+  ReductionCost.admissibilityMustBeCheckedSeparatelyIsTrue ReductionCost.canonicalExpectedFibreReductionCostBoundary
 
 data ProgrammeCompressionReading : Set where
   flyCarrierCompression : ProgrammeCompressionReading
@@ -273,14 +215,4 @@ record FibreCompressionLadderBoundary : Set where
 
 canonicalFibreCompressionLadderBoundary : FibreCompressionLadderBoundary
 canonicalFibreCompressionLadderBoundary =
-  fibreCompressionLadderBoundary
-    true
-    true
-    false
-    true
-    false
-    true
-    false
-    true
-    true
-    true
+  fibreCompressionLadderBoundary true true false true false true false true true true
