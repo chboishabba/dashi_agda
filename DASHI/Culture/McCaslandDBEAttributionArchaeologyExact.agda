@@ -84,6 +84,48 @@ kirtlandCurrentMcCasland = dbe-attribution-manifestation
   "Primary organisational page pays the current displayed DBE title string, but its stale ATA body and duplicate DBE Founder/Owner/President heading on Tegnelia's Kirtland profile make the page temporally and attributionally mixed. It cannot by itself establish DBE founding date, transfer date, exclusive ownership, 2026 client portfolio, or event-time corporate status."
 
 ------------------------------------------------------------------------
+-- Same-label company collision control.
+--
+-- Ibrahim-guided traversal from company register -> company exposed an unrelated
+-- active business using essentially the same DBE Consulting LLC label: an
+-- Atlanta/Georgia certification consultancy led by Kimberly Griffin and focused
+-- on DBE/ACDBE certification.  It is not the Albuquerque national-security
+-- company attributed to Tegnelia.  This is the corporate analogue of a same-name
+-- person/DOI collision: legal-entity identity must be paid by jurisdictional
+-- registry identifiers, addresses, formation records or equivalent primary
+-- company carriers, not by string equality.
+------------------------------------------------------------------------
+
+record SameLabelCompanyCollision : Set where
+  constructor same-label-company-collision
+  field
+    candidateLabel : String
+    candidateSource : String
+    candidateLink : String
+    candidateJurisdictionOrPlace : String
+    candidateBusinessDomain : String
+    targetLabel : String
+    targetPaidCarrier : String
+    sameLegalEntityPaid : Bool
+    mayMergeByCompanyName : Bool
+    usefulAsNegativeControl : Bool
+
+open SameLabelCompanyCollision public
+
+atlantaDBEConsultingCollision : SameLabelCompanyCollision
+atlantaDBEConsultingCollision = same-label-company-collision
+  "dbe Consulting LLC / DBE Consulting"
+  "AMAC PAC board + dbe Consulting public company surface"
+  "https://www.amac-org.com/pac/ ; https://capbuildernetwork.wixsite.com/dbeconsulting/about-us"
+  "Atlanta, Georgia / airport and transportation DBE-certification market"
+  "DBE/ACDBE certification consulting; Kimberly Griffin identified as CEO"
+  "DBE Consulting LLC, Albuquerque, New Mexico"
+  "State Department PRN 2011/1166 naming James A. Tegnelia as President/Owner; 2017 Albuquerque DBE letterhead"
+  false
+  false
+  true
+
+------------------------------------------------------------------------
 -- Conflict / payment state.
 ------------------------------------------------------------------------
 
@@ -95,6 +137,7 @@ record DBEOwnershipArchaeologyState : Set where
     tegneliaCurrentFounderHeadingPaid : Bool
     mccaslandCurrentDBEHeadingPaid : Bool
     currentKirtlandRoleLabelCollisionPaid : Bool
+    unrelatedSameLabelCompanyLocated : Bool
     sameDBEEntityAcrossAllManifestationsPaid : Bool
     mccaslandFounderFromCompanyInceptionPaid : Bool
     ownershipTransferDatePaid : Bool
@@ -106,8 +149,8 @@ open DBEOwnershipArchaeologyState public
 
 canonicalDBEOwnershipArchaeologyState : DBEOwnershipArchaeologyState
 canonicalDBEOwnershipArchaeologyState = dbe-ownership-archaeology-state
-  true true true true true false false false false false
-  "recover New Mexico corporate filing/history or equivalent primary company record identifying exact DBE entity, formation date, members/managers/ownership changes, and dated McCasland role; do not use either current Kirtland heading as the corporate-history authority; only then acquire primary 2025-2026 client/contract carriers"
+  true true true true true true false false false false false
+  "recover New Mexico corporate filing/history or equivalent primary company record identifying exact DBE entity, formation date, jurisdictional/entity identifier, members/managers/ownership changes, and dated McCasland role; use exact legal-entity identifiers to prevent collision with unrelated DBE/dbe Consulting companies; only then acquire primary 2025-2026 client/contract carriers"
 
 record DBEAttributionBoundary : Set where
   constructor dbe-attribution-boundary
@@ -117,6 +160,7 @@ record DBEAttributionBoundary : Set where
     sameCompanyLabelProvesSameLegalEntity : Bool
     organisationBiographyEqualsCorporateFiling : Bool
     duplicateFounderHeadingsCanBothBeReadAsLiteralCorporateHistory : Bool
+    unrelatedSameLabelCompanyMayBeMergedByName : Bool
     secondaryClientClaimsPromoteWithoutPrimaryContract : Bool
     datedManifestationsMayGuideCorporateRecordSearch : Bool
 
@@ -124,4 +168,4 @@ open DBEAttributionBoundary public
 
 canonicalDBEAttributionBoundary : DBEAttributionBoundary
 canonicalDBEAttributionBoundary = dbe-attribution-boundary
-  false false false false false false true
+  false false false false false false false true
