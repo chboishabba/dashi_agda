@@ -119,6 +119,12 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJSourceMinCutRound324Exact
 -- but they are not three independent fresh clustering inequalities.
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound325Exact
 
+-- R326 exposes the least-privilege source-facing H1 ABI already latent in R322:
+-- one published CMP116 localization authority plus one selected-J admissibility
+-- payment.  The former is source-owned; the latter is the current physical
+-- application residual.  R322 then compiles this package directly to R320.
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityMinCutRound326Exact
+
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
 -- once the source-response identity is supplied, its first theorem-bearing
