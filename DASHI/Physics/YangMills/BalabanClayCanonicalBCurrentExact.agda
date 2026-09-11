@@ -74,48 +74,15 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityMinCutRound326
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJCommonDomainRound327Exact
 import DASHI.Physics.YangMills.BalabanCMP116PublishedAuthoritySelectedT5ApplicationExact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound328Exact
-
--- R329 is the debt-kind normalization after the source-native H1 correction.
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound329Exact
-
--- R330 cross-pollinates the generic NS sequential-order closure into H2c and
--- records the source/application status of the five surviving coordinates.
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact
-
--- R331 repairs the historical "same Hamiltonian" carrier: the preferred
--- transfer coordinate is indexed by the actual OS reconstruction and retains a
--- proof-bearing TransferCoordinateOf relation before projecting to R311.
 import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact
-
--- R332 removes the arbitrary time-translation function: pairwise translated
--- tests are definitionally produced by the SAME Euclidean-covariance/OS1
--- translation action; only physical time/support meaning remains to be paid.
 import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact
-
--- R333 composes the repaired H2a/H2b/H2c/H3 interfaces all the way through
--- R304/R316.  It creates no new theorem debt; H1 remains upstream in the exact
--- finite T5 presentation, while the four downstream application coordinates are
--- now one executable compiler route.
 import DASHI.Physics.YangMills.BalabanCanonicalBOSIndexedCompletionRound333Exact
-
--- R334 corrects an over-coarse H1 application shortcut.  A scale/volume-level
--- common source-domain witness cannot by itself manufacture admissibility of
--- the actual selected pair (J_A,J_B); the pair-specific same-object domain weld
--- is proof-relevant and remains the source/application frontier.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainWeldRound334Exact
-
--- R335 factors that selected-pair weld through a source-native common-J pair
--- domain authority.  This demotes the selected-T5 pair weld from an independent
--- physical theorem: the surviving acquisition tasks are source-domain
--- transcription/alignment plus literal physical observable -> CMP116 J meaning.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainSourceFactorRound335Exact
-
--- R336 corrects one dependency overcount: once the unlocalized selected-T5 base
--- exists, its proof-bearing LiteralTwoSourceInsertionMeaning is already carried
--- as the `meaning` coordinate.  Constructing that base still requires the
--- physical same-density source semantics; it is simply not charged again after
--- the base has been built.
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound336Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound337Exact
 
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
