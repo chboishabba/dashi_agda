@@ -76,8 +76,11 @@ record GradedModuleVectorSpaceReceipt (moduleCarrier : VOA.GradedModule) : Setω
 open GradedModuleVectorSpaceReceipt public
 
 ------------------------------------------------------------------------
--- 2. Linearity of the existing literal VOA group action.
+-- 2. Linearity of the exact existing literal VOA group action.
 ------------------------------------------------------------------------
+
+moduleCarrier : VOA.VertexOperatorAlgebra → VOA.GradedModule
+moduleCarrier voa = VOA.gradedModule voa
 
 record VOAGroupActionLinearReceipt
     {G : Set}
@@ -85,31 +88,30 @@ record VOAGroupActionLinearReceipt
     (voa : VOA.VertexOperatorAlgebra)
     (action : VOA.VOAGroupAction G group voa) : Setω where
   field
-    moduleCarrier : VOA.GradedModule
-    moduleCarrierIsVOAModule : moduleCarrier ≡ VOA.gradedModule voa
-    vectorSpaceReceipt : GradedModuleVectorSpaceReceipt moduleCarrier
+    vectorSpaceReceipt : GradedModuleVectorSpaceReceipt (moduleCarrier voa)
 
     actionPreservesZero :
       (g : G) →
-      VOA.VOAGroupAction.act action g (VOA.GradedModule.zero moduleCarrier)
-      ≡ VOA.GradedModule.zero moduleCarrier
+      VOA.VOAGroupAction.act action g
+        (VOA.GradedModule.zero (moduleCarrier voa))
+      ≡ VOA.GradedModule.zero (moduleCarrier voa)
 
     actionPreservesAddition :
       (g : G) →
-      (u v : VOA.GradedModule.Carrier moduleCarrier) →
+      (u v : VOA.GradedModule.Carrier (moduleCarrier voa)) →
       VOA.VOAGroupAction.act action g
-        (VOA.GradedModule._+_ moduleCarrier u v)
-      ≡ VOA.GradedModule._+_ moduleCarrier
+        (VOA.GradedModule._+_ (moduleCarrier voa) u v)
+      ≡ VOA.GradedModule._+_ (moduleCarrier voa)
           (VOA.VOAGroupAction.act action g u)
           (VOA.VOAGroupAction.act action g v)
 
     actionPreservesScaling :
       (g : G) →
-      (a : VOA.GradedModule.Scalar moduleCarrier) →
-      (v : VOA.GradedModule.Carrier moduleCarrier) →
+      (a : VOA.GradedModule.Scalar (moduleCarrier voa)) →
+      (v : VOA.GradedModule.Carrier (moduleCarrier voa)) →
       VOA.VOAGroupAction.act action g
-        (VOA.GradedModule._·_ moduleCarrier a v)
-      ≡ VOA.GradedModule._·_ moduleCarrier a
+        (VOA.GradedModule._·_ (moduleCarrier voa) a v)
+      ≡ VOA.GradedModule._·_ (moduleCarrier voa) a
           (VOA.VOAGroupAction.act action g v)
 
 open VOAGroupActionLinearReceipt public
