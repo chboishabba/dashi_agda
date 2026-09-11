@@ -18,14 +18,9 @@ import DASHI.Policy.ABC730FirmDestinationExposureSnowballExact as Firms
 ------------------------------------------------------------------------
 -- Single Ibrahim/Snowball atlas for the C029 evidence chain.
 --
--- Each coordinate keeps these independent:
---   * source object and canonical link,
---   * claim-relative primary/secondary role,
---   * Dewey retrieval coordinate,
---   * QID identity coordinate,
---   * DOI or stable non-DOI identifier,
---   * downstream claim-payment scope.
--- Missing identifiers remain unresolved rather than inferred.
+-- Orthogonal coordinates:
+-- source object/link, claim-relative primaryness, Dewey, QID,
+-- DOI/stable identifier, and downstream payment scope.
 ------------------------------------------------------------------------
 
 data QidPayment : Set where
@@ -40,22 +35,17 @@ data StableIdKind : Set where
 
 data ClaimRelativeRole : Set where
   primaryForUtterance : ClaimRelativeRole
-  primaryForPolicyInstrument : ClaimRelativeRole
   primaryForImplementationGuidance : ClaimRelativeRole
   primaryForOfficialStatistic : ClaimRelativeRole
   primaryForDatasetStructure : ClaimRelativeRole
   primaryForBusinessUniverse : ClaimRelativeRole
   primaryForRegulatoryBaseline : ClaimRelativeRole
   secondaryForMechanismContext : ClaimRelativeRole
-  secondaryForMeasurementSynthesis : ClaimRelativeRole
-  unresolvedRole : ClaimRelativeRole
 
 data PaymentScope : Set where
   paysSpeakerAndWording : PaymentScope
   paysStatedRationale : PaymentScope
-  paysInstrumentIdentity : PaymentScope
   paysOriginDifferentiationMechanism : PaymentScope
-  paysTargetedAlternativeIdentity : PaymentScope
   paysExistingComplianceBurden : PaymentScope
   paysCountryOriginBaseline : PaymentScope
   paysPalestinianWorkerExposure : PaymentScope
@@ -95,7 +85,7 @@ abcTranscriptCoordinate = snowballSourceCoordinate
   (urlObjectId "abc730-2026-09-09:61c86754d9cb2ca6e540d522ebfa8056a42291afa257dd6c7e54f12374408383")
   "C028-C033"
   paysSpeakerAndWording
-  "primary for labelled transcript wording/stated positions; not causal truth"
+  "primary for labelled wording/stated positions; not causal truth"
   false false false false
 
 ukOriginCoordinate : SnowballSourceCoordinate
@@ -107,9 +97,9 @@ ukOriginCoordinate = snowballSourceCoordinate
   "382.7"
   (qidUnresolved "document/institution QID not paid in this atlas")
   (urlObjectId "govuk:notice-to-importers-israel-settlements:updated-2025-08-22")
-  "C029 implementation mechanism comparator"
+  "C029 implementation comparator"
   paysOriginDifferentiationMechanism
-  "pays existence of UK settlement-origin differentiation; not Australian cost/effect"
+  "pays UK settlement-origin differentiation; not Australian cost/effect"
   false false false false
 
 pcbsWorkersCoordinate : SnowballSourceCoordinate
@@ -123,7 +113,7 @@ pcbsWorkersCoordinate = snowballSourceCoordinate
   (urlObjectId "PCBS:Q4-2025:postId-23457")
   "C029 Palestinians affected-class mechanism"
   paysPalestinianWorkerExposure
-  "pays settlement-employment exposure population; not ban effect sign"
+  "pays settlement-employment exposure; not ban effect sign"
   false false false false
 
 pcbsMicrodataCoordinate : SnowballSourceCoordinate
@@ -137,7 +127,7 @@ pcbsMicrodataCoordinate = snowballSourceCoordinate
   (datasetId "PSE-PCBS-LFS-2025-V1.0")
   "C029 Palestinian incidence decomposition"
   paysNothingBeyondAcquisition
-  "pays existence/shape of a microdata carrier; analysis outputs remain unpaid"
+  "pays dataset carrier; analysis outputs remain unpaid"
   false false false false
 
 maharmehCoordinate : SnowballSourceCoordinate
@@ -147,11 +137,11 @@ maharmehCoordinate = snowballSourceCoordinate
   "https://doi.org/10.1080/2158379X.2025.2612489"
   secondaryForMechanismContext
   "331"
-  (qidUnresolved "article/person QID not required for mechanism payment")
+  (qidUnresolved "article/person QID not required for this payment")
   (doiId "10.1080/2158379X.2025.2612489")
   "C029 Palestinian labour dependence context"
   paysStructuralLabourContext
-  "qualitative/structural mechanism context only; no 2026 policy counterfactual"
+  "structural context only; no 2026 policy counterfactual"
   false false false false
 
 hacklCoordinate : SnowballSourceCoordinate
@@ -161,11 +151,11 @@ hacklCoordinate = snowballSourceCoordinate
   "https://doi.org/10.1080/2201473X.2022.2032545"
   secondaryForMechanismContext
   "331"
-  (qidUnresolved "article/person QID not required for mechanism payment")
+  (qidUnresolved "article/person QID not required for this payment")
   (doiId "10.1080/2201473X.2022.2032545")
   "C029 Palestinian labour incorporation context"
   paysStructuralLabourContext
-  "structural context only; predates policy and does not estimate effect"
+  "structural context only; predates the policy"
   false false false false
 
 wongRationaleCoordinate : SnowballSourceCoordinate
@@ -179,7 +169,7 @@ wongRationaleCoordinate = snowballSourceCoordinate
   (urlObjectId "foreignminister:palestine-speech-senate:2026-09-08")
   "C029"
   paysStatedRationale
-  "pays what rationale was publicly stated; not mechanism/materiality/probability"
+  "pays stated rationale only; mechanism/materiality/probability remain open"
   false false false false
 
 dfatConsolidatedListCoordinate : SnowballSourceCoordinate
@@ -189,11 +179,11 @@ dfatConsolidatedListCoordinate = snowballSourceCoordinate
   "https://www.dfat.gov.au/international-relations/security/sanctions/consolidated-list"
   primaryForImplementationGuidance
   "382.7"
-  (qidUnresolved "DFAT QID not confidently paid; source identity is URL/institution label")
+  (qidUnresolved "DFAT QID not confidently paid; URL/institution identity retained")
   (urlObjectId "DFAT-ASO:consolidated-list:2026-09-08")
   "C029 targeted alternative"
   paysExistingComplianceBurden
-  "pays named-entity due-diligence mechanism; not origin-classification equivalence"
+  "pays named-entity identification mechanism; not origin-equivalence"
   false false false false
 
 abfDeclarationCoordinate : SnowballSourceCoordinate
@@ -207,7 +197,7 @@ abfDeclarationCoordinate = snowballSourceCoordinate
   (urlObjectId "abf:import-declarations:2026")
   "C029 Australian implementation baseline"
   paysCountryOriginBaseline
-  "pays existing import-declaration infrastructure only"
+  "pays import-declaration infrastructure only"
   false false false false
 
 abfOriginAdviceCoordinate : SnowballSourceCoordinate
@@ -221,7 +211,7 @@ abfOriginAdviceCoordinate = snowballSourceCoordinate
   (urlObjectId "abf:origin-advice:2026")
   "C029 Australian implementation baseline"
   paysCountryOriginBaseline
-  "pays existence of origin adjudication; settlement-place rule remains unpaid"
+  "pays origin-adjudication capability; settlement-place rule remains open"
   false false false false
 
 acccOriginCoordinate : SnowballSourceCoordinate
@@ -235,18 +225,18 @@ acccOriginCoordinate = snowballSourceCoordinate
   (urlObjectId "accc:country-origin-food-labelling:2026")
   "C029 Australian implementation baseline"
   paysCountryOriginBaseline
-  "pays country-level retail food origin labelling; not settlement-place classification"
+  "pays country-level food origin labelling; not settlement-place classification"
   false false false false
 
 ohchrBusinessCoordinate : SnowballSourceCoordinate
 ohchrBusinessCoordinate = snowballSourceCoordinate
   "C029-atlas:ohchr-business-database"
-  Firms.ohchrBusinessDatabaseSource
-  "https://www.ohchr.org/en/press-releases/2026/09/un-human-rights-office-updates-database-business-enterprises-involved-certain"
+  Firms.ohchr2025Source
+  "https://www.un.org/unispal/document/business-database-26sep25/"
   primaryForBusinessUniverse
   "338.8"
   (qidPaid "Q656812")
-  (documentSymbolId "OHCHR:settlement-business-database:2026")
+  (documentSymbolId "A/HRC/60/19:2025")
   "C029 firm/destination exposure candidates"
   paysSettlementBusinessCandidates
   "pays candidate firm/activity universe; not destination/export/worker linkage"
@@ -263,7 +253,7 @@ ukMeasurementCoordinate = snowballSourceCoordinate
   (documentSymbolId "UKParliament:written-question:45543:2025-04-24")
   "C029 settlement trade magnitude"
   paysMeasurementLimitation
-  "pays non-identifiability in ordinary published partner-country aggregates"
+  "pays non-identifiability in ordinary published country aggregates"
   false false false false
 
 allC029SourceCoordinates : List SnowballSourceCoordinate
@@ -297,8 +287,35 @@ originBaselineNode = Ibrahim.dashi-knowledge-coordinate
 originBaselineSupportsC029 : Ibrahim.DashiFirstLinkEdge
 originBaselineSupportsC029 = Ibrahim.dashi-first-link-edge
   c029Node originBaselineNode Ibrahim.supportedBy Ibrahim.canonicalDashiFirstLinkPolicy
-  "Australian origin/compliance infrastructure pays the baseline capability comparison, while settlement-specific fields/costs remain residual."
+  "Australian origin/compliance infrastructure pays baseline capability; settlement-specific fields/costs remain residual."
   true
+
+------------------------------------------------------------------------
+-- Append-only identifier refinement.
+------------------------------------------------------------------------
+
+record IdentifierRefinementReceipt : Set where
+  constructor identifierRefinementReceipt
+  field
+    earlierStateReference : String
+    laterPaidQid : String
+    sameObjectReference : String
+    earlierStateRewritten : Bool
+    qidImportsClaimTruth : Bool
+
+pcbsQidRefinement : IdentifierRefinementReceipt
+pcbsQidRefinement = identifierRefinementReceipt
+  "ABC730PalestinianIncidenceSnowballExact earlier qid-unresolved-for-PCBS-institution"
+  "Q2895680"
+  "Palestinian Central Bureau of Statistics / pcbs.gov.ps"
+  false false
+
+ohchrQidRefinement : IdentifierRefinementReceipt
+ohchrQidRefinement = identifierRefinementReceipt
+  "ABC730FirmDestinationExposureSnowballExact source institution identity"
+  "Q656812"
+  "Office of the United Nations High Commissioner for Human Rights"
+  false false
 
 record AtlasBoundary : Set where
   constructor atlasBoundary
@@ -309,7 +326,7 @@ record AtlasBoundary : Set where
     deweyAdjacencyPaysClaim : Bool
     canonicalLinkPaysClaim : Bool
     primaryRolePaysBeyondRole : Bool
-    laterSourceMayRewriteEarlierSourceState : Bool
+    laterIdentifierMayRewriteEarlierState : Bool
     paymentMustRespectClaimScope : Bool
 
 canonicalAtlasBoundary : AtlasBoundary
