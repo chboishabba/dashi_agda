@@ -10,11 +10,12 @@ import DASHI.Wikimedia.IbrahimFirstLinkSourceArchaeologyLedgerExact as IbrahimSo
 ------------------------------------------------------------------------
 -- IBRAHIM-GUIDED SCIENTIST ACQUISITION TRAVERSAL
 --
--- Thin navigation owner only.  Ibrahim-style first-link traversal is used to
--- rank adjacent acquisition surfaces for the missing/deceased-scientist work.
--- It does NOT create evidence authority, same-object identity, person identity,
--- custody, succession, motive or causation.  Those remain owned by the source-
--- specific scientific/evidence modules.
+-- Thin navigation owner only. Ibrahim-style graph traversal is used to rank
+-- adjacent acquisition surfaces for the missing/deceased-scientist work.
+-- Current hand-inspected Wikipedia/Wikidata neighbours remain semantic/search
+-- coordinates unless the original Ibrahim parser policy has actually been run.
+-- They do NOT create evidence authority, same-object identity, person identity,
+-- custody, succession, motive or causation.
 --
 -- Method attribution:
 -- Mark Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds,
@@ -24,7 +25,7 @@ import DASHI.Wikimedia.IbrahimFirstLinkSourceArchaeologyLedgerExact as IbrahimSo
 ------------------------------------------------------------------------
 
 data TraversalEdgeClass : Set where
-  currentEnglishFirstLinkCandidate
+  parserEquivalentCurrentFirstLink
   currentSemanticNeighbour
   wikidataBroaderCoordinate
   historicalIbrahimPaidEdge : TraversalEdgeClass
@@ -43,6 +44,7 @@ record ScientistAcquisitionTraversal : Set where
     sourceLink : String
     deweyTraversal : String
     acquisitionReading : String
+    parserEquivalentExtractionPaid : Bool
     primaryObjectStillRequired : Bool
     graphEdgeCreatesEvidenceAuthority : Bool
     graphEdgeCreatesSameObjectIdentity : Bool
@@ -50,11 +52,11 @@ record ScientistAcquisitionTraversal : Set where
 open ScientistAcquisitionTraversal public
 
 ------------------------------------------------------------------------
--- Amy: the public POAMS object is a technical report.  On current English
--- Wikipedia, Technical report's first linked research concept in the defining
--- sentence is scientific research (the Research article/section).  This points
--- the acquisition outward from report content toward research-administration /
--- report-series metadata, but the graph does not itself supply the missing DAA.
+-- Amy: the public POAMS object is a technical report. Current English describes
+-- a technical report as a document reporting technical/scientific research.
+-- This is a useful semantic neighbourhood for routing toward report-series,
+-- research-administration and STI metadata, but no parser-equivalent current
+-- first-link edge is asserted here.
 ------------------------------------------------------------------------
 
 amyTechnicalReportToResearch : ScientistAcquisitionTraversal
@@ -65,19 +67,18 @@ amyTechnicalReportToResearch = scientist-acquisition-traversal
   "Q3099732"
   "research"
   "Q42240"
-  currentEnglishFirstLinkCandidate
+  currentSemanticNeighbour
   "2026-09-11"
   "https://en.wikipedia.org/wiki/Technical_report"
   "001 Knowledge / 500 Science traversal; report itself remains NASA Subject Category 70 / Physics"
-  "Use the Ibrahim edge only to rank report-series, research-administration and STI metadata surfaces. The conclusion-paying object remains the exact MSFC release-authorisation record."
-  true false false
+  "Current article semantics route from technical-report identity toward research/report administration and STI metadata. The conclusion-paying object remains the exact MSFC release-authorisation record."
+  false true false false
 
 ------------------------------------------------------------------------
--- Maiwald: spectroscopy has a current lead-level neighbour at electromagnetic
--- spectrum, while the unresolved scientific leaf is raw/reduced research data.
--- The graph therefore routes from topical spectroscopy toward data/metadata
--- provenance instead of treating affiliation or publication metadata as data
--- custody.
+-- Maiwald: spectroscopy is currently defined through spectra/electromagnetic
+-- radiation and the unresolved scientific leaf is raw/reduced research data.
+-- The graph routes topical science toward data/metadata provenance without
+-- treating affiliation or publication metadata as data custody.
 ------------------------------------------------------------------------
 
 maiwaldSpectroscopyToElectromagneticSpectrum : ScientistAcquisitionTraversal
@@ -92,8 +93,8 @@ maiwaldSpectroscopyToElectromagneticSpectrum = scientist-acquisition-traversal
   "2026-09-11"
   "https://en.wikipedia.org/wiki/Spectroscopy"
   "543.5 Spectroscopy / 540 Chemistry"
-  "The topical first-link neighbourhood confirms the measurement domain but does not identify the data carrier. Snowball next through research-data and metadata repositories, using DOI/deposit identities rather than author-name matching."
-  true false false
+  "The current semantic neighbourhood confirms the measurement domain but does not identify the data carrier. Snowball next through research-data and metadata repositories, using DOI/deposit identities rather than author-name matching."
+  false true false false
 
 maiwaldResearchDataCoordinate : ScientistAcquisitionTraversal
 maiwaldResearchDataCoordinate = scientist-acquisition-traversal
@@ -108,12 +109,13 @@ maiwaldResearchDataCoordinate = scientist-acquisition-traversal
   "https://www.wikidata.org/wiki/Q15809982"
   "001.4 Research methods / 540 Chemistry traversal only"
   "Treat raw spectra, reduced spectra, fitted/calculated spectra, coordinates and SI figures as distinct data manifestations. Search DOI-bearing deposits and repository metadata before inferring custody from a publication or affiliation."
-  true false false
+  false true false false
 
 ------------------------------------------------------------------------
--- Reza: the patent object funnels toward intellectual-property / legal-record
--- surfaces.  This ranks patent-family and inventor-identity records above
--- secondary role repetition, while the JPL employment record remains separate.
+-- Reza: current patent semantics route directly to intellectual property/legal
+-- record surfaces. This ranks patent-family, assignment and inventor-identity
+-- records above secondary role repetition, while JPL employment remains a
+-- separate primary-object leaf. No parser-equivalent current edge is claimed.
 ------------------------------------------------------------------------
 
 rezaPatentToIntellectualProperty : ScientistAcquisitionTraversal
@@ -124,17 +126,18 @@ rezaPatentToIntellectualProperty = scientist-acquisition-traversal
   "Q253623"
   "intellectual property"
   "Q131257"
-  currentEnglishFirstLinkCandidate
+  currentSemanticNeighbour
   "2026-09-11"
   "https://en.wikipedia.org/wiki/Patent"
   "346.048 Intellectual property / 620 Engineering"
   "Follow exact patent-family, inventor-name, assignment and institutional identity records first; keep the independent JPL personnel/org-chart leaf separate from patent identity."
-  true false false
+  false true false false
 
 ------------------------------------------------------------------------
--- McCasland: Company register points immediately to companies and government-
--- mandated registration.  This makes the legal register/entity-history surface
--- the graph-ranked next step, not biographies or secondary client narratives.
+-- McCasland: distinguish Wikidata's specific company-register item from the
+-- broader trade-register item. Current English semantics say a company register
+-- records business organisations/companies under a jurisdiction. This ranks the
+-- government legal-entity history above biographies and client narratives.
 ------------------------------------------------------------------------
 
 mccaslandCompanyRegisterToCompany : ScientistAcquisitionTraversal
@@ -142,21 +145,36 @@ mccaslandCompanyRegisterToCompany = scientist-acquisition-traversal
   "William Neil McCasland / DBE Consulting"
   "actual New Mexico entity/member-manager/ownership chronology"
   "company register"
-  "Q1394657"
+  "Q134611895"
   "company"
   "Q783794"
-  currentEnglishFirstLinkCandidate
+  currentSemanticNeighbour
   "2026-09-11"
   "https://en.wikipedia.org/wiki/Company_register"
   "338.7 Enterprises / 650 Management traversal only"
   "Prioritise the government company-register/entity-history carrier. Current biographies may guide the query but cannot pay founder, owner, manager or event-time corporate status."
-  true false false
+  false true false false
+
+mccaslandTradeRegisterCoordinate : ScientistAcquisitionTraversal
+mccaslandTradeRegisterCoordinate = scientist-acquisition-traversal
+  "William Neil McCasland / DBE Consulting"
+  "jurisdictional registry identity for the Albuquerque DBE entity"
+  "trade register"
+  "Q1394657"
+  "company register / business registry"
+  "Q134611895"
+  wikidataBroaderCoordinate
+  "2026-09-11"
+  "https://www.wikidata.org/wiki/Q1394657"
+  "338.7 Enterprises / 650 Management traversal only"
+  "Retain Q1394657 as the broader trade-register coordinate and Q134611895 as the specific company-register coordinate. Neither identifies DBE Consulting LLC without the New Mexico registry object/entity identifier."
+  false true false false
 
 ------------------------------------------------------------------------
--- Cross-lane metadata funnel.  Amy's DAA, Maiwald's CHORUS/NTRS harvest and
+-- Cross-lane metadata funnel. Amy's DAA, Maiwald's CHORUS/NTRS harvest and
 -- LeBlanc's freeze/role-state problem all depend on metadata/manifests rather
--- than another topical science paper.  Current Metadata exposes information/data
--- as its first general concepts; Wikidata Q180160 classifies metadata as data.
+-- than another topical science paper. Q180160 and Q42848 are traversal/search
+-- coordinates only.
 ------------------------------------------------------------------------
 
 record SharedMetadataFunnel : Set where
@@ -181,10 +199,10 @@ scientistAdministrativeMetadataFunnel = shared-metadata-funnel
   "information / data"
   "Q11028 / Q42848"
   "Amy EDAA/STI release metadata; Maiwald CHORUS/NTRS/ACS manifestation metadata; LeBlanc role-snapshot/freeze metadata"
-  "025.3 / 005.7 metadata coordinates; domain-specific Dewey remains authoritative only as traversal"
+  "025.3 / 005.7 metadata coordinates; domain-specific Dewey remains traversal-only"
   true
   false
-  "Ibrahim-style funneling says to inspect metadata/manifestation layers because multiple live frontiers converge there. Metadata can expose identifiers, dates, authorship and routing, but it does not manufacture the underlying manuscript, raw dataset, personnel state or succession relation."
+  "Ibrahim-style funneling ranks metadata/manifestation layers because multiple live frontiers converge there. Metadata can expose identifiers, dates, authorship and routing, but it does not manufacture the underlying manuscript, raw dataset, personnel state or succession relation."
 
 ------------------------------------------------------------------------
 -- Source and historical-snapshot boundary.
@@ -198,6 +216,7 @@ record IbrahimScientistTraversalBoundary : Set where
     currentEdgesRevisionSensitive : Bool
     exactNovember2014DumpDayStillUnpaid : Bool
     currentScientistEdgesClaimedAsHistorical2014Edges : Bool
+    handInspectionCalledParserEquivalentFirstLink : Bool
     qidUsedAsSearchCoordinateOnly : Bool
     deweyUsedAsTraversalCoordinateOnly : Bool
     firstLinkAdjacencyCreatesProofDependency : Bool
@@ -208,4 +227,4 @@ open IbrahimScientistTraversalBoundary public
 
 canonicalIbrahimScientistTraversalBoundary : IbrahimScientistTraversalBoundary
 canonicalIbrahimScientistTraversalBoundary = ibrahim-scientist-traversal-boundary
-  true true true true false true true false false true
+  true true true true false false true true false false true
