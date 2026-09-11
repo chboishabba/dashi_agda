@@ -60,9 +60,9 @@ rezaPatentSnowballCoordinate = Ext.snowball-source-coordinate
     "Monica A. Jacinto / Dallis Ann Hardwick alloy inventorship"
     "620 Engineering"
     "Q139385030"
-    "US20040208777A1; application US10/769,195; parent US20030053926A1; Wikidata Q139385030 labels Monica Jacinto and aliases Monica Jacinto Reza")
+    "US20040208777A1; application US10/769,195; parent US20030053926A1; California DOJ missing-person record LASD case 025-00905-1257-400 gives Monica Jacinto Reza AKA Monica Andrea Jacinto; Wikidata Q139385030 is traversal-only")
   true true true
-  "Q139385030 is a verified external semantic coordinate for Monica Jacinto, but its relevant alias/biographical statements are currently uncited and therefore it does not pay the Jacinto-to-Reza identity weld or event-time JPL role. Patent publication identity pays co-inventorship and disclosed alloy/process claims only."
+  "The primary California DOJ record, not Wikidata, pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. Q139385030 remains only an external semantic coordinate. The patent still uses the abbreviated inventor form Monica A. Jacinto, so exact patent-person identity remains a separate receipt; patent publication identity pays co-inventorship and disclosed alloy/process claims only."
 
 grillmairCrossroadsSnowballCoordinate : Ext.SnowballSourceCoordinate
 grillmairCrossroadsSnowballCoordinate = Ext.snowball-source-coordinate
