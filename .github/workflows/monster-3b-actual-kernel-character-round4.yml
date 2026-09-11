@@ -3,6 +3,7 @@ name: Monster 3B actual kernel character round 4
 on:
   pull_request:
     branches:
+      - master
       - 'agent/monster-3b-orbifold-local-module-round4'
       - 'agent/monster-3b-actual-kernel-character-round4'
     paths:
@@ -15,13 +16,18 @@ on:
       - 'DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda'
       - 'DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda'
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact.agda'
+      - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/monster_3b_inertia_phase_resolution.g'
+      - 'scripts/render_monster_3b_certificate.py'
       - 'scripts/render_monster_3b_actual_kernel_certificate.py'
+      - 'scripts/render_monster_3b_inertia_phase_certificate.py'
       - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
   workflow_dispatch:
-
 
 concurrency:
   group: dashi-global-${{ github.ref }}
@@ -65,7 +71,13 @@ jobs:
           export AGDA_LOG_PATH="$RUNNER_TEMP/monster-3b-round4-agda.log"
           AGDA_JOBS=2 bash scripts/check_monster_3b_actual_kernel_character_round4.sh
 
-      - name: Upload actual-kernel certificates
+      - name: Run inertia phase-resolution checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_inertia_phase_resolution.sh
+
+      - name: Upload actual-kernel and inertia certificates
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -74,5 +86,7 @@ jobs:
             build/monster_3b_normalizer_restriction.json
             build/monster_3b_actual_kernel_structure.json
             build/monster_3b_actual_kernel_character_certificate.json
+            build/monster_3b_inertia_phase_resolution.json
             build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
+            build/generated/DASHI/Moonshine/Generated/Monster3BInertiaPhaseResolutionCertificate.agda
           if-no-files-found: warn
