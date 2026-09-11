@@ -12,6 +12,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369DashiQFirstPublicSourceExac
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369IbrahimDeweyTraversalExact as ID
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369OEISAttributionExact as OEIS
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369OEISAufbauFormulaWeldExact as OW
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369MadelungSelectorBoundaryExact as M
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 
@@ -19,9 +20,9 @@ import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 -- Focused validation root.  Importing this module forces the generative
 -- formalism, provenance/snowball companion, chronology/status ledger,
 -- DOI/QID/primary/Dewey/OEIS attribution ledgers, first-public dashiQ source,
--- Ibrahim/Dewey traversal, OEIS Aufbau/closure arithmetic weld, and
--- cross-repository regression ledger through the Agda checker when this file
--- is actually checked.
+-- Ibrahim/Dewey traversal, OEIS Aufbau/closure arithmetic weld, the fixed-alpha
+-- Madelung selector boundary, and cross-repository regression ledger through
+-- the Agda checker when this file is actually checked.
 --
 -- The existence of this file is not itself a typecheck receipt.  See the
 -- chronology/status owner for the distinction between authored source and a
@@ -241,3 +242,31 @@ oeisAufbauNonPromotionRegression :
     OW.canonicalOEISAufbauWeldBoundary
   ≡ false
 oeisAufbauNonPromotionRegression = refl , (refl , refl)
+
+madelungFixedAlphaCounterexampleRegression :
+  M.score3of5 M.fourS ≡ 20
+  × M.score3of5 M.threeD ≡ 21
+  × M.score3of5 M.sixS ≡ 30
+  × M.score3of5 M.fourF ≡ 29
+  × M.madelungDiagonal M.sixS ≡ 6
+  × M.madelungDiagonal M.fourF ≡ 7
+madelungFixedAlphaCounterexampleRegression =
+  M.fourSScore ,
+  (M.threeDScore ,
+  (M.sixSScore ,
+  (M.fourFScore ,
+  (M.sixSDiagonal , M.fourFDiagonal))))
+
+madelungSelectorNonPromotionRegression :
+  M.MadelungSelectorBoundary.earlyClosuresPromoteFixedAlphaToGlobalAufbau
+    M.canonicalMadelungSelectorBoundary
+  ≡ false
+  ×
+  M.MadelungSelectorBoundary.fixedThreeFifthsMatchesA167268Globally
+    M.canonicalMadelungSelectorBoundary
+  ≡ false
+  ×
+  M.MadelungSelectorBoundary.exactLexicographicMadelungSelectorStillNeeded
+    M.canonicalMadelungSelectorBoundary
+  ≡ true
+madelungSelectorNonPromotionRegression = refl , (refl , refl)
