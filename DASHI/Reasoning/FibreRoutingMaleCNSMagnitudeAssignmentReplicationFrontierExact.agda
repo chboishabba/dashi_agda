@@ -231,8 +231,8 @@ magnitudeDependsOnPolarityFrontier = Traversal.dashi-first-link-edge
 polarityBoundary : Polarity.PolarityJointQuotientBoundary
 polarityBoundary = Polarity.canonicalPolarityJointQuotientBoundary
 
-scaleShapeBoundary : ScaleShape.MaleCNSScaleShapeSnowballBoundary
-scaleShapeBoundary = ScaleShape.canonicalMaleCNSScaleShapeSnowballBoundary
+scaleShapeBoundary : ScaleShape.MaleCNSScaleShapeBoundary
+scaleShapeBoundary = ScaleShape.canonicalMaleCNSScaleShapeBoundary
 
 ibrahimBoundary : Ibrahim.FibreCompressionIbrahimSnowballBoundary
 ibrahimBoundary = Ibrahim.canonicalFibreCompressionIbrahimSnowballBoundary
