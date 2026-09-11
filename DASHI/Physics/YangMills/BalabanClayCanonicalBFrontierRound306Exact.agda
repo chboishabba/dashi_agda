@@ -15,37 +15,17 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound306Exact where
 --
 -- Current YM-specific payments on this route:
 --
---   G1. literal absolute two-J CMP116/CMP119 localization on the exact T5 state;
+--   G1. literal selected-J applicability of the published CMP116/CMP119
+--       differentiated localization theorem on the exact T5 state;
 --   G2. physical Euclidean-time translation / bounded-observable / support-
 --       distance semantics for arbitrary physical observable pairs;
 --   G3. same reconstructed Hamiltonian: the concrete q=1/2 decay bound means
 --       exponential decay at one strictly positive physical mass m*.
 --
--- Introspective refinement after R299 + source archaeology:
---
---   * G1 must NOT be read as a fresh 4D YM decay theorem.  CMP116 already owns
---     differentiated exponential localization on its declared analytic
---     U/J/A carrier, and finite Cauchy differentiation + common-radius
---     construction are compiler/source-owned.  The surviving payment is the
---     SAME-OBJECT/APPLICABILITY specialization: identify the selected physical
---     T5 observables with the literal CMP116/CMP119 J directions on the active
---     density, preserve their support/root geometry, and instantiate the
---     published differentiated-localization theorem on those directions.
---   * G2 is a same-object / physical-semantics weld.  It is mandatory for
---     correctness, but it does not create a stronger decay inequality.
---   * G3 is a same-Hamiltonian rate/energy normalization weld.  The ordered
---     lattice/physical exponent algebra is already compiler-owned elsewhere;
---     this coordinate gives the concrete q=1/2 bound its physical mass meaning.
---
--- Thus the shortest B route currently contains NO newly invented generic
--- clustering mechanism.  Its first unresolved source-facing payment is the
--- literal selected-J specialization of an already source-owned differentiated
--- localization theorem.
---
--- Standard-library payment (not new 4D YM analysis):
---
---   S1. exponential connected clustering at m*>0 implies spectral separation
---       above the vacuum by m* on that same reconstructed Hamiltonian.
+-- R309 makes G1 proof-bearing at the correct boundary.  The source theorem is
+-- indexed by the exact selected-T5 shell carrier.  The only local welds are the
+-- selected mixed response, connecting root, and physical support distance.
+-- Type equality of neighbouring shell carriers is deliberately insufficient.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -56,6 +36,7 @@ import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R2
 import DASHI.Physics.YangMills.BalabanAbsoluteTwoJSourceMinCutRound299Exact as R299
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
 import DASHI.Physics.YangMills.BalabanPairwiseClusteringStandardMassGapRound305Exact as R305
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityRound309Exact as R309
 
 record Round306Boundary : Set where
   constructor round306-boundary
@@ -71,6 +52,10 @@ record Round306Boundary : Set where
     g1RemainingPaymentIsSelectedJSameObjectSpecialization : Bool
     g1RemainingPaymentIsSelectedJSameObjectSpecializationIsTrue :
       g1RemainingPaymentIsSelectedJSameObjectSpecialization ≡ true
+
+    g1NeighbourShellTypeEqualityMayPayApplicability : Bool
+    g1NeighbourShellTypeEqualityMayPayApplicabilityIsFalse :
+      g1NeighbourShellTypeEqualityMayPayApplicability ≡ false
 
     g2ManufacturesNewAnalyticDecayInformation : Bool
     g2ManufacturesNewAnalyticDecayInformationIsFalse :
@@ -112,6 +97,7 @@ canonicalRound306Boundary =
     true refl
     false refl
     false refl
+    false refl
     true refl
     true refl
     false refl
@@ -119,10 +105,18 @@ canonicalRound306Boundary =
     true refl
     false refl
 
--- G1 is split into its source theorem and its unresolved physical application.
+-- G1 source theorem and exact selected-T5 applicability are separate.
 round306G1PublishedDifferentiatedLocalizationLevel : ProofLevel
 round306G1PublishedDifferentiatedLocalizationLevel =
-  R299.round299FiniteDerivativeLocalizationAuthorityLevel
+  R309.publishedDifferentiatedLocalizationLevel
+
+round306G1SelectedJApplicabilityCompilerLevel : ProofLevel
+round306G1SelectedJApplicabilityCompilerLevel =
+  R309.selectedJApplicabilityCompilerLevel
+
+round306G1SelectedJApplicabilityPhysicalLevel : ProofLevel
+round306G1SelectedJApplicabilityPhysicalLevel =
+  R309.selectedJApplicabilityPhysicalLevel
 
 round306G1LiteralSelectedJSameObjectLocalizationLevel : ProofLevel
 round306G1LiteralSelectedJSameObjectLocalizationLevel =
