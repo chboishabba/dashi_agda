@@ -22,6 +22,7 @@ module DASHI.Physics.YangMills.BalabanCMP109SelectedT5SameObjectRound321Exact wh
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -42,8 +43,7 @@ record PublishedCMP109SelectedShellPayment
     : Set₁ where
   field
     sourceE2PiMagnitude :
-      (cutoff : Agda.Builtin.Nat.Nat) →
-      TestObservable → TestObservable → ℚ
+      Nat → TestObservable → TestObservable → ℚ
 
     sourceE2PiMagnitudeBelowSelectedShell :
       ∀ cutoff left right →
