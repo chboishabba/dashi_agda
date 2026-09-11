@@ -18,6 +18,7 @@ data RezaRoleSourceClass : Set where
   primaryHistoricalIdentityRecord
   primaryLawEnforcementIdentityRecord
   primaryPatentManifestation
+  renderedIndexManifestation
   primaryCongressionalDocument
   directColleagueWitnessSurface
   directFamilyWitnessViaReporting
@@ -70,15 +71,25 @@ californiaDOJ2026Alias = reza-role-source-carrier
   false false true
   "Primary state law-enforcement identity carrier directly spanning the Reza surname and Monica Andrea Jacinto alias. It pays that legal/alias bridge, but does not by itself prove that every historical Monica A. Jacinto publication/patent is this person or establish a JPL employment role."
 
-patentParent2003NameCarrier : RezaRoleSourceCarrier
-patentParent2003NameCarrier = reza-role-source-carrier
+patentParent2003FacsimileCarrier : RezaRoleSourceCarrier
+patentParent2003FacsimileCarrier = reza-role-source-carrier
   primaryPatentManifestation
-  "US20030053926A1 — Burn-resistant and high tensile strength metal alloys"
+  "US20030053926A1 publication facsimile — Burn-resistant and high tensile strength metal alloys"
   "US09/954,835; publication US20030053926A1; priority 2001-09-18"
-  "https://patents.google.com/patent/US20030053926A1/en"
-  "Inventors listed as Monica Jacinto and Dallis Hardwick; same patent family contains later continuation-in-part and continuation manifestations using Monica A. Jacinto"
+  "https://patentimages.storage.googleapis.com/58/4f/d7/4d0e60f1762cd4/US20030053926A1.pdf"
+  "front page identifies inventors Monica A. Jacinto, Glendale, CA, and Dallis Ann Hardwick, Dayton, OH"
   false false true
-  "The parent patent manifestation pays that the same patent family can omit the middle initial for Monica Jacinto. This shrinks the name-normalisation debt but does not itself expand A. to Andrea or prove identity with the California DOJ missing-person record."
+  "Publication facsimile preserves the middle initial A. in the source text. It does not expand A. to Andrea or by itself prove identity with the California DOJ missing-person record."
+
+patentParent2003RenderedCarrier : RezaRoleSourceCarrier
+patentParent2003RenderedCarrier = reza-role-source-carrier
+  renderedIndexManifestation
+  "Google Patents rendered metadata for US20030053926A1"
+  "US20030053926A1 rendered/index manifestation"
+  "https://patents.google.com/patent/US20030053926A1/en"
+  "rendered inventor field displays Monica Jacinto and Dallis Hardwick"
+  false false true
+  "The rendered/index manifestation omits the middle initial that is present in the publication facsimile. This is retained as a manifestation-normalisation conflict, not evidence that the source patent itself used two different inventor identities."
 
 houseOversight20260420 : RezaRoleSourceCarrier
 houseOversight20260420 = reza-role-source-carrier
@@ -131,19 +142,19 @@ wikidataMonicaJacinto = reza-role-source-carrier
   "Verified external semantic coordinate only. The item currently carries no cited references for the alias/biographical statements; the primary California DOJ alias carrier, not this QID, pays the Reza/Andrea-Jacinto alias bridge."
 
 ------------------------------------------------------------------------
--- Patent-family name manifestation boundary.
+-- Patent-publication manifestation boundary.
 ------------------------------------------------------------------------
 
 record PatentNameManifestationState : Set where
   constructor patent-name-manifestation-state
   field
-    parentPublication : String
-    parentInventorForm : String
-    continuationFamily : String
-    laterInventorForm : String
-    sharedPriorityDate : String
-    samePatentFamilyPaid : Bool
-    middleInitialPresenceVariesWithinFamily : Bool
+    publication : String
+    facsimileInventorForm : String
+    renderedInventorForm : String
+    samePublicationIdentityPaid : Bool
+    renderedNameDiffersFromFacsimile : Bool
+    sourceTextMiddleInitialPaid : Bool
+    familyLevelInitialVariationPaid : Bool
     middleInitialExpansionToAndreaPaid : Bool
     patentInventorEqualsDOJMissingPersonPaid : Bool
 
@@ -151,12 +162,10 @@ open PatentNameManifestationState public
 
 canonicalPatentNameManifestationState : PatentNameManifestationState
 canonicalPatentNameManifestationState = patent-name-manifestation-state
-  "US20030053926A1"
+  "US20030053926A1 / application US09/954,835 / priority 2001-09-18"
+  "Monica A. Jacinto"
   "Monica Jacinto"
-  "US20040208777A1 / US20100266442A1 continuation family"
-  "Monica A. Jacinto in later manifestations"
-  "2001-09-18"
-  true true false false
+  true true true false false false
 
 ------------------------------------------------------------------------
 -- Event-time role and alias state.
@@ -167,7 +176,7 @@ record RezaRoleEvidenceState : Set where
   field
     patentInventorshipPaid : Bool
     historicalJacintoEmployerLineagePaid : Bool
-    patentFamilyNameVariationPaid : Bool
+    patentManifestationNameConflictPaid : Bool
     verifiedSemanticQidLocated : Bool
     semanticQidPaysAliasIdentity : Bool
     primaryLegalAliasBridgePaid : Bool
@@ -188,8 +197,8 @@ canonicalRezaRoleEvidenceState : RezaRoleEvidenceState
 canonicalRezaRoleEvidenceState = reza-role-evidence-state
   true true true true false true false true true true
   false false false false
-  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. The patent family itself shows Monica Jacinto / Monica A. Jacinto manifestation variation under one priority lineage, while Boeing and Cal State pay a long Monica Jacinto materials-engineering/Mondaloy lineage. The remaining identity debt is exact patent-inventor-to-DOJ-person identity; independently, the JPL event-time role remains unpaid by an employer record."
-  "recover a primary carrier tying the patent/Mondaloy inventor identity to Monica Andrea Jacinto or Monica Jacinto Reza; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role"
+  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. The US20030053926A1 publication facsimile pays Monica A. Jacinto inventorship, while the rendered Google Patents page normalises that name to Monica Jacinto. Boeing and Cal State independently pay a long Monica Jacinto materials-engineering/Mondaloy lineage. The remaining identity debt is exact patent-inventor-to-DOJ-person identity; independently, the JPL event-time role remains unpaid by an employer record."
+  "recover a primary carrier tying the patent/Mondaloy inventor identity Monica A. Jacinto to Monica Andrea Jacinto or Monica Jacinto Reza; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role"
 
 ------------------------------------------------------------------------
 -- Snowball semantic coordinates.
@@ -234,7 +243,8 @@ record RezaRoleSourceBoundary : Set where
     historicalPageQuoteEqualsRecoveredHistoricalPage : Bool
     primaryHistoricalJacintoRoleAutomaticallyEqualsLaterRezaIdentity : Bool
     uncitedWikidataAliasPaysSamePersonIdentity : Bool
-    patentFamilyInitialVariationPaysAndreaExpansion : Bool
+    renderedPatentNameOverridesPublicationFacsimile : Bool
+    patentFacsimileInitialPaysAndreaExpansion : Bool
     dojAndreaAliasAutomaticallyPaysPatentInventorIdentity : Bool
     primaryAliasBridgeAutomaticallyPaysJPLRole : Bool
     multipleNonInstitutionalCarriersMayGuidePrimarySearch : Bool
@@ -244,4 +254,4 @@ open RezaRoleSourceBoundary public
 
 canonicalRezaRoleSourceBoundary : RezaRoleSourceBoundary
 canonicalRezaRoleSourceBoundary = reza-role-source-boundary
-  false false false false false false false false false false true false
+  false false false false false false false false false false false true false
