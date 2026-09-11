@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as G
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProvenanceSnowballExact as P
+import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 
 ------------------------------------------------------------------------
 -- Focused validation root.  Importing this module forces both the generative
@@ -31,10 +32,7 @@ historicalClosureCoordinateRegression =
   G.heliumLikeZ , (G.neonLikeZ , G.argonLikeZ)
 
 closedValenceRegression :
-  G.valenceClass
-    DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact.closedValencePattern
-  ≡
-  DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact.nobleLikeClass
+  G.valenceClass V.closedValencePattern ≡ V.nobleLikeClass
 closedValenceRegression = G.closedValenceIsNobleLike
 
 nonPromotionRegression :
