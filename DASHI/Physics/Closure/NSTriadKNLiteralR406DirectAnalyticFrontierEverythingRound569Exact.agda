@@ -3,56 +3,30 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 ------------------------------------------------------------------------
 -- ROUND569 / FOCUSED EXTENSION OF THE R505 DIRECT TERMINAL CONE
 --
--- R505 remains the large historical aggregate.  This smaller extension freezes
--- the current direct analytic frontier without rewriting that history again.
+-- The inward BIDI through R591 remains useful producer archaeology:
+--   R585 exact LH/HL inner symmetry;
+--   R586 the same symmetry after the actual R145 outer slot map;
+--   R587 three independent live class-norm coordinates, not four;
+--   R588 historical R434 only through an exact live R440 same-object weld;
+--   R589 eliminates the opaque R434-decomposition producer socket;
+--   R590 packages the exact live partition + three R284 region payments as one
+--        optional physical producer rather than four independent scheduler debts;
+--   R591 removes duplicated R572 sign receipts on the optional temporal route.
 --
--- The reconciled direct route contains the modern R568 commutator consumer,
--- R570's bridge into the canonical historical factored-full consumer, the
--- self-flux endpoint/tangent/order reductions, and R572's direct R503 compiler.
+-- R592 performs the decisive least-privilege correction: none of the
+-- critical-cone/Bony/Schur or temporal-commutator/FTC routes are mandatory.
+-- R496-R500 already construct the exact live direct off-diagonal nonseparable
+-- resolvent companion and R503 consumes precisely one analytic theorem:
 --
--- The nested inward BIDI is now also integrated:
+--   forall N,T, 4 * integratedDirectCompanion(N,T) <= B(T),
 --
---   R571  raw inner pair = four exact helical multiplier-difference channels;
---   R572N complete inner fibre pushes those four channels through the outer slot;
---   R573N actual weighted R294 commutator reaches that nested carrier pre-norm;
---   R574  every one of the four channels has the R178 low-output cell bound;
---   R575  the FOUR component majorants collapse exactly by helical Pythagoras;
---   R576  fixed four-channel Gram interference costs only the universal factor 4,
---         giving a 36 |k|^2 E_p E_q bound for one literal fourSignInner cell;
---   R577G welds those actual cells to R180's exact signed finite Gram ledger;
---   R578  on a common output, the positive cell-mass part factors exactly as
---         36 |k|^2 times the finite input-energy convolution;
---   R579  instantiates that statement on the literal physicalOutputFiber;
---   R580  refines the single signed Gram residual into four quantitative Bony
---         class residuals and proves those payments suffice with fixed factor 4;
---   R581  constructs the exact finite routing receipt by zero-masked pointwise
---         Bony channels and the existing foldPointwiseAdd theorem;
---   R582  proves any class norm/operator budget automatically upper-bounds the
---         corresponding Gram residual, so a direct covariance theorem is not
---         mandatory;
---   R583  removes even that intermediate Gram representation when the producer
---         already lands in class norms: four literal class norm ceilings compile
---         directly to the routed fourSignInner norm with the same fixed factor 4;
---   R584  instantiates that direct class-norm compiler on R573's ACTUAL nested
---         slot-transformed inner cells, so the remaining class estimates are
---         stated on the same object consumed by the modern commutator lane.
+-- with B independent of N.
 --
--- Separately, R577B reconciles the historical R328/R329 nested Schur producer
--- with the MODERN R568 consumer.  It correctly keeps four receipts distinct:
--- row, column, signed-response majorization, and cutoff-uniform Schur envelope.
---
--- The introspective result is therefore sharper than an opaque "commutator
--- estimate".  After R584 neither helicity expansion, positive convolution,
--- literal enumeration, Bony routing, direct covariance control, nor an
--- inner-vs-outer-slot carrier mismatch is a mandatory analytic residual.  The
--- preferred within-fibre target is now a cutoff-uniform norm/operator budget on
--- the literal zero-masked Bony classes AFTER the actual R145 outer slot map.
--- Existing Schur/Young/operator machinery may pay those norms directly.  The
--- outer R294 weight and spectator-weighted spacetime passage remain downstream.
---
--- Ordinary scalar FTC/order and initial-energy endpoint calibration remain
--- separately typed standard/source-realization coordinates.  Nothing in this
--- aggregate asserts analytic payment or Clay closure.
+-- The temporal-priority ledger now records first source implementation
+-- separately from type-check/kernel/publication status.  The global A/B/C/D
+-- owner keeps Clay's any-one criterion distinct from DASHI's stronger all-four
+-- research mission.  Neither chronology nor external C/D source status pays a
+-- missing internal theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -84,6 +58,16 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact
 import DASHI.Physics.Closure.NSTriadKNClassNormBudgetToBonyGramPaymentRound582Exact
 import DASHI.Physics.Closure.NSTriadKNDirectBonyClassNormCompilerRound583Exact
 import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyClassNormBidiRound584Exact
+import DASHI.Physics.Closure.NSTriadKNFourSignInnerBonyLHHLNormSymmetryRound585Exact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyLHHLNormSymmetryRound586Exact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact
+import DASHI.Physics.Closure.NSTriadKNModernCriticalConeSameObjectBidiRound588Exact
+import DASHI.Physics.Closure.NSTriadKNLiveCriticalConePaymentCompilerRound589Exact
+import DASHI.Physics.Closure.NSTriadKNLiveCriticalConeRegionPaymentRound590Exact
+import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact
+import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact as R592
+import DASHI.Physics.Closure.NSFirstImplementationPriorityLedgerExact as Priority
+import DASHI.Physics.Closure.NSGlobalFourAlternativeMissionExact as Global4
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -112,23 +96,75 @@ round569DirectClassNormCompilerIntegrated = true
 round569LiveNestedSlotClassNormBidiIntegrated : Bool
 round569LiveNestedSlotClassNormBidiIntegrated = true
 
+round569LiveInnerLHHLNormSymmetryIntegrated : Bool
+round569LiveInnerLHHLNormSymmetryIntegrated = true
+
+round569LiveNestedSlotLHHLNormSymmetryIntegrated : Bool
+round569LiveNestedSlotLHHLNormSymmetryIntegrated = true
+
+round569ThreeClassNormConsumerIntegrated : Bool
+round569ThreeClassNormConsumerIntegrated = true
+
+round569HistoricalCriticalConeSignedBidiIntegrated : Bool
+round569HistoricalCriticalConeSignedBidiIntegrated = true
+
+round569LiveCriticalConeMinimalWeldCompilerIntegrated : Bool
+round569LiveCriticalConeMinimalWeldCompilerIntegrated = true
+
+round569LiveCriticalConeRegionPaymentIntegrated : Bool
+round569LiveCriticalConeRegionPaymentIntegrated = true
+
+round569DirectTemporalLeastPrivilegeIntegrated : Bool
+round569DirectTemporalLeastPrivilegeIntegrated = true
+
+round569CanonicalDirectR503FrontierIntegrated : Bool
+round569CanonicalDirectR503FrontierIntegrated = true
+
+round569FirstImplementationPriorityLedgerIntegrated : Bool
+round569FirstImplementationPriorityLedgerIntegrated = true
+
+round569GlobalFourAlternativeMissionIntegrated : Bool
+round569GlobalFourAlternativeMissionIntegrated =
+  Global4.roundGlobalFourAlternativeMissionImplemented
+
+round569R503ConsumerPredatesSeptember8Release : Bool
+round569R503ConsumerPredatesSeptember8Release =
+  Priority.r503ConsumerWasInSourceBeforePublicSeptember8Release
+
+round569R587AbsoluteNormRouteMandatory : Bool
+round569R587AbsoluteNormRouteMandatory = false
+
+round569CriticalConeOrBonyRouteMandatory : Bool
+round569CriticalConeOrBonyRouteMandatory =
+  R592.round592CriticalConeOrBonyRouteMandatory
+
+round569TemporalCommutatorFTCRouteMandatory : Bool
+round569TemporalCommutatorFTCRouteMandatory =
+  R592.round592TemporalCommutatorFTCRouteMandatory
+
+round569LaplaceRouteMandatory : Bool
+round569LaplaceRouteMandatory = R592.round592LaplaceMandatory
+
+round569CanonicalLeafAIsSingleDirectR503Budget : Bool
+round569CanonicalLeafAIsSingleDirectR503Budget =
+  R592.round592CanonicalLeafAIsSingleDirectOffDiagonalBudget
+
+round569CanonicalDirectR503BudgetClosed : Bool
+round569CanonicalDirectR503BudgetClosed = R592.round592CanonicalLeafAClosed
+
+round569GlobalAllFourInternallyPaid : Bool
+round569GlobalAllFourInternallyPaid = Global4.roundGlobalAllFourInternallyPaid
+
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
 
-round569NovelCommutatorSpacetimeBudgetClosed : Bool
-round569NovelCommutatorSpacetimeBudgetClosed = false
-
-round569VariableFibreSignedGramResidualClosed : Bool
-round569VariableFibreSignedGramResidualClosed = false
-
-round569ClasswiseSignedGramResidualsClosed : Bool
-round569ClasswiseSignedGramResidualsClosed = false
-
-round569LiteralNestedSlotClassNormBudgetsClosed : Bool
-round569LiteralNestedSlotClassNormBudgetsClosed = false
-
-round569OuterWeightSpectatorSpacetimeClosed : Bool
-round569OuterWeightSpectatorSpacetimeClosed = false
-
 round569ClayPromotion : Bool
 round569ClayPromotion = false
+
+round569R503ConsumerPredatesSeptember8ReleaseIsTrue :
+  round569R503ConsumerPredatesSeptember8Release ≡ true
+round569R503ConsumerPredatesSeptember8ReleaseIsTrue = refl
+
+round569GlobalAllFourInternallyPaidIsFalse :
+  round569GlobalAllFourInternallyPaid ≡ false
+round569GlobalAllFourInternallyPaidIsFalse = refl
