@@ -172,6 +172,39 @@ canonicalReleasePolicyVersionState = release-policy-version-state
   "NASA Form NF-1676"
   true false true false true
 
+------------------------------------------------------------------------
+-- Archival pairing obligation.
+--
+-- NPR 2200.2E requires Center STRIVES representatives to track, file and
+-- transfer the NF-1676 together with its associated STI after approval.  It
+-- also requires the Center to ensure that NASA STI Program receives STI and
+-- corresponding NF-1676 forms before Center retention disposal.  This is a
+-- strong route/custody obligation, but it still does not prove that the exact
+-- historical POAMS form remains extant or that its identifier is public.
+------------------------------------------------------------------------
+
+record ApprovalArchivalPairingState : Set where
+  constructor approval-archival-pairing-state
+  field
+    policySource : String
+    pairedObjects : String
+    centerTracksFilesAndTransfersPair : Bool
+    nasaSTIReceivesCorrespondingFormsBeforeCenterDisposal : Bool
+    policySupportsPairedArchivalSearch : Bool
+    policyProvesExactPOAMSFormCurrentlyExtant : Bool
+    policyProvesPublicIdentifierExposure : Bool
+    policyProvesAmySameObject : Bool
+    acquisitionConsequence : String
+
+open ApprovalArchivalPairingState public
+
+poamsApprovalArchivalPairing : ApprovalArchivalPairingState
+poamsApprovalArchivalPairing = approval-archival-pairing-state
+  "NPR 2200.2E, Center STI Manager and Center STRIVES Representative responsibilities"
+  "approved NF-1676 plus associated STI object/version"
+  true true true false false false
+  "request the paired approval-and-STI archival crosswalk for NASA/TM-20205010911 from STI Compliance and Distribution Services / the MSFC STRIVES lineage: NF-1676/STRIVES record identity, disposition, approver/routing chronology, exact associated STI attachment/version, and any migrated legacy EDAA lineage; only after that compare the recovered reviewed object with the independently reported Amy review object"
+
 record ReleaseSystemBoundary : Set where
   constructor release-system-boundary
   field
