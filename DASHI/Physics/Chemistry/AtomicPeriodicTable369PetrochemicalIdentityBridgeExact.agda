@@ -122,21 +122,13 @@ chlorAlkaliRepoSource =
     "primary repo-native exact stoichiometric half-reaction object"
 
 ------------------------------------------------------------------------
--- Exact repo-native electron multiplicity is preserved from the existing
--- canonical half-reaction pair.  This is a bookkeeping weld only.
+-- Exact repo-native stoichiometric receipt is reused wholesale rather than
+-- reproving equality of equality proofs.  Its own fields carry the exact
+-- two-electron multiplicities at anode and cathode.
 ------------------------------------------------------------------------
 
-chlorAlkaliAnodeElectronMultiplicityIsTwo :
-  Half.CanonicalHalfReactionPair.anodeElectronMultiplicity
-    Half.canonicalHalfReactionPairReceipt
-  ≡ refl
-chlorAlkaliAnodeElectronMultiplicityIsTwo = refl
-
-chlorAlkaliCathodeElectronMultiplicityIsTwo :
-  Half.CanonicalHalfReactionPair.cathodeElectronMultiplicity
-    Half.canonicalHalfReactionPairReceipt
-  ≡ refl
-chlorAlkaliCathodeElectronMultiplicityIsTwo = refl
+chlorAlkaliHalfReactionPair : Half.CanonicalHalfReactionPair
+chlorAlkaliHalfReactionPair = Half.canonicalHalfReactionPairReceipt
 
 ------------------------------------------------------------------------
 -- Concrete industrial chain already owned elsewhere.
