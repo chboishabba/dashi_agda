@@ -14,13 +14,14 @@ import DASHI.Interop.SLRC029WorldConstraintFibreBridgeExact as World
 import DASHI.Interop.SLRReviewPromoteAbstainConsumerExact as Review
 import DASHI.Interop.SLRClaimFragmentProjectionExact as Fragment
 import DASHI.Interop.SLRClaimFragmentResidualInheritanceExact as FragmentResidual
+import DASHI.Interop.SLRFragmentEvidenceContractionExact as FragmentContraction
 
 ------------------------------------------------------------------------
 -- Validation-to-roadmap promotion.
 --
--- Runtime validation pays carrier/execution parity. It does not silently pay
--- gold semantic dimensions, world truth, canonical claim truth, or consumer
--- adequacy. Existing owners remain authoritative for those obligations.
+-- Runtime validation pays only the receipt it actually observed.  Implemented
+-- contraction/review machinery remains distinct from a later runtime receipt
+-- and from empirical consumer adequacy or claim truth.
 ------------------------------------------------------------------------
 
 data PromotedRoadmapState : Set where
@@ -63,14 +64,24 @@ currentSLRValidationRoadmap =
     "path adjacency does not by itself pay whole-claim source extent"
   ∷ promotedRoadmapCoordinate
     "claim-local fragment projection"
-    partial
-    "SLRClaimFragmentProjectionExact / slr-claim-fragment-projection-v1"
-    "dedicated runtime receipt pending; whole canonical claim extent remains unpaid"
+    paid
+    "validated: 5 fragments / 4 claim-local / 1 intermediate; SLRClaimFragmentProjectionExact formal check green"
+    "whole canonical claim extent remains unpaid"
   ∷ promotedRoadmapCoordinate
     "claim-local fragment residual inheritance"
-    partial
-    "SLRClaimFragmentResidualInheritanceExact / slr-claim-fragment-residual-inheritance-v1"
-    "dedicated runtime receipt pending; inherited consumer debt does not promote claim truth"
+    paid
+    "validated: 10 inherited obligations; intermediate fragment inherits none"
+    "inherited consumer debt does not promote claim truth"
+  ∷ promotedRoadmapCoordinate
+    "fragment source/attribution evidence contraction"
+    paid
+    "slr-fragment-evidence-contraction-v1: attribution_source_paid=4; fragment provenance and whole extent preserved"
+    "consumer-specific policy obligations remain open"
+  ∷ promotedRoadmapCoordinate
+    "fragment consumer-obligation payment + review recomputation"
+    active
+    "SLRFragmentEvidenceContractionExact / slr-fragment-evidence-contraction-v2 implemented"
+    "execute v2 loop; current tracked receipts are intentionally partial/non-paying, so C029 classifier debt should remain"
   ∷ promotedRoadmapCoordinate
     "world-constraint fibre integration"
     partial
@@ -80,12 +91,12 @@ currentSLRValidationRoadmap =
     "review/promote/abstain routing"
     paid
     "SLRReviewPromoteAbstainConsumerExact / slr-review-disposition-v1"
-    "current C029 candidate correctly abstains because residual remains open"
+    "review now follows derived current residual/adequacy rather than a hard-coded classifier residual"
   ∷ promotedRoadmapCoordinate
     "canonical claim/evidence projection"
     partial
     "SLRCanonicalClaimProjectionExact / slr-canonical-claim-projection-v2: historical explicit sentence mappings plus same-source unique-phrase/offset exact-subspan refinement"
-    "execute v2 projection against tracked ABC primary source; claim truth remains separately unpromoted"
+    "claim truth remains separately unpromoted"
   ∷ promotedRoadmapCoordinate
     "Brexit narrative benchmark"
     blockedByMissingSource
@@ -108,6 +119,9 @@ record ValidationPromotionBoundary : Set where
     claimFragmentProjectionRuntimeCertified : Bool
     fragmentResidualInheritanceImplemented : Bool
     fragmentResidualInheritanceRuntimeCertified : Bool
+    fragmentAttributionContractionRuntimeCertified : Bool
+    fragmentObligationContractionImplemented : Bool
+    fragmentObligationContractionRuntimeCertified : Bool
     canonicalClaimTruthPaid : Bool
     brexitNarrativeBenchmarkPaid : Bool
 
@@ -119,8 +133,9 @@ canonicalValidationPromotionBoundary =
     true true true true
     false false
     true false
-    true false
-    true false
+    true true
+    true true
+    true true false
     false false
 
 ------------------------------------------------------------------------
@@ -132,6 +147,7 @@ data CarrierParityPaysClaimIdentity : Set where
 data ClaimProjectionImplementationPaysRuntimeCertification : Set where
 data FragmentProjectionImplementationPaysRuntimeCertification : Set where
 data FragmentResidualInheritancePaysRuntimeCertification : Set where
+data FragmentObligationImplementationPaysRuntimeCertification : Set where
 data CanonicalClaimProjectionPaysClaimTruth : Set where
 data ReviewRouterImplementationPaysConsumerAdequacy : Set where
 data CurrentAbstentionMeansClaimFalse : Set where
@@ -154,6 +170,10 @@ fragmentImplementationDoesNotPayRuntime ()
 fragmentResidualImplementationDoesNotPayRuntime :
   FragmentResidualInheritancePaysRuntimeCertification → ⊥
 fragmentResidualImplementationDoesNotPayRuntime ()
+
+fragmentObligationImplementationDoesNotPayRuntime :
+  FragmentObligationImplementationPaysRuntimeCertification → ⊥
+fragmentObligationImplementationDoesNotPayRuntime ()
 
 projectionDoesNotPayClaimTruth : CanonicalClaimProjectionPaysClaimTruth → ⊥
 projectionDoesNotPayClaimTruth ()
@@ -192,3 +212,6 @@ fragmentAnchor = Fragment.canonicalClaimFragmentProjectionBoundary
 
 fragmentResidualAnchor : FragmentResidual.FragmentResidualRuntimeBoundary
 fragmentResidualAnchor = FragmentResidual.canonicalFragmentResidualRuntimeBoundary
+
+fragmentContractionAnchor : FragmentContraction.FragmentEvidenceContractionBoundary
+fragmentContractionAnchor = FragmentContraction.canonicalFragmentEvidenceContractionBoundary
