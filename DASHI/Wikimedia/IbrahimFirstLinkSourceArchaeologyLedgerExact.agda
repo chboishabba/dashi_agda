@@ -74,11 +74,11 @@ storyLabCodeData = ibrahim-source-manifestation
   "Mark Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds / Computational Story Lab"
   "Connecting Every Bit of Knowledge: Explore the paper"
   "author-hosted project page"
-  "UVM Computational Story Lab paper/code/data page"
-  "primary author-hosted project surface"
+  "UVM Computational Story Lab paper/code/data page; github.com/marksibrahim/wikipedia_network"
+  "primary author-hosted project/code/data surface"
   "004 Computer science / data processing"
   "Christopher M. Danforth Q89437200; Peter Sheridan Dodds Q42772652; Mark Ibrahim unresolvedQid"
-  "Provides a primary route to paper/code/data artifacts and is useful for historical-snapshot recovery. Hosting does not prove identity with every later mirror or regenerated dataset."
+  "Provides primary routes to the 505 MB FLN map, traversal-visit/path-length/funnel JSONs and producer code. Hosting does not prove identity with every later mirror or regenerated dataset."
 
 currentEnglishSnapshot : IbrahimSourceManifestation
 currentEnglishSnapshot = ibrahim-source-manifestation
@@ -91,6 +91,45 @@ currentEnglishSnapshot = ibrahim-source-manifestation
   "000 Computer science, information & general works / domain-specific child Dewey coordinates downstream"
   "per-probe verified QIDs; unresolved values remain unresolved"
   "A new empirical consumer of the Ibrahim method. It is revision-sensitive and is not a manifestation of the 2016/2017 dataset."
+
+------------------------------------------------------------------------
+-- PRODUCER-REPOSITORY INPUT ARCHAEOLOGY
+--
+-- The author's repository itself currently carries two incompatible date cues
+-- for the source English-Wikipedia dump.  code/readme.md says an
+-- `enwiki2015--.xml` dump; first_link_txt.py comments point to the concrete
+-- Wikimedia dump URL enwiki/20141008/.  Neither cue is silently preferred.
+-- The parser code, however, does pay the extraction policy actually encoded in
+-- that artifact: ignore links inside templates, parentheses, ref/div tags and
+-- non-article namespaces; then return the first qualifying outermost wikilink.
+------------------------------------------------------------------------
+
+record HistoricalInputArchaeology : Set where
+  constructor historical-input-archaeology
+  field
+    producerRepository : String
+    readmeDumpCue : String
+    parserDumpCue : String
+    exactHistoricalDumpDateReconciled : Bool
+    parserPolicyRecovered : Bool
+    parserPolicy : String
+    fullHistoricalFLNAvailable : Bool
+    historicalEdgeIdentityPaidForCurrentProbes : Bool
+    nextDiscriminator : String
+
+open HistoricalInputArchaeology public
+
+canonicalHistoricalInputArchaeology : HistoricalInputArchaeology
+canonicalHistoricalInputArchaeology = historical-input-archaeology
+  "marksibrahim/wikipedia_network"
+  "code/readme.md: enwiki2015--.xml (date truncated/underspecified)"
+  "code/first_link_txt.py: https://dumps.wikimedia.org/enwiki/20141008/"
+  false
+  true
+  "parse article body; ignore templates, parentheses, <ref>, <div>, nested/non-article namespace links; return first qualifying outermost [[wikilink]] destination"
+  true
+  false
+  "reconcile dump revision from paper/writeup/repository history or inspect the author-hosted FLN artifact metadata; only then compare targeted historical edges with the 2026 probes"
 
 ------------------------------------------------------------------------
 -- Semantic-coordinate payments recovered by the current audit.
@@ -129,10 +168,12 @@ record IbrahimSourceArchaeologyBoundary : Set where
     qidCreatesHistoricalEdgeIdentity : Bool
     deweyCreatesSourceAuthority : Bool
     traversalFunnelRankCreatesEpistemicAuthority : Bool
+    readmeDumpCueOverridesParserDumpCue : Bool
+    parserDumpCueOverridesReadmeDumpCue : Bool
     sourceManifestationsMayGuideHistoricalRecovery : Bool
 
 open IbrahimSourceArchaeologyBoundary public
 
 canonicalIbrahimSourceArchaeologyBoundary : IbrahimSourceArchaeologyBoundary
 canonicalIbrahimSourceArchaeologyBoundary = ibrahim-source-archaeology-boundary
-  false false false false false false false true
+  false false false false false false false false false true
