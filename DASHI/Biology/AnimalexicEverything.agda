@@ -21,6 +21,8 @@ open import DASHI.Biology.DrosophilaConnectomeFunctionalEffectorStateSpaceVisual
 open import DASHI.Biology.BioacousticAnimalexicTrajectoryBridgeExact
 open import DASHI.Biology.BioacousticAreseSharedManifoldProducerExact
 open import DASHI.Biology.DrosophilaGautheyFunctionalTrajectoryProducerExact
+open import DASHI.Biology.BioacousticFlySnowballParetoBidiExact
+open import DASHI.Biology.DrosophilaGautheyROIIdentityRecoveryBidiExact
 open import DASHI.Core.SufficientSupportFamilyInvalidationExact
 open import DASHI.Core.ProvenanceClosureIndependenceExact
 open import DASHI.Core.ExperimentLanguageEquivalenceExact
