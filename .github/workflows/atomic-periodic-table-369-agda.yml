@@ -31,3 +31,5 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck atomic periodic-table 369 validation root
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369Validation.agda
+      - name: Typecheck Madelung physical-source snowball owner
+        run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369MadelungPhysicalSourceSnowballExact.agda
