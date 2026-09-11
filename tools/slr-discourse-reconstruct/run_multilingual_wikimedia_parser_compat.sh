@@ -4,7 +4,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 HANDOFF_ROOT="${1:-/tmp/slr-validation-20260911}"
 OUT_DIR="${2:-$HANDOFF_ROOT/gwb-world}"
-LANGUAGES="${3:-en,es,fr,de}"
+LANGUAGES="${3:-en,es,fr,de,simple}"
 GRAPH="$OUT_DIR/gwb-wikimedia-world-graph.json"
 CACHE_DIR="$OUT_DIR/multilingual-wikimedia-http-cache"
 OUTPUT="$OUT_DIR/gwb-multilingual-wikimedia-parser-compat.json"
@@ -30,6 +30,7 @@ grep -q 'schema=slr-multilingual-wikimedia-parser-compat-v1' "$ERR" || {
 grep -q 'same_qid_identity=true' "$ERR" || { echo 'ERROR: shared-QID language identity not retained' >&2; exit 1; }
 grep -q 'translation_equivalence=false' "$ERR" || { echo 'ERROR: same-QID surface promoted to translation equivalence' >&2; exit 1; }
 grep -q 'semantic_equivalence=false' "$ERR" || { echo 'ERROR: parser compatibility promoted semantic equivalence' >&2; exit 1; }
+grep -q 'simplewiki_subset_assumed=false' "$ERR" || { echo 'ERROR: simplewiki was treated as an automatic subset/translation of enwiki' >&2; exit 1; }
 
 python3 - "$OUTPUT" <<'PY'
 import json, sys
@@ -37,16 +38,19 @@ m = json.load(open(sys.argv[1], encoding='utf-8'))
 assert m['same_qid_pays_cross_language_identity'] is True
 assert m['same_qid_pays_translation_equivalence'] is False
 assert m['parser_schema_compatibility_pays_semantic_equivalence'] is False
+assert m['simplewiki_is_presumed_subset_of_enwiki'] is False
 assert m['candidate_only'] is True
 assert m['semantic_promotion'] is False
 assert m['summary']['language_surfaces'] > 0
 print(
     'SLR_MULTILINGUAL_WIKIMEDIA_PARSER_COMPAT_VALIDATION '
     f"qids={m['summary']['qids']} language_surfaces={m['summary']['language_surfaces']} "
+    f"simplewiki_surfaces={m['summary']['simplewiki_surfaces']} "
     f"shared_qid_identity_pairs={m['summary']['shared_qid_identity_pairs']} "
     f"trained_parser_surfaces={m['summary']['trained_parser_surfaces']} "
     f"fallback_parser_surfaces={m['summary']['fallback_parser_surfaces']} "
-    'translation_equivalence=false semantic_equivalence=false candidate_only=true semantic_promotion=false'
+    'translation_equivalence=false semantic_equivalence=false simplewiki_subset_assumed=false '
+    'candidate_only=true semantic_promotion=false'
 )
 PY
 
