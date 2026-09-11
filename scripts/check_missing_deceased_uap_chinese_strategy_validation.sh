@@ -17,6 +17,10 @@ grep -q 'zhangDaibing' DASHI/Culture/ChineseStrategicScientistRosterSnowballExac
 grep -q 'fangDaining' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
 grep -q 'yanHong' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
 grep -q 'ninthNamedCaseDoesNotCreateTenth' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'record RosterCardinalityClaim' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'newsNationAtLeastTenClaim' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'enumeratedNineClaim' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'tenthIdentityUnresolved' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
 
 grep -q 'ActiveMechanicalMetamaterialScience' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
 grep -q 'phaseTransition' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
@@ -43,6 +47,7 @@ grep -q 'gamePayoffDoesNotBecomeEvidence' DASHI/Culture/MissingDeceasedGameTheor
 
 grep -q 'Chinese strategic scientist acquisition' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'UAP/adversarial discriminator' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'Chinese roster-cardinality resolution' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 
 grep -q 'MissingDeceasedTernaryAdversarialObserverExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'ChineseStrategicScientistRosterSnowballExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
