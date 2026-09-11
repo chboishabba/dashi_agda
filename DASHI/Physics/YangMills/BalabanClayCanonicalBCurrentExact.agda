@@ -110,6 +110,13 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainWeldRound334Exact
 -- transcription/alignment plus literal physical observable -> CMP116 J meaning.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainSourceFactorRound335Exact
 
+-- R336 corrects one dependency overcount: once the unlocalized selected-T5 base
+-- exists, its proof-bearing LiteralTwoSourceInsertionMeaning is already carried
+-- as the `meaning` coordinate.  Constructing that base still requires the
+-- physical same-density source semantics; it is simply not charged again after
+-- the base has been built.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound336Exact
+
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
 -- historical donor classification only; it does not promote Step-V to a
