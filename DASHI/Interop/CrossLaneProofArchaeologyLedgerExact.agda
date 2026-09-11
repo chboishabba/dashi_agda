@@ -11,17 +11,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 -- Active archaeology focus: Yang-Mills + Riemann Hypothesis.
 -- NS / GR-QFT remain as continuity coordinates only.
 --
--- Search handles:
--- archaeology chronology snowball attribution primary DOI QID Dewey OEIS link
--- date commit same-object source consumer producer compiler Clay
--- YM Yang-Mills Jaffe Witten Balaban CMP98 CMP109 CMP116 CMP119 CMP122
--- CombinedRG density dictionary regular-E Round87 Round236 Round259 Round260
--- operator domain Kato Mosco Osterwalder Schrader Heat Doob clustering
--- RH Riemann Weil Aristotle pole quotient signed-off Gamma nearResponse
--- finiteNearSum reflection parity modulation cluster margin certificate Bishop
---
 -- RULES
--- * dates below are first-confirmed repository clocks, never origin claims;
+-- * dates are first-confirmed repository clocks, never origin claims;
 -- * acquisition order may differ from theorem-payment order;
 -- * primary source / DOI / QID / Dewey / OEIS / link / commit are distinct;
 -- * source identity and source authority do not manufacture theorem payment;
@@ -69,7 +60,7 @@ ymRouter : ClayLaneRouter
 ymRouter = clay-lane-router yangMills
   "Finish the Jaffe-Witten existence + mass-gap problem on one literal compact-simple continuum construction."
   "Whole-problem accounting remains the frozen Round87-89 four-row physical cutset A/B/C/D. Source archaeology runs on parallel clocks: Aug-13 complete-density->CombinedRG dictionary, Aug-31 ActiveSourceDiscriminator, Sep-09 R236, Sep-10 R259/R260, plus the Sep-06 operator/continuum audit."
-  "FIRST SOURCE LEAF: inhabit CompleteDensityCombinedRGDictionary by identifying the actual Sect.-2 density trajectory and its source form/bounds with the repository CombinedRG trajectory's coupling, boundary and polymer-norm predicates. SECOND: selected CMP119 regular-E/effective potential = exact BC1."
+  "FIRST SOURCE LEAF: inhabit CompleteDensityCombinedRGDictionary by identifying the actual Sect.-2 density trajectory and source form/bounds with the repository CombinedRG trajectory's coupling, boundary and polymer-norm predicates. SECOND: selected CMP119 regular-E/effective potential = exact BC1."
   "Dictionary->AdmissibleRGState transport is machine checked. CMP116/119/122 source theorems and regular-E facts are imported. Many later algebraic/functional-analysis compilers are already owned."
   "Snowball exact source clauses/equations for those three dictionary predicate maps. Only after that source identity is paid should proof search move to the BC1 selected-potential weld, Row-C same-density Heat/Doob identities, or the physical operator/continuum construction."
   "Published finite-cutoff UV stability is not continuum YM. Matching names is not a dictionary. Lean total-map/gap theorems are donors, not the physical partial-domain/self-adjoint continuum construction."
@@ -77,7 +68,7 @@ ymRouter = clay-lane-router yangMills
 rhRouter : ClayLaneRouter
 rhRouter = clay-lane-router riemannHypothesis
   "Exclude every high off-line zero on the actual universal pole-quotient response, then combine with the independent low/critical bridge."
-  "REPRESENTATION FIRST: inhabit the exact final universal-pole-quotient finite kernel/equality nearResponseAt(chosen J)=finiteNearSum(cellResponse). ANALYTIC FIRST LEAF AFTER THAT: target-normalized signed universal-pole-quotient off-ordinate allowance. SECOND LIVE ANALYTIC LEAF: same-taper Gamma precision."
+  "REPRESENTATION FIRST: inhabit the exact final universal-pole-quotient finite kernel/equality nearResponseAt(chosen J)=finiteNearSum(cellResponse). FIRST NEW ANALYTIC LEAF AFTER THAT: target-normalized signed universal-pole-quotient off-ordinate allowance. SECOND LIVE ANALYTIC LEAF: same-taper Gamma precision."
   "Quantitative cluster-margin mathematics is already checked-Lean-owned and exact final-taper attachment is downstream. The contradiction/allowance compiler is already owned."
   "Zeta23Bridge owns PoleQuotientClusterMargin.lean and PoleQuotientBudgetCircularity.lean; the Agda return reports an 8889-job build. It also reports a Gamma bound, but explicitly marks it too coarse. Generic target modulation/cosine and certificate arithmetic are compiled."
   "Search source/window/Lean owners for exact final-taper pole-quotient instantiation. In parallel mine signed/projected off-ordinate and Gamma-asymptotic donors by exact output shape. Reuse the checked cluster margin only after same-object final-taper attachment."
@@ -254,8 +245,7 @@ record ArchaeologyDiscipline : Set where
     attributionNotAuthority : Bool
     compressedNotClayPaid : Bool
 canonicalDiscipline : ArchaeologyDiscipline
-canonicalDiscipline = archaeology-discipline
-  true true true true true true true true true true true true true true true
+canonicalDiscipline = archaeology-discipline true true true true true true true true true true true true true true true
 
 record ProofCatalystDashboard : Set where
   constructor dashboard
