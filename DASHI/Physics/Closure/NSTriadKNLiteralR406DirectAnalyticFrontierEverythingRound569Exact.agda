@@ -37,6 +37,18 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 --         slot-transformed inner cells, so the remaining class estimates are
 --         stated on the same object consumed by the modern commutator lane.
 --
+-- 2026-09-11 20:46 AEST: two thin representation owners are also integrated:
+--
+--   OfficialPeriodicTorusCharacterIntegralExact
+--     selects the existing TorusCharacterIntegral interface from explicit
+--     standard-imported normalized Haar/exponential-character authority and
+--     reuses the machine-checked finite character/multiplier algebra;
+--
+--   R571HomochiralRadialIncrementSpecializationExact
+--     welds the R571 ++/-- curl-eigenvalue gaps on the rational carrier to
+--     R311's signed radial difference and Round27's signed radial multiplier
+--     commutator.  It introduces no analytic gain and no heterochiral promotion.
+--
 -- Separately, R577B reconciles the historical R328/R329 nested Schur producer
 -- with the MODERN R568 consumer.  It correctly keeps four receipts distinct:
 -- row, column, signed-response majorization, and cutoff-uniform Schur envelope.
@@ -84,6 +96,8 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact
 import DASHI.Physics.Closure.NSTriadKNClassNormBudgetToBonyGramPaymentRound582Exact
 import DASHI.Physics.Closure.NSTriadKNDirectBonyClassNormCompilerRound583Exact
 import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyClassNormBidiRound584Exact
+import DASHI.Physics.Closure.NSTriadKNOfficialPeriodicTorusCharacterIntegralExact
+import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -112,6 +126,12 @@ round569DirectClassNormCompilerIntegrated = true
 round569LiveNestedSlotClassNormBidiIntegrated : Bool
 round569LiveNestedSlotClassNormBidiIntegrated = true
 
+round569OfficialPeriodicTorusCharacterIntegralIntegrated : Bool
+round569OfficialPeriodicTorusCharacterIntegralIntegrated = true
+
+round569R571HomochiralRadialIncrementIntegrated : Bool
+round569R571HomochiralRadialIncrementIntegrated = true
+
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
 
@@ -129,6 +149,9 @@ round569LiteralNestedSlotClassNormBudgetsClosed = false
 
 round569OuterWeightSpectatorSpacetimeClosed : Bool
 round569OuterWeightSpectatorSpacetimeClosed = false
+
+round569RadialNearAnalyticGainClosed : Bool
+round569RadialNearAnalyticGainClosed = false
 
 round569ClayPromotion : Bool
 round569ClayPromotion = false
