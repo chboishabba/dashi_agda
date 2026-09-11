@@ -154,15 +154,15 @@ abc730GoldBenchmarkPlan =
     "specimens/9-sept-8-03pm-unlabelled/source.sha256"
     "specimens/abc730-2026-09-09-primary/source.sha256"
     "slr-discourse-spans-v4"
-    "pending: speaker-boundary precision"
-    "pending: speaker-boundary recall"
-    "pending: quote/nesting accuracy"
-    "pending: typed-role preservation accuracy"
-    "pending: false-cut rate"
-    "pending: hidden-speaker-splice recovery"
-    "pending: speaker uncertainty calibration"
-    "pending: residual-fibre width before/after source evidence"
-    "SLR_DISCOURSE_SPAN_INTEGRITY"
+    "abc730-gold-benchmark.json:speaker_boundary.precision_milli"
+    "abc730-gold-benchmark.json:speaker_boundary.recall_milli"
+    "not-scored: official speaker labels are not independent quote/nesting gold annotation"
+    "abc730-gold-benchmark.json:role_preservation.hard_speaker_role_preservation_milli"
+    "abc730-gold-benchmark.json:speaker_boundary.false_cut_rate_milli"
+    "abc730-gold-benchmark.json:hidden_splice.recovery_milli"
+    "coverage-only: abc730-gold-benchmark.json:hidden_splice.uncertainty_recall_on_hard_misses_milli"
+    "not-scored: requires aligned labelled-vs-unlabelled candidate fibres"
+    "SLR_DISCOURSE_SPAN_INTEGRITY / abc730-gold-benchmark.json:source_recoverability"
     false
 
 ------------------------------------------------------------------------
@@ -196,8 +196,8 @@ slrGlobalRoadmap =
   slrRoadmapCoordinate "typed role-transition admission" complete dashiOwner "SensibLawRoleTransitionManifoldExact" ∷
   slrRoadmapCoordinate "source-preserving span reconstruction" complete slrRuntimeOwner "slr-discourse-spans-v4" ∷
   slrRoadmapCoordinate "discourse-specific quality audit" complete dashiOwner "SensibLawDiscourseQualityAuditExact" ∷
-  slrRoadmapCoordinate "gold-labelled discourse benchmark" next slrRuntimeOwner "ABC730 labelled-vs-unlabelled benchmark" ∷
-  slrRoadmapCoordinate "full world-constraint fibre integration" active dashiOwner "WorldConstraintFibre" ∷
+  slrRoadmapCoordinate "gold-labelled discourse benchmark" partial slrRuntimeOwner "slr-abc-gold-benchmark-v1: explicit speaker-turn slice executable; quote/nesting and calibrated uncertainty remain open" ∷
+  slrRoadmapCoordinate "full world-constraint fibre integration" partial dashiOwner "slr-world-constraint-fibre-v1 attached append-only to CandidateWorldModel; domain/legal consumers remain open" ∷
   slrRoadmapCoordinate "claim/evidence graph projection" active sensibLawOwner "CandidateWorldModel claims+relations+provenance" ∷
   slrRoadmapCoordinate "mechanism evidence snowball" active dashiOwner "ABC730 Ibrahim/Snowball policy owners" ∷
   slrRoadmapCoordinate "policy/evaluative consumer" next sensibLawOwner "review/promote/abstain consumer" ∷
