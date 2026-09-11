@@ -15,7 +15,6 @@ import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Hyper
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
 import DASHI.Law.DisclosureReadyClassificationInputAtomExact as Atom
 import DASHI.Law.MaboCountrySecurityClassificationCrossPollinationExact as Mabo
-import DASHI.Policy.ABC730C029EvidenceRoadmapExact as Roadmap
 import DASHI.Policy.ABC730C029IbrahimSourceAtlasExact as Atlas
 import DASHI.Policy.ABC730AustralianOriginBaselineExact as Origin
 import DASHI.Policy.ABC730AustralianAdviceAcquisitionSnowballExact as Advice
@@ -27,16 +26,7 @@ import DASHI.Policy.ABC730SettlementTradeMeasurementGapExact as Measurement
 -- Purpose
 --
 -- Thin cross-pollination of the existing C029 lane with the repository's
--- legal/representation machinery.  This owner adds no new source authority.
--- It makes explicit why several already-acquired objects are valid objects but
--- the wrong type for particular consumers, why coarse administrative surfaces
--- cannot answer situated policy questions, and which hard gates must be paid
--- before cost/effect comparison or evaluative promotion is admissible.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- 1. Mabo / intersectionality: coarse administrative charts can erase exactly
--- the distinction the downstream legal/policy consumer needs.
+-- legal/representation machinery. This owner adds no new source authority.
 ------------------------------------------------------------------------
 
 data IsraeliOriginSituated : Set where
@@ -73,11 +63,6 @@ countryOriginCannotDetermineSettlementRestriction :
 countryOriginCannotDetermineSettlementRestriction =
   INF.witnessRulesOutEveryFlatFactorisation countryOriginErasesSettlementWitness
 
-------------------------------------------------------------------------
--- Affected-class flattening has the same problem. "Palestinian" does not
--- determine policy incidence when situated economic roles differ.
-------------------------------------------------------------------------
-
 data PalestinianSituatedRole : Set where
   settlementDependentWorker : PalestinianSituatedRole
   substitutingPalestinianProducer : PalestinianSituatedRole
@@ -112,12 +97,6 @@ palestinianLabelCannotDetermineNetIncidence :
 palestinianLabelCannotDetermineNetIncidence =
   INF.witnessRulesOutEveryFlatFactorisation palestinianClassErasesIncidenceWitness
 
-------------------------------------------------------------------------
--- 2. FactorsThrough / consumer sufficiency: a surface can be useful for one
--- query and still fail another. Country-level origin remains useful; it is not
--- settlement-origin sufficient.
-------------------------------------------------------------------------
-
 data OriginQuery : Set where
   countryIdentityQuery : OriginQuery
   settlementApplicabilityQuery : OriginQuery
@@ -142,7 +121,6 @@ countryIdentityFactors = QFS.factorsThrough quotient proof
   where
     quotient : CountryOriginSurface → OriginAnswer
     quotient israelCountryOrigin = israelAnswer
-
     proof :
       (s : IsraeliOriginSituated) →
       QFS.ask originQuestions countryIdentityQuery s ≡ quotient (countryOriginObserver s)
@@ -150,9 +128,8 @@ countryIdentityFactors = QFS.factorsThrough quotient proof
     proof settlementOrigin = refl
 
 ------------------------------------------------------------------------
--- 3. WrongType: valid evidence objects offered to the wrong indexed obligation.
--- This is an adapter to the repo's WrongType discipline, not a new global
--- WrongType ontology.
+-- WrongType adapter: a valid evidence object may still be offered to the wrong
+-- indexed consumer obligation.
 ------------------------------------------------------------------------
 
 data C029EvidenceObject : Set where
@@ -179,7 +156,6 @@ record C029WrongTypeReceipt : Set where
     candidateIsValidEvidenceObject : Bool
     satisfiesThisObligation : Bool
     residual : String
-
 open C029WrongTypeReceipt public
 
 ministerialStatementWrongForImpact : C029WrongTypeReceipt
@@ -217,8 +193,8 @@ wrongTypeTopologyAnchor =
   "DASHI.Interop.SensibLawOntologyTopology: interpretations are indexed by system/perspective/evidence and claims are not world records"
 
 ------------------------------------------------------------------------
--- 4. Atom / lineage: the missing Australian advice object must be atomised and
--- welded through the actual decision chain. Similar wording is insufficient.
+-- Atom / lineage: advice must be atomised and welded through the actual
+-- decision chain. Similar wording is insufficient.
 ------------------------------------------------------------------------
 
 data PolicyAdviceStage : Set where
@@ -237,7 +213,6 @@ record PolicyAdviceAtom : Set where
     createdAt : String
     closure : Atom.AtomClosure
     sourceReference : String
-
 open PolicyAdviceAtom public
 
 record PolicyAdviceTransport : Set where
@@ -248,7 +223,6 @@ record PolicyAdviceTransport : Set where
     toStage : PolicyAdviceStage
     transport : Atom.SemanticTransport
     transformationReference : String
-
 open PolicyAdviceTransport public
 
 record C029AdviceLineage : Set where
@@ -260,7 +234,6 @@ record C029AdviceLineage : Set where
     toDecision : PolicyAdviceTransport
     sameObjectLineageClosed : Bool
     sameObjectReference : String
-
 open C029AdviceLineage public
 
 openAdviceAtom : PolicyAdviceAtom
@@ -288,8 +261,8 @@ canonicalOpenAdviceLineage = c029AdviceLineage
   "public rationale cannot backfill the missing advice->brief->decision lineage"
 
 ------------------------------------------------------------------------
--- 5. Woogaroo-style cutset: authority, application, incidence and realised
--- outcome are distinct gates.  The shortest residual is explicit.
+-- Woogaroo-style cutset: source authority, application, incidence and realised
+-- outcome remain separate gates.
 ------------------------------------------------------------------------
 
 data C029CutsetResidual : Set where
@@ -313,7 +286,6 @@ record C029LegalEvidenceCutset : Set where
     israeliNetIncidencePaid : Bool
     comparativeCounterfactualPaid : Bool
     cutsetReference : String
-
 open C029LegalEvidenceCutset public
 
 firstC029Residual : C029LegalEvidenceCutset → C029CutsetResidual
@@ -341,8 +313,8 @@ currentFirstResidualIsSettlementClassifier :
 currentFirstResidualIsSettlementClassifier = refl
 
 ------------------------------------------------------------------------
--- 6. Admissible transitions: a downstream evaluative move is disabled, not
--- merely assigned low confidence, until prerequisite evidence states exist.
+-- Admissible transitions: downstream moves are disabled until prerequisite
+-- evidence states exist; disabled is not merely low-confidence.
 ------------------------------------------------------------------------
 
 data C029EvidenceState : Set where
@@ -393,9 +365,8 @@ c029AdmissibleTransitionSystem = Admissible.admissibleTransitionSystem
   "C029 evidence payment order: origin baseline -> settlement classifier -> incidence -> comparative instrument evidence -> evaluative aptness"
 
 ------------------------------------------------------------------------
--- 7. Fibre / hyperfabric: representations are judged against the exact
--- consumer. A compact country-only surface is neither admissible nor adequate
--- for the full C029 comparison merely because it is easy to describe.
+-- Fibre / hyperfabric: representations are consumer-indexed. A short/coarse
+-- representation cannot bypass admissibility or adequacy.
 ------------------------------------------------------------------------
 
 data C029Representation : Set where
@@ -451,7 +422,7 @@ countryOnlyCounterexample = Hyper.consumerCounterexample
   "countryOriginErasesSettlementWitness"
 
 ------------------------------------------------------------------------
--- 8. Explicit cross-domain boundaries.
+-- Explicit cross-domain boundaries.
 ------------------------------------------------------------------------
 
 data CountryOriginCapabilityProvesSettlementClassifier : Set where
@@ -482,8 +453,7 @@ cheapRepresentationCannotBypassAdmissibility : CheapRepresentationMayBypassAdmis
 cheapRepresentationCannotBypassAdmissibility ()
 
 ------------------------------------------------------------------------
--- Donor anchors: these guarantee this owner is cross-pollination/composition,
--- not a replacement for the authoritative generic machinery.
+-- Donor anchors.
 ------------------------------------------------------------------------
 
 intersectionalAnchor : INF.NonFactorabilityWitness countryOriginObserver settlementRestrictionOutcome
@@ -501,17 +471,14 @@ atomBoundaryAnchor = Atom.canonicalDisclosureAtomBoundary
 maboBoundaryAnchor : Mabo.SecurityCountryBoundary
 maboBoundaryAnchor = Mabo.canonicalSecurityCountryBoundary
 
-roadmapAnchor : Roadmap.C029RoadmapSummary
-roadmapAnchor = Roadmap.canonicalC029RoadmapSummary
-
 atlasAnchor : Atlas.AtlasBoundary
 atlasAnchor = Atlas.canonicalAtlasBoundary
 
 originAnchor : Origin.AustralianOriginCapabilityState
 originAnchor = Origin.canonicalAustralianOriginCapabilityState
 
-adviceAnchor : Advice.AustralianAdviceAcquisitionFrontier
-adviceAnchor = Advice.canonicalAustralianAdviceAcquisitionFrontier
+adviceTargetAnchor : Advice.AdviceTarget
+adviceTargetAnchor = Advice.dfatImpactAdviceTarget
 
 firmAnchor : Firm.FirmDestinationWorkerState
 firmAnchor = Firm.canonicalFirmDestinationWorkerState
