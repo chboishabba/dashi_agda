@@ -22,6 +22,11 @@ grep -q 'newsNationAtLeastTenClaim' DASHI/Culture/ChineseStrategicScientistRoste
 grep -q 'enumeratedNineClaim' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
 grep -q 'tenthIdentityUnresolved' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
 
+grep -q 'data YanHongFlowControlObject' DASHI/Physics/Aerospace/YanHongHypersonicFlowControlBidiExact.agda
+grep -q 'thermalExcitationMach5Receipt' DASHI/Physics/Aerospace/YanHongHypersonicFlowControlBidiExact.agda
+grep -q 'plasmaActuatorReviewReceipt' DASHI/Physics/Aerospace/YanHongHypersonicFlowControlBidiExact.agda
+grep -q 'eventWorkSamePersonWeld' DASHI/Physics/Aerospace/YanHongHypersonicFlowControlBidiExact.agda
+
 grep -q 'ActiveMechanicalMetamaterialScience' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
 grep -q 'phaseTransition' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
 grep -q 'metamaterialMeansExtraterrestrialMaterial' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
@@ -52,6 +57,7 @@ grep -q 'Chinese roster-cardinality resolution' DASHI/Culture/MissingDeceasedIbr
 grep -q 'MissingDeceasedTernaryAdversarialObserverExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'ChineseStrategicScientistRosterSnowballExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'YanHongHypersonicFlowControlBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'FangDainingActiveMechanicalMetamaterialBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'RezaFangAlloyMetamaterialDiscriminationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'FengYangheMilitaryAIGameStatisticsBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
