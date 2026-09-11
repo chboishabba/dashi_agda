@@ -18,12 +18,6 @@ import DASHI.ComputerScience.RSA260CompressionAwareSymmetryPortfolioExact as Por
 
 ------------------------------------------------------------------------
 -- CONSOLIDATED ROADMAP AFTER EXACT C3/V4 COMPRESSION CERTIFICATION
---
--- Conclusion payment remains acquisition-first.  The synthetic exact-kernel
--- portfolio now contains full-256, pair-128, C3-88, and V4-76 carriers.  The
--- raw 64-coordinate candidate remains outside the eligible stratum.  Next
--- portfolio work is measured replay/memory/communication cost, not further
--- semantic promotion by width alone.
 ------------------------------------------------------------------------
 
 priorRoadmap : Prior.ConsolidatedRSA260RoadmapBoundary
@@ -96,7 +90,6 @@ firstUnpaidAdaptiveProductionResidual : AdaptiveProductionResidual
 firstUnpaidAdaptiveProductionResidual = acquireProductionLAInput
 
 record AdaptiveHyperfabricProductionBoundary : Set where
-  constructor adaptive-hyperfabric-production-boundary
   field
     syntheticBlockWiedemannPaid : Bool
     syntheticGraphRefinementPaid : Bool
@@ -150,26 +143,63 @@ record AdaptiveHyperfabricProductionBoundary : Set where
 open AdaptiveHyperfabricProductionBoundary public
 
 currentAdaptiveHyperfabricProductionBoundary : AdaptiveHyperfabricProductionBoundary
-currentAdaptiveHyperfabricProductionBoundary =
-  adaptive-hyperfabric-production-boundary
-    true true true true true true true true
-    true true true true
-    true true
-    true true true true
-    true true true
-    true true true true
-    true true true true true
-    true true true
-    false
-    false false
-    false false false false false false false false false false false
+currentAdaptiveHyperfabricProductionBoundary = record
+  { syntheticBlockWiedemannPaid = true
+  ; syntheticGraphRefinementPaid = true
+  ; syntheticOneComponentGluingClosurePaid = true
+  ; syntheticMultiComponentConflictSelectionRepresented = true
+  ; recursivePadicRefinementPolicyRepresented = true
+  ; conflictVsCoRequirementDistinctionRepresented = true
+  ; largestClosedBatchSelectionRepresented = true
+  ; selectedBatchEquivarianceRepresented = true
+  ; sourceDiligencePolicyAttached = true
+  ; primaryColouringSourceAttributed = true
+  ; conceptQIDsRecordedWithoutPromotion = true
+  ; irrelevantOEISIdentifierRejected = true
+  ; localReducerCandidatesInferredFromNDimRefinement = true
+  ; genericCandidateInferenceFailsClosed = true
+  ; structuredC3CandidateInferencePaid = true
+  ; structuredC3ResidualTailRetained = true
+  ; structuredC3BothOrientationsChecked = true
+  ; structuredC3ExactBlobExecutionPaid = true
+  ; mixedC2C3C4ActionOrderInferencePaid = true
+  ; multiFibreS4ToV4DisambiguationPaid = true
+  ; candidateFamilyFrozenBeforeGlobalPayoff = true
+  ; degreePreservingSymmetryNullPaid = true
+  ; degreePreservingSymmetryNullExactBlobPaid = true
+  ; fullHyperfabricReInferenceInsideEachNullPaid = true
+  ; fullHyperfabricReInferenceExactBlobPaid = true
+  ; consumerRelativeCompressionLayerPaid = true
+  ; compressionAwarePortfolioRepresented = true
+  ; pairExactKernelCompressionEligible = true
+  ; c3ExactKernelCompressionEligible = true
+  ; v4ExactKernelCompressionEligible = true
+  ; exactPortfolioKernelCertificateBlobPaid = true
+  ; uncertifiedCandidatesRemainReopenable = true
+  ; operatorDerivedRequirementInferenceImplemented = true
+  ; observerDerivedConflictInferenceImplemented = true
+  ; dataDrivenClosedBatchSelectionImplemented = true
+  ; exactCandidateRuntimeBlobExecutionPaid = false
+  ; exactDataDrivenRuntimeBlobExecutionPaid = false
+  ; syntheticMeasuredCompressionCostsPaid = false
+  ; productionBytesPaid = false
+  ; productionRecursiveRefinementPaid = false
+  ; productionReducerHyperfabricPaid = false
+  ; productionCompressionPortfolioPaid = false
+  ; productionSymmetryNullPaid = false
+  ; productionQuotientDecisionPaid = false
+  ; productionCPUReplayPaid = false
+  ; productionLiftPaid = false
+  ; productionCUDAParityPaid = false
+  ; productionNCCLParityPaid = false
+  ; fullRSA260ReproductionPaid = false
+  }
 
 ------------------------------------------------------------------------
 -- Compression-aware portfolio insertion.
 ------------------------------------------------------------------------
 
 record CompressionRoadmapInsertionBoundary : Set where
-  constructor compression-roadmap-insertion-boundary
   field
     adequacyPrecedesCostRanking : Bool
     rawSmallestCarrierMayBeRejected : Bool
@@ -188,16 +218,28 @@ record CompressionRoadmapInsertionBoundary : Set where
 open CompressionRoadmapInsertionBoundary public
 
 canonicalCompressionRoadmapInsertionBoundary : CompressionRoadmapInsertionBoundary
-canonicalCompressionRoadmapInsertionBoundary =
-  compression-roadmap-insertion-boundary
-    true true false true false false true true true true true 76 true false
+canonicalCompressionRoadmapInsertionBoundary = record
+  { adequacyPrecedesCostRanking = true
+  ; rawSmallestCarrierMayBeRejected = true
+  ; largestSymmetryAutomaticallyWins = false
+  ; multiAxisCompressionCostsRetained = true
+  ; exactGF2KernelCurrentlyUsesApproximateMargin = false
+  ; compressionCanReplaceSameObjectAcquisition = false
+  ; syntheticPairQuotientProvidesAdequateCompressionSpecimen = true
+  ; c3ExactKernelCompressionPaid = true
+  ; v4ExactKernelCompressionPaid = true
+  ; exactPortfolioKernelCertificateBlobPaid = true
+  ; raw64CandidateStillIneligible = true
+  ; currentCheapestEligibleWidth = 76
+  ; currentCheapestEligibleIsV4x76 = true
+  ; productionCompressionRankingPaid = false
+  }
 
 ------------------------------------------------------------------------
 -- Operational order after bytes arrive.
 ------------------------------------------------------------------------
 
 record AdaptiveReplayPolicy : Set where
-  constructor adaptive-replay-policy
   field
     addAxisOnlyOnObservedGain : Bool
     inferCandidatesBeforeRequirements : Bool
@@ -221,15 +263,33 @@ record AdaptiveReplayPolicy : Set where
 open AdaptiveReplayPolicy public
 
 canonicalAdaptiveReplayPolicy : AdaptiveReplayPolicy
-canonicalAdaptiveReplayPolicy = adaptive-replay-policy
-  true true true true true true true true true true true true true true true true false true false
+canonicalAdaptiveReplayPolicy = record
+  { addAxisOnlyOnObservedGain = true
+  ; inferCandidatesBeforeRequirements = true
+  ; allowStructuredOrbitGeneratorsBeyondPairs = true
+  ; keepAlternativeGeneratorFibresSeparateUntilCompatibility = true
+  ; inferRequirementsBeforeOptimisingBatch = true
+  ; closeRequirementsBeforeInferringClosedComponentConflicts = true
+  ; conflictsRemainConsumerRelative = true
+  ; rejectBatchesContainingConflict = true
+  ; requireGlobalMPEqualsPM = true
+  ; requireObserverCovariance = true
+  ; requireExactKernelCertificateBeforeCompressionRanking = true
+  ; rankCompressionOnlyAfterConsumerAdequacy = true
+  ; retainUncertifiedCandidatesAsReopenable = true
+  ; retainNonconformingTailCoordinates = true
+  ; measureCostsBeforeProductionSelection = true
+  ; symmetryNullMayInformOptimisationConfidence = true
+  ; symmetryNullRequiredForCorrectFullWidthFallback = false
+  ; failedCandidateOrSymmetrySearchFallsBackToFullWidth = true
+  ; quotientReplayEliminatesUpstairsVerification = false
+  }
 
 ------------------------------------------------------------------------
 -- Snowball/source order is orthogonal to mathematical dependency order.
 ------------------------------------------------------------------------
 
 record RoadmapSourcePaymentBoundary : Set where
-  constructor roadmap-source-payment-boundary
   field
     sourceAcquisitionMaySnowballOutOfOrder : Bool
     conclusionPaymentMaySnowballOutOfOrder : Bool
@@ -242,8 +302,16 @@ record RoadmapSourcePaymentBoundary : Set where
 open RoadmapSourcePaymentBoundary public
 
 canonicalRoadmapSourcePaymentBoundary : RoadmapSourcePaymentBoundary
-canonicalRoadmapSourcePaymentBoundary = roadmap-source-payment-boundary
-  true false false false false false false false
+canonicalRoadmapSourcePaymentBoundary = record
+  { sourceAcquisitionMaySnowballOutOfOrder = true
+  ; conclusionPaymentMaySnowballOutOfOrder = false
+  ; DOIAlonePaysTheorem = false
+  ; QIDAlonePaysConceptApplicability = false
+  ; OEISRequiredWhenNoSequenceClaimExists = false
+  ; implementationIdentityPaysExecution = false
+  ; citedGroupTheorySourceCreatesRSAGroupAction = false
+  ; internalCrossRepoMethodSourceEqualsExternalPrimaryLiterature = false
+  }
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
