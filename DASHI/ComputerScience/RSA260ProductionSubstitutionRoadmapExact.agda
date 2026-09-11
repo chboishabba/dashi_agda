@@ -6,18 +6,18 @@ open import Data.Empty using (⊥)
 
 import DASHI.ComputerScience.RSA260KrylovKernelRecoveryExact as SyntheticLA
 import DASHI.ComputerScience.RSA260GNFSRunParameterArtifactSnowballExact as RunArtifact
+import DASHI.ComputerScience.RSA260ProductionArtifactSubstituteAdmissionExact as Substitute
 
 ------------------------------------------------------------------------
 -- RSA-260 PRODUCTION-SUBSTITUTION ROADMAP
 --
--- The synthetic CPU Block-Wiedemann-shaped ladder is now end-to-end through a
--- nonzero v with Mv=0.  The next conclusion-paying boundary is therefore not
--- another synthetic algorithmic layer.  It is substitution of the production
--- RSA-260 linear-algebra objects, followed by execution parity.
+-- The synthetic CPU Block-Wiedemann-shaped ladder is end-to-end through a
+-- nonzero v with Mv=0.  The next conclusion-paying boundary is substitution
+-- of a same-object RSA-260 LA artifact, followed by replay/parity.
 --
--- First-party observations below come from Eric Lu, "Factoring RSA-260",
--- Cognition, 2026-09-09, RSA-260 stage table / parameters.  They are retained
--- as source-paid run observables, not as acquired matrix/checkpoint bytes.
+-- A downstream artifact may pay a later entry depth without reconstructing
+-- earlier carriers.  Therefore matrix/prep, checkpoint, generator, mksol and
+-- gather artifacts are admitted by typed constraints rather than filename.
 ------------------------------------------------------------------------
 
 record ProductionLAObservation : Set where
@@ -65,10 +65,8 @@ rsa260ProductionLAObservation = production-la-observation
 ------------------------------------------------------------------------
 -- Acquisition/search state.
 --
--- A targeted public search on 2026-09-11 re-located the first-party writeup
--- but did not locate downloadable production matrix, Krylov checkpoint,
--- generator, partial-solution, or gathered-kernel-vector bytes.  Search miss
--- is not proof of nonexistence or non-publication elsewhere.
+-- Public execution-envelope coordinates are known.  Same-object bytes remain
+-- separately unpaid.  A search miss is not proof of artifact absence.
 ------------------------------------------------------------------------
 
 record ProductionArtifactAcquisitionState : Set where
@@ -90,7 +88,7 @@ currentProductionArtifactAcquisitionState = production-artifact-acquisition-stat
   false false false false false false false true false
 
 ------------------------------------------------------------------------
--- Prior boundaries retained rather than collapsed.
+-- Prior/admission boundaries retained rather than collapsed.
 ------------------------------------------------------------------------
 
 syntheticLABoundary : SyntheticLA.RSA260KrylovKernelRecoveryRoadmapBoundary
@@ -98,6 +96,9 @@ syntheticLABoundary = SyntheticLA.currentRSA260KrylovKernelRecoveryRoadmapBounda
 
 runArtifactBoundary : RunArtifact.RSA260RunParameterArtifactBoundary
 runArtifactBoundary = RunArtifact.canonicalRSA260RunParameterArtifactBoundary
+
+substituteAdmissionBoundary : Substitute.SubstituteAdmissionBoundary
+substituteAdmissionBoundary = Substitute.currentSubstituteAdmissionBoundary
 
 ------------------------------------------------------------------------
 -- Ordered residual router.
@@ -153,6 +154,7 @@ data SyntheticKernelImpliesProductionKernel : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 data CPUReferenceImpliesCUDAParity : Set where
 data CUDAParityImpliesNCCLParity : Set where
+data DownstreamArtifactImpliesEarlierCarrier : Set where
 
 authorReportedShapeDoesNotCreateBytes : ProductionShapeImpliesProductionBytes → ⊥
 authorReportedShapeDoesNotCreateBytes ()
@@ -168,3 +170,6 @@ cpuReferenceDoesNotCreateCUDAParity ()
 
 cudaParityDoesNotCreateNCCLParity : CUDAParityImpliesNCCLParity → ⊥
 cudaParityDoesNotCreateNCCLParity ()
+
+downstreamArtifactDoesNotCreateEarlierCarrier : DownstreamArtifactImpliesEarlierCarrier → ⊥
+downstreamArtifactDoesNotCreateEarlierCarrier ()
