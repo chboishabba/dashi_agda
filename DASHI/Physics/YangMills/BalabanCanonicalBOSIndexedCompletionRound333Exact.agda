@@ -30,7 +30,9 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact a
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
 import DASHI.Physics.YangMills.BalabanClayT5OS1RotationRestorationExact as OS1
+import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
 import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact as R310
+import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact as R311
 import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact as R315
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact as R330
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
@@ -147,8 +149,7 @@ pairwisePresentation :
     (application : CanonicalBOSIndexedApplication
       {PhysicalObservable = PhysicalObservable} {Loop = Loop}
       dataSet extension finite assembly reconstruction Energy) →
-  DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact.PhysicalPairwiseTimePresentation
-    dataSet extension finite
+  R304.PhysicalPairwiseTimePresentation dataSet extension finite
 pairwisePresentation application =
   R310.asPhysicalPairwiseTimePresentation
     (historicalSemantics application)
@@ -169,8 +170,7 @@ historicalTransfer :
     (application : CanonicalBOSIndexedApplication
       {PhysicalObservable = PhysicalObservable} {Loop = Loop}
       dataSet extension finite assembly reconstruction Energy) →
-  DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact.SameHamiltonianTransferCoordinate
-    (OS.Hamiltonian reconstruction) Energy
+  R311.SameHamiltonianTransferCoordinate (OS.Hamiltonian reconstruction) Energy
 historicalTransfer {reconstruction = reconstruction} application =
   R331.asHistoricalSameHamiltonianTransferCoordinate
     reconstruction (transferCoordinate application)
