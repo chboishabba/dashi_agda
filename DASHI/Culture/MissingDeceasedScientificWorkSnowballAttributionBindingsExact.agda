@@ -3,9 +3,10 @@ module DASHI.Culture.MissingDeceasedScientificWorkSnowballAttributionBindingsExa
 ------------------------------------------------------------------------
 -- COHORT SNOWBALL ATTRIBUTION BINDINGS
 --
--- Thin bindings only.  Citation authority lives in the source registries;
--- QID/Dewey semantics live in DashiKnowledgeTraversalFunnelExact.  This file
--- does not create another ontology or another evidence model.
+-- Thin bindings only.  Citation authority lives in the source registries and
+-- source-specific owners; QID/Dewey semantics live in
+-- DashiKnowledgeTraversalFunnelExact.  This file does not create another
+-- ontology or another evidence model.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -14,11 +15,26 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact as Base
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExtendedExact as Ext
+import DASHI.Culture.AmyEskridgePOAMSReviewObjectDisambiguationExact as Amy
 import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Traversal
 
 ------------------------------------------------------------------------
 -- Primary NASA / patent / publication objects.
 ------------------------------------------------------------------------
+
+amyPOAMSTMSnowballCoordinate : Ext.SnowballSourceCoordinate
+amyPOAMSTMSnowballCoordinate = Ext.snowball-source-coordinate
+  Amy.poamsPublicTMCitation
+  Ext.primaryGovernmentRecord
+  true
+  (Traversal.dashi-knowledge-coordinate
+    "DASHI/Culture/AmyEskridgePOAMSReviewObjectDisambiguationExact.agda"
+    "NASA MSFC public POAMS Technical Memorandum object; Amy review-object identity remains separate"
+    "530 Physics"
+    "unresolvedQid"
+    "NASA NTRS 20205010911; NASA/TM-20205010911; M-1531; NASA Subject Category 70; funding MSFC-RMB-QUANTUM-SAA8-1519855-1")
+  false true true
+  "Primary NASA receipt pays the public TM object and its named authors R.H. Eskridge, M.A. Nelson and M.P. Schoenfeld. Amy is not a named author; the coordinate does not weld her September-2020 review object to M-1531 or identify the Institute derivative. Funding-number namespace is not the dotted SAA annex namespace."
 
 leblancNTRSSnowballCoordinate : Ext.SnowballSourceCoordinate
 leblancNTRSSnowballCoordinate = Ext.snowball-source-coordinate
