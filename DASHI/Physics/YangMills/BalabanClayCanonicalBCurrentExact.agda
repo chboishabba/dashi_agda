@@ -81,13 +81,18 @@ import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact
 -- than maintaining a second independent mass-rate convention.
 import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact
 
--- R312 is the current six-coordinate B min-cut after consumer-first archaeology.
+-- R312 is the six-coordinate B min-cut after consumer-first archaeology.
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound312Exact
 
 -- R313 removes an extra downstream G1 payment: once the exact R295 presentation
 -- already carries magnitude(D^2_J log Z) <= shell and magnitude is rational
 -- absolute value, the R296 absolute shell field is equality transport.
 import DASHI.Physics.YangMills.BalabanDirectR295ToR296MagnitudeCompilerRound313Exact
+
+-- R314 keeps six coordinates but makes the canonical H1 theorem the literal
+-- R295 selected-two-J magnitude localization; R309 is retained as an optional
+-- source/applicability producer for constructing that payment.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound314Exact
 
 -- Older producer tactics retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
