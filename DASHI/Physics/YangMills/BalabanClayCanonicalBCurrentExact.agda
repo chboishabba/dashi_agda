@@ -89,6 +89,7 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedT5ApplicationRound3
 import DASHI.Physics.YangMills.BalabanModeSelectedOneSidedClusteringLimitExact
 import DASHI.Physics.YangMills.BalabanCMP116ModeSelectedSubgapClusteringBidiExact
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalModeSelectedApplicationRound340Exact
+import DASHI.Physics.YangMills.BalabanCMP116R281ModeSelectedDirectRound341Exact
 
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
