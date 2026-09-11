@@ -33,3 +33,5 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369Validation.agda
       - name: Typecheck Madelung physical-source snowball owner
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369MadelungPhysicalSourceSnowballExact.agda
+      - name: Typecheck archive Hartree radial-identity defect owner
+        run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ArchiveHartreeRadialIdentityDefectExact.agda
