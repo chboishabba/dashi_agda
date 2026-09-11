@@ -11,18 +11,6 @@ import DASHI.Core.KnowledgeBoundaryCandidateIdentityBidiExact as Identity
 
 ------------------------------------------------------------------------
 -- AMY ESKRIDGE MEMORIAL: REVIEW-OBJECT REFERENT DISAMBIGUATION
---
--- The current source surface contains two non-identical candidate readings of
--- Amy's September-2020 release dependency:
---
---   (A) the earlier NASA/QM study / release process itself;
---   (B) the later NASA/TM-20205010911 / M-1531 report that records it.
---
--- NASA's TM establishes that the 2015-2016 experimental programme and the 2021
--- report are distinct knowledge objects. Secondary reconstructions can point
--- toward either referent, but disagreement among secondary descriptions cannot
--- manufacture exact identity. This owner preserves both candidates until an
--- identity-specific primary carrier resolves the referent.
 ------------------------------------------------------------------------
 
 data ReviewReferentCandidate : Set where
@@ -72,6 +60,35 @@ instituteDerivativeLead = review-referent-lead
   false
 
 ------------------------------------------------------------------------
+-- PRIMARY AUTHORSHIP ATTRIBUTION FIREWALL
+--
+-- NASA NTRS 20205010911 names R.H. Eskridge, M.A. Nelson and M.P. Schoenfeld
+-- as authors of M-1531. Amy Eskridge is not a named author on the public TM.
+-- Therefore even a future same-object receipt showing that this was the paper
+-- Amy was transitioning/releasing would establish a transition/release role,
+-- not authorship. The shared surname must never manufacture an Amy-authorship
+-- edge.
+------------------------------------------------------------------------
+
+record PublicTMAuthorAttribution : Set where
+  constructor public-tm-author-attribution
+  field
+    publicTMIdentifier : String
+    namedAuthors : String
+    amyNamedAsAuthor : Bool
+    sameSurnameImpliesSamePerson : Bool
+    transitionRoleImpliesAuthorship : Bool
+    sameObjectReceiptWouldPayTransitionIdentityOnly : Bool
+
+open PublicTMAuthorAttribution public
+
+canonicalPublicTMAuthorAttribution : PublicTMAuthorAttribution
+canonicalPublicTMAuthorAttribution = public-tm-author-attribution
+  "NASA NTRS 20205010911 / NASA/TM-20205010911 / M-1531"
+  "R.H. Eskridge; M.A. Nelson; M.P. Schoenfeld"
+  false false false true
+
+------------------------------------------------------------------------
 -- Existing object-lineage facts constrain the fork.
 ------------------------------------------------------------------------
 
@@ -118,12 +135,6 @@ open ReviewReferentResolution public
 
 ------------------------------------------------------------------------
 -- Temporal discriminator.
---
--- Amy's captured September-2020 statement expected publication soon. NTRS
--- records the eventual TM as acquired 1 Dec 2020 and published 1 Nov 2021.
--- That chronology is compatible with a delayed release path but is not an
--- identifier and therefore cannot choose between the earlier-study and later-
--- TM referents by itself.
 ------------------------------------------------------------------------
 
 record ReviewPublicationChronology : Set where
@@ -152,6 +163,8 @@ record ReviewReferentBoundary : Set where
     primaryIdentityReceiptMayResolveReferent : Bool
     resolvingReviewReferentAutomaticallyIdentifiesInstituteDerivative : Bool
     resolvingReviewReferentCreatesDeathCausation : Bool
+    sameSurnameCreatesAmyAuthorship : Bool
+    transitionRoleCreatesAmyAuthorship : Bool
 
 open ReviewReferentBoundary public
 
@@ -160,3 +173,4 @@ canonicalReviewReferentBoundary =
   review-referent-boundary
     false false false false
     true true false false
+    false false
