@@ -7,17 +7,22 @@ open import Agda.Builtin.List using (List; []; _∷_)
 ------------------------------------------------------------------------
 -- CROSS-LANE PROOF ARCHAEOLOGY LEDGER
 --
--- ONE easy-to-find/search/read navigation and proof-search owner for
--- Navier-Stokes, Yang-Mills, Riemann Hypothesis, and GR/QFT unification.
+-- ONE easy-to-find/search/read owner for the proof archaeology that matters
+-- to CURRENT completion work.
 --
--- START HERE.  Search handles intentionally live in this one file:
---   archaeology / chronology / date / snowball / attribution / DOI / QID /
---   OEIS / source / same-object / consumer / producer / compiler / frontier /
---   attempted-payment / buried-donor / NS / Navier-Stokes / YM / Yang-Mills /
---   RH / Riemann / GR / QFT.
+-- Search handles intentionally live here:
+--   archaeology chronology date snowball attribution DOI QID OEIS source
+--   same-object attempted-payment buried-donor Clay NS Navier-Stokes
+--   YM Yang-Mills RH Riemann GR QFT R503 R504 R568 R573 R584
+--   Round82 A1 B1 B2 C1 C2 certificate Bishop Bony Luo CMP109 CMP116 CMP119
 --
--- Dates are evidenced repository LOWER BOUNDS, never origin claims.
--- Existing mathematical owners remain authoritative.
+-- RULE OF USE
+--   * archaeology exists to reduce current proof debt, not to celebrate age;
+--   * dates are repository lower bounds, never origin claims;
+--   * old theorem names are searched by OUTPUT SHAPE, not round number;
+--   * same-object transport is mandatory before historical reuse;
+--   * source/QID/OEIS/status metadata never manufacture theorem payment;
+--   * promisingly compressed frontier != Clay-paid theorem.
 ------------------------------------------------------------------------
 
 data Lane : Set where
@@ -28,694 +33,406 @@ data HistoricalRole : Set where
   negativeControl diagnostic supersededOverpayment sourceTranscriptionDebt
   liveLevel2Theorem : HistoricalRole
 
-data EvidenceKind : Set where
-  exactCommitDate pullRequestDate repositorySequence historicalInference : EvidenceKind
-
 data HistoricalClock : Set where
   constructionAncestry firstTypedAppearance formalConsolidation
-  canonicalConsumerRecovery : HistoricalClock
+  canonicalConsumerRecovery liveCutsetCompression : HistoricalClock
 
 data HistoricalIdentityStatus : Set where
   sameObjectProved structuralAncestorOnly candidateAlias notSameObject : HistoricalIdentityStatus
 
+data PaymentStatus : Set where
+  paid conditionalPayment unpaid notApplicable : PaymentStatus
+
 ------------------------------------------------------------------------
--- START-HERE FOUR-ROW INDEX.
---
--- This is the intended first read/search surface.  It gives one compact row
--- per lane: earliest ancestry, first typed wall, route history, current
--- consumer, and the exact next proof-search output shape.
+-- START HERE: CURRENT CLAY-COMPLETION ROUTER.
 ------------------------------------------------------------------------
 
-record CanonicalLaneIndex : Set where
-  constructor lane-index
+record ClayLaneRouter : Set where
+  constructor clay-lane-router
   field
-    indexedLane : Lane
-    earliestConfirmedAncestry firstTypedWall historicalRouteSummary : String
-    currentCanonicalConsumer currentLevel2Target exactNextSearch : String
-    sourceMetadataOwners : String
+    routerLane : Lane
+    mission currentWholeProblemCutset currentFirstLeaf : String
+    alreadyOwned : String
+    archaeologyDonor : String
+    exactBridgeToTest : String
+    doNotConfuseWithProof : String
 
-open CanonicalLaneIndex public
+open ClayLaneRouter public
 
-nsIndex : CanonicalLaneIndex
-nsIndex = lane-index navierStokes
-  "2026-01-24 dashiCFD initial vorticity/residual carrier; 2026-01-28 signed support x sign x coherence x scale-persistence operator"
-  "2026-05-29/30 finite-depth vorticity/enstrophy tower plus explicit BKM/nonlinear continuum wall"
-  "January signed/coherence experiments -> May typed uniformity wall -> July profile/cross-shell uniform routes -> August signed triad/commutator/refinement -> September spectator-resolvent/nested signed composition"
-  "critical-cone / physical high-frequency regularity consumer"
-  "cutoff-uniform signed physical transfer/production -> spacetime or potential-budget payment"
-  "find a same-object signed production/transfer inequality that survives before absolute value/coarse-graining and pays the uniform spacetime/potential consumer"
-  "DASHI/Physics/Closure/NavierStokesSourceEntityQidBindingsExact.agda; DASHI/Physics/Closure/NavierStokesCitationIdentityAuditExact.agda; Docs/support/live/ScientificReferenceQidAtlas.md"
+nsClayRouter : ClayLaneRouter
+nsClayRouter = clay-lane-router navierStokes
+  "Finish unforced Clay A/B; forced C/D remains separate same-object/source reconstruction."
+  "R503/R504 terminal chain with the direct R568 commutator-only reformulation; after standard scalar FTC and endpoint calibration, the new PDE leaf is a cutoff-uniform spacetime upper bound for the live global forcing/commutator full square."
+  "R568 missingCutoffUniformLiveCommutatorSpacetimeBudget568; R504 still exposes missingLiteralR406SignedCrossPayment as the global first residual."
+  "R567 exact transpose reduction collapses factoredFull to 4 * forcingFull; R573 exact weighted nested four-sign commutator; R580-R584 exact Bony routing and class-norm-to-Gram compilers."
+  "2026-08-06 Luo/Bony annular four-class continuation: low-high, high-low and growing-annulus high-high are already analytically bounded on the older envelope carrier; comparable-shell remains explicit input."
+  "Prove same-object/majorization transport from the old LH/HL/HH envelopes to R584 nested-slot class cells, then solve the surviving comparable class and outer spectator/spacetime aggregation."
+  "Old Bony estimates are not automatically R584 payments; R584 currently says no live nested-slot class-norm payment is constructed and outer-weight/spectator spacetime remains open."
 
-yangMillsIndex : CanonicalLaneIndex
-yangMillsIndex = lane-index yangMills
-  "2026-05-17 BalabanRGMassGapReceiptSurface: finite-depth positive gaps do not imply one positive depth-uniform lower bound"
-  "2026-05-27 YangMillsMassGapBoundary: reflection/transfer positivity, spectral isolation, continuum stability, physical-spectrum transport"
-  "May uniform-gap debt -> May 30 4D Balaban reframe -> July finite/RG and uniform-contraction routes -> July/Aug clustering compilers and producer families -> August uniform physical-gap master -> September quantitative-clustering consumer recovery"
-  "same reconstructed continuum Schwinger family: quantitative connected-correlation decay -> positive physical spectral gap"
-  "quantitative continuum clustering on SAME Schwinger family, then candidate decay-rate -> physical-spectrum identification"
-  "search old uniform/infimum/refinement-stable/correlation/transfer-semigroup/coercivity outputs for a theorem already landing on the same reconstructed continuum family before paying Row-C machinery again"
-  "DASHI/Physics/YangMills/SourceEntityQidBindingsExact.agda; DASHI/Wikimedia/ScientificCitationQidBindingsExact.agda; Docs/support/live/ScientificReferenceQidAtlas.md"
+yangMillsClayRouter : ClayLaneRouter
+yangMillsClayRouter = clay-lane-router yangMills
+  "Finish the Jaffe-Witten existence + mass-gap problem on one literal compact-simple construction; do not optimize only the mass-gap subproblem."
+  "Latest archaeology-recovered shortest NEW-analysis cutset is Round82 five leaves: A1 LiteralCompactSimplePositiveBeta; B1 UniformHeatHessianDebt; B2 UniformCovariantFiniteSpeed; C1 SameFamilyCompositeOPERemainder; C2 SameFamilyStressWardHamiltonian."
+  "A1 source-facing determinant-first beta route is currently the sharpest finite/source leaf: positive Gaussian betaZ, finite-g interaction debt, and summable history-response debt on the same trajectory."
+  "CMP116/CMP119 make the formerly separate summable continuum increment downstream of A1 plus published analysis; CMP109 already owns differentiated marked E^(2)/Pi exponential decay; finite orbit/Walsh/interval compilers are largely machine-checked."
+  "2026-08-20 Round82 cut six independent new leaves to five; 2026-08-27 commit 85eb86c... recut A1 to determinant-first beta. Earlier Round77 five-job view is historical, not the sharpest current cutset."
+  "For A1: identify the constrained-Gaussian D^2 log det / Ward trace scalar exactly, prove betaZ_j >= b_Z > 0, bound finite-g betaInt_j, and prove summable source-native history response. For B1/B2: use the SAME density/Hessian carrier; for C1/C2: SAME continuum family and reconstructed H."
+  "Quantitative clustering is the hottest mass-gap Level-2 subproblem but is not the whole Clay cutset. Old gap=>clustering or clustering=>gap compilers cannot erase A1/C1/C2."
 
-rhIndex : CanonicalLaneIndex
-rhIndex = lane-index riemannHypothesis
-  "2026-02-23 AbelZeta analytic contraction/limit machinery; 2026-04-17 phase/zero-spacing visualization ancestry"
-  "2026-07-19 first currently confirmed explicit Riemann/Weil/explicit-formula programme boundary"
-  "February analytic regularisation -> April phase diagnostics -> July Weil/explicit formula -> August Hermitian/interference and pole-quotient families -> September direct/certified high contradiction normalization"
-  "forall high off-line zero: contradiction on the actual universal pole-quotient response"
-  "uniform strict bound on the literal reflection-paired oscillatory response; executable form is proof-bearing one-sided finite-cell upper certificates"
-  "find a phase-sensitive one-sided literal integral/sum bound that lands exactly on cellResponse/nearResponse; do not revive scalar/absolute-envelope/determinant routes unless they transport to this carrier"
-  "DASHI/Analysis/RiemannSourceEntityQidBindingsExact.agda; DASHI/Analysis/RiemannExtendedSourceEntityQidBindingsExact.agda; Docs/support/live/ScientificReferenceQidAtlas.md"
+rhClayRouter : ClayLaneRouter
+rhClayRouter = clay-lane-router riemannHypothesis
+  "Finish RH by excluding every high off-line zero on the actual universal pole-quotient response; low/critical bridge remains independently required."
+  "Final certificate plumbing is already owned: literal finite near fold -> proof-carrying finite upper -> actual nearResponseAt(J) -> source-order off-budget -> certified complement envelope."
+  "Only strict high-side theorem remains on the balance-free context: cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole)), or the direct literal-near equivalent."
+  "RiemannG2FinalCarrierFiniteSumCertificateExact and RiemannG2CertifiedNearUpperClusterResponseCompilerExact already transport finite certificates to the final scalar. Repository Bishop interval semantics already prove +,-,negation,multiplication and positive division soundly; four-corner multiplication handles two sign-straddling intervals constructively."
+  "The reusable interval stack was built in the YM lane but is generic: Bishop four-corner multiplication, compositional expression intervals, and exact sine/cosine alternating-series enclosures."
+  "Instantiate a thin RH atom/expression adapter for the literal oscillatory cosine cells and use existing proof-carrying finite-sum enclosure; then test/prove the strict certified envelope margin."
+  "A finite certificate alone is not RH; the compiler itself records strictCertifiedEnvelopeBelowClusterStillRequired=true and finiteCertificateAloneProvesRH=false."
 
-grQuantumIndex : CanonicalLaneIndex
-grQuantumIndex = lane-index grQuantum
-  "2026-05-12 W4 physical calibration -> MatterField -> T_mu_nu -> Einstein-law obligation seam"
-  "2026-05-17 GRQFTTerminalCompositionBoundary broad discrete-to-smooth/AQFT/stress-energy terminal consumer"
-  "May physical matter/stress seam -> July conditional Einstein-Hilbert/shared-action/authority cutset -> August total-QFT-stress correction and endpoint-only common metric/action/stress weld"
-  "one common physical metric/action language whose QFT and Einstein variations yield the SAME stress-energy source"
-  "literal sector same-action/same-stress inhabitants, then anomaly-free quantum dynamics + renormalized continuum amplitudes + semiclassical GR/backreaction"
-  "search existing Maxwell/scalar/spinor/Higgs/YM/Noether/action/stress owners for literal sector first-variation inhabitants on the common metric before broad quantum-gravity construction"
-  "DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda; DASHI/Physics/Closure/EinsteinHilbertVariationConditional.agda; DASHI/Physics/QFT/StressEnergyBridgeReceiptSurface.agda; Docs/support/live/ScientificReferenceQidAtlas.md"
+grQuantumRouter : ClayLaneRouter
+grQuantumRouter = clay-lane-router grQuantum
+  "Non-Clay cross-lane frontier retained because its variational/same-object machinery can donate proof patterns."
+  "Literal sectors + Einstein variation on one common metric/action/stress carrier, then anomaly/UV/semiclassical recovery."
+  "Same-action/common-stress sector inhabitants."
+  "2026-05 matter/stress seam and 2026-08 common-action/common-total-stress weld."
+  "Older Noether/action/stress owners and literal Maxwell/scalar/spinor/Higgs/YM sector variations."
+  "Feed literal sector first variations into the common weld before inventing broader QG architecture."
+  "Shared names, QIDs or flat compatibility do not prove same action/metric/stress or quantum gravity."
 
-canonicalLaneIndex : List CanonicalLaneIndex
-canonicalLaneIndex = nsIndex ∷ yangMillsIndex ∷ rhIndex ∷ grQuantumIndex ∷ []
+canonicalClayRouters : List ClayLaneRouter
+canonicalClayRouters =
+  nsClayRouter ∷ yangMillsClayRouter ∷ rhClayRouter ∷ grQuantumRouter ∷ []
 
 ------------------------------------------------------------------------
--- CLOCKED ARCHAEOLOGY ANCHORS.
+-- CANONICAL CURRENT CUTSETS.
 ------------------------------------------------------------------------
 
-record ClockedArchaeologyAnchor : Set where
-  constructor clocked-anchor
+record CurrentCutset : Set where
+  constructor current-cutset
+  field
+    cutsetLane : Lane
+    cutsetDateBrisbane cutsetOwner cutsetShape : String
+    cutsetStatus : PaymentStatus
+    nextDecrement : String
+
+open CurrentCutset public
+
+currentCutsets : List CurrentCutset
+currentCutsets =
+  current-cutset navierStokes "2026-09-11"
+    "NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact + R584 Bony bidi"
+    "one live commutator spacetime budget; Bony route may reduce its nested class debt to old LH/HL/HH donors + comparable + outer aggregation"
+    unpaid
+    "test exact transport old annular LH/HL/HH -> R584 nested-slot classNormBudget; only then attack comparable/outer residual"
+  ∷ current-cutset yangMills "2026-08-27"
+    "BalabanClayHighestAlphaRound82FiveAnalyticLeafExact; commit 85eb86c2476e566bce0ebbba051629d94fb64d24"
+    "A1 positive beta; B1 heat-Hessian debt; B2 covariant finite speed; C1 composite OPE remainder; C2 stress/Ward/Hamiltonian"
+    unpaid
+    "5->4 only by proving or rigorously eliminating one of A1/B1/B2/C1/C2; A1 determinant-first route is presently sharpest"
+  ∷ current-cutset riemannHypothesis "2026-09-11"
+    "RiemannG2CertifiedNearUpperClusterResponseCompilerExact"
+    "proof-bearing finite upper already transports to final near scalar; strict certified envelope below ClusterResponse remains"
+    unpaid
+    "reuse Bishop/Taylor interval semantics to generate literal cell uppers, then prove the one strict aggregate margin"
+  ∷ current-cutset grQuantum "2026-08-30"
+    "endpoint-only common metric/action/total-stress weld"
+    "same source carrier first, then post-weld quantum/semiclassical obligations"
+    conditionalPayment
+    "materialize literal sector inhabitants"
+  ∷ []
+
+------------------------------------------------------------------------
+-- DATED ARCHAEOLOGY: LOWER BOUNDS, NOT ORIGIN CLAIMS.
+------------------------------------------------------------------------
+
+record DatedAnchor : Set where
+  constructor dated-anchor
   field
     anchorLane : Lane
-    anchorDateBrisbane : String
-    anchorClock : HistoricalClock
-    anchorEvidence : EvidenceKind
-    anchorRepositoryReference : String
-    anchorObject : String
-    anchorRole : HistoricalRole
-    anchorIdentityStatus : HistoricalIdentityStatus
-    anchorInterpretation : String
+    dateBrisbane reference object : String
+    clock : HistoricalClock
+    role : HistoricalRole
+    identity : HistoricalIdentityStatus
+    interpretation : String
 
-open ClockedArchaeologyAnchor public
+open DatedAnchor public
 
-preJulyArchaeologyAnchors : List ClockedArchaeologyAnchor
-preJulyArchaeologyAnchors =
-  clocked-anchor navierStokes "2026-01-24" constructionAncestry exactCommitDate
-    "chboishabba/dashiCFD commit 1cb1bb612c4061676a06e615f69bf282462c25cc"
-    "initial CFD/DASHI vorticity, residual-closure, codec, and sandbox carrier"
-    diagnostic candidateAlias
-    "Physical/computational NS ancestry exists from the initial dashiCFD commit; this is not automatically the later Agda signed-transfer theorem carrier."
-  ∷ clocked-anchor navierStokes "2026-01-28" constructionAncestry exactCommitDate
-    "chboishabba/dashiCFD commit 7938f8282541b142e93cb2a7dadf32d83ca553b3; docs/signed_filament_annihilation.md; authored 2026-01-27 UTC"
-    "signed support x sign x coherence x scale-persistence annihilation/coarse-graining operator"
-    producerTactic candidateAlias
-    "The signed/coherence-before-coarse-graining design predates later NS round labels by months. It is structural ancestry unless exact same-object transport is separately proved."
-  ∷ clocked-anchor riemannHypothesis "2026-02-23" constructionAncestry exactCommitDate
-    "dashi_agda commit 8bf9e75a159e90c837836a998a43f55680ae66a9; file history DASHI/Analysis/AbelZeta.agda"
-    "Abel-summed eta/zeta analytic-continuation carrier"
-    diagnostic structuralAncestorOnly
-    "RH/zeta analytic machinery is already present in February. It predates the April visualization, July Weil ladder, August Hermitian family and September pole-quotient route; exact transport into the final pole response is not inferred."
-  ∷ clocked-anchor riemannHypothesis "2026-04-17" constructionAncestry exactCommitDate
-    "dashi_agda commit d59286c1eed63a1441b9243af031dbcf50f0edc5; file history DASHI/Analysis/ZetaVisualization.agda"
-    "phase/zero-spacing feature views over Abel-zeta samples with explicit no-RH boundary"
-    diagnostic notSameObject
-    "Phase-visible zeta exploration predates the later proof-search families but is intentionally non-theorem-bearing and is not the universal pole-quotient carrier."
-  ∷ clocked-anchor grQuantum "2026-05-12" firstTypedAppearance exactCommitDate
-    "dashi_agda commit 78c96a5c27795f3c3f7500bad71d4db72f53755e; file history DASHI/Physics/Closure/W4MatterStressEnergyInterfaceReceipt.agda"
-    "physical calibration -> MatterField -> T_mu_nu -> discrete Einstein-law obligation"
-    representationWeld structuralAncestorOnly
-    "The stress-energy seam that later becomes the common-action/common-stress consumer is already typed by 12 May."
-  ∷ clocked-anchor grQuantum "2026-05-17" firstTypedAppearance exactCommitDate
-    "dashi_agda commit 81fc16c11af4f4152410ea9ce9269c68cc223387; file history DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda"
-    "GR/QFT terminal composition: discrete-to-smooth, AQFT, stress-energy bridge, receipt composition"
-    terminalConsumer structuralAncestorOnly
-    "The broad terminal programme therefore predates the July QG cutset and August common-action normalization."
-  ∷ clocked-anchor yangMills "2026-05-17" firstTypedAppearance exactCommitDate
-    "dashi_agda commit 81fc16c11af4f4152410ea9ce9269c68cc223387; file history DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda"
-    "Balaban RG -> finite gap / mass-gap receipt surface with explicit uniform-in-depth gap debt"
-    producerTactic structuralAncestorOnly
-    "The May surface already distinguishes pointwise finite-depth positivity from one positive depth-uniform lower bound. Later clustering machinery is a candidate payment route for that older uniformity debt."
-  ∷ clocked-anchor yangMills "2026-05-27" firstTypedAppearance exactCommitDate
-    "dashi_agda commit 6e423ec962cc43ee1e678b490d253abb61ed8ef0; file history DASHI/Physics/Closure/YangMillsMassGapBoundary.agda"
-    "YM physical gap boundary: reflection/transfer positivity, spectral isolation, continuum stability, physical-spectrum transport"
-    terminalConsumer structuralAncestorOnly
-    "The explicit physical-spectrum consumer is typed by 27 May; July is a later refinement wave."
-  ∷ clocked-anchor navierStokes "2026-05-29" firstTypedAppearance exactCommitDate
-    "dashi_agda commit bdd0801cc7e544304c52412ea1ccd0164904d12f; NavierStokesRegularityTowerReceipt.agda + NavierStokesWeakSolutionInterface.agda"
-    "finite-depth enstrophy/vorticity/weak-solution tower with continuum BKM/Serrin/nonlinear-control wall"
-    terminalConsumer structuralAncestorOnly
-    "The typed NS continuum wall predates the round-labelled signed-transfer family; finite-depth control is explicitly not promoted to PDE regularity."
-  ∷ clocked-anchor navierStokes "2026-05-30" firstTypedAppearance exactCommitDate
-    "dashi_agda commit f4320249ab968dc02331e6722cd722fd6744da64; NSVorticityNoMechanismReceipt.agda"
-    "explicit no-vorticity-mechanism / BKM-still-open theorem state"
-    negativeControl structuralAncestorOnly
-    "Typed theorem state keeps carrier-native vorticity mechanism, uniform BKM control, global regularity and Clay promotion false despite looser historical commit-message language."
-  ∷ clocked-anchor yangMills "2026-05-30" formalConsolidation exactCommitDate
-    "dashi_agda commit 3ebb95536316159e92d89abc621b17538027ff20"
-    "programme reframe: 1+1D trivially confining; 4D product lattice + Balaban is the correct Clay-facing route"
-    diagnostic structuralAncestorOnly
-    "Programme-state evidence that the 4D Balaban path was selected before July source-faithful reconstruction; it does not itself pay the gap."
-  ∷ clocked-anchor navierStokes "2026-06-04" constructionAncestry exactCommitDate
-    "chboishabba/dashiCFD commit 125e52e04bed4042890d95db5d5371104ba1aafe and descendants"
-    "3D periodic incompressible truth + Leray/vorticity shells + shell-enstrophy + flux/dissipation theta diagnostics"
-    diagnostic candidateAlias
-    "The physical NS carrier and flux/dissipation barrier were tested before later Agda rounds; absolute-flux theta is not silently identified with the later signed theorem."
+canonicalDatedAnchors : List DatedAnchor
+canonicalDatedAnchors =
+  dated-anchor navierStokes "2026-01-24"
+    "dashiCFD 1cb1bb612c4061676a06e615f69bf282462c25cc"
+    "initial vorticity/residual CFD carrier"
+    constructionAncestry diagnostic candidateAlias
+    "physical/computational NS ancestry; not automatically later Agda theorem identity"
+  ∷ dated-anchor navierStokes "2026-01-28"
+    "dashiCFD 7938f8282541b142e93cb2a7dadf32d83ca553b3"
+    "signed support x sign x coherence x scale persistence before annihilation"
+    constructionAncestry producerTactic candidateAlias
+    "retain sign/coherence before destructive coarse-graining; later exact carrier requires a bridge"
+  ∷ dated-anchor riemannHypothesis "2026-02-23"
+    "AbelZeta.agda 8bf9e75a159e90c837836a998a43f55680ae66a9"
+    "Abel contraction/limit zeta machinery"
+    constructionAncestry diagnostic structuralAncestorOnly
+    "analytic technology, not the later pole-response theorem"
+  ∷ dated-anchor riemannHypothesis "2026-04-17"
+    "ZetaVisualization.agda d59286c1eed63a1441b9243af031dbcf50f0edc5"
+    "phase/zero-spacing visualization"
+    constructionAncestry diagnostic notSameObject
+    "phase-visible ancestry with explicit no-RH boundary"
+  ∷ dated-anchor grQuantum "2026-05-12"
+    "W4MatterStressEnergyInterfaceReceipt.agda 78c96a5c27795f3c3f7500bad71d4db72f53755e"
+    "physical calibration -> MatterField -> T_mu_nu -> Einstein-law seam"
+    firstTypedAppearance representationWeld structuralAncestorOnly
+    "stress-energy seam predates later common-action normalization"
+  ∷ dated-anchor yangMills "2026-05-17"
+    "BalabanRGMassGapReceiptSurface.agda 81fc16c11af4f4152410ea9ce9269c68cc223387"
+    "finite-depth positive gaps do not imply one positive depth-uniform epsilon"
+    firstTypedAppearance terminalConsumer structuralAncestorOnly
+    "modern YM uniformity debt already explicit in May"
+  ∷ dated-anchor yangMills "2026-05-27"
+    "YangMillsMassGapBoundary.agda 6e423ec962cc43ee1e678b490d253abb61ed8ef0"
+    "physical gap boundary / continuum / spectrum transport"
+    firstTypedAppearance terminalConsumer structuralAncestorOnly
+    "July is refinement, not origin"
+  ∷ dated-anchor navierStokes "2026-05-29"
+    "NavierStokesRegularityTowerReceipt.agda bdd0801cc7e544304c52412ea1ccd0164904d12f"
+    "finite-depth vorticity/enstrophy with BKM/nonlinear continuum wall"
+    firstTypedAppearance terminalConsumer structuralAncestorOnly
+    "finite-depth control is explicitly not continuum regularity"
+  ∷ dated-anchor navierStokes "2026-05-30"
+    "NSVorticityNoMechanismReceipt.agda f4320249ab968dc02331e6722cd722fd6744da64"
+    "typed no-vorticity-mechanism / BKM still open"
+    firstTypedAppearance negativeControl structuralAncestorOnly
+    "typed theorem state outranks the loose commit message 'NS vorticity honestly closed'"
+  ∷ dated-anchor riemannHypothesis "2026-07-19"
+    "PR #100 / 78bdf33b725596bd0c1bc399a3e5bb78cc9bb14c"
+    "first currently pinned explicit RH/Weil programme"
+    formalConsolidation producerTactic structuralAncestorOnly
+    "first explicit RH attack currently confirmed in this audit"
+  ∷ dated-anchor yangMills "2026-07-20"
+    "3933eaa7618e1565580a5ac67aed875dbd850d3f + 16e0a24d5766e93fb9cfee921dc9449dda36426e"
+    "uniform cutoff-gap survival / uniform contraction chain"
+    formalConsolidation producerTactic structuralAncestorOnly
+    "strong attempted payment, not proof of same-family continuum clustering"
+  ∷ dated-anchor navierStokes "2026-08-06"
+    "NSTriadKNLuoAnnularFourClassContinuationExact / 2dc4c4af909fd83360cb039c6685f77f7b48ab45"
+    "LH + HL + growing-annulus HH bounds; comparable supplied as explicit input"
+    formalConsolidation producerTactic candidateAlias
+    "high-value donor for R584 if exact slot/envelope majorization can be proved"
+  ∷ dated-anchor yangMills "2026-08-20"
+    "Round82 be702a432236171d115b9bc2b4ea1f8dc81d530c"
+    "shortest new-analysis cutset 6 -> 5"
+    liveCutsetCompression terminalConsumer sameObjectProved
+    "A2 summable continuum increment removed as independent new theorem via CMP116/CMP119 source route"
+  ∷ dated-anchor yangMills "2026-08-27"
+    "Round82 85eb86c2476e566bce0ebbba051629d94fb64d24"
+    "A1 recut to determinant-first positive-beta source route"
+    liveCutsetCompression liveLevel2Theorem sameObjectProved
+    "global Wilson/FP/Haar near/far route becomes fallback rather than mandatory first gate"
+  ∷ dated-anchor grQuantum "2026-08-30"
+    "PR #639 family"
+    "common metric/action/total-QFT-stress weld"
+    canonicalConsumerRecovery directProducer sameObjectProved
+    "sharp live bridge; post-weld work remains"
+  ∷ dated-anchor riemannHypothesis "2026-09-10"
+    "PR #855"
+    "generic high contradiction / certified-upper normalization"
+    canonicalConsumerRecovery terminalConsumer sameObjectProved
+    "certificate architecture compressed to the literal final high consumer"
   ∷ []
 
 ------------------------------------------------------------------------
--- REPOSITORY ANCESTRY LOWER BOUNDS.
-------------------------------------------------------------------------
-
-record RepositoryAncestryLowerBound : Set where
-  constructor repository-lower-bound
-  field
-    repository earliestConfirmedDateBrisbane evidenceReference relevance : String
-    originClaim : Bool
-
-open RepositoryAncestryLowerBound public
-
-repositoryAncestryLowerBounds : List RepositoryAncestryLowerBound
-repositoryAncestryLowerBounds =
-  repository-lower-bound "chboishabba/dashiCFD" "2026-01-24"
-    "commit 1cb1bb612c4061676a06e615f69bf282462c25cc; January signed-filament refinement at 7938f8282541b142e93cb2a7dadf32d83ca553b3"
-    "Earliest currently pinned NS physical/computational ancestry in this audit; exact later theorem identity is not inferred." false
-  ∷ repository-lower-bound "chboishabba/dashi_agda" "2026-02-23"
-    "AbelZeta file history 8bf9e75a159e90c837836a998a43f55680ae66a9"
-    "Earliest currently pinned lane-specific dashi_agda mathematical ancestor in this audit; not an origin claim." false
-  ∷ repository-lower-bound "chboishabba/dashiCORE" "2026-03-05"
-    "commit 684b899b3b05b4fbbf6799fe368c5da6551f0c13 and descendants"
-    "Cross-programme sibling-repo ancestry; lane-specific same-object lineage still requires file-level recovery." false
-  ∷ []
-
-------------------------------------------------------------------------
--- ATTRIBUTION / DOI / QID / OEIS COORDINATES.
---
--- Identity coordinates are intentionally non-promoting:
--- QID != DOI != theorem identity != source authority != proof payment.
--- OEIS is first-class/searchable but 'not applicable' is preferable to an
--- invented sequence identifier.
-------------------------------------------------------------------------
-
-record AttributionCoordinate : Set where
-  constructor attribution-coordinate
-  field
-    attributionLane : Lane
-    sourceAuthorOrOwner sourceTitleOrObject primarySourceIdentity : String
-    doi doiStatus qid qidStatus oeis oeisStatus : String
-    sourceRole attributionRelationship snowballPaymentState : String
-
-open AttributionCoordinate public
-
-canonicalAttributionCoordinates : List AttributionCoordinate
-canonicalAttributionCoordinates =
-  attribution-coordinate navierStokes
-    "Johl Brown / chboishabba"
-    "dashiCFD docs/signed_filament_annihilation.md"
-    "repository commit 7938f8282541b142e93cb2a7dadf32d83ca553b3"
-    "not applicable" "notApplicable"
-    "Q201321" "verified related concept: Navier-Stokes equations; not publication identity"
-    "not applicable" "notApplicable"
-    "repository construction ancestry"
-    "candidate structural ancestor of later signed/coherence NS work"
-    "retain evidence; do not pay exact same-object theorem identity without transport"
-  ∷ attribution-coordinate navierStokes
-    "Jean Leray / Eberhard Hopf / Beale-Kato-Majda source families"
-    "Leray-Hopf weak-solution and BKM regularity ancestry"
-    "exact consuming bibliography remains primary"
-    "varies by exact publication" "source-local"
-    "Q441143; Q86070; Q1335673; Q506133; Q201321" "verified related identities per in-repo scientific QID atlas"
-    "not applicable" "notApplicable"
-    "external mathematical ancestry"
-    "theorem/source context for May typed NS wall"
-    "citation does not manufacture the missing uniform continuum estimate"
-  ∷ attribution-coordinate yangMills
-    "Tadeusz Balaban"
-    "Averaging Operations for Lattice Gauge Theories"
-    "Communications in Mathematical Physics 98 (1985), 17-51"
-    "10.1007/BF01211042" "verified in-repo bibliography"
-    "unresolved" "unresolved person QID; deliberately not guessed"
-    "not applicable" "notApplicable"
-    "primary mathematical source"
-    "source family for literal lattice-gauge/RG constructions"
-    "source identity may be acquired before same-family continuum-clustering payment; acquisition order != conclusion-payment order"
-  ∷ attribution-coordinate yangMills
-    "Arthur Jaffe / Edward Witten"
-    "Quantum Yang-Mills Theory / Clay Millennium problem statement"
-    "official Clay Mathematics Institute problem statement"
-    "not applicable" "notApplicable"
-    "Q370094; Q201513; Q727000" "verified related identities per in-repo scientific QID atlas"
-    "not applicable" "notApplicable"
-    "terminal problem authority"
-    "defines the physical/mathematical target, not a DASHI producer"
-    "terminal authority cannot fill missing continuum clustering or physical-spectrum identification"
-  ∷ attribution-coordinate riemannHypothesis
-    "Bernhard Riemann"
-    "Ueber die Anzahl der Primzahlen unter einer gegebenen Groesse / 1859 zeta source"
-    "original 1859 publication identity"
-    "not applicable" "historical publication without DOI coordinate here"
-    "Q42299; Q205966" "verified related identities: Riemann and Riemann hypothesis"
-    "not applicable" "notApplicable"
-    "primary historical source ancestry"
-    "zeta/RH identity context"
-    "does not pay the later universal pole-quotient strict response theorem"
-  ∷ attribution-coordinate riemannHypothesis
-    "Polymath Project"
-    "Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant"
-    "DOI/arXiv source identity retained by Riemann source owner"
-    "10.1007/s40687-019-0193-1" "verified in-repo QID atlas"
-    "Q2000812; Q205966; Q1078285; Q5080476" "verified related identities: Polymath/RH/de Bruijn/Newman"
-    "not applicable" "notApplicable"
-    "external analytic/RH source"
-    "de Bruijn-Newman/heat-flow source context; not automatic pole-response producer"
-    "citation/source acquisition cannot replace literal same-carrier response inequality"
-  ∷ attribution-coordinate riemannHypothesis
-    "DASHI internal Abel-zeta owner"
-    "DASHI/Analysis/AbelZeta.agda"
-    "commit 8bf9e75a159e90c837836a998a43f55680ae66a9"
-    "not applicable" "notApplicable"
-    "Q205966" "related RH concept only"
-    "not applicable" "notApplicable"
-    "repository analytic ancestry"
-    "regularisation/limit methodology; structural ancestor only"
-    "retain as donor vocabulary; do not promote to same-object pole-response proof"
-  ∷ attribution-coordinate grQuantum
-    "DASHI W4 / GR-QFT closure owners"
-    "W4MatterStressEnergyInterfaceReceipt -> GRQFTTerminalCompositionBoundary"
-    "dashi_agda commits 78c96a5c27795f3c3f7500bad71d4db72f53755e and 81fc16c11af4f4152410ea9ce9269c68cc223387"
-    "not applicable" "repository-object coordinate"
-    "unresolved" "GR/QFT source-QID expansion remains source-local; no QID guessed here"
-    "not applicable" "notApplicable"
-    "repository representation/consumer ancestry"
-    "physical carrier -> matter -> stress-energy -> Einstein consumer ancestry"
-    "later common-action/common-stress weld still requires exact shared metric/action transport"
-  ∷ []
-
-------------------------------------------------------------------------
--- AUTHORITATIVE SOURCE/METADATA OWNER INDEX.
---
--- The archaeology ledger points to these owners instead of duplicating their
--- semantics.  This keeps one easy search surface while preserving authority.
-------------------------------------------------------------------------
-
-record AuthoritativeOwnerIndex : Set where
-  constructor owner-index
-  field
-    ownerLane : Lane
-    sourceQidOwner bibliographyOrAuditOwner statusOrConsumerOwner rule : String
-
-open AuthoritativeOwnerIndex public
-
-canonicalAuthoritativeOwnerIndex : List AuthoritativeOwnerIndex
-canonicalAuthoritativeOwnerIndex =
-  owner-index navierStokes
-    "DASHI/Physics/Closure/NavierStokesSourceEntityQidBindingsExact.agda"
-    "DASHI/Physics/Closure/NavierStokesCitationIdentityAuditExact.agda; Docs/support/live/ScientificReferenceQidAtlas.md"
-    "NavierStokesRegularityTowerReceipt.agda; NSVorticityNoMechanismReceipt.agda; current R503/critical-cone owners"
-    "exact publication/criterion identity remains DOI/bibliography-local; QID cannot close Package A"
-  ∷ owner-index yangMills
-    "DASHI/Physics/YangMills/SourceEntityQidBindingsExact.agda"
-    "DASHI/Wikimedia/ScientificCitationQidBindingsExact.agda; Docs/support/live/ScientificReferenceQidAtlas.md"
-    "BalabanRGMassGapReceiptSurface.agda; YangMillsMassGapBoundary.agda; current quantitative-clustering consumer"
-    "QID annotates source surface; DOI/official source remains bibliographic identity; QID cannot close Clay YM"
-  ∷ owner-index riemannHypothesis
-    "DASHI/Analysis/RiemannSourceEntityQidBindingsExact.agda; DASHI/Analysis/RiemannExtendedSourceEntityQidBindingsExact.agda"
-    "Docs/support/live/ScientificReferenceQidAtlas.md"
-    "RiemannZetaProgramBoundary.agda; current universal pole-quotient/high-contradiction owners"
-    "DOI/arXiv/repository remains source identity; QID cannot create certificate replay or RH proof"
-  ∷ owner-index grQuantum
-    "no dedicated canonical GR/QFT source-QID owner promoted here; use source-local owners and the shared scientific QID atlas"
-    "Docs/support/live/ScientificReferenceQidAtlas.md; docs/conditional_gr_quantum_closure_ladder.md"
-    "W4MatterStressEnergyInterfaceReceipt.agda; GRQFTTerminalCompositionBoundary.agda; EinsteinHilbertVariationConditional.agda; QFT/StressEnergyBridgeReceiptSurface.agda"
-    "shared labels or QIDs do not establish same action, same metric, same stress tensor, or quantum gravity"
-  ∷ []
-
-------------------------------------------------------------------------
--- ATTEMPTED PAYMENT LINEAGE.
---
--- This is the most proof-catalytic historical view: what route was tried,
--- which consumer it was supposed to pay, and why archaeology should or should
--- not reuse it now.
+-- ATTEMPTED PAYMENTS AND ROUTE PRUNING.
 ------------------------------------------------------------------------
 
 record AttemptedPayment : Set where
   constructor attempted-payment
   field
     paymentLane : Lane
-    paymentDateBrisbane repositoryReference attemptedRoute : String
+    dateOrWindow route intendedConsumer status reuseDecision : String
     paymentRole : HistoricalRole
-    intendedConsumer paymentStatus reuseDecision : String
 
 open AttemptedPayment public
 
-canonicalAttemptedPayments : List AttemptedPayment
-canonicalAttemptedPayments =
-  attempted-payment navierStokes "2026-01-28"
-    "dashiCFD 7938f8282541b142e93cb2a7dadf32d83ca553b3"
-    "signed filament/support/coherence persistence before annihilation"
+attemptedPayments : List AttemptedPayment
+attemptedPayments =
+  attempted-payment navierStokes "2026-01 -> current"
+    "signed filament; shell/theta; gamma-gap; Schur/resolvent; nested commutator; Bony classes"
+    "cutoff-uniform live physical spacetime payment"
+    "many exact finite/representation reductions; live PDE bound remains unpaid"
+    "prefer R584 old-donor transport and R568 live carrier; do not revive unrelated norm architecture"
     producerTactic
-    "physical retention of coherent signed structure across scales"
-    "empirical/operational ancestor, not a PDE uniform estimate"
-    "reuse the signed/coherence ordering idea only through an explicit same-object bridge"
-  ∷ attempted-payment navierStokes "2026-05-29"
-    "NavierStokesRegularityTowerReceipt.agda"
-    "finite-depth enstrophy/vorticity/BKM/Serrin tower"
-    terminalConsumer
-    "global smooth regularity"
-    "correctly exposes missing uniform continuum payment"
-    "treat as early consumer diagnosis; do not mistake finite-depth control for producer"
-  ∷ attempted-payment navierStokes "2026-07-18"
-    "commit 5b007992df368beb69f0a3350c87ebf8f969d39f / PR #14 family"
-    "profile-uniform gamma-gap reduction"
+  ∷ attempted-payment navierStokes "2026-08-06"
+    "Luo/Bony annular four-class continuation"
+    "R584 nested slot class-norm payments"
+    "LH/HL/HH paid only on older interaction/envelope carrier; comparable explicit; same-object bridge absent"
+    "test three class bridges first; this is the most plausible hidden NS payment found"
     producerTactic
-    "uniform shell/profile control"
-    "useful structural uniformisation, not by itself the final physical spacetime payment"
-    "search its output for transport into current signed physical consumer before re-proving uniformity machinery"
-  ∷ attempted-payment yangMills "2026-05-17"
-    "BalabanRGMassGapReceiptSurface.agda"
-    "finite-depth positive gaps plus explicit missing depth-uniform epsilon"
-    terminalConsumer
-    "continuum physical mass gap"
-    "uniformity debt explicitly identified, not paid"
-    "use as the earliest precise statement of the modern YM obstruction"
-  ∷ attempted-payment yangMills "2026-07-20"
-    "commits 3933eaa7618e1565580a5ac67aed875dbd850d3f + 16e0a24d5766e93fb9cfee921dc9449dda36426e; PR #248 family"
-    "uniform cutoff mass-gap survival / uniform contraction through mass-gap chain"
-    producerTactic
-    "continuum mass-gap survival"
-    "historically strong sufficient route; later archaeology still recovered quantitative continuum clustering as the cleaner canonical consumer"
-    "inspect whether any theorem inside this chain directly yields same-family correlation decay before rebuilding Row-C"
-  ∷ attempted-payment yangMills "2026-07-29"
-    "commit c4910cdcde12c764c818545fb658bb93171c471b"
-    "clustering -> transfer-gap spectral cutset"
+  ∷ attempted-payment yangMills "2026-07-20 -> 2026-08-19"
+    "uniform gap survival; gap/clustering compilers; physical-gap master"
+    "Clay mass-gap role"
+    "downstream compilers strong, but not a substitute for same-family analytic construction"
+    "reuse compilers only after B1/B2 or another accepted same-family producer pays clustering/gap"
     compiler
-    "physical spectral gap from quantitative clustering"
-    "downstream compiler essentially available; does not create clustering"
-    "reuse; do not spend proof-search effort downstream until clustering is paid"
-  ∷ attempted-payment yangMills "2026-08-05"
-    "f6759d1f4bf5ac94da33906717147ce33eafe363 + 4f5fc7e4d941d324534b543c1103129432106943"
-    "lattice-to-physical clustering exponent + dense-core clustering-to-full-gap"
-    compiler
-    "transport quantitative decay to physical spectrum"
-    "matures downstream transport while upstream clustering remains load-bearing"
-    "reuse as compiler once same-family quantitative clustering is inhabited"
-  ∷ attempted-payment yangMills "2026-08-19"
-    "commit 1a7075aa7c6343ff48a5b0ee7e49ec46bd841342 / Round64"
-    "collapse terminal gap/loss budget to uniform physical gap master"
+  ∷ attempted-payment yangMills "2026-08-20/27"
+    "Round82 source-accepting five-leaf recut"
+    "full Clay existence+mass-gap package"
+    "current archaeology-recovered shortest honest NEW-analysis cutset"
+    "use Round82, not Round73/77 counts, as current top-level search router"
     terminalConsumer
-    "uniform physical gap"
-    "consumer compression; still not evidence of upstream quantitative clustering producer"
-    "retain as historical consumer normalization, but current proof search starts one step earlier at clustering"
-  ∷ attempted-payment riemannHypothesis "2026-02-23"
-    "AbelZeta.agda at 8bf9e75a159e90c837836a998a43f55680ae66a9"
-    "contraction-parameter regularisation and canonical q -> 1 limit"
-    diagnostic
-    "analytic continuation / regularised zeta values"
-    "analytic technology only; not an RH proof route"
-    "reuse only if an exact transport into current oscillatory cell response is shown"
-  ∷ attempted-payment riemannHypothesis "2026-07-19"
-    "PR #100 / 78bdf33b725596bd0c1bc399a3e5bb78cc9bb14c"
-    "Weil positivity / explicit-formula theorem ladder"
-    producerTactic
-    "Riemann hypothesis via spectral/Weil positivity"
-    "major formal consolidation; later route exploration moved to literal phase/pole response"
-    "retain as alternate producer family/compiler context, not mandatory architecture"
-  ∷ attempted-payment riemannHypothesis "2026-08-21"
-    "Hermitian/top-down tranche beginning cb78f41b6f32955cc0121eb61dd8d78a6d133e54"
-    "retained pair / mixed interference / Poisson / alpha-square coercivity"
-    producerTactic
-    "exclude off-line zero through Hermitian/interference energy"
-    "valuable alternate producer family, not identical to final universal pole quotient"
-    "mine literal phase-sensitive inequalities; do not revive whole architecture unless same-object transport pays current consumer"
-  ∷ attempted-payment riemannHypothesis "2026-08-31"
-    "PR #677"
-    "H_X -> H_A -> H_M -> H_T -> H_W -> H_E"
-    supersededOverpayment
+  ∷ attempted-payment riemannHypothesis "2026-02 -> 2026-08"
+    "Abel; Weil; Hermitian; H_X->...->H_E"
     "high off-line contradiction"
-    "representation/producer debt was later compressed"
-    "reuse local lemmas, not the whole decomposition"
-  ∷ attempted-payment grQuantum "2026-05-12"
-    "W4MatterStressEnergyInterfaceReceipt.agda / 78c96a5c27795f3c3f7500bad71d4db72f53755e"
-    "physical calibration -> matter -> T_mu_nu -> Einstein-law obligation"
-    representationWeld
-    "physical stress-energy source usable by gravity"
-    "correct seam but only pre-GR contract; no same-action theorem"
-    "reuse as ancestry/ordering constraint"
-  ∷ attempted-payment grQuantum "2026-07-20"
-    "PR #192/#226/#246 family"
-    "Einstein-Hilbert variation + shared action + anomaly/renormalization/semiclassical research cutset"
-    terminalConsumer
-    "full GR/QFT/quantum-gravity promotion"
-    "comprehensive but too broad as immediate proof-search target"
-    "retain as promotion gate; search from the smaller same-action/same-stress consumer"
-  ∷ attempted-payment grQuantum "2026-08-30"
-    "PR #639 family; total-QFT-stress correction 8809e427d3456e039f22ed4808601d3ff3470b1b"
-    "endpoint-only common metric/action/stress weld with total QFT stress-energy"
+    "useful diagnostics/producers but current representation debt is already compressed"
+    "mine local phase inequalities only; final strict certified envelope is the load-bearing theorem"
+    producerTactic
+  ∷ attempted-payment riemannHypothesis "current"
+    "final finite-sum certificate + certified upper compiler"
+    "actual nearResponseAt(J) and ClusterResponse strict margin"
+    "same-object certificate transport paid; strict margin unpaid"
+    "reuse generic Bishop interval/taylor stack instead of creating another certificate arithmetic"
     directProducer
-    "same physical source in QFT and Einstein variation"
-    "strong live bridge; sector inhabitation and post-weld anomaly/UV/semiclassical work remain"
-    "reuse as canonical bridge and push literal sectors into it before inventing broader unification architecture"
   ∷ []
 
 ------------------------------------------------------------------------
--- HISTORICAL ALIAS / SAME-OBJECT BRIDGES.
+-- CROSS-LANE DONORS THAT SHOULD BE REUSED, NOT FORKED.
 ------------------------------------------------------------------------
 
-record HistoricalAliasBridge : Set where
-  constructor historical-alias
+record CrossLaneDonor : Set where
+  constructor cross-lane-donor
   field
-    aliasLane : Lane
-    oldReference laterCanonicalReference outputShapeRelation : String
-    identityStatus : HistoricalIdentityStatus
+    donorFrom donorTo donorObject reusableContent requiredAdapter firewall : String
 
-open HistoricalAliasBridge public
+open CrossLaneDonor public
 
-canonicalHistoricalAliasBridges : List HistoricalAliasBridge
-canonicalHistoricalAliasBridges =
-  historical-alias navierStokes
-    "January dashiCFD signed filament/support/coherence family + June shell flux/theta family"
-    "dashi_agda signed physical transfer -> uniform critical-cone payment"
-    "candidate signed/coherence physical ancestry; neither January projector semantics nor absolute-flux theta is definitionally the later signed analytic carrier" candidateAlias
-  ∷ historical-alias riemannHypothesis
-    "February AbelZeta + April phase/spacing visualization"
-    "September universal pole-quotient literal response"
-    "analytic/phase ancestry exists, but carrier identity and final strict theorem are not inherited" structuralAncestorOnly
-  ∷ historical-alias yangMills
-    "May Balaban RG finite-depth mass-gap receipt + physical gap boundary"
-    "September same-family quantitative continuum clustering consumer"
-    "same programme and terminal target; old finite/RG gap route explicitly exposes uniformity debt but does not itself inhabit continuum clustering" structuralAncestorOnly
-  ∷ historical-alias grQuantum
-    "May physical matter/stress-energy interface + GRQFT terminal composition"
-    "August endpoint-only common action/metric/stress weld"
-    "later route sharpens an old stress-energy target to one common variational carrier" structuralAncestorOnly
+canonicalCrossLaneDonors : List CrossLaneDonor
+canonicalCrossLaneDonors =
+  cross-lane-donor
+    "NS Luo/Bony lane"
+    "NS R584/R568 Clay lane"
+    "NSTriadKNLuoAnnularFourClassContinuationExact"
+    "low-high, high-low and growing-annulus high-high square bounds under one shared critical/output envelope"
+    "same-object/majorization from older interactions/envelopes to R584 nestedSlotCells584 classNormBudget582"
+    "class-label similarity does not prove cell identity; comparable-shell and outer spectator/spacetime remain"
+  ∷ cross-lane-donor
+    "YM interval/certificate lane"
+    "RH literal finite-cell certificate lane"
+    "BalabanClayT4BishopFourCornerIntervalExact + BalabanClayT4BishopExpressionIntervalSemanticsExact + RealElementaryFunctionsAlternatingSeriesExact"
+    "constructive sign-aware multiplication, compositional Bishop-real interval semantics, sine/cosine Taylor enclosures"
+    "RH atom environment for literal phase/cosine cells plus exact fold attachment to FinalCarrierFiniteSumCertificate"
+    "interval arithmetic proves enclosure, not the final strict ClusterResponse margin"
+  ∷ cross-lane-donor
+    "YM CMP109/CMP116/CMP119 source owners"
+    "YM Round82 A1/B1/B2 construction"
+    "published differentiated marked decay and normalized local expectation mechanisms"
+    "source-owned E^(2)/Pi decay and compatible local normalized-response summability"
+    "same-object identify source coordinates with the literal unified RG state and preserve the common small-coupling history"
+    "source theorem import != physical instantiation; no circular gap/clustering premise"
   ∷ []
 
 ------------------------------------------------------------------------
--- STATUS-LANGUAGE ARCHAEOLOGY.
+-- ATTRIBUTION / DOI / QID / OEIS / SNOWBALL COORDINATES.
 ------------------------------------------------------------------------
 
-record HistoricalStatusMismatch : Set where
-  constructor status-mismatch
+record AttributionCoordinate : Set where
+  constructor attribution-coordinate
   field
-    mismatchLane : Lane
-    mismatchDateBrisbane repositoryReference historicalLanguage typedState rule : String
+    attributionLane : Lane
+    authorOrOwner titleOrObject primaryIdentity doi qid oeis : String
+    relationship snowballState : String
 
-open HistoricalStatusMismatch public
+open AttributionCoordinate public
 
-canonicalHistoricalStatusMismatches : List HistoricalStatusMismatch
-canonicalHistoricalStatusMismatches =
-  status-mismatch navierStokes "2026-05-30"
-    "commit f4320249ab968dc02331e6722cd722fd6744da64"
-    "commit message includes 'NS vorticity honestly closed'"
-    "NSVorticityNoMechanismReceipt keeps carrier-native vorticity mechanism absent, BKM control open, uniform vorticity control false, global smooth regularity false, Clay promotion false"
-    "typed theorem state outranks loose historical status language"
+canonicalAttribution : List AttributionCoordinate
+canonicalAttribution =
+  attribution-coordinate navierStokes
+    "Jean-Michel Bony; Hajer Bahouri; Jean-Yves Chemin; Raphael Danchin"
+    "Bony/paraproduct and Fourier-analysis source family"
+    "source-local bibliography in NS Luo/Bony owners"
+    "Bony 10.24033/asens.1404; BCD 10.1007/978-3-642-16830-7"
+    "use authoritative source/QID owners; not guessed here"
+    "notApplicable"
+    "supports frequency-class estimates; does not by citation become R584 same-object payment"
+    "acquire source first; pay exact nested-slot bridge separately"
+  ∷ attribution-coordinate yangMills
+    "Tadeusz Balaban"
+    "CMP109/CMP116/CMP119/CMP122 lattice gauge RG source family"
+    "DOI/source-local owners remain bibliographic authority"
+    "CMP109 10.1007/BF01215223; other exact DOI coordinates remain source-local"
+    "unresolved person QID retained unresolved; do not guess"
+    "notApplicable"
+    "source mathematical authority for RG-locality/decay mechanisms, not automatic Clay inhabitant"
+    "source acquisition may precede same-object construction payment"
+  ∷ attribution-coordinate riemannHypothesis
+    "Bernhard Riemann / Polymath and DASHI source owners"
+    "zeta/RH and de Bruijn-Newman source family"
+    "Riemann source owners + scientific QID atlas"
+    "Polymath heat-flow paper 10.1007/s40687-019-0193-1"
+    "Q42299; Q205966; related verified identities remain metadata only"
+    "notApplicable"
+    "historical/source context; not final pole-response proof"
+    "retain evidence append-only; same-carrier strict inequality pays conclusion"
+  ∷ attribution-coordinate riemannHypothesis
+    "Errett Bishop; Douglas Bridges; Marc Daumas; David Lester; Cesar Munoz"
+    "constructive analysis / verified interval arithmetic donor"
+    "generic arithmetic source, imported through existing repo owners"
+    "10.1007/978-3-642-61667-9; 10.1109/TC.2008.213"
+    "source-local; not needed for theorem identity"
+    "notApplicable"
+    "supports proof-producing interval arithmetic reused by RH"
+    "arithmetic soundness is reusable; RH object identity and strict margin remain separate"
+  ∷ attribution-coordinate grQuantum
+    "DASHI W4 / GR-QFT closure owners"
+    "matter/stress/common-action lineage"
+    "repository commit/file identity"
+    "notApplicable"
+    "unresolved/source-local"
+    "notApplicable"
+    "repository representation/consumer ancestry"
+    "same action/metric/stress transport remains conclusion-paying coordinate"
   ∷ []
 
 ------------------------------------------------------------------------
--- DATED FORMAL CONSOLIDATION / RECOVERY CHRONOLOGY.
-------------------------------------------------------------------------
-
-record DatedArchaeologyEntry : Set where
-  constructor dated-entry
-  field
-    lane : Lane
-    dateBrisbane : String
-    evidenceKind : EvidenceKind
-    repositoryReference objectOrRoute : String
-    role : HistoricalRole
-    interpretation : String
-
-open DatedArchaeologyEntry public
-
-canonicalDatedArchaeology : List DatedArchaeologyEntry
-canonicalDatedArchaeology =
-  dated-entry navierStokes "2026-07-18" exactCommitDate
-    "5b007992df368beb69f0a3350c87ebf8f969d39f / PR #14 family"
-    "profile-uniform gamma-gap reduction" producerTactic
-    "Early explicit uniformisation attempt; search for transport into the later signed physical consumer rather than treating it as final PDE payment."
-  ∷ dated-entry riemannHypothesis "2026-07-19" exactCommitDate
-    "commit 78bdf33b725596bd0c1bc399a3e5bb78cc9bb14c / PR #100"
-    "DASHI-Weil / explicit-formula theorem ladder" compiler
-    "First currently confirmed explicit RH programme boundary; February ancestry is analytic technology, not yet this RH route."
-  ∷ dated-entry grQuantum "2026-07-20" pullRequestDate "PR #246"
-    "deep GR/quantum research authority cutset" terminalConsumer
-    "Comprehensive later promotion gate; the stress-energy/unification spine is already present in May."
-  ∷ dated-entry yangMills "2026-07-20" exactCommitDate
-    "3933eaa7618e1565580a5ac67aed875dbd850d3f + 16e0a24d5766e93fb9cfee921dc9449dda36426e / PR #248 family"
-    "uniform cutoff mass-gap survival + uniform contraction through mass-gap chain" producerTactic
-    "Strong historical sufficient route; inspect for direct same-family correlation-decay donors before rebuilding later machinery."
-  ∷ dated-entry yangMills "2026-07-21" pullRequestDate "PR #309"
-    "source-faithful Balaban matching + unconditional YM gate" terminalConsumer
-    "Source-faithful consolidation of a Balaban/mass-gap lane already visible in May."
-  ∷ dated-entry yangMills "2026-07-29" exactCommitDate
-    "commit c4910cdcde12c764c818545fb658bb93171c471b"
-    "clustering-to-transfer-gap spectral cutset" compiler
-    "Downstream gap compilation is explicit; quantitative continuum clustering remains upstream physics."
-  ∷ dated-entry yangMills "2026-08-05" repositorySequence
-    "f6759d1f4bf5ac94da33906717147ce33eafe363 + 4f5fc7e4d941d324534b543c1103129432106943"
-    "lattice-to-physical clustering exponent + dense-core clustering-to-gap" compiler
-    "Spectral conversion matures while the direct clustering producer remains the key theorem."
-  ∷ dated-entry riemannHypothesis "2026-08-21" repositorySequence
-    "Hermitian/top-down tranche beginning cb78f41b6f32955cc0121eb61dd8d78a6d133e54"
-    "retained pair / interference / Poisson / alpha-square coercivity" producerTactic
-    "Alternate producer family; not identical to final pole quotient."
-  ∷ dated-entry yangMills "2026-08-19" exactCommitDate
-    "1a7075aa7c6343ff48a5b0ee7e49ec46bd841342 / Round64"
-    "uniform physical gap master" terminalConsumer
-    "Historical consumer compression; later normalization moves proof search upstream to quantitative same-family clustering."
-  ∷ dated-entry grQuantum "2026-08-30" pullRequestDate "PR #639"
-    "endpoint-only common metric/action/stress weld" directProducer
-    "Consumer sharpening of the May stress-energy spine."
-  ∷ dated-entry yangMills "2026-08-31" exactCommitDate
-    "0ab210dfa75c584699decb64869eb2fa1d293ae3 / Round146"
-    "literal CMP98 Eq.(119) one-step derivative" sourceTranscriptionDebt
-    "Literal source reconstruction; valuable same-object plumbing, not automatically the clustering producer."
-  ∷ dated-entry riemannHypothesis "2026-08-31" pullRequestDate "PR #677"
-    "H_X -> H_A -> H_M -> H_T -> H_W -> H_E" supersededOverpayment
-    "Useful decomposition later compressed once producer/representation debt was separated from terminal analytic debt."
-  ∷ dated-entry riemannHypothesis "2026-09-10" pullRequestDate "PR #855"
-    "generic high contradiction with direct-phase and certified-upper producers" terminalConsumer
-    "Canonical-consumer recovery."
-  ∷ dated-entry yangMills "2026-09-10" pullRequestDate "PR #869"
-    "normalize mass-gap search to quantitative clustering consumer" terminalConsumer
-    "Canonical-consumer recovery: sophisticated producer tactics are demoted rather than mistaken for prerequisites."
-  ∷ []
-
-------------------------------------------------------------------------
--- BURIED-DONOR WINDOWS: SEARCH BY OUTPUT SHAPE, NOT ROUND NUMBER.
-------------------------------------------------------------------------
-
-record BuriedDonorWindow : Set where
-  constructor donor-window
-  field
-    donorLane : Lane
-    fromDate toDate searchByOutputShape whyThisWindow : String
-
-open BuriedDonorWindow public
-
-canonicalBuriedDonorWindows : List BuriedDonorWindow
-canonicalBuriedDonorWindows =
-  donor-window yangMills "2026-05-17" "2026-08-20"
-    "uniform / infimum / refinement-stable / correlation-decay / transfer-semigroup-decay / physical-gap / coercivity theorem transportable to SAME continuum Schwinger family"
-    "The May Balaban/RG surface already names the finite-depth-to-uniform-gap quantifier debt; July PR #248 then tries uniform gap survival directly. Search both before paying later Row-C machinery again."
-  ∷ donor-window riemannHypothesis "2026-02-23" "2026-08-31"
-    "phase-sensitive zeta response / reflection-paired oscillatory inequality / one-sided target-centred upper bound / Abel or contraction limit transport"
-    "February Abel-zeta machinery is analytic ancestry, while the first explicit RH programme boundary currently pinned is 19 July. Search donors without pretending those carriers are already identical."
-  ∷ donor-window grQuantum "2026-05-12" "2026-08-30"
-    "same action variation / metric perturbation / stress-energy identity across literal sectors"
-    "Stress-energy interface predates the terminal composition and the August common-action weld."
-  ∷ donor-window navierStokes "2026-01-24" "current"
-    "signed physical production/transfer retained before absolute value or destructive coarse-graining -> cutoff-uniform spacetime/potential payment"
-    "January dashiCFD already has signed/coherence construction ancestry; May explicitly types the continuum BKM/nonlinear wall; July has profile-uniform reductions; later exact Agda rounds should be searched as refinements/compositions, not assumed origin."
-  ∷ []
-
-------------------------------------------------------------------------
--- LIVE FRONTIERS.
-------------------------------------------------------------------------
-
-record LiveFrontier : Set where
-  constructor live-frontier
-  field
-    frontierLane : Lane
-    literalConsumer firstLiveLevel2Theorem knownCompilers optionalProducerFamilies
-      sameObjectFirewall nextArchaeologySearch : String
-
-open LiveFrontier public
-
-nsFrontier : LiveFrontier
-nsFrontier = live-frontier navierStokes
-  "critical-cone / physical high-frequency regularity consumer"
-  "cutoff-uniform signed physical transfer/production -> spacetime or potential-budget payment"
-  "January signed/coherence ancestry; May enstrophy/vorticity tower; July profile-uniform gamma/cross-shell routes; Abel/telescope/Gram/resolvent/critical-cone transports"
-  "dashiCFD signed filament/truth/theta; signed commutator; spectator resolvent; packet/danger"
-  "do not destroy sign/coherence before payment; historical similarity does not prove exact R294/R541/R573 identity"
-  "search January-current sibling-repo and pre-round aliases for signed transfer + dissipation/potential comparison in the correct order"
-
-yangMillsFrontier : LiveFrontier
-yangMillsFrontier = live-frontier yangMills
-  "same reconstructed continuum family: quantitative connected-correlation decay -> positive physical spectral gap"
-  "quantitative continuum clustering on SAME Schwinger family; separately identify candidate decay rate with physical spectrum"
-  "May finite-depth uniformity wall and gap boundary; July uniform-cutoff survival; OS reconstruction; clustering-to-gap; dense-core; lattice-to-physical exponent transport"
-  "May Balaban RG; July uniform contraction; coercivity/reflection positivity; CMP109/CMP116 influence; Langevin/Dyson; cluster expansion; polymer norm"
-  "finite/RG decay, uniform cutoff gap, or generic Clustered is not automatically same-family continuum clustering"
-  "search May-August history for attempted quantifier exchange/uniformisation and same-family correlation decay before paying Row-C again"
-
-rhFrontier : LiveFrontier
-rhFrontier = live-frontier riemannHypothesis
-  "forall high off-line zero: contradiction on actual universal pole-quotient response"
-  "uniform strict bound on literal reflection-paired oscillatory response; executable route: proof-bearing one-sided finite-cell uppers"
-  "near/far monotonicity; certificate fold; Off/Gamma; high contradiction; high/low compiler"
-  "February AbelZeta; April phase diagnostics; July Weil; August Hermitian; direct phase; certified interval; IBP/Taylor/quadrature"
-  "ancestry/status/absolute envelopes do not pay final same-object strict response"
-  "search February-August aliases for signed/phase-sensitive bounds landing or transporting exactly to cellResponse/nearResponse"
-
-grQuantumFrontier : LiveFrontier
-grQuantumFrontier = live-frontier grQuantum
-  "one common physical metric/action language whose QFT and Einstein variations yield SAME stress-energy source"
-  "instantiate same-action/same-stress on literal sectors; then anomaly-free dynamics + renormalized continuum amplitudes + semiclassical GR/backreaction"
-  "May stress-energy target; July Einstein-Hilbert/shared-action cutsets; endpoint sector variation; native-stress transport; common metric; pairing commutation; SameStressEnergyWeld"
-  "old Noether/action/stress; YM; Maxwell/scalar/spinor/Higgs; Einstein-Hilbert variation/separation"
-  "shared names or flat compatibility do not prove same action/metric/stress or quantum gravity"
-  "search May-August variational/Noether/stress ancestry for literal sector inhabitants before broad QG search"
-
-canonicalLiveFrontiers : List LiveFrontier
-canonicalLiveFrontiers = nsFrontier ∷ yangMillsFrontier ∷ rhFrontier ∷ grQuantumFrontier ∷ []
-
-------------------------------------------------------------------------
--- SNOWBALL / ARCHAEOLOGY DISCIPLINE.
+-- METADATA / STATUS FIREWALLS.
 ------------------------------------------------------------------------
 
 record ArchaeologyDiscipline : Set where
   constructor archaeology-discipline
   field
-    consumerFirst roundNumbersAreOnlyOneIndex searchSemanticAliases
-      searchSiblingRepositories distinguishHistoricalClocks
-      earliestConfirmedDateIsOnlyLowerBound compilerDoesNotCreateAnalyticContent
-      producerTacticIsNotMandatoryRoute sameObjectBeforePromotion
-      negativeResultsPruneRoutes datesRemainProvenanceNotProof
-      acquisitionOrderMayDifferFromPaymentOrder
-      attributionDoesNotManufactureAuthority
-      qidDoesNotManufactureBibliographicIdentity
-      oeisDoesNotManufactureTheoremIdentity
-      typedTheoremStateOutranksLooseStatusLanguage
-      authoritativeMetadataOwnersRemainAuthoritative
-      attemptedPaymentDoesNotEqualSuccessfulPayment : Bool
+    consumerFirst searchSemanticAliases searchSiblingRepos datesAreLowerBounds
+      acquisitionOrderMayDifferFromPaymentOrder sameObjectBeforePromotion
+      attemptedPaymentNotSuccessfulPayment compilerNotAnalyticProducer
+      typedStateOutranksCommitMessage qidNotProof doiNotProof oeisNotProof
+      attributionNotAuthority clayCompressedNotClayPaid : Bool
 
-canonicalArchaeologyDiscipline : ArchaeologyDiscipline
-canonicalArchaeologyDiscipline = archaeology-discipline
-  true true true true true true true true true true true true true true true true true true
+canonicalDiscipline : ArchaeologyDiscipline
+canonicalDiscipline = archaeology-discipline
+  true true true true true true true true true true true true true true
+
+record HistoricalStatusMismatch : Set where
+  constructor status-mismatch
+  field mismatchLane : Lane
+        mismatchDate looseLanguage typedState : String
+
+canonicalStatusMismatches : List HistoricalStatusMismatch
+canonicalStatusMismatches =
+  status-mismatch navierStokes "2026-05-30"
+    "commit message: NS vorticity honestly closed"
+    "typed owner: vorticity mechanism absent; BKM control open; global regularity false; Clay promotion false"
+  ∷ []
 
 ------------------------------------------------------------------------
--- COMPACT PROOF-CATALYST DASHBOARD.
+-- GREP-FIRST PROOF CATALYST DASHBOARD.
 ------------------------------------------------------------------------
 
 record ProofCatalystDashboard : Set where
-  constructor proof-catalyst-dashboard
-  field nsTarget ymTarget rhTarget grQuantumTarget historicalWarning : String
+  constructor dashboard
+  field ns ym rh gr warning : String
 
-canonicalProofCatalystDashboard : ProofCatalystDashboard
-canonicalProofCatalystDashboard = proof-catalyst-dashboard
-  "NS: January signed/coherence physical ancestry -> May explicit continuum wall -> July uniformisation attempts -> signed physical transfer -> uniform spacetime/potential payment"
-  "YM: May finite-depth gap/uniformity wall -> July uniform-gap survival attempts -> continuum physical Schwinger family -> quantitative clustering -> physical spectrum"
-  "RH: February analytic ancestry -> July first explicit RH programme -> literal oscillatory zero response -> uniform strict high margin"
-  "GR/QFT: May physical matter/stress seam -> July broad shared-action/QG cutset -> literal sector + Einstein variations -> same action/metric/stress weld -> anomaly/UV/semiclassical QG recovery"
-  "Dates are lower bounds. QID/OEIS/DOI are identity/provenance coordinates, not proof. Acquisition may snowball out of dependency order; theorem payment may not. Attempted payment is not successful payment. Typed theorem state outranks loose commit-message status. Search old outputs by shape and prove same-object transport before reuse."
+canonicalDashboard : ProofCatalystDashboard
+canonicalDashboard = dashboard
+  "NS: R567 exact transpose collapse -> R568 one live commutator spacetime budget; R584 exact nested Bony routing; test Aug-06 Luo LH/HL/HH donor transport, then comparable + outer spectator/spacetime."
+  "YM: current full Clay router = Round82 A1/B1/B2/C1/C2. A1 determinant-first positive beta is sharpest source-facing leaf; B1/B2 carry mass-gap/clustering; C1/C2 preserve local/OPE/stress/Hamiltonian submission requirements."
+  "RH: final finite certificate -> actual nearResponse transport is already owned. Reuse generic Bishop four-corner + expression intervals + sin/cos alternating series; remaining theorem is the strict certified envelope below actual ClusterResponse."
+  "GR/QFT: same action/metric/total-stress weld first; literal sectors next; anomaly/UV/semiclassical recovery afterwards."
+  "Dates are lower bounds. QID/OEIS/DOI/attribution are provenance coordinates. Search old outputs by shape, prove same-object transport, and count Clay payment only when the exact live theorem is inhabited."
