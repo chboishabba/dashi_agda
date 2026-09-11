@@ -30,6 +30,7 @@ bash "$HERE/run_span_reconstruction.sh" "$SPECIMEN"
 bash "$HERE/run_discourse_quality.sh" "$SPECIMEN"
 bash "$HERE/run_sensiblaw_world_adapter.sh" "$SPECIMEN"
 bash "$HERE/run_world_constraint_fibre.sh" "$SPECIMEN"
+bash "$HERE/run_review_disposition.sh" "$SPECIMEN" "$SPECIMEN/c029-consumer-gates.json"
 
 PARITY_STATUS="not-run"
 if [[ -d "$SENSIBLAW_ROOT/src" ]]; then
@@ -37,12 +38,13 @@ if [[ -d "$SENSIBLAW_ROOT/src" ]]; then
   PARITY_STATUS="passed"
 fi
 
-printf '\nABC730_PRIMARY_PIPELINE_RECEIPT specimen=%s source_role=speaker-labelled-primary programme_same_object=true sensiblaw_world_adapter=true world_constraint_fibre=attached-candidate-only sensiblaw_normalization_parity=%s semantic_promotion=false\n' "$SPECIMEN" "$PARITY_STATUS"
-printf 'Run outputs:\n  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n' \
+printf '\nABC730_PRIMARY_PIPELINE_RECEIPT specimen=%s source_role=speaker-labelled-primary programme_same_object=true sensiblaw_world_adapter=true world_constraint_fibre=attached-candidate-only review_consumer=c029-abstain-or-veto sensiblaw_normalization_parity=%s semantic_promotion=false\n' "$SPECIMEN" "$PARITY_STATUS"
+printf 'Run outputs:\n  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n  %s\n' \
   "$SPECIMEN/discourse-graph-transcript-wide.tsv" \
   "$SPECIMEN/discourse-spans-transcript-wide.tsv" \
   "$SPECIMEN/discourse-quality-transcript-wide.tsv" \
   "$SPECIMEN/sensiblaw-candidate-world-model.json" \
   "$SPECIMEN/world-constraint-fibres.json" \
   "$SPECIMEN/sensiblaw-candidate-world-model-constrained.json" \
+  "$SPECIMEN/review-dispositions.json" \
   "$SPECIMEN/source-reconstructed.txt"
