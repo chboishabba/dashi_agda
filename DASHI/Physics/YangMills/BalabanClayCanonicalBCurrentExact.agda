@@ -98,6 +98,12 @@ import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound33
 -- now one executable compiler route.
 import DASHI.Physics.YangMills.BalabanCanonicalBOSIndexedCompletionRound333Exact
 
+-- R334 corrects an over-coarse H1 application shortcut.  A scale/volume-level
+-- common source-domain witness cannot by itself manufacture admissibility of
+-- the actual selected pair (J_A,J_B); the pair-specific same-object domain weld
+-- is proof-relevant and remains the source/application frontier.
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainWeldRound334Exact
+
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
 -- historical donor classification only; it does not promote Step-V to a
