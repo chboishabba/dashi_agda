@@ -9,6 +9,9 @@ SOURCE="${UNLABELLED}/source.txt"
 OUT="${UNLABELLED}/sensiblaw-candidate-world-model-with-claim-fragments.json"
 ERR="${UNLABELLED}/sensiblaw-claim-fragment-projection.stderr"
 
+if [[ ! -s "$WORLD" ]]; then
+  bash "$HERE/run_claim_projection.sh" "$UNLABELLED" >/dev/null
+fi
 [[ -s "$WORLD" ]] || { echo "ERROR: missing world-with-claims $WORLD" >&2; exit 1; }
 [[ -s "$PATHS" ]] || { echo "ERROR: missing discourse paths $PATHS" >&2; exit 1; }
 [[ -s "$SOURCE" ]] || { echo "ERROR: missing source $SOURCE" >&2; exit 1; }
@@ -56,6 +59,7 @@ print(
     f"edges={m['summary']['claim_fragment_projection_edge_count']} "
     f"exact_boundary_fragments={m['summary']['exact_boundary_fragment_count']} "
     f"bounded_boundary_fragments={m['summary']['bounded_boundary_fragment_count']} "
+    'prerequisite_world=self-prepared '
     'whole_claim_extent_paid=false candidate_only=true semantic_promotion=false'
 )
 PY
