@@ -33,9 +33,12 @@ assert p["base_1458_central_trace"] == -729
 assert isinstance(p["base_1458_extraspecial_central_class_position"], int)
 assert p["base_1458_extraspecial_central_class_position"] > 0
 assert isinstance(p["qg_to_n3b_kernel_order_three_class_position"], int)
-assert p["qg_to_n3b_kernel_order_three_class_position"] > 0
 assert isinstance(p["qg_to_n3b_kernel_outer_class_position"], int)
-assert p["qg_to_n3b_kernel_outer_class_position"] > 0
+# Primary Barraclough--Wilson supplementary quotient coordinates.  These are
+# an external historical-data regression, deliberately separate from the GAP
+# semantic selector that recovers the kernel by order/size/quotient identity.
+assert p["qg_to_n3b_kernel_order_three_class_position"] == 20
+assert p["qg_to_n3b_kernel_outer_class_position"] == 6
 assert p["qg_to_n3b_kernel_order_three_class_position"] != p["base_1458_extraspecial_central_class_position"]
 assert len(p["degree_12_atlas_labels"]) == 2
 assert len(p["degree_78_atlas_labels"]) == 2
