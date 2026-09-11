@@ -36,7 +36,7 @@ releasedCode = Attribution.mkNoDOISource
   "GitHub source repository linked by the authors' online appendix"
   "2015-2019 public history"
   "https://github.com/marksibrahim/wikipedia_network"
-  Attribution.namedSourceKind
+  (Attribution.namedSourceKind "software repository")
   "released implementation/source-history carrier; not by itself proof of the exact executed production revision or local input bytes"
   Attribution.publicAttribution
 
