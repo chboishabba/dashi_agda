@@ -100,16 +100,19 @@ record HistoricalInputArchaeology : Set where
     producerRepository : String
     readmeDumpCue : String
     parserDumpCue : String
+    paperSnapshotCue : String
+    storyLabBlogSnapshotCue : String
     parserCueReplicatedAcrossProducerArtifacts : Bool
     readme2015CueUniqueInFocusedSearch : Bool
-    codeLevelCandidateDump : String
-    exactRuntimeDumpDateReconciled : Bool
+    historicalRuntimeMonthPaid : Bool
+    historicalRuntimeMonth : String
+    exactRuntimeDumpDayPaid : Bool
     parserPolicyRecovered : Bool
     parserPolicy : String
     currentAuditPolicy : String
     currentAuditParserEquivalentPaid : Bool
     fullHistoricalFLNAvailable : Bool
-    historicalEdgeIdentityPaidForCurrentProbes : Bool
+    historicalEdgeIdentityPaidForAllCurrentProbes : Bool
     nextDiscriminator : String
 
 open HistoricalInputArchaeology public
@@ -119,9 +122,12 @@ canonicalHistoricalInputArchaeology = historical-input-archaeology
   "marksibrahim/wikipedia_network"
   "code/readme.md: enwiki2015--.xml (date truncated/underspecified)"
   "code/first_link_txt.py and old parser/test copies: https://dumps.wikimedia.org/enwiki/20141008/"
+  "author-hosted paper: English Wikipedia as of November 2014"
+  "Computational Story Lab blog: snapshot of English Wikipedia in November 2014"
   true
   true
-  "2014-10-08 is the stronger code-level candidate, not yet promoted to proven runtime input"
+  true
+  "2014-11"
   false
   true
   "parse page body; ignore templates, parentheses, <ref>, <div>, nested/non-article namespace links; return first qualifying outermost [[wikilink]] destination"
@@ -129,7 +135,43 @@ canonicalHistoricalInputArchaeology = historical-input-archaeology
   false
   true
   false
-  "pay BOTH gates: reconcile the runtime dump revision and reproduce the original parser policy for the targeted pages; then compare the historical FLN edges with current probes"
+  "recover exact November-2014 dump file/day and reproduce the original parser for the remaining targeted pages; compare only after those two same-object gates are paid"
+
+------------------------------------------------------------------------
+-- Historical edge receipts recovered directly from the primary writeup.
+------------------------------------------------------------------------
+
+data HistoricalEdgeComparisonStatus : Set where
+  historicallyStable changed renamed unresolvedHistorical : HistoricalEdgeComparisonStatus
+
+record HistoricalEdgeComparison : Set where
+  constructor historical-edge-comparison
+  field
+    child : String
+    historicalParent : String
+    historicalSource : String
+    historicalSnapshot : String
+    currentParent : String
+    currentObservationDate : String
+    status : HistoricalEdgeComparisonStatus
+    exactHistoricalEdgePaid : Bool
+    currentEdgePaid : Bool
+    boundedReading : String
+
+open HistoricalEdgeComparison public
+
+economicsHistoricalComparison : HistoricalEdgeComparison
+economicsHistoricalComparison = historical-edge-comparison
+  "Economics"
+  "Social Science"
+  "Ibrahim-Danforth-Dodds author-hosted paper, Figure 1 / Train path"
+  "English Wikipedia November 2014 FLN"
+  "social science"
+  "2026-09-10"
+  historicallyStable
+  true
+  true
+  "The primary paper explicitly prints Economics -> Social Science in the historical FLN, and the current audit observes the same destination modulo title case. This pays stability for this edge only; it does not pay parser equivalence or the remaining current probes."
 
 ------------------------------------------------------------------------
 -- Semantic-coordinate payments recovered by the current audit.
@@ -157,11 +199,14 @@ record IbrahimSourceArchaeologyBoundary : Set where
     qidCreatesHistoricalEdgeIdentity : Bool
     deweyCreatesSourceAuthority : Bool
     traversalFunnelRankCreatesEpistemicAuthority : Bool
-    strongerCodeCueEqualsProvenRuntimeDump : Bool
+    parserCommentDateOverridesPaperSnapshotMonth : Bool
+    readme2015CueOverridesPaperSnapshotMonth : Bool
+    historicalMonthDeterminesExactDumpDay : Bool
+    onePaidHistoricalEdgePaysAllProbeEdges : Bool
     currentConceptualPolicyEqualsOriginalParser : Bool
     sourceManifestationsMayGuideHistoricalRecovery : Bool
 
 open IbrahimSourceArchaeologyBoundary public
 
 canonicalIbrahimSourceArchaeologyBoundary = ibrahim-source-archaeology-boundary
-  false false false false false false false false false true
+  false false false false false false false false false false false false true
