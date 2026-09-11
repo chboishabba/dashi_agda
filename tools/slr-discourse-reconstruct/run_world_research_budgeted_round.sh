@@ -15,6 +15,9 @@ ROUNDS_DIR="$OUT_DIR/world-research-rounds"
 ROUND_DIR="$ROUNDS_DIR/round-$ITERATION_INDEX"
 HISTORY="$ROUNDS_DIR/missing-surface-attempt-history.json"
 HISTORY_NEXT="$ROUND_DIR/missing-surface-attempt-history.json"
+PLANNING_CLOSURE="$ROUND_DIR/planning-semantic-world-closure.json"
+PLANNING_CLOSURE_ERR="$ROUND_DIR/planning-semantic-world-closure.stderr"
+PLANNING_ITERATION="$ROUND_DIR/planning-world-research-iteration.json"
 PLAN="$ROUND_DIR/budget-plan.json"
 SEEDS="$ROUND_DIR/selected-related-qid-seeds.jsonl"
 PLAN_ERR="$ROUND_DIR/budget-plan.stderr"
@@ -45,10 +48,49 @@ PY
 )"
 [[ -s "$PREVIOUS_CLOSURE" ]] || { echo "ERROR: previous semantic closure unavailable: $PREVIOUS_CLOSURE" >&2; exit 1; }
 
+# Older iteration receipts predate Pareto support coordinates.  Refresh the
+# pre-round closure from the exact current graph before planning so the first
+# upgraded round does not silently fall back to lexical-QID order.
+HAS_PARETO_COORDS="$(python3 - "$PREVIOUS_CLOSURE" <<'PY'
+import json, sys
+c=json.load(open(sys.argv[1], encoding='utf-8'))
+print('true' if bool(c.get('pareto_support_coordinates_emitted', False)) else 'false')
+PY
+)"
+if [[ "$HAS_PARETO_COORDS" == "true" ]]; then
+  cp "$PREVIOUS_CLOSURE" "$PLANNING_CLOSURE"
+else
+  python3 "$HERE/slr_semantic_world_closure.py" \
+    --graph "$BASE_GRAPH" \
+    --cache-dir "$OUT_DIR/semantic-world-http-cache" \
+    --output "$PLANNING_CLOSURE" \
+    --languages "$LANGUAGES" \
+    --max-links "${SLR_WORLD_MAX_SURFACE_LINKS:-60}" \
+    --retries "${MULTILINGUAL_MAX_RETRIES:-5}" \
+    2> "$PLANNING_CLOSURE_ERR"
+fi
+
+python3 - "$INPUT_ITERATION" "$PLANNING_CLOSURE" "$PLANNING_ITERATION" <<'PY'
+import json, sys
+from pathlib import Path
+iteration=json.load(open(sys.argv[1], encoding='utf-8'))
+closure=json.load(open(sys.argv[2], encoding='utf-8'))
+summary=iteration.setdefault('summary', {})
+cs=closure.get('summary') or {}
+for key in ('canonical_atoms','observed_surfaces','simplewiki_surfaces','semantic_gap_atoms','propagated_views','acquisition_obligations'):
+    summary[key]=int(cs.get(key, summary.get(key, 0)))
+iteration['semantic_closure_reference']=str(Path(sys.argv[2]))
+iteration['next_acquisition_obligations']=closure.get('acquisition_obligations') or []
+iteration['pareto_support_coordinates_emitted']=bool(closure.get('pareto_support_coordinates_emitted', False))
+iteration['pareto_dimensions_scalarized']=False
+Path(sys.argv[3]).write_text(json.dumps(iteration, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+PY
+PREVIOUS_CLOSURE="$PLANNING_CLOSURE"
+
 python3 "$HERE/slr_world_research_budget.py" self-check 2> "$ROUND_DIR/budget-self-check.stderr"
 plan_args=(
   plan
-  --iteration "$INPUT_ITERATION"
+  --iteration "$PLANNING_ITERATION"
   --output "$PLAN"
   --seeds "$SEEDS"
   --history-output "$HISTORY_NEXT"
@@ -91,8 +133,6 @@ else
   printf 'SLR_WORLD_RESEARCH_GRAPH_MERGE_SKIPPED reason=no-selected-related-qids candidate_only=true semantic_promotion=false\n' > "$MERGE_ERR"
 fi
 
-# Recompute closure from the merged graph without the original four-QID
-# multilingual limiter so newly followed QIDs can become roots in this round.
 python3 "$HERE/slr_semantic_world_closure.py" \
   --graph "$MERGED_GRAPH" \
   --cache-dir "$OUT_DIR/semantic-world-http-cache" \
@@ -117,7 +157,7 @@ python3 "$HERE/slr_world_research_gap_flow.py" \
 grep -q 'net_gap_growth_implies_no_contraction=false' "$GAP_FLOW_ERR" || { cat "$GAP_FLOW_ERR" >&2; exit 1; }
 grep -q 'semantic_promotion=false' "$GAP_FLOW_ERR" || { cat "$GAP_FLOW_ERR" >&2; exit 1; }
 
-python3 - "$INPUT_ITERATION" "$PLAN" "$BASE_GRAPH" "$MERGED_GRAPH" "$CLOSURE" "$GAP_FLOW" "$NEXT_ITERATION" "$ITERATION_INDEX" 2> "$ROUND_ERR" <<'PY'
+python3 - "$PLANNING_ITERATION" "$PLAN" "$BASE_GRAPH" "$MERGED_GRAPH" "$CLOSURE" "$GAP_FLOW" "$NEXT_ITERATION" "$ITERATION_INDEX" 2> "$ROUND_ERR" <<'PY'
 import json, sys
 from pathlib import Path
 previous = json.load(open(sys.argv[1], encoding='utf-8'))
@@ -203,6 +243,7 @@ print(
 PY
 
 cp "$HISTORY_NEXT" "$HISTORY"
+[[ -s "$PLANNING_CLOSURE_ERR" ]] && cat "$PLANNING_CLOSURE_ERR"
 cat "$PLAN_ERR"
 [[ -s "$FOLLOW_ERR" ]] && cat "$FOLLOW_ERR"
 cat "$MERGE_ERR"
