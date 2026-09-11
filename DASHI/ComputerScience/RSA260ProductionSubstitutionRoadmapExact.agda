@@ -27,6 +27,7 @@ import DASHI.ComputerScience.RSA260BidiKrylovReachableRankExact as DynamicRank
 import DASHI.ComputerScience.RSA260BidiStructuralFibrePortfolioHeldoutExact as StructuralPortfolio
 import DASHI.ComputerScience.RSA260BidiDynamicRankRepairHeldoutExact as DynamicRepair
 import DASHI.ComputerScience.RSA260BidiDynamicRankRepairPresentationTransferExact as DynamicTransfer
+import DASHI.ComputerScience.RSA260BidiKrylovFiniteHorizonSaturationExact as FiniteHorizon
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -161,6 +162,12 @@ dynamicTransferBoundary = DynamicTransfer.canonicalPresentationTransferBoundary
 dynamicTransferReceipt : DynamicTransfer.PresentationTransferReceipt
 dynamicTransferReceipt = DynamicTransfer.currentPresentationTransferReceipt
 
+finiteHorizonBoundary : FiniteHorizon.FiniteHorizonInterpretationBoundary
+finiteHorizonBoundary = FiniteHorizon.canonicalFiniteHorizonInterpretationBoundary
+
+finiteHorizonReceipt : FiniteHorizon.FiniteHorizonReceipt
+finiteHorizonReceipt = FiniteHorizon.currentFiniteHorizonReceipt
+
 data ProductionResidual : Set where
   acquireSameObjectFineIncidenceBearingLACarrierArtifact : ProductionResidual
   acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
@@ -188,12 +195,13 @@ data CandidateExperimentResidual : Set where
   repairStructuralPortfolioWithDynamicReachableRank : CandidateExperimentResidual
   rerunHeldoutDynamicRepairAcrossPreparationFibres : CandidateExperimentResidual
   inspectSurvivingDynamicRepairResidual : CandidateExperimentResidual
+  explainFiniteHorizonOffsetExceptions : CandidateExperimentResidual
   exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = inspectSurvivingDynamicRepairResidual
+firstUnpaidCandidateExperimentResidual = explainFiniteHorizonOffsetExceptions
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -267,6 +275,11 @@ record RSA260ProductionSubstitutionBoundary : Set where
     dynamicRankRepairPresentationTransferExactBlobPaid : Bool
     dynamicRankRepairTransfersAcrossPreparationFibres : Bool
     dynamicRankRepairTransfersAcrossProjectionFibres : Bool
+    finiteHorizonKrylovDiagnosticPaid : Bool
+    finiteHorizonExactBlobPaid : Bool
+    finiteHorizonCombinedMinusOneToPlusOnePaid : Bool
+    finiteHorizonUniversalFormulaPaid : Bool
+    sameObjectKrylovSequenceFiniteHorizonDiagnosticPaid : Bool
     sameObjectKrylovSequenceDynamicDiagnosticPaid : Bool
     broadCoverageRaisesRecurrenceComplexity : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
@@ -354,6 +367,11 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; dynamicRankRepairPresentationTransferExactBlobPaid = true
   ; dynamicRankRepairTransfersAcrossPreparationFibres = true
   ; dynamicRankRepairTransfersAcrossProjectionFibres = true
+  ; finiteHorizonKrylovDiagnosticPaid = true
+  ; finiteHorizonExactBlobPaid = true
+  ; finiteHorizonCombinedMinusOneToPlusOnePaid = true
+  ; finiteHorizonUniversalFormulaPaid = false
+  ; sameObjectKrylovSequenceFiniteHorizonDiagnosticPaid = false
   ; sameObjectKrylovSequenceDynamicDiagnosticPaid = false
   ; broadCoverageRaisesRecurrenceComplexity = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
@@ -383,6 +401,8 @@ data SameCoarseContractImpliesSameRecurrenceComplexity : Set where
 data SyntheticDynamicRankImpliesProductionReachableRank : Set where
 data DynamicRankRepairImpliesExactFormula : Set where
 data DynamicRankTransferImpliesProductionBehaviour : Set where
+data FiniteHorizonEnvelopeImpliesUniversalFormula : Set where
+data FiniteHorizonDiagnosticImpliesMatrixBytes : Set where
 data KrylovSequenceImpliesMatrixBytes : Set where
 data HeldoutAverageFitImpliesNoCounterexamples : Set where
 data SearchMissImpliesArtifactAbsent : Set where
@@ -425,6 +445,12 @@ dynamicRankRepairDoesNotCreateExactFormula ()
 
 dynamicRankTransferDoesNotCreateProductionBehaviour : DynamicRankTransferImpliesProductionBehaviour → ⊥
 dynamicRankTransferDoesNotCreateProductionBehaviour ()
+
+finiteHorizonEnvelopeDoesNotCreateUniversalFormula : FiniteHorizonEnvelopeImpliesUniversalFormula → ⊥
+finiteHorizonEnvelopeDoesNotCreateUniversalFormula ()
+
+finiteHorizonDiagnosticDoesNotCreateMatrixBytes : FiniteHorizonDiagnosticImpliesMatrixBytes → ⊥
+finiteHorizonDiagnosticDoesNotCreateMatrixBytes ()
 
 krylovSequenceDoesNotCreateMatrixBytes : KrylovSequenceImpliesMatrixBytes → ⊥
 krylovSequenceDoesNotCreateMatrixBytes ()
