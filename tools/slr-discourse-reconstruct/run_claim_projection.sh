@@ -12,19 +12,25 @@ FIXTURE="$HERE/../../fixtures/slr/abc730-west-bank-sanctions-2026-09-09-speaker-
 CUTS="$HERE/../../fixtures/slr/abc730-west-bank-sanctions-2026-09-09-intrasentence-cuts.jsonl"
 
 [[ -s "$WORLD" ]] || bash "$HERE/run_sensiblaw_world_adapter.sh" "$SPECIMEN" >/dev/null
-[[ -s "$SOURCE" ]] || { echo "ERROR: missing source $SOURCE" >&2; exit 1; }
-[[ -s "$SOURCE_META" ]] || { echo "ERROR: missing source metadata $SOURCE_META" >&2; exit 1; }
 [[ -s "$FIXTURE" ]] || { echo "ERROR: missing fixture $FIXTURE" >&2; exit 1; }
 [[ -s "$CUTS" ]] || { echo "ERROR: missing cut fixture $CUTS" >&2; exit 1; }
 
-python3 "$HERE/slr_claim_projection.py" \
-  --world "$WORLD" \
-  --fixture "$FIXTURE" \
-  --cuts "$CUTS" \
-  --source "$SOURCE" \
-  --source-metadata "$SOURCE_META" \
-  --output "$OUT" \
-  2> "$ERR"
+args=(
+  --world "$WORLD"
+  --fixture "$FIXTURE"
+  --cuts "$CUTS"
+  --output "$OUT"
+)
+SOURCE_MODE="sentence-mapping-only"
+if [[ -s "$SOURCE" && -s "$SOURCE_META" ]]; then
+  args+=(--source "$SOURCE" --source-metadata "$SOURCE_META")
+  SOURCE_MODE="same-source-refinement"
+elif [[ -s "$SOURCE" || -s "$SOURCE_META" ]]; then
+  echo "ERROR: source/source-metadata must either both exist or both be absent" >&2
+  exit 1
+fi
+
+python3 "$HERE/slr_claim_projection.py" "${args[@]}" 2> "$ERR"
 
 grep -q 'schema=slr-canonical-claim-projection-v2' "$ERR" || {
   echo 'ERROR: canonical claim projection receipt missing/stale' >&2
@@ -42,9 +48,10 @@ grep -q 'semantic_promotion=false' "$ERR" || {
   exit 1
 }
 
-python3 - "$OUT" <<'PY'
+python3 - "$OUT" "$SOURCE_MODE" <<'PY'
 import json, sys
 m = json.load(open(sys.argv[1], encoding='utf-8'))
+source_mode = sys.argv[2]
 assert m['schema_version'] == 'sl.candidate_world_model.v0_1'
 meta = m['metadata']['canonical_claim_projection']
 assert meta['schema'] == 'slr-canonical-claim-projection-v2'
@@ -53,8 +60,12 @@ assert meta['primary_speaker_resolution_is_claim_relative'] is True
 assert meta['exact_subspan_weld_paid_only_by_same_source_unique_phrase_offsets'] is True
 assert meta['semantic_promotion'] is False
 assert meta['candidate_only'] is True
+if source_mode == 'sentence-mapping-only':
+    assert meta['source'] == 'unsupplied'
+    assert m['summary']['exact_subspan_projection_edge_count'] == 0
 print(
     'SLR_CLAIM_PROJECTION_INTEGRITY '
+    f"source_mode={source_mode} "
     f"claims={m['summary']['canonical_claim_reference_count']} "
     f"edges={m['summary']['candidate_claim_projection_edge_count']} "
     f"exact_edges={m['summary']['exact_subspan_projection_edge_count']} "
@@ -66,4 +77,4 @@ print(
 )
 PY
 
-printf 'world_with_claims=%s\nstderr=%s\n' "$OUT" "$ERR"
+printf 'source_mode=%s\nworld_with_claims=%s\nstderr=%s\n' "$SOURCE_MODE" "$OUT" "$ERR"
