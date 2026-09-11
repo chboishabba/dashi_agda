@@ -44,6 +44,19 @@ stateDepartment2011Tegnelia = dbe-attribution-manifestation
   "650 Management / consulting traversal only"
   "Primary government carrier paying Tegnelia's 2011 DBE President/Owner attribution. It does not determine later ownership or exclude a later transfer/reorganisation involving McCasland."
 
+fec2014TegneliaAddress : DBEAttributionManifestation
+fec2014TegneliaAddress = dbe-attribution-manifestation
+  "2014-05-27"
+  primaryGovernmentRecord
+  "Federal Election Commission Schedule A itemized receipt naming James Tegnelia"
+  "https://docquery.fec.gov/pdf/904/14020503904/14020503904.pdf"
+  "James Tegnelia"
+  "FEC contributor mailing address 11039 Bridgepointe NE, Albuquerque, NM 87111"
+  "FEC filing 14020503904; Transaction ID C10047764"
+  "unresolvedQid"
+  "324 Political process record / 650 management traversal only"
+  "Primary federal filing pays James Tegnelia's personal/contributor mailing address at 11039 Bridgepointe NE in 2014. Because the later DBE letterhead uses the same address, that letterhead address cannot by itself be promoted to an independently established corporate office."
+
 tegneliaLetterhead2017 : DBEAttributionManifestation
 tegneliaLetterhead2017 = dbe-attribution-manifestation
   "2017-09-01"
@@ -55,7 +68,7 @@ tegneliaLetterhead2017 = dbe-attribution-manifestation
   "DBE CONSULTING LLC, 11039 Bridgepointe NE, Albuquerque, NM 87111"
   "unresolvedQid"
   "650 Management / consulting traversal only"
-  "Dated DBE-letterhead carrier showing Tegnelia acting through the company in 2017. It is not a corporate filing and does not itself identify every owner/member."
+  "Dated DBE-letterhead carrier showing Tegnelia acting through the company in 2017. The same 11039 Bridgepointe NE address is independently paid as Tegnelia's 2014 FEC contributor mailing address, so this source pays a DBE correspondence address but not a distinct corporate-office identity."
 
 kirtlandCurrentTegnelia : DBEAttributionManifestation
 kirtlandCurrentTegnelia = dbe-attribution-manifestation
@@ -97,13 +110,29 @@ federalDOTAtlantaDBE = dbe-attribution-manifestation
   "Primary federal government carrier paying existence, owner name and Atlanta address for a DBE Consulting, LLC distinct in place/person from the Albuquerque DBE attributed to Tegnelia. It is a negative-control entity carrier only and does not identify the New Mexico legal entity or its ownership history."
 
 ------------------------------------------------------------------------
+-- Address-manifestation boundary.
+------------------------------------------------------------------------
+
+record DBEAddressReuseState : Set where
+  constructor dbe-address-reuse-state
+  field
+    address : String
+    fecPersonAddressPaid : Bool
+    laterDBELetterheadAddressPaid : Bool
+    sameAddressAcrossManifestationsPaid : Bool
+    addressProvesSeparateCorporateOffice : Bool
+    addressProvesLegalEntityIdentity : Bool
+    addressMayGuideRegistrySearch : Bool
+
+open DBEAddressReuseState public
+
+canonicalDBEAddressReuseState : DBEAddressReuseState
+canonicalDBEAddressReuseState = dbe-address-reuse-state
+  "11039 Bridgepointe NE, Albuquerque, NM 87111"
+  true true true false false true
+
+------------------------------------------------------------------------
 -- Same-label company collision control.
---
--- Ibrahim/Dewey traversal from company register -> company/legal entity exposed
--- an unrelated U.S. DOT-listed DBE Consulting, LLC in Atlanta, owned by Kimberly
--- Griffin.  This is the corporate analogue of a same-name person/DOI collision:
--- legal-entity identity must be paid by jurisdictional identifiers, addresses,
--- formation records or equivalent primary company carriers, not string equality.
 ------------------------------------------------------------------------
 
 record SameLabelCompanyCollision : Set where
@@ -131,9 +160,7 @@ atlantaDBEConsultingCollision = same-label-company-collision
   "Disadvantaged Business Enterprise applicant; owner Kimberly Griffin"
   "DBE Consulting LLC, Albuquerque, New Mexico"
   "State Department PRN 2011/1166 naming James A. Tegnelia as President/Owner; 2017 Albuquerque DBE letterhead at 11039 Bridgepointe NE"
-  false
-  false
-  true
+  false false true
 
 ------------------------------------------------------------------------
 -- Conflict / payment state.
@@ -143,6 +170,7 @@ record DBEOwnershipArchaeologyState : Set where
   constructor dbe-ownership-archaeology-state
   field
     tegneliaOwner2011Paid : Bool
+    tegneliaAddress2014Paid : Bool
     tegneliaCompanyCarrier2017Paid : Bool
     tegneliaCurrentFounderHeadingPaid : Bool
     mccaslandCurrentDBEHeadingPaid : Bool
@@ -160,8 +188,8 @@ open DBEOwnershipArchaeologyState public
 
 canonicalDBEOwnershipArchaeologyState : DBEOwnershipArchaeologyState
 canonicalDBEOwnershipArchaeologyState = dbe-ownership-archaeology-state
-  true true true true true true true false false false false false
-  "recover New Mexico corporate filing/history or equivalent primary government/vendor record identifying the exact Albuquerque DBE entity, jurisdictional/entity identifier, formation date, members/managers/ownership changes and dated McCasland role; use exact identifiers to prevent collision with the U.S. DOT Atlanta DBE Consulting, LLC; only then acquire primary 2025-2026 client/contract carriers"
+  true true true true true true true true false false false false false
+  "recover New Mexico corporate filing/history or equivalent primary government/vendor record identifying the exact Albuquerque DBE entity, jurisdictional/entity identifier, formation date, members/managers/ownership changes and dated McCasland role; treat 11039 Bridgepointe NE as a paid Tegnelia/DBE correspondence coordinate rather than an independently established corporate office; only then acquire primary 2025-2026 client/contract carriers"
 
 record DBEAttributionBoundary : Set where
   constructor dbe-attribution-boundary
@@ -173,6 +201,7 @@ record DBEAttributionBoundary : Set where
     duplicateFounderHeadingsCanBothBeReadAsLiteralCorporateHistory : Bool
     unrelatedSameLabelCompanyMayBeMergedByName : Bool
     federalDBERecordIdentifiesAlbuquerqueEntity : Bool
+    sharedPersonalAndLetterheadAddressProvesSeparateOffice : Bool
     secondaryClientClaimsPromoteWithoutPrimaryContract : Bool
     datedManifestationsMayGuideCorporateRecordSearch : Bool
 
@@ -180,4 +209,4 @@ open DBEAttributionBoundary public
 
 canonicalDBEAttributionBoundary : DBEAttributionBoundary
 canonicalDBEAttributionBoundary = dbe-attribution-boundary
-  false false false false false false false false true
+  false false false false false false false false false true
