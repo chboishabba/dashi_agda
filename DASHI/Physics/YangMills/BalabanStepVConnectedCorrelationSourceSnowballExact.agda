@@ -29,10 +29,12 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational using (ℚ; _≤_)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Physics.YangMills.BalabanLargeFieldStepV as StepV
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
+import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
 import DASHI.Physics.YangMills.BalabanMarkedLogPartitionConnectedCorrelationCompilerExact as Marked
 
 ------------------------------------------------------------------------
@@ -124,8 +126,8 @@ koteckyPreissPaperQid =
     "not located in current source snowball"
     "do not guess a paper QID from author or DOI identity"
 
-danelUeltschiQid : SearchCoordinate
-danelUeltschiQid =
+danielUeltschiQid : SearchCoordinate
+danielUeltschiQid =
   searchCoordinate
     "Wikidata QID: Daniel Ueltschi"
     "unresolved"
@@ -138,7 +140,7 @@ ueltschiUDC =
     "UDC coordinates from journal record"
     "82B05; 82B10"
     "primary bibliographic record"
-    "statistical mechanics / equilibrium statistical mechanics search coordinate; not theorem authority"
+    "statistical mechanics search coordinate; not theorem authority"
 
 stepVDewey : SearchCoordinate
 stepVDewey =
@@ -161,7 +163,7 @@ stepVSearchCoordinates =
   romanKoteckyQid ∷
   davidPreissQid ∷
   koteckyPreissPaperQid ∷
-  danelUeltschiQid ∷
+  danielUeltschiQid ∷
   ueltschiUDC ∷
   stepVDewey ∷
   stepVOEIS ∷
@@ -257,9 +259,7 @@ TwoMarkLivePaymentShape dataSet =
         (λ cluster → TwoMark.absoluteValue dataSet
           (TwoMark.clusterWeight dataSet cutoff A B cluster))
         (TwoMark.contributingClusters dataSet cutoff A B))
-    Data.Rational._≤_
-      DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact.rootedShellTail
-        (TwoMark.supportSeparation dataSet A B)
+    ≤ Tail.rootedShellTail (TwoMark.supportSeparation dataSet A B)
 
 ------------------------------------------------------------------------
 -- Fail-closed source/payment boundary.
