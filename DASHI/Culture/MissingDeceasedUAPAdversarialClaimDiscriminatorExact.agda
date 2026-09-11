@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Culture.AmyEskridgeAntigravityObservationBidiCrossPollinationExact as AmyAnti
+import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact as Ning
 import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact as Reza
 import DASHI.Physics.Materials.RezaFangAlloyMetamaterialDiscriminationExact as MaterialDisc
 import DASHI.Physics.Materials.FusionPropulsionMaterialSurvivabilityCrossPollinationExact as FusionMaterials
@@ -47,12 +48,12 @@ zeroPointSuppressionDiscriminator : ClaimDiscriminator
 zeroPointSuppressionDiscriminator = claim-discriminator
   zeroPointSuppression
   "operational vacuum/zero-point antigravity exists and civilian replication was intentionally suppressed"
-  "DASHI types vacuum-regime antigravity requests and Amy-associated reverse-search lanes; independently, NASA TechPort project 12110 officially discusses aneutronic-fusion/TWDEC propulsion and historically mentions a Quantum Vacuum thruster as a possible partner technology"
-  "AntigravityMaterialBidiCrossPollinationExact + AmyEskridgeAntigravityObservationBidiCrossPollinationExact + FusionPropulsionMaterialSurvivabilityCrossPollinationExact"
-  "the TechPort wording is not a validation receipt: still need mechanism-specific zero-point extraction, operational thrust apparatus, independent replication and a causal suppression action tied to the same object/person"
-  "if suppression targeted a working device, pre-public programme/security/personnel records should converge on the same apparatus or validated effect rather than merely reuse vacuum-propulsion vocabulary"
-  "NASA can record speculative/advanced propulsion concepts and programme-planning language without demonstrating zero-point extraction or anomalous thrust"
-  "acquire project-12110 technical reports/test results and any named Q-thruster apparatus lineage; compare with Amy-linked mechanism objects only after same-object identity is paid"
+  "DASHI types vacuum-regime antigravity requests and Amy-associated reverse-search lanes; Ning Li/Li-Torr pays exact superconducting-gravity theory identities and a 1997 static YBCO gravimeter constraint (<2 parts in 10^8 g in the tested configuration); independently, NASA TechPort project 12110 officially discusses aneutronic-fusion/TWDEC propulsion and historically mentions a Quantum Vacuum thruster as a possible partner technology"
+  "AntigravityMaterialBidiCrossPollinationExact + AmyEskridgeAntigravityObservationBidiCrossPollinationExact + NingLiYBCOGravityConstraintBidiExact + FusionPropulsionMaterialSurvivabilityCrossPollinationExact"
+  "the theory vocabulary and TechPort wording are not validation receipts: still need mechanism-specific zero-point extraction, an operational thrust/gravity apparatus, independent replication and a causal suppression action tied to the same object/person; stronger later claims must also explain which changed coordinate escapes the 1997 static constraint"
+  "if suppression targeted a working device, pre-public programme/security/personnel records should converge on the same apparatus or validated effect and should identify a material/drive regime distinct enough to make the earlier static null constraint irrelevant"
+  "NASA can record speculative/advanced propulsion concepts and programme-planning language without demonstrating zero-point extraction or anomalous thrust; Li's own static experiment can constrain a theory family without refuting every dynamic variant"
+  "recover project-12110 technical reports/test results and reported Army agreement DAAH01-01-9-R001/AC Gravity technical records; compare apparatus geometry, drive regime and result state with Amy-linked mechanism objects only after same-object identity is paid"
   false false false
 
 mondaloyMetamaterialDiscriminator : ClaimDiscriminator
@@ -106,6 +107,9 @@ houseCoverStoryDiscriminator = claim-discriminator
 zeroPointSuppressionIsNotVacuumThrust : Bool
 zeroPointSuppressionIsNotVacuumThrust = true
 
+ningLiStaticConstraintCannotBeDropped : Bool
+ningLiStaticConstraintCannotBeDropped = true
+
 nasaQuantumVacuumMentionDoesNotPayOperationalThrust : Bool
 nasaQuantumVacuumMentionDoesNotPayOperationalThrust = true
 
@@ -117,6 +121,9 @@ houseInquiryDoesNotPayCommonCause = true
 
 existingAntigravityBoundary : Anti.AntigravityPromotionBoundary
 existingAntigravityBoundary = Anti.canonicalAntigravityPromotionBoundary
+
+existingNingConstraintBoundary : Ning.NingLiConstraintBoundary
+existingNingConstraintBoundary = Ning.canonicalNingLiConstraintBoundary
 
 existingFangMetamaterialBoundary : Fang.FangMetamaterialBoundary
 existingFangMetamaterialBoundary = Fang.canonicalFangMetamaterialBoundary
