@@ -9,6 +9,7 @@ import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Attribution
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapCurrentExact as Current
 import DASHI.Wikimedia.IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact as HistoricalDump
+import DASHI.Wikimedia.IbrahimFirstLinkNovember06ProducerPathStrengtheningExact as November06
 import DASHI.Wikimedia.IbrahimSnowballSourceGenealogyIndependenceEvidenceSynthesisBidiExact as Genealogy
 import DASHI.Wikimedia.IbrahimSnowballPostPublicationStatusPropagationBidiExact as Status
 import DASHI.Wikimedia.IbrahimSnowballLearningMemoryTraumaReplicationConsensusBidiExact as Learning
@@ -54,8 +55,8 @@ historicalFirstLinkRuntime : ParetoFrontierLeaf
 historicalFirstLinkRuntime = pareto-frontier-leaf
   1 currentHighestAlpha
   "Ibrahim historical First Link Network corpus / dump / parser / result same-object provenance"
-  "IbrahimKnowledgeCoverageRoadmapCurrentExact; IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact; IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact"
-  "2014-10-08 is the strongest concrete dump candidate, but exact artifact hash, dump-to-112-chunk lineage, parser-equivalent execution and reproduced-result same-object match remain unpaid; the paper/blog November-2014 description remains retained and unresolved against that candidate"
+  "IbrahimKnowledgeCoverageRoadmapCurrentExact; IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact; IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact; IbrahimFirstLinkNovember06ProducerPathStrengtheningExact"
+  "2014-11-06 is now the strongest producer-path DATE candidate: publication methods say November 2014 and 112 UVM cores; producer preprocessing repeatedly names enwiki_20141106.xml; chunk-preparation code enumerates 112 small*.xml names; author appendix identifies data/fln.json as the published 505 MB FLN map. Exact compressed dump variant/hash, raw pre-split command/chunk hashes, parser-equivalent execution and reproduced-result same-object comparison remain unpaid. The 20141008 parser comment is retained as a conflicting/stale cue, not silently deleted."
   "historical first-link edges beyond those directly printed by the paper may be promoted only after the exact source-object chain is paid; otherwise they remain current/revision-sensitive or candidate historical edges"
   "all historical Ibrahim traversal claims"
   false
@@ -63,8 +64,11 @@ historicalFirstLinkRuntime = pareto-frontier-leaf
 historicalDumpBoundary : HistoricalDump.CandidateStrengtheningBoundary
 historicalDumpBoundary = HistoricalDump.canonicalCandidateStrengtheningBoundary
 
+november06Boundary : November06.November06StrengtheningBoundary
+november06Boundary = November06.canonicalNovember06StrengtheningBoundary
+
 remainingHistoricalPayment : String
-remainingHistoricalPayment = HistoricalDump.remainingHistoricalPayment
+remainingHistoricalPayment = November06.remainingNovember06Payment
 
 ------------------------------------------------------------------------
 -- Rank 2: opportunistic external metadata only.
