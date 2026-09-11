@@ -151,11 +151,83 @@ activeContinuationPotentialIsTheorem1RegularE :
       background
 activeContinuationPotentialIsTheorem1RegularE theorem1 Tangent index volume background = refl
 
+------------------------------------------------------------------------
+-- Least-privilege active continuation.
+--
+-- The CMP109/CMP116 continuation consumes only the regular-E/localization form.
+-- It does not consume the independent quantitative Section-2 bounds.  Accept the
+-- projected form witness directly so source acquisition and downstream payment
+-- are not coupled more strongly than the consumer requires.
+------------------------------------------------------------------------
+
+asActiveCMP109116ContinuationFromRegularEForm :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : R246.ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history} →
+  R246.ActiveRegularESection2FormWitness dataSet →
+  (Tangent : Set) →
+  Continue.CMP109116LiteralEffectiveActionContinuation
+asActiveCMP109116ContinuationFromRegularEForm
+    {history = history} {dataSet = dataSet} formWitness Tangent = record
+  { Continue.CMP109116LiteralEffectiveActionContinuation.Scale = ActiveScaleIndex history
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.Volume =
+      R246.ActiveRegularESection2Inputs.Volume dataSet
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.Background =
+      R246.ActiveRegularESection2Inputs.Background dataSet
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.Tangent = Tangent
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.Component =
+      R246.ActiveRegularESection2Inputs.Component dataSet
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.components =
+      λ index volume →
+        R246.components
+          (R246.regularEFormOnActiveScale formWitness
+            (scale index) (active index))
+          volume
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.cmp116PhysicalLocalizedActivity =
+      λ index volume component →
+        R246.localizedRegularActivity
+          (R246.regularEFormOnActiveScale formWitness
+            (scale index) (active index))
+          volume component
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.cmp109EffectivePotential =
+      λ index _ →
+        R246.regularE
+          (R246.regularEFormOnActiveScale formWitness
+            (scale index) (active index))
+  ; Continue.CMP109116LiteralEffectiveActionContinuation.effectivePotentialIsLocalizedCompositeSum =
+      λ index volume →
+        R246.regularEIsLocalizedCompositeSum
+          (R246.regularEFormOnActiveScale formWitness
+            (scale index) (active index))
+          volume
+  }
+
+activeContinuationPotentialIsRegularEFormWitness :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : R246.ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history}
+    (formWitness : R246.ActiveRegularESection2FormWitness dataSet)
+    (Tangent : Set) →
+  ∀ index volume background →
+  Continue.cmp109EffectivePotential
+    (asActiveCMP109116ContinuationFromRegularEForm formWitness Tangent)
+    index volume background
+  ≡ R246.regularE
+      (R246.regularEFormOnActiveScale formWitness
+        (scale index) (active index))
+      background
+activeContinuationPotentialIsRegularEFormWitness formWitness Tangent index volume background = refl
+
 theorem1RegularEContinuationCompilerLevel : ProofLevel
 theorem1RegularEContinuationCompilerLevel = machineChecked
 
 activeTheorem1RegularEContinuationCompilerLevel : ProofLevel
 activeTheorem1RegularEContinuationCompilerLevel = machineChecked
+
+activeRegularEFormWitnessContinuationCompilerLevel : ProofLevel
+activeRegularEFormWitnessContinuationCompilerLevel = machineChecked
 
 -- The literal physical/source payment is now the Section-2 predicate binding on
 -- the exact beta-driven flow.  The imported Theorem-1 authority then yields the
@@ -171,3 +243,10 @@ literalCMP119RegularESection2PredicateInstantiationLevel =
 literalActiveCMP119RegularESection2PredicateInstantiationLevel : ProofLevel
 literalActiveCMP119RegularESection2PredicateInstantiationLevel =
   R246.literalCMP119RegularESection2PredicateInstantiationLevel
+
+-- Least-privilege payment after projection: the continuation needs only the
+-- active regular-E/localization form witness, not the independent Section-2
+-- quantitative-bounds component of the full CMP122 witness.
+literalActiveCMP119RegularESection2FormWitnessLevel : ProofLevel
+literalActiveCMP119RegularESection2FormWitnessLevel =
+  R246.literalActiveCMP119RegularESection2FormWitnessLevel
