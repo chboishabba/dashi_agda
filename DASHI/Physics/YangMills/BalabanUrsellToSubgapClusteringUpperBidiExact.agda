@@ -18,6 +18,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact as Ursell
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 
 record UrsellSubgapAdapter
@@ -65,8 +66,8 @@ record UrsellSubgapAdapter
       ∀ energy (mode : Gap.SubgapMode spectrum energy) time →
       Gap.LessEqual spectrum
         (rationalBound
-          (Ursell.half *
-            Ursell.halfPower
+          (Geo.half *
+            Geo.halfPower
               (Ursell.separationDepth ursell
                 (leftObservable energy mode time)
                 (rightObservable energy mode time))))
