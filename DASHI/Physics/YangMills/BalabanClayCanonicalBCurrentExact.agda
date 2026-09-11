@@ -91,7 +91,11 @@ import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact
 -- translation action; only physical time/support meaning remains to be paid.
 import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact
 
--- Optional producer families retained below the canonical consumer.
+-- Optional producer families and provenance snowballs retained below the
+-- canonical consumer.  The source snowball is attribution/search metadata plus
+-- historical donor classification only; it does not promote Step-V to a
+-- mandatory route or import theorem content from citations.
+import DASHI.Physics.YangMills.BalabanStepVConnectedCorrelationSourceSnowballExact
 import DASHI.Physics.YangMills.BalabanStepVMarkedSourceDirectClusteringProducerCurrentExact
 import DASHI.Physics.YangMills.BalabanUrsellToSubgapClusteringUpperBidiExact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBUrsellDonorBidiExact
