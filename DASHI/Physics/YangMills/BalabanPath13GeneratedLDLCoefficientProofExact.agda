@@ -2,9 +2,7 @@ module DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCoefficientProofExact wh
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Integer.Base using (+_)
-open import Data.Product using (_×_; _,_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _-_; -_; _≤_; _/_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _-_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -12,108 +10,16 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq; sqDiff)
 open import DASHI.Physics.YangMills.BalabanRationalLDLCertificate
-open import DASHI.Physics.YangMills.BalabanPath13GeneratedLDLDataExact public
+open import DASHI.Physics.YangMills.BalabanPath13QuadraticCoefficientDataExact public
 import DASHI.Physics.YangMills.BalabanTriangularQuadraticCertificateExact as Quad
 
-coordinates : Path13Coordinates → List ℚ
-coordinates c = y0 c ∷ y1 c ∷ y2 c ∷ y3 c ∷ y4 c ∷ y5 c ∷ y6 c ∷ y7 c ∷ y8 c ∷ y9 c ∷ y10 c ∷ y11 c ∷ []
-
-energy0Coefficients : List ℚ
-energy0Coefficients = (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-energy1Coefficients : List ℚ
-energy1Coefficients = 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-energy2Coefficients : List ℚ
-energy2Coefficients = 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-energy3Coefficients : List ℚ
-energy3Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-energy4Coefficients : List ℚ
-energy4Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-energy5Coefficients : List ℚ
-energy5Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-energy6Coefficients : List ℚ
-energy6Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-energy7Coefficients : List ℚ
-energy7Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-energy8Coefficients : List ℚ
-energy8Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ []
-energy9Coefficients : List ℚ
-energy9Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ 0ℚ ∷ []
-energy10Coefficients : List ℚ
-energy10Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (- (+ 1)) ∷ (+ 1) ∷ []
-energy11Coefficients : List ℚ
-energy11Coefficients = (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 2)) ∷ []
-
-norm0Coefficients : List ℚ
-norm0Coefficients = (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm1Coefficients : List ℚ
-norm1Coefficients = 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm2Coefficients : List ℚ
-norm2Coefficients = 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm3Coefficients : List ℚ
-norm3Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm4Coefficients : List ℚ
-norm4Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm5Coefficients : List ℚ
-norm5Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm6Coefficients : List ℚ
-norm6Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm7Coefficients : List ℚ
-norm7Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm8Coefficients : List ℚ
-norm8Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ []
-norm9Coefficients : List ℚ
-norm9Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ 0ℚ ∷ []
-norm10Coefficients : List ℚ
-norm10Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ 0ℚ ∷ []
-norm11Coefficients : List ℚ
-norm11Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ []
-norm12Coefficients : List ℚ
-norm12Coefficients = (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ (- (+ 1)) ∷ []
-
-form0Coefficients : List ℚ
-form0Coefficients = (+ 1) ∷ (- (+ 1 / 34)) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 1 / 2) ∷ (+ 35 / 34) ∷ []
-form1Coefficients : List ℚ
-form1Coefficients = 0ℚ ∷ (+ 1) ∷ (- (+ 17 / 1767)) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 595 / 1767) ∷ (+ 1225 / 1767) ∷ []
-form2Coefficients : List ℚ
-form2Coefficients = 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 16489 / 76856)) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 15317 / 76856) ∷ (+ 31535 / 76856) ∷ []
-form3Coefficients : List ℚ
-form3Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 1040093 / 2736473)) ∷ (+ 20195 / 160969) ∷ (+ 20195 / 160969) ∷ (+ 20195 / 160969) ∷ (+ 20195 / 160969) ∷ (+ 20195 / 160969) ∷ (+ 20195 / 160969) ∷ (+ 706825 / 2736473) ∷ []
-form4Coefficients : List ℚ
-form4Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 42203197 / 84108198)) ∷ (+ 7053317 / 84108198) ∷ (+ 7053317 / 84108198) ∷ (+ 7053317 / 84108198) ∷ (+ 7053317 / 84108198) ∷ (+ 7053317 / 84108198) ∷ (+ 14521535 / 84108198) ∷ []
-form5Coefficients : List ℚ
-form5Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 1378315529 / 2319761419)) ∷ (+ 135632035 / 2319761419) ∷ (+ 135632035 / 2319761419) ∷ (+ 135632035 / 2319761419) ∷ (+ 135632035 / 2319761419) ∷ (+ 279242425 / 2319761419) ∷ []
-form6Coefficients : List ℚ
-form6Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 7858771805 / 11768763332)) ∷ (+ 144814501 / 3461400980) ∷ (+ 144814501 / 3461400980) ∷ (+ 144814501 / 3461400980) ∷ (+ 1013701507 / 11768763332) ∷ []
-form7Coefficients : List ℚ
-form7Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 10704935275 / 14678568099)) ∷ (+ 8443969751 / 278892793881) ∷ (+ 8443969751 / 278892793881) ∷ (+ 17384643605 / 278892793881) ∷ []
-form8Coefficients : List ℚ
-form8Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 1285278684967 / 1641097686518)) ∷ (+ 35792443943 / 1641097686518) ∷ (+ 73690325765 / 1641097686518) ∷ []
-form9Coefficients : List ℚ
-form9Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 551132664563681 / 661887395501231)) ∷ (+ 20840943993625 / 661887395501231) ∷ []
-form10Coefficients : List ℚ
-form10Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ (- (+ 11638177724654623 / 13379628643375344)) ∷ []
-form11Coefficients : List ℚ
-form11Coefficients = 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ 0ℚ ∷ (+ 1) ∷ []
-
-energyFamilies : List (List ℚ)
-energyFamilies = energy0Coefficients ∷ energy1Coefficients ∷ energy2Coefficients ∷ energy3Coefficients ∷ energy4Coefficients ∷ energy5Coefficients ∷ energy6Coefficients ∷ energy7Coefficients ∷ energy8Coefficients ∷ energy9Coefficients ∷ energy10Coefficients ∷ energy11Coefficients ∷ []
-normFamilies : List (List ℚ)
-normFamilies = norm0Coefficients ∷ norm1Coefficients ∷ norm2Coefficients ∷ norm3Coefficients ∷ norm4Coefficients ∷ norm5Coefficients ∷ norm6Coefficients ∷ norm7Coefficients ∷ norm8Coefficients ∷ norm9Coefficients ∷ norm10Coefficients ∷ norm11Coefficients ∷ norm12Coefficients ∷ []
-ldlFamilies : List (ℚ × List ℚ)
-ldlFamilies =
-  ((+ 17 / 9) , form0Coefficients) ∷
-  ((+ 589 / 204) , form1Coefficients) ∷
-  ((+ 38428 / 15903) , form2Coefficients) ∷
-  ((+ 2736473 / 1383408) , form3Coefficients) ∷
-  ((+ 14018033 / 8209419) , form4Coefficients) ∷
-  ((+ 2319761419 / 1513947564) , form5Coefficients) ∷
-  ((+ 29421908330 / 20877852771) , form6Coefficients) ∷
-  ((+ 30988088209 / 23537526664) , form7Coefficients) ∷
-  ((+ 820548843259 / 660535564455) , form8Coefficients) ∷
-  ((+ 661887395501231 / 561255408789156) , form9Coefficients) ∷
-  ((+ 2229938107229224 / 1985662186503693) , form10Coefficients) ∷
-  ((+ 4514842591049713 / 240833315580756192) , form11Coefficients) ∷
-  []
+------------------------------------------------------------------------
+-- Literal linear carriers.
+--
+-- These are deliberately the only Path13 proofs below that mention the twelve
+-- symbolic coordinates at once.  Every identity is linear; no dense square or
+-- quadratic polynomial is sent to reflection.
+------------------------------------------------------------------------
 
 energyLinear0 : ∀ c → Quad.dot energy0Coefficients (coordinates c) ≡ y1 c - y0 c
 energyLinear0 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
@@ -192,13 +98,21 @@ formLinear10 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
 formLinear11 : ∀ c → Quad.dot form11Coefficients (coordinates c) ≡ form11 c
 formLinear11 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
 
+------------------------------------------------------------------------
+-- Attach the structural quadratic compilers to the literal Path13 functions.
+------------------------------------------------------------------------
+
 dropTrailingZero12 : ∀ v0 v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 v11 →
-  v0 + (v1 + (v2 + (v3 + (v4 + (v5 + (v6 + (v7 + (v8 + (v9 + (v10 + (v11 + 0ℚ))))))))))) ≡ v0 + (v1 + (v2 + (v3 + (v4 + (v5 + (v6 + (v7 + (v8 + (v9 + (v10 + v11))))))))))
-dropTrailingZero12 v0 v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 v11 rewrite ℚP.+-identityʳ v11 = refl
+  v0 + (v1 + (v2 + (v3 + (v4 + (v5 + (v6 + (v7 + (v8 + (v9 + (v10 + (v11 + 0ℚ)))))))))))
+  ≡ v0 + (v1 + (v2 + (v3 + (v4 + (v5 + (v6 + (v7 + (v8 + (v9 + (v10 + v11))))))))))
+dropTrailingZero12 v0 v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 v11
+  rewrite ℚP.+-identityʳ v11 = refl
 
 dropTrailingZero13 : ∀ v0 v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 v11 v12 →
-  v0 + (v1 + (v2 + (v3 + (v4 + (v5 + (v6 + (v7 + (v8 + (v9 + (v10 + (v11 + (v12 + 0ℚ)))))))))))) ≡ v0 + (v1 + (v2 + (v3 + (v4 + (v5 + (v6 + (v7 + (v8 + (v9 + (v10 + (v11 + v12)))))))))))
-dropTrailingZero13 v0 v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 v11 v12 rewrite ℚP.+-identityʳ v12 = refl
+  v0 + (v1 + (v2 + (v3 + (v4 + (v5 + (v6 + (v7 + (v8 + (v9 + (v10 + (v11 + (v12 + 0ℚ))))))))))))
+  ≡ v0 + (v1 + (v2 + (v3 + (v4 + (v5 + (v6 + (v7 + (v8 + (v9 + (v10 + (v11 + v12)))))))))))
+dropTrailingZero13 v0 v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 v11 v12
+  rewrite ℚP.+-identityʳ v12 = refl
 
 energyValuesMatch : ∀ c → Quad.sumSquareValues energyFamilies (coordinates c) ≡ path13Energy c
 energyValuesMatch c
@@ -224,165 +138,119 @@ normValuesMatch c
       (sq (y5 c)) (sq (y6 c)) (sq (y7 c)) (sq (y8 c)) (sq (y9 c))
       (sq (y10 c)) (sq (y11 c)) (sq (lastCoordinate c))
 
-ldlValuesMatch : ∀ c → Quad.sumWeightedSquareValues ldlFamilies (coordinates c) ≡ sumTermValues path13Terms c
+ldlValuesMatch : ∀ c →
+  Quad.sumWeightedSquareValues ldlFamilies (coordinates c)
+  ≡ sumTermValues path13Terms c
 ldlValuesMatch c
   rewrite formLinear0 c | formLinear1 c | formLinear2 c | formLinear3 c
         | formLinear4 c | formLinear5 c | formLinear6 c | formLinear7 c
         | formLinear8 c | formLinear9 c | formLinear10 c | formLinear11 c
-  = dropTrailingZero12
-      (pivot0 * sq (form0 c)) (pivot1 * sq (form1 c))
-      (pivot2 * sq (form2 c)) (pivot3 * sq (form3 c))
-      (pivot4 * sq (form4 c)) (pivot5 * sq (form5 c))
-      (pivot6 * sq (form6 c)) (pivot7 * sq (form7 c))
-      (pivot8 * sq (form8 c)) (pivot9 * sq (form9 c))
-      (pivot10 * sq (form10 c)) (pivot11 * sq (form11 c))
+  = refl
 
-energyTri normTri gapTri ldlTri : Quad.TriQuadratic
-energyTri = Quad.sumSquareTri energyFamilies
-normTri = Quad.sumSquareTri normFamilies
-gapTri = Quad.addTri energyTri (Quad.scaleTri (- oneEighteenth) normTri)
-ldlTri = Quad.sumWeightedSquareTri ldlFamilies
+------------------------------------------------------------------------
+-- Closed coefficient certificate.
+--
+-- The following twelve rows are the 78 independent coefficients of the
+-- symmetric Path13 gap matrix, using the full x_i*x_j coefficient convention.
+-- Both the physical gap compiler and the LDL compiler must reduce to this same
+-- finite carrier.  Each `refl` below is therefore closed rational computation;
+-- there are no symbolic Path13 variables in these checks.
+------------------------------------------------------------------------
 
-canonicalDiag0 : ℚ
-canonicalDiag0 = (+ 17 / 9)
-canonicalRow0 : List ℚ
+canonicalDiag0 canonicalDiag1 canonicalDiag2 canonicalDiag3 : ℚ
+canonicalDiag4 canonicalDiag5 canonicalDiag6 canonicalDiag7 : ℚ
+canonicalDiag8 canonicalDiag9 canonicalDiag10 canonicalDiag11 : ℚ
+canonicalDiag0 = + 17 / 9
+canonicalDiag1 = + 26 / 9
+canonicalDiag2 = + 26 / 9
+canonicalDiag3 = + 26 / 9
+canonicalDiag4 = + 26 / 9
+canonicalDiag5 = + 26 / 9
+canonicalDiag6 = + 26 / 9
+canonicalDiag7 = + 26 / 9
+canonicalDiag8 = + 26 / 9
+canonicalDiag9 = + 26 / 9
+canonicalDiag10 = + 26 / 9
+canonicalDiag11 = + 44 / 9
+
+canonicalRow0 canonicalRow1 canonicalRow2 canonicalRow3 : List ℚ
+canonicalRow4 canonicalRow5 canonicalRow6 canonicalRow7 : List ℚ
+canonicalRow8 canonicalRow9 canonicalRow10 canonicalRow11 : List ℚ
 canonicalRow0 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag1 : ℚ
-canonicalDiag1 = (+ 26 / 9)
-canonicalRow1 : List ℚ
 canonicalRow1 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag2 : ℚ
-canonicalDiag2 = (+ 26 / 9)
-canonicalRow2 : List ℚ
 canonicalRow2 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag3 : ℚ
-canonicalDiag3 = (+ 26 / 9)
-canonicalRow3 : List ℚ
 canonicalRow3 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag4 : ℚ
-canonicalDiag4 = (+ 26 / 9)
-canonicalRow4 : List ℚ
 canonicalRow4 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag5 : ℚ
-canonicalDiag5 = (+ 26 / 9)
-canonicalRow5 : List ℚ
 canonicalRow5 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag6 : ℚ
-canonicalDiag6 = (+ 26 / 9)
-canonicalRow6 : List ℚ
 canonicalRow6 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag7 : ℚ
-canonicalDiag7 = (+ 26 / 9)
-canonicalRow7 : List ℚ
 canonicalRow7 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag8 : ℚ
-canonicalDiag8 = (+ 26 / 9)
-canonicalRow8 : List ℚ
 canonicalRow8 = (- (+ 1 / 9)) ∷ (+ 17 / 9) ∷ (+ 35 / 9) ∷ []
-canonicalDiag9 : ℚ
-canonicalDiag9 = (+ 26 / 9)
-canonicalRow9 : List ℚ
 canonicalRow9 = (- (+ 1 / 9)) ∷ (+ 35 / 9) ∷ []
-canonicalDiag10 : ℚ
-canonicalDiag10 = (+ 26 / 9)
-canonicalRow10 : List ℚ
 canonicalRow10 = (+ 17 / 9) ∷ []
-canonicalDiag11 : ℚ
-canonicalDiag11 = (+ 44 / 9)
-canonicalRow11 : List ℚ
 canonicalRow11 = []
 
-canonicalTail12 : Quad.TriQuadratic
+canonicalTail12 canonicalTail11 canonicalTail10 canonicalTail9 : Quad.TriQuadratic
+canonicalTail8 canonicalTail7 canonicalTail6 canonicalTail5 : Quad.TriQuadratic
+canonicalTail4 canonicalTail3 canonicalTail2 canonicalTail1 canonicalTail0 : Quad.TriQuadratic
 canonicalTail12 = Quad.qnil
-canonicalTail11 : Quad.TriQuadratic
 canonicalTail11 = Quad.qcons canonicalDiag11 canonicalRow11 canonicalTail12
-canonicalTail10 : Quad.TriQuadratic
 canonicalTail10 = Quad.qcons canonicalDiag10 canonicalRow10 canonicalTail11
-canonicalTail9 : Quad.TriQuadratic
 canonicalTail9 = Quad.qcons canonicalDiag9 canonicalRow9 canonicalTail10
-canonicalTail8 : Quad.TriQuadratic
 canonicalTail8 = Quad.qcons canonicalDiag8 canonicalRow8 canonicalTail9
-canonicalTail7 : Quad.TriQuadratic
 canonicalTail7 = Quad.qcons canonicalDiag7 canonicalRow7 canonicalTail8
-canonicalTail6 : Quad.TriQuadratic
 canonicalTail6 = Quad.qcons canonicalDiag6 canonicalRow6 canonicalTail7
-canonicalTail5 : Quad.TriQuadratic
 canonicalTail5 = Quad.qcons canonicalDiag5 canonicalRow5 canonicalTail6
-canonicalTail4 : Quad.TriQuadratic
 canonicalTail4 = Quad.qcons canonicalDiag4 canonicalRow4 canonicalTail5
-canonicalTail3 : Quad.TriQuadratic
 canonicalTail3 = Quad.qcons canonicalDiag3 canonicalRow3 canonicalTail4
-canonicalTail2 : Quad.TriQuadratic
 canonicalTail2 = Quad.qcons canonicalDiag2 canonicalRow2 canonicalTail3
-canonicalTail1 : Quad.TriQuadratic
 canonicalTail1 = Quad.qcons canonicalDiag1 canonicalRow1 canonicalTail2
-canonicalTail0 : Quad.TriQuadratic
 canonicalTail0 = Quad.qcons canonicalDiag0 canonicalRow0 canonicalTail1
+
 canonicalTri : Quad.TriQuadratic
 canonicalTri = canonicalTail0
 
 diagOf : Quad.TriQuadratic → ℚ
 diagOf Quad.qnil = 0ℚ
 diagOf (Quad.qcons diagonal row tail) = diagonal
+
 rowOf : Quad.TriQuadratic → List ℚ
 rowOf Quad.qnil = []
 rowOf (Quad.qcons diagonal row tail) = row
+
 tailOf : Quad.TriQuadratic → Quad.TriQuadratic
 tailOf Quad.qnil = Quad.qnil
 tailOf (Quad.qcons diagonal row tail) = tail
 
-gapTail0 : Quad.TriQuadratic
+gapTail0 gapTail1 gapTail2 gapTail3 gapTail4 gapTail5 gapTail6 : Quad.TriQuadratic
+gapTail7 gapTail8 gapTail9 gapTail10 gapTail11 gapTail12 : Quad.TriQuadratic
 gapTail0 = gapTri
-gapTail1 : Quad.TriQuadratic
 gapTail1 = tailOf gapTail0
-gapTail2 : Quad.TriQuadratic
 gapTail2 = tailOf gapTail1
-gapTail3 : Quad.TriQuadratic
 gapTail3 = tailOf gapTail2
-gapTail4 : Quad.TriQuadratic
 gapTail4 = tailOf gapTail3
-gapTail5 : Quad.TriQuadratic
 gapTail5 = tailOf gapTail4
-gapTail6 : Quad.TriQuadratic
 gapTail6 = tailOf gapTail5
-gapTail7 : Quad.TriQuadratic
 gapTail7 = tailOf gapTail6
-gapTail8 : Quad.TriQuadratic
 gapTail8 = tailOf gapTail7
-gapTail9 : Quad.TriQuadratic
 gapTail9 = tailOf gapTail8
-gapTail10 : Quad.TriQuadratic
 gapTail10 = tailOf gapTail9
-gapTail11 : Quad.TriQuadratic
 gapTail11 = tailOf gapTail10
-gapTail12 : Quad.TriQuadratic
 gapTail12 = tailOf gapTail11
 
-ldlTail0 : Quad.TriQuadratic
+ldlTail0 ldlTail1 ldlTail2 ldlTail3 ldlTail4 ldlTail5 ldlTail6 : Quad.TriQuadratic
+ldlTail7 ldlTail8 ldlTail9 ldlTail10 ldlTail11 ldlTail12 : Quad.TriQuadratic
 ldlTail0 = ldlTri
-ldlTail1 : Quad.TriQuadratic
 ldlTail1 = tailOf ldlTail0
-ldlTail2 : Quad.TriQuadratic
 ldlTail2 = tailOf ldlTail1
-ldlTail3 : Quad.TriQuadratic
 ldlTail3 = tailOf ldlTail2
-ldlTail4 : Quad.TriQuadratic
 ldlTail4 = tailOf ldlTail3
-ldlTail5 : Quad.TriQuadratic
 ldlTail5 = tailOf ldlTail4
-ldlTail6 : Quad.TriQuadratic
 ldlTail6 = tailOf ldlTail5
-ldlTail7 : Quad.TriQuadratic
 ldlTail7 = tailOf ldlTail6
-ldlTail8 : Quad.TriQuadratic
 ldlTail8 = tailOf ldlTail7
-ldlTail9 : Quad.TriQuadratic
 ldlTail9 = tailOf ldlTail8
-ldlTail10 : Quad.TriQuadratic
 ldlTail10 = tailOf ldlTail9
-ldlTail11 : Quad.TriQuadratic
 ldlTail11 = tailOf ldlTail10
-ldlTail12 : Quad.TriQuadratic
 ldlTail12 = tailOf ldlTail11
 
 gapDiag0 : diagOf gapTail0 ≡ canonicalDiag0
@@ -434,33 +302,6 @@ gapDiag11 = refl
 gapRow11 : rowOf gapTail11 ≡ canonicalRow11
 gapRow11 = refl
 
-gapTail12Canonical : gapTail12 ≡ canonicalTail12
-gapTail12Canonical = refl
-gapTail11Canonical : gapTail11 ≡ canonicalTail11
-gapTail11Canonical = Quad.qconsCong gapDiag11 gapRow11 gapTail12Canonical
-gapTail10Canonical : gapTail10 ≡ canonicalTail10
-gapTail10Canonical = Quad.qconsCong gapDiag10 gapRow10 gapTail11Canonical
-gapTail9Canonical : gapTail9 ≡ canonicalTail9
-gapTail9Canonical = Quad.qconsCong gapDiag9 gapRow9 gapTail10Canonical
-gapTail8Canonical : gapTail8 ≡ canonicalTail8
-gapTail8Canonical = Quad.qconsCong gapDiag8 gapRow8 gapTail9Canonical
-gapTail7Canonical : gapTail7 ≡ canonicalTail7
-gapTail7Canonical = Quad.qconsCong gapDiag7 gapRow7 gapTail8Canonical
-gapTail6Canonical : gapTail6 ≡ canonicalTail6
-gapTail6Canonical = Quad.qconsCong gapDiag6 gapRow6 gapTail7Canonical
-gapTail5Canonical : gapTail5 ≡ canonicalTail5
-gapTail5Canonical = Quad.qconsCong gapDiag5 gapRow5 gapTail6Canonical
-gapTail4Canonical : gapTail4 ≡ canonicalTail4
-gapTail4Canonical = Quad.qconsCong gapDiag4 gapRow4 gapTail5Canonical
-gapTail3Canonical : gapTail3 ≡ canonicalTail3
-gapTail3Canonical = Quad.qconsCong gapDiag3 gapRow3 gapTail4Canonical
-gapTail2Canonical : gapTail2 ≡ canonicalTail2
-gapTail2Canonical = Quad.qconsCong gapDiag2 gapRow2 gapTail3Canonical
-gapTail1Canonical : gapTail1 ≡ canonicalTail1
-gapTail1Canonical = Quad.qconsCong gapDiag1 gapRow1 gapTail2Canonical
-gapTail0Canonical : gapTail0 ≡ canonicalTail0
-gapTail0Canonical = Quad.qconsCong gapDiag0 gapRow0 gapTail1Canonical
-
 ldlDiag0 : diagOf ldlTail0 ≡ canonicalDiag0
 ldlDiag0 = refl
 ldlRow0 : rowOf ldlTail0 ≡ canonicalRow0
@@ -510,6 +351,37 @@ ldlDiag11 = refl
 ldlRow11 : rowOf ldlTail11 ≡ canonicalRow11
 ldlRow11 = refl
 
+------------------------------------------------------------------------
+-- Reassemble the closed rows into whole quadratic objects.
+------------------------------------------------------------------------
+
+gapTail12Canonical : gapTail12 ≡ canonicalTail12
+gapTail12Canonical = refl
+gapTail11Canonical : gapTail11 ≡ canonicalTail11
+gapTail11Canonical = Quad.qconsCong gapDiag11 gapRow11 gapTail12Canonical
+gapTail10Canonical : gapTail10 ≡ canonicalTail10
+gapTail10Canonical = Quad.qconsCong gapDiag10 gapRow10 gapTail11Canonical
+gapTail9Canonical : gapTail9 ≡ canonicalTail9
+gapTail9Canonical = Quad.qconsCong gapDiag9 gapRow9 gapTail10Canonical
+gapTail8Canonical : gapTail8 ≡ canonicalTail8
+gapTail8Canonical = Quad.qconsCong gapDiag8 gapRow8 gapTail9Canonical
+gapTail7Canonical : gapTail7 ≡ canonicalTail7
+gapTail7Canonical = Quad.qconsCong gapDiag7 gapRow7 gapTail8Canonical
+gapTail6Canonical : gapTail6 ≡ canonicalTail6
+gapTail6Canonical = Quad.qconsCong gapDiag6 gapRow6 gapTail7Canonical
+gapTail5Canonical : gapTail5 ≡ canonicalTail5
+gapTail5Canonical = Quad.qconsCong gapDiag5 gapRow5 gapTail6Canonical
+gapTail4Canonical : gapTail4 ≡ canonicalTail4
+gapTail4Canonical = Quad.qconsCong gapDiag4 gapRow4 gapTail5Canonical
+gapTail3Canonical : gapTail3 ≡ canonicalTail3
+gapTail3Canonical = Quad.qconsCong gapDiag3 gapRow3 gapTail4Canonical
+gapTail2Canonical : gapTail2 ≡ canonicalTail2
+gapTail2Canonical = Quad.qconsCong gapDiag2 gapRow2 gapTail3Canonical
+gapTail1Canonical : gapTail1 ≡ canonicalTail1
+gapTail1Canonical = Quad.qconsCong gapDiag1 gapRow1 gapTail2Canonical
+gapTail0Canonical : gapTail0 ≡ canonicalTail0
+gapTail0Canonical = Quad.qconsCong gapDiag0 gapRow0 gapTail1Canonical
+
 ldlTail12Canonical : ldlTail12 ≡ canonicalTail12
 ldlTail12Canonical = refl
 ldlTail11Canonical : ldlTail11 ≡ canonicalTail11
@@ -540,18 +412,30 @@ ldlTail0Canonical = Quad.qconsCong ldlDiag0 ldlRow0 ldlTail1Canonical
 gapTriEqualsLDLTri : gapTri ≡ ldlTri
 gapTriEqualsLDLTri = trans gapTail0Canonical (sym ldlTail0Canonical)
 
+------------------------------------------------------------------------
+-- Compiler output: finite coefficient equality -> literal LDL decomposition.
+------------------------------------------------------------------------
+
 energyTriValue : ∀ c → Quad.evalTri energyTri (coordinates c) ≡ path13Energy c
-energyTriValue c = trans (Quad.sumSquareCompiler energyFamilies (coordinates c)) (energyValuesMatch c)
+energyTriValue c =
+  trans (Quad.sumSquareCompiler energyFamilies (coordinates c)) (energyValuesMatch c)
+
 normTriValue : ∀ c → Quad.evalTri normTri (coordinates c) ≡ path13NormSq c
-normTriValue c = trans (Quad.sumSquareCompiler normFamilies (coordinates c)) (normValuesMatch c)
+normTriValue c =
+  trans (Quad.sumSquareCompiler normFamilies (coordinates c)) (normValuesMatch c)
+
 ldlTriValue : ∀ c → Quad.evalTri ldlTri (coordinates c) ≡ sumTermValues path13Terms c
-ldlTriValue c = trans (Quad.sumWeightedSquareCompiler ldlFamilies (coordinates c)) (ldlValuesMatch c)
+ldlTriValue c =
+  trans (Quad.sumWeightedSquareCompiler ldlFamilies (coordinates c)) (ldlValuesMatch c)
 
 gapArithmetic : ∀ energyValue normValue →
-  energyValue + (- oneEighteenth) * normValue ≡ energyValue - oneEighteenth * normValue
+  energyValue + (- oneEighteenth) * normValue
+  ≡ energyValue - oneEighteenth * normValue
 gapArithmetic = ℚRing.solve-∀
 
-gapTriValue : ∀ c → Quad.evalTri gapTri (coordinates c) ≡ path13Energy c - oneEighteenth * path13NormSq c
+gapTriValue : ∀ c →
+  Quad.evalTri gapTri (coordinates c)
+  ≡ path13Energy c - oneEighteenth * path13NormSq c
 gapTriValue c =
   trans
     (Quad.evalAdd energyTri (Quad.scaleTri (- oneEighteenth) normTri) (coordinates c))
@@ -559,14 +443,17 @@ gapTriValue c =
       (cong (λ right → Quad.evalTri energyTri (coordinates c) + right)
         (Quad.evalScale (- oneEighteenth) normTri (coordinates c)))
       (trans
-        (cong (λ energyValue → energyValue + (- oneEighteenth) * Quad.evalTri normTri (coordinates c))
+        (cong (λ energyValue →
+          energyValue + (- oneEighteenth) * Quad.evalTri normTri (coordinates c))
           (energyTriValue c))
         (trans
           (cong (λ normValue → path13Energy c + (- oneEighteenth) * normValue)
             (normTriValue c))
           (gapArithmetic (path13Energy c) (path13NormSq c)))))
 
-path13GapToTerms : ∀ c → path13Energy c - oneEighteenth * path13NormSq c ≡ sumTermValues path13Terms c
+path13GapToTerms : ∀ c →
+  path13Energy c - oneEighteenth * path13NormSq c
+  ≡ sumTermValues path13Terms c
 path13GapToTerms c =
   trans (sym (gapTriValue c))
     (trans
@@ -578,11 +465,14 @@ recomposeIdentity : ∀ energyValue normValue constant →
 recomposeIdentity = ℚRing.solve-∀
 
 path13LDLDecomposition : ∀ c →
-  path13Energy c ≡ oneEighteenth * path13NormSq c + sumTermValues path13Terms c
+  path13Energy c
+  ≡ oneEighteenth * path13NormSq c + sumTermValues path13Terms c
 path13LDLDecomposition c =
   trans
     (recomposeIdentity (path13Energy c) (path13NormSq c) oneEighteenth)
-    (cong (λ remainder → oneEighteenth * path13NormSq c + remainder) (path13GapToTerms c))
+    (cong
+      (λ remainder → oneEighteenth * path13NormSq c + remainder)
+      (path13GapToTerms c))
 
 path13LDLCertificate : RationalLDLCertificate Path13Coordinates
 path13LDLCertificate = record
