@@ -17,6 +17,7 @@ data RezaRoleSourceClass : Set where
   primaryInstitutionalRoleRecord
   primaryHistoricalIdentityRecord
   primaryLawEnforcementIdentityRecord
+  primaryPatentManifestation
   primaryCongressionalDocument
   directColleagueWitnessSurface
   directFamilyWitnessViaReporting
@@ -69,6 +70,16 @@ californiaDOJ2026Alias = reza-role-source-carrier
   false false true
   "Primary state law-enforcement identity carrier directly spanning the Reza surname and Monica Andrea Jacinto alias. It pays that legal/alias bridge, but does not by itself prove that every historical Monica A. Jacinto publication/patent is this person or establish a JPL employment role."
 
+patentParent2003NameCarrier : RezaRoleSourceCarrier
+patentParent2003NameCarrier = reza-role-source-carrier
+  primaryPatentManifestation
+  "US20030053926A1 — Burn-resistant and high tensile strength metal alloys"
+  "US09/954,835; publication US20030053926A1; priority 2001-09-18"
+  "https://patents.google.com/patent/US20030053926A1/en"
+  "Inventors listed as Monica Jacinto and Dallis Hardwick; same patent family contains later continuation-in-part and continuation manifestations using Monica A. Jacinto"
+  false false true
+  "The parent patent manifestation pays that the same patent family can omit the middle initial for Monica Jacinto. This shrinks the name-normalisation debt but does not itself expand A. to Andrea or prove identity with the California DOJ missing-person record."
+
 houseOversight20260420 : RezaRoleSourceCarrier
 houseOversight20260420 = reza-role-source-carrier
   primaryCongressionalDocument
@@ -120,6 +131,34 @@ wikidataMonicaJacinto = reza-role-source-carrier
   "Verified external semantic coordinate only. The item currently carries no cited references for the alias/biographical statements; the primary California DOJ alias carrier, not this QID, pays the Reza/Andrea-Jacinto alias bridge."
 
 ------------------------------------------------------------------------
+-- Patent-family name manifestation boundary.
+------------------------------------------------------------------------
+
+record PatentNameManifestationState : Set where
+  constructor patent-name-manifestation-state
+  field
+    parentPublication : String
+    parentInventorForm : String
+    continuationFamily : String
+    laterInventorForm : String
+    sharedPriorityDate : String
+    samePatentFamilyPaid : Bool
+    middleInitialPresenceVariesWithinFamily : Bool
+    middleInitialExpansionToAndreaPaid : Bool
+    patentInventorEqualsDOJMissingPersonPaid : Bool
+
+open PatentNameManifestationState public
+
+canonicalPatentNameManifestationState : PatentNameManifestationState
+canonicalPatentNameManifestationState = patent-name-manifestation-state
+  "US20030053926A1"
+  "Monica Jacinto"
+  "US20040208777A1 / US20100266442A1 continuation family"
+  "Monica A. Jacinto in later manifestations"
+  "2001-09-18"
+  true true false false
+
+------------------------------------------------------------------------
 -- Event-time role and alias state.
 ------------------------------------------------------------------------
 
@@ -128,6 +167,7 @@ record RezaRoleEvidenceState : Set where
   field
     patentInventorshipPaid : Bool
     historicalJacintoEmployerLineagePaid : Bool
+    patentFamilyNameVariationPaid : Bool
     verifiedSemanticQidLocated : Bool
     semanticQidPaysAliasIdentity : Bool
     primaryLegalAliasBridgePaid : Bool
@@ -146,10 +186,10 @@ open RezaRoleEvidenceState public
 
 canonicalRezaRoleEvidenceState : RezaRoleEvidenceState
 canonicalRezaRoleEvidenceState = reza-role-evidence-state
-  true true true false true false true true true
+  true true true true false true false true true true
   false false false false
-  "California DOJ now directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto as a primary law-enforcement identity relation. Boeing/Cal State pay a long Monica Jacinto materials-engineering lineage and the patent pays Monica A. Jacinto inventorship. The remaining identity debt is the abbreviated patent/institutional form Monica A. Jacinto -> Monica Andrea Jacinto, plus the independent JPL event-time role debt."
-  "recover a primary carrier expanding Monica A. Jacinto to Monica Andrea Jacinto or otherwise tying the patent/inventor object to the DOJ identity; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role"
+  "California DOJ directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto. The patent family itself shows Monica Jacinto / Monica A. Jacinto manifestation variation under one priority lineage, while Boeing and Cal State pay a long Monica Jacinto materials-engineering/Mondaloy lineage. The remaining identity debt is exact patent-inventor-to-DOJ-person identity; independently, the JPL event-time role remains unpaid by an employer record."
+  "recover a primary carrier tying the patent/Mondaloy inventor identity to Monica Andrea Jacinto or Monica Jacinto Reza; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role"
 
 ------------------------------------------------------------------------
 -- Snowball semantic coordinates.
@@ -173,7 +213,7 @@ open RezaRoleCoordinate public
 
 canonicalRezaRoleCoordinate : RezaRoleCoordinate
 canonicalRezaRoleCoordinate = reza-role-coordinate
-  "US20040208777A1; application US10/769,195; parent US20030053926A1"
+  "US20030053926A1; US20040208777A1; US20100266442A1; priority 2001-09-18"
   "Q139385030"
   true false
   "California DOJ missing-person record; LASD case 025-00905-1257-400"
@@ -194,7 +234,8 @@ record RezaRoleSourceBoundary : Set where
     historicalPageQuoteEqualsRecoveredHistoricalPage : Bool
     primaryHistoricalJacintoRoleAutomaticallyEqualsLaterRezaIdentity : Bool
     uncitedWikidataAliasPaysSamePersonIdentity : Bool
-    dojAndreaAliasAutomaticallyPaysPatentMiddleInitialIdentity : Bool
+    patentFamilyInitialVariationPaysAndreaExpansion : Bool
+    dojAndreaAliasAutomaticallyPaysPatentInventorIdentity : Bool
     primaryAliasBridgeAutomaticallyPaysJPLRole : Bool
     multipleNonInstitutionalCarriersMayGuidePrimarySearch : Bool
     roleEvidenceCreatesCauseOrMotive : Bool
@@ -203,4 +244,4 @@ open RezaRoleSourceBoundary public
 
 canonicalRezaRoleSourceBoundary : RezaRoleSourceBoundary
 canonicalRezaRoleSourceBoundary = reza-role-source-boundary
-  false false false false false false false false false true false
+  false false false false false false false false false false true false
