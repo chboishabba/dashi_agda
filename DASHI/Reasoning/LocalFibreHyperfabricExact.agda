@@ -13,6 +13,7 @@ import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
 import DASHI.Topology.WormSoilPantsSheafBoundary as WormPants
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact as ReductionBridge
 import DASHI.Reasoning.TypedHyperfabricConsumerReductionBridgeExact as SectionReduction
+import DASHI.Reasoning.MaleCNSTypedHyperfabricChartProjectionExact as MaleCNSChart
 import DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact as Braid
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 
@@ -33,6 +34,8 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 --       consumer-indexed symmetry/quotient authority;
 --   * TypedHyperfabricConsumerReductionBridgeExact:
 --       canonical reduction instantiated directly on compatible GlobalSections;
+--   * MaleCNSTypedHyperfabricChartProjectionExact:
+--       26-region ordered-pair chart projection from compatible GlobalSections;
 --   * braided evidence / hypercube owners:
 --       path identity and presentation/transition-geometry boundaries.
 --
@@ -86,7 +89,7 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is a composition of already-owned theorem surfaces; compatible GlobalSections now feed the canonical consumer-reduction kernel directly, while physical incidence, pants/braid adapters and the MaleCNS instance remain separate obligations."
+  "The local-fibre architecture is a composition of already-owned theorem surfaces; compatible GlobalSections feed the canonical consumer-reduction kernel directly, and the MaleCNS 26-region ordered-pair chart is now a GlobalSection projection. The nonzero physical connectome incidence remains a separate unpaid obligation."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -131,12 +134,13 @@ globalSectionsUseCanonicalConsumerReduction :
     SectionReduction.canonicalHyperfabricConsumerReductionBoundary ≡ true
 globalSectionsUseCanonicalConsumerReduction = refl
 
+maleCNSPairChartComesFromGlobalSections :
+  MaleCNSChart.chartProjectionComesFromGlobalSectionEdgeValues
+    MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ true
+maleCNSPairChartComesFromGlobalSections = refl
+
 ------------------------------------------------------------------------
 -- The symmetry/quotient rule is already owned canonically.
---
--- Equivariance is only an intertwining receipt. A symmetry orbit can be
--- quotiented only when the represented reduced state is fixed for the declared
--- consumer. This module therefore introduces no competing symmetry record.
 ------------------------------------------------------------------------
 
 data SymmetryAloneCreatesQuotientAuthority : Set where
@@ -220,10 +224,6 @@ canonicalMaleCNSChartBoundary =
 
 ------------------------------------------------------------------------
 -- Missing-fields ledger.
---
--- These are the genuinely uncomposed pieces. They are not permissions to
--- invent another kernel; each requires an adapter/theorem connecting existing
--- owners.
 ------------------------------------------------------------------------
 
 record LocalFibreMissingFields : Set where
@@ -246,5 +246,5 @@ currentLocalFibreMissingFields = local-fibre-missing-fields
   false
   true
   false
-  false
-  "GlobalSection -> consumer-relative reduction is now paid by TypedHyperfabricConsumerReductionBridgeExact using the canonical reduction kernel directly. Remaining work is adapter/theorem work for NDim refinement, pants seams, braid transport, then the actual MaleCNS TypedHyperfabric incidence instance and chart projection from compatible global sections."
+  true
+  "GlobalSection -> consumer-relative reduction is paid by TypedHyperfabricConsumerReductionBridgeExact. The MaleCNS 26-region ordered-pair NDim chart is now a projection of compatible GlobalSections via MaleCNSTypedHyperfabricChartProjectionExact. Remaining work is NDim refinement, pants seams, braid transport, and the actual nonzero/typed MaleCNS physical incidence instance rather than the dense complete-pair chart carrier."
