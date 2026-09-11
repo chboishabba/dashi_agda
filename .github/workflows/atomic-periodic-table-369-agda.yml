@@ -11,6 +11,7 @@ on:
       - 'scripts/atomic_hydrogen_nist_comparison.py'
       - 'scripts/atomic_hydrogen_reduced_mass_nist.py'
       - 'scripts/atomic_helium_hartree_scf.py'
+      - 'scripts/atomic_helium_hartree_convergence.py'
       - 'Artifacts/atomic-periodic-table-369/**'
       - 'Docs/papers/drafts/DASHIAtomicPeriodicTable369*.tex'
       - '.github/workflows/atomic-periodic-table-369-agda.yml'
@@ -46,6 +47,8 @@ jobs:
         run: |
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369HydrogenNISTComparisonExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369HydrogenReducedMassExact.agda
+      - name: Typecheck helium Hartree convergence owner
+        run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369HeliumHartreeConvergenceExact.agda
       - name: Typecheck physical validation root
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369PhysicalValidation.agda
 
@@ -63,7 +66,6 @@ jobs:
             --receipt /tmp/radial-identity-repair-receipt.json
           python3 - <<'PY'
           import hashlib, json, pathlib
-
           committed = json.loads(pathlib.Path(
               'Artifacts/atomic-periodic-table-369/radial-identity-repair-receipt.json'
           ).read_text())
@@ -71,7 +73,6 @@ jobs:
           script_hash = hashlib.sha256(pathlib.Path(
               'scripts/atomic_radial_identity_repair.py'
           ).read_bytes()).hexdigest()
-
           assert rerun['passed'] is True
           assert rerun['same_l_principal_identity_distinguished'] is True
           assert rerun['all_energy_checks'] is True
@@ -92,7 +93,6 @@ jobs:
             --receipt /tmp/hydrogen-reduced-mass-nist-receipt.json
           python3 - <<'PY'
           import hashlib, json, pathlib
-
           pairs = [
               ('scripts/atomic_hydrogen_nist_comparison.py',
                'Artifacts/atomic-periodic-table-369/hydrogen-nist-comparison-receipt.json',
@@ -108,7 +108,6 @@ jobs:
               assert committed['producer_sha256'] == script_hash
               assert rerun['producer_sha256'] == script_hash
               assert rerun['passed'] is True
-
           rm = json.loads(pathlib.Path('/tmp/hydrogen-reduced-mass-nist-receipt.json').read_text())
           assert rm['residual_magnitude_improves_over_infinite_mass'] is True
           assert abs(rm['reduced_mass_minus_nist_ev']) < abs(rm['infinite_mass_minus_nist_ev'])
@@ -124,9 +123,24 @@ jobs:
           assert r['passed'] is True
           assert result['converged'] is True
           assert result['iterations'] <= 300
-          # Hartree-level He should bind the first electron but underpredict the
-          # experimental ionization energy because correlation is unpaid.
           assert result['ionization_energy_ev'] > 0.0
           assert result['minus_nist_ev'] < 0.0
           assert abs(result['minus_nist_ev']) < 2.0
+          PY
+      - name: Re-run helium grid convergence against published HF limit
+        run: |
+          python3 scripts/atomic_helium_hartree_convergence.py \
+            --receipt /tmp/helium-hartree-convergence-receipt.json
+          python3 - <<'PY'
+          import json, pathlib
+          rerun = json.loads(pathlib.Path('/tmp/helium-hartree-convergence-receipt.json').read_text())
+          committed = json.loads(pathlib.Path(
+              'Artifacts/atomic-periodic-table-369/helium-hartree-convergence-receipt.json'
+          ).read_text())
+          assert rerun['passed'] is True
+          assert rerun['monotone_toward_hf_limit'] is True
+          assert abs(rerun['richardson_minus_hf_limit_hartree']) < 1e-4
+          assert [(r['npts'], r['total_energy_hartree']) for r in rerun['rows']] == \
+                 [(r['npts'], r['total_energy_hartree']) for r in committed['rows']]
+          assert abs(rerun['hf_minus_pekeris_ev']) > 1.0
           PY
