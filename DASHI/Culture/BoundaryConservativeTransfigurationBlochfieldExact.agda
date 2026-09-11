@@ -13,21 +13,10 @@ import DASHI.Core.AppendOnlyEvidenceResidualRevisionExact as Revision
 import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 
 ------------------------------------------------------------------------
--- BOUNDARY-CONSERVATIVE TRANSFIGURATION / BLOCHFIELD SOURCE SPECIALISATION
+-- Thin repo-native specialisation.
 --
--- Thin specialisation over existing DASHI source, OSINT, append-only revision
--- and fibre-over-time owners.  It does not create a new provenance, OSINT or
--- temporal ontology.
---
--- Source idea:
---   protected stasis != traceable transfiguration.
---
--- Formal rule:
---   boundary absent after update != boundary lawfully resolved by update.
---
--- Resolution requires a proof-relevant Temporal.EvidencePath plus retained
--- ancestry / evidence-trace references.  Later evidence may reopen the state
--- without deleting the historical path by which it was reached.
+-- protected stasis != traceable transfiguration
+-- boundary absent later != boundary lawfully resolved along a witnessed path
 ------------------------------------------------------------------------
 
 blochfieldXSource : Attribution.AttributedSource
@@ -39,7 +28,7 @@ blochfieldXSource =
     "2026"
     "https://x.com/msiyasmsi/status/2090447851625050481"
     (Attribution.namedSourceKind "public social-media post / creator terminology")
-    "Conceptual-source attribution for protected stasis versus traceable transfiguration; does not import mathematical, physical, epistemic or domain authority."
+    "Conceptual-source attribution only; no mathematical, physical, epistemic or domain authority imported."
     Attribution.publicAttribution
 
 blochfieldSourceRoleReceipt :
@@ -48,11 +37,7 @@ blochfieldSourceRoleReceipt =
   SnowballAttribution.canonicalSourceRoleSnowballReceipt blochfieldXSource
 
 ------------------------------------------------------------------------
--- Social-source snapshot.
---
--- Counts are source-bound strings because public social mirrors may abbreviate
--- them and they are dynamic.  The values below are the 2026-09-11 supplied /
--- observed snapshot coordinates retained for discovery, not current truth.
+-- Existing OSINT carrier owns the acquisition semantics.
 ------------------------------------------------------------------------
 
 blochfieldAccountObservation : SnowballOSINT.OSINTObservation
@@ -64,7 +49,7 @@ blochfieldAccountObservation =
     SnowballOSINT.tertiaryAggregation
     SnowballOSINT.identityUnresolved
     "dynamic X/Twitter account-count snapshot for @msiyasmsi"
-    "source-bound discovery metadata only; counts do not establish identity, authority, reach quality, claim truth or same-object theory lineage"
+    "source-bound discovery metadata; counts do not establish identity, authority, truth or same-object theory lineage"
     "no native-content digest acquired"
     false
     true
@@ -86,8 +71,6 @@ record SocialAccountSnapshot : Set where
     countsCreateTruth : Bool
     countsCreateTruthIsFalse : countsCreateTruth ≡ false
 
-open SocialAccountSnapshot public
-
 blochfieldAccountSnapshot20260911 : SocialAccountSnapshot
 blochfieldAccountSnapshot20260911 =
   social-account-snapshot
@@ -102,15 +85,11 @@ blochfieldAccountSnapshot20260911 =
     false refl
 
 ------------------------------------------------------------------------
--- Native fibre-over-time boundary observations.
+-- Native fibre-over-time carrier.
 ------------------------------------------------------------------------
 
 data BoundaryStanding : Set where
-  unresolvedBoundary : BoundaryStanding
-  transformedBoundary : BoundaryStanding
-  resolvedBoundary : BoundaryStanding
-  absentBoundary : BoundaryStanding
-  reopenedBoundary : BoundaryStanding
+  unresolvedBoundary transformedBoundary resolvedBoundary absentBoundary reopenedBoundary : BoundaryStanding
 
 record BoundaryObservationAt
     (system : Temporal.TemporalEvidenceSystem)
@@ -150,24 +129,19 @@ record BoundaryConservativeTransfiguration
   constructor boundary-conservative-transfiguration
   field
     witness : BoundaryTransformationWitness system before after
-    sourceWasUnresolved :
-      standing (sourceBoundary witness) ≡ unresolvedBoundary
+    sourceWasUnresolved : standing (sourceBoundary witness) ≡ unresolvedBoundary
     targetResolvedOrTransformed :
-      (standing (targetBoundary witness) ≡ resolvedBoundary)
-      ⊎
+      (standing (targetBoundary witness) ≡ resolvedBoundary) ⊎
       (standing (targetBoundary witness) ≡ transformedBoundary)
     sameStateRequired : Bool
     sameStateRequiredIsFalse : sameStateRequired ≡ false
     sameBoundaryObjectRequired : Bool
     sameBoundaryObjectRequiredIsFalse : sameBoundaryObjectRequired ≡ false
     traceOfTransformationRequired : Bool
-    traceOfTransformationRequiredIsTrue :
-      traceOfTransformationRequired ≡ true
-
-open BoundaryConservativeTransfiguration public
+    traceOfTransformationRequiredIsTrue : traceOfTransformationRequired ≡ true
 
 ------------------------------------------------------------------------
--- Resolution and absence remain distinct types.
+-- Resolution has more evidence than an absent after-state.
 ------------------------------------------------------------------------
 
 record BoundaryResolution
@@ -176,10 +150,8 @@ record BoundaryResolution
   constructor boundary-resolution
   field
     transformation : BoundaryTransformationWitness system before after
-    beforeUnresolved :
-      standing (sourceBoundary transformation) ≡ unresolvedBoundary
-    afterResolved :
-      standing (targetBoundary transformation) ≡ resolvedBoundary
+    beforeUnresolved : standing (sourceBoundary transformation) ≡ unresolvedBoundary
+    afterResolved : standing (targetBoundary transformation) ≡ resolvedBoundary
 
 record BoundaryAbsenceAt
     (system : Temporal.TemporalEvidenceSystem)
@@ -188,10 +160,6 @@ record BoundaryAbsenceAt
   field
     observation : BoundaryObservationAt system t
     isAbsent : standing observation ≡ absentBoundary
-
-------------------------------------------------------------------------
--- Reopening is a later lawful path, not rollback / log deletion.
-------------------------------------------------------------------------
 
 record ReopenableResolvedState
     (system : Temporal.TemporalEvidenceSystem)
@@ -203,8 +171,7 @@ record ReopenableResolvedState
     reopeningPermitted : Bool
     reopeningPermittedIsTrue : reopeningPermitted ≡ true
     historicalResolutionRetained : Bool
-    historicalResolutionRetainedIsTrue :
-      historicalResolutionRetained ≡ true
+    historicalResolutionRetainedIsTrue : historicalResolutionRetained ≡ true
 
 record BoundaryReopening
     (system : Temporal.TemporalEvidenceSystem)
@@ -218,31 +185,18 @@ record BoundaryReopening
     oldPathStillRetained : Bool
     oldPathStillRetainedIsTrue : oldPathStillRetained ≡ true
 
-------------------------------------------------------------------------
--- Existing append-only revision semantics are the donor, not reimplemented.
-------------------------------------------------------------------------
-
 appendOnlyRevisionBoundary : Revision.AppendOnlyEvidenceRevisionBoundary
 appendOnlyRevisionBoundary = Revision.canonicalAppendOnlyEvidenceRevisionBoundary
 
 ------------------------------------------------------------------------
--- Snowball acquisition / payment cut.
---
--- Public artifacts may be retained out of dependency order under the existing
--- OSINT rule.  Promotion cannot skip identity, provenance or same-object debt.
+-- Snowball cut. Acquisition may be out of order; payment may not skip debt.
 ------------------------------------------------------------------------
 
 data BlochfieldSnowballLeaf : Set where
-  publicationEventIdentity : BlochfieldSnowballLeaf
-  suppliedImageIdentity : BlochfieldSnowballLeaf
-  nativeXBodyIdentity : BlochfieldSnowballLeaf
-  creatorLongFormIdentity : BlochfieldSnowballLeaf
-  externalSameObjectTheoryLineage : BlochfieldSnowballLeaf
-  technicalClaimPayment : BlochfieldSnowballLeaf
+  publicationEventIdentity suppliedImageIdentity nativeXBodyIdentity
+    creatorLongFormIdentity externalSameObjectTheoryLineage technicalClaimPayment : BlochfieldSnowballLeaf
 
-data LeafStanding : Set where
-  paid : LeafStanding
-  unpaid : LeafStanding
+data LeafStanding : Set where paid unpaid : LeafStanding
 
 blochfieldSnowballStanding : BlochfieldSnowballLeaf → LeafStanding
 blochfieldSnowballStanding publicationEventIdentity = paid
@@ -263,10 +217,9 @@ data SocialCountCreatesAuthority : Set where
 data SocialCountCreatesTruth : Set where
 data MemeTerminologyCreatesEstablishedPhysics : Set where
 data LaterEvidencePaysEarlierUnpaidIdentity : Set where
-\data MirrorEqualsNativeXCarrier : Set where
+data MirrorEqualsNativeXCarrier : Set where
 
-boundaryAbsenceDoesNotCreateResolution :
-  BoundaryAbsenceCreatesResolution → ⊥
+boundaryAbsenceDoesNotCreateResolution : BoundaryAbsenceCreatesResolution → ⊥
 boundaryAbsenceDoesNotCreateResolution ()
 
 protectedStasisDoesNotEqualTraceableTransfiguration :
@@ -294,10 +247,6 @@ laterEvidenceDoesNotSkipUnpaidIdentity ()
 mirrorDoesNotEqualNativeXCarrier : MirrorEqualsNativeXCarrier → ⊥
 mirrorDoesNotEqualNativeXCarrier ()
 
-------------------------------------------------------------------------
--- Canonical interpretation boundary.
-------------------------------------------------------------------------
-
 record BlochfieldBoundary : Set where
   constructor blochfield-boundary
   field
@@ -306,37 +255,16 @@ record BlochfieldBoundary : Set where
     lawfulResolutionRequiresTrace : Bool
     lawfulResolutionRequiresTraceIsTrue : lawfulResolutionRequiresTrace ≡ true
     historyMayBeDiscardedAfterResolution : Bool
-    historyMayBeDiscardedAfterResolutionIsFalse :
-      historyMayBeDiscardedAfterResolution ≡ false
+    historyMayBeDiscardedAfterResolutionIsFalse : historyMayBeDiscardedAfterResolution ≡ false
     resolvedStateMayBeReopened : Bool
     resolvedStateMayBeReopenedIsTrue : resolvedStateMayBeReopened ≡ true
     protectedStasisEqualsConservation : Bool
-    protectedStasisEqualsConservationIsFalse :
-      protectedStasisEqualsConservation ≡ false
+    protectedStasisEqualsConservationIsFalse : protectedStasisEqualsConservation ≡ false
     blochfieldIsPromotedToEstablishedPhysics : Bool
-    blochfieldIsPromotedToEstablishedPhysicsIsFalse :
-      blochfieldIsPromotedToEstablishedPhysics ≡ false
+    blochfieldIsPromotedToEstablishedPhysicsIsFalse : blochfieldIsPromotedToEstablishedPhysics ≡ false
     accountCountsAffectClaimValidity : Bool
-    accountCountsAffectClaimValidityIsFalse :
-      accountCountsAffectClaimValidity ≡ false
+    accountCountsAffectClaimValidityIsFalse : accountCountsAffectClaimValidity ≡ false
 
 canonicalBlochfieldBoundary : BlochfieldBoundary
 canonicalBlochfieldBoundary =
-  blochfield-boundary
-    true refl
-    true refl
-    false refl
-    true refl
-    false refl
-    false refl
-    false refl
-
-------------------------------------------------------------------------
--- Plain-language checksum:
---
--- protection   = keep the object/state in a protected class
--- conservation = keep the admissible trace of its lawful transformation
---
--- The X source motivates the terminology.  DASHI owns the formal consequence;
--- attribution does not make the source author of every downstream theorem.
-------------------------------------------------------------------------
+  blochfield-boundary true refl true refl false refl true refl false refl false refl false refl
