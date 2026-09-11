@@ -20,6 +20,7 @@ import DASHI.ComputerScience.RSA260BlockWiedemannProductionScaleReconstructionEx
 import DASHI.ComputerScience.RSA260BidiRandomIncidenceCarrierCrossValidationExact as RandomIncidence
 import DASHI.ComputerScience.RSA260BidiCADOGridPermutationCrossValidationExact as CADOGrid
 import DASHI.ComputerScience.RSA260BidiFineIncidencePredictorExact as FineIncidence
+import DASHI.ComputerScience.RSA260BidiFineIncidenceInterpolationExact as FineInterpolation
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -128,6 +129,9 @@ cadoGridBoundary = CADOGrid.canonicalCADOGridInterpretationBoundary
 fineIncidenceBoundary : FineIncidence.FineIncidencePredictorBoundary
 fineIncidenceBoundary = FineIncidence.canonicalFineIncidencePredictorBoundary
 
+fineInterpolationBoundary : FineInterpolation.FineIncidenceFragilityBoundary
+fineInterpolationBoundary = FineInterpolation.canonicalFineIncidenceFragilityBoundary
+
 ------------------------------------------------------------------------
 -- Ordered residual routers.
 --
@@ -152,7 +156,6 @@ firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectFineIncidenceBearingLACarrierArtifact
 
 data CandidateExperimentResidual : Set where
-  interpolateFineIncidenceBetweenCyclicAndRandom : CandidateExperimentResidual
   addTwoHopAndCommonNeighbourFibres : CandidateExperimentResidual
   fitRecurrenceComplexityFromStructuralFibrePortfolio : CandidateExperimentResidual
   exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
@@ -160,7 +163,7 @@ data CandidateExperimentResidual : Set where
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = interpolateFineIncidenceBetweenCyclicAndRandom
+firstUnpaidCandidateExperimentResidual = addTwoHopAndCommonNeighbourFibres
 
 ------------------------------------------------------------------------
 -- Consolidated status surface.  Named fields prevent positional status drift.
@@ -222,6 +225,9 @@ record RSA260ProductionSubstitutionBoundary : Set where
     randomFineIncidenceConsumerRecoveredAfterEscalation : Bool
     cadoShapedBalancingCrossValidationPaid : Bool
     fineIncidenceFamilyPredictorPaid : Bool
+    fineIncidenceInterpolationPaid : Bool
+    oneSwapPerRowFragilityEnsemblePaid : Bool
+    oneSwapProjectionCrossPaid : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
     fineIncidenceMeasuredOnProductionMatrix : Bool
 
@@ -292,6 +298,9 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; randomFineIncidenceConsumerRecoveredAfterEscalation = true
   ; cadoShapedBalancingCrossValidationPaid = true
   ; fineIncidenceFamilyPredictorPaid = true
+  ; fineIncidenceInterpolationPaid = true
+  ; oneSwapPerRowFragilityEnsemblePaid = true
+  ; oneSwapProjectionCrossPaid = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
   ; fineIncidenceMeasuredOnProductionMatrix = false
 
