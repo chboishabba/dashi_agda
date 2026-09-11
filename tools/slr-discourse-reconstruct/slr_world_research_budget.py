@@ -17,12 +17,16 @@ def load(path: Path) -> dict[str, Any]:
     return value
 
 
-def _dedupe_missing(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    seen: set[tuple[str, str]] = set()
+def missing_key(row: dict[str, Any]) -> str:
+    return f"{str(row.get('qid', '')).strip()}|{str(row.get('language', '')).strip()}"
+
+
+def _dedupe_missing(rows: list[dict[str, Any]], attempted_missing: set[str]) -> list[dict[str, Any]]:
+    seen: set[str] = set()
     out: list[dict[str, Any]] = []
     for row in sorted(rows, key=lambda r: (str(r.get("qid", "")), str(r.get("language", "")))):
-        key = (str(row.get("qid", "")), str(row.get("language", "")))
-        if not all(key) or key in seen:
+        key = missing_key(row)
+        if key == "|" or key in seen or key in attempted_missing:
             continue
         seen.add(key)
         out.append(dict(row))
@@ -33,7 +37,7 @@ def _dedupe_related(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     seen: set[str] = set()
     out: list[dict[str, Any]] = []
     for row in sorted(rows, key=lambda r: str(r.get("qid", ""))):
-        qid = str(row.get("qid", ""))
+        qid = str(row.get("qid", "")).strip()
         if not qid or qid in seen:
             continue
         seen.add(qid)
@@ -46,21 +50,32 @@ def plan_frontier(
     *,
     max_new_qids: int,
     max_missing_surfaces: int,
+    attempted_missing: set[str] | None = None,
 ) -> dict[str, Any]:
     if max_new_qids < 0 or max_missing_surfaces < 0:
         raise ValueError("budgets must be non-negative")
+    attempted = attempted_missing or set()
     clean = [dict(x) for x in obligations if isinstance(x, dict) and bool(x.get("candidate_only", True))]
-    missing = _dedupe_missing([x for x in clean if x.get("obligation_kind") == "missing-language-surface"])
+    all_missing = _dedupe_missing(
+        [x for x in clean if x.get("obligation_kind") == "missing-language-surface"],
+        set(),
+    )
+    missing = _dedupe_missing(
+        [x for x in clean if x.get("obligation_kind") == "missing-language-surface"],
+        attempted,
+    )
     related = _dedupe_related([x for x in clean if x.get("obligation_kind") == "follow-related-qid"])
     selected_missing = missing[:max_missing_surfaces]
     selected_related = related[:max_new_qids]
     selected_count = len(selected_missing) + len(selected_related)
     if not clean:
         stop_reason = "frontier-empty"
+    elif selected_count == 0 and not missing and not related:
+        stop_reason = "frontier-exhausted-or-already-attempted"
     elif selected_count == 0:
         stop_reason = "budget-exhausted-before-acquisition"
     elif len(selected_missing) == len(missing) and len(selected_related) == len(related):
-        stop_reason = "selected-entire-frontier"
+        stop_reason = "selected-entire-actionable-frontier"
     else:
         stop_reason = "budget-limited-selection"
     return {
@@ -69,6 +84,7 @@ def plan_frontier(
         "selected_related_qids": selected_related,
         "unselected_missing_surfaces": missing[max_missing_surfaces:],
         "unselected_related_qids": related[max_new_qids:],
+        "already_attempted_missing_surface_keys": sorted(set(missing_key(x) for x in all_missing) & attempted),
         "stop_reason": stop_reason,
         "consumer_closure_paid": False,
         "budget_exhaustion_is_consumer_closure": False,
@@ -77,7 +93,8 @@ def plan_frontier(
         "semantic_promotion": False,
         "summary": {
             "input_obligations": len(clean),
-            "deduplicated_missing_surfaces": len(missing),
+            "deduplicated_missing_surfaces": len(all_missing),
+            "actionable_missing_surfaces": len(missing),
             "deduplicated_follow_related_qids": len(related),
             "selected_missing_surfaces": len(selected_missing),
             "selected_related_qids": len(selected_related),
@@ -92,7 +109,7 @@ def plan_frontier(
 def seed_rows(plan: dict[str, Any], *, iteration_index: int) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for rank, obligation in enumerate(plan.get("selected_related_qids") or [], start=1):
-        qid = str(obligation.get("qid", ""))
+        qid = str(obligation.get("qid", "")).strip()
         if not qid:
             continue
         rows.append({
@@ -105,6 +122,31 @@ def seed_rows(plan: dict[str, Any], *, iteration_index: int) -> list[dict[str, A
             "semantic_promotion": False,
         })
     return rows
+
+
+def updated_attempt_history(existing: dict[str, Any] | None, plan: dict[str, Any], iteration_index: int) -> dict[str, Any]:
+    keys = set(str(x) for x in ((existing or {}).get("attempted_missing_surface_keys") or []) if str(x))
+    attempts = list((existing or {}).get("attempts") or [])
+    for row in plan.get("selected_missing_surfaces") or []:
+        key = missing_key(row)
+        if key == "|" or key in keys:
+            continue
+        keys.add(key)
+        attempts.append({
+            "iteration_index": iteration_index,
+            "qid": str(row.get("qid", "")),
+            "language": str(row.get("language", "")),
+            "attempt_kind": "recheck-wikidata-sitelink-before-broad-snowball",
+            "candidate_only": True,
+            "semantic_promotion": False,
+        })
+    return {
+        "schema": "slr-world-research-missing-surface-attempt-history-v1",
+        "attempted_missing_surface_keys": sorted(keys),
+        "attempts": attempts,
+        "candidate_only": True,
+        "semantic_promotion": False,
+    }
 
 
 def merge_graphs(base: dict[str, Any], delta: dict[str, Any]) -> dict[str, Any]:
@@ -124,10 +166,7 @@ def merge_graphs(base: dict[str, Any], delta: dict[str, Any]) -> dict[str, Any]:
             out.append(row)
         return out
 
-    nodes = uniq_rows(
-        list(base.get("nodes") or []) + list(delta.get("nodes") or []),
-        lambda r: str(r.get("node_id", "")),
-    )
+    nodes = uniq_rows(list(base.get("nodes") or []) + list(delta.get("nodes") or []), lambda r: str(r.get("node_id", "")))
     edges = uniq_rows(
         list(base.get("item_property_edges") or []) + list(delta.get("item_property_edges") or []),
         lambda r: (str(r.get("source", "")), str(r.get("property_id", "")), str(r.get("target", "")), str(r.get("edge_class", ""))),
@@ -144,12 +183,6 @@ def merge_graphs(base: dict[str, Any], delta: dict[str, Any]) -> dict[str, Any]:
     pages.update(delta.get("wikipedia_pages") or {})
     parent_edges = sum(1 for e in edges if e.get("edge_class") == "parent")
     related_edges = len(edges) - parent_edges
-    transport = {
-        "kind": "merged-budgeted-world-research",
-        "base_transport": base.get("transport") or {},
-        "delta_transport": delta.get("transport") or {},
-        "transport_provenance_is_entity_identity": False,
-    }
     return {
         "schema": "slr-wikimedia-world-follow-v1",
         "source_world_model_id": base.get("source_world_model_id") or delta.get("source_world_model_id", ""),
@@ -159,7 +192,12 @@ def merge_graphs(base: dict[str, Any], delta: dict[str, Any]) -> dict[str, Any]:
         "wikipedia_pages": pages,
         "first_link_candidates": first,
         "routing_policy": dict(base.get("routing_policy") or delta.get("routing_policy") or {}),
-        "transport": transport,
+        "transport": {
+            "kind": "merged-budgeted-world-research",
+            "base_transport": base.get("transport") or {},
+            "delta_transport": delta.get("transport") or {},
+            "transport_provenance_is_entity_identity": False,
+        },
         "summary": {
             "input_seed_count": len(seeds),
             "unresolved_seed_count": 0,
@@ -179,40 +217,40 @@ def merge_graphs(base: dict[str, Any], delta: dict[str, Any]) -> dict[str, Any]:
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
     sub = p.add_subparsers(dest="command", required=True)
-
     plan = sub.add_parser("plan")
     plan.add_argument("--iteration", type=Path, required=True)
     plan.add_argument("--output", type=Path, required=True)
     plan.add_argument("--seeds", type=Path, required=True)
+    plan.add_argument("--history", type=Path)
+    plan.add_argument("--history-output", type=Path)
     plan.add_argument("--iteration-index", type=int, default=1)
     plan.add_argument("--max-new-qids", type=int, default=8)
     plan.add_argument("--max-missing-surfaces", type=int, default=4)
-
     merge = sub.add_parser("merge")
     merge.add_argument("--base-graph", type=Path, required=True)
     merge.add_argument("--delta-graph", type=Path, required=True)
     merge.add_argument("--output", type=Path, required=True)
-
     sub.add_parser("self-check")
     return p.parse_args()
 
 
 def self_check() -> int:
-    plan = plan_frontier(
-        [
-            {"obligation_kind": "follow-related-qid", "qid": "Q2", "candidate_only": True},
-            {"obligation_kind": "follow-related-qid", "qid": "Q2", "candidate_only": True},
-            {"obligation_kind": "missing-language-surface", "qid": "Q1", "language": "fr", "candidate_only": True},
-        ],
-        max_new_qids=1,
-        max_missing_surfaces=1,
-    )
+    obligations = [
+        {"obligation_kind": "follow-related-qid", "qid": "Q2", "candidate_only": True},
+        {"obligation_kind": "follow-related-qid", "qid": "Q2", "candidate_only": True},
+        {"obligation_kind": "missing-language-surface", "qid": "Q1", "language": "fr", "candidate_only": True},
+    ]
+    plan = plan_frontier(obligations, max_new_qids=1, max_missing_surfaces=1)
     assert plan["summary"]["deduplicated_follow_related_qids"] == 1
     assert len(seed_rows(plan, iteration_index=1)) == 1
+    history = updated_attempt_history(None, plan, 1)
+    plan2 = plan_frontier(obligations, max_new_qids=0, max_missing_surfaces=1, attempted_missing=set(history["attempted_missing_surface_keys"]))
+    assert plan2["summary"]["actionable_missing_surfaces"] == 0
     assert plan["consumer_closure_paid"] is False
     print(
         "SLR_WORLD_RESEARCH_BUDGET_SELF_CHECK schema=slr-world-research-budget-v1 passed=true "
-        "frontier_rank_is_truth_rank=false budget_exhaustion_is_consumer_closure=false semantic_promotion=false",
+        "missing_surface_attempts_append_only=true frontier_rank_is_truth_rank=false "
+        "budget_exhaustion_is_consumer_closure=false semantic_promotion=false",
         file=sys.stderr,
     )
     return 0
@@ -228,10 +266,13 @@ def main() -> int:
             raise SystemExit(f"unexpected iteration schema: {iteration.get('schema')!r}")
         if bool(iteration.get("semantic_promotion", False)):
             raise SystemExit("refusing semantically promoted iteration")
+        history = load(args.history) if args.history and args.history.exists() else None
+        attempted = set(str(x) for x in ((history or {}).get("attempted_missing_surface_keys") or []) if str(x))
         plan = plan_frontier(
             [x for x in iteration.get("next_acquisition_obligations") or [] if isinstance(x, dict)],
             max_new_qids=args.max_new_qids,
             max_missing_surfaces=args.max_missing_surfaces,
+            attempted_missing=attempted,
         )
         plan["source_iteration_schema"] = iteration.get("schema", "")
         plan["iteration_index"] = args.iteration_index
@@ -240,6 +281,10 @@ def main() -> int:
         rows = seed_rows(plan, iteration_index=args.iteration_index)
         args.seeds.parent.mkdir(parents=True, exist_ok=True)
         args.seeds.write_text("".join(json.dumps(row, sort_keys=True) + "\n" for row in rows), encoding="utf-8")
+        if args.history_output:
+            new_history = updated_attempt_history(history, plan, args.iteration_index)
+            args.history_output.parent.mkdir(parents=True, exist_ok=True)
+            args.history_output.write_text(json.dumps(new_history, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         s = plan["summary"]
         print(
             "SLR_WORLD_RESEARCH_BUDGET_RECEIPT "
