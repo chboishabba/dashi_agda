@@ -58,6 +58,25 @@ canonicalGWBIdentityContractionReceipt =
     "Q942966"
     false false false true false
 
+-- Shallow boundary consumed by downstream source-role/world consumers.  Keep
+-- this distinct from the numeric runtime receipt so consumers do not have to
+-- project a particular specimen count merely to state the semantic firewall.
+record GWBIdentityContractionBoundary : Set where
+  constructor gwbIdentityContractionBoundary
+  field
+    topicAnchorMayPaySourceWorkIdentity : Bool
+    sourceWorkIdentityMayPayClaimTruth : Bool
+    runtimeWikipediaResolutionMayPayHistoricalTruth : Bool
+    exactWorkQidMayEraseSourceProvenance : Bool
+    candidateOnlyBoundary : Bool
+    semanticPromotionBoundary : Bool
+
+open GWBIdentityContractionBoundary public
+
+canonicalGWBIdentityContractionBoundary : GWBIdentityContractionBoundary
+canonicalGWBIdentityContractionBoundary =
+  gwbIdentityContractionBoundary false false false false true false
+
 reviewedTransportAnchor : Reviewed.WikidataTieredTransportPolicy
 reviewedTransportAnchor = Reviewed.canonicalWikidataTieredTransportPolicy
 
