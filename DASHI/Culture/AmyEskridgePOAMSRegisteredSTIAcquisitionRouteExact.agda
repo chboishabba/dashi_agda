@@ -11,7 +11,7 @@ open import Agda.Builtin.String using (String)
 -- NTRS Registered Content, described by NASA as the complete STI collection for
 -- authorized NASA users.  The public page also routes questions to the NASA STI
 -- Information Desk.  This pays an acquisition route only: it does not establish
--- that the missing POAMS EDAA/NF-1676B object is present in registered content.
+-- that the missing POAMS approval record is present in registered content.
 ------------------------------------------------------------------------
 
 record RegisteredSTIAcquisitionRoute : Set where
@@ -27,7 +27,7 @@ record RegisteredSTIAcquisitionRoute : Set where
     msfcQid : String
     deweyTraversal : String
     repeatedPublicSearchPerformed : Bool
-    poamsSpecificEDAAFoundPublicly : Bool
+    poamsSpecificApprovalFoundPublicly : Bool
     registeredContentMayContainTarget : Bool
     registeredContentProvesTargetExists : Bool
     publicSearchFailureProvesNoRecord : Bool
@@ -47,12 +47,12 @@ poamsRegisteredSTIRoute = registered-sti-acquisition-route
   "Q618696"
   "530 Physics / 629 Engineering traversal only"
   true false true false false
-  "request/search POAMS-specific legacy EDAA/NF-1676B identity and its current STI/STRIVES archival representation through the NASA STI Information Desk and MSFC STI compliance/distribution route, keyed by M-1531, NTRS 20205010911, title, authors, SAA8-1519855 and funding MSFC-RMB-QUANTUM-SAA8-1519855-1; require attached-object/version and Amy-linked same-object receipts before promotion"
+  "request/search the POAMS-specific NF-1676/STRIVES approval identity and any migrated legacy EDAA/NF-1676B lineage through the NASA STI Information Desk and MSFC STI compliance/distribution route, keyed by M-1531, NTRS 20205010911, title, authors, SAA8-1519855 and funding MSFC-RMB-QUANTUM-SAA8-1519855-1; require attached-object/version and Amy-linked same-object receipts before promotion"
 
 record RegisteredSTIBoundary : Set where
   constructor registered-sti-boundary
   field
-    completeCollectionDescriptionImpliesSpecificEDAAExists : Bool
+    completeCollectionDescriptionImpliesSpecificApprovalExists : Bool
     restrictedAccessImpliesSuppression : Bool
     publicSearchFailureImpliesDeletion : Bool
     registeredRouteMayGuideTargetedAcquisition : Bool
@@ -66,11 +66,10 @@ canonicalRegisteredSTIBoundary = registered-sti-boundary false false false true
 -- Legacy EDAA / current STRIVES archaeology.
 --
 -- Historical NPR 2200.2D documents the DAA/EDAA review and NF-1676/NF-1676B
--- lineage.  NASA marks 2200.2D obsolete.  Current NPR 2200.2E, effective
--- 2021-12-17 and revalidated through 2031, defines STRIVES Review as NASA's
--- dissemination/release approval process and NF-1676 as the requisite form.
--- NASA STI Compliance and Distribution Services separately states that STRIVES
--- standardizes STI submission, review and approval across all ten field centers.
+-- lineage. NASA's 2020 CIO annual report says STRIVES was fully adopted across
+-- the agency by May 2020, NTRS transitioned to the STRIVES STI Repository by
+-- July 2020, and legacy STI applications were retired by August 2020. Current
+-- NPR 2200.2E defines NF-1676 as the approval workflow implemented in STRIVES.
 -- These are successive process/system manifestations; identifier or byte
 -- identity across them is not assumed.
 ------------------------------------------------------------------------
@@ -88,7 +87,6 @@ record ReleaseSystemArchaeology : Set where
     exactPOAMSSTRIVESRecordPaid : Bool
     legacyAndCurrentRecordSameObjectPaid : Bool
     policyRequiresReleaseReview : Bool
-    daaRepresentativeTracksAndTransfersAssociatedSTI : Bool
     currentSystemCanGuideLegacyAcquisition : Bool
     systemMigrationImpliesRecordSuppression : Bool
     acquisitionTarget : String
@@ -97,14 +95,49 @@ open ReleaseSystemArchaeology public
 
 poamsReleaseSystemArchaeology : ReleaseSystemArchaeology
 poamsReleaseSystemArchaeology = release-system-archaeology
-  "Document Availability Authorization review for NASA STI"
-  "NASA Form NF-1676 / NF-1676B"
-  "Electronic Document Availability Authorization (EDAA) documented by historical NPR 2200.2D"
-  "Scientific, Technical and Research Information discoVEry System (STRIVES) under current NPR 2200.2E"
+  "Document Availability Authorization / NF-1676 release review for NASA STI"
+  "NASA Form NF-1676 / legacy NF-1676B"
+  "Electronic Document Availability Authorization (EDAA), predecessor system at Marshall"
+  "Scientific, Technical and Research Information discoVEry System (STRIVES)"
   "NASA STI Compliance and Distribution Services"
   "NASA STI Information Desk"
-  false false false true true true false
-  "recover the POAMS legacy EDAA/NF-1676B identity and ask NASA STI/MSFC for the corresponding current STRIVES/STI archival representation, associated STI attachment/version, review-history metadata and transfer/release relationship; do not assume EDAA and STRIVES identifiers are identical"
+  false false false true true false
+  "recover the POAMS NF-1676/STRIVES approval identity current at the 2020 acquisition/review period and, only if necessary, its migrated legacy EDAA/NF-1676B lineage; recover associated STI attachment/version and review-history metadata; do not assume EDAA and STRIVES identifiers are identical"
+
+------------------------------------------------------------------------
+-- 2020 transition chronology: this changes the preferred acquisition target.
+------------------------------------------------------------------------
+
+record ReleaseSystemTransition2020 : Set where
+  constructor release-system-transition-2020
+  field
+    strivesFullyAdoptedBy : String
+    ntrsTransitionedBy : String
+    legacyApplicationsRetiredBy : String
+    poamsReportedReviewMonth : String
+    poamsNtrsAcquisitionDate : String
+    poamsPublicationDate : String
+    poamsReviewAfterAgencySTRIVESAdoption : Bool
+    poamsAcquisitionAfterLegacyRetirement : Bool
+    strongestExpectedApprovalNamespace : String
+    legacyEDAAStillRelevantAsPredecessorLineage : Bool
+    legacyEDAAIsPreferredPrimaryTarget : Bool
+    currentSTRIVESIdentityLocated : Bool
+    transitionChronologyCreatesSpecificApprovalId : Bool
+
+open ReleaseSystemTransition2020 public
+
+poamsReleaseSystemTransition2020 : ReleaseSystemTransition2020
+poamsReleaseSystemTransition2020 = release-system-transition-2020
+  "2020-05"
+  "2020-07"
+  "2020-08"
+  "2020-09 (reported Amy review-object timing; exact same-object identity unpaid)"
+  "2020-12-01"
+  "2021-11-01"
+  true true
+  "NF-1676 / STRIVES approval identity or migrated STRIVES-era release metadata"
+  true false false false
 
 ------------------------------------------------------------------------
 -- Current-policy / historical-policy boundary.
@@ -123,7 +156,7 @@ record ReleasePolicyVersionState : Set where
     currentPolicyAppliesToNASAcenters : Bool
     historicalDirectiveMayBeUsedAsCurrentPolicy : Bool
     historicalDirectiveMayDocumentLegacyEDAAProcess : Bool
-    currentDirectivePaysPOAMSLegacyRecordIdentity : Bool
+    currentDirectivePaysPOAMSApprovalIdentity : Bool
     currentDirectiveCanRouteArchivalCrosswalkSearch : Bool
 
 open ReleasePolicyVersionState public
@@ -135,7 +168,7 @@ canonicalReleasePolicyVersionState = release-policy-version-state
   "NPR 2200.2E — Requirements for Documentation, Approval and Dissemination of Scientific and Technical Information, revalidated with Change 2"
   "2021-12-17"
   "2031-12-17"
-  "STRIVES Review = dissemination or release approval process by which NASA determines restrictions, if any, on a document"
+  "NF-1676 is the approval workflow implemented through STRIVES for NASA STI release/dissemination"
   "NASA Form NF-1676"
   true false true false true
 
@@ -144,11 +177,12 @@ record ReleaseSystemBoundary : Set where
   field
     edaaIdentifierEqualsStrivesIdentifierWithoutReceipt : Bool
     currentStrivesSurfaceProvesLegacyEdaaNumber : Bool
-    legacyPolicyRequirementProvesSpecificRecordLocated : Bool
+    historicalEdaaRequirementProvesPOAMSUsedEdaaInLate2020 : Bool
+    policyRequirementProvesSpecificRecordLocated : Bool
     systemMigrationProvesDeletionOrSuppression : Bool
     crossSystemIdentityMayBePaidByPrimaryNASARecord : Bool
 
 open ReleaseSystemBoundary public
 
 canonicalReleaseSystemBoundary : ReleaseSystemBoundary
-canonicalReleaseSystemBoundary = release-system-boundary false false false false true
+canonicalReleaseSystemBoundary = release-system-boundary false false false false false true
