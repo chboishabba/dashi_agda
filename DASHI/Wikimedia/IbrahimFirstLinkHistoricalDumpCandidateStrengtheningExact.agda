@@ -38,6 +38,36 @@ parserRepositorySource = Historical.firstLinkParserSource
 constructorRepositorySource : Attribution.AttributedSource
 constructorRepositorySource = Historical.flnConstructorSource
 
+------------------------------------------------------------------------
+-- Independent historical corroboration acquired 2026-09-11.
+--
+-- These sources pay only artifact/directory existence and filename plausibility.
+-- They do NOT pay Ibrahim's executed-input identity, hash, split lineage or
+-- result same-object relation.
+------------------------------------------------------------------------
+
+contemporaneousUsageSource : Attribution.AttributedSource
+contemporaneousUsageSource = Attribution.mkNoDOISource
+  "Sanmayce / Tom's Hardware forum"
+  "Need assistance in running 16-threaded superheavy fuzzy search"
+  "Tom's Hardware Forum"
+  "2014-12-22"
+  "https://forums.tomshardware.com/threads/need-assistance-in-running-16-threaded-superheavy-fuzzy-search.2075303/"
+  (Attribution.namedSourceKind "third-party contemporaneous technical forum post")
+  "independently names the URL https://dumps.wikimedia.org/enwiki/20141008/enwiki-20141008-pages-articles.xml.bz2 as downloadable test data shortly after the dump date; corroborates artifact filename/existence only"
+  Attribution.publicAttribution
+
+mirrorInventorySource : Attribution.AttributedSource
+mirrorInventorySource = Attribution.mkNoDOISource
+  "Federal University of Paraná mirror statistics"
+  "FTP Site Statistics"
+  "wikipedia.c3sl.ufpr.br mirror inventory report"
+  "2015-03-15"
+  "https://www.ftpstatus.com/reports/wikipedia.c3sl.ufpr.br.pdf"
+  (Attribution.namedSourceKind "institutional mirror inventory report")
+  "lists /wikipedia/enwiki/20141008 with 548 files and approximately 852.84 GB, corroborating that an October-2014 English Wikipedia dump directory was mirrored; does not identify Ibrahim's exact input or hash"
+  Attribution.publicAttribution
+
 record HistoricalDumpCandidateReceipt : Set where
   constructor historical-dump-candidate-receipt
   field
@@ -46,6 +76,8 @@ record HistoricalDumpCandidateReceipt : Set where
     candidateDecompressedFilename : String
     parserExplicitlyNamesDirectory : Bool
     contemporaneousExternalUseConfirmsArtifactName : Bool
+    independent2014UseConfirmsDownloadableArtifact : Bool
+    institutionalMirrorInventoryConfirmsDirectory : Bool
     producerReadmeConfirmsWholeDumpWasChopped : Bool
     constructorConfirms112LocalChunks : Bool
     exactSplitCommandRecovered : Bool
@@ -65,6 +97,8 @@ strongestConcreteDumpCandidate = historical-dump-candidate-receipt
   true
   true
   true
+  true
+  true
   false
   false
   false
@@ -79,6 +113,7 @@ strongestConcreteDumpCandidate = historical-dump-candidate-receipt
 data CandidateStage : Set where
   directoryCandidatePaid : CandidateStage
   filenameCandidatePaid : CandidateStage
+  independentExistenceCorroborationPaid : CandidateStage
   artifactHashUnpaid : CandidateStage
   dumpToChunksLineageUnpaid : CandidateStage
   parserExecutionUnpaid : CandidateStage
@@ -90,6 +125,7 @@ record CandidateStrengtheningBoundary : Set where
     october08IsStrongestConcreteRuntimeCandidate : Bool
     october08IsProvenPublishedRuntime : Bool
     exactCompressedFilenameCandidateRecorded : Bool
+    independentHistoricalExistenceCorroborationRecorded : Bool
     producer112ChunkLineageRecorded : Bool
     exactSplitLineageStillRequired : Bool
     exactArtifactHashStillRequired : Bool
@@ -101,7 +137,7 @@ open CandidateStrengtheningBoundary public
 
 canonicalCandidateStrengtheningBoundary : CandidateStrengtheningBoundary
 canonicalCandidateStrengtheningBoundary = candidate-strengthening-boundary
-  true false true true true true true true true false
+  true false true true true true true true true true false
 
 ------------------------------------------------------------------------
 -- No-promotion gates.
@@ -109,6 +145,8 @@ canonicalCandidateStrengtheningBoundary = candidate-strengthening-boundary
 
 data CandidateFilenameMeansExecutedInput : Set where
 data ExistingArtifactMeansPublishedSameObject : Set where
+data IndependentHistoricalUseMeansIbrahimInput : Set where
+data MirrorDirectoryMeansExactArtifactHash : Set where
 data ProducerDirectoryCommentMeansExactHash : Set where
 data ChunkCountMeansRecoveredSplitLineage : Set where
 data OctoberCandidateCancelsNovemberPublicationDescription : Set where
@@ -119,6 +157,12 @@ candidateFilenameDoesNotMeanExecutedInput ()
 artifactExistenceDoesNotMeanPublishedSameObject : ExistingArtifactMeansPublishedSameObject → ⊥
 artifactExistenceDoesNotMeanPublishedSameObject ()
 
+independentHistoricalUseDoesNotMeanIbrahimInput : IndependentHistoricalUseMeansIbrahimInput → ⊥
+independentHistoricalUseDoesNotMeanIbrahimInput ()
+
+mirrorDirectoryDoesNotMeanExactArtifactHash : MirrorDirectoryMeansExactArtifactHash → ⊥
+mirrorDirectoryDoesNotMeanExactArtifactHash ()
+
 producerDirectoryCommentDoesNotMeanExactHash : ProducerDirectoryCommentMeansExactHash → ⊥
 producerDirectoryCommentDoesNotMeanExactHash ()
 
@@ -126,8 +170,11 @@ chunkCountDoesNotRecoverSplitLineage : ChunkCountMeansRecoveredSplitLineage → 
 chunkCountDoesNotRecoverSplitLineage ()
 
 octoberCandidateDoesNotEraseNovemberDescription : OctoberCandidateCancelsNovemberPublicationDescription → ⊥
+octoberCandidateDoesNotEraseNovemberPublicationDescription = octoberCandidateDoesNotEraseNovemberDescription
+
+octoberCandidateDoesNotEraseNovemberDescription : OctoberCandidateCancelsNovemberPublicationDescription → ⊥
 octoberCandidateDoesNotEraseNovemberDescription ()
 
 remainingHistoricalPayment : String
 remainingHistoricalPayment =
-  "acquire an authoritative copy or manifest for enwiki-20141008-pages-articles.xml.bz2 and its hash; recover or reconstruct the exact dump-to-112-small*.xml split lineage; execute the pinned parser/constructor equivalently; compare the reproduced FLN against the author-hosted fln.json/result object. Until then 2014-10-08 is the strongest concrete input candidate, not a promoted published-runtime identity."
+  "independent historical sources now corroborate the enwiki/20141008 directory and enwiki-20141008-pages-articles.xml.bz2 artifact name/existence, but the decisive same-object chain remains unpaid: acquire an authoritative copy or manifest and hash; recover or reconstruct the exact dump-to-112-small*.xml split lineage; execute the pinned parser/constructor equivalently; compare the reproduced FLN against the author-hosted fln.json/result object. Until then 2014-10-08 is the strongest concrete input candidate, not a promoted published-runtime identity."
