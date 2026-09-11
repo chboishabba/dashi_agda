@@ -7,10 +7,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- LOUREIRO STUDENT SUCCESSION ARCHAEOLOGY
 --
--- Thin source/succession ledger.  Existing scientific and succession owners
--- remain authoritative.  This owner distinguishes coauthored scientific work,
--- current group membership, temporary/external PhD supervision, and formal
--- advisor-of-record succession so those relations cannot be collapsed.
+-- Thin source/succession ledger. Existing scientific and succession owners
+-- remain authoritative. This owner distinguishes coauthored scientific work,
+-- current group membership, temporary/external PhD supervision, formal
+-- advisor-of-record succession, and exact funding/compute-resource continuity.
 ------------------------------------------------------------------------
 
 record StudentSuccessionCarrier : Set where
@@ -102,6 +102,70 @@ simranPostLossSupervisionTransition = student-supervision-transition
   false
   false
   "MIT advisor-of-record / thesis committee / graduate programme record after 2025-12-16; distinguish temporary Oxford research supervision from formal MIT advisor reassignment"
+
+------------------------------------------------------------------------
+-- Exact post-loss funding / compute-resource continuity.
+--
+-- The 2025 APS DPP abstract for the Li/Liu/Loureiro ion-acoustic project names
+-- DOE DE-SC0022012, DOE DE-FG02-91-ER54109 and NERSC FES-ERCAP0026577.
+-- Dion Li's genuinely post-loss solo APS Open Science article reuses exactly
+-- DE-FG02-91ER54109 and FES-ERCAP0026577 (plus NSF GRFP 2141064), while not
+-- naming DE-SC0022012. This pays continuity of specific infrastructure/resource
+-- identifiers across the loss boundary, not transfer of a Loureiro-held grant,
+-- PI authority, repository custody, or inherited simulation state.
+------------------------------------------------------------------------
+
+record ScientificResourceContinuityReceipt : Set where
+  constructor scientific-resource-continuity-receipt
+  field
+    preLossObject : String
+    preLossStableIdentifier : String
+    preLossSourceLink : String
+    preLossAwardSet : String
+    postLossObject : String
+    postLossStableIdentifier : String
+    postLossSourceLink : String
+    postLossAwardSet : String
+    exactDOEInfrastructureAwardReused : Bool
+    exactNERSCAllocationReused : Bool
+    deSC0022012ReusedInPostLossObject : Bool
+    postLossScientificResourceContinuityPaid : Bool
+    formalGrantPITransferPaid : Bool
+    repositoryCustodyTransferPaid : Bool
+    sameSimulationStateTransferPaid : Bool
+    qidCoordinate : String
+    deweyTraversal : String
+
+open ScientificResourceContinuityReceipt public
+
+loureiroToLiResourceContinuity : ScientificResourceContinuityReceipt
+loureiroToLiResourceContinuity = scientific-resource-continuity-receipt
+  "First-principles modeling of ion acoustic turbulence in collisionless reconnection / Role of ion acoustic instability in magnetic reconnection — Dion Li; Zhuo Liu; Nuno F. Loureiro"
+  "arXiv:2505.08983; DOI 10.1017/S002237782510113X"
+  "https://meetings-archive.aps.org/dpp/2025/cm12/9/"
+  "NSF GRFP; DOE DE-SC0022012; DOE DE-FG02-91-ER54109; NERSC FES-ERCAP0026577; NERSC facility contract DE-AC02-05CH11231"
+  "Kinetic route to helicity-constrained decay — Dion Li"
+  "arXiv:2602.17514; DOI 10.1103/j5p4-jj3d"
+  "https://doi.org/10.1103/j5p4-jj3d"
+  "DOE DE-FG02-91ER54109; NERSC FES-ERCAP0026577; NERSC facility contract DE-AC02-05CH11231; NSF GRFP 2141064"
+  true true false true false false false
+  "Q51287446"
+  "530 Physics"
+
+record ResourceContinuityBoundary : Set where
+  constructor resource-continuity-boundary
+  field
+    repeatedAwardIdentifierImpliesGrantPITransfer : Bool
+    repeatedNERSCAllocationImpliesSameSimulationBytes : Bool
+    repeatedFacilityContractImpliesRepositoryTransfer : Bool
+    absentDEsc0022012InSoloPaperProvesGrantEnded : Bool
+    exactResourceReuseMayGuideGrantAndSimulationSearch : Bool
+
+open ResourceContinuityBoundary public
+
+canonicalResourceContinuityBoundary : ResourceContinuityBoundary
+canonicalResourceContinuityBoundary = resource-continuity-boundary
+  false false false false true
 
 ------------------------------------------------------------------------
 -- Attribution and promotion firewalls.
