@@ -11,14 +11,10 @@ module DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact wh
 -- boundedness assumptions when the selected observables are presented by those
 -- finite Wilson products.
 --
--- Physical/application payments retained here:
---   * selected physical observables/time translates are the stated finite
---     Wilson-cylinder products;
---   * the existing Wilson `Bound` predicate entails the exact T5
---     `BoundedObservable` predicate on the same observable carrier.
---
--- Once those two semantics are supplied, all three R310 bounded-test receipts
--- are compiler output.
+-- Same-object discipline: the Wilson-cylinder bound owner and the T5
+-- expectation algebra each expose an observable multiplication operation.  They
+-- are not identified by name.  The application must explicitly weld those two
+-- operations on the same observable carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -26,7 +22,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -58,9 +54,13 @@ record PairwiseWilsonCylinderPresentation
       R310.timeTranslate semantics observable time
       ≡ Thermo.productLoopObservable wilson (translatedRightLoops observable time)
 
-    -- Same-carrier admissibility meaning.  This is the only predicate weld:
-    -- the quantitative Wilson bound already proved by the T5 owner certifies
-    -- the exact bounded-test predicate used by the selected expectation lane.
+    -- SAME observable multiplication, not merely the same carrier/name.
+    wilsonMultiplyIsT5Multiply : ∀ left right →
+      Thermo.multiplyObservable wilson left right
+      ≡ Gram.multiplyObservable (Gram.operations dataSet) left right
+
+    -- Quantitative Wilson bounds imply the exact bounded-test predicate used by
+    -- the selected T5 expectation lane.
     wilsonBoundImpliesT5Bounded : ∀ observable bound →
       Thermo.Bound wilson observable bound →
       Gram.BoundedObservable dataSet observable
@@ -101,30 +101,22 @@ asPairwiseBoundedTestAdmissibility {dataSet = dataSet}
     semantics presentation = record
   { R310.PairwiseBoundedTestAdmissibility.leftBounded = λ observable →
       subst (Gram.BoundedObservable dataSet)
-        (symEq (decodedIsWilsonProduct presentation observable))
+        (sym (decodedIsWilsonProduct presentation observable))
         (wilsonProductIsT5Bounded presentation
           (leftLoops presentation observable))
   ; R310.PairwiseBoundedTestAdmissibility.translatedRightBounded =
       λ observable time →
         subst (Gram.BoundedObservable dataSet)
-          (symEq (translatedIsWilsonProduct presentation observable time))
+          (sym (translatedIsWilsonProduct presentation observable time))
           (wilsonProductIsT5Bounded presentation
             (translatedRightLoops presentation observable time))
   ; R310.PairwiseBoundedTestAdmissibility.translatedProductBounded =
       λ left right time →
         let
-          leftObservable = R310.decode semantics left
-          rightObservable = R310.timeTranslate semantics right time
-          leftBound =
-            subst (Gram.BoundedObservable dataSet)
-              (symEq (decodedIsWilsonProduct presentation left))
-              (wilsonProductIsT5Bounded presentation
-                (leftLoops presentation left))
-          rightBound =
-            subst (Gram.BoundedObservable dataSet)
-              (symEq (translatedIsWilsonProduct presentation right time))
-              (wilsonProductIsT5Bounded presentation
-                (translatedRightLoops presentation right time))
+          leftWilson = Thermo.productLoopObservable (wilson presentation)
+            (leftLoops presentation left)
+          rightWilson = Thermo.productLoopObservable (wilson presentation)
+            (translatedRightLoops presentation right time)
           leftWilsonBound =
             Thermo.finiteProductWilsonObservableUniformBound
               (wilson presentation) (leftLoops presentation left)
@@ -133,46 +125,43 @@ asPairwiseBoundedTestAdmissibility {dataSet = dataSet}
               (wilson presentation) (translatedRightLoops presentation right time)
           productWilsonBound =
             Thermo.multiplyBound (wilson presentation)
-              (Thermo.productLoopObservable (wilson presentation)
-                (leftLoops presentation left))
-              (Thermo.productLoopObservable (wilson presentation)
-                (translatedRightLoops presentation right time))
+              leftWilson rightWilson
               (Thermo.productLoopBound (wilson presentation)
                 (leftLoops presentation left))
               (Thermo.productLoopBound (wilson presentation)
                 (translatedRightLoops presentation right time))
               leftWilsonBound rightWilsonBound
-          productBounded =
+          productBoundedWilsonMultiply =
             wilsonBoundImpliesT5Bounded presentation
               (Thermo.multiplyObservable (wilson presentation)
-                (Thermo.productLoopObservable (wilson presentation)
-                  (leftLoops presentation left))
-                (Thermo.productLoopObservable (wilson presentation)
-                  (translatedRightLoops presentation right time)))
+                leftWilson rightWilson)
               (Thermo.multiplyScalar (wilson presentation)
                 (Thermo.productLoopBound (wilson presentation)
                   (leftLoops presentation left))
                 (Thermo.productLoopBound (wilson presentation)
                   (translatedRightLoops presentation right time)))
               productWilsonBound
-          productEquality :
+          productBoundedT5Multiply :
+            Gram.BoundedObservable dataSet
+              (Gram.multiplyObservable (Gram.operations dataSet)
+                leftWilson rightWilson)
+          productBoundedT5Multiply =
+            subst (Gram.BoundedObservable dataSet)
+              (wilsonMultiplyIsT5Multiply presentation leftWilson rightWilson)
+              productBoundedWilsonMultiply
+          targetEquality :
             Gram.multiplyObservable (Gram.operations dataSet)
-              leftObservable rightObservable
-            ≡ Thermo.multiplyObservable (wilson presentation)
-                (Thermo.productLoopObservable (wilson presentation)
-                  (leftLoops presentation left))
-                (Thermo.productLoopObservable (wilson presentation)
-                  (translatedRightLoops presentation right time))
-          productEquality
+              (R310.decode semantics left)
+              (R310.timeTranslate semantics right time)
+            ≡ Gram.multiplyObservable (Gram.operations dataSet)
+                leftWilson rightWilson
+          targetEquality
             rewrite decodedIsWilsonProduct presentation left
                   | translatedIsWilsonProduct presentation right time = refl
         in
         subst (Gram.BoundedObservable dataSet)
-          (symEq productEquality) productBounded
+          (sym targetEquality) productBoundedT5Multiply
   }
-  where
-    symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-    symEq refl = refl
 
 record Round315Boundary : Set where
   constructor round315-boundary
@@ -186,13 +175,16 @@ record Round315Boundary : Set where
     selectedObservableWilsonPresentationStillPhysical : Bool
     selectedObservableWilsonPresentationStillPhysicalIsTrue :
       selectedObservableWilsonPresentationStillPhysical ≡ true
+    wilsonT5MultiplicationSameObjectStillRequired : Bool
+    wilsonT5MultiplicationSameObjectStillRequiredIsTrue :
+      wilsonT5MultiplicationSameObjectStillRequired ≡ true
     boundPredicateSameCarrierMeaningStillRequired : Bool
     boundPredicateSameCarrierMeaningStillRequiredIsTrue :
       boundPredicateSameCarrierMeaningStillRequired ≡ true
 
 canonicalRound315Boundary : Round315Boundary
 canonicalRound315Boundary =
-  round315-boundary false refl true refl true refl true refl
+  round315-boundary false refl true refl true refl true refl true refl
 
 round315BoundedTestCompilerLevel : ProofLevel
 round315BoundedTestCompilerLevel = machineChecked
