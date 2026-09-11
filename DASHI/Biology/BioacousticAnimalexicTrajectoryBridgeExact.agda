@@ -81,9 +81,9 @@ areseSharedAcousticManifolds =
     "Lucio Arese"
     "Shared acoustic manifolds for exploratory comparison of passerine vocalizations"
     "DOI:10.32942/X2W65N"
-    "MFCC/chroma frame-aligned shared manifold analysis using PCA/UMAP"
+    "120D MFCC or 80D chroma -> PCA20 -> UMAP3 shared per-species manifolds; frame-aligned time trajectories"
     "real external bioacoustic trajectory producer; citation/data do not prove DASHI semantic claims"
-    "Zenodo DOI:10.5281/zenodo.18332166"
+    "Zenodo DOI:10.5281/zenodo.18332166; processed shared coordinates and frame-aligned descriptors"
 
 soundPlotProducer : ExternalTrajectoryProducer
 soundPlotProducer =
@@ -148,4 +148,4 @@ visualisationBoundaryReused = Visual.canonicalBioacousticVisualisationBoundary
 
 runtimeBridgeStatement : String
 runtimeBridgeStatement =
-  "Animalexic may export governed, provenance-bearing state-space rows for downstream rendering. Promotion status and receipt identity remain visible coordinates. The renderer is a consumer over fibres through time, not an authority that can manufacture canonical geometry, semantic meaning, anatomical identity, or causal mechanism."
+  "Animalexic may export governed, provenance-bearing state-space rows for downstream rendering. Promotion status and receipt identity remain visible coordinates. Published external coordinates may be rendered as candidate diagnostics, but publication is not promotion. The renderer is a consumer over fibres through time, not an authority that can manufacture canonical geometry, semantic meaning, anatomical identity, or causal mechanism."
