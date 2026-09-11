@@ -49,11 +49,10 @@ poamsPublicNTRSSurface = public-metadata-surface
 ------------------------------------------------------------------------
 -- Public-MSFC peer metadata controls.
 --
--- NTRS public citation records from the same centre visibly expose Marshall
--- EDAA identifiers in the public Report/Patent Number field.  The control set
--- now includes same-document-type Technical Memoranda, removing the earlier
--- comparator-class gap while retaining the no-interpolation/no-suppression
--- firewalls for POAMS itself.
+-- NTRS public citation records from the same centre show both positive and
+-- negative EDAA-exposure cases inside the Technical Memorandum document class.
+-- Therefore the POAMS omission is a manifestation-level observation, not a
+-- document-class anomaly and not evidence that an approval record was absent.
 ------------------------------------------------------------------------
 
 record PublicMSFCEDAAPeerControl : Set where
@@ -124,12 +123,42 @@ msfcTMPeer20200001187 = public-msfc-edaa-peer-control
   "https://ntrs.nasa.gov/citations/20200001187"
   true true
 
+-- Same-center/same-document-class negative controls.  Their current public
+-- NTRS records expose NASA/TM and/or M-series identifiers but no EDAA number.
+-- The empty EDAA string means only "not exposed on this public manifestation".
+
+msfcTMPeer20200000049 : PublicMSFCEDAAPeerControl
+msfcTMPeer20200000049 = public-msfc-edaa-peer-control
+  "NTRS 20200000049 / NASA/TM-2019-220142 / M-1494"
+  "Technical Memorandum (TM)"
+  ""
+  "https://ntrs.nasa.gov/citations/20200000049"
+  true false
+
+msfcTMPeer20200000050 : PublicMSFCEDAAPeerControl
+msfcTMPeer20200000050 = public-msfc-edaa-peer-control
+  "NTRS 20200000050 / NASA/TM-2019-220548 / M-1495"
+  "Technical Memorandum (TM)"
+  ""
+  "https://ntrs.nasa.gov/citations/20200000050"
+  true false
+
+msfcTMPeer20200000051 : PublicMSFCEDAAPeerControl
+msfcTMPeer20200000051 = public-msfc-edaa-peer-control
+  "NTRS 20200000051 / NASA/TM-2019-220551 / M-1498"
+  "Technical Memorandum (TM)"
+  ""
+  "https://ntrs.nasa.gov/citations/20200000051"
+  true false
+
 record PublicMetadataOmissionComparison : Set where
   constructor public-metadata-omission-comparison
   field
     peerMSFCRecordsPubliclyExposeEDAA : Bool
     poamsPublicRecordExposesEDAA : Bool
     sameDocumentTypeTMComparatorLocated : Bool
+    sameDocumentTypeTMNegativeComparatorLocated : Bool
+    sameTypeExposureIsHeterogeneous : Bool
     omissionIsManifestationSpecificObservation : Bool
     omissionProvesNoUnderlyingEDAA : Bool
     omissionProvesSuppression : Bool
@@ -139,8 +168,8 @@ open PublicMetadataOmissionComparison public
 
 canonicalPOAMSMetadataOmissionComparison : PublicMetadataOmissionComparison
 canonicalPOAMSMetadataOmissionComparison = public-metadata-omission-comparison
-  true false true true false false
-  "Multiple public MSFC Technical Memoranda expose MSFC-E-DAA-TN identifiers alongside NASA/TM and/or M-series report numbers, including NTRS 20180008760 (M-1479 / MSFC-E-DAA-TN64271), 20180005693 (M-1462 / MSFC-E-DAA-TN59151), 20180002207 (M-1458 / MSFC-E-DAA-TN52539), and 20200001187 (NASA/TM-2020-220471 / MSFC-E-DAA-TN77428). POAMS NTRS 20205010911 currently exposes M-1531 and NASA-TM-20205010911 without an EDAA field. This strengthens the observation that the missing public POAMS EDAA field is not merely explained by document type, but it still cannot be promoted to a claim that POAMS lacked an underlying approval record, that an identifier can be interpolated, or that metadata was suppressed."
+  true false true true true true false false
+  "Public MSFC Technical Memoranda are heterogeneous in EDAA exposure. NTRS 20200001187 exposes MSFC-E-DAA-TN77428 alongside NASA/TM-2020-220471, while NTRS 20200000049, 20200000050 and 20200000051 expose NASA/TM and M-series identifiers without a public EDAA field. POAMS NTRS 20205010911 likewise currently exposes M-1531 and NASA-TM-20205010911 without an EDAA field. Therefore document type does not determine public EDAA exposure, and POAMS is not established as anomalous by this field alone. The omission remains manifestation-specific and cannot be promoted to absence of an underlying approval record, interpolation of an identifier, deletion, or suppression."
 
 record PublicSearchBoundary : Set where
   constructor public-search-boundary
