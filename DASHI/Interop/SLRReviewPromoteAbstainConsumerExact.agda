@@ -147,8 +147,8 @@ data EligibilityMeansTruth : Set where
 data UnpaidConsumerMayBeReplacedByConfidenceScore : Set where
 data OpenResidualMayBeDroppedForConvenience : Set where
 
-a bstentionDoesNotMeanFalse : AbstentionMeansClaimFalse → ⊥
-a bstentionDoesNotMeanFalse ()
+abstentionDoesNotMeanFalse : AbstentionMeansClaimFalse → ⊥
+abstentionDoesNotMeanFalse ()
 
 rejectionDoesNotMeanWorldFalse : RejectionMeansWorldPropositionFalse → ⊥
 rejectionDoesNotMeanWorldFalse ()
