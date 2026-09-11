@@ -69,7 +69,7 @@ schwartzWikipediaNetworkPaper = Attribution.mkDOISource
 schwartzPaperEntity : Atlas.ScientificReferenceEntity
 schwartzPaperEntity = Atlas.verified
   "Complex networks reveal emergent interdisciplinary knowledge in Wikipedia"
-  Atlas.conceptEntity
+  Atlas.publicationEntity
   "Q113854554"
   "Wikidata scholarly-article identity inspected 2026-09-11; DOI 10.1057/s41599-021-00801-1"
 
