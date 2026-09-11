@@ -65,6 +65,14 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound314Exact
 -- coordinates.
 import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact
 
+-- R316 removes the abstract H3b predicate wrapper by normalizing the standard
+-- clustering->spectrum theorem directly to the concrete q=1/2 bound and the
+-- already-selected same-H transfer coordinate.  R317 is the current five-leaf
+-- consumer/application cut after that correction and the R315 bounded-test
+-- compiler.
+import DASHI.Physics.YangMills.BalabanHalfRateTransferCoordinateMassGapRound316Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound317Exact
+
 -- Optional producer families retained below the canonical consumer.
 -- The Step-V marked-source owner is the archaeology-normalized direct producer:
 -- once the source-response identity is supplied, its first theorem-bearing
