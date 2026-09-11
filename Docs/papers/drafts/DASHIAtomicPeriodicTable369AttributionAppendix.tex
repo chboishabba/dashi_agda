@@ -1,59 +1,53 @@
 % Provenance/chronology appendix for DASHIAtomicPeriodicTable369Formalism.tex
-% Current repo-native owner: DASHI/Physics/Chemistry/AtomicPeriodicTable369AttributionLedgerExact.agda
+% Repo-native owners live under DASHI/Physics/Chemistry/AtomicPeriodicTable369*.agda
 
 \section{Identifier-rich provenance register}
 
 This appendix keeps discovery identifiers separate from scientific authority.
 A DOI identifies a publication object; a QID supplies a semantic coordinate;
-Dewey supplies a catalogue coordinate; an OEIS identifier supplies an integer-
-sequence coordinate; and a repository commit supplies an implementation receipt.
-None of these fields, by itself, proves the physical claim represented by the source.
+Dewey supplies a catalogue coordinate; an IUPAC Gold Book identifier supplies a
+terminology coordinate; an OEIS number supplies an integer-sequence coordinate;
+and a repository commit supplies an implementation receipt. None of these fields,
+by itself, proves the physical claim represented by the source.
 
 \begin{longtable}{p{0.13\textwidth}p{0.20\textwidth}p{0.16\textwidth}p{0.14\textwidth}p{0.25\textwidth}}
 \toprule
-Date & Object & DOI / QID & Source role & Direct locator / significance\\
+Date & Object & DOI / QID / sequence & Source role & Direct locator / significance\\
 \midrule
 \endhead
-2025-11-11 & \texttt{dashifine} spectral-line tooling & atom Q9121; DOI unassigned & primary repository implementation & commit \texttt{4f1441e4989beec157733a960ca7dfc47a2bf3ee}; earliest clean atomic/spectral implementation located in the present audit, but not yet the 369 periodic-table constructor.\\
-2026-01-03 & \texttt{dashiQ} README, ``Chemistry \& the periodic table (first major test)'' & atom Q9121; periodic table Q10693; DOI unassigned & primary public repository programme source & commit \texttt{bbedb3bed85e31125eb68255379b57788a434939}, authored 00:16:42Z and committed 02:18:18Z, expands the prior two-line README and explicitly records shell structure from kernel filling, period lengths 1--3, valence structure, noble-gas closure and alkali recurrence while leaving exact energies, fine structure, relativistic corrections and nuclear stability open.\\
-2026-02-16 & \texttt{dashi\_agda/Base369.agda} & DOI/QID unassigned & primary formal substrate implementation & init commit \texttt{65266f7edc1ec7bb52e59ee020209cc5cb0eecec}, blob \texttt{8dc130c5af5a28580f729a57ea9e8ba610c0e9ad}; 3/6/9 cyclic carriers, repeated rotation, order laws, identities and ternary associativity are present at repository inception.\\
-2026-02-21 / 2026-03-05 & \texttt{dashifine} full-118 periodic-table cloud & atom Q9121; periodic table Q10693; DOI unassigned & primary repository computational source & authored 21 February and committed as \texttt{9f1430ab7fe7c4ae480e93bc9f7549f4b758950e} on 5 March; consumes \texttt{PeriodicTableCSV.csv}, so it pays table-wide computational breadth but not a first-principles derivation.\\
-2026-03-06 & \texttt{dashiQ/PHYSICS\_TARGETS.md} & DOI/QID unassigned & primary repository programme source & commit \texttt{47071bed2cbe853c76fb5bec7d65f3a8b73b14bc}; explicit projection/effective-physics precursor.\\
-2026-04-30 & atom/chemistry recovery carrier & atom Q9121; periodic table Q10693 & primary repo formal implementation & \texttt{dashi\_agda} commit \texttt{42e1d740141b0e9e1ca717ae5df79d6e31546c07}; earliest direct repo-native atom/chemistry milestone located in this audit.\\
-2026-06-07 & \texttt{ChemistryFiniteRuleTargets.agda} & atom Q9121; periodic table Q10693; Pauli principle Q131594 & primary formal finite-target source & commit \texttt{062ccb611c6d93fa7228a73d1557c8c934ea89d5} adds the file from zero lines with H-through-Ne occupations and exact H/Ne electron-count regressions while keeping spectroscopy, thermochemistry, wet-lab and physical-chemistry promotion false.\\
-2026-07-07 & Lean \texttt{Base369.lean} first repository proof source & DOI/QID unassigned & primary cross-assistant proof source & commit \texttt{55132524c2e132c0b86c17eeb60d7e39c3af08b6} adds \texttt{Base369.lean} from zero lines and labels the mirror genuine/fully proved; this is the first Lean implementation receipt located, not the later path move.\\
-2026-07-19 & explicit periodic-table recovery boundary & periodic table Q10693 & primary repo formal implementation & \texttt{dashi\_agda} commit \texttt{554e8f930dfee5293d75d3bb67be8098bde088d3}, PR \#101; explicit shell-recurrence/periodic-recovery boundary.\\
-2026-08-12 & Lean path reorganization & DOI/QID unassigned & repository organization receipt & commit \texttt{72734285fd83387837e0025eb51a93b63629a0b9} moves the already-existing mirror under \texttt{AgdaMirror/Base369.lean}; not the first Lean proof date.\\
-2026-09-11 & present atomic manuscript / PR \#886 & atom Q9121; periodic table Q10693; Pauli principle Q131594 & primary repository manuscript & same-object DOI/arXiv/Zenodo receipt not yet located; this is therefore a manuscript/implementation receipt, not an external-publication claim.\\
-1925 & W. Pauli, \emph{Ueber den Zusammenhang des Abschlusses der Elektronengruppen im Atom mit der Komplexstruktur der Spektren} & DOI \texttt{10.1007/BF02980631}; Pauli exclusion principle Q131594 & external primary physics source & historical primary anchor for hard fermionic exclusion; it does not identify the DASHI MDL cost with a physical Hamiltonian.\\
-1928 & D. R. Hartree, \emph{The Wave Mechanics of an Atom with a Non-Coulomb Central Field. Part II} & DOI \texttt{10.1017/S0305004100011920} & external primary method source & self-consistent atomic-field method applied to atoms; acquired method authority for the scale/spectrum snowball, not payment of the DASHI same-object operator bridge.\\
-1928 & J. C. Slater, \emph{The Self Consistent Field and the Structure of Atoms} & DOI \texttt{10.1103/PhysRev.32.339} & external primary method source & analysis of Hartree self-consistent fields against the Schr\"odinger equation; method/spectral authority only.\\
-2007 & Restrepo and Pach\'on, \emph{Mathematical Aspects of the Periodic Law} & DOI \texttt{10.1007/s10698-006-9026-6}; arXiv:math/0611410 & external mathematical-chemistry source & snowballed from OEIS A093907; source for mathematical periodic-law context, not proof of the DASHI 369 mechanism.\\
-2017 & Ibrahim, Danforth, Dodds, \emph{Connecting every bit of knowledge} & DOI \texttt{10.1016/j.jocs.2016.12.001}; arXiv:1605.00309 & primary search-policy source & donor for deterministic first-link/traversal-funnel investigation; it does not turn first-link centrality into proof authority.\\
-current & atom concept & Q9121 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q9121}; Dewey 539.7.\\
-current & chemical element & Q11344 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q11344}; Dewey 546; IUPAC Gold Book C01022.\\
-current & periodic table concept & Q10693 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q10693}; Dewey 546.8.\\
-current & atomic orbital & Q53860 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q53860}; Dewey 541.28; IUPAC Gold Book A00500.\\
-current & quantum mechanics & Q944 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q944}; Dewey 530.12.\\
-current & carbon & Q623 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q623}; Dewey 547; IUPAC Gold Book C00821.\\
-current & ionization energy & Q483769 & semantic/quantity coordinate only & \url{https://www.wikidata.org/wiki/Q483769}; IUPAC Gold Book I03199; IEV 113-06-39; Dewey unresolved in the inspected item.\\
-current & Hartree--Fock method & Q7879841 & semantic/method coordinate only & \url{https://www.wikidata.org/wiki/Q7879841}; Dewey unresolved in the inspected item.\\
-current & Pauli exclusion principle & Q131594 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q131594}; 539.7 retained only as an atom/exclusion topic coordinate.\\
+2025-11-11 & \texttt{dashifine} spectral-line tooling & atom Q9121 & primary repository implementation & commit \texttt{4f1441e4989beec157733a960ca7dfc47a2bf3ee}; earliest clean atomic/spectral implementation located in the present audit, not yet the 369 periodic-table constructor.\\
+2026-01-03 & \texttt{dashiQ} README, ``Chemistry \& the periodic table (first major test)'' & atom Q9121; periodic table Q10693 & primary public repository programme source & commit \texttt{bbedb3bed85e31125eb68255379b57788a434939}; explicitly records kernel-filling shell structure, periods 1--3, valence, noble-gas closure and alkali recurrence while leaving exact energies, fine structure, relativistic corrections and nuclear stability open.\\
+2026-02-16 & \texttt{dashi\_agda/Base369.agda} & DOI/QID unassigned & primary formal substrate implementation & init commit \texttt{65266f7edc1ec7bb52e59ee020209cc5cb0eecec}; 3/6/9 cyclic carriers, rotations, order laws, identities and ternary associativity already exist at repository inception.\\
+2026-02-21 / 2026-03-05 & \texttt{dashifine} full-118 table cloud & periodic table Q10693 & primary repository computational source & commit \texttt{9f1430ab7fe7c4ae480e93bc9f7549f4b758950e}; consumes \texttt{PeriodicTableCSV.csv}, therefore pays breadth but not generative derivation.\\
+2026-03-06 & \texttt{dashiQ/PHYSICS\_TARGETS.md} & DOI/QID unassigned & primary programme source & commit \texttt{47071bed2cbe853c76fb5bec7d65f3a8b73b14bc}; explicit projection/effective-physics precursor.\\
+2026-04-30 & atom/chemistry recovery carrier & atom Q9121; periodic table Q10693 & primary formal implementation & commit \texttt{42e1d740141b0e9e1ca717ae5df79d6e31546c07}; staged closure, not finished chemistry.\\
+2026-06-07 & \texttt{ChemistryFiniteRuleTargets.agda} & atom Q9121; Pauli Q131594 & primary finite formal source & commit \texttt{062ccb611c6d93fa7228a73d1557c8c934ea89d5}; exact H-through-Ne target surface with physical/spectroscopic promotion blocked.\\
+2026-07-07 & Lean \texttt{Base369.lean} & DOI/QID unassigned & primary cross-assistant proof-source receipt & commit \texttt{55132524c2e132c0b86c17eeb60d7e39c3af08b6}; concrete Lean proofs for the finite 3/6/9 carrier laws, not the atom constructor.\\
+2026-07-19 & periodic-table recovery boundary & periodic table Q10693 & primary formal implementation & commit \texttt{554e8f930dfee5293d75d3bb67be8098bde088d3}, PR \#101.\\
+2026-09-11 & present manuscript / PR \#886 & Q9121 / Q10693 / Q131594 & primary repository manuscript & same-object DOI/arXiv/Zenodo receipt remains unlocated; repository manuscript is not silently called peer-reviewed publication.\\
+1925 & Wolfgang Pauli exclusion paper & DOI \texttt{10.1007/BF02980631}; Q131594 & external primary physics & historical exclusion-principle anchor only.\\
+1928 & D. R. Hartree, \emph{Wave Mechanics... Part II} & DOI \texttt{10.1017/S0305004100011920} & external primary method & self-consistent atomic-field source; does not pay the DASHI same-object operator bridge.\\
+1928 & J. C. Slater, \emph{The Self Consistent Field and the Structure of Atoms} & DOI \texttt{10.1103/PhysRev.32.339} & external primary method & atomic self-consistent-field/spectral context.\\
+1936 & Erwin Madelung, \emph{Die Mathematischen Hilfsmittel des Physikers} & archive DOI \texttt{10.1007/978-3-662-02177-4}; author Q72626 & historical rule lineage & modern Springer archive identifier for the 1936 edition; retained as historical $n+\ell,n$ source lineage, not first-principles many-electron proof.\\
+1962 & V. M. Klechkovskii, \emph{Justification of the Rule for Successive Filling of $(n+l)$ Groups} & DOI unresolved in inspected primary source & external primary historical paper & JETP 14(2), 334; direct source retained without inventing a DOI.\\
+2002 & L. C. Allen and E. T. Knight, \emph{The Lowdin challenge} & DOI \texttt{10.1002/qua.965} & peer-reviewed analytic literature & origin/limits of the Madelung $n+l,n$ rule; not DASHI mechanism authority.\\
+2007 & Restrepo and Pach\'on, \emph{Mathematical Aspects of the Periodic Law} & DOI \texttt{10.1007/s10698-006-9026-6}; arXiv:math/0611410 & mathematical-chemistry literature & snowballed from OEIS A093907.\\
+2017 & Ibrahim, Danforth, Dodds, \emph{Connecting every bit of knowledge} & DOI \texttt{10.1016/j.jocs.2016.12.001}; arXiv:1605.00309 & primary search-policy source & donor for deterministic first-link traversal; first-link centrality does not import theorem authority.\\
+current & periodic table & Q10693; DDC 546.8 & semantic/catalogue coordinate & \url{https://www.wikidata.org/wiki/Q10693}.\\
+current & chemical element & Q11344; DDC 546; Gold Book C01022 & semantic/terminology coordinate & \url{https://www.wikidata.org/wiki/Q11344}.\\
+current & atom & Q9121; DDC 539.7 & semantic/catalogue coordinate & \url{https://www.wikidata.org/wiki/Q9121}.\\
+current & atomic orbital & Q53860; DDC 541.28; Gold Book A00500 & semantic/representation coordinate & \url{https://www.wikidata.org/wiki/Q53860}.\\
+current & quantum mechanics & Q944; DDC 530.12 & semantic/theory coordinate & \url{https://www.wikidata.org/wiki/Q944}.\\
+current & Aufbau principle & Q585745; Gold Book AT06996 & semantic/terminology coordinate & Dewey unresolved in the inspected semantic item; \url{https://www.wikidata.org/wiki/Q585745}.\\
+current & ionization energy & Q483769; Gold Book I03199; IEV 113-06-39 & quantity coordinate & Dewey unresolved; \url{https://www.wikidata.org/wiki/Q483769}.\\
+current & Hartree--Fock method & Q7879841 & method coordinate & Dewey unresolved; \url{https://www.wikidata.org/wiki/Q7879841}.\\
 \bottomrule
 \end{longtable}
 
-\paragraph{Priority versus publication.}
-The 3 January 2026 \texttt{dashiQ} commit is the earliest located public/repository
-source in this audit that explicitly states the periodic-table/kernel-filling
-programme.  The immediately preceding inspected README state is only the two-line
-repository title, so the addition boundary is exact at repository level.  This
-pays public-source priority/provenance; it is not called peer-reviewed publication
-and does not convert the historical phrase ``we did'' into a kernel-checked theorem.
-
 \paragraph{Ibrahim/Dewey traversal.}
-The repo-native traversal policy follows the Ibrahim first-link discipline while
-preferring typed DASHI formulation/dependency edges over lexical adjacency.  The
-most useful external catalogue walk located in this tranche is
+The repo-native traversal policy prefers explicit DASHI formulation owners, then
+typed dependency/generalisation edges, while using external catalogue coordinates
+as search aids. The first external walk is
 \[
 \text{periodic table }(Q10693,546.8)
 \to \text{chemical element }(Q11344,546)
@@ -61,82 +55,131 @@ most useful external catalogue walk located in this tranche is
 \to \text{atomic orbital }(Q53860,541.28)
 \to \text{quantum mechanics }(Q944,530.12).
 \]
-Carbon $(Q623,547)$ is retained as a downstream chemistry branch. Ionization
-energy $(Q483769,\mathrm{IUPAC}\ I03199)$ and Hartree--Fock $(Q7879841)$ are the
-next scale/method coordinates, but their Dewey fields remain unresolved in the
-inspected semantic items. This walk is a search funnel, not a theorem implication:
-Dewey adjacency, QID identity and first-link centrality carry no proof authority.
+The selector continuation is
+\[
+\text{periodic-table constructor}
+\to \text{exact }(n+\ell,n)\text{ selector}
+\to \mathrm{OEIS~A167268}
+\to \text{Aufbau }(Q585745,\mathrm{AT06996})
+\to \text{Madelung/Klechkovskii/Allen--Knight sources}.
+\]
+Dewey adjacency, QID identity, Gold Book terminology and first-link centrality
+remain non-promoting coordinates.
 
-\paragraph{OEIS sequence weld.}
-Following the repository's earlier OEIS practice, sequence identifiers are now
-attached as non-promoting mathematical coordinates.  The strongest exact matches
-are
+\paragraph{OEIS sequence atlas.}
+The current exact sequence coordinates are
 \[
 \begin{aligned}
-\text{A016825}:&\quad 2,6,10,14,\ldots = 4\ell+2
-               = 2(2\ell+1),\\
-\text{A001105}:&\quad 0,2,8,18,32,\ldots = 2n^2,\\
-\text{A006331}:&\quad 0,2,10,28,60,\ldots
-               = \sum_{k=1}^{n}2k^2,\\
-\text{A093907}:&\quad 2,8,8,18,18,32,32,\ldots
-               \quad\text{(Aufbau-predicted period lengths)},\\
-\text{A018227}:&\quad 2,10,18,36,54,86,118,\ldots
-               \quad\text{(full-shell/noble closure coordinate)}.
+\mathrm{A016825}:&\quad 2,6,10,14,\ldots=4\ell+2=2(2\ell+1),\\
+\mathrm{A001105}:&\quad 0,2,8,18,32,\ldots=2n^2,\\
+\mathrm{A006331}:&\quad 0,2,10,28,60,\ldots=\sum_{k=1}^{n}2k^2,\\
+\mathrm{A167268}:&\quad 2,2,6,2,6,2,10,6,2,10,6,2,14,\ldots,\\
+\mathrm{A093907}:&\quad 2,8,8,18,18,32,32,\ldots,\\
+\mathrm{A018227}:&\quad 2,10,18,36,54,86,118,\ldots.
 \end{aligned}
 \]
-Thus DASHI's exact subshell-capacity function coincides with A016825 and its
-principal-shell capacity coincides with A001105.  The historical $2,10,18$
-closure regression is a three-term prefix of A018227.  Crucially, A093907 is
-\emph{not} globally identical to $2n^2$: period length and principal-shell
-capacity are different sequence objects once the filling order is considered.
-OEIS A018227 records itself as the partial sums of A093907, which makes the
-closure/period relation a useful source coordinate without proving the DASHI MDL
-selector.  A sequence match does not establish mechanism identity, physical
-Hamiltonian authority, nuclear stability, or empirical recovery.
+A016825 is the subshell-capacity law, A001105 the principal-shell capacity,
+A167268 the capacities encountered in successive Madelung/Aufbau subshell order,
+A093907 the period lengths, and A018227 their cumulative full-shell closures.
+The important non-collapse law is
+\[
+2n^2\neq\text{global period-length sequence}.
+\]
 
-OEIS A093907 also provides the useful literature snowball to Restrepo and
-Pach\'on, \emph{Mathematical Aspects of the Periodic Law}, DOI
-\texttt{10.1007/s10698-006-9026-6}, arXiv:math/0611410.  This pays a primary
-mathematical-chemistry literature coordinate for period-length mathematics; it
-still does not identify that paper's mechanism with DASHI's 369/kernel/MDL route.
+\paragraph{Exact selector repair and historical fixed-$\alpha$ boundary.}
+The attached historical archive uses the toy score
+\[
+C_\alpha(n,\ell)=n+\alpha\ell
+\]
+and records early closures $2,10,18$. The archive also reports that $\alpha$
+changes the $4s/3d$ competition. The current formal archaeology preserves those
+runs, but no longer identifies a fixed $\alpha$ with the global Madelung rule.
+For the representative $\alpha=3/5$, multiply by five:
+\[
+\widehat C(n,\ell)=5n+3\ell.
+\]
+Then
+\[
+\widehat C(4s)=20<21=\widehat C(3d),
+\]
+which gives the desired early ordering, but
+\[
+\widehat C(4f)=29<30=\widehat C(6s),
+\]
+whereas Madelung diagonals give
+\[
+(n+\ell)(6s)=6<7=(n+\ell)(4f).
+\]
+Thus the fixed-$\alpha$ proxy is a retained finite historical producer, not the
+full Aufbau selector.
+
+A later typed repair now generates orbitals directly in lexicographic
+$(n+\ell,n)$ order. Its capacity image definitionally produces finite prefixes of
+A167268 without any fixed $\alpha$. This is structural selector mathematics,
+not a claim that empirical interacting-atom ground states have no exceptions.
+
+\paragraph{Same-object period/closure weld.}
+The exact selected subshell stream through $7p$, followed by the next $8s$
+boundary marker, is now partitioned into the first seven periods:
+\[
+\begin{array}{ll}
+1:&1s,\\
+2:&2s,2p,\\
+3:&3s,3p,\\
+4:&4s,3d,4p,\\
+5:&5s,4d,5p,\\
+6:&6s,4f,5d,6p,\\
+7:&7s,5f,6d,7p.
+\end{array}
+\]
+Applying $2(2\ell+1)$ to these same selected blocks gives exactly
+\[
+2,8,8,18,18,32,32,
+\]
+the first seven values of A093907. Their cumulative sums are
+\[
+2,10,18,36,54,86,118,
+\]
+the corresponding A018227 closure values. This is stronger than the earlier
+three-term $2,10,18$ adjacency: the bounded first-seven period/closure weld now
+uses the same selected subshell objects. It is still not an empirical theorem of
+nuclear stability, measured spectra, or ionization energies.
 
 \paragraph{Archive executable snowball.}
-Inspection of the canonical \emph{DASHI Atom} archive substantially narrows the
-historical-artifact leaf. The archive contains code-shaped reconstruction of the
-orbital enumerator/filler, the simple cost $n+\alpha\ell$, the degeneracy
-$2(2\ell+1)$, reported closures $Z=2,10,18$, later reported/rerun
-$\alpha$-sensitivity experiments around closed/open shells, and toy ionization
-work. One early code block explicitly says it is reconstructing the earlier test,
-so these retained objects do \emph{not} identify the original standalone script,
-exact original parameter schedule or artifact hash. The residual is now artifact
-identity/custody, not absence of an executable idea.
+The canonical \emph{DASHI Atom} archive contains code-shaped orbital filling,
+$2(2\ell+1)$ capacities, the $n+\alpha\ell$ proxy, reported closures $2,10,18$,
+closed/open-shell $\alpha$-sensitivity runs, toy ionization work, and a later
+Hartree-style numerical route. An early passage explicitly describes
+reconstructing the earlier Python test, so original standalone script identity,
+exact original parameter schedule and artifact hash remain unpaid.
 
 \paragraph{Mechanical-status boundary.}
-The repository distinguishes five states explicitly:
+The repository distinguishes
 \[
 \text{mathematical specification}
-\neq \text{proof source}
-\neq \text{recorded typecheck/build}
-\neq \text{executed regression}
-\neq \text{empirical recovery}.
+\neq\text{proof source}
+\neq\text{recorded typecheck/build}
+\neq\text{executed regression}
+\neq\text{empirical recovery}.
 \]
-The new Agda source is wired to a focused validation root, but source presence is
-not recorded as a successful typecheck without an exact-head checker receipt. The
-Lean \texttt{Base369} source contains concrete proof terms but this audit has not
-independently rebuilt the project.
+The new Agda owners are wired into \texttt{AtomicPeriodicTable369Validation.agda},
+but no exact-head GitHub Actions run has yet been returned. Therefore source
+presence is not recorded as a successful typecheck. The Lean Base369 source has
+concrete proof terms, but this audit has not independently rebuilt it.
 
-\paragraph{Highest-alpha snowball frontier.}
-The Ibrahim/Dewey/OEIS walk changes the next move.  The capacity sequences are
-now paid exactly at the integer-sequence level, and the full Aufbau period target
-is externally identified as A093907.  Therefore the first unpaid mathematical
-weld is not another capacity identity: it is the same-object proof that the DASHI
-valence-recurrence/MDL selector yields the full A093907 period-length sequence,
-rather than merely matching A016825/A001105 and the first three A018227 closures.
-External method provenance for the self-consistent-field rung is already paid by
-Hartree and Slater; the physical leaf remains the same-object DASHI
-operator-to-spectrum/calibrated-ionization bridge.  On the historical side, the
-archive pays embedded reconstruction and run narrative, leaving the original
-standalone script/execution identity/hash unpaid. Any same-object pre-PR
-DOI/arXiv/Zenodo/public-manuscript receipt remains separately valuable.
-Acquisition may occur laterally and out of dependency order; conclusion payment
-may not.
+\paragraph{Highest-alpha frontier.}
+The bounded first-seven selector-to-period-to-closure weld is now paid
+structurally. The remaining mathematical generalisation is an arbitrary-depth
+``split at next $ns$'' period-partition theorem if an unbounded sequence theorem
+is desired. The higher-value scientific residual is the same-object chain
+\[
+\text{selected atomic basis}
+\to H_Z
+\to \text{spectrum/ground state}
+\to E(Z)
+\to IE_1(Z),
+\]
+followed by nuclear stability, bonding, and empirical full-table validation.
+Historical artifact identity and any same-object pre-PR DOI/arXiv/Zenodo object
+remain independent provenance leaves. Acquisition may occur out of order;
+conclusion payment may not.
