@@ -35,24 +35,35 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 --         directly to the routed fourSignInner norm with the same fixed factor 4;
 --   R584  instantiates that direct class-norm compiler on R573's ACTUAL nested
 --         slot-transformed inner cells, so the remaining class estimates are
---         stated on the same object consumed by the modern commutator lane.
+--         stated on the same object consumed by the modern commutator lane;
+--   R585  proves LH/HL equality on fourSignInner using the exact inner swap;
+--   R586  transports that equality through the ACTUAL R145 outer slot map;
+--   R587  reduces the nonzero-p modern norm route to three independent class
+--         budgets: one far-low orientation, HH->low, and comparable;
+--   R588  reconciles this stronger modern route with the historical R434
+--         critical-cone route at the weakest honest seam: the exact R440 signed
+--         common cross.  It explicitly does NOT identify R434's outer Bony
+--         partition with R587's inner post-slot partition.
 --
 -- Separately, R577B reconciles the historical R328/R329 nested Schur producer
 -- with the MODERN R568 consumer.  It correctly keeps four receipts distinct:
 -- row, column, signed-response majorization, and cutoff-uniform Schur envelope.
 --
--- The introspective result is therefore sharper than an opaque "commutator
--- estimate".  After R584 neither helicity expansion, positive convolution,
--- literal enumeration, Bony routing, direct covariance control, nor an
--- inner-vs-outer-slot carrier mismatch is a mandatory analytic residual.  The
--- preferred within-fibre target is now a cutoff-uniform norm/operator budget on
--- the literal zero-masked Bony classes AFTER the actual R145 outer slot map.
--- Existing Schur/Young/operator machinery may pay those norms directly.  The
--- outer R294 weight and spectator-weighted spacetime passage remain downstream.
+-- CURRENT INTROSPECTIVE FRONTIER
+-- ------------------------------
+-- R587 is a sufficient, stronger norm/operator producer.  It is not mandatory.
+-- R434 is the weaker signed route and is preferable if its historical three
+-- physical region payments can be constructed on the exact live R440 common
+-- cross.  R588 isolates the one same-scalar identity receipt needed to reuse
+-- R434 without laundering its old outer class partition into R587's inner one.
 --
--- Ordinary scalar FTC/order and initial-energy endpoint calibration remain
--- separately typed standard/source-realization coordinates.  Nothing in this
--- aggregate asserts analytic payment or Clay closure.
+-- Therefore the remaining analytic work is not another Bony compiler.  It is
+-- actual cutoff-uniform harmonic analysis: literal deep-FL Bernstein/convolution,
+-- literal deep-HH null/convolution, critical-core signed covariance (or another
+-- admissible operator route), plus the exact live/historical signed-cross weld.
+-- The optional R587 route remains available if a direct three-class norm theorem
+-- is easier.  Outer R294 weight and spectator-weighted spacetime transport remain
+-- downstream.  No analytic or Clay closure is asserted here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -84,6 +95,10 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact
 import DASHI.Physics.Closure.NSTriadKNClassNormBudgetToBonyGramPaymentRound582Exact
 import DASHI.Physics.Closure.NSTriadKNDirectBonyClassNormCompilerRound583Exact
 import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyClassNormBidiRound584Exact
+import DASHI.Physics.Closure.NSTriadKNFourSignInnerBonyLHHLNormSymmetryRound585Exact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotBonyLHHLNormSymmetryRound586Exact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact
+import DASHI.Physics.Closure.NSTriadKNModernCriticalConeSameObjectBidiRound588Exact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -111,6 +126,24 @@ round569DirectClassNormCompilerIntegrated = true
 
 round569LiveNestedSlotClassNormBidiIntegrated : Bool
 round569LiveNestedSlotClassNormBidiIntegrated = true
+
+round569LiveInnerLHHLNormSymmetryIntegrated : Bool
+round569LiveInnerLHHLNormSymmetryIntegrated = true
+
+round569LiveNestedSlotLHHLNormSymmetryIntegrated : Bool
+round569LiveNestedSlotLHHLNormSymmetryIntegrated = true
+
+round569ThreeClassNormConsumerIntegrated : Bool
+round569ThreeClassNormConsumerIntegrated = true
+
+round569HistoricalCriticalConeSignedBidiIntegrated : Bool
+round569HistoricalCriticalConeSignedBidiIntegrated = true
+
+round569R587AbsoluteNormRouteMandatory : Bool
+round569R587AbsoluteNormRouteMandatory = false
+
+round569HistoricalR434SameCrossWeldClosed : Bool
+round569HistoricalR434SameCrossWeldClosed = false
 
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
