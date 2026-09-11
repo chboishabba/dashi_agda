@@ -10,13 +10,14 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoRegressionExact as
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369CrossRepoAttributionExact as XA
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369DashiQFirstPublicSourceExact as DQ
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369IbrahimDeweyTraversalExact as ID
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369OEISAttributionExact as OEIS
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 import DASHI.Promotion.ChemistryFiniteRuleTargets as F
 
 ------------------------------------------------------------------------
 -- Focused validation root.  Importing this module forces the generative
 -- formalism, provenance/snowball companion, chronology/status ledger,
--- DOI/QID/primary/Dewey attribution ledgers, first-public dashiQ source,
+-- DOI/QID/primary/Dewey/OEIS attribution ledgers, first-public dashiQ source,
 -- Ibrahim/Dewey traversal, and cross-repository regression ledger through the
 -- Agda checker when this file is actually checked.
 --
@@ -166,3 +167,35 @@ archiveArtifactIdentityRegression :
     ID.canonicalArchiveExecutableSnowballStatus
   ≡ true
 archiveArtifactIdentityRegression = refl , (refl , refl)
+
+oeisCapacityRegression :
+  G.subshellCapacity 0 ≡ 2
+  × G.subshellCapacity 1 ≡ 6
+  × G.subshellCapacity 2 ≡ 10
+  × G.shellCapacity 1 ≡ 2
+  × G.shellCapacity 2 ≡ 8
+  × G.shellCapacity 3 ≡ 18
+oeisCapacityRegression =
+  G.sCapacity ,
+  (G.pCapacity ,
+  (G.dCapacity ,
+  (G.firstShellCapacity ,
+  (G.secondShellCapacity , G.thirdShellCapacity))))
+
+oeisNonPromotionRegression :
+  OEIS.OEISAtomicBoundary.sequenceMatchImpliesMechanismIdentity
+    OEIS.canonicalOEISAtomicBoundary
+  ≡ false
+  ×
+  OEIS.OEISAtomicBoundary.oeisEntryImportsProof
+    OEIS.canonicalOEISAtomicBoundary
+  ≡ false
+  ×
+  OEIS.OEISAtomicBoundary.threeTermClosurePrefixProvesFullPeriodicTable
+    OEIS.canonicalOEISAtomicBoundary
+  ≡ false
+  ×
+  OEIS.OEISAtomicBoundary.shellCapacityEqualsAufbauPeriodLengthGlobally
+    OEIS.canonicalOEISAtomicBoundary
+  ≡ false
+oeisNonPromotionRegression = refl , (refl , (refl , refl))
