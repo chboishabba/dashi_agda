@@ -5,11 +5,6 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- COVERAGE LEDGER, NOT A COMMON-THEOREM CLAIM
---
--- Every retained roster identity gets a coverage row, but scientific work is
--- attached only after person/object attribution is paid.  Similar names,
--- institutions, programmes or later reporter groupings never manufacture an
--- identity weld.
 ------------------------------------------------------------------------
 
 data WorkCoverageStatus : Set where
@@ -133,6 +128,14 @@ amyEskridgeCoverage = work-coverage-entry
   "DASHI.Culture.AmyEskridgeGravityMechanismCrossPollinationExact"
   "recover Amy-linked same-object release/transition receipt for the policy-required Marshall EDAA/STI object and exact Institute derivative; do not manufacture M-1531 authorship from transition role or surname"
 
+ningLiCoverage : WorkCoverageEntry
+ningLiCoverage = work-coverage-entry
+  "Ning Li"
+  scientificOwnerImplemented
+  "superconducting gravitoelectric/gravitomagnetic theory plus static type-II YBCO gravity constraint experiment"
+  "DASHI.Physics.ExoticGravity.LiTorrTheorySourceDiligenceProofSearchExact + DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact"
+  "recover primary UAH/AC Gravity/DoD programme lineage and exact 2001 Other Transaction award/technical-results carrier; retain the 1997 <2 parts in 10^8 g static constraint as negative evidence for that tested configuration"
+
 melissaCasiasCoverage : WorkCoverageEntry
 melissaCasiasCoverage = work-coverage-entry
   "Melissa Casias"
@@ -156,6 +159,14 @@ matthewSullivanCoverage = work-coverage-entry
   "former U.S. Air Force intelligence role"
   "DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact"
   "primary cause/manner and any independently documented event-time programme/testimony obligation; anonymous later UAP/crash-retrieval claims remain separate"
+
+nickPopeCoverage : WorkCoverageEntry
+nickPopeCoverage = work-coverage-entry
+  "Nicholas George Pope"
+  nonScientificRoleNoScienceOwner
+  "former UK Ministry of Defence civil-service UFO investigation role; later author/media commentator"
+  "DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact"
+  "primary MoD role chronology and any exact event-time disclosure/testimony obligation; UFO investigation does not manufacture scientist status, clearance scope or recovered-craft access"
 
 record CoverageBoundary : Set where
   constructor coverage-boundary
