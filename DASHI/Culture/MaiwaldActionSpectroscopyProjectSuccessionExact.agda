@@ -6,13 +6,6 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- JPL SURP SAME-PROJECT SUCCESSION
---
--- JPL's SURP archive lists the same project title in 2023, 2024 and 2025.
--- 2023: Frank W. Maiwald (PI), Robert P. Hodyss, Mathias Weber, Lane Terry.
--- 2024/2025: Deacon J. Nemchick (PI), Robert P. Hodyss, Mathias Weber.
--- This closes project-level leadership succession and overlapping-team
--- continuity. It does not prove transfer of every calibration, qualification,
--- apparatus, failure-history or tacit-execution carrier.
 ------------------------------------------------------------------------
 
 record ProjectSuccessionReceipt : Set where
@@ -99,11 +92,6 @@ deprotonatedStates2025Carrier = spectroscopy-publication-carrier
 
 ------------------------------------------------------------------------
 -- Attribution-safe manifestation split.
---
--- A title family can have multiple public manifestations.  Identifier role is
--- therefore kept distinct from scientific lineage: ChemRxiv DOI, ACS DOI and
--- NTRS record identity are not interchangeable identifiers even where the
--- records clearly refer to the same title/author family.
 ------------------------------------------------------------------------
 
 data PublicationManifestationKind : Set where
@@ -168,6 +156,55 @@ open ManifestationBoundary public
 canonicalManifestationBoundary : ManifestationBoundary
 canonicalManifestationBoundary = manifestation-boundary
   false false false false true true
+
+------------------------------------------------------------------------
+-- Primary 2023 experimental-data existence receipt.
+--
+-- JPL SP23012p already shows experimental IR photodissociation spectra for
+-- protonated ValH+, deprotonated [Val-H]- and deprotonated [AVA-H]-, and lists
+-- the combined manuscript as in preparation with Maiwald as PI/task manager.
+-- This pays existence of those experimental spectrum carriers by the poster's
+-- 2023 manifestation. It does not pay exact run dates, raw bytes, final reduced
+-- datasets, final conformer/DFT libraries, or identity with later paper figures.
+------------------------------------------------------------------------
+
+record ExperimentalDataExistenceReceipt : Set where
+  constructor experimental-data-existence-receipt
+  field
+    sourceObject : String
+    sourceDate : String
+    protonatedExperimentalSpectrumVisible : Bool
+    deprotonatedValineExperimentalSpectrumVisible : Bool
+    deprotonatedAminovalericExperimentalSpectrumVisible : Bool
+    maiwaldPIOrTaskManagerVisible : Bool
+    broadManuscriptInPreparationVisible : Bool
+    exactExperimentRunDatesPaid : Bool
+    exactRawDataBytesPaid : Bool
+    laterPaperFigureByteIdentityPaid : Bool
+
+open ExperimentalDataExistenceReceipt public
+
+fy23ExperimentalDataExistence : ExperimentalDataExistenceReceipt
+fy23ExperimentalDataExistence = experimental-data-existence-receipt
+  "JPL SURP poster SP23012p / CL#23-5018"
+  "2023 poster manifestation"
+  true true true true true false false false
+
+record ExperimentalDataBoundary : Set where
+  constructor experimental-data-boundary
+  field
+    deprotonatedSpectraExistedBy2023 : Bool
+    protonatedSpectraExistedBy2023 : Bool
+    therefore2025PublicationCycleWasWhollyPostLossScience : Bool
+    posterSpectrumImpliesFinal2025DatasetComplete : Bool
+    posterSpectrumImpliesExactRawDataCustody : Bool
+    posterMaySeedDatasetVersionCrosswalk : Bool
+
+open ExperimentalDataBoundary public
+
+canonicalExperimentalDataBoundary : ExperimentalDataBoundary
+canonicalExperimentalDataBoundary = experimental-data-boundary
+  true true false false false true
 
 ------------------------------------------------------------------------
 -- Temporal split around Maiwald's death on 2024-07-04.
@@ -243,6 +280,9 @@ data MaiwaldSuccessionReverseTarget : Set where
   acquireWorkingTitleToPublishedVersionHistory : MaiwaldSuccessionReverseTarget
   acquireExperimentAndDataProductionDates : MaiwaldSuccessionReverseTarget
   acquirePreprintAcceptedManuscriptVersionCrosswalk : MaiwaldSuccessionReverseTarget
+  acquireExactDatasetAndReductionVersionCrosswalk : MaiwaldSuccessionReverseTarget
 
+-- The poster now pays a by-2023 upper bound for experimental-spectrum existence.
+-- Exact run dates and exact dataset/reduction lineage remain the first leaf.
 manuscriptForkNextTarget : MaiwaldSuccessionReverseTarget
-manuscriptForkNextTarget = acquireExperimentAndDataProductionDates
+manuscriptForkNextTarget = acquireExactDatasetAndReductionVersionCrosswalk
