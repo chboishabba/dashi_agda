@@ -240,4 +240,4 @@ canonicalOEISAufbauWeldFrontier =
 
 -- Keep the source-attribution owner linked without importing authority.
 oeisAttributionOwner : Set
-'oeisAttributionOwner = OEIS.OEISReceipt
+oeisAttributionOwner = OEIS.OEISReceipt
