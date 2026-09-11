@@ -10,22 +10,13 @@ import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapCurrentExact as Current
 import DASHI.Wikimedia.IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact as HistoricalDump
 import DASHI.Wikimedia.IbrahimFirstLinkNovember06ProducerPathStrengtheningExact as November06
+import DASHI.Wikimedia.IbrahimFirstLinkProducerOutputPathResidualExact as OutputPath
 import DASHI.Wikimedia.IbrahimSnowballSourceGenealogyIndependenceEvidenceSynthesisBidiExact as Genealogy
 import DASHI.Wikimedia.IbrahimSnowballPostPublicationStatusPropagationBidiExact as Status
 import DASHI.Wikimedia.IbrahimSnowballLearningMemoryTraumaReplicationConsensusBidiExact as Learning
 
 ------------------------------------------------------------------------
 -- IBRAHIM / SNOWBALL PARETO FRONTIER -- LIVE REBASE
---
--- This owner is deliberately small.  It records only what survives quotienting
--- against the CURRENT roadmap and the newest concurrent Snowball owners.
---
--- Pareto rule:
---   1. drop any residual as soon as an existing owner pays it;
---   2. prefer one source-/same-object payment that unlocks many consumers;
---   3. do not create breadth merely because a Dewey/QID cell is empty;
---   4. attribution/provenance travels with every promoted edge;
---   5. QID, Dewey and DOI/canonical URL are coordinates, never truth receipts.
 ------------------------------------------------------------------------
 
 data FrontierStatus : Set where
@@ -48,15 +39,15 @@ record ParetoFrontierLeaf : Set where
 open ParetoFrontierLeaf public
 
 ------------------------------------------------------------------------
--- Rank 1: the only known shared-parent residual in the current audit.
+-- Rank 1: only known shared-parent residual.
 ------------------------------------------------------------------------
 
 historicalFirstLinkRuntime : ParetoFrontierLeaf
 historicalFirstLinkRuntime = pareto-frontier-leaf
   1 currentHighestAlpha
   "Ibrahim historical First Link Network corpus / dump / parser / result same-object provenance"
-  "IbrahimKnowledgeCoverageRoadmapCurrentExact; IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact; IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact; IbrahimFirstLinkNovember06ProducerPathStrengtheningExact"
-  "2014-11-06 is now the strongest producer-path DATE candidate: publication methods say November 2014 and 112 UVM cores; producer preprocessing repeatedly names enwiki_20141106.xml; chunk-preparation code enumerates 112 small*.xml names; author appendix identifies data/fln.json as the published 505 MB FLN map. Exact compressed dump variant/hash, raw pre-split command/chunk hashes, parser-equivalent execution and reproduced-result same-object comparison remain unpaid. The 20141008 parser comment is retained as a conflicting/stale cue, not silently deleted."
+  "IbrahimKnowledgeCoverageRoadmapCurrentExact; IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact; IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact; IbrahimFirstLinkNovember06ProducerPathStrengtheningExact; IbrahimFirstLinkProducerOutputPathResidualExact"
+  "2014-11-06 is the strongest producer-path DATE candidate: methods say November 2014 and 112 UVM cores; producer preprocessing names enwiki_20141106.xml; chunk-preparation code enumerates 112 small*.xml names; run_fln.py submits 112 indexed jobs; combine_fln.py merges 112 numbered JSONs into fln.json; author appendix identifies a published 505 MB data/fln.json. However create_fln.py writes numbered shards to true_flnetwork while combine_fln.py reads flnetwork, with no committed move/copy/rename receipt recovered. Exact dump variant/hash, raw pre-split command/chunk hashes, executed source revision, shard custody, parser-equivalent reproduction and published-result hash comparison remain unpaid. The 20141008 parser comment remains a conflicting/stale cue."
   "historical first-link edges beyond those directly printed by the paper may be promoted only after the exact source-object chain is paid; otherwise they remain current/revision-sensitive or candidate historical edges"
   "all historical Ibrahim traversal claims"
   false
@@ -67,14 +58,15 @@ historicalDumpBoundary = HistoricalDump.canonicalCandidateStrengtheningBoundary
 november06Boundary : November06.November06StrengtheningBoundary
 november06Boundary = November06.canonicalNovember06StrengtheningBoundary
 
+outputPathBoundary : OutputPath.ProducerOutputPathBoundary
+outputPathBoundary = OutputPath.canonicalProducerOutputPathBoundary
+
 remainingHistoricalPayment : String
-remainingHistoricalPayment = November06.remainingNovember06Payment
+remainingHistoricalPayment =
+  "Recover exact 2014-11-06 input artifact identity/hash; raw dump-to-112 split command and chunk hashes; exact historically executed producer revision or a custody receipt connecting true_flnetwork outputs to flnetwork combiner inputs; acquire/hash the author-hosted data/fln.json; rerun parser/constructor equivalently; compare hashes/semantic object identity."
 
 ------------------------------------------------------------------------
--- Rank 2: opportunistic external metadata only.
---
--- This cannot outrank the historical same-object residual because unresolved
--- QID/Dewey/DOI coordinates normally do not block unrelated domain proofs.
+-- Rank 2: opportunistic metadata only.
 ------------------------------------------------------------------------
 
 metadataCleanup : ParetoFrontierLeaf
@@ -88,11 +80,7 @@ metadataCleanup = pareto-frontier-leaf
   false
 
 ------------------------------------------------------------------------
--- Rank 3: new graph work is now concrete-consumer driven.
---
--- CurrentRoadmap says no known shared-parent residual remains.  A new Ibrahim
--- leaf therefore enters the frontier only when an actual consumer exposes a
--- distinction the shared grammar cannot represent.
+-- Rank 3: concrete-consumer-driven only.
 ------------------------------------------------------------------------
 
 consumerDrivenResidual : ParetoFrontierLeaf
@@ -106,7 +94,7 @@ consumerDrivenResidual = pareto-frontier-leaf
   false
 
 ------------------------------------------------------------------------
--- Shared residuals that were live in the first Pareto cut are now PAID.
+-- Shared residuals already paid.
 ------------------------------------------------------------------------
 
 sourceGenealogyPaid : ParetoFrontierLeaf
@@ -161,10 +149,6 @@ externalIdentityPolicy = Identity.canonicalExternalIdentityPolicy
 currentRoadmapCriterion : Current.RoadmapCompletionCriterion
 currentRoadmapCriterion = Current.currentRoadmapCriterion
 
-------------------------------------------------------------------------
--- Compact answer to "where does that leave us?"
-------------------------------------------------------------------------
-
 record RemainingFrontier : Set where
   constructor remaining-frontier
   field
@@ -177,11 +161,7 @@ open RemainingFrontier public
 
 canonicalRemainingFrontier : RemainingFrontier
 canonicalRemainingFrontier = remaining-frontier
-  historicalFirstLinkRuntime
-  metadataCleanup
-  consumerDrivenResidual
-  false
-  false
+  historicalFirstLinkRuntime metadataCleanup consumerDrivenResidual false false
 
 record ParetoPolicy : Set where
   constructor pareto-policy
@@ -197,5 +177,4 @@ record ParetoPolicy : Set where
 open ParetoPolicy public
 
 canonicalParetoPolicy : ParetoPolicy
-canonicalParetoPolicy = pareto-policy
-  true true true true true true false false
+canonicalParetoPolicy = pareto-policy true true true true true true false false
