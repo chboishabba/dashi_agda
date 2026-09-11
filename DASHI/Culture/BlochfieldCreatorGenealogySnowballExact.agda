@@ -94,7 +94,7 @@ domainListingObservation =
 record DomainChronologyCandidate : Set where
   constructor domain-chronology-candidate
   field
-    observation : OSINT.OSINTObservation
+    domainObservation : OSINT.OSINTObservation
     domain : String
     listedDate : String
     role : String
@@ -161,7 +161,7 @@ record GenealogyEdge : Set where
     relation : GenealogyRelation
     toObject : String
     evidenceReference : String
-    paid : Bool
+    edgePaid : Bool
 
 creatorProfileToDomain : GenealogyEdge
 creatorProfileToDomain =
@@ -215,7 +215,6 @@ data CreatorProfileLinkPaysNativeWebsite : Set where
 data DomainListingProvesCreatorOwnership : Set where
 data SouthAtlanticAnomalyPaysBlochfieldTheoryLineage : Set where
 data ExternalConceptAdjacencyCreatesDerivation : Set where
-
 data SearchIndexedProfileEqualsNativeProfile : Set where
 
 creatorProfileLinkDoesNotPayNativeWebsite :
@@ -251,17 +250,17 @@ data GenealogyLeaf : Set where
   externalSameObjectLineage : GenealogyLeaf
 
 data GenealogyStanding : Set where
-  paid : GenealogyStanding
-  acquiredOutOfOrder : GenealogyStanding
-  unpaid : GenealogyStanding
+  genealogyPaid : GenealogyStanding
+  genealogyAcquiredOutOfOrder : GenealogyStanding
+  genealogyUnpaid : GenealogyStanding
 
 genealogyStanding : GenealogyLeaf → GenealogyStanding
-genealogyStanding nativeXProfileReceipt = unpaid
-genealogyStanding nativeBlochfieldWebsiteContent = unpaid
-genealogyStanding authoritativeDomainRegistration = unpaid
-genealogyStanding creatorLongFormExplanation = unpaid
-genealogyStanding creatorExplicitReferences = unpaid
-genealogyStanding externalSameObjectLineage = unpaid
+genealogyStanding nativeXProfileReceipt = genealogyUnpaid
+genealogyStanding nativeBlochfieldWebsiteContent = genealogyUnpaid
+genealogyStanding authoritativeDomainRegistration = genealogyUnpaid
+genealogyStanding creatorLongFormExplanation = genealogyUnpaid
+genealogyStanding creatorExplicitReferences = genealogyUnpaid
+genealogyStanding externalSameObjectLineage = genealogyUnpaid
 
 -- Acquired sideways but not promoted into the ordered payment path:
 --   * third-party profile -> blochfield.com association
