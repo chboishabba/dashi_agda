@@ -74,11 +74,12 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityMinCutRound326
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJCommonDomainRound327Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound328Exact
 
--- R329 is the current debt-kind normalization.  On the source-native CMP116
--- route no fresh B-side inequality is mandatory: the five remaining consumer
--- coordinates are source application, physical semantics, representation,
--- topology closure and same-H transfer identification.
+-- R329 is the debt-kind normalization after the source-native H1 correction.
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound329Exact
+
+-- R330 cross-pollinates the generic NS sequential-order closure into H2c and
+-- records the source/application status of the five surviving coordinates.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound330Exact
 
 -- Optional producer families retained below the canonical consumer.
 import DASHI.Physics.YangMills.BalabanStepVMarkedSourceDirectClusteringProducerCurrentExact
