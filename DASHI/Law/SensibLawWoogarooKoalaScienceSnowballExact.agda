@@ -11,8 +11,8 @@ import DASHI.Core.AttributedSourceCore as Source
 -- WOOGAROO KOALA SCIENCE SNOWBALL
 --
 -- Current scientific/methodological context for the live s 102 and s 13
--- consumers.  These sources support mechanisms, methods and counterfactual
--- questions.  They are not same-object evidence about Springview unless an
+-- consumers. These sources support mechanisms, methods and counterfactual
+-- questions. They are not same-object evidence about Springview unless an
 -- exact local study/data join is independently paid.
 ------------------------------------------------------------------------
 
@@ -219,15 +219,15 @@ koalaScienceSourceAtlas : Source.AttributedSourceAtlas
 koalaScienceSourceAtlas = Source.mkSourceAtlas
   "Woogaroo current koala science source atlas"
   "DASHI.Law.SensibLawWoogarooKoalaScienceSnowballExact"
-  (SourceSnowballEntry.source endangeredKoalaHabitatGuidance ∷
-   SourceSnowballEntry.source koalaRecoveryPlan ∷
-   SourceSnowballEntry.source koalaHabitatMethodsReview ∷
-   SourceSnowballEntry.source bruntonConnectivityReview ∷
-   SourceSnowballEntry.source frereSubdivisionStudy ∷
-   SourceSnowballEntry.source mclennanGenomicsStudy ∷
-   SourceSnowballEntry.source dexterSEQVehicleStrikeStudy ∷
-   SourceSnowballEntry.source mcleanMovementStudy ∷
-   SourceSnowballEntry.source nationalKoalaMonitoringProgram ∷ [])
+  (source endangeredKoalaHabitatGuidance ∷
+   source koalaRecoveryPlan ∷
+   source koalaHabitatMethodsReview ∷
+   source bruntonConnectivityReview ∷
+   source frereSubdivisionStudy ∷
+   source mclennanGenomicsStudy ∷
+   source dexterSEQVehicleStrikeStudy ∷
+   source mcleanMovementStudy ∷
+   source nationalKoalaMonitoringProgram ∷ [])
   "Current official guidance plus peer-reviewed state-of-the-art science for habitat definition, connectivity, fragmentation, population genetics, urban movement risk and survey uncertainty. These sources support methods/mechanisms only unless separately joined to Springview/Woogaroo same-object data."
 
 record ConsumerScienceState : Set where
