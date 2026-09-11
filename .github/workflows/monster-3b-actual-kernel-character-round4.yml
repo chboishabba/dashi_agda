@@ -16,16 +16,21 @@ on:
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMultiplicityCharacterSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiQuotientDescentCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3B729ExtensionFiniteFieldProducerSnowballExact.agda'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
+      - 'scripts/monster_3b_suzuki_main_quotient_match.g'
       - 'scripts/monster_3b_inertia_phase_resolution.g'
       - 'scripts/render_monster_3b_certificate.py'
       - 'scripts/render_monster_3b_actual_kernel_certificate.py'
       - 'scripts/render_monster_3b_suzuki_multiplicity_certificate.py'
+      - 'scripts/render_monster_3b_suzuki_main_quotient_match.py'
       - 'scripts/render_monster_3b_inertia_phase_certificate.py'
       - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
       - 'scripts/check_monster_3b_suzuki_multiplicity_characters.sh'
+      - 'scripts/check_monster_3b_suzuki_main_quotient_match.sh'
       - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
@@ -46,16 +51,21 @@ on:
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMultiplicityCharacterSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiQuotientDescentCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3B729ExtensionFiniteFieldProducerSnowballExact.agda'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
+      - 'scripts/monster_3b_suzuki_main_quotient_match.g'
       - 'scripts/monster_3b_inertia_phase_resolution.g'
       - 'scripts/render_monster_3b_certificate.py'
       - 'scripts/render_monster_3b_actual_kernel_certificate.py'
       - 'scripts/render_monster_3b_suzuki_multiplicity_certificate.py'
+      - 'scripts/render_monster_3b_suzuki_main_quotient_match.py'
       - 'scripts/render_monster_3b_inertia_phase_certificate.py'
       - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
       - 'scripts/check_monster_3b_suzuki_multiplicity_characters.sh'
+      - 'scripts/check_monster_3b_suzuki_main_quotient_match.sh'
       - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
@@ -109,6 +119,12 @@ jobs:
           set -euo pipefail
           bash scripts/check_monster_3b_suzuki_multiplicity_characters.sh
 
+      - name: Run Suzuki/main quotient same-object matcher
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_suzuki_main_quotient_match.sh
+
       - name: Run optional inertia phase-resolution fallback checker
         shell: bash
         continue-on-error: true
@@ -126,8 +142,10 @@ jobs:
             build/monster_3b_actual_kernel_structure.json
             build/monster_3b_actual_kernel_character_certificate.json
             build/monster_3b_suzuki_multiplicity_characters.json
+            build/monster_3b_suzuki_main_quotient_match.json
             build/monster_3b_inertia_phase_resolution.json
             build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
             build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda
+            build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMainQuotientMatchCertificate.agda
             build/generated/DASHI/Moonshine/Generated/Monster3BInertiaPhaseResolutionCertificate.agda
           if-no-files-found: warn
