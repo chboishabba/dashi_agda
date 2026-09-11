@@ -8,20 +8,19 @@ import DASHI.ComputerScience.RSA260KrylovKernelRecoveryExact as SyntheticLA
 import DASHI.ComputerScience.RSA260GNFSRunParameterArtifactSnowballExact as RunArtifact
 import DASHI.ComputerScience.RSA260ProductionArtifactSubstituteAdmissionExact as Substitute
 import DASHI.ComputerScience.RSA260LACarrierBidiDerivationExact as BidiCarrier
+import DASHI.ComputerScience.RSA260BidiCandidateExperimentExact as CandidateExperiment
 
 ------------------------------------------------------------------------
 -- RSA-260 PRODUCTION-SUBSTITUTION ROADMAP
 --
 -- The synthetic CPU Block-Wiedemann-shaped ladder is end-to-end through a
--- nonzero v with Mv=0.  The public production LA envelope has now also been
+-- nonzero v with Mv=0.  The public production LA envelope has also been
 -- intersected bidirectionally with downstream Block-Wiedemann/gather demands,
 -- yielding a typed sparse-GF(2) carrier CONSTRAINT FIBRE.
 --
--- This narrows P0 without paying same-object bytes:
---
---   carrier schema/fibre derived   = yes
---   unique matrix instance derived = no
---   same-object production bytes   = no
+-- A runnable implicit member of that fibre has now additionally passed the
+-- declared carrier/held-out/shadow-left-kernel experiment.  This is an
+-- experiment-supported candidate, NOT the historical same-object matrix.
 ------------------------------------------------------------------------
 
 record ProductionLAObservation : Set where
@@ -89,7 +88,7 @@ currentProductionArtifactAcquisitionState = production-artifact-acquisition-stat
   false false false false false false false true false
 
 ------------------------------------------------------------------------
--- Prior/admission/bidi boundaries retained rather than collapsed.
+-- Prior/admission/bidi/experiment boundaries retained rather than collapsed.
 ------------------------------------------------------------------------
 
 syntheticLABoundary : SyntheticLA.RSA260KrylovKernelRecoveryRoadmapBoundary
@@ -107,12 +106,19 @@ bidiCarrierBoundary = BidiCarrier.canonicalBidiCarrierDerivationBoundary
 bidiDerivedCarrier : BidiCarrier.BidiDerivedLACarrierFibre
 bidiDerivedCarrier = BidiCarrier.currentBidiDerivedLACarrierFibre
 
+candidateExperimentBoundary : CandidateExperiment.CandidateConsumerSupportBoundary
+candidateExperimentBoundary = CandidateExperiment.canonicalCandidateConsumerSupportBoundary
+
+candidateExperimentReceipt : CandidateExperiment.CandidateExperimentExecutionReceipt
+candidateExperimentReceipt = CandidateExperiment.currentCandidateExperimentExecutionReceipt
+
 ------------------------------------------------------------------------
 -- Ordered residual router.
 ------------------------------------------------------------------------
 
 data ProductionResidual : Set where
   acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
+  constructPreparedBWCAdapterForRunnableCandidate : ProductionResidual
   acquireProductionProjectionCheckpointOrGenerator : ProductionResidual
   bindExactModifiedSourceRevision : ProductionResidual
   reproduceProductionCPUReference : ProductionResidual
@@ -143,6 +149,13 @@ record RSA260ProductionSubstitutionBoundary : Set where
     bidiProductionLACarrierUniqueInstanceDerived : Bool
     bidiExactCarrierBytesDerived : Bool
 
+    runnableBidiCandidateImplemented : Bool
+    runnableBidiCandidateProductionContractPassed : Bool
+    runnableBidiCandidateHeldOutStructurePassed : Bool
+    runnableBidiCandidateShadowLeftKernelPassed : Bool
+    runnableBidiCandidateHistoricalIdentityPaid : Bool
+    runnableBidiCandidateProductionBWCReplayPaid : Bool
+
     productionMatrixBytesPaid : Bool
     productionCheckpointOrGeneratorBytesPaid : Bool
     exactModifiedSourceRevisionPaid : Bool
@@ -168,6 +181,12 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; bidiProductionLACarrierConstraintFibreDerived = true
   ; bidiProductionLACarrierUniqueInstanceDerived = false
   ; bidiExactCarrierBytesDerived = false
+  ; runnableBidiCandidateImplemented = true
+  ; runnableBidiCandidateProductionContractPassed = true
+  ; runnableBidiCandidateHeldOutStructurePassed = true
+  ; runnableBidiCandidateShadowLeftKernelPassed = true
+  ; runnableBidiCandidateHistoricalIdentityPaid = false
+  ; runnableBidiCandidateProductionBWCReplayPaid = false
   ; productionMatrixBytesPaid = false
   ; productionCheckpointOrGeneratorBytesPaid = false
   ; exactModifiedSourceRevisionPaid = false
@@ -183,6 +202,8 @@ currentRSA260ProductionSubstitutionBoundary = record
 
 data ProductionShapeImpliesProductionBytes : Set where
 data BidiCarrierFibreImpliesUniqueMatrix : Set where
+data RunnableCandidateImpliesHistoricalMatrix : Set where
+data PassedDeclaredExperimentImpliesProductionBWC : Set where
 data SyntheticKernelImpliesProductionKernel : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 data CPUReferenceImpliesCUDAParity : Set where
@@ -194,6 +215,12 @@ authorReportedShapeDoesNotCreateBytes ()
 
 bidiCarrierFibreDoesNotCreateUniqueMatrix : BidiCarrierFibreImpliesUniqueMatrix → ⊥
 bidiCarrierFibreDoesNotCreateUniqueMatrix ()
+
+runnableCandidateDoesNotCreateHistoricalMatrix : RunnableCandidateImpliesHistoricalMatrix → ⊥
+runnableCandidateDoesNotCreateHistoricalMatrix ()
+
+passedExperimentDoesNotCreateProductionBWC : PassedDeclaredExperimentImpliesProductionBWC → ⊥
+passedExperimentDoesNotCreateProductionBWC ()
 
 syntheticKernelDoesNotCreateProductionKernel : SyntheticKernelImpliesProductionKernel → ⊥
 syntheticKernelDoesNotCreateProductionKernel ()
