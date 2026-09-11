@@ -12,6 +12,7 @@ import DASHI.Topology.TetrationalGateField as Gate
 import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
 import DASHI.Topology.WormSoilPantsSheafBoundary as WormPants
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact as ReductionBridge
+import DASHI.Reasoning.TypedHyperfabricConsumerReductionBridgeExact as SectionReduction
 import DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact as Braid
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 
@@ -21,7 +22,7 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 -- This module is deliberately NOT a second sheaf/hyperfabric kernel.
 -- TypedHyperfabricCore already owns local stalks, typed incidence, restriction,
 -- global-section compatibility, obstructions, traces and provenance-preserving
--- reorganisation.  The remaining repo-native owners contribute orthogonal
+-- reorganisation. The remaining repo-native owners contribute orthogonal
 -- optional structure:
 --
 --   * ClopenNDimFibreBoundary / TetrationalGateField:
@@ -30,6 +31,8 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 --       n-ary pants geometry and typed interface matching;
 --   * ConsumerRelativeReductionCanonicalBridgeExact:
 --       consumer-indexed symmetry/quotient authority;
+--   * TypedHyperfabricConsumerReductionBridgeExact:
+--       canonical reduction instantiated directly on compatible GlobalSections;
 --   * braided evidence / hypercube owners:
 --       path identity and presentation/transition-geometry boundaries.
 --
@@ -83,7 +86,7 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is a composition of already-owned theorem surfaces; this module supplies role alignment and non-promotion boundaries only."
+  "The local-fibre architecture is a composition of already-owned theorem surfaces; compatible GlobalSections now feed the canonical consumer-reduction kernel directly, while physical incidence, pants/braid adapters and the MaleCNS instance remain separate obligations."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -123,12 +126,17 @@ hypercubeCarrierDoesNotFixTransitionGeometry :
 hypercubeCarrierDoesNotFixTransitionGeometry =
   Hypercube.mediatedGeometryBlocksDirectPoleJump
 
+globalSectionsUseCanonicalConsumerReduction :
+  SectionReduction.globalSectionMayServeAsFineReductionState
+    SectionReduction.canonicalHyperfabricConsumerReductionBoundary ≡ true
+globalSectionsUseCanonicalConsumerReduction = refl
+
 ------------------------------------------------------------------------
 -- The symmetry/quotient rule is already owned canonically.
 --
--- Equivariance is only an intertwining receipt.  A symmetry orbit can be
+-- Equivariance is only an intertwining receipt. A symmetry orbit can be
 -- quotiented only when the represented reduced state is fixed for the declared
--- consumer.  This module therefore introduces no competing symmetry record.
+-- consumer. This module therefore introduces no competing symmetry record.
 ------------------------------------------------------------------------
 
 data SymmetryAloneCreatesQuotientAuthority : Set where
@@ -137,7 +145,7 @@ symmetryStillNeedsConsumerInvariance ()
 
 ------------------------------------------------------------------------
 -- Historical MaleCNS eight-feature family = one selected chart, not fibre
--- cardinality.  Retained for compatibility with existing imports.
+-- cardinality. Retained for compatibility with existing imports.
 ------------------------------------------------------------------------
 
 data LegacyNDimChartCoordinate : Set where
@@ -213,7 +221,7 @@ canonicalMaleCNSChartBoundary =
 ------------------------------------------------------------------------
 -- Missing-fields ledger.
 --
--- These are the genuinely uncomposed pieces.  They are not permissions to
+-- These are the genuinely uncomposed pieces. They are not permissions to
 -- invent another kernel; each requires an adapter/theorem connecting existing
 -- owners.
 ------------------------------------------------------------------------
@@ -236,7 +244,7 @@ currentLocalFibreMissingFields = local-fibre-missing-fields
   false
   false
   false
+  true
   false
   false
-  false
-  "The ontology kernel is already present. Remaining work is adapter/theorem work: lift NDim refinement, pants seams, braid transport and consumer reduction onto TypedHyperfabric global sections, then instantiate the MaleCNS incidence base and chart projection."
+  "GlobalSection -> consumer-relative reduction is now paid by TypedHyperfabricConsumerReductionBridgeExact using the canonical reduction kernel directly. Remaining work is adapter/theorem work for NDim refinement, pants seams, braid transport, then the actual MaleCNS TypedHyperfabric incidence instance and chart projection from compatible global sections."
