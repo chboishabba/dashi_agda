@@ -48,4 +48,5 @@ import DASHI.Interop.SLRReviewPromoteAbstainConsumerExact
 import DASHI.Interop.SLRRuntimeValidationHandoffExact
 import DASHI.Interop.SLRValidationRoadmapPromotionExact
 import DASHI.Interop.SLRCanonicalClaimProjectionExact
+import DASHI.Interop.SLRLabelledSubspanWeldExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
