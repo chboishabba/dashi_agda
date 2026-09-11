@@ -22,10 +22,9 @@ import DASHI.ComputerScience.RSA260BlockWiedemannProductionScaleReconstructionEx
 -- A nested transition zoom then shows that one degree-preserving support swap
 -- in every row is already sufficient, on the tested path, to move d=16 -> 66.
 -- Eight independently seeded one-swap-per-row interventions all recover the
--- declared consumer at d in {65,66}.
---
--- This establishes tested local fragility of the LOW-DEGREE PRESENTATION, not
--- consumer failure and not a universal or production threshold.
+-- declared consumer at d in {65,66}.  A further 2x4 carrier/projection cross
+-- keeps all eight runs in d={65,66}, so the tested fragility is not tied to one
+-- projection seed.
 ------------------------------------------------------------------------
 
 predictorBoundary : Predictor.FineIncidencePredictorBoundary
@@ -38,9 +37,7 @@ snowballIdentityCoordinates : Scale.ProductionScaleIdentityCoordinates
 snowballIdentityCoordinates = Scale.currentProductionScaleIdentityCoordinates
 
 ------------------------------------------------------------------------
--- Runtime provenance.  The top-level files were exact-byte executed.  Their
--- local imported preparation-search dependency was source-equivalent but not
--- byte-identical to the committed dependency closure in that execution env.
+-- Runtime provenance.
 ------------------------------------------------------------------------
 
 record FineIncidenceInterpolationRuntime : Set where
@@ -60,6 +57,9 @@ record FineIncidenceInterpolationRuntime : Set where
     ensemblePath : String
     ensembleCommit : String
     ensembleBlob : String
+    projectionCrossPath : String
+    projectionCrossCommit : String
+    projectionCrossBlob : String
     dependencyPath : String
     committedDependencyBlob : String
     exactTopLevelBlobsExecuted : Bool
@@ -82,6 +82,9 @@ currentFineIncidenceInterpolationRuntime = fine-incidence-interpolation-runtime
   "rsa260_bidi_one_swap_per_row_ensemble.py"
   "3de6e2fa1c0d7ef63a41fb0e307d3f9fa5950eef"
   "574a04d3e4b068921b94bd914c808b7ead7f3c52"
+  "rsa260_bidi_one_swap_projection_cross.py"
+  "3b53a92a3c869e8fc13b647fc13127d8c14b7147"
+  "4428c6c2e4ad105513ecdc1b564712eae0ba0fe2"
   "rsa260_bidi_preparation_fibre_search.py"
   "47cdf55ad6fa2ab27215c125b2ce3e0ba9c0991c"
   true false
@@ -137,6 +140,22 @@ currentOneSwapFragilityReceipt = one-swap-fragility-receipt
   16 66
   8 8 65 66 true false
 
+record ProjectionCrossReceipt : Set where
+  constructor projection-cross-receipt
+  field
+    perturbedCarriers : Nat
+    projectionSeedsPerCarrier : Nat
+    runs : Nat
+    runsAdmitted : Nat
+    minimumGeneratorDegree : Nat
+    maximumGeneratorDegree : Nat
+    allShiftedRank512 : Bool
+open ProjectionCrossReceipt public
+
+currentProjectionCrossReceipt : ProjectionCrossReceipt
+currentProjectionCrossReceipt = projection-cross-receipt
+  2 4 8 8 65 66 true
+
 record FineIncidenceFragilityBoundary : Set where
   constructor fine-incidence-fragility-boundary
   field
@@ -144,6 +163,7 @@ record FineIncidenceFragilityBoundary : Set where
     oneSwapPerRowPreservesLowDegreeRecurrenceOnTestedEnsemble : Bool
     oneSwapPerRowPreservesDeclaredKernelConsumerOnTestedEnsemble : Bool
     testedLowDegreePresentationIsLocallyFragile : Bool
+    testedFragilitySurvivesProjectionVariation : Bool
     observedTransitionIsUniversalThreshold : Bool
     syntheticFragilityIsProductionMeasurement : Bool
     structuralAssociationIsCausalMechanismProof : Bool
@@ -152,20 +172,19 @@ open FineIncidenceFragilityBoundary public
 
 canonicalFineIncidenceFragilityBoundary : FineIncidenceFragilityBoundary
 canonicalFineIncidenceFragilityBoundary = fine-incidence-fragility-boundary
-  false false true true false false false false
+  false false true true true false false false false
 
 ------------------------------------------------------------------------
 -- Next bidi residual.
 ------------------------------------------------------------------------
 
 data FineIncidenceInterpolationResidual : Set where
-  repeatOneSwapEnsembleAcrossProjectionSeeds : FineIncidenceInterpolationResidual
   deriveTwoHopAndCommonNeighbourFibres : FineIncidenceInterpolationResidual
   fitRecurrenceComplexityFromStructuralFibrePortfolio : FineIncidenceInterpolationResidual
   acquireSameObjectFineIncidenceBearingArtifact : FineIncidenceInterpolationResidual
 
 firstFineIncidenceInterpolationResidual : FineIncidenceInterpolationResidual
-firstFineIncidenceInterpolationResidual = repeatOneSwapEnsembleAcrossProjectionSeeds
+firstFineIncidenceInterpolationResidual = deriveTwoHopAndCommonNeighbourFibres
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
