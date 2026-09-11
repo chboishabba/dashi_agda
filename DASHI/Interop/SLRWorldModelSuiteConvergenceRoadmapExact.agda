@@ -15,15 +15,22 @@ import DASHI.Interop.ITIRSensiBlawStreamlineArchitecture as ITIRSL
 ------------------------------------------------------------------------
 -- SLR / WORLD-MODEL SUITE CONVERGENCE ROADMAP
 --
--- This owner records the cross-repo division of labour discovered across:
---   SensibLaw      : generic CandidateWorldModel / review / promotion surface
---   ITIR-suite     : generic source -> span/PNF -> world-model compiler
---   TiRCorder      : contested event/narrative interpretation and provenance
---   StatiBaker     : append-only temporal state / replay / drift surface
---   DASHI          : typed proposal, promotion, sparse-world and proof boundaries
+-- Cross-repo division of labour:
+--   SensibLaw  : generic CandidateWorldModel / review / promotion surface
+--   ITIR-suite : generic source -> span/PNF -> world-model compiler
+--   TiRCorder  : contested event/narrative interpretation and provenance
+--   StatiBaker : append-only temporal state / replay / drift surface
+--   DASHI      : typed proposal, promotion, sparse-world and proof boundaries
+--   SLR        : discourse/document reconstruction + candidate producers
 --
--- None of these is a competing terminal architecture. SLR consumes them as
--- orthogonal carriers and constraints.
+-- Validated 2026-09-11 state:
+-- * parser/reconstruction/carrier plumbing is mature and largely frozen;
+-- * ABC proves claim-local fragment -> residual inheritance -> evidence
+--   contraction without claim-truth promotion;
+-- * GWB proves 41k-sentence CandidateWorldModel scale, replayable Wikimedia
+--   graph enrichment, cache-only replay and source-identity contraction;
+-- * live frontier is consumer-specific world residual contraction and
+--   canonical claim/evidence projection, not more boundary heuristics.
 ------------------------------------------------------------------------
 
 data SuiteOwner : Set where
@@ -159,6 +166,7 @@ abc730GoldBenchmarkPlan = goldDiscourseBenchmark
 data RoadmapState : Set where
   complete : RoadmapState
   frozenUnlessBenchmarkFails : RoadmapState
+  implementedAwaitingRuntime : RoadmapState
   active : RoadmapState
   partial : RoadmapState
   next : RoadmapState
@@ -175,29 +183,37 @@ open SLRRoadmapCoordinate public
 
 slrGlobalRoadmap : List SLRRoadmapCoordinate
 slrGlobalRoadmap =
-  slrRoadmapCoordinate "raw transcript custody" complete slrRuntimeOwner "source sha256 + provenance" ∷
-  slrRoadmapCoordinate "deterministic parse + SLR/PNF" complete slrRuntimeOwner "parser.tsv + pnf receipt" ∷
-  slrRoadmapCoordinate "candidate cut arithmetic" frozenUnlessBenchmarkFails slrRuntimeOwner "legacy diagnostic scorer" ∷
+  slrRoadmapCoordinate "raw transcript/document custody" complete slrRuntimeOwner "source/projection sha256 + provenance" ∷
+  slrRoadmapCoordinate "deterministic parse + SLR/PNF" complete slrRuntimeOwner "ABC + GWB + AU execution receipts" ∷
+  slrRoadmapCoordinate "candidate cut arithmetic" frozenUnlessBenchmarkFails slrRuntimeOwner "legacy diagnostic scorer; reopen only on labelled failure" ∷
   slrRoadmapCoordinate "typed discourse fibre manifold" complete dashiOwner "SensibLawTranscriptBoundaryPNFWorldManifoldExact" ∷
   slrRoadmapCoordinate "lexical MUST/MAY counterfactuals" complete dashiOwner "SensibLawLexicalWildcardSubjectTransitionExact" ∷
   slrRoadmapCoordinate "typed role-transition admission" complete dashiOwner "SensibLawRoleTransitionManifoldExact" ∷
   slrRoadmapCoordinate "source-preserving span reconstruction" complete slrRuntimeOwner "slr-discourse-spans-v4" ∷
   slrRoadmapCoordinate "discourse-specific quality audit" complete dashiOwner "SensibLawDiscourseQualityAuditExact" ∷
-  slrRoadmapCoordinate "SensibLaw CandidateWorldModel normalization parity" complete slrRuntimeOwner "validated: normalization_drift=false; ABC 405 claims / 53 relations" ∷
-  slrRoadmapCoordinate "cross-corpus SLR execution parity" complete slrRuntimeOwner "validated: GWB 41,134 + AU 19,235 sentences; parity_failed=0; published=0" ∷
-  slrRoadmapCoordinate "gold-labelled discourse benchmark" partial slrRuntimeOwner "slr-abc-gold-benchmark-v1: explicit speaker-turn slice executable; quote/nesting and calibrated uncertainty remain open" ∷
-  slrRoadmapCoordinate "canonical claim projection v1" complete slrRuntimeOwner "validated: 5 canonical refs / 16 candidate edges / 8 ambiguity-preserving fused edges / 2 cut constraints" ∷
-  slrRoadmapCoordinate "canonical claim projection v2 same-source phrase refinement" partial slrRuntimeOwner "implemented; rerun required for exact unique-phrase offsets" ∷
-  slrRoadmapCoordinate "labelled-to-noisy exact/bounded subspan weld" complete slrRuntimeOwner "validated source-offset weld; exact and bounded handoffs retained separately" ∷
-  slrRoadmapCoordinate "multi-hop labelled discourse path" complete slrRuntimeOwner "validated: sentence 42 Wong -> Greber -> Husic; sentence 45 Shoebridge -> Leeser" ∷
-  slrRoadmapCoordinate "claim-local fragment projection" partial slrRuntimeOwner "slr-claim-fragment-projection-v1 implemented; dedicated receipt rerun required" ∷
-  slrRoadmapCoordinate "whole-claim span completion" partial slrRuntimeOwner "local fragments do not pay full C029/C030/C032/C033 source extent" ∷
-  slrRoadmapCoordinate "claim-local fragment residual inheritance" partial slrRuntimeOwner "slr-claim-fragment-residual-inheritance-v1 implemented; explicit claim->obligation map; runtime certification pending" ∷
-  slrRoadmapCoordinate "full world-constraint fibre integration" partial dashiOwner "slr-world-constraint-fibre-v1 attached append-only to CandidateWorldModel; domain/legal consumers remain open" ∷
-  slrRoadmapCoordinate "claim/evidence graph projection" active sensibLawOwner "canonical claim-local fragments now carry candidate graph identity; downstream evidence obligations contract append-only" ∷
-  slrRoadmapCoordinate "mechanism evidence snowball" active dashiOwner "ABC730 Ibrahim/Snowball policy owners" ∷
-  slrRoadmapCoordinate "review/promote/abstain routing" complete sensibLawOwner "slr-review-disposition-v1 implemented; compatibility/adequacy/residual gates kept separate" ∷
-  slrRoadmapCoordinate "C029 policy/evaluative consumer adequacy" active dashiOwner "current first residual remains settlementClassifierResidual" ∷
+  slrRoadmapCoordinate "SensibLaw CandidateWorldModel normalization parity" complete slrRuntimeOwner "ABC and GWB normalization_drift=false" ∷
+  slrRoadmapCoordinate "cross-corpus SLR execution parity" complete slrRuntimeOwner "GWB 41,134 + AU 19,235 sentences; parity_failed=0; published=0" ∷
+  slrRoadmapCoordinate "gold-labelled discourse benchmark" partial slrRuntimeOwner "speaker-turn benchmark executable; quote/nesting and full calibration remain open" ∷
+  slrRoadmapCoordinate "canonical claim projection" complete slrRuntimeOwner "validated sentence-level canonical refs with ambiguity-preserving fused edges" ∷
+  slrRoadmapCoordinate "same-source unique-phrase refinement" partial slrRuntimeOwner "available where source identity/unique phrase pays exact offsets; not required for every source" ∷
+  slrRoadmapCoordinate "labelled-to-noisy subspan weld" complete slrRuntimeOwner "validated exact/bounded/unpaid distinction without forced closure" ∷
+  slrRoadmapCoordinate "multi-hop labelled discourse path" complete slrRuntimeOwner "validated sentence 42 Wong -> Greber -> Husic and sentence 45 Shoebridge -> Leeser" ∷
+  slrRoadmapCoordinate "claim-local fragment projection" complete slrRuntimeOwner "validated: 5 fragments / 4 claim-local / 1 intermediate; whole-claim extent=false" ∷
+  slrRoadmapCoordinate "claim-local fragment residual inheritance" complete slrRuntimeOwner "validated: 10 obligations; intermediate fragment inherits none" ∷
+  slrRoadmapCoordinate "fragment source/attribution evidence contraction" complete slrRuntimeOwner "validated: attribution_source_paid=4; claim truth and whole extent remain false" ∷
+  slrRoadmapCoordinate "whole-claim span completion" partial slrRuntimeOwner "local fragments do not pay full canonical claim extents" ∷
+  slrRoadmapCoordinate "GWB CandidateWorldModel corpus projection" complete slrRuntimeOwner "41,134 claims / 41,124 relations / provenance=10 / normalization_drift=false" ∷
+  slrRoadmapCoordinate "reviewed Wikimedia-first world enrichment" complete dashiOwner "10 reviewed seeds -> 51 QID nodes / 850 property edges / 162 parent / 688 surrounding-related / post-follow parity" ∷
+  slrRoadmapCoordinate "replayable cache + deterministic GWB handoff" complete slrRuntimeOwner "cache-only replay: 134 hits / 0 network; tar.xz SHA manifest; no raw/projected corpus text" ∷
+  slrRoadmapCoordinate "GWB source-work identity residual contraction" complete slrRuntimeOwner "paid=2 / unpaid=8 / topic anchors=8 / runtime-resolved work identities=1 / normalization_drift=false" ∷
+  slrRoadmapCoordinate "GWB claim-relative source-role atlas" implementedAwaitingRuntime dashiOwner "fixtures/slr/gwb-claim-relative-source-roles-v1.jsonl / SLRGWBClaimRelativeSourceRoleAtlasExact" ∷
+  slrRoadmapCoordinate "full world-constraint fibre integration" partial dashiOwner "generic fibre exists; domain consumers still attach/contract dimensions independently" ∷
+  slrRoadmapCoordinate "consumer-specific world residual contraction" active sensibLawOwner "use reviewed Q/P/source-role evidence only against declared consumer obligations" ∷
+  slrRoadmapCoordinate "claim/evidence graph projection" active sensibLawOwner "candidate claims/fragments carry graph identities and append-only evidence obligations" ∷
+  slrRoadmapCoordinate "mechanism evidence snowball" active dashiOwner "Wikimedia-first, then broader Snowball only for surviving consumer debt" ∷
+  slrRoadmapCoordinate "review/promote/abstain routing" complete sensibLawOwner "compatibility / adequacy / residual gates remain separate" ∷
+  slrRoadmapCoordinate "ABC C029 policy/evaluative consumer adequacy" active dashiOwner "source attribution paid; implementation/incidence/counterfactual residuals remain" ∷
+  slrRoadmapCoordinate "GWB canonical claim/evidence extraction" next slrRuntimeOwner "begin only after source-role attachment; adjacency/QID graph alone cannot manufacture claims" ∷
   []
 
 ------------------------------------------------------------------------
