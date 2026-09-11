@@ -152,6 +152,45 @@ loureiroToLiResourceContinuity = scientific-resource-continuity-receipt
   "Q51287446"
   "530 Physics"
 
+------------------------------------------------------------------------
+-- Award-scope archaeology / control.
+--
+-- MIT's federal Uniform Guidance schedule identifies DE-FG02-91ER54109 as
+-- "Theoretical Research in Advanced Physics and Technology" at the institutional
+-- level. APS records show the same award supporting unrelated MIT/PSFC plasma
+-- work years before the Li/Liu/Loureiro object. Therefore exact identifier reuse
+-- across Loureiro's death is evidence of continued institutional resource access,
+-- not evidence that a Loureiro-personal grant was transferred to Dion Li.
+------------------------------------------------------------------------
+
+record AwardScopeArchaeology : Set where
+  constructor award-scope-archaeology
+  field
+    awardIdentifier : String
+    primaryInstitutionalSource : String
+    primaryInstitutionalLink : String
+    institutionalAwardTitle : String
+    earlierIndependentUseSource : String
+    earlierIndependentUseLink : String
+    institutionalScopePaid : Bool
+    loureiroPersonalGrantIdentityPaid : Bool
+    postLossReusePaysInstitutionalResourceContinuity : Bool
+    postLossReusePaysPITransfer : Bool
+    deweyTraversal : String
+
+open AwardScopeArchaeology public
+
+mitDEFG0291ER54109Scope : AwardScopeArchaeology
+mitDEFG0291ER54109Scope = award-scope-archaeology
+  "DE-FG02-91ER54109"
+  "MIT Uniform Guidance / Schedule of Expenditures of Federal Awards"
+  "https://vpf.mit.edu/sites/default/files/downloads/AuditReport/2024-MIT-Uniform-Guidance-Report.pdf"
+  "Theoretical Research in Advanced Physics and Technology"
+  "APS DPP 2019, Validation of gyrokinetic simulations in NSTX including comparisons with a synthetic diagnostic for high-k scattering"
+  "https://meetings.aps.org/Meeting/DPP19/Session/TI2.1"
+  true false true false
+  "530 Physics"
+
 record ResourceContinuityBoundary : Set where
   constructor resource-continuity-boundary
   field
@@ -159,13 +198,14 @@ record ResourceContinuityBoundary : Set where
     repeatedNERSCAllocationImpliesSameSimulationBytes : Bool
     repeatedFacilityContractImpliesRepositoryTransfer : Bool
     absentDEsc0022012InSoloPaperProvesGrantEnded : Bool
+    institutionalAwardReuseEqualsPersonalGrantTransfer : Bool
     exactResourceReuseMayGuideGrantAndSimulationSearch : Bool
 
 open ResourceContinuityBoundary public
 
 canonicalResourceContinuityBoundary : ResourceContinuityBoundary
 canonicalResourceContinuityBoundary = resource-continuity-boundary
-  false false false false true
+  false false false false false true
 
 ------------------------------------------------------------------------
 -- Attribution and promotion firewalls.
