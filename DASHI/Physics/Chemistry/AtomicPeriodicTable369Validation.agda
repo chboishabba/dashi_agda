@@ -5,12 +5,14 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as G
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProvenanceSnowballExact as P
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChronologyStatusExact as C
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AttributionLedgerExact as A
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as V
 
 ------------------------------------------------------------------------
 -- Focused validation root.  Importing this module forces the generative
--- formalism, provenance/snowball companion, and chronology/status ledger
--- through the Agda checker when this file is actually checked.
+-- formalism, provenance/snowball companion, chronology/status ledger, and
+-- DOI/QID/primary/Dewey attribution ledger through the Agda checker when this
+-- file is actually checked.
 --
 -- The existence of this file is not itself a typecheck receipt.  See the
 -- chronology/status owner for the distinction between authored source and a
@@ -66,3 +68,17 @@ publicationDisciplineRegression :
     C.canonicalPublicationDiscipline
   ≡ false
 publicationDisciplineRegression = refl , refl
+
+attributionDisciplineRegression :
+  A.AttributionDiscipline.qidImpliesPrimaryAuthority
+    A.canonicalAttributionDiscipline
+  ≡ false
+  ×
+  A.AttributionDiscipline.deweyImpliesScientificTruth
+    A.canonicalAttributionDiscipline
+  ≡ false
+  ×
+  A.AttributionDiscipline.sourcePresenceImpliesTypechecked
+    A.canonicalAttributionDiscipline
+  ≡ false
+attributionDisciplineRegression = refl , (refl , refl)
