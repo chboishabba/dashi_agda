@@ -6,16 +6,6 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- MCCASLAND: HISTORICAL APPLICATION ROLE VS EVENT-TIME CONTINUITY
---
--- The old owner promoted a 2014 ATA appointment receipt under an event-time
--- module name.  A later primary USRA biography states that McCasland served as
--- ATA Chief Technology Officer from 2013-2021 and was, in 2023, an independent
--- consultant advising industry and government clients.  Therefore the ATA role
--- is source-backed historical capability evidence, but it cannot be inherited
--- into the 2025-2026 disappearance window without a dated continuity carrier.
---
--- No claim is made here that consulting work was sensitive, that a particular
--- client/programme existed at event time, or that any work caused the event.
 ------------------------------------------------------------------------
 
 data TemporalRoleStatus : Set where
@@ -64,20 +54,40 @@ mcCasland2023ConsultingState = application-role-receipt
   eventTimeContinuityPartial
   true false false
 
+------------------------------------------------------------------------
+-- DBE Consulting lead.
+--
+-- The Kirtland Partnership Committee's own board page currently labels
+-- McCasland "Founder, Owner, and President, DBE Consulting LLC".  The same page
+-- body also contains stale ATA Director-of-Technology prose, so the DBE heading
+-- is a primary organizational lead for his post-ATA work mode, not yet a dated
+-- 2025-2026 corporate-filing receipt or a client/programme identity.
+------------------------------------------------------------------------
+
+mcCaslandDBEConsultingLead : ApplicationRoleReceipt
+mcCaslandDBEConsultingLead = application-role-receipt
+  "William Neil McCasland"
+  "DBE Consulting LLC"
+  "Founder, Owner, and President"
+  "post-ATA work-mode lead; exact effective dates not paid by the located Kirtland Partnership Committee page"
+  "independent consulting work; exact client/project responsibility not identified"
+  "Kirtland Partnership Committee board surface carries the DBE role heading but also stale ATA biography text"
+  "Kirtland Partnership Committee board page for Neil McCasland"
+  eventTimeContinuityPartial
+  true false false
+
 mcCasland2025To2026EventTimeRole : ApplicationRoleReceipt
 mcCasland2025To2026EventTimeRole = application-role-receipt
   "William Neil McCasland"
-  "event-time employer/client/programme unresolved"
-  "2025-2026 operational role not yet source-welded"
+  "DBE Consulting LLC / exact event-time client or programme unresolved"
+  "post-ATA consulting work mode partially identified; 2025-2026 operational client/project not yet source-welded"
   "2025-2026 disappearance window"
-  "requires dated employer/client/project responsibility evidence"
-  "historical ATA/USAF roles may seed search but do not pay continuity"
-  "no primary 2025-2026 employer/client/project carrier owned in this module"
-  eventTimeRoleNotLocated
-  false false false
+  "requires dated DBE corporate-status evidence and client/project responsibility evidence"
+  "USRA 2025 governance role and Kirtland Partnership Committee DBE heading may seed search but do not pay a technical application object"
+  "USRA 2025 Board of Trustees; Kirtland Partnership Committee DBE Consulting heading"
+  eventTimeContinuityPartial
+  true false false
 
--- Compatibility name retained for downstream imports, but it now denotes the
--- bounded historical ATA receipt rather than pretending that 2014 = event time.
 mcCaslandATAApplicationRole : ApplicationRoleReceipt
 mcCaslandATAApplicationRole = mcCaslandATAHistoricalRole
 
@@ -86,6 +96,8 @@ record McCaslandApplicationBoundary : Set where
   field
     historicalATARoleEquals2026Role : Bool
     consultingState2023Equals2026ClientIdentity : Bool
+    kpcDBEHeadingEqualsDated2026CorporateStatus : Bool
+    dbeRoleEqualsExactClientProgrammeIdentity : Bool
     technologyStrategyRoleImpliesEveryProgrammePossession : Bool
     directedEnergyPortfolioImpliesUAPTechnology : Bool
     priorSAPOversightImpliesEventTimeSAPPossession : Bool
@@ -96,9 +108,10 @@ open McCaslandApplicationBoundary public
 
 canonicalMcCaslandApplicationBoundary : McCaslandApplicationBoundary
 canonicalMcCaslandApplicationBoundary = mccasland-application-boundary
-  false false false false false true true
+  false false false false false false false true true
 
 data McCaslandApplicationReverseTarget : Set where
+  acquireDBECorporateEffectiveDateAndStatus : McCaslandApplicationReverseTarget
   acquire2025To2026EmployerOrClientIdentity : McCaslandApplicationReverseTarget
   acquireEventTimeProgrammeList : McCaslandApplicationReverseTarget
   acquireIRADOrTechnologyPortfolio : McCaslandApplicationReverseTarget
@@ -108,4 +121,4 @@ data McCaslandApplicationReverseTarget : Set where
   acquireObserverOrReviewSurface : McCaslandApplicationReverseTarget
 
 firstMcCaslandEventTimeTarget : McCaslandApplicationReverseTarget
-firstMcCaslandEventTimeTarget = acquire2025To2026EmployerOrClientIdentity
+firstMcCaslandEventTimeTarget = acquireDBECorporateEffectiveDateAndStatus
