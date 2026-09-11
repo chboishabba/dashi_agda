@@ -7,7 +7,6 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ConsumerIndexedModelFibreExact as ModelFibre
-import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
 -- RALLY RECCE / PACE-NOTE FIBRE OVER TIME
@@ -185,7 +184,7 @@ record RecceTraversal
     traversalReference : String
     observedAt : (s : StageStation system) → ObservationState system t s
     calledAt : (s : StageStation system) → PaceNoteState system t s
-    controlAt : (s : StageStation system) → ControlState system
+    controlAt : (s : StageStation system) → ControlState system t
 
 record CrossRunResidual
     (system : RallyTemporalFibreSystem)
