@@ -16,6 +16,7 @@ open import Agda.Builtin.String using (String)
 data RezaRoleSourceClass : Set where
   primaryInstitutionalRoleRecord
   primaryHistoricalIdentityRecord
+  primaryLawEnforcementIdentityRecord
   primaryCongressionalDocument
   directColleagueWitnessSurface
   directFamilyWitnessViaReporting
@@ -45,9 +46,7 @@ boeing2004Jacinto = reza-role-source-carrier
   "Boeing corporate release dated 2004-10-11"
   "https://boeing.mediaroom.com/2004-10-11-Two-Boeing-Employees-Receive-National-Recognition"
   "Monica Jacinto; Boeing Integrated Defense Systems engineer; Boeing Associate Technical Fellow; metallic-alloy-development expertise"
-  false
-  true
-  true
+  false true true
   "Primary employer/corporate carrier for the Monica Jacinto professional identity in 2004. It does not itself contain the later surname Reza or establish the 2025 JPL role."
 
 calState2021Jacinto : RezaRoleSourceCarrier
@@ -57,10 +56,18 @@ calState2021Jacinto = reza-role-source-carrier
   "Cal State LA institutional profile; 2021 programme object"
   "https://www.calstatela.edu/ecst/success/launchpad-program-2021"
   "Monica Jacinto; Technical Fellow for Materials and Processes Engineering at Aerojet Rocketdyne; Mondaloy co-inventor"
-  false
-  true
-  true
+  false true true
   "Primary institutional carrier for the Monica Jacinto identity and pre-JPL Aerojet Rocketdyne role. It provides a high-confidence historical identity lineage but does not itself weld Jacinto to the later Monica Reza event-time identity."
+
+californiaDOJ2026Alias : RezaRoleSourceCarrier
+californiaDOJ2026Alias = reza-role-source-carrier
+  primaryLawEnforcementIdentityRecord
+  "California Department of Justice Missing Person record: Monica Jacinto Reza"
+  "LASD case 025-00905-1257-400; DOB 1964-12-30; last seen 2025-06-22"
+  "https://oag.ca.gov/missing/person/monica-jacinto-reza"
+  "legal/current missing-person name Monica Jacinto Reza; AKA Monica Andrea Jacinto"
+  false false true
+  "Primary state law-enforcement identity carrier directly spanning the Reza surname and Monica Andrea Jacinto alias. It pays that legal/alias bridge, but does not by itself prove that every historical Monica A. Jacinto publication/patent is this person or establish a JPL employment role."
 
 houseOversight20260420 : RezaRoleSourceCarrier
 houseOversight20260420 = reza-role-source-carrier
@@ -69,9 +76,7 @@ houseOversight20260420 = reza-role-source-carrier
   "119th Congress committee letter; DOE-Missing-Scientists-Letter_4.20.26.pdf"
   "https://oversight.house.gov/wp-content/uploads/2026/04/DOE-Missing-Scientists-Letter_4.20.26.pdf"
   "Monica Reza served as director of the NASA Lab's Materials Processing Group"
-  true
-  false
-  false
+  true false false
   "Primary congressional document, but the role sentence is footnoted to public press reporting. It therefore establishes congressional reliance/attention, not an independent JPL personnel receipt."
 
 allanPetreColleagueLead : RezaRoleSourceCarrier
@@ -81,9 +86,7 @@ allanPetreColleagueLead = reza-role-source-carrier
   "LinkedIn public post; no DOI"
   "https://www.linkedin.com/posts/allan-petre_help-find-monica-helpfindmonicareza-activity-7344704035611963392-bApi"
   "Director of the Materials Processing Group at NASA JPL"
-  true
-  false
-  true
+  true false true
   "Direct colleague/friend testimony is stronger than anonymous repetition but is still not a JPL HR, directory, org-chart, appointment, or archival personnel object."
 
 rezaFamilyEmploymentLead : RezaRoleSourceCarrier
@@ -93,9 +96,7 @@ rezaFamilyEmploymentLead = reza-role-source-carrier
   "secondary publication carrying direct family testimony; no DOI"
   "https://lamag.com/news/exclusive-for-monica-rezas-family-it-doesnt-make-sense/"
   "actively employed as Director of Materials Processing at NASA Jet Propulsion Laboratory when she disappeared"
-  true
-  false
-  true
+  true false true
   "Family testimony directly addresses event-time employment, but the carrier is journalistic reporting rather than an employer personnel record."
 
 calStateHistoricalRowLead : RezaRoleSourceCarrier
@@ -105,9 +106,7 @@ calStateHistoricalRowLead = reza-role-source-carrier
   "reported wording: Monica Reza — JPL NASA; archived primary page not yet recovered"
   "https://www.calstatela.edu/ecst/deans-advisory-board"
   "JPL NASA"
-  true
-  false
-  false
+  true false false
   "The current Cal State page is primary for the current board, but the historical Reza row has not been recovered from a primary archived manifestation. Repetition of the quoted row does not pay the historical page."
 
 wikidataMonicaJacinto : RezaRoleSourceCarrier
@@ -117,10 +116,8 @@ wikidataMonicaJacinto = reza-role-source-carrier
   "Q139385030"
   "https://www.wikidata.org/wiki/Q139385030"
   "semantic item labels Monica Jacinto and aliases Monica Jacinto Reza"
-  false
-  false
-  true
-  "Verified external semantic coordinate only. The item currently carries no cited references for the alias/biographical statements, so Q139385030 must not pay the Jacinto-to-Reza identity weld or JPL role."
+  false false true
+  "Verified external semantic coordinate only. The item currently carries no cited references for the alias/biographical statements; the primary California DOJ alias carrier, not this QID, pays the Reza/Andrea-Jacinto alias bridge."
 
 ------------------------------------------------------------------------
 -- Event-time role and alias state.
@@ -133,13 +130,14 @@ record RezaRoleEvidenceState : Set where
     historicalJacintoEmployerLineagePaid : Bool
     verifiedSemanticQidLocated : Bool
     semanticQidPaysAliasIdentity : Bool
+    primaryLegalAliasBridgePaid : Bool
+    patentInitialIdentityToMissingPersonPaid : Bool
     colleagueWitnessLocated : Bool
     familyEventTimeEmploymentWitnessLocated : Bool
     congressionalRepetitionLocated : Bool
     archivedCalStateHistoricalRowLocated : Bool
     primaryJPLPersonnelRecordLocated : Bool
     primaryJPLOrgChartLocated : Bool
-    exactJacintoRezaAliasWeldPaid : Bool
     exactMaterialsProcessingGroupIdentityPaid : Bool
     currentBestBoundedReading : String
     firstAcquisitionTarget : String
@@ -148,10 +146,10 @@ open RezaRoleEvidenceState public
 
 canonicalRezaRoleEvidenceState : RezaRoleEvidenceState
 canonicalRezaRoleEvidenceState = reza-role-evidence-state
-  true true true false true true true
-  false false false false false
-  "Primary Boeing and Cal State carriers pay a long Monica Jacinto alloy/materials-engineering lineage; multiple later source classes describe Monica Reza as an active JPL Materials Processing director; Q139385030 is useful for traversal but cannot itself weld the names because its relevant statements are uncited."
-  "recover a primary record spanning Monica Jacinto and Monica Reza, or a primary JPL/Caltech personnel/directory/org-chart object naming Monica Reza and the exact Materials Processing role; archived Cal State 2024-2025 row remains a secondary route to the same join"
+  true true true false true false true true true
+  false false false false
+  "California DOJ now directly pays Monica Jacinto Reza = AKA Monica Andrea Jacinto as a primary law-enforcement identity relation. Boeing/Cal State pay a long Monica Jacinto materials-engineering lineage and the patent pays Monica A. Jacinto inventorship. The remaining identity debt is the abbreviated patent/institutional form Monica A. Jacinto -> Monica Andrea Jacinto, plus the independent JPL event-time role debt."
+  "recover a primary carrier expanding Monica A. Jacinto to Monica Andrea Jacinto or otherwise tying the patent/inventor object to the DOJ identity; independently recover JPL/Caltech personnel/directory/org-chart evidence for the exact Materials Processing role"
 
 ------------------------------------------------------------------------
 -- Snowball semantic coordinates.
@@ -164,6 +162,7 @@ record RezaRoleCoordinate : Set where
     personQid : String
     personQidVerified : Bool
     personQidReferencePaid : Bool
+    primaryAliasCarrier : String
     deweyTraversal : String
     directSourceLinksRetained : Bool
     qidCreatesRoleReceipt : Bool
@@ -176,11 +175,10 @@ canonicalRezaRoleCoordinate : RezaRoleCoordinate
 canonicalRezaRoleCoordinate = reza-role-coordinate
   "US20040208777A1; application US10/769,195; parent US20030053926A1"
   "Q139385030"
-  true
-  false
+  true false
+  "California DOJ missing-person record; LASD case 025-00905-1257-400"
   "620 Engineering"
-  true
-  false false false
+  true false false false
 
 ------------------------------------------------------------------------
 -- Source-dependency firewalls.
@@ -196,6 +194,8 @@ record RezaRoleSourceBoundary : Set where
     historicalPageQuoteEqualsRecoveredHistoricalPage : Bool
     primaryHistoricalJacintoRoleAutomaticallyEqualsLaterRezaIdentity : Bool
     uncitedWikidataAliasPaysSamePersonIdentity : Bool
+    dojAndreaAliasAutomaticallyPaysPatentMiddleInitialIdentity : Bool
+    primaryAliasBridgeAutomaticallyPaysJPLRole : Bool
     multipleNonInstitutionalCarriersMayGuidePrimarySearch : Bool
     roleEvidenceCreatesCauseOrMotive : Bool
 
@@ -203,4 +203,4 @@ open RezaRoleSourceBoundary public
 
 canonicalRezaRoleSourceBoundary : RezaRoleSourceBoundary
 canonicalRezaRoleSourceBoundary = reza-role-source-boundary
-  false false false false false false false true false
+  false false false false false false false false false true false
