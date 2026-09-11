@@ -72,6 +72,7 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedJSourceMinCutRound324Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound325Exact
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJApplicabilityMinCutRound326Exact
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJCommonDomainRound327Exact
+import DASHI.Physics.YangMills.BalabanCMP116PublishedAuthoritySelectedT5ApplicationExact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound328Exact
 
 -- R329 is the debt-kind normalization after the source-native H1 correction.
