@@ -53,4 +53,5 @@ import DASHI.Interop.SLRLabelledDiscoursePathExact
 import DASHI.Interop.SLRClaimFragmentProjectionExact
 import DASHI.Interop.SLRClaimFragmentResidualInheritanceExact
 import DASHI.Interop.SLRFragmentEvidenceContractionExact
+import DASHI.Interop.SLRGWBCandidateWorldProjectionExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
