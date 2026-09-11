@@ -29,6 +29,60 @@ class WorldResearchBudgetTests(unittest.TestCase):
         self.assertEqual(plan["summary"]["selected_missing_surfaces"], 2)
         self.assertEqual(plan["summary"]["selected_related_qids"], 1)
 
+    def test_pareto_front_beats_lexical_qid_order_without_scalarization(self) -> None:
+        obligations = [
+            {
+                "obligation_kind": "follow-related-qid",
+                "qid": "Q10",
+                "cross_language_gap_coverage": 1,
+                "source_surface_support": 1,
+                "root_qid_support": 1,
+                "typed_wikidata_property_target": False,
+                "candidate_only": True,
+            },
+            {
+                "obligation_kind": "follow-related-qid",
+                "qid": "Q20",
+                "cross_language_gap_coverage": 7,
+                "source_surface_support": 4,
+                "root_qid_support": 2,
+                "typed_wikidata_property_target": True,
+                "candidate_only": True,
+            },
+        ]
+        plan = budget.plan_frontier(obligations, max_new_qids=1, max_missing_surfaces=0)
+        selected = plan["selected_related_qids"]
+        self.assertEqual([x["qid"] for x in selected], ["Q20"])
+        self.assertEqual(selected[0]["pareto_front_rank"], 0)
+        self.assertFalse(plan["pareto_dimensions_scalarized"])
+        self.assertFalse(plan["frontier_rank_is_truth_rank"])
+
+    def test_incomparable_candidates_share_front_and_qid_only_breaks_tie(self) -> None:
+        obligations = [
+            {
+                "obligation_kind": "follow-related-qid",
+                "qid": "Q30",
+                "cross_language_gap_coverage": 8,
+                "source_surface_support": 1,
+                "root_qid_support": 1,
+                "typed_wikidata_property_target": False,
+                "candidate_only": True,
+            },
+            {
+                "obligation_kind": "follow-related-qid",
+                "qid": "Q20",
+                "cross_language_gap_coverage": 2,
+                "source_surface_support": 4,
+                "root_qid_support": 2,
+                "typed_wikidata_property_target": True,
+                "candidate_only": True,
+            },
+        ]
+        plan = budget.plan_frontier(obligations, max_new_qids=2, max_missing_surfaces=0)
+        selected = plan["selected_related_qids"]
+        self.assertEqual([x["pareto_front_rank"] for x in selected], [0, 0])
+        self.assertEqual([x["qid"] for x in selected], ["Q20", "Q30"])
+
     def test_zero_budget_stops_without_claiming_consumer_closure(self) -> None:
         obligations = [{"obligation_kind": "follow-related-qid", "qid": "Q2", "candidate_only": True}]
         plan = budget.plan_frontier(obligations, max_new_qids=0, max_missing_surfaces=0)
