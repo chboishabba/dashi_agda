@@ -75,6 +75,6 @@ referenceDataBoundaryRegression :
   ≡ true
 referenceDataBoundaryRegression = refl , refl
 
--- Import witness that the pre-existing structural root remains in this cone.
-structuralValidationOwner : Set
-structuralValidationOwner = Structural.CrossRepoRegressionDiscipline
+-- The Structural import is intentionally retained even though no name is used
+-- below: importing the module is what keeps the structural validation root in
+-- the same Agda checker cone as this physical repair layer.
