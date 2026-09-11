@@ -10,18 +10,17 @@ import DASHI.ComputerScience.RSA260ProductionArtifactSubstituteAdmissionExact as
 import DASHI.ComputerScience.RSA260LACarrierBidiDerivationExact as BidiCarrier
 import DASHI.ComputerScience.RSA260BidiCandidateExperimentExact as CandidateExperiment
 import DASHI.ComputerScience.RSA260BidiCandidateBWCShadowExact as CandidateBWC
+import DASHI.ComputerScience.RSA260BidiCandidateGeneratorKernelExact as CandidateFullLA
 
 ------------------------------------------------------------------------
 -- RSA-260 PRODUCTION-SUBSTITUTION ROADMAP
 --
--- The synthetic CPU Block-Wiedemann-shaped ladder is end-to-end through a
--- nonzero v with Mv=0.  The public production LA envelope has also been
--- intersected bidirectionally with downstream Block-Wiedemann/gather demands,
--- yielding a typed sparse-GF(2) carrier CONSTRAINT FIBRE.
+-- The historical identity route remains unpaid at the byte level.  In
+-- parallel, the bidi-derived carrier fibre now has a runnable implicit member
+-- whose executable shadow has passed carrier, held-out, left-kernel, prepared
+-- SpMV/Krylov/projection, shared-generator and kernel-recovery consumers.
 --
--- A runnable implicit member of that fibre has passed carrier/held-out tests,
--- and a 924x512 shadow has passed an exact-byte BWC-shaped preparation test
--- using B = A A^T.  Neither result identifies the historical production bytes.
+-- Candidate adequacy for those declared consumers is not historical identity.
 ------------------------------------------------------------------------
 
 record ProductionLAObservation : Set where
@@ -115,14 +114,21 @@ candidateBWCShadowBoundary = CandidateBWC.canonicalPreparedShadowConsumerBoundar
 candidateBWCShadowReceipt : CandidateBWC.BWCShadowExecutionReceipt
 candidateBWCShadowReceipt = CandidateBWC.currentBWCShadowExecutionReceipt
 
+candidateFullLABoundary : CandidateFullLA.CandidateFullLAConsumerBoundary
+candidateFullLABoundary = CandidateFullLA.canonicalCandidateFullLAConsumerBoundary
+
+candidateGeneratorReceipt : CandidateFullLA.CandidateGeneratorExecutionReceipt
+candidateGeneratorReceipt = CandidateFullLA.currentCandidateGeneratorExecutionReceipt
+
+candidateKernelReceipt : CandidateFullLA.CandidateKernelExecutionReceipt
+candidateKernelReceipt = CandidateFullLA.currentCandidateKernelExecutionReceipt
+
 ------------------------------------------------------------------------
--- Ordered residual router.
+-- Ordered residual routers.
 ------------------------------------------------------------------------
 
 data ProductionResidual : Set where
   acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
-  raiseCandidateProjectionWidthTowardProduction : ProductionResidual
-  runCandidateMatrixGeneratorAndKernelRecovery : ProductionResidual
   acquireProductionProjectionCheckpointOrGenerator : ProductionResidual
   bindExactModifiedSourceRevision : ProductionResidual
   reproduceProductionCPUReference : ProductionResidual
@@ -132,6 +138,16 @@ data ProductionResidual : Set where
 
 firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectMemberOfDerivedLACarrierFibre
+
+data CandidateExperimentResidual : Set where
+  raiseCandidateProjectionWidthToward256 : CandidateExperimentResidual
+  compareIndependentProjectionSeeds : CandidateExperimentResidual
+  compareAlternativePreparationAdapters : CandidateExperimentResidual
+  measureCandidateCompressionCostFrontier : CandidateExperimentResidual
+  validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
+
+firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
+firstUnpaidCandidateExperimentResidual = raiseCandidateProjectionWidthToward256
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -160,7 +176,12 @@ record RSA260ProductionSubstitutionBoundary : Set where
     runnableBidiCandidatePreparedSquareAdapterPassed : Bool
     runnableBidiCandidatePackedScalarFactorizedKrylovPassed : Bool
     runnableBidiCandidateProjectionSequencePassed : Bool
-    runnableBidiCandidateExactBWCShadowBlobExecuted : Bool
+    runnableBidiCandidateSharedGeneratorPaid : Bool
+    runnableBidiCandidateGeneratorWithheldValidationPaid : Bool
+    runnableBidiCandidateShiftedRelationSpacePaid : Bool
+    runnableBidiCandidateNonzeroKernelRecoveryPaid : Bool
+    runnableBidiCandidateKernelVerifiedBackOnOriginalAT : Bool
+    runnableBidiCandidateExactGeneratorKernelBlobExecuted : Bool
     runnableBidiCandidateHistoricalIdentityPaid : Bool
     runnableBidiCandidateProductionBWCReplayPaid : Bool
 
@@ -196,7 +217,12 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; runnableBidiCandidatePreparedSquareAdapterPassed = true
   ; runnableBidiCandidatePackedScalarFactorizedKrylovPassed = true
   ; runnableBidiCandidateProjectionSequencePassed = true
-  ; runnableBidiCandidateExactBWCShadowBlobExecuted = true
+  ; runnableBidiCandidateSharedGeneratorPaid = true
+  ; runnableBidiCandidateGeneratorWithheldValidationPaid = true
+  ; runnableBidiCandidateShiftedRelationSpacePaid = true
+  ; runnableBidiCandidateNonzeroKernelRecoveryPaid = true
+  ; runnableBidiCandidateKernelVerifiedBackOnOriginalAT = true
+  ; runnableBidiCandidateExactGeneratorKernelBlobExecuted = true
   ; runnableBidiCandidateHistoricalIdentityPaid = false
   ; runnableBidiCandidateProductionBWCReplayPaid = false
   ; productionMatrixBytesPaid = false
@@ -217,7 +243,8 @@ data BidiCarrierFibreImpliesUniqueMatrix : Set where
 data RunnableCandidateImpliesHistoricalMatrix : Set where
 data PassedDeclaredExperimentImpliesProductionBWC : Set where
 data AATShadowImpliesProductionPreparedEncoding : Set where
-data SyntheticKernelImpliesProductionKernel : Set where
+data CandidateGeneratorImpliesProductionGenerator : Set where
+data CandidateKernelImpliesProductionDependency : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 data CPUReferenceImpliesCUDAParity : Set where
 data CUDAParityImpliesNCCLParity : Set where
@@ -238,8 +265,11 @@ passedExperimentDoesNotCreateProductionBWC ()
 aatShadowDoesNotCreateProductionPreparedEncoding : AATShadowImpliesProductionPreparedEncoding → ⊥
 aatShadowDoesNotCreateProductionPreparedEncoding ()
 
-syntheticKernelDoesNotCreateProductionKernel : SyntheticKernelImpliesProductionKernel → ⊥
-syntheticKernelDoesNotCreateProductionKernel ()
+candidateGeneratorDoesNotCreateProductionGenerator : CandidateGeneratorImpliesProductionGenerator → ⊥
+candidateGeneratorDoesNotCreateProductionGenerator ()
+
+candidateKernelDoesNotCreateProductionDependency : CandidateKernelImpliesProductionDependency → ⊥
+candidateKernelDoesNotCreateProductionDependency ()
 
 searchMissDoesNotProveAbsence : SearchMissImpliesArtifactAbsent → ⊥
 searchMissDoesNotProveAbsence ()
