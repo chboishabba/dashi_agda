@@ -43,23 +43,11 @@ open PreparationCrossSeedReceipt public
 
 affine511CrossSeed : PreparationCrossSeedReceipt
 affine511CrossSeed = preparation-cross-seed-receipt
-  "affine_511_1"
-  8 8
-  16875 15125
-  1
-  304
-  12
-  376
+  "affine_511_1" 8 8 16875 15125 1 304 12 376
 
 rotate31CrossSeed : PreparationCrossSeedReceipt
 rotate31CrossSeed = preparation-cross-seed-receipt
-  "rotate31"
-  8 8
-  16250 10250
-  0
-  78
-  52
-  100
+  "rotate31" 8 8 16250 10250 0 78 52 100
 
 record Width256FrontierReceipt : Set where
   constructor width256-frontier-receipt
@@ -91,7 +79,8 @@ record RobustnessAwarePreparationPreference : Set where
     preferredHasNoZeroShiftFailures : Bool
     preferredHasLowerMedianMinimumKernelWeight : Bool
     width256RuntimeOrderMateriallySeparated : Bool
-    exactGitBlobExecuted : Bool
+    exactFrontierScriptBlobExecuted : Bool
+    exactDependencyClosureExecuted : Bool
     preferredTestedIsGlobalOptimum : Bool
     preferredAdapterIsProductionCADOPreparation : Bool
     historicalSameObjectIdentityPaid : Bool
@@ -103,6 +92,7 @@ currentRobustnessAwarePreparationPreference = robustness-aware-preparation-prefe
   true true true true true
   false
   true
+  false
   false false false
 
 searchBoundary : Search.PreparationFibreInterpretationBoundary
@@ -115,6 +105,8 @@ data FrontierPreferenceImpliesGlobalOptimum : Set where
 data PythonTimingImpliesProductionPerformance : Set where
 data RobustPreferredAdapterImpliesProductionAdapter : Set where
 
+data ExactScriptImpliesExactDependencyClosure : Set where
+
 frontierPreferenceDoesNotCreateGlobalOptimum : FrontierPreferenceImpliesGlobalOptimum → ⊥
 frontierPreferenceDoesNotCreateGlobalOptimum ()
 
@@ -123,3 +115,6 @@ pythonTimingDoesNotCreateProductionPerformance ()
 
 robustPreferenceDoesNotCreateProductionAdapter : RobustPreferredAdapterImpliesProductionAdapter → ⊥
 robustPreferenceDoesNotCreateProductionAdapter ()
+
+exactScriptDoesNotCreateDependencyClosure : ExactScriptImpliesExactDependencyClosure → ⊥
+exactScriptDoesNotCreateDependencyClosure ()
