@@ -5,6 +5,7 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 HANDOFF_ROOT="${1:-/tmp/slr-validation-20260911}"
 SENSIBLAW_ROOT="${2:-/home/c/Documents/code/SensibLaw}"
 OUT_DIR="${3:-$HANDOFF_ROOT/gwb-world}"
+REVIEWED_OVERLAY="${4:-$HERE/../../fixtures/slr/gwb-reviewed-wikimedia-identities-v1.jsonl}"
 PROJECTION="$HANDOFF_ROOT/gwb-projection/source_projection.json"
 WORLD="$OUT_DIR/sensiblaw-gwb-candidate-world-model.json"
 SEEDS="$OUT_DIR/gwb-wikimedia-seeds.jsonl"
@@ -20,14 +21,22 @@ mkdir -p "$OUT_DIR"
 # This also pays the base GWB SensibLaw normalization parity first.
 bash "$HERE/run_gwb_candidate_world.sh" "$HANDOFF_ROOT" "$SENSIBLAW_ROOT" "$OUT_DIR" >/dev/null
 
-python3 "$HERE/slr_gwb_wikimedia_seed_candidates.py" \
-  --projection-manifest "$PROJECTION" \
-  --output "$SEEDS" \
-  2> "$SEED_ERR"
+seed_args=(
+  --projection-manifest "$PROJECTION"
+  --output "$SEEDS"
+)
+if [[ -s "$REVIEWED_OVERLAY" ]]; then
+  seed_args+=(--reviewed-overlay "$REVIEWED_OVERLAY")
+fi
+python3 "$HERE/slr_gwb_wikimedia_seed_candidates.py" "${seed_args[@]}" 2> "$SEED_ERR"
 
-grep -q 'schema=slr-gwb-wikimedia-seed-candidates-v1' "$SEED_ERR" || {
+grep -q 'schema=slr-gwb-wikimedia-seed-candidates-v2' "$SEED_ERR" || {
   echo 'ERROR: GWB Wikimedia seed receipt missing/stale' >&2
   cat "$SEED_ERR" >&2
+  exit 1
+}
+grep -q 'topic_anchor_is_source_object_identity=false' "$SEED_ERR" || {
+  echo 'ERROR: topical identity overlay collapsed into source-object identity' >&2
   exit 1
 }
 
@@ -41,7 +50,7 @@ PY
 
 if [[ "$SEED_COUNT" -eq 0 ]]; then
   cat "$SEED_ERR"
-  printf 'SLR_GWB_WIKIMEDIA_WORLD_FOLLOW_SKIPPED reason=no-explicit-or-metadata-seeds broad_snowball_not_started=true semantic_promotion=false\n' >&2
+  printf 'SLR_GWB_WIKIMEDIA_WORLD_FOLLOW_SKIPPED reason=no-explicit-or-reviewed-seeds broad_snowball_not_started=true semantic_promotion=false\n' >&2
   exit 0
 fi
 
@@ -113,5 +122,5 @@ fi
 cat "$SEED_ERR"
 cat "$FOLLOW_ERR"
 [[ -s "$PARITY_ERR" ]] && cat "$PARITY_ERR"
-printf 'gwb_world=%s\nseeds=%s\nworld_graph=%s\nfollowed_world=%s\nnormalization_parity=%s\n' \
-  "$WORLD" "$SEEDS" "$GRAPH" "$FOLLOWED" "$PARITY_STATUS"
+printf 'gwb_world=%s\nreviewed_overlay=%s\nseeds=%s\nworld_graph=%s\nfollowed_world=%s\nnormalization_parity=%s\n' \
+  "$WORLD" "$REVIEWED_OVERLAY" "$SEEDS" "$GRAPH" "$FOLLOWED" "$PARITY_STATUS"
