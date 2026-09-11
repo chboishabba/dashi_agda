@@ -8,80 +8,58 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AttributedSourceCore as Attribution
-import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSymbolicVerificationDeweyQidDoiBidiExact as Dewey
-import DASHI.Wikimedia.IbrahimSnowballArchiveHistoriographyCausalityBidiExact as Archive
-import DASHI.Wikimedia.IbrahimSnowballLearningMemoryTraumaReplicationConsensusBidiExact as Prior
-import DASHI.Wikimedia.IbrahimSnowballTestimonyMemoryCredibilityCorroborationExpertBidiExact as Testimony
+import DASHI.Wikimedia.IbrahimSnowballMemoryRepetitionSourceDependencyConsensusBidiExact as Dependency
+import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisPeerReviewConflictIndependenceBidiExact as Synthesis
+import DASHI.Wikimedia.IbrahimSnowballReplicationSourceGenealogyEvidenceSynthesisBidiExact as Genealogy
+import DASHI.Wikimedia.IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact as Cascade
+import DASHI.Wikimedia.IbrahimSnowballDependencySourceQualityAttributionDeltaExact as Quality
 
 ------------------------------------------------------------------------
--- IBRAHIM / SOURCE-GENEALOGY / INDEPENDENCE / EVIDENCE-SYNTHESIS BIDI
+-- THIN DELTA: PRIMARY-SOURCE ROLE / CITATION-BIAS / VISIBILITY
 --
--- The high-alpha residual after corroboration/replication is genealogy:
--- how many apparently distinct reports, papers, URLs, witnesses or reviews
--- descend from genuinely independent evidentiary origins?
+-- Dependency, source genealogy, meta-analytic dependence, information cascades,
+-- source quality and consensus are already owned by imported modules.  This
+-- file adds only what survived quotienting:
+--   * exact primary-source QID + bounded role,
+--   * DOI/canonical attribution for citation-bias / replicability studies,
+--   * citation visibility != replicability/evidential weight,
+--   * primary-source role != proposition truth.
 --
--- QID identifies a concept/publication type. DOI/canonical URL identifies a
--- source object. Dewey supplies a library/navigation coordinate when safely
--- inspected. None supplies independence, methodological quality, truth or
--- evidentiary weight. Those remain consumer-indexed Snowball obligations.
+-- QID, DOI, canonical link and Dewey remain navigation/provenance coordinates.
 ------------------------------------------------------------------------
 
 mkQid : String → String → Identity.ExternalIdentityDemand
 mkQid label qid = Identity.mkOptionalIdentityDemand
-  "Ibrahim source-genealogy/independence/evidence-synthesis BIDI"
+  "Ibrahim primary-source/citation-bias/source-genealogy delta"
   "verified external identity only"
   label Identity.wikidataQid
   (Identity.verified qid
-    "Wikidata identity inspected 2026-09-11; identity does not create source independence, methodological quality, truth, evidentiary weight or authority")
+    "Wikidata identity inspected 2026-09-11; identity does not create truth, independence, evidentiary weight or source quality")
 
 primarySourceQid : Identity.ExternalIdentityDemand
 primarySourceQid = mkQid "primary source" "Q112754"
 
 systematicReviewQid : Identity.ExternalIdentityDemand
-systematicReviewQid = mkQid "systematic review" "Q1504425"
+systematicReviewQid = Synthesis.systematicReviewQid
 
 metaAnalysisQid : Identity.ExternalIdentityDemand
-metaAnalysisQid = mkQid "meta-analysis" "Q815382"
-
-reproducibilityQid : Identity.ExternalIdentityDemand
-reproducibilityQid = Prior.reproducibilityQid
-
-scientificConsensusQid : Identity.ExternalIdentityDemand
-scientificConsensusQid = Prior.scientificConsensusQid
+metaAnalysisQid = Synthesis.metaAnalysisQid
 
 sourceGenealogyQid : Identity.ExternalIdentityDemand
-sourceGenealogyQid = Identity.mkOptionalIdentityDemand
-  "Ibrahim source-genealogy/independence/evidence-synthesis BIDI"
-  "external concept identity"
-  "source genealogy / common-source dependence"
-  Identity.wikidataQid
-  (Identity.unresolved
-    "no exact single Wikidata concept promoted for provenance genealogy/common-source dependence; retain as a Snowball consumer rather than substitute a nearby citation-network concept")
-
-------------------------------------------------------------------------
--- Dewey stays classification/navigation only. No uninspected number is inferred
--- from publication type or QID.
-------------------------------------------------------------------------
+sourceGenealogyQid = Dependency.sourceIndependenceQid
 
 primarySourceDewey : Dewey.DeweyCoordinate
 primarySourceDewey = Dewey.mkUnresolvedDewey
   "primary source"
-  "no exact inspected DDC value promoted from Q112754 in this pass"
+  "Q112754 verified; no exact inspected DDC value promoted in this pass"
 
 systematicReviewDewey : Dewey.DeweyCoordinate
-systematicReviewDewey = Dewey.mkUnresolvedDewey
-  "systematic review"
-  "no exact inspected DDC value promoted from Q1504425 in this pass"
-
-metaAnalysisDewey : Dewey.DeweyCoordinate
-metaAnalysisDewey = Dewey.mkUnresolvedDewey
-  "meta-analysis"
-  "no exact inspected DDC value promoted from Q815382 in this pass"
+systematicReviewDewey = Synthesis.systematicReviewDewey
 
 ------------------------------------------------------------------------
--- Source-bounded evidence about citation/replication distortions.
+-- Source-paid citation/replication lane.
 ------------------------------------------------------------------------
 
 serraGarciaGneezySource : Attribution.AttributedSource
@@ -93,7 +71,7 @@ serraGarciaGneezySource = Attribution.mkDOISource
   "10.1126/sciadv.abd1705"
   "https://doi.org/10.1126/sciadv.abd1705"
   Attribution.academicArticleSource
-  "observational analysis of three replication-project corpora finding higher citation of nonreplicable papers and limited post-failure acknowledgement; citation count is not treated as replication success, independence or truth"
+  "observational analysis of three replication-project corpora finding higher citation of nonreplicable papers and limited acknowledgement of replication failure; citation visibility is not replication success, independence or truth"
   Attribution.publicAttribution
 
 duyxCitationBiasSource : Attribution.AttributedSource
@@ -105,89 +83,38 @@ duyxCitationBiasSource = Attribution.mkDOISource
   "10.1016/j.jclinepi.2017.06.002"
   "https://doi.org/10.1016/j.jclinepi.2017.06.002"
   Attribution.academicArticleSource
-  "systematic review/meta-analysis of citation bias; supports treating citation frequency as a biased dissemination signal rather than an independence or truth count"
+  "systematic review/meta-analysis of citation bias; citation frequency is a dissemination signal that may be systematically associated with result direction and is not an independence or truth count"
   Attribution.publicAttribution
 
 ------------------------------------------------------------------------
--- Regression 1: citation multiplicity cannot recover independent origin count.
+-- Regression 1: citation visibility cannot recover replication status.
 ------------------------------------------------------------------------
 
-data CitationCase : Set where
-  sameCitationCountIndependentOrigins sameCitationCountSingleAncestralOrigin : CitationCase
+data CitationVisibilityCase : Set where
+  sameCitationVisibilityReplicable sameCitationVisibilityNonreplicable : CitationVisibilityCase
 
-data CitationSurface : Set where sameCitationMultiplicity : CitationSurface
-data OriginIndependence : Set where multipleIndependentOrigins commonAncestralOrigin : OriginIndependence
+data CitationVisibilitySurface : Set where sameCitationVisibility : CitationVisibilitySurface
+data ReplicationStatus : Set where replicableResult nonreplicableResult : ReplicationStatus
 
-citationSurface : CitationCase → CitationSurface
-citationSurface _ = sameCitationMultiplicity
+citationVisibilitySurface : CitationVisibilityCase → CitationVisibilitySurface
+citationVisibilitySurface _ = sameCitationVisibility
 
-originIndependence : CitationCase → OriginIndependence
-originIndependence sameCitationCountIndependentOrigins = multipleIndependentOrigins
-originIndependence sameCitationCountSingleAncestralOrigin = commonAncestralOrigin
+replicationStatus : CitationVisibilityCase → ReplicationStatus
+replicationStatus sameCitationVisibilityReplicable = replicableResult
+replicationStatus sameCitationVisibilityNonreplicable = nonreplicableResult
 
-citationGenealogyDefect : INF.NonFactorabilityWitness citationSurface originIndependence
-citationGenealogyDefect = INF.nonFactorabilityWitness
-  sameCitationCountIndependentOrigins sameCitationCountSingleAncestralOrigin refl (λ ())
+citationReplicationDefect :
+  INF.NonFactorabilityWitness citationVisibilitySurface replicationStatus
+citationReplicationDefect = INF.nonFactorabilityWitness
+  sameCitationVisibilityReplicable sameCitationVisibilityNonreplicable refl (λ ())
 
-citationMultiplicityCannotFactorIndependentOrigins :
-  INF.FactorsThrough citationSurface originIndependence → ⊥
-citationMultiplicityCannotFactorIndependentOrigins =
-  INF.witnessRulesOutEveryFlatFactorisation citationGenealogyDefect
-
-------------------------------------------------------------------------
--- Regression 2: publication count cannot recover primary-evidence diversity.
-------------------------------------------------------------------------
-
-data PublicationCase : Set where
-  samePublicationCountIndependentPrimaryStudies samePublicationCountSharedPrimaryStudy : PublicationCase
-
-data PublicationSurface : Set where samePublicationMultiplicity : PublicationSurface
-data PrimaryEvidenceDiversity : Set where independentPrimaryEvidence sharedPrimaryEvidence : PrimaryEvidenceDiversity
-
-publicationSurface : PublicationCase → PublicationSurface
-publicationSurface _ = samePublicationMultiplicity
-
-primaryEvidenceDiversity : PublicationCase → PrimaryEvidenceDiversity
-primaryEvidenceDiversity samePublicationCountIndependentPrimaryStudies = independentPrimaryEvidence
-primaryEvidenceDiversity samePublicationCountSharedPrimaryStudy = sharedPrimaryEvidence
-
-publicationPrimaryDefect : INF.NonFactorabilityWitness publicationSurface primaryEvidenceDiversity
-publicationPrimaryDefect = INF.nonFactorabilityWitness
-  samePublicationCountIndependentPrimaryStudies samePublicationCountSharedPrimaryStudy refl (λ ())
-
-publicationMultiplicityCannotFactorPrimaryEvidenceDiversity :
-  INF.FactorsThrough publicationSurface primaryEvidenceDiversity → ⊥
-publicationMultiplicityCannotFactorPrimaryEvidenceDiversity =
-  INF.witnessRulesOutEveryFlatFactorisation publicationPrimaryDefect
+citationVisibilityCannotFactorReplicationStatus :
+  INF.FactorsThrough citationVisibilitySurface replicationStatus → ⊥
+citationVisibilityCannotFactorReplicationStatus =
+  INF.witnessRulesOutEveryFlatFactorisation citationReplicationDefect
 
 ------------------------------------------------------------------------
--- Regression 3: synthesis label cannot recover independence/method quality.
-------------------------------------------------------------------------
-
-data SynthesisCase : Set where
-  sameMetaAnalysisLabelIndependentInputs sameMetaAnalysisLabelDependentInputs : SynthesisCase
-
-data SynthesisSurface : Set where sameEvidenceSynthesisLabel : SynthesisSurface
-data SynthesisIndependence : Set where synthesisInputsIndependent synthesisInputsDependent : SynthesisIndependence
-
-synthesisSurface : SynthesisCase → SynthesisSurface
-synthesisSurface _ = sameEvidenceSynthesisLabel
-
-synthesisIndependence : SynthesisCase → SynthesisIndependence
-synthesisIndependence sameMetaAnalysisLabelIndependentInputs = synthesisInputsIndependent
-synthesisIndependence sameMetaAnalysisLabelDependentInputs = synthesisInputsDependent
-
-synthesisIndependenceDefect : INF.NonFactorabilityWitness synthesisSurface synthesisIndependence
-synthesisIndependenceDefect = INF.nonFactorabilityWitness
-  sameMetaAnalysisLabelIndependentInputs sameMetaAnalysisLabelDependentInputs refl (λ ())
-
-evidenceSynthesisLabelCannotFactorInputIndependence :
-  INF.FactorsThrough synthesisSurface synthesisIndependence → ⊥
-evidenceSynthesisLabelCannotFactorInputIndependence =
-  INF.witnessRulesOutEveryFlatFactorisation synthesisIndependenceDefect
-
-------------------------------------------------------------------------
--- Regression 4: primary-source classification cannot recover proposition truth.
+-- Regression 2: primary-source role cannot recover proposition truth.
 ------------------------------------------------------------------------
 
 data PrimaryTruthCase : Set where
@@ -213,91 +140,79 @@ primarySourceRoleCannotFactorTruth =
   INF.witnessRulesOutEveryFlatFactorisation primaryTruthDefect
 
 ------------------------------------------------------------------------
--- Existing boundaries reused: acquisition, archive/history, testimony and
--- replication/consensus remain authoritative for their own consumers.
+-- Exact reuse: no new dependency/evidence-synthesis ontology.
 ------------------------------------------------------------------------
 
-acquisitionBoundary : Acquisition.SourceAcquisitionBoundary
-acquisitionBoundary = Acquisition.canonicalSourceAcquisitionBoundary
+dependencyBoundary : Dependency.MemoryRepetitionSourceDependencyConsensusBoundary
+dependencyBoundary = Dependency.canonicalMemoryRepetitionSourceDependencyConsensusBoundary
 
-archiveBoundary : Archive.ArchiveHistoriographyCausalityBoundary
-archiveBoundary = Archive.canonicalArchiveHistoriographyCausalityBoundary
+synthesisBoundary : Synthesis.EvidenceSynthesisPeerReviewIndependenceBoundary
+synthesisBoundary = Synthesis.canonicalEvidenceSynthesisPeerReviewIndependenceBoundary
 
-testimonyBoundary : Testimony.TestimonyMemoryCredibilityBoundary
-testimonyBoundary = Testimony.canonicalTestimonyMemoryCredibilityBoundary
+genealogyBoundary : Genealogy.ReplicationSourceGenealogyEvidenceSynthesisBoundary
+genealogyBoundary = Genealogy.canonicalReplicationSourceGenealogyEvidenceSynthesisBoundary
 
-priorReplicationBoundary : Prior.LearningMemoryTraumaReplicationConsensusBoundary
-priorReplicationBoundary = Prior.canonicalLearningMemoryTraumaReplicationConsensusBoundary
+cascadeBoundary : Cascade.InformationCascadeEvidenceDependencyHyperfabricBoundary
+cascadeBoundary = Cascade.canonicalInformationCascadeEvidenceDependencyHyperfabricBoundary
+
+qualityBoundary : Quality.DependencySourceQualityAttributionBoundary
+qualityBoundary = Quality.canonicalDependencySourceQualityAttributionBoundary
 
 ------------------------------------------------------------------------
--- Reverse BIDI constraints into Ibrahim parent nodes.
+-- Reverse BIDI constraints.
 ------------------------------------------------------------------------
 
-record SourceGenealogyReverseConstraint : Set where
-  constructor source-genealogy-reverse-constraint
+record CitationPrimaryReverseConstraint : Set where
+  constructor citation-primary-reverse-constraint
   field
     parentNode : String
     distinctionForcedUpward : String
     parentMayEraseDistinction : Bool
-open SourceGenealogyReverseConstraint public
+open CitationPrimaryReverseConstraint public
 
-informationConstraint : SourceGenealogyReverseConstraint
-informationConstraint = source-genealogy-reverse-constraint
-  "Information science / bibliography"
-  "document identity, citation edge, canonical source, source role, acquisition state and ancestral origin remain distinct"
+scienceConstraint : CitationPrimaryReverseConstraint
+scienceConstraint = citation-primary-reverse-constraint
+  "Science / publication / replication"
+  "primary-source role, peer-review status, citation visibility, source quality, replication, dependence, synthesis and truth remain distinct"
   false
 
-scienceConstraint : SourceGenealogyReverseConstraint
-scienceConstraint = source-genealogy-reverse-constraint
-  "Science / replication / evidence synthesis"
-  "primary study, replication, reused dataset/method, systematic review, meta-analysis, reproducibility and consensus remain distinct"
+informationConstraint : CitationPrimaryReverseConstraint
+informationConstraint = citation-primary-reverse-constraint
+  "Bibliography / information science"
+  "DOI/work identity, citation count, citation genealogy, canonical source, source role and evidentiary weight remain distinct"
   false
 
-mediaOsintConstraint : SourceGenealogyReverseConstraint
-mediaOsintConstraint = source-genealogy-reverse-constraint
-  "Media / OSINT / investigation"
-  "different URLs/accounts/posts do not become independent sources until common-origin and copying/republication genealogy are audited"
-  false
-
-lawHistoryConstraint : SourceGenealogyReverseConstraint
-lawHistoryConstraint = source-genealogy-reverse-constraint
-  "Law / history / testimony"
-  "multiple exhibits, witnesses or surviving accounts do not become independent corroboration merely by multiplicity; provenance genealogy must survive"
+investigationConstraint : CitationPrimaryReverseConstraint
+investigationConstraint = citation-primary-reverse-constraint
+  "OSINT / historical / legal investigation"
+  "primary-source designation identifies relation to the event/question; it does not create accuracy, independence, admissibility or proposition truth"
   false
 
 ------------------------------------------------------------------------
--- No-promotion gates.
+-- Attribution / no-promotion gates.
 ------------------------------------------------------------------------
 
 data PrimarySourceMeansTrue : Set where
-data SystematicReviewMeansIndependentInputs : Set where
-data MetaAnalysisMeansCausalProof : Set where
 data CitationCountMeansEvidenceWeight : Set where
-data DistinctUrlsMeanIndependentSources : Set where
-data DOIProvesMethodIndependence : Set where
-data QidProvesSourceRole : Set where
+data HighlyCitedMeansReplicable : Set where
+data DOIProvesIndependence : Set where
+data QidProvesSourceQuality : Set where
 data DeweyCreatesEvidenceHierarchy : Set where
 
 primarySourceDoesNotMeanTrue : PrimarySourceMeansTrue → ⊥
 primarySourceDoesNotMeanTrue ()
 
-systematicReviewDoesNotMeanIndependentInputs : SystematicReviewMeansIndependentInputs → ⊥
-systematicReviewDoesNotMeanIndependentInputs ()
-
-metaAnalysisDoesNotMeanCausalProof : MetaAnalysisMeansCausalProof → ⊥
-metaAnalysisDoesNotMeanCausalProof ()
-
 citationCountDoesNotMeanEvidenceWeight : CitationCountMeansEvidenceWeight → ⊥
 citationCountDoesNotMeanEvidenceWeight ()
 
-distinctUrlsDoNotMeanIndependentSources : DistinctUrlsMeanIndependentSources → ⊥
-distinctUrlsDoNotMeanIndependentSources ()
+highCitationDoesNotMeanReplicable : HighlyCitedMeansReplicable → ⊥
+highCitationDoesNotMeanReplicable ()
 
-doiDoesNotProveMethodIndependence : DOIProvesMethodIndependence → ⊥
-doiDoesNotProveMethodIndependence ()
+doiDoesNotProveIndependence : DOIProvesIndependence → ⊥
+doiDoesNotProveIndependence ()
 
-qidDoesNotProveSourceRole : QidProvesSourceRole → ⊥
-qidDoesNotProveSourceRole ()
+qidDoesNotProveSourceQuality : QidProvesSourceQuality → ⊥
+qidDoesNotProveSourceQuality ()
 
 deweyDoesNotCreateEvidenceHierarchy : DeweyCreatesEvidenceHierarchy → ⊥
 deweyDoesNotCreateEvidenceHierarchy ()
@@ -305,16 +220,14 @@ deweyDoesNotCreateEvidenceHierarchy ()
 record SourceGenealogyIndependenceEvidenceSynthesisBoundary : Set where
   constructor source-genealogy-independence-evidence-synthesis-boundary
   field
-    qidsAttachedWhenSafelyResolved : Bool
-    unresolvedGenealogyQidRetainedExplicitly : Bool
-    deweyUnresolvedStateRetained : Bool
+    existingDependencyOwnersReused : Bool
+    primarySourceQidAttached : Bool
+    primarySourceDeweyUnresolvedExplicitly : Bool
     doiAndCanonicalLinksRetained : Bool
+    citationBiasSourcesAttributed : Bool
+    citationVisibilitySeparatedFromReplicability : Bool
     primarySourceRoleSeparatedFromTruth : Bool
-    citationMultiplicitySeparatedFromIndependence : Bool
-    publicationMultiplicitySeparatedFromPrimaryDiversity : Bool
-    evidenceSynthesisSeparatedFromInputIndependence : Bool
-    replicationAndConsensusBoundariesReused : Bool
-    sourceAcquisitionAndArchiveBoundariesReused : Bool
+    qidDoiDeweySeparatedFromEvidenceWeight : Bool
     reverseBidiConstraintsPropagateUpward : Bool
     presentAxisVocabularyClaimedComplete : Bool
 open SourceGenealogyIndependenceEvidenceSynthesisBoundary public
@@ -323,4 +236,4 @@ canonicalSourceGenealogyIndependenceEvidenceSynthesisBoundary :
   SourceGenealogyIndependenceEvidenceSynthesisBoundary
 canonicalSourceGenealogyIndependenceEvidenceSynthesisBoundary =
   source-genealogy-independence-evidence-synthesis-boundary
-    true true true true true true true true true true true false
+    true true true true true true true true true false
