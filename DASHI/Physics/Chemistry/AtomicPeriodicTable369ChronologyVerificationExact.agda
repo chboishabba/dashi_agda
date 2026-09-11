@@ -54,6 +54,17 @@ firstLocatedAtomicCode =
     "commit 4f1441e4989beec157733a960ca7dfc47a2bf3ee; newtest/element_lines.py"
     "earliest clean repo-side atomic implementation located in this audit; atomic/spectral tooling, not yet the 369 periodic-table theorem"
 
+firstBase369AgdaCarrier : ChronologyReceipt
+firstBase369AgdaCarrier =
+  chronologyReceipt
+    "Base369 ternary / hexadic / nonary algebra present at repository inception"
+    "2026-02-16T11:20:02Z"
+    exactTimestamp
+    formalTheoremOwner
+    "chboishabba/dashi_agda"
+    "init commit 65266f7edc1ec7bb52e59ee020209cc5cb0eecec; Base369.agda blob 8dc130c5af5a28580f729a57ea9e8ba610c0e9ad"
+    "earliest exact 369 substrate implementation located in dashi_agda: spin, 3/6/9 cyclic carriers, rotation-order and identity laws, and ternary associativity"
+
 firstLocatedProjectionPhysicsProgramme : ChronologyReceipt
 firstLocatedProjectionPhysicsProgramme =
   chronologyReceipt
@@ -75,6 +86,28 @@ firstLocatedAtomicClosureOwner =
     "chboishabba/dashi_agda"
     "commit 42e1d740141b0e9e1ca717ae5df79d6e31546c07"
     "earliest located repo-native formal atom/chemistry closure milestone in this audit; explicitly staged rather than a finished physical chemistry theorem"
+
+firstLeanBase369ProofSource : ChronologyReceipt
+firstLeanBase369ProofSource =
+  chronologyReceipt
+    "Lean Base369 mirror introduced as a proof source"
+    "2026-07-07T03:47:18Z"
+    exactTimestamp
+    formalTheoremOwner
+    "chboishabba/dashi_lean4"
+    "commit 55132524c2e132c0b86c17eeb60d7e39c3af08b6; Base369.lean added in that commit"
+    "independent proof-assistant transcription of the 3/6/9 substrate; commit diff adds the file from zero lines and labels it genuine, fully proved"
+
+leanBase369PathReorganization : ChronologyReceipt
+leanBase369PathReorganization =
+  chronologyReceipt
+    "Lean Base369 mirror moved under AgdaMirror"
+    "2026-08-12T01:33:28Z"
+    exactTimestamp
+    repositoryImplementation
+    "chboishabba/dashi_lean4"
+    "commit 72734285fd83387837e0025eb51a93b63629a0b9; Base369.lean -> AgdaMirror/Base369.lean"
+    "path/repository organization receipt only; not the first Lean implementation date"
 
 firstLocatedExplicitPeriodicRecoveryBoundary : ChronologyReceipt
 firstLocatedExplicitPeriodicRecoveryBoundary =
@@ -129,7 +162,7 @@ currentFormalismPR =
     currentPullRequest
     "chboishabba/dashi_agda"
     "draft PR #886"
-    "current composition, provenance, verification, and paper surface"
+    "current composition, provenance, verification, attribution, and paper surface"
 
 ------------------------------------------------------------------------
 -- Verification status is intentionally separate from mathematical status.
@@ -138,7 +171,7 @@ data VerificationStatus : Set where
   sourceInspected : VerificationStatus
   historicalRunReported : VerificationStatus
   compilerReceiptFromRepository : VerificationStatus
-  builtByLeanReceipt : VerificationStatus
+  proofTermsInspectedBuildNotRerun : VerificationStatus
   renderedThisWorkSession : VerificationStatus
   sourcePresentNotCompilerCheckedThisSession : VerificationStatus
   mathematicalInterfaceOnly : VerificationStatus
@@ -168,23 +201,23 @@ currentAgdaSourceVerification =
     "PR #886 atomic 369 Agda owners"
     sourcePresentNotCompilerCheckedThisSession
     "source committed on agent/atomic-periodic-table-369-formalism with focused validation root"
-    "the current execution environment did not provide an Agda executable; source presence is not recorded as a successful typecheck"
+    "the current execution environment did not provide an Agda executable and no PR workflow run was returned at the inspected head; source presence is not recorded as a successful typecheck"
 
 existingPeriodicBoundaryVerification : VerificationReceipt
 existingPeriodicBoundaryVerification =
   verificationReceipt
     "existing AtomicPeriodicTableRecoveryBoundary owner"
     compilerReceiptFromRepository
-    "landed in PR #101 together with a focused biology-recovery Agda check"
-    "this chronology receipt records repository evidence; it is not a fresh re-typecheck of that historical commit in this session"
+    "landed in PR #101 together with a focused biology-recovery Agda workflow definition"
+    "workflow definition/source presence is not silently upgraded into a run result; an exact historical successful workflow-run receipt remains separately checkable"
 
-leanAristotleVerification : VerificationReceipt
-leanAristotleVerification =
+leanBase369Verification : VerificationReceipt
+leanBase369Verification =
   verificationReceipt
-    "chboishabba/dashi_lean4 Aristotle closure tranche"
-    builtByLeanReceipt
-    "ARISTOTLE_SUMMARY.md records lake build success: 8030 jobs, no errors, no sorry/axiom/implemented_by introduced"
-    "located Lean content is YM/NS/spectral closure, not a direct atom/periodic-table formalization"
+    "chboishabba/dashi_lean4 Base369 proof source"
+    proofTermsInspectedBuildNotRerun
+    "commit 55132524c2e132c0b86c17eeb60d7e39c3af08b6 adds Base369.lean from zero lines; the source contains explicit theorem proofs by cases/rfl and the aggregate classifies Base369 as genuine, fully proved"
+    "this session inspected proof terms and commit provenance but did not independently execute lake build, so no fresh Lean build receipt is claimed"
 
 latexPaperVerification : VerificationReceipt
 latexPaperVerification =
@@ -192,7 +225,7 @@ latexPaperVerification =
     "AtomicPeriodicTable369Formalism TeX/PDF"
     renderedThisWorkSession
     "LaTeX source compiled to PDF and page renders were inspected before repository insertion"
-    "rendering validates the document artifact, not the physical truth of every mathematical interpretation"
+    "rendering validates the document artifact, not the proof-assistant status or physical truth of the mathematical interpretation"
 
 fullPhysicalRecoveryVerification : VerificationReceipt
 fullPhysicalRecoveryVerification =
@@ -233,11 +266,14 @@ record ChronologyVerificationDashboard : Set₁ where
     formalismIs : formalism ≡ G.CanonicalAtomicPeriodicTableStatement
     provenance : P.ProvenanceDashboard
     firstAtomicImplementation : ChronologyReceipt
+    first369Implementation : ChronologyReceipt
     firstFormalAtomicClosure : ChronologyReceipt
+    firstLean369ProofSource : ChronologyReceipt
     explicitPeriodicBoundary : ChronologyReceipt
     currentPR : ChronologyReceipt
     currentAgdaVerification : VerificationReceipt
     historicalRunVerification : VerificationReceipt
+    lean369Verification : VerificationReceipt
     paperVerification : VerificationReceipt
     discipline : VerificationDiscipline
 
@@ -248,11 +284,14 @@ canonicalChronologyVerificationDashboard =
     ; formalismIs = refl
     ; provenance = P.canonicalProvenanceDashboard
     ; firstAtomicImplementation = firstLocatedAtomicCode
+    ; first369Implementation = firstBase369AgdaCarrier
     ; firstFormalAtomicClosure = firstLocatedAtomicClosureOwner
+    ; firstLean369ProofSource = firstLeanBase369ProofSource
     ; explicitPeriodicBoundary = firstLocatedExplicitPeriodicRecoveryBoundary
     ; currentPR = currentFormalismPR
     ; currentAgdaVerification = currentAgdaSourceVerification
     ; historicalRunVerification = historicalPythonFillingVerification
+    ; lean369Verification = leanBase369Verification
     ; paperVerification = latexPaperVerification
     ; discipline = canonicalVerificationDiscipline
     }
