@@ -50,14 +50,10 @@ poamsPublicNTRSSurface = public-metadata-surface
 -- Public-MSFC peer metadata controls.
 --
 -- NTRS public citation records from the same centre visibly expose Marshall
--- EDAA identifiers in the public Report/Patent Number field, e.g.
---   20180001588 -> MSFC-E-DAA-TN51196
---   20180001994 -> MSFC-E-DAA-TN53283
---   20190033128 -> MSFC-E-DAA-TN73753
--- These peers establish that EDAA identifiers can be public NTRS metadata.
--- They do not prove that every MSFC document type, every historical release,
--- or POAMS specifically must expose one.  A same-document-type Technical
--- Memorandum comparator was not located in the present public search pass.
+-- EDAA identifiers in the public Report/Patent Number field.  The control set
+-- now includes same-document-type Technical Memoranda, removing the earlier
+-- comparator-class gap while retaining the no-interpolation/no-suppression
+-- firewalls for POAMS itself.
 ------------------------------------------------------------------------
 
 record PublicMSFCEDAAPeerControl : Set where
@@ -96,6 +92,38 @@ msfcPeer20190033128 = public-msfc-edaa-peer-control
   "https://ntrs.nasa.gov/citations/20190033128"
   true true
 
+msfcTMPeer20180008760 : PublicMSFCEDAAPeerControl
+msfcTMPeer20180008760 = public-msfc-edaa-peer-control
+  "NTRS 20180008760 / NASA/TM-2018-219998 / M-1479"
+  "Technical Memorandum (TM)"
+  "MSFC-E-DAA-TN64271"
+  "https://ntrs.nasa.gov/citations/20180008760"
+  true true
+
+msfcTMPeer20180005693 : PublicMSFCEDAAPeerControl
+msfcTMPeer20180005693 = public-msfc-edaa-peer-control
+  "NTRS 20180005693 / NASA/TM-2018-219958 / M-1462"
+  "Technical Memorandum (TM)"
+  "MSFC-E-DAA-TN59151"
+  "https://ntrs.nasa.gov/citations/20180005693"
+  true true
+
+msfcTMPeer20180002207 : PublicMSFCEDAAPeerControl
+msfcTMPeer20180002207 = public-msfc-edaa-peer-control
+  "NTRS 20180002207 / NASA/TM-2018-219882 / M-1458"
+  "Technical Memorandum (TM)"
+  "MSFC-E-DAA-TN52539"
+  "https://ntrs.nasa.gov/citations/20180002207"
+  true true
+
+msfcTMPeer20200001187 : PublicMSFCEDAAPeerControl
+msfcTMPeer20200001187 = public-msfc-edaa-peer-control
+  "NTRS 20200001187 / NASA/TM-2020-220471"
+  "Technical Memorandum (TM)"
+  "MSFC-E-DAA-TN77428"
+  "https://ntrs.nasa.gov/citations/20200001187"
+  true true
+
 record PublicMetadataOmissionComparison : Set where
   constructor public-metadata-omission-comparison
   field
@@ -111,8 +139,8 @@ open PublicMetadataOmissionComparison public
 
 canonicalPOAMSMetadataOmissionComparison : PublicMetadataOmissionComparison
 canonicalPOAMSMetadataOmissionComparison = public-metadata-omission-comparison
-  true false false true false false
-  "Public MSFC peers establish that EDAA numbers can be exposed in NTRS Report/Patent Number metadata, while POAMS NTRS 20205010911 currently exposes M-1531 and NASA-TM-20205010911 without an EDAA field. No same-document-type Technical Memorandum comparator was located in this pass, so the observation is manifestation-specific and cannot be promoted to a claim that POAMS lacked an EDAA or that its metadata was suppressed."
+  true false true true false false
+  "Multiple public MSFC Technical Memoranda expose MSFC-E-DAA-TN identifiers alongside NASA/TM and/or M-series report numbers, including NTRS 20180008760 (M-1479 / MSFC-E-DAA-TN64271), 20180005693 (M-1462 / MSFC-E-DAA-TN59151), 20180002207 (M-1458 / MSFC-E-DAA-TN52539), and 20200001187 (NASA/TM-2020-220471 / MSFC-E-DAA-TN77428). POAMS NTRS 20205010911 currently exposes M-1531 and NASA-TM-20205010911 without an EDAA field. This strengthens the observation that the missing public POAMS EDAA field is not merely explained by document type, but it still cannot be promoted to a claim that POAMS lacked an underlying approval record, that an identifier can be interpolated, or that metadata was suppressed."
 
 record PublicSearchBoundary : Set where
   constructor public-search-boundary
@@ -135,7 +163,7 @@ canonicalPOAMSPublicSearchBoundary : PublicSearchBoundary
 canonicalPOAMSPublicSearchBoundary = public-search-boundary
   true true true true true true
   false false false true
-  "NASA STI Information Desk / MSFC STI Compliance and Distribution Services: request release-authorization metadata keyed to NTRS 20205010911, M-1531, full title, R.H. Eskridge / M.A. Nelson / M.P. Schoenfeld, SAA8-1519855 and MSFC-RMB-QUANTUM-SAA8-1519855-1; seek exact EDAA/NF-1676B identifier, approval/routing dates and attached manuscript/version"
+  "NASA STI Information Desk / MSFC STI Compliance and Distribution Services: request release-authorization metadata keyed to NTRS 20205010911, M-1531, full title, R.H. Eskridge / M.A. Nelson / M.P. Schoenfeld, SAA8-1519855 and MSFC-RMB-QUANTUM-SAA8-1519855-1; seek exact NF-1676/STRIVES approval identity or migrated EDAA lineage, approval/routing dates and attached manuscript/version"
 
 record PublicMetadataExhaustionFirewall : Set where
   constructor public-metadata-exhaustion-firewall
