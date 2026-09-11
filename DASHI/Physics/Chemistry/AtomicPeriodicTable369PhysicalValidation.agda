@@ -6,15 +6,16 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369Validation as Structural
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ArchiveHartreeRadialIdentityDefectExact as Defect
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369RadialIdentityRepairExecutionExact as Repair
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369HydrogenNISTComparisonExact as HN
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369HydrogenReducedMassExact as HR
 
 ------------------------------------------------------------------------
 -- Focused physical validation root.
 --
 -- This composes the structural periodic-table validation root with the exact
--- archive Hartree defect, the executed n-sensitive radial repair receipt, and
--- the first external NIST reference-data diagnostic. Keeping them in one cone
--- prevents later numerical evidence from silently rewriting earlier source or
--- implementation state.
+-- archive Hartree defect, the executed n-sensitive radial repair receipt, the
+-- first external NIST reference-data diagnostic, and the leading finite-proton
+-- reduced-mass correction. Keeping them in one cone prevents later numerical
+-- evidence from silently rewriting earlier source or implementation state.
 ------------------------------------------------------------------------
 
 archiveDefectRegression :
@@ -109,6 +110,38 @@ hydrogenNISTNonPromotionRegression :
   ≡ false
 hydrogenNISTNonPromotionRegression =
   refl , (refl , (refl , (refl , refl)))
+
+hydrogenReducedMassExecutionRegression :
+  HR.ReducedMassExecutionReceipt.residualMagnitudeImprovesOverInfiniteMass
+    HR.canonicalReducedMassExecutionReceipt
+  ≡ true
+  ×
+  HR.ReducedMassExecutionReceipt.executionPaid
+    HR.canonicalReducedMassExecutionReceipt
+  ≡ true
+  ×
+  HR.HydrogenCorrectionBudget.finiteProtonReducedMassPaid
+    HR.canonicalHydrogenCorrectionBudget
+  ≡ true
+hydrogenReducedMassExecutionRegression = refl , (refl , refl)
+
+hydrogenCorrectionBudgetRegression :
+  HR.HydrogenCorrectionBudget.relativisticCorrectionPaid
+    HR.canonicalHydrogenCorrectionBudget
+  ≡ false
+  ×
+  HR.HydrogenCorrectionBudget.radiativeQEDPaid
+    HR.canonicalHydrogenCorrectionBudget
+  ≡ false
+  ×
+  HR.HydrogenCorrectionBudget.nistAgreementWithinQuotedUncertaintyPaid
+    HR.canonicalHydrogenCorrectionBudget
+  ≡ false
+  ×
+  HR.HydrogenCorrectionBudget.manyElectronGeneralityPaid
+    HR.canonicalHydrogenCorrectionBudget
+  ≡ false
+hydrogenCorrectionBudgetRegression = refl , (refl , (refl , refl))
 
 -- The Structural import is intentionally retained even though no name is used
 -- below: importing the module is what keeps the structural validation root in
