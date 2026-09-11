@@ -119,6 +119,49 @@ protonatedValineMaiwaldConflict = manifestation-attribution-conflict
   "publisher/Crossref production metadata or correction history explaining why ACS rendered/PubMed mapping assigns Maiwald to JILA while the manuscript and ACS SI assign him to JPL"
 
 ------------------------------------------------------------------------
+-- Same-name DOI/dataset false-positive control.
+--
+-- A generic dataset search returns a 2023 Mendeley Data object entitled
+-- `Transcriptome atlas of the honeybee across development stages`, DOI
+-- 10.17632/7pyv3ccrzt.1, whose contributor list contains a Frank Maiwald.
+-- Its domain/coauthors are insect physiology/toxicology and do not match the
+-- independently paid JPL Frank W. Maiwald identity.  The object is therefore a
+-- useful negative control for automated DOI/QID snowballing: same display name,
+-- year proximity and a real DOI cannot manufacture person identity.
+------------------------------------------------------------------------
+
+record SameNameDatasetCollision : Set where
+  constructor same-name-dataset-collision
+  field
+    candidateName : String
+    candidateObject : String
+    candidateDOI : String
+    candidateSourceLink : String
+    candidateDomain : String
+    targetIdentity : String
+    targetIdentityCarrier : String
+    exactPersonIdentityPaid : Bool
+    mayAttachCandidateDOIToTarget : Bool
+    mayTreatDatasetAsJPLActionSpectroscopyData : Bool
+    usefulAsNegativeControl : Bool
+
+open SameNameDatasetCollision public
+
+honeybeeFrankMaiwaldCollision : SameNameDatasetCollision
+honeybeeFrankMaiwaldCollision = same-name-dataset-collision
+  "Frank Maiwald"
+  "Transcriptome atlas of the honeybee across development stages"
+  "10.17632/7pyv3ccrzt.1"
+  "https://data.mendeley.com/datasets/7pyv3ccrzt"
+  "insect physiology / insect toxicology / honeybee transcriptomics"
+  "Frank W. Maiwald, NASA Jet Propulsion Laboratory / Caltech"
+  "JPL SURP SP23012p; JPL Principal designation; DOI 10.1021/acs.analchem.4c01023 and other JPL publication carriers"
+  false
+  false
+  false
+  true
+
+------------------------------------------------------------------------
 -- Snowball coordinates: identity/search only, never authority.
 ------------------------------------------------------------------------
 
@@ -156,10 +199,12 @@ record ManifestationAttributionBoundary : Set where
     explicitSourceTextDeletesConflictingIndexHistory : Bool
     affiliationImpliesApparatusOwnership : Bool
     affiliationImpliesDataCustody : Bool
+    sameDisplayNamePlusDoiPaysPersonIdentity : Bool
+    crossDomainDatasetMayBeInheritedByName : Bool
     conflictShouldRemainNamed : Bool
 
 open ManifestationAttributionBoundary public
 
 canonicalManifestationAttributionBoundary : ManifestationAttributionBoundary
 canonicalManifestationAttributionBoundary = manifestation-attribution-boundary
-  false false false false false true
+  false false false false false false false true
