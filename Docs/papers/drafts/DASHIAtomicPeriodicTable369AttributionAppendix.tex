@@ -26,9 +26,18 @@ Date & Object & DOI / QID & Source role & Direct locator / significance\\
 2026-08-12 & Lean path reorganization & DOI/QID unassigned & repository organization receipt & commit \texttt{72734285fd83387837e0025eb51a93b63629a0b9} moves the already-existing mirror under \texttt{AgdaMirror/Base369.lean}; not the first Lean proof date.\\
 2026-09-11 & present atomic manuscript / PR \#886 & atom Q9121; periodic table Q10693; Pauli principle Q131594 & primary repository manuscript & same-object DOI/arXiv/Zenodo receipt not yet located; this is therefore a manuscript/implementation receipt, not an external-publication claim.\\
 1925 & W. Pauli, \emph{Ueber den Zusammenhang des Abschlusses der Elektronengruppen im Atom mit der Komplexstruktur der Spektren} & DOI \texttt{10.1007/BF02980631}; Pauli exclusion principle Q131594 & external primary physics source & historical primary anchor for hard fermionic exclusion; it does not identify the DASHI MDL cost with a physical Hamiltonian.\\
-current & atom concept & Q9121 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q9121}; Dewey cue 539.7.\\
-current & periodic table concept & Q10693 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q10693}; Dewey 546, which includes periodic law/table as an inorganic-chemistry classification.\\
-current & Pauli exclusion principle & Q131594 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q131594}; Dewey cue 539.7.\\
+1928 & D. R. Hartree, \emph{The Wave Mechanics of an Atom with a Non-Coulomb Central Field. Part II} & DOI \texttt{10.1017/S0305004100011920} & external primary method source & self-consistent atomic-field method applied to atoms; acquired method authority for the scale/spectrum snowball, not payment of the DASHI same-object operator bridge.\\
+1928 & J. C. Slater, \emph{The Self Consistent Field and the Structure of Atoms} & DOI \texttt{10.1103/PhysRev.32.339} & external primary method source & analysis of Hartree self-consistent fields against the Schr\"odinger equation; method/spectral authority only.\\
+2017 & Ibrahim, Danforth, Dodds, \emph{Connecting every bit of knowledge} & DOI \texttt{10.1016/j.jocs.2016.12.001}; arXiv:1605.00309 & primary search-policy source & donor for deterministic first-link/traversal-funnel investigation; it does not turn first-link centrality into proof authority.\\
+current & atom concept & Q9121 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q9121}; Dewey 539.7.\\
+current & chemical element & Q11344 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q11344}; Dewey 546; IUPAC Gold Book C01022.\\
+current & periodic table concept & Q10693 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q10693}; Dewey 546.8.\\
+current & atomic orbital & Q53860 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q53860}; Dewey 541.28; IUPAC Gold Book A00500.\\
+current & quantum mechanics & Q944 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q944}; Dewey 530.12.\\
+current & carbon & Q623 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q623}; Dewey 547; IUPAC Gold Book C00821.\\
+current & ionization energy & Q483769 & semantic/quantity coordinate only & \url{https://www.wikidata.org/wiki/Q483769}; IUPAC Gold Book I03199; IEV 113-06-39; Dewey unresolved in the inspected item.\\
+current & Hartree--Fock method & Q7879841 & semantic/method coordinate only & \url{https://www.wikidata.org/wiki/Q7879841}; Dewey unresolved in the inspected item.\\
+current & Pauli exclusion principle & Q131594 & semantic coordinate only & \url{https://www.wikidata.org/wiki/Q131594}; 539.7 retained only as an atom/exclusion topic coordinate.\\
 \bottomrule
 \end{longtable}
 
@@ -40,14 +49,36 @@ repository title, so the addition boundary is exact at repository level.  This
 pays public-source priority/provenance; it is not called peer-reviewed publication
 and does not convert the historical phrase ``we did'' into a kernel-checked theorem.
 
-\paragraph{Dewey cues.}
-The manuscript uses 539.7 as the atomic/nuclear-physics catalogue coordinate and
-546 as the inorganic-chemistry / periodic-law / periodic-table coordinate. These
-are discovery/index coordinates only; they carry no theorem or empirical
-promotion authority.
+\paragraph{Ibrahim/Dewey traversal.}
+The repo-native traversal policy follows the Ibrahim first-link discipline while
+preferring typed DASHI formulation/dependency edges over lexical adjacency.  The
+most useful external catalogue walk located in this tranche is
+\[
+\text{periodic table }(Q10693,546.8)
+\to \text{chemical element }(Q11344,546)
+\to \text{atom }(Q9121,539.7)
+\to \text{atomic orbital }(Q53860,541.28)
+\to \text{quantum mechanics }(Q944,530.12).
+\]
+Carbon $(Q623,547)$ is retained as a downstream chemistry branch. Ionization
+energy $(Q483769,\mathrm{IUPAC}\ I03199)$ and Hartree--Fock $(Q7879841)$ are the
+next scale/method coordinates, but their Dewey fields remain unresolved in the
+inspected semantic items. This walk is a search funnel, not a theorem implication:
+Dewey adjacency, QID identity and first-link centrality carry no proof authority.
+
+\paragraph{Archive executable snowball.}
+Inspection of the canonical \emph{DASHI Atom} archive substantially narrows the
+historical-artifact leaf. The archive contains code-shaped reconstruction of the
+orbital enumerator/filler, the simple cost $n+\alpha\ell$, the degeneracy
+$2(2\ell+1)$, reported closures $Z=2,10,18$, later reported/rerun
+$\alpha$-sensitivity experiments around closed/open shells, and toy ionization
+work. One early code block explicitly says it is reconstructing the earlier test,
+so these retained objects do \emph{not} identify the original standalone script,
+exact original parameter schedule or artifact hash. The residual is now artifact
+identity/custody, not absence of an executable idea.
 
 \paragraph{Mechanical-status boundary.}
-The repository now distinguishes five states explicitly:
+The repository distinguishes five states explicitly:
 \[
 \text{mathematical specification}
 \neq \text{proof source}
@@ -55,22 +86,18 @@ The repository now distinguishes five states explicitly:
 \neq \text{executed regression}
 \neq \text{empirical recovery}.
 \]
-At the present PR head the new Agda source is authored and wired to a focused
-validation root, but no PR workflow run was returned and the current execution
-environment has no Agda binary. The historical MDL filling run is reported in the
-attached archive but its original executable/script/hash has not yet been
-located. The Lean \texttt{Base369} file contains concrete proof terms introduced
-by commit \texttt{55132524c2e132c0b86c17eeb60d7e39c3af08b6}, but this audit has
-not independently rebuilt the Lean project.
+The new Agda source is wired to a focused validation root, but source presence is
+not recorded as a successful typecheck without an exact-head checker receipt. The
+Lean \texttt{Base369} source contains concrete proof terms but this audit has not
+independently rebuilt the project.
 
 \paragraph{Highest-alpha snowball frontier.}
-Public-source priority for the periodic-table programme is now paid at least to
-3 January 2026, while the exact 369 Agda substrate is paid to repository inception
-on 16 February 2026 and the Lean transcription to 7 July 2026. The next
-conclusion-paying acquisitions are therefore: (i) the original historical
-MDL/exclusion filling script plus exact parameter schedule and artifact hash;
-(ii) any source object predating the 3 January public README if earlier priority
-matters; (iii) any same-object DOI/arXiv/Zenodo/public-manuscript receipt for the
-atomic constructor; and (iv) the operator-to-spectrum/scale/ionisation bridge,
-followed by nuclear-stability and bonding validation. Acquisition may occur in
-any order; payment may not.
+The Ibrahim/Dewey walk changes the next move. External method provenance for the
+self-consistent-field rung is now paid by Hartree and Slater primary sources; the
+scientific leaf is therefore the \emph{same-object DASHI} operator-to-spectrum /
+calibrated-ionization bridge, not another generic SCF citation. On the historical
+side, the archive pays embedded reconstruction and run narrative, leaving the
+original standalone script/execution identity/hash unpaid. Any same-object
+pre-PR DOI/arXiv/Zenodo/public-manuscript receipt remains separately valuable.
+Acquisition may occur laterally and out of dependency order; conclusion payment
+may not.
