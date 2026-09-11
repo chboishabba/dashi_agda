@@ -19,6 +19,20 @@ Council’s Koala Conservation Plan describes the White Rock–Spring Mountain c
 
 Queensland’s SEQ koala mapping program defines Koala Priority Areas as large connected areas with the highest likelihood of sustaining SEQ koala populations in the long term. That is useful official spatial methodology, but it is not itself proof that the Springview parcel satisfies the NCA s 13 definition.
 
+## Important existing local monitoring that should be obtained before commissioning wholly new surveys
+
+A targeted Snowball found that substantial local Koala monitoring already exists.
+
+- **Queensland Herbarium / Ipswich City Council, 2016:** *Ipswich City Council Biodiversity Monitoring Project — Final Report*. White Rock–Spring Mountain was directly surveyed. The report records Koalas at eight locations across Council reserves, including one White Rock–Spring Mountain location, and establishes repeatable monitoring sites and methods.
+- **Bower Ecology, 2021:** *White Rock Koala Monitoring Report* within EPBC 2014/7388 compliance reporting. It records historical White Rock–Spring Mountain Council scat detections, a 2016 Koala sighting/scats, a 2019 baseline and later monitoring. This is an adjacent project/site, not Springview itself.
+- **Biolink / Ipswich City Council, 2020:** baseline Koala work across Ipswich reserves, including White Rock–Spring Mountain, using 63 SAT/Rapid-SAT sites and historical records to assess occupancy and metapopulation configuration.
+- **Biolink / Ipswich City Council, 2025:** a third monitoring round after 2020 and 2023, with **83 permanent sites plus 10 privately owned conservation properties**, integrating field surveys and sighting records for population-change analysis.
+- **Ipswich Koala Protection Society:** publicly states that it maintains extensive local Koala rescue records, statistics and habitat/population mapping.
+
+The highest-value immediate acquisition is therefore **not necessarily a brand-new field survey**. First obtain the underlying 2020, 2023 and 2025 Ipswich/Biolink reports and site-level results, particularly for White Rock–Spring Mountain and the eastern/north-eastern interface toward Springfield, plus an appropriate spatial/temporal extract or expert summary from IKPS.
+
+A project-summary webpage proves that a monitoring program exists and describes its scope. It does **not** prove the unseen site-level results. A White Rock detection does **not** prove Springview occupancy. Those joins still need to be made explicitly.
+
 ## What the independent literature adds
 
 The selected literature does not prove the Springview case. It identifies the variables that a defensible local analysis should address.
@@ -37,13 +51,15 @@ Please address these separately and state uncertainty where the data do not allo
 ### A. Identify the relevant population/community
 
 - What is the biologically defensible Koala population or population network relevant to Springview/Woogaroo/Opossum Creek?
-- What evidence supports that boundary: telemetry, genetics, repeated observations, density, rescue/clinical records, movement barriers, roads, waterways or other monitoring?
+- What do the existing Ipswich 2020/2023/2025 longitudinal monitoring data show about occupancy, activity and change in White Rock–Spring Mountain and the Springfield-facing parts of that landscape?
+- What evidence supports the population boundary: telemetry, genetics, repeated observations, density, rescue/clinical records, movement barriers, roads, waterways or other monitoring?
 - Is the development boundary biologically arbitrary relative to that population?
 
 ### B. Test functional connectivity
 
 - Is the Woogaroo/Opossum/Springview landscape merely structurally connected on a map, or is there evidence that Koalas actually move through or depend on it?
 - Does the Springview habitat function as a bottleneck, stepping-stone, refuge, dispersal route or ordinary replaceable patch?
+- Can the longitudinal Ipswich monitoring, White Rock detections, rescue/mortality data or other records establish a realised connection across the eastern/north-eastern White Rock–Spring Mountain / Springfield interface?
 - How do roads, existing development and retained creek/open-space strips affect realised movement and gene flow?
 
 ### C. Run the with-site / without-site counterfactual
@@ -70,6 +86,7 @@ Please explain whether that conclusion remains ecologically persuasive in light 
 - the same report’s greater-than-500-ha connectivity finding;
 - Council’s later description of the Woogaroo/Opossum area as important for securing urban Koala populations;
 - the Flinders–Karawatha corridor context;
+- the existing 2016–2025 Ipswich/White Rock monitoring lineage;
 - subsequent development/fragmentation pressure;
 - current observations or monitoring data, if available.
 
@@ -89,15 +106,16 @@ Please identify:
 
 ## What would most improve the opinion
 
-The highest-value additional evidence would be:
+The highest-value additional evidence is now ordered as follows:
 
-1. current local telemetry, genetics, density or repeated-monitoring data;
-2. current habitat condition and recent clearing/development change;
-3. local road-strike/rescue/clinical records;
-4. evidence of use of Opossum/Woogaroo creek corridors;
-5. performance evidence for retained strips/crossings/fauna controls, not just their existence;
-6. the substantive 2026 EPBC Preliminary Documentation and response to public comments;
-7. current 9281 Condition 6(a), prestart and commencement records.
+1. the actual Ipswich/Biolink **2020, 2023 and 2025 Koala monitoring reports/data**, including site IDs/coordinates and White Rock–Spring Mountain results;
+2. a locality-appropriate **IKPS rescue/mortality/mapping extract or expert summary** for Springfield/Woogaroo/Opossum/White Rock;
+3. current local telemetry, genetics or density data if these are not already present in the monitoring corpus;
+4. current habitat condition and recent clearing/development change;
+5. evidence of use of Opossum/Woogaroo creek corridors;
+6. performance evidence for retained strips/crossings/fauna controls, not just their existence;
+7. the substantive 2026 EPBC Preliminary Documentation and response to public comments;
+8. current 9281 Condition 6(a), prestart and commencement records.
 
 ## Source identity / navigation coordinates
 
