@@ -108,8 +108,10 @@ The current case has several distinct supports:
 4. The project consultant itself reached a serious habitat-impact conclusion under the federal framework.
 5. Independent science supports fragmentation, connectivity loss, movement risk and population subdivision as real Koala harm mechanisms.
 6. Ipswich City Council's Koala Conservation Plan records **high historical Koala activity at Ric Nattrass Environmental Park on Woogaroo Creek** (score 8, activity level 3 under that plan's scheme), and Council separately describes that park as providing species connectivity from White Rock–Spring Mountain to the Brisbane River corridor.
+7. Queensland Government WetlandInfo/WildNet reports **518 filtered Koala sighting records** across the WQ1435 area covering Sandy, Six Mile, Wolston, Woogaroo and Goodna Creeks, with the latest included Koala sighting dated **19 June 2025**. WetlandInfo excludes records classed as erroneous or duplicate, but its area report can include sightings up to 1 km outside the mapped area and accepts location precision up to 10 km. This is strong independent evidence that Koalas are repeatedly recorded in the wider creek system, **not** a count of 518 individual Koalas and not proof of an occurrence on the Springview parcel.
+8. An adjacent Greater Springfield project, **First Nine, Brookwater (EPBC 2016/7676)**, has repeat Koala SAT/scat monitoring. Its 2021 compliance report records Koala usage across all offset-area land parcels and a high-use survey location next to a rehabilitated area on the banks of Woogaroo Creek. This is useful nearby longitudinal evidence but is a different development action and the monitoring report was also prepared by Saunders Havill Group.
 
-The Council records are useful independent local context, but they do **not** prove current Springview occupancy or realised movement through the development site.
+The Council, WildNet and adjacent-project records increase the value of acquiring the underlying local monitoring and sighting data. They do **not** prove current Springview occupancy or the final s 102 effect question.
 
 The missing bridge is still a current, independent ecological opinion applying the **Queensland** test to this project:
 
@@ -169,16 +171,18 @@ And even if they are the same cluster, that would still not prove that Springvie
 
 ### Existing local monitoring should be obtained before commissioning duplicate work
 
-Council's Koala Conservation Plan and Biolink's public project descriptions establish a substantial local monitoring lineage:
+Council's Koala Conservation Plan, WildNet and Biolink's public project descriptions establish a substantial local monitoring/evidence lineage:
 
 - a 2020 Ipswich baseline survey across Mount Grandchester, Flinders–Goolman and White Rock–Spring Mountain, using 63 SAT/Rapid-SAT sites;
 - a repeat 2023 round;
-- a 2025 third round using 83 permanent Council-estate sites plus 10 private conservation-agreement properties; and
+- a 2025 third round using 83 permanent Council-estate sites plus 10 private conservation-agreement properties;
+- Queensland WildNet/WetlandInfo reporting 518 filtered Koala sighting records in the broader WQ1435 creek-plan area including Woogaroo Creek, with an included record as recent as June 2025;
+- adjacent First Nine/Brookwater repeat Koala monitoring with recorded use close to rehabilitated Woogaroo Creek habitat; and
 - recurring Council monitoring/reporting expectations, including Springfield-border fauna-management work.
 
-These sources establish that relevant monitoring exists. They do not tell us the unseen results.
+These sources establish that substantial relevant local data exist. They do not tell us which WildNet records or unseen monitoring sites belong to the exact Springview/Opossum-Woogaroo population.
 
-The next acquisition should therefore be the underlying 2020, 2023 and 2025 reports/data, especially any White Rock–Spring Mountain, Woogaroo/Opossum, genetic, occupancy, activity or population-change results.
+The next acquisition should therefore be the underlying WildNet sighting metadata and the 2020, 2023 and 2025 Ipswich/Biolink reports/data, especially any White Rock–Spring Mountain, Woogaroo/Opossum, genetic, occupancy, activity or population-change results.
 
 Only if those existing records cannot resolve population identity should targeted new non-invasive genetics become the next step.
 
@@ -190,11 +194,14 @@ Strongly supported:
 - Koala occurrence evidence;
 - >500 ha connected-landscape evidence;
 - independent Council local activity/corridor evidence;
+- independent Queensland-government catchment-scale Koala sighting evidence;
+- adjacent Brookwater/Woogaroo Creek repeat Koala-use monitoring;
 - regional population-genetic differentiation; and
 - independent science showing that functional connectivity and gene flow matter.
 
 Still open:
 
+- the exact spatial distribution and source projects behind the relevant WildNet records;
 - whether SEQ-03 and SEQ West are the same cluster label;
 - the exact local/subregional population to which Springview/Woogaroo Koalas belong;
 - realised functional connectivity through the relevant habitat; and
@@ -248,6 +255,8 @@ Counsel should identify the exact planning/vegetation/Koala exemptions and trans
 
 For each final offset, obtain exact parcel identity, existing protection/prior obligations, current vegetation condition and maturity, baseline risk of loss, restoration lag and functional equivalence to the habitat being lost.
 
+The First Nine/Brookwater monitoring provides a useful nearby example of rehabilitation being followed by Koala-use monitoring, but it does not establish the maturation rate or functional equivalence of any proposed 2019/8575 offset.
+
 A remote offset is not automatically inadequate, and a larger number of hectares is not automatically adequate.
 
 ---
@@ -265,16 +274,25 @@ The project ecology separately identifies Woogaroo and Opossum Creeks as potenti
 
 ---
 
-## 8. Highest-priority actions now
+## 8. Adjacent compliance history — useful only as an acquisition lead
+
+The Commonwealth's 2025 audit summary for **First Nine, Brookwater (EPBC 2016/7676)** reports seven conditions compliant and two conditions non-compliant. The public summary currently in our source set does not identify the two conditions.
+
+This does **not** prove any non-compliance by EPBC 2019/8575, `9281/2024/OW`, Stockland, Cherish Enterprises or the present project. It is relevant only because it shows that a condition-level federal audit exists for a nearby Greater Springfield approval and may contain useful information about monitoring, record-keeping and compliance practice. Obtain the full finding before drawing any further conclusion.
+
+---
+
+## 9. Highest-priority actions now
 
 1. **Obtain the substantive 2026 federal Preliminary Documentation and response to the 1,786 comments.**
 2. **Obtain one independent current ecological opinion on the s 102 likely-significant-detrimental-effect question.**
 3. **Obtain Condition 6(a), prestart and commencement records for 9281/2024/OW.**
-4. **Request the existing Ipswich/Biolink 2020, 2023 and 2025 Koala monitoring outputs and Springfield fauna-management monitoring before commissioning duplicate fieldwork.**
-5. **Resolve the SEQ-03 / SEQ-West terminology if possible, then use local monitoring/genetic evidence to identify the population actually relevant to Springview/Woogaroo.**
-6. **If population identity can be resolved, assess the without-site persistence/connectivity counterfactual against the s 13 definition.**
-7. **Ask counsel which operative route should carry that critical-habitat evidence: s 102, a conservation plan/regulation, s 49, or another available mechanism.**
-8. **Continue the offset/additionality and exact exemption audits.**
-9. **Keep s 43B secondary unless an actual reliance record appears.**
+4. **Use the WildNet sighting-level export to isolate Koala records relevant to Woogaroo/Opossum/White Rock–Spring Mountain, preserving dates, coordinate precision, source project and record provenance.**
+5. **Request the existing Ipswich/Biolink 2020, 2023 and 2025 Koala monitoring outputs and Springfield fauna-management monitoring before commissioning duplicate fieldwork.**
+6. **Resolve the SEQ-03 / SEQ-West terminology if possible, then use local monitoring/genetic evidence to identify the population actually relevant to Springview/Woogaroo.**
+7. **If population identity can be resolved, assess the without-site persistence/connectivity counterfactual against the s 13 definition.**
+8. **Ask counsel which operative route should carry that critical-habitat evidence: s 102, a conservation plan/regulation, s 49, or another available mechanism.**
+9. **Continue the offset/additionality and exact exemption audits.**
+10. **Keep s 43B secondary unless an actual reliance record appears.**
 
 GIS, LiDAR and tree/canopy mapping remain useful supporting evidence, especially for mature-existing versus planted/regrowth habitat and spatial quantification, but they are not prerequisites to the present s 102 or critical-habitat questions.
