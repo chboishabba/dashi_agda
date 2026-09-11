@@ -18,6 +18,14 @@ grep -q 'fangDaining' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact
 grep -q 'yanHong' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
 grep -q 'ninthNamedCaseDoesNotCreateTenth' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
 
+grep -q 'ActiveMechanicalMetamaterialScience' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
+grep -q 'phaseTransition' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
+grep -q 'metamaterialMeansExtraterrestrialMaterial' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
+
+grep -q 'warSkullIIReceipt' DASHI/GameTheory/FengYangheMilitaryAIGameStatisticsBidiExact.agda
+grep -q 'bayesianClassificationReceipt' DASHI/GameTheory/FengYangheMilitaryAIGameStatisticsBidiExact.agda
+grep -q 'noisyLabelClassificationReceipt' DASHI/GameTheory/FengYangheMilitaryAIGameStatisticsBidiExact.agda
+
 grep -q 'mondaloyToMetamaterialBridgeUnpaid' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'zeroPointSuppressionIsNotVacuumThrust' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'houseInquiryDoesNotPayCommonCause' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
@@ -28,11 +36,13 @@ grep -q 'existingParetoBoundary' DASHI/Culture/MissingDeceasedGameTheoryParetoPr
 grep -q 'existingProofSearchParetoBoundary' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
 grep -q 'gamePayoffDoesNotBecomeEvidence' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
 
-grep -q 'Chinese strategic scientist acquisition' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoExact.agda
-grep -q 'UAP/adversarial discriminator' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoExact.agda
+grep -q 'Chinese strategic scientist acquisition' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'UAP/adversarial discriminator' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 
 grep -q 'MissingDeceasedTernaryAdversarialObserverExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'ChineseStrategicScientistRosterSnowballExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'FangDainingActiveMechanicalMetamaterialBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'FengYangheMilitaryAIGameStatisticsBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 
 echo 'missing/deceased UAP Chinese strategic static check: ok'
