@@ -203,6 +203,7 @@ slrGlobalRoadmap =
   slrRoadmapCoordinate "claim-local fragment projection" complete slrRuntimeOwner "validated: 5 fragments / 4 claim-local / 1 intermediate; whole-claim extent=false" ∷
   slrRoadmapCoordinate "claim-local fragment residual inheritance" complete slrRuntimeOwner "validated: 10 obligations; intermediate fragment inherits none" ∷
   slrRoadmapCoordinate "fragment source/attribution evidence contraction" complete slrRuntimeOwner "validated: attribution_source_paid=4; claim truth and whole extent remain false" ∷
+  slrRoadmapCoordinate "fragment consumer-obligation payment + review recomputation" implementedAwaitingRuntime slrRuntimeOwner "slr-fragment-evidence-contraction-v2 + derived C029 gates + generic WorldConstraintFibre/review rerun; current receipts intentionally non-paying" ∷
   slrRoadmapCoordinate "whole-claim span completion" partial slrRuntimeOwner "local fragments do not pay full canonical claim extents" ∷
   slrRoadmapCoordinate "GWB CandidateWorldModel corpus projection" complete slrRuntimeOwner "41,134 claims / 41,124 relations / provenance=10 / normalization_drift=false" ∷
   slrRoadmapCoordinate "reviewed Wikimedia-first world enrichment" complete dashiOwner "10 reviewed seeds -> 51 QID nodes / 850 property edges / 162 parent / 688 surrounding-related / post-follow parity" ∷
