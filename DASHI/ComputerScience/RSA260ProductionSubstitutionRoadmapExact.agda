@@ -12,18 +12,8 @@ import DASHI.ComputerScience.RSA260BidiCandidateExperimentExact as CandidateExpe
 import DASHI.ComputerScience.RSA260BidiCandidateBWCShadowExact as CandidateBWC
 import DASHI.ComputerScience.RSA260BidiCandidateGeneratorKernelExact as CandidateFullLA
 import DASHI.ComputerScience.RSA260BidiCandidateProjection256Exact as CandidateProjection256
-
-------------------------------------------------------------------------
--- RSA-260 PRODUCTION-SUBSTITUTION ROADMAP
---
--- The historical identity route remains unpaid at the byte level.  In
--- parallel, the bidi-derived carrier fibre now has a runnable implicit member
--- whose executable shadow has passed carrier, held-out, left-kernel, prepared
--- SpMV/Krylov/projection, shared-generator, kernel-recovery and width-256
--- transport/projection consumers.
---
--- Candidate adequacy for those declared consumers is not historical identity.
-------------------------------------------------------------------------
+import DASHI.ComputerScience.RSA260BidiCandidateRobustnessExact as CandidateRobustness
+import DASHI.ComputerScience.RSA260BidiPreparationFibreSearchExact as PreparationSearch
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -73,10 +63,6 @@ currentProductionArtifactAcquisitionState : ProductionArtifactAcquisitionState
 currentProductionArtifactAcquisitionState = production-artifact-acquisition-state
   false false false false false false false true false
 
-------------------------------------------------------------------------
--- Prior/admission/bidi/experiment boundaries retained rather than collapsed.
-------------------------------------------------------------------------
-
 syntheticLABoundary : SyntheticLA.RSA260KrylovKernelRecoveryRoadmapBoundary
 syntheticLABoundary = SyntheticLA.currentRSA260KrylovKernelRecoveryRoadmapBoundary
 
@@ -95,33 +81,23 @@ bidiDerivedCarrier = BidiCarrier.currentBidiDerivedLACarrierFibre
 candidateExperimentBoundary : CandidateExperiment.CandidateConsumerSupportBoundary
 candidateExperimentBoundary = CandidateExperiment.canonicalCandidateConsumerSupportBoundary
 
-candidateExperimentReceipt : CandidateExperiment.CandidateExperimentExecutionReceipt
-candidateExperimentReceipt = CandidateExperiment.currentCandidateExperimentExecutionReceipt
-
 candidateBWCShadowBoundary : CandidateBWC.PreparedShadowConsumerBoundary
 candidateBWCShadowBoundary = CandidateBWC.canonicalPreparedShadowConsumerBoundary
-
-candidateBWCShadowReceipt : CandidateBWC.BWCShadowExecutionReceipt
-candidateBWCShadowReceipt = CandidateBWC.currentBWCShadowExecutionReceipt
 
 candidateFullLABoundary : CandidateFullLA.CandidateFullLAConsumerBoundary
 candidateFullLABoundary = CandidateFullLA.canonicalCandidateFullLAConsumerBoundary
 
-candidateGeneratorReceipt : CandidateFullLA.CandidateGeneratorExecutionReceipt
-candidateGeneratorReceipt = CandidateFullLA.currentCandidateGeneratorExecutionReceipt
-
-candidateKernelReceipt : CandidateFullLA.CandidateKernelExecutionReceipt
-candidateKernelReceipt = CandidateFullLA.currentCandidateKernelExecutionReceipt
-
 candidateProjection256Boundary : CandidateProjection256.Projection256ConsumerBoundary
 candidateProjection256Boundary = CandidateProjection256.canonicalProjection256ConsumerBoundary
 
-candidateProjection256Receipt : CandidateProjection256.Projection256ExecutionReceipt
-candidateProjection256Receipt = CandidateProjection256.currentProjection256ExecutionReceipt
+candidateRobustnessBoundary : CandidateRobustness.CandidateRobustnessBoundary
+candidateRobustnessBoundary = CandidateRobustness.canonicalCandidateRobustnessBoundary
 
-------------------------------------------------------------------------
--- Ordered residual routers.
-------------------------------------------------------------------------
+preparationSearchBoundary : PreparationSearch.PreparationFibreInterpretationBoundary
+preparationSearchBoundary = PreparationSearch.canonicalPreparationFibreInterpretationBoundary
+
+preparationSearchReceipt : PreparationSearch.PreparationSearchReceipt
+preparationSearchReceipt = PreparationSearch.currentPreparationSearchReceipt
 
 data ProductionResidual : Set where
   acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
@@ -136,14 +112,15 @@ firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectMemberOfDerivedLACarrierFibre
 
 data CandidateExperimentResidual : Set where
-  compareIndependentProjectionSeeds : CandidateExperimentResidual
+  exactByteExecutePreparationSearch : CandidateExperimentResidual
+  crossValidatePreparationFrontierAcrossSeeds : CandidateExperimentResidual
+  testPreparationFrontierAtWidth256 : CandidateExperimentResidual
   scaleGeneratorConsumerBeyondWidth8 : CandidateExperimentResidual
-  compareAlternativePreparationAdapters : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = compareIndependentProjectionSeeds
+firstUnpaidCandidateExperimentResidual = exactByteExecutePreparationSearch
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -154,17 +131,14 @@ record RSA260ProductionSubstitutionBoundary : Set where
     syntheticProjectionPaid : Bool
     syntheticGeneratorPaid : Bool
     syntheticNonzeroKernelRecoveryPaid : Bool
-
     productionMatrixShapePaidByPrimarySource : Bool
     productionKrylovCountPaidByPrimarySource : Bool
     productionGeneratorLengthPaidByPrimarySource : Bool
     productionKernelVectorCountPaidByPrimarySource : Bool
     productionDependencyCountPaidByPrimarySource : Bool
-
     bidiProductionLACarrierConstraintFibreDerived : Bool
     bidiProductionLACarrierUniqueInstanceDerived : Bool
     bidiExactCarrierBytesDerived : Bool
-
     runnableBidiCandidateImplemented : Bool
     runnableBidiCandidateProductionContractPassed : Bool
     runnableBidiCandidateHeldOutStructurePassed : Bool
@@ -182,9 +156,12 @@ record RSA260ProductionSubstitutionBoundary : Set where
     runnableBidiCandidateTotal512BlockColumnsPaid : Bool
     runnableBidiCandidateWidth256ExplicitFactorizedParityPaid : Bool
     runnableBidiCandidateExactProjection256BlobExecuted : Bool
+    runnableBidiCandidateSeedRobustnessPaid : Bool
+    runnableBidiCandidateAdapterRobustnessPaid : Bool
+    runnableBidiCandidatePreparationFibreSearchPaid : Bool
+    runnableBidiCandidatePreparationSearchExactBlobPaid : Bool
     runnableBidiCandidateHistoricalIdentityPaid : Bool
     runnableBidiCandidateProductionBWCReplayPaid : Bool
-
     productionMatrixBytesPaid : Bool
     productionCheckpointOrGeneratorBytesPaid : Bool
     exactModifiedSourceRevisionPaid : Bool
@@ -227,6 +204,10 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; runnableBidiCandidateTotal512BlockColumnsPaid = true
   ; runnableBidiCandidateWidth256ExplicitFactorizedParityPaid = true
   ; runnableBidiCandidateExactProjection256BlobExecuted = true
+  ; runnableBidiCandidateSeedRobustnessPaid = true
+  ; runnableBidiCandidateAdapterRobustnessPaid = true
+  ; runnableBidiCandidatePreparationFibreSearchPaid = true
+  ; runnableBidiCandidatePreparationSearchExactBlobPaid = false
   ; runnableBidiCandidateHistoricalIdentityPaid = false
   ; runnableBidiCandidateProductionBWCReplayPaid = false
   ; productionMatrixBytesPaid = false
@@ -238,22 +219,12 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; fullProductionLinearAlgebraReplayPaid = false
   }
 
-------------------------------------------------------------------------
--- WrongType firewalls.
-------------------------------------------------------------------------
-
 data ProductionShapeImpliesProductionBytes : Set where
 data BidiCarrierFibreImpliesUniqueMatrix : Set where
 data RunnableCandidateImpliesHistoricalMatrix : Set where
-data PassedDeclaredExperimentImpliesProductionBWC : Set where
-data AATShadowImpliesProductionPreparedEncoding : Set where
-data CandidateGeneratorImpliesProductionGenerator : Set where
-data CandidateKernelImpliesProductionDependency : Set where
-data Width256CandidateImpliesProductionProjection : Set where
+data PreparationFrontierImpliesProductionAdapter : Set where
+data SparseKernelImpliesFactoringSpeedup : Set where
 data SearchMissImpliesArtifactAbsent : Set where
-data CPUReferenceImpliesCUDAParity : Set where
-data CUDAParityImpliesNCCLParity : Set where
-data DownstreamArtifactImpliesEarlierCarrier : Set where
 
 authorReportedShapeDoesNotCreateBytes : ProductionShapeImpliesProductionBytes → ⊥
 authorReportedShapeDoesNotCreateBytes ()
@@ -264,29 +235,11 @@ bidiCarrierFibreDoesNotCreateUniqueMatrix ()
 runnableCandidateDoesNotCreateHistoricalMatrix : RunnableCandidateImpliesHistoricalMatrix → ⊥
 runnableCandidateDoesNotCreateHistoricalMatrix ()
 
-passedExperimentDoesNotCreateProductionBWC : PassedDeclaredExperimentImpliesProductionBWC → ⊥
-passedExperimentDoesNotCreateProductionBWC ()
+preparationFrontierDoesNotCreateProductionAdapter : PreparationFrontierImpliesProductionAdapter → ⊥
+preparationFrontierDoesNotCreateProductionAdapter ()
 
-aatShadowDoesNotCreateProductionPreparedEncoding : AATShadowImpliesProductionPreparedEncoding → ⊥
-aatShadowDoesNotCreateProductionPreparedEncoding ()
-
-candidateGeneratorDoesNotCreateProductionGenerator : CandidateGeneratorImpliesProductionGenerator → ⊥
-candidateGeneratorDoesNotCreateProductionGenerator ()
-
-candidateKernelDoesNotCreateProductionDependency : CandidateKernelImpliesProductionDependency → ⊥
-candidateKernelDoesNotCreateProductionDependency ()
-
-width256CandidateDoesNotCreateProductionProjection : Width256CandidateImpliesProductionProjection → ⊥
-width256CandidateDoesNotCreateProductionProjection ()
+sparseKernelDoesNotCreateFactoringSpeedup : SparseKernelImpliesFactoringSpeedup → ⊥
+sparseKernelDoesNotCreateFactoringSpeedup ()
 
 searchMissDoesNotProveAbsence : SearchMissImpliesArtifactAbsent → ⊥
 searchMissDoesNotProveAbsence ()
-
-cpuReferenceDoesNotCreateCUDAParity : CPUReferenceImpliesCUDAParity → ⊥
-cpuReferenceDoesNotCreateCUDAParity ()
-
-cudaParityDoesNotCreateNCCLParity : CUDAParityImpliesNCCLParity → ⊥
-cudaParityDoesNotCreateNCCLParity ()
-
-downstreamArtifactDoesNotCreateEarlierCarrier : DownstreamArtifactImpliesEarlierCarrier → ⊥
-downstreamArtifactDoesNotCreateEarlierCarrier ()
