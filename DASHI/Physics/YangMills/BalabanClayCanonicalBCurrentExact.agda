@@ -65,7 +65,11 @@ import DASHI.Physics.YangMills.BalabanClayCanonicalBFrontierRound314Exact
 -- coordinates.
 import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact
 
--- Older producer tactics retained below the canonical consumer.
+-- Optional producer families retained below the canonical consumer.
+-- The Step-V marked-source owner is the archaeology-normalized direct producer:
+-- once the source-response identity is supplied, its first theorem-bearing
+-- field is separation decay of the mixed marked log-partition derivative.
+import DASHI.Physics.YangMills.BalabanStepVMarkedSourceDirectClusteringProducerCurrentExact
 import DASHI.Physics.YangMills.BalabanLangevinDirectInfluencePaymentRound271Exact
 import DASHI.Physics.YangMills.BalabanPreferredRowCSpatialFrontierRound272Exact
 import DASHI.Physics.YangMills.BalabanLangevinMarkedRowInfluenceAdapterRound273Exact
