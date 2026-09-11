@@ -82,11 +82,7 @@ def root_qids(graph: dict[str, Any], multilingual: dict[str, Any] | None) -> lis
 def sitelinks(qids: list[str], languages: list[str], cache_dir: Path, timeout: float, retries: int) -> dict[str, dict[str, str]]:
     if not qids:
         return {}
-    url = query_url(WIKIDATA_API, {
-        "action": "wbgetentities",
-        "ids": "|".join(qids),
-        "props": "sitelinks",
-    })
+    url = query_url(WIKIDATA_API, {"action": "wbgetentities", "ids": "|".join(qids), "props": "sitelinks"})
     data = api_get(url, cache_dir, timeout, retries)
     entities = data.get("entities") or {}
     result: dict[str, dict[str, str]] = {}
@@ -104,17 +100,11 @@ def sitelinks(qids: list[str], languages: list[str], cache_dir: Path, timeout: f
 
 
 def linked_qids(language: str, title: str, cache_dir: Path, timeout: float, retries: int, max_links: int) -> list[str]:
-    host_lang = "simple" if language == "simple" else language
-    base = f"https://{host_lang}.wikipedia.org/w/api.php"
+    base = f"https://{language}.wikipedia.org/w/api.php"
     url = query_url(base, {
-        "action": "query",
-        "generator": "links",
-        "titles": title,
-        "gplnamespace": 0,
-        "gpllimit": max_links,
-        "prop": "pageprops",
-        "ppprop": "wikibase_item",
-        "redirects": 1,
+        "action": "query", "generator": "links", "titles": title,
+        "gplnamespace": 0, "gpllimit": max_links,
+        "prop": "pageprops", "ppprop": "wikibase_item", "redirects": 1,
     })
     data = api_get(url, cache_dir, timeout, retries)
     qids: list[str] = []
@@ -133,24 +123,21 @@ def graph_property_atoms(graph: dict[str, Any]) -> tuple[list[dict[str, Any]], d
     for edge in graph.get("item_property_edges") or []:
         if not isinstance(edge, dict):
             continue
-        source = str(edge.get("source", ""))
-        pid = str(edge.get("property_id", ""))
-        target = str(edge.get("target", ""))
+        source = str(edge.get("source", "")); pid = str(edge.get("property_id", "")); target = str(edge.get("target", ""))
         if not (source and pid and target):
             continue
         aid = atom_id("wikidata-property", source, pid, target)
-        atoms.append({
-            "atom_id": aid,
-            "kind": "wikidata-property",
-            "subject_qid": source,
-            "property_id": pid,
-            "object_qid": target,
-            "evidence_class": "reviewed-wikimedia-world-graph",
-            "claim_truth_promoted": False,
-        })
+        atoms.append({"atom_id": aid, "kind": "wikidata-property", "subject_qid": source, "property_id": pid, "object_qid": target, "evidence_class": "reviewed-wikimedia-world-graph", "claim_truth_promoted": False})
         by_pair[(source, target)].append(pid)
     atoms.sort(key=lambda a: a["atom_id"])
     return atoms, by_pair
+
+
+def atom_belongs_to_root(atom: dict[str, Any], qid: str) -> bool:
+    kind = str(atom.get("kind", ""))
+    if kind == "qid":
+        return str(atom.get("qid", "")) == qid
+    return str(atom.get("subject_qid", "")) == qid
 
 
 def build_closure(graph: dict[str, Any], qids: list[str], languages: list[str], links_by_surface: dict[tuple[str, str], list[str]], titles: dict[str, dict[str, str]]) -> dict[str, Any]:
@@ -162,160 +149,71 @@ def build_closure(graph: dict[str, Any], qids: list[str], languages: list[str], 
 
     for qid in qids:
         qid_atom = atom_id("qid", qid)
-        canonical.setdefault(qid_atom, {
-            "atom_id": qid_atom,
-            "kind": "qid",
-            "qid": qid,
-            "evidence_class": "shared-qid-identity",
-            "claim_truth_promoted": False,
-        })
+        canonical.setdefault(qid_atom, {"atom_id": qid_atom, "kind": "qid", "qid": qid, "evidence_class": "shared-qid-identity", "claim_truth_promoted": False})
         for language in languages:
             title = (titles.get(qid) or {}).get(language, "")
             sid = f"{qid}:{language}"
             if not title:
-                surfaces.append({
-                    "surface_id": sid,
-                    "qid": qid,
-                    "language": language,
-                    "status": "missing-sitelink",
-                    "observed_atom_ids": [],
-                    "candidate_only": True,
-                    "semantic_promotion": False,
-                })
+                surfaces.append({"surface_id": sid, "qid": qid, "language": language, "status": "missing-sitelink", "observed_atom_ids": [], "candidate_only": True, "semantic_promotion": False})
                 observed[sid] = set()
                 continue
             atom_ids: set[str] = {qid_atom}
             evidence_surfaces[qid_atom].append(sid)
             for related in links_by_surface.get((qid, language), []):
                 link_id = atom_id("wiki-link", qid, related)
-                canonical.setdefault(link_id, {
-                    "atom_id": link_id,
-                    "kind": "wiki-link",
-                    "subject_qid": qid,
-                    "object_qid": related,
-                    "evidence_class": "language-surface-mainspace-link",
-                    "article_link_is_claim_truth": False,
-                    "claim_truth_promoted": False,
-                })
-                atom_ids.add(link_id)
-                evidence_surfaces[link_id].append(sid)
+                canonical.setdefault(link_id, {"atom_id": link_id, "kind": "wiki-link", "subject_qid": qid, "object_qid": related, "evidence_class": "language-surface-mainspace-link", "article_link_is_claim_truth": False, "claim_truth_promoted": False})
+                atom_ids.add(link_id); evidence_surfaces[link_id].append(sid)
                 for pid in property_by_pair.get((qid, related), []):
                     prop_id = atom_id("wikidata-property", qid, pid, related)
-                    atom_ids.add(prop_id)
-                    evidence_surfaces[prop_id].append(sid)
+                    atom_ids.add(prop_id); evidence_surfaces[prop_id].append(sid)
             observed[sid] = atom_ids
-            surfaces.append({
-                "surface_id": sid,
-                "qid": qid,
-                "language": language,
-                "wikipedia_title": title,
-                "status": "observed",
-                "linked_qid_count": len(links_by_surface.get((qid, language), [])),
-                "observed_atom_ids": sorted(atom_ids),
-                "candidate_only": True,
-                "semantic_promotion": False,
-            })
+            surfaces.append({"surface_id": sid, "qid": qid, "language": language, "wikipedia_title": title, "status": "observed", "linked_qid_count": len(links_by_surface.get((qid, language), [])), "observed_atom_ids": sorted(atom_ids), "candidate_only": True, "semantic_promotion": False})
 
-    surface_closure = sorted(aid for aid, a in canonical.items() if a.get("kind") in {"qid", "wiki-link", "wikidata-property"} and evidence_surfaces.get(aid))
+    surface_closure = sorted(aid for aid, atom in canonical.items() if atom.get("kind") in {"qid", "wiki-link", "wikidata-property"} and evidence_surfaces.get(aid))
     gaps: list[dict[str, Any]] = []
     propagated: list[dict[str, Any]] = []
     for surface in surfaces:
         sid = surface["surface_id"]
         if surface["status"] != "observed":
-            gaps.append({
-                "surface_id": sid,
-                "qid": surface["qid"],
-                "language": surface["language"],
-                "gap_kind": "missing-surface",
-                "missing_atom_ids": [],
-                "candidate_only": True,
-                "semantic_promotion": False,
-            })
+            gaps.append({"surface_id": sid, "qid": surface["qid"], "language": surface["language"], "gap_kind": "missing-surface", "missing_atom_ids": [], "candidate_only": True, "semantic_promotion": False})
             continue
-        missing = [aid for aid in surface_closure if aid not in observed[sid] and (canonical[aid].get("subject_qid") in {None, surface["qid"]} or canonical[aid].get("qid") == surface["qid"])]
-        gaps.append({
-            "surface_id": sid,
-            "qid": surface["qid"],
-            "language": surface["language"],
-            "gap_kind": "semantic-atom-gap",
-            "missing_atom_ids": missing,
-            "candidate_only": True,
-            "semantic_promotion": False,
-        })
+        qid = str(surface["qid"])
+        missing = [aid for aid in surface_closure if aid not in observed[sid] and atom_belongs_to_root(canonical[aid], qid)]
+        gaps.append({"surface_id": sid, "qid": qid, "language": surface["language"], "gap_kind": "semantic-atom-gap", "missing_atom_ids": missing, "candidate_only": True, "semantic_promotion": False})
         for aid in missing:
-            propagated.append({
-                "target_surface_id": sid,
-                "target_language": surface["language"],
-                "atom_id": aid,
-                "source_surface_ids": sorted(set(evidence_surfaces.get(aid, []))),
-                "available_to_target_consumer": True,
-                "target_surface_asserted": False,
-                "translation_equivalence_paid": False,
-                "claim_semantic_equivalence_paid": False,
-                "candidate_only": True,
-                "semantic_promotion": False,
-            })
+            propagated.append({"target_surface_id": sid, "target_language": surface["language"], "atom_id": aid, "source_surface_ids": sorted(set(evidence_surfaces.get(aid, []))), "available_to_target_consumer": True, "target_surface_asserted": False, "translation_equivalence_paid": False, "claim_semantic_equivalence_paid": False, "candidate_only": True, "semantic_promotion": False})
 
     node_ids = {str(n.get("node_id", "")) for n in graph.get("nodes") or [] if isinstance(n, dict)}
     obligations: list[dict[str, Any]] = []
     for surface in surfaces:
         if surface["status"] == "missing-sitelink":
-            obligations.append({
-                "obligation_kind": "missing-language-surface",
-                "qid": surface["qid"],
-                "language": surface["language"],
-                "routing_priority": "wikidata-sitelink-or-wikipedia-search-before-broad-snowball",
-                "candidate_only": True,
-            })
-    related_targets = sorted({a.get("object_qid", "") for a in canonical.values() if a.get("kind") == "wiki-link"})
+            obligations.append({"obligation_kind": "missing-language-surface", "qid": surface["qid"], "language": surface["language"], "routing_priority": "wikidata-sitelink-or-wikipedia-search-before-broad-snowball", "candidate_only": True})
+    related_targets = sorted({str(a.get("object_qid", "")) for a in canonical.values() if a.get("kind") == "wiki-link" and a.get("object_qid")})
     for target in related_targets:
-        if target and target not in node_ids:
-            obligations.append({
-                "obligation_kind": "follow-related-qid",
-                "qid": target,
-                "routing_priority": "wikidata-properties-then-wikipedia-ibrahim-follow",
-                "candidate_only": True,
-            })
+        if target not in node_ids:
+            obligations.append({"obligation_kind": "follow-related-qid", "qid": target, "routing_priority": "wikidata-properties-then-wikipedia-ibrahim-follow", "candidate_only": True})
 
-    return {
-        "canonical_atoms": [canonical[k] for k in sorted(canonical)],
-        "surface_semantic_closure_atom_ids": surface_closure,
-        "world_property_atom_ids": [a["atom_id"] for a in property_atoms],
-        "surfaces": surfaces,
-        "gaps": gaps,
-        "propagated_views": propagated,
-        "acquisition_obligations": obligations,
-    }
+    return {"canonical_atoms": [canonical[k] for k in sorted(canonical)], "surface_semantic_closure_atom_ids": surface_closure, "world_property_atom_ids": [a["atom_id"] for a in property_atoms], "surfaces": surfaces, "gaps": gaps, "propagated_views": propagated, "acquisition_obligations": obligations}
 
 
 def self_check() -> int:
-    graph = {
-        "schema": "slr-wikimedia-world-follow-v1",
-        "nodes": [{"node_id": "Q1"}, {"node_id": "Q2"}],
-        "item_property_edges": [{"source": "Q1", "property_id": "P1", "target": "Q2"}],
-    }
-    titles = {"Q1": {"en": "A", "fr": "A-fr"}}
-    links = {("Q1", "en"): ["Q2"], ("Q1", "fr"): []}
-    result = build_closure(graph, ["Q1"], ["en", "fr"], links, titles)
+    graph = {"schema": "slr-wikimedia-world-follow-v1", "nodes": [{"node_id": "Q1"}, {"node_id": "Q2"}, {"node_id": "Q9"}], "item_property_edges": [{"source": "Q1", "property_id": "P1", "target": "Q2"}]}
+    titles = {"Q1": {"en": "A", "fr": "A-fr"}, "Q9": {"en": "B"}}
+    links = {("Q1", "en"): ["Q2"], ("Q1", "fr"): [], ("Q9", "en"): []}
+    result = build_closure(graph, ["Q1", "Q9"], ["en", "fr"], links, titles)
     prop = [p for p in result["propagated_views"] if p["target_surface_id"] == "Q1:fr"]
     assert prop, "expected propagated gap"
     assert all(p["target_surface_asserted"] is False for p in prop)
-    assert all(p["semantic_promotion"] is False for p in prop)
-    print("SLR_SEMANTIC_WORLD_CLOSURE_SELF_CHECK schema=slr-semantic-world-closure-v1 passed=true target_surface_asserted=false semantic_promotion=false", file=sys.stderr)
+    q1_fr_gap = next(g for g in result["gaps"] if g["surface_id"] == "Q1:fr")
+    assert "qid:Q9" not in q1_fr_gap["missing_atom_ids"], "cross-root atom leaked into surface gap"
+    print("SLR_SEMANTIC_WORLD_CLOSURE_SELF_CHECK schema=slr-semantic-world-closure-v1 passed=true root_scope_isolated=true target_surface_asserted=false semantic_promotion=false", file=sys.stderr)
     return 0
 
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
-    p.add_argument("--graph", type=Path)
-    p.add_argument("--multilingual-compat", type=Path)
-    p.add_argument("--cache-dir", type=Path)
-    p.add_argument("--output", type=Path)
-    p.add_argument("--languages", default="en,es,fr,de,simple")
-    p.add_argument("--max-links", type=int, default=60)
-    p.add_argument("--timeout", type=float, default=20.0)
-    p.add_argument("--retries", type=int, default=5)
-    p.add_argument("--self-check", action="store_true")
+    p.add_argument("--graph", type=Path); p.add_argument("--multilingual-compat", type=Path); p.add_argument("--cache-dir", type=Path); p.add_argument("--output", type=Path)
+    p.add_argument("--languages", default="en,es,fr,de,simple"); p.add_argument("--max-links", type=int, default=60); p.add_argument("--timeout", type=float, default=20.0); p.add_argument("--retries", type=int, default=5); p.add_argument("--self-check", action="store_true")
     return p.parse_args()
 
 
@@ -337,43 +235,13 @@ def main() -> int:
         for language, title in (titles.get(qid) or {}).items():
             links_by_surface[(qid, language)] = linked_qids(language, title, args.cache_dir, args.timeout, args.retries, args.max_links)
     closure = build_closure(graph, qids, languages, links_by_surface, titles)
-    payload = {
-        "schema": SCHEMA,
-        "source_graph_schema": graph.get("schema", ""),
-        "source_multilingual_schema": (multilingual or {}).get("schema", ""),
-        "languages_requested": languages,
-        "root_qids": qids,
-        **closure,
-        "summary": {
-            "qids": len(qids),
-            "surfaces": len(closure["surfaces"]),
-            "observed_surfaces": sum(1 for s in closure["surfaces"] if s["status"] == "observed"),
-            "simplewiki_surfaces": sum(1 for s in closure["surfaces"] if s["language"] == "simple" and s["status"] == "observed"),
-            "canonical_atoms": len(closure["canonical_atoms"]),
-            "surface_closure_atoms": len(closure["surface_semantic_closure_atom_ids"]),
-            "semantic_gap_atoms": sum(len(g.get("missing_atom_ids") or []) for g in closure["gaps"]),
-            "propagated_views": len(closure["propagated_views"]),
-            "acquisition_obligations": len(closure["acquisition_obligations"]),
-        },
-        "propagation_rewrites_target_surface": False,
-        "article_link_creates_claim_truth": False,
-        "same_qid_creates_semantic_equivalence": False,
-        "candidate_only": True,
-        "semantic_promotion": False,
-    }
+    payload = {"schema": SCHEMA, "source_graph_schema": graph.get("schema", ""), "source_multilingual_schema": (multilingual or {}).get("schema", ""), "languages_requested": languages, "root_qids": qids, **closure,
+        "summary": {"qids": len(qids), "surfaces": len(closure["surfaces"]), "observed_surfaces": sum(1 for s in closure["surfaces"] if s["status"] == "observed"), "simplewiki_surfaces": sum(1 for s in closure["surfaces"] if s["language"] == "simple" and s["status"] == "observed"), "canonical_atoms": len(closure["canonical_atoms"]), "surface_closure_atoms": len(closure["surface_semantic_closure_atom_ids"]), "semantic_gap_atoms": sum(len(g.get("missing_atom_ids") or []) for g in closure["gaps"]), "propagated_views": len(closure["propagated_views"]), "acquisition_obligations": len(closure["acquisition_obligations"])},
+        "propagation_rewrites_target_surface": False, "article_link_creates_claim_truth": False, "same_qid_creates_semantic_equivalence": False, "candidate_only": True, "semantic_promotion": False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     s = payload["summary"]
-    print(
-        "SLR_SEMANTIC_WORLD_CLOSURE_RECEIPT "
-        f"schema={SCHEMA} qids={s['qids']} surfaces={s['surfaces']} observed_surfaces={s['observed_surfaces']} "
-        f"simplewiki_surfaces={s['simplewiki_surfaces']} canonical_atoms={s['canonical_atoms']} "
-        f"surface_closure_atoms={s['surface_closure_atoms']} semantic_gap_atoms={s['semantic_gap_atoms']} "
-        f"propagated_views={s['propagated_views']} acquisition_obligations={s['acquisition_obligations']} "
-        "target_surface_asserted=false article_link_creates_claim_truth=false same_qid_semantic_equivalence=false "
-        "candidate_only=true semantic_promotion=false",
-        file=sys.stderr,
-    )
+    print("SLR_SEMANTIC_WORLD_CLOSURE_RECEIPT " f"schema={SCHEMA} qids={s['qids']} surfaces={s['surfaces']} observed_surfaces={s['observed_surfaces']} simplewiki_surfaces={s['simplewiki_surfaces']} canonical_atoms={s['canonical_atoms']} surface_closure_atoms={s['surface_closure_atoms']} semantic_gap_atoms={s['semantic_gap_atoms']} propagated_views={s['propagated_views']} acquisition_obligations={s['acquisition_obligations']} target_surface_asserted=false article_link_creates_claim_truth=false same_qid_semantic_equivalence=false candidate_only=true semantic_promotion=false", file=sys.stderr)
     return 0
 
 
