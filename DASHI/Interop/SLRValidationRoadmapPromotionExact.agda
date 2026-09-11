@@ -17,7 +17,7 @@ import DASHI.Interop.SLRReviewPromoteAbstainConsumerExact as Review
 -- Validation-to-roadmap promotion.
 --
 -- Runtime validation pays carrier/execution parity. It does not silently pay
--- gold semantic dimensions, world truth, canonical claim identity, or consumer
+-- gold semantic dimensions, world truth, canonical claim truth, or consumer
 -- adequacy. Existing owners remain authoritative for those obligations.
 ------------------------------------------------------------------------
 
@@ -66,9 +66,9 @@ currentSLRValidationRoadmap =
     "current C029 candidate correctly abstains because residual remains open"
   ∷ promotedRoadmapCoordinate
     "canonical claim/evidence projection"
-    active
-    "CandidateWorldModel carrier is now validated"
-    "explicit source-paid discourse/world node -> canonical claim-ID weld"
+    partial
+    "SLRCanonicalClaimProjectionExact / slr-canonical-claim-projection-v2: historical explicit sentence mappings plus same-source unique-phrase/offset exact-subspan refinement"
+    "execute v2 projection against tracked ABC primary source; claim truth remains separately unpromoted"
   ∷ promotedRoadmapCoordinate
     "Brexit narrative benchmark"
     blockedByMissingSource
@@ -84,14 +84,16 @@ record ValidationPromotionBoundary : Set where
     reviewRouterImplemented : Bool
     goldSemanticBenchmarkFullyPaid : Bool
     worldTruthPaid : Bool
-    canonicalClaimProjectionPaid : Bool
+    canonicalClaimProjectionImplemented : Bool
+    canonicalClaimProjectionRuntimeCertified : Bool
+    canonicalClaimTruthPaid : Bool
     brexitNarrativeBenchmarkPaid : Bool
 
 open ValidationPromotionBoundary public
 
 canonicalValidationPromotionBoundary : ValidationPromotionBoundary
 canonicalValidationPromotionBoundary =
-  validationPromotionBoundary true true true false false false false
+  validationPromotionBoundary true true true false false true false false false
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -99,6 +101,8 @@ canonicalValidationPromotionBoundary =
 
 data RuntimeParityPaysGoldSemantics : Set where
 data CarrierParityPaysClaimIdentity : Set where
+data ClaimProjectionImplementationPaysRuntimeCertification : Set where
+data CanonicalClaimProjectionPaysClaimTruth : Set where
 data ReviewRouterImplementationPaysConsumerAdequacy : Set where
 data CurrentAbstentionMeansClaimFalse : Set where
 data MissingBrexitNarrativeMayBeSynthesisedFromIntentFixture : Set where
@@ -108,6 +112,13 @@ runtimeParityDoesNotPayGoldSemantics ()
 
 carrierParityDoesNotPayClaimIdentity : CarrierParityPaysClaimIdentity → ⊥
 carrierParityDoesNotPayClaimIdentity ()
+
+implementationDoesNotPayProjectionRuntime :
+  ClaimProjectionImplementationPaysRuntimeCertification → ⊥
+implementationDoesNotPayProjectionRuntime ()
+
+projectionDoesNotPayClaimTruth : CanonicalClaimProjectionPaysClaimTruth → ⊥
+projectionDoesNotPayClaimTruth ()
 
 routerDoesNotPayAdequacy : ReviewRouterImplementationPaysConsumerAdequacy → ⊥
 routerDoesNotPayAdequacy ()
