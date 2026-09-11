@@ -11,10 +11,12 @@ import DASHI.Interop.SLRGWBCandidateWorldProjectionExact as GWB
 ------------------------------------------------------------------------
 -- GWB EXECUTION ROADMAP
 --
--- Updated from validated 2026-09-11 handoffs.  The SLR runtime,
--- CandidateWorldModel ABI, replayable Wikimedia graph and identity contraction
--- are paid.  Source-role attachment and multilingual compatibility are now
--- implemented diagnostic/runtime seams awaiting focused receipts.
+-- Updated from validated 2026-09-11 runtime handoffs.  The SLR runtime,
+-- CandidateWorldModel ABI, replayable Wikimedia graph, identity contraction,
+-- claim-relative source-role attachment and multilingual en/es/fr/de parser
+-- compatibility are paid at runtime.  Translation/semantic equivalence remain
+-- deliberately unpaid.  The live frontier is consumer-specific contraction
+-- and canonical claim/evidence extraction.
 ------------------------------------------------------------------------
 
 data GWBStageState : Set where
@@ -64,8 +66,8 @@ gwbSLRRoadmap =
   ∷ gwbRoadmapCoordinate
     "cache-only deterministic replay + one-tar handoff"
     paid
-    "134 cache hits / 0 network requests on replay; replayable handoff SHA receipt; no raw books/projected corpus text"
-    "cache/transport provenance does not create identity or semantic authority"
+    "134 cache hits / 0 network requests on replay; prior replayable handoff SHA receipt; no raw books/projected corpus text"
+    "v2 large-world streaming packager implemented; refreshed post-multilingual archive receipt still requires local rerun"
   ∷ gwbRoadmapCoordinate
     "Wikimedia source-work identity residual contraction"
     paid
@@ -73,19 +75,19 @@ gwbSLRRoadmap =
     "eight documents retain exact source-work identity debt; claim truth remains unpaid"
   ∷ gwbRoadmapCoordinate
     "claim-relative source-role atlas + CandidateWorldModel attachment"
-    implementedAwaitingRuntime
-    "fixtures/slr/gwb-claim-relative-source-roles-v1.jsonl / slr-gwb-source-role-attachment-v1 / SLRGWBSourceRoleAttachmentExact"
-    "validate ten provenance-role attachments and SensibLaw normalization without source-role -> truth promotion"
+    paid
+    "runtime: roles=10 / primary claim classes=11 / negative authority constraints=19 / normalization_drift=false"
+    "source role constrains downstream consumers but does not create identity, event truth or universal authority"
   ∷ gwbRoadmapCoordinate
     "multilingual shared-QID Wikimedia/parser compatibility"
-    implementedAwaitingRuntime
-    "slr-multilingual-wikimedia-parser-compat-v1 / SLRMultilingualWikimediaParserCompatibilityExact"
-    "measure installed trained-model vs blank fallback surfaces; shared QID pays identity only, not translation or claim-semantic equivalence"
+    paid
+    "runtime: qids=4 / language_surfaces=13 / trained_parser_surfaces=13 / fallback=0 across en/es/fr/de"
+    "shared QID pays entity identity only; translation equivalence=false and semantic equivalence=false remain residual"
   ∷ gwbRoadmapCoordinate
     "consumer-specific graph residual contraction"
     active
     "reuse Q/P parent/surrounding graph and claim-relative source roles only against declared consumer obligations"
-    "identify which world residual dimensions are paid by graph/source-role evidence and which survive to Snowball"
+    "identify which world residual dimensions are paid by graph/source-role/multilingual identity evidence and which survive to Snowball"
   ∷ gwbRoadmapCoordinate
     "advisory external ontology fallback"
     next
@@ -94,8 +96,8 @@ gwbSLRRoadmap =
   ∷ gwbRoadmapCoordinate
     "canonical GWB claim/evidence projection"
     next
-    "requires explicit claim fixtures or source-paid extraction receipts after source-role typing"
-    "sentence identity and adjacency alone cannot manufacture canonical claims"
+    "source-role attachment is now paid; next requires explicit claim fixtures or source-paid extraction receipts"
+    "sentence identity, adjacency and multilingual topic identity alone cannot manufacture canonical claims"
   ∷ gwbRoadmapCoordinate
     "broader Snowball acquisition"
     next
