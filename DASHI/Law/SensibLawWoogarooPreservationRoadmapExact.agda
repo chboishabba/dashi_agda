@@ -52,32 +52,32 @@ federal8575 = roadmap-coordinate
   "1 October 2026"
   "publication notice is not substantive final PD; comment count is not response adequacy; SHG consultant evidence is not a Commonwealth finding; 2019 referral state is not automatically the unchanged 2026 state; a significant impact on habitat critical to survival does not automatically determine the Part 9 approval/refusal outcome"
 
-qldCriticalHabitat : RoadmapCoordinate
-qldCriticalHabitat = roadmap-coordinate
-  queenslandCriticalHabitatLane
-  live
-  "NCA s 13 now has strong same-Springview-parcel habitat-function evidence: Lot 9999 SP292760; mostly remnant vegetation; recognised Koala food trees; Koala scat evidence; Woogaroo/Opossum Creek function; SHG connectivity score 2 and >500 ha connectivity surface; habitat score 7; plus broader Scenic/Peninsula/Bellevue and official corridor context. The open issue is statutory viable-population/community essentiality, including stress-testing SHG's contrary recovery-value-0/site-not-viable reasoning."
-  "Build the s 13 consumer around the exact parcel and current habitat function; identify the relevant viable protected-wildlife population/native-wildlife community; obtain expert analysis of severance/loss consequences; and test whether the NCA essentiality test is satisfied notwithstanding, or differently from, the 2019 EPBC recovery-value analysis."
-  "highest alpha before irreversible clearing; work concurrently with the s 102 works-threat lane"
-  "EPBC Koala-guideline 'critical habitat', habitat score 7, connectivity and occurrence do not themselves equal Queensland NCA s 13 statutory critical habitat or essentiality"
-
 qldInterim : RoadmapCoordinate
 qldInterim = roadmap-coordinate
   queenslandInterimRestraintLane
   live
-  "NCA ss 102-107 mechanism is source-paid. 9281/2024/OW gives a concrete approved vegetation-clearing/earthworks object, while the same Springview project has a 2019 candidate habitat-impact surface: 136 ha habitat-score-7 Koala impact, food trees/scats and >500 ha connectivity. The operational/legal join remains incomplete because the EPBC impact map is not the 9281 clearing map and approval is not commencement."
-  "Acquire the approved 9281 vegetation-clearing drawing/polygon, conditions and current works chronology; intersect that exact works geometry with current habitat/species/corridor evidence; then test likely significant detrimental effect and the procedural vehicle for an interim conservation order."
+  "NCA ss 102-107 interim-conservation-order mechanism is source-paid. 9281/2024/OW and the supplied A12705838 negotiated approved plans provide a concrete approved vegetation-clearing/earthworks process and plan-scale works, bushfire-clearing, Open Space and Opossum/O'Dwyers interfaces. The Koala is qualifying threatened wildlife, so this route does not require a prior formal critical-habitat identification."
+  "Pay the live statutory question: whether the qualifying threatened wildlife or another qualifying habitat/area is subject to the approved threatening process and whether significant detrimental effect is likely. Obtain a current independent ecological opinion and Condition 6(a)/prestart/commencement records. Use the existing local Ipswich monitoring, Ric Nattrass activity/corridor evidence and project ecology as distinct attributed inputs."
   "now; before physical clearing or other irreversible works commence"
-  "2019 EPBC impact geometry is not the 9281 works geometry; an approved clearing entitlement is not proof of commencement or of the s 102 significant-detrimental-effect condition"
+  "perfect spatial overlap is not required; s 103(2) permits an order over land even if the wildlife/habitat is not on that land. Approval is not commencement; federal significant-impact reasoning is not the Queensland s 102 opinion; mitigation existence is not proof of mitigation effectiveness."
+
+qldCriticalHabitat : RoadmapCoordinate
+qldCriticalHabitat = roadmap-coordinate
+  queenslandCriticalHabitatLane
+  live
+  "NCA s 13 is a statutory definition of critical habitat, not a standalone public 's 13 application' procedure. It defines critical habitat as habitat essential for conservation of a viable protected-wildlife population or native-wildlife community, including land not presently occupied. The definition can feed Ministerial opinion under s 102, nature-refuge reasoning under s 49, and formal identification through conservation plans or regulations."
+  "Identify the relevant viable Koala population/community and test the without-Springview habitat counterfactual. In parallel identify the legally available route for asking the Minister to act on that evidence: s 102 opinion now, s 120H conservation-plan preparation or regulation-based identification where appropriate, and s 49 if nature-refuge prerequisites arise."
+  "parallel with the live s 102 lane; do not treat s 13 itself as an application form or declaration mechanism"
+  "habitat function, federal 'critical habitat', mapped corridors, activity records and genetic-cluster context may support the s 13 definition but do not themselves formally identify an area under a conservation plan/regulation or establish essentiality."
 
 qldPermanent : RoadmapCoordinate
 qldPermanent = roadmap-coordinate
   queenslandPermanentProtectionLane
   open
-  "NCA s 49 compulsory nature-refuge route is source-paid and the exact-parcel ecological case is substantially stronger, but the qualifying s 13/area-of-major-interest basis, tenure/suitability and executive-initiation coordinates remain open."
-  "Prepare exact parcels/tenure, suitability, existing protection status and initiation procedure now, then activate the permanent-protection package once the s 13/area-of-major-interest predicate is sufficiently paid."
-  "prepare in parallel; activate immediately after the qualifying basis is sufficiently paid"
-  "source-paid habitat value or even a successful s 13 evidentiary case does not itself create or compel an s 49 declaration"
+  "NCA s 49 compulsory nature-refuge route is source-paid. It requires failed agreement with relevant landholders plus a Ministerial opinion that the area is or includes an area of major interest or critical habitat and should be declared a nature refuge; the Governor in Council may then declare by regulation after objections are considered."
+  "Prepare exact parcels/tenure, suitability, landholder/agreement history and the critical-habitat/area-of-major-interest evidence. Do not wait for a fictional s 13 application outcome: the relevant statutory predicate is the Minister's opinion under s 49, informed by the s 13 definition and evidence."
+  "prepare behind the live s 102 and population-essentiality work"
+  "s 13 is definitional, not a declaration by itself; ecological essentiality evidence does not establish the failed-agreement prerequisite or compel an s 49 declaration."
 
 planningExemption : RoadmapCoordinate
 planningExemption = roadmap-coordinate
@@ -85,7 +85,7 @@ planningExemption = roadmap-coordinate
   live
   "The 2019 referral supplies a primary proponent statement of a Planning Regulation 2017 urban-purpose/urban-area vegetation-clearing exemption theory for least-concern/of-concern regulated vegetation, identifies a high-risk NCA protected-plants trigger area and states public notification was not required. Later Council material and the identified 6243/2023/LAP -> 4272/2020/ADP + 5547/2020/ADP -> 9281/2024/OW + 9293/2024/OW chain record the current approval sequence."
   "Recover the exact historical/current exemption and transition instruments; test vegetation-class, temporal, parcel, stage and variation predicates for every current component; distinguish the proponent's 2019 legal characterisation from current legal scope."
-  "parallel with federal/s 13/s 102 work; before relying on ordinary koala/planning prohibition arguments"
+  "parallel with federal/s 102/population-essentiality work; before relying on ordinary koala/planning prohibition arguments"
   "a proponent-stated historical exemption theory, mapped habitat, no-public-notification pathway or local approval does not by itself establish current exemption validity, invalidity or scope"
 
 politicalAdvocacy : RoadmapCoordinate
@@ -132,8 +132,8 @@ record HighestAlphaPath : Set where
 currentHighestAlphaPath : HighestAlphaPath
 currentHighestAlphaPath = highest-alpha-path
   federal8575
-  qldCriticalHabitat
   qldInterim
+  qldCriticalHabitat
   qldPermanent
   true
   true
