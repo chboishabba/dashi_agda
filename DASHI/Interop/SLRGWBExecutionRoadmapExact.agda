@@ -15,8 +15,8 @@ import DASHI.Interop.SLRGWBCandidateWorldProjectionExact as GWB
 -- CandidateWorldModel ABI, replayable Wikimedia graph, identity contraction,
 -- claim-relative source-role attachment and multilingual en/es/fr/de parser
 -- compatibility are paid at runtime.  Translation/semantic equivalence remain
--- deliberately unpaid.  The live frontier is consumer-specific contraction
--- and canonical claim/evidence extraction.
+-- deliberately unpaid.  The live frontier is consumer-specific contraction,
+-- multilingual PNF-role compatibility, and canonical claim/evidence extraction.
 ------------------------------------------------------------------------
 
 data GWBStageState : Set where
@@ -64,10 +64,10 @@ gwbSLRRoadmap =
     "51 QID nodes / 850 property edges / 162 parent / 688 surrounding-related / 41 Wikipedia pages / post-follow normalization_drift=false"
     "current first-link candidates are not exact historical Ibrahim parser edges"
   ∷ gwbRoadmapCoordinate
-    "cache-only deterministic replay + one-tar handoff"
+    "cache-only deterministic replay + streamed one-tar handoff v2"
     paid
-    "134 cache hits / 0 network requests on replay; prior replayable handoff SHA receipt; no raw books/projected corpus text"
-    "v2 large-world streaming packager implemented; refreshed post-multilingual archive receipt still requires local rerun"
+    "v2 archive SHA-256 956c92ea0e5f402b8711f76d4146a2cc870248880bf693a0549b7a42f2d75594; stream-live-world-no-full-staging-copy; no raw/projected corpus text"
+    "cache/transport/package reproducibility does not create identity or semantic authority"
   ∷ gwbRoadmapCoordinate
     "Wikimedia source-work identity residual contraction"
     paid
@@ -83,6 +83,11 @@ gwbSLRRoadmap =
     paid
     "runtime: qids=4 / language_surfaces=13 / trained_parser_surfaces=13 / fallback=0 across en/es/fr/de"
     "shared QID pays entity identity only; translation equivalence=false and semantic equivalence=false remain residual"
+  ∷ gwbRoadmapCoordinate
+    "multilingual PNF role-family compatibility"
+    implementedAwaitingRuntime
+    "slr-multilingual-pnf-role-compat-v1 / SLRMultilingualPNFRoleCompatibilityExact"
+    "measure subject/object/predicate/negation/auxiliary/clause/coordination carrier overlap across same-QID language surfaces without claiming translation, sentence alignment or semantic equivalence"
   ∷ gwbRoadmapCoordinate
     "consumer-specific graph residual contraction"
     active
@@ -124,13 +129,14 @@ record GWBExecutionBoundary : Set where
     topicAnchorMayBecomeSourceObjectIdentity : Bool
     sharedQidMayPromoteTranslationEquivalence : Bool
     parserCompatibilityMayPromoteSemanticEquivalence : Bool
+    pnfRoleOverlapMayPromoteClaimSemanticEquivalence : Bool
     broadSnowballMayStartBeforeConsumerResidual : Bool
 
 open GWBExecutionBoundary public
 
 canonicalGWBExecutionBoundary : GWBExecutionBoundary
 canonicalGWBExecutionBoundary = gwbExecutionBoundary
-  false true true false true false false false false false false false
+  false true true false true false false false false false false false false
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -145,6 +151,7 @@ data WikimediaGraphCreatesClaimTruth : Set where
 data TopicAnchorIsSourceObjectIdentity : Set where
 data SharedQidIsTranslationEquivalence : Set where
 data ParserCompatibilityIsSemanticEquivalence : Set where
+data PNFRoleOverlapIsClaimSemanticEquivalence : Set where
 data SnowballMayIgnoreConsumerResidual : Set where
 
 proseIsNotBroadcastTranscript : GWBProseIsBroadcastTranscript → ⊥
@@ -173,6 +180,9 @@ sharedQidDoesNotCreateTranslationEquivalence ()
 
 parserCompatibilityDoesNotCreateSemanticEquivalence : ParserCompatibilityIsSemanticEquivalence → ⊥
 parserCompatibilityDoesNotCreateSemanticEquivalence ()
+
+pnfRoleOverlapDoesNotCreateSemanticEquivalence : PNFRoleOverlapIsClaimSemanticEquivalence → ⊥
+pnfRoleOverlapDoesNotCreateSemanticEquivalence ()
 
 snowballRequiresConsumerResidual : SnowballMayIgnoreConsumerResidual → ⊥
 snowballRequiresConsumerResidual ()
