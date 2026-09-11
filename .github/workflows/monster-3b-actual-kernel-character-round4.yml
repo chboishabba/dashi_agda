@@ -1,6 +1,30 @@
 name: Monster 3B actual kernel character round 4
 
 on:
+  push:
+    branches:
+      - 'agent/dewey-qid-firstlink-coverage-priorart'
+    paths:
+      - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact.agda'
+      - 'scripts/monster_3b_normalizer_restriction.g'
+      - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/monster_3b_inertia_phase_resolution.g'
+      - 'scripts/render_monster_3b_certificate.py'
+      - 'scripts/render_monster_3b_actual_kernel_certificate.py'
+      - 'scripts/render_monster_3b_inertia_phase_certificate.py'
+      - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
+      - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
+      - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
   pull_request:
     branches:
       - master
