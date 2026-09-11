@@ -109,6 +109,57 @@ record ExperimentalDataBoundary : Set where
 canonicalExperimentalDataBoundary = experimental-data-boundary true true false false false true
 
 ------------------------------------------------------------------------
+-- Primary conference manifestation immediately before Maiwald's death.
+--
+-- The official 77th ISMS schedule dates P7658 to 2024-06-20 and names
+-- Frank Maiwald (JPL/Caltech) as a coauthor.  The abstract explicitly says
+-- "we present" cryogenic gas-phase infrared spectra of deprotonated valine and
+-- deprotonated aminovaleric acid.  This pays public existence of those spectra
+-- before 2024-07-04, but not exact instrument-run dates, raw bytes, notebook
+-- custody, or identity with the later 2025 paper's final data products.
+------------------------------------------------------------------------
+
+record PreLossConferenceDataReceipt : Set where
+  constructor pre-loss-conference-data-receipt
+  field
+    sourceObject : String
+    presentationDate : String
+    sourceClass : String
+    authors : String
+    maiwaldAffiliation : String
+    deprotonatedValineSpectraPresented : Bool
+    deprotonatedAminovalericSpectraPresented : Bool
+    maiwaldNamedCoauthor : Bool
+    predatesMaiwaldDeath : Bool
+    exactInstrumentRunDatesPaid : Bool
+    exactRawDataBytesPaid : Bool
+    exactIdentityWith2025FinalDatasetPaid : Bool
+
+open PreLossConferenceDataReceipt public
+
+isms2024DeprotonatedSpectraReceipt : PreLossConferenceDataReceipt
+isms2024DeprotonatedSpectraReceipt = pre-loss-conference-data-receipt
+  "77th International Symposium on Molecular Spectroscopy, official session schedule, P7658 / RL06"
+  "2024-06-20 15:15-15:30"
+  "primary conference programme/abstract carrier"
+  "Lane M. Terry; Deacon J. Nemchick; Robert Hodyss; Frank Maiwald; J. Mathias Weber"
+  "Jet Propulsion Laboratory, California Institute of Technology, Pasadena, CA"
+  true true true true false false false
+
+record PreLossConferenceBoundary : Set where
+  constructor pre-loss-conference-boundary
+  field
+    deprotonatedSpectraPubliclyCarriedBeforeDeath : Bool
+    conferenceAuthorshipProvesExactRawDataCustody : Bool
+    conferenceDateEqualsExperimentRunDate : Bool
+    conferenceSpectraEqualFinal2025DatasetWithoutCrosswalk : Bool
+    preLossScientificContributionToDeprotonatedLaneSupported : Bool
+
+canonicalPreLossConferenceBoundary : PreLossConferenceBoundary
+canonicalPreLossConferenceBoundary =
+  pre-loss-conference-boundary true false false false true
+
+------------------------------------------------------------------------
 -- ACS SUPPORTING-INFORMATION PRODUCT SURFACES
 --
 -- These are exact public derivative-product classes for the two journal
@@ -172,4 +223,4 @@ data MaiwaldSuccessionReverseTarget : Set where
   acquireApparatusConfigurationContinuity acquireCalibrationTransfer acquireTagResponseModelContinuity acquireFailureHistoryTransfer acquireQualificationTransfer acquireRepositoryOrNotebookContinuity acquireWorkingTitleToPublishedVersionHistory acquireExperimentAndDataProductionDates acquirePreprintAcceptedManuscriptVersionCrosswalk acquireExactDatasetAndReductionVersionCrosswalk acquirePosterToSIProductCrosswalk : MaiwaldSuccessionReverseTarget
 
 manuscriptForkNextTarget : MaiwaldSuccessionReverseTarget
-manuscriptForkNextTarget = acquirePosterToSIProductCrosswalk
+manuscriptForkNextTarget = acquireExactDatasetAndReductionVersionCrosswalk
