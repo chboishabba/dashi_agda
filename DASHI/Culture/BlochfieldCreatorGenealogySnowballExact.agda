@@ -113,10 +113,6 @@ blochfieldDomainChronologyCandidate =
 
 ------------------------------------------------------------------------
 -- Independent external concept anchor: South Atlantic Anomaly.
---
--- This pays only the external identity/fact that the SAA is a real geomagnetic
--- anomaly studied by NASA.  It does NOT pay the creator's intended relation
--- between Blochfield and the SAA, nor any mathematics/physics of Blochfield.
 ------------------------------------------------------------------------
 
 southAtlanticAnomalyNASASource : Attribution.AttributedSource
@@ -141,6 +137,70 @@ southAtlanticAnomalyDOI : String
 southAtlanticAnomalyDOI = "no DOI claimed for the inspected NASA web source"
 
 ------------------------------------------------------------------------
+-- Cross-platform same-name / handle candidates.
+--
+-- These are acquired because creator-outward snowballing may expose older
+-- project ancestry.  They are intentionally identityUnresolved.  Same display
+-- name, surname/handle fragments, thematic overlap, or chronology cannot weld
+-- them to @msiyasmsi without an explicit cross-platform identity receipt.
+------------------------------------------------------------------------
+
+sameNameMediumCandidateObservation : OSINT.OSINTObservation
+sameNameMediumCandidateObservation =
+  OSINT.osint-observation
+    "https://medium.com/@yasminanacreto/list/80f317ad2598"
+    ""
+    "2026-09-11 search-indexed Medium list; page reports Yasmin Anacreto, Provocations, Mar 31 2024"
+    OSINT.discoveryMetadata
+    OSINT.identityUnresolved
+    "same-name Medium account/list candidate predating the observed @msiyasmsi X account join date"
+    "cross-platform identity candidate only; does not establish same person, Blochfield ancestry, endorsement of saved material, or creator technical lineage"
+    "no native cross-platform identity receipt acquired"
+    true
+    true
+    true
+
+crossPlatformLink3CandidateObservation : OSINT.OSINTObservation
+crossPlatformLink3CandidateObservation =
+  OSINT.osint-observation
+    "https://link3.to/0xyasanacreto"
+    ""
+    "2026-09-11 search-indexed Link3 profile"
+    OSINT.discoveryMetadata
+    OSINT.identityUnresolved
+    "0xyasanacreto.cyber profile contains featured content attributed to Yasmin Anacreto"
+    "cross-platform identity candidate only; handle/name similarity and web3 context do not establish same person or Blochfield lineage"
+    "no native cross-platform identity receipt acquired"
+    true
+    true
+    true
+
+record CrossPlatformIdentityCandidate : Set where
+  constructor cross-platform-identity-candidate
+  field
+    candidateObservation : OSINT.OSINTObservation
+    candidateLabel : String
+    relationToCreator : String
+    exactIdentityWeldPaid : Bool
+    exactIdentityWeldPaidIsFalse : exactIdentityWeldPaid ≡ false
+
+mediumIdentityCandidate : CrossPlatformIdentityCandidate
+mediumIdentityCandidate =
+  cross-platform-identity-candidate
+    sameNameMediumCandidateObservation
+    "Medium @yasminanacreto / Yasmin Anacreto"
+    "same-name historical account candidate"
+    false refl
+
+link3IdentityCandidate : CrossPlatformIdentityCandidate
+link3IdentityCandidate =
+  cross-platform-identity-candidate
+    crossPlatformLink3CandidateObservation
+    "Link3 0xyasanacreto.cyber"
+    "name/handle-context historical account candidate"
+    false refl
+
+------------------------------------------------------------------------
 -- Relationship classes.  Resemblance / adjacency cannot silently become
 -- ancestry or same-object lineage.
 ------------------------------------------------------------------------
@@ -150,6 +210,7 @@ data GenealogyRelation : Set where
   profileNamesExternalConcept : GenealogyRelation
   discoveryIndexListsDomain : GenealogyRelation
   externalConceptIdentity : GenealogyRelation
+  crossPlatformIdentityCandidate : GenealogyRelation
   creatorCitesSource : GenealogyRelation
   derivedFromSource : GenealogyRelation
   sameObjectTechnicalLineage : GenealogyRelation
@@ -190,6 +251,24 @@ nasaToSAAIdentity =
     "NASA institutional source plus Wikidata semantic identity coordinate"
     true
 
+mediumToCreatorIdentityCandidate : GenealogyEdge
+mediumToCreatorIdentityCandidate =
+  genealogy-edge
+    "Medium @yasminanacreto"
+    crossPlatformIdentityCandidate
+    "@msiyasmsi"
+    "same display name; exact identity weld not acquired"
+    false
+
+link3ToCreatorIdentityCandidate : GenealogyEdge
+link3ToCreatorIdentityCandidate =
+  genealogy-edge
+    "Link3 0xyasanacreto.cyber"
+    crossPlatformIdentityCandidate
+    "@msiyasmsi"
+    "name/handle-context similarity; exact identity weld not acquired"
+    false
+
 blochfieldSameObjectTechnicalLineage : GenealogyEdge
 blochfieldSameObjectTechnicalLineage =
   genealogy-edge
@@ -216,6 +295,8 @@ data DomainListingProvesCreatorOwnership : Set where
 data SouthAtlanticAnomalyPaysBlochfieldTheoryLineage : Set where
 data ExternalConceptAdjacencyCreatesDerivation : Set where
 data SearchIndexedProfileEqualsNativeProfile : Set where
+data SameDisplayNamePaysSamePerson : Set where
+data HandleStemPaysSamePerson : Set where
 
 creatorProfileLinkDoesNotPayNativeWebsite :
   CreatorProfileLinkPaysNativeWebsite → ⊥
@@ -237,6 +318,12 @@ searchIndexedProfileDoesNotEqualNativeProfile :
   SearchIndexedProfileEqualsNativeProfile → ⊥
 searchIndexedProfileDoesNotEqualNativeProfile ()
 
+sameDisplayNameDoesNotPaySamePerson : SameDisplayNamePaysSamePerson → ⊥
+sameDisplayNameDoesNotPaySamePerson ()
+
+handleStemDoesNotPaySamePerson : HandleStemPaysSamePerson → ⊥
+handleStemDoesNotPaySamePerson ()
+
 ------------------------------------------------------------------------
 -- Current creator-outward frontier.
 ------------------------------------------------------------------------
@@ -245,6 +332,7 @@ data GenealogyLeaf : Set where
   nativeXProfileReceipt : GenealogyLeaf
   nativeBlochfieldWebsiteContent : GenealogyLeaf
   authoritativeDomainRegistration : GenealogyLeaf
+  crossPlatformIdentityWeld : GenealogyLeaf
   creatorLongFormExplanation : GenealogyLeaf
   creatorExplicitReferences : GenealogyLeaf
   externalSameObjectLineage : GenealogyLeaf
@@ -258,6 +346,7 @@ genealogyStanding : GenealogyLeaf → GenealogyStanding
 genealogyStanding nativeXProfileReceipt = genealogyUnpaid
 genealogyStanding nativeBlochfieldWebsiteContent = genealogyUnpaid
 genealogyStanding authoritativeDomainRegistration = genealogyUnpaid
+genealogyStanding crossPlatformIdentityWeld = genealogyUnpaid
 genealogyStanding creatorLongFormExplanation = genealogyUnpaid
 genealogyStanding creatorExplicitReferences = genealogyUnpaid
 genealogyStanding externalSameObjectLineage = genealogyUnpaid
@@ -265,5 +354,7 @@ genealogyStanding externalSameObjectLineage = genealogyUnpaid
 -- Acquired sideways but not promoted into the ordered payment path:
 --   * third-party profile -> blochfield.com association
 --   * third-party 2026-08-28 domain-listing chronology candidate
---   * NASA/Q1468412 external SAA identity.
+--   * NASA/Q1468412 external SAA identity
+--   * same-name Medium historical candidate
+--   * Link3 0xyasanacreto.cyber historical candidate.
 -- The next conclusion-paying leaf remains native creator material.
