@@ -9,6 +9,7 @@ import DASHI.ComputerScience.RSA260GNFSRunParameterArtifactSnowballExact as RunA
 import DASHI.ComputerScience.RSA260ProductionArtifactSubstituteAdmissionExact as Substitute
 import DASHI.ComputerScience.RSA260LACarrierBidiDerivationExact as BidiCarrier
 import DASHI.ComputerScience.RSA260BidiCandidateExperimentExact as CandidateExperiment
+import DASHI.ComputerScience.RSA260BidiCandidateBWCShadowExact as CandidateBWC
 
 ------------------------------------------------------------------------
 -- RSA-260 PRODUCTION-SUBSTITUTION ROADMAP
@@ -18,9 +19,9 @@ import DASHI.ComputerScience.RSA260BidiCandidateExperimentExact as CandidateExpe
 -- intersected bidirectionally with downstream Block-Wiedemann/gather demands,
 -- yielding a typed sparse-GF(2) carrier CONSTRAINT FIBRE.
 --
--- A runnable implicit member of that fibre has now additionally passed the
--- declared carrier/held-out/shadow-left-kernel experiment.  This is an
--- experiment-supported candidate, NOT the historical same-object matrix.
+-- A runnable implicit member of that fibre has passed carrier/held-out tests,
+-- and a 924x512 shadow has passed an exact-byte BWC-shaped preparation test
+-- using B = A A^T.  Neither result identifies the historical production bytes.
 ------------------------------------------------------------------------
 
 record ProductionLAObservation : Set where
@@ -65,10 +66,6 @@ rsa260ProductionLAObservation = production-la-observation
   "nccl"
   true
 
-------------------------------------------------------------------------
--- Acquisition/search state.
-------------------------------------------------------------------------
-
 record ProductionArtifactAcquisitionState : Set where
   constructor production-artifact-acquisition-state
   field
@@ -112,13 +109,20 @@ candidateExperimentBoundary = CandidateExperiment.canonicalCandidateConsumerSupp
 candidateExperimentReceipt : CandidateExperiment.CandidateExperimentExecutionReceipt
 candidateExperimentReceipt = CandidateExperiment.currentCandidateExperimentExecutionReceipt
 
+candidateBWCShadowBoundary : CandidateBWC.PreparedShadowConsumerBoundary
+candidateBWCShadowBoundary = CandidateBWC.canonicalPreparedShadowConsumerBoundary
+
+candidateBWCShadowReceipt : CandidateBWC.BWCShadowExecutionReceipt
+candidateBWCShadowReceipt = CandidateBWC.currentBWCShadowExecutionReceipt
+
 ------------------------------------------------------------------------
 -- Ordered residual router.
 ------------------------------------------------------------------------
 
 data ProductionResidual : Set where
   acquireSameObjectMemberOfDerivedLACarrierFibre : ProductionResidual
-  constructPreparedBWCAdapterForRunnableCandidate : ProductionResidual
+  raiseCandidateProjectionWidthTowardProduction : ProductionResidual
+  runCandidateMatrixGeneratorAndKernelRecovery : ProductionResidual
   acquireProductionProjectionCheckpointOrGenerator : ProductionResidual
   bindExactModifiedSourceRevision : ProductionResidual
   reproduceProductionCPUReference : ProductionResidual
@@ -153,6 +157,10 @@ record RSA260ProductionSubstitutionBoundary : Set where
     runnableBidiCandidateProductionContractPassed : Bool
     runnableBidiCandidateHeldOutStructurePassed : Bool
     runnableBidiCandidateShadowLeftKernelPassed : Bool
+    runnableBidiCandidatePreparedSquareAdapterPassed : Bool
+    runnableBidiCandidatePackedScalarFactorizedKrylovPassed : Bool
+    runnableBidiCandidateProjectionSequencePassed : Bool
+    runnableBidiCandidateExactBWCShadowBlobExecuted : Bool
     runnableBidiCandidateHistoricalIdentityPaid : Bool
     runnableBidiCandidateProductionBWCReplayPaid : Bool
 
@@ -185,6 +193,10 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; runnableBidiCandidateProductionContractPassed = true
   ; runnableBidiCandidateHeldOutStructurePassed = true
   ; runnableBidiCandidateShadowLeftKernelPassed = true
+  ; runnableBidiCandidatePreparedSquareAdapterPassed = true
+  ; runnableBidiCandidatePackedScalarFactorizedKrylovPassed = true
+  ; runnableBidiCandidateProjectionSequencePassed = true
+  ; runnableBidiCandidateExactBWCShadowBlobExecuted = true
   ; runnableBidiCandidateHistoricalIdentityPaid = false
   ; runnableBidiCandidateProductionBWCReplayPaid = false
   ; productionMatrixBytesPaid = false
@@ -204,6 +216,7 @@ data ProductionShapeImpliesProductionBytes : Set where
 data BidiCarrierFibreImpliesUniqueMatrix : Set where
 data RunnableCandidateImpliesHistoricalMatrix : Set where
 data PassedDeclaredExperimentImpliesProductionBWC : Set where
+data AATShadowImpliesProductionPreparedEncoding : Set where
 data SyntheticKernelImpliesProductionKernel : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 data CPUReferenceImpliesCUDAParity : Set where
@@ -221,6 +234,9 @@ runnableCandidateDoesNotCreateHistoricalMatrix ()
 
 passedExperimentDoesNotCreateProductionBWC : PassedDeclaredExperimentImpliesProductionBWC → ⊥
 passedExperimentDoesNotCreateProductionBWC ()
+
+aatShadowDoesNotCreateProductionPreparedEncoding : AATShadowImpliesProductionPreparedEncoding → ⊥
+aatShadowDoesNotCreateProductionPreparedEncoding ()
 
 syntheticKernelDoesNotCreateProductionKernel : SyntheticKernelImpliesProductionKernel → ⊥
 syntheticKernelDoesNotCreateProductionKernel ()
