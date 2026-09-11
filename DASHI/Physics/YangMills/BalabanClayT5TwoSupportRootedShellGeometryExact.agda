@@ -21,6 +21,8 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact using
+  (SignedAxis4)
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalRootedShellInjectionExact as Shell
 
 record TwoSupportGeometry
@@ -82,7 +84,7 @@ record TwoSupportRootedShellInjection
     (diameter : TwoSupportDiameterAuthority geometry carrier) : Set₁ where
   field
     clusterTraceRoot : Cluster → Block
-    clusterTraceWord : Cluster → List Shell.SignedAxis4
+    clusterTraceWord : Cluster → List SignedAxis4
     clusterShellIndex : Cluster → Nat
 
     clusterTraceUsesPolymerRoot : ∀ cluster →
