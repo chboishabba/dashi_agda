@@ -11,6 +11,7 @@ import DASHI.ComputerScience.RSA260LACarrierBidiDerivationExact as BidiCarrier
 import DASHI.ComputerScience.RSA260BidiCandidateExperimentExact as CandidateExperiment
 import DASHI.ComputerScience.RSA260BidiCandidateBWCShadowExact as CandidateBWC
 import DASHI.ComputerScience.RSA260BidiCandidateGeneratorKernelExact as CandidateFullLA
+import DASHI.ComputerScience.RSA260BidiCandidateProjection256Exact as CandidateProjection256
 
 ------------------------------------------------------------------------
 -- RSA-260 PRODUCTION-SUBSTITUTION ROADMAP
@@ -18,7 +19,8 @@ import DASHI.ComputerScience.RSA260BidiCandidateGeneratorKernelExact as Candidat
 -- The historical identity route remains unpaid at the byte level.  In
 -- parallel, the bidi-derived carrier fibre now has a runnable implicit member
 -- whose executable shadow has passed carrier, held-out, left-kernel, prepared
--- SpMV/Krylov/projection, shared-generator and kernel-recovery consumers.
+-- SpMV/Krylov/projection, shared-generator, kernel-recovery and width-256
+-- transport/projection consumers.
 --
 -- Candidate adequacy for those declared consumers is not historical identity.
 ------------------------------------------------------------------------
@@ -48,22 +50,10 @@ open ProductionLAObservation public
 rsa260ProductionLAObservation : ProductionLAObservation
 rsa260ProductionLAObservation = production-la-observation
   "Eric Lu, Factoring RSA-260, RSA-260 stage table and parameters, 2026-09-09"
-  656182601
-  656182189
-  98431741898
+  656182601 656182189 98431741898
   "150.0 nonzeros per row (reported density)"
-  2564096
-  2
-  256
-  256
-  1281607
-  40
-  64
-  26
-  12
-  "cuda"
-  "nccl"
-  true
+  2564096 2 256 256 1281607 40 64 26 12
+  "cuda" "nccl" true
 
 record ProductionArtifactAcquisitionState : Set where
   constructor production-artifact-acquisition-state
@@ -123,6 +113,12 @@ candidateGeneratorReceipt = CandidateFullLA.currentCandidateGeneratorExecutionRe
 candidateKernelReceipt : CandidateFullLA.CandidateKernelExecutionReceipt
 candidateKernelReceipt = CandidateFullLA.currentCandidateKernelExecutionReceipt
 
+candidateProjection256Boundary : CandidateProjection256.Projection256ConsumerBoundary
+candidateProjection256Boundary = CandidateProjection256.canonicalProjection256ConsumerBoundary
+
+candidateProjection256Receipt : CandidateProjection256.Projection256ExecutionReceipt
+candidateProjection256Receipt = CandidateProjection256.currentProjection256ExecutionReceipt
+
 ------------------------------------------------------------------------
 -- Ordered residual routers.
 ------------------------------------------------------------------------
@@ -140,14 +136,14 @@ firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectMemberOfDerivedLACarrierFibre
 
 data CandidateExperimentResidual : Set where
-  raiseCandidateProjectionWidthToward256 : CandidateExperimentResidual
   compareIndependentProjectionSeeds : CandidateExperimentResidual
+  scaleGeneratorConsumerBeyondWidth8 : CandidateExperimentResidual
   compareAlternativePreparationAdapters : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = raiseCandidateProjectionWidthToward256
+firstUnpaidCandidateExperimentResidual = compareIndependentProjectionSeeds
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -182,6 +178,10 @@ record RSA260ProductionSubstitutionBoundary : Set where
     runnableBidiCandidateNonzeroKernelRecoveryPaid : Bool
     runnableBidiCandidateKernelVerifiedBackOnOriginalAT : Bool
     runnableBidiCandidateExactGeneratorKernelBlobExecuted : Bool
+    runnableBidiCandidateTwoWidth256SequencesPaid : Bool
+    runnableBidiCandidateTotal512BlockColumnsPaid : Bool
+    runnableBidiCandidateWidth256ExplicitFactorizedParityPaid : Bool
+    runnableBidiCandidateExactProjection256BlobExecuted : Bool
     runnableBidiCandidateHistoricalIdentityPaid : Bool
     runnableBidiCandidateProductionBWCReplayPaid : Bool
 
@@ -223,6 +223,10 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; runnableBidiCandidateNonzeroKernelRecoveryPaid = true
   ; runnableBidiCandidateKernelVerifiedBackOnOriginalAT = true
   ; runnableBidiCandidateExactGeneratorKernelBlobExecuted = true
+  ; runnableBidiCandidateTwoWidth256SequencesPaid = true
+  ; runnableBidiCandidateTotal512BlockColumnsPaid = true
+  ; runnableBidiCandidateWidth256ExplicitFactorizedParityPaid = true
+  ; runnableBidiCandidateExactProjection256BlobExecuted = true
   ; runnableBidiCandidateHistoricalIdentityPaid = false
   ; runnableBidiCandidateProductionBWCReplayPaid = false
   ; productionMatrixBytesPaid = false
@@ -245,6 +249,7 @@ data PassedDeclaredExperimentImpliesProductionBWC : Set where
 data AATShadowImpliesProductionPreparedEncoding : Set where
 data CandidateGeneratorImpliesProductionGenerator : Set where
 data CandidateKernelImpliesProductionDependency : Set where
+data Width256CandidateImpliesProductionProjection : Set where
 data SearchMissImpliesArtifactAbsent : Set where
 data CPUReferenceImpliesCUDAParity : Set where
 data CUDAParityImpliesNCCLParity : Set where
@@ -270,6 +275,9 @@ candidateGeneratorDoesNotCreateProductionGenerator ()
 
 candidateKernelDoesNotCreateProductionDependency : CandidateKernelImpliesProductionDependency → ⊥
 candidateKernelDoesNotCreateProductionDependency ()
+
+width256CandidateDoesNotCreateProductionProjection : Width256CandidateImpliesProductionProjection → ⊥
+width256CandidateDoesNotCreateProductionProjection ()
 
 searchMissDoesNotProveAbsence : SearchMissImpliesArtifactAbsent → ⊥
 searchMissDoesNotProveAbsence ()
