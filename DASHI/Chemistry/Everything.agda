@@ -58,3 +58,10 @@ import DASHI.Chemistry.AlliumMolecularIdentityExact
 import DASHI.Chemistry.AlliumOrganosulfurMechanismExact
 import DASHI.Chemistry.AlliumReactionNetworkCrossPollinationExact
 import DASHI.Chemistry.AlliumMolecularTrajectoryExact
+
+------------------------------------------------------------------------
+-- Atomic-periodic-table cross-pollination: consumes the existing atom/valence,
+-- molecular-assembly, admissible-reaction, temporal-trajectory and industrial
+-- material-lineage owners as one fibre-over-time bridge.  This import does not
+-- collapse atomic recovery into quantitative chemistry or plant validation.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
