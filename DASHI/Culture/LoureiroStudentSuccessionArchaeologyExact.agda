@@ -105,14 +105,6 @@ simranPostLossSupervisionTransition = student-supervision-transition
 
 ------------------------------------------------------------------------
 -- Exact post-loss funding / compute-resource continuity.
---
--- The 2025 APS DPP abstract for the Li/Liu/Loureiro ion-acoustic project names
--- DOE DE-SC0022012, DOE DE-FG02-91-ER54109 and NERSC FES-ERCAP0026577.
--- Dion Li's genuinely post-loss solo APS Open Science article reuses exactly
--- DE-FG02-91ER54109 and FES-ERCAP0026577 (plus NSF GRFP 2141064), while not
--- naming DE-SC0022012. This pays continuity of specific infrastructure/resource
--- identifiers across the loss boundary, not transfer of a Loureiro-held grant,
--- PI authority, repository custody, or inherited simulation state.
 ------------------------------------------------------------------------
 
 record ScientificResourceContinuityReceipt : Set where
@@ -155,23 +147,28 @@ loureiroToLiResourceContinuity = scientific-resource-continuity-receipt
 ------------------------------------------------------------------------
 -- Award-scope archaeology / control.
 --
--- MIT's federal Uniform Guidance schedule identifies DE-FG02-91ER54109 as
--- "Theoretical Research in Advanced Physics and Technology" at the institutional
--- level. APS records show the same award supporting unrelated MIT/PSFC plasma
--- work years before the Li/Liu/Loureiro object. Therefore exact identifier reuse
--- across Loureiro's death is evidence of continued institutional resource access,
--- not evidence that a Loureiro-personal grant was transferred to Dion Li.
+-- DOE's own active-award tables identify DE-FG02-91ER54109 as an MIT award,
+-- title "Theoretical Research in Advanced Physics and Technology", historically
+-- listing Peter Catto as PI. MIT audit schedules retain the same institutional
+-- award title. APS and 2026 EPS records show the identifier supporting multiple
+-- MIT/PSFC plasma projects across years, including work unrelated to Loureiro/Li.
+-- Therefore exact identifier reuse across Loureiro's death pays institutional
+-- resource continuity, not a personal Loureiro-to-Li grant transfer.
 ------------------------------------------------------------------------
 
 record AwardScopeArchaeology : Set where
   constructor award-scope-archaeology
   field
     awardIdentifier : String
+    primaryGovernmentSource : String
+    primaryGovernmentLink : String
+    historicalAwardee : String
+    historicalPI : String
+    institutionalAwardTitle : String
     primaryInstitutionalSource : String
     primaryInstitutionalLink : String
-    institutionalAwardTitle : String
-    earlierIndependentUseSource : String
-    earlierIndependentUseLink : String
+    independent2026UseSource : String
+    independent2026UseLink : String
     institutionalScopePaid : Bool
     loureiroPersonalGrantIdentityPaid : Bool
     postLossReusePaysInstitutionalResourceContinuity : Bool
@@ -183,11 +180,15 @@ open AwardScopeArchaeology public
 mitDEFG0291ER54109Scope : AwardScopeArchaeology
 mitDEFG0291ER54109Scope = award-scope-archaeology
   "DE-FG02-91ER54109"
+  "U.S. Department of Energy Office of Science active-award table for Massachusetts, FY2010/FY2011"
+  "https://science.osti.gov/-/media/_/pdf/universities/SC_StatebyState_awards_FY2010.pdf"
+  "Massachusetts Institute of Technology"
+  "Peter Catto"
+  "Theoretical Research in Advanced Physics and Technology"
   "MIT Uniform Guidance / Schedule of Expenditures of Federal Awards"
   "https://vpf.mit.edu/sites/default/files/downloads/AuditReport/2024-MIT-Uniform-Guidance-Report.pdf"
-  "Theoretical Research in Advanced Physics and Technology"
-  "APS DPP 2019, Validation of gyrokinetic simulations in NSTX including comparisons with a synthetic diagnostic for high-k scattering"
-  "https://meetings.aps.org/Meeting/DPP19/Session/TI2.1"
+  "EPS Plasma Physics Conference 2026: Jeffrey Freidberg / Earl Marmar MHD energy-conversion work"
+  "https://indico.ukaea.uk/event/449/contributions/1946/"
   true false true false
   "530 Physics"
 
@@ -199,13 +200,15 @@ record ResourceContinuityBoundary : Set where
     repeatedFacilityContractImpliesRepositoryTransfer : Bool
     absentDEsc0022012InSoloPaperProvesGrantEnded : Bool
     institutionalAwardReuseEqualsPersonalGrantTransfer : Bool
+    historicalDifferentPIBlocksLoureiroPersonalGrantReading : Bool
+    unrelated2026UseSupportsInstitutionalScopeReading : Bool
     exactResourceReuseMayGuideGrantAndSimulationSearch : Bool
 
 open ResourceContinuityBoundary public
 
 canonicalResourceContinuityBoundary : ResourceContinuityBoundary
 canonicalResourceContinuityBoundary = resource-continuity-boundary
-  false false false false false true
+  false false false false false true true true
 
 ------------------------------------------------------------------------
 -- Attribution and promotion firewalls.
