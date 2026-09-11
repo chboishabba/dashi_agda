@@ -11,7 +11,8 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- transformation modelling, event-time alignment, organisational/custody
 -- confounders, capability resilience and reconstruction cost, science-driven
 -- acquisition compilation, disruption-benefit evidence testing, actor
--- benefit/visibility/effect intersection, and matched disruption-impact controls.
+-- benefit/visibility/effect intersection, matched disruption-impact controls,
+-- and the parallel roster role/event audit.
 --
 -- The scientific formalisation is both memorial work and an investigative aid:
 -- it identifies the actual capability-bearing application transformations that
@@ -22,6 +23,10 @@ module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 -- Amy Eskridge is kept outside the House-letter denominator but included in the
 -- full memorial application-transformation atlas and acquisition compiler so she
 -- is not dropped from the comparative scientific/investigative surface.
+--
+-- Acquisition is intentionally parallel across the retained cohort. Each person
+-- keeps an independent unpaid frontier. Event-specific alternative evidence and
+-- controls are first-class and may weaken a common-work-cause hypothesis.
 
 import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
@@ -75,6 +80,7 @@ import DASHI.Culture.MaiwaldActionSpectroscopyProjectSuccessionExact
 import DASHI.Culture.McCaslandEventTimeApplicationTransformationExact
 import DASHI.Culture.McCaslandOrganizationalTransitionSurfaceExact
 import DASHI.Culture.LoureiroEventAlternativeEvidenceExact
+import DASHI.Culture.MissingDeceasedRosterRoleAndCommitteeWeldAuditExact
 import DASHI.Culture.MissingDeceasedOverlookedDimensionMatrixExact
 import DASHI.Culture.MissingDeceasedReconstructionCostMatrixExact
 import DASHI.Culture.MissingDeceasedApplicationSuccessionFrontierExact
