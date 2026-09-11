@@ -15,7 +15,7 @@ import DASHI.Wikimedia.IbrahimMonsterCharacterDeterminationPrimarySourceSnowball
 --
 -- The generic Monster 3B uniqueness frontier no longer needs to be treated as
 -- an undifferentiated request to re-prove characteristic-zero character
--- theory.  Current mathlib owns the machine-checked orthogonality theorem
+-- theory. Current mathlib owns the machine-checked orthogonality theorem
 --
 --   Representation.char_orthonormal
 --
@@ -81,7 +81,7 @@ canonicalMathlibCharacterSourcePin = mathlib-character-source-pin
 
 ------------------------------------------------------------------------
 -- 2. Mathematical provenance remains Serre, not silently transferred to the
---    code author.  Reuse the existing attributed source rather than duplicate
+--    code author. Reuse the existing attributed source rather than duplicate
 --    a second bibliographic object.
 ------------------------------------------------------------------------
 
@@ -95,8 +95,8 @@ serreDOI : String
 serreDOI = "10.1007/978-1-4684-9458-7"
 
 ------------------------------------------------------------------------
--- 3. QID / Dewey / OEIS coordinates.  These are discovery and classification
---    coordinates only.  Topic Dewey values are not promoted to a claim about
+-- 3. QID / Dewey / OEIS coordinates. These are discovery and classification
+--    coordinates only. Topic Dewey values are not promoted to a claim about
 --    the catalogue classification of Serre's particular book.
 ------------------------------------------------------------------------
 
@@ -154,8 +154,8 @@ canonicalMathlibCharOrthonormalProducer = mathlib-char-orthonormal-producer
   true true true true true true true true true true
 
 ------------------------------------------------------------------------
--- 5. The desired corollary is now a *tiny cross-prover wrapper*, not a request
---    for a new representation theory library.  We deliberately do not mark it
+-- 5. The desired corollary is now a tiny cross-prover wrapper, not a request
+--    for a new representation theory library. We deliberately do not mark it
 --    paid until an actual Lean execution receipt exists.
 ------------------------------------------------------------------------
 
@@ -182,7 +182,7 @@ currentEqualCharacterIsoCorollaryRoute = equal-character-iso-corollary-route
   false false false
 
 ------------------------------------------------------------------------
--- 6. Local consumer alignment.  The existing Agda record remains authoritative
+-- 6. Local consumer alignment. The existing Agda record remains authoritative
 --    for downstream use; this file does not pretend a theorem-name citation is
 --    an inhabitant of that record.
 ------------------------------------------------------------------------
@@ -208,7 +208,7 @@ data SerreCitationCreatesLeanKernelReceipt : Set where
 data TopicDeweyClassifiesSpecificBook : Set where
 data QidCreatesEquivariantIso : Set where
 data OeisCreatesCharacterTheorem : Set where
-\data ExternalOrthogonalityAutomaticallyAttachesActualMonsterSector : Set where
+data ExternalOrthogonalityAutomaticallyAttachesActualMonsterSector : Set where
 
 mathlibNameDoesNotCreateAgdaWitness : MathlibTheoremNameCreatesAgdaWitness → ⊥
 mathlibNameDoesNotCreateAgdaWitness ()
