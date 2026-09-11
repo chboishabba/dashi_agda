@@ -10,39 +10,43 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimSnowballSymbolicVerificationDeweyQidDoiBidiExact as Dewey
-import DASHI.Wikimedia.IbrahimSnowballLearningMemoryTraumaReplicationConsensusBidiExact as Prior
-import DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact as SLR
+import DASHI.Wikimedia.IbrahimSnowballSystematicReviewMetaAnalysisPublicationBiasBidiExact as Review
+import DASHI.Wikimedia.IbrahimSnowballSourceGenealogyIndependenceEvidenceSynthesisBidiExact as Genealogy
 
 ------------------------------------------------------------------------
--- IBRAHIM / DEWEY PARETO FRONTIER
--- evidence synthesis <-> primary/secondary source roles <-> citation genealogy
--- <-> source independence <-> replication/corroboration <-> consensus.
+-- THIN PARETO DELTA AFTER LIVE-BRANCH QUOTIENTING
 --
--- High-alpha seam: the same dependency error appears in scientific replication,
--- systematic reviews, media/OSINT copying, generated testimony and expert
--- consensus.  Multiplicity is not independence; review/synthesis status is not
--- primary evidence; a citation chain is not a new observation.
+-- Broad evidence-synthesis, source-genealogy, publication-bias, primary-source,
+-- information-cascade and replication-dependence machinery already exists on
+-- this branch.  This file retains only the surviving uncovered coordinates:
+--   * literature-review + secondary-source + replication-crisis identities,
+--   * verified meta-analysis DDC 519.53,
+--   * citation agreement != primary-source claim support,
+--   * perceived source independence != actual provenance independence.
+--
+-- QID / DOI / canonical links / Dewey remain attribution and navigation
+-- coordinates; none creates truth, independence, source role or authority.
 ------------------------------------------------------------------------
 
 mkQid : String → String → Identity.ExternalIdentityDemand
 mkQid label qid = Identity.mkOptionalIdentityDemand
-  "Ibrahim evidence-synthesis/source-independence Pareto BIDI"
+  "Ibrahim evidence-synthesis/source-independence Pareto delta"
   "verified external identity only"
   label Identity.wikidataQid
   (Identity.verified qid
-    "Wikidata identity inspected 2026-09-11; identity does not create source independence, primary-evidence status, synthesis validity, replication success, consensus or truth")
+    "Wikidata identity inspected 2026-09-11; identity does not create truth, source role, independence, review quality or authority")
 
 systematicReviewQid : Identity.ExternalIdentityDemand
-systematicReviewQid = mkQid "systematic review" "Q1504425"
+systematicReviewQid = Review.systematicReviewQid
 
 metaAnalysisQid : Identity.ExternalIdentityDemand
-metaAnalysisQid = mkQid "meta-analysis" "Q815382"
+metaAnalysisQid = Review.metaAnalysisQid
+
+primarySourceQid : Identity.ExternalIdentityDemand
+primarySourceQid = Genealogy.primarySourceQid
 
 literatureReviewQid : Identity.ExternalIdentityDemand
 literatureReviewQid = mkQid "literature review" "Q2412849"
-
-primarySourceQid : Identity.ExternalIdentityDemand
-primarySourceQid = mkQid "primary source" "Q112754"
 
 secondarySourceQid : Identity.ExternalIdentityDemand
 secondarySourceQid = mkQid "secondary source" "Q905511"
@@ -50,76 +54,38 @@ secondarySourceQid = mkQid "secondary source" "Q905511"
 replicationCrisisQid : Identity.ExternalIdentityDemand
 replicationCrisisQid = mkQid "replication crisis" "Q25303778"
 
-evidenceSynthesisQid : Identity.ExternalIdentityDemand
-evidenceSynthesisQid = Identity.mkOptionalIdentityDemand
-  "Ibrahim evidence-synthesis/source-independence Pareto BIDI"
-  "external concept identity"
-  "generic evidence synthesis"
-  Identity.wikidataQid
-  (Identity.unresolved
-    "a 2026 Wikidata evidence-synthesis item was inspected but is a recent neologism entry; no mature generic QID promoted here; systematic review Q1504425 and meta-analysis Q815382 remain exact neighbouring identities")
-
 sourceIndependenceQid : Identity.ExternalIdentityDemand
 sourceIndependenceQid = Identity.mkOptionalIdentityDemand
-  "Ibrahim evidence-synthesis/source-independence Pareto BIDI"
+  "Ibrahim evidence-synthesis/source-independence Pareto delta"
   "external concept identity"
   "source independence / common-source dependence"
   Identity.wikidataQid
   (Identity.unresolved
-    "no exact stable single Wikidata concept promoted; dependence is retained as a provenance relation rather than manufactured from a nearby concept")
+    "no exact stable single Wikidata identity promoted; provenance independence remains a typed relation")
 
 ------------------------------------------------------------------------
--- Dewey coordinates: only inspected values are promoted.
+-- Dewey delta.
 ------------------------------------------------------------------------
 
 metaAnalysisDewey : Dewey.DeweyCoordinate
 metaAnalysisDewey = Dewey.mkVerifiedDewey
   "meta-analysis"
   "519.53"
-  "Wikidata Q815382 DDC statement inspected 2026-09-11; stated in GND"
+  "Wikidata Q815382 DDC statement inspected 2026-09-11; stated in Integrated Authority File/GND"
 
-systematicReviewDewey : Dewey.DeweyCoordinate
-systematicReviewDewey = Dewey.mkUnresolvedDewey
-  "systematic review"
-  "no exact DDC statement found on inspected Q1504425 page"
+literatureReviewDewey : Dewey.DeweyCoordinate
+literatureReviewDewey = Dewey.mkUnresolvedDewey
+  "literature review"
+  "Q2412849 verified; no exact inspected DDC value promoted"
 
-primarySourceDewey : Dewey.DeweyCoordinate
-primarySourceDewey = Dewey.mkUnresolvedDewey
-  "primary source"
-  "inspected Q112754 carries Library of Congress classification D5-D5.5, not an exact DDC value; do not convert classification systems"
-
-sourceIndependenceDewey : Dewey.DeweyCoordinate
-sourceIndependenceDewey = Dewey.mkUnresolvedDewey
-  "source independence"
-  "relation/provenance concept retained without an invented shelf coordinate"
+secondarySourceDewey : Dewey.DeweyCoordinate
+secondarySourceDewey = Dewey.mkUnresolvedDewey
+  "secondary source"
+  "Q905511 verified; no exact inspected DDC value promoted"
 
 ------------------------------------------------------------------------
--- DOI/primary scholarship.  Each source owns only its bounded claim.
+-- DOI / canonical-source attribution for the surviving residuals.
 ------------------------------------------------------------------------
-
-snyderReviewMethodSource : Attribution.AttributedSource
-snyderReviewMethodSource = Attribution.mkDOISource
-  "Hannah Snyder"
-  "Literature review as a research methodology: An overview and guidelines"
-  "Journal of Business Research 104, 333-339"
-  "2019"
-  "10.1016/j.jbusres.2019.07.039"
-  "https://doi.org/10.1016/j.jbusres.2019.07.039"
-  Attribution.academicArticleSource
-  "review-methodology source distinguishing literature-review approaches; supports systematic-review/meta-analysis role separation, not truth-by-review-status"
-  Attribution.publicAttribution
-
-landesSourceIndependenceSource : Attribution.AttributedSource
-landesSourceIndependenceSource = Attribution.mkDOISource
-  "Jürgen Landes"
-  "The variety of evidence thesis and its independence of degrees of independence"
-  "Synthese 198, 10611-10641"
-  "2021"
-  "10.1007/s11229-020-02738-5"
-  "https://doi.org/10.1007/s11229-020-02738-5"
-  Attribution.academicArticleSource
-  "philosophy/formal analysis of evidential variety and graded source independence; source dependence is not reducible to raw source count"
-  Attribution.publicAttribution
 
 pavlovicCitationAccuracySource : Attribution.AttributedSource
 pavlovicCitationAccuracySource = Attribution.mkDOISource
@@ -130,7 +96,7 @@ pavlovicCitationAccuracySource = Attribution.mkDOISource
   "10.1042/CS20201573"
   "https://doi.org/10.1042/CS20201573"
   Attribution.academicArticleSource
-  "empirical audit of citation accuracy; documents chains of inaccurate citation and motivates inspecting the primary source rather than counting derivative citations"
+  "empirical citation-accuracy audit; supports checking claim-to-primary-source support and citation-chain errors, not distrust of citation as such"
   Attribution.publicAttribution
 
 ioannidisCitationCopyingSource : Attribution.AttributedSource
@@ -142,11 +108,11 @@ ioannidisCitationCopyingSource = Attribution.mkDOISource
   "10.1007/s10654-018-0449-x"
   "https://doi.org/10.1007/s10654-018-0449-x"
   Attribution.academicArticleSource
-  "commentary/meta-research source on quotation error and citation copying; supports citation genealogy as an evidentiary-dependence concern"
+  "meta-research commentary on quotation error and citation copying; supports citation genealogy as a dependence concern"
   Attribution.publicAttribution
 
-youngSourceIndependencePolarizationSource : Attribution.AttributedSource
-youngSourceIndependencePolarizationSource = Attribution.mkDOISource
+youngSourceIndependenceSource : Attribution.AttributedSource
+youngSourceIndependenceSource = Attribution.mkDOISource
   "David J. Young; Jens Koed Madsen; Lee H. de-Wit"
   "Belief polarization can be caused by disagreements over source independence: Computational modelling, experimental evidence, and applicability to real-world politics"
   "Cognition 259, 106126"
@@ -154,228 +120,156 @@ youngSourceIndependencePolarizationSource = Attribution.mkDOISource
   "10.1016/j.cognition.2025.106126"
   "https://doi.org/10.1016/j.cognition.2025.106126"
   Attribution.academicArticleSource
-  "models and tests perceived testimonial-source independence as a mechanism affecting belief updating; does not imply every political disagreement is caused by source-independence judgments"
+  "models and tests perceived testimonial-source independence as a mechanism in belief updating; perceived independence remains distinct from actual provenance independence"
+  Attribution.publicAttribution
+
+landesSourceIndependenceSource : Attribution.AttributedSource
+landesSourceIndependenceSource = Attribution.mkDOISource
+  "Jürgen Landes"
+  "The variety of evidence thesis and its independence of degrees of independence"
+  "Synthese 198, 10611-10641"
+  "2021"
+  "10.1007/s11229-020-02738-5"
+  "https://doi.org/10.1007/s11229-020-02738-5"
+  Attribution.academicArticleSource
+  "formal/philosophical analysis of degrees of source independence; raw multiplicity and provenance independence remain distinct"
   Attribution.publicAttribution
 
 ------------------------------------------------------------------------
--- SensibLaw reuse: review packet/runtime handoff preserves revision and anchors
--- but does not create authority or semantic promotion.
+-- Exact reuse: no parallel evidence-synthesis ontology.
 ------------------------------------------------------------------------
 
-sensibLawSLRBoundary : SLR.SensibLawHandoffBoundary
-sensibLawSLRBoundary = SLR.canonicalSensibLawHandoffBoundary
+reviewBoundary : Review.SystematicReviewMetaAnalysisBoundary
+reviewBoundary = Review.canonicalSystematicReviewMetaAnalysisBoundary
 
-priorReplicationBoundary : Prior.LearningMemoryTraumaReplicationConsensusBoundary
-priorReplicationBoundary = Prior.canonicalLearningMemoryTraumaReplicationConsensusBoundary
-
-------------------------------------------------------------------------
--- Regression 1: evidence-item count cannot recover source independence.
-------------------------------------------------------------------------
-
-data SynthesisCase : Set where
-  sameEvidenceCountIndependentOrigins sameEvidenceCountCopiedOrigin : SynthesisCase
-
-data EvidenceCountSurface : Set where sameEvidenceMultiplicity : EvidenceCountSurface
-data SourceGenealogy : Set where independentOrigins commonCopiedOrigin : SourceGenealogy
-
-evidenceCountSurface : SynthesisCase → EvidenceCountSurface
-evidenceCountSurface _ = sameEvidenceMultiplicity
-
-sourceGenealogy : SynthesisCase → SourceGenealogy
-sourceGenealogy sameEvidenceCountIndependentOrigins = independentOrigins
-sourceGenealogy sameEvidenceCountCopiedOrigin = commonCopiedOrigin
-
-countIndependenceDefect : INF.NonFactorabilityWitness evidenceCountSurface sourceGenealogy
-countIndependenceDefect = INF.nonFactorabilityWitness
-  sameEvidenceCountIndependentOrigins sameEvidenceCountCopiedOrigin refl (λ ())
-
-evidenceMultiplicityCannotFactorSourceIndependence :
-  INF.FactorsThrough evidenceCountSurface sourceGenealogy → ⊥
-evidenceMultiplicityCannotFactorSourceIndependence =
-  INF.witnessRulesOutEveryFlatFactorisation countIndependenceDefect
+genealogyBoundary : Genealogy.SourceGenealogyIndependenceEvidenceSynthesisBoundary
+genealogyBoundary = Genealogy.canonicalSourceGenealogyIndependenceEvidenceSynthesisBoundary
 
 ------------------------------------------------------------------------
--- Regression 2: review/synthesis classification cannot recover primary-source
--- inspection or source authority.
-------------------------------------------------------------------------
-
-data ReviewCase : Set where
-  sameSystematicReviewPrimaryInspected sameSystematicReviewPrimaryNotInspected : ReviewCase
-
-data ReviewSurface : Set where sameSystematicReviewLabel : ReviewSurface
-data PrimaryInspection : Set where primaryInspected primaryNotInspected : PrimaryInspection
-
-reviewSurface : ReviewCase → ReviewSurface
-reviewSurface _ = sameSystematicReviewLabel
-
-primaryInspection : ReviewCase → PrimaryInspection
-primaryInspection sameSystematicReviewPrimaryInspected = primaryInspected
-primaryInspection sameSystematicReviewPrimaryNotInspected = primaryNotInspected
-
-reviewInspectionDefect : INF.NonFactorabilityWitness reviewSurface primaryInspection
-reviewInspectionDefect = INF.nonFactorabilityWitness
-  sameSystematicReviewPrimaryInspected sameSystematicReviewPrimaryNotInspected refl (λ ())
-
-systematicReviewLabelCannotFactorPrimaryInspection :
-  INF.FactorsThrough reviewSurface primaryInspection → ⊥
-systematicReviewLabelCannotFactorPrimaryInspection =
-  INF.witnessRulesOutEveryFlatFactorisation reviewInspectionDefect
-
-------------------------------------------------------------------------
--- Regression 3: citation agreement cannot recover claim support.
+-- Regression 1: citation agreement cannot recover direct primary support.
 ------------------------------------------------------------------------
 
 data CitationCase : Set where
-  sameCitationChainAccurate sameCitationChainDistorted : CitationCase
+  sameCitationAgreementPrimarySupports sameCitationAgreementPrimaryDoesNotSupport : CitationCase
 
 data CitationSurface : Set where sameCitationAgreement : CitationSurface
-data SupportStatus : Set where primarySupportsClaim primaryDoesNotSupportClaim : SupportStatus
+data PrimarySupport : Set where primarySupportsClaim primaryDoesNotSupportClaim : PrimarySupport
 
 citationSurface : CitationCase → CitationSurface
 citationSurface _ = sameCitationAgreement
 
-supportStatus : CitationCase → SupportStatus
-supportStatus sameCitationChainAccurate = primarySupportsClaim
-supportStatus sameCitationChainDistorted = primaryDoesNotSupportClaim
+primarySupport : CitationCase → PrimarySupport
+primarySupport sameCitationAgreementPrimarySupports = primarySupportsClaim
+primarySupport sameCitationAgreementPrimaryDoesNotSupport = primaryDoesNotSupportClaim
 
-citationSupportDefect : INF.NonFactorabilityWitness citationSurface supportStatus
+citationSupportDefect : INF.NonFactorabilityWitness citationSurface primarySupport
 citationSupportDefect = INF.nonFactorabilityWitness
-  sameCitationChainAccurate sameCitationChainDistorted refl (λ ())
+  sameCitationAgreementPrimarySupports sameCitationAgreementPrimaryDoesNotSupport refl (λ ())
 
 citationAgreementCannotFactorPrimarySupport :
-  INF.FactorsThrough citationSurface supportStatus → ⊥
+  INF.FactorsThrough citationSurface primarySupport → ⊥
 citationAgreementCannotFactorPrimarySupport =
   INF.witnessRulesOutEveryFlatFactorisation citationSupportDefect
 
 ------------------------------------------------------------------------
--- Regression 4: consensus/review agreement cannot recover methodological
--- independence or proposition truth.
+-- Regression 2: perceived source independence cannot recover actual provenance
+-- independence.  The psychological update coordinate and the evidentiary
+-- genealogy coordinate are distinct even when both matter to a consumer.
 ------------------------------------------------------------------------
 
-data ConsensusDependenceCase : Set where
-  sameConsensusIndependentMethods sameConsensusSharedDependency : ConsensusDependenceCase
+data IndependenceCase : Set where
+  samePerceivedIndependentActuallyIndependent samePerceivedIndependentActuallyDependent : IndependenceCase
 
-data ConsensusSurface : Set where sameConsensusSummary : ConsensusSurface
-data MethodDependence : Set where methodologicallyVaried commonMethodDependency : MethodDependence
+data PerceivedIndependence : Set where perceivedAsIndependent : PerceivedIndependence
+data ProvenanceIndependence : Set where actuallyIndependent commonSourceDependent : ProvenanceIndependence
 
-consensusSurface : ConsensusDependenceCase → ConsensusSurface
-consensusSurface _ = sameConsensusSummary
+perceivedIndependence : IndependenceCase → PerceivedIndependence
+perceivedIndependence _ = perceivedAsIndependent
 
-methodDependence : ConsensusDependenceCase → MethodDependence
-methodDependence sameConsensusIndependentMethods = methodologicallyVaried
-methodDependence sameConsensusSharedDependency = commonMethodDependency
+provenanceIndependence : IndependenceCase → ProvenanceIndependence
+provenanceIndependence samePerceivedIndependentActuallyIndependent = actuallyIndependent
+provenanceIndependence samePerceivedIndependentActuallyDependent = commonSourceDependent
 
-consensusDependenceDefect : INF.NonFactorabilityWitness consensusSurface methodDependence
-consensusDependenceDefect = INF.nonFactorabilityWitness
-  sameConsensusIndependentMethods sameConsensusSharedDependency refl (λ ())
+perceptionProvenanceDefect : INF.NonFactorabilityWitness perceivedIndependence provenanceIndependence
+perceptionProvenanceDefect = INF.nonFactorabilityWitness
+  samePerceivedIndependentActuallyIndependent samePerceivedIndependentActuallyDependent refl (λ ())
 
-consensusSurfaceCannotFactorMethodIndependence :
-  INF.FactorsThrough consensusSurface methodDependence → ⊥
-consensusSurfaceCannotFactorMethodIndependence =
-  INF.witnessRulesOutEveryFlatFactorisation consensusDependenceDefect
+perceivedIndependenceCannotFactorActualProvenance :
+  INF.FactorsThrough perceivedIndependence provenanceIndependence → ⊥
+perceivedIndependenceCannotFactorActualProvenance =
+  INF.witnessRulesOutEveryFlatFactorisation perceptionProvenanceDefect
 
 ------------------------------------------------------------------------
--- Reverse BIDI constraints / Pareto fan-out.
+-- Reverse Pareto fan-out.
 ------------------------------------------------------------------------
 
-record SynthesisReverseConstraint : Set where
-  constructor synthesis-reverse-constraint
+record ParetoReverseConstraint : Set where
+  constructor pareto-reverse-constraint
   field
     parentNode : String
     distinctionForcedUpward : String
     parentMayEraseDistinction : Bool
-open SynthesisReverseConstraint public
+open ParetoReverseConstraint public
 
-scienceConstraint : SynthesisReverseConstraint
-scienceConstraint = synthesis-reverse-constraint
-  "Science / replication / consensus"
-  "result count, independent origin, methodological variety, reproducibility, synthesis method, uncertainty and consensus remain distinct"
+informationConstraint : ParetoReverseConstraint
+informationConstraint = pareto-reverse-constraint
+  "Information / bibliography / review"
+  "citation agreement, direct primary-source support, review classification, secondary-source role and source genealogy remain distinct"
   false
 
-informationConstraint : SynthesisReverseConstraint
-informationConstraint = synthesis-reverse-constraint
-  "Library / information / citation graph"
-  "citation edge, copied reference, inspected primary source, accurate claim support, source genealogy and review classification remain distinct"
+psychologyConstraint : ParetoReverseConstraint
+psychologyConstraint = pareto-reverse-constraint
+  "Cognition / testimony / polarization"
+  "perceived source independence, actual provenance independence, credibility, agreement and belief update remain distinct"
   false
 
-sensibLawConstraint : SynthesisReverseConstraint
-sensibLawConstraint = synthesis-reverse-constraint
-  "SensibLaw / SLR"
-  "source-unit revision, anchor, review packet, follow receipt, source authority, primary inspection and semantic promotion remain distinct"
-  false
-
-osintMediaConstraint : SynthesisReverseConstraint
-osintMediaConstraint = synthesis-reverse-constraint
-  "OSINT / media / alternative media"
-  "number of reports, syndication/copying, common upstream source, direct observation, corroboration and truth remain distinct"
-  false
-
-psychologyConstraint : SynthesisReverseConstraint
-psychologyConstraint = synthesis-reverse-constraint
-  "Testimony / cognition / polarization"
-  "agreement count, perceived source independence, actual provenance independence, credibility and proposition truth remain distinct"
+scienceConstraint : ParetoReverseConstraint
+scienceConstraint = pareto-reverse-constraint
+  "Science / meta-analysis / replication"
+  "meta-analysis identity, DDC classification, included-study count, dependence, replication status, synthesis result and truth remain distinct"
   false
 
 ------------------------------------------------------------------------
 -- No-promotion gates.
 ------------------------------------------------------------------------
 
-data ManySourcesMeanIndependent : Set where
-data SystematicReviewMeansPrimaryInspected : Set where
-data CitationMeansPrimarySupport : Set where
-data SecondarySourceBecomesPrimary : Set where
-data MetaAnalysisMeansTruth : Set where
-data ConsensusMeansIndependentMethods : Set where
-data SLRPacketCreatesAuthority : Set where
+data CitationAgreementMeansPrimarySupport : Set where
+data PerceivedIndependenceMeansActualIndependence : Set where
+data SecondarySourceMeansWeakEvidence : Set where
+data MetaAnalysisDeweyMeansTruth : Set where
 data QidCreatesSourceRole : Set where
-data DeweyCreatesEvidenceHierarchy : Set where
 
-manySourcesDoNotCreateIndependence : ManySourcesMeanIndependent → ⊥
-manySourcesDoNotCreateIndependence ()
+citationAgreementDoesNotCreatePrimarySupport : CitationAgreementMeansPrimarySupport → ⊥
+citationAgreementDoesNotCreatePrimarySupport ()
 
-systematicReviewDoesNotCreatePrimaryInspection : SystematicReviewMeansPrimaryInspected → ⊥
-systematicReviewDoesNotCreatePrimaryInspection ()
+perceivedIndependenceDoesNotCreateActualIndependence : PerceivedIndependenceMeansActualIndependence → ⊥
+perceivedIndependenceDoesNotCreateActualIndependence ()
 
-citationDoesNotCreatePrimarySupport : CitationMeansPrimarySupport → ⊥
-citationDoesNotCreatePrimarySupport ()
+secondarySourceDoesNotMeanWeakEvidence : SecondarySourceMeansWeakEvidence → ⊥
+secondarySourceDoesNotMeanWeakEvidence ()
 
-secondarySourceDoesNotBecomePrimary : SecondarySourceBecomesPrimary → ⊥
-secondarySourceDoesNotBecomePrimary ()
-
-metaAnalysisDoesNotCreateTruth : MetaAnalysisMeansTruth → ⊥
-metaAnalysisDoesNotCreateTruth ()
-
-consensusDoesNotCreateIndependentMethods : ConsensusMeansIndependentMethods → ⊥
-consensusDoesNotCreateIndependentMethods ()
-
-slrPacketDoesNotCreateAuthority : SLRPacketCreatesAuthority → ⊥
-slrPacketDoesNotCreateAuthority ()
+metaAnalysisDeweyDoesNotCreateTruth : MetaAnalysisDeweyMeansTruth → ⊥
+metaAnalysisDeweyDoesNotCreateTruth ()
 
 qidDoesNotCreateSourceRole : QidCreatesSourceRole → ⊥
 qidDoesNotCreateSourceRole ()
 
-deweyDoesNotCreateEvidenceHierarchy : DeweyCreatesEvidenceHierarchy → ⊥
-deweyDoesNotCreateEvidenceHierarchy ()
-
-record EvidenceSynthesisSourceIndependenceBoundary : Set where
-  constructor evidence-synthesis-source-independence-boundary
+record EvidenceSynthesisSourceIndependenceParetoBoundary : Set where
+  constructor evidence-synthesis-source-independence-pareto-boundary
   field
-    primarySecondaryQidsRetained : Bool
-    systematicReviewMetaAnalysisQidsRetained : Bool
-    weakEvidenceSynthesisQidLeftUnresolved : Bool
-    metaAnalysisDeweyRetained : Bool
-    doiPrimaryScholarshipRetained : Bool
-    canonicalLinksRetained : Bool
-    multiplicitySeparatedFromIndependence : Bool
+    broadCanonicalOwnersReused : Bool
+    literatureReviewSecondarySourceReplicationCrisisQidsAttached : Bool
+    exactMetaAnalysisDeweyAttached : Bool
+    doiCanonicalSourcesRetained : Bool
     citationAgreementSeparatedFromPrimarySupport : Bool
-    synthesisClassificationSeparatedFromPrimaryInspection : Bool
-    consensusSeparatedFromMethodIndependence : Bool
-    sensibLawSLRAuthorityBoundaryReused : Bool
-    reverseBidiParetoFanoutPresent : Bool
+    perceivedIndependenceSeparatedFromActualProvenance : Bool
+    qidDeweySourceRoleTruthSeparated : Bool
+    reverseParetoFanoutPresent : Bool
     presentAxisVocabularyClaimedComplete : Bool
-open EvidenceSynthesisSourceIndependenceBoundary public
+open EvidenceSynthesisSourceIndependenceParetoBoundary public
 
-canonicalEvidenceSynthesisSourceIndependenceBoundary : EvidenceSynthesisSourceIndependenceBoundary
-canonicalEvidenceSynthesisSourceIndependenceBoundary =
-  evidence-synthesis-source-independence-boundary
-    true true true true true true true true true true true true false
+canonicalEvidenceSynthesisSourceIndependenceParetoBoundary :
+  EvidenceSynthesisSourceIndependenceParetoBoundary
+canonicalEvidenceSynthesisSourceIndependenceParetoBoundary =
+  evidence-synthesis-source-independence-pareto-boundary
+    true true true true true true true true false
