@@ -9,6 +9,7 @@ import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapExact as Historical
 import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapDeltaExact as Delta
 import DASHI.Wikimedia.IbrahimSnowballMemoryRepetitionSourceDependencyConsensusBidiExact as Dependency
 import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisPeerReviewConflictIndependenceBidiExact as Synthesis
+import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact as Pareto
 import DASHI.Wikimedia.IbrahimSnowballDependencyNDimLocalGlobalProofSearchBidiExact as NDim
 import DASHI.Wikimedia.IbrahimSnowballAtomicClaimIntentExperimentAdequacyBidiExact as Atomic
 import DASHI.Wikimedia.IbrahimSnowballEthnographyParticipantObservationFieldworkBidiExact as Fieldwork
@@ -43,12 +44,12 @@ independenceConsensusNowPaid = live-roadmap-target
   0
   "Corroboration / replication / common-source dependence / evidence synthesis / peer review / consensus"
   completeAsParent
-  "LearningMemoryTraumaReplicationConsensus; MemoryRepetitionSourceDependencyConsensus; EvidenceSynthesisPeerReviewConflictIndependence"
+  "LearningMemoryTraumaReplicationConsensus; MemoryRepetitionSourceDependencyConsensus; EvidenceSynthesisPeerReviewConflictIndependence; SourceGenealogyIndependenceEvidenceSynthesis; SystematicReviewMetaAnalysisPublicationBias; EvidenceSynthesisSourceIndependencePareto"
   "only consumer-specific source-dependency calculations remain"
-  "reproducibility Q1425625; scientific consensus Q316748; systematic review Q1504425; meta-analysis Q815382; peer review Q215028; conflict of interest Q211067"
-  "unresolved where no exact inspected DDC is paid"
-  "DOI-bounded independence/evidence-synthesis sources travel with local owners"
-  "future work must exhibit a concrete dependence structure not representable by the shared provenance grammar"
+  "reproducibility Q1425625; scientific consensus Q316748; systematic review Q1504425; meta-analysis Q815382; literature review Q2412849; primary source Q112754; secondary source Q905511; peer review Q215028; conflict of interest Q211067; replication crisis Q25303778"
+  "meta-analysis Q815382 has inspected DDC 519.53; unresolved where no exact inspected DDC is paid"
+  "DOI-bounded independence/evidence-synthesis sources travel with local owners; Pareto delta adds Pavlovic 10.1042/CS20201573, Ioannidis 10.1007/s10654-018-0449-x, Young/Madsen/de-Wit 10.1016/j.cognition.2025.106126, Landes 10.1007/s11229-020-02738-5"
+  "future work must exhibit a concrete dependence structure not representable by the shared provenance grammar; citation agreement and perceived independence are not enough without primary-support/provenance receipts"
 
 atomicExperimentAdequacyNowPaid : LiveRoadmapTarget
 atomicExperimentAdequacyNowPaid = live-roadmap-target
@@ -140,6 +141,9 @@ deltaPolicy = Delta.canonicalRoadmapDeltaPolicy
 
 independenceBoundary : Synthesis.EvidenceSynthesisPeerReviewIndependenceBoundary
 independenceBoundary = Synthesis.canonicalEvidenceSynthesisPeerReviewIndependenceBoundary
+
+paretoBoundary : Pareto.EvidenceSynthesisSourceIndependenceParetoBoundary
+paretoBoundary = Pareto.canonicalEvidenceSynthesisSourceIndependenceParetoBoundary
 
 atomicBoundary : Atomic.AtomicClaimIntentExperimentAdequacyBoundary
 atomicBoundary = Atomic.canonicalAtomicClaimIntentExperimentAdequacyBoundary
