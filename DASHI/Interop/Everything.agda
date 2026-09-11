@@ -66,5 +66,6 @@ import DASHI.Interop.SLRMultilingualPNFRoleCompatibilityExact
 import DASHI.Interop.SLRSemanticWorldClosureExact
 import DASHI.Interop.SLRWorldResearchTrancheConvergenceExact
 import DASHI.Interop.SLRWorldResearchIterationBudgetExact
+import DASHI.Interop.SLRWikidataTypedTraversalParetoExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
