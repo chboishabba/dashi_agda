@@ -110,5 +110,10 @@ sameTopicDoesNotCreateSentenceAlignment ()
 parserCompatibilityDoesNotCreateSemanticEquivalence : ParserCompatibilityMeansSemanticEquivalence → ⊥
 parserCompatibilityDoesNotCreateSemanticEquivalence ()
 
-blankParserDoesNotEqualTrainedParser : BlankParserEqualsTrainedDependencyParser → ⊥
+blankParserDoesNotEqualTrainedDependencyParser : BlankParserEqualsTrainedDependencyParser → ⊥
 blankParserDoesNotEqualTrainedDependencyParser ()
+
+-- Backward-compatible spelling retained for any shallow consumers already
+-- importing the shorter name.
+blankParserDoesNotEqualTrainedParser : BlankParserEqualsTrainedDependencyParser → ⊥
+blankParserDoesNotEqualTrainedParser = blankParserDoesNotEqualTrainedDependencyParser
