@@ -1,0 +1,154 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+2 0 obj
+<< /Length 1668 >>
+stream
+BT
+/F1 10 Tf
+12 TL
+1 0 0 1 42 800 Tm (DASHI Atomic and Periodic-Table Formalism) Tj
+1 0 0 1 42 788 Tm (369 generative constructor, provenance, and verification companion) Tj
+1 0 0 1 42 776 Tm () Tj
+1 0 0 1 42 764 Tm (Canonical source: Docs/papers/drafts/DASHIAtomicPeriodicTable369Formalism.tex) Tj
+1 0 0 1 42 752 Tm (PR: chboishabba/dashi_agda #886) Tj
+1 0 0 1 42 740 Tm (Date: 2026-09-11) Tj
+1 0 0 1 42 728 Tm () Tj
+1 0 0 1 42 716 Tm (CORE GENERATIVE CHAIN) Tj
+1 0 0 1 42 704 Tm (  ternary/369 substrate) Tj
+1 0 0 1 42 692 Tm (    -> physical realization) Tj
+1 0 0 1 42 680 Tm (    -> one-particle representation) Tj
+1 0 0 1 42 668 Tm (    -> antisymmetric fermionic occupancy) Tj
+1 0 0 1 42 656 Tm (    -> interacting energy / ground-state selector) Tj
+1 0 0 1 42 644 Tm (    -> shell occupancy) Tj
+1 0 0 1 42 632 Tm (    -> energetic valence quotient) Tj
+1 0 0 1 42 620 Tm (    -> shell-completion recurrence) Tj
+1 0 0 1 42 608 Tm (    -> periodic-table observable quotient.) Tj
+1 0 0 1 42 596 Tm () Tj
+1 0 0 1 42 584 Tm (Atomic identity is indexed by \(Z,N,Ne\); for a neutral atom Ne = Z.) Tj
+1 0 0 1 42 572 Tm (Subshell capacity: g\(l\) = 2\(2l+1\).) Tj
+1 0 0 1 42 560 Tm (Principal-shell capacity: G\(n\) = 2 n^2.) Tj
+1 0 0 1 42 548 Tm () Tj
+1 0 0 1 42 536 Tm (The generic constructor is Nat-indexed.  Element Z is not a special cell:) Tj
+1 0 0 1 42 524 Tm (  Z -> admissible fermion state -> H_Z -> Argmin\(H_Z\) -> valence class.) Tj
+1 0 0 1 42 512 Tm () Tj
+1 0 0 1 42 500 Tm (Periodicity is recurrence of valence classes across shell-completion events,) Tj
+1 0 0 1 42 488 Tm (not one fixed global translation and not a finite geometric lookup table.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 2177 >>
+stream
+BT
+/F1 10 Tf
+12 TL
+1 0 0 1 42 800 Tm (PROVENANCE / PRIOR IMPLEMENTATION RECEIPTS) Tj
+1 0 0 1 42 788 Tm () Tj
+1 0 0 1 42 776 Tm (2025-11-11  dashifine spectral-line atomic tooling \(commit 4f1441e...\)) Tj
+1 0 0 1 42 764 Tm (2026-02-16  Base369.agda present at dashi_agda repository inception) Tj
+1 0 0 1 42 752 Tm (            \(init 65266f7..., blob 8dc130c5...\): exact 3/6/9 carriers.) Tj
+1 0 0 1 42 740 Tm (2026-02-21  dashifine full-118 periodic-table visualization authored;) Tj
+1 0 0 1 42 728 Tm (2026-03-05  committed as 9f1430ab...; consumes PeriodicTableCSV.csv.) Tj
+1 0 0 1 42 716 Tm (2026-03-06  dashiQ projection/effective-physics programme \(47071bed...\).) Tj
+1 0 0 1 42 704 Tm (2026-04-30  dashi_agda atom/chemistry recovery carrier + shell filling) Tj
+1 0 0 1 42 692 Tm (            strengthening \(42e1d740...\); explicitly staged, not finished.) Tj
+1 0 0 1 42 680 Tm (2026-06-07  ChemistryFiniteRuleTargets.agda added \(062ccb61...\): exact) Tj
+1 0 0 1 42 668 Tm (            H..Ne occupations and finite Aufbau/Pauli/Hund target surface.) Tj
+1 0 0 1 42 656 Tm (2026-07-07  dashi_lean4 Base369.lean added from zero lines \(55132524...\);) Tj
+1 0 0 1 42 644 Tm (            explicit Lean proof terms for the finite 3/6/9 carrier laws.) Tj
+1 0 0 1 42 632 Tm (2026-07-19  explicit AtomicPeriodicTableRecoveryBoundary \(554e8f93...,) Tj
+1 0 0 1 42 620 Tm (            PR #101\).) Tj
+1 0 0 1 42 608 Tm (2026-09-11  PR #886 consolidates generic constructor + chronology + paper.) Tj
+1 0 0 1 42 596 Tm () Tj
+1 0 0 1 42 584 Tm (IDENTIFIER DISCIPLINE) Tj
+1 0 0 1 42 572 Tm (  atom: Wikidata Q9121; periodic table: Q10693;) Tj
+1 0 0 1 42 560 Tm (  Pauli exclusion principle: Q131594.) Tj
+1 0 0 1 42 548 Tm (  Pauli 1925 primary paper DOI: 10.1007/BF02980631.) Tj
+1 0 0 1 42 536 Tm (  Dewey cues: 539.7 atomic/nuclear physics; 546 inorganic chemistry.) Tj
+1 0 0 1 42 524 Tm () Tj
+1 0 0 1 42 512 Tm (QID is semantic identity, Dewey is catalogue classification, DOI identifies) Tj
+1 0 0 1 42 500 Tm (a publication object, and a Git commit is an implementation receipt. None of) Tj
+1 0 0 1 42 488 Tm (these identifiers alone supplies physical or theorem authority.) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 2219 >>
+stream
+BT
+/F1 10 Tf
+12 TL
+1 0 0 1 42 800 Tm (VERIFICATION / NON-PROMOTION STATUS) Tj
+1 0 0 1 42 788 Tm () Tj
+1 0 0 1 42 776 Tm (Present and inspected:) Tj
+1 0 0 1 42 764 Tm (  * Base369 Agda source at repository inception.) Tj
+1 0 0 1 42 752 Tm (  * Lean Base369 proof source and its first-addition commit.) Tj
+1 0 0 1 42 740 Tm (  * exact first-ten shell target source in dashi_agda.) Tj
+1 0 0 1 42 728 Tm (  * full-118 dashifine visualization source.) Tj
+1 0 0 1 42 716 Tm (  * PR #886 Agda source, provenance ledgers, validation root and TeX paper.) Tj
+1 0 0 1 42 704 Tm () Tj
+1 0 0 1 42 692 Tm (Historically reported but not reproduced in this PR:) Tj
+1 0 0 1 42 680 Tm (  * MDL/exclusion filling experiment with closure coordinates Z=2,10,18;) Tj
+1 0 0 1 42 668 Tm (    original executable/script/hash and parameter schedule remain to locate.) Tj
+1 0 0 1 42 656 Tm () Tj
+1 0 0 1 42 644 Tm (Not claimed as freshly mechanically checked in this session:) Tj
+1 0 0 1 42 632 Tm (  * new PR #886 Agda modules \(no local Agda executable; focused CI added\);) Tj
+1 0 0 1 42 620 Tm (  * dashi_lean4 project build \(proof terms inspected, build not rerun\);) Tj
+1 0 0 1 42 608 Tm (  * original dashifine full-118 generated GIF artifact \(save call located\).) Tj
+1 0 0 1 42 596 Tm () Tj
+1 0 0 1 42 584 Tm (Open physical obligations:) Tj
+1 0 0 1 42 572 Tm (  * operator-to-spectrum realization and physical scale setting;) Tj
+1 0 0 1 42 560 Tm (  * ionisation-energy validation;) Tj
+1 0 0 1 42 548 Tm (  * nuclear-stability bridge;) Tj
+1 0 0 1 42 536 Tm (  * bonding / molecular chemistry;) Tj
+1 0 0 1 42 524 Tm (  * empirical recovery across the periodic table.) Tj
+1 0 0 1 42 512 Tm () Tj
+1 0 0 1 42 500 Tm (NON-COLLAPSE LAWS) Tj
+1 0 0 1 42 488 Tm (  triadic cardinality != orbital quantum numbers;) Tj
+1 0 0 1 42 476 Tm (  shell capacity != physical energy ordering;) Tj
+1 0 0 1 42 464 Tm (  full-118 visualization != generative derivation;) Tj
+1 0 0 1 42 452 Tm (  first-ten exact target != full empirical periodic table;) Tj
+1 0 0 1 42 440 Tm (  generic constructor != completed empirical chemistry.) Tj
+1 0 0 1 42 428 Tm () Tj
+1 0 0 1 42 416 Tm (Canonical full manuscript and equations are in the adjacent .tex source.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Pages /Count 3 /Kids [6 0 R 7 0 R 8 0 R] >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 5 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 5 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 5 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+9 0 obj
+<< /Type /Catalog /Pages 5 0 R >>
+endobj
+10 0 obj
+<< /Title (DASHI Atomic and Periodic-Table Formalism) /Author (Johl Brown / DASHI) /Subject (369 atom and periodic-table formalism; provenance and verification) >>
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000009 00000 n 
+0000000077 00000 n 
+0000001796 00000 n 
+0000004024 00000 n 
+0000006294 00000 n 
+0000006363 00000 n 
+0000006489 00000 n 
+0000006615 00000 n 
+0000006741 00000 n 
+0000006790 00000 n 
+trailer
+<< /Size 11 /Root 9 0 R /Info 10 0 R >>
+startxref
+6970
+%%EOF
