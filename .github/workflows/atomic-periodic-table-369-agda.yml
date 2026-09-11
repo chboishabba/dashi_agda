@@ -10,6 +10,7 @@ on:
       - 'scripts/atomic_radial_identity_repair.py'
       - 'scripts/atomic_hydrogen_nist_comparison.py'
       - 'scripts/atomic_hydrogen_reduced_mass_nist.py'
+      - 'scripts/atomic_helium_hartree_scf.py'
       - 'Artifacts/atomic-periodic-table-369/**'
       - 'Docs/papers/drafts/DASHIAtomicPeriodicTable369*.tex'
       - '.github/workflows/atomic-periodic-table-369-agda.yml'
@@ -111,4 +112,21 @@ jobs:
           rm = json.loads(pathlib.Path('/tmp/hydrogen-reduced-mass-nist-receipt.json').read_text())
           assert rm['residual_magnitude_improves_over_infinite_mass'] is True
           assert abs(rm['reduced_mass_minus_nist_ev']) < abs(rm['infinite_mass_minus_nist_ev'])
+          PY
+      - name: Run first many-electron helium Hartree diagnostic
+        run: |
+          python3 scripts/atomic_helium_hartree_scf.py \
+            --npts 32000 --receipt /tmp/helium-hartree-scf-receipt.json
+          python3 - <<'PY'
+          import json, pathlib
+          r = json.loads(pathlib.Path('/tmp/helium-hartree-scf-receipt.json').read_text())
+          result = r['result']
+          assert r['passed'] is True
+          assert result['converged'] is True
+          assert result['iterations'] <= 300
+          # Hartree-level He should bind the first electron but underpredict the
+          # experimental ionization energy because correlation is unpaid.
+          assert result['ionization_energy_ev'] > 0.0
+          assert result['minus_nist_ev'] < 0.0
+          assert abs(result['minus_nist_ev']) < 2.0
           PY
