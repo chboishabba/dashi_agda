@@ -45,6 +45,35 @@ exactHistoricalDumpDay : String
 exactHistoricalDumpDay = "unresolved: month paid by paper; exact dump day/file not promoted"
 
 ------------------------------------------------------------------------
+-- Independent later Wikipedia-network source.
+--
+-- Schwartz 2021 uses all retained internal links from a 2018-03-01 snapshot,
+-- not the first-link-only projection.  It is therefore useful independent
+-- evidence that Wikipedia can be studied as a directed network, while being a
+-- negative control against silently treating every Wikipedia-link graph as the
+-- Ibrahim FLN.
+------------------------------------------------------------------------
+
+schwartzWikipediaNetworkPaper : Attribution.AttributedSource
+schwartzWikipediaNetworkPaper = Attribution.mkDOISource
+  "Gustavo A. Schwartz"
+  "Complex networks reveal emergent interdisciplinary knowledge in Wikipedia"
+  "Humanities and Social Sciences Communications 8, 127"
+  "2021"
+  "10.1057/s41599-021-00801-1"
+  "https://doi.org/10.1057/s41599-021-00801-1"
+  Attribution.academicArticleSource
+  "independent later Wikipedia-network study using the WikiLinkGraphs 2018-03-01 full internal-link snapshot; supports the broad directed-network research family but is not a reproduction of Ibrahim's first-link projection"
+  Attribution.publicAttribution
+
+schwartzPaperEntity : Atlas.ScientificReferenceEntity
+schwartzPaperEntity = Atlas.verified
+  "Complex networks reveal emergent interdisciplinary knowledge in Wikipedia"
+  Atlas.conceptEntity
+  "Q113854554"
+  "Wikidata scholarly-article identity inspected 2026-09-11; DOI 10.1057/s41599-021-00801-1"
+
+------------------------------------------------------------------------
 -- QID coordinates.  Reuse the existing scientific-reference entity layer.
 ------------------------------------------------------------------------
 
@@ -123,15 +152,17 @@ record FirstLinkPrimarySourceReceipt : Set where
     november2014CorpusMonthPaid : Bool
     directedNetworkConstructionPaid : Bool
     traversalFunnelMethodPaid : Bool
+    independentWikipediaNetworkFamilySourcePaid : Bool
     exactDumpDayPaid : Bool
     exactDumpFilePaid : Bool
     parserEquivalentReproductionPaid : Bool
     currentWikipediaEdgesEqualHistoricalEdges : Bool
+    fullInternalLinkGraphEqualsFirstLinkGraph : Bool
 open FirstLinkPrimarySourceReceipt public
 
 canonicalFirstLinkPrimarySourceReceipt : FirstLinkPrimarySourceReceipt
 canonicalFirstLinkPrimarySourceReceipt = first-link-primary-source-receipt
-  true true true true true false false false false
+  true true true true true true false false false false false
 
 ------------------------------------------------------------------------
 -- WrongType / no-promotion gates.
@@ -142,6 +173,7 @@ data QidCreatesHistoricalFirstLink : Set where
 data DeweyCreatesSemanticEdge : Set where
 data CurrentWikipediaCreates2014Edge : Set where
 data DirectedGraphClassCreatesTraversalFunnel : Set where
+data FullInternalLinkGraphCreatesFirstLinkGraph : Set where
 
 doiDoesNotCreateHistoricalCorpus : DoiCreatesHistoricalCorpus → ⊥
 doiDoesNotCreateHistoricalCorpus ()
@@ -158,12 +190,17 @@ currentWikipediaDoesNotCreate2014Edge ()
 directedGraphClassDoesNotCreateTraversalFunnel : DirectedGraphClassCreatesTraversalFunnel → ⊥
 directedGraphClassDoesNotCreateTraversalFunnel ()
 
+fullInternalLinkGraphDoesNotCreateFirstLinkGraph : FullInternalLinkGraphCreatesFirstLinkGraph → ⊥
+fullInternalLinkGraphDoesNotCreateFirstLinkGraph ()
+
 ------------------------------------------------------------------------
 -- BIDI interpretation.
 --
 -- Forward: historical FLN source -> directed-graph/network-science navigation.
 -- Reverse: graph/QID/DDC coordinates may help discovery but may not pay the
 -- historical first-link edge, dump identity, or parser-equivalent replay.
+-- Independent later network studies may strengthen the research-family
+-- context without being promoted into same-object FLN reproductions.
 ------------------------------------------------------------------------
 
 record FirstLinkDeweyQidDoiBoundary : Set where
@@ -173,13 +210,15 @@ record FirstLinkDeweyQidDoiBoundary : Set where
     qidTravelsAsPresentEntityIdentity : Bool
     deweyTravelsAsLibraryNavigation : Bool
     paperOwnsHistoricalMethodReading : Bool
+    independentNetworkStudyKeptDistinct : Bool
     unresolvedDeweyRetained : Bool
     historicalDumpIdentityStillSeparate : Bool
     historicalParserReplayStillSeparate : Bool
     presentEntityIdentityCreatesHistoricalEdge : Bool
     classificationCreatesHistoricalEdge : Bool
+    laterFullLinkGraphCreatesHistoricalFirstLinkGraph : Bool
 open FirstLinkDeweyQidDoiBoundary public
 
 canonicalFirstLinkDeweyQidDoiBoundary : FirstLinkDeweyQidDoiBoundary
 canonicalFirstLinkDeweyQidDoiBoundary = first-link-dewey-qid-doi-boundary
-  true true true true true true true false false
+  true true true true true true true true false false false
