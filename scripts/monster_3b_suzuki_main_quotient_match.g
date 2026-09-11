@@ -122,24 +122,39 @@ outer78Pos := outer78Pair[1];
 # ----------------------------------------------------------------------
 # Identify Barraclough's fused degree-1458 main-table character.
 #
-# In the fused representation, the two extraspecial central phases contribute
-# 729*zeta + 729*zeta^2 = -729.  The outer group fuses the two nonidentity
-# extraspecial central elements into the unique size-two order-three class.
+# The extraspecial centre is NOT selected merely by order and class size.  The
+# main group also contains the 3-part of the 6.Suz centre and diagonal products.
+# The exact extraspecial central class is the size-two order-three class in the
+# kernel of the main -> 6.Suz.2 quotient.
 # ----------------------------------------------------------------------
 
 mainOrders := OrdersClassRepresentatives(main);
 mainSizes := SizesConjugacyClasses(main);
-centralCandidates := Filtered([1..Length(mainOrders)], i ->
-  mainOrders[i] = 3 and mainSizes[i] = 2);
-if Length(centralCandidates) <> 1 then
-  Error("expected one size-two order-three main-table class for the fused extraspecial centre");
+extraspecialCentralCandidates := Filtered([1..Length(mainOrders)], i ->
+  mainOrders[i] = 3 and mainSizes[i] = 2 and mainToOuter[i] = 1);
+if Length(extraspecialCentralCandidates) <> 1 then
+  Error("expected one size-two order-three extraspecial central class in ker(main -> 6.Suz.2)");
 fi;
-mainCentral3 := centralCandidates[1];
+mainCentral3 := extraspecialCentralCandidates[1];
+
+# Expose the nonidentity order-three class in the qGtoN3B kernel separately.
+# This is the exact future discriminator for <t1*t2> versus <t1*t2^-1>.
+qKernelCandidates := Filtered([1..Length(mainOrders)], i ->
+  mainOrders[i] = 3 and mainSizes[i] = 2 and mainToMN3B[i] = 1);
+if Length(qKernelCandidates) <> 1 then
+  Error("expected one size-two order-three nonidentity class in ker(main -> MN3B)");
+fi;
+qKernel3 := qKernelCandidates[1];
+qKernelOuterClass := mainToOuter[qKernel3];
+outerOrders := OrdersClassRepresentatives(outer);
+if outerOrders[qKernelOuterClass] <> 3 then
+  Error("qGtoN3B kernel class does not project to an order-three 6.Suz.2 class");
+fi;
 
 base1458Candidates := Filtered([1..Length(mainIrr)], i ->
   mainIrr[i][1] = 1458 and mainIrr[i][mainCentral3] = -729);
 if Length(base1458Candidates) <> 1 then
-  Error("degree-1458 fused Heisenberg character was not uniquely identified by central trace -729");
+  Error("degree-1458 fused Heisenberg character was not uniquely identified by extraspecial central trace -729");
 fi;
 base1458Pos := base1458Candidates[1];
 base1458 := mainIrr[base1458Pos];
@@ -271,8 +286,10 @@ PrintTo(output,
   "  \"six_suz_table\": \"", Identifier(six), "\",\n",
   "  \"six_suz_outer_table\": \"", Identifier(outer), "\",\n",
   "  \"base_1458_main_position\": ", base1458Pos, ",\n",
-  "  \"base_1458_central_class_position\": ", mainCentral3, ",\n",
+  "  \"base_1458_extraspecial_central_class_position\": ", mainCentral3, ",\n",
   "  \"base_1458_central_trace\": -729,\n",
+  "  \"qg_to_n3b_kernel_order_three_class_position\": ", qKernel3, ",\n",
+  "  \"qg_to_n3b_kernel_outer_class_position\": ", qKernelOuterClass, ",\n",
   "  \"degree_12_atlas_labels\": [\"", sixLabels[p12[1]], "\", \"", sixLabels[p12[2]], "\"],\n",
   "  \"degree_78_atlas_labels\": [\"", sixLabels[p78[1]], "\", \"", sixLabels[p78[2]], "\"],\n",
   "  \"outer_12_pair_position\": ", outer12Pos, ",\n",
@@ -285,16 +302,21 @@ PrintTo(output,
   "  \"mn3b_78_position\": ", mn3b78Pos, ",\n",
   "  \"mn3b_12_monster_multiplicity\": ", monsterMults[mn3b12Pos], ",\n",
   "  \"mn3b_78_monster_multiplicity\": ", monsterMults[mn3b78Pos], ",\n",
+  "  \"extraspecial_centre_selected_by_outer_quotient_kernel\": true,\n",
+  "  \"qg_to_n3b_kernel_class_identified\": true,\n",
   "  \"outer_pair_restriction_full_character_match\": true,\n",
   "  \"main_product_split_full_character_decomposition\": true,\n",
   "  \"quotient_descent_full_character_match\": true,\n",
   "  \"restricted_monster_same_object_match\": true,\n",
+  "  \"diagonal_kernel_orientation_paid\": false,\n",
   "  \"individual_zeta_label_orientation_paid\": false\n",
   "}\n");
 CloseStream(output);
 
 Print("Monster 3B Suzuki/main quotient same-object match written.\n");
 Print("base1458 main Irr position: ", base1458Pos, "\n");
+Print("qGtoN3B nonidentity kernel class: ", qKernel3,
+      "; outer image class: ", qKernelOuterClass, "\n");
 Print("12ab -> main ", dec12.support, " -> descending MN3B Irr ", mn3b12Pos, "\n");
 Print("78ab -> main ", dec78.support, " -> descending MN3B Irr ", mn3b78Pos, "\n");
 QUIT;
