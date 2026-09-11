@@ -3,21 +3,10 @@ module DASHI.Physics.YangMills.BalabanTriangularQuadraticCertificateExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; -_; _-_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
-
-------------------------------------------------------------------------
--- A triangular coefficient carrier for homogeneous rational quadratics.
---
--- qcons d row tail represents
---
---   d*x0^2 + x0 * dot(row,xs) + eval tail xs.
---
--- Off-diagonal coefficients are stored in their full x_i*x_j convention.
--- This lets a square of a linear form compile structurally, without asking the
--- ring solver to normalize a many-variable polynomial.
-------------------------------------------------------------------------
 
 data TriQuadratic : Set where
   qnil  : TriQuadratic
@@ -93,10 +82,6 @@ evalAdd (qcons dl rl tl) (qcons dr rr tr) (x ∷ xs)
   rewrite dotAdd rl rr xs
         | evalAdd tl tr xs
   = ℚRing.solve-∀
-
-------------------------------------------------------------------------
--- Structural square compiler.
-------------------------------------------------------------------------
 
 twoℚ : ℚ
 twoℚ = + 2
