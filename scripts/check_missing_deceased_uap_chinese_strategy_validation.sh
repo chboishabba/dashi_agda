@@ -32,6 +32,11 @@ grep -q 'staticYBCO1997Constraint' DASHI/Physics/ExoticGravity/NingLiYBCOGravity
 grep -q 'lessThanTwoPartsIn100MillionG' DASHI/Physics/ExoticGravity/NingLiYBCOGravityConstraintBidiExact.agda
 grep -q 'negativeConstraintIsNotPositiveAntigravityEvidence' DASHI/Physics/ExoticGravity/NingLiYBCOGravityConstraintBidiExact.agda
 
+grep -q 'record NingLiNASAProgrammeReceipt' DASHI/Physics/ExoticGravity/NingLiNASACooperativeAgreementNCC8124Exact.agda
+grep -q 'ncc8124FinalReport' DASHI/Physics/ExoticGravity/NingLiNASACooperativeAgreementNCC8124Exact.agda
+grep -q 'finalExperimentsCompleted' DASHI/Physics/ExoticGravity/NingLiNASACooperativeAgreementNCC8124Exact.agda
+grep -q 'nasaProgrammeDoesNotPayArmyOutcome' DASHI/Physics/ExoticGravity/NingLiNASACooperativeAgreementNCC8124Exact.agda
+
 grep -q 'ningLiRosterRepair' DASHI/Culture/MissingDeceasedRosterExtensionNingLiNickPopeExact.agda
 grep -q 'nickPopeRosterRepair' DASHI/Culture/MissingDeceasedRosterExtensionNingLiNickPopeExact.agda
 grep -q 'nickPopeIsNotScientist' DASHI/Culture/MissingDeceasedRosterExtensionNingLiNickPopeExact.agda
@@ -51,6 +56,7 @@ grep -q 'noisyLabelClassificationReceipt' DASHI/GameTheory/FengYangheMilitaryAIG
 
 grep -q 'mondaloyToMetamaterialBridgeUnpaid' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'zeroPointSuppressionIsNotVacuumThrust' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
+grep -q 'ningLiStaticConstraintCannotBeDropped' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'houseInquiryDoesNotPayCommonCause' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'existingAlloyMetamaterialBoundary' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 
@@ -88,6 +94,7 @@ grep -q 'ChineseStrategicScientistRosterSnowballExact' DASHI/Culture/MissingDece
 grep -q 'MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'YanHongHypersonicFlowControlBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'NingLiYBCOGravityConstraintBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'NingLiNASACooperativeAgreementNCC8124Exact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'MissingDeceasedRosterExtensionNingLiNickPopeExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'FangDainingActiveMechanicalMetamaterialBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'RezaFangAlloyMetamaterialDiscriminationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
