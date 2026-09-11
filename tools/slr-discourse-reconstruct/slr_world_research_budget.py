@@ -8,6 +8,12 @@ from pathlib import Path
 from typing import Any
 
 SCHEMA = "slr-world-research-budget-v1"
+PARETO_FIELDS = (
+    "cross_language_gap_coverage",
+    "source_surface_support",
+    "root_qid_support",
+    "typed_wikidata_property_target",
+)
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -33,16 +39,63 @@ def _dedupe_missing(rows: list[dict[str, Any]], attempted_missing: set[str]) -> 
     return out
 
 
+def _coord(row: dict[str, Any]) -> tuple[int, int, int, int]:
+    return (
+        int(row.get("cross_language_gap_coverage", 0) or 0),
+        int(row.get("source_surface_support", 0) or 0),
+        int(row.get("root_qid_support", 0) or 0),
+        1 if bool(row.get("typed_wikidata_property_target", False)) else 0,
+    )
+
+
+def _dominates(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    a = _coord(left)
+    b = _coord(right)
+    return all(x >= y for x, y in zip(a, b)) and any(x > y for x, y in zip(a, b))
+
+
+def _pareto_rank(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    remaining = [dict(row) for row in rows]
+    ranked: list[dict[str, Any]] = []
+    front_rank = 0
+    while remaining:
+        front: list[dict[str, Any]] = []
+        for row in remaining:
+            if not any(other is not row and _dominates(other, row) for other in remaining):
+                front.append(row)
+        if not front:
+            raise RuntimeError("Pareto ranking failed to find a nondominated front")
+        front.sort(key=lambda r: str(r.get("qid", "")))
+        front_ids = {id(row) for row in front}
+        for row in front:
+            row["pareto_front_rank"] = front_rank
+            row["pareto_dimensions_scalarized"] = False
+            row["frontier_rank_is_truth_rank"] = False
+            ranked.append(row)
+        remaining = [row for row in remaining if id(row) not in front_ids]
+        front_rank += 1
+    return ranked
+
+
 def _dedupe_related(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    seen: set[str] = set()
-    out: list[dict[str, Any]] = []
-    for row in sorted(rows, key=lambda r: str(r.get("qid", ""))):
+    grouped: dict[str, dict[str, Any]] = {}
+    for row in rows:
         qid = str(row.get("qid", "")).strip()
-        if not qid or qid in seen:
+        if not qid:
             continue
-        seen.add(qid)
-        out.append(dict(row))
-    return out
+        existing = grouped.get(qid)
+        if existing is None:
+            grouped[qid] = dict(row)
+            continue
+        # Duplicate obligations for one QID are one action.  Preserve the
+        # strongest independently observed support on every Pareto dimension.
+        for field in PARETO_FIELDS[:-1]:
+            existing[field] = max(int(existing.get(field, 0) or 0), int(row.get(field, 0) or 0))
+        existing["typed_wikidata_property_target"] = bool(
+            existing.get("typed_wikidata_property_target", False)
+            or row.get("typed_wikidata_property_target", False)
+        )
+    return _pareto_rank([grouped[qid] for qid in sorted(grouped)])
 
 
 def plan_frontier(
@@ -85,6 +138,9 @@ def plan_frontier(
         "unselected_missing_surfaces": missing[max_missing_surfaces:],
         "unselected_related_qids": related[max_new_qids:],
         "already_attempted_missing_surface_keys": sorted(set(missing_key(x) for x in all_missing) & attempted),
+        "selection_policy": "pareto-front-over-gap-and-support-coordinates-qid-tiebreak-only",
+        "pareto_dimensions": list(PARETO_FIELDS),
+        "pareto_dimensions_scalarized": False,
         "stop_reason": stop_reason,
         "consumer_closure_paid": False,
         "budget_exhaustion_is_consumer_closure": False,
@@ -102,6 +158,7 @@ def plan_frontier(
             "remaining_related_qids": max(0, len(related) - len(selected_related)),
             "max_new_qids": max_new_qids,
             "max_missing_surfaces": max_missing_surfaces,
+            "pareto_fronts": 1 + max((int(x.get("pareto_front_rank", 0)) for x in related), default=-1),
         },
     }
 
@@ -118,6 +175,7 @@ def seed_rows(plan: dict[str, Any], *, iteration_index: int) -> list[dict[str, A
             "qid": qid,
             "coordinate_role": "semantic-gap-next-acquisition",
             "identity_scope": "explicit-related-qid",
+            "pareto_front_rank": int(obligation.get("pareto_front_rank", 0)),
             "candidate_only": True,
             "semantic_promotion": False,
         })
@@ -236,12 +294,29 @@ def parse_args() -> argparse.Namespace:
 
 def self_check() -> int:
     obligations = [
-        {"obligation_kind": "follow-related-qid", "qid": "Q2", "candidate_only": True},
-        {"obligation_kind": "follow-related-qid", "qid": "Q2", "candidate_only": True},
-        {"obligation_kind": "missing-language-surface", "qid": "Q1", "language": "fr", "candidate_only": True},
+        {
+            "obligation_kind": "follow-related-qid",
+            "qid": "Q1",
+            "cross_language_gap_coverage": 1,
+            "source_surface_support": 1,
+            "root_qid_support": 1,
+            "typed_wikidata_property_target": False,
+            "candidate_only": True,
+        },
+        {
+            "obligation_kind": "follow-related-qid",
+            "qid": "Q2",
+            "cross_language_gap_coverage": 5,
+            "source_surface_support": 3,
+            "root_qid_support": 2,
+            "typed_wikidata_property_target": True,
+            "candidate_only": True,
+        },
+        {"obligation_kind": "missing-language-surface", "qid": "Q9", "language": "fr", "candidate_only": True},
     ]
     plan = plan_frontier(obligations, max_new_qids=1, max_missing_surfaces=1)
-    assert plan["summary"]["deduplicated_follow_related_qids"] == 1
+    assert [x["qid"] for x in plan["selected_related_qids"]] == ["Q2"]
+    assert plan["pareto_dimensions_scalarized"] is False
     assert len(seed_rows(plan, iteration_index=1)) == 1
     history = updated_attempt_history(None, plan, 1)
     plan2 = plan_frontier(obligations, max_new_qids=0, max_missing_surfaces=1, attempted_missing=set(history["attempted_missing_surface_keys"]))
@@ -249,8 +324,8 @@ def self_check() -> int:
     assert plan["consumer_closure_paid"] is False
     print(
         "SLR_WORLD_RESEARCH_BUDGET_SELF_CHECK schema=slr-world-research-budget-v1 passed=true "
-        "missing_surface_attempts_append_only=true frontier_rank_is_truth_rank=false "
-        "budget_exhaustion_is_consumer_closure=false semantic_promotion=false",
+        "pareto_selection=true pareto_dimensions_scalarized=false missing_surface_attempts_append_only=true "
+        "frontier_rank_is_truth_rank=false budget_exhaustion_is_consumer_closure=false semantic_promotion=false",
         file=sys.stderr,
     )
     return 0
@@ -289,8 +364,9 @@ def main() -> int:
         print(
             "SLR_WORLD_RESEARCH_BUDGET_RECEIPT "
             f"schema={SCHEMA} input={s['input_obligations']} selected_missing_surfaces={s['selected_missing_surfaces']} "
-            f"selected_related_qids={s['selected_related_qids']} remaining_missing_surfaces={s['remaining_missing_surfaces']} "
-            f"remaining_related_qids={s['remaining_related_qids']} stop_reason={plan['stop_reason']} "
+            f"selected_related_qids={s['selected_related_qids']} pareto_fronts={s['pareto_fronts']} "
+            f"remaining_missing_surfaces={s['remaining_missing_surfaces']} remaining_related_qids={s['remaining_related_qids']} "
+            f"stop_reason={plan['stop_reason']} pareto_dimensions_scalarized=false "
             "frontier_rank_is_truth_rank=false budget_exhaustion_is_consumer_closure=false "
             "candidate_only=true semantic_promotion=false",
             file=sys.stderr,
