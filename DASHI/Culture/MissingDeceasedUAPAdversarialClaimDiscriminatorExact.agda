@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Culture.AmyEskridgeAntigravityObservationBidiCrossPollinationExact as AmyAnti
 import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact as Reza
+import DASHI.Physics.Materials.RezaFangAlloyMetamaterialDiscriminationExact as MaterialDisc
 import DASHI.Physics.Spectroscopy.MaiwaldActionSpectroscopyBidiExact as Maiwald
 import DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact as Fang
 import DASHI.Culture.MissingDeceasedStrategicRoleCapabilityFibreExact as Role
@@ -61,12 +62,12 @@ mondaloyMetamaterialDiscriminator : ClaimDiscriminator
 mondaloyMetamaterialDiscriminator = claim-discriminator
   mondaloyS4Metamaterial
   "Mondaloy is a public spin-off of reverse-engineered metamaterial work associated with S4/Area 51"
-  "Reza/Jacinto burn-resistant nickel-alloy design is formalised; independent published active-mechanical-metamaterial science is now formalised for Fang Daining"
-  "RezaBurnResistantAlloyBidiExact + FangDainingActiveMechanicalMetamaterialBidiExact"
-  "same-object/provenance receipt connecting Mondaloy composition/process lineage to a classified reverse-engineering programme or S4 object"
-  "classified programme records should contain the same alloy/material object, composition/process lineage, custody chain or predecessor artifact before public patenting"
-  "advanced alloys and mechanical metamaterials are established terrestrial engineering categories with defence/aerospace uses"
-  "trace patent assignment, precursor compositions, funding/contract lineage, process notebooks and exact programme/material provenance"
+  "Reza/Jacinto burn-resistant nickel-alloy design is formalised; Fang Daining pays an independent published active-mechanical-metamaterial class; the new discrimination owner proves that alloy performance alone does not classify the Reza object as a metamaterial"
+  "RezaBurnResistantAlloyBidiExact + FangDainingActiveMechanicalMetamaterialBidiExact + RezaFangAlloyMetamaterialDiscriminationExact"
+  "for the same Reza/Mondaloy object: an architecture-based metamaterial classification receipt, architecture-derived effective-property receipt, and same-object provenance chain to a classified reverse-engineering programme or S4 predecessor"
+  "classified programme records should contain the same alloy/material object, architecture or composition/process lineage, custody chain or predecessor artifact before public patenting"
+  "advanced composition/process alloys and structured mechanical metamaterials are both established terrestrial engineering classes and must not be merged by the word 'advanced'"
+  "trace patent assignment, precursor compositions, architecture/effective-property evidence, funding/contract lineage, process notebooks and exact programme/material provenance"
   false false false
 
 maiwaldNhiDiscriminator : ClaimDiscriminator
@@ -123,6 +124,9 @@ existingAntigravityBoundary = Anti.canonicalAntigravityPromotionBoundary
 
 existingFangMetamaterialBoundary : Fang.FangMetamaterialBoundary
 existingFangMetamaterialBoundary = Fang.canonicalFangMetamaterialBoundary
+
+existingAlloyMetamaterialBoundary : MaterialDisc.AlloyMetamaterialDiscriminationBoundary
+existingAlloyMetamaterialBoundary = MaterialDisc.canonicalAlloyMetamaterialDiscriminationBoundary
 
 existingRoleCapabilityBoundary : Role.RoleCapabilityBoundary
 existingRoleCapabilityBoundary = Role.canonicalRoleCapabilityBoundary
