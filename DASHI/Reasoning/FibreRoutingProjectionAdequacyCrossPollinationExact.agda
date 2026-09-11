@@ -15,10 +15,6 @@ import DASHI.Interop.AdicHypervoxelArgumentTransportBridgeExact as Adic
 import DASHI.Wikimedia.NativeConcreteQidGraphProjectionExact as QID
 import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Fibre369
 
-------------------------------------------------------------------------
--- FIBRE ROUTING / PROJECTION ADEQUACY CROSS-POLLINATION
-------------------------------------------------------------------------
-
 data FlyConsumerQuery : Set where
   hardIdentityQuery : FlyConsumerQuery
   overlapProfileQuery : FlyConsumerQuery
@@ -27,67 +23,37 @@ data FlyConsumerAnswer : Set where
   hardIdentityAnswer : Fibre.HardPaintedIdentity → FlyConsumerAnswer
   overlapProfileAnswer : Fibre.PaintedOverlapProfile → FlyConsumerAnswer
 
-flyConsumerAnswer :
-  FlyConsumerQuery → Fibre.SelectedROISpecimen → FlyConsumerAnswer
-flyConsumerAnswer hardIdentityQuery state =
-  hardIdentityAnswer (Fibre.hardPaintedIdentity state)
-flyConsumerAnswer overlapProfileQuery state =
-  overlapProfileAnswer (Fibre.paintedOverlapProfile state)
+flyConsumerAnswer : FlyConsumerQuery → Fibre.SelectedROISpecimen → FlyConsumerAnswer
+flyConsumerAnswer hardIdentityQuery state = hardIdentityAnswer (Fibre.hardPaintedIdentity state)
+flyConsumerAnswer overlapProfileQuery state = overlapProfileAnswer (Fibre.paintedOverlapProfile state)
 
-flyConsumerSemantics :
-  Query.QuerySemantics Fibre.SelectedROISpecimen FlyConsumerQuery FlyConsumerAnswer
+flyConsumerSemantics : Query.QuerySemantics Fibre.SelectedROISpecimen FlyConsumerQuery FlyConsumerAnswer
 flyConsumerSemantics = Query.querySemantics flyConsumerAnswer
 
 hardWinnerAdequateForHardIdentity :
-  Query.AdequateFor
-    Fibre.hardPaintedIdentity
-    flyConsumerSemantics
-    hardIdentityQuery
+  Query.AdequateFor Fibre.hardPaintedIdentity flyConsumerSemantics hardIdentityQuery
 hardWinnerAdequateForHardIdentity =
-  Query.factorsForQuery
-    (λ identity → hardIdentityAnswer identity)
-    (λ state → refl)
+  Query.factorsForQuery (λ identity → hardIdentityAnswer identity) (λ state → refl)
 
 hardWinnerOverlapDefect :
-  Query.QueryAdequacyDefect
-    Fibre.hardPaintedIdentity
-    flyConsumerSemantics
-    overlapProfileQuery
+  Query.QueryAdequacyDefect Fibre.hardPaintedIdentity flyConsumerSemantics overlapProfileQuery
 hardWinnerOverlapDefect =
-  Query.queryAdequacyDefect
-    Fibre.overlappingROI
-    Fibre.parentOnlyROI
-    refl
-    (λ ())
+  Query.queryAdequacyDefect Fibre.overlappingROI Fibre.parentOnlyROI refl (λ ())
 
 hardWinnerCannotAnswerOverlapQuery :
-  Query.AdequateFor
-    Fibre.hardPaintedIdentity
-    flyConsumerSemantics
-    overlapProfileQuery → ⊥
+  Query.AdequateFor Fibre.hardPaintedIdentity flyConsumerSemantics overlapProfileQuery → ⊥
 hardWinnerCannotAnswerOverlapQuery =
   Query.queryAdequacyDefectBlocksFactorisation hardWinnerOverlapDefect
 
 softOverlapAdequateForOverlapQuery :
-  Query.AdequateFor
-    Fibre.paintedOverlapProfile
-    flyConsumerSemantics
-    overlapProfileQuery
+  Query.AdequateFor Fibre.paintedOverlapProfile flyConsumerSemantics overlapProfileQuery
 softOverlapAdequateForOverlapQuery =
-  Query.factorsForQuery
-    (λ profile → overlapProfileAnswer profile)
-    (λ state → refl)
+  Query.factorsForQuery (λ profile → overlapProfileAnswer profile) (λ state → refl)
 
 hardWinnerOverlapNonFactorability :
-  NonFactor.NonFactorabilityWitness
-    Fibre.hardPaintedIdentity
-    Fibre.paintedOverlapProfile
+  NonFactor.NonFactorabilityWitness Fibre.hardPaintedIdentity Fibre.paintedOverlapProfile
 hardWinnerOverlapNonFactorability =
-  NonFactor.nonFactorabilityWitness
-    Fibre.overlappingROI
-    Fibre.parentOnlyROI
-    refl
-    (λ ())
+  NonFactor.nonFactorabilityWitness Fibre.overlappingROI Fibre.parentOnlyROI refl (λ ())
 
 hardWinnerRechartCannotRecoverOverlap :
   ∀ {Recharted : Set} →
@@ -96,8 +62,7 @@ hardWinnerRechartCannotRecoverOverlap :
     (λ state → rechart (Fibre.hardPaintedIdentity state))
     Fibre.paintedOverlapProfile → ⊥
 hardWinnerRechartCannotRecoverOverlap rechart =
-  NonFactor.rechartingCannotRecoverErasedPhenomenon
-    rechart hardWinnerOverlapNonFactorability
+  NonFactor.rechartingCannotRecoverErasedPhenomenon rechart hardWinnerOverlapNonFactorability
 
 data Unit : Set where unit : Unit
 
@@ -109,17 +74,21 @@ projectionAdmissible : FlyProjectionModel → Set
 projectionAdmissible hardWinnerModel = Unit
 projectionAdmissible softOverlapModel = Unit
 
-projectionConsumerAdequate : FlyProjectionModel → Set₁
-projectionConsumerAdequate hardWinnerModel =
-  Query.AdequateFor
-    Fibre.hardPaintedIdentity
-    flyConsumerSemantics
-    overlapProfileQuery
-projectionConsumerAdequate softOverlapModel =
-  Query.AdequateFor
-    Fibre.paintedOverlapProfile
-    flyConsumerSemantics
-    overlapProfileQuery
+-- MDL's ConsumerAdequate field is Set-sized whereas query factorisation lives in
+-- Set₁. Keep a small receipt in MDL and prove its semantic soundness separately.
+data ProjectionAdequacyReceipt : FlyProjectionModel → Set where
+  softOverlapAdequacyReceipt : ProjectionAdequacyReceipt softOverlapModel
+
+projectionConsumerAdequate : FlyProjectionModel → Set
+projectionConsumerAdequate = ProjectionAdequacyReceipt
+
+softOverlapReceiptSound :
+  ProjectionAdequacyReceipt softOverlapModel →
+  Query.AdequateFor Fibre.paintedOverlapProfile flyConsumerSemantics overlapProfileQuery
+softOverlapReceiptSound softOverlapAdequacyReceipt = softOverlapAdequateForOverlapQuery
+
+hardWinnerReceiptImpossible : ProjectionAdequacyReceipt hardWinnerModel → ⊥
+hardWinnerReceiptImpossible ()
 
 projectionDescriptionLength : FlyProjectionModel → Nat
 projectionDescriptionLength hardWinnerModel = 1
@@ -131,10 +100,8 @@ data ProjectionRefines : FlyProjectionModel → FlyProjectionModel → Set where
   hardToSoft : ProjectionRefines hardWinnerModel softOverlapModel
 
 projectionModelReference : FlyProjectionModel → String
-projectionModelReference hardWinnerModel =
-  "unique-maximum painted-domain projection"
-projectionModelReference softOverlapModel =
-  "overlapping painted-domain profile"
+projectionModelReference hardWinnerModel = "unique-maximum painted-domain projection"
+projectionModelReference softOverlapModel = "overlapping painted-domain profile"
 
 flyProjectionProblem : Admissible.ConsumerMDLProblem
 flyProjectionProblem =
@@ -148,8 +115,6 @@ flyProjectionProblem =
     "finite illustrative code length; ranking only after admissibility and consumer adequacy"
     "Fly overlap-profile consumer"
 
--- Keep the universe-polymorphic query defect as the proof of insufficiency, but
--- use a first-order token for ConsumerCounterexample's Set-sized witness field.
 data HardOverlapFailureWitness : Set where
   hardOverlapFailureWitness : HardOverlapFailureWitness
 
@@ -159,45 +124,38 @@ hardProjectionCounterexample =
   Admissible.consumerCounterexample
     HardOverlapFailureWitness
     hardOverlapFailureWitness
-    hardWinnerCannotAnswerOverlapQuery
+    hardWinnerReceiptImpossible
     "hard winner identifies overlappingROI and parentOnlyROI"
     "the overlap-profile consumer distinguishes those states; exact query defect retained in hardWinnerOverlapDefect"
 
 hardToSoftLocalRepair :
-  Admissible.LocalRefinementRepair
-    flyProjectionProblem
-    hardWinnerModel
-    softOverlapModel
+  Admissible.LocalRefinementRepair flyProjectionProblem hardWinnerModel softOverlapModel
 hardToSoftLocalRepair =
   Admissible.localRefinementRepair
-    hardProjectionCounterexample
-    hardToSoft
-    unit
-    softOverlapAdequateForOverlapQuery
+    hardProjectionCounterexample hardToSoft unit softOverlapAdequacyReceipt
     "retain the same-point overlap fibre that the hard winner erased"
 
-softRepairIsEligible :
-  Admissible.Eligible flyProjectionProblem softOverlapModel
-softRepairIsEligible =
-  Admissible.repairProvidesEligibleRefinement hardToSoftLocalRepair
+softRepairIsEligible : Admissible.Eligible flyProjectionProblem softOverlapModel
+softRepairIsEligible = Admissible.repairProvidesEligibleRefinement hardToSoftLocalRepair
+
+softRepairSemanticAdequacy :
+  Query.AdequateFor Fibre.paintedOverlapProfile flyConsumerSemantics overlapProfileQuery
+softRepairSemanticAdequacy = softOverlapReceiptSound (proj₂ softRepairIsEligible)
 
 repairRemainsConsumerIndexed :
   Repair.repairIsConsumerIndexed Repair.canonicalConsumerFibreRepairBoundary ≡ true
 repairRemainsConsumerIndexed = refl
 
 repairOneWitnessDoesNotProveGlobalSufficiency :
-  Repair.separatingOneWitnessAloneProvesGlobalSufficiency
-    Repair.canonicalConsumerFibreRepairBoundary ≡ false
+  Repair.separatingOneWitnessAloneProvesGlobalSufficiency Repair.canonicalConsumerFibreRepairBoundary ≡ false
 repairOneWitnessDoesNotProveGlobalSufficiency = refl
 
 adicRefinementNeedsTypedSourceTarget :
-  Adic.refinementNeedsTypedSourceTarget
-    Adic.canonicalAdicArgumentTransportBoundary ≡ true
+  Adic.refinementNeedsTypedSourceTarget Adic.canonicalAdicArgumentTransportBoundary ≡ true
 adicRefinementNeedsTypedSourceTarget = refl
 
 adicProjectedShadowIsNotDefinitionalIdentity :
-  Adic.projectedShadowEqualsDefinitionalIdentity
-    Adic.canonicalAdicArgumentTransportBoundary ≡ false
+  Adic.projectedShadowEqualsDefinitionalIdentity Adic.canonicalAdicArgumentTransportBoundary ≡ false
 adicProjectedShadowIsNotDefinitionalIdentity = refl
 
 recursiveAddressDoesNotCreatePAdicPhysics :
@@ -208,23 +166,19 @@ recursiveAddressDoesNotCreatePAdicPhysics =
     Admissible.canonicalAdmissibleConsumerMDLBoundary
 
 qidProjectionIsIntentionallyLossy :
-  QID.projectionRetainsWholeNativeStatementLanguage
-    QID.canonicalNativeConcreteProjectionBoundary ≡ false
+  QID.projectionRetainsWholeNativeStatementLanguage QID.canonicalNativeConcreteProjectionBoundary ≡ false
 qidProjectionIsIntentionallyLossy = refl
 
 qidProjectionDoesNotAdmitArbitraryProperties :
-  QID.arbitraryPropertiesProjectToKernel
-    QID.canonicalNativeConcreteProjectionBoundary ≡ false
+  QID.arbitraryPropertiesProjectToKernel QID.canonicalNativeConcreteProjectionBoundary ≡ false
 qidProjectionDoesNotAdmitArbitraryProperties = refl
 
 nineObserverMayNeedSamePointContext :
-  Fibre369.c9MayDependOnSamePointContext
-    Fibre369.canonicalFibreObserverRepairBoundary ≡ true
+  Fibre369.c9MayDependOnSamePointContext Fibre369.canonicalFibreObserverRepairBoundary ≡ true
 nineObserverMayNeedSamePointContext = refl
 
 legacyPhaseOnlyAgreementIsNotAutomatic :
-  Fibre369.legacyPhaseOnlyAgreementAutomatic
-    Fibre369.canonicalFibreObserverRepairBoundary ≡ false
+  Fibre369.legacyPhaseOnlyAgreementAutomatic Fibre369.canonicalFibreObserverRepairBoundary ≡ false
 legacyPhaseOnlyAgreementIsNotAutomatic = refl
 
 record ProjectionRepairCrossPollinationBoundary : Set where
@@ -243,19 +197,7 @@ record ProjectionRepairCrossPollinationBoundary : Set where
     samePointContextMayBeRequiredBeyondCoarseObserver : Bool
     nuisanceControlAutomaticallyEstablishesPhysicalMechanism : Bool
 
-canonicalProjectionRepairCrossPollinationBoundary :
-  ProjectionRepairCrossPollinationBoundary
+canonicalProjectionRepairCrossPollinationBoundary : ProjectionRepairCrossPollinationBoundary
 canonicalProjectionRepairCrossPollinationBoundary =
   projectionRepairCrossPollinationBoundary
-    true
-    true
-    false
-    true
-    true
-    false
-    true
-    false
-    true
-    false
-    true
-    false
+    true true false true true false true false true false true false
