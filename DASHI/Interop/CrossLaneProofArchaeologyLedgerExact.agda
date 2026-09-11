@@ -14,7 +14,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 --   archaeology chronology date snowball attribution DOI QID OEIS source
 --   same-object attempted-payment buried-donor Clay NS Navier-Stokes
 --   YM Yang-Mills RH Riemann GR QFT R503 R504 R568 R573 R584
---   Round82 A1 B1 B2 C1 C2 certificate Bishop Bony Luo CMP109 CMP116 CMP119
+--   Round84 L1 L2 L3 L4 L5 L6 A1 B1 B2 C1 C2 certificate Bishop Bony Luo
+--   CMP109 CMP116 CMP119 one-loop marked-shell heat-Hessian OPE stress Ward
 --
 -- RULE OF USE
 --   * archaeology exists to reduce current proof debt, not to celebrate age;
@@ -72,22 +73,22 @@ nsClayRouter = clay-lane-router navierStokes
 yangMillsClayRouter : ClayLaneRouter
 yangMillsClayRouter = clay-lane-router yangMills
   "Finish the Jaffe-Witten existence + mass-gap problem on one literal compact-simple construction; do not optimize only the mass-gap subproblem."
-  "Latest archaeology-recovered shortest NEW-analysis cutset is Round82 five leaves: A1 LiteralCompactSimplePositiveBeta; B1 UniformHeatHessianDebt; B2 UniformCovariantFiniteSpeed; C1 SameFamilyCompositeOPERemainder; C2 SameFamilyStressWardHamiltonian."
-  "A1 source-facing determinant-first beta route is currently the sharpest finite/source leaf: positive Gaussian betaZ, finite-g interaction debt, and summable history-response debt on the same trajectory."
-  "CMP116/CMP119 make the formerly separate summable continuum increment downstream of A1 plus published analysis; CMP109 already owns differentiated marked E^(2)/Pi exponential decay; finite orbit/Walsh/interval compilers are largely machine-checked."
-  "2026-08-20 Round82 cut six independent new leaves to five; 2026-08-27 commit 85eb86c... recut A1 to determinant-first beta. Earlier Round77 five-job view is historical, not the sharpest current cutset."
-  "For A1: identify the constrained-Gaussian D^2 log det / Ward trace scalar exactly, prove betaZ_j >= b_Z > 0, bound finite-g betaInt_j, and prove summable source-native history response. For B1/B2: use the SAME density/Hessian carrier; for C1/C2: SAME continuum family and reconstructed H."
-  "Quantitative clustering is the hottest mass-gap Level-2 subproblem but is not the whole Clay cutset. Old gap=>clustering or clustering=>gap compilers cannot erase A1/C1/C2."
+  "Current package count remains five, but Round84 is the sharpest hard-analysis decomposition: six genuinely new physical lemma families L1-L6."
+  "L1 is the sharpest current finite/source-facing leaf: on the SAME Balaban finite-cutoff background, identify the literal constrained Wilson + reduced FP + Haar Ward scalar with C_A * 11/24 and prove the same-step Bishop/nonlinear remainder stays inside a cutoff/volume/scale/group-uniform positive margin."
+  "Already downstream/source-owned around L1: CMP109 Ward colour-scalar reduction; compact-simple invariant form uniqueness; classified C_A>0; Haar C_A/24 quadratic term; reduced ghost finite principal-log/log-det machinery; finite trace prefix/tail algebra. Round84 also makes CMP116 differentiated localization source-owned, irrelevant-coordinate memory decay downstream, clustering assembly downstream, OPE dyadic tail downstream, finite lattice stress-charge conservation exact, and Stone generator uniqueness standard."
+  "2026-08-20 Round84 commits f09e953f... -> 6f747f46... -> e0038fa0... reduce the hard-lemma upper count 7 -> 6 and narrow L2 to literal mark/radius/projection identification. Round82 remains the five-package parent but is not the sharpest hard-analysis router."
+  "Attack L1/L2/L3 before inventing new global machinery: L1 literal one-loop + local remainder; L2 same-object identification of beta/hessian/composite marks with source analytic coordinates and uniform radii/projections; L3 per-shell heat/Doob Hessian integral <= marked shell debt. Preserve L4 composite existence, L5 OPE/AF matching, L6 stress/Ward same-OS-translation generation for the full Clay package."
+  "Quantitative clustering is downstream of same-measure relaxation + finite-speed once L2/L3 feed the existing compilers; it is not the whole Clay cutset. Do not target exponential forgetting of the marginal running coupling: Round84 explicitly rejects that false target."
 
 rhClayRouter : ClayLaneRouter
 rhClayRouter = clay-lane-router riemannHypothesis
   "Finish RH by excluding every high off-line zero on the actual universal pole-quotient response; low/critical bridge remains independently required."
-  "Final certificate plumbing is already owned: literal finite near fold -> proof-carrying finite upper -> actual nearResponseAt(J) -> source-order off-budget -> certified complement envelope."
-  "Only strict high-side theorem remains on the balance-free context: cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole)), or the direct literal-near equivalent."
-  "RiemannG2FinalCarrierFiniteSumCertificateExact and RiemannG2CertifiedNearUpperClusterResponseCompilerExact already transport finite certificates to the final scalar. Repository Bishop interval semantics already prove +,-,negation,multiplication and positive division soundly; four-corner multiplication handles two sign-straddling intervals constructively."
+  "Current preferred high route has TWO genuine seams: one evaluator-independent representation equality nearResponseAt(chosen J) = finiteNearSum(cellResponse), followed by one primitive strict high analytic family. A proof-carrying finite upper certificate is an optional sufficient producer between them."
+  "First seam: realize the exact universal pole-quotient finite kernel and prove nearResponseAt(chosen crossing J)=finiteNearSum(cellResponse). After that, the strict certified route asks cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole)), or the direct literal-near equivalent."
+  "FinalNearIndexedFiniteProducer makes signedNearValue=finalNear definitional and removes a separate signed-value weld, but it explicitly leaves literal finite-sum realization unpaid. FinalCarrierFiniteSumCertificate and CertifiedNearUpperClusterResponseCompiler already transport a genuine finite upper once the kernel exists. Repository Bishop interval semantics already prove +,-,negation,multiplication and positive division soundly; four-corner multiplication handles two sign-straddling intervals constructively."
   "The reusable interval stack was built in the YM lane but is generic: Bishop four-corner multiplication, compositional expression intervals, and exact sine/cosine alternating-series enclosures."
-  "Instantiate a thin RH atom/expression adapter for the literal oscillatory cosine cells and use existing proof-carrying finite-sum enclosure; then test/prove the strict certified envelope margin."
-  "A finite certificate alone is not RH; the compiler itself records strictCertifiedEnvelopeBelowClusterStillRequired=true and finiteCertificateAloneProvesRH=false."
+  "Instantiate a thin RH atom/expression adapter for the literal reflection-paired cosine cells, attach it to FinalNearLiteralKernel/FinalCarrierFiniteSumCertificate, and independently prove the one strict aggregate ClusterResponse margin."
+  "A finite certificate alone is not RH; neither the representation equality nor the strict ClusterResponse inequality is manufactured by the arithmetic. CurrentDirectOneLeafFrontier also records no concrete exact scalar donor already found and RH derived=false."
 
 grQuantumRouter : ClayLaneRouter
 grQuantumRouter = clay-lane-router grQuantum
@@ -124,16 +125,16 @@ currentCutsets =
     "one live commutator spacetime budget; Bony route may reduce its nested class debt to old LH/HL/HH donors + comparable + outer aggregation"
     unpaid
     "test exact transport old annular LH/HL/HH -> R584 nested-slot classNormBudget; only then attack comparable/outer residual"
-  ∷ current-cutset yangMills "2026-08-27"
-    "BalabanClayHighestAlphaRound82FiveAnalyticLeafExact; commit 85eb86c2476e566bce0ebbba051629d94fb64d24"
-    "A1 positive beta; B1 heat-Hessian debt; B2 covariant finite speed; C1 composite OPE remainder; C2 stress/Ward/Hamiltonian"
+  ∷ current-cutset yangMills "2026-08-20"
+    "BalabanClayHighestAlphaRound84SixAnalyticLemmaExact; latest sharpening e0038fa05311fdf37462945c9a651bf45c4f16c9"
+    "five independent Clay theorem packages resolved to six hard physical lemma families: L1 literal one-loop/local remainder; L2 physical marked analytic coordinates/radii/projections; L3 per-shell heat-Hessian debt; L4 same-family composite existence; L5 OPE+AF matching; L6 stress/Ward generates same OS translations"
     unpaid
-    "5->4 only by proving or rigorously eliminating one of A1/B1/B2/C1/C2; A1 determinant-first route is presently sharpest"
+    "6->5 only by proving or rigorously eliminating one of L1-L6; current highest-alpha archaeology targets L1/L2/L3 because their surrounding algebra/source decay machinery is already owned"
   ∷ current-cutset riemannHypothesis "2026-09-11"
-    "RiemannG2CertifiedNearUpperClusterResponseCompilerExact"
-    "proof-bearing finite upper already transports to final near scalar; strict certified envelope below ClusterResponse remains"
+    "RiemannG2CurrentDirectOneLeafFrontierExact + FinalNearLiteralKernelExact + CertifiedNearUpperClusterResponseCompilerExact"
+    "one representation equality nearResponseAt(J)=finiteNearSum(cellResponse), then one uniform strict high analytic family; proof-carrying finite upper is optional producer"
     unpaid
-    "reuse Bishop/Taylor interval semantics to generate literal cell uppers, then prove the one strict aggregate margin"
+    "first inhabit exact literal kernel/equality, then reuse Bishop/Taylor interval semantics for certified cell uppers and prove strict aggregate margin below actual ClusterResponse"
   ∷ current-cutset grQuantum "2026-08-30"
     "endpoint-only common metric/action/total-stress weld"
     "same source carrier first, then post-weld quantum/semiclassical obligations"
@@ -221,14 +222,19 @@ canonicalDatedAnchors =
     "high-value donor for R584 if exact slot/envelope majorization can be proved"
   ∷ dated-anchor yangMills "2026-08-20"
     "Round82 be702a432236171d115b9bc2b4ea1f8dc81d530c"
-    "shortest new-analysis cutset 6 -> 5"
+    "five independent theorem packages: A1/B1/B2/C1/C2"
     liveCutsetCompression terminalConsumer sameObjectProved
-    "A2 summable continuum increment removed as independent new theorem via CMP116/CMP119 source route"
+    "package-level compression remains useful, but later Round84 is the sharper hard-analysis decomposition"
+  ∷ dated-anchor yangMills "2026-08-20"
+    "Round84 f09e953f79933701d59f186629e4ac30e0d0bd3a -> 6f747f468e2624346c224e84fb8c776fc758040d -> e0038fa05311fdf37462945c9a651bf45c4f16c9"
+    "hard-analysis cutset reduced 7 -> 6; false marginal-memory target removed; L2 narrowed to literal mark/radius/projection identification"
+    liveCutsetCompression liveLevel2Theorem sameObjectProved
+    "current YM archaeology root for genuinely new physical analysis"
   ∷ dated-anchor yangMills "2026-08-27"
     "Round82 85eb86c2476e566bce0ebbba051629d94fb64d24"
-    "A1 recut to determinant-first positive-beta source route"
-    liveCutsetCompression liveLevel2Theorem sameObjectProved
-    "global Wilson/FP/Haar near/far route becomes fallback rather than mandatory first gate"
+    "A1 determinant-first positive-beta source route refinement"
+    liveCutsetCompression producerTactic sameObjectProved
+    "useful L1 archaeology donor: global Wilson/FP/Haar near/far is fallback rather than mandatory first gate"
   ∷ dated-anchor grQuantum "2026-08-30"
     "PR #639 family"
     "common metric/action/total-QFT-stress weld"
@@ -238,7 +244,7 @@ canonicalDatedAnchors =
     "PR #855"
     "generic high contradiction / certified-upper normalization"
     canonicalConsumerRecovery terminalConsumer sameObjectProved
-    "certificate architecture compressed to the literal final high consumer"
+    "certificate architecture compressed to one representation seam plus one strict high analytic family"
   ∷ []
 
 ------------------------------------------------------------------------
@@ -272,25 +278,25 @@ attemptedPayments =
     "uniform gap survival; gap/clustering compilers; physical-gap master"
     "Clay mass-gap role"
     "downstream compilers strong, but not a substitute for same-family analytic construction"
-    "reuse compilers only after B1/B2 or another accepted same-family producer pays clustering/gap"
+    "reuse compilers only after the Round84 L2/L3 same-measure inputs or another accepted producer pay clustering/gap"
     compiler
-  ∷ attempted-payment yangMills "2026-08-20/27"
-    "Round82 source-accepting five-leaf recut"
+  ∷ attempted-payment yangMills "2026-08-20"
+    "Round82 five-package recut -> Round83 seven hard lemmas -> Round84 six hard lemmas"
     "full Clay existence+mass-gap package"
-    "current archaeology-recovered shortest honest NEW-analysis cutset"
-    "use Round82, not Round73/77 counts, as current top-level search router"
+    "current strict hard-analysis router is Round84 L1-L6; Round82 remains package-level parent"
+    "search old source/RG work against exact L1-L6 output shapes, not against obsolete round counts"
     terminalConsumer
   ∷ attempted-payment riemannHypothesis "2026-02 -> 2026-08"
     "Abel; Weil; Hermitian; H_X->...->H_E"
     "high off-line contradiction"
-    "useful diagnostics/producers but current representation debt is already compressed"
-    "mine local phase inequalities only; final strict certified envelope is the load-bearing theorem"
+    "useful diagnostics/producers but current representation debt is compressed to one equality"
+    "mine local phase inequalities only; do not revive full historical architectures"
     producerTactic
   ∷ attempted-payment riemannHypothesis "current"
-    "final finite-sum certificate + certified upper compiler"
-    "actual nearResponseAt(J) and ClusterResponse strict margin"
-    "same-object certificate transport paid; strict margin unpaid"
-    "reuse generic Bishop interval/taylor stack instead of creating another certificate arithmetic"
+    "FinalNearLiteralKernel + FinalNearIndexedFiniteProducer + FinalCarrierFiniteSumCertificate + certified upper compiler"
+    "nearResponseAt(J)=finiteNearSum(cellResponse), then actual ClusterResponse strict margin"
+    "signedNearValue=finalNear definitional and certificate transport owned; literal finite-sum representation and strict margin remain unpaid"
+    "reuse generic Bishop interval/Taylor stack for the finite cells; keep the representation theorem and analytic inequality as separate conclusion-paying seams"
     directProducer
   ∷ []
 
@@ -319,15 +325,15 @@ canonicalCrossLaneDonors =
     "RH literal finite-cell certificate lane"
     "BalabanClayT4BishopFourCornerIntervalExact + BalabanClayT4BishopExpressionIntervalSemanticsExact + RealElementaryFunctionsAlternatingSeriesExact"
     "constructive sign-aware multiplication, compositional Bishop-real interval semantics, sine/cosine Taylor enclosures"
-    "RH atom environment for literal phase/cosine cells plus exact fold attachment to FinalCarrierFiniteSumCertificate"
-    "interval arithmetic proves enclosure, not the final strict ClusterResponse margin"
+    "RH atom environment for literal reflection-paired phase/cosine cells plus exact fold attachment to FinalNearLiteralKernel/FinalCarrierFiniteSumCertificate"
+    "interval arithmetic proves enclosure, not nearResponseAt=finiteNearSum by itself and not the final strict ClusterResponse margin"
   ∷ cross-lane-donor
     "YM CMP109/CMP116/CMP119 source owners"
-    "YM Round82 A1/B1/B2 construction"
-    "published differentiated marked decay and normalized local expectation mechanisms"
-    "source-owned E^(2)/Pi decay and compatible local normalized-response summability"
-    "same-object identify source coordinates with the literal unified RG state and preserve the common small-coupling history"
-    "source theorem import != physical instantiation; no circular gap/clustering premise"
+    "YM Round84 L1/L2/L3 construction"
+    "Ward colour-scalar reduction; differentiated localized activities; normalized local-expectation compatibility; source exponential localization"
+    "source-owned reductions/decay mechanisms plus existing exact tail/row/clustering compilers"
+    "same-object identify physical one-loop scalar and beta/hessian/composite marks with literal source coordinates; preserve distinct metrics and the declared marginal history"
+    "source theorem import != physical instantiation; marginal g-history is not assumed exponentially forgotten; no circular gap/clustering premise"
   ∷ []
 
 ------------------------------------------------------------------------
@@ -361,8 +367,8 @@ canonicalAttribution =
     "CMP109 10.1007/BF01215223; other exact DOI coordinates remain source-local"
     "unresolved person QID retained unresolved; do not guess"
     "notApplicable"
-    "source mathematical authority for RG-locality/decay mechanisms, not automatic Clay inhabitant"
-    "source acquisition may precede same-object construction payment"
+    "source mathematical authority for Ward/locality/decay mechanisms, not automatic Clay inhabitant"
+    "source acquisition may precede same-object L1/L2/L3 construction payment"
   ∷ attribution-coordinate riemannHypothesis
     "Bernhard Riemann / Polymath and DASHI source owners"
     "zeta/RH and de Bruijn-Newman source family"
@@ -371,7 +377,7 @@ canonicalAttribution =
     "Q42299; Q205966; related verified identities remain metadata only"
     "notApplicable"
     "historical/source context; not final pole-response proof"
-    "retain evidence append-only; same-carrier strict inequality pays conclusion"
+    "retain evidence append-only; exact literal kernel plus same-carrier strict inequality pay conclusion"
   ∷ attribution-coordinate riemannHypothesis
     "Errett Bishop; Douglas Bridges; Marc Daumas; David Lester; Cesar Munoz"
     "constructive analysis / verified interval arithmetic donor"
@@ -432,7 +438,7 @@ record ProofCatalystDashboard : Set where
 canonicalDashboard : ProofCatalystDashboard
 canonicalDashboard = dashboard
   "NS: R567 exact transpose collapse -> R568 one live commutator spacetime budget; R584 exact nested Bony routing; test Aug-06 Luo LH/HL/HH donor transport, then comparable + outer spectator/spacetime."
-  "YM: current full Clay router = Round82 A1/B1/B2/C1/C2. A1 determinant-first positive beta is sharpest source-facing leaf; B1/B2 carry mass-gap/clustering; C1/C2 preserve local/OPE/stress/Hamiltonian submission requirements."
-  "RH: final finite certificate -> actual nearResponse transport is already owned. Reuse generic Bishop four-corner + expression intervals + sin/cos alternating series; remaining theorem is the strict certified envelope below actual ClusterResponse."
+  "YM: five Clay packages, six hard physical lemmas at Round84. Highest-alpha: L1 literal compact-simple one-loop + local remainder; L2 same-object marked analytic coordinates/radii/projections; L3 per-shell heat-Hessian debt. Clustering assembly, irrelevant-memory decay, OPE dyadic tail, finite stress-charge conservation and Stone uniqueness are downstream/source-owned; L4/L5/L6 remain full-submission obligations."
+  "RH: current high route has one representation equality nearResponseAt(J)=finiteNearSum(cellResponse) plus one strict uniform high analytic family. FinalNearIndexedFiniteProducer removes a separate signed-value weld; reuse Bishop four-corner + expression intervals + sin/cos alternating series for optional finite upper certificates, then prove strict certified envelope below actual ClusterResponse."
   "GR/QFT: same action/metric/total-stress weld first; literal sectors next; anomaly/UV/semiclassical recovery afterwards."
   "Dates are lower bounds. QID/OEIS/DOI/attribution are provenance coordinates. Search old outputs by shape, prove same-object transport, and count Clay payment only when the exact live theorem is inhabited."
