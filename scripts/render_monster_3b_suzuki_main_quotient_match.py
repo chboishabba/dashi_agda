@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 """Validate and render the Monster 3B Suzuki/main quotient same-object receipt.
 
-The GAP producer works entirely at character-table level:
+The GAP producer works entirely at character-table level and keeps two
+order-three class coordinates distinct:
 
-* 12a+12b / 78a+78b are identified as exact 6.Suz pair characters;
-* each pair is matched to one 6.Suz.2 irreducible by full restriction equality;
-* Barraclough's fused degree-1458 main-table character is selected by its
-  extraspecial central signature;
-* the products split into two equal-degree main-table irreducibles;
-* exactly one member of each pair descends through main -> MN3B;
-* the descended MN3B rows occur in the actual restricted Monster 196883
-  character and have paired-phase central trace.
+* the extraspecial central class is selected by ker(main -> 6.Suz.2);
+* the diagonal class killed by qGtoN3B is selected by ker(main -> MN3B).
 
-This pays pair-family occurrence.  It deliberately does NOT pay which of the
-individual ATLAS labels a/b belongs to the chosen zeta eigensector.
+The full character matcher pays pair-family occurrence but deliberately does
+not pay whether the diagonal kernel is <t1*t2> or <t1*t2^-1>, nor the resulting
+individual a/b orientation inside the selected zeta sector.
 """
 
 from __future__ import annotations
@@ -79,9 +75,17 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("unexpected MN3B table identity")
 
     base_pos = req_int(p, "base_1458_main_position")
-    central_pos = req_int(p, "base_1458_central_class_position")
+    extraspecial_central_pos = req_int(
+        p, "base_1458_extraspecial_central_class_position"
+    )
     if req_int(p, "base_1458_central_trace", positive=False) != -729:
         raise ValueError("base 1458 central trace must be -729")
+    q_kernel_pos = req_int(p, "qg_to_n3b_kernel_order_three_class_position")
+    q_kernel_outer_pos = req_int(p, "qg_to_n3b_kernel_outer_class_position")
+    if q_kernel_pos == extraspecial_central_pos:
+        raise ValueError(
+            "qGtoN3B diagonal kernel class must remain distinct from extraspecial central class"
+        )
 
     labels12 = req_pair_label(p, "degree_12_atlas_labels", 12)
     labels78 = req_pair_label(p, "degree_78_atlas_labels", 78)
@@ -100,17 +104,22 @@ def validate(p: dict[str, Any]) -> dict[str, Any]:
     mult78 = req_int(p, "mn3b_78_monster_multiplicity")
 
     for key in (
+        "extraspecial_centre_selected_by_outer_quotient_kernel",
+        "qg_to_n3b_kernel_class_identified",
         "outer_pair_restriction_full_character_match",
         "main_product_split_full_character_decomposition",
         "quotient_descent_full_character_match",
         "restricted_monster_same_object_match",
     ):
         req_true(p, key)
+    req_false(p, "diagonal_kernel_orientation_paid")
     req_false(p, "individual_zeta_label_orientation_paid")
 
     return {
         "base_pos": base_pos,
-        "central_pos": central_pos,
+        "extraspecial_central_pos": extraspecial_central_pos,
+        "q_kernel_pos": q_kernel_pos,
+        "q_kernel_outer_pos": q_kernel_outer_pos,
         "labels12": labels12,
         "labels78": labels78,
         "outer12": outer12,
@@ -143,8 +152,10 @@ def render(v: dict[str, Any], digest: str) -> str:
 
 -- GENERATED CERTIFICATE.
 -- Full character-table matching pays the 12a/b and 78a/b PAIR-FAMILY
--- occurrence in the actual restricted Monster character.  Individual a/b
--- orientation inside the selected zeta sector remains unpaid.
+-- occurrence in the actual restricted Monster character.  The extraspecial
+-- central class and qGtoN3B diagonal-kernel class remain separately identified.
+-- Diagonal t1*t2 versus t1*t2^-1 orientation and individual a/b orientation
+-- remain unpaid.
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -157,10 +168,14 @@ inputSHA256 = "{digest}"
 
 base1458MainPosition : Nat
 base1458MainPosition = {v['base_pos']}
-base1458CentralClassPosition : Nat
-base1458CentralClassPosition = {v['central_pos']}
-base1458CentralTraceMagnitude : Nat
-base1458CentralTraceMagnitude = 729
+extraspecialCentralClassPosition : Nat
+extraspecialCentralClassPosition = {v['extraspecial_central_pos']}
+base1458ExtraspecialCentralTraceMagnitude : Nat
+base1458ExtraspecialCentralTraceMagnitude = 729
+qGtoN3BKernelOrderThreeClassPosition : Nat
+qGtoN3BKernelOrderThreeClassPosition = {v['q_kernel_pos']}
+qGtoN3BKernelOuterClassPosition : Nat
+qGtoN3BKernelOuterClassPosition = {v['q_kernel_outer_pos']}
 
 sixSuzDegree12AtlasLabels : List String
 sixSuzDegree12AtlasLabels = {agda_pair_string(v['labels12'])}
@@ -188,6 +203,10 @@ mn3b12MonsterMultiplicity = {v['mult12']}
 mn3b78MonsterMultiplicity : Nat
 mn3b78MonsterMultiplicity = {v['mult78']}
 
+extraspecialCentreSelectedByOuterQuotientKernel : Bool
+extraspecialCentreSelectedByOuterQuotientKernel = true
+qGtoN3BKernelClassIdentified : Bool
+qGtoN3BKernelClassIdentified = true
 outerPairRestrictionFullCharacterMatch : Bool
 outerPairRestrictionFullCharacterMatch = true
 mainProductSplitFullCharacterDecomposition : Bool
@@ -198,6 +217,8 @@ restrictedMonsterSameObjectMatch : Bool
 restrictedMonsterSameObjectMatch = true
 pairFamilyMonsterOccurrencePaid : Bool
 pairFamilyMonsterOccurrencePaid = true
+diagonalKernelOrientationPaid : Bool
+diagonalKernelOrientationPaid = false
 individualZetaLabelOrientationPaid : Bool
 individualZetaLabelOrientationPaid = false
 
@@ -225,7 +246,8 @@ def main() -> None:
     args.output.write_text(render(values, digest), encoding="utf-8")
     print(
         "validated Suzuki/main/N3B/Monster pair-family same-object match; "
-        f"12={values['labels12']} 78={values['labels78']} sha256={digest}"
+        f"12={values['labels12']} 78={values['labels78']} "
+        f"qkernel={values['q_kernel_pos']} sha256={digest}"
     )
 
 
