@@ -23,6 +23,7 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BModernCharacterVerificationKernel20SnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BFactorCQuotientWordSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
@@ -30,6 +31,7 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact.agda'
       - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
       - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
+      - 'scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
@@ -70,6 +72,7 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BModernCharacterVerificationKernel20SnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BFactorCQuotientWordSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
@@ -77,6 +80,7 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact.agda'
       - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
       - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
+      - 'scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
@@ -118,6 +122,12 @@ jobs:
         run: |
           set -euo pipefail
           bash scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh
+
+      - name: Run multiplicity basis-vs-linear WrongType checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh
 
       - name: Install Nix
         uses: cachix/install-nix-action@v31
