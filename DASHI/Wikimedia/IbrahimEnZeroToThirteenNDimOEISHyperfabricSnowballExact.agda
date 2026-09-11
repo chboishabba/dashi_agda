@@ -16,22 +16,6 @@ import DASHI.Wikimedia.IbrahimE6CoxeterNinetyTypedCorrectionExact as E6Coxeter
 import DASHI.Wikimedia.IbrahimE7FiftySixAnd128TypedOEISSnowballExact as E7FiftySix
 import DASHI.Wikimedia.IbrahimMonster3BNineStratificationOEISPrimarySourceSnowballExact as Nine
 
-------------------------------------------------------------------------
--- E_n / RANK 0..13 / N-DIMENSIONAL FIBRE / OEIS SNOWBALL
---
--- There are several DIFFERENT uses of the same small integer n in DASHI:
---
---   * n as a finite coordinate/rank index;
---   * n as the number of independent ternary axes, giving 3^n profiles;
---   * n as the label in the conventional E_n supergravity/Lie ladder;
---   * n as a stage/atlas coordinate (the existing atlas is only 0..11);
---   * n as a level of a SELF-INDEXED hyperfabric tower.
---
--- This file puts 0..13 on one inspectable surface while refusing to identify
--- those roles.  In particular, fixed n-dimensional ternary growth 3^n is NOT
--- the repo's tetrational recurrence A_(k+1)=9^(A_k).
-------------------------------------------------------------------------
-
 data RankZeroToThirteen : Set where
   rank0 rank1 rank2 rank3 rank4 rank5 rank6 : RankZeroToThirteen
   rank7 rank8 rank9 rank10 rank11 rank12 rank13 : RankZeroToThirteen
@@ -88,11 +72,6 @@ rank12Profiles = refl
 rank13Profiles : fixedTernaryProfileCount rank13 ≡ 1594323
 rank13Profiles = refl
 
-------------------------------------------------------------------------
--- The rank-8 -> rank-9 fixed-axis step is exactly the arithmetic seam already
--- used by the Monster bulk, but role identity still requires a theorem.
-------------------------------------------------------------------------
-
 tenChannelAt8 : Nat
 tenChannelAt8 = 10 * fixedTernaryProfileCount rank8
 
@@ -115,28 +94,9 @@ rank9MatchesExistingBase369ProfileCount = refl
 rank9TenChannelMatchesA005052Level9 : Nine.a005052 9 ≡ tenChannelAt9
 rank9TenChannelMatchesA005052Level9 = refl
 
-------------------------------------------------------------------------
--- Conventional E_n interpretation.
---
--- n=0..5 below follows the standard supergravity convention used in the
--- cited literature: E0 trivial, E1~R, E2~A1 x R, E3~A2 x A1,
--- E4~A4, E5~D5.  E6/E7/E8 are the finite exceptional algebras.
--- E9/E10/E11 are respectively affine/hyperbolic/Lorentzian Kac-Moody
--- extensions of E8 in the cited extension lane.
---
--- We deliberately STOP canonical promotion at 11.  Labels E12/E13 are not
--- assigned a unique standard object by the source route used here; any such
--- extension must carry its own Cartan/Dynkin construction and provenance.
-------------------------------------------------------------------------
-
 data EnClass : Set where
-  trivialEn : EnClass
-  lowRankConventional : EnClass
-  classicalAlias : EnClass
-  finiteExceptional : EnClass
-  affineKacMoody : EnClass
-  hyperbolicKacMoody : EnClass
-  lorentzianKacMoody : EnClass
+  trivialEn lowRankConventional classicalAlias finiteExceptional : EnClass
+  affineKacMoody hyperbolicKacMoody lorentzianKacMoody : EnClass
   noncanonicalExtension : EnClass
 
 record EnRankCoordinate : Set where
@@ -153,73 +113,23 @@ record EnRankCoordinate : Set where
     note : String
 open EnRankCoordinate public
 
-en0 : EnRankCoordinate
-en0 = en-rank-coordinate rank0 "E0" trivialEn "trivial" 1 true "" false
-  "standard lower-E_n supergravity convention; the 1 is a trivial carrier only"
-
-en1 : EnRankCoordinate
-en1 = en-rank-coordinate rank1 "E1" lowRankConventional "R / one-dimensional split scaling factor" 0 false "" false
-  "convention-level label; no finite exceptional irrep is promoted here"
-
-en2 : EnRankCoordinate
-en2 = en-rank-coordinate rank2 "E2" lowRankConventional "A1 x R" 0 false "" false
-  "reductive lower-E_n convention; not a simple exceptional algebra"
-
-en3 : EnRankCoordinate
-en3 = en-rank-coordinate rank3 "E3" lowRankConventional "A2 x A1 / SL(3) x SL(2)" 6 true "A121741" false
-  "distinguished E3 carrier has dimension 6=(3,2); A121741 is only the A2/SL3 irrep sequence, so its occurrence of 6 is supporting adjacency rather than the full product representation"
-
-en4 : EnRankCoordinate
-en4 = en-rank-coordinate rank4 "E4" classicalAlias "A4 / SL(5)" 10 true "" false
-  "standard E4=A4 convention; distinguished antisymmetric/coordinate carrier dimension 10 comes from the exceptional-field/supergravity lane, not an OEIS identity paid here"
-
-en5 : EnRankCoordinate
-en5 = en-rank-coordinate rank5 "E5" classicalAlias "D5 / Spin(5,5) split real form" 16 true "" false
-  "standard E5=D5 convention; distinguished spinor/coordinate carrier dimension 16 is source-backed, with no OEIS sequence promoted here"
-
-en6 : EnRankCoordinate
-en6 = en-rank-coordinate rank6 "E6" finiteExceptional "E6" 27 true "A121737" true
-  "27 is the smallest faithful/minuscule E6 representation dimension; 78 is the adjoint"
-
-en7 : EnRankCoordinate
-en7 = en-rank-coordinate rank7 "E7" finiteExceptional "E7" 56 true "A121736" true
-  "56 is the smallest faithful/minuscule E7 representation dimension; this is the direct external coordinate already attached to Freudenthal56"
-
-en8 : EnRankCoordinate
-en8 = en-rank-coordinate rank8 "E8" finiteExceptional "E8" 248 true "A121732" true
-  "248 is the smallest faithful representation and the adjoint representation of E8"
-
-en9 : EnRankCoordinate
-en9 = en-rank-coordinate rank9 "E9" affineKacMoody "affine extension E8^(1)" 0 false "" false
-  "infinite-dimensional affine Kac-Moody extension; finite-irrep dimension sequences used for E6-E8 are the wrong type"
-
-en10 : EnRankCoordinate
-en10 = en-rank-coordinate rank10 "E10" hyperbolicKacMoody "hyperbolic overextension of E8" 0 false "" false
-  "infinite-dimensional hyperbolic Kac-Moody algebra; use root/level multiplicity families rather than finite irrep-dimension OEIS"
-
-en11 : EnRankCoordinate
-en11 = en-rank-coordinate rank11 "E11" lorentzianKacMoody "very-extended/Lorentzian E8 extension" 0 false "" false
-  "infinite-dimensional Lorentzian Kac-Moody algebra; source-backed as an E10 representation at low levels"
-
-en12 : EnRankCoordinate
-en12 = en-rank-coordinate rank12 "E12" noncanonicalExtension "unresolved/noncanonical in this source route" 0 false "" false
-  "do not infer a unique E12 from the numeral; require an explicit generalized Cartan/Dynkin construction and source before promotion"
-
-en13 : EnRankCoordinate
-en13 = en-rank-coordinate rank13 "E13" noncanonicalExtension "unresolved/noncanonical in this source route" 0 false "" false
-  "do not infer a unique E13 from the numeral; require an explicit generalized Cartan/Dynkin construction and source before promotion"
+en0 = en-rank-coordinate rank0 "E0" trivialEn "trivial" 1 true "" false "lower-E_n supergravity convention"
+en1 = en-rank-coordinate rank1 "E1" lowRankConventional "R" 0 false "" false "one-dimensional split scaling factor; not a finite exceptional irrep"
+en2 = en-rank-coordinate rank2 "E2" lowRankConventional "A1 x R" 0 false "" false "reductive lower-E_n convention"
+en3 = en-rank-coordinate rank3 "E3" lowRankConventional "A2 x A1 / SL(3) x SL(2)" 6 true "A121741" false "6=(3,2); A121741 is only the A2/SL3 factor sequence, not the full product representation"
+en4 = en-rank-coordinate rank4 "E4" classicalAlias "A4 / SL(5)" 10 true "" false "distinguished antisymmetric/coordinate carrier dimension 10; direct OEIS family not paid here"
+en5 = en-rank-coordinate rank5 "E5" classicalAlias "D5 / Spin(5,5)" 16 true "" false "distinguished spinor/coordinate carrier dimension 16; direct OEIS family not paid here"
+en6 = en-rank-coordinate rank6 "E6" finiteExceptional "E6" 27 true "A121737" true "27 minuscule; 78 adjoint"
+en7 = en-rank-coordinate rank7 "E7" finiteExceptional "E7" 56 true "A121736" true "56 smallest faithful/minuscule E7 representation dimension"
+en8 = en-rank-coordinate rank8 "E8" finiteExceptional "E8" 248 true "A121732" true "248 smallest faithful and adjoint E8 representation dimension"
+en9 = en-rank-coordinate rank9 "E9" affineKacMoody "affine E8^(1)" 0 false "" false "infinite-dimensional affine Kac-Moody; finite-irrep OEIS is WrongType"
+en10 = en-rank-coordinate rank10 "E10" hyperbolicKacMoody "hyperbolic overextension of E8" 0 false "" false "infinite-dimensional hyperbolic Kac-Moody"
+en11 = en-rank-coordinate rank11 "E11" lorentzianKacMoody "very-extended/Lorentzian E8 extension" 0 false "" false "source-backed as E11 decomposed over E10 at low levels"
+en12 = en-rank-coordinate rank12 "E12" noncanonicalExtension "unresolved/noncanonical here" 0 false "" false "require explicit generalized Cartan/Dynkin construction and source"
+en13 = en-rank-coordinate rank13 "E13" noncanonicalExtension "unresolved/noncanonical here" 0 false "" false "require explicit generalized Cartan/Dynkin construction and source"
 
 canonicalEnZeroToThirteen : List EnRankCoordinate
-canonicalEnZeroToThirteen =
-  en0 ∷ en1 ∷ en2 ∷ en3 ∷ en4 ∷ en5 ∷ en6 ∷
-  en7 ∷ en8 ∷ en9 ∷ en10 ∷ en11 ∷ en12 ∷ en13 ∷ []
-
-------------------------------------------------------------------------
--- Existing DASHI surfaces.
-------------------------------------------------------------------------
-
-stageAtlas0to11Exists : Bool
-stageAtlas0to11Exists = true
+canonicalEnZeroToThirteen = en0 ∷ en1 ∷ en2 ∷ en3 ∷ en4 ∷ en5 ∷ en6 ∷ en7 ∷ en8 ∷ en9 ∷ en10 ∷ en11 ∷ en12 ∷ en13 ∷ []
 
 stageAtlasSizeIs12 : Atlas.carrierSize ≡ 12
 stageAtlasSizeIs12 = Atlas.carrierSizeIsTwelve
@@ -227,13 +137,8 @@ stageAtlasSizeIs12 = Atlas.carrierSizeIsTwelve
 selfIndexedLevelOneHasNineAxes : SelfIndexed.paretoAxisCount 1 ≡ 9
 selfIndexedLevelOneHasNineAxes = SelfIndexed.paretoAxisCountOne
 
-selfIndexedLevelOneHas19683TernaryProfiles :
-  SelfIndexed.ternaryObjectiveProfileCount 1 ≡ 19683
+selfIndexedLevelOneHas19683TernaryProfiles : SelfIndexed.ternaryObjectiveProfileCount 1 ≡ 19683
 selfIndexedLevelOneHas19683TernaryProfiles = SelfIndexed.levelOneTernaryProfileCountIs19683
-
-------------------------------------------------------------------------
--- Primary/reference provenance.
-------------------------------------------------------------------------
 
 papadimitriouSource : Attribution.AttributedSource
 papadimitriouSource = Attribution.mkDOISource
@@ -244,7 +149,7 @@ papadimitriouSource = Attribution.mkDOISource
   "10.1088/1126-6708/2007/02/008"
   "https://doi.org/10.1088/1126-6708/2007/02/008"
   Attribution.academicArticleSource
-  "source for the conventional lower E_n identifications E5~D5, E4~A4, E3~A2xA1, E2~A1xR, E1~R in the maximal-supergravity context; not a source for DASHI ternary/tetrational semantics"
+  "source for conventional lower E_n identifications E5~D5, E4~A4, E3~A2xA1, E2~A1xR, E1~R; not DASHI ternary semantics"
   Attribution.publicAttribution
 
 kleinschmidtSource : Attribution.AttributedSource
@@ -256,15 +161,11 @@ kleinschmidtSource = Attribution.mkDOISource
   "10.1016/j.nuclphysb.2003.11.006"
   "https://doi.org/10.1016/j.nuclphysb.2003.11.006"
   Attribution.academicArticleSource
-  "source for the finite E8 -> affine E9 -> hyperbolic E10 -> Lorentzian E11 extension chain and E11/E10 level structure; not a source for E12/E13 or DASHI hyperfabric identity"
+  "source for finite E8 -> affine E9 -> hyperbolic E10 -> Lorentzian E11; not a source for E12/E13 or DASHI hyperfabric identity"
   Attribution.publicAttribution
 
 papadimitriouAttribution = AttributionSnowball.canonicalSourceRoleSnowballReceipt papadimitriouSource
 kleinschmidtAttribution = AttributionSnowball.canonicalSourceRoleSnowballReceipt kleinschmidtSource
-
-------------------------------------------------------------------------
--- BIDI / WrongType firewalls.
-------------------------------------------------------------------------
 
 data RankIndexCreatesEnObject : Set where
 data FixedPowerCreatesTetration : Set where
@@ -275,19 +176,14 @@ data E12LabelCreatesCanonicalKacMoodyObject : Set where
 
 enRankDoesNotAriseFromIndexAlone : RankIndexCreatesEnObject → ⊥
 enRankDoesNotAriseFromIndexAlone ()
-
 fixedPowerDoesNotCreateTetration : FixedPowerCreatesTetration → ⊥
 fixedPowerDoesNotCreateTetration ()
-
 sameRankDoesNotIdentifyCarriers : SameRankCreatesSameCarrier → ⊥
 sameRankDoesNotIdentifyCarriers ()
-
 sameSevenDoesNotCreateFreudenthalIntertwiner : E7RankCreatesFreudenthalIntertwiner → ⊥
 sameSevenDoesNotCreateFreudenthalIntertwiner ()
-
 finiteToAffineDoesNotEqualTernaryTripling : E8ToE9IndexStepEqualsTernaryTripling → ⊥
 finiteToAffineDoesNotEqualTernaryTripling ()
-
 eTwelveNumeralDoesNotCreateCanonicalObject : E12LabelCreatesCanonicalKacMoodyObject → ⊥
 eTwelveNumeralDoesNotCreateCanonicalObject ()
 
@@ -312,13 +208,8 @@ open ZeroToThirteenNDimBoundary public
 
 currentZeroToThirteenNDimBoundary : ZeroToThirteenNDimBoundary
 currentZeroToThirteenNDimBoundary = zero-to-thirteen-ndim-boundary
-  true true true true true true true true true true
-  false false false
-  "snowball each rank through typed families rather than numeral search: for n=0..5 keep the conventional lower-E_n aliases distinct from fixed ternary profile counts; for E6/E7/E8 compare the literal 27/56/248 representation carriers against DASHI Albert/Freudenthal/exceptional consumers; for E9/E10/E11 switch from finite irrep dimensions to affine/hyperbolic root and level multiplicity families. Keep E12/E13 unresolved until an explicit Cartan/Dynkin construction and primary source are selected. In parallel, compare every fixed 3^n fibre with the self-indexed 9-tetration tower only through declared FactorsThrough consumers."
-
-------------------------------------------------------------------------
--- Reuse existing boundaries rather than creating a parallel NDim planner.
-------------------------------------------------------------------------
+  true true true true true true true true true true false false false
+  "snowball each rank through typed families. Keep lower E_n aliases distinct from fixed ternary 3^n fibres; compare E6/E7/E8 27/56/248 only through actual consumers; switch E9/E10/E11 to affine/hyperbolic root-level families; keep E12/E13 unresolved pending an explicit Cartan/Dynkin construction. Compare fixed 3^n fibres with the self-indexed 9-tetration tower only through declared FactorsThrough consumers."
 
 existingSelfIndexedBoundary : SelfIndexed.SelfIndexedParetoTetrationBoundary
 existingSelfIndexedBoundary = SelfIndexed.canonicalSelfIndexedParetoTetrationBoundary
@@ -328,4 +219,4 @@ existingMonsterNDimBoundary = NDimBridge.canonicalMonster369NDimParetoTetrationB
 
 e7ExistingBoundary = E7FiftySix.currentFiftySixOneTwentyEightFrontier
 
-e6ExistingBoundary = E6Coxeter.currentE6CoxeterNinetyBoundary
+e6ExistingBoundary = E6Coxeter.currentE6CoxeterNinetyCorrectionFrontier
