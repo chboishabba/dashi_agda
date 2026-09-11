@@ -33,8 +33,15 @@ import DASHI.ComputerScience.RSA260BidiIntrospectiveOffsetRepairExact as Introsp
 -- a d=65 case plateaus at order 65, while the tested d=66 cases continue to
 -- gain rank at order 66 and plateau afterwards.
 --
--- This is a refinement of the live residual, not a universal invariant-factor
--- theorem and not a production RSA-260 measurement.
+-- A second rectangular-Hankel probe localises all three training exceptions:
+--
+--   rank(H_{d+1,d}) - rank(H_{d,d}) = 1
+--   rank(H_{d,d+1}) - rank(H_{d,d}) = 0.
+--
+-- Matched non-exception witnesses have extension signature (0,0).  Thus the
+-- surviving square-Hankel rank is entirely row-side / left-extension
+-- asymmetry on the tested witnesses.  This is still an observed finite
+-- minimal-index signature, not yet a universal invariant-factor theorem.
 ------------------------------------------------------------------------
 
 finiteHorizonBoundary : FiniteHorizon.FiniteHorizonInterpretationBoundary
@@ -62,8 +69,28 @@ currentBlockHankelRuntimeReceipt = block-hankel-runtime-receipt
   "bd86d122973158c0144d32e9d8329d1d003ba485"
   "07fed3cce86833dccb67aa74756e1f37cf63b9a42f66f14f9732ef0550d3e04a"
   "943303d8859c4b8e972ea373707de433187ffaac170a16b1bbb38066ca1e341f"
-  "9892d967d699e5994d8b344b60963cacb47a5e4f02c1af15fc027d36892b3573"
+  "9892d967d699e5994d8e344b60963cacb47a5e4f02c1af15fc027d36892b3573"
   "9e3fcaa94ec26dc18bd5172e54df8461b3a3e4892ee4c010e46deb0da2b96c85"
+  true
+  false
+
+record RectangularHankelRuntimeReceipt : Set where
+  constructor rectangular-hankel-runtime-receipt
+  field
+    runtimePath : String
+    localGitBlob : String
+    runtimeSHA256 : String
+    outputSHA256 : String
+    exactLocalRuntimeBlobExecuted : Bool
+    runtimeCommittedToProducerRepository : Bool
+open RectangularHankelRuntimeReceipt public
+
+currentRectangularHankelRuntimeReceipt : RectangularHankelRuntimeReceipt
+currentRectangularHankelRuntimeReceipt = rectangular-hankel-runtime-receipt
+  "/mnt/data/rsa260_bidi_rect_hankel_probe.py"
+  "32c3ebf74476d6af226ccb4ae1c2cb2b7bf3307a"
+  "4e0c88743adcce414bbe3e05781c15ed17c81deefafdb3076a1a000e23e4c685"
+  "d591fb9cc0cb60d78e69219715882099bb6e88a48dbad11a0496173cdd176f2f"
   true
   false
 
@@ -111,6 +138,27 @@ currentSharedDynamicCollisionReceipt = shared-dynamic-collision-receipt
   512 518 520 520
   true
 
+record RectangularHankelAsymmetryReceipt : Set where
+  constructor rectangular-hankel-asymmetry-receipt
+  field
+    exceptionWitnessesChecked : Nat
+    matchedNonExceptionWitnessesChecked : Nat
+    everyExceptionRowExtension : Nat
+    everyExceptionColumnExtension : Nat
+    everyExceptionSquareExtension : Nat
+    everyMatchedNonExceptionRowExtension : Nat
+    everyMatchedNonExceptionColumnExtension : Nat
+    everyMatchedNonExceptionSquareExtension : Nat
+    oneRankSquareExtensionFactorsThroughRowSideOnlyOnCheckedWitnesses : Bool
+open RectangularHankelAsymmetryReceipt public
+
+currentRectangularHankelAsymmetryReceipt : RectangularHankelAsymmetryReceipt
+currentRectangularHankelAsymmetryReceipt = rectangular-hankel-asymmetry-receipt
+  3 6
+  1 0 1
+  0 0 0
+  true
+
 record BlockHankelOffsetInterpretationBoundary : Set where
   constructor block-hankel-offset-interpretation-boundary
   field
@@ -121,7 +169,11 @@ record BlockHankelOffsetInterpretationBoundary : Set where
     localPlateauEqualsGeneratorDegreeOnHeldoutAndPresentationCases : Bool
     threeTrainingExceptionsRemain : Bool
     threeTrainingExceptionsAreOneRankExtensions : Bool
+    rectangularHankelProbeExecuted : Bool
+    threeExceptionsShareLeftExtensionOneRightExtensionZero : Bool
+    matchedNonExceptionsHaveZeroZeroExtension : Bool
     blockHankelPlateauIsUniversalGeneratorFormula : Bool
+    leftExtensionSignatureIsUniversalMinimalIndexTheorem : Bool
     localExecutionPaysProductionSameObjectIdentity : Bool
     localExecutionPaysHistoricalMatrixCustody : Bool
     consumerRefinementReceiptPaid : Bool
@@ -138,6 +190,10 @@ canonicalBlockHankelOffsetInterpretationBoundary =
     true
     true
     true
+    true
+    true
+    true
+    false
     false
     false
     false
@@ -149,21 +205,22 @@ canonicalBlockHankelOffsetInterpretationBoundary =
 ------------------------------------------------------------------------
 
 data BlockHankelOffsetResidual : Set where
-  explainOneRankHankelExtensionTrainingExceptions : BlockHankelOffsetResidual
+  deriveLeftMinimalIndexAsymmetryStatement : BlockHankelOffsetResidual
+  explainWhyThreeTrainingProjectionsCarryLeftExtension : BlockHankelOffsetResidual
   bindExecutedRuntimeIntoProducerRepository : BlockHankelOffsetResidual
-  deriveMinimalGeneratorInvariantFactorStatement : BlockHankelOffsetResidual
   compileBlockHankelCoordinateIntoRefinedObserver : BlockHankelOffsetResidual
   proveConsumerDescendsThroughRefinedObserver : BlockHankelOffsetResidual
   acquireSameObjectAStarOrFSolsForProductionHankelDiagnostic : BlockHankelOffsetResidual
 
 firstBlockHankelOffsetResidual : BlockHankelOffsetResidual
-firstBlockHankelOffsetResidual = explainOneRankHankelExtensionTrainingExceptions
+firstBlockHankelOffsetResidual = deriveLeftMinimalIndexAsymmetryStatement
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
 ------------------------------------------------------------------------
 
 data LocalHankelFitImpliesUniversalGeneratorTheorem : Set where
+data LeftExtensionObservationImpliesUniversalMinimalIndexTheorem : Set where
 data SyntheticHankelProfileImpliesProductionIdentity : Set where
 data CollisionSeparationImpliesConsumerClosure : Set where
 data OutputHashImpliesProducerRepositoryCustody : Set where
@@ -171,6 +228,10 @@ data OutputHashImpliesProducerRepositoryCustody : Set where
 localFitDoesNotCreateUniversalGeneratorTheorem :
   LocalHankelFitImpliesUniversalGeneratorTheorem → ⊥
 localFitDoesNotCreateUniversalGeneratorTheorem ()
+
+leftExtensionObservationDoesNotCreateUniversalMinimalIndexTheorem :
+  LeftExtensionObservationImpliesUniversalMinimalIndexTheorem → ⊥
+leftExtensionObservationDoesNotCreateUniversalMinimalIndexTheorem ()
 
 syntheticHankelProfileDoesNotCreateProductionIdentity :
   SyntheticHankelProfileImpliesProductionIdentity → ⊥
