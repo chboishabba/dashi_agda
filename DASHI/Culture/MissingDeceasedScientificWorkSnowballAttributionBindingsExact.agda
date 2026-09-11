@@ -3,9 +3,9 @@ module DASHI.Culture.MissingDeceasedScientificWorkSnowballAttributionBindingsExa
 ------------------------------------------------------------------------
 -- COHORT SNOWBALL ATTRIBUTION BINDINGS
 --
--- Thin bindings only.  Citation authority lives in the source registries and
+-- Thin bindings only. Citation authority lives in the source registries and
 -- source-specific owners; QID/Dewey semantics live in
--- DashiKnowledgeTraversalFunnelExact.  This file does not create another
+-- DashiKnowledgeTraversalFunnelExact. This file does not create another
 -- ontology or another evidence model.
 ------------------------------------------------------------------------
 
@@ -59,10 +59,10 @@ rezaPatentSnowballCoordinate = Ext.snowball-source-coordinate
     "DASHI/Physics/Materials/RezaBurnResistantAlloyBidiExact.agda"
     "Monica A. Jacinto / Dallis Ann Hardwick alloy inventorship"
     "620 Engineering"
-    "unresolvedQid"
-    "US20040208777A1; application US10/769,195; parent US20030053926A1")
-  false true true
-  "Patent publication identity pays co-inventorship and disclosed alloy/process claims only. It does not pay Monica Reza's event-time JPL role, sole process ownership, or later manufacturing custody."
+    "Q139385030"
+    "US20040208777A1; application US10/769,195; parent US20030053926A1; Wikidata Q139385030 labels Monica Jacinto and aliases Monica Jacinto Reza")
+  true true true
+  "Q139385030 is a verified external semantic coordinate for Monica Jacinto, but its relevant alias/biographical statements are currently uncited and therefore it does not pay the Jacinto-to-Reza identity weld or event-time JPL role. Patent publication identity pays co-inventorship and disclosed alloy/process claims only."
 
 grillmairCrossroadsSnowballCoordinate : Ext.SnowballSourceCoordinate
 grillmairCrossroadsSnowballCoordinate = Ext.snowball-source-coordinate
