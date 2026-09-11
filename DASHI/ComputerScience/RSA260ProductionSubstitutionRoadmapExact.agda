@@ -21,6 +21,7 @@ import DASHI.ComputerScience.RSA260BidiRandomIncidenceCarrierCrossValidationExac
 import DASHI.ComputerScience.RSA260BidiCADOGridPermutationCrossValidationExact as CADOGrid
 import DASHI.ComputerScience.RSA260BidiFineIncidencePredictorExact as FineIncidence
 import DASHI.ComputerScience.RSA260BidiFineIncidenceInterpolationExact as FineInterpolation
+import DASHI.ComputerScience.RSA260BidiTwoHopCommonNeighbourFibreExact as TwoHop
 
 record ProductionLAObservation : Set where
   constructor production-la-observation
@@ -132,13 +133,11 @@ fineIncidenceBoundary = FineIncidence.canonicalFineIncidencePredictorBoundary
 fineInterpolationBoundary : FineInterpolation.FineIncidenceFragilityBoundary
 fineInterpolationBoundary = FineInterpolation.canonicalFineIncidenceFragilityBoundary
 
+twoHopBoundary : TwoHop.TwoHopInterpretationBoundary
+twoHopBoundary = TwoHop.canonicalTwoHopInterpretationBoundary
+
 ------------------------------------------------------------------------
 -- Ordered residual routers.
---
--- The general identity route still accepts any same-object LA artifact at the
--- deepest consumer it can pay.  For the present recurrence-complexity question,
--- however, the highest-alpha production target is a same-object artifact that
--- constrains fine incidence or presentation: matrix/balancing/A*/F.sols*.
 ------------------------------------------------------------------------
 
 data ProductionResidual : Set where
@@ -156,18 +155,13 @@ firstUnpaidProductionResidual : ProductionResidual
 firstUnpaidProductionResidual = acquireSameObjectFineIncidenceBearingLACarrierArtifact
 
 data CandidateExperimentResidual : Set where
-  addTwoHopAndCommonNeighbourFibres : CandidateExperimentResidual
   fitRecurrenceComplexityFromStructuralFibrePortfolio : CandidateExperimentResidual
   exactByteExecutePreparationSearchClosure : CandidateExperimentResidual
   measureCandidateCompressionCostFrontier : CandidateExperimentResidual
   validateCandidateAgainstSameObjectProductionArtifact : CandidateExperimentResidual
 
 firstUnpaidCandidateExperimentResidual : CandidateExperimentResidual
-firstUnpaidCandidateExperimentResidual = addTwoHopAndCommonNeighbourFibres
-
-------------------------------------------------------------------------
--- Consolidated status surface.  Named fields prevent positional status drift.
-------------------------------------------------------------------------
+firstUnpaidCandidateExperimentResidual = fitRecurrenceComplexityFromStructuralFibrePortfolio
 
 record RSA260ProductionSubstitutionBoundary : Set where
   constructor rsa260-production-substitution-boundary
@@ -178,23 +172,19 @@ record RSA260ProductionSubstitutionBoundary : Set where
     syntheticProjectionPaid : Bool
     syntheticGeneratorPaid : Bool
     syntheticNonzeroKernelRecoveryPaid : Bool
-
     productionMatrixShapePaidByPrimarySource : Bool
     productionKrylovCountPaidByPrimarySource : Bool
     productionGeneratorLengthPaidByPrimarySource : Bool
     productionKernelVectorCountPaidByPrimarySource : Bool
     productionDependencyCountPaidByPrimarySource : Bool
-
     cadoArtifactFilenameSchemaPaid : Bool
     cadoBalancingPermutationShapePaid : Bool
     productionGeneratorScaleFormulaReconstructed : Bool
     productionKrylovEndpointFormulaReconstructed : Bool
     exactProductionCADORevisionRecovered : Bool
-
     bidiProductionLACarrierConstraintFibreDerived : Bool
     bidiProductionLACarrierUniqueInstanceDerived : Bool
     bidiExactCarrierBytesDerived : Bool
-
     runnableBidiCandidateImplemented : Bool
     runnableBidiCandidateProductionContractPassed : Bool
     runnableBidiCandidateHeldOutStructurePassed : Bool
@@ -220,7 +210,6 @@ record RSA260ProductionSubstitutionBoundary : Set where
     runnableBidiCandidateFrontierWidth256Paid : Bool
     runnableBidiCandidateFrontierExactBlobPaid : Bool
     runnableBidiCandidateRobustPreferredPreparationIdentified : Bool
-
     randomFineIncidenceCrossValidationPaid : Bool
     randomFineIncidenceConsumerRecoveredAfterEscalation : Bool
     cadoShapedBalancingCrossValidationPaid : Bool
@@ -228,9 +217,9 @@ record RSA260ProductionSubstitutionBoundary : Set where
     fineIncidenceInterpolationPaid : Bool
     oneSwapPerRowFragilityEnsemblePaid : Bool
     oneSwapProjectionCrossPaid : Bool
+    twoHopCommonNeighbourFibresPaid : Bool
     sameCoarseContractDeterminesRecurrenceComplexity : Bool
     fineIncidenceMeasuredOnProductionMatrix : Bool
-
     sameObjectFineIncidenceArtifactPaid : Bool
     runnableBidiCandidateHistoricalIdentityPaid : Bool
     runnableBidiCandidateProductionBWCReplayPaid : Bool
@@ -251,23 +240,19 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; syntheticProjectionPaid = true
   ; syntheticGeneratorPaid = true
   ; syntheticNonzeroKernelRecoveryPaid = true
-
   ; productionMatrixShapePaidByPrimarySource = true
   ; productionKrylovCountPaidByPrimarySource = true
   ; productionGeneratorLengthPaidByPrimarySource = true
   ; productionKernelVectorCountPaidByPrimarySource = true
   ; productionDependencyCountPaidByPrimarySource = true
-
   ; cadoArtifactFilenameSchemaPaid = true
   ; cadoBalancingPermutationShapePaid = true
   ; productionGeneratorScaleFormulaReconstructed = true
   ; productionKrylovEndpointFormulaReconstructed = true
   ; exactProductionCADORevisionRecovered = false
-
   ; bidiProductionLACarrierConstraintFibreDerived = true
   ; bidiProductionLACarrierUniqueInstanceDerived = false
   ; bidiExactCarrierBytesDerived = false
-
   ; runnableBidiCandidateImplemented = true
   ; runnableBidiCandidateProductionContractPassed = true
   ; runnableBidiCandidateHeldOutStructurePassed = true
@@ -293,7 +278,6 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; runnableBidiCandidateFrontierWidth256Paid = true
   ; runnableBidiCandidateFrontierExactBlobPaid = false
   ; runnableBidiCandidateRobustPreferredPreparationIdentified = true
-
   ; randomFineIncidenceCrossValidationPaid = true
   ; randomFineIncidenceConsumerRecoveredAfterEscalation = true
   ; cadoShapedBalancingCrossValidationPaid = true
@@ -301,9 +285,9 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; fineIncidenceInterpolationPaid = true
   ; oneSwapPerRowFragilityEnsemblePaid = true
   ; oneSwapProjectionCrossPaid = true
+  ; twoHopCommonNeighbourFibresPaid = true
   ; sameCoarseContractDeterminesRecurrenceComplexity = false
   ; fineIncidenceMeasuredOnProductionMatrix = false
-
   ; sameObjectFineIncidenceArtifactPaid = false
   ; runnableBidiCandidateHistoricalIdentityPaid = false
   ; runnableBidiCandidateProductionBWCReplayPaid = false
@@ -315,10 +299,6 @@ currentRSA260ProductionSubstitutionBoundary = record
   ; ncclParityPaid = false
   ; fullProductionLinearAlgebraReplayPaid = false
   }
-
-------------------------------------------------------------------------
--- WrongType firewalls.
-------------------------------------------------------------------------
 
 data ProductionShapeImpliesProductionBytes : Set where
 data BidiCarrierFibreImpliesUniqueMatrix : Set where
