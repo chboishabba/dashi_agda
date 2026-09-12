@@ -14,7 +14,7 @@ open import DASHI.Interop.SLRPostgresWorldPersistenceExact
 -- Python remains the replaceable trained-spaCy observation boundary.
 -- Rust owns high-volume world persistence and frontier retrieval.
 -- PostgreSQL remains append-only storage/query substrate, never semantic
--- authority.  Candidate semantic admission and promotion stay separate.
+-- authority. Candidate semantic admission and promotion stay separate.
 ------------------------------------------------------------------------
 
 record RustWorldStoreBoundary : Set where
@@ -26,7 +26,12 @@ record RustWorldStoreBoundary : Set where
     postgresCopyUsesSingleGenericStage : Bool
     serverMergeIsConflictSafe : Bool
     serverMergeMayRewritePriorEvidence : Bool
+    ndjsonIngressMayStreamRecordByRecord : Bool
+    ndjsonIngressRequiresWholeInputBuffer : Bool
+    legacyRoundReplayMayRemainBufferedCompatibilityPath : Bool
     latestFrontierReadOwnedByRust : Bool
+    latestFrontierMayEmitRowBeforeWholeFrontierMaterialised : Bool
+    latestFrontierRequiresWholeResultBuffer : Bool
     latestFrontierReadMayPromoteTruth : Bool
     postgresPerformsSLRSemanticProcessing : Bool
     databaseCredentialMayEnterReceipt : Bool
@@ -41,7 +46,8 @@ canonicalRustWorldStoreBoundary =
   rustWorldStoreBoundary
     true true
     true true true false
-    true false
+    true false true
+    true true false false
     false false false
     true false
 
@@ -49,8 +55,11 @@ record WorldStoreExecutionReceipt : Set where
   constructor worldStoreExecutionReceipt
   field
     rustBinaryResolved : Bool
-    ingestRoundExecuted : Bool
+    ingestNdjsonExecuted : Bool
+    ingestNdjsonStreamingPaid : Bool
+    legacyIngestRoundExecuted : Bool
     latestFrontierQueried : Bool
+    frontierStreamingPaid : Bool
     pythonFallbackUsed : Bool
     persistenceCreatesSemanticAuthority : Bool
     frontierRankCreatesTruth : Bool
@@ -66,6 +75,8 @@ data RustPersistenceCreatesSemanticAuthority : Set where
 data RustFrontierCreatesTruth : Set where
 data ConflictMergeMayRewritePriorEvidence : Set where
 data PythonHeavyPersistenceIsArchitecturallyRequired : Set where
+data StreamingIngressRequiresWholeInputBuffer : Set where
+data StreamingFrontierRequiresWholeResultBuffer : Set where
 
 postgresDoesNotPerformSemanticProcessing : PostgresPerformsSemanticProcessing → ⊥
 postgresDoesNotPerformSemanticProcessing ()
@@ -81,3 +92,9 @@ conflictMergeDoesNotRewritePriorEvidence ()
 
 pythonHeavyPersistenceIsNotRequired : PythonHeavyPersistenceIsArchitecturallyRequired → ⊥
 pythonHeavyPersistenceIsNotRequired ()
+
+streamingIngressDoesNotRequireWholeInput : StreamingIngressRequiresWholeInputBuffer → ⊥
+streamingIngressDoesNotRequireWholeInput ()
+
+streamingFrontierDoesNotRequireWholeResult : StreamingFrontierRequiresWholeResultBuffer → ⊥
+streamingFrontierDoesNotRequireWholeResult ()
