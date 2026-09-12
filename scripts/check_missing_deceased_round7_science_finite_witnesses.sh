@@ -11,6 +11,7 @@ required_files=(
   "DASHI/Control/ZhangDaibingUAVControlFiniteWitnessExact.agda"
   "DASHI/Biology/LiMinyongPhotopharmacologyFiniteWitnessExact.agda"
   "DASHI/Culture/MissingDeceasedTwentyScientistRound7FiniteWitnessProgressExact.agda"
+  "DASHI/Culture/MissingDeceasedTwentyScientistScienceFiniteWitnessBidiExact.agda"
 )
 
 for file in "${required_files[@]}"; do
@@ -37,5 +38,10 @@ for import_name in \
   LiMinyongPhotopharmacologyFiniteWitnessExact; do
   grep -q "$import_name" "$branch_root/DASHI/Culture/MissingDeceasedChineseScienceImplementationEverything.agda"
 done
+
+grep -q 'finiteScienceWitnessBindingsCount = 6' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistScienceFiniteWitnessBidiExact.agda"
+grep -q 'syntheticFiniteWitnessCannotPaySourceReplication = false' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistScienceFiniteWitnessBidiExact.agda"
+grep -q 'finiteWitnessCannotPayHistoricalDeployment = false' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistScienceFiniteWitnessBidiExact.agda"
+grep -q 'MissingDeceasedTwentyScientistScienceFiniteWitnessBidiExact' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda"
 
 echo 'Round-7 finite-witness static contract: OK'
