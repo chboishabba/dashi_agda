@@ -64,6 +64,15 @@ grep -q 'foiaClosurePaysNoRecordsFinding = false' DASHI/Culture/NingLiArmyFOIAPr
 grep -q 'reformulationWasExplicitlyInvited = true' DASHI/Culture/NingLiArmyFOIAProceduralHistoryExact.agda
 grep -q 'NingLiArmyFOIAProceduralHistoryExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
 
+# Primary/captured government request logs nominate response-package acquisitions.
+grep -q 'dtic2019NingLiACGravityRequest' DASHI/Culture/NingLiGovernmentRequestLogSnowballExact.agda
+grep -q 'fbi2021ACGravityRequest' DASHI/Culture/NingLiGovernmentRequestLogSnowballExact.agda
+grep -q 'dodOIG2022ACGravityRequest' DASHI/Culture/NingLiGovernmentRequestLogSnowballExact.agda
+grep -q 'fbiCaseNumber = "1499382-000"' DASHI/Culture/NingLiGovernmentRequestLogSnowballExact.agda
+grep -q 'dodOIGCaseNumber = "DODOIG-2022-001077"' DASHI/Culture/NingLiGovernmentRequestLogSnowballExact.agda
+grep -q 'requestLogPaysResponseContents = false' DASHI/Culture/NingLiGovernmentRequestLogSnowballExact.agda
+grep -q 'NingLiGovernmentRequestLogSnowballExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
+
 # Round-robin scientific cohort invariant: 11 U.S. + 9 Chinese scientists.
 grep -q 'twentyScientistRoundProgress' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
 grep -q 'scientificCohortCount = 20' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
