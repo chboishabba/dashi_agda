@@ -28,7 +28,9 @@ echo "monster 3B multiplicity basis-vs-linear WrongType check: ok"
 
 # Run the bounded linear-multiplicity frontier as one pre-GAP static tranche.
 # These checks deliberately validate source/proof-route surfaces only; they do
-# not claim Agda kernel certification.
+# not claim Agda kernel certification. The acquisition check is kept in this
+# path-filtered parent so changes to its typed grade-two/weight-two seam are
+# exercised by the existing Monster 3B workflow.
 bash "$ROOT/scripts/check_monster_3b_suzuki_90_not_permutation_character.sh"
 bash "$ROOT/scripts/check_monster_3b_linear_multiplicity_hom_space.sh"
 bash "$ROOT/scripts/check_monster_3b_linear_zeta_sector_restriction.sh"
