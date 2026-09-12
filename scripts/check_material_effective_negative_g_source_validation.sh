@@ -11,6 +11,7 @@ files=(
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGModelProvenanceBidiExact.agda
   DASHI/Physics/ExoticGravity/SuperconductingChargeMassCurrentBidiExact.agda
+  DASHI/Physics/ExoticGravity/SuperconductingGravityExperimentalConstraintRegistryExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyScopeBidiExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryStressEnergyCompilationExact.agda
   DASHI/Physics/ExoticGravity/AntigravityLaboratoryGRComparatorCompilationExact.agda
@@ -21,6 +22,32 @@ files=(
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1991CombinedFieldSourceEntitlementExact.agda
   DASHI/Physics/ExoticGravity/LiTorr1992CoupledPotentialSourceEntitlementExact.agda
+  DASHI/Culture/AmyEskridgeHAL5AntigravitySourceEntitlementExact.agda
+  DASHI/Culture/AmyEskridgeHAL5PrimaryLiteratureSnowballExact.agda
+  DASHI/Culture/AmyEskridgeHistoricalMechanismBidiSourceWeldExact.agda
+  DASHI/Culture/AmyEskridgeMechanismAssociationProvenanceExact.agda
+  DASHI/Culture/AmyEskridgeForensicAcquisitionPriorityExact.agda
+  DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
+  DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+  DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
+  DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+  DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
+  DASHI/Culture/AmyEskridgePOAMSBoundaryCandidateExact.agda
+  DASHI/Culture/AmyEskridgePOAMSObjectLineageExact.agda
+  DASHI/Culture/POAMSLayeredReleaseExact.agda
+  DASHI/Culture/AmyEskridgeApplicationTransformationExact.agda
+  DASHI/Culture/AmyEskridgeCorporateCustodySurfaceExact.agda
+  DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
+  DASHI/Culture/AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact.agda
+  DASHI/Culture/AmyEskridgeInstituteTeamSuccessionSurfaceExact.agda
+  DASHI/Culture/AmyEskridgeHoloChronPostDeathDissolutionFrontierExact.agda
+  DASHI/Culture/MissingDeceasedFullApplicationAcquisitionExact.agda
+  DASHI/Culture/MissingDeceasedReconstructionCostMatrixExact.agda
+  DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+  DASHI/Culture/AmyEskridgeCorporateInstitutionalChronologySnowballExact.agda
+  DASHI/Culture/AmyEskridgePostDeathTransitionSnowballWeldExact.agda
+  DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+  DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 )
 for file in "${files[@]}"; do
   test -f "$file"
@@ -53,10 +80,73 @@ grep -q 'closedWallHasNoFurtherAcquisition' DASHI/Physics/ExoticGravity/Material
 grep -q 'closedWallProducerIsNoSearch' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallProgressionExact.agda
 grep -q 'authorityClosurePaysSourceCurrent' DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGAuthorityClosureExact.agda
 
+# Amy memorial source-attribution / snowball boundaries.
+grep -q 'hostAuthenticatedDeckEqualsIndependentPhysicsValidation' DASHI/Culture/AmyEskridgeHAL5AntigravitySourceEntitlementExact.agda
+grep -q 'reportedPrimaryAnomalyEqualsEstablishedPhysicalEffect' DASHI/Culture/AmyEskridgeHAL5PrimaryLiteratureSnowballExact.agda
+grep -q 'abstractClaimCreatesObservationReceipt' DASHI/Culture/AmyEskridgeHistoricalMechanismBidiSourceWeldExact.agda
+grep -q 'amyDiscussionEqualsAmyEndorsement' DASHI/Culture/AmyEskridgeMechanismAssociationProvenanceExact.agda
+grep -q 'outOfOrderForensicAcquisitionMayBeRetained' DASHI/Culture/AmyEskridgeForensicAcquisitionPriorityExact.agda
+grep -q 'podkletnovNieminen1992ReportedSignal' DASHI/Physics/ExoticGravity/SuperconductingGravityExperimentalConstraintRegistryExact.agda
+grep -q 'reportedSignalEqualsEstablishedEffect' DASHI/Physics/ExoticGravity/SuperconductingGravityExperimentalConstraintRegistryExact.agda
+
+# Amy circumstances-of-demise boundaries.
+grep -q 'secondaryReportedSuicideEqualsInspectedPrimaryForensicRecord' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
+grep -q 'federalReviewContextEqualsCaseConnection' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
+grep -q 'scientificNoveltyEqualsDeathCausation' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
+grep -q 'notPubliclyLocatedEqualsKnownAbsent' DASHI/Culture/AmyEskridgeDemiseCircumstancesSnowballExact.agda
+
+# Amy OSINT boundaries.
+grep -q 'osintChangesAcquisitionRouteNotTruthStandard' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+grep -q 'repeatedReportingEqualsIndependentCorroboration' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+grep -q 'reportedScreenshotEqualsAuthenticatedNativeMessage' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+grep -q 'preDeathStatementAloneDeterminesDeathManner' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+grep -q 'osintAtomMayCreateCulpritByAccumulation' DASHI/Culture/AmyEskridgeOSINTSnowballExact.agda
+
+# Message provenance, chronology, and corroboration remain non-promoting.
+grep -q 'closerToOriginEqualsAuthenticated' DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
+grep -q 'authenticatedPreDeathStatementDeterminesDeathManner' DASHI/Culture/AmyEskridgeMessageProvenanceBacktraceExact.agda
+grep -q 'temporalOrderingCreatesCausation' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+grep -q 'exactReportedDateEqualsNativeMessageAuthentication' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+grep -q 'reportedDirectedEnergyClaimEstablishesDirectedEnergyAttack' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+grep -q 'unresolvedDatesRemainExplicit' DASHI/Culture/AmyEskridgeOSINTChronologySnowballExact.agda
+grep -q 'outletCountEqualsIndependentOriginCount' DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
+grep -q 'metadataContradictionCreatesDeathTheory' DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
+grep -q 'independentHouseInquiryCorroboratesAmySpecificCause' DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
+grep -q 'contradictionMayCreateNewAcquisitionTarget' DASHI/Culture/AmyEskridgeOSINTChronologyCorroborationExact.agda
+
+# Existing POAMS/application/custody owners composed by the snowball weld.
+grep -q 'poamsReviewToTMRemainsCandidateIdentity' DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
+grep -q 'poamsUnderlyingDataRemainPrivateCustody' DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
+grep -q 'poamsHardwareRemainsPrivateCustody' DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
+grep -q 'amyApplicationFirstMissingLeafStillDerivedObjectIdentity' DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
+grep -q 'currentComposedPOAMSFrontier' DASHI/Culture/AmyEskridgePOAMSApplicationCustodySnowballWeldExact.agda
+grep -q 'successorHandoverRequiresSameCarrierEvidence' DASHI/Culture/AmyEskridgePostDeathTransitionSnowballWeldExact.agda
+
+# Exact object identity remains discriminator-gated.
+grep -q 'firstExactIdentityDiscriminator = primaryNASAReleaseIdentifier' DASHI/Culture/AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact.agda
+grep -q 'directWitnessIdentifierLead = identity-discriminator-receipt' DASHI/Culture/AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact.agda
+grep -q 'exactIdentifierMayPayIdentityConsumer' DASHI/Culture/AmyEskridgeInstituteDerivativeIdentityDiscriminatorExact.agda
+grep -q 'discriminatorTargetsApplicationIdentity' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'ExactIdentityPaymentReceipt' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'discriminatorIsPaid' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'discriminatorMayPromoteExactIdentity' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'firstDiscriminatorTargetsFirstApplicationLeaf' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'currentWitnessIdentifierIsRetainedLeadOnly' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+grep -q 'paidIdentityAutomaticallyPaysSuccession' DASHI/Culture/AmyEskridgeEntityEventTimeCustodySnowballWeldExact.agda
+
+# Institute/HoloChron succession candidates are retained without same-carrier promotion.
+grep -q 'poamsExactIdentityStillUnpaid' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'amyApplicationAcquisitionRemainsHighestPriority' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'instituteReconstructionCostStillUnknown' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'richard2018TeamDoesNotPaySameExperimentPossession' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'holochronTechnicalAssetDispositionStillUnlocated' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+grep -q 'exactDerivativeIdentityStillPrecedesSameCarrierSuccession' DASHI/Culture/AmyEskridgeInstituteSuccessionCandidateSnowballWeldExact.agda
+
 chmod +x scripts/agda29_without_k_wrapper.sh scripts/run_agda29_parallel_check.sh
 AGDA_BIN="$root/scripts/agda29_without_k_wrapper.sh" \
   scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGSourceValidationExact.agda \
-  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda
+  DASHI/Physics/ExoticGravity/MaterialEffectiveNegativeGScientificWallValidationExact.agda \
+  DASHI/Culture/AmyEskridgeEvidenceEverything.agda
 
-echo "Material-effective negative-G source/provenance/GR/background/constitutive/replication/scientific-wall BIDI validation checks passed"
+echo "Material-effective negative-G + Amy memorial source/provenance/demise/OSINT/POAMS/custody/succession/identity-payment snowball validation checks passed"
