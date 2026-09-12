@@ -6,8 +6,13 @@ OWNER="$ROOT/DASHI/Wikimedia/IbrahimMonster3BMathlibCyclotomicFieldScalarExtensi
 required=(
   "record MathlibCyclotomicFieldCoordinate"
   "Mathlib/NumberTheory/Cyclotomic/Basic.lean"
+  "Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean"
   "CyclotomicField 3 ℚ"
   "AlgebraicClosure (CyclotomicField 3 ℚ)"
+  "integralPowerBasisOfPrimePow"
+  "integralPowerBasisOfPrimePow_gen"
+  "integralPowerBasisOfPrimePow_dim"
+  "phiThreeIsTwo"
   "record DashiCyclotomic3ToMathlibCyclotomicFieldTransport"
   "dashiPairPresentationIsCyclotomicField"
   "algebraicClosureTargetIsAlgClosed"
