@@ -14,9 +14,9 @@ import DASHI.Reasoning.TypedHyperfabricConsumerReductionBridgeExact as SectionRe
 --
 -- This owner instantiates the 26-region vocabulary and a source/target
 -- ordered-pair chart carrier. It does NOT identify the complete 26^2 pair
--- carrier with the nonzero physical synapse hypergraph: zero/possible pairs are
--- still present. The purpose is to make the already-used pairwise NDim chart a
--- projection of compatible TypedHyperfabric GlobalSections.
+-- carrier with the raw physical synapse hypergraph. The purpose is to make the
+-- already-used pairwise NDim chart a projection of compatible
+-- TypedHyperfabric GlobalSections.
 ------------------------------------------------------------------------
 
 data MaleCNSRegion : Set where
@@ -136,12 +136,6 @@ sourceAndTargetChartsAgreeThroughGlobalSection section source target =
 
 ------------------------------------------------------------------------
 -- Set-sized selected-section code.
---
--- A complete ordered-pair chart function is itself Set-sized.  Realization
--- constructs one compatible GlobalSection by using that same pair chart for
--- both the source-facing and target-facing vertex stalk views.  This pays the
--- universe-correct bridge into ConsumerRelativeReduction without identifying
--- the dense chart carrier with the physical nonzero synapse incidence graph.
 ------------------------------------------------------------------------
 
 MaleCNSPairChartCode : Set → Set
@@ -189,6 +183,93 @@ sectionPairChartRealizationExact :
 sectionPairChartRealizationExact code edge = refl
 
 ------------------------------------------------------------------------
+-- Executed Python representation receipts.
+--
+-- These are empirical/runtime coordinates, not kernel proofs. They record that
+-- the already-used eight-coordinate chart can be lifted to/projected from the
+-- local-hyperfabric runtime without numerical change for the declared consumer.
+------------------------------------------------------------------------
+
+record MaleCNSHyperfabricProjectionReceipt : Set where
+  constructor malecns-hyperfabric-projection-receipt
+  field
+    repository : String
+    artifactPath : String
+    regionCount : Nat
+    orderedPairLocalityCount : Nat
+    composableBaseIncidenceCount : Nat
+    legacyEightCoordinateRoundtripExact : Bool
+    originalJoinedLORO : String
+    projectedJoinedLORO : String
+    absoluteLORODifference : String
+    interpretation : String
+
+open MaleCNSHyperfabricProjectionReceipt public
+
+currentMaleCNSHyperfabricProjectionReceipt : MaleCNSHyperfabricProjectionReceipt
+currentMaleCNSHyperfabricProjectionReceipt = malecns-hyperfabric-projection-receipt
+  "github.com/chboishabba/dashiBRAIN"
+  "data/gauthey_lbm/jrc2018_regions_a2_r5/malecns_local_fibre_hyperfabric.json"
+  26
+  676
+  16250
+  true
+  "0.13639532298659035"
+  "0.13639532298659035"
+  "0.0"
+  "The 26-region local-hyperfabric lift/project route is numerically lossless for the historical eight-coordinate chart and joined-controlled LORO consumer. Base incidence materialization does not itself manufacture fibre transport or gluing."
+
+record SenderGainHyperfabricProjectionReceipt : Set where
+  constructor sender-gain-hyperfabric-projection-receipt
+  field
+    candidate : String
+    derivedFromHyperfabricProjection : Bool
+    matchesStandaloneCompositionExactly : Bool
+    maxAbsDifference : String
+    joinedLORO : String
+    certifiedConsumerSufficient : Bool
+    interpretation : String
+
+open SenderGainHyperfabricProjectionReceipt public
+
+currentSenderGainHyperfabricProjectionReceipt : SenderGainHyperfabricProjectionReceipt
+currentSenderGainHyperfabricProjectionReceipt = sender-gain-hyperfabric-projection-receipt
+  "m_i * P_ij"
+  true
+  true
+  "0.0"
+  "0.13189851095808636"
+  false
+  "The mP candidate is exactly derivable through the hyperfabric chart projection path. Exact derivability does not promote the candidate to a certified sufficient or minimal carrier."
+
+record MaleCNSPhysicalIncidenceProjectionReceipt : Set where
+  constructor malecns-physical-incidence-projection-receipt
+  field
+    regionCount : Nat
+    orderedPairCount : Nat
+    nonzeroDirectCouplingPairCount : Nat
+    aggregatedDirectSupportCompleteAt26RegionQuotient : Bool
+    regeneratedEightCoordinatesExactly : Bool
+    regeneratedJoinedLORO : String
+    joinedLORODifference : String
+    aggregatedRegionSupportEqualsRawPhysicalSynapseHypergraph : Bool
+    interpretation : String
+
+open MaleCNSPhysicalIncidenceProjectionReceipt public
+
+currentMaleCNSPhysicalIncidenceProjectionReceipt : MaleCNSPhysicalIncidenceProjectionReceipt
+currentMaleCNSPhysicalIncidenceProjectionReceipt = malecns-physical-incidence-projection-receipt
+  26
+  676
+  676
+  true
+  true
+  "0.13639532298659035"
+  "0.0"
+  false
+  "At the declared 26-region aggregation every ordered pair has nonzero direct coupling, and this aggregated support regenerates all eight NDim coordinates exactly. Completeness of the coarse region support does not identify it with the raw neuron/synapse physical hypergraph."
+
+------------------------------------------------------------------------
 -- Boundary.
 ------------------------------------------------------------------------
 
@@ -219,9 +300,25 @@ record MaleCNSHyperfabricChartProjectionBoundary : Set where
     completePairCarrierEqualsPhysicalNonzeroSynapseHypergraphIsFalse :
       completePairCarrierEqualsPhysicalNonzeroSynapseHypergraph ≡ false
 
+    aggregatedRegionSupportEqualsRawPhysicalSynapseHypergraph : Bool
+    aggregatedRegionSupportEqualsRawPhysicalSynapseHypergraphIsFalse :
+      aggregatedRegionSupportEqualsRawPhysicalSynapseHypergraph ≡ false
+
     eightCoordinatesEqualUnderlyingFibreCardinality : Bool
     eightCoordinatesEqualUnderlyingFibreCardinalityIsFalse :
       eightCoordinatesEqualUnderlyingFibreCardinality ≡ false
+
+    empiricalHyperfabricRoundtripLosslessForDeclaredConsumer : Bool
+    empiricalHyperfabricRoundtripLosslessForDeclaredConsumerIsTrue :
+      empiricalHyperfabricRoundtripLosslessForDeclaredConsumer ≡ true
+
+    empiricalSenderGainProjectionExact : Bool
+    empiricalSenderGainProjectionExactIsTrue :
+      empiricalSenderGainProjectionExact ≡ true
+
+    exactProjectionPromotesSufficiency : Bool
+    exactProjectionPromotesSufficiencyIsFalse :
+      exactProjectionPromotesSufficiency ≡ false
 
 open MaleCNSHyperfabricChartProjectionBoundary public
 
@@ -235,4 +332,8 @@ canonicalMaleCNSHyperfabricChartProjectionBoundary =
     true refl
     true refl
     false refl
+    false refl
+    false refl
+    true refl
+    true refl
     false refl
