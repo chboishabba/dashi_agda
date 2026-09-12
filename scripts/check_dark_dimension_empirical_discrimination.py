@@ -11,6 +11,7 @@ REQUIRED = {
         "reportedPreferenceDoesNotUniquelyIdentifyDarkDimension",
         "alternativeMechanismKeepsModelIdentityOpen",
         "darkDimensionPredictionAdmissionStillNonPromoting",
+        "externalPublishedFitDoesNotPayDASHIDerivedPrediction",
         "cPrimeBestFitFiveHundredths",
         "cPrimeUncertaintyOneHundredth",
         "cPrimeFifthForceUpperBoundTwoTenths",
