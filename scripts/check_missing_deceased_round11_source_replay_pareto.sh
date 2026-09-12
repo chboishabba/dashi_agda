@@ -20,10 +20,15 @@ grep -q 'grillmairStreamReplay' "$root/DASHI/Physics/Astrophysics/GrillmairStell
 grep -q 'hicksPhotometryReplay' "$root/DASHI/Physics/Planetary/HicksSmallBodyPhotometrySourceReplayExact.agda"
 
 grep -q 'sourceReplayBindingsCount = 9' "$root/DASHI/Culture/MissingDeceasedTwentyScientistScienceSourceReplayBidiExact.agda"
+grep -q 'sourceReplayRuntimeSlotCount = 7' "$root/DASHI/Culture/MissingDeceasedTwentyScientistEmbodiedReferenceRuntimeBidiExact.agda"
 grep -q 'round11ScientificCohortCount = 20' "$root/DASHI/Culture/MissingDeceasedTwentyScientistRound11SourceReplayParetoExact.agda"
 grep -q 'round11EveryScientistTouched = true' "$root/DASHI/Culture/MissingDeceasedTwentyScientistRound11SourceReplayParetoExact.agda"
 grep -q 'round11NewReplayPromotionCount = 5' "$root/DASHI/Culture/MissingDeceasedTwentyScientistRound11SourceReplayParetoExact.agda"
 grep -q 'sourceReplayDoesNotPayCustody = false' "$root/DASHI/Culture/MissingDeceasedTwentyScientistRound11SourceReplayParetoExact.agda"
 grep -q 'MissingDeceasedTwentyScientistRound11SourceReplayParetoExact' "$root/DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda"
+
+grep -q '"Carl J. Grillmair": {"role": "astronomical_inference", "ready": True, "source_replay": True' "$root/scripts/twenty_scientist_embodied_reference_runtime.py"
+grep -q '"Michael David Hicks": {"role": "planetary_characterisation", "ready": True, "source_replay": True' "$root/scripts/twenty_scientist_embodied_reference_runtime.py"
+grep -q '"Zhou Guangyuan": {"role": "thermal_protection", "ready": True, "source_replay": True' "$root/scripts/twenty_scientist_embodied_reference_runtime.py"
 
 echo 'Round-11 source-replay Pareto static contract: OK'
