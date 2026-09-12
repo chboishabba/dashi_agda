@@ -7,6 +7,8 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Moonshine.VertexOperatorAlgebraLinearActionReceiptExact as LiteralVOA
+import DASHI.Moonshine.GradedVOAHomogeneousLinearRealisationExact as Homogeneous
 import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
 import DASHI.Wikimedia.IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact as Occurrence
 import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as LinearZeta
@@ -22,15 +24,21 @@ import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectio
 --
 --   S_zeta = Hom_E(H_zeta , W_zeta)
 --
--- and the Moonshine lane now has a typed bridge for a linear 196883 Monster
--- constituent in weight two.  The remaining theorem-bearing payment is not a
--- new dimension coincidence: it is the SAME-OBJECT weld from that actual
--- Monster linear action, through the literal zeta eigensector, to the actual
--- multiplicity action whose character is the already-paid 12+78 family.
+-- and the Moonshine lane now has three progressively stronger donor interfaces:
 --
--- This owner records that acquisition contract.  It deliberately does not
--- inhabit it and therefore does not manufacture matrices, an inertia action or
--- an intertwiner from degree occurrence, Fin 90 basis labels, or identifiers.
+--   literal VOA action + explicit linearity receipt
+--     -> homogeneous-grade linear realisation
+--     -> linear 196883 Monster constituent in weight two.
+--
+-- Each donor deliberately leaves its actual Monster inhabitant separate.  The
+-- remaining theorem-bearing payment is therefore a SAME-OBJECT weld from the
+-- existing literal Monster VOA/group action, through grade two and the actual
+-- 196883 constituent, through the selected 3B action and literal zeta sector,
+-- to the actual multiplicity action whose character is the paid 12+78 family.
+--
+-- This owner records that acquisition contract.  It does not manufacture the
+-- missing inhabitant, matrices, inertia action or intertwiner from dimension,
+-- degree occurrence, Fin 90 basis labels, or identifiers.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -76,8 +84,10 @@ record ActualLinearMultiplicityAcquisition : Set₁ where
     multiplicityHomSpace : Hom.ActualLinearMultiplicityHomSpace
 
     -- Same-object receipts still requiring an actual producer/acquisition.
-    sameLiteralZetaSector : Set
+    literalVOAActionLinearityIsSameMonsterAction : Set
+    homogeneousGradeTwoIsSameLiteralVOAModule : Set
     weightTwo196883ActionIsSameMonsterAction : Set
+    sameLiteralZetaSector : Set
     degree17496SameObject : Set
     degree113724SameObject : Set
     sourcePaidCharacterOnSameAction : Set
@@ -94,6 +104,7 @@ data DegreeOccurrenceCreatesAction : Set where
 data PermutationBasisCreatesLinearAction : Set where
 data CharacterEqualityCreatesIntertwiner : Set where
 data WeightTwoDimensionCreatesMultiplicityAction : Set where
+data LiteralVOADefinitionCreatesActualMonsterInhabitant : Set where
 data QidCreatesAction : Set where
 data DeweyCreatesAction : Set where
 data OeisCreatesAction : Set where
@@ -110,6 +121,10 @@ characterEqualityDoesNotCreateIntertwiner ()
 weightTwoDimensionDoesNotCreateMultiplicityAction :
   WeightTwoDimensionCreatesMultiplicityAction → ⊥
 weightTwoDimensionDoesNotCreateMultiplicityAction ()
+
+literalVOADefinitionDoesNotCreateActualMonsterInhabitant :
+  LiteralVOADefinitionCreatesActualMonsterInhabitant → ⊥
+literalVOADefinitionDoesNotCreateActualMonsterInhabitant ()
 
 qidDoesNotCreateAction : QidCreatesAction → ⊥
 qidDoesNotCreateAction ()
@@ -160,7 +175,10 @@ record ActualLinearMultiplicityAcquisitionFrontier : Set where
     twelveFactorOccurrencePaid : Bool
     seventyEightFactorOccurrencePaid : Bool
     canonicalLinearHomTargetNamed : Bool
+    literalVOALinearityReceiptInterfaceAvailable : Bool
+    homogeneousGradeLinearisationInterfaceAvailable : Bool
     weightTwoLinearActionBridgeInterfaceAvailable : Bool
+    actualMonsterVOALinearityReceiptPaid : Bool
     finiteNinetyPermutationRouteIsCanonical : Bool
     actualLinearActionPaid : Bool
     sourceNativeInertiaSameActionPaid : Bool
@@ -172,9 +190,10 @@ currentActualLinearMultiplicityAcquisitionFrontier :
   ActualLinearMultiplicityAcquisitionFrontier
 currentActualLinearMultiplicityAcquisitionFrontier =
   actual-linear-multiplicity-acquisition-frontier
-    true true true true true true false
-    false false false
-    "instantiate the existing weight-two linear Monster bridge on the SAME 196883 action used by the selected 3B single-action producer; restrict that action linearly to the literal W_zeta eigensector; construct S_zeta = Hom_E(H_zeta,W_zeta) with the source-native inertia action; then weld the paid 17496 and 113724 restriction constituents to the 12 and 78 factors by an actual same-action character/intertwiner receipt. Degree occurrence, Fin90 basis labels, character equality, DOI/QID/Dewey/OEIS coordinates, and the generic Hom-space type do not pay this receipt."
+    true true true true true
+    true true true
+    false false false false false
+    "inhabit the existing literal VOA linearity receipt on the exact Monster VOA/group action, carry that same object through the grade-2 homogeneous linear realisation and 196883 constituent bridge, and identify it with the State/action used by the selected 3B single-action producer. Only then restrict linearly to literal W_zeta, construct S_zeta = Hom_E(H_zeta,W_zeta) with the source-native inertia action, and weld the paid 17496 and 113724 constituents to 12 and 78 by an actual same-action character/intertwiner receipt. Degree occurrence, Fin90 basis labels, character equality, DOI/QID/Dewey/OEIS coordinates, and generic interfaces do not pay the inhabitant."
 
 ------------------------------------------------------------------------
 -- 6. Imported status snapshots are routing information, not promotion.
@@ -191,6 +210,12 @@ homFrontier = Hom.currentLinearMultiplicityHomFrontier
 
 wrongTypeFrontier : WrongType.MultiplicityWrongTypeFrontier
 wrongTypeFrontier = WrongType.currentMultiplicityWrongTypeFrontier
+
+literalVOABoundary : LiteralVOA.VOAActionLinearReceiptBoundary
+literalVOABoundary = LiteralVOA.canonicalVOAActionLinearReceiptBoundary
+
+homogeneousGradeBoundary : Homogeneous.HomogeneousGradeLinearBoundary
+homogeneousGradeBoundary = Homogeneous.canonicalHomogeneousGradeLinearBoundary
 
 weightTwoBoundary : WeightTwo.WeightTwoLinearActionBoundary
 weightTwoBoundary = WeightTwo.canonicalWeightTwoLinearActionBoundary
