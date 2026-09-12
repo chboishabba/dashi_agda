@@ -64,6 +64,23 @@ grep -q 'foiaClosurePaysNoRecordsFinding = false' DASHI/Culture/NingLiArmyFOIAPr
 grep -q 'reformulationWasExplicitlyInvited = true' DASHI/Culture/NingLiArmyFOIAProceduralHistoryExact.agda
 grep -q 'NingLiArmyFOIAProceduralHistoryExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
 
+# Round-robin scientific cohort invariant: 11 U.S. + 9 Chinese scientists.
+grep -q 'twentyScientistRoundProgress' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
+grep -q 'scientificCohortCount = 20' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
+grep -q 'usScientificCohortCount = 11' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
+grep -q 'chineseScientificCohortCount = 9' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
+grep -q 'everyRetainedScientistHasRoundTarget = true' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
+grep -q 'roundTargetPaysLeaf = false' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
+for name in \
+  'Nuno F. G. Loureiro' 'Joshua Kyle LeBlanc' 'Frank W. Maiwald' \
+  'Monica Jacinto / Monica Reza' 'Carl J. Grillmair' 'Michael David Hicks' \
+  'William Neil McCasland' 'Anthony Chavez' 'Jason R. Thomas' 'Amy Eskridge' \
+  'Ning Li' 'Chen Shuming' 'Feng Yanghe' 'Zhou Guangyuan' 'Liu Donghao' \
+  'Zhang Xiaoxin' 'Zhang Daibing' 'Li Minyong' 'Fang Daining' 'Yan Hong'; do
+  grep -q "$name" DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
+done
+grep -q 'MissingDeceasedTwentyScientistRoundRobinProgressExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+
 grep -q 'armyCommercialTransfer' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'engineeringStackConvergence' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'informationPoisoning' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
