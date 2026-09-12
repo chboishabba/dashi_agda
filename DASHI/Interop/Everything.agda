@@ -69,5 +69,6 @@ import DASHI.Interop.SLRWorldResearchIterationBudgetExact
 import DASHI.Interop.SLRWikidataTypedTraversalParetoExact
 import DASHI.Interop.SLRWikipediaArticlePNFWorldProducerExact
 import DASHI.Interop.SLRNatClimateSourceUnitPNFBatchExact
+import DASHI.Interop.SLRPostgresWorldPersistenceExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
