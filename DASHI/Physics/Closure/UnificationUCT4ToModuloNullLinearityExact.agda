@@ -78,13 +78,14 @@ uct4CrossTermIsZeroModuloNull :
     (Boundary.actualU1aCrossTerm
       V G-boundary (UCT.-V_ uct) s1 s2)
     (U1a.zeroV V)
-uct4CrossTermIsZeroModuloNull {uct = uct} transport s1 s2 =
+uct4CrossTermIsZeroModuloNull {V} {G-boundary} {uct} transport s1 s2 =
   nullToZero transport crossTerm
     (UCT.uct4CrossTermNullityTheorem uct s1 s2)
   where
+    crossTerm : U1a.DefectQuotientV V
     crossTerm =
       Boundary.actualU1aCrossTerm
-        _ _ (UCT.-V_ uct) s1 s2
+        V G-boundary (UCT.-V_ uct) s1 s2
 
 uct5ModuloNullAdditivity :
   ∀ {V G-boundary}
