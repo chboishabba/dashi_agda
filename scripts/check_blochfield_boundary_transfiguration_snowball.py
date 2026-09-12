@@ -36,11 +36,17 @@ REQUIRED = {
         "crossPlatformIdentityWeld",
         "sameDisplayNameDoesNotPaySamePerson",
         "handleStemDoesNotPaySamePerson",
+    ],
+    "DASHI/Culture/BlochfieldMediumSavedReadingSnowballExact.agda": [
+        "module DASHI.Culture.BlochfieldMediumSavedReadingSnowballExact where",
         "darkMatterLabsRadicleCivicsSource",
         "mediumSavedRadicleCivicsCandidate",
         "savedReadingDoesNotPayCreatorLineage",
+        "sameNameMediumIdentityStillUnpaid",
+        "creatorLongFormStillUnpaid",
         '"Radicle Civics — Building Proofs of Possibilities for a Civic Economy and Society"',
         '"https://provocations.darkmatterlabs.org/radicle-civics-building-proofs-of-possibilities-for-a-civic-economy-and-society-ee28baeeec70"',
+        '"2023"',
     ],
     "DASHI/Culture/BlochfieldAcquisitionResidualSnowballExact.agda": [
         "module DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact where",
@@ -56,6 +62,7 @@ REQUIRED = {
     "DASHI/Culture/Everything.agda": [
         "import DASHI.Culture.BoundaryConservativeTransfigurationBlochfieldExact",
         "import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact",
+        "import DASHI.Culture.BlochfieldMediumSavedReadingSnowballExact",
         "import DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact",
     ],
 }
