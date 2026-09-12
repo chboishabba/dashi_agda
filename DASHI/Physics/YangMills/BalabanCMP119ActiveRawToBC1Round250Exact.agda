@@ -31,6 +31,7 @@ import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact a
 import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact as R248
 import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as R246
 import DASHI.Physics.YangMills.BalabanTheorem1RegularEContinuationRound247Exact as R247
+import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Continue
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
 import DASHI.Physics.YangMills.BalabanCMP109Equation51LocalizedHessianRound103Exact as Eq51
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as Canon
@@ -77,7 +78,7 @@ activeContinuation :
     {source = RawHistory.rawStateFromFiniteBetaHistory objects}
     predicates) →
   (Tangent : Set) →
-  _
+  Continue.CMP109116LiteralEffectiveActionContinuation
 activeContinuation decoder rawWitness Tangent =
   R247.asActiveCMP109116ContinuationFromRegularEForm
     (activeRegularEFormWitness decoder rawWitness)
