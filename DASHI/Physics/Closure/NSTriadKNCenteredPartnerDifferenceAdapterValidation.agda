@@ -12,6 +12,8 @@ open import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact
     )
 open import DASHI.Physics.Closure.NSTriadKNFixedOutputSlotCollisionExact
   using (fixedOutputEqualVelocityArgumentsHaveEqualSlotKernel)
+open import DASHI.Physics.Closure.NSTriadKNFixedOutputComparableCollisionGeometryExact
+  using (distinctComparableSameOutputIncidences)
 open import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact
   using (compressedPartnerDifferenceNormIsFourSlotDefect)
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferenceAggregateExact
