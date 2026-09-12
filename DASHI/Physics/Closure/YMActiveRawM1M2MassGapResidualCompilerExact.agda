@@ -18,6 +18,7 @@ module DASHI.Physics.Closure.YMActiveRawM1M2MassGapResidualCompilerExact where
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayMassGapGatePackageExact as Gates
+import DASHI.Physics.YangMills.BalabanClayPhysicalScaleExponentExact as Scale
 import DASHI.Physics.Closure.YMPhysicalScaleM1GateAdapterExact as M1
 import DASHI.Physics.Closure.YMActiveRawBC1ToDenseCoreProofSpineExact as Spine
 import DASHI.Physics.Closure.YMActiveRawDenseCoreM2GateAdapterExact as M2
@@ -73,9 +74,7 @@ assembleMandatoryMassGapGatesFromPhysicalScaleAndActiveRawDenseCore :
       {objects = objects} {predicates = predicates}
       {decoder = decoder} {rawWitness = rawWitness}
       bc1Inputs}
-    {physicalScale :
-      DASHI.Physics.YangMills.BalabanClayPhysicalScaleExponentExact.UniformPhysicalScaleClustering
-        Cutoff algebra} →
+    {physicalScale : Scale.UniformPhysicalScaleClustering Cutoff algebra} →
   M1.PhysicalScaleM1GateWeld physicalScale gates →
   M2.ActiveRawDenseCoreM2GateWeld spine gates →
   RemainingMandatoryMassGapGatesAfterM1M2 gates →
