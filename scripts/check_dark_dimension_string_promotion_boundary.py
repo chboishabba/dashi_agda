@@ -16,12 +16,18 @@ REQUIRED = {
         "10.1007/JHEP11(2023)109",
         "10.1103/PhysRevD.109.063540",
         "10.3847/2515-5172/ae8906",
+        "10.1103/1rsq-cv2m",
     ],
     "DASHI/Physics/Closure/GeneralGRCosmologyQuantumGravityRegression.agda": [
         "import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension",
         "darkDimensionTestableRegression",
         "darkDimensionStringPromotionBlockedRegression",
         "darkDimensionToEBlockedRegression",
+    ],
+    "DASHI/Unified/GRQuantumResearchAuthorityCutset.agda": [
+        "import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension",
+        "DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact",
+        "darkDimensionDoesNotPayEmpiricalCompletion",
     ],
 }
 
