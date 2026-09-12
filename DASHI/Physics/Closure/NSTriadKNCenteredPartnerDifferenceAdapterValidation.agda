@@ -2,3 +2,4 @@ module DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterValidation
 
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferenceDebtExact
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferenceAggregateExact
