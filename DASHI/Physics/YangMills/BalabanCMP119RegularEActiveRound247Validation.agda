@@ -10,15 +10,16 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularEActiveRound247Validation whe
 --   finite-mode beta history
 --     -> ActiveScale coupling hypothesis
 --     -> consumer-indexed CMP119 regular-E Section-2 predicate
---     -> active CMP122 Theorem-1 form projection
+--     -> active CMP122 Section-2 FORM witness
 --     -> least-privilege active regular-E/localization witness
 --     -> CMP109/CMP116 literal effective-action continuation.
 --
--- This root does NOT manufacture the published Theorem-1 witness or the
--- literal CMP119 predicate instantiation. Those source-facing payments remain
--- explicit. It validates both the compatibility full-witness path and the
--- preferred form-only consumer path without falling back to the legacy all-Nat
--- wrapper.
+-- The full CMP122 Theorem-1 witness remains a compatibility producer, but the
+-- BC1-facing route consumes only preservation of the Sect.-2 form. Quantitative
+-- Sect.-2 bounds are therefore not primitive dependencies of this continuation.
+--
+-- This root does NOT manufacture the published source witness or the literal
+-- CMP119 predicate instantiation. Those source-facing payments remain explicit.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -30,6 +31,10 @@ import DASHI.Physics.YangMills.BalabanTheorem1RegularEContinuationRound247Exact 
 activeScaleCouplingHypothesisCompilerLevel : ProofLevel
 activeScaleCouplingHypothesisCompilerLevel =
   R246.activeScaleCouplingHypothesisCompilerLevel
+
+activeSection2FormProjectionCompilerLevel : ProofLevel
+activeSection2FormProjectionCompilerLevel =
+  Active.activeScaleCMP122Section2FormProjectionLevel
 
 activeRegularESection2PredicateCompilerLevel : ProofLevel
 activeRegularESection2PredicateCompilerLevel =
