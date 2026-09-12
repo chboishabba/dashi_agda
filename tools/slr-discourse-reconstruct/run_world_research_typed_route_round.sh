@@ -8,6 +8,7 @@ ITERATION_INDEX="${3:-3}"
 INPUT_ITERATION="${4:-$OUT_DIR/world-research-rounds/round-$((ITERATION_INDEX-1))/world-research-iteration.json}"
 BASE_GRAPH="${5:-$OUT_DIR/world-research-rounds/round-$((ITERATION_INDEX-1))/merged-wikimedia-world-graph.json}"
 LANGUAGES="${6:-en,es,fr,de,simple}"
+ARTICLE_PNF_LANGUAGES="${SLR_WORLD_ARTICLE_PNF_LANGUAGES:-en}"
 MAX_TARGETS="${SLR_WORLD_MAX_TYPED_ROUTE_TARGETS:-4}"
 MAX_MISSING="${SLR_WORLD_MAX_MISSING_SURFACES_PER_ITERATION:-4}"
 ROUNDS_DIR="$OUT_DIR/world-research-rounds"
@@ -20,6 +21,12 @@ ROUTE_HISTORY_NEXT="$ROUND_DIR/route-yield-history.json"
 SYNTHETIC_CLOSURE="$ROUND_DIR/typed-route-input-closure.json"
 SYNTHETIC_ITERATION="$ROUND_DIR/typed-route-input-iteration.json"
 FRONTIER_WELD_ERR="$ROUND_DIR/typed-route-frontier-weld.stderr"
+ARTICLE_PNF="$ROUND_DIR/wikipedia-article-pnf-world-producer.json"
+ARTICLE_PNF_ERR="$ROUND_DIR/wikipedia-article-pnf-world-producer.stderr"
+ARTICLE_WELDED_CLOSURE="$ROUND_DIR/semantic-world-closure-with-article-pnf.json"
+ARTICLE_WELD_ERR="$ROUND_DIR/article-pnf-semantic-weld.stderr"
+ARTICLE_GAP_FLOW="$ROUND_DIR/semantic-gap-flow-with-article-pnf.json"
+ARTICLE_GAP_FLOW_ERR="$ROUND_DIR/semantic-gap-flow-with-article-pnf.stderr"
 
 mkdir -p "$ROUND_DIR"
 [[ -s "$INPUT_ITERATION" ]] || { echo "ERROR: missing input iteration $INPUT_ITERATION" >&2; exit 1; }
@@ -50,10 +57,6 @@ grep -q 'pareto_dimensions_scalarized=false' "$ROUTE_PLAN_ERR" || { cat "$ROUTE_
 grep -q 'typed_property_is_claim_truth=false' "$ROUTE_PLAN_ERR" || { cat "$ROUTE_PLAN_ERR" >&2; exit 1; }
 grep -q 'ibrahim_historical_equivalence=false' "$ROUTE_PLAN_ERR" || { cat "$ROUTE_PLAN_ERR" >&2; exit 1; }
 
-# Weld the selected typed route actions into a synthetic closure and iteration.
-# The bounded round refresh logic keys off semantic_closure_reference; pointing
-# it at the locked synthetic closure prevents the generic planner from replacing
-# the typed targets with unrelated high-Pareto QIDs.
 python3 "$HERE/slr_world_research_typed_route_frontier.py" \
   --iteration "$INPUT_ITERATION" \
   --closure "$PREVIOUS_CLOSURE" \
@@ -63,7 +66,6 @@ python3 "$HERE/slr_world_research_typed_route_frontier.py" \
   2> "$FRONTIER_WELD_ERR"
 
 grep -q 'typed_route_frontier_locked=true' "$FRONTIER_WELD_ERR" || { cat "$FRONTIER_WELD_ERR" >&2; exit 1; }
-
 grep -q 'typed_route_selection_rewrites_truth=false' "$FRONTIER_WELD_ERR" || { cat "$FRONTIER_WELD_ERR" >&2; exit 1; }
 
 SELECTED_TARGETS="$(python3 - "$ROUTE_PLAN" <<'PY'
@@ -79,9 +81,6 @@ SLR_WORLD_FOLLOW_MAX_DEPTH=0 \
 bash "$HERE/run_world_research_budgeted_round.sh" \
   "$HANDOFF_ROOT" "$OUT_DIR" "$ITERATION_INDEX" "$SYNTHETIC_ITERATION" "$BASE_GRAPH" "$LANGUAGES"
 
-# Strong execution weld: the QIDs actually selected by the inner bounded plan
-# must equal the typed-route targets.  Any drift means route-controlled
-# execution failed and the round is invalid.
 python3 - "$ROUTE_PLAN" "$ROUND_DIR/budget-plan.json" <<'PY'
 import json, sys
 route=json.load(open(sys.argv[1], encoding='utf-8'))
@@ -93,7 +92,74 @@ if actual != expected:
 print('SLR_TYPED_ROUTE_EXECUTION_WELD_RECEIPT selected_targets_match=true inner_replanning_changed_targets=false candidate_only=true semantic_promotion=false')
 PY
 
-GAP_FLOW="$ROUND_DIR/semantic-gap-flow.json"
+# Strong semantic producer: read the selected Wikipedia article revisions, run a
+# trained spaCy dependency parser, project sentence-level candidate PNF, and
+# weld those candidates into the same candidate semantic closure.  The parser
+# and PNF proposals remain non-authoritative and source-manifestation bound.
+python3 "$HERE/slr_wikipedia_article_pnf_world_producer.py" --self-check 2> "$ROUND_DIR/wikipedia-article-pnf-self-check.stderr"
+python3 "$HERE/slr_wikipedia_article_pnf_world_producer.py" \
+  --route-plan "$ROUTE_PLAN" \
+  --output "$ARTICLE_PNF" \
+  --cache-dir "$OUT_DIR/article-pnf-http-cache" \
+  --languages "$ARTICLE_PNF_LANGUAGES" \
+  --retries "${WIKIMEDIA_MAX_RETRIES:-5}" \
+  2> "$ARTICLE_PNF_ERR"
+
+grep -q 'spacy_dependency_surface_explicit=true' "$ARTICLE_PNF_ERR" || { cat "$ARTICLE_PNF_ERR" >&2; exit 1; }
+grep -q 'pnf_candidate_surface_explicit=true' "$ARTICLE_PNF_ERR" || { cat "$ARTICLE_PNF_ERR" >&2; exit 1; }
+grep -q 'parser_output_creates_ontology_truth=false' "$ARTICLE_PNF_ERR" || { cat "$ARTICLE_PNF_ERR" >&2; exit 1; }
+
+python3 "$HERE/slr_article_pnf_semantic_weld.py" --self-check 2> "$ROUND_DIR/article-pnf-semantic-weld-self-check.stderr"
+python3 "$HERE/slr_article_pnf_semantic_weld.py" \
+  --closure "$ROUND_DIR/semantic-world-closure.json" \
+  --article-pnf "$ARTICLE_PNF" \
+  --output "$ARTICLE_WELDED_CLOSURE" \
+  2> "$ARTICLE_WELD_ERR"
+
+grep -q 'article_pnf_creates_claim_truth=false' "$ARTICLE_WELD_ERR" || { cat "$ARTICLE_WELD_ERR" >&2; exit 1; }
+grep -q 'cross_language_propagation_rewrites_source=false' "$ARTICLE_WELD_ERR" || { cat "$ARTICLE_WELD_ERR" >&2; exit 1; }
+
+python3 "$HERE/slr_world_research_gap_flow.py" \
+  --previous "$PREVIOUS_CLOSURE" \
+  --current "$ARTICLE_WELDED_CLOSURE" \
+  --plan "$ROUND_DIR/budget-plan.json" \
+  --output "$ARTICLE_GAP_FLOW" \
+  2> "$ARTICLE_GAP_FLOW_ERR"
+
+# Promote the candidate article-PNF closure only as the round's candidate-world
+# continuation.  It still carries semantic_promotion=false and no claim truth.
+python3 - "$ROUND_DIR/world-research-iteration.json" "$ARTICLE_WELDED_CLOSURE" "$ARTICLE_GAP_FLOW" <<'PY'
+import json, sys
+from pathlib import Path
+iteration_path=Path(sys.argv[1])
+closure_path=Path(sys.argv[2])
+flow_path=Path(sys.argv[3])
+it=json.loads(iteration_path.read_text(encoding='utf-8'))
+cl=json.loads(closure_path.read_text(encoding='utf-8'))
+flow=json.loads(flow_path.read_text(encoding='utf-8'))
+s=cl.get('summary') or {}
+it['semantic_closure_reference']=str(closure_path)
+it['semantic_gap_flow_reference']=str(flow_path)
+it['article_pnf_world_producer_reference']=str(iteration_path.parent / 'wikipedia-article-pnf-world-producer.json')
+it['article_pnf_world_welded']=True
+it['spacy_dependency_surface_explicit']=True
+it['pnf_candidate_surface_explicit']=True
+it['parser_output_creates_ontology_truth']=False
+it['article_pnf_creates_claim_truth']=False
+it['candidate_only']=True
+it['semantic_promotion']=False
+summary=it.setdefault('summary', {})
+for key in ('canonical_atoms','surface_closure_atoms','semantic_gap_atoms','propagated_views','acquisition_obligations','article_pnf_atoms_added'):
+    if key in s:
+        summary[key]=int(s.get(key,0))
+for key in ('prior_gap_atoms','contracted_gap_atoms','persisting_gap_atoms','new_gap_atoms','net_gap_delta','prior_obligations','retired_obligations','persisting_obligations','new_obligations'):
+    if key in flow:
+        summary[key]=int(flow.get(key,0))
+it['next_acquisition_obligations']=cl.get('acquisition_obligations') or []
+iteration_path.write_text(json.dumps(it, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+PY
+
+GAP_FLOW="$ARTICLE_GAP_FLOW"
 DELTA_GRAPH="$ROUND_DIR/wikimedia-delta-graph.json"
 if [[ -s "$GAP_FLOW" && -s "$DELTA_GRAPH" ]]; then
   hist_args=(
@@ -110,5 +176,9 @@ fi
 
 cat "$ROUTE_PLAN_ERR"
 cat "$FRONTIER_WELD_ERR"
+cat "$ARTICLE_PNF_ERR"
+cat "$ARTICLE_WELD_ERR"
+cat "$ARTICLE_GAP_FLOW_ERR"
 [[ -s "$ROUND_DIR/typed-route-yield-history.stderr" ]] && cat "$ROUND_DIR/typed-route-yield-history.stderr"
-printf 'typed_route_plan=%s\ntyped_route_history=%s\nround_dir=%s\n' "$ROUTE_PLAN" "$ROUTE_HISTORY" "$ROUND_DIR"
+printf 'typed_route_plan=%s\ntyped_route_history=%s\narticle_pnf=%s\narticle_pnf_closure=%s\narticle_pnf_gap_flow=%s\nround_dir=%s\n' \
+  "$ROUTE_PLAN" "$ROUTE_HISTORY" "$ARTICLE_PNF" "$ARTICLE_WELDED_CLOSURE" "$ARTICLE_GAP_FLOW" "$ROUND_DIR"
