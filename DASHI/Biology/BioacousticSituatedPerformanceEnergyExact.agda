@@ -109,6 +109,8 @@ data AcousticAxis : Set where
   soundAmplitude : AcousticAxis
   spectralTimbre : AcousticAxis
   breathinessDescriptor : AcousticAxis
+  radiatedAcousticPowerCoordinate : AcousticAxis
+  radiatedAcousticEnergyCoordinate : AcousticAxis
   acousticAxisUnresolved : AcousticAxis
 
 data RespiratoryAxis : Set where
@@ -201,7 +203,7 @@ record AcousticPhysicalCoordinate : Set₁ where
     dimension : SI.Dimension
     unit : SI.Unit dimension
     semantics : String
-    soundPressureLevelIsLogarithmic : Bool
+    coordinateIsLogarithmicLevel : Bool
     directlyMeasuresWholeAnimalMetabolicCost : Bool
 
 open AcousticPhysicalCoordinate public
@@ -244,7 +246,7 @@ breathinessPhysicalCoordinate = acoustic-physical-coordinate
 
 acousticPowerPhysicalCoordinate : AcousticPhysicalCoordinate
 acousticPowerPhysicalCoordinate = acoustic-physical-coordinate
-  soundAmplitude
+  radiatedAcousticPowerCoordinate
   SI.Power
   SI.watt
   "radiated acoustic power, when independently calibrated/modelled, is measured in W; ordinary waveform amplitude or SPL does not by itself supply this coordinate"
@@ -253,7 +255,7 @@ acousticPowerPhysicalCoordinate = acoustic-physical-coordinate
 
 acousticEnergyPhysicalCoordinate : AcousticPhysicalCoordinate
 acousticEnergyPhysicalCoordinate = acoustic-physical-coordinate
-  soundAmplitude
+  radiatedAcousticEnergyCoordinate
   SI.Energy
   SI.joule
   "radiated acoustic energy is the time integral of calibrated acoustic power and remains distinct from whole-animal metabolic energy expenditure"
