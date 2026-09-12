@@ -6,7 +6,7 @@ module DASHI.Moonshine.Monster3BFiniteStoneVonNeumannWitnessFrontierCorrectionEx
 -- Monster3BFiniteStoneVonNeumannFrontierExact was written before the finite
 -- nonzero-coordinate search was constructed. Keep its leaf type and dependency
 -- graph as the canonical historical owner; this thin correction updates the
--- states paid by constructive witness extraction and now also splits the
+-- states paid by constructive witness extraction and splits the
 -- fixed-central-character uniqueness leaf at the proof-assistant boundary.
 --
 -- The constructive finite chain closes:
@@ -18,10 +18,13 @@ module DASHI.Moonshine.Monster3BFiniteStoneVonNeumannWitnessFrontierCorrectionEx
 --   -> all translated delta lines
 --   -> all Schrodinger functions.
 --
--- Separately, the standard characteristic-zero character-determination theorem
--- is now pinned to an exact mathlib source manifestation. That theorem being
--- proved upstream does NOT itself transport DASHI's representation carrier into
--- mathlib FDRep, and therefore does not yet close this Agda leaf.
+-- The character-determination route is now sharpened too.  We consume
+-- mathlib's scalar-product = equivariant-Hom-finrank theorem together with the
+-- general simple-object Schur fact that a nonzero morphism between simples is
+-- an isomorphism.  Equal characters identify the cross scalar product with the
+-- self scalar product, whose Hom space is nonzero because it contains the
+-- identity.  Therefore this implication does not require the stronger
+-- algebraically-closed-field orthonormality shortcut.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -69,9 +72,11 @@ schrodingerIrreducibilityLeafClosed = refl
 ------------------------------------------------------------------------
 -- 2. The structural leaf is now split internally:
 --
--- standard character-determination theorem      PAID upstream in mathlib
+-- lower-level character/Hom theorem components  PAID upstream in mathlib
+-- chosen route avoids algebraic closure          PAID by theorem inspection
+-- concrete Lean equal-character/simple receipt  OPEN
 -- concrete DASHI <-> mathlib representation map OPEN
--- resulting actual same-character isomorphism   BLOCKED on that transport.
+-- resulting actual same-character isomorphism   BLOCKED on those transports.
 ------------------------------------------------------------------------
 
 highestImpactStructuralLeafAfterWitness : Frontier.StoneVonNeumannProofLeaf
@@ -105,6 +110,7 @@ ordinaryNonzeroInvariantSubspaceIsWholeCarrier =
 
 data IrreducibilityCreatesUniqueness : Set where
 data UpstreamTheoremCreatesDashiTransport : Set where
+data AvoidingAlgebraicClosureCreatesLeanReceipt : Set where
 data UniquenessCreatesMonsterIdentification : Set where
 data Dimension729CreatesSameRepresentation : Set where
 data CharacterDegreeCreatesIntertwiner : Set where
@@ -118,6 +124,10 @@ irreducibilityDoesNotCreateUniqueness ()
 upstreamTheoremDoesNotCreateDashiTransport :
   UpstreamTheoremCreatesDashiTransport → ⊥
 upstreamTheoremDoesNotCreateDashiTransport ()
+
+avoidingAlgebraicClosureDoesNotCreateLeanReceipt :
+  AvoidingAlgebraicClosureCreatesLeanReceipt → ⊥
+avoidingAlgebraicClosureDoesNotCreateLeanReceipt ()
 
 uniquenessDoesNotCreateMonsterIdentification :
   UniquenessCreatesMonsterIdentification → ⊥
@@ -175,6 +185,8 @@ record CorrectedStoneVonNeumannFrontier : Set where
     normQualifiedAmplitudeUpgradePaid : Bool
     finiteSchrodingerIrreducibilityPaid : Bool
     standardCharacterDeterminationTheoremPaid : Bool
+    chosenCharacterRouteAvoidsAlgebraicClosure : Bool
+    leanEqualCharacterSimpleIsoReceiptPaid : Bool
     dashiCharacterDeterminationTransportPaid : Bool
     fixedCentralCharacterUniquenessPaid : Bool
     certifiedMonster729ConstituentIdentificationPaid : Bool
@@ -185,6 +197,6 @@ currentCorrectedStoneVonNeumannFrontier : CorrectedStoneVonNeumannFrontier
 currentCorrectedStoneVonNeumannFrontier =
   corrected-stone-von-neumann-frontier
     true true true
-    true false
+    true true false false
     false false
-    "instantiate DashiToMathlibCharacterDeterminationTransport for the concrete extraspecial 3^(1+12) representation layer. The standard finite-group irreducible-character theorem is already pinned to the kernel-checked mathlib Character.lean manifestation, so do not re-prove it in Agda. Instead identify the DASHI representation and cyclotomic class-character with a finite-dimensional mathlib FDRep over an algebraically closed characteristic-zero field, discharge the exact finite-group/invertibility/simple-object assumptions, and transport the resulting equivariant isomorphism back. Only then close fixed-central-character uniqueness and attach the certified Monster 729-dimensional constituent to the X6 Schrodinger model. Degree 729, character multiplicity, DOI/QID/Dewey/OEIS coordinates, and upstream theorem existence do not create the transport."
+    "produce CharacterInterop.LeanEqualCharacterSimpleIsoReceipt over the existing exact Q(zeta_3) scalar field, then instantiate DashiToMathlibCharacterDeterminationTransport for the concrete extraspecial 3^(1+12) Schrodinger representation. The proof route is: character equality -> equal scalar products -> self Hom has positive finrank because identity is nonzero -> cross Hom has positive finrank -> nonzero equivariant morphism -> simple-object Schur isomorphism. No algebraic-closure scalar extension is required for this implication. After the Lean receipt and concrete FDRep/class-character bridge are paid, close fixed-central-character uniqueness and only then identify the certified Monster 729-dimensional constituent with the X6 Schrodinger model. Degree 729, character multiplicity, DOI/QID/Dewey/OEIS coordinates, and upstream theorem names do not create the Lean receipt, representation transport, or intertwiner."
