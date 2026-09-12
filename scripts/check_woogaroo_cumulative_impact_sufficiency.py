@@ -44,6 +44,17 @@ REQUIRED = {
         "prestartAndFaunaRecordsRemainFirstImminenceLeaf",
         "canonical9281ExecutionPareto",
     ],
+    "DASHI/Law/SensibLawWoogaroo9281FederalPrestartGateExact.agda": [
+        "module DASHI.Law.SensibLawWoogaroo9281FederalPrestartGateExact where",
+        "condition6aFederalClearanceBeforePrestart",
+        "condition9LicensedSpotterCatcher",
+        "condition9PreClearanceFaunaPlan",
+        "councilLandAccessLicenceGate",
+        "controlledActionBranchMakesApprovalLeafCritical",
+        "localConditionDoesNotPaySameObjectGeometry",
+        "faunaPlanDoesNotPayCommencement",
+        "firstImminenceProducerSet",
+    ],
     "DASHI/Law/SensibLawWoogarooPreservationSourceAtlasExact.agda": [
         "springfield8575January2026PreliminaryDocumentation",
         "9612 Springfield Preliminary Documentation v5 — EPBC 2019/8575",
@@ -58,6 +69,7 @@ REQUIRED = {
         "import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact",
         "import DASHI.Law.SensibLawWoogarooEPBC8575BlockingCutsetExecutionStateExact",
         "import DASHI.Law.SensibLawWoogaroo9281SamePropertyExecutionLineageExact",
+        "import DASHI.Law.SensibLawWoogaroo9281FederalPrestartGateExact",
     ],
 }
 
@@ -75,4 +87,4 @@ for rel, needles in REQUIRED.items():
 if missing:
     raise SystemExit("\n".join(missing))
 
-print("Woogaroo cumulative-impact + federal blocking-cutset + 9281 same-property lineage static contract: OK")
+print("Woogaroo cumulative-impact + federal blocking-cutset + 9281 prestart-gate static contract: OK")
