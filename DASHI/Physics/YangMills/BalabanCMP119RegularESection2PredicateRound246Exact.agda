@@ -156,6 +156,28 @@ asActiveRegularESection2Flow dataSet = record
       ActiveRegularESection2Inputs.Section2ConditionsAndBounds dataSet
   }
 
+-- Preferred least-privilege source path: only the Sect.-2 FORM theorem is
+-- consumed here.  Quantitative Sect.-2 bounds are an independent source field.
+activeRegularEFormFromSection2FormWitness :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history} →
+  Active.ActiveBalaban1989Section2FormWitness
+    (asActiveRegularESection2Flow dataSet) →
+  ∀ scale →
+  FiniteHistory.ActiveScale history scale →
+  CMP119RegularESection2Form
+    (ActiveRegularESection2Inputs.Density dataSet)
+    (ActiveRegularESection2Inputs.Background dataSet)
+    (ActiveRegularESection2Inputs.Volume dataSet)
+    (ActiveRegularESection2Inputs.Component dataSet)
+    scale (ActiveRegularESection2Inputs.densityAt dataSet scale)
+activeRegularEFormFromSection2FormWitness source scale active =
+  Active.effectiveDensitiesPreserveSection2FormOnly source scale active
+
+-- Compatibility producer: the full CMP122 Theorem-1 witness projects to the
+-- least-privilege form witness before reaching the BC1-facing object.
 activeRegularEFormFromTheorem1 :
   ∀ {trajectory Mode Atom betaData history}
     {dataSet : ActiveRegularESection2Inputs
@@ -171,8 +193,9 @@ activeRegularEFormFromTheorem1 :
     (ActiveRegularESection2Inputs.Volume dataSet)
     (ActiveRegularESection2Inputs.Component dataSet)
     scale (ActiveRegularESection2Inputs.densityAt dataSet scale)
-activeRegularEFormFromTheorem1 theorem1 scale active =
-  Active.effectiveDensitiesPreserveSection2Form theorem1 scale active
+activeRegularEFormFromTheorem1 theorem1 =
+  activeRegularEFormFromSection2FormWitness
+    (Active.section2FormWitnessFromTheorem1 theorem1)
 
 ------------------------------------------------------------------------
 -- Least-privilege active source witness for the BC1 continuation.
@@ -203,6 +226,17 @@ record ActiveRegularESection2FormWitness
 
 open ActiveRegularESection2FormWitness public
 
+activeRegularESection2FormWitnessFromSection2FormWitness :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history} →
+  Active.ActiveBalaban1989Section2FormWitness
+    (asActiveRegularESection2Flow dataSet) →
+  ActiveRegularESection2FormWitness dataSet
+activeRegularESection2FormWitnessFromSection2FormWitness source = record
+  { regularEFormOnActiveScale = activeRegularEFormFromSection2FormWitness source }
+
 activeRegularESection2FormWitnessFromTheorem1 :
   ∀ {trajectory Mode Atom betaData history}
     {dataSet : ActiveRegularESection2Inputs
@@ -211,8 +245,9 @@ activeRegularESection2FormWitnessFromTheorem1 :
   Active.ActiveBalaban1989Theorem1Witness
     (asActiveRegularESection2Flow dataSet) →
   ActiveRegularESection2FormWitness dataSet
-activeRegularESection2FormWitnessFromTheorem1 theorem1 = record
-  { regularEFormOnActiveScale = activeRegularEFormFromTheorem1 theorem1 }
+activeRegularESection2FormWitnessFromTheorem1 theorem1 =
+  activeRegularESection2FormWitnessFromSection2FormWitness
+    (Active.section2FormWitnessFromTheorem1 theorem1)
 
 activeRegularESection2PredicateCompilerLevel : ProofLevel
 activeRegularESection2PredicateCompilerLevel = machineChecked
