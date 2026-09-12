@@ -36,6 +36,11 @@ REQUIRED = {
         "crossPlatformIdentityWeld",
         "sameDisplayNameDoesNotPaySamePerson",
         "handleStemDoesNotPaySamePerson",
+        "darkMatterLabsRadicleCivicsSource",
+        "mediumSavedRadicleCivicsCandidate",
+        "savedReadingDoesNotPayCreatorLineage",
+        '"Radicle Civics — Building Proofs of Possibilities for a Civic Economy and Society"',
+        '"https://provocations.darkmatterlabs.org/radicle-civics-building-proofs-of-possibilities-for-a-civic-economy-and-society-ee28baeeec70"',
     ],
     "DASHI/Culture/BlochfieldAcquisitionResidualSnowballExact.agda": [
         "module DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact where",
