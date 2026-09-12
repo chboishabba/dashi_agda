@@ -37,6 +37,17 @@ ningYBCO1997Source = A.mkDOISource
   "primary publication identity for the static YBCO gravimeter constraint; supports the tested-regime upper bound only and is not positive antigravity evidence"
   A.publicAttribution
 
+rezaEarlyPatentSource : A.AttributedSource
+rezaEarlyPatentSource = A.mkNoDOISource
+  "Monica Jacinto; Dallis Hardwick"
+  "Burn-resistant and high tensile strength metal alloys"
+  "United States patent publication US20030053926A1"
+  "2003"
+  "https://patents.google.com/patent/US20030053926A1/en"
+  A.governmentSource
+  "primary patent manifestation for the early Jacinto/Hardwick composition box, element-role statements, VIM/VAR/mechanical-work process and tested oxygen/tensile examples; it does not establish a single-crystal article, metamaterial architecture, ITAR status, S4 provenance or a McCasland programme edge"
+  A.publicAttribution
+
 rezaPatentSource : A.AttributedSource
 rezaPatentSource = A.mkNoDOISource
   "Monica A. Jacinto; Dallis E. Hardwick et al."
@@ -45,7 +56,7 @@ rezaPatentSource = A.mkNoDOISource
   "2010"
   "https://patents.google.com/patent/US20100266442A1/en"
   A.governmentSource
-  "primary patent manifestation for composition/process claims and inventor attribution; it does not by itself establish a single-crystal architecture, a metamaterial classification, ITAR status, S4 provenance or McCasland programme participation"
+  "primary later patent-family manifestation for composition/process/trade-off claims and inventor attribution; it does not by itself establish a single-crystal architecture, a metamaterial classification, ITAR status, S4 provenance or McCasland programme participation"
   A.publicAttribution
 
 nasaFusionDrivenRocketSource : A.AttributedSource
@@ -136,6 +147,17 @@ nmDPSMcCaslandSource = A.mkNoDOISource
   "primary missing-person identity/location/date carrier; does not pay a final-meeting, Space Force, UAP or programme-causation claim"
   A.publicAttribution
 
+afrlMcCaslandSpaceForceHistoricalSource : A.AttributedSource
+afrlMcCaslandSpaceForceHistoricalSource = A.mkNoDOISource
+  "U.S. Air Force / AFRL; photo by Joanne Perkins"
+  "210723-F-F3963-1001.JPG"
+  "Air Force Research Laboratory photo gallery"
+  "2021"
+  "https://www.afrl.af.mil/News/Photos/igphoto/2002819872/"
+  A.governmentSource
+  "primary public carrier showing retired Maj. Gen. McCasland officiating a 2021 Kirtland ceremony inducting AFRL/SMC officers into the U.S. Space Force; this establishes historical institutional adjacency only and cannot pay a claimed February-2026 Space Force meeting"
+  A.publicAttribution
+
 kobNewMexicoClusterSource : A.AttributedSource
 kobNewMexicoClusterSource = A.mkNoDOISource
   "KOB 4"
@@ -191,6 +213,17 @@ laTimesCasiasRecoverySource = A.mkNoDOISource
   "bounded secondary recovery/event report; supports Taos-home context, LANL employment and recovery beside a handgun as reported, not manner or culprit"
   A.publicAttribution
 
+foxLeBlancTelemetrySource : A.AttributedSource
+foxLeBlancTelemetrySource = A.mkNoDOISource
+  "Peter D'Abrosca / Fox News Digital"
+  "NASA engineer died in fiery Alabama crash as FBI probes scientist deaths"
+  "Fox News Digital"
+  "2026"
+  "https://www.foxnews.com/us/nasa-nuclear-engineer-found-dead-burned-tesla-vanishing-alabama-home-last-year/"
+  A.newsSource
+  "bounded secondary carrier for the reported Tesla/Sentry-derived approximately four-hour Huntsville airport stop, family account and crash chronology; raw Tesla/law-enforcement data remains required for event promotion"
+  A.publicAttribution
+
 laMagRezaSource : A.AttributedSource
 laMagRezaSource = A.mkNoDOISource
   "Lauren Conlin"
@@ -221,8 +254,19 @@ armyCoordinateDiscoverySource = A.mkNoDOISource
   "historical web manifestation"
   "https://www.zpenergy.com/modules.php?file=print&name=News&sid=838"
   A.communitySource
-  "discovery-only pointer for reported Army coordinate DAAH01-01-9-R001 and DoD FY2001 page-66 genealogy; cannot pay the award, amount, statement of work, classification or results until the original government carrier is recovered"
+  "discovery-only pointer for reported Army coordinate DAAH01-01-9-R001 and DoD FY2001 page-66 genealogy; cannot pay the award, amount, statement of work, classification or results until the original government carrier is inspected"
   A.publicAttribution
+
+dodFY2001ArchivedLocatorSource : A.AttributedSource
+dodFY2001ArchivedLocatorSource = A.mkNoDOISource
+  "U.S. Department of Defense / archived locator"
+  "Annual Report on Cooperative Agreements and Other Transactions Entered into During FY2001 Under 10 USC 2371"
+  "archived acq.osd.mil FY01RPT.doc locator"
+  "2001"
+  "https://web.archive.org/web/20210801183915id_/https://www.acq.osd.mil/dpap/Docs/FY01RPT.doc"
+  A.archivalSource
+  "existence/custody locator for the reported original DoD carrier; the National Academies independently cites the same original FY01RPT.doc URL, but this atlas does not claim the archived bytes/page-66 row have been inspected in-session"
+  A.existenceOnlyAttribution
 
 investigativeSourceAtlas : A.AttributedSourceAtlas
 investigativeSourceAtlas = A.mkSourceAtlas
@@ -230,6 +274,7 @@ investigativeSourceAtlas = A.mkSourceAtlas
   "DASHI.Culture.MissingDeceasedInvestigativeAttributedSourceAtlasExact"
   (nasaNingNCC8124Source ∷
    ningYBCO1997Source ∷
+   rezaEarlyPatentSource ∷
    rezaPatentSource ∷
    nasaFusionDrivenRocketSource ∷
    nasaDirectFusionDriveSource ∷
@@ -239,15 +284,18 @@ investigativeSourceAtlas = A.mkSourceAtlas
    nmDPSAnthonyChavezSource ∷
    nmDPSStevenGarciaSource ∷
    nmDPSMcCaslandSource ∷
+   afrlMcCaslandSpaceForceHistoricalSource ∷
    kobNewMexicoClusterSource ∷
    kobCasiasResetSource ∷
    kobCasiasFamilyInvestigationSource ∷
    laTimesCasiasAutopsySource ∷
    laTimesCasiasRecoverySource ∷
+   foxLeBlancTelemetrySource ∷
    laMagRezaSource ∷
    laMagRezaFamilySource ∷
-   armyCoordinateDiscoverySource ∷ [])
-  "Attribution/snowball spine for primary, bounded-secondary and discovery-only sources used by the investigative Pareto; formalisationRelationship on each entry states the exact proposition boundary."
+   armyCoordinateDiscoverySource ∷
+   dodFY2001ArchivedLocatorSource ∷ [])
+  "Attribution/snowball spine for primary, bounded-secondary, archival-locator and discovery-only sources used by the investigative Pareto; formalisationRelationship on each entry states the exact proposition boundary."
 
 sourceAtlasDoesNotPromoteClaims :
   A.atlasCreatesAuthority investigativeSourceAtlas ≡ false
@@ -258,10 +306,11 @@ record InvestigativeAttributionBoundary : Set where
   field
     newsSourceMayNominateAcquisition : Bool
     discoverySourceMayPayPrimaryAward : Bool
+    archivalLocatorEqualsInspectedCarrier : Bool
     sourceRepetitionMayCreateSameObject : Bool
     sourceLinkMayCreateForensicCause : Bool
     primaryCarrierStillPreferredWhenRecoverable : Bool
 
 canonicalInvestigativeAttributionBoundary : InvestigativeAttributionBoundary
 canonicalInvestigativeAttributionBoundary =
-  investigative-attribution-boundary true false false false true
+  investigative-attribution-boundary true false false false false true
