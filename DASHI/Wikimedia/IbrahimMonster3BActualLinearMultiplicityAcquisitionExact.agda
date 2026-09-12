@@ -5,6 +5,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (trans; subst)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
@@ -17,6 +18,8 @@ import DASHI.Moonshine.VertexOperatorAlgebraCore as Core
 import DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact as LiteralWeld
 import DASHI.Moonshine.VertexOperatorAlgebraLinearActionReceiptExact as LiteralVOA
 import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
+import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
 import DASHI.Wikimedia.IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact as Occurrence
 import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as LinearZeta
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
@@ -36,8 +39,8 @@ import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectio
 -- element type. It also owns a generic linear realisation compiler for an exact
 -- graded representation and a weight-two bridge carrying the linear 196883
 -- constituent. The shortest route therefore meets those owners on the exact
--- grade-2 representation and then requires the 196883 carrier to be the exact
--- ambient carrier of the selected-3B linear producer.
+-- grade-2 representation, identifies the 196883 carrier with the selected-3B
+-- State, and then asks for a typed normalizer-to-Monster action restriction.
 --
 -- Nothing here manufactures the missing inhabitant, matrices, inertia action
 -- or intertwiner from dimensions, degree occurrence, Fin 90 labels, or source
@@ -81,12 +84,9 @@ anWilsonAttribution = Snowball.canonicalSourceRoleSnowballReceipt anWilson
 
 record ActualLinearMultiplicityAcquisition {Monster K : Set} : Setω where
   field
-    -- Existing SAME-object character/action weld.
     literalSameObjectWeld :
       LiteralWeld.MonsterGradedVOALiteralActionWeld Monster K
 
-    -- The standard VOA-linearity receipt must be attached to that exact
-    -- literal VOA and that exact Monster action, not to a parallel carrier.
     literalVOALinearityReceipt :
       LiteralVOA.VOAGroupActionLinearReceipt
         (GVOA.group
@@ -96,8 +96,6 @@ record ActualLinearMultiplicityAcquisition {Monster K : Set} : Setω where
         (Core.monsterAction
           (LiteralWeld.literalVOA literalSameObjectWeld))
 
-    -- Meet the legacy/linear route at the exact grade-2 representation. This
-    -- avoids asserting an artificial equality between distinct total-VOA APIs.
     gradeTwoLinearRealisation :
       LinearRep.LinearEndomorphismRealisation
         (GVOA.group
@@ -109,33 +107,23 @@ record ActualLinearMultiplicityAcquisition {Monster K : Set} : Setω where
               (LiteralWeld.gradedAuthority literalSameObjectWeld)))
           2)
 
-    -- Existing 196883 linear constituent bridge on the SAME graded authority.
     weightTwoLinearBridge :
       WeightTwo.WeightTwoLinearActionBridge
         (LiteralWeld.gradedAuthority literalSameObjectWeld)
 
-    -- The bridge must use this exact grade-2 realisation, not merely one with
-    -- the same dimension/character.
     gradeTwoRealisationIsWeightTwoRealisation :
       gradeTwoLinearRealisation
       ≡ WeightTwo.fullWeightTwoLinearRealisation weightTwoLinearBridge
 
-    -- Existing canonical linear multiplicity surfaces.
     linearZetaProducer : LinearZeta.LinearSingleActionProducer
     multiplicityHomSpace : Hom.ActualLinearMultiplicityHomSpace
 
-    -- The 196883 constituent is now required to be the exact ambient linear
-    -- carrier consumed by the selected-3B producer. LinearZeta already carries
-    -- ambientCarrierIsActualState, so this composes to Single.State without a
-    -- second carrier-recognition proposition.
     weightTwoConstituentCarrierIsSelected3BAmbient :
       Linear.Vector
         (WeightTwo.constituentLinearCarrier weightTwoLinearBridge)
       ≡ Linear.Vector
           (LinearZeta.ambientLinearCarrier linearZetaProducer)
 
-    -- Remaining same-action receipts. Literal zeta-sector identity is already
-    -- owned inside LinearSingleActionProducer by zetaCarrierIsLiteralEigenspace.
     degree17496SameObject : Set
     degree113724SameObject : Set
     sourcePaidCharacterOnSameAction : Set
@@ -143,6 +131,72 @@ record ActualLinearMultiplicityAcquisition {Monster K : Set} : Setω where
     twelveSeventyEightLinearIntertwiner : Set
 
 open ActualLinearMultiplicityAcquisition public
+
+------------------------------------------------------------------------
+-- 2a. The 196883 carrier equality composes to the exact selected-3B State.
+------------------------------------------------------------------------
+
+selected3BStateCarrierEquality :
+  ∀ {Monster K}
+    (acquisition : ActualLinearMultiplicityAcquisition {Monster} {K}) →
+  Linear.Vector
+    (WeightTwo.constituentLinearCarrier
+      (weightTwoLinearBridge acquisition))
+  ≡ Single.State
+      (LinearZeta.singleActionProducer
+        (linearZetaProducer acquisition))
+selected3BStateCarrierEquality acquisition =
+  trans
+    (weightTwoConstituentCarrierIsSelected3BAmbient acquisition)
+    (LinearZeta.ambientCarrierIsActualState
+      (linearZetaProducer acquisition))
+
+------------------------------------------------------------------------
+-- 2b. Action-level same-object weld.
+--
+-- This is the first theorem-shaped obligation relating the selected normalizer
+-- carrier to the actual Monster action.  It does not require matrices: a
+-- normalizer element is embedded into Monster and the action is required to
+-- intertwine after transport along the already-paid carrier equality.
+------------------------------------------------------------------------
+
+record Selected3BNormalizerMonsterActionWeld
+    {Monster K : Set}
+    (acquisition : ActualLinearMultiplicityAcquisition {Monster} {K}) : Setω where
+  field
+    normalizerToMonster :
+      Single.Normalizer
+        (LinearZeta.singleActionProducer
+          (linearZetaProducer acquisition)) →
+      Monster
+
+    normalizerActionIntertwines :
+      (normalizer :
+        Single.Normalizer
+          (LinearZeta.singleActionProducer
+            (linearZetaProducer acquisition))) →
+      (state :
+        Linear.Vector
+          (WeightTwo.constituentLinearCarrier
+            (weightTwoLinearBridge acquisition))) →
+      subst
+        (λ Carrier → Carrier)
+        (selected3BStateCarrierEquality acquisition)
+        (WeightTwo.constituentAct
+          (weightTwoLinearBridge acquisition)
+          (normalizerToMonster normalizer)
+          state)
+      ≡ Inertia.act
+          (Single.normalizerAction
+            (LinearZeta.singleActionProducer
+              (linearZetaProducer acquisition)))
+          normalizer
+          (subst
+            (λ Carrier → Carrier)
+            (selected3BStateCarrierEquality acquisition)
+            state)
+
+open Selected3BNormalizerMonsterActionWeld public
 
 ------------------------------------------------------------------------
 -- 3. WrongType / non-promotion firewalls.
@@ -155,6 +209,7 @@ data WeightTwoDimensionCreatesMultiplicityAction : Set where
 data SameObjectWeldCreatesLinearity : Set where
 data GradeTwoDimensionCreatesRealisationEquality : Set where
 data EqualDimensionCreatesCarrierEquality : Set where
+data NormalizerNameCreatesMonsterEmbedding : Set where
 data QidCreatesAction : Set where
 data DeweyCreatesAction : Set where
 data OeisCreatesAction : Set where
@@ -181,6 +236,10 @@ gradeTwoDimensionDoesNotCreateRealisationEquality ()
 
 equalDimensionDoesNotCreateCarrierEquality : EqualDimensionCreatesCarrierEquality → ⊥
 equalDimensionDoesNotCreateCarrierEquality ()
+
+normalizerNameDoesNotCreateMonsterEmbedding :
+  NormalizerNameCreatesMonsterEmbedding → ⊥
+normalizerNameDoesNotCreateMonsterEmbedding ()
 
 qidDoesNotCreateAction : QidCreatesAction → ⊥
 qidDoesNotCreateAction ()
@@ -238,6 +297,7 @@ record ActualLinearMultiplicityAcquisitionFrontier : Set where
     gradeTwoWeightTwoSameObjectRequired : Bool
     selected3BAmbientCarrierEqualityRequired : Bool
     literalZetaCarrierIdentityAlreadyOwned : Bool
+    selected3BNormalizerMonsterActionWeldRequired : Bool
     actualMonsterVOALinearityReceiptPaid : Bool
     finiteNinetyPermutationRouteIsCanonical : Bool
     actualLinearActionPaid : Bool
@@ -251,9 +311,9 @@ currentActualLinearMultiplicityAcquisitionFrontier :
 currentActualLinearMultiplicityAcquisitionFrontier =
   actual-linear-multiplicity-acquisition-frontier
     true true true true true
-    true true true true true true true
+    true true true true true true true true
     false false false false false
-    "inhabit literalVOALinearityReceipt, gradeTwoLinearRealisation, weightTwoLinearBridge and their exact equality, then pay weightTwoConstituentCarrierIsSelected3BAmbient. LinearSingleActionProducer already identifies its ambient carrier with Single.State and its zeta carrier with the literal eigenspace, so do not add another zeta-recognition layer. The next genuinely new payment is action-level: identify the WeightTwo 196883 Monster action restricted to the selected 3B normalizer with the normalizer action used by the same Single producer; then S_zeta can inherit the source-native inertia action and the paid 17496/113724 constituents can be welded to 12/78 by an actual same-action character/intertwiner receipt. Degree occurrence, dimensions, Fin90 labels, DOI/QID/Dewey/OEIS and generic interfaces do not pay these equalities."
+    "inhabit the exact literal VOA/grade-2/196883 acquisition fields and then supply Selected3BNormalizerMonsterActionWeld: a normalizerToMonster embedding plus normalizerActionIntertwines on the transported selected-3B State. This is now the first unpaid action-level seam. Once paid, restrict that SAME action to literal W_zeta and instantiate S_zeta = Hom_E(H_zeta,W_zeta) with the source-native inertia action; then weld the already-paid 17496 and 113724 constituents to 12 and 78 by an actual same-action character/intertwiner receipt. Degree occurrence, dimensions, Fin90 labels, DOI/QID/Dewey/OEIS and names do not create the embedding or action equation."
 
 ------------------------------------------------------------------------
 -- 6. Imported status snapshots are routing information, not promotion.
