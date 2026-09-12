@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-owner="DASHI/Reasoning/HyperfabricConsumerReductionBridgeExact.agda"
+owner="DASHI/Reasoning/TypedHyperfabricConsumerReductionBridgeExact.agda"
 
 [[ -f "$owner" ]]
 
