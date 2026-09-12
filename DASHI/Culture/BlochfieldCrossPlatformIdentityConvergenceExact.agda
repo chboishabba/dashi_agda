@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.SnowballOSINTAcquisitionInvariantExact as OSINT
 import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact as Creator
 
 ------------------------------------------------------------------------
@@ -25,7 +26,7 @@ import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact as Creator
 record CrossPlatformConvergenceCandidate : Set where
   constructor cross-platform-convergence-candidate
   field
-    xCandidate : Creator.CrossPlatformIdentityCandidate
+    xObservation : OSINT.OSINTObservation
     link3Candidate : Creator.CrossPlatformIdentityCandidate
     sharedDisplayName : String
     xProjectCoordinate : String
@@ -42,7 +43,7 @@ open CrossPlatformConvergenceCandidate public
 link3XGalacticGConvergenceCandidate : CrossPlatformConvergenceCandidate
 link3XGalacticGConvergenceCandidate =
   cross-platform-convergence-candidate
-    Creator.link3IdentityCandidate
+    Creator.creatorProfileObservation
     Creator.link3IdentityCandidate
     "Yasmin Anacreto"
     "@gmnevergiveup"
