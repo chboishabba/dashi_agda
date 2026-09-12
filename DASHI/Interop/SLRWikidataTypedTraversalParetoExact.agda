@@ -13,6 +13,7 @@ import DASHI.Interop.SLRWorldResearchIterationBudgetExact as Budget
 --
 -- Runtime:
 --   tools/slr-discourse-reconstruct/slr_world_research_route_pareto.py
+--   tools/slr-discourse-reconstruct/slr_world_research_typed_route_frontier.py
 --   tools/slr-discourse-reconstruct/run_world_research_typed_route_round.sh
 --
 -- SensibLaw alignment:
@@ -22,13 +23,18 @@ import DASHI.Interop.SLRWorldResearchIterationBudgetExact as Budget
 --   imports into the internal legal ontology;
 -- * P31/P279 mixed-order, SCC and metaclass-heavy regions require review;
 -- * parthood relations remain typed review surfaces rather than automatic truth.
+--
+-- Execution discipline:
+-- * selecting a typed route and executing that route are separate obligations;
+-- * the bounded inner round must consume the exact selected target-QID set;
+-- * a generic Pareto replanner may not silently substitute unrelated QIDs.
 ------------------------------------------------------------------------
 
 data TraversalRouteFamily : Set where
   wikidataInstanceClass : TraversalRouteFamily       -- P31
   wikidataSubclassParent : TraversalRouteFamily      -- P279
   wikidataPartOf : TraversalRouteFamily              -- P361
-  wikidataHasPart : TraversalRouteFamily             -- P527
+  wikidataHasPart : TraversalRouteFamily              -- P527
   wikidataAdminLocation : TraversalRouteFamily       -- P131
   wikidataCountry : TraversalRouteFamily             -- P17
   wikidataFacetOf : TraversalRouteFamily             -- P1269
@@ -77,6 +83,8 @@ record TypedTraversalBoundary : Set where
     typedPropertyCreatesCanonicalInternalOntology : Bool
     providerTransportCreatesEntityIdentity : Bool
     paretoRequiresWeightedScore : Bool
+    selectedRouteMustMatchExecutedTarget : Bool
+    innerPlannerMaySubstituteTypedRouteTarget : Bool
     candidateOnly : Bool
     semanticPromotion : Bool
 
@@ -90,6 +98,31 @@ canonicalTypedTraversalBoundary =
     true false
     false false false false false
     true false
+    true false
+
+record RouteExecutionWeld : Set where
+  constructor routeExecutionWeld
+  field
+    schemaReference : String
+    typedRoutePlanReference : String
+    syntheticClosureReference : String
+    innerBudgetPlanReference : String
+    selectedTargetsMatch : Bool
+    innerReplanningChangedTargets : Bool
+    selectionCreatesTruth : Bool
+    candidateOnly : Bool
+    semanticPromotion : Bool
+
+open RouteExecutionWeld public
+
+canonicalRouteExecutionWeld : RouteExecutionWeld
+canonicalRouteExecutionWeld =
+  routeExecutionWeld
+    "slr-world-research-typed-route-frontier-v1"
+    "typed-route-plan.json"
+    "typed-route-input-closure.json"
+    "budget-plan.json"
+    true false false true false
 
 record RouteYieldObservation : Set where
   constructor routeYieldObservation
@@ -156,6 +189,8 @@ data MixedRouteObservationPaysCausalYield : Set where
 data RouteYieldCreatesTruth : Set where
 data P31P279ImportedAsCanonicalLegalOntology : Set where
 data ParetoRouteChoiceRequiresScalarScore : Set where
+data InnerPlannerMaySubstituteTypedRouteTarget : Set where
+data RouteSelectionIsRouteExecution : Set where
 
 typedPropertyDoesNotCreateClaimTruth : TypedPropertyCreatesClaimTruth → ⊥
 typedPropertyDoesNotCreateClaimTruth ()
@@ -180,3 +215,9 @@ p31p279DoNotBecomeCanonicalLegalOntology ()
 
 routeParetoDoesNotRequireScalarScore : ParetoRouteChoiceRequiresScalarScore → ⊥
 routeParetoDoesNotRequireScalarScore ()
+
+innerPlannerCannotSubstituteTypedRouteTarget : InnerPlannerMaySubstituteTypedRouteTarget → ⊥
+innerPlannerCannotSubstituteTypedRouteTarget ()
+
+routeSelectionIsNotExecutionWithoutWeld : RouteSelectionIsRouteExecution → ⊥
+routeSelectionIsNotExecutionWithoutWeld ()
