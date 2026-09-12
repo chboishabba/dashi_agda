@@ -36,10 +36,14 @@ REQUIRED = {
         "crossPlatformIdentityWeld",
         "sameDisplayNameDoesNotPaySamePerson",
         "handleStemDoesNotPaySamePerson",
+    ],
+    "DASHI/Culture/BlochfieldCrossPlatformIdentityConvergenceExact.agda": [
+        "module DASHI.Culture.BlochfieldCrossPlatformIdentityConvergenceExact where",
         "link3XGalacticGConvergenceCandidate",
         '"What’s a Galactic G?"',
         '"@gmnevergiveup"',
         "multiCoordinateConvergenceDoesNotPaySamePerson",
+        "crossPlatformIdentityWeldStillUnpaid",
     ],
     "DASHI/Culture/BlochfieldMediumSavedReadingSnowballExact.agda": [
         "module DASHI.Culture.BlochfieldMediumSavedReadingSnowballExact where",
@@ -66,6 +70,7 @@ REQUIRED = {
     "DASHI/Culture/Everything.agda": [
         "import DASHI.Culture.BoundaryConservativeTransfigurationBlochfieldExact",
         "import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact",
+        "import DASHI.Culture.BlochfieldCrossPlatformIdentityConvergenceExact",
         "import DASHI.Culture.BlochfieldMediumSavedReadingSnowballExact",
         "import DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact",
     ],
