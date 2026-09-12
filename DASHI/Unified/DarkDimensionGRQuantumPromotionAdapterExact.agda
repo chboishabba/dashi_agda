@@ -3,6 +3,7 @@ module DASHI.Unified.DarkDimensionGRQuantumPromotionAdapterExact where
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 
+import DASHI.Empirical.DarkDimensionEmpiricalDiscriminationExact as Discrimination
 import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension
 import DASHI.Physics.Closure.QuantumGravityTheoryBoundary as QuantumGravity
 import DASHI.Unified.GRQuantumResearchAuthorityCutset as Research
@@ -24,6 +25,13 @@ darkDimensionDoesNotPayEmpiricalCompletion =
   Research.empiricalCompletionObtainedIsFalse
     Research.canonicalGRQuantumResearchReadiness
 
+phenomenologyDiscriminationDoesNotPayEmpiricalCompletion :
+  Research.empiricalCompletionObtained
+    Research.canonicalGRQuantumResearchReadiness
+  ≡ false
+phenomenologyDiscriminationDoesNotPayEmpiricalCompletion =
+  darkDimensionDoesNotPayEmpiricalCompletion
+
 darkDimensionDoesNotPayQuantumGravityPromotion :
   QuantumGravity.quantumGravityClaimPermitted
     QuantumGravity.canonicalQuantumGravityPromotionBoundary
@@ -44,3 +52,15 @@ darkDimensionStringTheoryPromotionStillBlocked :
   ≡ false
 darkDimensionStringTheoryPromotionStillBlocked =
   DarkDimension.stringTheoryPromotionBlocked
+
+alternativeMechanismKeepsUnificationPromotionBlocked :
+  QuantumGravity.theoryOfEverythingClaimPermitted
+    QuantumGravity.canonicalQuantumGravityPromotionBoundary
+  ≡ false
+alternativeMechanismKeepsUnificationPromotionBlocked =
+  Discrimination.darkDimensionPredictionAdmissionStillNonPromoting
+    |> λ _ → DarkDimension.theoryOfEverythingPromotionStillBlocked
+  where
+    infixl 0 _|>_
+    _|>_ : ∀ {A B : Set} → A → (A → B) → B
+    x |> f = f x
