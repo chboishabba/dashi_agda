@@ -10,29 +10,30 @@ import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniqueness
-import DASHI.Wikimedia.IbrahimMonster3BCyclotomicScalarExtensionInteropExact as ScalarExtension
 
 ------------------------------------------------------------------------
 -- MATHLIB CHARACTER-DETERMINATION INTEROP
 --
--- The finite Stone--von Neumann BIDI owner has reduced the next open
--- mathematical leaf to the standard characteristic-zero theorem that two
--- irreducible finite-group representations with the same character are
--- equivariantly isomorphic.
---
--- Current mathlib source has a kernel-checked route through
+-- The corrected highest-alpha route does not need to pass through an
+-- algebraically closed scalar extension.  Mathlib's lower-level theorem
 --
 --   FDRep.scalar_product_char_eq_finrank_equivariant
---   FDRep.char_orthonormal
 --
--- in Mathlib/RepresentationTheory/Character.lean.  The concrete DASHI
--- Schrodinger representation, however, is over exact Q(zeta_3) amplitudes, not
--- yet an algebraically closed field.  Therefore the first transport payment is
--- the exact cyclotomic scalar-extension seam; only after that may a concrete
--- FDRep and class-character comparison be supplied.
+-- already identifies the character scalar product with the finrank of the
+-- equivariant-Hom space over any field where the finite group order is
+-- invertible.  For simple representations with equal characters:
 --
--- Citation or theorem-name equality is not proof transport. No Lean proof is
--- claimed to have been replayed by the Agda kernel in this owner.
+--   cross Hom finrank = self Hom finrank > 0,
+--
+-- because the self Hom contains the nonzero identity.  Hence there is a
+-- nonzero equivariant morphism.  General Schur simplicity then makes that
+-- morphism an isomorphism; this nonzero-simple-morphism step does not require
+-- algebraic closure.  Algebraic closure is used by char_orthonormal only for
+-- the stronger normalization End(V) has finrank exactly 1.
+--
+-- This owner therefore records the weaker theorem route actually consumed by
+-- DASHI and keeps the earlier scalar-extension owners as independent valid
+-- constructions rather than prerequisites for character determination.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -48,27 +49,29 @@ serre = Attribution.mkDOISource
   "10.1007/978-1-4684-9458-7"
   "https://doi.org/10.1007/978-1-4684-9458-7"
   Attribution.academicArticleSource
-  "standard representation-theory authority for character determination and Schur orthogonality; not a repository proof-transport receipt"
+  "standard representation-theory authority for character determination and Schur theory; not a repository proof-transport receipt"
   Attribution.publicAttribution
 
 serreAttribution = Snowball.canonicalSourceRoleSnowballReceipt serre
 
 ------------------------------------------------------------------------
--- 2. Exact machine-checked upstream manifestation.
+-- 2. Exact machine-checked upstream manifestations.
 ------------------------------------------------------------------------
 
 record MathlibCharacterDeterminationCoordinate : Set where
   constructor mathlib-character-determination-coordinate
   field
     repository : String
-    sourceFile : String
-    sourceBlobSha : String
+    characterSourceFile : String
+    characterSourceBlobSha : String
+    schurSourceFile : String
+    schurSourceBlobSha : String
     scalarProductTheorem : String
-    orthogonalityTheorem : String
+    nonIsoSimpleHomZeroTheorem : String
     finiteGroupRequired : Bool
-    algebraicallyClosedFieldRequired : Bool
+    algebraicallyClosedFieldRequiredForChosenRoute : Bool
     groupOrderInvertibleInFieldRequired : Bool
-    irreducibleRepresentationsRequired : Bool
+    simpleRepresentationsRequired : Bool
     upstreamKernelChecked : Bool
     replayedByAgdaKernelHere : Bool
 open MathlibCharacterDeterminationCoordinate public
@@ -80,17 +83,37 @@ canonicalMathlibCharacterDeterminationCoordinate =
     "leanprover-community/mathlib4"
     "Mathlib/RepresentationTheory/Character.lean"
     "d131ae62882df478bb2aadf013181b4c5b31b328"
+    "Mathlib/CategoryTheory/Preadditive/Schur.lean"
+    "0a9d695f4f24c0f9fad00116cfa4c840451dd3de"
     "FDRep.scalar_product_char_eq_finrank_equivariant"
-    "FDRep.char_orthonormal"
-    true true true true true false
+    "finrank_hom_simple_simple_eq_zero_of_not_iso"
+    true false true true true false
 
-cyclotomicScalarExtensionFrontier :
-  ScalarExtension.CyclotomicScalarExtensionFrontier
-cyclotomicScalarExtensionFrontier =
-  ScalarExtension.currentCyclotomicScalarExtensionFrontier
+algebraicClosureIsNotRequiredForChosenRoute : Bool
+algebraicClosureIsNotRequiredForChosenRoute = true
 
 ------------------------------------------------------------------------
--- 3. Only the cross-kernel transport is still an implementation obligation.
+-- 3. Lean-side receipt for the weaker equal-character -> isomorphism route.
+--
+-- We do not manufacture the Lean proof from theorem names.  A real Lean
+-- producer must discharge these steps for the concrete FDRep carrier over the
+-- exact DASHI cyclotomic field and return the transported isomorphism theorem.
+------------------------------------------------------------------------
+
+record LeanEqualCharacterSimpleIsoReceipt : Set₁ where
+  field
+    scalarProductEqualsEquivariantHomFinrank : Set
+    equalCharactersIdentifyCrossAndSelfScalarProducts : Set
+    selfIdentityMorphismIsNonzero : Set
+    selfEquivariantHomFinrankPositive : Set
+    equalCharactersForceNonzeroEquivariantHom : Set
+    nonzeroSimpleMorphismIsIso : Set
+    algebraicClosureNotUsed : Set
+    leanProofArtifact : Set
+open LeanEqualCharacterSimpleIsoReceipt public
+
+------------------------------------------------------------------------
+-- 4. Cross-kernel transport consumed by the existing Stone-von Neumann owner.
 ------------------------------------------------------------------------
 
 record DashiToMathlibCharacterDeterminationTransport : Set₂ where
@@ -103,13 +126,9 @@ record DashiToMathlibCharacterDeterminationTransport : Set₂ where
     IsIrreducible : Representation → Set
     EquivariantIso : Representation → Representation → Set
 
-    -- Receipt that the exact scalar extension and DASHI representation objects
-    -- satisfy the finite-group/field/simple-object hypotheses of the pinned
-    -- mathlib theorem and that its resulting isomorphism has been transported
-    -- back to this EquivariantIso carrier.
-    scalarExtension : ScalarExtension.Cyclotomic3ScalarExtension
-    schrodingerScalarExtension :
-      ScalarExtension.SchrodingerScalarExtensionTransport scalarExtension
+    -- Concrete proof receipt over the original exact scalar field.  No
+    -- Cyclotomic3ScalarExtension is a prerequisite for this route.
+    leanEqualCharacterSimpleIsoReceipt : LeanEqualCharacterSimpleIsoReceipt
 
     transportedEqualCharactersGiveIso :
       (left right : Representation) →
@@ -133,11 +152,11 @@ compileIrreducibleCharacterDetermination transport = record
   }
 
 ------------------------------------------------------------------------
--- 4. WrongType / non-promotion firewalls.
+-- 5. WrongType / non-promotion firewalls.
 ------------------------------------------------------------------------
 
 data MathlibTheoremCreatesDashiTransport : Set where
-data ScalarExtensionCreatesCharacterEquality : Set where
+data OrthogonalityShortcutMakesAlgebraicClosureNecessary : Set where
 data DOICharacterCitationCreatesTransport : Set where
 data EqualCharacterValuesChooseBasis : Set where
 data QidCreatesCharacterDetermination : Set where
@@ -148,9 +167,9 @@ mathlibTheoremDoesNotCreateDashiTransport :
   MathlibTheoremCreatesDashiTransport → ⊥
 mathlibTheoremDoesNotCreateDashiTransport ()
 
-scalarExtensionDoesNotCreateCharacterEquality :
-  ScalarExtensionCreatesCharacterEquality → ⊥
-scalarExtensionDoesNotCreateCharacterEquality ()
+orthogonalityShortcutDoesNotMakeAlgebraicClosureNecessary :
+  OrthogonalityShortcutMakesAlgebraicClosureNecessary → ⊥
+orthogonalityShortcutDoesNotMakeAlgebraicClosureNecessary ()
 
 doiCitationDoesNotCreateTransport :
   DOICharacterCitationCreatesTransport → ⊥
@@ -169,7 +188,7 @@ oeisDoesNotCreateCharacterDetermination : OeisCreatesCharacterDetermination → 
 oeisDoesNotCreateCharacterDetermination ()
 
 ------------------------------------------------------------------------
--- 5. Navigation/provenance coordinates remain non-promoting.
+-- 6. Navigation/provenance coordinates remain non-promoting.
 ------------------------------------------------------------------------
 
 record CharacterDeterminationExternalCoordinates : Set where
@@ -193,23 +212,24 @@ canonicalCharacterDeterminationExternalCoordinates =
     "Q1057968"
     "512.22"
     "512.23"
-    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no scalar-extension, irreducibility, character-orthogonality, representation-isomorphism, basis, or proof-transport authority"
+    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no irreducibility, character scalar-product, Hom-space, Schur-isomorphism, representation-isomorphism, basis, or proof-transport authority"
     false
 
 ------------------------------------------------------------------------
--- 6. Pareto frontier.
+-- 7. Pareto frontier.
 ------------------------------------------------------------------------
 
 record MathlibCharacterDeterminationInteropFrontier : Set where
   constructor mathlib-character-determination-interop-frontier
   field
     standardMathematicalTheoremSourcePaid : Bool
-    exactMathlibSourceManifestationPinned : Bool
-    scalarProductTheoremLocated : Bool
-    irreducibleOrthogonalityTheoremLocated : Bool
-    upstreamKernelProofExists : Bool
-    cyclotomicScalarExtensionInterfaceAvailable : Bool
-    scalarExtensionPaid : Bool
+    exactMathlibCharacterSourceManifestationPinned : Bool
+    exactMathlibSchurSourceManifestationPinned : Bool
+    scalarProductHomFinrankTheoremLocated : Bool
+    simpleNonIsoHomZeroTheoremLocated : Bool
+    chosenRouteAvoidsAlgebraicClosure : Bool
+    upstreamKernelProofComponentsExist : Bool
+    leanEqualCharacterSimpleIsoReceiptObserved : Bool
     dashiRepresentationTransportPaid : Bool
     agdaKernelReplayPaid : Bool
     fixedPhaseRepresentationIsoCompilerAvailable : Bool
@@ -220,7 +240,6 @@ currentMathlibCharacterDeterminationInteropFrontier :
   MathlibCharacterDeterminationInteropFrontier
 currentMathlibCharacterDeterminationInteropFrontier =
   mathlib-character-determination-interop-frontier
-    true true true true true
-    true false
-    false false true
-    "first instantiate Cyclotomic3ScalarExtension for the exact Q(zeta_3) amplitude algebra and SchrodingerScalarExtensionTransport for the existing X6 function module, preserving all six translation and six modulation actions. Then package that extended action as the finite-dimensional mathlib FDRep used by DashiToMathlibCharacterDeterminationTransport, prove the DASHI cyclotomic class-character agrees with its trace, and transport the resulting FDRep isomorphism back. Only then may the corrected Stone-von Neumann frontier mark fixed-central-character uniqueness closed. DOI/QID/Dewey/OEIS coordinates and upstream theorem existence do not create scalar extension, character equality, or proof transport."
+    true true true true true true true
+    false false false true
+    "produce LeanEqualCharacterSimpleIsoReceipt over the existing exact Q(zeta_3) field: instantiate FDRep.scalar_product_char_eq_finrank_equivariant, rewrite the cross scalar product by concrete character equality to the self scalar product, use the nonzero identity to prove self Hom finrank positive, obtain a nonzero cross equivariant morphism, and use simple-object Schur to turn it into an isomorphism. Then package the concrete finite Heisenberg FDRep and prove its DASHI class-character equals the mathlib trace. The earlier algebraic-closure scalar-extension route remains a valid independent construction but is not a prerequisite for this character-determination implication. Serre DOI/QID/Dewey/OEIS coordinates and theorem names do not create the Lean receipt or representation transport."
