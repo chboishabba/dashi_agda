@@ -9,8 +9,9 @@ open import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact
     ; fixedOutputSlotKernelDifferenceIsLiteralOutputFormulaDifference
     ; literalOutputSlotFormulaDifferenceTelescopesLeft
     ; fixedOutputSlotKernelDifferenceTelescopesByAmplitudeIncrements
-    ; fixedOutputEqualVelocityArgumentsHaveEqualSlotKernel
     )
+open import DASHI.Physics.Closure.NSTriadKNFixedOutputSlotCollisionExact
+  using (fixedOutputEqualVelocityArgumentsHaveEqualSlotKernel)
 open import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact
   using (compressedPartnerDifferenceNormIsFourSlotDefect)
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferenceAggregateExact
