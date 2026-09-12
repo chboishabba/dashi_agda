@@ -33,7 +33,8 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 --   * ConsumerRelativeReductionCanonicalBridgeExact:
 --       consumer-indexed symmetry/quotient authority;
 --   * TypedHyperfabricConsumerReductionBridgeExact:
---       canonical reduction instantiated directly on compatible GlobalSections;
+--       Set-sized selected-section codes realized as compatible GlobalSections
+--       before entering the Set-sized consumer-reduction kernel;
 --   * MaleCNSTypedHyperfabricChartProjectionExact:
 --       26-region ordered-pair chart projection from compatible GlobalSections;
 --   * braided evidence / hypercube owners:
@@ -89,7 +90,7 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is a composition of already-owned theorem surfaces; compatible GlobalSections feed the canonical consumer-reduction kernel directly, and the MaleCNS 26-region ordered-pair chart is now a GlobalSection projection. The nonzero physical connectome incidence remains a separate unpaid obligation."
+  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. The MaleCNS 26-region ordered-pair chart is a GlobalSection projection, while the nonzero physical connectome incidence remains a separate unpaid obligation."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -129,10 +130,15 @@ hypercubeCarrierDoesNotFixTransitionGeometry :
 hypercubeCarrierDoesNotFixTransitionGeometry =
   Hypercube.mediatedGeometryBlocksDirectPoleJump
 
-globalSectionsUseCanonicalConsumerReduction :
-  SectionReduction.globalSectionMayServeAsFineReductionState
+selectedSectionCodesUseCanonicalConsumerReduction :
+  SectionReduction.selectedSectionCodeMayServeAsFineReductionState
     SectionReduction.canonicalHyperfabricConsumerReductionBoundary ≡ true
-globalSectionsUseCanonicalConsumerReduction = refl
+selectedSectionCodesUseCanonicalConsumerReduction = refl
+
+globalSectionUniverseRemainsExplicit :
+  SectionReduction.globalSectionUniverseIsNotForcedIntoSet
+    SectionReduction.canonicalHyperfabricConsumerReductionBoundary ≡ true
+globalSectionUniverseRemainsExplicit = refl
 
 maleCNSPairChartComesFromGlobalSections :
   MaleCNSChart.chartProjectionComesFromGlobalSectionEdgeValues
@@ -232,9 +238,11 @@ record LocalFibreMissingFields : Set where
     genericRefinementActsOnTypedHyperfabricStalks : Bool
     pantsInterfaceMatchLiftedToGenericHyperfabricGluing : Bool
     braidDeformationLiftedToGenericHyperfabricTransport : Bool
-    consumerReductionInstantiatedOnHyperfabricGlobalSections : Bool
+    selectedSectionCodeConsumerReductionBridgeConstructed : Bool
+    directGlobalSectionReductionAvoided : Bool
     maleCNSPhysicalIncidenceInstanceConstructed : Bool
     maleCNSChartProjectionFromGlobalSectionsConstructed : Bool
+    maleCNSSelectedSectionCarrierConstructed : Bool
     note : String
 
 open LocalFibreMissingFields public
@@ -245,6 +253,8 @@ currentLocalFibreMissingFields = local-fibre-missing-fields
   false
   false
   true
+  true
   false
   true
-  "GlobalSection -> consumer-relative reduction is paid by TypedHyperfabricConsumerReductionBridgeExact. The MaleCNS 26-region ordered-pair NDim chart is now a projection of compatible GlobalSections via MaleCNSTypedHyperfabricChartProjectionExact. Remaining work is NDim refinement, pants seams, braid transport, and the actual nonzero/typed MaleCNS physical incidence instance rather than the dense complete-pair chart carrier."
+  false
+  "TypedHyperfabricConsumerReductionBridgeExact now pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact pays the projection of compatible GlobalSections into the 26-region ordered-pair chart. Remaining work is NDim refinement, pants seams, braid transport, an actual nonzero/typed MaleCNS physical incidence instance, and a concrete Set-sized MaleCNS selected-section carrier feeding the reduction bridge."
