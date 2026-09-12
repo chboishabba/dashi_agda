@@ -23,8 +23,8 @@ import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Traversal
 --   mAbs_i =   sum_j |S_ij| / sum_j |D_ij|
 --
 -- They coincide only when mixed-sign cancellation is absent/negligible.
--- The new null keeps P and the full multiset of mNet values fixed and permutes
--- only the anatomical assignment i -> m_i.
+-- The null keeps P and the full multiset of mNet values fixed and permutes only
+-- the anatomical assignment i -> m_i.
 --
 -- IMPORTANT: failure to reject this null does NOT prove exchangeability or
 -- certify the unordered multiset as a sufficient statistic.  It means only
@@ -86,8 +86,10 @@ currentMagnitudeAssignmentReceipt = magnitude-assignment-receipt
 -- APPEND-ONLY REPLICATION ACQUISITION FRONTIER
 --
 -- Exact source-row identity recovery is a prerequisite for independent-trial
--- materialization, not itself a replication result.  The currently paid state
--- combines the historical a2_r5 receipt with the out-of-core a1_r9 receipt.
+-- materialization, not itself a replication result.  The empirical receipt is
+-- pinned to the commit that produced the currently paid 559/1620 artifact.
+-- A distinct implementation-lineage coordinate may advance as recovery becomes
+-- safer/resumable; code advancement does not retroactively alter the artifact.
 ------------------------------------------------------------------------
 
 record ReplicationIdentityRecoveryReceipt : Set where
@@ -96,6 +98,8 @@ record ReplicationIdentityRecoveryReceipt : Set where
     repository : String
     branch : String
     recoveryRuntimeCommit : String
+    currentRecoveryImplementationCommit : String
+    recoveryImplementationState : String
     accumulationArtifactPath : String
     accumulatedIdentityCsv : String
     depositedSelectedCount : Nat
@@ -117,6 +121,8 @@ currentReplicationIdentityRecoveryReceipt = replication-identity-recovery-receip
   "github.com/chboishabba/dashiBRAIN"
   "agent/malecns-real-benchmark-tranche"
   "a9504ea00a30960a6728f90a5ff31b4d1f97ced6"
+  "9d15d4acc622a87cdd0ebc5d2f22f8531b277ce7"
+  "out-of-core pickle ingestion; blockwise scoring; standalone per-trial checkpoints; one-trial-at-a-time incremental merge; optional post-checkpoint source-ZIP release"
   "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_identity_accumulation.json"
   "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_selected_identities_accumulated.csv"
   1620
@@ -129,7 +135,7 @@ currentReplicationIdentityRecoveryReceipt = replication-identity-recovery-receip
   "04192024_6f_a1_r9"
   false
   "exact trace equality to deposited selected row; not neuron identity and not atlas identity"
-  "Two searched Gauthey LBM trials currently pay 559 of 1620 exact selected-row source identities. The remaining 1061 rows stay unresolved. This is acquisition progress toward replication and does not itself execute, validate, or generalize the frozen MaleCNS consumer carrier on an independent trial."
+  "Two searched Gauthey LBM trials currently pay 559 of 1620 exact selected-row source identities. The remaining 1061 rows stay unresolved. The recovery implementation has since advanced to durable one-trial-at-a-time checkpointing, but those code changes do not themselves add empirical identities or pay independent-trial replication."
 
 record ReplicationAcquisitionBoundary : Set where
   constructor replication-acquisition-boundary
@@ -138,7 +144,11 @@ record ReplicationAcquisitionBoundary : Set where
     exactSourceIdentityRecoveryComplete : Bool
     searchedTrialReceiptsAppendOnly : Bool
     unresolvedRowsRemainExplicit : Bool
+    perTrialCheckpointingImplemented : Bool
+    accumulatedReceiptAdvancesAfterEachTrial : Bool
+    sourceZipMayBeReleasedOnlyAfterDurableCheckpoint : Bool
     a1r9RecoveryRequiredRemoteArchiveAccess : Bool
+    implementationAdvanceCreatesEmpiricalPayment : Bool
     sourceIdentityRecoveryImpliesIndependentTrialReplication : Bool
     sourceIdentityRecoveryImpliesJRC2018Ready : Bool
     sourceIdentityRecoveryImpliesCrossAnimalReplication : Bool
@@ -147,7 +157,7 @@ open ReplicationAcquisitionBoundary public
 
 canonicalReplicationAcquisitionBoundary : ReplicationAcquisitionBoundary
 canonicalReplicationAcquisitionBoundary = replication-acquisition-boundary
-  true false true true false false false false
+  true false true true true true true false false false false false
 
 ------------------------------------------------------------------------
 -- Algebraic boundary: |sum S| and sum |S| are different operations.
@@ -282,7 +292,7 @@ replicationIdentityRecoveryCoordinate = Traversal.dashi-knowledge-coordinate
   "Gauthey exact selected-row identity recovery frontier"
   "570.000 / 612.8 neuroscience candidate"
   "same Gauthey source family; local acquisition receipt has no external QID"
-  "dashiBRAIN:gauthey_lbm_identity_accumulation.json@a9504ea00a30960a6728f90a5ff31b4d1f97ced6"
+  "dashiBRAIN:gauthey_lbm_identity_accumulation.json@a9504ea00a30960a6728f90a5ff31b4d1f97ced6; recovery implementation head 9d15d4acc622a87cdd0ebc5d2f22f8531b277ce7"
 
 polarityCoordinate : Traversal.DashiKnowledgeCoordinate
 polarityCoordinate = Traversal.dashi-knowledge-coordinate
