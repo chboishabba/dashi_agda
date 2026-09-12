@@ -82,7 +82,6 @@ crossPlatformIdentityWeldStillUnpaid =
 data SameNameWalletReviewPaysSamePerson : Set where
 data WalletUseContextPaysAccountOwnership : Set where
 data ReviewMirrorPaysNativeIdentity : Set where
-
 data HistoricalWeb3ContinuityPaysBlochfieldLineage : Set where
 
 sameNameWalletReviewDoesNotPaySamePerson :
