@@ -31,6 +31,8 @@ class WorldPgStoreTests(unittest.TestCase):
         self.assertIn("CREATE TABLE IF NOT EXISTS slr_world_source_manifestation", sql)
         self.assertIn("CREATE TABLE IF NOT EXISTS slr_world_pnf_candidate", sql)
         self.assertIn("CREATE TABLE IF NOT EXISTS slr_world_atom", sql)
+        self.assertIn("CREATE TABLE IF NOT EXISTS slr_world_gap", sql)
+        self.assertIn("CREATE TABLE IF NOT EXISTS slr_world_obligation", sql)
         self.assertIn("CREATE TABLE IF NOT EXISTS slr_world_iteration", sql)
         self.assertNotIn("DROP TABLE", sql.upper())
         self.assertNotIn("TRUNCATE", sql.upper())
@@ -41,6 +43,8 @@ class WorldPgStoreTests(unittest.TestCase):
             source_manifestations=2,
             pnf_candidates=3,
             world_atoms=4,
+            gaps=5,
+            obligations=6,
             route_actions=1,
             iteration_rows=1,
         )
@@ -76,6 +80,18 @@ class WorldPgStoreTests(unittest.TestCase):
                 "source_manifestation_id": "wiki:Q207:en:456",
                 "payload": {"candidate_only": True},
             }],
+            gaps=[{
+                "gap_id": "gap:Q207:fr:pnf:claim:1",
+                "iteration_index": 4,
+                "surface_id": "Q207:fr",
+                "payload": {"candidate_only": True},
+            }],
+            obligations=[{
+                "obligation_id": "obligation:follow:Q1:P279:Q2",
+                "iteration_index": 4,
+                "obligation_kind": "follow-related-qid",
+                "payload": {"frontier_rank_is_truth_rank": False},
+            }],
             route_actions=[{
                 "action_id": "Q1:P279:Q2",
                 "iteration_index": 4,
@@ -87,10 +103,12 @@ class WorldPgStoreTests(unittest.TestCase):
                 "payload": {"consumer_closure_paid": False},
             }],
         )
-        self.assertGreaterEqual(len(cursor.executemany_calls), 5)
+        self.assertGreaterEqual(len(cursor.executemany_calls), 7)
         for sql, _rows in cursor.executemany_calls:
             self.assertIn("ON CONFLICT", sql)
+            self.assertIn("DO NOTHING", sql)
             self.assertNotIn("DELETE", sql.upper())
+            self.assertNotIn("DO UPDATE", sql.upper())
 
 
 if __name__ == "__main__":
