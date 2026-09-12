@@ -29,8 +29,8 @@ echo "monster 3B multiplicity basis-vs-linear WrongType check: ok"
 # Run the bounded linear-multiplicity frontier as one pre-GAP static tranche.
 # These checks deliberately validate source/proof-route surfaces only; they do
 # not claim Agda kernel certification. Same-object composition, constructive
-# finite witness extraction, and source snowballs are chained here so their
-# non-promotion boundaries cannot drift.
+# finite witness extraction, corrected proof frontiers, and source snowballs
+# are chained here so their non-promotion boundaries cannot drift.
 bash "$ROOT/scripts/check_monster_3b_suzuki_90_not_permutation_character.sh"
 bash "$ROOT/scripts/check_monster_3b_linear_multiplicity_hom_space.sh"
 bash "$ROOT/scripts/check_monster_3b_linear_zeta_sector_restriction.sh"
@@ -42,5 +42,6 @@ bash "$ROOT/scripts/check_monster_3b_actual_voa_selected3b_composition.sh"
 bash "$ROOT/scripts/check_monster_3b_z3_orbifold_phase_recognition_snowball.sh"
 bash "$ROOT/scripts/check_monster_3b_cyclotomic_norm_separation.sh"
 bash "$ROOT/scripts/check_monster_3b_schrodinger_nonzero_witness_extraction.sh"
+bash "$ROOT/scripts/check_monster_3b_stone_von_neumann_witness_frontier_correction.sh"
 
 echo "monster 3B linear multiplicity frontier static tranche: ok"
