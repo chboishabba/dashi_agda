@@ -360,6 +360,46 @@ fixedOutputSlotKernelDifferenceIsLiteralOutputFormulaDifference alpha beta =
     (fixedOutputSlotKernelIsLiteralOutputFormula alpha)
     (fixedOutputSlotKernelIsLiteralOutputFormula beta)
 
+fixedOutputSlotKernelDifferenceTelescopesByAmplitudeIncrements :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    {system : Audit.FiniteComplex3GalerkinSystem F E I}
+    {output : Z3.FourierMode}
+    (alpha beta : R207.FixedOutputLocalizedComparablePartner system output) →
+  let alphaPartner = R207.partner alpha
+      betaPartner = R207.partner beta
+      alphaTau = R204.incidence (R205.localizedComparable alphaPartner)
+      betaTau = R204.incidence (R205.localizedComparable betaPartner)
+      alphaUP = Audit.velocity system (Physical.p alphaTau)
+      alphaUQ = Audit.velocity system (Physical.q alphaTau)
+      betaUP = Audit.velocity system (Physical.p betaTau)
+      betaUQ = Audit.velocity system (Physical.q betaTau)
+  in
+  compressedPartnerSlotKernelDifference alphaPartner betaPartner
+  ≡ C3.complex3Add
+      (literalOutputSlotFormula E output
+        (C3.complex3Subtract alphaUP betaUP)
+        alphaUQ)
+      (literalOutputSlotFormula E output
+        betaUP
+        (C3.complex3Subtract alphaUQ betaUQ))
+fixedOutputSlotKernelDifferenceTelescopesByAmplitudeIncrements
+    {E = E} {system = system} {output = output} alpha beta =
+  let
+    alphaPartner = R207.partner alpha
+    betaPartner = R207.partner beta
+    alphaTau = R204.incidence (R205.localizedComparable alphaPartner)
+    betaTau = R204.incidence (R205.localizedComparable betaPartner)
+    alphaUP = Audit.velocity system (Physical.p alphaTau)
+    alphaUQ = Audit.velocity system (Physical.q alphaTau)
+    betaUP = Audit.velocity system (Physical.p betaTau)
+    betaUQ = Audit.velocity system (Physical.q betaTau)
+  in
+  trans
+    (fixedOutputSlotKernelDifferenceIsLiteralOutputFormulaDifference alpha beta)
+    (literalOutputSlotFormulaDifferenceTelescopesLeft
+      E output alphaUP alphaUQ betaUP betaUQ)
+
 ------------------------------------------------------------------------
 -- Existing R574/R446 same-object specialization.
 ------------------------------------------------------------------------
@@ -443,6 +483,9 @@ roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosed = true
 roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosed : Bool
 roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosed = true
 
+roundCenteredPartnerPhysicalAmplitudeTelescopeClosed : Bool
+roundCenteredPartnerPhysicalAmplitudeTelescopeClosed = true
+
 roundCenteredPartnerRadialPlueckerDefectWeldClosed : Bool
 roundCenteredPartnerRadialPlueckerDefectWeldClosed = false
 
@@ -478,6 +521,10 @@ roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosedIsTrue = refl
 roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosedIsTrue :
   roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosed ≡ true
 roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosedIsTrue = refl
+
+roundCenteredPartnerPhysicalAmplitudeTelescopeClosedIsTrue :
+  roundCenteredPartnerPhysicalAmplitudeTelescopeClosed ≡ true
+roundCenteredPartnerPhysicalAmplitudeTelescopeClosedIsTrue = refl
 
 roundCenteredPartnerRadialPlueckerDefectWeldClosedIsFalse :
   roundCenteredPartnerRadialPlueckerDefectWeldClosed ≡ false
