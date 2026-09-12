@@ -17,6 +17,7 @@ module DASHI.Physics.Closure.UnificationUCTFullProofSpineExact where
 -- the pre-existing theorem target.  It does not inhabit UCT.1--UCT.4 itself.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 
@@ -76,16 +77,16 @@ uct4CrossTermNullityTheorem :
   nullClass package
     (Boundary.actualU1aCrossTerm
       V G-boundary (-V_ package) s1 s2)
-uct4CrossTermNullityTheorem package s1 s2 =
+uct4CrossTermNullityTheorem {V} {G-boundary} package s1 s2 =
   uct4CrossTermNullity package crossTerm
     (uct3UniqueContinuationIntake package crossTerm
       (uct2OperatorClass package crossTerm
         (uct1ResidualPDE package s1 s2)))
   where
-    crossTerm : U1a.DefectQuotientV _
+    crossTerm : U1a.DefectQuotientV V
     crossTerm =
       Boundary.actualU1aCrossTerm
-        _ _ (-V_ package) s1 s2
+        V G-boundary (-V_ package) s1 s2
 
 asU1aCrossTermNullityTheoremTarget :
   ∀ {V G-boundary} →
@@ -98,8 +99,7 @@ asU1aCrossTermNullityTheoremTarget package = record
       uct4CrossTermNullityTheorem package
   ; Boundary.U1aCrossTermNullityTheoremTarget.theoremTargetText =
       "forall s1 s2, nullClass (G(s1 +V s2) -V G(s1) -V G(s2))"
-  ; Boundary.U1aCrossTermNullityTheoremTarget.theoremTargetTextIsCanonical =
-      Agda.Builtin.Equality.refl
+  ; Boundary.U1aCrossTermNullityTheoremTarget.theoremTargetTextIsCanonical = refl
   }
 
 uctAnalyticSpineCompilerLevel : ProofLevel
