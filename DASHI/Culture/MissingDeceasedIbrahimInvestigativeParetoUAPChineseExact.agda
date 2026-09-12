@@ -35,16 +35,16 @@ ningLiSuperconductingGravityPareto : Base.InvestigativeParetoTarget
 ningLiSuperconductingGravityPareto = Base.investigative-pareto-target
   Base.firstFront
   "Ning Li superconducting-gravity reconstruction"
-  "Li/Torr theory -> 1997 static YBCO constraint -> UAH/NASA experimental lineage -> AC Gravity -> Army Other Transaction -> technical closeout/results -> later cohort same-object test"
-  "recover the primary FY2001 DoD Other Transactions report page for reported agreement DAAH01-01-9-R001, then the underlying Army AMCOM agreement/statement-of-work, technical closeout and any released results; separately recover authoritative AC Gravity corporate history and UAH/NASA apparatus lineage"
-  "Li/Torr DOI identities are paid; Physica C DOI 10.1016/S0921-4534(97)01462-7 is paid and reports <2 parts in 10^8 g acceleration change for the tested static YBCO configuration; Ning Li event/work identity is repaired by the Huntsville obituary; secondary transcriptions consistently report DAAH01-01-9-R001 and $448,970, while the primary page-66 carrier has not yet been recovered in this lane"
-  "government-programme identity; exact apparatus evolution from static YBCO constraint to proposed driven experiment; award amount/date authority; technical outcome; publication/classification disposition; any genuine Ning-Amy or Ning-NASA-fusion same-object bridge"
-  "DOI 10.1103/PhysRevD.43.457; 10.1103/PhysRevB.46.5489; 10.1007/BF00665654; 10.1016/S0921-4534(97)01462-7; reported agreement DAAH01-01-9-R001 is an acquisition key, not yet a primary-paid receipt"
+  "Li/Torr theory -> 1997 static YBCO constraint -> UAH/NASA experimental lineage -> AC Gravity -> Army Other Transaction archived carrier -> exact row inspection -> agreement/SOW -> technical closeout/results -> later cohort same-object test"
+  "inspect/materialise the recovered archived FY01RPT.doc carrier and verify the reported page-66 row for DAAH01-01-9-R001 exactly; only after that acquire the underlying Army AMCOM agreement/statement-of-work, technical closeout and released results; separately recover authoritative AC Gravity corporate history and apparatus lineage"
+  "Li/Torr DOI identities are paid; Physica C DOI 10.1016/S0921-4534(97)01462-7 is paid and reports <2 parts in 10^8 g acceleration change for the tested static YBCO configuration; NASA NTRS pays NCC8-124 and its incomplete all-up programme state; an archived locator for the FY2001 DoD report is now recovered and the National Academies independently cites the same original FY01RPT.doc URL, but the archived bytes/page-66 row have not been inspected in this lane"
+  "exact page-66 award-row text; government-programme identity; apparatus evolution from static YBCO constraint to proposed driven experiment; award amount/date authority; technical outcome; publication/classification disposition; any genuine Ning-Amy or Ning-NASA-fusion same-object bridge"
+  "DOI 10.1103/PhysRevD.43.457; 10.1103/PhysRevB.46.5489; 10.1007/BF00665654; 10.1016/S0921-4534(97)01462-7; archived locator https://web.archive.org/web/20210801183915id_/https://www.acq.osd.mil/dpap/Docs/FY01RPT.doc; DAAH01-01-9-R001 remains an acquisition key until the row is inspected"
   "person QID unresolved; programme/corporate identifiers must come from primary registries"
   "537 Electricity and electronics / 538 Magnetism / 530 Physics / 629 Aerospace traversal only"
-  "primary DoD/Army agreement and annual-report carrier, primary corporate registry, UAH/NASA programme record, technical report or apparatus/test record"
+  "archived DoD annual-report carrier first; then underlying Army agreement/SOW, primary corporate registry, UAH/NASA programme records and any technical closeout/apparatus/test result"
   true true false
-  "High fan-out: one primary government agreement/closeout package can distinguish a real funded experimental programme from later lore, identify the apparatus and result state, and sharply constrain the zero-point/suppression hypothesis. The 1997 negative constraint must remain in the same search graph rather than being discarded when later claims are examined."
+  "The residual has sharpened from source discovery to primary-carrier inspection. A located archive URL is not an inspected carrier, and a secondary transcription cannot pay the award row. Once the row is inspected, the highest-value downstream residual becomes outcome/closeout rather than award existence. The 1997 negative constraint remains in the same search graph throughout."
 
 fullSetTechnicalIntersectionPareto : Base.InvestigativeParetoTarget
 fullSetTechnicalIntersectionPareto = Base.investigative-pareto-target
