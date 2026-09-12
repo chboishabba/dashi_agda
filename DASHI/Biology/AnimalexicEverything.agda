@@ -14,6 +14,7 @@ open import DASHI.Biology.AnimalexicVisualInertialPosePriorExact
 open import DASHI.Biology.AnimalexicVisualInertialCorrectedTrajectoryExact
 open import DASHI.Biology.AnimalexicCrossCameraWorldWeldExact
 open import DASHI.Biology.AnimalexicStaticAnchorRobustWorldWeldExact
+open import DASHI.Biology.AnimalexicWorldWeldVoxelOriginHandoffExact
 open import DASHI.Biology.AnimalexicCrossPollinationExact
 open import DASHI.Biology.AnimalexicLexicIntegrationExact
 open import DASHI.Biology.AnimalexicRegression
