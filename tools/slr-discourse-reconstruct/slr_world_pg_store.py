@@ -81,7 +81,7 @@ def persist_rows(
             INSERT INTO slr_world_source_manifestation
               (source_manifestation_id, source_kind, qid, language, revision_ref, source_text_sha256, payload)
             VALUES (%s,%s,%s,%s,%s,%s,%s::jsonb)
-            ON CONFLICT (source_manifestation_id) DO UPDATE SET payload = EXCLUDED.payload
+            ON CONFLICT (source_manifestation_id) DO NOTHING
             """,
             source_rows,
         )
@@ -94,7 +94,7 @@ def persist_rows(
             """
             INSERT INTO slr_world_pnf_candidate (claim_candidate_id, source_manifestation_id, payload)
             VALUES (%s,%s,%s::jsonb)
-            ON CONFLICT (claim_candidate_id) DO UPDATE SET payload = EXCLUDED.payload
+            ON CONFLICT (claim_candidate_id) DO NOTHING
             """,
             pnf_rows,
         )
@@ -110,7 +110,7 @@ def persist_rows(
             """
             INSERT INTO slr_world_atom (atom_id, atom_kind, subject_qid, source_manifestation_id, payload)
             VALUES (%s,%s,%s,%s,%s::jsonb)
-            ON CONFLICT (atom_id) DO UPDATE SET payload = EXCLUDED.payload
+            ON CONFLICT (atom_id) DO NOTHING
             """,
             atom_rows,
         )
@@ -123,7 +123,7 @@ def persist_rows(
             """
             INSERT INTO slr_world_route_action (action_id, iteration_index, payload)
             VALUES (%s,%s,%s::jsonb)
-            ON CONFLICT (action_id, iteration_index) DO UPDATE SET payload = EXCLUDED.payload
+            ON CONFLICT (action_id, iteration_index) DO NOTHING
             """,
             route_rows,
         )
@@ -136,7 +136,7 @@ def persist_rows(
             """
             INSERT INTO slr_world_iteration (iteration_index, parent_iteration_index, payload)
             VALUES (%s,%s,%s::jsonb)
-            ON CONFLICT (iteration_index) DO UPDATE SET payload = EXCLUDED.payload
+            ON CONFLICT (iteration_index) DO NOTHING
             """,
             iteration_payloads,
         )
@@ -169,7 +169,7 @@ def database_url(*, env_file: Path | None = None) -> str:
 
 def persistence_receipt(*, database_url: str, source_manifestations: int, pnf_candidates: int,
                         world_atoms: int, route_actions: int, iteration_rows: int) -> dict[str, Any]:
-    _ = database_url  # deliberately never exposed in receipt
+    _ = database_url
     return {
         "schema": SCHEMA,
         "database_config_source": "DATABASE_URL",
@@ -180,6 +180,7 @@ def persistence_receipt(*, database_url: str, source_manifestations: int, pnf_ca
         "iteration_rows": int(iteration_rows),
         "append_only_identity_keys": True,
         "idempotent_conflict_safe_writes": True,
+        "conflicting_replay_rewrites_prior_evidence": False,
         "database_url_emitted": False,
         "postgres_persistence_is_semantic_authority": False,
         "candidate_only": True,
@@ -197,7 +198,6 @@ def _load(path: Path) -> dict[str, Any]:
 def rows_from_round(article: dict[str, Any], closure: dict[str, Any], route_plan: dict[str, Any],
                     iteration: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     manifestations: list[dict[str, Any]] = []
-    manifest_by_document: dict[str, str] = {}
     for m in article.get("article_manifestations") or article.get("manifestations") or []:
         if not isinstance(m, dict):
             continue
@@ -214,13 +214,15 @@ def rows_from_round(article: dict[str, Any], closure: dict[str, Any], route_plan
             "source_text_sha256": str(m.get("source_text_sha256", "")),
             "payload": m,
         })
-        manifest_by_document[sid] = sid
     pnf_rows: list[dict[str, Any]] = []
     for c in article.get("pnf_candidates") or []:
         if not isinstance(c, dict) or not c.get("claim_candidate_id"):
             continue
-        doc = str(c.get("document_ref", ""))
-        pnf_rows.append({"claim_candidate_id": str(c["claim_candidate_id"]), "source_manifestation_id": doc, "payload": c})
+        pnf_rows.append({
+            "claim_candidate_id": str(c["claim_candidate_id"]),
+            "source_manifestation_id": str(c.get("document_ref", "")),
+            "payload": c,
+        })
     atom_rows: list[dict[str, Any]] = []
     for a in closure.get("canonical_atoms") or []:
         if not isinstance(a, dict) or not a.get("atom_id"):
@@ -238,9 +240,11 @@ def rows_from_round(article: dict[str, Any], closure: dict[str, Any], route_plan
         for a in route_plan.get("selected_route_actions") or []
         if isinstance(a, dict) and a.get("action_id")
     ]
-    parent = iteration.get("previous_iteration_reference")
-    parent_idx = idx - 1 if idx > 0 else None
-    iteration_rows = [{"iteration_index": idx, "parent_iteration_index": parent_idx, "payload": iteration}]
+    iteration_rows = [{
+        "iteration_index": idx,
+        "parent_iteration_index": idx - 1 if idx > 0 else None,
+        "payload": iteration,
+    }]
     return {
         "source_manifestations": manifestations,
         "pnf_candidates": pnf_rows,
@@ -260,7 +264,9 @@ def persist_round(*, article_path: Path, closure_path: Path, route_plan_path: Pa
     rows = rows_from_round(_load(article_path), _load(closure_path), _load(route_plan_path), _load(iteration_path))
     with psycopg.connect(url) as connection:
         with connection.cursor() as cursor:
-            cursor.execute(schema_sql())
+            for statement in schema_sql().split(";"):
+                if statement.strip():
+                    cursor.execute(statement)
             persist_rows(cursor, **rows)
         connection.commit()
     receipt = persistence_receipt(
@@ -313,8 +319,8 @@ def main() -> int:
         f"schema={SCHEMA} source_manifestations={receipt['source_manifestations']} "
         f"pnf_candidates={receipt['pnf_candidates']} world_atoms={receipt['world_atoms']} "
         f"route_actions={receipt['route_actions']} iteration_rows={receipt['iteration_rows']} "
-        "database_url_emitted=false postgres_persistence_is_semantic_authority=false "
-        "candidate_only=true semantic_promotion=false",
+        "database_url_emitted=false conflicting_replay_rewrites_prior_evidence=false "
+        "postgres_persistence_is_semantic_authority=false candidate_only=true semantic_promotion=false",
         file=sys.stderr,
     )
     return 0
