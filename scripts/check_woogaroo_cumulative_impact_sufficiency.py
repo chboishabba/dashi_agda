@@ -55,6 +55,22 @@ REQUIRED = {
         "faunaPlanDoesNotPayCommencement",
         "firstImminenceProducerSet",
     ],
+    "DASHI/Law/SensibLawWoogaroo9281SourceDerivedSpatialOverlapExact.agda": [
+        "module DASHI.Law.SensibLawWoogaroo9281SourceDerivedSpatialOverlapExact where",
+        "cherishTreePlanSameObjectBridge",
+        "stocklandTreeScheduleSameObjectBridge",
+        "approvedGeneralArrangementEPBCApprovalNote",
+        "sourceDerivedBoundaryRegistrationReceipt",
+        "approxStageFootprintCentiHa",
+        "approxEPBC2014OverlapCentiHa",
+        "approxStagePinkOutside2014CentiHa",
+        "genericEPBCApprovalDoesNotIdentifyInstrument",
+        "sourceDerivedRasterDoesNotEqualAuthoritativeGeometry",
+        "epbc2014OverlapDoesNotPay8575Authorisation",
+        "condition6aSubmissionRemainsFirstInstrumentLeaf",
+        "authoritativeCADGISRemainsFirstGeometryLeaf",
+        "canonicalP3Pareto",
+    ],
     "DASHI/Law/SensibLawWoogarooPreservationSourceAtlasExact.agda": [
         "springfield8575January2026PreliminaryDocumentation",
         "9612 Springfield Preliminary Documentation v5 — EPBC 2019/8575",
@@ -70,6 +86,7 @@ REQUIRED = {
         "import DASHI.Law.SensibLawWoogarooEPBC8575BlockingCutsetExecutionStateExact",
         "import DASHI.Law.SensibLawWoogaroo9281SamePropertyExecutionLineageExact",
         "import DASHI.Law.SensibLawWoogaroo9281FederalPrestartGateExact",
+        "import DASHI.Law.SensibLawWoogaroo9281SourceDerivedSpatialOverlapExact",
     ],
 }
 
@@ -87,4 +104,4 @@ for rel, needles in REQUIRED.items():
 if missing:
     raise SystemExit("\n".join(missing))
 
-print("Woogaroo cumulative-impact + federal blocking-cutset + 9281 prestart-gate static contract: OK")
+print("Woogaroo cumulative-impact + federal blocking-cutset + 9281 P3 spatial-overlap static contract: OK")
