@@ -19,29 +19,6 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 
 ------------------------------------------------------------------------
 -- LOCAL FIBRE HYPERFABRIC ROLE MAP
---
--- This module is deliberately NOT a second sheaf/hyperfabric kernel.
--- TypedHyperfabricCore already owns local stalks, typed incidence, restriction,
--- global-section compatibility, obstructions, traces and provenance-preserving
--- reorganisation. The remaining repo-native owners contribute orthogonal
--- optional structure:
---
---   * ClopenNDimFibreBoundary / TetrationalGateField:
---       local chart dimension and refinement/tower requests;
---   * RelationalBranchCobordismGeometry:
---       n-ary pants geometry and typed interface matching;
---   * ConsumerRelativeReductionCanonicalBridgeExact:
---       consumer-indexed symmetry/quotient authority;
---   * TypedHyperfabricConsumerReductionBridgeExact:
---       Set-sized selected-section codes realized as compatible GlobalSections
---       before entering the Set-sized consumer-reduction kernel;
---   * MaleCNSTypedHyperfabricChartProjectionExact:
---       26-region ordered-pair chart projection from compatible GlobalSections;
---   * braided evidence / hypercube owners:
---       path identity and presentation/transition-geometry boundaries.
---
--- The purpose here is to state the composition and its firewalls without
--- redefining FibreAt, Incidence, Transport, LocalSection or gluing semantics.
 ------------------------------------------------------------------------
 
 TypedHyperfabricSurface : Set → Set → Set₁
@@ -54,10 +31,6 @@ GlobalSectionSurface = Hyperfabric.GlobalSection
 
 HyperfabricTraceSurface : Set → Set
 HyperfabricTraceSurface = Hyperfabric.HyperfabricTrace
-
-------------------------------------------------------------------------
--- Role assignment: which existing owner is authoritative for which operation.
-------------------------------------------------------------------------
 
 record LocalFibreAuthorityMap : Set where
   constructor local-fibre-authority-map
@@ -90,7 +63,7 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. The MaleCNS 26-region ordered-pair chart is a GlobalSection projection, while the nonzero physical connectome incidence remains a separate unpaid obligation."
+  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. MaleCNSTypedHyperfabricChartProjectionExact now supplies that selected chart-code carrier for the dense 26-region ordered-pair observational chart, while the nonzero physical connectome incidence remains a separate unpaid obligation."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -144,6 +117,11 @@ maleCNSPairChartComesFromGlobalSections :
   MaleCNSChart.chartProjectionComesFromGlobalSectionEdgeValues
     MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ true
 maleCNSPairChartComesFromGlobalSections = refl
+
+maleCNSSelectedSectionCarrierIsChartCodeNotPhysicalIncidence :
+  MaleCNSChart.selectedSectionCarrierIsChartCodeNotPhysicalIncidence
+    MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ true
+maleCNSSelectedSectionCarrierIsChartCodeNotPhysicalIncidence = refl
 
 ------------------------------------------------------------------------
 -- The symmetry/quotient rule is already owned canonically.
@@ -256,5 +234,5 @@ currentLocalFibreMissingFields = local-fibre-missing-fields
   true
   false
   true
-  false
-  "TypedHyperfabricConsumerReductionBridgeExact now pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact pays the projection of compatible GlobalSections into the 26-region ordered-pair chart. Remaining work is NDim refinement, pants seams, braid transport, an actual nonzero/typed MaleCNS physical incidence instance, and a concrete Set-sized MaleCNS selected-section carrier feeding the reduction bridge."
+  true
+  "TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact now pays both projection from compatible GlobalSections and a Set-sized complete ordered-pair chart code that realizes back to a compatible GlobalSection. Remaining work is NDim refinement, pants seams, braid transport, and an actual nonzero/typed MaleCNS physical incidence instance distinct from the dense complete-pair observational chart."
