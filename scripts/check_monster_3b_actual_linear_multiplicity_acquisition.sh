@@ -6,11 +6,14 @@ OWNER="$ROOT/DASHI/Wikimedia/IbrahimMonster3BActualLinearMultiplicityAcquisition
 
 required=(
   "record ActualLinearMultiplicityAcquisition"
+  "literalSameObjectWeld"
+  "literalVOALinearityReceipt"
   "sameLiteralZetaSector"
   "degree17496SameObject"
   "degree113724SameObject"
   "sourcePaidCharacterOnSameAction"
   "literalVOALinearityReceiptInterfaceAvailable"
+  "literalActionSameObjectWeldAvailable"
   "homogeneousGradeLinearisationInterfaceAvailable"
   "actualMonsterVOALinearityReceiptPaid"
   "actualLinearActionPaid"
