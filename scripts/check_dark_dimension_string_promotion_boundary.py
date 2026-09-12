@@ -24,10 +24,13 @@ REQUIRED = {
         "darkDimensionStringPromotionBlockedRegression",
         "darkDimensionToEBlockedRegression",
     ],
-    "DASHI/Unified/GRQuantumResearchAuthorityCutset.agda": [
+    "DASHI/Unified/DarkDimensionGRQuantumPromotionAdapterExact.agda": [
+        "module DASHI.Unified.DarkDimensionGRQuantumPromotionAdapterExact where",
+        "import DASHI.Unified.GRQuantumResearchAuthorityCutset as Research",
         "import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension",
-        "DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact",
         "darkDimensionDoesNotPayEmpiricalCompletion",
+        "darkDimensionDoesNotPayQuantumGravityPromotion",
+        "darkDimensionDoesNotPayTheoryOfEverythingPromotion",
     ],
 }
 
