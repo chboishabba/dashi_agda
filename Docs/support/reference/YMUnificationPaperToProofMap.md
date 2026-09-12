@@ -76,6 +76,38 @@ physical Yang–Mills VacuumOrthogonalRecoverySystem
 
 with the exact finite/limit vectors, vacuum-orthogonality witnesses, norm domination, uniform finite gap, and recovery-energy upper bound.
 
+The older Sprint121/128/129 carrier/recovery/no-pollution files are **receipt ledgers**, not theorem-bearing producers of this record: they store strings and Boolean closure/status evidence but do not supply the finite/limit vector maps, norms, energies, recovery vector, or vacuum-orthogonality proofs required by `VacuumOrthogonalRecoverySystem`.
+
+### Row-C clustering -> dense-core spectral exclusion route
+
+Formal owner:
+
+- `DASHI/Physics/Closure/YMPaper3RowCToDenseCoreGapAdapterExact.agda`
+
+Existing theorem-bearing ingredients:
+
+```text
+BalabanRowCPostBC2PhysicalCompletionRound108Exact
+  : UniformGeometricConnectedClustering Observable
+
+BalabanClayDenseCoreSpectralGapExact
+  : UniformDenseCoreClustering dataSet
+      -> DenseCoreSpectralExclusion dataSet
+```
+
+The adapter isolates the exact same-object continuum payment:
+
+```text
+dense centered core vector
+  -> corresponding Row-C observable
+  -> literal Row-C geometric clustering theorem
+  -> exact CoreClusteringEstimate for the OS/Hilbert dense-core consumer.
+```
+
+Once `RowCToDenseCoreClusteringWeld` and the physical `DenseCoreProjectionData` exist, spectral exclusion and the positive dense-core gap are compiler output.
+
+This is presently the strongest bridge between the modern CMP119/CMP116/Row-C work and Paper 3's continuum spectral theorem. It does **not** identify the finite/local Row-C observable carrier with the continuum OS/Wightman dense core by fiat.
+
 ### Manuscript Theorem 5.2 — H3a from constructive RG inputs
 
 Paper statement: Balaban multiscale fluctuation-integral control + large/small-field decomposition + polymer activity decay + Casimir suppression produce trace-norm transfer convergence on the vacuum-orthogonal sector.
@@ -88,9 +120,10 @@ Current formal status:
 
 Recommended proof direction:
 
-1. construct the physical recovery-system producer first if possible, because the lower-gap transfer algebra is already closed;
-2. retain full trace-norm H3a as the stronger Paper-3 route and prove it separately if the manuscript requires that exact strength;
-3. do not substitute Mosco liminf or status receipts for norm-resolvent/no-pollution theorems.
+1. pursue the Row-C -> dense-core same-object weld because both theorem endpoints are already typed and this can turn physical clustering into an actual spectral-exclusion theorem;
+2. in parallel construct the physical recovery-system producer, because the lower-gap transfer algebra is already closed;
+3. retain full trace-norm H3a as the stronger Paper-3 route and prove it separately if the manuscript requires that exact strength;
+4. do not substitute Mosco liminf, sprint receipts, or status Booleans for norm-resolvent/no-pollution theorems.
 
 ## Paper 8 — Unification / closure grammar
 
@@ -129,15 +162,33 @@ Current status:
 - UCT.3 matched Carleman/unique-continuation theorem: **open**;
 - UCT.4 cross-term nullity: **compiler target present, physical theorem open**.
 
-No concrete in-repo UCT.1 PDE producer was located by exact/semantic search; the current repo contains the target/agenda but not the theorem.
+No concrete in-repo UCT.1 PDE producer was located by exact/semantic search; the current repo contains the target/agenda but not the theorem. `UnificationCrossTermNullityDiscriminantBoundary` explicitly classifies the discriminant/Cauchy-Schwarz route as seed evidence only, not UCT.1 payment.
+
+### UCT.4 -> UCT.5 typed transport
+
+New formal owner:
+
+- `DASHI/Physics/Closure/UnificationUCT4ToModuloNullLinearityExact.agda`
+
+The actual proof chain now has a theorem-bearing compiler:
+
+```text
+UCT.4 nullClass(actual cross term)
+  + nullClass x -> moduloNullEqual x zeroV
+  + representative / G invariance
+  + zero residual -> modulo-additivity transport
+  -> UCT.5 G(s1+s2) = Gs1 + Gs2 modulo null.
+```
+
+The UCT.5 conclusion is genuinely derived once the quotient-semantics inputs are supplied. The missing quotient semantics are not represented as status Booleans in the new path.
 
 ### UCT.4 -> UCT.5 is not automatic
 
-Existing owner:
+Existing boundary owner:
 
 - `DASHI/Physics/Closure/UnificationNullToQuotientEqualityTransportBoundary.agda`
 
-After cross-term nullity, the full proof still needs:
+The full proof still needs:
 
 1. `nullClass x -> moduloNullEqual x zeroV`;
 2. representative invariance of nullity/equality;
@@ -166,7 +217,16 @@ Existing boundary modules record these consumers, but the theorem-bearing null/e
 
 ### YM
 
-Non-dominated first mathematical producer:
+Non-dominated same-object producer:
+
+```text
+Row-C UniformGeometricConnectedClustering
+  -> OS/Wightman dense centered core clustering estimate
+```
+
+because both sides already have theorem-bearing carriers and the downstream dense-core spectral-exclusion theorem is closed.
+
+Parallel non-dominated physical producer:
 
 ```text
 physical VacuumOrthogonalRecoverySystem
@@ -192,14 +252,15 @@ UCT.1 exact overlap residual PDE
 
 No in-repo inhabitant has been found. Until that PDE is fixed, UCT.2–UCT.4 cannot be honestly proved.
 
-Nonanalytic downstream proof work available immediately:
+Nonanalytic downstream proof work now typed:
 
 ```text
 nullClass x -> quotient equality with zero
 + representative/congruence theorems
+-> UCT.5 modulo-null additivity.
 ```
 
-These can be developed independently of the missing Carleman analysis and will be consumed once UCT.4 lands.
+This can be developed independently of the missing Carleman analysis and is immediately consumed once UCT.4 lands.
 
 ## Validation boundary
 
