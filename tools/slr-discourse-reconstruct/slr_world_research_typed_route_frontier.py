@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -103,7 +104,8 @@ def main() -> int:
         "SLR_TYPED_ROUTE_FRONTIER_WELD_RECEIPT "
         f"schema={SCHEMA} obligations={len(welded['closure'].get('acquisition_obligations') or [])} "
         "typed_route_frontier_locked=true typed_route_selection_rewrites_truth=false "
-        "pareto_dimensions_scalarized=false candidate_only=true semantic_promotion=false"
+        "pareto_dimensions_scalarized=false candidate_only=true semantic_promotion=false",
+        file=sys.stderr,
     )
     return 0
 
