@@ -4,7 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- ROLLING-SHUTTER ROW-TIME POSE TRANSPORT
+-- ROLLING-SHUTTER ROW-TIME POSE TRANSPORT + READOUT CANDIDATE
 ------------------------------------------------------------------------
 
 record RollingShutterPoseTransportReceipt : Set where
@@ -18,8 +18,6 @@ record RollingShutterPoseTransportReceipt : Set where
     candidateKeyframeBracketRequired : Bool
     translationInterpolationImplemented : Bool
     SO3RotationInterpolationImplemented : Bool
-    suppliedReadoutModelRequired : Bool
-    readoutCalibrationEstimated : Bool
     outputRemainsCandidate : Bool
 
 open RollingShutterPoseTransportReceipt public
@@ -28,17 +26,42 @@ currentRollingShutterPoseTransportReceipt : RollingShutterPoseTransportReceipt
 currentRollingShutterPoseTransportReceipt =
   rolling-shutter-pose-transport-receipt
     "chboishabba/animalexic/scripts/rolling_shutter_pose_transport.py"
-    true true true true true true true true false true
+    true true true true true true true true
+
+record RollingShutterReadoutCandidateReceipt : Set where
+  constructor rolling-shutter-readout-candidate-receipt
+  field
+    rowTimingObservationsRequired : Bool
+    rowTimingProvenanceRequired : Bool
+    normalizedRowSpanGateImplemented : Bool
+    centredLinearTimingFitImplemented : Bool
+    readoutMagnitudeCandidateProduced : Bool
+    directionCandidateProduced : Bool
+    timingResidualGateCanAbstain : Bool
+    outputPaysReadoutCalibration : Bool
+
+open RollingShutterReadoutCandidateReceipt public
+
+currentRollingShutterReadoutCandidateReceipt : RollingShutterReadoutCandidateReceipt
+currentRollingShutterReadoutCandidateReceipt =
+  rolling-shutter-readout-candidate-receipt
+    true true true true true true true false
 
 data RowTimeTransportImpliesReadoutCalibrationPermission : Set where
+
+data LowRowTimingResidualImpliesReadoutPaymentPermission : Set where
 
 data SuppliedReadoutImpliesFieldRollingShutterValidationPermission : Set where
 
 data InterpolatedRowPoseImpliesPromotedCameraPosePermission : Set where
 
-rowTimeTransportDoesNotEstimateReadout :
+rowTimeTransportDoesNotEstimateOrPayReadout :
   RowTimeTransportImpliesReadoutCalibrationPermission → ⊥
-rowTimeTransportDoesNotEstimateReadout ()
+rowTimeTransportDoesNotEstimateOrPayReadout ()
+
+lowTimingResidualDoesNotAutoPayReadout :
+  LowRowTimingResidualImpliesReadoutPaymentPermission → ⊥
+lowTimingResidualDoesNotAutoPayReadout ()
 
 suppliedReadoutDoesNotValidateFieldRollingShutter :
   SuppliedReadoutImpliesFieldRollingShutterValidationPermission → ⊥
@@ -52,10 +75,11 @@ record RollingShutterRoadmapStatus : Set where
   constructor rolling-shutter-roadmap-status
   field
     rowTimeTransportImplemented : Bool
-    readoutDirectionImplemented : Bool
+    readoutDirectionTransportImplemented : Bool
     rowPoseInterpolationImplemented : Bool
-    readoutTimeCandidateEstimationPaid : Bool
-    readoutDirectionCandidateEstimationPaid : Bool
+    readoutTimeCandidateEstimatorImplemented : Bool
+    readoutDirectionCandidateEstimatorImplemented : Bool
+    readoutCandidateAcceptancePaymentImplemented : Bool
     imageResidualRollingShutterValidationPaid : Bool
     realPhoneRollingShutterValidated : Bool
 
@@ -63,4 +87,4 @@ open RollingShutterRoadmapStatus public
 
 currentRollingShutterRoadmapStatus : RollingShutterRoadmapStatus
 currentRollingShutterRoadmapStatus =
-  rolling-shutter-roadmap-status true true true false false false false
+  rolling-shutter-roadmap-status true true true true true false false false
