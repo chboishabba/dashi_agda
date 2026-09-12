@@ -110,8 +110,93 @@ consumerIndexedBoundary : Consumer.ConsumerIndexedModelBoundary
 consumerIndexedBoundary = Consumer.canonicalConsumerIndexedModelBoundary
 
 ------------------------------------------------------------------------
+-- PRODUCER PARITY
+--
+-- The known-pose Issue-20 producer and an image-recovered pose may share the
+-- same downstream CameraObservation/ray/voxel consumer contract once metric
+-- scale is paid.  Contract parity is not evidence-quality parity and does not
+-- erase provenance.
+------------------------------------------------------------------------
+
+record PoseProducerParity : Set where
+  constructor pose-producer-parity
+  field
+    sameCameraObservationCarrier : Bool
+    sameRayProjectionConsumer : Bool
+    sameVoxelSurfelGovernanceConsumer : Bool
+    provenanceDistinguishesKnownFromRecovered : Bool
+    metricScaleRequiredForWorldGridParity : Bool
+    numericalPoseEqualityRequired : Bool
+    equalEvidenceQualityClaimed : Bool
+
+open PoseProducerParity public
+
+currentPoseProducerParity : PoseProducerParity
+currentPoseProducerParity =
+  pose-producer-parity
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+
+data SameConsumerContractImpliesEqualEvidenceQualityPermission : Set where
+
+data ScaleFreeRelativePoseImpliesMetricWorldParityPermission : Set where
+
+data SyntheticRecoveryImpliesHandheldFieldValidationPermission : Set where
+
+sameConsumerContractDoesNotEqualiseEvidenceQuality :
+  SameConsumerContractImpliesEqualEvidenceQualityPermission → ⊥
+sameConsumerContractDoesNotEqualiseEvidenceQuality ()
+
+scaleFreeRelativePoseDoesNotEnterMetricWorldByItself :
+  ScaleFreeRelativePoseImpliesMetricWorldParityPermission → ⊥
+scaleFreeRelativePoseDoesNotEnterMetricWorldByItself ()
+
+syntheticRecoveryDoesNotValidateHandheldFieldUse :
+  SyntheticRecoveryImpliesHandheldFieldValidationPermission → ⊥
+syntheticRecoveryDoesNotValidateHandheldFieldUse ()
+
+------------------------------------------------------------------------
+-- Implementation receipts are kept separate from empirical validation.  The
+-- controlled perturbation and calibrated two-view recovery producers now
+-- exist in the Animalexic runtime, but the real Issue-20 archive and handheld
+-- phone trajectories still owe their empirical validation receipts.
+------------------------------------------------------------------------
+
+record PoseRecoveryImplementationStatus : Set where
+  constructor pose-recovery-implementation-status
+  field
+    controlledPerturbationProducerImplemented : Bool
+    staticCorrespondenceRecoveryImplemented : Bool
+    dynamicTrackMaskImplemented : Bool
+    metricScaleGateImplemented : Bool
+    cameraObservationParityAdapterImplemented : Bool
+    syntheticRecoveryProbePaid : Bool
+    issue20ArchiveRecoveryValidated : Bool
+    handheldPhoneTrajectoryValidated : Bool
+
+open PoseRecoveryImplementationStatus public
+
+currentPoseRecoveryImplementationStatus : PoseRecoveryImplementationStatus
+currentPoseRecoveryImplementationStatus =
+  pose-recovery-implementation-status
+    true
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+
+------------------------------------------------------------------------
 -- Regime ladder retained explicitly so known-pose Issue-20 execution cannot
--- collapse directly into handheld success.
+-- collapse directly into handheld success.  The first three rungs now have
+-- executable producers; later rungs remain unpaid.
 ------------------------------------------------------------------------
 
 record MultiCameraPoseRoadmap : Set where
@@ -132,8 +217,8 @@ currentPoseRoadmap : MultiCameraPoseRoadmap
 currentPoseRoadmap =
   multi-camera-pose-roadmap
     true
-    false
-    false
+    true
+    true
     false
     false
     false
