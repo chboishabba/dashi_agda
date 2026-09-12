@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.JamesSensorimotorDecisionActionExact as James
 import DASHI.Cognition.PNF.MemoryFibre as Memory
+import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Decision
 
 ------------------------------------------------------------------------
 -- Focused regression: the James owner must retain active-sensing recurrence,
@@ -21,9 +22,10 @@ record JamesSensorimotorRegression (memory : Memory.MemoryFibre) : Set where
         (James.activeSensingStep
           (James.sensorimotorEpisode
             James.neutralEnvironment
+            James.neutralBody
             James.neutralSensation
             James.supportSensorimotor
-            James.Decision.supportAction
+            Decision.supportAction
             memory))
       ≡ James.supportFeedback
 
@@ -36,8 +38,7 @@ record JamesSensorimotorRegression (memory : Memory.MemoryFibre) : Set where
       ≡ James.sensorimotorProjection (James.counterMechanismEpisode memory) → ⊥
 
     determinismNotPromoted :
-      James.JamesWrongTypeBoundary.paperProvesDeterminism
-        James.canonicalJamesWrongTypeBoundary
+      James.paperProvesDeterminism James.canonicalJamesWrongTypeBoundary
       ≡ false
 
 open JamesSensorimotorRegression public
