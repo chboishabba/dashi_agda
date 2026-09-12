@@ -1,14 +1,20 @@
 module DASHI.Culture.MissingDeceasedChineseScienceImplementationEverything where
 
 -- Focused science-implementation aggregate for the nine retained Chinese
--- scientists.  Event identity/cause remains outside these domain owners.
+-- scientists. Event identity/cause remains outside these domain owners.
 
 import DASHI.ComputerScience.ChenShumingGraphHardwareVerificationBidiExact
+import DASHI.ComputerScience.ChenShumingGraphHardwareVerificationFiniteWitnessExact
 import DASHI.GameTheory.FengYangheMilitaryAIGameStatisticsBidiExact
 import DASHI.Physics.Materials.ZhouGuangyuanPolyimideAerogelBidiExact
+import DASHI.Physics.Materials.ZhouGuangyuanPolyimideAerogelFiniteWitnessExact
 import DASHI.ComputerScience.LiuDonghaoDSMMBidiExact
+import DASHI.ComputerScience.LiuDonghaoDSMMFiniteWitnessExact
 import DASHI.Physics.SpaceWeather.ZhangXiaoxinGeomagneticForecastBidiExact
+import DASHI.Physics.SpaceWeather.ZhangXiaoxinGeomagneticForecastFiniteWitnessExact
 import DASHI.Control.ZhangDaibingUAVControlBidiExact
+import DASHI.Control.ZhangDaibingUAVControlFiniteWitnessExact
 import DASHI.Biology.LiMinyongPhotopharmacologyBidiExact
+import DASHI.Biology.LiMinyongPhotopharmacologyFiniteWitnessExact
 import DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact
 import DASHI.Physics.Aerospace.YanHongHypersonicFlowControlBidiExact
