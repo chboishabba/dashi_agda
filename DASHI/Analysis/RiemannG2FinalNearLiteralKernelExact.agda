@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as NearFar
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
@@ -88,6 +89,52 @@ record FinalNearLiteralKernel
     kernelReference : String
 
 open FinalNearLiteralKernel public
+
+------------------------------------------------------------------------
+-- CROSS-PROVER REPRESENTATION FACTORIZATION
+--
+-- The checked Lean return and the final literal kernel currently meet at one
+-- representation equality.  For acquisition and transport work it is useful to
+-- expose the least same-object factorization of that equality without changing
+-- the final consumer:
+--
+--   final nearResponseAt(chosen J)
+--      = checked/imported finite-near scalar
+--      = literal finite cell fold.
+--
+-- Neither equality is manufactured here.  The first is the cross-prover
+-- same-carrier transport; the second is the literal-summand/fold identification.
+-- Once both are supplied, the final R1 equality is compiler output by transitivity.
+------------------------------------------------------------------------
+
+record FinalNearCheckedScalarBridge
+    {S : NearFar.OrderedAdditiveNearFarSurface}
+    {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
+    (offInput : Direct.DirectLiteralOffTargetInput S transport)
+    (literalFiniteNearValue : NearFar.Scalar S) : Set where
+  field
+    checkedNearScalar : NearFar.Scalar S
+
+    finalNearResponseIsCheckedNearScalar :
+      Transport.nearResponseAt transport (Direct.chosenCutoff offInput)
+      ≡ checkedNearScalar
+
+    checkedNearScalarIsLiteralFiniteNearValue :
+      checkedNearScalar ≡ literalFiniteNearValue
+
+open FinalNearCheckedScalarBridge public
+
+compileFinalNearRepresentationEquality :
+  forall {S transport} ->
+  (offInput : Direct.DirectLiteralOffTargetInput S transport) ->
+  {literalFiniteNearValue : NearFar.Scalar S} ->
+  FinalNearCheckedScalarBridge offInput literalFiniteNearValue ->
+  Transport.nearResponseAt transport (Direct.chosenCutoff offInput)
+  ≡ literalFiniteNearValue
+compileFinalNearRepresentationEquality offInput bridge =
+  trans
+    (finalNearResponseIsCheckedNearScalar bridge)
+    (checkedNearScalarIsLiteralFiniteNearValue bridge)
 
 compileFinalPoleNearLiteralModel :
   forall {S transport} ->
@@ -181,4 +228,4 @@ canonicalFinalNearLiteralKernelBoundary =
     false refl
     false refl
     false refl
-    "Representation is evaluator-independent. Realize the literal universal-pole-quotient finite kernel and prove nearResponseAt(chosen J)=finiteNearSum(cellResponse); then the existing FinalPoleNearLiteralModel is compiler output. Numerical/symbolic certificates consume this kernel downstream rather than being prerequisites. No selected Weil window or determinant consumer is required, and no strict ClusterResponse inequality or RH is proved here."
+    "Representation is evaluator-independent. The final R1 equality may be acquired directly or factored through one checked/imported near scalar: first identify final nearResponseAt(chosen J) with that scalar, then identify the same scalar with the literal finite cell fold. The bridge composes those same-object equalities only; it does not manufacture either one. Numerical/symbolic certificates remain downstream, no selected Weil window or determinant consumer is required, and no strict ClusterResponse inequality or RH is proved here."
