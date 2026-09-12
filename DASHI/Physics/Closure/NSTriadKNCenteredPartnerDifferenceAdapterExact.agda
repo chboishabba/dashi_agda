@@ -25,14 +25,22 @@ module DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact wher
 -- represented below as exact vector addition rather than a new scalar carrier.
 --
 -- On the tighter R207 fixed-output carrier, Round176 then rewrites every
--- canonical K_tau through the SAME selected output vector.  This is the first
--- quotient-facing normalization: raw output labels are erased, while the
--- amplitude data actually seen by the slot kernel are retained exactly.
+-- canonical K_tau through the SAME selected output vector.  The fixed-output
+-- slot formula is bilinear in its two velocity arguments, so the difference
+-- between two physical slots telescopes exactly into one left-amplitude
+-- increment plus one right-amplitude increment:
+--
+--   Phi_k(a,b) - Phi_k(c,d)
+--     = Phi_k(a-c,b) + Phi_k(c,b-d).
+--
+-- This is the first quotient-facing normalization: raw output labels are
+-- erased, while the amplitude data actually seen by the slot kernel are
+-- retained exactly.
 --
 -- No norm estimate, radial/Pluecker estimate, centered second-moment estimate,
 -- cutoff aggregation, spacetime estimate, or Clay promotion is introduced.
--- The next genuine analytic splice is a PAIRWISE amplitude-aware separation
--- theorem for these fixed-output slot formulas.  R128's radial/Pluecker identity
+-- The next genuine analytic splice is a quantitative estimate on the two
+-- exact amplitude-increment branches above.  R128's radial/Pluecker identity
 -- is a geometric donor for that theorem, not by itself a lower separation.
 ------------------------------------------------------------------------
 
@@ -182,18 +190,115 @@ compressedPartnerDifferenceIsDoubleSlotKernelDifference alpha beta
 -- P1a / Fixed-output quotient normalization through the literal output vector.
 ------------------------------------------------------------------------
 
-literalOutputSlotFormula :
-  (E : C3.IntegerEmbedding F) →
-  Z3.FourierMode →
+literalSlotFormulaAtWave :
+  C3.Complex3 F →
   C3.Complex3 F → C3.Complex3 F → C3.Complex3 F
-literalOutputSlotFormula E output uP uQ =
-  let waveK = C3.modeVector E output
-  in
+literalSlotFormulaAtWave waveK uP uQ =
   C3.complex3Subtract
     (C3.complex3Add
       (C3.complex3Scale (C3.bilinearDot3 waveK uQ) uP)
       (C3.complex3Scale (C3.bilinearDot3 uP waveK) uQ))
     (C3.complex3Scale (C3.bilinearDot3 uP uQ) waveK)
+
+literalOutputSlotFormula :
+  (E : C3.IntegerEmbedding F) →
+  Z3.FourierMode →
+  C3.Complex3 F → C3.Complex3 F → C3.Complex3 F
+literalOutputSlotFormula E output =
+  literalSlotFormulaAtWave (C3.modeVector E output)
+
+literalSlotFormulaDifferenceTelescopesLeft :
+  (waveK a b c d : C3.Complex3 F) →
+  C3.complex3Subtract
+    (literalSlotFormulaAtWave waveK a b)
+    (literalSlotFormulaAtWave waveK c d)
+  ≡ C3.complex3Add
+      (literalSlotFormulaAtWave waveK (C3.complex3Subtract a c) b)
+      (literalSlotFormulaAtWave waveK c (C3.complex3Subtract b d))
+literalSlotFormulaDifferenceTelescopesLeft
+    (C3.complex3 kx ky kz)
+    (C3.complex3 ax ay az)
+    (C3.complex3 bx by bz)
+    (C3.complex3 cx cy cz)
+    (C3.complex3 dx dy dz) =
+  Field.complex3Ext
+    (R.solve 15 goalX refl
+      kx ky kz ax ay az bx by bz cx cy cz dx dy dz)
+    (R.solve 15 goalY refl
+      kx ky kz ax ay az bx by bz cx cy cz dx dy dz)
+    (R.solve 15 goalZ refl
+      kx ky kz ax ay az bx by bz cx cy cz dx dy dz)
+  where
+  module R = Ring.Solver F
+
+  dot = λ x y z X Y Z →
+    ((x R.⊗ X) R.⊕ (y R.⊗ Y)) R.⊕ (z R.⊗ Z)
+
+  sub = λ x y → x R.⊕ (R.⊝ y)
+
+  phiX = λ kx ky kz ax ay az bx by bz →
+    (((dot kx ky kz bx by bz R.⊗ ax)
+      R.⊕ (dot ax ay az kx ky kz R.⊗ bx))
+      R.⊕ (R.⊝ (dot ax ay az bx by bz R.⊗ kx)))
+
+  phiY = λ kx ky kz ax ay az bx by bz →
+    (((dot kx ky kz bx by bz R.⊗ ay)
+      R.⊕ (dot ax ay az kx ky kz R.⊗ by))
+      R.⊕ (R.⊝ (dot ax ay az bx by bz R.⊗ ky)))
+
+  phiZ = λ kx ky kz ax ay az bx by bz →
+    (((dot kx ky kz bx by bz R.⊗ az)
+      R.⊕ (dot ax ay az kx ky kz R.⊗ bz))
+      R.⊕ (R.⊝ (dot ax ay az bx by bz R.⊗ kz)))
+
+  goalX = λ kx ky kz ax ay az bx by bz cx cy cz dx dy dz →
+    (phiX kx ky kz ax ay az bx by bz
+      R.⊕ (R.⊝ (phiX kx ky kz cx cy cz dx dy dz)))
+    R.⊜
+    (phiX kx ky kz
+      (sub ax cx) (sub ay cy) (sub az cz)
+      bx by bz
+      R.⊕
+      phiX kx ky kz
+        cx cy cz
+        (sub bx dx) (sub by dy) (sub bz dz))
+
+  goalY = λ kx ky kz ax ay az bx by bz cx cy cz dx dy dz →
+    (phiY kx ky kz ax ay az bx by bz
+      R.⊕ (R.⊝ (phiY kx ky kz cx cy cz dx dy dz)))
+    R.⊜
+    (phiY kx ky kz
+      (sub ax cx) (sub ay cy) (sub az cz)
+      bx by bz
+      R.⊕
+      phiY kx ky kz
+        cx cy cz
+        (sub bx dx) (sub by dy) (sub bz dz))
+
+  goalZ = λ kx ky kz ax ay az bx by bz cx cy cz dx dy dz →
+    (phiZ kx ky kz ax ay az bx by bz
+      R.⊕ (R.⊝ (phiZ kx ky kz cx cy cz dx dy dz)))
+    R.⊜
+    (phiZ kx ky kz
+      (sub ax cx) (sub ay cy) (sub az cz)
+      bx by bz
+      R.⊕
+      phiZ kx ky kz
+        cx cy cz
+        (sub bx dx) (sub by dy) (sub bz dz))
+
+literalOutputSlotFormulaDifferenceTelescopesLeft :
+  (E : C3.IntegerEmbedding F) →
+  (output : Z3.FourierMode) →
+  (a b c d : C3.Complex3 F) →
+  C3.complex3Subtract
+    (literalOutputSlotFormula E output a b)
+    (literalOutputSlotFormula E output c d)
+  ≡ C3.complex3Add
+      (literalOutputSlotFormula E output (C3.complex3Subtract a c) b)
+      (literalOutputSlotFormula E output c (C3.complex3Subtract b d))
+literalOutputSlotFormulaDifferenceTelescopesLeft E output =
+  literalSlotFormulaDifferenceTelescopesLeft (C3.modeVector E output)
 
 fixedOutputSlotKernelIsLiteralOutputFormula :
   ∀ {E : C3.IntegerEmbedding F}
@@ -335,6 +440,9 @@ roundCenteredPartnerDoubleSlotKernelDifferenceClosed = true
 roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosed : Bool
 roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosed = true
 
+roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosed : Bool
+roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosed = true
+
 roundCenteredPartnerRadialPlueckerDefectWeldClosed : Bool
 roundCenteredPartnerRadialPlueckerDefectWeldClosed = false
 
@@ -366,6 +474,10 @@ roundCenteredPartnerDoubleSlotKernelDifferenceClosedIsTrue = refl
 roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosedIsTrue :
   roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosed ≡ true
 roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosedIsTrue = refl
+
+roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosedIsTrue :
+  roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosed ≡ true
+roundCenteredPartnerFixedOutputSlotDifferenceTelescopeClosedIsTrue = refl
 
 roundCenteredPartnerRadialPlueckerDefectWeldClosedIsFalse :
   roundCenteredPartnerRadialPlueckerDefectWeldClosed ≡ false
