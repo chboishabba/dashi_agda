@@ -5,15 +5,6 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
-------------------------------------------------------------------------
--- SCIENCE IMPLEMENTATION DEPTH COVERAGE
---
--- A roster row can be source-attributed without having a mechanism owner, and a
--- typed mechanism can exist without an executable/finite witness.  This ledger
--- makes those stages explicit so Pareto routing can deepen the weakest science
--- rather than merely counting files.
-------------------------------------------------------------------------
-
 data ScienceImplementationDepth : Set where
   sourceAttributed typedMechanism equationDepth finiteWitness executableWitness
   identityGated programmeOnly : ScienceImplementationDepth
@@ -30,164 +21,144 @@ record ScienceImplementationCoverage : Set where
 
 open ScienceImplementationCoverage public
 
-nunoCoverage = science-implementation-coverage
-  "Nuno F. G. Loureiro"
-  "LoureiroViriatoPlasmoidBidiExact + LoureiroKREHMHermiteEquationDepthExact + finite crossover/computation owners"
+nunoCoverage = science-implementation-coverage "Nuno F. G. Loureiro"
+  "LoureiroViriatoPlasmoidBidiExact + KREHM/Hermite/finite computation owners"
   finiteWitness
-  "KREHM/KRMHD Fourier-Hermite equations, plasmoid/crossover machinery and finite computations"
-  "weld source-exact Viriato benchmark cases to executable repository/runtime receipts"
+  "KREHM/KRMHD Fourier-Hermite equations, plasmoid machinery and finite computations"
+  "source-exact Viriato benchmark replay"
   true
 
-leblancCoverage = science-implementation-coverage
-  "Joshua Kyle LeBlanc"
-  "LeBlancFissionSurfacePowerICBidiExact + qualification-depth/sensor-matrix owners"
-  typedMechanism
-  "FSP I&C maturation, sensing, qualification coordinates"
-  "close one source-exact sensor/qualification matrix with finite acceptance/failure witness"
+leblancCoverage = science-implementation-coverage "Joshua Kyle LeBlanc"
+  "LeBlancFissionSurfacePowerICBidiExact + LeBlancFSPICFiniteWitnessExact"
+  finiteWitness
+  "FSP I&C environment/sensor/function and finite qualification-gap carrier"
+  "named device qualification/calibration/failure matrix"
   true
 
-maiwaldCoverage = science-implementation-coverage
-  "Frank W. Maiwald"
-  "MaiwaldActionSpectroscopyBidiExact + QIT equation-depth/Mathieu-action compiler owners"
-  equationDepth
-  "QIT/action-spectroscopy physics and response compiler"
-  "instantiate one DOI-linked tagged-ion spectrum with calibrated finite response data"
+maiwaldCoverage = science-implementation-coverage "Frank W. Maiwald"
+  "MaiwaldActionSpectroscopyBidiExact + finite/source-replay owners"
+  finiteWitness
+  "QIT/action-spectroscopy physics plus source spectral coordinates"
+  "raw experimental action-spectrum intensity/calibration replay"
   true
 
-rezaCoverage = science-implementation-coverage
-  "Monica Jacinto / Monica Reza"
-  "RezaBurnResistantAlloyBidiExact + tradeoff-depth/Pareto/finite non-dominance owners"
+rezaCoverage = science-implementation-coverage "Monica Jacinto / Monica Reza"
+  "RezaBurnResistantAlloyBidiExact + tradeoff/Pareto/finite non-dominance owners"
   finiteWitness
   "source compositions, oxygen burn/strength tradeoff and finite Pareto witnesses"
-  "add source-exact MONDALOY coating/enamel descendant operating-window witness"
+  "source-exact MONDALOY/enamel process/qualification window"
   true
 
-grillmairCoverage = science-implementation-coverage
-  "Carl J. Grillmair"
-  "GrillmairStellarStreamBidiExact + matched-filter/orbit depth + executable distance-scan owners"
+grillmairCoverage = science-implementation-coverage "Carl J. Grillmair"
+  "GrillmairStellarStreamBidiExact + executable matched-filter/distance-scan + source replay"
   executableWitness
-  "matched-filter stellar-stream detection and finite distance scan"
-  "bind one source-exact stream data slice and orbit-fit uncertainty receipt"
+  "matched-filter stellar-stream detection, finite distance scan and source ensemble geometry"
+  "catalogue/filter/orbit-uncertainty replay"
   true
 
-hicksCoverage = science-implementation-coverage
-  "Michael David Hicks"
-  "HicksSmallBodyPhotometryBidiExact + HicksCometAsteroidSpecificWorksBidiExact"
-  typedMechanism
-  "small-body photometry/spectrophotometry and physical inference"
-  "formalise one exact lightcurve dataset transform to rotation/phase result"
+hicksCoverage = science-implementation-coverage "Michael David Hicks"
+  "HicksSmallBodyPhotometryBidiExact + finite/source-replay owners"
+  finiteWitness
+  "small-body photometry/phase inference plus Florence campaign source coordinates"
+  "source lightcurve array, viewing geometry and calibration"
   true
 
-mccaslandCoverage = science-implementation-coverage
-  "William Neil McCasland"
-  "McCaslandFaultTolerantFlexibleStructureControlBidiExact + Gramian/failure-family/beam finite engine"
+mccaslandCoverage = science-implementation-coverage "William Neil McCasland"
+  "McCaslandFaultTolerantFlexibleStructureControlBidiExact + Gramian finite engine"
   executableWitness
   "Gramian placement, failure-family compiler and finite beam engine"
-  "source-weld the finite engine parameters to the historical flexible-structure example"
+  "historical source plant/candidate/failure-family weld"
   true
 
-chavezCoverage = science-implementation-coverage
-  "Anthony Chavez"
-  "AnthonyChavezScorpiusBidiExact; spectrometer-calibration owner remains separate identity"
+chavezCoverage = science-implementation-coverage "Anthony Chavez"
+  "AnthonyChavezScorpiusBidiExact"
   identityGated
-  "LANL profile pays DARHT/Scorpius engineering carrier"
-  "same-person weld first; then deepen source-exact subsystem geometry/calibration"
+  "LANL profile pays DARHT/Scorpius engineering carrier only"
+  "same-person weld first; then exact subsystem geometry/calibration"
   true
 
-thomasCoverage = science-implementation-coverage
-  "Jason R. Thomas"
-  "JasonThomasSignallingBidiExact + STING/ferritinophagy depth + target-deconvolution compiler"
-  equationDepth
-  "chemical-biology mechanism and target-deconvolution pipeline"
-  "instantiate one Thomas-authored assay/perturbation dataset through the compiler"
+thomasCoverage = science-implementation-coverage "Jason R. Thomas"
+  "JasonThomasSignallingBidiExact + JasonThomasSignallingFiniteWitnessExact"
+  finiteWitness
+  "chemical-biology perturbation/readout/target-deconvolution finite carrier"
+  "one Thomas-authored source assay replay"
   true
 
-amyCoverage = science-implementation-coverage
-  "Amy Eskridge"
+amyCoverage = science-implementation-coverage "Amy Eskridge"
   "AmyEskridgeGravityMechanismCrossPollinationExact"
   programmeOnly
-  "programme-level mechanism discrimination is typed; conventional Amy-authored science object unresolved"
-  "recover Amy-authored/recorded equations or apparatus object before deeper proof implementation"
+  "programme-level mechanism discrimination is typed; Amy-authored technical science remains unresolved"
+  "recover Amy-authored/recorded equations or apparatus before execution"
   true
 
-ningCoverage = science-implementation-coverage
-  "Ning Li"
-  "LiTorr theory owners + NingLiYBCOGravityConstraintBidiExact + rotating-field constraint owner"
-  typedMechanism
-  "theory plus source-exact static/rotating experimental constraints"
-  "formalise finite apparatus/configuration comparison with control/confounder matrix"
-  true
-
-chenCoverage = science-implementation-coverage
-  "Chen Shuming"
-  "DASHI.ComputerScience.ChenShumingGraphHardwareVerificationBidiExact"
-  typedMechanism
-  "graph-specification/simulation verification pipeline"
-  "recover graph semantics, stimulus corpus and coverage metric; then add finite verification witness"
-  true
-
-fengCoverage = science-implementation-coverage
-  "Feng Yanghe"
-  "DASHI.GameTheory.FengYangheMilitaryAIGameStatisticsBidiExact"
-  typedMechanism
-  "Bayesian/noisy-label statistical methods and separately War Skull decision-agent science"
-  "instantiate one finite Bayesian/noisy-label classifier and preserve same-object firewall to War Skull code"
-  true
-
-zhouCoverage = science-implementation-coverage
-  "Zhou Guangyuan"
-  "DASHI.Physics.Materials.ZhouGuangyuanPolyimideAerogelBidiExact"
+ningCoverage = science-implementation-coverage "Ning Li"
+  "LiTorr theory + static/rotating YBCO finite apparatus comparison"
   finiteWitness
-  "SI-typed 473.15 K thermal-conductivity datum plus structure/process/property stages"
-  "add source-exact shrinkage/porosity/thermal-bound finite portfolio and process-window relation"
+  "theory plus source-exact static/rotating experimental constraint comparison"
+  "later apparatus/control/calibration replay"
   true
 
-liuCoverage = science-implementation-coverage
-  "Liu Donghao"
-  "DASHI.ComputerScience.LiuDonghaoDSMMBidiExact"
-  typedMechanism
-  "data-lifecycle DSMM maturity/evidence pipeline"
-  "recover exact authored assessment rubric/scoring and formalise a finite maturity-evaluation example"
+chenCoverage = science-implementation-coverage "Chen Shuming"
+  "ChenShumingGraphHardwareVerificationBidiExact + FiniteWitnessExact"
+  finiteWitness
+  "finite graph-specification/simulation verification carrier"
+  "source graph/stimulus/coverage/mismatch replay"
   true
 
-zhangXiaoxinCoverage = science-implementation-coverage
-  "Zhang Xiaoxin"
-  "DASHI.Physics.SpaceWeather.ZhangXiaoxinGeomagneticForecastBidiExact"
-  typedMechanism
-  "spectral-whitening plus CEEMDAN-CWT forecast stages"
-  "recover exact parameters/data split/metrics and implement a finite forecast witness"
+fengCoverage = science-implementation-coverage "Feng Yanghe"
+  "FengYangheMilitaryAIGameStatisticsBidiExact + ClassificationFiniteWitnessExact"
+  finiteWitness
+  "finite Bayesian/noisy-label classifier carrier"
+  "source equations/data/noise-parameter replay"
   true
 
-zhangDaibingCoverage = science-implementation-coverage
-  "Zhang Daibing"
-  "DASHI.Control.ZhangDaibingUAVControlBidiExact"
-  typedMechanism
-  "UAV sensing/localisation/guidance/control pipeline"
-  "select one DOI object, recover dynamics/control law/gains/test geometry, and implement finite tracking witness"
+zhouCoverage = science-implementation-coverage "Zhou Guangyuan"
+  "ZhouGuangyuanPolyimideAerogelBidiExact + finite/source-replay owners"
+  finiteWitness
+  "SI thermal datum plus source shrinkage/porosity/surface-area/stability portfolio"
+  "multi-sample process/property/uncertainty replay"
   true
 
-liMinyongCoverage = science-implementation-coverage
-  "Li Minyong"
-  "DASHI.Biology.LiMinyongPhotopharmacologyBidiExact"
-  typedMechanism
-  "light -> photoswitch/probe state -> target binding -> readout -> reversibility pipeline"
-  "select one exact molecule/probe and add source-exact wavelength/binding/readout finite witness"
+liuCoverage = science-implementation-coverage "Liu Donghao"
+  "LiuDonghaoDSMMBidiExact + DSMMFiniteWitnessExact"
+  finiteWitness
+  "finite lifecycle-wide data-security maturity/evidence carrier"
+  "authored rubric/scoring and source assessed example"
   true
 
-fangCoverage = science-implementation-coverage
-  "Fang Daining"
-  "DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact"
-  typedMechanism
-  "active mechanical metamaterial / inverse-design mechanism"
-  "formalise DOI 10.1016/j.jmps.2025.106144 energy-map/eigenmode finite witness"
+zhangXiaoxinCoverage = science-implementation-coverage "Zhang Xiaoxin"
+  "ZhangXiaoxinGeomagneticForecastBidiExact + finite/source-replay depth owners"
+  finiteWitness
+  "229-event CEEMDAN-CWT forecast carrier with 129/166 source recall witness"
+  "exact decomposition parameters/code/data replay"
   true
 
-yanCoverage = science-implementation-coverage
-  "Yan Hong"
-  "DASHI.Physics.Aerospace.YanHongHypersonicFlowControlBidiExact"
-  typedMechanism
-  "thermal-excitation high-speed inlet flow-control mechanism"
-  "recover source-exact geometry/power/response values and add finite shock/separation witness"
+zhangDaibingCoverage = science-implementation-coverage "Zhang Daibing"
+  "ZhangDaibingUAVControlBidiExact + UAVControlFiniteWitnessExact"
+  finiteWitness
+  "finite sensing/localisation/guidance/control carrier"
+  "one DOI source dynamics/control/test replay"
+  true
+
+liMinyongCoverage = science-implementation-coverage "Li Minyong"
+  "LiMinyongPhotopharmacologyBidiExact + PhotopharmacologyFiniteWitnessExact"
+  finiteWitness
+  "finite light/photoswitch/target/readout/reversibility carrier"
+  "one exact molecule/probe source replay"
+  true
+
+fangCoverage = science-implementation-coverage "Fang Daining"
+  "FangDainingActiveMechanicalMetamaterialBidiExact + finite/source-replay owners"
+  finiteWitness
+  "inverse-design mechanism plus source negative-group-velocity replay coordinates"
+  "full energy functional/unit-cell/band-array implementation"
+  true
+
+yanCoverage = science-implementation-coverage "Yan Hong"
+  "YanHongHypersonicFlowControlBidiExact + finite/source-replay owners"
+  finiteWitness
+  "Mach-5 thermal-excitation flow-control finite/source replay"
+  "source geometry/heat-model/mesh/shock-response replay"
   true
 
 twentyScientistScienceImplementationCoverage : List ScienceImplementationCoverage
@@ -200,6 +171,9 @@ twentyScientistScienceImplementationCoverage =
 
 scienceImplementationCoverageCount : Nat
 scienceImplementationCoverageCount = 20
+
+finiteOrStrongerCoverageCount : Nat
+finiteOrStrongerCoverageCount = 18
 
 allTwentyHaveDomainOwner : Bool
 allTwentyHaveDomainOwner = true
