@@ -58,10 +58,22 @@ REQUIRED = {
         "advertisedHighHeatCapabilityDoesNotProveDwellingSuitability",
         "canonicalHighHeatCookingPareto",
     ],
+    "DASHI/Law/SensibLawSpringfieldEnergyTransitionLineageExact.agda": [
+        "module DASHI.Law.SensibLawSpringfieldEnergyTransitionLineageExact where",
+        "energexGasRollout2004",
+        "engieNetZeroAlliance2018",
+        "energexNetZeroStudy",
+        "historicalGasBuildoutDoesNotProveCurrentFossilPolicy",
+        "netZeroAllianceDoesNotProveGasRemoval",
+        "electrificationStudyDoesNotProveExistingGasDecommissioning",
+        "gasLegacyVersusTransitionResidual",
+        "canonicalEnergyTransitionPareto",
+    ],
     "DASHI/Law/SensibLawWoogarooPreservationEverything.agda": [
         "import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact",
         "import DASHI.Law.SensibLawSpringfieldResidentialGasEndpointLockInExact",
         "import DASHI.Law.SensibLawSpringfieldHighHeatCookingEnvelopeExact",
+        "import DASHI.Law.SensibLawSpringfieldEnergyTransitionLineageExact",
     ],
 }
 
@@ -79,4 +91,4 @@ for rel, needles in REQUIRED.items():
 if missing:
     raise SystemExit("\n".join(missing))
 
-print("Springfield gas/lobbying/ownership + residential endpoint/high-heat envelope snowball static contract: OK")
+print("Springfield gas/lobbying/ownership + endpoint/high-heat/energy-transition snowball static contract: OK")
