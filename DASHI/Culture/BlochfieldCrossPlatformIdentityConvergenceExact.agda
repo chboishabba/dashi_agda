@@ -17,12 +17,16 @@ import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact as Creator
 --     profile coordinate @gmnevergiveup;
 --   * Link3: 0xyasanacreto.cyber, featured content explicitly attributed to
 --     Yasmin Anacreto; the inspected "What's a Galactic G?" snippet describes
---     web3 activity and explicitly names @Galxe.
+--     web3 activity and explicitly names @Galxe;
+--   * Link3 exposes an Ethereum transfer receiver only as 0x00a...8f530.
 --
--- Correction: no inspected source links "Galactic G" to @gmnevergiveup.
--- That lexical/project relation is therefore unpaid and must not be used as an
--- identity bridge.  The remaining convergence is same display name + web3
--- context, still insufficient for authenticated same-person identity.
+-- Corrections / payment boundaries:
+--   * no inspected source links "Galactic G" to @gmnevergiveup;
+--   * the truncated receiver fragment is not a full wallet address and cannot
+--     establish wallet identity, wallet ownership, or same-person identity.
+--
+-- The remaining convergence is same display name + web3 context, still
+-- insufficient for authenticated same-person identity.
 ------------------------------------------------------------------------
 
 record CrossPlatformConvergenceCandidate : Set where
@@ -35,12 +39,16 @@ record CrossPlatformConvergenceCandidate : Set where
     xProfileCoordinate : String
     link3FeaturedCoordinate : String
     inspectedLink3Reference : String
+    link3TransferReceiverFragment : String
     convergenceStrongerThanNameAlone : Bool
     convergenceStrongerThanNameAloneIsTrue :
       convergenceStrongerThanNameAlone ≡ true
     galacticGToGmNeverGiveUpRelationPaid : Bool
     galacticGToGmNeverGiveUpRelationPaidIsFalse :
       galacticGToGmNeverGiveUpRelationPaid ≡ false
+    link3FullWalletAddressPaid : Bool
+    link3FullWalletAddressPaidIsFalse :
+      link3FullWalletAddressPaid ≡ false
     exactSamePersonIdentityPaid : Bool
     exactSamePersonIdentityPaidIsFalse :
       exactSamePersonIdentityPaid ≡ false
@@ -57,7 +65,9 @@ link3XGalacticGConvergenceCandidate =
     "@gmnevergiveup"
     "What's a Galactic G?"
     "inspected Link3 snippet explicitly names @Galxe; no gmnevergiveup relation located"
+    "0x00a...8f530"
     true refl
+    false refl
     false refl
     false refl
 
@@ -70,10 +80,9 @@ crossPlatformIdentityWeldStillUnpaid =
   Creator.genealogyStanding Creator.crossPlatformIdentityWeld
 
 data MultiCoordinateConvergencePaysSamePerson : Set where
-
 data SharedWeb3ContextPaysSamePerson : Set where
-
 data GalacticGNamesGmNeverGiveUp : Set where
+data TruncatedWalletFragmentPaysWalletIdentity : Set where
 
 multiCoordinateConvergenceDoesNotPaySamePerson :
   MultiCoordinateConvergencePaysSamePerson → ⊥
@@ -87,6 +96,10 @@ galacticGDoesNotPayGmNeverGiveUpRelation :
   GalacticGNamesGmNeverGiveUp → ⊥
 galacticGDoesNotPayGmNeverGiveUpRelation ()
 
+truncatedWalletFragmentDoesNotPayWalletIdentity :
+  TruncatedWalletFragmentPaysWalletIdentity → ⊥
+truncatedWalletFragmentDoesNotPayWalletIdentity ()
+
 ------------------------------------------------------------------------
 -- Semantic checksum:
 --
@@ -96,12 +109,12 @@ galacticGDoesNotPayGmNeverGiveUpRelation ()
 --   "Galactic G" snippet -> @Galxe
 --   "Galactic G" -/-> @gmnevergiveup  (unpaid)
 --
+--   0x00a...8f530 != full Ethereum address
+--   truncated receiver fragment != wallet ownership / person identity
+--
 --   same display name + shared web3 context
 --     != authenticated cross-platform identity
 --
--- The correction prunes a suggestive but unsupported lexical edge while
--- retaining the lower-strength convergence that the inspected sources pay.
--- The next useful identity receipt remains a native mutual link, signed
--- wallet/account assertion, authenticated platform link, or explicit creator
--- statement connecting the accounts.
+-- The highest-alpha unresolved identity discriminator is now recovery of the
+-- full native Link3 receiver address or another signed/native mutual link.
 ------------------------------------------------------------------------
