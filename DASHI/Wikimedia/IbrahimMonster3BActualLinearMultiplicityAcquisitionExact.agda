@@ -1,12 +1,17 @@
 module DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary as GVOA
+import DASHI.Moonshine.MonsterGradedVOABridgeExact as Legacy
+import DASHI.Moonshine.VertexOperatorAlgebraCore as Core
+import DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact as LiteralWeld
 import DASHI.Moonshine.VertexOperatorAlgebraLinearActionReceiptExact as LiteralVOA
 import DASHI.Moonshine.GradedVOAHomogeneousLinearRealisationExact as Homogeneous
 import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
@@ -22,23 +27,18 @@ import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectio
 -- constituents in the actual Monster N(3B) restriction.  Independently, the
 -- linear audit has named the canonical multiplicity object
 --
---   S_zeta = Hom_E(H_zeta , W_zeta)
+--   S_zeta = Hom_E(H_zeta , W_zeta).
 --
--- and the Moonshine lane now has three progressively stronger donor interfaces:
+-- The repository also already owns a same-object weld joining exact graded
+-- character authority to the LITERAL VOA state action on the same Monster
+-- element type.  This owner therefore makes the next payment typed rather than
+-- verbal: an acquisition must carry that exact weld AND a linearity receipt on
+-- that exact literal VOA group action before it can descend through grade two,
+-- the 196883 constituent, the selected 3B action and the literal zeta sector.
 --
---   literal VOA action + explicit linearity receipt
---     -> homogeneous-grade linear realisation
---     -> linear 196883 Monster constituent in weight two.
---
--- Each donor deliberately leaves its actual Monster inhabitant separate.  The
--- remaining theorem-bearing payment is therefore a SAME-OBJECT weld from the
--- existing literal Monster VOA/group action, through grade two and the actual
--- 196883 constituent, through the selected 3B action and literal zeta sector,
--- to the actual multiplicity action whose character is the paid 12+78 family.
---
--- This owner records that acquisition contract.  It does not manufacture the
--- missing inhabitant, matrices, inertia action or intertwiner from dimension,
--- degree occurrence, Fin 90 basis labels, or identifiers.
+-- Nothing here manufactures the missing inhabitant, matrices, inertia action
+-- or intertwiner from dimensions, degree occurrence, Fin 90 labels, or source
+-- identifiers.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -76,15 +76,28 @@ anWilsonAttribution = Snowball.canonicalSourceRoleSnowballReceipt anWilson
 -- 2. Proof-bearing acquisition contract.
 ------------------------------------------------------------------------
 
-record ActualLinearMultiplicityAcquisition : Set₁ where
+record ActualLinearMultiplicityAcquisition {Monster K : Set} : Setω where
   field
-    -- Existing canonical linear surfaces.  These are not replaced by a new
-    -- representation ontology.
+    -- Existing SAME-object character/action weld.
+    literalSameObjectWeld :
+      LiteralWeld.MonsterGradedVOALiteralActionWeld Monster K
+
+    -- The standard VOA-linearity receipt must be attached to that exact
+    -- literal VOA and that exact Monster action, not to a parallel carrier.
+    literalVOALinearityReceipt :
+      LiteralVOA.VOAGroupActionLinearReceipt
+        (GVOA.group
+          (Legacy.voaAction
+            (LiteralWeld.gradedAuthority literalSameObjectWeld)))
+        (LiteralWeld.LiteralVOA literalSameObjectWeld)
+        (Core.monsterAction
+          (LiteralWeld.literalVOA literalSameObjectWeld))
+
+    -- Existing canonical linear multiplicity surfaces.
     linearZetaProducer : LinearZeta.LinearSingleActionProducer
     multiplicityHomSpace : Hom.ActualLinearMultiplicityHomSpace
 
     -- Same-object receipts still requiring an actual producer/acquisition.
-    literalVOAActionLinearityIsSameMonsterAction : Set
     homogeneousGradeTwoIsSameLiteralVOAModule : Set
     weightTwo196883ActionIsSameMonsterAction : Set
     sameLiteralZetaSector : Set
@@ -104,7 +117,7 @@ data DegreeOccurrenceCreatesAction : Set where
 data PermutationBasisCreatesLinearAction : Set where
 data CharacterEqualityCreatesIntertwiner : Set where
 data WeightTwoDimensionCreatesMultiplicityAction : Set where
-data LiteralVOADefinitionCreatesActualMonsterInhabitant : Set where
+data SameObjectWeldCreatesLinearity : Set where
 data QidCreatesAction : Set where
 data DeweyCreatesAction : Set where
 data OeisCreatesAction : Set where
@@ -122,9 +135,8 @@ weightTwoDimensionDoesNotCreateMultiplicityAction :
   WeightTwoDimensionCreatesMultiplicityAction → ⊥
 weightTwoDimensionDoesNotCreateMultiplicityAction ()
 
-literalVOADefinitionDoesNotCreateActualMonsterInhabitant :
-  LiteralVOADefinitionCreatesActualMonsterInhabitant → ⊥
-literalVOADefinitionDoesNotCreateActualMonsterInhabitant ()
+sameObjectWeldDoesNotCreateLinearity : SameObjectWeldCreatesLinearity → ⊥
+sameObjectWeldDoesNotCreateLinearity ()
 
 qidDoesNotCreateAction : QidCreatesAction → ⊥
 qidDoesNotCreateAction ()
@@ -175,6 +187,7 @@ record ActualLinearMultiplicityAcquisitionFrontier : Set where
     twelveFactorOccurrencePaid : Bool
     seventyEightFactorOccurrencePaid : Bool
     canonicalLinearHomTargetNamed : Bool
+    literalActionSameObjectWeldAvailable : Bool
     literalVOALinearityReceiptInterfaceAvailable : Bool
     homogeneousGradeLinearisationInterfaceAvailable : Bool
     weightTwoLinearActionBridgeInterfaceAvailable : Bool
@@ -191,9 +204,9 @@ currentActualLinearMultiplicityAcquisitionFrontier :
 currentActualLinearMultiplicityAcquisitionFrontier =
   actual-linear-multiplicity-acquisition-frontier
     true true true true true
-    true true true
+    true true true true
     false false false false false
-    "inhabit the existing literal VOA linearity receipt on the exact Monster VOA/group action, carry that same object through the grade-2 homogeneous linear realisation and 196883 constituent bridge, and identify it with the State/action used by the selected 3B single-action producer. Only then restrict linearly to literal W_zeta, construct S_zeta = Hom_E(H_zeta,W_zeta) with the source-native inertia action, and weld the paid 17496 and 113724 constituents to 12 and 78 by an actual same-action character/intertwiner receipt. Degree occurrence, Fin90 basis labels, character equality, DOI/QID/Dewey/OEIS coordinates, and generic interfaces do not pay the inhabitant."
+    "supply literalVOALinearityReceipt for the exact literalSameObjectWeld, then carry that same carrier/action through the existing homogeneous grade-2 and 196883 linear bridges and identify it with the State/action used by the selected 3B single-action producer. Only then restrict linearly to literal W_zeta, construct S_zeta = Hom_E(H_zeta,W_zeta) with the source-native inertia action, and weld the paid 17496 and 113724 constituents to 12 and 78 by an actual same-action character/intertwiner receipt. Degree occurrence, Fin90 basis labels, character equality, DOI/QID/Dewey/OEIS coordinates, and generic interfaces do not pay the inhabitant."
 
 ------------------------------------------------------------------------
 -- 6. Imported status snapshots are routing information, not promotion.
@@ -210,6 +223,9 @@ homFrontier = Hom.currentLinearMultiplicityHomFrontier
 
 wrongTypeFrontier : WrongType.MultiplicityWrongTypeFrontier
 wrongTypeFrontier = WrongType.currentMultiplicityWrongTypeFrontier
+
+literalSameObjectBoundary : LiteralWeld.SameObjectWeldBoundary
+literalSameObjectBoundary = LiteralWeld.canonicalSameObjectWeldBoundary
 
 literalVOABoundary : LiteralVOA.VOAActionLinearReceiptBoundary
 literalVOABoundary = LiteralVOA.canonicalVOAActionLinearReceiptBoundary
