@@ -19,7 +19,7 @@ record FiniteLiuDSMMWitness : Set where
   constructor finite-liu-dsmm-witness
   field
     sourceReference : String
-    lifecycleStages : List Liu.DSMMStage
+    lifecycleStages : List Liu.DataLifecycleStage
     assessedControlCount : Nat
     retainedEvidenceCount : Nat
     unresolvedControlCount : Nat
