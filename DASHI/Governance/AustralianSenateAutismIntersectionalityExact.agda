@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Biology.IntersectionalLongitudinalResidualDynamics as Longitudinal
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.SituatedFibreDynamicsEverything as Situated
 import DASHI.Governance.AustralianSenateAutismInquiryExact as Inquiry
@@ -77,7 +78,8 @@ canonicalAutismSituatedConstituency =
     "affected autistic constituencies retain direct articulation of needs and axes; committee enumeration is non-exhaustive"
 
 ------------------------------------------------------------------------
--- Native fibre-over-time carrier.
+-- Native fibre-over-time carrier. SituatedFibreDynamicsEverything is imported
+-- as the repo rollup; this application supplies only autism-policy semantics.
 ------------------------------------------------------------------------
 
 autismIntersectionalLongitudinalCarrier :
@@ -125,9 +127,9 @@ representationAlonePaysDistribution = false
 -- Strategy intersectionality weld.
 --
 -- The 2025 Strategy/First Action Plan explicitly defines intersectionality in
--- terms of overlapping discrimination/marginalisation and also describes
--- culturally responsive, LGBTQIA+-inclusive, lived-experience-informed
--- evidence. This is a downstream same-object thematic weld to Recommendation
+-- terms of overlapping discrimination/marginalisation and describes evidence
+-- as including culturally responsive, LGBTQIA+-inclusive and lived-experience
+-- components. This is a downstream same-object thematic weld to Recommendation
 -- 18, not yet a payment of each cohort-specific implementation obligation.
 ------------------------------------------------------------------------
 
@@ -141,7 +143,7 @@ record Recommendation18StrategyWeld : Set where
   constructor recommendation18-strategy-weld
   field
     senateFact : Inquiry.AttributedAutismInquiryFact
-    strategySource : DASHI.Core.AttributedSourceCore.AttributedSource
+    strategySource : Source.AttributedSource
     status : IntersectionalityWeldStatus
     statement : String
     recommendationEqualsImplementation : Bool
@@ -190,7 +192,6 @@ data FiniteCohortListEqualsExhaustiveIntersectionality : Set where
 data RecognitionEqualsMaterialAccess : Set where
 data CoDesignPresenceEqualsRepresentativeAdequacy : Set where
 data StrategyIntersectionalityTextEqualsCohortOutcome : Set where
-
 data ComplexNeedEqualsIdentityAxis : Set where
 
 finiteCohortListDoesNotEqualExhaustiveIntersectionality :
