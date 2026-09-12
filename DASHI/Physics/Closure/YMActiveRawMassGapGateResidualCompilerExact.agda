@@ -29,9 +29,9 @@ record RemainingMandatoryMassGapGatesAfterM2
     m1 : Gates.M1PhysicalScaleClustering gates
     m3 : Gates.M3LocalNoncollapse gates
     m4 :
-      Gates.M4ExactOSPullback gates
-      Gates.or
-      Gates.M4TransferIntertwining gates
+      Gates._or_
+        (Gates.M4ExactOSPullback gates)
+        (Gates.M4TransferIntertwining gates)
     m6 : Gates.M6SpectralUVCompatibility gates
     m7a : Gates.M7aPhysicalActionVariationHamiltonianSameObject gates
     m7b : Gates.M7bHamiltonianDomainCommonInvariantDenseCore gates
