@@ -16,13 +16,12 @@ import DASHI.Biology.BioacousticSongEnergyExpenditureBidiExact as Energy
 ------------------------------------------------------------------------
 -- SITUATED BIRDSONG PERFORMANCE / ENERGY
 --
--- This is a thin application owner over the repository's existing situated-
--- fibre and intersectional nonfactorability machinery.  It preserves acoustic,
--- respiratory, cardiac, movement, energetic and context coordinates as
--- distinct observations over time.  No single coordinate, and no mere product
--- of separately useful coordinates, is promoted to a sufficient explanation
--- of effort, condition, fitness signal or total display cost without an
--- application-supplied factorisation witness.
+-- Thin application owner over the repository's existing situated-fibre and
+-- intersectional nonfactorability machinery. Acoustic, respiratory, cardiac,
+-- movement, energetic and context coordinates remain distinct observations
+-- over time. No single coordinate, and no mere product of separately useful
+-- coordinates, is promoted to total effort, condition, fitness signal or total
+-- display cost without an application-supplied factorisation witness.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -105,6 +104,8 @@ situatedPerformanceSourceAtlas = Attr.mkSourceAtlas
 
 data AcousticAxis : Set where
   pitchFrequency : AcousticAxis
+  soundPressureRMS : AcousticAxis
+  soundPressureLevel : AcousticAxis
   soundAmplitude : AcousticAxis
   spectralTimbre : AcousticAxis
   breathinessDescriptor : AcousticAxis
@@ -133,6 +134,7 @@ data MovementAxis : Set where
 data EnergeticAxis : Set where
   metabolicPower : EnergeticAxis
   respiratoryMechanicalProxy : EnergeticAxis
+  acousticRadiatedPower : EnergeticAxis
   acousticRadiatedEnergy : EnergeticAxis
   accumulatedExcessEnergy : EnergeticAxis
   energeticAxisUnresolved : EnergeticAxis
@@ -175,6 +177,112 @@ intersectionalMachineryOwner : String
 intersectionalMachineryOwner = "DASHI.Core.IntersectionalNonFactorability"
 
 ------------------------------------------------------------------------
+-- Physical acoustic coordinates.
+--
+-- Pitch/fundamental frequency is a frequency coordinate, not energy. Sound
+-- pressure is pressure. Sound-pressure level is a logarithmic level/ratio and
+-- is deliberately typed dimensionless here; dB does not linearise pressure,
+-- power or energy. Acoustic power is W and radiated acoustic energy is J.
+-- Conversion from local sound pressure/level to total radiated power requires
+-- a propagation/medium/geometry/directivity model and cannot be inferred from
+-- the level alone.
+------------------------------------------------------------------------
+
+decibelLevel : SI.Unit SI.Dimensionless
+decibelLevel = SI.mkUnit "dB" "decibel level"
+
+oneUnit : SI.Unit SI.Dimensionless
+oneUnit = SI.mkUnit "1" "one"
+
+record AcousticPhysicalCoordinate : Set₁ where
+  constructor acoustic-physical-coordinate
+  field
+    acousticAxis : AcousticAxis
+    dimension : SI.Dimension
+    unit : SI.Unit dimension
+    semantics : String
+    soundPressureLevelIsLogarithmic : Bool
+    directlyMeasuresWholeAnimalMetabolicCost : Bool
+
+open AcousticPhysicalCoordinate public
+
+pitchPhysicalCoordinate : AcousticPhysicalCoordinate
+pitchPhysicalCoordinate = acoustic-physical-coordinate
+  pitchFrequency
+  SI.Frequency
+  SI.hertz
+  "fundamental/pitch frequency in Hz; frequency alone is not acoustic power or metabolic expenditure"
+  false
+  false
+
+soundPressurePhysicalCoordinate : AcousticPhysicalCoordinate
+soundPressurePhysicalCoordinate = acoustic-physical-coordinate
+  soundPressureRMS
+  SI.Pressure
+  SI.pascal
+  "root-mean-square acoustic pressure in Pa at a declared microphone position/calibration; not total radiated power"
+  false
+  false
+
+soundLevelPhysicalCoordinate : AcousticPhysicalCoordinate
+soundLevelPhysicalCoordinate = acoustic-physical-coordinate
+  soundPressureLevel
+  SI.Dimensionless
+  decibelLevel
+  "sound-pressure level in dB is a logarithmic level relative to a declared reference pressure; it is not a linear amplitude, power or energy coordinate"
+  true
+  false
+
+breathinessPhysicalCoordinate : AcousticPhysicalCoordinate
+breathinessPhysicalCoordinate = acoustic-physical-coordinate
+  breathinessDescriptor
+  SI.Dimensionless
+  oneUnit
+  "source-defined spectral/noise/timbre descriptor; breathiness is not itself a direct airflow, pressure, metabolic-power or pathology measurement"
+  false
+  false
+
+acousticPowerPhysicalCoordinate : AcousticPhysicalCoordinate
+acousticPowerPhysicalCoordinate = acoustic-physical-coordinate
+  soundAmplitude
+  SI.Power
+  SI.watt
+  "radiated acoustic power, when independently calibrated/modelled, is measured in W; ordinary waveform amplitude or SPL does not by itself supply this coordinate"
+  false
+  false
+
+acousticEnergyPhysicalCoordinate : AcousticPhysicalCoordinate
+acousticEnergyPhysicalCoordinate = acoustic-physical-coordinate
+  soundAmplitude
+  SI.Energy
+  SI.joule
+  "radiated acoustic energy is the time integral of calibrated acoustic power and remains distinct from whole-animal metabolic energy expenditure"
+  false
+  false
+
+record AcousticEnergyRelationBoundary : Set where
+  constructor acoustic-energy-relation-boundary
+  field
+    soundPressureLevelIsLogarithmic : Bool
+    pitchAloneDeterminesAcousticPower : Bool
+    soundLevelAloneDeterminesAcousticPower : Bool
+    soundPressureAloneDeterminesTotalRadiatedPower : Bool
+    pressureToPowerNeedsPropagationGeometryModel : Bool
+    acousticPowerIntegratedOverTimeHasEnergyDimension : Bool
+    acousticEnergyEqualsMetabolicEnergy : Bool
+    breathinessDirectlyMeasuresAirflowOrEnergy : Bool
+
+open AcousticEnergyRelationBoundary public
+
+canonicalAcousticEnergyRelationBoundary : AcousticEnergyRelationBoundary
+canonicalAcousticEnergyRelationBoundary = acoustic-energy-relation-boundary
+  true false false false true true false false
+
+acousticPressurePowerReading : String
+acousticPressurePowerReading =
+  "Pitch is Hz; calibrated acoustic pressure is Pa at a specified observation point; SPL is logarithmic dB; total radiated acoustic power requires propagation/medium/geometry/directivity assumptions; acoustic energy integrates acoustic power over time. None of these automatically equals whole-animal metabolic expenditure."
+
+------------------------------------------------------------------------
 -- Consumer-relative calibration debt. These labels do not add a universal
 -- score or reorder the existing fly ROI/MaleCNS Pareto frontier.
 ------------------------------------------------------------------------
@@ -189,7 +297,7 @@ data ConsumerCalibrationDebt : Set where
 
 consumerCalibrationReading : ConsumerCalibrationDebt → String
 consumerCalibrationReading acousticCalibrationDebt =
-  "consumer requires a source-bound acoustic calibration such as pitch, SPL or spectral descriptor"
+  "consumer requires a source-bound acoustic calibration such as pitch, pressure, SPL, spectral descriptor or acoustic power"
 consumerCalibrationReading respiratoryCalibrationDebt =
   "consumer requires source-bound pressure/airflow/phase or other respiratory calibration"
 consumerCalibrationReading cardiacCalibrationDebt =
@@ -197,7 +305,7 @@ consumerCalibrationReading cardiacCalibrationDebt =
 consumerCalibrationReading movementCalibrationDebt =
   "consumer requires source-bound beak/body/step/bob/dance movement calibration"
 consumerCalibrationReading energeticCalibrationDebt =
-  "consumer requires source-bound whole-animal or explicitly named energetic calibration"
+  "consumer requires source-bound whole-animal or explicitly named acoustic/mechanical energetic calibration"
 consumerCalibrationReading situatedContextDebt =
   "consumer requires species/individual/social/noise/thermal/trial/time context"
 
@@ -317,4 +425,4 @@ canonicalSituatedPerformanceBoundary = situated-performance-boundary
 
 situatedPerformanceReading : String
 situatedPerformanceReading =
-  "Song/display interpretation is intersectional in the repository's factorisation sense: pitch, amplitude, timbre/breathiness, respiration, heart rate, movement/dance and energetic state may all be useful observers, but none is promoted to total effort, condition, fitness signal or display cost without the situated context and a consumer-specific factorisation witness."
+  "Song/display interpretation is intersectional in the repository's factorisation sense: pitch, pressure/SPL, timbre/breathiness, respiration, heart rate, movement/dance and energetic state may all be useful observers, but none is promoted to total effort, condition, fitness signal or display cost without situated context and a consumer-specific factorisation witness."
