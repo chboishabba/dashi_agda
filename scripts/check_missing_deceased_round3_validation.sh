@@ -4,6 +4,7 @@ set -euo pipefail
 # Round-3 all-scientist static contract. This is not Agda/kernel CI.
 
 TARGET='DASHI/Culture/MissingDeceasedTwentyScientistRound3ProgressExact.agda'
+AGG='DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda'
 
 grep -q 'twentyScientistRound3Progress' "$TARGET"
 grep -q 'round3ScientificCohortCount = 20' "$TARGET"
@@ -20,6 +21,8 @@ for name in \
   grep -q "$name" "$TARGET"
 done
 
-grep -q 'MissingDeceasedTwentyScientistRound3ProgressExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedTwentyScientistRoundRobinProgressExact' "$AGG"
+grep -q 'MissingDeceasedTwentyScientistRound2ProgressExact' "$AGG"
+grep -q 'MissingDeceasedTwentyScientistRound3ProgressExact' "$AGG"
 
 echo 'missing/deceased round-3 static check: ok'
