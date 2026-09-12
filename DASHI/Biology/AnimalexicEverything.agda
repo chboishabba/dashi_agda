@@ -10,6 +10,7 @@ open import DASHI.Biology.AnimalexicGeometryReuseExact
 open import DASHI.Biology.AnimalexicIssue20KnownPoseMultiViewExact
 open import DASHI.Biology.AnimalexicHandheldMultiCameraPoseFibreExact
 open import DASHI.Biology.AnimalexicIssue20PoseRecoveryValidationExact
+open import DASHI.Biology.AnimalexicVisualInertialPosePriorExact
 open import DASHI.Biology.AnimalexicCrossPollinationExact
 open import DASHI.Biology.AnimalexicLexicIntegrationExact
 open import DASHI.Biology.AnimalexicRegression
