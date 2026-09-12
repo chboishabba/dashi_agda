@@ -4,10 +4,11 @@ set -euo pipefail
 root="${1:-.}"
 runtime_owner="$root/DASHI/Culture/MissingDeceasedTwentyScientistEmbodiedReferenceRuntimeBidiExact.agda"
 round_owner="$root/DASHI/Culture/MissingDeceasedTwentyScientistRound9ReferenceRuntimeProgressExact.agda"
+proof_debt_owner="$root/DASHI/Culture/MissingDeceasedTwentyScientistCompositeApplicationProofDebtExact.agda"
 py_runtime="$root/scripts/twenty_scientist_embodied_reference_runtime.py"
 aggregate="$root/DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda"
 
-for file in "$runtime_owner" "$round_owner" "$py_runtime"; do
+for file in "$runtime_owner" "$round_owner" "$proof_debt_owner" "$py_runtime"; do
   test -f "$file"
 done
 
@@ -32,6 +33,13 @@ grep -q 'round9GatedCount = 2' "$round_owner"
 grep -q 'runtimeExecutionDoesNotPaySourceReplay = false' "$round_owner"
 grep -q 'runtimeExecutionDoesNotPayHistoricalUse = false' "$round_owner"
 
+grep -q 'longDurationHardGateCount = 0' "$proof_debt_owner"
+grep -q 'extremeEnvironmentHardGateCount = 1' "$proof_debt_owner"
+grep -q 'autonomousSurveyHardGateCount = 0' "$proof_debt_owner"
+grep -q 'multiDomainLabHardGateCount = 1' "$proof_debt_owner"
+grep -q 'gatedRosterFibreImpliesApplicationImpossible = false' "$proof_debt_owner"
+grep -q 'softResidualDoesNotEqualHardGate = true' "$proof_debt_owner"
+
 for person in \
   'Nuno F. G. Loureiro' 'Joshua Kyle LeBlanc' 'Frank W. Maiwald' \
   'Monica Jacinto / Monica Reza' 'Carl J. Grillmair' 'Michael David Hicks' \
@@ -43,5 +51,6 @@ done
 
 grep -q 'MissingDeceasedTwentyScientistEmbodiedReferenceRuntimeBidiExact' "$aggregate"
 grep -q 'MissingDeceasedTwentyScientistRound9ReferenceRuntimeProgressExact' "$aggregate"
+grep -q 'MissingDeceasedTwentyScientistCompositeApplicationProofDebtExact' "$aggregate"
 
 echo 'Round-9 reference-runtime static contract: OK'
