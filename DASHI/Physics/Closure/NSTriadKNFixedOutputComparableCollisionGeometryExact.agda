@@ -82,7 +82,9 @@ record DistinctComparableSameOutputIncidences : Set where
   constructor distinct-comparable-same-output-incidences
   field
     alpha beta : R204.LocalizedComparableIncidence
-    outputAgreement : R204.incidence alpha |> Physical.k ≡ R204.incidence beta |> Physical.k
+    outputAgreement :
+      Physical.k (R204.incidence alpha)
+      ≡ Physical.k (R204.incidence beta)
     distinct : R204.incidence alpha ≡ R204.incidence beta → ⊥
 
 open DistinctComparableSameOutputIncidences public
