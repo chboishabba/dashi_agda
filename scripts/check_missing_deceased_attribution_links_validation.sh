@@ -55,6 +55,7 @@ grep -q 'fy2006DisplayedAmount = "477"' DASHI/Culture/NingLiArmyTexasAuditPrimar
 grep -q 'twoYearRecurrencePaysSameArmyObject = false' DASHI/Culture/NingLiArmyTexasAuditPrimaryInspectionExact.agda
 grep -q 'twoYearRecurrenceWeakensPureOCRHypothesis = true' DASHI/Culture/NingLiArmyTexasAuditPrimaryInspectionExact.agda
 grep -q 'NingLiArmyTexasAuditPrimaryInspectionExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
+grep -q 'two-year Texas recurrence' DASHI/Culture/NingLiAdministrativeIdentifierCollisionParetoExact.agda
 
 grep -q 'armyCommercialTransfer' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'engineeringStackConvergence' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
