@@ -13,6 +13,22 @@ REQUIRED = {
         "secondarySourceDoesNotPayPrimaryFact",
         "apparentGapDoesNotEqualLegalInvalidity",
         "finalPDMayStillPayResidual",
+        "EPBC 2020/8651",
+        "EPBC 2020/8629",
+        "EPBC 2018/8350",
+        "EPBC 2017/7875",
+        "EPBC 2016/7676",
+        "EPBC 2014/7306",
+    ],
+    "DASHI/Law/SensibLawWoogarooPreservationSourceAtlasExact.agda": [
+        "springfield8575January2026PreliminaryDocumentation",
+        "9612 Springfield Preliminary Documentation v5 — EPBC 2019/8575",
+        "source identity is kept distinct",
+    ],
+    "DASHI/Law/SensibLawWoogarooLegalPriorityRoadmapExact.agda": [
+        "cumulativeImpactSufficiency",
+        "Item 4.6(c)",
+        "Final PD",
     ],
     "DASHI/Law/SensibLawWoogarooPreservationEverything.agda": [
         "import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact"
