@@ -90,6 +90,21 @@ for name in \
 done
 grep -q 'MissingDeceasedTwentyScientistRoundRobinProgressExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 
+# Second round must again touch all twenty scientists with fresh or retained residuals.
+grep -q 'twentyScientistRound2Progress' DASHI/Culture/MissingDeceasedTwentyScientistRound2ProgressExact.agda
+grep -q 'round2ScientificCohortCount = 20' DASHI/Culture/MissingDeceasedTwentyScientistRound2ProgressExact.agda
+grep -q 'round2EveryScientistTouched = true' DASHI/Culture/MissingDeceasedTwentyScientistRound2ProgressExact.agda
+grep -q 'round2PromotionRequiresSourceReceipt = true' DASHI/Culture/MissingDeceasedTwentyScientistRound2ProgressExact.agda
+for name in \
+  'Nuno F. G. Loureiro' 'Joshua Kyle LeBlanc' 'Frank W. Maiwald' \
+  'Monica Jacinto / Monica Reza' 'Carl J. Grillmair' 'Michael David Hicks' \
+  'William Neil McCasland' 'Anthony Chavez' 'Jason R. Thomas' 'Amy Eskridge' \
+  'Ning Li' 'Chen Shuming' 'Feng Yanghe' 'Zhou Guangyuan' 'Liu Donghao' \
+  'Zhang Xiaoxin' 'Zhang Daibing' 'Li Minyong' 'Fang Daining' 'Yan Hong'; do
+  grep -q "$name" DASHI/Culture/MissingDeceasedTwentyScientistRound2ProgressExact.agda
+done
+grep -q 'MissingDeceasedTwentyScientistRound2ProgressExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+
 grep -q 'armyCommercialTransfer' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'engineeringStackConvergence' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'informationPoisoning' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
