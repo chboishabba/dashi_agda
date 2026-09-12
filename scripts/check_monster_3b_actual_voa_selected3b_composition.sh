@@ -6,9 +6,10 @@ OWNER="$ROOT/DASHI/Wikimedia/IbrahimMonster3BActualVOASelected3BCompositionExact
 
 required=(
   "record ActualVOASelected3BComposition"
-  "Selected3BRecognizedSameElementSource"
-  "recognizedSameElementSource"
-  "selectedWeldIsAcquisitionWeld"
+  "Actual3BKernelRecognizedSameElementAttachment"
+  "kernelRecognizedSameElementAttachment"
+  "selectedRecognizedFromKernel"
+  "kernelSelectedWeldIsAcquisitionWeld"
   "recognizedActionSourceFromSameElement"
   "compiledSingleActionProducerIsAcquisitionProducer"
   "recognizedSourceDoesNotCreateLinearity"
