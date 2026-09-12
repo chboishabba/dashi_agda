@@ -43,6 +43,7 @@ PY
 
 bash scripts/check_bioacoustic_fly_si_units_static.sh
 bash scripts/check_bioacoustic_song_energy_static.sh
+bash scripts/check_bioacoustic_situated_performance_static.sh
 bash scripts/check_gauthey_external_manifest_static.sh
 
 if command -v agda >/dev/null 2>&1; then
