@@ -40,7 +40,7 @@ REQUIRED = {
     "DASHI/Culture/BlochfieldCrossPlatformIdentityConvergenceExact.agda": [
         "module DASHI.Culture.BlochfieldCrossPlatformIdentityConvergenceExact where",
         "link3XGalacticGConvergenceCandidate",
-        '"What’s a Galactic G?"',
+        '"What\'s a Galactic G?"',
         '"@gmnevergiveup"',
         "multiCoordinateConvergenceDoesNotPaySamePerson",
         "crossPlatformIdentityWeldStillUnpaid",
