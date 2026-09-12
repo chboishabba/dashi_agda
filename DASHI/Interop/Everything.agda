@@ -71,5 +71,6 @@ import DASHI.Interop.SLRWikipediaArticlePNFWorldProducerExact
 import DASHI.Interop.SLRNatClimateSourceUnitPNFBatchExact
 import DASHI.Interop.SLRPostgresWorldPersistenceExact
 import DASHI.Interop.SLRRustWorldStoreBridgeExact
+import DASHI.Interop.SLRBinaryWorldWireParityExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
