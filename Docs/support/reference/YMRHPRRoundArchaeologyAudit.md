@@ -1,523 +1,709 @@
-# Yang–Mills / Riemann Hypothesis PR–Round Archaeology Audit
+# Yang–Mills / Riemann Hypothesis Pull Request Survey Index
 
-Status: repository archaeology reference, not theorem authority.
+Status: repository archaeology / navigation reference. **Not theorem authority.**
 
-Canonical companion owner: `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda`.
+Canonical companion owner: `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda`  
+Maintenance PR: #883 — `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger`
 
-Primary maintenance PR: https://github.com/chboishabba/dashi_agda/pull/883
+## Purpose
 
-This document exists to stop repeated rediscovery of the same PR/round history. It records the Yang–Mills and Riemann-hypothesis proof-search spine by **PR title**, **round clock**, **role**, **supersession**, and **current relevance**. It is a navigation/audit object only. PR titles, citations, source metadata, QIDs, Dewey numbers, Lean-return statuses, and historical compiler flags do not manufacture proof payment.
+This is the **card catalogue** for DASHI Yang–Mills and Riemann-hypothesis work. Its job is not to explain the mathematics. Its job is to let a future investigator survey the repository without repeatedly searching GitHub from scratch.
 
-## 1. Read this first: there are several different clocks
+The index is intentionally broad. It retains:
 
-Do not treat these as interchangeable.
+- early foundational PRs;
+- substantive theorem/proof-search PRs;
+- alternate and abandoned routes;
+- superseded/corrected branches;
+- validation, CI, profiling and integration PRs when they identify a proof-search epoch;
+- cross-pollination PRs that materially contributed machinery or changed route selection;
+- PRs whose title does not say `YM` or `RH` but whose body materially carries the lane;
+- internal rounds when no standalone PR title can honestly be located;
+- external Lean/Aristotle return labels and RH G-lane labels as separate clocks.
 
-1. **GitHub PR number** — repository integration chronology, e.g. `#846`.
-2. **PR-title round** — phrases such as “submission round ten”, “highest-alpha Round 24”, or “YM Round58”. These are programme labels in that PR lineage.
-3. **Internal Agda module round** — names such as `Round214`, `Round246`, `R259`. These are module-local proof-search rounds and frequently occur long after PR-title rounds with the same numeral family.
-4. **G-lane labels** — e.g. `G20`, `G21`; these are RH subprogramme labels, not PR or Agda rounds.
-5. **Lean return/build labels** — e.g. `8883`, `8885`, `8889`, `8894`; these identify external/cross-prover sessions or returns, not Agda rounds.
-6. **Dated commit archaeology** — first source appearance / route correction / consolidation. This is the closest analogue to the NS worker’s forensic timeline.
+**Coverage claim:** this is the union located by chronological PR-history inspection plus broad title/body alias sweeps. It is meant to be over-inclusive. It is not a claim that GitHub search can prove no additional historical body-only PR exists. If a newly found PR belongs here, append it; do not rewrite the older route away.
 
-The most common source of repeated search has been confusing one clock with another.
+## How to use this file
 
-## 2. Status vocabulary
-
-- **CURRENT** — on the current preferred proof-search path.
-- **ACTIVE DONOR** — useful theorem/representation source, but not itself the current consumer.
-- **SUPERSEDED AS ROUTE** — still historically/theoremically useful, but a later route removed it as a prerequisite.
-- **CORRECTED** — later PR/module fixed a semantic, carrier, sign, scope, or circularity defect.
-- **SUPPORT / DIAGNOSTIC** — useful comparison, source atlas, performance, validation, or cross-pollination work; not a new primitive Clay payment.
-- **VALIDATION ONLY** — checker/CI/probe PR; do not interpret as new mathematics.
-- **INTERNAL ROUND / NO STANDALONE PR LOCATED** — the round is visible in successor bodies/modules but this audit did not find an honest standalone PR-title mapping.
-
-## 3. Current start points — do not begin from the historical tables
-
-### 3.1 Yang–Mills current Clay-facing source route
-
-Current consumer-minimal route:
+Search first by one of:
 
 ```text
-finite beta history
-  -> active density family
-  -> CMP122 Theorem 1 source witness
-  -> active CMP119 regular-E Section-2 form
-       E_k : Background -> Real
-       + literal localized (2.25)-(2.27) composite-sum representation
-  -> CMP109/CMP116 continuation
-  -> BC1
+#PR-number
+route tag
+round number
+module-round Rxxx
+G20 / G21
+8883 / 8885 / 8889 / 8894
+Balaban / Bałaban / Path13 / Eq119 / CMP119 / Row C
+Riemann / zeta / Weil / pole-quotient / DBN / certificate
 ```
 
-Current branch owners:
+Then open the PR. Only after that descend into exact modules/commits if the investigation needs them.
 
-- `BalabanCMP119RegularESection2PredicateRound246Exact.agda`
-- `BalabanTheorem1RegularEContinuationRound247Exact.agda`
-- `BalabanCMP119RegularEActiveRound247Validation.agda`
+## Clocks — never collapse these
 
-The branch additionally has the least-privilege **form-only witness**: quantitative Section-2 bounds are no longer primitive inputs merely to reach BC1.
-
-The surviving source-facing payment is therefore the exact active `CMP119RegularESection2Form` on the beta-driven density family. Whole `A_k` semantics remains important for generated-action / first-variation / stress / unification provenance, but is **not** a prerequisite of the shorter BC1 route.
-
-### 3.2 Yang–Mills current mass-gap consumer
-
-PR #869 / internal R270–R275 is the conceptual correction to keep in mind:
-
-```text
-same reconstructed continuum family
-  -> quantitative clustering upper
-  -> positive rate/gap identification
-  -> physical spectral gap
-```
-
-Row-C Heat/Doob/Langevin, unified polymer norms, and source-native multiscale cluster-expansion routes are producer tactics, not mandatory architecture.
-
-### 3.3 RH current route
-
-Current direct high route:
-
-```text
-R1 representation:
-  nearResponseAt(chosen J) = finiteNearSum(cellResponse)
-
-then R2 analytic family:
-  literalNear(J) + B_far(J) + D_Gamma(g_pole)
-    < actual ClusterResponse(g_pole)
-
-uniformly for every arbitrary high off-line nontrivial zero.
-```
-
-Important current reductions:
-
-- `B_near = D_near` and `B_Gamma = D_Gamma` are source-order reflexive choices, not primitive analytic theorems.
-- intermediate `M_cluster` was removed; the target is actual `ClusterResponse`.
-- the final balance `ClusterResponse = Off + Gamma` is downstream and must not be available to the independent R2 proof.
-- R0 concrete numeric/certificate scalar realization is optional execution debt, not a prerequisite of a direct analytic R2 proof.
-- the 8889 quantitative cluster result is only an optional donor unless theorem-bearing same-object transport is recovered.
-
-## 4. Yang–Mills PR chronology — foundational and pre-round spine
-
-These PRs establish the major pre-“round-number” machinery. They remain useful for provenance and donor lookup but should not be mistaken for the current proof cut.
-
-| PR | Title | Role / what to remember |
+| Clock | Example | Meaning |
 |---|---|---|
-| #6 | `feat(ym): generate source-aware critical-path theory atlas` | SUPPORT: early source/status atlas. |
-| #8 | `feat(ym): add literal Balaban lattice operator realization` | Foundational literal Bałaban operator donor. |
-| #9 | `feat(ym): construct a concrete SU(2) quaternion carrier` | Concrete SU(2) carrier. |
-| #10 | `feat(ym): realize the concrete SU(2) adjoint operator lane` | Adjoint/operator realization. |
-| #49 | `feat(ym): package uniform SU(2) radial inverse families` | Early uniform inverse/chart donor. |
-| #92 | `Integrate finite Bałaban one-step SU(2) RG frontier` | Finite one-step RG consolidation. |
-| #125 | `Extract generic Schur coercivity and join NS/YM` | ACTIVE DONOR: cross-domain Schur/coercivity. |
-| #143 | `Formalise generic compact Lie group theory for Yang–Mills` | Compact-Lie abstraction. |
-| #146 | `Close compact Lie exact stack and formalise Yang–Mills frontier` | Compact-Lie consolidation. |
-| #151 | `Instantiate SU(N) matrices and constructive Yang–Mills closure stack` | SU(N) constructive stack. |
-| #153 | `Land concrete SU(N) and constructive Yang–Mills analytic stack` | Concrete SU(N) analytic integration. |
-| #191 | `Cross-pollinate shift geometry, Lorentz uniqueness, constraints, and YM frontier` | SUPPORT / cross-pollination. |
-| #248 | `Formalize uniform Yang–Mills contraction through continuum gap survival` | Historical contraction/gap route. |
-| #260 | `feat(ym): add compact-simple group-parametric coverage` | Compact-simple parameterization. |
-| #262 | `Refine all-scale RG invariant-domain obligations` | Historical all-scale RG route. |
-| #264 | `Formalize infinite-volume continuum limits C1-C9` | Historical continuum-limit packaging. |
-| #269 | `Derive dominant-free background closure bridges` | Background closure compiler. |
-| #288 | `Add infinite-volume and continuum OS bridge` | Continuum/OS bridge. |
-| #291 | `Formalize explicit Step V and all-scale invariant chains` | Step-V/all-scale chain. |
-| #303 | `Add exact continuum OS and physical mass-gap cutset` | Historical mass-gap cutset. |
-| #304 | `Complete finite-background critical-map and one-step RG cutset` | Finite critical-map/RG. |
-| #305 | `Add proof-relevant all-scale and thermodynamic cutset` | Historical all-scale thermodynamic cut. |
-| #306 | `Implement complete Yang-Mills analytic inhabitation cutset` | Broad historical inhabitation interface; not current proof payment. |
-| #307 | `Add published-analytic authority boundary and proof-branch CI` | SUPPORT / authority + CI boundary. |
-| #309 | `Add source-faithful Bałaban matching and finite Fourier Hodge reduction` | Source-faithful/Hodge donor. |
-| #313 | `Add periodic four-torus and finite Fourier Hodge foundation` | Periodic/Hodge foundation. |
-| #315 | `Close periodic physical fibres, exact finite reductions and terminal-scale assembly` | Periodic finite assembly. |
-| #328 | `Add trusted clean Agda CI for the YM coercivity cone` | VALIDATION ONLY. |
-| #329 | `Close side-four bond coercivity and repair the SU2 chart-radius lane` | Coercivity + chart repair. |
-| #334 | `Close configured-side C1 identification and radial chart interfaces` | C1/chart identity. |
-| #335 | `Prove exact SU(2) Wilson plaquette second-order jet` | Wilson-jet theorem donor. |
-| #339 | `Close side-four averages and instantiate the C2 coarse propagator frontier` | C2/coarse propagator. |
-| #342 | `Expose and advance the P1–P5 Clay Yang–Mills frontier` | P1–P5 frontier. |
-| #343 | `Close the configured Green inverse and advance the literal Clay frontier` | Green inverse/literal frontier. |
-| #344 | `Construct T1–T5 Yang–Mills frontier reductions and physical transport` | T1–T5 reduction spine. |
-| #346 | `Internalize literal Yang–Mills frontier producer cutset` | Producer cutset formalization. |
-| #348 | `Integrate Bishop and DASHI constructive-real backends with literal Yang–Mills frontier` | Bishop/real backend donor. |
-| #349 | `Merge literal Yang–Mills frontier into Bishop integration branch` | Integration-only merge tranche. |
-| #350 | `Sync current master into Bishop integration branch` | Sync-only. |
+| GitHub PR | `#440` | repository integration object |
+| PR-title/submission/highest-alpha round | `Round30` | programme label used by a PR lineage |
+| internal Agda round | `R214`, `R246` | module-local proof-search round |
+| RH G-lane | `G20`, `G21` | RH architecture family |
+| Lean/Aristotle return | `8883`, `8885`, `8889`, `8894` | external checked-return/session label |
+| commit chronology | SHA + timestamp | first source appearance / correction / recut |
 
-## 5. YM submission-round sequence
+## Row tags
 
-The “submission round” clock predates the later “highest-alpha round” clock.
+- `CORE` — substantive lane work.
+- `ALT` — alternative route or experiment worth retaining.
+- `SUPPORT` — donor/cross-pollination/source/metadata work.
+- `VALIDATION` — checker, CI, profiling or integration-only tranche.
+- `CORRECTED` — later work fixed a semantic/carrier/sign/scope defect.
+- `SUPERSEDED` — no longer preferred, but historically useful.
+- `BODY-ONLY` — material lane content found primarily in PR body rather than title.
+- `CURRENT` — current archaeology/current conceptual route pointer.
 
-| PR | Round | Title / role |
-|---|---:|---|
-| #353 | Gate-4 round six + submission rounds 7–9 | `Advance Gate 4 through physical involutions, Bishop parity, P06/P11, Step-V and SI` — aggregate multi-round integration. |
-| #357 | 8 | `Validate Yang-Mills submission round eight` — VALIDATION ONLY. |
-| #358 | 8 | second validation pass — VALIDATION ONLY. |
-| #359 | 8 | third validation pass — VALIDATION ONLY. |
-| #360 | 8 | fourth validation pass — VALIDATION ONLY. |
-| #361 | 9 | `Validate Yang-Mills submission round nine` — VALIDATION ONLY. |
-| #362 | 9 | `Validate latest Yang-Mills submission round nine` — VALIDATION ONLY. |
-| #365 | 10 | `Discharge Bishop factorial/parity/interlacing and finite Step-V sums; isolate lightweight P06` — substantive Round10. |
-| #366 | 10 | `Validate Yang-Mills submission round ten` — VALIDATION ONLY. |
-| #367 | 11 | `Add direct-ratio Step-V reducer, audit P06 diameter claims, and order P33 before Gate 4` — Round11 tranche. |
-| #369 | 11 | `Complete Round-11 full-ball, P11, and fixed-lattice-to-continuum dependency spines` — continuation. |
-| #370 | 11 | `Advance Yang-Mills Round 11: direct-ratio, P06/P11 audit, Gate-4 ordering, and OS spine` — master-facing Round11 integration. |
+---
 
-## 6. YM highest-alpha PR-title rounds
+# A. Master YM PR registry
 
-This is the round sequence most likely to be confused with later internal module rounds.
+The dedicated GitHub-era YM sequence begins at **PR #5**, not around #200.
 
-| PR | Title round | Title / status |
-|---|---:|---|
-| #377 | 14 | `Advance the Clay path with inverse-dexp bounds, Wilson budgets, and continuum-limit reuse`. |
-| #378 | 15 | `Audit physical-unit mass-gap transport and close new P33 algebra`. |
-| #380 | 16 | `Close inverse-dexp positivity and advance the local SU2 chart engine`. |
-| #381 | 17 | `Close the actual endpoint modulus and coupled RG factor audits`. |
-| #386 | 18 | `Close the literal quaternion chord lane and calibrate the physical residual`. |
-| #391 | 19 | `Replace the collar residual lane with exact Combes–Thomas conjugation`. |
-| #393 | 20 | `Close the finite Schur and physical Combes–Thomas endgame`. |
-| #394 | 21 | `Cancel exact gauge and constraint jets from the physical Hessian remainder` — later CORRECTED by Round22. |
-| #396 | 22 | `Repair the physical Hodge split and construct the rational Wilson sixteen-atom Hessian` — important correction to Round21. |
-| #402 | 23 | `Block bare volume-uniform coercivity and formalize terminal-scale gap pullback` — early/diverged Round23 stack. |
-| #403 | 23 | same programme on clean branch — definitive Round23 integration. |
-| #409 | 24 | `Reduce physical Wilson atoms and prove the signed gauge defect modulo the literal link radius`. |
-| #416 | 25 | `Cross-pollinate Yang–Mills RG with projection leakage and reduced modes` — Round25 cross-pollination / donor rather than new primitive route. |
-| #421 | 26 | `Separate physical gap scaling from RG compatibility and quantify uniform Schur inputs`. |
-| #427 | ~27 support | `Cross-pollinate YM gap scaling with harmonic and wreath refinement` — SUPPORT/DONOR around Round27. |
-| #430 | 27 | `Close signed Wilson incidence, same-h terminal coercivity, and exact RG tails` — main Round27. |
-| #432 | 27 | `Validation probe: round 27 signed Wilson and terminal Hessian` — VALIDATION ONLY. |
-| #435 | 28 | `Separate observable and spectral uniformity and formalize RG good-class preservation` — later superseded/integrated by Round29. |
-| #439 | 29 | `Unify YM highest-alpha head and isolate correlated W-local cancellation` — cumulative correction/integration of Round28 ancestry. |
-| #440 | 30 | `Add strong-coupling functional-inequality route and exact SU(2) margin arithmetic`. |
-| #443 | 30 support | Hurwitz/Hopf cross-pollination — SUPPORT/DONOR. |
-| #444 | 31 | `Reconcile SO/SU curvature rates, weighted Wasserstein contraction, and all-beta scaling`. |
-| #458 | 32 | `State the literal Clay YM contract and derive the Hessian coefficient from sixteen atoms`. |
-| #461 | 33 | `Formalize Yang-Mills claim papers, all-group promotion guards, and gap scaling`. |
-| #462 | 34 | `Derive the physical selected-background radius and construct W-local`. |
-| #466 | 35 | `Derive the plaquette curl and isolate the sharp Wilson deep remainder`. |
-| #470 | 36 | `Close the finite Wilson pair/deep channels and expose the exact variation selector`. |
-| #473 | 37 | `Construct the finite selected-variation repair and spillover ledger`. |
-| #476 | 37 continuation | `Construct the physical projector and split the selected-variation spillover`. |
-| — | 38 | **INTERNAL ROUND / NO STANDALONE PR LOCATED**. Round39 explicitly says it continues from Round38. |
-| #486 | 39 | `Construct the redundancy-safe KKT projector and local constrained Green algebra`. |
-| #487/#488 | 39 | temporary checker/probe PRs — VALIDATION ONLY. |
-| #489 | 40 | `Localize the KKT multiplier and close the correlated singleton reducer`. |
-| #491 | 40 | temporary checker — VALIDATION ONLY. |
-| #496 | 41 | `Build the physical Yang–Mills constraint producer and SZZ decision tranche`. |
-| #497 | 41-certified fork | `Certify the single-plaquette owner envelope with exact budget slack` — body says certified-enclosure fork after Round40; historical branch metadata labels it Round41. |
-| — | 42 | Internal round exists in the subsequent Gate-I lineage; no trustworthy standalone PR-title mapping fixed by this audit. |
-| — | 43 | INTERNAL ROUND / NO STANDALONE PR LOCATED. |
-| #522 | 44 | `YM round44: type beta coefficient and attempt termwise positivity`. |
-| — | 45 | INTERNAL ROUND / no standalone PR title located. |
-| #540 | 46 | `YM Round46: weld metric-stress identities and close invariant-theory G2`. |
-| #542 | 47 | `YM Gate I: tighten physical producer seams` — body identifies Round47. |
-| #543 | post-47 source-faithful | `YM Gate I + source-faithful complete-density RG reuse`. |
-| #547 | 52 | `YM Round52: source-native physical leaf reductions`. |
-| #554 | 54 | `YM Round54: derive Federbush cancellation and finite physical producer spine`. |
-| #564 | 56 | `YM Round56: normalized pi momentum bridge + five-channel quartic beta adapter`. |
-| #566 | 57 | `YM Round57: four-orbit beta, Bishop interval semantics, grouped G2 and source-native RG`. |
-| #574 | 57 parallel | `YM Round57: hyperoctahedral orbit reduction + Walsh cancellation` — symmetry-first parallel tranche. |
-| #568 | 58 | `YM Round58: canonical G2, compact-group one-loop, and published 4D UV boundary`. |
-| #571 | 59 | `YM Round59: positive RG geometry, Cheeger gap, and two-metric cutoff gate`. |
-| #575 | 60 | `YM Round60: Walsh cancellation before Bishop intervals and G2 symmetry falsifier`. |
-| #578 | 60 parallel | `YM Round60: literal G2 support, charge-relative Green closure, FP ghost and Wilson transfer positivity`. |
-| #583 | 61–87 aggregate | `YM Round61–87: literal Clay four-family frontier; marked stress fields and beta trig reduction` — aggregate PR spanning many internal rounds; do not infer one PR per round. |
-| #644 | 112 | `YM Round112: pay A2 marginal sensitivity with mixed-Cauchy cubic telescope`. |
+| PR | Tags | Title | Round / route search coordinates |
+|---:|---|---|---|
+| #5 | CORE | `feat(ym): formalize cumulative nested-constraint beta route` | earliest explicit YM PR located; beta / nested constraint |
+| #6 | SUPPORT | `feat(ym): generate source-aware critical-path theory atlas` | source/status atlas |
+| #7 | CORE | `feat(ym): construct literal periodic lattice transport` | literal lattice / periodic transport |
+| #8 | CORE | `feat(ym): add literal Balaban lattice operator realization` | Bałaban operator |
+| #9 | CORE | `feat(ym): construct a concrete SU(2) quaternion carrier` | SU(2), quaternion |
+| #10 | CORE | `feat(ym): realize the concrete SU(2) adjoint operator lane` | SU(2), adjoint |
+| #16 | CORE | `Formalize concrete SU(2) geometry, ad reduction, path transport, and Q0` | SU(2), Q0, path transport |
+| #49 | CORE | `feat(ym): package uniform SU(2) radial inverse families` | chart/radial inverse |
+| #92 | CORE | `Integrate finite Bałaban one-step SU(2) RG frontier` | one-step RG |
+| #125 | SUPPORT | `Extract generic Schur coercivity and join NS/YM` | Schur/coercivity donor |
+| #143 | CORE | `Formalise generic compact Lie group theory for Yang–Mills` | compact Lie |
+| #146 | CORE | `Close compact Lie exact stack and formalise Yang–Mills frontier` | compact Lie consolidation |
+| #151 | CORE | `Instantiate SU(N) matrices and constructive Yang–Mills closure stack` | SU(N) |
+| #153 | CORE | `Land concrete SU(N) and constructive Yang–Mills analytic stack` | SU(N), constructive analysis |
+| #191 | SUPPORT | `Cross-pollinate shift geometry, Lorentz uniqueness, constraints, and YM frontier` | cross-domain donor |
+| #248 | CORE | `Formalize uniform Yang–Mills contraction through continuum gap survival` | contraction / gap survival |
+| #260 | CORE | `feat(ym): add compact-simple group-parametric coverage` | compact-simple groups |
+| #262 | CORE | `Refine all-scale RG invariant-domain obligations` | all-scale RG |
+| #264 | CORE | `Formalize infinite-volume continuum limits C1-C9` | continuum / C1-C9 |
+| #269 | CORE | `Derive dominant-free background closure bridges` | background closure |
+| #288 | CORE | `Add infinite-volume and continuum OS bridge` | OS / continuum |
+| #290 | CORE, BODY-ONLY | `Add critical-map and one-step RG closure package` | YM critical-map/RG |
+| #291 | CORE | `Formalize explicit Step V and all-scale invariant chains` | Step V |
+| #303 | CORE | `Add exact continuum OS and physical mass-gap cutset` | OS / mass gap |
+| #304 | CORE | `Complete finite-background critical-map and one-step RG cutset` | critical-map |
+| #305 | CORE | `Add proof-relevant all-scale and thermodynamic cutset` | thermodynamic |
+| #306 | CORE | `Implement complete Yang-Mills analytic inhabitation cutset` | broad analytic cutset |
+| #307 | SUPPORT, VALIDATION | `Add published-analytic authority boundary and proof-branch CI` | source authority / CI |
+| #309 | CORE | `Add source-faithful Bałaban matching and finite Fourier Hodge reduction` | source matching / Hodge |
+| #313 | CORE | `Add periodic four-torus and finite Fourier Hodge foundation` | torus / Hodge |
+| #315 | CORE | `Close periodic physical fibres, exact finite reductions and terminal-scale assembly` | periodic / terminal scale |
+| #328 | VALIDATION | `Add trusted clean Agda CI for the YM coercivity cone` | coercivity CI |
+| #329 | CORE | `Close side-four bond coercivity and repair the SU2 chart-radius lane` | coercivity / chart repair |
+| #334 | CORE | `Close configured-side C1 identification and radial chart interfaces` | C1 / chart |
+| #335 | CORE | `Prove exact SU(2) Wilson plaquette second-order jet` | Wilson / Hessian precursor |
+| #339 | CORE | `Close side-four averages and instantiate the C2 coarse propagator frontier` | C2 / propagator |
+| #342 | CORE | `Expose and advance the P1–P5 Clay Yang–Mills frontier` | P1-P5 |
+| #343 | CORE | `Close the configured Green inverse and advance the literal Clay frontier` | Green inverse |
+| #344 | CORE | `Construct T1–T5 Yang–Mills frontier reductions and physical transport` | T1-T5 |
+| #346 | CORE | `Internalize literal Yang–Mills frontier producer cutset` | literal producer cutset |
+| #348 | CORE, SUPPORT | `Integrate Bishop and DASHI constructive-real backends with literal Yang–Mills frontier` | Bishop / constructive reals |
+| #349 | VALIDATION | `Merge literal Yang–Mills frontier into Bishop integration branch` | integration |
+| #350 | VALIDATION | `Sync current master into Bishop integration branch` | sync |
+| #353 | CORE | `Advance Gate 4 through physical involutions, Bishop parity, P06/P11, Step-V and SI` | Gate 4; submission rounds 7–9 aggregate |
+| #357 | VALIDATION | `Validate Yang-Mills submission round eight` | submission R8 |
+| #358 | VALIDATION | round-eight validation continuation | submission R8 |
+| #359 | VALIDATION | round-eight validation continuation | submission R8 |
+| #360 | VALIDATION | round-eight validation continuation | submission R8 |
+| #361 | VALIDATION | `Validate Yang-Mills submission round nine` | submission R9 |
+| #362 | VALIDATION | `Validate latest Yang-Mills submission round nine` | submission R9 |
+| #365 | CORE | `Discharge Bishop factorial/parity/interlacing and finite Step-V sums; isolate lightweight P06` | submission R10 |
+| #366 | VALIDATION | `Validate Yang-Mills submission round ten` | submission R10 |
+| #367 | CORE | `Add direct-ratio Step-V reducer, audit P06 diameter claims, and order P33 before Gate 4` | submission R11 |
+| #369 | CORE | `Complete Round-11 full-ball, P11, and fixed-lattice-to-continuum dependency spines` | submission R11 |
+| #370 | CORE | `Advance Yang-Mills Round 11: direct-ratio, P06/P11 audit, Gate-4 ordering, and OS spine` | submission R11 |
+| #372 | CORE | `Prove concrete signed P33 coercivity from exact LDL and five local Hessian channels` | P33 / LDL |
+| #377 | CORE | `Advance the Clay path with inverse-dexp bounds, Wilson budgets, and continuum-limit reuse` | highest-alpha R14 |
+| #378 | CORE | `Audit physical-unit mass-gap transport and close new P33 algebra` | highest-alpha R15 |
+| #380 | CORE | `Close inverse-dexp positivity and advance the local SU2 chart engine` | highest-alpha R16 |
+| #381 | CORE | `Close the actual endpoint modulus and coupled RG factor audits` | highest-alpha R17 |
+| #386 | CORE | `Close the literal quaternion chord lane and calibrate the physical residual` | highest-alpha R18 |
+| #391 | CORE | `Replace the collar residual lane with exact Combes–Thomas conjugation` | highest-alpha R19 |
+| #393 | CORE | `Close the finite Schur and physical Combes–Thomas endgame` | highest-alpha R20 |
+| #394 | CORE, CORRECTED | `Cancel exact gauge and constraint jets from the physical Hessian remainder` | R21; corrected by R22 |
+| #396 | CORE, CORRECTED | `Repair the physical Hodge split and construct the rational Wilson sixteen-atom Hessian` | R22 |
+| #399 | SUPPORT, BODY-ONLY | broad ternary/cross-domain tranche with NS/YM interface | cross-domain donor |
+| #402 | CORE, SUPERSEDED | `Block bare volume-uniform coercivity and formalize terminal-scale gap pullback` | early/diverged R23 |
+| #403 | CORE | clean Round23 integration of same programme | R23 |
+| #409 | CORE | `Reduce physical Wilson atoms and prove the signed gauge defect modulo the literal link radius` | R24 |
+| #415 | SUPPORT, BODY-ONLY | NS commutator tranche carrying YM projection-leakage cross-pollination | donor |
+| #416 | CORE, SUPPORT | `Cross-pollinate Yang–Mills RG with projection leakage and reduced modes` | R25 |
+| #421 | CORE | `Separate physical gap scaling from RG compatibility and quantify uniform Schur inputs` | R26 |
+| #425 | SUPPORT, BODY-ONLY | harmonic carrier / shared NS-YM filtered-estimate algebra | donor |
+| #427 | SUPPORT | `Cross-pollinate YM gap scaling with harmonic and wreath refinement` | around R27 |
+| #430 | CORE | `Close signed Wilson incidence, same-h terminal coercivity, and exact RG tails` | R27 |
+| #432 | VALIDATION | `Validation probe: round 27 signed Wilson and terminal Hessian` | R27 |
+| #433 | SUPPORT, BODY-ONLY | VOA finite-mode/trace probes with shared NS/YM material | donor |
+| #435 | CORE, SUPERSEDED | `Separate observable and spectral uniformity and formalize RG good-class preservation` | R28; integrated by R29 |
+| #439 | CORE, CORRECTED | `Unify YM highest-alpha head and isolate correlated W-local cancellation` | R29 |
+| #440 | CORE, ALT | `Add strong-coupling functional-inequality route and exact SU(2) margin arithmetic` | R30; strong-coupling route |
+| #443 | SUPPORT | `Formalize Hurwitz, Hopf, Klein, and Noether cross-pollination` | stacked on R30 |
+| #444 | CORE | `Reconcile SO/SU curvature rates, weighted Wasserstein contraction, and all-beta scaling` | R31 |
+| #457 | SUPPORT | `Add complete frontier Hodge, automorphic, spectral, YM and NS cross-pollination` | cross-domain frontier donor |
+| #458 | CORE | `State the literal Clay YM contract and derive the Hessian coefficient from sixteen atoms` | R32 |
+| #461 | CORE, SUPPORT | `Formalize Yang-Mills claim papers, all-group promotion guards, and gap scaling` | R33 / source claims |
+| #462 | CORE | `Derive the physical selected-background radius and construct W-local` | R34 |
+| #466 | CORE | `Derive the plaquette curl and isolate the sharp Wilson deep remainder` | R35 |
+| #470 | CORE | `Close the finite Wilson pair/deep channels and expose the exact variation selector` | R36 |
+| #473 | CORE | `Construct the finite selected-variation repair and spillover ledger` | R37 |
+| #476 | CORE | `Construct the physical projector and split the selected-variation spillover` | R37 continuation |
+| #486 | CORE | `Construct the redundancy-safe KKT projector and local constrained Green algebra` | R39; successor says R38 existed internally |
+| #487 | VALIDATION | temporary Round39 checker/probe | R39 |
+| #488 | VALIDATION | temporary Round39 checker/probe | R39 |
+| #489 | CORE | `Localize the KKT multiplier and close the correlated singleton reducer` | R40 |
+| #491 | VALIDATION | Round40 checker/probe | R40 |
+| #496 | CORE | `Build the physical Yang–Mills constraint producer and SZZ decision tranche` | R41 lineage |
+| #497 | CORE, ALT | `Certify the single-plaquette owner envelope with exact budget slack` | certified-enclosure fork after R40 / branch R41 |
+| #505 | VALIDATION | `TEMP: merge master into YM Round 41 working branch` | integration only |
+| #507 | CORE, CORRECTED | `Reconcile the physical YM constraint floor and recovery route onto master` | post-R41/R42 reconciliation |
+| #519 | CORE, SUPERSEDED | `Close the reduced KKT multiplier seam on the selected YM tangent projector` | stale first follow-up |
+| #520 | CORE | same reduced-KKT seam on clean/current ancestry | supersedes #519 branch state |
+| #522 | CORE | `Close the nonlinear gauge derivative budget and telescope RG covariance` | Round44 lineage |
+| #540 | CORE | `YM Gate I: normal-form authority and canonical correction` | Round46 aggregate lineage |
+| #542 | CORE | `YM Gate I: tighten physical producer seams` | R47 |
+| #543 | CORE | `YM Gate I + source-faithful complete-density RG reuse` | post-R47 / CMP119/CMP122 source route |
+| #547 | CORE | `YM Round52: source-native physical leaf reductions` | R52 |
+| #554 | CORE | `YM Round54: derive Federbush cancellation and finite physical producer spine` | R54; body references R53 predecessor |
+| #564 | CORE | `YM Round56: normalized pi momentum bridge + five-channel quartic beta adapter` | R56 |
+| #566 | CORE | `YM Round57: four-orbit beta, Bishop interval semantics, grouped G2 and source-native RG` | R57 |
+| #568 | CORE | `YM Round58: canonical G2, compact-group one-loop, and published 4D UV boundary` | R58 |
+| #571 | CORE | `YM Round59: positive RG geometry, Cheeger gap, and two-metric cutoff gate` | R59 |
+| #574 | CORE, ALT | `YM Round57: hyperoctahedral orbit reduction + Walsh cancellation` | parallel R57 symmetry route |
+| #575 | CORE | `YM Round60: Walsh cancellation before Bishop intervals and G2 symmetry falsifier` | R60 |
+| #578 | CORE, ALT | `YM Round60: literal G2 support, charge-relative Green closure, FP ghost and Wilson transfer positivity` | parallel R60 |
+| #583 | CORE | `YM Round61–87: literal Clay four-family frontier; marked stress fields and beta trig reduction` | aggregate of many internal rounds; do not assume one PR per round |
+| #644 | CORE | `YM Round112: pay A2 marginal sensitivity with mixed-Cauchy cubic telescope` | R112 |
+| #670 | CORE | `Close theorem-level Path13 exactness and compress the mass-gap frontier` | Path13 precursor |
+| #732 | CORE | `Narrow YM Eq119 and split the physical Hamiltonian cut` | Path13 / Eq119 / Hamiltonian |
+| #753 | CORE | `Construct the Path13 two-carrier Eq119 source-family compiler` | Path13 / CMP98 Eq.(119) |
+| #764 | CORE | `YM: prune per-bond geometry and pointwise Eq. (119) chart receipts` | Path13 Eq119 minimization |
+| #789 | CORE | `YM: split Path13 uniform calculus source payment` | Path13 Eq119 |
+| #790 | CORE | `YM: minimize Path13 Eq119 semantic calculus payments` | Path13 Eq119 |
+| #792 | CORE, CORRECTED | `YM: correct Path13 Eq119 printed dexp/J roles` | sign/operator correction |
+| #793 | CORE, SUPPORT | `YM: x-pollinate T3 right Jacobian into corrected Eq119 roles` | T3 donor |
+| #795 | CORE | `YM: minimize T3 Eq119 scalar source boundary` | scalar cut |
+| #796 | CORE | `YM: split Path13 physical data from standard operator representation` | physical vs representation split |
+| #797 | CORE | `YM: add current preferred Path13 Eq119 source frontier` | Eq119 frontier at that epoch |
+| #799 | CORE | `YM: make mass-gap route consume current Eq119 frontier` | route integration |
+| #800 | CORE | `YM: synchronize spectral statement with current Eq119 frontier` | spectral sync |
+| #801 | CORE | `YM: specialize Bałaban variational theorem directly to Path13` | variational specialization |
+| #803 | CORE | `YM: align Path13 selected defect with R171 and minimize printed semantics` | R171 alignment |
+| #804 | CORE, CORRECTED | `YM: replace 1/24 cut with exact 74-link Eq119 budget` | threshold correction |
+| #806 | CORE, SUPPORT | `YM: reduce M7 domain/self-adjointness through Kato closed forms` | operator-domain route |
+| #809 | CORE | `YM: minimize T5 physical continuum OS-gap source cut` | T5 / continuum / OS |
+| #811 | CORE | `YM: construct finite projected P33 Hamiltonian domain and floor` | finite Hamiltonian precursor |
+| #821 | CORE, SUPERSEDED | `YM: isolate literal CMP119 raw-source family as first preferred source wall` | internal R212–217; broad raw-source wall |
+| #829 | SUPPORT | `Wikimedia: attach scientific reference QIDs across YM, NS and RH` | metadata / source identity |
+| #846 | CORE, CORRECTED | `YM: recut preferred source frontier to regular-E and marked-history seams` | internal R218–228; BC1 route recut |
+| #849 | SUPPORT, VALIDATION | `YM Path13: fibre-native aggregation and OOM profiling follow-up` | elaboration/resource route |
+| #857 | CORE, ALT | `YM Row C: minimize Heat/Doob debt to real majorants and one weighted generator row` | internal R251–259; Row-C tactic |
+| #867 | CORE, SUPERSEDED | `YM Row C: split Langevin commutator from symmetric Hessian row weld` | explicitly superseded by #869 |
+| #869 | CORE, CURRENT | `YM: normalize mass-gap search to quantitative clustering consumer` | internal R270–275; Row C demoted to optional tactic |
+| #883 | SUPPORT, CURRENT | `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger` | archaeology / current survey branch |
 
-The gaps above are deliberate. They mean “no standalone PR title located in this audit”, not “round did not exist”.
+### YM internal-round-only gaps explicitly retained
 
-## 7. YM late source/operator/path13 PR spine
+These are known/visible in successor modules or PR bodies but **no trustworthy standalone PR title is assigned here**:
 
-These PRs are more useful for current work than many earlier title rounds.
+```text
+R38
+R42
+R43
+R45
+R48–R51 (unless later PR archaeology locates exact standalone titles)
+R53 predecessor referenced by #554
+R55 / R60-adjacent internal steps represented inside aggregate branches
+many R61–R87 steps represented by #583 rather than one PR each
+```
 
-| PR | Title | Current interpretation |
-|---|---|---|
-| #789 | `YM: split Path13 uniform calculus source payment` | Path13/CMP98 Eq.(119) source minimization. |
-| #790 | `YM: minimize Path13 Eq119 semantic calculus payments` | Further least-privilege source cut. |
-| #792 | `YM: correct Path13 Eq119 printed dexp/J roles` | CORRECTED source-sign/operator roles. |
-| #793 | `YM: x-pollinate T3 right Jacobian into corrected Eq119 roles` | T3 compatibility donor. |
-| #795 | `YM: minimize T3 Eq119 scalar source boundary` | Removes over-strong scalar prerequisites. |
-| #796 | `YM: split Path13 physical data from standard operator representation` | Separates physical/source from standard representation. |
-| #797 | `YM: add current preferred Path13 Eq119 source frontier` | Canonical Eq119 frontier at that time. |
-| #799 | `YM: make mass-gap route consume current Eq119 frontier` | Mass-gap route integration. |
-| #800 | `YM: synchronize spectral statement with current Eq119 frontier` | Spectral statement alignment. |
-| #801 | `YM: specialize Bałaban variational theorem directly to Path13` | Removes same-object receipts by construction. |
-| #803 | `YM: align Path13 selected defect with R171 and minimize printed semantics` | Further source minimization. |
-| #804 | `YM: replace 1/24 cut with exact 74-link Eq119 budget` | Exact threshold correction. |
-| #806 | `YM: reduce M7 domain/self-adjointness through Kato closed forms` | Operator/domain donor; physical closed form still open. |
-| #809 | `YM: minimize T5 physical continuum OS-gap source cut` | Continuum/OS/gap least-privilege input. |
-| #811 | `YM: construct finite projected P33 Hamiltonian domain and floor` | Finite M7 precursor only. |
-| #821 | `YM: isolate literal CMP119 raw-source family as first preferred source wall` | Internal R212–217. Historical first-source wall; later compressed for BC1. |
-| #846 | `YM: recut preferred source frontier to regular-E and marked-history seams` | Internal R218–228. SUPERSEDES whole raw-family-first ordering for BC1. |
-| #849 | `YM Path13: fibre-native aggregation and OOM profiling follow-up` | SUPPORT / elaboration-resource route, not new physical theorem. |
-| #857 | `YM Row C: minimize Heat/Doob debt to real majorants and one weighted generator row` | Internal R251–259; Row-C tactic minimization. |
-| #867 | `YM Row C: split Langevin commutator from symmetric Hessian row weld` | CLOSED / SUPERSEDED by #869. |
-| #869 | `YM: normalize mass-gap search to quantitative clustering consumer` | **CURRENT conceptual mass-gap correction**; internal R270–275. Row-C becomes optional producer tactic. |
-| #883 | `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger` | CURRENT archaeology/integration branch. |
+A search for `Round43` returns NS #527, not YM. Do not attach that PR to YM merely to fill the number.
 
-### Important naming collision
+### YM high-value route families for browsing
 
-`CMP98 Eq.(119)` / “Eq119” in the Path13 series is **not** “CMP119” the 1988 Bałaban journal-volume paper. They are unrelated numerals and have repeatedly produced misleading search hits.
+```text
+early beta/lattice/SU2        #5–#16, #49, #92
+compact-Lie / SU(N)           #143, #146, #151, #153
+all-scale / continuum / OS    #248, #262, #264, #288–#315
+Gate4 / submission rounds     #353–#370
+P33 / Combes–Thomas           #372, #377–#403
+highest-alpha Wilson/KKT       #409–#522
+Gate-I / source-native RG      #540–#583
+Path13 / CMP98 Eq.(119)        #670, #732, #753, #764, #789–#804
+Hamiltonian / OS support       #806, #809, #811
+CMP119/CMP122 source recuts    #821, #846
+Row C / mass-gap recut         #857, #867, #869
+```
 
-## 8. YM internal module-round crosswalk most relevant to current archaeology
+**Search warning:** `CMP98 Eq.(119)` / `Eq119` is not `CMP119` the Bałaban journal paper. Keep those search families separate.
 
-These are **not** PR-title rounds.
+---
 
-| Internal round | Meaning / route |
+# B. Master RH PR registry — every located route, not only the current one
+
+| PR | Tags | Title | Route / search coordinates |
+|---:|---|---|---|
+| #100 | CORE | `Formalise Riemann zeta and the DASHI–Weil RH proof route` | foundational zeta / Weil / explicit formula |
+| #121 | CORE | `Extend zeta with von Mangoldt exhaustion and Weil-square coercivity` | von Mangoldt / Weil-square |
+| #128 | SUPPORT | `Formalise prime counting, Chebyshev functions, and Riemann transforms` | prime-counting background |
+| #449 | ALT, SUPPORT | `Add substantive RH, Hodge, BSD, P-v-NP, Poincare, and graded-VOA tranches` | Xi symmetry / Hilbert–Pólya-style support |
+| #457 | SUPPORT, BODY-ONLY | broad spectral/frontier cross-pollination including RH | Hodge/spectral donor |
+| #604 | CORE, ALT | `Formalize zeta Hermitian defect, finite retention, interference and detectability route` | Hermitian-zeta / Alpöge–Furman / G1–G4-style top-down route |
+| #605 | SUPPORT, BODY-ONLY | `Round11: symmetry-resolved traveling-wave conscious-access formalism` | includes `RiemannReflectionOrbitDefectExact`; reflection-block support |
+| #610 | SUPPORT, BODY-ONLY | `Formalize C3 Fourier conjugation and SSP15 affine phase closure` | critical-line reflection fixed-locus grammar |
+| #620 | SUPPORT, BODY-ONLY | `Formalise coarse/fine criticality, stage genealogy, contradiction and recharting` | RH role/provenance / erased-coordinate support |
+| #622 | CORE, ALT | `G21: pole-quotiented two-channel exterior explicit-formula desk test` | G21; two-channel exterior; four-sample rank-two route |
+| #630 | CORE, ALT | `Aristotle RH bidi: explicit cutoff tail and finite post-Schur near core` | Lean return 8883; every-J near/far; finite near carrier |
+| #642 | CORE, ALT, SUPERSEDED | `RH bidi cut: checked scalarization plus balance no-go frontier` | Lean return 8885; determinant scalarization; balance no-go |
+| #646 | CORE, CORRECTED | `RH bidi: pole-quotient complement margin after balance no-go` | universal pole quotient becomes final carrier; Off + Gamma split |
+| #661 | SUPPORT | `Math 2026: source-bounded audits for DBN, prime gaps, D(p^2) and autoformalization` | de Bruijn–Newman / source audit |
+| #676 | SUPPORT | `Math 2026: source-exact Dujella/DBN BIDI cross-pollination with RH/NS/YM` | DBN / source-exact cross-pollination |
+| #677 | CORE, ALT | `RH: bidi-aware experimental proof search and 8889 feedback` | Lean return 8889; H_X→H_A→H_M→H_T→H_W→H_E; cluster/Gamma feedback |
+| #686 | CORE, ALT | `RH BIDI: 8894 gap-split no-go and adaptive clustering reconciliation` | Lean 8894; taper/gap-split no-go; adaptive clustering; target modulation recovery |
+| #691 | CORE, CORRECTED | `RH: H_A consumer-quotient active recovery cross-pollination` | source-native H_A / modulation dependent producer |
+| #721 | CORE | `BIDI-weld ζ density, literal target-gap moment, and direct finite producer into the live RH cut` | determinant/G2d diagnostic vs final-carrier weld |
+| #751 | CORE, CORRECTED | `Reconcile merged RH diagnostics with final pole-quotient cut` | final-carrier correction; one crossing J; signed near + far; Gamma |
+| #770 | SUPPORT, BODY-ONLY | `Cross-pollinate residual action with agentic, Base369/Monster, Pareto, tetration and literal frontier search` | `RiemannZetaLiteralFrontierSchedulerExact`; literal frontier scheduler |
+| #774 | CORE | `Reconcile post-751 RH final carrier and Gamma proof routes` | Off/Gamma analytic-core compression |
+| #813 | CORE, SUPERSEDED | `Fix and wire direct RH terminal compiler` | explicitly superseded by #818 |
+| #818 | CORE | `RH: unify current terminal compiler with analytic-core prize path` | analytic-core / high-low prize path |
+| #824 | CORE, CORRECTED | `RH: direct one-leaf pole-quotient cut with proof-gap introspection` | direct one-leaf; literal final near; still used intermediate M_cluster |
+| #829 | SUPPORT | `Wikimedia: attach scientific reference QIDs across YM, NS and RH` | bibliographic/QID support |
+| #847 | CORE, CURRENT | `RH: reduce high leaf to balance-free actual ClusterResponse` | removes M_cluster; actual ClusterResponse; balance-free context |
+| #855 | CORE, ALT | `RH: generic high contradiction and certified final-near follow-up` | direct + certified producer families; R0/R1/R2/R3 decomposition |
+| #856 | SUPPORT, BODY-ONLY | `J invariant Base369 formulaic renderer and pants/q-series follow-up` | carries RH observer-governance / fibre BIDI support |
+| #865 | CORE, ALT | `RH: fold-local concrete certificate bridge and R3 min-cut` | certificate scalar need not equal final analytic scalar |
+| #868 | CORE, ALT | `RH: reduce certified near route to cellwise integral uppers` | cellwise one-sided numerical certification route |
+| #883 | SUPPORT, CURRENT | `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger` | archaeology / current survey branch |
+
+## RH route-family index
+
+This section is intentionally route-oriented so **failed/abandoned routes remain discoverable**.
+
+### RH-01 — base zeta / Weil / explicit-formula route
+
+```text
+#100 -> #121 -> #128
+```
+
+Search aliases: `Riemann`, `zeta`, `Weil`, `von Mangoldt`, `Chebyshev`, `explicit formula`.
+
+### RH-02 — Xi symmetry / Hilbert–Pólya / broad spectral experiments
+
+```text
+#449
+#457 (support)
+```
+
+Keep as historical spectral route; do not equate it with the later pole-quotient route.
+
+### RH-03 — Hermitian defect / finite retention / interference route
+
+```text
+#604
+#605 support
+#610 support
+```
+
+Search aliases: `Hermitian defect`, `reflection orbit`, `critical-line reflection`, `Alpöge`, `Furman`.
+
+### RH-04 — G20 predecessor
+
+A separate **G20 cutset project is referenced by #622 but is not present in this GitHub tree**. This is an honest archaeology gap. Do not invent a PR number.
+
+### RH-05 — G21 two-channel exterior route
+
+```text
+#622
+```
+
+Four samples / rank <=2 nuisance / parity minors / exterior observable. This route matters historically even though later proof search moved elsewhere.
+
+### RH-06 — Aristotle/Lean 8883 explicit-cutoff route
+
+```text
+#630
+```
+
+Coordinates: every-cutoff near/far split, finite near carrier, explicit far-shell modulus, cutoff transport. Checked Lean status is not Agda proof transport.
+
+### RH-07 — 8885 determinant scalarization / balance no-go
+
+```text
+#642 -> #646
+```
+
+#642 finds the balanced determinant obstruction. #646 pivots to the universal pole quotient rather than forcing a strict contradiction on a balanced carrier.
+
+### RH-08 — universal pole-quotient split-complement route
+
+```text
+#646 -> #751 -> #774 -> #818
+```
+
+Search aliases: `pole quotient`, `Off`, `Gamma`, `allowance`, `analytic core`, `split complement`.
+
+### RH-09 — DBN / contemporary-source cross-pollination
+
+```text
+#661 -> #676
+```
+
+Source/support route; retains de Bruijn–Newman and 2026 math context without becoming the final RH carrier automatically.
+
+### RH-10 — 8889 BIDI experimental architecture
+
+```text
+#677
+```
+
+Search aliases: `8889`, `H_X`, `H_A`, `H_M`, `H_T`, `H_W`, `H_E`, `quantitative cluster`, `Gamma`.
+
+### RH-11 — 8894 gap-split/taper no-go + adaptive clustering
+
+```text
+#686
+```
+
+Search aliases: `8894`, `gap split`, `taper`, `adaptive clustering`, `J*Lambda`.
+
+### RH-12 — H_A source-native modulation / consumer quotient
+
+```text
+#686 -> #691
+```
+
+Recover source modulation/transform-shift structure and avoid charging generic Fourier translation machinery as new proof debt.
+
+### RH-13 — determinant/G2d target-gap diagnostic and live-carrier weld
+
+```text
+#721
+```
+
+Important diagnostic/same-object route; determinant/G2d scalarization is not automatically the final universal pole-quotient carrier.
+
+### RH-14 — final-carrier reconciliation / allowance route
+
+```text
+#751 -> #774
+```
+
+One common cutoff `J`, signed near estimate, far bound, same-taper Gamma; then analytic-core compression.
+
+### RH-15 — generic terminal compiler / analytic-core prize path
+
+```text
+#813 (superseded) -> #818
+```
+
+#813 is kept because it records the old compiler transition; #818 is the clean successor.
+
+### RH-16 — direct one-leaf route
+
+```text
+#824
+```
+
+Direct target against a cluster margin; literal final-near observer refinement. Retain even though #847 later removes the intermediate margin object.
+
+### RH-17 — actual-ClusterResponse / balance-free route
+
+```text
+#847
+```
+
+Current conceptual high-route correction: independent strict theorem targets actual `ClusterResponse`, with final balance withheld until downstream contradiction assembly.
+
+### RH-18 — certified numerical route
+
+```text
+#855 -> #865 -> #868
+```
+
+R0 concrete scalar bridge; R1 literal final-near identity; proof-carrying finite upper; cellwise one-sided integral upper; R2 strict actual-ClusterResponse margin. This is an **optional sufficient producer**, not the only RH route.
+
+### RH-19 — terminal low-ordinate / critical-coordinate route
+
+Mostly developed inside #824/#855/#865/#868:
+
+```text
+criticalLine <-> Re = 1/2
+constructive equality stability
+Platt–Trudgian verified region on same carrier
+verified-region-or-High cover
+```
+
+Search aliases: `Platt`, `Trudgian`, `critical line`, `verified region`, `R3`.
+
+### RH-20 — observer / Base369 / J / Monster support
+
+```text
+#620
+#770
+#856
+```
+
+Support/cross-pollination only. Keep because these PRs influenced observer/refinement/search machinery, but do not treat them as independent RH proof routes unless their exact RH owners are being investigated.
+
+---
+
+# C. Internal YM source-frontier round crosswalk
+
+These are **module rounds, not PR-title rounds**. They are indexed here because GitHub searches often land on the wrong clock.
+
+| Internal round | Search meaning |
 |---:|---|
-| R58 | Source-native raw-state ancestry / published finite-cutoff UV-stability lane. |
-| R61–87 | Large four-family aggregation represented by #583. |
-| R103 | Physical finite effective-action/Hessian A1/A2/BC1/BC2 leaf family. |
-| R108 | CombinedRG/source semantics and same-density continuation family. |
-| R112 | A2 marginal sensitivity; #644 title round112. |
-| R131 | Same-family finite/continuum/Schwinger/common-metric stress endpoint. |
-| R132/133 | Generated-action + first-variation/stress weld. |
-| R145 | Detects post-hoc density/action semantics circularity; forces source semantics before BC1. |
-| R191–211 | Current terminal-cutset iteration sequence before source recut. |
-| R212 | Compatibility source-realization route. |
-| R214 | Source-fixed `rho_k -> A_k`; important for generated-action/unification provenance. |
-| R215 | Route reversal: shortest BC1 path consumes literal regular `E_k`, not whole `A_k`. |
-| R216/217 | Raw source realization split / raw-state frontier. Historical broad source wall. |
-| R218 | Published source flow. |
-| R219 | Beta-driven residual/complete-density family. |
-| R221 | Selected regular-E source projection. |
-| R225 | Preferred regular-E source route; full residual family demoted to stronger alternative. |
-| R234/235 | Source-fixed regular-E semantics / localization-radius split. |
-| R236 | Preferred source frontier recomputation. |
-| R237 | Selected-scale semantics; total arbitrary-density interpreter no longer required. |
-| R240 | Priority router; regular-E projection, common radius, and D2 calculus separated. |
-| R241 | Regular-E projection compiler from source-native flow. |
-| R242 | `RegularTerm = Background -> Real` at source construction. |
-| R243 | Extraction + pointwise evaluation become compiler output. |
-| R244 | CMP119 localization source theorem separated from carrier realization. |
-| R245 | Function-valued E + localization -> CMP109/116 continuation. |
-| R246 | Consumer-indexed Section-2 form, finite `ActiveScale`; current branch adds form-only witness. |
-| R247 | Active continuation into CMP109/116; current branch has focused validation. |
-| R251–259 | Least-privilege Row-C Heat/Doob/Hessian/generator-row tranche. |
-| R260 | Anchored Hessian majorant correction. |
-| R270–275 | Canonical mass-gap/B-facing clustering consumer; producer tactics demoted. |
+| R58 | source-native raw-state ancestry / finite-cutoff UV-stability lineage |
+| R61–R87 | large four-family tranche largely aggregated by #583 |
+| R103 | finite effective-action/Hessian A1/A2/BC1/BC2 family |
+| R108 | CombinedRG / source semantics / same-density family |
+| R112 | A2 marginal sensitivity; visible in #644 |
+| R131 | same-family finite/continuum/Schwinger/common-metric stress endpoint |
+| R132–133 | generated-action + first-variation/stress weld |
+| R145 | detects post-hoc/circular density-action semantics |
+| R191–211 | terminal-cutset iterations before source recut |
+| R212 | compatibility source-realization route |
+| R214 | source-fixed `rho_k -> A_k`; generated-action provenance |
+| R215 | BC1 route reversal to literal regular `E_k` |
+| R216–217 | raw source realization split / broad raw-source frontier |
+| R218 | published source flow |
+| R219 | beta-driven residual/complete-density family |
+| R221 | regular-E source projection |
+| R225 | preferred regular-E route |
+| R234 | source-fixed regular-E semantics |
+| R235 | localization-radius split |
+| R236 | preferred source frontier recomputation |
+| R237 | selected-scale semantics |
+| R240 | priority router |
+| R241 | regular-E projection compiler |
+| R242 | function-valued `RegularTerm = Background -> Real` |
+| R243 | extraction/evaluation become compiler output |
+| R244 | CMP119 localization theorem vs carrier realization split |
+| R245 | function-valued E + localization -> CMP109/116 continuation |
+| R246 | active-scale Section-2 form/predicate |
+| R247 | active continuation / focused validation |
+| R251–259 | least-privilege Row-C Heat/Doob/Hessian/generator-row tranche |
+| R260 | anchored Hessian-majorant correction |
+| R270–275 | canonical quantitative-clustering/mass-gap consumer |
 
-### Dated source-frontier corrections worth remembering
+---
 
-- R131: `258e977a...`, 2026-08-30 03:19 Brisbane — common-metric finite/continuum/Schwinger/stress endpoint.
-- R132/133: `10d00f01...`, `281f2b7a...`, 30 Aug 20:56 Brisbane — generated action / first variation.
-- R145: `b8e2add4...`, 31 Aug 19:43 Brisbane — circular/post-hoc semantics correction.
-- R214: 8 Sep 07:35–07:37 Brisbane — whole-action semantics moved to source boundary.
-- R215: 8 Sep 07:39–07:41 Brisbane — BC1 regular-E route reversal.
-- R242: `0712caaa...`, 9 Sep 21:47 Brisbane — function-valued regular E.
-- R243: `c7c65b17...`, 9 Sep 21:47:59 Brisbane — extraction/evaluation compiler.
-- R244: `8f1b0d3b...` / `9f55e85d...`, 21:50:39 / 21:51:26 Brisbane — localization authority/carrier split.
-- R246: `c3a184b8...`, 21:54:33 Brisbane — consumer-indexed active Section-2 predicate.
+# D. RH clock crosswalk
 
-## 9. YM supersession map
+| Clock | PR | Route meaning |
+|---|---:|---|
+| G20 | — | predecessor referenced by #622; standalone GitHub project/PR not located in this tree |
+| G21 | #622 | two-channel exterior explicit-formula route |
+| 8883 | #630 | explicit cutoff / near-far / far shell / finite near carrier |
+| 8885 | #642 | determinant scalarization + balance no-go |
+| 8889 | #677 | BIDI feedback / cluster-Gamma return; later optional donor |
+| 8894 | #686 | gap-split/taper no-go / adaptive clustering / modulation recovery |
+| R0 | #855+ | optional concrete numeric/certificate scalar realization |
+| R1 | #855+ | final-near same-object representation |
+| R2 | #847/#855+ | independent strict high theorem vs actual ClusterResponse |
+| R3 | #855+ | critical-coordinate / verified-low-region / high-low terminal lane |
 
-Use this before reviving an older route.
+---
+
+# E. Known supersession / correction map
+
+## YM
 
 ```text
-Round21 (#394)
-  -> corrected Round22 (#396)
+R21 #394
+  -> corrected by R22 #396
 
-early/diverged Round23 (#402)
-  -> clean Round23 (#403)
+R23 early/diverged #402
+  -> clean R23 #403
 
-Round28 (#435)
-  -> integrated/corrected by Round29 (#439)
+R28 #435
+  -> integrated/corrected by R29 #439
 
-R217 / #821 broad raw-family-first source wall
-  -> R218–228 / #846 regular-E preferred source cut
-  -> R242–247 current function-valued active regular-E/localization cut
+stale reduced-KKT follow-up #519
+  -> clean/current ancestry #520
 
-Row-C tactic R251–260 / #857
-  -> canonical clustering consumer R270–275 / #869
-     (Row C remains an optional sufficient producer)
+broad raw-source-first #821 / R216–217
+  -> regular-E preferred recut #846 / R218–228
+  -> later R242–247 function-valued active regular-E route
+
+Row-C tactic #857 / R251–260
+  -> canonical clustering consumer #869 / R270–275
+     (Row C retained as optional producer)
 
 #867
   -> explicitly superseded by #869
 ```
 
-## 10. RH PR chronology — substantive proof-search spine
-
-| PR | Clock / label | Title / role |
-|---|---|---|
-| #100 | foundational | `Formalise Riemann zeta and the DASHI–Weil RH proof route` — initial zeta/explicit-formula/Weil architecture. HISTORICAL SUBSTRATE. |
-| #121 | foundational | `Extend zeta with von Mangoldt exhaustion and Weil-square coercivity`. |
-| #128 | support | `Formalise prime counting, Chebyshev functions, and Riemann transforms` — background donor. |
-| #449 | support | `Add substantive RH, Hodge, BSD, P-v-NP, Poincare, and graded-VOA tranches` — Xi/reflection and broad cross-math support. |
-| #604 | early top-down | `Formalize zeta Hermitian defect, finite retention, interference and detectability route` — historical G1–G4 style route. |
-| #622 | G21 | `G21: pole-quotiented two-channel exterior explicit-formula desk test` — exterior explicit-formula desk test. |
-| #630 | Lean 8883 | `Aristotle RH bidi: explicit cutoff tail and finite post-Schur near core` — checked every-J near/far, far shell, finite near carrier, cutoff transport; Agda proof transport not supplied. |
-| #642 | Lean 8885 | `RH bidi cut: checked scalarization plus balance no-go frontier` — determinant scalarization + balance no-go; diagnostic route. |
-| #646 | post-8885 | `RH bidi: pole-quotient complement margin after balance no-go` — universal pole quotient promoted as final carrier; channels separated. |
-| #676 | support | `Math 2026: source-exact Dujella/DBN BIDI cross-pollination with RH/NS/YM` — donor/attribution support. |
-| #677 | Lean 8889 | `RH: bidi-aware experimental proof search and 8889 feedback` — quantitative cluster/Gamma feedback; now OPTIONAL DONOR only unless theorem-bearing transport recovered. |
-| #686 | Lean 8894 | `RH BIDI: 8894 gap-split no-go and adaptive clustering reconciliation` — gap-split no-go/adaptive clustering; target-modulation/source recovery. |
-| #691 | source compression | `RH: H_A consumer-quotient active recovery cross-pollination` — collapses H_A to dependent source producer. |
-| #721 | same-object weld | `BIDI-weld ζ density, literal target-gap moment, and direct finite producer into the live RH cut`. |
-| #751 | terminal recut | `Reconcile merged RH diagnostics with final pole-quotient cut` — one crossing J, signed near + far, same-taper Gamma. |
-| #774 | analytic cores | `Reconcile post-751 RH final carrier and Gamma proof routes` — Off/Gamma analytic-core recut. |
-| #813 | terminal compiler | `Fix and wire direct RH terminal compiler` — CLOSED / explicitly superseded by #818. |
-| #818 | analytic-core prize path | `RH: unify current terminal compiler with analytic-core prize path` — historical payment APIs factor through minimal analytic-core route. |
-| #824 | one-leaf direct route | `RH: direct one-leaf pole-quotient cut with proof-gap introspection` — key route correction; isolates final-near representation + one high analytic family. At this point still used intermediate `M_cluster`. |
-| #847 | actual ClusterResponse | `RH: reduce high leaf to balance-free actual ClusterResponse` — **CURRENT conceptual correction**; removes `M_cluster`, enforces balance-free analytic context. |
-| #855 | generic high + certificates | `RH: generic high contradiction and certified final-near follow-up` — generic high consumer; R0/R1/R2/R3 decomposition; optional 8889 lower-envelope donor. |
-| #865 | fold-local certificate | `RH: fold-local concrete certificate bridge and R3 min-cut` — concrete certificate scalar may differ from final analytic scalar. |
-| #868 | cellwise upper route | `RH: reduce certified near route to cellwise integral uppers` — optional sufficient numerical producer; one-sided cell bounds enough. |
-| #883 | current archaeology | `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger`. |
-
-## 11. RH clock crosswalk
-
-### G-lane
-
-- `G21` is explicitly represented by PR #622.
-- A `G20` predecessor exists in the historical architecture, but this audit did not locate a safe standalone PR-title mapping. Do not guess one.
-
-### Lean / Aristotle returns
-
-| Return | PR | What it owns / does not own |
-|---:|---|---|
-| 8883 | #630 | Checked Lean every-cutoff near/far split, explicit far-shell modulus, finite near carrier, `D_off` cutoff transport. **Does not equal Agda proof transport.** |
-| 8885 | #642 | Determinant scalarization and balance no-go. Useful diagnostic; determinant carrier is not automatically the final universal pole quotient. |
-| 8889 | #677 | Quantitative cluster/Gamma feedback. Optional lower-envelope donor only after theorem-bearing same-carrier transport; status Boolean is not payment. |
-| 8894 | #686 | Gap-split no-go/adaptive clustering reconciliation and source recovery. |
-
-### Current direct-route internal chronology
-
-- 2026-09-08 05:20 Brisbane, `629700b2...`: `B_near = D_near`, `B_Gamma = D_Gamma`; separate channel-envelope theorems pruned.
-- 2026-09-09 16:17 Brisbane, `b1eeccee...`: bypass intermediate `M_cluster`; target actual `ClusterResponse`.
-- 2026-09-09 19:11 Brisbane, `751cd262...`: separate least terminal consumer from preferred phase-visible acquisition theorem.
-- 2026-09-09 22:07 Brisbane, `a25681a6...`: final near kernel evaluator-independent; one representation equality remains.
-- 2026-09-09 23:51 Brisbane, `4d48fbc7...`: current direct frontier = one representation seam + one primitive uniform high scalar family.
-
-### R0/R1/R2/R3 terminology
-
-- **R0** — optional concrete numeric/certificate scalar realization of the final carrier.
-- **R1** — exact same-object final-near representation:
-  `nearResponseAt(J) = finiteNearSum(cellResponse)`.
-- **R2** — independent high analytic theorem against actual `ClusterResponse`.
-- **R3** — actual-zeta critical coordinate / verified-low-region / high-low terminal carrier obligations.
-
-These are RH route labels, not YM internal rounds.
-
-## 12. RH supersession map
+## RH
 
 ```text
-historical broad Weil/window/global explicit-formula routes
-  -> useful donors, not mandatory current architecture
+broad Weil / window / explicit-formula architectures
+  -> retained as historical routes/donors
 
-8885 determinant scalarization
-  -> diagnostic/scalarization donor
-  -> NOT final universal pole-quotient carrier
+G21 #622
+  -> retained alternate observer route
+
+8885 determinant lane #642
+  -> balance no-go
+  -> universal pole quotient #646
+
+determinant scalarization remains diagnostic only
 
 #751 allowance/payment API
-  -> compressed by #774/#818 analytic cores
+  -> compressed by #774 / #818 analytic cores
 
 #813
   -> explicitly superseded by #818
 
-#824 direct one-leaf route with M_cluster
-  -> #847 removes M_cluster
-  -> direct target is actual ClusterResponse
+#824 direct one-leaf with intermediate M_cluster
+  -> #847 targets actual ClusterResponse and removes M_cluster
 
-#855 certificate route
-  -> optional sufficient producer
-  -> direct R2 theorem remains admissible and shorter if found
+#855/#865/#868 certified route
+  -> optional sufficient producer, not mandatory replacement of direct analytic R2
 
-8889 checked quantitative cluster status
-  -> optional donor only after theorem-bearing same-object transport
+8889 status/return
+  -> optional donor unless theorem-bearing same-carrier transport is recovered
 ```
 
-## 13. Stop rules — do not search/reprove these from scratch unless a current route actually fails
+---
 
-### YM
+# F. Search aliases for future rescans
 
-Do not restart:
+Use these exact families when updating the catalogue. Search **titles and bodies**, not titles alone.
 
-- generic CMP122 RG-stability theorem reconstruction merely because the local witness socket is conditional;
-- running-coupling identity over the finite beta history;
-- regular-E extraction or pointwise evaluation once using the R242 function-valued carrier;
-- CMP109/116 continuation compiler after the R246/R247 form witness;
-- BC1 same-object compiler from the literal regular-E continuation;
-- whole `A_k` semantics as a prerequisite of BC1;
-- Row-C stochastic/Heat/Doob/Langevin tactic architecture as if mandatory for the canonical mass-gap consumer;
-- generic geometric summation / Dyson plumbing already compiler-owned;
-- Path13 `CMP98 Eq.(119)` when searching for `CMP119` regular-E source semantics.
+### YM aliases
 
-Do not infer:
+```text
+YM
+Yang
+Yang-Mills
+Yang–Mills
+Balaban
+Bałaban
+mass gap
+Gate I
+highest-alpha
+submission round
+Path13
+Eq119
+CMP98
+CMP109
+CMP116
+CMP119
+CMP122
+P33
+Combes
+KKT
+Federbush
+Row C
+Heat/Doob
+Langevin
+cluster
+Wilson
+SU(2)
+SU(N)
+OS bridge
+```
 
-- finite-cutoff UV stability => continuum YM/OS/mass gap;
-- source DOI/QID => proof term;
-- whole-action semantics from downstream BC1 identity;
-- Round131/133 stress/action consistency backwards into upstream source semantics.
+### RH aliases
 
-### RH
+```text
+RH
+Riemann
+zeta
+Weil
+explicit formula
+Xi
+Hilbert
+G20
+G21
+Aristotle RH
+8883
+8885
+8889
+8894
+pole quotient
+pole-quotient
+Gamma
+DBN
+de Bruijn
+modulation
+Schur
+critical line
+Platt
+Trudgian
+certificate
+ClusterResponse
+nearOffFinset
+```
 
-Do not restart as primitive prerequisites:
+### Inclusion rule
 
-- absolute `W(t)` majorant route;
-- selected Weil-window machinery merely because it is mathematically available;
-- determinant-q scalarization;
-- intermediate `M_cluster`;
-- separate `B_near` and `B_Gamma` analytic envelope theorems;
-- far-shell theorem from scratch while the 8883 checked return is the source/status donor;
-- generic target translation/modulation/cosine mathematics;
-- reflection pairing/odd-channel cancellation as a fresh theorem unless same-object attachment genuinely fails;
-- certificate infrastructure as though it proves RH.
+Include a PR when the route is materially present in the title/body/diff ancestry. Do **not** include a PR merely because its boundary says something like “does not prove YM/RH”. Examples of false-positive search hits should remain excluded rather than padding the catalogue.
 
-Do not infer:
+---
 
-- one fixed-zero certificate => uniform high theorem;
-- Lean status => Agda theorem;
-- cluster balance => independent R2 inequality;
-- certificate scalar identity => final analytic scalar type equality.
+# G. Fast investigation pointers
 
-## 14. Attribution / identifier coordinates
+These are navigation shortcuts, not mathematical claims.
 
-These are navigation and source-identity coordinates only.
+| Question | Start here |
+|---|---|
+| earliest explicit YM PR? | #5, then #6–#10 and #16 |
+| early finite Bałaban RG? | #92 |
+| compact-Lie/SU(N) expansion? | #143, #146, #151, #153 |
+| continuum/OS historical work? | #248, #264, #288–#315 |
+| submission-round era? | #353–#370 |
+| P33/Combes–Thomas era? | #372, #377–#403 |
+| Wilson/KKT highest-alpha era? | #409–#522 |
+| Gate-I/source-native RG era? | #540–#583 |
+| Path13 / CMP98 Eq119? | #670, #732, #753, #764, #789–#804 |
+| Kato/Hamiltonian/T5 support? | #806, #809, #811 |
+| CMP119 raw/source recut? | #821, #846, then internal R242–247 |
+| Row-C / mass-gap recut? | #857, #867, #869 |
+| first RH Weil route? | #100, #121, #128 |
+| Hermitian-zeta alternate route? | #604 |
+| G21? | #622 |
+| G20? | referenced by #622; no standalone PR located in this tree |
+| 8883? | #630 |
+| 8885 / determinant no-go? | #642, then #646 |
+| DBN cross-pollination? | #661, #676 |
+| 8889? | #677 |
+| 8894? | #686 |
+| H_A source/modulation recut? | #691 |
+| target-gap/determinant diagnostic? | #721 |
+| final pole-quotient reconciliation? | #751, #774 |
+| analytic-core terminal path? | #818 |
+| direct one-leaf introspection? | #824 |
+| actual ClusterResponse correction? | #847 |
+| certified/computational route? | #855, #865, #868 |
+| current archaeology branch? | #883 |
 
-### YM
+---
 
-- Bałaban CMP109: DOI `10.1007/BF01215223`
-- Bałaban CMP116: DOI `10.1007/BF01239022`
-- Bałaban CMP119: DOI `10.1007/BF01217741`
-- Bałaban CMP122-I: DOI `10.1007/BF01257412`
-- Bałaban CMP122-II: DOI `10.1007/BF01238433`
-- Yang–Mills theory: Wikidata `Q1192873`
-- Tadeusz Bałaban person QID: unresolved in the authoritative repo atlas; do not guess.
-- Exact paper-specific Dewey: unresolved; do not substitute MSC for Dewey.
-- OEIS: not applicable to these source papers.
+# H. Maintenance rule
 
-### RH
+When a future PR materially changes YM or RH, append/update this catalogue in the same tranche with:
 
-- Riemann hypothesis: Wikidata `Q205966`
-- Riemann zeta function: Wikidata `Q187235`
-- Bernhard Riemann: Wikidata `Q42299`
-- Dewey coordinate recorded for the Riemann zeta function: `515.56`
-- Riemann 1859 memoir: no DOI assigned in the current source atlas.
+1. exact PR number and title;
+2. lane (`YM`, `RH`, or both/support);
+3. route tags/search aliases;
+4. round clock if one exists;
+5. whether it is core, alternate, validation, support, corrected, superseded, or current;
+6. predecessor/successor relationship;
+7. if an internal round has no standalone PR, leave the gap explicit instead of guessing.
 
-## 15. Fast lookup by question
-
-If the question is…
-
-- **“Where did YM source semantics become source-fixed?”** -> R145, R214.
-- **“When did BC1 stop requiring the whole action?”** -> R215, then R242–247.
-- **“Where is the current active regular-E source path?”** -> R246/R247 on PR #883 branch; historical recut in #846.
-- **“Where did Row C become optional rather than canonical?”** -> #869 / R270–275.
-- **“Where is the current Eq119 operator route?”** -> #789–#804; remember CMP98 Eq.(119) != CMP119.
-- **“Where is YM domain/self-adjointness?”** -> #806 plus operator/continuum frontier owners.
-- **“Where is YM continuum/OS least-privilege cut?”** -> #809 and later T5 owners.
-- **“Where did RH get the finite near/far checked source?”** -> #630 / 8883.
-- **“Where did determinant scalarization get demoted?”** -> #642 then #646/#824.
-- **“Where was M_cluster removed?”** -> #847.
-- **“Where are R0/R1/R2/R3?”** -> #855, refined by #865/#868.
-- **“What is the current RH first wall?”** -> R1 final-near literal finite representation; then R2 actual-ClusterResponse strict theorem.
-- **“Can we use 8889?”** -> only as optional donor with theorem-bearing same-carrier transport; see #855 optional lower-envelope adapter.
-
-## 16. Maintenance rule
-
-When a future PR changes a primitive proof obligation, update this document in the same tranche with:
-
-1. PR number and exact title;
-2. which clock changed (PR-title round / internal round / G label / Lean return);
-3. predecessor route;
-4. whether the predecessor is corrected, superseded, or still an active donor;
-5. new first live leaf;
-6. source/DOI/QID/Dewey changes, if any;
-7. exact-head validation status separately from theorem content.
-
-Do not rewrite history to make the current route look inevitable. Keep route reversals and failed/superseded consumers visible; they are part of the proof-search evidence.
+Do not delete failed routes just because a newer route is preferred. The failed and superseded routes are exactly what make this document useful for investigation.
