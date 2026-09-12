@@ -80,3 +80,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProteinDNA3DAdapterExact
 -- formula while stereochemical identity and measured optical response separate;
 -- phase/environment remains part of the observation fibre.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AlanineChiralEmpiricalExact
+
+-- Protein continuation: residue stereochemistry and peptide-backbone torsion
+-- are retained as local residual coordinates over the primary-sequence chart;
+-- Ramachandran geometry and PDB acquisition do not collapse into a unique-fold
+-- or protein-function theorem.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProteinBackboneStereochemistryExact
