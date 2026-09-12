@@ -7,7 +7,8 @@ open import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact
     ; compressedPartnerDifferenceIsDoubleSlotKernelDifference
     ; fixedOutputSlotKernelIsLiteralOutputFormula
     ; fixedOutputSlotKernelDifferenceIsLiteralOutputFormulaDifference
-    ; compressedPartnerDifferenceNormIsFourSlotDefect
     )
+open import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact
+  using (compressedPartnerDifferenceNormIsFourSlotDefect)
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferenceAggregateExact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferencePaymentExact
