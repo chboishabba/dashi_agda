@@ -10,6 +10,8 @@ import DASHI.Culture.MissingDeceasedUAPAdversarialClaimDiscriminatorExact as UAP
 import DASHI.Culture.MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact as Search
 import DASHI.Culture.MissingDeceasedFullSetTechnicalIntersectionParetoExact as FullSet
 import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact as RosterExtension
+import DASHI.Culture.MissingDeceasedFullAttachmentClaimAtlasExact as Attachment
+import DASHI.Culture.MissingDeceasedAttachmentSourcePromotionLedgerExact as Promotion
 import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact as NingExperiment
 
 ------------------------------------------------------------------------
@@ -106,8 +108,29 @@ uapAdversarialDiscriminatorPareto = Base.investigative-pareto-target
   false true false
   "High value is pruning: a broad narrative that explains disappearance, death, survival, contrary testimony and negative experiments equally well has no discriminating observable and should lose Pareto priority. Strategic/game-theory plausibility may choose a search but cannot become statistical or historical evidence."
 
+attachmentCompletionPareto : Base.InvestigativeParetoTarget
+attachmentCompletionPareto = Base.investigative-pareto-target
+  Base.secondFront
+  "71-page attachment source-promotion completion"
+  "attachment claim -> named manifestation -> primary carrier -> exact proposition -> existing science owner -> discriminating hypothesis leaf"
+  "promote or prune the highest-fan-out unresolved attachment claims in MissingDeceasedAttachmentSourcePromotionLedgerExact: Army OTA row/closeout, Casias device forensics, Chavez police statement, LeBlanc vehicle telemetry, McCasland claimed event-time meeting, Palantir AIPCon wording, Project Anchor provenance, time-crystal/QET/wormhole primary papers and anomalous-material source identity"
+  "all 71 pages are now accounted for in MissingDeceasedFullAttachmentClaimAtlasExact; the existing Reza high-oxygen alloy, Ning/Li-Torr, NASA NCC8-124, Maiwald spectroscopy, role-capability, geography and UAP owners pay their real scientific/event kernels while speculative scale-up remains unpaid"
+  "which attachment claims survive primary-source promotion; which collapse under source-class repair; whether any two technical/person/event leaves acquire a same-programme or causal bridge; whether alleged information operations have actor attribution"
+  "attachment page-range atlas; existing DOI/NTRS/patent/programme identifiers; exact URLs retained in discovery ledgers and source atlas"
+  "QIDs/Dewey are traversal only and cannot promote a claim"
+  "001 Knowledge / 070 News / 355 Military science / 530 Physics / 620 Engineering / 629 Aerospace traversal only"
+  "primary paper, transcript, police/forensic object, government award/SOW/closeout, programme/custody record or authenticated dataset appropriate to each row"
+  false true false
+  "Pareto value comes from pruning many high-salience narratives with one source-class repair. Missing records, speculative code, media repetition or technical adjacency cannot become evidence of suppression, deployment or event causation."
+
 fullSetOwnerPresent : FullSet.canonicalFullSetIntersectionBoundary ≡ FullSet.canonicalFullSetIntersectionBoundary
 fullSetOwnerPresent = refl
+
+attachmentAtlasPresent : Attachment.fullAttachmentClaimAtlas ≡ Attachment.fullAttachmentClaimAtlas
+attachmentAtlasPresent = refl
+
+promotionLedgerPresent : Promotion.sourcePromotionLedger ≡ Promotion.sourcePromotionLedger
+promotionLedgerPresent = refl
 
 ningLiRosterRepairPresent : RosterExtension.ningLiRosterRepair ≡ RosterExtension.ningLiRosterRepair
 ningLiRosterRepairPresent = refl
