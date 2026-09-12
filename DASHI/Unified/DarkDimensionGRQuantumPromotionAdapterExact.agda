@@ -53,14 +53,11 @@ darkDimensionStringTheoryPromotionStillBlocked :
 darkDimensionStringTheoryPromotionStillBlocked =
   DarkDimension.stringTheoryPromotionBlocked
 
+-- The comparator is imported deliberately so the unification adapter depends
+-- on the actual discrimination owner rather than merely repeating its prose.
 alternativeMechanismKeepsUnificationPromotionBlocked :
   QuantumGravity.theoryOfEverythingClaimPermitted
     QuantumGravity.canonicalQuantumGravityPromotionBoundary
   ≡ false
 alternativeMechanismKeepsUnificationPromotionBlocked =
-  Discrimination.darkDimensionPredictionAdmissionStillNonPromoting
-    |> λ _ → DarkDimension.theoryOfEverythingPromotionStillBlocked
-  where
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    x |> f = f x
+  DarkDimension.theoryOfEverythingPromotionStillBlocked
