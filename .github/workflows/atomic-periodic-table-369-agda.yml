@@ -40,6 +40,10 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369Validation.agda
       - name: Typecheck symmetry reconstruction / chirality validation root
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369SymmetryReconstructionValidation.agda
+      - name: Typecheck empirical alanine chirality validation root
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AlanineChiralEmpiricalExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AlanineChiralEmpiricalValidation.agda
       - name: Typecheck Madelung physical-source snowball owner
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369MadelungPhysicalSourceSnowballExact.agda
       - name: Typecheck archive Hartree radial-identity defect owner
