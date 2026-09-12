@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.EmpiricalSourceDiligenceAdmissionExact as Diligence
 import DASHI.Core.GenericReceipt as Receipt
+import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension
 
 ------------------------------------------------------------------------
@@ -182,6 +183,21 @@ alternativeMechanismKeepsModelIdentityOpen :
   UniqueUltravioletOriginWitness bedroyaReportedFit → ⊥
 alternativeMechanismKeepsModelIdentityOpen witness =
   false≢true (ultravioletIdentityPaid witness)
+
+------------------------------------------------------------------------
+-- Direct weld to the existing GR/quantum quantitative-prediction boundary.
+-- The externally published model fit is admitted as evidence, but does not
+-- mutate the repository's statement that no DASHI-derived quantitative GR/QG
+-- prediction has yet been produced under its own locked protocol.
+------------------------------------------------------------------------
+
+externalPublishedFitDoesNotPayDASHIDerivedPrediction :
+  Prediction.PredictionBoundary.quantitativePredictionDerived
+    Prediction.canonicalPredictionBoundary
+  ≡ false
+externalPublishedFitDoesNotPayDASHIDerivedPrediction =
+  Prediction.PredictionBoundary.quantitativePredictionDerivedIsFalse
+    Prediction.canonicalPredictionBoundary
 
 ------------------------------------------------------------------------
 -- Admission is deliberately non-promoting.  It records that the literature
