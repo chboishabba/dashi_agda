@@ -3,23 +3,17 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalDyadicEuclideanAnnulusRound518Exa
 ------------------------------------------------------------------------
 -- ROUND518 / CANONICAL DYADIC -> EUCLIDEAN-SQUARE ANNULUS
 --
--- R517 correctly leaves the cutoff-uniform dyadic H^(1/2)/H^(3/2) norm
--- equivalence open.  Before treating that as one monolithic analysis theorem,
--- close the finite arithmetic actually available on the literal Fourier mode
--- carrier.
---
--- For j = shellIndex(k), R88 and the ceil-log bounds imply
+-- Close the finite arithmetic on the literal Fourier mode carrier before any
+-- fractional multiplier is introduced.  For j = shellIndex(k), R88 and the
+-- ceil-log bounds imply
 --
 --   2^(2(j-1)) <= |k|_2^2 <= 3 * 2^(2j)
 --
--- whenever j>0.  The upper bound holds for every mode.  Thus the canonical
--- dyadic weight and the literal Euclidean squared radius are already uniformly
--- comparable before any square root / fractional Sobolev multiplier is
--- introduced.
+-- whenever j>0.  The upper bound holds for every mode.
 --
--- The remaining R517 receipt is therefore narrower: transport these squared-
--- radius bounds through the physical fractional multiplier and finite Fourier
--- norm, rather than reproving shell geometry or packet localization.
+-- This owner is now deliberately independent of the later R517 whole-norm
+-- status.  R519+ and the finite Fourier-order owners consume this geometry;
+-- R518 no longer imports a downstream historical Boolean merely to mirror it.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -34,7 +28,6 @@ import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle as Infinity
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNCeilLogShellBounds as Ceil
 import DASHI.Physics.Closure.NSTriadKNDyadicEuclideanShellMarginRound88Exact as R88
-import DASHI.Physics.Closure.NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound517Exact as R517
 
 canonicalDyadicLowerSquare : Z3.FourierMode → Nat
 canonicalDyadicLowerSquare k =
@@ -108,16 +101,11 @@ round518CanonicalDyadicEuclideanSquaredAnnulusClosed = true
 round518RequiresSquareRootToCloseFiniteShellGeometry : Bool
 round518RequiresSquareRootToCloseFiniteShellGeometry = false
 
-round518R517HOneHalfEquivalenceClosed : Bool
-round518R517HOneHalfEquivalenceClosed =
-  R517.round517UniformDyadicHOneHalfEquivalenceClosed
+round518IntroducesWholeNormAssumption : Bool
+round518IntroducesWholeNormAssumption = false
 
-round518R517HThreeHalfEquivalenceClosed : Bool
-round518R517HThreeHalfEquivalenceClosed =
-  R517.round517UniformDyadicHThreeHalfEquivalenceClosed
-
-round518RemainingCoordinateIsFractionalMultiplierTransport : Bool
-round518RemainingCoordinateIsFractionalMultiplierTransport = true
+round518DownstreamStatusDependencyRemoved : Bool
+round518DownstreamStatusDependencyRemoved = true
 
 round518ClayPromotion : Bool
 round518ClayPromotion = false
@@ -130,15 +118,9 @@ round518RequiresSquareRootToCloseFiniteShellGeometryIsFalse :
   round518RequiresSquareRootToCloseFiniteShellGeometry ≡ false
 round518RequiresSquareRootToCloseFiniteShellGeometryIsFalse = refl
 
-round518R517HOneHalfEquivalenceClosedIsFalse :
-  round518R517HOneHalfEquivalenceClosed ≡ false
-round518R517HOneHalfEquivalenceClosedIsFalse =
-  R517.round517UniformDyadicHOneHalfEquivalenceClosedIsFalse
-
-round518R517HThreeHalfEquivalenceClosedIsFalse :
-  round518R517HThreeHalfEquivalenceClosed ≡ false
-round518R517HThreeHalfEquivalenceClosedIsFalse =
-  R517.round517UniformDyadicHThreeHalfEquivalenceClosedIsFalse
+round518DownstreamStatusDependencyRemovedIsTrue :
+  round518DownstreamStatusDependencyRemoved ≡ true
+round518DownstreamStatusDependencyRemovedIsTrue = refl
 
 round518ClayPromotionIsFalse : round518ClayPromotion ≡ false
 round518ClayPromotionIsFalse = refl
