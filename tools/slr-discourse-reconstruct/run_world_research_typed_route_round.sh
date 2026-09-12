@@ -11,6 +11,7 @@ LANGUAGES="${6:-en,es,fr,de,simple}"
 ARTICLE_PNF_LANGUAGES="${SLR_WORLD_ARTICLE_PNF_LANGUAGES:-en}"
 MAX_TARGETS="${SLR_WORLD_MAX_TYPED_ROUTE_TARGETS:-4}"
 MAX_MISSING="${SLR_WORLD_MAX_MISSING_SURFACES_PER_ITERATION:-4}"
+ENV_FILE="${SLR_WORLD_ENV_FILE:-.env}"
 ROUNDS_DIR="$OUT_DIR/world-research-rounds"
 ROUND_DIR="$ROUNDS_DIR/round-$ITERATION_INDEX"
 ROUTE_PLAN="$ROUND_DIR/typed-route-plan.json"
@@ -27,6 +28,8 @@ ARTICLE_WELDED_CLOSURE="$ROUND_DIR/semantic-world-closure-with-article-pnf.json"
 ARTICLE_WELD_ERR="$ROUND_DIR/article-pnf-semantic-weld.stderr"
 ARTICLE_GAP_FLOW="$ROUND_DIR/semantic-gap-flow-with-article-pnf.json"
 ARTICLE_GAP_FLOW_ERR="$ROUND_DIR/semantic-gap-flow-with-article-pnf.stderr"
+PG_RECEIPT="$ROUND_DIR/postgres-world-persistence-receipt.json"
+PG_ERR="$ROUND_DIR/postgres-world-persistence.stderr"
 
 mkdir -p "$ROUND_DIR"
 [[ -s "$INPUT_ITERATION" ]] || { echo "ERROR: missing input iteration $INPUT_ITERATION" >&2; exit 1; }
@@ -75,6 +78,12 @@ print(len(p.get('selected_route_actions') or []))
 PY
 )"
 
+# The bounded round consumes the graph sidecar, not its copied CandidateWorldModel.
+# Route the legacy output-model write to /dev/null so a large redundant JSON
+# snapshot cannot fail the round before article -> spaCy -> PNF executes.
+rm -f "$ROUND_DIR/wikimedia-delta-world.json"
+ln -s /dev/null "$ROUND_DIR/wikimedia-delta-world.json"
+
 SLR_WORLD_MAX_NEW_QIDS_PER_ITERATION="$SELECTED_TARGETS" \
 SLR_WORLD_MAX_MISSING_SURFACES_PER_ITERATION="$MAX_MISSING" \
 SLR_WORLD_FOLLOW_MAX_DEPTH=0 \
@@ -94,8 +103,7 @@ PY
 
 # Strong semantic producer: read the selected Wikipedia article revisions, run a
 # trained spaCy dependency parser, project sentence-level candidate PNF, and
-# weld those candidates into the same candidate semantic closure.  The parser
-# and PNF proposals remain non-authoritative and source-manifestation bound.
+# weld those candidates into the same candidate semantic closure.
 python3 "$HERE/slr_wikipedia_article_pnf_world_producer.py" --self-check 2> "$ROUND_DIR/wikipedia-article-pnf-self-check.stderr"
 python3 "$HERE/slr_wikipedia_article_pnf_world_producer.py" \
   --route-plan "$ROUTE_PLAN" \
@@ -126,8 +134,6 @@ python3 "$HERE/slr_world_research_gap_flow.py" \
   --output "$ARTICLE_GAP_FLOW" \
   2> "$ARTICLE_GAP_FLOW_ERR"
 
-# Promote the candidate article-PNF closure only as the round's candidate-world
-# continuation.  It still carries semantic_promotion=false and no claim truth.
 python3 - "$ROUND_DIR/world-research-iteration.json" "$ARTICLE_WELDED_CLOSURE" "$ARTICLE_GAP_FLOW" <<'PY'
 import json, sys
 from pathlib import Path
@@ -159,6 +165,21 @@ it['next_acquisition_obligations']=cl.get('acquisition_obligations') or []
 iteration_path.write_text(json.dumps(it, indent=2, sort_keys=True)+'\n', encoding='utf-8')
 PY
 
+# Canonical durable state: append/idempotently persist the source manifestations,
+# PNF candidates, world atoms, route actions and iteration receipt into the
+# existing DATABASE_URL Postgres substrate.  Credentials never enter receipts.
+python3 "$HERE/slr_world_pg_store.py" persist-round \
+  --article-pnf "$ARTICLE_PNF" \
+  --closure "$ARTICLE_WELDED_CLOSURE" \
+  --route-plan "$ROUTE_PLAN" \
+  --iteration "$ROUND_DIR/world-research-iteration.json" \
+  --env-file "$ENV_FILE" \
+  --receipt "$PG_RECEIPT" \
+  2> "$PG_ERR"
+
+grep -q 'database_url_emitted=false' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
+grep -q 'postgres_persistence_is_semantic_authority=false' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
+
 GAP_FLOW="$ARTICLE_GAP_FLOW"
 DELTA_GRAPH="$ROUND_DIR/wikimedia-delta-graph.json"
 if [[ -s "$GAP_FLOW" && -s "$DELTA_GRAPH" ]]; then
@@ -179,6 +200,7 @@ cat "$FRONTIER_WELD_ERR"
 cat "$ARTICLE_PNF_ERR"
 cat "$ARTICLE_WELD_ERR"
 cat "$ARTICLE_GAP_FLOW_ERR"
+cat "$PG_ERR"
 [[ -s "$ROUND_DIR/typed-route-yield-history.stderr" ]] && cat "$ROUND_DIR/typed-route-yield-history.stderr"
-printf 'typed_route_plan=%s\ntyped_route_history=%s\narticle_pnf=%s\narticle_pnf_closure=%s\narticle_pnf_gap_flow=%s\nround_dir=%s\n' \
-  "$ROUTE_PLAN" "$ROUTE_HISTORY" "$ARTICLE_PNF" "$ARTICLE_WELDED_CLOSURE" "$ARTICLE_GAP_FLOW" "$ROUND_DIR"
+printf 'typed_route_plan=%s\ntyped_route_history=%s\narticle_pnf=%s\narticle_pnf_closure=%s\narticle_pnf_gap_flow=%s\npostgres_receipt=%s\nround_dir=%s\n' \
+  "$ROUTE_PLAN" "$ROUTE_HISTORY" "$ARTICLE_PNF" "$ARTICLE_WELDED_CLOSURE" "$ARTICLE_GAP_FLOW" "$PG_RECEIPT" "$ROUND_DIR"
