@@ -22,7 +22,6 @@ PLAN="$ROUND_DIR/budget-plan.json"
 SEEDS="$ROUND_DIR/selected-related-qid-seeds.jsonl"
 PLAN_ERR="$ROUND_DIR/budget-plan.stderr"
 DELTA_GRAPH="$ROUND_DIR/wikimedia-delta-graph.json"
-DELTA_WORLD="$ROUND_DIR/wikimedia-delta-world.json"
 FOLLOW_ERR="$ROUND_DIR/wikimedia-delta-follow.stderr"
 MERGED_GRAPH="$ROUND_DIR/merged-wikimedia-world-graph.json"
 MERGE_ERR="$ROUND_DIR/graph-merge.stderr"
@@ -48,9 +47,6 @@ PY
 )"
 [[ -s "$PREVIOUS_CLOSURE" ]] || { echo "ERROR: previous semantic closure unavailable: $PREVIOUS_CLOSURE" >&2; exit 1; }
 
-# Older iteration receipts predate Pareto support coordinates.  Refresh the
-# pre-round closure from the exact current graph before planning so the first
-# upgraded round does not silently fall back to lexical-QID order.
 HAS_PARETO_COORDS="$(python3 - "$PREVIOUS_CLOSURE" <<'PY'
 import json, sys
 c=json.load(open(sys.argv[1], encoding='utf-8'))
@@ -110,8 +106,8 @@ if [[ "$SEED_COUNT" -gt 0 ]]; then
   python3 "$HERE/slr_wikimedia_world_follow.py" \
     --world-model "$WORLD" \
     --seeds "$SEEDS" \
-    --output-model "$DELTA_WORLD" \
     --output-graph "$DELTA_GRAPH" \
+    --graph-only \
     --cache-dir "$OUT_DIR/wikimedia-http-cache" \
     --max-depth "$MAX_DEPTH" \
     --max-seed-search-results 1 \
@@ -122,6 +118,7 @@ if [[ "$SEED_COUNT" -gt 0 ]]; then
     --max-backoff "${WIKIMEDIA_MAX_BACKOFF:-60}" \
     --min-request-interval "${WIKIMEDIA_MIN_REQUEST_INTERVAL:-0.35}" \
     2> "$FOLLOW_ERR"
+  grep -q 'graph_only=true output_model_written=false' "$FOLLOW_ERR" || { cat "$FOLLOW_ERR" >&2; exit 1; }
   python3 "$HERE/slr_world_research_budget.py" merge \
     --base-graph "$BASE_GRAPH" \
     --delta-graph "$DELTA_GRAPH" \
