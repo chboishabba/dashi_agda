@@ -20,6 +20,19 @@ REQUIRED = {
         "EPBC 2016/7676",
         "EPBC 2014/7306",
     ],
+    "DASHI/Law/SensibLawWoogarooEPBC8575BlockingCutsetExecutionStateExact.agda": [
+        "module DASHI.Law.SensibLawWoogarooEPBC8575BlockingCutsetExecutionStateExact where",
+        "federalPortalFinalPDPublished",
+        "local9281OperationalWorksApproved",
+        "local9293OperationalWorksApproved",
+        "section67AControlledActionGate",
+        "section475InjunctionRoute",
+        "localApprovalDoesNotEqualFederalApproval",
+        "portalPublishedDoesNotEqualPart9Approval",
+        "sameObjectOverlapResidual",
+        "commencementEvidenceResidual",
+        "canonicalBlockingCutsetPareto",
+    ],
     "DASHI/Law/SensibLawWoogarooPreservationSourceAtlasExact.agda": [
         "springfield8575January2026PreliminaryDocumentation",
         "9612 Springfield Preliminary Documentation v5 — EPBC 2019/8575",
@@ -31,7 +44,8 @@ REQUIRED = {
         "Final PD",
     ],
     "DASHI/Law/SensibLawWoogarooPreservationEverything.agda": [
-        "import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact"
+        "import DASHI.Law.SensibLawWoogarooEPBC8575CumulativeImpactSufficiencyExact",
+        "import DASHI.Law.SensibLawWoogarooEPBC8575BlockingCutsetExecutionStateExact",
     ],
 }
 
@@ -49,4 +63,4 @@ for rel, needles in REQUIRED.items():
 if missing:
     raise SystemExit("\n".join(missing))
 
-print("Woogaroo cumulative-impact sufficiency static contract: OK")
+print("Woogaroo cumulative-impact + federal blocking-cutset static contract: OK")
