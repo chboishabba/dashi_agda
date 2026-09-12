@@ -24,6 +24,7 @@ open import DASHI.Biology.DrosophilaGautheyFunctionalTrajectoryProducerExact
 open import DASHI.Biology.BioacousticFlySnowballParetoBidiExact
 open import DASHI.Biology.BioacousticFlySIUnitSnowballParetoBidiExact
 open import DASHI.Biology.BioacousticSongEnergyExpenditureBidiExact
+open import DASHI.Biology.BioacousticSituatedPerformanceEnergyExact
 open import DASHI.Biology.DrosophilaGautheyExternalManifestHashBidiExact
 open import DASHI.Biology.DrosophilaGautheyROIIdentityRecoveryBidiExact
 open import DASHI.Core.SufficientSupportFamilyInvalidationExact
