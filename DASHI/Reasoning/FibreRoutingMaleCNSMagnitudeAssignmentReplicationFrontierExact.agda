@@ -83,6 +83,73 @@ currentMagnitudeAssignmentReceipt = magnitude-assignment-receipt
   "For this single session and joined-controlled LORO consumer, anatomical assignment of the net sender-magnitude field is not distinguished by the 999-draw permutation test (p=0.092). The result does not prove exchangeability, multiset sufficiency, or population invariance."
 
 ------------------------------------------------------------------------
+-- APPEND-ONLY REPLICATION ACQUISITION FRONTIER
+--
+-- Exact source-row identity recovery is a prerequisite for independent-trial
+-- materialization, not itself a replication result.  The currently paid state
+-- combines the historical a2_r5 receipt with the out-of-core a1_r9 receipt.
+------------------------------------------------------------------------
+
+record ReplicationIdentityRecoveryReceipt : Set where
+  constructor replication-identity-recovery-receipt
+  field
+    repository : String
+    branch : String
+    recoveryRuntimeCommit : String
+    accumulationArtifactPath : String
+    accumulatedIdentityCsv : String
+    depositedSelectedCount : Nat
+    resolvedSelectedCount : Nat
+    unresolvedSelectedCount : Nat
+    searchedTrialCount : Nat
+    a2r5ResolvedCount : Nat
+    a1r9ResolvedCount : Nat
+    a2r5TrialIdentity : String
+    a1r9TrialIdentity : String
+    a1r9RemoteArchiveAccessed : Bool
+    exactTraceIdentitySemantics : String
+    interpretation : String
+
+open ReplicationIdentityRecoveryReceipt public
+
+currentReplicationIdentityRecoveryReceipt : ReplicationIdentityRecoveryReceipt
+currentReplicationIdentityRecoveryReceipt = replication-identity-recovery-receipt
+  "github.com/chboishabba/dashiBRAIN"
+  "agent/malecns-real-benchmark-tranche"
+  "a9504ea00a30960a6728f90a5ff31b4d1f97ced6"
+  "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_identity_accumulation.json"
+  "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_selected_identities_accumulated.csv"
+  1620
+  559
+  1061
+  2
+  374
+  185
+  "04032024_6f_a2_r5"
+  "04192024_6f_a1_r9"
+  false
+  "exact trace equality to deposited selected row; not neuron identity and not atlas identity"
+  "Two searched Gauthey LBM trials currently pay 559 of 1620 exact selected-row source identities. The remaining 1061 rows stay unresolved. This is acquisition progress toward replication and does not itself execute, validate, or generalize the frozen MaleCNS consumer carrier on an independent trial."
+
+record ReplicationAcquisitionBoundary : Set where
+  constructor replication-acquisition-boundary
+  field
+    exactSourceIdentityRecoveryStarted : Bool
+    exactSourceIdentityRecoveryComplete : Bool
+    searchedTrialReceiptsAppendOnly : Bool
+    unresolvedRowsRemainExplicit : Bool
+    a1r9RecoveryRequiredRemoteArchiveAccess : Bool
+    sourceIdentityRecoveryImpliesIndependentTrialReplication : Bool
+    sourceIdentityRecoveryImpliesJRC2018Ready : Bool
+    sourceIdentityRecoveryImpliesCrossAnimalReplication : Bool
+
+open ReplicationAcquisitionBoundary public
+
+canonicalReplicationAcquisitionBoundary : ReplicationAcquisitionBoundary
+canonicalReplicationAcquisitionBoundary = replication-acquisition-boundary
+  true false true true false false false false
+
+------------------------------------------------------------------------
 -- Algebraic boundary: |sum S| and sum |S| are different operations.
 ------------------------------------------------------------------------
 
@@ -164,7 +231,7 @@ sameSessionCompressionLadderClosed = magnitude-assignment-gate-state sameSession
 
 independentTrialReplication : MagnitudeAssignmentGateState
 independentTrialReplication = magnitude-assignment-gate-state independentTrialReplicationGate false
-  "remaining Gauthey recordings not yet executed under the same factorized carrier protocol"
+  "replication acquisition has recovered 559/1620 exact selected-row source identities across a2_r5 and a1_r9, but no independent recording has yet been materialized on the frozen 26-region JRC2018 carrier and scored under the same factorized protocol"
 
 crossAnimalReplication : MagnitudeAssignmentGateState
 crossAnimalReplication = magnitude-assignment-gate-state crossAnimalReplicationGate false
@@ -208,6 +275,14 @@ magnitudeAssignmentCoordinate = Traversal.dashi-knowledge-coordinate
   "570.000 / 612.8 neuroscience candidate"
   "Q130888 Drosophila; Q162657 neurotransmitter; local empirical object has no external QID"
   "dashiBRAIN:malecns_sender_magnitude_assignment_null.json@60ce5efe85e4e01f0167369025fe8331373c7b81"
+
+replicationIdentityRecoveryCoordinate : Traversal.DashiKnowledgeCoordinate
+replicationIdentityRecoveryCoordinate = Traversal.dashi-knowledge-coordinate
+  "DASHI/Reasoning/FibreRoutingMaleCNSMagnitudeAssignmentReplicationFrontierExact.agda"
+  "Gauthey exact selected-row identity recovery frontier"
+  "570.000 / 612.8 neuroscience candidate"
+  "same Gauthey source family; local acquisition receipt has no external QID"
+  "dashiBRAIN:gauthey_lbm_identity_accumulation.json@a9504ea00a30960a6728f90a5ff31b4d1f97ced6"
 
 polarityCoordinate : Traversal.DashiKnowledgeCoordinate
 polarityCoordinate = Traversal.dashi-knowledge-coordinate
@@ -253,6 +328,8 @@ record MagnitudeReplicationBoundary : Set where
     netMagnitudeEqualsAbsoluteMagnitudeByDefinition : Bool
     sameSessionQuotientSearchShouldContinueIndefinitely : Bool
     replicationIsNextHighAlphaStep : Bool
+    partialExactReplicationSourceIdentityRecoveryPaid : Bool
+    partialIdentityRecoveryPromotesReplication : Bool
     qidDeweyDoiLinkCreateEmpiricalPayment : Bool
     negativeResultsRemainAppendOnly : Bool
 
@@ -260,4 +337,4 @@ open MagnitudeReplicationBoundary public
 
 canonicalMagnitudeReplicationBoundary : MagnitudeReplicationBoundary
 canonicalMagnitudeReplicationBoundary = magnitude-replication-boundary
-  true false false false false false true false true
+  true false false false false false true true false false true
