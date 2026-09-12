@@ -7,6 +7,7 @@ import DASHI.Biology.DNAChemistryCarrier as DNA
 import DASHI.Biology.Physical.DNAHelixDihedralExact as Helix
 import DASHI.Biology.Physical.BDNACalibratedHelicalGeometryExact as B
 import DASHI.Biology.Physical.BDNAStepSE3CompositionExact as SE3DNA
+import DASHI.Geometry.RigidMotionSemidirectProductExact as SE3
 import DASHI.Biology.Protein.ProteinConformationAttractor as Protein
 import DASHI.Biology.Molecular.MolecularAssemblyBoundary as Molecule
 
@@ -45,8 +46,8 @@ dnaDihedralConjugation = Helix.dihedralConjugation
 -- Physical DNA geometry is carried by sequence/environment-dependent rigid
 -- steps and ordered rigid-motion composition, not by the base alphabet itself.
 dnaRigidStepCalibrationSurface :
-  ∀ {model} → Set₁
-dnaRigidStepCalibrationSurface {model} = SE3DNA.BDNARigidStepCalibration model
+  (model : SE3.RigidMotionModel) → Set₁
+dnaRigidStepCalibrationSurface model = SE3DNA.BDNARigidStepCalibration model
 
 -- Protein: sequence indexes a conformational system with environment, basin,
 -- admissibility, and potentially multiple attractors.
