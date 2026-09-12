@@ -26,3 +26,7 @@ import DASHI.Culture.MissingDeceasedTwentyScientistCompositeApplicationProofDebt
 import DASHI.Culture.MissingDeceasedTwentyScientistCompositeReferenceTraceExact
 import DASHI.Culture.MissingDeceasedChineseScienceImplementationEverything
 import DASHI.Culture.MissingDeceasedTwentyScientistScienceImplementationCoverageExact
+
+-- Round-12 science-only arithmetic/depth tranche.
+import DASHI.Physics.Materials.RezaBurnResistantAlloyCompositionTradeoffExact
+import DASHI.Physics.SpaceWeather.ZhangXiaoxinForecastRecallArithmeticExact
