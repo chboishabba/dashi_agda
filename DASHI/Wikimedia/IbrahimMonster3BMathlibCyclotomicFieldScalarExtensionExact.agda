@@ -36,12 +36,17 @@ record MathlibCyclotomicFieldCoordinate : Set where
     repository : String
     sourceBlobSha : String
     cyclotomicSourceFile : String
+    numberFieldCyclotomicSourceFile : String
     algebraicClosureSourceFile : String
     cyclotomicFieldType : String
     algebraicClosureType : String
     cyclotomicFieldCharZeroInstance : String
     cyclotomicExtensionInstance : String
+    integralPowerBasisTheorem : String
+    integralPowerBasisGeneratorTheorem : String
+    integralPowerBasisDimensionTheorem : String
     algebraicClosureIsAlgClosedInstance : String
+    phiThreeIsTwo : Bool
     upstreamKernelChecked : Bool
     replayedByAgdaKernelHere : Bool
 open MathlibCyclotomicFieldCoordinate public
@@ -52,13 +57,26 @@ canonicalMathlibCyclotomicFieldCoordinate =
     "leanprover-community/mathlib4"
     "70f3f13433ba3d82a15a7cae679abac9128f102b"
     "Mathlib/NumberTheory/Cyclotomic/Basic.lean"
+    "Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean"
     "Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean"
     "CyclotomicField 3 ℚ"
     "AlgebraicClosure (CyclotomicField 3 ℚ)"
     "CyclotomicField.instCharZero"
     "CyclotomicField.isCyclotomicExtension"
+    "IsPrimitiveRoot.integralPowerBasisOfPrimePow"
+    "IsPrimitiveRoot.integralPowerBasisOfPrimePow_gen"
+    "IsPrimitiveRoot.integralPowerBasisOfPrimePow_dim"
     "AlgebraicClosure.isAlgClosed"
-    true false
+    true true false
+
+------------------------------------------------------------------------
+-- Power-basis reading of the remaining transport.
+--
+-- Specializing p=3,k=1 gives φ(3)=2.  The selected primitive cubic root is the
+-- power-basis generator.  Hence the remaining cross-kernel object is exactly
+-- the coordinate equivalence (u,v) ↔ u + v*zeta, not an arbitrary abstract
+-- two-dimensional-vector-space isomorphism.
+------------------------------------------------------------------------
 
 record DashiCyclotomic3ToMathlibCyclotomicFieldTransport : Set₁ where
   field
@@ -67,6 +85,10 @@ record DashiCyclotomic3ToMathlibCyclotomicFieldTransport : Set₁ where
     addField : MathlibCyclotomicField3 → MathlibCyclotomicField3 → MathlibCyclotomicField3
     multiplyField : MathlibCyclotomicField3 → MathlibCyclotomicField3 → MathlibCyclotomicField3
     zeroField oneField : MathlibCyclotomicField3
+
+    powerBasisDimensionIsTwo : Set
+    primitiveZetaIsPowerBasisGenerator : Set
+    everyElementHasUniquePairCoordinates : Set
 
     toCyclotomicField : C3.Cyclotomic3 → MathlibCyclotomicField3
     fromCyclotomicField : MathlibCyclotomicField3 → C3.Cyclotomic3
@@ -112,6 +134,7 @@ record MathlibAlgebraicClosureLift
 open MathlibAlgebraicClosureLift public
 
 data DimensionTwoCreatesPairPresentationEquivalence : Set where
+data PowerBasisDimensionCreatesCoordinateWeld : Set where
 data CyclotomicFieldNameCreatesSelectedPrimitiveRoot : Set where
 data AlgebraicClosureInstanceCreatesDashiTransport : Set where
 data QidCreatesCyclotomicEquivalence : Set where
@@ -121,6 +144,10 @@ data OeisCreatesCyclotomicEquivalence : Set where
 pairPresentationDoesNotFollowFromDimensionTwo :
   DimensionTwoCreatesPairPresentationEquivalence → ⊥
 pairPresentationDoesNotFollowFromDimensionTwo ()
+
+powerBasisDimensionDoesNotCreateCoordinateWeld :
+  PowerBasisDimensionCreatesCoordinateWeld → ⊥
+powerBasisDimensionDoesNotCreateCoordinateWeld ()
 
 cyclotomicFieldNameDoesNotSelectPrimitiveRoot :
   CyclotomicFieldNameCreatesSelectedPrimitiveRoot → ⊥
@@ -157,7 +184,7 @@ canonicalMathlibCyclotomicExternalCoordinates =
     "Q1057968"
     "512.22"
     "512.23"
-    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no cyclotomic-field presentation, primitive-root, algebraic-closure, scalar-extension, FDRep, character, or intertwiner authority"
+    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no cyclotomic-field presentation, primitive-root, power-basis coordinate, algebraic-closure, scalar-extension, FDRep, character, or intertwiner authority"
     false
 
 record MathlibCyclotomicScalarExtensionFrontier : Set where
@@ -166,8 +193,10 @@ record MathlibCyclotomicScalarExtensionFrontier : Set where
     mathlibCyclotomicFieldConstructionLocated : Bool
     mathlibCyclotomicFieldCharZeroPaidUpstream : Bool
     mathlibCyclotomicExtensionPaidUpstream : Bool
+    primitiveRootPowerBasisPaidUpstream : Bool
+    powerBasisDimensionTwoPaidUpstream : Bool
     algebraicClosureTargetIsAlgClosedPaidUpstream : Bool
-    dashiPairPresentationEquivalencePaid : Bool
+    dashiPairCoordinateWeldPaid : Bool
     selectedPrimitiveRootSameObjectPaid : Bool
     genericScalarExtensionInstantiated : Bool
     schrodingerScalarExtensionPaid : Bool
@@ -178,6 +207,6 @@ currentMathlibCyclotomicScalarExtensionFrontier :
   MathlibCyclotomicScalarExtensionFrontier
 currentMathlibCyclotomicScalarExtensionFrontier =
   mathlib-cyclotomic-scalar-extension-frontier
-    true true true true
+    true true true true true true
     false false false false
-    "construct DashiCyclotomic3ToMathlibCyclotomicFieldTransport by identifying the rational-pair presentation u+v*zeta with CyclotomicField 3 ℚ at a selected primitive cubic root. Then compose the canonical algebra map into AlgebraicClosure (CyclotomicField 3 ℚ) to inhabit the existing Cyclotomic3ScalarExtension. After that, extend Schrodinger states pointwise and prove translation/modulation preservation. Washington DOI/QID/Dewey/OEIS coordinates, dimension two, and the existence of mathlib CyclotomicField do not create the pair-presentation equivalence."
+    "specialize the mathlib primitive-root power basis to p=3,k=1 and construct the cross-kernel coordinate weld sending DASHI cyclotomic3 u v to u + v*primitiveZeta3, with inverse given by the unique two power-basis coordinates. Prove the existing DASHI multiplication formula matches the cyclotomic relation zeta^2+zeta+1=0; then compose the canonical algebra map into AlgebraicClosure (CyclotomicField 3 ℚ) to inhabit Cyclotomic3ScalarExtension. Power-basis dimension two, Washington DOI/QID/Dewey/OEIS coordinates, or matching formulas do not by themselves create the cross-kernel equality."
