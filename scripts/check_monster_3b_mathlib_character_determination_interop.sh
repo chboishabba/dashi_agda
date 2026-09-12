@@ -12,13 +12,17 @@ fi
 required=(
   "record MathlibCharacterDeterminationCoordinate"
   "d131ae62882df478bb2aadf013181b4c5b31b328"
+  "0a9d695f4f24c0f9fad00116cfa4c840451dd3de"
   "scalar_product_char_eq_finrank_equivariant"
-  "char_orthonormal"
-  "import DASHI.Wikimedia.IbrahimMonster3BCyclotomicScalarExtensionInteropExact as ScalarExtension"
-  "cyclotomicScalarExtensionFrontier"
-  "scalarExtensionPaid"
+  "finrank_hom_simple_simple_eq_zero_of_not_iso"
+  "algebraicallyClosedFieldRequiredForChosenRoute"
+  "equalCharactersForceNonzeroEquivariantHom"
+  "nonzeroSimpleMorphismIsIso"
+  "record LeanEqualCharacterSimpleIsoReceipt"
   "record DashiToMathlibCharacterDeterminationTransport"
+  "leanEqualCharacterSimpleIsoReceipt"
   "compileIrreducibleCharacterDetermination"
+  "algebraicClosureIsNotRequiredForChosenRoute"
   "mathlibTheoremDoesNotCreateDashiTransport"
   "oeisHasCharacterDeterminationAuthority"
 )
@@ -29,5 +33,12 @@ for needle in "${required[@]}"; do
     exit 1
   fi
 done
+
+# The chosen proof route must not silently retain the superseded scalar-extension
+# dependency as a proof prerequisite.
+if grep -Fq "scalarExtension : ScalarExtension.Cyclotomic3ScalarExtension" "$OWNER"; then
+  echo "superseded scalar-extension prerequisite still present in character-determination transport" >&2
+  exit 1
+fi
 
 echo "monster 3B mathlib character-determination interop check: ok"
