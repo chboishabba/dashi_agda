@@ -117,6 +117,13 @@ canarySingingPower = SI.measurement
   "Ward & Slater 2005; DOI 10.1007/s00359-005-0022-4"
   "reported singing metabolic power 0.70 +/- 0.02 W"
 
+canaryNominalExcessPower : SI.Quantity SI.Power SI.centiScale
+canaryNominalExcessPower = SI.posQ 8
+
+canaryNominalExcessPowerReading : String
+canaryNominalExcessPowerReading =
+  "nominal difference 0.08 W = 0.70 W - 0.62 W; no independent uncertainty propagation is invented by this formalisation"
+
 powerUnit : SI.Unit SI.Power
 powerUnit = SI.watt
 
