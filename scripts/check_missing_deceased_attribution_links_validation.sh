@@ -73,6 +73,12 @@ grep -q 'dodOIGCaseNumber = "DODOIG-2022-001077"' DASHI/Culture/NingLiGovernment
 grep -q 'requestLogPaysResponseContents = false' DASHI/Culture/NingLiGovernmentRequestLogSnowballExact.agda
 grep -q 'NingLiGovernmentRequestLogSnowballExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
 
+# Chinese event/work repair rows expanded when source class supports same-person continuity.
+grep -q 'zhouGuangyuanRepair' DASHI/Culture/ChineseStrategicScientistEventWorkRepairExact.agda
+grep -q 'liMinyongRepair' DASHI/Culture/ChineseStrategicScientistEventWorkRepairExact.agda
+grep -q 'fangDainingRepair' DASHI/Culture/ChineseStrategicScientistEventWorkRepairExact.agda
+grep -q 'zhangDaibingRepair' DASHI/Culture/ChineseStrategicScientistEventWorkRepairExact.agda
+
 # Round-robin scientific cohort invariant: 11 U.S. + 9 Chinese scientists.
 grep -q 'twentyScientistRoundProgress' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
 grep -q 'scientificCohortCount = 20' DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinProgressExact.agda
