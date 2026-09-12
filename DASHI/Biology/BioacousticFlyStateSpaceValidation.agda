@@ -9,13 +9,14 @@ import DASHI.Biology.BioacousticFlySnowballParetoBidiExact
 import DASHI.Biology.BioacousticFlySIUnitSnowballParetoBidiExact
 import DASHI.Biology.BioacousticSongEnergyExpenditureBidiExact
 import DASHI.Biology.BioacousticSituatedPerformanceEnergyExact
+import DASHI.Biology.BioacousticMultimodalEpisodeTrajectoryExact
 import DASHI.Biology.DrosophilaGautheyExternalManifestHashBidiExact
 import DASHI.Biology.DrosophilaGautheyROIIdentityRecoveryBidiExact
 
 -- Focused import root for the birdsong -> Animalexic -> fly state-space
 -- visualisation / attribution / snowball / N-dimensional Pareto / SI-unit /
--- energetic-cost / situated multi-axis performance / external-manifest /
--- source-row recovery cross-pollination. A kernel-clean claim requires an
--- exact-head Agda receipt; external data identity, SI interpretation,
--- energetic/physiological calibration and Pareto scheduling remain
--- non-promoting.
+-- energetic-cost / situated multi-axis performance / same-episode multimodal
+-- trajectory / external-manifest / source-row recovery cross-pollination. A
+-- kernel-clean claim requires an exact-head Agda receipt; external data
+-- identity, SI interpretation, energetic/physiological calibration, clock
+-- alignment and Pareto scheduling remain non-promoting.
