@@ -20,8 +20,8 @@ module DASHI.Physics.Closure.YMActiveRawBC1ToDenseCoreProofSpineExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
-import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as FiniteBeta
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
