@@ -23,6 +23,7 @@ module DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exac
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -53,14 +54,14 @@ open ExactRawRegularELocalization public
 
 asRound246Form :
   ∀ {Density Background Volume Component : Set}
-    {scale : Agda.Builtin.Nat.Nat}
+    {scale : Nat}
     {density : Density}
     {regularE : Background → ℝ} →
   ExactRawRegularELocalization Background Volume Component regularE →
   R246.CMP119RegularESection2Form
     Density Background Volume Component scale density
-asRound246Form localized = record
-  { R246.CMP119RegularESection2Form.regularE = _
+asRound246Form {regularE = regularE} localized = record
+  { R246.CMP119RegularESection2Form.regularE = regularE
   ; R246.CMP119RegularESection2Form.components = components localized
   ; R246.CMP119RegularESection2Form.localizedRegularActivity =
       localizedRegularActivity localized
@@ -105,9 +106,10 @@ asRound246ActiveInputs :
   (decoder : RawELocalizedAnalyticDecoder objects predicates) →
   R246.ActiveRegularESection2Inputs betaData history
 asRound246ActiveInputs
+    {Density = Density} {Background = Background}
     {objects = objects} {predicates = predicates} decoder = record
-  { R246.ActiveRegularESection2Inputs.Density = _
-  ; R246.ActiveRegularESection2Inputs.Background = _
+  { R246.ActiveRegularESection2Inputs.Density = Density
+  ; R246.ActiveRegularESection2Inputs.Background = Background
   ; R246.ActiveRegularESection2Inputs.Volume = Volume decoder
   ; R246.ActiveRegularESection2Inputs.Component = Component decoder
   ; R246.ActiveRegularESection2Inputs.densityAt =
