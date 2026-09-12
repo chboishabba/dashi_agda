@@ -28,4 +28,14 @@ grep -q 'round7EveryScientistTouched = true' "$branch_root/DASHI/Culture/Missing
 grep -q 'finiteWitnessDoesNotCreateHistoricalDeployment = false' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRound7FiniteWitnessProgressExact.agda"
 grep -q 'MissingDeceasedTwentyScientistRound7FiniteWitnessProgressExact' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda"
 
+for import_name in \
+  ChenShumingGraphHardwareVerificationFiniteWitnessExact \
+  ZhouGuangyuanPolyimideAerogelFiniteWitnessExact \
+  LiuDonghaoDSMMFiniteWitnessExact \
+  ZhangXiaoxinGeomagneticForecastFiniteWitnessExact \
+  ZhangDaibingUAVControlFiniteWitnessExact \
+  LiMinyongPhotopharmacologyFiniteWitnessExact; do
+  grep -q "$import_name" "$branch_root/DASHI/Culture/MissingDeceasedChineseScienceImplementationEverything.agda"
+done
+
 echo 'Round-7 finite-witness static contract: OK'
