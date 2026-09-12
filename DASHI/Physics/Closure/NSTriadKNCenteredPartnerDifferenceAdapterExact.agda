@@ -24,28 +24,36 @@ module DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact wher
 --
 -- represented below as exact vector addition rather than a new scalar carrier.
 --
+-- On the tighter R207 fixed-output carrier, Round176 then rewrites every
+-- canonical K_tau through the SAME selected output vector.  This is the first
+-- quotient-facing normalization: raw output labels are erased, while the
+-- amplitude data actually seen by the slot kernel are retained exactly.
+--
 -- No norm estimate, radial/Pluecker estimate, centered second-moment estimate,
 -- cutoff aggregation, spacetime estimate, or Clay promotion is introduced.
--- The next genuine analytic splice is to identify this literal doubled slot
--- difference with the existing R128/R176 radial-directional defect coordinates
--- strongly enough to construct the old CenteredPairCell carrier.
+-- The next genuine analytic splice is a PAIRWISE amplitude-aware separation
+-- theorem for these fixed-output slot formulas.  R128's radial/Pluecker identity
+-- is a geometric donor for that theorem, not by itself a lower separation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; Positive)
-open import Relation.Binary.PropositionalEquality using (cong; sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNRawCurlOutputDefectFactorizationRound176Exact as R176
 import DASHI.Physics.Closure.NSTriadKNHHDualDefectUnconditionalPointwiseRound177Exact as R177
 import DASHI.Physics.Closure.NSTriadKNPartnerBlockGramLedgerRound181Exact as R181
 import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlPartnerBonyRound186Exact as R186
 import DASHI.Physics.Closure.NSTriadKNComparableResidualProducerBoundaryRound204Exact as R204
 import DASHI.Physics.Closure.NSTriadKNComparableRawCurlPartnerMassRound205Exact as R205
+import DASHI.Physics.Closure.NSTriadKNComparableFixedOutputCarrierRound207Exact as R207
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3CauchyPSDRound446Exact as R446
 import DASHI.Physics.Closure.NSTriadKNCauchyVectorPolarizationRound574Exact as R574
 
@@ -171,6 +179,83 @@ compressedPartnerDifferenceIsDoubleSlotKernelDifference alpha beta
     (compressedPartnerSlotKernel beta)
 
 ------------------------------------------------------------------------
+-- P1a / Fixed-output quotient normalization through the literal output vector.
+------------------------------------------------------------------------
+
+literalOutputSlotFormula :
+  (E : C3.IntegerEmbedding F) →
+  Z3.FourierMode →
+  C3.Complex3 F → C3.Complex3 F → C3.Complex3 F
+literalOutputSlotFormula E output uP uQ =
+  let waveK = C3.modeVector E output
+  in
+  C3.complex3Subtract
+    (C3.complex3Add
+      (C3.complex3Scale (C3.bilinearDot3 waveK uQ) uP)
+      (C3.complex3Scale (C3.bilinearDot3 uP waveK) uQ))
+    (C3.complex3Scale (C3.bilinearDot3 uP uQ) waveK)
+
+fixedOutputSlotKernelIsLiteralOutputFormula :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    {system : Audit.FiniteComplex3GalerkinSystem F E I}
+    {output : Z3.FourierMode}
+    (entry : R207.FixedOutputLocalizedComparablePartner system output) →
+  let partner = R207.partner entry
+      tau = R204.incidence (R205.localizedComparable partner)
+      uP = Audit.velocity system (Physical.p tau)
+      uQ = Audit.velocity system (Physical.q tau)
+  in
+  compressedPartnerSlotKernel partner
+  ≡ literalOutputSlotFormula E output uP uQ
+fixedOutputSlotKernelIsLiteralOutputFormula
+    {E = E} {system = system} {output = output} entry =
+  let
+    partner = R207.partner entry
+    data = R205.rawCurlData partner
+    tau = R204.incidence (R205.localizedComparable partner)
+    uP = Audit.velocity system (Physical.p tau)
+    uQ = Audit.velocity system (Physical.q tau)
+
+    physical =
+      R176.rawPQSlotKernelFactorsThroughLiteralOutput
+        E uP uQ
+        (Physical.resonance tau)
+        (R186.pTransverse data)
+        (R186.qTransverse data)
+
+    outputTransport =
+      cong
+        (λ selectedOutput → literalOutputSlotFormula E selectedOutput uP uQ)
+        (R207.outputAgreement entry)
+  in
+  trans physical outputTransport
+
+fixedOutputSlotKernelDifferenceIsLiteralOutputFormulaDifference :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    {system : Audit.FiniteComplex3GalerkinSystem F E I}
+    {output : Z3.FourierMode}
+    (alpha beta : R207.FixedOutputLocalizedComparablePartner system output) →
+  let alphaPartner = R207.partner alpha
+      betaPartner = R207.partner beta
+      alphaTau = R204.incidence (R205.localizedComparable alphaPartner)
+      betaTau = R204.incidence (R205.localizedComparable betaPartner)
+      alphaUP = Audit.velocity system (Physical.p alphaTau)
+      alphaUQ = Audit.velocity system (Physical.q alphaTau)
+      betaUP = Audit.velocity system (Physical.p betaTau)
+      betaUQ = Audit.velocity system (Physical.q betaTau)
+  in
+  compressedPartnerSlotKernelDifference alphaPartner betaPartner
+  ≡ C3.complex3Subtract
+      (literalOutputSlotFormula E output alphaUP alphaUQ)
+      (literalOutputSlotFormula E output betaUP betaUQ)
+fixedOutputSlotKernelDifferenceIsLiteralOutputFormulaDifference alpha beta =
+  cong₂ C3.complex3Subtract
+    (fixedOutputSlotKernelIsLiteralOutputFormula alpha)
+    (fixedOutputSlotKernelIsLiteralOutputFormula beta)
+
+------------------------------------------------------------------------
 -- Existing R574/R446 same-object specialization.
 ------------------------------------------------------------------------
 
@@ -247,6 +332,9 @@ roundCenteredPartnerDoubleSlotKernelCompressionClosed = true
 roundCenteredPartnerDoubleSlotKernelDifferenceClosed : Bool
 roundCenteredPartnerDoubleSlotKernelDifferenceClosed = true
 
+roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosed : Bool
+roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosed = true
+
 roundCenteredPartnerRadialPlueckerDefectWeldClosed : Bool
 roundCenteredPartnerRadialPlueckerDefectWeldClosed = false
 
@@ -274,6 +362,10 @@ roundCenteredPartnerDoubleSlotKernelCompressionClosedIsTrue = refl
 roundCenteredPartnerDoubleSlotKernelDifferenceClosedIsTrue :
   roundCenteredPartnerDoubleSlotKernelDifferenceClosed ≡ true
 roundCenteredPartnerDoubleSlotKernelDifferenceClosedIsTrue = refl
+
+roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosedIsTrue :
+  roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosed ≡ true
+roundCenteredPartnerFixedOutputSlotQuotientNormalizationClosedIsTrue = refl
 
 roundCenteredPartnerRadialPlueckerDefectWeldClosedIsFalse :
   roundCenteredPartnerRadialPlueckerDefectWeldClosed ≡ false
