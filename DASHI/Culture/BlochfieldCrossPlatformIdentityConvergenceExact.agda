@@ -12,15 +12,17 @@ import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact as Creator
 ------------------------------------------------------------------------
 -- BLOCHFIELD CROSS-PLATFORM IDENTITY CONVERGENCE
 --
--- A stronger identity candidate than name similarity alone:
---   * X mirror: Yasmin Anacreto / @msiyasmsi, profile names @gmnevergiveup;
+-- The surviving convergence is stronger than display-name similarity alone:
+--   * X mirror: Yasmin Anacreto / @msiyasmsi, web3 fullstack context and
+--     profile coordinate @gmnevergiveup;
 --   * Link3: 0xyasanacreto.cyber, featured content explicitly attributed to
---     Yasmin Anacreto and titled "What's a Galactic G?".
+--     Yasmin Anacreto; the inspected "What's a Galactic G?" snippet describes
+--     web3 activity and explicitly names @Galxe.
 --
--- The shared display name plus Galactic-G / gmnevergiveup thematic coordinate
--- materially strengthens discovery convergence, but still does NOT pay exact
--- same-person identity.  No native mutual link, signed wallet assertion,
--- platform-authenticated account link, or creator statement was acquired.
+-- Correction: no inspected source links "Galactic G" to @gmnevergiveup.
+-- That lexical/project relation is therefore unpaid and must not be used as an
+-- identity bridge.  The remaining convergence is same display name + web3
+-- context, still insufficient for authenticated same-person identity.
 ------------------------------------------------------------------------
 
 record CrossPlatformConvergenceCandidate : Set where
@@ -29,11 +31,16 @@ record CrossPlatformConvergenceCandidate : Set where
     xObservation : OSINT.OSINTObservation
     link3Candidate : Creator.CrossPlatformIdentityCandidate
     sharedDisplayName : String
-    xProjectCoordinate : String
+    sharedContext : String
+    xProfileCoordinate : String
     link3FeaturedCoordinate : String
+    inspectedLink3Reference : String
     convergenceStrongerThanNameAlone : Bool
     convergenceStrongerThanNameAloneIsTrue :
       convergenceStrongerThanNameAlone ≡ true
+    galacticGToGmNeverGiveUpRelationPaid : Bool
+    galacticGToGmNeverGiveUpRelationPaidIsFalse :
+      galacticGToGmNeverGiveUpRelationPaid ≡ false
     exactSamePersonIdentityPaid : Bool
     exactSamePersonIdentityPaidIsFalse :
       exactSamePersonIdentityPaid ≡ false
@@ -46,9 +53,12 @@ link3XGalacticGConvergenceCandidate =
     Creator.creatorProfileObservation
     Creator.link3IdentityCandidate
     "Yasmin Anacreto"
+    "web3"
     "@gmnevergiveup"
     "What's a Galactic G?"
+    "inspected Link3 snippet explicitly names @Galxe; no gmnevergiveup relation located"
     true refl
+    false refl
     false refl
 
 ------------------------------------------------------------------------
@@ -61,27 +71,37 @@ crossPlatformIdentityWeldStillUnpaid =
 
 data MultiCoordinateConvergencePaysSamePerson : Set where
 
-data ThematicProjectOverlapPaysSamePerson : Set where
+data SharedWeb3ContextPaysSamePerson : Set where
+
+data GalacticGNamesGmNeverGiveUp : Set where
 
 multiCoordinateConvergenceDoesNotPaySamePerson :
   MultiCoordinateConvergencePaysSamePerson → ⊥
 multiCoordinateConvergenceDoesNotPaySamePerson ()
 
-thematicProjectOverlapDoesNotPaySamePerson :
-  ThematicProjectOverlapPaysSamePerson → ⊥
-thematicProjectOverlapDoesNotPaySamePerson ()
+sharedWeb3ContextDoesNotPaySamePerson :
+  SharedWeb3ContextPaysSamePerson → ⊥
+sharedWeb3ContextDoesNotPaySamePerson ()
+
+galacticGDoesNotPayGmNeverGiveUpRelation :
+  GalacticGNamesGmNeverGiveUp → ⊥
+galacticGDoesNotPayGmNeverGiveUpRelation ()
 
 ------------------------------------------------------------------------
 -- Semantic checksum:
 --
---   same display name + shared project vocabulary
---     > name similarity alone for discovery
+--   same display name + shared web3 context
+--     > display-name similarity alone for discovery
 --
---   same display name + shared project vocabulary
+--   "Galactic G" snippet -> @Galxe
+--   "Galactic G" -/-> @gmnevergiveup  (unpaid)
+--
+--   same display name + shared web3 context
 --     != authenticated cross-platform identity
 --
--- The Pareto therefore improves search priority without changing conclusion
--- payment.  The next useful identity receipt would be a native mutual link,
--- signed wallet/account assertion, authenticated platform link, or explicit
--- creator statement connecting the accounts.
+-- The correction prunes a suggestive but unsupported lexical edge while
+-- retaining the lower-strength convergence that the inspected sources pay.
+-- The next useful identity receipt remains a native mutual link, signed
+-- wallet/account assertion, authenticated platform link, or explicit creator
+-- statement connecting the accounts.
 ------------------------------------------------------------------------
