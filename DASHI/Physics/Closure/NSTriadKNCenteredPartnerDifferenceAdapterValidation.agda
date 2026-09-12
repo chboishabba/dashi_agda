@@ -8,6 +8,7 @@ open import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact
     ; fixedOutputSlotKernelIsLiteralOutputFormula
     ; fixedOutputSlotKernelDifferenceIsLiteralOutputFormulaDifference
     ; literalOutputSlotFormulaDifferenceTelescopesLeft
+    ; fixedOutputSlotKernelDifferenceTelescopesByAmplitudeIncrements
     )
 open import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact
   using (compressedPartnerDifferenceNormIsFourSlotDefect)
