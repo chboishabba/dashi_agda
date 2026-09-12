@@ -12,9 +12,7 @@ ARTICLE_PNF_LANGUAGES="${SLR_WORLD_ARTICLE_PNF_LANGUAGES:-en}"
 MAX_TARGETS="${SLR_WORLD_MAX_TYPED_ROUTE_TARGETS:-4}"
 MAX_MISSING="${SLR_WORLD_MAX_MISSING_SURFACES_PER_ITERATION:-4}"
 ENV_FILE="${SLR_WORLD_ENV_FILE:-.env}"
-PG_MODE="${SLR_WORLD_PG_PERSISTENCE_MODE:-copy-staging}"
 WORLD_STORE_BIN="${SLR_WORLD_STORE_BIN:-}"
-REQUIRE_RUST_STORE="${SLR_WORLD_REQUIRE_RUST_STORE:-0}"
 ROUNDS_DIR="$OUT_DIR/world-research-rounds"
 ROUND_DIR="$ROUNDS_DIR/round-$ITERATION_INDEX"
 ROUTE_PLAN="$ROUND_DIR/typed-route-plan.json"
@@ -115,23 +113,18 @@ PY
 if [[ -z "$WORLD_STORE_BIN" ]] && command -v sensiblaw-world-store >/dev/null 2>&1; then
   WORLD_STORE_BIN="$(command -v sensiblaw-world-store)"
 fi
-
-if [[ -n "$WORLD_STORE_BIN" && -x "$WORLD_STORE_BIN" ]]; then
-  "$WORLD_STORE_BIN" ingest-round --article-pnf "$ARTICLE_PNF" --closure "$ARTICLE_WELDED_CLOSURE" --route-plan "$ROUTE_PLAN" --iteration "$ROUND_DIR/world-research-iteration.json" --env-file "$ENV_FILE" > "$PG_RECEIPT" 2> "$PG_ERR"
-  "$WORLD_STORE_BIN" frontier --env-file "$ENV_FILE" > "$PG_FRONTIER" 2>> "$PG_ERR"
-  printf 'SLR_WORLD_STORE_BACKEND backend=rust-world-store rust_world_store=true python_heavy_persistence=false postgres_persistence_is_semantic_authority=false\n' >> "$PG_ERR"
-  grep -q '"postgres_persistence_is_semantic_authority":false' "$PG_RECEIPT" || { cat "$PG_RECEIPT" >&2; exit 1; }
-else
-  if [[ "$REQUIRE_RUST_STORE" == "1" ]]; then
-    printf 'ERROR: rust-world-store-unavailable; set SLR_WORLD_STORE_BIN or install sensiblaw-world-store\n' >&2
-    exit 1
-  fi
-  python3 "$HERE/slr_world_pg_store.py" persist-round --article-pnf "$ARTICLE_PNF" --closure "$ARTICLE_WELDED_CLOSURE" --route-plan "$ROUTE_PLAN" --iteration "$ROUND_DIR/world-research-iteration.json" --env-file "$ENV_FILE" --receipt "$PG_RECEIPT" --persistence-mode "$PG_MODE" 2> "$PG_ERR"
-  : > "$PG_FRONTIER"
-  printf 'SLR_WORLD_STORE_BACKEND backend=python-fallback rust_world_store=false reason=rust-world-store-unavailable postgres_persistence_is_semantic_authority=false\n' >> "$PG_ERR"
-  grep -q 'database_url_emitted=false' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
-  grep -q 'postgres_persistence_is_semantic_authority=false' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
+if [[ -z "$WORLD_STORE_BIN" || ! -x "$WORLD_STORE_BIN" ]]; then
+  printf 'ERROR: rust-world-store-unavailable; set SLR_WORLD_STORE_BIN or install sensiblaw-world-store\n' >&2
+  exit 1
 fi
+
+"$WORLD_STORE_BIN" ingest-round --article-pnf "$ARTICLE_PNF" --closure "$ARTICLE_WELDED_CLOSURE" --route-plan "$ROUTE_PLAN" --iteration "$ROUND_DIR/world-research-iteration.json" --env-file "$ENV_FILE" > "$PG_RECEIPT" 2> "$PG_ERR"
+grep -q '"postgres_persistence_is_semantic_authority":false' "$PG_RECEIPT" || { cat "$PG_RECEIPT" >&2; exit 1; }
+
+"$WORLD_STORE_BIN" frontier --env-file "$ENV_FILE" > "$PG_FRONTIER" 2>> "$PG_ERR"
+grep -q 'SLR_WORLD_FRONTIER_STREAM_RECEIPT' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
+grep -q 'buffered_full_frontier=false' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
+printf 'SLR_WORLD_STORE_BACKEND backend=rust-world-store rust_world_store=true python_heavy_persistence=false postgres_persistence_is_semantic_authority=false\n' >> "$PG_ERR"
 
 GAP_FLOW="$ARTICLE_GAP_FLOW"; DELTA_GRAPH="$ROUND_DIR/wikimedia-delta-graph.json"
 if [[ -s "$GAP_FLOW" && -s "$DELTA_GRAPH" ]]; then
