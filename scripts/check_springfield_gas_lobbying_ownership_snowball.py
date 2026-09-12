@@ -69,11 +69,30 @@ REQUIRED = {
         "gasLegacyVersusTransitionResidual",
         "canonicalEnergyTransitionPareto",
     ],
+    "DASHI/Law/SensibLawAzureSpringfieldInducedGasDemandExact.agda": [
+        "module DASHI.Law.SensibLawAzureSpringfieldInducedGasDemandExact where",
+        "azureDwellingIdentityObservation",
+        "separateGasConnectionDemandResidual",
+        "fixedCustomerRevenueResidual",
+        "throughputBenefitResidual",
+        "hotWaterWasteDemandResidual",
+        "wokBurnerInducedDemandResidual",
+        "networkUtilisationResidual",
+        "allgasReferenceTariffStructure",
+        "azureGasWithinSpringfieldNetZeroBoundaryResidual",
+        "newGasConnectionCompatibilityResidual",
+        "azureGasCorruptionRemainsUnpaid",
+        "wastefulDemandDoesNotProveIntent",
+        "netZeroLabelDoesNotProveNoFossilGas",
+        "azureDeveloperIdentityDoesNotProveGasLobbying",
+        "canonicalInducedDemandPareto",
+    ],
     "DASHI/Law/SensibLawWoogarooPreservationEverything.agda": [
         "import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact",
         "import DASHI.Law.SensibLawSpringfieldResidentialGasEndpointLockInExact",
         "import DASHI.Law.SensibLawSpringfieldHighHeatCookingEnvelopeExact",
         "import DASHI.Law.SensibLawSpringfieldEnergyTransitionLineageExact",
+        "import DASHI.Law.SensibLawAzureSpringfieldInducedGasDemandExact",
     ],
 }
 
@@ -91,4 +110,4 @@ for rel, needles in REQUIRED.items():
 if missing:
     raise SystemExit("\n".join(missing))
 
-print("Springfield gas/lobbying/ownership + endpoint/high-heat/energy-transition snowball static contract: OK")
+print("Springfield gas/lobbying/ownership + endpoint/high-heat/energy-transition/induced-demand snowball static contract: OK")
