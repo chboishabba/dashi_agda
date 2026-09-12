@@ -24,6 +24,9 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BModernCharacterVerificationKernel20SnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearZetaSectorRestrictionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearMultiplicityHomSpaceExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearShortestFrontierCorrectionExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BFactorCQuotientWordSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
@@ -32,6 +35,9 @@ on:
       - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
       - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
       - 'scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh'
+      - 'scripts/check_monster_3b_linear_zeta_sector_restriction.sh'
+      - 'scripts/check_monster_3b_linear_multiplicity_hom_space.sh'
+      - 'scripts/check_monster_3b_linear_shortest_frontier_correction.sh'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
@@ -73,6 +79,9 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BModernCharacterVerificationKernel20SnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearZetaSectorRestrictionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearMultiplicityHomSpaceExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearShortestFrontierCorrectionExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BFactorCQuotientWordSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
@@ -81,6 +90,9 @@ on:
       - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
       - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
       - 'scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh'
+      - 'scripts/check_monster_3b_linear_zeta_sector_restriction.sh'
+      - 'scripts/check_monster_3b_linear_multiplicity_hom_space.sh'
+      - 'scripts/check_monster_3b_linear_shortest_frontier_correction.sh'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
@@ -128,6 +140,24 @@ jobs:
         run: |
           set -euo pipefail
           bash scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh
+
+      - name: Run literal zeta-sector linear-restriction checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_linear_zeta_sector_restriction.sh
+
+      - name: Run linear multiplicity Hom-space checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_linear_multiplicity_hom_space.sh
+
+      - name: Run corrected linear shortest-frontier checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_linear_shortest_frontier_correction.sh
 
       - name: Install Nix
         uses: cachix/install-nix-action@v31
