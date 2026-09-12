@@ -46,9 +46,22 @@ REQUIRED = {
         "fossilAdjacencyDoesNotProveSpringfieldFossilLobbying",
         "canonicalEndpointToUpstreamPareto",
     ],
+    "DASHI/Law/SensibLawSpringfieldHighHeatCookingEnvelopeExact.agda": [
+        "module DASHI.Law.SensibLawSpringfieldHighHeatCookingEnvelopeExact where",
+        "gasWokBurnerObservation",
+        "recurrentAlarmAsCompatibilityLocator",
+        "highHeatCapabilityEnvelopeResidual",
+        "rangehoodAndMakeupAirResidual",
+        "alarmCauseRemainsUnpaid",
+        "alarmFrequencyDoesNotProveGasCause",
+        "wokBurnerDoesNotProveAdequateVentilation",
+        "advertisedHighHeatCapabilityDoesNotProveDwellingSuitability",
+        "canonicalHighHeatCookingPareto",
+    ],
     "DASHI/Law/SensibLawWoogarooPreservationEverything.agda": [
         "import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact",
         "import DASHI.Law.SensibLawSpringfieldResidentialGasEndpointLockInExact",
+        "import DASHI.Law.SensibLawSpringfieldHighHeatCookingEnvelopeExact",
     ],
 }
 
@@ -66,4 +79,4 @@ for rel, needles in REQUIRED.items():
 if missing:
     raise SystemExit("\n".join(missing))
 
-print("Springfield gas/lobbying/ownership + residential endpoint snowball static contract: OK")
+print("Springfield gas/lobbying/ownership + residential endpoint/high-heat envelope snowball static contract: OK")
