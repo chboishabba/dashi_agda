@@ -77,9 +77,10 @@ metricIMUDeltaDoesNotAutoPayDriftFreeScale :
 metricIMUDeltaDoesNotAutoPayDriftFreeScale ()
 
 ------------------------------------------------------------------------
--- Implementation status: the prior producer exists; the actual VIO trajectory
--- still owes visual correction, camera/IMU extrinsic calibration, time-offset
--- estimation, bias estimation and multi-keyframe optimization.
+-- Implementation status.  IMU preintegration and bounded visual keyframe
+-- correction now exist.  Camera/IMU extrinsic and clock values are consumed as
+-- supplied receipts; online estimation of those coordinates, online bias
+-- estimation, multi-keyframe optimization and field validation remain unpaid.
 ------------------------------------------------------------------------
 
 record VisualInertialRoadmapStatus : Set where
@@ -110,6 +111,6 @@ currentVisualInertialRoadmapStatus =
     false
     false
     false
-    false
+    true
     false
     false
