@@ -67,6 +67,50 @@ zhangXiaoxinRepair = event-work-repair
   true false false
   "exact traffic-accident carrier if public; specific project/award identifiers and post-loss monitoring-warning programme succession"
 
+zhouGuangyuanRepair : EventWorkRepair
+zhouGuangyuanRepair = event-work-repair
+  "Zhou Guangyuan / 周光远"
+  "Dalian Institute of Chemical Physics high-performance polymer-materials research identity; DOI 10.1016/j.cej.2023.147642 plus centre/team/application work"
+  "Chinese Academy of Sciences / Dalian Institute of Chemical Physics memorial feature republishing China Science Daily material"
+  "2023-12-16"
+  "逝世 / died; the cited memorial feature does not provide an independent forensic cause"
+  exactInstitutional
+  true false false
+  "recover exact post-loss centre leadership, project/IP custody and continuation of the polyimide-aerogel/high-performance-polymer application programmes"
+
+liMinyongRepair : EventWorkRepair
+liMinyongRepair = event-work-repair
+  "Li Minyong / 李敏勇"
+  "Hainan University medicinal-chemistry identity: light-controlled drug discovery and bioactive disease-target visualisation"
+  "Hainan University School of Pharmaceutical Sciences obituary, republished by Beijing Daily"
+  "2025-11-16"
+  "在广州突发疾病，经抢救无效 / sudden illness in Guangzhou; died despite rescue efforts"
+  sameInstitutionRepublished
+  true false false
+  "recover direct Hainan obituary manifestation plus first post-loss project/patent/student succession object; obituary wording is not an independent medical-forensic finding"
+
+fangDainingRepair : EventWorkRepair
+fangDainingRepair = event-work-repair
+  "Fang Daining / 方岱宁"
+  "BIT advanced-materials and structural-mechanics identity; active mechanical metamaterials and ultra-high-temperature multi-field testing"
+  "Chinese Academy of Sciences memorial page for Fang Daining"
+  "2026-02-27"
+  "因病去世 / died of illness"
+  exactInstitutional
+  true false false
+  "first dated post-loss BIT/Peking advanced-structure project/team leadership and custody object; keep metamaterial science separate from provenance/UAP claims"
+
+zhangDaibingRepair : EventWorkRepair
+zhangDaibingRepair = event-work-repair
+  "Zhang Daibing / 张代兵"
+  "NUDT unmanned-systems research identity plus DOI-level UAV landing/control/formation publications"
+  "South China Morning Post 2025-01-08 reporting based on an obituary"
+  "2025-01-03"
+  "cause not stated in cited obituary/reporting"
+  boundedSecondary
+  true false false
+  "recover the primary obituary/company carrier and named successor/custodian for Yunzhihang and NUDT unmanned-system projects before promoting succession or cause"
+
 ------------------------------------------------------------------------
 -- Repairs collapse identity debt, not causal or forensic debt.
 ------------------------------------------------------------------------
