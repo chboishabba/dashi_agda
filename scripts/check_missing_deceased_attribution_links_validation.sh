@@ -54,6 +54,12 @@ grep -q 'qetDoesNotCreateVacuumThrust = true' DASHI/Culture/MissingDeceasedUAPAd
 grep -q 'wormholeSimulationDoesNotCreateTraversableSpacetime = true' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'technicalAdjacencyDoesNotCreateEngineeringStack = true' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 
+# Dynamic YBCO regime between the 1997 static constraint and later programme work.
+grep -q 'ntrs19990019627' DASHI/Physics/ExoticGravity/NingLiYBCORotatingFieldConstraintExact.agda
+grep -q 'AIAA-98-3139' DASHI/Physics/ExoticGravity/NingLiYBCORotatingFieldConstraintExact.agda
+grep -q 'rotatingFieldPaysPositiveGravityEffect = false' DASHI/Physics/ExoticGravity/NingLiYBCORotatingFieldConstraintExact.agda
+grep -q 'NingLiYBCORotatingFieldConstraintExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+
 grep -q 'attachmentCompletionPareto' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'MissingDeceasedFullAttachmentClaimAtlasExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'MissingDeceasedAttachmentSourcePromotionLedgerExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
