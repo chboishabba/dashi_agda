@@ -36,6 +36,10 @@ REQUIRED = {
         "crossPlatformIdentityWeld",
         "sameDisplayNameDoesNotPaySamePerson",
         "handleStemDoesNotPaySamePerson",
+        "link3XGalacticGConvergenceCandidate",
+        '"What’s a Galactic G?"',
+        '"@gmnevergiveup"',
+        "multiCoordinateConvergenceDoesNotPaySamePerson",
     ],
     "DASHI/Culture/BlochfieldMediumSavedReadingSnowballExact.agda": [
         "module DASHI.Culture.BlochfieldMediumSavedReadingSnowballExact where",
