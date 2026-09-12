@@ -4,12 +4,12 @@ module DASHI.Moonshine.Monster3BFiniteStoneVonNeumannWitnessFrontierCorrectionEx
 -- CORRECTED FINITE STONE--VON NEUMANN FRONTIER AFTER WITNESS EXTRACTION
 --
 -- Monster3BFiniteStoneVonNeumannFrontierExact was written before the finite
--- nonzero-coordinate search was constructed.  Keep its leaf type and
--- dependency graph as the canonical historical owner; this thin correction
--- updates only the states paid by
--- Monster3BFiniteSchrodingerNonzeroWitnessExtractionExact.
+-- nonzero-coordinate search was constructed. Keep its leaf type and dependency
+-- graph as the canonical historical owner; this thin correction updates the
+-- states paid by constructive witness extraction and now also splits the
+-- fixed-central-character uniqueness leaf at the proof-assistant boundary.
 --
--- The constructive chain now closes:
+-- The constructive finite chain closes:
 --
 -- ordinary nonzero Schrodinger vector
 --   -> selected nonzero X6 coordinate
@@ -18,10 +18,10 @@ module DASHI.Moonshine.Monster3BFiniteStoneVonNeumannWitnessFrontierCorrectionEx
 --   -> all translated delta lines
 --   -> all Schrodinger functions.
 --
--- This proves irreducibility of the concrete finite Schrodinger model in the
--- repository's invariant-subspace sense.  It does NOT prove the finite
--- Stone--von Neumann uniqueness theorem, and it does NOT identify any actual
--- Monster 729-dimensional constituent with this model.
+-- Separately, the standard characteristic-zero character-determination theorem
+-- is now pinned to an exact mathlib source manifestation. That theorem being
+-- proved upstream does NOT itself transport DASHI's representation carrier into
+-- mathlib FDRep, and therefore does not yet close this Agda leaf.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -32,9 +32,10 @@ open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannFrontierExact as Frontier
 import DASHI.Moonshine.Monster3BFiniteSchrodingerNonzeroWitnessExtractionExact as Witness
+import DASHI.Wikimedia.IbrahimMonster3BMathlibCharacterDeterminationInteropExact as CharacterInterop
 
 ------------------------------------------------------------------------
--- 1. Same leaf carrier, corrected states only where new proof exists.
+-- 1. Same leaf carrier, corrected states only where actual proof exists.
 ------------------------------------------------------------------------
 
 correctedLeafState : Frontier.StoneVonNeumannProofLeaf → Frontier.LeafState
@@ -66,8 +67,11 @@ schrodingerIrreducibilityLeafClosed :
 schrodingerIrreducibilityLeafClosed = refl
 
 ------------------------------------------------------------------------
--- 2. The next high-alpha structural leaf is now uniqueness for the fixed
---    nontrivial central character.
+-- 2. The structural leaf is now split internally:
+--
+-- standard character-determination theorem      PAID upstream in mathlib
+-- concrete DASHI <-> mathlib representation map OPEN
+-- resulting actual same-character isomorphism   BLOCKED on that transport.
 ------------------------------------------------------------------------
 
 highestImpactStructuralLeafAfterWitness : Frontier.StoneVonNeumannProofLeaf
@@ -83,9 +87,13 @@ certifiedMonster729IdentificationStillBlocked :
   ≡ Frontier.blocked
 certifiedMonster729IdentificationStillBlocked = refl
 
+characterInteropFrontier :
+  CharacterInterop.MathlibCharacterDeterminationInteropFrontier
+characterInteropFrontier =
+  CharacterInterop.currentMathlibCharacterDeterminationInteropFrontier
+
 ------------------------------------------------------------------------
--- 3. Proof-bearing theorem snapshot, reusing the actual new theorem rather
---    than a Boolean promotion.
+-- 3. Proof-bearing theorem snapshots.
 ------------------------------------------------------------------------
 
 ordinaryNonzeroInvariantSubspaceIsWholeCarrier =
@@ -96,6 +104,7 @@ ordinaryNonzeroInvariantSubspaceIsWholeCarrier =
 ------------------------------------------------------------------------
 
 data IrreducibilityCreatesUniqueness : Set where
+data UpstreamTheoremCreatesDashiTransport : Set where
 data UniquenessCreatesMonsterIdentification : Set where
 data Dimension729CreatesSameRepresentation : Set where
 data CharacterDegreeCreatesIntertwiner : Set where
@@ -105,6 +114,10 @@ data OeisCreatesFrontierClosure : Set where
 
 irreducibilityDoesNotCreateUniqueness : IrreducibilityCreatesUniqueness → ⊥
 irreducibilityDoesNotCreateUniqueness ()
+
+upstreamTheoremDoesNotCreateDashiTransport :
+  UpstreamTheoremCreatesDashiTransport → ⊥
+upstreamTheoremDoesNotCreateDashiTransport ()
 
 uniquenessDoesNotCreateMonsterIdentification :
   UniquenessCreatesMonsterIdentification → ⊥
@@ -148,7 +161,7 @@ canonicalWitnessFrontierExternalCoordinates =
     "Q1055807"
     "512.23"
     "512.22"
-    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no irreducibility, uniqueness, same-representation, Monster-identification, action, or intertwiner authority"
+    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no irreducibility, uniqueness, proof-transport, same-representation, Monster-identification, action, or intertwiner authority"
     false
 
 ------------------------------------------------------------------------
@@ -161,6 +174,8 @@ record CorrectedStoneVonNeumannFrontier : Set where
     ordinaryNonzeroCoordinateExtractionPaid : Bool
     normQualifiedAmplitudeUpgradePaid : Bool
     finiteSchrodingerIrreducibilityPaid : Bool
+    standardCharacterDeterminationTheoremPaid : Bool
+    dashiCharacterDeterminationTransportPaid : Bool
     fixedCentralCharacterUniquenessPaid : Bool
     certifiedMonster729ConstituentIdentificationPaid : Bool
     nextResidual : String
@@ -169,5 +184,7 @@ open CorrectedStoneVonNeumannFrontier public
 currentCorrectedStoneVonNeumannFrontier : CorrectedStoneVonNeumannFrontier
 currentCorrectedStoneVonNeumannFrontier =
   corrected-stone-von-neumann-frontier
-    true true true false false
-    "prove finite Stone-von Neumann uniqueness for irreducible representations of the constructed extraspecial Heisenberg group with the fixed nontrivial central character. Only after that theorem is proof-bearing may the certified 729-dimensional Monster-kernel constituent be identified with the X6 Schrodinger model through an explicit same-central-character representation isomorphism. Degree 729, character multiplicity, DOI/QID/Dewey/OEIS coordinates, or abstract uniqueness slogans do not create that identification."
+    true true true
+    true false
+    false false
+    "instantiate DashiToMathlibCharacterDeterminationTransport for the concrete extraspecial 3^(1+12) representation layer. The standard finite-group irreducible-character theorem is already pinned to the kernel-checked mathlib Character.lean manifestation, so do not re-prove it in Agda. Instead identify the DASHI representation and cyclotomic class-character with a finite-dimensional mathlib FDRep over an algebraically closed characteristic-zero field, discharge the exact finite-group/invertibility/simple-object assumptions, and transport the resulting equivariant isomorphism back. Only then close fixed-central-character uniqueness and attach the certified Monster 729-dimensional constituent to the X6 Schrodinger model. Degree 729, character multiplicity, DOI/QID/Dewey/OEIS coordinates, and upstream theorem existence do not create the transport."
