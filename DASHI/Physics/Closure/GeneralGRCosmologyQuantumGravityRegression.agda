@@ -1,11 +1,12 @@
 module DASHI.Physics.Closure.GeneralGRCosmologyQuantumGravityRegression where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Geometry.DifferentialBianchiTheoremBoundary as Bianchi
 import DASHI.Geometry.GeneralLeviCivitaTheoremBoundary as LeviCivita
 import DASHI.Physics.Closure.ContinuumEinsteinMatterSolutionBoundary as Continuum
+import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension
 import DASHI.Physics.Closure.EmpiricalCosmologyValidationBoundary as Cosmology
 import DASHI.Physics.Closure.QuantumGravityTheoryBoundary as QuantumGravity
 
@@ -54,3 +55,29 @@ theoryOfEverythingStillBlockedRegression :
   ≡ false
 theoryOfEverythingStillBlockedRegression =
   QuantumGravity.canonicalTheoryOfEverythingBlocked
+
+------------------------------------------------------------------------
+-- Dark-Dimension specialization: a downstream model can be testable while the
+-- upstream string-theory / theory-of-everything promotions remain blocked.
+------------------------------------------------------------------------
+
+darkDimensionTestableRegression :
+  DarkDimension.modelHasFalsifiableTests
+    DarkDimension.canonicalDarkDimensionPromotionStatus
+  ≡ true
+darkDimensionTestableRegression =
+  DarkDimension.darkDimensionModelTestable
+
+darkDimensionStringPromotionBlockedRegression :
+  DarkDimension.stringTheoryPromotionPermitted
+    DarkDimension.canonicalDarkDimensionPromotionStatus
+  ≡ false
+darkDimensionStringPromotionBlockedRegression =
+  DarkDimension.stringTheoryPromotionBlocked
+
+darkDimensionToEBlockedRegression :
+  QuantumGravity.theoryOfEverythingClaimPermitted
+    QuantumGravity.canonicalQuantumGravityPromotionBoundary
+  ≡ false
+darkDimensionToEBlockedRegression =
+  DarkDimension.theoryOfEverythingPromotionStillBlocked
