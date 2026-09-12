@@ -17,7 +17,8 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationToActiveRawRound
 -- decoder mechanically.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; sym; trans; cong)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
