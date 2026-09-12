@@ -128,6 +128,41 @@ record ActiveBalaban1989Theorem1Witness
 
 open ActiveBalaban1989Theorem1Witness public
 
+------------------------------------------------------------------------
+-- Least-privilege source projection.
+--
+-- Some consumers (notably the regular-E/BC1 route) use only preservation of
+-- the CMP119 Sect.-2 FORM.  Keep that source theorem separate from the
+-- quantitative-bounds component so the latter cannot become a primitive
+-- dependency merely because both statements appear in CMP122 Theorem 1.
+------------------------------------------------------------------------
+
+record ActiveBalaban1989Section2FormWitness
+    {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom Density : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom}
+    {history : History.FiniteModeInverseSquareTerminalHistoryData
+      trajectory Mode Atom betaData}
+    (flow : ActiveEffectiveDensityFlow
+      trajectory Mode Atom Density betaData history) : Set₁ where
+  field
+    effectiveDensitiesPreserveSection2FormOnly : ∀ scale →
+      History.ActiveScale history scale →
+      InSection2DensityClass flow scale (densityAt flow scale)
+
+open ActiveBalaban1989Section2FormWitness public
+
+section2FormWitnessFromTheorem1 :
+  ∀ {trajectory Mode Atom Density betaData history}
+    {flow : ActiveEffectiveDensityFlow
+      trajectory Mode Atom Density betaData history} →
+  ActiveBalaban1989Theorem1Witness flow →
+  ActiveBalaban1989Section2FormWitness flow
+section2FormWitnessFromTheorem1 source = record
+  { effectiveDensitiesPreserveSection2FormOnly =
+      effectiveDensitiesPreserveSection2Form source
+  }
+
 record ActiveSection2Invariant
     {trajectory : Flow.SourceNormalizedCouplingTrajectory}
     {Mode Atom Density : Set}
@@ -164,6 +199,9 @@ activeScaleCMP122CouplingHypothesisFromFiniteBetaLevel = machineChecked
 
 activeScaleCMP122Section2AssemblyLevel : ProofLevel
 activeScaleCMP122Section2AssemblyLevel = machineChecked
+
+activeScaleCMP122Section2FormProjectionLevel : ProofLevel
+activeScaleCMP122Section2FormProjectionLevel = machineChecked
 
 activeScaleCMP122Theorem1SourceLevel : ProofLevel
 activeScaleCMP122Theorem1SourceLevel = standardImported
