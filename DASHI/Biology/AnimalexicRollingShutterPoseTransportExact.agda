@@ -47,6 +47,23 @@ currentRollingShutterReadoutCandidateReceipt =
   rolling-shutter-readout-candidate-receipt
     true true true true true true true false
 
+record RollingShutterReadoutPaymentReceipt : Set where
+  constructor rolling-shutter-readout-payment-receipt
+  field
+    exactCandidateReferenceRequired : Bool
+    acceptingActorRequired : Bool
+    receiptReferenceRequired : Bool
+    abstainedCandidateRejected : Bool
+    paidReadoutRetainsDirection : Bool
+    paidReadoutRetainsMagnitude : Bool
+    paymentEqualsFieldValidation : Bool
+
+open RollingShutterReadoutPaymentReceipt public
+
+currentRollingShutterReadoutPaymentReceipt : RollingShutterReadoutPaymentReceipt
+currentRollingShutterReadoutPaymentReceipt =
+  rolling-shutter-readout-payment-receipt true true true true true true false
+
 data RowTimeTransportImpliesReadoutCalibrationPermission : Set where
 
 data LowRowTimingResidualImpliesReadoutPaymentPermission : Set where
@@ -87,4 +104,4 @@ open RollingShutterRoadmapStatus public
 
 currentRollingShutterRoadmapStatus : RollingShutterRoadmapStatus
 currentRollingShutterRoadmapStatus =
-  rolling-shutter-roadmap-status true true true true true false false false
+  rolling-shutter-roadmap-status true true true true true true false false
