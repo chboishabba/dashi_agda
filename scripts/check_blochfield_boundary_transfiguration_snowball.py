@@ -36,6 +36,9 @@ REQUIRED = {
         "crossPlatformIdentityWeld",
         "sameDisplayNameDoesNotPaySamePerson",
         "handleStemDoesNotPaySamePerson",
+    ],
+    "DASHI/Culture/BlochfieldAcquisitionResidualSnowballExact.agda": [
+        "module DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact where",
         "exactPhraseSearchNonLocation",
         "searchNonLocationDoesNotProveAbsence",
         "reverseTopologicalAnalogueCandidate",
@@ -48,6 +51,7 @@ REQUIRED = {
     "DASHI/Culture/Everything.agda": [
         "import DASHI.Culture.BoundaryConservativeTransfigurationBlochfieldExact",
         "import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact",
+        "import DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact",
     ],
 }
 
