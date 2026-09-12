@@ -131,3 +131,22 @@ record ExtendedParetoBoundary : Set where
 canonicalExtendedParetoBoundary : ExtendedParetoBoundary
 canonicalExtendedParetoBoundary = extended-pareto-boundary
   false false false true true false false false false
+
+------------------------------------------------------------------------
+-- SOUTHWEST GEOGRAPHY + REPORTED-ANOMALY EXTENSION
+------------------------------------------------------------------------
+
+southwestGeographyAndAnomalyPareto : Base.InvestigativeParetoTarget
+southwestGeographyAndAnomalyPareto = Base.investigative-pareto-target
+  Base.secondFront
+  "Southwest geography and anomaly discrimination"
+  "attributed report -> event location -> work/facility relationship -> exact anomaly carrier -> matched geographic/role controls -> common-programme discriminator"
+  "recover primary underlying carriers for the highest-salience reported anomalies: Casias device-forensics/autopsy/scene records, Chavez police-report statement, LeBlanc Tesla/law-enforcement telemetry, Reza LASD/SAR evidence logs and any authenticated McCasland event-time meeting/tasking record; simultaneously build a matched New Mexico defense/lab reference population"
+  "New Mexico DPS and bounded journalism pay a real four-case New Mexico aggregation at person/event level; KOB explicitly identifies geography as the currently demonstrable common coordinate; Casias phone-reset, LeBlanc airport-stop and Reza search-geometry observations have bounded report carriers, while their operational interpretation remains unpaid"
+  "whether the cases share a programme/access/logistics/security object rather than merely geography; who/what produced the reported device/vehicle anomalies; exact chronology; prevalence of comparable disappearances/events among matched LANL/Kirtland/Sandia/KCNSC personnel; whether White Sands belongs to the event graph at all"
+  "New Mexico DPS Anthony Chavez / Steven Abel Garcia / William Neil McCasland records; KOB New Mexico cluster and Casias reporting; Los Angeles Times Casias autopsy/recovery reports; Fox News LeBlanc telemetry report; Los Angeles Magazine Reza reporting; URLs retained in MissingDeceasedInvestigativeAttributedSourceAtlasExact"
+  "no geographic or facility QID may create a programme/person/causal edge"
+  "363.1 Public safety / 355 Military science / 620 Engineering management / 001 knowledge traversal only"
+  "primary police/search/autopsy/device/vehicle/meeting/access records plus matched-control denominator and exact facility/programme objects"
+  false true false
+  "Geographic clustering is a legitimate discriminator only after event location is separated from workplace affiliation and base-rate facility density. The LANL-Kirtland-White Sands triangle is not paid: White Sands currently lacks a case-specific event/programme anchor in this lane. Reported anomalies survive as source-bound acquisition targets but cannot self-promote into common cause."
