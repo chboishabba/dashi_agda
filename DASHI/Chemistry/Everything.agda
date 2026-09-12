@@ -75,3 +75,8 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369PetrochemicalIdentityBridge
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdmissibleReconstructionEquivalenceExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChiralMolecularSeparatingPairExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProteinDNA3DAdapterExact
+
+-- First same-object empirical chiral witness: D/L alanine share molecular
+-- formula while stereochemical identity and measured optical response separate;
+-- phase/environment remains part of the observation fibre.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AlanineChiralEmpiricalExact
