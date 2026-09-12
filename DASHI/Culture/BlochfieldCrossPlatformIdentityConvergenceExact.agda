@@ -15,7 +15,7 @@ import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact as Creator
 -- A stronger identity candidate than name similarity alone:
 --   * X mirror: Yasmin Anacreto / @msiyasmsi, profile names @gmnevergiveup;
 --   * Link3: 0xyasanacreto.cyber, featured content explicitly attributed to
---     Yasmin Anacreto and titled "What’s a Galactic G?".
+--     Yasmin Anacreto and titled "What's a Galactic G?".
 --
 -- The shared display name plus Galactic-G / gmnevergiveup thematic coordinate
 -- materially strengthens discovery convergence, but still does NOT pay exact
@@ -47,7 +47,7 @@ link3XGalacticGConvergenceCandidate =
     Creator.link3IdentityCandidate
     "Yasmin Anacreto"
     "@gmnevergiveup"
-    "What’s a Galactic G?"
+    "What's a Galactic G?"
     true refl
     false refl
 
