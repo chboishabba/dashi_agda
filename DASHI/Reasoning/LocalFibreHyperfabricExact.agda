@@ -63,7 +63,7 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. MaleCNSTypedHyperfabricChartProjectionExact now supplies that selected chart-code carrier for the dense 26-region ordered-pair observational chart, while the nonzero physical connectome incidence remains a separate unpaid obligation."
+  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. MaleCNSTypedHyperfabricChartProjectionExact supplies that selected chart-code carrier and now also records the executed lossless chart/hyperfabric and sender-gain projection receipts. At the 26-region quotient all 676 ordered pairs have nonzero direct coupling, but the coarse complete support is still not identified with the raw neuron/synapse physical hypergraph."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -122,6 +122,21 @@ maleCNSSelectedSectionCarrierIsChartCodeNotPhysicalIncidence :
   MaleCNSChart.selectedSectionCarrierIsChartCodeNotPhysicalIncidence
     MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ true
 maleCNSSelectedSectionCarrierIsChartCodeNotPhysicalIncidence = refl
+
+maleCNSRuntimeHyperfabricRoundtripIsLosslessForDeclaredConsumer :
+  MaleCNSChart.empiricalHyperfabricRoundtripLosslessForDeclaredConsumer
+    MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ true
+maleCNSRuntimeHyperfabricRoundtripIsLosslessForDeclaredConsumer = refl
+
+maleCNSSenderGainProjectionIsExactButNotSufficiency :
+  MaleCNSChart.exactProjectionPromotesSufficiency
+    MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ false
+maleCNSSenderGainProjectionIsExactButNotSufficiency = refl
+
+maleCNSCoarseCompleteSupportIsNotRawPhysicalHypergraph :
+  MaleCNSChart.aggregatedRegionSupportEqualsRawPhysicalSynapseHypergraph
+    MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ false
+maleCNSCoarseCompleteSupportIsNotRawPhysicalHypergraph = refl
 
 ------------------------------------------------------------------------
 -- The symmetry/quotient rule is already owned canonically.
@@ -235,4 +250,4 @@ currentLocalFibreMissingFields = local-fibre-missing-fields
   false
   true
   true
-  "TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact now pays both projection from compatible GlobalSections and a Set-sized complete ordered-pair chart code that realizes back to a compatible GlobalSection. Remaining work is NDim refinement, pants seams, braid transport, and an actual nonzero/typed MaleCNS physical incidence instance distinct from the dense complete-pair observational chart."
+  "TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact pays projection from compatible GlobalSections, the Set-sized complete ordered-pair chart code, and the executed lossless runtime projection receipts. The 26-region direct support is empirically complete (676/676), but the raw neuron/synapse physical incidence instance remains unpaid. Remaining generic work is NDim refinement, pants seams, braid transport, and source-bound raw physical incidence distinct from the coarse observational chart."
