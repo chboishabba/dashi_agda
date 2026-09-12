@@ -7,17 +7,13 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Governance.AustralianSenateAutismInquiryExact as Inquiry
 import DASHI.Governance.AustralianSenateAutismIntersectionalityExact as Intersectional
 import DASHI.Governance.RecognitionDistributionRepresentationAxesExact as Fraser
 
 ------------------------------------------------------------------------
 -- RECOMMENDATION 18 -> DOWNSTREAM ACTION-EVIDENCE SNOWBALL
---
--- This owner pays only source-bound participation/action coordinates recovered
--- from DSS development and First Action Plan materials. Consultation,
--- representation, funded action, service access and measured outcome remain
--- distinct. The committee's finite cohort list remains non-exhaustive.
 ------------------------------------------------------------------------
 
 dssStrategyDevelopment : Source.AttributedSource
@@ -50,15 +46,12 @@ dssStrategyRelease = Source.mkNoDOISource
   "2025"
   "https://ministers.dss.gov.au/media-releases/17301"
   Source.governmentSource
-  "Government release recording funded First Action Plan measures, including peer support, evaluation, employment, diagnosis resources, knowledge translation and prevalence work; announcement does not equal completed delivery."
+  "Government release recording funded First Action Plan measures; announcement does not equal completed delivery."
   Source.publicAttribution
 
 intersectionalActionSources : List Source.AttributedSource
 intersectionalActionSources =
-  dssStrategyDevelopment ∷
-  dssFirstActionPlan ∷
-  dssStrategyRelease ∷
-  []
+  dssStrategyDevelopment ∷ dssFirstActionPlan ∷ dssStrategyRelease ∷ []
 
 intersectionalActionAtlas : Source.AttributedSourceAtlas
 intersectionalActionAtlas = Source.mkSourceAtlas
@@ -66,11 +59,6 @@ intersectionalActionAtlas = Source.mkSourceAtlas
   "DASHI.Governance.AustralianSenateAutismIntersectionalActionEvidenceExact"
   intersectionalActionSources
   "Downstream co-design and action evidence relevant to Recommendation 18, with representation/distribution/outcome boundaries retained."
-
-------------------------------------------------------------------------
--- Recommendation-18 cohort coordinates. These are source-local query labels,
--- not a new universal ontology of autistic identity.
-------------------------------------------------------------------------
 
 data R18CohortCoordinate : Set where
   autisticAdults : R18CohortCoordinate
@@ -111,69 +99,50 @@ record CohortEvidence : Set where
 
 open CohortEvidence public
 
-------------------------------------------------------------------------
--- Participation / representation evidence from the co-design process.
-------------------------------------------------------------------------
-
 firstNationsConsultation : CohortEvidence
-firstNationsConsultation = cohort-evidence
-  firstNations targetedConsultationSurface dssStrategyDevelopment
+firstNationsConsultation = cohort-evidence firstNations targetedConsultationSurface dssStrategyDevelopment
   "Phase 2 — targeted focus groups"
   "DSS records a targeted focus group with Autistic First Nations people during development of the Strategy."
   sourcePaid false refl false refl
 
 caldConsultation : CohortEvidence
-caldConsultation = cohort-evidence
-  caldCarm targetedConsultationSurface dssStrategyDevelopment
+caldConsultation = cohort-evidence caldCarm targetedConsultationSurface dssStrategyDevelopment
   "Phase 2 — targeted focus groups"
   "DSS records a targeted focus group with Autistic people from culturally and linguistically diverse backgrounds."
   sourcePaid false refl false refl
 
 lgbtqiaConsultation : CohortEvidence
-lgbtqiaConsultation = cohort-evidence
-  lgbtqiaNonHeterosexual targetedConsultationSurface dssStrategyDevelopment
+lgbtqiaConsultation = cohort-evidence lgbtqiaNonHeterosexual targetedConsultationSurface dssStrategyDevelopment
   "Phase 2 — targeted focus groups"
   "DSS records a targeted focus group with Autistic people from the LGBTQIA+ community."
   sourcePaid false refl false refl
 
 womenGenderConsultation : CohortEvidence
-womenGenderConsultation = cohort-evidence
-  womenGirlsGenderDiverse targetedConsultationSurface dssStrategyDevelopment
+womenGenderConsultation = cohort-evidence womenGirlsGenderDiverse targetedConsultationSurface dssStrategyDevelopment
   "Phase 2 — targeted focus groups"
   "DSS records a targeted focus group with Autistic women, girls and non-binary people."
   sourcePaid false refl false refl
 
 complexNeedsConsultation : CohortEvidence
-complexNeedsConsultation = cohort-evidence
-  complexHighSupportNeeds targetedConsultationSurface dssStrategyDevelopment
+complexNeedsConsultation = cohort-evidence complexHighSupportNeeds targetedConsultationSurface dssStrategyDevelopment
   "Phase 2 — targeted focus groups"
   "DSS records targeted participation by families and carers including people with very high support and dependency needs."
   sourcePaid false refl false refl
 
-------------------------------------------------------------------------
--- Action-level evidence. The First Action Plan evaluation explicitly considers
--- intersectional disadvantage and geography. The peer-support action is
--- described as Autistic-led, culturally sensitive and tailored to priority
--- cohorts, including First Nations and CALD/CARM communities.
-------------------------------------------------------------------------
-
 firstNationsPeerSupportAction : CohortEvidence
-firstNationsPeerSupportAction = cohort-evidence
-  firstNations fundedProgramSurface dssFirstActionPlan
+firstNationsPeerSupportAction = cohort-evidence firstNations fundedProgramSurface dssFirstActionPlan
   "Commitment 2 / peer support action"
   "The First Action Plan describes Autistic-led peer support tailored to priority cohorts and explicitly includes First Nations communities among underrepresented groups for increased access to resources, services and advocacy."
   partialActionPaid false refl false refl
 
 caldPeerSupportAction : CohortEvidence
-caldPeerSupportAction = cohort-evidence
-  caldCarm fundedProgramSurface dssFirstActionPlan
+caldPeerSupportAction = cohort-evidence caldCarm fundedProgramSurface dssFirstActionPlan
   "Commitment 2 / peer support action"
   "The First Action Plan describes culturally sensitive Autistic-led peer support and explicitly includes CALD/CARM communities among underrepresented groups for increased access to resources, services and advocacy."
   partialActionPaid false refl false refl
 
 regionalGeographyEvaluation : CohortEvidence
-regionalGeographyEvaluation = cohort-evidence
-  regionalRemote actionPlanDesignSurface dssFirstActionPlan
+regionalGeographyEvaluation = cohort-evidence regionalRemote actionPlanDesignSurface dssFirstActionPlan
   "Commitment 2 / peer-support model evaluation"
   "The First Action Plan requires evaluation of geographical factors in peer-support models; this is not equivalent to the regional service-access actions recommended by the Senate."
   partialActionPaid false refl false refl
@@ -185,13 +154,6 @@ intersectionalDisadvantageEvaluation = cohort-evidence
   "Commitment 2 / peer-support model evaluation"
   "The First Action Plan requires evaluation of whether peer-support models consider the needs of Autistic people facing intersectional disadvantage."
   partialActionPaid false refl false refl
-
-------------------------------------------------------------------------
--- Existing recognition/distribution/representation geometry applied to these
--- sources. Consultation can pay a bounded representation observation without
--- paying material distribution; a funded program can pay an action coordinate
--- without proving equitable access or longitudinal outcome.
-------------------------------------------------------------------------
 
 targetedConsultationPaysOutcome : Bool
 targetedConsultationPaysOutcome = false
@@ -206,14 +168,8 @@ someCohortSpecificActionEvidencePaid : Bool
 someCohortSpecificActionEvidencePaid = true
 
 recognitionStillSeparateFromDistribution :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    Fraser.recognition Fraser.distribution →
-  ⊥
+  NF.FactorsThrough Fraser.recognition Fraser.distribution → ⊥
 recognitionStillSeparateFromDistribution = Fraser.recognitionCannotRecoverDistribution
-
-------------------------------------------------------------------------
--- Explicit unpaid high-alpha coordinates.
-------------------------------------------------------------------------
 
 lowerSocioeconomicActionPaymentOpen : Bool
 lowerSocioeconomicActionPaymentOpen = true
@@ -232,10 +188,6 @@ womenGirlsServiceActionPaymentOpen = true
 
 lgbtqiaServiceActionPaymentOpen : Bool
 lgbtqiaServiceActionPaymentOpen = true
-
-------------------------------------------------------------------------
--- Ordered intersectional snowball after this tranche.
-------------------------------------------------------------------------
 
 data ActionSnowballLeaf : Set where
   consultationParticipationLeaf : ActionSnowballLeaf
