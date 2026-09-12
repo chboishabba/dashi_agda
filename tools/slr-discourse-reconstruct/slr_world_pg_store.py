@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -37,6 +38,22 @@ CREATE TABLE IF NOT EXISTS slr_world_atom (
     payload JSONB NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+CREATE TABLE IF NOT EXISTS slr_world_gap (
+    gap_id TEXT NOT NULL,
+    iteration_index INTEGER NOT NULL,
+    surface_id TEXT NOT NULL DEFAULT '',
+    payload JSONB NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    PRIMARY KEY (gap_id, iteration_index)
+);
+CREATE TABLE IF NOT EXISTS slr_world_obligation (
+    obligation_id TEXT NOT NULL,
+    iteration_index INTEGER NOT NULL,
+    obligation_kind TEXT NOT NULL,
+    payload JSONB NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    PRIMARY KEY (obligation_id, iteration_index)
+);
 CREATE TABLE IF NOT EXISTS slr_world_route_action (
     action_id TEXT NOT NULL,
     iteration_index INTEGER NOT NULL,
@@ -57,12 +74,18 @@ def _json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
+def _stable_id(prefix: str, value: Any) -> str:
+    return prefix + hashlib.sha256(_json(value).encode("utf-8")).hexdigest()
+
+
 def persist_rows(
     cursor: Any,
     *,
     source_manifestations: Iterable[Mapping[str, Any]] = (),
     pnf_candidates: Iterable[Mapping[str, Any]] = (),
     world_atoms: Iterable[Mapping[str, Any]] = (),
+    gaps: Iterable[Mapping[str, Any]] = (),
+    obligations: Iterable[Mapping[str, Any]] = (),
     route_actions: Iterable[Mapping[str, Any]] = (),
     iteration_rows: Iterable[Mapping[str, Any]] = (),
 ) -> None:
@@ -113,6 +136,32 @@ def persist_rows(
             ON CONFLICT (atom_id) DO NOTHING
             """,
             atom_rows,
+        )
+    gap_rows = [
+        (str(r["gap_id"]), int(r["iteration_index"]), str(r.get("surface_id", "")), _json(r.get("payload") or {}))
+        for r in gaps
+    ]
+    if gap_rows:
+        cursor.executemany(
+            """
+            INSERT INTO slr_world_gap (gap_id, iteration_index, surface_id, payload)
+            VALUES (%s,%s,%s,%s::jsonb)
+            ON CONFLICT (gap_id, iteration_index) DO NOTHING
+            """,
+            gap_rows,
+        )
+    obligation_rows = [
+        (str(r["obligation_id"]), int(r["iteration_index"]), str(r.get("obligation_kind", "")), _json(r.get("payload") or {}))
+        for r in obligations
+    ]
+    if obligation_rows:
+        cursor.executemany(
+            """
+            INSERT INTO slr_world_obligation (obligation_id, iteration_index, obligation_kind, payload)
+            VALUES (%s,%s,%s,%s::jsonb)
+            ON CONFLICT (obligation_id, iteration_index) DO NOTHING
+            """,
+            obligation_rows,
         )
     route_rows = [
         (str(r["action_id"]), int(r["iteration_index"]), _json(r.get("payload") or {}))
@@ -168,7 +217,8 @@ def database_url(*, env_file: Path | None = None) -> str:
 
 
 def persistence_receipt(*, database_url: str, source_manifestations: int, pnf_candidates: int,
-                        world_atoms: int, route_actions: int, iteration_rows: int) -> dict[str, Any]:
+                        world_atoms: int, gaps: int, obligations: int,
+                        route_actions: int, iteration_rows: int) -> dict[str, Any]:
     _ = database_url
     return {
         "schema": SCHEMA,
@@ -176,6 +226,8 @@ def persistence_receipt(*, database_url: str, source_manifestations: int, pnf_ca
         "source_manifestations": int(source_manifestations),
         "pnf_candidates": int(pnf_candidates),
         "world_atoms": int(world_atoms),
+        "gaps": int(gaps),
+        "obligations": int(obligations),
         "route_actions": int(route_actions),
         "iteration_rows": int(iteration_rows),
         "append_only_identity_keys": True,
@@ -235,6 +287,38 @@ def rows_from_round(article: dict[str, Any], closure: dict[str, Any], route_plan
             "payload": a,
         })
     idx = int(iteration.get("iteration_index", 0) or 0)
+    gap_rows: list[dict[str, Any]] = []
+    for gap in closure.get("gaps") or []:
+        if not isinstance(gap, dict):
+            continue
+        sid = str(gap.get("surface_id", ""))
+        missing = [str(x) for x in gap.get("missing_atom_ids") or [] if str(x)]
+        if missing:
+            for atom_id in missing:
+                gap_rows.append({
+                    "gap_id": f"gap:{sid}:{atom_id}",
+                    "iteration_index": idx,
+                    "surface_id": sid,
+                    "payload": {**gap, "missing_atom_id": atom_id},
+                })
+        elif str(gap.get("gap_kind", "")) == "missing-surface":
+            gap_rows.append({
+                "gap_id": f"gap:{sid}:missing-surface",
+                "iteration_index": idx,
+                "surface_id": sid,
+                "payload": gap,
+            })
+    obligation_rows: list[dict[str, Any]] = []
+    for obligation in closure.get("acquisition_obligations") or []:
+        if not isinstance(obligation, dict):
+            continue
+        oid = str(obligation.get("obligation_id", "")) or _stable_id("obligation:", obligation)
+        obligation_rows.append({
+            "obligation_id": oid,
+            "iteration_index": idx,
+            "obligation_kind": str(obligation.get("obligation_kind", "")),
+            "payload": obligation,
+        })
     route_rows = [
         {"action_id": str(a.get("action_id", "")), "iteration_index": idx, "payload": a}
         for a in route_plan.get("selected_route_actions") or []
@@ -249,6 +333,8 @@ def rows_from_round(article: dict[str, Any], closure: dict[str, Any], route_plan
         "source_manifestations": manifestations,
         "pnf_candidates": pnf_rows,
         "world_atoms": atom_rows,
+        "gaps": gap_rows,
+        "obligations": obligation_rows,
         "route_actions": route_rows,
         "iteration_rows": iteration_rows,
     }
@@ -274,6 +360,8 @@ def persist_round(*, article_path: Path, closure_path: Path, route_plan_path: Pa
         source_manifestations=len(rows["source_manifestations"]),
         pnf_candidates=len(rows["pnf_candidates"]),
         world_atoms=len(rows["world_atoms"]),
+        gaps=len(rows["gaps"]),
+        obligations=len(rows["obligations"]),
         route_actions=len(rows["route_actions"]),
         iteration_rows=len(rows["iteration_rows"]),
     )
@@ -318,6 +406,7 @@ def main() -> int:
         "SLR_WORLD_POSTGRES_PERSISTENCE_RECEIPT "
         f"schema={SCHEMA} source_manifestations={receipt['source_manifestations']} "
         f"pnf_candidates={receipt['pnf_candidates']} world_atoms={receipt['world_atoms']} "
+        f"gaps={receipt['gaps']} obligations={receipt['obligations']} "
         f"route_actions={receipt['route_actions']} iteration_rows={receipt['iteration_rows']} "
         "database_url_emitted=false conflicting_replay_rewrites_prior_evidence=false "
         "postgres_persistence_is_semantic_authority=false candidate_only=true semantic_promotion=false",
