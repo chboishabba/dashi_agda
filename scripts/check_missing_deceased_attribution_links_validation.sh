@@ -45,6 +45,7 @@ grep -q 'texasAuditAgreementNumberCollision' DASHI/Culture/NingLiArmyAgreementId
 grep -q 'agreementNumberCollisionDoesNotCreateSameObject = true' DASHI/Culture/NingLiArmyAgreementIdentifierCollisionExact.agda
 grep -q 'lockheedPassThroughInterpretationPaid = false' DASHI/Culture/NingLiArmyAgreementIdentifierCollisionExact.agda
 grep -q 'NingLiArmyAgreementIdentifierCollisionExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
+grep -q 'ningLiAdministrativeIdentifierCollisionPareto' DASHI/Culture/NingLiAdministrativeIdentifierCollisionParetoExact.agda
 
 grep -q 'armyCommercialTransfer' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'engineeringStackConvergence' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
@@ -67,7 +68,6 @@ grep -q 'rotatingFieldPaysPositiveGravityEffect = false' DASHI/Physics/ExoticGra
 grep -q 'NingLiYBCORotatingFieldConstraintExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 
 grep -q 'attachmentCompletionPareto' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
-grep -q 'ningLiAdministrativeIdentifierCollisionPareto' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'MissingDeceasedFullAttachmentClaimAtlasExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'MissingDeceasedAttachmentSourcePromotionLedgerExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 
