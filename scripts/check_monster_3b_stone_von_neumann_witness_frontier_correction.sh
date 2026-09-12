@@ -13,6 +13,8 @@ required=(
   "identifyCertifiedMonster729Constituent = Frontier.blocked"
   "import DASHI.Wikimedia.IbrahimMonster3BMathlibCharacterDeterminationInteropExact as CharacterInterop"
   "standardCharacterDeterminationTheoremPaid"
+  "chosenCharacterRouteAvoidsAlgebraicClosure"
+  "leanEqualCharacterSimpleIsoReceiptPaid"
   "dashiCharacterDeterminationTransportPaid"
   "CharacterInterop.currentMathlibCharacterDeterminationInteropFrontier"
   "highestImpactStructuralLeafAfterWitness"
@@ -26,5 +28,10 @@ for needle in "${required[@]}"; do
     exit 1
   fi
 done
+
+if grep -Fq "over an algebraically closed characteristic-zero field" "$OWNER"; then
+  echo "superseded algebraically-closed-field prerequisite remains in Stone-von Neumann frontier" >&2
+  exit 1
+fi
 
 echo "monster 3B Stone-von Neumann witness-frontier correction check: ok"
