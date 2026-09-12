@@ -301,7 +301,8 @@ existingActionProjectionIsLossy :
 existingActionProjectionIsLossy = Bundle.actionCannotRecoverCommitmentFromBundle
 
 existingNeuralProducerDoesNotDefineOneDecisionCircuit :
-  Neural.oneCircuitDefinesDecision Neural.canonicalNeuralDecisionProducerBoundary
+  Neural.NeuralDecisionProducerBoundary.oneCircuitDefinesDecision
+    Neural.canonicalNeuralDecisionProducerBoundary
   ≡ false
 existingNeuralProducerDoesNotDefineOneDecisionCircuit = refl
 
