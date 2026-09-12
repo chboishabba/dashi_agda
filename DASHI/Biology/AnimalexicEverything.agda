@@ -16,6 +16,7 @@ open import DASHI.Biology.AnimalexicCrossCameraWorldWeldExact
 open import DASHI.Biology.AnimalexicStaticAnchorRobustWorldWeldExact
 open import DASHI.Biology.AnimalexicWorldWeldVoxelOriginHandoffExact
 open import DASHI.Biology.AnimalexicSharedWorldGuardTransportExact
+open import DASHI.Biology.AnimalexicPoseGuardSensitivityRefinementExact
 open import DASHI.Biology.AnimalexicCrossPollinationExact
 open import DASHI.Biology.AnimalexicLexicIntegrationExact
 open import DASHI.Biology.AnimalexicRegression
