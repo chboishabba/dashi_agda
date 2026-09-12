@@ -23,8 +23,32 @@ REQUIRED = {
         "currentOwnershipResidual",
         "canonicalInfluenceSnowballBoundary",
     ],
+    "DASHI/Law/SensibLawSpringfieldResidentialGasEndpointLockInExact.agda": [
+        "module DASHI.Law.SensibLawSpringfieldResidentialGasEndpointLockInExact where",
+        "springfieldEndpointGasHotWater",
+        "springfieldEndpointMixedCooking",
+        "springfieldEndpointSolar",
+        "springfieldEndpointHotWaterDelay",
+        "springfieldEndpointIgnitionBurst",
+        "springfieldEndpointOutdoorOdour",
+        "springfieldEndpointAlarmObservation",
+        "allgasStreetRegister",
+        "santoroFossilRTILocator",
+        "developerSpecifiedGasEndpointsResidual",
+        "gasNetworkCommercialObjectiveResidual",
+        "gasOwnerBenefitResidual",
+        "springfieldFossilLobbyResidual",
+        "azureGasSpecificationResidual",
+        "combustionMeasurementResidual",
+        "gasApplianceDoesNotProveDeveloperIntent",
+        "odourDoesNotProveGasLeak",
+        "sharedLobbyistDoesNotProveFossilCoordination",
+        "fossilAdjacencyDoesNotProveSpringfieldFossilLobbying",
+        "canonicalEndpointToUpstreamPareto",
+    ],
     "DASHI/Law/SensibLawWoogarooPreservationEverything.agda": [
-        "import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact"
+        "import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact",
+        "import DASHI.Law.SensibLawSpringfieldResidentialGasEndpointLockInExact",
     ],
 }
 
@@ -42,4 +66,4 @@ for rel, needles in REQUIRED.items():
 if missing:
     raise SystemExit("\n".join(missing))
 
-print("Springfield gas/lobbying/ownership snowball static contract: OK")
+print("Springfield gas/lobbying/ownership + residential endpoint snowball static contract: OK")
