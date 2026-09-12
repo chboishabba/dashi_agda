@@ -7,6 +7,7 @@ import unittest
 
 HERE = Path(__file__).resolve().parent
 MODULE_PATH = HERE.parent / "slr_wikimedia_world_follow.py"
+RUNNER_PATH = HERE.parent / "run_world_research_budgeted_round.sh"
 spec = importlib.util.spec_from_file_location("slr_wikimedia_world_follow", MODULE_PATH)
 assert spec and spec.loader
 follow = importlib.util.module_from_spec(spec)
@@ -37,6 +38,14 @@ class WikimediaWorldFollowGraphOnlyTests(unittest.TestCase):
                 graph_only=True,
             )
         )
+
+    def test_bounded_round_uses_true_graph_only_follower(self) -> None:
+        script = RUNNER_PATH.read_text(encoding="utf-8")
+        call_start = script.index('python3 "$HERE/slr_wikimedia_world_follow.py"')
+        call_end = script.index('2> "$FOLLOW_ERR"', call_start)
+        invocation = script[call_start:call_end]
+        self.assertIn("--graph-only", invocation)
+        self.assertNotIn("--output-model", invocation)
 
 
 if __name__ == "__main__":
