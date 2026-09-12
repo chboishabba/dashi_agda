@@ -9,32 +9,11 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
+import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact as Schrodinger
 import DASHI.Wikimedia.IbrahimMonster3BCyclotomicScalarExtensionInteropExact as Scalar
 
 ------------------------------------------------------------------------
 -- MATHLIB NATIVE CYCLOTOMIC-FIELD ROUTE FOR THE 3B SCALAR EXTENSION
---
--- The previous owner correctly exposed an algebraically closed target as a
--- required semantic receipt.  Mathlib already supplies a more concrete route:
---
---   CyclotomicField 3 ℚ
---     = splitting field of cyclotomic 3 ℚ,
---
--- with characteristic zero and an IsCyclotomicExtension instance, followed by
--- the canonical algebra map into
---
---   AlgebraicClosure (CyclotomicField 3 ℚ),
---
--- whose IsAlgClosed instance is machine checked upstream.
---
--- Therefore the only DASHI-specific algebraic identification left before the
--- generic scalar-extension owner can be instantiated is the pair-presentation
--- weld
---
---   C3.Cyclotomic3  ~=  CyclotomicField 3 ℚ
---
--- taking DASHI zeta to a selected primitive cubic root and preserving + and *.
--- This is not inferred from both carriers having dimension two.
 ------------------------------------------------------------------------
 
 washington : Attribution.AttributedSource
@@ -50,10 +29,6 @@ washington = Attribution.mkDOISource
   Attribution.publicAttribution
 
 washingtonAttribution = Snowball.canonicalSourceRoleSnowballReceipt washington
-
-------------------------------------------------------------------------
--- 1. Exact upstream software manifestation.
-------------------------------------------------------------------------
 
 record MathlibCyclotomicFieldCoordinate : Set where
   constructor mathlib-cyclotomic-field-coordinate
@@ -85,10 +60,6 @@ canonicalMathlibCyclotomicFieldCoordinate =
     "AlgebraicClosure.isAlgClosed"
     true false
 
-------------------------------------------------------------------------
--- 2. The one DASHI-specific pair-presentation weld.
-------------------------------------------------------------------------
-
 record DashiCyclotomic3ToMathlibCyclotomicFieldTransport : Set₁ where
   field
     MathlibCyclotomicField3 : Set
@@ -113,8 +84,7 @@ record DashiCyclotomic3ToMathlibCyclotomicFieldTransport : Set₁ where
 
     preservesAddition :
       (x y : C3.Cyclotomic3) →
-      toCyclotomicField
-        (DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact.addC3 x y)
+      toCyclotomicField (Schrodinger.addC3 x y)
       ≡ addField (toCyclotomicField x) (toCyclotomicField y)
 
     preservesMultiplication :
@@ -127,16 +97,10 @@ record DashiCyclotomic3ToMathlibCyclotomicFieldTransport : Set₁ where
       ≡ toCyclotomicField C3.zetaSquared
 
     primitiveZetaCubedIsOne :
-      multiplyField
-        (toCyclotomicField C3.zetaSquared)
-        primitiveZeta3
+      multiplyField (toCyclotomicField C3.zetaSquared) primitiveZeta3
       ≡ oneField
-
 open DashiCyclotomic3ToMathlibCyclotomicFieldTransport public
 
--- Semantic receipt exported to the older generic scalar-extension boundary.
--- The consuming Lean bridge must instantiate the target with the canonical
--- algebraic closure and its actual field operations.
 record MathlibAlgebraicClosureLift
     (pairWeld : DashiCyclotomic3ToMathlibCyclotomicFieldTransport) : Set₁ where
   field
@@ -145,12 +109,7 @@ record MathlibAlgebraicClosureLift
     pairPresentationIsCyclotomicField : Set
     dashiPairPresentationIsCyclotomicField : Set
     scalarExtension : Scalar.Cyclotomic3ScalarExtension
-
 open MathlibAlgebraicClosureLift public
-
-------------------------------------------------------------------------
--- 3. WrongType firewalls.
-------------------------------------------------------------------------
 
 data DimensionTwoCreatesPairPresentationEquivalence : Set where
 data CyclotomicFieldNameCreatesSelectedPrimitiveRoot : Set where
@@ -180,10 +139,6 @@ deweyDoesNotCreateCyclotomicEquivalence ()
 oeisDoesNotCreateCyclotomicEquivalence : OeisCreatesCyclotomicEquivalence → ⊥
 oeisDoesNotCreateCyclotomicEquivalence ()
 
-------------------------------------------------------------------------
--- 4. Snowball coordinates remain navigation/provenance only.
-------------------------------------------------------------------------
-
 record MathlibCyclotomicExternalCoordinates : Set where
   constructor mathlib-cyclotomic-external-coordinates
   field
@@ -204,10 +159,6 @@ canonicalMathlibCyclotomicExternalCoordinates =
     "512.23"
     "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no cyclotomic-field presentation, primitive-root, algebraic-closure, scalar-extension, FDRep, character, or intertwiner authority"
     false
-
-------------------------------------------------------------------------
--- 5. Pareto frontier.
-------------------------------------------------------------------------
 
 record MathlibCyclotomicScalarExtensionFrontier : Set where
   constructor mathlib-cyclotomic-scalar-extension-frontier
