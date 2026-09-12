@@ -47,6 +47,15 @@ grep -q 'lockheedPassThroughInterpretationPaid = false' DASHI/Culture/NingLiArmy
 grep -q 'NingLiArmyAgreementIdentifierCollisionExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
 grep -q 'ningLiAdministrativeIdentifierCollisionPareto' DASHI/Culture/NingLiAdministrativeIdentifierCollisionParetoExact.agda
 
+# Primary Texas audit recurrence repair: FY2005 + FY2006 Lockheed pass-through appearances.
+grep -q 'texasFY2005LockheedAppearance' DASHI/Culture/NingLiArmyTexasAuditPrimaryInspectionExact.agda
+grep -q 'texasFY2006LockheedAppearance' DASHI/Culture/NingLiArmyTexasAuditPrimaryInspectionExact.agda
+grep -q 'fy2005DisplayedAmount = "17529"' DASHI/Culture/NingLiArmyTexasAuditPrimaryInspectionExact.agda
+grep -q 'fy2006DisplayedAmount = "477"' DASHI/Culture/NingLiArmyTexasAuditPrimaryInspectionExact.agda
+grep -q 'twoYearRecurrencePaysSameArmyObject = false' DASHI/Culture/NingLiArmyTexasAuditPrimaryInspectionExact.agda
+grep -q 'twoYearRecurrenceWeakensPureOCRHypothesis = true' DASHI/Culture/NingLiArmyTexasAuditPrimaryInspectionExact.agda
+grep -q 'NingLiArmyTexasAuditPrimaryInspectionExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
+
 grep -q 'armyCommercialTransfer' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'engineeringStackConvergence' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'informationPoisoning' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
