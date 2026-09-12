@@ -10,29 +10,28 @@ import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniqueness
+import DASHI.Wikimedia.IbrahimMonster3BCyclotomicScalarExtensionInteropExact as ScalarExtension
 
 ------------------------------------------------------------------------
 -- MATHLIB CHARACTER-DETERMINATION INTEROP
 --
--- The finite Stone--von Neumann BIDI owner has already reduced the next open
+-- The finite Stone--von Neumann BIDI owner has reduced the next open
 -- mathematical leaf to the standard characteristic-zero theorem that two
 -- irreducible finite-group representations with the same character are
 -- equivariantly isomorphic.
 --
--- We do not re-axiomatize that theorem as new mathematics here.  Current
--- mathlib source has a kernel-checked route through
+-- Current mathlib source has a kernel-checked route through
 --
 --   FDRep.scalar_product_char_eq_finrank_equivariant
 --   FDRep.char_orthonormal
 --
--- in Mathlib/RepresentationTheory/Character.lean.  This file pins that exact
--- software manifestation and makes the remaining DASHI obligation explicit:
--- transport the repository's concrete extraspecial representation objects and
--- characters into the hypotheses/carriers of the upstream theorem, then
--- return the resulting equivariant isomorphism to the existing Agda
--- `IrreducibleCharacterDetermination` interface.
+-- in Mathlib/RepresentationTheory/Character.lean.  The concrete DASHI
+-- Schrodinger representation, however, is over exact Q(zeta_3) amplitudes, not
+-- yet an algebraically closed field.  Therefore the first transport payment is
+-- the exact cyclotomic scalar-extension seam; only after that may a concrete
+-- FDRep and class-character comparison be supplied.
 --
--- Citation or theorem-name equality is not proof transport.  No Lean proof is
+-- Citation or theorem-name equality is not proof transport. No Lean proof is
 -- claimed to have been replayed by the Agda kernel in this owner.
 ------------------------------------------------------------------------
 
@@ -85,6 +84,11 @@ canonicalMathlibCharacterDeterminationCoordinate =
     "FDRep.char_orthonormal"
     true true true true true false
 
+cyclotomicScalarExtensionFrontier :
+  ScalarExtension.CyclotomicScalarExtensionFrontier
+cyclotomicScalarExtensionFrontier =
+  ScalarExtension.currentCyclotomicScalarExtensionFrontier
+
 ------------------------------------------------------------------------
 -- 3. Only the cross-kernel transport is still an implementation obligation.
 ------------------------------------------------------------------------
@@ -99,10 +103,14 @@ record DashiToMathlibCharacterDeterminationTransport : Set₂ where
     IsIrreducible : Representation → Set
     EquivariantIso : Representation → Representation → Set
 
-    -- Receipt that the DASHI representation/character objects satisfy the
-    -- exact finite-group/field/simple-object hypotheses of the pinned mathlib
-    -- theorem and that its resulting isomorphism has been transported back to
-    -- this EquivariantIso carrier.
+    -- Receipt that the exact scalar extension and DASHI representation objects
+    -- satisfy the finite-group/field/simple-object hypotheses of the pinned
+    -- mathlib theorem and that its resulting isomorphism has been transported
+    -- back to this EquivariantIso carrier.
+    scalarExtension : ScalarExtension.Cyclotomic3ScalarExtension
+    schrodingerScalarExtension :
+      ScalarExtension.SchrodingerScalarExtensionTransport scalarExtension
+
     transportedEqualCharactersGiveIso :
       (left right : Representation) →
       IsIrreducible left →
@@ -129,6 +137,7 @@ compileIrreducibleCharacterDetermination transport = record
 ------------------------------------------------------------------------
 
 data MathlibTheoremCreatesDashiTransport : Set where
+data ScalarExtensionCreatesCharacterEquality : Set where
 data DOICharacterCitationCreatesTransport : Set where
 data EqualCharacterValuesChooseBasis : Set where
 data QidCreatesCharacterDetermination : Set where
@@ -138,6 +147,10 @@ data OeisCreatesCharacterDetermination : Set where
 mathlibTheoremDoesNotCreateDashiTransport :
   MathlibTheoremCreatesDashiTransport → ⊥
 mathlibTheoremDoesNotCreateDashiTransport ()
+
+scalarExtensionDoesNotCreateCharacterEquality :
+  ScalarExtensionCreatesCharacterEquality → ⊥
+scalarExtensionDoesNotCreateCharacterEquality ()
 
 doiCitationDoesNotCreateTransport :
   DOICharacterCitationCreatesTransport → ⊥
@@ -180,7 +193,7 @@ canonicalCharacterDeterminationExternalCoordinates =
     "Q1057968"
     "512.22"
     "512.23"
-    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no irreducibility, character-orthogonality, representation-isomorphism, basis, or proof-transport authority"
+    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no scalar-extension, irreducibility, character-orthogonality, representation-isomorphism, basis, or proof-transport authority"
     false
 
 ------------------------------------------------------------------------
@@ -195,6 +208,8 @@ record MathlibCharacterDeterminationInteropFrontier : Set where
     scalarProductTheoremLocated : Bool
     irreducibleOrthogonalityTheoremLocated : Bool
     upstreamKernelProofExists : Bool
+    cyclotomicScalarExtensionInterfaceAvailable : Bool
+    scalarExtensionPaid : Bool
     dashiRepresentationTransportPaid : Bool
     agdaKernelReplayPaid : Bool
     fixedPhaseRepresentationIsoCompilerAvailable : Bool
@@ -206,5 +221,6 @@ currentMathlibCharacterDeterminationInteropFrontier :
 currentMathlibCharacterDeterminationInteropFrontier =
   mathlib-character-determination-interop-frontier
     true true true true true
+    true false
     false false true
-    "construct DashiToMathlibCharacterDeterminationTransport for the concrete extraspecial 3^(1+12) representation layer: identify the DASHI representation carrier with a finite-dimensional representation over an algebraically closed characteristic-zero field, prove its class-character function agrees with the pinned mathlib FDRep character, and transport the resulting FDRep isomorphism back to the repository's EquivariantIso type. Only then may the corrected Stone-von Neumann frontier mark fixed-central-character uniqueness closed and proceed to identify the certified Monster 729-dimensional constituent. DOI/QID/Dewey/OEIS coordinates and the existence of an upstream theorem do not create that transport."
+    "first instantiate Cyclotomic3ScalarExtension for the exact Q(zeta_3) amplitude algebra and SchrodingerScalarExtensionTransport for the existing X6 function module, preserving all six translation and six modulation actions. Then package that extended action as the finite-dimensional mathlib FDRep used by DashiToMathlibCharacterDeterminationTransport, prove the DASHI cyclotomic class-character agrees with its trace, and transport the resulting FDRep isomorphism back. Only then may the corrected Stone-von Neumann frontier mark fixed-central-character uniqueness closed. DOI/QID/Dewey/OEIS coordinates and upstream theorem existence do not create scalar extension, character equality, or proof transport."
