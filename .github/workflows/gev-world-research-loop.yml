@@ -14,6 +14,7 @@ on:
       - 'DASHI/Interop/GodsEyeViewWorldResearchFrontierActionExact.agda'
       - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
       - 'DASHI/Interop/Everything.agda'
+      - 'DASHI/Astronomy/**'
       - '.github/workflows/gev-world-research-loop.yml'
   workflow_dispatch:
 
@@ -87,3 +88,8 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Interop/Everything.agda
+
+      - name: Type-check Local Group astronomy aggregate
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Astronomy/Everything.agda
