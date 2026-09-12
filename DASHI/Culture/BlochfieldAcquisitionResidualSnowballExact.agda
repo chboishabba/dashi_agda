@@ -7,7 +7,6 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
-import DASHI.Core.SnowballOSINTAcquisitionInvariantExact as OSINT
 import DASHI.Culture.BlochfieldCreatorGenealogySnowballExact as Creator
 
 ------------------------------------------------------------------------
