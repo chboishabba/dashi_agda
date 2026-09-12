@@ -1,0 +1,26 @@
+{
+  "electron_proton_mass_ratio_2022_codata": 0.0005446170214889,
+  "hartree_to_ev_2022_codata": 27.211386245981,
+  "infinite_mass_minus_nist_ev": 0.00725852328850074,
+  "input_comparison_producer_sha256": "43d6ca4c6a3ac5a66db75819d9e5d2b6d47423ce6987eeba0fd717f1b8de4961",
+  "input_comparison_receipt": "Artifacts/atomic-periodic-table-369/hydrogen-nist-comparison-receipt.json",
+  "model": "nonrelativistic Coulomb hydrogen with finite proton mass via reduced mass",
+  "nist_asd_doi": "10.18434/T4W30F",
+  "nist_ionization_energy_ev": 13.598434599702,
+  "nist_uncertainty_ev": 1.2e-11,
+  "non_promotion_boundary": "Reduced mass pays the leading finite-nuclear-mass correction only. The remaining NIST residual is not numerical failure evidence by itself and is not a periodic-table empirical validation.",
+  "passed": true,
+  "producer": "scripts/atomic_hydrogen_reduced_mass_nist.py",
+  "producer_sha256": "25b2ac8fd8925b64903535a90b238e4bb4f53a95144695972c9edac99df8121f",
+  "reduced_mass_ionization_energy_ev": 13.598287264283275,
+  "reduced_mass_minus_nist_ev": -0.0001473354187240261,
+  "reduced_mass_over_electron_mass": 0.9994556794247615,
+  "relative_residual": -1.0834733780846721e-05,
+  "residual_magnitude_improves_over_infinite_mass": true,
+  "unpaid_physics": [
+    "relativistic fine-structure / Dirac corrections",
+    "radiative QED corrections including Lamb shift",
+    "higher-order recoil and proton finite-size effects",
+    "many-electron SCF/HF/exchange/correlation for Z>1"
+  ]
+}
