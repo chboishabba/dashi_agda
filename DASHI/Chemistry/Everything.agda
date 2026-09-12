@@ -67,3 +67,11 @@ import DASHI.Chemistry.AlliumMolecularTrajectoryExact
 -- identity, exact chlor-alkali stoichiometry and plant-process receipts apart.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369PetrochemicalIdentityBridgeExact
+
+-- Symmetry-resolved 3-D continuation: rich state is reconstructed from an
+-- admissible coarse surface plus retained residual; chirality supplies the
+-- first finite same-coarse/nonfactorability fixture; protein and DNA reuse the
+-- existing stereochemistry, attractor, dihedral and rigid-motion owners.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdmissibleReconstructionEquivalenceExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChiralMolecularSeparatingPairExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProteinDNA3DAdapterExact
