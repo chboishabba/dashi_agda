@@ -7,7 +7,7 @@ import json
 import os
 from pathlib import Path
 import sys
-from typing import Any, Iterable, Mapping
+from typing import Any, Iterable, Mapping, Sequence
 
 SCHEMA = "slr-world-postgres-store-v1"
 
@@ -89,6 +89,7 @@ def persist_rows(
     route_actions: Iterable[Mapping[str, Any]] = (),
     iteration_rows: Iterable[Mapping[str, Any]] = (),
 ) -> None:
+    """Small/debug fallback. Production persistence uses bulk_persist_rows."""
     source_rows = [
         (
             str(r["source_manifestation_id"]), str(r.get("source_kind", "")),
@@ -191,6 +192,164 @@ def persist_rows(
         )
 
 
+def _copy_stage(
+    cursor: Any,
+    *,
+    stage_table: str,
+    target_table: str,
+    stage_columns: Sequence[tuple[str, str]],
+    target_columns: Sequence[str],
+    select_expressions: Sequence[str],
+    conflict_columns: Sequence[str],
+    rows: Sequence[tuple[Any, ...]],
+) -> None:
+    if not rows:
+        return
+    definitions = ", ".join(f"{name} {kind}" for name, kind in stage_columns)
+    stage_names = ", ".join(name for name, _ in stage_columns)
+    target_names = ", ".join(target_columns)
+    selects = ", ".join(select_expressions)
+    conflicts = ", ".join(conflict_columns)
+    cursor.execute(f"CREATE TEMP TABLE {stage_table} ({definitions}) ON COMMIT DROP")
+    with cursor.copy(f"COPY {stage_table} ({stage_names}) FROM STDIN") as copy:
+        for row in rows:
+            copy.write_row(row)
+    cursor.execute(
+        f"INSERT INTO {target_table} ({target_names}) "
+        f"SELECT {selects} FROM {stage_table} "
+        f"ON CONFLICT ({conflicts}) DO NOTHING"
+    )
+
+
+def bulk_persist_rows(
+    cursor: Any,
+    *,
+    source_manifestations: Iterable[Mapping[str, Any]] = (),
+    pnf_candidates: Iterable[Mapping[str, Any]] = (),
+    world_atoms: Iterable[Mapping[str, Any]] = (),
+    gaps: Iterable[Mapping[str, Any]] = (),
+    obligations: Iterable[Mapping[str, Any]] = (),
+    route_actions: Iterable[Mapping[str, Any]] = (),
+    iteration_rows: Iterable[Mapping[str, Any]] = (),
+) -> None:
+    """COPY rows into transaction-local staging tables, then idempotently merge."""
+    source_rows = [
+        (
+            str(r["source_manifestation_id"]), str(r.get("source_kind", "")),
+            str(r.get("qid", "")), str(r.get("language", "")),
+            str(r.get("revision_ref", "")), str(r.get("source_text_sha256", "")),
+            _json(r.get("payload") or {}),
+        )
+        for r in source_manifestations
+    ]
+    _copy_stage(
+        cursor,
+        stage_table="slr_stage_source_manifestation",
+        target_table="slr_world_source_manifestation",
+        stage_columns=(("source_manifestation_id", "TEXT"), ("source_kind", "TEXT"), ("qid", "TEXT"),
+                       ("language", "TEXT"), ("revision_ref", "TEXT"), ("source_text_sha256", "TEXT"),
+                       ("payload_text", "TEXT")),
+        target_columns=("source_manifestation_id", "source_kind", "qid", "language", "revision_ref", "source_text_sha256", "payload"),
+        select_expressions=("source_manifestation_id", "source_kind", "qid", "language", "revision_ref", "source_text_sha256", "payload_text::jsonb"),
+        conflict_columns=("source_manifestation_id",),
+        rows=source_rows,
+    )
+
+    pnf_rows = [
+        (str(r["claim_candidate_id"]), str(r["source_manifestation_id"]), _json(r.get("payload") or {}))
+        for r in pnf_candidates
+    ]
+    _copy_stage(
+        cursor,
+        stage_table="slr_stage_pnf_candidate",
+        target_table="slr_world_pnf_candidate",
+        stage_columns=(("claim_candidate_id", "TEXT"), ("source_manifestation_id", "TEXT"), ("payload_text", "TEXT")),
+        target_columns=("claim_candidate_id", "source_manifestation_id", "payload"),
+        select_expressions=("claim_candidate_id", "source_manifestation_id", "payload_text::jsonb"),
+        conflict_columns=("claim_candidate_id",),
+        rows=pnf_rows,
+    )
+
+    atom_rows = [
+        (
+            str(r["atom_id"]), str(r.get("atom_kind", "")), str(r.get("subject_qid", "")),
+            str(r.get("source_manifestation_id", "")), _json(r.get("payload") or {}),
+        )
+        for r in world_atoms
+    ]
+    _copy_stage(
+        cursor,
+        stage_table="slr_stage_world_atom",
+        target_table="slr_world_atom",
+        stage_columns=(("atom_id", "TEXT"), ("atom_kind", "TEXT"), ("subject_qid", "TEXT"),
+                       ("source_manifestation_id", "TEXT"), ("payload_text", "TEXT")),
+        target_columns=("atom_id", "atom_kind", "subject_qid", "source_manifestation_id", "payload"),
+        select_expressions=("atom_id", "atom_kind", "subject_qid", "source_manifestation_id", "payload_text::jsonb"),
+        conflict_columns=("atom_id",),
+        rows=atom_rows,
+    )
+
+    gap_rows = [
+        (str(r["gap_id"]), int(r["iteration_index"]), str(r.get("surface_id", "")), _json(r.get("payload") or {}))
+        for r in gaps
+    ]
+    _copy_stage(
+        cursor,
+        stage_table="slr_stage_world_gap",
+        target_table="slr_world_gap",
+        stage_columns=(("gap_id", "TEXT"), ("iteration_index", "INTEGER"), ("surface_id", "TEXT"), ("payload_text", "TEXT")),
+        target_columns=("gap_id", "iteration_index", "surface_id", "payload"),
+        select_expressions=("gap_id", "iteration_index", "surface_id", "payload_text::jsonb"),
+        conflict_columns=("gap_id", "iteration_index"),
+        rows=gap_rows,
+    )
+
+    obligation_rows = [
+        (str(r["obligation_id"]), int(r["iteration_index"]), str(r.get("obligation_kind", "")), _json(r.get("payload") or {}))
+        for r in obligations
+    ]
+    _copy_stage(
+        cursor,
+        stage_table="slr_stage_world_obligation",
+        target_table="slr_world_obligation",
+        stage_columns=(("obligation_id", "TEXT"), ("iteration_index", "INTEGER"), ("obligation_kind", "TEXT"), ("payload_text", "TEXT")),
+        target_columns=("obligation_id", "iteration_index", "obligation_kind", "payload"),
+        select_expressions=("obligation_id", "iteration_index", "obligation_kind", "payload_text::jsonb"),
+        conflict_columns=("obligation_id", "iteration_index"),
+        rows=obligation_rows,
+    )
+
+    route_rows = [
+        (str(r["action_id"]), int(r["iteration_index"]), _json(r.get("payload") or {}))
+        for r in route_actions
+    ]
+    _copy_stage(
+        cursor,
+        stage_table="slr_stage_world_route_action",
+        target_table="slr_world_route_action",
+        stage_columns=(("action_id", "TEXT"), ("iteration_index", "INTEGER"), ("payload_text", "TEXT")),
+        target_columns=("action_id", "iteration_index", "payload"),
+        select_expressions=("action_id", "iteration_index", "payload_text::jsonb"),
+        conflict_columns=("action_id", "iteration_index"),
+        rows=route_rows,
+    )
+
+    iteration_payloads = [
+        (int(r["iteration_index"]), r.get("parent_iteration_index"), _json(r.get("payload") or {}))
+        for r in iteration_rows
+    ]
+    _copy_stage(
+        cursor,
+        stage_table="slr_stage_world_iteration",
+        target_table="slr_world_iteration",
+        stage_columns=(("iteration_index", "INTEGER"), ("parent_iteration_index", "INTEGER"), ("payload_text", "TEXT")),
+        target_columns=("iteration_index", "parent_iteration_index", "payload"),
+        select_expressions=("iteration_index", "parent_iteration_index", "payload_text::jsonb"),
+        conflict_columns=("iteration_index",),
+        rows=iteration_payloads,
+    )
+
+
 def _parse_env_file(path: Path) -> dict[str, str]:
     out: dict[str, str] = {}
     if not path.exists():
@@ -218,11 +377,13 @@ def database_url(*, env_file: Path | None = None) -> str:
 
 def persistence_receipt(*, database_url: str, source_manifestations: int, pnf_candidates: int,
                         world_atoms: int, gaps: int, obligations: int,
-                        route_actions: int, iteration_rows: int) -> dict[str, Any]:
+                        route_actions: int, iteration_rows: int,
+                        persistence_mode: str = "copy-staging") -> dict[str, Any]:
     _ = database_url
     return {
         "schema": SCHEMA,
         "database_config_source": "DATABASE_URL",
+        "persistence_mode": persistence_mode,
         "source_manifestations": int(source_manifestations),
         "pnf_candidates": int(pnf_candidates),
         "world_atoms": int(world_atoms),
@@ -233,6 +394,7 @@ def persistence_receipt(*, database_url: str, source_manifestations: int, pnf_ca
         "append_only_identity_keys": True,
         "idempotent_conflict_safe_writes": True,
         "conflicting_replay_rewrites_prior_evidence": False,
+        "copy_staging_bulk_path": persistence_mode == "copy-staging",
         "database_url_emitted": False,
         "postgres_persistence_is_semantic_authority": False,
         "candidate_only": True,
@@ -341,7 +503,8 @@ def rows_from_round(article: dict[str, Any], closure: dict[str, Any], route_plan
 
 
 def persist_round(*, article_path: Path, closure_path: Path, route_plan_path: Path,
-                  iteration_path: Path, env_file: Path | None, receipt_path: Path) -> dict[str, Any]:
+                  iteration_path: Path, env_file: Path | None, receipt_path: Path,
+                  persistence_mode: str = "copy-staging") -> dict[str, Any]:
     try:
         import psycopg  # type: ignore
     except Exception as exc:
@@ -353,7 +516,12 @@ def persist_round(*, article_path: Path, closure_path: Path, route_plan_path: Pa
             for statement in schema_sql().split(";"):
                 if statement.strip():
                     cursor.execute(statement)
-            persist_rows(cursor, **rows)
+            if persistence_mode == "rowwise-debug":
+                persist_rows(cursor, **rows)
+            elif persistence_mode == "copy-staging":
+                bulk_persist_rows(cursor, **rows)
+            else:
+                raise RuntimeError(f"unsupported persistence mode: {persistence_mode}")
         connection.commit()
     receipt = persistence_receipt(
         database_url=url,
@@ -364,6 +532,7 @@ def persist_round(*, article_path: Path, closure_path: Path, route_plan_path: Pa
         obligations=len(rows["obligations"]),
         route_actions=len(rows["route_actions"]),
         iteration_rows=len(rows["iteration_rows"]),
+        persistence_mode=persistence_mode,
     )
     receipt_path.parent.mkdir(parents=True, exist_ok=True)
     receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -382,6 +551,7 @@ def parse_args() -> argparse.Namespace:
     r.add_argument("--iteration", type=Path, required=True)
     r.add_argument("--env-file", type=Path, default=Path(".env"))
     r.add_argument("--receipt", type=Path, required=True)
+    r.add_argument("--persistence-mode", choices=("copy-staging", "rowwise-debug"), default="copy-staging")
     return p.parse_args()
 
 
@@ -401,14 +571,17 @@ def main() -> int:
         iteration_path=args.iteration,
         env_file=args.env_file,
         receipt_path=args.receipt,
+        persistence_mode=args.persistence_mode,
     )
     print(
         "SLR_WORLD_POSTGRES_PERSISTENCE_RECEIPT "
-        f"schema={SCHEMA} source_manifestations={receipt['source_manifestations']} "
+        f"schema={SCHEMA} persistence_mode={receipt['persistence_mode']} "
+        f"source_manifestations={receipt['source_manifestations']} "
         f"pnf_candidates={receipt['pnf_candidates']} world_atoms={receipt['world_atoms']} "
         f"gaps={receipt['gaps']} obligations={receipt['obligations']} "
         f"route_actions={receipt['route_actions']} iteration_rows={receipt['iteration_rows']} "
-        "database_url_emitted=false conflicting_replay_rewrites_prior_evidence=false "
+        "copy_staging_bulk_path=true database_url_emitted=false "
+        "conflicting_replay_rewrites_prior_evidence=false "
         "postgres_persistence_is_semantic_authority=false candidate_only=true semantic_promotion=false",
         file=sys.stderr,
     )
