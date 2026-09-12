@@ -57,6 +57,13 @@ grep -q 'twoYearRecurrenceWeakensPureOCRHypothesis = true' DASHI/Culture/NingLiA
 grep -q 'NingLiArmyTexasAuditPrimaryInspectionExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
 grep -q 'two-year Texas recurrence' DASHI/Culture/NingLiAdministrativeIdentifierCollisionParetoExact.agda
 
+# FOIA procedural history must not be misread as a substantive no-records result.
+grep -q 'foiaTrackingNumber = "23-F-0043"' DASHI/Culture/NingLiArmyFOIAProceduralHistoryExact.agda
+grep -q 'administrativelyClosedForNoResponse = true' DASHI/Culture/NingLiArmyFOIAProceduralHistoryExact.agda
+grep -q 'foiaClosurePaysNoRecordsFinding = false' DASHI/Culture/NingLiArmyFOIAProceduralHistoryExact.agda
+grep -q 'reformulationWasExplicitlyInvited = true' DASHI/Culture/NingLiArmyFOIAProceduralHistoryExact.agda
+grep -q 'NingLiArmyFOIAProceduralHistoryExact' DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda
+
 grep -q 'armyCommercialTransfer' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'engineeringStackConvergence' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
 grep -q 'informationPoisoning' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
