@@ -38,6 +38,8 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Typecheck atomic periodic-table 369 validation root
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369Validation.agda
+      - name: Typecheck symmetry reconstruction / chirality validation root
+        run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369SymmetryReconstructionValidation.agda
       - name: Typecheck Madelung physical-source snowball owner
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369MadelungPhysicalSourceSnowballExact.agda
       - name: Typecheck archive Hartree radial-identity defect owner
@@ -56,6 +58,9 @@ jobs:
         run: |
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ChemistryHyperfibreBridgeExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369PetrochemicalIdentityBridgeExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdmissibleReconstructionEquivalenceExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ChiralMolecularSeparatingPairExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ProteinDNA3DAdapterExact.agda
           nix develop .# --command agda -i . DASHI/Chemistry/Everything.agda
 
   radial-regression:
