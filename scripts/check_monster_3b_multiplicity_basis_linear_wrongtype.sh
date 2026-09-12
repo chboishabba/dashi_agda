@@ -35,5 +35,6 @@ bash "$ROOT/scripts/check_monster_3b_linear_zeta_sector_restriction.sh"
 bash "$ROOT/scripts/check_graded_representation_linear_realisation.sh"
 bash "$ROOT/scripts/check_monster_weight_two_linear_action_bridge.sh"
 bash "$ROOT/scripts/check_graded_voa_homogeneous_linear_realisation.sh"
+bash "$ROOT/scripts/check_monster_3b_actual_linear_multiplicity_acquisition.sh"
 
 echo "monster 3B linear multiplicity frontier static tranche: ok"
