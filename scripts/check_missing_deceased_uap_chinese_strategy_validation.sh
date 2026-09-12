@@ -83,12 +83,34 @@ grep -q 'technicalAdjacencyDoesNotCreateSharedProgramme' DASHI/Culture/MissingDe
 grep -q 'ningLiCoverage' DASHI/Culture/ScientificRosterWorkCoverageExact.agda
 grep -q 'nickPopeCoverage' DASHI/Culture/ScientificRosterWorkCoverageExact.agda
 
+# Source-attribution + geography/anomaly contracts.  These are deliberately
+# non-promoting: a URL/claim carrier does not become event or causal authority.
+grep -q 'investigativeSourceAtlas' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+grep -q 'nasaNingNCC8124Source' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+grep -q 'rezaPatentSource' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+grep -q 'armyCoordinateDiscoverySource' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+grep -q 'sourceAtlasDoesNotPromoteClaims' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+
+grep -q 'record SouthwestCaseLocation' DASHI/Culture/MissingDeceasedSouthwestGeographyDiscriminatorExact.agda
+grep -q 'newMexicoClusterIsSourceBacked' DASHI/Culture/MissingDeceasedSouthwestGeographyDiscriminatorExact.agda
+grep -q 'whiteSandsEventAnchorIsUnpaid' DASHI/Culture/MissingDeceasedSouthwestGeographyDiscriminatorExact.agda
+grep -q 'geographyDoesNotCreateCommonCause' DASHI/Culture/MissingDeceasedSouthwestGeographyDiscriminatorExact.agda
+
+grep -q 'record ReportedAnomaly' DASHI/Culture/MissingDeceasedReportedAnomalyAttributionLedgerExact.agda
+grep -q 'casiasDeviceResetClaim' DASHI/Culture/MissingDeceasedReportedAnomalyAttributionLedgerExact.agda
+grep -q 'chavezBilocationStatementClaim' DASHI/Culture/MissingDeceasedReportedAnomalyAttributionLedgerExact.agda
+grep -q 'secondaryReportDoesNotBecomePrimaryEventFact' DASHI/Culture/MissingDeceasedReportedAnomalyAttributionLedgerExact.agda
+
 grep -q 'Chinese strategic scientist acquisition' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'UAP/adversarial discriminator' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'Chinese roster-cardinality resolution' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'full-set technical intersection' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 grep -q 'Ning Li superconducting-gravity reconstruction' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'Southwest geography and anomaly discrimination' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
 
+grep -q 'MissingDeceasedInvestigativeAttributedSourceAtlasExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedSouthwestGeographyDiscriminatorExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedReportedAnomalyAttributionLedgerExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'MissingDeceasedTernaryAdversarialObserverExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'ChineseStrategicScientistRosterSnowballExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
 grep -q 'MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
