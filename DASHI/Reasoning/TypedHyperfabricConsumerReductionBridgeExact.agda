@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
 
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
@@ -13,65 +14,116 @@ import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as FutureCanonical
 
 ------------------------------------------------------------------------
--- TYPED HYPERFABRIC GLOBAL-SECTION -> CONSUMER-RELATIVE REDUCTION BRIDGE
+-- TYPED HYPERFABRIC -> SET-SIZED SELECTED-SECTION CONSUMER REDUCTION
 --
--- No new fibre/sheaf/reduction kernel is introduced here. A compatible
--- Hyperfabric.GlobalSection is simply used as the Fine state of the already
--- canonical ConsumerRelativeReduction kernel. The reduced state is therefore
--- explicitly a consumer-facing quotient/projection of compatible sections,
--- not a claim that the physical/local fabric itself has collapsed.
+-- Hyperfabric.GlobalSection fabric : Set₁, while ConsumerRelativeReduction is
+-- currently parameterised by Fine : Set.  Agda universes are not silently
+-- cumulative, so a generic GlobalSection cannot simply be supplied as Fine.
+--
+-- A domain must instead declare an explicit Set-sized selected-section code
+-- and a realization map into actual compatible GlobalSections.  Consumer
+-- reduction then acts on those codes.  This preserves the TypedHyperfabric
+-- ownership of compatibility while avoiding a parallel sheaf kernel or an
+-- unnecessary universe-generalisation of the reduction stack.
 ------------------------------------------------------------------------
 
-HyperfabricSectionReduction :
-  {Vertex Edge : Set} →
-  Hyperfabric.TypedHyperfabric Vertex Edge →
-  Set → Set → Set₁
-HyperfabricSectionReduction fabric Action Observation =
-  Reduction.ConsumerRelativeReduction
-    (Hyperfabric.GlobalSection fabric)
-    Action
-    Observation
+record SelectedSectionCarrier
+    {Vertex Edge : Set}
+    (fabric : Hyperfabric.TypedHyperfabric Vertex Edge) : Set₁ where
+  constructor selected-section-carrier
+  field
+    SectionCode : Set
+    realizeSection : SectionCode → Hyperfabric.GlobalSection fabric
+    carrierLabel : String
+
+open SelectedSectionCarrier public
+
+record HyperfabricSectionReduction
+    {Vertex Edge Action Observation : Set}
+    (fabric : Hyperfabric.TypedHyperfabric Vertex Edge) : Set₁ where
+  constructor hyperfabric-section-reduction
+  field
+    selectedSections : SelectedSectionCarrier fabric
+    sectionReduction :
+      Reduction.ConsumerRelativeReduction
+        (SectionCode selectedSections)
+        Action
+        Observation
+    bridgeReceipt : String
+
+open HyperfabricSectionReduction public
 
 sectionCurrentConsumerDescent :
   ∀ {Vertex Edge Action Observation}
     {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} →
-  (rom : HyperfabricSectionReduction fabric Action Observation) →
+  (bridge : HyperfabricSectionReduction {Action = Action} {Observation = Observation} fabric) →
   Consumer.ConsumerDescent
-    (Reduction.encode rom)
-    (Reduction.fineObserve rom)
-sectionCurrentConsumerDescent = Canonical.currentConsumerDescent
+    (Reduction.encode (sectionReduction bridge))
+    (Reduction.fineObserve (sectionReduction bridge))
+sectionCurrentConsumerDescent bridge =
+  Canonical.currentConsumerDescent (sectionReduction bridge)
 
 sectionActionIntertwiner :
   ∀ {Vertex Edge Action Observation}
     {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} →
-  (rom : HyperfabricSectionReduction fabric Action Observation) →
+  (bridge : HyperfabricSectionReduction {Action = Action} {Observation = Observation} fabric) →
   (action : Action) →
   Consumer.Intertwiner
-    (Reduction.encode rom)
-    (Reduction.encode rom)
-    (Reduction.fineStep rom action)
-    (Reduction.reducedStep rom action)
-sectionActionIntertwiner = Canonical.actionIntertwiner
+    (Reduction.encode (sectionReduction bridge))
+    (Reduction.encode (sectionReduction bridge))
+    (Reduction.fineStep (sectionReduction bridge) action)
+    (Reduction.reducedStep (sectionReduction bridge) action)
+sectionActionIntertwiner bridge =
+  Canonical.actionIntertwiner (sectionReduction bridge)
 
 sectionCanonicalFutureSafety :
   ∀ {Vertex Edge Action Observation}
     {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} →
-  (rom : HyperfabricSectionReduction fabric Action Observation) →
+  (bridge : HyperfabricSectionReduction {Action = Action} {Observation = Observation} fabric) →
   (actionLabel : Action → String) →
   Future.FutureLanguageSafeProjection
-    (FutureCanonical.deterministicSystem (Reduction.fineStep rom) actionLabel)
-    (Reduction.fineObserve rom)
-    (Reduction.encode rom)
-sectionCanonicalFutureSafety = Canonical.canonicalFutureSafety
+    (FutureCanonical.deterministicSystem
+      (Reduction.fineStep (sectionReduction bridge)) actionLabel)
+    (Reduction.fineObserve (sectionReduction bridge))
+    (Reduction.encode (sectionReduction bridge))
+sectionCanonicalFutureSafety bridge =
+  Canonical.canonicalFutureSafety (sectionReduction bridge)
+
+sectionCodeConsumerFuturePreserved :
+  ∀ {Vertex Edge Action Observation}
+    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge}
+    (bridge : HyperfabricSectionReduction {Action = Action} {Observation = Observation} fabric) →
+  (actions : List Action) →
+  (sectionCode : SectionCode (selectedSections bridge)) →
+  Reduction.fineObserve (sectionReduction bridge)
+    (Reduction.run (Reduction.fineStep (sectionReduction bridge)) actions sectionCode)
+  ≡
+  Reduction.reducedObserve (sectionReduction bridge)
+    (Reduction.run
+      (Reduction.reducedStep (sectionReduction bridge))
+      actions
+      (Reduction.encode (sectionReduction bridge) sectionCode))
+sectionCodeConsumerFuturePreserved bridge =
+  Reduction.consumerFuturePreserved (sectionReduction bridge)
+
+sectionCodeEqualityPreservesDeclaredConsumerFuture :
+  ∀ {Vertex Edge Action Observation}
+    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge}
+    (bridge : HyperfabricSectionReduction {Action = Action} {Observation = Observation} fabric) →
+  {left right : SectionCode (selectedSections bridge)} →
+  Reduction.encode (sectionReduction bridge) left
+    ≡ Reduction.encode (sectionReduction bridge) right →
+  (actions : List Action) →
+  Reduction.fineObserve (sectionReduction bridge)
+    (Reduction.run (Reduction.fineStep (sectionReduction bridge)) actions left)
+  ≡
+  Reduction.fineObserve (sectionReduction bridge)
+    (Reduction.run (Reduction.fineStep (sectionReduction bridge)) actions right)
+sectionCodeEqualityPreservesDeclaredConsumerFuture bridge =
+  Reduction.encodedEqualityImpliesConsumerFutureEquality (sectionReduction bridge)
 
 ------------------------------------------------------------------------
 -- Finite exact specimen.
---
--- One compatible global section carries a visible coordinate and an extra
--- hidden/local coordinate in its vertex stalk. The declared consumer sees
--- only the visible coordinate. Two globally compatible sections may then
--- collapse to the same consumer code while remaining distinct local-stalk
--- assignments. This is consumer quotienting of sections, not stalk identity.
 ------------------------------------------------------------------------
 
 data SpecVertex : Set where
@@ -110,74 +162,107 @@ rightSection = record
   ; sectionReceipt = "visible=false; hidden=true"
   }
 
-sectionVisible : Hyperfabric.GlobalSection specFabric → Bool
-sectionVisible section = proj₁ (Hyperfabric.vertexValue section region)
+data SpecSectionCode : Set where
+  leftCode : SpecSectionCode
+  rightCode : SpecSectionCode
 
-specReduction : HyperfabricSectionReduction specFabric ⊤ Bool
+realizeSpecSection : SpecSectionCode → Hyperfabric.GlobalSection specFabric
+realizeSpecSection leftCode = leftSection
+realizeSpecSection rightCode = rightSection
+
+specSelectedSections : SelectedSectionCarrier specFabric
+specSelectedSections = selected-section-carrier
+  SpecSectionCode
+  realizeSpecSection
+  "two explicit compatible global sections"
+
+sectionVisible : SpecSectionCode → Bool
+sectionVisible code =
+  proj₁ (Hyperfabric.vertexValue (realizeSpecSection code) region)
+
+specReduction : Reduction.ConsumerRelativeReduction SpecSectionCode ⊤ Bool
 specReduction = Reduction.consumerRelativeReduction
   Bool
   sectionVisible
-  (λ _ section → section)
   (λ _ code → code)
+  (λ _ visible → visible)
   sectionVisible
-  (λ code → code)
+  (λ visible → visible)
   (λ _ _ → refl)
   (λ _ → refl)
 
+specBridge : HyperfabricSectionReduction {Action = ⊤} {Observation = Bool} specFabric
+specBridge = hyperfabric-section-reduction
+  specSelectedSections
+  specReduction
+  "Set-sized selected-section codes bridge compatible global sections to the canonical consumer-reduction kernel"
+
 hiddenStalkDifferenceCanCollapseForDeclaredConsumer :
-  Reduction.encode specReduction leftSection
-  ≡ Reduction.encode specReduction rightSection
+  Reduction.encode specReduction leftCode
+  ≡ Reduction.encode specReduction rightCode
 hiddenStalkDifferenceCanCollapseForDeclaredConsumer = refl
 
 finiteSectionConsumerDescent :
   Consumer.ConsumerDescent
     (Reduction.encode specReduction)
     (Reduction.fineObserve specReduction)
-finiteSectionConsumerDescent = sectionCurrentConsumerDescent specReduction
+finiteSectionConsumerDescent = sectionCurrentConsumerDescent specBridge
 
 finiteSectionFutureSafe :
   Future.FutureLanguageSafeProjection
     (FutureCanonical.deterministicSystem
       (Reduction.fineStep specReduction)
-      (λ _ → "identity section action"))
+      (λ _ → "identity section-code action"))
     (Reduction.fineObserve specReduction)
     (Reduction.encode specReduction)
 finiteSectionFutureSafe =
-  sectionCanonicalFutureSafety specReduction (λ _ → "identity section action")
+  sectionCanonicalFutureSafety specBridge (λ _ → "identity section-code action")
 
 ------------------------------------------------------------------------
--- Boundary.
+-- Promotion firewalls.
 ------------------------------------------------------------------------
+
+data SectionCodeEqualityImpliesGlobalSectionIdentity : Set where
+
+sectionCodeEqualityDoesNotImplyGlobalSectionIdentity :
+  SectionCodeEqualityImpliesGlobalSectionIdentity → ⊥
+sectionCodeEqualityDoesNotImplyGlobalSectionIdentity ()
 
 record HyperfabricConsumerReductionBoundary : Set where
   constructor hyperfabric-consumer-reduction-boundary
   field
-    globalSectionMayServeAsFineReductionState : Bool
-    globalSectionMayServeAsFineReductionStateIsTrue :
-      globalSectionMayServeAsFineReductionState ≡ true
-
-    reductionActsOnCompatibleSectionsNotBareStalks : Bool
-    reductionActsOnCompatibleSectionsNotBareStalksIsTrue :
-      reductionActsOnCompatibleSectionsNotBareStalks ≡ true
-
+    typedHyperfabricOwnsGlobalSectionSemantics : Bool
+    selectedSectionCodeMayServeAsFineReductionState : Bool
+    globalSectionMayServeDirectlyAsFineReductionState : Bool
+    globalSectionMayServeDirectlyAsFineReductionStateIsFalse :
+      globalSectionMayServeDirectlyAsFineReductionState ≡ false
+    globalSectionUniverseIsNotForcedIntoSet : Bool
+    reductionActsOnSelectedCompatibleSectionCodes : Bool
     consumerReductionCollapsesPhysicalHyperfabric : Bool
     consumerReductionCollapsesPhysicalHyperfabricIsFalse :
       consumerReductionCollapsesPhysicalHyperfabric ≡ false
-
+    reducedCodeEqualityImpliesGlobalSectionIdentity : Bool
+    reducedCodeEqualityImpliesGlobalSectionIdentityIsFalse :
+      reducedCodeEqualityImpliesGlobalSectionIdentity ≡ false
     symmetryEquivarianceAloneAuthorizesSectionQuotient : Bool
     symmetryEquivarianceAloneAuthorizesSectionQuotientIsFalse :
       symmetryEquivarianceAloneAuthorizesSectionQuotient ≡ false
-
     canonicalFutureSafetyImpliesMechanisticRealization : Bool
     canonicalFutureSafetyImpliesMechanisticRealizationIsFalse :
       canonicalFutureSafetyImpliesMechanisticRealization ≡ false
+
+open HyperfabricConsumerReductionBoundary public
 
 canonicalHyperfabricConsumerReductionBoundary :
   HyperfabricConsumerReductionBoundary
 canonicalHyperfabricConsumerReductionBoundary =
   hyperfabric-consumer-reduction-boundary
-    true refl
-    true refl
+    true
+    true
+    false refl
+    true
+    true
+    false refl
     false refl
     false refl
     false refl
