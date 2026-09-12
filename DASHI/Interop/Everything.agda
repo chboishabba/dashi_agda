@@ -46,4 +46,5 @@ import DASHI.Interop.DirectionalEvidenceProofSearchBridgeExact
 import DASHI.Interop.IntrospectiveProofLoopExact
 import DASHI.Interop.FormalisationGovernanceAttributedSourceMigrationExact
 import DASHI.Interop.SourceAttributionShapePolicyExact
+import DASHI.Interop.SnowballPluralLensLESBioChemGeoCrossPollinationExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
