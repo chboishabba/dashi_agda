@@ -30,13 +30,19 @@ washington = Attribution.mkDOISource
 
 washingtonAttribution = Snowball.canonicalSourceRoleSnowballReceipt washington
 
+------------------------------------------------------------------------
+-- 1. Exact upstream software manifestations.
+------------------------------------------------------------------------
+
 record MathlibCyclotomicFieldCoordinate : Set where
   constructor mathlib-cyclotomic-field-coordinate
   field
     repository : String
     sourceBlobSha : String
+    polynomialCyclotomicSourceBlobSha : String
     cyclotomicSourceFile : String
     numberFieldCyclotomicSourceFile : String
+    polynomialCyclotomicSourceFile : String
     algebraicClosureSourceFile : String
     cyclotomicFieldType : String
     algebraicClosureType : String
@@ -45,6 +51,8 @@ record MathlibCyclotomicFieldCoordinate : Set where
     integralPowerBasisTheorem : String
     integralPowerBasisGeneratorTheorem : String
     integralPowerBasisDimensionTheorem : String
+    cyclotomicThreePolynomialTheorem : String
+    powerBasisBasisEqPowTheorem : String
     algebraicClosureIsAlgClosedInstance : String
     phiThreeIsTwo : Bool
     upstreamKernelChecked : Bool
@@ -56,8 +64,10 @@ canonicalMathlibCyclotomicFieldCoordinate =
   mathlib-cyclotomic-field-coordinate
     "leanprover-community/mathlib4"
     "70f3f13433ba3d82a15a7cae679abac9128f102b"
+    "aa21122bf6e385a6828b017c7f22cdfdedaee6a9"
     "Mathlib/NumberTheory/Cyclotomic/Basic.lean"
     "Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean"
+    "Mathlib/RingTheory/Polynomial/Cyclotomic/Basic.lean"
     "Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean"
     "CyclotomicField 3 ℚ"
     "AlgebraicClosure (CyclotomicField 3 ℚ)"
@@ -66,16 +76,19 @@ canonicalMathlibCyclotomicFieldCoordinate =
     "IsPrimitiveRoot.integralPowerBasisOfPrimePow"
     "IsPrimitiveRoot.integralPowerBasisOfPrimePow_gen"
     "IsPrimitiveRoot.integralPowerBasisOfPrimePow_dim"
+    "Polynomial.cyclotomic_three"
+    "PowerBasis.basis_eq_pow"
     "AlgebraicClosure.isAlgClosed"
     true true false
 
 ------------------------------------------------------------------------
--- Power-basis reading of the remaining transport.
+-- 2. Power-basis reading of the remaining transport.
 --
--- Specializing p=3,k=1 gives φ(3)=2.  The selected primitive cubic root is the
--- power-basis generator.  Hence the remaining cross-kernel object is exactly
--- the coordinate equivalence (u,v) ↔ u + v*zeta, not an arbitrary abstract
--- two-dimensional-vector-space isomorphism.
+-- Specializing p=3,k=1 gives phi(3)=2.  The selected primitive cubic root is
+-- the power-basis generator.  `Polynomial.cyclotomic_three` gives the exact
+-- relation X^2 + X + 1, while `PowerBasis.basis_eq_pow` identifies basis
+-- coordinates with powers of that generator.  The remaining cross-kernel
+-- object is therefore the coordinate equivalence (u,v) <-> u + v*zeta.
 ------------------------------------------------------------------------
 
 record DashiCyclotomic3ToMathlibCyclotomicFieldTransport : Set₁ where
@@ -123,6 +136,34 @@ record DashiCyclotomic3ToMathlibCyclotomicFieldTransport : Set₁ where
       ≡ oneField
 open DashiCyclotomic3ToMathlibCyclotomicFieldTransport public
 
+------------------------------------------------------------------------
+-- 3. Cross-kernel receipt expected from the Lean/Kant side.
+--
+-- This is deliberately NOT an Agda reconstruction of mathlib's PowerBasis.
+-- A producer must pay the exact Lean theorem application and return the
+-- concrete transport.  The compiler below merely exposes that paid transport
+-- to the existing DASHI scalar-extension route.
+------------------------------------------------------------------------
+
+record LeanPhi3PowerBasisCoordinateReceipt : Set₁ where
+  field
+    pairTransport : DashiCyclotomic3ToMathlibCyclotomicFieldTransport
+    cyclotomicThreePolynomialApplied : Set
+    primitiveRootPowerBasisSpecializedToThree : Set
+    powerBasisCoordinatesArePairCoordinates : Set
+    phiThreeRelationPaysMultiplicationFormula : Set
+    leanProofArtifact : Set
+open LeanPhi3PowerBasisCoordinateReceipt public
+
+compilePairTransportFromLeanPhi3Receipt :
+  LeanPhi3PowerBasisCoordinateReceipt →
+  DashiCyclotomic3ToMathlibCyclotomicFieldTransport
+compilePairTransportFromLeanPhi3Receipt = pairTransport
+
+------------------------------------------------------------------------
+-- 4. Algebraic-closure lift after the coordinate receipt.
+------------------------------------------------------------------------
+
 record MathlibAlgebraicClosureLift
     (pairWeld : DashiCyclotomic3ToMathlibCyclotomicFieldTransport) : Set₁ where
   field
@@ -133,8 +174,13 @@ record MathlibAlgebraicClosureLift
     scalarExtension : Scalar.Cyclotomic3ScalarExtension
 open MathlibAlgebraicClosureLift public
 
+------------------------------------------------------------------------
+-- 5. WrongType / non-promotion firewalls.
+------------------------------------------------------------------------
+
 data DimensionTwoCreatesPairPresentationEquivalence : Set where
 data PowerBasisDimensionCreatesCoordinateWeld : Set where
+data PhiThreeTheoremNameCreatesLeanReceipt : Set where
 data CyclotomicFieldNameCreatesSelectedPrimitiveRoot : Set where
 data AlgebraicClosureInstanceCreatesDashiTransport : Set where
 data QidCreatesCyclotomicEquivalence : Set where
@@ -148,6 +194,10 @@ pairPresentationDoesNotFollowFromDimensionTwo ()
 powerBasisDimensionDoesNotCreateCoordinateWeld :
   PowerBasisDimensionCreatesCoordinateWeld → ⊥
 powerBasisDimensionDoesNotCreateCoordinateWeld ()
+
+phiThreeTheoremNameDoesNotCreateLeanReceipt :
+  PhiThreeTheoremNameCreatesLeanReceipt → ⊥
+phiThreeTheoremNameDoesNotCreateLeanReceipt ()
 
 cyclotomicFieldNameDoesNotSelectPrimitiveRoot :
   CyclotomicFieldNameCreatesSelectedPrimitiveRoot → ⊥
@@ -165,6 +215,10 @@ deweyDoesNotCreateCyclotomicEquivalence ()
 
 oeisDoesNotCreateCyclotomicEquivalence : OeisCreatesCyclotomicEquivalence → ⊥
 oeisDoesNotCreateCyclotomicEquivalence ()
+
+------------------------------------------------------------------------
+-- 6. Snowball/navigation coordinates remain non-promoting.
+------------------------------------------------------------------------
 
 record MathlibCyclotomicExternalCoordinates : Set where
   constructor mathlib-cyclotomic-external-coordinates
@@ -184,8 +238,12 @@ canonicalMathlibCyclotomicExternalCoordinates =
     "Q1057968"
     "512.22"
     "512.23"
-    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no cyclotomic-field presentation, primitive-root, power-basis coordinate, algebraic-closure, scalar-extension, FDRep, character, or intertwiner authority"
+    "A005052 remains numerical provenance for 90 = 10*3^2 only; it has no cyclotomic-polynomial, cyclotomic-field presentation, primitive-root, power-basis coordinate, algebraic-closure, scalar-extension, FDRep, character, or intertwiner authority"
     false
+
+------------------------------------------------------------------------
+-- 7. Pareto frontier.
+------------------------------------------------------------------------
 
 record MathlibCyclotomicScalarExtensionFrontier : Set where
   constructor mathlib-cyclotomic-scalar-extension-frontier
@@ -195,7 +253,9 @@ record MathlibCyclotomicScalarExtensionFrontier : Set where
     mathlibCyclotomicExtensionPaidUpstream : Bool
     primitiveRootPowerBasisPaidUpstream : Bool
     powerBasisDimensionTwoPaidUpstream : Bool
+    phiThreePolynomialPaidUpstream : Bool
     algebraicClosureTargetIsAlgClosedPaidUpstream : Bool
+    leanPhi3CoordinateReceiptObserved : Bool
     dashiPairCoordinateWeldPaid : Bool
     selectedPrimitiveRootSameObjectPaid : Bool
     genericScalarExtensionInstantiated : Bool
@@ -207,6 +267,6 @@ currentMathlibCyclotomicScalarExtensionFrontier :
   MathlibCyclotomicScalarExtensionFrontier
 currentMathlibCyclotomicScalarExtensionFrontier =
   mathlib-cyclotomic-scalar-extension-frontier
-    true true true true true true
-    false false false false
-    "specialize the mathlib primitive-root power basis to p=3,k=1 and construct the cross-kernel coordinate weld sending DASHI cyclotomic3 u v to u + v*primitiveZeta3, with inverse given by the unique two power-basis coordinates. Prove the existing DASHI multiplication formula matches the cyclotomic relation zeta^2+zeta+1=0; then compose the canonical algebra map into AlgebraicClosure (CyclotomicField 3 ℚ) to inhabit Cyclotomic3ScalarExtension. Power-basis dimension two, Washington DOI/QID/Dewey/OEIS coordinates, or matching formulas do not by themselves create the cross-kernel equality."
+    true true true true true true true
+    false false false false false
+    "produce LeanPhi3PowerBasisCoordinateReceipt in the Lean/Kant layer by specializing the primitive-root power basis to p=3,k=1, using Polynomial.cyclotomic_three and PowerBasis.basis_eq_pow to prove that the unique coordinates are exactly u+v*zeta and that the DASHI multiplication formula is the quotient relation zeta^2=-zeta-1. Then compile the receipt here, compose the canonical algebra map into AlgebraicClosure (CyclotomicField 3 ℚ), and instantiate Cyclotomic3ScalarExtension. Theorem names, dimension two, Washington DOI/QID/Dewey/OEIS coordinates, or matching formulas do not create the Lean receipt."
