@@ -12,6 +12,7 @@ module DASHI.Physics.Closure.UnificationFourPointToParallelogramExact where
 -- UCT.5 -> UCT.6 bridge and does NOT perform Jordan-von Neumann polarization.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -34,18 +35,12 @@ asFourPointToQuadraticBoundary axioms = record
       fourPointAxiomsGiveParallelogram axioms
   ; Four.FourPointToQuadraticBoundary.parallelogramLawComesFromFourPointDefect =
       refl
-  ; Four.FourPointToQuadraticBoundary.polarizationBoundaryAvailable =
-      Agda.Builtin.Bool.true
-  ; Four.FourPointToQuadraticBoundary.polarizationBoundaryAvailableIsTrue =
-      refl
-  ; Four.FourPointToQuadraticBoundary.jordanVonNeumannBoundaryAvailable =
-      Agda.Builtin.Bool.true
-  ; Four.FourPointToQuadraticBoundary.jordanVonNeumannBoundaryAvailableIsTrue =
-      refl
-  ; Four.FourPointToQuadraticBoundary.quadraticFormPromoted =
-      Agda.Builtin.Bool.false
-  ; Four.FourPointToQuadraticBoundary.quadraticFormPromotedIsFalse =
-      refl
+  ; Four.FourPointToQuadraticBoundary.polarizationBoundaryAvailable = true
+  ; Four.FourPointToQuadraticBoundary.polarizationBoundaryAvailableIsTrue = refl
+  ; Four.FourPointToQuadraticBoundary.jordanVonNeumannBoundaryAvailable = true
+  ; Four.FourPointToQuadraticBoundary.jordanVonNeumannBoundaryAvailableIsTrue = refl
+  ; Four.FourPointToQuadraticBoundary.quadraticFormPromoted = false
+  ; Four.FourPointToQuadraticBoundary.quadraticFormPromotedIsFalse = refl
   }
 
 uct6ToUCT7CompilerLevel : ProofLevel
