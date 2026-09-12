@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+OWNER="DASHI/Biology/BioacousticMultimodalEpisodeTrajectoryExact.agda"
+test -f "$OWNER"
+grep -q "record MultimodalEpisodeClockReceipt" "$OWNER"
+grep -q "record MultimodalEpisodeSample" "$OWNER"
+grep -q "acousticTimeReference" "$OWNER"
+grep -q "respiratoryTimeReference" "$OWNER"
+grep -q "cardiacTimeReference" "$OWNER"
+grep -q "movementTimeReference" "$OWNER"
+grep -q "energeticTimeReference" "$OWNER"
+grep -q "sameEpisodeIdentityRequired" "$OWNER"
+grep -q "clockAlignmentDoesNotCreateCausality" "$OWNER"
+grep -q "trajectoryABISchemaReused" "$OWNER"
+grep -q "promotionRemainsUpstream" "$OWNER"
+echo "bioacoustic multimodal episode static contract passed"
