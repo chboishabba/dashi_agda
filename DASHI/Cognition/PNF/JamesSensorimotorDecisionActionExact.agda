@@ -1,16 +1,16 @@
 module DASHI.Cognition.PNF.JamesSensorimotorDecisionActionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
 
 import DASHI.Biology.NeuralDecisionProducerBridgeExact as Neural
 import DASHI.Cognition.PNF.DecisionStateBundleExact as Bundle
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Decision
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.IntersectionalNonFactorability as NF
 
 ------------------------------------------------------------------------
@@ -35,10 +35,53 @@ publishedDOI = "10.1162/JOCN.a.2484"
 preprintDOI : String
 preprintDOI = "10.20944/preprints202507.0979.v1"
 
+publishedSource : Source.AttributedSource
+publishedSource = Source.mkDOISource
+  "Thomas W. James"
+  "Sensorimotor Mechanisms of Decisions and Actions"
+  "Journal of Cognitive Neuroscience 38(6), 1089-1100"
+  "2026"
+  publishedDOI
+  "https://doi.org/10.1162/JOCN.a.2484"
+  Source.academicArticleSource
+  "source-paying published perspective for the sensorimotor/active-sensing formalisation; citation does not import proof or authority"
+  Source.publicAttribution
+
+preprintSource : Source.AttributedSource
+preprintSource = Source.mkDOISource
+  "Thomas W. James"
+  "Sensorimotor Mechanisms of Decisions and Actions"
+  "Preprints.org"
+  "2025"
+  preprintDOI
+  "https://doi.org/10.20944/preprints202507.0979.v1"
+  Source.academicArticleSource
+  "earlier manifestation retained for chronology and wording comparison; not conflated with the published paper"
+  Source.publicAttribution
+
+publishedCitationImportsNoProof :
+  Source.citationImportsProof publishedSource ≡ false
+publishedCitationImportsNoProof = Source.citationImportsProofIsFalse publishedSource
+
+publishedCitationCreatesNoAuthority :
+  Source.citationCreatesAuthority publishedSource ≡ false
+publishedCitationCreatesNoAuthority = Source.citationCreatesAuthorityIsFalse publishedSource
+
+------------------------------------------------------------------------
+-- Finite recurrent carrier. The model is deliberately small: it witnesses the
+-- causal geometry James asks experiments to preserve, not a complete theory of
+-- biological decision making.
+------------------------------------------------------------------------
+
 data EnvironmentState : Set where
   neutralEnvironment : EnvironmentState
   supportChangedEnvironment : EnvironmentState
   counterChangedEnvironment : EnvironmentState
+
+data BodyState : Set where
+  neutralBody : BodyState
+  supportActuatedBody : BodyState
+  counterActuatedBody : BodyState
 
 data SensoryState : Set where
   neutralSensation : SensoryState
@@ -53,6 +96,7 @@ record SensorimotorEpisode : Set where
   constructor sensorimotorEpisode
   field
     environment : EnvironmentState
+    body : BodyState
     sensory : SensoryState
     mechanism : SensorimotorState
     action : Decision.ExecutedAction
@@ -65,17 +109,26 @@ nextEnvironment Decision.noAction env = env
 nextEnvironment Decision.supportAction _ = supportChangedEnvironment
 nextEnvironment Decision.counterAction _ = counterChangedEnvironment
 
-sense : EnvironmentState → SensoryState
-sense neutralEnvironment = neutralSensation
-sense supportChangedEnvironment = supportFeedback
-sense counterChangedEnvironment = counterFeedback
+nextBody : Decision.ExecutedAction → BodyState → BodyState
+nextBody Decision.noAction bodyState = bodyState
+nextBody Decision.supportAction _ = supportActuatedBody
+nextBody Decision.counterAction _ = counterActuatedBody
+
+sense : EnvironmentState → BodyState → SensoryState
+sense neutralEnvironment neutralBody = neutralSensation
+sense supportChangedEnvironment _ = supportFeedback
+sense counterChangedEnvironment _ = counterFeedback
+sense neutralEnvironment supportActuatedBody = supportFeedback
+sense neutralEnvironment counterActuatedBody = counterFeedback
 
 activeSensingStep : SensorimotorEpisode → SensorimotorEpisode
 activeSensingStep episode =
   let env′ = nextEnvironment (action episode) (environment episode)
+      body′ = nextBody (action episode) (body episode)
   in sensorimotorEpisode
        env′
-       (sense env′)
+       body′
+       (sense env′ body′)
        (mechanism episode)
        (action episode)
        (learning episode)
@@ -83,7 +136,7 @@ activeSensingStep episode =
 supportActionChangesNextSensation : (memory : Memory.MemoryFibre) →
   sensory
     (activeSensingStep
-      (sensorimotorEpisode neutralEnvironment neutralSensation
+      (sensorimotorEpisode neutralEnvironment neutralBody neutralSensation
         supportSensorimotor Decision.supportAction memory))
   ≡ supportFeedback
 supportActionChangesNextSensation memory = refl
@@ -91,7 +144,7 @@ supportActionChangesNextSensation memory = refl
 counterActionChangesNextSensation : (memory : Memory.MemoryFibre) →
   sensory
     (activeSensingStep
-      (sensorimotorEpisode neutralEnvironment neutralSensation
+      (sensorimotorEpisode neutralEnvironment neutralBody neutralSensation
         counterSensorimotor Decision.counterAction memory))
   ≡ counterFeedback
 counterActionChangesNextSensation memory = refl
@@ -100,18 +153,19 @@ sameInitialSensationDifferentActionsDifferentNextSensation :
   (memory : Memory.MemoryFibre) →
   sensory
     (activeSensingStep
-      (sensorimotorEpisode neutralEnvironment neutralSensation
+      (sensorimotorEpisode neutralEnvironment neutralBody neutralSensation
         supportSensorimotor Decision.supportAction memory))
   ≡ sensory
     (activeSensingStep
-      (sensorimotorEpisode neutralEnvironment neutralSensation
+      (sensorimotorEpisode neutralEnvironment neutralBody neutralSensation
         counterSensorimotor Decision.counterAction memory)) → ⊥
 sameInitialSensationDifferentActionsDifferentNextSensation memory ()
 
 ------------------------------------------------------------------------
 -- Learning-through-active-sensing reuses MemoryFibre rather than introducing
--- another memory ontology. Experience can increase future action relevance
--- while retained event identity remains stable.
+-- another memory ontology. `reinforce` is a finite DASHI witness of an
+-- experience-dependent update; it is not attributed to James as a unique
+-- biological learning law.
 ------------------------------------------------------------------------
 
 learningThroughActiveSensing : Memory.MemoryFibre → Memory.MemoryFibre
@@ -142,12 +196,12 @@ sensorimotorProjection = mechanism
 
 supportMechanismEpisode : Memory.MemoryFibre → SensorimotorEpisode
 supportMechanismEpisode memory =
-  sensorimotorEpisode neutralEnvironment neutralSensation
+  sensorimotorEpisode neutralEnvironment neutralBody neutralSensation
     supportSensorimotor Decision.noAction memory
 
 counterMechanismEpisode : Memory.MemoryFibre → SensorimotorEpisode
 counterMechanismEpisode memory =
-  sensorimotorEpisode neutralEnvironment neutralSensation
+  sensorimotorEpisode neutralEnvironment neutralBody neutralSensation
     counterSensorimotor Decision.noAction memory
 
 sameObservedActionDifferentSensorimotorState :
@@ -180,7 +234,9 @@ observedActionDoesNotRecoverSensorimotorState memory =
     (sensorimotorActionNonFactorabilityWitness memory)
 
 ------------------------------------------------------------------------
--- Phenomenon/mechanism WrongType boundary.
+-- Phenomenon/mechanism WrongType boundary. The empty permissions are explicit
+-- no-promotion surfaces: no function in this owner can silently identify the
+-- phenomenological label with its physical producer/update.
 ------------------------------------------------------------------------
 
 data DecisionPhenomenon : Set where
@@ -195,13 +251,17 @@ data MemoryDescription : Set where
 data LearningUpdate : Set where
   physicalLearningUpdate : LearningUpdate
 
+data DecisionPhenomenonMechanismCollapsePermission : Set where
+
+data MemoryDescriptionLearningUpdateCollapsePermission : Set where
+
 decisionPhenomenonIsNotMechanism :
-  DecisionPhenomenon → DecisionMechanism → Bool
-decisionPhenomenonIsNotMechanism _ _ = true
+  DecisionPhenomenonMechanismCollapsePermission → ⊥
+decisionPhenomenonIsNotMechanism ()
 
 memoryDescriptionIsNotLearningUpdate :
-  MemoryDescription → LearningUpdate → Bool
-memoryDescriptionIsNotLearningUpdate _ _ = true
+  MemoryDescriptionLearningUpdateCollapsePermission → ⊥
+memoryDescriptionIsNotLearningUpdate ()
 
 record JamesWrongTypeBoundary : Set where
   constructor jamesWrongTypeBoundary
@@ -215,18 +275,18 @@ record JamesWrongTypeBoundary : Set where
     paperProvesDeterminism : Bool
     paperProvesLibertarianFreeWill : Bool
 
+open JamesWrongTypeBoundary public
+
 canonicalJamesWrongTypeBoundary : JamesWrongTypeBoundary
 canonicalJamesWrongTypeBoundary =
   jamesWrongTypeBoundary false false false false false false false false
 
 jamesDoesNotProveDeterminism :
-  JamesWrongTypeBoundary.paperProvesDeterminism canonicalJamesWrongTypeBoundary
-  ≡ false
+  paperProvesDeterminism canonicalJamesWrongTypeBoundary ≡ false
 jamesDoesNotProveDeterminism = refl
 
 jamesDoesNotProveLibertarianFreeWill :
-  JamesWrongTypeBoundary.paperProvesLibertarianFreeWill canonicalJamesWrongTypeBoundary
-  ≡ false
+  paperProvesLibertarianFreeWill canonicalJamesWrongTypeBoundary ≡ false
 jamesDoesNotProveLibertarianFreeWill = refl
 
 ------------------------------------------------------------------------
@@ -241,8 +301,7 @@ existingActionProjectionIsLossy :
 existingActionProjectionIsLossy = Bundle.actionCannotRecoverCommitmentFromBundle
 
 existingNeuralProducerDoesNotDefineOneDecisionCircuit :
-  Neural.NeuralDecisionProducerBoundary.oneCircuitDefinesDecision
-    Neural.canonicalNeuralDecisionProducerBoundary
+  Neural.oneCircuitDefinesDecision Neural.canonicalNeuralDecisionProducerBoundary
   ≡ false
 existingNeuralProducerDoesNotDefineOneDecisionCircuit = refl
 
