@@ -7,14 +7,6 @@ open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- POSTGRES WORLD-RESEARCH PERSISTENCE BOUNDARY
---
--- Runtime:
---   tools/slr-discourse-reconstruct/slr_world_pg_store.py
---   tools/slr-discourse-reconstruct/run_world_research_typed_route_round.sh
---
--- Postgres is durable append/idempotent persistence for source manifestations,
--- spaCy/PNF candidate fibres, world atoms, route actions and iteration receipts.
--- It is never semantic authority and never promotes candidate observations.
 ------------------------------------------------------------------------
 
 record PostgresWorldPersistenceBoundary : Set where
@@ -25,9 +17,12 @@ record PostgresWorldPersistenceBoundary : Set where
     sourceManifestationIdentityStable : Bool
     pnfCandidateIdentityStable : Bool
     worldAtomIdentityStable : Bool
+    gapIdentityStableWithinIteration : Bool
+    obligationIdentityStableWithinIteration : Bool
     routeActionIdentityStable : Bool
     iterationIdentityStable : Bool
     writesConflictSafeAndIdempotent : Bool
+    conflictingReplayRewritesPriorEvidence : Bool
     writesDeletePriorEvidence : Bool
     postgresPersistenceCreatesSemanticAuthority : Bool
     postgresPersistenceCreatesClaimTruth : Bool
@@ -41,8 +36,8 @@ canonicalPostgresWorldPersistenceBoundary : PostgresWorldPersistenceBoundary
 canonicalPostgresWorldPersistenceBoundary =
   postgresWorldPersistenceBoundary
     true false
-    true true true true true
-    true false
+    true true true true true true true
+    true false false
     false false false
     true false
 
@@ -70,6 +65,7 @@ data PostgresCreatesClaimTruth : Set where
 data PostgresCreatesOntologyTruth : Set where
 data DatabaseUrlMayBePublishedInReceipt : Set where
 data ConflictSafeWriteMayDeletePriorEvidence : Set where
+data ConflictingReplayMayRewritePriorEvidence : Set where
 data CopiedWorldSnapshotRequiredForGraphMerge : Set where
 
 postgresIsNotSemanticAuthority : PostgresIsSemanticAuthority → ⊥
@@ -86,6 +82,9 @@ databaseUrlDoesNotEnterReceipt ()
 
 conflictSafeWriteDoesNotDeleteEvidence : ConflictSafeWriteMayDeletePriorEvidence → ⊥
 conflictSafeWriteDoesNotDeleteEvidence ()
+
+conflictingReplayDoesNotRewriteEvidence : ConflictingReplayMayRewritePriorEvidence → ⊥
+conflictingReplayDoesNotRewriteEvidence ()
 
 graphMergeDoesNotRequireCopiedWorldSnapshot : CopiedWorldSnapshotRequiredForGraphMerge → ⊥
 graphMergeDoesNotRequireCopiedWorldSnapshot ()
