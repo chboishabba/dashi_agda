@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 from pathlib import Path
+import tempfile
 import unittest
 
 HERE = Path(__file__).resolve().parent
@@ -76,6 +78,32 @@ class WikipediaArticlePNFWorldProducerTests(unittest.TestCase):
         self.assertEqual(row["producer_abi"], producer.PRODUCER_ABI)
         self.assertEqual(row["source_unit_ref"], "unit:wikidata_user_sandbox:nat_wdu:p5991_p14143:2026-04-01")
         self.assertFalse(row["source_unit_text_creates_migration_truth"])
+
+    def test_article_payload_emits_compact_world_store_ndjson_without_promotion(self) -> None:
+        payload = {
+            "article_manifestations": [{
+                "qid": "Q207", "language": "en", "revision_id": 456,
+                "manifestation_kind": "wikipedia-revision-text",
+                "source_text_sha256": "abc", "candidate_only": True,
+                "semantic_promotion": False,
+            }],
+            "pnf_candidates": [{
+                "claim_candidate_id": "pnf-candidate:1",
+                "document_ref": "wiki:Q207:en:456",
+                "candidate_only": True,
+                "semantic_promotion": False,
+            }],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "world-store.ndjson"
+            count = producer.write_world_store_ndjson(payload, path, iteration_index=4)
+            rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+        self.assertEqual(count, 2)
+        self.assertEqual([r["kind"] for r in rows], ["source_manifestation", "pnf_candidate"])
+        self.assertEqual(rows[0]["id"], "wiki:Q207:en:456")
+        self.assertEqual(rows[1]["source_manifestation_id"], "wiki:Q207:en:456")
+        self.assertTrue(all(r["payload"]["candidate_only"] for r in rows))
+        self.assertTrue(all(not r["payload"]["semantic_promotion"] for r in rows))
 
 
 if __name__ == "__main__":
