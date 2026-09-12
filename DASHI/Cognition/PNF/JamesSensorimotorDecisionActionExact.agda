@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Biology.NeuralDecisionProducerBridgeExact as Neural
+import DASHI.Cognition.PNF.DecisionOutcomeLearningFeedbackExact as Feedback
 import DASHI.Cognition.PNF.DecisionStateBundleExact as Bundle
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.UnifiedDecisionDynamicsExact as Decision
@@ -162,26 +163,35 @@ sameInitialSensationDifferentActionsDifferentNextSensation :
 sameInitialSensationDifferentActionsDifferentNextSensation memory ()
 
 ------------------------------------------------------------------------
--- Learning-through-active-sensing reuses MemoryFibre rather than introducing
--- another memory ontology. `reinforce` is a finite DASHI witness of an
--- experience-dependent update; it is not attributed to James as a unique
--- biological learning law.
+-- Learning-through-active-sensing reuses the existing decision-outcome
+-- feedback seam, which itself owns the MemoryFibre update. `reinforcingOutcome`
+-- is a finite DASHI witness of an experience-dependent update; it is not
+-- attributed to James as a unique biological learning law.
 ------------------------------------------------------------------------
 
 learningThroughActiveSensing : Memory.MemoryFibre → Memory.MemoryFibre
-learningThroughActiveSensing = Memory.reinforce
+learningThroughActiveSensing =
+  Feedback.learnFromOutcome Feedback.reinforcingOutcome
 
 activeSensingLearningPreservesRememberedEvent :
   (memory : Memory.MemoryFibre) →
   Memory.rememberedEvent (learningThroughActiveSensing memory)
   ≡ Memory.rememberedEvent memory
-activeSensingLearningPreservesRememberedEvent memory = refl
+activeSensingLearningPreservesRememberedEvent memory =
+  Feedback.outcomeLearningPreservesRememberedEvent
+    Feedback.reinforcingOutcome memory
 
 activeSensingLearningIncrementsActionWeight :
   (memory : Memory.MemoryFibre) →
   Memory.actionWeight (learningThroughActiveSensing memory)
   ≡ suc (Memory.actionWeight memory)
 activeSensingLearningIncrementsActionWeight memory = refl
+
+existingDecisionOutcomeFeedbackBoundaryRetained :
+  Feedback.DecisionLearningBoundary.learningEqualsDecision
+    Feedback.canonicalDecisionLearningBoundary
+  ≡ false
+existingDecisionOutcomeFeedbackBoundaryRetained = refl
 
 ------------------------------------------------------------------------
 -- Same observed action can arise from distinct task-achieving sensorimotor
