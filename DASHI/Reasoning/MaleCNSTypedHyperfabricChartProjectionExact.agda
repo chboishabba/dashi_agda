@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (length)
 
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
+import DASHI.Reasoning.TypedHyperfabricConsumerReductionBridgeExact as SectionReduction
 
 ------------------------------------------------------------------------
 -- MaleCNS region-level chart incidence.
@@ -134,6 +135,60 @@ sourceAndTargetChartsAgreeThroughGlobalSection section source target =
     (sym (sectionIncomingAgreesWithPairChart section source target))
 
 ------------------------------------------------------------------------
+-- Set-sized selected-section code.
+--
+-- A complete ordered-pair chart function is itself Set-sized.  Realization
+-- constructs one compatible GlobalSection by using that same pair chart for
+-- both the source-facing and target-facing vertex stalk views.  This pays the
+-- universe-correct bridge into ConsumerRelativeReduction without identifying
+-- the dense chart carrier with the physical nonzero synapse incidence graph.
+------------------------------------------------------------------------
+
+MaleCNSPairChartCode : Set → Set
+MaleCNSPairChartCode Value = MaleCNSPair → LegacyNDimChart8 Value
+
+regionStalkFromPairChart :
+  ∀ {Value : Set} →
+  MaleCNSPairChartCode Value →
+  MaleCNSRegion →
+  RegionPairChartStalk Value
+regionStalkFromPairChart code region =
+  region-pair-chart-stalk
+    (λ target → code (pair region target))
+    (λ source → code (pair source region))
+
+realizeMaleCNSPairChartCode :
+  ∀ {Value : Set} →
+  MaleCNSPairChartCode Value →
+  Hyperfabric.GlobalSection (maleCNSRegionPairChartFabric {Value})
+realizeMaleCNSPairChartCode code = record
+  { vertexValue = regionStalkFromPairChart code
+  ; edgeValue = code
+  ; compatible = λ
+      { sourceIncidence → refl
+      ; targetIncidence → refl
+      }
+  ; sectionReceipt = "ordered-pair chart code realized as one compatible MaleCNS chart GlobalSection"
+  }
+
+maleCNSSelectedSectionCarrier :
+  ∀ {Value : Set} →
+  SectionReduction.SelectedSectionCarrier
+    (maleCNSRegionPairChartFabric {Value})
+maleCNSSelectedSectionCarrier {Value} =
+  SectionReduction.selected-section-carrier
+    (MaleCNSPairChartCode Value)
+    realizeMaleCNSPairChartCode
+    "Set-sized MaleCNS complete ordered-pair eight-coordinate chart code"
+
+sectionPairChartRealizationExact :
+  ∀ {Value : Set}
+    (code : MaleCNSPairChartCode Value)
+    (edge : MaleCNSPair) →
+  sectionPairChart (realizeMaleCNSPairChartCode code) edge ≡ code edge
+sectionPairChartRealizationExact code edge = refl
+
+------------------------------------------------------------------------
 -- Boundary.
 ------------------------------------------------------------------------
 
@@ -156,6 +211,10 @@ record MaleCNSHyperfabricChartProjectionBoundary : Set where
     globalSectionForcesSourceTargetChartAgreementIsTrue :
       globalSectionForcesSourceTargetChartAgreement ≡ true
 
+    selectedSectionCarrierIsChartCodeNotPhysicalIncidence : Bool
+    selectedSectionCarrierIsChartCodeNotPhysicalIncidenceIsTrue :
+      selectedSectionCarrierIsChartCodeNotPhysicalIncidence ≡ true
+
     completePairCarrierEqualsPhysicalNonzeroSynapseHypergraph : Bool
     completePairCarrierEqualsPhysicalNonzeroSynapseHypergraphIsFalse :
       completePairCarrierEqualsPhysicalNonzeroSynapseHypergraph ≡ false
@@ -164,10 +223,13 @@ record MaleCNSHyperfabricChartProjectionBoundary : Set where
     eightCoordinatesEqualUnderlyingFibreCardinalityIsFalse :
       eightCoordinatesEqualUnderlyingFibreCardinality ≡ false
 
+open MaleCNSHyperfabricChartProjectionBoundary public
+
 canonicalMaleCNSHyperfabricChartProjectionBoundary :
   MaleCNSHyperfabricChartProjectionBoundary
 canonicalMaleCNSHyperfabricChartProjectionBoundary =
   malecns-hyperfabric-chart-projection-boundary
+    true refl
     true refl
     true refl
     true refl
