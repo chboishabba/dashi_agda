@@ -31,9 +31,20 @@ Penrose1965SourceReceipt =
     "primary theorem source for the trapped-surface singularity theorem boundary; citation records provenance but does not import the proof"
     Source.publicAttribution
 
-citationImportsNeitherProofNorAuthority :
-  Source.citationImportsProof Penrose1965SourceReceipt ≡ false
-citationImportsNeitherProofNorAuthority = refl
+record CitationNonPromotionReceipt : Set where
+  field
+    citationImportsNoProof :
+      Source.citationImportsProof Penrose1965SourceReceipt ≡ false
+    citationCreatesNoAuthority :
+      Source.citationCreatesAuthority Penrose1965SourceReceipt ≡ false
+
+open CitationNonPromotionReceipt public
+
+citationImportsNeitherProofNorAuthority : CitationNonPromotionReceipt
+citationImportsNeitherProofNorAuthority = record
+  { citationImportsNoProof = refl
+  ; citationCreatesNoAuthority = refl
+  }
 
 data PenroseHypothesisKind : Set where
   nonCompactCauchyHypersurfaceHypothesis : PenroseHypothesisKind
