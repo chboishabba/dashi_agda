@@ -9,6 +9,7 @@ import DASHI.Interop.SourceDiligenceProofSearchBridgeExact as SourceSearch
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun
 import DASHI.Empirical.DarkDimensionBedroyaParameterManifestBoundaryExact as BedroyaManifest
+import DASHI.Empirical.DarkDimensionFadingDMParentLineageExact as ParentLineage
 
 ------------------------------------------------------------------------
 -- RESIDUAL DEBT ROUTING THROUGH EXISTING PARENTS
@@ -48,6 +49,13 @@ bedroyaAcquisitionStillOpen :
     BedroyaManifest.canonicalBedroyaParameterManifestStatus
   ≡ false
 bedroyaAcquisitionStillOpen = BedroyaManifest.exactStandardTupleStillOpen
+
+parentLineageStillLeavesSameObjectGap :
+  ParentLineage.normalizationInheritanceSameObject
+    ParentLineage.canonicalFadingDMParentLineageStatus
+  ≡ false
+parentLineageStillLeavesSameObjectGap =
+  ParentLineage.parentNormalizationInheritanceStillOpen
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
