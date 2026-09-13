@@ -2,6 +2,9 @@ module DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 
+import DASHI.Cognition.PNF.MemoryFibre as Memory
+import DASHI.Cognition.PhaseEnrichedTrit as Phase
+
 ------------------------------------------------------------------------
 -- Structural continuous-oscillator refinement carrier.
 --
@@ -98,6 +101,29 @@ record ObservedCognitiveMeasurement : Set₁ where
     Measurement : Set
 
 open ObservedCognitiveMeasurement public
+
+------------------------------------------------------------------------
+-- Refinement into the existing public memory and finite phase carriers.
+--
+-- The semantic identity preserved here is rememberedEvent.  Hidden oscillator
+-- coordinates may therefore change while the public remembered event remains
+-- the same.  A finite phase-bearing observation is supplied explicitly; no
+-- identification between ContinuousPhase and Phase3 is made.
+------------------------------------------------------------------------
+
+record OscillatorMemoryRefinement (Hidden : Set) : Set₁ where
+  field
+    observeMemory : Hidden → Memory.MemoryFibre
+    MemoryEquivalentHiddenState : Hidden → Hidden → Set
+    preservedRememberedEvent :
+      ∀ x y →
+      MemoryEquivalentHiddenState x y →
+      Memory.rememberedEvent (observeMemory x) ≡
+      Memory.rememberedEvent (observeMemory y)
+
+    observeFinitePhase : Hidden → Phase.PhaseEnrichedTrit
+
+open OscillatorMemoryRefinement public
 
 ------------------------------------------------------------------------
 -- WrongType / non-promotion boundary.
