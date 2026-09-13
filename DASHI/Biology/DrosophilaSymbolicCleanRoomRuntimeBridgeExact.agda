@@ -11,20 +11,21 @@ import DASHI.Core.AttributedSourceCore as Source
 -- Runtime-side clean-room substrate.
 --
 -- dashiBRAIN PR #8 implements an auditable receipt carrier, a runnable
--- symbolic decoder over the repo's existing kernel-flow trajectories, and
--- concrete matched controls. This pays clean-room implementation dependencies,
--- not the original viral run or empirical performance claims.
+-- symbolic decoder over the repo's existing kernel-flow trajectories,
+-- concrete matched controls, and a three-arm MaleCNS packet/CLI. This pays
+-- clean-room implementation dependencies, not the original viral run or
+-- empirical performance claims.
 ------------------------------------------------------------------------
 
 runtimeCleanRoomSource : Source.AttributedSource
 runtimeCleanRoomSource = Source.mkNoDOISource
   "chboishabba/dashiBRAIN"
-  "MaleCNS symbolic clean-room receipts, trace runner, and matched controls"
+  "MaleCNS symbolic clean-room receipts, controls, packet, and CLI"
   "GitHub pull request #8"
   "2026"
   "https://github.com/chboishabba/dashiBRAIN/pull/8"
   (Source.namedSourceKind "software implementation")
-  "clean-room runtime substrate at head aedd4536e4f66991409cc26de559e4227288bdf3; includes explicit assistance receipts, orthogonal topology/identity/intervention controls, an external symbolic decoder over existing kernel flow, equal-weight degree-and-strength-preserving rewiring, deterministic identity reassignment, focused tests, and a focused CI workflow; not an empirical reproduction receipt"
+  "clean-room runtime substrate at head c0062475f5c12760d4d88661c84dc6ecf0eb960b; includes explicit assistance receipts, orthogonal topology/identity/intervention controls, external symbolic decoding over existing kernel flow, invariant-preserving topology and identity controls, a three-arm packet builder, MaleCNS loader CLI, source/artifact hashes, and parse-only Python inspection with execution disabled; not an empirical reproduction receipt"
   Source.publicAttribution
 
 runtimeCitationImportsNoProof :
@@ -44,6 +45,9 @@ record CleanRoomRuntimeStatus : Set where
     topologyIdentityInterventionAxesSeparated : Bool
     matchedTopologyControlProducerImplemented : Bool
     identityAssignmentControlProducerImplemented : Bool
+    threeArmPacketBuilderImplemented : Bool
+    maleCNSCLIImplemented : Bool
+    emittedPythonExecutionDisabled : Bool
     viralImplementationRecovered : Bool
     viralDemoReproduced : Bool
     empiricalNullsExecuted : Bool
@@ -53,6 +57,9 @@ open CleanRoomRuntimeStatus public
 
 canonicalCleanRoomRuntimeStatus : CleanRoomRuntimeStatus
 canonicalCleanRoomRuntimeStatus = cleanRoomRuntimeStatus
+  true
+  true
+  true
   true
   true
   true
@@ -86,6 +93,18 @@ matchedTopologyControlProducerIsLocated = refl
 identityAssignmentControlProducerIsLocated :
   identityAssignmentControlProducerImplemented canonicalCleanRoomRuntimeStatus ≡ true
 identityAssignmentControlProducerIsLocated = refl
+
+threeArmPacketBuilderIsLocated :
+  threeArmPacketBuilderImplemented canonicalCleanRoomRuntimeStatus ≡ true
+threeArmPacketBuilderIsLocated = refl
+
+maleCNSCLIIsLocated :
+  maleCNSCLIImplemented canonicalCleanRoomRuntimeStatus ≡ true
+maleCNSCLIIsLocated = refl
+
+emittedPythonIsNotExecutedByCleanRoomRunner :
+  emittedPythonExecutionDisabled canonicalCleanRoomRuntimeStatus ≡ true
+emittedPythonIsNotExecutedByCleanRoomRunner = refl
 
 viralImplementationStillUnrecovered :
   viralImplementationRecovered canonicalCleanRoomRuntimeStatus ≡ false
