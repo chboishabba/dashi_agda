@@ -17,6 +17,9 @@ REQUIRED = {
         "primaryImplementationStillUnpaid",
         "adjacentDemoAssistanceDoesNotTransferToPythonRun",
         "stronglyCorroboratedIdentityStillIsNotSameObjectReceipt",
+        "record PublicArtifactSearchReceipt",
+        "canonicalPublicArtifactSearchReceipt",
+        "publicSearchNotFoundDoesNotProveNoArtifact",
         "connectomeAdvantageRequiresNullComparison",
     ],
     "DASHI/Biology/DrosophilaSymbolicInterfaceLearningRegression.agda": [
@@ -24,6 +27,7 @@ REQUIRED = {
         "implementationRecoveryStillOpen",
         "adjacentAssistanceStillDoesNotTransfer",
         "sameObjectIdentityStillUnpaid",
+        "negativePublicSearchStillDoesNotProveAbsence",
     ],
     "DASHI/Biology/AnimalexicEverything.agda": [
         "DrosophilaSymbolicInterfaceLearningExact",
