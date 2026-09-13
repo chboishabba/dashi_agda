@@ -23,7 +23,7 @@ runtimeCleanRoomSource = Source.mkNoDOISource
   "2026"
   "https://github.com/chboishabba/dashiBRAIN/pull/8"
   (Source.namedSourceKind "software implementation")
-  "clean-room runtime substrate at head 1b453bfe7558d3805d8a75a771d523c793e1c262; includes explicit assistance receipts, orthogonal topology/intervention controls, and an external symbolic decoder over existing kernel flow; not an empirical reproduction receipt"
+  "clean-room runtime substrate at head 3a13617224c93b7dc450106670650e57caef27f7; includes explicit assistance receipts, orthogonal topology/intervention controls, an external symbolic decoder over existing kernel flow, focused tests, and a focused CI workflow; not an empirical reproduction receipt"
   Source.publicAttribution
 
 runtimeCitationImportsNoProof :
