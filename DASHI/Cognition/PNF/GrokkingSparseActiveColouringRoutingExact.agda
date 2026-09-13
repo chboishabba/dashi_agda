@@ -60,7 +60,6 @@ record MoNEActivationObservation : Set where
   constructor moneActivation
   field activationSource : Source.AttributedSource; reportedMoNEActivatedPercent : Nat; nearZeroNeuronActivationsReported : Bool; universalLLMNeuronUsageClaim : Bool; sourceImportsProof : Bool
 open MoNEActivationObservation public
-
 moneActivationObservation : MoNEActivationObservation
 moneActivationObservation = moneActivation moneSource 50 true false false
 
@@ -72,19 +71,14 @@ record EmpiricalMetricObservation : Set where
   constructor empiricalMetricObservation
   field observationSource : Source.AttributedSource; metric : SparseRoutingMetric; trend : Trend; universalAcrossArchitectures : Bool; importsMechanisticProof : Bool
 open EmpiricalMetricObservation public
-
 salahNeuronActivityObservation : EmpiricalMetricObservation
 salahNeuronActivityObservation = empiricalMetricObservation salahYevickSource inactiveNeuronFraction decreases false false
-
 humayunCircuitDensityObservation : EmpiricalMetricObservation
 humayunCircuitDensityObservation = empiricalMetricObservation humayunCircuitSource uniqueCircuitDensity decreases false false
-
 inactiveNeuronFractionIsUniqueCircuitDensity : Bool
 inactiveNeuronFractionIsUniqueCircuitDensity = false
-
 grokkingActiveSupportShrinkPaid : Bool
 grokkingActiveSupportShrinkPaid = false
-
 empiricalConflictGraphChromaticObjectivePaid : Bool
 empiricalConflictGraphChromaticObjectivePaid = false
 
@@ -92,7 +86,6 @@ record GrokkingRoutingTransitionReceipt : Set where
   constructor grokkingRoutingTransitionReceipt
   field activeSupportMeasured : Bool; circuitFamilyMeasured : Bool; conflictEdgesMeasured : Bool; sameCheckpointFamily : Bool; sameActivationThreshold : Bool; heldOutGeneralisationMeasured : Bool
 open GrokkingRoutingTransitionReceipt public
-
 unpaidGrokkingRoutingTransition : GrokkingRoutingTransitionReceipt
 unpaidGrokkingRoutingTransition = grokkingRoutingTransitionReceipt false false false false false false
 
@@ -102,28 +95,20 @@ unpaidGrokkingRoutingTransition = grokkingRoutingTransitionReceipt false false f
 
 GrokkingReducerRelation : Set
 GrokkingReducerRelation = CanonicalReducer.ReducerRelation
-
 conflict : GrokkingReducerRelation
 conflict = CanonicalReducer.conflict
-
 gluingRequirement : GrokkingReducerRelation
 gluingRequirement = CanonicalReducer.gluingRequirement
-
 independent : GrokkingReducerRelation
 independent = CanonicalReducer.independent
-
 canonicalConflict : CanonicalReducer.ReducerRelation
 canonicalConflict = CanonicalReducer.conflict
-
 canonicalRequirement : CanonicalReducer.ReducerRelation
 canonicalRequirement = CanonicalReducer.gluingRequirement
-
 canonicalIndependent : CanonicalReducer.ReducerRelation
 canonicalIndependent = CanonicalReducer.independent
-
 fromCanonicalReducerRelation : CanonicalReducer.ReducerRelation → GrokkingReducerRelation
 fromCanonicalReducerRelation relation = relation
-
 conflictFreeImpliesRequirementClosed : Bool
 conflictFreeImpliesRequirementClosed = false
 
@@ -131,7 +116,6 @@ record ConflictCarrierIntegrationResidual : Set where
   constructor conflictCarrierIntegrationResidual
   field localDuplicateConflictOntologyAdded : Bool; canonicalReducerRelationAdapterPaid : Bool; rebaseNeededBeforeCanonicalImport : Bool
 open ConflictCarrierIntegrationResidual public
-
 currentConflictCarrierIntegrationResidual : ConflictCarrierIntegrationResidual
 currentConflictCarrierIntegrationResidual = conflictCarrierIntegrationResidual false true false
 
@@ -141,70 +125,36 @@ currentConflictCarrierIntegrationResidual = conflictCarrierIntegrationResidual f
 
 activationCorrelationAlonePaysConflict : Bool
 activationCorrelationAlonePaysConflict = false
-
 jointInterventionRequiredForConflict : Bool
 jointInterventionRequiredForConflict = true
 
 record CircuitPairInterventionReceipt : Set where
   constructor circuitPairInterventionReceipt
-  field
-    activationCorrelationMeasured : Bool
-    leftInterventionMeasured : Bool
-    rightInterventionMeasured : Bool
-    jointInterventionMeasured : Bool
-    sameCheckpoint : Bool
-    sameHeldOutEvaluation : Bool
-    proposedRelation : GrokkingReducerRelation
-    relationPromotionPaid : Bool
+  field activationCorrelationMeasured : Bool; leftInterventionMeasured : Bool; rightInterventionMeasured : Bool; jointInterventionMeasured : Bool; sameCheckpoint : Bool; sameHeldOutEvaluation : Bool; proposedRelation : GrokkingReducerRelation; relationPromotionPaid : Bool
 open CircuitPairInterventionReceipt public
-
 unpaidCircuitPairIntervention : CircuitPairInterventionReceipt
 unpaidCircuitPairIntervention = circuitPairInterventionReceipt false false false false false false independent false
-
 syntheticPaidConflictIntervention : CircuitPairInterventionReceipt
 syntheticPaidConflictIntervention = circuitPairInterventionReceipt true true true true true true conflict true
-
 syntheticConflictIsEmpiricalGrokkingResult : Bool
 syntheticConflictIsEmpiricalGrokkingResult = false
 
 ------------------------------------------------------------------------
 -- Threshold-governed pair classifier.
---
--- The score uses non-negative held-out loss/effect magnitudes.  The positive
--- interaction residual is
---
---   joint - (left + right)
---
--- truncated at zero in Nat.  A positive excess above the declared threshold
--- pays `conflict` only after adequate power/matching has already been checked.
--- Requirement is a separate directional dependency coordinate and therefore
--- is not inferred from the signed residual alone.  Underpowered observations
--- remain unclassified rather than being forced into `independent`.
 ------------------------------------------------------------------------
 
 record PairInterventionScore : Set where
   constructor pairInterventionScore
-  field
-    leftEffect : Nat
-    rightEffect : Nat
-    jointEffect : Nat
-    interactionThreshold : Nat
-    adequatelyPowered : Bool
-    leftRequiresRight : Bool
-    rightRequiresLeft : Bool
+  field leftEffect : Nat; rightEffect : Nat; jointEffect : Nat; interactionThreshold : Nat; adequatelyPowered : Bool; leftRequiresRight : Bool; rightRequiresLeft : Bool
 open PairInterventionScore public
-
 interactionExcess : PairInterventionScore → Nat
 interactionExcess score = jointEffect score ∸ (leftEffect score + rightEffect score)
-
 interactionDeficit : PairInterventionScore → Nat
 interactionDeficit score = (leftEffect score + rightEffect score) ∸ jointEffect score
-
 natLE : Nat → Nat → Bool
 natLE zero _ = true
 natLE (suc _) zero = false
 natLE (suc left) (suc right) = natLE left right
-
 aboveInteractionThreshold : PairInterventionScore → Bool
 aboveInteractionThreshold score = natLE (suc (interactionThreshold score)) (interactionExcess score)
 
@@ -224,21 +174,81 @@ classifyPair score with adequatelyPowered score
 
 activationCorrelationIsClassificationInput : Bool
 activationCorrelationIsClassificationInput = false
-
 syntheticConflictScore : PairInterventionScore
 syntheticConflictScore = pairInterventionScore 2 2 7 1 true false false
-
 syntheticRequirementScore : PairInterventionScore
 syntheticRequirementScore = pairInterventionScore 2 2 4 1 true true false
-
 syntheticIndependentScore : PairInterventionScore
 syntheticIndependentScore = pairInterventionScore 2 3 5 1 true false false
-
 syntheticUnderpoweredScore : PairInterventionScore
 syntheticUnderpoweredScore = pairInterventionScore 2 2 7 1 false false false
-
 classifierIsEmpiricalGrokkingResult : Bool
 classifierIsEmpiricalGrokkingResult = false
+
+------------------------------------------------------------------------
+-- Finite closed-compatible-family beta witness.
+--
+-- beta is the certified maximum size of a family that is both conflict-free
+-- and closed under declared requirements.  This tranche does not implement a
+-- universal maximum-independent-set solver.  Each finite system carries the
+-- claimed maximum plus an explicit finite-exhaustion payment bit; the examples
+-- pin the structural distinctions we need for later empirical checkpoints.
+------------------------------------------------------------------------
+
+record ClosedCompatibleFamilyCertificate : Set where
+  constructor closedCompatibleFamilyCertificate
+  field
+    familySize : Nat
+    conflictFree : Bool
+    requirementClosed : Bool
+open ClosedCompatibleFamilyCertificate public
+
+record FiniteClosedCompatibleSystem : Set where
+  constructor finiteClosedCompatibleSystem
+  field
+    rawCandidateCount : Nat
+    conflictEdgeCountFinite : Nat
+    requirementEdgeCountFinite : Nat
+    certifiedFamily : ClosedCompatibleFamilyCertificate
+    certifiedMaximum : Nat
+    maximalityPaidByFiniteExhaustion : Bool
+open FiniteClosedCompatibleSystem public
+
+betaClosedCompatible : FiniteClosedCompatibleSystem → Nat
+betaClosedCompatible system = certifiedMaximum system
+
+baseClosedCompatibleSystem : FiniteClosedCompatibleSystem
+baseClosedCompatibleSystem =
+  finiteClosedCompatibleSystem 3 1 0
+    (closedCompatibleFamilyCertificate 2 true true)
+    2 true
+
+extraBlockedCapacitySystem : FiniteClosedCompatibleSystem
+extraBlockedCapacitySystem =
+  finiteClosedCompatibleSystem 4 2 0
+    (closedCompatibleFamilyCertificate 2 true true)
+    2 true
+
+conflictRemovedSystem : FiniteClosedCompatibleSystem
+conflictRemovedSystem =
+  finiteClosedCompatibleSystem 3 0 0
+    (closedCompatibleFamilyCertificate 3 true true)
+    3 true
+
+requirementOpenSystem : FiniteClosedCompatibleSystem
+requirementOpenSystem =
+  finiteClosedCompatibleSystem 2 0 1
+    (closedCompatibleFamilyCertificate 1 true true)
+    1 true
+
+requirementClosedSystem : FiniteClosedCompatibleSystem
+requirementClosedSystem =
+  finiteClosedCompatibleSystem 2 0 1
+    (closedCompatibleFamilyCertificate 2 true true)
+    2 true
+
+betaWitnessIsUniversalGrokkingObjective : Bool
+betaWitnessIsUniversalGrokkingObjective = false
 
 ------------------------------------------------------------------------
 -- Colouring cross-pollination remains structural, not objective identity.
@@ -246,13 +256,10 @@ classifierIsEmpiricalGrokkingResult = false
 
 colouringSourceClaim : Colouring.AttributedClaim
 colouringSourceClaim = Colouring.fourColourLinearReductionClaim
-
 colouringConflictFreeBatchWitness : Bool
 colouringConflictFreeBatchWitness = true
-
 grokkingLiterallyMinimisesChromaticNumber : Bool
 grokkingLiterallyMinimisesChromaticNumber = false
-
 colouringAnalogyBoundary : colouringConflictFreeBatchWitness ≡ true × grokkingLiterallyMinimisesChromaticNumber ≡ false
 colouringAnalogyBoundary = refl , refl
 
@@ -260,10 +267,8 @@ record CandidateActionRoutingWitness : Set where
   constructor candidateActionRoutingWitness
   field largeCandidateFamily : Bool; sparseCompatibleAction : Bool; globalCorrectnessStillNeedsLiftOrConsumer : Bool
 open CandidateActionRoutingWitness public
-
 colouringRoutingWitness : CandidateActionRoutingWitness
 colouringRoutingWitness = candidateActionRoutingWitness true true true
-
 colouringCandidateActionWitness : largeCandidateFamily colouringRoutingWitness ≡ true × sparseCompatibleAction colouringRoutingWitness ≡ true
 colouringCandidateActionWitness = refl , refl
 
@@ -271,6 +276,5 @@ record SparseActiveGrokkingBoundary : Set where
   constructor sparseActiveGrokkingBoundary
   field availableCapacityIsActiveCapacity : Bool; inactiveForOneInputImpliesGloballyRedundant : Bool; interpolationImpliesGeneralisation : Bool; grokkingIsOrdinaryLossReduction : Bool; sparseActivationImpliesPrunableEverywhere : Bool; graphColouringCompatibilityIsMoERoutingIdentity : Bool; graphChromaticNumberIsGrokkingObjective : Bool; neuronActivationSparsityIsCircuitDensity : Bool; sourceScopedMoNEHalfActivationIsUniversalLLMLaw : Bool; largeCandidateFamilyCanPermitSparseCompatibleAction : Bool; overcompleteCarrierMaySupportConditionalReuse : Bool
 open SparseActiveGrokkingBoundary public
-
 canonicalSparseActiveGrokkingBoundary : SparseActiveGrokkingBoundary
 canonicalSparseActiveGrokkingBoundary = sparseActiveGrokkingBoundary false false false false false false false false false true true
