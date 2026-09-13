@@ -15,14 +15,6 @@ import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun
 
 ------------------------------------------------------------------------
 -- CROSS-DOMAIN EVIDENCE WELD
---
--- Reuses three repo-wide boundaries rather than creating a new planner:
---   1. source diligence / acquisition assessment: search non-location and
---      runtime no-match are bounded acquisition states, not negative facts;
---   2. non-factorability: coarse marginals/equations need not determine a
---      unique same-key numerical vector;
---   3. prediction protocol: a reconstruction receipt is not automatically a
---      frozen held-out quantitative prediction.
 ------------------------------------------------------------------------
 
 data CurrentSearchResult : Set where
@@ -62,10 +54,7 @@ bedroyaChainSearchDiligence =
     "downstream numerical reproduction remains blocked until exact manifest/normalization custody is paid"
 
 ------------------------------------------------------------------------
--- Finite non-factorability witness.
--- Two richer states can expose exactly the same plotted marginal summary while
--- carrying different six-key vectors.  Therefore a unique vector does not
--- factor through the marginal summary alone.
+-- Abstract finite non-factorability witness over the declared carriers only.
 ------------------------------------------------------------------------
 
 data MarginalSummaryState : Set where
@@ -112,12 +101,12 @@ marginalsCannotFactorToUniqueSixKeyVector =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     sameMarginalsDifferentSixKeyWitness
 
-equationsAndMarginalsCannotAutoDetermineSixKeyVector :
+publishedMarginalsCannotAutoDetermineSixKeyVector :
   NonFactor.FactorsThrough
     publishedMarginalProjection
     sixKeyVectorProjection →
   ⊥
-equationsAndMarginalsCannotAutoDetermineSixKeyVector =
+publishedMarginalsCannotAutoDetermineSixKeyVector =
   marginalsCannotFactorToUniqueSixKeyVector
 
 ------------------------------------------------------------------------
