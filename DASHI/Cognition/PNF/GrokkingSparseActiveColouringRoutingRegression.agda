@@ -95,3 +95,37 @@ closingRequirementStrictlyIncreasesBeta = s≤s (s≤s z≤n)
 betaIsFiniteWitnessNotUniversalOptimizer :
   Bridge.betaWitnessIsUniversalGrokkingObjective ≡ false
 betaIsFiniteWitnessNotUniversalOptimizer = refl
+
+syntheticCheckpointTransitionHasBetaGain :
+  Bridge.betaGain Bridge.syntheticClosedCompatibleTransition ≡ 1
+syntheticCheckpointTransitionHasBetaGain = refl
+
+syntheticCheckpointTransitionHasHeldOutGain :
+  Bridge.heldOutGeneralisationGain Bridge.syntheticClosedCompatibleTransition ≡ 3
+syntheticCheckpointTransitionHasHeldOutGain = refl
+
+activeSupportChangeRemainsSeparateFromBeta :
+  Bridge.activeSupportGain Bridge.syntheticClosedCompatibleTransition ≡ 1 ×
+  Bridge.betaGain Bridge.syntheticClosedCompatibleTransition ≡ 1
+activeSupportChangeRemainsSeparateFromBeta = refl , refl
+
+trainingLossChangeRemainsSeparateFromBeta :
+  Bridge.trainingLossDecrease Bridge.syntheticClosedCompatibleTransition ≡ 0 ×
+  Bridge.betaGain Bridge.syntheticClosedCompatibleTransition ≡ 1
+trainingLossChangeRemainsSeparateFromBeta = refl , refl
+
+matchedPaidTransitionCanPromote :
+  Bridge.transitionPromotionPaid Bridge.syntheticClosedCompatibleTransition ≡ true
+matchedPaidTransitionCanPromote = refl
+
+unmatchedTransitionCannotPromote :
+  Bridge.transitionPromotionPaid Bridge.unmatchedClosedCompatibleTransition ≡ false
+unmatchedTransitionCannotPromote = refl
+
+betaCertificatesAreRequiredForPromotion :
+  Bridge.transitionPromotionPaid Bridge.unpaidBetaClosedCompatibleTransition ≡ false
+betaCertificatesAreRequiredForPromotion = refl
+
+syntheticTransitionIsNotEmpiricalGrokkingResult :
+  Bridge.syntheticTransitionIsEmpiricalGrokkingResult ≡ false
+syntheticTransitionIsNotEmpiricalGrokkingResult = refl
