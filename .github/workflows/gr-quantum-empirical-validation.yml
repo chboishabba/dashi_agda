@@ -29,6 +29,7 @@ on:
       - 'scripts/run_dark_dimension_dao_same_key_reconstruction.py'
       - 'scripts/check_dark_dimension_bedroya_background_reconstruction.py'
       - 'scripts/check_dark_dimension_bedroya_parameter_manifest_boundary.py'
+      - 'scripts/check_dark_dimension_cross_domain_evidence_weld.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
@@ -73,6 +74,7 @@ jobs:
           python scripts/check_dark_dimension_dao_same_key_reconstruction_runner.py
           python scripts/check_dark_dimension_bedroya_background_reconstruction.py
           python scripts/check_dark_dimension_bedroya_parameter_manifest_boundary.py
+          python scripts/check_dark_dimension_cross_domain_evidence_weld.py
 
   dao-reconstruction-runtime:
     needs: receipt-validator
@@ -144,6 +146,7 @@ jobs:
           check_agda DASHI/Empirical/DarkDimensionDAOSameKeyReconstructionRunExact.agda
           check_agda DASHI/Empirical/DarkDimensionBedroyaParameterManifestBoundaryExact.agda
           check_agda DASHI/Empirical/DarkDimensionBedroyaBackgroundReconstructionExact.agda
+          check_agda DASHI/Empirical/DarkDimensionCrossDomainEvidenceWeldExact.agda
           check_agda DASHI/Empirical/DarkDimensionSameKeyPredictionDebtExact.agda
           check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
           check_agda DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda
