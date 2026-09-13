@@ -28,6 +28,7 @@ on:
       - 'scripts/check_dark_dimension_dao_same_key_reconstruction_runner.py'
       - 'scripts/run_dark_dimension_dao_same_key_reconstruction.py'
       - 'scripts/check_dark_dimension_bedroya_background_reconstruction.py'
+      - 'scripts/check_dark_dimension_bedroya_parameter_manifest_boundary.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
@@ -71,6 +72,7 @@ jobs:
           python scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py --format class-ini
           python scripts/check_dark_dimension_dao_same_key_reconstruction_runner.py
           python scripts/check_dark_dimension_bedroya_background_reconstruction.py
+          python scripts/check_dark_dimension_bedroya_parameter_manifest_boundary.py
 
   dao-reconstruction-runtime:
     needs: receipt-validator
@@ -140,6 +142,7 @@ jobs:
           check_agda DASHI/Empirical/DarkDimensionDAOParameterManifestBoundaryExact.agda
           check_agda DASHI/Empirical/DarkDimensionDAOSameKeyExtractionRecipeExact.agda
           check_agda DASHI/Empirical/DarkDimensionDAOSameKeyReconstructionRunExact.agda
+          check_agda DASHI/Empirical/DarkDimensionBedroyaParameterManifestBoundaryExact.agda
           check_agda DASHI/Empirical/DarkDimensionBedroyaBackgroundReconstructionExact.agda
           check_agda DASHI/Empirical/DarkDimensionSameKeyPredictionDebtExact.agda
           check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
