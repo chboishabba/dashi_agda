@@ -3,6 +3,7 @@ module DASHI.Applications.CounterUASOpenWorldBridgeRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Applications.CounterUASOpenWorldBridgeExact as Bridge
+import DASHI.Applications.OpenWorldTemporalPromotionExact as Temporal
 
 record CounterUASOpenWorldBridgeRegression : Set where
   constructor counterUASOpenWorldBridgeRegression
@@ -17,8 +18,17 @@ record CounterUASOpenWorldBridgeRegression : Set where
       Bridge.generalOpenWorldPaperValidatesVendorImplementation ≡ false
     laterSignatureDoesNotRewriteEarlierUnknownObservation :
       Bridge.laterSignatureRetroactivelyRewritesEarlierObservation ≡ false
+    confidenceDoesNotCreateKnownIdentity :
+      Bridge.confidenceScoreCreatesKnownIdentity ≡ false
+    noveltyEvidenceDoesNotCreateThreatAuthority :
+      Bridge.rfNoveltyEvidenceCreatesThreatAuthority ≡ false
+    temporalReceiptRetainsEncounterState :
+      Temporal.encounterStateRetained Bridge.rfUnknownThenLaterRecognizedReceipt ≡ true
+    temporalReceiptDoesNotRewriteEncounter :
+      Temporal.laterLabelDoesNotRewriteEncounter Bridge.rfUnknownThenLaterRecognizedReceipt ≡ true
 
 canonicalCounterUASOpenWorldBridgeRegression :
   CounterUASOpenWorldBridgeRegression
 canonicalCounterUASOpenWorldBridgeRegression =
-  counterUASOpenWorldBridgeRegression refl refl refl refl refl
+  counterUASOpenWorldBridgeRegression
+    refl refl refl refl refl refl refl refl refl
