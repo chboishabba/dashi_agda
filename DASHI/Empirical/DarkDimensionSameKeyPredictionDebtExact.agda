@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact as BedroyaBackground
+import DASHI.Empirical.DarkDimensionCrossDomainEvidenceWeldExact as CrossDomain
 import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
 import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun
 import DASHI.Empirical.DarkDimensionSharedBAOObservableExact as SharedBAO
@@ -147,6 +148,11 @@ daoExtractionRecipeLocatedButExecutionStillOpen = DAORecipe.recipeExecutionStill
 daoRecipeStillDoesNotPaySameKeyVector :
   DAORecipe.sameKeyBAOVectorDerived DAORecipe.daoPinnedExtractionRecipe ≡ false
 daoRecipeStillDoesNotPaySameKeyVector = DAORecipe.sameKeyBAOVectorStillNotDerived
+
+crossDomainEvidenceWeldStillBlocksPromotion :
+  CrossDomain.ReconstructionReceiptEqualsHeldOutPrediction → ⊥
+crossDomainEvidenceWeldStillBlocksPromotion =
+  CrossDomain.reconstructionReceiptDoesNotBecomeHeldOutPrediction
 
 sameKeyPredictionDebtStillOpen :
   debtClosed canonicalSameKeyPredictionDerivationDebt ≡ false
