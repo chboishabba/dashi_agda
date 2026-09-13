@@ -83,8 +83,8 @@ open ScaleTransitionWitness public
 record RecursiveScaleTransitionBoundary : Set₁ where
   field
     persistenceIsNotNextIdentityByDefinition : Set
-    persistenceNeedNotBeFixedPoint : Set
-    persistenceNeedNotBeAttractor : Set
+    persistenceIsNotRequiredToBeFixedPoint : Set
+    persistenceIsNotRequiredToBeAttractor : Set
     environmentRemainsExplicit : Set
     historyRemainsExplicit : Set
     noUniversalPhysicalF : Set
