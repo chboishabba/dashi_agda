@@ -35,6 +35,8 @@ REQUIRED = {
         "runtimeCleanRoomSource",
         "record CleanRoomRuntimeStatus",
         "runtimeSubstrateIsLocated",
+        "symbolicKernelRunnerIsLocated",
+        "controlAxesAreSeparated",
         "viralImplementationStillUnrecovered",
         "viralReproductionStillUnpaid",
         "empiricalNullsStillUnpaid",
