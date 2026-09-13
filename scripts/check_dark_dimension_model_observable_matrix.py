@@ -18,8 +18,9 @@ REQUIRED = {
         "sameObservableRequirement",
         "DASHI.Empirical.DarkDimensionQuantitativeEnvelopeExact",
     ],
-    "DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda": [
-        "import DASHI.Empirical.DarkDimensionModelObservableMatrixExact",
+    "DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda": [
+        "import DASHI.Empirical.DarkDimensionModelObservableMatrixExact as ModelMatrix",
+        "modelObservableMatrixStillBlocksLockedSeparation",
     ],
     ".github/workflows/gr-quantum-empirical-validation.yml": [
         "python scripts/check_dark_dimension_model_observable_matrix.py",
