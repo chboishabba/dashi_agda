@@ -8,6 +8,7 @@ import DASHI.Core.CoarseFineFabricCalculusExact as Calculus
 import DASHI.Biology.JCoarseFineFabricCalculusAdapterExact as JAdapter
 import DASHI.Core.NDimProjectionLossAdapterExact as NDimAdapter
 import DASHI.Physics.WaveProjectionLossAdapterExact as WaveAdapter
+import DASHI.Foundations.Base369CoarseFineFabricAdapterExact as Base369Adapter
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact as J
 import DASHI.Biology.ModularCoarseFineAddressFibrationExact as Modular
@@ -50,6 +51,9 @@ nDimProjectionBoundaryAdapterSurface =
 waveProjectionStatusSurface : WaveAdapter.WaveProjectionStatus
 waveProjectionStatusSurface = WaveAdapter.waveProjectionStatus
 
+base369CoarseFineReopeningSurface =
+  Base369Adapter.base369CoarseFineReopening
+
 staticNonrecoverabilityIsDynamicNoncongruence : Bool
 staticNonrecoverabilityIsDynamicNoncongruence =
   Calculus.staticNonrecoverabilityIsDynamicNoncongruence
@@ -65,3 +69,8 @@ hyperfabric369PromotedAsGenericFabricInThisTranche =
 hyperfabric369PromotedAsGenericFabricInThisTrancheIsFalse :
   hyperfabric369PromotedAsGenericFabricInThisTranche ≡ false
 hyperfabric369PromotedAsGenericFabricInThisTrancheIsFalse = refl
+
+base369IsInstanceNotGenericFabric :
+  Base369Adapter.Base369CoarseFineBoundary.base369IsGenericFabric
+    Base369Adapter.canonicalBase369CoarseFineBoundary ≡ false
+base369IsInstanceNotGenericFabric = refl
