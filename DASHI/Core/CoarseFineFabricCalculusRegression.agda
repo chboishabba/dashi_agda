@@ -4,31 +4,30 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.CoarseFineFabricCalculusExact as Calculus
+import DASHI.Biology.JCoarseFineFabricCalculusAdapterExact as JAdapter
+import DASHI.Core.NDimProjectionLossAdapterExact as NDimAdapter
+import DASHI.Physics.WaveProjectionLossAdapterExact as WaveAdapter
 
 ------------------------------------------------------------------------
 -- RED/GREEN REGRESSION CONTRACT
 --
--- This regression intentionally names the cross-domain surfaces before the
--- production owner exists.  The first tranche must expose one projection-loss
--- theorem family and three grounded adapter/status surfaces without collapsing
--- static information loss into dynamic noncongruence or promoting 369 as the
--- generic fabric.
+-- Core remains domain-neutral.  J, NDim, and wave are independently imported
+-- manifestations of the shared projection-loss surface.
 ------------------------------------------------------------------------
 
-projectionCollisionSurface : Set₁
 projectionCollisionSurface = Calculus.ProjectionCollision
 
 consumerCannotFactorThroughProjectionSurface =
   Calculus.consumerCannotFactorThroughProjection
 
 jCoarseFineProjectionLossAdapterSurface =
-  Calculus.jCoarseFineProjectionLossAdapter
+  JAdapter.jCoarseFineProjectionLossAdapter
 
 nDimProjectionBoundaryAdapterSurface =
-  Calculus.nDimProjectionBoundaryAdapter
+  NDimAdapter.nDimProjectionBoundaryAdapter
 
 waveProjectionStatusSurface =
-  Calculus.waveProjectionStatus
+  WaveAdapter.waveProjectionStatus
 
 staticNonrecoverabilityIsDynamicNoncongruence : Bool
 staticNonrecoverabilityIsDynamicNoncongruence =
