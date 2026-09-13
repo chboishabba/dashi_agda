@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.WikipediaFirstLinkNetworkExact as FLN
 import DASHI.Wikimedia.ConceptEntityAlignmentExact as Alignment
+import DASHI.Wikimedia.ScientificReferenceEntityAtlasExact as Entity
 
 ------------------------------------------------------------------------
 -- IBRAHIM ENGLISH-FIRST-LINK PARENT COVERAGE GAP ATLAS
@@ -16,7 +17,6 @@ import DASHI.Wikimedia.ConceptEntityAlignmentExact as Alignment
 -- "Connecting every bit of knowledge: The structure of Wikipedia's First
 -- Link Network", Journal of Computational Science 19 (2017), 21-30.
 -- DOI: 10.1016/j.jocs.2016.12.001
--- arXiv:1605.00309
 --
 -- Ibrahim et al. supply the navigation prior: first-link paths tend to move
 -- from specific subjects toward increasingly general concepts, and traversal
@@ -25,7 +25,7 @@ import DASHI.Wikimedia.ConceptEntityAlignmentExact as Alignment
 --
 -- IMPORTANT SNAPSHOT BOUNDARY
 -- The edges below are current English-Wikipedia observations inspected on
--- 2026-09-10/11.  They are NOT asserted to be the exact 2016/2017 Ibrahim dump
+-- 2026-09-10.  They are NOT asserted to be the exact 2016/2017 Ibrahim dump
 -- edges, because article revisions and parser/exclusion policy can change.
 ------------------------------------------------------------------------
 
@@ -130,32 +130,164 @@ societyToIndividual =
     "society"
     "Q8425"
     "individual"
-    "Q795052"
-    "2026-09-11"
+    "unresolved-in-this-tranche"
+    "2026-09-10"
     currentEnPolicy
     fragmentedIndirectCoverage
-    "DASHI has individual/agent/observer carriers in multiple domains"
-    "Wikidata Q795052 resolves the semantic coordinate for individual. The remaining debt is quotienting that coordinate against existing agent/person/observer formulations; QID identity does not choose the DASHI owner."
+    "DASHI has individual/agent/observer carriers in cognition, provenance, law and core observer formulations"
+    "current EN first qualifying concept is individual; resolve the exact external individual identity before choosing among person/agent/observer DASHI carriers"
 
 socialScienceToScienceBranch : EnglishParentProbe
 socialScienceToScienceBranch =
   english-parent-probe
     "social science"
     "Q34749"
-    "branch of science"
-    "Q2465832"
-    "2026-09-11"
+    "branches of science"
+    "unresolved-in-this-tranche"
+    "2026-09-10"
+    currentEnPolicy
+    strongLeafCoverageMissingParent
+    "science and natural-science formulations are spread across DASHI/Physics, Biology, Chemistry, Geology and methodology owners"
+    "this is the highest-leverage common social funnel: a shared SocialScience owner can bind economics, sociology, anthropology, archaeology, political science, psychology, law, history and geography without pretending their methods are identical"
+
+politicsToSociety : EnglishParentProbe
+politicsToSociety =
+  english-parent-probe
+    "politics"
+    "Q7163"
+    "society"
+    "Q8425"
+    "2026-09-10"
     currentEnPolicy
     fragmentedIndirectCoverage
-    "science and natural-science formulations are spread across DASHI/Physics, Biology, Chemistry and methodology owners"
-    "Wikidata Q2465832 resolves the branch-of-science semantic coordinate. The high-value gap remains selecting/reusing a repo-wide science formulation owner rather than creating a directory-label ontology."
+    "DASHI/Governance/*; SensibLaw; Mabo/native-title; political-economy and capital formulations"
+    "Political science now has a current EN path politics -> society -> individual; the missing work is canonical bridge ownership, not new political leaf facts"
+
+------------------------------------------------------------------------
+-- Natural-science probes.  These distinguish true absence from broad domain
+-- ownership whose only debt is an explicit parent bridge.
+------------------------------------------------------------------------
+
+archaeologyToHumanActivity : EnglishParentProbe
+archaeologyToHumanActivity =
+  english-parent-probe
+    "Archaeology"
+    "Q23498"
+    "human activity"
+    "Q24902509"
+    "2026-09-10"
+    currentEnPolicy
+    parentBridgeMissing
+    "focused Archaeology search returned proof/repository-archaeology usages but no archaeological domain owner; anthropology/history/culture/geology/material-analysis substrates already exist"
+    "genuine parent-owner gap: bridge archaeology across human activity, material culture, anthropology, history/geography and geoscience rather than creating an isolated archaeology silo"
+
+geologyToNaturalScience : EnglishParentProbe
+geologyToNaturalScience =
+  english-parent-probe
+    "Geology"
+    "Q1069"
+    "natural science"
+    "Q7991"
+    "2026-09-10"
+    currentEnPolicy
+    directParentOwner
+    "DASHI/Geology/Everything.agda; SaltGeochemistryExact; SaltConservationSpineExact; environmental geology/geomorphology cross-pollinations"
+    "geology is already a direct formal domain; retain only the explicit Geology -> NaturalScience bridge debt"
+
+chemistryToMatter : EnglishParentProbe
+chemistryToMatter =
+  english-parent-probe
+    "Chemistry"
+    "Q2329"
+    "matter"
+    "Q35758"
+    "2026-09-10"
+    currentEnPolicy
+    directParentOwner
+    "DASHI/Chemistry/Everything.agda; TransitionKernel; industrial chemistry, chlor-alkali, assay and molecular-mechanism surfaces"
+    "chemistry is not a coverage gap; the Ibrahim path identifies matter as its external parent coordinate and exposes only a parent-weld audit"
+
+naturalScienceToScience : EnglishParentProbe
+naturalScienceToScience =
+  english-parent-probe
+    "Natural science"
+    "Q7991"
+    "science"
+    "Q336"
+    "2026-09-10"
+    currentEnPolicy
+    fragmentedIndirectCoverage
+    "Physics, Biology, Chemistry, Geology, Environment and scientific-method/source-diligence surfaces"
+    "the shared natural-science funnel is broad but fragmented; select a canonical Science/NaturalScience bridge instead of adding another scientific leaf hierarchy"
+
+------------------------------------------------------------------------
+-- Petrochemistry is intentionally NOT encoded as an English first-link edge.
+-- Wikidata Q493630 identifies petrochemistry as a branch of chemistry, while
+-- the audited item has no EN Wikipedia sitelink.  DASHI already has explicit
+-- petroleum/refinery/petrochemical chemistry content, so absence from the EN
+-- seed graph must not be mistaken for a DASHI subject gap.
+------------------------------------------------------------------------
+
+record NonEnSeedDisposition : Set where
+  constructor non-en-seed-disposition
+  field
+    conceptTitle : String
+    conceptQid : String
+    externalParentTitle : String
+    externalParentQid : String
+    englishFirstLinkAvailable : Bool
+    dashiDomainPresent : Bool
+    dashiEvidence : String
+    disposition : String
+open NonEnSeedDisposition public
+
+petrochemistryDisposition : NonEnSeedDisposition
+petrochemistryDisposition =
+  non-en-seed-disposition
+    "petrochemistry"
+    "Q493630"
+    "chemistry"
+    "Q2329"
+    false
+    true
+    "DASHI/Chemistry/SaltPetroleumIndustrialChemistryNetworkExact.agda; DASHI/IndustrialChemistryLogisticsEverything.agda"
+    "retain Wikidata parent identity and DASHI coverage; do not manufacture an Ibrahim EN first-link observation"
+
+------------------------------------------------------------------------
+-- Existing QID atlas reuse receipts.  The strings carried by EnglishParentProbe
+-- are observation payloads; canonical external identities live in the shared
+-- ScientificReferenceEntityAtlasExact owner.
+------------------------------------------------------------------------
+
+record ParentEntityReuseReceipt : Set where
+  constructor parent-entity-reuse-receipt
+  field
+    auditRole : String
+    entity : Entity.ScientificReferenceEntity
+open ParentEntityReuseReceipt public
+
+socialScienceEntityReuse societyEntityReuse politicsEntityReuse : ParentEntityReuseReceipt
+archaeologyEntityReuse humanActivityEntityReuse : ParentEntityReuseReceipt
+geologyEntityReuse chemistryEntityReuse petrochemistryEntityReuse : ParentEntityReuseReceipt
+matterEntityReuse naturalScienceEntityReuse scienceEntityReuse : ParentEntityReuseReceipt
+socialScienceEntityReuse = parent-entity-reuse-receipt "shared social-science funnel" Entity.socialScience
+societyEntityReuse = parent-entity-reuse-receipt "sociology/politics convergence parent" Entity.society
+politicsEntityReuse = parent-entity-reuse-receipt "political-science parent" Entity.politics
+archaeologyEntityReuse = parent-entity-reuse-receipt "archaeology gap seed" Entity.archaeology
+humanActivityEntityReuse = parent-entity-reuse-receipt "archaeology first parent" Entity.humanActivity
+geologyEntityReuse = parent-entity-reuse-receipt "geology domain seed" Entity.geology
+chemistryEntityReuse = parent-entity-reuse-receipt "chemistry domain seed" Entity.chemistry
+petrochemistryEntityReuse = parent-entity-reuse-receipt "petrochemistry non-EN seed" Entity.petrochemistry
+matterEntityReuse = parent-entity-reuse-receipt "chemistry first parent" Entity.matter
+naturalScienceEntityReuse = parent-entity-reuse-receipt "geology/science funnel" Entity.naturalScience
+scienceEntityReuse = parent-entity-reuse-receipt "natural-science parent" Entity.science
 
 ------------------------------------------------------------------------
 -- Gap-priority semantics.
 ------------------------------------------------------------------------
 
-record EnglishSocialScienceGapPriority : Set where
-  constructor english-social-science-gap-priority
+record EnglishCoverageGapPriority : Set where
+  constructor english-coverage-gap-priority
   field
     psychologyNeedsNewLeafTheory : Bool
     psychologyNeedsParentBridge : Bool
@@ -164,13 +296,18 @@ record EnglishSocialScienceGapPriority : Set where
     economicsNeedsSocialScienceBridge : Bool
     anthropologyNeedsCanonicalParent : Bool
     politicalScienceNeedsCanonicalParent : Bool
+    archaeologyNeedsCanonicalParent : Bool
+    geologyNeedsNewLeafDomain : Bool
+    chemistryNeedsNewLeafDomain : Bool
+    petrochemistryNeedsNewLeafDomain : Bool
     socialScienceCommonFunnelIsPriority : Bool
-open EnglishSocialScienceGapPriority public
+    naturalScienceCommonFunnelNeedsBridgeAudit : Bool
+open EnglishCoverageGapPriority public
 
-firstSocialSciencePriority : EnglishSocialScienceGapPriority
-firstSocialSciencePriority =
-  english-social-science-gap-priority
-    false true true false true true true true
+firstCoveragePriority : EnglishCoverageGapPriority
+firstCoveragePriority =
+  english-coverage-gap-priority
+    false true true false true true true true false false false true true
 
 ------------------------------------------------------------------------
 -- Firewalls: navigation evidence discovers coverage debt; it never promotes
@@ -182,6 +319,7 @@ data CurrentEnglishEdgeIsIbrahimHistoricalEdge : Set where
 data WikipediaParentCreatesDashiProofDependency : Set where
 data MissingCanonicalParentMeansNoDomainKnowledge : Set where
 data QidCreatesDashiDefinition : Set where
+data MissingEnglishSitelinkMeansMissingDashiDomain : Set where
 
 currentEdgeDoesNotBecomeHistoricalIbrahimEdge :
   CurrentEnglishEdgeIsIbrahimHistoricalEdge → ⊥
@@ -198,6 +336,10 @@ missingParentDoesNotEraseLeafKnowledge ()
 qidDoesNotCreateDashiDefinition : QidCreatesDashiDefinition → ⊥
 qidDoesNotCreateDashiDefinition ()
 
+missingEnglishSitelinkDoesNotEraseDashiDomain :
+  MissingEnglishSitelinkMeansMissingDashiDomain → ⊥
+missingEnglishSitelinkDoesNotEraseDashiDomain ()
+
 record IbrahimEnglishCoverageAuditBoundary : Set where
   constructor ibrahim-english-coverage-audit-boundary
   field
@@ -205,7 +347,7 @@ record IbrahimEnglishCoverageAuditBoundary : Set where
     currentEnglishEdgesRevisionSensitive : Bool
     existingQidLayerReused : Bool
     leafCoverageSeparatedFromParentCoverage : Bool
-    parentSemanticQidsResolvedForCurrentSecondLayer : Bool
+    missingEnSeedSeparatedFromMissingDomain : Bool
     wikipediaEdgesCreateProofDependencies : Bool
     missingParentErasesExistingKnowledge : Bool
 

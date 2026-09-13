@@ -50,4 +50,5 @@ import DASHI.Interop.KantIntrospectiveResidualContractsExact
 import DASHI.Interop.KantRuntimeObservationExact
 import DASHI.Interop.FormalisationGovernanceAttributedSourceMigrationExact
 import DASHI.Interop.SourceAttributionShapePolicyExact
+import DASHI.Interop.SnowballPluralLensLESBioChemGeoCrossPollinationExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact

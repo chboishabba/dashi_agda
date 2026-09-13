@@ -22,6 +22,11 @@ import DASHI.Physics.Closure.NSTriadKNBKMContinuation
 import DASHI.Physics.Closure.NSTriadKNLuoScalingExact
 import DASHI.Physics.Closure.NSTriadKNResonantNullGain
 
+-- Finite Base369 ternary-27 -> Z^3 resonance regression.  This reuses the
+-- literal physical triad carrier and keeps raw cutoff resonance distinct from
+-- nonzero, conjugacy, phase/helicity, Schur and amplitude layers.
+import DASHI.Physics.Closure.Base369Ternary27Z3TriadRegressionExact
+
 -- 2026 almost-orthogonal Gram/Schur x-pollination: realized-data vs
 -- structural-operator Schur, angular/helicity/phase producer frontiers,
 -- absolute->block->signed fallback hierarchy, zero-safe defect API, the
