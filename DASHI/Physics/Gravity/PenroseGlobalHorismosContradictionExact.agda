@@ -7,15 +7,14 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Gravity.CausalFutureHorismosNullGeneratorExact as Causal
 import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
 import DASHI.Physics.Gravity.PenroseHorismosCompactnessPaymentExact as Compactness
+import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact as Authority
 import DASHI.Physics.Gravity.Penrose1965NullGeodesicIncompletenessExact as Penrose
 
 ------------------------------------------------------------------------
 -- Global causal/topological Penrose contradiction boundary.
 --
--- The compactness side now consumes an explicit payment owner:
--- compact trapped surface + uniform generator bound + compact parameter domain
--- + continuous generator image + closed horismos.  The noncompact-Cauchy side
--- remains a separate global causal/topological authority obligation.
+-- Causal semantics, compactness payment, and exact modern theorem authority
+-- are separate consumers. This owner composes them but does not reprove them.
 ------------------------------------------------------------------------
 
 data GlobalPenroseObject : Set where
@@ -37,26 +36,19 @@ record PenroseGlobalHorismosBoundary : Set where
   field
     futureHorismosOfTrappedSurface : String
     sameHorismosObjectCarriesBothReductioClaims : Bool
-    sameHorismosObjectCarriesBothReductioClaimsIsTrue :
-      sameHorismosObjectCarriesBothReductioClaims ≡ true
+    sameHorismosObjectCarriesBothReductioClaimsIsTrue : sameHorismosObjectCarriesBothReductioClaims ≡ true
     nullCompletenessPlusFocusingMakesFutureHorismosCompact : Bool
-    nullCompletenessPlusFocusingMakesFutureHorismosCompactIsTrue :
-      nullCompletenessPlusFocusingMakesFutureHorismosCompact ≡ true
+    nullCompletenessPlusFocusingMakesFutureHorismosCompactIsTrue : nullCompletenessPlusFocusingMakesFutureHorismosCompact ≡ true
     globalHyperbolicityIdentifiesHorismosWithAchronalBoundary : Bool
-    globalHyperbolicityIdentifiesHorismosWithAchronalBoundaryIsTrue :
-      globalHyperbolicityIdentifiesHorismosWithAchronalBoundary ≡ true
+    globalHyperbolicityIdentifiesHorismosWithAchronalBoundaryIsTrue : globalHyperbolicityIdentifiesHorismosWithAchronalBoundary ≡ true
     nonCompactCauchySurfaceForcesFutureHorismosNonCompact : Bool
-    nonCompactCauchySurfaceForcesFutureHorismosNonCompactIsTrue :
-      nonCompactCauchySurfaceForcesFutureHorismosNonCompact ≡ true
+    nonCompactCauchySurfaceForcesFutureHorismosNonCompactIsTrue : nonCompactCauchySurfaceForcesFutureHorismosNonCompact ≡ true
     compactAndNonCompactHorismosContradiction : Bool
-    compactAndNonCompactHorismosContradictionIsTrue :
-      compactAndNonCompactHorismosContradiction ≡ true
+    compactAndNonCompactHorismosContradictionIsTrue : compactAndNonCompactHorismosContradiction ≡ true
     globalContradictionForcesNullIncompleteness : Bool
-    globalContradictionForcesNullIncompletenessIsTrue :
-      globalContradictionForcesNullIncompleteness ≡ true
+    globalContradictionForcesNullIncompletenessIsTrue : globalContradictionForcesNullIncompleteness ≡ true
     globalOwnerInternallyReprovesContinuumCausality : Bool
-    globalOwnerInternallyReprovesContinuumCausalityIsFalse :
-      globalOwnerInternallyReprovesContinuumCausality ≡ false
+    globalOwnerInternallyReprovesContinuumCausalityIsFalse : globalOwnerInternallyReprovesContinuumCausality ≡ false
 
 open PenroseGlobalHorismosBoundary public
 
@@ -83,20 +75,15 @@ canonicalPenroseGlobalHorismosBoundary = record
 record PenroseGlobalInterpretationBoundary : Set where
   field
     compactHorismosIsNotSpacetimeSingularity : Bool
-    compactHorismosIsNotSpacetimeSingularityIsTrue :
-      compactHorismosIsNotSpacetimeSingularity ≡ true
+    compactHorismosIsNotSpacetimeSingularityIsTrue : compactHorismosIsNotSpacetimeSingularity ≡ true
     globalHyperbolicityIsNotMerelyNoClosedTimelikeCurves : Bool
-    globalHyperbolicityIsNotMerelyNoClosedTimelikeCurvesIsTrue :
-      globalHyperbolicityIsNotMerelyNoClosedTimelikeCurves ≡ true
+    globalHyperbolicityIsNotMerelyNoClosedTimelikeCurvesIsTrue : globalHyperbolicityIsNotMerelyNoClosedTimelikeCurves ≡ true
     nonCompactCauchyIsTopologicalGlobalInputNotLocalCurvature : Bool
-    nonCompactCauchyIsTopologicalGlobalInputNotLocalCurvatureIsTrue :
-      nonCompactCauchyIsTopologicalGlobalInputNotLocalCurvature ≡ true
+    nonCompactCauchyIsTopologicalGlobalInputNotLocalCurvatureIsTrue : nonCompactCauchyIsTopologicalGlobalInputNotLocalCurvature ≡ true
     localFocalPointAloneCannotPayHorismosNoncompactness : Bool
-    localFocalPointAloneCannotPayHorismosNoncompactnessIsTrue :
-      localFocalPointAloneCannotPayHorismosNoncompactness ≡ true
+    localFocalPointAloneCannotPayHorismosNoncompactnessIsTrue : localFocalPointAloneCannotPayHorismosNoncompactness ≡ true
     assumedNullCompletenessIsReductioInputNotEmpiricalClaim : Bool
-    assumedNullCompletenessIsReductioInputNotEmpiricalClaimIsTrue :
-      assumedNullCompletenessIsReductioInputNotEmpiricalClaim ≡ true
+    assumedNullCompletenessIsReductioInputNotEmpiricalClaimIsTrue : assumedNullCompletenessIsReductioInputNotEmpiricalClaim ≡ true
 
 open PenroseGlobalInterpretationBoundary public
 
@@ -120,8 +107,11 @@ causalBoundaryConsumer = Causal.CausalFutureHorismosBoundary
 localFocusingConsumer : Set
 localFocusingConsumer = Focusing.NullOpticalFocusingBoundary
 
-horismosCompactnessConsumer : Set
-horismosCompactnessConsumer = Compactness.PenroseHorismosCompactnessBoundary
+compactnessPaymentConsumer : Set
+compactnessPaymentConsumer = Compactness.PenroseHorismosCompactnessBoundary
+
+globalCausalityAuthorityConsumer : Set
+globalCausalityAuthorityConsumer = Authority.GlobalCausalityAuthorityReceipt
 
 penroseTheoremConsumer : Set
 penroseTheoremConsumer = Penrose.Penrose1965TheoremBoundary
@@ -129,6 +119,5 @@ penroseTheoremConsumer = Penrose.Penrose1965TheoremBoundary
 globalHorismosOwnerPromotesContinuumGR : Bool
 globalHorismosOwnerPromotesContinuumGR = false
 
-globalHorismosOwnerPromotesContinuumGRIsFalse :
-  globalHorismosOwnerPromotesContinuumGR ≡ false
+globalHorismosOwnerPromotesContinuumGRIsFalse : globalHorismosOwnerPromotesContinuumGR ≡ false
 globalHorismosOwnerPromotesContinuumGRIsFalse = refl
