@@ -1,0 +1,103 @@
+{
+  "Z": 1,
+  "all_energy_checks": true,
+  "all_node_checks": true,
+  "all_orthogonality_checks": true,
+  "energy_tolerance_hartree": 0.0005,
+  "non_promotion_boundary": "This receipt validates radial-state identity and hydrogenic numerical regressions only; it does not establish SCF convergence, many-electron ground states, calibrated ionization energies, nuclear stability, or empirical periodic-table recovery.",
+  "npts": 4000,
+  "numpy_version": "2.3.5",
+  "orthogonality_by_l": {
+    "0": {
+      "max_abs_gram_error": 4.440892098500626e-16,
+      "ok": true,
+      "state_count": 3
+    },
+    "1": {
+      "max_abs_gram_error": 6.661338147750939e-16,
+      "ok": true,
+      "state_count": 2
+    },
+    "2": {
+      "max_abs_gram_error": 0.0,
+      "ok": true,
+      "state_count": 1
+    }
+  },
+  "passed": true,
+  "producer": "scripts/atomic_radial_identity_repair.py",
+  "producer_sha256": "d4df9c2ef1e2292cdf216d7bf5da4aab78189b47cff02dc83bb28d308d240b9e",
+  "purpose": "n-sensitive radial eigenstate identity regression in the hydrogenic limit",
+  "python_version": "3.13.5",
+  "rmax_bohr": 80.0,
+  "same_l_principal_identity_distinguished": true,
+  "scipy_version": "1.17.0",
+  "states": [
+    {
+      "absolute_error_hartree": 4.9965021726272596e-05,
+      "analytic_energy_hartree": -0.5,
+      "energy_hartree": -0.4999500349782737,
+      "energy_ok": true,
+      "l": 0,
+      "n": 1,
+      "nodes_ok": true,
+      "observed_nodes": 0,
+      "radial_state_index": 0
+    },
+    {
+      "absolute_error_hartree": 3.1232819666660028e-06,
+      "analytic_energy_hartree": -0.125,
+      "energy_hartree": -0.12499687671803333,
+      "energy_ok": true,
+      "l": 0,
+      "n": 2,
+      "nodes_ok": true,
+      "observed_nodes": 1,
+      "radial_state_index": 1
+    },
+    {
+      "absolute_error_hartree": 6.169618839216295e-07,
+      "analytic_energy_hartree": -0.05555555555555555,
+      "energy_hartree": -0.05555493859367163,
+      "energy_ok": true,
+      "l": 0,
+      "n": 3,
+      "nodes_ok": true,
+      "observed_nodes": 2,
+      "radial_state_index": 2
+    },
+    {
+      "absolute_error_hartree": 1.0412099821222043e-06,
+      "analytic_energy_hartree": -0.125,
+      "energy_hartree": -0.12500104120998212,
+      "energy_ok": true,
+      "l": 1,
+      "n": 2,
+      "nodes_ok": true,
+      "observed_nodes": 0,
+      "radial_state_index": 0
+    },
+    {
+      "absolute_error_hartree": 4.798961150132008e-07,
+      "analytic_energy_hartree": -0.05555555555555555,
+      "energy_hartree": -0.055556035451670566,
+      "energy_ok": true,
+      "l": 1,
+      "n": 3,
+      "nodes_ok": true,
+      "observed_nodes": 1,
+      "radial_state_index": 1
+    },
+    {
+      "absolute_error_hartree": 4.113204828126715e-08,
+      "analytic_energy_hartree": -0.05555555555555555,
+      "energy_hartree": -0.055555596687603834,
+      "energy_ok": true,
+      "l": 2,
+      "n": 3,
+      "nodes_ok": true,
+      "observed_nodes": 0,
+      "radial_state_index": 0
+    }
+  ]
+}

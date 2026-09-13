@@ -1,0 +1,169 @@
+% Provenance/chronology appendix for DASHIAtomicPeriodicTable369Formalism.tex
+% Repo-native owners live under DASHI/Physics/Chemistry/AtomicPeriodicTable369*.agda
+
+\section{Identifier-rich provenance register}
+
+This appendix keeps discovery identifiers separate from scientific authority.
+A DOI identifies a publication object; a QID supplies a semantic coordinate;
+Dewey supplies a catalogue coordinate; an IUPAC Gold Book identifier supplies a
+terminology coordinate; an OEIS number supplies an integer-sequence coordinate;
+and a repository commit supplies an implementation receipt. None of these fields,
+by itself, proves the physical claim represented by the source.
+
+\begin{longtable}{p{0.13\textwidth}p{0.20\textwidth}p{0.16\textwidth}p{0.14\textwidth}p{0.25\textwidth}}
+\toprule
+Date & Object & DOI / QID / sequence & Source role & Direct locator / significance\\
+\midrule
+\endhead
+2025-11-11 & \texttt{dashifine} spectral-line tooling & atom Q9121 & primary repository implementation & commit \texttt{4f1441e4989beec157733a960ca7dfc47a2bf3ee}; earliest clean atomic/spectral implementation located in the present audit.\\
+2026-01-03 & \texttt{dashiQ} README, ``Chemistry \& the periodic table (first major test)'' & atom Q9121; periodic table Q10693 & primary public repository programme source & commit \texttt{bbedb3bed85e31125eb68255379b57788a434939}; kernel filling, periods 1--3, valence, noble-gas closure and alkali recurrence, with energies/relativity/nuclear stability left open.\\
+2026-02-16 & \texttt{dashi\_agda/Base369.agda} & DOI/QID unassigned & primary formal substrate implementation & init commit \texttt{65266f7edc1ec7bb52e59ee020209cc5cb0eecec}; finite 3/6/9 carrier laws already exist at repository inception.\\
+2026-02-21 / 2026-03-05 & \texttt{dashifine} full-118 table cloud & periodic table Q10693 & primary repository computational source & commit \texttt{9f1430ab7fe7c4ae480e93bc9f7549f4b758950e}; consumes existing table data, therefore pays breadth not derivation.\\
+2026-03-06 & \texttt{dashiQ/PHYSICS\_TARGETS.md} & DOI/QID unassigned & primary programme source & commit \texttt{47071bed2cbe853c76fb5bec7d65f3a8b73b14bc}; projection/effective-physics precursor.\\
+2026-04-30 & atom/chemistry recovery carrier & atom Q9121; periodic table Q10693 & primary formal implementation & commit \texttt{42e1d740141b0e9e1ca717ae5df79d6e31546c07}; staged closure, not finished chemistry.\\
+2026-06-07 & \texttt{ChemistryFiniteRuleTargets.agda} & atom Q9121; Pauli Q131594 & primary finite formal source & commit \texttt{062ccb611c6d93fa7228a73d1557c8c934ea89d5}; exact H-through-Ne target surface.\\
+2026-07-07 & Lean \texttt{Base369.lean} & DOI/QID unassigned & primary cross-assistant proof source & commit \texttt{55132524c2e132c0b86c17eeb60d7e39c3af08b6}; finite 3/6/9 proof terms, not atom recovery.\\
+2026-07-19 & periodic-table recovery boundary & periodic table Q10693 & primary formal implementation & commit \texttt{554e8f930dfee5293d75d3bb67be8098bde088d3}, PR \#101.\\
+2026-09-11 & present manuscript / PR \#886 & Q9121 / Q10693 / Q131594 & primary repository manuscript & same-object DOI/arXiv/Zenodo receipt remains unlocated; repository manuscript is not called peer-reviewed publication.\\
+1925 & Wolfgang Pauli exclusion paper & DOI \texttt{10.1007/BF02980631}; Q131594 & external primary physics & historical exclusion-principle anchor only.\\
+1926 & E. Schr\"odinger, eigenvalue-problem paper & DOI \texttt{10.1002/andp.19263840404} & external primary physics & historical eigenproblem source; not a DASHI implementation receipt.\\
+1928 & D. R. Hartree, \emph{Wave Mechanics... Part II} & DOI \texttt{10.1017/S0305004100011920} & external primary method & self-consistent atomic-field source; includes helium as an explicit test case.\\
+1928 & J. C. Slater, \emph{The Self Consistent Field and the Structure of Atoms} & DOI \texttt{10.1103/PhysRev.32.339} & external primary method & atomic self-consistent-field/spectral context.\\
+1936 & Erwin Madelung, \emph{Die Mathematischen Hilfsmittel des Physikers} & archive DOI \texttt{10.1007/978-3-662-02177-4}; author Q72626 & historical rule lineage & modern Springer archive identifier for the 1936 edition.\\
+1959 & C. L. Pekeris, helium $^1S$/$^3S$ states & DOI \texttt{10.1103/PhysRev.115.1216} & external primary high-accuracy benchmark & nonrelativistic correlated helium ground-state benchmark $-2.903724375\,E_h$.\\
+1962 & V. M. Klechkovskii, successive $(n+l)$ filling & DOI unresolved in inspected primary source & external primary historical paper & JETP 14(2), 334; direct source retained without inventing a DOI.\\
+1992 & J. R. Mohallem, helium Hartree--Fock comment & DOI \texttt{10.1016/0009-2614(92)85634-M} & external published method benchmark & records the well-known He SCF/HF limit $-2.861679995612\,E_h$.\\
+2002 & L. C. Allen and E. T. Knight, \emph{The Lowdin challenge} & DOI \texttt{10.1002/qua.965} & peer-reviewed analytic literature & origin/limits of Madelung $n+l,n$.\\
+2007 & Restrepo and Pach\'on, \emph{Mathematical Aspects of the Periodic Law} & DOI \texttt{10.1007/s10698-006-9026-6}; arXiv:math/0611410 & mathematical-chemistry literature & snowballed from OEIS A093907.\\
+2017 & Ibrahim, Danforth, Dodds, \emph{Connecting every bit of knowledge} & DOI \texttt{10.1016/j.jocs.2016.12.001}; arXiv:1605.00309 & primary search-policy source & donor for deterministic first-link traversal; first-link centrality does not import theorem authority.\\
+current & periodic table & Q10693; DDC 546.8 & semantic/catalogue coordinate & \url{https://www.wikidata.org/wiki/Q10693}.\\
+current & chemical element & Q11344; DDC 546; Gold Book C01022 & semantic/terminology coordinate & \url{https://www.wikidata.org/wiki/Q11344}.\\
+current & atom & Q9121; DDC 539.7 & semantic/catalogue coordinate & \url{https://www.wikidata.org/wiki/Q9121}.\\
+current & helium & Q560; current DDC 553.971 & element/catalogue coordinate & \url{https://www.wikidata.org/wiki/Q560}; catalogue placement does not imply theory.\\
+current & atomic orbital & Q53860; DDC 541.28; Gold Book A00500 & semantic/representation coordinate & \url{https://www.wikidata.org/wiki/Q53860}.\\
+current & quantum mechanics & Q944; DDC 530.12 & semantic/theory coordinate & \url{https://www.wikidata.org/wiki/Q944}.\\
+current & Aufbau principle & Q585745; Gold Book AT06996 & semantic/terminology coordinate & Dewey unresolved in inspected item; \url{https://www.wikidata.org/wiki/Q585745}.\\
+current & ionization energy & Q483769; Gold Book I03199; IEV 113-06-39 & quantity coordinate & Dewey unresolved; \url{https://www.wikidata.org/wiki/Q483769}.\\
+current & Hartree--Fock method & Q7879841 & method coordinate & Dewey unresolved; \url{https://www.wikidata.org/wiki/Q7879841}.\\
+current & NIST Atomic Spectra Database & DOI \texttt{10.18434/T4W30F} & authoritative reference-data source & \url{https://physics.nist.gov/asd}; source presence is not agreement.\\
+\bottomrule
+\end{longtable}
+
+\paragraph{Ibrahim/Dewey traversal.}
+The repo-native traversal policy prefers explicit DASHI formulation owners, then
+typed dependency/generalisation edges, while using external catalogue coordinates
+as search aids. The first external walk is
+\[
+\text{periodic table }(Q10693,546.8)
+\to \text{chemical element }(Q11344,546)
+\to \text{atom }(Q9121,539.7)
+\to \text{atomic orbital }(Q53860,541.28)
+\to \text{quantum mechanics }(Q944,530.12).
+\]
+The selector continuation is
+\[
+\text{periodic-table constructor}
+\to \text{exact }(n+\ell,n)\text{ selector}
+\to \mathrm{A167268}
+\to \text{Aufbau }(Q585745,\mathrm{AT06996})
+\to \mathrm{A093907}
+\to \mathrm{A018227}.
+\]
+The physical continuation is now
+\[
+\text{atom}
+\to \text{helium }(Q560)
+\to \text{Hartree/SCF primary source}
+\to \text{HF-limit benchmark}
+\to \text{Pekeris correlated benchmark}
+\to \text{NIST ASD observable}.
+\]
+Dewey adjacency, QID identity, Gold Book terminology, OEIS identity and first-link
+centrality remain non-promoting coordinates.
+
+\paragraph{OEIS sequence atlas.}
+The current exact structural coordinates are
+\[
+\begin{aligned}
+\mathrm{A016825}:&\quad 2,6,10,14,\ldots=4\ell+2=2(2\ell+1),\\
+\mathrm{A001105}:&\quad 0,2,8,18,32,\ldots=2n^2,\\
+\mathrm{A006331}:&\quad 0,2,10,28,60,\ldots=\sum_{k=1}^{n}2k^2,\\
+\mathrm{A167268}:&\quad 2,2,6,2,6,2,10,6,2,10,6,2,14,\ldots,\\
+\mathrm{A093907}:&\quad 2,8,8,18,18,32,32,\ldots,\\
+\mathrm{A018227}:&\quad 2,10,18,36,54,86,118,\ldots.
+\end{aligned}
+\]
+The physical-observable continuation uses
+\[
+\mathrm{A320506}
+\]
+for rounded first-ionization energies by atomic number, and
+\[
+\mathrm{A320507}
+\]
+for atomic numbers sorted by first ionization energy. These are downstream
+observable/navigation coordinates, not mechanism or proof imports.
+
+\paragraph{Exact selector repair and fixed-$\alpha$ boundary.}
+The historical archive uses
+\[
+C_\alpha(n,\ell)=n+\alpha\ell
+\]
+and records early closures $2,10,18$. The current typed repair generates orbitals
+directly in lexicographic $(n+\ell,n)$ order. For $\alpha=3/5$, the historical
+proxy gets $4s<3d$ but incorrectly puts $4f<6s$ relative to Madelung, so it is
+retained as finite historical evidence rather than silently renamed as the global
+selector.
+
+\paragraph{Same-object period/closure weld.}
+The exact selected subshell stream through $7p$, followed by $8s$ as the next
+boundary marker, partitions into the first seven periods and yields
+\[
+2,8,8,18,18,32,32
+\]
+(A093907) and cumulative
+\[
+2,10,18,36,54,86,118
+\]
+(A018227). This is structural mathematics, not a nuclear-stability or measured-
+spectrum theorem.
+
+\paragraph{Executed physical ladder.}
+The physical snowball has now advanced past source-only code. The historical
+Hartree implementation's principal-index erasure is preserved as a defect owner.
+A repaired hydrogenic producer executes distinct radial states and is checked
+against analytic energies and node counts. Hydrogen is compared to NIST and then
+receives the leading finite-proton reduced-mass correction. The first corrected
+many-electron helium producer has also been executed over doubled grids. Its
+Richardson extrapolation gives
+\[
+E_{\rm He}^{\rm Rich}=-2.861682238129302\,E_h,
+\]
+within approximately $2.24\times10^{-6}E_h$ of the published HF limit
+$-2.861679995612E_h$. The remaining HF-to-Pekeris gap is approximately
+$0.04204438E_h\approx1.1441$ eV, identifying electron correlation/model physics
+rather than radial-state identity as the dominant surviving helium residual.
+
+\paragraph{Mechanical-status boundary.}
+The repository distinguishes
+\[
+\text{mathematical specification}
+\neq\text{proof source}
+\neq\text{recorded typecheck/build}
+\neq\text{executed regression}
+\neq\text{empirical recovery}.
+\]
+The numerical H and He producers now have execution receipts, but no exact-head
+GitHub Actions run has yet been returned. Therefore the newly authored Agda
+owners are not promoted to successful typecheck status merely because source and
+local execution artifacts exist.
+
+\paragraph{Highest-alpha frontier.}
+The structural seven-period selector/closure weld is paid, and the corrected
+closed-shell He Hartree producer has been validated against its own approximation
+class. The higher-value residual is now a genuine multi-orbital SCF/HF carrier:
+preserve $(n,\ell)$ identity and orthogonality across several occupied sectors,
+compute matched neutral/cation total energies, and compare the resulting
+$IE_1(Z)$ ladder against NIST ASD while retaining A320506/A320507 and source
+uncertainties. Electron correlation, relativistic corrections, nuclear stability
+and bonding remain downstream promotion gates.

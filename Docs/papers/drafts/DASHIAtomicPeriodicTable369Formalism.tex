@@ -1,0 +1,825 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black}
+\setlist[itemize]{leftmargin=1.5em,itemsep=0.2em,topsep=0.3em}
+\setlist[enumerate]{leftmargin=1.7em,itemsep=0.2em,topsep=0.3em}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{obligation}[definition]{Obligation}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{firewall}[definition]{Firewall}
+
+\newcommand{\T}{\mathcal T}
+\newcommand{\K}{\mathcal K}
+\newcommand{\Hone}{\mathcal H_1}
+\newcommand{\Hz}{\mathcal H_Z}
+\newcommand{\Cfg}{\mathcal C}
+\newcommand{\Val}{\mathsf{Val}}
+\newcommand{\MDL}{\operatorname{MDL}}
+\newcommand{\Argmin}{\operatorname*{Argmin}}
+\newcommand{\PT}{\operatorname{PT}}
+\newcommand{\Atom}{\mathsf{Atom}}
+\newcommand{\Elem}{\mathsf{Element}}
+\newcommand{\Nat}{\mathbb N}
+\newcommand{\Rphys}{\mathcal R_{\rm phys}}
+\newcommand{\qchem}{q_{\rm chem}}
+\newcommand{\simchem}{\sim_{\rm chem}}
+\newcommand{\simper}{\sim_{\rm per}}
+\newcommand{\defeq}{\vcentcolon=}
+
+\title{DASHI Atomic and Periodic-Table Formalism\\
+\large Kernel Filling, MDL Selection, Valence Recurrence, and Provenance Gates}
+\author{Prepared from the attached \emph{DASHI Atom} archive and current DASHI formalism notes}
+\date{2026-09-11}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note writes the atom/chemistry formalism as a typed generative theory.  The
+core claim is not that a finite geometric chart can be counted and renamed as
+chemistry.  The core claim is that a ternary/369 structural substrate can feed a
+realization layer; the realization layer supplies a discrete fermionic kernel;
+hard exclusion and a minimum-description-length ordering select stable fillings;
+closed kernels yield noble-gas-like closures; and periodic-table structure is the
+quotient of the atomic family by recurrent boundary/valence classes.  Provenance
+is kept append-only: archive statements, Python-test claims, Agda owners, and
+external comparison models have different authority.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Source register and provenance discipline}
+
+The attached archive contains several distinct source roles.  The formalism below
+keeps them separated, because using the same mathematics under the wrong source
+role is precisely the type error this lane is designed to avoid.
+
+\begin{longtable}{p{0.22\linewidth}p{0.37\linewidth}p{0.31\linewidth}}
+\toprule
+\textbf{Source layer} & \textbf{Content imported} & \textbf{Authority granted here}\\
+\midrule
+\endhead
+Attached \emph{DASHI Atom} conversation archive & Atoms-as-dictionaries, noble gases as saturated kernels, MDL/exclusion filling, and the first closures $Z=2,10,18$ in the remembered Python-test lane. & Historical/provenance evidence for the internal DASHI theory and its conversational/test lineage.\\
+Attached rendered pages 294--301 & The atom-centric reconstruction: kernel states $(n,\ell,m,s)$, exclusion quotient, MDL proxy $n+\alpha\ell$, closures, boundary-condition equivalence, magic-number analogy, and explicit non-claims. & Formal content to be stabilized into the typed theory below.\\
+Attached page 418 & Move from topographic closure tests to a Hamiltonian/ionization-energy validation path, with $IE_1(Z)=E(Z-1)-E(Z)$ and scale as derivative. & Snowball target for the next empirical/scale bridge, not a completed physical calibration theorem.\\
+Current markdown formalism & Clean typed presentation: ternary carrier, atomic species, Hilbert/exterior-power layer, configuration minimization, valence recurrence, periodic quotient, and non-collapse laws. & Base text for the rendered LaTeX formalism.\\
+Agda/repo owners & Names such as \texttt{AtomicFermionShellExact}, \texttt{AtomicGenerationPipelineExact}, \texttt{AtomicShellRecurrence}, and \texttt{AtomicPeriodicTableRecoveryBoundary}. & Same-object anchors and implementation targets; they do not by themselves promote unresolved physical gates.\\
+External topological periodic-matrix claims & $S^4\times T^3$, $86+86$, $Z=172$, $1/C(n)$, and arithmetic/discriminant claims. & Candidate external chart only.  No same-object identity with DASHI is assumed.\\
+\bottomrule
+\end{longtable}
+
+\begin{firewall}[Append-only provenance]
+Acquisition order may be out of dependency order, but payment order may not be.
+Later evidence may be retained as a snowball target, but it does not rewrite the
+historical source state and does not pay an earlier identity, scale, or empirical
+adequacy obligation.
+\end{firewall}
+
+\section{Executive claim}
+
+The DASHI atom formalism is the following compositional statement:
+\[
+\boxed{\begin{gathered}
+\text{369/ternary structure}\to\text{realized fermionic kernel}\to\text{MDL-ordered exclusion filling}\\
+\to\text{closed-shell recurrence}\to\text{periodic-table quotient}
+\end{gathered}}
+\]
+
+This is stronger and cleaner than a finite-table embedding.  It generates a
+parameterized family indexed by nuclear charge and then quotients that family by
+chemistry-visible recurrence.  It does not count cells in a manifold and assign
+names afterward.
+
+\section{Ternary substrate}
+
+\begin{definition}[Ternary carrier]
+For each finite depth $n$, let
+\[
+\T_n = \{-1,0,+1\}^n
+\]
+or equivalently $\{0,1,2\}^n$ after relabelling.  Let $\iota:\T_n\to\T_n$ be
+an involution, written $\iota(x)=-x$ in the balanced representation, with fixed
+neutral symbol $0$.
+\end{definition}
+
+\begin{definition}[Agreement ultrametric]
+Let $\ell(x,y)$ be the greatest common prefix/agreement depth of $x,y\in\T_n$.
+For fixed $0<\rho<1$, define
+\[
+ d_{\T}(x,y)=\rho^{\ell(x,y)}.
+\]
+This metric records structural agreement depth, not physical distance.
+\end{definition}
+
+\begin{definition}[Admissible contraction]
+An admissible structural evolution is a map $K:\T_n\to\T_n$ together with a
+certificate
+\[
+ d_{\T}(Kx,Ky)\le \lambda d_{\T}(x,y),\qquad 0\le \lambda<1.
+\]
+A stable structural class is either a fixed point $Kx^\star=x^\star$ or a
+quotient-invariant orbit $[Kx]_{\sim}=[x]_{\sim}$.
+\end{definition}
+
+\begin{firewall}[No numerological promotion]
+\[
+ |\T_n|=N \quad\not\Rightarrow\quad N\text{ chemical elements}.
+\]
+The ternary/369 carrier is a structural substrate.  Atomic meaning requires a
+realization map and the downstream fermionic and energetic witnesses.
+\end{firewall}
+
+\section{Physical realization and kernel states}
+
+\begin{definition}[Realization map]
+A physical realization is a typed map
+\[
+ \Phi:\T_n\longrightarrow \Rphys
+\]
+that preserves the structural data required by its consumer.  Typical required
+laws are equivariance
+\[
+ \Phi(Kx)=U\Phi(x)
+\]
+for a physical evolution $U$, and quotient preservation
+\[
+ x\sim_{\T}y \Longrightarrow \Phi(x)\sim_{\rm phys}\Phi(y).
+\]
+\end{definition}
+
+\begin{definition}[Kernel mode]
+The realized atomic kernel contains fermionic modes labelled by
+\[
+ k=(n,\ell,m,s),
+\]
+where
+\[
+ n\in\Nat_{>0},\qquad \ell\in\{0,\ldots,n-1\},\qquad
+ m\in\{-\ell,\ldots,+\ell\},\qquad s\in\{\uparrow,\downarrow\}.
+\]
+The one-particle carrier is
+\[
+ \Hone = \bigoplus_{n,\ell} V_\ell\otimes V_{1/2}.
+\]
+\end{definition}
+
+\begin{proposition}[Subshell and shell capacities]
+For fixed angular index $\ell$,
+\[
+ g(n,\ell)=2(2\ell+1).
+\]
+Hence
+\[
+ g_s=2,\qquad g_p=6,
+\qquad g_d=10,
+\qquad g_f=14.
+\]
+For a principal shell $n$,
+\[
+ G_n = \sum_{\ell=0}^{n-1}2(2\ell+1)=2n^2.
+\]
+Thus
+\[
+ G_1=2,
+\quad G_2=8,
+\quad G_3=18,
+\quad G_4=32,
+\quad \ldots
+\]
+\end{proposition}
+
+\begin{firewall}[Representation before capacity]
+The capacity theorem depends on a supplied rotational/spin representation.
+Therefore
+\[
+\text{triadic carrier}\not\Rightarrow(n,\ell,m,s)
+\]
+without a realization/representation bridge.
+\end{firewall}
+
+\section{Atomic identity}
+
+\begin{definition}[Atomic species]
+An atomic species is a triple
+\[
+ A=(Z,N,N_e)\in\Nat^3,
+\]
+where $Z$ is proton number, $N$ is neutron number, and $N_e$ is electron number.
+Neutrality is
+\[
+ \mathsf{Neutral}(A)\;\Longleftrightarrow\;N_e=Z.
+\]
+Element identity is indexed by nuclear charge:
+\[
+ A_1\sim_{\rm element}A_2 \Longleftrightarrow Z(A_1)=Z(A_2).
+\]
+Isotope identity additionally fixes neutron number:
+\[
+ A_1\sim_{\rm isotope}A_2 \Longleftrightarrow Z_1=Z_2\land N_1=N_2.
+\]
+\end{definition}
+
+\begin{firewall}[Electronic state does not define element]
+Two atoms with the same $Z$ may have different electronic configurations.  An
+electronic filling pattern is therefore not the primitive identity of the
+element.
+\end{firewall}
+
+\section{Hard exclusion and the many-fermion carrier}
+
+\begin{definition}[Exclusion quotient]
+The Pauli/exclusion rule is treated as a hard admissibility quotient on the
+kernel:
+\[
+ n_k\in\{0,1\}\qquad\text{for every mode }k=(n,\ell,m,s).
+\]
+Equivalently, no two indistinguishable fermions may occupy the same key in the
+same kernel scope.
+\end{definition}
+
+\begin{definition}[Many-electron carrier]
+For electron number $N_e$, the electronic state lies in the antisymmetric sector
+\[
+ \mathcal H_{N_e}=\bigwedge^{N_e}\Hone,
+\]
+not in the raw tensor product $\Hone^{\otimes N_e}$.
+\end{definition}
+
+\begin{corollary}[Finite occupancy]
+For any subshell,
+\[
+ 0\le N_{n\ell}\le 2(2\ell+1).
+\]
+A subshell is closed when
+\[
+ N_{n\ell}=2(2\ell+1),
+\]
+and a principal shell is closed when
+\[
+ N_n=2n^2.
+\]
+\end{corollary}
+
+\section{MDL filling}
+
+\begin{definition}[MDL cost]
+The simplest programmatic filling cost used in the archive is
+\[
+ C_{\alpha}(n,\ell)=n+\alpha\ell,
+ \qquad 0<\alpha<1.
+\]
+This is a description-cost proxy.  It is not asserted to be the physical
+Hamiltonian energy.
+\end{definition}
+
+\begin{definition}[Configuration]
+A finite electronic configuration is an occupancy function
+\[
+ C:k\longmapsto n_k\in\{0,1\}
+\]
+satisfying
+\[
+ \sum_k n_k=N_e.
+\]
+The MDL-selected configuration is any minimizer
+\[
+ C^{\rm MDL}_{Z,N_e}\in
+ \Argmin_{C\in\Cfg(Z,N_e)} \MDL(C),
+\]
+where, in the simplest block model, $\MDL(C)$ is generated from
+$C_{\alpha}(n,\ell)$.
+\end{definition}
+
+\begin{proposition}[Finite filling algorithm]
+At fixed cutoff:
+\begin{enumerate}
+\item enumerate all blocks $(n,\ell)$;
+\item assign cost $C_{\alpha}(n,\ell)$;
+\item sort by that cost;
+\item expose exactly $g(n,\ell)$ fermionic keys in each block;
+\item fill admissible keys until cumulative occupancy is $N_e$.
+\end{enumerate}
+Thus the structural simulation is
+\[
+\boxed{\text{MDL ordering}+\text{exclusion}+\text{degeneracy}.}
+\]
+\end{proposition}
+
+\begin{definition}[Closure]
+A filling $C$ is closed at MDL depth $d$ when all admissible kernel modes of
+cost at most $d$ are occupied and any admissible extension requires a strictly
+larger cost class:
+\[
+ \forall e\in\operatorname{AdmExt}(C),
+ \qquad \MDL(C\oplus e)>\MDL(C).
+\]
+\end{definition}
+
+\begin{remark}[Historical finite regression]
+The archive records the first structural closures as
+\[
+ Z=2,\qquad Z=10,\qquad Z=18,
+\]
+corresponding respectively to the saturated $1s$, $2s+2p$, and $3s+3p$
+regimes in the simplified filling model.  These values are retained as
+historical regression targets, not elevated into an independent proof of all
+physical atomic spectra.
+\end{remark}
+
+\begin{firewall}[Cost is not spectrum]
+\[
+ C_{\alpha}(n,\ell)\not\equiv E^{\rm physical}_{n\ell}.
+\]
+In particular, the simplified MDL rule can expose ordering sensitivity near
+competing subshells.  A physical spectrum requires the Hamiltonian/scale bridge
+below.
+\end{firewall}
+
+\section{Atoms as dictionaries}
+
+\begin{definition}[Atomic dictionary]
+An atom is represented as a typed dictionary
+\[
+ A=\{\K_A,B_A,G_A,L_A\},
+\]
+where
+\begin{itemize}
+\item $\K_A$ is the internal fermionic kernel;
+\item $B_A$ is the writable/exposed interaction boundary;
+\item $G_A$ is the stabilizer/symmetry data;
+\item $L_A$ is the description/selection cost.
+\end{itemize}
+The dictionary language is a quotient/interface description of the same
+occupancy state, not a replacement for the underlying fermionic carrier.
+\end{definition}
+
+\begin{definition}[Saturated dictionary]
+A dictionary is saturated when its active kernel classes are closed and no
+low-cost writable boundary remains.  Equivalently, every admissible extension
+raises the relevant description cost.
+\end{definition}
+
+\begin{proposition}[Noble-gas structural class]
+A noble-gas-like structural state is a saturated dictionary whose valence
+boundary is closed.  In the archive's terminology this gives maximal local
+symmetry, minimal writable interaction boundary, and MDL resistance to
+extension.
+\end{proposition}
+
+This is the precise mathematical content of the ``perfectly packed suitcase''
+analogy: saturation is not a visual metaphor but a certificate that no
+lower-description admissible extension remains in the current kernel class.
+
+\section{Valence and periodicity}
+
+\begin{definition}[Active boundary]
+Given a physical or proxy ordering, let $A_C(k)$ state that mode $k$ is active
+at the interaction boundary of configuration $C$.  The boundary projection is
+\[
+ V(C)=\{k\mid A_C(k)\}.
+\]
+For an actual Hamiltonian one may define activity through an energy window
+$W_{\Delta}(E_F)$; for the structural MDL model it is the currently writable
+minimal-cost boundary.
+\end{definition}
+
+\begin{definition}[Valence class]
+Let $\simchem$ identify boundary states with the same chemistry-visible
+structure.  Define
+\[
+ \Val(C)=[V(C)]_{\simchem}.
+\]
+\end{definition}
+
+\begin{definition}[Shell-completion step]
+A relation
+\[
+ C\leadsto C'
+\]
+means that $C'$ is reached from $C$ through an admissible shell-completion
+progression while preserving the selected structural laws.
+\end{definition}
+
+\begin{definition}[Periodicity]
+Periodicity is recurrence of valence classes across completion events:
+\[
+ C\leadsto C'\land\operatorname{Closed}(C)
+ \Longrightarrow
+ R_{\rm val}(\Val(C),\Val(C')).
+\]
+It is not postulated as a single fixed translation $V(Z+p)=V(Z)$ for every
+$Z$.
+\end{definition}
+
+\begin{definition}[Periodic-table quotient]
+Let
+\[
+ \mathcal P=\{\Atom(Z):Z\in\Nat_{>0}\}
+\]
+be the generated neutral atomic family.  For a periodic observation map
+\[
+ Q_{\rm per}:\mathcal P\to\mathcal O_{\rm per},
+\]
+define
+\[
+ A_Z\simper A_{Z'}
+ \Longleftrightarrow
+ Q_{\rm per}(A_Z)=Q_{\rm per}(A_{Z'}).
+\]
+The periodic table is the ordered quotient
+\[
+ \boxed{\PT=\mathcal P/\simper}
+\]
+together with nuclear-charge order $Z_1<Z_2$.
+\end{definition}
+
+\begin{remark}[Groups as boundary equivalence]
+The archive's example $Z=3$ and $Z=11$ illustrates the intended notion: both
+have one active electron outside a saturated inner kernel in the simplified
+model.  The repeated chemistry class is therefore a boundary-equivalence class,
+not an empirical coincidence inserted as a lookup table.
+\end{remark}
+
+\section{Molecules as dictionary merges}
+
+A molecule is not required as a new primitive.  Given atomic dictionaries
+$A_1,\dots,A_r$, define a candidate merge
+\[
+ M=A_1\oplus\cdots\oplus A_r\oplus S,
+\]
+where $S$ is a set of shared boundary keys.  A structural bond is admitted when
+\[
+ \operatorname{Adm}(M)
+\]
+and, in the MDL model,
+\[
+ \MDL(M)<\sum_i\MDL(A_i).
+\]
+This is a clean place to cross-pollinate the archive's proposed interpretation
+of covalent/ionic alternatives as different merge/quotient choices.  It remains
+a chemistry-model interface until a physical bonding-energy interpretation is
+supplied.
+
+\section{Hamiltonian and scale bridge}
+
+The MDL constructor produces structural ordering.  A physical atom requires a
+Hamiltonian realization.  For neutral charge $Z$ define schematically
+\[
+ H_Z=\sum_{i=1}^{Z}h_Z(i)+\sum_{i<j}V_{ee}(i,j),
+\]
+with the familiar Coulomb realization only when separately adopted:
+\[
+ h_Z=-\frac{\hbar^2}{2m_e}\nabla^2-
+ \frac{Ze^2}{4\pi\varepsilon_0 r},
+ \qquad
+ V_{ee}(i,j)=\frac{e^2}{4\pi\varepsilon_0|r_i-r_j|}.
+\]
+
+The physical ground state is
+\[
+ \Psi_Z^\star\in
+ \Argmin_{\Psi\in\bigwedge^Z\Hone}
+ \langle\Psi,H_Z\Psi\rangle.
+\]
+The structural and physical orderings must then be related by an explicit
+bridge, rather than silently identified.
+
+\begin{definition}[Ionization observable]
+Once a calibrated total-energy function $E(Z,N_e)$ is supplied,
+\[
+ IE_1(Z)=E(Z,Z-1)-E(Z,Z).
+\]
+The archive identifies this difference as a decisive snowball target for testing
+whether structural noble-gas peaks and alkali-like drops survive promotion from
+MDL proxy geometry to a physical Hamiltonian basis.
+\end{definition}
+
+\begin{obligation}[Structure-to-scale]
+A complete physical promotion requires at least:
+\begin{enumerate}
+\item a defended Hamiltonian/operator carrier;
+\item a scale/unit calibration;
+\item a spectral observable;
+\item valence/projector compatibility;
+\item empirical comparison with declared error semantics.
+\end{enumerate}
+\end{obligation}
+
+\section{Full recovery theorem shape}
+
+\begin{definition}[Physical recovery package]
+A full periodic-table recovery witness is a product of prior obligations:
+\[
+ \mathsf{PeriodicTableRecovery}
+ =\mathsf{SpectrumRecovery}
+ \times\mathsf{ShellRecovery}
+ \times\mathsf{ValenceRecurrence}
+ \times\mathsf{NuclearStabilityCompatibility}
+ \times\mathsf{ObservableCompatibility}.
+\]
+Concretely it must supply:
+\begin{enumerate}
+\item a physical or formal spectrum for each admissible $Z$;
+\item a shell decomposition with correct degeneracies and occupied projectors;
+\item hard fermion occupation in $\bigwedge^Z\Hone$;
+\item a ground-state/minimizer selector;
+\item a robust projector/valence class;
+\item recurrence across completion events;
+\item nuclear-state compatibility for claims about real elements;
+\item observable comparison under a declared calibration/error contract.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Generic element constructor]
+A structural atomic generator has the type
+\[
+ \boxed{\Elem:\Nat_{>0}\longrightarrow\mathsf{AtomicState}}
+\]
+and, for neutral atoms, takes the schematic form
+\[
+ \Elem(Z)=
+ (Z,N_Z^\star,Z,H_Z,\Psi_Z^\star,C_Z^\star,\Val_Z,Q_Z).
+\]
+There is no special constructor for hydrogen, carbon, iron, uranium, or element
+$172$; they are evaluations of the same parameterized map.  Whether a given $Z$
+has a physically stable nucleus is a separate theorem.
+\end{definition}
+
+\section{Cross-pollination map}
+
+The formalism is intentionally reusable.  Its strongest justified cross-lane
+connections are:
+\begin{itemize}
+\item \textbf{Triadic/369 algebra:} substrate and multiscale lift structure;
+\item \textbf{observer/quotient machinery:} chemistry is a stable observable
+quotient rather than the raw microscopic state;
+\item \textbf{MDL/Lyapunov machinery:} selection and closure are phrased as
+cost descent and resistance to admissible extension;
+\item \textbf{representation theory:} shell degeneracy is generated by the
+rotational/spin representation before filling;
+\item \textbf{nuclear magic numbers:} same mathematical pattern---discrete
+fermionic modes, exclusion, closure, enhanced stability---on a different
+kernel; no identity of atomic and nuclear spectra is assumed;
+\item \textbf{molecular assembly:} bonds become admissible shared-boundary
+merges whose physical energy semantics remain separately payable;
+\item \textbf{provenance hyperfabric:} every promotion remembers whether its
+source was archive testimony, programmatic regression, exact formal theorem,
+or external empirical evidence.
+\end{itemize}
+
+\section{Comparison with a finite topological matrix}
+
+Suppose an external proposal provides a compact manifold $M$, a finite set of
+geometric states $X(M)$, and a map
+\[
+ \chi:X(M)\to\{1,\ldots,Z_{\max}\}.
+\]
+Such a construction can be mathematically interesting, but it is a different
+kind of object from the DASHI constructor unless it supplies a commuting bridge.
+
+\begin{obligation}[External same-object bridge]
+To identify the external chart with the DASHI atom generator, one needs maps
+making at least the following structures agree:
+\[
+\begin{array}{ccc}
+\T & \xrightarrow{\Phi} & \Rphys\\
+\downarrow && \downarrow\\
+X(M) & \xrightarrow{\chi} & \mathsf{AtomicState}
+\end{array}
+\]
+together with preservation of fermionic admissibility, shell/valence recurrence,
+and the physical observables used for validation.
+\end{obligation}
+
+In particular,
+\[
+ 86+86=172
+ \not\Rightarrow
+ \text{a physically stable }Z=172\text{ nucleus}.
+\]
+The latter requires a nuclear-stability witness and downstream electronic
+physical observables.
+
+\section{Agda-shaped owner}
+
+A compact Agda-facing owner can be organized as follows.  This is schematic
+surface syntax rather than a claim that every field below is already inhabited.
+
+\begin{verbatim}
+record AtomicDictionary : Set1 where
+  field
+    protonNumber   : Nat
+    neutronNumber  : Nat
+    electronNumber : Nat
+
+    Kernel         : Set
+    Mode           : Kernel -> Set
+    occupied       : Kernel -> Bool
+    pauliOK        : Set
+
+    Boundary       : Set
+    active         : Boundary -> Set
+
+    Cost           : Set
+    lessCost       : Cost -> Cost -> Set
+    mdl            : Kernel -> Cost
+
+    ValenceClass   : Set
+    valence        : ValenceClass
+
+record PeriodicTableConstructor : Set1 where
+  field
+    atom              : Nat -> AtomicDictionary
+    completionStep    : Nat -> Nat -> Set
+    recurrentValence  : completionStep -> Set
+    periodicQuotient  : Nat -> Nat -> Set
+    nonClaimBoundary  : List String
+\end{verbatim}
+
+\section{Non-collapse laws}
+
+The theory is defined as much by what it refuses as by what it constructs:
+\[
+\boxed{
+\begin{aligned}
+369\text{ cardinality} &\not\Rightarrow \text{orbital quantum numbers},\\
+\text{shell capacity} &\not\Rightarrow \text{energy ordering},\\
+\text{MDL ordering} &\not\Rightarrow \text{physical Hamiltonian spectrum},\\
+\text{electronic filling} &\not\Rightarrow \text{nuclear stability},\\
+Z &\not\Rightarrow \text{stable isotope},\\
+\text{closed shell} &\not\Rightarrow \text{quantitative ionization energy},\\
+\text{valence recurrence} &\not\Rightarrow \text{finished chemistry},\\
+\text{geometric chart} &\not\Rightarrow \text{same-object atomic constructor}.
+\end{aligned}}
+\]
+
+\section{Final normal form}
+
+The normal form is the commuting dependency diagram:
+\[
+\boxed{
+\begin{array}{c}
+\text{369 / ternary carrier}\\
+\downarrow\\
+\text{contraction / stable structural classes}\\
+\downarrow\\
+\text{physical realization}\\
+\downarrow\\
+\text{one-particle kernel representation}\\
+\downarrow\\
+\text{spin + angular degeneracy}\\
+\downarrow\\
+\text{fermionic exterior power / exclusion quotient}\\
+\downarrow\\
+\text{MDL or Hamiltonian minimizer}\\
+\downarrow\\
+\text{shell occupancy}\\
+\downarrow\\
+\text{energetic/writable boundary projection}\\
+\downarrow\\
+\text{valence recurrence across shell completion}\\
+\downarrow\\
+\text{periodic-table quotient}\\
+\downarrow\\
+\text{chemical observables and validation}.
+\end{array}}
+\]
+
+Equivalently:
+\[
+\boxed{\begin{gathered}
+\text{geometry/algebra generates the admissible state space;}\\
+\text{fermionic MDL dynamics selects the atom;}\\
+\text{valence recurrence generates the periodic table.}
+\end{gathered}}
+\]
+
+\section{Chronology, publication identity, and verification status}
+
+The chronology below is a provenance surface, not a premise of the mathematical
+construction.  Dates name the earliest clean receipts located in this audit;
+they do not retroactively date conception, and a repository commit is not treated
+as an external publication.
+
+\begin{longtable}{p{0.16\textwidth}p{0.26\textwidth}p{0.46\textwidth}}
+\toprule
+Date & Surface & Status / significance\\
+\midrule
+2025-11-11 & \texttt{dashifine} spectral-line tooling & Earliest clean atomic/spectral implementation located in the wider repo archaeology: commit \texttt{4f1441e4989b...}, ``Add spectral line tooling and smoke tests.'' This predates the direct DASHI atomic constructor but is not itself the 369 periodic-table formalism.\\
+2026-02-25 / 2026-03-05 & \texttt{dashifine} geometry validation & Authored 25 February and committed 5 March: topology along the RG/projection axis plus low-dimensional-manifold diagnostics. This is a programme precursor, not atom recovery.\\
+2026-03-06 & \texttt{dashiQ/PHYSICS\_TARGETS.md} & Explicit projection/effective-manifold programme, including emergent $3+1$D/Lorentz/locality questions. Again a programme precursor rather than direct atomic construction.\\
+2026-04-30 21:51:43 +10:00 & First direct atom/chemistry repo implementation located & \texttt{dashi\_agda} commit \texttt{42e1d740141b0e9e1ca717ae5df79d6e31546c07}: atom/chemistry recovery carrier plus closed-shell stability and shell-filling dictionary compatibility. The commit itself says this is staged closure, not finished chemistry recovery.\\
+2026-05-03 & Explicit atomic generation pipeline & Follow-up commits add an explicit atomic generation pipeline and thread chemistry into it. This is the direct generative-constructor strengthening of the April carrier.\\
+2026-08-12 01:33:28Z & Lean 369 mirror at its current path & \texttt{chboishabba/dashi\_lean4} commit \texttt{72734285fd83387837e0025eb51a93b63629a0b9} reorganizes the Aristotle artifacts under \texttt{AgdaMirror/}; \texttt{AgdaMirror/Base369.lean} explicitly contains proofs of ternary/hexadic/nonary rotation/XOR laws. This is substrate-level cross-assistant proof, not an atom constructor mirror.\\
+2026-09-11 & Current formal consolidation & Draft PR \#886 adds the generative 369 atom owner, provenance/snowball owner, chronology/status owner, focused validation root, and this manuscript.\\
+\bottomrule
+\end{longtable}
+
+The attached historical conversation export visibly prints the page label
+``12/1/26''.  That is retained as a source-object date cue only: the locale and
+original publication semantics are not independently established, so this note
+does not silently convert it into an asserted ISO publication date.
+
+\subsection{First implementation versus first publication}
+
+The strongest date claim paid by the current repository archaeology is therefore:
+\[
+\boxed{\text{first direct repo implementation located} = \text{30 April 2026}.}
+\]
+The manuscript does \emph{not} currently have a same-object DOI, arXiv, Zenodo,
+or other external-publication receipt predating this PR.  Accordingly:
+\[
+\boxed{\text{repo implementation date}\neq\text{external publication date}.}
+\]
+The present paper is the first repo-contained manuscript located in this audit
+that is devoted specifically to the reconstructed generative atom/periodic-table
+formalism.  That is a manuscript/provenance claim, not a priority claim outside
+the repositories.
+
+\subsection{What has actually been checked or executed}
+
+The project distinguishes mathematical status from certification status:
+
+\begin{longtable}{p{0.25\textwidth}p{0.22\textwidth}p{0.43\textwidth}}
+\toprule
+Object & Current status & Evidence and boundary\\
+\midrule
+Historical MDL/exclusion filling regression & Reported executed run; artifact missing & The attached archive reports a programmatic run over the first 15+ elements and closure coordinates $Z=2,10,18$.  The exact original Python file, parameter schedule, commit/hash, and rerun receipt have not yet been located, so the manuscript does not call this reproduced.\\
+Existing Agda atom/369 owners on \texttt{master} & Source/theorem terms present; not freshly checked in this session & The repo has an explicit validation policy: a targeted pass is an Agda compile signal and aggregate green means \texttt{agda -i . DASHI/Everything.agda} passes.  The execution environment used for this paper has no Agda binary, so no fresh local compiler receipt is claimed.\\
+PR \#886 Agda modules & Authored, validation-rooted, pending compiler receipt & The PR contains the generative owner, provenance owner, chronology/status owner, and focused validation root.  No PR workflow run had appeared at the inspected head, and no local Agda executable was available.  Source presence is not typechecking.\\
+\texttt{dashi\_lean4/AgdaMirror/Base369.lean} & Explicit proof terms in source; independent build receipt not obtained here & The file describes itself as a genuine fully proved mirror and contains concrete proofs by case analysis for the $3/6/9$ carrier laws.  The repository contains a \texttt{leanprover/lean-action} CI workflow, but the inspected main head returned no workflow runs/status checks, and this session did not independently rebuild Mathlib/Lean.\\
+Full empirical periodic-table recovery & Formal interface / open obligation & The current theory separates spectra, nuclear stability, scale calibration, ionization observables, bonding, and empirical validation.  Their typed interfaces must not be confused with physically inhabited recovery theorems.\\
+This \LaTeX{} manuscript & Compiled and rendered & The source is compiled to the accompanying PDF and rendered for layout inspection.  Successful document rendering is only a publication-artifact check, not a proof-assistant or empirical-physics check.\\
+\bottomrule
+\end{longtable}
+
+Thus the public status is intentionally multi-layered:
+\[
+\boxed{
+\text{mathematical specification}
+\neq \text{proof-assistant source}
+\neq \text{recorded typecheck/build}
+\neq \text{executed regression}
+\neq \text{empirical physical recovery}.}
+\]
+
+\subsection{Lean cross-pollination}
+
+The Lean repository adds a useful independent substrate lane without licensing an
+overclaim.  Its \texttt{AgdaMirror/Base369.lean} defines \texttt{TriTruth},
+\texttt{HexTruth}, and \texttt{NonaryTruth}; defines the iterated rotation
+\texttt{spin}; and proves the agreement of spin-defined and modular XOR, the
+respective rotation orders, identities, and ternary associativity.  This means
+that the elementary 369 algebra is not Agda-only source prose.  What was not found
+in the current Lean archaeology is a direct Lean mirror of the atomic shell,
+valence, or periodic-table constructor itself.  The safe cross-language statement
+is therefore
+\[
+\boxed{\text{Lean-paid 369 substrate}\quad\text{but}\quad
+\text{atomic constructor presently Agda-facing}.}
+\]
+
+\appendix
+\section{Provenance notes from the attached archive}
+
+The attached \emph{DASHI Atom} archive records the following source claims used
+above.
+
+\begin{enumerate}
+\item Noble gases are treated as saturated-kernel objects with maximal symmetry,
+minimal interaction, and MDL resistance to extension.
+\item Pages 294--296 state the remembered programmatic path: kernel states
+$(n,\ell,m,s)$, exclusion quotient, MDL proxy $E(n,\ell)=n+\alpha\ell$, closures
+at $Z=2,10,18$, and structure/scale separation.
+\item Pages 297--301 provide the atom-centric reconstruction: atoms are stable
+filling configurations of a discrete fermionic kernel; exclusion forces finite
+occupancy; MDL ordering selects fillings; noble gases are local MDL minima;
+groups are boundary-condition equivalence classes; nuclear magic numbers share
+the same mathematics at another kernel.
+\item Page 418 records the scale snowball: ionization energy
+$IE_1(Z)=E(Z-1)-E(Z)$ is the next validation route for converting MDL geometry
+into calibrated physical observables.
+\end{enumerate}
+
+\end{document}

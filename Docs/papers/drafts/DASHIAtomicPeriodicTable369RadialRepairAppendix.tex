@@ -1,0 +1,248 @@
+% Radial-identity repair / execution appendix for DASHIAtomicPeriodicTable369Formalism.tex
+% Repo-native owners:
+%   DASHI/Physics/Chemistry/AtomicPeriodicTable369ArchiveHartreeRadialIdentityDefectExact.agda
+%   DASHI/Physics/Chemistry/AtomicPeriodicTable369RadialIdentityRepairExecutionExact.agda
+%   DASHI/Physics/Chemistry/AtomicPeriodicTable369HydrogenNISTComparisonExact.agda
+%   DASHI/Physics/Chemistry/AtomicPeriodicTable369HydrogenReducedMassExact.agda
+%   DASHI/Physics/Chemistry/AtomicPeriodicTable369HeliumHartreeConvergenceExact.agda
+%   DASHI/Physics/Chemistry/AtomicPeriodicTable369PhysicalValidation.agda
+
+\section{Radial-state identity repair and execution receipt}
+
+The historical \emph{DASHI Atom} Hartree code-shaped object accepted subshell
+triples $(n,\ell,\mathrm{occ})$, but passed only $\ell$ into its radial
+eigenproblem and always requested the lowest eigenpair in that $\ell$ sector.
+Consequently $1s$, $2s$, $3s$, \ldots{} collapsed to the same radial target.
+This defect is preserved append-only in
+\texttt{AtomicPeriodicTable369ArchiveHartreeRadialIdentityDefectExact.agda}; the
+later repair does not rewrite the historical source state.
+
+\subsection{Corrected radial selector}
+
+For an analytically controlled hydrogenic central potential, the radial state
+index associated with a bound label $(n,\ell)$ is
+\[
+  r(n,\ell)=n-\ell-1.
+\]
+The repaired producer
+\[
+  \texttt{scripts/atomic\_radial\_identity\_repair.py}
+\]
+therefore diagonalizes each complete $\ell$ sector far enough to contain every
+required radial index and selects eigenpair $r(n,\ell)$. Solving the sector as
+one eigenproblem also gives a direct within-$\ell$ orthogonality check rather
+than solving the same lowest state repeatedly.
+
+The committed execution receipt is
+\[
+\texttt{Artifacts/atomic-periodic-table-369/radial-identity-repair-receipt.json}
+\]
+with producer SHA--256
+\[
+\texttt{d4df9c2ef1e2292cdf216d7bf5da4aab78189b47cff02dc83bb28d308d240b9e}.
+\]
+It records Python 3.13.5, NumPy 2.3.5 and SciPy 1.17.0, $4000$ radial grid
+points on $r\in(0,80]$ Bohr, and an energy tolerance of $5\times 10^{-4}$
+Hartree.
+
+\subsection{Executed hydrogenic regression}
+
+For $Z=1$ and $V_H=0$, the numerical producer checks
+\[
+  E_n=-\frac{1}{2n^2}\ \text{Hartree}
+\]
+and radial node count $n-\ell-1$. The retained values are:
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+state & radial index & nodes & computed $E$ & analytic $E$\\
+\midrule
+$1s$ & 0 & 0 & $-0.4999500349782737$ & $-0.5$\\
+$2s$ & 1 & 1 & $-0.12499687671803333$ & $-0.125$\\
+$3s$ & 2 & 2 & $-0.05555493859367163$ & $-1/18$\\
+$2p$ & 0 & 0 & $-0.12500104120998212$ & $-0.125$\\
+$3p$ & 1 & 1 & $-0.055556035451670566$ & $-1/18$\\
+$3d$ & 0 & 0 & $-0.055555596687603834$ & $-1/18$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All energy, node-count and within-$\ell$ orthogonality checks passed. The
+largest retained Gram-matrix deviation was below $7\times10^{-16}$.
+
+\subsection{First authoritative H I reference-data diagnostic}
+
+The repaired $1s$ energy is consumed by
+\texttt{scripts/atomic\_hydrogen\_nist\_comparison.py}. The committed receipt
+uses the 2022 CODATA conversion
+\[
+  1E_h=27.211386245981\ \mathrm{eV}
+\]
+and NIST ASD SRD~78
+\[
+  IE_1(\mathrm H)=13.598434599702\ \mathrm{eV},
+\]
+with uncertainty $1.2\times10^{-11}$ eV. The finite-grid result is
+\[
+  IE_1^{\rm grid}=13.604333505485517\ \mathrm{eV},
+\]
+with residual $+0.005898905783517705$ eV. The exact infinite-nuclear-mass
+Coulomb value in the same units is
+\[
+  IE_1^{\infty M}=13.6056931229905\ \mathrm{eV},
+\]
+with residual $+0.00725852328850074$ eV. The finite-grid value being closer is
+not promoted as better physics: discretization partially cancels omitted model
+physics.
+
+\subsection{Leading finite-proton-mass correction}
+
+Using the 2022 CODATA ratio
+\[
+  \frac{m_e}{m_p}=5.446170214889\times10^{-4},
+\qquad
+  \frac{\mu}{m_e}=0.9994556794247615,
+\]
+gives
+\[
+  IE_1^{\mu}=13.598287264283275\ \mathrm{eV},
+\]
+with NIST residual
+\[
+  -0.0001473354187240261\ \mathrm{eV}.
+\]
+Thus the leading finite-nuclear-mass correction pays most of the large
+infinite-mass offset, while relativistic, radiative/QED, higher-order recoil and
+proton-size effects remain explicitly unpaid.
+
+\subsection{Executed closed-shell helium continuation}
+
+The first same-object many-electron producer is
+\[
+\texttt{scripts/atomic\_helium\_hartree\_scf.py}.
+\]
+It treats neutral helium as a restricted closed-shell $1s^2$ Hartree product.
+Each electron sees the Coulomb field of the other electron and the total energy
+is
+\[
+  E_{\rm He}=2\varepsilon_{1s}-J.
+\]
+At $32000$ radial points it converges in $64$ iterations to
+\[
+  E_{\rm He}=-2.8604050079530117\ E_h,
+\]
+with
+\[
+  IE_1^{\rm grid}(\mathrm{He})=23.412898027945555\ \mathrm{eV},
+\]
+against NIST ASD
+\[
+  IE_1(\mathrm{He})=24.587389011\ \mathrm{eV}.
+\]
+The raw $32000$-point residual is therefore
+\[
+  -1.1744909830544437\ \mathrm{eV}.
+\]
+
+To distinguish discretization from approximation-class error, the convergence
+producer
+\[
+\texttt{scripts/atomic\_helium\_hartree\_convergence.py}
+\]
+runs the same object at $4000,8000,16000,32000,64000$ grid points. The total
+energies monotonically approach the published helium Hartree--Fock/SCF limit
+\[
+  E_{\rm HF}=-2.861679995612\ E_h
+\]
+(Mohallem, DOI \texttt{10.1016/0009-2614(92)85634-M}). The two finest grids
+produce the first-order Richardson estimate
+\[
+  E_{\rm Rich}=-2.861682238129302\ E_h,
+\]
+which differs from the published HF limit by only
+\[
+  -2.2425173020756972\times10^{-6}\ E_h.
+\]
+Thus the corrected producer is converging to its intended approximation class.
+
+For a separate correlated benchmark, Pekeris' 1959 helium ground-state value
+(doi \texttt{10.1103/PhysRev.115.1216}) is
+\[
+  E_{\rm Pekeris}=-2.903724375\ E_h.
+\]
+The HF-to-Pekeris gap is therefore
+\[
+  0.042044379387999875\ E_h
+  \approx 1.1440858469994268\ \mathrm{eV}.
+\]
+This is the critical defect-routing result: after the radial identity repair and
+grid convergence, the dominant surviving helium discrepancy is unpaid
+electron correlation/model physics, not recurrence of the archived $n$-erasure
+bug.
+
+The execution receipt is
+\[
+\texttt{Artifacts/atomic-periodic-table-369/helium-hartree-convergence-receipt.json}.
+\]
+
+\subsection{Attribution snowball}
+
+The identifier fields remain source-role separated:
+
+\begin{itemize}
+\item Schr\"odinger, \emph{Quantisierung als Eigenwertproblem} (1926), DOI
+  \texttt{10.1002/andp.19263840404}, is the historical eigenvalue-problem
+  source; atom Q9121 and quantum mechanics Q944 are semantic coordinates, with
+  Dewey 539.7 and 530.12 as catalogue coordinates.
+\item Hartree 1928, DOI \texttt{10.1017/S0305004100011920}, is primary SCF
+  provenance. The paper itself reports a helium self-consistent-field
+  ionization potential near 24.85 V, explicitly making He a historical SCF
+  test object rather than a new DASHI choice.
+\item Helium is Wikidata Q560. The current semantic item carries Dewey 553.971;
+  this is a catalogue coordinate only and must not be confused with the more
+  theory-oriented periodic-table/atomic-physics Dewey route.
+\item Hartree--Fock is Q7879841; ionization energy is Q483769 / Gold Book
+  I03199. QID identity does not imply model correctness.
+\item NIST Atomic Spectra Database SRD~78, DOI \texttt{10.18434/T4W30F}, is the
+  downstream authoritative reference-data source. NIST reports helium ground
+  shell $1s^2$, ground level $^1S_0$, and $IE_1=24.587389011$ eV with quoted
+  uncertainty $2.5\times10^{-8}$ eV.
+\item Mohallem 1992, DOI \texttt{10.1016/0009-2614(92)85634-M}, is used only as
+  the published helium HF/SCF-limit benchmark. Pekeris 1959, DOI
+  \texttt{10.1103/PhysRev.115.1216}, supplies the correlated nonrelativistic
+  benchmark. Neither source imports correctness into the DASHI producer.
+\item OEIS A320506 records rounded first-ionization energies by atomic number;
+  A320507 records atomic numbers sorted by first ionization energy. They are
+  useful downstream sequence/navigation coordinates for the future full-$Z$
+  residual ladder, not proof or mechanism authority.
+\item OEIS A167268, A093907 and A018227 remain upstream structural-selector,
+  period-length and closure coordinates. Their role is distinct from A320506
+  and A320507, which describe an empirical ionization-energy observable.
+\end{itemize}
+
+\subsection{Promotion boundary and next producer}
+
+The paid physical chain is now
+\[
+\boxed{
+\text{radial identity}
+\to \text{H execution/reference diagnostic}
+\to \text{finite-mass correction}
+\to \text{executed He Hartree}
+\to \text{He grid convergence to HF limit}.
+}
+\]
+It does \emph{not} imply correlated helium, generic multi-orbital SCF/HF,
+correct empirical ground-state configurations, nuclear stability, or full
+periodic-table recovery.
+
+The highest-value periodic-table continuation is therefore no longer finer
+helium gridding. It is to carry the repaired $(n,\ell)$ state identity into a
+multi-orbital SCF/HF producer, beginning with lithium/beryllium-sized occupied
+spaces, emit matched neutral/cation total energies, and compare
+\[
+  IE_1(Z)=E(Z-1)-E(Z)
+\]
+against NIST ASD while retaining the A320506/A320507 sequence coordinates and
+source-specific uncertainties.

@@ -1,0 +1,27 @@
+{
+  "analytic_infinite_mass_ionization_energy_ev": 13.6056931229905,
+  "analytic_infinite_mass_minus_nist_ev": 0.00725852328850074,
+  "diagnostic": "The direct NIST residual mixes discretization error with physical model incompleteness. The analytic infinite-mass Coulomb value is also retained so accidental cancellation cannot be promoted as accuracy.",
+  "hartree_to_ev_2022_codata": 27.211386245981,
+  "input_radial_producer_sha256": "d4df9c2ef1e2292cdf216d7bf5da4aab78189b47cff02dc83bb28d308d240b9e",
+  "input_radial_receipt": "Artifacts/atomic-periodic-table-369/radial-identity-repair-receipt.json",
+  "model": "nonrelativistic infinite-nuclear-mass Coulomb hydrogenic Z=1",
+  "next_physics": [
+    "finite proton mass / reduced-mass correction",
+    "relativistic and QED corrections if pursuing hydrogen precision",
+    "many-electron SCF/HF/exchange treatment for Z>1"
+  ],
+  "nist_asd_doi": "10.18434/T4W30F",
+  "nist_ground_shell": "1s",
+  "nist_ionization_energy_ev": 13.598434599702,
+  "nist_spectrum": "H I",
+  "nist_uncertainty_ev": 1.2e-11,
+  "non_promotion_boundary": "This comparison pays only a one-electron reference-data diagnostic. It does not validate the many-electron periodic-table mechanism.",
+  "numeric_1s_energy_hartree": -0.4999500349782737,
+  "numeric_ionization_energy_ev": 13.604333505485517,
+  "numeric_minus_nist_ev": 0.005898905783517705,
+  "numeric_relative_residual": 0.000433793003177511,
+  "passed": true,
+  "producer": "scripts/atomic_hydrogen_nist_comparison.py",
+  "producer_sha256": "43d6ca4c6a3ac5a66db75819d9e5d2b6d47423ce6987eeba0fd717f1b8de4961"
+}
