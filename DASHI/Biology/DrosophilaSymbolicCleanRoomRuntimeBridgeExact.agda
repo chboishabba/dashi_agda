@@ -14,12 +14,12 @@ import DASHI.Core.AttributedSourceCore as Source
 runtimeCleanRoomSource : Source.AttributedSource
 runtimeCleanRoomSource = Source.mkNoDOISource
   "chboishabba/dashiBRAIN"
-  "MaleCNS symbolic clean-room receipts, controls, packet, CLI, and eligibility-trace primitive"
+  "MaleCNS symbolic clean-room receipts, controls, sparse continuous learning, packet, and CLI"
   "GitHub pull request #8"
   "2026"
   "https://github.com/chboishabba/dashiBRAIN/pull/8"
   (Source.namedSourceKind "software implementation")
-  "clean-room runtime substrate at head dec72f17805915aa826e15d78ca723d021732fdf; includes explicit assistance receipts, topology and identity-assignment artifact hashes, orthogonal topology/identity/intervention controls, external symbolic decoding over existing kernel flow, invariant-preserving controls, a three-arm packet builder, MaleCNS loader CLI, parse-only Python inspection, and a source-attributed information-minus-energy eligibility-trace update primitive; kernel-to-eligibility construction and viral-demo learning-rule recovery remain unpaid"
+  "clean-room runtime substrate through the continuous sparse-learning tranche; includes explicit assistance receipts, topology and identity-assignment artifact hashes, orthogonal topology/identity/intervention controls, external symbolic decoding, invariant-preserving topology and identity controls, source-exact ReLU RateRNN dynamics, sparse MaleCNS A[pre,post] to W[post,pre] orientation conversion, archived Part-E trace/update specialization, one sparse training epoch, executable zero-learning-rate control, sparse information-energy objective, held-out promotion gates, and parse-only Python inspection; not an empirical reproduction receipt"
   Source.publicAttribution
 
 runtimeCitationImportsNoProof :
@@ -44,8 +44,15 @@ record CleanRoomRuntimeStatus : Set where
     threeArmPacketBuilderImplemented : Bool
     maleCNSCLIImplemented : Bool
     emittedPythonExecutionDisabled : Bool
-    eligibilityTraceUpdateAlgebraImplemented : Bool
-    kernelEligibilityAdapterImplemented : Bool
+    eligibilityUpdateAlgebraImplemented : Bool
+    continuousRateDynamicsImplemented : Bool
+    sparseMaleCNSOrientationAdapterImplemented : Bool
+    sparseArchivedLearningAdapterImplemented : Bool
+    sparseTrainingEpochImplemented : Bool
+    continuousNoLearningControlImplemented : Bool
+    sparseInformationEnergyObjectiveImplemented : Bool
+    heldOutLearningPromotionGateImplemented : Bool
+    ternaryKernelPaperEligibilityAdapterImplemented : Bool
     viralImplementationRecovered : Bool
     viralDemoReproduced : Bool
     empiricalNullsExecuted : Bool
@@ -55,26 +62,9 @@ open CleanRoomRuntimeStatus public
 
 canonicalCleanRoomRuntimeStatus : CleanRoomRuntimeStatus
 canonicalCleanRoomRuntimeStatus = cleanRoomRuntimeStatus
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  false
-  false
-  false
-  false
-  false
+  true true true true true true true true true true true true true true
+  true true true true true true true true
+  false false false false false
 
 runtimeSubstrateIsLocated :
   runtimeSubstrateLocated canonicalCleanRoomRuntimeStatus ≡ true
@@ -116,13 +106,26 @@ emittedPythonIsNotExecutedByCleanRoomRunner :
   emittedPythonExecutionDisabled canonicalCleanRoomRuntimeStatus ≡ true
 emittedPythonIsNotExecutedByCleanRoomRunner = refl
 
-eligibilityTraceUpdateAlgebraIsLocated :
-  eligibilityTraceUpdateAlgebraImplemented canonicalCleanRoomRuntimeStatus ≡ true
-eligibilityTraceUpdateAlgebraIsLocated = refl
+continuousRateDynamicsIsLocated :
+  continuousRateDynamicsImplemented canonicalCleanRoomRuntimeStatus ≡ true
+continuousRateDynamicsIsLocated = refl
 
-kernelEligibilityAdapterStillUnpaid :
-  kernelEligibilityAdapterImplemented canonicalCleanRoomRuntimeStatus ≡ false
-kernelEligibilityAdapterStillUnpaid = refl
+sparseTrainingEpochIsLocated :
+  sparseTrainingEpochImplemented canonicalCleanRoomRuntimeStatus ≡ true
+sparseTrainingEpochIsLocated = refl
+
+continuousNoLearningControlIsLocated :
+  continuousNoLearningControlImplemented canonicalCleanRoomRuntimeStatus ≡ true
+continuousNoLearningControlIsLocated = refl
+
+heldOutLearningPromotionGateIsLocated :
+  heldOutLearningPromotionGateImplemented canonicalCleanRoomRuntimeStatus ≡ true
+heldOutLearningPromotionGateIsLocated = refl
+
+ternaryKernelPaperEligibilityAdapterStillUnpaid :
+  ternaryKernelPaperEligibilityAdapterImplemented canonicalCleanRoomRuntimeStatus
+  ≡ false
+ternaryKernelPaperEligibilityAdapterStillUnpaid = refl
 
 viralImplementationStillUnrecovered :
   viralImplementationRecovered canonicalCleanRoomRuntimeStatus ≡ false
