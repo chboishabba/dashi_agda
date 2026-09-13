@@ -1,0 +1,69 @@
+name: Continuous oscillator synthetic certification
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/run_continuous_oscillator_synthetic.py'
+      - 'tests/test_continuous_oscillator_synthetic.py'
+      - 'DASHI/Cognition/PNF/ContinuousOscillatorSyntheticReceipt.agda'
+      - 'DASHI/Cognition/PNF/ContinuousOscillatorMemoryRefinementExact.agda'
+      - 'DASHI/Cognition/PNF/ContinuousOscillatorMemoryRefinementRegression.agda'
+      - 'DASHI/Cognition/PNF/PNFIRLearningEverything.agda'
+      - 'Docs/roadmaps/ContinuousOscillatorSyntheticRoadmap.md'
+      - '.github/workflows/continuous-oscillator-synthetic.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Run focused Python tests
+        run: |
+          python3 -m pip install --disable-pip-version-check numpy pytest
+          pytest -q tests/test_continuous_oscillator_synthetic.py
+          python3 -m py_compile scripts/run_continuous_oscillator_synthetic.py
+
+      - name: Run bounded executable producer
+        run: |
+          rm -rf /tmp/continuous-oscillator-synthetic
+          python3 scripts/run_continuous_oscillator_synthetic.py \
+            --out-dir /tmp/continuous-oscillator-synthetic
+          test -s /tmp/continuous-oscillator-synthetic/summary.json
+          test -s /tmp/continuous-oscillator-synthetic/trajectories.csv
+          test -s /tmp/continuous-oscillator-synthetic/comparison.csv
+          test -s /tmp/continuous-oscillator-synthetic/report.md
+
+      - name: Upload numerical receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: continuous-oscillator-synthetic-receipts
+          path: /tmp/continuous-oscillator-synthetic/
+
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Typecheck synthetic receipt
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Cognition/PNF/ContinuousOscillatorSyntheticReceipt.agda
+
+      - name: Typecheck continuous memory refinement regression
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Cognition/PNF/ContinuousOscillatorMemoryRefinementRegression.agda
+
+      - name: Typecheck narrow PNF learning aggregate
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Cognition/PNF/PNFIRLearningEverything.agda
