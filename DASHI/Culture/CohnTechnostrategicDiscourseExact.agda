@@ -137,6 +137,9 @@ feministRecognitionBoundary =
 sourceToDASHITheoremPromotion : Philosophy.PhilosophyPromotionKind
 sourceToDASHITheoremPromotion = Philosophy.sourcePropositionToDASHITheorem
 
+cohnSourceAtlas : CohnSources.CohnSourceBoundary
+cohnSourceAtlas = CohnSources.canonicalCohnSourceBoundary
+
 ------------------------------------------------------------------------
 -- WrongType / no-promotion boundary.
 ------------------------------------------------------------------------
@@ -182,10 +185,3 @@ canonicalCohnTechnostrategicBoundary =
     false refl
     false refl
     true refl
-
-------------------------------------------------------------------------
--- Source object remains provenance, not theorem authority.
-------------------------------------------------------------------------
-
-cohnPrimarySource : CohnSources.Source.AttributedSource
-cohnPrimarySource = CohnSources.cohnSexAndDeath
