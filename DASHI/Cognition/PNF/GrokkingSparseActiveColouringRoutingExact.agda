@@ -49,10 +49,8 @@ trainingTaskMechanismMassRemainDistinct = true
 
 moneSource : Source.AttributedSource
 moneSource = Source.mkDOISource "Runxi Cheng; Yuchen Guan; Yucheng Ding; Qingguo Hu; Yongxian Wei; Chun Yuan; Yelong Shen; Weizhu Chen; Yeyun Gong" "Mixture of Neuron Experts" "arXiv:2510.05781" "2025" "10.48550/arXiv.2510.05781" "https://arxiv.org/abs/2510.05781" Source.academicArticleSource "source for neuron-granular MoE activation sparsity and the reported 50-percent activated-parameter MoNE comparison; not a universal neuron-usage theorem" Source.publicAttribution
-
 salahYevickSource : Source.AttributedSource
 salahYevickSource = Source.mkDOISource "Ahmed Salah; David Yevick" "Tracing the Path to Grokking: Dropout, Embeddings, and Network Activation" "Neural Processing Letters 58, article 36" "2026" "10.1007/s11063-026-11843-4" "https://doi.org/10.1007/s11063-026-11843-4" Source.academicArticleSource "source for grokking diagnostics including neuron activity; reports decreasing inactive-neuron percentage during generalisation in the studied models" Source.publicAttribution
-
 humayunCircuitSource : Source.AttributedSource
 humayunCircuitSource = Source.mkNoDOISource "Ahmed Imtiaz Humayun; Randall Balestriero; Richard G. Baraniuk" "Grokking and the Geometry of Circuit Formation" "ICML 2024 Workshop on Mechanistic Interpretability" "2024" "https://research.google/pubs/grokking-and-the-geometry-of-circuit-formation/" Source.academicArticleSource "source for circuit-geometry and circuit-density changes during grokking; not identified with neuron activation sparsity" Source.publicAttribution
 
@@ -64,9 +62,7 @@ moneActivationObservation : MoNEActivationObservation
 moneActivationObservation = moneActivation moneSource 50 true false false
 
 data SparseRoutingMetric : Set where inactiveNeuronFraction activeSupportSize uniqueCircuitDensity conflictEdgeCount compatibleBatchSize : SparseRoutingMetric
-
 data Trend : Set where increases decreases stable unmeasured : Trend
-
 record EmpiricalMetricObservation : Set where
   constructor empiricalMetricObservation
   field observationSource : Source.AttributedSource; metric : SparseRoutingMetric; trend : Trend; universalAcrossArchitectures : Bool; importsMechanisticProof : Bool
@@ -127,7 +123,6 @@ activationCorrelationAlonePaysConflict : Bool
 activationCorrelationAlonePaysConflict = false
 jointInterventionRequiredForConflict : Bool
 jointInterventionRequiredForConflict = true
-
 record CircuitPairInterventionReceipt : Set where
   constructor circuitPairInterventionReceipt
   field activationCorrelationMeasured : Bool; leftInterventionMeasured : Bool; rightInterventionMeasured : Bool; jointInterventionMeasured : Bool; sameCheckpoint : Bool; sameHeldOutEvaluation : Bool; proposedRelation : GrokkingReducerRelation; relationPromotionPaid : Bool
@@ -161,7 +156,6 @@ aboveInteractionThreshold score = natLE (suc (interactionThreshold score)) (inte
 data PairRelationClassification : Set where
   underpowered : PairRelationClassification
   classified : GrokkingReducerRelation → PairRelationClassification
-
 classifyPair : PairInterventionScore → PairRelationClassification
 classifyPair score with adequatelyPowered score
 ... | false = underpowered
@@ -171,7 +165,6 @@ classifyPair score with adequatelyPowered score
 ...   | false | false with aboveInteractionThreshold score
 ...     | true  = classified conflict
 ...     | false = classified independent
-
 activationCorrelationIsClassificationInput : Bool
 activationCorrelationIsClassificationInput = false
 syntheticConflictScore : PairInterventionScore
@@ -187,66 +180,32 @@ classifierIsEmpiricalGrokkingResult = false
 
 ------------------------------------------------------------------------
 -- Finite closed-compatible-family beta witness.
---
--- beta is the certified maximum size of a family that is both conflict-free
--- and closed under declared requirements.  This tranche does not implement a
--- universal maximum-independent-set solver.  Each finite system carries the
--- claimed maximum plus an explicit finite-exhaustion payment bit; the examples
--- pin the structural distinctions we need for later empirical checkpoints.
 ------------------------------------------------------------------------
 
 record ClosedCompatibleFamilyCertificate : Set where
   constructor closedCompatibleFamilyCertificate
-  field
-    familySize : Nat
-    conflictFree : Bool
-    requirementClosed : Bool
+  field familySize : Nat; conflictFree : Bool; requirementClosed : Bool
 open ClosedCompatibleFamilyCertificate public
-
 record FiniteClosedCompatibleSystem : Set where
   constructor finiteClosedCompatibleSystem
-  field
-    rawCandidateCount : Nat
-    conflictEdgeCountFinite : Nat
-    requirementEdgeCountFinite : Nat
-    certifiedFamily : ClosedCompatibleFamilyCertificate
-    certifiedMaximum : Nat
-    maximalityPaidByFiniteExhaustion : Bool
+  field rawCandidateCount : Nat; conflictEdgeCountFinite : Nat; requirementEdgeCountFinite : Nat; certifiedFamily : ClosedCompatibleFamilyCertificate; certifiedMaximum : Nat; maximalityPaidByFiniteExhaustion : Bool
 open FiniteClosedCompatibleSystem public
-
 betaClosedCompatible : FiniteClosedCompatibleSystem → Nat
 betaClosedCompatible system = certifiedMaximum system
 
 baseClosedCompatibleSystem : FiniteClosedCompatibleSystem
-baseClosedCompatibleSystem =
-  finiteClosedCompatibleSystem 3 1 0
-    (closedCompatibleFamilyCertificate 2 true true)
-    2 true
-
+baseClosedCompatibleSystem = finiteClosedCompatibleSystem 3 1 0 (closedCompatibleFamilyCertificate 2 true true) 2 true
 extraBlockedCapacitySystem : FiniteClosedCompatibleSystem
-extraBlockedCapacitySystem =
-  finiteClosedCompatibleSystem 4 2 0
-    (closedCompatibleFamilyCertificate 2 true true)
-    2 true
-
+extraBlockedCapacitySystem = finiteClosedCompatibleSystem 4 2 0 (closedCompatibleFamilyCertificate 2 true true) 2 true
 conflictRemovedSystem : FiniteClosedCompatibleSystem
-conflictRemovedSystem =
-  finiteClosedCompatibleSystem 3 0 0
-    (closedCompatibleFamilyCertificate 3 true true)
-    3 true
-
+conflictRemovedSystem = finiteClosedCompatibleSystem 3 0 0 (closedCompatibleFamilyCertificate 3 true true) 3 true
 requirementOpenSystem : FiniteClosedCompatibleSystem
-requirementOpenSystem =
-  finiteClosedCompatibleSystem 2 0 1
-    (closedCompatibleFamilyCertificate 1 true true)
-    1 true
-
+requirementOpenSystem = finiteClosedCompatibleSystem 2 0 1 (closedCompatibleFamilyCertificate 1 true true) 1 true
 requirementClosedSystem : FiniteClosedCompatibleSystem
-requirementClosedSystem =
-  finiteClosedCompatibleSystem 2 0 1
-    (closedCompatibleFamilyCertificate 2 true true)
-    2 true
+requirementClosedSystem = finiteClosedCompatibleSystem 2 0 1 (closedCompatibleFamilyCertificate 2 true true) 2 true
 
+betaMaximalityIsReceiptGated : Bool
+betaMaximalityIsReceiptGated = true
 betaWitnessIsUniversalGrokkingObjective : Bool
 betaWitnessIsUniversalGrokkingObjective = false
 
@@ -262,7 +221,6 @@ grokkingLiterallyMinimisesChromaticNumber : Bool
 grokkingLiterallyMinimisesChromaticNumber = false
 colouringAnalogyBoundary : colouringConflictFreeBatchWitness ≡ true × grokkingLiterallyMinimisesChromaticNumber ≡ false
 colouringAnalogyBoundary = refl , refl
-
 record CandidateActionRoutingWitness : Set where
   constructor candidateActionRoutingWitness
   field largeCandidateFamily : Bool; sparseCompatibleAction : Bool; globalCorrectnessStillNeedsLiftOrConsumer : Bool
