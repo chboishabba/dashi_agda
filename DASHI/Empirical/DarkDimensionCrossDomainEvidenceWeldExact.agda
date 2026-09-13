@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.EmpiricalSourceDiligenceAdmissionExact as Diligence
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
+import DASHI.Interop.GodsEyeViewAcquisitionResultAssessmentBridgeExact as AcquisitionAssessment
 import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 import DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact as BedroyaBackground
 import DASHI.Empirical.DarkDimensionBedroyaParameterManifestBoundaryExact as BedroyaManifest
@@ -16,7 +17,8 @@ import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun
 -- CROSS-DOMAIN EVIDENCE WELD
 --
 -- Reuses three repo-wide boundaries rather than creating a new planner:
---   1. source diligence: search non-location is bounded acquisition state;
+--   1. source diligence / acquisition assessment: search non-location and
+--      runtime no-match are bounded acquisition states, not negative facts;
 --   2. non-factorability: coarse marginals/equations need not determine a
 --      unique same-key numerical vector;
 --   3. prediction protocol: a reconstruction receipt is not automatically a
@@ -34,6 +36,11 @@ data SearchNonlocationEqualsKnownAbsence : Set where
 
 notLocatedDoesNotBecomeAbsent : SearchNonlocationEqualsKnownAbsence → ⊥
 notLocatedDoesNotBecomeAbsent ()
+
+acquisitionNoMatchDoesNotBecomeAbsence :
+  AcquisitionAssessment.NoMatchIsNegativeWorldFact → ⊥
+acquisitionNoMatchDoesNotBecomeAbsence =
+  AcquisitionAssessment.noMatchDoesNotBecomeNegativeFact
 
 bedroyaChainSearchDiligence : Diligence.SourceDiligence
 bedroyaChainSearchDiligence =
