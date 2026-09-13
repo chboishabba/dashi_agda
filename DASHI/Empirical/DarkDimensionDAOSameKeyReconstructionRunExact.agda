@@ -35,12 +35,19 @@ qsoRedshift = "1.484"
 lyaRedshift : String
 lyaRedshift = "2.330"
 
+publishedRdBAOMpcOverH : String
+publishedRdBAOMpcOverH = "100.0"
+
+publishedRdDAOMpcOverH : String
+publishedRdDAOMpcOverH = "58.6"
+
 record DAOSameKeyReconstructionRunStatus : Set where
   constructor daoSameKeyReconstructionRunStatus
   field
     upstreamRevisionPinned : Bool
     paperTableReconstructionSelected : Bool
     allSixDESIKeysRequested : Bool
+    publishedHorizonCrossCheckRequested : Bool
     originalPaperManifestClaimed : Bool
     executionReceiptPresent : Bool
     numericalVectorPresent : Bool
@@ -53,9 +60,15 @@ canonicalDAOSameKeyReconstructionRunStatus =
     true
     true
     true
+    true
     false
     false
     false
+
+publishedHorizonValidationRequested :
+  publishedHorizonCrossCheckRequested canonicalDAOSameKeyReconstructionRunStatus
+  ≡ true
+publishedHorizonValidationRequested = refl
 
 originalPaperManifestNotClaimed :
   originalPaperManifestClaimed canonicalDAOSameKeyReconstructionRunStatus ≡ false
@@ -71,6 +84,12 @@ numericalVectorStillOpen = refl
 
 data ReconstructionVectorEqualsOriginalPaperChainPrediction : Set where
 
+data HorizonAgreementRecoversOriginalManifestCustody : Set where
+
 reconstructionVectorDoesNotBecomeOriginalPaperChainPrediction :
   ReconstructionVectorEqualsOriginalPaperChainPrediction → ⊥
 reconstructionVectorDoesNotBecomeOriginalPaperChainPrediction ()
+
+horizonAgreementDoesNotRecoverOriginalManifestCustody :
+  HorizonAgreementRecoversOriginalManifestCustody → ⊥
+horizonAgreementDoesNotRecoverOriginalManifestCustody ()
