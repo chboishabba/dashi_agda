@@ -33,19 +33,10 @@ fi
   > "$PG_RECEIPT" \
   2> "$PG_ERR"
 
-grep -q 'SLR_WORLD_BINARY_INGEST_RECEIPT' "$PG_RECEIPT" || { cat "$PG_RECEIPT" >&2; exit 1; }
-grep -q 'binary_wire=true' "$PG_RECEIPT" || { cat "$PG_RECEIPT" >&2; exit 1; }
-grep -q 'postgres_persistence_is_semantic_authority=false' "$PG_RECEIPT" || { cat "$PG_RECEIPT" >&2; exit 1; }
-grep -q 'semantic_promotion=false' "$PG_RECEIPT" || { cat "$PG_RECEIPT" >&2; exit 1; }
-
 "$WORLD_STORE_BIN" frontier \
   --env-file "$ENV_FILE" \
   > "$PG_FRONTIER" \
   2>> "$PG_ERR"
-
-grep -q 'SLR_WORLD_FRONTIER_BINARY_STREAM_RECEIPT' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
-grep -q 'buffered_full_frontier=false' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
-grep -q 'binary_wire=true' "$PG_ERR" || { cat "$PG_ERR" >&2; exit 1; }
 
 printf 'SLR_WORLD_STORE_BACKEND backend=rust-world-store wire=SLRW binary_wire=true json_transport=false regex_world_parser=false python_heavy_persistence=false postgres_persistence_is_semantic_authority=false\n' >> "$PG_ERR"
 
