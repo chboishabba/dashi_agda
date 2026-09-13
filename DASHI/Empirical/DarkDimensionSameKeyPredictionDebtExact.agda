@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
 import DASHI.Empirical.DarkDimensionSharedBAOObservableExact as SharedBAO
 import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationKey
 
@@ -34,7 +35,7 @@ daoDRMDClassSource =
     "2026"
     "https://github.com/NEDE-Cosmo/DRMD-CLASS"
     Source.practitionerSource
-    "public CLASS implementation of the Dark Radiation-Matter Decoupling model; revision/config provenance is pinned below, but no DASHI execution receipt or same-key BAO prediction is imported by source existence"
+    "public CLASS implementation of the Dark Radiation-Matter Decoupling model; revision/config provenance and same-key extraction recipe are pinned below, but no DASHI execution receipt or BAO prediction is imported by source existence"
     Source.publicAttribution
 
 darkDimensionModelSource : Source.AttributedSource
@@ -60,7 +61,9 @@ record PublicExecutionSurface : Set where
     revision : String
     primaryInputSurface : String
     inferenceConfigSurface : String
-    derivedObservableSurface : String
+    baoDragHorizonSurface : String
+    modelSpecificDarkHorizonSurface : String
+    sameKeyExtractionRecipeOwner : String
     executableRevisionPinned : Bool
     executionConfigSurfaceLocated : Bool
     executedByDASHI : Bool
@@ -72,9 +75,11 @@ daoDRMDExecutionSurface =
   publicExecutionSurface
     "NEDE-Cosmo/DRMD-CLASS"
     "aa2b61a0f1cf246672cdbd4634a4797d4cc654f9"
-    "DRMD.ini"
+    "input/DRMD.ini"
     "cobaya/"
+    "rs_drag"
     "rs_d_drmd"
+    "DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact"
     true
     true
     false
@@ -147,6 +152,16 @@ daoExecutionStillNotRun = refl
 darkDimensionExecutableStillOpen :
   darkDimensionExecutableModelLocated canonicalSameKeyPredictionDerivationDebt ≡ false
 darkDimensionExecutableStillOpen = refl
+
+daoExtractionRecipeLocatedButExecutionStillOpen :
+  DAORecipe.recipeExecuted DAORecipe.daoPinnedExtractionRecipe ≡ false
+daoExtractionRecipeLocatedButExecutionStillOpen =
+  DAORecipe.recipeExecutionStillOpen
+
+daoRecipeStillDoesNotPaySameKeyVector :
+  DAORecipe.sameKeyBAOVectorDerived DAORecipe.daoPinnedExtractionRecipe ≡ false
+daoRecipeStillDoesNotPaySameKeyVector =
+  DAORecipe.sameKeyBAOVectorStillNotDerived
 
 sameKeyPredictionDebtStillOpen :
   debtClosed canonicalSameKeyPredictionDerivationDebt ≡ false
