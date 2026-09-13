@@ -5,8 +5,12 @@ open import DASHI.Core.Prelude
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Reasoning.CrossCulturalCompassionAccountabilityExact as Cross
 
-sourceCountRegression : Cross.crossCulturalCompassionSourceCount ≡ 2
+sourceCountRegression : Cross.crossCulturalCompassionSourceCount ≡ 3
 sourceCountRegression = refl
+
+academicAutonomyRelatednessSourcePresentRegression :
+  Attr.sourceAuthor Cross.kagitcibasiAutonomyRelatednessSource ≡ "Cigdem Kagitcibasi"
+academicAutonomyRelatednessSourcePresentRegression = refl
 
 sourceAtlasNonPromotingRegression :
   Attr.atlasCreatesAuthority Cross.crossCulturalCompassionSourceAtlas ≡ false
