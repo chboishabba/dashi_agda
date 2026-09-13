@@ -65,6 +65,7 @@ jobs:
           python scripts/check_dark_dimension_dao_same_key_extraction_recipe.py
           python scripts/check_dark_dimension_dao_paper_table_reconstruction.py
           python scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py
+          python scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py --format class-ini
 
   agda-empirical-atlas:
     runs-on: ubuntu-24.04
