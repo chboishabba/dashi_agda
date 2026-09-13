@@ -5,6 +5,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Empirical.DarkDimensionFadingDMParentLineageExact as ParentLineage
+
 simulationStartRedshift : String
 simulationStartRedshift = "1e14"
 
@@ -86,3 +88,19 @@ predecessorImplementationStillUnlocatedByCurrentSearch :
   firstPartyPredecessorImplementationLocatedByCurrentSearch canonicalBedroyaParameterManifestStatus
   ≡ false
 predecessorImplementationStillUnlocatedByCurrentSearch = refl
+
+-- Parent-model genealogy is paid, but its implementation/normalization is not
+-- silently imported into the later dark-dimension reanalysis.
+parentLineageStillDoesNotPayNormalizationMap :
+  ParentLineage.normalizationInheritanceSameObject
+    ParentLineage.canonicalFadingDMParentLineageStatus
+  ≡ false
+parentLineageStillDoesNotPayNormalizationMap =
+  ParentLineage.parentNormalizationInheritanceStillOpen
+
+parentImplementationInheritanceStillOpen :
+  ParentLineage.exactImplementationInheritanceDemonstrated
+    ParentLineage.canonicalFadingDMParentLineageStatus
+  ≡ false
+parentImplementationInheritanceStillOpen =
+  ParentLineage.parentImplementationInheritanceStillOpen
