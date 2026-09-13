@@ -70,3 +70,21 @@ paidSyntheticConflictUsesCanonicalConflict = refl , refl
 
 conflictReceiptDoesNotClaimRealGrokkingMeasurement : Bridge.syntheticConflictIsEmpiricalGrokkingResult ≡ false
 conflictReceiptDoesNotClaimRealGrokkingMeasurement = refl
+
+interactionResidualUsesJointMinusSingles : Bridge.interactionExcess Bridge.syntheticConflictScore ≡ 3
+interactionResidualUsesJointMinusSingles = refl
+
+thresholdedPositiveInteractionClassifiesConflict : Bridge.classifyPair Bridge.syntheticConflictScore ≡ Bridge.classified Bridge.conflict
+thresholdedPositiveInteractionClassifiesConflict = refl
+
+explicitDependencyClassifiesRequirement : Bridge.classifyPair Bridge.syntheticRequirementScore ≡ Bridge.classified Bridge.gluingRequirement
+explicitDependencyClassifiesRequirement = refl
+
+additiveJointEffectClassifiesIndependent : Bridge.classifyPair Bridge.syntheticIndependentScore ≡ Bridge.classified Bridge.independent
+additiveJointEffectClassifiesIndependent = refl
+
+underpoweredPairRemainsUnclassified : Bridge.classifyPair Bridge.syntheticUnderpoweredScore ≡ Bridge.underpowered
+underpoweredPairRemainsUnclassified = refl
+
+correlationIsNotClassifierInput : Bridge.activationCorrelationIsClassificationInput ≡ false
+correlationIsNotClassifierInput = refl
