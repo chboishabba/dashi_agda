@@ -97,7 +97,7 @@ liEtAl2025 =
 wangEtAl2025 : Source.AttributedSource
 wangEtAl2025 =
   Source.mkDOISource
-    "Ziyang Wang; Jiahui Li; Guodong Chen; Zhen Dong; Yong Chen"
+    "Ke Wang; Zhikang Li; Yang Chen; Wenjie Dong; Junlan Chen"
     "Towards open-world recognition: Critical problems and challenges"
     "Engineering Applications of Artificial Intelligence 143, 110042"
     "2025"
