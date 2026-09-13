@@ -93,3 +93,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProteinBackboneStereochemis
 -- not determine the observed conformation in this fixture; context remains a
 -- required fibre coordinate.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalExact
+
+-- NDim geometric continuation: source-paid NMP--CORE and LID--CORE endpoint
+-- coordinates replace the binary open/closed label with a retained two-axis
+-- residual while preserving the NDim rule that extra axes are not automatic
+-- consumer improvement or a complete transition mechanism.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNDimGeometricResidualExact
