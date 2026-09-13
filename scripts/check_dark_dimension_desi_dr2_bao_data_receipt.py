@@ -13,6 +13,7 @@ REQUIRED = {
         "elg2Measurement",
         "qsoMeasurement",
         "lyaMeasurement",
+        "withinBinCorrelationCoefficientRecorded",
         "withinBinCorrelationRecorded",
         "fullCovarianceAssemblyStillOpen",
         "retrospectiveDataDoesNotPayHeldOutPrediction",
