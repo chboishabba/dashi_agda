@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Focused static contract for intrinsic-GR interpretation and Penrose incompleteness.
+"""Focused static contract for intrinsic GR, null focusing, and Penrose incompleteness.
 
-This is intentionally structural: it verifies that the repo contains a thin
-interpretation owner, a source-bounded null-focusing owner, a theorem-boundary
-owner, and a focused Agda regression, with the expected WrongType firewalls
-exported through the existing physics aggregate. It does not certify the
-continuum equations or singularity theorem themselves.
+This is intentionally structural: it verifies thin interpretation, local
+focusing, global causal/topological, and theorem-boundary owners plus focused
+regressions. It does not certify the continuum equations or Penrose theorem.
 """
 
 from pathlib import Path
@@ -14,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 INTRINSIC = ROOT / "DASHI/Physics/Gravity/IntrinsicSpacetimeCurvatureInterpretationExact.agda"
 FOCUSING = ROOT / "DASHI/Physics/Gravity/NullRaychaudhuriSachsFocusingExact.agda"
+GLOBAL = ROOT / "DASHI/Physics/Gravity/PenroseGlobalHorismosContradictionExact.agda"
 PENROSE = ROOT / "DASHI/Physics/Gravity/Penrose1965NullGeodesicIncompletenessExact.agda"
 REGRESSION = ROOT / "DASHI/Physics/Gravity/IntrinsicPenroseInterpretationRegression.agda"
 AGGREGATE = ROOT / "DASHI/Physics/PhysicsKernelClosure.agda"
@@ -61,6 +60,22 @@ require(
 )
 
 require(
+    GLOBAL,
+    [
+        "futureHorismosOfTrappedSurface",
+        "nullCompletenessPlusFocusingMakesFutureHorismosCompact",
+        "globalHyperbolicityIdentifiesHorismosWithAchronalBoundary",
+        "nonCompactCauchySurfaceForcesFutureHorismosNonCompact",
+        "compactAndNonCompactHorismosContradiction",
+        "globalContradictionForcesNullIncompleteness",
+        "compactHorismosIsNotSpacetimeSingularity",
+        "globalHyperbolicityIsNotMerelyNoClosedTimelikeCurves",
+        "nonCompactCauchyIsTopologicalGlobalInputNotLocalCurvature",
+        "globalOwnerInternallyReprovesContinuumCausality",
+    ],
+)
+
+require(
     PENROSE,
     [
         "Penrose1965SourceReceipt",
@@ -85,6 +100,9 @@ require(
         "localFocusingNotGlobalIncompletenessRegression",
         "energyConditionTranslationFirewallRegression",
         "focusingContinuumDerivationStillClosedRegression",
+        "compactHorismosNotSingularityRegression",
+        "nonCompactCauchyIsGlobalInputRegression",
+        "globalCausalityDerivationStillClosedRegression",
         "continuumPromotionStillClosedRegression",
     ],
 )
@@ -94,9 +112,10 @@ require(
     [
         "IntrinsicSpacetimeCurvatureInterpretationExact",
         "NullRaychaudhuriSachsFocusingExact",
+        "PenroseGlobalHorismosContradictionExact",
         "Penrose1965NullGeodesicIncompletenessExact",
         "IntrinsicPenroseInterpretationRegression",
     ],
 )
 
-print("GR intrinsic-curvature / focusing / Penrose incompleteness static contract: OK")
+print("GR intrinsic-curvature / focusing / global Penrose incompleteness static contract: OK")
