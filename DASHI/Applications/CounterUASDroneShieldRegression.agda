@@ -9,10 +9,6 @@ import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 
 ------------------------------------------------------------------------
 -- Regression surface for the defensive counter-UAS architecture.
---
--- The production owner is required to keep sensing, fused inference,
--- operating context, threat assessment, and mitigation authority distinct.
--- This file is committed before those owners as the TDD red contract.
 ------------------------------------------------------------------------
 
 record CounterUASDroneShieldRegression : Set₁ where
@@ -30,6 +26,24 @@ record CounterUASDroneShieldRegression : Set₁ where
       CUAS.performanceClaimRequiresOperatingContext ≡ true
     fusedTrackRetainsObservationProvenance :
       CUAS.fusedTrackRequiresObservationProvenance ≡ true
+    noCatalogMatchDoesNotMeanNoRFDetection :
+      CUAS.noCatalogMatchDoesNotImplyNoDetection ≡ true
+    rfActivityDoesNotCreateEmitterIdentity :
+      CUAS.rfActivityDoesNotCreateEmitterIdentity ≡ true
+    openSetDetectionDoesNotCreateKnownClass :
+      CUAS.openSetDetectionDoesNotCreateKnownClass ≡ true
+    generatedSignatureIsReferenceNotIdentityAuthority :
+      CUAS.generatedSignatureDoesNotCreateIdentityAuthority ≡ true
+    catalogProjectionHasDetectionAdequacyDefect :
+      Adequacy.QueryAdequacyDefect
+        CUAS.catalogOnlyProjection
+        CUAS.rfSemantics
+        CUAS.activityQuery
+    anomalyProjectionHasIdentityAdequacyDefect :
+      Adequacy.QueryAdequacyDefect
+        CUAS.anomalyOnlyProjection
+        CUAS.openSetSemantics
+        CUAS.identityQuery
     trackAloneHasMitigationAdequacyDefect :
       Adequacy.QueryAdequacyDefect
         CUAS.trackOnlyProjection
@@ -44,17 +58,18 @@ record CounterUASDroneShieldRegression : Set₁ where
       Sources.counterUASSOTASourceAtlasCreatesAuthority ≡ false
     operationalSourceAtlasNonPromoting :
       OperationalSources.counterUASOperationalSourceAtlasCreatesAuthority ≡ false
+    rfAI3ClaimSnapshotNonPromoting :
+      OperationalSources.rfAI3SnapshotCreatesAuthority ≡ false
 
 canonicalCounterUASDroneShieldRegression : CounterUASDroneShieldRegression
 canonicalCounterUASDroneShieldRegression =
   counterUASDroneShieldRegression
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
+    refl refl refl refl refl refl
+    refl refl refl refl
+    CUAS.catalogOnlyDetectionAdequacyDefect
+    CUAS.anomalyOnlyIdentityAdequacyDefect
     CUAS.trackOnlyMitigationAdequacyDefect
     CUAS.specificationOnlyPerformanceAdequacyDefect
     Sources.counterUASSOTASourceAtlasCreatesAuthorityIsFalse
     OperationalSources.counterUASOperationalSourceAtlasCreatesAuthorityIsFalse
+    OperationalSources.rfAI3SnapshotCreatesAuthorityIsFalse
