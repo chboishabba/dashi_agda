@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Gravity.IntrinsicSpacetimeCurvatureInterpretationExact as Intrinsic
 import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
+import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Global
 import DASHI.Physics.Gravity.Penrose1965NullGeodesicIncompletenessExact as Penrose
 
 rubberSheetFirewallRegression :
@@ -48,6 +49,24 @@ focusingContinuumDerivationStillClosedRegression :
     Focusing.canonicalNullOpticalFocusingBoundary
   ≡ false
 focusingContinuumDerivationStillClosedRegression = refl
+
+compactHorismosNotSingularityRegression :
+  Global.compactHorismosIsNotSpacetimeSingularity
+    Global.canonicalPenroseGlobalInterpretationBoundary
+  ≡ true
+compactHorismosNotSingularityRegression = refl
+
+nonCompactCauchyIsGlobalInputRegression :
+  Global.nonCompactCauchyIsTopologicalGlobalInputNotLocalCurvature
+    Global.canonicalPenroseGlobalInterpretationBoundary
+  ≡ true
+nonCompactCauchyIsGlobalInputRegression = refl
+
+globalCausalityDerivationStillClosedRegression :
+  Global.globalOwnerInternallyReprovesContinuumCausality
+    Global.canonicalPenroseGlobalHorismosBoundary
+  ≡ false
+globalCausalityDerivationStillClosedRegression = refl
 
 continuumPromotionStillClosedRegression :
   Penrose.penroseOwnerPromotesContinuumGR ≡ false
