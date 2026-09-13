@@ -20,6 +20,7 @@ REQUIRED = {
         "record PublicArtifactSearchReceipt",
         "canonicalPublicArtifactSearchReceipt",
         "publicSearchNotFoundDoesNotProveNoArtifact",
+        "publicArtifactStillNotLocated",
         "connectomeAdvantageRequiresNullComparison",
     ],
     "DASHI/Biology/DrosophilaSymbolicInterfaceLearningRegression.agda": [
@@ -28,6 +29,7 @@ REQUIRED = {
         "adjacentAssistanceStillDoesNotTransfer",
         "sameObjectIdentityStillUnpaid",
         "negativePublicSearchStillDoesNotProveAbsence",
+        "publicArtifactStillUnrecovered",
     ],
     "DASHI/Biology/AnimalexicEverything.agda": [
         "DrosophilaSymbolicInterfaceLearningExact",
