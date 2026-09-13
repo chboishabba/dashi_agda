@@ -17,6 +17,8 @@ import DASHI.Physics.Closure.NSTriadKNComparableConstantBandGramNoGoRound214Exac
 -- longer the primary paper-facing producer path, but their theorem-bearing
 -- work and terminal guards remain part of the provenance record.
 import DASHI.Physics.Closure.NSA6TheoremLadderBoundary as A6
+import DASHI.Physics.Closure.NSA7ResidualDepletionGronwallBoundary as A7
+import DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary as A8
 import DASHI.Physics.Closure.NSA9CKNBKMClosureBoundary as A9
 import DASHI.Physics.Closure.NSFinalStateReceipt as Final
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
@@ -222,3 +224,29 @@ canonicalNSPaperTheoremStatus =
     ; statement = paperInterfaceStatement
     ; statementIsCanonical = refl
     }
+
+------------------------------------------------------------------------
+-- Legacy publication-readiness anchors.
+--
+-- These names are intentionally preserved for old manifest/readiness tooling.
+-- They expose the historical A6-A9 route only; they do not define the modern
+-- canonical proof frontier and they do not promote Clay/global regularity.
+------------------------------------------------------------------------
+
+a6TheoremProved : Bool
+a6TheoremProved = A6.A6TheoremProved
+
+a7ResidualDepletionProved : Bool
+a7ResidualDepletionProved = A7.A7ResidualDepletionGronwallProved
+
+a8FullLocalDefectMonotonicityProved : Bool
+a8FullLocalDefectMonotonicityProved = A8.A8FullLocalDefectMonotonicityProved
+
+a9CKNBKMClosureProved : Bool
+a9CKNBKMClosureProved = A9.A9CKNBKMClosureProved
+
+nsPaperInterfaceTerminalFalse :
+  NSPaperTheoremStatus.clayTerminalPromotion canonicalNSPaperTheoremStatus
+  ≡ false
+nsPaperInterfaceTerminalFalse =
+  NSPaperTheoremStatus.clayTerminalPromotionIsFalse canonicalNSPaperTheoremStatus
