@@ -7,6 +7,8 @@ on:
       - 'DASHI/Cognition/PNF/GrokkingSparseActiveColouringRoutingRegression.agda'
       - 'DASHI/Learning/GrokkingCircuitTemporalAlignmentExact.agda'
       - 'DASHI/Learning/GrokkingCircuitTemporalAlignmentRegression.agda'
+      - 'DASHI/Learning/Mod97CircuitRuntimeBoundaryExact.agda'
+      - 'DASHI/Learning/Mod97CircuitRuntimeBoundaryRegression.agda'
       - 'DASHI/Learning/GrokkingRegression.agda'
       - 'DASHI/Programmes/GrokkingExact.agda'
       - 'Docs/learning/GrokkingOperatorFormalism.md'
@@ -72,13 +74,17 @@ jobs:
         run: git submodule update --init --depth 1 DCHoTT-Agda cubical
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
       - uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Reject trust escapes in new temporal-alignment surface
+      - name: Reject trust escapes in new Grokking runtime surfaces
         run: |
           if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|{!!}|\?)\b' \
             DASHI/Learning/GrokkingCircuitTemporalAlignmentExact.agda \
-            DASHI/Learning/GrokkingCircuitTemporalAlignmentRegression.agda; then
-            echo 'trust escape found in temporal-alignment surface'
+            DASHI/Learning/GrokkingCircuitTemporalAlignmentRegression.agda \
+            DASHI/Learning/Mod97CircuitRuntimeBoundaryExact.agda \
+            DASHI/Learning/Mod97CircuitRuntimeBoundaryRegression.agda; then
+            echo 'trust escape found in Grokking runtime surface'
             exit 1
           fi
       - name: Typecheck temporal-alignment regression root
         run: nix develop .# --command agda -i . DASHI/Learning/GrokkingCircuitTemporalAlignmentRegression.agda
+      - name: Typecheck Mod97 runtime-boundary regression root
+        run: nix develop .# --command agda -i . DASHI/Learning/Mod97CircuitRuntimeBoundaryRegression.agda
