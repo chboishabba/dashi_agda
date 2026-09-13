@@ -73,5 +73,6 @@ import DASHI.Interop.SLRPostgresWorldPersistenceExact
 import DASHI.Interop.SLRRustWorldStoreBridgeExact
 import DASHI.Interop.SLRBinaryWorldWireParityExact
 import DASHI.Interop.SLRSpacyObservationWorldCompilerParityExact
+import DASHI.Interop.SLRCompiledWorldBodyParityExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
