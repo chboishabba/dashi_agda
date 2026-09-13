@@ -1,0 +1,58 @@
+module DASHI.Interop.PenroseLocalGlobalHyperfabricCrossPollinationRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Interop.PenroseLocalGlobalHyperfabricCrossPollinationExact as Cross
+import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Penrose
+
+localValidityFirewallRegression :
+  Cross.localValidityDoesNotImplyGlobalValidity ≡ true
+localValidityFirewallRegression =
+  Cross.localValidityDoesNotImplyGlobalValidityIsTrue
+
+projectionSufficiencyFirewallRegression :
+  Cross.projectionValidityDoesNotImplySourceSufficiency ≡ true
+projectionSufficiencyFirewallRegression =
+  Cross.projectionValidityDoesNotImplySourceSufficiencyIsTrue
+
+boundedLocalCarrierFirewallRegression :
+  Cross.boundedLocalCarrierDoesNotImplyGlobalCompactnessOrClosure ≡ true
+boundedLocalCarrierFirewallRegression =
+  Cross.boundedLocalCarrierDoesNotImplyGlobalCompactnessOrClosureIsTrue
+
+sharedArchitectureFirewallRegression :
+  Cross.sharedProofArchitectureDoesNotIdentifyDomainTheorems ≡ true
+sharedArchitectureFirewallRegression =
+  Cross.sharedProofArchitectureDoesNotIdentifyDomainTheoremsIsTrue
+
+sameObjectIdentityRegression :
+  Cross.sameObjectReductioRequiresSameObjectIdentity ≡ true
+sameObjectIdentityRegression =
+  Penrose.sameHorismosObjectCarriesBothReductioClaimsIsTrue
+    Penrose.canonicalPenroseGlobalHorismosBoundary
+
+noNewSourceAuthorityRegression :
+  Cross.crossPollinationAddsNoNewSourceAuthority ≡ true
+noNewSourceAuthorityRegression =
+  Cross.crossPollinationAddsNoNewSourceAuthorityIsTrue
+
+retrospectiveNotHistoricalRegression :
+  Cross.crossPollinationIsRetrospectiveNotHistoricalInfluence ≡ true
+retrospectiveNotHistoricalRegression =
+  Cross.crossPollinationIsRetrospectiveNotHistoricalInfluenceIsTrue
+
+snowballPaymentCannotSkipParentRegression :
+  Cross.snowballPaymentMaySkipUnpaidParentDependency ≡ false
+snowballPaymentCannotSkipParentRegression =
+  Cross.snowballPaymentMaySkipUnpaidParentDependencyIsFalse
+
+analogyDoesNotCreateAuthorityRegression :
+  Cross.crossDomainAnalogyCreatesSourceAuthority ≡ false
+analogyDoesNotCreateAuthorityRegression =
+  Cross.crossDomainAnalogyCreatesSourceAuthorityIsFalse
+
+downstreamCandidateMapIsNotImplementationRegression :
+  Cross.downstreamCandidateMapIsImplementation ≡ false
+downstreamCandidateMapIsNotImplementationRegression =
+  Cross.downstreamCandidateMapIsImplementationIsFalse
