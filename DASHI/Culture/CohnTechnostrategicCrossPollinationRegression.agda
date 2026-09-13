@@ -71,6 +71,21 @@ intersectionalAnalogyNotHistoricalIdentity :
     Cohn.canonicalCohnTechnostrategicBoundary ≡ false
 intersectionalAnalogyNotHistoricalIdentity = refl
 
+expertFluencyNotHumanConsequenceAdequacy :
+  Cohn.expertFluencyImpliesHumanConsequenceAdequacy
+    Cohn.canonicalCohnTechnostrategicBoundary ≡ false
+expertFluencyNotHumanConsequenceAdequacy = refl
+
+sharedVocabularyNotSharedRelationalGrammar :
+  Cohn.sameVocabularyImpliesSameRelationalGrammar
+    Cohn.canonicalCohnTechnostrategicBoundary ≡ false
+sharedVocabularyNotSharedRelationalGrammar = refl
+
+discourseAnalysisNotMaterialInstitutionalExhaustion :
+  Cohn.discourseAnalysisExhaustsMaterialInstitutionalAnalysis
+    Cohn.canonicalCohnTechnostrategicBoundary ≡ false
+discourseAnalysisNotMaterialInstitutionalExhaustion = refl
+
 cohnCitationDoesNotCreateAuthority :
   Source.citationCreatesAuthority CohnSources.cohnSexAndDeath ≡ false
 cohnCitationDoesNotCreateAuthority = refl
