@@ -11,6 +11,7 @@ import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as AxisJoin
 import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 import DASHI.Empirical.DarkDimensionEmpiricalDiscriminationExact as Discrimination
+import DASHI.Empirical.DarkDimensionQuantitativeEnvelopeExact as Quantitative
 import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension
 
 ------------------------------------------------------------------------
@@ -24,7 +25,9 @@ import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDi
 --   * IntersectionalNonFactorability owns the proof that one transverse axis
 --     cannot recover another once two states collide on the first axis;
 --   * DarkDimensionEmpiricalDiscriminationExact owns the retrospective
---     DESI-era fit/comparator boundary.
+--     DESI-era fit/comparator boundary;
+--   * DarkDimensionQuantitativeEnvelopeExact owns source-precision-aware
+--     numerical/range coordinates without promoting them to a forecast.
 --
 -- This module contributes only the missing prospective *shape*:
 --
@@ -186,17 +189,7 @@ dao2026 =
     Source.publicAttribution
 
 lawSmithEtAl2024 : Source.AttributedSource
-lawSmithEtAl2024 =
-  Source.mkDOISource
-    "Jamie A. P. Law-Smith; Georges Obied; Anirudh Prabhu; Cumrun Vafa"
-    "Astrophysical constraints on decaying dark gravitons"
-    "Journal of High Energy Physics 2024, 47"
-    "2024"
-    "10.1007/JHEP06(2024)047"
-    "https://doi.org/10.1007/JHEP06(2024)047"
-    Source.academicArticleSource
-    "source for the currently viable Dark-Dimension effective-size range around 1-30 micrometres and dark-graviton observable constraints; it does not by itself specify a laboratory discovery threshold"
-    Source.publicAttribution
+lawSmithEtAl2024 = Quantitative.lawSmithEtAl2024
 
 anchordoquiAntoniadisCunat2024 : Source.AttributedSource
 anchordoquiAntoniadisCunat2024 =
@@ -290,6 +283,17 @@ canonicalProspectiveDiscriminatorPacket =
 prospectivePacketStillOpen :
   prospectivePacketLocked canonicalProspectiveDiscriminatorPacket ≡ false
 prospectivePacketStillOpen = refl
+
+quantitativeEnvelopeStillDoesNotLockProspectivePacket :
+  quantitativeModelSeparationLocked canonicalProspectiveDiscriminatorPacket ≡ false
+quantitativeEnvelopeStillDoesNotLockProspectivePacket = refl
+
+quantitativeEnvelopeCrossModelSeparationStillOpen :
+  Quantitative.crossModelNumericalSeparationLocked
+    Quantitative.canonicalQuantitativeEnvelopeStatus
+  ≡ false
+quantitativeEnvelopeCrossModelSeparationStillOpen =
+  Quantitative.crossModelNumericalSeparationStillOpen
 
 ------------------------------------------------------------------------
 -- Promotion / WrongType firewalls.
