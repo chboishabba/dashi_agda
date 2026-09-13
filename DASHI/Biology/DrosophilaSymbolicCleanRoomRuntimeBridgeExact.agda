@@ -14,12 +14,12 @@ import DASHI.Core.AttributedSourceCore as Source
 runtimeCleanRoomSource : Source.AttributedSource
 runtimeCleanRoomSource = Source.mkNoDOISource
   "chboishabba/dashiBRAIN"
-  "MaleCNS symbolic clean-room receipts, controls, packet, and CLI"
+  "MaleCNS symbolic clean-room receipts, controls, packet, CLI, and eligibility-trace primitive"
   "GitHub pull request #8"
   "2026"
   "https://github.com/chboishabba/dashiBRAIN/pull/8"
   (Source.namedSourceKind "software implementation")
-  "clean-room runtime substrate at head 2429f0dd33753385c28c65015d316d2dd89ba982; includes explicit assistance receipts, topology and identity-assignment artifact hashes, orthogonal topology/identity/intervention controls, external symbolic decoding over existing kernel flow, invariant-preserving topology and identity controls, a three-arm packet builder, MaleCNS loader CLI, and parse-only Python inspection with execution disabled; control labels must be paid by actual artifact differences; not an empirical reproduction receipt"
+  "clean-room runtime substrate at head dec72f17805915aa826e15d78ca723d021732fdf; includes explicit assistance receipts, topology and identity-assignment artifact hashes, orthogonal topology/identity/intervention controls, external symbolic decoding over existing kernel flow, invariant-preserving controls, a three-arm packet builder, MaleCNS loader CLI, parse-only Python inspection, and a source-attributed information-minus-energy eligibility-trace update primitive; kernel-to-eligibility construction and viral-demo learning-rule recovery remain unpaid"
   Source.publicAttribution
 
 runtimeCitationImportsNoProof :
@@ -44,6 +44,8 @@ record CleanRoomRuntimeStatus : Set where
     threeArmPacketBuilderImplemented : Bool
     maleCNSCLIImplemented : Bool
     emittedPythonExecutionDisabled : Bool
+    eligibilityTraceUpdateAlgebraImplemented : Bool
+    kernelEligibilityAdapterImplemented : Bool
     viralImplementationRecovered : Bool
     viralDemoReproduced : Bool
     empiricalNullsExecuted : Bool
@@ -67,6 +69,8 @@ canonicalCleanRoomRuntimeStatus = cleanRoomRuntimeStatus
   true
   true
   true
+  true
+  false
   false
   false
   false
@@ -111,6 +115,14 @@ maleCNSCLIIsLocated = refl
 emittedPythonIsNotExecutedByCleanRoomRunner :
   emittedPythonExecutionDisabled canonicalCleanRoomRuntimeStatus ≡ true
 emittedPythonIsNotExecutedByCleanRoomRunner = refl
+
+eligibilityTraceUpdateAlgebraIsLocated :
+  eligibilityTraceUpdateAlgebraImplemented canonicalCleanRoomRuntimeStatus ≡ true
+eligibilityTraceUpdateAlgebraIsLocated = refl
+
+kernelEligibilityAdapterStillUnpaid :
+  kernelEligibilityAdapterImplemented canonicalCleanRoomRuntimeStatus ≡ false
+kernelEligibilityAdapterStillUnpaid = refl
 
 viralImplementationStillUnrecovered :
   viralImplementationRecovered canonicalCleanRoomRuntimeStatus ≡ false
