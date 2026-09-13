@@ -7,6 +7,7 @@ import DASHI.Physics.Gravity.IntrinsicSpacetimeCurvatureInterpretationExact as I
 import DASHI.Physics.Gravity.CausalFutureHorismosNullGeneratorExact as Causal
 import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
 import DASHI.Physics.Gravity.PenroseHorismosCompactnessPaymentExact as Compactness
+import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact as Authority
 import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Global
 import DASHI.Physics.Gravity.Penrose1965NullGeodesicIncompletenessExact as Penrose
 
@@ -50,20 +51,25 @@ focusingContinuumDerivationStillClosedRegression :
     Focusing.canonicalNullOpticalFocusingBoundary ≡ false
 focusingContinuumDerivationStillClosedRegression = refl
 
-pointwiseNegativeNotUniformRegression :
-  Compactness.pointwiseNegativeExpansionDoesNotAloneGiveUniformBound
+rawNullVectorFibreFirewallRegression :
+  Compactness.rawNullNormalVectorFibreIsNotCompactDirectionFibre
     Compactness.canonicalPenroseCompactnessInterpretationBoundary ≡ true
-pointwiseNegativeNotUniformRegression = refl
-
-boundedParameterNotCompactnessRegression :
-  Compactness.boundedAffineParameterDoesNotAloneMakeHorismosCompact
-    Compactness.canonicalPenroseCompactnessInterpretationBoundary ≡ true
-boundedParameterNotCompactnessRegression = refl
+rawNullVectorFibreFirewallRegression = refl
 
 compactnessTopologyDerivationStillClosedRegression :
   Compactness.compactnessOwnerInternallyReprovesContinuumTopology
     Compactness.canonicalPenroseHorismosCompactnessBoundary ≡ false
 compactnessTopologyDerivationStillClosedRegression = refl
+
+globalAuthorityCitationNonPromotionRegression :
+  Authority.authorityCitationImportsNeitherProofNorAuthority
+    Authority.canonicalGlobalCausalityAuthorityReceipt ≡ true
+globalAuthorityCitationNonPromotionRegression = refl
+
+globalAuthorityDerivationStillClosedRegression :
+  Authority.authorityOwnerInternallyReprovesGlobalCausality
+    Authority.canonicalGlobalCausalityAuthorityReceipt ≡ false
+globalAuthorityDerivationStillClosedRegression = refl
 
 compactHorismosNotSingularityRegression :
   Global.compactHorismosIsNotSpacetimeSingularity
