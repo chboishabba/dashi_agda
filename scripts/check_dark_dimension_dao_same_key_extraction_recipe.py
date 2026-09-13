@@ -12,8 +12,10 @@ REQUIRED = {
         "angular_distance",
         "Hubble",
         "rs_drag",
+        "rs_d_drmd",
         "transverseDistanceFormula",
         "radialDistanceFormula",
+        "darkSoundHorizonDoesNotSubstituteForBAODragHorizon",
         "lrg1TransverseExtractionRequest",
         "lrg1RadialExtractionRequest",
         "recipeExecuted",
@@ -24,6 +26,7 @@ REQUIRED = {
     "DASHI/Empirical/DarkDimensionSameKeyPredictionDebtExact.agda": [
         "import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe",
         "daoExtractionRecipeLocatedButExecutionStillOpen",
+        "input/DRMD.ini",
     ],
     ".github/workflows/gr-quantum-empirical-validation.yml": [
         "python scripts/check_dark_dimension_dao_same_key_extraction_recipe.py",
