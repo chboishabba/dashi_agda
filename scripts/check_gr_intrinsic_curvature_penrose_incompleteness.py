@@ -2,8 +2,8 @@
 """Focused static contract for intrinsic-GR interpretation and Penrose incompleteness.
 
 This is intentionally structural: it verifies that the repo contains a thin
-interpretation owner and a theorem-boundary owner, with the expected WrongType
-firewalls, and that both are exported through the existing focused physics
+interpretation owner, a theorem-boundary owner, and a focused Agda regression,
+with the expected WrongType firewalls exported through the existing physics
 aggregate. It does not certify the continuum theorem itself.
 """
 
@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 INTRINSIC = ROOT / "DASHI/Physics/Gravity/IntrinsicSpacetimeCurvatureInterpretationExact.agda"
 PENROSE = ROOT / "DASHI/Physics/Gravity/Penrose1965NullGeodesicIncompletenessExact.agda"
+REGRESSION = ROOT / "DASHI/Physics/Gravity/IntrinsicPenroseInterpretationRegression.agda"
 AGGREGATE = ROOT / "DASHI/Physics/PhysicsKernelClosure.agda"
 
 
@@ -56,10 +57,22 @@ require(
 )
 
 require(
+    REGRESSION,
+    [
+        "rubberSheetFirewallRegression",
+        "temporalPhraseFirewallRegression",
+        "incompletenessPointFirewallRegression",
+        "curvatureDivergenceFirewallRegression",
+        "continuumPromotionStillClosedRegression",
+    ],
+)
+
+require(
     AGGREGATE,
     [
         "IntrinsicSpacetimeCurvatureInterpretationExact",
         "Penrose1965NullGeodesicIncompletenessExact",
+        "IntrinsicPenroseInterpretationRegression",
     ],
 )
 
