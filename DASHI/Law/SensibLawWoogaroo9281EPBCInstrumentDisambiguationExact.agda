@@ -13,20 +13,6 @@ import DASHI.Law.SensibLawSpringfieldFirstNineApprovalGasEndpointBridgeExact as 
 import DASHI.Law.SensibLawWoogaroo9281FederalPrestartGateExact as Prestart
 import DASHI.Law.SensibLawWoogaroo9281SourceDerivedSpatialOverlapExact as P3
 
-------------------------------------------------------------------------
--- 9281/2024/OW: COMMONWEALTH INSTRUMENT DISAMBIGUATION
---
--- Highest-alpha question:
---   which literal Commonwealth instrument was supplied to Ipswich City
---   Council to discharge negotiated condition 6(a) for the proposed 9281
---   clearing works?
---
--- This owner deliberately separates the existence of older Springfield EPBC
--- approvals from same-action payment for 9281.  Acquisition may snowball out
--- of dependency order; conclusion payment may not skip source manifestation,
--- instrument identity, action identity or geometry.
-------------------------------------------------------------------------
-
 firstNine2016ReferralDecision : Source.AttributedSource
 firstNine2016ReferralDecision = Source.mkNoDOISource
   "Australian Government Department of the Environment"
@@ -48,11 +34,6 @@ firstNine2016VariationDecision = Source.mkNoDOISource
   Source.governmentSource
   "Primary Commonwealth variation manifestation: the varied First Nine action uses two sites east of Brookwater. The associated request described a 47.25 ha revised referral area comprising the original 40.8 ha footprint plus a 6.45 ha disposal area. This record is an action-boundary coordinate, not a 9281 authorisation receipt."
   Source.publicAttribution
-
-------------------------------------------------------------------------
--- Existing final approval is reused from the existing First Nine owner rather
--- than minting a duplicate attribution object.
-------------------------------------------------------------------------
 
 firstNine2016FinalApprovalReceipt : Source.AttributedSource
 firstNine2016FinalApprovalReceipt = FirstNine.firstNineFinalApproval
@@ -84,13 +65,6 @@ firstNineApprovalIsOperativeButDifferentAction = existing-federal-instrument
   false
   false
 
-------------------------------------------------------------------------
--- The current 2019/8575 manifestation remains a separate controlled action.
--- The July 2026 s95B notice records Cherish Enterprises Pty Ltd as seeking
--- approval for EPBC 2019/8575 after the preliminary-documentation comment
--- process.  That notice is not itself a Part 9 approval instrument.
-------------------------------------------------------------------------
-
 springfield8575FinalPDNotice : Source.AttributedSource
 springfield8575FinalPDNotice = Source.mkNoDOISource
   "National Environmental Protection Agency / Australian Government"
@@ -101,10 +75,6 @@ springfield8575FinalPDNotice = Source.mkNoDOISource
   Source.governmentSource
   "Primary Commonwealth notice: Cherish Enterprises Pty Ltd is seeking approval for the Springfield Residential Development; the action is a controlled action assessed by preliminary documentation. The notice records the closed public-comment process and publication of final preliminary documentation, but is not itself a Part 9 approval instrument."
   Source.publicAttribution
-
-------------------------------------------------------------------------
--- WrongType / no-skip firewalls.
-------------------------------------------------------------------------
 
 data EPBC2016ApprovalPays9281Condition6aWithoutSameAction : Set where
 data EPBC2016ApprovalPays8575Authorisation : Set where
@@ -125,10 +95,6 @@ genericSpringfieldApprovalDoesNotIdentifyCondition6aInstrument ()
 
 finalPDNoticeDoesNotEqualPart9Approval : FinalPDNoticeEqualsPart9Approval → ⊥
 finalPDNoticeDoesNotEqualPart9Approval ()
-
-------------------------------------------------------------------------
--- Candidate-instrument ledger.
-------------------------------------------------------------------------
 
 data InstrumentCandidateStatus : Set where
   primaryInstrumentPaid : InstrumentCandidateStatus
@@ -196,12 +162,6 @@ condition6aCandidateOrder =
   firstNine2016Candidate ∷
   springfield8575Candidate ∷
   []
-
-------------------------------------------------------------------------
--- Pareto: do not spend a paid historical approval as though it answers the
--- present condition-6(a) question.  The literal Council satisfaction record is
--- the shortest path to the preservation cutset.
-------------------------------------------------------------------------
 
 record InstrumentDisambiguationPareto : Set where
   constructor instrument-disambiguation-pareto
