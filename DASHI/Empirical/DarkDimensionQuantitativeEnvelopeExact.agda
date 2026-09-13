@@ -188,6 +188,44 @@ sourceEnvelopeDoesNotPayDASHIDerivedPrediction =
     Prediction.canonicalPredictionBoundary
 
 ------------------------------------------------------------------------
+-- SI -> GR/quantum prediction-quantity residual.
+--
+-- Canonical SI has a signed DecimalScale, while the currently unused
+-- Prediction.ScaledQuantity surface stores a Nat `decimalExponent` and a
+-- separate empirical PhysicalUnit.  No repository owner currently states the
+-- sign/conversion convention between those carriers.  We therefore retain the
+-- missing weld explicitly rather than manufacture a `ScaledQuantity` value.
+------------------------------------------------------------------------
+
+record PredictionQuantityAdapterResidual : Set where
+  constructor predictionQuantityAdapterResidual
+  field
+    canonicalSIQuantityAvailable : Bool
+    predictionScaledQuantitySurfaceAvailable : Bool
+    signedScaleConventionWelded : Bool
+    physicalUnitCarrierWelded : Bool
+    adapterScope : String
+
+open PredictionQuantityAdapterResidual public
+
+canonicalPredictionQuantityAdapterResidual : PredictionQuantityAdapterResidual
+canonicalPredictionQuantityAdapterResidual =
+  predictionQuantityAdapterResidual
+    true
+    true
+    false
+    false
+    "the 1-30 micrometre interval is typed in DASHI.Physics.Units.SI; conversion into GRQuantumPredictionProtocol.ScaledQuantity remains unpaid until the decimal-exponent sign and PhysicalUnit correspondence are explicitly owned"
+
+signedScaleConventionStillOpen :
+  signedScaleConventionWelded canonicalPredictionQuantityAdapterResidual ≡ false
+signedScaleConventionStillOpen = refl
+
+physicalUnitWeldStillOpen :
+  physicalUnitCarrierWelded canonicalPredictionQuantityAdapterResidual ≡ false
+physicalUnitWeldStillOpen = refl
+
+------------------------------------------------------------------------
 -- Source coordinates retained explicitly.  Citation imports neither proof nor
 -- framework authority through AttributedSourceCore.
 ------------------------------------------------------------------------
