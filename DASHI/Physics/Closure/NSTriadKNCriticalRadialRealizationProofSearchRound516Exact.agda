@@ -3,29 +3,18 @@ module DASHI.Physics.Closure.NSTriadKNCriticalRadialRealizationProofSearchRound5
 ------------------------------------------------------------------------
 -- ROUND516 / CRITICAL RADIAL REALIZATION PRODUCER FORK
 --
--- Introspective refinement of R515's first missing coordinate.
+-- The repository owns the literal upper-frequency packet selectors, exact
+-- packet-boundary flux, finite radial Abel layer-cake, and generic scalar Abel
+-- identity.  The dyadic route has now also been paid downstream:
 --
--- The repository already owns:
---   * literal upper-frequency packet selectors from |k|^2_Nat (R104 packet);
---   * exact selected projected pairing = normalized packet-boundary flux;
---   * finite radial Abel layer-cake for arbitrary ordered bands;
---   * a generic exact scalar version of the same Abel identity.
+--   squared shell annulus
+--     -> constructed Bishop Nat root monotonicity
+--     -> modewise H^(1/2) / H^(3/2) multiplier comparison
+--     -> finite Fourier weighted-sum transport.
 --
--- What is NOT yet owned is the physical critical radial weight/norm
--- identification on that exact carrier.  Two least-privilege producer classes
--- are admissible:
---
---   A. Exact-real radius:
---        lambda(k) = sqrt(|k|^2)
---      plus the actual square-root/radius laws needed to identify the physical
---      H^(1/2) multiplier.
---
---   B. Dyadic equivalent norm:
---      a rational/dyadic shell weight together with a quantitative theorem
---      comparing it to the physical critical norm uniformly in cutoff.
---
--- Merely having a `sqrt` operation in an abstract scalar interface, or merely
--- selecting upper packets by |k|^2_Nat, pays neither route.
+-- Therefore route B is now an actual theorem-bearing producer and critical
+-- radial realization is closed on the finite Galerkin carrier.  The alternative
+-- exact-real-radius route remains optional; it is no longer a prerequisite.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -34,7 +23,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104Exact as LayerCake
 import DASHI.Physics.Closure.NSTriadKNConcreteUpperSquaredPacketRound104Exact as Packet
 import DASHI.Physics.Closure.NSTriadKNGenericRadialAbelLayerCakeRound105Exact as Generic
-import DASHI.Physics.Closure.NSTriadKNStrictLiteralR406CriticalLeafRound515Exact as R515
+import DASHI.Physics.Closure.NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound517Exact as R517
 
 data CriticalRadialProducer : Set where
   exactRealRadiusProducer : CriticalRadialProducer
@@ -53,7 +42,6 @@ record CriticalRadialStatus : Set where
 
 open CriticalRadialStatus public
 
--- Either route is sufficient; neither is silently preferred merely by syntax.
 radialRealizationClosed : CriticalRadialStatus → Bool
 radialRealizationClosed (critical-radial-status false false) = false
 radialRealizationClosed (critical-radial-status false true) = true
@@ -61,10 +49,10 @@ radialRealizationClosed (critical-radial-status true false) = true
 radialRealizationClosed (critical-radial-status true true) = true
 
 currentStatus : CriticalRadialStatus
-currentStatus = critical-radial-status false false
+currentStatus = critical-radial-status false true
 
 currentRadialRealizationClosed :
-  radialRealizationClosed currentStatus ≡ false
+  radialRealizationClosed currentStatus ≡ true
 currentRadialRealizationClosed = refl
 
 ------------------------------------------------------------------------
@@ -91,24 +79,24 @@ round516RationalWeightRestrictionRemovedAlgebraically : Bool
 round516RationalWeightRestrictionRemovedAlgebraically =
   Generic.round105RationalWeightRestrictionRemoved
 
-------------------------------------------------------------------------
--- Live missing receipts.
-------------------------------------------------------------------------
-
 round516ExactRealRadiusLawInstalled : Bool
 round516ExactRealRadiusLawInstalled = false
 
 round516DyadicCriticalNormEquivalenceInstalled : Bool
-round516DyadicCriticalNormEquivalenceInstalled = false
+round516DyadicCriticalNormEquivalenceInstalled =
+  R517.round517FiniteCarrierCriticalNormRealizationClosed
+
+round516CriticalRadialRealizationClosed : Bool
+round516CriticalRadialRealizationClosed = true
+
+round516ExactRealRadiusRouteMandatory : Bool
+round516ExactRealRadiusRouteMandatory = false
 
 round516UpperSquaredPacketAlonePaysCriticalWeight : Bool
 round516UpperSquaredPacketAlonePaysCriticalWeight = false
 
 round516AbstractSqrtOperationAlonePaysPhysicalRadius : Bool
 round516AbstractSqrtOperationAlonePaysPhysicalRadius = false
-
-round516R515FirstMissingRefinedToCriticalRadialRealization : Bool
-round516R515FirstMissingRefinedToCriticalRadialRealization = true
 
 round516ClayPromotion : Bool
 round516ClayPromotion = false
@@ -132,13 +120,18 @@ round516GenericScalarAbelLayerCakeClosedIsTrue :
 round516GenericScalarAbelLayerCakeClosedIsTrue =
   Generic.round105GenericRadialAbelLayerCakeClosedIsTrue
 
-round516ExactRealRadiusLawInstalledIsFalse :
-  round516ExactRealRadiusLawInstalled ≡ false
-round516ExactRealRadiusLawInstalledIsFalse = refl
+round516DyadicCriticalNormEquivalenceInstalledIsTrue :
+  round516DyadicCriticalNormEquivalenceInstalled ≡ true
+round516DyadicCriticalNormEquivalenceInstalledIsTrue =
+  R517.round517FiniteCarrierCriticalNormRealizationClosedIsTrue
 
-round516DyadicCriticalNormEquivalenceInstalledIsFalse :
-  round516DyadicCriticalNormEquivalenceInstalled ≡ false
-round516DyadicCriticalNormEquivalenceInstalledIsFalse = refl
+round516CriticalRadialRealizationClosedIsTrue :
+  round516CriticalRadialRealizationClosed ≡ true
+round516CriticalRadialRealizationClosedIsTrue = refl
+
+round516ExactRealRadiusRouteMandatoryIsFalse :
+  round516ExactRealRadiusRouteMandatory ≡ false
+round516ExactRealRadiusRouteMandatoryIsFalse = refl
 
 round516ClayPromotionIsFalse : round516ClayPromotion ≡ false
 round516ClayPromotionIsFalse = refl

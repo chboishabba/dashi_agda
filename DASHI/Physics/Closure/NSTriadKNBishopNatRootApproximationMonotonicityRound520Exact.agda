@@ -3,25 +3,24 @@ module DASHI.Physics.Closure.NSTriadKNBishopNatRootApproximationMonotonicityRoun
 ------------------------------------------------------------------------
 -- ROUND520 / FINITE MONOTONICITY OF CANONICAL NAT-ROOT APPROXIMANTS
 --
--- R519 isolated monotonicity of the constructed Bishop Nat root as the first
--- missing scalar-order coordinate.  All substantive number-theoretic content
--- can already be paid before entering the Bishop-real order:
+-- R519 originally isolated monotonicity of the constructed Bishop Nat root as
+-- the first missing scalar-order coordinate.  The finite arithmetic below
+-- showed all substantive number-theoretic content before entering Bishop-real
+-- order:
 --
 --   left <= right
 --     => floorSqrt(left) <= floorSqrt(right)
 --     => floorSqrt(left*n^2) <= floorSqrt(right*n^2)
---     => a(left,n) <= a(right,n)
+--     => a(left,n) <= a(right,n).
 --
--- for every positive precision n.  The first implication follows only from
--- the finite floor-root maximality theorem: the left root is an admissible
--- candidate for the right target.
---
--- Thus after this round, the remaining R519 step is purely the standard
--- realization theorem that pointwise-ordered regular rational approximants
--- induce the corresponding Bishop-real order.
+-- The domain-neutral Foundations owner now also transports this pointwise
+-- rational order into the pinned Bishop-real order, and R519 consumes it.
+-- Therefore the former realization residual is closed.  The next standard
+-- analysis seam is finite Fourier-sum transport of the modewise multiplier
+-- comparison, not scalar square-root monotonicity.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_≤_; NonZero)
@@ -107,7 +106,10 @@ round520BishopRealRootMonotonicityClosed =
   R519.round519CanonicalNatRootMonotonicityClosed
 
 round520RemainingCoordinateIsApproximationOrderRealization : Bool
-round520RemainingCoordinateIsApproximationOrderRealization = true
+round520RemainingCoordinateIsApproximationOrderRealization = false
+
+round520RemainingCoordinateIsFiniteFourierSumTransport : Bool
+round520RemainingCoordinateIsFiniteFourierSumTransport = true
 
 round520ClayPromotion : Bool
 round520ClayPromotion = false
@@ -120,10 +122,14 @@ round520CanonicalRationalApproximationMonotonicityClosedIsTrue :
   round520CanonicalRationalApproximationMonotonicityClosed ≡ true
 round520CanonicalRationalApproximationMonotonicityClosedIsTrue = refl
 
-round520BishopRealRootMonotonicityClosedIsFalse :
-  round520BishopRealRootMonotonicityClosed ≡ false
-round520BishopRealRootMonotonicityClosedIsFalse =
-  R519.round519CanonicalNatRootMonotonicityClosedIsFalse
+round520BishopRealRootMonotonicityClosedIsTrue :
+  round520BishopRealRootMonotonicityClosed ≡ true
+round520BishopRealRootMonotonicityClosedIsTrue =
+  R519.round519CanonicalNatRootMonotonicityClosedIsTrue
+
+round520RemainingCoordinateIsApproximationOrderRealizationIsFalse :
+  round520RemainingCoordinateIsApproximationOrderRealization ≡ false
+round520RemainingCoordinateIsApproximationOrderRealizationIsFalse = refl
 
 round520ClayPromotionIsFalse : round520ClayPromotion ≡ false
 round520ClayPromotionIsFalse = refl
