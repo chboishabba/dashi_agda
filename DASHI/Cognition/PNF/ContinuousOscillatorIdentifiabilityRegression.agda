@@ -1,0 +1,27 @@
+module DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityRegression where
+
+import DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityReceipt as Ident
+
+waveformQueryExists : Ident.OscillatorIdentifiabilityQuery
+waveformQueryExists = Ident.waveformQuery
+
+frequencyQueryExists : Ident.OscillatorIdentifiabilityQuery
+frequencyQueryExists = Ident.frequencyQuery
+
+amplitudeQueryExists : Ident.OscillatorIdentifiabilityQuery
+amplitudeQueryExists = Ident.amplitudeQuery
+
+phaseQueryExists : Ident.OscillatorIdentifiabilityQuery
+phaseQueryExists = Ident.phaseQuery
+
+hiddenStateQueryExists : Ident.OscillatorIdentifiabilityQuery
+hiddenStateQueryExists = Ident.hiddenStateQuery
+
+parentChainRetained : Ident.OscillatorIdentifiabilityParentChain
+parentChainRetained = Ident.canonicalOscillatorIdentifiabilityParentChain
+
+promotionBoundaryRetained : Ident.OscillatorIdentifiabilityPromotionBoundary
+promotionBoundaryRetained = Ident.canonicalOscillatorIdentifiabilityPromotionBoundary
+
+sourceSnowballRetained : Ident.OscillatorIdentifiabilitySourceBoundary
+sourceSnowballRetained = Ident.canonicalOscillatorIdentifiabilitySourceBoundary
