@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as AxisJoin
 import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 import DASHI.Empirical.DarkDimensionEmpiricalDiscriminationExact as Discrimination
@@ -19,6 +20,8 @@ import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDi
 --     competing-model requirements;
 --   * RequiredObserverAxisJoinAdequacyExact owns the product law for
 --     transverse observer axes;
+--   * IntersectionalNonFactorability owns the proof that one transverse axis
+--     cannot recover another once two states collide on the first axis;
 --   * DarkDimensionEmpiricalDiscriminationExact owns the retrospective
 --     DESI-era fit/comparator boundary.
 --
@@ -79,6 +82,90 @@ jointAxisRetainsShortRangeGravity :
   AxisJoin.RetainsAxis jointProspectiveAxis shortRangeGravityAxis
 jointAxisRetainsShortRangeGravity =
   AxisJoin.jointRetainsRight fullShapeCosmologyAxis shortRangeGravityAxis
+
+------------------------------------------------------------------------
+-- Transverse nonfactorability.
+--
+-- These finite witnesses do not assert that any particular future observation
+-- will occur.  They establish the information-geometry fact needed by the
+-- prospective design: fixing one axis does not determine the other axis.
+------------------------------------------------------------------------
+
+sameCosmologyGravitySupported : ProspectiveObservationState
+sameCosmologyGravitySupported =
+  prospectiveObservationState
+    fullShapeUnobserved
+    micronScaleDeviationSupported
+
+sameCosmologyGravityDisfavoured : ProspectiveObservationState
+sameCosmologyGravityDisfavoured =
+  prospectiveObservationState
+    fullShapeUnobserved
+    micronScaleDeviationDisfavoured
+
+sameCosmologyDifferentGravityWitness :
+  NonFactor.NonFactorabilityWitness
+    fullShapeCosmologyAxis
+    shortRangeGravityAxis
+sameCosmologyDifferentGravityWitness =
+  NonFactor.nonFactorabilityWitness
+    sameCosmologyGravitySupported
+    sameCosmologyGravityDisfavoured
+    refl
+    (λ ())
+
+cosmologyCannotRecoverShortRangeGravity :
+  NonFactor.FactorsThrough
+    fullShapeCosmologyAxis
+    shortRangeGravityAxis →
+  ⊥
+cosmologyCannotRecoverShortRangeGravity =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    sameCosmologyDifferentGravityWitness
+
+sameGravityCosmologySupported : ProspectiveObservationState
+sameGravityCosmologySupported =
+  prospectiveObservationState
+    nearBAODAOFeatureSupported
+    shortRangeGravityUnobserved
+
+sameGravityCosmologyDisfavoured : ProspectiveObservationState
+sameGravityCosmologyDisfavoured =
+  prospectiveObservationState
+    nearBAODAOFeatureDisfavoured
+    shortRangeGravityUnobserved
+
+sameGravityDifferentCosmologyWitness :
+  NonFactor.NonFactorabilityWitness
+    shortRangeGravityAxis
+    fullShapeCosmologyAxis
+sameGravityDifferentCosmologyWitness =
+  NonFactor.nonFactorabilityWitness
+    sameGravityCosmologySupported
+    sameGravityCosmologyDisfavoured
+    refl
+    (λ ())
+
+shortRangeGravityCannotRecoverCosmology :
+  NonFactor.FactorsThrough
+    shortRangeGravityAxis
+    fullShapeCosmologyAxis →
+  ⊥
+shortRangeGravityCannotRecoverCosmology =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    sameGravityDifferentCosmologyWitness
+
+cosmologyRechartCannotRecoverShortRangeGravity :
+  ∀ {Recharted : Set} →
+  (rechart : FullShapeCosmologyState → Recharted) →
+  NonFactor.FactorsThrough
+    (λ state → rechart (fullShapeCosmologyAxis state))
+    shortRangeGravityAxis →
+  ⊥
+cosmologyRechartCannotRecoverShortRangeGravity rechart =
+  NonFactor.rechartingCannotRecoverErasedPhenomenon
+    rechart
+    sameCosmologyDifferentGravityWitness
 
 ------------------------------------------------------------------------
 -- Source-bound future targets.
