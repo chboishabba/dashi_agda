@@ -13,26 +13,26 @@ import DASHI.Core.AttributedSourceCore as Attribution
 ------------------------------------------------------------------------
 -- EXPERT INFERENCE ANCESTRY
 --
--- Thin child of the repo-wide source-genealogy / dependency idea:
+-- Thin child of the repo-wide source-genealogy/dependency programme:
 -- distinct documents and agreement do not imply independent generation paths.
 -- For expert evidence, an additional coordinate is whether a later inference
 -- was formed independently, after exposure to an earlier opinion, or through an
 -- unresolved ancestry path.
 --
 -- This owner deliberately does NOT import the Wikimedia parent ontology.  The
--- parent relationship is recorded below as structural precedent only.  The law
--- layer reuses generic query adequacy, observer refinement and attributed-source
--- machinery directly.
+-- parent chain is recorded below as structural precedent only.  Law reuses the
+-- generic query-adequacy, observer-refinement and attributed-source cores.
 --
--- Crucial two-sided correction:
+-- Two-sided correction:
 --   prior-opinion exposure != proved causal dependence;
---   separate reports / agreement != proved independent inference.
+--   separate reports/agreement != proved independent inference.
 ------------------------------------------------------------------------
 
 record ParentStructuralPrecedent : Set where
   constructor parentStructuralPrecedentRecord
   field
-    parentOwner : String
+    immediateParentOwner : String
+    upstreamDependencyOwner : String
     parentRole : String
     sameHistoricalDoctrineClaimed : Bool
     parentCitationCreatesLegalAuthority : Bool
@@ -42,8 +42,9 @@ open ParentStructuralPrecedent public
 parentStructuralPrecedent : ParentStructuralPrecedent
 parentStructuralPrecedent =
   parentStructuralPrecedentRecord
+    "DASHI.Wikimedia.IbrahimSnowballSourceGenealogyIndependenceEvidenceSynthesisBidiExact"
     "DASHI.Wikimedia.IbrahimSnowballMemoryRepetitionSourceDependencyConsensusBidiExact"
-    "structural precedent: repeated/agreed outputs do not recover source independence; expert inference ancestry is a downstream consumer-specific specialization"
+    "structural precedent only: multiplicity/agreement/citation surfaces do not recover source independence; expert inference ancestry is a consumer-specific child specialization"
     false
     false
 
@@ -99,8 +100,8 @@ record PriorOpinionExposureReceipt : Set where
     disclosure : ExposureDisclosure
 
 ------------------------------------------------------------------------
--- Exact finite witness 1: nominally separate agreeing reports cannot recover
--- independent inference ancestry.
+-- Witness 1: nominally separate agreeing reports cannot recover independent
+-- inference ancestry.
 ------------------------------------------------------------------------
 
 data InferenceAncestryWorld : Set where
@@ -188,9 +189,8 @@ inferenceAncestryQueryNotAdequate =
     inferenceAncestryQueryAdequacyDefect
 
 ------------------------------------------------------------------------
--- Constructive repair: retain agreement AND ancestry.  This is a strict
--- refinement for the declared two-world specimen, not a universal sufficiency
--- theorem for expert-evidence evaluation.
+-- Constructive repair: retain agreement AND ancestry.  Strict only for this
+-- declared two-world specimen, not universal expert-evidence sufficiency.
 ------------------------------------------------------------------------
 
 reportAgreementPlusInferenceAncestry :
@@ -222,8 +222,8 @@ reportAgreementPlusInferenceAncestryStrictRefinement =
     (λ ())
 
 ------------------------------------------------------------------------
--- Exact finite witness 2: observed prior-opinion exposure does not by itself
--- recover whether the earlier opinion actually influenced the later inference.
+-- Witness 2: observed prior-opinion exposure cannot recover whether the prior
+-- opinion actually influenced the later inference.
 ------------------------------------------------------------------------
 
 data ExposureInfluenceWorld : Set where
@@ -233,28 +233,70 @@ data ExposureInfluenceWorld : Set where
 data ExposureSurface : Set where
   priorOpinionReadBeforeFinalisation : ExposureSurface
 
-data InfluenceCoordinate : Set where
-  noCausalInfluenceEstablished : InfluenceCoordinate
-  causalInfluencePresent : InfluenceCoordinate
+data ExposureInfluenceQuery : Set where
+  exposureObservedQuery : ExposureInfluenceQuery
+  causalInfluenceQuery : ExposureInfluenceQuery
+
+data ExposureInfluenceAnswer : Set where
+  exposureObservedAnswer : ExposureInfluenceAnswer
+  noCausalInfluenceEstablished : ExposureInfluenceAnswer
+  causalInfluencePresent : ExposureInfluenceAnswer
 
 priorOpinionExposureSurface : ExposureInfluenceWorld → ExposureSurface
 priorOpinionExposureSurface world = priorOpinionReadBeforeFinalisation
 
-influenceCoordinate : ExposureInfluenceWorld → InfluenceCoordinate
-influenceCoordinate exposedButIndependentReasoning = noCausalInfluenceEstablished
-influenceCoordinate exposedAndInfluencedReasoning = causalInfluencePresent
+exposureInfluenceAnswer :
+  ExposureInfluenceQuery → ExposureInfluenceWorld → ExposureInfluenceAnswer
+exposureInfluenceAnswer exposureObservedQuery world = exposureObservedAnswer
+exposureInfluenceAnswer causalInfluenceQuery exposedButIndependentReasoning =
+  noCausalInfluenceEstablished
+exposureInfluenceAnswer causalInfluenceQuery exposedAndInfluencedReasoning =
+  causalInfluencePresent
 
-exposureCannotRecoverInfluence :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
+exposureInfluenceSemantics :
+  Query.QuerySemantics
+    ExposureInfluenceWorld
+    ExposureInfluenceQuery
+    ExposureInfluenceAnswer
+exposureInfluenceSemantics = Query.querySemantics exposureInfluenceAnswer
+
+exposureObservedQueryAdequate :
+  Query.AdequateFor
     priorOpinionExposureSurface
-    influenceCoordinate → ⊥
-exposureCannotRecoverInfluence =
-  DASHI.Core.IntersectionalNonFactorability.witnessRulesOutEveryFlatFactorisation
-    (DASHI.Core.IntersectionalNonFactorability.nonFactorabilityWitness
-      exposedButIndependentReasoning
-      exposedAndInfluencedReasoning
-      refl
-      (λ ()))
+    exposureInfluenceSemantics
+    exposureObservedQuery
+exposureObservedQueryAdequate =
+  Query.factorsForQuery
+    (λ surface → exposureObservedAnswer)
+    (λ world → refl)
+
+ExposureInfluenceQueryAdequacyDefect : Set₁
+ExposureInfluenceQueryAdequacyDefect =
+  Query.QueryAdequacyDefect
+    priorOpinionExposureSurface
+    exposureInfluenceSemantics
+    causalInfluenceQuery
+
+exposureInfluenceQueryAdequacyDefect : ExposureInfluenceQueryAdequacyDefect
+exposureInfluenceQueryAdequacyDefect =
+  Query.queryAdequacyDefect
+    exposedButIndependentReasoning
+    exposedAndInfluencedReasoning
+    refl
+    (λ ())
+
+ExposureInfluenceQueryAdequate : Set₁
+ExposureInfluenceQueryAdequate =
+  Query.AdequateFor
+    priorOpinionExposureSurface
+    exposureInfluenceSemantics
+    causalInfluenceQuery
+
+exposureInfluenceQueryNotAdequate :
+  ExposureInfluenceQueryAdequate → ⊥
+exposureInfluenceQueryNotAdequate =
+  Query.queryAdequacyDefectBlocksFactorisation
+    exposureInfluenceQueryAdequacyDefect
 
 ------------------------------------------------------------------------
 -- WrongType / promotion firewalls.
