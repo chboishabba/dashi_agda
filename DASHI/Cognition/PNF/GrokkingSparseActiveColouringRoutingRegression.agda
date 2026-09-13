@@ -55,3 +55,18 @@ rebaseResidualIsDischarged = refl
 
 conflictFreeStillDoesNotMeanRequirementClosed : Bridge.conflictFreeImpliesRequirementClosed ≡ false
 conflictFreeStillDoesNotMeanRequirementClosed = refl
+
+activationCorrelationAloneCannotPayConflict : Bridge.activationCorrelationAlonePaysConflict ≡ false
+activationCorrelationAloneCannotPayConflict = refl
+
+jointInterventionIsRequiredForConflictPayment : Bridge.jointInterventionRequiredForConflict ≡ true
+jointInterventionIsRequiredForConflictPayment = refl
+
+unpaidPairCannotPromoteRelation : Bridge.relationPromotionPaid Bridge.unpaidCircuitPairIntervention ≡ false
+unpaidPairCannotPromoteRelation = refl
+
+paidSyntheticConflictUsesCanonicalConflict : Bridge.proposedRelation Bridge.syntheticPaidConflictIntervention ≡ Bridge.conflict × Bridge.relationPromotionPaid Bridge.syntheticPaidConflictIntervention ≡ true
+paidSyntheticConflictUsesCanonicalConflict = refl , refl
+
+conflictReceiptDoesNotClaimRealGrokkingMeasurement : Bridge.syntheticConflictIsEmpiricalGrokkingResult ≡ false
+conflictReceiptDoesNotClaimRealGrokkingMeasurement = refl
