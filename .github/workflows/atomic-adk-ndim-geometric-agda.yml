@@ -1,0 +1,28 @@
+name: AdK NDim geometric residual Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseNDimGeometricResidual*.agda'
+      - 'DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalExact.agda'
+      - 'DASHI/ComputerScience/FlyStructureFunctionNDimFibreExact.agda'
+      - 'DASHI/Chemistry/Everything.agda'
+      - '.github/workflows/atomic-adk-ndim-geometric-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck source-paid NDim residual and validation root
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseNDimGeometricResidualExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseNDimGeometricResidualValidation.agda
+          nix develop .# --command agda -i . DASHI/Chemistry/Everything.agda
