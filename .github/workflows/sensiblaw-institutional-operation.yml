@@ -7,6 +7,8 @@ on:
       - 'DASHI/Law/SensibLawOperationalLegalityRegression.agda'
       - 'DASHI/Law/SensibLawInstitutionalResponsibilityExact.agda'
       - 'DASHI/Law/SensibLawInstitutionalResponsibilityRegression.agda'
+      - 'DASHI/Law/SensibLawEpistemicConsequenceBoundaryExact.agda'
+      - 'DASHI/Law/SensibLawEpistemicConsequenceBoundaryRegression.agda'
       - 'DASHI/Law/SensibLawInstitutionalOperationEverything.agda'
       - 'DASHI/Law/SensibLawInstitutionalOperationEverythingRegression.agda'
       - 'DASHI/Core/QueryIndexedProjectionAdequacyExact.agda'
@@ -18,6 +20,8 @@ on:
       - 'DASHI/Law/SensibLawOperationalLegalityRegression.agda'
       - 'DASHI/Law/SensibLawInstitutionalResponsibilityExact.agda'
       - 'DASHI/Law/SensibLawInstitutionalResponsibilityRegression.agda'
+      - 'DASHI/Law/SensibLawEpistemicConsequenceBoundaryExact.agda'
+      - 'DASHI/Law/SensibLawEpistemicConsequenceBoundaryRegression.agda'
       - 'DASHI/Law/SensibLawInstitutionalOperationEverything.agda'
       - 'DASHI/Law/SensibLawInstitutionalOperationEverythingRegression.agda'
       - 'DASHI/Core/QueryIndexedProjectionAdequacyExact.agda'
@@ -50,6 +54,8 @@ jobs:
             DASHI/Law/SensibLawOperationalLegalityRegression.agda
             DASHI/Law/SensibLawInstitutionalResponsibilityExact.agda
             DASHI/Law/SensibLawInstitutionalResponsibilityRegression.agda
+            DASHI/Law/SensibLawEpistemicConsequenceBoundaryExact.agda
+            DASHI/Law/SensibLawEpistemicConsequenceBoundaryRegression.agda
             DASHI/Law/SensibLawInstitutionalOperationEverything.agda
             DASHI/Law/SensibLawInstitutionalOperationEverythingRegression.agda
           )
@@ -76,6 +82,7 @@ jobs:
             targets=(
               DASHI/Law/SensibLawOperationalLegalityRegression.agda
               DASHI/Law/SensibLawInstitutionalResponsibilityRegression.agda
+              DASHI/Law/SensibLawEpistemicConsequenceBoundaryRegression.agda
               DASHI/Law/SensibLawInstitutionalOperationEverythingRegression.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
