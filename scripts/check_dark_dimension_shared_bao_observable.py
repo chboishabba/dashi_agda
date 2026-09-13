@@ -21,6 +21,7 @@ REQUIRED = {
     ],
     "DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda": [
         "module DASHI.Empirical.DarkDimensionSharedBAOProspectiveWeldExact where",
+        "open import Agda.Builtin.Bool using (false; true)",
         "sharedBAOIdentityPaidButNumericalSeparationOpen",
         "sharedBAOStillDoesNotLockProspectivePacket",
         "DarkDimensionSharedBAOObservableExact",
