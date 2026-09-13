@@ -7,6 +7,9 @@ import DASHI.Applications.CounterUASOpenSetRFExact as OpenRF
 import DASHI.Applications.CounterUASSOTASourceAtlasExact as Sources
 import DASHI.Applications.CounterUASOpenSetRFSourceAtlasExact as OpenRFSources
 import DASHI.Applications.CounterUASOperationalSourceAtlasExact as OperationalSources
+import DASHI.Applications.CounterUASSensibLawAuthorityBridgeExact as LegalBridge
+import DASHI.Law.SensibLawInternationalInstrumentLifecycleExact as Lifecycle
+import DASHI.Law.SensibLawCCWLAWS2026Exact as CCW2026
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 
 ------------------------------------------------------------------------
@@ -64,6 +67,24 @@ record CounterUASDroneShieldRegression : Set₁ where
       OperationalSources.counterUASOperationalSourceAtlasCreatesAuthority ≡ false
     rfAI3ClaimSnapshotNonPromoting :
       OperationalSources.rfAI3SnapshotCreatesAuthority ≡ false
+    consensusTextHasBindingAdequacyDefect :
+      Adequacy.QueryAdequacyDefect
+        Lifecycle.consensusOnlyProjection
+        Lifecycle.instrumentSemantics
+        Lifecycle.bindingEffectQuery
+    joinedLifecycleDeterminesBinding :
+      Adequacy.AdequateFor
+        Lifecycle.consensusAndInstitutionalProjection
+        Lifecycle.instrumentSemantics
+        Lifecycle.bindingEffectQuery
+    septemberInstrumentNatureStillUnresolved :
+      CCW2026.september2026InstrumentNature ≡ Lifecycle.instrumentNatureUnresolved
+    ccwOfficialSourceAtlasNonPromoting :
+      CCW2026.ccwLAWS2026SourceAtlasCreatesAuthority ≡ false
+    domesticAuthorityDoesNotSetInternationalApplicability :
+      LegalBridge.domesticMitigationAuthorityDoesNotCreateInternationalLawApplicability ≡ true
+    technicalAutonomyDoesNotCreateLawfulEngagement :
+      LegalBridge.technicalAutonomyDoesNotCreateLawfulAutonomousEngagement ≡ true
 
 canonicalCounterUASDroneShieldRegression : CounterUASDroneShieldRegression
 canonicalCounterUASDroneShieldRegression =
@@ -78,3 +99,9 @@ canonicalCounterUASDroneShieldRegression =
     OpenRFSources.counterUASOpenSetRFSourceAtlasCreatesAuthorityIsFalse
     OperationalSources.counterUASOperationalSourceAtlasCreatesAuthorityIsFalse
     OperationalSources.rfAI3SnapshotCreatesAuthorityIsFalse
+    Lifecycle.consensusOnlyBindingAdequacyDefect
+    Lifecycle.consensusAndInstitutionalDetermineBinding
+    refl
+    CCW2026.ccwLAWS2026SourceAtlasCreatesAuthorityIsFalse
+    refl
+    refl
