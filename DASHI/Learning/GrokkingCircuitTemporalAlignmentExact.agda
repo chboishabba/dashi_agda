@@ -29,7 +29,7 @@ record GrokkingCircuitMechanismObservation : Set where
     relationThresholdKey : Nat
     circuitSystem : Circuit.FiniteClosedCompatibleSystem
     activeSupport : Nat
-    heldOutOutcomeUsedForSelection : Bool
+    circuitHeldOutOutcomeUsedForSelection : Bool
 open GrokkingCircuitMechanismObservation public
 
 record GrokkingCircuitTrajectoryReceipt : Set where
