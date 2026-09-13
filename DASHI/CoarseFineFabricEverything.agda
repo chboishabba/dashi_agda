@@ -2,9 +2,6 @@ module DASHI.CoarseFineFabricEverything where
 
 ------------------------------------------------------------------------
 -- Opt-in coarse/fine fabric calculus rollup.
---
--- Core remains domain-neutral; this aggregate is the explicit cross-domain
--- garden surface for the first projection-loss tranche.
 ------------------------------------------------------------------------
 
 import DASHI.Core.CoarseFineFabricCalculusExact
@@ -16,6 +13,10 @@ import DASHI.Core.NDimProjectionLossAdapterExact
 
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
 import DASHI.Biology.JCoarseFineFabricCalculusAdapterExact
+
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact
+import DASHI.Foundations.Base369NDimParetoChartExact
+import DASHI.Foundations.Base369CoarseFineFabricAdapterExact
 
 import DASHI.Physics.ShiftWaveRefinementSeam
 import DASHI.Physics.WaveProjectionLossAdapterExact
