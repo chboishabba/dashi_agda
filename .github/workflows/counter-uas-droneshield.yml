@@ -7,9 +7,14 @@ on:
       - 'DASHI/Applications/CounterUASDroneShieldExact.agda'
       - 'DASHI/Applications/CounterUASDroneShieldRegression.agda'
       - 'DASHI/Applications/CounterUASOpenSetRFExact.agda'
+      - 'DASHI/Applications/CounterUASOpenWorldBridgeExact.agda'
+      - 'DASHI/Applications/CounterUASOpenWorldBridgeRegression.agda'
       - 'DASHI/Applications/CounterUASSOTASourceAtlasExact.agda'
       - 'DASHI/Applications/CounterUASOpenSetRFSourceAtlasExact.agda'
       - 'DASHI/Applications/CounterUASOperationalSourceAtlasExact.agda'
+      - 'DASHI/Applications/OpenClosedWorldRecognitionExact.agda'
+      - 'DASHI/Applications/OpenClosedWorldRecognitionRegression.agda'
+      - 'DASHI/Applications/OpenClosedWorldRecognitionSourceAtlasExact.agda'
       - '.github/workflows/counter-uas-droneshield.yml'
   workflow_dispatch:
 
@@ -34,7 +39,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: counter-uas-droneshield-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-      - name: Check counter-UAS regression with Agda 2.9
+      - name: Check counter-UAS and open-world regressions with Agda 2.9
         id: focused
         shell: bash
         run: |
@@ -50,11 +55,13 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-counter-uas-droneshield.log"
             export AGDA_JOBS=2
             scripts/run_agda29_parallel_check.sh \
-              DASHI/Applications/CounterUASDroneShieldRegression.agda
+              DASHI/Applications/CounterUASDroneShieldRegression.agda \
+              DASHI/Applications/OpenClosedWorldRecognitionRegression.agda \
+              DASHI/Applications/CounterUASOpenWorldBridgeRegression.agda
           ) > counter-uas-droneshield-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 320 counter-uas-droneshield-check.log
+          tail -n 400 counter-uas-droneshield-check.log
           exit 0
       - name: Upload focused Agda log
         if: always()
