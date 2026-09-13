@@ -15,11 +15,15 @@ REQUIRED = {
         "record PythonDemoImplementationDebt",
         "canonicalPythonDemoImplementationDebt",
         "primaryImplementationStillUnpaid",
+        "adjacentDemoAssistanceDoesNotTransferToPythonRun",
+        "stronglyCorroboratedIdentityStillIsNotSameObjectReceipt",
         "connectomeAdvantageRequiresNullComparison",
     ],
     "DASHI/Biology/DrosophilaSymbolicInterfaceLearningRegression.agda": [
         "canonicalDrosophilaSymbolicInterfaceRegression",
         "implementationRecoveryStillOpen",
+        "adjacentAssistanceStillDoesNotTransfer",
+        "sameObjectIdentityStillUnpaid",
     ],
     "DASHI/Biology/AnimalexicEverything.agda": [
         "DrosophilaSymbolicInterfaceLearningExact",
