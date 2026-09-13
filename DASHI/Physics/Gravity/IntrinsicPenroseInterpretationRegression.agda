@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Gravity.IntrinsicSpacetimeCurvatureInterpretationExact as Intrinsic
 import DASHI.Physics.Gravity.CausalFutureHorismosNullGeneratorExact as Causal
 import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
+import DASHI.Physics.Gravity.PenroseHorismosCompactnessPaymentExact as Compactness
 import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Global
 import DASHI.Physics.Gravity.Penrose1965NullGeodesicIncompletenessExact as Penrose
 
@@ -48,6 +49,21 @@ focusingContinuumDerivationStillClosedRegression :
   Focusing.focusingOwnerInternallyDerivesContinuumEquation
     Focusing.canonicalNullOpticalFocusingBoundary ≡ false
 focusingContinuumDerivationStillClosedRegression = refl
+
+pointwiseNegativeNotUniformRegression :
+  Compactness.pointwiseNegativeExpansionDoesNotAloneGiveUniformBound
+    Compactness.canonicalPenroseCompactnessInterpretationBoundary ≡ true
+pointwiseNegativeNotUniformRegression = refl
+
+boundedParameterNotCompactnessRegression :
+  Compactness.boundedAffineParameterDoesNotAloneMakeHorismosCompact
+    Compactness.canonicalPenroseCompactnessInterpretationBoundary ≡ true
+boundedParameterNotCompactnessRegression = refl
+
+compactnessTopologyDerivationStillClosedRegression :
+  Compactness.compactnessOwnerInternallyReprovesContinuumTopology
+    Compactness.canonicalPenroseHorismosCompactnessBoundary ≡ false
+compactnessTopologyDerivationStillClosedRegression = refl
 
 compactHorismosNotSingularityRegression :
   Global.compactHorismosIsNotSpacetimeSingularity
