@@ -8,6 +8,11 @@ REQUIRED = {
         "fullShapeCosmologyAxis",
         "shortRangeGravityAxis",
         "jointProspectiveAxis",
+        "sameCosmologyDifferentGravityWitness",
+        "cosmologyCannotRecoverShortRangeGravity",
+        "sameGravityDifferentCosmologyWitness",
+        "shortRangeGravityCannotRecoverCosmology",
+        "cosmologyRechartCannotRecoverShortRangeGravity",
         "cosmologyOnlyDoesNotPayUniqueMechanism",
         "shortRangeGravityOnlyDoesNotPayStringTheory",
         "jointAxisStillDoesNotPayStringTheory",
@@ -15,6 +20,7 @@ REQUIRED = {
         "darkDimensionMicronGravityTarget",
         "prospectivePacketStillOpen",
         "prospectivePacketDoesNotBecomeDASHIDerivedPrediction",
+        "IntersectionalNonFactorability",
         "RequiredObserverAxisJoinAdequacyExact",
         "GRQuantumPredictionProtocol",
         "10.1103/y31p-9g5k",
@@ -23,6 +29,7 @@ REQUIRED = {
     "DASHI/Unified/DarkDimensionGRQuantumPromotionAdapterExact.agda": [
         "import DASHI.Empirical.DarkDimensionProspectiveDiscriminatorExact as Prospective",
         "prospectiveDiscriminatorDoesNotPayEmpiricalCompletion",
+        "jointProspectiveAxisStillDoesNotPayStringTheory",
         "jointProspectiveAxisDoesNotPayTheoryOfEverything",
     ],
     "scripts/check_dark_dimension_string_promotion_boundary.py": [
