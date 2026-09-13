@@ -26,6 +26,42 @@ The tranche does not promote a neural-memory mechanism, Hebbian/Kuramoto identit
 
 ## Cross-pollinated constraints
 
+### Query-indexed projection adequacy / non-factorability
+
+Reuse `DASHI.Core.QueryIndexedProjectionAdequacyExact` rather than inventing a parallel identifiability calculus.
+
+For an observation projection
+
+\[
+\pi : \Theta \to \mathcal O
+\]
+
+and a hidden-parameter query
+
+\[
+Q : \Theta \to A,
+\]
+
+exact identifiability for that query means `Q` factors through `pi`:
+
+\[
+Q = \bar Q \circ \pi.
+\]
+
+A collision
+
+\[
+\pi(\theta_1)=\pi(\theta_2),
+\qquad
+Q(\theta_1)\ne Q(\theta_2)
+\]
+
+is therefore an exact non-factorability witness and refutes identifiability for that query.
+
+This also makes identifiability explicitly query-relative. A waveform may be adequate for an output-reconstruction query while inadequate for a phase, frequency, or hidden-state query. There is no single intrinsic Boolean `observableIsIdentifiable` property.
+
+The numerical tranche approximates this exact finite theorem shape by looking for near-collisions under declared observation and parameter tolerances. Those approximate collisions are empirical diagnostics, not kernel proofs of exact non-factorability.
+
 ### Fly/NDim anti-leakage discipline
 
 Reuse the existing ordered pattern:
@@ -77,6 +113,18 @@ At minimum, treat these as candidate gauge freedoms:
 - amplitude/sign-phase equivalences when allowed by the parameterization.
 
 Define a canonicalization or an explicit equivalence-aware distance before claiming parameter recovery.
+
+## Query family
+
+The first formal/query-indexed layer should keep distinct consumers separate:
+
+- `waveformQuery` — reconstruct the observed target waveform;
+- `frequencyQuery` — recover the underlying frequency multiset/equivalence class;
+- `amplitudeQuery` — recover amplitudes after matching/gauge normalization;
+- `phaseQuery` — recover phase relations after gauge normalization;
+- `hiddenStateQuery` — distinguish the complete canonicalized hidden parameter state.
+
+The same observation projection may be adequate for `waveformQuery` and defective for `hiddenStateQuery`. That distinction is a feature, not an implementation error.
 
 ## Primary observables
 
@@ -152,6 +200,7 @@ A result such as `N=9 has more hidden multiplicity for the same observable` woul
 - `tests/test_continuous_oscillator_identifiability.py`
 - machine-readable JSON/CSV receipts under an output directory
 - later Agda owner: `DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityReceipt`
+- formal adapter/reuse surface over `DASHI.Core.QueryIndexedProjectionAdequacyExact`
 
 The implementation should reuse the existing synthetic target/model utilities where possible rather than fork a second oscillator ontology.
 
