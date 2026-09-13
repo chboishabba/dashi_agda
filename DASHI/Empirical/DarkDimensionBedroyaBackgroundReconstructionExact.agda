@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Empirical.DarkDimensionBedroyaParameterManifestBoundaryExact as Manifest
 
 bedroyaBackgroundSource : Source.AttributedSource
 bedroyaBackgroundSource =
@@ -86,6 +87,19 @@ equationsDoNotEqualNumericalManifest ()
 bestFitCouplingsDoNotDetermineBackgroundVector :
   BestFitCouplingsDetermineBackgroundVector → ⊥
 bestFitCouplingsDoNotDetermineBackgroundVector ()
+
+parameterManifestStillBlocksBackgroundExecution :
+  Manifest.exactStandardBestFitTuplePublished
+    Manifest.canonicalBedroyaParameterManifestStatus
+  ≡ false
+parameterManifestStillBlocksBackgroundExecution =
+  Manifest.exactStandardTupleStillOpen
+
+normalizationBoundaryStillBlocksBackgroundExecution :
+  Manifest.normalizationMapLocated Manifest.canonicalBedroyaParameterManifestStatus
+  ≡ false
+normalizationBoundaryStillBlocksBackgroundExecution =
+  Manifest.normalizationMapStillOpen
 
 backgroundReconstructionStillOpen :
   backgroundIntegratorExecutable canonicalBedroyaBackgroundReconstructionStatus ≡ false
