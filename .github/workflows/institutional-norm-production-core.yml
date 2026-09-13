@@ -1,0 +1,107 @@
+name: Institutional norm production core
+
+on:
+  push:
+    paths:
+      - 'DASHI/Core/InstitutionalNormProductionExact.agda'
+      - 'DASHI/Core/InstitutionalNormProductionRegression.agda'
+      - 'DASHI/Core/FragmentationCompositionExact.agda'
+      - 'DASHI/Core/FragmentationCompositionRegression.agda'
+      - 'DASHI/Core/ObserverSituatedReasonablenessExact.agda'
+      - 'DASHI/Core/ObserverSituatedReasonablenessRegression.agda'
+      - 'DASHI/Core/InstitutionalNormProductionEverything.agda'
+      - 'DASHI/Core/InstitutionalNormProductionEverythingRegression.agda'
+      - 'DASHI/Core/QueryIndexedProjectionAdequacyExact.agda'
+      - 'DASHI/Core/ObserverRefinementLatticeExact.agda'
+      - 'DASHI/Core/IntersectionalNonFactorability.agda'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - '.github/workflows/institutional-norm-production-core.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Core/InstitutionalNormProductionExact.agda'
+      - 'DASHI/Core/InstitutionalNormProductionRegression.agda'
+      - 'DASHI/Core/FragmentationCompositionExact.agda'
+      - 'DASHI/Core/FragmentationCompositionRegression.agda'
+      - 'DASHI/Core/ObserverSituatedReasonablenessExact.agda'
+      - 'DASHI/Core/ObserverSituatedReasonablenessRegression.agda'
+      - 'DASHI/Core/InstitutionalNormProductionEverything.agda'
+      - 'DASHI/Core/InstitutionalNormProductionEverythingRegression.agda'
+      - 'DASHI/Core/QueryIndexedProjectionAdequacyExact.agda'
+      - 'DASHI/Core/ObserverRefinementLatticeExact.agda'
+      - 'DASHI/Core/IntersectionalNonFactorability.agda'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - '.github/workflows/institutional-norm-production-core.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: institutional-norm-production-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Reject trust escapes in new tranche
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            DASHI/Core/InstitutionalNormProductionExact.agda
+            DASHI/Core/InstitutionalNormProductionRegression.agda
+            DASHI/Core/FragmentationCompositionExact.agda
+            DASHI/Core/FragmentationCompositionRegression.agda
+            DASHI/Core/ObserverSituatedReasonablenessExact.agda
+            DASHI/Core/ObserverSituatedReasonablenessRegression.agda
+            DASHI/Core/InstitutionalNormProductionEverything.agda
+            DASHI/Core/InstitutionalNormProductionEverythingRegression.agda
+          )
+          if grep -nE '\bpostulate\b|\{!|!\}|--allow-unsolved-metas' "${files[@]}"; then
+            echo 'trust escape found in institutional norm production tranche' >&2
+            exit 1
+          fi
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: institutional-norm-production-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check institutional norm production modules
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-institutional-norm-production.log"
+            export AGDA_JOBS=2
+            targets=(
+              DASHI/Core/InstitutionalNormProductionRegression.agda
+              DASHI/Core/FragmentationCompositionRegression.agda
+              DASHI/Core/ObserverSituatedReasonablenessRegression.agda
+              DASHI/Core/InstitutionalNormProductionEverythingRegression.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-institutional-norm-production.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 240 agda-institutional-norm-production.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: institutional-norm-production-agda-log
+          path: agda-institutional-norm-production.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
