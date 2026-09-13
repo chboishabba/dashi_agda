@@ -46,11 +46,13 @@ REQUIRED = {
     ],
     "DASHI/Biology/DrosophilaSymbolicControlAxisSeparationExact.agda": [
         "data SymbolicTopologyKind",
+        "data SymbolicIdentityAssignmentKind",
         "data SymbolicInterventionKind",
         "record SymbolicControlArm",
         "noLearningIsNotTopology",
         "alternateInitializationIsNotTopology",
-        "topologyAndInterventionAreDistinctAxes",
+        "shuffledIdentityIsNotTopology",
+        "topologyIdentityAndInterventionAreDistinctAxes",
         "legacyMixedCarrierNotCanonicalForNewRuns",
     ],
     "DASHI/Biology/AnimalexicEverything.agda": [
