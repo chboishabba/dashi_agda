@@ -1,0 +1,326 @@
+module DASHI.Reasoning.CrossCulturalCompassionAccountabilityExact where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
+
+import DASHI.Core.AttributedSourceCore as Attr
+import DASHI.Reasoning.DefensiveReversalRepair as Defensive
+
+------------------------------------------------------------------------
+-- Cross-cultural compassion / accountability boundary.
+--
+-- This owner is deliberately role-general.  It formalises three distinctions
+-- prompted by practitioner material about family relationships across cultures:
+--
+--   * cultural and family context can change the cost and feasibility of a
+--     boundary without determining the correct boundary for a person;
+--   * compassion and causal explanation can coexist with accountability;
+--   * a practitioner label such as "emotionally immature" is not a diagnosis,
+--     a motive finding, or a proof about any named parent or family.
+--
+-- The source rows below are attribution coordinates, not imported authority.
+------------------------------------------------------------------------
+
+kohliSource : Attr.AttributedSource
+kohliSource = Attr.mkNoDOISource
+  "Sahaj Kaur Kohli"
+  "But What Will People Say? Navigating Mental Health, Identity, Love, and Family Between Cultures"
+  "Penguin Life / Penguin Random House"
+  "2024"
+  "https://www.penguinrandomhouse.com/books/705868/but-what-will-people-say-by-sahaj-kaur-kohli-maed-lgpc/"
+  Attr.practitionerSource
+  "Practitioner and lived-experience provenance for treating family, community, migration, bicultural identity, safety and relational obligation as relevant coordinates when evaluating therapeutic advice.  It does not establish what any culture, family or person must value, and it does not make any boundary universally safe or correct."
+  Attr.publicAttribution
+
+gibsonSource : Attr.AttributedSource
+gibsonSource = Attr.mkNoDOISource
+  "Lindsay C. Gibson"
+  "Disentangling from Emotionally Immature People"
+  "New Harbinger Publications"
+  "2023"
+  "https://www.newharbinger.com/9781648481512/disentangling-from-emotionally-immature-people/"
+  Attr.practitionerSource
+  "Practitioner provenance for examining coercive relational patterns, emotional domination, self-protection and the difference between understanding another person and surrendering one's own agency.  The source label does not diagnose a named person or prove motive, abuse, incapacity or misconduct."
+  Attr.publicAttribution
+
+crossCulturalCompassionSources : List Attr.AttributedSource
+crossCulturalCompassionSources = kohliSource ∷ gibsonSource ∷ []
+
+crossCulturalCompassionSourceAtlas : Attr.AttributedSourceAtlas
+crossCulturalCompassionSourceAtlas = Attr.mkSourceAtlas
+  "cross-cultural compassion and accountability sources"
+  "DASHI.Reasoning.CrossCulturalCompassionAccountabilityExact"
+  crossCulturalCompassionSources
+  "Bounded practitioner provenance for situated boundary feasibility, family/community audience pressure, compassion, accountability, self-protection and non-diagnostic relational vocabulary."
+
+crossCulturalCompassionSourceCount : Nat
+crossCulturalCompassionSourceCount = Attr.sourceCount crossCulturalCompassionSources
+
+crossCulturalCompassionSourceCountIsTwo :
+  crossCulturalCompassionSourceCount ≡ 2
+crossCulturalCompassionSourceCountIsTwo = refl
+
+crossCulturalCompassionAtlasDoesNotCreateAuthority :
+  Attr.atlasCreatesAuthority crossCulturalCompassionSourceAtlas ≡ false
+crossCulturalCompassionAtlasDoesNotCreateAuthority =
+  Attr.atlasCreatesAuthorityIsFalse crossCulturalCompassionSourceAtlas
+
+------------------------------------------------------------------------
+-- A boundary decision is situated rather than a one-dimensional command to
+-- "put yourself first" or, conversely, to preserve harmony at any cost.
+------------------------------------------------------------------------
+
+data NormCoordinate : Set where
+  personalValue : NormCoordinate
+  familyExpectation : NormCoordinate
+  communityExpectation : NormCoordinate
+  heritageCultureExpectation : NormCoordinate
+  hostCultureExpectation : NormCoordinate
+  institutionalExpectation : NormCoordinate
+
+data BoundaryAction : Set where
+  continueUnchanged : BoundaryAction
+  clarifyExpectation : BoundaryAction
+  limitTopic : BoundaryAction
+  limitTask : BoundaryAction
+  limitAccess : BoundaryAction
+  temporaryPause : BoundaryAction
+  supportedContact : BoundaryAction
+  endContact : BoundaryAction
+  unresolvedBoundaryAction : BoundaryAction
+
+record SituatedBoundaryContext : Set where
+  constructor situatedBoundaryContext
+  field
+    salientNorms : List NormCoordinate
+    familyDependencyPresent : Bool
+    communityDependencyPresent : Bool
+    materialDependencyPresent : Bool
+    relationalContinuityValued : Bool
+    reputationCostPresent : Bool
+    practicalRetaliationRiskPresent : Bool
+    physicalSafetyRiskPresent : Bool
+    exitCostPresent : Bool
+    selectedAction : BoundaryAction
+    contextReceipt : String
+
+open SituatedBoundaryContext public
+
+record BoundaryAdviceFirewall : Set where
+  field
+    westernIndividualistAdviceUniversallyApplicable : Bool
+    familyHarmonyUniversallyOverridesAutonomy : Bool
+    culturalNormDeterminesIndividualPreference : Bool
+    dependencyImpliesConsent : Bool
+    costlyBoundaryImpliesInvalidBoundary : Bool
+    preservingRelationshipImpliesNoBoundary : Bool
+    boundaryRequiresEstrangement : Bool
+    firewallNote : String
+
+canonicalBoundaryAdviceFirewall : BoundaryAdviceFirewall
+canonicalBoundaryAdviceFirewall = record
+  { westernIndividualistAdviceUniversallyApplicable = false
+  ; familyHarmonyUniversallyOverridesAutonomy = false
+  ; culturalNormDeterminesIndividualPreference = false
+  ; dependencyImpliesConsent = false
+  ; costlyBoundaryImpliesInvalidBoundary = false
+  ; preservingRelationshipImpliesNoBoundary = false
+  ; boundaryRequiresEstrangement = false
+  ; firewallNote =
+      "Cultural, family, dependency and safety coordinates alter feasibility and cost.  They do not mechanically choose a person's values, consent, or boundary action."
+  }
+
+------------------------------------------------------------------------
+-- Compassion and explanation are different coordinates from waiver.
+------------------------------------------------------------------------
+
+data ExplanationKind : Set where
+  developmentalExplanation : ExplanationKind
+  culturalExplanation : ExplanationKind
+  traumaExplanation : ExplanationKind
+  stressExplanation : ExplanationKind
+  neurocognitiveExplanation : ExplanationKind
+  situationalExplanation : ExplanationKind
+  unknownExplanation : ExplanationKind
+
+record CompassionAccountabilityState : Set where
+  constructor compassionAccountabilityState
+  field
+    explanationKinds : List ExplanationKind
+    perspectiveTakingPresent : Bool
+    compassionPresent : Bool
+    impactRecorded : Bool
+    conductParticularised : Bool
+    requestedChangeRecorded : Bool
+    accountabilityStillLive : Bool
+    accessStillNegotiable : Bool
+    forgivenessRequired : Bool
+    reconciliationRequired : Bool
+    responsibilityErasedByExplanation : Bool
+    responsibilityErasedByCompassion : Bool
+    stateReceipt : String
+
+open CompassionAccountabilityState public
+
+canonicalCompassionAccountabilityState : CompassionAccountabilityState
+canonicalCompassionAccountabilityState = compassionAccountabilityState
+  (culturalExplanation ∷ developmentalExplanation ∷ [])
+  true
+  true
+  true
+  true
+  true
+  true
+  true
+  false
+  false
+  false
+  false
+  "A person may understand context and retain compassion while keeping impact, requested change, responsibility and access conditions separately reviewable."
+
+compassionDoesNotEraseAccountability :
+  responsibilityErasedByCompassion canonicalCompassionAccountabilityState ≡ false
+compassionDoesNotEraseAccountability = refl
+
+explanationDoesNotEraseAccountability :
+  responsibilityErasedByExplanation canonicalCompassionAccountabilityState ≡ false
+explanationDoesNotEraseAccountability = refl
+
+compassionDoesNotRequireForgiveness :
+  forgivenessRequired canonicalCompassionAccountabilityState ≡ false
+compassionDoesNotRequireForgiveness = refl
+
+compassionDoesNotRequireReconciliation :
+  reconciliationRequired canonicalCompassionAccountabilityState ≡ false
+compassionDoesNotRequireReconciliation = refl
+
+------------------------------------------------------------------------
+-- Audience pressure: "what will people say?" is modelled as a constraint on
+-- the decision environment, not as evidence that the audience is correct.
+------------------------------------------------------------------------
+
+record AudiencePressure : Set where
+  constructor audiencePressure
+  field
+    anticipatedAudience : String
+    anticipatedJudgement : String
+    familyReputationLinked : Bool
+    belongingCostLinked : Bool
+    shameResponseLinked : Bool
+    materialConsequenceLinked : Bool
+    audienceJudgementTrue : Bool
+    audienceJudgementAuthoritative : Bool
+    pressureReceipt : String
+
+open AudiencePressure public
+
+canonicalAudiencePressureBoundary : AudiencePressure
+canonicalAudiencePressureBoundary = audiencePressure
+  "family, community or other socially salient audience"
+  "anticipated negative evaluation"
+  true
+  true
+  true
+  false
+  false
+  false
+  "Anticipated social judgement may materially constrain choice or belonging without becoming a truth-maker or moral authority."
+
+audienceSalienceDoesNotCreateTruth :
+  audienceJudgementTrue canonicalAudiencePressureBoundary ≡ false
+audienceSalienceDoesNotCreateTruth = refl
+
+audienceSalienceDoesNotCreateAuthority :
+  audienceJudgementAuthoritative canonicalAudiencePressureBoundary ≡ false
+audienceSalienceDoesNotCreateAuthority = refl
+
+------------------------------------------------------------------------
+-- Non-diagnostic use of "emotionally immature" and related practitioner
+-- vocabulary.  Behavioural particulars remain the admissible object.
+------------------------------------------------------------------------
+
+record PractitionerLabelBoundary : Set where
+  field
+    practitionerLabel : String
+    labelMayOrganiseQuestions : Bool
+    labelDiagnosesNamedPerson : Bool
+    labelProvesMotive : Bool
+    labelProvesMisconduct : Bool
+    labelProvesIncapacity : Bool
+    particularsStillRequired : Bool
+    chronologyStillRequired : Bool
+    authorityBoundary : String
+
+canonicalEmotionallyImmatureLabelBoundary : PractitionerLabelBoundary
+canonicalEmotionallyImmatureLabelBoundary = record
+  { practitionerLabel = "emotionally immature"
+  ; labelMayOrganiseQuestions = true
+  ; labelDiagnosesNamedPerson = false
+  ; labelProvesMotive = false
+  ; labelProvesMisconduct = false
+  ; labelProvesIncapacity = false
+  ; particularsStillRequired = true
+  ; chronologyStillRequired = true
+  ; authorityBoundary =
+      "Use the label, if at all, as a question-organising practitioner construct.  Findings attach to particular acts, contexts, effects, evidence and chronology rather than to the label itself."
+  }
+
+emotionallyImmatureLabelDoesNotDiagnose :
+  PractitionerLabelBoundary.labelDiagnosesNamedPerson
+    canonicalEmotionallyImmatureLabelBoundary ≡ false
+emotionallyImmatureLabelDoesNotDiagnose = refl
+
+emotionallyImmatureLabelDoesNotProveMisconduct :
+  PractitionerLabelBoundary.labelProvesMisconduct
+    canonicalEmotionallyImmatureLabelBoundary ≡ false
+emotionallyImmatureLabelDoesNotProveMisconduct = refl
+
+------------------------------------------------------------------------
+-- Care / gratitude / compassion are not substitutes for complaint merits.
+-- This mirrors the existing parent-child process template while staying
+-- role-general and source-bounded.
+------------------------------------------------------------------------
+
+record CareComplaintBoundary : Set where
+  field
+    careProvided : Bool
+    gratitudePresent : Bool
+    complaintParticularised : Bool
+    careErasesComplaint : Bool
+    gratitudeWaivesConsent : Bool
+    compassionWaivesBoundary : Bool
+    dependencyCreatesMoralSubordination : Bool
+    complaintMeritsRemainReviewable : Bool
+
+canonicalCareComplaintBoundary : CareComplaintBoundary
+canonicalCareComplaintBoundary = record
+  { careProvided = true
+  ; gratitudePresent = true
+  ; complaintParticularised = true
+  ; careErasesComplaint = false
+  ; gratitudeWaivesConsent = false
+  ; compassionWaivesBoundary = false
+  ; dependencyCreatesMoralSubordination = false
+  ; complaintMeritsRemainReviewable = true
+  }
+
+careDoesNotEraseComplaint :
+  CareComplaintBoundary.careErasesComplaint canonicalCareComplaintBoundary ≡ false
+careDoesNotEraseComplaint = refl
+
+gratitudeDoesNotWaiveConsent :
+  CareComplaintBoundary.gratitudeWaivesConsent canonicalCareComplaintBoundary ≡ false
+gratitudeDoesNotWaiveConsent = refl
+
+compassionDoesNotWaiveBoundary :
+  CareComplaintBoundary.compassionWaivesBoundary canonicalCareComplaintBoundary ≡ false
+compassionDoesNotWaiveBoundary = refl
+
+------------------------------------------------------------------------
+-- Compatibility with the existing defensive-reversal owner: the new source
+-- lane does not weaken its requirement to reconstruct incidents and preserve
+-- both the initiating event and the delivery of the objection.
+------------------------------------------------------------------------
+
+canonicalRepairSequenceStillApplies : Defensive.RepairSequence
+canonicalRepairSequenceStillApplies = Defensive.canonicalRepairSequence
