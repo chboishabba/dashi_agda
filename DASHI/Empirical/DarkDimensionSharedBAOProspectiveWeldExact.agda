@@ -77,23 +77,29 @@ sameObservationKeyStillRequiredForProspectiveSeparation :
 sameObservationKeyStillRequiredForProspectiveSeparation =
   ObservationKey.sameKeyNumericalModelPredictionsStillOpen
 
-sameKeyPredictionDerivationDebtStillBlocksProspectiveSeparation :
+------------------------------------------------------------------------
+-- Status-only aliases.  These deliberately do not claim that the prefixed
+-- evidence/debt item is by itself a causal proof of the prospective status;
+-- the conjunction is carried by SharedBAOProspectiveWeldStatus above.
+------------------------------------------------------------------------
+
+sameKeyPredictionDebtStatusStillOpenForProspectiveSeparation :
   Prospective.quantitativeModelSeparationLocked
     Prospective.canonicalProspectiveDiscriminatorPacket
   ≡ false
-sameKeyPredictionDerivationDebtStillBlocksProspectiveSeparation =
+sameKeyPredictionDebtStatusStillOpenForProspectiveSeparation =
   Prospective.quantitativeEnvelopeStillDoesNotLockProspectivePacket
 
-retrospectiveDR2DataStillDoesNotLockProspectiveSeparation :
+retrospectiveDR2DataStatusStillOpenForProspectiveSeparation :
   Prospective.quantitativeModelSeparationLocked
     Prospective.canonicalProspectiveDiscriminatorPacket
   ≡ false
-retrospectiveDR2DataStillDoesNotLockProspectiveSeparation =
+retrospectiveDR2DataStatusStillOpenForProspectiveSeparation =
   Prospective.quantitativeEnvelopeStillDoesNotLockProspectivePacket
 
-sharedBAOStillDoesNotLockProspectivePacket :
+sharedBAOIdentityStatusStillOpenForProspectivePacket :
   Prospective.quantitativeModelSeparationLocked
     Prospective.canonicalProspectiveDiscriminatorPacket
   ≡ false
-sharedBAOStillDoesNotLockProspectivePacket =
+sharedBAOIdentityStatusStillOpenForProspectivePacket =
   Prospective.quantitativeEnvelopeStillDoesNotLockProspectivePacket
