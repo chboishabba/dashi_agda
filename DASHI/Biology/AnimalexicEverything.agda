@@ -20,6 +20,7 @@ open import DASHI.Biology.DrosophilaSymbolicInterfaceLearningExact
 open import DASHI.Biology.DrosophilaSymbolicInterfaceLearningRegression
 open import DASHI.Biology.DrosophilaSymbolicCleanRoomRuntimeBridgeExact
 open import DASHI.Biology.DrosophilaSymbolicControlAxisSeparationExact
+open import DASHI.Biology.DrosophilaEligibilityTraceLearningAuthorityExact
 open import DASHI.Core.SufficientSupportFamilyInvalidationExact
 open import DASHI.Core.ProvenanceClosureIndependenceExact
 open import DASHI.Core.ExperimentLanguageEquivalenceExact
