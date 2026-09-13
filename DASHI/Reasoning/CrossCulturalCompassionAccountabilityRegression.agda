@@ -88,3 +88,49 @@ compassionNotBoundaryWaiverRegression :
   Cross.CareComplaintBoundary.compassionWaivesBoundary
     Cross.canonicalCareComplaintBoundary ≡ false
 compassionNotBoundaryWaiverRegression = Cross.compassionDoesNotWaiveBoundary
+
+------------------------------------------------------------------------
+-- Positive construction: compassion, belonging, relationship continuity,
+-- accountability, consent and bounded access must be jointly inhabitable.
+------------------------------------------------------------------------
+
+positiveWitnessKeepsPerspectiveTakingRegression :
+  Cross.CompassionWithoutSelfErasure.perspectiveTakingRetained
+    Cross.canonicalCompassionWithoutSelfErasure ≡ true
+positiveWitnessKeepsPerspectiveTakingRegression = refl
+
+positiveWitnessKeepsRelationshipRegression :
+  Cross.CompassionWithoutSelfErasure.continuedRelationshipPossible
+    Cross.canonicalCompassionWithoutSelfErasure ≡ true
+positiveWitnessKeepsRelationshipRegression = refl
+
+positiveWitnessKeepsBelongingRegression :
+  Cross.CompassionWithoutSelfErasure.culturalBelongingPreserved
+    Cross.canonicalCompassionWithoutSelfErasure ≡ true
+positiveWitnessKeepsBelongingRegression = refl
+
+positiveWitnessKeepsAccountabilityRegression :
+  Cross.CompassionWithoutSelfErasure.accountabilityPreserved
+    Cross.canonicalCompassionWithoutSelfErasure ≡ true
+positiveWitnessKeepsAccountabilityRegression = refl
+
+positiveWitnessKeepsBoundedAccessRegression :
+  Cross.CompassionWithoutSelfErasure.boundedAccessPreserved
+    Cross.canonicalCompassionWithoutSelfErasure ≡ true
+positiveWitnessKeepsBoundedAccessRegression = refl
+
+positiveWitnessKeepsConsentRegression :
+  Cross.CompassionWithoutSelfErasure.consentPreserved
+    Cross.canonicalCompassionWithoutSelfErasure ≡ true
+positiveWitnessKeepsConsentRegression = refl
+
+positiveWitnessKeepsComplaintReviewRegression :
+  Cross.CompassionWithoutSelfErasure.complaintReviewPreserved
+    Cross.canonicalCompassionWithoutSelfErasure ≡ true
+positiveWitnessKeepsComplaintReviewRegression = refl
+
+positiveWitnessRejectsSelfErasureRegression :
+  Cross.CompassionWithoutSelfErasure.selfErasureRequired
+    Cross.canonicalCompassionWithoutSelfErasure ≡ false
+positiveWitnessRejectsSelfErasureRegression =
+  Cross.compassionWithoutSelfErasureDoesNotRequireSelfErasure
