@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Applications.CounterUASOpenSetRFExact as RF
 import DASHI.Applications.OpenClosedWorldRecognitionExact as OpenClosed
+import DASHI.Applications.OpenWorldTemporalPromotionExact as Temporal
 
 ------------------------------------------------------------------------
 -- DRONESHIELD / OPEN-WORLD RECOGNITION BRIDGE
@@ -28,6 +29,12 @@ generalOpenWorldPaperValidatesVendorImplementation = false
 laterSignatureRetroactivelyRewritesEarlierObservation : Bool
 laterSignatureRetroactivelyRewritesEarlierObservation = false
 
+confidenceScoreCreatesKnownIdentity : Bool
+confidenceScoreCreatesKnownIdentity = false
+
+rfNoveltyEvidenceCreatesThreatAuthority : Bool
+rfNoveltyEvidenceCreatesThreatAuthority = false
+
 ------------------------------------------------------------------------
 -- Typed relationship:
 --
@@ -46,6 +53,10 @@ fullIncrementalRegime = OpenClosed.openWorld
 rfUnknownState : RF.RFDetectionState
 rfUnknownState = RF.unknownRFActivity
 
+rfUnknownThenLaterRecognizedReceipt : Temporal.TemporalKnowledgeReceipt
+rfUnknownThenLaterRecognizedReceipt =
+  Temporal.canonicalUnknownThenRecognizedReceipt
+
 record CounterUASOpenWorldBoundary : Set where
   constructor counterUASOpenWorldBoundary
   field
@@ -57,6 +68,14 @@ record CounterUASOpenWorldBoundary : Set where
     generatedReferenceImpliesSemanticClassIdentity : Bool
     generatedReferenceImpliesSemanticClassIdentityIsFalse :
       generatedReferenceImpliesSemanticClassIdentity ≡ false
+    confidenceImpliesKnownIdentity : Bool
+    confidenceImpliesKnownIdentityIsFalse : confidenceImpliesKnownIdentity ≡ false
+    laterRecognitionRewritesEncounterUnknown : Bool
+    laterRecognitionRewritesEncounterUnknownIsFalse :
+      laterRecognitionRewritesEncounterUnknown ≡ false
+    noveltyEvidenceImpliesThreatAuthority : Bool
+    noveltyEvidenceImpliesThreatAuthorityIsFalse :
+      noveltyEvidenceImpliesThreatAuthority ≡ false
     retrospectiveCrossPollinationIsHistoricalIdentity : Bool
     retrospectiveCrossPollinationIsHistoricalIdentityIsFalse :
       retrospectiveCrossPollinationIsHistoricalIdentity ≡ false
@@ -65,6 +84,9 @@ canonicalCounterUASOpenWorldBoundary : CounterUASOpenWorldBoundary
 canonicalCounterUASOpenWorldBoundary =
   counterUASOpenWorldBoundary
     true refl
+    false refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
