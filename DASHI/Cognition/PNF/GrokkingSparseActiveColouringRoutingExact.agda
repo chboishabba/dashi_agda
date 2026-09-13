@@ -1,6 +1,8 @@
 module DASHI.Cognition.PNF.GrokkingSparseActiveColouringRoutingExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Nat using (_+_)
+open import Data.Nat using (_∸_)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Cognition.PNF.GrokkingInvariantSubspaceSelectionExact as GrokSelect
@@ -135,12 +137,6 @@ currentConflictCarrierIntegrationResidual = conflictCarrierIntegrationResidual f
 
 ------------------------------------------------------------------------
 -- Intervention discipline for empirical relation edges.
---
--- Correlated activation is observational evidence only.  A conflict edge is
--- promotable only through a matched intervention receipt that measures the two
--- units/circuits individually and jointly on the same checkpoint/evaluation
--- carrier.  The synthetic paid witness below tests the type; it is not an
--- empirical grokking result.
 ------------------------------------------------------------------------
 
 activationCorrelationAlonePaysConflict : Bool
@@ -170,6 +166,79 @@ syntheticPaidConflictIntervention = circuitPairInterventionReceipt true true tru
 
 syntheticConflictIsEmpiricalGrokkingResult : Bool
 syntheticConflictIsEmpiricalGrokkingResult = false
+
+------------------------------------------------------------------------
+-- Threshold-governed pair classifier.
+--
+-- The score uses non-negative held-out loss/effect magnitudes.  The positive
+-- interaction residual is
+--
+--   joint - (left + right)
+--
+-- truncated at zero in Nat.  A positive excess above the declared threshold
+-- pays `conflict` only after adequate power/matching has already been checked.
+-- Requirement is a separate directional dependency coordinate and therefore
+-- is not inferred from the signed residual alone.  Underpowered observations
+-- remain unclassified rather than being forced into `independent`.
+------------------------------------------------------------------------
+
+record PairInterventionScore : Set where
+  constructor pairInterventionScore
+  field
+    leftEffect : Nat
+    rightEffect : Nat
+    jointEffect : Nat
+    interactionThreshold : Nat
+    adequatelyPowered : Bool
+    leftRequiresRight : Bool
+    rightRequiresLeft : Bool
+open PairInterventionScore public
+
+interactionExcess : PairInterventionScore → Nat
+interactionExcess score = jointEffect score ∸ (leftEffect score + rightEffect score)
+
+interactionDeficit : PairInterventionScore → Nat
+interactionDeficit score = (leftEffect score + rightEffect score) ∸ jointEffect score
+
+natLE : Nat → Nat → Bool
+natLE zero _ = true
+natLE (suc _) zero = false
+natLE (suc left) (suc right) = natLE left right
+
+aboveInteractionThreshold : PairInterventionScore → Bool
+aboveInteractionThreshold score = natLE (suc (interactionThreshold score)) (interactionExcess score)
+
+data PairRelationClassification : Set where
+  underpowered : PairRelationClassification
+  classified : GrokkingReducerRelation → PairRelationClassification
+
+classifyPair : PairInterventionScore → PairRelationClassification
+classifyPair score with adequatelyPowered score
+... | false = underpowered
+... | true with leftRequiresRight score | rightRequiresLeft score
+...   | true  | _     = classified gluingRequirement
+...   | false | true  = classified gluingRequirement
+...   | false | false with aboveInteractionThreshold score
+...     | true  = classified conflict
+...     | false = classified independent
+
+activationCorrelationIsClassificationInput : Bool
+activationCorrelationIsClassificationInput = false
+
+syntheticConflictScore : PairInterventionScore
+syntheticConflictScore = pairInterventionScore 2 2 7 1 true false false
+
+syntheticRequirementScore : PairInterventionScore
+syntheticRequirementScore = pairInterventionScore 2 2 4 1 true true false
+
+syntheticIndependentScore : PairInterventionScore
+syntheticIndependentScore = pairInterventionScore 2 3 5 1 true false false
+
+syntheticUnderpoweredScore : PairInterventionScore
+syntheticUnderpoweredScore = pairInterventionScore 2 2 7 1 false false false
+
+classifierIsEmpiricalGrokkingResult : Bool
+classifierIsEmpiricalGrokkingResult = false
 
 ------------------------------------------------------------------------
 -- Colouring cross-pollination remains structural, not objective identity.
