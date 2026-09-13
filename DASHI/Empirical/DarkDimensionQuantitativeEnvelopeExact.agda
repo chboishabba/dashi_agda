@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Empirical.DarkDimensionEmpiricalDiscriminationExact as Discrimination
+import DASHI.Empirical.DarkDimensionPredictionQuantityAdapterExact as QuantityAdapter
 import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension
 import DASHI.Physics.Units.SI as SI
@@ -190,11 +191,9 @@ sourceEnvelopeDoesNotPayDASHIDerivedPrediction =
 ------------------------------------------------------------------------
 -- SI -> GR/quantum prediction-quantity residual.
 --
--- Canonical SI has a signed DecimalScale, while the currently unused
--- Prediction.ScaledQuantity surface stores a Nat `decimalExponent` and a
--- separate empirical PhysicalUnit.  No repository owner currently states the
--- sign/conversion convention between those carriers.  We therefore retain the
--- missing weld explicitly rather than manufacture a `ScaledQuantity` value.
+-- The generic signed-scale conversion remains deliberately unpaid.  The thin
+-- Dark-Dimension adapter now pays only the two positive micrometre endpoints by
+-- encoding them as exact rational metres with decimalExponent = 0.
 ------------------------------------------------------------------------
 
 record PredictionQuantityAdapterResidual : Set where
@@ -202,8 +201,9 @@ record PredictionQuantityAdapterResidual : Set where
   field
     canonicalSIQuantityAvailable : Bool
     predictionScaledQuantitySurfaceAvailable : Bool
-    signedScaleConventionWelded : Bool
-    physicalUnitCarrierWelded : Bool
+    darkDimensionMicrometreEndpointAdapterAvailable : Bool
+    genericSignedScaleConventionWelded : Bool
+    genericPhysicalUnitCarrierWelded : Bool
     adapterScope : String
 
 open PredictionQuantityAdapterResidual public
@@ -213,17 +213,29 @@ canonicalPredictionQuantityAdapterResidual =
   predictionQuantityAdapterResidual
     true
     true
+    true
     false
     false
-    "the 1-30 micrometre interval is typed in DASHI.Physics.Units.SI; conversion into GRQuantumPredictionProtocol.ScaledQuantity remains unpaid until the decimal-exponent sign and PhysicalUnit correspondence are explicitly owned"
+    "the Dark-Dimension 1-30 micrometre endpoints have an exact rational-metre bridge into GRQuantumPredictionProtocol.ScaledQuantity; a generic signed DecimalScale/PhysicalUnit conversion law remains unpaid"
 
-signedScaleConventionStillOpen :
-  signedScaleConventionWelded canonicalPredictionQuantityAdapterResidual ≡ false
-signedScaleConventionStillOpen = refl
+microRadiusLowerPredictionBridge : QuantityAdapter.ExactMicrometrePredictionBridge 1
+microRadiusLowerPredictionBridge = QuantityAdapter.microRadiusLowerBridge
 
-physicalUnitWeldStillOpen :
-  physicalUnitCarrierWelded canonicalPredictionQuantityAdapterResidual ≡ false
-physicalUnitWeldStillOpen = refl
+microRadiusUpperPredictionBridge : QuantityAdapter.ExactMicrometrePredictionBridge 30
+microRadiusUpperPredictionBridge = QuantityAdapter.microRadiusUpperBridge
+
+predictionQuantityAdapterAvailableButSeparationStillOpen :
+  crossModelNumericalSeparationLocked canonicalQuantitativeEnvelopeStatus ≡ false
+predictionQuantityAdapterAvailableButSeparationStillOpen =
+  crossModelNumericalSeparationStillOpen
+
+genericSignedScaleConventionStillOpen :
+  genericSignedScaleConventionWelded canonicalPredictionQuantityAdapterResidual ≡ false
+genericSignedScaleConventionStillOpen = refl
+
+genericPhysicalUnitWeldStillOpen :
+  genericPhysicalUnitCarrierWelded canonicalPredictionQuantityAdapterResidual ≡ false
+genericPhysicalUnitWeldStillOpen = refl
 
 ------------------------------------------------------------------------
 -- Source coordinates retained explicitly.  Citation imports neither proof nor
