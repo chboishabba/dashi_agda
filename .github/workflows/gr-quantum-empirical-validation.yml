@@ -21,6 +21,7 @@ on:
       - 'scripts/check_dark_dimension_shared_bao_observation_key.py'
       - 'scripts/check_dark_dimension_desi_dr2_bao_data_receipt.py'
       - 'scripts/check_dark_dimension_same_key_prediction_debt.py'
+      - 'scripts/check_dark_dimension_dao_parameter_manifest_boundary.py'
       - 'scripts/check_dark_dimension_dao_same_key_extraction_recipe.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
@@ -58,6 +59,7 @@ jobs:
           python scripts/check_dark_dimension_shared_bao_observation_key.py
           python scripts/check_dark_dimension_desi_dr2_bao_data_receipt.py
           python scripts/check_dark_dimension_same_key_prediction_debt.py
+          python scripts/check_dark_dimension_dao_parameter_manifest_boundary.py
           python scripts/check_dark_dimension_dao_same_key_extraction_recipe.py
 
   agda-empirical-atlas:
@@ -100,6 +102,7 @@ jobs:
           check_agda DASHI/Empirical/DarkDimensionSharedBAOObservableExact.agda
           check_agda DASHI/Empirical/DarkDimensionSharedBAOObservationKeyExact.agda
           check_agda DASHI/Empirical/DarkDimensionDESIDR2BAODataReceiptExact.agda
+          check_agda DASHI/Empirical/DarkDimensionDAOParameterManifestBoundaryExact.agda
           check_agda DASHI/Empirical/DarkDimensionDAOSameKeyExtractionRecipeExact.agda
           check_agda DASHI/Empirical/DarkDimensionSameKeyPredictionDebtExact.agda
           check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
