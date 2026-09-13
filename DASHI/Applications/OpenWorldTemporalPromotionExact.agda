@@ -32,10 +32,6 @@ testTunedThresholdCountsAsHeldOut = false
 
 ------------------------------------------------------------------------
 -- I. Confidence alone is inadequate for novelty.
---
--- A known and a novel observation can expose the same confidence surface while
--- differing in novelty status.  This captures the literature warning that
--- uncertain is not unknown and unknown need not present as low confidence.
 ------------------------------------------------------------------------
 
 data NoveltyWorld : Set where
@@ -90,9 +86,6 @@ confidenceAloneCannotDetermineNovelty =
 
 ------------------------------------------------------------------------
 -- II. Append-only temporal knowledge.
---
--- Encounter-time status is retained even when a later stage gains a semantic
--- label.  Later recognition is new evidence, not retroactive mutation.
 ------------------------------------------------------------------------
 
 data EncounterStatus : Set where
@@ -190,9 +183,6 @@ noveltyDetectionCannotDetermineContinualLearning =
 
 ------------------------------------------------------------------------
 -- IV. Reported metric alone is inadequate for evaluation validity.
---
--- Two experiments can report the same score while one freezes thresholds on a
--- training/validation carrier and the other tunes them against the test set.
 ------------------------------------------------------------------------
 
 data EvaluationWorld : Set where
@@ -253,6 +243,47 @@ reportedScoreCannotDetermineHeldOutValidity =
   Adequacy.queryAdequacyDefectBlocksFactorisation
     reportedScoreOnlyAdequacyDefect
 
+------------------------------------------------------------------------
+-- V. Promotion ladder.  Each stage is an evidentiary status, not a license to
+-- skip to identity, continual-learning, or operational-authority conclusions.
+------------------------------------------------------------------------
+
+data PromotionStage : Set where
+  observationStage : PromotionStage
+  noveltyStage : PromotionStage
+  characterizationStage : PromotionStage
+  semanticIdentityStage : PromotionStage
+  continualLearningStage : PromotionStage
+  operationalAuthorityStage : PromotionStage
+
+record OpenWorldPromotionReceipt : Set where
+  constructor openWorldPromotionReceipt
+  field
+    currentStage : PromotionStage
+    provenanceRetained : Bool
+    provenanceRetainedIsTrue : provenanceRetained ≡ true
+    laterStageMayRewriteEarlierEvidence : Bool
+    laterStageMayRewriteEarlierEvidenceIsFalse :
+      laterStageMayRewriteEarlierEvidence ≡ false
+    stageCreatesOperationalAuthority : Bool
+    stageCreatesOperationalAuthorityIsFalse :
+      stageCreatesOperationalAuthority ≡ false
+
+open OpenWorldPromotionReceipt public
+
+mkNonPromotingOpenWorldReceipt : PromotionStage → OpenWorldPromotionReceipt
+mkNonPromotingOpenWorldReceipt stage =
+  openWorldPromotionReceipt stage true refl false refl false refl
+
+noveltyObservationReceipt : OpenWorldPromotionReceipt
+noveltyObservationReceipt = mkNonPromotingOpenWorldReceipt noveltyStage
+
+characterizedUnknownReceipt : OpenWorldPromotionReceipt
+characterizedUnknownReceipt = mkNonPromotingOpenWorldReceipt characterizationStage
+
+laterSemanticIdentityReceipt : OpenWorldPromotionReceipt
+laterSemanticIdentityReceipt = mkNonPromotingOpenWorldReceipt semanticIdentityStage
+
 record OpenWorldTemporalPromotionBoundary : Set where
   constructor openWorldTemporalPromotionBoundary
   field
@@ -266,11 +297,15 @@ record OpenWorldTemporalPromotionBoundary : Set where
     metricValueEqualsEvaluationValidity : Bool
     metricValueEqualsEvaluationValidityIsFalse :
       metricValueEqualsEvaluationValidity ≡ false
+    semanticIdentityEqualsOperationalAuthority : Bool
+    semanticIdentityEqualsOperationalAuthorityIsFalse :
+      semanticIdentityEqualsOperationalAuthority ≡ false
 
 canonicalOpenWorldTemporalPromotionBoundary :
   OpenWorldTemporalPromotionBoundary
 canonicalOpenWorldTemporalPromotionBoundary =
   openWorldTemporalPromotionBoundary
+    false refl
     false refl
     false refl
     false refl
