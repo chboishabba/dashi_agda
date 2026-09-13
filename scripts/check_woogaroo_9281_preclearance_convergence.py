@@ -5,13 +5,17 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {
     "DASHI/Law/SensibLawWoogaroo9281PreclearanceConvergenceExact.agda": [
         "module DASHI.Law.SensibLawWoogaroo9281PreclearanceConvergenceExact where",
+        "negotiated9281DecisionNotice",
+        "approved9281GeneralArrangement",
         "condition6aLocalFederalGate",
         "approvedPlanEPBCExecutionGate",
         "springfield8575EnvironmentalPreclearanceProtocol",
         "springfield8575SignedChecklistProtocol",
+        "Atlas.springfield8575January2026PreliminaryDocumentation",
         "localConditionAndProponentProtocolConvergeOnFederalClearance",
         "proponentProtocolDoesNotEqualOperativePart9Condition",
         "signedChecklistDoesNotEqualFederalApproval",
+        "sourceCitationDoesNotPaySameActionIdentity",
         "condition6aSatisfactionRecordFirstLeaf",
         "signedEnvironmentalPreclearancePackageSecondLeaf",
         "canonicalPreclearanceConvergencePareto",
@@ -35,4 +39,4 @@ for rel, needles in REQUIRED.items():
 if missing:
     raise SystemExit("\n".join(missing))
 
-print("Woogaroo 9281 preclearance convergence static contract: OK")
+print("Woogaroo 9281 preclearance convergence + attribution static contract: OK")
