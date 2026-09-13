@@ -3,8 +3,8 @@
 
 This is intentionally structural: it verifies that the repo contains a thin
 interpretation owner and a theorem-boundary owner, with the expected WrongType
-firewalls, and that both are exported through the focused gravity aggregate.
-It does not certify the continuum theorem itself.
+firewalls, and that both are exported through the existing focused physics
+aggregate. It does not certify the continuum theorem itself.
 """
 
 from pathlib import Path
@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 INTRINSIC = ROOT / "DASHI/Physics/Gravity/IntrinsicSpacetimeCurvatureInterpretationExact.agda"
 PENROSE = ROOT / "DASHI/Physics/Gravity/Penrose1965NullGeodesicIncompletenessExact.agda"
-AGGREGATE = ROOT / "DASHI/Physics/Gravity/Everything.agda"
+AGGREGATE = ROOT / "DASHI/Physics/PhysicsKernelClosure.agda"
 
 
 def require(path: Path, needles: list[str]) -> None:
