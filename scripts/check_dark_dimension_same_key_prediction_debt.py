@@ -19,6 +19,12 @@ REQUIRED = {
         "daoReconstructionRuntimeReceiptStillOpen",
         "daoReconstructionVectorStillOpen",
         "darkDimensionExecutableStillOpen",
+        "lrg1TransversePredictionRequest", "lrg1RadialPredictionRequest",
+        "lrg2TransversePredictionRequest", "lrg2RadialPredictionRequest",
+        "lrg3Elg1TransversePredictionRequest", "lrg3Elg1RadialPredictionRequest",
+        "elg2TransversePredictionRequest", "elg2RadialPredictionRequest",
+        "qsoTransversePredictionRequest", "qsoRadialPredictionRequest",
+        "lyaTransversePredictionRequest", "lyaRadialPredictionRequest",
         "daoDRMDClassRevision",
         "aa2b61a0f1cf246672cdbd4634a4797d4cc654f9",
         "input/DRMD.ini",
@@ -35,7 +41,7 @@ REQUIRED = {
     ],
     "DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda": [
         "import DASHI.Empirical.DarkDimensionSameKeyPredictionDebtExact as PredictionDebt",
-        "sameKeyPredictionDerivationDebtStillBlocksProspectiveSeparation",
+        "sameKeyPredictionDebtStatusStillOpenForProspectiveSeparation",
     ],
     ".github/workflows/gr-quantum-empirical-validation.yml": [
         "python scripts/check_dark_dimension_same_key_prediction_debt.py",
