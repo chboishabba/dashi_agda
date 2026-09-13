@@ -24,6 +24,11 @@ import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 --     a concrete best-fit row, but the inspected file/notebook surface does not
 --     source-bind that row to the LSS-independent arXiv:2602.23895 target.
 --
+-- The repository README does source-bind DRMD_v2 to arXiv:2602.23895.  That
+-- pays code-version relevance, not the stronger claim that any particular
+-- checked-in config/best-fit row is the executable manifest for that paper's
+-- LSS-independent posterior.
+--
 -- A future same-key prospective prediction must therefore identify and freeze
 -- the actual parameter manifest used for the independent target, and record a
 -- parameterManifestHash as required by GRQuantumPredictionProtocol.
@@ -35,6 +40,8 @@ record DAOParameterManifestStatus : Set where
     exampleInputLocated : Bool
     retrospectiveDESIConfigLocated : Bool
     bestFitRowLocated : Bool
+    repositoryVersionLinkedToIndependentTarget : Bool
+    independentTargetSpecificConfigLocated : Bool
     bestFitRowSourceBoundToIndependentTarget : Bool
     independentTargetExecutableManifestFrozen : Bool
     parameterManifestHashRecorded : Bool
@@ -48,6 +55,8 @@ canonicalDAOParameterManifestStatus =
     true
     true
     true
+    true
+    false
     false
     false
     false
@@ -64,6 +73,9 @@ bestFitRowPath = "notebooks/DRMD/DRMD.bestfit"
 
 retrospectiveLikelihoodCoordinate : String
 retrospectiveLikelihoodCoordinate = "bao.desi_dr2"
+
+independentTargetArXiv : String
+independentTargetArXiv = "2602.23895"
 
 ------------------------------------------------------------------------
 -- Direct weld to the existing prediction-provenance coordinate.
@@ -82,6 +94,8 @@ data DESIConditionedFitEqualsHeldOutPrediction : Set where
 
 data AmbiguousBestFitRowPaysIndependentManifest : Set where
 
+data VersionLinkManufacturesSpecificConfig : Set where
+
 exampleInputDoesNotBecomePaperPrediction :
   ExampleInputEqualsPaperPrediction → ⊥
 exampleInputDoesNotBecomePaperPrediction ()
@@ -93,6 +107,20 @@ desiConditionedFitDoesNotBecomeHeldOutPrediction ()
 ambiguousBestFitRowDoesNotPayIndependentManifest :
   AmbiguousBestFitRowPaysIndependentManifest → ⊥
 ambiguousBestFitRowDoesNotPayIndependentManifest ()
+
+versionLinkDoesNotManufactureSpecificConfig :
+  VersionLinkManufacturesSpecificConfig → ⊥
+versionLinkDoesNotManufactureSpecificConfig ()
+
+repositoryVersionLinkPaid :
+  repositoryVersionLinkedToIndependentTarget canonicalDAOParameterManifestStatus
+  ≡ true
+repositoryVersionLinkPaid = refl
+
+independentTargetConfigStillOpen :
+  independentTargetSpecificConfigLocated canonicalDAOParameterManifestStatus
+  ≡ false
+independentTargetConfigStillOpen = refl
 
 independentTargetManifestStillOpen :
   independentTargetExecutableManifestFrozen canonicalDAOParameterManifestStatus
