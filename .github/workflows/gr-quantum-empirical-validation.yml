@@ -20,6 +20,7 @@ on:
       - 'scripts/check_dark_dimension_shared_bao_observable.py'
       - 'scripts/check_dark_dimension_shared_bao_observation_key.py'
       - 'scripts/check_dark_dimension_desi_dr2_bao_data_receipt.py'
+      - 'scripts/check_dark_dimension_same_key_prediction_debt.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
@@ -55,6 +56,7 @@ jobs:
           python scripts/check_dark_dimension_shared_bao_observable.py
           python scripts/check_dark_dimension_shared_bao_observation_key.py
           python scripts/check_dark_dimension_desi_dr2_bao_data_receipt.py
+          python scripts/check_dark_dimension_same_key_prediction_debt.py
 
   agda-empirical-atlas:
     runs-on: ubuntu-24.04
@@ -96,6 +98,7 @@ jobs:
           check_agda DASHI/Empirical/DarkDimensionSharedBAOObservableExact.agda
           check_agda DASHI/Empirical/DarkDimensionSharedBAOObservationKeyExact.agda
           check_agda DASHI/Empirical/DarkDimensionDESIDR2BAODataReceiptExact.agda
+          check_agda DASHI/Empirical/DarkDimensionSameKeyPredictionDebtExact.agda
           check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
           check_agda DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda
           check_agda DASHI/Unified/DarkDimensionGRQuantumPromotionAdapterExact.agda
