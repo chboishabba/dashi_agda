@@ -23,6 +23,8 @@ on:
       - 'scripts/check_dark_dimension_same_key_prediction_debt.py'
       - 'scripts/check_dark_dimension_dao_parameter_manifest_boundary.py'
       - 'scripts/check_dark_dimension_dao_same_key_extraction_recipe.py'
+      - 'scripts/check_dark_dimension_dao_paper_table_reconstruction.py'
+      - 'scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
@@ -61,6 +63,8 @@ jobs:
           python scripts/check_dark_dimension_same_key_prediction_debt.py
           python scripts/check_dark_dimension_dao_parameter_manifest_boundary.py
           python scripts/check_dark_dimension_dao_same_key_extraction_recipe.py
+          python scripts/check_dark_dimension_dao_paper_table_reconstruction.py
+          python scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py
 
   agda-empirical-atlas:
     runs-on: ubuntu-24.04
@@ -102,6 +106,7 @@ jobs:
           check_agda DASHI/Empirical/DarkDimensionSharedBAOObservableExact.agda
           check_agda DASHI/Empirical/DarkDimensionSharedBAOObservationKeyExact.agda
           check_agda DASHI/Empirical/DarkDimensionDESIDR2BAODataReceiptExact.agda
+          check_agda DASHI/Empirical/DarkDimensionDAOPaperTableReconstructionExact.agda
           check_agda DASHI/Empirical/DarkDimensionDAOParameterManifestBoundaryExact.agda
           check_agda DASHI/Empirical/DarkDimensionDAOSameKeyExtractionRecipeExact.agda
           check_agda DASHI/Empirical/DarkDimensionSameKeyPredictionDebtExact.agda
