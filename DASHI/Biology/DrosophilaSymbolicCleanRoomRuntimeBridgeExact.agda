@@ -10,20 +10,20 @@ import DASHI.Core.AttributedSourceCore as Source
 ------------------------------------------------------------------------
 -- Runtime-side clean-room substrate.
 --
--- dashiBRAIN PR #8 implements an auditable receipt carrier for symbolic-output
--- experiments.  Locating that substrate pays an implementation dependency;
--- it does not reproduce the viral Python/FizzBuzz run or pay empirical nulls.
+-- dashiBRAIN PR #8 implements an auditable receipt carrier plus a runnable
+-- symbolic decoder over the repo's existing kernel-flow trajectories.  This
+-- pays a clean-room implementation dependency, not the original viral run.
 ------------------------------------------------------------------------
 
 runtimeCleanRoomSource : Source.AttributedSource
 runtimeCleanRoomSource = Source.mkNoDOISource
   "chboishabba/dashiBRAIN"
-  "MaleCNS symbolic clean-room receipts"
+  "MaleCNS symbolic clean-room receipts and kernel trace runner"
   "GitHub pull request #8"
   "2026"
   "https://github.com/chboishabba/dashiBRAIN/pull/8"
   (Source.namedSourceKind "software implementation")
-  "runtime receipt substrate at head ec9e52aa6be45799258675c71bddb1e57896b511; source/implementation locator only, not an empirical reproduction receipt"
+  "clean-room runtime substrate at head 1b453bfe7558d3805d8a75a771d523c793e1c262; includes explicit assistance receipts, orthogonal topology/intervention controls, and an external symbolic decoder over existing kernel flow; not an empirical reproduction receipt"
   Source.publicAttribution
 
 runtimeCitationImportsNoProof :
@@ -38,7 +38,9 @@ record CleanRoomRuntimeStatus : Set where
     assistanceBudgetCarrierImplemented : Bool
     artifactHashCarrierImplemented : Bool
     competenceNonpromotionImplemented : Bool
-    matchedNullBudgetGuardImplemented : Bool
+    matchedControlBudgetGuardImplemented : Bool
+    symbolicKernelTraceRunnerImplemented : Bool
+    topologyInterventionAxesSeparated : Bool
     viralImplementationRecovered : Bool
     viralDemoReproduced : Bool
     empiricalNullsExecuted : Bool
@@ -53,6 +55,8 @@ canonicalCleanRoomRuntimeStatus = cleanRoomRuntimeStatus
   true
   true
   true
+  true
+  true
   false
   false
   false
@@ -61,6 +65,14 @@ canonicalCleanRoomRuntimeStatus = cleanRoomRuntimeStatus
 runtimeSubstrateIsLocated :
   runtimeSubstrateLocated canonicalCleanRoomRuntimeStatus ≡ true
 runtimeSubstrateIsLocated = refl
+
+symbolicKernelRunnerIsLocated :
+  symbolicKernelTraceRunnerImplemented canonicalCleanRoomRuntimeStatus ≡ true
+symbolicKernelRunnerIsLocated = refl
+
+controlAxesAreSeparated :
+  topologyInterventionAxesSeparated canonicalCleanRoomRuntimeStatus ≡ true
+controlAxesAreSeparated = refl
 
 viralImplementationStillUnrecovered :
   viralImplementationRecovered canonicalCleanRoomRuntimeStatus ≡ false
