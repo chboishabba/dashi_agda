@@ -109,10 +109,6 @@ springfield8575SignedChecklistProtocol = preclearance-receipt
   "The proponent material states that the civil contractor, clearing contractor, fauna spotter catcher, arborist if required, environmental coordinator, superintendent and client sign the checklist before clearing; it is run through at a project pre-start meeting and no clearing for the phase can commence until Environmental Coordinator sign-off."
   true false false false
 
-------------------------------------------------------------------------
--- Convergence is an evidence-routing result, not a transfer of legal force.
-------------------------------------------------------------------------
-
 record PreclearanceConvergence : Set where
   constructor preclearance-convergence
   field
@@ -128,15 +124,10 @@ localConditionAndProponentProtocolConvergeOnFederalClearance : PreclearanceConve
 localConditionAndProponentProtocolConvergeOnFederalClearance = preclearance-convergence
   true true true true true false false
 
-------------------------------------------------------------------------
--- WrongType / attribution firewalls.
-------------------------------------------------------------------------
-
 data ProponentProtocolEqualsOperativePart9Condition : Set where
 data SignedChecklistEqualsFederalApproval : Set where
 data ApprovedPlanGenericEPBCNoteIdentifiesInstrument : Set where
 data PrestartProtocolPaysActualCommencement : Set where
-
 data SourceCitationPaysSameActionIdentity : Set where
 
 proponentProtocolDoesNotEqualOperativePart9Condition :
@@ -155,12 +146,6 @@ prestartProtocolDoesNotPayActualCommencement ()
 
 sourceCitationDoesNotPaySameActionIdentity : SourceCitationPaysSameActionIdentity → ⊥
 sourceCitationDoesNotPaySameActionIdentity ()
-
-------------------------------------------------------------------------
--- Acquisition leaves. The first leaf can identify the instrument relied on;
--- the second can simultaneously identify the approval documentation actually
--- circulated to the clearing team and provide strong evidence of imminence.
-------------------------------------------------------------------------
 
 data AcquisitionStatus : Set where
   acquisitionOpen : AcquisitionStatus
