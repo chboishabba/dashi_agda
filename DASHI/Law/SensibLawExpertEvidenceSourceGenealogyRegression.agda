@@ -1,18 +1,16 @@
 module DASHI.Law.SensibLawExpertEvidenceSourceGenealogyRegression where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as Expert
-import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
 ------------------------------------------------------------------------
--- RED contract for provenance-independence cross-pollination.
+-- Provenance-independence cross-pollination regression.
 --
 -- Agreement / multiplicity of expert reports must not manufacture source
--- independence.  Joining the source-genealogy axis must be an explicit observer
+-- independence. Joining the source-genealogy axis must be an explicit observer
 -- refinement rather than an implicit re-interpretation of the same report count.
 ------------------------------------------------------------------------
 
