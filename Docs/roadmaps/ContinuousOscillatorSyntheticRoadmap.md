@@ -1,10 +1,44 @@
-# Continuous Oscillator Synthetic Roadmap
+# Continuous Oscillator / Recursive Scale Roadmap
 
-Declared surface level: `numerical diagnostic`, `receipt`, and `roadmap`.
+Declared surface level: `structural refinement`, `synthetic numerical diagnostics`, `formal receipts`, and `roadmap`.
 
-This lane is the first executable numerical realization beneath the structural continuous-oscillator memory refinement merged in PR #896.
+## Parent chain
 
-## Current executable slice
+This programme follows its parent rather than treating each tranche as a new ontology:
+
+```text
+existing MemoryFibre / phase / learning / decision machinery
+  -> merged PR #896: continuous hidden oscillator refinement
+       + recursive level-indexed scale transition
+  -> PR #909: fixed-frequency synthetic 3/6/9 producer
+  -> PR #909 continuation: learnable-frequency query-indexed identifiability
+  -> update-law discrimination
+  -> Lyapunov / stability analysis
+  -> eligible-only MDL / Pareto comparison
+  -> explicit continuous-state -> MemoryFibre observation/quotient
+  -> empirical neural / Levin adapters
+```
+
+Certification is orthogonal proof debt: implementation/source integration may advance while an Agda runner is unavailable, but no kernel theorem status is promoted without an actual execution receipt.
+
+## Thread invariants retained from the structural parent
+
+The programme continues to enforce the decisions made before the first numerical producer:
+
+- there is no universal physical `F`; scale transition is level/domain indexed;
+- environment and history remain explicit inputs to situated lower-scale dynamics;
+- persistence is broader than fixed-point/local-minimum attraction and may include invariant sets, metastable classes, phase-locked sets, limit cycles modulo gauge, and other stable equivalence classes;
+- persistent lower-scale structure does not become next-scale semantic identity without an explicit realisation witness;
+- `MemoryFibre` remains the public semantic memory carrier;
+- continuous phase is not definitionally finite `Phase3` and does not create a Hilbert/quantum interpretation;
+- objective value, learning/update rule, and observed cognitive/behavioural measurement remain distinct;
+- oscillator mismatch is not cognitive dissonance by definition;
+- target/reference states are present-time constraints and do not imply backwards-in-time causation;
+- the oscillator objective does not merge the repo's distinct energy carriers.
+
+## Fixed-frequency executable tranche
+
+PR #909 first established a deliberately bounded falsifiable producer:
 
 ```text
 three-frequency synthetic target
@@ -15,95 +49,117 @@ three-frequency synthetic target
   -> fail-closed Agda receipt
 ```
 
-Implemented surfaces:
+All three conditions share the same target spectral support. Larger conditions receive redundant oscillators, not additional target frequencies. Default seeds `7,17,29` produced near-perfect waveform reconstruction in all three conditions while larger redundant models retained hidden phase multiplicity. That observation motivates identifiability work; it does not establish `9 > 6 > 3`, neuroscience, or mechanism identity.
 
-- `scripts/run_continuous_oscillator_synthetic.py`
-- `tests/test_continuous_oscillator_synthetic.py`
-- `DASHI.Cognition.PNF.ContinuousOscillatorSyntheticReceipt`
-- `DASHI.Cognition.PNF.PNFIRLearningEverything`
+## Query-indexed identifiability tranche
 
-The 3/6/9 conditions intentionally share the same three target frequencies. The larger models receive redundant oscillators rather than extra spectral support. This prevents a larger condition from winning merely because it was given additional frequencies.
+The next runtime is now explicit:
 
-## Current observables
+- `scripts/run_continuous_oscillator_identifiability.py`
+- `tests/test_continuous_oscillator_identifiability.py`
+- `DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityReceipt`
+- `DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityRegression`
 
-Each `(oscillator count, seed)` run records:
+Frequencies become learnable inside declared bounds. The design freezes optimizer budget, frequency bounds, train/held-out split, gauge/matching policy, observable tolerance, and parameter tolerance before held-out evaluation.
 
-- initial and final waveform MSE;
-- initial and final total objective;
-- loss reduction ratio;
-- waveform correlation;
-- global phase coherence;
-- per-frequency-group phase coherence;
-- gradient norm;
-- last parameter-step norm;
-- learned amplitudes and phases;
-- unchanged frequency vector;
-- convergence reason and step count.
+Identifiability is query-relative. Reuse `DASHI.Core.QueryIndexedProjectionAdequacyExact`:
 
-These coordinates are intentionally not collapsed into a scalar truth or `truthiness` score.
+```text
+hidden state Theta --pi--> observation O
+        |                  |
+        Q                  Qbar
+        v                  v
+      answer  <------------
+```
 
-## Default bounded result
+For a query `Q`, exact identifiability means `Q` factors through the observation projection. The query family is kept separate:
 
-For default seeds `7, 17, 29`, all three model-size conditions reduce waveform fit error by more than `0.999999` as a fraction of initial MSE and achieve waveform correlation extremely close to one.
+- waveform reconstruction;
+- frequency recovery;
+- amplitude recovery;
+- phase recovery after declared gauge normalization;
+- complete canonical hidden-state recovery.
 
-The current default means are approximately:
+A numerical near-collision is only a diagnostic approximation to the exact fibre-collision theorem shape. It is not an Agda `QueryAdequacyDefect` unless an exact finite witness is separately constructed.
 
-| N | mean initial MSE | mean final MSE | mean correlation |
-|---:|---:|---:|---:|
-| 3 | 1.143462218688 | 3.39e-10 | 0.999999999822 |
-| 6 | 0.429337767144 | 1.02255e-7 | 0.999999948433 |
-| 9 | 0.367922009437 | 2.3389e-8 | 0.999999987425 |
+## Cross-pollinated experiment discipline
 
-This is not a promoted ordering. In particular, the lane does not infer `9 > 6 > 3`. N=3 has the smallest mean final fit loss in this bounded default run. N=6 and N=9 retain nontrivial hidden within-frequency phase multiplicity despite nearly identical observable target reconstruction, which is useful evidence for the hidden-state/public-observation distinction but is not yet a neuroscience result.
+From Fly/NDim and Grokking:
+
+```text
+define carrier/rule
+  -> fit/select on training/design coordinates
+  -> freeze
+  -> held-out time evaluation
+  -> harder held-out spectral geometry
+  -> nulls/refits
+```
+
+Held-out time is not equivalent to unseen spectral geometry. Held-out outcomes may not tune matching, tolerances, optimizer budget, or null definitions. Optimizer failure is `optimizationUnresolved`, not mathematical non-identifiability.
+
+From admissible-consumer MDL/Pareto:
+
+```text
+admissible
+  + consumer adequate
+  -> eligible
+  -> only then compare description length / Pareto cost
+```
+
+Thus neither fewer parameters nor richer hidden multiplicity wins the 3/6/9 comparison by itself.
+
+## Attribution / snowball / external identity discipline
+
+All scientific sources used by this programme retain the repository `AttributedSourceCore` coordinates and `SnowballAttributionProvenanceInvariantExact` role invariants: author, title, publication, DOI state, canonical URL, source kind, formalisation relationship, visibility, and proof/authority non-promotion.
+
+The identifiability adapter currently retains David Blackwell, *Equivalent Comparisons of Experiments* (1953), DOI `10.1214/aoms/1177729032`, only as an information-comparison precedent inherited through the query-indexed projection-adequacy parent. Blackwell does not author the DASHI oscillator construction and citation does not prove numerical identifiability.
+
+OEIS, Wikidata QIDs, Dewey coordinates, and other external identifiers are optional identity/navigation coordinates, not decoration. Add them only where the same object or a role-relevant external concept is actually paid. In particular, the digits `3/6/9` do not create semantic identity across Base369, oscillator count, Tesla folklore, physics, cognition, or any other domain.
+
+## Remaining Pareto frontier
+
+1. **Execute/certify the identifiability runtime.** Obtain actual pytest/Python receipts and map near-collision/recovery behaviour across seeds before promoting any numerical observation.
+2. **Finish identifiability stress/nulls.** Add frequency-separation ladder, noise ladder, restart multiplicity, gauge null, and unseen spectral-geometry transfer with refitting where required.
+3. **Update-law discrimination.** Compare the current gradient rule with separately derived Hebbian, Oja, and Kuramoto candidates. Analogy is not identity; each candidate needs its own source and derivation chain.
+4. **Lyapunov/stability.** Ask whether each declared update admits a monotone Lyapunov quantity; keep fit error, regularisation, phase coherence, and semantic/empirical adequacy distinct.
+5. **Eligible-only MDL/Pareto.** Compare 3/6/9 using held-out reconstruction, query adequacy, code/parameter length, basin robustness, convergence and null stability only after eligibility gates pass.
+6. **MemoryFibre quotient.** Build the explicit observation/quotient from continuous learned states into the existing public memory fibre, preserving remembered-event identity while retaining hidden multiplicity.
+7. **Recursive-scale realisation.** Only with an explicit `RealisesNext` witness may a persistent lower-scale oscillator class become a next-scale effective object.
+8. **CRT continuous-carrier lane.** Separately investigate CRT/projector structure on a genuine continuous module/Hilbert-like carrier; do not smuggle finite Base369/Phase3 arithmetic into the oscillator carrier by shared numerals.
+9. **Empirical adapters.** EEG/MEG/neural data and Levin-style morphogenetic analogues remain downstream and require separate source, authority, same-object, measurement, and promotion receipts.
 
 ## Promotion boundary
 
-The executable slice does not promote:
+Remain fail-closed until separately paid:
 
 - neural-memory mechanism identity;
-- Hebbian or Oja identity;
-- Kuramoto identity;
-- cognitive dissonance as oscillator energy by definition;
+- Hebbian/Oja/Kuramoto identity;
+- cognitive-dissonance identity;
 - empirical EEG/MEG/brain fit;
 - intrinsic 3/6/9 superiority;
 - quantum interpretation;
-- a universal physical oscillator ontology.
+- universal physical oscillator ontology;
+- global identifiability;
+- Levin-specific realisation;
+- one physical energy governing all scales.
 
-`ContinuousOscillatorSyntheticReceipt` keeps each of those claims fail-closed.
+## Verification wall
 
-## Next numerical tranches
-
-Pareto order:
-
-1. **Certification.** Obtain actual CI/kernel receipts for the Agda receipt and focused Python test on the PR head.
-2. **Identifiability.** Add a learnable-frequency tranche only after defining frequency-separation, observation-window and gauge/degeneracy diagnostics.
-3. **Update-law comparison.** Compare plain gradient phase updates with explicitly derived Hebbian/Oja/Kuramoto candidates; do not identify them by analogy.
-4. **Lyapunov surface.** Test whether the declared optimization dynamics admit a monotone Lyapunov certificate, keeping fit error, phase regularization and diagnostic coherence separate.
-5. **MDL/Pareto comparison.** Compare 3/6/9 by held-out reconstruction, parameter/code length, basin robustness and convergence—not by count preference.
-6. **MemoryFibre adapter.** Define an explicit observation/quotient from continuous learned states into the existing public memory fibre while preserving hidden-state multiplicity.
-7. **Empirical/biological adapters.** Only after the synthetic and identifiability lanes are paid, test neural data or Levin-style morphogenetic analogues with separate authority and promotion receipts.
-
-## Validation
-
-Focused Python inner loop:
+Focused Python targets:
 
 ```bash
-pytest -q tests/test_continuous_oscillator_synthetic.py
-python -m py_compile scripts/run_continuous_oscillator_synthetic.py
+pytest -q tests/test_continuous_oscillator_synthetic.py tests/test_continuous_oscillator_identifiability.py
+python -m py_compile scripts/run_continuous_oscillator_synthetic.py scripts/run_continuous_oscillator_identifiability.py
 ```
 
-Formal receipt target:
+Focused formal targets:
 
 ```bash
 agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
-  DASHI/Cognition/PNF/ContinuousOscillatorSyntheticReceipt.agda
-```
+  DASHI/Cognition/PNF/ContinuousOscillatorIdentifiabilityRegression.agda
 
-Narrow aggregate target:
-
-```bash
 agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
   DASHI/Cognition/PNF/PNFIRLearningEverything.agda
 ```
 
-No Agda success should be claimed until one of those commands or an equivalent repository workflow actually returns green.
+No Python or Agda GREEN is claimed for a new head until the corresponding command/workflow is actually observed to pass.
