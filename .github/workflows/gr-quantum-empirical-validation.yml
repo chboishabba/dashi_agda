@@ -4,10 +4,17 @@ on:
   pull_request:
     paths:
       - 'DASHI/Empirical/GRQuantum*.agda'
+      - 'DASHI/Empirical/DarkDimension*.agda'
+      - 'DASHI/Physics/Closure/DarkDimension*.agda'
+      - 'DASHI/Unified/DarkDimension*.agda'
       - 'DASHI/Unified/GRQuantumStrictProofTerms.agda'
       - 'DASHI/Unified/GRQuantumContinuumAuthorities.agda'
       - 'DASHI/Unified/GRQuantumProofTermAtlas.agda'
       - 'scripts/validate_gr_quantum_empirical_receipt.py'
+      - 'scripts/check_dark_dimension_string_promotion_boundary.py'
+      - 'scripts/check_dark_dimension_empirical_discrimination.py'
+      - 'scripts/check_dark_dimension_prospective_discriminator.py'
+      - 'scripts/check_dark_dimension_quantitative_envelope.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
@@ -35,6 +42,10 @@ jobs:
           python -m pip install --quiet --upgrade pip pytest
           python -m py_compile scripts/validate_gr_quantum_empirical_receipt.py
           pytest -q tests/test_gr_quantum_empirical_receipt.py
+          python scripts/check_dark_dimension_string_promotion_boundary.py
+          python scripts/check_dark_dimension_empirical_discrimination.py
+          python scripts/check_dark_dimension_prospective_discriminator.py
+          python scripts/check_dark_dimension_quantitative_envelope.py
 
   agda-empirical-atlas:
     runs-on: ubuntu-24.04
@@ -49,21 +60,30 @@ jobs:
           cp -a /usr/share/agda-stdlib /tmp/agda-stdlib
           chmod -R u+w /tmp/agda-stdlib
           agda --version
-      - name: Type-check GR quantum proof and empirical atlas
+      - name: Type-check GR quantum proof and Dark Dimension empirical tranche
         run: |
-          set +e
-          agda \
-            --no-libraries \
-            -i . \
-            -i /tmp/agda-stdlib \
-            DASHI/Unified/GRQuantumProofTermAtlas.agda \
-            >/tmp/gr-quantum-empirical-agda.log 2>&1
-          status=$?
-          if [ "$status" -ne 0 ]; then
-            echo '--- Agda diagnostic tail ---'
-            tail -n 160 /tmp/gr-quantum-empirical-agda.log
-            exit "$status"
-          fi
+          set -e
+          : > /tmp/gr-quantum-empirical-agda.log
+          check_agda() {
+            file="$1"
+            echo "=== agda $file ===" | tee -a /tmp/gr-quantum-empirical-agda.log
+            if ! agda \
+              --no-libraries \
+              -i . \
+              -i /tmp/agda-stdlib \
+              "$file" \
+              >>/tmp/gr-quantum-empirical-agda.log 2>&1; then
+              echo "--- Agda diagnostic tail for $file ---"
+              tail -n 160 /tmp/gr-quantum-empirical-agda.log
+              exit 1
+            fi
+          }
+          check_agda DASHI/Unified/GRQuantumProofTermAtlas.agda
+          check_agda DASHI/Physics/Closure/DarkDimensionStringPromotionBoundaryExact.agda
+          check_agda DASHI/Empirical/DarkDimensionEmpiricalDiscriminationExact.agda
+          check_agda DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda
+          check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
+          check_agda DASHI/Unified/DarkDimensionGRQuantumPromotionAdapterExact.agda
           cat /tmp/gr-quantum-empirical-agda.log
       - name: Upload Agda diagnostic
         if: always()
