@@ -5,6 +5,7 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Core.RecursiveScaleTransitionExact as Scale
+import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementExact as Osc
 
 ------------------------------------------------------------------------
 -- Recursive scale transition surface.
@@ -39,3 +40,13 @@ witnessMediatedRealisation = tt
 
 nonAttractorPersistenceSurface : Scale.PersistentRole
 nonAttractorPersistenceSurface = Scale.persistenceNeedNotBeAttractor
+
+------------------------------------------------------------------------
+-- Continuous oscillator refinement surface.
+------------------------------------------------------------------------
+
+oscillatorSchemaSurfaceExists : Set₁
+oscillatorSchemaSurfaceExists = Osc.OscillatorSchema
+
+continuousBoundarySurfaceExists : Set₁
+continuousBoundarySurfaceExists = Osc.ContinuousOscillatorBoundary
