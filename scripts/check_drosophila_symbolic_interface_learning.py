@@ -11,6 +11,7 @@ REQUIRED = {
         "connectomeDoesNotDetermineExecutableDynamics",
         "emittedCharactersDoNotEstablishPythonKnowledge",
         "fizzBuzzDoesNotEstablishGeneralProgrammingCompetence",
+        "programTextDoesNotRecoverNeuralObservation",
         "connectomeAdvantageRequiresNullComparison",
     ],
     "DASHI/Biology/DrosophilaSymbolicInterfaceLearningRegression.agda": [
