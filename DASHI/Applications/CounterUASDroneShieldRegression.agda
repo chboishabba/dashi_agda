@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Applications.CounterUASDroneShieldExact as CUAS
 import DASHI.Applications.CounterUASSOTASourceAtlasExact as Sources
+import DASHI.Applications.CounterUASOperationalSourceAtlasExact as OperationalSources
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 
 ------------------------------------------------------------------------
@@ -34,8 +35,15 @@ record CounterUASDroneShieldRegression : Set₁ where
         CUAS.trackOnlyProjection
         CUAS.responseSemantics
         CUAS.mitigationQuery
+    specificationAloneHasPerformanceAdequacyDefect :
+      Adequacy.QueryAdequacyDefect
+        CUAS.specificationProjection
+        CUAS.evaluationSemantics
+        CUAS.fieldPerformanceQuery
     academicSourceAtlasNonPromoting :
       Sources.counterUASSOTASourceAtlasCreatesAuthority ≡ false
+    operationalSourceAtlasNonPromoting :
+      OperationalSources.counterUASOperationalSourceAtlasCreatesAuthority ≡ false
 
 canonicalCounterUASDroneShieldRegression : CounterUASDroneShieldRegression
 canonicalCounterUASDroneShieldRegression =
@@ -47,4 +55,6 @@ canonicalCounterUASDroneShieldRegression =
     refl
     refl
     CUAS.trackOnlyMitigationAdequacyDefect
+    CUAS.specificationOnlyPerformanceAdequacyDefect
     Sources.counterUASSOTASourceAtlasCreatesAuthorityIsFalse
+    OperationalSources.counterUASOperationalSourceAtlasCreatesAuthorityIsFalse
