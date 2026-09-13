@@ -43,8 +43,9 @@ require(CAUSAL, [
 require(FOCUSING, ["negativeExpansionForcesFiniteAffineFocusing", "conjugatePointIsNotSpacetimeSingularity"])
 require(GLOBAL, [
     "futureHorismosOfTrappedSurface",
+    "sameHorismosObjectCarriesBothReductioClaims",
+    "causalBoundaryConsumer",
     "nullCompletenessPlusFocusingMakesFutureHorismosCompact",
-    "sameFutureHorismosUsedOnBothSidesOfContradiction",
     "globalContradictionForcesNullIncompleteness",
 ])
 require(PENROSE, ["Penrose1965SourceReceipt", "nullGeodesicIncompletenessConclusion"])
