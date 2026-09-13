@@ -10,11 +10,30 @@ import DASHI.Core.AttributedSourceCore as Source
 ------------------------------------------------------------------------
 -- FADING-DARK-MATTER PARENT / REANALYSIS LINEAGE
 --
--- The 2021 Agrawal-Obied-Vafa model is a source-identified predecessor of the
--- 2025/26 Bedroya-Obied-Vafa-Wu reanalysis.  This records the genealogy while
--- refusing to turn model lineage into implementation, normalization or
--- numerical-manifest identity.
+-- 2018: quintessence-potential parameterization ancestor.
+-- 2021: fading-dark-matter parent proposal / analysis.
+-- 2025/26: dark-dimension reanalysis using a locally exponential realization.
+--
+-- These edge types are intentionally different.  Parameterization ancestry and
+-- proposal lineage import neither implementation identity nor numerical-manifest
+-- custody downstream.
 ------------------------------------------------------------------------
+
+potentialAncestorSource : Source.AttributedSource
+potentialAncestorSource =
+  Source.mkDOISource
+    "Prateek Agrawal; Georges Obied; Paul J. Steinhardt; Cumrun Vafa"
+    "On the Cosmological Implications of the String Swampland"
+    "Physics Letters B 784, 271-276"
+    "2018"
+    "10.1016/j.physletb.2018.07.040"
+    "https://doi.org/10.1016/j.physletb.2018.07.040"
+    Source.academicArticleSource
+    "source identified by the 2021 fading-dark-matter paper as the prior quintessence-potential parameterization; this lineage edge does not make the 2018 work the source of the later fading-DM coupling, code, or numerical manifest"
+    Source.publicAttribution
+
+potentialAncestorArXiv : String
+potentialAncestorArXiv = "1806.09718"
 
 parentSource : Source.AttributedSource
 parentSource =
@@ -65,6 +84,10 @@ childLocalPotentialLaw = "V=V0 exp(-c phi)"
 record FadingDMParentLineageStatus : Set where
   constructor fadingDMParentLineageStatus
   field
+    potentialParameterizationAncestorIdentified : Bool
+    parentStatesSamePotentialParameterization : Bool
+    ancestorImplementationInheritanceDemonstrated : Bool
+    ancestorNumericalManifestIdentityDemonstrated : Bool
     parentModelIdentified : Bool
     childReanalysisRelationshipLocated : Bool
     parentModifiedCLASSMontePythonLocated : Bool
@@ -83,8 +106,19 @@ open FadingDMParentLineageStatus public
 canonicalFadingDMParentLineageStatus : FadingDMParentLineageStatus
 canonicalFadingDMParentLineageStatus =
   fadingDMParentLineageStatus
+    true true false false
     true true true true true true true true
     false false false false
+
+ancestorImplementationInheritanceStillOpen :
+  ancestorImplementationInheritanceDemonstrated canonicalFadingDMParentLineageStatus
+  ≡ false
+ancestorImplementationInheritanceStillOpen = refl
+
+ancestorNumericalManifestIdentityStillOpen :
+  ancestorNumericalManifestIdentityDemonstrated canonicalFadingDMParentLineageStatus
+  ≡ false
+ancestorNumericalManifestIdentityStillOpen = refl
 
 parentImplementationInheritanceStillOpen :
   exactImplementationInheritanceDemonstrated canonicalFadingDMParentLineageStatus
@@ -109,6 +143,10 @@ parentChainStillUnlocatedByCurrentSearch = refl
 -- WrongType / same-object firewalls.
 ------------------------------------------------------------------------
 
+data PotentialAncestorEqualsFadingDMImplementationAncestor : Set where
+
+data AncestorParameterizationPaysParentManifest : Set where
+
 data ParentLineageEqualsImplementationIdentity : Set where
 
 data ParentNormalizationPaysChildNormalization : Set where
@@ -118,6 +156,14 @@ data SameProposalFamilyMeansSameNumericalManifest : Set where
 data ParentMassLawEqualsChildLocalMassLaw : Set where
 
 data ParentPotentialLawEqualsChildLocalPotentialLaw : Set where
+
+potentialAncestorDoesNotEqualFadingDMImplementationAncestor :
+  PotentialAncestorEqualsFadingDMImplementationAncestor → ⊥
+potentialAncestorDoesNotEqualFadingDMImplementationAncestor ()
+
+ancestorParameterizationDoesNotAutoPayParentManifest :
+  AncestorParameterizationPaysParentManifest → ⊥
+ancestorParameterizationDoesNotAutoPayParentManifest ()
 
 parentLineageDoesNotEqualImplementationIdentity :
   ParentLineageEqualsImplementationIdentity → ⊥
