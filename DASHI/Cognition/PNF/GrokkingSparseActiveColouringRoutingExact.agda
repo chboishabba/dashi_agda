@@ -210,6 +210,113 @@ betaWitnessIsUniversalGrokkingObjective : Bool
 betaWitnessIsUniversalGrokkingObjective = false
 
 ------------------------------------------------------------------------
+-- Matched checkpoint transition receipt.
+--
+-- Beta, held-out generalisation, active support, and training loss remain
+-- separate coordinates.  Promotion requires matched checkpoint provenance and
+-- paid finite beta maximality receipts on both sides; no delta alone promotes.
+------------------------------------------------------------------------
+
+record GrokkingCheckpointObservation : Set where
+  constructor grokkingCheckpointObservation
+  field
+    closedCompatibleSystem : FiniteClosedCompatibleSystem
+    activeSupportAtCheckpoint : Nat
+    heldOutGeneralisationScore : Nat
+    trainingLossMagnitude : Nat
+    checkpointMeasured : Bool
+open GrokkingCheckpointObservation public
+
+record GrokkingClosedCompatibleTransitionReceipt : Set where
+  constructor grokkingClosedCompatibleTransitionReceipt
+  field
+    beforeCheckpoint : GrokkingCheckpointObservation
+    afterCheckpoint : GrokkingCheckpointObservation
+    sameModelFamily : Bool
+    sameHeldOutSplit : Bool
+    sameCircuitExtractionRule : Bool
+open GrokkingClosedCompatibleTransitionReceipt public
+
+betaGain : GrokkingClosedCompatibleTransitionReceipt → Nat
+betaGain receipt =
+  betaClosedCompatible (closedCompatibleSystem (afterCheckpoint receipt)) ∸
+  betaClosedCompatible (closedCompatibleSystem (beforeCheckpoint receipt))
+
+heldOutGeneralisationGain : GrokkingClosedCompatibleTransitionReceipt → Nat
+heldOutGeneralisationGain receipt =
+  heldOutGeneralisationScore (afterCheckpoint receipt) ∸
+  heldOutGeneralisationScore (beforeCheckpoint receipt)
+
+activeSupportGain : GrokkingClosedCompatibleTransitionReceipt → Nat
+activeSupportGain receipt =
+  activeSupportAtCheckpoint (afterCheckpoint receipt) ∸
+  activeSupportAtCheckpoint (beforeCheckpoint receipt)
+
+trainingLossDecrease : GrokkingClosedCompatibleTransitionReceipt → Nat
+trainingLossDecrease receipt =
+  trainingLossMagnitude (beforeCheckpoint receipt) ∸
+  trainingLossMagnitude (afterCheckpoint receipt)
+
+transitionPromotionPaid : GrokkingClosedCompatibleTransitionReceipt → Bool
+transitionPromotionPaid receipt with sameModelFamily receipt
+... | false = false
+... | true with sameHeldOutSplit receipt
+...   | false = false
+...   | true with sameCircuitExtractionRule receipt
+...     | false = false
+...     | true with checkpointMeasured (beforeCheckpoint receipt)
+...       | false = false
+...       | true with checkpointMeasured (afterCheckpoint receipt)
+...         | false = false
+...         | true with maximalityPaidByFiniteExhaustion (closedCompatibleSystem (beforeCheckpoint receipt))
+...           | false = false
+...           | true with maximalityPaidByFiniteExhaustion (closedCompatibleSystem (afterCheckpoint receipt))
+...             | false = false
+...             | true = true
+
+syntheticBeforeCheckpoint : GrokkingCheckpointObservation
+syntheticBeforeCheckpoint =
+  grokkingCheckpointObservation baseClosedCompatibleSystem 2 5 1 true
+
+syntheticAfterCheckpoint : GrokkingCheckpointObservation
+syntheticAfterCheckpoint =
+  grokkingCheckpointObservation conflictRemovedSystem 3 8 1 true
+
+syntheticClosedCompatibleTransition : GrokkingClosedCompatibleTransitionReceipt
+syntheticClosedCompatibleTransition =
+  grokkingClosedCompatibleTransitionReceipt
+    syntheticBeforeCheckpoint
+    syntheticAfterCheckpoint
+    true true true
+
+unmatchedClosedCompatibleTransition : GrokkingClosedCompatibleTransitionReceipt
+unmatchedClosedCompatibleTransition =
+  grokkingClosedCompatibleTransitionReceipt
+    syntheticBeforeCheckpoint
+    syntheticAfterCheckpoint
+    false true true
+
+unpaidBetaSystem : FiniteClosedCompatibleSystem
+unpaidBetaSystem =
+  finiteClosedCompatibleSystem 3 1 0
+    (closedCompatibleFamilyCertificate 2 true true)
+    2 false
+
+unpaidBetaBeforeCheckpoint : GrokkingCheckpointObservation
+unpaidBetaBeforeCheckpoint =
+  grokkingCheckpointObservation unpaidBetaSystem 2 5 1 true
+
+unpaidBetaClosedCompatibleTransition : GrokkingClosedCompatibleTransitionReceipt
+unpaidBetaClosedCompatibleTransition =
+  grokkingClosedCompatibleTransitionReceipt
+    unpaidBetaBeforeCheckpoint
+    syntheticAfterCheckpoint
+    true true true
+
+syntheticTransitionIsEmpiricalGrokkingResult : Bool
+syntheticTransitionIsEmpiricalGrokkingResult = false
+
+------------------------------------------------------------------------
 -- Colouring cross-pollination remains structural, not objective identity.
 ------------------------------------------------------------------------
 
