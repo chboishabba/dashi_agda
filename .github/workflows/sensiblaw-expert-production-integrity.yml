@@ -5,9 +5,11 @@ on:
     paths:
       - 'DASHI/Law/SensibLawExpertEvidenceProductionIntegrityExact.agda'
       - 'DASHI/Law/SensibLawExpertEvidenceProductionIntegrityRegression.agda'
+      - 'DASHI/Law/SensibLawExpertEvidenceSourceGenealogyRegression.agda'
       - 'DASHI/Core/MeasurementAdministrationComparabilityExact.agda'
       - 'DASHI/Core/MeasurementAdministrationComparabilityRegression.agda'
       - 'DASHI/Core/QueryIndexedProjectionAdequacyExact.agda'
+      - 'DASHI/Core/ObserverRefinementLatticeExact.agda'
       - 'DASHI/Core/AuthorityNonPromotionCore.agda'
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/sensiblaw-expert-production-integrity.yml'
@@ -15,9 +17,11 @@ on:
     paths:
       - 'DASHI/Law/SensibLawExpertEvidenceProductionIntegrityExact.agda'
       - 'DASHI/Law/SensibLawExpertEvidenceProductionIntegrityRegression.agda'
+      - 'DASHI/Law/SensibLawExpertEvidenceSourceGenealogyRegression.agda'
       - 'DASHI/Core/MeasurementAdministrationComparabilityExact.agda'
       - 'DASHI/Core/MeasurementAdministrationComparabilityRegression.agda'
       - 'DASHI/Core/QueryIndexedProjectionAdequacyExact.agda'
+      - 'DASHI/Core/ObserverRefinementLatticeExact.agda'
       - 'DASHI/Core/AuthorityNonPromotionCore.agda'
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/sensiblaw-expert-production-integrity.yml'
@@ -58,6 +62,7 @@ jobs:
             targets=(
               DASHI/Core/MeasurementAdministrationComparabilityRegression.agda
               DASHI/Law/SensibLawExpertEvidenceProductionIntegrityRegression.agda
+              DASHI/Law/SensibLawExpertEvidenceSourceGenealogyRegression.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-sensiblaw-expert-production.log 2>&1
