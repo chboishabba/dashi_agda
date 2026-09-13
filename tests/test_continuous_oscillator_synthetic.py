@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import csv
 import json
+import math
 import subprocess
 import sys
 from pathlib import Path
@@ -23,8 +25,10 @@ FAIL_CLOSED_FLAGS = {
 }
 
 
-def run_diagnostic(tmp_path: Path, *extra_args: str) -> tuple[dict[str, Any], Path]:
-    out_dir = tmp_path / "oscillator"
+def run_diagnostic(
+    tmp_path: Path, *extra_args: str, leaf: str = "oscillator"
+) -> tuple[dict[str, Any], Path]:
+    out_dir = tmp_path / leaf
     proc = subprocess.run(
         [
             sys.executable,
@@ -68,3 +72,59 @@ def test_default_run_writes_receipt_artifacts_and_declares_369_conditions(
     assert payload["output_paths"] == {
         key: str(path) for key, path in expected_paths.items()
     }
+
+    with expected_paths["comparison_csv"].open(newline="", encoding="utf-8") as handle:
+        comparison_rows = list(csv.DictReader(handle))
+    assert len(comparison_rows) == len(payload["runs"])
+
+
+def test_default_runs_share_target_support_keep_frequencies_fixed_and_reduce_fit_loss(
+    tmp_path: Path,
+) -> None:
+    payload, _out_dir = run_diagnostic(tmp_path)
+
+    target_frequencies = payload["target"]["frequencies_hz"]
+    assert len(target_frequencies) == 3
+    assert payload["default_seeds"] == [7, 17, 29]
+    assert len(payload["runs"]) == 9
+
+    for run in payload["runs"]:
+        n = run["oscillator_count"]
+        repeats = n // 3
+        assert run["frequencies_fixed"] is True
+        assert run["frequencies_hz"] == [
+            frequency
+            for frequency in target_frequencies
+            for _ in range(repeats)
+        ]
+        assert run["final_fit_loss"] < run["initial_fit_loss"]
+        assert run["loss_reduction_ratio"] > 0.0
+        assert math.isfinite(run["final_total_objective"])
+        assert math.isfinite(run["gradient_norm"])
+        assert math.isfinite(run["parameter_step_norm"])
+        assert -1.0 <= run["waveform_correlation"] <= 1.0
+        assert 0.0 <= run["global_phase_coherence"] <= 1.0
+        assert len(run["group_phase_coherence"]) == 3
+        assert all(0.0 <= value <= 1.0 for value in run["group_phase_coherence"])
+
+
+def test_seeded_numerical_receipt_is_deterministic(tmp_path: Path) -> None:
+    args = ("--seeds", "17", "--max-steps", "600")
+    first, _ = run_diagnostic(tmp_path, *args, leaf="first")
+    second, _ = run_diagnostic(tmp_path, *args, leaf="second")
+
+    assert first["target"] == second["target"]
+    assert first["runs"] == second["runs"]
+    assert first["comparison_by_count"] == second["comparison_by_count"]
+
+
+def test_comparison_surface_does_not_encode_a_required_369_ranking(tmp_path: Path) -> None:
+    payload, _out_dir = run_diagnostic(tmp_path)
+
+    assert payload["comparison_policy"] == {
+        "same_frequency_support": True,
+        "ranking_required": False,
+        "nine_superiority_assumed": False,
+    }
+    assert set(payload["comparison_by_count"]) == {"3", "6", "9"}
+    assert payload["promotion"]["flags"]["three_six_nine_superiority_promoted"] is False
