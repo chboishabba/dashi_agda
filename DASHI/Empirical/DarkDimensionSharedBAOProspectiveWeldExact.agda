@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Empirical.DarkDimensionDESIDR2BAODataReceiptExact as DR2Data
 import DASHI.Empirical.DarkDimensionProspectiveDiscriminatorExact as Prospective
+import DASHI.Empirical.DarkDimensionSameKeyPredictionDebtExact as PredictionDebt
 import DASHI.Empirical.DarkDimensionSharedBAOObservableExact as SharedBAO
 import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationKey
 
@@ -27,6 +28,11 @@ record SharedBAOProspectiveWeldStatus : Set where
 
     retrospectiveDR2StillNotHeldOut :
       DR2Data.futureHeldOutData DR2Data.canonicalDESIDR2BAODataStatus
+      ≡ false
+
+    sameKeyPredictionDerivationStillOpen :
+      PredictionDebt.debtClosed
+        PredictionDebt.canonicalSameKeyPredictionDerivationDebt
       ≡ false
 
     sharedObservableNumericalSeparationOpen :
@@ -54,6 +60,8 @@ sharedBAOIdentityPaidButNumericalSeparationOpen = record
   ; retrospectiveDR2ValuesRecorded = refl
   ; retrospectiveDR2StillNotHeldOut =
       DR2Data.retrospectiveDataDoesNotPayHeldOutPrediction
+  ; sameKeyPredictionDerivationStillOpen =
+      PredictionDebt.sameKeyPredictionDebtStillOpen
   ; sharedObservableNumericalSeparationOpen =
       SharedBAO.sharedObservableNumericalPredictionsStillOpen
   ; sameKeyNumericalSeparationOpen =
@@ -68,6 +76,13 @@ sameObservationKeyStillRequiredForProspectiveSeparation :
   ≡ false
 sameObservationKeyStillRequiredForProspectiveSeparation =
   ObservationKey.sameKeyNumericalModelPredictionsStillOpen
+
+sameKeyPredictionDerivationDebtStillBlocksProspectiveSeparation :
+  Prospective.quantitativeModelSeparationLocked
+    Prospective.canonicalProspectiveDiscriminatorPacket
+  ≡ false
+sameKeyPredictionDerivationDebtStillBlocksProspectiveSeparation =
+  Prospective.quantitativeEnvelopeStillDoesNotLockProspectivePacket
 
 retrospectiveDR2DataStillDoesNotLockProspectiveSeparation :
   Prospective.quantitativeModelSeparationLocked
