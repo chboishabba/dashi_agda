@@ -6,14 +6,11 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact as BedroyaBackground
 import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
 import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun
 import DASHI.Empirical.DarkDimensionSharedBAOObservableExact as SharedBAO
 import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationKey
-
-------------------------------------------------------------------------
--- SAME-KEY MODEL-PREDICTION DERIVATION DEBT
-------------------------------------------------------------------------
 
 daoIndependentTargetSource : Source.AttributedSource
 daoIndependentTargetSource =
@@ -51,10 +48,6 @@ darkDimensionModelSource =
     "source for the evolving Dark-Dimension equations and DESI DR2 retrospective fit; no first-party public executable implementation is admitted by this tranche"
     Source.publicAttribution
 
-------------------------------------------------------------------------
--- Revision-pinned public execution surface for the DAO/DRMD lane.
-------------------------------------------------------------------------
-
 record PublicExecutionSurface : Set where
   constructor publicExecutionSurface
   field
@@ -81,16 +74,10 @@ daoDRMDExecutionSurface =
     "rs_drag"
     "rs_d_drmd"
     "DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact"
-    true
-    true
-    false
+    true true false
 
 daoDRMDClassRevision : String
 daoDRMDClassRevision = "aa2b61a0f1cf246672cdbd4634a4797d4cc654f9"
-
-------------------------------------------------------------------------
--- Debt carrier.
-------------------------------------------------------------------------
 
 record SameKeyPredictionDerivationDebt : Set where
   constructor sameKeyPredictionDerivationDebt
@@ -145,6 +132,13 @@ daoReconstructionVectorStillOpen = DAORun.numericalVectorStillOpen
 darkDimensionExecutableStillOpen :
   darkDimensionExecutableModelLocated canonicalSameKeyPredictionDerivationDebt ≡ false
 darkDimensionExecutableStillOpen = refl
+
+darkDimensionBackgroundReconstructionStillOpen :
+  BedroyaBackground.sixKeyBAOVectorDerived
+    BedroyaBackground.canonicalBedroyaBackgroundReconstructionStatus
+  ≡ false
+darkDimensionBackgroundReconstructionStillOpen =
+  BedroyaBackground.sixKeyVectorStillOpen
 
 daoExtractionRecipeLocatedButExecutionStillOpen :
   DAORecipe.recipeExecuted DAORecipe.daoPinnedExtractionRecipe ≡ false
