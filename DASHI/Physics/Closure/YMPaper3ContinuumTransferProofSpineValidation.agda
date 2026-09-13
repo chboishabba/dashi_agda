@@ -1,0 +1,23 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Closure.YMPaper3ContinuumTransferProofSpineValidation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.YMPaper3ContinuumTransferProofSpineExact as Spine
+
+paper3SpineCompilerIsMachineChecked : ProofLevel
+paper3SpineCompilerIsMachineChecked = Spine.paper3ContinuumTransferCompilerLevel
+
+paper3H3aRemainsConditional : ProofLevel
+paper3H3aRemainsConditional = Spine.paper3H3aPhysicalInputLevel
+
+paper3H3bRemainsConditional : ProofLevel
+paper3H3bRemainsConditional = Spine.paper3H3bPhysicalInputLevel
+
+paper3NoPollutionRemainsConditional : ProofLevel
+paper3NoPollutionRemainsConditional = Spine.paper3NoSpectralPollutionPhysicalInputLevel
+
+paper3OSWightmanRemainsConditional : ProofLevel
+paper3OSWightmanRemainsConditional = Spine.paper3OSWightmanPhysicalInputLevel
+
+paper3PositiveGapRemainsConditional : ProofLevel
+paper3PositiveGapRemainsConditional = Spine.paper3PositiveContinuumMassGapPhysicalLevel

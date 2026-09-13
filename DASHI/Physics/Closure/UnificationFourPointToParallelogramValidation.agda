@@ -1,0 +1,14 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Closure.UnificationFourPointToParallelogramValidation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.UnificationFourPointToParallelogramExact as FourPoint
+
+uct6ToUCT7CompilerIsMachineChecked : ProofLevel
+uct6ToUCT7CompilerIsMachineChecked = FourPoint.uct6ToUCT7CompilerLevel
+
+uct6FourPointAxiomsRemainConditional : ProofLevel
+uct6FourPointAxiomsRemainConditional = FourPoint.uct6FourPointAxiomsPhysicalLevel
+
+uct8JordanVonNeumannRemainsConditional : ProofLevel
+uct8JordanVonNeumannRemainsConditional = FourPoint.uct8JordanVonNeumannPhysicalLevel

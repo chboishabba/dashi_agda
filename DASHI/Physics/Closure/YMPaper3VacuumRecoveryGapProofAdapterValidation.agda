@@ -1,0 +1,17 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Closure.YMPaper3VacuumRecoveryGapProofAdapterValidation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.YMPaper3VacuumRecoveryGapProofAdapterExact as RecoveryRoute
+
+paper3RecoveryCompilerIsMachineChecked : ProofLevel
+paper3RecoveryCompilerIsMachineChecked = RecoveryRoute.paper3RecoveryGapCompilerLevel
+
+paper3PhysicalRecoveryProducerRemainsConditional : ProofLevel
+paper3PhysicalRecoveryProducerRemainsConditional = RecoveryRoute.paper3PhysicalVacuumRecoverySystemLevel
+
+paper3RecoveryOSWightmanRemainsConditional : ProofLevel
+paper3RecoveryOSWightmanRemainsConditional = RecoveryRoute.paper3RecoveryRouteOSWightmanLevel
+
+paper3RecoveryPositiveGapRemainsConditional : ProofLevel
+paper3RecoveryPositiveGapRemainsConditional = RecoveryRoute.paper3RecoveryRoutePositiveMassGapLevel

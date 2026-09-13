@@ -14,6 +14,12 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exa
 -- predicate.  Hence a Balaban Theorem-1 witness on this flow produces E_k and
 -- its localization directly, rather than requiring inversion of an abstract
 -- density or construction of unrelated R/B/vacuum sectors first.
+--
+-- ARCHAEOLOGY CORRECTION (2026-09-11): the older source-shaped finite-mode
+-- theorem carrier already restricts CMP122 Theorem 1 to the actually active RG
+-- scales.  Keep the original all-Nat wrapper below for compatibility, but expose
+-- the preferred active-scale wrapper as well.  The latter does not require a
+-- fictitious proof that every Nat is an active source scale.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -26,6 +32,10 @@ import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as 
 import DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.Balaban1989Theorem1UVStabilityExact as Source
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
+import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
+import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as FiniteBeta
+import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as FiniteHistory
+import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact as Active
 
 record CMP119RegularESection2Form
     (Density Background Volume Component : Set)
@@ -44,6 +54,10 @@ record CMP119RegularESection2Form
           background
 
 open CMP119RegularESection2Form public
+
+------------------------------------------------------------------------
+-- Legacy all-Nat wrapper retained for compatibility with Round247.
+------------------------------------------------------------------------
 
 record BetaDrivenRegularESection2Inputs
     {trajectory split}
@@ -93,6 +107,158 @@ regularEFormFromTheorem1 :
 regularEFormFromTheorem1 theorem1 scale =
   Source.effectiveDensitiesPreserveSection2Form theorem1 scale
 
+------------------------------------------------------------------------
+-- Preferred source-shaped active-scale wrapper.
+--
+-- `Balaban1989ActiveScaleTheorem1BetaBridgeExact` already records the finite
+-- UV trajectory with an `ActiveScale` fibre.  We instantiate its Sect.-2 form
+-- predicate with the same consumer-minimal regular-E/localization object above.
+-- No conversion to the stronger all-Nat beta-driven wrapper is required.
+------------------------------------------------------------------------
+
+record ActiveRegularESection2Inputs
+    {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    (betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom)
+    (history : FiniteHistory.FiniteModeInverseSquareTerminalHistoryData
+      trajectory Mode Atom betaData) : Set₂ where
+  field
+    Density Background Volume Component : Set
+    densityAt : Nat → Density
+
+    -- Kept distinct because CMP122 Theorem 1 also owns the quantitative Sect.-2
+    -- conditions/bounds, while the BC1 extraction below consumes only the form.
+    Section2ConditionsAndBounds : Nat → Density → Set
+
+open ActiveRegularESection2Inputs public
+
+asActiveRegularESection2Flow :
+  ∀ {trajectory Mode Atom betaData history} →
+  (dataSet : ActiveRegularESection2Inputs
+    {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+    betaData history) →
+  Active.ActiveEffectiveDensityFlow
+    trajectory Mode Atom
+    (ActiveRegularESection2Inputs.Density dataSet)
+    betaData history
+asActiveRegularESection2Flow dataSet = record
+  { Active.ActiveEffectiveDensityFlow.densityAt =
+      ActiveRegularESection2Inputs.densityAt dataSet
+  ; Active.ActiveEffectiveDensityFlow.InSection2DensityClass =
+      λ scale density →
+        CMP119RegularESection2Form
+          (ActiveRegularESection2Inputs.Density dataSet)
+          (ActiveRegularESection2Inputs.Background dataSet)
+          (ActiveRegularESection2Inputs.Volume dataSet)
+          (ActiveRegularESection2Inputs.Component dataSet)
+          scale density
+  ; Active.ActiveEffectiveDensityFlow.Section2ConditionsAndBounds =
+      ActiveRegularESection2Inputs.Section2ConditionsAndBounds dataSet
+  }
+
+-- Preferred least-privilege source path: only the Sect.-2 FORM theorem is
+-- consumed here.  Quantitative Sect.-2 bounds are an independent source field.
+activeRegularEFormFromSection2FormWitness :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history} →
+  Active.ActiveBalaban1989Section2FormWitness
+    (asActiveRegularESection2Flow dataSet) →
+  ∀ scale →
+  FiniteHistory.ActiveScale history scale →
+  CMP119RegularESection2Form
+    (ActiveRegularESection2Inputs.Density dataSet)
+    (ActiveRegularESection2Inputs.Background dataSet)
+    (ActiveRegularESection2Inputs.Volume dataSet)
+    (ActiveRegularESection2Inputs.Component dataSet)
+    scale (ActiveRegularESection2Inputs.densityAt dataSet scale)
+activeRegularEFormFromSection2FormWitness source scale active =
+  Active.effectiveDensitiesPreserveSection2FormOnly source scale active
+
+-- Compatibility producer: the full CMP122 Theorem-1 witness projects to the
+-- least-privilege form witness before reaching the BC1-facing object.
+activeRegularEFormFromTheorem1 :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history} →
+  Active.ActiveBalaban1989Theorem1Witness
+    (asActiveRegularESection2Flow dataSet) →
+  ∀ scale →
+  FiniteHistory.ActiveScale history scale →
+  CMP119RegularESection2Form
+    (ActiveRegularESection2Inputs.Density dataSet)
+    (ActiveRegularESection2Inputs.Background dataSet)
+    (ActiveRegularESection2Inputs.Volume dataSet)
+    (ActiveRegularESection2Inputs.Component dataSet)
+    scale (ActiveRegularESection2Inputs.densityAt dataSet scale)
+activeRegularEFormFromTheorem1 theorem1 =
+  activeRegularEFormFromSection2FormWitness
+    (Active.section2FormWitnessFromTheorem1 theorem1)
+
+------------------------------------------------------------------------
+-- Least-privilege active source witness for the BC1 continuation.
+--
+-- CMP122 Theorem 1 owns more than BC1 needs.  Once the regular-E/localization
+-- field has been projected, the quantitative Section-2 bounds are no longer a
+-- primitive dependency of the CMP109/CMP116 continuation.
+------------------------------------------------------------------------
+
+record ActiveRegularESection2FormWitness
+    {trajectory : Flow.SourceNormalizedCouplingTrajectory}
+    {Mode Atom : Set}
+    {betaData : FiniteBeta.FiniteModeBetaTrajectoryData trajectory Mode Atom}
+    {history : FiniteHistory.FiniteModeInverseSquareTerminalHistoryData
+      trajectory Mode Atom betaData}
+    (dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history) : Set₁ where
+  field
+    regularEFormOnActiveScale : ∀ scale →
+      FiniteHistory.ActiveScale history scale →
+      CMP119RegularESection2Form
+        (ActiveRegularESection2Inputs.Density dataSet)
+        (ActiveRegularESection2Inputs.Background dataSet)
+        (ActiveRegularESection2Inputs.Volume dataSet)
+        (ActiveRegularESection2Inputs.Component dataSet)
+        scale (ActiveRegularESection2Inputs.densityAt dataSet scale)
+
+open ActiveRegularESection2FormWitness public
+
+activeRegularESection2FormWitnessFromSection2FormWitness :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history} →
+  Active.ActiveBalaban1989Section2FormWitness
+    (asActiveRegularESection2Flow dataSet) →
+  ActiveRegularESection2FormWitness dataSet
+activeRegularESection2FormWitnessFromSection2FormWitness source = record
+  { regularEFormOnActiveScale = activeRegularEFormFromSection2FormWitness source }
+
+activeRegularESection2FormWitnessFromTheorem1 :
+  ∀ {trajectory Mode Atom betaData history}
+    {dataSet : ActiveRegularESection2Inputs
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      betaData history} →
+  Active.ActiveBalaban1989Theorem1Witness
+    (asActiveRegularESection2Flow dataSet) →
+  ActiveRegularESection2FormWitness dataSet
+activeRegularESection2FormWitnessFromTheorem1 theorem1 =
+  activeRegularESection2FormWitnessFromSection2FormWitness
+    (Active.section2FormWitnessFromTheorem1 theorem1)
+
+activeRegularESection2PredicateCompilerLevel : ProofLevel
+activeRegularESection2PredicateCompilerLevel = machineChecked
+
+activeRegularESection2FormWitnessCompilerLevel : ProofLevel
+activeRegularESection2FormWitnessCompilerLevel = machineChecked
+
+activeScaleCouplingHypothesisCompilerLevel : ProofLevel
+activeScaleCouplingHypothesisCompilerLevel =
+  Active.activeScaleCMP122CouplingHypothesisFromFiniteBetaLevel
+
 regularESection2PredicateCompilerLevel : ProofLevel
 regularESection2PredicateCompilerLevel = machineChecked
 
@@ -103,6 +269,13 @@ cmp119RegularESection2TheoremSourceLevel = Source.balaban1989Theorem1SourceLevel
 
 -- The surviving source/repository seam is to instantiate the beta-driven flow's
 -- literal Section-2 predicate with this function/localization representation.
--- Once a Theorem-1 witness is supplied on that exact flow, E_k is produced.
+-- On the preferred finite-active route this means the exact active-scale density
+-- family plus the source theorem witness; no proof that every Nat is active is
+-- required. Once the source witness is supplied, E_k is projected mechanically.
 literalCMP119RegularESection2PredicateInstantiationLevel : ProofLevel
 literalCMP119RegularESection2PredicateInstantiationLevel = conditional
+
+-- Least-privilege source payment for the BC1 continuation after projection:
+-- only the active-scale regular-E/localization form is needed downstream.
+literalActiveCMP119RegularESection2FormWitnessLevel : ProofLevel
+literalActiveCMP119RegularESection2FormWitnessLevel = conditional
