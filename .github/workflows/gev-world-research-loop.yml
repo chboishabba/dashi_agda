@@ -13,6 +13,8 @@ on:
       - 'DASHI/Interop/GodsEyeViewCommunitySourceWorldAdapterExact.agda'
       - 'DASHI/Interop/GodsEyeViewWorldResearchFrontierActionExact.agda'
       - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
+      - 'DASHI/Interop/KantIntrospectiveResidualContractsExact.agda'
+      - 'DASHI/Interop/KantRuntimeObservationExact.agda'
       - 'DASHI/Interop/Everything.agda'
       - '.github/workflows/gev-world-research-loop.yml'
   workflow_dispatch:
@@ -82,6 +84,16 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Interop/IntrospectiveProofLoopExact.agda
+
+      - name: Type-check Kant residual contracts
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/KantIntrospectiveResidualContractsExact.agda
+
+      - name: Type-check Kant runtime observation ABI
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/KantRuntimeObservationExact.agda
 
       - name: Type-check Interop aggregate
         run: >-
