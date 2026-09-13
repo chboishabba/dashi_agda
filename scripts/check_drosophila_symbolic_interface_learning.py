@@ -35,6 +35,8 @@ REQUIRED = {
         "runtimeCleanRoomSource",
         "record CleanRoomRuntimeStatus",
         "runtimeSubstrateIsLocated",
+        "identityAssignmentArtifactHashIsLocated",
+        "controlArtifactDifferenceGuardIsLocated",
         "symbolicKernelRunnerIsLocated",
         "controlAxesAreSeparated",
         "matchedTopologyControlProducerIsLocated",
