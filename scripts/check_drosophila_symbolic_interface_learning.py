@@ -12,10 +12,14 @@ REQUIRED = {
         "emittedCharactersDoNotEstablishPythonKnowledge",
         "fizzBuzzDoesNotEstablishGeneralProgrammingCompetence",
         "programTextDoesNotRecoverNeuralObservation",
+        "record PythonDemoImplementationDebt",
+        "canonicalPythonDemoImplementationDebt",
+        "primaryImplementationStillUnpaid",
         "connectomeAdvantageRequiresNullComparison",
     ],
     "DASHI/Biology/DrosophilaSymbolicInterfaceLearningRegression.agda": [
         "canonicalDrosophilaSymbolicInterfaceRegression",
+        "implementationRecoveryStillOpen",
     ],
     "DASHI/Biology/AnimalexicEverything.agda": [
         "DrosophilaSymbolicInterfaceLearningExact",
