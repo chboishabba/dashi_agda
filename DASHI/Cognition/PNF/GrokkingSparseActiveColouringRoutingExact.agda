@@ -96,9 +96,6 @@ unpaidGrokkingRoutingTransition = grokkingRoutingTransitionReceipt false false f
 
 ------------------------------------------------------------------------
 -- Canonical conflict / requirement / independence carrier.
---
--- Reuse the existing RSA/NDim relation rather than introducing another graph
--- ontology.  Grokking-specific semantics remain downstream measurements.
 ------------------------------------------------------------------------
 
 GrokkingReducerRelation : Set
@@ -135,6 +132,44 @@ open ConflictCarrierIntegrationResidual public
 
 currentConflictCarrierIntegrationResidual : ConflictCarrierIntegrationResidual
 currentConflictCarrierIntegrationResidual = conflictCarrierIntegrationResidual false true false
+
+------------------------------------------------------------------------
+-- Intervention discipline for empirical relation edges.
+--
+-- Correlated activation is observational evidence only.  A conflict edge is
+-- promotable only through a matched intervention receipt that measures the two
+-- units/circuits individually and jointly on the same checkpoint/evaluation
+-- carrier.  The synthetic paid witness below tests the type; it is not an
+-- empirical grokking result.
+------------------------------------------------------------------------
+
+activationCorrelationAlonePaysConflict : Bool
+activationCorrelationAlonePaysConflict = false
+
+jointInterventionRequiredForConflict : Bool
+jointInterventionRequiredForConflict = true
+
+record CircuitPairInterventionReceipt : Set where
+  constructor circuitPairInterventionReceipt
+  field
+    activationCorrelationMeasured : Bool
+    leftInterventionMeasured : Bool
+    rightInterventionMeasured : Bool
+    jointInterventionMeasured : Bool
+    sameCheckpoint : Bool
+    sameHeldOutEvaluation : Bool
+    proposedRelation : GrokkingReducerRelation
+    relationPromotionPaid : Bool
+open CircuitPairInterventionReceipt public
+
+unpaidCircuitPairIntervention : CircuitPairInterventionReceipt
+unpaidCircuitPairIntervention = circuitPairInterventionReceipt false false false false false false independent false
+
+syntheticPaidConflictIntervention : CircuitPairInterventionReceipt
+syntheticPaidConflictIntervention = circuitPairInterventionReceipt true true true true true true conflict true
+
+syntheticConflictIsEmpiricalGrokkingResult : Bool
+syntheticConflictIsEmpiricalGrokkingResult = false
 
 ------------------------------------------------------------------------
 -- Colouring cross-pollination remains structural, not objective identity.
