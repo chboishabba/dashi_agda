@@ -124,6 +124,44 @@ sameObjectIdentityStillUnpaid :
 sameObjectIdentityStillUnpaid = refl
 
 ------------------------------------------------------------------------
+-- Public-artifact search receipt.
+--
+-- A negative search result is evidence about the searched public surfaces,
+-- not a theorem that no first-party artifact exists anywhere.
+------------------------------------------------------------------------
+
+record PublicArtifactSearchReceipt : Set where
+  constructor publicArtifactSearchReceipt
+  field
+    lordsplinePublicReposEnumerated : Bool
+    exactCodeTermsSearched : Bool
+    recentRelevantCommitMessagesSearched : Bool
+    obviousCapyRepositoriesSearched : Bool
+    exactPythonDemoArtifactLocated : Bool
+    searchReading : String
+
+open PublicArtifactSearchReceipt public
+
+canonicalPublicArtifactSearchReceipt : PublicArtifactSearchReceipt
+canonicalPublicArtifactSearchReceipt = publicArtifactSearchReceipt
+  true
+  true
+  true
+  true
+  false
+  "searched public lordspline repositories plus obvious Capy-related repositories and fly/FizzBuzz/Python commit/code terms; no exact first-party Python/FizzBuzz implementation surfaced in the searched public GitHub surfaces"
+
+data PublicSearchExhaustionPermission : Set where
+
+publicSearchNotFoundDoesNotProveNoArtifact :
+  PublicSearchExhaustionPermission → ⊥
+publicSearchNotFoundDoesNotProveNoArtifact ()
+
+publicArtifactStillNotLocated :
+  exactPythonDemoArtifactLocated canonicalPublicArtifactSearchReceipt ≡ false
+publicArtifactStillNotLocated = refl
+
+------------------------------------------------------------------------
 -- Typed carrier layers.
 ------------------------------------------------------------------------
 
