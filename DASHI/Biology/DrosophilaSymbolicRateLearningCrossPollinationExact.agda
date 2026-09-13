@@ -55,6 +55,8 @@ record SymbolicRateLearningCrossPollinationStatus : Set where
     kernelEligibilityAdapterImplemented : Bool
     maleCNSOrientationAdapterImplemented : Bool
     sparseRateArchivedTraceAdapterImplemented : Bool
+    sparseRateTrainingEpochImplemented : Bool
+    continuousNoLearningInterventionImplemented : Bool
     paperEligibilityConstructorRecovered : Bool
     viralDemoTrainingRuleLocated : Bool
     generalProgrammingPromotable : Bool
@@ -71,6 +73,8 @@ canonicalSymbolicRateLearningStatus = symbolicRateLearningCrossPollinationStatus
   false
   false
   false
+  true
+  true
   true
   true
   false
@@ -98,6 +102,15 @@ sparseRateArchivedTraceAdapterIsPaid :
   sparseRateArchivedTraceAdapterImplemented canonicalSymbolicRateLearningStatus
   ≡ true
 sparseRateArchivedTraceAdapterIsPaid = refl
+
+sparseRateTrainingEpochIsPaid :
+  sparseRateTrainingEpochImplemented canonicalSymbolicRateLearningStatus ≡ true
+sparseRateTrainingEpochIsPaid = refl
+
+continuousNoLearningInterventionIsPaid :
+  continuousNoLearningInterventionImplemented canonicalSymbolicRateLearningStatus
+  ≡ true
+continuousNoLearningInterventionIsPaid = refl
 
 kernelEligibilityAdapterStillUnpaid :
   kernelEligibilityAdapterImplemented canonicalSymbolicRateLearningStatus ≡ false
@@ -134,6 +147,8 @@ data SourceTargetPostPreCollapsePermission : Set where
 
 data SparseArchivedPaysPaperEligibilityPermission : Set where
 
+data ContinuousNoLearningPaysTernaryLearningPermission : Set where
+
 rateDynamicsDoNotReplaceTernaryKernel :
   RateDynamicsTernaryKernelCollapsePermission → ⊥
 rateDynamicsDoNotReplaceTernaryKernel ()
@@ -167,6 +182,13 @@ maleCNSSourceTargetRequiresExplicitTranspose ()
 sparseArchivedAdapterDoesNotPayPaperEligibilityConstructor :
   SparseArchivedPaysPaperEligibilityPermission → ⊥
 sparseArchivedAdapterDoesNotPayPaperEligibilityConstructor ()
+
+-- A zero-learning-rate arm is now executable for the continuous RateRNN
+-- specialization.  That does not manufacture a learning/no-learning ablation
+-- for the distinct ternary DASHI kernel.
+continuousNoLearningDoesNotPayTernaryLearningAdapter :
+  ContinuousNoLearningPaysTernaryLearningPermission → ⊥
+continuousNoLearningDoesNotPayTernaryLearningAdapter ()
 
 ------------------------------------------------------------------------
 -- Existing authority/debt remains authoritative.
