@@ -15,6 +15,7 @@ on:
       - 'scripts/check_dark_dimension_empirical_discrimination.py'
       - 'scripts/check_dark_dimension_prospective_discriminator.py'
       - 'scripts/check_dark_dimension_quantitative_envelope.py'
+      - 'scripts/check_dark_dimension_prediction_quantity_adapter.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
@@ -46,6 +47,7 @@ jobs:
           python scripts/check_dark_dimension_empirical_discrimination.py
           python scripts/check_dark_dimension_prospective_discriminator.py
           python scripts/check_dark_dimension_quantitative_envelope.py
+          python scripts/check_dark_dimension_prediction_quantity_adapter.py
 
   agda-empirical-atlas:
     runs-on: ubuntu-24.04
@@ -81,6 +83,7 @@ jobs:
           check_agda DASHI/Unified/GRQuantumProofTermAtlas.agda
           check_agda DASHI/Physics/Closure/DarkDimensionStringPromotionBoundaryExact.agda
           check_agda DASHI/Empirical/DarkDimensionEmpiricalDiscriminationExact.agda
+          check_agda DASHI/Empirical/DarkDimensionPredictionQuantityAdapterExact.agda
           check_agda DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda
           check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
           check_agda DASHI/Unified/DarkDimensionGRQuantumPromotionAdapterExact.agda
