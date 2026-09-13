@@ -3,7 +3,9 @@ module DASHI.Applications.CounterUASDroneShieldRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Applications.CounterUASDroneShieldExact as CUAS
+import DASHI.Applications.CounterUASOpenSetRFExact as OpenRF
 import DASHI.Applications.CounterUASSOTASourceAtlasExact as Sources
+import DASHI.Applications.CounterUASOpenSetRFSourceAtlasExact as OpenRFSources
 import DASHI.Applications.CounterUASOperationalSourceAtlasExact as OperationalSources
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 
@@ -27,23 +29,23 @@ record CounterUASDroneShieldRegression : Set₁ where
     fusedTrackRetainsObservationProvenance :
       CUAS.fusedTrackRequiresObservationProvenance ≡ true
     noCatalogMatchDoesNotMeanNoRFDetection :
-      CUAS.noCatalogMatchDoesNotImplyNoDetection ≡ true
+      OpenRF.noCatalogMatchDoesNotImplyNoDetection ≡ true
     rfActivityDoesNotCreateEmitterIdentity :
-      CUAS.rfActivityDoesNotCreateEmitterIdentity ≡ true
+      OpenRF.rfActivityDoesNotCreateEmitterIdentity ≡ true
     openSetDetectionDoesNotCreateKnownClass :
-      CUAS.openSetDetectionDoesNotCreateKnownClass ≡ true
+      OpenRF.openSetDetectionDoesNotCreateKnownClass ≡ true
     generatedSignatureIsReferenceNotIdentityAuthority :
-      CUAS.generatedSignatureDoesNotCreateIdentityAuthority ≡ true
+      OpenRF.generatedSignatureDoesNotCreateIdentityAuthority ≡ true
     catalogProjectionHasDetectionAdequacyDefect :
       Adequacy.QueryAdequacyDefect
-        CUAS.catalogOnlyProjection
-        CUAS.rfSemantics
-        CUAS.activityQuery
+        OpenRF.catalogOnlyProjection
+        OpenRF.rfSemantics
+        OpenRF.activityQuery
     anomalyProjectionHasIdentityAdequacyDefect :
       Adequacy.QueryAdequacyDefect
-        CUAS.anomalyOnlyProjection
-        CUAS.openSetSemantics
-        CUAS.identityQuery
+        OpenRF.anomalyOnlyProjection
+        OpenRF.openSetSemantics
+        OpenRF.identityQuery
     trackAloneHasMitigationAdequacyDefect :
       Adequacy.QueryAdequacyDefect
         CUAS.trackOnlyProjection
@@ -56,6 +58,8 @@ record CounterUASDroneShieldRegression : Set₁ where
         CUAS.fieldPerformanceQuery
     academicSourceAtlasNonPromoting :
       Sources.counterUASSOTASourceAtlasCreatesAuthority ≡ false
+    openSetAcademicSourceAtlasNonPromoting :
+      OpenRFSources.counterUASOpenSetRFSourceAtlasCreatesAuthority ≡ false
     operationalSourceAtlasNonPromoting :
       OperationalSources.counterUASOperationalSourceAtlasCreatesAuthority ≡ false
     rfAI3ClaimSnapshotNonPromoting :
@@ -66,10 +70,11 @@ canonicalCounterUASDroneShieldRegression =
   counterUASDroneShieldRegression
     refl refl refl refl refl refl
     refl refl refl refl
-    CUAS.catalogOnlyDetectionAdequacyDefect
-    CUAS.anomalyOnlyIdentityAdequacyDefect
+    OpenRF.catalogOnlyDetectionAdequacyDefect
+    OpenRF.anomalyOnlyIdentityAdequacyDefect
     CUAS.trackOnlyMitigationAdequacyDefect
     CUAS.specificationOnlyPerformanceAdequacyDefect
     Sources.counterUASSOTASourceAtlasCreatesAuthorityIsFalse
+    OpenRFSources.counterUASOpenSetRFSourceAtlasCreatesAuthorityIsFalse
     OperationalSources.counterUASOperationalSourceAtlasCreatesAuthorityIsFalse
     OperationalSources.rfAI3SnapshotCreatesAuthorityIsFalse
