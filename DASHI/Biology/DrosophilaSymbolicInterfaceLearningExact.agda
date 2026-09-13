@@ -46,12 +46,6 @@ socialDemoCitationCreatesNoAuthority = Source.citationCreatesAuthorityIsFalse so
 
 ------------------------------------------------------------------------
 -- Implementation-recovery debt.
---
--- Current public search pays the existence of the viral claim and provides
--- independently documented examples of MaleCNS/connectome simulations being
--- wired to software environments. It does not yet pay the first-party Python
--- demo implementation itself. The missing pieces remain explicit instead of
--- being reconstructed from captions or secondary reporting.
 ------------------------------------------------------------------------
 
 record PythonDemoImplementationDebt : Set where
@@ -90,6 +84,57 @@ primaryImplementationStillUnpaid = refl
 exactFizzBuzzArtifactStillUnpaid :
   exactFizzBuzzArtifactPresent canonicalPythonDemoImplementationDebt ≡ false
 exactFizzBuzzArtifactStillUnpaid = refl
+
+------------------------------------------------------------------------
+-- Object-indexed social/demo evidence.
+--
+-- Current public evidence says the adjacent Capy Tetris object used "1 prompt
+-- and Slack".  That assistance fact is useful, but it belongs to a different
+-- run.  It cannot be copied across to the Python/FizzBuzz object without a
+-- same-object receipt.
+------------------------------------------------------------------------
+
+data DemoObject : Set where
+  pythonFizzBuzzDemo : DemoObject
+  capyTetrisDemo : DemoObject
+
+data AssistanceFact : DemoObject → Set where
+  tetrisOnePromptAndSlack : AssistanceFact capyTetrisDemo
+
+data AdjacentDemoAssistanceTransferPermission : Set where
+
+adjacentDemoAssistanceDoesNotTransferToPythonRun :
+  AdjacentDemoAssistanceTransferPermission → ⊥
+adjacentDemoAssistanceDoesNotTransferToPythonRun ()
+
+------------------------------------------------------------------------
+-- Identity evidence is also stratified.  We can retain strong cross-platform
+-- corroboration without silently upgrading it to a strict same-object receipt
+-- for the exact social-demo account/run.
+------------------------------------------------------------------------
+
+record IdentityCorroboration : Set where
+  constructor identityCorroboration
+  field
+    xHandleStatesCapyCofounder : Bool
+    ycNamesNalinSemwalCapyFounder : Bool
+    huggingFaceLordsplineNamesNalinSemwal : Bool
+    sameObjectReceiptPresent : Bool
+
+open IdentityCorroboration public
+
+canonicalIdentityCorroboration : IdentityCorroboration
+canonicalIdentityCorroboration = identityCorroboration true true true false
+
+data CorroboratedIdentityPromotionPermission : Set where
+
+stronglyCorroboratedIdentityStillIsNotSameObjectReceipt :
+  CorroboratedIdentityPromotionPermission → ⊥
+stronglyCorroboratedIdentityStillIsNotSameObjectReceipt ()
+
+sameObjectIdentityStillUnpaid :
+  sameObjectReceiptPresent canonicalIdentityCorroboration ≡ false
+sameObjectIdentityStillUnpaid = refl
 
 ------------------------------------------------------------------------
 -- Typed carrier layers.
@@ -261,8 +306,7 @@ programTextDoesNotRecoverNeuralObservation =
     programTextNeuralNonFactorabilityWitness
 
 ------------------------------------------------------------------------
--- Learning/update lane is distinct from interface success. We reuse the
--- existing outcome-learning owner rather than defining a new memory ontology.
+-- Learning/update lane is distinct from interface success.
 ------------------------------------------------------------------------
 
 learningUpdateWitness : Memory.MemoryFibre → Memory.MemoryFibre
@@ -345,7 +389,7 @@ sharedDisplayNameDoesNotEstablishPersonIdentity ()
 
 ------------------------------------------------------------------------
 -- Null-model obligations for any stronger "biological topology advantage"
--- claim. These are obligations, not receipts that the controls were run.
+-- claim.
 ------------------------------------------------------------------------
 
 data NullModelKind : Set where
@@ -383,8 +427,7 @@ connectomeAdvantageRequiresNullComparison :
 connectomeAdvantageRequiresNullComparison ()
 
 ------------------------------------------------------------------------
--- Cross-pollination with Animalexic: symbolic recurrence/output is not semantic
--- meaning and remains governed by candidate/promotion receipts.
+-- Cross-pollination with Animalexic.
 ------------------------------------------------------------------------
 
 animalexicBoundary : Animalexic.DrosophilaAnimalexicBoundary
