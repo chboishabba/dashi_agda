@@ -84,11 +84,15 @@ record OpenWorldTemporalPromotionAttributionBoundary : Set where
     citationCreatesIdentityAuthority : Bool
     citationCreatesIdentityAuthorityIsFalse :
       citationCreatesIdentityAuthority ≡ false
+    citedSourceTheoremEqualsImportedDASHIProof : Bool
+    citedSourceTheoremEqualsImportedDASHIProofIsFalse :
+      citedSourceTheoremEqualsImportedDASHIProof ≡ false
 
 canonicalOpenWorldTemporalPromotionAttributionBoundary :
   OpenWorldTemporalPromotionAttributionBoundary
 canonicalOpenWorldTemporalPromotionAttributionBoundary =
   openWorldTemporalPromotionAttributionBoundary
+    false refl
     false refl
     false refl
     false refl
