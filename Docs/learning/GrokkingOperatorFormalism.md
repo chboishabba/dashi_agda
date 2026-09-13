@@ -13,6 +13,7 @@ The implementation connects machine-learning experiments to existing DASHI surfa
 - `DASHI.Learning.Mod97WeightDecayReceipt`: the recorded modular-multiplication experiment;
 - `DASHI.Learning.Mod97GrokkingBoundary`: exact consequences of those receipts without promotion beyond the measured horizon;
 - `DASHI.Learning.GrokkingCircuitTemporalAlignmentExact`: a Stage-6/7 receipt bridge comparing predeclared circuit-beta transitions against first-passage timing without promoting the comparison into a mechanism proof;
+- `DASHI.Learning.Mod97CircuitRuntimeBoundaryExact`: typed separation among runtime producer implementation, execution, historical identity, leakage control, oriented damage adaptation, relation payment, beta maximality, and mechanism payment;
 - `DASHI.Learning.GrokkingRegression`: compact import and value regression surface.
 
 ## Learning operator
@@ -82,6 +83,8 @@ The current receipt fixes:
 
 Weight decay is stored in thousandths, so `600` denotes `0.6`. Accuracy is stored in permille. A missing `t95` is represented as `rightCensored`, not as proof that grokking never occurs.
 
+The checked-in receipt does **not** fix the original embedding width, hidden width, or exact split-generation procedure. Those coordinates therefore remain provenance debt. Matching an old weight decay, seed, first-passage time, or final accuracy cannot by itself identify a regenerated run with the historical run.
+
 ## Defensible measured boundary
 
 At the fixed 15000-epoch horizon:
@@ -91,6 +94,62 @@ At the fixed 15000-epoch horizon:
 - weight decay `0.60` through `1.00` on the coarse grid: all three seeds reach 95% test accuracy.
 
 This establishes a **horizon-dependent transition band** for the fixed task and optimiser configuration. It does not establish an absolute critical weight decay. The earlier 10000-epoch scan locating reliable passage near `1.0`, followed by the 15000-epoch scan locating reliable passage at `0.6`, is evidence that the apparent boundary depends on the observation horizon.
+
+## Runtime checkpoint and intervention frontier
+
+PR #900 now contains executable producers for a **new checkpoint-bearing Mod97 run family**:
+
+```text
+scripts/mod97_checkpoint_producer.py
+scripts/mod97_circuit_intervention_producer.py
+```
+
+The checkpoint producer preserves the source-paid coordinates above but requires the previously unpaid architecture and split coordinates explicitly. Its manifests and saved checkpoints retain:
+
+```text
+historical_receipt_same_run = false
+historical_receipt_same_configuration = false
+historical_checkpoint_reconstruction = false
+```
+
+so regeneration cannot silently rewrite the old receipt into checkpoint custody.
+
+The intervention producer uses the Fly-style leakage firewall operationally:
+
+```text
+training activations
+-> predeclare/freeze candidate hidden units
+-> held-out singleton and joint ablations
+-> raw effect receipt
+```
+
+Held-out outcomes do not select the candidate units. The current rule ranks units by mean absolute post-ReLU activation on the training carrier with deterministic unit-index tie breaking. That rule is a local experimental method, not a source-derived fact or universal circuit definition.
+
+The held-out effect is represented first as the signed change in cross-entropy loss. For compatibility with the existing non-negative `PairInterventionScore` carrier, the producer also emits an orientation-aware Nat adapter:
+
+```text
+larger held-out loss = worse
+Nat damage = max(0, round(lossIncrease * 1_000_000))
+```
+
+The raw signed value is retained. A beneficial ablation therefore remains visible in the receipt even though its contribution to the non-negative damage carrier is zero. The `1_000_000` scale is experiment metadata, not a physical or source-derived unit.
+
+The typed runtime frontier deliberately keeps these states separate:
+
+```text
+producer implemented
+!= producer executed
+!= historical run/config identity
+!= Nat damage adapter paid
+!= requirement edges paid
+!= relation classification paid
+!= beta maximality paid
+!= Grokking mechanism paid
+```
+
+At the current repo frontier, both Python producers are implemented, numerical execution receipts remain unpaid, historical run/config identity remains unestablished, training/held-out selection separation is encoded, and the Nat damage adapter is paid. Directional requirement inference, relation classification, beta maximality, and mechanism promotion remain unpaid.
+
+The repo Nix development surface supplies Python and Agda but does not currently declare PyTorch. The focused PR workflow therefore verifies pure producer contracts, syntax, plan-only provenance output, and CLI import boundaries without pretending to execute the heavyweight numerical run.
 
 ## Circuit-mechanism temporal alignment
 
@@ -170,11 +229,15 @@ A stronger contribution requires at least one of the following:
 5. a coding theorem connecting the optimisation penalty to `modelCode` rather than treating weight decay as an MDL proxy;
 6. a concrete contraction constant after rule-basin entry, permitting an actual upper time bound;
 7. a concrete obstruction detector and witness-preserving lift, allowing the ML system to instantiate `LearningCOLBundle` rather than only the generic adapter;
-8. acquisition or regeneration of saved checkpoints for the Mod97 family so circuit trajectories can be measured rather than reconstructed from final receipts;
-9. cross-seed replication of a predeclared circuit extraction/intervention rule;
-10. cross-task/config transfer across at least another modulus, train fraction, width, or optimiser;
-11. timing-null comparisons, including epoch-label permutation or equivalent temporal-null tests;
-12. threshold-robustness analysis under a predeclared admissible grid or interval;
-13. an active-support-only baseline establishing whether beta adds information beyond raw participation changes.
+8. execute the new checkpoint-bearing Mod97 producer in a PyTorch-capable environment and retain the generated checkpoint/receipt hashes;
+9. execute the frozen training-selected / held-out-evaluated singleton/joint intervention producer over those checkpoints;
+10. define and pay directional requirement edges with an asymmetric conditional-intervention design rather than treating them as the opposite sign of conflict;
+11. classify conflict / requirement / independence under a predeclared effect threshold and adequacy/power rule;
+12. close requirements and certify finite beta maximality at each checkpoint;
+13. cross-seed replication of the predeclared circuit extraction/intervention rule;
+14. cross-task/config transfer across at least another modulus, train fraction, width, or optimiser;
+15. timing-null comparisons, including epoch-label permutation or equivalent temporal-null tests;
+16. threshold-robustness analysis under a predeclared admissible grid or interval;
+17. an active-support-only baseline establishing whether beta adds information beyond raw participation changes.
 
-Until those are supplied, the repo claim is the typed operator contract, exact receipt-level boundaries, the circuit temporal-alignment carrier, and the proved adapters between the learning, RG-flow, COL, and circuit-receipt interfaces—not a universal grokking mechanism.
+Until those are supplied, the repo claim is the typed operator contract, exact receipt-level boundaries, implemented-but-unexecuted runtime producers, the orientation-aware damage adapter, the circuit temporal-alignment carrier, and the proved adapters between the learning, RG-flow, COL, and circuit-receipt interfaces—not a universal grokking mechanism.
