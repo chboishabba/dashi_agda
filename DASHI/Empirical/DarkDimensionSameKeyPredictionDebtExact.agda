@@ -10,6 +10,7 @@ import DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact as Bedr
 import DASHI.Empirical.DarkDimensionCrossDomainEvidenceWeldExact as CrossDomain
 import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
 import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun
+import DASHI.Empirical.DarkDimensionResidualDebtRoutingExact as DebtRouting
 import DASHI.Empirical.DarkDimensionSharedBAOObservableExact as SharedBAO
 import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationKey
 
@@ -153,6 +154,11 @@ crossDomainEvidenceWeldStillBlocksPromotion :
   CrossDomain.ReconstructionReceiptEqualsHeldOutPrediction → ⊥
 crossDomainEvidenceWeldStillBlocksPromotion =
   CrossDomain.reconstructionReceiptDoesNotBecomeHeldOutPrediction
+
+residualDebtClassesRemainDistinct :
+  DebtRouting.DAOExecutionPaysBedroyaAcquisitionGap → ⊥
+residualDebtClassesRemainDistinct =
+  DebtRouting.residualKindsRemainDistinct
 
 sameKeyPredictionDebtStillOpen :
   debtClosed canonicalSameKeyPredictionDerivationDebt ≡ false
