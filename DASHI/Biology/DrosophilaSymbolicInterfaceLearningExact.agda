@@ -45,6 +45,53 @@ socialDemoCitationCreatesNoAuthority :
 socialDemoCitationCreatesNoAuthority = Source.citationCreatesAuthorityIsFalse socialDemoSource
 
 ------------------------------------------------------------------------
+-- Implementation-recovery debt.
+--
+-- Current public search pays the existence of the viral claim and provides
+-- independently documented examples of MaleCNS/connectome simulations being
+-- wired to software environments. It does not yet pay the first-party Python
+-- demo implementation itself. The missing pieces remain explicit instead of
+-- being reconstructed from captions or secondary reporting.
+------------------------------------------------------------------------
+
+record PythonDemoImplementationDebt : Set where
+  constructor pythonDemoImplementationDebt
+  field
+    viralClaimLocatorPresent : Bool
+    viralClaimLocatorPresentIsTrue : viralClaimLocatorPresent ≡ true
+    primaryImplementationLocated : Bool
+    dynamicsReceiptPresent : Bool
+    decoderReceiptPresent : Bool
+    trainingRuleReceiptPresent : Bool
+    evaluatorReceiptPresent : Bool
+    exactFizzBuzzArtifactPresent : Bool
+    personIdentityWeldPresent : Bool
+    recoveryReading : String
+
+open PythonDemoImplementationDebt public
+
+canonicalPythonDemoImplementationDebt : PythonDemoImplementationDebt
+canonicalPythonDemoImplementationDebt = pythonDemoImplementationDebt
+  true
+  refl
+  false
+  false
+  false
+  false
+  false
+  false
+  false
+  "viral claim located; first-party Python demo code/config, exact dynamics, neural-to-key decoder, training rule, evaluator, emitted artifact, and same-object person identity remain unpaid"
+
+primaryImplementationStillUnpaid :
+  primaryImplementationLocated canonicalPythonDemoImplementationDebt ≡ false
+primaryImplementationStillUnpaid = refl
+
+exactFizzBuzzArtifactStillUnpaid :
+  exactFizzBuzzArtifactPresent canonicalPythonDemoImplementationDebt ≡ false
+exactFizzBuzzArtifactStillUnpaid = refl
+
+------------------------------------------------------------------------
 -- Typed carrier layers.
 ------------------------------------------------------------------------
 
@@ -177,7 +224,7 @@ canonicalSocialDemoExperiment = symbolicInterfaceExperiment
 
 ------------------------------------------------------------------------
 -- Output nonfactorability: the same emitted program text can coexist with
--- different executable/neural states.  Recharting the program text cannot
+-- different executable/neural states. Recharting the program text cannot
 -- recover neural information erased by that projection.
 ------------------------------------------------------------------------
 
