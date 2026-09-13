@@ -27,6 +27,15 @@ REQUIRED = {
     "scripts/check_dark_dimension_prospective_discriminator.py": [
         "DarkDimensionQuantitativeEnvelopeExact",
     ],
+    ".github/workflows/gr-quantum-empirical-validation.yml": [
+        "DASHI/Empirical/DarkDimension*.agda",
+        "DASHI/Physics/Closure/DarkDimension*.agda",
+        "DASHI/Unified/DarkDimension*.agda",
+        "python scripts/check_dark_dimension_quantitative_envelope.py",
+        "python scripts/check_dark_dimension_prospective_discriminator.py",
+        "DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda",
+        "DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda",
+    ],
 }
 
 missing = []
