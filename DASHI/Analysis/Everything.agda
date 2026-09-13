@@ -12,7 +12,9 @@ import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact
 import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact
 
--- Window-free proof-carrying finite certification on the final carrier.
+-- Concrete execution boundary and window-free proof-carrying certification.
+import DASHI.Analysis.RiemannG2ConcreteCertificateFinalScalarBridgeExact
+import DASHI.Analysis.RiemannG2ConcreteScalarExecutionFrontierExact
 import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact
 import DASHI.Analysis.RiemannG2CertifiedNearUpperClusterResponseCompilerExact
 import DASHI.Analysis.RiemannG2CertifiedClusterLowerEnvelopeCompilerExact
