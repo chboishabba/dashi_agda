@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
 import DASHI.Law.SensibLawInternationalInstrumentLifecycleExact as Lifecycle
 
 ------------------------------------------------------------------------
@@ -28,6 +29,11 @@ ccwGGE2026AgendaSource =
     Source.institutionalSource
     "Primary institutional source for the 2026 session dates and the mandate to formulate by consensus elements of an instrument without prejudging its nature"
     Source.publicAttribution
+
+ccwGGE2026AgendaSourceSnowballReceipt :
+  AttributionSnowball.SourceRoleSnowballReceipt ccwGGE2026AgendaSource
+ccwGGE2026AgendaSourceSnowballReceipt =
+  AttributionSnowball.canonicalSourceRoleSnowballReceipt ccwGGE2026AgendaSource
 
 ccwGGEFirst2026ChairSummarySource : Source.AttributedSource
 ccwGGEFirst2026ChairSummarySource =
