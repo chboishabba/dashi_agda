@@ -26,9 +26,11 @@ record CounterUASOpenWorldBridgeRegression : Set where
       Temporal.encounterStateRetained Bridge.rfUnknownThenLaterRecognizedReceipt ≡ true
     temporalReceiptDoesNotRewriteEncounter :
       Temporal.laterLabelDoesNotRewriteEncounter Bridge.rfUnknownThenLaterRecognizedReceipt ≡ true
+    noveltyPromotionReceiptIsNonAuthoritative :
+      Temporal.stageCreatesOperationalAuthority Temporal.noveltyObservationReceipt ≡ false
 
 canonicalCounterUASOpenWorldBridgeRegression :
   CounterUASOpenWorldBridgeRegression
 canonicalCounterUASOpenWorldBridgeRegression =
   counterUASOpenWorldBridgeRegression
-    refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl
