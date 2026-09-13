@@ -49,12 +49,24 @@ def classy_parameters(manifest: dict) -> dict:
 def run_reconstruction() -> dict:
     manifest = build_manifest()
     cosmo = Class()
+    computed = False
     try:
         cosmo.set(classy_parameters(manifest))
         cosmo.compute(["thermodynamics"])
+        computed = True
+
         rd = float(cosmo.rs_drag)
+        rd_dao = float(cosmo.rs_d_drmd)
+        h = float(cosmo.h)
         if not rd > 0.0:
             raise RuntimeError(f"non-positive rs_drag: {rd}")
+        if not rd_dao > 0.0:
+            raise RuntimeError(f"non-positive rs_d_drmd: {rd_dao}")
+
+        published_rd_bao_mpc_over_h = 100.0
+        published_rd_dao_mpc_over_h = 58.6
+        reconstructed_rd_bao_mpc_over_h = h * rd
+        reconstructed_rd_dao_mpc_over_h = h * rd_dao
 
         vector = []
         for label, z in DESI_KEYS.items():
@@ -80,11 +92,23 @@ def run_reconstruction() -> dict:
             "upstream_revision": DRMD_CLASS_REVISION,
             "original_paper_manifest_claimed": False,
             "equation13_approximation_used": True,
+            "published_horizon_cross_check": {
+                "published_rd_BAO_Mpc_over_h": 100.0,
+                "published_rd_DAO_Mpc_over_h": 58.6,
+                "reconstructed_rd_BAO_Mpc_over_h": reconstructed_rd_bao_mpc_over_h,
+                "reconstructed_rd_DAO_Mpc_over_h": reconstructed_rd_dao_mpc_over_h,
+                "rd_BAO_residual_Mpc_over_h": reconstructed_rd_bao_mpc_over_h
+                - published_rd_bao_mpc_over_h,
+                "rd_DAO_residual_Mpc_over_h": reconstructed_rd_dao_mpc_over_h
+                - published_rd_dao_mpc_over_h,
+            },
             "rs_drag_Mpc": rd,
+            "rs_d_drmd_Mpc": rd_dao,
             "same_key_vector": vector,
         }
     finally:
-        cosmo.struct_cleanup()
+        if computed:
+            cosmo.struct_cleanup()
         cosmo.empty()
 
 
