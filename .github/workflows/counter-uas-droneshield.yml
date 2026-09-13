@@ -7,6 +7,7 @@ on:
       - 'DASHI/Applications/CounterUASDroneShieldExact.agda'
       - 'DASHI/Applications/CounterUASDroneShieldRegression.agda'
       - 'DASHI/Applications/CounterUASSOTASourceAtlasExact.agda'
+      - 'DASHI/Applications/CounterUASOperationalSourceAtlasExact.agda'
       - '.github/workflows/counter-uas-droneshield.yml'
   workflow_dispatch:
 
