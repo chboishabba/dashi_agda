@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Empirical.DarkDimensionDAOPaperTableReconstructionExact as PaperReconstruction
 import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 
 ------------------------------------------------------------------------
@@ -29,13 +30,19 @@ import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 -- checked-in config/best-fit row is the executable manifest for that paper's
 -- LSS-independent posterior.
 --
+-- The paper itself publishes a nearly complete extended-analysis best-fit point
+-- in Table I.  DarkDimensionDAOPaperTableReconstructionExact records that point
+-- and reconstructs z_stop through the paper's approximate Eq. (13).  This pays
+-- a runnable reconstruction packet, but not custody/identity of the authors'
+-- original MCMC manifest.
+--
 -- The pinned public snapshot used here is dated 2026-06-04, later than the
 -- paper submission date 2026-02-27.  A later snapshot can preserve/reproduce
 -- the model while still failing to certify which exact parameter manifest was
 -- used for the earlier paper inference.
 --
--- A future same-key prospective prediction must therefore identify and freeze
--- the actual parameter manifest used for the independent target, and record a
+-- A future exact paper-manifest claim must therefore identify and freeze the
+-- actual parameter manifest used for the independent target, and record a
 -- parameterManifestHash as required by GRQuantumPredictionProtocol.
 ------------------------------------------------------------------------
 
@@ -46,6 +53,8 @@ record DAOParameterManifestStatus : Set where
     retrospectiveDESIConfigLocated : Bool
     bestFitRowLocated : Bool
     repositoryVersionLinkedToIndependentTarget : Bool
+    paperTableReconstructionLocated : Bool
+    paperTableReconstructionRunnable : Bool
     pinnedSnapshotPostdatesIndependentPaper : Bool
     snapshotChronologyPaysPaperManifest : Bool
     independentTargetSpecificConfigLocated : Bool
@@ -59,6 +68,8 @@ open DAOParameterManifestStatus public
 canonicalDAOParameterManifestStatus : DAOParameterManifestStatus
 canonicalDAOParameterManifestStatus =
   daoParameterManifestStatus
+    true
+    true
     true
     true
     true
@@ -113,6 +124,8 @@ data VersionLinkManufacturesSpecificConfig : Set where
 
 data LaterSnapshotCertifiesPaperManifest : Set where
 
+data PaperTableReconstructionClosesOriginalManifestDebt : Set where
+
 exampleInputDoesNotBecomePaperPrediction :
   ExampleInputEqualsPaperPrediction → ⊥
 exampleInputDoesNotBecomePaperPrediction ()
@@ -133,10 +146,19 @@ laterSnapshotDoesNotCertifyPaperManifest :
   LaterSnapshotCertifiesPaperManifest → ⊥
 laterSnapshotDoesNotCertifyPaperManifest ()
 
+paperTableReconstructionDoesNotCloseOriginalManifestDebt :
+  PaperTableReconstructionClosesOriginalManifestDebt → ⊥
+paperTableReconstructionDoesNotCloseOriginalManifestDebt ()
+
 repositoryVersionLinkPaid :
   repositoryVersionLinkedToIndependentTarget canonicalDAOParameterManifestStatus
   ≡ true
 repositoryVersionLinkPaid = refl
+
+paperTableReconstructionLocatedAndRunnable :
+  paperTableReconstructionRunnable canonicalDAOParameterManifestStatus ≡ true
+paperTableReconstructionLocatedAndRunnable =
+  PaperReconstruction.reconstructionCanRunWithoutClaimingOriginalCustody
 
 pinnedSnapshotChronologyRecorded :
   pinnedSnapshotPostdatesIndependentPaper canonicalDAOParameterManifestStatus
