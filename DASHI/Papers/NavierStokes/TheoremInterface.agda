@@ -164,8 +164,6 @@ record NSPaperTheoremStatus : Setω where
     statementIsCanonical :
       statement ≡ paperInterfaceStatement
 
-open NSPaperTheoremStatus public
-
 canonicalNSPaperTheoremStatus : NSPaperTheoremStatus
 canonicalNSPaperTheoremStatus =
   record
@@ -224,43 +222,3 @@ canonicalNSPaperTheoremStatus =
     ; statement = paperInterfaceStatement
     ; statementIsCanonical = refl
     }
-
-------------------------------------------------------------------------
--- Stable top-level aliases consumed by source contracts and paper tooling.
-------------------------------------------------------------------------
-
-directCompanionConstructed : Bool
-directCompanionConstructed =
-  NSPaperTheoremStatus.directCompanionConstructed canonicalNSPaperTheoremStatus
-
-commutatorOnlySpacetimeProducerClosed : Bool
-commutatorOnlySpacetimeProducerClosed =
-  NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosed canonicalNSPaperTheoremStatus
-
-directLeafACompilerConstructed : Bool
-directLeafACompilerConstructed =
-  NSPaperTheoremStatus.directLeafACompilerConstructed canonicalNSPaperTheoremStatus
-
-directOffDiagonalConsumerConstructed : Bool
-directOffDiagonalConsumerConstructed =
-  NSPaperTheoremStatus.directOffDiagonalConsumerConstructed canonicalNSPaperTheoremStatus
-
-sameOutputDebtPaymentClosed : Bool
-sameOutputDebtPaymentClosed =
-  NSPaperTheoremStatus.sameOutputDebtPaymentClosed canonicalNSPaperTheoremStatus
-
-p3SeparationProducerClosed : Bool
-p3SeparationProducerClosed =
-  NSPaperTheoremStatus.p3SeparationProducerClosed canonicalNSPaperTheoremStatus
-
-historicalAlternativeRoute : String
-historicalAlternativeRoute =
-  NSPaperTheoremStatus.historicalAlternativeRoute canonicalNSPaperTheoremStatus
-
-historicalA1A9Retained : Bool
-historicalA1A9Retained =
-  NSPaperTheoremStatus.historicalA1A9Retained canonicalNSPaperTheoremStatus
-
-clayTerminalPromotion : Bool
-clayTerminalPromotion =
-  NSPaperTheoremStatus.clayTerminalPromotion canonicalNSPaperTheoremStatus
