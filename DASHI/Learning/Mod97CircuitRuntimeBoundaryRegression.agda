@@ -31,6 +31,10 @@ heldOutSelectionLeakageIsRejected :
   Runtime.selectionLeakage Runtime.currentMod97RuntimeFrontier ≡ Runtime.heldOutNotUsedForSelection
 heldOutSelectionLeakageIsRejected = refl
 
+orientedDamageAdapterIsPaid :
+  Runtime.natDamageAdapterPayment Runtime.currentMod97RuntimeFrontier ≡ Runtime.paid
+orientedDamageAdapterIsPaid = refl
+
 requirementEdgesRemainUnpaid :
   Runtime.requirementEdgePayment Runtime.currentMod97RuntimeFrontier ≡ Runtime.unpaid
 requirementEdgesRemainUnpaid = refl
