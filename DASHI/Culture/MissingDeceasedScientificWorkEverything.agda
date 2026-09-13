@@ -1,27 +1,23 @@
 module DASHI.Culture.MissingDeceasedScientificWorkEverything where
 
 -- Focused aggregate for attribution-safe scientific-work reconstruction,
--- source-exact citation, technical-intersection proof search, independent
--- common-selector/visibility analysis, selector-discrimination search,
--- higher-order capability synthesis, capability-indexed selector salience,
--- denominator-aware matched-control enrichment, competing-hypothesis
--- discrimination, critical-knowledge BIDI acquisition, viewpoint-provenance
--- testing, open-science/knowledge-release and externalisation-boundary BIDI
--- testing, science-to-capability-carrier reconstruction, application-
+-- source-exact citation, DOI/QID/Dewey snowball bindings, technical-intersection
+-- proof search, independent common-selector/visibility analysis, selector-
+-- discrimination search, higher-order capability synthesis, capability-indexed
+-- selector salience, denominator-aware matched-control enrichment, competing-
+-- hypothesis discrimination, critical-knowledge BIDI acquisition, viewpoint-
+-- provenance testing, open-science/knowledge-release and externalisation-boundary
+-- BIDI testing, science-to-capability-carrier reconstruction, application-
 -- transformation modelling, event-time alignment, organisational/custody
 -- confounders, capability resilience and reconstruction cost, science-driven
 -- acquisition compilation, disruption-benefit evidence testing, actor
--- benefit/visibility/effect intersection, and matched disruption-impact controls.
+-- benefit/visibility/effect intersection, matched disruption-impact controls,
+-- and the parallel roster role/event audit.
 --
--- The scientific formalisation is both memorial work and an investigative aid:
--- it identifies the actual capability-bearing application transformations that
--- later evidence must connect to people, access, replacement difficulty,
--- observers and events. None of those bridges are inferred from scientific
--- interest or public governing physics alone.
---
--- Amy Eskridge is kept outside the House-letter denominator but included in the
--- full memorial application-transformation atlas and acquisition compiler so she
--- is not dropped from the comparative scientific/investigative surface.
+-- Acquisition is intentionally parallel across the retained cohort. Each person
+-- keeps an independent unpaid frontier. External QID/Dewey coordinates are
+-- traversal aids only; evidentiary authority remains with the cited primary or
+-- bounded secondary source.
 
 import DASHI.Core.ScientificWorkAttributionExact
 import DASHI.Core.ScientificSourceCitationExact
@@ -52,6 +48,10 @@ import DASHI.Culture.MissingDeceasedScientistWorkAttributionExact
 import DASHI.Culture.MissingDeceasedScientificWorkCrossPollinationExact
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExact
 import DASHI.Culture.MissingDeceasedScientificWorkSourceRegistryExtendedExact
+import DASHI.Culture.MissingDeceasedScientificWorkSnowballAttributionBindingsExact
+import DASHI.Culture.MissingDeceasedIbrahimAcquisitionTraversalExact
+import DASHI.Culture.MissingDeceasedIbrahimInvestigativeParetoExact
+import DASHI.Culture.MissingDeceasedIbrahimDeweyConvergenceExact
 import DASHI.Culture.MissingDeceasedTechnicalDependencyHypergraphExact
 import DASHI.Culture.MissingDeceasedTechnicalIntersectionAcquisitionExact
 import DASHI.Culture.MissingDeceasedCommonSelectorVisibilityExact
@@ -66,15 +66,22 @@ import DASHI.Culture.MissingDeceasedScienceDrivenAcquisitionExact
 import DASHI.Culture.MissingDeceasedApplicationTransformationMatrixExact
 import DASHI.Culture.AmyEskridgeApplicationTransformationExact
 import DASHI.Culture.AmyEskridgeInstituteTeamSuccessionSurfaceExact
+import DASHI.Culture.AmyEskridgePOAMSRegisteredSTIAcquisitionRouteExact
 import DASHI.Culture.MissingDeceasedFullApplicationTransformationAtlasExact
 import DASHI.Culture.MissingDeceasedFullApplicationAcquisitionExact
 import DASHI.Culture.ChavezApplicationTransformationPossessionExact
 import DASHI.Culture.LeBlancApplicationTransformationPossessionExact
 import DASHI.Culture.RezaApplicationTransformationPossessionExact
+import DASHI.Culture.RezaRoleSourceArchaeologyExact
 import DASHI.Culture.MaiwaldActionSpectroscopyProjectSuccessionExact
+import DASHI.Culture.MaiwaldManifestationAttributionArchaeologyExact
+import DASHI.Culture.MaiwaldGovernmentRepositoryResourceLineageExact
 import DASHI.Culture.McCaslandEventTimeApplicationTransformationExact
 import DASHI.Culture.McCaslandOrganizationalTransitionSurfaceExact
+import DASHI.Culture.McCaslandDBEAttributionArchaeologyExact
 import DASHI.Culture.LoureiroEventAlternativeEvidenceExact
+import DASHI.Culture.LoureiroStudentSuccessionArchaeologyExact
+import DASHI.Culture.MissingDeceasedRosterRoleAndCommitteeWeldAuditExact
 import DASHI.Culture.MissingDeceasedOverlookedDimensionMatrixExact
 import DASHI.Culture.MissingDeceasedReconstructionCostMatrixExact
 import DASHI.Culture.MissingDeceasedApplicationSuccessionFrontierExact
@@ -132,3 +139,35 @@ import DASHI.Biology.JasonThomasSignallingBidiExact
 import DASHI.Biology.JasonThomasSTINGFerritinophagyMechanismDepthExact
 import DASHI.Biology.JasonThomasTargetDeconvolutionCompilerExact
 import DASHI.Culture.HouseOversightScientistRosterScopeExact
+
+-- UAP/adversarial and Chinese strategic-science extensions.
+import DASHI.Culture.MissingDeceasedTernaryAdversarialObserverExact
+import DASHI.Culture.MissingDeceasedStrategicRoleCapabilityFibreExact
+import DASHI.Culture.ChineseStrategicScientistRosterSnowballExact
+import DASHI.Culture.ChineseStrategicScientistEventWorkRepairExact
+import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact
+import DASHI.Culture.MissingDeceasedRosterScopeReconciliationExact
+import DASHI.Culture.MissingDeceasedTwentyScientistRoundRobinProgressExact
+import DASHI.Culture.MissingDeceasedTwentyScientistRound2ProgressExact
+import DASHI.Culture.MissingDeceasedInvestigativeAttributedSourceAtlasExact
+import DASHI.Culture.MissingDeceasedInvestigativeDiscoveryLinksAExact
+import DASHI.Culture.MissingDeceasedInvestigativeDiscoveryLinksBExact
+import DASHI.Culture.MissingDeceasedInvestigativeDiscoveryLinksCExact
+import DASHI.Culture.MissingDeceasedSouthwestGeographyDiscriminatorExact
+import DASHI.Culture.MissingDeceasedReportedAnomalyAttributionLedgerExact
+import DASHI.Culture.MissingDeceasedFullAttachmentClaimAtlasExact
+import DASHI.Culture.MissingDeceasedAttachmentSourcePromotionLedgerExact
+import DASHI.Culture.MissingDeceasedUAPAdversarialClaimDiscriminatorExact
+import DASHI.Culture.MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact
+import DASHI.Culture.MissingDeceasedFullSetTechnicalIntersectionParetoExact
+import DASHI.Culture.MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact
+import DASHI.Physics.Aerospace.YanHongHypersonicFlowControlBidiExact
+import DASHI.Physics.ExoticGravity.LiTorrPRB1992AttributedSourceExact
+import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact
+import DASHI.Physics.ExoticGravity.NingLiYBCORotatingFieldConstraintExact
+import DASHI.Physics.ExoticGravity.NingLiNASACooperativeAgreementNCC8124Exact
+import DASHI.Physics.ExoticGravity.NingLiArmyOtherTransactionSourceDiligenceExact
+import DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact
+import DASHI.Physics.Materials.RezaFangAlloyMetamaterialDiscriminationExact
+import DASHI.Physics.Materials.FusionPropulsionMaterialSurvivabilityCrossPollinationExact
+import DASHI.GameTheory.FengYangheMilitaryAIGameStatisticsBidiExact

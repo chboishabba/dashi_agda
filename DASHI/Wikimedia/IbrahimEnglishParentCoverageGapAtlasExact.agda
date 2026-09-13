@@ -16,6 +16,7 @@ import DASHI.Wikimedia.ConceptEntityAlignmentExact as Alignment
 -- "Connecting every bit of knowledge: The structure of Wikipedia's First
 -- Link Network", Journal of Computational Science 19 (2017), 21-30.
 -- DOI: 10.1016/j.jocs.2016.12.001
+-- arXiv:1605.00309
 --
 -- Ibrahim et al. supply the navigation prior: first-link paths tend to move
 -- from specific subjects toward increasingly general concepts, and traversal
@@ -24,7 +25,7 @@ import DASHI.Wikimedia.ConceptEntityAlignmentExact as Alignment
 --
 -- IMPORTANT SNAPSHOT BOUNDARY
 -- The edges below are current English-Wikipedia observations inspected on
--- 2026-09-10.  They are NOT asserted to be the exact 2016/2017 Ibrahim dump
+-- 2026-09-10/11.  They are NOT asserted to be the exact 2016/2017 Ibrahim dump
 -- edges, because article revisions and parser/exclusion policy can change.
 ------------------------------------------------------------------------
 
@@ -129,25 +130,25 @@ societyToIndividual =
     "society"
     "Q8425"
     "individual"
-    "unresolved-in-this-tranche"
-    "2026-09-10"
+    "Q795052"
+    "2026-09-11"
     currentEnPolicy
-    unresolvedAudit
+    fragmentedIndirectCoverage
     "DASHI has individual/agent/observer carriers in multiple domains"
-    "resolve the exact current EN/Wikidata parent identity and quotient against existing agent/person/observer formulations before adding a new owner"
+    "Wikidata Q795052 resolves the semantic coordinate for individual. The remaining debt is quotienting that coordinate against existing agent/person/observer formulations; QID identity does not choose the DASHI owner."
 
 socialScienceToScienceBranch : EnglishParentProbe
 socialScienceToScienceBranch =
   english-parent-probe
     "social science"
     "Q34749"
-    "branches of science"
-    "unresolved-in-this-tranche"
-    "2026-09-10"
+    "branch of science"
+    "Q2465832"
+    "2026-09-11"
     currentEnPolicy
-    unresolvedAudit
+    fragmentedIndirectCoverage
     "science and natural-science formulations are spread across DASHI/Physics, Biology, Chemistry and methodology owners"
-    "this is a high-value common funnel seam; formalise the science parent only after selecting a repo-wide formulation owner rather than a directory label"
+    "Wikidata Q2465832 resolves the branch-of-science semantic coordinate. The high-value gap remains selecting/reusing a repo-wide science formulation owner rather than creating a directory-label ontology."
 
 ------------------------------------------------------------------------
 -- Gap-priority semantics.
@@ -204,9 +205,10 @@ record IbrahimEnglishCoverageAuditBoundary : Set where
     currentEnglishEdgesRevisionSensitive : Bool
     existingQidLayerReused : Bool
     leafCoverageSeparatedFromParentCoverage : Bool
+    parentSemanticQidsResolvedForCurrentSecondLayer : Bool
     wikipediaEdgesCreateProofDependencies : Bool
     missingParentErasesExistingKnowledge : Bool
 
 canonicalIbrahimEnglishCoverageAuditBoundary : IbrahimEnglishCoverageAuditBoundary
 canonicalIbrahimEnglishCoverageAuditBoundary =
-  ibrahim-english-coverage-audit-boundary true true true true false false
+  ibrahim-english-coverage-audit-boundary true true true true true false false
