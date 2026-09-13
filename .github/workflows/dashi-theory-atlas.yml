@@ -23,6 +23,28 @@ on:
       - "tests/test_materialize_dashi_phase_visualisations.py"
       - "flake.nix"
       - ".github/workflows/dashi-theory-atlas.yml"
+    paths:
+      - "DASHI/**/*.agda"
+      - "config/dashi-*-atlas.json"
+      - "config/dashi-*-lane-hyperfabric.json"
+      - "config/dashi-*-termflow.json"
+      - "config/dashi-euler-phase-visualisations.json"
+      - "scripts/materialize_dashi_theory_atlas.py"
+      - "scripts/materialize_dashi_hyperfabric.py"
+      - "scripts/materialize_dashi_lane_hyperfabric.py"
+      - "scripts/materialize_dashi_agda_termflow.py"
+      - "scripts/materialize_dashi_phase_visualisations.py"
+      - "scripts/dashi_visualize_agda.py"
+      - "scripts/generate_triadic_arithmetic_laws.py"
+      - "scripts/generate_triadic_depth_two_dft.py"
+      - "tests/test_materialize_dashi_theory_atlas.py"
+      - "tests/test_materialize_dashi_hyperfabric.py"
+      - "tests/test_materialize_dashi_lane_hyperfabric.py"
+      - "tests/test_materialize_dashi_agda_termflow.py"
+      - "tests/test_materialize_dashi_phase_visualisations.py"
+      - "flake.nix"
+      - ".github/workflows/dashi-theory-atlas.yml"
+
 
 concurrency:
   group: dashi-global-${{ github.ref }}
