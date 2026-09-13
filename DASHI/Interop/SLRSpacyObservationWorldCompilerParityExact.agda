@@ -10,18 +10,8 @@ import DASHI.Interop.SLRBinaryWorldWireParityExact as WorldWire
 
 ------------------------------------------------------------------------
 -- Exact observation/compiler ABI mirrored by
--- chboishabba/slr :: crates/sl-world-compiler.
---
--- Observation wire v1:
---   magic[4] = "SLRO"
---   version  = u16 little-endian 1
---   record kind 1 = source manifestation
---   record kind 2 = spaCy token/dependency observation
---
--- Token observations carry document identity, sentence/local ordinals,
--- source span, head ordinal, a numeric DependencyShape tag, orth/lemma and
--- head orth/lemma.  No JSON object and no regex-derived semantic field is an
--- executable input to the compiler.
+-- chboishabba/slr :: crates/sl-world-compiler and the trained-spaCy binary
+-- observation boundary in slr_spacy_observation_wire.py.
 ------------------------------------------------------------------------
 
 observationWireVersion : Nat
@@ -34,6 +24,54 @@ data ObservationWireKind : Set where
 observationWireKindTag : ObservationWireKind → Nat
 observationWireKindTag sourceManifestationObservation = 1
 observationWireKindTag tokenDependencyObservation = 2
+
+------------------------------------------------------------------------
+-- The Python boundary recognizes only these exact dependency-label classes.
+-- Unknown labels are retained as unresolvedDependency; they are not guessed.
+------------------------------------------------------------------------
+
+data SpacyDependencyLabel : Set where
+  nsubjLabel csubjLabel : SpacyDependencyLabel
+  objLabel dobjLabel iobjLabel pobjLabel : SpacyDependencyLabel
+  nsubjpassLabel nsubjColonPassLabel csubjpassLabel csubjColonPassLabel : SpacyDependencyLabel
+  amodLabel nmodLabel oblLabel : SpacyDependencyLabel
+  conjLabel ccLabel negLabel : SpacyDependencyLabel
+  auxLabel auxpassLabel auxColonPassLabel copLabel : SpacyDependencyLabel
+  detLabel npadvmodLabel tmodLabel : SpacyDependencyLabel
+  ccompLabel xcompLabel advclLabel aclLabel relclLabel aclColonRelclLabel : SpacyDependencyLabel
+  unknownLabel : SpacyDependencyLabel
+
+shapeForDependencyLabel : SpacyDependencyLabel → Spacy.DependencyShape
+shapeForDependencyLabel nsubjLabel = Spacy.nominalSubject
+shapeForDependencyLabel csubjLabel = Spacy.nominalSubject
+shapeForDependencyLabel objLabel = Spacy.directObject
+shapeForDependencyLabel dobjLabel = Spacy.directObject
+shapeForDependencyLabel iobjLabel = Spacy.directObject
+shapeForDependencyLabel pobjLabel = Spacy.directObject
+shapeForDependencyLabel nsubjpassLabel = Spacy.passiveSubject
+shapeForDependencyLabel nsubjColonPassLabel = Spacy.passiveSubject
+shapeForDependencyLabel csubjpassLabel = Spacy.passiveSubject
+shapeForDependencyLabel csubjColonPassLabel = Spacy.passiveSubject
+shapeForDependencyLabel amodLabel = Spacy.adjectivalModifier
+shapeForDependencyLabel nmodLabel = Spacy.nominalModifier
+shapeForDependencyLabel oblLabel = Spacy.nominalModifier
+shapeForDependencyLabel conjLabel = Spacy.conjunction
+shapeForDependencyLabel ccLabel = Spacy.conjunction
+shapeForDependencyLabel negLabel = Spacy.negation
+shapeForDependencyLabel auxLabel = Spacy.modalAuxiliary
+shapeForDependencyLabel auxpassLabel = Spacy.modalAuxiliary
+shapeForDependencyLabel auxColonPassLabel = Spacy.modalAuxiliary
+shapeForDependencyLabel copLabel = Spacy.modalAuxiliary
+shapeForDependencyLabel detLabel = Spacy.determiner
+shapeForDependencyLabel npadvmodLabel = Spacy.temporalModifier
+shapeForDependencyLabel tmodLabel = Spacy.temporalModifier
+shapeForDependencyLabel ccompLabel = Spacy.clausalComplement
+shapeForDependencyLabel xcompLabel = Spacy.openClausalComplement
+shapeForDependencyLabel advclLabel = Spacy.adverbialClause
+shapeForDependencyLabel aclLabel = Spacy.clausalModifier
+shapeForDependencyLabel relclLabel = Spacy.relativeClause
+shapeForDependencyLabel aclColonRelclLabel = Spacy.relativeClause
+shapeForDependencyLabel unknownLabel = Spacy.unresolvedDependency
 
 dependencyShapeTag : Spacy.DependencyShape → Nat
 dependencyShapeTag Spacy.nominalSubject = 1
@@ -54,18 +92,9 @@ dependencyShapeTag Spacy.relativeClause = 15
 dependencyShapeTag Spacy.unresolvedDependency = 16
 
 data CompilerFragmentKind : Set where
-  actorFragment : CompilerFragmentKind
-  patientFragment : CompilerFragmentKind
-  propertyFragment : CompilerFragmentKind
-  relationFragment : CompilerFragmentKind
-  conjunctionFragment : CompilerFragmentKind
-  negationFragment : CompilerFragmentKind
-  modalityFragment : CompilerFragmentKind
-  quantifierFragment : CompilerFragmentKind
-  temporalFragment : CompilerFragmentKind
-  contentClauseFragment : CompilerFragmentKind
-  clauseAttachmentFragment : CompilerFragmentKind
-  unresolvedFragment : CompilerFragmentKind
+  actorFragment patientFragment propertyFragment relationFragment : CompilerFragmentKind
+  conjunctionFragment negationFragment modalityFragment quantifierFragment : CompilerFragmentKind
+  temporalFragment contentClauseFragment clauseAttachmentFragment unresolvedFragment : CompilerFragmentKind
 
 compilerFragmentTag : CompilerFragmentKind → Nat
 compilerFragmentTag actorFragment = 1
@@ -109,6 +138,8 @@ record ObservationCompilerParity : Set where
     magicIsSLRO : Bool
     versionIsOne : Bool
     littleEndianNumericFields : Bool
+    dependencyLabelProjectionExact : Bool
+    unknownDependencyRemainsUnresolved : Bool
     dependencyTagMappingExact : Bool
     fragmentMappingExact : Bool
     documentRefRetained : Bool
@@ -132,7 +163,7 @@ open ObservationCompilerParity public
 canonicalObservationCompilerParity : ObservationCompilerParity
 canonicalObservationCompilerParity =
   observationCompilerParity
-    true true true true true
+    true true true true true true true
     true true true true true true
     true true true true
     false false false false false
@@ -143,6 +174,7 @@ canonicalObservationCompilerParity =
 
 data JsonObservationTransport : Set where
 data RegexObservationSemanticParser : Set where
+data UnknownDependencyGuessing : Set where
 data UnresolvedDependencyPromotion : Set where
 data CompilerSemanticAuthority : Set where
 data CompilerTruthPromotion : Set where
@@ -153,6 +185,9 @@ jsonObservationTransportForbidden ()
 regexObservationSemanticParserForbidden : RegexObservationSemanticParser → ⊥
 regexObservationSemanticParserForbidden ()
 
+unknownDependencyCannotBeGuessed : UnknownDependencyGuessing → ⊥
+unknownDependencyCannotBeGuessed ()
+
 unresolvedDependencyCannotPromote : UnresolvedDependencyPromotion → ⊥
 unresolvedDependencyCannotPromote ()
 
@@ -162,6 +197,5 @@ compilerDoesNotCreateSemanticAuthority ()
 compilerDoesNotPromoteTruth : CompilerTruthPromotion → ⊥
 compilerDoesNotPromoteTruth ()
 
--- The world-store output remains the exact SLRW ABI already formalised.
 compilerTargetsWorldWireVersion : Nat
 compilerTargetsWorldWireVersion = WorldWire.wireVersion
