@@ -16,13 +16,22 @@ import json
 from pathlib import Path
 from typing import Any, Iterable
 
-from scripts.mod97_checkpoint_producer import (
-    MODULUS,
-    TOTAL_PAIRS,
-    TRAINING_PAIRS,
-    Mod97RunConfig,
-    deterministic_split_indices,
-)
+try:
+    from scripts.mod97_checkpoint_producer import (
+        MODULUS,
+        TOTAL_PAIRS,
+        TRAINING_PAIRS,
+        Mod97RunConfig,
+        deterministic_split_indices,
+    )
+except ModuleNotFoundError:
+    from mod97_checkpoint_producer import (
+        MODULUS,
+        TOTAL_PAIRS,
+        TRAINING_PAIRS,
+        Mod97RunConfig,
+        deterministic_split_indices,
+    )
 
 
 def select_candidates_from_training(
