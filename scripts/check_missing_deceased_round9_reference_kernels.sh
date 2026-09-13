@@ -9,7 +9,7 @@ required_files=(
   "DASHI/Physics/Materials/FangDainingInverseDesignReferenceKernelExact.agda"
   "DASHI/Physics/Aerospace/YanHongThermalExcitationReferenceKernelExact.agda"
   "DASHI/Culture/MissingDeceasedTwentyScientistScienceReferenceKernelBidiExact.agda"
-  "DASHI/Culture/MissingDeceasedTwentyScientistRound9ReferenceKernelProgressExact.agda"
+  "DASHI/Culture/MissingDeceasedTwentyScientistRound13ReferenceKernelProgressExact.agda"
 )
 
 for file in "${required_files[@]}"; do
@@ -21,10 +21,11 @@ grep -q 'maiwaldSpectralReferenceKernel' "$branch_root/DASHI/Physics/Spectroscop
 grep -q 'fangInverseDesignReferenceKernel' "$branch_root/DASHI/Physics/Materials/FangDainingInverseDesignReferenceKernelExact.agda"
 grep -q 'yanThermalCaseReferenceKernel' "$branch_root/DASHI/Physics/Aerospace/YanHongThermalExcitationReferenceKernelExact.agda"
 grep -q 'referenceKernelBindingsCount = 4' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistScienceReferenceKernelBidiExact.agda"
-grep -q 'round9ScientificCohortCount = 20' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRound9ReferenceKernelProgressExact.agda"
-grep -q 'round9EveryScientistTouched = true' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRound9ReferenceKernelProgressExact.agda"
+grep -q 'round13ScientificCohortCount = 20' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRound13ReferenceKernelProgressExact.agda"
+grep -q 'round13EveryScientistTouched = true' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRound13ReferenceKernelProgressExact.agda"
 grep -q 'referenceProjectionDoesNotEqualSourceAlgorithm = false' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistScienceReferenceKernelBidiExact.agda"
-grep -q 'MissingDeceasedTwentyScientistRound9ReferenceKernelProgressExact' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda"
+grep -q 'scienceReferenceKernelBindingCount' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistScienceExecutionKernelExact.agda"
+grep -q 'MissingDeceasedTwentyScientistRound13ReferenceKernelProgressExact' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda"
 grep -q 'MissingDeceasedTwentyScientistScienceReferenceKernelBidiExact' "$branch_root/DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda"
 
-echo 'Round-9 reference-kernel static contract: OK'
+echo 'Round-13 reference-kernel static contract: OK'
