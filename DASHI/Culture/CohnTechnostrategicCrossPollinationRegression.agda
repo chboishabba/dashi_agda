@@ -10,8 +10,10 @@ import DASHI.Culture.CohnTechnostrategicSourceAtlasExact as CohnSources
 ------------------------------------------------------------------------
 -- Regression contract for the Cohn / feminist / discourse bridge.
 --
--- This file is intentionally written before the production owners.  The first
--- focused kernel run must fail because those owners do not yet exist.
+-- This contract was written before the production owners.  It therefore fixes
+-- the desired collision, repair and no-promotion surface independently of the
+-- implementation.  Kernel certification is tracked separately from that TDD
+-- ordering and is not inferred from the existence of this file.
 ------------------------------------------------------------------------
 
 coarseTechnostrategicCollision :
@@ -41,6 +43,13 @@ enrichedObserverSeparatesCollisionPair :
   ≡ Cohn.enrichedObservation Cohn.highSituatedHarm → ⊥
 enrichedObserverSeparatesCollisionPair =
   Cohn.enrichedObserverSeparatesCanonicalPair
+
+enrichedObserverRecoversHumanConsequence :
+  Intersectional.FactorsThrough
+    Cohn.enrichedObservation
+    Cohn.humanMaterialConsequence
+enrichedObserverRecoversHumanConsequence =
+  Cohn.humanConsequenceFactorsThroughEnrichedObserver
 
 technicalCoherenceNotUniversalAdequacy :
   Cohn.technicalCoherenceImpliesUniversalConsumerAdequacy
