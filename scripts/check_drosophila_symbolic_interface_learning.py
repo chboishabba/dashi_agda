@@ -31,9 +31,21 @@ REQUIRED = {
         "negativePublicSearchStillDoesNotProveAbsence",
         "publicArtifactStillUnrecovered",
     ],
+    "DASHI/Biology/DrosophilaSymbolicCleanRoomRuntimeBridgeExact.agda": [
+        "runtimeCleanRoomSource",
+        "record CleanRoomRuntimeStatus",
+        "runtimeSubstrateIsLocated",
+        "viralImplementationStillUnrecovered",
+        "viralReproductionStillUnpaid",
+        "empiricalNullsStillUnpaid",
+        "biologicalTopologyAdvantageStillUnpaid",
+        "runtimeSubstrateDoesNotEqualViralReproduction",
+        "existingImplementationDebtRemainsOpen",
+    ],
     "DASHI/Biology/AnimalexicEverything.agda": [
         "DrosophilaSymbolicInterfaceLearningExact",
         "DrosophilaSymbolicInterfaceLearningRegression",
+        "DrosophilaSymbolicCleanRoomRuntimeBridgeExact",
     ],
 }
 
