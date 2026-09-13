@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "Docs/papers/live/Paper1NavierStokesClayDraft.md"
@@ -32,6 +31,26 @@ REQUIRED_INTERFACE = [
     "p3SeparationProducerClosed",
     "historicalAlternativeRoute",
     "clayTerminalPromotion",
+    "R500.round500IntegratedDirectCompanionWeldClosedModuloIntegrationAuthority",
+    "R568.round568LiveCommutatorSpacetimeBudgetClosed",
+    "R572.round572R503DirectBudgetCompilerClosedGivenReceipts",
+    "R503.round503ExactR500ToR415CompilerClosed",
+    "R211.round211ConcreteSameOutputResidualPaymentConstructed",
+    "R214.round214ConstantShellBandAlonePaysGramDebt",
+]
+
+REQUIRED_FAIL_CLOSED_PROOFS = [
+    "commutatorOnlySpacetimeProducerClosedIsFalse",
+    "sameOutputDebtPaymentClosedIsFalse",
+    "p3SeparationProducerClosedIsFalse",
+    "clayTerminalPromotionIsFalse",
+]
+
+REQUIRED_CONSTRUCTED_PROOFS = [
+    "directCompanionConstructedIsTrue",
+    "directLeafACompilerConstructedIsTrue",
+    "directOffDiagonalConsumerConstructedIsTrue",
+    "historicalA1A9RetainedIsTrue",
 ]
 
 FORBIDDEN_PRIMARY_PAPER_PHRASES = [
@@ -69,32 +88,14 @@ def main() -> None:
 
     require_all(paper, REQUIRED_PAPER, "paper")
     require_all(interface, REQUIRED_INTERFACE, "interface")
+    require_all(interface, REQUIRED_FAIL_CLOSED_PROOFS, "interface fail-closed proofs")
+    require_all(interface, REQUIRED_CONSTRUCTED_PROOFS, "interface constructed proofs")
 
     appendix = historical_appendix(paper)
     primary = paper[: len(paper) - len(appendix)] if appendix else paper
     for phrase in FORBIDDEN_PRIMARY_PAPER_PHRASES:
         if phrase in primary:
             fail(f"stale A1-A9 primary-frontier phrase remains: {phrase!r}")
-
-    required_false_assignments = [
-        "commutatorOnlySpacetimeProducerClosed = false",
-        "sameOutputDebtPaymentClosed = false",
-        "p3SeparationProducerClosed = false",
-        "clayTerminalPromotion = false",
-    ]
-    for assignment in required_false_assignments:
-        if assignment not in interface:
-            fail(f"fail-closed interface assignment not found: {assignment}")
-
-    required_true_assignments = [
-        "directCompanionConstructed = true",
-        "directLeafACompilerConstructed = true",
-        "directOffDiagonalConsumerConstructed = true",
-        "historicalA1A9Retained = true",
-    ]
-    for assignment in required_true_assignments:
-        if assignment not in interface:
-            fail(f"constructed/historical interface assignment not found: {assignment}")
 
     print("PASS: modern NS paper proof-spine source contract")
 
