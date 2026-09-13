@@ -1,0 +1,43 @@
+name: Grokking circuit temporal alignment Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Cognition/PNF/GrokkingSparseActiveColouringRoutingExact.agda'
+      - 'DASHI/Cognition/PNF/GrokkingSparseActiveColouringRoutingRegression.agda'
+      - 'DASHI/Learning/GrokkingCircuitTemporalAlignmentExact.agda'
+      - 'DASHI/Learning/GrokkingCircuitTemporalAlignmentRegression.agda'
+      - 'DASHI/Learning/GrokkingRegression.agda'
+      - 'DASHI/Programmes/GrokkingExact.agda'
+      - 'Docs/learning/GrokkingOperatorFormalism.md'
+      - '.github/workflows/grokking-circuit-temporal-alignment-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_BIN: agda
+      DASHI_REPO_ROOT: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Reject trust escapes in new temporal-alignment surface
+        run: |
+          if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|{!!}|\?)\b' \
+            DASHI/Learning/GrokkingCircuitTemporalAlignmentExact.agda \
+            DASHI/Learning/GrokkingCircuitTemporalAlignmentRegression.agda; then
+            echo 'trust escape found in temporal-alignment surface'
+            exit 1
+          fi
+      - name: Typecheck temporal-alignment regression root
+        run: nix develop .# --command agda -i . DASHI/Learning/GrokkingCircuitTemporalAlignmentRegression.agda
