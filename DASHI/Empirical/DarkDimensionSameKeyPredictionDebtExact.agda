@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
+import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun
 import DASHI.Empirical.DarkDimensionSharedBAOObservableExact as SharedBAO
 import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationKey
 
@@ -96,19 +97,15 @@ record SameKeyPredictionDerivationDebt : Set where
   field
     sharedBAOObservableLocated : Bool
     sameDESIObservationKeyLocated : Bool
-
     daoExecutableModelLocated : Bool
     darkDimensionExecutableModelLocated : Bool
     daoExecutableRevisionPinned : Bool
     daoExecutionConfigSurfaceLocated : Bool
     daoExecutedByDASHI : Bool
-
     daoLargeScaleStructureIndependentTargetLocated : Bool
     daoTargetChronologicallyHeldOutBeforeDESIDR2 : Bool
-
     daoSameKeyBAOVectorDerived : Bool
     darkDimensionSameKeyBAOVectorDerived : Bool
-
     commonCovarianceSurfaceAssembled : Bool
     analysisChoicesFrozenBeforeFutureData : Bool
     sameKeyLikelihoodLocked : Bool
@@ -119,24 +116,8 @@ open SameKeyPredictionDerivationDebt public
 canonicalSameKeyPredictionDerivationDebt : SameKeyPredictionDerivationDebt
 canonicalSameKeyPredictionDerivationDebt =
   sameKeyPredictionDerivationDebt
-    true
-    true
-    true
-    false
-    true
-    true
-    false
-    true
-    false
-    false
-    false
-    false
-    false
-    false
-    false
+    true true true false true true false true false false false false false false false
 
--- Semantic field receipts.  Because the carrier is Bool-heavy, these equalities
--- make constructor-order mistakes observable to the type checker.
 daoExecutableRevisionPinPaid :
   daoExecutableRevisionPinned canonicalSameKeyPredictionDerivationDebt ≡ true
 daoExecutableRevisionPinPaid = refl
@@ -149,45 +130,43 @@ daoExecutionStillNotRun :
   daoExecutedByDASHI canonicalSameKeyPredictionDerivationDebt ≡ false
 daoExecutionStillNotRun = refl
 
+daoReconstructionRuntimeRequestLocated :
+  DAORun.upstreamRevisionPinned DAORun.canonicalDAOSameKeyReconstructionRunStatus ≡ true
+daoReconstructionRuntimeRequestLocated = refl
+
+daoReconstructionRuntimeReceiptStillOpen :
+  DAORun.executionReceiptPresent DAORun.canonicalDAOSameKeyReconstructionRunStatus ≡ false
+daoReconstructionRuntimeReceiptStillOpen = DAORun.reconstructionRunStillOpen
+
+daoReconstructionVectorStillOpen :
+  DAORun.numericalVectorPresent DAORun.canonicalDAOSameKeyReconstructionRunStatus ≡ false
+daoReconstructionVectorStillOpen = DAORun.numericalVectorStillOpen
+
 darkDimensionExecutableStillOpen :
   darkDimensionExecutableModelLocated canonicalSameKeyPredictionDerivationDebt ≡ false
 darkDimensionExecutableStillOpen = refl
 
 daoExtractionRecipeLocatedButExecutionStillOpen :
   DAORecipe.recipeExecuted DAORecipe.daoPinnedExtractionRecipe ≡ false
-daoExtractionRecipeLocatedButExecutionStillOpen =
-  DAORecipe.recipeExecutionStillOpen
+daoExtractionRecipeLocatedButExecutionStillOpen = DAORecipe.recipeExecutionStillOpen
 
 daoRecipeStillDoesNotPaySameKeyVector :
   DAORecipe.sameKeyBAOVectorDerived DAORecipe.daoPinnedExtractionRecipe ≡ false
-daoRecipeStillDoesNotPaySameKeyVector =
-  DAORecipe.sameKeyBAOVectorStillNotDerived
+daoRecipeStillDoesNotPaySameKeyVector = DAORecipe.sameKeyBAOVectorStillNotDerived
 
 sameKeyPredictionDebtStillOpen :
   debtClosed canonicalSameKeyPredictionDerivationDebt ≡ false
 sameKeyPredictionDebtStillOpen = refl
 
 sharedBAONumericalSeparationStillBlocked :
-  SharedBAO.sharedObservableNumericalSeparationLocked
-    SharedBAO.canonicalSharedBAOStatus
-  ≡ false
-sharedBAONumericalSeparationStillBlocked =
-  SharedBAO.sharedObservableNumericalPredictionsStillOpen
-
-------------------------------------------------------------------------
--- WrongType boundary: LSS independence != chronological holdout.
-------------------------------------------------------------------------
+  SharedBAO.sharedObservableNumericalSeparationLocked SharedBAO.canonicalSharedBAOStatus ≡ false
+sharedBAONumericalSeparationStillBlocked = SharedBAO.sharedObservableNumericalPredictionsStillOpen
 
 data LargeScaleStructureIndependenceImpliesChronologicalHoldout : Set where
 
 largeScaleStructureIndependentDoesNotMeanChronologicallyHeldOut :
   LargeScaleStructureIndependenceImpliesChronologicalHoldout → ⊥
 largeScaleStructureIndependentDoesNotMeanChronologicallyHeldOut ()
-
-------------------------------------------------------------------------
--- Concrete same-key request objects.  They name the key and both source lanes
--- without supplying fabricated predictions.
-------------------------------------------------------------------------
 
 record SameKeyPredictionRequest : Set where
   constructor sameKeyPredictionRequest
@@ -203,23 +182,11 @@ open SameKeyPredictionRequest public
 
 lrg1TransversePredictionRequest : SameKeyPredictionRequest
 lrg1TransversePredictionRequest =
-  sameKeyPredictionRequest
-    ObservationKey.lrg1TransverseKey
-    darkDimensionModelSource
-    daoIndependentTargetSource
-    false
-    false
-    false
+  sameKeyPredictionRequest ObservationKey.lrg1TransverseKey darkDimensionModelSource daoIndependentTargetSource false false false
 
 lrg1RadialPredictionRequest : SameKeyPredictionRequest
 lrg1RadialPredictionRequest =
-  sameKeyPredictionRequest
-    ObservationKey.lrg1RadialKey
-    darkDimensionModelSource
-    daoIndependentTargetSource
-    false
-    false
-    false
+  sameKeyPredictionRequest ObservationKey.lrg1RadialKey darkDimensionModelSource daoIndependentTargetSource false false false
 
 bedroyaArXiv : String
 bedroyaArXiv = "2507.03090"
