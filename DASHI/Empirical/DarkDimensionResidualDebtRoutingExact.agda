@@ -21,6 +21,7 @@ import DASHI.Empirical.DarkDimensionBedroyaParameterManifestBoundaryExact as Bed
 
 daoFormalCertificationRoute :
   ProofDebt.routeDebt
+    ProofDebt.deductiveTheorem
     ProofDebt.derivedInRepo
     ProofDebt.sourceAligned
     ProofDebt.uncertified
