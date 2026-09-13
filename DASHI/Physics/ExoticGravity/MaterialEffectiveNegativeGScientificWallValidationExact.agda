@@ -6,93 +6,91 @@ open import Agda.Builtin.Bool using (true; false)
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallBidiExact as Wall
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallProgressionExact as Progress
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallPaymentReceiptExact as Payment
 
-currentWallStartsAtMassCurrent :
-  Wall.currentScientificWallDiscriminator
-    ≡ Wall.componentResolvedMassCurrent
+currentWallStartsAtMassCurrent : Wall.currentScientificWallDiscriminator ≡ Wall.componentResolvedMassCurrent
 currentWallStartsAtMassCurrent = Wall.currentScientificWallStartsAtMassCurrent
 
-currentWallRequestsEmpiricalEvidence :
-  Wall.currentScientificWallProducer ≡ Search.empiricalEvidenceProducer
+currentWallRequestsEmpiricalEvidence : Wall.currentScientificWallProducer ≡ Search.empiricalEvidenceProducer
 currentWallRequestsEmpiricalEvidence = Wall.currentScientificWallProducerIsEmpiricalEvidence
 
-chargeCollisionSelectsMassCurrent :
-  Wall.requiredDiscriminator Wall.chargeVsMassCurrentCollision
-    ≡ Wall.componentResolvedMassCurrent
+chargeCollisionSelectsMassCurrent : Wall.requiredDiscriminator Wall.chargeVsMassCurrentCollision ≡ Wall.componentResolvedMassCurrent
 chargeCollisionSelectsMassCurrent = Wall.chargeCurrentCollisionNeedsMassCurrentDiscriminator
 
-sourceConstitutiveCollisionSelectsIndependentAxes :
-  Wall.requiredDiscriminator Wall.sourceVsConstitutiveCollision
-    ≡ Wall.independentSourceMaterialAxes
+sourceConstitutiveCollisionSelectsIndependentAxes : Wall.requiredDiscriminator Wall.sourceVsConstitutiveCollision ≡ Wall.independentSourceMaterialAxes
 sourceConstitutiveCollisionSelectsIndependentAxes = Wall.singleFieldCollisionNeedsIndependentAxes
 
-finiteScalingCollisionSelectsModelSeparation :
-  Wall.requiredDiscriminator Wall.finiteScalingModelCollision
-    ≡ Wall.scalingModelClassSeparation
+finiteScalingCollisionSelectsModelSeparation : Wall.requiredDiscriminator Wall.finiteScalingModelCollision ≡ Wall.scalingModelClassSeparation
 finiteScalingCollisionSelectsModelSeparation = Wall.finiteScalingCollisionNeedsModelSeparation
 
-stagedCurrentWallStartsAtMassCurrent :
-  Progress.firstOpenScientificWallLeaf Progress.currentWallState
-    ≡ Progress.massCurrentLeaf
+stagedCurrentWallStartsAtMassCurrent : Progress.firstOpenScientificWallLeaf Progress.currentWallState ≡ Progress.massCurrentLeaf
 stagedCurrentWallStartsAtMassCurrent = Progress.currentWallFirstOpen
 
-afterMassCurrentWallAdvancesToStressEnergy :
-  Progress.firstOpenScientificWallLeaf Progress.afterMassCurrent
-    ≡ Progress.stressEnergyLeaf
+afterMassCurrentWallAdvancesToStressEnergy : Progress.firstOpenScientificWallLeaf Progress.afterMassCurrent ≡ Progress.stressEnergyLeaf
 afterMassCurrentWallAdvancesToStressEnergy = Progress.afterMassCurrentFirstOpen
 
-afterStressEnergyWallAdvancesToIndependentAxes :
-  Progress.firstOpenScientificWallLeaf Progress.afterStressEnergy
-    ≡ Progress.sourceMaterialAxesLeaf
+afterStressEnergyWallAdvancesToIndependentAxes : Progress.firstOpenScientificWallLeaf Progress.afterStressEnergy ≡ Progress.sourceMaterialAxesLeaf
 afterStressEnergyWallAdvancesToIndependentAxes = Progress.afterStressEnergyFirstOpen
 
-afterIndependentAxesWallAdvancesToModelSeparation :
-  Progress.firstOpenScientificWallLeaf Progress.afterIndependentAxes
-    ≡ Progress.modelClassSeparationLeaf
+afterIndependentAxesWallAdvancesToModelSeparation : Progress.firstOpenScientificWallLeaf Progress.afterIndependentAxes ≡ Progress.modelClassSeparationLeaf
 afterIndependentAxesWallAdvancesToModelSeparation = Progress.afterIndependentAxesFirstOpen
 
-afterModelSeparationWallAdvancesToReplicationIdentity :
-  Progress.firstOpenScientificWallLeaf Progress.afterModelSeparation
-    ≡ Progress.scalingReplicationIdentityLeaf
+afterModelSeparationWallAdvancesToReplicationIdentity : Progress.firstOpenScientificWallLeaf Progress.afterModelSeparation ≡ Progress.scalingReplicationIdentityLeaf
 afterModelSeparationWallAdvancesToReplicationIdentity = Progress.afterModelSeparationFirstOpen
 
-fullyPaidWallStopsSchedulingAcquisition :
-  Progress.decisionForLeaf (Progress.firstOpenScientificWallLeaf Progress.fullyPaidWall)
-    ≡ Progress.noFurtherScientificWallAcquisition
+laterAxesCanBeRetainedBeforeMassCurrentPayment : Progress.sourceMaterialAxesAcquired Progress.outOfOrderRetainedAcquisition ≡ true
+laterAxesCanBeRetainedBeforeMassCurrentPayment = Progress.laterAxesMayAlreadyBeAcquired
+
+modelSeparationCanBeRetainedBeforeMassCurrentPayment : Progress.modelClassSeparationAcquired Progress.outOfOrderRetainedAcquisition ≡ true
+modelSeparationCanBeRetainedBeforeMassCurrentPayment = Progress.modelSeparationDataMayAlreadyBeAcquired
+
+replicationMetadataCanBeRetainedBeforeMassCurrentPayment : Progress.scalingReplicationIdentityAcquired Progress.outOfOrderRetainedAcquisition ≡ true
+replicationMetadataCanBeRetainedBeforeMassCurrentPayment = Progress.replicationMetadataMayAlreadyBeAcquired
+
+outOfOrderAcquisitionDoesNotSkipDependencyPayment : Progress.firstOpenScientificWallLeaf Progress.outOfOrderRetainedPayment ≡ Progress.massCurrentLeaf
+outOfOrderAcquisitionDoesNotSkipDependencyPayment = Progress.outOfOrderAcquisitionDoesNotSkipMassCurrentPayment
+
+physicalAcquisitionNeedNotFollowPromotionOrder : Progress.physicalAcquisitionMustFollowPromotionOrder Progress.canonicalScientificWallProgressionBoundary ≡ false
+physicalAcquisitionNeedNotFollowPromotionOrder = refl
+
+outOfOrderAcquisitionMayBeRetained : Progress.outOfOrderAcquisitionMayBeRetained Progress.canonicalScientificWallProgressionBoundary ≡ true
+outOfOrderAcquisitionMayBeRetained = refl
+
+outOfOrderAcquisitionDoesNotAutoPayDependency : Progress.outOfOrderAcquisitionAutomaticallyPaysDependency Progress.canonicalScientificWallProgressionBoundary ≡ false
+outOfOrderAcquisitionDoesNotAutoPayDependency = refl
+
+arbitraryAllTrueBooleansAreNotScientificPayment : Payment.arbitraryAllTrueBooleansCountAsScientificPayment Payment.canonicalScientificWallPaymentReceiptBoundary ≡ false
+arbitraryAllTrueBooleansAreNotScientificPayment = refl
+
+terminalPaymentRequiresActualReceipts : Payment.terminalPaymentRequiresActualReceipts Payment.canonicalScientificWallPaymentReceiptBoundary ≡ true
+terminalPaymentRequiresActualReceipts = refl
+
+stressEnergyMustUseExactMassCurrentReceipt : Payment.stressEnergyMustUseExactPaidMassCurrent Payment.canonicalScientificWallPaymentReceiptBoundary ≡ true
+stressEnergyMustUseExactMassCurrentReceipt = refl
+
+terminalInterpretationMayNotDriftAcrossReceipts : Payment.terminalNegativeGInterpretationMayDriftAcrossReceipts Payment.canonicalScientificWallPaymentReceiptBoundary ≡ false
+terminalInterpretationMayNotDriftAcrossReceipts = refl
+
+fullyPaidWallStopsSchedulingAcquisition : Progress.decisionForLeaf (Progress.firstOpenScientificWallLeaf Progress.fullyPaidWall) ≡ Progress.noFurtherScientificWallAcquisition
 fullyPaidWallStopsSchedulingAcquisition = Progress.closedWallHasNoFurtherAcquisition
 
-fullyPaidWallUsesNoSearchProducer :
-  Progress.producerForDecision
-    (Progress.decisionForLeaf (Progress.firstOpenScientificWallLeaf Progress.fullyPaidWall))
-    ≡ Search.noSearchProducer
+fullyPaidWallUsesNoSearchProducer : Progress.producerForDecision (Progress.decisionForLeaf (Progress.firstOpenScientificWallLeaf Progress.fullyPaidWall)) ≡ Search.noSearchProducer
 fullyPaidWallUsesNoSearchProducer = Progress.closedWallProducerIsNoSearch
 
-closedWallDoesNotProveNegativeG :
-  Progress.closedWallAutomaticallyProvesNegativeEffectiveG
-    Progress.canonicalScientificWallProgressionBoundary ≡ false
+closedWallDoesNotProveNegativeG : Progress.closedWallAutomaticallyProvesNegativeEffectiveG Progress.canonicalScientificWallProgressionBoundary ≡ false
 closedWallDoesNotProveNegativeG = refl
 
-missingDatasetIsNotOneOpaqueResidual :
-  Wall.missingDatasetIsOneOpaqueResidual
-    Wall.canonicalScientificWallBidiBoundary ≡ false
+missingDatasetIsNotOneOpaqueResidual : Wall.missingDatasetIsOneOpaqueResidual Wall.canonicalScientificWallBidiBoundary ≡ false
 missingDatasetIsNotOneOpaqueResidual = refl
 
-eachMissingReceiptNeedsCollisionJustification :
-  Wall.eachMissingReceiptNeedsCollisionJustification
-    Wall.canonicalScientificWallBidiBoundary ≡ true
+eachMissingReceiptNeedsCollisionJustification : Wall.eachMissingReceiptNeedsCollisionJustification Wall.canonicalScientificWallBidiBoundary ≡ true
 eachMissingReceiptNeedsCollisionJustification = refl
 
-solvingOneCollisionDoesNotSolveLaterCollisions :
-  Wall.solvingOneCollisionAutomaticallySolvesLaterCollisions
-    Wall.canonicalScientificWallBidiBoundary ≡ false
+solvingOneCollisionDoesNotSolveLaterCollisions : Wall.solvingOneCollisionAutomaticallySolvesLaterCollisions Wall.canonicalScientificWallBidiBoundary ≡ false
 solvingOneCollisionDoesNotSolveLaterCollisions = refl
 
-empiricalPaymentsStillNeedProvenance :
-  Wall.empiricalPaymentsStillNeedCarrierSensitiveProvenance
-    Wall.canonicalScientificWallBidiBoundary ≡ true
+empiricalPaymentsStillNeedProvenance : Wall.empiricalPaymentsStillNeedCarrierSensitiveProvenance Wall.canonicalScientificWallBidiBoundary ≡ true
 empiricalPaymentsStillNeedProvenance = refl
 
-discriminatorDoesNotProveNegativeG :
-  Wall.discriminatorReceiptAutomaticallyProvesNegativeEffectiveG
-    Wall.canonicalScientificWallBidiBoundary ≡ false
+discriminatorDoesNotProveNegativeG : Wall.discriminatorReceiptAutomaticallyProvesNegativeEffectiveG Wall.canonicalScientificWallBidiBoundary ≡ false
 discriminatorDoesNotProveNegativeG = refl
