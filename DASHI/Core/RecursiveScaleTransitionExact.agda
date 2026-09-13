@@ -1,7 +1,6 @@
 module DASHI.Core.RecursiveScaleTransitionExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Agda.Builtin.Equality using (_≡_)
 
 ------------------------------------------------------------------------
 -- Recursive scale transition.
@@ -48,15 +47,15 @@ record RecursiveScaleTransition
     classifyPersistent : Trajectory → Persistent
     persistentRole : Persistent → PersistentRole
 
-    -- Q_n / realisation boundary.  The next-scale object is not obtained by
-    -- identifying it with Persistent; a witness must relate the two.
+    -- Q_n / realisation boundary.  This relation is intentionally not a total
+    -- function Persistent -> Next: a later witness must pay the semantic weld.
     RealisesNext : Persistent → Next → Set
-    realiseNextObject : (p : Persistent) → Σ Next (RealisesNext p)
 
 open RecursiveScaleTransition public
 
 ------------------------------------------------------------------------
--- A concrete execution witness keeps the three stages visible.
+-- A concrete execution witness keeps the three stages visible and pays the
+-- realisation relation for one lower-scale state.
 ------------------------------------------------------------------------
 
 record ScaleTransitionWitness
@@ -75,6 +74,15 @@ record ScaleTransitionWitness
     nextRealisesPersistent : RealisesNext transition persistent next
 
 open ScaleTransitionWitness public
+
+realiseNextObject :
+  {State Environment History Trajectory Persistent Next : Set}
+  {transition : RecursiveScaleTransition
+    State Environment History Trajectory Persistent Next}
+  {lower : SituatedLowerState State Environment History} →
+  ScaleTransitionWitness transition lower →
+  Next
+realiseNextObject witness = ScaleTransitionWitness.next witness
 
 ------------------------------------------------------------------------
 -- Non-promotion boundaries.
