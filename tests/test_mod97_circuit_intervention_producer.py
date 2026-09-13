@@ -1,3 +1,6 @@
+import subprocess
+import sys
+
 from scripts.mod97_circuit_intervention_producer import (
     build_intervention_receipt,
     interaction_excess,
@@ -49,3 +52,13 @@ def test_raw_receipt_does_not_promote_relations_or_beta() -> None:
     assert receipt["promotion"]["relation_classification_paid"] is False
     assert receipt["promotion"]["beta_maximality_paid"] is False
     assert receipt["promotion"]["grokking_mechanism_paid"] is False
+
+
+def test_direct_script_help_resolves_repo_local_imports() -> None:
+    result = subprocess.run(
+        [sys.executable, "scripts/mod97_circuit_intervention_producer.py", "--help"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
