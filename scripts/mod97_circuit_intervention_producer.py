@@ -33,6 +33,8 @@ except ModuleNotFoundError:
         deterministic_split_indices,
     )
 
+LOSS_DAMAGE_SCALE = 1_000_000
+
 
 def select_candidates_from_training(
     activations: Iterable[Iterable[float]], candidate_count: int
@@ -60,6 +62,18 @@ def interaction_excess(left_effect: float, right_effect: float, joint_effect: fl
     return joint_effect - (left_effect + right_effect)
 
 
+def canonical_damage_microunits(loss_increase: float) -> int:
+    """Map signed held-out loss change to the non-negative Nat damage carrier.
+
+    Negative loss changes mean the intervention improved held-out loss. They remain
+    present in the raw receipt but contribute zero damage to the Nat adapter; this
+    avoids silently encoding a signed quantity in the existing non-negative formal
+    classifier. The scale is local experiment metadata, not a source-derived unit.
+    """
+
+    return max(0, int(round(loss_increase * LOSS_DAMAGE_SCALE)))
+
+
 def build_intervention_receipt(
     *,
     checkpoint_path: str,
@@ -71,6 +85,9 @@ def build_intervention_receipt(
 ) -> dict[str, Any]:
     pairs = []
     for (left, right), joint_effect in sorted(pair_effects.items()):
+        raw_excess = interaction_excess(
+            singleton_effects[left], singleton_effects[right], joint_effect
+        )
         pairs.append(
             {
                 "left": left,
@@ -78,9 +95,14 @@ def build_intervention_receipt(
                 "left_effect": singleton_effects[left],
                 "right_effect": singleton_effects[right],
                 "joint_effect": joint_effect,
-                "interaction_excess": interaction_excess(
-                    singleton_effects[left], singleton_effects[right], joint_effect
+                "interaction_excess": raw_excess,
+                "left_damage_microunits": canonical_damage_microunits(
+                    singleton_effects[left]
                 ),
+                "right_damage_microunits": canonical_damage_microunits(
+                    singleton_effects[right]
+                ),
+                "joint_damage_microunits": canonical_damage_microunits(joint_effect),
             }
         )
 
@@ -100,23 +122,34 @@ def build_intervention_receipt(
         "evaluation": {
             "carrier": "held-out test split",
             "baseline_test_loss": baseline_test_loss,
+            "effect_orientation": "larger held-out loss is worse",
+            "canonical_damage_scale": LOSS_DAMAGE_SCALE,
+            "canonical_damage_rule": "max(0, round(loss_increase * scale))",
             "singleton_effects": [
-                {"unit": unit, "loss_increase": singleton_effects[unit]}
+                {
+                    "unit": unit,
+                    "loss_increase": singleton_effects[unit],
+                    "damage_microunits": canonical_damage_microunits(
+                        singleton_effects[unit]
+                    ),
+                }
                 for unit in selected_units
             ],
             "pair_effects": pairs,
         },
         "promotion": {
             "raw_interventions_measured": True,
+            "nat_damage_adapter_paid": True,
             "requirement_edges_paid": False,
             "relation_classification_paid": False,
             "beta_maximality_paid": False,
             "grokking_mechanism_paid": False,
         },
         "non_promotion_boundary": (
-            "Raw singleton/joint ablation effects are observation receipts. They do not "
-            "by themselves establish directional requirements, causal relation classes, "
-            "closed-compatible beta, or Grokking mechanism identity."
+            "Raw singleton/joint ablation effects and their orientation-aware Nat damage "
+            "adapter are observation receipts. They do not by themselves establish "
+            "directional requirements, causal relation classes, closed-compatible beta, "
+            "or Grokking mechanism identity."
         ),
     }
 
