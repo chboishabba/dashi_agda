@@ -7,6 +7,7 @@ import DASHI.Cognition.PNF.OperationalIRExecution
 import DASHI.Cognition.PNF.MemoryFibre
 import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementExact
 import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementRegression
+import DASHI.Core.RecursiveScaleTransitionExact
 import DASHI.Cognition.PNF.LearningAlgebra
 import DASHI.Cognition.PNF.FibreLearningDynamics
 import DASHI.Cognition.PNF.BraidLearningTransport
