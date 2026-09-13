@@ -21,7 +21,7 @@ open import Data.Empty using (⊥)
 --   bodyLen : u32 little-endian
 --   iteration : i64 little-endian
 -- followed by exactly idLen UTF-8 bytes, auxLen UTF-8 bytes and bodyLen
--- opaque kind-owned binary bytes.  Presence of iteration/aux is carried by
+-- opaque kind-owned binary bytes. Presence of iteration/aux is carried by
 -- flags; no textual sentinel, JSON object, JSONB payload or regex parser is
 -- part of the production ABI.
 ------------------------------------------------------------------------
@@ -68,6 +68,11 @@ record BinaryWorldWireParity : Set where
     regexParserUsed : Bool
     postgresBinaryCopyUsed : Bool
     postgresBodyStoredAsBytea : Bool
+    frontierUsesFallibleRowIteration : Bool
+    frontierEmitsFramesIncrementally : Bool
+    typedRunnerRequiresBinaryWire : Bool
+    legacyJsonExecutablePathAvailable : Bool
+    textReceiptRegexValidationUsed : Bool
     replayMayRewritePriorEvidence : Bool
     persistenceCreatesSemanticAuthority : Bool
     semanticPromotion : Bool
@@ -82,6 +87,7 @@ canonicalBinaryWorldWireParity =
     true true true false
     false false false false
     true true
+    true true true false false
     false false false
 
 ------------------------------------------------------------------------
@@ -93,6 +99,8 @@ data JsonWorldPayload : Set where
 data PostgresJsonbWorldPayload : Set where
 data RegexWorldParser : Set where
 data WholeStreamBufferRequired : Set where
+data LegacyJsonExecutablePath : Set where
+data TextReceiptRegexValidation : Set where
 data BinaryPersistenceCreatesSemanticAuthority : Set where
 data BinaryPersistencePromotesTruth : Set where
 data BinaryReplayRewritesPriorEvidence : Set where
@@ -111,6 +119,12 @@ regexWorldParserForbidden ()
 
 streamingWireDoesNotRequireWholeBuffer : WholeStreamBufferRequired → ⊥
 streamingWireDoesNotRequireWholeBuffer ()
+
+legacyJsonExecutablePathForbidden : LegacyJsonExecutablePath → ⊥
+legacyJsonExecutablePathForbidden ()
+
+textReceiptRegexValidationForbidden : TextReceiptRegexValidation → ⊥
+textReceiptRegexValidationForbidden ()
 
 binaryPersistenceDoesNotCreateSemanticAuthority : BinaryPersistenceCreatesSemanticAuthority → ⊥
 binaryPersistenceDoesNotCreateSemanticAuthority ()
