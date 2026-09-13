@@ -29,6 +29,11 @@ import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 -- checked-in config/best-fit row is the executable manifest for that paper's
 -- LSS-independent posterior.
 --
+-- The pinned public snapshot used here is dated 2026-06-04, later than the
+-- paper submission date 2026-02-27.  A later snapshot can preserve/reproduce
+-- the model while still failing to certify which exact parameter manifest was
+-- used for the earlier paper inference.
+--
 -- A future same-key prospective prediction must therefore identify and freeze
 -- the actual parameter manifest used for the independent target, and record a
 -- parameterManifestHash as required by GRQuantumPredictionProtocol.
@@ -41,6 +46,8 @@ record DAOParameterManifestStatus : Set where
     retrospectiveDESIConfigLocated : Bool
     bestFitRowLocated : Bool
     repositoryVersionLinkedToIndependentTarget : Bool
+    pinnedSnapshotPostdatesIndependentPaper : Bool
+    snapshotChronologyPaysPaperManifest : Bool
     independentTargetSpecificConfigLocated : Bool
     bestFitRowSourceBoundToIndependentTarget : Bool
     independentTargetExecutableManifestFrozen : Bool
@@ -56,6 +63,8 @@ canonicalDAOParameterManifestStatus =
     true
     true
     true
+    true
+    false
     false
     false
     false
@@ -77,6 +86,12 @@ retrospectiveLikelihoodCoordinate = "bao.desi_dr2"
 independentTargetArXiv : String
 independentTargetArXiv = "2602.23895"
 
+independentPaperSubmissionDate : String
+independentPaperSubmissionDate = "2026-02-27"
+
+pinnedPublicSnapshotDate : String
+pinnedPublicSnapshotDate = "2026-06-04"
+
 ------------------------------------------------------------------------
 -- Direct weld to the existing prediction-provenance coordinate.
 ------------------------------------------------------------------------
@@ -96,6 +111,8 @@ data AmbiguousBestFitRowPaysIndependentManifest : Set where
 
 data VersionLinkManufacturesSpecificConfig : Set where
 
+data LaterSnapshotCertifiesPaperManifest : Set where
+
 exampleInputDoesNotBecomePaperPrediction :
   ExampleInputEqualsPaperPrediction → ⊥
 exampleInputDoesNotBecomePaperPrediction ()
@@ -112,10 +129,24 @@ versionLinkDoesNotManufactureSpecificConfig :
   VersionLinkManufacturesSpecificConfig → ⊥
 versionLinkDoesNotManufactureSpecificConfig ()
 
+laterSnapshotDoesNotCertifyPaperManifest :
+  LaterSnapshotCertifiesPaperManifest → ⊥
+laterSnapshotDoesNotCertifyPaperManifest ()
+
 repositoryVersionLinkPaid :
   repositoryVersionLinkedToIndependentTarget canonicalDAOParameterManifestStatus
   ≡ true
 repositoryVersionLinkPaid = refl
+
+pinnedSnapshotChronologyRecorded :
+  pinnedSnapshotPostdatesIndependentPaper canonicalDAOParameterManifestStatus
+  ≡ true
+pinnedSnapshotChronologyRecorded = refl
+
+snapshotChronologyStillNonPromoting :
+  snapshotChronologyPaysPaperManifest canonicalDAOParameterManifestStatus
+  ≡ false
+snapshotChronologyStillNonPromoting = refl
 
 independentTargetConfigStillOpen :
   independentTargetSpecificConfigLocated canonicalDAOParameterManifestStatus
