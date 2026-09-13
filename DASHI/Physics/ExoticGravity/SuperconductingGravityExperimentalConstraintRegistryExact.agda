@@ -6,10 +6,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- EXPERIMENTAL CONSTRAINT REGISTRY
 --
--- This registry separates: null replication, artifact attribution, transition
--- mismatch, and upper-bound style constraints.  None is promoted into the
--- stronger universal claim that every superconducting-gravity coupling is
--- impossible.
+-- This registry separates reported signals, null replications, artifact
+-- attribution, transition mismatch, and upper-bound constraints. None is
+-- promoted into a universal claim for or against superconducting-gravity
+-- coupling. Historical reported anomalies retain their authorship and are not
+-- treated as independently replicated observations.
 ------------------------------------------------------------------------
 
 data ConstraintKind : Set where
@@ -31,6 +32,16 @@ record ExperimentalConstraint : Set where
     resultSummary : String
 
 open ExperimentalConstraint public
+
+podkletnovNieminen1992ReportedSignal : ExperimentalConstraint
+podkletnovNieminen1992ReportedSignal = experimental-constraint
+  "Podkletnov-Nieminen bulk-YBCO apparent-weight experiment"
+  "1992"
+  "E. Podkletnov and R. Nieminen, Physica C 203 (1992) 441-444, DOI 10.1016/0921-4534(92)90055-H"
+  unresolvedSignal
+  "publisher abstract: dense bulk YBCO below 77 K; 5.48 g nonconducting/nonmagnetic sample above a levitating superconducting disk; disk rotation varied; electro-optical balance"
+  "apparent weight of external test sample"
+  "authors report 0.05-0.3 percent apparent weight loss depending on disk rotation speed; registry retains this as a published unresolved claim, not as an independently established gravity effect"
 
 nasaStaticYBCO : ExperimentalConstraint
 nasaStaticYBCO = experimental-constraint
@@ -89,6 +100,9 @@ tajmarLargeTheoryBound = experimental-constraint
 record ConstraintBoundary : Set where
   constructor constraint-boundary
   field
+    reportedSignalEqualsEstablishedEffect : Bool
+    reportedSignalEqualsIndependentReplication : Bool
+    laterNullRewritesHistoricalReportedClaim : Bool
     nullOneGeometryImpliesUniversalZero : Bool
     nullOneGeometryImpliesUniversalZeroIsFalse :
       nullOneGeometryImpliesUniversalZero ≡ false
@@ -107,6 +121,7 @@ record ConstraintBoundary : Set where
 
 canonicalConstraintBoundary : ConstraintBoundary
 canonicalConstraintBoundary = constraint-boundary
+  false false false
   false refl
   false refl
   false refl

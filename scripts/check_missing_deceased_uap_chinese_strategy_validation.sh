@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Focused static contract for the missing/deceased UAP + Chinese strategic lane.
+# Source integration only; this script is not a substitute for Agda/kernel CI.
+
+grep -q 'data ObserverPolarity' DASHI/Culture/MissingDeceasedTernaryAdversarialObserverExact.agda
+grep -q 'polaritySwapInvolution' DASHI/Culture/MissingDeceasedTernaryAdversarialObserverExact.agda
+grep -q 'identityObserverMapsToZero' DASHI/Culture/MissingDeceasedTernaryAdversarialObserverExact.agda
+
+grep -q 'record RoleCapabilityFibre' DASHI/Culture/MissingDeceasedStrategicRoleCapabilityFibreExact.agda
+grep -q 'managerMayExceedScientistOnProgrammeCoordination' DASHI/Culture/MissingDeceasedStrategicRoleCapabilityFibreExact.agda
+grep -q 'roleLabelDoesNotDetermineCapability' DASHI/Culture/MissingDeceasedStrategicRoleCapabilityFibreExact.agda
+
+grep -q 'chenShuming' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'zhangDaibing' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'fangDaining' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'yanHong' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'ninthNamedCaseDoesNotCreateTenth' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'record RosterCardinalityClaim' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'newsNationAtLeastTenClaim' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'enumeratedNineClaim' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+grep -q 'tenthIdentityUnresolved' DASHI/Culture/ChineseStrategicScientistRosterSnowballExact.agda
+
+grep -q 'data YanHongFlowControlObject' DASHI/Physics/Aerospace/YanHongHypersonicFlowControlBidiExact.agda
+grep -q 'thermalExcitationMach5Receipt' DASHI/Physics/Aerospace/YanHongHypersonicFlowControlBidiExact.agda
+grep -q 'plasmaActuatorReviewReceipt' DASHI/Physics/Aerospace/YanHongHypersonicFlowControlBidiExact.agda
+grep -q 'eventWorkSamePersonWeld' DASHI/Physics/Aerospace/YanHongHypersonicFlowControlBidiExact.agda
+
+grep -q 'record NingLiYBCOConstraintReceipt' DASHI/Physics/ExoticGravity/NingLiYBCOGravityConstraintBidiExact.agda
+grep -q 'staticYBCO1997Constraint' DASHI/Physics/ExoticGravity/NingLiYBCOGravityConstraintBidiExact.agda
+grep -q 'lessThanTwoPartsIn100MillionG' DASHI/Physics/ExoticGravity/NingLiYBCOGravityConstraintBidiExact.agda
+grep -q 'negativeConstraintIsNotPositiveAntigravityEvidence' DASHI/Physics/ExoticGravity/NingLiYBCOGravityConstraintBidiExact.agda
+
+grep -q 'record NingLiNASAProgrammeReceipt' DASHI/Physics/ExoticGravity/NingLiNASACooperativeAgreementNCC8124Exact.agda
+grep -q 'ncc8124FinalReport' DASHI/Physics/ExoticGravity/NingLiNASACooperativeAgreementNCC8124Exact.agda
+grep -q 'finalExperimentsCompleted' DASHI/Physics/ExoticGravity/NingLiNASACooperativeAgreementNCC8124Exact.agda
+grep -q 'nasaProgrammeDoesNotPayArmyOutcome' DASHI/Physics/ExoticGravity/NingLiNASACooperativeAgreementNCC8124Exact.agda
+
+grep -q 'ningLiRosterRepair' DASHI/Culture/MissingDeceasedRosterExtensionNingLiNickPopeExact.agda
+grep -q 'nickPopeRosterRepair' DASHI/Culture/MissingDeceasedRosterExtensionNingLiNickPopeExact.agda
+grep -q 'nickPopeIsNotScientist' DASHI/Culture/MissingDeceasedRosterExtensionNingLiNickPopeExact.agda
+grep -q 'ningLiEventWorkIdentityPaid' DASHI/Culture/MissingDeceasedRosterExtensionNingLiNickPopeExact.agda
+
+grep -q 'ActiveMechanicalMetamaterialScience' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
+grep -q 'phaseTransition' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
+grep -q 'metamaterialMeansExtraterrestrialMaterial' DASHI/Physics/Materials/FangDainingActiveMechanicalMetamaterialBidiExact.agda
+
+grep -q 'MaterialObjectClass' DASHI/Physics/Materials/RezaFangAlloyMetamaterialDiscriminationExact.agda
+grep -q 'mondaloyMetamaterialBridge' DASHI/Physics/Materials/RezaFangAlloyMetamaterialDiscriminationExact.agda
+grep -q 'alloyPropertyDoesNotImplyMetamaterial' DASHI/Physics/Materials/RezaFangAlloyMetamaterialDiscriminationExact.agda
+
+grep -q 'warSkullIIReceipt' DASHI/GameTheory/FengYangheMilitaryAIGameStatisticsBidiExact.agda
+grep -q 'bayesianClassificationReceipt' DASHI/GameTheory/FengYangheMilitaryAIGameStatisticsBidiExact.agda
+grep -q 'noisyLabelClassificationReceipt' DASHI/GameTheory/FengYangheMilitaryAIGameStatisticsBidiExact.agda
+
+grep -q 'mondaloyToMetamaterialBridgeUnpaid' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
+grep -q 'zeroPointSuppressionIsNotVacuumThrust' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
+grep -q 'ningLiStaticConstraintCannotBeDropped' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
+grep -q 'houseInquiryDoesNotPayCommonCause' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
+grep -q 'existingAlloyMetamaterialBoundary' DASHI/Culture/MissingDeceasedUAPAdversarialClaimDiscriminatorExact.agda
+
+grep -q 'existingStrategicBoundary' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
+grep -q 'existingEnrichmentBoundary' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
+grep -q 'existingParetoBoundary' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
+grep -q 'existingProofSearchParetoBoundary' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
+grep -q 'gamePayoffDoesNotBecomeEvidence' DASHI/Culture/MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact.agda
+
+grep -q 'record FusionPropulsionMaterialIntersection' DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda
+grep -q 'oxygenRichChemicalRocketIsNotFusionPropulsion' DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda
+grep -q 'quantumVacuumMentionIsNotValidation' DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda
+grep -q 'gammaPrimeIsCrystalScaleMechanism' DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda
+
+grep -q 'record FullSetTechnicalIntersection' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'loureiroFusionPlasmaRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'rezaOxygenMaterialsRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'ningLiSuperconductorGravityRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'nickPopeUAPCivilServiceRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'fangMetamaterialRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'fengStrategicGameRow' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+grep -q 'technicalAdjacencyDoesNotCreateSharedProgramme' DASHI/Culture/MissingDeceasedFullSetTechnicalIntersectionParetoExact.agda
+
+grep -q 'ningLiCoverage' DASHI/Culture/ScientificRosterWorkCoverageExact.agda
+grep -q 'nickPopeCoverage' DASHI/Culture/ScientificRosterWorkCoverageExact.agda
+
+# Source-attribution + geography/anomaly contracts.  These are deliberately
+# non-promoting: a URL/claim carrier does not become event or causal authority.
+grep -q 'investigativeSourceAtlas' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+grep -q 'nasaNingNCC8124Source' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+grep -q 'rezaPatentSource' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+grep -q 'armyCoordinateDiscoverySource' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+grep -q 'sourceAtlasDoesNotPromoteClaims' DASHI/Culture/MissingDeceasedInvestigativeAttributedSourceAtlasExact.agda
+
+grep -q 'record SouthwestCaseLocation' DASHI/Culture/MissingDeceasedSouthwestGeographyDiscriminatorExact.agda
+grep -q 'newMexicoClusterIsSourceBacked' DASHI/Culture/MissingDeceasedSouthwestGeographyDiscriminatorExact.agda
+grep -q 'whiteSandsEventAnchorIsUnpaid' DASHI/Culture/MissingDeceasedSouthwestGeographyDiscriminatorExact.agda
+grep -q 'geographyDoesNotCreateCommonCause' DASHI/Culture/MissingDeceasedSouthwestGeographyDiscriminatorExact.agda
+
+grep -q 'record ReportedAnomaly' DASHI/Culture/MissingDeceasedReportedAnomalyAttributionLedgerExact.agda
+grep -q 'casiasDeviceResetClaim' DASHI/Culture/MissingDeceasedReportedAnomalyAttributionLedgerExact.agda
+grep -q 'chavezBilocationStatementClaim' DASHI/Culture/MissingDeceasedReportedAnomalyAttributionLedgerExact.agda
+grep -q 'secondaryReportDoesNotBecomePrimaryEventFact' DASHI/Culture/MissingDeceasedReportedAnomalyAttributionLedgerExact.agda
+
+grep -q 'Chinese strategic scientist acquisition' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'UAP/adversarial discriminator' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'Chinese roster-cardinality resolution' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'full-set technical intersection' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'Ning Li superconducting-gravity reconstruction' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+grep -q 'Southwest geography and anomaly discrimination' DASHI/Culture/MissingDeceasedIbrahimInvestigativeParetoUAPChineseExact.agda
+
+grep -q 'MissingDeceasedInvestigativeAttributedSourceAtlasExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedSouthwestGeographyDiscriminatorExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedReportedAnomalyAttributionLedgerExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedTernaryAdversarialObserverExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'ChineseStrategicScientistRosterSnowballExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedGameTheoryParetoProofSearchCrossPollinationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'YanHongHypersonicFlowControlBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'NingLiYBCOGravityConstraintBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'NingLiNASACooperativeAgreementNCC8124Exact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedRosterExtensionNingLiNickPopeExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'FangDainingActiveMechanicalMetamaterialBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'RezaFangAlloyMetamaterialDiscriminationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'FusionPropulsionMaterialSurvivabilityCrossPollinationExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'MissingDeceasedFullSetTechnicalIntersectionParetoExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'FengYangheMilitaryAIGameStatisticsBidiExact' DASHI/Culture/MissingDeceasedScientificWorkEverything.agda
+grep -q 'FengYangheMilitaryAIGameStatisticsBidiExact' DASHI/GameTheory/Everything.agda
+
+echo 'missing/deceased UAP Chinese strategic static check: ok'
