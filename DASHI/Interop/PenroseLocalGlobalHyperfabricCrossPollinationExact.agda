@@ -14,7 +14,7 @@ import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact as Authority
 -- THIN LOCAL/GLOBAL CROSS-POLLINATION BRIDGE
 --
 -- This module records a shared dependency architecture across already-owned
--- theorem surfaces.  It does not identify domain objects, import proofs from
+-- theorem surfaces. It does not identify domain objects, import proofs from
 -- citations, or assert historical influence among the source traditions.
 ------------------------------------------------------------------------
 
@@ -84,7 +84,7 @@ record GraphColouringLocalGlobalAdapter : Set where
     boundaryRestrictionReference : String
     seamCompatibilityReference : String
     recursiveCompatibilityReference : String
-    globalObjectReference : String
+    globalColouringReference : String
     localMoveAutomaticallyPaysGlobalCompatibility : Bool
     localMoveAutomaticallyPaysGlobalCompatibilityIsFalse :
       localMoveAutomaticallyPaysGlobalCompatibility ≡ false
@@ -258,7 +258,7 @@ crossDomainAnalogyCreatesSourceAuthority : Bool
 crossDomainAnalogyCreatesSourceAuthority = false
 
 ------------------------------------------------------------------------
--- Downstream candidate map only.  No downstream implementation occurs here.
+-- Downstream candidate map only. No downstream implementation occurs here.
 ------------------------------------------------------------------------
 
 record DownstreamCrossPollinationCandidate : Set where
@@ -320,6 +320,18 @@ boundedLocalCarrierDoesNotImplyGlobalCompactnessOrClosureIsTrue = refl
 sharedProofArchitectureDoesNotIdentifyDomainTheoremsIsTrue :
   sharedProofArchitectureDoesNotIdentifyDomainTheorems ≡ true
 sharedProofArchitectureDoesNotIdentifyDomainTheoremsIsTrue = refl
+
+penroseProjectionIsNotParetoAxisProjectionIsTrue :
+  penroseProjectionIsNotParetoAxisProjection ≡ true
+penroseProjectionIsNotParetoAxisProjectionIsTrue = refl
+
+horismosIsNotHyperfabricGlobalSectionIsTrue :
+  horismosIsNotHyperfabricGlobalSection ≡ true
+horismosIsNotHyperfabricGlobalSectionIsTrue = refl
+
+graphSeamCompatibilityIsNotLorentzianCompatibilityIsTrue :
+  graphSeamCompatibilityIsNotLorentzianCompatibility ≡ true
+graphSeamCompatibilityIsNotLorentzianCompatibilityIsTrue = refl
 
 sameObjectReductioRequiresSameObjectIdentityIsTrue :
   sameObjectReductioRequiresSameObjectIdentity ≡ true
