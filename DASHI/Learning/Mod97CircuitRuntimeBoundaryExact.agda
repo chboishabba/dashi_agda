@@ -37,6 +37,7 @@ record Mod97CircuitRuntimeFrontier : Set where
     historicalRunIdentity : IdentityStatus
     historicalConfigurationIdentity : IdentityStatus
     selectionLeakage : SelectionLeakageStatus
+    natDamageAdapterPayment : PaymentStatus
     requirementEdgePayment : PaymentStatus
     relationClassificationPayment : PaymentStatus
     betaMaximalityPayment : PaymentStatus
@@ -47,7 +48,10 @@ open Mod97CircuitRuntimeFrontier public
 -- Current exact frontier on PR #900.
 --
 -- The checked-in Python producers implement a new-run checkpoint path and a
--- training-selected / held-out-evaluated raw intervention path. No numerical
+-- training-selected / held-out-evaluated raw intervention path. Raw signed
+-- held-out loss changes are retained, while an orientation-aware adapter maps
+-- only positive loss increase into non-negative micro-loss Nat damage. That
+-- representation payment is distinct from relation classification. No numerical
 -- run receipt has yet been observed here, and the historical receipt does not
 -- pay exact original architecture/split identity.
 ------------------------------------------------------------------------
@@ -62,6 +66,7 @@ currentMod97RuntimeFrontier =
     notEstablished
     notEstablished
     heldOutNotUsedForSelection
+    paid
     unpaid
     unpaid
     unpaid
@@ -73,6 +78,12 @@ currentMod97RuntimeFrontier =
 
 producerImplementationPaysExecution : PaymentStatus
 producerImplementationPaysExecution = unpaid
+
+natDamageAdapterPaysRequirementEdges : PaymentStatus
+natDamageAdapterPaysRequirementEdges = unpaid
+
+natDamageAdapterPaysRelationClassification : PaymentStatus
+natDamageAdapterPaysRelationClassification = unpaid
 
 rawInterventionPaysRequirementEdges : PaymentStatus
 rawInterventionPaysRequirementEdges = unpaid
