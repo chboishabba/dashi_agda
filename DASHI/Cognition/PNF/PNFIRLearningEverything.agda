@@ -5,6 +5,8 @@ import DASHI.Cognition.PNF.CandidateInvalidation
 import DASHI.Cognition.PNF.OperationalIR
 import DASHI.Cognition.PNF.OperationalIRExecution
 import DASHI.Cognition.PNF.MemoryFibre
+import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementExact
+import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementRegression
 import DASHI.Cognition.PNF.LearningAlgebra
 import DASHI.Cognition.PNF.FibreLearningDynamics
 import DASHI.Cognition.PNF.BraidLearningTransport
