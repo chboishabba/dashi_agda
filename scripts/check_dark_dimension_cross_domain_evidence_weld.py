@@ -19,7 +19,7 @@ REQUIRED = {
         "MarginalSummaryState",
         "sameMarginalsDifferentSixKeyWitness",
         "marginalsCannotFactorToUniqueSixKeyVector",
-        "equationsAndMarginalsCannotAutoDetermineSixKeyVector",
+        "publishedMarginalsCannotAutoDetermineSixKeyVector",
         "daoRuntimeArtifactStillReconstructionOnly",
         "reconstructionReceiptDoesNotBecomeHeldOutPrediction",
         "quantitativePredictionBoundaryStillOpen",
