@@ -3,6 +3,7 @@ import sys
 
 from scripts.mod97_circuit_intervention_producer import (
     build_intervention_receipt,
+    canonical_damage_microunits,
     interaction_excess,
     select_candidates_from_training,
 )
@@ -35,6 +36,11 @@ def test_interaction_excess_is_joint_minus_singletons() -> None:
     assert interaction_excess(0.2, 0.3, 0.8) == 0.3000000000000001
 
 
+def test_signed_loss_effects_are_canonicalised_to_nonnegative_damage_nats() -> None:
+    assert canonical_damage_microunits(0.0012344) == 1234
+    assert canonical_damage_microunits(-0.5) == 0
+
+
 def test_raw_receipt_does_not_promote_relations_or_beta() -> None:
     receipt = build_intervention_receipt(
         checkpoint_path="epoch-01000.pt",
@@ -48,6 +54,9 @@ def test_raw_receipt_does_not_promote_relations_or_beta() -> None:
     assert receipt["selection"]["carrier"] == "training activations"
     assert receipt["selection"]["held_out_outcome_used"] is False
     assert receipt["evaluation"]["carrier"] == "held-out test split"
+    assert receipt["evaluation"]["effect_orientation"] == "larger held-out loss is worse"
+    assert receipt["evaluation"]["canonical_damage_scale"] == 1000000
+    assert receipt["evaluation"]["singleton_effects"][0]["damage_microunits"] == 200000
     assert receipt["promotion"]["requirement_edges_paid"] is False
     assert receipt["promotion"]["relation_classification_paid"] is False
     assert receipt["promotion"]["beta_maximality_paid"] is False
