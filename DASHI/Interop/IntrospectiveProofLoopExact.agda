@@ -153,11 +153,100 @@ record ConsumerDefectExperimentBinding
 open ConsumerDefectExperimentBinding public
 
 ------------------------------------------------------------------------
+-- R270 / NS-R592 LESSON: A PROOF TACTIC IS NOT A MANDATORY RESIDUAL.
+--
+-- A route may be useful, elegant, or currently preferred without being a
+-- prerequisite of the consumer.  To label a route mandatory one must prove the
+-- universal factorisation statement: EVERY admissible payment of the consumer
+-- passes through that route.  A single valid direct bypass refutes mandatory
+-- status.  This prevents proof search from growing a decomposition/tactic into
+-- a fake theorem debt merely because previous rounds happened to use it.
+------------------------------------------------------------------------
+
+record ConsumerRouteAudit
+    (Route Payment : Set) : Set₁ where
+  field
+    PaysConsumer : Payment → Set
+    UsesRoute : Route → Payment → Set
+
+open ConsumerRouteAudit public
+
+record MandatoryRoute
+    {Route Payment : Set}
+    (audit : ConsumerRouteAudit Route Payment)
+    (route : Route) : Set₁ where
+  field
+    everyConsumerPaymentUsesRoute :
+      ∀ payment → PaysConsumer audit payment → UsesRoute audit route payment
+
+open MandatoryRoute public
+
+record DirectRouteBypass
+    {Route Payment : Set}
+    (audit : ConsumerRouteAudit Route Payment)
+    (route : Route) : Set₁ where
+  field
+    directPayment : Payment
+    directPaymentPaysConsumer : PaysConsumer audit directPayment
+    directPaymentDoesNotUseRoute : UsesRoute audit route directPayment → ⊥
+
+open DirectRouteBypass public
+
+mandatoryRouteContradictsDirectBypass :
+  ∀ {Route Payment}
+    {audit : ConsumerRouteAudit Route Payment}
+    {route : Route} →
+  MandatoryRoute audit route →
+  DirectRouteBypass audit route →
+  ⊥
+mandatoryRouteContradictsDirectBypass mandatory bypass =
+  directPaymentDoesNotUseRoute bypass
+    (everyConsumerPaymentUsesRoute mandatory
+      (directPayment bypass)
+      (directPaymentPaysConsumer bypass))
+
+data ProofSearchTargetRole : Set where
+  canonicalConsumerResidual : ProofSearchTargetRole
+  optionalProducerTactic : ProofSearchTargetRole
+  compilerConsequence : ProofSearchTargetRole
+  verificationOrSubmissionStatus : ProofSearchTargetRole
+
+------------------------------------------------------------------------
+-- Closure is multi-coordinate, but metadata cannot pay theorem content.
+-- Typechecking, CI, submission, review and external acceptance are important
+-- coordinates after theorem content exists; none constructs the missing proof.
+------------------------------------------------------------------------
+
+data ClosureCoordinate : Set where
+  theoremContent : ClosureCoordinate
+  typechecked : ClosureCoordinate
+  submitted : ClosureCoordinate
+  reviewed : ClosureCoordinate
+  externallyAccepted : ClosureCoordinate
+
+record ClosureLedger : Set where
+  constructor closure-ledger
+  field
+    theoremContentClosed : Bool
+    typecheckedClosed : Bool
+    submittedClosed : Bool
+    reviewedClosed : Bool
+    externallyAcceptedClosed : Bool
+
+open ClosureLedger public
+
+data StatusCreatesTheoremContentPermission : Set where
+
+statusDoesNotCreateTheoremContent : StatusCreatesTheoremContentPermission → ⊥
+statusDoesNotCreateTheoremContent ()
+
+------------------------------------------------------------------------
 -- Visual diagnosis remains non-promoting.
 ------------------------------------------------------------------------
 
 data VisualAuditFinding : Set where
   sourceRouteNeedsLiveResidualBinding : VisualAuditFinding
+  producerTacticMistakenForMandatoryResidual : VisualAuditFinding
   noAdditionalFormalMismatchObserved : VisualAuditFinding
 
 record ReviewedVisualization : Set where
@@ -210,6 +299,8 @@ data VisualizationCreatesEvidencePermission : Set where
 data VisualizationCreatesConsumerClosurePermission : Set where
 data AuditFindingCreatesProgressPermission : Set where
 
+data PreferredTacticCreatesMandatoryResidualPermission : Set where
+
 visualizationDoesNotCreateEvidence : VisualizationCreatesEvidencePermission → ⊥
 visualizationDoesNotCreateEvidence ()
 
@@ -220,6 +311,10 @@ visualizationDoesNotCreateConsumerClosure ()
 auditFindingDoesNotCreateProgress : AuditFindingCreatesProgressPermission → ⊥
 auditFindingDoesNotCreateProgress ()
 
+preferredTacticDoesNotCreateMandatoryResidual :
+  PreferredTacticCreatesMandatoryResidualPermission → ⊥
+preferredTacticDoesNotCreateMandatoryResidual ()
+
 record IntrospectiveProofLoopBoundary : Set where
   constructor introspective-proof-loop-boundary
   field
@@ -228,7 +323,9 @@ record IntrospectiveProofLoopBoundary : Set where
     experimentRouteMustBindLiveResidual : Bool
     consumerClosureStillNeedsRefinementReceipt : Bool
     visualAuditMayRevealFormalMismatch : Bool
+    mandatoryRouteNeedsUniversalConsumerFactorization : Bool
+    verificationStatusDoesNotCreateTheoremContent : Bool
 
 canonicalIntrospectiveProofLoopBoundary : IntrospectiveProofLoopBoundary
 canonicalIntrospectiveProofLoopBoundary =
-  introspective-proof-loop-boundary true true true true true
+  introspective-proof-loop-boundary true true true true true true true

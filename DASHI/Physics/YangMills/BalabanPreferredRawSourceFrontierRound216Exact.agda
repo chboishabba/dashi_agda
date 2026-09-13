@@ -14,12 +14,16 @@ module DASHI.Physics.YangMills.BalabanPreferredRawSourceFrontierRound216Exact wh
 --     -> CMP109/CMP116 continuation                              [compiler]
 --     -> BC1 effective potential = literal E_k                  [refl]
 --
+-- Archaeology correction: the older `CMP119Section2SourceNativeStateExact`
+-- already owns the entire non-coupling raw object family, Eq. (2.23), and the
+-- Section-2 predicate vocabulary.  The buried-donor compiler therefore removes
+-- `raw objects` and `predicate vocabulary` as separate source-realization jobs.
+-- The first leaf below now means only: instantiate that one literal source-native
+-- complete-density state.  The finite-history constructor remains authoritative
+-- for the running coupling.
+--
 -- The complete action A_k must not be substituted for the Part-I/II regular
 -- E_k effective action differentiated in CMP109 Eq.(5.1).
---
--- The finite-history raw-state compiler is REUSED from the existing
--- `BalabanCMP119RawStateFromFiniteBetaHistoryExact`; Round216 does not duplicate
--- that constructor.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
@@ -27,6 +31,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact as Raw
+import DASHI.Physics.YangMills.BalabanCMP119Section2StateToFiniteHistoryRawObjectsBidiExact as Donor
 import DASHI.Physics.YangMills.BalabanCMP119RegularSectorCMP109116Round215Exact as Regular
 import DASHI.Physics.YangMills.BalabanCMP119RegularSectorBC1Round215Exact as BC1
 import DASHI.Physics.YangMills.BalabanPreferredSourceRealizationFrontierRound212Exact as R212
@@ -93,9 +98,15 @@ cmp119RegularSectorContinuationLevel = Regular.cmp119RegularSectorContinuationCo
 cmp119RegularSectorBC1Level : ProofLevel
 cmp119RegularSectorBC1Level = BC1.cmp119RegularSectorBC1CompilerLevel
 
+-- Corrected meaning of the first raw-source leaf after the buried-donor reuse:
+-- instantiate ONE literal source-native complete-density state.  The raw-object
+-- and predicate-family projections are compiler-owned by `Donor`.
 literalBetaDrivenCMP119RawSourceFamilyLevel : ProofLevel
 literalBetaDrivenCMP119RawSourceFamilyLevel =
-  Raw.cmp119LiteralRawObjectsAndPredicateInstantiationLevel
+  Donor.literalCMP119SourceNativeStateInstantiationLevel
+
+rawObjectsAndPredicateVocabularyProjectionLevel : ProofLevel
+rawObjectsAndPredicateVocabularyProjectionLevel = Donor.buriedCMP119ReuseCompilerLevel
 
 literalCMP119RegularESectorRealizationLevel : ProofLevel
 literalCMP119RegularESectorRealizationLevel = Regular.literalCMP119RegularSectorRealizationLevel
