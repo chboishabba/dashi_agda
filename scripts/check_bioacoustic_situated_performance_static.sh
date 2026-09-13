@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+OWNER="DASHI/Biology/BioacousticSituatedPerformanceEnergyExact.agda"
+
+test -f "$OWNER"
+
+grep -q "record SituatedPerformanceState" "$OWNER"
+grep -q "data AcousticAxis" "$OWNER"
+grep -q "data RespiratoryAxis" "$OWNER"
+grep -q "data CardiacAxis" "$OWNER"
+grep -q "data MovementAxis" "$OWNER"
+grep -q "data EnergeticAxis" "$OWNER"
+grep -q "record SituatedContext" "$OWNER"
+grep -q "record AcousticPhysicalCoordinate" "$OWNER"
+grep -q "pitchPhysicalCoordinate" "$OWNER"
+grep -q "soundPressurePhysicalCoordinate" "$OWNER"
+grep -q "soundLevelPhysicalCoordinate" "$OWNER"
+grep -q "acousticPowerPhysicalCoordinate" "$OWNER"
+grep -q "acousticEnergyPhysicalCoordinate" "$OWNER"
+grep -q "soundPressureLevelIsLogarithmic" "$OWNER"
+grep -q "pitchAloneDeterminesAcousticPower" "$OWNER"
+grep -q "soundLevelAloneDeterminesAcousticPower" "$OWNER"
+grep -q "acousticEnergyEqualsMetabolicEnergy" "$OWNER"
+grep -q "acousticProjectionCannotDetermineSituatedEffort" "$OWNER"
+grep -q "energeticProjectionCannotDetermineSituatedDisplay" "$OWNER"
+grep -q "10.1371/journal.pone.0023198" "$OWNER"
+grep -q "10.1242/jeb.00196" "$OWNER"
+grep -q "10.1002/neu.10327" "$OWNER"
+grep -q "10.1152/jn.01123.2005" "$OWNER"
+grep -q "10.1038/srep16614" "$OWNER"
+grep -q "pitchAloneDeterminesEnergeticCost" "$OWNER"
+grep -q "amplitudeAloneDeterminesMetabolicCost" "$OWNER"
+grep -q "heartRateAloneDeterminesSongProductionCost" "$OWNER"
+grep -q "danceIntensityAloneDeterminesVocalEffort" "$OWNER"
+grep -q "separateAxesAutoDetermineSituatedPerformance" "$OWNER"
+
+echo "bioacoustic situated-performance static contract passed"
