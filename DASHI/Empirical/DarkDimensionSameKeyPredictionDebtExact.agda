@@ -11,21 +11,6 @@ import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationK
 
 ------------------------------------------------------------------------
 -- SAME-KEY MODEL-PREDICTION DERIVATION DEBT
---
--- Shared observable identity and concrete DESI observation keys are now paid.
--- What remains is model execution: both hypotheses must be run/derived onto the
--- same future BAO keys before a numerical residual is well typed.
---
--- The two lanes are currently asymmetric:
---   * DAO/DRMD has a public CLASS implementation and an LSS-independent
---     parameter target from arXiv:2602.23895;
---   * the Bedroya-Obied-Vafa-Wu evolving Dark-Dimension paper supplies the
---     model equations and retrospective fit, but no first-party public
---     executable implementation was located in this acquisition tranche.
---
--- LSS-independent inference is not promoted to chronological holdout or
--- preregistration.  It can strengthen a derivation chain without paying the
--- future-data discipline owned by GRQuantumPredictionProtocol.
 ------------------------------------------------------------------------
 
 daoIndependentTargetSource : Source.AttributedSource
@@ -49,7 +34,7 @@ daoDRMDClassSource =
     "2026"
     "https://github.com/NEDE-Cosmo/DRMD-CLASS"
     Source.practitionerSource
-    "public CLASS implementation of the Dark Radiation-Matter Decoupling model; executable availability does not by itself supply the frozen same-key BAO prediction vector required here"
+    "public CLASS implementation of the Dark Radiation-Matter Decoupling model; revision/config provenance is pinned below, but no DASHI execution receipt or same-key BAO prediction is imported by source existence"
     Source.publicAttribution
 
 darkDimensionModelSource : Source.AttributedSource
@@ -65,6 +50,39 @@ darkDimensionModelSource =
     Source.publicAttribution
 
 ------------------------------------------------------------------------
+-- Revision-pinned public execution surface for the DAO/DRMD lane.
+------------------------------------------------------------------------
+
+record PublicExecutionSurface : Set where
+  constructor publicExecutionSurface
+  field
+    repositoryLabel : String
+    revision : String
+    primaryInputSurface : String
+    inferenceConfigSurface : String
+    derivedObservableSurface : String
+    executableRevisionPinned : Bool
+    executionConfigSurfaceLocated : Bool
+    executedByDASHI : Bool
+
+open PublicExecutionSurface public
+
+daoDRMDExecutionSurface : PublicExecutionSurface
+daoDRMDExecutionSurface =
+  publicExecutionSurface
+    "NEDE-Cosmo/DRMD-CLASS"
+    "aa2b61a0f1cf246672cdbd4634a4797d4cc654f9"
+    "DRMD.ini"
+    "cobaya/"
+    "rs_d_drmd"
+    true
+    true
+    false
+
+daoDRMDClassRevision : String
+daoDRMDClassRevision = "aa2b61a0f1cf246672cdbd4634a4797d4cc654f9"
+
+------------------------------------------------------------------------
 -- Debt carrier.
 ------------------------------------------------------------------------
 
@@ -76,6 +94,9 @@ record SameKeyPredictionDerivationDebt : Set where
 
     daoExecutableModelLocated : Bool
     darkDimensionExecutableModelLocated : Bool
+    daoExecutableRevisionPinned : Bool
+    daoExecutionConfigSurfaceLocated : Bool
+    daoExecutedByDASHI : Bool
 
     daoLargeScaleStructureIndependentTargetLocated : Bool
     daoTargetChronologicallyHeldOutBeforeDESIDR2 : Bool
@@ -94,6 +115,9 @@ canonicalSameKeyPredictionDerivationDebt : SameKeyPredictionDerivationDebt
 canonicalSameKeyPredictionDerivationDebt =
   sameKeyPredictionDerivationDebt
     true
+    true
+    true
+    false
     true
     true
     false
@@ -128,7 +152,7 @@ largeScaleStructureIndependentDoesNotMeanChronologicallyHeldOut :
 largeScaleStructureIndependentDoesNotMeanChronologicallyHeldOut ()
 
 ------------------------------------------------------------------------
--- A concrete same-key request object.  It names the key and both source lanes
+-- Concrete same-key request objects.  They name the key and both source lanes
 -- without supplying fabricated predictions.
 ------------------------------------------------------------------------
 
