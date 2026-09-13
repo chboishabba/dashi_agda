@@ -1,5 +1,6 @@
 name: gr-penrose-causal-boundary
 
+# Focused certification workflow for the GR/Penrose causal-boundary tranche.
 on:
   workflow_dispatch:
   pull_request:
