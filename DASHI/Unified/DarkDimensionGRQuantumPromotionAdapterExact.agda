@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Empirical.DarkDimensionEmpiricalDiscriminationExact as Discrimination
+import DASHI.Empirical.DarkDimensionProspectiveDiscriminatorExact as Prospective
 import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension
 import DASHI.Physics.Closure.QuantumGravityTheoryBoundary as QuantumGravity
 import DASHI.Unified.GRQuantumResearchAuthorityCutset as Research
@@ -30,6 +31,13 @@ phenomenologyDiscriminationDoesNotPayEmpiricalCompletion :
     Research.canonicalGRQuantumResearchReadiness
   ≡ false
 phenomenologyDiscriminationDoesNotPayEmpiricalCompletion =
+  darkDimensionDoesNotPayEmpiricalCompletion
+
+prospectiveDiscriminatorDoesNotPayEmpiricalCompletion :
+  Research.empiricalCompletionObtained
+    Research.canonicalGRQuantumResearchReadiness
+  ≡ false
+prospectiveDiscriminatorDoesNotPayEmpiricalCompletion =
   darkDimensionDoesNotPayEmpiricalCompletion
 
 darkDimensionDoesNotPayQuantumGravityPromotion :
@@ -61,3 +69,12 @@ alternativeMechanismKeepsUnificationPromotionBlocked :
   ≡ false
 alternativeMechanismKeepsUnificationPromotionBlocked =
   DarkDimension.theoryOfEverythingPromotionStillBlocked
+
+-- Cross-pollinated prospective axes likewise do not become a unification
+-- theorem merely because the observer bundle is richer.
+jointProspectiveAxisDoesNotPayTheoryOfEverything :
+  QuantumGravity.theoryOfEverythingClaimPermitted
+    QuantumGravity.canonicalQuantumGravityPromotionBoundary
+  ≡ false
+jointProspectiveAxisDoesNotPayTheoryOfEverything =
+  Prospective.stringTheoryPromotionRemainsBlocked
