@@ -32,6 +32,7 @@ require(CAUSAL, ["futureHorismosEPlus", "futureHorismosIsAchronalBoundary", "gen
 require(FOCUSING, ["negativeExpansionForcesFiniteAffineFocusing", "conjugatePointIsNotSpacetimeSingularity"])
 require(AUTHORITY, [
     "Minguzzi2019LorentzianCausalitySourceReceipt",
+    "propositionTwoOneFourThreeCausalSimplicityHorismosClosure",
     "theoremSixTwentyThreeNonCompactCauchyObstruction",
     "theoremSixTwentyThreeTimelikeFlowProjection",
     "globallyHyperbolicImpliesCausallySimpleForHorismosBoundary",
