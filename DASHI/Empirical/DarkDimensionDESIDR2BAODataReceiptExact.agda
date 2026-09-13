@@ -93,7 +93,7 @@ record DESIDR2BAODataStatus : Set where
   field
     publishedAnisotropicValuesRecorded : Bool
     marginalUncertaintiesRecorded : Bool
-    withinBinCorrelationRecorded : Bool
+    withinBinCorrelationCoefficientRecorded : Bool
     fullCovarianceMatrixAssembled : Bool
     retrospectiveObservedData : Bool
     futureHeldOutData : Bool
@@ -115,8 +115,7 @@ canonicalDESIDR2BAODataStatus =
     false
 
 withinBinCorrelationRecorded :
-  DESIDR2BAODataStatus.withinBinCorrelationRecorded
-    canonicalDESIDR2BAODataStatus
+  withinBinCorrelationCoefficientRecorded canonicalDESIDR2BAODataStatus
   ≡ true
 withinBinCorrelationRecorded = refl
 
