@@ -42,10 +42,20 @@ REQUIRED = {
         "runtimeSubstrateDoesNotEqualViralReproduction",
         "existingImplementationDebtRemainsOpen",
     ],
+    "DASHI/Biology/DrosophilaSymbolicControlAxisSeparationExact.agda": [
+        "data SymbolicTopologyKind",
+        "data SymbolicInterventionKind",
+        "record SymbolicControlArm",
+        "noLearningIsNotTopology",
+        "alternateInitializationIsNotTopology",
+        "topologyAndInterventionAreDistinctAxes",
+        "legacyMixedCarrierNotCanonicalForNewRuns",
+    ],
     "DASHI/Biology/AnimalexicEverything.agda": [
         "DrosophilaSymbolicInterfaceLearningExact",
         "DrosophilaSymbolicInterfaceLearningRegression",
         "DrosophilaSymbolicCleanRoomRuntimeBridgeExact",
+        "DrosophilaSymbolicControlAxisSeparationExact",
     ],
 }
 
