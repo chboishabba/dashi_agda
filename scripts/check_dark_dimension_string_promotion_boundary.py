@@ -28,6 +28,18 @@ REQUIRED = {
         "DarkDimensionEmpiricalDiscriminationExact",
         "10.1103/y31p-9g5k",
     ],
+    "DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda": [
+        "module DASHI.Empirical.DarkDimensionQuantitativeEnvelopeExact where",
+        "darkDimensionRadiusEnvelope",
+        "bedroyaCPrimeEnvelope",
+        "daoPercentLevelAmplitudeBand",
+        "crossModelNumericalSeparationStillOpen",
+        "sourceEnvelopeDoesNotPayDASHIDerivedPrediction",
+        "DASHI.Physics.Units.SI",
+        "10.1007/JHEP06(2024)047",
+        "10.1103/1rsq-cv2m",
+        "10.1103/y31p-9g5k",
+    ],
     "DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda": [
         "module DASHI.Empirical.DarkDimensionProspectiveDiscriminatorExact where",
         "fullShapeCosmologyAxis",
@@ -36,7 +48,9 @@ REQUIRED = {
         "cosmologyOnlyDoesNotPayUniqueMechanism",
         "shortRangeGravityOnlyDoesNotPayStringTheory",
         "jointAxisStillDoesNotPayStringTheory",
+        "quantitativeEnvelopeStillDoesNotLockProspectivePacket",
         "prospectivePacketDoesNotBecomeDASHIDerivedPrediction",
+        "DarkDimensionQuantitativeEnvelopeExact",
         "RequiredObserverAxisJoinAdequacyExact",
         "GRQuantumPredictionProtocol",
         "10.1103/y31p-9g5k",
@@ -61,6 +75,11 @@ REQUIRED = {
         "jointProspectiveAxisDoesNotPayTheoryOfEverything",
         "darkDimensionDoesNotPayQuantumGravityPromotion",
         "darkDimensionDoesNotPayTheoryOfEverythingPromotion",
+    ],
+    ".github/workflows/gr-quantum-empirical-validation.yml": [
+        "DASHI/Empirical/DarkDimension*.agda",
+        "python scripts/check_dark_dimension_quantitative_envelope.py",
+        "DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda",
     ],
 }
 
