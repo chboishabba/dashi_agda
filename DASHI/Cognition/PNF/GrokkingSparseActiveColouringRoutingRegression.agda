@@ -1,36 +1,57 @@
 module DASHI.Cognition.PNF.GrokkingSparseActiveColouringRoutingRegression where
 
 open import DASHI.Core.Prelude
-
 import DASHI.Cognition.PNF.GrokkingSparseActiveColouringRoutingExact as Bridge
 
-availableCapacityExceedsActiveSupport :
-  Bridge.activeSupport Bridge.structuredSparseWitness <
-  Bridge.availableCapacity Bridge.structuredSparseWitness
-availableCapacityExceedsActiveSupport =
-  Bridge.structuredSparseUsesStrictSubset
+availableCapacityExceedsActiveSupport : Bridge.activeSupport Bridge.structuredSparseWitness < Bridge.availableCapacity Bridge.structuredSparseWitness
+availableCapacityExceedsActiveSupport = Bridge.structuredSparseUsesStrictSubset
+inactiveForOneInputDoesNotMeanGloballyRedundant : Bridge.inactiveForCurrentInput Bridge.conditionallyUsefulUnit ≡ true × Bridge.usefulOnAnotherInput Bridge.conditionallyUsefulUnit ≡ true
+inactiveForOneInputDoesNotMeanGloballyRedundant = Bridge.conditionalUseWitness
+trainingFitDoesNotDetermineSparseStructuralRoute : Bridge.trainingFitSame Bridge.memorizerRoute Bridge.characterRoute ≡ true × Bridge.structuralDefect Bridge.characterRoute < Bridge.structuralDefect Bridge.memorizerRoute
+trainingFitDoesNotDetermineSparseStructuralRoute = Bridge.fitEqualButStructuralRouteImproves
+colouringWitnessIsAnalogyNotIdentity : Bridge.colouringConflictFreeBatchWitness ≡ true × Bridge.grokkingLiterallyMinimisesChromaticNumber ≡ false
+colouringWitnessIsAnalogyNotIdentity = Bridge.colouringAnalogyBoundary
+largeCandidateFamilyCanCoexistWithSparseAction : Bridge.largeCandidateFamily Bridge.colouringRoutingWitness ≡ true × Bridge.sparseCompatibleAction Bridge.colouringRoutingWitness ≡ true
+largeCandidateFamilyCanCoexistWithSparseAction = Bridge.colouringCandidateActionWitness
 
-inactiveForOneInputDoesNotMeanGloballyRedundant :
-  Bridge.inactiveForCurrentInput Bridge.conditionallyUsefulUnit ≡ true ×
-  Bridge.usefulOnAnotherInput Bridge.conditionallyUsefulUnit ≡ true
-inactiveForOneInputDoesNotMeanGloballyRedundant =
-  Bridge.conditionalUseWitness
+moneHalfActivationIsSourceScoped : Bridge.reportedMoNEActivatedPercent Bridge.moneActivationObservation ≡ 50 × Bridge.nearZeroNeuronActivationsReported Bridge.moneActivationObservation ≡ true × Bridge.universalLLMNeuronUsageClaim Bridge.moneActivationObservation ≡ false
+moneHalfActivationIsSourceScoped = refl , refl , refl
 
-trainingFitDoesNotDetermineSparseStructuralRoute :
-  Bridge.trainingFitSame Bridge.memorizerRoute Bridge.characterRoute ≡ true ×
-  Bridge.structuralDefect Bridge.characterRoute <
-  Bridge.structuralDefect Bridge.memorizerRoute
-trainingFitDoesNotDetermineSparseStructuralRoute =
-  Bridge.fitEqualButStructuralRouteImproves
+grokkingInactiveNeuronFractionCanDecrease : Bridge.metric Bridge.salahNeuronActivityObservation ≡ Bridge.inactiveNeuronFraction × Bridge.trend Bridge.salahNeuronActivityObservation ≡ Bridge.decreases
+grokkingInactiveNeuronFractionCanDecrease = refl , refl
 
-colouringWitnessIsAnalogyNotIdentity :
-  Bridge.colouringConflictFreeBatchWitness ≡ true ×
-  Bridge.grokkingLiterallyMinimisesChromaticNumber ≡ false
-colouringWitnessIsAnalogyNotIdentity =
-  Bridge.colouringAnalogyBoundary
+grokkingCircuitDensityCanDecrease : Bridge.metric Bridge.humayunCircuitDensityObservation ≡ Bridge.uniqueCircuitDensity × Bridge.trend Bridge.humayunCircuitDensityObservation ≡ Bridge.decreases
+grokkingCircuitDensityCanDecrease = refl , refl
 
-largeCandidateFamilyCanCoexistWithSparseAction :
-  Bridge.largeCandidateFamily Bridge.colouringRoutingWitness ≡ true ×
-  Bridge.sparseCompatibleAction Bridge.colouringRoutingWitness ≡ true
-largeCandidateFamilyCanCoexistWithSparseAction =
-  Bridge.colouringCandidateActionWitness
+neuronSparsityAndCircuitCompressionAreDifferentCoordinates : Bridge.inactiveNeuronFractionIsUniqueCircuitDensity ≡ false
+neuronSparsityAndCircuitCompressionAreDifferentCoordinates = refl
+
+sourceEvidenceDoesNotPayMonotoneActiveSupportShrink : Bridge.grokkingActiveSupportShrinkPaid ≡ false
+sourceEvidenceDoesNotPayMonotoneActiveSupportShrink = refl
+
+sourceEvidenceDoesNotPayChromaticObjective : Bridge.empiricalConflictGraphChromaticObjectivePaid ≡ false
+sourceEvidenceDoesNotPayChromaticObjective = refl
+
+unmeasuredRoutingTransitionRemainsOpen : Bridge.activeSupportMeasured Bridge.unpaidGrokkingRoutingTransition ≡ false × Bridge.circuitFamilyMeasured Bridge.unpaidGrokkingRoutingTransition ≡ false × Bridge.conflictEdgesMeasured Bridge.unpaidGrokkingRoutingTransition ≡ false
+unmeasuredRoutingTransitionRemainsOpen = refl , refl , refl
+
+canonicalConflictCarrierReuseStillNeedsNoDuplicate : Bridge.localDuplicateConflictOntologyAdded Bridge.currentConflictCarrierIntegrationResidual ≡ false
+canonicalConflictCarrierReuseStillNeedsNoDuplicate = refl
+
+canonicalReducerAdapterIsPaid : Bridge.canonicalReducerRelationAdapterPaid Bridge.currentConflictCarrierIntegrationResidual ≡ true
+canonicalReducerAdapterIsPaid = refl
+
+canonicalConflictRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalConflict ≡ Bridge.conflict
+canonicalConflictRelationRoundTrips = refl
+
+canonicalRequirementRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalRequirement ≡ Bridge.gluingRequirement
+canonicalRequirementRelationRoundTrips = refl
+
+canonicalIndependentRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalIndependent ≡ Bridge.independent
+canonicalIndependentRelationRoundTrips = refl
+
+rebaseResidualIsDischarged : Bridge.rebaseNeededBeforeCanonicalImport Bridge.currentConflictCarrierIntegrationResidual ≡ false
+rebaseResidualIsDischarged = refl
+
+conflictFreeStillDoesNotMeanRequirementClosed : Bridge.conflictFreeImpliesRequirementClosed ≡ false
+conflictFreeStillDoesNotMeanRequirementClosed = refl
