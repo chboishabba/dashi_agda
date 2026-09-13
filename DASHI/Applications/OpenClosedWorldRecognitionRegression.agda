@@ -4,6 +4,8 @@ open import DASHI.Core.Prelude
 
 import DASHI.Applications.OpenClosedWorldRecognitionExact as OpenClosed
 import DASHI.Applications.OpenClosedWorldRecognitionSourceAtlasExact as Sources
+import DASHI.Applications.OpenWorldTemporalPromotionExact as Temporal
+import DASHI.Applications.OpenWorldTemporalPromotionSourceAtlasExact as TemporalSources
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 
 record OpenClosedWorldRecognitionRegression : Set where
@@ -40,6 +42,29 @@ record OpenClosedWorldRecognitionRegression : Set where
     sourceAtlasNonPromoting :
       Sources.openClosedWorldSourceAtlasCreatesAuthority ≡ false
 
+    uncertaintyIsNotUnknown :
+      Temporal.uncertaintyEqualsUnknown ≡ false
+    unknownNeedNotBeLowConfidence :
+      Temporal.unknownRequiresLowConfidence ≡ false
+    confidenceAloneHasNoveltyAdequacyDefect :
+      Adequacy.QueryAdequacyDefect
+        Temporal.confidenceOnlyProjection
+        Temporal.noveltySemantics
+        Temporal.noveltyStatusQuery
+    laterRecognitionDoesNotRewriteEarlierUnknown :
+      Temporal.laterRecognitionRewritesEncounterState ≡ false
+    noveltyDetectionAloneIsNotContinualLearning :
+      Temporal.noveltyDetectionEqualsContinualLearning ≡ false
+    reportedScoreAloneHasEvaluationAdequacyDefect :
+      Adequacy.QueryAdequacyDefect
+        Temporal.reportedScoreProjection
+        Temporal.evaluationSemantics
+        Temporal.heldOutProtocolQuery
+    testTunedThresholdIsNotHeldOutEvaluation :
+      Temporal.testTunedThresholdCountsAsHeldOut ≡ false
+    temporalSourceAtlasNonPromoting :
+      TemporalSources.openWorldTemporalPromotionSourceAtlasCreatesAuthority ≡ false
+
 canonicalOpenClosedWorldRecognitionRegression :
   OpenClosedWorldRecognitionRegression
 canonicalOpenClosedWorldRecognitionRegression =
@@ -48,3 +73,9 @@ canonicalOpenClosedWorldRecognitionRegression =
     OpenClosed.closedSurfaceNoveltyAdequacyDefect
     OpenClosed.openSetSurfaceOpenWorldAdequacyDefect
     Sources.openClosedWorldSourceAtlasCreatesAuthorityIsFalse
+    refl refl
+    Temporal.confidenceOnlyNoveltyAdequacyDefect
+    refl refl
+    Temporal.reportedScoreOnlyAdequacyDefect
+    refl
+    TemporalSources.openWorldTemporalPromotionSourceAtlasCreatesAuthorityIsFalse
