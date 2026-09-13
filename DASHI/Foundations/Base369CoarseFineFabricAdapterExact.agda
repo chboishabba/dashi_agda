@@ -10,11 +10,6 @@ import DASHI.Foundations.Base369NDimParetoChartExact as Chart
 
 ------------------------------------------------------------------------
 -- BASE369 -> CANONICAL COARSE / RELATIVE-FINE REOPENING
---
--- The existing 9-coordinate hyperfabric already decomposes literally into:
---   interaction voxel (27 states) x appraisal fibre (27 x 27 = 729 states).
--- This file only packages that existing geometry through the canonical
--- CoarseFineReopening kernel.  It does not make Base369 the generic fabric.
 ------------------------------------------------------------------------
 
 base369CoarseFineReopening :
@@ -28,6 +23,9 @@ base369CoarseFineReopening =
     Geometry.rebuildOverInteraction
     (λ { (Geometry.ternaryHyperformalPoint interaction appraisalA appraisalB) → refl })
 
+base369CoarseFineObserver :
+  Geometry.TernaryHyperformalPoint →
+  Geometry.Ternary27Point × Geometry.AppraisalFibrePoint
 base369CoarseFineObserver =
   Fibre.coarseFineObserver base369CoarseFineReopening
 
