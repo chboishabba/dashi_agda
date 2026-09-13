@@ -1,0 +1,77 @@
+{
+  "execution_date": "2026-09-11",
+  "execution_environment": {
+    "python_version": "3.13.5",
+    "numpy_version": "2.3.5",
+    "scipy_version": "1.17.0"
+  },
+  "execution_status": "executed in the current analysis environment using the same numerical equations/defaults as the committed branch producer; CI is responsible for rerunning the exact repository file",
+  "producer": "scripts/atomic_helium_hartree_convergence.py",
+  "producer_git_blob_sha": "b67a2913c6c985cc89d3d3ab07f43f7a1caea2c2",
+  "upstream_producer": "scripts/atomic_helium_hartree_scf.py",
+  "upstream_git_blob_sha": "289eae455beb8f42674f808f5f5209afcc9ec65b",
+  "model": "restricted closed-shell spherical Hartree / RHF-equivalent He 1s2",
+  "hf_limit_hartree": -2.861679995612,
+  "hf_limit_doi": "10.1016/0009-2614(92)85634-M",
+  "pekeris_nonrel_ground_hartree": -2.903724375,
+  "pekeris_doi": "10.1103/PhysRev.115.1216",
+  "nist_asd_doi": "10.18434/T4W30F",
+  "nist_helium_ie_ev": 24.587389011,
+  "rows": [
+    {
+      "npts": 4000,
+      "total_energy_hartree": -2.851230574616222,
+      "minus_hf_limit_hartree": 0.01044942099577817,
+      "ionization_energy_ev": 23.168602420316578,
+      "minus_nist_ev": -1.4187865906834212,
+      "iterations": 64,
+      "final_max_potential_delta": 8.927392158852854e-11
+    },
+    {
+      "npts": 8000,
+      "total_energy_hartree": -2.8565263848367546,
+      "minus_hf_limit_hartree": 0.005153610775245454,
+      "ionization_energy_ev": 23.308630448969474,
+      "minus_nist_ev": -1.278758562030525,
+      "iterations": 64,
+      "final_max_potential_delta": 8.951162033810078e-11
+    },
+    {
+      "npts": 16000,
+      "total_energy_hartree": -2.8591210611461726,
+      "minus_hf_limit_hartree": 0.002558934465827445,
+      "ionization_energy_ev": 23.37821512171945,
+      "minus_nist_ev": -1.2091738892805495,
+      "iterations": 64,
+      "final_max_potential_delta": 9.02093955090777e-11
+    },
+    {
+      "npts": 32000,
+      "total_energy_hartree": -2.8604050079530117,
+      "minus_hf_limit_hartree": 0.001274987658988369,
+      "ionization_energy_ev": 23.412898027945555,
+      "minus_nist_ev": -1.1744909830544437,
+      "iterations": 64,
+      "final_max_potential_delta": 8.913969562485136e-11
+    },
+    {
+      "npts": 64000,
+      "total_energy_hartree": -2.861043623041157,
+      "minus_hf_limit_hartree": 0.0006363725708431467,
+      "ionization_energy_ev": 23.430211868539566,
+      "minus_nist_ev": -1.1571771424604336,
+      "iterations": 64,
+      "final_max_potential_delta": 8.845679744240442e-11
+    }
+  ],
+  "monotone_toward_hf_limit": true,
+  "richardson_first_order_total_energy_hartree": -2.861682238129302,
+  "richardson_minus_hf_limit_hartree": -2.2425173020756972e-06,
+  "richardson_ionization_energy_ev": 23.447568203037818,
+  "richardson_minus_nist_ev": -1.139820807962181,
+  "hf_minus_pekeris_hartree": 0.042044379387999875,
+  "hf_minus_pekeris_ev": 1.1440858469994268,
+  "passed": true,
+  "interpretation": "The doubled-grid sequence converges toward the published helium HF/SCF limit. First-order Richardson extrapolation lands within about 2.24e-6 Hartree of that limit. The remaining approximately 1.14 eV gap to the accurate nonrelativistic helium benchmark is therefore predominantly unpaid correlation/model physics rather than the previously found radial-identity defect.",
+  "non_promotion_boundary": "This execution validates the finite closed-shell Hartree producer against its approximation class. It does not establish correlated helium, generic multi-orbital atoms, calibrated full-table ionization energies, nuclear stability, or empirical periodic-table recovery."
+}
