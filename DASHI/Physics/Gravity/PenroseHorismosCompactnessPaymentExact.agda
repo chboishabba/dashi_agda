@@ -11,7 +11,7 @@ import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
 -- Compactness payment for the Penrose future-horismos reductio.
 --
 -- This owner makes explicit the standard compact-domain/image architecture
--- hidden inside the phrase "focusing makes E+(T) compact".  It records the
+-- hidden inside the phrase "focusing makes E+(T) compact". It records the
 -- continuum/topological obligations and composition order; it does not reprove
 -- compactness theory, continuity of the exponential map, or Lorentzian causal
 -- theory inside Agda.
@@ -42,6 +42,7 @@ record PenroseHorismosCompactnessBoundary : Set where
     futureNullNormalDirectionFibreCompact : Bool
     futureNullNormalDirectionFibreCompactIsTrue :
       futureNullNormalDirectionFibreCompact ≡ true
+    futureNullNormalDirectionFibreMeaning : String
 
     boundedGeneratorParameterDomainCompact : Bool
     boundedGeneratorParameterDomainCompactIsTrue :
@@ -88,10 +89,12 @@ canonicalPenroseHorismosCompactnessBoundary = record
       "the uniform negative expansion margin feeds the null focusing estimate to give one finite affine-length ceiling L valid for every relevant future null generator"
   ; futureNullNormalDirectionFibreCompact = true
   ; futureNullNormalDirectionFibreCompactIsTrue = refl
+  ; futureNullNormalDirectionFibreMeaning =
+      "the compact fibre is the normalized/projectivized future null-normal direction fibre; raw nonzero null normal vectors are scale-noncompact and are not the carrier used here"
   ; boundedGeneratorParameterDomainCompact = true
   ; boundedGeneratorParameterDomainCompactIsTrue = refl
   ; compactGeneratorDomainMeaning =
-      "compact trapped surface T times its compact future-null normal-direction fibre times a closed bounded affine interval [0,L] forms the compact generator parameter domain"
+      "compact trapped surface T times its compact normalized future-null normal-direction fibre times a closed bounded affine interval [0,L] forms the compact generator parameter domain"
   ; nullExponentialGeneratorMapContinuous = true
   ; nullExponentialGeneratorMapContinuousIsTrue = refl
   ; futureHorismosCoveredByBoundedGeneratorImage = true
@@ -113,6 +116,10 @@ record PenroseCompactnessInterpretationBoundary : Set where
     pointwiseNegativeExpansionDoesNotAloneGiveUniformBound : Bool
     pointwiseNegativeExpansionDoesNotAloneGiveUniformBoundIsTrue :
       pointwiseNegativeExpansionDoesNotAloneGiveUniformBound ≡ true
+
+    rawNullNormalVectorFibreIsNotCompactDirectionFibre : Bool
+    rawNullNormalVectorFibreIsNotCompactDirectionFibreIsTrue :
+      rawNullNormalVectorFibreIsNotCompactDirectionFibre ≡ true
 
     boundedAffineParameterDoesNotAloneMakeHorismosCompact : Bool
     boundedAffineParameterDoesNotAloneMakeHorismosCompactIsTrue :
@@ -141,6 +148,8 @@ canonicalPenroseCompactnessInterpretationBoundary :
 canonicalPenroseCompactnessInterpretationBoundary = record
   { pointwiseNegativeExpansionDoesNotAloneGiveUniformBound = true
   ; pointwiseNegativeExpansionDoesNotAloneGiveUniformBoundIsTrue = refl
+  ; rawNullNormalVectorFibreIsNotCompactDirectionFibre = true
+  ; rawNullNormalVectorFibreIsNotCompactDirectionFibreIsTrue = refl
   ; boundedAffineParameterDoesNotAloneMakeHorismosCompact = true
   ; boundedAffineParameterDoesNotAloneMakeHorismosCompactIsTrue = refl
   ; continuousImageCompactnessRequiresCompactDomain = true
