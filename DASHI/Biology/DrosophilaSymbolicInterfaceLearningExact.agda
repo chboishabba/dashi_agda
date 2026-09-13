@@ -13,6 +13,7 @@ import DASHI.Cognition.PNF.DecisionOutcomeLearningFeedbackExact as Feedback
 import DASHI.Cognition.PNF.JamesSensorimotorDecisionActionExact as James
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.IntersectionalNonFactorability as NF
 
 ------------------------------------------------------------------------
 -- VIRAL DROSOPHILA -> SYMBOLIC-INTERFACE FORMALISATION
@@ -173,6 +174,44 @@ canonicalSocialDemoExperiment = symbolicInterfaceExperiment
   (λ _ → taskCredit)
   noLearningReceipt
   mappedTokenEmission
+
+------------------------------------------------------------------------
+-- Output nonfactorability: the same emitted program text can coexist with
+-- different executable/neural states.  Recharting the program text cannot
+-- recover neural information erased by that projection.
+------------------------------------------------------------------------
+
+programTextProjection : ExecutableState → ProgramText
+programTextProjection _ = candidateFizzBuzzProgram
+
+neuralObservationProjection : ExecutableState → NeuralObservation
+neuralObservationProjection quiescentExecutableState = noObservedActivation
+neuralObservationProjection activeExecutableState = tokenDriveObserved
+
+sameProgramTextAcrossExecutableStates :
+  programTextProjection quiescentExecutableState
+  ≡ programTextProjection activeExecutableState
+sameProgramTextAcrossExecutableStates = refl
+
+neuralObservationsStillDiffer :
+  neuralObservationProjection quiescentExecutableState
+  ≡ neuralObservationProjection activeExecutableState → ⊥
+neuralObservationsStillDiffer ()
+
+programTextNeuralNonFactorabilityWitness :
+  NF.NonFactorabilityWitness programTextProjection neuralObservationProjection
+programTextNeuralNonFactorabilityWitness =
+  NF.nonFactorabilityWitness
+    quiescentExecutableState
+    activeExecutableState
+    sameProgramTextAcrossExecutableStates
+    neuralObservationsStillDiffer
+
+programTextDoesNotRecoverNeuralObservation :
+  NF.FactorsThrough programTextProjection neuralObservationProjection → ⊥
+programTextDoesNotRecoverNeuralObservation =
+  NF.witnessRulesOutEveryFlatFactorisation
+    programTextNeuralNonFactorabilityWitness
 
 ------------------------------------------------------------------------
 -- Learning/update lane is distinct from interface success. We reuse the
