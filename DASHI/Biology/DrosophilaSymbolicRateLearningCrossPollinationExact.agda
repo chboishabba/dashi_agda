@@ -11,11 +11,12 @@ import DASHI.Core.AttributedSourceCore as Source
 ------------------------------------------------------------------------
 -- Continuous-rate symbolic-learning cross-pollination.
 --
--- This owner combines three existing programme disciplines without importing
--- their claims wholesale:
+-- This owner combines existing programme disciplines without importing their
+-- claims wholesale:
 --   * real-data / held-out promotion gates from the MaleCNS benchmark lane;
 --   * finite-run-only stability receipts from the BIDI kernel lane;
---   * explicit dynamics/type separation from the threshold/margin lane.
+--   * explicit dynamics/type separation from the threshold/margin lane;
+--   * sparse MaleCNS execution with an explicit adjacency-orientation weld.
 --
 -- Continuous RateRNN dynamics are a specialization beside the ternary DASHI
 -- kernel.  They do not replace it and do not identify the viral demo's hidden
@@ -48,7 +49,13 @@ record SymbolicRateLearningCrossPollinationStatus : Set where
     finiteRunStabilityOnly : Bool
     globalStabilityClaimed : Bool
     globalContractionClaimed : Bool
+    -- This specifically means a ternary-kernel -> paper-level eligibility
+    -- constructor.  The separate sparse RateRNN -> archived Part-E adapter
+    -- below does not pay this stronger seam.
     kernelEligibilityAdapterImplemented : Bool
+    maleCNSOrientationAdapterImplemented : Bool
+    sparseRateArchivedTraceAdapterImplemented : Bool
+    paperEligibilityConstructorRecovered : Bool
     viralDemoTrainingRuleLocated : Bool
     generalProgrammingPromotable : Bool
 
@@ -63,6 +70,9 @@ canonicalSymbolicRateLearningStatus = symbolicRateLearningCrossPollinationStatus
   true
   false
   false
+  false
+  true
+  true
   false
   false
   false
@@ -80,9 +90,23 @@ heldOutPromotionGateIsPaid :
   heldOutPromotionGateImplemented canonicalSymbolicRateLearningStatus ≡ true
 heldOutPromotionGateIsPaid = refl
 
+maleCNSOrientationAdapterIsPaid :
+  maleCNSOrientationAdapterImplemented canonicalSymbolicRateLearningStatus ≡ true
+maleCNSOrientationAdapterIsPaid = refl
+
+sparseRateArchivedTraceAdapterIsPaid :
+  sparseRateArchivedTraceAdapterImplemented canonicalSymbolicRateLearningStatus
+  ≡ true
+sparseRateArchivedTraceAdapterIsPaid = refl
+
 kernelEligibilityAdapterStillUnpaid :
   kernelEligibilityAdapterImplemented canonicalSymbolicRateLearningStatus ≡ false
 kernelEligibilityAdapterStillUnpaid = refl
+
+paperEligibilityConstructorStillUnpaid :
+  paperEligibilityConstructorRecovered canonicalSymbolicRateLearningStatus
+  ≡ false
+paperEligibilityConstructorStillUnpaid = refl
 
 globalStabilityStillUnclaimed :
   globalStabilityClaimed canonicalSymbolicRateLearningStatus ≡ false
@@ -106,6 +130,10 @@ data PaperArchivedTraceCollapsePermission : Set where
 
 data HeldOutGeneralProgrammingPromotionPermission : Set where
 
+data SourceTargetPostPreCollapsePermission : Set where
+
+data SparseArchivedPaysPaperEligibilityPermission : Set where
+
 rateDynamicsDoNotReplaceTernaryKernel :
   RateDynamicsTernaryKernelCollapsePermission → ⊥
 rateDynamicsDoNotReplaceTernaryKernel ()
@@ -125,6 +153,20 @@ paperFactorizationDoesNotCollapseToArchivedTraceRule ()
 heldOutLearningDoesNotEstablishGeneralProgramming :
   HeldOutGeneralProgrammingPromotionPermission → ⊥
 heldOutLearningDoesNotEstablishGeneralProgramming ()
+
+-- MaleCNS stores A[pre,post], whereas the released RateRNN multiplies
+-- W[post,pre] by the presynaptic rate vector.  The orientation weld is an
+-- explicit transpose and may not be erased as a notational coincidence.
+maleCNSSourceTargetRequiresExplicitTranspose :
+  SourceTargetPostPreCollapsePermission → ⊥
+maleCNSSourceTargetRequiresExplicitTranspose ()
+
+-- The sparse adapter executes the archived supplementary recurrence on the
+-- source-exact continuous RateRNN carrier.  It does not reconstruct the
+-- paper-level information/energy eligibility constructor.
+sparseArchivedAdapterDoesNotPayPaperEligibilityConstructor :
+  SparseArchivedPaysPaperEligibilityPermission → ⊥
+sparseArchivedAdapterDoesNotPayPaperEligibilityConstructor ()
 
 ------------------------------------------------------------------------
 -- Existing authority/debt remains authoritative.
