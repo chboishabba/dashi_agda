@@ -13,17 +13,23 @@ import DASHI.Law.SensibLawCorpusProducerRoutingExact as Corpus
 import DASHI.Law.SensibLawDialecticalProofSearchExact as Dialectic
 import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Result
 import DASHI.Law.SensibLawProofSearchParetoSaturationExact as Pareto
+import DASHI.Law.SensibLawSearchExecutionCostParetoExact as ExecutionCost
+import DASHI.Law.SensibLawCostedProofSearchSchedulerExact as CostScheduler
 import DASHI.Law.SensibLawSparseWorldModelAcquisitionExact as World
 import DASHI.Law.SensibLawPrecedentGeometryStatisticsExact as Geometry
 import DASHI.Law.SensibLawProofSearchExpansionBidiExact as Expansion
 import DASHI.Law.SensibLawBidirectionalWorldLawProofSearchExact as Bidi
 import DASHI.Law.SensibLawWaterproofArgumentGapSearchExact as Waterproof
+import DASHI.Law.SensibLawTextWitnessTransmissionProvenanceExact as Witness
+import DASHI.Law.SensibLawLegalFollowProofSearchBridgeExact as LegalFollow
+import DASHI.Law.SensibLawHistoricalLegalResearchOperatorExact as Historical
+import DASHI.Law.SensibLawProofGapExecutableSearchCompilerExact as Compiler
+import DASHI.Law.SensibLawIterativeProofSearchStateMachineExact as Iterative
 import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
+import DASHI.Law.SensibLawOfflinePabaiLoopRustReceiptV01Exact as RustReceipt
 
 ------------------------------------------------------------------------
 -- PROOF-DIRECTED CORPUS NAVIGATION CAPSTONE
---
--- Canonical order:
 --
 -- consumer/question
 --   -> proof cutset / smallest live gap
@@ -31,13 +37,17 @@ import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
 --   -> search intent
 --   -> support/defeater/comparator hypothesis family
 --   -> provider-neutral query algebra
+--   -> execution cost/value Pareto surface
 --   -> provider lowering or citation traversal
---   -> acquisition
---   -> same parser / PNF re-entry
+--   -> bounded legal-follow / corpus acquisition
+--   -> same parser / PNF re-entry with witness lineage retained
 --   -> proposition/authority/treatment assessment
 --   -> proof payment / frontier delta
---   -> Pareto continuation or saturation
+--   -> costed iterative Pareto continuation or saturation
 --   -> memoised world-model extension
+--
+-- The exact Rust offline Pabai receipt is pinned separately as a bounded runtime
+-- witness and never upgrades candidate-only runtime output into Agda authority.
 ------------------------------------------------------------------------
 
 record ProofDirectedCorpusSearchContract : Set where
@@ -57,6 +67,29 @@ record ProofDirectedCorpusSearchContract : Set where
 
     citationAcquisitionReentersPNF : Bool
     citationAcquisitionReentersPNFIsTrue : citationAcquisitionReentersPNF ≡ true
+
+    transmissionWitnessLineageRetained : Bool
+    transmissionWitnessLineageRetainedIsTrue : transmissionWitnessLineageRetained ≡ true
+
+    legalFollowConstraintsSurviveCompilation : Bool
+    legalFollowConstraintsSurviveCompilationIsTrue :
+      legalFollowConstraintsSurviveCompilation ≡ true
+
+    historicalSparseResearchAvailable : Bool
+    historicalSparseResearchAvailableIsTrue : historicalSparseResearchAvailable ≡ true
+
+    gapCompilesEndToEnd : Bool
+    gapCompilesEndToEndIsTrue : gapCompilesEndToEnd ≡ true
+
+    iterativeFrontierSearchOwned : Bool
+    iterativeFrontierSearchOwnedIsTrue : iterativeFrontierSearchOwned ≡ true
+
+    executionStrategyCostedSeparately : Bool
+    executionStrategyCostedSeparatelyIsTrue : executionStrategyCostedSeparately ≡ true
+
+    proofReductionThresholdPrecedesCostOptimisation : Bool
+    proofReductionThresholdPrecedesCostOptimisationIsTrue :
+      proofReductionThresholdPrecedesCostOptimisation ≡ true
 
     retrievalRequiresProofAssessment : Bool
     retrievalRequiresProofAssessmentIsTrue : retrievalRequiresProofAssessment ≡ true
@@ -78,8 +111,19 @@ record ProofDirectedCorpusSearchContract : Set where
     maboAndPabaiAreSearchCalibrations : Bool
     maboAndPabaiAreSearchCalibrationsIsTrue : maboAndPabaiAreSearchCalibrations ≡ true
 
+    exactRustOfflineReceiptPinned : Bool
+    exactRustOfflineReceiptPinnedIsTrue : exactRustOfflineReceiptPinned ≡ true
+
 canonicalProofDirectedCorpusSearchContract : ProofDirectedCorpusSearchContract
 canonicalProofDirectedCorpusSearchContract = proofDirectedCorpusSearchContract
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
   true refl
   true refl
   true refl
@@ -120,6 +164,12 @@ selectedResultBoundary = Result.canonicalResultAssessmentBoundary
 selectedParetoBoundary : Pareto.SearchParetoRefinementBoundary
 selectedParetoBoundary = Pareto.canonicalSearchParetoRefinementBoundary
 
+selectedExecutionCostBoundary : ExecutionCost.SearchExecutionCostBoundary
+selectedExecutionCostBoundary = ExecutionCost.canonicalSearchExecutionCostBoundary
+
+selectedCostSchedulerBoundary : CostScheduler.CostedProofSearchSchedulerBoundary
+selectedCostSchedulerBoundary = CostScheduler.canonicalCostedProofSearchSchedulerBoundary
+
 selectedSaturationBoundary : Pareto.SearchSaturationBoundary
 selectedSaturationBoundary = Pareto.canonicalSearchSaturationBoundary
 
@@ -138,8 +188,29 @@ selectedBidirectionalBoundary = Bidi.canonicalBidirectionalSearchBoundary
 selectedWaterproofBoundary : Waterproof.WaterproofArgumentBoundary
 selectedWaterproofBoundary = Waterproof.canonicalWaterproofArgumentBoundary
 
+selectedWitnessBoundary : Witness.TextWitnessBoundary
+selectedWitnessBoundary = Witness.canonicalTextWitnessBoundary
+
+selectedLegalFollowBoundary : LegalFollow.LegalFollowProofSearchBoundary
+selectedLegalFollowBoundary = LegalFollow.canonicalLegalFollowProofSearchBoundary
+
+selectedHistoricalBoundary : Historical.HistoricalResearchBoundary
+selectedHistoricalBoundary = Historical.canonicalHistoricalResearchBoundary
+
+selectedCompilerBoundary : Compiler.EndToEndSearchCompilerBoundary
+selectedCompilerBoundary = Compiler.canonicalEndToEndSearchCompilerBoundary
+
+selectedIterativeBoundary : Iterative.IterativeProofSearchBoundary
+selectedIterativeBoundary = Iterative.canonicalIterativeProofSearchBoundary
+
 selectedMaboPabaiBoundary : Fixture.MaboPabaiSearchBoundary
 selectedMaboPabaiBoundary = Fixture.canonicalMaboPabaiSearchBoundary
+
+selectedRustReceiptBoundary : RustReceipt.OfflinePabaiRustReceiptBoundary
+selectedRustReceiptBoundary = RustReceipt.canonicalOfflinePabaiRustReceiptBoundary
+
+selectedRustReceipt : RustReceipt.OfflinePabaiLoopReceiptV01
+selectedRustReceipt = RustReceipt.canonicalOfflinePabaiLoopReceiptV01
 
 ------------------------------------------------------------------------
 -- Canonical no-collapse laws.
@@ -152,8 +223,12 @@ data SearchResultEqualsProofPayment : Set where
 data WorldModelCompletenessRequiredBeforeUse : Set where
 data MaboTopologyAutomaticallyTransfersToPabaiDoctrine : Set where
 data StatisticalSeparatorAutomaticallyLegalRule : Set where
-
 data MoreCasesAutomaticallyMakeArgumentWaterproof : Set where
+data RepeatedPublicationAutomaticallyIndependentTruth : Set where
+data HistoricalSparseSearchEqualsFinalWorldModel : Set where
+data ExecutableQueryCompilerMayBypassAssessment : Set where
+data CheapestExecutionAutomaticallyBestProofSearch : Set where
+data RustRuntimeReceiptAutomaticallyFormalProof : Set where
 
 searchResultDoesNotEqualTruth : SearchResultEqualsTruth → ⊥
 searchResultDoesNotEqualTruth ()
@@ -178,3 +253,23 @@ statisticalSeparatorDoesNotBecomeRule ()
 
 moreCasesDoNotAutomaticallyWaterproofArgument : MoreCasesAutomaticallyMakeArgumentWaterproof → ⊥
 moreCasesDoNotAutomaticallyWaterproofArgument ()
+
+repeatedPublicationDoesNotCreateIndependentTruth :
+  RepeatedPublicationAutomaticallyIndependentTruth → ⊥
+repeatedPublicationDoesNotCreateIndependentTruth ()
+
+historicalSparseSearchDoesNotEqualFinalWorld :
+  HistoricalSparseSearchEqualsFinalWorldModel → ⊥
+historicalSparseSearchDoesNotEqualFinalWorld ()
+
+queryCompilerDoesNotBypassAssessment :
+  ExecutableQueryCompilerMayBypassAssessment → ⊥
+queryCompilerDoesNotBypassAssessment ()
+
+cheapestExecutionDoesNotAutomaticallyWin :
+  CheapestExecutionAutomaticallyBestProofSearch → ⊥
+cheapestExecutionDoesNotAutomaticallyWin ()
+
+rustRuntimeReceiptDoesNotBecomeFormalProof :
+  RustRuntimeReceiptAutomaticallyFormalProof → ⊥
+rustRuntimeReceiptDoesNotBecomeFormalProof ()

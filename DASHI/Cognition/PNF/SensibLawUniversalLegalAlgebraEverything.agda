@@ -12,11 +12,19 @@ import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Element
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyRequirementSalienceExact as DutySalience
 import DASHI.Cognition.PNF.SensibLawNegligenceDutyGenericParetoFrontierExact as DutyPareto
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyParetoProofPromotionExact as DutyParetoProof
 import DASHI.Cognition.PNF.SensibLawWrongTypeRequirementSalienceFrontierExact as Frontier
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierProofPromotionExact as ParetoProof
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 import DASHI.Cognition.PNF.SensibLawLegalObserverResidualRefinementBidiExact as Residual
 import DASHI.Cognition.PNF.SensibLawLegalGraphRefinementReopeningExact as Refinement
+import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as Search
+import DASHI.Cognition.PNF.SensibLawFiniteLegalCutGuardExact as CutGuard
+import DASHI.Cognition.PNF.SensibLawCullenPublicAuthorityDutyCalibrationExact as Cullen
+import DASHI.Cognition.PNF.SensibLawRecentDutyCaseSourceAtlasExact as PrimarySources
+import DASHI.Cognition.PNF.SensibLawDutyPublicAuthoritySourceLineageGraphExact as SourceLineage
+import DASHI.Cognition.PNF.SensibLawDutySourceLineageRefinementCutRerunExact as SourceRerun
 
 ------------------------------------------------------------------------
 -- Universal graph and issue-specific graph are one architecture.
@@ -108,7 +116,8 @@ statutoryCoherenceMayBecomeSalientAfterPolicyClosure =
   DutySalience.statutoryCoherenceBecomesSalientAfterPolicyClosure
 
 ------------------------------------------------------------------------
--- Generic finite Pareto frontier now computes the current question set.
+-- Generic finite Pareto frontier computes the current question set; proof
+-- promotion remains a separate receipt over that same portfolio.
 ------------------------------------------------------------------------
 
 currentDutyParetoFrontierSelectsCorePolicy :
@@ -117,16 +126,112 @@ currentDutyParetoFrontierSelectsCorePolicy :
 currentDutyParetoFrontierSelectsCorePolicy =
   DutyPareto.currentDutyParetoFrontierIsCorePolicyOnly
 
+currentDutyCorePolicyHasProofPromotion :
+  ParetoProof.FrontierPromotion
+    DutyPareto.currentDutyPortfolio
+    DutyPareto.currentCorePolicyCell
+currentDutyCorePolicyHasProofPromotion = DutyParetoProof.corePolicyPromotion
+
 postPolicyParetoFrontierSelectsStatutoryCoherence :
   Pareto.paretoFrontier DutyPareto.postPolicyPortfolio
   ≡ DutyPareto.postPolicyStatutoryCoherenceCell ∷ []
 postPolicyParetoFrontierSelectsStatutoryCoherence =
-  DutyPareto.postPolicyParetoFrontierIsStatutoryCoherenceOnly
+  DutyPareto.postPolicyDutyParetoFrontierIsStatutoryCoherenceOnly
+
+postPolicyStatutoryCoherenceHasProofPromotion :
+  ParetoProof.FrontierPromotion
+    DutyPareto.postPolicyPortfolio
+    DutyPareto.postPolicyStatutoryCoherenceCell
+postPolicyStatutoryCoherenceHasProofPromotion =
+  DutyParetoProof.statutoryCoherencePromotion
 
 foreseeabilityRemainsRequiredWhileOffParetoFrontier :
   Pareto.requiredForConsumer DutyPareto.currentForeseeabilityCell ≡ true
 foreseeabilityRemainsRequiredWhileOffParetoFrontier =
   DutyPareto.foreseeabilityRequiredButOffCurrentParetoFrontier
+
+------------------------------------------------------------------------
+-- Preferred source-owned duty/public-authority graph.
+-- PrimarySources keeps court publication identity separate from graph roles.
+------------------------------------------------------------------------
+
+sourceLineageMallonlandConstraintReachable :
+  Search.reachable 1 SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceLineage.mallonlandAssessmentFacts
+    SourceLineage.mallonlandFurtherSalientFeaturesRequired ≡ true
+sourceLineageMallonlandConstraintReachable =
+  SourceLineage.mallonlandConstraintReachable
+
+sourceLineageCullenDutyReachable :
+  Search.reachable 1 SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceLineage.cullenHoldingFacts Cullen.cullenDutyProposition ≡ true
+sourceLineageCullenDutyReachable = SourceLineage.cullenSpecificDutyReachable
+
+sourceLineagePabaiObstructionReachable :
+  Search.reachable 1 SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceLineage.pabaiPolicyFacts
+    SourceLineage.pabaiCurrentPleadedClimateDutyUnavailable ≡ true
+sourceLineagePabaiObstructionReachable =
+  SourceLineage.pabaiCurrentObstructionReachable
+
+sourceLineageClimateDoesNotAutoReceiveCullen :
+  Search.reachable 1 SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceLineage.climateComparatorFacts Cullen.cullenDutyProposition ≡ false
+sourceLineageClimateDoesNotAutoReceiveCullen =
+  SourceLineage.climateFactsDoNotReachCullenSpecificDuty
+
+sourceLineageCullenDoesNotAutoReceivePabai :
+  Search.reachable 1 SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceLineage.cullenHoldingFacts
+    SourceLineage.pabaiCurrentPleadedClimateDutyUnavailable ≡ false
+sourceLineageCullenDoesNotAutoReceivePabai =
+  SourceLineage.cullenFactsDoNotReachPabaiClimateObstruction
+
+sourceLineageCullenHasProofRelevantRoute :
+  Algebra.Reachable SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceLineage.cullenHoldingFacts Cullen.cullenDutyProposition
+sourceLineageCullenHasProofRelevantRoute = SourceLineage.cullenSpecificDutyProof
+
+------------------------------------------------------------------------
+-- Source-owned material-feature refinement over the same richer graph.
+------------------------------------------------------------------------
+
+positiveActRefinementPreservesGraphAndHistory :
+  Refinement.LegalRefinementReceipt.oldHistoryPreserved
+    SourceRerun.positiveActRefinementReceipt ≡ true
+positiveActRefinementPreservesGraphAndHistory = refl
+
+cullenRouteClosedBeforePositiveAct :
+  Search.reachable 1 SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceRerun.beforePositiveActFacts Cullen.cullenDutyProposition ≡ false
+cullenRouteClosedBeforePositiveAct =
+  SourceRerun.cullenDutyUnreachableBeforePositiveAct
+
+cullenRouteOpensAfterPositiveAct :
+  Search.reachable 1 SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceRerun.afterPositiveActFacts Cullen.cullenDutyProposition ≡ true
+cullenRouteOpensAfterPositiveAct =
+  SourceRerun.cullenDutyReachableAfterPositiveAct
+
+cullenRouteHasProofAfterPositiveAct :
+  Algebra.Reachable SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceRerun.afterPositiveActFacts Cullen.cullenDutyProposition
+cullenRouteHasProofAfterPositiveAct = SourceRerun.cullenDutyProofAfterPositiveAct
+
+noMeaningfulCutBeforePositiveAct :
+  CutGuard.searchReachableMinimalCut 1
+    SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceRerun.beforePositiveActFacts Cullen.cullenDutyProposition
+  ≡ Search.notFound
+noMeaningfulCutBeforePositiveAct = SourceRerun.noGuardedCutBeforePositiveAct
+
+cullenRatioIsGuardedCutAfterPositiveAct :
+  CutGuard.searchReachableMinimalCut 1
+    SourceLineage.dutyPublicAuthoritySourceLineageGraph
+    SourceRerun.afterPositiveActFacts Cullen.cullenDutyProposition
+  ≡ Search.found
+    (Search.ruleKey SourceLineage.cullenPositiveOperationalDutyRule ∷ [])
+cullenRatioIsGuardedCutAfterPositiveAct = SourceRerun.cullenRatioCutAfterPositiveAct
 
 ------------------------------------------------------------------------
 -- Reverse epistemic path.

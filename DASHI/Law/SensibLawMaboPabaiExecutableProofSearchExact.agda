@@ -8,14 +8,18 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawMaboDawsonRecognitionResidualPlannerExact as DawsonPlan
+import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalDiscriminatorExact as MaboMinimal
+import DASHI.Cognition.PNF.SensibLawMaboMinimalDoctrinalCutsetExact as MaboCutset
 import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 import DASHI.Cognition.PNF.SensibLawMaboPabaiPositiveNegativeRegressionExact as Regression
 import DASHI.Cognition.PNF.SensibLawAuthorityTransformationMinimalCutExact as Cut
-import DASHI.Cognition.PNF.SensibLawTypedLegalAuthorityEdgeExact as Edge
+import DASHI.Cognition.PNF.SensibLawFiniteLegalSearchRegressionExact as Finite
+import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as FiniteSearch
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
+import DASHI.Cognition.PNF.SensibLawCullenPublicAuthorityDutyCalibrationExact as Cullen
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Intent
 import DASHI.Law.SensibLawProviderNeutralLegalQueryAlgebraExact as Query
 import DASHI.Law.SensibLawCitationAuthorityFollowExact as Follow
-import DASHI.Law.SensibLawCitationUsePropositionExact as CitationUse
 import DASHI.Law.SensibLawDialecticalProofSearchExact as Dialectic
 
 ------------------------------------------------------------------------
@@ -99,8 +103,12 @@ maboRecognitionFamily = Query.searchHypothesisFamily
   (maboHallComparator ∷ maboAmoduComparator ∷ [])
   "Mabo recognition-condition proof search family"
 
-maboCurrentPlannerStillTargetsRecognitionCondition : Bool
-maboCurrentPlannerStillTargetsRecognitionCondition = true
+maboCurrentPlannerResidualExact :
+  MaboCutset.firstResidual
+    MaboMinimal.identifyUnifiedRecognitionTheory
+    MaboCutset.postHallVerificationCutset
+  ≡ MaboCutset.recognitionConditionResidual
+maboCurrentPlannerResidualExact = DawsonPlan.currentUnifiedResidualIsRecognitionCondition
 
 ------------------------------------------------------------------------
 -- AMODU citation-follow fixture.
@@ -215,7 +223,7 @@ pabaiSupportDefeaterPair = Dialectic.dialecticalProbePair
   "paired support/defeater search for Pabai route repair"
 
 ------------------------------------------------------------------------
--- Existing positive/negative regression remains authoritative for the fixture.
+-- Existing exact route/search receipts pinned to this query layer.
 ------------------------------------------------------------------------
 
 maboPositiveStillReachable :
@@ -230,6 +238,34 @@ pabaiSearchStillRequiresProof :
   Cut.proofStillRequired Cut.pabaiNegativeCalibration ≡ true
 pabaiSearchStillRequiresProof = Regression.pabaiCandidateStillNeedsProof
 
+maboFiniteSearchStillReachable :
+  FiniteSearch.reachable 2 Finite.maboGraph Finite.maboFacts Finite.maboSurvival ≡ true
+maboFiniteSearchStillReachable = Finite.maboComputedReachable
+
+pabaiFiniteSearchStillUnreachable :
+  FiniteSearch.reachable 1 Finite.pabaiGraph Finite.pabaiFacts Negligence.dutyProposition ≡ false
+pabaiFiniteSearchStillUnreachable = Finite.pabaiComputedCurrentlyUnreachable
+
+pabaiFiniteTransformationFound :
+  FiniteSearch.firstReopeningTransformation 1 Negligence.dutyProposition
+    (Finite.pabaiReformulationCandidate ∷ [])
+  ≡ FiniteSearch.found Finite.pabaiReformulationCandidate
+pabaiFiniteTransformationFound = Finite.pabaiTransformationSearch
+
+cullenClimateFirstMissingComparatorFeature :
+  FiniteSearch.minimalDistinguishingCandidate
+    Cullen.cullenDutyHolding Finite.climateComparatorCase
+  ≡ FiniteSearch.found Cullen.positiveOperationalAct
+cullenClimateFirstMissingComparatorFeature = Finite.cullenClimateFirstMissingFeature
+
+pabaiCorePolicyBroadRuleNotEstablished :
+  Climate.sourceActuallyEntailsBroadRule Climate.corePolicyReopenQuery ≡ false
+pabaiCorePolicyBroadRuleNotEstablished = refl
+
+pabaiCorePolicyBroadRuleStillUnchecked :
+  Climate.sourceActuallyEntailsBroadRuleChecked Climate.corePolicyReopenQuery ≡ false
+pabaiCorePolicyBroadRuleStillUnchecked = refl
+
 ------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
@@ -238,6 +274,8 @@ data MaboIsClimateNegligencePrecedent : Set where
 data MaboPositivePathForcesPabaiReopening : Set where
 data PabaiNegativePathMeansParliamentOnly : Set where
 data AmoduCitationMeansMaboAdoptedEveryAmoduProposition : Set where
+
+data CullenComparatorFeatureAutomaticallyCreatesClimateDuty : Set where
 
 maboIsNotPromotedToClimateNegligencePrecedent : MaboIsClimateNegligencePrecedent → ⊥
 maboIsNotPromotedToClimateNegligencePrecedent ()
@@ -252,6 +290,10 @@ amoduCitationDoesNotMeanWholesaleAdoption :
   AmoduCitationMeansMaboAdoptedEveryAmoduProposition → ⊥
 amoduCitationDoesNotMeanWholesaleAdoption ()
 
+cullenFeatureDoesNotCreateClimateDuty :
+  CullenComparatorFeatureAutomaticallyCreatesClimateDuty → ⊥
+cullenFeatureDoesNotCreateClimateDuty ()
+
 record MaboPabaiSearchBoundary : Set where
   constructor maboPabaiSearchBoundary
   field
@@ -261,6 +303,8 @@ record MaboPabaiSearchBoundary : Set where
     pabaiNegativeCalibrationCompilesToRepairSearch : Bool
     pabaiNegativeCalibrationCompilesToRepairSearchIsTrue :
       pabaiNegativeCalibrationCompilesToRepairSearch ≡ true
+    finiteSearchReceiptsPinned : Bool
+    finiteSearchReceiptsPinnedIsTrue : finiteSearchReceiptsPinned ≡ true
     maboAnalogyAutomaticallyTransfersDoctrine : Bool
     maboAnalogyAutomaticallyTransfersDoctrineIsFalse :
       maboAnalogyAutomaticallyTransfersDoctrine ≡ false
@@ -269,4 +313,4 @@ record MaboPabaiSearchBoundary : Set where
 
 canonicalMaboPabaiSearchBoundary : MaboPabaiSearchBoundary
 canonicalMaboPabaiSearchBoundary =
-  maboPabaiSearchBoundary true refl true refl false refl true refl
+  maboPabaiSearchBoundary true refl true refl true refl false refl true refl

@@ -4,8 +4,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+
+import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
@@ -183,7 +184,12 @@ path4MartingalePoincareBeforeEnergyContraction fieldValue meanZero =
     trans
       (cong (oneSixteenth *_)
         (physicalMartingaleVarianceDecomposition current currentMeanZero))
-      (ℚRing.solve-∀)
+      (OpaqueAlgebra.scaleFourSum
+        oneSixteenth
+        (globalNormSq (martingaleField0 current))
+        (globalNormSq (martingaleField1 current))
+        (globalNormSq (martingaleField2 current))
+        (globalNormSq (martingaleField3 current)))
 
 path4GlobalComponentPoincareLevel : ProofLevel
 path4GlobalComponentPoincareLevel = machineChecked

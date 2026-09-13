@@ -1,0 +1,233 @@
+module DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGSourceValidationExact where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (true; false)
+
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGAuthorityClosureExact as Authority
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGModelProvenanceBidiExact as Provenance
+import DASHI.Physics.ExoticGravity.SuperconductingChargeMassCurrentBidiExact as Current
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyScopeBidiExact as Scope
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyCompilationExact as Compilation
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorCompilationExact as Comparator
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryGRComparatorStateBridgeExact as ComparatorState
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryBackgroundClosureExact as Background
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryOrdinaryModelClosureWeldExact as OrdinaryWeld
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGConstitutiveRatioMeasurementExact as Ratio
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact as ScalingWeld
+import DASHI.Physics.ExoticGravity.AntigravityOptimizedAcquisitionPlanExact as Plan
+import DASHI.Physics.ExoticGravity.LiTorrStandardGRComparatorBidiExact as LegacyComparator
+import DASHI.Physics.ExoticGravity.LiTorr1991CombinedFieldSourceEntitlementExact as LT1991
+import DASHI.Physics.ExoticGravity.LiTorr1992CoupledPotentialSourceEntitlementExact as LT1992
+import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingModelDiscriminatorExact as Scaling
+
+internalAuthorityShapeIsClosed : Authority.internalAuthorityShapeClosed Authority.canonicalMaterialEffectiveGAuthorityClosureBoundary ≡ true
+internalAuthorityShapeIsClosed = refl
+
+authorityClosureDoesNotPaySourceCurrent : Authority.authorityClosurePaysSourceCurrent Authority.canonicalMaterialEffectiveGAuthorityClosureBoundary ≡ false
+authorityClosureDoesNotPaySourceCurrent = refl
+
+authorityClosureDoesNotPayStressEnergy : Authority.authorityClosurePaysStressEnergy Authority.canonicalMaterialEffectiveGAuthorityClosureBoundary ≡ false
+authorityClosureDoesNotPayStressEnergy = refl
+
+historicalLiTorrClaimIsNotDASHIEffectiveG : Provenance.liTorrHistoricalClaimEqualsDASHIEffectiveGInterpretation Provenance.canonicalModelProvenanceBoundary ≡ false
+historicalLiTorrClaimIsNotDASHIEffectiveG = refl
+
+exactLiTorrEquationDoesNotEntitleDASHIEffectiveG : Provenance.exactLiTorrEquationAutomaticallyEntitlesDASHIEffectiveGModel Provenance.canonicalModelProvenanceBoundary ≡ false
+exactLiTorrEquationDoesNotEntitleDASHIEffectiveG = refl
+
+primary1991AbstractDoesNotProveNegativeG : LT1991.sourceEntitlementProvesMaterialEffectiveNegativeG LT1991.canonicalLiTorr1991SourceEntitlementBoundary ≡ false
+primary1991AbstractDoesNotProveNegativeG = refl
+
+secondary1992CarrierIsNotPrimaryAPS : LT1992.secondaryInspectionEqualsPrimaryPublisherCustody LT1992.canonicalCoupledPotentialAttributionBoundary ≡ false
+secondary1992CarrierIsNotPrimaryAPS = refl
+
+secondary1992EquationShapeDoesNotProveNegativeG : LT1992.equationShapeAttributionProvesMaterialEffectiveNegativeG LT1992.canonicalCoupledPotentialAttributionBoundary ≡ false
+secondary1992EquationShapeDoesNotProveNegativeG = refl
+
+netElectricalCurrentDoesNotDetermineMassCurrent : Current.netElectricalCurrentDeterminesMassCurrent Current.canonicalChargeMassCurrentBoundary ≡ false
+netElectricalCurrentDoesNotDetermineMassCurrent = refl
+
+measuredSupercurrentDoesNotPaySourceCurrent : Current.measuredSupercurrentAlonePaysSourceCurrentLeaf Current.canonicalChargeMassCurrentBoundary ≡ false
+measuredSupercurrentDoesNotPaySourceCurrent = refl
+
+massCurrentDoesNotConstructFullStressEnergy : Current.massCurrentReceiptAutomaticallyConstructsFullStressEnergy Current.canonicalChargeMassCurrentBoundary ≡ false
+massCurrentDoesNotConstructFullStressEnergy = refl
+
+sameTensorNameDoesNotFixStressEnergyConsumer : Scope.sameTensorNameMeansSameConsumer Scope.canonicalLaboratoryStressEnergyScopeBoundary ≡ false
+sameTensorNameDoesNotFixStressEnergyConsumer = refl
+
+labStressEnergyDoesNotPayW4 : Scope.laboratoryReceiptPaysW4MatterInterface Scope.canonicalLaboratoryStressEnergyScopeBoundary ≡ false
+labStressEnergyDoesNotPayW4 = refl
+
+massCurrentAloneDoesNotConstructStressEnergy : Compilation.massCurrentAloneConstructsStressEnergy Compilation.canonicalLaboratoryStressEnergyCompilationBoundary ≡ false
+massCurrentAloneDoesNotConstructStressEnergy = refl
+
+energyDensityStillRequiredAfterMassCurrent : Compilation.energyDensityStillRequired Compilation.canonicalLaboratoryStressEnergyCompilationBoundary ≡ true
+energyDensityStillRequiredAfterMassCurrent = refl
+
+stressComponentsStillRequiredAfterMassCurrent : Compilation.stressComponentsStillRequired Compilation.canonicalLaboratoryStressEnergyCompilationBoundary ≡ true
+stressComponentsStillRequiredAfterMassCurrent = refl
+
+genericKernelDoesNotEqualSameApparatusPrediction : Comparator.genericWeakFieldKernelEqualsSameApparatusPrediction Comparator.canonicalLaboratoryGRComparatorBoundary ≡ false
+genericKernelDoesNotEqualSameApparatusPrediction = refl
+
+evaluationRequestIsNotCompletedPrediction : Comparator.evaluationRequestEqualsCompletedPrediction Comparator.canonicalLaboratoryGRComparatorBoundary ≡ false
+evaluationRequestIsNotCompletedPrediction = refl
+
+numericalEvaluationStillRequired : Comparator.numericalEvaluationStillRequired Comparator.canonicalLaboratoryGRComparatorBoundary ≡ true
+numericalEvaluationStillRequired = refl
+
+predictionReceiptDoesNotProveNegativeEffectiveG : Comparator.predictionReceiptAutomaticallyProvesNegativeEffectiveG Comparator.canonicalLaboratoryGRComparatorBoundary ≡ false
+predictionReceiptDoesNotProveNegativeEffectiveG = refl
+
+requestStateMatchesExistingPlanningState :
+  ComparatorState.requestStageState ≡ Plan.postSourceComparatorState
+requestStateMatchesExistingPlanningState = ComparatorState.requestStageMatchesExistingPlan
+
+requestStageStillNeedsWeakFieldSolver :
+  LegacyComparator.firstOpenGRComparatorLeaf ComparatorState.requestStageState
+    ≡ LegacyComparator.weakFieldSolverLeaf
+requestStageStillNeedsWeakFieldSolver = ComparatorState.requestStageFirstOpen
+
+predictionStageStillNeedsBackgroundClosure :
+  LegacyComparator.firstOpenGRComparatorLeaf ComparatorState.predictionStageState
+    ≡ LegacyComparator.backgroundClosureLeaf
+predictionStageStillNeedsBackgroundClosure = ComparatorState.predictionStageFirstOpen
+
+requestDoesNotPayWeakFieldPrediction :
+  ComparatorState.typedRequestPaysWeakFieldPrediction
+    ComparatorState.canonicalLaboratoryGRComparatorStateBridgeBoundary ≡ false
+requestDoesNotPayWeakFieldPrediction = refl
+
+predictionDoesNotPayBackgroundClosure :
+  ComparatorState.typedPredictionPaysBackgroundClosure
+    ComparatorState.canonicalLaboratoryGRComparatorStateBridgeBoundary ≡ false
+predictionDoesNotPayBackgroundClosure = refl
+
+backgroundClosureClosesExistingComparator :
+  LegacyComparator.firstOpenGRComparatorLeaf Background.closedComparatorState
+    ≡ LegacyComparator.comparatorClosed
+backgroundClosureClosesExistingComparator = Background.closedComparatorStateIsClosed
+
+predictionAloneDoesNotCloseBackgrounds :
+  Background.ordinaryGRPredictionAlonePaysBackgroundClosure
+    Background.canonicalLaboratoryBackgroundClosureBoundary ≡ false
+predictionAloneDoesNotCloseBackgrounds = refl
+
+rfControlAloneDoesNotCloseAllBackgrounds :
+  Background.rfInstrumentationControlAlonePaysAllBackgrounds
+    Background.canonicalLaboratoryBackgroundClosureBoundary ≡ false
+rfControlAloneDoesNotCloseAllBackgrounds = refl
+
+closedComparatorDoesNotProveNegativeG :
+  Background.closedComparatorAutomaticallyProvesMaterialEffectiveNegativeG
+    Background.canonicalLaboratoryBackgroundClosureBoundary ≡ false
+closedComparatorDoesNotProveNegativeG = refl
+
+typedComparatorClosureDoesNotCreateOrdinaryBundle :
+  OrdinaryWeld.typedComparatorClosureAloneCreatesOptimizedBundle
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ false
+typedComparatorClosureDoesNotCreateOrdinaryBundle = refl
+
+ordinaryBundleDoesNotCreateTypedBackgroundReceipt :
+  OrdinaryWeld.optimizedBundleAloneCreatesTypedBackgroundReceipt
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ false
+ordinaryBundleDoesNotCreateTypedBackgroundReceipt = refl
+
+ordinaryClosureStillLeavesConstitutiveResidual :
+  OrdinaryWeld.fullOrdinaryClosureStillLeavesConstitutiveResidual
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ true
+ordinaryClosureStillLeavesConstitutiveResidual = refl
+
+ordinaryClosureStillLeavesReproducibility :
+  OrdinaryWeld.fullOrdinaryClosureStillLeavesReproducibility
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ true
+ordinaryClosureStillLeavesReproducibility = refl
+
+ordinaryClosureStillLeavesConstitutiveRatio :
+  OrdinaryWeld.fullOrdinaryClosureStillLeavesConstitutiveRatio
+    OrdinaryWeld.canonicalOrdinaryModelClosureWeldBoundary ≡ true
+ordinaryClosureStillLeavesConstitutiveRatio = refl
+
+etaCStringDoesNotPayTypedRatio :
+  Ratio.etaCStringAlonePaysConstitutiveRatio
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ false
+etaCStringDoesNotPayTypedRatio = refl
+
+ordinaryClosureAloneDoesNotPayTypedRatio :
+  Ratio.ordinaryModelClosureAlonePaysConstitutiveRatio
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ false
+ordinaryClosureAloneDoesNotPayTypedRatio = refl
+
+typedRatioNeedsIndependentReplication :
+  Ratio.independentReplicationRequired
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ true
+typedRatioNeedsIndependentReplication = refl
+
+typedRatioAloneCannotCompileNegativeGWeld :
+  Ratio.typedRatioAloneMayCompileExistingNegativeGWeld
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ false
+typedRatioAloneCannotCompileNegativeGWeld = refl
+
+canonicalScalingReplicationIdentityStillRequired :
+  Ratio.canonicalScalingReplicationIdentityStillRequired
+    Ratio.canonicalConstitutiveRatioMeasurementBoundary ≡ true
+canonicalScalingReplicationIdentityStillRequired = refl
+
+sameLabelDoesNotSubstituteForReplicationIdentity :
+  ScalingWeld.sameLabelMaySubstituteForSameReplicationCarrier
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+sameLabelDoesNotSubstituteForReplicationIdentity = refl
+
+differentScalingSweepDoesNotPaySameTypedRatio :
+  ScalingWeld.differentScalingSweepMayPaySameTypedRatio
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+differentScalingSweepDoesNotPaySameTypedRatio = refl
+
+apparatusIdentityMayNotDriftAcrossReplication :
+  ScalingWeld.apparatusIdentityMayDriftBetweenRatioAndReplication
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+apparatusIdentityMayNotDriftAcrossReplication = refl
+
+exactReplicationCarrierEqualityRequired :
+  ScalingWeld.exactReplicationCarrierEqualityRequired
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ true
+exactReplicationCarrierEqualityRequired = refl
+
+exactScalingSweepCarrierEqualityRequired :
+  ScalingWeld.exactScalingSweepCarrierEqualityRequired
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ true
+exactScalingSweepCarrierEqualityRequired = refl
+
+ratioAloneCannotCompileAtScalingBoundary :
+  ScalingWeld.typedRatioAloneMayCompileExistingNegativeGWeld
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+ratioAloneCannotCompileAtScalingBoundary = refl
+
+identityWeldMayCompileExistingNegativeGWeld :
+  ScalingWeld.identityWeldMayCompileExistingNegativeGWeld
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ true
+identityWeldMayCompileExistingNegativeGWeld = refl
+
+closedScalingStateDoesNotProveNegativeG :
+  ScalingWeld.closedScalingStateAutomaticallyProvesNegativeEffectiveG
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+closedScalingStateDoesNotProveNegativeG = refl
+
+compiledNegativeGWeldDoesNotProveUniversalNegativeG :
+  ScalingWeld.compiledNegativeGWeldProvesUniversalNegativeG
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+compiledNegativeGWeldDoesNotProveUniversalNegativeG = refl
+
+compiledNegativeGWeldDoesNotProvePhysicalCorrectness :
+  ScalingWeld.compiledNegativeGWeldProvesPhysicalCorrectness
+    ScalingWeld.canonicalScalingReplicationIdentityBoundary ≡ false
+compiledNegativeGWeldDoesNotProvePhysicalCorrectness = refl
+
+postScalingEvidenceRemainsBoundedNoPromotion :
+  ScalingWeld.postScalingEvidenceIsBounded
+    ≡ Plan.postScalingEvidenceBounded
+postScalingEvidenceRemainsBoundedNoPromotion = refl
+
+sourceDependentAdditiveCanStillMimicMultiplicative : Scaling.sourceDependentAdditiveCanMimicMultiplicativeSignature Scaling.canonicalScalingModelDiscriminatorBoundary ≡ true
+sourceDependentAdditiveCanStillMimicMultiplicative = refl

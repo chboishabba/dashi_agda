@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1020" viewBox="0 0 1400 1020">
+  <rect width="1400" height="1020" fill="white"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#111"/></marker>
+    <style>
+      text { font-family: sans-serif; fill: #111; }
+      .title { font-size: 31px; font-weight: 700; }
+      .subtitle { font-size: 18px; }
+      .box { fill: white; stroke: #111; stroke-width: 2; rx: 14; }
+      .soft { fill: #f5f5f5; stroke: #111; stroke-width: 2; rx: 14; }
+      .warn { fill: white; stroke: #111; stroke-width: 3; stroke-dasharray: 8 7; rx: 14; }
+      .label { font-size: 20px; font-weight: 700; }
+      .body { font-size: 17px; }
+      .small { font-size: 15px; }
+      .arrow { stroke: #111; stroke-width: 2.3; fill: none; marker-end: url(#arrow); }
+      .thin { stroke: #111; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <text x="65" y="55" class="title">Introspective proof loop: observe only what the live proof gap requires</text>
+  <text x="65" y="88" class="subtitle">The visual is a diagnostic aid. Evidence and closure still require typed witnesses.</text>
+  <rect x="65" y="130" width="350" height="165" class="box"/><text x="90" y="165" class="label">1. Two possible world states</text>
+  <circle cx="145" cy="220" r="28" fill="white" stroke="#111" stroke-width="2"/><circle cx="225" cy="220" r="28" fill="white" stroke="#111" stroke-width="2"/>
+  <text x="137" y="226" class="body">x</text><text x="217" y="226" class="body">y</text>
+  <text x="90" y="265" class="small"><tspan x="90" dy="0">They differ in something that may</tspan><tspan x="90" dy="22">matter to the consumer.</tspan></text>
+  <rect x="525" y="130" width="350" height="165" class="box"/><text x="550" y="165" class="label">2. Current observer</text>
+  <text x="550" y="202" class="body"><tspan x="550" dy="0">The implementation maps x and y</tspan><tspan x="550" dy="28">to the same visible observation.</tspan><tspan x="550" dy="28">Their important difference is hidden.</tspan></text>
+  <rect x="985" y="130" width="350" height="165" class="box"/><text x="1010" y="165" class="label">3. Consumer question</text>
+  <text x="1010" y="202" class="body"><tspan x="1010" dy="0">The consumer needs different</tspan><tspan x="1010" dy="28">answers for x and y.</tspan><tspan x="1010" dy="28">That mismatch is the adequacy defect.</tspan></text>
+  <path d="M415 212 H525" class="arrow"/><path d="M875 212 H985" class="arrow"/>
+  <rect x="395" y="355" width="610" height="135" class="soft"/><text x="425" y="392" class="label">4. Name the first missing coordinate</text>
+  <text x="425" y="428" class="body"><tspan x="425" dy="0">History, provenance, authority, incidence, mechanism, ...</tspan><tspan x="425" dy="27">The application supplies this coordinate; the defect does not choose it.</tspan></text>
+  <path d="M1160 295 C1160 330 1005 350 1000 390" class="arrow"/>
+  <rect x="65" y="575" width="370" height="165" class="box"/><text x="90" y="610" class="label">5A. Source diligence</text>
+  <text x="90" y="647" class="body"><tspan x="90" dy="0">Acquire the missing source, locator,</tspan><tspan x="90" dy="27">coverage, provenance, or authority.</tspan><tspan x="90" dy="27">Must be bound to this live residual.</tspan></text>
+  <rect x="515" y="575" width="370" height="165" class="box"/><text x="540" y="610" class="label">5B. Discriminating observation</text>
+  <text x="540" y="647" class="body"><tspan x="540" dy="0">Choose a measurement or experiment</tspan><tspan x="540" dy="27">that separates this exact x/y witness.</tspan><tspan x="540" dy="27">Interesting data alone is not progress.</tspan></text>
+  <rect x="965" y="575" width="370" height="165" class="box"/><text x="990" y="610" class="label">5C. Existing refinement</text>
+  <text x="990" y="647" class="body"><tspan x="990" dy="0">If a refined observer already exists,</tspan><tspan x="990" dy="27">supply the real refinement receipt.</tspan><tspan x="990" dy="27">No extra acquisition is required.</tspan></text>
+  <path d="M700 490 C550 530 330 540 250 575" class="thin"/><path d="M700 490 V575" class="thin"/><path d="M700 490 C850 530 1070 540 1150 575" class="thin"/>
+  <rect x="315" y="805" width="770" height="135" class="box"/><text x="345" y="842" class="label">6. Refine observer, recompute the answer, then prove descent</text>
+  <text x="345" y="878" class="body"><tspan x="345" dy="0">Progress counts only when new evidence or refinement addresses the live defect.</tspan><tspan x="345" dy="27">Pairwise separation can motivate refinement; consumer closure still needs its receipt.</tspan></text>
+  <path d="M250 740 C300 775 410 785 485 805" class="arrow"/><path d="M700 740 V805" class="arrow"/><path d="M1150 740 C1100 775 990 785 915 805" class="arrow"/>
+  <rect x="65" y="965" width="1270" height="42" class="warn"/><text x="90" y="992" class="small">Firewall: model description != visualization != observation result != semantic promotion != consumer closure.</text>
+  <rect x="1035" y="360" width="300" height="130" class="box"/><text x="1060" y="390" class="label">ZKP frame</text>
+  <text x="1060" y="420" class="small"><tspan x="1060" dy="0">O organization | R request/RFP | C code</tspan><tspan x="1060" dy="22">S state | L observer/lattice | P proposal</tspan><tspan x="1060" dy="22">G goal | F live gap function</tspan></text>
+</svg>

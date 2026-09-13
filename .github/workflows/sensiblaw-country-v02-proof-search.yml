@@ -1,0 +1,85 @@
+name: SensibLaw Country V02 proof-search weld
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchBridgeV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeCandidateV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityAdmissibilityV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeAuthorityPaymentCutV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawGriffithsCustodialOutcomePaymentV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawGriffithsCustodialAuthorityCutV02Exact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchV02Everything.agda'
+      - '.github/workflows/sensiblaw-country-v02-proof-search.yml'
+
+concurrency:
+  group: sensiblaw-country-v02-proof-search-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject trust escapes
+        run: |
+          sources=(
+            DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchBridgeV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeCandidateV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityAdmissibilityV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeAuthorityPaymentCutV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawGriffithsCustodialOutcomePaymentV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawGriffithsCustodialAuthorityCutV02Exact.agda
+            DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchV02Everything.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Type-check V02 residual proof-search bridge
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchBridgeV02Exact.agda
+
+      - name: Type-check community outcome candidate packet
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeCandidateV02Exact.agda
+
+      - name: Type-check community authority admissibility packet
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryCommunityAuthorityAdmissibilityV02Exact.agda
+
+      - name: Type-check community outcome-authority payment cut
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryCommunityOutcomeAuthorityPaymentCutV02Exact.agda
+
+      - name: Type-check community payment acquisition plan
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryCommunityPaymentAcquisitionPlanV02Exact.agda
+
+      - name: Type-check Griffiths custodial outcome payment
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawGriffithsCustodialOutcomePaymentV02Exact.agda
+
+      - name: Type-check Griffiths custodial authority cut
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawGriffithsCustodialAuthorityCutV02Exact.agda
+
+      - name: Type-check V02 proof-search capstone
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawCountryRealisedRepairProofSearchV02Everything.agda

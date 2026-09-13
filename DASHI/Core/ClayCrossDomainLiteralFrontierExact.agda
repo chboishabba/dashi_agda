@@ -6,7 +6,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Physics.Closure.NSTriadKNDirectSignedCompanionFrontierRound442Exact as NS
+import DASHI.Physics.Closure.NSTriadKNCanonicalClayProofSearchRound486Exact as NS
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCriticalConeCompilerRound434Exact as NSCritical
+import DASHI.Physics.Closure.NSTriadKNCauchyFullVsSignedFluxBoundaryRound484Exact as NSCauchyBoundary
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact as RH
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
@@ -14,17 +16,27 @@ import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact as Zeta
 ------------------------------------------------------------------------
 -- CROSS-DOMAIN TERMINAL FRONTIER MOTIFS
 --
--- This is reuse of proof-search shape, not transfer of theorem content.
--- NS, YM and RH/zeta remain mathematically independent programmes.  The shared
--- value is that their current literal frontiers are now small enough to classify
--- by producer motif, which prevents wasting search on already-owned compiler
--- infrastructure.
+-- Reuse proof-search SHAPE only; never identify mathematical carriers across
+-- programmes.
+--
+-- NS canonical correction (R486)
+-- ------------------------------
+-- R481-R485 were useful Cauchy proof-search archaeology, but a downstream
+-- consumer audit shows that neither the full Cauchy form nor +F(T) is the
+-- canonical Clay target.  R282/R423 already own the shortest exact consumer:
+-- one cutoff-uniform INTEGRATED signed quadratic-companion heat-cross payment.
+-- R423 sends that payment directly to the critical barrier.
+--
+-- R284/R434, Cauchy/Schur/operator bounds and endpoint decompositions remain
+-- optional producer strategies.  Their unpaid children must not silently become
+-- mandatory prerequisites of the direct R423 route.
 ------------------------------------------------------------------------
 
 data TerminalProducerMotif : Set where
   sameObjectRepresentation : TerminalProducerMotif
   assignedAllowancePayment : TerminalProducerMotif
   signedIntegratedPayment : TerminalProducerMotif
+  resolvedGramOperatorBound : TerminalProducerMotif
   sourceSemanticsRecovery : TerminalProducerMotif
   conjunctionOfIndependentChildren : TerminalProducerMotif
   downstreamCompilerReuse : TerminalProducerMotif
@@ -33,50 +45,96 @@ data TerminalProducerMotif : Set where
 data Programme : Set where navierStokes yangMills riemannZeta : Programme
 
 data TerminalCoordinate : Set where
-  nsResolventHeat : TerminalCoordinate
-  nsSignedSpacetime : TerminalCoordinate
+  nsCutoffUniformIntegratedSignedCompanionBudget : TerminalCoordinate
   ymRound108Semantics : TerminalCoordinate
   ymRound108BC1SameObject : TerminalCoordinate
   rhOffAllowance : TerminalCoordinate
   rhGammaAllowance : TerminalCoordinate
 
-
 coordinateProgramme : TerminalCoordinate → Programme
-coordinateProgramme nsResolventHeat = navierStokes
-coordinateProgramme nsSignedSpacetime = navierStokes
+coordinateProgramme nsCutoffUniformIntegratedSignedCompanionBudget = navierStokes
 coordinateProgramme ymRound108Semantics = yangMills
 coordinateProgramme ymRound108BC1SameObject = yangMills
 coordinateProgramme rhOffAllowance = riemannZeta
 coordinateProgramme rhGammaAllowance = riemannZeta
 
 primaryMotif : TerminalCoordinate → TerminalProducerMotif
-primaryMotif nsResolventHeat = sameObjectRepresentation
-primaryMotif nsSignedSpacetime = signedIntegratedPayment
+primaryMotif nsCutoffUniformIntegratedSignedCompanionBudget = signedIntegratedPayment
 primaryMotif ymRound108Semantics = sourceSemanticsRecovery
 primaryMotif ymRound108BC1SameObject = sameObjectRepresentation
 primaryMotif rhOffAllowance = assignedAllowancePayment
 primaryMotif rhGammaAllowance = assignedAllowancePayment
 
 coordinateReference : TerminalCoordinate → String
-coordinateReference nsResolventHeat = "NS: exact R290 Cauchy-resolvent -> one-cell heat-factor realization"
-coordinateReference nsSignedSpacetime = "NS: cutoff-uniform integrated payment of explicit R440/R441 common signed cross"
+coordinateReference nsCutoffUniformIntegratedSignedCompanionBudget =
+  "NS: R423 cutoff-uniform integrated signed quadratic-companion heat-cross budget"
 coordinateReference ymRound108Semantics = "YM: source-fixed Round108 density semantics"
 coordinateReference ymRound108BC1SameObject = "YM: selected potential = BC1 same-object representation weld"
 coordinateReference rhOffAllowance = "RH/zeta: universal pole-quotient Off budget <= assigned A_off"
 coordinateReference rhGammaAllowance = "RH/zeta: same-taper Gamma budget <= assigned A_Gamma"
 
 ------------------------------------------------------------------------
--- Exact pins to current terminality.
+-- Exact NS pins.
 ------------------------------------------------------------------------
 
-nsResolventStillOpen : NS.round442AnalyticResolventHeatRealizationClosed ≡ false
-nsResolventStillOpen = NS.round442AnalyticResolventHeatRealizationClosedIsFalse
+nsCanonicalShortestConsumerIsR423 :
+  NS.round486R423IsCanonicalShortestConsumer ≡ true
+nsCanonicalShortestConsumerIsR423 = NS.round486R423IsCanonicalShortestConsumerIsTrue
 
-nsSignedSpacetimeStillOpen : NS.round442SignedCompanionSpacetimePaymentClosed ≡ false
-nsSignedSpacetimeStillOpen = NS.round442SignedCompanionSpacetimePaymentClosedIsFalse
+nsR423TargetIsCutoffUniformSignedCompanionBudget :
+  NS.round486R423TargetIsCutoffUniformSignedCompanionBudget ≡ true
+nsR423TargetIsCutoffUniformSignedCompanionBudget =
+  NS.round486R423TargetIsCutoffUniformSignedCompanionBudgetIsTrue
 
-nsFiniteCompilerAlreadyOwned : NS.round442PhysicalR299RecordInhabited ≡ true
-nsFiniteCompilerAlreadyOwned = NS.round442PhysicalR299RecordInhabitedIsTrue
+nsCurrentFirstMissingIsDirectR423Budget :
+  NS.firstCanonicalNSResidual NS.currentCanonicalNSStatus
+  ≡ NS.missingCutoffUniformSignedCompanionBudget
+nsCurrentFirstMissingIsDirectR423Budget = NS.currentFirstMissingIsR423Budget
+
+nsCurrentMechanismIsThink :
+  NS.mechanismFor (NS.firstCanonicalNSResidual NS.currentCanonicalNSStatus)
+  ≡ NS.Think
+nsCurrentMechanismIsThink = NS.currentMechanismIsThink
+
+nsDirectR423BudgetStillOpen : NS.round486DirectR423BudgetClosed ≡ false
+nsDirectR423BudgetStillOpen = NS.round486DirectR423BudgetClosedIsFalse
+
+nsCrossOutputCoherenceNotRequired : NS.round486CrossOutputCoherenceRequired ≡ false
+nsCrossOutputCoherenceNotRequired = NS.round486CrossOutputCoherenceRequiredIsFalse
+
+nsR284DecompositionNotMandatory : NS.round486R284DecompositionMandatory ≡ false
+nsR284DecompositionNotMandatory = NS.round486R284DecompositionMandatoryIsFalse
+
+-- Optional R284/R434 producer route remains honestly open at three physical
+-- region payments.  These are NOT direct R423 prerequisites.
+nsOptionalR284DeepFarLowPhysicalWeldOpen :
+  NSCritical.round434DeepFarLowPhysicalWeldClosed ≡ false
+nsOptionalR284DeepFarLowPhysicalWeldOpen =
+  NSCritical.round434DeepFarLowPhysicalWeldClosedIsFalse
+
+nsOptionalR284DeepHighHighPhysicalWeldOpen :
+  NSCritical.round434DeepHighHighPhysicalWeldClosed ≡ false
+nsOptionalR284DeepHighHighPhysicalWeldOpen =
+  NSCritical.round434DeepHighHighPhysicalWeldClosedIsFalse
+
+nsOptionalR284CriticalConeCovarianceOpen :
+  NSCritical.round434PhysicalCriticalConeCovarianceClosed ≡ false
+nsOptionalR284CriticalConeCovarianceOpen =
+  NSCritical.round434PhysicalCriticalConeCovarianceClosedIsFalse
+
+nsFullCauchyFormNotSignedCrossIdentity :
+  NSCauchyBoundary.round484FullFormSameObjectAsSignedFlux ≡ false
+nsFullCauchyFormNotSignedCrossIdentity =
+  NSCauchyBoundary.round484FullFormSameObjectAsSignedFluxIsFalse
+
+nsPositiveTerminalFluxNotCanonicalClayLeaf :
+  NS.round486PositiveTerminalFluxIsCanonicalClayLeaf ≡ false
+nsPositiveTerminalFluxNotCanonicalClayLeaf =
+  NS.round486PositiveTerminalFluxIsCanonicalClayLeafIsFalse
+
+------------------------------------------------------------------------
+-- Other programmes remain independent.
+------------------------------------------------------------------------
 
 ymDirectRouteRemainsAND :
   YM.routeTargets YM.directRound108ActionRoute
@@ -98,10 +156,6 @@ rhDownstreamBudgetCompilerNotFreshLeaf = refl
 
 ------------------------------------------------------------------------
 -- Highest-alpha shared search policy.
---
--- Search one literal coordinate at a time unless the exact consumer explicitly
--- permits a single producer theorem to pay more than one coordinate.  Reuse
--- infrastructure by MOTIF, never by silently identifying mathematical carriers.
 ------------------------------------------------------------------------
 
 record CrossDomainSearchPolicy : Set where
@@ -134,27 +188,20 @@ canonicalCrossDomainSearchPolicy =
     false refl
 
 ------------------------------------------------------------------------
--- Search order as a dependency statement, not a numerical ranking.
+-- Current dependency order.
 --
--- 1. Remove representation/source seams that block an already-built compiler.
--- 2. Attack terminal analytic allowance/signed-payment leaves.
--- 3. Let existing downstream compilers fire; do not rebuild them.
---
--- This makes YM's source/same-object children and NS's resolvent same-object
--- realization natural early targets, while RH/zeta's two allowance payments and
--- NS signed spacetime payment remain the irreducible analytic leaves.  It does
--- NOT assert that any of these theorems has been proved.
+-- NS: Think directly on R423.  Optional producer decompositions may be explored
+-- only when they improve the route; they do not enlarge the canonical cutset.
 ------------------------------------------------------------------------
 
 data ClosurePhase : Set where
   representationOrSource : ClosurePhase
   terminalAnalyticPayment : ClosurePhase
+  terminalOperatorBound : ClosurePhase
   downstreamCompiler : ClosurePhase
 
-
 phase : TerminalCoordinate → ClosurePhase
-phase nsResolventHeat = representationOrSource
-phase nsSignedSpacetime = terminalAnalyticPayment
+phase nsCutoffUniformIntegratedSignedCompanionBudget = terminalAnalyticPayment
 phase ymRound108Semantics = representationOrSource
 phase ymRound108BC1SameObject = representationOrSource
 phase rhOffAllowance = terminalAnalyticPayment
