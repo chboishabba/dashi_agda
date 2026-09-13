@@ -15,13 +15,13 @@ import DASHI.Core.AttributedSourceCore as Source
 droneShieldRfAI3Launch2026 : Source.AttributedSource
 droneShieldRfAI3Launch2026 =
   Source.mkNoDOISource
-    "DroneShield Ltd"
+    "Kim Barin; DroneShield Ltd"
     "DroneShield Breaks the Detection Paradigm: RfAI-3 Senses Drones That Have Never Been Seen Before"
-    "DroneShield press release, Sydney"
+    "DroneShield press release, Sydney, 28 July 2026"
     "2026"
     "https://www.droneshield.com/media/press-releases/droneshield-breaks-the-detection-paradigm-rfai-3-senses-drones-never-seen-before"
     Source.institutionalSource
-    "vendor source for the product claim that RfAI-3 performs wideband RF sensing, distinguishes matched known emitters from previously unseen emissions, and reports a confidence assessment; not independent performance validation"
+    "vendor source for the product claim that RfAI-3 performs wideband RF sensing, fingerprints observed emissions against previously observed drone signatures, presents unmatched emissions to the operator with confidence assessment, and retains generated signatures as references for later encounters; not independent performance validation"
     Source.publicAttribution
 
 droneShieldSensorFusionAI2023 : Source.AttributedSource
@@ -72,6 +72,47 @@ acmaSection27CounterDrone2026 =
     "regulatory source for current section 27 exemption categories, including the Remotely Piloted Aircraft Disruption Determination authorising counter-drone equipment for specified Australian police use; this does not make detection, classification, vendor ownership, or purchase equivalent to legal authority to operate prohibited equipment"
     Source.publicAttribution
 
+------------------------------------------------------------------------
+-- Dynamic vendor claim snapshots.
+--
+-- This keeps date/source/claim/status together.  A snapshot records what the
+-- source said at that time; it is not a proof of implementation or performance.
+------------------------------------------------------------------------
+
+record VendorClaimSnapshot : Set where
+  constructor vendorClaimSnapshot
+  field
+    snapshotSource : Source.AttributedSource
+    snapshotDate : String
+    claimText : String
+    vendorSelfDescription : Bool
+    vendorSelfDescriptionIsTrue : vendorSelfDescription ≡ true
+    independentlyReplicated : Bool
+    independentlyReplicatedIsFalse : independentlyReplicated ≡ false
+    createsAuthority : Bool
+    createsAuthorityIsFalse : createsAuthority ≡ false
+
+open VendorClaimSnapshot public
+
+rfAI3ClaimSnapshot20260728 : VendorClaimSnapshot
+rfAI3ClaimSnapshot20260728 =
+  vendorClaimSnapshot
+    droneShieldRfAI3Launch2026
+    "2026-07-28"
+    "RfAI-3 detects emissions present in the wideband RF environment, fingerprints them against previously observed drone signatures, classifies matched emitters, surfaces unmatched emissions with confidence assessment, and retains generated signatures as references for later encounters"
+    true refl
+    false refl
+    false refl
+
+rfAI3SnapshotCreatesAuthority : Bool
+rfAI3SnapshotCreatesAuthority =
+  createsAuthority rfAI3ClaimSnapshot20260728
+
+rfAI3SnapshotCreatesAuthorityIsFalse :
+  rfAI3SnapshotCreatesAuthority ≡ false
+rfAI3SnapshotCreatesAuthorityIsFalse =
+  createsAuthorityIsFalse rfAI3ClaimSnapshot20260728
+
 counterUASOperationalSources : List Source.AttributedSource
 counterUASOperationalSources =
   droneShieldRfAI3Launch2026 ∷
@@ -113,10 +154,14 @@ record CounterUASSourcePartitionBoundary : Set where
     regulatoryExemptionEqualsUniversalPublicAuthority : Bool
     regulatoryExemptionEqualsUniversalPublicAuthorityIsFalse :
       regulatoryExemptionEqualsUniversalPublicAuthority ≡ false
+    timestampedVendorClaimEqualsIndependentReplication : Bool
+    timestampedVendorClaimEqualsIndependentReplicationIsFalse :
+      timestampedVendorClaimEqualsIndependentReplication ≡ false
 
 canonicalCounterUASSourcePartitionBoundary : CounterUASSourcePartitionBoundary
 canonicalCounterUASSourcePartitionBoundary =
   counterUASSourcePartitionBoundary
+    false refl
     false refl
     false refl
     false refl
