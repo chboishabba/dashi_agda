@@ -20,6 +20,11 @@ record DrosophilaSymbolicInterfaceRegression : Set where
     socialClaimDoesNotCreateScientificAuthority :
       Source.citationCreatesAuthority Symbolic.socialDemoSource ≡ false
 
+    implementationRecoveryStillOpen :
+      Symbolic.primaryImplementationLocated
+        Symbolic.canonicalPythonDemoImplementationDebt
+      ≡ false
+
     connectomeAdvantageStillNeedsNulls :
       Symbolic.ConnectomeCausalAdvantagePermission → ⊥
 
@@ -37,5 +42,6 @@ canonicalDrosophilaSymbolicInterfaceRegression =
     refl
     Symbolic.fizzBuzzDoesNotEstablishGeneralProgrammingCompetence
     Symbolic.socialDemoCitationCreatesNoAuthority
+    Symbolic.primaryImplementationStillUnpaid
     Symbolic.connectomeAdvantageRequiresNullComparison
     Symbolic.jamesDeterminismBoundaryPreserved
