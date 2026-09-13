@@ -84,7 +84,7 @@ wangVazeHan2025 =
 liEtAl2025 : Source.AttributedSource
 liEtAl2025 =
   Source.mkDOISource
-    "Zhenyong Li et al."
+    "Yiming Li; Yi Wang; Wenqian Wang; Dan Lin; Bingbing Li; Kim-Hui Yap"
     "Open World Object Detection: A Survey"
     "IEEE Transactions on Circuits and Systems for Video Technology 35(2), 988-1008"
     "2025"
@@ -92,6 +92,19 @@ liEtAl2025 =
     "https://doi.org/10.1109/TCSVT.2024.3480691"
     Source.academicArticleSource
     "survey source for open-world object detection, its relation to open-set recognition and incremental learning, and benchmark/evaluation distinctions"
+    Source.publicAttribution
+
+wangLiChenDongChen2025 : Source.AttributedSource
+wangLiChenDongChen2025 =
+  Source.mkDOISource
+    "Ke Wang; Zhikang Li; Yang Chen; Wenjie Dong; Junlan Chen"
+    "Towards open-world recognition: Critical problems and challenges"
+    "Engineering Applications of Artificial Intelligence 143, 110042"
+    "2025"
+    "10.1016/j.engappai.2025.110042"
+    "https://doi.org/10.1016/j.engappai.2025.110042"
+    Source.academicArticleSource
+    "recent survey source for open-world recognition under dynamic environments, domain shift, incomplete labels, and incremental knowledge expansion; supports the distinction between static closed-world assumptions and adaptive open-world learning"
     Source.publicAttribution
 
 openClosedWorldSources : List Source.AttributedSource
@@ -103,6 +116,7 @@ openClosedWorldSources =
   josephEtAl2021 ∷
   wangVazeHan2025 ∷
   liEtAl2025 ∷
+  wangLiChenDongChen2025 ∷
   []
 
 openClosedWorldSourceAtlas : Source.AttributedSourceAtlas
