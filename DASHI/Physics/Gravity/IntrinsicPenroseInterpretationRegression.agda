@@ -4,68 +4,64 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Gravity.IntrinsicSpacetimeCurvatureInterpretationExact as Intrinsic
+import DASHI.Physics.Gravity.CausalFutureHorismosNullGeneratorExact as Causal
 import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
 import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Global
 import DASHI.Physics.Gravity.Penrose1965NullGeodesicIncompletenessExact as Penrose
 
 rubberSheetFirewallRegression :
   Intrinsic.rubberSheetEmbeddingIsNotIntrinsicLorentzianCurvature
-    Intrinsic.canonicalIntrinsicCurvatureInterpretationBoundary
-  ≡ true
+    Intrinsic.canonicalIntrinsicCurvatureInterpretationBoundary ≡ true
 rubberSheetFirewallRegression = refl
 
 temporalPhraseFirewallRegression :
   Intrinsic.timeCurvesIntoSpacePhraseIsNotInvariantGRStatement
-    Intrinsic.canonicalIntrinsicCurvatureInterpretationBoundary
-  ≡ true
+    Intrinsic.canonicalIntrinsicCurvatureInterpretationBoundary ≡ true
 temporalPhraseFirewallRegression = refl
 
-incompletenessPointFirewallRegression :
-  Penrose.geodesicIncompletenessIsNotSingularPointInSpacetime
-    Penrose.canonicalPenroseInterpretationBoundary
-  ≡ true
-incompletenessPointFirewallRegression = refl
+causalVsChronologicalFutureFirewallRegression :
+  Causal.causalFutureIsNotChronologicalFuture
+    Causal.canonicalCausalFutureInterpretationBoundary ≡ true
+causalVsChronologicalFutureFirewallRegression = refl
 
-curvatureDivergenceFirewallRegression :
-  Penrose.incompletenessDoesNotRequireCurvatureScalarDivergence
-    Penrose.canonicalPenroseInterpretationBoundary
-  ≡ true
-curvatureDivergenceFirewallRegression = refl
+horismosNotEventHorizonRegression :
+  Causal.horismosIsNotEventHorizon
+    Causal.canonicalCausalFutureInterpretationBoundary ≡ true
+horismosNotEventHorizonRegression = refl
+
+causalBoundaryDerivationStillClosedRegression :
+  Causal.causalBoundaryOwnerInternallyReprovesContinuumCausality
+    Causal.canonicalCausalFutureHorismosBoundary ≡ false
+causalBoundaryDerivationStillClosedRegression = refl
 
 localFocusingNotGlobalIncompletenessRegression :
   Focusing.localFocusingDoesNotEqualGlobalGeodesicIncompleteness
-    Focusing.canonicalNullFocusingCompositionBoundary
-  ≡ true
+    Focusing.canonicalNullFocusingCompositionBoundary ≡ true
 localFocusingNotGlobalIncompletenessRegression = refl
 
 energyConditionTranslationFirewallRegression :
   Focusing.nullEnergyConditionIsNotNullConvergenceWithoutEinsteinEquation
-    Focusing.canonicalNullFocusingCompositionBoundary
-  ≡ true
+    Focusing.canonicalNullFocusingCompositionBoundary ≡ true
 energyConditionTranslationFirewallRegression = refl
 
 focusingContinuumDerivationStillClosedRegression :
   Focusing.focusingOwnerInternallyDerivesContinuumEquation
-    Focusing.canonicalNullOpticalFocusingBoundary
-  ≡ false
+    Focusing.canonicalNullOpticalFocusingBoundary ≡ false
 focusingContinuumDerivationStillClosedRegression = refl
 
 compactHorismosNotSingularityRegression :
   Global.compactHorismosIsNotSpacetimeSingularity
-    Global.canonicalPenroseGlobalInterpretationBoundary
-  ≡ true
+    Global.canonicalPenroseGlobalInterpretationBoundary ≡ true
 compactHorismosNotSingularityRegression = refl
 
 nonCompactCauchyIsGlobalInputRegression :
   Global.nonCompactCauchyIsTopologicalGlobalInputNotLocalCurvature
-    Global.canonicalPenroseGlobalInterpretationBoundary
-  ≡ true
+    Global.canonicalPenroseGlobalInterpretationBoundary ≡ true
 nonCompactCauchyIsGlobalInputRegression = refl
 
 globalCausalityDerivationStillClosedRegression :
   Global.globalOwnerInternallyReprovesContinuumCausality
-    Global.canonicalPenroseGlobalHorismosBoundary
-  ≡ false
+    Global.canonicalPenroseGlobalHorismosBoundary ≡ false
 globalCausalityDerivationStillClosedRegression = refl
 
 continuumPromotionStillClosedRegression :
