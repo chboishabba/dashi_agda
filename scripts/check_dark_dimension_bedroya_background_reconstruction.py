@@ -20,6 +20,7 @@ REQUIRED = {
         '"V = V0 exp(-c phi)"',
         '"m_DM = m0 exp(-cPrime phi)"',
         '"V_eff = V0 exp(-c phi) + m0 n0 a^-3 exp(-cPrime phi)"',
+        '"3 H^2 = 1/2 phi_dot^2 + V_eff + Omega_R0 a^-4 (3 H0^2) + Omega_B0 a^-3 (3 H0^2)"',
         '"phi_ddot + 3 H phi_dot + dV_eff/dphi = 0"',
         '"D_M(z) = integral_0^z dzPrime / H(zPrime)"',
         '"D_H(z) = 1 / H(z)"',
