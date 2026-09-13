@@ -1,0 +1,104 @@
+module DASHI.Interop.SensibLawBrightonS185AuthorityViolationFrontierValidation where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Law.SensibLawBrightonS185HistoricalAuthoritySourceExact as Historical
+import DASHI.Cognition.PNF.SensibLawBrightonS185HistoricalAuthorityWeldExact as Weld
+import DASHI.Cognition.PNF.SensibLawBrightonS185ViolationElementFrontierExact as Frontier
+import DASHI.Cognition.PNF.SensibLawBrightonS185Subsection3aCompilerExact as Compiler
+import DASHI.Law.SensibLawBrightonObjectiveUnfitnessAcquisitionDemandExact as Acquisition
+
+open Historical.HistoricalS185SourceVersionBoundary
+open Weld.BrightonHistoricalAuthorityWeldBoundary
+open Frontier.BrightonS185ViolationElementFrontierBoundary
+open Compiler.BrightonS185Subsection3aCompilerBoundary
+open Acquisition.ObjectiveUnfitnessAcquisitionState
+
+historicalVersionPinned :
+  exactVersionIdentityPinned Historical.canonicalHistoricalS185SourceVersionBoundary ≡ true
+historicalVersionPinned = refl
+
+historicalDatePinned :
+  exactMatterDatePinned Historical.canonicalHistoricalS185SourceVersionBoundary ≡ true
+historicalDatePinned = refl
+
+meetSourceWeldRequired :
+  exactMeetAuthoritySourceWeldRequired Weld.canonicalBrightonHistoricalAuthorityWeldBoundary ≡ true
+meetSourceWeldRequired = refl
+
+conditionPaid :
+  conditionElementSatisfied Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+conditionPaid = refl
+
+outstandingRemediationPaid :
+  outstandingRemediationElementSatisfied Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+outstandingRemediationPaid = refl
+
+continuingTenancyPaid :
+  continuingTenancyElementSatisfied Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+continuingTenancyPaid = refl
+
+s185ApplicabilityPaid :
+  s185ApplicabilityElementSatisfied Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+s185ApplicabilityPaid = refl
+
+directCompilerReady :
+  directSubsection3aCompilerReady Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+directCompilerReady = refl
+
+compilerTenancyInputPaid :
+  Compiler.continuingTenancyPaid Compiler.canonicalBrightonS185Subsection3aCompilerBoundary ≡ true
+compilerTenancyInputPaid = refl
+
+compilerApplicabilityInputPaid :
+  Compiler.applicabilityPaid Compiler.canonicalBrightonS185Subsection3aCompilerBoundary ≡ true
+compilerApplicabilityInputPaid = refl
+
+objectiveUnfitnessIsFirstOpen :
+  firstOpenElementIsObjectiveUnfitness Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+objectiveUnfitnessIsFirstOpen = refl
+
+objectiveUnfitnessStillUnresolved :
+  Frontier.firstOpenElementDispositionUnresolved Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ true
+objectiveUnfitnessStillUnresolved = refl
+
+contractorInspectionExistenceConfirmed :
+  Acquisition.contractorInspectionExistenceConfirmed
+    Acquisition.canonicalObjectiveUnfitnessAcquisitionState ≡ true
+contractorInspectionExistenceConfirmed = refl
+
+contractorReportStillMissing :
+  Acquisition.contractorReportInHand
+    Acquisition.canonicalObjectiveUnfitnessAcquisitionState ≡ false
+contractorReportStillMissing = refl
+
+contractorFindingsStillMissing :
+  Acquisition.exactContractorFindingsInHand
+    Acquisition.canonicalObjectiveUnfitnessAcquisitionState ≡ false
+contractorFindingsStillMissing = refl
+
+objectiveClassificationStillUnpaid :
+  Acquisition.objectiveUnfitnessClassificationPaid
+    Acquisition.canonicalObjectiveUnfitnessAcquisitionState ≡ false
+objectiveClassificationStillUnpaid = refl
+
+agentWordsDoNotAutoPayObjectiveUnfitness :
+  agentCharacterisationAutomaticallyPaysObjectiveUnfitness Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+agentWordsDoNotAutoPayObjectiveUnfitness = refl
+
+form12LabelDoesNotAutoPayObjectiveUnfitness :
+  form12LabelAutomaticallyPaysObjectiveUnfitness Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+form12LabelDoesNotAutoPayObjectiveUnfitness = refl
+
+photosDoNotAutoPayObjectiveUnfitness :
+  photosAutomaticallyPayObjectiveUnfitness Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+photosDoNotAutoPayObjectiveUnfitness = refl
+
+outstandingRemediationDoesNotAutoPayObjectiveUnfitness :
+  outstandingRemediationAutomaticallyPaysObjectiveUnfitness Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+outstandingRemediationDoesNotAutoPayObjectiveUnfitness = refl
+
+objectiveUnfitnessDoesNotAutoEqualWholeViolation :
+  objectiveUnfitnessAutomaticallyEqualsWholeViolation Frontier.canonicalBrightonS185ViolationElementFrontierBoundary ≡ false
+objectiveUnfitnessDoesNotAutoEqualWholeViolation = refl
