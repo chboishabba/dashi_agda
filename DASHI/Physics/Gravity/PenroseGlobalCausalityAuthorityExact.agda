@@ -67,21 +67,15 @@ canonicalGlobalCausalityAuthorityReceipt = record
 record GlobalCausalityAuthorityInterpretationBoundary : Set where
   field
     theoremCoordinateIsNotKernelProof : Bool
-    theoremCoordinateIsNotKernelProofIsTrue :
-      theoremCoordinateIsNotKernelProof ≡ true
-
+    theoremCoordinateIsNotKernelProofIsTrue : theoremCoordinateIsNotKernelProof ≡ true
     modernReviewDoesNotReplacePrimaryPenroseAttribution : Bool
-    modernReviewDoesNotReplacePrimaryPenroseAttributionIsTrue :
-      modernReviewDoesNotReplacePrimaryPenroseAttribution ≡ true
-
+    modernReviewDoesNotReplacePrimaryPenroseAttributionIsTrue : modernReviewDoesNotReplacePrimaryPenroseAttribution ≡ true
     cauchyProjectionArgumentIsGlobalNotLocalFocusing : Bool
-    cauchyProjectionArgumentIsGlobalNotLocalFocusingIsTrue :
-      cauchyProjectionArgumentIsGlobalNotLocalFocusing ≡ true
+    cauchyProjectionArgumentIsGlobalNotLocalFocusingIsTrue : cauchyProjectionArgumentIsGlobalNotLocalFocusing ≡ true
 
 open GlobalCausalityAuthorityInterpretationBoundary public
 
-canonicalGlobalCausalityAuthorityInterpretationBoundary :
-  GlobalCausalityAuthorityInterpretationBoundary
+canonicalGlobalCausalityAuthorityInterpretationBoundary : GlobalCausalityAuthorityInterpretationBoundary
 canonicalGlobalCausalityAuthorityInterpretationBoundary = record
   { theoremCoordinateIsNotKernelProof = true
   ; theoremCoordinateIsNotKernelProofIsTrue = refl
