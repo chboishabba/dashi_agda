@@ -8,6 +8,8 @@ import DASHI.Cognition.PNF.MemoryFibre
 import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementExact
 import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementRegression
 import DASHI.Cognition.PNF.ContinuousOscillatorSyntheticReceipt
+import DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityReceipt
+import DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityRegression
 import DASHI.Core.RecursiveScaleTransitionExact
 import DASHI.Cognition.PNF.LearningAlgebra
 import DASHI.Cognition.PNF.FibreLearningDynamics
