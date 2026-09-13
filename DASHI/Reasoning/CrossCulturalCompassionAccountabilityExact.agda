@@ -317,6 +317,88 @@ compassionDoesNotWaiveBoundary :
 compassionDoesNotWaiveBoundary = refl
 
 ------------------------------------------------------------------------
+-- Positive construction: compassion without self-erasure.
+--
+-- The earlier boundaries mostly say what does not follow.  This witness is
+-- intentionally stronger and constructive: perspective-taking, cultural
+-- belonging and continued relationship can coexist with accountability,
+-- consent, complaint review and scoped access.  Bounded access is therefore
+-- not definitionally estrangement, and relationship preservation is not
+-- definitionally self-abandonment.
+------------------------------------------------------------------------
+
+record CompassionWithoutSelfErasure : Set where
+  constructor compassionWithoutSelfErasure
+  field
+    situatedContext : SituatedBoundaryContext
+    compassionState : CompassionAccountabilityState
+    selectedBoundaryAction : BoundaryAction
+    perspectiveTakingRetained : Bool
+    continuedRelationshipPossible : Bool
+    culturalBelongingPreserved : Bool
+    accountabilityPreserved : Bool
+    boundedAccessPreserved : Bool
+    consentPreserved : Bool
+    complaintReviewPreserved : Bool
+    forgivenessStillOptional : Bool
+    reconciliationStillOptional : Bool
+    selfErasureRequired : Bool
+    constructionReceipt : String
+
+open CompassionWithoutSelfErasure public
+
+canonicalCompassionWithoutSelfErasureContext : SituatedBoundaryContext
+canonicalCompassionWithoutSelfErasureContext = situatedBoundaryContext
+  (personalValue
+    ∷ familyExpectation
+    ∷ communityExpectation
+    ∷ heritageCultureExpectation
+    ∷ [])
+  true
+  true
+  false
+  true
+  true
+  false
+  false
+  true
+  limitAccess
+  "The relationship and cultural belonging remain valued while access is scoped rather than treated as all-or-nothing."
+
+canonicalCompassionWithoutSelfErasure : CompassionWithoutSelfErasure
+canonicalCompassionWithoutSelfErasure = compassionWithoutSelfErasure
+  canonicalCompassionWithoutSelfErasureContext
+  canonicalCompassionAccountabilityState
+  limitAccess
+  true
+  true
+  true
+  true
+  true
+  true
+  true
+  true
+  true
+  false
+  "Constructive witness: perspective-taking plus continued relationship plus cultural belonging plus accountability plus bounded access plus consent plus complaint review, without requiring self-erasure, forgiveness, reconciliation or unrestricted access."
+
+compassionWithoutSelfErasureDoesNotRequireSelfErasure :
+  selfErasureRequired canonicalCompassionWithoutSelfErasure ≡ false
+compassionWithoutSelfErasureDoesNotRequireSelfErasure = refl
+
+compassionWithoutSelfErasureKeepsAccountability :
+  accountabilityPreserved canonicalCompassionWithoutSelfErasure ≡ true
+compassionWithoutSelfErasureKeepsAccountability = refl
+
+compassionWithoutSelfErasureKeepsBelonging :
+  culturalBelongingPreserved canonicalCompassionWithoutSelfErasure ≡ true
+compassionWithoutSelfErasureKeepsBelonging = refl
+
+compassionWithoutSelfErasureKeepsBoundedAccess :
+  boundedAccessPreserved canonicalCompassionWithoutSelfErasure ≡ true
+compassionWithoutSelfErasureKeepsBoundedAccess = refl
+
+------------------------------------------------------------------------
 -- Compatibility with the existing defensive-reversal owner: the new source
 -- lane does not weaken its requirement to reconstruct incidents and preserve
 -- both the initiating event and the delivery of the objection.
