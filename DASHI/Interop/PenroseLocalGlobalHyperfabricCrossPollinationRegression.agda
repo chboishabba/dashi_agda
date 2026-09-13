@@ -26,6 +26,21 @@ sharedArchitectureFirewallRegression :
 sharedArchitectureFirewallRegression =
   Cross.sharedProofArchitectureDoesNotIdentifyDomainTheoremsIsTrue
 
+penroseProjectionIdentityFirewallRegression :
+  Cross.penroseProjectionIsNotParetoAxisProjection ≡ true
+penroseProjectionIdentityFirewallRegression =
+  Cross.penroseProjectionIsNotParetoAxisProjectionIsTrue
+
+horismosGlobalSectionIdentityFirewallRegression :
+  Cross.horismosIsNotHyperfabricGlobalSection ≡ true
+horismosGlobalSectionIdentityFirewallRegression =
+  Cross.horismosIsNotHyperfabricGlobalSectionIsTrue
+
+graphLorentzianCompatibilityFirewallRegression :
+  Cross.graphSeamCompatibilityIsNotLorentzianCompatibility ≡ true
+graphLorentzianCompatibilityFirewallRegression =
+  Cross.graphSeamCompatibilityIsNotLorentzianCompatibilityIsTrue
+
 sameObjectIdentityRegression :
   Cross.sameObjectReductioRequiresSameObjectIdentity ≡ true
 sameObjectIdentityRegression =
