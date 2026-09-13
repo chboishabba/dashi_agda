@@ -33,10 +33,18 @@ REQUIRED = {
         "LOG10_ZDEC_BEST_FIT = 3.350",
         "G_OVER_AH_INI = 1.0e7",
         "z_stop = (1.0 + z_dec) * math.log(G_OVER_AH_INI) - 1.0",
+        "A_s = math.exp(3.051) * 1.0e-10",
+        "def render_class_ini",
+        '"N_ur": 2.0308',
+        '"N_ncdm": 1',
+        '"m_ncdm": 0.06',
+        '"T_ncdm": 0.716',
+        '"YHe": "BBN"',
         '"manifest_kind": "paper-table-reconstruction"',
         '"original_mcmc_manifest_recovered": False',
         '"equation13_approximation_used": True',
         '"z_stop_directly_published": False',
+        'choices=("json", "class-ini")',
     ],
     "DASHI/Empirical/DarkDimensionDAOParameterManifestBoundaryExact.agda": [
         "import DASHI.Empirical.DarkDimensionDAOPaperTableReconstructionExact as PaperReconstruction",
@@ -45,6 +53,7 @@ REQUIRED = {
     ".github/workflows/gr-quantum-empirical-validation.yml": [
         "python scripts/check_dark_dimension_dao_paper_table_reconstruction.py",
         "python scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py",
+        "python scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py --format class-ini",
         "DASHI/Empirical/DarkDimensionDAOPaperTableReconstructionExact.agda",
     ],
 }
