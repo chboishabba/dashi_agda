@@ -73,6 +73,30 @@ lrg2TransverseKey = mkDR2Key lrg2 SharedBAO.transverseDMOverRd
 lrg2RadialKey : SharedBAOObservationKey
 lrg2RadialKey = mkDR2Key lrg2 SharedBAO.radialDHOverRd
 
+lrg3Elg1TransverseKey : SharedBAOObservationKey
+lrg3Elg1TransverseKey = mkDR2Key lrg3Elg1 SharedBAO.transverseDMOverRd
+
+lrg3Elg1RadialKey : SharedBAOObservationKey
+lrg3Elg1RadialKey = mkDR2Key lrg3Elg1 SharedBAO.radialDHOverRd
+
+elg2TransverseKey : SharedBAOObservationKey
+elg2TransverseKey = mkDR2Key elg2 SharedBAO.transverseDMOverRd
+
+elg2RadialKey : SharedBAOObservationKey
+elg2RadialKey = mkDR2Key elg2 SharedBAO.radialDHOverRd
+
+qsoTransverseKey : SharedBAOObservationKey
+qsoTransverseKey = mkDR2Key qso SharedBAO.transverseDMOverRd
+
+qsoRadialKey : SharedBAOObservationKey
+qsoRadialKey = mkDR2Key qso SharedBAO.radialDHOverRd
+
+lyaTransverseKey : SharedBAOObservationKey
+lyaTransverseKey = mkDR2Key lya SharedBAO.transverseDMOverRd
+
+lyaRadialKey : SharedBAOObservationKey
+lyaRadialKey = mkDR2Key lya SharedBAO.radialDHOverRd
+
 record SameObservationKeyRequirement
     (left right : SharedBAOObservationKey) : Set where
   constructor sameObservationKeyRequirement
