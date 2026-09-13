@@ -27,6 +27,7 @@ Minguzzi2019LorentzianCausalitySourceReceipt =
 
 record GlobalCausalityAuthorityReceipt : Set where
   field
+    propositionTwoOneFourThreeCausalSimplicityHorismosClosure : String
     theoremSixTwentyThreeNonCompactCauchyObstruction : String
     theoremSixTwentyThreeTimelikeFlowProjection : String
     globallyHyperbolicImpliesCausallySimpleForHorismosBoundary : String
@@ -45,14 +46,16 @@ open GlobalCausalityAuthorityReceipt public
 
 canonicalGlobalCausalityAuthorityReceipt : GlobalCausalityAuthorityReceipt
 canonicalGlobalCausalityAuthorityReceipt = record
-  { theoremSixTwentyThreeNonCompactCauchyObstruction =
+  { propositionTwoOneFourThreeCausalSimplicityHorismosClosure =
+      "Minguzzi 2019 Proposition 2.143: if spacetime is causally simple and S is compact then J+(S) is closed, E+(S) equals the boundary of I+(S), and edge(E+(S)) is empty"
+  ; theoremSixTwentyThreeNonCompactCauchyObstruction =
       "Minguzzi 2019 Theorem 6.23: in a globally hyperbolic spacetime with a non-compact Cauchy hypersurface there is no non-empty compact future trapped set; equivalently the Penrose compact-horismos side cannot coexist with that global topology"
   ; theoremSixTwentyThreeTimelikeFlowProjection =
       "Minguzzi 2019 proof of Theorem 6.23: project E+(A) along a global timelike vector-field flow to a Cauchy hypersurface; compactness of the projection conflicts with the absence of boundary implied by local crossing while the Cauchy hypersurface is non-compact"
   ; globallyHyperbolicImpliesCausallySimpleForHorismosBoundary =
-      "Minguzzi 2019 Theorem 6.23 proof uses that global hyperbolicity implies causal simplicity, enabling E+(A) to be identified with the boundary of I+(A) through the cited causal-boundary results"
+      "Minguzzi 2019 Theorem 6.23 proof uses that global hyperbolicity implies causal simplicity; Proposition 2.143 then supplies closed J+(A), E+(A)=boundary I+(A), and empty edge for compact A"
   ; horismosAsBoundaryOfChronologicalFuture =
-      "under the declared causal-simplicity hypotheses, E+(A) is the achronal boundary / boundary of I+(A) used by the timelike-flow projection argument"
+      "under causal simplicity and compactness of A, Proposition 2.143 identifies E+(A) with the boundary of I+(A), the achronal-boundary object consumed by the timelike-flow projection argument"
   ; theoremSixTwentyFivePenroseComposition =
       "Minguzzi 2019 Theorem 6.25: global hyperbolicity + non-compact Cauchy hypersurface + null convergence + trapped surface imply future null geodesic incompleteness by composing the trapped-set result with the noncompact-Cauchy obstruction"
   ; authorityCitationImportsNeitherProofNorAuthority = true
