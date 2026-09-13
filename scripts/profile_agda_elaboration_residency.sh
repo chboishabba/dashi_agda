@@ -26,7 +26,10 @@ export AGDA_PROFILE=all
 export AGDA_RTS_STATS=1
 export DASHI_NO_TMUX=1
 export DASHI_TMUX_KEEP_FAILED=0
-export DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-28672}"
+# Keep a wide safety margin on a 32 GiB workstation so a pathological
+# elaboration cannot push the desktop into swap thrash before the watchdog
+# fires.  Override explicitly for exceptional runs.
+export DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-15360}"
 export AGDA_LOG_KEEP_COUNT=100
 export AGDA_LOG_PATH="$RUN_DIR/agda.log"
 
