@@ -3,6 +3,9 @@ name: gr-penrose-causal-boundary
 # Focused certification workflow for the GR/Penrose causal-boundary tranche.
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'agent/gr-penrose-causal-boundary-v2'
   pull_request:
     paths:
       - 'DASHI/Physics/Gravity/IntrinsicSpacetimeCurvatureInterpretationExact.agda'
