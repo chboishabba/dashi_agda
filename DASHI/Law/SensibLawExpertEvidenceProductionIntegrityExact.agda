@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
 ------------------------------------------------------------------------
 -- GENERIC EXPERT-EVIDENCE PRODUCTION INTEGRITY
@@ -139,6 +140,126 @@ RiskQueryAdequate =
 riskQueryNotAdequate : RiskQueryAdequate → ⊥
 riskQueryNotAdequate =
   Query.queryAdequacyDefectBlocksFactorisation riskQueryAdequacyDefect
+
+------------------------------------------------------------------------
+-- SOURCE-GENEALOGY / INDEPENDENCE CROSS-POLLINATION
+--
+-- Reuses the same non-factorability grammar already exercised by the repo's
+-- testimony / replication / source-dependency lanes: two visible reports can
+-- agree while arising from independent paths or one common source.  Report
+-- multiplicity and agreement therefore cannot manufacture provenance
+-- independence.  The canonical repair is to retain the visible report surface
+-- and join the missing genealogy coordinate explicitly.
+------------------------------------------------------------------------
+
+data ExpertReportPairWorld : Set where
+  agreeingIndependentReports : ExpertReportPairWorld
+  agreeingCommonSourceReports : ExpertReportPairWorld
+
+data ReportAgreementSurface : Set where
+  sameObservedReportAgreement : ReportAgreementSurface
+
+data ReportSourceGenealogy : Set where
+  independentReportPaths : ReportSourceGenealogy
+  commonSourceReportPath : ReportSourceGenealogy
+
+data SourceGenealogyQuery : Set where
+  reportAgreementQuery : SourceGenealogyQuery
+  sourceIndependenceQuery : SourceGenealogyQuery
+
+data SourceGenealogyAnswer : Set where
+  sameAgreementAnswer : SourceGenealogyAnswer
+  independentSourceAnswer : SourceGenealogyAnswer
+  commonSourceAnswer : SourceGenealogyAnswer
+
+reportAgreementSurface : ExpertReportPairWorld → ReportAgreementSurface
+reportAgreementSurface world = sameObservedReportAgreement
+
+reportSourceGenealogy : ExpertReportPairWorld → ReportSourceGenealogy
+reportSourceGenealogy agreeingIndependentReports = independentReportPaths
+reportSourceGenealogy agreeingCommonSourceReports = commonSourceReportPath
+
+sourceGenealogyAnswer :
+  SourceGenealogyQuery → ExpertReportPairWorld → SourceGenealogyAnswer
+sourceGenealogyAnswer reportAgreementQuery world = sameAgreementAnswer
+sourceGenealogyAnswer sourceIndependenceQuery agreeingIndependentReports =
+  independentSourceAnswer
+sourceGenealogyAnswer sourceIndependenceQuery agreeingCommonSourceReports =
+  commonSourceAnswer
+
+sourceGenealogySemantics :
+  Query.QuerySemantics
+    ExpertReportPairWorld SourceGenealogyQuery SourceGenealogyAnswer
+sourceGenealogySemantics = Query.querySemantics sourceGenealogyAnswer
+
+reportAgreementQueryAdequate :
+  Query.AdequateFor
+    reportAgreementSurface sourceGenealogySemantics reportAgreementQuery
+reportAgreementQueryAdequate =
+  Query.factorsForQuery
+    (λ surface → sameAgreementAnswer)
+    (λ world → refl)
+
+SourceIndependenceQueryAdequacyDefect : Set₁
+SourceIndependenceQueryAdequacyDefect =
+  Query.QueryAdequacyDefect
+    reportAgreementSurface sourceGenealogySemantics sourceIndependenceQuery
+
+sourceIndependenceQueryAdequacyDefect :
+  SourceIndependenceQueryAdequacyDefect
+sourceIndependenceQueryAdequacyDefect =
+  Query.queryAdequacyDefect
+    agreeingIndependentReports
+    agreeingCommonSourceReports
+    refl
+    (λ ())
+
+SourceIndependenceQueryAdequate : Set₁
+SourceIndependenceQueryAdequate =
+  Query.AdequateFor
+    reportAgreementSurface sourceGenealogySemantics sourceIndependenceQuery
+
+sourceIndependenceQueryNotAdequate :
+  SourceIndependenceQueryAdequate → ⊥
+sourceIndependenceQueryNotAdequate =
+  Query.queryAdequacyDefectBlocksFactorisation
+    sourceIndependenceQueryAdequacyDefect
+
+reportAgreementPlusGenealogy :
+  ExpertReportPairWorld → ReportAgreementSurface × ReportSourceGenealogy
+reportAgreementPlusGenealogy =
+  Observer.pairObserver reportAgreementSurface reportSourceGenealogy
+
+reportAgreementPlusGenealogyRefinesAgreement :
+  Observer.Refines reportAgreementSurface reportAgreementPlusGenealogy
+reportAgreementPlusGenealogyRefinesAgreement =
+  Observer.pairRefinesLeft reportAgreementSurface reportSourceGenealogy
+
+reportAgreementPlusGenealogyStrictRefinement :
+  Observer.StrictRefinement reportAgreementSurface reportAgreementPlusGenealogy
+reportAgreementPlusGenealogyStrictRefinement =
+  Observer.strictPairRefinement
+    reportAgreementSurface
+    reportSourceGenealogy
+    agreeingIndependentReports
+    agreeingCommonSourceReports
+    refl
+    (λ ())
+
+data MultipleReportsAutomaticallyIndependent : Set where
+data AgreementAutomaticallyIndependentCorroboration : Set where
+data DependenceMeansNoEvidence : Set where
+
+multipleReportsDoNotAutomaticallyCreateIndependence :
+  MultipleReportsAutomaticallyIndependent → ⊥
+multipleReportsDoNotAutomaticallyCreateIndependence ()
+
+agreementDoesNotAutomaticallyCreateIndependentCorroboration :
+  AgreementAutomaticallyIndependentCorroboration → ⊥
+agreementDoesNotAutomaticallyCreateIndependentCorroboration ()
+
+dependenceDoesNotMeanNoEvidence : DependenceMeansNoEvidence → ⊥
+dependenceDoesNotMeanNoEvidence ()
 
 ------------------------------------------------------------------------
 -- Closed authority bundle.
