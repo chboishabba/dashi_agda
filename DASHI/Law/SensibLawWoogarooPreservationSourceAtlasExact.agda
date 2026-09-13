@@ -18,6 +18,8 @@ import DASHI.Cognition.PNF.SensibLawLegalClaimProvenanceLineageExact as Lineage
 -- Source identity is kept distinct from repository application.  These source
 -- entries establish who/what said what and where.  They do not themselves
 -- prove that any Queensland or Commonwealth statutory test is satisfied.
+-- In particular, source identity is kept distinct from source truth, legal
+-- effect, same-object geometry, and downstream consumer payment.
 ------------------------------------------------------------------------
 
 qldNatureConservationAct : Source.AttributedSource
@@ -40,6 +42,17 @@ epbcAct = Source.mkNoDOISource
   "https://www.legislation.gov.au/C2004A00485/latest/text"
   Source.governmentSource
   "Primary legal authority for threatened-species/community controlled-action, approval and injunction mechanisms."
+  Source.publicAttribution
+
+springfield8575January2026PreliminaryDocumentation : Source.AttributedSource
+springfield8575January2026PreliminaryDocumentation = Source.mkNoDOISource
+  "Cherish Enterprises Pty Ltd / Saunders Havill Group"
+  "9612 Springfield Preliminary Documentation v5 — EPBC 2019/8575"
+  "EPBC Act Preliminary Documentation package"
+  "2026"
+  "https://web.archive.org/web/20260214104241/https://www.saundershavill.com/springfieldresidentialdevelopment"
+  Source.practitionerSource
+  "Primary proponent assessment manifestation for the January 2026 public-comment baseline. It can pay exact statements made in that manifestation, including the quoted PD Request, project geometry, survey/impact assertions and Plan A7 project identities; it does not by citation alone establish ecological truth, legal sufficiency, final-decision status, or the contents of the later post-comment Final PD."
   Source.publicAttribution
 
 scenicPreliminaryDocumentation : Source.AttributedSource
@@ -79,6 +92,7 @@ woogarooPreservationSources : List Source.AttributedSource
 woogarooPreservationSources =
   qldNatureConservationAct ∷
   epbcAct ∷
+  springfield8575January2026PreliminaryDocumentation ∷
   scenicPreliminaryDocumentation ∷
   springviewCouncilDecision ∷
   springviewDevelopmentIRecord ∷
