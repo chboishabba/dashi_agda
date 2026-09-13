@@ -86,3 +86,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AlanineChiralEmpiricalExact
 -- Ramachandran geometry and PDB acquisition do not collapse into a unique-fold
 -- or protein-function theorem.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProteinBackboneStereochemistryExact
+
+-- Same-sequence empirical protein pair: E. coli adenylate kinase 4AKE/1AKE
+-- supplies experimentally resolved open/unligated and closed/Ap5A-bound
+-- conformations of the same polypeptide chain.  Sequence alone therefore does
+-- not determine the observed conformation in this fixture; context remains a
+-- required fibre coordinate.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalExact
