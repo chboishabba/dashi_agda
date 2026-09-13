@@ -15,16 +15,17 @@ import DASHI.Physics.Units.SI as SI
 ------------------------------------------------------------------------
 -- SOURCE-PRECISION-AWARE QUANTITATIVE ENVELOPES
 --
--- This owner deliberately separates three kinds of numerical evidence:
+-- This owner separates source precision rather than flattening every number
+-- into one prediction object:
 --
---   * an exact source-reported fit coordinate (c' = 0.05 +/- 0.01);
---   * a source-reported interval (effective radius around 1-30 micrometres);
---   * a qualitative numerical scale (DAO amplitude described only as
---     "percent-level" in the primary abstract).
+--   * c' = 0.05 +/- 0.01 with c' <= approximately 0.2;
+--   * effective Dark-Dimension radius around 1-30 micrometres;
+--   * DAO abstract: qualitative "percent-level" amplitude;
+--   * DAO published full text: numerical interval 0.005 <= A_D <= 0.025.
 --
--- A source envelope is not a preregistered forecast.  In particular, the DAO
--- source does not supply one exact frozen amplitude in the inspected primary
--- surface, so no exact cross-model numerical separation is manufactured here.
+-- The abstract/full-text refinement is retained explicitly because source
+-- version and inspected surface matter.  None of these retrospective/source
+-- envelopes is thereby converted into a preregistered future forecast.
 ------------------------------------------------------------------------
 
 false≢true : false ≡ true → ⊥
@@ -95,7 +96,7 @@ bedroyaSource : Source.AttributedSource
 bedroyaSource = DarkDimension.bedroyaObiedVafaWu2026
 
 ------------------------------------------------------------------------
--- DAO precision boundary.
+-- DAO precision boundary and source-version refinement.
 ------------------------------------------------------------------------
 
 data AmplitudePrecision : Set where
@@ -126,6 +127,52 @@ daoPercentLevelAmplitudeBand =
     false
     true
 
+daoAbsoluteAmplitudeLower : Discrimination.DecimalRatio
+daoAbsoluteAmplitudeLower = Discrimination.decimalRatio 5 1000
+
+daoAbsoluteAmplitudeUpper : Discrimination.DecimalRatio
+daoAbsoluteAmplitudeUpper = Discrimination.decimalRatio 25 1000
+
+record DAOAmplitudeInterval : Set where
+  constructor daoAmplitudeInterval
+  field
+    intervalSource : Source.AttributedSource
+    lowerAbsoluteAmplitude : Discrimination.DecimalRatio
+    upperAbsoluteAmplitude : Discrimination.DecimalRatio
+    intervalPrecision : AmplitudePrecision
+    sourceSurface : String
+
+open DAOAmplitudeInterval public
+
+publishedDAOAmplitudeInterval : DAOAmplitudeInterval
+publishedDAOAmplitudeInterval =
+  daoAmplitudeInterval
+    Discrimination.darkAcousticOscillationSource
+    daoAbsoluteAmplitudeLower
+    daoAbsoluteAmplitudeUpper
+    intervalAmplitude
+    "published Physical Review D full text: physically interesting linear-spectrum DAO amplitude approximately 0.005-0.025"
+
+record DAOAbstractToFullTextPrecisionRefinement : Set where
+  constructor daoAbstractToFullTextPrecisionRefinement
+  field
+    abstractPrecision : AmplitudePrecision
+    fullTextPrecision : AmplitudePrecision
+    publicationDOI : String
+    abstractCarriesOnlyQualitativeBand : Bool
+    fullTextCarriesNumericalInterval : Bool
+
+open DAOAbstractToFullTextPrecisionRefinement public
+
+abstractToFullTextPrecisionRefinement : DAOAbstractToFullTextPrecisionRefinement
+abstractToFullTextPrecisionRefinement =
+  daoAbstractToFullTextPrecisionRefinement
+    qualitativeScaleAmplitude
+    intervalAmplitude
+    "10.1103/y31p-9g5k"
+    true
+    true
+
 ------------------------------------------------------------------------
 -- Cross-model numerical-separation status.
 ------------------------------------------------------------------------
@@ -136,6 +183,7 @@ record QuantitativeEnvelopeStatus : Set where
     darkDimensionRadiusRangeRecorded : Bool
     bedroyaCPrimeFitRecorded : Bool
     daoPercentLevelScaleRecorded : Bool
+    daoPublishedAmplitudeIntervalRecorded : Bool
     daoExactAmplitudeRecorded : Bool
     sourceValuesFrozenAsProspectivePrediction : Bool
     crossModelNumericalSeparationLocked : Bool
@@ -147,6 +195,7 @@ open QuantitativeEnvelopeStatus public
 canonicalQuantitativeEnvelopeStatus : QuantitativeEnvelopeStatus
 canonicalQuantitativeEnvelopeStatus =
   quantitativeEnvelopeStatus
+    true
     true
     true
     true
@@ -192,7 +241,7 @@ sourceEnvelopeDoesNotPayDASHIDerivedPrediction =
 -- SI -> GR/quantum prediction-quantity residual.
 --
 -- The generic signed-scale conversion remains deliberately unpaid.  The thin
--- Dark-Dimension adapter now pays only the two positive micrometre endpoints by
+-- Dark-Dimension adapter pays only the two positive micrometre endpoints by
 -- encoding them as exact rational metres with decimalExponent = 0.
 ------------------------------------------------------------------------
 
