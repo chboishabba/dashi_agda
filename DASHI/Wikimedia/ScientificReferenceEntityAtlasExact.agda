@@ -101,6 +101,23 @@ millenniumPrizeProblems = verified "Millennium Prize Problems" conceptEntity "Q7
 gaugeFixing = verified "gauge fixing" conceptEntity "Q832289" "Wikidata lookup 2026-09-08"
 gangTianGaugeCalibratedGeometryI = verified "Gauge theory and calibrated geometry, I" publicationEntity "Q116272041" "Wikidata item matched to DOI 10.2307/121116, 2026-09-08"
 
+-- Cross-domain parent concepts used by the Ibrahim EN coverage audit.
+-- These are canonical external identities only; the revision-sensitive EN
+-- first-link edge remains owned by IbrahimEnglishParentCoverageGapAtlasExact.
+socialScience society politics archaeology humanActivity : ScientificReferenceEntity
+geology chemistry petrochemistry matter naturalScience science : ScientificReferenceEntity
+socialScience = verified "social science" conceptEntity "Q34749" "Wikidata lookup 2026-09-10"
+society = verified "society" conceptEntity "Q8425" "Wikidata lookup 2026-09-10"
+politics = verified "politics" conceptEntity "Q7163" "Wikidata lookup 2026-09-10"
+archaeology = verified "archaeology" conceptEntity "Q23498" "Wikidata lookup 2026-09-10"
+humanActivity = verified "human activity" conceptEntity "Q24902509" "Wikidata lookup 2026-09-10"
+geology = verified "geology" conceptEntity "Q1069" "Wikidata lookup 2026-09-10"
+chemistry = verified "chemistry" conceptEntity "Q2329" "Wikidata lookup 2026-09-10"
+petrochemistry = verified "petrochemistry" conceptEntity "Q493630" "Wikidata lookup 2026-09-10"
+matter = verified "matter" conceptEntity "Q35758" "Wikidata lookup 2026-09-10"
+naturalScience = verified "natural science" conceptEntity "Q7991" "Wikidata lookup 2026-09-10"
+science = verified "science" conceptEntity "Q336" "Wikidata lookup 2026-09-10"
+
 ------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------

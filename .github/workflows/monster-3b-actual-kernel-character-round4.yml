@@ -1,8 +1,62 @@
 name: Monster 3B actual kernel character round 4
 
 on:
+  push:
+    branches:
+      - 'agent/dewey-qid-firstlink-coverage-priorart'
+    paths:
+      - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda'
+      - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMultiplicityCharacterSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiQuotientDescentCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3B729ExtensionFiniteFieldProducerSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMainQuotientSameObjectSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalC3QuotientOrientationSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BModernCharacterVerificationKernel20SnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearZetaSectorRestrictionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearMultiplicityHomSpaceExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearShortestFrontierCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BFactorCQuotientWordSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BT1ComplementClass18LambdaZeroSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact.agda'
+      - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
+      - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
+      - 'scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh'
+      - 'scripts/check_monster_3b_linear_zeta_sector_restriction.sh'
+      - 'scripts/check_monster_3b_linear_multiplicity_hom_space.sh'
+      - 'scripts/check_monster_3b_linear_shortest_frontier_correction.sh'
+      - 'scripts/monster_3b_normalizer_restriction.g'
+      - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
+      - 'scripts/monster_3b_suzuki_main_quotient_match.g'
+      - 'scripts/monster_3b_inertia_phase_resolution.g'
+      - 'scripts/render_monster_3b_certificate.py'
+      - 'scripts/render_monster_3b_actual_kernel_certificate.py'
+      - 'scripts/render_monster_3b_suzuki_multiplicity_certificate.py'
+      - 'scripts/render_monster_3b_suzuki_main_quotient_match.py'
+      - 'scripts/render_monster_3b_inertia_phase_certificate.py'
+      - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'scripts/check_monster_3b_suzuki_multiplicity_characters.sh'
+      - 'scripts/check_monster_3b_suzuki_main_quotient_match.sh'
+      - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
+      - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
+      - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
   pull_request:
     branches:
+      - master
       - 'agent/monster-3b-orbifold-local-module-round4'
       - 'agent/monster-3b-actual-kernel-character-round4'
     paths:
@@ -15,13 +69,47 @@ on:
       - 'DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda'
       - 'DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda'
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BInertiaPhaseResolutionProducerSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMultiplicityCharacterSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiQuotientDescentCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3B729ExtensionFiniteFieldProducerSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BSuzukiMainQuotientSameObjectSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalC3QuotientOrientationSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BModernCharacterVerificationKernel20SnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearZetaSectorRestrictionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearMultiplicityHomSpaceExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BLinearShortestFrontierCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BFactorCQuotientWordSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BT1ComplementClass18LambdaZeroSnowballExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact.agda'
+      - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
+      - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
+      - 'scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh'
+      - 'scripts/check_monster_3b_linear_zeta_sector_restriction.sh'
+      - 'scripts/check_monster_3b_linear_multiplicity_hom_space.sh'
+      - 'scripts/check_monster_3b_linear_shortest_frontier_correction.sh'
+      - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
+      - 'scripts/monster_3b_suzuki_main_quotient_match.g'
+      - 'scripts/monster_3b_inertia_phase_resolution.g'
+      - 'scripts/render_monster_3b_certificate.py'
       - 'scripts/render_monster_3b_actual_kernel_certificate.py'
+      - 'scripts/render_monster_3b_suzuki_multiplicity_certificate.py'
+      - 'scripts/render_monster_3b_suzuki_main_quotient_match.py'
+      - 'scripts/render_monster_3b_inertia_phase_certificate.py'
       - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'scripts/check_monster_3b_suzuki_multiplicity_characters.sh'
+      - 'scripts/check_monster_3b_suzuki_main_quotient_match.sh'
+      - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
   workflow_dispatch:
-
 
 concurrency:
   group: dashi-global-${{ github.ref }}
@@ -40,6 +128,36 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+
+      - name: Run modern restriction degree-uniqueness checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh
+
+      - name: Run multiplicity basis-vs-linear WrongType checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh
+
+      - name: Run literal zeta-sector linear-restriction checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_linear_zeta_sector_restriction.sh
+
+      - name: Run linear multiplicity Hom-space checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_linear_multiplicity_hom_space.sh
+
+      - name: Run corrected linear shortest-frontier checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_linear_shortest_frontier_correction.sh
 
       - name: Install Nix
         uses: cachix/install-nix-action@v31
@@ -65,14 +183,40 @@ jobs:
           export AGDA_LOG_PATH="$RUNNER_TEMP/monster-3b-round4-agda.log"
           AGDA_JOBS=2 bash scripts/check_monster_3b_actual_kernel_character_round4.sh
 
-      - name: Upload actual-kernel certificates
+      - name: Run source-native 6.Suz multiplicity-character checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_suzuki_multiplicity_characters.sh
+
+      - name: Run Suzuki/main quotient same-object matcher
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_suzuki_main_quotient_match.sh
+
+      - name: Run optional inertia phase-resolution fallback checker
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_inertia_phase_resolution.sh
+
+      - name: Upload actual-kernel and multiplicity certificates
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: monster-3b-actual-kernel-character-round4
           path: |
+            build/monster_3b_modern_restriction_degree_uniqueness.json
             build/monster_3b_normalizer_restriction.json
             build/monster_3b_actual_kernel_structure.json
             build/monster_3b_actual_kernel_character_certificate.json
+            build/monster_3b_suzuki_multiplicity_characters.json
+            build/monster_3b_suzuki_main_quotient_match.json
+            build/monster_3b_inertia_phase_resolution.json
             build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
+            build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda
+            build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMainQuotientMatchCertificate.agda
+            build/generated/DASHI/Moonshine/Generated/Monster3BInertiaPhaseResolutionCertificate.agda
           if-no-files-found: warn
