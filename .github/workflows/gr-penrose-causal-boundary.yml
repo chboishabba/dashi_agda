@@ -1,0 +1,78 @@
+name: gr-penrose-causal-boundary
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Gravity/IntrinsicSpacetimeCurvatureInterpretationExact.agda'
+      - 'DASHI/Physics/Gravity/CausalFutureHorismosNullGeneratorExact.agda'
+      - 'DASHI/Physics/Gravity/NullRaychaudhuriSachsFocusingExact.agda'
+      - 'DASHI/Physics/Gravity/PenroseHorismosCompactnessPaymentExact.agda'
+      - 'DASHI/Physics/Gravity/PenroseGlobalCausalityAuthorityExact.agda'
+      - 'DASHI/Physics/Gravity/PenroseGlobalHorismosContradictionExact.agda'
+      - 'DASHI/Physics/Gravity/Penrose1965NullGeodesicIncompletenessExact.agda'
+      - 'DASHI/Physics/Gravity/IntrinsicPenroseInterpretationRegression.agda'
+      - 'DASHI/Physics/PhysicsKernelClosure.agda'
+      - 'scripts/check_gr_intrinsic_curvature_penrose_incompleteness.py'
+      - 'scripts/check_penrose_horismos_compactness_payment.py'
+      - '.github/workflows/gr-penrose-causal-boundary.yml'
+
+concurrency:
+  group: gr-penrose-causal-boundary-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Show tool versions
+        run: |
+          python --version
+          agda --version
+
+      - name: Run focused structural contracts
+        run: |
+          python scripts/check_gr_intrinsic_curvature_penrose_incompleteness.py
+          python scripts/check_penrose_horismos_compactness_payment.py
+
+      - name: Reject trust escapes in the GR/Penrose tranche
+        run: |
+          sources=(
+            DASHI/Physics/Gravity/IntrinsicSpacetimeCurvatureInterpretationExact.agda
+            DASHI/Physics/Gravity/CausalFutureHorismosNullGeneratorExact.agda
+            DASHI/Physics/Gravity/NullRaychaudhuriSachsFocusingExact.agda
+            DASHI/Physics/Gravity/PenroseHorismosCompactnessPaymentExact.agda
+            DASHI/Physics/Gravity/PenroseGlobalCausalityAuthorityExact.agda
+            DASHI/Physics/Gravity/PenroseGlobalHorismosContradictionExact.agda
+            DASHI/Physics/Gravity/Penrose1965NullGeodesicIncompletenessExact.agda
+            DASHI/Physics/Gravity/IntrinsicPenroseInterpretationRegression.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+
+      - name: Kernel-check focused GR/Penrose regression root
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Physics/Gravity/IntrinsicPenroseInterpretationRegression.agda
+
+      - name: Kernel-check physics aggregate
+        run: |
+          agda -i . -l standard-library \
+            DASHI/Physics/PhysicsKernelClosure.agda
