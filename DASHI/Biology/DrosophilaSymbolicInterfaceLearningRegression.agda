@@ -1,10 +1,11 @@
 module DASHI.Biology.DrosophilaSymbolicInterfaceLearningRegression where
 
 open import Agda.Builtin.Bool using (false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Biology.DrosophilaSymbolicInterfaceLearningExact as Symbolic
+import DASHI.Core.AttributedSourceCore as Source
 
 record DrosophilaSymbolicInterfaceRegression : Set where
   constructor drosophilaSymbolicInterfaceRegression
@@ -17,7 +18,7 @@ record DrosophilaSymbolicInterfaceRegression : Set where
       Symbolic.FizzBuzzGeneralProgrammingPermission → ⊥
 
     socialClaimDoesNotCreateScientificAuthority :
-      Symbolic.Source.citationCreatesAuthority Symbolic.socialDemoSource ≡ false
+      Source.citationCreatesAuthority Symbolic.socialDemoSource ≡ false
 
     connectomeAdvantageStillNeedsNulls :
       Symbolic.ConnectomeCausalAdvantagePermission → ⊥
@@ -33,7 +34,7 @@ canonicalDrosophilaSymbolicInterfaceRegression :
   DrosophilaSymbolicInterfaceRegression
 canonicalDrosophilaSymbolicInterfaceRegression =
   drosophilaSymbolicInterfaceRegression
-    Agda.Builtin.Equality.refl
+    refl
     Symbolic.fizzBuzzDoesNotEstablishGeneralProgrammingCompetence
     Symbolic.socialDemoCitationCreatesNoAuthority
     Symbolic.connectomeAdvantageRequiresNullComparison
