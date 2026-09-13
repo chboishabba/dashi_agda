@@ -157,7 +157,13 @@ repositoryVersionLinkPaid = refl
 
 paperTableReconstructionLocatedAndRunnable :
   paperTableReconstructionRunnable canonicalDAOParameterManifestStatus ≡ true
-paperTableReconstructionLocatedAndRunnable =
+paperTableReconstructionLocatedAndRunnable = refl
+
+sourceReconstructionRunnableWithoutOriginalCustody :
+  PaperReconstruction.reconstructionManifestRunnable
+    PaperReconstruction.canonicalPaperTableReconstructionStatus
+  ≡ true
+sourceReconstructionRunnableWithoutOriginalCustody =
   PaperReconstruction.reconstructionCanRunWithoutClaimingOriginalCustody
 
 pinnedSnapshotChronologyRecorded :
