@@ -62,6 +62,10 @@ record OpenClosedWorldRecognitionRegression : Set where
         Temporal.heldOutProtocolQuery
     testTunedThresholdIsNotHeldOutEvaluation :
       Temporal.testTunedThresholdCountsAsHeldOut ≡ false
+    noveltyReceiptRetainsProvenance :
+      Temporal.provenanceRetained Temporal.noveltyObservationReceipt ≡ true
+    semanticIdentityReceiptDoesNotCreateOperationalAuthority :
+      Temporal.stageCreatesOperationalAuthority Temporal.laterSemanticIdentityReceipt ≡ false
     temporalSourceAtlasNonPromoting :
       TemporalSources.openWorldTemporalPromotionSourceAtlasCreatesAuthority ≡ false
 
@@ -77,5 +81,5 @@ canonicalOpenClosedWorldRecognitionRegression =
     Temporal.confidenceOnlyNoveltyAdequacyDefect
     refl refl
     Temporal.reportedScoreOnlyAdequacyDefect
-    refl
+    refl refl refl
     TemporalSources.openWorldTemporalPromotionSourceAtlasCreatesAuthorityIsFalse
