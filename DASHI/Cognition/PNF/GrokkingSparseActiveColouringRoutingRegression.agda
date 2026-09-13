@@ -88,3 +88,6 @@ underpoweredPairRemainsUnclassified = refl
 
 correlationIsNotClassifierInput : Bridge.activationCorrelationIsClassificationInput ≡ false
 correlationIsNotClassifierInput = refl
+
+classifierExamplesAreNotEmpiricalGrokkingResults : Bridge.classifierIsEmpiricalGrokkingResult ≡ false
+classifierExamplesAreNotEmpiricalGrokkingResults = refl
