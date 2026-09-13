@@ -10,19 +10,6 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Law.SensibLawWoogarooPreservationSourceAtlasExact as Atlas
 
-------------------------------------------------------------------------
--- 9281 / 2019-8575 PRECLEARANCE CONVERGENCE
---
--- The local negotiated approval and the proponent's 2019/8575 assessment
--- materials independently converge on the same operational question:
--- federal approval status must be resolved before the relevant clearing phase
--- proceeds. Their legal force is deliberately kept different.
---
--- Snowball rule: acquisition may occur out of dependency order; promotion may
--- not skip source manifestation, same clearing phase, literal instrument, or
--- source force (condition / approved plan / proponent assessment protocol).
-------------------------------------------------------------------------
-
 negotiated9281DecisionNotice : Source.AttributedSource
 negotiated9281DecisionNotice = Source.mkNoDOISource
   "Ipswich City Council"
@@ -130,15 +117,13 @@ data ApprovedPlanGenericEPBCNoteIdentifiesInstrument : Set where
 data PrestartProtocolPaysActualCommencement : Set where
 data SourceCitationPaysSameActionIdentity : Set where
 
-proponentProtocolDoesNotEqualOperativePart9Condition :
-  ProponentProtocolEqualsOperativePart9Condition → ⊥
+proponentProtocolDoesNotEqualOperativePart9Condition : ProponentProtocolEqualsOperativePart9Condition → ⊥
 proponentProtocolDoesNotEqualOperativePart9Condition ()
 
 signedChecklistDoesNotEqualFederalApproval : SignedChecklistEqualsFederalApproval → ⊥
 signedChecklistDoesNotEqualFederalApproval ()
 
-approvedPlanGenericEPBCNoteDoesNotIdentifyInstrument :
-  ApprovedPlanGenericEPBCNoteIdentifiesInstrument → ⊥
+approvedPlanGenericEPBCNoteDoesNotIdentifyInstrument : ApprovedPlanGenericEPBCNoteIdentifiesInstrument → ⊥
 approvedPlanGenericEPBCNoteDoesNotIdentifyInstrument ()
 
 prestartProtocolDoesNotPayActualCommencement : PrestartProtocolPaysActualCommencement → ⊥
@@ -186,11 +171,7 @@ faunaPreclearancePlanThirdLeaf = preclearance-acquisition-leaf
   acquisitionOpen false true false
 
 preclearanceAcquisitionOrder : List PreclearanceAcquisitionLeaf
-preclearanceAcquisitionOrder =
-  condition6aSatisfactionRecordFirstLeaf ∷
-  signedEnvironmentalPreclearancePackageSecondLeaf ∷
-  faunaPreclearancePlanThirdLeaf ∷
-  []
+preclearanceAcquisitionOrder = condition6aSatisfactionRecordFirstLeaf ∷ signedEnvironmentalPreclearancePackageSecondLeaf ∷ faunaPreclearancePlanThirdLeaf ∷ []
 
 record PreclearanceConvergencePareto : Set where
   constructor preclearance-convergence-pareto
@@ -205,5 +186,4 @@ record PreclearanceConvergencePareto : Set where
     conclusionMaySkipDependencies : Bool
 
 canonicalPreclearanceConvergencePareto : PreclearanceConvergencePareto
-canonicalPreclearanceConvergencePareto = preclearance-convergence-pareto
-  true true true true false false true false
+canonicalPreclearanceConvergencePareto = preclearance-convergence-pareto true true true true false false true false
