@@ -18,6 +18,7 @@ on:
       - 'scripts/check_dark_dimension_prediction_quantity_adapter.py'
       - 'scripts/check_dark_dimension_model_observable_matrix.py'
       - 'scripts/check_dark_dimension_shared_bao_observable.py'
+      - 'scripts/check_dark_dimension_shared_bao_observation_key.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
@@ -51,6 +52,7 @@ jobs:
           python scripts/check_dark_dimension_prediction_quantity_adapter.py
           python scripts/check_dark_dimension_model_observable_matrix.py
           python scripts/check_dark_dimension_shared_bao_observable.py
+          python scripts/check_dark_dimension_shared_bao_observation_key.py
 
   agda-empirical-atlas:
     runs-on: ubuntu-24.04
@@ -90,6 +92,7 @@ jobs:
           check_agda DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda
           check_agda DASHI/Empirical/DarkDimensionModelObservableMatrixExact.agda
           check_agda DASHI/Empirical/DarkDimensionSharedBAOObservableExact.agda
+          check_agda DASHI/Empirical/DarkDimensionSharedBAOObservationKeyExact.agda
           check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
           check_agda DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda
           check_agda DASHI/Unified/DarkDimensionGRQuantumPromotionAdapterExact.agda
