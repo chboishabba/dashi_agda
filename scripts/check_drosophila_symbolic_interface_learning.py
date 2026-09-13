@@ -37,6 +37,8 @@ REQUIRED = {
         "runtimeSubstrateIsLocated",
         "symbolicKernelRunnerIsLocated",
         "controlAxesAreSeparated",
+        "matchedTopologyControlProducerIsLocated",
+        "identityAssignmentControlProducerIsLocated",
         "viralImplementationStillUnrecovered",
         "viralReproductionStillUnpaid",
         "empiricalNullsStillUnpaid",
