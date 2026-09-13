@@ -10,20 +10,21 @@ import DASHI.Core.AttributedSourceCore as Source
 ------------------------------------------------------------------------
 -- Runtime-side clean-room substrate.
 --
--- dashiBRAIN PR #8 implements an auditable receipt carrier plus a runnable
--- symbolic decoder over the repo's existing kernel-flow trajectories.  This
--- pays a clean-room implementation dependency, not the original viral run.
+-- dashiBRAIN PR #8 implements an auditable receipt carrier, a runnable
+-- symbolic decoder over the repo's existing kernel-flow trajectories, and
+-- concrete matched controls. This pays clean-room implementation dependencies,
+-- not the original viral run or empirical performance claims.
 ------------------------------------------------------------------------
 
 runtimeCleanRoomSource : Source.AttributedSource
 runtimeCleanRoomSource = Source.mkNoDOISource
   "chboishabba/dashiBRAIN"
-  "MaleCNS symbolic clean-room receipts and kernel trace runner"
+  "MaleCNS symbolic clean-room receipts, trace runner, and matched controls"
   "GitHub pull request #8"
   "2026"
   "https://github.com/chboishabba/dashiBRAIN/pull/8"
   (Source.namedSourceKind "software implementation")
-  "clean-room runtime substrate at head 3a13617224c93b7dc450106670650e57caef27f7; includes explicit assistance receipts, orthogonal topology/intervention controls, an external symbolic decoder over existing kernel flow, focused tests, and a focused CI workflow; not an empirical reproduction receipt"
+  "clean-room runtime substrate at head aedd4536e4f66991409cc26de559e4227288bdf3; includes explicit assistance receipts, orthogonal topology/identity/intervention controls, an external symbolic decoder over existing kernel flow, equal-weight degree-and-strength-preserving rewiring, deterministic identity reassignment, focused tests, and a focused CI workflow; not an empirical reproduction receipt"
   Source.publicAttribution
 
 runtimeCitationImportsNoProof :
@@ -40,7 +41,9 @@ record CleanRoomRuntimeStatus : Set where
     competenceNonpromotionImplemented : Bool
     matchedControlBudgetGuardImplemented : Bool
     symbolicKernelTraceRunnerImplemented : Bool
-    topologyInterventionAxesSeparated : Bool
+    topologyIdentityInterventionAxesSeparated : Bool
+    matchedTopologyControlProducerImplemented : Bool
+    identityAssignmentControlProducerImplemented : Bool
     viralImplementationRecovered : Bool
     viralDemoReproduced : Bool
     empiricalNullsExecuted : Bool
@@ -50,6 +53,8 @@ open CleanRoomRuntimeStatus public
 
 canonicalCleanRoomRuntimeStatus : CleanRoomRuntimeStatus
 canonicalCleanRoomRuntimeStatus = cleanRoomRuntimeStatus
+  true
+  true
   true
   true
   true
@@ -71,8 +76,16 @@ symbolicKernelRunnerIsLocated :
 symbolicKernelRunnerIsLocated = refl
 
 controlAxesAreSeparated :
-  topologyInterventionAxesSeparated canonicalCleanRoomRuntimeStatus ≡ true
+  topologyIdentityInterventionAxesSeparated canonicalCleanRoomRuntimeStatus ≡ true
 controlAxesAreSeparated = refl
+
+matchedTopologyControlProducerIsLocated :
+  matchedTopologyControlProducerImplemented canonicalCleanRoomRuntimeStatus ≡ true
+matchedTopologyControlProducerIsLocated = refl
+
+identityAssignmentControlProducerIsLocated :
+  identityAssignmentControlProducerImplemented canonicalCleanRoomRuntimeStatus ≡ true
+identityAssignmentControlProducerIsLocated = refl
 
 viralImplementationStillUnrecovered :
   viralImplementationRecovered canonicalCleanRoomRuntimeStatus ≡ false
