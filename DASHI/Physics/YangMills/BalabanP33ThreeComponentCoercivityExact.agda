@@ -13,6 +13,10 @@ module DASHI.Physics.YangMills.BalabanP33ThreeComponentCoercivityExact where
 -- su(2)-valued bond carrier.  The lift is a finite sum over the concrete
 -- x/y/z coordinate list and therefore introduces neither a hidden direct-sum
 -- theorem nor a second coercivity assumption.
+--
+-- Elaboration discipline: finite-sum monotonicity is consumed through the
+-- generic relation-preserving fibre observer, rather than importing the much
+-- larger directional-energy theorem merely for its local recursive helper.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -22,8 +26,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRational; sumRationalScale)
-open import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact using
-  (sumRationalMonotone)
+import DASHI.Physics.YangMills.BalabanFiniteSumRelationFibreLiftExact as SumLift
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
@@ -56,7 +59,7 @@ threeComponentP33Floor fld componentEnergy componentFloor =
   subst
     (λ lower → lower ≤ threeComponentEnergy componentEnergy)
     (sym (scaledThreeComponentNormExact fld))
-    (sumRationalMonotone
+    (SumLift.sumRationalMonotoneViaFibre
       Coordinates.lieCoordinates3
       (λ coordinate →
         P33.p33PhysicalFloor * Hodge.bondNormSq (fld coordinate))

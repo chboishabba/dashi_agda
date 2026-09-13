@@ -57,6 +57,11 @@ open import DASHI.Core.Prelude
 -- terminal mathematical interface currently owned by the repository; same-object
 -- receipts are no longer counted as fresh analysis.
 --
+-- The current direct-route compiler additionally projects the already-owned
+-- chosen-cutoff Off route and fresh same-taper Gamma route straight into those
+-- analytic cores. The historical payment records therefore no longer need to be
+-- traversed by proof search: they survive only as downstream compatibility APIs.
+--
 -- FINAL OFF, CURRENT MINIMAL CUT
 --
 -- The old direct input over-quantified the source as
@@ -186,6 +191,8 @@ import DASHI.Analysis.RiemannG2FinalPoleQuotientTwoPaymentCutExact
 import DASHI.Analysis.RiemannG2FinalPoleQuotientTwoPaymentCutRegression
 import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact
 import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreRegression
+import DASHI.Analysis.RiemannG2DirectInputsToAnalyticCoresExact
+import DASHI.Analysis.RiemannG2DirectInputsToAnalyticCoresRegression
 import DASHI.Analysis.RiemannG2PoleQuotientFinalCutReconciliationExact
 import DASHI.Analysis.RiemannAristotleRHFinalAllowanceLeafSchedulerExact
 import DASHI.Analysis.RiemannAristotleRHBidiSearchSchedulerExact

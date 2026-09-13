@@ -28,6 +28,11 @@ is preserved verbatim at
 Serious readers should continue there after reading the source-attribution rule
 above.
 
+The proof-search/observation development method is documented in
+**[`Docs/IntrospectiveProofLoop.md`](Docs/IntrospectiveProofLoop.md)**, including
+the plain-language visual walkthrough and the rule that visualization remains a
+diagnostic aid rather than evidence or proof.
+
 Repository automation follows a resource-conscious, newest-run-wins policy;
 see [`.github/WORKFLOW_PHILOSOPHY.md`](.github/WORKFLOW_PHILOSOPHY.md) before
 adding or broadening a GitHub Actions workflow.

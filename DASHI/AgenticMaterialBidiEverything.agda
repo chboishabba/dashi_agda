@@ -5,7 +5,8 @@ module DASHI.AgenticMaterialBidiEverything where
 -- realised interaction topology, consciousness boundaries, chemistry/process
 -- state, planning/logistics, active BIDI discriminator/refinement cycles,
 -- neural/ML coarse-graining, quantum implementation, prebiotic chemistry,
--- carbon chemical suitability and cosmic-parameter viability fibres.
+-- strategic interaction, carbon chemical suitability and cosmic-parameter
+-- viability fibres.
 ------------------------------------------------------------------------
 
 import DASHI.Biology.Levin.Everything
@@ -18,6 +19,30 @@ import DASHI.Biology.Levin.ProblemSpaceAgency
 import DASHI.Biology.Levin.ConstitutiveInteractiveAutonomy
 import DASHI.Biology.Levin.BiologicalComputationalConsciousnessBoundary
 import DASHI.Biology.PrebioticChemistryLifeInevitabilityBidiExact
+import DASHI.Biology.LogisticPopulationDirectionalEvidenceExact
+import DASHI.Biology.LogisticAgenticPrebioticCrossPollinationExact
+import DASHI.Biology.ResourceCoupledLogisticReplicationExact
+import DASHI.Biology.ResourceCoupledLogisticEvolutionBridgeExact
+import DASHI.Biology.ResourceCoupledMetabolicOpenBalanceBridgeExact
+import DASHI.Biology.ResourceCoupledMetabolicAdmissibilityExact
+import DASHI.Biology.ResourceCoupledProtoAgencyRealisationExact
+import DASHI.Biology.HeritableAgenticOrganisationEvolutionExact
+import DASHI.Biology.OpenEndedAgenticRepertoireEvolutionExact
+import DASHI.Biology.OpenEndedEvolutionHistoricalEvidenceCrossPollinationExact
+import DASHI.Biology.MultiscaleCausalProvenanceProofSearchRouterExact
+import DASHI.Biology.CausalIdentificationFamiliesExact
+import DASHI.Biology.CausalEffectEstimandExact
+import DASHI.Biology.CausalEstimandStatisticalRealisationExact
+import DASHI.Biology.FiniteRationalCausalEstimandExpectationExact
+import DASHI.Biology.CausalEstimatorGuaranteesExact
+import DASHI.Biology.CausalEstimatorMetricConsistencyExact
+import DASHI.Biology.CausalEstimatorFiniteDispersionExact
+import DASHI.Biology.CausalEstimatorFiniteProbabilityConsistencyExact
+import DASHI.Biology.CausalEstimatorFiniteTestDistributionConvergenceExact
+import DASHI.Biology.CausalEstimatorWeakNormalLimitDebtSplitExact
+import DASHI.Biology.CausalEstimatorAsymptoticProofDebtExact
+
+import DASHI.GameTheory.Everything
 
 import DASHI.Core.SharedStateCoalitionReachableEffectExact
 import DASHI.Core.DeclaredRealisedInteractionTopologyExact

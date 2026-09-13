@@ -1,0 +1,61 @@
+name: NS Round478-486 proof-search reconciliation
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedGramOperatorRound477Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedDirectConsumerRound478Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedSignedResidualRound479Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedPhysicalSnapshotRound480Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedProofSearchRound481Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedPositiveCellCarrierRound482Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedOrderedHermitianRound483Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyFullVsSignedFluxBoundaryRound484Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchySignedFluxProofSearchRound485Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCanonicalClayProofSearchRound486Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNCauchyResolvedTerminalEverythingRound479Exact.agda'
+      - 'DASHI/Physics/Closure/Everything.agda'
+      - 'DASHI/Core/ClayCrossDomainLiteralFrontierExact.agda'
+      - '.github/workflows/ns-round478-direct-resolved-consumer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  round478-486:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check historical Cauchy proof-search cone
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCauchySignedFluxProofSearchRound485Exact.agda
+
+      - name: Type-check R486 canonical R423 reconciliation
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCanonicalClayProofSearchRound486Exact.agda
+
+      - name: Type-check focused terminal aggregate
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNCauchyResolvedTerminalEverythingRound479Exact.agda
+
+      - name: Type-check authoritative closure rollup
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/Everything.agda
+
+      - name: Type-check Clay cross-domain literal frontier
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Core/ClayCrossDomainLiteralFrontierExact.agda

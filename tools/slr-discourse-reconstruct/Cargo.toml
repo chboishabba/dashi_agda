@@ -1,0 +1,8 @@
+[package]
+name = "slr-discourse-reconstruct"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+vader-parity = "=0.1.0"

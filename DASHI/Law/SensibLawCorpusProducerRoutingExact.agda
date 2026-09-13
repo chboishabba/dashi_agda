@@ -10,10 +10,6 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Intent
 
 ------------------------------------------------------------------------
 -- PRODUCER-INDEXED CORPUS ROUTING
---
--- The proof obligation selects eligible source classes. Providers are lower
--- level execution choices and no source class is permitted to upgrade itself
--- into a different epistemic or legal authority role.
 ------------------------------------------------------------------------
 
 data CorpusClass : Set where
@@ -74,6 +70,7 @@ eligibleCorpora Intent.counterexampleProducer =
   localCompiledWorldCorpus ∷ officialCaseLawCorpus ∷ matterDocumentCorpus ∷ journalCorpus ∷ []
 eligibleCorpora Intent.discriminatorProducer =
   localCompiledWorldCorpus ∷ officialCaseLawCorpus ∷ researchCaseLawIndex ∷ journalCorpus ∷ bookAndTreatiseCorpus ∷ []
+eligibleCorpora Intent.noSearchProducer = []
 
 ------------------------------------------------------------------------
 -- Source capability boundary.
@@ -129,6 +126,7 @@ data JudgmentAutomaticallyUniversalFact : Set where
 data LegislationAutomaticallyAppliesToMatter : Set where
 data MatterEvidenceAutomaticallyCreatesLegalRule : Set where
 data ProviderClassMayOverrideProducerClass : Set where
+data NoSearchProducerMayAcquireCorpus : Set where
 
 wikipediaDoesNotBecomeLegalAuthority : WikipediaAutomaticallyLegalAuthority → ⊥
 wikipediaDoesNotBecomeLegalAuthority ()
@@ -151,6 +149,9 @@ matterEvidenceDoesNotCreateRule ()
 providerDoesNotOverrideProducer : ProviderClassMayOverrideProducerClass → ⊥
 providerDoesNotOverrideProducer ()
 
+noSearchProducerDoesNotAcquire : NoSearchProducerMayAcquireCorpus → ⊥
+noSearchProducerDoesNotAcquire ()
+
 record CorpusRoutingBoundary : Set where
   constructor corpusRoutingBoundary
   field
@@ -164,7 +165,9 @@ record CorpusRoutingBoundary : Set where
       wikidataMayProposeIdentityWithoutTruth ≡ true
     worldEvidenceEqualsLegalAuthority : Bool
     worldEvidenceEqualsLegalAuthorityIsFalse : worldEvidenceEqualsLegalAuthority ≡ false
+    closedConsumerHasEligibleCorpus : Bool
+    closedConsumerHasEligibleCorpusIsFalse : closedConsumerHasEligibleCorpus ≡ false
 
 canonicalCorpusRoutingBoundary : CorpusRoutingBoundary
 canonicalCorpusRoutingBoundary =
-  corpusRoutingBoundary true refl true refl true refl false refl
+  corpusRoutingBoundary true refl true refl true refl false refl false refl

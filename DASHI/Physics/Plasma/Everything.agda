@@ -79,3 +79,4 @@ import DASHI.Physics.Plasma.MHDMagneticHelicityTriplePairCancellationExact
 import DASHI.Physics.Plasma.MHDLiteralMagneticHelicityTriadConservationExact
 import DASHI.Physics.Plasma.MHDLiteralIdealInvariantTriadCompilerExact
 import DASHI.Physics.Plasma.LoureiroViriatoPlasmoidBidiExact
+import DASHI.Physics.Plasma.PlasmaActivatedWaterAgricultureSourceRegistryExact
