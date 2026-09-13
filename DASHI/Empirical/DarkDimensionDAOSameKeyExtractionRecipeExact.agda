@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Empirical.DarkDimensionDAOParameterManifestBoundaryExact as Manifest
 import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationKey
 
 ------------------------------------------------------------------------
@@ -93,6 +94,13 @@ recipeExecutionStillOpen = refl
 sameKeyBAOVectorStillNotDerived :
   sameKeyBAOVectorDerived daoPinnedExtractionRecipe ≡ false
 sameKeyBAOVectorStillNotDerived = refl
+
+parameterManifestStillBlocksExecutionClaim :
+  Manifest.independentTargetExecutableManifestFrozen
+    Manifest.canonicalDAOParameterManifestStatus
+  ≡ false
+parameterManifestStillBlocksExecutionClaim =
+  Manifest.independentTargetManifestStillOpen
 
 ------------------------------------------------------------------------
 -- Same-key extraction requests.  These retain the exact observation identity
