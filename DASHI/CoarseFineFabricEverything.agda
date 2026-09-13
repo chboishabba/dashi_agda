@@ -10,6 +10,9 @@ import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ObserverFactorizedRefinementExact
 import DASHI.Core.NDimParetoHyperfabricExact
 import DASHI.Core.NDimProjectionLossAdapterExact
+import DASHI.Core.DynamicalQuotientSafety
+import DASHI.Core.CoarseDynamicsTraceCongruenceExact
+import DASHI.Core.CoarseDynamicsTraceCongruenceRegression
 
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
 import DASHI.Biology.JCoarseFineFabricCalculusAdapterExact
