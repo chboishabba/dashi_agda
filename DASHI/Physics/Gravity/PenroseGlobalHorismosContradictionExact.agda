@@ -6,13 +6,16 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Gravity.CausalFutureHorismosNullGeneratorExact as Causal
 import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
+import DASHI.Physics.Gravity.PenroseHorismosCompactnessPaymentExact as Compactness
 import DASHI.Physics.Gravity.Penrose1965NullGeodesicIncompletenessExact as Penrose
 
 ------------------------------------------------------------------------
 -- Global causal/topological Penrose contradiction boundary.
 --
--- The explicit causal-boundary consumer now supplies the I+/J+/E+ semantics
--- and generator-exit rule used by the compactness side of the reductio.
+-- The compactness side now consumes an explicit payment owner:
+-- compact trapped surface + uniform generator bound + compact parameter domain
+-- + continuous generator image + closed horismos.  The noncompact-Cauchy side
+-- remains a separate global causal/topological authority obligation.
 ------------------------------------------------------------------------
 
 data GlobalPenroseObject : Set where
@@ -116,6 +119,9 @@ causalBoundaryConsumer = Causal.CausalFutureHorismosBoundary
 
 localFocusingConsumer : Set
 localFocusingConsumer = Focusing.NullOpticalFocusingBoundary
+
+horismosCompactnessConsumer : Set
+horismosCompactnessConsumer = Compactness.PenroseHorismosCompactnessBoundary
 
 penroseTheoremConsumer : Set
 penroseTheoremConsumer = Penrose.Penrose1965TheoremBoundary
