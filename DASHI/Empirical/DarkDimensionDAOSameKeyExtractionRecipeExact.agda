@@ -3,6 +3,7 @@ module DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationKey
 
@@ -23,8 +24,11 @@ import DASHI.Empirical.DarkDimensionSharedBAOObservationKeyExact as ObservationK
 -- For each DESI observation key z:
 --   D_M(z)/r_d = (1+z) * angular_distance(z) / rs_drag
 --   D_H(z)/r_d = (1/Hubble(z)) / rs_drag
--- where the CLASS background Hubble quantity is used in its native inverse-Mpc
--- convention and rs_drag is the baryon-drag sound horizon in Mpc.
+--
+-- Important WrongType boundary:
+--   rs_drag   = baryon-drag sound horizon used by the DESI BAO denominator;
+--   rs_d_drmd = model-specific dark-radiation/matter sound horizon.
+-- The public DRMD repository exposes both, but they are not interchangeable.
 ------------------------------------------------------------------------
 
 transverseDistanceFormula : String
@@ -34,6 +38,15 @@ transverseDistanceFormula =
 radialDistanceFormula : String
 radialDistanceFormula =
   "D_H(z)/r_d = (1/Hubble(z)) / rs_drag"
+
+data DarkSoundHorizonSubstitutesForBAODragHorizon : Set where
+
+darkSoundHorizonDoesNotSubstituteForBAODragHorizon :
+  DarkSoundHorizonSubstitutesForBAODragHorizon → ⊥
+darkSoundHorizonDoesNotSubstituteForBAODragHorizon ()
+
+darkSoundHorizonAPI : String
+darkSoundHorizonAPI = "rs_d_drmd"
 
 record DAOSameKeyExtractionRecipe : Set where
   constructor daoSameKeyExtractionRecipe
@@ -46,6 +59,7 @@ record DAOSameKeyExtractionRecipe : Set where
     angularDistanceAPI : String
     hubbleAPI : String
     dragSoundHorizonAPI : String
+    modelSpecificDarkSoundHorizonAPI : String
     transverseFormula : String
     radialFormula : String
     recipeSourcePinned : Bool
@@ -65,6 +79,7 @@ daoPinnedExtractionRecipe =
     "angular_distance"
     "Hubble"
     "rs_drag"
+    darkSoundHorizonAPI
     transverseDistanceFormula
     radialDistanceFormula
     true
