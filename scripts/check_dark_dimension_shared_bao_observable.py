@@ -19,13 +19,17 @@ REQUIRED = {
         "10.1103/1rsq-cv2m",
         "10.1103/y31p-9g5k",
     ],
-    "DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda": [
-        "import DASHI.Empirical.DarkDimensionSharedBAOObservableExact as SharedBAO",
+    "DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda": [
+        "module DASHI.Empirical.DarkDimensionSharedBAOProspectiveWeldExact where",
         "sharedBAOIdentityPaidButNumericalSeparationOpen",
+        "sharedBAOStillDoesNotLockProspectivePacket",
+        "DarkDimensionSharedBAOObservableExact",
+        "DarkDimensionProspectiveDiscriminatorExact",
     ],
     ".github/workflows/gr-quantum-empirical-validation.yml": [
         "python scripts/check_dark_dimension_shared_bao_observable.py",
         "DASHI/Empirical/DarkDimensionSharedBAOObservableExact.agda",
+        "DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda",
     ],
 }
 
