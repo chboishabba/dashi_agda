@@ -39,6 +39,7 @@ import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact
 import DASHI.Cognition.PNF.DecisionStateBundleExact
 import DASHI.Cognition.PNF.DecisionStateBundleDynamicsExact
 import DASHI.Cognition.PNF.DecisionActionFibreMultiplicityExact
+import DASHI.Cognition.PNF.JamesSensorimotorDecisionActionExact
 import DASHI.Cognition.PNF.DecisionConfidenceNoncollapseExact
 import DASHI.Cognition.PNF.DecisionConflictAuditSeparationExact
 import DASHI.Cognition.PNF.DecisionLandscapeFluxExact
