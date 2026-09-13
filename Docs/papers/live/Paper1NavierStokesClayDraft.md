@@ -386,6 +386,22 @@ The Round62 Com/Schur paper interface is retained for the same reason: it
 contains theorem-bearing intermediate reductions and falsifiers, but it is no
 longer the canonical Paper-1 producer surface.
 
+### Legacy publication-readiness compatibility vocabulary
+
+This paragraph exists only so the older publication-readiness automation can
+continue to recognize the June route after the canonical migration.  Every
+marker in it is historical, not a statement of the current live frontier.
+
+At the time, **A1 A3** was described as the **live mathematical wall**; the
+**Abel weighted triadic** defect and quantitative **stationarity** problem were
+its main terms.  **A4** contained the independent **actual theorem walls** for
+support transfer, with **CKN BKM** and **global regularity** only downstream.
+The source/intake vocabulary included `Seregin2012`, `ESS2003`, the `Type-I`
+rescaling/`ancient`-solution setting, and `L^{3,\infty}`.  `A3.2` was the
+Seregin/ESS intake; the `A3.3` rate `r^(1/12)` was a target, **not derived** and
+not promoted.  The old **Route compatibility** note kept the `Sprint164`
+microlocal route **separate** from the `tail-flux` / `Abel` route.
+
 ### Historical claim firewall
 
 Nothing in this migration retroactively declares the June route proved or
