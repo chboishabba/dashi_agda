@@ -11,6 +11,7 @@ import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 --
 -- The production owner is required to keep sensing, fused inference,
 -- operating context, threat assessment, and mitigation authority distinct.
+-- This file is committed before those owners as the TDD red contract.
 ------------------------------------------------------------------------
 
 record CounterUASDroneShieldRegression : Set₁ where
