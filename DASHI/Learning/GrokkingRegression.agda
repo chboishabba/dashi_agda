@@ -6,6 +6,7 @@ open import DASHI.Learning.GrokkingOperatorContract
 open import DASHI.Learning.GrokkingCOLBridge
 open import DASHI.Learning.Mod97WeightDecayReceipt
 open import DASHI.Learning.Mod97GrokkingBoundary
+open import DASHI.Learning.GrokkingCircuitTemporalAlignmentRegression
 
 modulus-regression : modulus ≡ 97
 modulus-regression = refl
