@@ -17,12 +17,6 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 
 ------------------------------------------------------------------------
 -- VIRAL DROSOPHILA -> SYMBOLIC-INTERFACE FORMALISATION
---
--- This owner formalises the interface/evaluation geometry of the current
--- "fruit fly writes Python" demo wave. It does not identify a connectome map
--- with executable dynamics, a software simulation with living-fly cognition,
--- emitted symbols with semantic understanding, or one FizzBuzz success with
--- general programming competence.
 ------------------------------------------------------------------------
 
 socialDemoSource : Source.AttributedSource
@@ -87,11 +81,6 @@ exactFizzBuzzArtifactStillUnpaid = refl
 
 ------------------------------------------------------------------------
 -- Object-indexed social/demo evidence.
---
--- Current public evidence says the adjacent Capy Tetris object used "1 prompt
--- and Slack".  That assistance fact is useful, but it belongs to a different
--- run.  It cannot be copied across to the Python/FizzBuzz object without a
--- same-object receipt.
 ------------------------------------------------------------------------
 
 data DemoObject : Set where
@@ -108,9 +97,7 @@ adjacentDemoAssistanceDoesNotTransferToPythonRun :
 adjacentDemoAssistanceDoesNotTransferToPythonRun ()
 
 ------------------------------------------------------------------------
--- Identity evidence is also stratified.  We can retain strong cross-platform
--- corroboration without silently upgrading it to a strict same-object receipt
--- for the exact social-demo account/run.
+-- Identity evidence stratification.
 ------------------------------------------------------------------------
 
 record IdentityCorroboration : Set where
@@ -233,10 +220,6 @@ record SymbolicInterfaceExperiment : Set where
 
 open SymbolicInterfaceExperiment public
 
-------------------------------------------------------------------------
--- Minimal finite symbolic interface witness.
-------------------------------------------------------------------------
-
 canonicalAssistanceBudget : AssistanceBudget
 canonicalAssistanceBudget = assistanceBudget
   "external sensory/task encoding"
@@ -268,9 +251,7 @@ canonicalSocialDemoExperiment = symbolicInterfaceExperiment
   mappedTokenEmission
 
 ------------------------------------------------------------------------
--- Output nonfactorability: the same emitted program text can coexist with
--- different executable/neural states. Recharting the program text cannot
--- recover neural information erased by that projection.
+-- Output nonfactorability.
 ------------------------------------------------------------------------
 
 programTextProjection : ExecutableState → ProgramText
@@ -304,10 +285,6 @@ programTextDoesNotRecoverNeuralObservation :
 programTextDoesNotRecoverNeuralObservation =
   NF.witnessRulesOutEveryFlatFactorisation
     programTextNeuralNonFactorabilityWitness
-
-------------------------------------------------------------------------
--- Learning/update lane is distinct from interface success.
-------------------------------------------------------------------------
 
 learningUpdateWitness : Memory.MemoryFibre → Memory.MemoryFibre
 learningUpdateWitness = Feedback.learnFromOutcome Feedback.reinforcingOutcome
@@ -388,8 +365,7 @@ sharedDisplayNameDoesNotEstablishPersonIdentity :
 sharedDisplayNameDoesNotEstablishPersonIdentity ()
 
 ------------------------------------------------------------------------
--- Null-model obligations for any stronger "biological topology advantage"
--- claim.
+-- Null-model obligations.
 ------------------------------------------------------------------------
 
 data NullModelKind : Set where
@@ -425,10 +401,6 @@ canonicalNullComparisonObligation = nullComparisonObligation
 connectomeAdvantageRequiresNullComparison :
   ConnectomeCausalAdvantagePermission → ⊥
 connectomeAdvantageRequiresNullComparison ()
-
-------------------------------------------------------------------------
--- Cross-pollination with Animalexic.
-------------------------------------------------------------------------
 
 animalexicBoundary : Animalexic.DrosophilaAnimalexicBoundary
 animalexicBoundary = Animalexic.noNeuralStateEqualsBehaviourMotif
