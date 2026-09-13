@@ -37,57 +37,61 @@ unmeasuredRoutingTransitionRemainsOpen = refl , refl , refl
 
 canonicalConflictCarrierReuseStillNeedsNoDuplicate : Bridge.localDuplicateConflictOntologyAdded Bridge.currentConflictCarrierIntegrationResidual ≡ false
 canonicalConflictCarrierReuseStillNeedsNoDuplicate = refl
-
 canonicalReducerAdapterIsPaid : Bridge.canonicalReducerRelationAdapterPaid Bridge.currentConflictCarrierIntegrationResidual ≡ true
 canonicalReducerAdapterIsPaid = refl
-
 canonicalConflictRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalConflict ≡ Bridge.conflict
 canonicalConflictRelationRoundTrips = refl
-
 canonicalRequirementRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalRequirement ≡ Bridge.gluingRequirement
 canonicalRequirementRelationRoundTrips = refl
-
 canonicalIndependentRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalIndependent ≡ Bridge.independent
 canonicalIndependentRelationRoundTrips = refl
-
 rebaseResidualIsDischarged : Bridge.rebaseNeededBeforeCanonicalImport Bridge.currentConflictCarrierIntegrationResidual ≡ false
 rebaseResidualIsDischarged = refl
-
 conflictFreeStillDoesNotMeanRequirementClosed : Bridge.conflictFreeImpliesRequirementClosed ≡ false
 conflictFreeStillDoesNotMeanRequirementClosed = refl
 
 activationCorrelationAloneCannotPayConflict : Bridge.activationCorrelationAlonePaysConflict ≡ false
 activationCorrelationAloneCannotPayConflict = refl
-
 jointInterventionIsRequiredForConflictPayment : Bridge.jointInterventionRequiredForConflict ≡ true
 jointInterventionIsRequiredForConflictPayment = refl
-
 unpaidPairCannotPromoteRelation : Bridge.relationPromotionPaid Bridge.unpaidCircuitPairIntervention ≡ false
 unpaidPairCannotPromoteRelation = refl
-
 paidSyntheticConflictUsesCanonicalConflict : Bridge.proposedRelation Bridge.syntheticPaidConflictIntervention ≡ Bridge.conflict × Bridge.relationPromotionPaid Bridge.syntheticPaidConflictIntervention ≡ true
 paidSyntheticConflictUsesCanonicalConflict = refl , refl
-
 conflictReceiptDoesNotClaimRealGrokkingMeasurement : Bridge.syntheticConflictIsEmpiricalGrokkingResult ≡ false
 conflictReceiptDoesNotClaimRealGrokkingMeasurement = refl
 
 interactionResidualUsesJointMinusSingles : Bridge.interactionExcess Bridge.syntheticConflictScore ≡ 3
 interactionResidualUsesJointMinusSingles = refl
-
 thresholdedPositiveInteractionClassifiesConflict : Bridge.classifyPair Bridge.syntheticConflictScore ≡ Bridge.classified Bridge.conflict
 thresholdedPositiveInteractionClassifiesConflict = refl
-
 explicitDependencyClassifiesRequirement : Bridge.classifyPair Bridge.syntheticRequirementScore ≡ Bridge.classified Bridge.gluingRequirement
 explicitDependencyClassifiesRequirement = refl
-
 additiveJointEffectClassifiesIndependent : Bridge.classifyPair Bridge.syntheticIndependentScore ≡ Bridge.classified Bridge.independent
 additiveJointEffectClassifiesIndependent = refl
-
 underpoweredPairRemainsUnclassified : Bridge.classifyPair Bridge.syntheticUnderpoweredScore ≡ Bridge.underpowered
 underpoweredPairRemainsUnclassified = refl
-
 correlationIsNotClassifierInput : Bridge.activationCorrelationIsClassificationInput ≡ false
 correlationIsNotClassifierInput = refl
-
 classifierExamplesAreNotEmpiricalGrokkingResults : Bridge.classifierIsEmpiricalGrokkingResult ≡ false
 classifierExamplesAreNotEmpiricalGrokkingResults = refl
+
+rawCapacityCanIncreaseWithoutBetaIncrease :
+  Bridge.rawCandidateCount Bridge.extraBlockedCapacitySystem ≡ 4 ×
+  Bridge.betaClosedCompatible Bridge.extraBlockedCapacitySystem ≡ 2 ×
+  Bridge.betaClosedCompatible Bridge.baseClosedCompatibleSystem ≡ 2
+rawCapacityCanIncreaseWithoutBetaIncrease = refl , refl , refl
+
+removingConflictStrictlyIncreasesBeta :
+  Bridge.betaClosedCompatible Bridge.baseClosedCompatibleSystem <
+  Bridge.betaClosedCompatible Bridge.conflictRemovedSystem
+removingConflictStrictlyIncreasesBeta = s≤s (s≤s (s≤s z≤n))
+
+closingRequirementStrictlyIncreasesBeta :
+  Bridge.betaClosedCompatible Bridge.requirementOpenSystem <
+  Bridge.betaClosedCompatible Bridge.requirementClosedSystem
+closingRequirementStrictlyIncreasesBeta = s≤s (s≤s z≤n)
+
+betaIsFiniteWitnessNotUniversalOptimizer :
+  Bridge.betaWitnessIsUniversalGrokkingObjective ≡ false
+betaIsFiniteWitnessNotUniversalOptimizer = refl
