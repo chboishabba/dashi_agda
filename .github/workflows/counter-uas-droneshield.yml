@@ -15,6 +15,9 @@ on:
       - 'DASHI/Applications/OpenClosedWorldRecognitionExact.agda'
       - 'DASHI/Applications/OpenClosedWorldRecognitionRegression.agda'
       - 'DASHI/Applications/OpenClosedWorldRecognitionSourceAtlasExact.agda'
+      - 'DASHI/Applications/CounterUASSensibLawAuthorityBridgeExact.agda'
+      - 'DASHI/Law/SensibLawInternationalInstrumentLifecycleExact.agda'
+      - 'DASHI/Law/SensibLawCCWLAWS2026Exact.agda'
       - '.github/workflows/counter-uas-droneshield.yml'
   workflow_dispatch:
 
