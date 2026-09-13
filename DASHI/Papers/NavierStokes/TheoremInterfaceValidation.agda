@@ -14,42 +14,44 @@ import DASHI.Papers.NavierStokes.TheoremInterface as Paper
 -- analytic producers are open.
 ------------------------------------------------------------------------
 
+status = Paper.canonicalNSPaperTheoremStatus
+
 directCompanionConstructedIsTrue :
-  Paper.directCompanionConstructed ≡ true
+  Paper.NSPaperTheoremStatus.directCompanionConstructed status ≡ true
 directCompanionConstructedIsTrue =
-  Paper.directCompanionConstructedIsTrue Paper.canonicalNSPaperTheoremStatus
+  Paper.NSPaperTheoremStatus.directCompanionConstructedIsTrue status
 
 directLeafACompilerConstructedIsTrue :
-  Paper.directLeafACompilerConstructed ≡ true
+  Paper.NSPaperTheoremStatus.directLeafACompilerConstructed status ≡ true
 directLeafACompilerConstructedIsTrue =
-  Paper.directLeafACompilerConstructedIsTrue Paper.canonicalNSPaperTheoremStatus
+  Paper.NSPaperTheoremStatus.directLeafACompilerConstructedIsTrue status
 
 directOffDiagonalConsumerConstructedIsTrue :
-  Paper.directOffDiagonalConsumerConstructed ≡ true
+  Paper.NSPaperTheoremStatus.directOffDiagonalConsumerConstructed status ≡ true
 directOffDiagonalConsumerConstructedIsTrue =
-  Paper.directOffDiagonalConsumerConstructedIsTrue Paper.canonicalNSPaperTheoremStatus
+  Paper.NSPaperTheoremStatus.directOffDiagonalConsumerConstructedIsTrue status
 
 commutatorOnlySpacetimeProducerClosedIsFalse :
-  Paper.commutatorOnlySpacetimeProducerClosed ≡ false
+  Paper.NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosed status ≡ false
 commutatorOnlySpacetimeProducerClosedIsFalse =
-  Paper.commutatorOnlySpacetimeProducerClosedIsFalse Paper.canonicalNSPaperTheoremStatus
+  Paper.NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosedIsFalse status
 
 sameOutputDebtPaymentClosedIsFalse :
-  Paper.sameOutputDebtPaymentClosed ≡ false
+  Paper.NSPaperTheoremStatus.sameOutputDebtPaymentClosed status ≡ false
 sameOutputDebtPaymentClosedIsFalse =
-  Paper.sameOutputDebtPaymentClosedIsFalse Paper.canonicalNSPaperTheoremStatus
+  Paper.NSPaperTheoremStatus.sameOutputDebtPaymentClosedIsFalse status
 
 p3SeparationProducerClosedIsFalse :
-  Paper.p3SeparationProducerClosed ≡ false
+  Paper.NSPaperTheoremStatus.p3SeparationProducerClosed status ≡ false
 p3SeparationProducerClosedIsFalse =
-  Paper.p3SeparationProducerClosedIsFalse Paper.canonicalNSPaperTheoremStatus
+  Paper.NSPaperTheoremStatus.p3SeparationProducerClosedIsFalse status
 
 historicalA1A9RetainedIsTrue :
-  Paper.historicalA1A9Retained ≡ true
+  Paper.NSPaperTheoremStatus.historicalA1A9Retained status ≡ true
 historicalA1A9RetainedIsTrue =
-  Paper.historicalA1A9RetainedIsTrue Paper.canonicalNSPaperTheoremStatus
+  Paper.NSPaperTheoremStatus.historicalA1A9RetainedIsTrue status
 
 clayTerminalPromotionIsFalse :
-  Paper.clayTerminalPromotion ≡ false
+  Paper.NSPaperTheoremStatus.clayTerminalPromotion status ≡ false
 clayTerminalPromotionIsFalse =
-  Paper.clayTerminalPromotionIsFalse Paper.canonicalNSPaperTheoremStatus
+  Paper.NSPaperTheoremStatus.clayTerminalPromotionIsFalse status
