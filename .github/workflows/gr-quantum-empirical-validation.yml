@@ -17,11 +17,11 @@ on:
       - 'scripts/check_dark_dimension_quantitative_envelope.py'
       - 'scripts/check_dark_dimension_prediction_quantity_adapter.py'
       - 'scripts/check_dark_dimension_model_observable_matrix.py'
+      - 'scripts/check_dark_dimension_shared_bao_observable.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
   workflow_dispatch:
-
 
 concurrency:
   group: dashi-global-${{ github.ref }}
@@ -50,6 +50,7 @@ jobs:
           python scripts/check_dark_dimension_quantitative_envelope.py
           python scripts/check_dark_dimension_prediction_quantity_adapter.py
           python scripts/check_dark_dimension_model_observable_matrix.py
+          python scripts/check_dark_dimension_shared_bao_observable.py
 
   agda-empirical-atlas:
     runs-on: ubuntu-24.04
@@ -88,7 +89,9 @@ jobs:
           check_agda DASHI/Empirical/DarkDimensionPredictionQuantityAdapterExact.agda
           check_agda DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda
           check_agda DASHI/Empirical/DarkDimensionModelObservableMatrixExact.agda
+          check_agda DASHI/Empirical/DarkDimensionSharedBAOObservableExact.agda
           check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
+          check_agda DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda
           check_agda DASHI/Unified/DarkDimensionGRQuantumPromotionAdapterExact.agda
           cat /tmp/gr-quantum-empirical-agda.log
       - name: Upload Agda diagnostic
