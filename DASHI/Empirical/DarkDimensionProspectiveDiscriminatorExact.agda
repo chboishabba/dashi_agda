@@ -12,6 +12,7 @@ import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as AxisJoin
 import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 import DASHI.Empirical.DarkDimensionEmpiricalDiscriminationExact as Discrimination
 import DASHI.Empirical.DarkDimensionQuantitativeEnvelopeExact as Quantitative
+import DASHI.Empirical.DarkDimensionModelObservableMatrixExact as ModelMatrix
 import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension
 
 ------------------------------------------------------------------------
@@ -27,7 +28,9 @@ import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDi
 --   * DarkDimensionEmpiricalDiscriminationExact owns the retrospective
 --     DESI-era fit/comparator boundary;
 --   * DarkDimensionQuantitativeEnvelopeExact owns source-precision-aware
---     numerical/range coordinates without promoting them to a forecast.
+--     numerical/range coordinates without promoting them to a forecast;
+--   * DarkDimensionModelObservableMatrixExact requires a head-to-head numeric
+--     comparison to live on the same measured observable.
 --
 -- This module contributes only the missing prospective *shape*:
 --
@@ -89,10 +92,6 @@ jointAxisRetainsShortRangeGravity =
 
 ------------------------------------------------------------------------
 -- Transverse nonfactorability.
---
--- These finite witnesses do not assert that any particular future observation
--- will occur.  They establish the information-geometry fact needed by the
--- prospective design: fixing one axis does not determine the other axis.
 ------------------------------------------------------------------------
 
 sameCosmologyGravitySupported : ProspectiveObservationState
@@ -246,8 +245,7 @@ darkDimensionMicronGravityTarget =
     false
 
 ------------------------------------------------------------------------
--- Packet status.  The target axes are selected but the actual predictive
--- separation and preregistration are intentionally still unpaid.
+-- Packet status.
 ------------------------------------------------------------------------
 
 record ProspectiveDiscriminatorPacket : Set where
@@ -295,6 +293,13 @@ quantitativeEnvelopeCrossModelSeparationStillOpen :
 quantitativeEnvelopeCrossModelSeparationStillOpen =
   Quantitative.crossModelNumericalSeparationStillOpen
 
+modelObservableMatrixStillBlocksLockedSeparation :
+  ModelMatrix.sharedObservableNumericalSeparationLocked
+    ModelMatrix.canonicalModelObservableMatrixStatus
+  ≡ false
+modelObservableMatrixStillBlocksLockedSeparation =
+  ModelMatrix.sharedObservableNumericalSeparationStillOpen
+
 ------------------------------------------------------------------------
 -- Promotion / WrongType firewalls.
 ------------------------------------------------------------------------
@@ -340,8 +345,6 @@ jointAxisStillDoesNotPayStringTheory witness =
 
 ------------------------------------------------------------------------
 -- Cross-pollination with the strict GR/quantum prediction boundary.
--- Selecting future axes and keeping data held out is progress, but it is not
--- the same object as a DASHI-derived QuantitativeFalsifiablePrediction.
 ------------------------------------------------------------------------
 
 prospectivePacketDoesNotBecomeDASHIDerivedPrediction :
