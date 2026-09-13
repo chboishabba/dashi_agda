@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# This file is also a pull-request trigger for the focused GR/Penrose kernel workflow.
 INTRINSIC = ROOT / "DASHI/Physics/Gravity/IntrinsicSpacetimeCurvatureInterpretationExact.agda"
 CAUSAL = ROOT / "DASHI/Physics/Gravity/CausalFutureHorismosNullGeneratorExact.agda"
 FOCUSING = ROOT / "DASHI/Physics/Gravity/NullRaychaudhuriSachsFocusingExact.agda"
