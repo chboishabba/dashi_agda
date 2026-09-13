@@ -12,6 +12,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "run_continuous_oscillator_synthetic.py"
 OUTPUT_STEM = "continuous_oscillator_synthetic"
+RECEIPT = ROOT / "DASHI" / "Cognition" / "PNF" / "ContinuousOscillatorSyntheticReceipt.agda"
+AGGREGATE = ROOT / "DASHI" / "Cognition" / "PNF" / "PNFIRLearningEverything.agda"
 
 FAIL_CLOSED_FLAGS = {
     "neuroscience_interpretation_promoted": False,
@@ -128,3 +130,37 @@ def test_comparison_surface_does_not_encode_a_required_369_ranking(tmp_path: Pat
     }
     assert set(payload["comparison_by_count"]) == {"3", "6", "9"}
     assert payload["promotion"]["flags"]["three_six_nine_superiority_promoted"] is False
+
+
+def test_agda_receipt_keeps_numerical_execution_and_semantic_promotion_separate() -> None:
+    receipt = RECEIPT.read_text(encoding="utf-8")
+    aggregate = AGGREGATE.read_text(encoding="utf-8")
+
+    required_receipt_tokens = [
+        "module DASHI.Cognition.PNF.ContinuousOscillatorSyntheticReceipt where",
+        "syntheticThreeConditionExecuted",
+        "syntheticSixConditionExecuted",
+        "syntheticNineConditionExecuted",
+        "fixedFrequencies",
+        "neuroscienceInterpretationPromoted",
+        "memoryMechanismPromoted",
+        "hebbianIdentityPromoted",
+        "kuramotoIdentityPromoted",
+        "cognitiveDissonanceIdentityPromoted",
+        "empiricalBrainFitPromoted",
+        "threeSixNineSuperiorityPromoted",
+        "quantumInterpretationPromoted",
+        "syntheticThreeConditionExecutedIsTrue",
+        "syntheticSixConditionExecutedIsTrue",
+        "syntheticNineConditionExecutedIsTrue",
+        "fixedFrequenciesIsTrue",
+        "neuroscienceInterpretationPromotedIsFalse",
+        "threeSixNineSuperiorityPromotedIsFalse",
+    ]
+    for token in required_receipt_tokens:
+        assert token in receipt
+
+    assert (
+        "import DASHI.Cognition.PNF.ContinuousOscillatorSyntheticReceipt"
+        in aggregate
+    )
