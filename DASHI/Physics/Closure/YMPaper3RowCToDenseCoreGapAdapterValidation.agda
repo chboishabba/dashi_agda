@@ -1,0 +1,14 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Closure.YMPaper3RowCToDenseCoreGapAdapterValidation where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.YMPaper3RowCToDenseCoreGapAdapterExact as Adapter
+
+rowCToDenseCoreCompilerIsMachineChecked : ProofLevel
+rowCToDenseCoreCompilerIsMachineChecked = Adapter.rowCToDenseCoreCompilerLevel
+
+rowCToDenseCoreSameObjectWeldRemainsConditional : ProofLevel
+rowCToDenseCoreSameObjectWeldRemainsConditional = Adapter.rowCToDenseCoreSameObjectWeldLevel
+
+physicalDenseCoreProjectionDataRemainsConditional : ProofLevel
+physicalDenseCoreProjectionDataRemainsConditional = Adapter.physicalDenseCoreProjectionDataLevel

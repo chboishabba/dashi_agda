@@ -27,6 +27,11 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectAnalyticFrontierEverythin
 -- owner keeps Clay's any-one criterion distinct from DASHI's stronger all-four
 -- research mission.  Neither chronology nor external C/D source status pays a
 -- missing internal theorem.
+--
+-- The archaeology ledger additionally supplies two representation owners:
+-- the standard-authority periodic-torus character integral, and the R571
+-- homochiral radial-increment specialization.  They preserve the separate
+-- radial/source seam; neither supplies an analytic payment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -68,6 +73,8 @@ import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact
 import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact as R592
 import DASHI.Physics.Closure.NSFirstImplementationPriorityLedgerExact as Priority
 import DASHI.Physics.Closure.NSGlobalFourAlternativeMissionExact as Global4
+import DASHI.Physics.Closure.NSTriadKNOfficialPeriodicTorusCharacterIntegralExact
+import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact
 
 round569DirectAnalyticFrontierIntegrated : Bool
 round569DirectAnalyticFrontierIntegrated = true
@@ -155,8 +162,32 @@ round569CanonicalDirectR503BudgetClosed = R592.round592CanonicalLeafAClosed
 round569GlobalAllFourInternallyPaid : Bool
 round569GlobalAllFourInternallyPaid = Global4.roundGlobalAllFourInternallyPaid
 
+round569OfficialPeriodicTorusCharacterIntegralIntegrated : Bool
+round569OfficialPeriodicTorusCharacterIntegralIntegrated = true
+
+round569R571HomochiralRadialIncrementIntegrated : Bool
+round569R571HomochiralRadialIncrementIntegrated = true
+
 round569ParallelLeafAConsumersRemain : Bool
 round569ParallelLeafAConsumersRemain = false
+
+round569NovelCommutatorSpacetimeBudgetClosed : Bool
+round569NovelCommutatorSpacetimeBudgetClosed = false
+
+round569VariableFibreSignedGramResidualClosed : Bool
+round569VariableFibreSignedGramResidualClosed = false
+
+round569ClasswiseSignedGramResidualsClosed : Bool
+round569ClasswiseSignedGramResidualsClosed = false
+
+round569LiteralNestedSlotClassNormBudgetsClosed : Bool
+round569LiteralNestedSlotClassNormBudgetsClosed = false
+
+round569OuterWeightSpectatorSpacetimeClosed : Bool
+round569OuterWeightSpectatorSpacetimeClosed = false
+
+round569RadialNearAnalyticGainClosed : Bool
+round569RadialNearAnalyticGainClosed = false
 
 round569ClayPromotion : Bool
 round569ClayPromotion = false
