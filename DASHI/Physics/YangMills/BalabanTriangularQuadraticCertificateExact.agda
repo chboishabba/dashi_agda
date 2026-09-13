@@ -42,63 +42,99 @@ evalTri (qcons diagonal row tail) [] = 0ℚ
 evalTri (qcons diagonal row tail) (x ∷ xs) =
   diagonal * x * x + x * dot row xs + evalTri tail xs
 
+twoℚ : ℚ
+twoℚ = 1ℚ + 1ℚ
+
+scalarMulZeroRaw : ∀ s → 0ℚ ≡ s * 0ℚ
+scalarMulZeroRaw = ℚRing.solve-∀
+
+zeroPlusZeroRaw : 0ℚ ≡ 0ℚ + 0ℚ
+zeroPlusZeroRaw = ℚRing.solve-∀
+
+zeroPlusRaw : ∀ y → y ≡ 0ℚ + y
+zeroPlusRaw = ℚRing.solve-∀
+
+plusZeroRaw : ∀ y → y ≡ y + 0ℚ
+plusZeroRaw = ℚRing.solve-∀
+
+zeroMulZeroRaw : 0ℚ * 0ℚ ≡ 0ℚ
+zeroMulZeroRaw = ℚRing.solve-∀
+
+dotScaleStepRaw : ∀ s a x d →
+  (s * a) * x + s * d ≡ s * (a * x + d)
+dotScaleStepRaw = ℚRing.solve-∀
+
 dotScale : ∀ scalar coefficients coordinates →
   dot (scaleList scalar coefficients) coordinates
   ≡ scalar * dot coefficients coordinates
-dotScale scalar [] coordinates = ℚRing.solve-∀
-dotScale scalar coefficients [] = ℚRing.solve-∀
+dotScale scalar [] coordinates = scalarMulZeroRaw scalar
+dotScale scalar (a ∷ as) [] = scalarMulZeroRaw scalar
 dotScale scalar (a ∷ as) (x ∷ xs)
-  rewrite dotScale scalar as xs = ℚRing.solve-∀
+  rewrite dotScale scalar as xs = dotScaleStepRaw scalar a x (dot as xs)
+
+dotAddStepRaw : ∀ a b x da db →
+  (a + b) * x + (da + db) ≡ (a * x + da) + (b * x + db)
+dotAddStepRaw = ℚRing.solve-∀
 
 dotAdd : ∀ left right coordinates →
   dot (addList left right) coordinates
   ≡ dot left coordinates + dot right coordinates
-dotAdd [] right [] = ℚRing.solve-∀
-dotAdd [] right (x ∷ xs) = ℚRing.solve-∀
-dotAdd (a ∷ as) [] [] = ℚRing.solve-∀
-dotAdd (a ∷ as) [] (x ∷ xs) = ℚRing.solve-∀
-dotAdd (a ∷ as) (b ∷ bs) [] = ℚRing.solve-∀
+dotAdd [] right coordinates = zeroPlusRaw (dot right coordinates)
+dotAdd (a ∷ as) [] coordinates = plusZeroRaw (dot (a ∷ as) coordinates)
+dotAdd (a ∷ as) (b ∷ bs) [] = zeroPlusZeroRaw
 dotAdd (a ∷ as) (b ∷ bs) (x ∷ xs)
-  rewrite dotAdd as bs xs = ℚRing.solve-∀
+  rewrite dotAdd as bs xs = dotAddStepRaw a b x (dot as xs) (dot bs xs)
+
+evalScaleStepRaw : ∀ s d x r t →
+  (s * d) * x * x + x * (s * r) + s * t
+  ≡ s * (d * x * x + x * r + t)
+evalScaleStepRaw = ℚRing.solve-∀
 
 evalScale : ∀ scalar quadratic coordinates →
   evalTri (scaleTri scalar quadratic) coordinates
   ≡ scalar * evalTri quadratic coordinates
-evalScale scalar qnil coordinates = ℚRing.solve-∀
-evalScale scalar (qcons diagonal row tail) [] = ℚRing.solve-∀
+evalScale scalar qnil coordinates = scalarMulZeroRaw scalar
+evalScale scalar (qcons diagonal row tail) [] = scalarMulZeroRaw scalar
 evalScale scalar (qcons diagonal row tail) (x ∷ xs)
   rewrite dotScale scalar row xs
         | evalScale scalar tail xs
-  = ℚRing.solve-∀
+  = evalScaleStepRaw scalar diagonal x (dot row xs) (evalTri tail xs)
+
+evalAddStepRaw : ∀ dl dr x rl rr tl tr →
+  (dl + dr) * x * x + x * (rl + rr) + (tl + tr)
+  ≡ (dl * x * x + x * rl + tl) + (dr * x * x + x * rr + tr)
+evalAddStepRaw = ℚRing.solve-∀
 
 evalAdd : ∀ left right coordinates →
   evalTri (addTri left right) coordinates
   ≡ evalTri left coordinates + evalTri right coordinates
-evalAdd qnil right coordinates = ℚRing.solve-∀
-evalAdd left qnil coordinates = ℚRing.solve-∀
-evalAdd (qcons dl rl tl) (qcons dr rr tr) [] = ℚRing.solve-∀
+evalAdd qnil right coordinates = zeroPlusRaw (evalTri right coordinates)
+evalAdd (qcons dl rl tl) qnil coordinates = plusZeroRaw (evalTri (qcons dl rl tl) coordinates)
+evalAdd (qcons dl rl tl) (qcons dr rr tr) [] = zeroPlusZeroRaw
 evalAdd (qcons dl rl tl) (qcons dr rr tr) (x ∷ xs)
   rewrite dotAdd rl rr xs
         | evalAdd tl tr xs
-  = ℚRing.solve-∀
-
-twoℚ : ℚ
-twoℚ = 1ℚ + 1ℚ
+  = evalAddStepRaw dl dr x (dot rl xs) (dot rr xs) (evalTri tl xs) (evalTri tr xs)
 
 squareLinear : List ℚ → TriQuadratic
 squareLinear [] = qnil
 squareLinear (a ∷ as) =
   qcons (a * a) (scaleList (twoℚ * a) as) (squareLinear as)
 
+squareDotStepRaw : ∀ a x d →
+  (a * x + d) * (a * x + d)
+  ≡ (a * a) * x * x + x * ((twoℚ * a) * d) + (d * d)
+squareDotStepRaw = ℚRing.solve-∀
+
 squareDot : ∀ coefficients coordinates →
   dot coefficients coordinates * dot coefficients coordinates
   ≡ evalTri (squareLinear coefficients) coordinates
-squareDot [] coordinates = ℚRing.solve-∀
-squareDot (a ∷ as) [] = ℚRing.solve-∀
+squareDot [] coordinates = zeroMulZeroRaw
+squareDot (a ∷ as) [] = zeroMulZeroRaw
 squareDot (a ∷ as) (x ∷ xs)
   rewrite dotScale (twoℚ * a) as xs
         | sym (squareDot as xs)
-  = ℚRing.solve-∀
+  = squareDotStepRaw a x (dot as xs)
 
 sumSquareTri : List (List ℚ) → TriQuadratic
 sumSquareTri [] = qnil

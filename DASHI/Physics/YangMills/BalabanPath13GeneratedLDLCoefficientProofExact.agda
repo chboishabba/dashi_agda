@@ -21,82 +21,267 @@ import DASHI.Physics.YangMills.BalabanTriangularQuadraticCertificateExact as Qua
 -- to the ring solver.
 ------------------------------------------------------------------------
 
+energyLinear0Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy0Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ b - a
+energyLinear0Raw = ℚRing.solve-∀
+
 energyLinear0 : ∀ c → Quad.dot energy0Coefficients (coordinates c) ≡ y1 c - y0 c
-energyLinear0 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear0 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear0Raw a b c d e f g h i j k l
+energyLinear1Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy1Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ c - b
+energyLinear1Raw = ℚRing.solve-∀
+
 energyLinear1 : ∀ c → Quad.dot energy1Coefficients (coordinates c) ≡ y2 c - y1 c
-energyLinear1 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear1 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear1Raw a b c d e f g h i j k l
+energyLinear2Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy2Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ d - c
+energyLinear2Raw = ℚRing.solve-∀
+
 energyLinear2 : ∀ c → Quad.dot energy2Coefficients (coordinates c) ≡ y3 c - y2 c
-energyLinear2 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear2 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear2Raw a b c d e f g h i j k l
+energyLinear3Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy3Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ e - d
+energyLinear3Raw = ℚRing.solve-∀
+
 energyLinear3 : ∀ c → Quad.dot energy3Coefficients (coordinates c) ≡ y4 c - y3 c
-energyLinear3 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear3 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear3Raw a b c d e f g h i j k l
+energyLinear4Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy4Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ f - e
+energyLinear4Raw = ℚRing.solve-∀
+
 energyLinear4 : ∀ c → Quad.dot energy4Coefficients (coordinates c) ≡ y5 c - y4 c
-energyLinear4 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear4 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear4Raw a b c d e f g h i j k l
+energyLinear5Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy5Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ g - f
+energyLinear5Raw = ℚRing.solve-∀
+
 energyLinear5 : ∀ c → Quad.dot energy5Coefficients (coordinates c) ≡ y6 c - y5 c
-energyLinear5 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear5 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear5Raw a b c d e f g h i j k l
+energyLinear6Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy6Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ h - g
+energyLinear6Raw = ℚRing.solve-∀
+
 energyLinear6 : ∀ c → Quad.dot energy6Coefficients (coordinates c) ≡ y7 c - y6 c
-energyLinear6 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear6 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear6Raw a b c d e f g h i j k l
+energyLinear7Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy7Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ i - h
+energyLinear7Raw = ℚRing.solve-∀
+
 energyLinear7 : ∀ c → Quad.dot energy7Coefficients (coordinates c) ≡ y8 c - y7 c
-energyLinear7 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear7 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear7Raw a b c d e f g h i j k l
+energyLinear8Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy8Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ j - i
+energyLinear8Raw = ℚRing.solve-∀
+
 energyLinear8 : ∀ c → Quad.dot energy8Coefficients (coordinates c) ≡ y9 c - y8 c
-energyLinear8 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear8 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear8Raw a b c d e f g h i j k l
+energyLinear9Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy9Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ k - j
+energyLinear9Raw = ℚRing.solve-∀
+
 energyLinear9 : ∀ c → Quad.dot energy9Coefficients (coordinates c) ≡ y10 c - y9 c
-energyLinear9 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear9 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear9Raw a b c d e f g h i j k l
+energyLinear10Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy10Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ l - k
+energyLinear10Raw = ℚRing.solve-∀
+
 energyLinear10 : ∀ c → Quad.dot energy10Coefficients (coordinates c) ≡ y11 c - y10 c
-energyLinear10 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear10 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear10Raw a b c d e f g h i j k l
+energyLinear11Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot energy11Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ lastCoordinate (path13Coordinates a b c d e f g h i j k l) - l
+energyLinear11Raw = ℚRing.solve-∀
+
 energyLinear11 : ∀ c → Quad.dot energy11Coefficients (coordinates c) ≡ lastCoordinate c - y11 c
-energyLinear11 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+energyLinear11 (path13Coordinates a b c d e f g h i j k l) =
+  energyLinear11Raw a b c d e f g h i j k l
+
+normLinear0Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm0Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ a
+normLinear0Raw = ℚRing.solve-∀
 
 normLinear0 : ∀ c → Quad.dot norm0Coefficients (coordinates c) ≡ y0 c
-normLinear0 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear0 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear0Raw a b c d e f g h i j k l
+normLinear1Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm1Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ b
+normLinear1Raw = ℚRing.solve-∀
+
 normLinear1 : ∀ c → Quad.dot norm1Coefficients (coordinates c) ≡ y1 c
-normLinear1 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear1 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear1Raw a b c d e f g h i j k l
+normLinear2Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm2Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ c
+normLinear2Raw = ℚRing.solve-∀
+
 normLinear2 : ∀ c → Quad.dot norm2Coefficients (coordinates c) ≡ y2 c
-normLinear2 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear2 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear2Raw a b c d e f g h i j k l
+normLinear3Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm3Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ d
+normLinear3Raw = ℚRing.solve-∀
+
 normLinear3 : ∀ c → Quad.dot norm3Coefficients (coordinates c) ≡ y3 c
-normLinear3 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear3 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear3Raw a b c d e f g h i j k l
+normLinear4Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm4Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ e
+normLinear4Raw = ℚRing.solve-∀
+
 normLinear4 : ∀ c → Quad.dot norm4Coefficients (coordinates c) ≡ y4 c
-normLinear4 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear4 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear4Raw a b c d e f g h i j k l
+normLinear5Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm5Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ f
+normLinear5Raw = ℚRing.solve-∀
+
 normLinear5 : ∀ c → Quad.dot norm5Coefficients (coordinates c) ≡ y5 c
-normLinear5 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear5 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear5Raw a b c d e f g h i j k l
+normLinear6Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm6Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ g
+normLinear6Raw = ℚRing.solve-∀
+
 normLinear6 : ∀ c → Quad.dot norm6Coefficients (coordinates c) ≡ y6 c
-normLinear6 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear6 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear6Raw a b c d e f g h i j k l
+normLinear7Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm7Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ h
+normLinear7Raw = ℚRing.solve-∀
+
 normLinear7 : ∀ c → Quad.dot norm7Coefficients (coordinates c) ≡ y7 c
-normLinear7 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear7 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear7Raw a b c d e f g h i j k l
+normLinear8Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm8Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ i
+normLinear8Raw = ℚRing.solve-∀
+
 normLinear8 : ∀ c → Quad.dot norm8Coefficients (coordinates c) ≡ y8 c
-normLinear8 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear8 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear8Raw a b c d e f g h i j k l
+normLinear9Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm9Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ j
+normLinear9Raw = ℚRing.solve-∀
+
 normLinear9 : ∀ c → Quad.dot norm9Coefficients (coordinates c) ≡ y9 c
-normLinear9 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear9 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear9Raw a b c d e f g h i j k l
+normLinear10Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm10Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ k
+normLinear10Raw = ℚRing.solve-∀
+
 normLinear10 : ∀ c → Quad.dot norm10Coefficients (coordinates c) ≡ y10 c
-normLinear10 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear10 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear10Raw a b c d e f g h i j k l
+normLinear11Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm11Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ l
+normLinear11Raw = ℚRing.solve-∀
+
 normLinear11 : ∀ c → Quad.dot norm11Coefficients (coordinates c) ≡ y11 c
-normLinear11 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear11 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear11Raw a b c d e f g h i j k l
+normLinear12Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot norm12Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ lastCoordinate (path13Coordinates a b c d e f g h i j k l)
+normLinear12Raw = ℚRing.solve-∀
+
 normLinear12 : ∀ c → Quad.dot norm12Coefficients (coordinates c) ≡ lastCoordinate c
-normLinear12 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+normLinear12 (path13Coordinates a b c d e f g h i j k l) =
+  normLinear12Raw a b c d e f g h i j k l
+
+formLinear0Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form0Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form0 (path13Coordinates a b c d e f g h i j k l)
+formLinear0Raw = ℚRing.solve-∀
 
 formLinear0 : ∀ c → Quad.dot form0Coefficients (coordinates c) ≡ form0 c
-formLinear0 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear0 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear0Raw a b c d e f g h i j k l
+formLinear1Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form1Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form1 (path13Coordinates a b c d e f g h i j k l)
+formLinear1Raw = ℚRing.solve-∀
+
 formLinear1 : ∀ c → Quad.dot form1Coefficients (coordinates c) ≡ form1 c
-formLinear1 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear1 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear1Raw a b c d e f g h i j k l
+formLinear2Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form2Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form2 (path13Coordinates a b c d e f g h i j k l)
+formLinear2Raw = ℚRing.solve-∀
+
 formLinear2 : ∀ c → Quad.dot form2Coefficients (coordinates c) ≡ form2 c
-formLinear2 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear2 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear2Raw a b c d e f g h i j k l
+formLinear3Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form3Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form3 (path13Coordinates a b c d e f g h i j k l)
+formLinear3Raw = ℚRing.solve-∀
+
 formLinear3 : ∀ c → Quad.dot form3Coefficients (coordinates c) ≡ form3 c
-formLinear3 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear3 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear3Raw a b c d e f g h i j k l
+formLinear4Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form4Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form4 (path13Coordinates a b c d e f g h i j k l)
+formLinear4Raw = ℚRing.solve-∀
+
 formLinear4 : ∀ c → Quad.dot form4Coefficients (coordinates c) ≡ form4 c
-formLinear4 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear4 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear4Raw a b c d e f g h i j k l
+formLinear5Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form5Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form5 (path13Coordinates a b c d e f g h i j k l)
+formLinear5Raw = ℚRing.solve-∀
+
 formLinear5 : ∀ c → Quad.dot form5Coefficients (coordinates c) ≡ form5 c
-formLinear5 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear5 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear5Raw a b c d e f g h i j k l
+formLinear6Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form6Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form6 (path13Coordinates a b c d e f g h i j k l)
+formLinear6Raw = ℚRing.solve-∀
+
 formLinear6 : ∀ c → Quad.dot form6Coefficients (coordinates c) ≡ form6 c
-formLinear6 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear6 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear6Raw a b c d e f g h i j k l
+formLinear7Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form7Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form7 (path13Coordinates a b c d e f g h i j k l)
+formLinear7Raw = ℚRing.solve-∀
+
 formLinear7 : ∀ c → Quad.dot form7Coefficients (coordinates c) ≡ form7 c
-formLinear7 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear7 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear7Raw a b c d e f g h i j k l
+formLinear8Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form8Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form8 (path13Coordinates a b c d e f g h i j k l)
+formLinear8Raw = ℚRing.solve-∀
+
 formLinear8 : ∀ c → Quad.dot form8Coefficients (coordinates c) ≡ form8 c
-formLinear8 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear8 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear8Raw a b c d e f g h i j k l
+formLinear9Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form9Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form9 (path13Coordinates a b c d e f g h i j k l)
+formLinear9Raw = ℚRing.solve-∀
+
 formLinear9 : ∀ c → Quad.dot form9Coefficients (coordinates c) ≡ form9 c
-formLinear9 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear9 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear9Raw a b c d e f g h i j k l
+formLinear10Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form10Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form10 (path13Coordinates a b c d e f g h i j k l)
+formLinear10Raw = ℚRing.solve-∀
+
 formLinear10 : ∀ c → Quad.dot form10Coefficients (coordinates c) ≡ form10 c
-formLinear10 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear10 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear10Raw a b c d e f g h i j k l
+formLinear11Raw : ∀ a b c d e f g h i j k l →
+  Quad.dot form11Coefficients (coordinates (path13Coordinates a b c d e f g h i j k l)) ≡ form11 (path13Coordinates a b c d e f g h i j k l)
+formLinear11Raw = ℚRing.solve-∀
+
 formLinear11 : ∀ c → Quad.dot form11Coefficients (coordinates c) ≡ form11 c
-formLinear11 (path13Coordinates a b c d e f g h i j k l) = ℚRing.solve-∀
+formLinear11 (path13Coordinates a b c d e f g h i j k l) =
+  formLinear11Raw a b c d e f g h i j k l
 
 ------------------------------------------------------------------------
 -- Structural compiler attachments.
