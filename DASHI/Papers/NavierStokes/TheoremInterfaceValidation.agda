@@ -14,6 +14,7 @@ import DASHI.Papers.NavierStokes.TheoremInterface as Paper
 -- analytic producers are open.
 ------------------------------------------------------------------------
 
+status : Paper.NSPaperTheoremStatus
 status = Paper.canonicalNSPaperTheoremStatus
 
 directCompanionConstructedIsTrue :
