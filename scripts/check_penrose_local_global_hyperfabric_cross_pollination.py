@@ -2,7 +2,7 @@
 """Focused static contract for Penrose local/global hyperfabric cross-pollination.
 
 This checker requires a thin Interop bridge over already-owned Penrose,
-LocalFibre, NDim/Pareto, and graph-colouring surfaces.  It does not certify any
+LocalFibre, NDim/Pareto, and graph-colouring surfaces. It does not certify any
 of those domain theorems, does not create source authority, and does not turn
 proof-architecture correspondence into theorem/domain identity.
 """
@@ -57,10 +57,15 @@ require(OWNER, [
     "sameObjectReductioRequiresSameObjectIdentity",
     "crossPollinationAddsNoNewSourceAuthority",
     "crossPollinationIsRetrospectiveNotHistoricalInfluence",
+    "CrossPollinationParentLineage",
     "snowballAcquisitionMayProceedOutOfDependencyOrder",
     "snowballPaymentMaySkipUnpaidParentDependency",
     "crossDomainAnalogyCreatesSourceAuthority",
     "DownstreamCrossPollinationCandidate",
+    "rsaNDimCandidate",
+    "flyMaleCNSCandidate",
+    "navierStokesCandidate",
+    "sensibLawCandidate",
     "downstreamCandidateMapIsImplementation",
 ])
 
@@ -69,11 +74,15 @@ require(REGRESSION, [
     "projectionSufficiencyFirewallRegression",
     "boundedLocalCarrierFirewallRegression",
     "sharedArchitectureFirewallRegression",
+    "penroseProjectionIdentityFirewallRegression",
+    "horismosGlobalSectionIdentityFirewallRegression",
+    "graphLorentzianCompatibilityFirewallRegression",
     "sameObjectIdentityRegression",
     "noNewSourceAuthorityRegression",
     "retrospectiveNotHistoricalRegression",
     "snowballPaymentCannotSkipParentRegression",
     "analogyDoesNotCreateAuthorityRegression",
+    "downstreamCandidateMapIsNotImplementationRegression",
 ])
 
 print("Penrose local/global hyperfabric cross-pollination static contract: OK")
