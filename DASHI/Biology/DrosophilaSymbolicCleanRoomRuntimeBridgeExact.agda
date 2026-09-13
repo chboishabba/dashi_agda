@@ -9,12 +9,6 @@ import DASHI.Core.AttributedSourceCore as Source
 
 ------------------------------------------------------------------------
 -- Runtime-side clean-room substrate.
---
--- dashiBRAIN PR #8 implements an auditable receipt carrier, a runnable
--- symbolic decoder over the repo's existing kernel-flow trajectories,
--- concrete matched controls, and a three-arm MaleCNS packet/CLI. This pays
--- clean-room implementation dependencies, not the original viral run or
--- empirical performance claims.
 ------------------------------------------------------------------------
 
 runtimeCleanRoomSource : Source.AttributedSource
@@ -25,7 +19,7 @@ runtimeCleanRoomSource = Source.mkNoDOISource
   "2026"
   "https://github.com/chboishabba/dashiBRAIN/pull/8"
   (Source.namedSourceKind "software implementation")
-  "clean-room runtime substrate at head c0062475f5c12760d4d88661c84dc6ecf0eb960b; includes explicit assistance receipts, orthogonal topology/identity/intervention controls, external symbolic decoding over existing kernel flow, invariant-preserving topology and identity controls, a three-arm packet builder, MaleCNS loader CLI, source/artifact hashes, and parse-only Python inspection with execution disabled; not an empirical reproduction receipt"
+  "clean-room runtime substrate at head 2429f0dd33753385c28c65015d316d2dd89ba982; includes explicit assistance receipts, topology and identity-assignment artifact hashes, orthogonal topology/identity/intervention controls, external symbolic decoding over existing kernel flow, invariant-preserving topology and identity controls, a three-arm packet builder, MaleCNS loader CLI, and parse-only Python inspection with execution disabled; control labels must be paid by actual artifact differences; not an empirical reproduction receipt"
   Source.publicAttribution
 
 runtimeCitationImportsNoProof :
@@ -39,6 +33,8 @@ record CleanRoomRuntimeStatus : Set where
     runtimeSubstrateLocated : Bool
     assistanceBudgetCarrierImplemented : Bool
     artifactHashCarrierImplemented : Bool
+    identityAssignmentArtifactHashImplemented : Bool
+    controlArtifactDifferenceGuardImplemented : Bool
     competenceNonpromotionImplemented : Bool
     matchedControlBudgetGuardImplemented : Bool
     symbolicKernelTraceRunnerImplemented : Bool
@@ -69,6 +65,8 @@ canonicalCleanRoomRuntimeStatus = cleanRoomRuntimeStatus
   true
   true
   true
+  true
+  true
   false
   false
   false
@@ -77,6 +75,14 @@ canonicalCleanRoomRuntimeStatus = cleanRoomRuntimeStatus
 runtimeSubstrateIsLocated :
   runtimeSubstrateLocated canonicalCleanRoomRuntimeStatus ≡ true
 runtimeSubstrateIsLocated = refl
+
+identityAssignmentArtifactHashIsLocated :
+  identityAssignmentArtifactHashImplemented canonicalCleanRoomRuntimeStatus ≡ true
+identityAssignmentArtifactHashIsLocated = refl
+
+controlArtifactDifferenceGuardIsLocated :
+  controlArtifactDifferenceGuardImplemented canonicalCleanRoomRuntimeStatus ≡ true
+controlArtifactDifferenceGuardIsLocated = refl
 
 symbolicKernelRunnerIsLocated :
   symbolicKernelTraceRunnerImplemented canonicalCleanRoomRuntimeStatus ≡ true
