@@ -52,21 +52,23 @@ mkMeasurement tracer dm dmError dh dhError correlationMagnitude =
     (ratio dhError 1000)
     (negativeThousandth correlationMagnitude)
 
+-- Final journal-matched DESI DR2 Table IV values.  The arXiv record notes that
+-- v3 was updated to match Phys. Rev. D 112, 083515 (2025).
 lrg1Measurement : AnisotropicBAOMeasurement ObservationKey.lrg1
-lrg1Measurement = mkMeasurement ObservationKey.lrg1 13587 169 21863 427 475
+lrg1Measurement = mkMeasurement ObservationKey.lrg1 13588 167 21863 425 459
 
 lrg2Measurement : AnisotropicBAOMeasurement ObservationKey.lrg2
-lrg2Measurement = mkMeasurement ObservationKey.lrg2 17347 180 19458 332 423
+lrg2Measurement = mkMeasurement ObservationKey.lrg2 17351 177 19455 330 404
 
 lrg3Elg1Measurement : AnisotropicBAOMeasurement ObservationKey.lrg3Elg1
 lrg3Elg1Measurement =
-  mkMeasurement ObservationKey.lrg3Elg1 21574 153 17641 193 425
+  mkMeasurement ObservationKey.lrg3Elg1 21576 152 17641 193 416
 
 elg2Measurement : AnisotropicBAOMeasurement ObservationKey.elg2
-elg2Measurement = mkMeasurement ObservationKey.elg2 27605 320 14178 217 437
+elg2Measurement = mkMeasurement ObservationKey.elg2 27601 318 14176 221 434
 
 qsoMeasurement : AnisotropicBAOMeasurement ObservationKey.qso
-qsoMeasurement = mkMeasurement ObservationKey.qso 30519 758 12816 513 489
+qsoMeasurement = mkMeasurement ObservationKey.qso 30512 760 12817 516 500
 
 lyaMeasurement : AnisotropicBAOMeasurement ObservationKey.lya
 lyaMeasurement = mkMeasurement ObservationKey.lya 38988 531 8632 101 431
