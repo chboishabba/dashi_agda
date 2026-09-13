@@ -70,11 +70,19 @@ alternativeMechanismKeepsUnificationPromotionBlocked :
 alternativeMechanismKeepsUnificationPromotionBlocked =
   DarkDimension.theoryOfEverythingPromotionStillBlocked
 
--- Cross-pollinated prospective axes likewise do not become a unification
--- theorem merely because the observer bundle is richer.
+-- Keep the two promotion targets separately typed.  A joint prospective
+-- observer bundle still does not identify string theory, and that fact cannot
+-- be used as if it were itself the distinct ToE gate.
+jointProspectiveAxisStillDoesNotPayStringTheory :
+  DarkDimension.stringTheoryPromotionPermitted
+    DarkDimension.canonicalDarkDimensionPromotionStatus
+  ≡ false
+jointProspectiveAxisStillDoesNotPayStringTheory =
+  Prospective.stringTheoryPromotionRemainsBlocked
+
 jointProspectiveAxisDoesNotPayTheoryOfEverything :
   QuantumGravity.theoryOfEverythingClaimPermitted
     QuantumGravity.canonicalQuantumGravityPromotionBoundary
   ≡ false
 jointProspectiveAxisDoesNotPayTheoryOfEverything =
-  Prospective.stringTheoryPromotionRemainsBlocked
+  QuantumGravity.canonicalTheoryOfEverythingBlocked
