@@ -186,13 +186,47 @@ record SameKeyPredictionRequest : Set where
 
 open SameKeyPredictionRequest public
 
+mkOpenPredictionRequest :
+  ObservationKey.SharedBAOObservationKey → SameKeyPredictionRequest
+mkOpenPredictionRequest key =
+  sameKeyPredictionRequest
+    key darkDimensionModelSource daoIndependentTargetSource false false false
+
 lrg1TransversePredictionRequest : SameKeyPredictionRequest
-lrg1TransversePredictionRequest =
-  sameKeyPredictionRequest ObservationKey.lrg1TransverseKey darkDimensionModelSource daoIndependentTargetSource false false false
+lrg1TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg1TransverseKey
 
 lrg1RadialPredictionRequest : SameKeyPredictionRequest
-lrg1RadialPredictionRequest =
-  sameKeyPredictionRequest ObservationKey.lrg1RadialKey darkDimensionModelSource daoIndependentTargetSource false false false
+lrg1RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg1RadialKey
+
+lrg2TransversePredictionRequest : SameKeyPredictionRequest
+lrg2TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg2TransverseKey
+
+lrg2RadialPredictionRequest : SameKeyPredictionRequest
+lrg2RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg2RadialKey
+
+lrg3Elg1TransversePredictionRequest : SameKeyPredictionRequest
+lrg3Elg1TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg3Elg1TransverseKey
+
+lrg3Elg1RadialPredictionRequest : SameKeyPredictionRequest
+lrg3Elg1RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg3Elg1RadialKey
+
+elg2TransversePredictionRequest : SameKeyPredictionRequest
+elg2TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.elg2TransverseKey
+
+elg2RadialPredictionRequest : SameKeyPredictionRequest
+elg2RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.elg2RadialKey
+
+qsoTransversePredictionRequest : SameKeyPredictionRequest
+qsoTransversePredictionRequest = mkOpenPredictionRequest ObservationKey.qsoTransverseKey
+
+qsoRadialPredictionRequest : SameKeyPredictionRequest
+qsoRadialPredictionRequest = mkOpenPredictionRequest ObservationKey.qsoRadialKey
+
+lyaTransversePredictionRequest : SameKeyPredictionRequest
+lyaTransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lyaTransverseKey
+
+lyaRadialPredictionRequest : SameKeyPredictionRequest
+lyaRadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lyaRadialKey
 
 bedroyaArXiv : String
 bedroyaArXiv = "2507.03090"
