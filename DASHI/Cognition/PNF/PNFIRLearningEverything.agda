@@ -78,3 +78,5 @@ import DASHI.Geometry.QuinticThreefoldCandidate
 import DASHI.Cognition.PNF.PNFIRLearningRegression
 import DASHI.Cognition.PNF.PNFIRExecutionRegression
 import DASHI.Cognition.PNF.PNFNashiAttractorRegression
+import DASHI.Cognition.PNF.GrokkingSparseActiveColouringRoutingExact
+import DASHI.Cognition.PNF.GrokkingSparseActiveColouringRoutingRegression
