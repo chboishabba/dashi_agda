@@ -10,7 +10,10 @@ import DASHI.Physics.Optics.OpticalPhenomenaKernelBridge
 import DASHI.Physics.Optics.MultiscaleApertureSynthesisKernelBridge
 import DASHI.Physics.Gravity.RelativityOpticalKernelBridge
 import DASHI.Physics.Gravity.IntrinsicSpacetimeCurvatureInterpretationExact
+import DASHI.Physics.Gravity.CausalFutureHorismosNullGeneratorExact
 import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact
+import DASHI.Physics.Gravity.PenroseHorismosCompactnessPaymentExact
+import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact
 import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact
 import DASHI.Physics.Gravity.Penrose1965NullGeodesicIncompletenessExact
 import DASHI.Physics.Gravity.IntrinsicPenroseInterpretationRegression
