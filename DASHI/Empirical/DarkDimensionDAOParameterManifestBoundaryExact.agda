@@ -22,8 +22,9 @@ import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 --     therefore retrospective with respect to the DESI DR2 BAO observation;
 --
 --   notebooks/DRMD/DRMD.bestfit
---     a concrete best-fit row, but the inspected file/notebook surface does not
---     source-bind that row to the LSS-independent arXiv:2602.23895 target.
+--     a concrete best-fit row.  Its interaction-strength coordinate is
+--     log10G/(aH)=13.05733, while arXiv:2602.23895 fixes (G/H)_ini=10^7,
+--     i.e. log10(G/H)=7.  That directly rules out same-manifest identity.
 --
 -- The repository README does source-bind DRMD_v2 to arXiv:2602.23895.  That
 -- pays code-version relevance, not the stronger claim that any particular
@@ -52,6 +53,7 @@ record DAOParameterManifestStatus : Set where
     exampleInputLocated : Bool
     retrospectiveDESIConfigLocated : Bool
     bestFitRowLocated : Bool
+    bestFitRowMatchesPaperFixedInteractionStrength : Bool
     repositoryVersionLinkedToIndependentTarget : Bool
     paperTableReconstructionLocated : Bool
     paperTableReconstructionRunnable : Bool
@@ -71,6 +73,7 @@ canonicalDAOParameterManifestStatus =
     true
     true
     true
+    false
     true
     true
     true
@@ -90,6 +93,12 @@ retrospectiveDESIConfigPath = "cobaya/DRMD.yaml"
 
 bestFitRowPath : String
 bestFitRowPath = "notebooks/DRMD/DRMD.bestfit"
+
+publicBestFitLog10InitialInteraction : String
+publicBestFitLog10InitialInteraction = "13.05733"
+
+paperFixedLog10InitialInteraction : String
+paperFixedLog10InitialInteraction = "7"
 
 retrospectiveLikelihoodCoordinate : String
 retrospectiveLikelihoodCoordinate = "bao.desi_dr2"
@@ -126,6 +135,8 @@ data LaterSnapshotCertifiesPaperManifest : Set where
 
 data PaperTableReconstructionClosesOriginalManifestDebt : Set where
 
+data PublicBestFitIsIndependentPaperBestFit : Set where
+
 exampleInputDoesNotBecomePaperPrediction :
   ExampleInputEqualsPaperPrediction → ⊥
 exampleInputDoesNotBecomePaperPrediction ()
@@ -150,10 +161,19 @@ paperTableReconstructionDoesNotCloseOriginalManifestDebt :
   PaperTableReconstructionClosesOriginalManifestDebt → ⊥
 paperTableReconstructionDoesNotCloseOriginalManifestDebt ()
 
+publicBestFitCannotBeIndependentPaperBestFit :
+  PublicBestFitIsIndependentPaperBestFit → ⊥
+publicBestFitCannotBeIndependentPaperBestFit ()
+
 repositoryVersionLinkPaid :
   repositoryVersionLinkedToIndependentTarget canonicalDAOParameterManifestStatus
   ≡ true
 repositoryVersionLinkPaid = refl
+
+publicBestFitInteractionCoordinateMismatchRecorded :
+  bestFitRowMatchesPaperFixedInteractionStrength canonicalDAOParameterManifestStatus
+  ≡ false
+publicBestFitInteractionCoordinateMismatchRecorded = refl
 
 paperTableReconstructionLocatedAndRunnable :
   paperTableReconstructionRunnable canonicalDAOParameterManifestStatus ≡ true
