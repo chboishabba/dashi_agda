@@ -55,3 +55,62 @@ record HiddenObservationQuotient
       ∀ x y → EquivalentHiddenState x y → observe x ≡ observe y
 
 open HiddenObservationQuotient public
+
+------------------------------------------------------------------------
+-- Stable learned classes are deliberately broader than local minima.
+------------------------------------------------------------------------
+
+data StabilityRole : Set where
+  localMinimum
+  flatMinimum
+  metastable
+  phaseLocked
+  limitCycleModGauge
+  invariantLearnedClass : StabilityRole
+
+record StableLearnedClass (Hidden : Set) : Set₁ where
+  field
+    LearnedClass : Set
+    classify : Hidden → LearnedClass
+    role : LearnedClass → StabilityRole
+
+open StableLearnedClass public
+
+------------------------------------------------------------------------
+-- Objective, update and empirical/behavioural measurement remain distinct.
+------------------------------------------------------------------------
+
+record OscillatorObjectiveSurface (Hidden : Set) : Set₁ where
+  field
+    Objective : Set
+    objective : Hidden → Objective
+
+open OscillatorObjectiveSurface public
+
+record LearningUpdateWitness (Hidden : Set) : Set₁ where
+  field
+    update : Hidden → Hidden
+
+open LearningUpdateWitness public
+
+record ObservedCognitiveMeasurement : Set₁ where
+  field
+    Measurement : Set
+
+open ObservedCognitiveMeasurement public
+
+------------------------------------------------------------------------
+-- WrongType / non-promotion boundary.
+------------------------------------------------------------------------
+
+record ContinuousOscillatorBoundary : Set₁ where
+  field
+    continuousPhaseIsNotPhase3ByDefinition : Set
+    mismatchIsNotCognitiveDissonanceByDefinition : Set
+    gradientDescentIsNotHebbianByDefinition : Set
+    coherenceIsNotTruthByDefinition : Set
+    stableClassIsNotMinimumByDefinition : Set
+    targetStateIsNotBackwardsCausation : Set
+    objectiveDoesNotMergeAllEnergyCarriers : Set
+
+open ContinuousOscillatorBoundary public
