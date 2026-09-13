@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementRegression where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.RecursiveScaleTransitionExact as Scale
 import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementExact as Osc
@@ -122,3 +123,50 @@ finitePhaseObservationIsExplicit :
   Phase.PhaseEnrichedTrit
 finitePhaseObservationIsExplicit refinement =
   Osc.observeFinitePhase refinement
+
+------------------------------------------------------------------------
+-- Concrete finite regression: two definitionally distinct hidden states may
+-- inhabit one public-memory fibre while retaining an explicit finite-phase
+-- observation seam.
+------------------------------------------------------------------------
+
+data HiddenPair : Set where
+  hiddenLeft : HiddenPair
+  hiddenRight : HiddenPair
+
+hiddenPairDistinct : hiddenLeft ≡ hiddenRight → ⊥
+hiddenPairDistinct ()
+
+constantPublicRefinement :
+  Memory.MemoryFibre →
+  Phase.PhaseEnrichedTrit →
+  Osc.OscillatorMemoryRefinement HiddenPair
+constantPublicRefinement memory finitePhase = record
+  { observeMemory = λ _ → memory
+  ; MemoryEquivalentHiddenState = λ _ _ → ⊤
+  ; preservedRememberedEvent = λ _ _ _ → refl
+  ; observeFinitePhase = λ _ → finitePhase
+  }
+
+distinctHiddenStatesAreEquivalentInMemoryFibre :
+  (memory : Memory.MemoryFibre) →
+  (finitePhase : Phase.PhaseEnrichedTrit) →
+  Osc.MemoryEquivalentHiddenState
+    (constantPublicRefinement memory finitePhase)
+    hiddenLeft
+    hiddenRight
+distinctHiddenStatesAreEquivalentInMemoryFibre memory finitePhase = tt
+
+distinctHiddenStatesPreserveRememberedEvent :
+  (memory : Memory.MemoryFibre) →
+  (finitePhase : Phase.PhaseEnrichedTrit) →
+  Memory.rememberedEvent
+    (Osc.observeMemory
+      (constantPublicRefinement memory finitePhase)
+      hiddenLeft)
+    ≡
+  Memory.rememberedEvent
+    (Osc.observeMemory
+      (constantPublicRefinement memory finitePhase)
+      hiddenRight)
+distinctHiddenStatesPreserveRememberedEvent memory finitePhase = refl
