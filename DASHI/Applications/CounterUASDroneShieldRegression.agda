@@ -11,6 +11,7 @@ import DASHI.Applications.CounterUASSensibLawAuthorityBridgeExact as LegalBridge
 import DASHI.Law.SensibLawInternationalInstrumentLifecycleExact as Lifecycle
 import DASHI.Law.SensibLawCCWLAWS2026Exact as CCW2026
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
 
 ------------------------------------------------------------------------
 -- Regression surface for the defensive counter-UAS architecture.
@@ -81,6 +82,8 @@ record CounterUASDroneShieldRegression : Set₁ where
       CCW2026.september2026InstrumentNature ≡ Lifecycle.instrumentNatureUnresolved
     ccwOfficialSourceAtlasNonPromoting :
       CCW2026.ccwLAWS2026SourceAtlasCreatesAuthority ≡ false
+    ccwAgendaSourceRetainsAttributionSnowball :
+      AttributionSnowball.SourceRoleSnowballReceipt CCW2026.ccwGGE2026AgendaSource
     domesticAuthorityDoesNotSetInternationalApplicability :
       LegalBridge.domesticMitigationAuthorityDoesNotCreateInternationalLawApplicability ≡ true
     technicalAutonomyDoesNotCreateLawfulEngagement :
@@ -103,5 +106,6 @@ canonicalCounterUASDroneShieldRegression =
     Lifecycle.consensusAndInstitutionalDetermineBinding
     refl
     CCW2026.ccwLAWS2026SourceAtlasCreatesAuthorityIsFalse
+    CCW2026.ccwGGE2026AgendaSourceSnowballReceipt
     refl
     refl
