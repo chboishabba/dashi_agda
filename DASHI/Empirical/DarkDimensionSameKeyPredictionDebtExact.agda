@@ -130,6 +130,24 @@ canonicalSameKeyPredictionDerivationDebt =
     false
     false
 
+-- Semantic field receipts.  Because the carrier is Bool-heavy, these equalities
+-- make constructor-order mistakes observable to the type checker.
+daoExecutableRevisionPinPaid :
+  daoExecutableRevisionPinned canonicalSameKeyPredictionDerivationDebt ≡ true
+daoExecutableRevisionPinPaid = refl
+
+daoExecutionConfigSurfacePaid :
+  daoExecutionConfigSurfaceLocated canonicalSameKeyPredictionDerivationDebt ≡ true
+daoExecutionConfigSurfacePaid = refl
+
+daoExecutionStillNotRun :
+  daoExecutedByDASHI canonicalSameKeyPredictionDerivationDebt ≡ false
+daoExecutionStillNotRun = refl
+
+darkDimensionExecutableStillOpen :
+  darkDimensionExecutableModelLocated canonicalSameKeyPredictionDerivationDebt ≡ false
+darkDimensionExecutableStillOpen = refl
+
 sameKeyPredictionDebtStillOpen :
   debtClosed canonicalSameKeyPredictionDerivationDebt ≡ false
 sameKeyPredictionDebtStillOpen = refl
