@@ -79,5 +79,6 @@ import DASHI.Interop.SLRConsumerRequirementV2Exact
 import DASHI.Interop.SLRAppendOnlyActiveResidualFrontierExact
 import DASHI.Interop.SLRResidualDrivenProducerPlannerExact
 import DASHI.Interop.SLRReviewedEvidencePaymentExact
+import DASHI.Interop.SLRBinaryRouteCandidateParetoExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
