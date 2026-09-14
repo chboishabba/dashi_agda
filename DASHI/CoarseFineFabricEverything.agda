@@ -8,7 +8,10 @@ import DASHI.Core.CanonicalSpineRegistry
 import DASHI.Core.CanonicalSpineRegistryCrossDomainRegression
 import DASHI.Core.CanonicalSpineDependencyAtlasExact
 import DASHI.Core.CanonicalSpineDependencyAtlasRegression
+import DASHI.Core.ObserverRefinementCore
 import DASHI.Core.ObserverRefinementLatticeExact
+import DASHI.Core.ObserverRefinementOrientationCrosswalkExact
+import DASHI.Core.ObserverRefinementOrientationCrosswalkRegression
 import DASHI.Core.DeclaredScenarioRobustnessExact
 import DASHI.Core.DeclaredScenarioRobustnessRegression
 import DASHI.Core.SnowballOSINTAcquisitionInvariantExact
@@ -81,6 +84,8 @@ import DASHI.ComputerScience.RSA260MultipartReconstructionSpineRegression
 import DASHI.ComputerScience.FlyCandidateFamilyExecutionAdapterExact
 import DASHI.ComputerScience.FlyCandidateFamilyExecutionAdapterRegression
 import DASHI.Reasoning.WavePantsBundleGluingAdapterExact
+import DASHI.Semantics.SIOObserverRefinementLatticeAdapterExact
+import DASHI.Semantics.SIOObserverRefinementLatticeAdapterRegression
 
 import DASHI.Interop.CrossLaneProofArchaeologyLedgerExact
 import DASHI.Interop.ProofArchaeologyCoarseFineAdapterExact
