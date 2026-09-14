@@ -8,6 +8,18 @@ import DASHI.Core.CanonicalSpineRegistry as Registry
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.CanonicalSpineDependencyAtlasExact as Atlas
 
+consumerRepairObserverRelation :
+  Atlas.CanonicalDependency
+    Registry.consumerFibreRepairOwner
+    Registry.observerRefinementOwner
+consumerRepairObserverRelation = Atlas.consumerRepairDependsOnObserverRefinement
+
+frozenDynamicObserverRelation :
+  Atlas.CanonicalDependency
+    Registry.frozenProvenanceDynamicOwner
+    Registry.observerRefinementOwner
+frozenDynamicObserverRelation = Atlas.frozenDynamicDependsOnObserverRefinement
+
 requiredAxisJoinRelation :
   Atlas.CanonicalDependency
     Registry.requiredObserverAxisJoinOwner
@@ -43,6 +55,14 @@ futureSafeDynamicRelation :
     Registry.queryIndexedFutureSafePromotionOwner
     Registry.frozenProvenanceDynamicOwner
 futureSafeDynamicRelation = Atlas.futureSafePromotionDependsOnFrozenDynamic
+
+consumerRepairObserverDependencyWitness :
+  Dependency.DependencyWitness Atlas.CanonicalDependency
+consumerRepairObserverDependencyWitness = Atlas.consumerRepairObserverDependencyWitness
+
+frozenDynamicObserverDependencyWitness :
+  Dependency.DependencyWitness Atlas.CanonicalDependency
+frozenDynamicObserverDependencyWitness = Atlas.frozenDynamicObserverDependencyWitness
 
 requiredAxisJoinDependencyWitness :
   Dependency.DependencyWitness Atlas.CanonicalDependency
