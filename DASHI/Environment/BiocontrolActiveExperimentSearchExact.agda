@@ -53,18 +53,35 @@ canonicalNetOutcomeReopening = netOutcomeReopeningReceipt
 
 ------------------------------------------------------------------------
 -- Host-specificity is deliberately outside the oxygen reverse dependency
--- closure.  This is represented constructively by the absence of an edge/path
--- constructor into that artifact in the declared dependency language.
+-- closure.  This is stronger than merely omitting a direct edge: no declared
+-- transitive path can reach the host-specificity certificate either.
 ------------------------------------------------------------------------
+
+netOutcomeCannotReachHostSpecificity :
+  Affected.AffectedClosure Depends netOutcomeCertificate hostSpecificityCertificate → ⊥
+netOutcomeCannotReachHostSpecificity ()
+
+oxygenOutcomeCannotReachHostSpecificity :
+  Affected.AffectedClosure Depends oxygenOutcomeCertificate hostSpecificityCertificate → ⊥
+oxygenOutcomeCannotReachHostSpecificity
+  (Affected.affectedStep oxygenOutcomeAffectsNetOutcome rest) =
+    netOutcomeCannotReachHostSpecificity rest
+
+oxygenObservationCannotReachHostSpecificity :
+  Affected.AffectedClosure Depends oxygenObservation hostSpecificityCertificate → ⊥
+oxygenObservationCannotReachHostSpecificity
+  (Affected.affectedStep oxygenObservationAffectsOxygenOutcome rest) =
+    oxygenOutcomeCannotReachHostSpecificity rest
 
 record HostSpecificityUnaffectedReceipt : Set where
   constructor hostSpecificityUnaffectedReceipt
   field
-    noDirectOxygenDependency : Depends oxygenObservation hostSpecificityCertificate → ⊥
-    noOxygenOutcomeDependency : Depends oxygenOutcomeCertificate hostSpecificityCertificate → ⊥
+    noAffectedClosure :
+      Affected.AffectedClosure Depends oxygenObservation hostSpecificityCertificate → ⊥
 
 canonicalHostSpecificityUnaffected : HostSpecificityUnaffectedReceipt
-canonicalHostSpecificityUnaffected = hostSpecificityUnaffectedReceipt (λ ()) (λ ())
+canonicalHostSpecificityUnaffected =
+  hostSpecificityUnaffectedReceipt oxygenObservationCannotReachHostSpecificity
 
 ------------------------------------------------------------------------
 -- Active ecological experiment-search weld.
