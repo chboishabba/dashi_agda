@@ -22,7 +22,7 @@ singularPhotonicsLitavisRelease =
     "Singular Photonics launches world-first SPAD-based image sensor"
     "Singular Photonics"
     "2026"
-    "https://singularphotonics.com/singular-photonics-launches-world-first-spad-based-image-sensor/"
+    "https://singularphotonics.com/singular-photonics-launches-world-first-spad-image-sensor/"
     Source.institutionalSource
     "primary company release for the source-attested Litavis architecture and claimed operating modes; does not independently validate novelty, latency, power, application performance, or market claims"
     Source.publicAttribution
@@ -223,15 +223,15 @@ multimodalHistogramQueryAdequate =
     factor stateA = refl
     factor stateB = refl
 
-intensityCannotPayTimingConsumer : IntensityAdequacy → TimingDefect → ⊥
-intensityCannotPayTimingConsumer intensityAdequate defect =
-  Query.queryAdequacyDefectBlocksFactorisation defect
-    (Query.factorsForQuery (λ observation → timingEarly) impossible)
-  where
-    impossible : (state : SensorState) →
-      litavisAnswer timingQuery state ≡ timingEarly
-    impossible stateA = refl
-    impossible stateB = refl
+timingQueryNotAdequate :
+  Query.AdequateFor intensityProject litavisSemantics timingQuery → ⊥
+timingQueryNotAdequate =
+  Query.queryAdequacyDefectBlocksFactorisation timingQueryDefect
+
+histogramQueryNotAdequate :
+  Query.AdequateFor intensityProject litavisSemantics histogramQuery → ⊥
+histogramQueryNotAdequate =
+  Query.queryAdequacyDefectBlocksFactorisation histogramQueryDefect
 
 ------------------------------------------------------------------------
 -- Claim firewall.
