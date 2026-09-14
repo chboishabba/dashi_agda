@@ -1,0 +1,52 @@
+module DASHI.Core.InstitutionalNormSituatedReasonablenessBridgeRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Core.InstitutionalNormSituatedReasonablenessBridgeExact as Bridge
+
+parentNormProductionReusedRegression :
+  Bridge.parentNormProductionReused Bridge.canonicalInstitutionalNormReasonablenessBoundary
+  ≡ true
+parentNormProductionReusedRegression = refl
+
+parentSituatedReasonablenessReusedRegression :
+  Bridge.parentSituatedReasonablenessReused Bridge.canonicalInstitutionalNormReasonablenessBoundary
+  ≡ true
+parentSituatedReasonablenessReusedRegression = refl
+
+sameStandardDifferentHistoryDefectRegression :
+  Bridge.SameReasonablenessStandardDifferentProductionHistoryDefect
+sameStandardDifferentHistoryDefectRegression =
+  Bridge.sameReasonablenessStandardDifferentProductionHistoryDefect
+
+legalSpecificationNeutralProductionRegression :
+  Bridge.legallySpecifiedStandardAutomaticallyNeutralProductionHistory
+    Bridge.canonicalInstitutionalNormReasonablenessBoundary
+  ≡ false
+legalSpecificationNeutralProductionRegression = refl
+
+institutionalConventionObjectiveTruthRegression :
+  Bridge.institutionalConventionAutomaticallyObjectiveTruth
+    Bridge.canonicalInstitutionalNormReasonablenessBoundary
+  ≡ false
+institutionalConventionObjectiveTruthRegression = refl
+
+upstreamProximityDeterminesNormRegression :
+  Bridge.proximityAutomaticallyDeterminesReasonablenessNorm
+    Bridge.canonicalInstitutionalNormReasonablenessBoundary
+  ≡ false
+upstreamProximityDeterminesNormRegression = refl
+
+currentRuleCanBeAppliedWithoutNeutralityProofRegression :
+  Bridge.currentRuleApplicationDoesNotRequireNeutralProductionHistory
+    Bridge.canonicalInstitutionalNormReasonablenessBoundary
+  ≡ true
+currentRuleCanBeAppliedWithoutNeutralityProofRegression = refl
+
+historyCanRemainCritiqueCoordinateRegression :
+  Bridge.productionHistoryCanRemainDistinctCritiqueCoordinate
+    Bridge.canonicalInstitutionalNormReasonablenessBoundary
+  ≡ true
+historyCanRemainCritiqueCoordinateRegression = refl
