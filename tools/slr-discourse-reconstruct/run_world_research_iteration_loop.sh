@@ -7,7 +7,13 @@ OUT_DIR="${2:-$HANDOFF_ROOT/gwb-world}"
 START_ITERATION="${3:-0}"
 SLR_MAX_ITERATIONS="${SLR_MAX_ITERATIONS:-3}"
 
-if ! [[ "$SLR_MAX_ITERATIONS" =~ ^[1-9][0-9]*$ ]]; then
+case "$SLR_MAX_ITERATIONS" in
+  ''|*[!0-9]*)
+    printf 'ERROR: SLR_MAX_ITERATIONS must be a positive integer\n' >&2
+    exit 2
+    ;;
+esac
+if (( SLR_MAX_ITERATIONS < 1 )); then
   printf 'ERROR: SLR_MAX_ITERATIONS must be a positive integer\n' >&2
   exit 2
 fi
