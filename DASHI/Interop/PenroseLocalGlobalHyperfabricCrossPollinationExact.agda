@@ -6,9 +6,13 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Reasoning.LocalFibreHyperfabricExact as LocalFibre
 import DASHI.Core.NDimParetoHyperfabricExact as NDim
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Combinatorics.GraphColouringRecolourPantsSnowballExact as Graph
 import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Penrose
 import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact as Authority
+import DASHI.ComputerScience.RSA260C3OrbitReducerHyperfabricExact as RSA
+import DASHI.ComputerScience.RSA260ReducerHyperfabricSourceDiligenceExact as RSASources
+import DASHI.ComputerScience.FlyStructureFunctionNDimFibreExact as Fly
 
 ------------------------------------------------------------------------
 -- THIN LOCAL/GLOBAL CROSS-POLLINATION BRIDGE
@@ -154,6 +158,183 @@ canonicalNDimProjectionAdapter = ndimProjectionAdapter
     NDim.canonicalNDimParetoHyperfabricBoundary)
   refl
   false refl
+
+------------------------------------------------------------------------
+-- RSA adapter: candidate compatibility is not terminal action validity.
+--
+-- The donor already requires co-requirement closure, consumer-conflict
+-- selection, and final MP = PM. Its source-diligence owner separately blocks
+-- transfer from graph-colouring / Monster source architecture to RSA theorem
+-- authority. We reuse those states rather than re-authoring them.
+------------------------------------------------------------------------
+
+record RSACompatibilityClosureAdapter : Set where
+  constructor rsaCompatibilityClosureAdapter
+  field
+    candidateReference : String
+    closureReference : String
+    conflictSelectionReference : String
+    terminalConsumerReference : String
+    coRequirementClosureRequired : Bool
+    coRequirementClosureRequiredIsTrue : coRequirementClosureRequired ≡ true
+    consumerConflictSelectionRequired : Bool
+    consumerConflictSelectionRequiredIsTrue : consumerConflictSelectionRequired ≡ true
+    globalCommutationRequired : Bool
+    globalCommutationRequiredIsTrue : globalCommutationRequired ≡ true
+    sourceArchitectureCreatesRSAAction : Bool
+    sourceArchitectureCreatesRSAActionIsFalse : sourceArchitectureCreatesRSAAction ≡ false
+    snowballAcquisitionOutOfOrderAllowed : Bool
+    snowballAcquisitionOutOfOrderAllowedIsTrue : snowballAcquisitionOutOfOrderAllowed ≡ true
+    snowballPaymentOutOfOrderAllowed : Bool
+    snowballPaymentOutOfOrderAllowedIsFalse : snowballPaymentOutOfOrderAllowed ≡ false
+
+open RSACompatibilityClosureAdapter public
+
+canonicalRSACompatibilityClosureAdapter : RSACompatibilityClosureAdapter
+canonicalRSACompatibilityClosureAdapter = rsaCompatibilityClosureAdapter
+  "stable refinement class / inferred structured orbit candidate"
+  "operator-derived co-requirement closure"
+  "consumer-conflict-free closed-batch selection"
+  "final global MP = PM commutation check"
+  (RSA.coRequirementClosureStillRequired RSA.canonicalStructuredOrbitPromotionBoundary)
+  refl
+  (RSA.consumerConflictSelectionStillRequired RSA.canonicalStructuredOrbitPromotionBoundary)
+  refl
+  (RSA.globalMPEqualsPMStillRequired RSA.canonicalStructuredOrbitPromotionBoundary)
+  refl
+  (RSA.monster3BSourceImpliesRSAAction RSA.canonicalStructuredOrbitPromotionBoundary)
+  refl
+  (RSASources.acquisitionMayProceedOutOfDependencyOrder
+    RSASources.canonicalSnowballAttributionBoundary)
+  refl
+  (RSASources.paymentMayProceedOutOfDependencyOrder
+    RSASources.canonicalSnowballAttributionBoundary)
+  refl
+
+------------------------------------------------------------------------
+-- Fly adapter: compatibility selection precedes and cannot replace held-out
+-- consumer payment.
+------------------------------------------------------------------------
+
+record FlyHeldOutCompatibilityAdapter : Set where
+  constructor flyHeldOutCompatibilityAdapter
+  field
+    restrictionReference : String
+    compatibilityReference : String
+    freezeReference : String
+    terminalConsumerReference : String
+    compatibilitySelectionUsesHeldOutOutcome : Bool
+    compatibilitySelectionUsesHeldOutOutcomeIsFalse :
+      compatibilitySelectionUsesHeldOutOutcome ≡ false
+    compositionFitUsesHeldOutOutcome : Bool
+    compositionFitUsesHeldOutOutcomeIsFalse :
+      compositionFitUsesHeldOutOutcome ≡ false
+    localCompatibilityAutomaticallyPaysGlobalImprovement : Bool
+    localCompatibilityAutomaticallyPaysGlobalImprovementIsFalse :
+      localCompatibilityAutomaticallyPaysGlobalImprovement ≡ false
+    globalHeldOutEvaluationRequired : Bool
+    globalHeldOutEvaluationRequiredIsTrue : globalHeldOutEvaluationRequired ≡ true
+    unseenRegionEvaluationRequired : Bool
+    unseenRegionEvaluationRequiredIsTrue : unseenRegionEvaluationRequired ≡ true
+
+open FlyHeldOutCompatibilityAdapter public
+
+canonicalFlyHeldOutCompatibilityAdapter : FlyHeldOutCompatibilityAdapter
+canonicalFlyHeldOutCompatibilityAdapter = flyHeldOutCompatibilityAdapter
+  "restrict structural fibres to training carrier"
+  "build conflict graph and select a compatible fibre family without held-out outcomes"
+  "fit on training pairs then freeze composition before evaluation"
+  "held-out pairs, held-out regions, stability, and null-model consumers"
+  (Fly.compatibilitySelectionUsesHeldOutOutcomes
+    Fly.canonicalFlyNDimStructureFunctionBoundary)
+  refl
+  (Fly.compositionFitUsesHeldOutOutcomes
+    Fly.canonicalFlyNDimStructureFunctionBoundary)
+  refl
+  (Fly.pairwiseCompatibilityAutomaticallyImpliesHeldOutImprovement
+    Fly.canonicalFlyNDimStructureFunctionBoundary)
+  refl
+  (Fly.globalHeldOutEvaluationStillRequired
+    Fly.canonicalFlyNDimStructureFunctionBoundary)
+  refl
+  (Fly.unseenRegionEvaluationStillRequired
+    Fly.canonicalFlyNDimStructureFunctionBoundary)
+  refl
+
+------------------------------------------------------------------------
+-- Pareto / MDL adapter: optimization occurs only inside the eligible stratum.
+------------------------------------------------------------------------
+
+record ParetoEligibilityBeforeOptimizationAdapter : Set where
+  constructor paretoEligibilityBeforeOptimizationAdapter
+  field
+    eligibilityReference : String
+    paretoReference : String
+    lowerDescriptionLengthCreatesPhysicalTruth : Bool
+    lowerDescriptionLengthCreatesPhysicalTruthIsFalse :
+      lowerDescriptionLengthCreatesPhysicalTruth ≡ false
+    inadmissibleCandidateMayWinByShortCode : Bool
+    inadmissibleCandidateMayWinByShortCodeIsFalse :
+      inadmissibleCandidateMayWinByShortCode ≡ false
+    consumerInadequateCandidateMayWinByShortCode : Bool
+    consumerInadequateCandidateMayWinByShortCodeIsFalse :
+      consumerInadequateCandidateMayWinByShortCode ≡ false
+    paretoAxesRemainApplicationDeclared : Bool
+    paretoAxesRemainApplicationDeclaredIsTrue :
+      paretoAxesRemainApplicationDeclared ≡ true
+
+open ParetoEligibilityBeforeOptimizationAdapter public
+
+canonicalParetoEligibilityBeforeOptimizationAdapter :
+  ParetoEligibilityBeforeOptimizationAdapter
+canonicalParetoEligibilityBeforeOptimizationAdapter =
+  paretoEligibilityBeforeOptimizationAdapter
+    "Eligible problem model = Admissible model × ConsumerAdequate model"
+    "ParetoAdmissible is defined only over the eligible stratum"
+    (Pareto.lowerDescriptionLengthIsPhysicalTruth
+      Pareto.canonicalAdmissibleConsumerMDLBoundary)
+    refl
+    (Pareto.inadmissibleModelMayWinByShortCode
+      Pareto.canonicalAdmissibleConsumerMDLBoundary)
+    refl
+    (Pareto.consumerInadequateModelMayWinByShortCode
+      Pareto.canonicalAdmissibleConsumerMDLBoundary)
+    refl
+    (Pareto.paretoAxesAreApplicationDeclared
+      Pareto.canonicalAdmissibleConsumerMDLBoundary)
+    refl
+
+------------------------------------------------------------------------
+-- Shared terminal-consumer payment rule.
+------------------------------------------------------------------------
+
+terminalConsumerStillMustBePaid : Bool
+terminalConsumerStillMustBePaid = true
+
+terminalConsumerStillMustBePaidIsTrue : terminalConsumerStillMustBePaid ≡ true
+terminalConsumerStillMustBePaidIsTrue = refl
+
+compatibilityDoesNotCreateTerminalConsumerPayment : Bool
+compatibilityDoesNotCreateTerminalConsumerPayment = true
+
+compatibilityDoesNotCreateTerminalConsumerPaymentIsTrue :
+  compatibilityDoesNotCreateTerminalConsumerPayment ≡ true
+compatibilityDoesNotCreateTerminalConsumerPaymentIsTrue = refl
+
+paretoSelectionCannotRescueIneligibleCandidate :
+  Pareto.inadmissibleModelMayWinByShortCode
+    Pareto.canonicalAdmissibleConsumerMDLBoundary ≡ false
+paretoSelectionCannotRescueIneligibleCandidate = refl
+
+transferredArchitectureDoesNotTransferTheoremAuthority :
+  RSA.monster3BSourceImpliesRSAAction
+    RSA.canonicalStructuredOrbitPromotionBoundary ≡ false
+transferredArchitectureDoesNotTransferTheoremAuthority = refl
+
+rsaSnowballPaymentCannotSkipDependency :
+  RSASources.paymentMayProceedOutOfDependencyOrder
+    RSASources.canonicalSnowballAttributionBoundary ≡ false
+rsaSnowballPaymentCannotSkipDependency = refl
 
 ------------------------------------------------------------------------
 -- Constructive gluing versus obstruction/reductio duality.
