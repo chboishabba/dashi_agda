@@ -22,6 +22,11 @@ import DASHI.Core.TypedDependencyCore as Dependency
 
 data CanonicalDependency :
     Registry.CanonicalOwner → Registry.CanonicalOwner → Set where
+  requiredAxisJoinDependsOnQueryAdequacy :
+    CanonicalDependency
+      Registry.requiredObserverAxisJoinOwner
+      Registry.queryIndexedProjectionOwner
+
   boundedNegativeSearchDependsOnOSINT :
     CanonicalDependency
       Registry.boundedNegativeSearchOwner
@@ -50,6 +55,18 @@ data CanonicalDependency :
 ------------------------------------------------------------------------
 -- Proof-bearing dependency receipts reuse TypedDependencyCore directly.
 ------------------------------------------------------------------------
+
+requiredAxisJoinDependencyWitness :
+  Dependency.DependencyWitness CanonicalDependency
+requiredAxisJoinDependencyWitness =
+  Dependency.dependencyWitness
+    Registry.requiredObserverAxisJoinOwner
+    Registry.queryIndexedProjectionOwner
+    requiredAxisJoinDependsOnQueryAdequacy
+    Dependency.epistemicLayer
+    Dependency.requiredDependency
+    "RequiredObserverAxisJoinAdequacyExact extends the query-relative adequacy discipline to multiple declared observer axes and constructs the exact product factorisation when both are retained."
+    "joint observer adequacy for declared consumer axes only; it does not establish world completeness"
 
 boundedNegativeSearchDependencyWitness :
   Dependency.DependencyWitness CanonicalDependency
