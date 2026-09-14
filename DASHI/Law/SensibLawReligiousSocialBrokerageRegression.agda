@@ -11,6 +11,11 @@ parentNormProductionReusedRegression :
   ≡ true
 parentNormProductionReusedRegression = refl
 
+parentProximityAdequacyReusedRegression :
+  Brokerage.parentProximityAdequacyReused Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ true
+parentProximityAdequacyReusedRegression = refl
+
 parentLobbyingEdgeDisciplineReusedRegression :
   Brokerage.parentLobbyingEdgeDisciplineReused Brokerage.canonicalReligiousSocialBrokerageBoundary
   ≡ true
