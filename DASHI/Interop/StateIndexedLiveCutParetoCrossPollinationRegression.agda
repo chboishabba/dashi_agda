@@ -1,0 +1,80 @@
+module DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationExact as State
+
+salienceIsLiveSetIndexedRegression :
+  State.salienceIndexedByResidualAndLiveSet State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
+salienceIsLiveSetIndexedRegression =
+  State.salienceIndexedByResidualAndLiveSetIsTrue State.canonicalStateIndexedLiveCutParetoAdapter
+
+magnitudeGreedyCanMissNarrowingRegression :
+  State.magnitudeGreedyMayMissLiveNarrowing State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
+magnitudeGreedyCanMissNarrowingRegression =
+  State.magnitudeGreedyMayMissLiveNarrowingIsTrue State.canonicalStateIndexedLiveCutParetoAdapter
+
+salienceNoAdmissionRegression :
+  State.salienceCreatesCandidateAdmission State.canonicalStateIndexedLiveCutParetoAdapter ≡ false
+salienceNoAdmissionRegression =
+  State.salienceCreatesCandidateAdmissionIsFalse State.canonicalStateIndexedLiveCutParetoAdapter
+
+residualUpdateChangesSelectionRegression :
+  State.residualUpdateMayChangeSelectedExperiment
+    State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
+residualUpdateChangesSelectionRegression =
+  State.residualUpdateMayChangeSelectedExperimentIsTrue
+    State.canonicalStateIndexedLiveCutParetoAdapter
+
+portfolioNoExecutionAuthorityRegression :
+  State.portfolioSelectionCreatesExecutionAuthority
+    State.canonicalStateIndexedLiveCutParetoAdapter ≡ false
+portfolioNoExecutionAuthorityRegression =
+  State.portfolioSelectionCreatesExecutionAuthorityIsFalse
+    State.canonicalStateIndexedLiveCutParetoAdapter
+
+terminalConsumerStillRequiredRegression :
+  State.terminalConsumerStillRequired State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
+terminalConsumerStillRequiredRegression =
+  State.terminalConsumerStillRequiredIsTrue State.canonicalStateIndexedLiveCutParetoAdapter
+
+sameGraphCutStateChangeRegression :
+  State.sameGraphFactAppendMayChangeReachabilityAndCut
+    State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
+sameGraphCutStateChangeRegression =
+  State.sameGraphFactAppendMayChangeReachabilityAndCutIsTrue
+    State.canonicalStateIndexedLiveCutParetoAdapter
+
+stateIndexedSelectionNoSourceAuthorityRegression :
+  State.stateIndexedSelectionDoesNotCreateSourceAuthority
+    State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
+stateIndexedSelectionNoSourceAuthorityRegression =
+  State.stateIndexedSelectionDoesNotCreateSourceAuthorityIsTrue
+    State.canonicalStateIndexedLiveCutParetoAdapter
+
+historicalEvidenceRetainedRegression :
+  State.historicalEvidenceMayRemainValidWhileNextStepSalienceChanges
+    State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
+historicalEvidenceRetainedRegression =
+  State.historicalEvidenceMayRemainValidWhileNextStepSalienceChangesIsTrue
+    State.canonicalStateIndexedLiveCutParetoAdapter
+
+parentSnowballPaymentStillFailClosedRegression :
+  State.parentSnowballPaymentMaySkipDependency ≡ false
+parentSnowballPaymentStillFailClosedRegression =
+  State.parentSnowballPaymentMaySkipDependencyIsFalse
+
+currentSalienceNoAuthorityRegression :
+  State.currentSalienceAutomaticallyCreatesAuthority
+    State.canonicalStateIndexedLiveCutParetoBoundary ≡ false
+currentSalienceNoAuthorityRegression =
+  State.currentSalienceAutomaticallyCreatesAuthorityIsFalse
+    State.canonicalStateIndexedLiveCutParetoBoundary
+
+currentCutNoCrossDomainTransferRegression :
+  State.currentMinimalCutAutomaticallyTransfersAcrossDomains
+    State.canonicalStateIndexedLiveCutParetoBoundary ≡ false
+currentCutNoCrossDomainTransferRegression =
+  State.currentMinimalCutAutomaticallyTransfersAcrossDomainsIsFalse
+    State.canonicalStateIndexedLiveCutParetoBoundary
