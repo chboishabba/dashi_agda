@@ -90,7 +90,8 @@ currentMagnitudeAssignmentReceipt = magnitude-assignment-receipt
 -- materialization, not itself a replication result.  The empirical receipt is
 -- pinned to the runtime that produced the currently paid 559/1620 identities.
 -- Later searched-zero trials and transport/source alternatives append state;
--- implementation advances do not retroactively change empirical payment.
+-- implementation advances, including accumulated-receipt resume, do not
+-- retroactively change empirical payment.
 ------------------------------------------------------------------------
 
 record ReplicationIdentityRecoveryReceipt : Set where
@@ -123,7 +124,7 @@ currentReplicationIdentityRecoveryReceipt = replication-identity-recovery-receip
   "agent/malecns-real-benchmark-tranche"
   "a9504ea00a30960a6728f90a5ff31b4d1f97ced6"
   "50de03399961464cd0ad62dc4613ba93d4f48693"
-  "out-of-core pickle ingestion; blockwise scoring; standalone per-trial checkpoints; one-trial-at-a-time incremental merge; optional post-checkpoint source-ZIP release; source-bound Princeton Data Commons mirror resolver"
+  "out-of-core pickle ingestion; blockwise scoring; standalone per-trial checkpoints; one-trial-at-a-time incremental merge; accumulated-receipt resume (298a4bb7585c06d0b8743edd210dff777ee5a74d); long-transfer retry (8f8bf0b834069c0ede282ec79290fccbb1f9fcad); optional post-checkpoint source-ZIP release; source-bound Princeton Data Commons mirror resolver"
   "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_identity_accumulation.json"
   "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_selected_identities_accumulated.csv"
   1620
