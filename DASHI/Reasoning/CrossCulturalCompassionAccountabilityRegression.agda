@@ -5,12 +5,17 @@ open import DASHI.Core.Prelude
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Reasoning.CrossCulturalCompassionAccountabilityExact as Cross
 
-sourceCountRegression : Cross.crossCulturalCompassionSourceCount ≡ 3
+sourceCountRegression : Cross.crossCulturalCompassionSourceCount ≡ 4
 sourceCountRegression = refl
 
 academicAutonomyRelatednessSourcePresentRegression :
   Attr.sourceAuthor Cross.kagitcibasiAutonomyRelatednessSource ≡ "Cigdem Kagitcibasi"
 academicAutonomyRelatednessSourcePresentRegression = refl
+
+autonomyIndividualismSourcePresentRegression :
+  Attr.sourceAuthor Cross.chirkovRyanWillnessSource ≡
+  "Valery I. Chirkov; Richard M. Ryan; Chelsea Willness"
+autonomyIndividualismSourcePresentRegression = refl
 
 sourceAtlasNonPromotingRegression :
   Attr.atlasCreatesAuthority Cross.crossCulturalCompassionSourceAtlas ≡ false
@@ -167,3 +172,24 @@ familyOrCommunityStandingDoesNotReplaceCurrentAuthorityRegression = refl
 situatedRouteStillRequiresRepairCapacityRegression :
   Cross.situatedRouteStillRequiresRepairCapacity ≡ true
 situatedRouteStillRequiresRepairCapacityRegression = refl
+
+------------------------------------------------------------------------
+-- Academic snowball boundary: autonomy is not silently identified with
+-- individualism/independence, and relatedness is not silently identified with
+-- heteronomy.  Cultural form also does not determine internalisation.
+------------------------------------------------------------------------
+
+autonomyNotIndividualismRegression :
+  Cross.AutonomyIndividualismBoundary.autonomyEqualsIndividualism
+    Cross.canonicalAutonomyIndividualismBoundary ≡ false
+autonomyNotIndividualismRegression = refl
+
+relatednessNotHeteronomyRegression :
+  Cross.AutonomyIndividualismBoundary.relatednessEqualsHeteronomy
+    Cross.canonicalAutonomyIndividualismBoundary ≡ false
+relatednessNotHeteronomyRegression = refl
+
+culturalFormNotInternalisationDeterminismRegression :
+  Cross.AutonomyIndividualismBoundary.culturalFormDeterminesInternalisation
+    Cross.canonicalAutonomyIndividualismBoundary ≡ false
+culturalFormNotInternalisationDeterminismRegression = refl
