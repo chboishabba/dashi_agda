@@ -6,6 +6,7 @@ module DASHI.Core.RequiredObserverAxisJoinAdequacyExact where
 -- QueryIndexedProjectionAdequacyExact already establishes that adequacy is
 -- query-relative, not an intrinsic Boolean property of a projection.
 -- IntersectionalNonFactorability already owns the exact factorisation carrier.
+-- ObserverRefinementLatticeExact owns observer pairing.
 --
 -- This module adds only the product law needed by transverse observers:
 -- if a candidate projection retains two required observation axes separately,
@@ -19,6 +20,7 @@ module DASHI.Core.RequiredObserverAxisJoinAdequacyExact where
 
 open import DASHI.Core.Prelude
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 
 RetainsAxis :
@@ -33,7 +35,15 @@ jointAxis :
   (State → A) →
   (State → B) →
   State → A × B
-jointAxis left right state = left state , right state
+jointAxis = Observer.pairObserver
+
+jointAxisIsCanonicalPairObserver :
+  ∀ {State A B : Set}
+    (left : State → A)
+    (right : State → B)
+    (state : State) →
+  jointAxis left right state ≡ Observer.pairObserver left right state
+jointAxisIsCanonicalPairObserver left right state = refl
 
 candidateRetainingBothRetainsJoint :
   ∀ {State Observation A B : Set}
@@ -117,10 +127,6 @@ rightAxisDefectBlocksRetainingBoth defect retained =
 
 ------------------------------------------------------------------------
 -- Query-indexed finite witness.
---
--- The same pair observation answers each coordinate query exactly.  This is a
--- concrete specialization of query-relative adequacy, not a claim that the
--- pair is adequate for every possible query on the fine state.
 ------------------------------------------------------------------------
 
 data DemoState : Set where demo00 demo01 demo10 demo11 : DemoState
