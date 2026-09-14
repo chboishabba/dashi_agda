@@ -6,10 +6,16 @@ cd "$ROOT"
 
 FILES=(
   DASHI/Core/ExperimentalCoordinateDesignExact.agda
+  DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
+  DASHI/Core/ExperimentalCoordinateProjectionBridgeRegression.agda
   DASHI/Core/ActionabilityCostedExperimentChoiceExact.agda
   DASHI/Core/CommonExperimentRealisationExact.agda
   DASHI/Core/DiscriminatorSynthesisExact.agda
   DASHI/Core/CoarseFineRelativeFibreExact.agda
+  DASHI/Core/CandidateFamilyExecutionExact.agda
+  DASHI/Core/CandidateFamilyExecutionRegression.agda
+  DASHI/Core/RequirementConflictBatchExecutionExact.agda
+  DASHI/Core/RequirementConflictBatchExecutionRegression.agda
   DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
   DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
   DASHI/Core/ConsumerAdequacyJointPolicyBidiCompilerExact.agda
@@ -21,6 +27,10 @@ FILES=(
   DASHI/Core/JointSequentialInformationFidelityFixtureExact.agda
   DASHI/Core/SequentialExperimentPlanningValidation.agda
   DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
+  DASHI/ComputerScience/RSA260RequirementConflictBatchSpineExact.agda
+  DASHI/ComputerScience/RSA260RequirementConflictBatchSpineRegression.agda
+  DASHI/ComputerScience/FlyCandidateFamilyExecutionAdapterExact.agda
+  DASHI/ComputerScience/FlyCandidateFamilyExecutionAdapterRegression.agda
   DASHI/CoarseFineFabricEverything.agda
   DASHI/Physics/Foundations/GRQFTDiscriminatorSynthesisExact.agda
   DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda
@@ -50,6 +60,17 @@ grep -q '^modelChangeKeepsWorldCoordinates :' DASHI/Core/RelativeFineModelFideli
 grep -q 'relativeFineInformationEqualsModelFidelityIsFalse' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
 grep -q 'relativeFineCanBeDisclosedAsEvidenceAtFixedModelIsTrue' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
 
+grep -q '^coordinateSeparationYieldsProjectionCollision :' DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
+grep -q '^coordinateReadCannotFactorThroughExisting :' DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
+grep -q '^record CandidateFamilyExecutionSpine' DASHI/Core/CandidateFamilyExecutionExact.agda
+grep -q '^record RequirementConflictBatchSpine' DASHI/Core/RequirementConflictBatchExecutionExact.agda
+grep -q '^data CandidateRelation' DASHI/Core/RequirementConflictBatchExecutionExact.agda
+grep -q '^admittedBatchProjectsToCandidateFamilyExecution :' DASHI/Core/RequirementConflictBatchExecutionExact.agda
+grep -q '^fromRSAReducerRelation :' DASHI/ComputerScience/RSA260RequirementConflictBatchSpineExact.agda
+grep -q '^syntheticBatchExecution :' DASHI/ComputerScience/RSA260RequirementConflictBatchSpineExact.agda
+grep -q '^flyCandidateFamilyExecutionSpine :' DASHI/ComputerScience/FlyCandidateFamilyExecutionAdapterExact.agda
+grep -q '^admitFlyFamilyComposition :' DASHI/ComputerScience/FlyCandidateFamilyExecutionAdapterExact.agda
+
 grep -q '^exactReducedDecisionSelectsSameIntervention :' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
 grep -q '^approximateReducedDecisionSelectsSameIntervention :' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
 grep -q '^data DerivedDecisionAdequacy' DASHI/Core/ConsumerDecisionAdequacyFromReductionExact.agda
@@ -68,6 +89,9 @@ grep -q 'jFineIsMerelyAnotherNameForMaximumComputeFidelityIsFalse' DASHI/Biology
 
 grep -q '^module DASHI.CoarseFineFabricEverything where' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.CoarseFineFabricCalculusExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.ExperimentalCoordinateProjectionBridgeExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.CandidateFamilyExecutionExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.RequirementConflictBatchExecutionExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.CoarseDynamicsTraceCongruenceExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Interop.LocalGlobalBundleGluingExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Interop.ProofArchaeologyCoarseFineAdapterExact' DASHI/CoarseFineFabricEverything.agda
