@@ -5,6 +5,13 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {
     "DASHI/Empirical/DarkDimensionBedroyaParameterManifestBoundaryExact.agda": [
         "module DASHI.Empirical.DarkDimensionBedroyaParameterManifestBoundaryExact where",
+        "import DASHI.Core.AttributedSourceCore as Source",
+        "import DASHI.Core.EmpiricalSourceDiligenceAdmissionExact as Diligence",
+        "import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension",
+        "bedroyaNormalizationSource",
+        "DarkDimension.bedroyaObiedVafaWu2026",
+        "bedroyaEq11NormalizationDiligence",
+        "Diligence.source-diligence",
         "BedroyaParameterManifestStatus",
         "simulationStartRedshiftLocated",
         "fadingOnsetPhiLocated",
