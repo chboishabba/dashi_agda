@@ -165,6 +165,36 @@ classifyPair score with adequatelyPowered score
 ...   | false | false with aboveInteractionThreshold score
 ...     | true  = classified conflict
 ...     | false = classified independent
+
+------------------------------------------------------------------------
+-- Requirement direction is an evidence coordinate, not the opposite sign of
+-- conflict.  The current Mod97 runtime intervenes on parallel post-ReLU units
+-- in one hidden layer, so its singleton/joint pair ablations cannot supply a
+-- directed hidden-unit requirement edge.  An externally paid directional
+-- receipt is a separate admissible source for the generic classifier.
+------------------------------------------------------------------------
+
+data RequirementEvidenceSource : Set where
+  sameLayerPostReLUPairAblation : RequirementEvidenceSource
+  externallyPaidDirectionalRequirement : RequirementEvidenceSource
+
+requirementEvidencePaysDirection : RequirementEvidenceSource → Bool
+requirementEvidencePaysDirection sameLayerPostReLUPairAblation = false
+requirementEvidencePaysDirection externallyPaidDirectionalRequirement = true
+
+classifyPairWithoutRequirementDirection : PairInterventionScore → PairRelationClassification
+classifyPairWithoutRequirementDirection score with adequatelyPowered score
+... | false = underpowered
+... | true with aboveInteractionThreshold score
+...   | true = classified conflict
+...   | false = classified independent
+
+classifyPairWithRequirementEvidence :
+  RequirementEvidenceSource → PairInterventionScore → PairRelationClassification
+classifyPairWithRequirementEvidence source score with requirementEvidencePaysDirection source
+... | true = classifyPair score
+... | false = classifyPairWithoutRequirementDirection score
+
 activationCorrelationIsClassificationInput : Bool
 activationCorrelationIsClassificationInput = false
 syntheticConflictScore : PairInterventionScore
