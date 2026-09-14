@@ -1,0 +1,37 @@
+module DASHI.Law.SensibLawRegulatoryOperationalisationBridgeRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Law.SensibLawRegulatoryOperationalisationBridgeExact as Bridge
+
+parentRegulatoryImplementationReusedRegression :
+  Bridge.parentRegulatoryImplementationReused Bridge.canonicalRegulatoryOperationalisationBoundary
+  ≡ true
+parentRegulatoryImplementationReusedRegression = refl
+
+parentOperationalLegalityReusedRegression :
+  Bridge.parentOperationalLegalityReused Bridge.canonicalRegulatoryOperationalisationBoundary
+  ≡ true
+parentOperationalLegalityReusedRegression = refl
+
+enablingPowerOperativeConstraintRegression :
+  Bridge.enablingPowerAutomaticallyOperationalConstraint Bridge.canonicalRegulatoryOperationalisationBoundary
+  ≡ false
+enablingPowerOperativeConstraintRegression = refl
+
+regulationInstrumentEveryPowerRegression :
+  Bridge.regulationsInstrumentAutomaticallyImplementsEveryDelegatedPower Bridge.canonicalRegulatoryOperationalisationBoundary
+  ≡ false
+regulationInstrumentEveryPowerRegression = refl
+
+formalRuleOperationalStateSeparatedRegression :
+  Bridge.formalAuthorityAndOperationalImplementationAreSeparate Bridge.canonicalRegulatoryOperationalisationBoundary
+  ≡ true
+formalRuleOperationalStateSeparatedRegression = refl
+
+negativeSearchAbsenceRegression :
+  Bridge.unlocatedImplementationAutomaticallyProvesNonExistence Bridge.canonicalRegulatoryOperationalisationBoundary
+  ≡ false
+negativeSearchAbsenceRegression = refl

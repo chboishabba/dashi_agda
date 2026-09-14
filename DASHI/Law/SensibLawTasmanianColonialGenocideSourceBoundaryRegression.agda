@@ -1,0 +1,42 @@
+module DASHI.Law.SensibLawTasmanianColonialGenocideSourceBoundaryRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Law.SensibLawTasmanianColonialGenocideSourceBoundaryExact as Tasmania
+
+cambridgeGenocideSourcePaidRegression :
+  Tasmania.cambridgeGenocideScholarshipPaid Tasmania.canonicalTasmanianColonialGenocideBoundary
+  ≡ true
+cambridgeGenocideSourcePaidRegression = refl
+
+utasHistoricalLocatorPaidRegression :
+  Tasmania.utasHistoricalGenocideLocatorPaid Tasmania.canonicalTasmanianColonialGenocideBoundary
+  ≡ true
+utasHistoricalLocatorPaidRegression = refl
+
+extinctionNarrativeCorrectionPaidRegression :
+  Tasmania.truganiniLastTasmanianNarrativeCorrectedBySource Tasmania.canonicalTasmanianColonialGenocideBoundary
+  ≡ true
+extinctionNarrativeCorrectionPaidRegression = refl
+
+genocideRequiresTotalExtinctionRegression :
+  Tasmania.genocideAutomaticallyRequiresTotalBiologicalExtinction Tasmania.canonicalTasmanianColonialGenocideBoundary
+  ≡ false
+genocideRequiresTotalExtinctionRegression = refl
+
+extinctionNarrativeProvesNoSurvivorsRegression :
+  Tasmania.colonialExtinctionNarrativeAutomaticallyProvesNoPalawaSurvivors Tasmania.canonicalTasmanianColonialGenocideBoundary
+  ≡ false
+extinctionNarrativeProvesNoSurvivorsRegression = refl
+
+scholarshipAutomaticallyLegalJudgmentRegression :
+  Tasmania.historicalScholarshipAutomaticallyJudicialGenocideFinding Tasmania.canonicalTasmanianColonialGenocideBoundary
+  ≡ false
+scholarshipAutomaticallyLegalJudgmentRegression = refl
+
+maboIdentityRegression :
+  Tasmania.tasmanianGenocideHistoryAutomaticallySameObjectAsMaboNativeTitleDoctrine Tasmania.canonicalTasmanianColonialGenocideBoundary
+  ≡ false
+maboIdentityRegression = refl
