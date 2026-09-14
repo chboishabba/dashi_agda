@@ -6,6 +6,9 @@ on:
       - 'DASHI/Arithmetic/AdicGeometricMirror.agda'
       - 'DASHI/Cognition/PNF/PNFIRLearningEverything.agda'
       - 'DASHI/Cognition/PNF/TraumaMemoryHypervoxelBridge.agda'
+      - 'DASHI/Cognition/PNF/ContinuousOscillatorMemoryRefinementExact.agda'
+      - 'DASHI/Cognition/PNF/ContinuousOscillatorMemoryRefinementRegression.agda'
+      - 'DASHI/Cognition/PNF/ContinuousOscillatorSyntheticReceipt.agda'
       - 'DASHI/Cognition/TlureyChaosBridge.agda'
       - 'DASHI/Core/FramedORCSLPGFAdapter.agda'
       - 'DASHI/Dynamics/LogisticAdicManifoldObligations.agda'
@@ -20,7 +23,10 @@ on:
       - 'DASHI/Foundations/StageValuationBundleAtlas.agda'
       - 'DASHI/Physics/Closure/SheetExchangeJFixedResolutionBoundary.agda'
       - 'Docs/support/reference/LogisticAdicStageCommutingSpine.md'
+      - 'Docs/roadmaps/ContinuousOscillatorSyntheticRoadmap.md'
       - 'scripts/check_logistic_adic_stage_spine.py'
+      - 'scripts/run_continuous_oscillator_synthetic.py'
+      - 'tests/test_continuous_oscillator_synthetic.py'
       - '.github/workflows/logistic-adic-stage-agda.yml'
   workflow_dispatch:
 
