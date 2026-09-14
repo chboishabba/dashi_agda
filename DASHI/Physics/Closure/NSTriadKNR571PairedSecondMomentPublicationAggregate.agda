@@ -1,0 +1,13 @@
+module DASHI.Physics.Closure.NSTriadKNR571PairedSecondMomentPublicationAggregate where
+
+-- Single focused check surface for PR #920.
+-- Imports both production and regressions; no additional theorem authority.
+
+import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact
+import DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizationExact
+import DASHI.Physics.Closure.NSTriadKNLuoPairedSecondOrderAbsoluteMagnitudeBridgeExact
+import DASHI.Physics.Closure.NSTriadKNR571CanonicalSecondMomentMagnitudeAdapterExact
+import DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizationRegression
+import DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizationValidation
+import DASHI.Physics.Closure.NSTriadKNR571SecondOrderAbsoluteMagnitudeRegression
+import DASHI.Physics.Closure.NSTriadKNR571CanonicalSecondMomentMagnitudeAdapterRegression
