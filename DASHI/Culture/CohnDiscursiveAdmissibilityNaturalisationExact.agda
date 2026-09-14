@@ -3,6 +3,7 @@ module DASHI.Culture.CohnDiscursiveAdmissibilityNaturalisationExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
+import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Culture.CohnTechnostrategicDiscourseExact as Cohn
 import DASHI.Culture.CohnTechnostrategicSourceAtlasExact as Sources
 import DASHI.Culture.IntellectualReceptionAdmissibilityStratumWhatIfExact as Reception
@@ -162,18 +163,32 @@ normalisedPracticeCannotDetermineAdequacy =
 
 ------------------------------------------------------------------------
 -- History-qualified admissibility dynamics.
---
--- Reuse the intellectual-reception theorem directly: identical present
--- vocabulary does not determine the admissible future cone because arrival
--- history and reception topology can remain hidden.  This is a structural
--- cross-pollination only; it does not claim that Cohn authored that theorem or
--- that intellectual reception and nuclear strategy are the same domain.
 ------------------------------------------------------------------------
 
 presentVocabularyCannotDetermineInstitutionalFutureCone :
   NonFactor.FactorsThrough Reception.presentSurface Reception.futureCode → ⊥
 presentVocabularyCannotDetermineInstitutionalFutureCone =
   Reception.samePresentCannotRecoverFutureCone
+
+------------------------------------------------------------------------
+-- Feminist subject-position cross-pollination.
+--
+-- The existing Irigaray-motivated owner proves that category visibility does
+-- not recover originating subject-position.  Reusing it here prevents a
+-- technostrategic representation of a person/group/consequence from being
+-- promoted into transparent access to that represented subject's standpoint or
+-- originating authority.
+------------------------------------------------------------------------
+
+representedCategoryCannotRecoverOriginatingSubjectPosition :
+  NonFactor.FactorsThrough Subject.categoryVisibility Subject.subjectPosition → ⊥
+representedCategoryCannotRecoverOriginatingSubjectPosition =
+  Subject.categoryVisibilityCannotRecoverSubjectPosition
+
+representationSubjectPositionBoundary :
+  Subject.RepresentationSubjectPositionBoundary
+representationSubjectPositionBoundary =
+  Subject.canonicalRepresentationSubjectPositionBoundary
 
 ------------------------------------------------------------------------
 -- Cross-pollination retains parent ownership.
@@ -206,6 +221,9 @@ record DiscursiveAdmissibilityBoundary : Set where
     presentVocabularyDeterminesFutureCone : Bool
     presentVocabularyDeterminesFutureConeIsFalse :
       presentVocabularyDeterminesFutureCone ≡ false
+    representedCategoryRecoversOriginatingSubjectPosition : Bool
+    representedCategoryRecoversOriginatingSubjectPositionIsFalse :
+      representedCategoryRecoversOriginatingSubjectPosition ≡ false
     expertRecognitionCreatesReality : Bool
     expertRecognitionCreatesRealityIsFalse :
       expertRecognitionCreatesReality ≡ false
@@ -221,6 +239,7 @@ open DiscursiveAdmissibilityBoundary public
 canonicalDiscursiveAdmissibilityBoundary : DiscursiveAdmissibilityBoundary
 canonicalDiscursiveAdmissibilityBoundary =
   discursiveAdmissibilityBoundary
+    false refl
     false refl
     false refl
     false refl
