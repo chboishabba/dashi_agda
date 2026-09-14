@@ -19,6 +19,22 @@ interventionExecutionRemainsUnpaid :
   Runtime.interventionExecution Runtime.currentMod97RuntimeFrontier ≡ Runtime.notExecuted
 interventionExecutionRemainsUnpaid = refl
 
+relationClassifierIsImplemented :
+  Runtime.relationClassifierProducer Runtime.currentMod97RuntimeFrontier ≡ Runtime.implemented
+relationClassifierIsImplemented = refl
+
+relationClassifierExecutionRemainsUnpaid :
+  Runtime.relationClassifierExecution Runtime.currentMod97RuntimeFrontier ≡ Runtime.notExecuted
+relationClassifierExecutionRemainsUnpaid = refl
+
+relationGraphCompilerIsImplemented :
+  Runtime.relationGraphCompilerProducer Runtime.currentMod97RuntimeFrontier ≡ Runtime.implemented
+relationGraphCompilerIsImplemented = refl
+
+relationGraphCompilerExecutionRemainsUnpaid :
+  Runtime.relationGraphCompilerExecution Runtime.currentMod97RuntimeFrontier ≡ Runtime.notExecuted
+relationGraphCompilerExecutionRemainsUnpaid = refl
+
 betaProducerIsImplemented :
   Runtime.betaProducer Runtime.currentMod97RuntimeFrontier ≡ Runtime.implemented
 betaProducerIsImplemented = refl
