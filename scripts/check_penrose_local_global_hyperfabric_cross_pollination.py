@@ -2,10 +2,10 @@
 """Focused static contract for Penrose local/global hyperfabric cross-pollination.
 
 This checker requires a thin Interop bridge over already-owned Penrose,
-LocalFibre, NDim/Pareto, graph-colouring, RSA reducer, and Fly held-out
-surfaces. It does not certify any of those domain theorems, does not create
-source authority, and does not turn proof-architecture correspondence into
-theorem/domain identity.
+LocalFibre, NDim/Pareto, graph-colouring, RSA reducer, Fly held-out, recursive
+Pareto, and live-set scheduler surfaces. It does not certify any of those
+domain theorems, does not create source authority, and does not turn
+proof-architecture correspondence into theorem/domain identity.
 """
 
 from pathlib import Path
@@ -28,6 +28,8 @@ require(OWNER, [
     "DASHI.Reasoning.LocalFibreHyperfabricExact",
     "DASHI.Core.NDimParetoHyperfabricExact",
     "DASHI.Core.AdmissibleConsumerMDLHyperfabricExact",
+    "DASHI.Core.RecursiveParetoFrontierLiftingExact",
+    "DASHI.Core.LiveSetParetoExperimentSchedulerExact",
     "DASHI.Combinatorics.GraphColouringRecolourPantsSnowballExact",
     "DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact",
     "DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact",
@@ -56,6 +58,10 @@ require(OWNER, [
     "canonicalFlyHeldOutCompatibilityAdapter",
     "ParetoEligibilityBeforeOptimizationAdapter",
     "canonicalParetoEligibilityBeforeOptimizationAdapter",
+    "RecursiveParetoAdmissionAdapter",
+    "canonicalRecursiveParetoAdmissionAdapter",
+    "LiveSetParetoSchedulerAdapter",
+    "canonicalLiveSetParetoSchedulerAdapter",
     "ConstructiveGluingObstructionDuality",
     "canonicalConstructiveGluingObstructionDuality",
     "terminalConsumerStillMustBePaid",
@@ -63,6 +69,10 @@ require(OWNER, [
     "paretoSelectionCannotRescueIneligibleCandidate",
     "transferredArchitectureDoesNotTransferTheoremAuthority",
     "rsaSnowballPaymentCannotSkipDependency",
+    "recursiveParetoDoesNotCreateProofAuthority",
+    "liveSetAuthorityHardGate",
+    "liveSetConsumerRelevanceHardGate",
+    "paretoChoiceDoesNotCreateUniqueScientificTruth",
     "localValidityDoesNotImplyGlobalValidity",
     "projectionValidityDoesNotImplySourceSufficiency",
     "boundedLocalCarrierDoesNotImplyGlobalCompactnessOrClosure",
@@ -82,7 +92,7 @@ require(OWNER, [
     "flyMaleCNSCandidate",
     "navierStokesCandidate",
     "sensibLawCandidate",
-    "downstreamCandidateMapIsImplementation",
+    "donorKernelModifiedInThisTranche",
 ])
 
 require(REGRESSION, [
@@ -105,9 +115,14 @@ require(REGRESSION, [
     "flyHeldOutStillRequiredRegression",
     "paretoIneligibleCannotWinRegression",
     "paretoConsumerInadequateCannotWinRegression",
+    "recursiveParetoNoAuthorityRegression",
+    "recursiveParetoOldCostsPreservedRegression",
+    "liveParetoAuthorityGateRegression",
+    "liveParetoConsumerGateRegression",
+    "liveParetoNoUniqueTruthRegression",
     "terminalConsumerPaymentRegression",
     "architectureTransferNoAuthorityRegression",
-    "downstreamCandidateMapIsNotImplementationRegression",
+    "downstreamCandidateMapDoesNotMutateDonorsRegression",
 ])
 
 print("Penrose local/global hyperfabric cross-pollination static contract: OK")
