@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
 import DASHI.Core.BidiResidualApproximationExact as Bidi
 import DASHI.Interop.SourceDiligenceProofSearchBridgeExact as SourceSearch
+import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Empirical.DarkDimensionResidualDebtRoutingExact as DebtRouting
 import DASHI.Empirical.DarkDimensionFadingDMParentLineageExact as ParentLineage
 
@@ -61,63 +62,68 @@ bedroyaSameObjectSearchExperiment =
 
 exactChildObservationWouldRefineCustody :
   Bidi.FibreRefines
-    (Bidi.MeasuredFibre
-      candidateCustodyPrior
-      sameObjectIdentityMeasurement
-      exactChildSameObject)
+    (Bidi.MeasuredFibre candidateCustodyPrior sameObjectIdentityMeasurement exactChildSameObject)
     candidateCustodyPrior
 exactChildObservationWouldRefineCustody =
   Bidi.partialMeasurementIsUsefulWithoutExactClosure
-    bedroyaSameObjectSearchExperiment
-    exactChildSameObject
+    bedroyaSameObjectSearchExperiment exactChildSameObject
 
 lineageOnlyObservationWouldRefineCustody :
   Bidi.FibreRefines
-    (Bidi.MeasuredFibre
-      candidateCustodyPrior
-      sameObjectIdentityMeasurement
-      lineageOnlyEvidence)
+    (Bidi.MeasuredFibre candidateCustodyPrior sameObjectIdentityMeasurement lineageOnlyEvidence)
     candidateCustodyPrior
 lineageOnlyObservationWouldRefineCustody =
   Bidi.partialMeasurementIsUsefulWithoutExactClosure
-    bedroyaSameObjectSearchExperiment
-    lineageOnlyEvidence
+    bedroyaSameObjectSearchExperiment lineageOnlyEvidence
 
 parentOnlyLineageWitness :
-  Bidi.MeasuredFibre
-    candidateCustodyPrior
-    sameObjectIdentityMeasurement
-    lineageOnlyEvidence
-    parentOnlyImplementation
+  Bidi.MeasuredFibre candidateCustodyPrior sameObjectIdentityMeasurement lineageOnlyEvidence parentOnlyImplementation
 parentOnlyLineageWitness = candidate-admissible , refl
 
 ancestorLineageWitness :
-  Bidi.MeasuredFibre
-    candidateCustodyPrior
-    sameObjectIdentityMeasurement
-    lineageOnlyEvidence
-    ancestorParameterizationOnly
+  Bidi.MeasuredFibre candidateCustodyPrior sameObjectIdentityMeasurement lineageOnlyEvidence ancestorParameterizationOnly
 ancestorLineageWitness = candidate-admissible , refl
 
-parentOnlyNotAncestor :
-  parentOnlyImplementation ≡ ancestorParameterizationOnly → ⊥
+parentOnlyNotAncestor : parentOnlyImplementation ≡ ancestorParameterizationOnly → ⊥
 parentOnlyNotAncestor ()
 
 lineageOnlyObservationDoesNotIdentifyCustody :
   Bidi.PointIdentifies
-    (Bidi.MeasuredFibre
-      candidateCustodyPrior
-      sameObjectIdentityMeasurement
-      lineageOnlyEvidence)
-    (λ candidate → candidate) →
-  ⊥
+    (Bidi.MeasuredFibre candidateCustodyPrior sameObjectIdentityMeasurement lineageOnlyEvidence)
+    (λ candidate → candidate) → ⊥
 lineageOnlyObservationDoesNotIdentifyCustody identifies =
   parentOnlyNotAncestor
-    (identifies
-      parentOnlyImplementation
-      ancestorParameterizationOnly
-      parentOnlyLineageWitness
-      ancestorLineageWitness)
+    (identifies parentOnlyImplementation ancestorParameterizationOnly
+      parentOnlyLineageWitness ancestorLineageWitness)
+
+------------------------------------------------------------------------
+-- Attribution ladder after a hypothetical exact-child location.
+-- Location/identity is upstream of proposition support; it does not close it.
+------------------------------------------------------------------------
+
+bedroyaPostIdentitySupportGap : SourceSearch.SourceDiligenceGap
+bedroyaPostIdentitySupportGap = SourceSearch.propositionSupportUnresolved
+
+bedroyaPostIdentitySupportDemand : SourceSearch.SourceDiligenceSearchDemand
+bedroyaPostIdentitySupportDemand =
+  SourceSearch.source-diligence-search-demand
+    "2026 child manifest support for the exact standard tuple and normalization map"
+    bedroyaPostIdentitySupportGap
+    Search.propositionSourceProducer
+    refl
+    "DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact"
+    "bedroya-post-identity-proposition-support-demand"
+
+postIdentitySupportStillRequiresSourcePayment :
+  SourceSearch.producer bedroyaPostIdentitySupportDemand
+  ≡ Search.propositionSourceProducer
+postIdentitySupportStillRequiresSourcePayment = refl
+
+data SameObjectLocationClosesPropositionSupport : Set where
+
+sameObjectLocationDoesNotCloseSupport :
+  SameObjectLocationClosesPropositionSupport → ⊥
+sameObjectLocationDoesNotCloseSupport ()
 
 childSameObjectStillUnacquired :
   Acquisition.fullTextAcquired bedroya2026SameObjectTarget ≡ false
