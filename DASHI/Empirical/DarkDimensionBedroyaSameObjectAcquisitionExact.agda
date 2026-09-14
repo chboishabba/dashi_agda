@@ -98,7 +98,6 @@ lineageOnlyObservationDoesNotIdentifyCustody identifies =
 
 ------------------------------------------------------------------------
 -- Attribution ladder after a hypothetical exact-child location.
--- Location/identity is upstream of proposition support; it does not close it.
 ------------------------------------------------------------------------
 
 bedroyaPostIdentitySupportGap : SourceSearch.SourceDiligenceGap
@@ -119,8 +118,6 @@ postIdentitySupportStillRequiresSourcePayment :
   ≡ Search.propositionSourceProducer
 postIdentitySupportStillRequiresSourcePayment = refl
 
--- After Eq. (11) pays the paper-level m0*n0 / rho_DM^0 identity, two narrower
--- proposition-support demands remain.  They are deliberately distinct.
 bedroyaSampledDensityMappingDemand : SourceSearch.SourceDiligenceSearchDemand
 bedroyaSampledDensityMappingDemand =
   SourceSearch.source-diligence-search-demand
@@ -140,6 +137,16 @@ bedroyaV0NormalizationDemand =
     refl
     "DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact"
     "bedroya-V0-normalization-demand"
+
+bedroyaInitialScalarVelocityConventionDemand : SourceSearch.SourceDiligenceSearchDemand
+bedroyaInitialScalarVelocityConventionDemand =
+  SourceSearch.source-diligence-search-demand
+    "initial scalar velocity convention used by the 2026 CLASS implementation"
+    SourceSearch.propositionSupportUnresolved
+    Search.propositionSourceProducer
+    refl
+    "DASHI.Empirical.DarkDimensionBedroyaBackgroundInputContractExact"
+    "bedroya-initial-scalar-velocity-convention-demand"
 
 data SampledDensitySupportEqualsV0Support : Set where
 
