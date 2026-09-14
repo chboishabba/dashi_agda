@@ -11,7 +11,9 @@ module DASHI.Core.ContextIndexedGovernedObservationExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ConsumerIndexedResidualRefinementExact as Consumer
+import DASHI.Core.ConsumerResidualRepairCrosswalkExact as Crosswalk
 
 record ContextIndexedGovernedFamily
     (State Context Query Surface : Set)
@@ -50,6 +52,18 @@ record ActiveGovernedCollision
 
 open ActiveGovernedCollision public
 
+activeGovernedCollisionAsCanonicalNonDescent :
+  ∀ {State Context Query Surface}
+    {observe : State → Surface}
+    {family : ContextIndexedGovernedFamily State Context Query Surface observe}
+    {context : Context} {query : Query} →
+  (defect : ActiveGovernedCollision family context query) →
+  Descent.ConsumerNonDescentWitness
+    observe
+    (consume family (axis defect))
+activeGovernedCollisionAsCanonicalNonDescent defect =
+  Crosswalk.residualCollisionToNonDescent (collision defect)
+
 activeGovernedCollisionBlocksSafety :
   ∀ {State Context Query Surface}
     {observe : State → Surface}
@@ -59,9 +73,10 @@ activeGovernedCollisionBlocksSafety :
   GovernedSafeFor family context query →
   ⊥
 activeGovernedCollisionBlocksSafety defect safe =
-  Consumer.coarseCollisionBlocksSufficiency
-    (collision defect)
-    (safe (axis defect) (axisIsActive defect))
+  Descent.nonDescentWitnessBlocksSufficiency
+    (activeGovernedCollisionAsCanonicalNonDescent defect)
+    (Crosswalk.residualSufficientToCanonical
+      (safe (axis defect) (axisIsActive defect)))
 
 -- Requirement inclusion is the variable-rank analogue of required-axis join
 -- monotonicity: if every weak requirement is also active in the stronger

@@ -63,7 +63,8 @@ causalAbstractionToGenericIntertwiner abstraction intervention =
 
 ------------------------------------------------------------------------
 -- Round 2's robustness witness is stronger than the intended ensemble-relative
--- reading.  It nevertheless induces the correctly quantified declared version.
+-- reading.  Reuse the canonical universal -> declared weakening rather than
+-- rebuilding the membership-indexed record by hand.
 ------------------------------------------------------------------------
 
 round2RobustnessImpliesDeclaredRobustness :
@@ -77,7 +78,7 @@ round2RobustnessImpliesDeclaredRobustness :
     plan
     (Round2.ensemble robust)
 round2RobustnessImpliesDeclaredRobustness robust =
-  Robustness.robustOnDeclared λ future member →
+  Robustness.fromUniversalObligation λ future →
     Round2.evaluationIsForPlan robust future ,
     Round2.allDeclaredFuturesAcceptable robust future
 
