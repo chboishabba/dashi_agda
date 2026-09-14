@@ -10,6 +10,7 @@ WORLD_COMPILER_BIN="${SLR_WORLD_COMPILER_BIN:-}"
 CONSUMER_RESIDUAL_BIN="${SLR_CONSUMER_RESIDUAL_BIN:-}"
 EVIDENCE_PAYMENT_BIN="${SLR_EVIDENCE_PAYMENT_BIN:-}"
 RESIDUAL_PLANNER_BIN="${SLR_RESIDUAL_PLANNER_BIN:-}"
+WIKIMEDIA_CANDIDATE_PROVIDER_BIN="${SLR_WIKIMEDIA_CANDIDATE_PROVIDER_BIN:-}"
 ROUTE_SELECTOR_BIN="${SLR_ROUTE_SELECTOR_BIN:-}"
 WORLD_STORE_BIN="${SLR_WORLD_STORE_BIN:-}"
 SLR_SPACY_OBSERVATION_STREAM="${SLR_SPACY_OBSERVATION_STREAM:-}"
@@ -24,6 +25,7 @@ SLR_SOURCE_REVISION_REF="${SLR_SOURCE_REVISION_REF:-}"
 SLR_SPACY_MODEL="${SLR_SPACY_MODEL:-}"
 ROUND_DIR="$OUT_DIR/world-research-rounds/round-$ITERATION_INDEX"
 GENERATED_OBSERVATIONS="$ROUND_DIR/spacy-observations.slro"
+GENERATED_ROUTE_CANDIDATES="$ROUND_DIR/wikimedia-route-candidates.slrg"
 SLR_WORLD_WIRE_STREAM="$ROUND_DIR/world-wire.slrw"
 SLR_RESIDUAL_WORLD_STREAM="$ROUND_DIR/residual-world.slrw"
 SLR_REVIEW_PAYMENT_STREAM="$ROUND_DIR/review-payment.slrw"
@@ -34,6 +36,7 @@ COMPILER_ERR="$ROUND_DIR/world-compiler.stderr"
 RESIDUAL_ERR="$ROUND_DIR/consumer-residual.stderr"
 EVIDENCE_ERR="$ROUND_DIR/evidence-payment.stderr"
 PLANNER_ERR="$ROUND_DIR/residual-planner.stderr"
+PROVIDER_ERR="$ROUND_DIR/wikimedia-candidate-provider.stderr"
 SELECTOR_ERR="$ROUND_DIR/route-selector.stderr"
 PG_RECEIPT="$ROUND_DIR/postgres-world-persistence-receipt.txt"
 PG_REVIEW_RECEIPT="$ROUND_DIR/postgres-review-persistence-receipt.txt"
@@ -89,14 +92,20 @@ if [[ -z "$RESIDUAL_PLANNER_BIN" ]] && command -v sensiblaw-residual-planner >/d
 [[ -n "$RESIDUAL_PLANNER_BIN" && -x "$RESIDUAL_PLANNER_BIN" ]] || { printf 'ERROR: rust-residual-planner-unavailable; set SLR_RESIDUAL_PLANNER_BIN or install sensiblaw-residual-planner\n' >&2; exit 1; }
 "$RESIDUAL_PLANNER_BIN" plan --frontier "$PG_FRONTIER" --output "$SLR_ROUTE_INTENTS" 2> "$PLANNER_ERR"
 
-if [[ -n "$SLR_ROUTE_CANDIDATE_STREAM" ]]; then
-  [[ -s "$SLR_ROUTE_CANDIDATE_STREAM" ]] || { printf 'ERROR: binary-route-candidates-unavailable; SLR_ROUTE_CANDIDATE_STREAM is not a non-empty SLRG stream\n' >&2; exit 1; }
-  if [[ -z "$ROUTE_SELECTOR_BIN" ]] && command -v sensiblaw-route-selector >/dev/null 2>&1; then ROUTE_SELECTOR_BIN="$(command -v sensiblaw-route-selector)"; fi
-  [[ -n "$ROUTE_SELECTOR_BIN" && -x "$ROUTE_SELECTOR_BIN" ]] || { printf 'ERROR: rust-route-selector-unavailable; set SLR_ROUTE_SELECTOR_BIN or install sensiblaw-route-selector\n' >&2; exit 1; }
-  "$ROUTE_SELECTOR_BIN" select --intents "$SLR_ROUTE_INTENTS" --candidates "$SLR_ROUTE_CANDIDATE_STREAM" --output "$SLR_SELECTED_ROUTES" 2> "$SELECTOR_ERR"
+if [[ -z "$SLR_ROUTE_CANDIDATE_STREAM" ]]; then
+  [[ -n "$SLR_SOURCE_QID" ]] || { printf 'ERROR: route-candidate-root-qid-unavailable; set SLR_SOURCE_QID or SLR_ROUTE_CANDIDATE_STREAM\n' >&2; exit 1; }
+  if [[ -z "$WIKIMEDIA_CANDIDATE_PROVIDER_BIN" ]] && command -v sensiblaw-wikimedia-candidate-provider >/dev/null 2>&1; then WIKIMEDIA_CANDIDATE_PROVIDER_BIN="$(command -v sensiblaw-wikimedia-candidate-provider)"; fi
+  [[ -n "$WIKIMEDIA_CANDIDATE_PROVIDER_BIN" && -x "$WIKIMEDIA_CANDIDATE_PROVIDER_BIN" ]] || { printf 'ERROR: rust-wikimedia-candidate-provider-unavailable; set SLR_WIKIMEDIA_CANDIDATE_PROVIDER_BIN or install sensiblaw-wikimedia-candidate-provider\n' >&2; exit 1; }
+  "$WIKIMEDIA_CANDIDATE_PROVIDER_BIN" fetch --qid "$SLR_SOURCE_QID" --output "$GENERATED_ROUTE_CANDIDATES" 2> "$PROVIDER_ERR"
+  SLR_ROUTE_CANDIDATE_STREAM="$GENERATED_ROUTE_CANDIDATES"
 fi
 
-printf 'SLR_WORLD_PIPELINE_BACKEND spacy_boundary=python-local observation_wire=SLRO compiler=rust-world-compiler consumer_spec=SLRC residual_compiler=rust-consumer-residual evidence_review=optional-SLRE active_frontier=rust-world-store producer_planner=rust-residual-planner route_candidates=optional-SLRG route_selector=rust-route-selector world_wire=SLRW store=rust-world-store binary_wire=true json_transport=false regex_world_parser=false python_world_semantics=false postgres_persistence_is_semantic_authority=false route_intent_is_claim_truth=false\n' >> "$PG_ERR"
+[[ -s "$SLR_ROUTE_CANDIDATE_STREAM" ]] || { printf 'ERROR: binary-route-candidates-unavailable; route candidate producer returned no SLRG stream\n' >&2; exit 1; }
+if [[ -z "$ROUTE_SELECTOR_BIN" ]] && command -v sensiblaw-route-selector >/dev/null 2>&1; then ROUTE_SELECTOR_BIN="$(command -v sensiblaw-route-selector)"; fi
+[[ -n "$ROUTE_SELECTOR_BIN" && -x "$ROUTE_SELECTOR_BIN" ]] || { printf 'ERROR: rust-route-selector-unavailable; set SLR_ROUTE_SELECTOR_BIN or install sensiblaw-route-selector\n' >&2; exit 1; }
+"$ROUTE_SELECTOR_BIN" select --intents "$SLR_ROUTE_INTENTS" --candidates "$SLR_ROUTE_CANDIDATE_STREAM" --output "$SLR_SELECTED_ROUTES" 2> "$SELECTOR_ERR"
 
-printf 'spacy_observation_stream=%s\nworld_wire_stream=%s\nconsumer_spec=%s\nresidual_world_stream=%s\nevidence_review_spec=%s\nreview_payment_stream=%s\npostgres_latest_frontier=%s\nroute_intents=%s\nroute_candidate_stream=%s\nselected_routes=%s\nspacy_stderr=%s\ncompiler_stderr=%s\nresidual_stderr=%s\nevidence_stderr=%s\nplanner_stderr=%s\nselector_stderr=%s\nround_dir=%s\n' \
-  "$SLR_SPACY_OBSERVATION_STREAM" "$SLR_WORLD_WIRE_STREAM" "$SLR_CONSUMER_SPEC" "$SLR_RESIDUAL_WORLD_STREAM" "$SLR_EVIDENCE_REVIEW_SPEC" "$SLR_REVIEW_PAYMENT_STREAM" "$PG_FRONTIER" "$SLR_ROUTE_INTENTS" "$SLR_ROUTE_CANDIDATE_STREAM" "$SLR_SELECTED_ROUTES" "$SPACY_ERR" "$COMPILER_ERR" "$RESIDUAL_ERR" "$EVIDENCE_ERR" "$PLANNER_ERR" "$SELECTOR_ERR" "$ROUND_DIR"
+printf 'SLR_WORLD_PIPELINE_BACKEND spacy_boundary=python-local observation_wire=SLRO compiler=rust-world-compiler consumer_spec=SLRC residual_compiler=rust-consumer-residual evidence_review=optional-SLRE active_frontier=rust-world-store producer_planner=rust-residual-planner route_candidates=rust-wikimedia-rdf-provider route_selector=rust-route-selector world_wire=SLRW store=rust-world-store binary_wire=true json_transport=false regex_world_parser=false python_world_semantics=false postgres_persistence_is_semantic_authority=false route_intent_is_claim_truth=false route_candidate_is_claim_truth=false\n' >> "$PG_ERR"
+
+printf 'spacy_observation_stream=%s\nworld_wire_stream=%s\nconsumer_spec=%s\nresidual_world_stream=%s\nevidence_review_spec=%s\nreview_payment_stream=%s\npostgres_latest_frontier=%s\nroute_intents=%s\nroute_candidate_stream=%s\nselected_routes=%s\nspacy_stderr=%s\ncompiler_stderr=%s\nresidual_stderr=%s\nevidence_stderr=%s\nplanner_stderr=%s\nprovider_stderr=%s\nselector_stderr=%s\nround_dir=%s\n' \
+  "$SLR_SPACY_OBSERVATION_STREAM" "$SLR_WORLD_WIRE_STREAM" "$SLR_CONSUMER_SPEC" "$SLR_RESIDUAL_WORLD_STREAM" "$SLR_EVIDENCE_REVIEW_SPEC" "$SLR_REVIEW_PAYMENT_STREAM" "$PG_FRONTIER" "$SLR_ROUTE_INTENTS" "$SLR_ROUTE_CANDIDATE_STREAM" "$SLR_SELECTED_ROUTES" "$SPACY_ERR" "$COMPILER_ERR" "$RESIDUAL_ERR" "$EVIDENCE_ERR" "$PLANNER_ERR" "$PROVIDER_ERR" "$SELECTOR_ERR" "$ROUND_DIR"
