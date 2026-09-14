@@ -2,17 +2,6 @@ module DASHI.Core.ConsumerObserverJoinResidualExact where
 
 ------------------------------------------------------------------------
 -- CONSUMER OBSERVER JOINS + HOT/COLD EXACT REOPENING
---
--- Incoming PR #588 independently exposes observer pairing as an information
--- join.  This module lands only the theorem consequences needed by the current
--- reopenable-consumer stack: joined views refine each component; a hot
--- consumer-sufficient projection may retain a cold residual for exact reopening;
--- and minimality is stated as an explicit universal property rather than
--- inferred from compression size.
---
--- Canonical ownership note: ObserverRefinementLatticeExact owns the underlying
--- pair observer/refinement law.  This module keeps its existential Observer
--- wrapper API but reuses that canonical pairing implementation directly.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -53,17 +42,17 @@ joinRefinesLeft :
   ∀ {State} (left right : Observer State) →
   Refines (joinObserver left right) left
 joinRefinesLeft left right =
-  refines (Lattice.pairRefinesLeft (observe left) (observe right))
+  refines
+    (λ {left = x} {right = y} same →
+      Lattice.pairRefinesLeft (observe left) (observe right) x y same)
 
 joinRefinesRight :
   ∀ {State} (left right : Observer State) →
   Refines (joinObserver left right) right
 joinRefinesRight left right =
-  refines (Lattice.pairRefinesRight (observe left) (observe right))
-
-------------------------------------------------------------------------
--- Exact hot/cold decomposition.
-------------------------------------------------------------------------
+  refines
+    (λ {left = x} {right = y} same →
+      Lattice.pairRefinesRight (observe left) (observe right) x y same)
 
 record RecoverableHotCold
     (Fine Hot Residual : Set) : Set₁ where
@@ -94,10 +83,6 @@ sameHotAndResidualSameFine recoverable {left} {right} sameHot sameResidual =
       ≡ reopen recoverable (hot recoverable right) (residual recoverable right)
     sameReopened rewrite sameHot | sameResidual = refl
 
-------------------------------------------------------------------------
--- Consumer sufficiency is ordinary descent through the hot projection.
-------------------------------------------------------------------------
-
 record ConsumerSufficientHotState
     {Fine Hot Output : Set}
     (hot : Fine → Hot)
@@ -107,13 +92,6 @@ record ConsumerSufficientHotState
     descent : Kernel.ConsumerDescent hot consume
 
 open ConsumerSufficientHotState public
-
-------------------------------------------------------------------------
--- Minimality is not guessed from bit-count or dimension.  It is the universal
--- property: every other consumer-sufficient projection factors the proposed
--- hot state.  This is intentionally a certificate/obligation, not an automatic
--- theorem for every projection.
-------------------------------------------------------------------------
 
 record MinimalConsumerSufficientHotState
     {Fine Hot Output : Set}
@@ -130,14 +108,6 @@ record MinimalConsumerSufficientHotState
         (λ factor → ∀ fine → hot fine ≡ factor (other fine))
 
 open MinimalConsumerSufficientHotState public
-
-------------------------------------------------------------------------
--- A performant representation may therefore use
---
---   hot consumer-sufficient state + cold exact residual.
---
--- The hot projection is not claimed to reconstruct the fine state by itself.
-------------------------------------------------------------------------
 
 record ReopenableMinimalConsumerState
     (Fine Hot Residual Output : Set)
