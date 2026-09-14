@@ -14,7 +14,7 @@ import DASHI.Core.FactorisationSpineCrosswalkExact as Crosswalk
 data State : Set where left right : State
 data Surface : Set where same : Surface
 data Outcome : Set where yes : Outcome
-\data QueryKey : Set where q : QueryKey
+data QueryKey : Set where q : QueryKey
 
 project : State → Surface
 project _ = same
