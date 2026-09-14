@@ -1,5 +1,6 @@
 module DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationExact where
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
@@ -8,6 +9,8 @@ open import Data.Empty using (⊥)
 import DASHI.Interop.PenroseLocalGlobalHyperfabricCrossPollinationExact as Parent
 import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact as Live
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
+import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
 import DASHI.Cognition.PNF.SensibLawDutySourceLineageRefinementCutRerunExact as GuardedCut
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound83Exact as NS83
@@ -98,6 +101,49 @@ canonicalStateIndexedLiveCutParetoAdapter = stateIndexedLiveCutParetoAdapter
   true refl
   true refl
   true refl
+
+------------------------------------------------------------------------
+-- Constructive state-indexed Pareto eligibility weld.
+--
+-- Current residual relevance is the consumer-adequacy gate; current authority
+-- admissibility is the hard admissibility gate. The portfolio's declared move
+-- cost is reused as the description-length/resource coordinate. This weld
+-- constructs eligibility only; it does not construct route admission, Pareto
+-- optimality, experimental authority, or theorem authority.
+------------------------------------------------------------------------
+
+asStateIndexedMDLProblem :
+  (P : Portfolio.ExperimentPortfolio) →
+  Portfolio.ResidualContext P →
+  Portfolio.Consumer P →
+  Portfolio.Authority P →
+  Pareto.ConsumerMDLProblem
+asStateIndexedMDLProblem P residual consumer authority =
+  Pareto.consumerMDLProblem
+    (Portfolio.Experiment P)
+    (λ experiment → Portfolio.admissibleNow P authority experiment ≡ true)
+    (λ experiment → Portfolio.relevantNow P residual consumer experiment ≡ true)
+    (λ experiment → Choice.cost (Portfolio.move P experiment))
+    (λ _ _ → ⊤)
+    (Portfolio.experimentReference P)
+    "state-indexed residual-portfolio resource-cost code"
+    "current residual / consumer / authority context"
+
+portfolioCandidateIsEligible :
+  ∀ {P residual consumer authority experiment} →
+  Portfolio.PortfolioCandidate P residual consumer authority experiment →
+  Pareto.Eligible
+    (asStateIndexedMDLProblem P residual consumer authority)
+    experiment
+portfolioCandidateIsEligible candidate =
+  Portfolio.admissible candidate , Portfolio.relevant candidate
+
+stateIndexedEligibilityDoesNotCreateRouteAdmission : Bool
+stateIndexedEligibilityDoesNotCreateRouteAdmission = true
+
+stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue :
+  stateIndexedEligibilityDoesNotCreateRouteAdmission ≡ true
+stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue = refl
 
 ------------------------------------------------------------------------
 -- Exact source-/authority-preserving legal adapters.
