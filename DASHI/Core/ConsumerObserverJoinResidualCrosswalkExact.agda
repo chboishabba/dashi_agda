@@ -10,12 +10,6 @@ import DASHI.Core.ObserverRefinementLatticeExact as Lattice
 
 ------------------------------------------------------------------------
 -- WRAPPED OBSERVER / HOT-COLD CROSSWALK
---
--- ConsumerObserverJoinResidualExact carries useful packaging and the minimal
--- consumer-hot-state universal property.  Its observer refinement, exact
--- hot/cold reopening, and explicit consumer descent are exact manifestations of
--- existing canonical Core owners.  Translate them rather than creating another
--- generic observer/reopening/factorisation theory.
 ------------------------------------------------------------------------
 
 wrappedRefinesToLattice :
@@ -23,14 +17,17 @@ wrappedRefinesToLattice :
     {fine coarse : Join.Observer State} →
   Join.Refines fine coarse →
   Lattice.Refines (Join.observe coarse) (Join.observe fine)
-wrappedRefinesToLattice refinement = Join.collisionMapsBack refinement
+wrappedRefinesToLattice refinement x y same =
+  Join.collisionMapsBack refinement {left = x} {right = y} same
 
 latticeRefinesToWrapped :
   ∀ {State : Set}
     {fine coarse : Join.Observer State} →
   Lattice.Refines (Join.observe coarse) (Join.observe fine) →
   Join.Refines fine coarse
-latticeRefinesToWrapped refinement = Join.refines refinement
+latticeRefinesToWrapped refinement =
+  Join.refines
+    (λ {left = x} {right = y} same → refinement x y same)
 
 joinObserverUsesCanonicalPair :
   ∀ {State : Set}
