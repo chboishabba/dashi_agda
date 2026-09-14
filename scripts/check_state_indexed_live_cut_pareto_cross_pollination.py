@@ -2,10 +2,9 @@
 """Static contract for state-indexed live-cut Pareto cross-pollination.
 
 The child composes the existing local/global bridge with residual/live-set
-salience, residual-conditioned experiment portfolios, the source-correct
-SensibLaw guarded-cut rerun, and the current NS Round83 producer cut. It must
-not create legal authority, execution authority, candidate admission from
-salience alone, or Clay promotion around an unpaid NS producer.
+salience, residual-conditioned experiment portfolios, source-correct SensibLaw
+guarded cuts, the current NS Round83 producer cut, and least-privilege proof
+search. It must not create authority or route around unpaid consumers.
 """
 
 from pathlib import Path
@@ -28,6 +27,7 @@ require(OWNER, [
     "PenroseLocalGlobalHyperfabricCrossPollinationExact",
     "ResidualLiveSetSalienceSchedulerBidiExact",
     "ResidualConditionedExperimentPortfolioExact",
+    "ProofSearchLeastPrivilegeAdmissionExact",
     "SensibLawDutySourceLineageRefinementCutRerunExact",
     "NSTriadKNHighestAlphaRound83Exact",
     "StateIndexedLiveCutParetoAdapter",
@@ -54,6 +54,15 @@ require(OWNER, [
     "closedAlgebraRemainsHighestSalience",
     "currentNSCutMayBeSkippedByPareto",
     "crossPollinationCreatesNSTheoremAuthority",
+    "LeastPrivilegeLiveCutAdmissionAdapter",
+    "canonicalLeastPrivilegeLiveCutAdmissionAdapter",
+    "theoremNameStringCreatesProofCapability",
+    "routeMayElaborateBeforeAdmission",
+    "routeMaySilentlyStrengthenHypotheses",
+    "localLemmaAutomaticallyMovesProgrammeFrontier",
+    "lemmaCountIsAuthoritativeProgress",
+    "duplicateRouteShouldBeReproved",
+    "liveCutSalienceCannotBypassRouteAdmission",
 ])
 
 require(REGRESSION, [
@@ -72,6 +81,12 @@ require(REGRESSION, [
     "nsClosedAlgebraNotHighestSalienceRegression",
     "nsParetoCannotSkipCurrentCutRegression",
     "nsCrossPollinationNoAuthorityRegression",
+    "routeAdmissionRequiredRegression",
+    "silentStrengtheningBlockedRegression",
+    "localLemmaNoAutomaticFrontierRegression",
+    "lemmaCountNoAuthorityRegression",
+    "duplicateRouteReuseRegression",
+    "liveCutCannotBypassAdmissionRegression",
 ])
 
 print("State-indexed live-cut Pareto cross-pollination static contract: OK")
