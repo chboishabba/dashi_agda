@@ -24,4 +24,5 @@ jobs:
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalValidation.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseNDimGeometricResidualValidation.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseMixedStateReferenceSquareValidation.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseSameSequenceSimulatedMixedStatesValidation.agda
           nix develop .# --command agda -i . DASHI/Chemistry/Everything.agda
