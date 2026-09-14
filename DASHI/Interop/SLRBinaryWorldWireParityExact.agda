@@ -7,23 +7,6 @@ open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- Exact cross-kernel contract for the production world-store wire ABI.
---
--- Runtime owner:
---   chboishabba/slr :: crates/sl-world-store
---
--- Wire v1 fixed header, in order:
---   magic[4] = "SLRW"
---   version : u16 little-endian = 1
---   kind    : u8
---   flags   : u8
---   idLen   : u32 little-endian
---   auxLen  : u32 little-endian
---   bodyLen : u32 little-endian
---   iteration : i64 little-endian
--- followed by exactly idLen UTF-8 bytes, auxLen UTF-8 bytes and bodyLen
--- opaque kind-owned binary bytes. Presence of iteration/aux is carried by
--- flags; no textual sentinel, JSON object, JSONB payload or regex parser is
--- part of the production ABI.
 ------------------------------------------------------------------------
 
 data WorldWireKind : Set where
@@ -35,6 +18,7 @@ data WorldWireKind : Set where
   routeAction : WorldWireKind
   iteration : WorldWireKind
   payment : WorldWireKind
+  review : WorldWireKind
 
 worldWireKindTag : WorldWireKind → Nat
 worldWireKindTag sourceManifestation = 1
@@ -45,6 +29,7 @@ worldWireKindTag obligation = 5
 worldWireKindTag routeAction = 6
 worldWireKindTag iteration = 7
 worldWireKindTag payment = 8
+worldWireKindTag review = 9
 
 wireVersion : Nat
 wireVersion = 1
@@ -57,6 +42,7 @@ record BinaryWorldWireParity : Set where
     littleEndianHeader : Bool
     kindTagMappingExact : Bool
     paymentKindTagIsEight : Bool
+    reviewKindTagIsNine : Bool
     lengthsAreExplicitU32 : Bool
     iterationCoordinateIsI64 : Bool
     iterationPresenceCarriedByFlag : Bool
@@ -85,7 +71,7 @@ open BinaryWorldWireParity public
 canonicalBinaryWorldWireParity : BinaryWorldWireParity
 canonicalBinaryWorldWireParity =
   binaryWorldWireParity
-    true true true true true
+    true true true true true true
     true true true true
     true true true false
     false false false false
