@@ -11,6 +11,9 @@ import DASHI.Core.CoarseFineRelativeFibreExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ObserverFactorizedRefinementExact
 import DASHI.Core.QueryFactorisationSufficiency
+import DASHI.Core.QueryIndexedProjectionAdequacyExact
+import DASHI.Core.QueryIndexedProjectionSpineAdapterExact
+import DASHI.Core.QueryIndexedProjectionSpineAdapterRegression
 import DASHI.Core.IntersectionalNonFactorability
 import DASHI.Core.ConsumerDescentMinimalObserverExact
 import DASHI.Core.FactorisationSpineCrosswalkExact
