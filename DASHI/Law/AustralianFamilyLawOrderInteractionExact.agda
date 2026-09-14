@@ -45,6 +45,30 @@ data InformationSharingStage : Set where
   evidentialWeightAssessed : InformationSharingStage
 
 ------------------------------------------------------------------------
+-- Section 67ZBH admission consequence.
+--
+-- Receipt is not identical to admission.  But once material supplied through
+-- the Subdivision DA route is intended to be relied upon substantively, s 67ZBH
+-- requires admission.  Case-management-only reliance is expressly excepted.
+------------------------------------------------------------------------
+
+data ReliancePurpose : Set where
+  substantiveReliance : ReliancePurpose
+  caseManagementOnly : ReliancePurpose
+  noRelianceDeclared : ReliancePurpose
+
+data AdmissionConsequence : Set where
+  admissionRequired : AdmissionConsequence
+  admissionNotRequiredByCaseManagementException : AdmissionConsequence
+  admissionRuleNotTriggered : AdmissionConsequence
+
+admissionConsequence : ReliancePurpose → AdmissionConsequence
+admissionConsequence substantiveReliance = admissionRequired
+admissionConsequence caseManagementOnly =
+  admissionNotRequiredByCaseManagementException
+admissionConsequence noRelianceDeclared = admissionRuleNotTriggered
+
+------------------------------------------------------------------------
 -- Primary source atlas.
 ------------------------------------------------------------------------
 
@@ -67,7 +91,7 @@ familyLawInformationSharingSource = Attribution.mkNoDOISource
   "current compilation surface searched 2026-09-14"
   "https://www.legislation.gov.au/C2004A00275/latest/text"
   Attribution.governmentSource
-  "primary statutory source for court orders seeking particulars/documents/information from information-sharing agencies; existence of the route does not prove information exists, was requested, received, admitted or correctly weighted"
+  "primary statutory source for court orders seeking particulars/documents/information from information-sharing agencies, including section 67ZBH's conditional admission rule; existence of the route does not prove information exists, was requested, received or correctly weighted"
   Attribution.publicAttribution
 
 attorneyGeneralInformationSharingSource : Attribution.AttributedSource
@@ -137,7 +161,7 @@ orderInteractionSourceAtlas = Attribution.mkSourceAtlas
     ∷ fcfcoaSeptember2026InformationSharingStatementSource
     ∷ queenslandDVOFamilyLawInteractionSource
     ∷ [])
-  "federal statutory mechanisms + information-sharing/collaboration sources + current Court institutional description + Queensland manifestation; no source citation itself decides inconsistency, jurisdiction, agency intervention, admissibility, weight or case outcome"
+  "federal statutory mechanisms + information-sharing/collaboration sources + current Court institutional description + Queensland manifestation; no source citation itself decides inconsistency, jurisdiction, agency intervention, evidential weight or case outcome"
 
 ------------------------------------------------------------------------
 -- Source-paid structural coordinates.
@@ -151,6 +175,9 @@ section68RStateTerritoryVariationPowerLocated = true
 
 subdivisionDAInformationSharingLocated : Bool
 subdivisionDAInformationSharingLocated = true
+
+section67ZBHConditionalAdmissionLocated : Bool
+section67ZBHConditionalAdmissionLocated = true
 
 childProtectionJurisdictionSeparatelyTyped : Bool
 childProtectionJurisdictionSeparatelyTyped = true
@@ -169,12 +196,6 @@ courtRoutineChildProtectionInformationUseReported = true
 
 ------------------------------------------------------------------------
 -- Query-indexed observer cross-pollination.
---
--- Merely observing the existence of the same federal order is enough for the
--- federal-order-existence query, but not for the consumer asking about the
--- operative effect on an existing family-violence order.  The missing
--- coordinate is inconsistency.  Joining that coordinate strictly refines the
--- coarse federal-order surface for this finite specimen.
 ------------------------------------------------------------------------
 
 data OrderInteractionWorld : Set where
@@ -277,8 +298,7 @@ federalOrderPlusInconsistencyStrictRefinement =
     (λ ())
 
 ------------------------------------------------------------------------
--- Operational interaction receipt.  The receipt identifies the mechanism and
--- whether its factual/application predicates have actually been paid.
+-- Operational interaction receipt.
 ------------------------------------------------------------------------
 
 record OrderInteractionReceipt : Set where
@@ -298,7 +318,9 @@ record OrderInteractionReceipt : Set where
 open OrderInteractionReceipt public
 
 ------------------------------------------------------------------------
--- Information-sharing receipt.  Each stage is retained independently.
+-- Information-sharing receipt.  Each stage is retained independently while
+-- the statutory conditional link from intended reliance to admission remains
+-- explicit through ReliancePurpose / AdmissionConsequence above.
 ------------------------------------------------------------------------
 
 record InformationSharingReceipt : Set where
@@ -311,6 +333,7 @@ record InformationSharingReceipt : Set where
     productionOrderPaid : Bool
     agencyResponsePaid : Bool
     courtReceiptPaid : Bool
+    reliancePurpose : ReliancePurpose
     admissionPaid : Bool
     weightAssessmentPaid : Bool
 
@@ -388,6 +411,7 @@ record AustralianFamilyLawOrderInteractionBoundary : Set where
     section68QExtentLimited : Bool
     section68RPowerSeparatedFromExercise : Bool
     informationSharingStagesSeparated : Bool
+    section67ZBHConditionalAdmissionRetained : Bool
     childProtectionJurisdictionSeparate : Bool
     parallelSystemsCollaborationLocated : Bool
     twoWayInformationSharingLocatedFlag : Bool
@@ -410,6 +434,7 @@ canonicalAustralianFamilyLawOrderInteractionBoundary :
   AustralianFamilyLawOrderInteractionBoundary
 canonicalAustralianFamilyLawOrderInteractionBoundary =
   australianFamilyLawOrderInteractionBoundary
+    true
     true
     true
     true
