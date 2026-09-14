@@ -39,7 +39,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (trans; subst)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -50,10 +50,6 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceE
 import DASHI.Physics.Closure.NSTriadKNLuoCenteredPairedCommutatorIdentityExact as Centered
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondOrderExact as SecondOrder
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
-
-------------------------------------------------------------------------
--- 1. Literal radial multiplier and canonical opposite-shift Taylor carrier.
-------------------------------------------------------------------------
 
 radialSymbol :
   R311.HelicitySign →
@@ -125,11 +121,6 @@ radialTaylorCenteredSecondDifferenceExact sign S centerMode plusMode minusMode l
   Taylor.centeredSecondDifferenceCancelsLinearSymbol
     (radialTaylorPair sign S centerMode plusMode minusMode linearModel)
 
-------------------------------------------------------------------------
--- 2. Round27 signed multiplier difference is exactly the Taylor one-sided
---    increment whenever the Fourier shift lands on the selected center mode.
-------------------------------------------------------------------------
-
 round27PlusDifferenceIsTaylorOneSided :
   (sign : R311.HelicitySign) →
   (S : Helical.HelicalModeScalars Weld.F) →
@@ -180,10 +171,6 @@ round27MinusDifferenceIsTaylorOpposite
     ∷ linearModel
     ∷ [])
 
-------------------------------------------------------------------------
--- 3. Literal Round27 scalar on the already-proved R571 homochiral radial route.
-------------------------------------------------------------------------
-
 r571Round27Scalar :
   (sign : R311.HelicitySign) →
   (S : Helical.HelicalModeScalars Weld.F) →
@@ -196,12 +183,6 @@ r571Round27Scalar sign S shift state output =
       (Weld.radialMultiplier sign S) shift state)
     output
 
-------------------------------------------------------------------------
--- 4. Same-object scalarization into the EXISTING centered paired carrier.
---    The exact physical scalarization equation remains explicit as a field;
---    no incidence-only separation is fabricated.
-------------------------------------------------------------------------
-
 record R571PairedTaylorRealization : Set₁ where
   field
     sign : R311.HelicitySign
@@ -209,17 +190,14 @@ record R571PairedTaylorRealization : Set₁ where
     shift : Z3.FourierMode
     state : R27.FourierStateCarrier
     output : Z3.FourierMode
-
     taylorPair : Taylor.MultiplierTaylorPair
     pairedSample : Centered.PairedCommutatorSample
-
     pairedCenterIsTaylorCenter :
       Centered.aCenter pairedSample ≡ Taylor.center taylorPair
     pairedPlusIsTaylorPlus :
       Centered.aPlus pairedSample ≡ Taylor.plusValue taylorPair
     pairedMinusIsTaylorMinus :
       Centered.aMinus pairedSample ≡ Taylor.minusValue taylorPair
-
     round27ScalarIsWeightedRawPair :
       r571Round27Scalar sign scalars shift state output
       ≡ Centered.weightedRawPair pairedSample
@@ -240,10 +218,6 @@ r571PairedCenteredIdentity realization =
   trans
     (round27ScalarIsWeightedRawPair realization)
     (Centered.weightedPairedCommutatorIdentity (pairedSample realization))
-
-------------------------------------------------------------------------
--- 5. The same Taylor data also inhabits the old second-order paired carrier.
-------------------------------------------------------------------------
 
 secondOrderSampleFromTaylor :
   (sample : Taylor.MultiplierTaylorPair) →
@@ -342,17 +316,10 @@ r571ScalarIsExistingSecondOrderDefect realization =
         (Centered.gPlus (pairedSample realization))
         (Centered.gMinus (pairedSample realization))))
 
-------------------------------------------------------------------------
--- 6. Quantitative scalar carrier.  A physical realization supplies a
---    nonnegative old PairedSecondMomentSample dominating the exact signed
---    second-order defect.  The old pointwise compiler is then reused verbatim.
-------------------------------------------------------------------------
-
 record R571PairedSecondMomentRealization : Set₁ where
   field
     taylor : R571PairedTaylorRealization
     secondMomentSample : Moment.PairedSecondMomentSample
-
     secondOrderDefectBelowPairedMagnitude :
       SecondOrder.pairedSecondOrderDefect
         (secondOrderSampleFromTaylor
@@ -373,14 +340,9 @@ r571ScalarBelowPairedMagnitude :
       (state (taylor realization))
       (output (taylor realization))
   ≤ Moment.pairedMagnitude (secondMomentSample realization)
-r571ScalarBelowPairedMagnitude realization =
-  let
-    exactIdentity = r571ScalarIsExistingSecondOrderDefect (taylor realization)
-  in
-  subst
-    (λ value → value ≤ Moment.pairedMagnitude (secondMomentSample realization))
-    exactIdentity
-    (secondOrderDefectBelowPairedMagnitude realization)
+r571ScalarBelowPairedMagnitude realization
+  rewrite r571ScalarIsExistingSecondOrderDefect (taylor realization) =
+  secondOrderDefectBelowPairedMagnitude realization
 
 r571PointwiseSecondMomentBound :
   (realization : R571PairedSecondMomentRealization) →
@@ -398,10 +360,6 @@ r571PointwiseSecondMomentBound realization budget =
     (r571ScalarBelowPairedMagnitude realization)
     (Moment.pointwisePairedSecondMomentBound budget
       (secondMomentSample realization))
-
-------------------------------------------------------------------------
--- 7. Publication-facing status / firewalls.
-------------------------------------------------------------------------
 
 r571PairedCommutatorCarrierReused : Bool
 r571PairedCommutatorCarrierReused = true
