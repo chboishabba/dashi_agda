@@ -8,14 +8,15 @@ module DASHI.Physics.Closure.NSTriadKNR571SecondOrderAbsoluteMagnitudeRegression
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Physics.Closure.NSTriadKNLuoPairedSecondOrderAbsoluteMagnitudeBridgeExact as Abs
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizationExact as R
 
 absoluteMagnitudeCarrierClosed :
-  R.r571SecondOrderAbsoluteMagnitudeCarrierClosed ≡ true
+  Abs.roundAbsoluteMagnitudeCarrierClosed ≡ true
 absoluteMagnitudeCarrierClosed = refl
 
 signedDefectToMagnitudeClosed :
-  R.r571SignedSecondOrderDefectBelowAbsoluteMagnitudeClosed ≡ true
+  Abs.roundSignedDefectToMagnitudeClosed ≡ true
 signedDefectToMagnitudeClosed = refl
 
 physicalEnvelopeStillOpen :
