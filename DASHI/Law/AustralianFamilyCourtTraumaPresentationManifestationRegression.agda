@@ -11,6 +11,12 @@ abcSourceBoundRegression :
   ≡ true
 abcSourceBoundRegression = refl
 
+traumaEvidenceParentReusedRegression :
+  Manifestation.traumaNarrativeEvidenceParentReused
+    Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ true
+traumaEvidenceParentReusedRegression = refl
+
 difficultWitnessReportedRegression :
   Manifestation.difficultWitnessCharacterisationReported Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
   ≡ true
