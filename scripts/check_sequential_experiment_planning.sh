@@ -21,6 +21,7 @@ FILES=(
   DASHI/Core/JointSequentialInformationFidelityFixtureExact.agda
   DASHI/Core/SequentialExperimentPlanningValidation.agda
   DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
+  DASHI/CoarseFineFabricEverything.agda
   DASHI/Physics/Foundations/GRQFTDiscriminatorSynthesisExact.agda
   DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda
   DASHI/Environment/LESDiscriminatorSynthesisExact.agda
@@ -65,6 +66,12 @@ grep -q '^jFineSensitiveConsumerRefutesJCoarseOnly :' DASHI/Biology/JCoarseFineC
 grep -q '^jCoarseExactReductionRetainingJFine :' DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
 grep -q 'jFineIsMerelyAnotherNameForMaximumComputeFidelityIsFalse' DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
 
+grep -q '^module DASHI.CoarseFineFabricEverything where' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.CoarseFineFabricCalculusExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.CoarseDynamicsTraceCongruenceExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Interop.LocalGlobalBundleGluingExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Interop.ProofArchaeologyCoarseFineAdapterExact' DASHI/CoarseFineFabricEverything.agda
+
 grep -q '^data SequentialConsumerPlan' DASHI/Core/SequentialConsumerExperimentPlannerExact.agda
 grep -q '^OutcomePossible :' DASHI/Core/SequentialConsumerExperimentPlannerExact.agda
 grep -q '^oneShotConsumerClosingPlan :' DASHI/Core/SequentialConsumerExperimentPlannerExact.agda
@@ -96,3 +103,4 @@ grep -q 'fineStateMeansOnlyMoreExpensiveModelIsFalse' DASHI/Environment/LESAdapt
 grep -q 'relativeFineInformationEqualsModelFidelityIsFalse' DASHI/Environment/LESAdaptiveConsumerLoopCrossPollinationExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Core/SequentialExperimentPlanningValidation.agda
+scripts/run_agda29_parallel_check.sh DASHI/CoarseFineFabricEverything.agda
