@@ -8,6 +8,7 @@ import DASHI.Core.CanonicalSpineRegistry
 import DASHI.Core.CanonicalSpineRegistryCrossDomainRegression
 import DASHI.Core.BoundedNegativeSearchExact
 import DASHI.Core.BoundedNegativeSearchRegression
+import DASHI.Core.RobustExperimentInferenceFrontierExact
 import DASHI.Core.CoarseFineFabricCalculusExact
 import DASHI.Core.CoarseFineRelativeFibreExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
