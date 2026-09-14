@@ -18,13 +18,18 @@ data CandidateRelation : Set where
   coRequirement : CandidateRelation
   independent : CandidateRelation
 
+------------------------------------------------------------------------
+-- CandidateRelation is intentionally a vocabulary, not a mandatory total
+-- Candidate x Candidate classifier.  Domains may have only partial relation
+-- receipts; absence of a receipt must not be retyped as independence.
+------------------------------------------------------------------------
+
 record RequirementConflictBatchSpine : Set₁ where
   field
     Candidate : Set
     Batch : Set
     GlobalAction : Set
 
-    relation : Candidate → Candidate → CandidateRelation
     requirementClosed : Batch → Set
     conflictFree : Batch → Set
 
@@ -82,6 +87,7 @@ record BatchExecutionBoundary : Set where
   field
     candidateFamilyParentReused : Bool
     conflictRequirementIndependenceSeparated : Bool
+    relationKnowledgeRequiredToBeTotal : Bool
     requirementClosureRequired : Bool
     conflictFreedomRequired : Bool
     globalValidityRequiredAfterSelection : Bool
@@ -95,6 +101,7 @@ canonicalBatchExecutionBoundary =
   batch-execution-boundary
     true
     true
+    false
     true
     true
     true
