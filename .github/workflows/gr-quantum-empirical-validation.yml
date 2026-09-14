@@ -17,11 +17,25 @@ on:
       - 'scripts/check_dark_dimension_quantitative_envelope.py'
       - 'scripts/check_dark_dimension_prediction_quantity_adapter.py'
       - 'scripts/check_dark_dimension_model_observable_matrix.py'
+      - 'scripts/check_dark_dimension_shared_bao_observable.py'
+      - 'scripts/check_dark_dimension_shared_bao_observation_key.py'
+      - 'scripts/check_dark_dimension_desi_dr2_bao_data_receipt.py'
+      - 'scripts/check_dark_dimension_same_key_prediction_debt.py'
+      - 'scripts/check_dark_dimension_dao_parameter_manifest_boundary.py'
+      - 'scripts/check_dark_dimension_dao_same_key_extraction_recipe.py'
+      - 'scripts/check_dark_dimension_dao_paper_table_reconstruction.py'
+      - 'scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py'
+      - 'scripts/check_dark_dimension_dao_same_key_reconstruction_runner.py'
+      - 'scripts/run_dark_dimension_dao_same_key_reconstruction.py'
+      - 'scripts/check_dark_dimension_bedroya_background_reconstruction.py'
+      - 'scripts/check_dark_dimension_bedroya_parameter_manifest_boundary.py'
+      - 'scripts/check_dark_dimension_cross_domain_evidence_weld.py'
+      - 'scripts/check_dark_dimension_residual_debt_routing.py'
+      - 'scripts/check_dark_dimension_fading_dm_parent_lineage.py'
       - 'tests/test_gr_quantum_empirical_receipt.py'
       - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
       - '.github/workflows/gr-quantum-empirical-validation.yml'
   workflow_dispatch:
-
 
 concurrency:
   group: dashi-global-${{ github.ref }}
@@ -50,6 +64,45 @@ jobs:
           python scripts/check_dark_dimension_quantitative_envelope.py
           python scripts/check_dark_dimension_prediction_quantity_adapter.py
           python scripts/check_dark_dimension_model_observable_matrix.py
+          python scripts/check_dark_dimension_shared_bao_observable.py
+          python scripts/check_dark_dimension_shared_bao_observation_key.py
+          python scripts/check_dark_dimension_desi_dr2_bao_data_receipt.py
+          python scripts/check_dark_dimension_same_key_prediction_debt.py
+          python scripts/check_dark_dimension_dao_parameter_manifest_boundary.py
+          python scripts/check_dark_dimension_dao_same_key_extraction_recipe.py
+          python scripts/check_dark_dimension_dao_paper_table_reconstruction.py
+          python scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py
+          python scripts/reconstruct_dark_dimension_dao_paper_table_manifest.py --format class-ini
+          python scripts/check_dark_dimension_dao_same_key_reconstruction_runner.py
+          python scripts/check_dark_dimension_bedroya_background_reconstruction.py
+          python scripts/check_dark_dimension_bedroya_parameter_manifest_boundary.py
+          python scripts/check_dark_dimension_cross_domain_evidence_weld.py
+          python scripts/check_dark_dimension_residual_debt_routing.py
+          python scripts/check_dark_dimension_fading_dm_parent_lineage.py
+
+  dao-reconstruction-runtime:
+    needs: receipt-validator
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned DRMD-CLASS Python interface
+        run: |
+          python -m pip install --quiet --upgrade pip setuptools wheel numpy cython
+          python -m pip install 'git+https://github.com/NEDE-Cosmo/DRMD-CLASS.git@aa2b61a0f1cf246672cdbd4634a4797d4cc654f9'
+      - name: Execute source-bounded six-key reconstruction
+        run: |
+          python scripts/run_dark_dimension_dao_same_key_reconstruction.py > /tmp/dao-same-key-reconstruction.json
+          cat /tmp/dao-same-key-reconstruction.json
+      - name: Upload DAO same-key reconstruction receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: dao-same-key-reconstruction
+          path: /tmp/dao-same-key-reconstruction.json
+          if-no-files-found: error
 
   agda-empirical-atlas:
     runs-on: ubuntu-24.04
@@ -88,7 +141,21 @@ jobs:
           check_agda DASHI/Empirical/DarkDimensionPredictionQuantityAdapterExact.agda
           check_agda DASHI/Empirical/DarkDimensionQuantitativeEnvelopeExact.agda
           check_agda DASHI/Empirical/DarkDimensionModelObservableMatrixExact.agda
+          check_agda DASHI/Empirical/DarkDimensionSharedBAOObservableExact.agda
+          check_agda DASHI/Empirical/DarkDimensionSharedBAOObservationKeyExact.agda
+          check_agda DASHI/Empirical/DarkDimensionDESIDR2BAODataReceiptExact.agda
+          check_agda DASHI/Empirical/DarkDimensionDAOPaperTableReconstructionExact.agda
+          check_agda DASHI/Empirical/DarkDimensionDAOParameterManifestBoundaryExact.agda
+          check_agda DASHI/Empirical/DarkDimensionDAOSameKeyExtractionRecipeExact.agda
+          check_agda DASHI/Empirical/DarkDimensionDAOSameKeyReconstructionRunExact.agda
+          check_agda DASHI/Empirical/DarkDimensionFadingDMParentLineageExact.agda
+          check_agda DASHI/Empirical/DarkDimensionBedroyaParameterManifestBoundaryExact.agda
+          check_agda DASHI/Empirical/DarkDimensionBedroyaBackgroundReconstructionExact.agda
+          check_agda DASHI/Empirical/DarkDimensionCrossDomainEvidenceWeldExact.agda
+          check_agda DASHI/Empirical/DarkDimensionResidualDebtRoutingExact.agda
+          check_agda DASHI/Empirical/DarkDimensionSameKeyPredictionDebtExact.agda
           check_agda DASHI/Empirical/DarkDimensionProspectiveDiscriminatorExact.agda
+          check_agda DASHI/Empirical/DarkDimensionSharedBAOProspectiveWeldExact.agda
           check_agda DASHI/Unified/DarkDimensionGRQuantumPromotionAdapterExact.agda
           cat /tmp/gr-quantum-empirical-agda.log
       - name: Upload Agda diagnostic
