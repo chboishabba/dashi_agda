@@ -119,6 +119,18 @@ def build_intervention_receipt(
             "held_out_outcome_used": False,
             "selection_frozen_before_evaluation": True,
         },
+        "requirement_evidence": {
+            "candidate_layer": "single shared hidden layer",
+            "intervention_site": "post-ReLU hidden activation",
+            "directed_hidden_to_hidden_path": False,
+            "same_layer_pair_ablations_pay_direction": False,
+            "directional_requirement_rule": "not available from this producer",
+            "boundary": (
+                "The current MLP has parallel hidden units feeding the output layer. "
+                "Post-ReLU singleton/joint ablations can measure interaction effects, "
+                "but cannot establish a directed hidden-unit dependency edge."
+            ),
+        },
         "evaluation": {
             "carrier": "held-out test split",
             "baseline_test_loss": baseline_test_loss,
@@ -147,9 +159,9 @@ def build_intervention_receipt(
         },
         "non_promotion_boundary": (
             "Raw singleton/joint ablation effects and their orientation-aware Nat damage "
-            "adapter are observation receipts. They do not by themselves establish "
-            "directional requirements, causal relation classes, closed-compatible beta, "
-            "or Grokking mechanism identity."
+            "adapter are observation receipts. Same-layer post-ReLU pair ablations do not "
+            "supply directional requirement evidence. They do not by themselves establish "
+            "causal relation classes, closed-compatible beta, or Grokking mechanism identity."
         ),
     }
 
