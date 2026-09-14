@@ -20,6 +20,8 @@ import DASHI.Core.ConsumerResidualRepairCrosswalkExact
 import DASHI.Core.ConsumerResidualRepairCrosswalkRegression
 import DASHI.Core.ContextIndexedGovernedObservationExact
 import DASHI.Core.ContextIndexedGovernedObservationCanonicalRegression
+import DASHI.Core.ResidualObserverDependencyExact
+import DASHI.Core.ResidualObserverDependencyProjectionAdapterRegression
 import DASHI.Core.DeclaredScenarioRobustnessExact
 import DASHI.Core.DeclaredScenarioRobustnessRegression
 import DASHI.Core.SnowballOSINTAcquisitionInvariantExact
