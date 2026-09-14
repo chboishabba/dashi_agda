@@ -5,6 +5,14 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Core/CanonicalSpineRegistry.agda
+  DASHI/Core/CanonicalSpineRegistryCrossDomainRegression.agda
+  DASHI/Core/SnowballOSINTAcquisitionInvariantExact.agda
+  DASHI/Core/BoundedNegativeSearchExact.agda
+  DASHI/Core/BoundedNegativeSearchRegression.agda
+  DASHI/Core/RobustExperimentInferenceFrontierExact.agda
+  DASHI/Core/MultipartSameObjectReconstructionExact.agda
+  DASHI/Core/MultipartSameObjectReconstructionRegression.agda
   DASHI/Core/ExperimentalCoordinateDesignExact.agda
   DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
   DASHI/Core/ExperimentalCoordinateProjectionBridgeRegression.agda
@@ -13,10 +21,18 @@ FILES=(
   DASHI/Core/FactorisationSpineCrosswalkRegression.agda
   DASHI/Interop/FactorisationSpineCrossDomainAdapterExact.agda
   DASHI/Interop/FactorisationSpineCrossDomainAdapterRegression.agda
+  DASHI/Interop/OSINTBoundedNegativeSearchAdapterExact.agda
+  DASHI/Interop/OSINTBoundedNegativeSearchAdapterRegression.agda
   DASHI/Core/ActionabilityCostedExperimentChoiceExact.agda
   DASHI/Core/CommonExperimentRealisationExact.agda
   DASHI/Core/DiscriminatorSynthesisExact.agda
   DASHI/Core/CoarseFineRelativeFibreExact.agda
+  DASHI/Core/FrozenProvenanceDynamicRefinementExact.agda
+  DASHI/Core/FrozenProvenanceDynamicRefinementRegression.agda
+  DASHI/Core/FrozenHeldOutRepairRefinementExact.agda
+  DASHI/Core/FrozenHeldOutRepairRefinementRegression.agda
+  DASHI/Core/QueryIndexedFrozenDynamicPromotionExact.agda
+  DASHI/Core/QueryIndexedFrozenDynamicPromotionRegression.agda
   DASHI/Core/CandidateFamilyExecutionExact.agda
   DASHI/Core/CandidateFamilyExecutionRegression.agda
   DASHI/Core/RequirementConflictBatchExecutionExact.agda
@@ -34,6 +50,8 @@ FILES=(
   DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
   DASHI/ComputerScience/RSA260RequirementConflictBatchSpineExact.agda
   DASHI/ComputerScience/RSA260RequirementConflictBatchSpineRegression.agda
+  DASHI/ComputerScience/RSA260MultipartReconstructionSpineExact.agda
+  DASHI/ComputerScience/RSA260MultipartReconstructionSpineRegression.agda
   DASHI/ComputerScience/FlyCandidateFamilyExecutionAdapterExact.agda
   DASHI/ComputerScience/FlyCandidateFamilyExecutionAdapterRegression.agda
   DASHI/CoarseFineFabricEverything.agda
@@ -64,6 +82,24 @@ grep -q '^relativeFineEvidenceMove :' DASHI/Core/RelativeFineModelFidelityOrthog
 grep -q '^modelChangeKeepsWorldCoordinates :' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
 grep -q 'relativeFineInformationEqualsModelFidelityIsFalse' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
 grep -q 'relativeFineCanBeDisclosedAsEvidenceAtFixedModelIsTrue' DASHI/Core/RelativeFineModelFidelityOrthogonalityExact.agda
+
+grep -q '^experimentalCoordinateOwner :' DASHI/Core/CanonicalSpineRegistry.agda
+grep -q '^osintAcquisitionOwner :' DASHI/Core/CanonicalSpineRegistry.agda
+grep -q '^boundedNegativeSearchOwner :' DASHI/Core/CanonicalSpineRegistry.agda
+grep -q '^robustExperimentInferenceOwner :' DASHI/Core/CanonicalSpineRegistry.agda
+grep -q '^multipartReconstructionOwner :' DASHI/Core/CanonicalSpineRegistry.agda
+grep -q '^frozenProvenanceDynamicOwner :' DASHI/Core/CanonicalSpineRegistry.agda
+grep -q '^queryIndexedFutureSafePromotionOwner :' DASHI/Core/CanonicalSpineRegistry.agda
+
+grep -q '^boundedNegativeSearchWithCoverageProvesGlobalAbsence :' DASHI/Core/BoundedNegativeSearchExact.agda
+grep -q '^osintSearchFailureDoesNotCreateKnownAbsence :' DASHI/Interop/OSINTBoundedNegativeSearchAdapterExact.agda
+grep -q '^coveredBoundedSearchProvesGlobalAbsence :' DASHI/Interop/OSINTBoundedNegativeSearchAdapterExact.agda
+grep -q '^record CompleteMultipartReconstruction' DASHI/Core/MultipartSameObjectReconstructionExact.agda
+grep -q '^rsa260CompleteMultipartReconstructionStillUnpaid :' DASHI/ComputerScience/RSA260MultipartReconstructionSpineExact.agda
+grep -q '^rsa260LocalValidityDoesNotCreateWhole :' DASHI/ComputerScience/RSA260MultipartReconstructionSpineExact.agda
+grep -q '^record FrozenHeldOutRepair' DASHI/Core/FrozenHeldOutRepairRefinementExact.agda
+grep -q '^record FrozenProvenanceDynamicPromotion' DASHI/Core/FrozenProvenanceDynamicRefinementExact.agda
+grep -q '^record QueryIndexedFutureSafePromotion' DASHI/Core/QueryIndexedFrozenDynamicPromotionExact.agda
 
 grep -q '^coordinateSeparationYieldsProjectionCollision :' DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
 grep -q '^coordinateReadCannotFactorThroughExisting :' DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
@@ -109,6 +145,12 @@ grep -q 'DASHI.Core.CoarseFineFabricCalculusExact' DASHI/CoarseFineFabricEveryth
 grep -q 'DASHI.Core.FactorisationSpineCrosswalkExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Interop.FactorisationSpineCrossDomainAdapterExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.ExperimentalCoordinateProjectionBridgeExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.BoundedNegativeSearchExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Interop.OSINTBoundedNegativeSearchAdapterExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.MultipartSameObjectReconstructionExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.ComputerScience.RSA260MultipartReconstructionSpineExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.FrozenHeldOutRepairRefinementExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.QueryIndexedFrozenDynamicPromotionExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.CandidateFamilyExecutionExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.RequirementConflictBatchExecutionExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.CoarseDynamicsTraceCongruenceExact' DASHI/CoarseFineFabricEverything.agda
