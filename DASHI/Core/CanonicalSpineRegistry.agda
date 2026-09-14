@@ -160,6 +160,12 @@ residualActionPolicyOwner = canonical-owner
   "DASHI.Core.ResidualActionPolicyExact"
   exactInterface false refl
 
+typedDependencyOwner : CanonicalOwner
+typedDependencyOwner = canonical-owner
+  "typed dependency witnesses, indexed requirement families, and admissible dependent actions"
+  "DASHI.Core.TypedDependencyCore"
+  exactInterface false refl
+
 genericReceiptOwner : CanonicalOwner
 genericReceiptOwner = canonical-owner
   "generic non-promoting receipt metadata and list-level fail-closed receipt proof"
@@ -188,6 +194,7 @@ canonicalOwners =
   ∷ attributedSourceOwner
   ∷ appendOnlyRevisionOwner
   ∷ residualActionPolicyOwner
+  ∷ typedDependencyOwner
   ∷ genericReceiptOwner
   ∷ []
 
