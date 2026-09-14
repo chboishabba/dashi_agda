@@ -4,9 +4,11 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.InstitutionalNormProductionExact as Norm
+import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
 import DASHI.Law.SensibLawSpringfieldGasLobbyingOwnershipSnowballExact as Lobbying
 
 ------------------------------------------------------------------------
@@ -56,6 +58,9 @@ religiousSocialBrokerageAtlas = Source.mkSourceAtlas
 parentNormProductionBoundary : Norm.InstitutionalNormProductionBoundary
 parentNormProductionBoundary = Norm.canonicalInstitutionalNormProductionBoundary
 
+parentProximityBoundary : Proximity.InstitutionalProximityBoundary
+parentProximityBoundary = Proximity.canonicalInstitutionalProximityBoundary
+
 -- Reuse the existing investigative relation-kind discipline.  The Springfield
 -- owner already separates donation, registered lobbying contact, employment,
 -- partnership, corporate control, infrastructure alliance and ownership.
@@ -66,6 +71,7 @@ record ReligiousSocialBrokerageBoundary : Set where
   constructor religiousSocialBrokerageBoundary
   field
     parentNormProductionReused : Bool
+    parentProximityAdequacyReused : Bool
     parentLobbyingEdgeDisciplineReused : Bool
     generalBrokerageLiteraturePaid : Bool
     religiousNetworkPoliticalInfluenceLiteraturePaid : Bool
@@ -82,6 +88,7 @@ open ReligiousSocialBrokerageBoundary public
 canonicalReligiousSocialBrokerageBoundary : ReligiousSocialBrokerageBoundary
 canonicalReligiousSocialBrokerageBoundary =
   religiousSocialBrokerageBoundary
+    true
     true
     true
     true
