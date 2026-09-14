@@ -28,8 +28,6 @@ initialNumberDensityDefinition = "n0 = initial dark-matter number-density scale"
 initialPotentialScaleDefinition : String
 initialPotentialScaleDefinition = "V0 = scalar-potential energy scale"
 
--- Bedroya et al. Eq. (11), retained as a source-level normalization identity.
--- This is narrower than a CLASS/Cobaya sampled-parameter map.
 effectiveDMNormalizationEquation : String
 effectiveDMNormalizationEquation =
   "rho_DM = m0 n0 exp(-cPrime phi_i) a^-3 = rho_DM^0 exp(-cPrime phi_i) a^-3"
@@ -39,6 +37,9 @@ onsetPhiInitialValue = "phi_i = 0 at the stated fading onset"
 
 paperDMNormalizationIdentityAtOnset : String
 paperDMNormalizationIdentityAtOnset = "m0 n0 = rho_DM^0 under phi_i = 0"
+
+effectiveDMReferenceConvention : String
+effectiveDMReferenceConvention = "initial DM density reference, not current-DM subtraction"
 
 bedroyaEq11NormalizationDiligence : Diligence.SourceDiligence
 bedroyaEq11NormalizationDiligence =
@@ -56,7 +57,7 @@ bedroyaEq11NormalizationDiligence =
     "bounded to the paper's local exponential FDS realization and its stated onset convention"
     "covers the paper-level m0*n0 / rho_DM^0 identity only; does not cover the CLASS/Cobaya sampled-density parameter map or V0 normalization"
     "supplement/posterior surfaces were checked separately; no machine-readable same-fit standard-parameter manifest is admitted"
-    "rho_DM^0 is retained as the paper-defined effective initial DM density coordinate; it is not silently identified with a sampled Omega_FDM h^2 coordinate"
+    "rho_DM^0 is retained as the paper-defined effective initial DM density coordinate; it is not silently identified with a sampled Omega_FDM h^2 coordinate or a current-density subtraction convention"
     "pays only the source-level Eq. (11) normalization coordinate and leaves the complete executable normalization map open"
 
 supplementH0Coordinate : String
@@ -86,6 +87,8 @@ record BedroyaParameterManifestStatus : Set where
     effectiveDMNormalizationEquationLocated : Bool
     onsetPhiInitialValueLocated : Bool
     m0n0ToRhoDM0PaperIdentityLocated : Bool
+    effectiveDMReferenceUsesInitialDensity : Bool
+    currentDensitySubtractionConventionUsed : Bool
     rhoDM0ToSampledOmegaFDMMappingLocated : Bool
     v0ToSampledDarkEnergyNormalizationLocated : Bool
     completeNormalizationMapLocated : Bool
@@ -102,12 +105,21 @@ canonicalBedroyaParameterManifestStatus =
   bedroyaParameterManifestStatus
     true true true
     true true true
+    true false
     false false false
     true false false true false
 
 paperDMNormalizationIdentityPaid :
   m0n0ToRhoDM0PaperIdentityLocated canonicalBedroyaParameterManifestStatus ≡ true
 paperDMNormalizationIdentityPaid = refl
+
+initialDensityConventionPaid :
+  effectiveDMReferenceUsesInitialDensity canonicalBedroyaParameterManifestStatus ≡ true
+initialDensityConventionPaid = refl
+
+currentDensityConventionNotUsed :
+  currentDensitySubtractionConventionUsed canonicalBedroyaParameterManifestStatus ≡ false
+currentDensityConventionNotUsed = refl
 
 sampledOmegaFDMMappingStillOpen :
   rhoDM0ToSampledOmegaFDMMappingLocated canonicalBedroyaParameterManifestStatus ≡ false
@@ -121,6 +133,8 @@ completeNormalizationStillOpen :
   completeNormalizationMapLocated canonicalBedroyaParameterManifestStatus ≡ false
 completeNormalizationStillOpen = refl
 
+data InitialDMReferenceEqualsCurrentDMReference : Set where
+
 data PaperDMIdentityEqualsSampledOmegaMapping : Set where
 
 data OneNormalizationCoordinatePaysCompleteNormalization : Set where
@@ -130,6 +144,10 @@ data PosteriorDisplayEqualsExactBestFitTuple : Set where
 data StartPrescriptionPaysNormalizationMap : Set where
 
 data CurrentSearchNonlocationProvesNonexistence : Set where
+
+initialDMReferenceDoesNotBecomeCurrentDMReference :
+  InitialDMReferenceEqualsCurrentDMReference → ⊥
+initialDMReferenceDoesNotBecomeCurrentDMReference ()
 
 paperDMIdentityDoesNotBecomeSampledOmegaMapping :
   PaperDMIdentityEqualsSampledOmegaMapping → ⊥
