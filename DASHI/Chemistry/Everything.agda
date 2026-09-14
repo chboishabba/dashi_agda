@@ -112,3 +112,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMixedStateRe
 -- distinct from four experimental PDB structures, thermodynamic independence,
 -- kinetic independence, equilibrium populations, or a unique transition path.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSameSequenceSimulatedMixedStatesExact
+
+-- Dynamical coupling refinement: Li, Liu & Ji 2015 pay both ligand-free closure
+-- orders and an approximate 5.7:1 pathway-flux asymmetry favouring LID-first
+-- closure.  Reachability and flux asymmetry are kept distinct from equilibrium
+-- independence, universal rate constants, or an experimentally closed mechanism.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCouplingResidualExact
