@@ -50,6 +50,8 @@ record CounterUASDroneShieldRegression : Set₁ where
     ccwAgendaSourceRetainsAttributionSnowball : AttributionSnowball.SourceRoleSnowballReceipt CCW2026.ccwGGE2026AgendaSource
     ccwDepositarySourceRetainsAttributionSnowball : AttributionSnowball.SourceRoleSnowballReceipt CCW2026.ccwDepositaryStatusSource
     ccwPartyCountDoesNotSetProtocolPartyCount : CCW2026.parentConventionPartyCountDoesNotDetermineProtocolPartyCount ≡ true
+    septemberFutureLAWSParticipationUnresolved : LegalBridge.september2026FutureLAWSParticipation ≡ Participation.participationUnresolved
+    parentCCWPartyDoesNotCreateFutureLAWSBinding : LegalBridge.ccwParentConventionParticipationDoesNotCreateFutureLAWSBinding ≡ true
     domesticAuthorityDoesNotSetInternationalApplicability : LegalBridge.domesticMitigationAuthorityDoesNotCreateInternationalLawApplicability ≡ true
     technicalAutonomyDoesNotCreateLawfulEngagement : LegalBridge.technicalAutonomyDoesNotCreateLawfulAutonomousEngagement ≡ true
 
@@ -76,6 +78,8 @@ canonicalCounterUASDroneShieldRegression =
     CCW2026.ccwLAWS2026SourceAtlasCreatesAuthorityIsFalse
     CCW2026.ccwGGE2026AgendaSourceSnowballReceipt
     CCW2026.ccwDepositaryStatusSourceSnowballReceipt
+    refl
+    refl
     refl
     refl
     refl
