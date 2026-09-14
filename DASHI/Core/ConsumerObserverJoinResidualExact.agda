@@ -5,27 +5,22 @@ module DASHI.Core.ConsumerObserverJoinResidualExact where
 --
 -- Incoming PR #588 independently exposes observer pairing as an information
 -- join.  This module lands only the theorem consequences needed by the current
--- reopenable-consumer stack, without importing that unrelated branch: joined
--- views refine each component; a hot consumer-sufficient projection may retain
--- a cold residual for exact reopening; and minimality is stated as an explicit
--- universal property rather than inferred from compression size.
+-- reopenable-consumer stack: joined views refine each component; a hot
+-- consumer-sufficient projection may retain a cold residual for exact reopening;
+-- and minimality is stated as an explicit universal property rather than
+-- inferred from compression size.
 --
--- Literature calibration:
--- David Blackwell, "Equivalent Comparisons of Experiments", Annals of
--- Mathematical Statistics 24(2), 1953. DOI: 10.1214/aoms/1177729032.
--- The universal-property formulation below is an internal deterministic DASHI
--- construction, not a theorem imported from Blackwell.
+-- Canonical ownership note: ObserverRefinementLatticeExact owns the underlying
+-- pair observer/refinement law.  This module keeps its existential Observer
+-- wrapper API but reuses that canonical pairing implementation directly.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_; proj₁; proj₂; Σ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
+import DASHI.Core.ObserverRefinementLatticeExact as Lattice
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Kernel
-
-------------------------------------------------------------------------
--- Typed observer and binary join.
-------------------------------------------------------------------------
 
 record Observer (State : Set) : Set₁ where
   constructor observer
@@ -40,7 +35,7 @@ joinObserver :
 joinObserver left right =
   observer
     (Value left × Value right)
-    (λ state → observe left state , observe right state)
+    (Lattice.pairObserver (observe left) (observe right))
 
 record Refines
     {State : Set}
@@ -58,13 +53,13 @@ joinRefinesLeft :
   ∀ {State} (left right : Observer State) →
   Refines (joinObserver left right) left
 joinRefinesLeft left right =
-  refines (λ same → cong proj₁ same)
+  refines (Lattice.pairRefinesLeft (observe left) (observe right))
 
 joinRefinesRight :
   ∀ {State} (left right : Observer State) →
   Refines (joinObserver left right) right
 joinRefinesRight left right =
-  refines (λ same → cong proj₂ same)
+  refines (Lattice.pairRefinesRight (observe left) (observe right))
 
 ------------------------------------------------------------------------
 -- Exact hot/cold decomposition.
