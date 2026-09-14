@@ -16,6 +16,12 @@ sourceFixturesBoundedRegression :
   ≡ true
 sourceFixturesBoundedRegression = refl
 
+israeliDomesticBoundedSearchAuthoredRegression :
+  Roadmap.israeliDomesticLawBoundedSearchReceiptAuthored
+    Roadmap.canonicalInstitutionalNormativityRoadmap
+  ≡ true
+israeliDomesticBoundedSearchAuthoredRegression = refl
+
 israeliDomesticLawComprehensiveRegression :
   Roadmap.israeliDomesticLawComprehensiveFixturePaid Roadmap.canonicalInstitutionalNormativityRoadmap
   ≡ false
