@@ -37,6 +37,7 @@ record InstitutionalNormativityRoadmap : Set where
     religiousBrokerageFixtureAuthored : Bool
     familyCourtNewsManifestationAuthored : Bool
     israelOperationalLegalityFixtureAuthored : Bool
+    israeliDomesticLawBoundedSearchReceiptAuthored : Bool
     tasmanianGenocideSourceBoundaryAuthored : Bool
     naziBureaucraticParticipationFixtureAuthored : Bool
     israeliDomesticLawComprehensiveFixturePaid : Bool
@@ -51,6 +52,7 @@ open InstitutionalNormativityRoadmap public
 canonicalInstitutionalNormativityRoadmap : InstitutionalNormativityRoadmap
 canonicalInstitutionalNormativityRoadmap =
   institutionalNormativityRoadmap
+    true
     true
     true
     true
