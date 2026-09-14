@@ -25,7 +25,14 @@ REQUIRED_FILES = [
     "DASHI/Core/ObserverIncomparabilityTypedJoinExact.agda",
     "DASHI/Core/ObserverIncomparabilityCrosswalkExact.agda",
     "DASHI/Core/ObserverIncomparabilityCrosswalkRegression.agda",
+    "DASHI/Core/ConsumerIndexedResidualRefinementExact.agda",
+    "DASHI/Core/ConsumerResidualRepairCrosswalkExact.agda",
+    "DASHI/Core/ConsumerResidualRepairCrosswalkRegression.agda",
     "DASHI/Core/ConsumerFibreRepairExact.agda",
+    "DASHI/Core/ContextIndexedGovernedObservationExact.agda",
+    "DASHI/Core/ContextIndexedGovernedObservationCanonicalRegression.agda",
+    "DASHI/Core/ResidualObserverDependencyExact.agda",
+    "DASHI/Core/ResidualObserverDependencyProjectionAdapterRegression.agda",
     "DASHI/Core/DeclaredScenarioRobustnessExact.agda",
     "DASHI/Core/DeclaredScenarioRobustnessRegression.agda",
     "DASHI/Core/RequiredObserverAxisJoinAdequacyExact.agda",
@@ -93,9 +100,25 @@ EXPECTED = {
         "typedJoinStrictLeftToCore :",
         "typedJoinStrictRightToLattice :",
     ],
+    "DASHI/Core/ConsumerResidualRepairCrosswalkExact.agda": [
+        "residualCollisionToNonDescent :",
+        "nonDescentToResidualCollision :",
+        "residualRepairToCanonicalRepair :",
+        "canonicalRepairToResidualRepair :",
+        "residualMustSeparateViaCanonicalRepair :",
+    ],
     "DASHI/Core/ConsumerFibreRepairExact.agda": [
         "Observer.pairObserver observe refine",
         "observerPairingHasSingleCanonicalOwner",
+    ],
+    "DASHI/Core/ContextIndexedGovernedObservationExact.agda": [
+        "activeGovernedCollisionAsCanonicalNonDescent :",
+        "Descent.nonDescentWitnessBlocksSufficiency",
+    ],
+    "DASHI/Core/ResidualObserverDependencyExact.agda": [
+        "hiddenResidualDependencyProjectionCollision :",
+        "hiddenResidualDependencyRefutesCoarseFactorisation :",
+        "Calculus.consumerCannotFactorThroughProjection",
     ],
     "DASHI/Core/DeclaredScenarioRobustnessExact.agda": [
         "fromUniversalObligation :",
@@ -139,6 +162,10 @@ EXPECTED = {
         "import DASHI.Core.ObserverRefinementLatticeExact",
         "import DASHI.Core.ObserverRefinementOrientationCrosswalkExact",
         "import DASHI.Core.ObserverIncomparabilityCrosswalkExact",
+        "import DASHI.Core.ConsumerResidualRepairCrosswalkExact",
+        "import DASHI.Core.ContextIndexedGovernedObservationExact",
+        "import DASHI.Core.ResidualObserverDependencyExact",
+        "import DASHI.Core.ResidualObserverDependencyProjectionAdapterRegression",
         "import DASHI.Core.DeclaredScenarioRobustnessExact",
         "import DASHI.Core.RequiredObserverAxisJoinAdequacyExact",
         "import DASHI.Core.BoundedNegativeSearchExact",
@@ -149,14 +176,9 @@ EXPECTED = {
     ],
 }
 
-# Catches the exact class of source typo found during the #902 audit, while
-# leaving legitimate string literals and comments alone.
 ESCAPED_AGDA_KEYWORD = re.compile(
     r"^\s*\\(?:data|record|module|import|open|postulate)\b", re.MULTILINE
 )
-
-# Keep this deliberately narrow; the older shell checker owns the broader trust
-# escape scan.
 OBVIOUS_PLACEHOLDER = re.compile(r"^\s*postulate\b|\{![^}]*!\}", re.MULTILINE)
 
 
