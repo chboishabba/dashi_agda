@@ -48,6 +48,10 @@ jobs:
         run: |
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ProteinBackboneStereochemistryExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ProteinBackboneStereochemistryValidation.agda
+      - name: Typecheck adenylate-kinase same-sequence conformational pair
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalValidation.agda
       - name: Typecheck Madelung physical-source snowball owner
         run: nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369MadelungPhysicalSourceSnowballExact.agda
       - name: Typecheck archive Hartree radial-identity defect owner
@@ -70,6 +74,7 @@ jobs:
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ChiralMolecularSeparatingPairExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ProteinDNA3DAdapterExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369ProteinBackboneStereochemistryExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalExact.agda
           nix develop .# --command agda -i . DASHI/Chemistry/Everything.agda
 
   radial-regression:

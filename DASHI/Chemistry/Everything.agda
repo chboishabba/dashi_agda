@@ -86,3 +86,85 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AlanineChiralEmpiricalExact
 -- Ramachandran geometry and PDB acquisition do not collapse into a unique-fold
 -- or protein-function theorem.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProteinBackboneStereochemistryExact
+
+-- Same-sequence empirical protein pair: E. coli adenylate kinase 4AKE/1AKE
+-- supplies experimentally resolved open/unligated and closed/Ap5A-bound
+-- conformations of the same polypeptide chain. Sequence alone therefore does
+-- not determine the observed conformation in this fixture; context remains a
+-- required fibre coordinate.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalExact
+
+-- NDim geometric continuation: source-paid NMP--CORE and LID--CORE endpoint
+-- coordinates replace the binary open/closed label with a retained two-axis
+-- residual while preserving the NDim rule that extra axes are not automatic
+-- consumer improvement or a complete transition mechanism.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNDimGeometricResidualExact
+
+-- Four-corner structural reference continuation: 4AKE/1AKE plus 2AK3/1DVR
+-- instantiate open/open, closed/closed and the two mixed domain labels.  The
+-- mixed references are cross-homolog, so the square is explicitly blocked from
+-- promotion to same-sequence NMP/LID independence evidence.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMixedStateReferenceSquareExact
+
+-- Same-sequence computational refinement: the Ping et al. E. coli MD carrier
+-- reports both off-diagonal NMP/LID combinations as simulated clusters.  This
+-- pays a same-sequence computational four-corner carrier while remaining
+-- distinct from four experimental PDB structures, thermodynamic independence,
+-- kinetic independence, equilibrium populations, or a unique transition path.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSameSequenceSimulatedMixedStatesExact
+
+-- Dynamical coupling refinement: Li, Liu & Ji 2015 pay both ligand-free closure
+-- orders and an approximate 5.7:1 pathway-flux asymmetry favouring LID-first
+-- closure.  Reachability and flux asymmetry are kept distinct from equilibrium
+-- independence, universal rate constants, or an experimentally closed mechanism.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCouplingResidualExact
+
+-- Weighted NDim state graph: equation-level alpha/beta/gamma/delta/epsilon/xi
+-- states are connected into the source-paid primary and alternative routes,
+-- weighted by the 5.7:1 path-flux receipt and paired with the two-angle free-
+-- energy surface. Figure-level zeta and equation-level xi remain distinct
+-- source labels until a same-object notation repair is explicitly paid.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseWeightedNDimStateGraphExact
+
+-- Context-indexed landscape: the same LID--CORE / NMP--CORE axes carry distinct
+-- ligand-free and ligand-bound free-energy surfaces. The bound landscape pays
+-- an approx 8.0 kcal/mol open-to-closed delta G and strongly disfavors the
+-- NMP-first region; ligand-free path weights are not transferred across context.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandConditionedLandscapeExact
+
+-- Rate-observer adequacy: route topology can answer reachability but cannot
+-- manufacture transition-rate answers.  The repaired observer retains a rate
+-- coordinate, while source-paid Kramers diffusion calibrations remain distinct
+-- from still-unacquired per-edge Figure 5/6 numeric labels and experiment.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseRateObserverAdequacyExact
+
+-- FRET observer-axis refinement: two ligand-free single-molecule FRET studies
+-- observe different residue/domain axes (LID--NMP versus LID--CORE) and report
+-- different population summaries. Axis-erased observation is inadequate for
+-- that query; retaining the measurement axis repairs the finite collision.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverAxisExact
+
+-- Observer-axis join: either single FRET coordinate can collide while the
+-- transverse coordinate changes.  The joined LID--NMP × LID--CORE observer
+-- retains both declared axes by the generic required-axis join theorem, without
+-- claiming complete protein-state recovery or simultaneous historical readout.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverJoinExact
+
+-- Third-axis boundary: the joined two-distance observer remains query-relative.
+-- Li-Liu-Ji use a three-CV AdK description (theta1, theta2, dLN); a repository-
+-- local same-two-axis/different-third-axis collision proves that two declared
+-- FRET axes cannot be promoted to complete NDim state recovery. A three-axis
+-- observer repairs only the declared third-coordinate query.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETThirdAxisExact
+
+-- Consumer-indexed Pareto selection: the two-axis join is the minimal eligible
+-- observer for a declared two-axis consumer, while the third-coordinate query
+-- excludes it and promotes the three-axis observer.  Description length and
+-- NDim design costs are applied only after adequacy, never as physical truth.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverParetoExact
+
+-- Counterexample-to-repair closure: the third-axis inadequacy witness now drives
+-- the declared local refinement joinedTwo -> threeAxis.  The repo-native local
+-- repair theorem constructs eligibility inside the same observer family before
+-- minimal-description/Pareto ranking resumes; no new experiment is manufactured.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverLocalRepairExact
