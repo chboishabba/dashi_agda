@@ -41,6 +41,20 @@ for f in "${FILES[@]}"; do
   fi
 done
 
+# R1 archaeology regression: keep the representation wall split into theorem-
+# bearing same-object obligations.  Generic phase algebra/source-status receipts
+# must not be mistaken for the actual pole-quotient realization or checked-scalar
+# transport.
+R1="DASHI/Analysis/RiemannG2FinalNearLiteralKernelExact.agda"
+grep -q 'genericTargetGapCosineLawClosed' "$R1"
+grep -q 'reflectionPairLiteralFormulaSourceOwned' "$R1"
+grep -q 'actualUniversalPoleQuotientPhaseRealizationInhabited' "$R1"
+grep -q 'checkedNearScalarBridgeInhabited' "$R1"
+grep -q 'statusReceiptPaysR1Equality' "$R1"
+grep -q 'actualUniversalPoleQuotientPhaseRealizationInhabitedIsFalse' "$R1"
+grep -q 'checkedNearScalarBridgeInhabitedIsFalse' "$R1"
+grep -q 'statusReceiptPaysR1EqualityIsFalse' "$R1"
+
 if command -v agda >/dev/null 2>&1; then
   echo "Agda: $(agda --version)"
   for f in "${FILES[@]}"; do

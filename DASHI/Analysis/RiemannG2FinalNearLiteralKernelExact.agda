@@ -10,6 +10,8 @@ import DASHI.Analysis.RiemannAristotlePoleQuotientOffOrdinateNearFarBidiExact as
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as Final
+import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact as Phase
+import DASHI.Analysis.RiemannAristotleFiniteNearSchurKernelCovarianceTargetExact as Reflection
 
 ------------------------------------------------------------------------
 -- EVALUATOR-INDEPENDENT FINAL LITERAL NEAR KERNEL
@@ -136,6 +138,32 @@ compileFinalNearRepresentationEquality offInput bridge =
     (finalNearResponseIsCheckedNearScalar bridge)
     (checkedNearScalarIsLiteralFiniteNearValue bridge)
 
+------------------------------------------------------------------------
+-- R1 SOURCE/TRANSPORT AUDIT
+--
+-- Repo archaeology separates three facts that must not be collapsed:
+--
+--   1. generic target-gap / even-projection algebra is proof-bearing in Agda;
+--   2. a Lean source owner names the literal reflection-pair 4*g*cosh*cos
+--      formula on the zeta carrier;
+--   3. neither fact instantiates the actual universal pole-quotient phase
+--      carrier or transports the checked finite-near scalar into this Agda
+--      final carrier.
+--
+-- The booleans below are deliberately fail-closed acquisition status.  They do
+-- not replace either equality in `FinalNearCheckedScalarBridge`.
+------------------------------------------------------------------------
+
+genericTargetGapCosineCompilerClosedReceipt :
+  Phase.ProofRelevantTranslationModulationBoundary.targetGapCosineCompilerClosed
+    Phase.canonicalProofRelevantTranslationModulationBoundary ≡ true
+genericTargetGapCosineCompilerClosedReceipt = refl
+
+reflectionPairLiteralFormulaSourceOwnedReceipt :
+  Reflection.FiniteNearSchurKernelCovarianceTarget.rawPairKernelFormulaOwnedInLean
+    Reflection.canonicalFiniteNearSchurKernelCovarianceTarget ≡ true
+reflectionPairLiteralFormulaSourceOwnedReceipt = refl
+
 compileFinalPoleNearLiteralModel :
   forall {S transport} ->
   (offInput : Direct.DirectLiteralOffTargetInput S transport) ->
@@ -210,6 +238,26 @@ record FinalNearLiteralKernelBoundary : Set where
     determinantConsumerRequired : Bool
     determinantConsumerRequiredIsFalse : determinantConsumerRequired ≡ false
 
+    genericTargetGapCosineLawClosed : Bool
+    genericTargetGapCosineLawClosedIsTrue :
+      genericTargetGapCosineLawClosed ≡ true
+
+    reflectionPairLiteralFormulaSourceOwned : Bool
+    reflectionPairLiteralFormulaSourceOwnedIsTrue :
+      reflectionPairLiteralFormulaSourceOwned ≡ true
+
+    actualUniversalPoleQuotientPhaseRealizationInhabited : Bool
+    actualUniversalPoleQuotientPhaseRealizationInhabitedIsFalse :
+      actualUniversalPoleQuotientPhaseRealizationInhabited ≡ false
+
+    checkedNearScalarBridgeInhabited : Bool
+    checkedNearScalarBridgeInhabitedIsFalse :
+      checkedNearScalarBridgeInhabited ≡ false
+
+    statusReceiptPaysR1Equality : Bool
+    statusReceiptPaysR1EqualityIsFalse :
+      statusReceiptPaysR1Equality ≡ false
+
     analyticClusterMarginPaidHere : Bool
     analyticClusterMarginPaidHereIsFalse : analyticClusterMarginPaidHere ≡ false
 
@@ -226,6 +274,11 @@ canonicalFinalNearLiteralKernelBoundary =
     true refl
     false refl
     false refl
+    true refl
+    true refl
     false refl
     false refl
-    "Representation is evaluator-independent. The final R1 equality may be acquired directly or factored through one checked/imported near scalar: first identify final nearResponseAt(chosen J) with that scalar, then identify the same scalar with the literal finite cell fold. The bridge composes those same-object equalities only; it does not manufacture either one. Numerical/symbolic certificates remain downstream, no selected Weil window or determinant consumer is required, and no strict ClusterResponse inequality or RH is proved here."
+    false refl
+    false refl
+    false refl
+    "Representation is evaluator-independent. Generic target-gap/even-projection cosine algebra is already proof-bearing in Agda, and a Lean source owner names the literal reflection-pair 4*g*cosh*cos formula. Neither fact supplies the actual universal pole-quotient phase realization or the theorem-bearing checked-near-scalar transport. The final R1 equality may be acquired directly or factored through one checked/imported near scalar: identify final nearResponseAt(chosen J) with that scalar, then identify the same scalar with the literal finite cell fold. Status Booleans and opaque same-carrier receipts pay neither equality. Numerical/symbolic certificates remain downstream, no selected Weil window or determinant consumer is required, and no strict ClusterResponse inequality or RH is proved here."
