@@ -89,6 +89,23 @@ eligibilityNoRouteAdmissionRegression :
 eligibilityNoRouteAdmissionRegression =
   State.stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue
 
+admittedCandidateEligibilityProjectionRegression :
+  ∀ {P residual consumer authority experiment} →
+  State.AdmittedStateIndexedCandidate P residual consumer authority experiment →
+  Pareto.Eligible (State.asStateIndexedMDLProblem P residual consumer authority) experiment
+admittedCandidateEligibilityProjectionRegression =
+  State.admittedStateIndexedCandidateEligible
+
+admittedCandidateNoAutomaticParetoRegression :
+  State.admittedCandidateAutomaticallyParetoOptimal ≡ false
+admittedCandidateNoAutomaticParetoRegression =
+  State.admittedCandidateAutomaticallyParetoOptimalIsFalse
+
+admittedCandidateNoAutomaticTerminalClosureRegression :
+  State.admittedCandidateAutomaticallyClosesTerminalConsumer ≡ false
+admittedCandidateNoAutomaticTerminalClosureRegression =
+  State.admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse
+
 parentSnowballPaymentStillFailClosedRegression :
   State.parentSnowballPaymentMaySkipDependency ≡ false
 parentSnowballPaymentStillFailClosedRegression =
