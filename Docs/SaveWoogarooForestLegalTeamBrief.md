@@ -2,430 +2,291 @@
 
 ## Purpose
 
-This brief is for Save Woogaroo Forest and any lawyers assisting the group, including pro-bono counsel. It is **not legal advice** and does not attempt to replace counsel's professional judgment. Its purpose is to compress the current source/proof state into a lawyer-usable gap analysis:
+This brief is for Save Woogaroo Forest and lawyers assisting the group. It is **not legal advice**. It compresses the current source/proof state into a lawyer-usable gap analysis while keeping source identity, statutory authority, inference and unresolved facts separate.
 
-- what is already source-paid;
-- which statutory consumers are live;
-- which facts remain missing;
-- where admissible evidence does **not** yet factor through to the legal conclusion being sought;
-- what questions should be put to counsel immediately.
-
-The Ash Barty outreach lane is optional and off the critical path. The present priority is legal preservation.
+The preservation objective is the priority. Political/lobbying/public-figure work remains off the critical path unless it produces a concrete legal or decision-integrity issue.
 
 ---
 
-## Executive position
+## 15 September 2026 — current shortest preservation path
 
-The shortest current preservation path is:
+The highest-alpha ordering is now:
 
-1. **Commonwealth EPBC 2019/8575 — live decision before 1 October 2026**;
-2. **Queensland Nature Conservation Act 1992 (Qld), s 13 — critical habitat application**;
-3. **NCA ss 102–107 — interim conservation order / temporary restraint**;
-4. **NCA s 49 — compulsory nature refuge / permanent protection route**;
-5. **planning / koala exemption and grandfathering audit**;
-6. **EPBC s 475 and NCA Part 10 enforcement routes** if threatened conduct can be mapped to an actual contravention/offence.
+1. **9281/2024/OW execution gate** — post-decision Condition 6(a) satisfaction/acceptance, same-clearing-phase pre-start material, authoritative geometry and imminence;
+2. **EPBC 2019/8575 Part 9 decision** — refusal/restrictive-conditions merits work against the source-paid 1 October 2026 written-extension deadline;
+3. **Queensland Planning Act cut** — Condition 6(a) -> s 72 -> s 164 -> s 180, if the factual/legal trigger is paid;
+4. **EPBC cut** — s 67A -> s 475, if the same-action, operative-authorisation, proposed-conduct and standing facts are paid;
+5. **NCA ss 102–107** interim conservation order;
+6. **NCA s 13** critical-habitat essentiality;
+7. **NCA s 49** permanent protection and the planning/koala exemption/grandfathering audit.
 
-These are distinct legal consumers. Evidence useful for one is not automatically sufficient for another.
-
-A new spatial lead should now be treated as high priority: a campaign aerial outline shows **Springview 2 & 3, Scenic and Peninsular as a near-continuous north–south wooded chain**, while the official Queensland Statewide Biodiversity Corridors screenshots show a north–south riparian/state/regional corridor system through the same broader Brookwater–Springfield landscape. This is visually compelling but is **not yet an exact GIS intersection**.
-
----
-
-## 1. Immediate federal clock — EPBC 2019/8575
-
-The Australian Government notice dated **2 September 2026** extends the decision period for **Springfield Residential Development — EPBC 2019/8575** by **20 business days to 1 October 2026** under **s 130(1A)** of the Environment Protection and Biodiversity Conservation Act 1999 (Cth).
-
-The notice identifies **Declan O'Connor-Cox, Branch Head, Environment Assessments Queensland**, as the person authorised to make the approval decision.
-
-This means the current federal consumer is not an abstract campaign target. It is a live Part 9 approval/refusal decision with an identified delegate and sourced decision deadline.
-
-### Already source-paid
-
-- EPBC reference and project identity;
-- controlled-action status;
-- preliminary-documentation assessment pathway;
-- listed threatened-species / ecological-community controlling provisions;
-- 1 October 2026 decision deadline;
-- authorised decision-maker/delegate;
-- State Library of Queensland legal-deposit/custody of the four-volume Preliminary Documentation set.
-
-### Still required for a decision-grade refusal case
-
-The missing high-value material is the Preliminary Documentation and associated ecology maps/tables showing, preferably on the proponent's own evidence:
-
-- exact project / cadastral footprint;
-- total habitat by species / community;
-- habitat proposed to be cleared;
-- habitat retained or placed in conservation tenure;
-- habitat quality / critical-to-survival classification;
-- observed or inferred species use;
-- corridor / connectivity function;
-- fragmentation effects;
-- cumulative impacts;
-- avoidance alternatives considered;
-- residual impacts after avoidance / mitigation;
-- proposed offsets;
-- consistency with conservation advice / recovery planning.
-
-### New corridor/fragmentation question for the federal consumer
-
-The campaign aerial outline and official Queensland corridor screenshots should now be converted into an exact spatial test:
-
-```text
-2019/8575 action polygon
-  x
-official Queensland corridor geometry
-  x
-species/habitat-use evidence
-  ->
-fragmentation / connectivity proposition
-```
-
-If an exact intersection is proven, counsel should assess whether it strengthens the case that the action removes or narrows a functional movement/dispersal corridor and whether that consequence has been adequately dealt with in the Preliminary Documentation, cumulative-impact analysis, alternatives and proposed offsets.
-
-The visual comparison is not itself proof:
-
-```text
-screenshot alignment != GIS intersection
-```
-
-### Questions for counsel
-
-1. What are the strongest **Part 9 decision criteria / mandatory considerations** for a refusal argument on the presently available record?
-2. Is there any legal basis to require the decision-maker to address specific conservation-advice, cumulative-impact, alternatives, fragmentation/connectivity, or irreversibility evidence expressly?
-3. What material can still validly be lodged before the 1 October deadline, and in what form?
-4. Is there any procedural route to seek a further extension, reconsideration, supplementary information request, or deferral if material evidence is outstanding?
-5. Are there reviewable-error risks if the delegate relies on incomplete, stale, internally inconsistent, or materially misleading habitat/corridor calculations?
-6. What standing and timing issues should be preserved now for any later judicial-review or s 475 enforcement application?
+No route is promoted merely because it exists in legislation.
 
 ---
 
-## 2. Queensland s 13 — critical habitat
+## 1. 9281 execution gate — first acquisition priority
 
-Current Nature Conservation Act 1992 (Qld) s 13 defines **critical habitat** as habitat essential for conservation of a viable population of protected wildlife or community of native wildlife. The statutory concept is stronger than simple presence of threatened species, and it can include land not presently occupied by the wildlife.
+Council has approved 9281/2024/OW for Kalina Village 2 Stages 1–16 earthworks, vegetation clearing and stormwater. The negotiated decision notice, approved plans, tree plan, RFI chain and supporting application material are already acquired.
 
-The central legal-evidence question is therefore not merely:
+**The 21-document public application bundle is already acquired/exhausted for present purposes.** Do not keep asking for duplicate application PDFs unless a particular source copy is corrupt. The live evidentiary gap is the later **post-decision execution/compliance file**.
 
-> Are koalas / threatened species present?
+Condition 6(a) is **paid as a requirement**: before the pre-start meeting the applicant must provide either DCCEEW evidence that the proposed clearing is not a controlled action or, if it is controlled, the Commonwealth approval relied upon.
 
-It is:
+The following remain **open**:
 
-> Is this exact habitat **essential for conservation of a viable population or native-wildlife community**?
+- the post-decision Condition 6(a) satisfaction submission;
+- Council receipt/assessment/acceptance of it;
+- signed same-clearing-phase Environmental Pre-Clearance Package/checklist;
+- pre-start notice/minutes/attendance;
+- fauna spotter-catcher identity/licence and Pre-Clearance Fauna Management Plan;
+- relevant arborist/pre-start material;
+- executed Access and Works Licence where Council-controlled land is involved;
+- dated mobilisation/commencement evidence;
+- authoritative CAD/GIS for the clearing phase.
 
-### Existing useful evidence coordinates
-
-- threatened / endangered / vulnerable species and threatened ecological-community evidence;
-- mature remnant habitat;
-- habitat-quality assessments;
-- corridor / landscape connectivity;
-- Woogaroo–Opossum ecological linkage;
-- regional depletion / scarcity of remnant habitat;
-- fragmentation consequences;
-- breeding / foraging / dispersal / refuge function where evidenced;
-- evidence that a comparable function cannot readily be recreated elsewhere.
-
-### New spatial hypothesis
-
-The supplied project-outline image shows **Springview 2 & 3, Scenic and Peninsular** arranged as a wooded north–south chain. The official Queensland corridor overlay independently shows riparian/state/regional corridor features running through the broader Brookwater–Springfield landscape.
-
-This creates a high-value hypothesis:
+Public non-location is not proof of non-submission.
 
 ```text
-exact project polygon
-  x
-official corridor intersection
-  x
-population movement / habitat function
-  ->
-candidate essentiality evidence
+Condition 6(a) requirement = PAID
+Condition 6(a) satisfaction = OPEN
+preclearance protocol = PAID
+completed stage-specific package = OPEN
 ```
 
-The strongest apparent candidate from the screenshots is the Springview/Scenic portion of the chain, with Peninsular relevant at the southern transition into the broader Springfield corridor surface. This must be verified by exact geospatial data before being represented as a fact.
-
-### FactorsThrough defect presently remaining
-
-```text
-threatened-species presence
-    !=
-NCA s 13 critical-habitat conclusion
-```
-
-and likewise:
-
-```text
-official corridor mapping
-    !=
-NCA s 13 critical-habitat conclusion
-```
-
-The erased coordinate is still **essentiality to viable-population conservation**. Corridor intersection could help pay that coordinate only when joined to same-object ecological evidence about movement, dispersal, breeding/foraging/refuge function and consequences of severance.
-
-### Questions for counsel
-
-1. What administrative mechanism is presently available to **put an s 13 critical-habitat case before the Minister / department**?
-2. Does s 13 operate only as a definition feeding other powers, or is there a direct application / nomination / identification process relevant here?
-3. What evidentiary threshold has been used administratively or judicially for “essential” and “viable population”?
-4. Can multiple species, ecological-community and connectivity functions cumulatively pay the critical-habitat test, or should the case be species-specific?
-5. What is the strongest same-parcel proof package: ecology report, exact GIS intersection, expert affidavit/report, conservation advice, population/corridor modelling, or a combination?
-6. If the affected habitat is part of an official state/regional/riparian biodiversity corridor, what weight can that carry in proving that severing this exact habitat affects the viability of the local population/community?
+The source-derived GIS registration is useful for routing acquisition only. Approximate analytical figures (~41.74 ha Stage 1–16 footprint; ~8.28 ha detected older 2014/7306 overlap; ~32.84 ha Plan-A1 urban surface outside that detected older overlap) are **not legal clearing hectares** and are not proof of contravention.
 
 ---
 
-## 3. Queensland ss 102–107 — interim conservation order
+## 2. Immediate Council acquisition step
 
-Section 102 currently allows the Minister to make an interim conservation order where threatened or near-threatened wildlife, critical habitat, an area of major interest, or a protected area is subject to a threatening process likely to have a **significant detrimental effect**.
+The next action is a narrow records-status enquiry to **Council Development Planning**. The purpose is not to ask an officer for a legal opinion; it is to locate the missing primary execution-state records.
 
-An order may prohibit or control the threatening process.
+Ask, in substance:
 
-This route is potentially valuable because it is temporary and therefore may be deployable before the permanent-protection case is fully resolved.
+> For 9281/2024/OW, has Council received material purporting to satisfy negotiated Condition 6(a)? If so, when was it received, what Commonwealth/DCCEEW document was relied upon, has Council treated or recorded the condition as satisfied, and can copies of the submission and Council assessment/acceptance be provided?
 
-### Current missing atom
+Then ask:
+
+> Has a pre-start meeting occurred or been scheduled, and has Council received the associated Environmental Pre-Clearance, fauna spotter-catcher, arborist or Access and Works Licence material for the relevant clearing phase?
+
+Record the officer/team, date/time, any document/reference numbers, receipt dates, and the exact language used about whether Condition 6(a) is satisfied. Treat an oral answer as a dated source manifestation, not the final documentary payment.
+
+Follow the call with a written request for:
+
+1. the post-decision Condition 6(a) submission;
+2. Council receipt/assessment/acceptance correspondence or record;
+3. signed same-phase Environmental Pre-Clearance Package/checklist;
+4. pre-start notice, agenda, minutes and attendance;
+5. fauna spotter-catcher identity/licence and Pre-Clearance Fauna Management Plan;
+6. relevant arboricultural assessment/approval;
+7. executed Access and Works Licence;
+8. any same-phase mobilisation/commencement record.
+
+If Development Planning cannot release the material directly, ask whether it can be provided by **administrative access**. If not, preserve the same narrow scope for **formal RTI** rather than widening the request into the whole application file.
 
 ```text
-exact proposed works + timing
-    x
-exact wildlife/habitat object
-    x
-likely significant detrimental effect
+Council says no public copy located
+  != record does not exist
+
+Council officer says record exists
+  != Condition 6(a) legally satisfied
+
+Council provides literal record
+  -> classify source/instrument
+  -> test same action / geometry / phase / operative time
 ```
-
-The four-volume SLQ set is now especially important here because **Part Aii — Vegetation Clearing & Fauna Management Plan — Clearing Directions** may contain the exact clearing sequence/directions needed to bind a threatening process to place and time.
-
-The 1 October federal extension is useful as an intervention window, but:
-
-```text
-federal delay != Queensland s 102 trigger
-```
-
-### Questions for counsel
-
-1. Who may request that the Minister exercise s 102 and what form should that request take?
-2. Is there a practical evidentiary threshold for “likely to have significant detrimental effect”?
-3. Can the threatened process be clearing / earthworks / infrastructure works even before they commence?
-4. Is an s 13 critical-habitat identification required first, or can threatened / near-threatened wildlife independently activate s 102?
-5. Can an exact official-corridor intersection plus a documented clearing sequence materially strengthen the detrimental-effect case?
-6. What judicial-review options exist if a properly evidenced request is ignored or refused?
 
 ---
 
-## 4. Queensland s 49 — compulsory declaration of nature refuge
+## 3. Queensland commencement/enforcement route
 
-Section 49 provides a route where the Minister and landholders cannot agree on a nature-refuge proposal / conservation agreement and the Minister considers the area to be, or include, an **area of major interest or critical habitat** and that it should be declared a nature refuge.
+Current Planning Act text pays the following statutory sequence:
 
-This is a **discretionary executive power**, not an automatic consequence of ecological value.
+```text
+9281 Condition 6(a)
+  -> s 72: development may start only after pre-start conditions are complied with
+  -> s 164: a person must not contravene a development approval
+  -> s 180: any person may seek an enforcement order; future offences and interim orders are expressly contemplated
+```
 
-### Current missing coordinates
+Counsel must still determine whether Condition 6(a) is a condition required to be complied with before the relevant development starts, what conduct constitutes commencement for the relevant phase, whether an offence would be committed, and what procedural/cost consequences attach to any proposed P&E Court application.
 
-- exact parcels and tenure/interests;
-- s 13 critical-habitat or area-of-major-interest basis;
-- conservation-management intent;
-- suitability for nature-refuge protection;
-- evidence of failed / unavailable voluntary agreement where legally relevant;
-- ministerial initiation pathway.
+```text
+unlocated 6(a) record != unsatisfied condition
+unsatisfied-condition hypothesis != development offence
+s 180 availability != order will issue
+```
 
-### Questions for counsel
-
-1. Is s 49 realistically available on privately held Springfield development land in the present factual context?
-2. What procedural steps are required before “unable to agree” is satisfied?
-3. Can a third-party conservation group trigger or request commencement of that process?
-4. What role do compensation provisions and landholder rights play strategically?
-5. Is another tenure, acquisition, covenant, conservation agreement, or reserve mechanism legally faster or more realistic?
+This State route remains parallel to the EPBC route; neither displaces the other.
 
 ---
 
-## 5. Planning / koala exemption and grandfathering audit
+## 4. Portal status and s 95B / s 130 clock correction
 
-Ipswich material presents an important warning: mapped koala habitat can coexist with an approved / exempted development outcome.
+The EPBC Public Portal is presently undergoing status-field updates. EPBC 2019/8575 has been observed with the stable project-level label **Final Preliminary Documentation Published** while the separate `Decision Status` manifestation has varied, including `Published` and `Expired`.
+
+The portal string is not the operative legal state:
+
+```text
+Decision Status = Expired
+  != referral superseded
+  != referral necessarily lapsed
+  != absence of later Part 9 decision
+
+Decision Status = Published
+  != Part 9 approval
+```
+
+The controlling statutory timing rule is more precise than the shorthand often used publicly. Under s 95B, after comments the designated proponent prepares the final document and gives the Minister the final material and comments. Section 95B(1A) also provides that the documents are taken not to have been given if a required fee has not been paid. Under s 130, for preliminary-documentation assessment the ordinary 40-business-day period runs from the first business day after the Minister receives the s 95B material (or relevant s 95B(3) statement), subject to the Act and any written longer period.
 
 Therefore:
 
+> **publication is not the statutory clock trigger by itself**.
+
+Final-PD publication is strong process-state evidence, but an independent reconstruction of the ordinary clock needs the **Minister's s 95B receipt date** and the applicable fee/timing state. The project-specific written extension already source-paid elsewhere in the Woogaroo corpus supplies the practical current deadline of **1 October 2026**; do not derive a competing deadline merely from the publication date.
+
+The literal Part 9 approval/refusal instrument remains the decisive legal object when made.
+
+The official machine-readable EPBC referrals service is useful for referral/status/spatial navigation, but its own scope warning matters: a referral boundary is the maximum referral extent and is **not** the same thing as the development footprint or an approved clearing polygon.
+
+### Submission-count attribution
+
+Save Woogaroo Forest reports **more than 850** Springview Village 2 & 3 submissions **that the group could account for**. That is useful community evidence of participation, but it is not promoted to an exact Department total.
+
 ```text
-mapped habitat != prohibition on development
+more than 850 accounted for = community-source bounded claim
+exact official submission total remains open
 ```
 
-unless the applicable statutory, planning, temporal and exemption coordinates are known.
-
-### Counsel should identify
-
-- the exact statutory / planning basis of the Springview exemption or grandfathering;
-- the approval instrument(s) and dates;
-- parcel and stage scope;
-- whether later amendments, extensions, changed actions, infrastructure components or additional clearing remain inside the original exemption;
-- whether any approval has lapsed, materially changed, or requires a fresh assessment;
-- interaction with current koala mapping and later-enacted protections.
-
-This is potentially high value because a “grandfathered” project may still contain later components that do not inherit every historical immunity.
+Do not use an exact `1,786` total unless an authoritative same-project record is acquired that pays it.
 
 ---
 
-## 6. Enforcement / judicial backstop
+## 5. EPBC 2019/8575 merits lane
 
-### EPBC Act s 475
+The federal merits lane remains urgent in parallel with the local execution gate. Source-paid coordinates include controlled-action identity, controlling provisions, preliminary-documentation pathway, authorised decision-maker/delegate lineage and the written-extension deadline.
 
-Section 475 is an injunction route where a person has engaged, engages, or proposes to engage in conduct constituting an offence or other contravention of the EPBC Act or regulations. It is therefore not a general merits-based “environmental harm” injunction.
-
-The threshold question is:
+The remaining high-alpha merits work is to bind the final project material to the actual Part 9 consumer:
 
 ```text
-what exact proposed conduct
-    x
-what exact statutory contravention?
+species/community
+x exact habitat loss and retention
+x habitat quality / corridor function
+x avoidance and alternatives
+x residual significant impacts
+x offsets / additionality / temporal lag
+x cumulative fragmentation
+x conservation advice / recovery planning
+x irreversibility
 ```
 
-### Queensland enforcement orders
+The January PD is a baseline. Where the final PD/comment-response has changed or answered an apparent gap, use the final material; where the final material does not close the gap, preserve the residual rather than assuming either sufficiency or invalidity.
 
-Nature Conservation Act Part 10 contains enforcement-order machinery for nominated offences, including interim orders and restoration-related relief in qualifying cases.
-
-### Questions for counsel
-
-- what future conduct would actually be unlawful rather than merely environmentally damaging;
-- standing;
-- evidentiary preservation;
-- undertakings as to damages, costs and urgency considerations where applicable;
-- whether declaratory or judicial-review relief is more appropriate than enforcement relief in any present scenario.
+The cumulative-impact seam remains particularly valuable because the Department's own request required local/regional cumulative-impact analysis in the context of development patterns. A map of surrounding projects is not by itself that analysis.
 
 ---
 
-## 7. Political / ministerial routing — useful but not legal proof
+## 6. Same-action / instrument disambiguation
 
-Current political and administrative routes should be kept separate:
-
-- **Declan O'Connor-Cox** — authorised EPBC 2019/8575 decision delegate;
-- **Murray Watt (ALP)** — Commonwealth Environment Minister / portfolio escalation;
-- **Milton Dick (ALP)** — federal electorate representation;
-- **Shayne Neumann (ALP)** — federal electorate representation;
-- **Charis Mullen (ALP)** — Queensland Member for Jordan / opposition representation;
-- **Andrew Powell (LNP)** — Queensland Environment Minister / state protection route.
-
-Same-party alignment may make political coordination easier, but:
+Older Springfield-area Commonwealth approvals are real but bounded. 2014/7306, 2016/7676 and 2019/8575 are separate action coordinates.
 
 ```text
-same party != coordination proven
-political support != statutory test paid
-ministerial advocacy != delegate legally bound
+an EPBC approval exists in Springfield
+  != that approval authorises 9281 clearing
 ```
 
-A lawyer-facing brief should therefore use political support as an escalation / attention mechanism, never as a substitute for legal evidence.
+If Council's Condition 6(a) record relies on a Commonwealth approval, obtain the literal instrument and test:
+
+1. same proposed clearing/action;
+2. authoritative geometry;
+3. same clearing phase;
+4. operative date/time;
+5. any statutory exception or condition relied upon.
+
+If it instead relies on DCCEEW no-controlled-action correspondence, the same proposed clearing still has to be proved.
 
 ---
 
-## 8. Evidence architecture for the legal team
+## 7. Imminence / evidence preservation
 
-For every proposed factual proposition, the cleanest handoff record is:
+A same-phase signed Environmental Pre-Clearance Package is unusually high value because the proponent's own protocol says relevant approvals are assembled, responsible parties sign, the checklist is run at pre-start, and no clearing for that phase begins until Environmental Coordinator sign-off.
 
-```text
-Source
-Atom / proposition
-Exact project / parcel
-Statutory consumer
-Admissible?
-Consumer-adequate?
-FactorsThrough?
-WrongType risk?
-Remaining residual
-```
-
-Examples:
+That object can potentially join:
 
 ```text
-koala present
-  -> admissible ecological evidence
-  -> relevant to EPBC and NCA
-  -> not by itself adequate for NCA s 13
-
-QCC says ~136 ha habitat will be cleared
-  -> useful submission evidence
-  -> not equivalent to independently extracted final-PD primary fact
-
-project deadline extended to 1 Oct 2026
-  -> exact procedural fact
-  -> relevant to timing
-  -> not substantive protection
-
-mapped koala habitat
-  -> relevant planning/environmental fact
-  -> cannot determine approval legality without exemption/history coordinates
-
-campaign aerial outline appears to follow official corridor landscape
-  -> high-value acquisition lead
-  -> not an exact intersection until georeferenced
+instrument identity
++ phase identity
++ date
++ responsible participants
++ imminence
 ```
+
+without itself becoming a Commonwealth approval.
+
+Pre-start/fauna/arborist/access and contractor-mobilisation records should therefore be acquired as one execution-state tranche rather than serially.
 
 ---
 
-## 9. Material we should try to obtain for counsel immediately
+## 8. Queensland ecological protection lanes
 
-Highest-value acquisition order:
+### NCA ss 102–107
 
-1. **access the four-volume SLQ Preliminary Documentation set for EPBC 2019/8575**, especially Part Ai and Part Aii;
-2. exact cadastral/project-stage footprint and Lot 9999 SP292760 materials;
-3. machine-readable geometry for the official Queensland Statewide Biodiversity Corridors features around Brookwater/Springfield;
-4. proponent ecology reports and habitat-quality scoring;
-5. koala / threatened-species survey records and raw spatial layers if obtainable;
-6. proposed-clearing vs retained-habitat GIS;
-7. offsets / conservation-area details;
-8. conservation advice / recovery-plan material relied on in the assessment;
-9. all Commonwealth requests for further information and proponent responses;
-10. exact Springview local/state approval and exemption / grandfathering instruments;
-11. clearing / works schedule and any imminent pre-construction activity;
-12. equivalent exact polygons for Scenic EPBC 2020/8651 and Peninsula EPBC 2020/8629 if the broader corridor/cumulative-impact case is to be made.
+The execution chronology can pay the threatening-process/timing side. The remaining join is exact proposed works and timing × affected wildlife/habitat × likely significant detrimental effect.
+
+### NCA s 13
+
+Species presence, remnant habitat and corridor mapping do not alone establish that the exact habitat is essential for conservation of a viable protected-wildlife population or native-wildlife community. Same-parcel habitat-function/viability evidence remains required.
+
+### NCA s 49
+
+Permanent protection remains a slower discretionary backstop requiring exact tenure/interests, qualifying ecological basis, suitability and the statutory/executive pathway.
 
 ---
 
-## 10. Communications/public-education context
+## 9. Counsel questions now
 
-Save Woogaroo Forest's `Maximus's Forest — Why Habitats Matter` teaching resource already introduces habitat fragmentation and wildlife corridors, and asks students to consider how housing, roads, green spaces, wildlife corridors and buffer zones can coexist.
+1. Has Condition 6(a) been validly satisfied, and what legal significance does its exact wording have under Planning Act ss 72, 164 and 180?
+2. If Council says it is satisfied, what exact Commonwealth-status document was accepted and does it concern the same action/geometry/phase/time?
+3. What evidence is sufficient to establish proposed commencement before physical clearing?
+4. What is the safest State procedural vehicle if the pre-start condition is unpaid when commencement is proposed?
+5. What is the safest federal vehicle if same-action controlled conduct is proposed without operative federal authorisation?
+6. For EPBC 2019/8575, confirm the project-specific written extension and identify the s 95B Minister-receipt date only if independent clock reconstruction is necessary.
+7. What material can still be put before the Part 9 decision-maker before 1 October 2026, and what review rights should be preserved?
+8. How should the same-phase execution evidence feed the NCA ss 102–107 request?
 
-That is useful because it shows connectivity is already part of the campaign's public ecological framing. But it belongs in a different evidentiary fibre:
+---
+
+## 10. Current acquisition order
+
+1. **post-decision Condition 6(a) satisfaction submission + Council treatment/acceptance**;
+2. **signed same-clearing-phase Environmental Pre-Clearance Package**;
+3. **pre-start/fauna/arborist/access + mobilisation evidence**;
+4. **authoritative 9281 clearing geometry joined to Commonwealth action/approval geometry**;
+5. **literal EPBC 2019/8575 Part 9 instrument when made**, while preserving the 1 October merits clock;
+6. **final PD/comment-response material** not already held, especially for cumulative-impact, alternatives, offsets and species impacts;
+7. same-parcel expert ecology for NCA ss 102–107 / s 13;
+8. exact planning/koala exemption/grandfathering instruments.
+
+The application-file acquisition phase is substantially complete. The immediate wall is **post-decision execution-state custody**, not another copy of the 21 Development.i application documents.
+
+---
+
+## 11. Promotion boundaries
 
 ```text
-public education / community narrative
-  !=
-ecological expert evidence
-  !=
-GIS intersection
-  !=
-statutory conclusion
+portal status != operative legal state
+final-PD publication != clock trigger by itself
+community process summary != primary statute
+community submission tally != official total
+local approval != federal authorisation
+public silence != non-submission
+same property != same controlled-action geometry
+historical approval != transferable authority
+referral boundary != development footprint
+source-derived GIS != authoritative geometry
+approved works != commencement
+court/enforcement route exists != relief will issue
+DASHI reconstruction != legal advice
 ```
 
-The legal team should use official spatial data and expert ecology for the case, while the Maximus material can communicate the same underlying ecological concept in accessible language.
-
----
-
-## 11. Suggested handoff to pro-bono lawyers
-
-A useful first note to counsel would be:
-
-> We have been mapping the current Woogaroo preservation case by statutory consumer rather than by general conservation concern. The immediate live matter is EPBC 2019/8575, whose decision period has been extended to 1 October 2026. We have also identified potentially relevant Queensland Nature Conservation Act routes under ss 13, 102–107 and 49, plus a planning/koala exemption issue and enforcement backstops. A new spatial comparison suggests the Springview/Scenic/Peninsular project chain may intersect the official Queensland biodiversity-corridor system, but we are treating this as a hypothesis until the exact geometries are joined. We would value your assessment of which routes are legally live, what factual elements are still missing, and what should be lodged or preserved before the federal decision date. We can provide a source-indexed evidence matrix and would especially appreciate help obtaining/interpreting the SLQ Preliminary Documentation set and identifying the exact state/local approval and exemption instruments.
-
-The ask is therefore **not** “please find a law to save the forest.” It is:
-
-> **Please stress-test the identified legal routes, identify missing elements and procedural vehicles, and tell us what evidence/action is highest-value before irreversible clearing or the 1 October federal decision.**
-
----
-
-## 12. Current priority summary
-
-```text
-URGENT
-  EPBC 2019/8575 decision package — before 1 October 2026
-
-HIGH ALPHA
-  exact project polygon x official corridor geometry x habitat-function x species
-  -> EPBC fragmentation/cumulative-impact consumer
-  -> NCA s 13 essentiality consumer
-
-PARALLEL
-  s 102 interim conservation order request
-  s 49 permanent nature-refuge analysis
-  Springview exemption/grandfathering audit
-  Scenic/Peninsular cumulative-fragmentation geometry where relevant
-
-CONDITIONAL BACKSTOP
-  EPBC s 475 / Queensland enforcement / judicial review
-
-BONUS ONLY
-  Ash Barty / public-figure outreach
-```
-
-The central bottleneck is now **exact spatial/evidence-to-element payment and procedure**, not discovering additional abstract legal theories.
+The current task is not to find more abstract law. It is to acquire the smallest primary evidence objects that can actually change the preservation position before the execution phase or federal decision outruns the evidence.
