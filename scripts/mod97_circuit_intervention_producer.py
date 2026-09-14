@@ -123,12 +123,21 @@ def build_intervention_receipt(
             "candidate_layer": "single shared hidden layer",
             "intervention_site": "post-ReLU hidden activation",
             "directed_hidden_to_hidden_path": False,
+            "canonical_requirement_semantics": (
+                "selection closure: selecting one candidate may require another to close "
+                "an operator/seam compatibility condition"
+            ),
+            "canonical_requirement_is_causal_path_claim": False,
             "same_layer_pair_ablations_pay_direction": False,
-            "directional_requirement_rule": "not available from this producer",
+            "direction_unpaid_reason": (
+                "the symmetric singleton/joint pair-ablation surface does not identify "
+                "which directed closure requirement holds"
+            ),
             "boundary": (
-                "The current MLP has parallel hidden units feeding the output layer. "
-                "Post-ReLU singleton/joint ablations can measure interaction effects, "
-                "but cannot establish a directed hidden-unit dependency edge."
+                "Absence of a hidden-to-hidden wire is architecture context, not the "
+                "definition of gluingRequirement. The payment failure is informational: "
+                "the observed pair-ablation surface cannot distinguish opposite directed "
+                "selection-closure worlds."
             ),
         },
         "evaluation": {
@@ -159,9 +168,9 @@ def build_intervention_receipt(
         },
         "non_promotion_boundary": (
             "Raw singleton/joint ablation effects and their orientation-aware Nat damage "
-            "adapter are observation receipts. Same-layer post-ReLU pair ablations do not "
-            "supply directional requirement evidence. They do not by themselves establish "
-            "causal relation classes, closed-compatible beta, or Grokking mechanism identity."
+            "adapter are observation receipts. The symmetric pair surface does not identify "
+            "directed gluing-requirement closure. It does not by itself establish a complete "
+            "relation graph, closed-compatible beta, or Grokking mechanism identity."
         ),
     }
 
