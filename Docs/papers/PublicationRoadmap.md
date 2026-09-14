@@ -92,8 +92,10 @@ Live manuscript:
 Formal support:
 
 - `DASHI/Papers/NavierStokes/TheoremInterface.agda`
+- `DASHI/Papers/NavierStokes/TheoremInterfaceValidation.agda`
 - `Docs/papers/generated/core_papers_theorem_var_manifest.md`
-- `Docs/support/live/SupportCompendium.md`
+- `Docs/support/reference/NSAnalyticState.md`
+- `Docs/support/reference/AgdaValidationTargets.md`
 
 Reason for second priority:
 
@@ -101,31 +103,42 @@ Reason for second priority:
   review;
 - it must be self-contained as a PDE paper and must not depend on the reader
   accepting the unification architecture first;
-- the strongest exposition burden is the A6 defect-from-critical coercivity
-  narrative and the exact constant budget feeding A7-A9.
+- its primary burden is now sharply localized: P3 must pay the same-output
+  between-partner residual on the literal compressed physical carrier, and the
+  modern direct route still requires the cutoff-uniform R568
+  `CommutatorOnlySpacetimeBudget568` producer;
+- the downstream R572/R503 compiler chain is already constructed and should be
+  presented as compiler infrastructure, not as evidence that R568 is solved.
 
 Required update before submission:
 
-- rewrite the A6 section around defect-from-critical coercivity rather than
-  negative stretching sign;
-- state the Seregin/ESS intake as an `A3.2` compactness theorem only, with
-  `delta_r = O(r^(1/12))` recorded as the `A3.3` Abel-weighted target rather
-  than a derived theorem;
-- add the route-compatibility boundary separating this paper's tail-flux /
-  Abel-defect route from the independent Sprint164 microlocal `Sigma` route;
-- provide a constant table for the depletion and Gronwall thresholds;
-- separate accepted external PDE inputs from internal DASHI receipts and
-  diagnostic harnesses;
-- keep the formal-support appendix explicit that theorem-interface receipts do
-  not promote `A1/A3` or `A4`;
-- keep the formal status box conservative: candidate proof package, not Clay
-  resolution.
+- keep the main theorem conditional on R568 until a genuine source-written
+  producer closes it;
+- present `C_direct` / the integrated direct companion as constructed rather
+  than as a missing object;
+- expose the exact modern causal spine:
+  `R104/R406 -> C_direct -> R568 -> R572 -> R503 -> critical barrier`;
+- present the same-output Gram residual through R207/R209/R211 and state P3 as
+  the local physical anti-alignment/separation producer frontier;
+- retain R214 as a negative control showing constant shell width/localization
+  alone does not pay same-output covariance;
+- preserve the June `A1-A9` ESS/Abel-defect route and the Round62 Com/Schur
+  route as dated historical/alternative strategies, with explicit statements
+  of what they proved, what remained open, and why they were superseded as the
+  primary Paper-1 route;
+- keep `MathematicalStatus`, `StatementStatus`, and `CertificationStatus`
+  separate, including the distinction between validation-root existence,
+  workflow targeting, and an observed commit-specific Agda success receipt;
+- update the generated theorem-variable manifest only after the canonical
+  theorem interface stabilizes;
+- keep the formal status box conservative: conditional reduction manuscript,
+  not Clay resolution.
 
 Submission target state:
 
 ```text
-independently readable PDE preprint with exact lemma dependencies and a formal
-supplement.
+independently readable PDE preprint with exact same-object dependencies,
+explicit open producer fields, historical provenance, and a formal supplement.
 ```
 
 ## Priority 3: Paper 8, Closure Grammar
@@ -309,10 +322,16 @@ ask reviewers to first accept Paper 8.
 ## Immediate Work Queue
 
 1. Update Paper 3 to submission-standard prose.
-2. Update Paper 1 to submission-standard prose.
-3. Generate and cite theorem-variable manifests for all core papers.
-4. Update Paper 8 after Papers 1 and 3 stabilize.
-5. Only then select one satellite, with `Quantum / Operator` preferred over
+2. Finish Paper 1 modern proof-spine migration and certification receipt.
+3. Continue P3 same-output physical separation proof search on the literal
+   compressed partner carrier; if paid, construct R211 rather than a new
+   residual API.
+4. Prove/construct the R568 cutoff-uniform commutator-only spacetime producer;
+   consume it through the existing R572/R503 chain.
+5. Generate and cite theorem-variable manifests for all core papers after their
+   canonical interfaces stabilize.
+6. Update Paper 8 after Papers 1 and 3 stabilize.
+7. Only then select one satellite, with `Quantum / Operator` preferred over
    `Observer Quotients / Transcript PNF / Phenomenal Non-Recovery`.
 
 ## Promotion Gates
