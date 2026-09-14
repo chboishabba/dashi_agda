@@ -3,9 +3,10 @@
 
 The current observation carries non-negative singleton/joint damage values and a
 predeclared interaction threshold. It can pay conflict versus independent only
-when the adequacy/power gate is paid. It cannot manufacture gluingRequirement:
-requirement direction is non-identifiable from the symmetric pair-ablation
-surface and must come from a richer, separately paid observation.
+when the adequacy/power gate is paid and the classification policy was frozen
+before held-out evaluation. It cannot manufacture gluingRequirement: requirement
+direction is non-identifiable from the symmetric pair-ablation surface and must
+come from a richer, separately paid observation.
 """
 
 from __future__ import annotations
@@ -22,6 +23,7 @@ def classify_pair_receipt(
     joint_damage: int,
     interaction_threshold: int,
     adequacy_power_paid: bool,
+    policy_frozen_before_evaluation: bool,
 ) -> dict[str, Any]:
     if left == right:
         raise ValueError("pair endpoints must be distinct")
@@ -36,7 +38,11 @@ def classify_pair_receipt(
 
     excess = max(0, joint_damage - (left_damage + right_damage))
 
-    if not adequacy_power_paid:
+    if not policy_frozen_before_evaluation:
+        classification = "policyNotFrozen"
+        relation = None
+        classification_paid = False
+    elif not adequacy_power_paid:
         classification = "underpowered"
         relation = None
         classification_paid = False
@@ -59,6 +65,10 @@ def classify_pair_receipt(
         "interaction_threshold": interaction_threshold,
         "threshold_rule": "conflict iff interaction_excess > interaction_threshold",
         "adequacy_power_paid": adequacy_power_paid,
+        "policy_frozen_before_evaluation": policy_frozen_before_evaluation,
+        "held_out_outcome_used_to_choose_policy": False
+        if policy_frozen_before_evaluation
+        else None,
         "observation_surface": "symmetric singleton/joint pair-ablation damage",
         "requirement_direction_paid": False,
         "gluing_requirement_available": False,
@@ -66,8 +76,9 @@ def classify_pair_receipt(
         "relation": relation,
         "classification_paid": classification_paid,
         "boundary": (
-            "This classifier pays only conflict/independent on the current observation. "
-            "It cannot emit gluingRequirement because opposite directed closure worlds "
-            "can expose the same pair-ablation effects."
+            "This classifier pays only conflict/independent on the current observation, "
+            "and only under a policy frozen before held-out evaluation. It cannot emit "
+            "gluingRequirement because opposite directed closure worlds can expose the "
+            "same pair-ablation effects."
         ),
     }
