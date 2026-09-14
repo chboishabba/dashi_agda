@@ -41,6 +41,7 @@ module DASHI.Core.ResidualObserverDependencyExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.CoarseFineFabricCalculusExact as Calculus
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.TypedDependencyCore as Dependency
 
@@ -120,6 +121,37 @@ hiddenResidualDependencyGivesStrictRefinement witness =
     (sameCoarseObservation witness)
     (dependencyCodeSeparates witness)
 
+hiddenResidualDependencyProjectionCollision :
+  ∀ {State Action Index Code Coarse : Set}
+    {dependency : ResidualDependencyObserver State Action Index Code}
+    {coarse : Observer.Observer State Coarse}
+    {action : Action} →
+  HiddenResidualDependency dependency coarse action →
+  Calculus.ProjectionCollision
+    coarse
+    (residualDependencyAt dependency action)
+hiddenResidualDependencyProjectionCollision witness =
+  Calculus.projectionCollision
+    (left witness)
+    (right witness)
+    (sameCoarseObservation witness)
+    (dependencyCodeSeparates witness)
+
+hiddenResidualDependencyRefutesCoarseFactorisation :
+  ∀ {State Action Index Code Coarse : Set}
+    {dependency : ResidualDependencyObserver State Action Index Code}
+    {coarse : Observer.Observer State Coarse}
+    {action : Action} →
+  HiddenResidualDependency dependency coarse action →
+  (coarseCode : Coarse → Code) →
+  ((state : State) →
+    residualDependencyAt dependency action state
+    ≡ coarseCode (coarse state)) →
+  ⊥
+hiddenResidualDependencyRefutesCoarseFactorisation witness =
+  Calculus.consumerCannotFactorThroughProjection
+    (hiddenResidualDependencyProjectionCollision witness)
+
 ------------------------------------------------------------------------
 -- Non-factorability, in the same exact style as other DASHI observer bridges.
 ------------------------------------------------------------------------
@@ -147,15 +179,10 @@ hiddenResidualDependencyBlocksDescent :
   DependencyCodeDescendsAt dependency coarse action →
   ⊥
 hiddenResidualDependencyBlocksDescent witness descent =
-  dependencyCodeSeparates witness
-    (trans
-      (sym (commutes (left witness)))
-      (trans
-        (cong reconstruct (sameCoarseObservation witness))
-        (commutes (right witness))))
-  where
-    reconstruct = proj₁ descent
-    commutes = proj₂ descent
+  hiddenResidualDependencyRefutesCoarseFactorisation
+    witness
+    (proj₁ descent)
+    (λ state → sym (proj₂ descent state))
 
 ------------------------------------------------------------------------
 -- Quantitative seam.
