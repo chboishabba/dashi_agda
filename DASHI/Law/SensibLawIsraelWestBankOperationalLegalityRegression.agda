@@ -1,0 +1,52 @@
+module DASHI.Law.SensibLawIsraelWestBankOperationalLegalityRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Law.SensibLawIsraelWestBankOperationalLegalityExact as Fixture
+
+parentOperationalLegalityReusedRegression :
+  Fixture.parentOperationalLegalityReused Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ true
+parentOperationalLegalityReusedRegression = refl
+
+icjAdvisoryOpinionPaidRegression :
+  Fixture.icj2024AdvisoryOpinionPaid Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ true
+icjAdvisoryOpinionPaidRegression = refl
+
+settlementInternationalIllegalityPaidRegression :
+  Fixture.settlementRegimeInternationalIllegalityPaid Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ true
+settlementInternationalIllegalityPaidRegression = refl
+
+domesticOutpostContraventionRegularisationPaidRegression :
+  Fixture.domesticOutpostContraventionAndRegularisationPaid Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ true
+domesticOutpostContraventionRegularisationPaidRegression = refl
+
+failurePreventPunishPaidRegression :
+  Fixture.systematicFailurePreventPunishSettlerAttacksPaid Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ true
+failurePreventPunishPaidRegression = refl
+
+advisoryOpinionUnanimousRegression :
+  Fixture.advisoryOpinionUnanimousOnContinuedPresenceIllegality Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ false
+advisoryOpinionUnanimousRegression = refl
+
+domesticLawfulAutomaticallyInternationalLawfulRegression :
+  Fixture.domesticLawfulnessAutomaticallyInternationalLawfulness Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ false
+domesticLawfulAutomaticallyInternationalLawfulRegression = refl
+
+nonEnforcementAutomaticallyIndividualIntentRegression :
+  Fixture.nonEnforcementAutomaticallyEstablishesIndividualIntent Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ false
+nonEnforcementAutomaticallyIndividualIntentRegression = refl
+
+settlerIdentityAutomaticallyStateAttributionRegression :
+  Fixture.settlerIdentityAutomaticallyStateAttribution Fixture.canonicalIsraelWestBankOperationalLegalityBoundary
+  ≡ false
+settlerIdentityAutomaticallyStateAttributionRegression = refl
