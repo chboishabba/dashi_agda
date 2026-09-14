@@ -22,6 +22,7 @@ data RoadmapState : Set where
   blockedOnExternalDecision : RoadmapState
 
 data RoadmapLane : Set where
+  local9281ExecutionGateLane : RoadmapLane
   federalEPBC8575DecisionLane : RoadmapLane
   queenslandCriticalHabitatLane : RoadmapLane
   queenslandInterimRestraintLane : RoadmapLane
@@ -43,6 +44,15 @@ record RoadmapCoordinate : Set where
 
 open RoadmapCoordinate public
 
+condition6aExecutionGate : RoadmapCoordinate
+condition6aExecutionGate = roadmap-coordinate
+  local9281ExecutionGateLane
+  live
+  "9281/2024/OW has an approved negotiated operational-works pathway for earthworks, vegetation clearing and stormwater. Negotiated Condition 6(a) requires a Commonwealth-status record before pre-start, while the literal satisfaction material, Council acceptance and same-clearing-phase package remain unacquired by DASHI."
+  "Acquire the literal Condition 6(a) submission and Council treatment first, then join it to the signed same-clearing-phase Environmental Pre-Clearance Package, authoritative clearing geometry and dated proposed-execution evidence."
+  "before any clearing phase can outrun preservation; acquisition priority is immediate"
+  "local approval, a generic EPBC note, public-register silence, historical Commonwealth approvals and source-derived raster overlap do not establish federal authorisation, non-authorisation, imminence or contravention"
+
 federal8575 : RoadmapCoordinate
 federal8575 = roadmap-coordinate
   federalEPBC8575DecisionLane
@@ -58,7 +68,7 @@ qldCriticalHabitat = roadmap-coordinate
   open
   "NCA s 13 rule and candidate Woogaroo threatened-species/habitat evidence are source-paid at different fibres."
   "Produce a same-parcel application receipt showing why the exact habitat is essential for conservation of a viable protected-wildlife population or native-wildlife community."
-  "highest alpha before irreversible clearing"
+  "high alpha before irreversible clearing; parallel with the execution gate"
   "federal/proponent use of 'critical habitat' does not itself pay Queensland s 13"
 
 qldInterim : RoadmapCoordinate
@@ -67,8 +77,8 @@ qldInterim = roadmap-coordinate
   open
   "NCA ss 102-107 mechanism is source-paid; threatening-process application is not yet same-object paid."
   "Bind exact proposed works/timing to threatened wildlife or s 13 habitat and likely significant detrimental effect; prepare interim conservation-order request."
-  "before works commence; delay window is useful but not protection"
-  "project delay does not itself establish s 102 conditions"
+  "before works commence; strongest once the 9281 same-phase/pre-start chronology is paid"
+  "project delay or local approval does not itself establish s 102 conditions"
 
 qldPermanent : RoadmapCoordinate
 qldPermanent = roadmap-coordinate
@@ -102,9 +112,9 @@ enforcementBackstop = roadmap-coordinate
   enforcementBackstopLane
   open
   "EPBC s 475 and NCA s 173D mechanisms are source-paid as legal routes."
-  "Map any threatened conduct to an exact contravention/offence and standing/procedure before relying on court restraint."
-  "activate if works threaten to outrun or breach applicable legal controls"
-  "environmental harm alone is not automatically a statutory contravention"
+  "Map any threatened conduct to an exact contravention/offence and standing/procedure before relying on court restraint. The 9281 Condition 6(a), same-phase, authoritative-geometry and imminence receipts are upstream payments, not substitutes for counsel's legal application."
+  "activate if primary execution evidence shows works threaten to outrun or breach applicable legal controls"
+  "environmental harm, a local approval or an unlocated federal record alone is not automatically a statutory contravention"
 
 custodianshipCommunity : RoadmapCoordinate
 custodianshipCommunity = roadmap-coordinate
@@ -117,6 +127,12 @@ custodianshipCommunity = roadmap-coordinate
 
 ------------------------------------------------------------------------
 -- Current shortest path to a physical preservation outcome.
+--
+-- The earlier federal-decision-first ordering is no longer sufficient once a
+-- concrete local operational-works execution path is source-paid.  The first
+-- live leaf is now the Condition 6(a) / same-phase execution gate because it
+-- can change both imminence and the legal character of any contemplated
+-- restraint route before the 1 October Part 9 decision lands.
 ------------------------------------------------------------------------
 
 record HighestAlphaPath : Set where
@@ -127,13 +143,17 @@ record HighestAlphaPath : Set where
     third : RoadmapCoordinate
     fourth : RoadmapCoordinate
     federalClockSourcePaid : Bool
+    localExecutionPathSourcePaid : Bool
     permanentProtectionStillOpen : Bool
+    condition6aBeforeEmergencyCourtTheory : Bool
 
 currentHighestAlphaPath : HighestAlphaPath
 currentHighestAlphaPath = highest-alpha-path
+  condition6aExecutionGate
   federal8575
-  qldCriticalHabitat
   qldInterim
-  qldPermanent
+  qldCriticalHabitat
+  true
+  true
   true
   true
