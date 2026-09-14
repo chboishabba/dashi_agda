@@ -10,8 +10,10 @@ import DASHI.Core.ObserverSituatedReasonablenessExact
 import DASHI.Core.InstitutionalNormSituatedReasonablenessBridgeExact
 import DASHI.Core.InstitutionalDenaturalisationRevisionExact
 import DASHI.Core.InstitutionalStatusSignalAdequacyExact
+import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact
 
 import DASHI.Law.SensibLawLegalReasonablenessExact
+import DASHI.Law.SensibLawLegalReasonablenessNormativityBridgeExact
 import DASHI.Law.SensibLawOperationalLegalityExact
 import DASHI.Law.SensibLawInstitutionalResponsibilityExact
 import DASHI.Law.SensibLawEpistemicConsequenceBoundaryExact
