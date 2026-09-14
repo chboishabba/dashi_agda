@@ -14,6 +14,8 @@ import DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityParetoExact
 import DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityParetoRegression
 import DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawAttributionExact
 import DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawAttributionRegression
+import DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawComparisonReceipt
+import DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawComparisonRegression
 import DASHI.Core.RecursiveScaleTransitionExact
 import DASHI.Cognition.PNF.LearningAlgebra
 import DASHI.Cognition.PNF.FibreLearningDynamics
