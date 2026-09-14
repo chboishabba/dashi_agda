@@ -9,15 +9,13 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- FEDERATED ZOS / ERDFA / IPFS ACQUISITION BOUNDARY
 --
--- Runtime owner:
+-- Runtime owners:
 --   chboishabba/SensibLaw :: src/pnf/federated_zos_acquisition.py
--- Existing identity/publication owners:
+--   chboishabba/SensibLaw :: src/pnf/progressive_acquisition_depth.py
+-- Existing identity/publication/execution owners:
 --   src/pnf/sync_identity.py
 --   src/pnf/erdfa_export.py
---
--- Federation distributes storage, routing, parsing and public-ontology
--- candidate production.  It does not distribute semantic authority merely
--- because bytes or a CID are available remotely.
+--   src/storage/postgres/distributed_semantic_execution.py
 ------------------------------------------------------------------------
 
 data CorpusPrivacy : Set where
@@ -31,6 +29,9 @@ data SourceClass : Set where
 
 data ConsumerClass : Set where
   obsidianConsumer legalConsumer medicalConsumer publicResearchConsumer : ConsumerClass
+
+data AcquisitionDepth : Set where
+  searchResultDepth abstractDepth fullSourceDepth : AcquisitionDepth
 
 record AcquisitionPolicy : Set where
   constructor acquisitionPolicy
@@ -106,6 +107,41 @@ canonicalParallelOntologyBoundary : ParallelOntologyBoundary
 canonicalParallelOntologyBoundary =
   parallelOntologyBoundary true true true true false false
 
+record DistributedComputeBoundary : Set where
+  constructor distributedComputeBoundary
+  field
+    existingTypedPostgresWorkerReused : Bool
+    stableInputRefIsExecutionIdentityOnly : Bool
+    publicPolicyMayDispatchParseCompute : Bool
+    legalRestrictedPolicyMayDispatchParseCompute : Bool
+    medicalRestrictedPolicyMayDispatchParseCompute : Bool
+    rejectedDispatchDisclosesPayload : Bool
+    distributedExecutionCreatesSemanticAuthority : Bool
+
+open DistributedComputeBoundary public
+
+canonicalDistributedComputeBoundary : DistributedComputeBoundary
+canonicalDistributedComputeBoundary =
+  distributedComputeBoundary true true true false false false false
+
+record ProgressiveDeepeningBoundary : Set where
+  constructor progressiveDeepeningBoundary
+  field
+    searchResultPrecedesAbstract : Bool
+    abstractPrecedesFullSource : Bool
+    exactResidualMayDeepen : Bool
+    exhaustedBudgetMayDeepen : Bool
+    strictLegalPrimaryAuthorityNeedsFullSource : Bool
+    strictLegalPrimaryAuthorityNeedsExactSpan : Bool
+    fullSourceCreatesTruthWithoutReview : Bool
+    fullSourceCreatesPaymentWithoutReview : Bool
+
+open ProgressiveDeepeningBoundary public
+
+canonicalProgressiveDeepeningBoundary : ProgressiveDeepeningBoundary
+canonicalProgressiveDeepeningBoundary =
+  progressiveDeepeningBoundary true true false false true true false false
+
 record MaboFederatedResidualBoundary : Set where
   constructor maboFederatedResidualBoundary
   field
@@ -132,6 +168,11 @@ data FederatedCapabilityImpliesDisclosurePermission : Set where
 data PublicOntologyCreatesClaimTruth : Set where
 data PublicOntologyMayTransplantOntology : Set where
 data ExactMaboCommonGroundRequiresFederatedSearch : Set where
+data StableInputRefCreatesSemanticAuthority : Set where
+data RestrictedComputeMayDisclosePayload : Set where
+data SearchResultPaysPrimaryAuthority : Set where
+data AbstractPaysPrimaryAuthority : Set where
+data FullSourcePaysWithoutReview : Set where
 
 aCIDIsNotSemanticAuthority : CIDCreatesSemanticAuthority → ⊥
 aCIDIsNotSemanticAuthority ()
@@ -153,3 +194,18 @@ publicOntologyDoesNotAuthorizeOntologyTransplant ()
 
 maboExactCommonGroundIsZeroFederatedWork : ExactMaboCommonGroundRequiresFederatedSearch → ⊥
 maboExactCommonGroundIsZeroFederatedWork ()
+
+stableInputIdentityIsNotSemanticAuthority : StableInputRefCreatesSemanticAuthority → ⊥
+stableInputIdentityIsNotSemanticAuthority ()
+
+restrictedComputeDisclosureForbidden : RestrictedComputeMayDisclosePayload → ⊥
+restrictedComputeDisclosureForbidden ()
+
+searchResultCannotPayPrimaryAuthority : SearchResultPaysPrimaryAuthority → ⊥
+searchResultCannotPayPrimaryAuthority ()
+
+abstractCannotPayPrimaryAuthority : AbstractPaysPrimaryAuthority → ⊥
+abstractCannotPayPrimaryAuthority ()
+
+fullSourceStillNeedsReviewForPayment : FullSourcePaysWithoutReview → ⊥
+fullSourceStillNeedsReviewForPayment ()
