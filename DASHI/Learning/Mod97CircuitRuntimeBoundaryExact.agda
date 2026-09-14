@@ -3,8 +3,9 @@ module DASHI.Learning.Mod97CircuitRuntimeBoundaryExact where
 open import DASHI.Core.Prelude
 
 ------------------------------------------------------------------------
--- Runtime implementation, execution, historical identity, leakage, topology,
--- and scientific payment are deliberately different carriers.
+-- Runtime implementation, execution, historical identity, leakage,
+-- observation adequacy, and scientific payment are deliberately different
+-- carriers.
 ------------------------------------------------------------------------
 
 data ProducerStatus : Set where
@@ -24,7 +25,7 @@ data SelectionLeakageStatus : Set where
   heldOutUsedForSelection : SelectionLeakageStatus
 
 data RequirementDirectionStatus : Set where
-  unavailableForCurrentTopology : RequirementDirectionStatus
+  unavailableFromCurrentObservation : RequirementDirectionStatus
   externallyPayable : RequirementDirectionStatus
 
 data PaymentStatus : Set where
@@ -61,11 +62,14 @@ open Mod97CircuitRuntimeFrontier public
 -- loss increase into non-negative micro-loss Nat damage. That representation
 -- payment is distinct from relation classification.
 --
--- The current intervention producer acts on parallel post-ReLU units in one
--- hidden layer. There is no hidden-unit -> hidden-unit edge in that runtime
--- topology, so same-layer singleton/joint ablations cannot pay directional
--- requirement evidence. A different externally paid topology/intervention
--- receipt would be needed before gluing-requirement direction can be promoted.
+-- Canonical gluingRequirement is a directed selection-closure relation: if one
+-- candidate is selected, another may also need to be selected to close an
+-- operator/seam compatibility condition. It is not defined as a physical
+-- hidden-unit causal edge. The current singleton/joint pair-ablation observation
+-- is symmetric with respect to opposite requirement directions, so it cannot
+-- pay which directed closure relation holds. A richer externally paid
+-- observation/consumer receipt is needed before requirement direction can be
+-- promoted.
 --
 -- The beta producer can exhaust a supplied finite relation graph, but no
 -- empirical relation graph has yet been paid or executed through it here.
@@ -87,7 +91,7 @@ currentMod97RuntimeFrontier =
     notEstablished
     heldOutNotUsedForSelection
     paid
-    unavailableForCurrentTopology
+    unavailableFromCurrentObservation
     unpaid
     unpaid
     unpaid
