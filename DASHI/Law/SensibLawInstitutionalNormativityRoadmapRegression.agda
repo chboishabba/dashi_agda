@@ -27,6 +27,12 @@ israeliDomesticLawComprehensiveRegression :
   ≡ false
 israeliDomesticLawComprehensiveRegression = refl
 
+tasmaniaPrimaryArchiveAcquisitionFrontierRegression :
+  Roadmap.tasmaniaPrimaryArchiveAcquisitionFrontierAuthored
+    Roadmap.canonicalInstitutionalNormativityRoadmap
+  ≡ true
+tasmaniaPrimaryArchiveAcquisitionFrontierRegression = refl
+
 tasmaniaPrimaryArchiveReplayRegression :
   Roadmap.tasmaniaPrimaryArchiveReplayPaid Roadmap.canonicalInstitutionalNormativityRoadmap
   ≡ false
