@@ -4,7 +4,6 @@ module DASHI.Papers.NavierStokes.Everything where
 -- Historical and current theorem-interface rounds remain live provenance.
 
 import DASHI.Papers.NavierStokes.TheoremInterface
-import DASHI.Papers.NavierStokes.PublishedProofBidiProvenanceExact
 import DASHI.Papers.NavierStokes.ClayContractRound23
 import DASHI.Papers.NavierStokes.ClaimCorpusHighestAlphaRound24
 import DASHI.Papers.NavierStokes.CurrentTheoremInterfaceRound24
