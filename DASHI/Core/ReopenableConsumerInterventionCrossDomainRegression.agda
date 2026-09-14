@@ -13,6 +13,7 @@ import DASHI.Core.AuthorityPromotionHierarchyExact as AuthorityHierarchy
 import DASHI.Core.CompositionalComplianceExact as Compliance
 import DASHI.Core.ConsumerIndexedGovernedTransitionExact as Governed
 import DASHI.Core.ConsumerObserverJoinResidualExact as ObserverResidual
+import DASHI.Core.ConsumerObserverJoinResidualCrosswalkExact as ObserverResidualCrosswalk
 import DASHI.Core.ConsumerSafeFidelityEscalationExact as Escalation
 import DASHI.Core.EvidenceReliabilityPolarityExact as Polarity
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Kernel
@@ -263,6 +264,8 @@ fullAuthorityPath = AuthorityHierarchy.computedToActionablePath
 
 ------------------------------------------------------------------------
 -- 8. Hot consumer state plus cold residual can reopen the exact fine carrier.
+-- The historical wrapper is retained while the identity theorem routes through
+-- the canonical CoarseFineReopening crosswalk.
 ------------------------------------------------------------------------
 
 hotFine : Fine → Coarse
@@ -285,4 +288,4 @@ sameHotResidualReopensSameFine :
   residualFine x ≡ residualFine y →
   x ≡ y
 sameHotResidualReopensSameFine =
-  ObserverResidual.sameHotAndResidualSameFine recoverableFine
+  ObserverResidualCrosswalk.sameHotAndResidualSameFineViaCanonical recoverableFine
