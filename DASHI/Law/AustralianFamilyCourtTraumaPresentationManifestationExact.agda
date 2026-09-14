@@ -8,6 +8,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Law.SensibLawExpertEvidenceSituatedObserverExact as ExpertSituated
 import DASHI.Law.AustralianDisabilityJusticeObserverFixtureExact as Disability
+import DASHI.Law.TraumaNarrativeEvidenceBoundaryExact as TraumaEvidence
 import DASHI.Law.SensibLawEpistemicConsequenceBoundaryExact as Consequence
 
 ------------------------------------------------------------------------
@@ -46,6 +47,9 @@ parentExpertSituatedBoundary = ExpertSituated.canonicalExpertSituatedObserverBou
 parentDisabilityJusticeBoundary : Disability.AustralianDisabilityJusticeObserverBoundary
 parentDisabilityJusticeBoundary = Disability.canonicalAustralianDisabilityJusticeObserverBoundary
 
+parentTraumaNarrativeEvidenceBoundary : TraumaEvidence.TraumaNarrativeEvidenceBoundary
+parentTraumaNarrativeEvidenceBoundary = TraumaEvidence.canonicalTraumaNarrativeEvidenceBoundary
+
 -- Repository-local analytical classification of the reported combination of
 -- unresolved uncertainty and a highly consequential, difficult-to-reverse
 -- order.  This is not a quotation, judicial characterisation, legal threshold,
@@ -66,6 +70,7 @@ record FamilyCourtTraumaPresentationBoundary : Set where
     abc2026SourceBound : Bool
     expertSituatedObserverParentReused : Bool
     disabilityJusticeParentReused : Bool
+    traumaNarrativeEvidenceParentReused : Bool
     difficultWitnessCharacterisationReported : Bool
     fragmentedNarrationTruthBoundaryReported : Bool
     considerableUncertaintyAndSevereOrderReported : Bool
@@ -84,6 +89,7 @@ canonicalFamilyCourtTraumaPresentationBoundary :
   FamilyCourtTraumaPresentationBoundary
 canonicalFamilyCourtTraumaPresentationBoundary =
   familyCourtTraumaPresentationBoundary
+    true
     true
     true
     true
