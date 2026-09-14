@@ -6,13 +6,11 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawWoogarooPreservationRoadmapExact as Roadmap
+import DASHI.Law.SensibLawWoogarooEPBC8575PortalClockManifestationExact as Clock
 
 ------------------------------------------------------------------------
 -- WOOGAROO COUNSEL HANDOFF
---
--- This is a lawyer-facing issue/gap carrier.  It does not promote DASHI's
--- reconstruction into legal advice, a concluded legal opinion, an agency
--- finding, or an adjudicated result.
+-- This is a lawyer-facing issue/gap carrier, not legal advice.
 ------------------------------------------------------------------------
 
 data CounselTaskKind : Set where
@@ -57,15 +55,27 @@ condition6aExecutionCounselIssue = counsel-handoff-issue
   "before the relevant clearing phase or mobilisation; do not wait for physical clearing if proposed conduct becomes evidentially concrete"
   false
 
+federalClockManifestationCounselIssue : CounselHandoffIssue
+federalClockManifestationCounselIssue = counsel-handoff-issue
+  Roadmap.federal8575
+  validateStatutoryConstruction
+  urgentBeforeFederalDeadline
+  "EPBC 2019/8575 clock/status reconciliation: keep mutable portal status manifestations separate from the statutory s 95B -> s 130 clock and from the literal Part 9 decision instrument."
+  "The portal currently exposes Final Preliminary Documentation Published while Decision Status manifestations have varied; primary statutory text pays that the ordinary preliminary-documentation decision period runs from Minister receipt of the s 95B material, subject to the fee gate and any written longer period; the project-specific 1 October extension is separately source-paid in the roadmap."
+  "Confirm the legal effect and chronology of the project-specific extension; identify the exact s 95B Minister-receipt date if clock reconstruction matters; treat portal labels only as manifestations; obtain the literal Part 9 instrument when made."
+  "Exact Minister s 95B receipt date; literal Final PD/comment-response if still missing from the evidence corpus; literal Part 9 decision/conditions when made; authoritative official submission total if material."
+  "1 October 2026 practical decision deadline under the source-paid written extension; do not derive a different deadline merely from publication date"
+  false
+
 federalDecisionCounselIssue : CounselHandoffIssue
 federalDecisionCounselIssue = counsel-handoff-issue
   Roadmap.federal8575
   identifyProceduralVehicle
   urgentBeforeFederalDeadline
-  "EPBC 2019/8575: determine the strongest lawful route to put a decision-grade refusal case before the authorised delegate before the current decision deadline."
-  "Project identity, controlled-action status, listed controlling provisions, authorised delegate, and 1 October 2026 deadline."
+  "EPBC 2019/8575: determine the strongest lawful route to put a decision-grade refusal or restrictive-conditions case before the authorised delegate before the current decision deadline."
+  "Project identity, controlled-action status, listed controlling provisions, authorised delegate, final-PD-publication process state and source-paid 1 October 2026 written-extension deadline."
   "Validate the Part 9 decision criteria/mandatory considerations; advise what material can still be lodged, whether further information/extension/reconsideration routes exist, and what review rights should be preserved."
-  "Final Preliminary Documentation maps/tables, exact habitat-loss/retention calculations, alternatives, residual impacts, offsets, conservation-advice/recovery-plan treatment."
+  "Final Preliminary Documentation/comment-response maps and tables where not yet acquired; exact habitat-loss/retention calculations, alternatives, residual impacts, offsets, conservation-advice/recovery-plan treatment."
   "1 October 2026"
   false
 
@@ -122,29 +132,25 @@ enforcementCounselIssue = counsel-handoff-issue
   Roadmap.enforcementBackstop
   identifyEnforcementRoute
   conditionalBackstop
-  "Map any imminent or proposed conduct to an exact EPBC/NCA contravention before seeking injunction/enforcement relief."
-  "EPBC s 475 and Queensland NCA enforcement-order machinery exist as statutory routes."
+  "Map any imminent or proposed conduct to an exact EPBC/Planning Act/NCA contravention before seeking injunction/enforcement relief."
+  "EPBC s 475, Queensland Planning Act s 180 and NCA enforcement machinery exist as statutory routes."
   "Advise standing, exact cause/contravention, evidentiary preservation, urgency, costs/undertaking risks, and whether judicial review/declaratory relief is more appropriate."
   "Exact threatened conduct and exact statutory contravention/offence, with Condition 6(a), same-phase, geometry and operative-time facts source-paid first."
   "activate only if facts satisfy the legal trigger"
   false
-
-------------------------------------------------------------------------
--- No-promotion firewalls.
-------------------------------------------------------------------------
 
 data DashReconstructionEqualsLegalAdvice : Set where
 data CounselReviewAutomaticallyPaysMissingFact : Set where
 data ProBonoRepresentationCreatesMerits : Set where
 data LawyerInvolvementCreatesStatutoryStanding : Set where
 data Condition6aRecordBeforeContraventionOpinion : Set where
+data PortalStatusBeforeLegalStateFirewall : Set where
+data MinisterReceiptDateBeforeClockReconstruction : Set where
 
-dashReconstructionDoesNotBecomeLegalAdvice :
-  DashReconstructionEqualsLegalAdvice → ⊥
+dashReconstructionDoesNotBecomeLegalAdvice : DashReconstructionEqualsLegalAdvice → ⊥
 dashReconstructionDoesNotBecomeLegalAdvice ()
 
-counselReviewDoesNotCreateMissingEvidence :
-  CounselReviewAutomaticallyPaysMissingFact → ⊥
+counselReviewDoesNotCreateMissingEvidence : CounselReviewAutomaticallyPaysMissingFact → ⊥
 counselReviewDoesNotCreateMissingEvidence ()
 
 proBonoStatusDoesNotCreateMerits : ProBonoRepresentationCreatesMerits → ⊥
@@ -153,9 +159,17 @@ proBonoStatusDoesNotCreateMerits ()
 lawyerInvolvementDoesNotCreateStanding : LawyerInvolvementCreatesStatutoryStanding → ⊥
 lawyerInvolvementDoesNotCreateStanding ()
 
-condition6aRecordBeforeContraventionOpinion :
-  Condition6aRecordBeforeContraventionOpinion → ⊥
+condition6aRecordBeforeContraventionOpinion : Condition6aRecordBeforeContraventionOpinion → ⊥
 condition6aRecordBeforeContraventionOpinion ()
+
+portalStatusBeforeLegalStateFirewall : PortalStatusBeforeLegalStateFirewall → ⊥
+portalStatusBeforeLegalStateFirewall ()
+
+ministerReceiptDateBeforeClockReconstruction : MinisterReceiptDateBeforeClockReconstruction → ⊥
+ministerReceiptDateBeforeClockReconstruction ()
+
+federalClockReceiptForCounsel : Clock.ClockReceipt
+federalClockReceiptForCounsel = Clock.section130FortyBusinessDayClock
 
 record CounselHandoffBoundary : Set where
   constructor counsel-handoff-boundary
@@ -166,7 +180,9 @@ record CounselHandoffBoundary : Set where
     proceduralVehicleTreatedAsSeparateFromMerits : Bool
     evidenceResidualsRemainOpenUntilPaid : Bool
     condition6aExecutionGateEscalatedBeforeCourtConclusion : Bool
+    portalManifestationSeparatedFromLegalState : Bool
+    statutoryClockSeparatedFromPublicationDate : Bool
 
 canonicalCounselHandoffBoundary : CounselHandoffBoundary
 canonicalCounselHandoffBoundary =
-  counsel-handoff-boundary true true true true true true
+  counsel-handoff-boundary true true true true true true true true
