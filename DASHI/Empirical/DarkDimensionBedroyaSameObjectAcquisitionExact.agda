@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
+import DASHI.Core.BidiResidualApproximationExact as Bidi
 import DASHI.Interop.SourceDiligenceProofSearchBridgeExact as SourceSearch
 import DASHI.Empirical.DarkDimensionResidualDebtRoutingExact as DebtRouting
 import DASHI.Empirical.DarkDimensionFadingDMParentLineageExact as ParentLineage
@@ -32,6 +33,48 @@ bedroya2026SameObjectTarget =
 
 bedroyaIdentitySearchDemand : SourceSearch.SourceDiligenceSearchDemand
 bedroyaIdentitySearchDemand = DebtRouting.bedroyaManifestIdentitySearchDemand
+
+------------------------------------------------------------------------
+-- Pre-observation identity search as partial-information refinement.
+--
+-- This does not assert that a search has run.  It only records the current
+-- candidate fibre and the identity distinction a future acquisition can make.
+------------------------------------------------------------------------
+
+data CandidateCustody : Set where
+  childSpecificManifest : CandidateCustody
+  parentOnlyImplementation : CandidateCustody
+  ancestorParameterizationOnly : CandidateCustody
+
+data CandidateAdmissible (candidate : CandidateCustody) : Set where
+  candidate-admissible : CandidateAdmissible candidate
+
+candidateCustodyPrior : Bidi.ResidualFibre CandidateCustody
+candidateCustodyPrior candidate = CandidateAdmissible candidate
+
+data SameObjectIdentityMeasurement : Set where
+  exactChildSameObject : SameObjectIdentityMeasurement
+  lineageOnlyEvidence : SameObjectIdentityMeasurement
+
+sameObjectIdentityMeasurement :
+  CandidateCustody → SameObjectIdentityMeasurement
+sameObjectIdentityMeasurement childSpecificManifest = exactChildSameObject
+sameObjectIdentityMeasurement parentOnlyImplementation = lineageOnlyEvidence
+sameObjectIdentityMeasurement ancestorParameterizationOnly = lineageOnlyEvidence
+
+bedroyaSameObjectSearchExperiment :
+  Bidi.PartialInformationExperiment
+    CandidateCustody
+    SameObjectIdentityMeasurement
+bedroyaSameObjectSearchExperiment =
+  Bidi.partialInformationExperiment
+    candidateCustodyPrior
+    sameObjectIdentityMeasurement
+    "locate child-specific same-fit 2026 manifest/normalization custody or retain lineage-only result"
+    "same-object calibration requires explicit child linkage; author/model lineage alone is insufficient"
+    "search useful even without exact closure: an observed result can shrink the custody fibre"
+    false
+    "no acquisition result has been promoted; source-diligence and same-object checks remain downstream"
 
 childSameObjectStillUnacquired :
   Acquisition.fullTextAcquired bedroya2026SameObjectTarget ≡ false
