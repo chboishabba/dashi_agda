@@ -8,6 +8,11 @@ import DASHI.Core.CoarseFineFabricCalculusExact
 import DASHI.Core.CoarseFineRelativeFibreExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ObserverFactorizedRefinementExact
+import DASHI.Core.QueryFactorisationSufficiency
+import DASHI.Core.IntersectionalNonFactorability
+import DASHI.Core.ConsumerDescentMinimalObserverExact
+import DASHI.Core.FactorisationSpineCrosswalkExact
+import DASHI.Core.FactorisationSpineCrosswalkRegression
 import DASHI.Core.ExperimentalCoordinateDesignExact
 import DASHI.Core.ExperimentalCoordinateProjectionBridgeExact
 import DASHI.Core.ExperimentalCoordinateProjectionBridgeRegression
