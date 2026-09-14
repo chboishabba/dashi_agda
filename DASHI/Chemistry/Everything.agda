@@ -162,3 +162,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETThirdAxi
 -- excludes it and promotes the three-axis observer.  Description length and
 -- NDim design costs are applied only after adequacy, never as physical truth.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverParetoExact
+
+-- Counterexample-to-repair closure: the third-axis inadequacy witness now drives
+-- the declared local refinement joinedTwo -> threeAxis.  The repo-native local
+-- repair theorem constructs eligibility inside the same observer family before
+-- minimal-description/Pareto ranking resumes; no new experiment is manufactured.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverLocalRepairExact
