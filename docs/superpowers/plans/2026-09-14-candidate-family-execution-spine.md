@@ -21,6 +21,8 @@ RequirementConflictBatchExecutionExact
 
 The stronger batch spine projects canonically to the weaker candidate-family spine.
 
+Relation knowledge is open-world: `conflict / coRequirement / independent` is a reusable vocabulary, but domains are not required to expose a total candidate-pair classifier. Absence of a relation receipt is not independence.
+
 ## Current paid manifestations
 
 ### RSA synthetic batch closure
@@ -36,10 +38,11 @@ Payments are deliberately separate:
 - requirement closure: every seed closure reaches the declared global family;
 - conflict freedom: synthetic receipt has zero conflict edges;
 - global validity: global closed family commutes;
-- relation receipts translate RSA `conflict / gluingRequirement / independent` into the generic vocabulary.
+- individual RSA relation receipts translate `conflict / gluingRequirement / independent` into the generic vocabulary.
 
 Not promoted:
 
+- a total pairwise relation oracle;
 - exact runtime Git-blob execution;
 - production RSA-260 matrix execution;
 - GF(2), CUDA, NCCL or matrix semantics into Core;
@@ -66,6 +69,54 @@ Not promoted:
 - unseen-region generalisation;
 - null rejection;
 - wiring/mechanism claims.
+
+## Third independent donor: live Grokking PR #900
+
+Do not copy this branch into #902. Treat it as a cross-PR donor until integration.
+
+The live `agent/grokking-sparse-active-colouring-routing` branch already exposes:
+
+```text
+conflict / gluingRequirement / independent
+-> intervention-paid relation receipts
+-> ClosedCompatibleFamilyCertificate
+   (conflictFree, requirementClosed)
+-> FiniteClosedCompatibleSystem
+-> finite beta maximality
+-> frozen rule / held-out temporal comparison
+```
+
+This is an independent manifestation of the stronger requirement/conflict spine. After #902 lands, #900 should replace its direct import of the RSA reducer relation ontology with the generic Core vocabulary and, where type-compatible, use the generic batch admission carrier.
+
+Do not make #902 depend on #900 before merge/rebase integration.
+
+## Adaptive-refinement extraction
+
+Do not promote the RSA-local `RefinementPayment` enum into Core. The repo already owns the stronger generic information-theoretic condition in `ExperimentalCoordinateDesignExact`.
+
+`DASHI.Core.ExperimentalCoordinateProjectionBridgeExact` now proves:
+
+```text
+CoordinateSeparatesCollision
+-> ProjectionCollision
+-> old observer cannot determine that coordinate readout
+```
+
+This is the preferred generic payment for added observational coordinates.
+
+RSA-local reasons such as:
+
+```text
+splitsFalseEquivalence
+resolvesConflict
+discoversCoRequirement
+increasesAdmissibleClosedBatch
+improvesMeasuredQuotient
+```
+
+remain application-level reasons to seek refinement. They become conclusion-paying only when connected to an actual generic witness such as collision separation, a batch-execution payment, or a measured downstream consumer improvement.
+
+The bridge explicitly does not create a new physical dimension, dynamic defect, or manipulation authority.
 
 ## Existing adjacent generic owner retained
 
@@ -109,7 +160,7 @@ A lane may instantiate `RequirementConflictBatchExecutionExact` only if it addit
 4. no assumption that either predicate implies the other;
 5. global validity checked after selection/closure.
 
-Absence of a relation receipt is not `independent`.
+A lane may claim an added observational coordinate is paying only when an explicit downstream witness exists, preferably `CoordinateSeparatesCollision` / `ProjectionCollision` or a declared consumer-improvement theorem. Merely adding NDim axes is not payment.
 
 ## Candidate lanes
 
@@ -123,19 +174,27 @@ Before candidate-family promotion, locate or build an actual selected reduction-
 
 ### Grokking/circuit selection
 
-Current status: inspect live owner first.
+Current status: third independent donor found on live PR #900, but branch integration is unpaid.
 
-Likely reusable shape:
+Migration target after #902 integration:
 
 ```text
 candidate circuits
--> conflict/compatibility relation
--> selection frozen before held-out outcome
--> composed intervention/diagnostic
+-> intervention-paid conflict/coRequirement/independent receipts
+-> requirement-closed conflict-free family
+-> finite maximality
+-> frozen selection
 -> independent temporal/held-out validation
 ```
 
-Promote only if the live Agda owner exposes those as proof-valued carriers; do not reconstruct from prose or runtime output.
+Preserve the existing firewalls:
+
+```text
+beta increase != held-out improvement
+closed compatible family != Grokking mechanism
+runtime producer implemented != executed
+historical final receipt != historical checkpoint custody
+```
 
 ### Proof search / dependency-cut planning
 
@@ -158,13 +217,14 @@ Do not apply this spine to Clay proof archaeology merely because proof routes fo
 
 ## Pareto order
 
-1. Obtain Agda kernel receipt for the current rollup.
+1. Obtain Agda kernel receipt for the current #902 rollup.
 2. Keep RSA synthetic adapter as the positive requirement/conflict instance.
 3. Keep Fly as the positive parent-level instance.
-4. Inspect live grokking circuit-selection owner for a third independent manifestation.
-5. If a third manifestation typechecks, promote `CandidateFamilyExecutionExact` into a broader canonical Core rollup/registry.
-6. Only then migrate duplicated domain-local candidate-family records.
-7. Compose with symmetry/quotient execution where both family selection and quotient reduction are actually paid.
+4. After branch integration, migrate #900's closed-compatible family relation vocabulary from RSA-local ownership to Core ownership.
+5. If #900 typechecks against the generic spine, treat three independent manifestations as sufficient promotion evidence for the family/batch Core owners.
+6. Mine for duplicated domain-local candidate-family records and replace only exact factoring duplicates.
+7. Connect adaptive NDim/refinement proposals to `CoordinateSeparatesCollision` or another real consumer-payment witness before adding dimensions.
+8. Compose with symmetry/quotient execution where both family selection and quotient reduction are actually paid.
 
 ## Non-collapse boundaries
 
@@ -173,7 +233,10 @@ compatibility != requirement closure
 requirement closure != conflict freedom
 conflict freedom != global validity
 global execution != empirical success
+missing relation receipt != independence
 local action != quotient authority
+added axis != useful information
+coordinate separation != physical dimension
 same cardinality != same algebra
 synthetic benchmark != production execution
 source attribution != proof
