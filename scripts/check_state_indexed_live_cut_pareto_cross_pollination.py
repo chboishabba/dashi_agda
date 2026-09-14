@@ -86,7 +86,7 @@ require(REGRESSION, [
     "initialPortfolioCandidateEligibleRegression",
     "laterPortfolioCandidateEligibleRegression",
     "eligibilityNoRouteAdmissionRegression",
-    "admittedInitialCandidateEligibleRegression",
+    "admittedCandidateEligibilityProjectionRegression",
     "admittedCandidateNoAutomaticParetoRegression",
     "admittedCandidateNoAutomaticTerminalClosureRegression",
     "nsRelativeGrowthSplitClosedRegression",
