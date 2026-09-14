@@ -24,6 +24,16 @@ import DASHI.Environment.PhotosyntheticLightOptimizationExact
 import DASHI.Environment.PhotosyntheticAssimilationValidationExact
 import DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollinationExact
 
+-- Water-hyacinth biocontrol as a concrete LES / experimental-coordinate /
+-- active proof-search consumer.
+import DASHI.Environment.BiocontrolExternalityExperimentExact
+import DASHI.Environment.BiocontrolExternalityExperimentRegression
+import DASHI.Environment.BiocontrolExternalityExperimentSourceAtlasExact
+import DASHI.Environment.WaterHyacinthLESExact
+import DASHI.Environment.WaterHyacinthLESRegression
+import DASHI.Environment.BiocontrolActiveExperimentSearchExact
+import DASHI.Environment.BiocontrolActiveExperimentSearchRegression
+
 -- General physical world-engine / RTX coupling.
 import DASHI.Environment.LESPhysicalPhotonTransportFibreExact
 import DASHI.Environment.LESWaterPhotonInteractionExact
