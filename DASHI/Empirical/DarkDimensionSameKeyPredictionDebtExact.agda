@@ -6,7 +6,11 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
+import DASHI.Interop.SourceDiligenceProofSearchBridgeExact as SourceSearch
+import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact as BedroyaBackground
+import DASHI.Empirical.DarkDimensionBedroyaSameObjectAcquisitionExact as BedroyaAcquisition
 import DASHI.Empirical.DarkDimensionCrossDomainEvidenceWeldExact as CrossDomain
 import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
 import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun
@@ -142,6 +146,18 @@ darkDimensionBackgroundReconstructionStillOpen :
 darkDimensionBackgroundReconstructionStillOpen =
   BedroyaBackground.sixKeyVectorStillOpen
 
+bedroyaSameObjectAcquisitionStillOpen :
+  Acquisition.fullTextAcquired BedroyaAcquisition.bedroya2026SameObjectTarget
+  ≡ false
+bedroyaSameObjectAcquisitionStillOpen =
+  BedroyaAcquisition.childSameObjectStillUnacquired
+
+bedroyaPostIdentitySupportStageDefined :
+  SourceSearch.producer BedroyaAcquisition.bedroyaPostIdentitySupportDemand
+  ≡ Search.propositionSourceProducer
+bedroyaPostIdentitySupportStageDefined =
+  BedroyaAcquisition.postIdentitySupportStillRequiresSourcePayment
+
 daoExtractionRecipeLocatedButExecutionStillOpen :
   DAORecipe.recipeExecuted DAORecipe.daoPinnedExtractionRecipe ≡ false
 daoExtractionRecipeLocatedButExecutionStillOpen = DAORecipe.recipeExecutionStillOpen
@@ -157,8 +173,7 @@ crossDomainEvidenceWeldStillBlocksPromotion =
 
 residualDebtClassesRemainDistinct :
   DebtRouting.DAOExecutionPaysBedroyaAcquisitionGap → ⊥
-residualDebtClassesRemainDistinct =
-  DebtRouting.residualKindsRemainDistinct
+residualDebtClassesRemainDistinct = DebtRouting.residualKindsRemainDistinct
 
 sameKeyPredictionDebtStillOpen :
   debtClosed canonicalSameKeyPredictionDerivationDebt ≡ false
@@ -186,46 +201,21 @@ record SameKeyPredictionRequest : Set where
 
 open SameKeyPredictionRequest public
 
-mkOpenPredictionRequest :
-  ObservationKey.SharedBAOObservationKey → SameKeyPredictionRequest
+mkOpenPredictionRequest : ObservationKey.SharedBAOObservationKey → SameKeyPredictionRequest
 mkOpenPredictionRequest key =
-  sameKeyPredictionRequest
-    key darkDimensionModelSource daoIndependentTargetSource false false false
+  sameKeyPredictionRequest key darkDimensionModelSource daoIndependentTargetSource false false false
 
-lrg1TransversePredictionRequest : SameKeyPredictionRequest
 lrg1TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg1TransverseKey
-
-lrg1RadialPredictionRequest : SameKeyPredictionRequest
 lrg1RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg1RadialKey
-
-lrg2TransversePredictionRequest : SameKeyPredictionRequest
 lrg2TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg2TransverseKey
-
-lrg2RadialPredictionRequest : SameKeyPredictionRequest
 lrg2RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg2RadialKey
-
-lrg3Elg1TransversePredictionRequest : SameKeyPredictionRequest
 lrg3Elg1TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg3Elg1TransverseKey
-
-lrg3Elg1RadialPredictionRequest : SameKeyPredictionRequest
 lrg3Elg1RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg3Elg1RadialKey
-
-elg2TransversePredictionRequest : SameKeyPredictionRequest
 elg2TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.elg2TransverseKey
-
-elg2RadialPredictionRequest : SameKeyPredictionRequest
 elg2RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.elg2RadialKey
-
-qsoTransversePredictionRequest : SameKeyPredictionRequest
 qsoTransversePredictionRequest = mkOpenPredictionRequest ObservationKey.qsoTransverseKey
-
-qsoRadialPredictionRequest : SameKeyPredictionRequest
 qsoRadialPredictionRequest = mkOpenPredictionRequest ObservationKey.qsoRadialKey
-
-lyaTransversePredictionRequest : SameKeyPredictionRequest
 lyaTransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lyaTransverseKey
-
-lyaRadialPredictionRequest : SameKeyPredictionRequest
 lyaRadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lyaRadialKey
 
 bedroyaArXiv : String
