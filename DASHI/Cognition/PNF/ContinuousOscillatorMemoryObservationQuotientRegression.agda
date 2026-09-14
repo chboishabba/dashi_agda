@@ -1,0 +1,12 @@
+module DASHI.Cognition.PNF.ContinuousOscillatorMemoryObservationQuotientRegression where
+
+import DASHI.Cognition.PNF.ContinuousOscillatorMemoryObservationQuotientExact as Quotient
+
+quotientSurfaceExists : Set₁
+quotientSurfaceExists = Quotient.MemoryObservationQuotient
+
+collisionSurfaceExists : Set₁
+collisionSurfaceExists = Quotient.HiddenRecoveryCollision
+
+boundaryExists : Quotient.ContinuousOscillatorMemoryQuotientBoundary
+boundaryExists = Quotient.canonicalContinuousOscillatorMemoryQuotientBoundary
