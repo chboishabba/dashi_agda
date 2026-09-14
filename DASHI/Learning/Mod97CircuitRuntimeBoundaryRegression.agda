@@ -19,6 +19,14 @@ interventionExecutionRemainsUnpaid :
   Runtime.interventionExecution Runtime.currentMod97RuntimeFrontier ≡ Runtime.notExecuted
 interventionExecutionRemainsUnpaid = refl
 
+betaProducerIsImplemented :
+  Runtime.betaProducer Runtime.currentMod97RuntimeFrontier ≡ Runtime.implemented
+betaProducerIsImplemented = refl
+
+betaExecutionRemainsUnpaid :
+  Runtime.betaExecution Runtime.currentMod97RuntimeFrontier ≡ Runtime.notExecuted
+betaExecutionRemainsUnpaid = refl
+
 historicalRunIdentityRemainsUnestablished :
   Runtime.historicalRunIdentity Runtime.currentMod97RuntimeFrontier ≡ Runtime.notEstablished
 historicalRunIdentityRemainsUnestablished = refl
