@@ -77,6 +77,8 @@ grep -q '^projectionCollisionRepairRequiresSeparation :' DASHI/Core/Factorisatio
 grep -q '^actionCrossingProjectionCollision :' DASHI/Interop/FactorisationSpineCrossDomainAdapterExact.agda
 grep -q '^securityRoutingProjectionCollision :' DASHI/Interop/FactorisationSpineCrossDomainAdapterExact.agda
 grep -q '^indigenousPropositionProvenanceCollision :' DASHI/Interop/FactorisationSpineCrossDomainAdapterExact.agda
+grep -q '^securityRoutingRepairRequiresSeparation :' DASHI/Interop/FactorisationSpineCrossDomainAdapterExact.agda
+grep -q '^indigenousProvenanceRepairRequiresSeparation :' DASHI/Interop/FactorisationSpineCrossDomainAdapterExact.agda
 grep -q '^record CandidateFamilyExecutionSpine' DASHI/Core/CandidateFamilyExecutionExact.agda
 grep -q '^record RequirementConflictBatchSpine' DASHI/Core/RequirementConflictBatchExecutionExact.agda
 grep -q '^data CandidateRelation' DASHI/Core/RequirementConflictBatchExecutionExact.agda
