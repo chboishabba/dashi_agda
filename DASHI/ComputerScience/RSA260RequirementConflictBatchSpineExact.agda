@@ -15,6 +15,15 @@ import DASHI.ComputerScience.RSA260FractalPadicHyperfabricBatchGluingExact as RS
 -- RSA-260 or import GF(2)/CUDA semantics into the core spine.
 ------------------------------------------------------------------------
 
+fromRSAReducerRelation : RSA.ReducerRelation → Batch.CandidateRelation
+fromRSAReducerRelation RSA.conflict = Batch.conflict
+fromRSAReducerRelation RSA.gluingRequirement = Batch.coRequirement
+fromRSAReducerRelation RSA.independent = Batch.independent
+
+relationReceiptKind : RSA.ReducerRelationReceipt → Batch.CandidateRelation
+relationReceiptKind receipt =
+  fromRSAReducerRelation (RSA.relation receipt)
+
 syntheticBatchReceipt : RSA.BatchGluingClosureReceipt
 syntheticBatchReceipt = RSA.currentBatchGluingClosureReceipt
 
@@ -61,6 +70,8 @@ record RSARequirementConflictBatchBoundary : Set where
   constructor rsa-requirement-conflict-batch-boundary
   field
     genericSpineReused : Bool
+    rsaRelationVocabularyTranslated : Bool
+    relationKnowledgePromotedToTotalOracle : Bool
     requirementClosurePaidSeparately : Bool
     conflictFreedomPaidSeparately : Bool
     globalCommutationPaidSeparately : Bool
@@ -73,6 +84,8 @@ canonicalRSARequirementConflictBatchBoundary :
 canonicalRSARequirementConflictBatchBoundary =
   rsa-requirement-conflict-batch-boundary
     true
+    true
+    false
     true
     true
     true
