@@ -118,3 +118,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSameSequence
 -- closure.  Reachability and flux asymmetry are kept distinct from equilibrium
 -- independence, universal rate constants, or an experimentally closed mechanism.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCouplingResidualExact
+
+-- Weighted NDim state graph: equation-level alpha/beta/gamma/delta/epsilon/xi
+-- states are connected into the source-paid primary and alternative routes,
+-- weighted by the 5.7:1 path-flux receipt and paired with the two-angle free-
+-- energy surface. Figure-level zeta and equation-level xi remain distinct
+-- source labels until a same-object notation repair is explicitly paid.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseWeightedNDimStateGraphExact
