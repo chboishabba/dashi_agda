@@ -42,6 +42,8 @@ import DASHI.Cognition.PNF.CoarseFineStaticDynamicBridgeRegression
 
 import DASHI.Interop.FactorisationSpineCrossDomainAdapterExact
 import DASHI.Interop.FactorisationSpineCrossDomainAdapterRegression
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterRegression
 import DASHI.Interop.LocalGlobalBundleGluingExact
 import DASHI.Interop.LocalGlobalBundleGluingRegression
 import DASHI.Governance.LocalGlobalCouncilGluing
