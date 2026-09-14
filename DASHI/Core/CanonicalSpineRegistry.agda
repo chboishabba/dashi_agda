@@ -62,9 +62,15 @@ queryIndexedProjectionOwner = canonical-owner
   "DASHI.Core.QueryIndexedProjectionAdequacyExact"
   exactInterface false refl
 
+osintAcquisitionOwner : CanonicalOwner
+osintAcquisitionOwner = canonical-owner
+  "OSINT acquisition, source/carrier identity, corroboration independence, and search-nonlocation firewall"
+  "DASHI.Core.SnowballOSINTAcquisitionInvariantExact"
+  exactInterface false refl
+
 boundedNegativeSearchOwner : CanonicalOwner
 boundedNegativeSearchOwner = canonical-owner
-  "bounded negative search with explicit universe-coverage gate for global absence"
+  "proof-valued bounded negative search refining the OSINT nonlocation firewall with an explicit universe-coverage gate for global absence"
   "DASHI.Core.BoundedNegativeSearchExact"
   exactInterface false refl
 
@@ -120,12 +126,13 @@ canonicalOwners : List CanonicalOwner
 canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
   descentOwner ∷ approximateNaturalityOwner ∷ kernelSplitOwner ∷ codingTargetOwner ∷
-  continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷ boundedNegativeSearchOwner ∷
-  robustExperimentInferenceOwner ∷ multipartReconstructionOwner ∷ projectionFibreOwner ∷
-  consumerFibreRepairOwner ∷ candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷
-  localGlobalGluingOwner ∷ candidateObjectIdentityOwner ∷ attributedSourceOwner ∷
-  attributionSnowballOwner ∷ appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷
-  typedDependencyOwner ∷ genericReceiptOwner ∷ []
+  continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷
+  osintAcquisitionOwner ∷ boundedNegativeSearchOwner ∷ robustExperimentInferenceOwner ∷
+  multipartReconstructionOwner ∷ projectionFibreOwner ∷ consumerFibreRepairOwner ∷
+  candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷
+  candidateObjectIdentityOwner ∷ attributedSourceOwner ∷ attributionSnowballOwner ∷
+  appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷ typedDependencyOwner ∷
+  genericReceiptOwner ∷ []
 
 record RepositoryClosureBoundary : Set where
   constructor repository-closure-boundary
