@@ -38,6 +38,8 @@ record Mod97CircuitRuntimeFrontier : Set where
     checkpointExecution : ExecutionStatus
     interventionProducer : ProducerStatus
     interventionExecution : ExecutionStatus
+    betaProducer : ProducerStatus
+    betaExecution : ExecutionStatus
     historicalRunIdentity : IdentityStatus
     historicalConfigurationIdentity : IdentityStatus
     selectionLeakage : SelectionLeakageStatus
@@ -52,17 +54,22 @@ open Mod97CircuitRuntimeFrontier public
 ------------------------------------------------------------------------
 -- Current exact frontier on PR #900.
 --
--- The checked-in Python producers implement a new-run checkpoint path and a
--- training-selected / held-out-evaluated raw intervention path. Raw signed
--- held-out loss changes are retained, while an orientation-aware adapter maps
--- only positive loss increase into non-negative micro-loss Nat damage. That
--- representation payment is distinct from relation classification.
+-- The checked-in Python producers implement a new-run checkpoint path, a
+-- training-selected / held-out-evaluated raw intervention path, and an exact
+-- finite closed-compatible-capacity enumerator. Raw signed held-out loss
+-- changes are retained, while an orientation-aware adapter maps only positive
+-- loss increase into non-negative micro-loss Nat damage. That representation
+-- payment is distinct from relation classification.
 --
 -- The current intervention producer acts on parallel post-ReLU units in one
 -- hidden layer. There is no hidden-unit -> hidden-unit edge in that runtime
 -- topology, so same-layer singleton/joint ablations cannot pay directional
 -- requirement evidence. A different externally paid topology/intervention
 -- receipt would be needed before gluing-requirement direction can be promoted.
+--
+-- The beta producer can exhaust a supplied finite relation graph, but no
+-- empirical relation graph has yet been paid or executed through it here.
+-- Therefore beta maximality remains unpaid at the empirical checkpoint layer.
 -- No numerical run receipt has yet been observed here, and the historical
 -- receipt does not pay exact original architecture/split identity.
 ------------------------------------------------------------------------
@@ -70,6 +77,8 @@ open Mod97CircuitRuntimeFrontier public
 currentMod97RuntimeFrontier : Mod97CircuitRuntimeFrontier
 currentMod97RuntimeFrontier =
   mod97CircuitRuntimeFrontier
+    implemented
+    notExecuted
     implemented
     notExecuted
     implemented
@@ -90,6 +99,9 @@ currentMod97RuntimeFrontier =
 
 producerImplementationPaysExecution : PaymentStatus
 producerImplementationPaysExecution = unpaid
+
+betaProducerImplementationPaysBetaMaximality : PaymentStatus
+betaProducerImplementationPaysBetaMaximality = unpaid
 
 natDamageAdapterPaysRequirementEdges : PaymentStatus
 natDamageAdapterPaysRequirementEdges = unpaid
