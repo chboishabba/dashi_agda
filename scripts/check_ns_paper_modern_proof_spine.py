@@ -6,6 +6,7 @@ PAPER = ROOT / "Docs/papers/live/Paper1NavierStokesClayDraft.md"
 INTERFACE = ROOT / "DASHI/Papers/NavierStokes/TheoremInterface.agda"
 PROGRAM = ROOT / "DASHI/Papers/NavierStokes/FourLaneProofProgramExact.agda"
 CONTROL = ROOT / "Docs/roadmaps/NSProofControl20260915.md"
+ADDENDUM = ROOT / "Docs/papers/NSFourLanePublicationAddendum20260915.md"
 
 REQUIRED_PAPER = [
     "CommutatorOnlySpacetimeBudget568",
@@ -21,14 +22,6 @@ REQUIRED_PAPER = [
     "historical/alternative",
     "A1-A9",
     "R214",
-    "Lane A",
-    "Lane B",
-    "Lane C",
-    "Lane D",
-    "unforced whole-space",
-    "unforced periodic",
-    "forced whole-space breakdown",
-    "forced periodic breakdown",
 ]
 
 REQUIRED_INTERFACE = [
@@ -81,6 +74,25 @@ REQUIRED_CONTROL = [
     "historical/provenance",
     "P3",
     "does not imply",
+]
+
+REQUIRED_ADDENDUM = [
+    "Lane A",
+    "Lane B",
+    "Lane C",
+    "Lane D",
+    "unforced whole-space",
+    "unforced periodic",
+    "forced whole-space",
+    "forced periodic",
+    "R571",
+    "centered/Taylor",
+    "six-three",
+    "R568",
+    "many-to-one observable map",
+    "MathematicalStatus",
+    "StatementStatus",
+    "CertificationStatus",
 ]
 
 REQUIRED_FAIL_CLOSED_PROOFS = [
@@ -136,11 +148,13 @@ def main() -> None:
     interface = INTERFACE.read_text(encoding="utf-8")
     program = PROGRAM.read_text(encoding="utf-8")
     control = CONTROL.read_text(encoding="utf-8")
+    addendum = ADDENDUM.read_text(encoding="utf-8")
 
     require_all(paper, REQUIRED_PAPER, "paper")
     require_all(interface, REQUIRED_INTERFACE, "interface")
     require_all(program, REQUIRED_PROGRAM, "four-lane programme")
     require_all(control, REQUIRED_CONTROL, "proof-control record")
+    require_all(addendum, REQUIRED_ADDENDUM, "publication addendum")
     require_all(interface, REQUIRED_FAIL_CLOSED_PROOFS, "interface fail-closed proofs")
     require_all(interface, REQUIRED_CONSTRUCTED_PROOFS, "interface constructed proofs")
 
