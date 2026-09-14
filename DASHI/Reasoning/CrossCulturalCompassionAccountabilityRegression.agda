@@ -193,3 +193,24 @@ culturalFormNotInternalisationDeterminismRegression :
   Cross.AutonomyIndividualismBoundary.culturalFormDeterminesInternalisation
     Cross.canonicalAutonomyIndividualismBoundary ≡ false
 culturalFormNotInternalisationDeterminismRegression = refl
+
+------------------------------------------------------------------------
+-- Attribution snowball: identity, role and non-promotion survive downstream
+-- use of the two academic sources.
+------------------------------------------------------------------------
+
+kagitcibasiProofNonImportRetainedRegression :
+  Cross.kagitcibasiProofNonImportRetained ≡ true
+kagitcibasiProofNonImportRetainedRegression = refl
+
+kagitcibasiAuthorityNonCreationRetainedRegression :
+  Cross.kagitcibasiAuthorityNonCreationRetained ≡ true
+kagitcibasiAuthorityNonCreationRetainedRegression = refl
+
+chirkovRelationshipRetainedRegression :
+  Cross.chirkovFormalisationRelationshipRetained ≡ true
+chirkovRelationshipRetainedRegression = refl
+
+chirkovAuthorityNonCreationRetainedRegression :
+  Cross.chirkovAuthorityNonCreationRetained ≡ true
+chirkovAuthorityNonCreationRetainedRegression = refl
