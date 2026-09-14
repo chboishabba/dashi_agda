@@ -22,6 +22,10 @@ record CounterUASOpenWorldBridgeRegression : Set where
       Bridge.confidenceScoreCreatesKnownIdentity ≡ false
     noveltyEvidenceDoesNotCreateThreatAuthority :
       Bridge.rfNoveltyEvidenceCreatesThreatAuthority ≡ false
+    selfAgreementDoesNotPaySemanticPromotion :
+      Bridge.selfAgreementPaysSemanticPromotion ≡ false
+    referenceMatchDoesNotBypassIntegrity :
+      Bridge.referenceMatchBypassesIntegrityCheck ≡ false
     temporalReceiptRetainsEncounterState :
       Temporal.encounterStateRetained Bridge.rfUnknownThenLaterRecognizedReceipt ≡ true
     temporalReceiptDoesNotRewriteEncounter :
@@ -33,4 +37,4 @@ canonicalCounterUASOpenWorldBridgeRegression :
   CounterUASOpenWorldBridgeRegression
 canonicalCounterUASOpenWorldBridgeRegression =
   counterUASOpenWorldBridgeRegression
-    refl refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl refl refl
