@@ -6,10 +6,19 @@ on:
       - 'DASHI/Law/SensibLawExpertEvidenceProductionIntegrityExact.agda'
       - 'DASHI/Law/SensibLawExpertEvidenceProductionIntegrityRegression.agda'
       - 'DASHI/Law/SensibLawExpertEvidenceSourceGenealogyRegression.agda'
+      - 'DASHI/Law/SensibLawExpertInferenceAncestryExact.agda'
+      - 'DASHI/Law/SensibLawExpertInferenceAncestryRegression.agda'
+      - 'DASHI/Law/AustralianFamilyAssessmentPriorOpinionIndependenceExact.agda'
+      - 'DASHI/Law/AustralianFamilyAssessmentPriorOpinionIndependenceRegression.agda'
+      - 'DASHI/Law/AustralianFamilyReportWriterIntegrityExact.agda'
+      - 'DASHI/Law/AustralianFamilyReportWriterIntegrityRegression.agda'
+      - 'DASHI/Law/AustralianFamilyReportFalseWitnessManifestationExact.agda'
+      - 'DASHI/Law/AustralianFamilyReportFalseWitnessManifestationRegression.agda'
       - 'DASHI/Core/MeasurementAdministrationComparabilityExact.agda'
       - 'DASHI/Core/MeasurementAdministrationComparabilityRegression.agda'
       - 'DASHI/Core/QueryIndexedProjectionAdequacyExact.agda'
       - 'DASHI/Core/ObserverRefinementLatticeExact.agda'
+      - 'DASHI/Core/AttributedSourceCore.agda'
       - 'DASHI/Core/AuthorityNonPromotionCore.agda'
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/sensiblaw-expert-production-integrity.yml'
@@ -18,10 +27,19 @@ on:
       - 'DASHI/Law/SensibLawExpertEvidenceProductionIntegrityExact.agda'
       - 'DASHI/Law/SensibLawExpertEvidenceProductionIntegrityRegression.agda'
       - 'DASHI/Law/SensibLawExpertEvidenceSourceGenealogyRegression.agda'
+      - 'DASHI/Law/SensibLawExpertInferenceAncestryExact.agda'
+      - 'DASHI/Law/SensibLawExpertInferenceAncestryRegression.agda'
+      - 'DASHI/Law/AustralianFamilyAssessmentPriorOpinionIndependenceExact.agda'
+      - 'DASHI/Law/AustralianFamilyAssessmentPriorOpinionIndependenceRegression.agda'
+      - 'DASHI/Law/AustralianFamilyReportWriterIntegrityExact.agda'
+      - 'DASHI/Law/AustralianFamilyReportWriterIntegrityRegression.agda'
+      - 'DASHI/Law/AustralianFamilyReportFalseWitnessManifestationExact.agda'
+      - 'DASHI/Law/AustralianFamilyReportFalseWitnessManifestationRegression.agda'
       - 'DASHI/Core/MeasurementAdministrationComparabilityExact.agda'
       - 'DASHI/Core/MeasurementAdministrationComparabilityRegression.agda'
       - 'DASHI/Core/QueryIndexedProjectionAdequacyExact.agda'
       - 'DASHI/Core/ObserverRefinementLatticeExact.agda'
+      - 'DASHI/Core/AttributedSourceCore.agda'
       - 'DASHI/Core/AuthorityNonPromotionCore.agda'
       - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/sensiblaw-expert-production-integrity.yml'
@@ -63,6 +81,10 @@ jobs:
               DASHI/Core/MeasurementAdministrationComparabilityRegression.agda
               DASHI/Law/SensibLawExpertEvidenceProductionIntegrityRegression.agda
               DASHI/Law/SensibLawExpertEvidenceSourceGenealogyRegression.agda
+              DASHI/Law/SensibLawExpertInferenceAncestryRegression.agda
+              DASHI/Law/AustralianFamilyAssessmentPriorOpinionIndependenceRegression.agda
+              DASHI/Law/AustralianFamilyReportWriterIntegrityRegression.agda
+              DASHI/Law/AustralianFamilyReportFalseWitnessManifestationRegression.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-sensiblaw-expert-production.log 2>&1
