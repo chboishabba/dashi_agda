@@ -98,6 +98,14 @@ sameNumericScoreWithDirectionalEvidenceCanBeRequirement :
   ≡ Bridge.classified Bridge.gluingRequirement
 sameNumericScoreWithDirectionalEvidenceCanBeRequirement = refl
 
+pairAblationDirectionCollisionIsPaid :
+  Bridge.pairAblationRequirementDirectionCollisionPaid ≡ true
+pairAblationDirectionCollisionIsPaid = refl
+
+pairAblationDirectionDoesNotFactorThroughObservedEffects :
+  Bridge.requirementDirectionFactorsThroughPairAblation ≡ false
+pairAblationDirectionDoesNotFactorThroughObservedEffects = refl
+
 rawCapacityCanIncreaseWithoutBetaIncrease :
   Bridge.rawCandidateCount Bridge.extraBlockedCapacitySystem ≡ 4 ×
   Bridge.betaClosedCompatible Bridge.extraBlockedCapacitySystem ≡ 2 ×
