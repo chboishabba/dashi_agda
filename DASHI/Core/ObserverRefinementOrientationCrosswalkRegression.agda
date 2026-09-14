@@ -26,7 +26,8 @@ pairObserversAgreePointwise :
   (x : State) →
   Lattice.pairObserver coarseObserver fineObserver x
   ≡ Core.pairObserver coarseObserver fineObserver x
-pairObserversAgreePointwise = Crosswalk.pairObserversAgreePointwise
+pairObserversAgreePointwise x =
+  Crosswalk.pairObserversAgreePointwise coarseObserver fineObserver x
 
 refinementOrientationRoundTrip :
   Lattice.Refines coarseObserver (Lattice.pairObserver coarseObserver fineObserver)
