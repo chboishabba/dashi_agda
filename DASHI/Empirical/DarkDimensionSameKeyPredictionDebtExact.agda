@@ -11,6 +11,7 @@ import DASHI.Interop.SourceDiligenceProofSearchBridgeExact as SourceSearch
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact as BedroyaBackground
 import DASHI.Empirical.DarkDimensionBedroyaBackgroundInputContractExact as BedroyaInput
+import DASHI.Empirical.DarkDimensionBedroyaConditionalRuntimeExact as BedroyaRuntime
 import DASHI.Empirical.DarkDimensionBedroyaSameObjectAcquisitionExact as BedroyaAcquisition
 import DASHI.Empirical.DarkDimensionCrossDomainEvidenceWeldExact as CrossDomain
 import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
@@ -166,6 +167,18 @@ bedroyaSameFitRDragStillOpen :
     BedroyaInput.canonicalBedroyaBackgroundInputStatus
   ≡ false
 bedroyaSameFitRDragStillOpen = BedroyaInput.exactRDragSameFitStillOpen
+
+bedroyaConditionalRuntimeStillBlocked :
+  BedroyaInput.completeBackgroundInputManifestLocated
+    BedroyaInput.canonicalBedroyaBackgroundInputStatus
+  ≡ false
+bedroyaConditionalRuntimeStillBlocked = BedroyaRuntime.canonicalRuntimeRequestStillBlocked
+
+bedroyaBAONormalizationStillBlocked :
+  BedroyaInput.exactRDragSameFitLocated
+    BedroyaInput.canonicalBedroyaBackgroundInputStatus
+  ≡ false
+bedroyaBAONormalizationStillBlocked = BedroyaRuntime.canonicalBAONormalizationStillBlocked
 
 daoExtractionRecipeLocatedButExecutionStillOpen :
   DAORecipe.recipeExecuted DAORecipe.daoPinnedExtractionRecipe ≡ false
