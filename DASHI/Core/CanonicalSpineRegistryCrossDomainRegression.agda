@@ -12,6 +12,9 @@ factorisationCanonical = Registry.factorisationOwner
 queryIndexedProjectionCanonical : Registry.CanonicalOwner
 queryIndexedProjectionCanonical = Registry.queryIndexedProjectionOwner
 
+experimentalCoordinateCanonical : Registry.CanonicalOwner
+experimentalCoordinateCanonical = Registry.experimentalCoordinateOwner
+
 osintAcquisitionCanonical : Registry.CanonicalOwner
 osintAcquisitionCanonical = Registry.osintAcquisitionOwner
 
@@ -29,6 +32,12 @@ projectionFibreCanonical = Registry.projectionFibreOwner
 
 consumerRepairCanonical : Registry.CanonicalOwner
 consumerRepairCanonical = Registry.consumerFibreRepairOwner
+
+frozenDynamicCanonical : Registry.CanonicalOwner
+frozenDynamicCanonical = Registry.frozenProvenanceDynamicOwner
+
+queryFutureSafePromotionCanonical : Registry.CanonicalOwner
+queryFutureSafePromotionCanonical = Registry.queryIndexedFutureSafePromotionOwner
 
 candidateFamilyCanonical : Registry.CanonicalOwner
 candidateFamilyCanonical = Registry.candidateFamilyExecutionOwner
@@ -68,6 +77,10 @@ queryIndexedProjectionParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed queryIndexedProjectionCanonical ≡ false
 queryIndexedProjectionParallelDefinitionsBlocked = refl
 
+experimentalCoordinateParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed experimentalCoordinateCanonical ≡ false
+experimentalCoordinateParallelDefinitionsBlocked = refl
+
 osintAcquisitionParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed osintAcquisitionCanonical ≡ false
 osintAcquisitionParallelDefinitionsBlocked = refl
@@ -83,6 +96,14 @@ robustExperimentParallelDefinitionsBlocked = refl
 multipartReconstructionParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed multipartReconstructionCanonical ≡ false
 multipartReconstructionParallelDefinitionsBlocked = refl
+
+frozenDynamicParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed frozenDynamicCanonical ≡ false
+frozenDynamicParallelDefinitionsBlocked = refl
+
+queryFutureSafePromotionParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed queryFutureSafePromotionCanonical ≡ false
+queryFutureSafePromotionParallelDefinitionsBlocked = refl
 
 batchParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed batchCanonical ≡ false
