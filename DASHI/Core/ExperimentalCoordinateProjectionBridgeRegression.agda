@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.ExperimentalCoordinateDesignExact as Coordinate
 import DASHI.Core.CoarseFineFabricCalculusExact as Calculus
+import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Join
 import DASHI.Core.ExperimentalCoordinateProjectionBridgeExact as Bridge
 
 record World : Set where
@@ -49,6 +50,27 @@ separation = Coordinate.coordinateSeparatesCollision
 collision :
   Calculus.ProjectionCollision coarse (Coordinate.read design hiddenKey)
 collision = Bridge.coordinateSeparationYieldsProjectionCollision separation
+
+joinedObserver : World → Bool × Bool
+joinedObserver = Join.jointAxis coarse (Coordinate.read design hiddenKey)
+
+joinedObserverRetainsBothAxes :
+  Join.RetainsBothRequiredAxes
+    joinedObserver
+    coarse
+    (Coordinate.read design hiddenKey)
+joinedObserverRetainsBothAxes =
+  Bridge.coordinateJoinRetainsExistingAndNewAxis separation
+
+joinedObserverRetainsExisting :
+  Join.RetainsAxis joinedObserver coarse
+joinedObserverRetainsExisting =
+  Join.retainsLeft joinedObserverRetainsBothAxes
+
+joinedObserverRetainsNewCoordinate :
+  Join.RetainsAxis joinedObserver (Coordinate.read design hiddenKey)
+joinedObserverRetainsNewCoordinate =
+  Join.retainsRight joinedObserverRetainsBothAxes
 
 bridgeDoesNotCreatePhysicalDimension : Bool
 bridgeDoesNotCreatePhysicalDimension =
