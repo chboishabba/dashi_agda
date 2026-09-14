@@ -25,6 +25,21 @@ record DrosophilaSymbolicInterfaceRegression : Set where
         Symbolic.canonicalPythonDemoImplementationDebt
       ≡ false
 
+    adjacentAssistanceStillDoesNotTransfer :
+      Symbolic.AdjacentDemoAssistanceTransferPermission → ⊥
+
+    sameObjectIdentityStillUnpaid :
+      Symbolic.sameObjectReceiptPresent Symbolic.canonicalIdentityCorroboration
+      ≡ false
+
+    negativePublicSearchStillDoesNotProveAbsence :
+      Symbolic.PublicSearchExhaustionPermission → ⊥
+
+    publicArtifactStillUnrecovered :
+      Symbolic.exactPythonDemoArtifactLocated
+        Symbolic.canonicalPublicArtifactSearchReceipt
+      ≡ false
+
     connectomeAdvantageStillNeedsNulls :
       Symbolic.ConnectomeCausalAdvantagePermission → ⊥
 
@@ -43,5 +58,9 @@ canonicalDrosophilaSymbolicInterfaceRegression =
     Symbolic.fizzBuzzDoesNotEstablishGeneralProgrammingCompetence
     Symbolic.socialDemoCitationCreatesNoAuthority
     Symbolic.primaryImplementationStillUnpaid
+    Symbolic.adjacentDemoAssistanceDoesNotTransferToPythonRun
+    Symbolic.sameObjectIdentityStillUnpaid
+    Symbolic.publicSearchNotFoundDoesNotProveNoArtifact
+    Symbolic.publicArtifactStillNotLocated
     Symbolic.connectomeAdvantageRequiresNullComparison
     Symbolic.jamesDeterminismBoundaryPreserved

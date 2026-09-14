@@ -12,7 +12,7 @@ The new tranche composes rather than replaces:
 
 - `DASHI/Biology/DrosophilaMaleCNSEffectorObservationBridge.agda`: structural connectome, neural state, motor/effector continuation, body/behaviour, sensory return, and explicit connectome/dynamics/effector firewalls.
 - `DASHI/Biology/AnimalexicDrosophilaEmbodiedBridge.agda`: candidate/promotion governance, multimodal observations, intervention language, and neural-state/behaviour/meaning separation.
-- `DASHI/Cognition/PNF/JamesSensorimotorDecisionActionExact.agda`: recurrent active-sensing carrier and learning/non-promotion boundaries from stacked PR #895.
+- `DASHI/Cognition/PNF/JamesSensorimotorDecisionActionExact.agda`: recurrent active-sensing carrier and learning/non-promotion boundaries from merged PR #895.
 - `DASHI/Cognition/PNF/DecisionOutcomeLearningFeedbackExact.agda`: outcome -> learning -> future action relevance.
 - `DASHI/Core/AttributedSourceCore.agda`: source identity and non-promoting attribution.
 - `DASHI/Core/IntersectionalNonFactorability.agda`: collision witnesses and post-rechart non-recovery.
@@ -28,11 +28,9 @@ The source bundle must keep separate:
 3. any implementation repository or technical account that can pay the interface, dynamics, training, or evaluation details;
 4. secondary media that can locate the demo but cannot independently pay its hidden implementation details.
 
-Identity is fail-closed. A social handle/display name such as `Nalin` must not be identified with a named academic researcher without a same-object source receipt.
+Identity is fail-closed. Cross-platform corroboration may strengthen an identity hypothesis, but strict same-object identity for the exact demo account/run remains a separate receipt.
 
 ## Core carrier
-
-The experiment is represented as the typed chain
 
 ```text
 ConnectomeCarrier
@@ -59,8 +57,6 @@ The keyboard is an artificial actuator. It is not silently identified with biolo
 
 ## Competence ladder
 
-The formalisation distinguishes at least the following levels:
-
 ```text
 neural activity exists
 < mapped key/token emission
@@ -77,30 +73,13 @@ No lower level automatically promotes to a higher level.
 
 ## Assistance budget
 
-A task run must carry the external assistance coordinates needed to interpret the result:
+A task run must carry sensory/input encoding, dynamics rule, initial state/seed, decoder/output mapping, training/update rule, reward/fitness signal, prompt/template/scaffold, parser/runtime/evaluator, attempt/search budget, and selection policy.
 
-- sensory/input encoding;
-- neural dynamics rule;
-- initial state/seed;
-- decoder/output mapping;
-- training/update rule;
-- reward/fitness signal;
-- prompt/template/scaffold, if any;
-- parser/runtime/evaluator;
-- number of attempts or search budget;
-- selection/cherry-picking policy.
-
-A successful output is not attributable to the connectome alone unless the required ablations/nulls close those dependencies.
+Assistance evidence is object-indexed. An assistance fact from an adjacent Tetris demo, such as a public "1 prompt and Slack" description, does not pay the Python/FizzBuzz run without a same-object receipt.
 
 ## Null-model obligations
 
-The strongest future promotion route compares the same task/interface/training budget against controls such as:
-
-- shuffled or degree-preserving rewired connectivity;
-- randomized neuron identities;
-- generic recurrent network matched in size or budget;
-- identical decoder with no learning;
-- identical learning under alternate initialization.
+The strongest future promotion route compares the same task/interface/training budget against controls such as shuffled or degree-preserving rewired connectivity, randomized neuron identities, a generic recurrent network matched in size or budget, identical decoder with no learning, and identical learning under alternate initialization.
 
 The tranche does not claim those experiments have been run unless a receipt exists.
 
@@ -119,7 +98,8 @@ one successful run = learned policy
 training/update = biological synaptic plasticity
 social caption = technical implementation receipt
 secondary media report = primary implementation proof
-shared name/display name = person identity
+adjacent-demo assistance = Python-demo assistance
+strongly corroborated identity = strict same-object identity receipt
 connectome-derived success = causal advantage of biological topology
 ```
 
@@ -127,21 +107,7 @@ It must also preserve the #895 boundary that empirical task performance proves n
 
 ## Minimal implementation shape
 
-Create one focused owner:
-
-`DASHI/Biology/DrosophilaSymbolicInterfaceLearningExact.agda`
-
-Create one focused regression:
-
-`DASHI/Biology/DrosophilaSymbolicInterfaceLearningRegression.agda`
-
-Create one static contract:
-
-`scripts/check_drosophila_symbolic_interface_learning.py`
-
-Wire the two Agda modules into `DASHI/Biology/AnimalexicEverything.agda`.
-
-No new general planner, no duplicate decision ontology, no duplicate memory ontology, and no attempt in this tranche to build a full executable fly simulator.
+Create one focused owner, one focused regression, one static contract, and wire the Agda modules through `DASHI/Biology/AnimalexicEverything.agda`. No new general planner, duplicate decision ontology, duplicate memory ontology, or full executable fly simulator belongs in this tranche.
 
 ## Verification boundary
 

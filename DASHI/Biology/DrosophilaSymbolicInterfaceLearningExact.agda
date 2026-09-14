@@ -17,12 +17,6 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 
 ------------------------------------------------------------------------
 -- VIRAL DROSOPHILA -> SYMBOLIC-INTERFACE FORMALISATION
---
--- This owner formalises the interface/evaluation geometry of the current
--- "fruit fly writes Python" demo wave. It does not identify a connectome map
--- with executable dynamics, a software simulation with living-fly cognition,
--- emitted symbols with semantic understanding, or one FizzBuzz success with
--- general programming competence.
 ------------------------------------------------------------------------
 
 socialDemoSource : Source.AttributedSource
@@ -46,12 +40,6 @@ socialDemoCitationCreatesNoAuthority = Source.citationCreatesAuthorityIsFalse so
 
 ------------------------------------------------------------------------
 -- Implementation-recovery debt.
---
--- Current public search pays the existence of the viral claim and provides
--- independently documented examples of MaleCNS/connectome simulations being
--- wired to software environments. It does not yet pay the first-party Python
--- demo implementation itself. The missing pieces remain explicit instead of
--- being reconstructed from captions or secondary reporting.
 ------------------------------------------------------------------------
 
 record PythonDemoImplementationDebt : Set where
@@ -90,6 +78,88 @@ primaryImplementationStillUnpaid = refl
 exactFizzBuzzArtifactStillUnpaid :
   exactFizzBuzzArtifactPresent canonicalPythonDemoImplementationDebt ≡ false
 exactFizzBuzzArtifactStillUnpaid = refl
+
+------------------------------------------------------------------------
+-- Object-indexed social/demo evidence.
+------------------------------------------------------------------------
+
+data DemoObject : Set where
+  pythonFizzBuzzDemo : DemoObject
+  capyTetrisDemo : DemoObject
+
+data AssistanceFact : DemoObject → Set where
+  tetrisOnePromptAndSlack : AssistanceFact capyTetrisDemo
+
+data AdjacentDemoAssistanceTransferPermission : Set where
+
+adjacentDemoAssistanceDoesNotTransferToPythonRun :
+  AdjacentDemoAssistanceTransferPermission → ⊥
+adjacentDemoAssistanceDoesNotTransferToPythonRun ()
+
+------------------------------------------------------------------------
+-- Identity evidence stratification.
+------------------------------------------------------------------------
+
+record IdentityCorroboration : Set where
+  constructor identityCorroboration
+  field
+    xHandleStatesCapyCofounder : Bool
+    ycNamesNalinSemwalCapyFounder : Bool
+    huggingFaceLordsplineNamesNalinSemwal : Bool
+    sameObjectReceiptPresent : Bool
+
+open IdentityCorroboration public
+
+canonicalIdentityCorroboration : IdentityCorroboration
+canonicalIdentityCorroboration = identityCorroboration true true true false
+
+data CorroboratedIdentityPromotionPermission : Set where
+
+stronglyCorroboratedIdentityStillIsNotSameObjectReceipt :
+  CorroboratedIdentityPromotionPermission → ⊥
+stronglyCorroboratedIdentityStillIsNotSameObjectReceipt ()
+
+sameObjectIdentityStillUnpaid :
+  sameObjectReceiptPresent canonicalIdentityCorroboration ≡ false
+sameObjectIdentityStillUnpaid = refl
+
+------------------------------------------------------------------------
+-- Public-artifact search receipt.
+--
+-- A negative search result is evidence about the searched public surfaces,
+-- not a theorem that no first-party artifact exists anywhere.
+------------------------------------------------------------------------
+
+record PublicArtifactSearchReceipt : Set where
+  constructor publicArtifactSearchReceipt
+  field
+    lordsplinePublicReposEnumerated : Bool
+    exactCodeTermsSearched : Bool
+    recentRelevantCommitMessagesSearched : Bool
+    obviousCapyRepositoriesSearched : Bool
+    exactPythonDemoArtifactLocated : Bool
+    searchReading : String
+
+open PublicArtifactSearchReceipt public
+
+canonicalPublicArtifactSearchReceipt : PublicArtifactSearchReceipt
+canonicalPublicArtifactSearchReceipt = publicArtifactSearchReceipt
+  true
+  true
+  true
+  true
+  false
+  "searched public lordspline repositories plus obvious Capy-related repositories and fly/FizzBuzz/Python commit/code terms; no exact first-party Python/FizzBuzz implementation surfaced in the searched public GitHub surfaces"
+
+data PublicSearchExhaustionPermission : Set where
+
+publicSearchNotFoundDoesNotProveNoArtifact :
+  PublicSearchExhaustionPermission → ⊥
+publicSearchNotFoundDoesNotProveNoArtifact ()
+
+publicArtifactStillNotLocated :
+  exactPythonDemoArtifactLocated canonicalPublicArtifactSearchReceipt ≡ false
+publicArtifactStillNotLocated = refl
 
 ------------------------------------------------------------------------
 -- Typed carrier layers.
@@ -188,10 +258,6 @@ record SymbolicInterfaceExperiment : Set where
 
 open SymbolicInterfaceExperiment public
 
-------------------------------------------------------------------------
--- Minimal finite symbolic interface witness.
-------------------------------------------------------------------------
-
 canonicalAssistanceBudget : AssistanceBudget
 canonicalAssistanceBudget = assistanceBudget
   "external sensory/task encoding"
@@ -223,9 +289,7 @@ canonicalSocialDemoExperiment = symbolicInterfaceExperiment
   mappedTokenEmission
 
 ------------------------------------------------------------------------
--- Output nonfactorability: the same emitted program text can coexist with
--- different executable/neural states. Recharting the program text cannot
--- recover neural information erased by that projection.
+-- Output nonfactorability.
 ------------------------------------------------------------------------
 
 programTextProjection : ExecutableState → ProgramText
@@ -259,11 +323,6 @@ programTextDoesNotRecoverNeuralObservation :
 programTextDoesNotRecoverNeuralObservation =
   NF.witnessRulesOutEveryFlatFactorisation
     programTextNeuralNonFactorabilityWitness
-
-------------------------------------------------------------------------
--- Learning/update lane is distinct from interface success. We reuse the
--- existing outcome-learning owner rather than defining a new memory ontology.
-------------------------------------------------------------------------
 
 learningUpdateWitness : Memory.MemoryFibre → Memory.MemoryFibre
 learningUpdateWitness = Feedback.learnFromOutcome Feedback.reinforcingOutcome
@@ -344,8 +403,7 @@ sharedDisplayNameDoesNotEstablishPersonIdentity :
 sharedDisplayNameDoesNotEstablishPersonIdentity ()
 
 ------------------------------------------------------------------------
--- Null-model obligations for any stronger "biological topology advantage"
--- claim. These are obligations, not receipts that the controls were run.
+-- Null-model obligations.
 ------------------------------------------------------------------------
 
 data NullModelKind : Set where
@@ -381,11 +439,6 @@ canonicalNullComparisonObligation = nullComparisonObligation
 connectomeAdvantageRequiresNullComparison :
   ConnectomeCausalAdvantagePermission → ⊥
 connectomeAdvantageRequiresNullComparison ()
-
-------------------------------------------------------------------------
--- Cross-pollination with Animalexic: symbolic recurrence/output is not semantic
--- meaning and remains governed by candidate/promotion receipts.
-------------------------------------------------------------------------
 
 animalexicBoundary : Animalexic.DrosophilaAnimalexicBoundary
 animalexicBoundary = Animalexic.noNeuralStateEqualsBehaviourMotif
