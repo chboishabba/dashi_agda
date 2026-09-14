@@ -149,3 +149,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserver
 -- retains both declared axes by the generic required-axis join theorem, without
 -- claiming complete protein-state recovery or simultaneous historical readout.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverJoinExact
+
+-- Third-axis boundary: the joined two-distance observer remains query-relative.
+-- Li-Liu-Ji use a three-CV AdK description (theta1, theta2, dLN); a repository-
+-- local same-two-axis/different-third-axis collision proves that two declared
+-- FRET axes cannot be promoted to complete NDim state recovery. A three-axis
+-- observer repairs only the declared third-coordinate query.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETThirdAxisExact
