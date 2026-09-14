@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Static contract for state-indexed live-cut Pareto cross-pollination.
 
-The child composes the existing local/global bridge with residual/live-set
-salience, residual-conditioned experiment portfolios, source-correct SensibLaw
-guarded cuts, the current NS Round83 producer cut, and least-privilege proof
-search. It must not create authority or route around unpaid consumers.
+The child composes residual/live-set salience, residual-conditioned experiment
+portfolios, source-correct SensibLaw guarded cuts, the canonical NS R486/R423
+frontier, and least-privilege proof search. It must not create authority, route
+around unpaid consumers, or let superseded producer archaeology override the
+current canonical terminal cut.
 """
 
 from pathlib import Path
@@ -31,16 +32,10 @@ require(OWNER, [
     "ActionabilityCostedExperimentChoiceExact",
     "ProofSearchLeastPrivilegeAdmissionExact",
     "SensibLawDutySourceLineageRefinementCutRerunExact",
-    "NSTriadKNHighestAlphaRound83Exact",
+    "NSTriadKNCanonicalClayProofSearchRound486Exact",
+    "ClayCrossDomainLiteralFrontierExact",
     "StateIndexedLiveCutParetoAdapter",
     "canonicalStateIndexedLiveCutParetoAdapter",
-    "salienceIndexedByResidualAndLiveSet",
-    "magnitudeGreedyMayMissLiveNarrowing",
-    "salienceCreatesCandidateAdmission",
-    "residualUpdateMayChangeSelectedExperiment",
-    "portfolioSelectionCreatesExecutionAuthority",
-    "terminalConsumerStillRequired",
-    "sameGraphFactAppendMayChangeReachabilityAndCut",
     "asStateIndexedMDLProblem",
     "portfolioCandidateIsEligible",
     "stateIndexedEligibilityDoesNotCreateRouteAdmission",
@@ -52,25 +47,19 @@ require(OWNER, [
     "guardedCutCannotPromoteAuthority",
     "OpenCullenRouteTransfersToClimate",
     "openCullenRouteStillDoesNotTransfer",
-    "stateIndexedSelectionDoesNotCreateSourceAuthority",
-    "historicalEvidenceMayRemainValidWhileNextStepSalienceChanges",
-    "NSCurrentCutParetoAdapter",
-    "canonicalNSCurrentCutParetoAdapter",
-    "relativeGrowthSplitClosed",
-    "nonlinearPressureRelativeGrowthEstimatePaid",
-    "criticalRatioBarrierPaid",
+    "NSCanonicalCurrentCutParetoAdapter",
+    "canonicalNSCanonicalCurrentCutParetoAdapter",
+    "nsCurrentResidualIsDirectR423Budget",
+    "canonicalShortestConsumerIsR423",
+    "directR423BudgetPaid",
+    "crossOutputCoherenceRequired",
+    "r284DecompositionMandatory",
     "clayPromotionPaid",
-    "closedAlgebraRemainsHighestSalience",
-    "currentNSCutMayBeSkippedByPareto",
-    "crossPollinationCreatesNSTheoremAuthority",
+    "staleRound83SnapshotMayOverrideCanonicalCut",
+    "optionalProducerMayBecomeMandatoryWithoutFrontierImprovement",
+    "crossDomainSchedulerShapeProvesSharedMathematics",
     "LeastPrivilegeLiveCutAdmissionAdapter",
     "canonicalLeastPrivilegeLiveCutAdmissionAdapter",
-    "theoremNameStringCreatesProofCapability",
-    "routeMayElaborateBeforeAdmission",
-    "routeMaySilentlyStrengthenHypotheses",
-    "localLemmaAutomaticallyMovesProgrammeFrontier",
-    "lemmaCountIsAuthoritativeProgress",
-    "duplicateRouteShouldBeReproved",
     "liveCutSalienceCannotBypassRouteAdmission",
 ])
 
@@ -80,22 +69,21 @@ require(REGRESSION, [
     "salienceNoAdmissionRegression",
     "residualUpdateChangesSelectionRegression",
     "portfolioNoExecutionAuthorityRegression",
-    "terminalConsumerStillRequiredRegression",
-    "sameGraphCutStateChangeRegression",
-    "stateIndexedSelectionNoSourceAuthorityRegression",
     "initialPortfolioCandidateEligibleRegression",
     "laterPortfolioCandidateEligibleRegression",
     "eligibilityNoRouteAdmissionRegression",
     "admittedCandidateEligibilityProjectionRegression",
     "admittedCandidateNoAutomaticParetoRegression",
     "admittedCandidateNoAutomaticTerminalClosureRegression",
-    "nsRelativeGrowthSplitClosedRegression",
-    "nsPressureProducerStillOpenRegression",
-    "nsCriticalBarrierStillOpenRegression",
+    "nsCanonicalResidualRegression",
+    "nsCanonicalR423ShortestRegression",
+    "nsDirectR423StillOpenRegression",
+    "nsCrossOutputNotRequiredRegression",
+    "nsR284NotMandatoryRegression",
     "nsClayPromotionStillFalseRegression",
-    "nsClosedAlgebraNotHighestSalienceRegression",
-    "nsParetoCannotSkipCurrentCutRegression",
-    "nsCrossPollinationNoAuthorityRegression",
+    "nsRound83CannotOverrideCanonicalCutRegression",
+    "nsOptionalProducerCannotSelfPromoteRegression",
+    "crossDomainShapeNoSharedMathematicsRegression",
     "routeAdmissionRequiredRegression",
     "silentStrengtheningBlockedRegression",
     "localLemmaNoAutomaticFrontierRegression",
