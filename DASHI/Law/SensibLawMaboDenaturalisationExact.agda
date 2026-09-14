@@ -87,7 +87,7 @@ canonicalMaboDenaturalisationBoundary =
 
 data JudicialRecognitionCreatesUnderlyingRights : Set where
 data PriorNonRecognitionEstablishesUnderlyingNonExistence : Set where
-\data MaboRecognitionResolvesSovereignty : Set where
+data MaboRecognitionResolvesSovereignty : Set where
 
 judicialRecognitionDoesNotCreateUnderlyingRights :
   JudicialRecognitionCreatesUnderlyingRights → ⊥
