@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Culture.CohnTechnostrategicDiscourseExact as Cohn
 import DASHI.Culture.CohnTechnostrategicSourceAtlasExact as Sources
+import DASHI.Culture.IntellectualReceptionAdmissibilityStratumWhatIfExact as Reception
 import DASHI.Education.CapabilityRecognitionExact as Recognition
 
 ------------------------------------------------------------------------
@@ -77,9 +78,6 @@ expressionSurfaceCannotDetermineAdmissibility =
 
 ------------------------------------------------------------------------
 -- Inadmissibility does not determine material irrelevance.
---
--- Two states can both lie outside the discourse's admissible surface while
--- differing on the external material/situational consumer query.
 ------------------------------------------------------------------------
 
 sameInadmissibilityDifferentMaterialRelevance :
@@ -110,11 +108,6 @@ admissibilityCannotDetermineMaterialRelevance =
 
 ------------------------------------------------------------------------
 -- Explicit existence-before-legibility reuse.
---
--- CapabilityRecognitionExact already proves that capability can be present
--- before it is reachable, socially legible, or institutionally recognised.
--- We import that exact boundary rather than manufacturing a discourse-specific
--- duplicate theorem.
 ------------------------------------------------------------------------
 
 recognitionLegibilityBoundary : Recognition.CapabilityRecognitionBoundary
@@ -128,10 +121,6 @@ latentCapabilityRemainsPresentBeforeLegibility = refl , (refl , refl)
 
 ------------------------------------------------------------------------
 -- Naturalisation / normalisation is not consumer adequacy.
---
--- Institutional routine can stabilise both an adequate and an inadequate
--- practice.  Therefore the fact that a discourse/practice is normalised cannot
--- by itself determine whether it preserves the consumer-relevant coordinate.
 ------------------------------------------------------------------------
 
 data PracticeState : Set where
@@ -172,6 +161,21 @@ normalisedPracticeCannotDetermineAdequacy =
     normalisationAdequacyCollision
 
 ------------------------------------------------------------------------
+-- History-qualified admissibility dynamics.
+--
+-- Reuse the intellectual-reception theorem directly: identical present
+-- vocabulary does not determine the admissible future cone because arrival
+-- history and reception topology can remain hidden.  This is a structural
+-- cross-pollination only; it does not claim that Cohn authored that theorem or
+-- that intellectual reception and nuclear strategy are the same domain.
+------------------------------------------------------------------------
+
+presentVocabularyCannotDetermineInstitutionalFutureCone :
+  NonFactor.FactorsThrough Reception.presentSurface Reception.futureCode → ⊥
+presentVocabularyCannotDetermineInstitutionalFutureCone =
+  Reception.samePresentCannotRecoverFutureCone
+
+------------------------------------------------------------------------
 -- Cross-pollination retains parent ownership.
 ------------------------------------------------------------------------
 
@@ -199,6 +203,9 @@ record DiscursiveAdmissibilityBoundary : Set where
     institutionallyNormalisedImpliesAdequate : Bool
     institutionallyNormalisedImpliesAdequateIsFalse :
       institutionallyNormalisedImpliesAdequate ≡ false
+    presentVocabularyDeterminesFutureCone : Bool
+    presentVocabularyDeterminesFutureConeIsFalse :
+      presentVocabularyDeterminesFutureCone ≡ false
     expertRecognitionCreatesReality : Bool
     expertRecognitionCreatesRealityIsFalse :
       expertRecognitionCreatesReality ≡ false
@@ -214,6 +221,7 @@ open DiscursiveAdmissibilityBoundary public
 canonicalDiscursiveAdmissibilityBoundary : DiscursiveAdmissibilityBoundary
 canonicalDiscursiveAdmissibilityBoundary =
   discursiveAdmissibilityBoundary
+    false refl
     false refl
     false refl
     false refl
