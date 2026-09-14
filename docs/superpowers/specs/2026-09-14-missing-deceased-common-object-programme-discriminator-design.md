@@ -2,9 +2,9 @@
 
 ## Purpose
 
-Add an object-first causal-linking layer above the existing twenty-scientist science/custody BIDI. The new layer must test whether the observed event cluster is better explained by independent events and roster selection, broad strategic-sector exposure, one or more shared programmes/objects with ordinary succession/disruption, or coordinated targeting related to a shared programme.
+Add an object-first causal-linking layer above the existing twenty-scientist science/custody BIDI. The new layer tests whether the observed event cluster is better explained by independent events and roster selection, broad strategic-sector exposure, one or more shared programmes/objects with ordinary succession/disruption, or coordinated targeting related to a shared programme.
 
-The layer must not encode related disappearance/death as a fact. It must preserve the repo's existing firewalls: technical adjacency does not create a common engineering stack; geography does not create common cause; programme identity does not create targeting; source repetition does not create independent corroboration.
+The layer must not encode related disappearance/death as a fact. It preserves the repo's existing firewalls: technical adjacency does not create a common engineering stack; geography does not create common cause; programme identity does not create targeting; source repetition does not create independent corroboration.
 
 ## Core hypothesis family
 
@@ -30,6 +30,29 @@ CandidateProgramme
 ```
 
 Programmes may contain multiple objects. A candidate object need not consume all twenty science fibres; forcing all twenty into one literal machine is prohibited.
+
+## Evidence ladder refinement
+
+Round 16 sharpens the object-first layer into a strict promotion ladder:
+
+```text
+thematic adjacency
+  -> explicit person/work reference
+  -> institution identifier
+  -> literal programme/object identifier
+  -> intermediated programme chain
+  -> literal cross-person same-programme receipt
+  -> pre-event operational link
+```
+
+Lower rungs improve search precision but do not promote the hypothesis level. In particular:
+
+- Amy Eskridge explicitly naming Ning Li/Torr in the 2018 HAL5 deck pays awareness/reference only;
+- DAAH01-01-9-R001 pays a literal Ning/AC Gravity Army programme identifier, not a second retained scientist or result state;
+- FA930020P5032 pays later AFRL persistence of Mondaloy 200 as a material/process object, not McCasland's earlier personal involvement;
+- the Reza -> Hardwick -> AFRL -> McCasland command path is an intermediated archival-search path, not a direct professional or work-package receipt.
+
+H2 requires at least one source-backed pre-event same-programme/work-package/apparatus receipt spanning two retained people. H3 additionally requires at least one pre-event operational targeting/security/action receipt.
 
 ## Initial candidate object/programme classes
 
@@ -97,7 +120,7 @@ H3 cannot be promoted without operational evidence such as:
 
 ## Candidate scoring
 
-The object-first layer should rank candidate programmes/objects by a conservative score tuple, not a single scalar:
+The object-first layer ranks candidate programmes/objects by a conservative score tuple, not a single scalar:
 
 ```text
 (explainedCapabilityCount,
@@ -112,7 +135,7 @@ No candidate wins merely by covering many science fibres. High capability covera
 
 ## Temporal concentration
 
-Add a typed event-time surface that can carry exact dates/ranges and event classes. The first version may record the statistic contract and current known event coordinates without claiming a population-level p-value until an appropriate comparison population is sourced.
+Add a typed event-time surface that can carry exact dates/ranges and event classes. The first version records the statistic contract and current known event coordinates without claiming a population-level p-value until an appropriate comparison population is sourced.
 
 Required distinctions:
 
@@ -135,27 +158,17 @@ Reuse existing owners rather than creating parallel theories:
 - `MissingDeceasedStrategicRoleCapabilityFibreExact`
 - existing attribution/snowball/same-object machinery.
 
-## New owner
+## New owners
 
-`DASHI/Culture/MissingDeceasedCommonObjectProgrammeDiscriminatorExact.agda`
-
-Core records/types:
-
-- `HypothesisClass = H0 | H1 | H2 | H3`
-- `CandidateProgramme`
-- `CandidateObject`
-- `RequiredCapability`
-- `PersonCapabilityReceipt`
-- `CrossPersonProgrammeReceipt`
-- `EventClass`
-- `EventChronologyReceipt`
-- `HypothesisDiscriminationReceipt`
-
-Initial candidates are the four classes above. They begin unpromoted unless existing literal receipts already pay the relevant edge.
+- `DASHI/Culture/MissingDeceasedCommonObjectProgrammeDiscriminatorExact.agda`
+- `DASHI/Culture/MissingDeceasedLiteralCrossPersonIdentifierSearchExact.agda`
+- `DASHI/Culture/MissingDeceasedLiteralObjectEvidenceLadderExact.agda`
+- `DASHI/Culture/MissingDeceasedCommonProgrammePromotionStateExact.agda`
+- all-20 Round 15 and Round 16 progress owners.
 
 ## Firewalls
 
-The owner must export exact booleans/propositions equivalent to:
+The owners export exact booleans/propositions equivalent to:
 
 ```text
 capabilityFitPaysProgrammeIdentity = false
@@ -167,19 +180,18 @@ commonObjectRequiresLiteralCrossPersonReceipt = true
 coordinatedTargetingRequiresOperationalEvidence = true
 portfolioObjectMembershipRequiresSameObjectReceipt = true
 sourceRepetitionPaysIndependentCorroboration = false
+personReferencePaysSameProgramme = false
+programmeIdentifierPaysCrossPersonLink = false
+laterProcurementPaysEarlierCommandInvolvement = false
 ```
 
-## First Pareto search
+## Current Pareto acquisition
 
-After the owner exists, the first investigation tranche should search for literal cross-person objects rather than broad thematic similarity:
-
-1. common programme/contract/grant identifiers spanning two or more scientists;
-2. shared facility/apparatus identifiers;
-3. procurement/interface-control/work-package documents;
-4. pre-event handoff/custody/succession records;
-5. cross-case security/investigative identifiers predating media aggregation.
-
-The search must include negative controls and matched ordinary explanations.
+1. acquire original DAAH01-01-9-R001 FY2001 row bytes, SOW and closeout; enumerate personnel/subcontract/facility/apparatus identifiers;
+2. recover pre-2013 AFRL Mondaloy contracts/programme reviews and named participants rather than infer involvement from later command hierarchy;
+3. inspect Amy's NASA/Institute reviewed object and release metadata for AC Gravity/Army identifier reuse;
+4. recover exact NUDT and JPL task/work-package/project identifiers;
+5. only after a literal pre-event cross-person programme edge exists, test event alignment against that object.
 
 ## Certification boundary
 
