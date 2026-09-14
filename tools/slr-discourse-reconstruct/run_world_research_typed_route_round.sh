@@ -12,6 +12,7 @@ EVIDENCE_PAYMENT_BIN="${SLR_EVIDENCE_PAYMENT_BIN:-}"
 RESIDUAL_PLANNER_BIN="${SLR_RESIDUAL_PLANNER_BIN:-}"
 WIKIMEDIA_CANDIDATE_PROVIDER_BIN="${SLR_WIKIMEDIA_CANDIDATE_PROVIDER_BIN:-}"
 ROUTE_SELECTOR_BIN="${SLR_ROUTE_SELECTOR_BIN:-}"
+ROUTE_EXECUTOR_BIN="${SLR_ROUTE_EXECUTOR_BIN:-}"
 WORLD_STORE_BIN="${SLR_WORLD_STORE_BIN:-}"
 SLR_SPACY_OBSERVATION_STREAM="${SLR_SPACY_OBSERVATION_STREAM:-}"
 SLR_CONSUMER_SPEC="${SLR_CONSUMER_SPEC:-}"
@@ -31,13 +32,17 @@ SLR_RESIDUAL_WORLD_STREAM="$ROUND_DIR/residual-world.slrw"
 SLR_REVIEW_PAYMENT_STREAM="$ROUND_DIR/review-payment.slrw"
 SLR_ROUTE_INTENTS="$ROUND_DIR/route-intents.slrw"
 SLR_SELECTED_ROUTES="$ROUND_DIR/selected-routes.slrw"
+SLR_ACQUIRED_SOURCE_STREAM="$ROUND_DIR/acquired-sources.slrx"
+SLR_NEXT_OBSERVATIONS="$ROUND_DIR/next-spacy-observations.slro"
 SPACY_ERR="$ROUND_DIR/spacy-observation.stderr"
+NEXT_SPACY_ERR="$ROUND_DIR/next-spacy-observation.stderr"
 COMPILER_ERR="$ROUND_DIR/world-compiler.stderr"
 RESIDUAL_ERR="$ROUND_DIR/consumer-residual.stderr"
 EVIDENCE_ERR="$ROUND_DIR/evidence-payment.stderr"
 PLANNER_ERR="$ROUND_DIR/residual-planner.stderr"
 PROVIDER_ERR="$ROUND_DIR/wikimedia-candidate-provider.stderr"
 SELECTOR_ERR="$ROUND_DIR/route-selector.stderr"
+EXECUTOR_ERR="$ROUND_DIR/route-executor.stderr"
 PG_RECEIPT="$ROUND_DIR/postgres-world-persistence-receipt.txt"
 PG_REVIEW_RECEIPT="$ROUND_DIR/postgres-review-persistence-receipt.txt"
 PG_FRONTIER="$ROUND_DIR/postgres-latest-frontier.slrw"
@@ -105,7 +110,20 @@ if [[ -z "$ROUTE_SELECTOR_BIN" ]] && command -v sensiblaw-route-selector >/dev/n
 [[ -n "$ROUTE_SELECTOR_BIN" && -x "$ROUTE_SELECTOR_BIN" ]] || { printf 'ERROR: rust-route-selector-unavailable; set SLR_ROUTE_SELECTOR_BIN or install sensiblaw-route-selector\n' >&2; exit 1; }
 "$ROUTE_SELECTOR_BIN" select --intents "$SLR_ROUTE_INTENTS" --candidates "$SLR_ROUTE_CANDIDATE_STREAM" --output "$SLR_SELECTED_ROUTES" 2> "$SELECTOR_ERR"
 
-printf 'SLR_WORLD_PIPELINE_BACKEND spacy_boundary=python-local observation_wire=SLRO compiler=rust-world-compiler consumer_spec=SLRC residual_compiler=rust-consumer-residual evidence_review=optional-SLRE active_frontier=rust-world-store producer_planner=rust-residual-planner route_candidates=rust-wikimedia-rdf-provider route_selector=rust-route-selector world_wire=SLRW store=rust-world-store binary_wire=true json_transport=false regex_world_parser=false python_world_semantics=false postgres_persistence_is_semantic_authority=false route_intent_is_claim_truth=false route_candidate_is_claim_truth=false\n' >> "$PG_ERR"
+if [[ -z "$ROUTE_EXECUTOR_BIN" ]] && command -v sensiblaw-route-executor >/dev/null 2>&1; then ROUTE_EXECUTOR_BIN="$(command -v sensiblaw-route-executor)"; fi
+[[ -n "$ROUTE_EXECUTOR_BIN" && -x "$ROUTE_EXECUTOR_BIN" ]] || { printf 'ERROR: rust-route-executor-unavailable; set SLR_ROUTE_EXECUTOR_BIN or install sensiblaw-route-executor\n' >&2; exit 1; }
+"$ROUTE_EXECUTOR_BIN" execute --routes "$SLR_SELECTED_ROUTES" --output "$SLR_ACQUIRED_SOURCE_STREAM" 2> "$EXECUTOR_ERR"
 
-printf 'spacy_observation_stream=%s\nworld_wire_stream=%s\nconsumer_spec=%s\nresidual_world_stream=%s\nevidence_review_spec=%s\nreview_payment_stream=%s\npostgres_latest_frontier=%s\nroute_intents=%s\nroute_candidate_stream=%s\nselected_routes=%s\nspacy_stderr=%s\ncompiler_stderr=%s\nresidual_stderr=%s\nevidence_stderr=%s\nplanner_stderr=%s\nprovider_stderr=%s\nselector_stderr=%s\nround_dir=%s\n' \
-  "$SLR_SPACY_OBSERVATION_STREAM" "$SLR_WORLD_WIRE_STREAM" "$SLR_CONSUMER_SPEC" "$SLR_RESIDUAL_WORLD_STREAM" "$SLR_EVIDENCE_REVIEW_SPEC" "$SLR_REVIEW_PAYMENT_STREAM" "$PG_FRONTIER" "$SLR_ROUTE_INTENTS" "$SLR_ROUTE_CANDIDATE_STREAM" "$SLR_SELECTED_ROUTES" "$SPACY_ERR" "$COMPILER_ERR" "$RESIDUAL_ERR" "$EVIDENCE_ERR" "$PLANNER_ERR" "$PROVIDER_ERR" "$SELECTOR_ERR" "$ROUND_DIR"
+if [[ -s "$SLR_ACQUIRED_SOURCE_STREAM" ]]; then
+  next_spacy_args=(--source-wire "$SLR_ACQUIRED_SOURCE_STREAM" --output "$SLR_NEXT_OBSERVATIONS")
+  [[ -n "$SLR_SPACY_MODEL" ]] && next_spacy_args+=(--model "$SLR_SPACY_MODEL")
+  python3 "$HERE/slr_spacy_observation_wire.py" "${next_spacy_args[@]}" 2> "$NEXT_SPACY_ERR"
+  [[ -s "$SLR_NEXT_OBSERVATIONS" ]] || { printf 'ERROR: next-binary-observation-wire-unavailable; acquired sources produced no SLRO frames\n' >&2; exit 1; }
+else
+  : > "$NEXT_SPACY_ERR"
+fi
+
+printf 'SLR_WORLD_PIPELINE_BACKEND spacy_boundary=python-local observation_wire=SLRO compiler=rust-world-compiler consumer_spec=SLRC residual_compiler=rust-consumer-residual evidence_review=optional-SLRE active_frontier=rust-world-store producer_planner=rust-residual-planner route_candidates=rust-wikimedia-rdf-provider route_selector=rust-route-selector route_executor=rust-route-executor acquired_source_wire=SLRX next_observation_wire=SLRO world_wire=SLRW store=rust-world-store binary_wire=true json_transport=false regex_world_parser=false python_world_semantics=false postgres_persistence_is_semantic_authority=false route_intent_is_claim_truth=false route_candidate_is_claim_truth=false route_execution_creates_claim_truth=false\n' >> "$PG_ERR"
+
+printf 'spacy_observation_stream=%s\nworld_wire_stream=%s\nconsumer_spec=%s\nresidual_world_stream=%s\nevidence_review_spec=%s\nreview_payment_stream=%s\npostgres_latest_frontier=%s\nroute_intents=%s\nroute_candidate_stream=%s\nselected_routes=%s\nacquired_source_stream=%s\nnext_spacy_observations=%s\nspacy_stderr=%s\nnext_spacy_stderr=%s\ncompiler_stderr=%s\nresidual_stderr=%s\nevidence_stderr=%s\nplanner_stderr=%s\nprovider_stderr=%s\nselector_stderr=%s\nexecutor_stderr=%s\nround_dir=%s\n' \
+  "$SLR_SPACY_OBSERVATION_STREAM" "$SLR_WORLD_WIRE_STREAM" "$SLR_CONSUMER_SPEC" "$SLR_RESIDUAL_WORLD_STREAM" "$SLR_EVIDENCE_REVIEW_SPEC" "$SLR_REVIEW_PAYMENT_STREAM" "$PG_FRONTIER" "$SLR_ROUTE_INTENTS" "$SLR_ROUTE_CANDIDATE_STREAM" "$SLR_SELECTED_ROUTES" "$SLR_ACQUIRED_SOURCE_STREAM" "$SLR_NEXT_OBSERVATIONS" "$SPACY_ERR" "$NEXT_SPACY_ERR" "$COMPILER_ERR" "$RESIDUAL_ERR" "$EVIDENCE_ERR" "$PLANNER_ERR" "$PROVIDER_ERR" "$SELECTOR_ERR" "$EXECUTOR_ERR" "$ROUND_DIR"
