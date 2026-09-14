@@ -31,3 +31,4 @@ import DASHI.Physics.Semiconductor.Device.BishopSGPopulationJacobianExact
 import DASHI.Physics.Semiconductor.Device.BishopTwoCellSparsePopulationResponseExact
 import DASHI.Physics.Semiconductor.Device.BishopSameObjectResidualSecantExact
 import DASHI.Physics.Semiconductor.Device.LitavisSPADMultimodalObservationExact
+import DASHI.Physics.Semiconductor.Device.LitavisSPADConsumerSafeReductionExact
