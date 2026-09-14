@@ -3,6 +3,7 @@ module DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -12,7 +13,11 @@ import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
+import DASHI.Core.LiteralFrontierSchedulerExact as Literal
 import DASHI.Core.ClayCrossDomainLiteralFrontierExact as Clay
+import DASHI.Physics.NSYMLiteralFrontierSchedulerExact as NSYM
+import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM146
+import DASHI.Physics.YangMills.BalabanFrontierRouteAdmissionRound147Exact as YM147
 import DASHI.Cognition.PNF.SensibLawDutySourceLineageRefinementCutRerunExact as GuardedCut
 import DASHI.Physics.Closure.NSTriadKNCanonicalClayProofSearchRound486Exact as NS486
 
@@ -94,8 +99,7 @@ portfolioCandidateIsEligible candidate = Portfolio.admissible candidate , Portfo
 stateIndexedEligibilityDoesNotCreateRouteAdmission : Bool
 stateIndexedEligibilityDoesNotCreateRouteAdmission = true
 
-stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue :
-  stateIndexedEligibilityDoesNotCreateRouteAdmission ≡ true
+stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue : stateIndexedEligibilityDoesNotCreateRouteAdmission ≡ true
 stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue = refl
 
 record AdmittedStateIndexedCandidate
@@ -116,8 +120,7 @@ admittedStateIndexedCandidateEligible :
   ∀ {P residual consumer authority experiment} →
   AdmittedStateIndexedCandidate P residual consumer authority experiment →
   Pareto.Eligible (asStateIndexedMDLProblem P residual consumer authority) experiment
-admittedStateIndexedCandidateEligible admitted =
-  portfolioCandidateIsEligible (currentPortfolioCandidate admitted)
+admittedStateIndexedCandidateEligible admitted = portfolioCandidateIsEligible (currentPortfolioCandidate admitted)
 
 admittedCandidateAutomaticallyParetoOptimal : Bool
 admittedCandidateAutomaticallyParetoOptimal = false
@@ -132,7 +135,7 @@ admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse : admittedCandidateA
 admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse = refl
 
 ------------------------------------------------------------------------
--- Exact source-/authority-preserving legal adapters.
+-- Source-/authority-preserving legal adapters.
 ------------------------------------------------------------------------
 
 GuardedCutAuthorityPromotion : Set
@@ -149,11 +152,6 @@ openCullenRouteStillDoesNotTransfer = GuardedCut.specificOpenRouteStillDoesNotTr
 
 ------------------------------------------------------------------------
 -- Canonical NS current-cut adapter (R486/R423).
---
--- Round83 is retained as historical proof archaeology elsewhere, but it no
--- longer owns the canonical live Clay cut. R486 restores the direct R423
--- cutoff-uniform integrated signed quadratic-companion heat-cross payment as
--- the shortest terminal consumer. Optional R284/Cauchy routes stay optional.
 ------------------------------------------------------------------------
 
 record NSCanonicalCurrentCutParetoAdapter : Set where
@@ -184,18 +182,12 @@ canonicalNSCanonicalCurrentCutParetoAdapter : NSCanonicalCurrentCutParetoAdapter
 canonicalNSCanonicalCurrentCutParetoAdapter = nsCanonicalCurrentCutParetoAdapter
   "R486/R423: cutoff-uniform integrated signed quadratic-companion heat-cross payment"
   "canonical NS frontier and attribution remain owned by NSTriadKNCanonicalClayProofSearchRound486Exact and ClayCrossDomainLiteralFrontierExact"
-  NS486.round486R423IsCanonicalShortestConsumer
-  NS486.round486R423IsCanonicalShortestConsumerIsTrue
-  NS486.round486DirectR423BudgetClosed
-  NS486.round486DirectR423BudgetClosedIsFalse
-  NS486.round486CrossOutputCoherenceRequired
-  NS486.round486CrossOutputCoherenceRequiredIsFalse
-  NS486.round486R284DecompositionMandatory
-  NS486.round486R284DecompositionMandatoryIsFalse
-  NS486.round486ClayPromotion
-  NS486.round486ClayPromotionIsFalse
-  false refl
-  false refl
+  NS486.round486R423IsCanonicalShortestConsumer NS486.round486R423IsCanonicalShortestConsumerIsTrue
+  NS486.round486DirectR423BudgetClosed NS486.round486DirectR423BudgetClosedIsFalse
+  NS486.round486CrossOutputCoherenceRequired NS486.round486CrossOutputCoherenceRequiredIsFalse
+  NS486.round486R284DecompositionMandatory NS486.round486R284DecompositionMandatoryIsFalse
+  NS486.round486ClayPromotion NS486.round486ClayPromotionIsFalse
+  false refl false refl
   (Clay.sharedSchedulerShapeProvesSharedMathematics Clay.canonicalCrossDomainBoundary)
   (Clay.sharedSchedulerShapeProvesSharedMathematicsIsFalse Clay.canonicalCrossDomainBoundary)
 
@@ -206,6 +198,57 @@ nsCurrentResidualIsDirectR423Budget = NS486.currentFirstMissingIsR423Budget
 
 nsCurrentRouteAdmission : ProofSearch.RouteAdmission
 nsCurrentRouteAdmission = NS486.directR423RouteAdmission
+
+------------------------------------------------------------------------
+-- Literal frontier / YM reuse boundary.
+--
+-- LiteralFrontierMove carries paretoReference : String, not a CostHyperfabric.
+-- Therefore existing close/redirect/reject outcomes are reusable, while any
+-- quantitative Pareto dominance claim still requires separately declared axes
+-- and costs. YM keeps its exact two-child AND route and authority firewall.
+------------------------------------------------------------------------
+
+record LiteralFrontierParetoBoundaryAdapter : Set where
+  constructor literalFrontierParetoBoundaryAdapter
+  field
+    literalSchedulerReference : String
+    ymSchedulerReference : String
+    paretoReferenceConstructsCostHyperfabric : Bool
+    paretoReferenceConstructsCostHyperfabricIsFalse : paretoReferenceConstructsCostHyperfabric ≡ false
+    redirectEqualsFormalClosure : Bool
+    redirectEqualsFormalClosureIsFalse : redirectEqualsFormalClosure ≡ false
+    formalClosureRequiresExactConsumerReceipt : Bool
+    formalClosureRequiresExactConsumerReceiptIsTrue : formalClosureRequiresExactConsumerReceipt ≡ true
+    ymOneChildAuthorityClosesParent : Bool
+    ymOneChildAuthorityClosesParentIsFalse : ymOneChildAuthorityClosesParent ≡ false
+    ymQuantitativeParetoRankingAvailableWithoutDeclaredCosts : Bool
+    ymQuantitativeParetoRankingAvailableWithoutDeclaredCostsIsFalse : ymQuantitativeParetoRankingAvailableWithoutDeclaredCosts ≡ false
+
+open LiteralFrontierParetoBoundaryAdapter public
+
+canonicalLiteralFrontierParetoBoundaryAdapter : LiteralFrontierParetoBoundaryAdapter
+canonicalLiteralFrontierParetoBoundaryAdapter = literalFrontierParetoBoundaryAdapter
+  "DASHI.Core.LiteralFrontierSchedulerExact owns close/redirect/reject outcomes"
+  "DASHI.Physics.NSYMLiteralFrontierSchedulerExact owns current NS/YM literal moves"
+  false refl
+  (Literal.redirectEqualsFormalClosure Literal.canonicalLiteralFrontierSchedulerBoundary)
+  (Literal.redirectEqualsFormalClosureIsFalse Literal.canonicalLiteralFrontierSchedulerBoundary)
+  (Literal.formalClosureRequiresExactConsumerReceipt Literal.canonicalLiteralFrontierSchedulerBoundary)
+  (Literal.formalClosureRequiresExactConsumerReceiptIsTrue Literal.canonicalLiteralFrontierSchedulerBoundary)
+  (NSYM.ymParentRouteInheritsOneChildAuthority NSYM.canonicalNSYMLiteralFrontierBoundary)
+  (NSYM.ymParentRouteInheritsOneChildAuthorityIsFalse NSYM.canonicalNSYMLiteralFrontierBoundary)
+  false refl
+
+ymDirectRouteStillConjunctive :
+  YM146.routeTargets YM146.directRound108ActionRoute
+  ≡ YM146.round108FixedDensitySemantics ∷ YM146.round108SelectedPotentialMatchesBC1 ∷ []
+ymDirectRouteStillConjunctive = NSYM.ymDirectRouteHasTwoChildren
+
+YMNumericalDirectClosure : Set
+YMNumericalDirectClosure = YM147.DirectLeafClosureCapability YM147.numericalExperiment
+
+ymNumericalCannotCloseLeaf : YMNumericalDirectClosure → ⊥
+ymNumericalCannotCloseLeaf = NSYM.ymNumericalCannotCloseLeaf
 
 ------------------------------------------------------------------------
 -- Least-privilege route admission adapter.
