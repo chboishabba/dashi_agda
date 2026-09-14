@@ -12,6 +12,9 @@ import DASHI.Core.ObserverRefinementCore
 import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.ObserverRefinementOrientationCrosswalkExact
 import DASHI.Core.ObserverRefinementOrientationCrosswalkRegression
+import DASHI.Core.ObserverIncomparabilityTypedJoinExact
+import DASHI.Core.ObserverIncomparabilityCrosswalkExact
+import DASHI.Core.ObserverIncomparabilityCrosswalkRegression
 import DASHI.Core.DeclaredScenarioRobustnessExact
 import DASHI.Core.DeclaredScenarioRobustnessRegression
 import DASHI.Core.SnowballOSINTAcquisitionInvariantExact
