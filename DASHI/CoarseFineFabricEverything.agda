@@ -20,10 +20,17 @@ import DASHI.Biology.JCoarseFineFabricCalculusAdapterExact
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact
 import DASHI.Foundations.Base369NDimParetoChartExact
 import DASHI.Foundations.Base369CoarseFineFabricAdapterExact
+import DASHI.Foundations.StageValuationBundleAtlas
 
 import DASHI.Cognition.PNF.TerminalisationDefectRegression
 import DASHI.Cognition.PNF.CoarseFineStaticDynamicBridgeExact
 import DASHI.Cognition.PNF.CoarseFineStaticDynamicBridgeRegression
+
+import DASHI.Interop.LocalGlobalBundleGluingExact
+import DASHI.Interop.LocalGlobalBundleGluingRegression
+import DASHI.Combinatorics.GraphColouringBundleGluingAdapterExact
+import DASHI.ComputerScience.RSA260BundleGluingAdapterExact
+import DASHI.Reasoning.WavePantsBundleGluingAdapterExact
 
 import DASHI.Physics.ShiftWaveRefinementSeam
 import DASHI.Physics.WaveProjectionLossAdapterExact
