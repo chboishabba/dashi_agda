@@ -20,6 +20,7 @@ on:
       - 'DASHI/Core/SequentialExperimentPlanningValidation.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda'
+      - 'DASHI/CoarseFineFabricEverything.agda'
       - 'DASHI/Physics/Foundations/GRQFTDiscriminatorSynthesisExact.agda'
       - 'DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda'
       - 'DASHI/Physics/Foundations/Everything.agda'
