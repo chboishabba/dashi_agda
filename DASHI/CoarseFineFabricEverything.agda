@@ -4,6 +4,8 @@ module DASHI.CoarseFineFabricEverything where
 -- Opt-in coarse/fine fabric calculus rollup.
 ------------------------------------------------------------------------
 
+import DASHI.Core.CanonicalSpineRegistry
+import DASHI.Core.CanonicalSpineRegistryCrossDomainRegression
 import DASHI.Core.CoarseFineFabricCalculusExact
 import DASHI.Core.CoarseFineRelativeFibreExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
