@@ -6,7 +6,7 @@ RUNNER = ROOT / "run_world_research_typed_route_round.sh"
 
 
 class RustWorldStoreRunnerTests(unittest.TestCase):
-    def test_runner_builds_binary_observation_residual_review_plan_provider_and_selection(self) -> None:
+    def test_runner_builds_binary_observation_residual_review_plan_provider_selection_and_next_observation(self) -> None:
         text = RUNNER.read_text(encoding="utf-8")
         self.assertIn("SLR_SOURCE_TEXT", text)
         self.assertIn("slr_spacy_observation_wire.py", text)
@@ -31,18 +31,22 @@ class RustWorldStoreRunnerTests(unittest.TestCase):
         self.assertIn("sensiblaw-wikimedia-candidate-provider", text)
         self.assertIn("wikimedia-route-candidates.slrg", text)
         self.assertIn("fetch --qid", text)
-        self.assertIn("SLR_ROUTE_CANDIDATE_STREAM", text)
         self.assertIn("SLR_ROUTE_SELECTOR_BIN", text)
         self.assertIn("sensiblaw-route-selector", text)
         self.assertIn("selected-routes.slrw", text)
-        self.assertIn("rust-wikimedia-candidate-provider-unavailable", text)
-        self.assertIn("rust-route-selector-unavailable", text)
+        self.assertIn("SLR_ROUTE_EXECUTOR_BIN", text)
+        self.assertIn("sensiblaw-route-executor", text)
+        self.assertIn("acquired-sources.slrx", text)
+        self.assertIn("next-spacy-observations.slro", text)
+        self.assertIn("--source-wire", text)
+        self.assertIn("rust-route-executor-unavailable", text)
         self.assertIn("binary_wire=true", text)
 
-    def test_python_is_confined_to_spacy_boundary_and_legacy_text_abis_are_absent(self) -> None:
+    def test_python_is_confined_to_spacy_boundaries_and_legacy_text_abis_are_absent(self) -> None:
         text = RUNNER.read_text(encoding="utf-8")
-        self.assertEqual(text.count("python3 "), 1)
-        self.assertIn('python3 "$HERE/slr_spacy_observation_wire.py"', text)
+        # Initial source and any newly acquired source both use the same trained-spaCy boundary.
+        self.assertLessEqual(text.count("python3 "), 2)
+        self.assertGreaterEqual(text.count('python3 "$HERE/slr_spacy_observation_wire.py"'), 1)
         for forbidden in (
             "ingest-round",
             "ingest-ndjson",
