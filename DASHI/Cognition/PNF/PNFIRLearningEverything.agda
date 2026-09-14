@@ -18,6 +18,8 @@ import DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawComparisonReceipt
 import DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawComparisonRegression
 import DASHI.Cognition.PNF.ContinuousOscillatorLyapunovDiscriminationExact
 import DASHI.Cognition.PNF.ContinuousOscillatorLyapunovDiscriminationRegression
+import DASHI.Cognition.PNF.ContinuousOscillatorMemoryObservationQuotientExact
+import DASHI.Cognition.PNF.ContinuousOscillatorMemoryObservationQuotientRegression
 import DASHI.Core.RecursiveScaleTransitionExact
 import DASHI.Cognition.PNF.LearningAlgebra
 import DASHI.Cognition.PNF.FibreLearningDynamics
