@@ -5,9 +5,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Law.AustralianFamilyLawOrderInteractionExact as Interaction
+import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
 ------------------------------------------------------------------------
--- RED contract: operational interaction of federal family-law orders,
+-- Contract: operational interaction of federal family-law orders,
 -- State/Territory family-violence orders, information sharing and child-welfare
 -- jurisdiction must not collapse into a bare supremacy slogan.
 ------------------------------------------------------------------------
@@ -23,6 +25,34 @@ section68RPowerIsDistinct = refl
 informationSharingSubdivisionDALocated :
   Interaction.subdivisionDAInformationSharingLocated ≡ true
 informationSharingSubdivisionDALocated = refl
+
+------------------------------------------------------------------------
+-- Query-indexed cross-pollination: the same visible federal-order surface can
+-- coexist with different inconsistency states.  Federal-order existence is
+-- therefore insufficient for the consumer asking about operative FVO effect.
+------------------------------------------------------------------------
+
+interactionDefectIsPresent : Interaction.FVOEffectQueryAdequacyDefect
+interactionDefectIsPresent = Interaction.fvoEffectQueryAdequacyDefect
+
+federalOrderSurfaceCannotDetermineFVOEffect :
+  Interaction.FVOEffectQueryAdequate → ⊥
+federalOrderSurfaceCannotDetermineFVOEffect =
+  Interaction.fvoEffectQueryNotAdequate
+
+joinedInconsistencyObserverRefinesFederalOrderSurface :
+  Observer.Refines
+    Interaction.federalOrderSurface
+    Interaction.federalOrderPlusInconsistency
+joinedInconsistencyObserverRefinesFederalOrderSurface =
+  Interaction.federalOrderPlusInconsistencyRefinesFederalOrder
+
+joinedInconsistencyObserverIsStrictRepair :
+  Observer.StrictRefinement
+    Interaction.federalOrderSurface
+    Interaction.federalOrderPlusInconsistency
+joinedInconsistencyObserverIsStrictRepair =
+  Interaction.federalOrderPlusInconsistencyStrictRefinement
 
 commonwealthSupremacyDoesNotReplaceStatutoryMechanism :
   Interaction.CommonwealthSupremacyAutomaticallyCompleteOperationalRule → ⊥
