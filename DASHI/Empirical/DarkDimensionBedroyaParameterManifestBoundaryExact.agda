@@ -5,7 +5,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.EmpiricalSourceDiligenceAdmissionExact as Diligence
+import DASHI.Physics.Closure.DarkDimensionStringPromotionBoundaryExact as DarkDimension
 import DASHI.Empirical.DarkDimensionFadingDMParentLineageExact as ParentLineage
+
+bedroyaNormalizationSource : Source.AttributedSource
+bedroyaNormalizationSource = DarkDimension.bedroyaObiedVafaWu2026
 
 simulationStartRedshift : String
 simulationStartRedshift = "1e14"
@@ -33,6 +39,25 @@ onsetPhiInitialValue = "phi_i = 0 at the stated fading onset"
 
 paperDMNormalizationIdentityAtOnset : String
 paperDMNormalizationIdentityAtOnset = "m0 n0 = rho_DM^0 under phi_i = 0"
+
+bedroyaEq11NormalizationDiligence : Diligence.SourceDiligence
+bedroyaEq11NormalizationDiligence =
+  Diligence.source-diligence
+    "Bedroya-Obied-Vafa-Wu Eq. (11) dark-matter normalization identity"
+    bedroyaNormalizationSource
+    Diligence.primaryProposition
+    true
+    refl
+    "arXiv:2507.03090v3 primary HTML/manuscript inspected at Section IV equations (10)-(17)"
+    Diligence.primaryLocated
+    "Eq. (11) defines the effective pressureless DM density from the initial DM density; the onset field value phi_i is the field value at onset, with the stated fading onset set at phi=0"
+    "arXiv:2507.03090v3 dated 29 May 2026; accepted Physical Review D source DOI 10.1103/1rsq-cv2m"
+    "same 2026 Bedroya-Obied-Vafa-Wu fading-dark-sector model object"
+    "bounded to the paper's local exponential FDS realization and its stated onset convention"
+    "covers the paper-level m0*n0 / rho_DM^0 identity only; does not cover the CLASS/Cobaya sampled-density parameter map or V0 normalization"
+    "supplement/posterior surfaces were checked separately; no machine-readable same-fit standard-parameter manifest is admitted"
+    "rho_DM^0 is retained as the paper-defined effective initial DM density coordinate; it is not silently identified with a sampled Omega_FDM h^2 coordinate"
+    "pays only the source-level Eq. (11) normalization coordinate and leaves the complete executable normalization map open"
 
 supplementH0Coordinate : String
 supplementH0Coordinate = "H0"
