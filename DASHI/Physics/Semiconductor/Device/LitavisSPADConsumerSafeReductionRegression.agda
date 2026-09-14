@@ -13,6 +13,8 @@ record LitavisConsumerSafeReductionRegression : Set₁ where
       Reduction.ExactTimestampReductionDefect
     joinedReductionPaysBothDeclaredConsumers :
       Reduction.JoinedReductionAdequacy
+    sourceSnowballCountIsFour :
+      Reduction.reductionSourceCount ≡ 4
     sourceSnowballRetainsBoundaries :
       Reduction.ReductionSourceBoundary
     reductionSafetyRemainsConsumerRelative :
@@ -25,5 +27,6 @@ canonicalLitavisConsumerSafeReductionRegression =
     Reduction.histogramReductionAdequate
     Reduction.exactTimestampReductionDefect
     Reduction.joinedReductionAdequate
+    Reduction.reductionSourceCountIsFour
     Reduction.canonicalReductionSourceBoundary
     Reduction.canonicalReductionSafetyBoundary
