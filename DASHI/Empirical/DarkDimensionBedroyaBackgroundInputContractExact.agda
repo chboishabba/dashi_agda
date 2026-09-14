@@ -41,7 +41,7 @@ canonicalBedroyaBackgroundInputStatus =
 
 partialInputSurfacePaid :
   paperDMNormalizationLocated canonicalBedroyaBackgroundInputStatus ≡ true
-partialInputSurfacePaid = Manifest.paperDMNormalizationIdentityPaid
+partialInputSurfacePaid = refl
 
 initialVelocityConventionStillOpen :
   initialScalarVelocityConventionLocated canonicalBedroyaBackgroundInputStatus ≡ false
@@ -68,3 +68,9 @@ backgroundEquationsRemainLocated :
     Background.canonicalBedroyaBackgroundReconstructionStatus
   ≡ true
 backgroundEquationsRemainLocated = refl
+
+manifestPaperDMIdentityRemainsPaid :
+  Manifest.m0n0ToRhoDM0PaperIdentityLocated
+    Manifest.canonicalBedroyaParameterManifestStatus
+  ≡ true
+manifestPaperDMIdentityRemainsPaid = Manifest.paperDMNormalizationIdentityPaid
