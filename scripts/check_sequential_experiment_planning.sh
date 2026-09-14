@@ -8,6 +8,8 @@ FILES=(
   DASHI/Core/ExperimentalCoordinateDesignExact.agda
   DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
   DASHI/Core/ExperimentalCoordinateProjectionBridgeRegression.agda
+  DASHI/Core/FactorisationSpineCrosswalkExact.agda
+  DASHI/Core/FactorisationSpineCrosswalkRegression.agda
   DASHI/Core/ActionabilityCostedExperimentChoiceExact.agda
   DASHI/Core/CommonExperimentRealisationExact.agda
   DASHI/Core/DiscriminatorSynthesisExact.agda
@@ -62,6 +64,11 @@ grep -q 'relativeFineCanBeDisclosedAsEvidenceAtFixedModelIsTrue' DASHI/Core/Rela
 
 grep -q '^coordinateSeparationYieldsProjectionCollision :' DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
 grep -q '^coordinateReadCannotFactorThroughExisting :' DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda
+grep -q '^queryFactorsToNonFactor :' DASHI/Core/FactorisationSpineCrosswalkExact.agda
+grep -q '^nonFactorToFactorized :' DASHI/Core/FactorisationSpineCrosswalkExact.agda
+grep -q '^projectionCollisionToNonFactorability :' DASHI/Core/FactorisationSpineCrosswalkExact.agda
+grep -q '^projectionCollisionToNonDescent :' DASHI/Core/FactorisationSpineCrosswalkExact.agda
+grep -q '^projectionCollisionBlocksFactorizedRefinement :' DASHI/Core/FactorisationSpineCrosswalkExact.agda
 grep -q '^record CandidateFamilyExecutionSpine' DASHI/Core/CandidateFamilyExecutionExact.agda
 grep -q '^record RequirementConflictBatchSpine' DASHI/Core/RequirementConflictBatchExecutionExact.agda
 grep -q '^data CandidateRelation' DASHI/Core/RequirementConflictBatchExecutionExact.agda
@@ -89,6 +96,7 @@ grep -q 'jFineIsMerelyAnotherNameForMaximumComputeFidelityIsFalse' DASHI/Biology
 
 grep -q '^module DASHI.CoarseFineFabricEverything where' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.CoarseFineFabricCalculusExact' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.FactorisationSpineCrosswalkExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.ExperimentalCoordinateProjectionBridgeExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.CandidateFamilyExecutionExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.RequirementConflictBatchExecutionExact' DASHI/CoarseFineFabricEverything.agda
