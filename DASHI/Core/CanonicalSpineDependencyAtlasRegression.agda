@@ -20,6 +20,12 @@ frozenDynamicObserverRelation :
     Registry.observerRefinementOwner
 frozenDynamicObserverRelation = Atlas.frozenDynamicDependsOnObserverRefinement
 
+requiredAxisJoinObserverRelation :
+  Atlas.CanonicalDependency
+    Registry.requiredObserverAxisJoinOwner
+    Registry.observerRefinementOwner
+requiredAxisJoinObserverRelation = Atlas.requiredAxisJoinDependsOnObserverRefinement
+
 requiredAxisJoinRelation :
   Atlas.CanonicalDependency
     Registry.requiredObserverAxisJoinOwner
@@ -63,6 +69,10 @@ consumerRepairObserverDependencyWitness = Atlas.consumerRepairObserverDependency
 frozenDynamicObserverDependencyWitness :
   Dependency.DependencyWitness Atlas.CanonicalDependency
 frozenDynamicObserverDependencyWitness = Atlas.frozenDynamicObserverDependencyWitness
+
+requiredAxisJoinObserverDependencyWitness :
+  Dependency.DependencyWitness Atlas.CanonicalDependency
+requiredAxisJoinObserverDependencyWitness = Atlas.requiredAxisJoinObserverDependencyWitness
 
 requiredAxisJoinDependencyWitness :
   Dependency.DependencyWitness Atlas.CanonicalDependency
