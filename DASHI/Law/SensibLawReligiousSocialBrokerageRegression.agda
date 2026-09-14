@@ -16,6 +16,11 @@ parentProximityAdequacyReusedRegression :
   ≡ true
 parentProximityAdequacyReusedRegression = refl
 
+parentStatusSignalAdequacyReusedRegression :
+  Brokerage.parentStatusSignalAdequacyReused Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ true
+parentStatusSignalAdequacyReusedRegression = refl
+
 parentLobbyingEdgeDisciplineReusedRegression :
   Brokerage.parentLobbyingEdgeDisciplineReused Brokerage.canonicalReligiousSocialBrokerageBoundary
   ≡ true
