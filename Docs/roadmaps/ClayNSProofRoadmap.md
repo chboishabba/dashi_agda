@@ -2,6 +2,14 @@
 
 Status: lemma roadmap; non-promoting.
 
+## Current control record (2026-09-15)
+
+This is a historical and broad dependency ledger.  For the current active
+proof-search objective, the C/D source-integration split, the R568/R571
+priority, the independent R406 phase-production leaf, and the exact delivery
+discipline, read `Docs/roadmaps/NSProofControl20260915.md` first.  Nothing in
+this older roadmap promotes a Clay claim or supersedes that control record.
+
 This document is a dependency graph for what a DASHI-based proof of the
 three-dimensional incompressible Navier-Stokes global regularity problem would
 have to prove. It is not a proof, and it does not promote any Clay,
