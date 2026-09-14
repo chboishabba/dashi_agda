@@ -21,6 +21,10 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact
 import DASHI.Foundations.Base369NDimParetoChartExact
 import DASHI.Foundations.Base369CoarseFineFabricAdapterExact
 
+import DASHI.Cognition.PNF.TerminalisationDefectRegression
+import DASHI.Cognition.PNF.CoarseFineStaticDynamicBridgeExact
+import DASHI.Cognition.PNF.CoarseFineStaticDynamicBridgeRegression
+
 import DASHI.Physics.ShiftWaveRefinementSeam
 import DASHI.Physics.WaveProjectionLossAdapterExact
 
