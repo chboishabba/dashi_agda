@@ -7,6 +7,8 @@ cd "$ROOT"
 FILES=(
   DASHI/Core/CanonicalSpineRegistry.agda
   DASHI/Core/CanonicalSpineRegistryCrossDomainRegression.agda
+  DASHI/Core/CanonicalSpineDependencyAtlasExact.agda
+  DASHI/Core/CanonicalSpineDependencyAtlasRegression.agda
   DASHI/Core/SnowballOSINTAcquisitionInvariantExact.agda
   DASHI/Core/BoundedNegativeSearchExact.agda
   DASHI/Core/BoundedNegativeSearchRegression.agda
@@ -90,6 +92,9 @@ grep -q '^robustExperimentInferenceOwner :' DASHI/Core/CanonicalSpineRegistry.ag
 grep -q '^multipartReconstructionOwner :' DASHI/Core/CanonicalSpineRegistry.agda
 grep -q '^frozenProvenanceDynamicOwner :' DASHI/Core/CanonicalSpineRegistry.agda
 grep -q '^queryIndexedFutureSafePromotionOwner :' DASHI/Core/CanonicalSpineRegistry.agda
+grep -q '^data CanonicalDependency' DASHI/Core/CanonicalSpineDependencyAtlasExact.agda
+grep -q '^boundedNegativeSearchDependencyWitness :' DASHI/Core/CanonicalSpineDependencyAtlasExact.agda
+grep -q '^futureSafeQueryDependencyWitness :' DASHI/Core/CanonicalSpineDependencyAtlasExact.agda
 
 grep -q '^boundedNegativeSearchWithCoverageProvesGlobalAbsence :' DASHI/Core/BoundedNegativeSearchExact.agda
 grep -q '^osintSearchFailureDoesNotCreateKnownAbsence :' DASHI/Interop/OSINTBoundedNegativeSearchAdapterExact.agda
@@ -141,6 +146,7 @@ grep -q '^jCoarseExactReductionRetainingJFine :' DASHI/Biology/JCoarseFineConsum
 grep -q 'jFineIsMerelyAnotherNameForMaximumComputeFidelityIsFalse' DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda
 
 grep -q '^module DASHI.CoarseFineFabricEverything where' DASHI/CoarseFineFabricEverything.agda
+grep -q 'DASHI.Core.CanonicalSpineDependencyAtlasExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.CoarseFineFabricCalculusExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Core.FactorisationSpineCrosswalkExact' DASHI/CoarseFineFabricEverything.agda
 grep -q 'DASHI.Interop.FactorisationSpineCrossDomainAdapterExact' DASHI/CoarseFineFabricEverything.agda
