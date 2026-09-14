@@ -1,36 +1,161 @@
 module DASHI.Cognition.PNF.GrokkingSparseActiveColouringRoutingRegression where
 
 open import DASHI.Core.Prelude
-
 import DASHI.Cognition.PNF.GrokkingSparseActiveColouringRoutingExact as Bridge
 
-availableCapacityExceedsActiveSupport :
-  Bridge.activeSupport Bridge.structuredSparseWitness <
-  Bridge.availableCapacity Bridge.structuredSparseWitness
-availableCapacityExceedsActiveSupport =
-  Bridge.structuredSparseUsesStrictSubset
+availableCapacityExceedsActiveSupport : Bridge.activeSupport Bridge.structuredSparseWitness < Bridge.availableCapacity Bridge.structuredSparseWitness
+availableCapacityExceedsActiveSupport = Bridge.structuredSparseUsesStrictSubset
+inactiveForOneInputDoesNotMeanGloballyRedundant : Bridge.inactiveForCurrentInput Bridge.conditionallyUsefulUnit ≡ true × Bridge.usefulOnAnotherInput Bridge.conditionallyUsefulUnit ≡ true
+inactiveForOneInputDoesNotMeanGloballyRedundant = Bridge.conditionalUseWitness
+trainingFitDoesNotDetermineSparseStructuralRoute : Bridge.trainingFitSame Bridge.memorizerRoute Bridge.characterRoute ≡ true × Bridge.structuralDefect Bridge.characterRoute < Bridge.structuralDefect Bridge.memorizerRoute
+trainingFitDoesNotDetermineSparseStructuralRoute = Bridge.fitEqualButStructuralRouteImproves
+colouringWitnessIsAnalogyNotIdentity : Bridge.colouringConflictFreeBatchWitness ≡ true × Bridge.grokkingLiterallyMinimisesChromaticNumber ≡ false
+colouringWitnessIsAnalogyNotIdentity = Bridge.colouringAnalogyBoundary
+largeCandidateFamilyCanCoexistWithSparseAction : Bridge.largeCandidateFamily Bridge.colouringRoutingWitness ≡ true × Bridge.sparseCompatibleAction Bridge.colouringRoutingWitness ≡ true
+largeCandidateFamilyCanCoexistWithSparseAction = Bridge.colouringCandidateActionWitness
 
-inactiveForOneInputDoesNotMeanGloballyRedundant :
-  Bridge.inactiveForCurrentInput Bridge.conditionallyUsefulUnit ≡ true ×
-  Bridge.usefulOnAnotherInput Bridge.conditionallyUsefulUnit ≡ true
-inactiveForOneInputDoesNotMeanGloballyRedundant =
-  Bridge.conditionalUseWitness
+moneHalfActivationIsSourceScoped : Bridge.reportedMoNEActivatedPercent Bridge.moneActivationObservation ≡ 50 × Bridge.nearZeroNeuronActivationsReported Bridge.moneActivationObservation ≡ true × Bridge.universalLLMNeuronUsageClaim Bridge.moneActivationObservation ≡ false
+moneHalfActivationIsSourceScoped = refl , refl , refl
 
-trainingFitDoesNotDetermineSparseStructuralRoute :
-  Bridge.trainingFitSame Bridge.memorizerRoute Bridge.characterRoute ≡ true ×
-  Bridge.structuralDefect Bridge.characterRoute <
-  Bridge.structuralDefect Bridge.memorizerRoute
-trainingFitDoesNotDetermineSparseStructuralRoute =
-  Bridge.fitEqualButStructuralRouteImproves
+grokkingInactiveNeuronFractionCanDecrease : Bridge.metric Bridge.salahNeuronActivityObservation ≡ Bridge.inactiveNeuronFraction × Bridge.trend Bridge.salahNeuronActivityObservation ≡ Bridge.decreases
+grokkingInactiveNeuronFractionCanDecrease = refl , refl
 
-colouringWitnessIsAnalogyNotIdentity :
-  Bridge.colouringConflictFreeBatchWitness ≡ true ×
-  Bridge.grokkingLiterallyMinimisesChromaticNumber ≡ false
-colouringWitnessIsAnalogyNotIdentity =
-  Bridge.colouringAnalogyBoundary
+grokkingCircuitDensityCanDecrease : Bridge.metric Bridge.humayunCircuitDensityObservation ≡ Bridge.uniqueCircuitDensity × Bridge.trend Bridge.humayunCircuitDensityObservation ≡ Bridge.decreases
+grokkingCircuitDensityCanDecrease = refl , refl
 
-largeCandidateFamilyCanCoexistWithSparseAction :
-  Bridge.largeCandidateFamily Bridge.colouringRoutingWitness ≡ true ×
-  Bridge.sparseCompatibleAction Bridge.colouringRoutingWitness ≡ true
-largeCandidateFamilyCanCoexistWithSparseAction =
-  Bridge.colouringCandidateActionWitness
+neuronSparsityAndCircuitCompressionAreDifferentCoordinates : Bridge.inactiveNeuronFractionIsUniqueCircuitDensity ≡ false
+neuronSparsityAndCircuitCompressionAreDifferentCoordinates = refl
+
+sourceEvidenceDoesNotPayMonotoneActiveSupportShrink : Bridge.grokkingActiveSupportShrinkPaid ≡ false
+sourceEvidenceDoesNotPayMonotoneActiveSupportShrink = refl
+
+sourceEvidenceDoesNotPayChromaticObjective : Bridge.empiricalConflictGraphChromaticObjectivePaid ≡ false
+sourceEvidenceDoesNotPayChromaticObjective = refl
+
+unmeasuredRoutingTransitionRemainsOpen : Bridge.activeSupportMeasured Bridge.unpaidGrokkingRoutingTransition ≡ false × Bridge.circuitFamilyMeasured Bridge.unpaidGrokkingRoutingTransition ≡ false × Bridge.conflictEdgesMeasured Bridge.unpaidGrokkingRoutingTransition ≡ false
+unmeasuredRoutingTransitionRemainsOpen = refl , refl , refl
+
+canonicalConflictCarrierReuseStillNeedsNoDuplicate : Bridge.localDuplicateConflictOntologyAdded Bridge.currentConflictCarrierIntegrationResidual ≡ false
+canonicalConflictCarrierReuseStillNeedsNoDuplicate = refl
+canonicalReducerAdapterIsPaid : Bridge.canonicalReducerRelationAdapterPaid Bridge.currentConflictCarrierIntegrationResidual ≡ true
+canonicalReducerAdapterIsPaid = refl
+canonicalConflictRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalConflict ≡ Bridge.conflict
+canonicalConflictRelationRoundTrips = refl
+canonicalRequirementRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalRequirement ≡ Bridge.gluingRequirement
+canonicalRequirementRelationRoundTrips = refl
+canonicalIndependentRelationRoundTrips : Bridge.fromCanonicalReducerRelation Bridge.canonicalIndependent ≡ Bridge.independent
+canonicalIndependentRelationRoundTrips = refl
+rebaseResidualIsDischarged : Bridge.rebaseNeededBeforeCanonicalImport Bridge.currentConflictCarrierIntegrationResidual ≡ false
+rebaseResidualIsDischarged = refl
+conflictFreeStillDoesNotMeanRequirementClosed : Bridge.conflictFreeImpliesRequirementClosed ≡ false
+conflictFreeStillDoesNotMeanRequirementClosed = refl
+
+activationCorrelationAloneCannotPayConflict : Bridge.activationCorrelationAlonePaysConflict ≡ false
+activationCorrelationAloneCannotPayConflict = refl
+jointInterventionIsRequiredForConflictPayment : Bridge.jointInterventionRequiredForConflict ≡ true
+jointInterventionIsRequiredForConflictPayment = refl
+unpaidPairCannotPromoteRelation : Bridge.relationPromotionPaid Bridge.unpaidCircuitPairIntervention ≡ false
+unpaidPairCannotPromoteRelation = refl
+paidSyntheticConflictUsesCanonicalConflict : Bridge.proposedRelation Bridge.syntheticPaidConflictIntervention ≡ Bridge.conflict × Bridge.relationPromotionPaid Bridge.syntheticPaidConflictIntervention ≡ true
+paidSyntheticConflictUsesCanonicalConflict = refl , refl
+conflictReceiptDoesNotClaimRealGrokkingMeasurement : Bridge.syntheticConflictIsEmpiricalGrokkingResult ≡ false
+conflictReceiptDoesNotClaimRealGrokkingMeasurement = refl
+
+interactionResidualUsesJointMinusSingles : Bridge.interactionExcess Bridge.syntheticConflictScore ≡ 3
+interactionResidualUsesJointMinusSingles = refl
+thresholdedPositiveInteractionClassifiesConflict : Bridge.classifyPair Bridge.syntheticConflictScore ≡ Bridge.classified Bridge.conflict
+thresholdedPositiveInteractionClassifiesConflict = refl
+explicitDependencyClassifiesRequirement : Bridge.classifyPair Bridge.syntheticRequirementScore ≡ Bridge.classified Bridge.gluingRequirement
+explicitDependencyClassifiesRequirement = refl
+additiveJointEffectClassifiesIndependent : Bridge.classifyPair Bridge.syntheticIndependentScore ≡ Bridge.classified Bridge.independent
+additiveJointEffectClassifiesIndependent = refl
+underpoweredPairRemainsUnclassified : Bridge.classifyPair Bridge.syntheticUnderpoweredScore ≡ Bridge.underpowered
+underpoweredPairRemainsUnclassified = refl
+correlationIsNotClassifierInput : Bridge.activationCorrelationIsClassificationInput ≡ false
+correlationIsNotClassifierInput = refl
+classifierExamplesAreNotEmpiricalGrokkingResults : Bridge.classifierIsEmpiricalGrokkingResult ≡ false
+classifierExamplesAreNotEmpiricalGrokkingResults = refl
+
+sameLayerAblationCannotPayRequirementDirection :
+  Bridge.requirementEvidencePaysDirection Bridge.sameLayerPostReLUPairAblation ≡ false
+sameLayerAblationCannotPayRequirementDirection = refl
+
+externalDirectionalReceiptCanPayRequirementDirection :
+  Bridge.requirementEvidencePaysDirection Bridge.externallyPaidDirectionalRequirement ≡ true
+externalDirectionalReceiptCanPayRequirementDirection = refl
+
+sameNumericScoreWithoutDirectionalEvidenceIsNotRequirement :
+  Bridge.classifyPairWithRequirementEvidence
+    Bridge.sameLayerPostReLUPairAblation
+    Bridge.syntheticRequirementScore
+  ≡ Bridge.classified Bridge.independent
+sameNumericScoreWithoutDirectionalEvidenceIsNotRequirement = refl
+
+sameNumericScoreWithDirectionalEvidenceCanBeRequirement :
+  Bridge.classifyPairWithRequirementEvidence
+    Bridge.externallyPaidDirectionalRequirement
+    Bridge.syntheticRequirementScore
+  ≡ Bridge.classified Bridge.gluingRequirement
+sameNumericScoreWithDirectionalEvidenceCanBeRequirement = refl
+
+pairAblationDirectionCollisionIsPaid :
+  Bridge.pairAblationRequirementDirectionCollisionPaid ≡ true
+pairAblationDirectionCollisionIsPaid = refl
+
+pairAblationDirectionDoesNotFactorThroughObservedEffects :
+  Bridge.requirementDirectionFactorsThroughPairAblation ≡ false
+pairAblationDirectionDoesNotFactorThroughObservedEffects = refl
+
+rawCapacityCanIncreaseWithoutBetaIncrease :
+  Bridge.rawCandidateCount Bridge.extraBlockedCapacitySystem ≡ 4 ×
+  Bridge.betaClosedCompatible Bridge.extraBlockedCapacitySystem ≡ 2 ×
+  Bridge.betaClosedCompatible Bridge.baseClosedCompatibleSystem ≡ 2
+rawCapacityCanIncreaseWithoutBetaIncrease = refl , refl , refl
+
+removingConflictStrictlyIncreasesBeta :
+  Bridge.betaClosedCompatible Bridge.baseClosedCompatibleSystem <
+  Bridge.betaClosedCompatible Bridge.conflictRemovedSystem
+removingConflictStrictlyIncreasesBeta = s≤s (s≤s (s≤s z≤n))
+
+closingRequirementStrictlyIncreasesBeta :
+  Bridge.betaClosedCompatible Bridge.requirementOpenSystem <
+  Bridge.betaClosedCompatible Bridge.requirementClosedSystem
+closingRequirementStrictlyIncreasesBeta = s≤s (s≤s z≤n)
+
+betaIsFiniteWitnessNotUniversalOptimizer :
+  Bridge.betaWitnessIsUniversalGrokkingObjective ≡ false
+betaIsFiniteWitnessNotUniversalOptimizer = refl
+
+syntheticCheckpointTransitionHasBetaGain :
+  Bridge.betaGain Bridge.syntheticClosedCompatibleTransition ≡ 1
+syntheticCheckpointTransitionHasBetaGain = refl
+
+syntheticCheckpointTransitionHasHeldOutGain :
+  Bridge.heldOutGeneralisationGain Bridge.syntheticClosedCompatibleTransition ≡ 3
+syntheticCheckpointTransitionHasHeldOutGain = refl
+
+activeSupportChangeRemainsSeparateFromBeta :
+  Bridge.activeSupportGain Bridge.syntheticClosedCompatibleTransition ≡ 1 ×
+  Bridge.betaGain Bridge.syntheticClosedCompatibleTransition ≡ 1
+activeSupportChangeRemainsSeparateFromBeta = refl , refl
+
+trainingLossChangeRemainsSeparateFromBeta :
+  Bridge.trainingLossDecrease Bridge.syntheticClosedCompatibleTransition ≡ 0 ×
+  Bridge.betaGain Bridge.syntheticClosedCompatibleTransition ≡ 1
+trainingLossChangeRemainsSeparateFromBeta = refl , refl
+
+matchedPaidTransitionCanPromote :
+  Bridge.transitionPromotionPaid Bridge.syntheticClosedCompatibleTransition ≡ true
+matchedPaidTransitionCanPromote = refl
+
+unmatchedTransitionCannotPromote :
+  Bridge.transitionPromotionPaid Bridge.unmatchedClosedCompatibleTransition ≡ false
+unmatchedTransitionCannotPromote = refl
+
+betaCertificatesAreRequiredForPromotion :
+  Bridge.transitionPromotionPaid Bridge.unpaidBetaClosedCompatibleTransition ≡ false
+betaCertificatesAreRequiredForPromotion = refl
+
+syntheticTransitionIsNotEmpiricalGrokkingResult :
+  Bridge.syntheticTransitionIsEmpiricalGrokkingResult ≡ false
+syntheticTransitionIsNotEmpiricalGrokkingResult = refl
