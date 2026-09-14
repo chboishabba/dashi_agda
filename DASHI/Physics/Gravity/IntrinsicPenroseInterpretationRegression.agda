@@ -4,7 +4,10 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Gravity.IntrinsicSpacetimeCurvatureInterpretationExact as Intrinsic
+import DASHI.Physics.Gravity.CausalFutureHorismosNullGeneratorExact as Causal
 import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
+import DASHI.Physics.Gravity.PenroseHorismosCompactnessPaymentExact as Compactness
+import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact as Authority
 import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Global
 import DASHI.Physics.Gravity.Penrose1965NullGeodesicIncompletenessExact as Penrose
 
@@ -32,6 +35,21 @@ curvatureDivergenceFirewallRegression :
   ≡ true
 curvatureDivergenceFirewallRegression = refl
 
+causalVsChronologicalFutureFirewallRegression :
+  Causal.causalFutureIsNotChronologicalFuture
+    Causal.canonicalCausalFutureInterpretationBoundary ≡ true
+causalVsChronologicalFutureFirewallRegression = refl
+
+horismosNotEventHorizonRegression :
+  Causal.horismosIsNotEventHorizon
+    Causal.canonicalCausalFutureInterpretationBoundary ≡ true
+horismosNotEventHorizonRegression = refl
+
+causalBoundaryDerivationStillClosedRegression :
+  Causal.causalBoundaryOwnerInternallyReprovesContinuumCausality
+    Causal.canonicalCausalFutureHorismosBoundary ≡ false
+causalBoundaryDerivationStillClosedRegression = refl
+
 localFocusingNotGlobalIncompletenessRegression :
   Focusing.localFocusingDoesNotEqualGlobalGeodesicIncompleteness
     Focusing.canonicalNullFocusingCompositionBoundary
@@ -49,6 +67,36 @@ focusingContinuumDerivationStillClosedRegression :
     Focusing.canonicalNullOpticalFocusingBoundary
   ≡ false
 focusingContinuumDerivationStillClosedRegression = refl
+
+pointwiseNegativeNotUniformRegression :
+  Compactness.pointwiseNegativeExpansionDoesNotAloneGiveUniformBound
+    Compactness.canonicalPenroseCompactnessInterpretationBoundary ≡ true
+pointwiseNegativeNotUniformRegression = refl
+
+rawNullVectorFibreFirewallRegression :
+  Compactness.rawNullNormalVectorFibreIsNotCompactDirectionFibre
+    Compactness.canonicalPenroseCompactnessInterpretationBoundary ≡ true
+rawNullVectorFibreFirewallRegression = refl
+
+boundedParameterNotCompactnessRegression :
+  Compactness.boundedAffineParameterDoesNotAloneMakeHorismosCompact
+    Compactness.canonicalPenroseCompactnessInterpretationBoundary ≡ true
+boundedParameterNotCompactnessRegression = refl
+
+compactnessTopologyDerivationStillClosedRegression :
+  Compactness.compactnessOwnerInternallyReprovesContinuumTopology
+    Compactness.canonicalPenroseHorismosCompactnessBoundary ≡ false
+compactnessTopologyDerivationStillClosedRegression = refl
+
+globalAuthorityCitationNonPromotionRegression :
+  Authority.authorityCitationImportsNeitherProofNorAuthority
+    Authority.canonicalGlobalCausalityAuthorityReceipt ≡ true
+globalAuthorityCitationNonPromotionRegression = refl
+
+globalAuthorityDerivationStillClosedRegression :
+  Authority.authorityOwnerInternallyReprovesGlobalCausality
+    Authority.canonicalGlobalCausalityAuthorityReceipt ≡ false
+globalAuthorityDerivationStillClosedRegression = refl
 
 compactHorismosNotSingularityRegression :
   Global.compactHorismosIsNotSpacetimeSingularity
