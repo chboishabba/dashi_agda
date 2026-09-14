@@ -6,7 +6,9 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as AxisJoin
 import DASHI.Empirical.DarkDimensionBedroyaParameterManifestBoundaryExact as Manifest
+import DASHI.Empirical.DarkDimensionBedroyaNormalizationAxisJoinExact as NormalizationJoin
 
 bedroyaBackgroundSource : Source.AttributedSource
 bedroyaBackgroundSource =
@@ -111,6 +113,15 @@ v0NormalizationStillBlocksExecution :
     Manifest.canonicalBedroyaParameterManifestStatus
   ≡ false
 v0NormalizationStillBlocksExecution = Manifest.v0NormalizationStillOpen
+
+normalizationJoinStillBlocksBackgroundExecution :
+  AxisJoin.RetainsBothRequiredAxes
+    NormalizationJoin.paperDMObserver
+    NormalizationJoin.sampledDensityAxis
+    NormalizationJoin.v0NormalizationAxis →
+  ⊥
+normalizationJoinStillBlocksBackgroundExecution =
+  NormalizationJoin.paperDMObserverCannotRetainBothMissingAxes
 
 normalizationBoundaryStillBlocksBackgroundExecution :
   Manifest.normalizationMapLocated Manifest.canonicalBedroyaParameterManifestStatus
