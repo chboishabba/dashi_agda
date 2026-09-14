@@ -35,6 +35,17 @@ epbcPortal8575ManifestationSource = Source.mkNoDOISource
   "Primary portal manifestation for project identity and displayed workflow/status fields. The portal itself warns that project/status fields are being updated; a displayed status string is not the Part 9 instrument and is retained as a time-bound manifestation rather than timeless legal state."
   Source.publicAttribution
 
+officialReferralsSpatialService : Source.AttributedSource
+officialReferralsSpatialService = Source.mkNoDOISource
+  "Australian Government Department of Climate Change, Energy, the Environment and Water"
+  "EPBC Referrals Spatial Database — public ArcGIS service"
+  "Australian Government GIS services"
+  "2026"
+  "https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/EPBC_Referrals/MapServer/0"
+  Source.governmentSource
+  "Primary machine-readable referral/status/spatial service. Service metadata expressly says referral boundaries record the maximum referral extent and must not be misinterpreted as development footprints; status fields and geometry are retained for referral-state/spatial navigation, not promoted into legal authorisation or exact project works geometry."
+  Source.publicAttribution
+
 saveWoogarooProcessSummary : Source.AttributedSource
 saveWoogarooProcessSummary = Source.mkNoDOISource
   "Save Woogaroo Forest"
@@ -174,6 +185,7 @@ minister95BReceiptDateOpen = clock-receipt
 data FinalPDPublicationStartsClockByItself : Set where
 data ExpiredStatusImpliesSupersedingReferral : Set where
 data PublishedStatusEqualsPart9Approval : Set where
+data ReferralBoundaryEqualsDevelopmentFootprint : Set where
 data CommunityCountEqualsOfficialSubmissionCount : Set where
 data CommunityFAQPaysMinisterReceiptDate : Set where
 
@@ -188,6 +200,10 @@ decisionStatusExpiredDoesNotImplySupersedingReferral ()
 decisionStatusPublishedDoesNotEqualPart9Approval :
   PublishedStatusEqualsPart9Approval → ⊥
 decisionStatusPublishedDoesNotEqualPart9Approval ()
+
+referralBoundaryDoesNotEqualDevelopmentFootprint :
+  ReferralBoundaryEqualsDevelopmentFootprint → ⊥
+referralBoundaryDoesNotEqualDevelopmentFootprint ()
 
 communityCountDoesNotEqualOfficialSubmissionCount :
   CommunityCountEqualsOfficialSubmissionCount → ⊥
@@ -225,10 +241,11 @@ record PortalClockPareto : Set where
     minister95BReceiptBeforeIndependentClockReconstruction : Bool
     projectSpecificWrittenExtensionCanControlPracticalDeadline : Bool
     portalManifestationsRetainedAppendOnly : Bool
+    officialReferralServiceUsedOnlyWithinScope : Bool
     communitySourceMayLocatePrimary : Bool
     communitySourceMayPayPrimary : Bool
     exactOfficialSubmissionCountOpen : Bool
 
 canonicalPortalClockPareto : PortalClockPareto
 canonicalPortalClockPareto = portal-clock-pareto
-  true true true true true false true
+  true true true true true true false true
