@@ -22,6 +22,16 @@ import DASHI.Core.TypedDependencyCore as Dependency
 
 data CanonicalDependency :
     Registry.CanonicalOwner → Registry.CanonicalOwner → Set where
+  consumerRepairDependsOnObserverRefinement :
+    CanonicalDependency
+      Registry.consumerFibreRepairOwner
+      Registry.observerRefinementOwner
+
+  frozenDynamicDependsOnObserverRefinement :
+    CanonicalDependency
+      Registry.frozenProvenanceDynamicOwner
+      Registry.observerRefinementOwner
+
   requiredAxisJoinDependsOnQueryAdequacy :
     CanonicalDependency
       Registry.requiredObserverAxisJoinOwner
@@ -55,6 +65,30 @@ data CanonicalDependency :
 ------------------------------------------------------------------------
 -- Proof-bearing dependency receipts reuse TypedDependencyCore directly.
 ------------------------------------------------------------------------
+
+consumerRepairObserverDependencyWitness :
+  Dependency.DependencyWitness CanonicalDependency
+consumerRepairObserverDependencyWitness =
+  Dependency.dependencyWitness
+    Registry.consumerFibreRepairOwner
+    Registry.observerRefinementOwner
+    consumerRepairDependsOnObserverRefinement
+    Dependency.epistemicLayer
+    Dependency.requiredDependency
+    "ConsumerFibreRepairExact reuses ObserverRefinementLatticeExact.pairObserver as the single canonical pairing/refinement carrier and adds consumer-specific sufficiency obligations over that observer refinement."
+    "observer pairing and refinement only; consumer sufficiency/non-descent remains owned by the repair/descent layer"
+
+frozenDynamicObserverDependencyWitness :
+  Dependency.DependencyWitness CanonicalDependency
+frozenDynamicObserverDependencyWitness =
+  Dependency.dependencyWitness
+    Registry.frozenProvenanceDynamicOwner
+    Registry.observerRefinementOwner
+    frozenDynamicDependsOnObserverRefinement
+    Dependency.epistemicLayer
+    Dependency.requiredDependency
+    "FrozenProvenanceDynamicRefinementExact constructs provenance joins and strict refinements using ObserverRefinementLatticeExact, then adds frozen-selection and independent dynamic-safety payments."
+    "static observer refinement coordinate only; frozen methodology and dynamic safety remain separate child obligations"
 
 requiredAxisJoinDependencyWitness :
   Dependency.DependencyWitness CanonicalDependency
