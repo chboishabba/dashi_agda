@@ -131,3 +131,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseWeightedNDim
 -- an approx 8.0 kcal/mol open-to-closed delta G and strongly disfavors the
 -- NMP-first region; ligand-free path weights are not transferred across context.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandConditionedLandscapeExact
+
+-- Rate-observer adequacy: route topology can answer reachability but cannot
+-- manufacture transition-rate answers.  The repaired observer retains a rate
+-- coordinate, while source-paid Kramers diffusion calibrations remain distinct
+-- from still-unacquired per-edge Figure 5/6 numeric labels and experiment.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseRateObserverAdequacyExact
