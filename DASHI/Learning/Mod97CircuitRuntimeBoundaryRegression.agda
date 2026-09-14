@@ -55,6 +55,11 @@ heldOutSelectionLeakageIsRejected :
   Runtime.selectionLeakage Runtime.currentMod97RuntimeFrontier ≡ Runtime.heldOutNotUsedForSelection
 heldOutSelectionLeakageIsRejected = refl
 
+classificationPolicyIsFrozen :
+  Runtime.classificationPolicyStatus Runtime.currentMod97RuntimeFrontier ≡
+  Runtime.frozenBeforeHeldOutEvaluation
+classificationPolicyIsFrozen = refl
+
 orientedDamageAdapterIsPaid :
   Runtime.natDamageAdapterPayment Runtime.currentMod97RuntimeFrontier ≡ Runtime.paid
 orientedDamageAdapterIsPaid = refl
