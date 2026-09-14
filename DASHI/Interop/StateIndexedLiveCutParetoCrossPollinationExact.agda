@@ -17,18 +17,6 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound83Exact as NS83
 
 ------------------------------------------------------------------------
 -- STATE-INDEXED LIVE-CUT / PARETO CHILD
---
--- Parent pattern:
---   candidate -> compatibility/admission -> terminal consumer -> Pareto.
---
--- This child adds state dependence. The live hypothesis/residual/cut state is
--- recomputed first; only moves that remain relevant to that state are eligible
--- for subsequent route admission, authority/consumer gates, and Pareto
--- comparison.
---
--- The SensibLaw and NS donors remain domain-specific. We reuse exact state,
--- cut, and non-promotion surfaces without transferring theorem identity or
--- source authority across domains.
 ------------------------------------------------------------------------
 
 record StateIndexedLiveCutParetoAdapter : Set where
@@ -38,41 +26,24 @@ record StateIndexedLiveCutParetoAdapter : Set where
     residualPortfolioReference : String
     guardedCutReference : String
     paretoReference : String
-
     salienceIndexedByResidualAndLiveSet : Bool
-    salienceIndexedByResidualAndLiveSetIsTrue :
-      salienceIndexedByResidualAndLiveSet ≡ true
-
+    salienceIndexedByResidualAndLiveSetIsTrue : salienceIndexedByResidualAndLiveSet ≡ true
     magnitudeGreedyMayMissLiveNarrowing : Bool
-    magnitudeGreedyMayMissLiveNarrowingIsTrue :
-      magnitudeGreedyMayMissLiveNarrowing ≡ true
-
+    magnitudeGreedyMayMissLiveNarrowingIsTrue : magnitudeGreedyMayMissLiveNarrowing ≡ true
     salienceCreatesCandidateAdmission : Bool
-    salienceCreatesCandidateAdmissionIsFalse :
-      salienceCreatesCandidateAdmission ≡ false
-
+    salienceCreatesCandidateAdmissionIsFalse : salienceCreatesCandidateAdmission ≡ false
     residualUpdateMayChangeSelectedExperiment : Bool
-    residualUpdateMayChangeSelectedExperimentIsTrue :
-      residualUpdateMayChangeSelectedExperiment ≡ true
-
+    residualUpdateMayChangeSelectedExperimentIsTrue : residualUpdateMayChangeSelectedExperiment ≡ true
     portfolioSelectionCreatesExecutionAuthority : Bool
-    portfolioSelectionCreatesExecutionAuthorityIsFalse :
-      portfolioSelectionCreatesExecutionAuthority ≡ false
-
+    portfolioSelectionCreatesExecutionAuthorityIsFalse : portfolioSelectionCreatesExecutionAuthority ≡ false
     terminalConsumerStillRequired : Bool
     terminalConsumerStillRequiredIsTrue : terminalConsumerStillRequired ≡ true
-
     sameGraphFactAppendMayChangeReachabilityAndCut : Bool
-    sameGraphFactAppendMayChangeReachabilityAndCutIsTrue :
-      sameGraphFactAppendMayChangeReachabilityAndCut ≡ true
-
+    sameGraphFactAppendMayChangeReachabilityAndCutIsTrue : sameGraphFactAppendMayChangeReachabilityAndCut ≡ true
     stateIndexedSelectionDoesNotCreateSourceAuthority : Bool
-    stateIndexedSelectionDoesNotCreateSourceAuthorityIsTrue :
-      stateIndexedSelectionDoesNotCreateSourceAuthority ≡ true
-
+    stateIndexedSelectionDoesNotCreateSourceAuthorityIsTrue : stateIndexedSelectionDoesNotCreateSourceAuthority ≡ true
     historicalEvidenceMayRemainValidWhileNextStepSalienceChanges : Bool
-    historicalEvidenceMayRemainValidWhileNextStepSalienceChangesIsTrue :
-      historicalEvidenceMayRemainValidWhileNextStepSalienceChanges ≡ true
+    historicalEvidenceMayRemainValidWhileNextStepSalienceChangesIsTrue : historicalEvidenceMayRemainValidWhileNextStepSalienceChanges ≡ true
 
 open StateIndexedLiveCutParetoAdapter public
 
@@ -82,34 +53,18 @@ canonicalStateIndexedLiveCutParetoAdapter = stateIndexedLiveCutParetoAdapter
   "ResidualConditionedExperimentPortfolioExact: relevance/admissibility are indexed by current residual, consumer, and authority"
   "SensibLawDutySourceLineageRefinementCutRerunExact: same source-lineage graph, source-owned fact append, recomputed reachability and guarded cut"
   "PenroseLocalGlobalHyperfabricCrossPollinationExact: terminal consumer and hard-gated Pareto selection"
-  (Live.salienceIndexedByResidualAndLiveSet Live.canonicalResidualLiveSetSalienceBoundary)
-  refl
-  (Live.magnitudeGreedyMayMissNarrowing Live.canonicalResidualLiveSetSalienceBoundary)
-  refl
-  (Live.salienceCreatesCandidateAdmission Live.canonicalResidualLiveSetSalienceBoundary)
-  refl
-  (Portfolio.residualUpdateMayChangeSelectedExperiment
-    Portfolio.canonicalResidualConditionedPortfolioBoundary)
-  (Portfolio.residualUpdateMayChangeSelectedExperimentIsTrue
-    Portfolio.canonicalResidualConditionedPortfolioBoundary)
-  (Portfolio.portfolioSelectionCreatesExecutionAuthority
-    Portfolio.canonicalResidualConditionedPortfolioBoundary)
-  (Portfolio.portfolioSelectionCreatesExecutionAuthorityIsFalse
-    Portfolio.canonicalResidualConditionedPortfolioBoundary)
-  Parent.terminalConsumerStillMustBePaid
-  Parent.terminalConsumerStillMustBePaidIsTrue
-  true refl
-  true refl
-  true refl
+  (Live.salienceIndexedByResidualAndLiveSet Live.canonicalResidualLiveSetSalienceBoundary) refl
+  (Live.magnitudeGreedyMayMissNarrowing Live.canonicalResidualLiveSetSalienceBoundary) refl
+  (Live.salienceCreatesCandidateAdmission Live.canonicalResidualLiveSetSalienceBoundary) refl
+  (Portfolio.residualUpdateMayChangeSelectedExperiment Portfolio.canonicalResidualConditionedPortfolioBoundary)
+  (Portfolio.residualUpdateMayChangeSelectedExperimentIsTrue Portfolio.canonicalResidualConditionedPortfolioBoundary)
+  (Portfolio.portfolioSelectionCreatesExecutionAuthority Portfolio.canonicalResidualConditionedPortfolioBoundary)
+  (Portfolio.portfolioSelectionCreatesExecutionAuthorityIsFalse Portfolio.canonicalResidualConditionedPortfolioBoundary)
+  Parent.terminalConsumerStillMustBePaid Parent.terminalConsumerStillMustBePaidIsTrue
+  true refl true refl true refl
 
 ------------------------------------------------------------------------
 -- Constructive state-indexed Pareto eligibility weld.
---
--- Current residual relevance is the consumer-adequacy gate; current authority
--- admissibility is the hard admissibility gate. The portfolio's declared move
--- cost is reused as the description-length/resource coordinate. This weld
--- constructs eligibility only; it does not construct route admission, Pareto
--- optimality, experimental authority, or theorem authority.
 ------------------------------------------------------------------------
 
 asStateIndexedMDLProblem :
@@ -132,11 +87,8 @@ asStateIndexedMDLProblem P residual consumer authority =
 portfolioCandidateIsEligible :
   ∀ {P residual consumer authority experiment} →
   Portfolio.PortfolioCandidate P residual consumer authority experiment →
-  Pareto.Eligible
-    (asStateIndexedMDLProblem P residual consumer authority)
-    experiment
-portfolioCandidateIsEligible candidate =
-  Portfolio.admissible candidate , Portfolio.relevant candidate
+  Pareto.Eligible (asStateIndexedMDLProblem P residual consumer authority) experiment
+portfolioCandidateIsEligible candidate = Portfolio.admissible candidate , Portfolio.relevant candidate
 
 stateIndexedEligibilityDoesNotCreateRouteAdmission : Bool
 stateIndexedEligibilityDoesNotCreateRouteAdmission = true
@@ -144,6 +96,51 @@ stateIndexedEligibilityDoesNotCreateRouteAdmission = true
 stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue :
   stateIndexedEligibilityDoesNotCreateRouteAdmission ≡ true
 stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue = refl
+
+------------------------------------------------------------------------
+-- Admitted live-cut candidate: eligibility + independent route admission.
+--
+-- RouteAdmission is intentionally supplied independently. This record does not
+-- manufacture a route-specific receipt from a portfolio candidate. It merely
+-- bundles already-paid current-state eligibility with already-paid proof-search
+-- admission and retains the terminal-consumer reference that must still close.
+------------------------------------------------------------------------
+
+record AdmittedStateIndexedCandidate
+    (P : Portfolio.ExperimentPortfolio)
+    (residual : Portfolio.ResidualContext P)
+    (consumer : Portfolio.Consumer P)
+    (authority : Portfolio.Authority P)
+    (experiment : Portfolio.Experiment P) : Set where
+  constructor admitted-state-indexed-candidate
+  field
+    currentPortfolioCandidate :
+      Portfolio.PortfolioCandidate P residual consumer authority experiment
+    routeAdmission : ProofSearch.RouteAdmission
+    terminalConsumerReference : String
+
+open AdmittedStateIndexedCandidate public
+
+admittedStateIndexedCandidateEligible :
+  ∀ {P residual consumer authority experiment} →
+  AdmittedStateIndexedCandidate P residual consumer authority experiment →
+  Pareto.Eligible (asStateIndexedMDLProblem P residual consumer authority) experiment
+admittedStateIndexedCandidateEligible admitted =
+  portfolioCandidateIsEligible (currentPortfolioCandidate admitted)
+
+admittedCandidateAutomaticallyParetoOptimal : Bool
+admittedCandidateAutomaticallyParetoOptimal = false
+
+admittedCandidateAutomaticallyParetoOptimalIsFalse :
+  admittedCandidateAutomaticallyParetoOptimal ≡ false
+admittedCandidateAutomaticallyParetoOptimalIsFalse = refl
+
+admittedCandidateAutomaticallyClosesTerminalConsumer : Bool
+admittedCandidateAutomaticallyClosesTerminalConsumer = false
+
+admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse :
+  admittedCandidateAutomaticallyClosesTerminalConsumer ≡ false
+admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse = refl
 
 ------------------------------------------------------------------------
 -- Exact source-/authority-preserving legal adapters.
@@ -170,30 +167,20 @@ record NSCurrentCutParetoAdapter : Set where
   field
     currentProducerCutReference : String
     sourceCustodyReference : String
-
     relativeGrowthSplitClosed : Bool
     relativeGrowthSplitClosedIsTrue : relativeGrowthSplitClosed ≡ true
-
     nonlinearPressureRelativeGrowthEstimatePaid : Bool
-    nonlinearPressureRelativeGrowthEstimatePaidIsFalse :
-      nonlinearPressureRelativeGrowthEstimatePaid ≡ false
-
+    nonlinearPressureRelativeGrowthEstimatePaidIsFalse : nonlinearPressureRelativeGrowthEstimatePaid ≡ false
     criticalRatioBarrierPaid : Bool
     criticalRatioBarrierPaidIsFalse : criticalRatioBarrierPaid ≡ false
-
     clayPromotionPaid : Bool
     clayPromotionPaidIsFalse : clayPromotionPaid ≡ false
-
     closedAlgebraRemainsHighestSalience : Bool
-    closedAlgebraRemainsHighestSalienceIsFalse :
-      closedAlgebraRemainsHighestSalience ≡ false
-
+    closedAlgebraRemainsHighestSalienceIsFalse : closedAlgebraRemainsHighestSalience ≡ false
     currentNSCutMayBeSkippedByPareto : Bool
     currentNSCutMayBeSkippedByParetoIsFalse : currentNSCutMayBeSkippedByPareto ≡ false
-
     crossPollinationCreatesNSTheoremAuthority : Bool
-    crossPollinationCreatesNSTheoremAuthorityIsFalse :
-      crossPollinationCreatesNSTheoremAuthority ≡ false
+    crossPollinationCreatesNSTheoremAuthorityIsFalse : crossPollinationCreatesNSTheoremAuthority ≡ false
 
 open NSCurrentCutParetoAdapter public
 
@@ -205,13 +192,9 @@ canonicalNSCurrentCutParetoAdapter = nsCurrentCutParetoAdapter
   NS83.round83RelativeGrowthSplitsViscousNonlinearExactlyIsTrue
   NS83.round83NonlinearPressureRelativeGrowthEstimateConstructed
   NS83.round83NonlinearPressureRelativeGrowthEstimateConstructedIsFalse
-  NS83.round83CriticalRatioBarrier
-  refl
-  NS83.round83ClayPromotion
-  NS83.round83ClayPromotionIsFalse
-  false refl
-  false refl
-  false refl
+  NS83.round83CriticalRatioBarrier refl
+  NS83.round83ClayPromotion NS83.round83ClayPromotionIsFalse
+  false refl false refl false refl
 
 ------------------------------------------------------------------------
 -- Least-privilege route admission adapter.
@@ -221,61 +204,38 @@ record LeastPrivilegeLiveCutAdmissionAdapter : Set where
   constructor leastPrivilegeLiveCutAdmissionAdapter
   field
     admissionReference : String
-
     theoremNameStringCreatesProofCapability : Bool
-    theoremNameStringCreatesProofCapabilityIsFalse :
-      theoremNameStringCreatesProofCapability ≡ false
-
+    theoremNameStringCreatesProofCapabilityIsFalse : theoremNameStringCreatesProofCapability ≡ false
     routeMayElaborateBeforeAdmission : Bool
     routeMayElaborateBeforeAdmissionIsFalse : routeMayElaborateBeforeAdmission ≡ false
-
     routeMaySilentlyStrengthenHypotheses : Bool
-    routeMaySilentlyStrengthenHypothesesIsFalse :
-      routeMaySilentlyStrengthenHypotheses ≡ false
-
+    routeMaySilentlyStrengthenHypothesesIsFalse : routeMaySilentlyStrengthenHypotheses ≡ false
     localLemmaAutomaticallyMovesProgrammeFrontier : Bool
-    localLemmaAutomaticallyMovesProgrammeFrontierIsFalse :
-      localLemmaAutomaticallyMovesProgrammeFrontier ≡ false
-
+    localLemmaAutomaticallyMovesProgrammeFrontierIsFalse : localLemmaAutomaticallyMovesProgrammeFrontier ≡ false
     lemmaCountIsAuthoritativeProgress : Bool
     lemmaCountIsAuthoritativeProgressIsFalse : lemmaCountIsAuthoritativeProgress ≡ false
-
     duplicateRouteShouldBeReproved : Bool
     duplicateRouteShouldBeReprovedIsFalse : duplicateRouteShouldBeReproved ≡ false
-
     liveCutSalienceCannotBypassRouteAdmission : Bool
-    liveCutSalienceCannotBypassRouteAdmissionIsTrue :
-      liveCutSalienceCannotBypassRouteAdmission ≡ true
+    liveCutSalienceCannotBypassRouteAdmissionIsTrue : liveCutSalienceCannotBypassRouteAdmission ≡ true
 
 open LeastPrivilegeLiveCutAdmissionAdapter public
 
 canonicalLeastPrivilegeLiveCutAdmissionAdapter : LeastPrivilegeLiveCutAdmissionAdapter
 canonicalLeastPrivilegeLiveCutAdmissionAdapter = leastPrivilegeLiveCutAdmissionAdapter
   "current live-cut candidates still require ProofSearch.RouteAdmission before elaboration; salience is not capability"
-  (ProofSearch.theoremNameStringIsProofCapability
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.theoremNameStringIsProofCapabilityIsFalse
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.routeMayElaborateBeforeAdmission
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.routeMayElaborateBeforeAdmissionIsFalse
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.routeMaySilentlyStrengthenHypotheses
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.routeMaySilentlyStrengthenHypothesesIsFalse
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.localLemmaAutomaticallyMovesProgrammeFrontier
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.localLemmaAutomaticallyMovesProgrammeFrontierIsFalse
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.lemmaCountIsAuthoritativeProgress
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.lemmaCountIsAuthoritativeProgressIsFalse
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.duplicateRouteShouldBeReproved
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
-  (ProofSearch.duplicateRouteShouldBeReprovedIsFalse
-    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.theoremNameStringIsProofCapability ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.theoremNameStringIsProofCapabilityIsFalse ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.routeMayElaborateBeforeAdmission ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.routeMayElaborateBeforeAdmissionIsFalse ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.routeMaySilentlyStrengthenHypotheses ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.routeMaySilentlyStrengthenHypothesesIsFalse ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.localLemmaAutomaticallyMovesProgrammeFrontier ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.localLemmaAutomaticallyMovesProgrammeFrontierIsFalse ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.lemmaCountIsAuthoritativeProgress ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.lemmaCountIsAuthoritativeProgressIsFalse ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.duplicateRouteShouldBeReproved ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.duplicateRouteShouldBeReprovedIsFalse ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
   true refl
 
 ------------------------------------------------------------------------
@@ -285,18 +245,14 @@ canonicalLeastPrivilegeLiveCutAdmissionAdapter = leastPrivilegeLiveCutAdmissionA
 parentSnowballPaymentMaySkipDependency : Bool
 parentSnowballPaymentMaySkipDependency = Parent.snowballPaymentMaySkipUnpaidParentDependency
 
-parentSnowballPaymentMaySkipDependencyIsFalse :
-  parentSnowballPaymentMaySkipDependency ≡ false
-parentSnowballPaymentMaySkipDependencyIsFalse =
-  Parent.snowballPaymentMaySkipUnpaidParentDependencyIsFalse
+parentSnowballPaymentMaySkipDependencyIsFalse : parentSnowballPaymentMaySkipDependency ≡ false
+parentSnowballPaymentMaySkipDependencyIsFalse = Parent.snowballPaymentMaySkipUnpaidParentDependencyIsFalse
 
 parentCrossDomainAnalogyCreatesAuthority : Bool
 parentCrossDomainAnalogyCreatesAuthority = Parent.crossDomainAnalogyCreatesSourceAuthority
 
-parentCrossDomainAnalogyCreatesAuthorityIsFalse :
-  parentCrossDomainAnalogyCreatesAuthority ≡ false
-parentCrossDomainAnalogyCreatesAuthorityIsFalse =
-  Parent.crossDomainAnalogyCreatesSourceAuthorityIsFalse
+parentCrossDomainAnalogyCreatesAuthorityIsFalse : parentCrossDomainAnalogyCreatesAuthority ≡ false
+parentCrossDomainAnalogyCreatesAuthorityIsFalse = Parent.crossDomainAnalogyCreatesSourceAuthorityIsFalse
 
 ------------------------------------------------------------------------
 -- Interpretation boundary.
@@ -306,30 +262,21 @@ record StateIndexedLiveCutParetoBoundary : Set where
   constructor stateIndexedLiveCutParetoBoundary
   field
     staleHistoricalEvidenceMustBeDeleted : Bool
-    staleHistoricalEvidenceMustBeDeletedIsFalse :
-      staleHistoricalEvidenceMustBeDeleted ≡ false
+    staleHistoricalEvidenceMustBeDeletedIsFalse : staleHistoricalEvidenceMustBeDeleted ≡ false
     onceUsefulExperimentAlwaysHighestSalience : Bool
-    onceUsefulExperimentAlwaysHighestSalienceIsFalse :
-      onceUsefulExperimentAlwaysHighestSalience ≡ false
+    onceUsefulExperimentAlwaysHighestSalienceIsFalse : onceUsefulExperimentAlwaysHighestSalience ≡ false
     currentSalienceAutomaticallyCreatesAuthority : Bool
-    currentSalienceAutomaticallyCreatesAuthorityIsFalse :
-      currentSalienceAutomaticallyCreatesAuthority ≡ false
+    currentSalienceAutomaticallyCreatesAuthorityIsFalse : currentSalienceAutomaticallyCreatesAuthority ≡ false
     currentMinimalCutAutomaticallyTransfersAcrossDomains : Bool
-    currentMinimalCutAutomaticallyTransfersAcrossDomainsIsFalse :
-      currentMinimalCutAutomaticallyTransfersAcrossDomains ≡ false
+    currentMinimalCutAutomaticallyTransfersAcrossDomainsIsFalse : currentMinimalCutAutomaticallyTransfersAcrossDomains ≡ false
     paretoRankingMayIgnoreCurrentResidualState : Bool
-    paretoRankingMayIgnoreCurrentResidualStateIsFalse :
-      paretoRankingMayIgnoreCurrentResidualState ≡ false
+    paretoRankingMayIgnoreCurrentResidualStateIsFalse : paretoRankingMayIgnoreCurrentResidualState ≡ false
 
 open StateIndexedLiveCutParetoBoundary public
 
 canonicalStateIndexedLiveCutParetoBoundary : StateIndexedLiveCutParetoBoundary
 canonicalStateIndexedLiveCutParetoBoundary = stateIndexedLiveCutParetoBoundary
   false refl
-  (Portfolio.onceUsefulExperimentAlwaysHighestSalience
-    Portfolio.canonicalResidualConditionedPortfolioBoundary)
-  (Portfolio.onceUsefulExperimentAlwaysHighestSalienceIsFalse
-    Portfolio.canonicalResidualConditionedPortfolioBoundary)
-  false refl
-  false refl
-  false refl
+  (Portfolio.onceUsefulExperimentAlwaysHighestSalience Portfolio.canonicalResidualConditionedPortfolioBoundary)
+  (Portfolio.onceUsefulExperimentAlwaysHighestSalienceIsFalse Portfolio.canonicalResidualConditionedPortfolioBoundary)
+  false refl false refl false refl
