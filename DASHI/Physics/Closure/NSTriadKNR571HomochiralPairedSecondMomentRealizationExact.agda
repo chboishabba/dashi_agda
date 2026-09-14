@@ -18,12 +18,14 @@ module DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizatio
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
+import Data.Rational.Properties as ℚₚ
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNFiniteTranslationMultiplierCommutatorRound27Exact as R27
+import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact as R311
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact as Weld
 import DASHI.Physics.Closure.NSTriadKNLuoCenteredPairedCommutatorIdentityExact as Pair
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
@@ -33,7 +35,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBound
 ------------------------------------------------------------------------
 
 r571Round27Scalar :
-  (sign : DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact.HelicitySign) →
+  (sign : R311.HelicitySign) →
   (S : Helical.HelicalModeScalars Weld.F) →
   (shift : Z3.FourierMode) →
   (state : R27.FourierStateCarrier) →
@@ -50,7 +52,7 @@ r571Round27Scalar sign S shift state output =
 
 record R571PairedTaylorRealization : Set₁ where
   field
-    sign : DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact.HelicitySign
+    sign : R311.HelicitySign
     scalars : Helical.HelicalModeScalars Weld.F
     shift : Z3.FourierMode
     state : R27.FourierStateCarrier
@@ -124,7 +126,7 @@ r571PointwiseSecondMomentBound :
   ≤ Moment.weightedSecondMoment (secondMomentSample realization)
       * Moment.secondMomentCoefficient budget
 r571PointwiseSecondMomentBound realization budget =
-  Data.Rational.Properties.≤-trans
+  ℚₚ.≤-trans
     (r571ScalarBelowPairedMagnitude realization)
     (Moment.pointwisePairedSecondMomentBound budget
       (secondMomentSample realization))
