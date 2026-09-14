@@ -34,3 +34,4 @@ import DASHI.Physics.Semiconductor.Device.LitavisSPADMultimodalObservationExact
 import DASHI.Physics.Semiconductor.Device.LitavisSPADConsumerSafeReductionExact
 import DASHI.Physics.Semiconductor.Device.LitavisSPADCoarseFineReductionBridgeExact
 import DASHI.Physics.Semiconductor.Device.LitavisSPADFutureModeReductionExact
+import DASHI.Physics.Semiconductor.Device.LitavisSPADSpatialGranularityExact
