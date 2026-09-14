@@ -62,6 +62,12 @@ queryIndexedProjectionOwner = canonical-owner
   "DASHI.Core.QueryIndexedProjectionAdequacyExact"
   exactInterface false refl
 
+experimentalCoordinateOwner : CanonicalOwner
+experimentalCoordinateOwner = canonical-owner
+  "experimental coordinate roles, declared control-relative invariance, derived-discriminator provenance, and collision-separating coordinates"
+  "DASHI.Core.ExperimentalCoordinateDesignExact"
+  exactInterface false refl
+
 osintAcquisitionOwner : CanonicalOwner
 osintAcquisitionOwner = canonical-owner
   "OSINT acquisition, source/carrier identity, corroboration independence, and search-nonlocation firewall"
@@ -91,6 +97,18 @@ projectionFibreOwner = canonical-owner "coarse/fine projection with retained rel
 
 consumerFibreRepairOwner : CanonicalOwner
 consumerFibreRepairOwner = canonical-owner "consumer-relative collision repair by observer refinement" "DASHI.Core.ConsumerFibreRepairExact" exactInterface false refl
+
+frozenProvenanceDynamicOwner : CanonicalOwner
+frozenProvenanceDynamicOwner = canonical-owner
+  "provenance-aware strict refinement with frozen selection and separate dynamic-safety payment"
+  "DASHI.Core.FrozenProvenanceDynamicRefinementExact"
+  exactInterface false refl
+
+queryIndexedFutureSafePromotionOwner : CanonicalOwner
+queryIndexedFutureSafePromotionOwner = canonical-owner
+  "query-indexed future-safe promotion requiring frozen provenance-aware refinement, query adequacy, and dynamic safety"
+  "DASHI.Core.QueryIndexedFrozenDynamicPromotionExact"
+  exactInterface false refl
 
 candidateFamilyExecutionOwner : CanonicalOwner
 candidateFamilyExecutionOwner = canonical-owner "selected candidate-family admissibility, composition, and independent global execution check" "DASHI.Core.CandidateFamilyExecutionExact" exactInterface false refl
@@ -127,12 +145,13 @@ canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
   descentOwner ∷ approximateNaturalityOwner ∷ kernelSplitOwner ∷ codingTargetOwner ∷
   continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷
-  osintAcquisitionOwner ∷ boundedNegativeSearchOwner ∷ robustExperimentInferenceOwner ∷
-  multipartReconstructionOwner ∷ projectionFibreOwner ∷ consumerFibreRepairOwner ∷
-  candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷
-  candidateObjectIdentityOwner ∷ attributedSourceOwner ∷ attributionSnowballOwner ∷
-  appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷ typedDependencyOwner ∷
-  genericReceiptOwner ∷ []
+  experimentalCoordinateOwner ∷ osintAcquisitionOwner ∷ boundedNegativeSearchOwner ∷
+  robustExperimentInferenceOwner ∷ multipartReconstructionOwner ∷ projectionFibreOwner ∷
+  consumerFibreRepairOwner ∷ frozenProvenanceDynamicOwner ∷
+  queryIndexedFutureSafePromotionOwner ∷ candidateFamilyExecutionOwner ∷
+  requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷ candidateObjectIdentityOwner ∷
+  attributedSourceOwner ∷ attributionSnowballOwner ∷ appendOnlyRevisionOwner ∷
+  residualActionPolicyOwner ∷ typedDependencyOwner ∷ genericReceiptOwner ∷ []
 
 record RepositoryClosureBoundary : Set where
   constructor repository-closure-boundary
