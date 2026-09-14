@@ -46,11 +46,19 @@ parentExpertSituatedBoundary = ExpertSituated.canonicalExpertSituatedObserverBou
 parentDisabilityJusticeBoundary : Disability.AustralianDisabilityJusticeObserverBoundary
 parentDisabilityJusticeBoundary = Disability.canonicalAustralianDisabilityJusticeObserverBoundary
 
-reportedConsequenceState : Consequence.EpistemicConsequenceState
-reportedConsequenceState = Consequence.epistemicConsequenceState
+-- Repository-local analytical classification of the reported combination of
+-- unresolved uncertainty and a highly consequential, difficult-to-reverse
+-- order.  This is not a quotation, judicial characterisation, legal threshold,
+-- or source holding.
+manifestationAnalyticalConsequenceState : Consequence.EpistemicConsequenceState
+manifestationAnalyticalConsequenceState = Consequence.epistemicConsequenceState
   Consequence.unresolvedUncertainty
   Consequence.extremeConsequence
   Consequence.difficultToReverse
+
+-- Backward-compatible name retained as a non-authoritative alias.
+reportedConsequenceState : Consequence.EpistemicConsequenceState
+reportedConsequenceState = manifestationAnalyticalConsequenceState
 
 record FamilyCourtTraumaPresentationBoundary : Set where
   constructor familyCourtTraumaPresentationBoundary
@@ -68,6 +76,7 @@ record FamilyCourtTraumaPresentationBoundary : Set where
     difficultWitnessCharacterisationAutomaticallyEstablishesUnreliability : Bool
     severeOrderAutomaticallyEstablishesLegalError : Bool
     articleAutomaticallyEstablishesSystemicGeneralisation : Bool
+    analyticalConsequenceMappingAutomaticallySourceHolding : Bool
 
 open FamilyCourtTraumaPresentationBoundary public
 
@@ -81,6 +90,7 @@ canonicalFamilyCourtTraumaPresentationBoundary =
     true
     true
     true
+    false
     false
     false
     false
