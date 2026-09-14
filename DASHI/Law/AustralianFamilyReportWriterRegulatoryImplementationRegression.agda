@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 import DASHI.Law.AustralianFamilyReportWriterRegulatoryImplementationExact as Regulatory
 
 ------------------------------------------------------------------------
--- RED contract: Part IIIAA / s 11K implementation status.
+-- Contract: Part IIIAA / s 11K implementation status.
 --
 -- The Act can enact an enabling power while the current searched regulations
 -- surface does not locate an implementing family-report-writer regime.  A
@@ -27,6 +27,25 @@ currentRegulationsSurfaceWasChecked = refl
 implementingProvisionRemainsUnlocated :
   Regulatory.implementingProvisionLocated ≡ false
 implementingProvisionRemainsUnlocated = refl
+
+------------------------------------------------------------------------
+-- Snowball widening: a broader Federal Register / AGD search was also run.
+-- It located the Act / Schedule-7 enabling architecture and historical
+-- consultation context, but did not locate a separate implementing instrument.
+-- That still does not pay nonexistence.
+------------------------------------------------------------------------
+
+broaderImplementationSearchWasRun :
+  Regulatory.broaderImplementationSearchPerformed ≡ true
+broaderImplementationSearchWasRun = refl
+
+broaderSearchStillDidNotLocateImplementingInstrument :
+  Regulatory.broaderSearchLocatedImplementingInstrument ≡ false
+broaderSearchStillDidNotLocateImplementingInstrument = refl
+
+broaderSearchStillDoesNotProveAbsence :
+  Regulatory.broaderSearchProvesAbsence ≡ false
+broaderSearchStillDoesNotProveAbsence = refl
 
 absenceIsNotProved :
   Regulatory.absenceOfImplementingProvisionProved ≡ false
@@ -54,3 +73,6 @@ possibleCourtConsequenceDoesNotCreateOperativeRule =
 
 currentSearchReceiptIsExplicit : Regulatory.RegulatoryImplementationSearchReceipt
 currentSearchReceiptIsExplicit = Regulatory.currentRegulatoryImplementationSearchReceipt
+
+broaderSearchReceiptIsExplicit : Regulatory.BroaderRegulatorySearchReceipt
+broaderSearchReceiptIsExplicit = Regulatory.currentBroaderRegulatorySearchReceipt
