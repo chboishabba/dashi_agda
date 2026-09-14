@@ -4,16 +4,18 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Core.ConsumerObserverJoinResidualExact as Join
+import DASHI.Core.KernelConsumerDescentFactorisationCrosswalkExact as KernelFactor
+import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.ObserverRefinementLatticeExact as Lattice
 
 ------------------------------------------------------------------------
 -- WRAPPED OBSERVER / HOT-COLD CROSSWALK
 --
 -- ConsumerObserverJoinResidualExact carries useful packaging and the minimal
--- consumer-hot-state universal property.  Its observer refinement and exact
--- hot/cold reopening shapes are nevertheless exact manifestations of existing
--- canonical Core owners.  Translate them rather than creating another generic
--- observer/reopening theory.
+-- consumer-hot-state universal property.  Its observer refinement, exact
+-- hot/cold reopening, and explicit consumer descent are exact manifestations of
+-- existing canonical Core owners.  Translate them rather than creating another
+-- generic observer/reopening/factorisation theory.
 ------------------------------------------------------------------------
 
 wrappedRefinesToLattice :
@@ -42,10 +44,10 @@ hotColdToCoarseFineReopening :
   ∀ {Fine Hot Residual : Set} →
   Join.RecoverableHotCold Fine Hot Residual →
   Fibre.CoarseFineReopening Fine
-hotColdToCoarseFineReopening recoverable =
+hotColdToCoarseFineReopening {Hot = Hot} {Residual = Residual} recoverable =
   Fibre.coarseFineReopening
-    _
-    _
+    Hot
+    Residual
     (Join.hot recoverable)
     (Join.residual recoverable)
     (Join.reopen recoverable)
@@ -75,3 +77,21 @@ sameHotAndResidualSameFineViaCanonical :
 sameHotAndResidualSameFineViaCanonical recoverable =
   Fibre.coarseAndRelativeFineDetermineState
     (hotColdToCoarseFineReopening recoverable)
+
+consumerSufficientHotToFactorized :
+  ∀ {Fine Hot Output : Set}
+    {hot : Fine → Hot}
+    {consume : Fine → Output} →
+  Join.ConsumerSufficientHotState hot consume →
+  Factorized.FactorizedRefinement consume hot
+consumerSufficientHotToFactorized sufficient =
+  KernelFactor.kernelDescentToFactorized (Join.descent sufficient)
+
+minimalHotSufficiencyToFactorized :
+  ∀ {Fine Hot Output : Set}
+    {hot : Fine → Hot}
+    {consume : Fine → Output} →
+  Join.MinimalConsumerSufficientHotState hot consume →
+  Factorized.FactorizedRefinement consume hot
+minimalHotSufficiencyToFactorized minimal =
+  consumerSufficientHotToFactorized (Join.sufficient minimal)
