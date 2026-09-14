@@ -14,25 +14,6 @@ import DASHI.Interop.SLRFragmentEvidenceContractionExact as EvidenceContraction
 
 ------------------------------------------------------------------------
 -- BINARY CONSUMER-RESIDUAL COMPILER PARITY
---
--- Runtime owner:
---   chboishabba/slr :: crates/sl-consumer-residual
---
--- Consumer wire v1:
---   magic[4] = "SLRC"
---   version  = u16 little-endian 1
---   consumerId : length-prefixed UTF-8
---   surfaceId  : length-prefixed UTF-8
---   requirementCount : u32 little-endian
---   repeated requirement:
---     requirementId : length-prefixed UTF-8
---     fragmentTag   : u8, exact CompilerFragmentKind tag
---     scopeTag      : u8, 0 = any source, 1 = exact source manifestation
---     sourceRef     : length-prefixed UTF-8 only when scopeTag = 1
---
--- A candidate PNF pays only the declared observation requirement when its
--- fragment family matches and the optional source-manifestation scope matches.
--- Payment does not promote claim truth, semantic equivalence or authority.
 ------------------------------------------------------------------------
 
 consumerWireVersion : Nat
@@ -54,6 +35,9 @@ gapWorldWireKindTag = WorldWire.worldWireKindTag WorldWire.gap
 
 obligationWorldWireKindTag : Nat
 obligationWorldWireKindTag = WorldWire.worldWireKindTag WorldWire.obligation
+
+paymentWorldWireKindTag : Nat
+paymentWorldWireKindTag = WorldWire.worldWireKindTag WorldWire.payment
 
 record ConsumerRequirement : Set where
   constructor consumerRequirement
@@ -101,14 +85,11 @@ record RequirementPaymentReceipt
 open RequirementPaymentReceipt public
 
 ------------------------------------------------------------------------
--- Output body contracts.  Both are kind-owned binary payloads inside the
--- already formalised SLRW envelope.
---
--- GAP1 body:
---   "GAP1" | fragment:u8 | candidateOnly:u8=1 | semanticPromotion:u8=0 |
---   consumerId:text | requirementId:text | scopeTag:u8 | [sourceRef:text]
---
--- OBL1 body has the identical coordinate payload under magic "OBL1".
+-- Output body contracts.
+-- GAP1 and OBL1 carry the unpaid residual coordinates.
+-- PAY1 carries the same consumer/requirement/scope coordinates plus the exact
+-- target residual id. A paid requirement emits two PAY1 records: one for its
+-- deterministic gap id and one for its deterministic obligation id.
 ------------------------------------------------------------------------
 
 record ConsumerResidualBodyParity : Set where
@@ -116,9 +97,11 @@ record ConsumerResidualBodyParity : Set where
   field
     gapMagicIsGAP1 : Bool
     obligationMagicIsOBL1 : Bool
+    paymentMagicIsPAY1 : Bool
     fragmentTagUsesCompilerMapping : Bool
     gapUsesWorldWireKindFour : Bool
     obligationUsesWorldWireKindFive : Bool
+    paymentUsesWorldWireKindEight : Bool
     anySourceScopeTagIsZero : Bool
     exactSourceScopeTagIsOne : Bool
     candidateOnlyByteIsOne : Bool
@@ -127,13 +110,15 @@ record ConsumerResidualBodyParity : Set where
     requirementReferenceRetained : Bool
     scopeCoordinateRetained : Bool
     exactSourceReferenceRetainedWhenScoped : Bool
+    paymentRetainsExactTargetResidualId : Bool
 
 open ConsumerResidualBodyParity public
 
 canonicalConsumerResidualBodyParity : ConsumerResidualBodyParity
 canonicalConsumerResidualBodyParity =
   consumerResidualBodyParity
-    true true true true true true true true true true true true true
+    true true true true true true true true
+    true true true true true true true true
 
 record ConsumerResidualRuntimeParity : Set where
   constructor consumerResidualRuntimeParity
@@ -146,10 +131,12 @@ record ConsumerResidualRuntimeParity : Set where
     incomingSLRWFramesPreserved : Bool
     paidRequirementEmitsGap : Bool
     paidRequirementEmitsObligation : Bool
+    paidRequirementEmitsTwoPaymentReceipts : Bool
     unpaidRequirementEmitsExactlyOneGap : Bool
     unpaidRequirementEmitsExactlyOneObligation : Bool
     gapUsesConsumerSurfaceAsAuxCoordinate : Bool
     obligationUsesNeedFragmentKindAsAuxCoordinate : Bool
+    paymentUsesTargetResidualAsAuxCoordinate : Bool
     otherSourceMayPayExactSourceRequirement : Bool
     paymentCreatesClaimTruth : Bool
     paymentCreatesSemanticEquivalence : Bool
@@ -166,7 +153,7 @@ canonicalConsumerResidualRuntimeParity : ConsumerResidualRuntimeParity
 canonicalConsumerResidualRuntimeParity =
   consumerResidualRuntimeParity
     true true true true true true
-    false false true true true true
+    false false true true true true true true
     false false false false false false false
     true false
 
@@ -202,12 +189,6 @@ jsonConsumerTransportForbidden ()
 
 regexConsumerRequirementParserForbidden : RegexConsumerRequirementParser → ⊥
 regexConsumerRequirementParserForbidden ()
-
-------------------------------------------------------------------------
--- Existing-owner anchors: consumer-relative closure and append-only evidence
--- contraction remain the semantic parents; this module only fixes the runtime
--- binary ABI and the first executable observation-payment rule.
-------------------------------------------------------------------------
 
 consumerClosureBoundaryAnchor : ConsumerClosure.SemanticConsumerClosureBoundary
 consumerClosureBoundaryAnchor = ConsumerClosure.canonicalSemanticConsumerClosureBoundary
