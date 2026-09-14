@@ -75,6 +75,7 @@ import DASHI.Interop.SLRBinaryWorldWireParityExact
 import DASHI.Interop.SLRSpacyObservationWorldCompilerParityExact
 import DASHI.Interop.SLRCompiledWorldBodyParityExact
 import DASHI.Interop.SLRConsumerResidualCompilerParityExact
+import DASHI.Interop.SLRConsumerRequirementV2Exact
 import DASHI.Interop.SLRAppendOnlyActiveResidualFrontierExact
 import DASHI.Interop.SLRResidualDrivenProducerPlannerExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
