@@ -83,5 +83,6 @@ import DASHI.Interop.SLRBinaryRouteCandidateParetoExact
 import DASHI.Interop.SLRWikidataRdfCandidateProviderExact
 import DASHI.Interop.SLRSelectedRouteExecutionNextObservationExact
 import DASHI.Interop.SLRBoundedResearchIterationControlExact
+import DASHI.Interop.SensibLawFederatedZOSAcquisitionExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
