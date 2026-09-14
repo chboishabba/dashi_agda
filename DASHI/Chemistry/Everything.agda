@@ -143,3 +143,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseRateObserver
 -- different population summaries. Axis-erased observation is inadequate for
 -- that query; retaining the measurement axis repairs the finite collision.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverAxisExact
+
+-- Observer-axis join: either single FRET coordinate can collide while the
+-- transverse coordinate changes.  The joined LID--NMP × LID--CORE observer
+-- retains both declared axes by the generic required-axis join theorem, without
+-- claiming complete protein-state recovery or simultaneous historical readout.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverJoinExact
