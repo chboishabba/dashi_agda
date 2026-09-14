@@ -6,12 +6,14 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
 import DASHI.Law.SensibLawInternationalInstrumentLifecycleExact as Lifecycle
+import DASHI.Law.SensibLawTreatyParticipationExact as Participation
 
 ------------------------------------------------------------------------
 -- 2026 CCW / GGE ON LAWS — SOURCE-BOUND SNAPSHOT
 --
 -- Primary-source discipline:
 --   * UN/UNODA documents pay mandate/session/document-status coordinates.
+--   * UN Treaty Collection depositary data pay participation/effect coordinates.
 --   * A government mission report is retained as a post-session consensus
 --     report, not promoted into a treaty or independent legal authority.
 --   * No DOI/QID/Dewey/OEIS identifier is invented.  Absence here is local to
@@ -59,11 +61,29 @@ ccwSeptember2026ConsensusReportSource =
     "Official post-session government report of consensus on basic elements; retained as a status report and not treated as an adopted treaty/protocol or as proof of binding legal effect"
     Source.publicAttribution
 
+ccwDepositaryStatusSource : Source.AttributedSource
+ccwDepositaryStatusSource =
+  Source.mkNoDOISource
+    "Secretary-General of the United Nations, depositary"
+    "Status of the Convention on Certain Conventional Weapons, Chapter XXVI-2"
+    "United Nations Treaty Collection"
+    "2026"
+    "https://treaties.un.org/pages/ViewDetails.aspx?chapter=26&mtdsg_no=XXVI-2&src=TREATY"
+    Source.institutionalSource
+    "Primary depositary status source for entry into force and State participation; pays status/date coordinates only and does not create substantive IHL rules or infer participation in every annexed Protocol"
+    Source.publicAttribution
+
+ccwDepositaryStatusSourceSnowballReceipt :
+  AttributionSnowball.SourceRoleSnowballReceipt ccwDepositaryStatusSource
+ccwDepositaryStatusSourceSnowballReceipt =
+  AttributionSnowball.canonicalSourceRoleSnowballReceipt ccwDepositaryStatusSource
+
 ccwLAWS2026Sources : List Source.AttributedSource
 ccwLAWS2026Sources =
   ccwGGE2026AgendaSource
   ∷ ccwGGEFirst2026ChairSummarySource
   ∷ ccwSeptember2026ConsensusReportSource
+  ∷ ccwDepositaryStatusSource
   ∷ []
 
 ccwLAWS2026SourceAtlas : Source.AttributedSourceAtlas
@@ -72,7 +92,7 @@ ccwLAWS2026SourceAtlas =
     "2026 CCW/GGE LAWS lifecycle source atlas"
     "DASHI.Law.SensibLawCCWLAWS2026Exact"
     ccwLAWS2026Sources
-    "Mandate, session dates, chair-summary status and September 2026 consensus-elements status only; does not establish a treaty, entry into force, State consent, universal binding effect, event-level applicability or independent legal authority"
+    "Mandate, session dates, chair-summary status, September 2026 consensus-elements status and depositary participation/effect status only; does not establish a future LAWS treaty, State consent to such a future instrument, universal binding effect, event-level applicability or independent legal authority"
 
 ccwLAWS2026SourceAtlasCreatesAuthority : Bool
 ccwLAWS2026SourceAtlasCreatesAuthority =
@@ -82,6 +102,37 @@ ccwLAWS2026SourceAtlasCreatesAuthorityIsFalse :
   ccwLAWS2026SourceAtlasCreatesAuthority ≡ false
 ccwLAWS2026SourceAtlasCreatesAuthorityIsFalse =
   Source.atlasCreatesAuthorityIsFalse ccwLAWS2026SourceAtlas
+
+------------------------------------------------------------------------
+-- Current depositary coordinates retained as source-bound strings.
+--
+-- The UN Treaty Collection status page observed on 11 September 2026 reports
+-- the parent CCW as in force since 2 December 1983 with 128 parties.  Separate
+-- annexed protocols have their own participation/effect coordinates; e.g. the
+-- amended Protocol II page reports 107 parties.  These coordinates witness the
+-- structural distinction; they are not a claim that protocol counts are static.
+------------------------------------------------------------------------
+
+ccwParentConventionEntryIntoForce : String
+ccwParentConventionEntryIntoForce = "1983-12-02"
+
+ccwParentConventionPartyCountSnapshot : String
+ccwParentConventionPartyCountSnapshot = "128"
+
+ccwAmendedProtocolIIPartyCountSnapshot : String
+ccwAmendedProtocolIIPartyCountSnapshot = "107"
+
+ccwDepositarySnapshotDate : String
+ccwDepositarySnapshotDate = "2026-09-11"
+
+parentConventionPartyCountDoesNotDetermineProtocolPartyCount : Bool
+parentConventionPartyCountDoesNotDetermineProtocolPartyCount = true
+
+parentConventionParticipationDoesNotManufactureProtocolConsent : Bool
+parentConventionParticipationDoesNotManufactureProtocolConsent = true
+
+depositaryStatusDoesNotCreateSubstantiveIHLRule : Bool
+depositaryStatusDoesNotCreateSubstantiveIHLRule = true
 
 ------------------------------------------------------------------------
 -- Snapshot as of the close of the second 2026 GGE session.
@@ -109,6 +160,18 @@ september2026LifecycleSnapshot =
     september2026InstrumentNature
     september2026LegalEffectStatus
     september2026ApplicabilityStatus
+
+------------------------------------------------------------------------
+-- Cross-pollination into the participation carrier.
+------------------------------------------------------------------------
+
+ccwParentConventionPartyDoesNotDetermineProtocolBinding :
+  Adequacy.QueryAdequacyDefect
+    Participation.parentConventionOnlyProjection
+    Participation.participationSemantics
+    Participation.protocolBindingQuery
+ccwParentConventionPartyDoesNotDetermineProtocolBinding =
+  Participation.parentConventionOnlyProtocolBindingAdequacyDefect
 
 ------------------------------------------------------------------------
 -- Attribution/status firewalls.
