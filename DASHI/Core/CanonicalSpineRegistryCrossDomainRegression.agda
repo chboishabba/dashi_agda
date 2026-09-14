@@ -33,6 +33,9 @@ attributionCanonical = Registry.attributedSourceOwner
 appendOnlyCanonical : Registry.CanonicalOwner
 appendOnlyCanonical = Registry.appendOnlyRevisionOwner
 
+residualActionCanonical : Registry.CanonicalOwner
+residualActionCanonical = Registry.residualActionPolicyOwner
+
 genericReceiptCanonical : Registry.CanonicalOwner
 genericReceiptCanonical = Registry.genericReceiptOwner
 
@@ -43,3 +46,7 @@ factorisationParallelDefinitionsBlocked = refl
 batchParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed batchCanonical ≡ false
 batchParallelDefinitionsBlocked = refl
+
+residualActionParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed residualActionCanonical ≡ false
+residualActionParallelDefinitionsBlocked = refl
