@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
+import DASHI.Core.CoarseFineFabricCalculusExact as Calculus
 import DASHI.Interop.CrossLaneProofArchaeologyLedgerExact as Ledger
 
 ------------------------------------------------------------------------
@@ -109,6 +110,36 @@ surfacePlusResidualDeterminesAnchor :
   left ≡ right
 surfacePlusResidualDeterminesAnchor =
   Fibre.coarseAndRelativeFineDetermineState proofAnchorReopening
+
+------------------------------------------------------------------------
+-- Any concrete chronology/provenance-sensitive consumer of anchors can now use
+-- the repo-wide projection-collision theorem directly.  No collision pair is
+-- fabricated here; callers must provide the existing FineSensitiveConsumer.
+------------------------------------------------------------------------
+
+proofResidualSensitiveConsumerProjectsToCollision :
+  ∀ {Observation : Set}
+    {observe : Ledger.DatedAnchor → Observation} →
+  Fibre.FineSensitiveConsumer proofAnchorReopening observe →
+  Calculus.ProjectionCollision proofAnchorSurface observe
+proofResidualSensitiveConsumerProjectsToCollision witness =
+  Calculus.projectionCollision
+    (Fibre.left witness)
+    (Fibre.right witness)
+    (Fibre.sameCoarse witness)
+    (Fibre.consumerSeparates witness)
+
+proofResidualSensitiveConsumerRefutesSurfaceOnly :
+  ∀ {Observation : Set}
+    {observe : Ledger.DatedAnchor → Observation} →
+  Fibre.FineSensitiveConsumer proofAnchorReopening observe →
+  (surfaceObserve : ProofAnchorSurface → Observation) →
+  ((anchor : Ledger.DatedAnchor) →
+    observe anchor ≡ surfaceObserve (proofAnchorSurface anchor)) →
+  ⊥
+proofResidualSensitiveConsumerRefutesSurfaceOnly witness =
+  Calculus.consumerCannotFactorThroughProjection
+    (proofResidualSensitiveConsumerProjectsToCollision witness)
 
 record ProofArchaeologyCoarseFineBoundary : Set where
   constructor proofArchaeologyCoarseFineBoundary
