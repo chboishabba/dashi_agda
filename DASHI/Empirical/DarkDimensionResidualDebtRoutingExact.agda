@@ -44,6 +44,24 @@ bedroyaSameObjectGapRoutesToIdentityProducer :
   ≡ Search.identityProducer
 bedroyaSameObjectGapRoutesToIdentityProducer = refl
 
+-- Executable source-diligence demand for the live child residual.  Parent or
+-- ancestor model genealogy may inform where to search, but cannot substitute
+-- for identity/custody of the 2026 same-fit numerical object itself.
+bedroyaManifestIdentitySearchDemand : SourceSearch.SourceDiligenceSearchDemand
+bedroyaManifestIdentitySearchDemand =
+  SourceSearch.source-diligence-search-demand
+    "2026 same-fit parameter manifest and normalization custody"
+    bedroyaFirstMissingSourceCoordinate
+    Search.identityProducer
+    refl
+    "DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact"
+    "bedroya-same-object-manifest-normalization-demand"
+
+bedroyaManifestSearchDemandRoutesToIdentityProducer :
+  SourceSearch.producer bedroyaManifestIdentitySearchDemand
+  ≡ Search.identityProducer
+bedroyaManifestSearchDemandRoutesToIdentityProducer = refl
+
 bedroyaAcquisitionStillOpen :
   BedroyaManifest.exactStandardBestFitTuplePublished
     BedroyaManifest.canonicalBedroyaParameterManifestStatus
