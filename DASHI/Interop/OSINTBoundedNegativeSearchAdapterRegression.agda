@@ -25,7 +25,8 @@ data InScope : Candidate → Set where
 data Matches : Candidate → Set where
 
 boundedSearch : Negative.BoundedNegativeSearch InScope Matches
-boundedSearch = Negative.bounded-negative-search (λ candidate inScope match → case match of λ ())
+boundedSearch =
+  Negative.bounded-negative-search (λ candidate inScope ())
 
 coverage : Negative.SearchCoverage InScope
 coverage = Negative.search-coverage (λ { onlyCandidate → onlyCandidateInScope })
