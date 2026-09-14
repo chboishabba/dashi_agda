@@ -148,6 +148,12 @@ attributedSourceOwner = canonical-owner
   "DASHI.Core.AttributedSourceCore"
   exactInterface false refl
 
+attributionSnowballOwner : CanonicalOwner
+attributionSnowballOwner = canonical-owner
+  "snowball retention of source identity, source role, visibility, proof non-import, and authority non-creation"
+  "DASHI.Core.SnowballAttributionProvenanceInvariantExact"
+  exactInterface false refl
+
 appendOnlyRevisionOwner : CanonicalOwner
 appendOnlyRevisionOwner = canonical-owner
   "append-only evidence history with non-monotone conclusion and residual revision"
@@ -192,6 +198,7 @@ canonicalOwners =
   ∷ localGlobalGluingOwner
   ∷ candidateObjectIdentityOwner
   ∷ attributedSourceOwner
+  ∷ attributionSnowballOwner
   ∷ appendOnlyRevisionOwner
   ∷ residualActionPolicyOwner
   ∷ typedDependencyOwner
