@@ -12,6 +12,7 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact as BedroyaBackground
 import DASHI.Empirical.DarkDimensionBedroyaBackgroundInputContractExact as BedroyaInput
 import DASHI.Empirical.DarkDimensionBedroyaConditionalRuntimeExact as BedroyaRuntime
+import DASHI.Empirical.DarkDimensionBedroyaBAOReadinessExact as BedroyaBAOReadiness
 import DASHI.Empirical.DarkDimensionBedroyaSameObjectAcquisitionExact as BedroyaAcquisition
 import DASHI.Empirical.DarkDimensionCrossDomainEvidenceWeldExact as CrossDomain
 import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
@@ -180,6 +181,23 @@ bedroyaBAONormalizationStillBlocked :
   ≡ false
 bedroyaBAONormalizationStillBlocked = BedroyaRuntime.canonicalBAONormalizationStillBlocked
 
+record BedroyaTwoStageBAOReadinessOpen : Set where
+  field
+    backgroundStageOpen :
+      BedroyaInput.completeBackgroundInputManifestLocated
+        BedroyaInput.canonicalBedroyaBackgroundInputStatus
+      ≡ false
+    rDragStageOpen :
+      BedroyaInput.exactRDragSameFitLocated
+        BedroyaInput.canonicalBedroyaBackgroundInputStatus
+      ≡ false
+
+bedroyaTwoStageBAOReadinessStillOpen : BedroyaTwoStageBAOReadinessOpen
+bedroyaTwoStageBAOReadinessStillOpen = record
+  { backgroundStageOpen = BedroyaBAOReadiness.backgroundInputStillOpen
+  ; rDragStageOpen = BedroyaBAOReadiness.rDragStillOpen
+  }
+
 daoExtractionRecipeLocatedButExecutionStillOpen :
   DAORecipe.recipeExecuted DAORecipe.daoPinnedExtractionRecipe ≡ false
 daoExtractionRecipeLocatedButExecutionStillOpen = DAORecipe.recipeExecutionStillOpen
@@ -228,37 +246,26 @@ mkOpenPredictionRequest key =
 
 lrg1TransversePredictionRequest : SameKeyPredictionRequest
 lrg1TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg1TransverseKey
-
 lrg1RadialPredictionRequest : SameKeyPredictionRequest
 lrg1RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg1RadialKey
-
 lrg2TransversePredictionRequest : SameKeyPredictionRequest
 lrg2TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg2TransverseKey
-
 lrg2RadialPredictionRequest : SameKeyPredictionRequest
 lrg2RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg2RadialKey
-
 lrg3Elg1TransversePredictionRequest : SameKeyPredictionRequest
 lrg3Elg1TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg3Elg1TransverseKey
-
 lrg3Elg1RadialPredictionRequest : SameKeyPredictionRequest
 lrg3Elg1RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg3Elg1RadialKey
-
 elg2TransversePredictionRequest : SameKeyPredictionRequest
 elg2TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.elg2TransverseKey
-
 elg2RadialPredictionRequest : SameKeyPredictionRequest
 elg2RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.elg2RadialKey
-
 qsoTransversePredictionRequest : SameKeyPredictionRequest
 qsoTransversePredictionRequest = mkOpenPredictionRequest ObservationKey.qsoTransverseKey
-
 qsoRadialPredictionRequest : SameKeyPredictionRequest
 qsoRadialPredictionRequest = mkOpenPredictionRequest ObservationKey.qsoRadialKey
-
 lyaTransversePredictionRequest : SameKeyPredictionRequest
 lyaTransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lyaTransverseKey
-
 lyaRadialPredictionRequest : SameKeyPredictionRequest
 lyaRadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lyaRadialKey
 
