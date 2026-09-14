@@ -32,6 +32,10 @@ import DASHI.Combinatorics.GraphColouringBundleGluingAdapterExact
 import DASHI.ComputerScience.RSA260BundleGluingAdapterExact
 import DASHI.Reasoning.WavePantsBundleGluingAdapterExact
 
+import DASHI.Interop.CrossLaneProofArchaeologyLedgerExact
+import DASHI.Interop.ProofArchaeologyCoarseFineAdapterExact
+import DASHI.Interop.ProofArchaeologyCoarseFineAdapterRegression
+
 import DASHI.Physics.ShiftWaveRefinementSeam
 import DASHI.Physics.WaveProjectionLossAdapterExact
 
