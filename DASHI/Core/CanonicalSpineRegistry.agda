@@ -68,6 +68,12 @@ boundedNegativeSearchOwner = canonical-owner
   "DASHI.Core.BoundedNegativeSearchExact"
   exactInterface false refl
 
+robustExperimentInferenceOwner : CanonicalOwner
+robustExperimentInferenceOwner = canonical-owner
+  "robust experiment frontier separating training fit, held-out repair, model adequacy, and experiment design"
+  "DASHI.Core.RobustExperimentInferenceFrontierExact"
+  exactInterface false refl
+
 projectionFibreOwner : CanonicalOwner
 projectionFibreOwner = canonical-owner "coarse/fine projection with retained relative-fine fibre and exact reopening" "DASHI.Core.CoarseFineRelativeFibreExact" exactInterface false refl
 
@@ -108,11 +114,12 @@ canonicalOwners : List CanonicalOwner
 canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
   descentOwner ∷ approximateNaturalityOwner ∷ kernelSplitOwner ∷ codingTargetOwner ∷
-  continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷ boundedNegativeSearchOwner ∷ projectionFibreOwner ∷
-  consumerFibreRepairOwner ∷ candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷
-  localGlobalGluingOwner ∷ candidateObjectIdentityOwner ∷ attributedSourceOwner ∷
-  attributionSnowballOwner ∷ appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷
-  typedDependencyOwner ∷ genericReceiptOwner ∷ []
+  continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷ boundedNegativeSearchOwner ∷
+  robustExperimentInferenceOwner ∷ projectionFibreOwner ∷ consumerFibreRepairOwner ∷
+  candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷
+  candidateObjectIdentityOwner ∷ attributedSourceOwner ∷ attributionSnowballOwner ∷
+  appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷ typedDependencyOwner ∷
+  genericReceiptOwner ∷ []
 
 record RepositoryClosureBoundary : Set where
   constructor repository-closure-boundary
