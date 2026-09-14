@@ -28,6 +28,7 @@ open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _+_; _≤_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact as Sum
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
 import DASHI.Physics.Closure.NSTriadKNLuoScopedPairedSecondMomentBudgetExact as Scoped
 
@@ -133,11 +134,9 @@ compiledCoefficientIsSplitCoefficient package = refl
 
 compiledFiniteSecondMomentBound :
   (package : R571PhysicalSecondMomentEnvelopePackage) →
-  DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact.sumBy
-    (family package) Moment.pairedMagnitude
+  Sum.sumBy (family package) Moment.pairedMagnitude
   ≤ splitSecondMomentCoefficient package
-      * DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact.sumBy
-          (family package) Moment.weightedSecondMoment
+      * Sum.sumBy (family package) Moment.weightedSecondMoment
 compiledFiniteSecondMomentBound package =
   Scoped.finiteScopedPairedSecondMomentBound (compileScopedBudget package)
 
