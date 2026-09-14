@@ -7,6 +7,7 @@ import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ConsumerFibreRepairExact as Repair
 import DASHI.Core.CoarseFineFabricCalculusExact as Coarse
 
 ------------------------------------------------------------------------
@@ -152,7 +153,7 @@ nonDescentToNonFactorability witness =
     (nonDescentToProjectionCollision witness)
 
 ------------------------------------------------------------------------
--- Shared obstruction theorem through the canonical crosswalk.
+-- Shared obstruction / repair theorems through the canonical crosswalk.
 ------------------------------------------------------------------------
 
 projectionCollisionBlocksFactorizedRefinement :
@@ -167,6 +168,19 @@ projectionCollisionBlocksFactorizedRefinement collision factor =
     (projectionCollisionToNonFactorability collision)
     (factorizedToNonFactor factor)
 
+projectionCollisionRepairRequiresSeparation :
+  ∀ {State Surface Refinement Outcome : Set}
+    {project : State → Surface}
+    {refine : State → Refinement}
+    {consumer : State → Outcome} →
+  (collision : Coarse.ProjectionCollision project consumer) →
+  Repair.RefinementRepairs project refine consumer →
+  refine (Coarse.left collision) ≡ refine (Coarse.right collision) →
+  ⊥
+projectionCollisionRepairRequiresSeparation collision =
+  Repair.refinementRepairSeparatesWitness
+    (projectionCollisionToNonDescent collision)
+
 record FactorisationCrosswalkBoundary : Set where
   constructor factorisation-crosswalk-boundary
   field
@@ -174,6 +188,8 @@ record FactorisationCrosswalkBoundary : Set where
     canonicalFactorisationTranslatesToFactorizedRefinement : Bool
     projectionCollisionTranslatesToNonFactorability : Bool
     projectionCollisionTranslatesToConsumerNonDescent : Bool
+    sufficientRepairMustSeparateWitnessedCollision : Bool
+    separatingOneCollisionAloneProvesGlobalSufficiency : Bool
     queryIndexingStillAddsStructure : Bool
     sectionedProjectionStillAddsConstructiveDescentStructure : Bool
     historicalOwnersMustBeDeleted : Bool
@@ -186,6 +202,8 @@ canonicalFactorisationCrosswalkBoundary =
     true
     true
     true
+    true
+    false
     true
     true
     false
