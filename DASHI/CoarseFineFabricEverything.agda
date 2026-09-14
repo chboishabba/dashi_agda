@@ -31,6 +31,8 @@ import DASHI.Core.NDimProjectionLossAdapterExact
 import DASHI.Core.DynamicalQuotientSafety
 import DASHI.Core.CoarseDynamicsTraceCongruenceExact
 import DASHI.Core.CoarseDynamicsTraceCongruenceRegression
+import DASHI.Core.FrozenProvenanceDynamicRefinementExact
+import DASHI.Core.FrozenProvenanceDynamicRefinementRegression
 import DASHI.Core.CandidateFamilyExecutionExact
 import DASHI.Core.CandidateFamilyExecutionRegression
 import DASHI.Core.RequirementConflictBatchExecutionExact
