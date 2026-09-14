@@ -26,6 +26,7 @@ data CounselTaskKind : Set where
 
 data CounselPriority : Set where
   urgentBeforeFederalDeadline : CounselPriority
+  urgentBeforePhysicalExecution : CounselPriority
   highAlphaParallel : CounselPriority
   conditionalBackstop : CounselPriority
 
@@ -43,6 +44,18 @@ record CounselHandoffIssue : Set where
     dashConclusionIsLegalAdvice : Bool
 
 open CounselHandoffIssue public
+
+condition6aExecutionCounselIssue : CounselHandoffIssue
+condition6aExecutionCounselIssue = counsel-handoff-issue
+  Roadmap.condition6aExecutionGate
+  evidencePreservationAdvice
+  urgentBeforePhysicalExecution
+  "9281/2024/OW execution gate: determine the legal significance of negotiated Condition 6(a) and the safest preservation response once the literal Council-held satisfaction material and same-clearing-phase pre-start package are acquired."
+  "Local operational-works approval is source-paid; Condition 6(a) requires a Commonwealth-status record before pre-start; the approved-plan generic EPBC note and source-derived overlap are source-paid only in bounded roles; public non-location is not proof of non-submission."
+  "Identify what exact Commonwealth-status document would satisfy Condition 6(a), whether Council acceptance has legal significance beyond local-condition administration, how same-action/geometry/phase/operative-time should be tested, and what immediate preservation step is available if the acquired record does not cover the proposed clearing."
+  "Literal Condition 6(a) submission; Council receipt/assessment/acceptance; signed same-clearing-phase Environmental Pre-Clearance Package; pre-start/fauna/arborist/access records; authoritative local/Commonwealth geometry; dated execution evidence."
+  "before the relevant clearing phase or mobilisation; do not wait for physical clearing if proposed conduct becomes evidentially concrete"
+  false
 
 federalDecisionCounselIssue : CounselHandoffIssue
 federalDecisionCounselIssue = counsel-handoff-issue
@@ -112,7 +125,7 @@ enforcementCounselIssue = counsel-handoff-issue
   "Map any imminent or proposed conduct to an exact EPBC/NCA contravention before seeking injunction/enforcement relief."
   "EPBC s 475 and Queensland NCA enforcement-order machinery exist as statutory routes."
   "Advise standing, exact cause/contravention, evidentiary preservation, urgency, costs/undertaking risks, and whether judicial review/declaratory relief is more appropriate."
-  "Exact threatened conduct and exact statutory contravention/offence."
+  "Exact threatened conduct and exact statutory contravention/offence, with Condition 6(a), same-phase, geometry and operative-time facts source-paid first."
   "activate only if facts satisfy the legal trigger"
   false
 
@@ -124,6 +137,7 @@ data DashReconstructionEqualsLegalAdvice : Set where
 data CounselReviewAutomaticallyPaysMissingFact : Set where
 data ProBonoRepresentationCreatesMerits : Set where
 data LawyerInvolvementCreatesStatutoryStanding : Set where
+data Condition6aRecordBeforeContraventionOpinion : Set where
 
 dashReconstructionDoesNotBecomeLegalAdvice :
   DashReconstructionEqualsLegalAdvice → ⊥
@@ -139,6 +153,10 @@ proBonoStatusDoesNotCreateMerits ()
 lawyerInvolvementDoesNotCreateStanding : LawyerInvolvementCreatesStatutoryStanding → ⊥
 lawyerInvolvementDoesNotCreateStanding ()
 
+condition6aRecordBeforeContraventionOpinion :
+  Condition6aRecordBeforeContraventionOpinion → ⊥
+condition6aRecordBeforeContraventionOpinion ()
+
 record CounselHandoffBoundary : Set where
   constructor counsel-handoff-boundary
   field
@@ -147,7 +165,8 @@ record CounselHandoffBoundary : Set where
     sourceAndInferenceSeparated : Bool
     proceduralVehicleTreatedAsSeparateFromMerits : Bool
     evidenceResidualsRemainOpenUntilPaid : Bool
+    condition6aExecutionGateEscalatedBeforeCourtConclusion : Bool
 
 canonicalCounselHandoffBoundary : CounselHandoffBoundary
 canonicalCounselHandoffBoundary =
-  counsel-handoff-boundary true true true true true
+  counsel-handoff-boundary true true true true true true
