@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Papers.NavierStokes.FourLaneProofProgramExact as Program
 import DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact as R568
 import DASHI.Physics.Closure.NSTriadKNDirectLeafACompilerRound572Exact as R572
 import DASHI.Physics.Closure.NSTriadKNDirectResolventSignedCrossToR415Round503Exact as R503
@@ -13,7 +14,7 @@ import DASHI.Physics.Closure.NSTriadKNComparableOutputGramTelescopeRound209Exact
 import DASHI.Physics.Closure.NSTriadKNComparableOutputResidualPaymentRound211Exact as R211
 import DASHI.Physics.Closure.NSTriadKNComparableConstantBandGramNoGoRound214Exact as R214
 
--- Historical/alternative route anchors retained deliberately.  They are no
+-- Historical/alternative route anchors retained deliberately. They are no
 -- longer the primary paper-facing producer path, but their theorem-bearing
 -- work and terminal guards remain part of the provenance record.
 import DASHI.Physics.Closure.NSA6TheoremLadderBoundary as A6
@@ -24,38 +25,87 @@ import DASHI.Physics.Closure.NSFinalStateReceipt as Final
 import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 
 ------------------------------------------------------------------------
--- Canonical Paper-1 theorem/status interface after the 2026-09-13 migration.
+-- Canonical Paper-1 theorem/status interface after the 2026-09-15 A/B/C/D
+-- nomenclature correction.
 --
--- Modern causal spine:
+-- Programme lanes:
+--   A = unforced whole-space R^3 regularity
+--   B = unforced periodic T^3 regularity
+--   C = forced whole-space R^3 breakdown verification/provenance
+--   D = forced periodic T^3 breakdown verification/provenance
 --
---   literal R406 / direct companion
---     -> R568 CommutatorOnlySpacetimeBudget568        [LIVE PRODUCER]
---     -> R572 DirectLeafAProducer572 compiler         [CONSTRUCTED GIVEN RECEIPTS]
---     -> R503 DirectOffDiagonalBudget / R415 consumer [CONSTRUCTED COMPILER SURFACE]
+-- Active B causal spine:
 --
--- Current local proof-search frontier:
+--   R571 signed/helical carrier
+--     -> centered/Taylor realization                 [OPEN]
+--     -> old second moment / six-three transplant   [OPEN]
+--     -> R568 CommutatorOnlySpacetimeBudget568      [LIVE PRODUCER]
+--     -> R572 DirectLeafAProducer572 compiler        [CONSTRUCTED GIVEN RECEIPTS]
+--     -> R503 DirectOffDiagonalBudget/R415 consumer  [CONSTRUCTED COMPILER SURFACE]
 --
---   same-output between-partner debt / P3 separation
---     -> R211 quantitative residual payment
+-- NOTE: the historical identifier `DirectLeafA...` is an owner name and does
+-- not mean programme Lane A.
 --
--- Historical A1-A9 and Round62-era routes are retained as predecessor and
--- alternative strategies; they are not erased or rewritten as if they never
--- existed.  None of the open producer fields below are promoted by this paper
--- interface.
+-- The same-output Gram/P3 route remains theorem-bearing historical provenance
+-- and negative-control infrastructure. It is not erased. It is no longer the
+-- primary B producer after the amplitude telescope exposed a many-to-one
+-- observable map that blocks incidence-only lower separation.
 ------------------------------------------------------------------------
 
 historicalAlternativeRouteStatement : String
 historicalAlternativeRouteStatement =
-  "Historical/alternative A1-A9 ESS/Abel-defect and Round62 Com/Schur routes are retained as dated predecessor strategies. They contributed theorem-bearing reductions and diagnostics but are no longer the primary Paper-1 producer path because the current shortest same-object chain runs through the literal R406/direct-companion construction and the R568 commutator-only spacetime leaf."
+  "Historical/alternative A1-A9 ESS/Abel-defect, Round62 Com/Schur, and same-output Gram/P3 routes are retained as dated predecessor strategies. They contributed theorem-bearing reductions, diagnostics, PSD/difference infrastructure, and negative controls. The Gram/P3 route was abandoned as the primary periodic-B producer after the exact amplitude telescope exposed a many-to-one observable map, so incidence geometry alone cannot force the uniform compressed-cell separation it required."
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: C_direct / the integrated direct companion is constructed modulo the explicit standard integration authority; CommutatorOnlySpacetimeBudget568 is the live cutoff-uniform PDE producer; R572 compiles a paid R568 budget and standard temporal/order receipts into the pre-existing R503 DirectOffDiagonalBudget/R415 consumer; the same-output between-partner debt and its P3 physical separation producer remain open; A1-A9 and the Round62 Com/Schur path remain visible as historical/alternative provenance; no unconditional Clay Navier-Stokes or terminal promotion is made."
+  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. C_direct is constructed modulo explicit standard integration authority; the current B proof search preserves the R571 signed carrier into centered/Taylor and second-moment/six-three machinery before the live R568 cutoff-uniform PDE producer; R572 compiles a paid R568 budget and standard temporal/order receipts into the pre-existing R503 DirectOffDiagonalBudget/R415 consumer. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
 
 record NSPaperTheoremStatus : Setω where
   field
     ----------------------------------------------------------------------
-    -- Modern canonical spine.
+    -- Four-lane programme / transfer firewall.
+    ----------------------------------------------------------------------
+    fourLaneProgram : Program.NSFourLaneProofProgram
+    fourLaneProgramIsCanonical :
+      fourLaneProgram ≡ Program.canonicalNSFourLaneProofProgram
+
+    periodicBIsActiveConstruction : Bool
+    periodicBIsActiveConstructionMatchesProgram :
+      periodicBIsActiveConstruction
+      ≡ Program.periodicBIsActiveConstruction Program.canonicalNSFourLaneProofProgram
+    periodicBIsActiveConstructionIsTrue :
+      periodicBIsActiveConstruction ≡ true
+
+    wholeSpaceAIsIndependentObligation : Bool
+    wholeSpaceAIsIndependentObligationMatchesProgram :
+      wholeSpaceAIsIndependentObligation
+      ≡ Program.wholeSpaceAIsIndependentObligation Program.canonicalNSFourLaneProofProgram
+    wholeSpaceAIsIndependentObligationIsTrue :
+      wholeSpaceAIsIndependentObligation ≡ true
+
+    periodicBProofProgressDoesNotPromoteWholeSpaceA : Bool
+    periodicBProofProgressDoesNotPromoteWholeSpaceAMatchesProgram :
+      periodicBProofProgressDoesNotPromoteWholeSpaceA
+      ≡ Program.periodicBProofProgressDoesNotPromoteWholeSpaceA Program.canonicalNSFourLaneProofProgram
+    periodicBProofProgressDoesNotPromoteWholeSpaceAIsTrue :
+      periodicBProofProgressDoesNotPromoteWholeSpaceA ≡ true
+
+    wholeSpaceAProofProgressDoesNotPromotePeriodicB : Bool
+    wholeSpaceAProofProgressDoesNotPromotePeriodicBMatchesProgram :
+      wholeSpaceAProofProgressDoesNotPromotePeriodicB
+      ≡ Program.wholeSpaceAProofProgressDoesNotPromotePeriodicB Program.canonicalNSFourLaneProofProgram
+    wholeSpaceAProofProgressDoesNotPromotePeriodicBIsTrue :
+      wholeSpaceAProofProgressDoesNotPromotePeriodicB ≡ true
+
+    forcedCDDoesNotSettleUnforcedAB : Bool
+    forcedCDDoesNotSettleUnforcedABMatchesProgram :
+      forcedCDDoesNotSettleUnforcedAB
+      ≡ Program.forcedCDDoesNotSettleUnforcedAB Program.canonicalNSFourLaneProofProgram
+    forcedCDDoesNotSettleUnforcedABIsTrue :
+      forcedCDDoesNotSettleUnforcedAB ≡ true
+
+    ----------------------------------------------------------------------
+    -- Modern periodic-B canonical spine.
     ----------------------------------------------------------------------
     directCompanionConstructed : Bool
     directCompanionConstructedMatchesOwner :
@@ -63,6 +113,20 @@ record NSPaperTheoremStatus : Setω where
       ≡ R500.round500IntegratedDirectCompanionWeldClosedModuloIntegrationAuthority
     directCompanionConstructedIsTrue :
       directCompanionConstructed ≡ true
+
+    periodicBR571TaylorRealizationClosed : Bool
+    periodicBR571TaylorRealizationClosedMatchesProgram :
+      periodicBR571TaylorRealizationClosed
+      ≡ Program.periodicBR571TaylorRealizationClosed Program.canonicalNSFourLaneProofProgram
+    periodicBR571TaylorRealizationClosedIsFalse :
+      periodicBR571TaylorRealizationClosed ≡ false
+
+    periodicBSecondMomentSixThreeTransplantClosed : Bool
+    periodicBSecondMomentSixThreeTransplantClosedMatchesProgram :
+      periodicBSecondMomentSixThreeTransplantClosed
+      ≡ Program.periodicBSecondMomentSixThreeTransplantClosed Program.canonicalNSFourLaneProofProgram
+    periodicBSecondMomentSixThreeTransplantClosedIsFalse :
+      periodicBSecondMomentSixThreeTransplantClosed ≡ false
 
     commutatorOnlySpacetimeProducerClosed : Bool
     commutatorOnlySpacetimeProducerMatchesOwner :
@@ -92,7 +156,7 @@ record NSPaperTheoremStatus : Setω where
       directOffDiagonalBudgetPaid ≡ false
 
     ----------------------------------------------------------------------
-    -- Current proof-search frontier.
+    -- Historical same-output Gram/P3 route retained append-only.
     ----------------------------------------------------------------------
     sameOutputDebtIdentityConstructed : Bool
     sameOutputDebtIdentityConstructedMatchesOwner :
@@ -115,6 +179,20 @@ record NSPaperTheoremStatus : Setω where
     p3SeparationProducerClosedIsFalse :
       p3SeparationProducerClosed ≡ false
 
+    p3GramAttemptRetainedAsHistoricalProvenance : Bool
+    p3GramAttemptRetainedAsHistoricalProvenanceMatchesProgram :
+      p3GramAttemptRetainedAsHistoricalProvenance
+      ≡ Program.gramP3AttemptRetainedAsHistoricalProvenance Program.canonicalNSFourLaneProofProgram
+    p3GramAttemptRetainedAsHistoricalProvenanceIsTrue :
+      p3GramAttemptRetainedAsHistoricalProvenance ≡ true
+
+    p3GramAttemptAbandonedAsPrimaryRoute : Bool
+    p3GramAttemptAbandonedAsPrimaryRouteMatchesProgram :
+      p3GramAttemptAbandonedAsPrimaryRoute
+      ≡ Program.gramP3AttemptAbandonedAsPrimaryRoute Program.canonicalNSFourLaneProofProgram
+    p3GramAttemptAbandonedAsPrimaryRouteIsTrue :
+      p3GramAttemptAbandonedAsPrimaryRoute ≡ true
+
     constantBandLocalizationAlonePaysDebt : Bool
     constantBandLocalizationAlonePaysDebtMatchesNoGo :
       constantBandLocalizationAlonePaysDebt
@@ -123,7 +201,7 @@ record NSPaperTheoremStatus : Setω where
       constantBandLocalizationAlonePaysDebt ≡ false
 
     ----------------------------------------------------------------------
-    -- Historical provenance retained rather than rewritten away.
+    -- Earlier historical provenance retained rather than rewritten away.
     ----------------------------------------------------------------------
     historicalAlternativeRoute : String
     historicalAlternativeRouteIsCanonical :
@@ -169,10 +247,40 @@ record NSPaperTheoremStatus : Setω where
 canonicalNSPaperTheoremStatus : NSPaperTheoremStatus
 canonicalNSPaperTheoremStatus =
   record
-    { directCompanionConstructed =
+    { fourLaneProgram = Program.canonicalNSFourLaneProofProgram
+    ; fourLaneProgramIsCanonical = refl
+    ; periodicBIsActiveConstruction =
+        Program.periodicBIsActiveConstruction Program.canonicalNSFourLaneProofProgram
+    ; periodicBIsActiveConstructionMatchesProgram = refl
+    ; periodicBIsActiveConstructionIsTrue = refl
+    ; wholeSpaceAIsIndependentObligation =
+        Program.wholeSpaceAIsIndependentObligation Program.canonicalNSFourLaneProofProgram
+    ; wholeSpaceAIsIndependentObligationMatchesProgram = refl
+    ; wholeSpaceAIsIndependentObligationIsTrue = refl
+    ; periodicBProofProgressDoesNotPromoteWholeSpaceA =
+        Program.periodicBProofProgressDoesNotPromoteWholeSpaceA Program.canonicalNSFourLaneProofProgram
+    ; periodicBProofProgressDoesNotPromoteWholeSpaceAMatchesProgram = refl
+    ; periodicBProofProgressDoesNotPromoteWholeSpaceAIsTrue = refl
+    ; wholeSpaceAProofProgressDoesNotPromotePeriodicB =
+        Program.wholeSpaceAProofProgressDoesNotPromotePeriodicB Program.canonicalNSFourLaneProofProgram
+    ; wholeSpaceAProofProgressDoesNotPromotePeriodicBMatchesProgram = refl
+    ; wholeSpaceAProofProgressDoesNotPromotePeriodicBIsTrue = refl
+    ; forcedCDDoesNotSettleUnforcedAB =
+        Program.forcedCDDoesNotSettleUnforcedAB Program.canonicalNSFourLaneProofProgram
+    ; forcedCDDoesNotSettleUnforcedABMatchesProgram = refl
+    ; forcedCDDoesNotSettleUnforcedABIsTrue = refl
+    ; directCompanionConstructed =
         R500.round500IntegratedDirectCompanionWeldClosedModuloIntegrationAuthority
     ; directCompanionConstructedMatchesOwner = refl
     ; directCompanionConstructedIsTrue = refl
+    ; periodicBR571TaylorRealizationClosed =
+        Program.periodicBR571TaylorRealizationClosed Program.canonicalNSFourLaneProofProgram
+    ; periodicBR571TaylorRealizationClosedMatchesProgram = refl
+    ; periodicBR571TaylorRealizationClosedIsFalse = refl
+    ; periodicBSecondMomentSixThreeTransplantClosed =
+        Program.periodicBSecondMomentSixThreeTransplantClosed Program.canonicalNSFourLaneProofProgram
+    ; periodicBSecondMomentSixThreeTransplantClosedMatchesProgram = refl
+    ; periodicBSecondMomentSixThreeTransplantClosedIsFalse = refl
     ; commutatorOnlySpacetimeProducerClosed =
         R568.round568LiveCommutatorSpacetimeBudgetClosed
     ; commutatorOnlySpacetimeProducerMatchesOwner = refl
@@ -200,6 +308,14 @@ canonicalNSPaperTheoremStatus =
         R211.round211ConcreteSameOutputResidualPaymentConstructed
     ; p3SeparationProducerClosedMatchesPayment = refl
     ; p3SeparationProducerClosedIsFalse = refl
+    ; p3GramAttemptRetainedAsHistoricalProvenance =
+        Program.gramP3AttemptRetainedAsHistoricalProvenance Program.canonicalNSFourLaneProofProgram
+    ; p3GramAttemptRetainedAsHistoricalProvenanceMatchesProgram = refl
+    ; p3GramAttemptRetainedAsHistoricalProvenanceIsTrue = refl
+    ; p3GramAttemptAbandonedAsPrimaryRoute =
+        Program.gramP3AttemptAbandonedAsPrimaryRoute Program.canonicalNSFourLaneProofProgram
+    ; p3GramAttemptAbandonedAsPrimaryRouteMatchesProgram = refl
+    ; p3GramAttemptAbandonedAsPrimaryRouteIsTrue = refl
     ; constantBandLocalizationAlonePaysDebt =
         R214.round214ConstantShellBandAlonePaysGramDebt
     ; constantBandLocalizationAlonePaysDebtMatchesNoGo = refl
