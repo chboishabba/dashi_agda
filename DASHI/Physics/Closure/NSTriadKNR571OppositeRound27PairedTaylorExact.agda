@@ -16,6 +16,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -30,18 +31,14 @@ record OppositeRound27PairData : Set₁ where
   field
     sign : R311.HelicitySign
     scalars : Helical.HelicalModeScalars Weld.F
-
     centerMode plusMode minusMode : Z3.FourierMode
     plusShift minusShift : Z3.FourierMode
     plusState minusState : R27.FourierStateCarrier
-
     kernelWeight linearModel gPlus gMinus : ℚ
-
     plusShiftLandsAtCenter :
       R27.shiftedMode plusShift plusMode ≡ centerMode
     minusShiftLandsAtCenter :
       R27.shiftedMode minusShift minusMode ≡ centerMode
-
     plusStateAtCenter :
       R27.stateCoefficient plusState centerMode ≡ gPlus
     minusStateAtCenter :
@@ -81,38 +78,28 @@ pairedPlusIsTaylorPlus :
   Centered.aPlus (pairedCenteredSample dataSet)
   ≡ Taylor.plusValue (pairedTaylor dataSet)
 pairedPlusIsTaylorPlus dataSet =
-  R.radialTaylorPlusValueExact
-    (sign dataSet)
-    (scalars dataSet)
-    (centerMode dataSet)
-    (plusMode dataSet)
-    (minusMode dataSet)
-    (linearModel dataSet)
-    |> sym
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
-    infixl 0 _|>_
-    _|>_ : ∀ {a b : Set} → a → (a → b) → b
-    x |> f = f x
+  sym
+    (R.radialTaylorPlusValueExact
+      (sign dataSet)
+      (scalars dataSet)
+      (centerMode dataSet)
+      (plusMode dataSet)
+      (minusMode dataSet)
+      (linearModel dataSet))
 
 pairedMinusIsTaylorMinus :
   (dataSet : OppositeRound27PairData) →
   Centered.aMinus (pairedCenteredSample dataSet)
   ≡ Taylor.minusValue (pairedTaylor dataSet)
 pairedMinusIsTaylorMinus dataSet =
-  R.radialTaylorMinusValueExact
-    (sign dataSet)
-    (scalars dataSet)
-    (centerMode dataSet)
-    (plusMode dataSet)
-    (minusMode dataSet)
-    (linearModel dataSet)
-    |> sym
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
-    infixl 0 _|>_
-    _|>_ : ∀ {a b : Set} → a → (a → b) → b
-    x |> f = f x
+  sym
+    (R.radialTaylorMinusValueExact
+      (sign dataSet)
+      (scalars dataSet)
+      (centerMode dataSet)
+      (plusMode dataSet)
+      (minusMode dataSet)
+      (linearModel dataSet))
 
 pairedRound27Scalar : OppositeRound27PairData → ℚ
 pairedRound27Scalar dataSet =
@@ -149,9 +136,6 @@ oppositeRound27PairCenteredIdentity :
   ≡ Centered.weightedCenteredBranch (pairedCenteredSample dataSet)
     + Centered.weightedHighDifferenceBranch (pairedCenteredSample dataSet)
 oppositeRound27PairCenteredIdentity dataSet =
-  let
-    open import Relation.Binary.PropositionalEquality using (trans)
-  in
   trans
     (oppositeRound27PairIsCenteredRawPair dataSet)
     (Centered.weightedPairedCommutatorIdentity (pairedCenteredSample dataSet))
