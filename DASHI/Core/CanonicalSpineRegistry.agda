@@ -62,6 +62,12 @@ queryIndexedProjectionOwner = canonical-owner
   "DASHI.Core.QueryIndexedProjectionAdequacyExact"
   exactInterface false refl
 
+observerRefinementOwner : CanonicalOwner
+observerRefinementOwner = canonical-owner
+  "observer fibres, strict refinement, observer families, pair observers, and monotone residual-fibre shrinkage"
+  "DASHI.Core.ObserverRefinementLatticeExact"
+  exactInterface false refl
+
 requiredObserverAxisJoinOwner : CanonicalOwner
 requiredObserverAxisJoinOwner = canonical-owner
   "joint retention of multiple consumer-required observer axes, with exact product factorisation and per-axis defect blocking"
@@ -157,14 +163,14 @@ canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
   descentOwner ∷ approximateNaturalityOwner ∷ kernelSplitOwner ∷ codingTargetOwner ∷
   continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷
-  requiredObserverAxisJoinOwner ∷ experimentalCoordinateOwner ∷ declaredScenarioRobustnessOwner ∷
-  osintAcquisitionOwner ∷ boundedNegativeSearchOwner ∷ robustExperimentInferenceOwner ∷
-  multipartReconstructionOwner ∷ projectionFibreOwner ∷ consumerFibreRepairOwner ∷
-  frozenProvenanceDynamicOwner ∷ queryIndexedFutureSafePromotionOwner ∷
-  candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷
-  candidateObjectIdentityOwner ∷ attributedSourceOwner ∷ attributionSnowballOwner ∷
-  appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷ typedDependencyOwner ∷
-  genericReceiptOwner ∷ []
+  observerRefinementOwner ∷ requiredObserverAxisJoinOwner ∷ experimentalCoordinateOwner ∷
+  declaredScenarioRobustnessOwner ∷ osintAcquisitionOwner ∷ boundedNegativeSearchOwner ∷
+  robustExperimentInferenceOwner ∷ multipartReconstructionOwner ∷ projectionFibreOwner ∷
+  consumerFibreRepairOwner ∷ frozenProvenanceDynamicOwner ∷
+  queryIndexedFutureSafePromotionOwner ∷ candidateFamilyExecutionOwner ∷
+  requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷ candidateObjectIdentityOwner ∷
+  attributedSourceOwner ∷ attributionSnowballOwner ∷ appendOnlyRevisionOwner ∷
+  residualActionPolicyOwner ∷ typedDependencyOwner ∷ genericReceiptOwner ∷ []
 
 record RepositoryClosureBoundary : Set where
   constructor repository-closure-boundary
