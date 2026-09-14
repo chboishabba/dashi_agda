@@ -5,6 +5,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Reasoning.DefensiveReversalRepair as Defensive
+import DASHI.Reasoning.RelationalSharedStateUpdate as Shared
+import DASHI.Governance.SituatedAuthorityRoutingExact as Situated
 
 ------------------------------------------------------------------------
 -- Cross-cultural compassion / accountability boundary.
@@ -43,22 +45,38 @@ gibsonSource = Attr.mkNoDOISource
   "Practitioner provenance for examining coercive relational patterns, emotional domination, self-protection and the difference between understanding another person and surrendering one's own agency.  The source label does not diagnose a named person or prove motive, abuse, incapacity or misconduct."
   Attr.publicAttribution
 
+kagitcibasiAutonomyRelatednessSource : Attr.AttributedSource
+kagitcibasiAutonomyRelatednessSource = Attr.mkDOISource
+  "Cigdem Kagitcibasi"
+  "Autonomy and Relatedness in Cultural Context: Implications for Self and Family"
+  "Journal of Cross-Cultural Psychology 36(4), 403-422"
+  "2005"
+  "10.1177/0022022105275959"
+  "https://doi.org/10.1177/0022022105275959"
+  Attr.academicArticleSource
+  "Academic precedent for treating agency/autonomy and interpersonal relatedness as distinct dimensions that can be jointly present.  It does not prove DASHI's boundary construction, prescribe a boundary for any person, establish facts about a named family, or create clinical, cultural, or moral authority."
+  Attr.publicAttribution
+
 crossCulturalCompassionSources : List Attr.AttributedSource
-crossCulturalCompassionSources = kohliSource ∷ gibsonSource ∷ []
+crossCulturalCompassionSources =
+  kohliSource ∷
+  gibsonSource ∷
+  kagitcibasiAutonomyRelatednessSource ∷
+  []
 
 crossCulturalCompassionSourceAtlas : Attr.AttributedSourceAtlas
 crossCulturalCompassionSourceAtlas = Attr.mkSourceAtlas
   "cross-cultural compassion and accountability sources"
   "DASHI.Reasoning.CrossCulturalCompassionAccountabilityExact"
   crossCulturalCompassionSources
-  "Bounded practitioner provenance for situated boundary feasibility, family/community audience pressure, compassion, accountability, self-protection and non-diagnostic relational vocabulary."
+  "Bounded practitioner provenance for situated boundary feasibility and relational vocabulary, plus academic precedent for the compatibility of autonomy/agency with relatedness.  No citation imports proof, diagnosis, a culturally correct action, or authority over a particular relationship."
 
 crossCulturalCompassionSourceCount : Nat
 crossCulturalCompassionSourceCount = Attr.sourceCount crossCulturalCompassionSources
 
-crossCulturalCompassionSourceCountIsTwo :
-  crossCulturalCompassionSourceCount ≡ 2
-crossCulturalCompassionSourceCountIsTwo = refl
+crossCulturalCompassionSourceCountIsThree :
+  crossCulturalCompassionSourceCount ≡ 3
+crossCulturalCompassionSourceCountIsThree = refl
 
 crossCulturalCompassionAtlasDoesNotCreateAuthority :
   Attr.atlasCreatesAuthority crossCulturalCompassionSourceAtlas ≡ false
@@ -325,6 +343,11 @@ compassionDoesNotWaiveBoundary = refl
 -- consent, complaint review and scoped access.  Bounded access is therefore
 -- not definitionally estrangement, and relationship preservation is not
 -- definitionally self-abandonment.
+--
+-- Kağıtçıbaşı's autonomy/relatedness model pays only the narrow academic
+-- precedent that agency and relatedness need not be collapsed into opposite
+-- ends of a single axis.  The record below and its exact fields are DASHI's
+-- construction, not a theorem attributed to that source.
 ------------------------------------------------------------------------
 
 record CompassionWithoutSelfErasure : Set where
@@ -397,6 +420,65 @@ compassionWithoutSelfErasureKeepsBelonging = refl
 compassionWithoutSelfErasureKeepsBoundedAccess :
   boundedAccessPreserved canonicalCompassionWithoutSelfErasure ≡ true
 compassionWithoutSelfErasureKeepsBoundedAccess = refl
+
+------------------------------------------------------------------------
+-- Pareto cross-pollination with the existing relational shared-state and
+-- situated-authority owners.
+--
+-- This is deliberately a weld, not a replacement ontology.  Cultural
+-- belonging and continued relationship do not weaken the already-formalised
+-- requirements around assent, explicit commitment, complaint/accountability,
+-- pause-without-erasure, current authority, or repair capacity.
+------------------------------------------------------------------------
+
+record CompassionAuthorityWeld : Set where
+  constructor compassionAuthorityWeld
+  field
+    compassionWitness : CompassionWithoutSelfErasure
+    sharedStateInvariants : Shared.SharedStateInvariants
+    minimalRepairProtocol : Shared.MinimalRepairProtocol
+    situatedAuthorityBoundary : Situated.SituatedAuthorityRoutingBoundary
+    weldReceipt : String
+
+open CompassionAuthorityWeld public
+
+canonicalCompassionAuthorityWeld : CompassionAuthorityWeld
+canonicalCompassionAuthorityWeld = compassionAuthorityWeld
+  canonicalCompassionWithoutSelfErasure
+  Shared.canonicalSharedStateInvariants
+  Shared.canonicalMinimalRepairProtocol
+  Situated.canonicalSituatedAuthorityRoutingBoundary
+  "The positive compassion/belonging witness composes with existing shared-state and situated-authority constraints; it does not promote belonging, care or community standing into assent, obligation or authority."
+
+sharedStateSilenceStillNeedsAssentWitness : Bool
+sharedStateSilenceStillNeedsAssentWitness =
+  Shared.silenceNeverPromotedToAssentWithoutWitness
+    (sharedStateInvariants canonicalCompassionAuthorityWeld)
+
+sharedStateFutureObligationStillNeedsCommitment : Bool
+sharedStateFutureObligationStillNeedsCommitment =
+  Shared.futureObligationsRequireExplicitCommitment
+    (sharedStateInvariants canonicalCompassionAuthorityWeld)
+
+sharedStateCareAndAccountabilityRemainDistinct : Bool
+sharedStateCareAndAccountabilityRemainDistinct =
+  Shared.careAndAccountabilityRemainDistinct
+    (sharedStateInvariants canonicalCompassionAuthorityWeld)
+
+minimalRepairStillPermitsPauseWithoutErasure : Bool
+minimalRepairStillPermitsPauseWithoutErasure =
+  Shared.permitPauseWithoutErasure
+    (minimalRepairProtocol canonicalCompassionAuthorityWeld)
+
+situatedRouteStillRequiresCurrentAuthority : Bool
+situatedRouteStillRequiresCurrentAuthority =
+  Situated.routeAdmissibilityRequiresCurrentAuthority
+    (situatedAuthorityBoundary canonicalCompassionAuthorityWeld)
+
+situatedRouteStillRequiresRepairCapacity : Bool
+situatedRouteStillRequiresRepairCapacity =
+  Situated.routeAdmissibilityRequiresRepairCapacity
+    (situatedAuthorityBoundary canonicalCompassionAuthorityWeld)
 
 ------------------------------------------------------------------------
 -- Compatibility with the existing defensive-reversal owner: the new source
