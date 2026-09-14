@@ -5,15 +5,15 @@ open import DASHI.Core.Prelude
 import DASHI.Applications.CounterUASDroneShieldExact as CUAS
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 import DASHI.Law.SensibLawInternationalInstrumentLifecycleExact as Lifecycle
+import DASHI.Law.SensibLawTreatyParticipationExact as Participation
 import DASHI.Law.SensibLawCCWLAWS2026Exact as CCW2026
 
 ------------------------------------------------------------------------
 -- COUNTER-UAS / SENSIBLAW AUTHORITY BRIDGE
 --
--- This is deliberately thin.  Domestic mitigation authority, armed-conflict
--- context, LAWS classification and international-law applicability are
--- independent coordinates.  The bridge does not assert that every counter-UAS
--- event is an armed-conflict event or a LAWS event.
+-- This is deliberately thin.  Domestic mitigation authority, instrument
+-- lifecycle, State participation, armed-conflict context, LAWS classification
+-- and international-law applicability are independent coordinates.
 ------------------------------------------------------------------------
 
 record CounterUASLegalContext : Set where
@@ -21,17 +21,22 @@ record CounterUASLegalContext : Set where
   field
     domesticAuthority : CUAS.AuthorityState
     instrumentLifecycle : Lifecycle.InstrumentLifecycleSnapshot
+    instrumentParticipation : Participation.ParticipationStatus
     armedConflictContextEstablished : Bool
     lawsClassificationEstablished : Bool
     internationalLawApplicabilityEstablished : Bool
 
 open CounterUASLegalContext public
 
+september2026FutureLAWSParticipation : Participation.ParticipationStatus
+september2026FutureLAWSParticipation = Participation.participationUnresolved
+
 september2026ReferenceContext : CounterUASLegalContext
 september2026ReferenceContext =
   counterUASLegalContext
     CUAS.noMitigationAuthority
     CCW2026.september2026LifecycleSnapshot
+    september2026FutureLAWSParticipation
     false
     false
     false
@@ -115,6 +120,9 @@ threatAssessmentDoesNotCreateInternationalLawApplicability = true
 
 ccwConsensusElementsDoNotCreateDomesticMitigationAuthority : Bool
 ccwConsensusElementsDoNotCreateDomesticMitigationAuthority = true
+
+ccwParentConventionParticipationDoesNotCreateFutureLAWSBinding : Bool
+ccwParentConventionParticipationDoesNotCreateFutureLAWSBinding = true
 
 counterUASEventDoesNotAutomaticallyInstantiateLAWS : Bool
 counterUASEventDoesNotAutomaticallyInstantiateLAWS = true
