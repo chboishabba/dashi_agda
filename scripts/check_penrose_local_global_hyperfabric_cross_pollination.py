@@ -2,9 +2,10 @@
 """Focused static contract for Penrose local/global hyperfabric cross-pollination.
 
 This checker requires a thin Interop bridge over already-owned Penrose,
-LocalFibre, NDim/Pareto, and graph-colouring surfaces. It does not certify any
-of those domain theorems, does not create source authority, and does not turn
-proof-architecture correspondence into theorem/domain identity.
+LocalFibre, NDim/Pareto, graph-colouring, RSA reducer, and Fly held-out
+surfaces. It does not certify any of those domain theorems, does not create
+source authority, and does not turn proof-architecture correspondence into
+theorem/domain identity.
 """
 
 from pathlib import Path
@@ -26,9 +27,13 @@ def require(path: Path, needles: list[str]) -> None:
 require(OWNER, [
     "DASHI.Reasoning.LocalFibreHyperfabricExact",
     "DASHI.Core.NDimParetoHyperfabricExact",
+    "DASHI.Core.AdmissibleConsumerMDLHyperfabricExact",
     "DASHI.Combinatorics.GraphColouringRecolourPantsSnowballExact",
     "DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact",
     "DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact",
+    "DASHI.ComputerScience.RSA260C3OrbitReducerHyperfabricExact",
+    "DASHI.ComputerScience.RSA260ReducerHyperfabricSourceDiligenceExact",
+    "DASHI.ComputerScience.FlyStructureFunctionNDimFibreExact",
     "LocalGlobalRole",
     "localWitness",
     "boundaryRestriction",
@@ -45,8 +50,19 @@ require(OWNER, [
     "canonicalLocalFibreLocalGlobalAdapter",
     "NDimProjectionAdapter",
     "canonicalNDimProjectionAdapter",
+    "RSACompatibilityClosureAdapter",
+    "canonicalRSACompatibilityClosureAdapter",
+    "FlyHeldOutCompatibilityAdapter",
+    "canonicalFlyHeldOutCompatibilityAdapter",
+    "ParetoEligibilityBeforeOptimizationAdapter",
+    "canonicalParetoEligibilityBeforeOptimizationAdapter",
     "ConstructiveGluingObstructionDuality",
     "canonicalConstructiveGluingObstructionDuality",
+    "terminalConsumerStillMustBePaid",
+    "compatibilityDoesNotCreateTerminalConsumerPayment",
+    "paretoSelectionCannotRescueIneligibleCandidate",
+    "transferredArchitectureDoesNotTransferTheoremAuthority",
+    "rsaSnowballPaymentCannotSkipDependency",
     "localValidityDoesNotImplyGlobalValidity",
     "projectionValidityDoesNotImplySourceSufficiency",
     "boundedLocalCarrierDoesNotImplyGlobalCompactnessOrClosure",
@@ -82,6 +98,15 @@ require(REGRESSION, [
     "retrospectiveNotHistoricalRegression",
     "snowballPaymentCannotSkipParentRegression",
     "analogyDoesNotCreateAuthorityRegression",
+    "rsaClosureStillRequiredRegression",
+    "rsaGlobalCommutationStillRequiredRegression",
+    "rsaSnowballPaymentRegression",
+    "flyCompatibilityNotGlobalImprovementRegression",
+    "flyHeldOutStillRequiredRegression",
+    "paretoIneligibleCannotWinRegression",
+    "paretoConsumerInadequateCannotWinRegression",
+    "terminalConsumerPaymentRegression",
+    "architectureTransferNoAuthorityRegression",
     "downstreamCandidateMapIsNotImplementationRegression",
 ])
 
