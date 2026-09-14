@@ -57,11 +57,24 @@ kagitcibasiAutonomyRelatednessSource = Attr.mkDOISource
   "Academic precedent for treating agency/autonomy and interpersonal relatedness as distinct dimensions that can be jointly present.  It does not prove DASHI's boundary construction, prescribe a boundary for any person, establish facts about a named family, or create clinical, cultural, or moral authority."
   Attr.publicAttribution
 
+chirkovRyanWillnessSource : Attr.AttributedSource
+chirkovRyanWillnessSource = Attr.mkDOISource
+  "Valery I. Chirkov; Richard M. Ryan; Chelsea Willness"
+  "Cultural Context and Psychological Needs in Canada and Brazil: Testing a Self-Determination Approach to the Internalization of Cultural Practices, Identity, and Well-Being"
+  "Journal of Cross-Cultural Psychology 36(4), 423-443"
+  "2005"
+  "10.1177/0022022105275960"
+  "https://doi.org/10.1177/0022022105275960"
+  Attr.academicArticleSource
+  "Academic precedent for distinguishing autonomy from individualism and independence, and for treating internalisation of cultural practices as a separate empirical coordinate.  It does not prove DASHI's relational boundary rules, determine a person's values, or create clinical, cultural, family, or moral authority."
+  Attr.publicAttribution
+
 crossCulturalCompassionSources : List Attr.AttributedSource
 crossCulturalCompassionSources =
   kohliSource ∷
   gibsonSource ∷
   kagitcibasiAutonomyRelatednessSource ∷
+  chirkovRyanWillnessSource ∷
   []
 
 crossCulturalCompassionSourceAtlas : Attr.AttributedSourceAtlas
@@ -69,14 +82,14 @@ crossCulturalCompassionSourceAtlas = Attr.mkSourceAtlas
   "cross-cultural compassion and accountability sources"
   "DASHI.Reasoning.CrossCulturalCompassionAccountabilityExact"
   crossCulturalCompassionSources
-  "Bounded practitioner provenance for situated boundary feasibility and relational vocabulary, plus academic precedent for the compatibility of autonomy/agency with relatedness.  No citation imports proof, diagnosis, a culturally correct action, or authority over a particular relationship."
+  "Bounded practitioner provenance for situated boundary feasibility and relational vocabulary, plus academic precedents for autonomy/relatedness compatibility and autonomy/individualism separation.  No citation imports proof, diagnosis, a culturally correct action, or authority over a particular relationship."
 
 crossCulturalCompassionSourceCount : Nat
 crossCulturalCompassionSourceCount = Attr.sourceCount crossCulturalCompassionSources
 
-crossCulturalCompassionSourceCountIsThree :
-  crossCulturalCompassionSourceCount ≡ 3
-crossCulturalCompassionSourceCountIsThree = refl
+crossCulturalCompassionSourceCountIsFour :
+  crossCulturalCompassionSourceCount ≡ 4
+crossCulturalCompassionSourceCountIsFour = refl
 
 crossCulturalCompassionAtlasDoesNotCreateAuthority :
   Attr.atlasCreatesAuthority crossCulturalCompassionSourceAtlas ≡ false
@@ -146,6 +159,35 @@ canonicalBoundaryAdviceFirewall = record
   ; boundaryRequiresEstrangement = false
   ; firewallNote =
       "Cultural, family, dependency and safety coordinates alter feasibility and cost.  They do not mechanically choose a person's values, consent, or boundary action."
+  }
+
+------------------------------------------------------------------------
+-- Autonomy is not a synonym for individualism or independence.
+--
+-- Kağıtçıbaşı pays the compatibility precedent for autonomy + relatedness;
+-- Chirkov/Ryan/Willness pay the narrower empirical/conceptual distinction
+-- between autonomy and individualism/independence.  The exact firewall below
+-- is a DASHI boundary rather than an imported theorem about any individual.
+------------------------------------------------------------------------
+
+record AutonomyIndividualismBoundary : Set where
+  field
+    autonomyEqualsIndividualism : Bool
+    autonomyEqualsIndependence : Bool
+    relatednessEqualsHeteronomy : Bool
+    culturalFormDeterminesInternalisation : Bool
+    culturalDifferenceDeterminesIndividualPreference : Bool
+    boundaryReceipt : String
+
+canonicalAutonomyIndividualismBoundary : AutonomyIndividualismBoundary
+canonicalAutonomyIndividualismBoundary = record
+  { autonomyEqualsIndividualism = false
+  ; autonomyEqualsIndependence = false
+  ; relatednessEqualsHeteronomy = false
+  ; culturalFormDeterminesInternalisation = false
+  ; culturalDifferenceDeterminesIndividualPreference = false
+  ; boundaryReceipt =
+      "Autonomy/agency, individualism/independence, relatedness and cultural internalisation remain separate coordinates.  Population-level cultural variation does not determine an individual's preference or consent."
   }
 
 ------------------------------------------------------------------------
