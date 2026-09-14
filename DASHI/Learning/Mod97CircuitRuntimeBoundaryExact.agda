@@ -39,6 +39,10 @@ record Mod97CircuitRuntimeFrontier : Set where
     checkpointExecution : ExecutionStatus
     interventionProducer : ProducerStatus
     interventionExecution : ExecutionStatus
+    relationClassifierProducer : ProducerStatus
+    relationClassifierExecution : ExecutionStatus
+    relationGraphCompilerProducer : ProducerStatus
+    relationGraphCompilerExecution : ExecutionStatus
     betaProducer : ProducerStatus
     betaExecution : ExecutionStatus
     historicalRunIdentity : IdentityStatus
@@ -55,12 +59,19 @@ open Mod97CircuitRuntimeFrontier public
 ------------------------------------------------------------------------
 -- Current exact frontier on PR #900.
 --
--- The checked-in Python producers implement a new-run checkpoint path, a
--- training-selected / held-out-evaluated raw intervention path, and an exact
--- finite closed-compatible-capacity enumerator. Raw signed held-out loss
--- changes are retained, while an orientation-aware adapter maps only positive
--- loss increase into non-negative micro-loss Nat damage. That representation
--- payment is distinct from relation classification.
+-- The checked-in Python surfaces now implement:
+--   checkpoint regeneration under explicit new-run provenance,
+--   leakage-safe singleton/joint interventions,
+--   producer-safe conflict/independent classification for the current
+--     symmetric observation,
+--   fail-closed compilation of already-paid canonical relation receipts, and
+--   exact finite closed-compatible-capacity enumeration.
+--
+-- Implementation is not execution. Raw signed held-out loss changes are
+-- retained, while an orientation-aware adapter maps only positive loss increase
+-- into non-negative micro-loss Nat damage. The current classifier can pay only
+-- conflict/independent once adequacy/power is supplied. It cannot manufacture a
+-- gluingRequirement edge.
 --
 -- Canonical gluingRequirement is a directed selection-closure relation: if one
 -- candidate is selected, another may also need to be selected to close an
@@ -71,16 +82,20 @@ open Mod97CircuitRuntimeFrontier public
 -- observation/consumer receipt is needed before requirement direction can be
 -- promoted.
 --
--- The beta producer can exhaust a supplied finite relation graph, but no
--- empirical relation graph has yet been paid or executed through it here.
--- Therefore beta maximality remains unpaid at the empirical checkpoint layer.
--- No numerical run receipt has yet been observed here, and the historical
--- receipt does not pay exact original architecture/split identity.
+-- The graph compiler rejects unpaid relation classifications and rejects
+-- gluingRequirement without a paid direction. The beta producer can exhaust a
+-- supplied paid finite relation graph, but no empirical relation graph has yet
+-- been executed through this chain here. Therefore relation classification and
+-- beta maximality remain unpaid at the empirical checkpoint layer.
 ------------------------------------------------------------------------
 
 currentMod97RuntimeFrontier : Mod97CircuitRuntimeFrontier
 currentMod97RuntimeFrontier =
   mod97CircuitRuntimeFrontier
+    implemented
+    notExecuted
+    implemented
+    notExecuted
     implemented
     notExecuted
     implemented
@@ -103,6 +118,12 @@ currentMod97RuntimeFrontier =
 
 producerImplementationPaysExecution : PaymentStatus
 producerImplementationPaysExecution = unpaid
+
+relationClassifierImplementationPaysRelationClassification : PaymentStatus
+relationClassifierImplementationPaysRelationClassification = unpaid
+
+relationGraphCompilerImplementationPaysRelationGraph : PaymentStatus
+relationGraphCompilerImplementationPaysRelationGraph = unpaid
 
 betaProducerImplementationPaysBetaMaximality : PaymentStatus
 betaProducerImplementationPaysBetaMaximality = unpaid
