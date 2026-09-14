@@ -30,6 +30,9 @@ identityCanonical = Registry.candidateObjectIdentityOwner
 attributionCanonical : Registry.CanonicalOwner
 attributionCanonical = Registry.attributedSourceOwner
 
+attributionSnowballCanonical : Registry.CanonicalOwner
+attributionSnowballCanonical = Registry.attributionSnowballOwner
+
 appendOnlyCanonical : Registry.CanonicalOwner
 appendOnlyCanonical = Registry.appendOnlyRevisionOwner
 
@@ -49,6 +52,10 @@ factorisationParallelDefinitionsBlocked = refl
 batchParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed batchCanonical ≡ false
 batchParallelDefinitionsBlocked = refl
+
+attributionSnowballParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed attributionSnowballCanonical ≡ false
+attributionSnowballParallelDefinitionsBlocked = refl
 
 residualActionParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed residualActionCanonical ≡ false
