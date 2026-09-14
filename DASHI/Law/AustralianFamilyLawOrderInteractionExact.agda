@@ -81,6 +81,39 @@ attorneyGeneralInformationSharingSource = Attribution.mkNoDOISource
   "implementation/context source confirming the Family Law Amendment (Information Sharing) Act 2023 commenced 6 May 2024 and introduced the court-driven Subdivision DA framework; does not create case-level information custody or evidential weight"
   Attribution.publicAttribution
 
+familyLawChildProtectionCollaborationSource : Attribution.AttributedSource
+familyLawChildProtectionCollaborationSource = Attribution.mkNoDOISource
+  "Australian Government Attorney-General's Department"
+  "Family law and child protection collaboration"
+  "Attorney-General's Department"
+  "current page searched 2026-09-14"
+  "https://www.ag.gov.au/families-and-marriage/families/children-and-family-law/family-law-and-child-protection-collaboration"
+  Attribution.governmentSource
+  "institutional source stating that children can be involved in both State/Territory child-protection systems and the federal family-law system and describing collaboration projects; does not prove agency intervention in any particular matter"
+  Attribution.publicAttribution
+
+familyLawNationalInformationSharingFrameworkSource : Attribution.AttributedSource
+familyLawNationalInformationSharingFrameworkSource = Attribution.mkNoDOISource
+  "Australian Government Attorney-General's Department"
+  "National Strategic Framework for Information Sharing between the Family Law and Family Violence and Child Protection Systems"
+  "Attorney-General's Department"
+  "framework endorsed 12 November 2021; publication page searched 2026-09-14"
+  "https://www.ag.gov.au/families-and-marriage/publications/national-strategic-framework-information-sharing-between-family-law-and-family-violence-and-child-protection-systems"
+  Attribution.governmentSource
+  "institutional framework for nationally consistent two-way information sharing across family-law, family-violence and child-protection systems; does not merge jurisdictions or impose a universal case-specific intervention duty"
+  Attribution.publicAttribution
+
+fcfcoaSeptember2026InformationSharingStatementSource : Attribution.AttributedSource
+fcfcoaSeptember2026InformationSharingStatementSource = Attribution.mkNoDOISource
+  "Federal Circuit and Family Court of Australia"
+  "Statement in response to articles published by the Herald Sun and syndicated to News Corp outlets, 7-10 September 2026"
+  "Federal Circuit and Family Court of Australia"
+  "2026-09-10"
+  "https://www.fcfcoa.gov.au/news-and-media-centre/latest-news/statement-100926"
+  Attribution.institutionalSource
+  "current institutional self-description that co-located child-protection/police officials operate in family-law registries and that the Courts routinely seek and consider State/Territory child-protection and police information in parenting matters; not an independent audit and not proof of any particular agency response"
+  Attribution.publicAttribution
+
 queenslandDVOFamilyLawInteractionSource : Attribution.AttributedSource
 queenslandDVOFamilyLawInteractionSource = Attribution.mkNoDOISource
   "State of Queensland"
@@ -99,9 +132,12 @@ orderInteractionSourceAtlas = Attribution.mkSourceAtlas
   (familyLawDivision11Source
     ∷ familyLawInformationSharingSource
     ∷ attorneyGeneralInformationSharingSource
+    ∷ familyLawChildProtectionCollaborationSource
+    ∷ familyLawNationalInformationSharingFrameworkSource
+    ∷ fcfcoaSeptember2026InformationSharingStatementSource
     ∷ queenslandDVOFamilyLawInteractionSource
     ∷ [])
-  "federal statutory mechanisms + information-sharing context + Queensland manifestation; no source citation itself decides inconsistency, jurisdiction, admissibility, weight or case outcome"
+  "federal statutory mechanisms + information-sharing/collaboration sources + current Court institutional description + Queensland manifestation; no source citation itself decides inconsistency, jurisdiction, agency intervention, admissibility, weight or case outcome"
 
 ------------------------------------------------------------------------
 -- Source-paid structural coordinates.
@@ -118,6 +154,18 @@ subdivisionDAInformationSharingLocated = true
 
 childProtectionJurisdictionSeparatelyTyped : Bool
 childProtectionJurisdictionSeparatelyTyped = true
+
+parallelSystemInvolvementLocated : Bool
+parallelSystemInvolvementLocated = true
+
+twoWayInformationSharingFrameworkLocated : Bool
+twoWayInformationSharingFrameworkLocated = true
+
+coLocationProgramLocated : Bool
+coLocationProgramLocated = true
+
+courtRoutineChildProtectionInformationUseReported : Bool
+courtRoutineChildProtectionInformationUseReported = true
 
 ------------------------------------------------------------------------
 -- Query-indexed observer cross-pollination.
@@ -279,6 +327,9 @@ data InformationExistsAutomaticallyReceivedByCourt : Set where
 data CourtReceiptAutomaticallyAdmitted : Set where
 data CourtReceiptAutomaticallyCorrectWeight : Set where
 data FamilyProceedingAutomaticallyDisplacesChildProtectionJurisdiction : Set where
+data FamilyProceedingAutomaticallyEndsChildProtectionAgencyRole : Set where
+data CollaborationArchitectureAutomaticallyRequiresAgencyIntervention : Set where
+data CoLocationAutomaticallyCreatesJointJurisdiction : Set where
 data StateFamilyViolenceOrderAutomaticallyDeterminesFederalParentingQuestion : Set where
 data FederalParentingOrderAutomaticallyErasesEveryStateProtection : Set where
 
@@ -310,6 +361,18 @@ familyProceedingDoesNotAutomaticallyDisplaceChildProtectionJurisdiction :
   FamilyProceedingAutomaticallyDisplacesChildProtectionJurisdiction → ⊥
 familyProceedingDoesNotAutomaticallyDisplaceChildProtectionJurisdiction ()
 
+familyProceedingDoesNotAutomaticallyEndChildProtectionAgencyRole :
+  FamilyProceedingAutomaticallyEndsChildProtectionAgencyRole → ⊥
+familyProceedingDoesNotAutomaticallyEndChildProtectionAgencyRole ()
+
+collaborationArchitectureDoesNotAutomaticallyRequireAgencyIntervention :
+  CollaborationArchitectureAutomaticallyRequiresAgencyIntervention → ⊥
+collaborationArchitectureDoesNotAutomaticallyRequireAgencyIntervention ()
+
+coLocationDoesNotAutomaticallyCreateJointJurisdiction :
+  CoLocationAutomaticallyCreatesJointJurisdiction → ⊥
+coLocationDoesNotAutomaticallyCreateJointJurisdiction ()
+
 stateFamilyViolenceOrderDoesNotAutomaticallyDetermineFederalParentingQuestion :
   StateFamilyViolenceOrderAutomaticallyDeterminesFederalParentingQuestion → ⊥
 stateFamilyViolenceOrderDoesNotAutomaticallyDetermineFederalParentingQuestion ()
@@ -326,12 +389,19 @@ record AustralianFamilyLawOrderInteractionBoundary : Set where
     section68RPowerSeparatedFromExercise : Bool
     informationSharingStagesSeparated : Bool
     childProtectionJurisdictionSeparate : Bool
+    parallelSystemsCollaborationLocated : Bool
+    twoWayInformationSharingLocatedFlag : Bool
+    coLocationProgramLocatedFlag : Bool
+    courtRoutineChildProtectionInformationUseReportedFlag : Bool
     queryIndexedInconsistencyCoordinateRetained : Bool
     bareSupremacySloganCompleteOperationalRule : Bool
     wholeFamilyViolenceOrderAutomaticallyInvalid : Bool
     informationExistenceEqualsCourtReceipt : Bool
     courtReceiptEqualsCorrectWeight : Bool
     familyProceedingDisplacesChildProtection : Bool
+    familyProceedingEndsAgencyRole : Bool
+    collaborationRequiresAgencyIntervention : Bool
+    coLocationCreatesJointJurisdiction : Bool
     citationDecidesConcreteCase : Bool
 
 open AustralianFamilyLawOrderInteractionBoundary public
@@ -346,6 +416,13 @@ canonicalAustralianFamilyLawOrderInteractionBoundary =
     true
     true
     true
+    true
+    true
+    true
+    true
+    false
+    false
+    false
     false
     false
     false
