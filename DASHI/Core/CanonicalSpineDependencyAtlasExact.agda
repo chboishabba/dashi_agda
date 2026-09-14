@@ -7,17 +7,6 @@ import DASHI.Core.TypedDependencyCore as Dependency
 
 ------------------------------------------------------------------------
 -- TYPED DEPENDENCIES BETWEEN CANONICAL SPINES
---
--- This is deliberately not another generic relationship enum.  The generic
--- relation/witness machinery already lives in TypedDependencyCore.  We only
--- state the small set of canonical parent dependencies currently paid by the
--- repository archaeology and formal interfaces.
---
--- Direction convention:
---   CanonicalDependency child parent
--- means the child structurally/provenance-wise depends on or refines the parent
--- for the stated scope.  It does NOT mean theorem equivalence, definitionally
--- identical carriers, or a literal Agda import edge.
 ------------------------------------------------------------------------
 
 data CanonicalDependency :
@@ -30,6 +19,11 @@ data CanonicalDependency :
   frozenDynamicDependsOnObserverRefinement :
     CanonicalDependency
       Registry.frozenProvenanceDynamicOwner
+      Registry.observerRefinementOwner
+
+  requiredAxisJoinDependsOnObserverRefinement :
+    CanonicalDependency
+      Registry.requiredObserverAxisJoinOwner
       Registry.observerRefinementOwner
 
   requiredAxisJoinDependsOnQueryAdequacy :
@@ -62,10 +56,6 @@ data CanonicalDependency :
       Registry.queryIndexedFutureSafePromotionOwner
       Registry.frozenProvenanceDynamicOwner
 
-------------------------------------------------------------------------
--- Proof-bearing dependency receipts reuse TypedDependencyCore directly.
-------------------------------------------------------------------------
-
 consumerRepairObserverDependencyWitness :
   Dependency.DependencyWitness CanonicalDependency
 consumerRepairObserverDependencyWitness =
@@ -89,6 +79,18 @@ frozenDynamicObserverDependencyWitness =
     Dependency.requiredDependency
     "FrozenProvenanceDynamicRefinementExact constructs provenance joins and strict refinements using ObserverRefinementLatticeExact, then adds frozen-selection and independent dynamic-safety payments."
     "static observer refinement coordinate only; frozen methodology and dynamic safety remain separate child obligations"
+
+requiredAxisJoinObserverDependencyWitness :
+  Dependency.DependencyWitness CanonicalDependency
+requiredAxisJoinObserverDependencyWitness =
+  Dependency.dependencyWitness
+    Registry.requiredObserverAxisJoinOwner
+    Registry.observerRefinementOwner
+    requiredAxisJoinDependsOnObserverRefinement
+    Dependency.epistemicLayer
+    Dependency.requiredDependency
+    "RequiredObserverAxisJoinAdequacyExact now reuses ObserverRefinementLatticeExact.pairObserver as its joint observation carrier rather than defining another pair observer."
+    "observer pairing only; query-relative required-axis adequacy remains a separate parent obligation"
 
 requiredAxisJoinDependencyWitness :
   Dependency.DependencyWitness CanonicalDependency
@@ -161,12 +163,6 @@ futureSafeDynamicDependencyWitness =
     Dependency.requiredDependency
     "Future-safe promotion retains provenance-aware strict refinement, frozen selection, and dynamic trace safety from the frozen/dynamic parent."
     "future trace congruence and frozen-selection coordinate"
-
-------------------------------------------------------------------------
--- Boundary: this atlas is intentionally incomplete and append-only.  Missing
--- edges remain missing rather than being inferred from names, imports, shared
--- vocabulary, or conceptual resemblance.
-------------------------------------------------------------------------
 
 record CanonicalDependencyAtlasBoundary : Set where
   constructor canonical-dependency-atlas-boundary
