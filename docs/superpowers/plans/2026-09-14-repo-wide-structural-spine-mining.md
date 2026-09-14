@@ -42,6 +42,7 @@ requirement/conflict batch execution
 local/global BundleSheaf gluing
 graded candidate same-object identity
 attributed source / authority firewall
+snowball source-role retention / proof-and-authority firewall
 append-only evidence revision
 residual -> admissible action policy
 typed dependency witnesses / dependent actions
@@ -184,7 +185,8 @@ Migration rule:
 Independent donors already located:
 
 1. RSA multipart artifact discipline: local chunk identity/position/tails/boundaries/digests/reconstruction/global same-object receipt;
-2. Drosophila/Gauthey external manifest: exact code-tree identity paid while exact external data bytes/hashes remain independent same-object debt.
+2. Drosophila/Gauthey external manifest: exact code-tree identity paid while exact external data bytes/hashes remain independent same-object debt;
+3. TOE handoff: the archive was delivered without the adjacent source manifest/checksum sidecars; TOE correctly treated external verification as unpaid and generated an archive hash plus per-path hash index.
 
 Likely generic shape:
 
@@ -198,9 +200,18 @@ parts may be acquired in arbitrary order
 -> conclusion consumer may use reconstructed whole
 ```
 
-Compose with `AppendOnlyEvidenceResidualRevisionExact`, but do not identify the two: append-only evidence persistence is not multipart reconstruction completeness.
+The TOE case sharpens a packaging requirement:
 
-Require a third independent donor or a clear consumer before implementation because this spine touches custody and same-object semantics.
+```text
+portable archive verification
+requires
+manifest/checksum material inside the transported archive
+or an explicit same-object sidecar attachment receipt
+```
+
+The next TOE tranche should embed `SOURCE_MANIFEST.txt` and checksum material inside the tar rather than relying on adjacent sidecars.
+
+Compose multipart reconstruction with `AppendOnlyEvidenceResidualRevisionExact`, but do not identify the two: append-only evidence persistence is not reconstruction completeness or archive verification.
 
 ## Cluster G — source / attribution / authority / receipts
 
@@ -216,9 +227,11 @@ Reuse:
 
 The promotion summary and authority-gate owners already project into `GenericReceipt` and carry list-level non-promotion proofs. #902 corrected stale `GenericReceipt` metadata that still described one of those bridges as unimplemented.
 
+#902 now also registers `SnowballAttributionProvenanceInvariantExact` as the canonical owner for retaining source identity, source kind, formalisation relationship, visibility, proof non-import and authority non-creation through snowball projection.
+
 Migration target: local Booleans such as `citationCreatesAuthority`, `sourceImportsProof`, `doiPaysFileIdentity` should progressively derive from canonical source/receipt boundaries where type-compatible rather than being recreated per lane.
 
-Do not collapse source identity, theorem proof, institutional authority, same-object identity, execution receipt, or content digest.
+Do not collapse source identity, theorem proof, institutional authority, same-object identity, execution receipt, content digest, or downstream claim-provenance stage.
 
 ## Cluster H — payment / routing / ownership / status
 
@@ -349,6 +362,87 @@ qualified local action
 
 No step implies the next automatically.
 
+## Cluster O — Agda↔Lean lineage, snowball attribution and SensibLaw claim stages
+
+**Status: strict-refinement adapter implemented on #902; TOE provides the Lean-side lineage ledger.**
+
+TOE's Lean consolidation now carries a typed lineage ledger of the form:
+
+```text
+Agda owner
+-> Lean carrier
+-> Lean adapter
+-> Lean consumer
+-> hypotheses
+-> status class/detail
+-> provenance
+-> supersession
+-> open payments
+```
+
+The important cross-prover boundary is:
+
+```text
+Lean theorem checks
+!=
+faithful transcription of visible Agda surface
+!=
+Agda source elaborates
+```
+
+and likewise:
+
+```text
+provenance / content
+!=
+permission
+!=
+authority
+!=
+promotion status
+```
+
+SensibLaw contributes a strictly richer provenance-stage axis:
+
+```text
+external source claim
+secondary interpretation
+repository reconstruction
+cross-source inference
+repository theorem extension
+promotion / external adjudication
+```
+
+`DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact` now constructs, from one `PropositionSourceReceipt`:
+
+```text
+SourceRoleSnowballReceipt
++
+LegalClaimLineageReceipt
+```
+
+and proves that the same source receipt can support different legal-claim stages (external source claim vs repository reconstruction). Therefore:
+
+```text
+source identity / role retained
+!=
+claim-provenance stage fixed
+```
+
+This is the Agda counterpart of TOE's Lean `ClaimTransportLanes` authority result: visible content/provenance does not determine permission or downstream promotion.
+
+Do not flatten the Lean lineage ledger into SensibLaw stages. The relationship is strict refinement:
+
+```text
+cross-prover lineage/status/provenance row
++
+source-role snowball invariants
++
+optional domain-specific claim stage
+```
+
+Raw imported archive sources carrying `native_decide`, axioms, or historical status markers remain archive/provenance material until a promoted owner and build receipt pay the relevant theorem status.
+
 ## WrongType / negative knowledge note
 
 Repo-wide mining shows two meanings that must remain distinct:
@@ -380,15 +474,17 @@ Prefer exact crosswalks over new carriers when equivalent machinery already exis
 
 ## Immediate Pareto frontier
 
-1. Obtain Agda kernel receipt for the current #902 rollup.
-2. If `FactorisationSpineCrosswalkExact` and the cross-domain repair returns typecheck, begin consumer-by-consumer migration away from duplicate deterministic factorisation/collision records.
-3. Integrate #900 later and replace RSA-local relation vocabulary with Core batch vocabulary.
-4. Use `CanonicalSpineRegistry` as the preflight check before new Core abstractions.
-5. Audit representative payment/status lanes before designing an orthogonal status product.
-6. Design multipart same-object reconstruction only after another independent donor/consumer appears.
-7. Locate a third theorem-level frozen-selection/evaluation donor before extracting a leakage/precommitment spine.
-8. Migrate residual-action and dependency-specialised lanes toward their already-existing canonical Core owners where exact adapters are available.
-9. Continue mining by structural shape, never by directory/domain name.
+1. Obtain Agda kernel receipt for the current #902 rollup, including the SensibLaw/snowball strict-refinement adapter.
+2. Run the imported TOE Lean opt-in libraries before promoting TOE's source-level receipts into checked Lean status; preserve archive/history status for raw imported axiom/native-decide material.
+3. If `FactorisationSpineCrosswalkExact` and the cross-domain repair returns typecheck, begin consumer-by-consumer migration away from duplicate deterministic factorisation/collision records.
+4. Treat TOE's 23-row Lean↔Agda lineage ledger as the initial cross-prover registry and add rows only with explicit owner/carrier/consumer/status/provenance/open-payment coordinates.
+5. Add SensibLaw/domain claim-stage coordinates as strict refinements of lineage rows where they matter; never derive claim stage from source identity alone.
+6. Integrate #900 later and replace RSA-local relation vocabulary with Core batch vocabulary.
+7. Use `CanonicalSpineRegistry` as the preflight check before new Core abstractions.
+8. Audit representative payment/status lanes before designing an orthogonal status product.
+9. Promote multipart reconstruction only after the TOE archive-manifest lesson is encoded: manifest/checksum inside the transported archive or explicitly same-object-attached sidecars.
+10. Locate a third theorem-level frozen-selection/evaluation donor before extracting a leakage/precommitment spine.
+11. Continue mining by structural shape, never by directory/domain name.
 
 ## Non-collapse rule
 
