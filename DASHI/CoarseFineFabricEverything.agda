@@ -8,6 +8,7 @@ import DASHI.Core.CanonicalSpineRegistry
 import DASHI.Core.CanonicalSpineRegistryCrossDomainRegression
 import DASHI.Core.CanonicalSpineDependencyAtlasExact
 import DASHI.Core.CanonicalSpineDependencyAtlasRegression
+import DASHI.Core.ObserverRefinementLatticeExact
 import DASHI.Core.DeclaredScenarioRobustnessExact
 import DASHI.Core.DeclaredScenarioRobustnessRegression
 import DASHI.Core.SnowballOSINTAcquisitionInvariantExact
