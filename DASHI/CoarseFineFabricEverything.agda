@@ -8,6 +8,9 @@ import DASHI.Core.CoarseFineFabricCalculusExact
 import DASHI.Core.CoarseFineRelativeFibreExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
 import DASHI.Core.ObserverFactorizedRefinementExact
+import DASHI.Core.ExperimentalCoordinateDesignExact
+import DASHI.Core.ExperimentalCoordinateProjectionBridgeExact
+import DASHI.Core.ExperimentalCoordinateProjectionBridgeRegression
 import DASHI.Core.NDimParetoHyperfabricExact
 import DASHI.Core.NDimProjectionLossAdapterExact
 import DASHI.Core.DynamicalQuotientSafety
