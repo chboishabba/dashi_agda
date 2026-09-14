@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Interop.PenroseLocalGlobalHyperfabricCrossPollinationExact as Parent
 import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact as Live
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
+import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
 import DASHI.Cognition.PNF.SensibLawDutySourceLineageRefinementCutRerunExact as GuardedCut
 import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound83Exact as NS83
 
@@ -19,7 +20,8 @@ import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound83Exact as NS83
 --
 -- This child adds state dependence. The live hypothesis/residual/cut state is
 -- recomputed first; only moves that remain relevant to that state are eligible
--- for subsequent authority/consumer gates and Pareto comparison.
+-- for subsequent route admission, authority/consumer gates, and Pareto
+-- comparison.
 --
 -- The SensibLaw and NS donors remain domain-specific. We reuse exact state,
 -- cut, and non-promotion surfaces without transferring theorem identity or
@@ -115,12 +117,6 @@ openCullenRouteStillDoesNotTransfer = GuardedCut.specificOpenRouteStillDoesNotTr
 
 ------------------------------------------------------------------------
 -- Current NS producer-cut adapter.
---
--- Round83 has already paid the same-object viscous/nonlinear relative-growth
--- split. Its current load-bearing producer is narrower: construct the physical
--- nonlinear pressure-relative-growth estimate, then discharge the critical
--- barrier. This child records that current cut only; it does not alter Round83
--- sources, prove the missing estimate, or promote the Clay conclusion.
 ------------------------------------------------------------------------
 
 record NSCurrentCutParetoAdapter : Set where
@@ -170,6 +166,71 @@ canonicalNSCurrentCutParetoAdapter = nsCurrentCutParetoAdapter
   false refl
   false refl
   false refl
+
+------------------------------------------------------------------------
+-- Least-privilege route admission adapter.
+------------------------------------------------------------------------
+
+record LeastPrivilegeLiveCutAdmissionAdapter : Set where
+  constructor leastPrivilegeLiveCutAdmissionAdapter
+  field
+    admissionReference : String
+
+    theoremNameStringCreatesProofCapability : Bool
+    theoremNameStringCreatesProofCapabilityIsFalse :
+      theoremNameStringCreatesProofCapability ≡ false
+
+    routeMayElaborateBeforeAdmission : Bool
+    routeMayElaborateBeforeAdmissionIsFalse : routeMayElaborateBeforeAdmission ≡ false
+
+    routeMaySilentlyStrengthenHypotheses : Bool
+    routeMaySilentlyStrengthenHypothesesIsFalse :
+      routeMaySilentlyStrengthenHypotheses ≡ false
+
+    localLemmaAutomaticallyMovesProgrammeFrontier : Bool
+    localLemmaAutomaticallyMovesProgrammeFrontierIsFalse :
+      localLemmaAutomaticallyMovesProgrammeFrontier ≡ false
+
+    lemmaCountIsAuthoritativeProgress : Bool
+    lemmaCountIsAuthoritativeProgressIsFalse : lemmaCountIsAuthoritativeProgress ≡ false
+
+    duplicateRouteShouldBeReproved : Bool
+    duplicateRouteShouldBeReprovedIsFalse : duplicateRouteShouldBeReproved ≡ false
+
+    liveCutSalienceCannotBypassRouteAdmission : Bool
+    liveCutSalienceCannotBypassRouteAdmissionIsTrue :
+      liveCutSalienceCannotBypassRouteAdmission ≡ true
+
+open LeastPrivilegeLiveCutAdmissionAdapter public
+
+canonicalLeastPrivilegeLiveCutAdmissionAdapter : LeastPrivilegeLiveCutAdmissionAdapter
+canonicalLeastPrivilegeLiveCutAdmissionAdapter = leastPrivilegeLiveCutAdmissionAdapter
+  "current live-cut candidates still require ProofSearch.RouteAdmission before elaboration; salience is not capability"
+  (ProofSearch.theoremNameStringIsProofCapability
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.theoremNameStringIsProofCapabilityIsFalse
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.routeMayElaborateBeforeAdmission
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.routeMayElaborateBeforeAdmissionIsFalse
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.routeMaySilentlyStrengthenHypotheses
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.routeMaySilentlyStrengthenHypothesesIsFalse
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.localLemmaAutomaticallyMovesProgrammeFrontier
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.localLemmaAutomaticallyMovesProgrammeFrontierIsFalse
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.lemmaCountIsAuthoritativeProgress
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.lemmaCountIsAuthoritativeProgressIsFalse
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.duplicateRouteShouldBeReproved
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  (ProofSearch.duplicateRouteShouldBeReprovedIsFalse
+    ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
+  true refl
 
 ------------------------------------------------------------------------
 -- Parent payment / attribution boundaries remain live in the child.
