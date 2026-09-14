@@ -18,3 +18,4 @@ import DASHI.Law.SensibLawMaboDenaturalisationExact
 import DASHI.Law.SensibLawReligiousSocialBrokerageExact
 import DASHI.Law.AustralianFamilyCourtTraumaPresentationManifestationExact
 import DASHI.Law.SensibLawIsraelWestBankOperationalLegalityExact
+import DASHI.Law.SensibLawTasmanianColonialGenocideSourceBoundaryExact
