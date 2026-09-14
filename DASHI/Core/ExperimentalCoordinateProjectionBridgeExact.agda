@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Core.ExperimentalCoordinateDesignExact as Coordinate
 import DASHI.Core.CoarseFineFabricCalculusExact as Calculus
+import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Join
 
 ------------------------------------------------------------------------
 -- EXPERIMENTAL COORDINATE SEPARATION -> PROJECTION COLLISION
@@ -44,6 +45,37 @@ coordinateReadCannotFactorThroughExisting :
 coordinateReadCannotFactorThroughExisting separation =
   Calculus.consumerCannotFactorThroughProjection
     (coordinateSeparationYieldsProjectionCollision separation)
+
+------------------------------------------------------------------------
+-- Constructive observer repair.
+--
+-- Once the missing coordinate is identified, the least-inventive refinement is
+-- the product observer retaining both the old surface and the new coordinate.
+-- RequiredObserverAxisJoinAdequacyExact already owns the product law; this
+-- bridge merely instantiates it at the coordinate discovered by the collision.
+------------------------------------------------------------------------
+
+coordinateJoinRetainsExistingAndNewAxis :
+  ∀ {World Control Value Dimension ExistingCode : Set}
+    {design : Coordinate.ExperimentalCoordinateDesign
+      World Control Value Dimension}
+    {existing : World → ExistingCode} →
+  (separation : Coordinate.CoordinateSeparatesCollision design existing) →
+  Join.RetainsBothRequiredAxes
+    (Join.jointAxis
+      existing
+      (Coordinate.read design (Coordinate.coordinate separation)))
+    existing
+    (Coordinate.read design (Coordinate.coordinate separation))
+coordinateJoinRetainsExistingAndNewAxis
+  {design = design} {existing = existing} separation =
+  Join.retainsBothRequiredAxes
+    (Join.jointRetainsLeft
+      existing
+      (Coordinate.read design (Coordinate.coordinate separation)))
+    (Join.jointRetainsRight
+      existing
+      (Coordinate.read design (Coordinate.coordinate separation)))
 
 record ExperimentalCoordinateProjectionBoundary : Set where
   constructor experimental-coordinate-projection-boundary
