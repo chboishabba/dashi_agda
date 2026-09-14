@@ -6,7 +6,7 @@ RUNNER = ROOT / "run_world_research_typed_route_round.sh"
 
 
 class RustWorldStoreRunnerTests(unittest.TestCase):
-    def test_runner_builds_binary_observation_then_compiles_and_stores(self) -> None:
+    def test_runner_builds_binary_observation_compiles_residuals_and_stores(self) -> None:
         text = RUNNER.read_text(encoding="utf-8")
         self.assertIn("SLR_SOURCE_TEXT", text)
         self.assertIn("SLR_SOURCE_DOCUMENT_REF", text)
@@ -17,8 +17,12 @@ class RustWorldStoreRunnerTests(unittest.TestCase):
         self.assertIn("SLR_SPACY_OBSERVATION_STREAM", text)
         self.assertIn("SLR_WORLD_COMPILER_BIN", text)
         self.assertIn("sensiblaw-world-compiler", text)
-        self.assertIn("compile", text)
         self.assertIn("world-wire.slrw", text)
+        self.assertIn("SLR_CONSUMER_RESIDUAL_BIN", text)
+        self.assertIn("sensiblaw-consumer-residual", text)
+        self.assertIn("SLR_CONSUMER_SPEC", text)
+        self.assertIn(".slrc", text)
+        self.assertIn("residual-world.slrw", text)
         self.assertIn("SLR_WORLD_STORE_BIN", text)
         self.assertIn("sensiblaw-world-store", text)
         self.assertIn("ingest-wire", text)
@@ -26,6 +30,8 @@ class RustWorldStoreRunnerTests(unittest.TestCase):
         self.assertIn("postgres-latest-frontier.slrw", text)
         self.assertIn("binary_wire=true", text)
         self.assertIn("rust-world-compiler-unavailable", text)
+        self.assertIn("rust-consumer-residual-unavailable", text)
+        self.assertIn("binary-consumer-spec-unavailable", text)
 
     def test_python_is_confined_to_spacy_boundary_and_legacy_text_abis_are_absent(self) -> None:
         text = RUNNER.read_text(encoding="utf-8")
