@@ -7,18 +7,17 @@ import DASHI.Core.IntersectionalNonFactorability as Intersectional
 import DASHI.Culture.CohnTechnostrategicDiscourseExact as Cohn
 import DASHI.Culture.CohnTechnostrategicSourceAtlasExact as CohnSources
 import DASHI.Culture.CohnDiscursiveAdmissibilityNaturalisationExact as Admissibility
+import DASHI.Culture.IntellectualReceptionAdmissibilityStratumWhatIfExact as Reception
 
 ------------------------------------------------------------------------
 -- Regression contract for the Cohn / feminist / discourse bridge.
 --
 -- The first tranche fixed the coarse strategic collision, constructive repair,
--- and source/authority firewalls.  The second tranche requires a further
--- separation:
+-- and source/authority firewalls.  The second tranche requires:
 --
 --   expressible != institutionally admissible != materially/situationally real
 --
--- together with a naturalisation obstruction.  These are DASHI finite theorem
--- patterns; Cohn's sources motivate the bounded fixture but do not author them.
+-- plus normalisation != adequacy and a history-qualified future-cone weld.
 ------------------------------------------------------------------------
 
 coarseTechnostrategicCollision :
@@ -92,7 +91,7 @@ discourseAnalysisNotMaterialInstitutionalExhaustion :
 discourseAnalysisNotMaterialInstitutionalExhaustion = refl
 
 ------------------------------------------------------------------------
--- New Pareto seam: expression, admissibility and reality remain distinct.
+-- Expression, admissibility and reality remain distinct.
 ------------------------------------------------------------------------
 
 sameExpressionCanDifferInAdmissibility :
@@ -130,6 +129,19 @@ capabilityRecognitionBoundaryReused :
   Admissibility.recognitionLegibilityBoundary
   ≡ Admissibility.recognitionLegibilityBoundary
 capabilityRecognitionBoundaryReused = refl
+
+------------------------------------------------------------------------
+-- Dynamic/history-qualified weld.
+-- The existing reception owner proves that the same present vocabulary can
+-- hide distinct future cones.  The Cohn bridge must expose that result rather
+-- than treating today's expert vocabulary as a complete dynamics state.
+------------------------------------------------------------------------
+
+samePresentVocabularyCannotDetermineFutureCone :
+  Intersectional.FactorsThrough
+    Reception.presentSurface Reception.futureCode → ⊥
+samePresentVocabularyCannotDetermineFutureCone =
+  Admissibility.presentVocabularyCannotDetermineInstitutionalFutureCone
 
 secondCohnSourceDoesNotCreateAuthority :
   Source.citationCreatesAuthority CohnSources.cohnWarsWimpsWomen ≡ false
