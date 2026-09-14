@@ -28,6 +28,9 @@ import DASHI.Cognition.PNF.CoarseFineStaticDynamicBridgeRegression
 
 import DASHI.Interop.LocalGlobalBundleGluingExact
 import DASHI.Interop.LocalGlobalBundleGluingRegression
+import DASHI.Governance.LocalGlobalCouncilGluing
+import DASHI.Governance.CouncilBundleGluingCalculusAdapterExact
+import DASHI.Governance.CouncilBundleGluingCalculusAdapterRegression
 import DASHI.Combinatorics.GraphColouringBundleGluingAdapterExact
 import DASHI.ComputerScience.RSA260BundleGluingAdapterExact
 import DASHI.Reasoning.WavePantsBundleGluingAdapterExact
