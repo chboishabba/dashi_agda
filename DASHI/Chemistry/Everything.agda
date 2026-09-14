@@ -156,3 +156,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserver
 -- FRET axes cannot be promoted to complete NDim state recovery. A three-axis
 -- observer repairs only the declared third-coordinate query.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETThirdAxisExact
+
+-- Consumer-indexed Pareto selection: the two-axis join is the minimal eligible
+-- observer for a declared two-axis consumer, while the third-coordinate query
+-- excludes it and promotes the three-axis observer.  Description length and
+-- NDim design costs are applied only after adequacy, never as physical truth.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverParetoExact
