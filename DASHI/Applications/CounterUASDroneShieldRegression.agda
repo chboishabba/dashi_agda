@@ -9,6 +9,7 @@ import DASHI.Applications.CounterUASOpenSetRFSourceAtlasExact as OpenRFSources
 import DASHI.Applications.CounterUASOperationalSourceAtlasExact as OperationalSources
 import DASHI.Applications.CounterUASSensibLawAuthorityBridgeExact as LegalBridge
 import DASHI.Law.SensibLawInternationalInstrumentLifecycleExact as Lifecycle
+import DASHI.Law.SensibLawTreatyParticipationExact as Participation
 import DASHI.Law.SensibLawCCWLAWS2026Exact as CCW2026
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
@@ -78,12 +79,26 @@ record CounterUASDroneShieldRegression : Set₁ where
         Lifecycle.consensusAndInstitutionalProjection
         Lifecycle.instrumentSemantics
         Lifecycle.bindingEffectQuery
+    parentConventionPartyHasProtocolBindingAdequacyDefect :
+      Adequacy.QueryAdequacyDefect
+        Participation.parentConventionOnlyProjection
+        Participation.participationSemantics
+        Participation.protocolBindingQuery
+    joinedParticipationDeterminesProtocolBinding :
+      Adequacy.AdequateFor
+        Participation.parentAndProtocolProjection
+        Participation.participationSemantics
+        Participation.protocolBindingQuery
     septemberInstrumentNatureStillUnresolved :
       CCW2026.september2026InstrumentNature ≡ Lifecycle.instrumentNatureUnresolved
     ccwOfficialSourceAtlasNonPromoting :
       CCW2026.ccwLAWS2026SourceAtlasCreatesAuthority ≡ false
     ccwAgendaSourceRetainsAttributionSnowball :
       AttributionSnowball.SourceRoleSnowballReceipt CCW2026.ccwGGE2026AgendaSource
+    ccwDepositarySourceRetainsAttributionSnowball :
+      AttributionSnowball.SourceRoleSnowballReceipt CCW2026.ccwDepositaryStatusSource
+    ccwPartyCountDoesNotSetProtocolPartyCount :
+      CCW2026.parentConventionPartyCountDoesNotDetermineProtocolPartyCount ≡ true
     domesticAuthorityDoesNotSetInternationalApplicability :
       LegalBridge.domesticMitigationAuthorityDoesNotCreateInternationalLawApplicability ≡ true
     technicalAutonomyDoesNotCreateLawfulEngagement :
@@ -104,8 +119,12 @@ canonicalCounterUASDroneShieldRegression =
     OperationalSources.rfAI3SnapshotCreatesAuthorityIsFalse
     Lifecycle.consensusOnlyBindingAdequacyDefect
     Lifecycle.consensusAndInstitutionalDetermineBinding
+    Participation.parentConventionOnlyProtocolBindingAdequacyDefect
+    Participation.parentAndProtocolDetermineBinding
     refl
     CCW2026.ccwLAWS2026SourceAtlasCreatesAuthorityIsFalse
     CCW2026.ccwGGE2026AgendaSourceSnowballReceipt
+    CCW2026.ccwDepositaryStatusSourceSnowballReceipt
+    refl
     refl
     refl
