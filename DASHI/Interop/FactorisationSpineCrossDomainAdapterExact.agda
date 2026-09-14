@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.CoarseFineFabricCalculusExact as Coarse
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
+import DASHI.Core.ConsumerFibreRepairExact as Repair
 import DASHI.Core.FactorisationSpineCrosswalkExact as Crosswalk
 import DASHI.Core.ActionCrossingBraidExact as Crossing
 import DASHI.Law.SecurityRoutingComparatorHypervoxelExact as Security
@@ -50,12 +51,48 @@ indigenousPropositionProvenanceCollision =
       refl
       (λ ()))
 
+------------------------------------------------------------------------
+-- Return path: the generic repair theorem yields domain-local necessary
+-- refinement obligations.  These do not say which refinement is sufficient;
+-- only that any sufficient repair must separate the witnessed collision.
+------------------------------------------------------------------------
+
+securityRoutingRepairRequiresSeparation :
+  ∀ {Refinement : Set}
+    (refine : Security.SecurityRoutingHypervoxel → Refinement) →
+  Repair.RefinementRepairs
+    Security.coarseSecurityObserver
+    refine
+    Security.routingTarget →
+  refine Security.syntheticProtectiveHigh ≡
+    refine Security.syntheticCoerciveHigh →
+  ⊥
+securityRoutingRepairRequiresSeparation refine =
+  Crosswalk.projectionCollisionRepairRequiresSeparation
+    securityRoutingProjectionCollision
+
+indigenousProvenanceRepairRequiresSeparation :
+  ∀ {Refinement : Set}
+    (refine : IK.KnowledgeCarrier → Refinement) →
+  Repair.RefinementRepairs
+    IK.extractedProposition
+    refine
+    IK.carrierProvenance →
+  refine IK.indigenousMedicinalStoryCarrier ≡
+    refine IK.scientificMedicinalPaperCarrier →
+  ⊥
+indigenousProvenanceRepairRequiresSeparation refine =
+  Crosswalk.projectionCollisionRepairRequiresSeparation
+    indigenousPropositionProvenanceCollision
+
 record CrossDomainFactorisationAdapterBoundary : Set where
   constructor cross-domain-factorisation-adapter-boundary
   field
     actionCrossingUsesSharedProjectionSpine : Bool
     securityRoutingUsesSharedProjectionSpine : Bool
     indigenousProvenanceUsesSharedProjectionSpine : Bool
+    sharedSpineReturnsNecessaryRepairObligations : Bool
+    separatingWitnessAutomaticallyProvesGlobalSufficiency : Bool
     commonProjectionShapeIdentifiesDomains : Bool
     commonProjectionShapeImportsDomainAuthority : Bool
 
@@ -63,4 +100,4 @@ canonicalCrossDomainFactorisationAdapterBoundary :
   CrossDomainFactorisationAdapterBoundary
 canonicalCrossDomainFactorisationAdapterBoundary =
   cross-domain-factorisation-adapter-boundary
-    true true true false false
+    true true true true false false false
