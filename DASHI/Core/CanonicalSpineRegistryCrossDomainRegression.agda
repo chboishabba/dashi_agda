@@ -9,6 +9,9 @@ import DASHI.Core.CanonicalSpineRegistry as Registry
 factorisationCanonical : Registry.CanonicalOwner
 factorisationCanonical = Registry.factorisationOwner
 
+queryIndexedProjectionCanonical : Registry.CanonicalOwner
+queryIndexedProjectionCanonical = Registry.queryIndexedProjectionOwner
+
 projectionFibreCanonical : Registry.CanonicalOwner
 projectionFibreCanonical = Registry.projectionFibreOwner
 
@@ -48,6 +51,10 @@ genericReceiptCanonical = Registry.genericReceiptOwner
 factorisationParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed factorisationCanonical ≡ false
 factorisationParallelDefinitionsBlocked = refl
+
+queryIndexedProjectionParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed queryIndexedProjectionCanonical ≡ false
+queryIndexedProjectionParallelDefinitionsBlocked = refl
 
 batchParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed batchCanonical ≡ false
