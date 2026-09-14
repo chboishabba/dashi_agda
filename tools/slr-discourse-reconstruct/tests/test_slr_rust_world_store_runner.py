@@ -6,7 +6,7 @@ RUNNER = ROOT / "run_world_research_typed_route_round.sh"
 
 
 class RustWorldStoreRunnerTests(unittest.TestCase):
-    def test_runner_builds_binary_observation_compiles_residuals_reviews_stores_and_plans(self) -> None:
+    def test_runner_builds_binary_observation_residual_review_plan_and_selection(self) -> None:
         text = RUNNER.read_text(encoding="utf-8")
         self.assertIn("SLR_SOURCE_TEXT", text)
         self.assertIn("slr_spacy_observation_wire.py", text)
@@ -27,8 +27,11 @@ class RustWorldStoreRunnerTests(unittest.TestCase):
         self.assertIn("SLR_RESIDUAL_PLANNER_BIN", text)
         self.assertIn("sensiblaw-residual-planner", text)
         self.assertIn("route-intents.slrw", text)
-        self.assertIn("rust-evidence-payment-unavailable", text)
-        self.assertIn("rust-residual-planner-unavailable", text)
+        self.assertIn("SLR_ROUTE_CANDIDATE_STREAM", text)
+        self.assertIn("SLR_ROUTE_SELECTOR_BIN", text)
+        self.assertIn("sensiblaw-route-selector", text)
+        self.assertIn("selected-routes.slrw", text)
+        self.assertIn("rust-route-selector-unavailable", text)
         self.assertIn("binary_wire=true", text)
 
     def test_python_is_confined_to_spacy_boundary_and_legacy_text_abis_are_absent(self) -> None:
