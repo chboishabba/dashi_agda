@@ -81,5 +81,6 @@ import DASHI.Interop.SLRResidualDrivenProducerPlannerExact
 import DASHI.Interop.SLRReviewedEvidencePaymentExact
 import DASHI.Interop.SLRBinaryRouteCandidateParetoExact
 import DASHI.Interop.SLRWikidataRdfCandidateProviderExact
+import DASHI.Interop.SLRSelectedRouteExecutionNextObservationExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
