@@ -6,14 +6,19 @@ import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
 import DASHI.Culture.CohnTechnostrategicDiscourseExact as Cohn
 import DASHI.Culture.CohnTechnostrategicSourceAtlasExact as CohnSources
+import DASHI.Culture.CohnDiscursiveAdmissibilityNaturalisationExact as Admissibility
 
 ------------------------------------------------------------------------
 -- Regression contract for the Cohn / feminist / discourse bridge.
 --
--- This contract was written before the production owners.  It therefore fixes
--- the desired collision, repair and no-promotion surface independently of the
--- implementation.  Kernel certification is tracked separately from that TDD
--- ordering and is not inferred from the existence of this file.
+-- The first tranche fixed the coarse strategic collision, constructive repair,
+-- and source/authority firewalls.  The second tranche requires a further
+-- separation:
+--
+--   expressible != institutionally admissible != materially/situationally real
+--
+-- together with a naturalisation obstruction.  These are DASHI finite theorem
+-- patterns; Cohn's sources motivate the bounded fixture but do not author them.
 ------------------------------------------------------------------------
 
 coarseTechnostrategicCollision :
@@ -85,6 +90,55 @@ discourseAnalysisNotMaterialInstitutionalExhaustion :
   Cohn.discourseAnalysisExhaustsMaterialInstitutionalAnalysis
     Cohn.canonicalCohnTechnostrategicBoundary ≡ false
 discourseAnalysisNotMaterialInstitutionalExhaustion = refl
+
+------------------------------------------------------------------------
+-- New Pareto seam: expression, admissibility and reality remain distinct.
+------------------------------------------------------------------------
+
+sameExpressionCanDifferInAdmissibility :
+  Admissibility.expressionProjection Admissibility.expressibleRejected
+  ≡ Admissibility.expressionProjection Admissibility.expressibleAdmitted
+sameExpressionCanDifferInAdmissibility = refl
+
+expressionCannotDetermineAdmissibility :
+  Intersectional.FactorsThrough
+    Admissibility.expressionProjection
+    Admissibility.admissibilityProjection → ⊥
+expressionCannotDetermineAdmissibility =
+  Admissibility.expressionSurfaceCannotDetermineAdmissibility
+
+inadmissibilityCannotDetermineMaterialIrrelevance :
+  Intersectional.FactorsThrough
+    Admissibility.admissibilityProjection
+    Admissibility.materialRelevanceProjection → ⊥
+inadmissibilityCannotDetermineMaterialIrrelevance =
+  Admissibility.admissibilityCannotDetermineMaterialRelevance
+
+unexpressibleCanStillBeMateriallyRelevant :
+  Admissibility.expressionProjection Admissibility.outsideVocabularyConsequential ≡ false ×
+  Admissibility.materialRelevanceProjection Admissibility.outsideVocabularyConsequential ≡ true
+unexpressibleCanStillBeMateriallyRelevant = refl , refl
+
+normalisationCannotDetermineConsumerAdequacy :
+  Intersectional.FactorsThrough
+    Admissibility.normalisationProjection
+    Admissibility.adequacyProjection → ⊥
+normalisationCannotDetermineConsumerAdequacy =
+  Admissibility.normalisedPracticeCannotDetermineAdequacy
+
+capabilityRecognitionBoundaryReused :
+  Admissibility.recognitionLegibilityBoundary
+  ≡ Admissibility.recognitionLegibilityBoundary
+capabilityRecognitionBoundaryReused = refl
+
+secondCohnSourceDoesNotCreateAuthority :
+  Source.citationCreatesAuthority CohnSources.cohnWarsWimpsWomen ≡ false
+secondCohnSourceDoesNotCreateAuthority = refl
+
+cohnSourceCountIsTwo :
+  Source.sourceCount (Source.sources CohnSources.cohnTechnostrategicAtlas)
+  ≡ suc (suc zero)
+cohnSourceCountIsTwo = refl
 
 cohnCitationDoesNotCreateAuthority :
   Source.citationCreatesAuthority CohnSources.cohnSexAndDeath ≡ false
