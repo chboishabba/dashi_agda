@@ -68,6 +68,12 @@ experimentalCoordinateOwner = canonical-owner
   "DASHI.Core.ExperimentalCoordinateDesignExact"
   exactInterface false refl
 
+declaredScenarioRobustnessOwner : CanonicalOwner
+declaredScenarioRobustnessOwner = canonical-owner
+  "least-privilege obligations quantified only over a declared finite scenario/family, with universal-to-declared weakening and subensemble restriction"
+  "DASHI.Core.DeclaredScenarioRobustnessExact"
+  exactInterface false refl
+
 osintAcquisitionOwner : CanonicalOwner
 osintAcquisitionOwner = canonical-owner
   "OSINT acquisition, source/carrier identity, corroboration independence, and search-nonlocation firewall"
@@ -145,13 +151,14 @@ canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
   descentOwner ∷ approximateNaturalityOwner ∷ kernelSplitOwner ∷ codingTargetOwner ∷
   continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷
-  experimentalCoordinateOwner ∷ osintAcquisitionOwner ∷ boundedNegativeSearchOwner ∷
-  robustExperimentInferenceOwner ∷ multipartReconstructionOwner ∷ projectionFibreOwner ∷
-  consumerFibreRepairOwner ∷ frozenProvenanceDynamicOwner ∷
-  queryIndexedFutureSafePromotionOwner ∷ candidateFamilyExecutionOwner ∷
-  requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷ candidateObjectIdentityOwner ∷
-  attributedSourceOwner ∷ attributionSnowballOwner ∷ appendOnlyRevisionOwner ∷
-  residualActionPolicyOwner ∷ typedDependencyOwner ∷ genericReceiptOwner ∷ []
+  experimentalCoordinateOwner ∷ declaredScenarioRobustnessOwner ∷
+  osintAcquisitionOwner ∷ boundedNegativeSearchOwner ∷ robustExperimentInferenceOwner ∷
+  multipartReconstructionOwner ∷ projectionFibreOwner ∷ consumerFibreRepairOwner ∷
+  frozenProvenanceDynamicOwner ∷ queryIndexedFutureSafePromotionOwner ∷
+  candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷
+  candidateObjectIdentityOwner ∷ attributedSourceOwner ∷ attributionSnowballOwner ∷
+  appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷ typedDependencyOwner ∷
+  genericReceiptOwner ∷ []
 
 record RepositoryClosureBoundary : Set where
   constructor repository-closure-boundary
