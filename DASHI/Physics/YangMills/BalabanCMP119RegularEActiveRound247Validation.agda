@@ -19,10 +19,6 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularEActiveRound247Validation whe
 -- The full CMP122 Theorem-1 witness remains a compatibility producer, but the
 -- BC1-facing route consumes only preservation of the Sect.-2 form. Quantitative
 -- Sect.-2 bounds are therefore not primitive dependencies of this continuation.
---
--- Source authority that E_k is localized/analytic is distinct from the concrete
--- repository localization carrier.  R249 reuses that carrier only after proving
--- it is the SAME E_k as the finite-history raw term.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -90,16 +86,19 @@ literalActiveCMP119RegularESection2PredicateInstantiationLevel : ProofLevel
 literalActiveCMP119RegularESection2PredicateInstantiationLevel =
   R247.literalActiveCMP119RegularESection2PredicateInstantiationLevel
 
--- Direct R248 source/repository payment on the legacy opaque-predicate route:
--- interpret the CMP119 Sect.-2 E-localization predicate as concrete localization
--- data for the exact raw E_k.  The preferred concrete-predicate route above
--- removes this as an independent decoder theorem, but not the source witness
--- that E_k actually satisfies the concrete localization predicate.
+-- Legacy opaque-predicate route: an explicit decoder is still conditional.
 literalRawELocalizedAnalyticDecoderLevel : ProofLevel
 literalRawELocalizedAnalyticDecoderLevel =
   R248.literalRawELocalizedAnalyticDecoderLevel
 
--- Preferred reuse decomposition from R249.  The older function-valued
+-- Preferred concrete-predicate route: decoder plumbing is closed; the source
+-- payment is now the active Sect.-2 witness that the exact raw E_k satisfies the
+-- concrete localization predicate.
+literalConcreteELocalizationActiveSection2WitnessLevel : ProofLevel
+literalConcreteELocalizationActiveSection2WitnessLevel =
+  R248.literalConcreteELocalizationActiveSection2WitnessLevel
+
+-- Optional reuse decomposition from R249.  The older function-valued
 -- localization carrier may be reused, but only after an explicit same-E weld to
 -- the finite-history raw regular term.  Neither payment is manufactured here.
 literalFunctionalRegularELocalizationCarrierLevel : ProofLevel
