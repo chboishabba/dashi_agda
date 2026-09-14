@@ -76,5 +76,6 @@ import DASHI.Interop.SLRSpacyObservationWorldCompilerParityExact
 import DASHI.Interop.SLRCompiledWorldBodyParityExact
 import DASHI.Interop.SLRConsumerResidualCompilerParityExact
 import DASHI.Interop.SLRAppendOnlyActiveResidualFrontierExact
+import DASHI.Interop.SLRResidualDrivenProducerPlannerExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
