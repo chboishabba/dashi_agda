@@ -27,6 +27,28 @@ informationSharingSubdivisionDALocated :
 informationSharingSubdivisionDALocated = refl
 
 ------------------------------------------------------------------------
+-- Section 67ZBH: receipt alone does not automatically equal admission, but
+-- intended substantive reliance on material supplied through Subdivision DA
+-- triggers the statutory admission requirement. Case-management-only reliance
+-- is expressly separated.
+------------------------------------------------------------------------
+
+substantiveRelianceRequiresAdmission :
+  Interaction.admissionConsequence Interaction.substantiveReliance
+    ≡ Interaction.admissionRequired
+substantiveRelianceRequiresAdmission = refl
+
+caseManagementOnlyDoesNotRequireAdmission :
+  Interaction.admissionConsequence Interaction.caseManagementOnly
+    ≡ Interaction.admissionNotRequiredByCaseManagementException
+caseManagementOnlyDoesNotRequireAdmission = refl
+
+noRelianceDoesNotTriggerAdmissionRule :
+  Interaction.admissionConsequence Interaction.noRelianceDeclared
+    ≡ Interaction.admissionRuleNotTriggered
+noRelianceDoesNotTriggerAdmissionRule = refl
+
+------------------------------------------------------------------------
 -- Child-protection / family-law collaboration is source-paid as a parallel-
 -- systems coordination surface, not as a universal intervention obligation.
 ------------------------------------------------------------------------
