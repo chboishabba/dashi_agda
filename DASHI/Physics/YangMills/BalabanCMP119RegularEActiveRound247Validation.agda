@@ -57,6 +57,17 @@ rawActiveRegularEFormWitnessCompilerLevel : ProofLevel
 rawActiveRegularEFormWitnessCompilerLevel =
   R248.rawActiveRegularEFormWitnessCompilerLevel
 
+-- Pareto refinement: when the source predicate vocabulary itself chooses
+-- ELocalizedAnalytic to be the concrete same-E localization record, the decoder
+-- is definitional rather than a second source theorem.
+preferredConcreteELocalizationPredicateCompilerLevel : ProofLevel
+preferredConcreteELocalizationPredicateCompilerLevel =
+  R248.preferredConcreteELocalizationPredicateCompilerLevel
+
+preferredConcreteELocalizationIdentityDecoderCompilerLevel : ProofLevel
+preferredConcreteELocalizationIdentityDecoderCompilerLevel =
+  R248.preferredConcreteELocalizationIdentityDecoderCompilerLevel
+
 functionalLocalizationToRawDecoderCompilerLevel : ProofLevel
 functionalLocalizationToRawDecoderCompilerLevel =
   R249.functionalLocalizationToRawDecoderCompilerLevel
@@ -79,8 +90,11 @@ literalActiveCMP119RegularESection2PredicateInstantiationLevel : ProofLevel
 literalActiveCMP119RegularESection2PredicateInstantiationLevel =
   R247.literalActiveCMP119RegularESection2PredicateInstantiationLevel
 
--- Direct R248 source/repository payment: interpret the opaque CMP119 Sect.-2
--- E-localization predicate as concrete localization data for the exact raw E_k.
+-- Direct R248 source/repository payment on the legacy opaque-predicate route:
+-- interpret the CMP119 Sect.-2 E-localization predicate as concrete localization
+-- data for the exact raw E_k.  The preferred concrete-predicate route above
+-- removes this as an independent decoder theorem, but not the source witness
+-- that E_k actually satisfies the concrete localization predicate.
 literalRawELocalizedAnalyticDecoderLevel : ProofLevel
 literalRawELocalizedAnalyticDecoderLevel =
   R248.literalRawELocalizedAnalyticDecoderLevel
