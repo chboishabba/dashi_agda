@@ -74,6 +74,12 @@ robustExperimentInferenceOwner = canonical-owner
   "DASHI.Core.RobustExperimentInferenceFrontierExact"
   exactInterface false refl
 
+multipartReconstructionOwner : CanonicalOwner
+multipartReconstructionOwner = canonical-owner
+  "complete multipart reconstruction with indexed part admission, compatibility, and explicit whole same-object receipt"
+  "DASHI.Core.MultipartSameObjectReconstructionExact"
+  exactInterface false refl
+
 projectionFibreOwner : CanonicalOwner
 projectionFibreOwner = canonical-owner "coarse/fine projection with retained relative-fine fibre and exact reopening" "DASHI.Core.CoarseFineRelativeFibreExact" exactInterface false refl
 
@@ -115,11 +121,11 @@ canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
   descentOwner ∷ approximateNaturalityOwner ∷ kernelSplitOwner ∷ codingTargetOwner ∷
   continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷ boundedNegativeSearchOwner ∷
-  robustExperimentInferenceOwner ∷ projectionFibreOwner ∷ consumerFibreRepairOwner ∷
-  candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷ localGlobalGluingOwner ∷
-  candidateObjectIdentityOwner ∷ attributedSourceOwner ∷ attributionSnowballOwner ∷
-  appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷ typedDependencyOwner ∷
-  genericReceiptOwner ∷ []
+  robustExperimentInferenceOwner ∷ multipartReconstructionOwner ∷ projectionFibreOwner ∷
+  consumerFibreRepairOwner ∷ candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷
+  localGlobalGluingOwner ∷ candidateObjectIdentityOwner ∷ attributedSourceOwner ∷
+  attributionSnowballOwner ∷ appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷
+  typedDependencyOwner ∷ genericReceiptOwner ∷ []
 
 record RepositoryClosureBoundary : Set where
   constructor repository-closure-boundary
