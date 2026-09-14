@@ -1,0 +1,47 @@
+module DASHI.Law.SensibLawReligiousSocialBrokerageRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Law.SensibLawReligiousSocialBrokerageExact as Brokerage
+
+parentNormProductionReusedRegression :
+  Brokerage.parentNormProductionReused Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ true
+parentNormProductionReusedRegression = refl
+
+parentLobbyingEdgeDisciplineReusedRegression :
+  Brokerage.parentLobbyingEdgeDisciplineReused Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ true
+parentLobbyingEdgeDisciplineReusedRegression = refl
+
+brokerageLiteraturePaidRegression :
+  Brokerage.generalBrokerageLiteraturePaid Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ true
+brokerageLiteraturePaidRegression = refl
+
+religiousNetworkLiteraturePaidRegression :
+  Brokerage.religiousNetworkPoliticalInfluenceLiteraturePaid Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ true
+religiousNetworkLiteraturePaidRegression = refl
+
+churchMembershipAutomaticallyInfluenceRegression :
+  Brokerage.churchMembershipAutomaticallyPoliticalInfluence Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ false
+churchMembershipAutomaticallyInfluenceRegression = refl
+
+donationAutomaticallyQuidProQuoRegression :
+  Brokerage.religiousDonationAutomaticallyQuidProQuo Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ false
+donationAutomaticallyQuidProQuoRegression = refl
+
+priestRelationshipAutomaticallyCorruptionRegression :
+  Brokerage.clergyRelationshipAutomaticallyCorruption Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ false
+priestRelationshipAutomaticallyCorruptionRegression = refl
+
+anecdoteAutomaticallyHistoricalFactRegression :
+  Brokerage.personalAnecdoteAutomaticallyHistoricalFact Brokerage.canonicalReligiousSocialBrokerageBoundary
+  ≡ false
+anecdoteAutomaticallyHistoricalFactRegression = refl
