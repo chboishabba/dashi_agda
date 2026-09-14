@@ -6,6 +6,7 @@ module DASHI.CoarseFineFabricEverything where
 
 import DASHI.Core.CanonicalSpineRegistry
 import DASHI.Core.CanonicalSpineRegistryCrossDomainRegression
+import DASHI.Core.SnowballOSINTAcquisitionInvariantExact
 import DASHI.Core.BoundedNegativeSearchExact
 import DASHI.Core.BoundedNegativeSearchRegression
 import DASHI.Core.RobustExperimentInferenceFrontierExact
@@ -56,6 +57,8 @@ import DASHI.Interop.FactorisationSpineCrossDomainAdapterExact
 import DASHI.Interop.FactorisationSpineCrossDomainAdapterRegression
 import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact
 import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterRegression
+import DASHI.Interop.OSINTBoundedNegativeSearchAdapterExact
+import DASHI.Interop.OSINTBoundedNegativeSearchAdapterRegression
 import DASHI.Interop.LocalGlobalBundleGluingExact
 import DASHI.Interop.LocalGlobalBundleGluingRegression
 import DASHI.Governance.LocalGlobalCouncilGluing
