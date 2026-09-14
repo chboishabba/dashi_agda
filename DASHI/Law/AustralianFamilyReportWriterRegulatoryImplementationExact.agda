@@ -61,6 +61,17 @@ familyLawRegulations2024Source = Attribution.mkNoDOISource
   "current regulations surface searched for family-report-writer / section-11K implementation terms; non-location is bounded search evidence, not proof of absence"
   Attribution.publicAttribution
 
+familyLawAmendmentAct2023Schedule7Source : Attribution.AttributedSource
+familyLawAmendmentAct2023Schedule7Source = Attribution.mkNoDOISource
+  "Commonwealth of Australia"
+  "Family Law Amendment Act 2023, Schedule 7—Family report writers"
+  "Federal Register of Legislation, Act No. 87 of 2023"
+  "2023"
+  "https://www.legislation.gov.au/C2023A00087/latest/text"
+  Attribution.governmentSource
+  "historical amending Act paying the enactment genealogy of Part IIIAA and section 11K; it does not pay a later implementing regulation"
+  Attribution.publicAttribution
+
 attorneyGeneralFamilyReportWriterConsultationSource : Attribution.AttributedSource
 attorneyGeneralFamilyReportWriterConsultationSource = Attribution.mkNoDOISource
   "Australian Government Attorney-General's Department"
@@ -78,12 +89,13 @@ regulatoryImplementationSourceAtlas = Attribution.mkSourceAtlas
   "DASHI.Law.AustralianFamilyReportWriterRegulatoryImplementationExact"
   (familyLawActPartIIIAASource
     ∷ familyLawRegulations2024Source
+    ∷ familyLawAmendmentAct2023Schedule7Source
     ∷ attorneyGeneralFamilyReportWriterConsultationSource
     ∷ [])
-  "primary Act + current Federal Register regulations surface + historical implementation context; no citation creates implementation, compliance, breach or legal authority beyond its source role"
+  "primary Act + current Federal Register regulations surface + amending-Act genealogy + historical implementation context; no citation creates implementation, compliance, breach or legal authority beyond its source role"
 
 ------------------------------------------------------------------------
--- Current bounded search receipt.
+-- Current principal-instrument search receipt.
 ------------------------------------------------------------------------
 
 record RegulatoryImplementationSearchReceipt : Set where
@@ -127,6 +139,46 @@ currentRegulatoryImplementationSearchReceipt =
     false
 
 ------------------------------------------------------------------------
+-- Widened search receipt.
+--
+-- A separate public-web search was run across legislation.gov.au / AGD for
+-- family-report-writer regulations and section-11K implementation.  It located
+-- the Act, Schedule-7 amending genealogy and historical consultation context,
+-- but no separate implementing instrument in the returned result set.  Search
+-- engine coverage is not the Federal Register itself and cannot prove absence.
+------------------------------------------------------------------------
+
+record BroaderRegulatorySearchReceipt : Set where
+  constructor broaderRegulatorySearchReceipt
+  field
+    broaderSearchDate : String
+    federalRegisterDomainSearchPerformed : Bool
+    attorneyGeneralDomainSearchPerformed : Bool
+    enablingActResultsLocated : Bool
+    schedule7AmendingActLocated : Bool
+    historicalConsultationLocated : Bool
+    separateImplementingInstrumentLocated : Bool
+    searchResultSetExhaustive : Bool
+    broaderSearchAbsenceClaim : Bool
+    broaderSearchScope : String
+
+open BroaderRegulatorySearchReceipt public
+
+currentBroaderRegulatorySearchReceipt : BroaderRegulatorySearchReceipt
+currentBroaderRegulatorySearchReceipt =
+  broaderRegulatorySearchReceipt
+    "2026-09-14"
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+    false
+    "Public domain-restricted search across legislation.gov.au and ag.gov.au for family-report-writer / section-11K regulations. Returned sources included the Family Law Act 1975, Family Law Amendment Act 2023 Schedule 7 and AGD consultation material; no separate implementing instrument appeared in the returned result set. This is acquisition metadata only and is not exhaustive Federal Register proof."
+
+------------------------------------------------------------------------
 -- Canonical paid/unpaid coordinates.
 ------------------------------------------------------------------------
 
@@ -139,9 +191,20 @@ section11KEnablingPowerPaid = true
 currentRegulationsSurfaceChecked : Bool
 currentRegulationsSurfaceChecked = true
 
+broaderImplementationSearchPerformed : Bool
+broaderImplementationSearchPerformed = true
+
 implementingProvisionLocated : Bool
 implementingProvisionLocated =
   implementingProvisionLocatedByThisSearch currentRegulatoryImplementationSearchReceipt
+
+broaderSearchLocatedImplementingInstrument : Bool
+broaderSearchLocatedImplementingInstrument =
+  separateImplementingInstrumentLocated currentBroaderRegulatorySearchReceipt
+
+broaderSearchProvesAbsence : Bool
+broaderSearchProvesAbsence =
+  broaderSearchAbsenceClaim currentBroaderRegulatorySearchReceipt
 
 regulatorDesignationPaid : Bool
 regulatorDesignationPaid =
@@ -174,6 +237,7 @@ data RecognitionPowerAutomaticallyCreatesRecognitionScheme : Set where
 data PossibleCourtConsequenceAutomaticallyOperativeRule : Set where
 data ProfessionalRegistrationAutomaticallyFamilyReportRecognition : Set where
 data RegulationsInstrumentAutomaticallyImplementsEveryActPower : Set where
+data PublicSearchResultsAutomaticallyExhaustFederalRegister : Set where
 
 enablingPowerDoesNotAutomaticallyCreateOperativeRegime :
   EnablingPowerAutomaticallyOperativeRegime → ⊥
@@ -203,18 +267,25 @@ regulationsInstrumentDoesNotAutomaticallyImplementEveryActPower :
   RegulationsInstrumentAutomaticallyImplementsEveryActPower → ⊥
 regulationsInstrumentDoesNotAutomaticallyImplementEveryActPower ()
 
+publicSearchResultsDoNotAutomaticallyExhaustFederalRegister :
+  PublicSearchResultsAutomaticallyExhaustFederalRegister → ⊥
+publicSearchResultsDoNotAutomaticallyExhaustFederalRegister ()
+
 record RegulatoryImplementationBoundary : Set where
   constructor regulatoryImplementationBoundary
   field
     primaryActEnacted : Bool
     enablingPowerLocated : Bool
     regulationsInstrumentLocatedAndInForce : Bool
+    principalRegulationsSearched : Bool
+    broaderPublicSearchPerformed : Bool
     implementingProvisionLocatedFlag : Bool
     regulatorDesignationPaidFlag : Bool
     recognitionSchemePaidFlag : Bool
     complaintSchemePaidFlag : Bool
     courtDisregardRulePaidFlag : Bool
     negativeSearchProvesAbsenceFlag : Bool
+    publicSearchExhaustsFederalRegister : Bool
     citationCreatesImplementation : Bool
     citationCreatesCompliance : Bool
     citationCreatesBreach : Bool
@@ -227,6 +298,9 @@ canonicalRegulatoryImplementationBoundary =
     true
     true
     true
+    true
+    true
+    false
     false
     false
     false
