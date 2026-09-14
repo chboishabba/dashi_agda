@@ -7,6 +7,8 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
+import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
 ------------------------------------------------------------------------
 -- AUSTRALIAN FAMILY-LAW ORDER INTERACTION
@@ -118,6 +120,115 @@ childProtectionJurisdictionSeparatelyTyped : Bool
 childProtectionJurisdictionSeparatelyTyped = true
 
 ------------------------------------------------------------------------
+-- Query-indexed observer cross-pollination.
+--
+-- Merely observing the existence of the same federal order is enough for the
+-- federal-order-existence query, but not for the consumer asking about the
+-- operative effect on an existing family-violence order.  The missing
+-- coordinate is inconsistency.  Joining that coordinate strictly refines the
+-- coarse federal-order surface for this finite specimen.
+------------------------------------------------------------------------
+
+data OrderInteractionWorld : Set where
+  sameFederalOrderNoInconsistency : OrderInteractionWorld
+  sameFederalOrderWithInconsistency : OrderInteractionWorld
+
+data FederalOrderSurface : Set where
+  sameFederalOrderObserved : FederalOrderSurface
+
+data InconsistencyCoordinate : Set where
+  noInconsistency : InconsistencyCoordinate
+  inconsistencyPresent : InconsistencyCoordinate
+
+data OrderInteractionQuery : Set where
+  federalOrderExistsQuery : OrderInteractionQuery
+  fvoEffectQuery : OrderInteractionQuery
+
+data OrderInteractionAnswer : Set where
+  federalOrderExistsAnswer : OrderInteractionAnswer
+  fvoRemainsEffectiveAnswer : OrderInteractionAnswer
+  fvoInvalidToExtentAnswer : OrderInteractionAnswer
+
+federalOrderSurface : OrderInteractionWorld → FederalOrderSurface
+federalOrderSurface world = sameFederalOrderObserved
+
+inconsistencyCoordinate : OrderInteractionWorld → InconsistencyCoordinate
+inconsistencyCoordinate sameFederalOrderNoInconsistency = noInconsistency
+inconsistencyCoordinate sameFederalOrderWithInconsistency = inconsistencyPresent
+
+orderInteractionAnswer :
+  OrderInteractionQuery → OrderInteractionWorld → OrderInteractionAnswer
+orderInteractionAnswer federalOrderExistsQuery world = federalOrderExistsAnswer
+orderInteractionAnswer fvoEffectQuery sameFederalOrderNoInconsistency =
+  fvoRemainsEffectiveAnswer
+orderInteractionAnswer fvoEffectQuery sameFederalOrderWithInconsistency =
+  fvoInvalidToExtentAnswer
+
+orderInteractionSemantics :
+  Query.QuerySemantics
+    OrderInteractionWorld
+    OrderInteractionQuery
+    OrderInteractionAnswer
+orderInteractionSemantics = Query.querySemantics orderInteractionAnswer
+
+federalOrderExistsQueryAdequate :
+  Query.AdequateFor
+    federalOrderSurface
+    orderInteractionSemantics
+    federalOrderExistsQuery
+federalOrderExistsQueryAdequate =
+  Query.factorsForQuery
+    (λ surface → federalOrderExistsAnswer)
+    (λ world → refl)
+
+FVOEffectQueryAdequacyDefect : Set₁
+FVOEffectQueryAdequacyDefect =
+  Query.QueryAdequacyDefect
+    federalOrderSurface
+    orderInteractionSemantics
+    fvoEffectQuery
+
+fvoEffectQueryAdequacyDefect : FVOEffectQueryAdequacyDefect
+fvoEffectQueryAdequacyDefect =
+  Query.queryAdequacyDefect
+    sameFederalOrderNoInconsistency
+    sameFederalOrderWithInconsistency
+    refl
+    (λ ())
+
+FVOEffectQueryAdequate : Set₁
+FVOEffectQueryAdequate =
+  Query.AdequateFor
+    federalOrderSurface
+    orderInteractionSemantics
+    fvoEffectQuery
+
+fvoEffectQueryNotAdequate : FVOEffectQueryAdequate → ⊥
+fvoEffectQueryNotAdequate =
+  Query.queryAdequacyDefectBlocksFactorisation fvoEffectQueryAdequacyDefect
+
+federalOrderPlusInconsistency :
+  OrderInteractionWorld → FederalOrderSurface × InconsistencyCoordinate
+federalOrderPlusInconsistency =
+  Observer.pairObserver federalOrderSurface inconsistencyCoordinate
+
+federalOrderPlusInconsistencyRefinesFederalOrder :
+  Observer.Refines federalOrderSurface federalOrderPlusInconsistency
+federalOrderPlusInconsistencyRefinesFederalOrder =
+  Observer.pairRefinesLeft federalOrderSurface inconsistencyCoordinate
+
+federalOrderPlusInconsistencyStrictRefinement :
+  Observer.StrictRefinement federalOrderSurface federalOrderPlusInconsistency
+federalOrderPlusInconsistencyStrictRefinement =
+  Observer.strictPairRefinement
+    federalOrderSurface
+    inconsistencyCoordinate
+    sameFederalOrderNoInconsistency
+    sameFederalOrderWithInconsistency
+    refl
+    (λ ())
+
+------------------------------------------------------------------------
 -- Operational interaction receipt.  The receipt identifies the mechanism and
 -- whether its factual/application predicates have actually been paid.
 ------------------------------------------------------------------------
@@ -215,6 +326,7 @@ record AustralianFamilyLawOrderInteractionBoundary : Set where
     section68RPowerSeparatedFromExercise : Bool
     informationSharingStagesSeparated : Bool
     childProtectionJurisdictionSeparate : Bool
+    queryIndexedInconsistencyCoordinateRetained : Bool
     bareSupremacySloganCompleteOperationalRule : Bool
     wholeFamilyViolenceOrderAutomaticallyInvalid : Bool
     informationExistenceEqualsCourtReceipt : Bool
@@ -228,6 +340,7 @@ canonicalAustralianFamilyLawOrderInteractionBoundary :
   AustralianFamilyLawOrderInteractionBoundary
 canonicalAustralianFamilyLawOrderInteractionBoundary =
   australianFamilyLawOrderInteractionBoundary
+    true
     true
     true
     true
