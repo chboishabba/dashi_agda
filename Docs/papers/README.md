@@ -24,6 +24,14 @@ tracked in:
 
 - `PublicationRoadmap.md`
 
+The current Paper-1 A/B/C/D nomenclature, transfer firewalls, periodic-B proof
+priority, and historical status of the same-output Gram/P3 attempt are frozen in:
+
+- `NSFourLanePublicationAddendum20260915.md`
+
+The dated addendum is a current control overlay; it does not delete the older
+publication roadmap or its historical sequencing record.
+
 Shared live paper support has moved to:
 
 - `../support/live/SupportCompendium.md`
