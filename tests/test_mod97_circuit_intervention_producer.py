@@ -63,6 +63,25 @@ def test_raw_receipt_does_not_promote_relations_or_beta() -> None:
     assert receipt["promotion"]["grokking_mechanism_paid"] is False
 
 
+def test_same_layer_post_relu_ablations_do_not_pay_directional_requirements() -> None:
+    receipt = build_intervention_receipt(
+        checkpoint_path="epoch-01000.pt",
+        checkpoint_sha256="abc",
+        selected_units=[0, 2],
+        baseline_test_loss=1.0,
+        singleton_effects={0: 0.2, 2: 0.3},
+        pair_effects={(0, 2): 0.8},
+    )
+
+    topology = receipt["requirement_evidence"]
+    assert topology["candidate_layer"] == "single shared hidden layer"
+    assert topology["intervention_site"] == "post-ReLU hidden activation"
+    assert topology["directed_hidden_to_hidden_path"] is False
+    assert topology["same_layer_pair_ablations_pay_direction"] is False
+    assert topology["directional_requirement_rule"] == "not available from this producer"
+    assert receipt["promotion"]["requirement_edges_paid"] is False
+
+
 def test_direct_script_help_resolves_repo_local_imports() -> None:
     result = subprocess.run(
         [sys.executable, "scripts/mod97_circuit_intervention_producer.py", "--help"],
