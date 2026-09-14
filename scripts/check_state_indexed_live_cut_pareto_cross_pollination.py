@@ -2,9 +2,10 @@
 """Static contract for state-indexed live-cut Pareto cross-pollination.
 
 The child composes the existing local/global bridge with residual/live-set
-salience, residual-conditioned experiment portfolios, and the source-correct
-SensibLaw guarded-cut rerun. It must not create legal authority, execution
-authority, or candidate admission from salience alone.
+salience, residual-conditioned experiment portfolios, the source-correct
+SensibLaw guarded-cut rerun, and the current NS Round83 producer cut. It must
+not create legal authority, execution authority, candidate admission from
+salience alone, or Clay promotion around an unpaid NS producer.
 """
 
 from pathlib import Path
@@ -28,6 +29,7 @@ require(OWNER, [
     "ResidualLiveSetSalienceSchedulerBidiExact",
     "ResidualConditionedExperimentPortfolioExact",
     "SensibLawDutySourceLineageRefinementCutRerunExact",
+    "NSTriadKNHighestAlphaRound83Exact",
     "StateIndexedLiveCutParetoAdapter",
     "canonicalStateIndexedLiveCutParetoAdapter",
     "salienceIndexedByResidualAndLiveSet",
@@ -43,6 +45,15 @@ require(OWNER, [
     "openCullenRouteStillDoesNotTransfer",
     "stateIndexedSelectionDoesNotCreateSourceAuthority",
     "historicalEvidenceMayRemainValidWhileNextStepSalienceChanges",
+    "NSCurrentCutParetoAdapter",
+    "canonicalNSCurrentCutParetoAdapter",
+    "relativeGrowthSplitClosed",
+    "nonlinearPressureRelativeGrowthEstimatePaid",
+    "criticalRatioBarrierPaid",
+    "clayPromotionPaid",
+    "closedAlgebraRemainsHighestSalience",
+    "currentNSCutMayBeSkippedByPareto",
+    "crossPollinationCreatesNSTheoremAuthority",
 ])
 
 require(REGRESSION, [
@@ -54,6 +65,13 @@ require(REGRESSION, [
     "terminalConsumerStillRequiredRegression",
     "sameGraphCutStateChangeRegression",
     "stateIndexedSelectionNoSourceAuthorityRegression",
+    "nsRelativeGrowthSplitClosedRegression",
+    "nsPressureProducerStillOpenRegression",
+    "nsCriticalBarrierStillOpenRegression",
+    "nsClayPromotionStillFalseRegression",
+    "nsClosedAlgebraNotHighestSalienceRegression",
+    "nsParetoCannotSkipCurrentCutRegression",
+    "nsCrossPollinationNoAuthorityRegression",
 ])
 
 print("State-indexed live-cut Pareto cross-pollination static contract: OK")
