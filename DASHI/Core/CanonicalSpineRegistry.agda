@@ -62,6 +62,12 @@ queryIndexedProjectionOwner = canonical-owner
   "DASHI.Core.QueryIndexedProjectionAdequacyExact"
   exactInterface false refl
 
+requiredObserverAxisJoinOwner : CanonicalOwner
+requiredObserverAxisJoinOwner = canonical-owner
+  "joint retention of multiple consumer-required observer axes, with exact product factorisation and per-axis defect blocking"
+  "DASHI.Core.RequiredObserverAxisJoinAdequacyExact"
+  exactInterface false refl
+
 experimentalCoordinateOwner : CanonicalOwner
 experimentalCoordinateOwner = canonical-owner
   "experimental coordinate roles, declared control-relative invariance, derived-discriminator provenance, and collision-separating coordinates"
@@ -151,7 +157,7 @@ canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
   descentOwner ∷ approximateNaturalityOwner ∷ kernelSplitOwner ∷ codingTargetOwner ∷
   continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷
-  experimentalCoordinateOwner ∷ declaredScenarioRobustnessOwner ∷
+  requiredObserverAxisJoinOwner ∷ experimentalCoordinateOwner ∷ declaredScenarioRobustnessOwner ∷
   osintAcquisitionOwner ∷ boundedNegativeSearchOwner ∷ robustExperimentInferenceOwner ∷
   multipartReconstructionOwner ∷ projectionFibreOwner ∷ consumerFibreRepairOwner ∷
   frozenProvenanceDynamicOwner ∷ queryIndexedFutureSafePromotionOwner ∷
