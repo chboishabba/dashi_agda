@@ -18,7 +18,7 @@ bedroyaBackgroundSource =
     "10.1103/1rsq-cv2m"
     "https://doi.org/10.1103/1rsq-cv2m"
     Source.academicArticleSource
-    "source for the fading-dark-sector background equations, DESI background-distance observables, and fitted c/cPrime coordinates; equation availability does not import the authors' complete numerical MCMC manifest"
+    "source for the fading-dark-sector background equations, DESI background-distance observables, fitted c/cPrime coordinates, and the Eq. (11) paper-level DM normalization identity; source availability does not import the complete numerical MCMC manifest"
     Source.publicAttribution
 
 paperArXiv : String
@@ -92,14 +92,30 @@ parameterManifestStillBlocksBackgroundExecution :
   Manifest.exactStandardBestFitTuplePublished
     Manifest.canonicalBedroyaParameterManifestStatus
   ≡ false
-parameterManifestStillBlocksBackgroundExecution =
-  Manifest.exactStandardTupleStillOpen
+parameterManifestStillBlocksBackgroundExecution = Manifest.exactStandardTupleStillOpen
+
+paperDMNormalizationIdentityAvailable :
+  Manifest.m0n0ToRhoDM0PaperIdentityLocated
+    Manifest.canonicalBedroyaParameterManifestStatus
+  ≡ true
+paperDMNormalizationIdentityAvailable = Manifest.paperDMNormalizationIdentityPaid
+
+sampledDensityMappingStillBlocksExecution :
+  Manifest.rhoDM0ToSampledOmegaFDMMappingLocated
+    Manifest.canonicalBedroyaParameterManifestStatus
+  ≡ false
+sampledDensityMappingStillBlocksExecution = Manifest.sampledOmegaFDMMappingStillOpen
+
+v0NormalizationStillBlocksExecution :
+  Manifest.v0ToSampledDarkEnergyNormalizationLocated
+    Manifest.canonicalBedroyaParameterManifestStatus
+  ≡ false
+v0NormalizationStillBlocksExecution = Manifest.v0NormalizationStillOpen
 
 normalizationBoundaryStillBlocksBackgroundExecution :
   Manifest.normalizationMapLocated Manifest.canonicalBedroyaParameterManifestStatus
   ≡ false
-normalizationBoundaryStillBlocksBackgroundExecution =
-  Manifest.normalizationMapStillOpen
+normalizationBoundaryStillBlocksBackgroundExecution = Manifest.normalizationMapStillOpen
 
 backgroundReconstructionStillOpen :
   backgroundIntegratorExecutable canonicalBedroyaBackgroundReconstructionStatus ≡ false
