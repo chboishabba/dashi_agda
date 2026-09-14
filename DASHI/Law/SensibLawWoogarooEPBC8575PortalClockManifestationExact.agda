@@ -11,16 +11,6 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 
 ------------------------------------------------------------------------
 -- EPBC 2019/8575 PORTAL MANIFESTATIONS / PRELIMINARY-DOCUMENTATION CLOCK
---
--- Keep three different objects separate:
---   (1) mutable portal status manifestations;
---   (2) the statutory s 95B -> s 130 clock;
---   (3) the literal Part 9 decision/approval instrument.
---
--- A portal label can route acquisition but cannot create legal effect.
--- A community process summary can locate the statutory mechanism but cannot
--- substitute for the Act, the Minister's receipt date, an extension notice or
--- the eventual Part 9 instrument.
 ------------------------------------------------------------------------
 
 epbcAct95B130Source : Source.AttributedSource
@@ -55,10 +45,6 @@ saveWoogarooProcessSummary = Source.mkNoDOISource
   Source.communitySource
   "Community/advocacy process summary stating that the proponent manages the s 95A(3) comment process, describing a 40-business-day decision period after final documentation/administrative requirements, and reporting more than 850 submissions that the group could account for. It is a secondary locator and bounded community count; the Act and official project records remain the primary payment surfaces."
   Source.publicAttribution
-
-------------------------------------------------------------------------
--- Mutable portal manifestations.
-------------------------------------------------------------------------
 
 data PortalDecisionStatus : Set where
   decisionStatusExpired : PortalDecisionStatus
@@ -95,10 +81,6 @@ publishedPortalManifestation = portal-manifestation
 finalPDPublicationStatusPaid : Bool
 finalPDPublicationStatusPaid = true
 
-------------------------------------------------------------------------
--- Portal status cannot recover operative Part 9 legal state.
-------------------------------------------------------------------------
-
 data PortalWorld : Set where
   expiredWithoutPart9Instrument : PortalWorld
   expiredWithLaterPart9Instrument : PortalWorld
@@ -130,10 +112,6 @@ portalStatusDoesNotPayOperativeLegalState =
       refl
       operativePart9Differs)
 
-------------------------------------------------------------------------
--- Statutory clock receipts.
-------------------------------------------------------------------------
-
 data ClockCoordinate : Set where
   finalDocumentPreparedAfterComments : ClockCoordinate
   documentsGivenToMinister : ClockCoordinate
@@ -157,7 +135,7 @@ section95BReceiptStartsClock : ClockReceipt
 section95BReceiptStartsClock = clock-receipt
   documentsGivenToMinister
   epbcAct95B130Source
-  "For assessment on preliminary documentation where comments were received, s 95B(1) requires the designated proponent to prepare the final document and give the Minister that document plus the comments; s 130(1B) measures the relevant decision period from the Minister's receipt of the s 95B material."
+  "For assessment on preliminary documentation where comments were received, s 95B(1) requires the designated proponent to prepare the final document and give the Minister that document plus the comments; s 130 measures the relevant decision period from the Minister's receipt of the s 95B material."
   true
   false
 
@@ -193,15 +171,11 @@ minister95BReceiptDateOpen = clock-receipt
   true
   false
 
-------------------------------------------------------------------------
--- WrongType / no-skip firewalls.
-------------------------------------------------------------------------
-
 data FinalPDPublicationStartsClockByItself : Set where
 data ExpiredStatusImpliesSupersedingReferral : Set where
 data PublishedStatusEqualsPart9Approval : Set where
 data CommunityCountEqualsOfficialSubmissionCount : Set where
-\data CommunityFAQPaysMinisterReceiptDate : Set where
+data CommunityFAQPaysMinisterReceiptDate : Set where
 
 finalPDPublicationDoesNotStartClockByItself :
   FinalPDPublicationStartsClockByItself → ⊥
@@ -223,10 +197,6 @@ communityFAQDoesNotPayMinisterReceiptDate :
   CommunityFAQPaysMinisterReceiptDate → ⊥
 communityFAQDoesNotPayMinisterReceiptDate ()
 
-------------------------------------------------------------------------
--- Submission-count provenance.
-------------------------------------------------------------------------
-
 record SubmissionCountReceipt : Set where
   constructor submission-count-receipt
   field
@@ -247,10 +217,6 @@ exactSubmissionCountRemainsOpen = submission-count-receipt
   saveWoogarooProcessSummary
   "Exact official total of comments received under the EPBC 2019/8575 public-comment process remains an acquisition residual until paid by an authoritative project record."
   false
-
-------------------------------------------------------------------------
--- Current Pareto.
-------------------------------------------------------------------------
 
 record PortalClockPareto : Set where
   constructor portal-clock-pareto
