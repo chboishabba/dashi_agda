@@ -34,6 +34,7 @@ data WorldWireKind : Set where
   obligation : WorldWireKind
   routeAction : WorldWireKind
   iteration : WorldWireKind
+  payment : WorldWireKind
 
 worldWireKindTag : WorldWireKind → Nat
 worldWireKindTag sourceManifestation = 1
@@ -43,6 +44,7 @@ worldWireKindTag gap = 4
 worldWireKindTag obligation = 5
 worldWireKindTag routeAction = 6
 worldWireKindTag iteration = 7
+worldWireKindTag payment = 8
 
 wireVersion : Nat
 wireVersion = 1
@@ -54,6 +56,7 @@ record BinaryWorldWireParity : Set where
     versionIsOne : Bool
     littleEndianHeader : Bool
     kindTagMappingExact : Bool
+    paymentKindTagIsEight : Bool
     lengthsAreExplicitU32 : Bool
     iterationCoordinateIsI64 : Bool
     iterationPresenceCarriedByFlag : Bool
@@ -82,7 +85,7 @@ open BinaryWorldWireParity public
 canonicalBinaryWorldWireParity : BinaryWorldWireParity
 canonicalBinaryWorldWireParity =
   binaryWorldWireParity
-    true true true true
+    true true true true true
     true true true true
     true true true false
     false false false false
