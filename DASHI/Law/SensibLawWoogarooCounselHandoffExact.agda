@@ -48,11 +48,11 @@ condition6aExecutionCounselIssue = counsel-handoff-issue
   Roadmap.condition6aExecutionGate
   evidencePreservationAdvice
   urgentBeforePhysicalExecution
-  "9281/2024/OW execution gate: determine the legal significance of negotiated Condition 6(a) and the safest preservation response once the literal Council-held satisfaction material and same-clearing-phase pre-start package are acquired."
-  "Local operational-works approval is source-paid; Condition 6(a) requires a Commonwealth-status record before pre-start; the approved-plan generic EPBC note and source-derived overlap are source-paid only in bounded roles; public non-location is not proof of non-submission."
-  "Identify what exact Commonwealth-status document would satisfy Condition 6(a), whether Council acceptance has legal significance beyond local-condition administration, how same-action/geometry/phase/operative-time should be tested, and what immediate preservation step is available if the acquired record does not cover the proposed clearing."
-  "Literal Condition 6(a) submission; Council receipt/assessment/acceptance; signed same-clearing-phase Environmental Pre-Clearance Package; pre-start/fauna/arborist/access records; authoritative local/Commonwealth geometry; dated execution evidence."
-  "before the relevant clearing phase or mobilisation; do not wait for physical clearing if proposed conduct becomes evidentially concrete"
+  "9281/2024/OW execution gate: obtain and test the post-decision Condition 6(a) satisfaction material, Council's treatment of it, and the same-clearing-phase pre-start package before promoting any contravention theory."
+  "The 20 March 2026 negotiated decision notice, approved plans, tree plan, RFI chain and the full 21-document public application bundle are already acquired. Condition 6(a) is paid as a requirement; its later satisfaction state is open. Public non-location is not proof of non-submission."
+  "Have Council Development Planning identify whether a post-decision Condition 6(a) submission exists, when it was received, what Commonwealth/DCCEEW object it relies on, whether Council treated the condition as satisfied, whether pre-start has occurred or been scheduled, and how the records can be obtained. Then test same action, geometry, phase and operative time before any legal conclusion."
+  "Post-decision Condition 6(a) satisfaction submission; Council receipt/assessment/acceptance; signed same-clearing-phase Environmental Pre-Clearance Package; pre-start notice/minutes/attendance; fauna spotter-catcher and Pre-Clearance Fauna Management Plan; arborist material; executed Access and Works Licence; authoritative local/Commonwealth geometry; dated mobilisation/commencement evidence. If not available administratively, preserve the narrow record request for formal RTI."
+  "immediate acquisition before the relevant clearing phase or mobilisation; do not wait for physical clearing if proposed conduct becomes evidentially concrete"
   false
 
 federalClockManifestationCounselIssue : CounselHandoffIssue
