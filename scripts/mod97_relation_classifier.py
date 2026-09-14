@@ -38,12 +38,15 @@ def classify_pair_receipt(
 
     if not adequacy_power_paid:
         classification = "underpowered"
+        relation = None
         classification_paid = False
     elif excess > interaction_threshold:
         classification = "conflict"
+        relation = "conflict"
         classification_paid = True
     else:
         classification = "independent"
+        relation = "independent"
         classification_paid = True
 
     return {
@@ -60,6 +63,7 @@ def classify_pair_receipt(
         "requirement_direction_paid": False,
         "gluing_requirement_available": False,
         "classification": classification,
+        "relation": relation,
         "classification_paid": classification_paid,
         "boundary": (
             "This classifier pays only conflict/independent on the current observation. "
