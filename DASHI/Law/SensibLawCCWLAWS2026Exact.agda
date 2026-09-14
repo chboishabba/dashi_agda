@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
 import DASHI.Law.SensibLawInternationalInstrumentLifecycleExact as Lifecycle
 import DASHI.Law.SensibLawTreatyParticipationExact as Participation
