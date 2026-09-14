@@ -108,6 +108,37 @@ paretoConsumerInadequateCannotWinRegression =
   Cross.consumerInadequateCandidateMayWinByShortCodeIsFalse
     Cross.canonicalParetoEligibilityBeforeOptimizationAdapter
 
+recursiveParetoNoAuthorityRegression :
+  Cross.frontierRefinementCreatesProofAuthority
+    Cross.canonicalRecursiveParetoAdmissionAdapter ≡ false
+recursiveParetoNoAuthorityRegression =
+  Cross.frontierRefinementCreatesProofAuthorityIsFalse
+    Cross.canonicalRecursiveParetoAdmissionAdapter
+
+recursiveParetoOldCostsPreservedRegression :
+  Cross.oldAxisCostsMayChangeSilently Cross.canonicalRecursiveParetoAdmissionAdapter ≡ false
+recursiveParetoOldCostsPreservedRegression =
+  Cross.oldAxisCostsMayChangeSilentlyIsFalse Cross.canonicalRecursiveParetoAdmissionAdapter
+
+liveParetoAuthorityGateRegression :
+  Cross.authorityHardGateBeforePareto Cross.canonicalLiveSetParetoSchedulerAdapter ≡ true
+liveParetoAuthorityGateRegression =
+  Cross.authorityHardGateBeforeParetoIsTrue Cross.canonicalLiveSetParetoSchedulerAdapter
+
+liveParetoConsumerGateRegression :
+  Cross.consumerRelevanceHardGateBeforePareto
+    Cross.canonicalLiveSetParetoSchedulerAdapter ≡ true
+liveParetoConsumerGateRegression =
+  Cross.consumerRelevanceHardGateBeforeParetoIsTrue
+    Cross.canonicalLiveSetParetoSchedulerAdapter
+
+liveParetoNoUniqueTruthRegression :
+  Cross.paretoChoiceCreatesUniqueScientificTruth
+    Cross.canonicalLiveSetParetoSchedulerAdapter ≡ false
+liveParetoNoUniqueTruthRegression =
+  Cross.paretoChoiceCreatesUniqueScientificTruthIsFalse
+    Cross.canonicalLiveSetParetoSchedulerAdapter
+
 terminalConsumerPaymentRegression :
   Cross.terminalConsumerStillMustBePaid ≡ true
 terminalConsumerPaymentRegression =
@@ -118,7 +149,7 @@ architectureTransferNoAuthorityRegression :
 architectureTransferNoAuthorityRegression =
   Cross.sourceArchitectureCreatesRSAActionIsFalse Cross.canonicalRSACompatibilityClosureAdapter
 
-downstreamCandidateMapIsNotImplementationRegression :
-  Cross.downstreamCandidateMapIsImplementation ≡ false
-downstreamCandidateMapIsNotImplementationRegression =
-  Cross.downstreamCandidateMapIsImplementationIsFalse
+downstreamCandidateMapDoesNotMutateDonorsRegression :
+  Cross.downstreamCandidateMapMutatesDonorKernels ≡ false
+downstreamCandidateMapDoesNotMutateDonorsRegression =
+  Cross.downstreamCandidateMapMutatesDonorKernelsIsFalse
