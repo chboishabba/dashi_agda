@@ -62,6 +62,12 @@ queryIndexedProjectionOwner = canonical-owner
   "DASHI.Core.QueryIndexedProjectionAdequacyExact"
   exactInterface false refl
 
+boundedNegativeSearchOwner : CanonicalOwner
+boundedNegativeSearchOwner = canonical-owner
+  "bounded negative search with explicit universe-coverage gate for global absence"
+  "DASHI.Core.BoundedNegativeSearchExact"
+  exactInterface false refl
+
 projectionFibreOwner : CanonicalOwner
 projectionFibreOwner = canonical-owner "coarse/fine projection with retained relative-fine fibre and exact reopening" "DASHI.Core.CoarseFineRelativeFibreExact" exactInterface false refl
 
@@ -102,7 +108,7 @@ canonicalOwners : List CanonicalOwner
 canonicalOwners =
   tritOwner ∷ supportSignOwner ∷ multiscaleOwner ∷ ultrametricOwner ∷ mdlOwner ∷
   descentOwner ∷ approximateNaturalityOwner ∷ kernelSplitOwner ∷ codingTargetOwner ∷
-  continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷ projectionFibreOwner ∷
+  continuumTargetOwner ∷ factorisationOwner ∷ queryIndexedProjectionOwner ∷ boundedNegativeSearchOwner ∷ projectionFibreOwner ∷
   consumerFibreRepairOwner ∷ candidateFamilyExecutionOwner ∷ requirementConflictBatchOwner ∷
   localGlobalGluingOwner ∷ candidateObjectIdentityOwner ∷ attributedSourceOwner ∷
   attributionSnowballOwner ∷ appendOnlyRevisionOwner ∷ residualActionPolicyOwner ∷
