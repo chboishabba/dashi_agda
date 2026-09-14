@@ -2,7 +2,7 @@
 
 Declared surface level: `structural refinement`, `synthetic numerical diagnostics`, `formal receipts`, and `roadmap`.
 
-## Parent chain
+## Canonical parent chain
 
 This programme follows its parent rather than treating each tranche as a new ontology:
 
@@ -15,14 +15,17 @@ existing MemoryFibre / phase / learning / decision machinery
   -> refit falsification/null ladder
   -> eligible-only MDL/Pareto comparison
   -> source-bound update-law discrimination
-  -> Lyapunov / stability analysis
-  -> explicit continuous-state -> MemoryFibre observation/quotient
+  -> finite-sample Lyapunov diagnostic + abstract global descent obligation
+  -> explicit continuous-state -> MemoryFibre observation quotient
+  -> quotient/stability -> RealisesNext weld
   -> empirical neural / Levin adapters
 ```
 
-Certification is orthogonal proof debt: implementation/source integration may advance while an Agda runner is unavailable, but no kernel theorem status is promoted without an actual execution receipt.
+Certification is orthogonal proof debt. Implementation and source integration may advance while a runner is unavailable, but source integration is never promoted into execution or kernel proof.
 
-## Thread invariants retained from the structural parent
+## Thread invariants
+
+The following remain non-negotiable programme invariants:
 
 - no universal physical `F`; scale transition is level/domain indexed;
 - environment/history remain explicit in situated lower-scale dynamics;
@@ -33,55 +36,40 @@ Certification is orthogonal proof debt: implementation/source integration may ad
 - objective value, update law, and observed cognitive/behavioural measurement remain distinct;
 - oscillator mismatch is not cognitive dissonance by definition;
 - target/reference states are present-time constraints and do not imply backwards-in-time causation;
-- the oscillator objective does not merge the repo's distinct energy carriers.
+- the oscillator objective does not merge the repo's distinct energy carriers;
+- shared `3/6/9` numerals do not create semantic identity across domains.
 
-## Fixed-frequency executable tranche
+## Executable numerical programme
 
-PR #909 first established a bounded falsifiable producer:
+### Fixed-frequency baseline
 
-```text
-three-frequency synthetic target
-  -> N = 3 / 6 / 9 redundant oscillator conditions
-  -> fixed-frequency amplitude/phase gradient learning
-  -> fit/coherence/stability observables
-  -> JSON + trajectory CSV + comparison CSV + Markdown receipt
-  -> fail-closed Agda receipt
-```
+The original producer keeps the same three target frequencies across `N={3,6,9}`. Larger conditions receive redundant oscillators, not extra target spectral support. This makes 3/6/9 a controlled model-size/redundancy comparison rather than a built-in advantage for larger N.
 
-All conditions share the same target spectral support. Larger conditions receive redundant oscillators, not extra target frequencies. The earlier bounded run therefore motivates an identifiability question without promoting `9 > 6 > 3`.
+### Learnable-frequency query-indexed identifiability
 
-## Query-indexed identifiability
+`scripts/run_continuous_oscillator_identifiability.py` now carries bounded learnable frequencies, train/held-out separation, gauge-aware canonical recovery, near-collision diagnostics, and separate consumers for waveform, frequency, amplitude, phase and hidden-state recovery.
 
-Current surfaces:
+Identifiability is query-relative through the existing `QueryIndexedProjectionAdequacyExact` calculus. A numerical near-collision is only a diagnostic approximation to an exact fibre collision; optimizer failure is not mathematical non-identifiability.
 
-- `scripts/run_continuous_oscillator_identifiability.py`
-- `tests/test_continuous_oscillator_identifiability.py`
-- `DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityReceipt`
-- `DASHI.Cognition.PNF.ContinuousOscillatorIdentifiabilityRegression`
+### Refit falsification ladder
 
-Frequencies are learnable inside declared bounds. Optimizer budget, frequency bounds, train/held-out split, gauge/matching policy, observable tolerance and parameter tolerance are frozen before held-out evaluation.
-
-Identifiability is query-relative through the existing `QueryIndexedProjectionAdequacyExact` calculus. The query family remains split into waveform, frequency, amplitude, phase, and canonical hidden-state recovery. A numerical near-collision is only a diagnostic approximation to the exact fibre-collision theorem shape.
-
-## Refit falsification ladder
-
-The runtime now contains a source-level falsification/stress ladder with the experiment rule frozen before execution:
+The frozen stress/null programme now distinguishes:
 
 ```text
-independent restart basins
-  + additive observation-noise ladder
-  + frequency-separation compression ladder
-  + shifted spectral-geometry transfer
-  + 2pi gauge-equivalence check
+independent seeded restarts
+additive observation noise: 0, .02, .05
+frequency-separation compression: 1, .6, .3
+shifted spectral-geometry transfer
+a 2pi gauge-equivalence check
 ```
 
-Restart, noise, separation and spectral-transfer conditions require a fresh fit. The gauge check is deliberately not refit because it asks whether a declared representational symmetry preserves the waveform. Each condition remains a diagnostic; a bad null result does not by itself prove global non-identifiability or mechanism falsity.
+Restart/noise/separation/spectral-transfer conditions require fresh fitting. The gauge check does not refit because it tests a declared representation symmetry. Every null remains a diagnostic; null failure does not automatically prove mechanism falsity or global non-identifiability.
 
-## Eligible-only MDL / Pareto cross-pollination
+### Eligible-only MDL / Pareto
 
-`ContinuousOscillatorIdentifiabilityParetoExact` now reuses `AdmissibleConsumerMDLHyperfabricExact` rather than inventing another ranking calculus.
+`ContinuousOscillatorIdentifiabilityParetoExact` reuses `AdmissibleConsumerMDLHyperfabricExact`.
 
-The executable output exposes the cost axes:
+The current numerical cost axes are:
 
 ```text
 model size
@@ -91,55 +79,103 @@ restart/basin instability
 null fragility
 ```
 
-but ranking is only defined after:
+but formal ranking remains:
 
 ```text
 admissible + consumer adequate -> eligible -> Pareto comparison
 ```
 
-The formal adapter is evidence-parameterised: it does not assert that N=3, N=6, or N=9 is eligible. Consequently cheaper/smaller models cannot win by cheapness alone, and richer/larger models cannot win merely by representational capacity.
+The formal adapter is evidence-parameterised and therefore does not assert that N=3, N=6 or N=9 is eligible by construction. Lower code/model size does not create truth; richer hidden state does not create adequacy; Pareto membership does not create authority.
 
-## Source-bound update-law discrimination
+## Update-law discrimination
 
-`ContinuousOscillatorUpdateLawAttributionExact` now establishes the attribution and comparison boundary before any update-law equivalence claim.
+The programme now has both source/formal and executable comparison surfaces:
 
-Candidate families are kept distinct:
+- `ContinuousOscillatorUpdateLawAttributionExact`
+- `ContinuousOscillatorUpdateLawComparisonReceipt`
+- `scripts/run_continuous_oscillator_update_law_discrimination.py`
+- `tests/test_continuous_oscillator_update_law_discrimination.py`
 
-- current PR #909 explicit gradient update;
-- Hebb historical synaptic-learning precedent;
-- Oja normalized principal-component learning rule;
-- Kuramoto coupled phase-oscillator dynamics.
+Four candidate families remain typed apart:
 
-The comparison object requires explicit payments for same state variables, time parameterisation, equation, normalization, noise/drive boundary and exact reduction. Shared words such as `learning`, `phase`, `coupling`, or `normalization` do not pay those obligations.
+1. the actual PR #909 gradient vector field;
+2. a modern Hebbian-style correlation comparator on shared amplitude coordinates;
+3. Oja's normalized linear rule on shared amplitude coordinates;
+4. Kuramoto phase coupling on shared phase coordinates.
 
-The source atlas retains:
+The runtime compares local vector fields only on genuinely shared coordinates using cosine similarity and best scalar-projection residual. Frequency is not silently coerced into candidate laws that do not expose a comparable frequency update. Local vector similarity is not a global reduction theorem or a biological mechanism identity.
 
-- Donald O. Hebb, *The Organization of Behavior: A Neuropsychological Theory* (1949), with no DOI fabricated;
-- Erkki Oja, *A simplified neuron model as a principal component analyzer* (1982), DOI `10.1007/BF00275687`;
-- Yoshiki Kuramoto, *Chemical Oscillations, Waves, and Turbulence* (1984), DOI `10.1007/978-3-642-69689-3`.
+## Lyapunov / stability
 
-Each source carries a `SourceRoleSnowballReceipt`; citation imports neither proof nor authority and does not make the source author responsible for the DASHI oscillator construction.
+`scripts/run_continuous_oscillator_lyapunov_diagnostic.py` now applies each candidate update over the same finite synthetic states and records waveform-MSE nonincrease fraction, net energy change and largest sampled increase.
 
-## Attribution / snowball / external identity discipline
+`ContinuousOscillatorLyapunovDiscriminationExact` separates this finite diagnostic from a real global certificate. Its `DiscreteDescentSystem` requires:
 
-All scientific sources retain `AttributedSourceCore` and `SnowballAttributionProvenanceInvariantExact`: author, title, publication, DOI state, canonical URL, source kind, formalisation relationship, visibility, and proof/authority non-promotion.
+```text
+State
+Energy
+step : State -> State
+energy : State -> Energy
+energy preorder
+forall state, energy(step state) <= energy(state)
+```
 
-The identifiability owner retains David Blackwell, *Equivalent Comparisons of Experiments* (1953), DOI `10.1214/aoms/1177729032`, only as an information-comparison precedent. OEIS/QID/Dewey coordinates remain optional same-object/role-relevant coordinates; none are invented merely because a source or experiment contains `3/6/9`.
+A stronger `StrictDescentOutsideInvariant` is a separate payment, as is convergence. Hence:
+
+```text
+sampled decrease
+  != global one-step theorem
+  != strict descent
+  != convergence
+  != asymptotic stability
+  != semantic memory correctness
+  != empirical truth.
+```
+
+The common waveform MSE used to compare candidates is not promoted to the native Lyapunov function of Hebb/Oja/Kuramoto dynamics.
+
+## Explicit MemoryFibre observation quotient
+
+`ContinuousOscillatorMemoryObservationQuotientExact` now makes the hidden-to-public seam explicit.
+
+A `MemoryObservationQuotient Hidden` contains the existing oscillator refinement plus a hidden equivalence relation and an observation-soundness witness for the whole public `MemoryFibre`. The theorem `rememberedEventSound` then follows by projection.
+
+A separate `HiddenRecoveryCollision` requires two hidden states with equal public memory but a hidden query that separates them. This preserves the exact distinction:
+
+```text
+same remembered event
+  != same whole MemoryFibre
+same whole MemoryFibre
+  != same hidden oscillator state.
+```
+
+The quotient itself creates neither neuroscience mechanism identity nor a `RealisesNext` scale transition.
+
+## Attribution / snowball discipline
+
+All scientific sources retain `AttributedSourceCore` and `SnowballAttributionProvenanceInvariantExact`: author, title, publication, DOI state, canonical URL, source kind, formalisation relationship, visibility, proof non-import and authority non-creation.
+
+Current source roles include:
+
+- David Blackwell, *Equivalent Comparisons of Experiments* (1953), DOI `10.1214/aoms/1177729032`: information-comparison precedent only;
+- Donald O. Hebb, *The Organization of Behavior* (1949): historical synaptic-learning precedent; no DOI fabricated and no modern comparator equation attributed directly to the book;
+- Erkki Oja, *A simplified neuron model as a principal component analyzer* (1982), DOI `10.1007/BF00275687`: Oja comparator family;
+- Yoshiki Kuramoto, *Chemical Oscillations, Waves, and Turbulence* (1984), DOI `10.1007/978-3-642-69689-3`: coupled phase-oscillator comparator family.
+
+Citation creates neither proof, authority, DASHI authorship nor mechanism identity. OEIS/QID/Dewey remain optional same-object/role coordinates and are not invented for the synthetic experiment.
 
 ## Current Pareto frontier
 
-1. **Execute the current numerical tranche locally when convenient.** CI is not a roadmap blocker; numerical claims still require an actual run receipt before promotion.
-2. **Update-law numerical discrimination.** Put the current gradient vector field and source-derived Hebb/Oja/Kuramoto candidates on explicitly shared coordinates where possible; mark non-comparable coordinates instead of coercing them.
-3. **Lyapunov/stability.** For each candidate update, ask whether a monotone Lyapunov quantity is actually derived; keep fit error, regularisation, coherence and empirical adequacy separate.
-4. **Eligibility refinement.** Replace provisional runtime adequacy thresholds with consumer-specific frozen thresholds or exact finite witnesses where available before interpreting a Pareto frontier.
-5. **MemoryFibre quotient.** Build the explicit observation/quotient from continuous learned states into public memory while preserving hidden multiplicity.
-6. **Recursive-scale realisation.** Require explicit `RealisesNext` witnesses before using stable lower-scale oscillator classes as next-scale effective objects.
-7. **CRT continuous-carrier lane.** Investigate CRT/projector structure only on a genuine continuous carrier; do not import finite Base369/Phase3 arithmetic by numeral coincidence.
-8. **Empirical adapters.** EEG/MEG/neural and Levin morphogenesis remain downstream, with separate source, measurement, authority and same-object receipts.
+1. **Pareto gate hardening.** Replace provisional numerical adequacy gates with explicitly frozen consumer-specific thresholds and/or exact finite consumer witnesses. Keep formal eligibility evidence-parameterised.
+2. **Candidate-specific Lyapunov search.** Derive candidate-native energy/descent structures where they actually exist, or record an explicit non-descent witness for the current common objective. Do not infer global stability from finite traces.
+3. **Concrete quotient witnesses.** Instantiate hidden-state -> `MemoryFibre` quotient/collision receipts from actual learned runtime states instead of leaving the quotient only abstract.
+4. **Scale realisation weld.** Join the paid quotient/stability coordinates to `RecursiveScaleTransitionExact.RealisesNext`; persistence plus observation is still not next-scale identity by itself.
+5. **CRT continuous-carrier lane.** Investigate CRT/projector structure only on a genuine continuous module/Hilbert-like carrier; finite Base369/Phase3 arithmetic may not enter by numeral coincidence.
+6. **Empirical adapters.** Only after the synthetic/identifiability/update/stability/quotient programme is paid should EEG/MEG/neural or Levin morphogenesis adapters advance, each with separate measurement, source, authority, same-object and promotion receipts.
 
 ## Promotion boundary
 
-Remain fail-closed until separately paid:
+Remain false/unpaid unless separately established:
 
 - neural-memory mechanism identity;
 - Hebbian/Oja/Kuramoto identity;
@@ -149,24 +185,28 @@ Remain fail-closed until separately paid:
 - quantum interpretation;
 - universal physical oscillator ontology;
 - global identifiability;
+- Pareto-frontier = truth;
+- finite sampled descent = global Lyapunov theorem;
+- stable oscillator class = next-scale semantic object;
 - Levin-specific realisation;
-- one physical energy governing all scales;
-- Pareto-frontier = truth.
+- one physical energy/mechanism governing all scales.
 
 ## Focused validation targets
 
 ```bash
-pytest -q tests/test_continuous_oscillator_synthetic.py tests/test_continuous_oscillator_identifiability.py
-python -m py_compile scripts/run_continuous_oscillator_synthetic.py scripts/run_continuous_oscillator_identifiability.py
+pytest -q \
+  tests/test_continuous_oscillator_synthetic.py \
+  tests/test_continuous_oscillator_identifiability.py \
+  tests/test_continuous_oscillator_update_law_discrimination.py \
+  tests/test_continuous_oscillator_lyapunov_diagnostic.py
 
-agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
-  DASHI/Cognition/PNF/ContinuousOscillatorIdentifiabilityRegression.agda
-
-agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
-  DASHI/Cognition/PNF/ContinuousOscillatorIdentifiabilityParetoRegression.agda
-
-agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
-  DASHI/Cognition/PNF/ContinuousOscillatorUpdateLawAttributionRegression.agda
+python -m py_compile \
+  scripts/run_continuous_oscillator_synthetic.py \
+  scripts/run_continuous_oscillator_identifiability.py \
+  scripts/run_continuous_oscillator_update_law_discrimination.py \
+  scripts/run_continuous_oscillator_lyapunov_diagnostic.py
 ```
+
+Formal targets now include the identifiability, Pareto, update-law attribution/comparison, Lyapunov and memory-quotient regressions plus `PNFIRLearningEverything`.
 
 No execution or kernel GREEN is promoted without a corresponding observed command receipt.
