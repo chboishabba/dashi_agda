@@ -8,11 +8,11 @@ The preservation objective is the priority. Political/lobbying/public-figure wor
 
 ---
 
-## 14 September 2026 — current shortest preservation path
+## 15 September 2026 — current shortest preservation path
 
 The highest-alpha ordering is now:
 
-1. **9281/2024/OW execution gate** — negotiated Condition 6(a), same-clearing-phase pre-start material, authoritative geometry and imminence;
+1. **9281/2024/OW execution gate** — post-decision Condition 6(a) satisfaction/acceptance, same-clearing-phase pre-start material, authoritative geometry and imminence;
 2. **EPBC 2019/8575 Part 9 decision** — refusal/restrictive-conditions merits work against the source-paid 1 October 2026 written-extension deadline;
 3. **Queensland Planning Act cut** — Condition 6(a) -> s 72 -> s 164 -> s 180, if the factual/legal trigger is paid;
 4. **EPBC cut** — s 67A -> s 475, if the same-action, operative-authorisation, proposed-conduct and standing facts are paid;
@@ -26,7 +26,9 @@ No route is promoted merely because it exists in legislation.
 
 ## 1. 9281 execution gate — first acquisition priority
 
-Council has approved 9281/2024/OW for Kalina Village 2 Stages 1–16 earthworks, vegetation clearing and stormwater. The negotiated decision notice and approved plans are already acquired.
+Council has approved 9281/2024/OW for Kalina Village 2 Stages 1–16 earthworks, vegetation clearing and stormwater. The negotiated decision notice, approved plans, tree plan, RFI chain and supporting application material are already acquired.
+
+**The 21-document public application bundle is already acquired/exhausted for present purposes.** Do not keep asking for duplicate application PDFs unless a particular source copy is corrupt. The live evidentiary gap is the later **post-decision execution/compliance file**.
 
 Condition 6(a) is **paid as a requirement**: before the pre-start meeting the applicant must provide either DCCEEW evidence that the proposed clearing is not a controlled action or, if it is controlled, the Commonwealth approval relied upon.
 
@@ -55,7 +57,48 @@ The source-derived GIS registration is useful for routing acquisition only. Appr
 
 ---
 
-## 2. Queensland commencement/enforcement route
+## 2. Immediate Council acquisition step
+
+The next action is a narrow records-status enquiry to **Council Development Planning**. The purpose is not to ask an officer for a legal opinion; it is to locate the missing primary execution-state records.
+
+Ask, in substance:
+
+> For 9281/2024/OW, has Council received material purporting to satisfy negotiated Condition 6(a)? If so, when was it received, what Commonwealth/DCCEEW document was relied upon, has Council treated or recorded the condition as satisfied, and can copies of the submission and Council assessment/acceptance be provided?
+
+Then ask:
+
+> Has a pre-start meeting occurred or been scheduled, and has Council received the associated Environmental Pre-Clearance, fauna spotter-catcher, arborist or Access and Works Licence material for the relevant clearing phase?
+
+Record the officer/team, date/time, any document/reference numbers, receipt dates, and the exact language used about whether Condition 6(a) is satisfied. Treat an oral answer as a dated source manifestation, not the final documentary payment.
+
+Follow the call with a written request for:
+
+1. the post-decision Condition 6(a) submission;
+2. Council receipt/assessment/acceptance correspondence or record;
+3. signed same-phase Environmental Pre-Clearance Package/checklist;
+4. pre-start notice, agenda, minutes and attendance;
+5. fauna spotter-catcher identity/licence and Pre-Clearance Fauna Management Plan;
+6. relevant arboricultural assessment/approval;
+7. executed Access and Works Licence;
+8. any same-phase mobilisation/commencement record.
+
+If Development Planning cannot release the material directly, ask whether it can be provided by **administrative access**. If not, preserve the same narrow scope for **formal RTI** rather than widening the request into the whole application file.
+
+```text
+Council says no public copy located
+  != record does not exist
+
+Council officer says record exists
+  != Condition 6(a) legally satisfied
+
+Council provides literal record
+  -> classify source/instrument
+  -> test same action / geometry / phase / operative time
+```
+
+---
+
+## 3. Queensland commencement/enforcement route
 
 Current Planning Act text pays the following statutory sequence:
 
@@ -78,7 +121,7 @@ This State route remains parallel to the EPBC route; neither displaces the other
 
 ---
 
-## 3. Portal status and s 95B / s 130 clock correction
+## 4. Portal status and s 95B / s 130 clock correction
 
 The EPBC Public Portal is presently undergoing status-field updates. EPBC 2019/8575 has been observed with the stable project-level label **Final Preliminary Documentation Published** while the separate `Decision Status` manifestation has varied, including `Published` and `Expired`.
 
@@ -104,6 +147,8 @@ Final-PD publication is strong process-state evidence, but an independent recons
 
 The literal Part 9 approval/refusal instrument remains the decisive legal object when made.
 
+The official machine-readable EPBC referrals service is useful for referral/status/spatial navigation, but its own scope warning matters: a referral boundary is the maximum referral extent and is **not** the same thing as the development footprint or an approved clearing polygon.
+
 ### Submission-count attribution
 
 Save Woogaroo Forest reports **more than 850** Springview Village 2 & 3 submissions **that the group could account for**. That is useful community evidence of participation, but it is not promoted to an exact Department total.
@@ -117,7 +162,7 @@ Do not use an exact `1,786` total unless an authoritative same-project record is
 
 ---
 
-## 4. EPBC 2019/8575 merits lane
+## 5. EPBC 2019/8575 merits lane
 
 The federal merits lane remains urgent in parallel with the local execution gate. Source-paid coordinates include controlled-action identity, controlling provisions, preliminary-documentation pathway, authorised decision-maker/delegate lineage and the written-extension deadline.
 
@@ -141,7 +186,7 @@ The cumulative-impact seam remains particularly valuable because the Department'
 
 ---
 
-## 5. Same-action / instrument disambiguation
+## 6. Same-action / instrument disambiguation
 
 Older Springfield-area Commonwealth approvals are real but bounded. 2014/7306, 2016/7676 and 2019/8575 are separate action coordinates.
 
@@ -162,7 +207,7 @@ If it instead relies on DCCEEW no-controlled-action correspondence, the same pro
 
 ---
 
-## 6. Imminence / evidence preservation
+## 7. Imminence / evidence preservation
 
 A same-phase signed Environmental Pre-Clearance Package is unusually high value because the proponent's own protocol says relevant approvals are assembled, responsible parties sign, the checklist is run at pre-start, and no clearing for that phase begins until Environmental Coordinator sign-off.
 
@@ -182,7 +227,7 @@ Pre-start/fauna/arborist/access and contractor-mobilisation records should there
 
 ---
 
-## 7. Queensland ecological protection lanes
+## 8. Queensland ecological protection lanes
 
 ### NCA ss 102–107
 
@@ -198,7 +243,7 @@ Permanent protection remains a slower discretionary backstop requiring exact ten
 
 ---
 
-## 8. Counsel questions now
+## 9. Counsel questions now
 
 1. Has Condition 6(a) been validly satisfied, and what legal significance does its exact wording have under Planning Act ss 72, 164 and 180?
 2. If Council says it is satisfied, what exact Commonwealth-status document was accepted and does it concern the same action/geometry/phase/time?
@@ -211,7 +256,7 @@ Permanent protection remains a slower discretionary backstop requiring exact ten
 
 ---
 
-## 9. Current acquisition order
+## 10. Current acquisition order
 
 1. **post-decision Condition 6(a) satisfaction submission + Council treatment/acceptance**;
 2. **signed same-clearing-phase Environmental Pre-Clearance Package**;
@@ -226,7 +271,7 @@ The application-file acquisition phase is substantially complete. The immediate 
 
 ---
 
-## 10. Promotion boundaries
+## 11. Promotion boundaries
 
 ```text
 portal status != operative legal state
@@ -237,6 +282,7 @@ local approval != federal authorisation
 public silence != non-submission
 same property != same controlled-action geometry
 historical approval != transferable authority
+referral boundary != development footprint
 source-derived GIS != authoritative geometry
 approved works != commencement
 court/enforcement route exists != relief will issue
