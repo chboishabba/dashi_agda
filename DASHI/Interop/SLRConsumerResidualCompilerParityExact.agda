@@ -42,6 +42,19 @@ data ConsumerScope : Set where
   anySource : ConsumerScope
   sourceManifestation : String → ConsumerScope
 
+consumerScopeTag : ConsumerScope → Nat
+consumerScopeTag anySource = 0
+consumerScopeTag (sourceManifestation sourceRef) = 1
+
+consumerRequirementFragmentTag : Compiler.CompilerFragmentKind → Nat
+consumerRequirementFragmentTag = Compiler.compilerFragmentTag
+
+gapWorldWireKindTag : Nat
+gapWorldWireKindTag = WorldWire.worldWireKindTag WorldWire.gap
+
+obligationWorldWireKindTag : Nat
+obligationWorldWireKindTag = WorldWire.worldWireKindTag WorldWire.obligation
+
 record ConsumerRequirement : Set where
   constructor consumerRequirement
   field
@@ -104,6 +117,10 @@ record ConsumerResidualBodyParity : Set where
     gapMagicIsGAP1 : Bool
     obligationMagicIsOBL1 : Bool
     fragmentTagUsesCompilerMapping : Bool
+    gapUsesWorldWireKindFour : Bool
+    obligationUsesWorldWireKindFive : Bool
+    anySourceScopeTagIsZero : Bool
+    exactSourceScopeTagIsOne : Bool
     candidateOnlyByteIsOne : Bool
     semanticPromotionByteIsZero : Bool
     consumerReferenceRetained : Bool
@@ -116,7 +133,7 @@ open ConsumerResidualBodyParity public
 canonicalConsumerResidualBodyParity : ConsumerResidualBodyParity
 canonicalConsumerResidualBodyParity =
   consumerResidualBodyParity
-    true true true true true true true true true
+    true true true true true true true true true true true true true
 
 record ConsumerResidualRuntimeParity : Set where
   constructor consumerResidualRuntimeParity
