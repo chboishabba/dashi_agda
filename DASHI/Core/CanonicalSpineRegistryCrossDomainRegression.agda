@@ -12,6 +12,9 @@ factorisationCanonical = Registry.factorisationOwner
 queryIndexedProjectionCanonical : Registry.CanonicalOwner
 queryIndexedProjectionCanonical = Registry.queryIndexedProjectionOwner
 
+requiredObserverAxisJoinCanonical : Registry.CanonicalOwner
+requiredObserverAxisJoinCanonical = Registry.requiredObserverAxisJoinOwner
+
 experimentalCoordinateCanonical : Registry.CanonicalOwner
 experimentalCoordinateCanonical = Registry.experimentalCoordinateOwner
 
@@ -79,6 +82,10 @@ factorisationParallelDefinitionsBlocked = refl
 queryIndexedProjectionParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed queryIndexedProjectionCanonical ≡ false
 queryIndexedProjectionParallelDefinitionsBlocked = refl
+
+requiredObserverAxisJoinParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed requiredObserverAxisJoinCanonical ≡ false
+requiredObserverAxisJoinParallelDefinitionsBlocked = refl
 
 experimentalCoordinateParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed experimentalCoordinateCanonical ≡ false
