@@ -78,3 +78,40 @@ currentCutNoCrossDomainTransferRegression :
 currentCutNoCrossDomainTransferRegression =
   State.currentMinimalCutAutomaticallyTransfersAcrossDomainsIsFalse
     State.canonicalStateIndexedLiveCutParetoBoundary
+
+nsRelativeGrowthSplitClosedRegression :
+  State.relativeGrowthSplitClosed State.canonicalNSCurrentCutParetoAdapter ≡ true
+nsRelativeGrowthSplitClosedRegression =
+  State.relativeGrowthSplitClosedIsTrue State.canonicalNSCurrentCutParetoAdapter
+
+nsPressureProducerStillOpenRegression :
+  State.nonlinearPressureRelativeGrowthEstimatePaid
+    State.canonicalNSCurrentCutParetoAdapter ≡ false
+nsPressureProducerStillOpenRegression =
+  State.nonlinearPressureRelativeGrowthEstimatePaidIsFalse
+    State.canonicalNSCurrentCutParetoAdapter
+
+nsCriticalBarrierStillOpenRegression :
+  State.criticalRatioBarrierPaid State.canonicalNSCurrentCutParetoAdapter ≡ false
+nsCriticalBarrierStillOpenRegression =
+  State.criticalRatioBarrierPaidIsFalse State.canonicalNSCurrentCutParetoAdapter
+
+nsClayPromotionStillFalseRegression :
+  State.clayPromotionPaid State.canonicalNSCurrentCutParetoAdapter ≡ false
+nsClayPromotionStillFalseRegression =
+  State.clayPromotionPaidIsFalse State.canonicalNSCurrentCutParetoAdapter
+
+nsClosedAlgebraNotHighestSalienceRegression :
+  State.closedAlgebraRemainsHighestSalience State.canonicalNSCurrentCutParetoAdapter ≡ false
+nsClosedAlgebraNotHighestSalienceRegression =
+  State.closedAlgebraRemainsHighestSalienceIsFalse State.canonicalNSCurrentCutParetoAdapter
+
+nsParetoCannotSkipCurrentCutRegression :
+  State.currentNSCutMayBeSkippedByPareto State.canonicalNSCurrentCutParetoAdapter ≡ false
+nsParetoCannotSkipCurrentCutRegression =
+  State.currentNSCutMayBeSkippedByParetoIsFalse State.canonicalNSCurrentCutParetoAdapter
+
+nsCrossPollinationNoAuthorityRegression :
+  State.crossPollinationCreatesNSTheoremAuthority State.canonicalNSCurrentCutParetoAdapter ≡ false
+nsCrossPollinationNoAuthorityRegression =
+  State.crossPollinationCreatesNSTheoremAuthorityIsFalse State.canonicalNSCurrentCutParetoAdapter
