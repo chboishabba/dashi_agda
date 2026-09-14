@@ -33,6 +33,8 @@ import DASHI.Core.CoarseDynamicsTraceCongruenceExact
 import DASHI.Core.CoarseDynamicsTraceCongruenceRegression
 import DASHI.Core.FrozenProvenanceDynamicRefinementExact
 import DASHI.Core.FrozenProvenanceDynamicRefinementRegression
+import DASHI.Core.QueryIndexedFrozenDynamicPromotionExact
+import DASHI.Core.QueryIndexedFrozenDynamicPromotionRegression
 import DASHI.Core.CandidateFamilyExecutionExact
 import DASHI.Core.CandidateFamilyExecutionRegression
 import DASHI.Core.RequirementConflictBatchExecutionExact
