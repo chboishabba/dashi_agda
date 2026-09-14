@@ -31,4 +31,5 @@ jobs:
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseRateObserverAdequacyValidation.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseFRETObserverAxisValidation.agda
           nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseFRETObserverJoinValidation.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseFRETThirdAxisValidation.agda
           nix develop .# --command agda -i . DASHI/Chemistry/Everything.agda
