@@ -1,6 +1,8 @@
 module DASHI.Core.CanonicalSpineDependencyAtlasRegression where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.CanonicalSpineRegistry as Registry
 import DASHI.Core.TypedDependencyCore as Dependency
@@ -43,3 +45,8 @@ boundedSearchDependencyWitness = Atlas.boundedNegativeSearchDependencyWitness
 futureSafeQueryDependencyWitness :
   Dependency.DependencyWitness Atlas.CanonicalDependency
 futureSafeQueryDependencyWitness = Atlas.futureSafeQueryDependencyWitness
+
+structuralParentageIsNotImportDependency :
+  Atlas.CanonicalDependencyAtlasBoundary.structuralParentageImpliesCodeImportDependency
+    Atlas.canonicalDependencyAtlasBoundary ≡ false
+structuralParentageIsNotImportDependency = refl
