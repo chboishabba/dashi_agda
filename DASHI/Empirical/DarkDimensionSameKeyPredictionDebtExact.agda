@@ -143,20 +143,16 @@ darkDimensionBackgroundReconstructionStillOpen :
   BedroyaBackground.sixKeyBAOVectorDerived
     BedroyaBackground.canonicalBedroyaBackgroundReconstructionStatus
   ≡ false
-darkDimensionBackgroundReconstructionStillOpen =
-  BedroyaBackground.sixKeyVectorStillOpen
+darkDimensionBackgroundReconstructionStillOpen = BedroyaBackground.sixKeyVectorStillOpen
 
 bedroyaSameObjectAcquisitionStillOpen :
-  Acquisition.fullTextAcquired BedroyaAcquisition.bedroya2026SameObjectTarget
-  ≡ false
-bedroyaSameObjectAcquisitionStillOpen =
-  BedroyaAcquisition.childSameObjectStillUnacquired
+  Acquisition.fullTextAcquired BedroyaAcquisition.bedroya2026SameObjectTarget ≡ false
+bedroyaSameObjectAcquisitionStillOpen = BedroyaAcquisition.childSameObjectStillUnacquired
 
 bedroyaPostIdentitySupportStageDefined :
   SourceSearch.producer BedroyaAcquisition.bedroyaPostIdentitySupportDemand
   ≡ Search.propositionSourceProducer
-bedroyaPostIdentitySupportStageDefined =
-  BedroyaAcquisition.postIdentitySupportStillRequiresSourcePayment
+bedroyaPostIdentitySupportStageDefined = BedroyaAcquisition.postIdentitySupportStillRequiresSourcePayment
 
 daoExtractionRecipeLocatedButExecutionStillOpen :
   DAORecipe.recipeExecuted DAORecipe.daoPinnedExtractionRecipe ≡ false
@@ -168,8 +164,7 @@ daoRecipeStillDoesNotPaySameKeyVector = DAORecipe.sameKeyBAOVectorStillNotDerive
 
 crossDomainEvidenceWeldStillBlocksPromotion :
   CrossDomain.ReconstructionReceiptEqualsHeldOutPrediction → ⊥
-crossDomainEvidenceWeldStillBlocksPromotion =
-  CrossDomain.reconstructionReceiptDoesNotBecomeHeldOutPrediction
+crossDomainEvidenceWeldStillBlocksPromotion = CrossDomain.reconstructionReceiptDoesNotBecomeHeldOutPrediction
 
 residualDebtClassesRemainDistinct :
   DebtRouting.DAOExecutionPaysBedroyaAcquisitionGap → ⊥
@@ -205,17 +200,40 @@ mkOpenPredictionRequest : ObservationKey.SharedBAOObservationKey → SameKeyPred
 mkOpenPredictionRequest key =
   sameKeyPredictionRequest key darkDimensionModelSource daoIndependentTargetSource false false false
 
+lrg1TransversePredictionRequest : SameKeyPredictionRequest
 lrg1TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg1TransverseKey
+
+lrg1RadialPredictionRequest : SameKeyPredictionRequest
 lrg1RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg1RadialKey
+
+lrg2TransversePredictionRequest : SameKeyPredictionRequest
 lrg2TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg2TransverseKey
+
+lrg2RadialPredictionRequest : SameKeyPredictionRequest
 lrg2RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg2RadialKey
+
+lrg3Elg1TransversePredictionRequest : SameKeyPredictionRequest
 lrg3Elg1TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lrg3Elg1TransverseKey
+
+lrg3Elg1RadialPredictionRequest : SameKeyPredictionRequest
 lrg3Elg1RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lrg3Elg1RadialKey
+
+elg2TransversePredictionRequest : SameKeyPredictionRequest
 elg2TransversePredictionRequest = mkOpenPredictionRequest ObservationKey.elg2TransverseKey
+
+elg2RadialPredictionRequest : SameKeyPredictionRequest
 elg2RadialPredictionRequest = mkOpenPredictionRequest ObservationKey.elg2RadialKey
+
+qsoTransversePredictionRequest : SameKeyPredictionRequest
 qsoTransversePredictionRequest = mkOpenPredictionRequest ObservationKey.qsoTransverseKey
+
+qsoRadialPredictionRequest : SameKeyPredictionRequest
 qsoRadialPredictionRequest = mkOpenPredictionRequest ObservationKey.qsoRadialKey
+
+lyaTransversePredictionRequest : SameKeyPredictionRequest
 lyaTransversePredictionRequest = mkOpenPredictionRequest ObservationKey.lyaTransverseKey
+
+lyaRadialPredictionRequest : SameKeyPredictionRequest
 lyaRadialPredictionRequest = mkOpenPredictionRequest ObservationKey.lyaRadialKey
 
 bedroyaArXiv : String
