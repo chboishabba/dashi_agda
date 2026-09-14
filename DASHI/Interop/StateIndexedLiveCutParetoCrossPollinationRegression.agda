@@ -2,6 +2,8 @@ module DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationRegression where
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Empty using (⊥)
 
 import DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationExact as State
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
