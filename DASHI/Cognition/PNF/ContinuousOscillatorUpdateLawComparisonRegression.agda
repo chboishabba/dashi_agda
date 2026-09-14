@@ -1,0 +1,9 @@
+module DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawComparisonRegression where
+
+import DASHI.Cognition.PNF.ContinuousOscillatorUpdateLawComparisonReceipt as Receipt
+
+receiptExists : Receipt.ContinuousOscillatorUpdateLawComparisonReceipt
+receiptExists = Receipt.canonicalContinuousOscillatorUpdateLawComparisonReceipt
+
+boundaryExists : Receipt.ContinuousOscillatorUpdateLawComparisonBoundary
+boundaryExists = Receipt.canonicalContinuousOscillatorUpdateLawComparisonBoundary
