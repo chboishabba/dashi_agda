@@ -24,6 +24,10 @@ data SelectionLeakageStatus : Set where
   heldOutNotUsedForSelection : SelectionLeakageStatus
   heldOutUsedForSelection : SelectionLeakageStatus
 
+data ClassificationPolicyStatus : Set where
+  notFrozenBeforeHeldOutEvaluation : ClassificationPolicyStatus
+  frozenBeforeHeldOutEvaluation : ClassificationPolicyStatus
+
 data RequirementDirectionStatus : Set where
   unavailableFromCurrentObservation : RequirementDirectionStatus
   externallyPayable : RequirementDirectionStatus
@@ -48,6 +52,7 @@ record Mod97CircuitRuntimeFrontier : Set where
     historicalRunIdentity : IdentityStatus
     historicalConfigurationIdentity : IdentityStatus
     selectionLeakage : SelectionLeakageStatus
+    classificationPolicyStatus : ClassificationPolicyStatus
     natDamageAdapterPayment : PaymentStatus
     requirementDirectionStatus : RequirementDirectionStatus
     requirementEdgePayment : PaymentStatus
@@ -67,10 +72,15 @@ open Mod97CircuitRuntimeFrontier public
 --   fail-closed compilation of already-paid canonical relation receipts, and
 --   exact finite closed-compatible-capacity enumeration.
 --
--- Implementation is not execution. Raw signed held-out loss changes are
--- retained, while an orientation-aware adapter maps only positive loss increase
--- into non-negative micro-loss Nat damage. The current classifier can pay only
--- conflict/independent once adequacy/power is supplied. It cannot manufacture a
+-- Candidate selection and relation-classification policy are separate leakage
+-- coordinates. The candidate rule is fixed on the training carrier; the
+-- interaction threshold plus adequacy/power policy must likewise be frozen
+-- before held-out evaluation. Implementation is not execution.
+--
+-- Raw signed held-out loss changes are retained, while an orientation-aware
+-- adapter maps only positive loss increase into non-negative micro-loss Nat
+-- damage. The current classifier can pay only conflict/independent once its
+-- frozen-policy and adequacy/power gates are supplied. It cannot manufacture a
 -- gluingRequirement edge.
 --
 -- Canonical gluingRequirement is a directed selection-closure relation: if one
@@ -105,6 +115,7 @@ currentMod97RuntimeFrontier =
     notEstablished
     notEstablished
     heldOutNotUsedForSelection
+    frozenBeforeHeldOutEvaluation
     paid
     unavailableFromCurrentObservation
     unpaid
