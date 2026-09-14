@@ -36,6 +36,9 @@ appendOnlyCanonical = Registry.appendOnlyRevisionOwner
 residualActionCanonical : Registry.CanonicalOwner
 residualActionCanonical = Registry.residualActionPolicyOwner
 
+typedDependencyCanonical : Registry.CanonicalOwner
+typedDependencyCanonical = Registry.typedDependencyOwner
+
 genericReceiptCanonical : Registry.CanonicalOwner
 genericReceiptCanonical = Registry.genericReceiptOwner
 
@@ -50,3 +53,7 @@ batchParallelDefinitionsBlocked = refl
 residualActionParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed residualActionCanonical ≡ false
 residualActionParallelDefinitionsBlocked = refl
+
+typedDependencyParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed typedDependencyCanonical ≡ false
+typedDependencyParallelDefinitionsBlocked = refl
