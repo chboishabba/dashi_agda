@@ -3,8 +3,27 @@ module DASHI.Culture.MissingDeceasedAstronomicalSurveyPlatformBidiExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.ApplicationTransformationCapabilityBidiExact as T
 import DASHI.Core.RealObjectApplicationBidiExact as R
+
+astronomySource : Source.AttributedSource
+astronomySource = Source.mkNoDOISource
+  "DASHI / retained Grillmair primary-source lineage"
+  "Wide-field stellar-stream survey and orbit-inference object"
+  "Grillmair/IPAC/Caltech source surfaces already retained in-repo"
+  "current formalisation"
+  "DASHI Grillmair source owners"
+  (Source.namedSourceKind "formalisation composite")
+  "Pays only the existence of a real astronomical-survey/inference object class; not a shared historical programme for the retained cohort."
+  Source.publicAttribution
+
+astronomyAtlas : Source.AttributedSourceAtlas
+astronomyAtlas = Source.mkSourceAtlas
+  "astronomical-survey object atlas"
+  "DASHI.Culture.MissingDeceasedAstronomicalSurveyPlatformBidiExact"
+  (astronomySource ∷ [])
+  "Source composition imports neither proof nor historical participation."
 
 surveyRequirement : R.RealObjectRequirement
 surveyRequirement = R.mkRequirement
@@ -18,7 +37,7 @@ astronomicalSurveyObject : R.RealEngineeringObject
 astronomicalSurveyObject = R.real-engineering-object
   "wide-field astronomical survey / stellar-stream inference platform"
   "benign astronomy research object"
-  (R.objectSourceAtlasPlaceholder "Grillmair/IPAC survey science retained in-repo")
+  astronomyAtlas
   (surveyRequirement ∷ [])
   "detect and characterise stellar streams and use them for Galactic-structure/orbit inference"
   "Object fit does not establish historical participation in any particular survey beyond separately sourced receipts."
