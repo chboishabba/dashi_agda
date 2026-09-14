@@ -185,7 +185,7 @@ shoebridgeSpeakerSupported = refl
 
 bandtSpeakerContradicted :
   Fibre.validateRequiredSubfibre Fibre.axisRequired false true ≡
-  Fibre.fibreShape Fibre.contradicted
+  Fibre.fibreShape Fibre.violated
 bandtSpeakerContradicted = refl
 
 evaluativeTruthStillUndetermined :
