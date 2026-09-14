@@ -7,6 +7,8 @@ module DASHI.Law.SensibLawInstitutionalNormativityEverything where
 import DASHI.Core.InstitutionalNormProductionExact
 import DASHI.Core.FragmentationCompositionExact
 import DASHI.Core.ObserverSituatedReasonablenessExact
+import DASHI.Core.InstitutionalNormSituatedReasonablenessBridgeExact
+import DASHI.Core.InstitutionalDenaturalisationRevisionExact
 
 import DASHI.Law.SensibLawLegalReasonablenessExact
 import DASHI.Law.SensibLawOperationalLegalityExact
