@@ -31,6 +31,19 @@ bruschiniSPADReviewSource =
     "general SPAD architecture precedent: on-/in-pixel timing and processing, spatial/temporal granularity trade-offs, histogram generation and data-rate reduction; does not establish Litavis-specific measurements or this DASHI factorisation theorem"
     Source.publicAttribution
 
+zhangInPixelHistogramSource : Source.AttributedSource
+zhangInPixelHistogramSource =
+  Source.mkDOISource
+    "Chao Zhang; Ning Zhang; Zhijie Ma; Letian Wang; Yu Qin; Jieyang Jia; Kai Zang"
+    "A 240 x 160 3D-Stacked SPAD dToF Image Sensor With Rolling Shutter and In-Pixel Histogram for Mobile Devices"
+    "IEEE Open Journal of the Solid-State Circuits Society 2, 3-11"
+    "2021"
+    "10.1109/OJSSCS.2021.3118332"
+    "https://doi.org/10.1109/OJSSCS.2021.3118332"
+    Source.academicArticleSource
+    "targeted engineering precedent: partial histogramming readout compresses photon events into in-pixel histograms and incomplete fine histograms require an explicit distortion treatment; not a Litavis benchmark and not proof of the repository-local consumer-safety theorem"
+    Source.publicAttribution
+
 reductionSourceAtlas : Source.AttributedSourceAtlas
 reductionSourceAtlas =
   Source.mkSourceAtlas
@@ -38,8 +51,15 @@ reductionSourceAtlas =
     "DASHI.Physics.Semiconductor.Device.LitavisSPADConsumerSafeReductionExact"
     (Litavis.singularPhotonicsLitavisRelease ∷
      Litavis.interestingEngineeringLitavisArticle ∷
-     bruschiniSPADReviewSource ∷ [])
-    "separates the Litavis launch architecture claim, secondary discovery report, and general academic SPAD processing precedent; none imports proof of universal reduction safety"
+     bruschiniSPADReviewSource ∷
+     zhangInPixelHistogramSource ∷ [])
+    "separates the Litavis launch architecture claim, secondary discovery report, general SPAD processing review, and a targeted in-pixel histogram compression precedent; none imports proof of universal reduction safety"
+
+reductionSourceCount : Nat
+reductionSourceCount = Source.sourceCount (Source.sources reductionSourceAtlas)
+
+reductionSourceCountIsFour : reductionSourceCount ≡ 4
+reductionSourceCountIsFour = refl
 
 ------------------------------------------------------------------------
 -- Finite event fixture.
@@ -198,6 +218,9 @@ record ReductionSourceBoundary : Set where
       interestingEngineeringRetainedAsSecondary ≡ true
     academicSPADPrecedentRetained : Bool
     academicSPADPrecedentRetainedIsTrue : academicSPADPrecedentRetained ≡ true
+    targetedHistogramCompressionPrecedentRetained : Bool
+    targetedHistogramCompressionPrecedentRetainedIsTrue :
+      targetedHistogramCompressionPrecedentRetained ≡ true
     academicPrecedentIsLitavisBenchmark : Bool
     academicPrecedentIsLitavisBenchmarkIsFalse :
       academicPrecedentIsLitavisBenchmark ≡ false
@@ -211,6 +234,7 @@ record ReductionSourceBoundary : Set where
 canonicalReductionSourceBoundary : ReductionSourceBoundary
 canonicalReductionSourceBoundary =
   reduction-source-boundary
+    true refl
     true refl
     true refl
     true refl
