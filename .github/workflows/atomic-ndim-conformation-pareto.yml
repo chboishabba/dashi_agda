@@ -1,0 +1,27 @@
+name: Atomic NDim conformation Pareto
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinase*.agda'
+      - 'DASHI/Chemistry/Everything.agda'
+      - '.github/workflows/atomic-ndim-conformation-pareto.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck adenylate-kinase empirical and NDim owners
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalValidation.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseNDimGeometricResidualValidation.agda
+          nix develop .# --command agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AdenylateKinaseMixedStateReferenceSquareValidation.agda
+          nix develop .# --command agda -i . DASHI/Chemistry/Everything.agda
