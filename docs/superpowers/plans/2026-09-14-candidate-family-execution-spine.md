@@ -118,6 +118,69 @@ remain application-level reasons to seek refinement. They become conclusion-payi
 
 The bridge explicitly does not create a new physical dimension, dynamic defect, or manipulation authority.
 
+## Next extraction candidate: multipart same-object manifest/reconstruction
+
+Do not implement this Core carrier before the current #902 rollup receives a fresh Agda kernel receipt. Two independent donors now justify a design pass after certification.
+
+### RSA donor
+
+`RSA260369DNA27CodecNDimTetrationCrossPollinationExact` requires a production artifact reconstruction to retain:
+
+```text
+local chunk identity
++ explicit tails/positions
++ boundary/seam compatibility
++ local digests
++ global reconstruction receipt
++ global same-object digest
+```
+
+Acquisition may proceed out of chunk order, but conclusion payment may not ignore a missing chunk. Optional 27/pants indexing is explicitly not a replacement encoding for the production GF(2) carrier.
+
+### Fly/data donor
+
+`DrosophilaGautheyExternalManifestHashBidiExact` independently separates:
+
+```text
+repository/code manifest identity
+!= external data-byte identity
+```
+
+The code tree/blob hashes can pay algorithm/code custody while the four trial dictionaries and compact carrier remain unpaid until exact bytes/digests are acquired. DOI/repository location does not pay file-byte same-object identity.
+
+### Intended generic shape
+
+Candidate design only:
+
+```text
+parts may be acquired in any order
+-> each retained with local identity/provenance
+-> required coverage/completeness paid
+-> boundary/ordering/tail compatibility paid where applicable
+-> reconstruction performed
+-> reconstructed whole receives same-object receipt
+```
+
+This should compose with `AppendOnlyEvidenceResidualRevisionExact` rather than replace it:
+
+```text
+append-only custody/history
++ multipart reconstruction obligations
+```
+
+The first answers whether earlier evidence remains retained as new pieces arrive. The second answers whether a whole-object conclusion is licensed from the currently acquired parts.
+
+Non-collapse rules for the future owner:
+
+```text
+repository identity != data-byte identity
+locator/DOI != file digest
+all local pieces individually valid != global same-object reconstruction
+out-of-order acquisition != out-of-order conclusion payment
+index tree != payload encoding
+matching cardinality != same artifact
+```
+
 ## Existing adjacent generic owner retained
 
 `DASHI.Interop.SymmetryQuotientExecutionBidiCrossPollinationExact` already owns the distinct symmetry/quotient execution checklist:
@@ -225,6 +288,7 @@ Do not apply this spine to Clay proof archaeology merely because proof routes fo
 6. Mine for duplicated domain-local candidate-family records and replace only exact factoring duplicates.
 7. Connect adaptive NDim/refinement proposals to `CoordinateSeparatesCollision` or another real consumer-payment witness before adding dimensions.
 8. Compose with symmetry/quotient execution where both family selection and quotient reduction are actually paid.
+9. After certification, design the multipart same-object manifest/reconstruction Core owner against RSA + Fly/data donors before migrating either domain.
 
 ## Non-collapse boundaries
 
@@ -240,4 +304,7 @@ coordinate separation != physical dimension
 same cardinality != same algebra
 synthetic benchmark != production execution
 source attribution != proof
+repository identity != data-byte identity
+locator != digest
+local completeness != same-object reconstruction
 ```
