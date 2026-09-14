@@ -40,3 +40,9 @@ traumaAutomaticallyTruthRegression :
   Manifestation.reportedTraumaAutomaticallyEstablishesUnderlyingAllegationTruth Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
   ≡ false
 traumaAutomaticallyTruthRegression = refl
+
+analyticalMappingAutomaticallySourceHoldingRegression :
+  Manifestation.analyticalConsequenceMappingAutomaticallySourceHolding
+    Manifestation.canonicalFamilyCourtTraumaPresentationBoundary
+  ≡ false
+analyticalMappingAutomaticallySourceHoldingRegression = refl
