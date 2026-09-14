@@ -13,7 +13,7 @@ The implementation connects machine-learning experiments to existing DASHI surfa
 - `DASHI.Learning.Mod97WeightDecayReceipt`: the recorded modular-multiplication experiment;
 - `DASHI.Learning.Mod97GrokkingBoundary`: exact consequences of those receipts without promotion beyond the measured horizon;
 - `DASHI.Learning.GrokkingCircuitTemporalAlignmentExact`: a Stage-6/7 receipt bridge comparing predeclared circuit-beta transitions against first-passage timing without promoting the comparison into a mechanism proof;
-- `DASHI.Learning.Mod97CircuitRuntimeBoundaryExact`: typed separation among runtime producer implementation, execution, historical identity, leakage control, oriented damage adaptation, relation payment, beta maximality, and mechanism payment;
+- `DASHI.Learning.Mod97CircuitRuntimeBoundaryExact`: typed separation among runtime producer implementation, execution, historical identity, leakage control, oriented damage adaptation, observation adequacy, relation payment, beta maximality, and mechanism payment;
 - `DASHI.Learning.GrokkingRegression`: compact import and value regression surface.
 
 ## Learning operator
@@ -95,13 +95,16 @@ At the fixed 15000-epoch horizon:
 
 This establishes a **horizon-dependent transition band** for the fixed task and optimiser configuration. It does not establish an absolute critical weight decay. The earlier 10000-epoch scan locating reliable passage near `1.0`, followed by the 15000-epoch scan locating reliable passage at `0.6`, is evidence that the apparent boundary depends on the observation horizon.
 
-## Runtime checkpoint and intervention frontier
+## Runtime checkpoint, relation, and beta frontier
 
-PR #900 now contains executable producers for a **new checkpoint-bearing Mod97 run family**:
+PR #900 now contains an executable but deliberately unexecuted pure/runtime spine for a **new checkpoint-bearing Mod97 run family**:
 
 ```text
 scripts/mod97_checkpoint_producer.py
 scripts/mod97_circuit_intervention_producer.py
+scripts/mod97_relation_classifier.py
+scripts/mod97_relation_graph_compiler.py
+scripts/mod97_closed_compatible_capacity.py
 ```
 
 The checkpoint producer preserves the source-paid coordinates above but requires the previously unpaid architecture and split coordinates explicitly. Its manifests and saved checkpoints retain:
@@ -134,22 +137,55 @@ Nat damage = max(0, round(lossIncrease * 1_000_000))
 
 The raw signed value is retained. A beneficial ablation therefore remains visible in the receipt even though its contribution to the non-negative damage carrier is zero. The `1_000_000` scale is experiment metadata, not a physical or source-derived unit.
 
+The current producer-safe relation classifier mirrors the formal threshold rule only on the observation coordinates that are actually available:
+
+```text
+adequacy/power unpaid -> underpowered
+interaction excess > frozen threshold -> conflict
+otherwise -> independent
+```
+
+It has no `gluingRequirement` branch. That is not because canonical `gluingRequirement` means a physical hidden-unit wire. The canonical RSA/NDim relation means **selection closure**: selecting one candidate may require another so that an operator/seam compatibility condition closes.
+
+The current singleton/joint pair-ablation observation is inadequate for the query “which directed requirement closure holds?”. `GrokkingSparseActiveColouringRoutingExact` now pays this with an exact query-indexed fibre collision: two worlds expose the same observed pair effects while one has `left requires right` and the other `right requires left`. Therefore requirement direction does not factor through the current pair-ablation surface.
+
+This reuses `QueryIndexedProjectionAdequacyExact`; its Blackwell citation remains conceptual precedent for information comparison only. The finite requirement-direction collision is a repository-local theorem and imports neither empirical truth nor authority from that citation.
+
+The fail-closed relation-graph compiler consumes only already-paid canonical relation receipts:
+
+```text
+conflict            -> undirected coexistence prohibition
+gluingRequirement   -> directed selection-closure edge; direction must be paid
+independent         -> retained audit pair; no graph constraint
+```
+
+Unpaid relation classifications are rejected. A `gluingRequirement` without a paid direction is rejected. The compiler therefore cannot manufacture the missing requirement direction from raw pair effects.
+
+The exact finite capacity producer then exhaustively enumerates the supplied finite graph:
+
+```text
+beta(G,R) = max |S|
+subject to S conflict-free and requirement-closed
+```
+
+For the intended 12-unit frozen carrier, the reference exhaustive search examines `2^12 = 4096` subsets. This is an exact local certificate for the supplied paid graph, not a universal optimisation theorem.
+
 The typed runtime frontier deliberately keeps these states separate:
 
 ```text
-producer implemented
-!= producer executed
-!= historical run/config identity
-!= Nat damage adapter paid
-!= requirement edges paid
-!= relation classification paid
-!= beta maximality paid
-!= Grokking mechanism paid
+checkpoint producer implemented != checkpoint executed
+intervention producer implemented != intervention executed
+relation classifier implemented != classifier executed
+relation-graph compiler implemented != compiler executed
+beta producer implemented != beta executed
+historical run/config identity != regenerated run provenance
+Nat damage adapter paid != relation classification paid
+pair-ablation effects != requirement direction
+paid relation graph != beta transition through training
+beta maximality != Grokking mechanism
 ```
 
-At the current repo frontier, both Python producers are implemented, numerical execution receipts remain unpaid, historical run/config identity remains unestablished, training/held-out selection separation is encoded, and the Nat damage adapter is paid. Directional requirement inference, relation classification, beta maximality, and mechanism promotion remain unpaid.
-
-The repo Nix development surface supplies Python and Agda but does not currently declare PyTorch. The focused PR workflow therefore verifies pure producer contracts, syntax, plan-only provenance output, and CLI import boundaries without pretending to execute the heavyweight numerical run.
+At the current repo frontier, all five producer/compiler surfaces above are implemented but unexecuted. Historical run/config identity remains unestablished, training/held-out selection separation is encoded, and the Nat damage adapter is paid. Requirement direction, empirical relation classification, empirical beta maximality, and mechanism promotion remain unpaid.
 
 ## Circuit-mechanism temporal alignment
 
@@ -199,6 +235,7 @@ beta-before-test95 != causal mechanism
 alignmentPromotionPaid != GrokkingMechanismWitness
 cross-seed stability != cross-task stability
 beta increase != held-out improvement
+requirement closure != physical causal wiring
 ```
 
 A beta transition may eventually be evidence for pre-crossing structural reorganisation, crossing/basin entry, post-crossing contraction/cleanup, or merely a correlate. The formal carrier does not choose among these interpretations.
@@ -231,13 +268,13 @@ A stronger contribution requires at least one of the following:
 7. a concrete obstruction detector and witness-preserving lift, allowing the ML system to instantiate `LearningCOLBundle` rather than only the generic adapter;
 8. execute the new checkpoint-bearing Mod97 producer in a PyTorch-capable environment and retain the generated checkpoint/receipt hashes;
 9. execute the frozen training-selected / held-out-evaluated singleton/joint intervention producer over those checkpoints;
-10. define and pay directional requirement edges with an asymmetric conditional-intervention design rather than treating them as the opposite sign of conflict;
-11. classify conflict / requirement / independence under a predeclared effect threshold and adequacy/power rule;
-12. close requirements and certify finite beta maximality at each checkpoint;
-13. cross-seed replication of the predeclared circuit extraction/intervention rule;
+10. predeclare and pay the classifier adequacy/power rule, then execute conflict/independent classification under the frozen interaction threshold;
+11. define a richer **consumer-specific closure observation** capable of distinguishing opposite directed `gluingRequirement` worlds; the current symmetric pair-ablation surface is formally inadequate for this query;
+12. compile the paid relation receipts and execute exact finite beta certification at each checkpoint;
+13. cross-seed replication of the predeclared circuit extraction/intervention/classification rule;
 14. cross-task/config transfer across at least another modulus, train fraction, width, or optimiser;
 15. timing-null comparisons, including epoch-label permutation or equivalent temporal-null tests;
 16. threshold-robustness analysis under a predeclared admissible grid or interval;
 17. an active-support-only baseline establishing whether beta adds information beyond raw participation changes.
 
-Until those are supplied, the repo claim is the typed operator contract, exact receipt-level boundaries, implemented-but-unexecuted runtime producers, the orientation-aware damage adapter, the circuit temporal-alignment carrier, and the proved adapters between the learning, RG-flow, COL, and circuit-receipt interfaces—not a universal grokking mechanism.
+Until those are supplied, the repo claim is the typed operator contract, exact receipt-level boundaries, implemented-but-unexecuted runtime/classifier/compiler/beta producers, the orientation-aware damage adapter, the exact requirement-direction nonfactorability witness, the circuit temporal-alignment carrier, and the proved adapters between the learning, RG-flow, COL, and circuit-receipt interfaces—not a universal grokking mechanism.
