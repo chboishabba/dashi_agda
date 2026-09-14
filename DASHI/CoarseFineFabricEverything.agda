@@ -9,6 +9,8 @@ import DASHI.Core.CanonicalSpineRegistryCrossDomainRegression
 import DASHI.Core.BoundedNegativeSearchExact
 import DASHI.Core.BoundedNegativeSearchRegression
 import DASHI.Core.RobustExperimentInferenceFrontierExact
+import DASHI.Core.MultipartSameObjectReconstructionExact
+import DASHI.Core.MultipartSameObjectReconstructionRegression
 import DASHI.Core.CoarseFineFabricCalculusExact
 import DASHI.Core.CoarseFineRelativeFibreExact
 import DASHI.Core.ConsumerRelativeReductionKernelExact
