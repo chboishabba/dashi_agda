@@ -13,7 +13,6 @@ required=(
   "04192024_6f_a1_r9"
   "gauthey_lbm_identity_accumulation.json"
   "a9504ea00a30960a6728f90a5ff31b4d1f97ced6"
-  "9d15d4acc622a87cdd0ebc5d2f22f8531b277ce7"
   "currentRecoveryImplementationCommit"
   "perTrialCheckpointingImplemented"
   "accumulatedReceiptAdvancesAfterEachTrial"
@@ -22,6 +21,13 @@ required=(
   "exactSourceIdentityRecoveryComplete"
   "sourceIdentityRecoveryImpliesIndependentTrialReplication"
   "sourceIdentityRecoveryImpliesJRC2018Ready"
+  "SearchedZeroTrialReceipt"
+  "04032024_6f_a2_r1"
+  "currentSearchedTrialCount"
+  "searchedZeroPromotesNoBiologicalContribution"
+  "10.34770/s5hx-1x75"
+  "alternateRepositoryLocatorEqualsSameFileBytes"
+  "alternateRepositoryLocatorPaysReplication"
 )
 
 for needle in "${required[@]}"; do
