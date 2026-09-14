@@ -105,3 +105,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNDimGeometri
 -- mixed references are cross-homolog, so the square is explicitly blocked from
 -- promotion to same-sequence NMP/LID independence evidence.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMixedStateReferenceSquareExact
+
+-- Same-sequence computational refinement: the Ping et al. E. coli MD carrier
+-- reports both off-diagonal NMP/LID combinations as simulated clusters.  This
+-- pays a same-sequence computational four-corner carrier while remaining
+-- distinct from four experimental PDB structures, thermodynamic independence,
+-- kinetic independence, equilibrium populations, or a unique transition path.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSameSequenceSimulatedMixedStatesExact
