@@ -35,6 +35,15 @@ orientedDamageAdapterIsPaid :
   Runtime.natDamageAdapterPayment Runtime.currentMod97RuntimeFrontier ≡ Runtime.paid
 orientedDamageAdapterIsPaid = refl
 
+currentTopologyCannotPayRequirementDirection :
+  Runtime.requirementDirectionStatus Runtime.currentMod97RuntimeFrontier ≡
+  Runtime.unavailableForCurrentTopology
+currentTopologyCannotPayRequirementDirection = refl
+
+sameLayerPostReluAblationDoesNotPayRequirementDirection :
+  Runtime.sameLayerPostReluAblationPaysRequirementDirection ≡ Runtime.unpaid
+sameLayerPostReluAblationDoesNotPayRequirementDirection = refl
+
 requirementEdgesRemainUnpaid :
   Runtime.requirementEdgePayment Runtime.currentMod97RuntimeFrontier ≡ Runtime.unpaid
 requirementEdgesRemainUnpaid = refl
