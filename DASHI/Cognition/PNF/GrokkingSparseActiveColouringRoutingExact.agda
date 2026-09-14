@@ -5,6 +5,7 @@ open import Agda.Builtin.Nat using (_+_)
 open import Data.Nat using (_∸_)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Cognition.PNF.GrokkingInvariantSubspaceSelectionExact as GrokSelect
 import DASHI.Cognition.PNF.GrokkingMeasureStrataExact as GrokMeasure
 import DASHI.Combinatorics.GraphColouringRecolourPantsSnowballExact as Colouring
@@ -194,6 +195,68 @@ classifyPairWithRequirementEvidence :
 classifyPairWithRequirementEvidence source score with requirementEvidencePaysDirection source
 ... | true = classifyPair score
 ... | false = classifyPairWithoutRequirementDirection score
+
+------------------------------------------------------------------------
+-- Exact query-indexed nonfactorability of requirement direction through the
+-- symmetric singleton/joint pair-ablation surface.  The finite collision is a
+-- repository-local theorem; the imported query calculus retains its own source
+-- attribution boundary and imports neither empirical truth nor authority.
+------------------------------------------------------------------------
+
+data RequirementDirectionWorld : Set where
+  worldLeftRequiresRight : RequirementDirectionWorld
+  worldRightRequiresLeft : RequirementDirectionWorld
+
+record PairAblationObservedEffects : Set where
+  constructor pairAblationObservedEffects
+  field observedLeftEffect : Nat; observedRightEffect : Nat; observedJointEffect : Nat
+open PairAblationObservedEffects public
+
+pairAblationProject : RequirementDirectionWorld → PairAblationObservedEffects
+pairAblationProject world = pairAblationObservedEffects 2 2 4
+
+data RequirementDirectionQuery : Set where
+  askRequirementDirection : RequirementDirectionQuery
+
+data RequirementDirectionAnswer : Set where
+  answerLeftRequiresRight : RequirementDirectionAnswer
+  answerRightRequiresLeft : RequirementDirectionAnswer
+
+requirementDirectionAnswer :
+  RequirementDirectionQuery → RequirementDirectionWorld → RequirementDirectionAnswer
+requirementDirectionAnswer askRequirementDirection worldLeftRequiresRight = answerLeftRequiresRight
+requirementDirectionAnswer askRequirementDirection worldRightRequiresLeft = answerRightRequiresLeft
+
+requirementDirectionSemantics :
+  Query.QuerySemantics RequirementDirectionWorld RequirementDirectionQuery RequirementDirectionAnswer
+requirementDirectionSemantics = Query.querySemantics requirementDirectionAnswer
+
+pairAblationRequirementDirectionDefect :
+  Query.QueryAdequacyDefect
+    pairAblationProject
+    requirementDirectionSemantics
+    askRequirementDirection
+pairAblationRequirementDirectionDefect =
+  Query.queryAdequacyDefect
+    worldLeftRequiresRight
+    worldRightRequiresLeft
+    refl
+    (λ ())
+
+pairAblationRequirementDirectionNotAdequate :
+  Query.AdequateFor
+    pairAblationProject
+    requirementDirectionSemantics
+    askRequirementDirection → ⊥
+pairAblationRequirementDirectionNotAdequate =
+  Query.queryAdequacyDefectBlocksFactorisation
+    pairAblationRequirementDirectionDefect
+
+pairAblationRequirementDirectionCollisionPaid : Bool
+pairAblationRequirementDirectionCollisionPaid = true
+
+requirementDirectionFactorsThroughPairAblation : Bool
+requirementDirectionFactorsThroughPairAblation = false
 
 activationCorrelationIsClassificationInput : Bool
 activationCorrelationIsClassificationInput = false
