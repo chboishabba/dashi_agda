@@ -67,6 +67,57 @@ analogyDoesNotCreateAuthorityRegression :
 analogyDoesNotCreateAuthorityRegression =
   Cross.crossDomainAnalogyCreatesSourceAuthorityIsFalse
 
+rsaClosureStillRequiredRegression :
+  Cross.coRequirementClosureRequired Cross.canonicalRSACompatibilityClosureAdapter ≡ true
+rsaClosureStillRequiredRegression =
+  Cross.coRequirementClosureRequiredIsTrue Cross.canonicalRSACompatibilityClosureAdapter
+
+rsaGlobalCommutationStillRequiredRegression :
+  Cross.globalCommutationRequired Cross.canonicalRSACompatibilityClosureAdapter ≡ true
+rsaGlobalCommutationStillRequiredRegression =
+  Cross.globalCommutationRequiredIsTrue Cross.canonicalRSACompatibilityClosureAdapter
+
+rsaSnowballPaymentRegression :
+  Cross.snowballPaymentOutOfOrderAllowed Cross.canonicalRSACompatibilityClosureAdapter ≡ false
+rsaSnowballPaymentRegression =
+  Cross.snowballPaymentOutOfOrderAllowedIsFalse Cross.canonicalRSACompatibilityClosureAdapter
+
+flyCompatibilityNotGlobalImprovementRegression :
+  Cross.localCompatibilityAutomaticallyPaysGlobalImprovement
+    Cross.canonicalFlyHeldOutCompatibilityAdapter ≡ false
+flyCompatibilityNotGlobalImprovementRegression =
+  Cross.localCompatibilityAutomaticallyPaysGlobalImprovementIsFalse
+    Cross.canonicalFlyHeldOutCompatibilityAdapter
+
+flyHeldOutStillRequiredRegression :
+  Cross.globalHeldOutEvaluationRequired Cross.canonicalFlyHeldOutCompatibilityAdapter ≡ true
+flyHeldOutStillRequiredRegression =
+  Cross.globalHeldOutEvaluationRequiredIsTrue Cross.canonicalFlyHeldOutCompatibilityAdapter
+
+paretoIneligibleCannotWinRegression :
+  Cross.inadmissibleCandidateMayWinByShortCode
+    Cross.canonicalParetoEligibilityBeforeOptimizationAdapter ≡ false
+paretoIneligibleCannotWinRegression =
+  Cross.inadmissibleCandidateMayWinByShortCodeIsFalse
+    Cross.canonicalParetoEligibilityBeforeOptimizationAdapter
+
+paretoConsumerInadequateCannotWinRegression :
+  Cross.consumerInadequateCandidateMayWinByShortCode
+    Cross.canonicalParetoEligibilityBeforeOptimizationAdapter ≡ false
+paretoConsumerInadequateCannotWinRegression =
+  Cross.consumerInadequateCandidateMayWinByShortCodeIsFalse
+    Cross.canonicalParetoEligibilityBeforeOptimizationAdapter
+
+terminalConsumerPaymentRegression :
+  Cross.terminalConsumerStillMustBePaid ≡ true
+terminalConsumerPaymentRegression =
+  Cross.terminalConsumerStillMustBePaidIsTrue
+
+architectureTransferNoAuthorityRegression :
+  Cross.sourceArchitectureCreatesRSAAction Cross.canonicalRSACompatibilityClosureAdapter ≡ false
+architectureTransferNoAuthorityRegression =
+  Cross.sourceArchitectureCreatesRSAActionIsFalse Cross.canonicalRSACompatibilityClosureAdapter
+
 downstreamCandidateMapIsNotImplementationRegression :
   Cross.downstreamCandidateMapIsImplementation ≡ false
 downstreamCandidateMapIsNotImplementationRegression =
