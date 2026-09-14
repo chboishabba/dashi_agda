@@ -115,3 +115,45 @@ nsCrossPollinationNoAuthorityRegression :
   State.crossPollinationCreatesNSTheoremAuthority State.canonicalNSCurrentCutParetoAdapter ≡ false
 nsCrossPollinationNoAuthorityRegression =
   State.crossPollinationCreatesNSTheoremAuthorityIsFalse State.canonicalNSCurrentCutParetoAdapter
+
+routeAdmissionRequiredRegression :
+  State.routeMayElaborateBeforeAdmission
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+routeAdmissionRequiredRegression =
+  State.routeMayElaborateBeforeAdmissionIsFalse
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+
+silentStrengtheningBlockedRegression :
+  State.routeMaySilentlyStrengthenHypotheses
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+silentStrengtheningBlockedRegression =
+  State.routeMaySilentlyStrengthenHypothesesIsFalse
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+
+localLemmaNoAutomaticFrontierRegression :
+  State.localLemmaAutomaticallyMovesProgrammeFrontier
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+localLemmaNoAutomaticFrontierRegression =
+  State.localLemmaAutomaticallyMovesProgrammeFrontierIsFalse
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+
+lemmaCountNoAuthorityRegression :
+  State.lemmaCountIsAuthoritativeProgress
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+lemmaCountNoAuthorityRegression =
+  State.lemmaCountIsAuthoritativeProgressIsFalse
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+
+duplicateRouteReuseRegression :
+  State.duplicateRouteShouldBeReproved
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+duplicateRouteReuseRegression =
+  State.duplicateRouteShouldBeReprovedIsFalse
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+
+liveCutCannotBypassAdmissionRegression :
+  State.liveCutSalienceCannotBypassRouteAdmission
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ true
+liveCutCannotBypassAdmissionRegression =
+  State.liveCutSalienceCannotBypassRouteAdmissionIsTrue
+    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
