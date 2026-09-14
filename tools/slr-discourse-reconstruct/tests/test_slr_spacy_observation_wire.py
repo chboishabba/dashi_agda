@@ -3,6 +3,7 @@ import hashlib
 import importlib.util
 import io
 import struct
+import sys
 import unittest
 
 HERE = Path(__file__).resolve().parent
@@ -10,6 +11,7 @@ MODULE_PATH = HERE.parent / "slr_spacy_observation_wire.py"
 spec = importlib.util.spec_from_file_location("slr_spacy_observation_wire", MODULE_PATH)
 assert spec and spec.loader
 wire = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = wire
 spec.loader.exec_module(wire)
 
 
