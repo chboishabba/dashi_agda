@@ -10,13 +10,6 @@ import DASHI.Core.AttributedSourceCore as Source
 
 ------------------------------------------------------------------------
 -- EPBC 2019/8575 BLOCKING CUTSET / EXECUTION-STATE OWNER
---
--- The preservation objective is kept lawful and source-bounded:
--- identify the smallest currently live legal/factual cutset capable of stopping
--- clearing or other implementation of the controlled action.  Local planning
--- approval, federal assessment status, same-object geometry, commencement and
--- injunction standing are separate coordinates.  No source identity imports a
--- conclusion that works are unlawful or that any particular person has standing.
 ------------------------------------------------------------------------
 
 data EvidenceStatus : Set where
@@ -47,13 +40,13 @@ federalRegisterEPBC2026 = Source.mkNoDOISource
 
 federalPortal8575 : Source.AttributedSource
 federalPortal8575 = Source.mkNoDOISource
-  "Australian Government"
+  "Australian Government / National Environmental Protection Agency"
   "Springfield Residential Development — EPBC 2019/8575"
   "EPBC Act Public Portal"
   "2026"
-  "https://epbcpublicportal.environment.gov.au/all-notices/project-decision/?id=d951b5fa-9efb-ee11-9f89-00224892a860"
+  "https://epbcpublicportal.environment.gov.au/all-notices/project-decision/?id=3c8edc14-9ffb-ee11-9f89-00224892a860"
   Source.governmentSource
-  "Primary project-status surface currently showing Project Status 'Final Preliminary Documentation Published' and Decision Status 'Published'. The portal status label is not promoted into a Part 9 approval receipt without the actual approval instrument."
+  "Primary project-status surface showing Project Status 'Final Preliminary Documentation Published'. The separate Decision Status field has been observed with differing manifestations while the portal warns status fields are being updated. No portal status string is promoted into Part 9 legal effect without the literal decision instrument."
   Source.publicAttribution
 
 ipswich9281 : Source.AttributedSource
@@ -86,7 +79,7 @@ ipswich9281DocumentRegister = Source.mkNoDOISource
   "2026"
   "https://edoc.ipswich.qld.gov.au/objective/?env=iccecm&id=1697504&plat=pwy"
   Source.governmentSource
-  "Primary document manifest recording a negotiated decision notice and approved plans dated 20 March 2026 plus the earlier decision, tree-retention/removal plan and desktop assessment. The manifest locates exact primary objects but does not substitute for reading their conditions and geometry."
+  "Primary document manifest recording the negotiated decision notice and approved plans plus earlier application material. It locates primary objects but does not establish post-decision condition satisfaction or commencement."
   Source.publicAttribution
 
 record CutsetEvidence : Set where
@@ -106,8 +99,8 @@ federalPortalFinalPDPublished : CutsetEvidence
 federalPortalFinalPDPublished = cutset-evidence
   federalAssessmentState
   federalPortal8575
-  "EPBC 2019/8575 project status surface"
-  "The federal portal currently shows the controlled-action assessment at Final Preliminary Documentation Published. No same-object Part 9 approval instrument has been located in the inspected portal surface."
+  "EPBC 2019/8575 Project Status manifestation"
+  "The federal portal displays Project Status 'Final Preliminary Documentation Published'. The mutable Decision Status field is not used here to infer operative legal state. No same-object Part 9 approval/refusal instrument has been located in the inspected portal surface."
   portalStatusPaid
   false refl
 
@@ -134,7 +127,7 @@ section67AControlledActionGate = cutset-evidence
   federalControlledActionGate
   federalRegisterEPBC2026
   "EPBC Act s 67A"
-  "Section 67A provides that a person must not take a controlled action unless a relevant Part 9 approval is in operation or another specified statutory exception applies. This is the federal execution gate; project-specific application still requires same-object conduct and exception analysis."
+  "Section 67A provides that a person must not take a controlled action unless a relevant Part 9 approval is in operation or another specified statutory exception applies. Project-specific application still requires same-object conduct and exception analysis."
   primaryPaid
   false refl
 
@@ -143,13 +136,9 @@ section475InjunctionRoute = cutset-evidence
   federalInjunctionRoute
   federalRegisterEPBC2026
   "EPBC Act s 475"
-  "Section 475 permits the Minister or an interested person to apply to the Federal Court for prohibitory, mandatory or interim injunctions concerning conduct that constitutes or would constitute an offence or other contravention. This does not itself establish standing, merits or entitlement to relief in EPBC 2019/8575."
+  "Section 475 provides a Federal Court injunction route concerning conduct that constitutes or would constitute an offence or other contravention. It does not itself establish standing, merits or entitlement to relief for EPBC 2019/8575."
   primaryPaid
   false refl
-
-------------------------------------------------------------------------
--- The actual blocking cutset is conditional, not rhetorical.
-------------------------------------------------------------------------
 
 record ExecutionResidual : Set where
   constructor execution-residual
@@ -167,37 +156,33 @@ sameObjectOverlapResidual : ExecutionResidual
 sameObjectOverlapResidual = execution-residual
   sameObjectSpatialOverlap
   false
-  "9281/2024/OW negotiated decision notice and approved-plan geometry, overlaid against the EPBC 2019/8575 controlled-action/referral and 2026 impact footprints."
-  "Local operational-works approval is highly relevant only if the proposed clearing/work to be restrained is paid as the same action or a legally relevant component of the controlled action. Property-level adjacency or shared project naming is not enough."
+  "Authoritative 9281/2024/OW clearing/work geometry overlaid against authoritative relevant Commonwealth action/approval geometry, separating older 2014/7306 coverage from 2019/8575."
+  "Local operational-works approval is blocking-relevant only if the conduct at issue is paid as the same action or legally relevant component. Property-level adjacency or shared naming is not enough."
   true false
 
 commencementEvidenceResidual : ExecutionResidual
 commencementEvidenceResidual = execution-residual
   commencementOrProposedConduct
   false
-  "Pre-start notices, condition-satisfaction records, fauna/clearing pre-clearance records, contractor mobilisation, site notices, commencement correspondence or other primary evidence of actual/proposed execution under 9281/2024/OW."
-  "Section 475 can concern proposed conduct, so proof of imminent/proposed clearing can be as important as proof of completed commencement. The local approval alone does not establish that conduct is occurring or imminent."
+  "Post-decision Condition 6(a) satisfaction/acceptance, same-phase pre-start and environmental-preclearance records, fauna/arborist/access records, mobilisation or other primary evidence of actual/proposed execution under 9281/2024/OW."
+  "Both State and federal restraint routes can turn on proposed conduct; local approval alone does not establish actual or imminent execution."
   true false
 
 federalApprovalInstrumentResidual : ExecutionResidual
 federalApprovalInstrumentResidual = execution-residual
   federalAssessmentState
   false
-  "Any actual Part 9 approval/refusal instrument for EPBC 2019/8575, including conditions, decision date, approval holder and any current statutory exception/determination relevant to s 67A."
-  "The portal label 'Published' cannot be substituted for the operative approval instrument. Locating an approval would materially change the injunction theory from 'no approval' to compliance/validity/condition analysis."
+  "Any literal Part 9 approval/refusal instrument for EPBC 2019/8575, including conditions, decision date, approval holder and any current statutory exception/determination relevant to s 67A."
+  "Portal status manifestations cannot substitute for the operative decision instrument. A Part 9 decision would materially change the federal execution analysis."
   true false
 
 standingResidual : ExecutionResidual
 standingResidual = execution-residual
   interestedPersonStanding
   false
-  "Counsel-grade facts and evidence for the standing limb relied upon under EPBC Act s 475(6)/(7), if an injunction applicant is contemplated."
-  "The statute defines interested person broadly in specified circumstances, but DASHI does not infer that any named individual or organisation satisfies those facts without a separate evidentiary carrier."
+  "Counsel-grade facts and evidence for the standing limb relied upon under EPBC Act s 475, if a Federal Court applicant is contemplated."
+  "DASHI does not infer that a particular individual or organisation satisfies standing facts without a separate evidentiary carrier."
   true false
-
-------------------------------------------------------------------------
--- WrongType / no-skip firewalls.
-------------------------------------------------------------------------
 
 data LocalApprovalEqualsFederalApproval : Set where
 data PortalPublishedEqualsPart9Approval : Set where
@@ -219,10 +204,6 @@ approvedOperationalWorksDoesNotEqualCommencement ()
 
 section475DoesNotEqualInjunctionSuccess : Section475ExistenceEqualsInjunctionSuccess → ⊥
 section475DoesNotEqualInjunctionSuccess ()
-
-------------------------------------------------------------------------
--- Highest-alpha lawful preservation Pareto.
-------------------------------------------------------------------------
 
 data BlockingParetoLeaf : Set where
   exactFederalApprovalInstrument : BlockingParetoLeaf
