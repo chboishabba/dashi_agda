@@ -8,9 +8,11 @@ open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawWoogarooPreservationRoadmapExact as Roadmap
 import DASHI.Law.SensibLawWoogarooEPBC8575DecisionConsumerMatrixExact as EPBC
+import DASHI.Law.SensibLawWoogarooEPBC8575PortalClockManifestationExact as Clock
 import DASHI.Law.SensibLawWoogarooAdmissibleFactorsWrongTypeAtomBridgeExact as AFW
 
 data LegalPriority : Set where
+  localExecutionGate : LegalPriority
   immediateFederalDecision : LegalPriority
   cumulativeImpactSufficiency : LegalPriority
   sameParcelCriticalHabitat : LegalPriority
@@ -39,16 +41,33 @@ record LegalPriorityCoordinate : Set where
 
 open LegalPriorityCoordinate public
 
+condition6aPriority : LegalPriorityCoordinate
+condition6aPriority = legal-priority-coordinate
+  localExecutionGate
+  consumerPaymentOpen
+  "9281/2024/OW Condition 6(a) -> Planning Act 2016 s 72 commencement gate, with ss 164 and 180 available for counsel review if the factual/legal trigger is paid"
+  "Condition 6(a) requirement is source-paid; local negotiated approval is source-paid; post-decision satisfaction, Council treatment, same-clearing-phase prestart package and commencement remain open"
+  "literal Condition 6(a) satisfaction submission; Council acceptance/assessment; signed same-phase environmental preclearance; authoritative geometry; imminence"
+  "an unlocated compliance record is not non-compliance; an unsatisfied-condition hypothesis is not a development offence; s 180 availability is not an order"
+  "public-register silence, generic EPBC notes and historical Springfield approvals do not factor to Condition 6(a) satisfaction"
+  "acquire the post-decision Condition 6(a) satisfaction/acceptance record and same-phase prestart package before widening the execution theory"
+
 federal8575Priority : LegalPriorityCoordinate
 federal8575Priority = legal-priority-coordinate
   immediateFederalDecision
   consumerPaymentOpen
-  "EPBC 2019/8575 Part 9 approval/refusal decision due 1 October 2026"
-  "controlled-action identity; controlling species/community; authorised delegate; s 130(1A) extension/deadline; January 2026 Preliminary Documentation baseline"
-  "Final PD parcel x habitat x impacted/retained hectares x significance x avoidance x residual impact x offsets x conservation-advice/recovery-plan correspondence"
-  "controlled action is not refusal; threatened-species presence is not final significant-impact conclusion"
-  "species list alone does not determine the approval/refusal answer"
-  "recover/extract the Final PD bundle and compile the refusal matrix against the actual statutory consumer"
+  "EPBC 2019/8575 Part 9 approval/refusal decision; project-specific written extension presently carries the practical 1 October 2026 deadline"
+  "controlled-action identity; controlling species/community; authorised delegate; final-PD-publication status; statutory s 95B -> s 130 clock rule; source-paid project-specific s 130 extension/deadline"
+  "literal final PD/comment-response material if not already acquired; exact Minister s 95B receipt date if independently reconstructing the ordinary clock; eventual literal Part 9 decision instrument; merits matrix for habitat loss/retention, significance, avoidance, residual impact, offsets and conservation-advice/recovery-plan treatment"
+  "portal Decision Status is a mutable manifestation, not operative legal state; final-PD publication does not by itself start the statutory clock; controlled-action status does not imply refusal"
+  "portal status, species list and publication date do not factor to the approval/refusal answer or the Minister-receipt date"
+  "treat the written 1 October extension as the practical decision clock while independently acquiring the s 95B receipt date/final material; compile the refusal/conditions matrix against the actual Part 9 consumer"
+
+federalClockReceipt : Clock.ClockReceipt
+federalClockReceipt = Clock.section130FortyBusinessDayClock
+
+ministerReceiptResidual : Clock.ClockReceipt
+ministerReceiptResidual = Clock.minister95BReceiptDateOpen
 
 cumulative8575Priority : LegalPriorityCoordinate
 cumulative8575Priority = legal-priority-coordinate
@@ -59,7 +78,7 @@ cumulative8575Priority = legal-priority-coordinate
   "same-object local/regional integration of surrounding development patterns, habitat loss/retention, corridor function and the action's marginal cumulative contribution; Final PD/comment-response and Department sufficiency record"
   "a surrounding-project map is not the requested cumulative analysis; an apparent January response gap is not legal invalidity"
   "project identifiers, generic fragmentation statements, or secondary commentary do not factor to payment of Item 4.6(c)"
-  "acquire the Final PD/comment-response first; then snowball primary Scenic/Peninsula/adjacent project geometry and build the time-indexed cumulative habitat/connectivity ledger only where the final material leaves the residual open"
+  "acquire/read the Final PD/comment-response first; then snowball primary Scenic/Peninsula/adjacent project geometry and build the time-indexed cumulative habitat/connectivity ledger only where the final material leaves the residual open"
 
 qldS13Priority : LegalPriorityCoordinate
 qldS13Priority = legal-priority-coordinate
@@ -109,21 +128,22 @@ enforcementPriority : LegalPriorityCoordinate
 enforcementPriority = legal-priority-coordinate
   enforcementBackstop
   conditionalBackstop
-  "EPBC s 475 / NCA s 173D restraint or enforcement consumer"
-  "source-paid enforcement mechanisms"
-  "exact threatened conduct, contravention/offence, approval/permit status, standing/procedure and chronology"
-  "environmental harm is not automatically a statutory contravention or nominated offence"
+  "parallel Queensland Planning Act s 180 / EPBC s 475 / NCA enforcement or restraint consumers"
+  "source-paid statutory mechanisms including the 9281 Condition 6(a) -> Planning Act ss 72/164/180 sequence and the federal s 67A -> s 475 route"
+  "exact threatened conduct, condition/contravention status, same-action/phase/geometry, standing/procedure and chronology"
+  "environmental harm, public silence or local approval is not automatically a statutory contravention or offence"
   "harm evidence alone does not factor to injunction/enforcement availability"
-  "keep dormant until conduct can be mapped to an exact breached or threatened legal obligation"
+  "keep fail-closed until proposed conduct can be mapped to an exact breached or threatened legal obligation and counsel validates the procedural vehicle"
 
 record LegalOnlyPriorityPolicy : Set where
   constructor legal-only-priority-policy
   field
-    federalDecisionFirst : Bool
+    localExecutionGateFirst : Bool
+    federalDecisionParallelSecond : Bool
     cumulativeSufficiencyInsideFederalLane : Bool
-    qldS13Second : Bool
-    qldS102Third : Bool
-    qldS49Fourth : Bool
+    qldS102HighAlphaParallel : Bool
+    qldS13HighAlphaParallel : Bool
+    qldS49SlowerBackstop : Bool
     exemptionAuditParallel : Bool
     enforcementConditional : Bool
     ashBartyOnCriticalPath : Bool
@@ -131,7 +151,7 @@ record LegalOnlyPriorityPolicy : Set where
 
 canonicalLegalOnlyPriorityPolicy : LegalOnlyPriorityPolicy
 canonicalLegalOnlyPriorityPolicy = legal-only-priority-policy
-  true true true true true true true false false
+  true true true true true true true true false false
 
 data AdvocacyInterestCreatesLegalElement : Set where
 data PoliticalAlignmentCreatesStatutoryPayment : Set where
