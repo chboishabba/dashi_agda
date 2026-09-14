@@ -7,6 +7,8 @@ open import Agda.Builtin.String using (String)
 import DASHI.Reasoning.LocalFibreHyperfabricExact as LocalFibre
 import DASHI.Core.NDimParetoHyperfabricExact as NDim
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
+import DASHI.Core.RecursiveParetoFrontierLiftingExact as RecursivePareto
+import DASHI.Core.LiveSetParetoExperimentSchedulerExact as LivePareto
 import DASHI.Combinatorics.GraphColouringRecolourPantsSnowballExact as Graph
 import DASHI.Physics.Gravity.PenroseGlobalHorismosContradictionExact as Penrose
 import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact as Authority
@@ -161,11 +163,6 @@ canonicalNDimProjectionAdapter = ndimProjectionAdapter
 
 ------------------------------------------------------------------------
 -- RSA adapter: candidate compatibility is not terminal action validity.
---
--- The donor already requires co-requirement closure, consumer-conflict
--- selection, and final MP = PM. Its source-diligence owner separately blocks
--- transfer from graph-colouring / Monster source architecture to RSA theorem
--- authority. We reuse those states rather than re-authoring them.
 ------------------------------------------------------------------------
 
 record RSACompatibilityClosureAdapter : Set where
@@ -305,6 +302,94 @@ canonicalParetoEligibilityBeforeOptimizationAdapter =
     refl
 
 ------------------------------------------------------------------------
+-- Recursive Pareto adapter: open only residual-relevant coordinates, preserve
+-- old costs, and require a new admission receipt before proof search.
+------------------------------------------------------------------------
+
+record RecursiveParetoAdmissionAdapter : Set where
+  constructor recursiveParetoAdmissionAdapter
+  field
+    residualMaterialisationReference : String
+    admissionReference : String
+    selectedResidualAxesAllowed : Bool
+    selectedResidualAxesAllowedIsTrue : selectedResidualAxesAllowed ≡ true
+    oldAxisCostsMayChangeSilently : Bool
+    oldAxisCostsMayChangeSilentlyIsFalse : oldAxisCostsMayChangeSilently ≡ false
+    frontierRefinementCreatesProofAuthority : Bool
+    frontierRefinementCreatesProofAuthorityIsFalse :
+      frontierRefinementCreatesProofAuthority ≡ false
+
+open RecursiveParetoAdmissionAdapter public
+
+canonicalRecursiveParetoAdmissionAdapter : RecursiveParetoAdmissionAdapter
+canonicalRecursiveParetoAdmissionAdapter = recursiveParetoAdmissionAdapter
+  "ResidualRelevantMaterialisation opens only residual-relevant coordinates from the lifted frontier"
+  "AdmittedFrontierRefinement carries a fresh ProofSearch.RouteAdmission before theorem search"
+  (RecursivePareto.residualRelevantRefinementMayOpenOnlySelectedAxes
+    RecursivePareto.canonicalRecursiveParetoFrontierBoundary)
+  (RecursivePareto.residualRelevantRefinementMayOpenOnlySelectedAxesIsTrue
+    RecursivePareto.canonicalRecursiveParetoFrontierBoundary)
+  (RecursivePareto.frontierLiftMaySilentlyChangeOldAxisCosts
+    RecursivePareto.canonicalRecursiveParetoFrontierBoundary)
+  (RecursivePareto.frontierLiftMaySilentlyChangeOldAxisCostsIsFalse
+    RecursivePareto.canonicalRecursiveParetoFrontierBoundary)
+  (RecursivePareto.paretoFrontierRefinementCreatesProofAuthority
+    RecursivePareto.canonicalRecursiveParetoFrontierBoundary)
+  (RecursivePareto.paretoFrontierRefinementCreatesProofAuthorityIsFalse
+    RecursivePareto.canonicalRecursiveParetoFrontierBoundary)
+
+------------------------------------------------------------------------
+-- Live-set Pareto adapter: authority and consumer relevance are hard gates;
+-- Pareto only compares experiments inside the admitted stratum.
+------------------------------------------------------------------------
+
+record LiveSetParetoSchedulerAdapter : Set where
+  constructor liveSetParetoSchedulerAdapter
+  field
+    admittedReference : String
+    declaredAxesReference : String
+    authorityHardGateBeforePareto : Bool
+    authorityHardGateBeforeParetoIsTrue : authorityHardGateBeforePareto ≡ true
+    consumerRelevanceHardGateBeforePareto : Bool
+    consumerRelevanceHardGateBeforeParetoIsTrue :
+      consumerRelevanceHardGateBeforePareto ≡ true
+    cheapestAlwaysParetoDominates : Bool
+    cheapestAlwaysParetoDominatesIsFalse : cheapestAlwaysParetoDominates ≡ false
+    strongestReductionAlwaysParetoDominates : Bool
+    strongestReductionAlwaysParetoDominatesIsFalse :
+      strongestReductionAlwaysParetoDominates ≡ false
+    paretoChoiceCreatesUniqueScientificTruth : Bool
+    paretoChoiceCreatesUniqueScientificTruthIsFalse :
+      paretoChoiceCreatesUniqueScientificTruth ≡ false
+
+open LiveSetParetoSchedulerAdapter public
+
+canonicalLiveSetParetoSchedulerAdapter : LiveSetParetoSchedulerAdapter
+canonicalLiveSetParetoSchedulerAdapter = liveSetParetoSchedulerAdapter
+  "Admitted P e = consumerRelevant(candidate e) = true × authorityAdmissible(candidate e) = true"
+  "residual-survival penalty × declared experiment/search resource cost"
+  (LivePareto.authorityIsHardGateBeforeParetoComparison
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.authorityIsHardGateBeforeParetoComparisonIsTrue
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.consumerRelevanceIsHardGateBeforeParetoComparison
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.consumerRelevanceIsHardGateBeforeParetoComparisonIsTrue
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.cheapestAdmittedExperimentAlwaysParetoDominates
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.cheapestAdmittedExperimentAlwaysParetoDominatesIsFalse
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.strongestReductionAlwaysParetoDominates
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.strongestReductionAlwaysParetoDominatesIsFalse
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.paretoChoiceCreatesUniqueScientificTruth
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+  (LivePareto.paretoChoiceCreatesUniqueScientificTruthIsFalse
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary)
+
+------------------------------------------------------------------------
 -- Shared terminal-consumer payment rule.
 ------------------------------------------------------------------------
 
@@ -335,6 +420,34 @@ rsaSnowballPaymentCannotSkipDependency :
   RSASources.paymentMayProceedOutOfDependencyOrder
     RSASources.canonicalSnowballAttributionBoundary ≡ false
 rsaSnowballPaymentCannotSkipDependency = refl
+
+recursiveParetoDoesNotCreateProofAuthority :
+  RecursivePareto.paretoFrontierRefinementCreatesProofAuthority
+    RecursivePareto.canonicalRecursiveParetoFrontierBoundary ≡ false
+recursiveParetoDoesNotCreateProofAuthority =
+  RecursivePareto.paretoFrontierRefinementCreatesProofAuthorityIsFalse
+    RecursivePareto.canonicalRecursiveParetoFrontierBoundary
+
+liveSetAuthorityHardGate :
+  LivePareto.authorityIsHardGateBeforeParetoComparison
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary ≡ true
+liveSetAuthorityHardGate =
+  LivePareto.authorityIsHardGateBeforeParetoComparisonIsTrue
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary
+
+liveSetConsumerRelevanceHardGate :
+  LivePareto.consumerRelevanceIsHardGateBeforeParetoComparison
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary ≡ true
+liveSetConsumerRelevanceHardGate =
+  LivePareto.consumerRelevanceIsHardGateBeforeParetoComparisonIsTrue
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary
+
+paretoChoiceDoesNotCreateUniqueScientificTruth :
+  LivePareto.paretoChoiceCreatesUniqueScientificTruth
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary ≡ false
+paretoChoiceDoesNotCreateUniqueScientificTruth =
+  LivePareto.paretoChoiceCreatesUniqueScientificTruthIsFalse
+    LivePareto.canonicalLiveSetParetoSchedulerBoundary
 
 ------------------------------------------------------------------------
 -- Constructive gluing versus obstruction/reductio duality.
@@ -439,7 +552,8 @@ crossDomainAnalogyCreatesSourceAuthority : Bool
 crossDomainAnalogyCreatesSourceAuthority = false
 
 ------------------------------------------------------------------------
--- Downstream candidate map only. No downstream implementation occurs here.
+-- Downstream adapter map. Interop adapters may exist here while donor kernels
+-- remain unchanged. The Boolean tracks donor-kernel mutation only.
 ------------------------------------------------------------------------
 
 record DownstreamCrossPollinationCandidate : Set where
@@ -448,8 +562,9 @@ record DownstreamCrossPollinationCandidate : Set where
     domain : String
     candidateConstructiveRole : String
     candidateObstructionRole : String
-    implementedInThisTranche : Bool
-    implementedInThisTrancheIsFalse : implementedInThisTranche ≡ false
+    donorKernelModifiedInThisTranche : Bool
+    donorKernelModifiedInThisTrancheIsFalse :
+      donorKernelModifiedInThisTranche ≡ false
 
 rsaNDimCandidate : DownstreamCrossPollinationCandidate
 rsaNDimCandidate = downstreamCrossPollinationCandidate
@@ -481,6 +596,9 @@ sensibLawCandidate = downstreamCrossPollinationCandidate
 
 downstreamCandidateMapIsImplementation : Bool
 downstreamCandidateMapIsImplementation = false
+
+downstreamCandidateMapMutatesDonorKernels : Bool
+downstreamCandidateMapMutatesDonorKernels = false
 
 ------------------------------------------------------------------------
 -- Exact top-level regression-ready equalities.
@@ -541,3 +659,7 @@ crossDomainAnalogyCreatesSourceAuthorityIsFalse = refl
 downstreamCandidateMapIsImplementationIsFalse :
   downstreamCandidateMapIsImplementation ≡ false
 downstreamCandidateMapIsImplementationIsFalse = refl
+
+downstreamCandidateMapMutatesDonorKernelsIsFalse :
+  downstreamCandidateMapMutatesDonorKernels ≡ false
+downstreamCandidateMapMutatesDonorKernelsIsFalse = refl
