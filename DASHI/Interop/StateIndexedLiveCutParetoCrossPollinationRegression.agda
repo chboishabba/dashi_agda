@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationExact as State
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
+import DASHI.Physics.Closure.NSTriadKNCanonicalClayProofSearchRound486Exact as NS486
 
 salienceIsLiveSetIndexedRegression :
   State.salienceIndexedByResidualAndLiveSet State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
@@ -26,15 +27,13 @@ residualUpdateChangesSelectionRegression :
   State.residualUpdateMayChangeSelectedExperiment
     State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
 residualUpdateChangesSelectionRegression =
-  State.residualUpdateMayChangeSelectedExperimentIsTrue
-    State.canonicalStateIndexedLiveCutParetoAdapter
+  State.residualUpdateMayChangeSelectedExperimentIsTrue State.canonicalStateIndexedLiveCutParetoAdapter
 
 portfolioNoExecutionAuthorityRegression :
   State.portfolioSelectionCreatesExecutionAuthority
     State.canonicalStateIndexedLiveCutParetoAdapter ≡ false
 portfolioNoExecutionAuthorityRegression =
-  State.portfolioSelectionCreatesExecutionAuthorityIsFalse
-    State.canonicalStateIndexedLiveCutParetoAdapter
+  State.portfolioSelectionCreatesExecutionAuthorityIsFalse State.canonicalStateIndexedLiveCutParetoAdapter
 
 terminalConsumerStillRequiredRegression :
   State.terminalConsumerStillRequired State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
@@ -45,30 +44,25 @@ sameGraphCutStateChangeRegression :
   State.sameGraphFactAppendMayChangeReachabilityAndCut
     State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
 sameGraphCutStateChangeRegression =
-  State.sameGraphFactAppendMayChangeReachabilityAndCutIsTrue
-    State.canonicalStateIndexedLiveCutParetoAdapter
+  State.sameGraphFactAppendMayChangeReachabilityAndCutIsTrue State.canonicalStateIndexedLiveCutParetoAdapter
 
 stateIndexedSelectionNoSourceAuthorityRegression :
   State.stateIndexedSelectionDoesNotCreateSourceAuthority
     State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
 stateIndexedSelectionNoSourceAuthorityRegression =
-  State.stateIndexedSelectionDoesNotCreateSourceAuthorityIsTrue
-    State.canonicalStateIndexedLiveCutParetoAdapter
+  State.stateIndexedSelectionDoesNotCreateSourceAuthorityIsTrue State.canonicalStateIndexedLiveCutParetoAdapter
 
 historicalEvidenceRetainedRegression :
   State.historicalEvidenceMayRemainValidWhileNextStepSalienceChanges
     State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
 historicalEvidenceRetainedRegression =
-  State.historicalEvidenceMayRemainValidWhileNextStepSalienceChangesIsTrue
-    State.canonicalStateIndexedLiveCutParetoAdapter
+  State.historicalEvidenceMayRemainValidWhileNextStepSalienceChangesIsTrue State.canonicalStateIndexedLiveCutParetoAdapter
 
 initialPortfolioCandidateEligibleRegression :
   Pareto.Eligible
     (State.asStateIndexedMDLProblem
-      Portfolio.toyPortfolio
-      Portfolio.chemistryUnresolved
-      Portfolio.mechanismConsumer
-      Portfolio.measurementAuthority)
+      Portfolio.toyPortfolio Portfolio.chemistryUnresolved
+      Portfolio.mechanismConsumer Portfolio.measurementAuthority)
     Portfolio.chemistryProbe
 initialPortfolioCandidateEligibleRegression =
   State.portfolioCandidateIsEligible Portfolio.initialChemistryCandidate
@@ -76,30 +70,25 @@ initialPortfolioCandidateEligibleRegression =
 laterPortfolioCandidateEligibleRegression :
   Pareto.Eligible
     (State.asStateIndexedMDLProblem
-      Portfolio.toyPortfolio
-      Portfolio.chemistryResolvedDownstreamLive
-      Portfolio.mechanismConsumer
-      Portfolio.measurementAuthority)
+      Portfolio.toyPortfolio Portfolio.chemistryResolvedDownstreamLive
+      Portfolio.mechanismConsumer Portfolio.measurementAuthority)
     Portfolio.downstreamProbe
 laterPortfolioCandidateEligibleRegression =
   State.portfolioCandidateIsEligible Portfolio.laterDownstreamCandidate
 
 eligibilityNoRouteAdmissionRegression :
   State.stateIndexedEligibilityDoesNotCreateRouteAdmission ≡ true
-eligibilityNoRouteAdmissionRegression =
-  State.stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue
+eligibilityNoRouteAdmissionRegression = State.stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue
 
 admittedCandidateEligibilityProjectionRegression :
   ∀ {P residual consumer authority experiment} →
   State.AdmittedStateIndexedCandidate P residual consumer authority experiment →
   Pareto.Eligible (State.asStateIndexedMDLProblem P residual consumer authority) experiment
-admittedCandidateEligibilityProjectionRegression =
-  State.admittedStateIndexedCandidateEligible
+admittedCandidateEligibilityProjectionRegression = State.admittedStateIndexedCandidateEligible
 
 admittedCandidateNoAutomaticParetoRegression :
   State.admittedCandidateAutomaticallyParetoOptimal ≡ false
-admittedCandidateNoAutomaticParetoRegression =
-  State.admittedCandidateAutomaticallyParetoOptimalIsFalse
+admittedCandidateNoAutomaticParetoRegression = State.admittedCandidateAutomaticallyParetoOptimalIsFalse
 
 admittedCandidateNoAutomaticTerminalClosureRegression :
   State.admittedCandidateAutomaticallyClosesTerminalConsumer ≡ false
@@ -108,98 +97,94 @@ admittedCandidateNoAutomaticTerminalClosureRegression =
 
 parentSnowballPaymentStillFailClosedRegression :
   State.parentSnowballPaymentMaySkipDependency ≡ false
-parentSnowballPaymentStillFailClosedRegression =
-  State.parentSnowballPaymentMaySkipDependencyIsFalse
+parentSnowballPaymentStillFailClosedRegression = State.parentSnowballPaymentMaySkipDependencyIsFalse
 
 currentSalienceNoAuthorityRegression :
-  State.currentSalienceAutomaticallyCreatesAuthority
-    State.canonicalStateIndexedLiveCutParetoBoundary ≡ false
+  State.currentSalienceAutomaticallyCreatesAuthority State.canonicalStateIndexedLiveCutParetoBoundary ≡ false
 currentSalienceNoAuthorityRegression =
-  State.currentSalienceAutomaticallyCreatesAuthorityIsFalse
-    State.canonicalStateIndexedLiveCutParetoBoundary
+  State.currentSalienceAutomaticallyCreatesAuthorityIsFalse State.canonicalStateIndexedLiveCutParetoBoundary
 
 currentCutNoCrossDomainTransferRegression :
-  State.currentMinimalCutAutomaticallyTransfersAcrossDomains
-    State.canonicalStateIndexedLiveCutParetoBoundary ≡ false
+  State.currentMinimalCutAutomaticallyTransfersAcrossDomains State.canonicalStateIndexedLiveCutParetoBoundary ≡ false
 currentCutNoCrossDomainTransferRegression =
-  State.currentMinimalCutAutomaticallyTransfersAcrossDomainsIsFalse
-    State.canonicalStateIndexedLiveCutParetoBoundary
+  State.currentMinimalCutAutomaticallyTransfersAcrossDomainsIsFalse State.canonicalStateIndexedLiveCutParetoBoundary
 
-nsRelativeGrowthSplitClosedRegression :
-  State.relativeGrowthSplitClosed State.canonicalNSCurrentCutParetoAdapter ≡ true
-nsRelativeGrowthSplitClosedRegression =
-  State.relativeGrowthSplitClosedIsTrue State.canonicalNSCurrentCutParetoAdapter
+nsCanonicalResidualRegression :
+  NS486.firstCanonicalNSResidual NS486.currentCanonicalNSStatus
+  ≡ NS486.missingCutoffUniformSignedCompanionBudget
+nsCanonicalResidualRegression = State.nsCurrentResidualIsDirectR423Budget
 
-nsPressureProducerStillOpenRegression :
-  State.nonlinearPressureRelativeGrowthEstimatePaid
-    State.canonicalNSCurrentCutParetoAdapter ≡ false
-nsPressureProducerStillOpenRegression =
-  State.nonlinearPressureRelativeGrowthEstimatePaidIsFalse
-    State.canonicalNSCurrentCutParetoAdapter
+nsCanonicalR423ShortestRegression :
+  State.canonicalShortestConsumerIsR423 State.canonicalNSCanonicalCurrentCutParetoAdapter ≡ true
+nsCanonicalR423ShortestRegression =
+  State.canonicalShortestConsumerIsR423IsTrue State.canonicalNSCanonicalCurrentCutParetoAdapter
 
-nsCriticalBarrierStillOpenRegression :
-  State.criticalRatioBarrierPaid State.canonicalNSCurrentCutParetoAdapter ≡ false
-nsCriticalBarrierStillOpenRegression =
-  State.criticalRatioBarrierPaidIsFalse State.canonicalNSCurrentCutParetoAdapter
+nsDirectR423StillOpenRegression :
+  State.directR423BudgetPaid State.canonicalNSCanonicalCurrentCutParetoAdapter ≡ false
+nsDirectR423StillOpenRegression =
+  State.directR423BudgetPaidIsFalse State.canonicalNSCanonicalCurrentCutParetoAdapter
+
+nsCrossOutputNotRequiredRegression :
+  State.crossOutputCoherenceRequired State.canonicalNSCanonicalCurrentCutParetoAdapter ≡ false
+nsCrossOutputNotRequiredRegression =
+  State.crossOutputCoherenceRequiredIsFalse State.canonicalNSCanonicalCurrentCutParetoAdapter
+
+nsR284NotMandatoryRegression :
+  State.r284DecompositionMandatory State.canonicalNSCanonicalCurrentCutParetoAdapter ≡ false
+nsR284NotMandatoryRegression =
+  State.r284DecompositionMandatoryIsFalse State.canonicalNSCanonicalCurrentCutParetoAdapter
 
 nsClayPromotionStillFalseRegression :
-  State.clayPromotionPaid State.canonicalNSCurrentCutParetoAdapter ≡ false
+  State.clayPromotionPaid State.canonicalNSCanonicalCurrentCutParetoAdapter ≡ false
 nsClayPromotionStillFalseRegression =
-  State.clayPromotionPaidIsFalse State.canonicalNSCurrentCutParetoAdapter
+  State.clayPromotionPaidIsFalse State.canonicalNSCanonicalCurrentCutParetoAdapter
 
-nsClosedAlgebraNotHighestSalienceRegression :
-  State.closedAlgebraRemainsHighestSalience State.canonicalNSCurrentCutParetoAdapter ≡ false
-nsClosedAlgebraNotHighestSalienceRegression =
-  State.closedAlgebraRemainsHighestSalienceIsFalse State.canonicalNSCurrentCutParetoAdapter
+nsRound83CannotOverrideCanonicalCutRegression :
+  State.staleRound83SnapshotMayOverrideCanonicalCut State.canonicalNSCanonicalCurrentCutParetoAdapter ≡ false
+nsRound83CannotOverrideCanonicalCutRegression =
+  State.staleRound83SnapshotMayOverrideCanonicalCutIsFalse State.canonicalNSCanonicalCurrentCutParetoAdapter
 
-nsParetoCannotSkipCurrentCutRegression :
-  State.currentNSCutMayBeSkippedByPareto State.canonicalNSCurrentCutParetoAdapter ≡ false
-nsParetoCannotSkipCurrentCutRegression =
-  State.currentNSCutMayBeSkippedByParetoIsFalse State.canonicalNSCurrentCutParetoAdapter
+nsOptionalProducerCannotSelfPromoteRegression :
+  State.optionalProducerMayBecomeMandatoryWithoutFrontierImprovement
+    State.canonicalNSCanonicalCurrentCutParetoAdapter ≡ false
+nsOptionalProducerCannotSelfPromoteRegression =
+  State.optionalProducerMayBecomeMandatoryWithoutFrontierImprovementIsFalse
+    State.canonicalNSCanonicalCurrentCutParetoAdapter
 
-nsCrossPollinationNoAuthorityRegression :
-  State.crossPollinationCreatesNSTheoremAuthority State.canonicalNSCurrentCutParetoAdapter ≡ false
-nsCrossPollinationNoAuthorityRegression =
-  State.crossPollinationCreatesNSTheoremAuthorityIsFalse State.canonicalNSCurrentCutParetoAdapter
+crossDomainShapeNoSharedMathematicsRegression :
+  State.crossDomainSchedulerShapeProvesSharedMathematics
+    State.canonicalNSCanonicalCurrentCutParetoAdapter ≡ false
+crossDomainShapeNoSharedMathematicsRegression =
+  State.crossDomainSchedulerShapeProvesSharedMathematicsIsFalse
+    State.canonicalNSCanonicalCurrentCutParetoAdapter
 
 routeAdmissionRequiredRegression :
-  State.routeMayElaborateBeforeAdmission
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+  State.routeMayElaborateBeforeAdmission State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
 routeAdmissionRequiredRegression =
-  State.routeMayElaborateBeforeAdmissionIsFalse
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+  State.routeMayElaborateBeforeAdmissionIsFalse State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
 
 silentStrengtheningBlockedRegression :
-  State.routeMaySilentlyStrengthenHypotheses
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+  State.routeMaySilentlyStrengthenHypotheses State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
 silentStrengtheningBlockedRegression =
-  State.routeMaySilentlyStrengthenHypothesesIsFalse
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+  State.routeMaySilentlyStrengthenHypothesesIsFalse State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
 
 localLemmaNoAutomaticFrontierRegression :
   State.localLemmaAutomaticallyMovesProgrammeFrontier
     State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
 localLemmaNoAutomaticFrontierRegression =
-  State.localLemmaAutomaticallyMovesProgrammeFrontierIsFalse
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+  State.localLemmaAutomaticallyMovesProgrammeFrontierIsFalse State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
 
 lemmaCountNoAuthorityRegression :
-  State.lemmaCountIsAuthoritativeProgress
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+  State.lemmaCountIsAuthoritativeProgress State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
 lemmaCountNoAuthorityRegression =
-  State.lemmaCountIsAuthoritativeProgressIsFalse
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+  State.lemmaCountIsAuthoritativeProgressIsFalse State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
 
 duplicateRouteReuseRegression :
-  State.duplicateRouteShouldBeReproved
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
+  State.duplicateRouteShouldBeReproved State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ false
 duplicateRouteReuseRegression =
-  State.duplicateRouteShouldBeReprovedIsFalse
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+  State.duplicateRouteShouldBeReprovedIsFalse State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
 
 liveCutCannotBypassAdmissionRegression :
-  State.liveCutSalienceCannotBypassRouteAdmission
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ true
+  State.liveCutSalienceCannotBypassRouteAdmission State.canonicalLeastPrivilegeLiveCutAdmissionAdapter ≡ true
 liveCutCannotBypassAdmissionRegression =
-  State.liveCutSalienceCannotBypassRouteAdmissionIsTrue
-    State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
+  State.liveCutSalienceCannotBypassRouteAdmissionIsTrue State.canonicalLeastPrivilegeLiveCutAdmissionAdapter
