@@ -9,6 +9,7 @@ import DASHI.Interop.PenroseLocalGlobalHyperfabricCrossPollinationExact as Paren
 import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact as Live
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
 import DASHI.Cognition.PNF.SensibLawDutySourceLineageRefinementCutRerunExact as GuardedCut
+import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound83Exact as NS83
 
 ------------------------------------------------------------------------
 -- STATE-INDEXED LIVE-CUT / PARETO CHILD
@@ -20,9 +21,9 @@ import DASHI.Cognition.PNF.SensibLawDutySourceLineageRefinementCutRerunExact as 
 -- recomputed first; only moves that remain relevant to that state are eligible
 -- for subsequent authority/consumer gates and Pareto comparison.
 --
--- The SensibLaw donor is source-correct and domain-specific. We reuse its exact
--- same-graph refinement/cut behaviour and its non-promotion firewalls without
--- treating the legal theorem as a generic scientific theorem or vice versa.
+-- The SensibLaw and NS donors remain domain-specific. We reuse exact state,
+-- cut, and non-promotion surfaces without transferring theorem identity or
+-- source authority across domains.
 ------------------------------------------------------------------------
 
 record StateIndexedLiveCutParetoAdapter : Set where
@@ -111,6 +112,64 @@ OpenCullenRouteTransfersToClimate = GuardedCut.OpenCullenRouteTransfersToClimate
 
 openCullenRouteStillDoesNotTransfer : OpenCullenRouteTransfersToClimate → ⊥
 openCullenRouteStillDoesNotTransfer = GuardedCut.specificOpenRouteStillDoesNotTransfer
+
+------------------------------------------------------------------------
+-- Current NS producer-cut adapter.
+--
+-- Round83 has already paid the same-object viscous/nonlinear relative-growth
+-- split. Its current load-bearing producer is narrower: construct the physical
+-- nonlinear pressure-relative-growth estimate, then discharge the critical
+-- barrier. This child records that current cut only; it does not alter Round83
+-- sources, prove the missing estimate, or promote the Clay conclusion.
+------------------------------------------------------------------------
+
+record NSCurrentCutParetoAdapter : Set where
+  constructor nsCurrentCutParetoAdapter
+  field
+    currentProducerCutReference : String
+    sourceCustodyReference : String
+
+    relativeGrowthSplitClosed : Bool
+    relativeGrowthSplitClosedIsTrue : relativeGrowthSplitClosed ≡ true
+
+    nonlinearPressureRelativeGrowthEstimatePaid : Bool
+    nonlinearPressureRelativeGrowthEstimatePaidIsFalse :
+      nonlinearPressureRelativeGrowthEstimatePaid ≡ false
+
+    criticalRatioBarrierPaid : Bool
+    criticalRatioBarrierPaidIsFalse : criticalRatioBarrierPaid ≡ false
+
+    clayPromotionPaid : Bool
+    clayPromotionPaidIsFalse : clayPromotionPaid ≡ false
+
+    closedAlgebraRemainsHighestSalience : Bool
+    closedAlgebraRemainsHighestSalienceIsFalse :
+      closedAlgebraRemainsHighestSalience ≡ false
+
+    currentNSCutMayBeSkippedByPareto : Bool
+    currentNSCutMayBeSkippedByParetoIsFalse : currentNSCutMayBeSkippedByPareto ≡ false
+
+    crossPollinationCreatesNSTheoremAuthority : Bool
+    crossPollinationCreatesNSTheoremAuthorityIsFalse :
+      crossPollinationCreatesNSTheoremAuthority ≡ false
+
+open NSCurrentCutParetoAdapter public
+
+canonicalNSCurrentCutParetoAdapter : NSCurrentCutParetoAdapter
+canonicalNSCurrentCutParetoAdapter = nsCurrentCutParetoAdapter
+  "Round83 live producer: pressure-resolved selected-event geometry -> cutoff-uniform nonlinearRelativeGrowthCore estimate -> viscous combination -> integrated margin -> occupation/replenishment/residence"
+  "all analytic/source attribution remains owned by NSTriadKNHighestAlphaRound83Exact and its imported source/theorem owners"
+  NS83.round83RelativeGrowthSplitsViscousNonlinearExactly
+  NS83.round83RelativeGrowthSplitsViscousNonlinearExactlyIsTrue
+  NS83.round83NonlinearPressureRelativeGrowthEstimateConstructed
+  NS83.round83NonlinearPressureRelativeGrowthEstimateConstructedIsFalse
+  NS83.round83CriticalRatioBarrier
+  refl
+  NS83.round83ClayPromotion
+  NS83.round83ClayPromotionIsFalse
+  false refl
+  false refl
+  false refl
 
 ------------------------------------------------------------------------
 -- Parent payment / attribution boundaries remain live in the child.
