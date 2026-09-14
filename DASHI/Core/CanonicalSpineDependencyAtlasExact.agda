@@ -11,13 +11,13 @@ import DASHI.Core.TypedDependencyCore as Dependency
 -- This is deliberately not another generic relationship enum.  The generic
 -- relation/witness machinery already lives in TypedDependencyCore.  We only
 -- state the small set of canonical parent dependencies currently paid by the
--- implementation.
+-- repository archaeology and formal interfaces.
 --
 -- Direction convention:
 --   CanonicalDependency child parent
--- means the child structurally depends on / refines the parent for the stated
--- scope.  It does not mean theorem equivalence or that every manifestation of
--- the child is definitionally the parent.
+-- means the child structurally/provenance-wise depends on or refines the parent
+-- for the stated scope.  It does NOT mean theorem equivalence, definitionally
+-- identical carriers, or a literal Agda import edge.
 ------------------------------------------------------------------------
 
 data CanonicalDependency :
@@ -60,8 +60,8 @@ boundedNegativeSearchDependencyWitness =
     boundedNegativeSearchDependsOnOSINT
     Dependency.epistemicLayer
     Dependency.requiredDependency
-    "SnowballOSINTAcquisitionInvariantExact owns the qualitative non-location firewall; BoundedNegativeSearchExact strictly refines it with proof-valued scope and an explicit universe-coverage promotion gate."
-    "negative search / acquisition semantics only; source identity and corroboration discipline remain owned by the OSINT parent"
+    "SnowballOSINTAcquisitionInvariantExact owns the qualitative non-location firewall; BoundedNegativeSearchExact strictly refines that repository lesson with proof-valued scope and an explicit universe-coverage promotion gate."
+    "structural/provenance parentage for negative-search acquisition semantics only; the generic bounded-search theorem remains mathematically standalone and does not import OSINT"
 
 attributionSnowballDependencyWitness :
   Dependency.DependencyWitness CanonicalDependency
@@ -125,12 +125,14 @@ record CanonicalDependencyAtlasBoundary : Set where
     importRelationshipAutomaticallyCreatesDependency : Bool
     conceptualResemblanceAutomaticallyCreatesDependency : Bool
     childDependencyImpliesTheoremEquivalence : Bool
+    structuralParentageImpliesCodeImportDependency : Bool
 
 canonicalDependencyAtlasBoundary : CanonicalDependencyAtlasBoundary
 canonicalDependencyAtlasBoundary =
   canonical-dependency-atlas-boundary
     true
     true
+    false
     false
     false
     false
