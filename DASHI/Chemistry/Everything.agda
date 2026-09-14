@@ -137,3 +137,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandCondit
 -- coordinate, while source-paid Kramers diffusion calibrations remain distinct
 -- from still-unacquired per-edge Figure 5/6 numeric labels and experiment.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseRateObserverAdequacyExact
+
+-- FRET observer-axis refinement: two ligand-free single-molecule FRET studies
+-- observe different residue/domain axes (LID--NMP versus LID--CORE) and report
+-- different population summaries. Axis-erased observation is inadequate for
+-- that query; retaining the measurement axis repairs the finite collision.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverAxisExact
