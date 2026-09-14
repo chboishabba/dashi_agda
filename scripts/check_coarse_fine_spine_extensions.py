@@ -36,6 +36,7 @@ REQUIRED_FILES = [
     "DASHI/Core/DeclaredScenarioRobustnessExact.agda",
     "DASHI/Core/DeclaredScenarioRobustnessRegression.agda",
     "DASHI/Core/RequiredObserverAxisJoinAdequacyExact.agda",
+    "DASHI/Core/RequiredObserverAxisJoinCanonicalPairRegression.agda",
     "DASHI/Core/ExperimentalCoordinateProjectionBridgeExact.agda",
     "DASHI/Core/ExperimentalCoordinateProjectionBridgeRegression.agda",
     "DASHI/Core/SnowballOSINTAcquisitionInvariantExact.agda",
@@ -73,6 +74,7 @@ EXPECTED = {
     "DASHI/Core/CanonicalSpineDependencyAtlasExact.agda": [
         "consumerRepairDependsOnObserverRefinement",
         "frozenDynamicDependsOnObserverRefinement",
+        "requiredAxisJoinDependsOnObserverRefinement",
         "requiredAxisJoinDependsOnQueryAdequacy",
         "boundedNegativeSearchDependsOnOSINT",
         "attributionSnowballDependsOnAttributedSource",
@@ -126,6 +128,8 @@ EXPECTED = {
         "declaredFamilyAutomaticallyRecoversUniversalObligation = false",
     ],
     "DASHI/Core/RequiredObserverAxisJoinAdequacyExact.agda": [
+        "jointAxis = Observer.pairObserver",
+        "jointAxisIsCanonicalPairObserver :",
         "candidateRetainingBothRetainsJoint :",
         "leftAxisDefectBlocksRetainingBoth :",
         "rightAxisDefectBlocksRetainingBoth :",
@@ -168,6 +172,7 @@ EXPECTED = {
         "import DASHI.Core.ResidualObserverDependencyProjectionAdapterRegression",
         "import DASHI.Core.DeclaredScenarioRobustnessExact",
         "import DASHI.Core.RequiredObserverAxisJoinAdequacyExact",
+        "import DASHI.Core.RequiredObserverAxisJoinCanonicalPairRegression",
         "import DASHI.Core.BoundedNegativeSearchExact",
         "import DASHI.Core.MultipartSameObjectReconstructionExact",
         "import DASHI.Core.FrozenHeldOutRepairRefinementExact",
