@@ -1,7 +1,7 @@
 module DASHI.Governance.CouncilBundleGluingCalculusAdapterExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Foundations.StageValuationBundleAtlas as Stage
