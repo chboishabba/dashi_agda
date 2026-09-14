@@ -2,10 +2,9 @@
 """Static contract for state-indexed live-cut Pareto cross-pollination.
 
 The child composes residual/live-set salience, residual-conditioned experiment
-portfolios, source-correct SensibLaw guarded cuts, the canonical NS R486/R423
-frontier, and least-privilege proof search. It must not create authority, route
-around unpaid consumers, or let superseded producer archaeology override the
-current canonical terminal cut.
+portfolios, source-correct guarded cuts, canonical Clay frontiers, literal
+frontier dispositions, and least-privilege proof search. It must not fabricate
+Pareto costs from labels or route around unpaid consumers.
 """
 
 from pathlib import Path
@@ -31,6 +30,8 @@ require(OWNER, [
     "AdmissibleConsumerMDLHyperfabricExact",
     "ActionabilityCostedExperimentChoiceExact",
     "ProofSearchLeastPrivilegeAdmissionExact",
+    "LiteralFrontierSchedulerExact",
+    "NSYMLiteralFrontierSchedulerExact",
     "SensibLawDutySourceLineageRefinementCutRerunExact",
     "NSTriadKNCanonicalClayProofSearchRound486Exact",
     "ClayCrossDomainLiteralFrontierExact",
@@ -50,17 +51,19 @@ require(OWNER, [
     "NSCanonicalCurrentCutParetoAdapter",
     "canonicalNSCanonicalCurrentCutParetoAdapter",
     "nsCurrentResidualIsDirectR423Budget",
-    "canonicalShortestConsumerIsR423",
-    "directR423BudgetPaid",
-    "crossOutputCoherenceRequired",
-    "r284DecompositionMandatory",
-    "clayPromotionPaid",
-    "staleRound83SnapshotMayOverrideCanonicalCut",
-    "optionalProducerMayBecomeMandatoryWithoutFrontierImprovement",
-    "crossDomainSchedulerShapeProvesSharedMathematics",
     "LeastPrivilegeLiveCutAdmissionAdapter",
     "canonicalLeastPrivilegeLiveCutAdmissionAdapter",
     "liveCutSalienceCannotBypassRouteAdmission",
+    "LiteralFrontierParetoBoundaryAdapter",
+    "canonicalLiteralFrontierParetoBoundaryAdapter",
+    "paretoReferenceConstructsCostHyperfabric",
+    "redirectEqualsFormalClosure",
+    "formalClosureRequiresExactConsumerReceipt",
+    "ymDirectRouteStillConjunctive",
+    "YMNumericalDirectClosure",
+    "ymNumericalCannotCloseLeaf",
+    "ymOneChildAuthorityClosesParent",
+    "ymQuantitativeParetoRankingAvailableWithoutDeclaredCosts",
 ])
 
 require(REGRESSION, [
@@ -84,6 +87,13 @@ require(REGRESSION, [
     "nsRound83CannotOverrideCanonicalCutRegression",
     "nsOptionalProducerCannotSelfPromoteRegression",
     "crossDomainShapeNoSharedMathematicsRegression",
+    "literalParetoReferenceNoCostHyperfabricRegression",
+    "literalRedirectNotClosureRegression",
+    "literalClosureNeedsConsumerReceiptRegression",
+    "ymDirectRouteConjunctiveRegression",
+    "ymNumericalNoDirectClosureRegression",
+    "ymOneChildNoParentClosureRegression",
+    "ymNoQuantitativeParetoWithoutCostsRegression",
     "routeAdmissionRequiredRegression",
     "silentStrengtheningBlockedRegression",
     "localLemmaNoAutomaticFrontierRegression",
