@@ -215,4 +215,4 @@ canonicalLESRound4RemainingScientificFrontier =
     true true true true true true
 
 round4BuildsOnRound3 : Round3.LESRound3Boundary
-round4BuildsOnRound3 = Round3.canonicalRound3Boundary
+round4BuildsOnRound3 = Round3.canonicalLESRound3Boundary
