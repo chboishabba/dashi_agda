@@ -138,3 +138,32 @@ positiveWitnessRejectsSelfErasureRegression :
     Cross.canonicalCompassionWithoutSelfErasure ≡ false
 positiveWitnessRejectsSelfErasureRegression =
   Cross.compassionWithoutSelfErasureDoesNotRequireSelfErasure
+
+------------------------------------------------------------------------
+-- Cross-pollination: the positive witness must preserve existing relational
+-- shared-state and situated-authority invariants rather than replacing them.
+------------------------------------------------------------------------
+
+belongingDoesNotPromoteSilenceToAssentRegression :
+  Cross.sharedStateSilenceStillNeedsAssentWitness ≡ true
+belongingDoesNotPromoteSilenceToAssentRegression = refl
+
+continuedRelationshipDoesNotCreateFutureObligationRegression :
+  Cross.sharedStateFutureObligationStillNeedsCommitment ≡ true
+continuedRelationshipDoesNotCreateFutureObligationRegression = refl
+
+careAccountabilityInvariantSurvivesRegression :
+  Cross.sharedStateCareAndAccountabilityRemainDistinct ≡ true
+careAccountabilityInvariantSurvivesRegression = refl
+
+boundedPauseDoesNotEraseRepairRegression :
+  Cross.minimalRepairStillPermitsPauseWithoutErasure ≡ true
+boundedPauseDoesNotEraseRepairRegression = refl
+
+familyOrCommunityStandingDoesNotReplaceCurrentAuthorityRegression :
+  Cross.situatedRouteStillRequiresCurrentAuthority ≡ true
+familyOrCommunityStandingDoesNotReplaceCurrentAuthorityRegression = refl
+
+situatedRouteStillRequiresRepairCapacityRegression :
+  Cross.situatedRouteStillRequiresRepairCapacity ≡ true
+situatedRouteStillRequiresRepairCapacityRegression = refl
