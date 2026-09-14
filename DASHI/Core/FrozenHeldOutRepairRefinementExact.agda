@@ -47,7 +47,7 @@ retainsFrozenSelection = frozenSelection
 
 data HeldOutRepairAutomaticallyFrozen : Set where
 data FrozenSelectionAutomaticallyCreatesHeldOutRepair : Set where
-\data TrainingFitCreatesHeldOutValidity : Set where
+data TrainingFitCreatesHeldOutValidity : Set where
 
 heldOutRepairDoesNotAutomaticallyFreezeSelection :
   HeldOutRepairAutomaticallyFrozen → ⊥
