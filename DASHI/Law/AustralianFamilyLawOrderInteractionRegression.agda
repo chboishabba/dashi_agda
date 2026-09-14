@@ -27,6 +27,37 @@ informationSharingSubdivisionDALocated :
 informationSharingSubdivisionDALocated = refl
 
 ------------------------------------------------------------------------
+-- Child-protection / family-law collaboration is source-paid as a parallel-
+-- systems coordination surface, not as a universal intervention obligation.
+------------------------------------------------------------------------
+
+parallelFamilyAndChildProtectionInvolvementLocated :
+  Interaction.parallelSystemInvolvementLocated ≡ true
+parallelFamilyAndChildProtectionInvolvementLocated = refl
+
+twoWayInformationSharingLocated :
+  Interaction.twoWayInformationSharingFrameworkLocated ≡ true
+twoWayInformationSharingLocated = refl
+
+coLocationProgramLocated :
+  Interaction.coLocationProgramLocated ≡ true
+coLocationProgramLocated = refl
+
+courtRoutineUseOfChildProtectionInformationReported :
+  Interaction.courtRoutineChildProtectionInformationUseReported ≡ true
+courtRoutineUseOfChildProtectionInformationReported = refl
+
+familyProceedingDoesNotAutomaticallyEndAgencyRole :
+  Interaction.FamilyProceedingAutomaticallyEndsChildProtectionAgencyRole → ⊥
+familyProceedingDoesNotAutomaticallyEndAgencyRole =
+  Interaction.familyProceedingDoesNotAutomaticallyEndChildProtectionAgencyRole
+
+collaborationArchitectureDoesNotForceIntervention :
+  Interaction.CollaborationArchitectureAutomaticallyRequiresAgencyIntervention → ⊥
+collaborationArchitectureDoesNotForceIntervention =
+  Interaction.collaborationArchitectureDoesNotAutomaticallyRequireAgencyIntervention
+
+------------------------------------------------------------------------
 -- Query-indexed cross-pollination: the same visible federal-order surface can
 -- coexist with different inconsistency states.  Federal-order existence is
 -- therefore insufficient for the consumer asking about operative FVO effect.
