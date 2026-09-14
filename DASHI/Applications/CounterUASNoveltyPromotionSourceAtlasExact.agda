@@ -3,6 +3,7 @@ module DASHI.Applications.CounterUASNoveltyPromotionSourceAtlasExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 
 ------------------------------------------------------------------------
 -- NOVELTY PROMOTION / CONTAMINATION SOURCE ATLAS
@@ -73,6 +74,15 @@ noveltyPromotionSourceAtlasCreatesAuthorityIsFalse :
 noveltyPromotionSourceAtlasCreatesAuthorityIsFalse =
   Source.atlasCreatesAuthorityIsFalse noveltyPromotionSourceAtlas
 
+nieSnowballReceipt : Snowball.SourceRoleSnowballReceipt nieEtAl2025
+nieSnowballReceipt = Snowball.canonicalSourceRoleSnowballReceipt nieEtAl2025
+
+paaSnowballReceipt : Snowball.SourceRoleSnowballReceipt liEtAl2025PAA
+paaSnowballReceipt = Snowball.canonicalSourceRoleSnowballReceipt liEtAl2025PAA
+
+ofclSnowballReceipt : Snowball.SourceRoleSnowballReceipt liEtAlKDD2025
+ofclSnowballReceipt = Snowball.canonicalSourceRoleSnowballReceipt liEtAlKDD2025
+
 record NoveltyPromotionAttributionBoundary : Set where
   constructor noveltyPromotionAttributionBoundary
   field
@@ -85,8 +95,11 @@ record NoveltyPromotionAttributionBoundary : Set where
     sourceAgreementCreatesIndependentGenealogy : Bool
     sourceAgreementCreatesIndependentGenealogyIsFalse :
       sourceAgreementCreatesIndependentGenealogy ≡ false
+    citationCreatesPromotionEligibility : Bool
+    citationCreatesPromotionEligibilityIsFalse :
+      citationCreatesPromotionEligibility ≡ false
 
 canonicalNoveltyPromotionAttributionBoundary :
   NoveltyPromotionAttributionBoundary
 canonicalNoveltyPromotionAttributionBoundary =
-  noveltyPromotionAttributionBoundary false refl false refl false refl
+  noveltyPromotionAttributionBoundary false refl false refl false refl false refl
