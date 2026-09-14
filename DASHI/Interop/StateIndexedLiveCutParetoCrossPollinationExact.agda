@@ -12,8 +12,9 @@ import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
+import DASHI.Core.ClayCrossDomainLiteralFrontierExact as Clay
 import DASHI.Cognition.PNF.SensibLawDutySourceLineageRefinementCutRerunExact as GuardedCut
-import DASHI.Physics.Closure.NSTriadKNHighestAlphaRound83Exact as NS83
+import DASHI.Physics.Closure.NSTriadKNCanonicalClayProofSearchRound486Exact as NS486
 
 ------------------------------------------------------------------------
 -- STATE-INDEXED LIVE-CUT / PARETO CHILD
@@ -97,15 +98,6 @@ stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue :
   stateIndexedEligibilityDoesNotCreateRouteAdmission ≡ true
 stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue = refl
 
-------------------------------------------------------------------------
--- Admitted live-cut candidate: eligibility + independent route admission.
---
--- RouteAdmission is intentionally supplied independently. This record does not
--- manufacture a route-specific receipt from a portfolio candidate. It merely
--- bundles already-paid current-state eligibility with already-paid proof-search
--- admission and retains the terminal-consumer reference that must still close.
-------------------------------------------------------------------------
-
 record AdmittedStateIndexedCandidate
     (P : Portfolio.ExperimentPortfolio)
     (residual : Portfolio.ResidualContext P)
@@ -114,8 +106,7 @@ record AdmittedStateIndexedCandidate
     (experiment : Portfolio.Experiment P) : Set where
   constructor admitted-state-indexed-candidate
   field
-    currentPortfolioCandidate :
-      Portfolio.PortfolioCandidate P residual consumer authority experiment
+    currentPortfolioCandidate : Portfolio.PortfolioCandidate P residual consumer authority experiment
     routeAdmission : ProofSearch.RouteAdmission
     terminalConsumerReference : String
 
@@ -131,15 +122,13 @@ admittedStateIndexedCandidateEligible admitted =
 admittedCandidateAutomaticallyParetoOptimal : Bool
 admittedCandidateAutomaticallyParetoOptimal = false
 
-admittedCandidateAutomaticallyParetoOptimalIsFalse :
-  admittedCandidateAutomaticallyParetoOptimal ≡ false
+admittedCandidateAutomaticallyParetoOptimalIsFalse : admittedCandidateAutomaticallyParetoOptimal ≡ false
 admittedCandidateAutomaticallyParetoOptimalIsFalse = refl
 
 admittedCandidateAutomaticallyClosesTerminalConsumer : Bool
 admittedCandidateAutomaticallyClosesTerminalConsumer = false
 
-admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse :
-  admittedCandidateAutomaticallyClosesTerminalConsumer ≡ false
+admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse : admittedCandidateAutomaticallyClosesTerminalConsumer ≡ false
 admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse = refl
 
 ------------------------------------------------------------------------
@@ -159,42 +148,64 @@ openCullenRouteStillDoesNotTransfer : OpenCullenRouteTransfersToClimate → ⊥
 openCullenRouteStillDoesNotTransfer = GuardedCut.specificOpenRouteStillDoesNotTransfer
 
 ------------------------------------------------------------------------
--- Current NS producer-cut adapter.
+-- Canonical NS current-cut adapter (R486/R423).
+--
+-- Round83 is retained as historical proof archaeology elsewhere, but it no
+-- longer owns the canonical live Clay cut. R486 restores the direct R423
+-- cutoff-uniform integrated signed quadratic-companion heat-cross payment as
+-- the shortest terminal consumer. Optional R284/Cauchy routes stay optional.
 ------------------------------------------------------------------------
 
-record NSCurrentCutParetoAdapter : Set where
-  constructor nsCurrentCutParetoAdapter
+record NSCanonicalCurrentCutParetoAdapter : Set where
+  constructor nsCanonicalCurrentCutParetoAdapter
   field
-    currentProducerCutReference : String
+    canonicalConsumerReference : String
     sourceCustodyReference : String
-    relativeGrowthSplitClosed : Bool
-    relativeGrowthSplitClosedIsTrue : relativeGrowthSplitClosed ≡ true
-    nonlinearPressureRelativeGrowthEstimatePaid : Bool
-    nonlinearPressureRelativeGrowthEstimatePaidIsFalse : nonlinearPressureRelativeGrowthEstimatePaid ≡ false
-    criticalRatioBarrierPaid : Bool
-    criticalRatioBarrierPaidIsFalse : criticalRatioBarrierPaid ≡ false
+    canonicalShortestConsumerIsR423 : Bool
+    canonicalShortestConsumerIsR423IsTrue : canonicalShortestConsumerIsR423 ≡ true
+    directR423BudgetPaid : Bool
+    directR423BudgetPaidIsFalse : directR423BudgetPaid ≡ false
+    crossOutputCoherenceRequired : Bool
+    crossOutputCoherenceRequiredIsFalse : crossOutputCoherenceRequired ≡ false
+    r284DecompositionMandatory : Bool
+    r284DecompositionMandatoryIsFalse : r284DecompositionMandatory ≡ false
     clayPromotionPaid : Bool
     clayPromotionPaidIsFalse : clayPromotionPaid ≡ false
-    closedAlgebraRemainsHighestSalience : Bool
-    closedAlgebraRemainsHighestSalienceIsFalse : closedAlgebraRemainsHighestSalience ≡ false
-    currentNSCutMayBeSkippedByPareto : Bool
-    currentNSCutMayBeSkippedByParetoIsFalse : currentNSCutMayBeSkippedByPareto ≡ false
-    crossPollinationCreatesNSTheoremAuthority : Bool
-    crossPollinationCreatesNSTheoremAuthorityIsFalse : crossPollinationCreatesNSTheoremAuthority ≡ false
+    staleRound83SnapshotMayOverrideCanonicalCut : Bool
+    staleRound83SnapshotMayOverrideCanonicalCutIsFalse : staleRound83SnapshotMayOverrideCanonicalCut ≡ false
+    optionalProducerMayBecomeMandatoryWithoutFrontierImprovement : Bool
+    optionalProducerMayBecomeMandatoryWithoutFrontierImprovementIsFalse : optionalProducerMayBecomeMandatoryWithoutFrontierImprovement ≡ false
+    crossDomainSchedulerShapeProvesSharedMathematics : Bool
+    crossDomainSchedulerShapeProvesSharedMathematicsIsFalse : crossDomainSchedulerShapeProvesSharedMathematics ≡ false
 
-open NSCurrentCutParetoAdapter public
+open NSCanonicalCurrentCutParetoAdapter public
 
-canonicalNSCurrentCutParetoAdapter : NSCurrentCutParetoAdapter
-canonicalNSCurrentCutParetoAdapter = nsCurrentCutParetoAdapter
-  "Round83 live producer: pressure-resolved selected-event geometry -> cutoff-uniform nonlinearRelativeGrowthCore estimate -> viscous combination -> integrated margin -> occupation/replenishment/residence"
-  "all analytic/source attribution remains owned by NSTriadKNHighestAlphaRound83Exact and its imported source/theorem owners"
-  NS83.round83RelativeGrowthSplitsViscousNonlinearExactly
-  NS83.round83RelativeGrowthSplitsViscousNonlinearExactlyIsTrue
-  NS83.round83NonlinearPressureRelativeGrowthEstimateConstructed
-  NS83.round83NonlinearPressureRelativeGrowthEstimateConstructedIsFalse
-  NS83.round83CriticalRatioBarrier refl
-  NS83.round83ClayPromotion NS83.round83ClayPromotionIsFalse
-  false refl false refl false refl
+canonicalNSCanonicalCurrentCutParetoAdapter : NSCanonicalCurrentCutParetoAdapter
+canonicalNSCanonicalCurrentCutParetoAdapter = nsCanonicalCurrentCutParetoAdapter
+  "R486/R423: cutoff-uniform integrated signed quadratic-companion heat-cross payment"
+  "canonical NS frontier and attribution remain owned by NSTriadKNCanonicalClayProofSearchRound486Exact and ClayCrossDomainLiteralFrontierExact"
+  NS486.round486R423IsCanonicalShortestConsumer
+  NS486.round486R423IsCanonicalShortestConsumerIsTrue
+  NS486.round486DirectR423BudgetClosed
+  NS486.round486DirectR423BudgetClosedIsFalse
+  NS486.round486CrossOutputCoherenceRequired
+  NS486.round486CrossOutputCoherenceRequiredIsFalse
+  NS486.round486R284DecompositionMandatory
+  NS486.round486R284DecompositionMandatoryIsFalse
+  NS486.round486ClayPromotion
+  NS486.round486ClayPromotionIsFalse
+  false refl
+  false refl
+  (Clay.sharedSchedulerShapeProvesSharedMathematics Clay.canonicalCrossDomainBoundary)
+  (Clay.sharedSchedulerShapeProvesSharedMathematicsIsFalse Clay.canonicalCrossDomainBoundary)
+
+nsCurrentResidualIsDirectR423Budget :
+  NS486.firstCanonicalNSResidual NS486.currentCanonicalNSStatus
+  ≡ NS486.missingCutoffUniformSignedCompanionBudget
+nsCurrentResidualIsDirectR423Budget = NS486.currentFirstMissingIsR423Budget
+
+nsCurrentRouteAdmission : ProofSearch.RouteAdmission
+nsCurrentRouteAdmission = NS486.directR423RouteAdmission
 
 ------------------------------------------------------------------------
 -- Least-privilege route admission adapter.
