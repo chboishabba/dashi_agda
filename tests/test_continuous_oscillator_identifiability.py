@@ -99,3 +99,58 @@ def test_recovery_is_gauge_normalized_and_near_collision_is_only_diagnostic(tmp_
         assert recovery["phase_rmse_rad"] >= 0.0
         assert recovery["canonical_parameter_distance"] >= 0.0
         assert run["near_collision_diagnostic"]["exact_nonfactorability_proved"] is False
+
+
+def test_falsification_ladder_refits_and_keeps_null_axes_distinct(tmp_path: Path) -> None:
+    payload = run_identifiability(
+        tmp_path,
+        "--seeds", "7", "17",
+        "--max-steps", "100",
+        "--samples", "240",
+        "--null-steps", "45",
+    )
+    ladder = payload["falsification_ladder"]
+    assert ladder["frozen_before_execution"] is True
+    assert ladder["restart"]["refit_required"] is True
+    assert ladder["noise"]["refit_required"] is True
+    assert ladder["frequency_separation"]["refit_required"] is True
+    assert ladder["spectral_transfer"]["refit_required"] is True
+    assert ladder["gauge"]["refit_required"] is False
+    assert ladder["gauge"]["semantic_identity_test"] is True
+    assert ladder["noise"]["levels"] == [0.0, 0.02, 0.05]
+    assert ladder["frequency_separation"]["factors"] == [1.0, 0.6, 0.3]
+    assert ladder["spectral_transfer"]["offset_hz"] > 0.0
+    assert set(ladder["by_count"]) == {"3", "6", "9"}
+    for entry in ladder["by_count"].values():
+        assert entry["restart_count"] >= 2
+        assert entry["all_null_results_are_diagnostics"] is True
+        assert entry["global_identifiability_proved"] is False
+
+
+def test_pareto_ranking_is_eligible_only_and_never_promotes_truth(tmp_path: Path) -> None:
+    payload = run_identifiability(
+        tmp_path,
+        "--seeds", "7", "17", "29",
+        "--max-steps", "120",
+        "--samples", "288",
+        "--null-steps", "50",
+    )
+    pareto = payload["eligible_only_pareto"]
+    assert pareto["selection_policy"] == "admissible_and_consumer_adequate_before_cost_ranking"
+    assert pareto["lower_cost_implies_truth"] is False
+    assert pareto["smaller_n_wins_by_definition"] is False
+    assert pareto["larger_n_wins_by_definition"] is False
+    assert pareto["axes"] == [
+        "model_size",
+        "heldout_error",
+        "hidden_state_error",
+        "restart_instability",
+        "null_fragility",
+    ]
+    assert set(pareto["models"]) == {"3", "6", "9"}
+    for model in pareto["models"].values():
+        assert model["admissible"] is True
+        assert model["consumer_adequate"] in {True, False}
+        assert model["eligible"] == (model["admissible"] and model["consumer_adequate"])
+        assert model["pareto_ranked"] == model["eligible"]
+    assert set(pareto["frontier"]).issubset({"3", "6", "9"})
