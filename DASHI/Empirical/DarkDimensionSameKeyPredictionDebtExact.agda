@@ -10,6 +10,7 @@ import DASHI.Core.SourceAcquisitionGeometryExact as Acquisition
 import DASHI.Interop.SourceDiligenceProofSearchBridgeExact as SourceSearch
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact as BedroyaBackground
+import DASHI.Empirical.DarkDimensionBedroyaBackgroundInputContractExact as BedroyaInput
 import DASHI.Empirical.DarkDimensionBedroyaSameObjectAcquisitionExact as BedroyaAcquisition
 import DASHI.Empirical.DarkDimensionCrossDomainEvidenceWeldExact as CrossDomain
 import DASHI.Empirical.DarkDimensionDAOSameKeyExtractionRecipeExact as DAORecipe
@@ -153,6 +154,18 @@ bedroyaPostIdentitySupportStageDefined :
   SourceSearch.producer BedroyaAcquisition.bedroyaPostIdentitySupportDemand
   ≡ Search.propositionSourceProducer
 bedroyaPostIdentitySupportStageDefined = BedroyaAcquisition.postIdentitySupportStillRequiresSourcePayment
+
+bedroyaBackgroundInputManifestStillOpen :
+  BedroyaInput.completeBackgroundInputManifestLocated
+    BedroyaInput.canonicalBedroyaBackgroundInputStatus
+  ≡ false
+bedroyaBackgroundInputManifestStillOpen = BedroyaInput.completeBackgroundInputStillOpen
+
+bedroyaSameFitRDragStillOpen :
+  BedroyaInput.exactRDragSameFitLocated
+    BedroyaInput.canonicalBedroyaBackgroundInputStatus
+  ≡ false
+bedroyaSameFitRDragStillOpen = BedroyaInput.exactRDragSameFitStillOpen
 
 daoExtractionRecipeLocatedButExecutionStillOpen :
   DAORecipe.recipeExecuted DAORecipe.daoPinnedExtractionRecipe ≡ false
