@@ -13,11 +13,12 @@ import DASHI.Law.SensibLawOperationalLegalityExact as Operational
 -- ISRAELI DOMESTIC SETTLEMENT LEGALITY — BOUNDED SEARCH RECEIPT
 --
 -- This owner pays a mixed-source acquisition state, not a comprehensive
--- domestic-law conclusion.  Knesset committee language, a preliminary-reading
--- bill, and an Israeli Government legal-position page are deliberately kept as
--- different source kinds/roles.  None is silently promoted into a final court
--- holding or a universal proposition about every settlement, outpost, settler
--- act, soldier, ministry, or enforcement event.
+-- domestic-law conclusion.  Knesset committee language, legislative-process
+-- material, an Israeli Government legal-position page, and a Ministry of
+-- Justice enforcement self-description are deliberately kept as different
+-- source roles.  None is silently promoted into a final court holding,
+-- independent audit, or universal proposition about every settlement, outpost,
+-- settler act, soldier, ministry, or enforcement event.
 ------------------------------------------------------------------------
 
 knessetIllegalOutposts2026 : Source.AttributedSource
@@ -64,12 +65,24 @@ israeliGovernmentOsloAreaCPosition = Source.mkNoDOISource
   "Official Israeli Government legal-position publication arguing that Oslo allocates governing/planning authority in Area C to Israel and does not itself determine settlements illegal. This is a government legal position, not an independent domestic court adjudication and not a comprehensive legality map for every settlement/outpost/action."
   Source.publicAttribution
 
+ministryJusticeWestBankEnforcement2022 : Source.AttributedSource
+ministryJusticeWestBankEnforcement2022 = Source.mkNoDOISource
+  "State of Israel — Ministry of Justice, Office of the Deputy Attorney General (International Law)"
+  "Israel's Investigation and Prosecution of Ideologically Motivated Offences Against Palestinians in the West Bank"
+  "Ministry of Justice"
+  "2022"
+  "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/hr-0007/he/human-rights-replay_investigation-and-prosecutionof-offences-against-palestinians.pdf"
+  Source.governmentSource
+  "Official Ministry of Justice self-description of investigation/prosecution policy and claimed enforcement efforts concerning ideologically motivated offences against Palestinians in the West Bank. It pays the existence/content of that government self-description only; it is not an independent audit of enforcement adequacy or proof of any individual case outcome."
+  Source.publicAttribution
+
 israeliDomesticSettlementSearchSources : List Source.AttributedSource
 israeliDomesticSettlementSearchSources =
   knessetIllegalOutposts2026 ∷
   knessetSettlementRegulationBill2021 ∷
   knessetSettlementRegulationBill2017 ∷
   israeliGovernmentOsloAreaCPosition ∷
+  ministryJusticeWestBankEnforcement2022 ∷
   []
 
 israeliDomesticSettlementSearchAtlas : Source.AttributedSourceAtlas
@@ -77,7 +90,7 @@ israeliDomesticSettlementSearchAtlas = Source.mkSourceAtlas
   "Israeli domestic settlement-legality bounded search atlas"
   "DASHI.Law.IsraeliDomesticSettlementLegalitySearchReceiptExact"
   israeliDomesticSettlementSearchSources
-  "Official Knesset and Israeli Government sources retained by source role. Acquisition pays a mixed domestic-law/legislative/official-position surface, not a comprehensive domestic legality conclusion."
+  "Official Knesset and Israeli Government sources retained by source role. Acquisition pays a mixed domestic-law/legislative/official-position/enforcement-self-description surface, not a comprehensive domestic legality or independent enforcement conclusion."
 
 parentIsraelOperationalLegalityBoundary : Israel.IsraelWestBankOperationalLegalityBoundary
 parentIsraelOperationalLegalityBoundary = Israel.canonicalIsraelWestBankOperationalLegalityBoundary
@@ -93,6 +106,7 @@ record IsraeliDomesticSettlementSearchBoundary : Set where
     officialKnessetIllegalOutpostLanguageLocated : Bool
     knessetRegularisationProposalLocated : Bool
     officialGovernmentOsloAreaCPositionLocated : Bool
+    ministryJusticeEnforcementSelfDescriptionLocated : Bool
     comprehensiveDomesticSettlementLegalityPaid : Bool
     everySettlerActionAutomaticallyDomesticLawful : Bool
     everySettlementAutomaticallyDomesticIllegal : Bool
@@ -100,6 +114,7 @@ record IsraeliDomesticSettlementSearchBoundary : Set where
     legislativeProposalAutomaticallyCurrentLaw : Bool
     knessetCommitteeLanguageAutomaticallyJudicialHolding : Bool
     governmentLegalPositionAutomaticallyIndependentAdjudication : Bool
+    ministryEnforcementSelfDescriptionAutomaticallyIndependentAudit : Bool
     areaCPlanningAuthorityAutomaticallyEveryConstructionLawful : Bool
     officialSourceAutomaticallyIndependentAudit : Bool
     domesticLegalityAutomaticallyInternationalLegality : Bool
@@ -116,6 +131,8 @@ canonicalIsraeliDomesticSettlementSearchBoundary =
     true
     true
     true
+    true
+    false
     false
     false
     false
