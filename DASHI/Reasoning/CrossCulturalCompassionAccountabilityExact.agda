@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Attr
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
 import DASHI.Reasoning.DefensiveReversalRepair as Defensive
 import DASHI.Reasoning.RelationalSharedStateUpdate as Shared
 import DASHI.Governance.SituatedAuthorityRoutingExact as Situated
@@ -96,6 +97,33 @@ crossCulturalCompassionAtlasDoesNotCreateAuthority :
 crossCulturalCompassionAtlasDoesNotCreateAuthority =
   Attr.atlasCreatesAuthorityIsFalse crossCulturalCompassionSourceAtlas
 
+kagitcibasiSnowballReceipt :
+  AttributionSnowball.SourceRoleSnowballReceipt kagitcibasiAutonomyRelatednessSource
+kagitcibasiSnowballReceipt =
+  AttributionSnowball.canonicalSourceRoleSnowballReceipt
+    kagitcibasiAutonomyRelatednessSource
+
+chirkovSnowballReceipt :
+  AttributionSnowball.SourceRoleSnowballReceipt chirkovRyanWillnessSource
+chirkovSnowballReceipt =
+  AttributionSnowball.canonicalSourceRoleSnowballReceipt chirkovRyanWillnessSource
+
+kagitcibasiProofNonImportRetained : Bool
+kagitcibasiProofNonImportRetained =
+  AttributionSnowball.proofNonImportRetained kagitcibasiSnowballReceipt
+
+kagitcibasiAuthorityNonCreationRetained : Bool
+kagitcibasiAuthorityNonCreationRetained =
+  AttributionSnowball.authorityNonCreationRetained kagitcibasiSnowballReceipt
+
+chirkovFormalisationRelationshipRetained : Bool
+chirkovFormalisationRelationshipRetained =
+  AttributionSnowball.formalisationRelationshipRetained chirkovSnowballReceipt
+
+chirkovAuthorityNonCreationRetained : Bool
+chirkovAuthorityNonCreationRetained =
+  AttributionSnowball.authorityNonCreationRetained chirkovSnowballReceipt
+
 ------------------------------------------------------------------------
 -- A boundary decision is situated rather than a one-dimensional command to
 -- "put yourself first" or, conversely, to preserve harmony at any cost.
@@ -163,11 +191,6 @@ canonicalBoundaryAdviceFirewall = record
 
 ------------------------------------------------------------------------
 -- Autonomy is not a synonym for individualism or independence.
---
--- Kağıtçıbaşı pays the compatibility precedent for autonomy + relatedness;
--- Chirkov/Ryan/Willness pay the narrower empirical/conceptual distinction
--- between autonomy and individualism/independence.  The exact firewall below
--- is a DASHI boundary rather than an imported theorem about any individual.
 ------------------------------------------------------------------------
 
 record AutonomyIndividualismBoundary : Set where
@@ -337,8 +360,6 @@ emotionallyImmatureLabelDoesNotProveMisconduct = refl
 
 ------------------------------------------------------------------------
 -- Care / gratitude / compassion are not substitutes for complaint merits.
--- This mirrors the existing parent-child process template while staying
--- role-general and source-bounded.
 ------------------------------------------------------------------------
 
 record CareComplaintBoundary : Set where
@@ -378,18 +399,6 @@ compassionDoesNotWaiveBoundary = refl
 
 ------------------------------------------------------------------------
 -- Positive construction: compassion without self-erasure.
---
--- The earlier boundaries mostly say what does not follow.  This witness is
--- intentionally stronger and constructive: perspective-taking, cultural
--- belonging and continued relationship can coexist with accountability,
--- consent, complaint review and scoped access.  Bounded access is therefore
--- not definitionally estrangement, and relationship preservation is not
--- definitionally self-abandonment.
---
--- Kağıtçıbaşı's autonomy/relatedness model pays only the narrow academic
--- precedent that agency and relatedness need not be collapsed into opposite
--- ends of a single axis.  The record below and its exact fields are DASHI's
--- construction, not a theorem attributed to that source.
 ------------------------------------------------------------------------
 
 record CompassionWithoutSelfErasure : Set where
@@ -464,13 +473,8 @@ compassionWithoutSelfErasureKeepsBoundedAccess :
 compassionWithoutSelfErasureKeepsBoundedAccess = refl
 
 ------------------------------------------------------------------------
--- Pareto cross-pollination with the existing relational shared-state and
--- situated-authority owners.
---
--- This is deliberately a weld, not a replacement ontology.  Cultural
--- belonging and continued relationship do not weaken the already-formalised
--- requirements around assent, explicit commitment, complaint/accountability,
--- pause-without-erasure, current authority, or repair capacity.
+-- Pareto cross-pollination with existing shared-state and situated-authority
+-- owners.  This is a weld, not a replacement ontology.
 ------------------------------------------------------------------------
 
 record CompassionAuthorityWeld : Set where
@@ -523,9 +527,7 @@ situatedRouteStillRequiresRepairCapacity =
     (situatedAuthorityBoundary canonicalCompassionAuthorityWeld)
 
 ------------------------------------------------------------------------
--- Compatibility with the existing defensive-reversal owner: the new source
--- lane does not weaken its requirement to reconstruct incidents and preserve
--- both the initiating event and the delivery of the objection.
+-- Compatibility with the existing defensive-reversal owner.
 ------------------------------------------------------------------------
 
 canonicalRepairSequenceStillApplies : Defensive.RepairSequence
