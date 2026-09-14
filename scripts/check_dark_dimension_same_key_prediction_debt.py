@@ -6,6 +6,7 @@ REQUIRED = {
     "DASHI/Empirical/DarkDimensionSameKeyPredictionDebtExact.agda": [
         "module DASHI.Empirical.DarkDimensionSameKeyPredictionDebtExact where",
         "import DASHI.Empirical.DarkDimensionDAOSameKeyReconstructionRunExact as DAORun",
+        "import DASHI.Empirical.DarkDimensionBedroyaSameObjectAcquisitionExact as BedroyaAcquisition",
         "SameKeyPredictionDerivationDebt",
         "daoExecutableModelLocated",
         "darkDimensionExecutableModelLocated",
@@ -19,6 +20,10 @@ REQUIRED = {
         "daoReconstructionRuntimeReceiptStillOpen",
         "daoReconstructionVectorStillOpen",
         "darkDimensionExecutableStillOpen",
+        "bedroyaSameObjectAcquisitionStillOpen",
+        "BedroyaAcquisition.childSameObjectStillUnacquired",
+        "bedroyaPostIdentitySupportStageDefined",
+        "BedroyaAcquisition.postIdentitySupportStillRequiresSourcePayment",
         "lrg1TransversePredictionRequest", "lrg1RadialPredictionRequest",
         "lrg2TransversePredictionRequest", "lrg2RadialPredictionRequest",
         "lrg3Elg1TransversePredictionRequest", "lrg3Elg1RadialPredictionRequest",
