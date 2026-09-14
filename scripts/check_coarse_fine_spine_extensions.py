@@ -18,7 +18,10 @@ REQUIRED_FILES = [
     "DASHI/Core/CanonicalSpineRegistryCrossDomainRegression.agda",
     "DASHI/Core/CanonicalSpineDependencyAtlasExact.agda",
     "DASHI/Core/CanonicalSpineDependencyAtlasRegression.agda",
+    "DASHI/Core/ObserverRefinementCore.agda",
     "DASHI/Core/ObserverRefinementLatticeExact.agda",
+    "DASHI/Core/ObserverRefinementOrientationCrosswalkExact.agda",
+    "DASHI/Core/ObserverRefinementOrientationCrosswalkRegression.agda",
     "DASHI/Core/ConsumerFibreRepairExact.agda",
     "DASHI/Core/DeclaredScenarioRobustnessExact.agda",
     "DASHI/Core/DeclaredScenarioRobustnessRegression.agda",
@@ -39,6 +42,9 @@ REQUIRED_FILES = [
     "DASHI/ComputerScience/RSA260MultipartReconstructionSpineRegression.agda",
     "DASHI/Core/FrozenProvenanceDynamicRefinementExact.agda",
     "DASHI/Core/QueryIndexedFrozenDynamicPromotionExact.agda",
+    "DASHI/Semantics/SIOSemanticSurfaceBridge.agda",
+    "DASHI/Semantics/SIOObserverRefinementLatticeAdapterExact.agda",
+    "DASHI/Semantics/SIOObserverRefinementLatticeAdapterRegression.agda",
     "DASHI/CoarseFineFabricEverything.agda",
 ]
 
@@ -70,6 +76,13 @@ EXPECTED = {
         "pairObserver :",
         "strictPairRefinement :",
         "addingObserverShrinksResidualFibre :",
+    ],
+    "DASHI/Core/ObserverRefinementOrientationCrosswalkExact.agda": [
+        "latticeRefinesToCore :",
+        "coreRefinesToLattice :",
+        "pairObserversAgreePointwise :",
+        "latticeStrictToCore :",
+        "coreStrictToLattice :",
     ],
     "DASHI/Core/ConsumerFibreRepairExact.agda": [
         "Observer.pairObserver observe refine",
@@ -108,15 +121,21 @@ EXPECTED = {
         "rsa260CompleteMultipartReconstructionStillUnpaid :",
         "rsa260LocalValidityDoesNotCreateWhole :",
     ],
+    "DASHI/Semantics/SIOObserverRefinementLatticeAdapterExact.agda": [
+        "sioPairedObserverCanonicalStrictRefinements :",
+        "Crosswalk.coreStrictToLattice",
+    ],
     "DASHI/CoarseFineFabricEverything.agda": [
         "import DASHI.Core.CanonicalSpineDependencyAtlasExact",
         "import DASHI.Core.ObserverRefinementLatticeExact",
+        "import DASHI.Core.ObserverRefinementOrientationCrosswalkExact",
         "import DASHI.Core.DeclaredScenarioRobustnessExact",
         "import DASHI.Core.RequiredObserverAxisJoinAdequacyExact",
         "import DASHI.Core.BoundedNegativeSearchExact",
         "import DASHI.Core.MultipartSameObjectReconstructionExact",
         "import DASHI.Core.FrozenHeldOutRepairRefinementExact",
         "import DASHI.ComputerScience.RSA260MultipartReconstructionSpineExact",
+        "import DASHI.Semantics.SIOObserverRefinementLatticeAdapterExact",
     ],
 }
 
