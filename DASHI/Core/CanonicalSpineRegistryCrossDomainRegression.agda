@@ -15,6 +15,9 @@ queryIndexedProjectionCanonical = Registry.queryIndexedProjectionOwner
 experimentalCoordinateCanonical : Registry.CanonicalOwner
 experimentalCoordinateCanonical = Registry.experimentalCoordinateOwner
 
+declaredScenarioCanonical : Registry.CanonicalOwner
+declaredScenarioCanonical = Registry.declaredScenarioRobustnessOwner
+
 osintAcquisitionCanonical : Registry.CanonicalOwner
 osintAcquisitionCanonical = Registry.osintAcquisitionOwner
 
@@ -80,6 +83,10 @@ queryIndexedProjectionParallelDefinitionsBlocked = refl
 experimentalCoordinateParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed experimentalCoordinateCanonical ≡ false
 experimentalCoordinateParallelDefinitionsBlocked = refl
+
+declaredScenarioParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed declaredScenarioCanonical ≡ false
+declaredScenarioParallelDefinitionsBlocked = refl
 
 osintAcquisitionParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed osintAcquisitionCanonical ≡ false
