@@ -119,6 +119,34 @@ postIdentitySupportStillRequiresSourcePayment :
   ≡ Search.propositionSourceProducer
 postIdentitySupportStillRequiresSourcePayment = refl
 
+-- After Eq. (11) pays the paper-level m0*n0 / rho_DM^0 identity, two narrower
+-- proposition-support demands remain.  They are deliberately distinct.
+bedroyaSampledDensityMappingDemand : SourceSearch.SourceDiligenceSearchDemand
+bedroyaSampledDensityMappingDemand =
+  SourceSearch.source-diligence-search-demand
+    "rho_DM^0 to sampled Omega_FDM h^2 correspondence"
+    SourceSearch.propositionSupportUnresolved
+    Search.propositionSourceProducer
+    refl
+    "DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact"
+    "bedroya-rhoDM0-to-sampled-OmegaFDM-demand"
+
+bedroyaV0NormalizationDemand : SourceSearch.SourceDiligenceSearchDemand
+bedroyaV0NormalizationDemand =
+  SourceSearch.source-diligence-search-demand
+    "V0 to fitted dark-energy normalization correspondence"
+    SourceSearch.propositionSupportUnresolved
+    Search.propositionSourceProducer
+    refl
+    "DASHI.Empirical.DarkDimensionBedroyaBackgroundReconstructionExact"
+    "bedroya-V0-normalization-demand"
+
+data SampledDensitySupportEqualsV0Support : Set where
+
+sampledDensityAndV0DemandsRemainDistinct :
+  SampledDensitySupportEqualsV0Support → ⊥
+sampledDensityAndV0DemandsRemainDistinct ()
+
 data SameObjectLocationClosesPropositionSupport : Set where
 
 sameObjectLocationDoesNotCloseSupport :
