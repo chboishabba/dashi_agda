@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import dataclass
 import hashlib
 from pathlib import Path
 import struct
@@ -10,6 +11,8 @@ from typing import BinaryIO
 
 MAGIC = b"SLRO"
 VERSION = 1
+ACQUIRED_MAGIC = b"SLRX"
+ACQUIRED_VERSION = 1
 
 NOMINAL_SUBJECT = 1
 DIRECT_OBJECT = 2
@@ -38,6 +41,19 @@ MODEL_BY_LANG = {
     "pt": "pt_core_news_sm",
     "nl": "nl_core_news_sm",
 }
+
+
+@dataclass(frozen=True)
+class AcquiredSource:
+    document_ref: str
+    qid: str
+    language: str
+    revision_ref: str
+    canonical_url: str
+    source_sha256: bytes
+    text: str
+    candidate_only: bool
+    semantic_promotion: bool
 
 
 def dependency_shape(label: str) -> int:
@@ -79,6 +95,58 @@ def _write_text(out: BinaryIO, value: str) -> None:
     data = value.encode("utf-8")
     out.write(struct.pack("<I", len(data)))
     out.write(data)
+
+
+def _read_exact(source: BinaryIO, size: int) -> bytes:
+    data = source.read(size)
+    if len(data) != size:
+        raise ValueError("truncated binary source frame")
+    return data
+
+
+def _read_text(source: BinaryIO) -> str:
+    size = struct.unpack("<I", _read_exact(source, 4))[0]
+    if size > 64 << 20:
+        raise ValueError("binary source text field exceeds limit")
+    return _read_exact(source, size).decode("utf-8")
+
+
+def read_acquired_source(source: BinaryIO) -> AcquiredSource | None:
+    magic = source.read(4)
+    if magic == b"":
+        return None
+    if magic != ACQUIRED_MAGIC:
+        raise ValueError("bad SLRX magic")
+    version = struct.unpack("<H", _read_exact(source, 2))[0]
+    if version != ACQUIRED_VERSION:
+        raise ValueError("unsupported SLRX version")
+    kind, flags = _read_exact(source, 2)
+    if kind != 1:
+        raise ValueError(f"unsupported SLRX source kind {kind}")
+    candidate_only = bool(flags & 1)
+    semantic_promotion = bool(flags & 2)
+    if not candidate_only or semantic_promotion:
+        raise ValueError("SLRX source must remain candidate-only and non-promoting")
+    document_ref = _read_text(source)
+    qid = _read_text(source)
+    language = _read_text(source)
+    revision_ref = _read_text(source)
+    canonical_url = _read_text(source)
+    source_sha256 = _read_exact(source, 32)
+    text = _read_text(source)
+    if hashlib.sha256(text.encode("utf-8")).digest() != source_sha256:
+        raise ValueError("SLRX source digest mismatch")
+    return AcquiredSource(
+        document_ref=document_ref,
+        qid=qid,
+        language=language,
+        revision_ref=revision_ref,
+        canonical_url=canonical_url,
+        source_sha256=source_sha256,
+        text=text,
+        candidate_only=candidate_only,
+        semantic_promotion=semantic_promotion,
+    )
 
 
 def _write_header(out: BinaryIO, kind: int) -> None:
@@ -188,11 +256,13 @@ def emit_spacy_observations(
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
-    p.add_argument("--text", type=Path, required=True)
-    p.add_argument("--document-ref", required=True)
-    p.add_argument("--qid", required=True)
-    p.add_argument("--language", required=True)
-    p.add_argument("--revision-ref", required=True)
+    source = p.add_mutually_exclusive_group(required=True)
+    source.add_argument("--text", type=Path)
+    source.add_argument("--source-wire", type=Path)
+    p.add_argument("--document-ref")
+    p.add_argument("--qid")
+    p.add_argument("--language")
+    p.add_argument("--revision-ref")
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--model")
     return p.parse_args()
@@ -200,21 +270,49 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    text = args.text.read_text(encoding="utf-8")
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    total_sentences = 0
+    total_tokens = 0
+    manifestations = 0
     with args.output.open("wb") as out:
-        sentences, tokens = emit_spacy_observations(
-            text,
-            document_ref=args.document_ref,
-            qid=args.qid,
-            language=args.language,
-            revision_ref=args.revision_ref,
-            out=out,
-            model_name=args.model,
-        )
+        if args.text is not None:
+            if not all((args.document_ref, args.qid, args.language, args.revision_ref)):
+                raise SystemExit("--text requires --document-ref, --qid, --language, and --revision-ref")
+            text = args.text.read_text(encoding="utf-8")
+            sentences, tokens = emit_spacy_observations(
+                text,
+                document_ref=args.document_ref,
+                qid=args.qid,
+                language=args.language,
+                revision_ref=args.revision_ref,
+                out=out,
+                model_name=args.model,
+            )
+            total_sentences += sentences
+            total_tokens += tokens
+            manifestations += 1
+        else:
+            assert args.source_wire is not None
+            with args.source_wire.open("rb") as source_wire:
+                while True:
+                    acquired = read_acquired_source(source_wire)
+                    if acquired is None:
+                        break
+                    sentences, tokens = emit_spacy_observations(
+                        acquired.text,
+                        document_ref=acquired.document_ref,
+                        qid=acquired.qid,
+                        language=acquired.language,
+                        revision_ref=acquired.revision_ref,
+                        out=out,
+                        model_name=args.model,
+                    )
+                    total_sentences += sentences
+                    total_tokens += tokens
+                    manifestations += 1
     print(
         "SLR_SPACY_OBSERVATION_BINARY_RECEIPT "
-        f"sentences={sentences} tokens={tokens} binary_wire=true json_transport=false regex_parser=false "
+        f"manifestations={manifestations} sentences={total_sentences} tokens={total_tokens} binary_wire=true json_transport=false regex_parser=false "
         "parser_output_creates_ontology_truth=false candidate_only=true semantic_promotion=false",
         file=sys.stderr,
     )
