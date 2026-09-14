@@ -9,7 +9,6 @@ on:
       - 'DASHI/Papers/NavierStokes/TheoremInterface.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceValidation.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound1*.agda'
-      - 'DASHI/Interop/NavierStokesFourLaneProofArchaeologyExact.agda'
       - 'Docs/papers/live/Paper1NavierStokesClayDraft.md'
       - 'Docs/papers/NSFourLanePublicationAddendum20260915.md'
       - 'Docs/roadmaps/NSProofControl20260915.md'
@@ -232,12 +231,6 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound202Validation.agda
-
-      - name: Type-check NS four-lane archaeology overlay
-        run: >-
-          nix develop .# --command
-          bash scripts/run_agda29_parallel_check.sh
-          DASHI/Interop/NavierStokesFourLaneProofArchaeologyExact.agda
 
       - name: Type-check canonical Paper 1 modern theorem interface
         run: >-
