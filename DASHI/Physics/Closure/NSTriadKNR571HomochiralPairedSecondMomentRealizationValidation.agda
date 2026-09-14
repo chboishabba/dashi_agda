@@ -5,6 +5,8 @@ module DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizatio
 --
 -- The production owner must:
 --   * construct the exact paired Taylor carrier from radial multiplier values;
+--   * pair the two opposite Round27 translated legs before identifying the old
+--     centered weighted raw-pair scalar;
 --   * reuse the existing paired second-order identity;
 --   * expose the existing second-moment compiler without claiming its four
 --     physical envelope inequalities are already paid;
@@ -20,6 +22,10 @@ import DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizatio
 pairedTaylorCarrierClosed :
   R.r571HomochiralPairedTaylorCarrierClosed ≡ true
 pairedTaylorCarrierClosed = R.r571HomochiralPairedTaylorCarrierClosedIsTrue
+
+oppositeRound27PairCarrierClosed :
+  R.r571OppositeRound27PairCarrierClosed ≡ true
+oppositeRound27PairCarrierClosed = R.r571OppositeRound27PairCarrierClosedIsTrue
 
 pairedSecondOrderIdentityReused :
   R.r571ExistingPairedSecondOrderIdentityReused ≡ true
