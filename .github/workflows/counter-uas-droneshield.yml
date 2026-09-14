@@ -1,0 +1,80 @@
+name: Counter-UAS DroneShield Agda check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'DASHI/Applications/CounterUASDroneShieldExact.agda'
+      - 'DASHI/Applications/CounterUASDroneShieldRegression.agda'
+      - 'DASHI/Applications/CounterUASOpenSetRFExact.agda'
+      - 'DASHI/Applications/CounterUASOpenWorldBridgeExact.agda'
+      - 'DASHI/Applications/CounterUASOpenWorldBridgeRegression.agda'
+      - 'DASHI/Applications/CounterUASSOTASourceAtlasExact.agda'
+      - 'DASHI/Applications/CounterUASOpenSetRFSourceAtlasExact.agda'
+      - 'DASHI/Applications/CounterUASOperationalSourceAtlasExact.agda'
+      - 'DASHI/Applications/OpenClosedWorldRecognitionExact.agda'
+      - 'DASHI/Applications/OpenClosedWorldRecognitionRegression.agda'
+      - 'DASHI/Applications/OpenClosedWorldRecognitionSourceAtlasExact.agda'
+      - 'DASHI/Applications/OpenWorldTemporalPromotionExact.agda'
+      - 'DASHI/Applications/OpenWorldTemporalPromotionSourceAtlasExact.agda'
+      - 'DASHI/Applications/CounterUASSensibLawAuthorityBridgeExact.agda'
+      - 'DASHI/Law/SensibLawInternationalInstrumentLifecycleExact.agda'
+      - 'DASHI/Law/SensibLawCCWLAWS2026Exact.agda'
+      - '.github/workflows/counter-uas-droneshield.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: counter-uas-droneshield-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: counter-uas-droneshield-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check counter-UAS and open-world regressions with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export XDG_CACHE_HOME="$RUNNER_TEMP/dashi-cache"
+            export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-status"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export DASHI_NO_TMUX=1
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-counter-uas-droneshield.log"
+            export AGDA_JOBS=2
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Applications/CounterUASDroneShieldRegression.agda \
+              DASHI/Applications/OpenClosedWorldRecognitionRegression.agda \
+              DASHI/Applications/CounterUASOpenWorldBridgeRegression.agda
+          ) > counter-uas-droneshield-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 400 counter-uas-droneshield-check.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: counter-uas-droneshield-agda-log
+          path: counter-uas-droneshield-check.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
