@@ -9,6 +9,7 @@ import DASHI.Reasoning.FibreRoutingMaleCNSScaleShapeEmpiricalSnowballExact as Sc
 import DASHI.Reasoning.FibreRoutingCompressionIbrahimSnowballExact as Ibrahim
 import DASHI.Reasoning.FibreRoutingSufficiencyCausalInterventionSnowballExact as Causal
 import DASHI.Biology.DrosophilaSignedFibreAnatomySourceSnowballExact as Anatomy
+import DASHI.Biology.DrosophilaGautheyExternalManifestHashBidiExact as GautheyManifest
 import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Traversal
 
 ------------------------------------------------------------------------
@@ -87,9 +88,9 @@ currentMagnitudeAssignmentReceipt = magnitude-assignment-receipt
 --
 -- Exact source-row identity recovery is a prerequisite for independent-trial
 -- materialization, not itself a replication result.  The empirical receipt is
--- pinned to the commit that produced the currently paid 559/1620 artifact.
--- A distinct implementation-lineage coordinate may advance as recovery becomes
--- safer/resumable; code advancement does not retroactively alter the artifact.
+-- pinned to the runtime that produced the currently paid 559/1620 identities.
+-- Later searched-zero trials and transport/source alternatives append state;
+-- implementation advances do not retroactively change empirical payment.
 ------------------------------------------------------------------------
 
 record ReplicationIdentityRecoveryReceipt : Set where
@@ -121,8 +122,8 @@ currentReplicationIdentityRecoveryReceipt = replication-identity-recovery-receip
   "github.com/chboishabba/dashiBRAIN"
   "agent/malecns-real-benchmark-tranche"
   "a9504ea00a30960a6728f90a5ff31b4d1f97ced6"
-  "9d15d4acc622a87cdd0ebc5d2f22f8531b277ce7"
-  "out-of-core pickle ingestion; blockwise scoring; standalone per-trial checkpoints; one-trial-at-a-time incremental merge; optional post-checkpoint source-ZIP release"
+  "50de03399961464cd0ad62dc4613ba93d4f48693"
+  "out-of-core pickle ingestion; blockwise scoring; standalone per-trial checkpoints; one-trial-at-a-time incremental merge; optional post-checkpoint source-ZIP release; source-bound Princeton Data Commons mirror resolver"
   "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_identity_accumulation.json"
   "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_selected_identities_accumulated.csv"
   1620
@@ -135,7 +136,56 @@ currentReplicationIdentityRecoveryReceipt = replication-identity-recovery-receip
   "04192024_6f_a1_r9"
   false
   "exact trace equality to deposited selected row; not neuron identity and not atlas identity"
-  "Two searched Gauthey LBM trials currently pay 559 of 1620 exact selected-row source identities. The remaining 1061 rows stay unresolved. The recovery implementation has since advanced to durable one-trial-at-a-time checkpointing, but those code changes do not themselves add empirical identities or pay independent-trial replication."
+  "Historical two-positive-trial receipt: a2_r5 plus a1_r9 pay 559 of 1620 exact selected-row source identities. a2_r1 is appended separately as searched-zero. Mirror/resume implementation advances do not add empirical identities or pay replication."
+
+record SearchedZeroTrialReceipt : Set where
+  constructor searched-zero-trial-receipt
+  field
+    trialIdentity : String
+    exactDepositedMatches : Nat
+    standaloneCheckpointPersisted : Bool
+    accumulatedReceiptRewritten : Bool
+    sourceZipReleasedAfterCheckpoint : Bool
+    zeroMatchesMeansZeroSelectedRowsInThisExactTraceSearch : Bool
+    zeroMatchesMeansNoBiologicalContribution : Bool
+    interpretation : String
+
+open SearchedZeroTrialReceipt public
+
+a2r1SearchedZeroReceipt : SearchedZeroTrialReceipt
+a2r1SearchedZeroReceipt = searched-zero-trial-receipt
+  "04032024_6f_a2_r1"
+  0
+  true
+  true
+  true
+  true
+  false
+  "a2_r1 was actually searched through the exact deposited-trace identity matcher and produced zero exact matches. This pays a searched-zero acquisition result only; it does not prove the recording made no biological contribution outside this selected-row identity query."
+
+currentSearchedTrialCount : Nat
+currentSearchedTrialCount = 3
+
+currentResolvedSelectedCount : Nat
+currentResolvedSelectedCount = 559
+
+currentUnresolvedSelectedCount : Nat
+currentUnresolvedSelectedCount = 1061
+
+------------------------------------------------------------------------
+-- Official alternate repository boundary.
+--
+-- The Gauthey external-manifest owner already records Princeton Data Commons
+-- DOI 10.34770/s5hx-1x75 as the Nature-paper-named alternate repository and
+-- explicitly refuses to promote repository locator equality to same-file bytes.
+-- We reuse that owner here rather than create a parallel source ontology.
+------------------------------------------------------------------------
+
+gautheyExternalManifestBoundary : GautheyManifest.ExternalManifestBoundary
+gautheyExternalManifestBoundary = GautheyManifest.canonicalExternalManifestBoundary
+
+princetonAlternateRepositoryDOI : String
+princetonAlternateRepositoryDOI = "10.34770/s5hx-1x75"
 
 record ReplicationAcquisitionBoundary : Set where
   constructor replication-acquisition-boundary
@@ -147,7 +197,12 @@ record ReplicationAcquisitionBoundary : Set where
     perTrialCheckpointingImplemented : Bool
     accumulatedReceiptAdvancesAfterEachTrial : Bool
     sourceZipMayBeReleasedOnlyAfterDurableCheckpoint : Bool
+    searchedZeroRetainedAsInformation : Bool
+    searchedZeroPromotesNoBiologicalContribution : Bool
     a1r9RecoveryRequiredRemoteArchiveAccess : Bool
+    alternateRepositoryLocatorRecorded : Bool
+    alternateRepositoryLocatorEqualsSameFileBytes : Bool
+    alternateRepositoryLocatorPaysReplication : Bool
     implementationAdvanceCreatesEmpiricalPayment : Bool
     sourceIdentityRecoveryImpliesIndependentTrialReplication : Bool
     sourceIdentityRecoveryImpliesJRC2018Ready : Bool
@@ -157,7 +212,7 @@ open ReplicationAcquisitionBoundary public
 
 canonicalReplicationAcquisitionBoundary : ReplicationAcquisitionBoundary
 canonicalReplicationAcquisitionBoundary = replication-acquisition-boundary
-  true false true true true true true false false false false false
+  true false true true true true true true false false true false false false false false false
 
 ------------------------------------------------------------------------
 -- Algebraic boundary: |sum S| and sum |S| are different operations.
@@ -241,7 +296,7 @@ sameSessionCompressionLadderClosed = magnitude-assignment-gate-state sameSession
 
 independentTrialReplication : MagnitudeAssignmentGateState
 independentTrialReplication = magnitude-assignment-gate-state independentTrialReplicationGate false
-  "replication acquisition has recovered 559/1620 exact selected-row source identities across a2_r5 and a1_r9, but no independent recording has yet been materialized on the frozen 26-region JRC2018 carrier and scored under the same factorized protocol"
+  "replication acquisition has searched a2_r5, a1_r9, and a2_r1; 559/1620 exact selected-row identities are paid, a2_r1 is searched-zero, and no independent recording has yet been materialized on the frozen 26-region JRC2018 carrier and scored under the same factorized protocol"
 
 crossAnimalReplication : MagnitudeAssignmentGateState
 crossAnimalReplication = magnitude-assignment-gate-state crossAnimalReplicationGate false
@@ -292,7 +347,7 @@ replicationIdentityRecoveryCoordinate = Traversal.dashi-knowledge-coordinate
   "Gauthey exact selected-row identity recovery frontier"
   "570.000 / 612.8 neuroscience candidate"
   "same Gauthey source family; local acquisition receipt has no external QID"
-  "dashiBRAIN:gauthey_lbm_identity_accumulation.json@a9504ea00a30960a6728f90a5ff31b4d1f97ced6; recovery implementation head 9d15d4acc622a87cdd0ebc5d2f22f8531b277ce7"
+  "dashiBRAIN:gauthey_lbm_identity_accumulation.json; searched trials a2_r5, a1_r9, a2_r1; recovery/mirror implementation head 50de03399961464cd0ad62dc4613ba93d4f48693; official alternate repository DOI 10.34770/s5hx-1x75"
 
 polarityCoordinate : Traversal.DashiKnowledgeCoordinate
 polarityCoordinate = Traversal.dashi-knowledge-coordinate
