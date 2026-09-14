@@ -92,12 +92,19 @@ oxygenWorldsDifferForConsumer :
   oxygenConsumer oxygenDebtWorld ≡ oxygenConsumer oxygenRecoveryWorld → ⊥
 oxygenWorldsDifferForConsumer ()
 
+oxygenNonFactorabilityWitness :
+  NonFactor.NonFactorabilityWitness suppressionObserver oxygenConsumer
+oxygenNonFactorabilityWitness =
+  NonFactor.nonFactorabilityWitness
+    oxygenDebtWorld
+    oxygenRecoveryWorld
+    refl
+    (λ ())
+
 oxygenDoesNotFactorThroughSuppression :
   NonFactor.FactorsThrough suppressionObserver oxygenConsumer → ⊥
-oxygenDoesNotFactorThroughSuppression factors =
-  oxygenWorldsDifferForConsumer
-    (NonFactor.factorisationPreservesEqualObservation
-      factors oxygenDebtWorld oxygenRecoveryWorld oxygenWorldsCollapseOnSuppression)
+oxygenDoesNotFactorThroughSuppression =
+  NonFactor.witnessRulesOutEveryFlatFactorisation oxygenNonFactorabilityWitness
 
 restorationWorldsCollapseOnSuppressionAndOxygen :
   suppressionOxygenObserver restorationFailureWorld
@@ -109,13 +116,19 @@ restorationWorldsDifferForConsumer :
   ≡ restorationConsumer restorationRecoveryWorld → ⊥
 restorationWorldsDifferForConsumer ()
 
+restorationNonFactorabilityWitness :
+  NonFactor.NonFactorabilityWitness suppressionOxygenObserver restorationConsumer
+restorationNonFactorabilityWitness =
+  NonFactor.nonFactorabilityWitness
+    restorationFailureWorld
+    restorationRecoveryWorld
+    refl
+    (λ ())
+
 restorationDoesNotFactorThroughSuppressionAndOxygen :
   NonFactor.FactorsThrough suppressionOxygenObserver restorationConsumer → ⊥
-restorationDoesNotFactorThroughSuppressionAndOxygen factors =
-  restorationWorldsDifferForConsumer
-    (NonFactor.factorisationPreservesEqualObservation
-      factors restorationFailureWorld restorationRecoveryWorld
-      restorationWorldsCollapseOnSuppressionAndOxygen)
+restorationDoesNotFactorThroughSuppressionAndOxygen =
+  NonFactor.witnessRulesOutEveryFlatFactorisation restorationNonFactorabilityWitness
 
 ------------------------------------------------------------------------
 -- Experimental coordinate design.
