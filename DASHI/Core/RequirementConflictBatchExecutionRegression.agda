@@ -16,11 +16,18 @@ data Candidate : Set where c0 c1 : Candidate
 data BatchCarrier : Set where batch01 : BatchCarrier
 data GlobalAction : Set where composed01 : GlobalAction
 
+candidateRelation : Candidate → Candidate → Batch.CandidateRelation
+candidateRelation c0 c0 = Batch.independent
+candidateRelation c1 c1 = Batch.independent
+candidateRelation c0 c1 = Batch.coRequirement
+candidateRelation c1 c0 = Batch.coRequirement
+
 spine : Batch.RequirementConflictBatchSpine
 spine = record
   { Candidate = Candidate
   ; Batch = BatchCarrier
   ; GlobalAction = GlobalAction
+  ; relation = candidateRelation
   ; requirementClosed = λ batch → Bool
   ; conflictFree = λ batch → Bool
   ; compose = λ batch → composed01
