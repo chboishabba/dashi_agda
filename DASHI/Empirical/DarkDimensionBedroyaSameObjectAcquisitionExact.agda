@@ -1,5 +1,6 @@
 module DASHI.Empirical.DarkDimensionBedroyaSameObjectAcquisitionExact where
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -12,12 +13,6 @@ import DASHI.Empirical.DarkDimensionFadingDMParentLineageExact as ParentLineage
 
 ------------------------------------------------------------------------
 -- BEDROYA 2026 SAME-OBJECT ACQUISITION ADAPTER
---
--- Thin adapter over existing source-acquisition and proof-directed-search
--- machinery.  The target is the exact child numerical object required by the
--- live reconstruction consumer.  Parent/ancestor lineage may guide where to
--- search, but cannot substitute for child implementation, normalization or
--- same-fit manifest custody.
 ------------------------------------------------------------------------
 
 bedroya2026SameObjectTarget : Acquisition.SourceAcquisitionTarget
@@ -27,19 +22,10 @@ bedroya2026SameObjectTarget =
     "DESI+CMB+Pantheon+ negative-c best-fit chain/config or machine-readable manifest"
     Acquisition.directDigitalArchive
     Acquisition.publisherBackfile
-    false
-    false
-    false
+    false false false
 
 bedroyaIdentitySearchDemand : SourceSearch.SourceDiligenceSearchDemand
 bedroyaIdentitySearchDemand = DebtRouting.bedroyaManifestIdentitySearchDemand
-
-------------------------------------------------------------------------
--- Pre-observation identity search as partial-information refinement.
---
--- This does not assert that a search has run.  It only records the current
--- candidate fibre and the identity distinction a future acquisition can make.
-------------------------------------------------------------------------
 
 data CandidateCustody : Set where
   childSpecificManifest : CandidateCustody
@@ -56,16 +42,13 @@ data SameObjectIdentityMeasurement : Set where
   exactChildSameObject : SameObjectIdentityMeasurement
   lineageOnlyEvidence : SameObjectIdentityMeasurement
 
-sameObjectIdentityMeasurement :
-  CandidateCustody → SameObjectIdentityMeasurement
+sameObjectIdentityMeasurement : CandidateCustody → SameObjectIdentityMeasurement
 sameObjectIdentityMeasurement childSpecificManifest = exactChildSameObject
 sameObjectIdentityMeasurement parentOnlyImplementation = lineageOnlyEvidence
 sameObjectIdentityMeasurement ancestorParameterizationOnly = lineageOnlyEvidence
 
 bedroyaSameObjectSearchExperiment :
-  Bidi.PartialInformationExperiment
-    CandidateCustody
-    SameObjectIdentityMeasurement
+  Bidi.PartialInformationExperiment CandidateCustody SameObjectIdentityMeasurement
 bedroyaSameObjectSearchExperiment =
   Bidi.partialInformationExperiment
     candidateCustodyPrior
@@ -75,6 +58,66 @@ bedroyaSameObjectSearchExperiment =
     "search useful even without exact closure: an observed result can shrink the custody fibre"
     false
     "no acquisition result has been promoted; source-diligence and same-object checks remain downstream"
+
+exactChildObservationWouldRefineCustody :
+  Bidi.FibreRefines
+    (Bidi.MeasuredFibre
+      candidateCustodyPrior
+      sameObjectIdentityMeasurement
+      exactChildSameObject)
+    candidateCustodyPrior
+exactChildObservationWouldRefineCustody =
+  Bidi.partialMeasurementIsUsefulWithoutExactClosure
+    bedroyaSameObjectSearchExperiment
+    exactChildSameObject
+
+lineageOnlyObservationWouldRefineCustody :
+  Bidi.FibreRefines
+    (Bidi.MeasuredFibre
+      candidateCustodyPrior
+      sameObjectIdentityMeasurement
+      lineageOnlyEvidence)
+    candidateCustodyPrior
+lineageOnlyObservationWouldRefineCustody =
+  Bidi.partialMeasurementIsUsefulWithoutExactClosure
+    bedroyaSameObjectSearchExperiment
+    lineageOnlyEvidence
+
+parentOnlyLineageWitness :
+  Bidi.MeasuredFibre
+    candidateCustodyPrior
+    sameObjectIdentityMeasurement
+    lineageOnlyEvidence
+    parentOnlyImplementation
+parentOnlyLineageWitness = candidate-admissible , refl
+
+ancestorLineageWitness :
+  Bidi.MeasuredFibre
+    candidateCustodyPrior
+    sameObjectIdentityMeasurement
+    lineageOnlyEvidence
+    ancestorParameterizationOnly
+ancestorLineageWitness = candidate-admissible , refl
+
+parentOnlyNotAncestor :
+  parentOnlyImplementation ≡ ancestorParameterizationOnly → ⊥
+parentOnlyNotAncestor ()
+
+lineageOnlyObservationDoesNotIdentifyCustody :
+  Bidi.PointIdentifies
+    (Bidi.MeasuredFibre
+      candidateCustodyPrior
+      sameObjectIdentityMeasurement
+      lineageOnlyEvidence)
+    (λ candidate → candidate) →
+  ⊥
+lineageOnlyObservationDoesNotIdentifyCustody identifies =
+  parentOnlyNotAncestor
+    (identifies
+      parentOnlyImplementation
+      ancestorParameterizationOnly
+      parentOnlyLineageWitness
+      ancestorLineageWitness)
 
 childSameObjectStillUnacquired :
   Acquisition.fullTextAcquired bedroya2026SameObjectTarget ≡ false
@@ -95,12 +138,7 @@ parentLineageMayGuideSearchButCannotSubstitute :
 parentLineageMayGuideSearchButCannotSubstitute =
   ParentLineage.parentImplementationInheritanceStillOpen
 
-------------------------------------------------------------------------
--- WrongType / same-object firewalls.
-------------------------------------------------------------------------
-
 data ParentImplementationPaysChildSameObjectDemand : Set where
-
 data ParentNormalizationPaysChildSameObjectDemand : Set where
 
 parentImplementationCannotPayChildSameObjectDemand :
