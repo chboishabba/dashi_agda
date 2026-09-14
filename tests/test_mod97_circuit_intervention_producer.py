@@ -63,7 +63,7 @@ def test_raw_receipt_does_not_promote_relations_or_beta() -> None:
     assert receipt["promotion"]["grokking_mechanism_paid"] is False
 
 
-def test_same_layer_post_relu_ablations_do_not_pay_directional_requirements() -> None:
+def test_pair_ablations_do_not_identify_requirement_direction() -> None:
     receipt = build_intervention_receipt(
         checkpoint_path="epoch-01000.pt",
         checkpoint_sha256="abc",
@@ -73,12 +73,19 @@ def test_same_layer_post_relu_ablations_do_not_pay_directional_requirements() ->
         pair_effects={(0, 2): 0.8},
     )
 
-    topology = receipt["requirement_evidence"]
-    assert topology["candidate_layer"] == "single shared hidden layer"
-    assert topology["intervention_site"] == "post-ReLU hidden activation"
-    assert topology["directed_hidden_to_hidden_path"] is False
-    assert topology["same_layer_pair_ablations_pay_direction"] is False
-    assert topology["directional_requirement_rule"] == "not available from this producer"
+    evidence = receipt["requirement_evidence"]
+    assert evidence["candidate_layer"] == "single shared hidden layer"
+    assert evidence["intervention_site"] == "post-ReLU hidden activation"
+    assert evidence["canonical_requirement_semantics"] == (
+        "selection closure: selecting one candidate may require another to close "
+        "an operator/seam compatibility condition"
+    )
+    assert evidence["canonical_requirement_is_causal_path_claim"] is False
+    assert evidence["same_layer_pair_ablations_pay_direction"] is False
+    assert evidence["direction_unpaid_reason"] == (
+        "the symmetric singleton/joint pair-ablation surface does not identify "
+        "which directed closure requirement holds"
+    )
     assert receipt["promotion"]["requirement_edges_paid"] is False
 
 
