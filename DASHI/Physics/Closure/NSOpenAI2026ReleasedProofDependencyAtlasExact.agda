@@ -204,9 +204,11 @@ fullPublishedForcedBreakdownProofReconstructedInDASHI = false
 publishedProofPaysUnforcedR568 : Bool
 publishedProofPaysUnforcedR568 = false
 
+unforcedPeriodicBInternallyPaid : Bool
+unforcedPeriodicBInternallyPaid = Clay4.roundBInternallyPaid4
+
 unforcedPeriodicBStillOpenInDASHI : Bool
-unforcedPeriodicBStillOpenInDASHI =
-  Clay4.roundBInternallyPaid4
+unforcedPeriodicBStillOpenInDASHI = true
 
 releasedDependencyAtlasConstructedIsTrue :
   releasedDependencyAtlasConstructed ≡ true
@@ -226,3 +228,6 @@ fullPublishedForcedBreakdownProofReconstructedInDASHIIsFalse = refl
 
 publishedProofPaysUnforcedR568IsFalse : publishedProofPaysUnforcedR568 ≡ false
 publishedProofPaysUnforcedR568IsFalse = refl
+
+unforcedPeriodicBInternallyPaidIsFalse : unforcedPeriodicBInternallyPaid ≡ false
+unforcedPeriodicBInternallyPaidIsFalse = Clay4.roundBInternallyPaid4IsFalse
