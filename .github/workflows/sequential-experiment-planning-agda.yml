@@ -20,6 +20,7 @@ on:
       - 'DASHI/Core/SequentialExperimentPlanningValidation.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Biology/JCoarseFineConsumerReductionBridgeExact.agda'
+      - 'DASHI/CoarseFineFabricEverything.agda'
       - 'DASHI/Physics/Foundations/GRQFTDiscriminatorSynthesisExact.agda'
       - 'DASHI/Physics/Foundations/GRQFTSequentialExperimentPlannerExact.agda'
       - 'DASHI/Physics/Foundations/Everything.agda'
@@ -31,6 +32,7 @@ on:
       - 'DASHI/Environment/LESSituatedSocioEcologicalHyperfabricValidation.agda'
       - 'DASHI/ReopenableConsumerInterventionCrossDomainEverything.agda'
       - 'scripts/check_sequential_experiment_planning.sh'
+      - 'scripts/check_coarse_fine_spine_extensions.py'
       - '.github/workflows/sequential-experiment-planning-agda.yml'
   workflow_dispatch:
 
@@ -48,6 +50,8 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+      - name: Run coarse/fine canonical-spine static contract
+        run: python3 scripts/check_coarse_fine_spine_extensions.py
       - name: Materialize Agda source dependencies
         run: git submodule update --init --depth 1 DCHoTT-Agda cubical
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
