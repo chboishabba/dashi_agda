@@ -12,10 +12,6 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Empirical.DarkDimensionResidualDebtRoutingExact as DebtRouting
 import DASHI.Empirical.DarkDimensionFadingDMParentLineageExact as ParentLineage
 
-------------------------------------------------------------------------
--- BEDROYA 2026 SAME-OBJECT ACQUISITION ADAPTER
-------------------------------------------------------------------------
-
 bedroya2026SameObjectTarget : Acquisition.SourceAcquisitionTarget
 bedroya2026SameObjectTarget =
   Acquisition.sourceAcquisitionTarget
@@ -96,10 +92,6 @@ lineageOnlyObservationDoesNotIdentifyCustody identifies =
     (identifies parentOnlyImplementation ancestorParameterizationOnly
       parentOnlyLineageWitness ancestorLineageWitness)
 
-------------------------------------------------------------------------
--- Attribution ladder after a hypothetical exact-child location.
-------------------------------------------------------------------------
-
 bedroyaPostIdentitySupportGap : SourceSearch.SourceDiligenceGap
 bedroyaPostIdentitySupportGap = SourceSearch.propositionSupportUnresolved
 
@@ -147,6 +139,16 @@ bedroyaInitialScalarVelocityConventionDemand =
     refl
     "DASHI.Empirical.DarkDimensionBedroyaBackgroundInputContractExact"
     "bedroya-initial-scalar-velocity-convention-demand"
+
+bedroyaRDragSameFitDemand : SourceSearch.SourceDiligenceSearchDemand
+bedroyaRDragSameFitDemand =
+  SourceSearch.source-diligence-search-demand
+    "exact same-fit r_drag used for the 2026 DESI BAO prediction surface"
+    SourceSearch.propositionSupportUnresolved
+    Search.propositionSourceProducer
+    refl
+    "DASHI.Empirical.DarkDimensionBedroyaBackgroundInputContractExact"
+    "bedroya-same-fit-r-drag-demand"
 
 data SampledDensitySupportEqualsV0Support : Set where
 
