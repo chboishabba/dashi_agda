@@ -12,6 +12,9 @@ factorisationCanonical = Registry.factorisationOwner
 queryIndexedProjectionCanonical : Registry.CanonicalOwner
 queryIndexedProjectionCanonical = Registry.queryIndexedProjectionOwner
 
+boundedNegativeSearchCanonical : Registry.CanonicalOwner
+boundedNegativeSearchCanonical = Registry.boundedNegativeSearchOwner
+
 projectionFibreCanonical : Registry.CanonicalOwner
 projectionFibreCanonical = Registry.projectionFibreOwner
 
@@ -55,6 +58,10 @@ factorisationParallelDefinitionsBlocked = refl
 queryIndexedProjectionParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed queryIndexedProjectionCanonical ≡ false
 queryIndexedProjectionParallelDefinitionsBlocked = refl
+
+boundedNegativeSearchParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed boundedNegativeSearchCanonical ≡ false
+boundedNegativeSearchParallelDefinitionsBlocked = refl
 
 batchParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed batchCanonical ≡ false
