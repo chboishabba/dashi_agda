@@ -39,11 +39,11 @@ canonicalWaterHyacinthScenario : WaterHyacinthInterventionScenario
 canonicalWaterHyacinthScenario = waterHyacinthInterventionScenario
   Experiment.oxygenDebtWorld
   supported
-  postReleaseObserved
+  postReleaseUnresolved
   controlOnly
   netOutcomeUnresolved
-  "CSIRO water-hyacinth biocontrol page plus Australian Weed Management Guide; empirical source coordinates only"
-  "host specificity, observed post-release safety, restoration and net ecosystem benefit remain distinct evidence/status axes"
+  "CSIRO water-hyacinth biocontrol page; Australian Weed Management Guide; host-specificity literature row in source atlas"
+  "host-range evidence does not by itself pay post-release safety, restoration, or net ecosystem benefit"
 
 ------------------------------------------------------------------------
 -- Control and restoration are separate coordinates.
@@ -60,16 +60,17 @@ canonicalControlRestorationSeparation : ControlRestorationSeparation
 canonicalControlRestorationSeparation = controlRestorationSeparation refl refl
 
 ------------------------------------------------------------------------
--- Host-specificity evidence, field safety observation, and net ecosystem
--- benefit are intentionally non-collapsed status axes.
+-- Host-specificity evidence, post-release safety observation, and net ecosystem
+-- benefit are intentionally non-collapsed status axes.  The canonical fixture
+-- pays only the first one and leaves the latter two unresolved.
 ------------------------------------------------------------------------
 
 record BiocontrolStatusSeparation : Set where
   constructor biocontrolStatusSeparation
   field
     hostSpecificityPaid : hostSpecificityEvidence canonicalWaterHyacinthScenario ≡ supported
-    postReleaseSafetyObserved :
-      observedPostReleaseSafety canonicalWaterHyacinthScenario ≡ postReleaseObserved
+    postReleaseSafetyStillUnresolved :
+      observedPostReleaseSafety canonicalWaterHyacinthScenario ≡ postReleaseUnresolved
     netBenefitStillUnresolved :
       netEcosystemBenefit canonicalWaterHyacinthScenario ≡ netOutcomeUnresolved
 
@@ -94,7 +95,7 @@ record WaterHyacinthSourceBoundary : Set where
 
 canonicalWaterHyacinthSourceBoundary : WaterHyacinthSourceBoundary
 canonicalWaterHyacinthSourceBoundary = waterHyacinthSourceBoundary
-  "CSIRO/ENTO water-hyacinth biological control page; Australian Weed Management Guide - Water Hyacinth"
+  "CSIRO/ENTO water-hyacinth biological control page; Australian Weed Management Guide - Water Hyacinth; host-specificity literature retained separately"
   false refl
   false refl
   false refl
