@@ -3,6 +3,8 @@ module DASHI.Law.SensibLawExpertEvidenceSituatedObserverExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as Expert
 import DASHI.Law.AustralianFamilyReportWriterIntegrityExact as Family
