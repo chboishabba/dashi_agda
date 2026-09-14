@@ -125,3 +125,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCouplingResi
 -- energy surface. Figure-level zeta and equation-level xi remain distinct
 -- source labels until a same-object notation repair is explicitly paid.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseWeightedNDimStateGraphExact
+
+-- Context-indexed landscape: the same LID--CORE / NMP--CORE axes carry distinct
+-- ligand-free and ligand-bound free-energy surfaces. The bound landscape pays
+-- an approx 8.0 kcal/mol open-to-closed delta G and strongly disfavors the
+-- NMP-first region; ligand-free path weights are not transferred across context.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandConditionedLandscapeExact
