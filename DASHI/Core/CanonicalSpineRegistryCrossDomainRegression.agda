@@ -15,6 +15,9 @@ queryIndexedProjectionCanonical = Registry.queryIndexedProjectionOwner
 boundedNegativeSearchCanonical : Registry.CanonicalOwner
 boundedNegativeSearchCanonical = Registry.boundedNegativeSearchOwner
 
+robustExperimentCanonical : Registry.CanonicalOwner
+robustExperimentCanonical = Registry.robustExperimentInferenceOwner
+
 projectionFibreCanonical : Registry.CanonicalOwner
 projectionFibreCanonical = Registry.projectionFibreOwner
 
@@ -62,6 +65,10 @@ queryIndexedProjectionParallelDefinitionsBlocked = refl
 boundedNegativeSearchParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed boundedNegativeSearchCanonical ≡ false
 boundedNegativeSearchParallelDefinitionsBlocked = refl
+
+robustExperimentParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed robustExperimentCanonical ≡ false
+robustExperimentParallelDefinitionsBlocked = refl
 
 batchParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed batchCanonical ≡ false
