@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -12,18 +13,16 @@ import DASHI.Core.ResidualLiveSetSalienceSchedulerBidiExact as Live
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
+import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
 import DASHI.Core.LiteralFrontierSchedulerExact as Literal
 import DASHI.Core.ClayCrossDomainLiteralFrontierExact as Clay
 import DASHI.Physics.NSYMLiteralFrontierSchedulerExact as NSYM
 import DASHI.Physics.YangMills.BalabanPhysicalFrontierSearchHypergraphRound146Exact as YM146
 import DASHI.Physics.YangMills.BalabanFrontierRouteAdmissionRound147Exact as YM147
+import DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact as YMSource
 import DASHI.Cognition.PNF.SensibLawDutySourceLineageRefinementCutRerunExact as GuardedCut
 import DASHI.Physics.Closure.NSTriadKNCanonicalClayProofSearchRound486Exact as NS486
-
-------------------------------------------------------------------------
--- STATE-INDEXED LIVE-CUT / PARETO CHILD
-------------------------------------------------------------------------
 
 record StateIndexedLiveCutParetoAdapter : Set where
   constructor stateIndexedLiveCutParetoAdapter
@@ -68,10 +67,6 @@ canonicalStateIndexedLiveCutParetoAdapter = stateIndexedLiveCutParetoAdapter
   (Portfolio.portfolioSelectionCreatesExecutionAuthorityIsFalse Portfolio.canonicalResidualConditionedPortfolioBoundary)
   Parent.terminalConsumerStillMustBePaid Parent.terminalConsumerStillMustBePaidIsTrue
   true refl true refl true refl
-
-------------------------------------------------------------------------
--- Constructive state-indexed Pareto eligibility weld.
-------------------------------------------------------------------------
 
 asStateIndexedMDLProblem :
   (P : Portfolio.ExperimentPortfolio) →
@@ -134,10 +129,6 @@ admittedCandidateAutomaticallyClosesTerminalConsumer = false
 admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse : admittedCandidateAutomaticallyClosesTerminalConsumer ≡ false
 admittedCandidateAutomaticallyClosesTerminalConsumerIsFalse = refl
 
-------------------------------------------------------------------------
--- Source-/authority-preserving legal adapters.
-------------------------------------------------------------------------
-
 GuardedCutAuthorityPromotion : Set
 GuardedCutAuthorityPromotion = GuardedCut.GuardedCutPromotesReconstructionToRatio
 
@@ -149,10 +140,6 @@ OpenCullenRouteTransfersToClimate = GuardedCut.OpenCullenRouteTransfersToClimate
 
 openCullenRouteStillDoesNotTransfer : OpenCullenRouteTransfersToClimate → ⊥
 openCullenRouteStillDoesNotTransfer = GuardedCut.specificOpenRouteStillDoesNotTransfer
-
-------------------------------------------------------------------------
--- Canonical NS current-cut adapter (R486/R423).
-------------------------------------------------------------------------
 
 record NSCanonicalCurrentCutParetoAdapter : Set where
   constructor nsCanonicalCurrentCutParetoAdapter
@@ -192,21 +179,11 @@ canonicalNSCanonicalCurrentCutParetoAdapter = nsCanonicalCurrentCutParetoAdapter
   (Clay.sharedSchedulerShapeProvesSharedMathematicsIsFalse Clay.canonicalCrossDomainBoundary)
 
 nsCurrentResidualIsDirectR423Budget :
-  NS486.firstCanonicalNSResidual NS486.currentCanonicalNSStatus
-  ≡ NS486.missingCutoffUniformSignedCompanionBudget
+  NS486.firstCanonicalNSResidual NS486.currentCanonicalNSStatus ≡ NS486.missingCutoffUniformSignedCompanionBudget
 nsCurrentResidualIsDirectR423Budget = NS486.currentFirstMissingIsR423Budget
 
 nsCurrentRouteAdmission : ProofSearch.RouteAdmission
 nsCurrentRouteAdmission = NS486.directR423RouteAdmission
-
-------------------------------------------------------------------------
--- Literal frontier / YM reuse boundary.
---
--- LiteralFrontierMove carries paretoReference : String, not a CostHyperfabric.
--- Therefore existing close/redirect/reject outcomes are reusable, while any
--- quantitative Pareto dominance claim still requires separately declared axes
--- and costs. YM keeps its exact two-child AND route and authority firewall.
-------------------------------------------------------------------------
 
 record LiteralFrontierParetoBoundaryAdapter : Set where
   constructor literalFrontierParetoBoundaryAdapter
@@ -251,8 +228,52 @@ ymNumericalCannotCloseLeaf : YMNumericalDirectClosure → ⊥
 ymNumericalCannotCloseLeaf = NSYM.ymNumericalCannotCloseLeaf
 
 ------------------------------------------------------------------------
--- Least-privilege route admission adapter.
+-- Costed YM source-recovery consumer probe.
 ------------------------------------------------------------------------
+
+record YMSourceRecoveryConsumerAdapter : Set where
+  constructor ymSourceRecoveryConsumerAdapter
+  field
+    sourceProbeReference : String
+    sourceProbeCost : Nat
+    matchingSourceLabelsCloseLiteralRecovery : Bool
+    matchingSourceLabelsCloseLiteralRecoveryIsFalse : matchingSourceLabelsCloseLiteralRecovery ≡ false
+    sourceProbeMayRefineRecoveryFibre : Bool
+    sourceProbeMayRefineRecoveryFibreIsTrue : sourceProbeMayRefineRecoveryFibre ≡ true
+    consumerClosureRequiresWholeSourceIdentity : Bool
+    consumerClosureRequiresWholeSourceIdentityIsFalse : consumerClosureRequiresWholeSourceIdentity ≡ false
+    machineCheckedCompilerImpliesLiteralSourceInhabitation : Bool
+    machineCheckedCompilerImpliesLiteralSourceInhabitationIsFalse : machineCheckedCompilerImpliesLiteralSourceInhabitation ≡ false
+    declaredProbeCostCreatesRouteAdmission : Bool
+    declaredProbeCostCreatesRouteAdmissionIsFalse : declaredProbeCostCreatesRouteAdmission ≡ false
+    consumerClosingProbeClosesYMTheoremLeaf : Bool
+    consumerClosingProbeClosesYMTheoremLeafIsFalse : consumerClosingProbeClosesYMTheoremLeaf ≡ false
+
+open YMSourceRecoveryConsumerAdapter public
+
+canonicalYMSourceRecoveryConsumerAdapter : YMSourceRecoveryConsumerAdapter
+canonicalYMSourceRecoveryConsumerAdapter = ymSourceRecoveryConsumerAdapter
+  "Balaban literal same-object recovery discriminator; source-exact reconstruction receipt, not numerical calibration"
+  (Synthesis.cost YMSource.literalRecoveryBundle)
+  (YMSource.matchingSourceLabelsCloseLiteralRecovery YMSource.canonicalBalabanActiveSourceBoundary)
+  (YMSource.matchingSourceLabelsCloseLiteralRecoveryIsFalse YMSource.canonicalBalabanActiveSourceBoundary)
+  (YMSource.sourceProbeMayRefineRecoveryFibre YMSource.canonicalBalabanActiveSourceBoundary)
+  (YMSource.sourceProbeMayRefineRecoveryFibreIsTrue YMSource.canonicalBalabanActiveSourceBoundary)
+  (YMSource.consumerClosureRequiresWholeSourceIdentity YMSource.canonicalBalabanActiveSourceBoundary)
+  (YMSource.consumerClosureRequiresWholeSourceIdentityIsFalse YMSource.canonicalBalabanActiveSourceBoundary)
+  (YMSource.machineCheckedCompilerImpliesLiteralSourceInhabitation YMSource.canonicalBalabanActiveSourceBoundary)
+  (YMSource.machineCheckedCompilerImpliesLiteralSourceInhabitationIsFalse YMSource.canonicalBalabanActiveSourceBoundary)
+  false refl false refl
+
+ymLiteralRecoveryProbeCostIsOne : Synthesis.cost YMSource.literalRecoveryBundle ≡ 1
+ymLiteralRecoveryProbeCostIsOne = refl
+
+ymLiteralProbeClosesRecoveryDecision :
+  Synthesis.ProspectivelyClosesConsumer
+    YMSource.compatible
+    YMSource.recoveryDecision
+    YMSource.literalRecoveryBundle
+ymLiteralProbeClosesRecoveryDecision = YMSource.literalProbeClosesDecision
 
 record LeastPrivilegeLiveCutAdmissionAdapter : Set where
   constructor leastPrivilegeLiveCutAdmissionAdapter
@@ -292,10 +313,6 @@ canonicalLeastPrivilegeLiveCutAdmissionAdapter = leastPrivilegeLiveCutAdmissionA
   (ProofSearch.duplicateRouteShouldBeReprovedIsFalse ProofSearch.canonicalProofSearchLeastPrivilegeBoundary)
   true refl
 
-------------------------------------------------------------------------
--- Parent payment / attribution boundaries remain live in the child.
-------------------------------------------------------------------------
-
 parentSnowballPaymentMaySkipDependency : Bool
 parentSnowballPaymentMaySkipDependency = Parent.snowballPaymentMaySkipUnpaidParentDependency
 
@@ -307,10 +324,6 @@ parentCrossDomainAnalogyCreatesAuthority = Parent.crossDomainAnalogyCreatesSourc
 
 parentCrossDomainAnalogyCreatesAuthorityIsFalse : parentCrossDomainAnalogyCreatesAuthority ≡ false
 parentCrossDomainAnalogyCreatesAuthorityIsFalse = Parent.crossDomainAnalogyCreatesSourceAuthorityIsFalse
-
-------------------------------------------------------------------------
--- Interpretation boundary.
-------------------------------------------------------------------------
 
 record StateIndexedLiveCutParetoBoundary : Set where
   constructor stateIndexedLiveCutParetoBoundary
