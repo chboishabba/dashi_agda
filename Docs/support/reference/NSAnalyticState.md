@@ -1,170 +1,209 @@
 # Navier-Stokes Analytic State
 
-Status: Paper 1 is now an honest reduction manuscript; the live Clay frontier
-is the coupled `A1/A3` bootstrap plus the quantitative `A4`
-Lei-Ren-Tian-to-Fourier transfer.
+Updated: `2026-09-13`
 
-## What Landed
+Status: Paper 1 now follows the modern same-object/direct-companion proof spine.
+The live analytic producer is the cutoff-uniform commutator-only spacetime
+budget R568.  The current local proof-search frontier is the same-output
+between-partner/P3 separation problem feeding R211.  The June A1-A9
+ESS/Abel-defect route remains retained below as a historical/alternative route.
 
-1. Reduction-manuscript reset
-   - Surface: `Docs/papers/live/Paper1NavierStokesClayDraft.md`
-   - Result: Paper 1 is now explicitly a conditional blowup-reduction paper
-     organized around `A1-A9`, with the constants ladder promoted to
-     theorem-sized propositions and the main analytic burden localized.
-   - Boundary: this is not a Clay proof and does not pretend that `A1-A9` are
-     already discharged.
+## Canonical live chain
 
-2. A1/A3 split frontier
-   - Receipts: `NSAbelTriadicStationarityConstructionBoundary`,
-     `NSBoundedAbelMassEstimateBoundary`,
-     `NSQuantitativeStationarityRateBoundary`
-   - Result: the repo now names the live coupled wall honestly: construct the
-     Abel-weighted triadic defect measure with quantitative compactness and
-     prove enough approximate `T_NS`-stationarity to close the bootstrap.
-  - Boundary: the repo now carries an exact candidate theorem package for
-    `A1.1-A3.4`, including explicit candidate constants and rates, but the
-    closure remains fail-closed until those calculations are accepted in the
-    exact normed setting consumed downstream by `A6-A8`. In particular, the
-    current candidate `epsilon = 1/6` Seregin/ESS intake and
-    `delta_r = O(r^(1/12))` stationarity rate are recorded as concrete theorem
-    targets rather than promoted local theorems.
-   - Exact live lemma ladder:
-     `A1.1` bounded Abel-weighted defect mass,
-     `A1.2` weak-* tightness / precompactness,
-     `A1.3` quantitative shell-tail control,
-     `A3.1` energy ODE for `W_r = U_r - U_infinity`,
-     `A3.2` imported Seregin/ESS epsilon-rate intake,
-     `A3.3` `delta_r -> 0` quantitative stationarity,
-     `A3.4` multiscale Abel-summation closure with no hidden exponent loss.
-  - Verification posture: the candidate theorem package is now:
-    bounded Abel-weighted defect mass with explicit constant,
-    weak-* tightness with explicit tail radius,
-    quantitative shell-tail control,
-    localized energy ODE for `W_r`,
-    imported ESS/Seregin rate with `epsilon = 1/6`,
-    stationarity-defect rate `delta_r = O(r^(1/12))`,
-    and multiscale Abel-summation closure with finite geometric constants.
-    These are recorded as the exact inputs Paper 1 would consume if promoted;
-    they are not yet treated as locally discharged theorems.
+```text
+literal periodic Galerkin NS
+  -> signed/helical commutator geometry
+  -> same-output physical residual / P3 separation
+  -> literal R406/direct companion
+  -> R568 CommutatorOnlySpacetimeBudget568
+  -> R572 direct leaf-A compiler
+  -> R503 DirectOffDiagonalBudget / R415 consumer
+  -> critical-barrier consumer
+```
 
-3. A4 transfer ladder
-   - Receipts: `NSLeiRenTianOutputSupportTransferBoundary`,
-     `NSWhitneyCouplingInequalityBoundary`,
-     `NSPhiJacobianLowerBoundBoundary`, and the A4 child/composite surfaces
-   - Result: the physical-angular-richness -> Fourier-output-richness theorem
-     is now decomposed into its Jacobian/coarea/Whitney obligations.
-  - Boundary: the repo now carries an exact candidate A4 theorem package:
-    direction-map regularity, Jacobian lower bound, coarea propagation,
-    strip-hitting richness, and a rescaling-uniform lower bound. The
-    governance posture remains fail-closed until that package is accepted as a
-    usable theorem in the precise output-support form consumed by `A5-A6`.
-   - Exact live lemma ladder:
-     `A4.1` direction-map regularity,
-     `A4.2` Jacobian lower-bound / nondegeneracy route,
-     `A4.3` coarea propagation,
-     `A4.4` strip-hitting / pushforward richness,
-     `A4.5` uniformity across the Type-I rescaling family.
+The exact status distinctions are:
 
-4. Downstream route organization
-   - Receipts: `NSA5KappaBiasVanishingFromA4StationarityBoundary`,
-     `NSPointwiseToAbelCompositeA6Boundary`,
-     `NSA7ResidualDepletionGronwallBoundary`,
-     `NSA8A9MonotonicityClosureTheoremLadderBoundary`
-   - Result: once `A1/A3` and `A4` are available, the later A5-A9 stages are
-     organized as downstream consumers rather than free-floating blockers.
-   - Boundary: these stages are not yet promoted independently of the earlier
-     fronts, but the repo now records an exact candidate downstream theorem
-     package rather than generic placeholders.
-   - Exact candidate downstream package:
-     `A5` kappa-bias vanishing from asymptotic stationarity plus A4 richness,
-     `A6` pointwise-to-Abel / leakage inequality with explicit transport,
-     commutator, and stretching budgets,
-     `A7` Gronwall depletion threshold,
-     `A8` scale-monotonicity recursion,
-     `A9` CKN/BKM contradiction.
-   - Verification posture: this package is recorded so the referee-facing
-   route is exact once `A1/A3` and `A4` are accepted. It does not upgrade
-   the current governance state; every theorem and Clay flag remains
-   fail-closed until the upstream fronts are promoted.
+```text
+C_direct / integrated direct companion       constructed
+R568 commutator-only spacetime producer      open
+R572 compiler                                constructed given its listed receipts
+R503 R500->R415 compiler surface             constructed
+R503 direct off-diagonal analytic payment    open until supplied by a producer
+P3 same-output separation producer           open
+Clay/global-regularity promotion              false
+```
 
-5. Classical-theorem intake is now sharply packetized
-   - Receipts: the CKN / ESS / LRT packet surfaces, the standard PDE writeup
-     assembly surface, and the reviewer-facing NS packet surfaces.
-   - Result: the repo now treats the classical PDE intake as exact theorem
-     grammar rather than generic external fog. CKN local-energy and
-     epsilon-regularity, ESS backward-uniqueness / Carleman, and the
-     Lei-Ren-Tian angular-richness ladder are each named as concrete theorem
-     packets feeding `A1/A3`, `A4`, and the downstream `A5-A9` route.
-   - Boundary: this sharpens the self-contained packet story only. It does not
-     by itself promote the NS candidate package to a proved Clay theorem.
+`C_direct` is therefore not the missing object.  R568 is the live producer.
+R572 and R503 are downstream compiler/consumer surfaces and do not themselves
+supply the missing PDE estimate.
 
-## Diagnostic
+## Same-output residual / P3 frontier
 
-The older theta/danger-shell diagnostics are still useful as obstruction
-guidance, but they are no longer the main manuscript grammar. Their honest role
-is to explain why the near-diagonal high-high interaction is the right seam to
-localize before one asks for Abel-defect compactness, quantitative
-stationarity, and the later support-geometry transfer. They remain diagnostic
-evidence only.
+The historical Gram/block chain now gives an exact named residual rather than a
+generic "Gram problem":
 
-## Remaining NS Burden
+```text
+R179/R180   polarization + signed Gram ledger
+R181        partner-first compression
+R201        law of total Gram / covariance
+R205        literal localized comparable partner cells
+R206        localized compressed Gram frontier
+R207        fixed-output carrier
+R208        outer Fourier L2 carrier
+R209        outputwise same-mode debt telescope
+R211        quantitative residual-payment socket
+R214        constant-band localization no-go
+```
 
-The remaining NS burden is now governance-shaped rather than theorem-shape
-shaped.
+For fixed-output compressed cells `B_alpha`, the complete-graph identity is
 
-1. Accept or reject the candidate self-contained `A1.1-A3.4` package in the
-   exact norms consumed by the downstream Abel/leakage route.
-2. Accept or reject the candidate self-contained `A4.1-A4.5` package with a
-   uniform Type-I-rescaling constant in the exact output-support form used by
-   `A5-A6`.
-3. If those two packages are accepted, the already recorded `A5-A9` ladder is
-   available as the downstream consumer path into kappa-bias vanishing,
-   pointwise-to-Abel averaging, depletion, monotonicity, and the final
-   CKN/BKM contradiction.
+```math
+\mathrm{Debt}
+=
+(n-1)\sum_\alpha \|B_\alpha\|^2
+-
+\sum_{\alpha<\beta}\|B_\alpha-B_\beta\|^2.
+```
 
-In other words, the repo no longer lacks theorem grammar for the NS Clay lane.
-It now carries an explicit candidate self-contained packet
-`CKN + ESS + LRT + A1/A3 + A4 + A5-A9`. What remains fail-closed is the
-promotion decision: whether those candidate calculations and constants are
-accepted as the exact theorem inputs consumed by Paper 1.
+The useful producer polarity is therefore a lower bound on physical pairwise
+separation.  A single-cell low-output estimate does not by itself pay arbitrary
+inter-partner covariance.
 
-## Publication Posture
+The immediate proof search is:
 
-Publishable claim: Paper 1 is an honest reduction manuscript with a sharp
-frontier. The repo now carries an explicit classical PDE packet
-`CKN + ESS + LRT + A1/A3 + A4 + A5-A9` in reviewer-readable form, while the
-live new mathematics remains concentrated in the coupled `A1/A3` bootstrap and
-the `A4` uniform output-support transfer.
+```text
+literal compressed partner difference
+  -> exact raw-curl/BAC-CAB expansion
+  -> physical magnitude/radial + direction/helicity separation
+  -> quantitative same-output pair-separation lower bound
+  -> R211 ComparableSameOutputResidualPayment
+```
 
-Forbidden claim: unconditional regularity or Clay promotion.
+PR #890's R205-compressed-cell to R574/R446 difference/PSD weld is a useful
+same-object adapter at this level.  It remains a construction experiment until
+the physical pair-separation theorem and certification close.
 
-## Navier-Stokes Multi-Scale Order Framework
+## Modern signed/helical and direct-companion ancestry
 
-The finite sparse-network program's retirement (N32 1024-output effectively dense and switching result) motivates a multi-scale description of order in a Navier-Stokes state. These three aspects are compatible rather than contradictory:
+Proof-critical donors include:
 
-### 1. Microscopic Delocalization
-$$N_{\mathrm{eff}}(\mu_t) \gg 1$$
-The dynamically relevant quantity (energy, enstrophy, triadic weight) is distributed over microscopic states. No single mode or channel carries the bulk of the activity. For microscopic weights $p_i$, $N_{\mathrm{eff}} = (\sum_i p_i^2)^{-1} \gg 1$ reflects a large active degree-of-freedom population (turbulent intuition), ruling out low-dimensional fixed-graph control.
+- R120/R123: pure signed commutator / paired-Bony weld;
+- R126-R132: HH radial-gap / square-gap / Plucker geometry;
+- R166-R178: homogeneity-correct quadratic companion, raw-curl weld,
+  radial/angular dual defect, low-output mass;
+- R179-R181: exact signed Gram and partner compression;
+- R186-R193: literal physical partner blocks, swap, and dynamic owner chain;
+- R194-R200: cyclic/raw-curl/radius-gap continuation and homogeneity correction;
+- R294: swap-invariant weighted mixed commutator;
+- R545/R567: spectator factorization and live forcing full-square normal form;
+- R414/R500/R503/R507: literal R406/direct-companion same-object lineage;
+- R568: live cutoff-uniform commutator-only spacetime producer;
+- R572: compiler from a paid R568 budget to the existing direct consumer.
 
-### 2. Temporal Turnover
-$$d(\mu_t, \mu_{t+s}) \ge \delta$$
-The microscopic distribution at $t+s$ is different from $t$. The active carriers change (eddies are repopulated, folded, or dissipated) even when the coarse dynamical regime remains statistically stable (the "waterfall" analogy).
+Positive/fallback routes such as R575/R576/R577 remain valid reduction
+machinery but are not automatically preferred over cancellation-preserving
+producers.
 
-### 3. Coarse Geometric Concentration
-Let $\pi: X_{\mathrm{micro}} \to G$ project to coarse variables (shells, interaction angles, helicity, locality ratios), and let $\nu_t = \pi_\# \mu_t$ be the pushforward. Coarse concentration means $\nu_t(A) \ge 1 - \varepsilon$ for a small region $A \subseteq G$. The microscopic events vary, but the geometric class remains statistically stable.
+## Certification posture
 
-### Regularity and Vortex Stretching Depletion
-Microscopic delocalization and temporal turnover alone do not protect against blow-up. Regularity hinges on whether the coarse pushforward concentrates on a **dynamically depleting sector** $A \subseteq G_{\mathrm{depleting}}$:
-$$\omega(x) \parallel \omega(y) \implies \omega \cdot S \omega \ll |S||\omega|^2$$
-Even with high microscopic complexity, the persistent geometry instantiates cancellation.
+Use three separate status axes:
 
-### Compact DASHI-Style Predicates
-Let $\mu_t \in \mathcal{P}(X_{\mathrm{micro}})$ and $\pi: X_{\mathrm{micro}} \to G$:
-- $\mathrm{MicroDelocalized}(t) := N_{\mathrm{eff}}(\mu_t) \gg 1$
-- $\mathrm{Turnover}(t, s) := d_X(\mu_t, \mu_{t+s}) \ge \delta$
-- $\mathrm{CoarseConcentrated}(t, A) := (\pi_\# \mu_t)(A) \ge 1 - \varepsilon$
-- $\mathrm{PersistentDepletion} := A \subseteq G_{\mathrm{depleting}}$
+```text
+MathematicalStatus
+StatementStatus
+CertificationStatus
+```
 
-The regularity obligation is to show:
-$$\mathrm{MicroDelocalized} \wedge \mathrm{Turnover} \wedge \mathrm{CoarseConcentrated} \implies \text{statistically persistent nonlinear depletion}$$
-The active modes/triads do not persist; the geometry they instantiate persists.
+`CertificationStatus` must separately record:
+
+```text
+validation root exists?
+workflow targets it?
+observed commit-specific Agda success receipt?
+```
+
+The focused NS workflow explicitly targets selected R101-R132 roots, R185,
+R193, R200-R202, and—after the Paper-1 migration—the canonical
+`DASHI/Papers/NavierStokes/TheoremInterfaceValidation.agda` root.
+
+A workflow target without an observed successful run is not promoted to
+kernel-certified status.  Historical PR #627 is an explicit example: its
+workflow wiring is useful evidence, but no successful Agda receipt for that
+exact head has been recovered here.
+
+## Historical/alternative A1-A9 route
+
+The earlier Paper-1 route is retained, not covered up.
+
+The original `2026-06-09` manuscript organized the problem around the tail
+identity
+
+```text
+d/dt E_{>K} = -D_{>K} + F_{>K}
+```
+
+and a danger-shell ratio `theta(K,t)`.  Its primary unresolved coordinates were
+the coupled A1/A3 Abel-weighted compactness/stationarity package and the A4
+physical-angular-richness to Fourier-output-richness transfer.
+
+The exact historical candidate ladders included:
+
+```text
+A1.1 bounded Abel-weighted defect mass
+A1.2 weak-* tightness / precompactness
+A1.3 quantitative shell-tail control
+A3.1 localized energy ODE
+A3.2 Seregin/ESS compactness-rate intake
+A3.3 quantitative stationarity target
+A3.4 Abel-weighted multiscale closure
+A4.1-A4.5 direction/Jacobian/coarea/strip-hitting/uniformity transfer
+A5-A9 downstream depletion/monotonicity/CKN-BKM consumers
+```
+
+Those objects remain historical theorem/provenance surfaces.  They were
+superseded as the **primary manuscript route** because later source archaeology
+found a shorter literal R406/direct-companion chain terminating in the single
+R568 spacetime producer.  They are still useful as diagnostics, alternative
+reductions, and historical evidence of what was tried and why it was later
+demoted.
+
+No statement in this document retroactively declares the A1-A9 route proved or
+fraudulent.  Its old open coordinates stay open historical facts unless their
+authoritative owners change independently.
+
+## Remaining NS burden
+
+Priority order:
+
+1. P3: prove quantitative same-output physical anti-alignment/separation for
+   the literal compressed partner cells.
+2. Use that to construct the existing R211 same-output residual payment rather
+   than a new residual API.
+3. Test the shortest same-object transplant from that paid historical residual
+   into the modern signed/full-square route.
+4. Prove the R568 cutoff-uniform commutator-only spacetime budget.
+5. Consume the result through the already-constructed R572/R503 chain.
+
+Broad archaeology is no longer itself a proof task.  Search should proceed
+forward from named unpaid fields, while failed/superseded routes remain visible
+as historical provenance.
+
+## Publication posture
+
+Publishable claim: Paper 1 is a conditional reduction manuscript whose modern
+proof spine and remaining producer fields are explicit.  It distinguishes
+constructed same-object/compiler machinery from open analytic payments and
+preserves the June A1-A9 attempt as historical/alternative provenance.
+
+Forbidden claim: unconditional regularity, Clay resolution, or kernel
+certification without the corresponding mathematical and commit-specific
+receipts.
+
+## Historical/diagnostic multi-scale order framework
+
+The older finite sparse-network/coherence diagnostics remain useful as
+obstruction guidance.  Microscopic delocalization, temporal turnover, and
+coarse geometric concentration can coexist; none alone proves regularity.
+Their retained role is to motivate searches for dynamically persistent
+nonlinear depletion or anti-alignment, not to substitute diagnostic coherence
+for the P3 or R568 theorem.

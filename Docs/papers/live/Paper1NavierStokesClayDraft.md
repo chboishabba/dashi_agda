@@ -1,457 +1,429 @@
-# Paper 1 Draft: Navier-Stokes Blowup Reduction Through Tail Flux Control
+# Paper 1 Draft: Navier–Stokes Signed-Commutator Reduction and Direct-Companion Frontier
 
-Author: Johl Brown
-Date: `2026-06-09`
-Version: `draft 1`
-Status: live analytic manuscript draft; Clay-facing; non-promoting
+Author: Johl Brown  
+Original Paper-1 draft date: `2026-06-09`  
+Modern proof-spine migration: `2026-09-13`  
+Status: live analytic manuscript draft; conditional; non-promoting
 
 ## Abstract
 
-This manuscript presents a conditional Navier-Stokes blowup-reduction route
-through high-frequency tail-flux control. The fixed-shell identity separates
-tail dissipation from nonlinear replenishment, and the proof package organizes
-the remaining work into ESS localization, Abel-defect bookkeeping,
-near-diagonal stationarity, support-richness transfer, defect-from-critical
-coercivity, depletion, scale monotonicity, and CKN/BKM closure. The theorem is
-a reduction theorem: if the named `A1-A9` package supplies a uniform
-high-tail domination estimate at the dynamically selected danger shell, then
-the continuation criteria preclude finite-time blowup.
+This manuscript records the current proof-critical Navier–Stokes reduction in
+DASHI.  The live route is no longer organized primarily around the June
+`A1-A9` ESS/Abel-defect programme.  The shortest currently constructed
+same-object chain runs through the literal periodic Galerkin carrier, signed
+helical commutator geometry, the direct companion of the literal `R406`
+remainder, and the cutoff-uniform spacetime interface
+`CommutatorOnlySpacetimeBudget568`.
 
-The paper should be read as a candidate proof package, internally
-DASHI/Agda-receipted where stated, pending independent peer review, external
-authority review, and the applicable Clay Mathematics Institute eligibility
-procedures. Its live frontiers are the quantitative `A1/A3` Abel-stationarity
-package and the uniform `A4` physical-to-Fourier support-richness transfer,
-not a claim that the Clay problem is already settled.
+The downstream compiler is already source-written: a paid R568 budget, together
+with the explicitly separated standard temporal/order receipts, is consumed by
+R572 to build the pre-existing R503 direct-off-diagonal/R415 budget surface.
+The direct companion `C_direct` is therefore constructed; what is not yet
+constructed is its required cutoff-uniform analytic payment.  The present paper
+is consequently a conditional reduction manuscript, not an unconditional
+Clay/global-regularity claim.
 
-## 1. Introduction and main theorem
+A second local frontier remains visible inside the historical comparable-class
+route: the same-output between-partner Gram debt.  We call the current physical
+anti-alignment/separation producer search **P3**.  P3 is not silently identified
+with the single-cell R176 low-output theorem.  The same-output payment and R568
+spacetime producer remain open unless the authoritative source state changes.
 
-This paper isolates the current analytic Navier-Stokes route in DASHI without
-the old cross-domain unification framing. The governing question is whether a
-finite-time blowup can be excluded by proving that the high-frequency tail
-dissipates faster than nonlinear flux can replenish it. The current repository
-already supports the fixed-shell identity
+The June `A1-A9` route is retained below as a historical/alternative strategy.
+It was a serious earlier reduction attempt with theorem-bearing infrastructure,
+not a strawman.  It ceased to be the primary Paper-1 organization because it no
+longer matches the shortest same-object/direct-companion proof spine.
+
+## 1. Main theorem, claim boundary, and live cutset
+
+The principal live analytic interface is
+
+```text
+DASHI/Physics/Closure/NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact.agda
+  CommutatorOnlySpacetimeBudget568
+```
+
+For a literal physical NS Galerkin trajectory `T` and supported cutoff
+trajectory `R`, R568 asks for a cutoff-independent bound on four times the
+spacetime integral of the global signed forcing/commutator full square.
+Schematically,
+
+```math
+4\int_0^T \mathrm{globalForcingFull}(N,t)\,dt \le B(T)
+```
+
+uniformly in the cutoff `N`.
+
+The main theorem of this draft is therefore deliberately conditional.
+
+> **Theorem 1.1 (modern direct-companion reduction, conditional).**  Assume the
+> standard temporal/order receipts isolated by the direct leaf-A compiler and
+> assume an inhabitant of `CommutatorOnlySpacetimeBudget568` on the literal
+> periodic Galerkin trajectory.  Then the existing R572 compiler constructs the
+> pre-existing R503 `DirectOffDiagonalBudget`, which feeds the existing signed
+> R415/critical-barrier consumer chain.  The theorem does not assert that the
+> R568 producer itself is proved.
+
+The causal status is:
+
+```text
+C_direct                            constructed
+R568 / CommutatorOnlySpacetimeBudget568   live analytic producer, open
+R572                                compiler, constructed given receipts
+R503                                downstream compiler/consumer surface constructed
+R503 direct off-diagonal payment   open until a producer inhabits it
+Clay/global regularity             not promoted
+```
+
+This distinction is load-bearing.  `C_direct` is not the missing object.  R572
+is not a new PDE estimate.  R503 is not evidence that R568 has been paid.
+
+## 2. Literal periodic finite-dimensional carrier
+
+The modern route is formulated first on the exact finite periodic Galerkin
+carrier.  Fourier modes live on the repository's integer lattice; physical
+triad incidence fixes literal resonances and output fibres; Leray projection
+and helical projectors are represented in the same finite carrier; and the
+trajectory owners retain the literal projected dynamics required by R406 and
+the later direct-companion chain.
+
+The helical infrastructure uses the periodic curl symbol
+
+```math
+\widehat{\operatorname{curl}u}(k)=i\,k\times\widehat u(k)
+```
+
+and the exact eigenvalue convention
+
+```math
+\lambda_+(k)=|k|,\qquad \lambda_-(k)=-|k|.
+```
+
+The finite algebra, incidence identities, swap laws, and same-object vector
+identities should be read as internal theorem-bearing structure where their
+owners provide proofs.  Standard continuum/Haar/Bochner, limiting, or imported
+analytic authority remains separately classified and is not smuggled into the
+finite carrier by notation.
+
+## 3. Signed commutator and helical construction
+
+The modern cancellation-first route preserves sign and phase before positive
+majorization.  R571 expands the raw inner physical interaction into the four
+helicity channels
+
+```math
+M_{\sigma\tau}
+=
+(\lambda_\tau(q)-\lambda_\sigma(p))
+P_k(u_p^\sigma\times u_q^\tau),
+```
+
+with no estimate in the identity itself.  The surrounding R573/R574 owners
+attach those exact channels to the modern weighted/raw directional carrier and
+pay the single-channel low-output magnitude estimate.  R575 then shows that
+the four positive channel majorants collapse to raw modal mass without an
+extra factor four at the majorant level.
+
+The positive four-channel recombination and generic Gram residual reductions
+in R576/R577 remain valid fallbacks.  They are not automatically the
+highest-alpha producer because they deliberately discard some signed
+cancellation structure.
+
+Several older theorem families remain important donors:
+
+- the July signed multiplier-difference commutator lane;
+- early-August centered first/second-moment identities;
+- the six-three scale arithmetic;
+- R127/R128 radial/square-gap and Plücker geometry;
+- R172-R178 raw-curl dual-defect and low-output estimates.
+
+Those are retained as ancestry and reusable mathematics, not rewritten as if
+they were discovered only by the later R57x normal form.
+
+## 4. Same-output Gram/covariance obstruction
+
+The historical block route identifies the residual much more precisely than the
+phrase "Gram problem" suggests.
+
+```text
+R179/R180   exact polarization and signed Gram ledger
+R181        partner-first compression
+R201        law of total Gram / covariance
+R205        literal localized comparable partner cells
+R206        localized compressed Gram frontier
+R207        same-output carrier
+R208        outer Fourier L2 carrier
+R209        outputwise Gram telescope
+R211        quantitative residual-payment consumer socket
+R214        constant-band localization no-go / negative control
+```
+
+After partner compression, the exact obstruction is the same-output
+between-partner debt.  R207 correctly removes cross-output covariance from the
+problem because distinct Fourier outputs are combined in the outer Fourier
+`L^2` sum.  R209 telescopes the remaining same-output debt over outputs, and
+R211 states the exact backward-facing payment socket
+
+```math
+D_{CC}\le R_{CC}
+\quad\Longrightarrow\quad
+Q_{CC}\le M_{CC}+R_{CC}.
+```
+
+R214 is a negative control.  It proves that even zero-width shell localization
+is compatible with strictly positive aligned Gram debt.  It therefore refutes
+"constant shell width alone pays covariance"; it does not refute every
+signed-resolvent, Schur, Cotlar-Stein, or physical anti-alignment producer.
+
+The active PR #890 compressed partner-difference/PSD adapter belongs at this
+level.  It may be cited as an active construction experiment, but it is not a
+completed producer until its physical separation theorem and corresponding
+certification state close.
+
+## 5. P3: physical same-output separation producer frontier
+
+Let the fixed-output compressed physical partner cells be `B_alpha`.  The exact
+complete-graph polarization identity can be written in the useful polarity
+
+```math
+\boxed{
+\mathrm{Debt}
+=
+(n-1)\sum_\alpha\|B_\alpha\|^2
+-
+\sum_{\alpha<\beta}\|B_\alpha-B_\beta\|^2 .
+}
+```
+
+Thus positive same-output Gram debt is paid by **lower** control on physical
+pairwise separation, not by another upper bound on a single cell.  The P3
+producer problem is to prove enough anti-alignment/separation on the literal
+same-output cells to obtain a cutoff-uniform R211 residual budget.
+
+The current proof-search order is:
+
+1. expand the literal compressed partner difference through exact raw-curl /
+   BAC-CAB algebra;
+2. expose magnitude/radial and direction/helicity separation coordinates;
+3. reuse R127/R128 radial plus Plücker geometry where it is genuinely the same
+   physical coordinate;
+4. reuse R176 dual-defect geometry only at its valid intra-incidence level;
+5. apply centered/Taylor/second-moment machinery after physical separation is
+   exposed;
+6. use six-three scale aggregation only after the correct scalar defect exists.
+
+The paper explicitly does **not** claim
+
+```math
+B_\alpha-B_\beta = \text{one R176 raw directional cell}
+```
+
+for arbitrary inter-partner pairs.  R176 pays intra-incidence geometry; P3 is
+an inter-partner/fixed-output separation problem.
+
+## 6. Weighted/nested commutator and full-square normal form
+
+The modern weighted route preserves the signed commutator before applying
+positive envelopes.  R294 proves the swap-invariant weighted mixed-commutator
+collapse.  R545 then performs the spectator factorization, and R567 reduces
+the live normal form to one forcing full square after the exact transpose and
+amplitude identifications.  R568 names the resulting cutoff-uniform spacetime
+producer.
+
+Schematic proof flow:
+
+```text
+weighted signed commutator
+  -> fixed spectator fold
+  -> complete ordered/full-square carrier
+  -> one forcing full square
+  -> R568 cutoff-uniform spacetime producer
+```
+
+The nested Schur route and R575/R576/R577 positive reductions remain useful
+fallback compilers/donors.  Their existence does not turn the direct signed
+producer into a solved theorem.
+
+## 7. Direct companion and the literal R406 same-object lineage
+
+The modern manuscript makes the same-object remainder genealogy central.
+Representative owners include
+
+```text
+NSTriadKNOneCancellationPaysRemainderAndCriticalRound414Exact.agda
+NSTriadKNDirectResolventIntegratedCompanionRound500Exact.agda
+NSTriadKNDirectResolventSignedCrossToR415Round503Exact.agda
+NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact.agda
+```
+
+The direct route proves that the literal R406 remainder integral is the same
+quantity consumed by the direct companion, with the exact factor four carried
+through the compiler.  In the notation used throughout the archaeology,
+
+```math
+F_N^{R104}
+\equiv
+\int_0^T R406(N,t)\,dt
+\equiv
+4\,C_{\rm direct}^{\rm integrated}(N,T).
+```
+
+The precise lesson is
+
+```text
+C_direct constructed != C_direct uniformly paid.
+```
+
+The construction/same-object weld is not the analytic R568 estimate.
+
+## 8. Terminal compiler chain
+
+Once the live producer is paid, the downstream route is already explicit:
+
+```text
+CommutatorOnlySpacetimeBudget568
+  -> NSTriadKNDirectLeafACompilerRound572Exact
+  -> R503.DirectOffDiagonalBudget
+  -> existing R415 / critical-barrier consumer
+```
+
+R572 is a compiler.  Its source explicitly requires the R568 commutator budget
+and standard temporal/order receipts, then constructs the pre-existing R503
+budget.  It introduces no replacement R406 observable and no parallel leaf-A
+consumer.
+
+The nested Schur/R577 branch is retained as a fallback compiler route.  It is
+not promoted over the direct route merely because it has a different interface.
+
+## 9. MathematicalStatus, StatementStatus, and CertificationStatus
+
+The paper uses three independent status coordinates.
+
+- **MathematicalStatus**: what theorem/identity/conditional implication is
+  actually source-written.
+- **StatementStatus**: whether the manuscript/interface states the current
+  theorem boundary accurately.
+- **CertificationStatus**: whether a validation root exists, whether a workflow
+  targets it, and whether an observed commit-specific Agda success receipt has
+  actually been recovered.
+
+A configured workflow is not itself a kernel receipt.
+
+| owner / tranche | role | MathematicalStatus | StatementStatus | CertificationStatus |
+| --- | --- | --- | --- | --- |
+| R101-R132 selected frontiers | early physical/commutator milestones | theorem-bearing selected roots | historical support | validation roots/workflow targets exist for many selected milestones; commit-specific receipts vary |
+| R185 | three-class Gram reduction | constructed reduction; Package A still open | retained predecessor | validation root/workflow target recorded; head-specific receipt not assumed here |
+| R193 | complete dynamic/external-cell frontier | constructed source chain; terminal promotion false | retained predecessor | cumulative validation root/workflow target recorded; head-specific receipt not assumed here |
+| R200-R202 | homogeneity-correct quartic frontier / Gram residual API | constructed reduction interfaces; residual payment open | historical modern-predecessor support | focused workflow targets recorded; PR #627 head-specific Agda success receipt not recovered |
+| R207/R209/R211 | same-output debt carrier/telescope/payment socket | exact debt identity and consumer socket constructed; payment open | current P3 support | source-written; dedicated Paper-1 interface certification added separately by this migration |
+| R214 | constant-band no-go | negative control proved | current negative control | source-written; no extra promotion inferred |
+| R500 | integrated direct companion | same-object weld closed modulo explicit integration authority | current canonical spine | certification tracked independently of statement status |
+| R503 | direct companion -> R415 compiler | compiler constructed; direct budget itself still open | current canonical spine | certification tracked independently of statement status |
+| R568 | live commutator-only spacetime leaf | interface constructed; producer payment open | **live analytic cutset** | no kernel-clean producer receipt can exist until an inhabitant is source-written |
+| R572 | direct leaf-A compiler | constructed given listed receipts | current canonical compiler | workflow/source status does not constitute R568 proof |
+
+This table is intentionally conservative.  Later validation work may upgrade a
+`CertificationStatus` without changing the underlying mathematical theorem.
+Conversely, citation or prose cannot upgrade either mathematics or
+certification.
+
+## Historical/alternative A1-A9 route
+
+### Historical context
+
+The original live Paper-1 draft was dated `2026-06-09` and titled
+*Navier-Stokes Blowup Reduction Through Tail Flux Control*.  It organized the
+argument as the `A1-A9` ESS/Abel-defect/tail-flux route.  Its governing seam was
 
 ```text
 d/dt E_{>K}(t) = -D_{>K}(t) + F_{>K}(t),
+theta(K,t) = |F_{>K}(t)| / D_{>K}(t),
 ```
 
-with the seam variable
-
-```text
-theta(K,t) = |F_{>K}(t)| / D_{>K}(t)
-```
-
-defined whenever `D_{>K}(t) > 0`. The paper therefore treats blowup exclusion
-as a tail-flux domination problem rather than as a constructive-unification
+and it treated blowup exclusion as a dynamically selected high-tail domination
 problem.
 
-The seam variable `theta(K,t)` remains the compact way to name where the ESS
-localization strategy has to win: the argument must identify a shell window in
-which the tail flux is genuinely near-critical and then show that the support
-geometry and depletion mechanism still force dissipation to dominate there.
+### Original conditional theorem
 
-The main theorem stated here is a reduction theorem, not a Clay claim.
+The June paper stated, in substance:
 
-> **Theorem 1.1 (analytic blowup reduction).** Let `u` be a smooth Leray-Hopf
-> solution on its maximal interval of existence, and assume the shell package
-> developed in Sections 3-6: ESS localization, Abel defect control,
-> near-diagonal stationarity, support-geometry richness, leakage reduction,
-> depletion, and scale monotonicity. If these hypotheses yield a uniform
-> high-tail domination estimate `theta(K_*,t) <= 1 - eta` at a dynamically
-> selected danger shell `K_*`, with constants compatible with the radii and
-> smallness thresholds fixed in Sections 4-6, then the BKM/CKN continuation
-> mechanism closes and finite-time blowup is excluded.
+> Let `u` be a smooth Leray-Hopf solution on its maximal interval and assume the
+> ESS localization, Abel defect control, near-diagonal stationarity,
+> support-geometry richness, leakage reduction, depletion, and scale
+> monotonicity package.  If these hypotheses produce a uniform high-tail
+> domination estimate `theta(K_*,t) <= 1-eta` at the dynamically selected danger
+> shell, then the downstream BKM/CKN continuation mechanism excludes finite-time
+> blowup.
 
-The theorem is deliberately conditional. What this draft contributes is a
-canonical reduction pipeline:
+That was explicitly a reduction theorem rather than a Clay claim.
 
-1. localize a blowup sequence into ESS shells;
-2. encode the unresolved nonlinear remainder as an Abel defect measure;
-3. force enough stationarity and support control near the danger shell;
-4. reduce leakage to a compatible smallness budget;
-5. convert depletion plus monotonicity into a continuation contradiction.
+### What remained open in that route
 
-The current Clay-blocking frontier is also sharp. The coupled `A1/A3` problem
-is the live mathematical wall: one must construct the Abel-weighted triadic
-defect measure with quantitative compactness and simultaneously prove a
-quantitative near-stationarity rate strong enough to close the bootstrap. The
-next independent hard theorem is `A4`, the quantitative Lei-Ren-Tian transfer
-from physical angular richness to Fourier output-support richness with a
-uniform constant across the Type-I rescaling family. Assertions `A5-A9` are
-then downstream of those two fronts rather than separate mystery steps.
+The live June frontiers were the coupled `A1/A3` quantitative
+localization/stationarity package and the independent `A4` physical-to-Fourier
+support-richness transfer.  In particular, the draft distinguished compactness
+or theorem-shape inputs from the stronger quantitative rates actually required
+by its Abel-weighted bootstrap.  Candidate rates and constant tables were
+recorded as targets, not silently promoted theorem inputs.
 
-The manuscript should also be read with one further caution. There are now
-several plausible candidate closure routes for `A1/A3` and `A4` inside the
-repo notes, including Seregin-rate, coarea, and multiscale Abel-summation
-packages. Those routes are useful because they isolate where the proof burden
-would have to land, but they are not promoted here as finished theorem inputs
-unless the imported quantitative exponents and uniform constants have already
-been justified in the exact form this paper consumes.
+### Why it is no longer the primary Paper-1 organization
 
-In particular, the current repo state now carries a concrete candidate package
-for `A1.1-A3.4` with explicit constants and rates. Those values are recorded
-in Appendix B as a candidate constant table rather than as theorem input. They
-are a named target for the `A1/A3` acceptance question and are not silently
-promoted here to theorem status.
+The route was not discarded because it was fraudulent or useless.  It was
+superseded as the **primary manuscript spine** because later construction
+archaeology produced a shorter same-object route from the literal R406
+remainder through the direct companion to a single live R568 spacetime budget,
+followed by the already-existing R572/R503 compiler chain.
 
-Accordingly, the remaining burden in this manuscript should not be described as
-missing theorem-shape grammar. The theorem package is explicit. What remains is
-the fail-closed promotion question: whether the candidate `CKN + ESS + LRT +
-A1/A3 + A4 + A5-A9` packet is accepted in the exact normed and constant-level
-form consumed by the reduction.
+The A1-A9 programme remains valuable as:
 
-At theorem resolution, the live `A1/A3` checklist is:
-`A1.1` bounded Abel-weighted defect mass,
-`A1.2` weak-* compactness,
-`A1.3` shell-tail control,
-`A3.1` an energy ODE for `W_r = U_r - U_infinity`,
-`A3.2` a quantitative Seregin/ESS rate intake,
-`A3.3` a rate `delta_r -> 0`,
-and `A3.4` a multiscale Abel-summation closure with no hidden exponent loss.
-The live `A4` checklist is:
-direction-map regularity,
-Jacobian lower bound,
-coarea propagation,
-strip-hitting richness,
-and a uniform constant across the Type-I rescaling family.
+- historical provenance for the original Paper-1 attempt;
+- a source of diagnostics and alternative reductions;
+- a record of what ESS/Abel/support-richness assumptions would have needed to
+  pay;
+- a negative-control comparison against the later direct same-object route.
 
-For the abstract closure grammar governing how this reduction fits into the
-larger corpus, see Paper 8, *Closure Grammar, Jordan-von Neumann Recovery, and
-Controlled Consumers*. Paper 1 does not rely on Paper 8 for its analytic proof
-steps, but it does inherit the same claim-boundary discipline.
+The Round62 Com/Schur paper interface is retained for the same reason: it
+contains theorem-bearing intermediate reductions and falsifiers, but it is no
+longer the canonical Paper-1 producer surface.
 
-**Formal status box.** This is a candidate analytic reduction manuscript. The
-external inputs are load-bearing and named explicitly: `LerayHopf` supplies the
-weak-solution and energy-inequality framework, `CoifmanMeyer` supplies the
-paraproduct bookkeeping used to isolate near-diagonal shell interactions,
-`CKN` supplies the epsilon-regularity closure surface, and `BKM` supplies the
-continuation criterion. The proposed `A4` intake is `LeiRenTian2025`, consumed
-only as a candidate geometric route from physical angular richness toward the
-Fourier output-support richness required downstream. The internal DASHI
-receipts track theorem-interface anchors and terminal false guards. The
-diagnostic surfaces identify exactly where `A1/A3` and `A4` still need
-accepted quantitative constants. No global regularity theorem or Clay
-resolution is asserted.
+### Legacy publication-readiness compatibility vocabulary
 
-The historical theta or danger-shell diagnostics remain relevant as obstruction
-guidance, but they appear here only as appendix-level context for why the tail
-route is natural.
+This paragraph exists only so the older publication-readiness automation can
+continue to recognize the June route after the canonical migration.  Every
+marker in it is historical, not a statement of the current live frontier.
 
-## 2. Analytic setup and blowup reduction
+At the time, **A1 A3** was described as the **live mathematical wall**; the
+**Abel weighted triadic** defect and quantitative **stationarity** problem were
+its main terms.  **A4** contained the independent **actual theorem walls** for
+support transfer, with **CKN BKM** and **global regularity** only downstream.
+The source/intake vocabulary included `Seregin2012`, `ESS2003`, the `Type-I`
+rescaling/`ancient`-solution setting, and `L^{3,\infty}`.  `A3.2` was the
+Seregin/ESS intake; the `A3.3` rate `r^(1/12)` was a target, **not derived** and
+not promoted.  The old **Route compatibility** note kept the `Sprint164`
+microlocal route **separate** from the `tail-flux` / `Abel` route.
 
-Fix a Leray-Hopf solution `u` on `R^3 x [0,T)` and a Littlewood-Paley
-decomposition `u = sum_j Delta_j u`. For a shell cutoff `K`, define the tail
-energy and dissipation
+### Historical claim firewall
+
+Nothing in this migration retroactively declares the June route proved or
+failed in a stronger sense than its own source state supported.  Its unresolved
+frontiers remain unresolved historical facts.  Later published or internal
+results receive their own mathematical credit; earlier DASHI objects receive
+only the ancestry/priority statement supported by their dated source.  Citation
+does not import proof or certification.
+
+## Current roadmap
+
+The proof-search order associated with this manuscript is now:
 
 ```text
-E_{>K}(t) = sum_{j>K} ||Delta_j u(t)||_2^2,
-D_{>K}(t) = nu sum_{j>K} 2^{2j} ||Delta_j u(t)||_2^2.
+P3 fixed-output compressed-partner physical separation
+  -> R211 same-output residual payment
+  -> shortest same-object transplant into the modern weighted/direct route
+  -> R568 cutoff-uniform commutator-only spacetime producer
+  -> R572 compiler
+  -> R503/R415 critical-barrier consumer
 ```
 
-The fixed-cutoff identity from the current NS target file gives the exact
-bookkeeping surface:
-
-```text
-d/dt E_{>K} = -D_{>K} + F_{>K}.
-```
-
-If `|F_{>K}| <= (1-eta) D_{>K}` with `eta>0`, then the tail energy decays and
-the chosen shell lies on the dissipative side of the seam. The analytic problem
-is therefore to make this domination statement non-circular at a shell selected
-from the dynamics rather than from hindsight.
-
-Assume toward contradiction that `T<infinity` is a first singular time. The
-standard CKN/BKM reduction says it is enough to preclude a critical
-concentration scenario in which energy, vorticity, or enstrophy remain
-compatible with Leray control at coarse scales while a high shell or short
-parabolic cylinder carries the defect. This paper packages that contradiction
-route into assertions `A1` through `A9`. Assertions `A1-A3` identify the
-dangerous shell geometry and stationarity package; `A4-A6` trap the defect
-near sufficiently rich supports; `A7-A8` turn that geometry into depletion and
-monotonicity; `A9` feeds the resulting gain into the continuation criterion.
-
-The numbering is now used consistently: `A1` denotes ESS shell localization,
-`A2` denotes Abel defect-measure construction, and `A3` denotes the
-near-diagonal stationarity bootstrap. The live ladder therefore runs
-`A1-A9`, with `A1/A3` naming the coupled localization-stationarity frontier.
-
-## 3. A1-A3: ESS, shells, Abel defect measure, near-diagonal stationarity
-
-The first stage is an ESS reduction: replace a diffuse blowup scenario by one
-that is concentrated on an essentially singular sequence of shells and times.
-The selected shell `K_*(t)` is not defined by a moving theorem-proof shortcut.
-It is a danger-shell locator tied to the maximal stress of the tail-flux to
-dissipation ratio, subject to the proviso that low-shell artefacts do not count
-as dissipative-tail witnesses.
-
-Assertion `A1` is the shell localization principle. It says that any candidate
-blowup sequence admits a subsequence for which the dominant defect is seen at a
-bounded-width shell window around `K_*`. This is the manuscript version of the
-runtime insight that the obstruction must be high-high and near-seam rather
-than low-high.
-
-Assertion `A2` introduces the Abel defect measure. Instead of pretending that
-the nonlinear remainder is already absorbed, we record it as a signed defect
-object whose near-diagonal part is the only component allowed to survive into
-the later contradiction argument. Assertion `A3` is the near-diagonal
-stationarity bootstrap: after passing to the ESS subsequence, the shell
-interactions feeding the defect do not drift arbitrarily far from `K_*`; they
-remain trapped in a thin cone around the diagonal `|j-k| <= c_0`.
-
-This is the point at which Coifman-Meyer style paraproduct bookkeeping enters:
-it identifies which commutator or bilinear pieces are truly dangerous and which
-are perturbative once the shell window is fixed. The point is not yet a closed
-estimate. The point is a reduction of the entire nonlinear obstruction to a
-small class of near-diagonal defect interactions.
-
-> **Proposition 3.1 (output of `A1-A3`).** After passing to the ESS subsequence
-> and fixing the danger shell `K_*`, the blowup obstruction is reduced to a
-> bounded-width shell window carrying an Abel defect measure whose surviving
-> interactions are near-diagonal and stationary in the sense required for the
-> support-geometry argument of Sections 4-6.
-
-In sum, `A1-A3` yield a controlled shell window and defect measure from which
-Sections 4-6 will extract support geometry.
-
-What is not claimed here is that the ESS package already closes. The unresolved
-mathematics is the quantitative part of the `A1/A3` package: enough compactness
-to produce a true Abel defect object and enough stationarity to make its
-near-diagonal component usable in the later support argument.
-
-More precisely, the remaining burden is not just "some fixed-point argument."
-The manuscript needs a quantitative rate package whose natural norm is stable
-under the Abel-weighted multiscale summation used later in `A6-A8`. Candidate
-Gronwall or dyadic-improvement maps are informative only if they really close
-on that normed space and really consume the imported `CKN` / `Type-I` /
-Seregin exponents without hidden losses.
-
-In particular, the current candidate imported verification task is not merely
-"some epsilon-regularity." It is an exact Seregin/ESS-style rate in the norm
-used by the Abel bootstrap. Until that intake is fixed in the required form,
-the manuscript treats even attractive candidate rates as diagnostic guidance
-rather than promoted theorem inputs.
-
-For submission purposes the external intake is therefore stated in the
-following fail-closed form. By the Seregin/ESS Type-I compactness theorem
-(`Seregin2012`, building on `ESS2003`), every Type-I blowup rescaling sequence
-with the critical `L^{3,\infty}` control admits a subsequence converging in
-`L^2_loc` to an ancient `L^{3,\infty}` solution `W_infinity`, with the same
-critical bound up to the constants of the theorem. This paper consumes that
-statement only as the compactness part of `A3.2`. The stronger
-Abel-bootstrap assertion needed here is the normed and quantitative target
-
-```text
-delta_r = || W_r - W_infinity ||_Abel = O(r^(1/12)),
-```
-
-after passage to the relevant subsequence. The displayed rate is a named
-`A3.3` target and is not derived from Seregin/ESS in this draft. The
-downstream `A3.4` Abel summation must still prove that this target survives the
-multiscale Abel-weighted norm without hidden exponent loss.
-
-**Route compatibility note.** This paper develops the tail-flux /
-Abel-defect route `A1-A9`. A separate microlocal route through pressure
-commutator estimates near the stretching surface `Sigma` is recorded in the
-Sprint164 boundary surfaces. The two routes are independent reduction
-strategies. They would become equivalent only after proving a bridge from
-Abel-defect stationarity near `K_*` to microlocal alignment near `Sigma`, or
-the converse. No such bridge is claimed here; this manuscript keeps the
-tail-flux/Abel route and the Sprint164 microlocal route separate.
-
-## 4. A4-A6: support geometry, richness, defect-from-critical coercivity
-
-The next stage replaces shell bookkeeping alone by physical-space support
-geometry. Assertion `A4` selects parabolic cylinders or annular supports on
-which the defect mass is nontrivial but quantitatively localized. Assertion
-`A5` is a richness statement: the support cannot degenerate to a set too thin
-to interact with the dissipation mechanism. Assertion `A6` then converts this
-richness into defect-from-critical coercivity: the near-diagonal nonlinear
-production may remain positive, but after Abel averaging, transport control,
-and commutator bookkeeping it must lose a fixed fraction of the critical
-tail-flux budget. This is weaker and safer than a pointwise negative stretching
-claim; it asks only that the localized defect cannot retain full critical
-strength once the `A4-A5` support geometry is imposed.
-
-The manuscript needs this section because shell domination alone cannot exclude
-edge inflow or critical near-diagonal recirculation. The support geometry
-creates a second ledger, independent of the Littlewood-Paley identity, that
-tracks how much defect can leak into or out of the danger region and how much
-of the remaining near-diagonal defect must be spent against the coercive
-reserve. The intended conclusion is that after fixing radii `r_4 < r_6` and
-smallness thresholds `eps_4`, `eps_6`, one has enough slack to replace the raw
-flux term by an effective interior flux plus a leakage/coercivity error that is
-strictly smaller than the dissipation reserve carried forward to `A7-A8`.
-
-> **Proposition 4.1 (constants compatibility, first pass).**
-Choose radii and thresholds so that
-
-```text
-0 < r_4 < r_6 < r_7 < r_8 < r_9,
-0 < eps_9 << eps_8 << eps_7 << eps_6 << eps_4 << 1,
-```
-
-and require the leakage error at scale `r_6` to be at most `eps_6 D_{>K_*}`
-while the richness lower bound at scale `r_4` contributes at least
-`4 eps_6 D_{>K_*}`. Then the support-geometric gain leaves a factor of `3`
-slack before depletion is used. The exact numeric values are not canonical, but
-the inequalities are jointly satisfiable because the support radii are ordered
-strictly and the smallness parameters are nested rather than competing at the
-same scale.
-
-In sum, `A4-A6` convert near-diagonal defect control into a leakage-aware,
-defect-from-critical coercivity statement with explicit room left for the later
-depletion and closure steps.
-
-The theorem-sized obstruction in this section is the quantitative `A4`
-transfer itself. The manuscript needs a uniform physical-to-Fourier output
-richness constant across the Type-I rescaling family; without that, the
-constants ladder of Propositions 4.1 and 5.1 has no honest geometric source.
-
-The current candidate route runs through the geometric obstruction suggested by
-`LeiRenTian2025`, then direction-map regularity, coarea, and Whitney/Jacobian
-control. The specific theorem needed here is not merely qualitative vorticity
-direction non-concentration. It is a quantitative, Type-I-uniform transfer from
-physical angular richness to Fourier output-support richness in the exact norm
-used by `A5-A6`. What remains mathematically live is the passage from those
-local ingredients to that uniform lower bound.
-
-The sharpened candidate package is likewise explicit: a direction-map
-regularity bound, a Jacobian lower bound, a coarea lower bound, strip-hitting
-richness, and a uniform constant across the rescaling family. This paper uses
-that package only as a named target until the constants are accepted in the
-exact theorem form required downstream.
-
-The downstream route is now equally explicit at theorem grammar level. The
-current repo records a candidate `A5-A9` package with the following shape:
-`A5` kappa-bias vanishing from asymptotic stationarity and A4 richness,
-`A6` defect-from-critical coercivity through pointwise-to-Abel transfer,
-leakage accounting, transport control, and commutator budgets,
-`A7` a Gronwall depletion threshold,
-`A8` a scale-monotonicity recursion,
-and `A9` the CKN/BKM contradiction.
-This sharpens the manuscript’s dependency story. It does not change the live
-frontier: the paper still treats `A1/A3` and `A4` as the actual theorem walls.
-
-## 5. A7-A8: depletion and scale monotonicity
-
-Assertion `A7` is the depletion step. Once the defect has been localized and
-the leakage reduced, the remaining nonlinear production must weaken as the flow
-enters the rich support region. Analytically this means the stretching or
-cascade term gains a multiplicative factor strictly below the naively critical
-value. The paper does not need to identify a unique depletion mechanism at this
-stage; it needs a theorem-sized statement that the localized defect cannot
-retain full critical strength across the ESS subsequence.
-
-Assertion `A8` is scale monotonicity. The required monotonic quantity can be a
-frequency-envelope budget, a rescaled defect mass, or a CKN-style density. The
-essential feature is monotone improvement from the `A4-A7` input scales toward
-the final continuation scale. This prevents the argument from winning at one
-radius only to lose the gain after rescaling.
-
-> **Proposition 5.1 (constants compatibility, full ladder).**
-Sections 4-6 use the same ordered radii
-
-```text
-r_4 < r_6 < r_7 < r_8 < r_9
-```
-
-and the same nested smallness ladder
-
-```text
-eps_9 << eps_8 << eps_7 << eps_6 << eps_4.
-```
-
-To make the ladder explicit, it is enough to impose the following compatible
-budget:
-
-1. `A4` richness yields at least `8 eps_6` of normalized slack.
-2. `A6` leakage consumes at most `2 eps_6`.
-3. `A7` depletion consumes at most `eps_7`, with `eps_7 <= eps_6`.
-4. `A8` monotonicity loses at most `eps_8`, with `eps_8 <= eps_7/2`.
-5. `A9` closure requires a final reserve `eps_9`, with `eps_9 <= eps_8/2`.
-
-Under these inequalities the retained reserve is at least
-
-```text
-8 eps_6 - 2 eps_6 - eps_7 - eps_8 - eps_9 >= 3 eps_6 > 0,
-```
-
-so the radii and smallness constraints are jointly satisfiable with explicit
-slack. This is the constants-compatibility point the draft must carry in prose:
-the later closure assumptions do not overconsume the gains created earlier.
-
-In sum, `A7-A8` preserve a positive quantitative reserve rather than a
-qualitative hope, so the continuation step can consume a real budget.
-
-The same information can be read as the constants table consumed by the final
-closure:
-
-| Stage | Input scale or parameter | Budget role |
-| --- | --- | --- |
-| `A4` support richness | `r_4`, `eps_4` | creates at least `8 eps_6` of normalized reserve |
-| `A6` defect-from-critical coercivity | `r_6`, `eps_6` | consumes at most `2 eps_6` through leakage, transport, and commutators |
-| `A7` depletion | `r_7`, `eps_7 <= eps_6` | consumes at most `eps_7` in the Gronwall step |
-| `A8` scale monotonicity | `r_8`, `eps_8 <= eps_7/2` | consumes at most `eps_8` while moving to the closure scale |
-| `A9` CKN/BKM closure | `r_9`, `eps_9 <= eps_8/2` | requires a final positive reserve |
-
-## 6. A9: CKN/BKM closure and contradiction
-
-Assertion `A9` converts the retained reserve into a continuation theorem. Once
-the defect budget remains strictly below dissipation at the final radius, the
-localized quantities entering either a CKN epsilon-regularity statement or a
-BKM continuation criterion become subcritical. The contradiction is then
-standard in form: a first singular time cannot exist if every ESS blowup
-subsequence yields a strictly improving high-tail budget.
-
-What remains open is precisely what the current diagnostics already indicate:
-the nontrivial issue is not low-high transfer but the genuinely near-diagonal
-high-high obstruction. This draft therefore presents Paper 1 as an analytic
-reduction manuscript with a sharp frontier, not as a proof of global
-regularity.
-
-In sum, `A9` closes the reduction theorem by converting the retained reserve
-into the CKN/BKM contradiction promised in Theorem 1.1.
-
-## Appendix A. Historical obstruction context
-
-The older theta and danger-shell diagnostics remain useful as historical
-evidence that the obstruction sits at the high-high seam. They are not used
-here as proof certificates. Their role is to justify why the present paper
-prioritizes ESS localization, Abel-defect bookkeeping, and leakage-aware
-closure rather than a tail-only numerical threshold.
-
-## Appendix B. Candidate constant table
-
-The following values are diagnostic targets for the `A1/A3` acceptance
-question. They satisfy the ladder shape of Proposition 5.1, but they are not
-promoted as theorem inputs until the associated compactness, Seregin/ESS rate,
-and Abel-summation estimates are accepted in the exact norm consumed by the
-reduction.
-
-| Candidate item | Candidate value or role | Promotion boundary |
-| --- | --- | --- |
-| ESS/Seregin intake | `epsilon = 1/6` | candidate rate intake only; not an accepted theorem input here |
-| Stationarity rate | `delta_r = O(r^(1/12))` | target rate for `A3.3`; must survive the Abel-weighted norm |
-| Abel summation | explicit multiscale constants | must close `A3.4` without hidden exponent loss |
-| Constants ladder | compatible with `eps_9 << eps_8 << eps_7 << eps_6 << eps_4` | diagnostic compatibility with Proposition 5.1, not a proof of `A1/A3` |
-
-## Appendix C. Formal-support appendix
-
-The paper-facing theorem-variable manifest is generated by
-`scripts/generate_paper_proof_manifest.py` and recorded at
-`Docs/papers/generated/core_papers_theorem_var_manifest.md`. For Paper 1 it
-indexes the normalized theorem interface
-`DASHI/Papers/NavierStokes/TheoremInterface.agda`, including the `A6`, `A7`,
-`A8`, `A9`, final-status, and terminal false guard surfaces. The manifest is a
-formal-support index for the manuscript interfaces; it does not promote the
-analytic `A1/A3` and `A4` frontiers to accepted PDE theorems.
-
-## Appendix D. Claim boundary table
-
-| Proved in this paper | Assumed externally with citation | Explicitly left open |
-| --- | --- | --- |
-| The reduction theorem `A1-A9` is organized as a single analytic route from tail-flux domination to continuation closure. | Leray-Hopf existence theory (`LerayHopf`) supplies the solution framework. | Any unconditional proof that all `A1-A9` hypotheses hold for every 3D Navier-Stokes solution. |
-| Proposition 3.1 reduces the obstruction to a near-diagonal Abel-defect shell window. | Coifman-Meyer paraproduct technology (`CoifmanMeyer`) supplies the standard bilinear bookkeeping surface. | Quantitative Abel-defect-measure construction and the coupled `A1/A3` stationarity bootstrap in the exact norm consumed later. |
-| Proposition 4.1 proves compatibility of the support radii and leakage/coercivity thresholds once `A4-A6` are granted. | The candidate physical-to-Fourier richness route is routed through `LeiRenTian2025` only if upgraded to the exact quantitative theorem consumed here. | The uniform `A4` Lei-Ren-Tian output-support transfer constant across Type-I rescalings. |
-| Proposition 5.1 proves the full constants ladder is jointly satisfiable with explicit slack. | CKN epsilon regularity (`CKN`) and the Beale-Kato-Majda continuation criterion (`BKM`) are used for the final continuation contradiction. | Any global smoothness theorem for 3D Navier-Stokes or any claim of Clay resolution. |
+Broad archaeology is no longer a proof step.  Historical/certification audits
+should proceed from named unpaid fields, with failed and superseded routes kept
+visible as provenance.

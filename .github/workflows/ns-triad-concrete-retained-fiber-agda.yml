@@ -4,7 +4,11 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterface.agda'
+      - 'DASHI/Papers/NavierStokes/TheoremInterfaceValidation.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound1*.agda'
+      - 'Docs/papers/live/Paper1NavierStokesClayDraft.md'
+      - 'scripts/check_ns_paper_modern_proof_spine.py'
       - 'scripts/ns_triad_signed_frontier_lab.py'
       - 'scripts/check_ns_triad_completion_identities.py'
       - 'scripts/check_ns_triad_clay_frontier.py'
@@ -36,6 +40,9 @@ jobs:
 
       - name: Reject new frontier holes and postulates
         run: python3 scripts/check_ns_triad_clay_frontier.py
+
+      - name: Verify Paper 1 modern proof-spine source contract
+        run: python3 scripts/check_ns_paper_modern_proof_spine.py
 
       - name: Verify exact signed finite laboratory
         run: >-
@@ -220,3 +227,9 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound202Validation.agda
+
+      - name: Type-check canonical Paper 1 modern theorem interface
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Papers/NavierStokes/TheoremInterfaceValidation.agda
