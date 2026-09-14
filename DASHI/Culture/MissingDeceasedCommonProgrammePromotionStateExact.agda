@@ -80,3 +80,23 @@ searchResidualProvesNoCommonProgramme = false
 
 literalIdentifierSearchStateRetained : Bool
 literalIdentifierSearchStateRetained = true
+
+------------------------------------------------------------------------
+-- Current exact promotion gates, exposed for downstream schedulers.
+------------------------------------------------------------------------
+
+h2NeededCrossPersonSameProgrammeReceipts : Nat
+h2NeededCrossPersonSameProgrammeReceipts = 1
+
+h3NeededPreEventOperationalReceipts : Nat
+h3NeededPreEventOperationalReceipts = 1
+
+currentH2CrossPersonDeficit : Nat
+currentH2CrossPersonDeficit = 1
+
+currentH3OperationalDeficit : Nat
+currentH3OperationalDeficit = 1
+
+nextHighestAlphaPromotionSearch : String
+nextHighestAlphaPromotionSearch =
+  "first: inspect DAAH01-01-9-R001 SOW/closeout and pre-2013 AFRL Mondaloy programme records for a second retained person; second: inspect Amy NASA/Institute release object for AC Gravity/Army identifier reuse; third: search exact NUDT/JPL work-package IDs"
