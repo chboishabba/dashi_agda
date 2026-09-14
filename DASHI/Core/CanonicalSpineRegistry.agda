@@ -10,8 +10,10 @@ open import Agda.Builtin.String using (String)
 -- Canonical owner registry.
 --
 -- This is a checked repository-governance surface: new bridges should import
--- these owners instead of defining parallel trit, residual, MDL, ultrametric,
--- or reversible/dissipative vocabularies.
+-- these owners instead of defining parallel vocabularies when the required
+-- carrier already exists.  Registration names the owning theorem/interface;
+-- it does not claim every domain manifestation is definitionally identical.
+------------------------------------------------------------------------
 
 data ProofStatus : Set where
   provedFinite : ProofStatus
@@ -29,6 +31,10 @@ record CanonicalOwner : Set where
     parallelDefinitionAllowed : Bool
     parallelDefinitionAllowedIsFalse : parallelDefinitionAllowed ≡ false
 open CanonicalOwner public
+
+------------------------------------------------------------------------
+-- Historical multiscale spine.
+------------------------------------------------------------------------
 
 tritOwner : CanonicalOwner
 tritOwner = canonical-owner
@@ -90,6 +96,70 @@ continuumTargetOwner = canonical-owner
   "DASHI.Physics.DiscreteContinuumKernelTargets"
   openAnalyticTarget false refl
 
+------------------------------------------------------------------------
+-- Cross-domain structural spine validated by repeated independent consumers.
+------------------------------------------------------------------------
+
+factorisationOwner : CanonicalOwner
+factorisationOwner = canonical-owner
+  "consumer-relative factorisation, descent, sufficiency, and non-descent"
+  "DASHI.Core.ConsumerDescentMinimalObserverExact"
+  exactInterface false refl
+
+projectionFibreOwner : CanonicalOwner
+projectionFibreOwner = canonical-owner
+  "coarse/fine projection with retained relative-fine fibre and exact reopening"
+  "DASHI.Core.CoarseFineRelativeFibreExact"
+  exactInterface false refl
+
+consumerFibreRepairOwner : CanonicalOwner
+consumerFibreRepairOwner = canonical-owner
+  "consumer-relative collision repair by observer refinement"
+  "DASHI.Core.ConsumerFibreRepairExact"
+  exactInterface false refl
+
+candidateFamilyExecutionOwner : CanonicalOwner
+candidateFamilyExecutionOwner = canonical-owner
+  "selected candidate-family admissibility, composition, and independent global execution check"
+  "DASHI.Core.CandidateFamilyExecutionExact"
+  exactInterface false refl
+
+requirementConflictBatchOwner : CanonicalOwner
+requirementConflictBatchOwner = canonical-owner
+  "requirement-closed, conflict-free batch execution with independent global validity"
+  "DASHI.Core.RequirementConflictBatchExecutionExact"
+  exactInterface false refl
+
+localGlobalGluingOwner : CanonicalOwner
+localGlobalGluingOwner = canonical-owner
+  "compatible local family, gluing, global section, and exact restriction-back"
+  "DASHI.Foundations.StageValuationBundleAtlas"
+  exactInterface false refl
+
+candidateObjectIdentityOwner : CanonicalOwner
+candidateObjectIdentityOwner = canonical-owner
+  "graded candidate same-object identity and exact identity receipt"
+  "DASHI.Core.KnowledgeBoundaryCandidateIdentityBidiExact"
+  exactInterface false refl
+
+attributedSourceOwner : CanonicalOwner
+attributedSourceOwner = canonical-owner
+  "attributed source identity, DOI state, source role, visibility, and authority firewall"
+  "DASHI.Core.AttributedSourceCore"
+  exactInterface false refl
+
+appendOnlyRevisionOwner : CanonicalOwner
+appendOnlyRevisionOwner = canonical-owner
+  "append-only evidence history with non-monotone conclusion and residual revision"
+  "DASHI.Core.AppendOnlyEvidenceResidualRevisionExact"
+  exactInterface false refl
+
+genericReceiptOwner : CanonicalOwner
+genericReceiptOwner = canonical-owner
+  "generic non-promoting receipt metadata and list-level fail-closed receipt proof"
+  "DASHI.Core.GenericReceipt"
+  exactInterface false refl
+
 canonicalOwners : List CanonicalOwner
 canonicalOwners =
   tritOwner
@@ -102,6 +172,16 @@ canonicalOwners =
   ∷ kernelSplitOwner
   ∷ codingTargetOwner
   ∷ continuumTargetOwner
+  ∷ factorisationOwner
+  ∷ projectionFibreOwner
+  ∷ consumerFibreRepairOwner
+  ∷ candidateFamilyExecutionOwner
+  ∷ requirementConflictBatchOwner
+  ∷ localGlobalGluingOwner
+  ∷ candidateObjectIdentityOwner
+  ∷ attributedSourceOwner
+  ∷ appendOnlyRevisionOwner
+  ∷ genericReceiptOwner
   ∷ []
 
 record RepositoryClosureBoundary : Set where
@@ -109,13 +189,23 @@ record RepositoryClosureBoundary : Set where
   field
     canonicalOwnersRecorded : Bool
     canonicalOwnersRecordedIsTrue : canonicalOwnersRecorded ≡ true
+    crossDomainOwnersRecorded : Bool
+    crossDomainOwnersRecordedIsTrue : crossDomainOwnersRecorded ≡ true
     everythingCompileConfirmedHere : Bool
     everythingCompileConfirmedHereIsFalse : everythingCompileConfirmedHere ≡ false
     duplicateOwnersEliminatedAutomatically : Bool
     duplicateOwnersEliminatedAutomaticallyIsFalse :
       duplicateOwnersEliminatedAutomatically ≡ false
+    registryEntryMakesEveryDomainManifestationDefinitionallyIdentical : Bool
+    registryEntryMakesEveryDomainManifestationDefinitionallyIdenticalIsFalse :
+      registryEntryMakesEveryDomainManifestationDefinitionallyIdentical ≡ false
 open RepositoryClosureBoundary public
 
 canonicalRepositoryClosureBoundary : RepositoryClosureBoundary
 canonicalRepositoryClosureBoundary =
-  repository-closure-boundary true refl false refl false refl
+  repository-closure-boundary
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
