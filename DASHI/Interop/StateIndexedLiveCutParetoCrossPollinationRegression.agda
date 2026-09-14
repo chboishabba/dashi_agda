@@ -4,6 +4,8 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationExact as State
+import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 
 salienceIsLiveSetIndexedRegression :
   State.salienceIndexedByResidualAndLiveSet State.canonicalStateIndexedLiveCutParetoAdapter ≡ true
@@ -59,6 +61,33 @@ historicalEvidenceRetainedRegression :
 historicalEvidenceRetainedRegression =
   State.historicalEvidenceMayRemainValidWhileNextStepSalienceChangesIsTrue
     State.canonicalStateIndexedLiveCutParetoAdapter
+
+initialPortfolioCandidateEligibleRegression :
+  Pareto.Eligible
+    (State.asStateIndexedMDLProblem
+      Portfolio.toyPortfolio
+      Portfolio.chemistryUnresolved
+      Portfolio.mechanismConsumer
+      Portfolio.measurementAuthority)
+    Portfolio.chemistryProbe
+initialPortfolioCandidateEligibleRegression =
+  State.portfolioCandidateIsEligible Portfolio.initialChemistryCandidate
+
+laterPortfolioCandidateEligibleRegression :
+  Pareto.Eligible
+    (State.asStateIndexedMDLProblem
+      Portfolio.toyPortfolio
+      Portfolio.chemistryResolvedDownstreamLive
+      Portfolio.mechanismConsumer
+      Portfolio.measurementAuthority)
+    Portfolio.downstreamProbe
+laterPortfolioCandidateEligibleRegression =
+  State.portfolioCandidateIsEligible Portfolio.laterDownstreamCandidate
+
+eligibilityNoRouteAdmissionRegression :
+  State.stateIndexedEligibilityDoesNotCreateRouteAdmission ≡ true
+eligibilityNoRouteAdmissionRegression =
+  State.stateIndexedEligibilityDoesNotCreateRouteAdmissionIsTrue
 
 parentSnowballPaymentStillFailClosedRegression :
   State.parentSnowballPaymentMaySkipDependency ≡ false
