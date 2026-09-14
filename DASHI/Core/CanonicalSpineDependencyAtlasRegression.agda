@@ -8,6 +8,12 @@ import DASHI.Core.CanonicalSpineRegistry as Registry
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.CanonicalSpineDependencyAtlasExact as Atlas
 
+requiredAxisJoinRelation :
+  Atlas.CanonicalDependency
+    Registry.requiredObserverAxisJoinOwner
+    Registry.queryIndexedProjectionOwner
+requiredAxisJoinRelation = Atlas.requiredAxisJoinDependsOnQueryAdequacy
+
 boundedSearchRelation :
   Atlas.CanonicalDependency
     Registry.boundedNegativeSearchOwner
@@ -37,6 +43,10 @@ futureSafeDynamicRelation :
     Registry.queryIndexedFutureSafePromotionOwner
     Registry.frozenProvenanceDynamicOwner
 futureSafeDynamicRelation = Atlas.futureSafePromotionDependsOnFrozenDynamic
+
+requiredAxisJoinDependencyWitness :
+  Dependency.DependencyWitness Atlas.CanonicalDependency
+requiredAxisJoinDependencyWitness = Atlas.requiredAxisJoinDependencyWitness
 
 boundedSearchDependencyWitness :
   Dependency.DependencyWitness Atlas.CanonicalDependency
