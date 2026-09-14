@@ -38,6 +38,8 @@ import DASHI.Cognition.PNF.TerminalisationDefectRegression
 import DASHI.Cognition.PNF.CoarseFineStaticDynamicBridgeExact
 import DASHI.Cognition.PNF.CoarseFineStaticDynamicBridgeRegression
 
+import DASHI.Interop.FactorisationSpineCrossDomainAdapterExact
+import DASHI.Interop.FactorisationSpineCrossDomainAdapterRegression
 import DASHI.Interop.LocalGlobalBundleGluingExact
 import DASHI.Interop.LocalGlobalBundleGluingRegression
 import DASHI.Governance.LocalGlobalCouncilGluing
