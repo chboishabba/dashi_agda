@@ -99,3 +99,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConformation
 -- residual while preserving the NDim rule that extra axes are not automatic
 -- consumer improvement or a complete transition mechanism.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNDimGeometricResidualExact
+
+-- Four-corner structural reference continuation: 4AKE/1AKE plus 2AK3/1DVR
+-- instantiate open/open, closed/closed and the two mixed domain labels.  The
+-- mixed references are cross-homolog, so the square is explicitly blocked from
+-- promotion to same-sequence NMP/LID independence evidence.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMixedStateReferenceSquareExact
