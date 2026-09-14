@@ -48,7 +48,7 @@ record StateInstrumentParticipation : Set where
 open StateInstrumentParticipation public
 
 ------------------------------------------------------------------------
--- Exact projection defect:
+-- Exact projection defect I:
 -- being a party to a parent convention does not determine whether the same
 -- State is bound by a particular annexed protocol.
 ------------------------------------------------------------------------
@@ -147,6 +147,110 @@ parentAndProtocolStrictlyRefinesParentParty =
     protocolParticipationProjection
     parentPartyProtocolNotBound
     parentPartyProtocolBound
+    refl
+    (λ ())
+
+------------------------------------------------------------------------
+-- Exact projection defect II:
+-- even where the State is bound, applicability to a particular event still
+-- depends on an independent factual/legal context coordinate.
+------------------------------------------------------------------------
+
+data ApplicabilityWorld : Set where
+  boundStateEventOutsideScope : ApplicabilityWorld
+  boundStateEventInsideScope : ApplicabilityWorld
+
+data StateBindingSurface : Set where
+  sameBoundState : StateBindingSurface
+
+data EventContextSurface : Set where
+  eventOutsideInstrumentScope : EventContextSurface
+  eventInsideInstrumentScope : EventContextSurface
+
+data EventApplicabilityQuery : Set where
+  stateBindingQuery : EventApplicabilityQuery
+  eventApplicabilityQuery : EventApplicabilityQuery
+
+data EventApplicabilityAnswer : Set where
+  stateBoundObserved : EventApplicabilityAnswer
+  eventNotApplicable : EventApplicabilityAnswer
+  eventApplicable : EventApplicabilityAnswer
+
+stateBindingOnlyProjection : ApplicabilityWorld → StateBindingSurface
+stateBindingOnlyProjection world = sameBoundState
+
+eventContextProjection : ApplicabilityWorld → EventContextSurface
+eventContextProjection boundStateEventOutsideScope = eventOutsideInstrumentScope
+eventContextProjection boundStateEventInsideScope = eventInsideInstrumentScope
+
+eventApplicabilityAnswer :
+  EventApplicabilityQuery → ApplicabilityWorld → EventApplicabilityAnswer
+eventApplicabilityAnswer stateBindingQuery world = stateBoundObserved
+eventApplicabilityAnswer eventApplicabilityQuery boundStateEventOutsideScope =
+  eventNotApplicable
+eventApplicabilityAnswer eventApplicabilityQuery boundStateEventInsideScope =
+  eventApplicable
+
+eventApplicabilitySemantics :
+  Adequacy.QuerySemantics ApplicabilityWorld EventApplicabilityQuery EventApplicabilityAnswer
+eventApplicabilitySemantics = Adequacy.querySemantics eventApplicabilityAnswer
+
+stateBindingOnlyEventApplicabilityAdequacyDefect :
+  Adequacy.QueryAdequacyDefect
+    stateBindingOnlyProjection
+    eventApplicabilitySemantics
+    eventApplicabilityQuery
+stateBindingOnlyEventApplicabilityAdequacyDefect =
+  Adequacy.queryAdequacyDefect
+    boundStateEventOutsideScope
+    boundStateEventInsideScope
+    refl
+    (λ ())
+
+stateBindingCannotDetermineEventApplicability :
+  Adequacy.AdequateFor
+    stateBindingOnlyProjection
+    eventApplicabilitySemantics
+    eventApplicabilityQuery →
+  ⊥
+stateBindingCannotDetermineEventApplicability =
+  Adequacy.queryAdequacyDefectBlocksFactorisation
+    stateBindingOnlyEventApplicabilityAdequacyDefect
+
+stateBindingAndEventContextProjection :
+  ApplicabilityWorld → StateBindingSurface × EventContextSurface
+stateBindingAndEventContextProjection =
+  Observer.pairObserver stateBindingOnlyProjection eventContextProjection
+
+joinedEventApplicabilityAnswer :
+  StateBindingSurface × EventContextSurface → EventApplicabilityAnswer
+joinedEventApplicabilityAnswer (sameBoundState , eventOutsideInstrumentScope) =
+  eventNotApplicable
+joinedEventApplicabilityAnswer (sameBoundState , eventInsideInstrumentScope) =
+  eventApplicable
+
+stateBindingAndEventContextDetermineApplicability :
+  Adequacy.AdequateFor
+    stateBindingAndEventContextProjection
+    eventApplicabilitySemantics
+    eventApplicabilityQuery
+stateBindingAndEventContextDetermineApplicability =
+  Adequacy.factorsForQuery
+    joinedEventApplicabilityAnswer
+    (λ { boundStateEventOutsideScope → refl
+       ; boundStateEventInsideScope → refl
+       })
+
+stateBindingAndEventContextStrictlyRefinesBinding :
+  Observer.StrictRefinement
+    stateBindingOnlyProjection
+    stateBindingAndEventContextProjection
+stateBindingAndEventContextStrictlyRefinesBinding =
+  Observer.strictPairRefinement
+    stateBindingOnlyProjection
+    eventContextProjection
+    boundStateEventOutsideScope
+    boundStateEventInsideScope
     refl
     (λ ())
 
