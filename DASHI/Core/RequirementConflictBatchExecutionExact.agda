@@ -2,7 +2,9 @@ module DASHI.Core.RequirementConflictBatchExecutionExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
+
+import DASHI.Core.CandidateFamilyExecutionExact as Family
 
 ------------------------------------------------------------------------
 -- DOMAIN-NEUTRAL REQUIREMENT / CONFLICT / GLOBAL-EXECUTION SPINE
@@ -10,12 +12,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 -- This is extracted from the recurring RSA/NDim batch-reduction shape without
 -- importing RSA, GF(2), matrices, colouring, GPU, or performance semantics.
 --
--- A batch is admitted only after three logically separate payments:
+-- It specializes CandidateFamilyExecutionExact by defining family
+-- admissibility as the conjunction of two logically separate payments:
 --   * requirement closure,
---   * conflict freedom,
---   * global validity of the composed action.
---
--- The record deliberately does NOT provide maps from one payment to another.
+--   * conflict freedom.
+-- Global validity of the composed action remains a third independent payment.
 ------------------------------------------------------------------------
 
 record RequirementConflictBatchSpine : Set₁ where
@@ -31,6 +32,18 @@ record RequirementConflictBatchSpine : Set₁ where
     globallyValid : GlobalAction → Set
 
 open RequirementConflictBatchSpine public
+
+asCandidateFamilyExecutionSpine :
+  RequirementConflictBatchSpine →
+  Family.CandidateFamilyExecutionSpine
+asCandidateFamilyExecutionSpine spine = record
+  { Family = Batch spine
+  ; GlobalAction = GlobalAction spine
+  ; admissibleFamily = λ batch →
+      requirementClosed spine batch × conflictFree spine batch
+  ; compose = compose spine
+  ; globallyAdmissible = globallyValid spine
+  }
 
 record AdmittedBatchExecution
     (spine : RequirementConflictBatchSpine)
@@ -52,9 +65,22 @@ admitBatchExecution :
   AdmittedBatchExecution spine batch
 admitBatchExecution = admitted-batch-execution
 
+admittedBatchProjectsToCandidateFamilyExecution :
+  {spine : RequirementConflictBatchSpine} →
+  {batch : Batch spine} →
+  AdmittedBatchExecution spine batch →
+  Family.AdmittedCandidateFamilyExecution
+    (asCandidateFamilyExecutionSpine spine)
+    batch
+admittedBatchProjectsToCandidateFamilyExecution execution =
+  Family.admitCandidateFamilyExecution
+    (requirementClosurePaid execution , conflictFreedomPaid execution)
+    (globalValidityPaid execution)
+
 record BatchExecutionBoundary : Set where
   constructor batch-execution-boundary
   field
+    candidateFamilyParentReused : Bool
     requirementClosureRequired : Bool
     conflictFreedomRequired : Bool
     globalValidityRequiredAfterSelection : Bool
@@ -66,6 +92,7 @@ record BatchExecutionBoundary : Set where
 canonicalBatchExecutionBoundary : BatchExecutionBoundary
 canonicalBatchExecutionBoundary =
   batch-execution-boundary
+    true
     true
     true
     true
