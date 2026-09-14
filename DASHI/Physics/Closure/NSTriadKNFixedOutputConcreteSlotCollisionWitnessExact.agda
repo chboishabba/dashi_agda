@@ -25,6 +25,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputConcreteSlotCollisionWitnessExa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([])
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤)
 open import Data.Empty using (⊥)
@@ -38,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlPartnerBonyRound186Exact as R186
 import DASHI.Physics.Closure.NSTriadKNComparableRawCurlPartnerMassRound205Exact as R205
 import DASHI.Physics.Closure.NSTriadKNComparableFixedOutputCarrierRound207Exact as R207
+import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact as Adapter
 import DASHI.Physics.Closure.NSTriadKNFixedOutputSlotCollisionExact as Collision
 import DASHI.Physics.Closure.NSTriadKNFixedOutputComparableCollisionGeometryExact as Geometry
 
@@ -70,7 +72,8 @@ zeroVelocityTransverse :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E}
     (mode : Z3.FourierMode) →
-  Helical.Transverse E mode (Audit.velocity (zeroFiniteSystem {E = E} {I = I}) mode)
+  Helical.Transverse E mode
+    (Audit.velocity (zeroFiniteSystem {E = E} {I = I}) mode)
 zeroVelocityTransverse {E = E} mode =
   R30.bilinearDot3ZeroRight (C3.modeVector E mode)
 
@@ -147,9 +150,9 @@ alphaBetaQSlotVelocityAgreement = refl
 concreteDistinctCCSlotCollision :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
-  Collision.Adapter.compressedPartnerSlotKernel
+  Adapter.compressedPartnerSlotKernel
     (R207.partner (alphaFixedOutput {E = E} {I = I}))
-  ≡ Collision.Adapter.compressedPartnerSlotKernel
+  ≡ Adapter.compressedPartnerSlotKernel
     (R207.partner (betaFixedOutput {E = E} {I = I}))
 concreteDistinctCCSlotCollision {E = E} {I = I} =
   Collision.fixedOutputEqualVelocityArgumentsHaveEqualSlotKernel
