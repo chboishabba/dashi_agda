@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Core.CandidateFamilyExecutionExact as Family
 import DASHI.Core.RequirementConflictBatchExecutionExact as Batch
 
 ------------------------------------------------------------------------
@@ -28,6 +29,13 @@ spine = record
 
 admitted : Batch.AdmittedBatchExecution spine batch01
 admitted = Batch.admitBatchExecution true true true
+
+projectedToGenericFamilyExecution :
+  Family.AdmittedCandidateFamilyExecution
+    (Batch.asCandidateFamilyExecutionSpine spine)
+    batch01
+projectedToGenericFamilyExecution =
+  Batch.admittedBatchProjectsToCandidateFamilyExecution admitted
 
 closureDoesNotEraseConflict : Bool
 closureDoesNotEraseConflict =
