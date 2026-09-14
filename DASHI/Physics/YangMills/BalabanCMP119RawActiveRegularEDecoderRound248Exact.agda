@@ -21,11 +21,13 @@ module DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exac
 -- choose `ELocalizedAnalytic` itself to BE the concrete same-E localization
 -- record below.  On that representation the decoder is identity.  This removes
 -- a redundant decoder theorem; it does not manufacture source localization.
--- The real payment becomes the active CMP122 witness that the exact raw E_k
--- inhabits this concrete predicate.
 --
--- No CMP122 quantitative-bounds field is consumed here.  No new localization
--- theorem is asserted.
+-- The raw finite-history constructor already makes runningCoupling equal to the
+-- finite-history coupling definitionally.  Therefore, once the genuine CMP122
+-- theorem witness is supplied on this concrete predicate family, the active raw
+-- Sect.-2 witness and the Round246 regular-E form witness are compiler output.
+--
+-- No new localization theorem is asserted here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -39,7 +41,9 @@ import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as FiniteBeta
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
+import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact as Active
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
+import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact as Theorem1Raw
 import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact as RawHistory
 import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as R246
 
@@ -103,11 +107,6 @@ open RawELocalizedAnalyticDecoder public
 
 ------------------------------------------------------------------------
 -- Preferred concrete-E predicate representation.
---
--- Keep the non-E Sect.-2 predicates abstract/source-native, but choose the E
--- predicate itself to expose exactly the concrete localization data consumed by
--- BC1.  The active source witness must still prove this predicate at every
--- active scale; therefore source authority/payment is not weakened.
 ------------------------------------------------------------------------
 
 record ConcreteELocalizationSection2PredicateInputs
@@ -231,6 +230,40 @@ activeRegularEFormWitnessFromRaw decoder witness = record
               (Raw.section2OnActiveScale witness scale active)))
   }
 
+------------------------------------------------------------------------
+-- Preferred theorem-1 entrypoint.
+--
+-- `rawStateFromFiniteBetaHistory` makes the coupling identity definitional.
+-- `preferredConcreteELocalizationIdentityDecoder` makes E-localization decoding
+-- definitional.  Therefore a genuine CMP122 theorem witness instantiated on the
+-- concrete predicate family compiles directly to the R246 form witness.
+------------------------------------------------------------------------
+
+preferredConcreteActiveRegularEFormWitnessFromTheorem1 :
+  ∀ {trajectory Mode Atom betaData history
+      Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum}
+    {objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum} →
+  (inputs : ConcreteELocalizationSection2PredicateInputs objects) →
+  Active.ActiveBalaban1989Theorem1Witness
+    (Theorem1Raw.asActiveEffectiveDensityFlow
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      {betaData = betaData} {history = history}
+      (preferredConcreteELocalizationPredicates inputs)) →
+  R246.ActiveRegularESection2FormWitness
+    (asRound246ActiveInputs
+      (preferredConcreteELocalizationIdentityDecoder inputs))
+preferredConcreteActiveRegularEFormWitnessFromTheorem1
+    {objects = objects} inputs theorem1 =
+  activeRegularEFormWitnessFromRaw
+    (preferredConcreteELocalizationIdentityDecoder inputs)
+    (RawHistory.activeRawWitnessFromFiniteHistoryAndTheorem1 objects theorem1)
+
+preferredConcreteActiveRegularEFormFromTheorem1CompilerLevel : ProofLevel
+preferredConcreteActiveRegularEFormFromTheorem1CompilerLevel = machineChecked
+
 rawActiveRegularEDecoderCompilerLevel : ProofLevel
 rawActiveRegularEDecoderCompilerLevel = machineChecked
 
@@ -242,8 +275,14 @@ rawActiveRegularEFormWitnessCompilerLevel = machineChecked
 literalRawELocalizedAnalyticDecoderLevel : ProofLevel
 literalRawELocalizedAnalyticDecoderLevel = conditional
 
--- Preferred concrete-predicate route: the decoder itself is compiler-owned.
--- The surviving physical/source payment is instead the active Sect.-2 witness
--- proving that the exact raw E_k inhabits the concrete localization predicate.
+-- Preferred route: the source theorem witness is the remaining primitive input.
+-- The decoder, coupling weld, active raw witness, and R246 form projection all
+-- compile from it and the already-selected raw object/predicate carriers.
+literalCMP122Theorem1OnConcreteELocalizationPredicateLevel : ProofLevel
+literalCMP122Theorem1OnConcreteELocalizationPredicateLevel = conditional
+
+-- Compatibility frontier name retained for downstream archaeology. On the
+-- preferred concrete-predicate route this active witness is compiler output from
+-- the theorem1 input above rather than a separate theorem payment.
 literalConcreteELocalizationActiveSection2WitnessLevel : ProofLevel
 literalConcreteELocalizationActiveSection2WitnessLevel = conditional
