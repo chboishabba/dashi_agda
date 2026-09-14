@@ -9,16 +9,14 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularEActiveRound247Validation whe
 --
 --   finite-mode beta history
 --     -> raw CMP119 selected E_k on that SAME history
---     -> active CMP122 Sect.-2 witness
---     -> R248 exact-E decoder
---     -> optional R249 reuse of the older function-valued localization carrier
---        through an explicit same-E weld (no history coercion)
---     -> concrete active regular-E/localization form witness
+--     -> concrete same-E Sect.-2 predicate vocabulary
+--     -> active CMP122 theorem witness on that vocabulary
+--     -> R248 active regular-E/localization form witness [compiler]
 --     -> CMP109/CMP116 literal effective-action continuation.
 --
--- The full CMP122 Theorem-1 witness remains a compatibility producer, but the
--- BC1-facing route consumes only preservation of the Sect.-2 form. Quantitative
--- Sect.-2 bounds are therefore not primitive dependencies of this continuation.
+-- The running-coupling weld is definitional in the raw finite-history state.
+-- The preferred E-localization decoder is identity by construction.  Therefore
+-- neither is a primitive source payment on the shortest BC1 path.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -53,9 +51,6 @@ rawActiveRegularEFormWitnessCompilerLevel : ProofLevel
 rawActiveRegularEFormWitnessCompilerLevel =
   R248.rawActiveRegularEFormWitnessCompilerLevel
 
--- Pareto refinement: when the source predicate vocabulary itself chooses
--- ELocalizedAnalytic to be the concrete same-E localization record, the decoder
--- is definitional rather than a second source theorem.
 preferredConcreteELocalizationPredicateCompilerLevel : ProofLevel
 preferredConcreteELocalizationPredicateCompilerLevel =
   R248.preferredConcreteELocalizationPredicateCompilerLevel
@@ -63,6 +58,13 @@ preferredConcreteELocalizationPredicateCompilerLevel =
 preferredConcreteELocalizationIdentityDecoderCompilerLevel : ProofLevel
 preferredConcreteELocalizationIdentityDecoderCompilerLevel =
   R248.preferredConcreteELocalizationIdentityDecoderCompilerLevel
+
+-- New least-privilege route: the finite-history coupling identity and concrete
+-- E-localization decoder are both compiler-owned.  A genuine CMP122 theorem
+-- witness on the concrete predicate compiles directly to the R246 form witness.
+preferredConcreteActiveRegularEFormFromTheorem1CompilerLevel : ProofLevel
+preferredConcreteActiveRegularEFormFromTheorem1CompilerLevel =
+  R248.preferredConcreteActiveRegularEFormFromTheorem1CompilerLevel
 
 functionalLocalizationToRawDecoderCompilerLevel : ProofLevel
 functionalLocalizationToRawDecoderCompilerLevel =
@@ -91,9 +93,15 @@ literalRawELocalizedAnalyticDecoderLevel : ProofLevel
 literalRawELocalizedAnalyticDecoderLevel =
   R248.literalRawELocalizedAnalyticDecoderLevel
 
--- Preferred concrete-predicate route: decoder plumbing is closed; the source
--- payment is now the active Sect.-2 witness that the exact raw E_k satisfies the
--- concrete localization predicate.
+-- Preferred source payment: the concrete E-localization predicate is already
+-- the repository data shape and coupling is already the finite-history coupling.
+-- The remaining primitive source input is therefore the CMP122 theorem witness
+-- instantiated on this exact concrete predicate family.
+literalCMP122Theorem1OnConcreteELocalizationPredicateLevel : ProofLevel
+literalCMP122Theorem1OnConcreteELocalizationPredicateLevel =
+  R248.literalCMP122Theorem1OnConcreteELocalizationPredicateLevel
+
+-- The resulting active Sect.-2 witness/form is downstream compiler output.
 literalConcreteELocalizationActiveSection2WitnessLevel : ProofLevel
 literalConcreteELocalizationActiveSection2WitnessLevel =
   R248.literalConcreteELocalizationActiveSection2WitnessLevel
