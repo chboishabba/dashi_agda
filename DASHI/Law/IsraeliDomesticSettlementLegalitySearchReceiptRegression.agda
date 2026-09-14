@@ -30,6 +30,12 @@ governmentLegalPositionLocatedRegression :
   ≡ true
 governmentLegalPositionLocatedRegression = refl
 
+ministryEnforcementSelfDescriptionLocatedRegression :
+  Domestic.ministryJusticeEnforcementSelfDescriptionLocated
+    Domestic.canonicalIsraeliDomesticSettlementSearchBoundary
+  ≡ true
+ministryEnforcementSelfDescriptionLocatedRegression = refl
+
 comprehensiveDomesticLegalityPaidRegression :
   Domestic.comprehensiveDomesticSettlementLegalityPaid
     Domestic.canonicalIsraeliDomesticSettlementSearchBoundary
@@ -53,6 +59,12 @@ governmentPositionIndependentAdjudicationRegression :
     Domestic.canonicalIsraeliDomesticSettlementSearchBoundary
   ≡ false
 governmentPositionIndependentAdjudicationRegression = refl
+
+enforcementSelfDescriptionIndependentAuditRegression :
+  Domestic.ministryEnforcementSelfDescriptionAutomaticallyIndependentAudit
+    Domestic.canonicalIsraeliDomesticSettlementSearchBoundary
+  ≡ false
+enforcementSelfDescriptionIndependentAuditRegression = refl
 
 allSettlerActionsDomesticLawfulRegression :
   Domestic.everySettlerActionAutomaticallyDomesticLawful
