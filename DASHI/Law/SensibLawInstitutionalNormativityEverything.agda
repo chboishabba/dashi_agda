@@ -1,16 +1,17 @@
 module DASHI.Law.SensibLawInstitutionalNormativityEverything where
 
 -- Thin discoverability roll-up for the institutional normativity tranche.
--- No new theorem or authority is introduced here.
+-- Deliberately uses qualified imports to avoid manufacturing a merged namespace
+-- or collapsing identically named parent/boundary coordinates.
 
-open import DASHI.Core.InstitutionalNormProductionExact public
-open import DASHI.Core.FragmentationCompositionExact public
-open import DASHI.Core.ObserverSituatedReasonablenessExact public
+import DASHI.Core.InstitutionalNormProductionExact
+import DASHI.Core.FragmentationCompositionExact
+import DASHI.Core.ObserverSituatedReasonablenessExact
 
-open import DASHI.Law.SensibLawLegalReasonablenessExact public
-open import DASHI.Law.SensibLawOperationalLegalityExact public
-open import DASHI.Law.SensibLawInstitutionalResponsibilityExact public
-open import DASHI.Law.SensibLawEpistemicConsequenceBoundaryExact public
-open import DASHI.Law.SensibLawExpertEvidenceSituatedObserverExact public
-open import DASHI.Law.AustralianDisabilityJusticeObserverFixtureExact public
-open import DASHI.Law.SensibLawMaboDenaturalisationExact public
+import DASHI.Law.SensibLawLegalReasonablenessExact
+import DASHI.Law.SensibLawOperationalLegalityExact
+import DASHI.Law.SensibLawInstitutionalResponsibilityExact
+import DASHI.Law.SensibLawEpistemicConsequenceBoundaryExact
+import DASHI.Law.SensibLawExpertEvidenceSituatedObserverExact
+import DASHI.Law.AustralianDisabilityJusticeObserverFixtureExact
+import DASHI.Law.SensibLawMaboDenaturalisationExact
