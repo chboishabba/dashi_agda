@@ -18,6 +18,8 @@ REQUIRED_FILES = [
     "DASHI/Core/CanonicalSpineRegistryCrossDomainRegression.agda",
     "DASHI/Core/CanonicalSpineDependencyAtlasExact.agda",
     "DASHI/Core/CanonicalSpineDependencyAtlasRegression.agda",
+    "DASHI/Core/ObserverRefinementLatticeExact.agda",
+    "DASHI/Core/ConsumerFibreRepairExact.agda",
     "DASHI/Core/DeclaredScenarioRobustnessExact.agda",
     "DASHI/Core/DeclaredScenarioRobustnessRegression.agda",
     "DASHI/Core/RequiredObserverAxisJoinAdequacyExact.agda",
@@ -42,6 +44,7 @@ REQUIRED_FILES = [
 
 EXPECTED = {
     "DASHI/Core/CanonicalSpineRegistry.agda": [
+        "observerRefinementOwner : CanonicalOwner",
         "requiredObserverAxisJoinOwner : CanonicalOwner",
         "declaredScenarioRobustnessOwner : CanonicalOwner",
         "osintAcquisitionOwner : CanonicalOwner",
@@ -52,6 +55,8 @@ EXPECTED = {
         "queryIndexedFutureSafePromotionOwner : CanonicalOwner",
     ],
     "DASHI/Core/CanonicalSpineDependencyAtlasExact.agda": [
+        "consumerRepairDependsOnObserverRefinement",
+        "frozenDynamicDependsOnObserverRefinement",
         "requiredAxisJoinDependsOnQueryAdequacy",
         "boundedNegativeSearchDependsOnOSINT",
         "attributionSnowballDependsOnAttributedSource",
@@ -59,6 +64,16 @@ EXPECTED = {
         "futureSafePromotionDependsOnQueryAdequacy",
         "futureSafePromotionDependsOnFrozenDynamic",
         "structuralParentageImpliesCodeImportDependency",
+    ],
+    "DASHI/Core/ObserverRefinementLatticeExact.agda": [
+        "record StrictRefinement",
+        "pairObserver :",
+        "strictPairRefinement :",
+        "addingObserverShrinksResidualFibre :",
+    ],
+    "DASHI/Core/ConsumerFibreRepairExact.agda": [
+        "Observer.pairObserver observe refine",
+        "observerPairingHasSingleCanonicalOwner",
     ],
     "DASHI/Core/DeclaredScenarioRobustnessExact.agda": [
         "fromUniversalObligation :",
@@ -95,6 +110,7 @@ EXPECTED = {
     ],
     "DASHI/CoarseFineFabricEverything.agda": [
         "import DASHI.Core.CanonicalSpineDependencyAtlasExact",
+        "import DASHI.Core.ObserverRefinementLatticeExact",
         "import DASHI.Core.DeclaredScenarioRobustnessExact",
         "import DASHI.Core.RequiredObserverAxisJoinAdequacyExact",
         "import DASHI.Core.BoundedNegativeSearchExact",
