@@ -18,6 +18,9 @@ import DASHI.Core.ObserverIncomparabilityCrosswalkRegression
 import DASHI.Core.ConsumerIndexedResidualRefinementExact
 import DASHI.Core.ConsumerResidualRepairCrosswalkExact
 import DASHI.Core.ConsumerResidualRepairCrosswalkRegression
+import DASHI.Core.ConsumerObserverJoinResidualExact
+import DASHI.Core.ConsumerObserverJoinResidualCrosswalkExact
+import DASHI.Core.ConsumerObserverJoinResidualCrosswalkRegression
 import DASHI.Core.ContextIndexedGovernedObservationExact
 import DASHI.Core.ContextIndexedGovernedObservationCanonicalRegression
 import DASHI.Core.ResidualObserverDependencyExact
@@ -62,6 +65,7 @@ import DASHI.Core.CandidateFamilyExecutionExact
 import DASHI.Core.CandidateFamilyExecutionRegression
 import DASHI.Core.RequirementConflictBatchExecutionExact
 import DASHI.Core.RequirementConflictBatchExecutionRegression
+import DASHI.Core.ReopenableConsumerInterventionCrossDomainRegression
 
 import DASHI.Biology.JCoarseFineConsumerReductionBridgeExact
 import DASHI.Biology.JCoarseFineFabricCalculusAdapterExact
