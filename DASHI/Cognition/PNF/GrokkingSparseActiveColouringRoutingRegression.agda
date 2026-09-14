@@ -76,6 +76,28 @@ correlationIsNotClassifierInput = refl
 classifierExamplesAreNotEmpiricalGrokkingResults : Bridge.classifierIsEmpiricalGrokkingResult ≡ false
 classifierExamplesAreNotEmpiricalGrokkingResults = refl
 
+sameLayerAblationCannotPayRequirementDirection :
+  Bridge.requirementEvidencePaysDirection Bridge.sameLayerPostReLUPairAblation ≡ false
+sameLayerAblationCannotPayRequirementDirection = refl
+
+externalDirectionalReceiptCanPayRequirementDirection :
+  Bridge.requirementEvidencePaysDirection Bridge.externallyPaidDirectionalRequirement ≡ true
+externalDirectionalReceiptCanPayRequirementDirection = refl
+
+sameNumericScoreWithoutDirectionalEvidenceIsNotRequirement :
+  Bridge.classifyPairWithRequirementEvidence
+    Bridge.sameLayerPostReLUPairAblation
+    Bridge.syntheticRequirementScore
+  ≡ Bridge.classified Bridge.independent
+sameNumericScoreWithoutDirectionalEvidenceIsNotRequirement = refl
+
+sameNumericScoreWithDirectionalEvidenceCanBeRequirement :
+  Bridge.classifyPairWithRequirementEvidence
+    Bridge.externallyPaidDirectionalRequirement
+    Bridge.syntheticRequirementScore
+  ≡ Bridge.classified Bridge.gluingRequirement
+sameNumericScoreWithDirectionalEvidenceCanBeRequirement = refl
+
 rawCapacityCanIncreaseWithoutBetaIncrease :
   Bridge.rawCandidateCount Bridge.extraBlockedCapacitySystem ≡ 4 ×
   Bridge.betaClosedCompatible Bridge.extraBlockedCapacitySystem ≡ 2 ×
