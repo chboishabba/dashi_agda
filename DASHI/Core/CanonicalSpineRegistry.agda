@@ -154,6 +154,12 @@ appendOnlyRevisionOwner = canonical-owner
   "DASHI.Core.AppendOnlyEvidenceResidualRevisionExact"
   exactInterface false refl
 
+residualActionPolicyOwner : CanonicalOwner
+residualActionPolicyOwner = canonical-owner
+  "typed residual-to-action policy with proof-bearing admission and least-privilege authority boundary"
+  "DASHI.Core.ResidualActionPolicyExact"
+  exactInterface false refl
+
 genericReceiptOwner : CanonicalOwner
 genericReceiptOwner = canonical-owner
   "generic non-promoting receipt metadata and list-level fail-closed receipt proof"
@@ -181,6 +187,7 @@ canonicalOwners =
   ∷ candidateObjectIdentityOwner
   ∷ attributedSourceOwner
   ∷ appendOnlyRevisionOwner
+  ∷ residualActionPolicyOwner
   ∷ genericReceiptOwner
   ∷ []
 
