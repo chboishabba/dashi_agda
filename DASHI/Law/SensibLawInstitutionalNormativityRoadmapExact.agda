@@ -41,6 +41,7 @@ record InstitutionalNormativityRoadmap : Set where
     tasmanianGenocideSourceBoundaryAuthored : Bool
     naziBureaucraticParticipationFixtureAuthored : Bool
     israeliDomesticLawComprehensiveFixturePaid : Bool
+    tasmaniaPrimaryArchiveAcquisitionFrontierAuthored : Bool
     tasmaniaPrimaryArchiveReplayPaid : Bool
     abc2026UnderlyingPrimaryCourtRecordPaid : Bool
     caseSpecificNeurodivergenceInferencePaid : Bool
@@ -78,6 +79,7 @@ canonicalInstitutionalNormativityRoadmap =
     true
     true
     false
+    true
     false
     false
     false
