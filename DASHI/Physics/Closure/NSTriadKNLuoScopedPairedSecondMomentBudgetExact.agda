@@ -28,7 +28,7 @@ open import Data.Rational.Base as ℚ
   using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact as Sum
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
@@ -256,7 +256,11 @@ scopedSumBoundOn :
   Sum.sumBy family Moment.pairedMagnitude
   ≤ scopedSecondMomentCoefficient budget
       * Sum.sumBy family Moment.weightedSecondMoment
-scopedSumBoundOn budget [] included = ℚP.≤-refl
+scopedSumBoundOn budget [] included =
+  subst
+    (0ℚ ≤_)
+    (sym (solve (scopedSecondMomentCoefficient budget ∷ [])))
+    ℚP.≤-refl
 scopedSumBoundOn budget (sample ∷ rest) included =
   let
     local :
@@ -271,7 +275,7 @@ scopedSumBoundOn budget (sample ∷ rest) included =
           ∷ scopedSecondMomentCoefficient budget
           ∷ []))
         (scopedPointwisePairedSecondMomentBound
-          budget sample (included sample here))
+          budget sample (included sample (here refl)))
 
     tail :
       Sum.sumBy rest Moment.pairedMagnitude
