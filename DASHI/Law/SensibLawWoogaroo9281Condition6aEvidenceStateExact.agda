@@ -170,9 +170,9 @@ condition6aAcquisitionBundle =
   []
 
 ------------------------------------------------------------------------
--- Promotion ladder.  Same-phase identity is deliberately explicit because a
--- valid approval or checklist for another Springfield stage cannot pay the
--- 9281 clearing phase presently at issue.
+-- Promotion ladder. Same-phase identity is explicit because a valid approval
+-- or checklist for another Springfield stage cannot pay the 9281 clearing
+-- phase presently at issue.
 ------------------------------------------------------------------------
 
 record Condition6aPromotionGate : Set where
@@ -213,6 +213,11 @@ canonicalCondition6aEvidencePareto = condition6a-evidence-pareto
 -- Reuse receipts: this owner does not re-mint source authority.
 ------------------------------------------------------------------------
 
+localConditionReceipt : Preclear.PreclearanceReceipt
 localConditionReceipt = Preclear.condition6aLocalFederalGate
+
+signedPackageProtocolReceipt : Preclear.PreclearanceReceipt
 signedPackageProtocolReceipt = Preclear.springfield8575SignedChecklistProtocol
+
+literalInstrumentCandidate : Instrument.InstrumentCandidate
 literalInstrumentCandidate = Instrument.condition6aLiteralInstrumentStillOpen
