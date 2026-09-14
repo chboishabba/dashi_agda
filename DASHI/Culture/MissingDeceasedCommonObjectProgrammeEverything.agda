@@ -1,0 +1,5 @@
+module DASHI.Culture.MissingDeceasedCommonObjectProgrammeEverything where
+
+import DASHI.Culture.MissingDeceasedCommonObjectProgrammeDiscriminatorExact
+import DASHI.Culture.MissingDeceasedEventTimeConcentrationExact
+import DASHI.Culture.MissingDeceasedCommonObjectProgrammeInvestigationExact
