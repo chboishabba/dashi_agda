@@ -8,6 +8,7 @@ import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ConsumerFibreRepairExact as Repair
 import DASHI.Core.CoarseFineFabricCalculusExact as Coarse
 import DASHI.Core.FactorisationSpineCrosswalkExact as Crosswalk
 
@@ -66,6 +67,15 @@ descentWitness = Crosswalk.projectionCollisionToNonDescent collision
 
 backToCollision : Coarse.ProjectionCollision hiddenProject hiddenConsumer
 backToCollision = Crosswalk.nonDescentToProjectionCollision descentWitness
+
+repairMustSeparateCollision :
+  ∀ {Refinement : Set}
+    (refine : HiddenState → Refinement) →
+  Repair.RefinementRepairs hiddenProject refine hiddenConsumer →
+  refine (hiddenState false true) ≡ refine (hiddenState false false) →
+  ⊥
+repairMustSeparateCollision refine =
+  Crosswalk.projectionCollisionRepairRequiresSeparation collision
 
 historicalOwnersDeleted : Bool
 historicalOwnersDeleted =
