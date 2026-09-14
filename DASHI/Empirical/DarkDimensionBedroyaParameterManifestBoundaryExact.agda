@@ -22,6 +22,18 @@ initialNumberDensityDefinition = "n0 = initial dark-matter number-density scale"
 initialPotentialScaleDefinition : String
 initialPotentialScaleDefinition = "V0 = scalar-potential energy scale"
 
+-- Bedroya et al. Eq. (11), retained as a source-level normalization identity.
+-- This is narrower than a CLASS/Cobaya sampled-parameter map.
+effectiveDMNormalizationEquation : String
+effectiveDMNormalizationEquation =
+  "rho_DM = m0 n0 exp(-cPrime phi_i) a^-3 = rho_DM^0 exp(-cPrime phi_i) a^-3"
+
+onsetPhiInitialValue : String
+onsetPhiInitialValue = "phi_i = 0 at the stated fading onset"
+
+paperDMNormalizationIdentityAtOnset : String
+paperDMNormalizationIdentityAtOnset = "m0 n0 = rho_DM^0 under phi_i = 0"
+
 supplementH0Coordinate : String
 supplementH0Coordinate = "H0"
 
@@ -46,6 +58,12 @@ record BedroyaParameterManifestStatus : Set where
     simulationStartRedshiftLocated : Bool
     fadingOnsetPhiLocated : Bool
     initialScaleDefinitionsLocated : Bool
+    effectiveDMNormalizationEquationLocated : Bool
+    onsetPhiInitialValueLocated : Bool
+    m0n0ToRhoDM0PaperIdentityLocated : Bool
+    rhoDM0ToSampledOmegaFDMMappingLocated : Bool
+    v0ToSampledDarkEnergyNormalizationLocated : Bool
+    completeNormalizationMapLocated : Bool
     supplementPosteriorCoordinatesDisplayed : Bool
     exactStandardBestFitTuplePublished : Bool
     normalizationMapLocated : Bool
@@ -56,13 +74,45 @@ open BedroyaParameterManifestStatus public
 
 canonicalBedroyaParameterManifestStatus : BedroyaParameterManifestStatus
 canonicalBedroyaParameterManifestStatus =
-  bedroyaParameterManifestStatus true true true true false false true false
+  bedroyaParameterManifestStatus
+    true true true
+    true true true
+    false false false
+    true false false true false
+
+paperDMNormalizationIdentityPaid :
+  m0n0ToRhoDM0PaperIdentityLocated canonicalBedroyaParameterManifestStatus ≡ true
+paperDMNormalizationIdentityPaid = refl
+
+sampledOmegaFDMMappingStillOpen :
+  rhoDM0ToSampledOmegaFDMMappingLocated canonicalBedroyaParameterManifestStatus ≡ false
+sampledOmegaFDMMappingStillOpen = refl
+
+v0NormalizationStillOpen :
+  v0ToSampledDarkEnergyNormalizationLocated canonicalBedroyaParameterManifestStatus ≡ false
+v0NormalizationStillOpen = refl
+
+completeNormalizationStillOpen :
+  completeNormalizationMapLocated canonicalBedroyaParameterManifestStatus ≡ false
+completeNormalizationStillOpen = refl
+
+data PaperDMIdentityEqualsSampledOmegaMapping : Set where
+
+data OneNormalizationCoordinatePaysCompleteNormalization : Set where
 
 data PosteriorDisplayEqualsExactBestFitTuple : Set where
 
 data StartPrescriptionPaysNormalizationMap : Set where
 
 data CurrentSearchNonlocationProvesNonexistence : Set where
+
+paperDMIdentityDoesNotBecomeSampledOmegaMapping :
+  PaperDMIdentityEqualsSampledOmegaMapping → ⊥
+paperDMIdentityDoesNotBecomeSampledOmegaMapping ()
+
+partialNormalizationDoesNotCloseCompleteMap :
+  OneNormalizationCoordinatePaysCompleteNormalization → ⊥
+partialNormalizationDoesNotCloseCompleteMap ()
 
 posteriorDisplayDoesNotEqualExactBestFitTuple :
   PosteriorDisplayEqualsExactBestFitTuple → ⊥
@@ -89,8 +139,6 @@ predecessorImplementationStillUnlocatedByCurrentSearch :
   ≡ false
 predecessorImplementationStillUnlocatedByCurrentSearch = refl
 
--- Parent-model genealogy is paid, but its implementation/normalization is not
--- silently imported into the later dark-dimension reanalysis.
 parentLineageStillDoesNotPayNormalizationMap :
   ParentLineage.normalizationInheritanceSameObject
     ParentLineage.canonicalFadingDMParentLineageStatus
