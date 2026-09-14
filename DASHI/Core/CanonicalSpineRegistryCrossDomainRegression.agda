@@ -18,6 +18,9 @@ boundedNegativeSearchCanonical = Registry.boundedNegativeSearchOwner
 robustExperimentCanonical : Registry.CanonicalOwner
 robustExperimentCanonical = Registry.robustExperimentInferenceOwner
 
+multipartReconstructionCanonical : Registry.CanonicalOwner
+multipartReconstructionCanonical = Registry.multipartReconstructionOwner
+
 projectionFibreCanonical : Registry.CanonicalOwner
 projectionFibreCanonical = Registry.projectionFibreOwner
 
@@ -69,6 +72,10 @@ boundedNegativeSearchParallelDefinitionsBlocked = refl
 robustExperimentParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed robustExperimentCanonical ≡ false
 robustExperimentParallelDefinitionsBlocked = refl
+
+multipartReconstructionParallelDefinitionsBlocked :
+  Registry.parallelDefinitionAllowed multipartReconstructionCanonical ≡ false
+multipartReconstructionParallelDefinitionsBlocked = refl
 
 batchParallelDefinitionsBlocked :
   Registry.parallelDefinitionAllowed batchCanonical ≡ false
