@@ -4,10 +4,15 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
+      - 'DASHI/Physics/Closure/NSClayFourAlternativeReleasedProofBidiExact.agda'
+      - 'DASHI/Papers/NavierStokes/FourLaneProofProgramExact.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterface.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceValidation.agda'
       - 'DASHI/Papers/NavierStokes/TheoremInterfaceRound1*.agda'
+      - 'DASHI/Interop/NavierStokesFourLaneProofArchaeologyExact.agda'
       - 'Docs/papers/live/Paper1NavierStokesClayDraft.md'
+      - 'Docs/papers/NSFourLanePublicationAddendum20260915.md'
+      - 'Docs/roadmaps/NSProofControl20260915.md'
       - 'scripts/check_ns_paper_modern_proof_spine.py'
       - 'scripts/ns_triad_signed_frontier_lab.py'
       - 'scripts/check_ns_triad_completion_identities.py'
@@ -227,6 +232,12 @@ jobs:
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound202Validation.agda
+
+      - name: Type-check NS four-lane archaeology overlay
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/NavierStokesFourLaneProofArchaeologyExact.agda
 
       - name: Type-check canonical Paper 1 modern theorem interface
         run: >-
