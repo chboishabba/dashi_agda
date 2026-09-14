@@ -20,7 +20,7 @@ import DASHI.Reasoning.SemanticCandidateResidualBidiExact as Semantic
 -- prediction-envelope / consumer-relative closure geometry.
 ------------------------------------------------------------------------
 
-SemanticConsumer : Set → Set₁
+SemanticConsumer : Set → Set
 SemanticConsumer Decision = Candidate.CandidateSemanticFragment → Decision
 
 ConsumerClosedOnSemanticFibre :

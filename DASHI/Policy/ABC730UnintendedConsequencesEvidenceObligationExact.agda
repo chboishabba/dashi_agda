@@ -204,8 +204,8 @@ correctSpeakerDoesNotProveEvaluation ()
 canonicalTranscriptRationale : Transcript.TranscriptClaim
 canonicalTranscriptRationale = Transcript.abcAustraliaUnintendedConsequencesRationale
 
-speakerResolutionAnchor : Speakers.PrimarySourceSpeakerResolutionBoundary
-speakerResolutionAnchor = Speakers.canonicalPrimarySourceSpeakerResolutionBoundary
+speakerResolutionAnchor : Speakers.PrimarySourceResolutionBoundary
+speakerResolutionAnchor = Speakers.canonicalPrimarySourceResolutionBoundary
 
 rationaleBoundaryAnchor : Rationale.RationaleSalienceBoundary
 rationaleBoundaryAnchor = Rationale.canonicalRationaleSalienceBoundary
