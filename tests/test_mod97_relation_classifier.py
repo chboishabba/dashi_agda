@@ -13,9 +13,26 @@ def test_underpowered_pair_cannot_be_classified() -> None:
         joint_damage=7,
         interaction_threshold=1,
         adequacy_power_paid=False,
+        policy_frozen_before_evaluation=True,
     )
     assert receipt["classification_paid"] is False
     assert receipt["classification"] == "underpowered"
+    assert receipt["relation"] is None
+
+
+def test_unfrozen_policy_cannot_pay_classification() -> None:
+    receipt = classify_pair_receipt(
+        left=0,
+        right=1,
+        left_damage=2,
+        right_damage=2,
+        joint_damage=7,
+        interaction_threshold=1,
+        adequacy_power_paid=True,
+        policy_frozen_before_evaluation=False,
+    )
+    assert receipt["classification_paid"] is False
+    assert receipt["classification"] == "policyNotFrozen"
     assert receipt["relation"] is None
 
 
@@ -28,11 +45,13 @@ def test_positive_excess_above_threshold_classifies_conflict() -> None:
         joint_damage=7,
         interaction_threshold=1,
         adequacy_power_paid=True,
+        policy_frozen_before_evaluation=True,
     )
     assert receipt["interaction_excess"] == 3
     assert receipt["classification"] == "conflict"
     assert receipt["relation"] == "conflict"
     assert receipt["classification_paid"] is True
+    assert receipt["policy_frozen_before_evaluation"] is True
 
 
 def test_additive_pair_classifies_independent_when_direction_is_unavailable() -> None:
@@ -44,6 +63,7 @@ def test_additive_pair_classifies_independent_when_direction_is_unavailable() ->
         joint_damage=5,
         interaction_threshold=1,
         adequacy_power_paid=True,
+        policy_frozen_before_evaluation=True,
     )
     assert receipt["classification"] == "independent"
     assert receipt["relation"] == "independent"
@@ -60,6 +80,7 @@ def test_current_observation_never_manufactures_gluing_requirement() -> None:
         joint_damage=4,
         interaction_threshold=1,
         adequacy_power_paid=True,
+        policy_frozen_before_evaluation=True,
     )
     assert receipt["classification"] == "independent"
     assert receipt["relation"] == "independent"
@@ -76,6 +97,7 @@ def test_paid_classifier_receipts_feed_graph_compiler_without_field_rewrite() ->
         joint_damage=7,
         interaction_threshold=1,
         adequacy_power_paid=True,
+        policy_frozen_before_evaluation=True,
     )
     independent = classify_pair_receipt(
         left=1,
@@ -85,6 +107,7 @@ def test_paid_classifier_receipts_feed_graph_compiler_without_field_rewrite() ->
         joint_damage=5,
         interaction_threshold=1,
         adequacy_power_paid=True,
+        policy_frozen_before_evaluation=True,
     )
 
     compiled = compile_and_certify(
@@ -106,4 +129,5 @@ def test_negative_nat_damage_is_rejected() -> None:
             joint_damage=3,
             interaction_threshold=1,
             adequacy_power_paid=True,
+            policy_frozen_before_evaluation=True,
         )
