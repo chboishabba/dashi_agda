@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Core.ConsumerObserverJoinResidualExact as Join
+import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.ObserverRefinementLatticeExact as Lattice
 import DASHI.Core.ConsumerObserverJoinResidualCrosswalkExact as Crosswalk
 
@@ -36,3 +37,12 @@ canonicalReopeningBackToHotCold :
     (Fibre.Coarse geometry)
     (Fibre.RelativeFine geometry)
 canonicalReopeningBackToHotCold = Crosswalk.coarseFineReopeningToHotCold
+
+hotStateSufficiencyIsCanonicalFactorisation :
+  ∀ {Fine Hot Output : Set}
+    {hot : Fine → Hot}
+    {consume : Fine → Output} →
+  Join.ConsumerSufficientHotState hot consume →
+  Factorized.FactorizedRefinement consume hot
+hotStateSufficiencyIsCanonicalFactorisation =
+  Crosswalk.consumerSufficientHotToFactorized
