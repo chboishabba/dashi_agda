@@ -11,13 +11,12 @@ import DASHI.Core.CandidateFamilyExecutionExact as Family
 --
 -- This is extracted from the recurring RSA/NDim batch-reduction shape without
 -- importing RSA, GF(2), matrices, colouring, GPU, or performance semantics.
---
--- It specializes CandidateFamilyExecutionExact by defining family
--- admissibility as the conjunction of two logically separate payments:
---   * requirement closure,
---   * conflict freedom.
--- Global validity of the composed action remains a third independent payment.
 ------------------------------------------------------------------------
+
+data CandidateRelation : Set where
+  conflict : CandidateRelation
+  coRequirement : CandidateRelation
+  independent : CandidateRelation
 
 record RequirementConflictBatchSpine : Set₁ where
   field
@@ -25,6 +24,7 @@ record RequirementConflictBatchSpine : Set₁ where
     Batch : Set
     GlobalAction : Set
 
+    relation : Candidate → Candidate → CandidateRelation
     requirementClosed : Batch → Set
     conflictFree : Batch → Set
 
@@ -81,6 +81,7 @@ record BatchExecutionBoundary : Set where
   constructor batch-execution-boundary
   field
     candidateFamilyParentReused : Bool
+    conflictRequirementIndependenceSeparated : Bool
     requirementClosureRequired : Bool
     conflictFreedomRequired : Bool
     globalValidityRequiredAfterSelection : Bool
@@ -92,6 +93,7 @@ record BatchExecutionBoundary : Set where
 canonicalBatchExecutionBoundary : BatchExecutionBoundary
 canonicalBatchExecutionBoundary =
   batch-execution-boundary
+    true
     true
     true
     true
