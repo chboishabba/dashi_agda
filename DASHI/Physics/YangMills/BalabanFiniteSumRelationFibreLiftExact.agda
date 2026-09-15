@@ -18,7 +18,7 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
 import DASHI.Physics.YangMills.BalabanFiniteRationalOrderCoreExact as OrderCore
 
 sumObserver : ∀ {A : Set} → List A → (A → ℚ) → ℚ
-sumObserver values field = sumRational values field
+sumObserver values fld = sumRational values fld
 
 sumObserverPreservesPointwiseOrder :
   ∀ {A : Set} (values : List A) {left right : A → ℚ} →

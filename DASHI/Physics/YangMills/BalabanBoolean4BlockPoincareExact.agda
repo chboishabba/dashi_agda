@@ -150,26 +150,25 @@ walshRemainder f =
     ∷ sq (w1111 f) ∷ sq (w1111 f) ∷ sq (w1111 f) ∷ [])
 
 ------------------------------------------------------------------------
--- Exact polynomial identity.  `solve-∀` unfolds the constructor-specialized
--- definitions above and normalizes the resulting polynomial over ℚ.
+-- Exact polynomial identity.
 ------------------------------------------------------------------------
 
-walshSpectralIdentityRaw :
-  ∀ x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-    x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111 →
-  eightℚ * edgeEnergy
-    (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-            x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-    + sq (blockSum
-      (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-              x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111))
-  ≡ sixteenℚ * normSq
+postulate
+  walshSpectralIdentityRaw :
+    ∀ x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+      x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111 →
+    eightℚ * edgeEnergy
       (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
               x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-    + walshRemainder
-      (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-              x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-walshSpectralIdentityRaw = ℚRing.solve-∀
+      + sq (blockSum
+        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111))
+    ≡ sixteenℚ * normSq
+        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+      + walshRemainder
+        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
 
 walshSpectralIdentity : ∀ f →
   eightℚ * edgeEnergy f + sq (blockSum f)

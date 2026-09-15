@@ -82,9 +82,10 @@ normalizedAverageOfConstant {L} dataSet value =
     (cong (weight dataSet *_)
       (sumRationalConstant (allCyclicIndices L) value))
     (trans
-      (ℚP.*-assoc
-        (weight dataSet)
-        (natAsRational (length (allCyclicIndices L))) value)
+      (sym
+        (ℚP.*-assoc
+          (weight dataSet)
+          (natAsRational (length (allCyclicIndices L))) value))
       (trans
         (cong (_* value) (normalized dataSet))
         (ℚP.*-identityˡ value)))
@@ -231,13 +232,21 @@ axisAverageCommutes {L} dataSet (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
 axisAverageCommutes {L} dataSet (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteF site = refl
 
+diffPlusDiff : ∀ a b c d → (a - b) + (c - d) ≡ (a + c) - (b + d)
+diffPlusDiff = ℚRing.solve-∀
+
+subSelfZero : ∀ a → a - a ≡ 0ℚ
+subSelfZero = ℚRing.solve-∀
+
 sumRationalSubtract :
   ∀ {A : Set} values (left right : A → ℚ) →
   sumRational values (λ value → left value - right value)
   ≡ sumRational values left - sumRational values right
 sumRationalSubtract [] left right = ℚRing.solve-∀
 sumRationalSubtract (value ∷ values) left right
-  rewrite sumRationalSubtract values left right = ℚRing.solve-∀
+  rewrite sumRationalSubtract values left right =
+    diffPlusDiff (left value) (right value)
+      (sumRational values left) (sumRational values right)
 
 axisCenteringFibreSumZero :
   ∀ {L} (dataSet : NormalizedAxisAverageData L)
@@ -283,7 +292,7 @@ axisCenteringFibreSumZero {L} dataSet siteF axis transverse =
       (trans
         (cong (λ averagedTotal → total - averagedTotal)
           (sumOfAverageConstant dataSet total))
-        (ℚRing.solve-∀)))
+        (subSelfZero total)))
 
 ------------------------------------------------------------------------
 -- Self-adjointness in the literal global block inner product.
