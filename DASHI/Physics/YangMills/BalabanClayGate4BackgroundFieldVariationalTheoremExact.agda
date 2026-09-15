@@ -10,8 +10,15 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Tadeusz Bałaban,
 -- "The Variational Problem and Background Fields in Renormalization Group
 -- Method for Lattice Gauge Theories",
--- Communications in Mathematical Physics 102 (1985), 605--636.
+-- Communications in Mathematical Physics 102 (1985), 277--309.
 -- DOI: 10.1007/BF01229381.
+--
+-- Source-identity guard:
+-- CMP 102, 255--275, DOI 10.1007/BF01229380 is the distinct paper
+-- "Ultraviolet Stability of Three-Dimensional Lattice Pure Gauge Field
+-- Theories".  Do not use its local source extract as bytes for this authority.
+-- CMP 109's own bibliography identifies its reference [15] with the present
+-- variational/background-field paper and [16] with the 3D UV-stability paper.
 --
 -- Theorem 1 proves, under the displayed small-field assumptions, existence and
 -- uniqueness of the constrained action minimizer, the quantitative fine-bond
