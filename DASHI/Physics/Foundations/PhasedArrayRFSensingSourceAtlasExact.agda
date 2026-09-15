@@ -77,9 +77,42 @@ warThunderCommunityLead = Source.mkNoDOISource
   "lead-generation source for mechanically oriented versus electronically steered phased-array terminology; not technical authority"
   Source.publicAttribution
 
+hackadayConsumerWifiLead : Source.AttributedSource
+hackadayConsumerWifiLead = Source.mkNoDOISource
+  "Donald Papp / Hackaday"
+  "Make Your Own ESP32-Based Person Sensor, No Special Hardware Needed"
+  "Hackaday"
+  "2026"
+  "https://hackaday.com/2026/01/28/make-your-own-esp32-based-person-sensor-no-special-hardware-needed/"
+  Source.communitySource
+  "lead showing commodity ESP32 Wi-Fi CSI used for person/motion sensing and reported wall penetration; primary literature still pays general technical claims"
+  Source.publicAttribution
+
+hackadaySDRPassiveRadarLead : Source.AttributedSource
+hackadaySDRPassiveRadarLead = Source.mkNoDOISource
+  "Juha Vierinen / Hackaday"
+  "Building Your Own SDR-based Passive Radar On A Shoestring"
+  "Hackaday"
+  "2015"
+  "https://hackaday.com/2015/06/05/building-your-own-sdr-based-passive-radar-on-a-shoestring/"
+  Source.communitySource
+  "lead showing passive-radar experimentation with inexpensive RTL-SDR receivers and existing illuminators; not operational surveillance authority"
+  Source.publicAttribution
+
+hackadayPhasedArrayThroughWallLead : Source.AttributedSource
+hackadayPhasedArrayThroughWallLead = Source.mkNoDOISource
+  "Gregory L. Charvat / Hackaday"
+  "Build A Phased-Array Radar In Your Garage That Sees Through Walls"
+  "Hackaday"
+  "2015"
+  "https://hackaday.com/2015/04/07/build-a-phased-array-radar-in-your-garage-that-sees-through-walls/"
+  Source.communitySource
+  "lead connecting low-cost phased-array experimentation, Wi-Fi-band antennas and through-wall radar demonstrations; underlying technical papers remain the acquisition target"
+  Source.publicAttribution
+
 phasedArrayRFSensingAtlas : Source.AttributedSourceAtlas
 phasedArrayRFSensingAtlas = Source.mkSourceAtlas
   "phased-array / RF-sensing bounded source atlas"
   "DASHI.Physics.Foundations.PhasedArrayRFSensingSourceAtlasExact"
-  (techIngredientsLead ∷ rfPosePrimary ∷ csiModelSurvey ∷ csiWifiSurvey ∷ dcsCommunityLead ∷ warThunderCommunityLead ∷ [])
+  (techIngredientsLead ∷ rfPosePrimary ∷ csiModelSurvey ∷ csiWifiSurvey ∷ dcsCommunityLead ∷ warThunderCommunityLead ∷ hackadayConsumerWifiLead ∷ hackadaySDRPassiveRadarLead ∷ hackadayPhasedArrayThroughWallLead ∷ [])
   "community leads remain acquisition leads; academic sources pay only bounded observation claims; all system identity, exact hardware provenance, operational use, and authority claims remain separate"
