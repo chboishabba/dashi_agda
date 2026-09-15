@@ -10,6 +10,7 @@ import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Wikimedia.IbrahimKnowledgeCoverageRoadmapCurrentExact as Current
 import DASHI.Wikimedia.IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact as HistoricalDump
 import DASHI.Wikimedia.IbrahimFirstLinkNovember06ProducerPathStrengtheningExact as November06
+import DASHI.Wikimedia.IbrahimFirstLinkNovember06DecompressedVariantStrengtheningExact as November06Variant
 import DASHI.Wikimedia.IbrahimFirstLinkProducerOutputPathResidualExact as OutputPath
 import DASHI.Wikimedia.IbrahimFirstLinkRepositoryHistoryCustodyPruningExact as HistoryPruning
 import DASHI.Wikimedia.IbrahimSnowballSourceGenealogyIndependenceEvidenceSynthesisBidiExact as Genealogy
@@ -47,8 +48,8 @@ historicalFirstLinkRuntime : ParetoFrontierLeaf
 historicalFirstLinkRuntime = pareto-frontier-leaf
   1 currentHighestAlpha
   "Ibrahim historical First Link Network corpus / dump / parser / result same-object provenance"
-  "IbrahimKnowledgeCoverageRoadmapCurrentExact; IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact; IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact; IbrahimFirstLinkNovember06ProducerPathStrengtheningExact; IbrahimFirstLinkProducerOutputPathResidualExact; IbrahimFirstLinkRepositoryHistoryCustodyPruningExact"
-  "2014-11-06 remains the strongest producer-path DATE candidate: methods say November 2014 and 112 UVM cores; producer preprocessing names enwiki_20141106.xml; chunk-preparation code enumerates 112 small*.xml names; run_fln.py submits 112 indexed jobs; combine_fln.py merges 112 numbered JSONs into fln.json; author appendix identifies a published 505 MB data/fln.json. create_fln.py writes numbered shards to true_flnetwork while combine_fln.py reads flnetwork. Public Git path archaeology now prunes an older committed path-fix route: create_fln.py and the incomplete results/README.md both first appear in the 2015-10-04 ready snapshot, with no earlier committed revision recovered; current code still contains the mismatch and no committed move/copy/rename receipt. Therefore the remaining same-object payment must come from external execution/custody evidence, published-data acquisition, or another non-committed artifact. Exact dump variant/hash, raw pre-split command/chunk hashes, executed source object, shard custody, parser-equivalent reproduction and published-result hash comparison remain unpaid. The 20141008 parser comment remains a conflicting/stale cue."
+  "IbrahimKnowledgeCoverageRoadmapCurrentExact; IbrahimFirstLinkHistoricalSnapshotProvenanceResidualExact; IbrahimFirstLinkHistoricalDumpCandidateStrengtheningExact; IbrahimFirstLinkNovember06ProducerPathStrengtheningExact; IbrahimFirstLinkNovember06DecompressedVariantStrengtheningExact; IbrahimFirstLinkProducerOutputPathResidualExact; IbrahimFirstLinkRepositoryHistoryCustodyPruningExact"
+  "2014-11-06 remains the strongest producer-path DATE candidate and the pages-articles artifact FAMILY is now independently corroborated at both compressed-multistream and uncompressed-XML layers. Methods say November 2014 and 112 UVM cores; producer preprocessing names enwiki_20141106.xml; chunk-preparation code enumerates 112 small*.xml names; run_fln.py submits 112 indexed jobs; combine_fln.py merges 112 numbered JSONs into fln.json; author appendix identifies a published 505 MB data/fln.json. Independent 2015 dump correspondence names enwiki-20141106-pages-articles-multistream.xml.bz2, while Wikimedia Phabricator later inventories an uncompressed enwiki-20141106-pages-articles.xml object. These receipts strengthen family/date compatibility but do not identify Ibrahim's exact compressed variant, decompression/rename path, bytes or hash. create_fln.py writes numbered shards to true_flnetwork while combine_fln.py reads flnetwork. Public Git path archaeology prunes an older committed path-fix route. Remaining same-object payment therefore requires exact input bytes/hash, decompression/rename receipt, raw pre-split command/chunk hashes, external execution/custody across the output-path mismatch, parser-equivalent reproduction and published-result hash comparison. The 20141008 parser comment remains a conflicting/stale cue."
   "historical first-link edges beyond those directly printed by the paper may be promoted only after the exact source-object chain is paid; otherwise they remain current/revision-sensitive or candidate historical edges"
   "all historical Ibrahim traversal claims"
   false
@@ -59,6 +60,9 @@ historicalDumpBoundary = HistoricalDump.canonicalCandidateStrengtheningBoundary
 november06Boundary : November06.November06StrengtheningBoundary
 november06Boundary = November06.canonicalNovember06StrengtheningBoundary
 
+november06VariantBoundary : November06Variant.November06DecompressedVariantBoundary
+november06VariantBoundary = November06Variant.canonicalNovember06DecompressedVariantBoundary
+
 outputPathBoundary : OutputPath.ProducerOutputPathBoundary
 outputPathBoundary = OutputPath.canonicalProducerOutputPathBoundary
 
@@ -67,7 +71,7 @@ historyPruningBoundary = HistoryPruning.canonicalRepositoryHistoryCustodyBoundar
 
 remainingHistoricalPayment : String
 remainingHistoricalPayment =
-  "Public committed-history search for an older path-consistent create_fln.py is now pruned. Recover exact 2014-11-06 input artifact identity/hash and raw dump-to-112 split receipt; recover an external execution/custody artifact connecting true_flnetwork outputs to flnetwork inputs or another historically executed path-consistent source object; acquire/hash the author-hosted data/fln.json; rerun parser/constructor equivalently; compare hashes/semantic object identity."
+  "Date/family narrowing is now substantially paid: November-06 pages-articles exists independently at compressed-multistream and uncompressed-XML layers and matches the producer's local enwiki_20141106.xml date/shape. Recover the exact downloaded compressed variant and manifest/hash or historical bytes; recover decompression/rename receipt and hash the resulting XML; recover the raw XML-to-112 pre-split command and chunk hashes; recover an external execution/custody artifact connecting true_flnetwork outputs to flnetwork inputs or another historically executed path-consistent source object; acquire/hash the author-hosted data/fln.json; rerun parser/constructor equivalently; compare hashes/semantic object identity."
 
 ------------------------------------------------------------------------
 -- Rank 2: opportunistic metadata only.
