@@ -26,8 +26,9 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalSubstitutionDistanceAttachm
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-
+open import DASHI.Foundations.RealAnalysisAxioms using (0ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+
 import DASHI.Physics.YangMills.BalabanSelectedSubstitutionMarkedSourceRound351Exact as R351
 import DASHI.Physics.YangMills.BalabanCMP116JointParametricSensitivityRound373Exact as R373
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutionHessianBidiRound376Exact as R376
@@ -67,9 +68,7 @@ boundaryDistanceIsCanonicalSelectedDistance dataSet s = refl
 asRound376 :
   (dataSet : CanonicalSubstitutionDistanceAttachmentData) →
   (selectedLipschitzNonnegative :
-    DASHI.Foundations.RealAnalysisAxioms.0ℝ
-      DASHI.Foundations.RealAnalysisAxioms.≤ℝ
-    R373.selectedLipschitz (joint dataSet)) →
+    0ℝ ≤ℝ R373.selectedLipschitz (joint dataSet)) →
   R376.CMP116SubstitutionHessianBidiData
 asRound376 dataSet selectedLipschitzNonnegative = record
   { R376.joint = joint dataSet
