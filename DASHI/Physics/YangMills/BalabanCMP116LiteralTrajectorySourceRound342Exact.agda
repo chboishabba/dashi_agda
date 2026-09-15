@@ -10,16 +10,18 @@ module DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Exact
 -- source payment needed by the canonical B consumer can instead be stated on
 -- the literal selected trajectory from the start.
 --
--- This owner therefore keeps the genuine theorem-bearing coordinates only:
+-- A second least-privilege correction matters just as much: the canonical B
+-- consumer asks only for the mode/time-selected source pair.  It does NOT need
+-- a theorem over every possible J_L,J_R pair.  Therefore the proof-bearing
+-- localization field below is indexed only by cutoff + selected observable/time.
 --
---   1. CMP116 differentiated localization, now stated directly on the literal
---      mixed-log response and still guarded by the canonical common U,J domain;
---   2. quantitative comparison of the source-native envelope with the exact
---      reconstructed-spectrum clustering envelope;
+-- Genuine theorem-bearing coordinates left here:
+--   1. literal selected CMP116 differentiated localization;
+--   2. source-envelope -> reconstructed-spectrum-envelope calibration;
 --   3. standard one-sided closedness of the selected rational limit.
 --
--- The mixed-log response -> finite connected covariance identity is compiler
--- output from the existing cumulant/T5 algebra.  No citation, ProofLevel label,
+-- The mixed-log response -> finite connected covariance identity and canonical
+-- common-domain membership are compiler output.  No citation, ProofLevel label,
 -- or source name manufactures the literal localization inhabitant.
 ------------------------------------------------------------------------
 
@@ -40,6 +42,7 @@ import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumu
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338Exact as R338
 import DASHI.Physics.YangMills.BalabanCMP116R281ModeSelectedDirectRound341Exact as R341
 
 ------------------------------------------------------------------------
@@ -70,11 +73,17 @@ record LiteralTrajectoryCMP116Source
     sourceEnvelopeHasPositiveExponentialTreeDecay :
       SourceEnvelopeHasPositiveExponentialTreeDecay
 
-    -- The actual source/application payment.  The response on the left is the
-    -- literal selected mixed-log response; there is no independently named
-    -- source magnitude and therefore no later same-object equality to prove.
-    literalDifferentiatedLocalization :
-      ∀ cutoff leftJ rightJ →
+    -- Actual source/application payment, only on the selected pair consumed by
+    -- the reconstructed spectrum.  The response is literal by construction.
+    literalSelectedDifferentiatedLocalization :
+      ∀ cutoff observable time →
+      let
+        index = R281.indexFor spectrumSource observable time
+        left = R278.left tests index
+        right = R278.right tests index
+        leftJ = Cumulant.sourceDirectionOf (R318.meaning base) left
+        rightJ = Cumulant.sourceDirectionOf (R318.meaning base) right
+      in
       Common.SourceCoordinateInside
         (R114.canonicalCMP116CommonDomain
           {R318.Scale base} {R318.Volume base} demands)
@@ -112,6 +121,72 @@ record LiteralTrajectoryCMP116Source
       target ≤ upper
 
 open LiteralTrajectoryCMP116Source public
+
+------------------------------------------------------------------------
+-- Compatibility: the stronger historical R341 payment compiles into R342.
+--
+-- This proves R342 is an interface minimization, not a new stronger route.
+------------------------------------------------------------------------
+
+fromR341Application :
+  ∀ {Measure TestObservable SpectralObservable Energy}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    {demands : R104.CMP116FiniteNormalizedAnalyticDemands}
+    {source : R338.CanonicalCommonDomainCMP116Source base demands}
+    {tests : R278.SelectedConnectedCovarianceTests dataSet}
+    {spectrumSource : R281.ContinuumCovarianceSpectrumData
+      {SpectralObservable = SpectralObservable} {Energy = Energy}
+      dataSet extension tests} →
+  R341.CanonicalCMP116R281ModeSelectedApplication
+    base demands source tests spectrumSource →
+  LiteralTrajectoryCMP116Source base demands tests spectrumSource
+fromR341Application
+    {base = base} {demands = demands} {source = source}
+    {tests = tests} {spectrumSource = spectrumSource} application = record
+  { sourceRoot = λ cutoff leftJ rightJ →
+      R338.sourceRoot source
+        (R318.scaleOf base cutoff) (R318.volumeOf base cutoff)
+        leftJ rightJ
+  ; sourceDistance = R338.sourceDistance source
+  ; sourceEnvelope = λ cutoff root distance →
+      R338.sourceEnvelope source
+        (R318.scaleOf base cutoff) (R318.volumeOf base cutoff)
+        root distance
+  ; SourceEnvelopeHasPositiveExponentialTreeDecay =
+      R338.SourceEnvelopeHasPositiveExponentialTreeDecay source
+  ; sourceEnvelopeHasPositiveExponentialTreeDecay =
+      R338.sourceEnvelopeHasPositiveExponentialTreeDecay source
+  ; literalSelectedDifferentiatedLocalization =
+      λ cutoff observable time commonInside →
+        let
+          index = R281.indexFor spectrumSource observable time
+          left = R278.left tests index
+          right = R278.right tests index
+          leftJ = Cumulant.sourceDirectionOf (R318.meaning base) left
+          rightJ = Cumulant.sourceDirectionOf (R318.meaning base) right
+          sourceBound =
+            R338.differentiatedLocalizationOnCanonicalCommonDomain source
+              (R318.scaleOf base cutoff) (R318.volumeOf base cutoff)
+              leftJ rightJ commonInside
+        in
+        subst
+          (λ lower →
+            lower ≤ R338.sourceEnvelope source
+              (R318.scaleOf base cutoff) (R318.volumeOf base cutoff)
+              (R338.sourceRoot source
+                (R318.scaleOf base cutoff) (R318.volumeOf base cutoff)
+                leftJ rightJ)
+              (R338.sourceDistance source leftJ rightJ))
+          (R341.sourceMagnitudeIsSelectedMixedLogMagnitude application
+            cutoff observable time)
+          sourceBound
+  ; sourceEnvelopeBelowSpectrumEnvelope =
+      R341.sourceEnvelopeBelowSpectrumEnvelope application
+  ; rationalUpperClosedUnderSelectedLimit =
+      R341.rationalUpperClosedUnderSelectedLimit application
+  }
 
 ------------------------------------------------------------------------
 -- Finite selected upper: literal source theorem -> exact T5 covariance.
@@ -153,7 +228,8 @@ finiteSelectedLiteralUpper
           {R318.Scale base} {R318.Volume base} demands)
         (R318.scaleOf base cutoff) (R318.volumeOf base cutoff)
     literalBound =
-      literalDifferentiatedLocalization source cutoff leftJ rightJ commonInside
+      literalSelectedDifferentiatedLocalization source
+        cutoff observable time commonInside
     literalToCovariance =
       R341.mixedLogMagnitudeIsFiniteSelectedCovarianceMagnitude
         base cutoff left right
@@ -226,6 +302,13 @@ literalTrajectorySourceDirectProducerIsTrue :
   literalTrajectorySourceDirectProducer ≡ true
 literalTrajectorySourceDirectProducerIsTrue = refl
 
+allSourceDirectionPairsRequired : Bool
+allSourceDirectionPairsRequired = false
+
+allSourceDirectionPairsRequiredIsFalse :
+  allSourceDirectionPairsRequired ≡ false
+allSourceDirectionPairsRequiredIsFalse = refl
+
 record Round342Boundary : Set where
   constructor round342-boundary
   field
@@ -233,9 +316,17 @@ record Round342Boundary : Set where
     postHocSourceMagnitudeEqualityIndependentLeafIsFalse :
       postHocSourceMagnitudeEqualityIndependentLeaf ≡ false
 
+    allSourceDirectionPairsIndependentLeaf : Bool
+    allSourceDirectionPairsIndependentLeafIsFalse :
+      allSourceDirectionPairsIndependentLeaf ≡ false
+
     commonDomainMembershipIndependentLeaf : Bool
     commonDomainMembershipIndependentLeafIsFalse :
       commonDomainMembershipIndependentLeaf ≡ false
+
+    historicalR341CompilesToR342 : Bool
+    historicalR341CompilesToR342IsTrue :
+      historicalR341CompilesToR342 ≡ true
 
     literalSelectedLocalizationStillProofBearing : Bool
     literalSelectedLocalizationStillProofBearingIsTrue :
@@ -258,6 +349,8 @@ canonicalRound342Boundary =
   round342-boundary
     false refl
     false refl
+    false refl
+    true refl
     true refl
     true refl
     true refl
