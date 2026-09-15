@@ -3,11 +3,15 @@ module DASHI.Environment.WaterHyacinthLESExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Environment.BiocontrolExternalityExperimentExact as Experiment
+import DASHI.Environment.BiocontrolExternalityExperimentSourceAtlasExact as SourceAtlas
 
 ------------------------------------------------------------------------
 -- Thin LES-facing scenario.  The empirical values are fixture coordinates,
 -- not claims that the formal layer has itself measured an ecosystem.
+-- Source identity is retained as a typed AttributedSourceAtlas rather than a
+-- prose-only citation string.
 ------------------------------------------------------------------------
 
 data EvidenceStatus : Set where
@@ -30,6 +34,7 @@ record WaterHyacinthInterventionScenario : Set where
     observedPostReleaseSafety : PostReleaseSafetyStatus
     restorationStatus : RestorationStatus
     netEcosystemBenefit : NetEcosystemStatus
+    sourceAtlas : Attribution.AttributedSourceAtlas
     sourceReference : String
     evidenceBoundaryReference : String
 
@@ -42,8 +47,9 @@ canonicalWaterHyacinthScenario = waterHyacinthInterventionScenario
   postReleaseUnresolved
   controlOnly
   netOutcomeUnresolved
-  "CSIRO water-hyacinth biocontrol page; Australian Weed Management Guide; host-specificity literature row in source atlas"
-  "host-range evidence does not by itself pay post-release safety, restoration, or net ecosystem benefit"
+  SourceAtlas.canonicalBiocontrolSourceAtlas
+  "typed source atlas retains CSIRO, Australian management guide, DAFF and literature roles separately"
+  "host-range evidence does not by itself pay post-release safety, restoration, or net ecosystem benefit; source citation does not import DASHI mathematics"
 
 ------------------------------------------------------------------------
 -- Control and restoration are separate coordinates.
@@ -85,7 +91,7 @@ canonicalBiocontrolStatusSeparation = biocontrolStatusSeparation refl refl refl
 record WaterHyacinthSourceBoundary : Set where
   constructor waterHyacinthSourceBoundary
   field
-    sourceReferencePresent : String
+    typedAtlasPresent : Attribution.AttributedSourceAtlas
     citationImportsProof : Bool
     citationImportsProofIsFalse : citationImportsProof ≡ false
     sourceCreatesDeploymentAuthority : Bool
@@ -95,7 +101,7 @@ record WaterHyacinthSourceBoundary : Set where
 
 canonicalWaterHyacinthSourceBoundary : WaterHyacinthSourceBoundary
 canonicalWaterHyacinthSourceBoundary = waterHyacinthSourceBoundary
-  "CSIRO/ENTO water-hyacinth biological control page; Australian Weed Management Guide - Water Hyacinth; host-specificity literature retained separately"
+  SourceAtlas.canonicalBiocontrolSourceAtlas
   false refl
   false refl
   false refl
