@@ -19,7 +19,7 @@ quantitative connected-correlation decay
 -> SameHamiltonianPhysicalMassGap.
 ```
 
-This remains the global YM consumer. CMP116, Row C, Heat/Doob/Langevin, Step-V/KP, unified polymer norms and the R350--R353 local cuts are producer strategies beneath it, not alternate Clay endpoints.
+This remains the global YM consumer. CMP116, Row C, Heat/Doob/Langevin, Step-V/KP, unified polymer norms and the R350--R354 cuts are producer strategies beneath it, not alternate Clay endpoints.
 
 ### Riemann hypothesis
 
@@ -33,48 +33,48 @@ RH remains behind YM in immediate actionability because theorem-bearing checked-
 
 ## 2. Current cross-lane Pareto queue
 
-```text
-1. YM R353 H_factor
-   instantiate the literal CMP99/CMP109 factorwise ordinary/marked bounds
-   that feed the existing differentiated-product / surviving-walk machinery
+The queue distinguishes **cheap acquisition order** from the **first genuinely new analytic theorem**.
 
-2. YM R353 H_sum
-   instantiate the retained CMP116 marked/tree summability on the SAME walk carrier
+```text
+CHEAP / SOURCE-REPLAY FIRST
+
+1. YM R353 H_factor
+   instantiate literal CMP99/CMP109 ordinary + marked factor/walk bounds
+
+2. YM R354 H_sum
+   instantiate the CMP116 charged-family summability after a positive
+   residual tree/localisation rate has been retained
 
 3. YM R353 H_scale
    source marked Hessian majorant
      <= sourceLipschitz * sourceSubstitutionDistance
 
-4. YM R352 H_stab^attach
-   same-object attachment of selected Hessian difference, Lipschitz constant,
-   and substitution distance to the source coordinates
+FIRST GENUINELY NEW ANALYTIC GEOMETRY IN THIS PRODUCER
 
-5. YM R351 H_sub^source
-   literal CMP116 substituted-background displacement theorem
-     d_sub^source <= M_marked^source
+4. YM R354 H_charge
+   raw CMP99 marked surviving-walk/localisation majorant
+     <= charged majorant retaining either discrepancy distance
+        or enough positive tree/localisation length
 
-6. YM R351 H_sub^attach
-   selected/source same-object attachment for displacement and mark
+SAME-OBJECT / SOURCE ATTACHMENT
 
-7. YM R348 C_attach
-   source/Cauchy coefficient = literal R318 selected mixed-log response
+5. YM R352 H_stab^attach
+6. YM R351 H_sub^source
+7. YM R351 H_sub^attach
+8. YM R348 C_attach
+9. YM R346 D_time
 
-8. YM R346 D_time
-   selected R318 physical distance = Euclidean spectral time
+CROSS-LANE AFTER YM
 
-9. RH R1a/R1b
-   final-near checked-object / literal-finite representation transport
-   when theorem-bearing checked-near material is recoverable
-
-10. RH R2
-   fresh strict literal-complement analysis.
+10. RH R1a/R1b when theorem-bearing checked-near material is recoverable
+11. RH R2 fresh strict literal-complement analysis.
 ```
 
-Pareto note: `H_factor`, `H_sum`, and `H_scale` are independent acquisition coordinates until source archaeology proves one source theorem supplies more than one. Do not force an arbitrary sequential dependency among them merely because they are listed in proof-search order.
+Pareto rule: if H_factor/H_sum source replay reveals that the source already pays part of H_charge on the exact carrier, immediately recut rather than treating the list as a fixed dependency order.
 
 ## 3. YM T78-B current preferred producer
 
-Current integration vehicle: PR #944, internal R345--R353.
+Current integration vehicle: PR #944, internal R345--R354.
 
 Backward from the terminal consumer:
 
@@ -87,7 +87,7 @@ SameHamiltonianPhysicalMassGap
 <- { R348 C_attach , R350 H_stab , R350 H_sub }
 <- { R352 H_stab^source , R352 H_stab^attach,
      R351 H_sub^source , R351 H_sub^attach }
-<- { R353 H_factor , R353 H_sum , R353 H_scale }
+<- { R353 H_factor , R354 H_charge , R354 H_sum , R353 H_scale }
      + R352 H_stab^attach.
 ```
 
@@ -95,8 +95,12 @@ Forward from source acquisition:
 
 ```text
 CMP99/CMP109 factorwise marked input
-+ CMP116 retained marked/tree summability
--> existing marked-walk cancellation/resummation compiler
+-> H_factor
+
+H_factor
++ H_charge
++ CMP116 charged-family summability H_sum
+-> existing finite marked-walk/localisation resummation compiler
 -> source marked Hessian majorant
 
 + H_scale
@@ -123,206 +127,91 @@ H_stab + H_sub
 -> existing clustering-to-gap compiler.
 ```
 
-This forward/backward agreement is the current **BIDI invariant**: downstream consumers determine the least source statement to acquire, but may not define or weaken source semantics post hoc.
+The BIDI invariant remains: downstream consumers determine the least source statement to acquire, but may not define or weaken source semantics post hoc.
 
-## 4. R345--R353 reductions
+## 4. R345--R354 reductions
 
 ### R345--R346
 
-R345 removes fixed-amplitude overpayment. R346 keeps the literal shared-marked amplitude
+R345 removes fixed-amplitude overpayment. R346 keeps the literal shared-marked amplitude `A_H = (1/4) C_H` directly; `C_H <= 1` is not primitive.
 
-```text
-A_H = (1/4) C_H
-```
+### R347--R350
 
-directly. `C_H <= 1` is not primitive.
-
-### R347
-
-Descends `L_marked` below generic Cauchy machinery. Pointwise-boundary -> Cauchy coefficient/Hessian lifting is already owned.
-
-### R348
-
-R318 already constructs the selected source directions. The surviving scalar same-object coordinate is only
-
-```text
-C_attach:
-source/Cauchy coefficient(J_L,J_R)
-  = literal selected mixed-log response(J_L,J_R).
-```
-
-### R349
-
-R304 distance=time is donor-only because acquiring it through R296 reintroduces a stronger rooted-shell producer. Direct `D_time` remains preferred.
-
-### R350
-
-Splits the selected boundary comparison into
-
-```text
-H_stab:
-Hessian-integrand difference <= lipschitz * substitutionDistance
-
-H_sub:
-substitutionDistance <= markedInput.
-```
-
-No fresh Cauchy theorem or boundary-envelope theorem is primitive.
+R347 descends `L_marked` below generic Cauchy machinery. R348 removes fresh J-direction selection and leaves only `C_attach`. R349 keeps the older R304 distance=time path donor-only. R350 splits the marked comparison into `H_stab` and `H_sub`; generic boundary/Cauchy assembly is not primitive.
 
 ### R351
 
-Splits `H_sub` into:
-
-```text
-H_sub^source:
-sourceSubstitutionDistance <= sourceMarkedInput
-
-H_sub^attach:
-selectedSubstitutionDistance = sourceSubstitutionDistance
-selectedMarkedInput = sourceMarkedInput.
-```
-
-Equality transport is source-written in `BalabanSelectedSubstitutionMarkedSourceRound351Exact.agda`.
-
-Important firewall:
-
-```text
-CMP99 marked background-propagator/domain comparison
-  != direct H_sub payment.
-```
+`H_sub` becomes source displacement theorem + selected/source same-object attachment. CMP99 marked propagator/domain comparison is explicitly **not** direct H_sub payment.
 
 ### R352
 
-Splits `H_stab` analogously:
-
-```text
-H_stab^source:
-sourceHessianDifference <= sourceLipschitz * sourceSubstitutionDistance
-
-H_stab^attach:
-selectedHessianDifference = sourceHessianDifference
-selectedLipschitz = sourceLipschitz
-selectedSubstitutionDistance = sourceSubstitutionDistance.
-```
-
-Equality transport is source-written in `BalabanSelectedHessianStabilitySourceRound352Exact.agda`.
+`H_stab` becomes source local stability theorem + selected/source same-object attachment. Round53 Wilson/coercivity Lipschitz is donor-only because it is the wrong carrier.
 
 ### R353
 
-R352's `H_stab^source` is no longer treated as one opaque analytic theorem. The historical repo already owns:
+`H_stab^source` descends to the existing marked-walk compiler. `BalabanSelectedHessianWalkResummationCutRound353Exact.agda` constructs the R352 source inequality from the existing marked local-Hessian estimate plus one final `H_scale` comparison. The physical source inputs behind the marked-walk record remain explicit.
+
+No fresh generic Cauchy/Hessian derivative theorem is required: the source has already differentiated to the relevant E^(2)/localized-Hessian level.
+
+### R354
+
+`H_sum` is split again because CMP116 ordinary summability and the extra CMP99 discrepancy mark are not the same theorem.
+
+`BalabanMarkedWalkChargingCutRound354Exact.agda` proves only:
 
 ```text
-finite factor-product telescoping
-common-walk cancellation
-surviving-walk triangle inequality
-finite marked-walk summation compiler.
+pointwise rawMarked <= charged
++ sum charged <= envelope
+--------------------------------
+  sum rawMarked <= envelope.
 ```
 
-`BalabanSelectedHessianWalkResummationCutRound353Exact.agda` composes the existing `BalabanMarkedPolarisationResummation.markedLocalisedHessianEstimate` with one final source-scale comparison and compiles the result directly into the R352 source ABI.
-
-The remaining source-facing coordinates are therefore:
+Thus:
 
 ```text
-H_factor:
-  physical CMP99/CMP109 ordinary + marked factor/walk bounds
+H_charge:
+  marked distance OR sufficiently large localisation/tree length
 
 H_sum:
-  physical CMP116 marked/tree summability on the same surviving-walk carrier
-
-H_scale:
-  source Hessian marked majorant
-    <= sourceLipschitz * sourceSubstitutionDistance.
+  charged family is summable with retained positive tree/localisation rate.
 ```
 
-The older `BalabanDifferentiatedMarkedFactorProductExact` already proves the finite product telescope from factorwise bounds. It is not imported into the R353 theorem cone because its historical generic-real helper surface predates the newer safety boundary; that is certification/import debt, not new YM mathematics.
+The finite sum compiler is owned. `H_charge` is the first presently visible genuinely new block-scale analytic geometry in this producer family.
 
-Critical correction:
+## 5. Source investigation map
 
-```text
-CMP99/CMP109/CMP116 source archaeology
-  does NOT justify reopening a generic Cauchy/Hessian derivative theorem.
-```
-
-The source has already differentiated to the relevant E^(2)/localized Hessian level. Preserve the marked distance and tree-length weights through resummation instead.
-
-## 5. Current source investigation map
-
-### H_factor — first candidate physical/source leaf
-
-Use the literal source chain already identified in `BalabanPropagatorSourceLedger.md`:
+### H_factor
 
 ```text
 CMP99 Theorem 3.14/(3.154)
-  surviving localized propagator/background difference gets marked distance
+  marked difference on surviving localized propagator/background factor
 +
 CMP109 (4.3)--(4.5)
   already-differentiated finite tree/factor expressions with ordinary decay
--> literal factorwise marked estimates on the CMP116 walk carrier.
+-> literal factorwise marked estimates.
 ```
 
-The finite product telescope is already compiler-owned. The live work is same-object instantiation of its factor bounds / the equivalent surviving-walk marked estimate.
+The noncommutative/commutative finite telescopes already exist. Their literal CMP109 factor instantiation remains conditional.
+
+### H_charge — first live Level-2 theorem inside this producer
+
+The older resummation owner already names the exact field `markedDistanceOrLargeLocalisation` and states that the actual block-scale geometry proving it is the remaining CMP99/109 lemma.
+
+Do not replace this with a generic absolute/Cauchy estimate. The desired geometry preserves either the discrepancy-distance exponent or a residual positive tree/localisation exponent.
 
 ### H_sum
 
-CMP116 must retain the marked discrepancy factor jointly with the positive tree/localisation decay. Do not take an infimum over the localization set that discards the compensating tree-length cost.
-
-Existing `BalabanMarkedPolarisationResummation` consumes this as `markedWalkSummability`; the finite sum proof itself is already owned.
+CMP116 (1.24)--(1.29) already demonstrates ordinary localization/tree summation to an exponential `d_k(Y)` bound. The live same-carrier payment is to instantiate that summation **after H_charge**, with the residual positive decay retained.
 
 ### H_scale
 
-After marked-walk resummation, compare the resulting source majorant with the exact `L^source * d_sub^source` quantity required by R352. This is distinct from proving the walk estimate itself.
+Compare the resulting source marked Hessian majorant with the exact `L^source * d_sub^source` quantity required by R352. This is distinct from H_factor/H_charge/H_sum.
 
 ### H_sub^source
 
-```text
-CMP116 Sect. 1 substituted-background construction around (1.13)--(1.21)
--> exact source displacement/mark inequality
--> R351 H_sub^source.
-```
+CMP116 Sect. 1 around (1.13)--(1.21) gives the substituted-background analytic construction and absolute bounds. The exact source displacement/mark comparison needed by R351 remains to be extracted/replayed; absolute smallness alone does not imply the selected displacement theorem.
 
-### Same-object attachments
-
-R351 and R352 separate source theorem possession from application to the exact R318/R350 selected pair. Citation/status cannot inhabit these fields.
-
-Primary source identifiers:
-
-- T. Bałaban, *Propagators for Lattice Gauge Theories in a Background Field*, CMP 99(3) (1985), DOI `10.1007/BF01240355`.
-- T. Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories I*, CMP 109 (1987), DOI `10.1007/BF01215223`.
-- T. Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, CMP 116 (1988), DOI `10.1007/BF01239022`.
-
-## 6. BIDI roadmap
-
-### Consumer -> source, backwards
-
-```text
-mass gap
-<- continuum covariance decay
-<- finite selected covariance upper
-<- L_marked + D_time
-<- C_attach + H_stab + H_sub
-<- H_stab^attach + H_sub^source + H_sub^attach
-   + H_factor + H_sum + H_scale.
-```
-
-This direction identifies the least consumer-sufficient source statements and blocks stronger historical routes from becoming accidental prerequisites.
-
-### Source -> consumer, forwards
-
-```text
-H_factor + H_sum
--> existing marked-walk/local-Hessian compiler
-+ H_scale
--> H_stab^source
-+ selected attachment -> H_stab
-
-source substitution displacement + selected attachment -> H_sub
-H_stab + H_sub -> generic boundary/Cauchy coefficient bound
-+ C_attach -> literal selected mixed-log response bound
-+ D_time -> continuum covariance decay
--> existing spectral-gap compiler.
-```
-
-### BIDI firewalls
+## 6. BIDI firewalls
 
 Do not allow:
 
@@ -331,70 +220,56 @@ downstream selected consumer -> define source semantics
 source citation/status -> selected physical theorem
 CMP99 marked-domain comparison -> H_sub by name similarity
 CMP99 marked propagator theorem -> full H_factor without CMP109 same-factor instantiation
-CMP116 summability -> H_factor by name similarity
+CMP116 ordinary summability -> H_charge
+H_charge -> H_sum without retained positive tree/localisation rate
 Wilson/coercivity Lipschitz donor -> H_stab without same-carrier theorem
 fresh generic Cauchy derivative loss -> mandatory after source has already differentiated E^(2)
 compiler availability -> source theorem possession
 stronger rooted-shell producer -> mandatory route merely because it exists.
 ```
 
-## 7. Roadmap position after R353
+## 7. Roadmap position after R354
 
-The global roadmap remains unchanged at the top: **same-family quantitative continuum clustering is the YM mass-gap consumer**. R353 only shrinks one optional/direct CMP116 producer beneath that consumer.
+The global roadmap is unchanged at the top: **same-family quantitative continuum clustering is the YM mass-gap consumer**.
 
-The preferred local route has reached literal source factor/walk estimates:
+R354 only sharpens the current CMP116 producer beneath that consumer. The local mathematical frontier is no longer “prove a marked Hessian theorem”; it is the exact marked source geometry:
 
 ```text
-pay physical marked factor/walk input,
-pay retained marked/tree summability,
-pay the source scale comparison,
-attach the resulting source H_stab to the selected carrier,
-pay source H_sub + its attachment,
-pay C_attach and D_time,
-then reuse existing downstream compilers.
+literal factorwise marked estimate
++ discrepancy-vs-localisation charging
++ retained-tree CMP116 summation
++ source scale comparison
+-> H_stab^source.
 ```
 
-The main mathematical risk has therefore moved away from generic Hessian/Cauchy calculus and into the **same-object marked CMP99/CMP109/CMP116 estimate and its retained-tree resummation**.
-
-T78-A/T78-C remain live on the same construction but Pareto-dominated unless they pay one of these leaves for free. Step-V/KP and Heat/Doob/Langevin remain alternative producer families, not mandatory architecture. Unification/common-action remains downstream consistency structure and does not currently shorten R351--R353.
+T78-A/T78-C remain live but Pareto-dominated unless they pay one of these leaves for free. Step-V/KP and Heat/Doob/Langevin remain alternate producer families, not mandatory architecture. Unification/common-action remains downstream consistency structure and does not currently shorten R351--R354.
 
 ## 8. RH current route
 
-### R1
-
 ```text
 R1a: nearResponseAt(J) = N_checked
-R1b: N_checked = finiteNearSum(literal cells).
+R1b: N_checked = finiteNearSum(literal cells)
+R2: literalNear(J) + B_far(J) + D_Gamma(g_pole)
+      < actual ClusterResponse(g_pole)
 ```
 
-The accessible checked return exposes status/coordinates but no recoverable theorem-bearing checked scalar object in the audited repo surfaces. Stop archaeology until such an object reappears.
-
-### R2
-
-```text
-literalNear(J) + B_far(J) + D_Gamma(g_pole)
-  < actual ClusterResponse(g_pole)
-```
-
-uniformly for arbitrary high off-line zeros. This remains the first direct high analytic family after R1.
+Stop R1 archaeology until a theorem-bearing checked-near object is recoverable. R2 remains the first direct high analytic family after R1.
 
 ## 9. Explicitly dominated / pruned requirements
 
 Do not reintroduce as primitive:
 
 ```text
-#940 / R343 {S1,B2} preferred route
+#940 / R343 {S1,B2}
 R343 sourceEnvelope -> clusteringEnvelope calibration
 C_H <= 1
 fresh J-direction selection
 fresh mixed-log -> connected-covariance calculus
 fresh Cauchy coefficient extraction
 fresh boundary-envelope construction
-fresh generic Cauchy Hessian-Lipschitz theorem after E^(2) is already source-native
-reverse rootedShell <= markedAnalyticShell
-equality with older hessianInfluenceShell
+fresh generic Cauchy Hessian-Lipschitz theorem after E^(2) is source-native
 forcing T78-B through Heat/Doob/Langevin
-forcing T78-B through Step-V/KP merely because that route exists
+forcing T78-B through Step-V/KP merely because it exists
 fresh clustering-to-gap theorem
 R304/R296 rooted-shell path merely to obtain D_time
 CMP99 marked-domain comparison counted directly as H_sub
@@ -407,6 +282,6 @@ This board is scheduling/accounting only.
 
 - `machineChecked` labels are not fresh exact-head kernel receipts.
 - CodeRabbit status is not Agda validation.
-- R351--R353 are source-written frontier/transport refinements; their physical/source inputs and selected attachments remain conditional.
-- R353's historical marked-resummation dependency is not promoted to a new `--safe` receipt by import.
+- R351--R354 are source-written frontier/transport refinements; their physical/source inputs and selected attachments remain conditional.
+- Historical imported owners are not promoted to a new `--safe` or kernel receipt by reuse.
 - No Clay Yang--Mills solution or RH proof is claimed.
