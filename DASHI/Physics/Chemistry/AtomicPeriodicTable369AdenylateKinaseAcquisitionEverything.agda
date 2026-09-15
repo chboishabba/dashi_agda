@@ -48,6 +48,14 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseIntermediate
 -- Role differences are preserved rather than collapsed into gamma-state identity.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaCrystalReferenceAcquisitionExact
 
+-- Ligand-bound gamma_L-near crystal references: Li-Liu-Ji place PDB 1DVR/2C9Y
+-- around gamma_L in the Figure-6 theta1/theta2 landscape.  Independent structural
+-- roles are retained: 1DVR is mutant yeast AdK in an ATP-analogue LID-closed
+-- structure (DOI/PMID paid), whereas 2C9Y is human AK2/B4P with its associated
+-- publication still unresolved.  Cross-species references are not E. coli
+-- same-sequence states and near-gamma_L does not create exact gamma_L identity.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaLCrystalReferenceAcquisitionExact
+
 -- Source-paid projection limitation: the one-dimensional dLN free-energy view
 -- shows a double well and ligand-dependent population shift but averages over
 -- theta1/theta2 states; the three-CV view is richer for the paper's pathway
