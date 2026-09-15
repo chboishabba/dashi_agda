@@ -55,6 +55,29 @@ csiWifiSurvey = Source.mkDOISource
   "survey source for CSI as a sensing observation of multipath, attenuation and phase changes; citation does not imply exact reconstruction"
   Source.publicAttribution
 
+spotFiAoAPrimary : Source.AttributedSource
+spotFiAoAPrimary = Source.mkNoDOISource
+  "Manikanta Kotaru; Kiran Joshi; Dinesh Bharadia; Sachin Katti"
+  "SpotFi: Decimeter Level Localization Using WiFi"
+  "ACM SIGCOMM 2015"
+  "2015"
+  "https://web.stanford.edu/~skatti/pubs/sigcomm15-spotfi.pdf"
+  Source.academicArticleSource
+  "primary research source for the bounded claim that commodity Wi-Fi CSI from a small antenna array can support angle-of-arrival estimation of multipath components; not a claim that coarse CSI amplitude alone determines angle or exact world state"
+  Source.publicAttribution
+
+wifiCSIAoAToFPrimary : Source.AttributedSource
+wifiCSIAoAToFPrimary = Source.mkDOISource
+  "Afaz Uddin Ahmed; Reza Arablouei; Frank de Hoog; Brano Kusy; Raja Jurdak; Neil Bergmann"
+  "Estimating Angle-of-Arrival and Time-of-Flight for Multipath Components Using WiFi Channel State Information"
+  "Sensors 18(6):1753"
+  "2018"
+  "10.3390/s18061753"
+  "https://doi.org/10.3390/s18061753"
+  Source.academicArticleSource
+  "primary research source for estimating multipath AoA and time-of-flight from Wi-Fi CSI; pays only the source-bounded measurement relationship, not hardware identity, exact emitter identity, or operational authority"
+  Source.publicAttribution
+
 dcsCommunityLead : Source.AttributedSource
 dcsCommunityLead = Source.mkNoDOISource
   "DCS community contributors"
@@ -114,5 +137,5 @@ phasedArrayRFSensingAtlas : Source.AttributedSourceAtlas
 phasedArrayRFSensingAtlas = Source.mkSourceAtlas
   "phased-array / RF-sensing bounded source atlas"
   "DASHI.Physics.Foundations.PhasedArrayRFSensingSourceAtlasExact"
-  (techIngredientsLead ∷ rfPosePrimary ∷ csiModelSurvey ∷ csiWifiSurvey ∷ dcsCommunityLead ∷ warThunderCommunityLead ∷ hackadayConsumerWifiLead ∷ hackadaySDRPassiveRadarLead ∷ hackadayPhasedArrayThroughWallLead ∷ [])
+  (techIngredientsLead ∷ rfPosePrimary ∷ csiModelSurvey ∷ csiWifiSurvey ∷ spotFiAoAPrimary ∷ wifiCSIAoAToFPrimary ∷ dcsCommunityLead ∷ warThunderCommunityLead ∷ hackadayConsumerWifiLead ∷ hackadaySDRPassiveRadarLead ∷ hackadayPhasedArrayThroughWallLead ∷ [])
   "community leads remain acquisition leads; academic sources pay only bounded observation claims; all system identity, exact hardware provenance, operational use, and authority claims remain separate"
