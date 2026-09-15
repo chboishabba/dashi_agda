@@ -6,14 +6,20 @@ module DASHI.Physics.Foundations.BalabanRound131NativeSectorRecoveryTransportExa
 --
 -- Round131 already proves the native continuum first-variation identity on the
 -- canonical CMP116 metric/stress carrier.  The common-action consumer does not
--- need another continuum or stress theorem.  It needs only explicit transport
--- of perturbations, scalars, and the native stress object into the shared QFT
--- carriers.
+-- need another continuum or stress theorem.
 --
--- This module therefore packages exactly that representation weld into the
--- existing `NativeBalabanSectorRecoveryTransport` interface.  No aggregation is
--- performed here; `BalabanTransportedSectorFamilyProducerExact` owns the
--- all-sector aggregation step.
+-- Pareto recut: the generic native transport consumes only the distinguished
+-- literal stress.  The genuinely live same-object seams are therefore:
+--
+--   1. common perturbation/scalar transport;
+--   2. attachment of Round131's fixed literal construction Y to the selected
+--      QFT target qftTarget(coarseGrain candidate regime);
+--   3. pairing coherence for the one literal sector stress.
+--
+-- Once (2) is supplied, the shared-stress identity is derived from the existing
+-- UnifiedCandidate.qftSectorStressToShared map rather than restated opaquely.
+-- No aggregation is performed here; BalabanTransportedSectorFamilyProducerExact
+-- owns the all-sector aggregation step.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -54,24 +60,25 @@ record Round131SharedTransportData
     fromNativeVariationScalar :
       StressRep.PairingScalar representation → VariationScalar
 
-    nativeStressToShared :
-      StressRep.StressTensor representation → Weld.SharedStressEnergy U
-
-    nativeLiteralStressIsActualSharedSectorStress :
+    -- Same-object construction attachment.  Round131 is proved for one fixed Y;
+    -- the shared consumer is indexed by the selected coarse-grained QFT target.
+    literalConstructionIsSelectedQFTTarget :
       ∀ candidate regime →
       Weld.qftRegime U regime →
-      nativeStressToShared (StressRep.stressTensor representation)
-      ≡ Weld.actualQFTSectorStressShared U
-          (Weld.coarseGrain U candidate regime) group
+      Y ≡ Weld.qftTarget U (Weld.coarseGrain U candidate regime)
 
     sharedStressMetricPairing :
       Weld.SharedStressEnergy U → MetricPerturbation → VariationScalar
 
-    nativePairingCommutes :
-      ∀ stress perturbation →
-      sharedStressMetricPairing (nativeStressToShared stress) perturbation
+    -- Only the distinguished literal sector stress is consumed downstream.
+    literalStressPairingCommutes :
+      ∀ perturbation →
+      sharedStressMetricPairing
+        (Weld.qftSectorStressToShared U group (Top.stressTensor Y group))
+        perturbation
       ≡ fromNativeVariationScalar
-          (StressRep.stressMetricPairing representation stress
+          (StressRep.stressMetricPairing representation
+            (StressRep.stressTensor representation)
             (toNativeMetricPerturbation perturbation))
 
 open Round131SharedTransportData public
@@ -89,6 +96,7 @@ round131RecoveryToNativeSectorTransport :
   Transport.NativeBalabanSectorRecoveryTransport
     {U = U} group MetricPerturbation VariationScalar
 round131RecoveryToNativeSectorTransport
+    {U = U} {Y = Y} {group = group}
     {domain = domain} {representation = representation}
     recovery dataSet = record
   { Transport.NativeBalabanSectorRecoveryTransport.NativeMetricPerturbation =
@@ -111,18 +119,29 @@ round131RecoveryToNativeSectorTransport
       toNativeMetricPerturbation dataSet
   ; Transport.NativeBalabanSectorRecoveryTransport.fromNativeVariationScalar =
       fromNativeVariationScalar dataSet
-  ; Transport.NativeBalabanSectorRecoveryTransport.nativeStressToShared =
-      nativeStressToShared dataSet
+  ; Transport.NativeBalabanSectorRecoveryTransport.nativeLiteralStressShared =
+      Weld.qftSectorStressToShared U group (Top.stressTensor Y group)
   ; Transport.NativeBalabanSectorRecoveryTransport.nativeLiteralStressIsActualSharedSectorStress =
-      nativeLiteralStressIsActualSharedSectorStress dataSet
+      λ candidate regime qftAtRegime →
+        cong
+          (λ construction →
+            Weld.qftSectorStressToShared U group
+              (Top.stressTensor construction group))
+          (literalConstructionIsSelectedQFTTarget
+            dataSet candidate regime qftAtRegime)
   ; Transport.NativeBalabanSectorRecoveryTransport.sharedStressMetricPairing =
       sharedStressMetricPairing dataSet
-  ; Transport.NativeBalabanSectorRecoveryTransport.nativePairingCommutes =
-      nativePairingCommutes dataSet
+  ; Transport.NativeBalabanSectorRecoveryTransport.nativeLiteralPairingCommutes =
+      literalStressPairingCommutes dataSet
   }
 
 round131NativeSectorTransportCompilerLevel : ProofLevel
 round131NativeSectorTransportCompilerLevel = machineChecked
+
+-- Alias required by the focused Pareto validation root.
+round131LiteralSectorTransportCompilerLevel : ProofLevel
+round131LiteralSectorTransportCompilerLevel =
+  round131NativeSectorTransportCompilerLevel
 
 record Round131NativeSectorTransportBoundary : Set where
   constructor round131-native-sector-transport-boundary
@@ -135,9 +154,17 @@ record Round131NativeSectorTransportBoundary : Set where
     secondStressConvergenceTheoremRequiredIsFalse :
       secondStressConvergenceTheoremRequired ≡ false
 
-    explicitCarrierTransportStillRequired : Bool
-    explicitCarrierTransportStillRequiredIsTrue :
-      explicitCarrierTransportStillRequired ≡ true
+    allNativeStressTransportRequired : Bool
+    allNativeStressTransportRequiredIsFalse :
+      allNativeStressTransportRequired ≡ false
+
+    literalConstructionAttachmentStillRequired : Bool
+    literalConstructionAttachmentStillRequiredIsTrue :
+      literalConstructionAttachmentStillRequired ≡ true
+
+    literalPairingCoherenceStillRequired : Bool
+    literalPairingCoherenceStillRequiredIsTrue :
+      literalPairingCoherenceStillRequired ≡ true
 
     allSectorAggregationPaidHere : Bool
     allSectorAggregationPaidHereIsFalse :
@@ -149,5 +176,7 @@ canonicalRound131NativeSectorTransportBoundary =
   round131-native-sector-transport-boundary
     false refl
     false refl
+    false refl
+    true refl
     true refl
     false refl
