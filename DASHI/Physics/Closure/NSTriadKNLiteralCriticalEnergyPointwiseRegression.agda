@@ -1,0 +1,31 @@
+module DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseExact as Energy
+
+literalModeEnergySplitClosed :
+  Energy.literalModeCriticalEnergySplitClosed ≡ true
+literalModeEnergySplitClosed =
+  Energy.literalModeCriticalEnergySplitClosedIsTrue
+
+literalFiniteEnergySplitClosed :
+  Energy.literalFiniteCriticalEnergySplitClosed ≡ true
+literalFiniteEnergySplitClosed =
+  Energy.literalFiniteCriticalEnergySplitClosedIsTrue
+
+pointwiseSplitUsesLiteralProjectedNonlinearity :
+  Energy.pointwiseSplitUsesLiteralProjectedNonlinearity ≡ true
+pointwiseSplitUsesLiteralProjectedNonlinearity =
+  Energy.pointwiseSplitUsesLiteralProjectedNonlinearityIsTrue
+
+pointwiseSplitIntroducesNoCalculusAuthority :
+  Energy.pointwiseSplitIntroducesCalculusAuthority ≡ false
+pointwiseSplitIntroducesNoCalculusAuthority =
+  Energy.pointwiseSplitIntroducesCalculusAuthorityIsFalse
+
+integratedCriticalEnergyIdentityStillNeedsCalculus :
+  Energy.integratedCriticalEnergyIdentityClosed ≡ false
+integratedCriticalEnergyIdentityStillNeedsCalculus =
+  Energy.integratedCriticalEnergyIdentityClosedIsFalse
