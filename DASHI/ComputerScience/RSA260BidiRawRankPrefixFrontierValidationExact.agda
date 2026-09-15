@@ -1,0 +1,9 @@
+module DASHI.ComputerScience.RSA260BidiRawRankPrefixFrontierValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiRawRankPrefixFrontierExact as Raw
+
+boundary : Raw.RawRankPrefixFrontierBoundary
+boundary = Raw.canonicalRawRankPrefixFrontierBoundary
+
+firstResidual : Raw.RawRankPrefixResidual
+firstResidual = Raw.firstRawRankPrefixResidual
