@@ -11,6 +11,9 @@ paidInterfaceRegression :
   × P.RecognizedLinearZetaBoundary.linearZetaInterfaceAvailable
     P.currentRecognizedLinearZetaBoundary
   ≡ true
+  × P.RecognizedLinearZetaBoundary.base369ReverseRecognitionCompilerAvailable
+    P.currentRecognizedLinearZetaBoundary
+  ≡ true
   × P.RecognizedLinearZetaBoundary.sameSelectedProducerEqualityRequired
     P.currentRecognizedLinearZetaBoundary
   ≡ true
@@ -20,10 +23,13 @@ paidInterfaceRegression :
   × P.RecognizedLinearZetaBoundary.orbifoldPhaseSourcePaid
     P.currentRecognizedLinearZetaBoundary
   ≡ true
-paidInterfaceRegression = refl , refl , refl , refl , refl
+paidInterfaceRegression = refl , refl , refl , refl , refl , refl
 
 unpaidWitnessRegression :
   P.RecognizedLinearZetaBoundary.orbifoldSourceCreatesActualRecognition
+    P.currentRecognizedLinearZetaBoundary
+  ≡ false
+  × P.RecognizedLinearZetaBoundary.base369RecognitionCandidateInhabited
     P.currentRecognizedLinearZetaBoundary
   ≡ false
   × P.RecognizedLinearZetaBoundary.recognitionInhabitantPaid
@@ -38,4 +44,4 @@ unpaidWitnessRegression :
   × P.RecognizedLinearZetaBoundary.oeisHasRecognitionAuthority
     P.currentRecognizedLinearZetaBoundary
   ≡ false
-unpaidWitnessRegression = refl , refl , refl , refl , refl
+unpaidWitnessRegression = refl , refl , refl , refl , refl , refl
