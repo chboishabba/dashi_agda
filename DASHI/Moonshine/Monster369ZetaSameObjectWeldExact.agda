@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Algebra.TriadicDepthOneCharacters as DepthOne
 import DASHI.Moonshine.C3FourierConjugationExact as Fourier
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
+import DASHI.Moonshine.GradedRepresentation as GR
 import DASHI.Moonshine.Monster3BPhaseTransportExact as Phase
 import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
 import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact as VOAAdapter
@@ -83,7 +84,7 @@ cyclotomicConjugationMatchesSelectedInverseScalar = C3.conjugateZetaIsZetaSquare
 ------------------------------------------------------------------------
 
 literalVOAZetaSectorIsSelectedEigenspace :
-  ∀ {G K : Set} {group} →
+  ∀ {G K : Set} {group : GR.Group G} →
   (source : VOAAdapter.ActualMonster3BVOAPhaseActionSource G K group) →
   VOAAdapter.literalVOAZetaSector source
   ≡ Inertia.CentralEigenspace
