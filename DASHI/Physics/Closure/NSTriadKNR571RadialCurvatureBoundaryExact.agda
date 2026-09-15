@@ -13,13 +13,17 @@ module DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact where
 -- For the homochiral R571 multiplier m_sigma(k) = sigma |k| this is precisely
 -- the centered second-difference / Euclidean-radius curvature estimate.
 --
--- The post-#935 square-gap owner now pays the exact denominator-cleared algebra:
--- the centered defect times the two radial sums is a sum of two square-gap
--- numerators.  Therefore the remaining A2 payment is no longer opaque Taylor
--- theory.  It is the ordered/annular denominator control plus the geometric
--- bound on that square-gap combination.
+-- The square-gap owner pays the exact denominator-cleared algebra.  The
+-- centered-shift owner additionally proves on the literal integer Fourier
+-- carrier
 --
--- Existing finite centered/six-three compilers remain downstream consumers.
+--   (k+y) + (k-y) = 2k,
+--   |2k|^2 = 4|k|^2,
+--   Plucker(k+y,k-y) = 4 Plucker(k,y).
+--
+-- Therefore the remaining A2 payment is no longer opaque Taylor theory or
+-- unresolved lattice geometry.  It is scalar radius doubling, ordered/annular
+-- denominator control, and the final angular/square-gap second-moment bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -32,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact as Weld
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact as GateA
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as SquareGap
+import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceExact as Taylor
 
 record R571PreferredRadialCurvatureSample : Set₁ where
@@ -62,9 +67,6 @@ preferredPlusRemainderIsExactlyZero sample =
     (sign sample) (scalars sample)
     (center sample) (plus sample) (minus sample)
 
--- The record above remains the least-privilege A2 producer socket.  The new
--- square-gap theorem is an exact algebraic reduction of that socket, not a
--- manufactured uniform bound.
 r571A2RadialCurvatureIsolated : Bool
 r571A2RadialCurvatureIsolated = true
 
@@ -74,6 +76,22 @@ r571A2PlusRemainderEliminatedByPreferredLinearization = true
 r571A2SquareGapNumeratorReductionClosed : Bool
 r571A2SquareGapNumeratorReductionClosed =
   SquareGap.r571A2CenteredRadiusDefectSquareGapRationalized
+
+r571A2CenteredShiftModeGeometryClosed : Bool
+r571A2CenteredShiftModeGeometryClosed =
+  CenteredShift.r571A2CenteredShiftModeSumClosed
+
+r571A2CenteredShiftSquaredOutputScalingClosed : Bool
+r571A2CenteredShiftSquaredOutputScalingClosed =
+  CenteredShift.r571A2CenteredShiftSquaredOutputScalingClosed
+
+r571A2CenteredShiftPluckerScalingClosed : Bool
+r571A2CenteredShiftPluckerScalingClosed =
+  CenteredShift.r571A2CenteredShiftPluckerScalingClosed
+
+r571A2CenteredShiftScalarRadiusDoublingClosed : Bool
+r571A2CenteredShiftScalarRadiusDoublingClosed =
+  CenteredShift.r571A2CenteredShiftScalarRadiusDoublingClosed
 
 r571A2OrderedRadialDenominatorPaymentClosed : Bool
 r571A2OrderedRadialDenominatorPaymentClosed =
