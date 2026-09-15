@@ -22,6 +22,18 @@ routeSelectionRegression :
   ≡ false
 routeSelectionRegression = refl , refl , refl , refl , refl
 
+bidiFallbackRegression :
+  P.RecognitionRouteParetoBoundary.wholeCharacterInterfaceSeamLocalized
+    P.canonicalRecognitionRouteParetoBoundary
+  ≡ true
+  × P.RecognitionRouteParetoBoundary.failedCoarseRouteReopensConstituentResidual
+    P.canonicalRecognitionRouteParetoBoundary
+  ≡ true
+  × P.RecognitionRouteParetoBoundary.failedCoarseRouteForcesConcreteBasisReconstruction
+    P.canonicalRecognitionRouteParetoBoundary
+  ≡ false
+bidiFallbackRegression = refl , refl , refl
+
 paymentRegression :
   P.RecognitionRouteParetoBoundary.actualKernelReplayReceiptObserved
     P.canonicalRecognitionRouteParetoBoundary
