@@ -91,6 +91,51 @@ record CheckedScalarLiteralFoldIdentification
 
 open CheckedScalarLiteralFoldIdentification public
 
+------------------------------------------------------------------------
+-- Least-privilege refinement of R1b.
+--
+-- The retained Lean source separately names the reflection-paired scalar formula,
+-- while the final Agda consumer needs the finite fold of literal cells.  Keep
+-- those identities distinct so source recovery can pay either edge without
+-- manufacturing the other:
+--
+--   checked scalar = literal reflection-pair scalar = finite cell fold.
+------------------------------------------------------------------------
+
+record CheckedScalarLiteralReflectionPairIdentification
+    {S : NearFar.OrderedAdditiveNearFarSurface}
+    (checkedNearScalar literalReflectionPairScalar : NearFar.Scalar S) : Set where
+  field
+    identifiedCheckedScalarIsLiteralReflectionPairScalar :
+      checkedNearScalar ≡ literalReflectionPairScalar
+
+open CheckedScalarLiteralReflectionPairIdentification public
+
+record LiteralReflectionPairFiniteFoldIdentification
+    {S : NearFar.OrderedAdditiveNearFarSurface}
+    (literalReflectionPairScalar literalFiniteNearValue : NearFar.Scalar S) : Set where
+  field
+    identifiedLiteralReflectionPairScalarIsFiniteFold :
+      literalReflectionPairScalar ≡ literalFiniteNearValue
+
+open LiteralReflectionPairFiniteFoldIdentification public
+
+compileCheckedScalarLiteralFoldIdentificationFromReflectionPairSplit :
+  forall {S} ->
+  {checkedNearScalar literalReflectionPairScalar literalFiniteNearValue : NearFar.Scalar S} ->
+  CheckedScalarLiteralReflectionPairIdentification
+    checkedNearScalar literalReflectionPairScalar ->
+  LiteralReflectionPairFiniteFoldIdentification
+    literalReflectionPairScalar literalFiniteNearValue ->
+  CheckedScalarLiteralFoldIdentification checkedNearScalar literalFiniteNearValue
+compileCheckedScalarLiteralFoldIdentificationFromReflectionPairSplit
+    checkedToReflection reflectionToFold = record
+  { identifiedCheckedScalarIsLiteralFiniteNearValue =
+      trans
+        (identifiedCheckedScalarIsLiteralReflectionPairScalar checkedToReflection)
+        (identifiedLiteralReflectionPairScalarIsFiniteFold reflectionToFold)
+  }
+
 record FinalNearCheckedScalarBridge
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
@@ -227,6 +272,12 @@ record FinalNearLiteralKernelBoundary : Set where
     r1aCheckedScalarAttachmentInhabitedIsFalse : r1aCheckedScalarAttachmentInhabited ≡ false
     r1bLiteralFoldIdentificationInhabited : Bool
     r1bLiteralFoldIdentificationInhabitedIsFalse : r1bLiteralFoldIdentificationInhabited ≡ false
+    r1b1CheckedScalarReflectionPairIdentificationInhabited : Bool
+    r1b1CheckedScalarReflectionPairIdentificationInhabitedIsFalse :
+      r1b1CheckedScalarReflectionPairIdentificationInhabited ≡ false
+    r1b2ReflectionPairFiniteFoldIdentificationInhabited : Bool
+    r1b2ReflectionPairFiniteFoldIdentificationInhabitedIsFalse :
+      r1b2ReflectionPairFiniteFoldIdentificationInhabited ≡ false
     statusReceiptPaysR1Equality : Bool
     statusReceiptPaysR1EqualityIsFalse : statusReceiptPaysR1Equality ≡ false
     analyticClusterMarginPaidHere : Bool
@@ -252,4 +303,6 @@ canonicalFinalNearLiteralKernelBoundary =
     false refl
     false refl
     false refl
-    "R1 is evaluator-independent and now split into two independently payable theorem obligations. R1a attaches final nearResponseAt(chosen J) to one checked/imported finite-near scalar. R1b identifies that SAME scalar with the literal finite cell fold. Generic target-gap/even-projection algebra and the retained Lean reflection-pair formula do not inhabit either payment; the 8883 status owner explicitly records that Lean proof terms are not transported into Agda. The bundled bridge and final R1 equality compile from R1a+R1b. Certificates remain downstream; no strict ClusterResponse inequality or RH is proved here."
+    false refl
+    false refl
+    "R1 is evaluator-independent. R1a attaches final nearResponseAt(chosen J) to one checked/imported finite-near scalar. R1b is now factored further: R1b1 identifies that checked scalar with the literal reflection-pair scalar on the final universal pole-quotient carrier; R1b2 identifies the SAME reflection-pair scalar with the literal finite cell fold. The retained Lean reflection-pair theorem is source ownership only in the current return, so it does not inhabit R1b1; generic phase algebra does not inhabit the final pole-quotient carrier either. R1b compiles from R1b1+R1b2, and final R1 compiles from R1a+R1b. Certificates remain downstream; no strict ClusterResponse inequality or RH is proved here."
