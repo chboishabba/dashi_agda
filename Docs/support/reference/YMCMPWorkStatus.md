@@ -15,13 +15,13 @@ Use this classification instead:
 | CMP99 | SOURCE PROPAGATOR AUTHORITY OWNED | regular-background Green/gradient bounds, analytic background dependence, marked domain-sequence propagator comparison / discrepancy-decay source boundary | exact attachment of the published marked propagator-difference theorem to a selected later `H(s(Y0))` carrier; not a direct fixed-point displacement theorem |
 | CMP102 | SOURCE VARIATIONAL/BACKGROUND AUTHORITY OWNED | background criticality/minimization/uniqueness modulo gauge, analyticity/locality/derivative locality, common source radius; source contraction/locality proof behind the nonlinear background map | exact same-object identification of the literal nonlinear critical-map `C` and a proof-bearing quantitative contraction/Lipschitz receipt on the selected CMP116 carrier |
 | CMP109 | SOURCE/COMPILER LARGELY OWNED | regular small-field effective-action lane, differentiated coordinate machinery, Eq.(5.1)-facing continuation interfaces, downstream BC/response compilers | a *specific literal physical differential/source identification* required by a live consumer; not CMP109 as a whole |
-| CMP116 | SOURCE/COMPILER LARGELY OWNED | localization/cluster-expansion continuation, marked-source/localization machinery, literal substituted-background fixed-point equation, common small-ball contraction construction, common continuation interfaces, Row-C donor machinery | a *specific carrier realization, same-object propagator/map attachment, marked-row or quantitative physical estimate* demanded by the current consumer |
+| CMP116 | SOURCE/COMPILER LARGELY OWNED | localization/cluster-expansion continuation, marked-source/localization machinery, literal substituted-background fixed-point equation, common small-ball contraction construction, common continuation interfaces, Row-C donor machinery | a *specific carrier realization, same-object propagator/map/operation attachment, marked-row or quantitative physical estimate* demanded by the current consumer |
 | CMP119 | SOURCE OBJECT/DICTIONARY LARGELY OWNED | complete-density dictionary, raw source state, finite-beta construction, `rho_k/U_k/E_k/R_k/B_k/A_k/vacuum` vocabulary, Eq.(2.23), function-valued regular `E_k`, selected regular-E projection, source-localization interface | exact same-object realization of a selected physical carrier if not already attached; do not reconstruct the complete-density theory merely because a later wrapper is conditional |
 | CMP122 | PUBLISHED THEOREM BOUNDARY OWNED | Theorem-1/UV-stability authority, finite-history coupling hypothesis, active-scale source theorem carrier, raw-CMP119 active specialization | theorem-bearing exact instantiation on a selected source family if a current consumer lacks it; continuum/OS/mass-gap consequences remain separate and are **not** supplied by CMP122 |
 
-## Current live sensitivity recut: R365--R367
+## Current live sensitivity recut: R365--R368
 
-This is the present high-alpha CMP102/CMP116 application seam on specialist PR #944.
+This is the present high-alpha CMP99/CMP102/CMP116 application seam on specialist PR #944.
 
 CMP116 Part II, Sect. 1 uses the source equation
 
@@ -91,7 +91,30 @@ a quantitative C-Lipschitz proof.
 
 Source analyticity/locality metadata may motivate the attachment, but only the actual contraction theorem on the same `C` carrier can inhabit the R367 payment.
 
-### Current same-object payments after R367
+### R368 — affine argument difference is generic algebra
+
+`BalabanCMP116AffineArgumentDifferenceRound368Exact.agda` removes another false physical primitive.
+
+On an ordinary abelian difference carrier, with operator subtraction acting pointwise, it proves
+
+```text
+(A' - H_L X) - (A' - H_R X)
+  = (H_R - H_L) X.
+```
+
+The common-base cancellation is derived from addition/negation/subtraction laws; the operator step is derived from the generic operator-difference action law. The resulting scalar argument-defect inequality is then reflexive after equality transport.
+
+Therefore:
+
+```text
+argumentDefectBelowPropagatorAction
+```
+
+is no longer a primitive analytic/source estimate on the preferred route.
+
+What remains source-facing is only the **same-object operation attachment**: the actual CMP116 background subtraction and `H_R-H_L` action must instantiate the generic R368 carrier. R368 does not manufacture that identity from shared notation, and it does not pay the CMP99 quantitative propagator bound or the common source ball.
+
+### Current same-object payments after R368
 
 The local `H_sub` route is now concentrated in:
 
@@ -102,22 +125,20 @@ C_attach^102/116:
 H_attach^99/116:
   published CMP99 marked H_L-H_R theorem == selected CMP116 H(s(Y0)) difference;
 
-operation/radius welds:
-  literal subtraction/operator action and source common ball == R366/R365 carriers.
+operation attachment:
+  literal CMP116 background subtraction and operator-difference action
+  instantiate the ordinary R368 affine carrier;
+
+radius/common-ball attachment:
+  source CMP102/CMP116 invariant ball == selected R365/R367 carrier.
 ```
 
-The affine identity
-
-```text
-(A' - H_L X) - (A' - H_R X) = (H_R - H_L) X
-```
-
-is compiler algebra **after** the source operation semantics are attached. It should not become a new PDE/analytic programme merely because the current generic carrier does not expose a canonical operator-subtraction library.
+The affine identity itself is compiler algebra once the operation semantics are attached. It is no longer a separate physical theorem coordinate.
 
 Once those attachments are paid:
 
 ```text
-R367 -> R366 -> R365 -> R364
+R368 -> R367 -> R366 -> R365 -> R364
 ```
 
 constructs the selected substitution displacement path.
@@ -166,7 +187,7 @@ broad CMP reconstruction
 
 Later R248--R250 work strengthens this again: on the preferred concrete Sect.-2 predicate representation, identity decoding, active raw witness assembly, regular-E projection and R247 continuation are compiler-owned. The live BC1 source coordinates are P0 CMP122 theorem witness, P1 physical second variation, P2 literal CMP109 Eq.(5.1) binding and P3 finite normalized CMP116 demand extraction.
 
-Do not conflate that BC1 finite-source-realization lane with the current R365--R367 mass-gap sensitivity lane merely because both mention CMP116.
+Do not conflate that BC1 finite-source-realization lane with the current R365--R368 mass-gap sensitivity lane merely because both mention CMP116.
 
 ## What “conditional” means here
 
@@ -191,7 +212,8 @@ Unless a current exact consumer demonstrates otherwise, do not spend proof-searc
 - rebuilding generic fixed-point perturbation after R365;
 - treating CMP99 marked comparison as direct `H_subScale` payment;
 - treating source analyticity as a numerical C-Lipschitz proof;
-- creating a new operator algebra merely to express the affine R366 argument identity;
+- proving the R366 affine argument inequality as a new physical theorem after R368;
+- confusing the remaining same-object operation attachment with new analysis;
 - rebuilding an abstract `RegularTerm` instead of function-valued `E_k`;
 - treating complete action `A_k` as the object differentiated by CMP109 Eq.(5.1);
 - treating CMP122 UV stability as continuum Schwinger construction, OS reconstruction, nontriviality, clustering, or physical mass gap.
@@ -224,4 +246,4 @@ Person QID / exact paper-specific Dewey remain unresolved unless an authoritativ
 
 ## Validation boundary
 
-This file is navigation/status only. R365--R367 are source-written reductions; repository `machineChecked`/`standardImported` labels are not fresh exact-head kernel receipts. Source text and citation authority do not create same-object Agda inhabitants. No continuum Yang--Mills construction, physical mass-gap theorem, Clay promotion, or RH proof is claimed here.
+This file is navigation/status only. R365--R368 are source-written reductions; repository `machineChecked`/`standardImported` labels are not fresh exact-head kernel receipts. Source text and citation authority do not create same-object Agda inhabitants. No continuum Yang--Mills construction, physical mass-gap theorem, Clay promotion, or RH proof is claimed here.
