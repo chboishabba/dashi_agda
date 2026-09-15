@@ -93,8 +93,7 @@ record FrontendArtifact : Set where
 open FrontendArtifact public
 
 FrontendImplementation : FrontendBackend → Set
-FrontendImplementation eguiStyle = FrontendArtifact
-FrontendImplementation retainedStyle = FrontendArtifact
+FrontendImplementation _ = FrontendArtifact
 
 frontendInterpret :
   (backend : FrontendBackend) →
