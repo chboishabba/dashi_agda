@@ -33,13 +33,7 @@ SI semantics
   -> consumer-specific LES reasoning
 ```
 
-not:
-
-```text
-number in mg/L -> universal ecological label
-```
-
-An uncertainty-band result may remain explicitly unresolved.
+not `number in mg/L -> universal ecological label`. An uncertainty-band result may remain explicitly unresolved.
 
 ## Active discriminator search
 
@@ -49,42 +43,17 @@ The finite nitrate/ammonium witness is DASHI mathematics. It is not asserted as 
 
 ## Consumer-indexed Pareto selection
 
-`BiocontrolChemistryObserverParetoExact` adds the missing ranking layer after counterexample-driven repair. The finite observer family is:
+`BiocontrolChemistryObserverParetoExact` adds the missing ranking layer after counterexample-driven repair. The finite observer family is `bulkOnly -> speciesSensitive -> contextualChemistry -> multiCoordinatePanel`.
 
-```text
-bulkOnly
-  -> speciesSensitive
-  -> contextualChemistry
-  -> multiCoordinatePanel
-```
+For the chemical-species/fraction consumer, `bulkOnly` is excluded by the existing equal-bulk-mass/different-species collision before ranking, and `speciesSensitive` is the minimum eligible observer. For contextual ecological classification, `speciesSensitive` is itself inadequate because site/season/window/protocol/uncertainty context is erased; the local repair promotes `contextualChemistry`, which is then the minimum eligible observer for that consumer.
 
-The ranking is consumer-indexed. For the chemical-species/fraction consumer, `bulkOnly` is excluded by the existing equal-bulk-mass/different-species collision before ranking, and `speciesSensitive` is the minimum eligible observer. For contextual ecological classification, `speciesSensitive` is itself inadequate because site/season/window/protocol/uncertainty context is erased; the local repair promotes `contextualChemistry`, which is then the minimum eligible observer for that consumer.
+The three Pareto axes are repository-local synthetic design coordinates: observer/assay complexity, contextual-information burden, and retained-coordinate count. They are not dollars, measured field effort, probability, ecological value, scientific truth, ethics, or deployment authority. The richer `multiCoordinatePanel` remains available without receiving automatic preference.
 
-Thus the selection rule is:
-
-```text
-live consumer collision
-  -> counterexample
-  -> local refinement
-  -> repaired eligibility
-  -> admissible/adequate stratum
-  -> MDL/Pareto ranking
-  -> selected observer
-```
-
-not `pick the cheapest observer globally`, and not `retain every available coordinate by default`.
-
-The three Pareto axes are repository-local synthetic design coordinates: observer/assay complexity, contextual-information burden, and retained-coordinate count. They are not dollars, measured field effort, probability, ecological value, scientific truth, ethics, or deployment authority. In this finite fixture the selected model is componentwise no more costly than every other eligible model on the declared axes, while cheaper but consumer-inadequate models never enter the Pareto comparison.
-
-The richer `multiCoordinatePanel` therefore remains available without receiving automatic preference. `more dimensions -> better` is explicitly blocked.
-
-The first source implementation of this owner is commit `e472798201a360c42670e6218f7911cbef9cabe8`, timestamped `2026-09-15T04:57:05Z` / `2026-09-15T14:57:05+10:00`, and is recorded as `sourceCommittedOnly`; this chronology does not imply Agda typecheck or kernel certification.
+The first source implementation of this owner is commit `e472798201a360c42670e6218f7911cbef9cabe8`, timestamped `2026-09-15T04:57:05Z` / `2026-09-15T14:57:05+10:00`, and is recorded as `sourceCommittedOnly`.
 
 ## Pareto-selected assay scheduling
 
-`BiocontrolChemistryParetoExperimentSchedulerExact` now welds observer selection back into experiment acquisition rather than leaving the two layers adjacent.
-
-The ordering is fail-closed:
+`BiocontrolChemistryParetoExperimentSchedulerExact` welds observer selection back into experiment acquisition:
 
 ```text
 consumer collision
@@ -95,42 +64,49 @@ consumer collision
   -> realised observation fibre
 ```
 
-For the species/fraction consumer, the selected `speciesSensitive` observer schedules the species-sensitive assay already known to separate the equal-bulk/different-species collision. A richer species-plus-pH panel remains declared, but the species-only assay has lower repository-local bundle cost and already separates the live collision, so the richer panel is not automatically reacquired.
+For the species/fraction consumer, the selected `speciesSensitive` observer schedules the species-sensitive assay already known to separate the equal-bulk/different-species collision. A richer species-plus-pH panel remains declared but is not automatically reacquired. For contextual classification, a second synthetic finite fixture holds chemistry fixed while changing a retained context-classification key; the selected `contextualChemistry` observer therefore schedules the missing context bundle.
 
-For the contextual-classification consumer, a second synthetic finite fixture holds the chemistry state fixed while changing a retained context-classification key. The already retained species state therefore remains insufficient for that consumer. The selected `contextualChemistry` observer schedules the missing context bundle, while a richer chemistry-plus-context panel remains available but is not automatically preferred. The context fixture is explicitly DASHI synthesis and is not asserted as a Springfield Lakes field observation.
-
-This produces the end-to-end rule:
-
-```text
-Q
-  -> minimal eligible / Pareto observer
-  -> minimum declared separating assay bundle
-  -> realised observation fibre
-```
-
-rather than either of the invalid shortcuts:
-
-```text
-cheapest assay globally -> answer
-```
-
-or
-
-```text
-richest panel available -> answer
-```
-
-Bundle costs remain repository-local search/design ranks. They are not empirical acquisition costs, money, ecological value, scientific truth, probability, ethics, or deployment authority. Selecting a bundle does not create a measurement: the actual assay/sensor/site/time/protocol/calibration/provenance obligations remain separately unpaid until a source or runtime acquisition pays them.
+Bundle costs remain repository-local search/design ranks. They are not empirical acquisition costs, money, ecological value, scientific truth, probability, ethics, or deployment authority. Selecting a bundle does not create a measurement.
 
 The scheduler regression landed first at `65ea58a031cac445793df81efe4b9cbf492f38fd`; exact lookup of the future production path then returned 404; the owner landed at `deb98096245b319b9c0e467f393d0c065fb1b6fb`, timestamped `2026-09-15T05:05:41Z` / `2026-09-15T15:05:41+10:00`, and is recorded as `sourceCommittedOnly`.
+
+## Acquisition, source qualification, promotion, and selective reopening
+
+`BiocontrolChemistryAcquisitionPromotionExact` inserts the evidence boundary that was still missing after Pareto scheduling. A selected experiment bundle now generates a targeted acquisition obligation rather than being silently reinterpreted as an observation.
+
+The chain is:
+
+```text
+selected Pareto bundle
+  -> targeted acquisition obligation
+  -> same-object source/site/sample/time/protocol/uncertainty qualification
+  -> empirical observation payment
+  -> separately paid calibration/local validation
+  -> calibrated classification
+  -> exact dependency-closure reopening
+```
+
+The owner defines separate acquisition targets for the species/fraction assay and the contextual-classification record. Both begin as `notLocated` obligations through the repository-native `EvidenceAcquisitionSelectiveReopeningExact` machinery. No canonical `QualifiedObservation` is fabricated in the owner: promotion requires source identity, site identity, sample identity, sampling window, assay/sensor protocol, analyte/context identity, uncertainty, custody/transformation lineage, same-object identity, and a proof that the object is not merely a synthetic fixture.
+
+A `QualifiedClassificationPromotion` additionally requires the existing calibrated-classification receipt to pay empirical observation, threshold calibration, uncertainty handling and local validation, while retaining `createsInterventionAuthority = false`.
+
+Selective reopening reuses the repository-native `AffectedDependencyClosureExact`. The declared finite dependency graph is:
+
+```text
+qualified observation
+  -> calibrated classification
+  -> rebound consumer
+```
+
+with no declared edge to the Springfield equipment-selection lane. Thus an acquired observation can reopen the classification and the transitive rebound consumer, while unrelated consumers are not automatically reopened merely because a new record exists.
+
+The regression surface was committed first at `2f0c94c84e5d760512412c56c6de99cd13632343`; exact lookup of `BiocontrolChemistryAcquisitionPromotionExact.agda` then returned 404 before the production owner was added at `3165ff61c335cf5c8a2c189aed8c4380b0886244`, timestamped `2026-09-15T05:46:49Z` / `2026-09-15T15:46:49+10:00`. The chronology receipt remains `sourceCommittedOnly`.
 
 ## Springfield Lakes intervention geometry
 
 `SpringfieldLakesInterventionGeometryExact` uses only the two source-bound operational roles already recorded from Ipswich City Council: spider excavator at the hard-access Viewpoint Drive pond and aquatic weed harvester at the Vistula Circuit pond. On that finite carrier, treatment type alone does not determine equipment choice, while treatment plus access geometry does.
 
-This is not a universal equipment-optimisation theorem and does not transfer salvinia efficacy to water hyacinth.
-
-The repository easter egg about the spider being "OVER 9000" is retained in the source owner with an explicit boundary that it creates no scientific evidence.
+This is not a universal equipment-optimisation theorem and does not transfer salvinia efficacy to water hyacinth. The repository easter egg about the spider being "OVER 9000" remains explicitly non-evidentiary.
 
 ## Attribution firewall
 
@@ -140,16 +116,12 @@ Attribution remains role-specific and append-only across this and previous round
 - External ecological, chemistry and government sources supply only the empirical, historical, mechanistic, operational or governance premises actually present in those sources.
 - Ipswich City Council supplies the Springfield Lakes salvinia equipment/access record only.
 - Existing DASHI actual-chemistry/369 owners supply repository-native structural contracts and non-promotion boundaries; importing those contracts does not transfer external authorship or empirical authority.
-- Site sensors, assays and runtime acquisition own actual numeric observations only when separately acquired with site/time/sample/protocol provenance.
+- Site sensors, assays, operator/laboratory records and runtime acquisition own actual numeric/context observations only when separately acquired with source/site/time/sample/protocol/uncertainty provenance and same-object identity.
 - Calibration or threshold sources own only the classification premises they actually justify; BIPM unit authority cannot be promoted into ecological threshold authority.
-- DASHI owns the new finite counterexamples, synthetic worlds, local-refinement constructions, non-factorability statements, active discriminator adapters, contextual classification firewalls, finite observer family, synthetic cost axes, Pareto/MDL selections, minimal-discriminator proofs and scheduler weld.
+- DASHI owns the finite counterexamples, synthetic worlds, local-refinement constructions, non-factorability statements, active discriminator adapters, contextual classification firewalls, finite observer family, synthetic cost axes, Pareto/MDL selections, minimal-discriminator proofs, acquisition obligations, dependency graph and selective-reopening theorems.
 
 Citation imports neither proof nor deployment authority. Cross-pollination transfers structure, not authorship, truth, empirical status, geographic applicability, mechanism, causal authority or operational authority. A synthetic repository witness must not be redescribed as a sourced field observation. A source-backed operational analogue must not be promoted across species, site, assay or consumer without a separate paid transfer receipt.
 
 ## Certification/status boundary
-
-The Pareto regression surface was committed first at `248345e3a691b0a5a45ac1852ac52b8ca1e1acd0`; exact lookup of `BiocontrolChemistryObserverParetoExact.agda` then returned 404 before the production owner was added at `e472798201a360c42670e6218f7911cbef9cabe8`.
-
-The scheduler regression surface was committed first at `65ea58a031cac445793df81efe4b9cbf492f38fd`; exact lookup of `BiocontrolChemistryParetoExperimentSchedulerExact.agda` then returned 404 before the production owner was added at `deb98096245b319b9c0e467f393d0c065fb1b6fb`.
 
 The local checker and aggregate rollup enumerate the new owners and regressions, but no fresh Agda invocation or GitHub Actions receipt has been produced in this continuation. Source presence, RED/owner ordering, chronology and repository integration therefore remain distinct from typecheck/kernel status.
