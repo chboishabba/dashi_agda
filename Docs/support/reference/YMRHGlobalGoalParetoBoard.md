@@ -28,7 +28,7 @@ Source/DOI/QID/Dewey/link/status coordinates never manufacture theorem payment.
 
 ```text
 1. YM T78-B / R347 selected marked boundary-substitution comparison
-2. YM T78-B / R348 selected coefficient = literal selected mixed-log response
+2. YM T78-B / R348 source/Cauchy coefficient = literal selected mixed-log response
 3. YM T78-B / R346 selected physical distance = Euclidean time
 4. RH R1a/R1b final-near representation transport when theorem-bearing checked-near bytes/object are recoverable
 5. RH R2 fresh strict literal complement theorem
@@ -117,10 +117,10 @@ D_time
 ```
 
 Canonical owner:
-`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryCutRound347Exact.agda`
+`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact.agda`
 
 Focused validation:
-`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryCutRound347Validation.agda`
+`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryRound347Validation.agda`
 
 ### 3.3 R348 recut below J_attach
 
@@ -131,9 +131,9 @@ J_L = sourceDirectionOf (meaning base) left
 J_R = sourceDirectionOf (meaning base) right.
 ```
 
-No independent theorem remains to choose or discover the J pair.
+`NormalizedTwoSourceConnectedCumulantExact` also already proves on this exact selected carrier that the literal mixed second log derivative is the connected covariance. Hence neither fresh J-direction selection nor a fresh log-Hessian-to-covariance theorem belongs in the physical debt.
 
-The residual same-object payment is only:
+The residual same-object payment remains:
 
 ```text
 C_attach:
@@ -151,7 +151,7 @@ Focused validation:
 
 ### 3.4 R349 optional donor audit for D_time
 
-R304 does own distance = time on the exact same R300-selected spectral pair, but only inside `ModeSelectedDirectT5UpperPayment`, whose `directShell` is the older R284 rooted-shell producer. No independent concrete R304 payment is currently present in-repo.
+R304 owns distance = time on the exact same R300-selected spectral pair, but only inside `ModeSelectedDirectT5UpperPayment`, whose `directShell` is the older R284 rooted-shell producer. No independent concrete R304 payment is currently present in-repo.
 
 Constructing that payment through R296 reintroduces the stronger rooted-shell localization theorem solely to recover time semantics. That is Pareto-dominated by keeping R346's direct `D_time` field.
 
@@ -182,6 +182,7 @@ Do **not** reintroduce as primitive:
 R343 sourceEnvelope -> R281 clusteringEnvelope calibration
 C_H <= 1
 fresh selection of J_L,J_R
+fresh mixed-log-Hessian -> connected-covariance calculus
 source-root weld for the preferred R346 route
 source-distance weld to an abstract source carrier
 rootedShell <= markedAnalyticShell
@@ -265,7 +266,7 @@ The older 8889 cluster result is an optional donor only; status is not transport
 #944 / R345  removes fixed 1/4 amplitude overpayment.
 #944 / R346  direct shared-marked shell producer; terminal T78-B consumer surface.
 #944 / R347  decomposes L_marked below the generic Cauchy compiler.
-#944 / R348  removes fresh J-direction selection; leaves coefficient same-object attachment.
+#944 / R348  removes fresh J-direction selection and generic covariance calculus; leaves coefficient same-object attachment.
 #944 / R349  optional donor: R304 distance=time reuse is dominated unless its stronger shell payment is independently free.
 
 RH R1         genuine representation wall; source bytes currently unavailable.
