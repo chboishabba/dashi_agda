@@ -6,34 +6,34 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Core.ConsumerIndexedUntanglingTowerExact as Tower
 import DASHI.Core.ConsumerIndexedResidualLocalizationExact as Localization
 import DASHI.ComputerScience.RSA260BidiConsumerIndexedUntanglingTowerExact as RSA
-import DASHI.ComputerScience.RSA260BidiHybridTailCostShapeCollisionExact as CostCollision
-import DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionExact as FactorCollision
-import DASHI.ComputerScience.RSA260BidiRawModeRankResidualLocalizationExact as RawLocalization
-import DASHI.ComputerScience.RSA260BidiSparseRawRankObserverFrontierExact as SparseRaw
-import DASHI.ComputerScience.RSA260BidiSparseRawRankStressFrontierExact as StressRaw
-import DASHI.ComputerScience.RSA260BidiRankObserverGrowthStressExact as Growth
+import DASHI.ComputerScience.RSA260BidiRankObserverGrowthStressExact as RankGrowth
+import DASHI.ComputerScience.RSA260BidiMksolConsumerProjectionExact as MksolProjection
+import DASHI.ComputerScience.RSA260BidiMksolStyleConsumerCollisionExact as MksolCollision
+import DASHI.ComputerScience.RSA260BidiHybridReplayMksolAdequacyExact as ReplayAdequacy
+import DASHI.ComputerScience.RSA260BidiMksolActionKernelQuotientExact as ActionKernel
+import DASHI.ComputerScience.RSA260BidiMksolVContextStressExact as VStress
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
 import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
-import DASHI.Analysis.RiemannG2PhaseResidualRealizationExact as RHRealization
-import DASHI.Analysis.RiemannG2PhaseWeldCellResponseTransportExact as RHExactTransport
 import DASHI.Analysis.RiemannG2PhaseWeldCellwiseUpperBridgeExact as RHUpper
+import DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeDiagnosticExact as RHRuntime
 import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Production
 
 ------------------------------------------------------------------------
 -- RSA-260 / RH CONSUMER-INDEXED UNTANGLING ROADMAP
 --
 -- INFORMATION DESCENT
---   collide -> retain residual -> localize residual -> prune coordinates ->
---   adversarially attack the smaller observer again.
+--   candidate quotient -> consumer collision -> localize missing information ->
+--   retain only the smallest coordinate family adequate for the DECLARED
+--   consumer family -> stress by broadening that family.
 --
 -- SEMANTIC ASCENT
---   localized coordinate -> same-object realization -> weakest downstream
---   consequence sufficient for the active consumer -> aggregate consumer.
+--   localized coordinate -> same-object realization -> weakest theorem/estimate
+--   sufficient for the DECLARED downstream consumer -> aggregate consumer.
 --
--- The repo-native ConsumerRelativeReduction kernel already distinguishes
--- consumer-preserving reduction, candidate-reduction failure/fidelity escalation,
--- and external target realization.  The tower/localization layer specializes
--- those patterns to recursively retained fibres rather than replacing them.
+-- This tranche now demonstrates both failure modes of over-solving:
+--
+--   RSA: receipt-identity rank sketches optimize the wrong downstream query;
+--   RH: exact aggregation equality is stronger than the current upper consumer.
 ------------------------------------------------------------------------
 
 coreTowerBoundary : Tower.ConsumerIndexedUntanglingTowerBoundary
@@ -45,23 +45,23 @@ coreLocalizationBoundary = Localization.canonicalConsumerIndexedResidualLocaliza
 rsaTowerBoundary : RSA.RSAConsumerIndexedUntanglingBoundary
 rsaTowerBoundary = RSA.canonicalRSAConsumerIndexedUntanglingBoundary
 
-rsaCostCollisionBoundary : CostCollision.HybridTailCostShapeCollisionBoundary
-rsaCostCollisionBoundary = CostCollision.canonicalHybridTailCostShapeCollisionBoundary
+rankGrowthBoundary : RankGrowth.RankObserverGrowthStressBoundary
+rankGrowthBoundary = RankGrowth.canonicalRankObserverGrowthStressBoundary
 
-rsaFactorCollisionBoundary : FactorCollision.FactorLayerStructureCollisionBoundary
-rsaFactorCollisionBoundary = FactorCollision.canonicalFactorLayerStructureCollisionBoundary
+mksolProjectionBoundary : MksolProjection.MksolConsumerProjectionBoundary
+mksolProjectionBoundary = MksolProjection.canonicalMksolConsumerProjectionBoundary
 
-rsaRawLocalizationBoundary : RawLocalization.RawModeRankResidualLocalizationBoundary
-rsaRawLocalizationBoundary = RawLocalization.canonicalRawModeRankResidualLocalizationBoundary
+mksolCollisionBoundary : MksolCollision.MksolStyleConsumerCollisionBoundary
+mksolCollisionBoundary = MksolCollision.canonicalMksolStyleConsumerCollisionBoundary
 
-rsaSparseBoundary : SparseRaw.SparseRawRankObserverFrontierBoundary
-rsaSparseBoundary = SparseRaw.canonicalSparseRawRankObserverFrontierBoundary
+replayAdequacyBoundary : ReplayAdequacy.HybridReplayMksolAdequacyBoundary
+replayAdequacyBoundary = ReplayAdequacy.canonicalHybridReplayMksolAdequacyBoundary
 
-rsaStressBoundary : StressRaw.SparseRawRankStressFrontierBoundary
-rsaStressBoundary = StressRaw.canonicalSparseRawRankStressFrontierBoundary
+actionKernelBoundary : ActionKernel.MksolActionKernelQuotientBoundary
+actionKernelBoundary = ActionKernel.canonicalMksolActionKernelQuotientBoundary
 
-rsaGrowthBoundary : Growth.RankObserverGrowthStressBoundary
-rsaGrowthBoundary = Growth.canonicalRankObserverGrowthStressBoundary
+vStressBoundary : VStress.MksolVContextStressBoundary
+vStressBoundary = VStress.canonicalMksolVContextStressBoundary
 
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
@@ -69,14 +69,11 @@ rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
 rhWeldBoundary : RHWeld.LiteralPhaseModulationWeldBoundary
 rhWeldBoundary = RHWeld.canonicalLiteralPhaseModulationWeldBoundary
 
-rhRealizationBoundary : RHRealization.PhaseResidualRealizationBoundary
-rhRealizationBoundary = RHRealization.canonicalPhaseResidualRealizationBoundary
-
-rhExactTransportBoundary : RHExactTransport.PhaseWeldCellResponseTransportBoundary
-rhExactTransportBoundary = RHExactTransport.canonicalPhaseWeldCellResponseTransportBoundary
-
 rhUpperBoundary : RHUpper.PhaseWeldCellwiseUpperBridgeBoundary
 rhUpperBoundary = RHUpper.canonicalPhaseWeldCellwiseUpperBridgeBoundary
+
+rhRuntimeBoundary : RHRuntime.PhaseSensitiveRuntimeDiagnosticBoundary
+rhRuntimeBoundary = RHRuntime.canonicalPhaseSensitiveRuntimeDiagnosticBoundary
 
 productionFirstResidual : Production.ProductionResidual
 productionFirstResidual = Production.firstUnpaidProductionResidual
@@ -84,30 +81,27 @@ productionFirstResidual = Production.firstUnpaidProductionResidual
 ------------------------------------------------------------------------
 -- RSA research queue.
 --
--- Rank fingerprints repeatedly fit a finite family and then fail under a richer
--- family.  Runtime minimum coordinate count (degree retained) has grown:
+-- Rank sketches failed not only receipt identity but a concrete synthetic
+-- generator-action consumer.  Exact replay is a proved sufficient upper endpoint
+-- for every pure consumer after decode.  The first useful quotient is therefore
+-- the kernel of the ACTUAL generator-action family, not a receipt fingerprint.
 --
---   18 worlds -> 3 ranks
---   26 worlds -> 4 ranks
---   34 worlds -> 5 ranks
---
--- while the first separating contiguous prefix from F2 reaches six ranks at 34
--- worlds.  This does NOT prove unbounded rank dimension.  It does show that
--- continuing to optimize a tiny rank code for exact RECEIPT identity is becoming
--- dominated.  Keep rank sketches as cheap diagnostics, keep exact replay tail for
--- replay, and ask which downstream consumer actually needs generator identity.
+-- A single synthetic V context exposed hidden coefficient directions, but a
+-- second independent V context reopened all 1088 coefficient bits in the tested
+-- degree-17 identity case.  Therefore the next object must be the source-native
+-- mksol CONTEXT FAMILY before any compression search is ranked.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
-  chooseDownstreamConsumerBeforeFurtherReceiptRankSearch : ResearchUntanglingTarget
-  retainRanksAsCheapDiagnostics : ResearchUntanglingTarget
-  testWhetherMksolRelevantConsumerNeedsFullGeneratorIdentity : ResearchUntanglingTarget
-  attackExactReplayTailByConsumerRatherThanReceiptName : ResearchUntanglingTarget
-  onlyFormalizeThirtyFourWorldFiveRankCodeIfConsumerJustifiesIt : ResearchUntanglingTarget
-  retainExactReplayTailSeparately : ResearchUntanglingTarget
+  defineSourceNativeCADOMksolContextFamily : ResearchUntanglingTarget
+  determineActualVBlockFamilyAndSolutionRanges : ResearchUntanglingTarget
+  testActionKernelIntersectionAcrossDeclaredContextFamily : ResearchUntanglingTarget
+  searchOnlyPersistentEvaluationKernelForCompression : ResearchUntanglingTarget
+  retainExactReplayAsSufficientUpperEndpoint : ResearchUntanglingTarget
+  retainRanksOnlyAsCheapDiagnostics : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = chooseDownstreamConsumerBeforeFurtherReceiptRankSearch
+firstResearchUntanglingTarget = defineSourceNativeCADOMksolContextFamily
 
 ------------------------------------------------------------------------
 -- Production queue: independent execution from a same-object fine carrier.
@@ -118,6 +112,7 @@ data ProductionReconstructionTarget : Set where
   authenticateSameObjectBalancingAndPreparation : ProductionReconstructionTarget
   executeIndependentKrylovProjection : ProductionReconstructionTarget
   recoverIndependentGeneratorResidual : ProductionReconstructionTarget
+  bindSameObjectInitialVAndMksolContextFamily : ProductionReconstructionTarget
   replayIndependentMksol : ProductionReconstructionTarget
   verifyIndependentNonzeroKernel : ProductionReconstructionTarget
   compileFactorCertificate : ProductionReconstructionTarget
@@ -128,21 +123,22 @@ firstProductionReconstructionTarget = acquireSameObjectFineIncidenceBearingLACar
 ------------------------------------------------------------------------
 -- RH analytic queue.
 --
--- Strong route:
---   same-object weld -> exact aggregation congruence -> exact final-near rewrite.
+-- The Python diagnostic executes the correct 4*g*cosh*cos phase architecture
+-- with a deliberately non-authoritative Gaussian taper.  Across 18 tested cells
+-- the phase-sensitive positive-part majorant was a valid upper and retained much
+-- more cancellation than the coarse absolute envelope.  This is diagnostic
+-- evidence for the route, not a same-object RH payment.
 --
--- Pareto-preferred current-consumer route:
---   same-object weld -> phase-sensitive pointwise majorant -> pair-specific
---   integral monotonicity -> certified cell upper -> existing finite enumerated
---   additive monotonicity -> final near upper -> strict near/far consumer margin.
---
--- Thus exact integrate/finiteNearSum congruence is optional for the upper-bound
--- consumer, although still useful as a stronger representation certificate.
+-- Critical path remains:
+--   actual universal pole-quotient weld/taper -> proof-carrying phase-sensitive
+--   majorant -> pair-specific integral monotonicity -> cell upper -> exact finite
+--   enumeration/fold -> final near upper -> strict near/far margin.
 ------------------------------------------------------------------------
 
 data RHAnalyticRefinementTarget : Set where
   inhabitUniversalPoleQuotientPhaseModulationWeld : RHAnalyticRefinementTarget
-  constructPhaseSensitivePointwiseMajorant : RHAnalyticRefinementTarget
+  replaceDiagnosticGaussianByExactUniversalPoleQuotientTaper : RHAnalyticRefinementTarget
+  constructProofCarryingPhaseSensitivePointwiseMajorant : RHAnalyticRefinementTarget
   provePairSpecificIntegralMonotonicity : RHAnalyticRefinementTarget
   certifyIntegratedMajorantCellUppers : RHAnalyticRefinementTarget
   instantiateExactFiniteNearEnumeration : RHAnalyticRefinementTarget
@@ -164,32 +160,34 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     genericConsumerIndexedTowerPaid : Bool
     genericResidualLocalizationPaid : Bool
 
-    eighteenWorldRankMinimumFoundThree : Bool
-    twentySixWorldRankMinimumFoundFour : Bool
-    thirtyFourWorldRankMinimumFoundFive : Bool
-    thirtyFourWorldFirstContiguousPrefixNeedsSixRanks : Bool
-    fixedTinyRankFingerprintStableReceiptTerminal : Bool
-    rankCoordinateGrowthProvesUnboundedRequirement : Bool
-    ranksRemainUsefulDiagnostics : Bool
-    exactReplayTailStillRetainedSeparately : Bool
+    rankFingerprintsRemainUsefulDiagnostics : Bool
+    rankFingerprintPaysSyntheticMksolActionConsumer : Bool
+    concreteMksolStyleRankCollisionPaid : Bool
+    exactReplayPreservesPureGeneratorConsumers : Bool
+    fixedContextActionKernelObserved : Bool
+    fixedContextKernelStableUnderCheckedSecondV : Bool
+    checkedTwoVFamilyReopensFullDegree17CoefficientSpace : Bool
+    actualCADOMksolContextFamilyFormalized : Bool
+    compressionSearchShouldWaitForDeclaredConsumerFamily : Bool
 
     rhFinitePhaseLocalized : Bool
     rhLiteralPhaseWeldInterfaceWritten : Bool
-    rhExactAggregationTransportCompilerWritten : Bool
     rhOneSidedCellUpperBridgeWritten : Bool
-    exactIntegrationCongruenceRequiredForCurrentUpperConsumer : Bool
-    exactFiniteSumCongruenceRequiredForCurrentUpperConsumer : Bool
+    rhPythonDiagnosticExecuted : Bool
+    rhPythonAllEighteenOneSidedBoundsHeld : Bool
+    rhPythonUsesFinalUniversalPoleQuotientTaper : Bool
     rhPhaseSensitiveMajorantAuthorityPaid : Bool
     rhActualUniversalPoleQuotientWeldPaid : Bool
     rhStrictNearComplementMarginPaid : Bool
+    exactAggregationCongruenceRequiredForCurrentUpperConsumer : Bool
 
     productionSearchForUnpublishedIntermediateBytesRequired : Bool
     productionSubstitutionReturnsToFineIncidenceMatrixCarrier : Bool
     independentArtifactsAreHistoricalWithheldArtifacts : Bool
 
     adequacyMustPrecedeParetoRanking : Bool
+    consumerFamilyMustPrecedeCompressionRanking : Bool
     weakerConsumerSufficientRoutePreferredWhenAvailable : Bool
-    receiptIdentityMustBeJustifiedByDownstreamConsumer : Bool
     threeQueuesMayAdvanceIndependently : Bool
 open RSA260RHUntanglingRoadmapBoundary public
 
@@ -198,7 +196,7 @@ canonicalRSA260RHUntanglingRoadmapBoundary :
 canonicalRSA260RHUntanglingRoadmapBoundary =
   rsa260-rh-untangling-roadmap-boundary
     true true
-    true true true true false false true true
-    true true true true false false false false false
+    true false true true true false true false true
+    true true true true true false false false false false
     false true false
     true true true true
