@@ -7,6 +7,15 @@ import DASHI.Biology.BioacousticYouTubeSeedSourceExact
 import DASHI.Biology.MagpieVocalAtlasObservationExact
 import DASHI.Biology.MagpieVocalAtlasLatentExact
 import DASHI.Biology.MagpieSemanticPromotionExact
+import DASHI.Biology.AnimalCommunicationSceneObservationExact
+import DASHI.Biology.AnimalCommunicationInteractionExact
+import DASHI.Biology.AnimalCommunicationLatentExact
+import DASHI.Biology.AnimalCommunicationSemanticEvidenceExact
+import DASHI.Biology.MagpieAnimalCommunicationAdapterExact
+import DASHI.Biology.AnimalCommunicationMultiObserverVisualBridgeExact
+import DASHI.Biology.AnimalCommunicationPassiveAcousticLocalizationExact
+import DASHI.Biology.AnimalCommunicationSharedWorldAVAssociationExact
+import DASHI.Biology.AnimalCommunicationRuntimeObservatoryBridgeExact
 import DASHI.Biology.DrosophilaConnectomeFunctionalEffectorStateSpaceVisualisationExact
 import DASHI.Biology.DrosophilaGautheyFunctionalTrajectoryProducerExact
 import DASHI.Biology.BioacousticFlySnowballParetoBidiExact
@@ -18,13 +27,13 @@ import DASHI.Biology.BioacousticMultimodalLagFactorisationExact
 import DASHI.Biology.DrosophilaGautheyExternalManifestHashBidiExact
 import DASHI.Biology.DrosophilaGautheyROIIdentityRecoveryBidiExact
 
--- Focused import root for the birdsong -> Animalexic -> fly state-space
--- visualisation / attribution / snowball / N-dimensional Pareto / SI-unit /
--- energetic-cost / situated multi-axis performance / YouTube audiovisual seed /
--- append-only magpie vocal atlas / hierarchical latent fibres / semantic
--- promotion / same-episode multimodal trajectory / query-indexed lag-
--- factorisation / external-manifest / source-row recovery cross-pollination.
--- A kernel-clean claim requires an exact-head Agda receipt; external
--- source/media identity, location precision, semantic/function interpretation,
--- dialect status, SI interpretation, energetic/physiological calibration,
--- clock alignment, query adequacy and Pareto scheduling remain non-promoting.
+-- Focused import root for birdsong / Animalexic / fly state-space work,
+-- including source-bound YouTube seeds, the append-only magpie atlas, generic
+-- multi-emitter communication, multi-observer trail-camera tracks, passive
+-- acoustic localization, shared-world audiovisual association, and the
+-- candidate-only Animalexic Python observatory handoff. Species presence,
+-- emitter identity, spatial association, addressee, receiver response,
+-- function and semantic evidence remain query-indexed fibres. Cross-species
+-- analogy and shared-world overlap transfer neither mechanism, same-object
+-- identity nor semantics. Runtime source presence is not pytest/kernel/field
+-- validation; a kernel-clean claim still requires an exact-head Agda receipt.
