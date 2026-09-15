@@ -28,22 +28,12 @@ data ReadingState : Set where
   maboState : ReadingState
   maboStateWithDifferentAuthorityAudit : ReadingState
 
-------------------------------------------------------------------------
--- The shallow reading projection intentionally forgets the distinction needed
--- by an authority audit.  Both states present the same readable proposition.
-------------------------------------------------------------------------
-
 data ReadableProjection : Set where
   sameReadableMaboExplanation : ReadableProjection
 
 projectReadable : ReadingState → ReadableProjection
 projectReadable maboState = sameReadableMaboExplanation
 projectReadable maboStateWithDifferentAuthorityAudit = sameReadableMaboExplanation
-
-------------------------------------------------------------------------
--- Reading questions are consumer-indexed.  A shallow explanation may suffice
--- for one question while being provably insufficient for another.
-------------------------------------------------------------------------
 
 data ReadingQuery : Set where
   layMeaningQuestion : ReadingQuery
@@ -82,10 +72,6 @@ layMeaningFactorsThroughReadable = Query.factorsThrough answer proof
     proof maboState = refl
     proof maboStateWithDifferentAuthorityAudit = refl
 
-------------------------------------------------------------------------
--- The same shallow projection cannot pay the primary-authority audit.
-------------------------------------------------------------------------
-
 authorityAuditDoesNotFactorThroughReadable :
   Query.FactorsThrough
     readingQuestions
@@ -96,18 +82,11 @@ authorityAuditDoesNotFactorThroughReadable factor = impossible
   where
     open Query.FactorsThrough factor
 
-    left :
-      authorityAuditPaid ≡ quotientAnswer sameReadableMaboExplanation
+    left : authorityAuditPaid ≡ quotientAnswer sameReadableMaboExplanation
     left = factorisation maboState
 
-    right :
-      authorityAuditResidual ≡ quotientAnswer sameReadableMaboExplanation
+    right : authorityAuditResidual ≡ quotientAnswer sameReadableMaboExplanation
     right = factorisation maboStateWithDifferentAuthorityAudit
-
-    data PaidIsNotResidual : Set where
-
-    distinguish : authorityAuditPaid ≡ authorityAuditResidual → PaidIsNotResidual
-    distinguish ()
 
     impossible : ⊥
     impossible = helper left right
@@ -119,9 +98,9 @@ authorityAuditDoesNotFactorThroughReadable factor = impossible
         helper refl ()
 
 ------------------------------------------------------------------------
--- Reopenability: shallow display plus its receipt can reconstruct the retained
--- state exactly.  The receipt may be replaced later by a smaller residual;
--- this file does not claim minimality.
+-- Reopenability: the shallow display may omit distinctions while the retained
+-- receipt can reconstruct the original state exactly.  No minimality claim is
+-- made for this receipt.
 ------------------------------------------------------------------------
 
 readableReopenable :
@@ -132,15 +111,7 @@ readableReopenable =
     projectReadable
     (λ state → state)
     (λ projection receipt → receipt)
-    proof
-  where
-    proof :
-      (state : ReadingState) →
-      Reopenable.reopen readableReopenable
-        (projectReadable state)
-        state ≡ state
-    proof maboState = refl
-    proof maboStateWithDifferentAuthorityAudit = refl
+    (λ state → refl)
 
 ------------------------------------------------------------------------
 -- PNF / semantic-reading overlay.
@@ -168,10 +139,6 @@ record RoleOverlay : Set where
     role : TokenRole
     anchoredToLiteral : Bool
 
-------------------------------------------------------------------------
--- The overlay refines a literal token; it is not a replacement source.
-------------------------------------------------------------------------
-
 canonicalToken : LiteralToken
 canonicalToken = literalToken true
 
@@ -183,8 +150,7 @@ overlayRetainsLiteral :
 overlayRetainsLiteral = refl
 
 ------------------------------------------------------------------------
--- WrongType-style firewalls.  These empty permissions make the absence of an
--- inference explicit at the type level.
+-- WrongType-style firewalls.
 ------------------------------------------------------------------------
 
 data RoleOverlayCreatesTruthPermission : Set where
@@ -235,14 +201,7 @@ record ProgressiveDisclosureBoundary : Set where
 
 canonicalBoundary : ProgressiveDisclosureBoundary
 canonicalBoundary =
-  progressiveDisclosureBoundary
-    true
-    true
-    true
-    true
-    true
-    false
-    false
+  progressiveDisclosureBoundary true true true true true false false
 
 viewDepthDoesNotChangeSemanticState :
   ProgressiveDisclosureBoundary.viewDepthChangesSemanticState canonicalBoundary ≡ false
@@ -253,8 +212,7 @@ viewDepthDoesNotCreateAuthority :
 viewDepthDoesNotCreateAuthority = refl
 
 ------------------------------------------------------------------------
--- Reading-trail navigation preserves the distinction between following a
--- semantic/context link and asserting anything about the reader.
+-- Reading-trail navigation receipts describe interaction, not cognition.
 ------------------------------------------------------------------------
 
 data TrailAction : Set where
