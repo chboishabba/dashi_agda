@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSP
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Moonshine.JInvariantOrderThreeOrbitBalancedTernaryBidiExact as Orbit
+import DASHI.Moonshine.JInvariantFormulaic369ModularReplicationExact as Replication
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Fricke
 import DASHI.Wikimedia.IbrahimMonster6BCompleteReplicabilityPowerSnowballExact as Replicability
 
@@ -20,7 +21,9 @@ import DASHI.Wikimedia.IbrahimMonster6BCompleteReplicabilityPowerSnowballExact a
 -- * the signed-SSP/FRACTRAN side has a genuine multiplicity negation, where
 --   negative/zero/positive multiplicity projects to the balanced ternary fibre;
 -- * the j-orbit owner already consumes that same signed multiplicity through
---   the balanced-trit seam/gluing observer.
+--   the balanced-trit seam/gluing observer;
+-- * the existing formulaic-j replication owner already records that the same
+--   signed-FRACTRAN seam word is reused by its analytic modular action.
 --
 -- We therefore construct the product involution
 --
@@ -31,7 +34,8 @@ import DASHI.Wikimedia.IbrahimMonster6BCompleteReplicabilityPowerSnowballExact a
 -- This does NOT identify signed FRACTRAN execution with a modular action, and
 -- it does NOT yet prove that the 6B McKay-Thompson replicability owner uses the
 -- same literal FinePoint/tau carrier.  That same-object weld remains the next
--- Monster-facing residual.
+-- Monster-facing residual.  Modular tau is also kept distinct from Ramanujan's
+-- arithmetic tau(n); shared notation creates no identity.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -122,7 +126,18 @@ zeroSignedInversionRemainsIdentity :
 zeroSignedInversionRemainsIdentity = refl
 
 ------------------------------------------------------------------------
--- 5. Keep the current 6B whole-series donor visible without inventing a tau weld.
+-- 5. Existing formulaic 369 modular replication already reuses the signed
+-- FRACTRAN seam word.  Retain that exact receipt instead of restating it.
+------------------------------------------------------------------------
+
+existingSignedFRACTRANSeamWordReuse :
+  Replication.FormulaicReplicationFrontier.signedFRACTRANSeamWordReused
+    Replication.canonicalFormulaicReplicationFrontier
+  ≡ true
+existingSignedFRACTRANSeamWordReuse = refl
+
+------------------------------------------------------------------------
+-- 6. Keep the current 6B whole-series donor visible without inventing a tau weld.
 ------------------------------------------------------------------------
 
 replicabilityFrontier : Replicability.Monster6BReplicabilityFrontier
@@ -130,17 +145,17 @@ replicabilityFrontier = Replicability.currentMonster6BReplicabilityFrontier
 
 sameTauResidual : String
 sameTauResidual =
-  "attach the selected 6B McKay-Thompson modular function to the same literal modular FinePoint/tau carrier used by the Fricke/Hecke side; only then compare complete replicability and signed-SSP inversion on one same-object tau fibre"
+  "attach the selected 6B McKay-Thompson modular function to the same literal modular FinePoint/tau carrier used by the Fricke/Hecke/formulaic-j side; only then compare complete replicability and signed-SSP inversion on one same-object tau fibre"
 
 ------------------------------------------------------------------------
--- 6. WrongType / same-object firewalls.
+-- 7. WrongType / same-object firewalls.
 ------------------------------------------------------------------------
 
 data SignedSSPIsLiteralFrickeAction : Set where
 data SharedInvolutionCreatesSameObject : Set where
 data SameTauSpellingCreatesSameCarrier : Set where
+data ModularTauIsRamanujanTau : Set where
 data ReplicabilityCreatesSignedFRACTRANAction : Set where
-
 data ProductInvolutionCreatesMonsterRepresentation : Set where
 
 signedSSPDoesNotBecomeFrickeAction : SignedSSPIsLiteralFrickeAction -> ⊥
@@ -152,6 +167,9 @@ sharedInvolutionDoesNotCreateSameObject ()
 sameTauSpellingDoesNotCreateSameCarrier : SameTauSpellingCreatesSameCarrier -> ⊥
 sameTauSpellingDoesNotCreateSameCarrier ()
 
+modularTauDoesNotBecomeRamanujanTau : ModularTauIsRamanujanTau -> ⊥
+modularTauDoesNotBecomeRamanujanTau ()
+
 replicabilityDoesNotCreateSignedFRACTRANAction :
   ReplicabilityCreatesSignedFRACTRANAction -> ⊥
 replicabilityDoesNotCreateSignedFRACTRANAction ()
@@ -161,7 +179,7 @@ productInvolutionDoesNotCreateMonsterRepresentation :
 productInvolutionDoesNotCreateMonsterRepresentation ()
 
 ------------------------------------------------------------------------
--- 7. Frontier.
+-- 8. Frontier.
 ------------------------------------------------------------------------
 
 record Monster369SignedSSPTauInversionBoundary : Set where
@@ -172,7 +190,9 @@ record Monster369SignedSSPTauInversionBoundary : Set where
     productInversionConstructed : Bool
     coarseTritNegationCompatible : Bool
     jOrbitSignedSeamFlipConstructed : Bool
+    signedFRACTRANSeamWordReusedInModularReplication : Bool
     signedSSPIsLiteralFrickeAction : Bool
+    modularTauIsRamanujanTau : Bool
     sameTauCarrierFor6BReplicabilityPaid : Bool
     literalMonsterActionWeldPaid : Bool
     nextResidual : String
@@ -182,6 +202,6 @@ canonicalMonster369SignedSSPTauInversionBoundary :
   Monster369SignedSSPTauInversionBoundary
 canonicalMonster369SignedSSPTauInversionBoundary =
   monster-369-signed-ssp-tau-inversion-boundary
-    true true true true true
-    false false false
+    true true true true true true
+    false false false false
     sameTauResidual
