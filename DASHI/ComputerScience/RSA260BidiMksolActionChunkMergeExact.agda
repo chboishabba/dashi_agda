@@ -58,7 +58,7 @@ mergedExpectedWorldCountIsThirtyFour = refl
 data PartialChunkEligibleForCandidateEvaluation : Set where
 data OEISOverlapCreatesChunkCompletion : Set where
 data TwelveWorldAdequacyCreatesMergedAdequacy : Set where
-\data CompletionFlagAloneCreatesVerifiedChunk : Set where
+data CompletionFlagAloneCreatesVerifiedChunk : Set where
 
 partialChunkDoesNotPermitEvaluation :
   PartialChunkEligibleForCandidateEvaluation -> ⊥
