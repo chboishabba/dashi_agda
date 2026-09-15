@@ -9,12 +9,13 @@ import DASHI.ComputerScience.RSA260BidiGF2FactorMaskDecoderExact as Decoder
 import DASHI.ComputerScience.RSA260BidiGF2SelectedBasisExpansionRuntimeReceiptExact as Runtime
 
 ------------------------------------------------------------------------
--- GENERATED FINITE FACTOR-PACKET PORTFOLIO
+-- FIRST FORMALLY COMPILED FACTOR PACKET
 --
--- Concrete basis/mask terms for every factor-mode layer in the ten-generator
--- discovery portfolio.  Expected rows come from the independent pre-codec
--- coefficient receipt.  Each row equality is stated against Decoder.expandMask8
--- and is intended to reduce by refl; no fresh kernel receipt is claimed here.
+-- The runtime receipt covers 28 factor-mode layers / 224 rows.  This source
+-- currently compiles only the first factor layer into concrete Agda basis/mask
+-- terms.  Its eight row equalities are stated against Decoder.expandMask8 and
+-- reduce by refl at source level.  The remaining 27 layers are explicit proof
+-- debt; no coverage inflation is allowed.
 ------------------------------------------------------------------------
 
 runtimeReceipt : Runtime.SelectedBasisExpansionRuntimeReceipt
@@ -120,26 +121,39 @@ identityLayer0Row7Exact :
   ≡ identityLayer0Row7Expected
 identityLayer0Row7Exact = refl
 
-checkedFactorLayerCount : Nat
-checkedFactorLayerCount = 28
+compiledFactorLayerCount : Nat
+compiledFactorLayerCount = 1
 
-checkedFactorLayerCountIsTwentyEight : checkedFactorLayerCount ≡ 28
-checkedFactorLayerCountIsTwentyEight = refl
+compiledFactorLayerCountIsOne : compiledFactorLayerCount ≡ 1
+compiledFactorLayerCountIsOne = refl
 
-checkedRowCount : Nat
-checkedRowCount = 224
+compiledRowCount : Nat
+compiledRowCount = 8
 
-checkedRowCountIsTwoHundredTwentyFour : checkedRowCount ≡ 224
-checkedRowCountIsTwoHundredTwentyFour = refl
+compiledRowCountIsEight : compiledRowCount ≡ 8
+compiledRowCountIsEight = refl
+
+runtimeFactorLayerCount : Nat
+runtimeFactorLayerCount = 28
+
+runtimeFactorLayerCountIsTwentyEight : runtimeFactorLayerCount ≡ 28
+runtimeFactorLayerCountIsTwentyEight = refl
+
+runtimeCheckedRowCount : Nat
+runtimeCheckedRowCount = 224
+
+runtimeCheckedRowCountIsTwoHundredTwentyFour : runtimeCheckedRowCount ≡ 224
+runtimeCheckedRowCountIsTwoHundredTwentyFour = refl
 
 record GF2FactorPacketPortfolioBoundary : Set where
   constructor gf2-factor-packet-portfolio-boundary
   field
     independentPrecodecRuntimeReceiptInherited : Bool
-    concreteTwentyEightFactorLayersCompiled : Bool
-    concreteTwoHundredTwentyFourRowsCompiled : Bool
-    sourceWrittenExpansionEqualitiesUseFormalDecoder : Bool
-    sourceWrittenExpansionEqualitiesReduceByRefl : Bool
+    runtimeTwentyEightFactorLayersPaid : Bool
+    runtimeTwoHundredTwentyFourRowsPaid : Bool
+    oneFactorLayerCompiledToFormalTerms : Bool
+    eightFormalRowEqualitiesSourceWritten : Bool
+    fullTwentyEightLayerPortfolioCompiled : Bool
     exactHeadAgdaKernelReceiptObserved : Bool
     producerBasisSearchAlgorithmProved : Bool
     packedRuntimeBytesWeldedToFormalConstructors : Bool
@@ -158,29 +172,29 @@ canonicalGF2FactorPacketPortfolioBoundary =
     false
     false
     false
+    false
 
 data GF2FactorPacketPortfolioResidual : Set where
-  obtainExactHeadAgdaKernelReceiptForFactorPortfolio : GF2FactorPacketPortfolioResidual
+  compileRemainingTwentySevenFactorPackets : GF2FactorPacketPortfolioResidual
+  obtainExactHeadAgdaKernelReceiptForCompiledPortfolio : GF2FactorPacketPortfolioResidual
   weldPackedRuntimeBytesToFormalFactorConstructors : GF2FactorPacketPortfolioResidual
   provePackedEightBitRowRepresentationExact : GF2FactorPacketPortfolioResidual
   compileCertifiedFactorPacketsIntoHybridLayerCodec : GF2FactorPacketPortfolioResidual
   acquireSameObjectAStarOrFSols : GF2FactorPacketPortfolioResidual
 
 firstGF2FactorPacketPortfolioResidual : GF2FactorPacketPortfolioResidual
-firstGF2FactorPacketPortfolioResidual =
-  obtainExactHeadAgdaKernelReceiptForFactorPortfolio
+firstGF2FactorPacketPortfolioResidual = compileRemainingTwentySevenFactorPackets
 
 data SourceWrittenReflMeansKernelReceipt : Set where
-data FinitePortfolioMeansUniversalSolverProof : Set where
+data OneLayerMeansFullPortfolio : Set where
 data SyntheticFactorPortfolioMeansProductionCustody : Set where
 
 sourceWrittenReflDoesNotCreateKernelReceipt :
   SourceWrittenReflMeansKernelReceipt → ⊥
 sourceWrittenReflDoesNotCreateKernelReceipt ()
 
-finitePortfolioDoesNotCreateUniversalSolverProof :
-  FinitePortfolioMeansUniversalSolverProof → ⊥
-finitePortfolioDoesNotCreateUniversalSolverProof ()
+oneLayerDoesNotCreateFullPortfolio : OneLayerMeansFullPortfolio → ⊥
+oneLayerDoesNotCreateFullPortfolio ()
 
 syntheticFactorPortfolioDoesNotCreateProductionCustody :
   SyntheticFactorPortfolioMeansProductionCustody → ⊥
