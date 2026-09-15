@@ -11,6 +11,9 @@ paymentRegression :
   × P.AdKCalibrationPaymentLedgerBoundary.gammaZeroReferencePaid
     P.canonicalAdKCalibrationPaymentLedgerBoundary
   ≡ true
+  × P.AdKCalibrationPaymentLedgerBoundary.figureFiveVisibleEnergyCellsPaid
+    P.canonicalAdKCalibrationPaymentLedgerBoundary
+  ≡ true
   × P.AdKCalibrationPaymentLedgerBoundary.intermediateDLnCellsPaid
     P.canonicalAdKCalibrationPaymentLedgerBoundary
   ≡ false
@@ -20,7 +23,7 @@ paymentRegression :
   × P.AdKCalibrationPaymentLedgerBoundary.perEdgeKramersNumericsPaid
     P.canonicalAdKCalibrationPaymentLedgerBoundary
   ≡ false
-paymentRegression = refl , refl , refl , refl , refl
+paymentRegression = refl , refl , refl , refl , refl , refl
 
 provenanceRegression :
   P.AdKCalibrationPaymentLedgerBoundary.everyCellCarriesSourceRole
