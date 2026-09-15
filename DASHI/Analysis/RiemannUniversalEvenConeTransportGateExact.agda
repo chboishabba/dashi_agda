@@ -2,23 +2,15 @@ module DASHI.Analysis.RiemannUniversalEvenConeTransportGateExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannG2PhaseWeldCellwiseUpperBridgeExact as Upper
+import DASHI.Analysis.RiemannG2FinalPoleQuotientAnalyticCoreExact as FinalCore
 
 ------------------------------------------------------------------------
 -- UNIVERSAL EVEN-CONE SAME-OBJECT TRANSPORT GATE
---
--- The source-side Lean lane already owns a nonnegative universal pole-quotient
--- taper with exact pole annihilation and positive same-ordinate response.  The
--- remaining first payment is not another taper design: it is transporting that
--- exact object onto the final Agda pole-quotient carrier consumed downstream.
---
--- Once the same-object transport is available, nonnegativity is exactly the
--- property needed to feed a positive-part phase majorant into the existing
--- one-sided cell/fold upper route.  This gate does not pay Gamma or the signed
--- off-ordinate estimate by itself.
 ------------------------------------------------------------------------
 
 universalReturn : Universal.UniversalEvenConeReturn
@@ -36,18 +28,77 @@ record UniversalEvenConeTransportCandidate : Set₁ where
     finalTaper : FinalPoleQuotientTaper
 
     sameObjectTransport : Set
+    sameObjectTransportReceipt : sameObjectTransport
     transportedTaperIsSourceTaper : Set
+    transportedTaperIsSourceTaperReceipt : transportedTaperIsSourceTaper
 
     sourceTaperNonnegative : Set
+    sourceTaperNonnegativeReceipt : sourceTaperNonnegative
     sourcePoleClassKilledExactly : Set
+    sourcePoleClassKilledExactlyReceipt : sourcePoleClassKilledExactly
     sourceSameOrdinateClusterPositive : Set
+    sourceSameOrdinateClusterPositiveReceipt : sourceSameOrdinateClusterPositive
 
     finalTaperNonnegative : Set
+    finalTaperNonnegativeReceipt : finalTaperNonnegative
     finalPoleClassKilledExactly : Set
+    finalPoleClassKilledExactlyReceipt : finalPoleClassKilledExactly
     finalSameOrdinateClusterPositive : Set
+    finalSameOrdinateClusterPositiveReceipt : finalSameOrdinateClusterPositive
 
     positivePartPhaseMajorantAvailable : Set
+    positivePartPhaseMajorantAvailableReceipt : positivePartPhaseMajorantAvailable
 open UniversalEvenConeTransportCandidate public
+
+------------------------------------------------------------------------
+-- Exact attachment compilers.
+--
+-- Taper identity is already one of the representation attachments consumed by
+-- the final analytic-core API.  The transport candidate therefore discharges
+-- that coordinate directly.  The off-ordinate attachment has an additional,
+-- independent crossing-cutoff identity, so that receipt stays explicit.
+------------------------------------------------------------------------
+
+transportToGammaRepresentationAttachment :
+  (candidate : UniversalEvenConeTransportCandidate) ->
+  (core : FinalCore.GammaAnalyticCore) ->
+  FinalCore.GammaRepresentationAttachment core
+transportToGammaRepresentationAttachment candidate core = record
+  { FinalCore.sameLiteralPoleQuotientTaperAsFinalConsumer =
+      sameObjectTransport candidate
+  ; FinalCore.sameLiteralPoleQuotientTaperAsFinalConsumerReceipt =
+      sameObjectTransportReceipt candidate
+  ; FinalCore.attachmentReference =
+      "universal-even-cone same-object transport -> final Gamma taper attachment"
+  }
+
+record OffCutoffAttachmentInput
+    (candidate : UniversalEvenConeTransportCandidate)
+    (core : FinalCore.OffAnalyticCore) : Set₁ where
+  constructor off-cutoff-attachment-input
+  field
+    crossingCutoffFeedsThisExactOffProducer : Set
+    crossingCutoffFeedsThisExactOffProducerReceipt :
+      crossingCutoffFeedsThisExactOffProducer
+    attachmentReference : String
+open OffCutoffAttachmentInput public
+
+transportToOffRepresentationAttachment :
+  (candidate : UniversalEvenConeTransportCandidate) ->
+  (core : FinalCore.OffAnalyticCore) ->
+  OffCutoffAttachmentInput candidate core ->
+  FinalCore.OffRepresentationAttachment core
+transportToOffRepresentationAttachment candidate core cutoff = record
+  { FinalCore.crossingCutoffFeedsThisExactOffProducer =
+      crossingCutoffFeedsThisExactOffProducer cutoff
+  ; FinalCore.crossingCutoffFeedsThisExactOffProducerReceipt =
+      crossingCutoffFeedsThisExactOffProducerReceipt cutoff
+  ; FinalCore.sameLiteralPoleQuotientTaperAsFinalConsumer =
+      sameObjectTransport candidate
+  ; FinalCore.sameLiteralPoleQuotientTaperAsFinalConsumerReceipt =
+      sameObjectTransportReceipt candidate
+  ; FinalCore.attachmentReference = attachmentReference cutoff
+  }
 
 ------------------------------------------------------------------------
 -- WrongType / attribution firewalls.
@@ -76,8 +127,12 @@ record UniversalEvenConeTransportBoundary : Set where
   field
     sourceUniversalTaperOwned : Bool
     sameObjectTransportInterfaceSpecified : Bool
+    transportCandidateCarriesProofWitnesses : Bool
     nonnegativeTaperFeedsPositivePartMajorant : Bool
     existingOneSidedCellUpperRouteReusable : Bool
+    gammaRepresentationAttachmentCompilerAvailable : Bool
+    offRepresentationAttachmentUsesTransportedTaper : Bool
+    offRepresentationAttachmentStillNeedsCutoffReceipt : Bool
 
     sameObjectTransportPaid : Bool
     positivePartMajorantAuthorityPaid : Bool
@@ -92,6 +147,7 @@ open UniversalEvenConeTransportBoundary public
 canonicalUniversalEvenConeTransportBoundary : UniversalEvenConeTransportBoundary
 canonicalUniversalEvenConeTransportBoundary =
   universal-even-cone-transport-boundary
-    true true true true
+    true true true true true
+    true true true
     false false false false
     false false false
