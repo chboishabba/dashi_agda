@@ -27,39 +27,39 @@ R1a/R1b final-near same-object representation
 
 RH stays behind the present YM sensitivity seam while theorem-bearing checked-near bytes remain unavailable.
 
-## 2. Current YM Pareto queue — R370 cut
+## 2. Current YM Pareto queue — R371 cut
 
 ```text
-A. H_sub direct sensitivity route
+A. Preferred H_subScale producer: direct CMP116 parametric fixed point
 
-1. H_attach^99/116
-   Attach CMP99 Theorem 3.14/(3.154) marked propagator-difference authority to
-   the exact selected CMP116 H(s(Y0)) difference.
+1. selected published-family attachment
+   Identify the selected R364/R370 substituted background with the literal
+   CMP116 fixed-point family D(H(s(Y0)),A') / H_k(s(Y0),B') on the exact source
+   parameter carrier.
 
-2. cross-parameter C sensitivity
-   Current proof-bearing producer: R367 C-Lipschitz on the exact C, requiring
-   C_attach^102/116. Keep open a direct CMP116 composite-map parameter theorem.
+2. selected parameter-domain attachment
+   Show the two selected decoupling assignments lie in the source common complex
+   s(Y0) domain used by CMP116 Sect. 1.
 
-3. operation attachment
-   Attach actual CMP116 subtraction/operator-difference semantics to R369.
-   The affine identity/argument inequality itself is compiler-owned.
+3. parameter-distance calibration
+   Bound the exact selected decoupling-parameter distance by one source scale.
+   Do not promote a generic finite-polydisc metric until the selected assignment
+   semantics are identified.
 
-4. one-sided source-ball cross-membership
-   R370 proves equality of left/right source balls is unnecessary. The actual
-   requirement is only that the right fixed point lies in the left source ball
-   used for the contraction step.
+4. substitution-distance same-object weld
+   Identify the R364 boundary substitution distance with the distance between
+   the two values of the published fixed-point family.
 
-R368 supplies same-parameter source contraction.
-R369 supplies generic affine cancellation.
-R370 supplies the least-privilege domain-overlap compiler into R365.
-R366/R367 supply the current cross-parameter defect route.
-R365 absorbs contraction and pays H_subScale.
+R370 provides standard Cauchy/mean-value parametric sensitivity.
+R371 packages the published CMP116 analytic fixed-point theorem shape and feeds
+it directly into R370.  R366--R369 and the R370 one-sided-ball route are now
+optional sufficient producers for H_subScale, not mandatory prerequisites.
 
 B. H_local / H_stab
 
 5. source-local Hessian variation
      ||D^2 E(H_Omega) - D^2 E(H_Omega')|| <= L_source d_sub
-6. selected same-object attachment / H_scale.
+6. selected same-object attachment into R352/R364.
 
 C. Optional marked/localisation producer route
 
@@ -90,38 +90,41 @@ SameHamiltonianPhysicalMassGap
 <- { C_attach , H_stab , H_sub }
 
 H_sub
-<- R364 H_subScale
-<- R365 fixed-point perturbation
-   <- R368 fixed-parameter source contraction
-   <- R370 one-sided source-ball adapter
-   <- cross-parameter one-step defect
-      <- R366 factorization
-      <- { R367 cross-parameter C sensitivity,
-           R369 affine argument compiler,
-           CMP99/CMP116 H attachment,
-           operation attachment }.
+<- R364 { H_local , H_subScale }
+<- preferred H_subScale route R371 -> R370
+   <- published CMP116 fixed-point analyticity/uniform bound
+   <- selected same-object parameter-family attachment
+   <- selected source-domain membership
+   <- parameter-distance calibration
+   <- substitution-distance same-object weld.
+
+optional H_subScale route:
+R365 fixed-point perturbation
+<- R368 fixed-parameter source contraction
+<- R370 one-sided source-ball adapter
+<- R366 cross-parameter defect
+<- { R367 C sensitivity, R369 affine argument compiler,
+     CMP99/CMP116 H attachment, operation attachment }.
 ```
 
 Forward:
 
 ```text
-CMP116 fixed-parameter composite contraction
--> R368
+CMP116 Sect. 1:
+H(s(Y0)) analytic and uniformly bounded
++ F_s(X)=C(A'-H(s)X) preserves a small ball and is contractive
+-> fixed point D(H(s(Y0)),A') analytic in A',s(Y0) and uniformly bounded
+-> R371 proof-bearing source ABI
 
-left/right source maps + right-fixed-point-in-left-ball
--> R370
--> R365 domain/contraction side without any ball-equality premise
-
-ordinary abelian difference laws + pointwise operator subtraction
--> R369 affine cancellation
-
-R367 C sensitivity + exact C attachment if used
-+ CMP99 H_L-H_R theorem attached to selected H(s(Y0))
-+ R369 operation attachment
--> R366 cross-parameter defect
--> R365 contraction absorption
+selected source parameter family/domain/distance attachments
++ standard R370 Cauchy parametric sensitivity
 -> H_subScale
 -> R364
+
+H_local + H_subScale
+-> existing finite-polydisc coefficient lift
+-> H_stab^source
++ selected attachment -> H_stab
 
 H_stab + H_sub
 -> existing boundary/Cauchy compiler
@@ -130,14 +133,16 @@ H_stab + H_sub
 -> existing clustering-to-gap compiler.
 ```
 
-## 4. R365--R370 reductions
+## 4. R365--R371 reductions
 
 - **R365:** full two-fixed-point displacement is replaced by one contraction plus one same-candidate defect.
 - **R366:** the cross-parameter defect factors into C sensitivity, affine argument difference, H difference, candidate size and radius.
 - **R367:** C sensitivity is proof-bearing; source analyticity alone cannot pay it.
-- **R368:** fixed-parameter CMP116 composite contraction is imported directly on `F_s(X)=C(A'-H(s)X)`; cross-paper C identity is not mandatory for the contraction factor.
+- **R368:** fixed-parameter CMP116 composite contraction is imported directly on `F_s(X)=C(A'-H(s)X)`.
 - **R369:** `(A'-H_LX)-(A'-H_RX)=(H_R-H_L)X` is generic compiler algebra after operation attachment.
-- **R370:** R365 needs one-sided cross-membership, not equality of source balls.
+- **R370a:** R365 needs one-sided cross-membership, not equality of source balls.
+- **R370b:** an independent direct Cauchy-parametric route can pay H_subScale from a source analytic fixed-point family.
+- **R371:** CMP116 Sect. 1 already supplies exactly the published theorem shape needed by R370b: the fixed point is analytic in the decoupling parameters on the declared complex domain and uniformly bounded there. The remaining debt is selected-family/domain/distance attachment, not R366--R369.
 
 ## 5. Source-owned versus application debt
 
@@ -148,20 +153,31 @@ CMP99 marked propagator comparison source theorem;
 CMP102 variational/background source theory;
 CMP116 fixed-parameter composite contraction;
 CMP116 substituted-background equation;
+CMP116 H(s(Y0)) analyticity/uniform bound;
+CMP116 parametric fixed-point analyticity/uniform bound around (1.13)--(1.18);
 generic affine cancellation;
 CMP109 differentiated E^(2) locality;
 CMP116 localization/tree summability;
 finite marked-walk algebra.
 ```
 
-Current application/same-object debt:
+Current application/same-object debt on the preferred H_subScale route:
+
+```text
+published CMP116 fixed-point family == selected R364/R370 substitution family;
+selected left/right decoupling assignments lie in the source complex parameter domain;
+selected parameter distance <= one source parameter-distance scale;
+R364 boundary substitution distance == distance of the two published fixed points;
+source-local D^2E variation == selected H_local consumer.
+```
+
+Optional-route-only debt:
 
 ```text
 CMP99 marked H difference == selected CMP116 H(s(Y0)) difference;
 CMP116 subtraction/operator semantics == R369 carrier;
 right fixed point ∈ left source ball;
-CMP102 C == selected C only if R367 is used;
-source-local D^2E variation == selected H_local consumer.
+CMP102 C == selected C if R367 is used.
 ```
 
 ## 6. Firewalls
@@ -170,13 +186,14 @@ Do not allow:
 
 ```text
 source status -> theorem payment
+source text/citation -> selected same-object family identity
+source analyticity -> arbitrary selected parameter-distance calibration
 same-parameter R368 contraction -> cross-parameter defect
 source ball existence -> equality of two balls
 R370 one-sided overlap -> stronger common-ball identity
 R369 generic algebra -> automatic source-operation identity
 CMP99 marked propagator comparison -> full fixed-point displacement
-background analyticity -> numerical C-Lipschitz proof
-shared symbol C/H -> same-object proof
+shared symbol C/H/D -> same-object proof
 full CMP109/116/119/122 reconstruction -> current task.
 ```
 
@@ -193,7 +210,7 @@ raw finite-history CMP119 E_k
 -> BC1.
 ```
 
-Live BC1 inputs remain P0 CMP122 witness, P1 physical second variation, P2 CMP109 Eq.(5.1) binding, P3 normalized CMP116 demand extraction. Do not merge this queue with R365--R370.
+Live BC1 inputs remain P0 CMP122 witness, P1 physical second variation, P2 CMP109 Eq.(5.1) binding, P3 normalized CMP116 demand extraction. Do not merge this queue with R365--R371.
 
 ## 8. RH current route
 
@@ -208,11 +225,13 @@ Stop alias archaeology until theorem-bearing checked-near material becomes recov
 
 ## 9. Validation boundary
 
-- R365--R370 are source-written compiler/interface reductions.
+- R365--R371 are source-written compiler/interface reductions.
 - repository `machineChecked` labels are not fresh exact-head kernel receipts.
 - source statements are not Agda proof terms.
-- H/operation/cross-membership attachments remain conditional.
-- R367 C attachment remains conditional if that producer is used.
+- R371 does not inhabit its own published-source record by citation.
+- selected family/domain/distance attachments remain conditional.
+- H_local remains independent theorem-bearing debt.
+- R366--R369 remain valid optional H_subScale producers.
 - no continuum YM construction, mass-gap theorem, Clay completion or RH proof is claimed.
 
 ## 10. Update log
@@ -223,4 +242,6 @@ Stop alias archaeology until theorem-bearing checked-near material becomes recov
 - R367: cross-parameter C sensitivity made proof-bearing.
 - R368: fixed-parameter source composite contraction recovered directly.
 - R369: affine argument cancellation compiled generically.
-- R370: common-ball equality removed; only one-sided cross-membership remains.
+- R370a: common-ball equality removed; only one-sided cross-membership remains on the perturbative route.
+- R370b: direct parametric sensitivity opened as an independent H_subScale producer.
+- R371: CMP116's published analytic fixed-point theorem shape is exposed directly; R366--R369 become optional for H_subScale.
