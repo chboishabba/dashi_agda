@@ -1,0 +1,12 @@
+module DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalRegression where
+
+import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalExact as Springfield
+
+viewpointSpider : Springfield.SpringfieldMechanicalRemovalReceipt
+viewpointSpider = Springfield.viewpointSpiderReceipt
+
+vistulaHarvester : Springfield.SpringfieldMechanicalRemovalReceipt
+vistulaHarvester = Springfield.vistulaHarvesterReceipt
+
+speciesTransferBoundary : Springfield.SpringfieldMechanicalRemovalBoundary
+speciesTransferBoundary = Springfield.canonicalSpringfieldMechanicalRemovalBoundary
