@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Papers.NavierStokes.TheoremInterface as Paper
 import DASHI.Papers.NavierStokes.FourLaneProofProgramCoordinatorRegression
+import DASHI.Papers.NavierStokes.FourLaneProofProgramS2bBandTransferRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierRegression
@@ -16,10 +17,10 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionBandTransferRegre
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
--- the authoritative owners it imports. The coordinator regression plus the
--- strict S0/S1/S2 representation regressions are imported so the current
--- A/B/C/D routing state and first physical phase seams are checked by the same
--- root whenever it is actually kernel-run.
+-- the authoritative owners it imports. The canonical coordinator regression,
+-- thin S2b0 successor delta, and strict S0/S1/S2 representation regressions are
+-- imported so current A/B/C/D routing and physical phase seams are checked by
+-- the same root whenever it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
@@ -76,9 +77,9 @@ periodicBSecondMomentSixThreeTransplantClosedIsFalse =
   Paper.NSPaperTheoremStatus.periodicBSecondMomentSixThreeTransplantClosedIsFalse status
 
 directLeafACompilerConstructedIsTrue :
-  Paper.NSPaperTheoremStatus.directLeafACompilerConstructed status ≡ true
+  Paper.NSPaperTheoremStatus.directCompanionConstructed status ≡ true
 directLeafACompilerConstructedIsTrue =
-  Paper.NSPaperTheoremStatus.directLeafACompilerConstructedIsTrue status
+  Paper.NSPaperTheoremStatus.directCompanionConstructedIsTrue status
 
 directOffDiagonalConsumerConstructedIsTrue :
   Paper.NSPaperTheoremStatus.directOffDiagonalConsumerConstructed status ≡ true
