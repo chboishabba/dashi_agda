@@ -4,11 +4,14 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Core.ConsumerIndexedUntanglingTowerExact as Tower
+import DASHI.Core.ConsumerIndexedResidualLocalizationExact as Localization
 import DASHI.ComputerScience.RSA260BidiConsumerIndexedUntanglingTowerExact as RSA
 import DASHI.ComputerScience.RSA260BidiHybridTailCostShapeCollisionExact as CostCollision
 import DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionExact as FactorCollision
+import DASHI.ComputerScience.RSA260BidiRawModeRankResidualLocalizationExact as RawLocalization
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
 import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
+import DASHI.Analysis.RiemannG2PhaseResidualRealizationExact as RHRealization
 import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Production
 
 ------------------------------------------------------------------------
@@ -16,34 +19,44 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 --
 -- Three queues remain explicit and non-blocking:
 --
---   (A) recursive untangling research
---       projection collision -> missing coordinate -> retained residual ->
---       strict refinement -> repeat until consumer terminal or exact terminal;
+--   (A) recursive untangling research;
+--   (B) RSA production reconstruction from a same-object fine carrier;
+--   (C) RH analytic refinement on the literal pole-quotient carrier.
 --
---   (B) RSA production reconstruction
---       published execution constraints -> same-object fine-incidence/matrix
---       carrier -> independently execute Krylov/lingen/mksol -> kernel -> factor;
+-- The common tower now has a second generic operation: residual localization.
+-- Once a coarse collision proves that RelativeFine matters, do not automatically
+-- retain the whole residual.  Search a smaller observer on RelativeFine and
+-- prove that it still separates the concrete consumer witness.
 --
---   (C) RH analytic refinement
---       coarse count/envelope collision -> phase-sensitive residual -> literal
---       target-relative model -> same-carrier translation/modulation weld ->
---       strict consumer margin.
+-- Current RSA descent:
 --
--- New frontier information:
+--   whole generator
+--     -> rank prefix + hybrid tail
+--     -> codec-cost collision
+--     -> identical factor basis/mask structure
+--     -> raw-mode residual
+--     -> first raw layer rank(F_2) separates rotate3/affine7 (7 vs 5).
 --
--- * RSA: rotate3/affine7 collide not only on codec cost shape but on the entire
---   current factor-mode basis/mask footprint (layers 0,1,16). The next retained
---   residual is therefore the complementary raw-mode layer payload, which must
---   itself be factorized and attacked rather than accepted as globally minimal.
+-- Therefore full raw payload is not required merely to separate that witness.
+-- The new research frontier is to attack this localized raw-rank coordinate on
+-- a wider collision family and refine again if it fails.
 --
--- * RH: proof-relevant phase laws and the literal near-cell kernel now have an
---   explicit weld interface. The live theorem is to inhabit that interface on
---   the actual universal pole-quotient analytic carrier; merely identifying the
---   missing phase coordinate is no longer the sharp frontier.
+-- Current RH descent:
+--
+--   count/envelope collision
+--     -> signed target-relative phase residual
+--     -> finite phase class localizes the consumer witness
+--     -> same-object analytic weld must realize that phase as the literal
+--        target-gap/cosine equality on the universal pole-quotient carrier.
+--
+-- Finite localization does not pay the analytic weld, near budget, or RH.
 ------------------------------------------------------------------------
 
 coreTowerBoundary : Tower.ConsumerIndexedUntanglingTowerBoundary
 coreTowerBoundary = Tower.canonicalConsumerIndexedUntanglingTowerBoundary
+
+coreLocalizationBoundary : Localization.ConsumerIndexedResidualLocalizationBoundary
+coreLocalizationBoundary = Localization.canonicalConsumerIndexedResidualLocalizationBoundary
 
 rsaTowerBoundary : RSA.RSAConsumerIndexedUntanglingBoundary
 rsaTowerBoundary = RSA.canonicalRSAConsumerIndexedUntanglingBoundary
@@ -54,29 +67,35 @@ rsaCostCollisionBoundary = CostCollision.canonicalHybridTailCostShapeCollisionBo
 rsaFactorCollisionBoundary : FactorCollision.FactorLayerStructureCollisionBoundary
 rsaFactorCollisionBoundary = FactorCollision.canonicalFactorLayerStructureCollisionBoundary
 
+rsaRawLocalizationBoundary : RawLocalization.RawModeRankResidualLocalizationBoundary
+rsaRawLocalizationBoundary = RawLocalization.canonicalRawModeRankResidualLocalizationBoundary
+
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
 
 rhWeldBoundary : RHWeld.LiteralPhaseModulationWeldBoundary
 rhWeldBoundary = RHWeld.canonicalLiteralPhaseModulationWeldBoundary
 
+rhRealizationBoundary : RHRealization.PhaseResidualRealizationBoundary
+rhRealizationBoundary = RHRealization.canonicalPhaseResidualRealizationBoundary
+
 productionFirstResidual : Production.ProductionResidual
 productionFirstResidual = Production.firstUnpaidProductionResidual
 
 ------------------------------------------------------------------------
--- Research queue: the current tail has now been attacked twice.
+-- Research queue: attack the newly localized RSA coordinate.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
-  factorRawModePayloadBelowFactorStructureCollision : ResearchUntanglingTarget
+  attackLocalizedRawRankAcrossWiderCollisionFamily : ResearchUntanglingTarget
+  refineRawRankIntoRowSpaceAndPayloadResidual : ResearchUntanglingTarget
   adversariallyAttackEveryProposedRSAQuotient : ResearchUntanglingTarget
-  testWhetherSomeRawLayersAreConsumerIrrelevant : ResearchUntanglingTarget
   deriveConsumerTerminalBeforeExactTerminalWhenPossible : ResearchUntanglingTarget
   separateDescriptionWitnessExecutionCosts : ResearchUntanglingTarget
   transportOnlyGenericUntanglingStructureIntoRH : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = factorRawModePayloadBelowFactorStructureCollision
+firstResearchUntanglingTarget = attackLocalizedRawRankAcrossWiderCollisionFamily
 
 ------------------------------------------------------------------------
 -- Production queue: historical A*/F.sols custody is not assumed available.
@@ -95,7 +114,7 @@ firstProductionReconstructionTarget : ProductionReconstructionTarget
 firstProductionReconstructionTarget = acquireSameObjectFineIncidenceBearingLACarrier
 
 ------------------------------------------------------------------------
--- RH queue: phase coordinate found; now inhabit the same-carrier weld.
+-- RH queue: localized phase found; now realize it on the literal carrier.
 ------------------------------------------------------------------------
 
 data RHAnalyticRefinementTarget : Set where
@@ -103,6 +122,7 @@ data RHAnalyticRefinementTarget : Set where
   bindLiteralScalarFrequencyOrdinatePhaseCarriers : RHAnalyticRefinementTarget
   proveEvenProjectionEqualsLiteralCosineKernel : RHAnalyticRefinementTarget
   pushWeldThroughLiteralCellResponse : RHAnalyticRefinementTarget
+  aggregateLiteralCellsOverFiniteNearSum : RHAnalyticRefinementTarget
   deriveFiniteNearConsumerBudget : RHAnalyticRefinementTarget
   payStrictNearComplementConsumerMargin : RHAnalyticRefinementTarget
   closeOnlyThenPromoteRHTerminal : RHAnalyticRefinementTarget
@@ -123,13 +143,18 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
   constructor rsa260-rh-untangling-roadmap-boundary
   field
     genericConsumerIndexedTowerPaid : Bool
+    genericResidualLocalizationPaid : Bool
     rsaFiniteExactTowerPaid : Bool
     rsaFullCostShapeCollisionPaid : Bool
     rsaFactorLayerStructureCollisionPaid : Bool
-    rawModePayloadIsNextRSAResidual : Bool
-    rawModePayloadProvedGloballyMinimal : Bool
+    rsaFirstRawLayerRankLocalizesCurrentWitness : Bool
+    fullRawPayloadRequiredToSeparateCurrentWitness : Bool
+    firstRawRankGloballyAdequate : Bool
+    firstRawRankGloballyMinimal : Bool
     rhFiniteCollisionRefinementPaid : Bool
+    rhFinitePhaseLocalized : Bool
     rhLiteralPhaseWeldInterfaceWritten : Bool
+    rhConditionalAnalyticRealizationCompilerWritten : Bool
     rhActualUniversalPoleQuotientWeldPaid : Bool
     researchShouldContinueBelowCurrentRSAResidual : Bool
     productionSearchForUnpublishedIntermediateBytesRequired : Bool
@@ -138,7 +163,7 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     independentExecutionMayProduceNewAStarGeneratorMksolArtifacts : Bool
     independentArtifactsAreHistoricalWithheldArtifacts : Bool
     rsaFiniteReplayPaysRHAnalyticRepresentation : Bool
-    rhPhaseCoordinateAlonePaysStrictRHMargin : Bool
+    rhFinitePhaseLocalizationPaysStrictRHMargin : Bool
     adequacyMustPrecedeParetoRanking : Bool
     threeQueuesMayAdvanceIndependently : Bool
 open RSA260RHUntanglingRoadmapBoundary public
@@ -152,15 +177,21 @@ canonicalRSA260RHUntanglingRoadmapBoundary =
     true
     true
     true
+    true
+    false
+    false
     false
     true
     true
+    true
+    true
     false
     true
     false
     true
     true
     true
+    false
     false
     false
     false
