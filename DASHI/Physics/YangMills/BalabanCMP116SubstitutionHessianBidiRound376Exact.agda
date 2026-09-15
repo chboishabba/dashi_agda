@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SubstitutionHessianBidiRound376Exact
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Foundations.FinitePolydiscCauchyAxioms as Cauchy
 
