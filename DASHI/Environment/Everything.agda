@@ -28,8 +28,8 @@ import DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollination
 -- active proof-search consumer with canonical attribution, SI semantics,
 -- actual-chemistry/369 indexing, contextual classification, consumer-indexed
 -- chemistry Pareto selection, Pareto-selected assay scheduling, acquisition /
--- promotion gating, local Springfield operational geometry and collision-backed
--- costed probes.
+-- promotion gating, acquisition Pareto frontier, local Springfield operational
+-- geometry and collision-backed costed probes.
 import DASHI.Environment.BiocontrolExternalityExperimentExact
 import DASHI.Environment.BiocontrolExternalityExperimentRegression
 import DASHI.Environment.BiocontrolExternalityExperimentSourceAtlasExact
@@ -56,6 +56,8 @@ import DASHI.Environment.BiocontrolChemistryParetoExperimentSchedulerExact
 import DASHI.Environment.BiocontrolChemistryParetoExperimentSchedulerRegression
 import DASHI.Environment.BiocontrolChemistryAcquisitionPromotionExact
 import DASHI.Environment.BiocontrolChemistryAcquisitionPromotionRegression
+import DASHI.Environment.BiocontrolAcquisitionParetoFrontierExact
+import DASHI.Environment.BiocontrolAcquisitionParetoFrontierRegression
 import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalExact
 import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalRegression
 import DASHI.Environment.SpringfieldLakesInterventionGeometryExact
