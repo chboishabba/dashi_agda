@@ -10,6 +10,10 @@ import DASHI.Culture.MissingDeceasedTwentyScientistRound45ChineseReportedCohortE
 
 ------------------------------------------------------------------------
 -- ROUND 46: EXTERNAL COHORT COVERAGE OF THE RETAINED TWENTY
+--
+-- Round 49 later audits source-origin independence.  This owner therefore
+-- records external comparison-set membership without claiming that separate
+-- publications necessarily arose from independent source origins.
 ------------------------------------------------------------------------
 
 record ExternalCohortCoverage : Set where
@@ -78,6 +82,9 @@ seventeenOfTwentyDoesNotPayTargeting = true
 usOfficialAndChineseMediaCohortsMustRemainSourceDistinct : Bool
 usOfficialAndChineseMediaCohortsMustRemainSourceDistinct = true
 
+externalAssemblyDoesNotImplyIndependentSourceOrigin : Bool
+externalAssemblyDoesNotImplyIndependentSourceOrigin = true
+
 round46H2PaidCount : Nat
 round46H2PaidCount = 0
 
@@ -85,4 +92,4 @@ round46H3PaidCount : Nat
 round46H3PaidCount = 0
 
 round46NarrativeBoundary : String
-round46NarrativeBoundary = "Seventeen of the retained twenty are already members of one of two externally reported comparison sets: eight overlap the U.S. House/public-reporting ten and all nine members of the April 2026 Chinese reported cluster are retained. Amy Eskridge, Ning Li and Joshua Kyle LeBlanc are outside both comparison sets. This is strong evidence that the retained cohort substantially overlaps independently assembled public-reporting sets, but it is a selection/context fact only. The U.S. official-inquiry cohort and Chinese media-comparison cohort have different source status and cannot be merged into a single official, causal or operational object."
+round46NarrativeBoundary = "Seventeen of the retained twenty are members of one of two externally reported comparison sets: eight overlap the U.S. House/public-reporting ten and all nine members of the April 2026 Chinese reported cluster are retained. Amy Eskridge, Ning Li and Joshua Kyle LeBlanc are outside both comparison sets. This is evidence that the retained cohort substantially overlaps externally assembled comparison sets, but it is a selection/context fact only. It does not establish independent source origin for the reporting, one common programme, targeting or causation. The U.S. official-inquiry cohort and Chinese media-comparison cohort retain distinct source status."
