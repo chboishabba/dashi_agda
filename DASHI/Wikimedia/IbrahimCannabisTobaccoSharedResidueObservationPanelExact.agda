@@ -43,12 +43,12 @@ tobacco16Method = residue-method-receipt
 
 cannabis96Method : ResidueMethodReceipt
 cannabis96Method = residue-method-receipt
-  "Quantitative determination and validation of 96 pesticides in cannabis by LC-MS/MS and GC-MS/MS"
-  "unresolved in this owner until bibliographic identity is bound from the paper header"
-  "cannabis"
+  "MacKenzie, Anyanwu, McRae, Melanson 2025 Quantitative determination and validation of 96 pesticides in cannabis by LC-MS/MS and GC-MS/MS"
+  "10.1007/s00216-025-05918-9"
+  "dried cannabis flower and hemp"
   96
   "LC-MS/MS + GC-MS/MS"
-  "validated multi-residue cannabis method; analyte-specific performance reported"
+  "validated linearity, precision, accuracy, recovery, ion suppression and LOQ across cannabis/hemp matrices; 10 cannabis cultivars used for accuracy evaluation"
   false
 
 record SharedAnalyte : Set where
