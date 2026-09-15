@@ -18,6 +18,7 @@ terminal consumer
 -> enumerate in-repo producers
 -> quotient only by theorem-bearing same-object transports
 -> separate source theorem / local replay / physical application / compiler
+-> weaken producer interfaces to the least consumer-sufficient statement
 -> Pareto-rank remaining payments
 -> implement only a non-dominated leaf
 ```
@@ -65,37 +66,80 @@ Terminal consumer:
 CutoffUniformPhysicalMassGap Y
 ```
 
-Preferred source-native route:
+Current source-native spine:
 
 ```text
 R278 selected finite/continuum covariance carrier
 -> R281 reconstructed covariance spectrum on that exact covariance carrier
--> R338 canonical CMP116 common-domain source
--> R341 direct selected-spectrum application
+-> CMP116 differentiated J-localization on the selected source directions
 -> positive subgap exclusion / same-H mass gap
 ```
 
-Heat/Doob/Langevin, unified-polymer-norm, rooted-shell R284/R339, and older R279/R280 routes remain donors. Do not force T78-B through historical frozen Row C when the R341 route is cheaper.
-
-### 3.1 R341 live coordinates
+Historical producer sequence:
 
 ```text
-B1 SAME_OBJECT_TRANSPORT
-   R338 CMP116 differentiated J-response magnitude
-   = selected literal mixed-log magnitude
+R338 canonical CMP116 source ABI
+-> R339/R341 {source-response equality + envelope calibration}
+-> R343 weaker direct selected-source upper
+```
+
+R343 is now the preferred consumer surface because R341's source-response equality is stronger than the terminal mass-gap proof actually uses.
+
+### 3.1 R343 live coordinates — current preferred T78-B cut
+
+```text
+S1 SOURCE_REALIZATION / SAME_OBJECT APPLICATION
+   selected literal mixed-log magnitude
+   <= CMP116 sourceEnvelope
    on the exact R318/R281 selected scale, volume and J(F),J(G) pair.
 
 B2 SOURCE_REALIZATION / QUANTITATIVE CALIBRATION
-   R338 CMP116 sourceEnvelope
+   CMP116 sourceEnvelope
    <= R281 selected spectral clusteringEnvelope.
 
 B3 STANDARD IMPORT / SHARED TOPOLOGY
    one-sided rational upper closed under actual R278 convergence.
 ```
 
-R341 records `freshYMDecayEstimateIntroduced = false`.
+`BalabanCMP116R281SelectedSourceUpperRound343Exact.agda` compiles `{S1,B2,B3}` directly to the same reconstructed subgap clustering upper consumed by T78-B.
 
-### 3.2 Critical WrongType correction: CMP109 Pi is not the preferred B1 source
+No source-magnitude equality is primitive on this route.
+
+### 3.2 Why R343 Pareto-dominates R341 B1
+
+R341 asks for:
+
+```text
+B1:
+R338 CMP116 differentiatedMagnitude
+= selected literal mixed-log magnitude.
+```
+
+The proof then uses the source theorem only as:
+
+```text
+CMP116 differentiatedMagnitude <= sourceEnvelope.
+```
+
+Hence B1 is used solely to derive:
+
+```text
+selected literal mixed-log magnitude <= sourceEnvelope.
+```
+
+R343 takes that one-sided statement directly as `S1`.
+
+The old R341 application mechanically compiles to R343 using the source localization theorem plus B1. The converse is intentionally unavailable: the one-sided upper does not recover the discarded equality.
+
+Therefore:
+
+```text
+{B1, B2, B3}  ->  {S1, B2, B3}
+```
+
+with no reverse theorem, so the R343 surface is strictly weaker and preferred.
+
+### 3.3 WrongType / source-family firewall
 
 R322 explicitly records:
 
@@ -104,29 +148,29 @@ cmp109PolarizationTensorIsDefinitionallyTwoJConnectedCumulant = false
 cmp116JDomainIsCorrectSourceFamilyForR320 = true
 ```
 
-The selected T5 route is based on CMP116's declared analytic `J` directions. The R318 base already carries proof-bearing `LiteralTwoSourceInsertionMeaning`; R335–R337 place the remaining source-domain issue at CMP116's common `U,J` domain replay, not at a CMP109-Pi identification.
+The preferred selected-T5 route uses CMP116's declared analytic `J` directions, not CMP109's vacuum-polarization field Hessian/Pi.
 
-Therefore the preferred B1 is the **direct R339/R341 CMP116-J-response equality above**.
+R318 already carries proof-bearing selected observable -> literal J-direction meaning. R335–R337 place the remaining source-domain issue at CMP116 common-`U,J` replay/application.
 
-### 3.3 R342 role after correction
+Do not reintroduce CMP109 Pi as a primitive B payment.
 
-`BalabanCMP116R281SourceResponseSameObjectRound342Exact.agda` still usefully isolates direct B1 from B2.
+### 3.4 Status of R342 and the CMP109 donor
 
-It also retains an optional donor compiler:
+R342 remains a useful historical/optional compiler:
 
 ```text
 IF
   R338 CMP116 differentiatedMagnitude
-  = R321 CMP109 E^(2)/Pi sourceE2PiMagnitude
+  = R321 CMP109 E^(2)/Pi source magnitude
 AND
-  the existing R321 selected-response weld holds
+  the R321 selected-response weld is supplied
 THEN
-  direct B1 follows.
+  R341 B1 follows.
 ```
 
-That CMP109/CMP116 source-source identity is **extra stronger debt** and is not charged by the preferred route. R321 is therefore an optional donor, not the current B1 leaf.
+That is a **stronger optional donor route**, not part of the preferred R343 cut.
 
-Regression invariants now exposed by the R342 validation root:
+R342 validation now guards:
 
 ```text
 directCMP116JResponseIsPreferredB1Route = true
@@ -135,23 +179,23 @@ cmp109PiIdentificationRequiredByPreferredB1 = false
 CMP109 Pi definitionally equals selected two-J cumulant = false
 ```
 
-### 3.4 B1 stop condition
+R343 goes one step further and removes primitive B1 equality altogether.
 
-No theorem-bearing in-repo inhabitant of direct B1 is currently known.
+### 3.5 S1 source/application boundary
 
-Already owned and therefore not to be reproved:
+Already owned and not to be reproved:
 
-- selected observable -> literal J-direction meaning is carried by R318;
-- target two-source calculus and selected mixed-log response are owned;
-- common radius/common-domain membership compilers are owned;
-- published CMP116 differentiated-localization authority is source-owned;
-- selected rational magnitude is fixed to rational absolute value in the selected T5 lane.
+- R318 selected observable -> literal J-direction meaning;
+- normalized two-source mixed-log / connected-covariance algebra;
+- CMP116 common radius and selected common-domain membership once source demands are instantiated;
+- CMP116 differentiated-localization source authority;
+- selected finite covariance identity and R278 continuum convergence.
 
-What remains is the physical/source same-object application that the canonical CMP116 differentiated J-response magnitude is the magnitude of the selected literal mixed-log response on the exact selected pair.
+What remains in S1 is the physical/source **application of the published differentiated-localization theorem directly to the selected literal response and its source-native envelope**.
 
-Do **not** replace this with a CMP109 Pi theorem unless that stronger cross-source theorem becomes independently free.
+R327 is a historical proof that this application style is legitimate: it states the published localization result directly on the selected mixed-log response, but routes through the older configured rooted shell. R343 preserves the later source-native `sourceEnvelope` instead and therefore does not reintroduce rooted-shell geometry.
 
-### 3.5 B2 stop condition
+### 3.6 B2 stop condition
 
 `R338.sourceEnvelope` and `R281.clusteringEnvelope` are abstract producer fields. No current theorem-bearing common prefactor/rate decomposition makes
 
@@ -161,13 +205,17 @@ sourceEnvelope <= clusteringEnvelope
 
 compiler output.
 
-R284/R339 rooted-shell routes add root/distance/geometric calibration coordinates and are Pareto-dominated for the direct R341 consumer unless those coordinates become independently free.
+R284/R339 rooted-shell routes add root/distance/geometric calibration coordinates and are Pareto-dominated for the direct R343 consumer unless those coordinates become independently free.
 
-Hence the honest T78-B frontier is:
+Hence the honest T78-B frontier is now:
 
 ```text
-{ direct B1, direct B2 } + standard B3.
+{ S1 selected-response source upper,
+  B2 direct envelope calibration }
++ standard B3.
 ```
+
+No fresh YM decay estimate is introduced by this recut.
 
 ## 4. YM T78-A — UV -> same continuum YM
 
@@ -276,7 +324,7 @@ its Cauchy completion = completed marked stress field
 completed marked stress = literal stressTensor Y group
 ```
 
-No concrete `LiteralStressCoordinate` inhabitant is currently known. C1 remains broader than direct T78-B B1.
+No concrete `LiteralStressCoordinate` inhabitant is currently known. C1 remains broader than T78-B S1.
 
 ### C2 — physical composite/OPE identification
 
@@ -348,9 +396,9 @@ Classification: `SAME_OBJECT SEMANTICS + VERIFIED-REGION INTERPRETATION`.
 ## 7. Current cross-lane Pareto queue
 
 ```text
-1. YM T78-B / direct B1
-   R338 CMP116 differentiated J-response magnitude
-   = selected literal mixed-log magnitude.
+1. YM T78-B / R343 S1
+   selected literal mixed-log magnitude
+   <= CMP116 sourceEnvelope on the exact selected J pair.
 
 2. YM T78-B / B2
    direct sourceEnvelope -> R281 clusteringEnvelope calibration.
@@ -360,11 +408,11 @@ Classification: `SAME_OBJECT SEMANTICS + VERIFIED-REGION INTERPRETATION`.
    Stop archaeology unless theorem-bearing source bytes appear.
 
 4. YM T78-A / A2 or A4
-   only if a new same-object constructor makes one cheaper than B1/B2/RH R1.
+   only if a new same-object constructor makes one cheaper than S1/B2/RH R1.
 
 5. YM T78-C / C1-C4
    C1 is compressed to one literal stress-coordinate package but still carries
-   more physical same-object information than direct B1.
+   more physical same-object information than S1.
 
 6. RH R2
    fresh strict actual-ClusterResponse analysis after R1 unless an exact donor
@@ -374,11 +422,13 @@ Classification: `SAME_OBJECT SEMANTICS + VERIFIED-REGION INTERPRETATION`.
    keep verified-region / critical-line carrier work independent from R1/R2.
 ```
 
-Optional donor, not queue leaf:
+Historical/optional donors, not queue leaves:
 
 ```text
-R321 CMP109 E^(2)/Pi route -> B1
-ONLY after an extra CMP109/CMP116 source-magnitude identity.
+R341 direct B1 equality producer
+R321 CMP109 E^(2)/Pi route -> R341 B1 only after extra source-source identity
+Heat/Doob/Langevin Row-C producer family
+rooted-shell R284/R339 producer family
 ```
 
 ## 8. Shared YM coordinates to exploit
@@ -426,6 +476,7 @@ These are navigation/provenance coordinates only.
 
 - One YM Clay endpoint; T78-A/B/C and frozen A/B/C/D are internal decompositions.
 - A cheaper terminal producer may route around a historical research row without declaring that row inhabited.
+- Prefer the weakest theorem sufficient for the terminal consumer; equality is overpayment when a one-sided application upper suffices.
 - Correct source family matters: CMP109 field-Hessian/Pi and CMP116 analytic-J response are not interchangeable by name.
 - Source authority != source realization.
 - Same scalar shape != same-object theorem.
