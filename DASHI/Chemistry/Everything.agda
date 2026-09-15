@@ -238,3 +238,26 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationA
 -- role, source locator and attribution envelope; state geometry/free energy and
 -- path flux remain distinct from edge-rate calibration and experimental kinetics.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAttributedSparseTransitionKernelExact
+
+-- Structural identity snowball: PDB deposition DOIs/IDs, UniProt P69441 and
+-- adenylate-kinase Q356240 remain separate from exact PDB-object/article QIDs and
+-- from experimental condition/dynamics authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseStructuralIdentitySnowballExact
+
+-- Supporting-material manifestation guard: the PMC-rendered legacy supplemental
+-- PII is retained as a cross-source mismatch because it resolves to a different
+-- Biophysical Journal article; PMC-attached mmc1/mmc2 remain same-article
+-- candidates, but no numeric calibration is paid without an exact locator.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSupportingMaterialManifestationExact
+
+-- Manifestation-guarded calibration acquisition: sparse cells can be upgraded
+-- only after same-article manifestation, locator-specific and value-role
+-- payments. Foreign legacy supplements and unreceipted visual/OCR-style reads
+-- remain fail-closed.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGuardedCalibrationAcquisitionExact
+
+-- Source-bounded metadynamics uncertainty: the reported ~0.5 kcal/mol BE-META
+-- free-energy error is retained as an uncertainty envelope only. It does not
+-- fill missing per-state energies, make a visual readout exact, or turn relative
+-- free energy into absolute thermodynamic free energy.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMetadynamicsUncertaintyExact
