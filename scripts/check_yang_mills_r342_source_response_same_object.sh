@@ -13,6 +13,13 @@ grep -q 'record SourceResponseSameObjectPayment' "$PRODUCTION"
 grep -q 'record CMP109CMP116SourceResponseIdentity' "$PRODUCTION"
 grep -q 'r321SameObjectBuildsB1AfterSourceIdentity' "$PRODUCTION"
 grep -q 'r321SameObjectCanFeedB1AfterSourceIdentity = true' "$PRODUCTION"
+
+# Preferred-route correction: CMP116 analytic J response is the live B1 source.
+grep -q 'r321CMP109DonorIsPreferredB1Route = false' "$PRODUCTION"
+grep -q 'directCMP116JResponseIsPreferredB1Route = true' "$PRODUCTION"
+grep -q 'cmp109PiIdentificationRequiredByPreferredB1 = false' "$PRODUCTION"
+grep -q 'cmp109PiIsDefinitionallyTwoJConnectedCumulant' "$PRODUCTION"
+
 grep -q 'SourceEnvelopeCalibration' "$PRODUCTION"
 grep -q 'asRound341Application' "$PRODUCTION"
 grep -q 'round342SourceResponseSameObjectLevel = conditional' "$PRODUCTION"
