@@ -4,13 +4,15 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Core.ConsumerSafeFuturePromotionExact as Future
+import DASHI.Core.TypedDependencyCore as Dependency
+import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 
 ------------------------------------------------------------------------
 -- CONSUMER-SAFE GOVERNANCE PROMOTION
 --
 -- Governance is a thin specialization of the canonical consumer-safe future
--- promotion spine.  Hard governance conditions are consequences of eligibility;
--- they are not soft Pareto axes.  In particular, a cheap terminalised model is
+-- promotion spine. Hard governance conditions are consequences of eligibility;
+-- they are not soft Pareto axes. In particular, a cheap terminalised model is
 -- outside the ranking domain rather than merely receiving a bad score.
 ------------------------------------------------------------------------
 
@@ -41,11 +43,11 @@ record ConsumerSafeGovernancePromotion
     (costs : MDL.CostHyperfabric problem)
     (coarse fine : MDL.Model problem)
     {State Action Surface Provenance QueryKey Answer : Set}
-    (system : DASHI.Core.TypedDependencyCore.DependentActionSystem State Action)
+    (system : Dependency.DependentActionSystem State Action)
     (surface : State → Surface)
     (provenance : State → Provenance)
     (Rule : Set)
-    (semantics : DASHI.Core.QueryIndexedProjectionAdequacyExact.QuerySemantics State QueryKey Answer)
+    (semantics : Query.QuerySemantics State QueryKey Answer)
     (query : QueryKey)
     (Realises : MDL.Model problem → (State → Surface × Provenance) → Set)
     (gates : GovernanceGateSystem problem) : Set₁ where
