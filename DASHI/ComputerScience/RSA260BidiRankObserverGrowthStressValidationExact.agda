@@ -1,0 +1,11 @@
+module DASHI.ComputerScience.RSA260BidiRankObserverGrowthStressValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.ComputerScience.RSA260BidiRankObserverGrowthStressExact as Growth
+
+boundary : Growth.RankObserverGrowthStressBoundary
+boundary = Growth.canonicalRankObserverGrowthStressBoundary
+
+firstResidual : Growth.RankObserverGrowthResidual
+firstResidual = Growth.firstRankObserverGrowthResidual

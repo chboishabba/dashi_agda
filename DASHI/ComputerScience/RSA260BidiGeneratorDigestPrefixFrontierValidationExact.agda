@@ -1,0 +1,15 @@
+module DASHI.ComputerScience.RSA260BidiGeneratorDigestPrefixFrontierValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiGeneratorDigestPrefixFrontierExact as Frontier
+
+boundary : Frontier.GeneratorDigestPrefixFrontierBoundary
+boundary = Frontier.canonicalGeneratorDigestPrefixFrontierBoundary
+
+fourBitCollision : Frontier.FourBitPrefixAdequacyDefect
+fourBitCollision = Frontier.fourBitPrefixCannotDetermineGeneratorReceipt
+
+eightBitAdequacy : Frontier.EightBitPrefixAdequacy
+eightBitAdequacy = Frontier.generatorReceiptFactorsThroughEightBitPrefix
+
+firstResidual : Frontier.GeneratorDigestPrefixFrontierResidual
+firstResidual = Frontier.firstGeneratorDigestPrefixFrontierResidual
