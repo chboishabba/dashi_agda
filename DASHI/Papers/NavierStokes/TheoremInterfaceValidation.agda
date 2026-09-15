@@ -9,21 +9,22 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldRegress
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionProjectedPairingRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
 -- the authoritative owners it imports. The coordinator regression plus the
--- strict S0/S1 regressions are imported so the current A/B/C/D routing state
--- and first physical phase seams are checked by the same root whenever it is
--- actually kernel-run.
+-- strict S0/S1/S2a regressions are imported so the current A/B/C/D routing
+-- state and first physical phase seams are checked by the same root whenever
+-- it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
--- into an observed commit-specific Agda receipt. S0, S1a and the conditional
--- S1b compiler may be source-written while the concrete scalar FTC / integration
--- authorities, phase estimate, initial ceiling and retained-viscosity payments
--- remain unobserved or open.
+-- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
+-- compiler and the S2a same-object production weld may be source-written while
+-- concrete scalar FTC / integration authorities, the quantitative S2 payment,
+-- initial ceiling and retained-viscosity payments remain unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
