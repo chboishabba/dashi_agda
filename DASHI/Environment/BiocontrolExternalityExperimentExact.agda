@@ -34,6 +34,9 @@ data NonTargetState : Set where
 data AgentInteraction : Set where
   agentIndependent agentInterference : AgentInteraction
 
+data AgentCountSurface : Set where
+  declaredTwoAgentAssemblage : AgentCountSurface
+
 record InterventionWorld : Set where
   constructor interventionWorld
   field
@@ -68,6 +71,26 @@ restorationRecoveryWorld = interventionWorld
   targetSuppressed exportedFromWater oxygenRecovered nativeRecovery
   nutrientResidualLow seedbankReduced nonTargetPaid agentIndependent
 
+reboundHighWorld : InterventionWorld
+reboundHighWorld = interventionWorld
+  targetSuppressed exportedFromWater oxygenRecovered nativeRecovery
+  nutrientResidualHigh seedbankPersistent nonTargetPaid agentIndependent
+
+reboundLowWorld : InterventionWorld
+reboundLowWorld = interventionWorld
+  targetSuppressed exportedFromWater oxygenRecovered nativeRecovery
+  nutrientResidualLow seedbankReduced nonTargetPaid agentIndependent
+
+agentIndependentWorld : InterventionWorld
+agentIndependentWorld = interventionWorld
+  targetSuppressed exportedFromWater oxygenRecovered nativeRecovery
+  nutrientResidualLow seedbankReduced nonTargetPaid agentIndependent
+
+agentInterferenceWorld : InterventionWorld
+agentInterferenceWorld = interventionWorld
+  targetSuppressed exportedFromWater oxygenRecovered nativeRecovery
+  nutrientResidualLow seedbankReduced nonTargetPaid agentInterference
+
 ------------------------------------------------------------------------
 -- Coarse observers and consumers.
 ------------------------------------------------------------------------
@@ -78,11 +101,26 @@ suppressionObserver = suppression
 suppressionOxygenObserver : InterventionWorld → TargetSuppression × OxygenState
 suppressionOxygenObserver world = suppression world , oxygen world
 
+suppressionAgentCountObserver :
+  InterventionWorld → TargetSuppression × AgentCountSurface
+suppressionAgentCountObserver world = suppression world , declaredTwoAgentAssemblage
+
 oxygenConsumer : InterventionWorld → OxygenState
 oxygenConsumer = oxygen
 
 restorationConsumer : InterventionWorld → CommunityState
 restorationConsumer = community
+
+reboundConsumer : InterventionWorld → NutrientResidual × SeedbankResidual
+reboundConsumer world = nutrientResidual world , seedbankResidual world
+
+agentInteractionConsumer : InterventionWorld → AgentInteraction
+agentInteractionConsumer = interaction
+
+------------------------------------------------------------------------
+-- Non-factorability witnesses: each consumer can distinguish worlds collapsed
+-- by the candidate coarse observation surface.
+------------------------------------------------------------------------
 
 oxygenWorldsCollapseOnSuppression :
   suppressionObserver oxygenDebtWorld ≡ suppressionObserver oxygenRecoveryWorld
@@ -129,6 +167,55 @@ restorationDoesNotFactorThroughSuppressionAndOxygen :
   NonFactor.FactorsThrough suppressionOxygenObserver restorationConsumer → ⊥
 restorationDoesNotFactorThroughSuppressionAndOxygen =
   NonFactor.witnessRulesOutEveryFlatFactorisation restorationNonFactorabilityWitness
+
+reboundWorldsCollapseOnPresentSuppression :
+  suppressionObserver reboundHighWorld ≡ suppressionObserver reboundLowWorld
+reboundWorldsCollapseOnPresentSuppression = refl
+
+reboundWorldsDifferForConsumer :
+  reboundConsumer reboundHighWorld ≡ reboundConsumer reboundLowWorld → ⊥
+reboundWorldsDifferForConsumer ()
+
+reboundNonFactorabilityWitness :
+  NonFactor.NonFactorabilityWitness suppressionObserver reboundConsumer
+reboundNonFactorabilityWitness =
+  NonFactor.nonFactorabilityWitness
+    reboundHighWorld
+    reboundLowWorld
+    refl
+    (λ ())
+
+reboundDoesNotFactorThroughPresentSuppression :
+  NonFactor.FactorsThrough suppressionObserver reboundConsumer → ⊥
+reboundDoesNotFactorThroughPresentSuppression =
+  NonFactor.witnessRulesOutEveryFlatFactorisation reboundNonFactorabilityWitness
+
+agentInteractionWorldsCollapseOnCountAndSuppression :
+  suppressionAgentCountObserver agentIndependentWorld
+  ≡ suppressionAgentCountObserver agentInterferenceWorld
+agentInteractionWorldsCollapseOnCountAndSuppression = refl
+
+agentInteractionWorldsDifferForConsumer :
+  agentInteractionConsumer agentIndependentWorld
+  ≡ agentInteractionConsumer agentInterferenceWorld → ⊥
+agentInteractionWorldsDifferForConsumer ()
+
+agentInteractionNonFactorabilityWitness :
+  NonFactor.NonFactorabilityWitness
+    suppressionAgentCountObserver agentInteractionConsumer
+agentInteractionNonFactorabilityWitness =
+  NonFactor.nonFactorabilityWitness
+    agentIndependentWorld
+    agentInterferenceWorld
+    refl
+    (λ ())
+
+agentInteractionDoesNotFactorThroughCountAndSuppression :
+  NonFactor.FactorsThrough
+    suppressionAgentCountObserver agentInteractionConsumer → ⊥
+agentInteractionDoesNotFactorThroughCountAndSuppression =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    agentInteractionNonFactorabilityWitness
 
 ------------------------------------------------------------------------
 -- Experimental coordinate design.
@@ -293,6 +380,62 @@ canonicalRestorationDiscriminator = restorationDiscriminatorReceipt record
   ; coordinateSeparates = λ ()
   }
 
+record ReboundCollisionReceipt : Set where
+  constructor reboundCollisionReceipt
+  field
+    samePresentSuppression :
+      suppressionObserver reboundHighWorld ≡ suppressionObserver reboundLowWorld
+    differentResidualReboundState :
+      reboundConsumer reboundHighWorld ≡ reboundConsumer reboundLowWorld → ⊥
+
+canonicalReboundCollision : ReboundCollisionReceipt
+canonicalReboundCollision = reboundCollisionReceipt refl (λ ())
+
+record ReboundDiscriminatorReceipt : Set where
+  constructor reboundDiscriminatorReceipt
+  field
+    separates :
+      Coordinate.CoordinateSeparatesCollision
+        biocontrolCoordinateDesign suppressionObserver
+
+canonicalReboundDiscriminator : ReboundDiscriminatorReceipt
+canonicalReboundDiscriminator = reboundDiscriminatorReceipt record
+  { coordinate = nutrientCoordinate
+  ; left = reboundHighWorld
+  ; right = reboundLowWorld
+  ; currentlyCollapsed = refl
+  ; coordinateSeparates = λ ()
+  }
+
+record AgentInteractionCollisionReceipt : Set where
+  constructor agentInteractionCollisionReceipt
+  field
+    sameSuppressionAndDeclaredAgentCount :
+      suppressionAgentCountObserver agentIndependentWorld
+      ≡ suppressionAgentCountObserver agentInterferenceWorld
+    differentInteractionOutcome :
+      agentInteractionConsumer agentIndependentWorld
+      ≡ agentInteractionConsumer agentInterferenceWorld → ⊥
+
+canonicalAgentInteractionCollision : AgentInteractionCollisionReceipt
+canonicalAgentInteractionCollision = agentInteractionCollisionReceipt refl (λ ())
+
+record AgentInteractionDiscriminatorReceipt : Set where
+  constructor agentInteractionDiscriminatorReceipt
+  field
+    separates :
+      Coordinate.CoordinateSeparatesCollision
+        biocontrolCoordinateDesign suppressionAgentCountObserver
+
+canonicalAgentInteractionDiscriminator : AgentInteractionDiscriminatorReceipt
+canonicalAgentInteractionDiscriminator = agentInteractionDiscriminatorReceipt record
+  { coordinate = interactionCoordinate
+  ; left = agentIndependentWorld
+  ; right = agentInterferenceWorld
+  ; currentlyCollapsed = refl
+  ; coordinateSeparates = λ ()
+  }
+
 record BiocontrolExternalityBoundary : Set where
   constructor biocontrolExternalityBoundary
   field
@@ -302,10 +445,21 @@ record BiocontrolExternalityBoundary : Set where
     suppressionAndPresentOxygenPayRestorationConsumer : Bool
     suppressionAndPresentOxygenPayRestorationConsumerIsFalse :
       suppressionAndPresentOxygenPayRestorationConsumer ≡ false
+    presentSuppressionPaysFutureReboundConsumer : Bool
+    presentSuppressionPaysFutureReboundConsumerIsFalse :
+      presentSuppressionPaysFutureReboundConsumer ≡ false
+    agentCountAndSuppressionPayInteractionConsumer : Bool
+    agentCountAndSuppressionPayInteractionConsumerIsFalse :
+      agentCountAndSuppressionPayInteractionConsumer ≡ false
     specificityAndEfficacyAutomaticallyPaySystemAdequacy : Bool
     specificityAndEfficacyAutomaticallyPaySystemAdequacyIsFalse :
       specificityAndEfficacyAutomaticallyPaySystemAdequacy ≡ false
 
 canonicalBiocontrolExternalityBoundary : BiocontrolExternalityBoundary
 canonicalBiocontrolExternalityBoundary =
-  biocontrolExternalityBoundary false refl false refl false refl
+  biocontrolExternalityBoundary
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
