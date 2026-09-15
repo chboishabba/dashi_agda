@@ -32,6 +32,18 @@ semanticFirewallRegression :
   H.oeisIdentityCreatesMonsterAction boundary ≡ false
 semanticFirewallRegression = refl
 
+coordinateNameFirewallRegression :
+  H.coordinateSelectionCreatesConsumerProof boundary ≡ false
+coordinateNameFirewallRegression = refl
+
+actionSlotFirewallRegression :
+  H.coordinateNameAlonePaysMonsterAction H.actualWeylActionCoordinate ≡ false
+actionSlotFirewallRegression = refl
+
+multiplicitySlotFirewallRegression :
+  H.coordinateNameAlonePaysMonsterAction H.twelvePlusSeventyEightCoordinate ≡ false
+multiplicitySlotFirewallRegression = refl
+
 minimumFirewallRegression :
   H.minimumHittingSetKernelProved boundary ≡ false
 minimumFirewallRegression = refl
