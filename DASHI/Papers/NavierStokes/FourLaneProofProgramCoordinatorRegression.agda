@@ -35,13 +35,27 @@ periodicBPhaseR406WeldRecovered :
 periodicBPhaseR406WeldRecovered =
   Program.periodicBPhaseLiteralR406RemainderWeldRecoveredIsTrue
 
--- R516/R517 close the finite-carrier critical radial/norm realization, but
--- they do not manufacture the full R414 physical critical-observable slice.
+-- R516/R517 close the finite-carrier critical radial/norm realization.
 periodicBPhaseCriticalRadialRealizationRecovered :
   Program.periodicBPhaseCriticalRadialRealizationRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
 periodicBPhaseCriticalRadialRealizationRecovered =
   Program.periodicBPhaseCriticalRadialRealizationRecoveredIsTrue
+
+-- S0 now has an actual live-trajectory finite fold for endpoint mass,
+-- dissipation and projected-nonlinearity production.  This is intentionally
+-- weaker than a full R414 same-object slice.
+periodicBPhaseLiteralFiniteCriticalFoldRecovered :
+  Program.periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralFiniteCriticalFoldRecovered =
+  Program.periodicBPhaseLiteralFiniteCriticalObservableFoldRecoveredIsTrue
+
+periodicBPhaseR414ProductionNormalisationStillOpen :
+  Program.periodicBPhaseR414ProductionNormalisationRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseR414ProductionNormalisationStillOpen =
+  Program.periodicBPhaseR414ProductionNormalisationRecoveredIsFalse
 
 periodicBPhasePhysicalCriticalObservablesStillOpen :
   Program.periodicBPhasePhysicalCriticalObservableRealizationRecovered
