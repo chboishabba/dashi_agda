@@ -3,10 +3,14 @@ set -euo pipefail
 
 owner="DASHI/Reasoning/MaleCNSLatentStateMoEGrokkingAnimalexicCrossPollinationExact.agda"
 bidi="DASHI/Reasoning/MaleCNSJointConsumerBidiRefinementExact.agda"
+kernel="DASHI/Core/ConsumerFamilyRefinementKernelExact.agda"
+trial_context="DASHI/Reasoning/MaleCNSStructureFunctionTrialContextRefinementExact.agda"
 validation="DASHI/Reasoning/MaleCNSLatentStateMoEGrokkingAnimalexicValidation.agda"
 
 [[ -f "$owner" ]]
 [[ -f "$bidi" ]]
+[[ -f "$kernel" ]]
+[[ -f "$trial_context" ]]
 [[ -f "$validation" ]]
 
 grep -q 'record LatentStateProgrammeBoundary' "$owner"
@@ -31,8 +35,26 @@ grep -q 'connectomeConstraintIsNotLatentInversion' "$bidi"
 grep -q 'interventionFailureCreatesRefinementObligation' "$bidi"
 grep -q 'populationTrajectoryDoesNotPromoteMechanism' "$bidi"
 
+grep -q 'record ConsumerFamily' "$kernel"
+grep -q 'record FamilyFactorsThrough' "$kernel"
+grep -q 'record FamilyCollision' "$kernel"
+grep -q 'collisionRulesOutFamilyFactorisation' "$kernel"
+grep -q 'familyRechartCannotRecoverCollision' "$kernel"
+grep -q 'record ConsumerFamilyRepair' "$kernel"
+grep -q 'repairRetainsCoarseObserver' "$kernel"
+grep -q 'repairPaysFailedConsumer' "$kernel"
+
+grep -q 'structureOnlyTrialContextCollision' "$trial_context"
+grep -q 'structureOnlyCannotPayJointTrialContextConsumer' "$trial_context"
+grep -q 'trialContextRechartCannotRecoverFunctionalDifference' "$trial_context"
+grep -q 'repairedStructureTrialContextFactorsJointConsumer' "$trial_context"
+grep -q 'record MaleCNSStructureFunctionTrialContextBoundary' "$trial_context"
+grep -q 'finiteSpecimenIsNotEmpiricalCrossTrialReplication' "$trial_context"
+
 grep -q 'MaleCNSLatentStateMoEGrokkingAnimalexicCrossPollinationExact' "$validation"
 grep -q 'MaleCNSJointConsumerBidiRefinementExact' "$validation"
+grep -q 'ConsumerFamilyRefinementKernelExact' "$validation"
+grep -q 'MaleCNSStructureFunctionTrialContextRefinementExact' "$validation"
 grep -q 'FunctionalConnectomeBodyMemoryBridge' "$validation"
 grep -q 'IntersectionalLongitudinalProxyTransitionBridge' "$validation"
 grep -q 'AnimalexicDrosophilaEmbodiedBridge' "$validation"
