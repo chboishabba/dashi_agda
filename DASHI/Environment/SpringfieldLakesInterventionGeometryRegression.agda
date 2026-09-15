@@ -1,5 +1,7 @@
 module DASHI.Environment.SpringfieldLakesInterventionGeometryRegression where
 
+open import DASHI.Core.Prelude
+
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Environment.SpringfieldLakesInterventionGeometryExact as Geometry
 
