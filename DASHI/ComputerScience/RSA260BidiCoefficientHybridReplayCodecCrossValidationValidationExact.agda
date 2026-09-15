@@ -1,0 +1,12 @@
+module DASHI.ComputerScience.RSA260BidiCoefficientHybridReplayCodecCrossValidationValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiCoefficientHybridReplayCodecCrossValidationExact as Cross
+
+boundary : Cross.HybridCodecCrossValidationBoundary
+boundary = Cross.canonicalHybridCodecCrossValidationBoundary
+
+firstSyntheticResidual : Cross.HybridCodecCrossValidationResidual
+firstSyntheticResidual = Cross.firstHybridCodecCrossValidationResidual
+
+firstProductionResidual : Cross.HybridCodecProductionResidual
+firstProductionResidual = Cross.firstHybridCodecProductionResidual
