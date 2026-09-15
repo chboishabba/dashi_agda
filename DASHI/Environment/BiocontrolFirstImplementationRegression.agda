@@ -1,0 +1,10 @@
+module DASHI.Environment.BiocontrolFirstImplementationRegression where
+
+import DASHI.Core.FirstImplementationTimestampExact as Chronology
+import DASHI.Environment.BiocontrolFirstImplementationExact as First
+
+externalityFirstImplementation : Chronology.FirstImplementationReceipt
+externalityFirstImplementation = First.biocontrolExternalityFirstImplementation
+
+costedChoiceFirstImplementation : Chronology.FirstImplementationReceipt
+costedChoiceFirstImplementation = First.biocontrolCostedChoiceFirstImplementation
