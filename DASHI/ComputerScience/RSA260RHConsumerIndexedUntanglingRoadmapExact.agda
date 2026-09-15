@@ -11,6 +11,7 @@ import DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionExact as Fac
 import DASHI.ComputerScience.RSA260BidiRawModeRankResidualLocalizationExact as RawLocalization
 import DASHI.ComputerScience.RSA260BidiSparseRawRankObserverFrontierExact as SparseRaw
 import DASHI.ComputerScience.RSA260BidiSparseRawRankStressFrontierExact as StressRaw
+import DASHI.ComputerScience.RSA260BidiRankObserverGrowthStressExact as Growth
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
 import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
 import DASHI.Analysis.RiemannG2PhaseResidualRealizationExact as RHRealization
@@ -59,6 +60,9 @@ rsaSparseBoundary = SparseRaw.canonicalSparseRawRankObserverFrontierBoundary
 rsaStressBoundary : StressRaw.SparseRawRankStressFrontierBoundary
 rsaStressBoundary = StressRaw.canonicalSparseRawRankStressFrontierBoundary
 
+rsaGrowthBoundary : Growth.RankObserverGrowthStressBoundary
+rsaGrowthBoundary = Growth.canonicalRankObserverGrowthStressBoundary
+
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
 
@@ -80,31 +84,30 @@ productionFirstResidual = Production.firstUnpaidProductionResidual
 ------------------------------------------------------------------------
 -- RSA research queue.
 --
--- 18-world stage:
---   (degree,r2,r4,r10) separated every then-current receipt.
+-- Rank fingerprints repeatedly fit a finite family and then fail under a richer
+-- family.  Runtime minimum coordinate count (degree retained) has grown:
 --
--- Stress with eight fresh seed worlds:
---   the same observer collides on seed7/seed8/seed11/seed14 at (16,7,6,7).
---   Exhaustive runtime subset search over ranks 0..15 finds no degree + <=3
---   rank observer on the 26-world family.  A selected four-rank raw-mode set
+--   18 worlds -> 3 ranks
+--   26 worlds -> 4 ranks
+--   34 worlds -> 5 ranks
 --
---     (degree,r4,r5,r7,r9)
---
---   separates all 26 formally.  The first contiguous F2-prefix that survives
---   requires five ranks F2..F6.  Continue attacking the sparse four-rank code;
---   do not call runtime subset minimality a kernel theorem.
+-- while the first separating contiguous prefix from F2 reaches six ranks at 34
+-- worlds.  This does NOT prove unbounded rank dimension.  It does show that
+-- continuing to optimize a tiny rank code for exact RECEIPT identity is becoming
+-- dominated.  Keep rank sketches as cheap diagnostics, keep exact replay tail for
+-- replay, and ask which downstream consumer actually needs generator identity.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
-  attackSelectedFourRankObserverWithFreshAdapters : ResearchUntanglingTarget
-  compareSixRuntimeMinimalFourRankSetsOnAcquisitionCost : ResearchUntanglingTarget
-  formallyAttackAllDegreePlusThreeRankSubsets : ResearchUntanglingTarget
-  testSparseObserverAgainstNonReceiptConsumers : ResearchUntanglingTarget
-  refineSparseRanksIntoRowSpaceAndPayloadResidual : ResearchUntanglingTarget
+  chooseDownstreamConsumerBeforeFurtherReceiptRankSearch : ResearchUntanglingTarget
+  retainRanksAsCheapDiagnostics : ResearchUntanglingTarget
+  testWhetherMksolRelevantConsumerNeedsFullGeneratorIdentity : ResearchUntanglingTarget
+  attackExactReplayTailByConsumerRatherThanReceiptName : ResearchUntanglingTarget
+  onlyFormalizeThirtyFourWorldFiveRankCodeIfConsumerJustifiesIt : ResearchUntanglingTarget
   retainExactReplayTailSeparately : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = attackSelectedFourRankObserverWithFreshAdapters
+firstResearchUntanglingTarget = chooseDownstreamConsumerBeforeFurtherReceiptRankSearch
 
 ------------------------------------------------------------------------
 -- Production queue: independent execution from a same-object fine carrier.
@@ -161,15 +164,13 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     genericConsumerIndexedTowerPaid : Bool
     genericResidualLocalizationPaid : Bool
 
-    priorSparseDegreeR2R4R10SeparatedEighteen : Bool
-    priorSparseObserverFailsFreshSeedStress : Bool
-    explicitSeed7Seed8StressCollisionPaid : Bool
-    runtimeSearchFindsNoDegreePlusThreeRankObserverOnTwentySix : Bool
-    selectedDegreeR4R5R7R9SeparatesTwentySix : Bool
-    selectedStressFactorisationPaid : Bool
-    firstContiguousStressRepairNeedsFiveRanks : Bool
-    runtimeFourRankMinimalityKernelProved : Bool
-    selectedSparseObserverReplaysCoefficients : Bool
+    eighteenWorldRankMinimumFoundThree : Bool
+    twentySixWorldRankMinimumFoundFour : Bool
+    thirtyFourWorldRankMinimumFoundFive : Bool
+    thirtyFourWorldFirstContiguousPrefixNeedsSixRanks : Bool
+    fixedTinyRankFingerprintStableReceiptTerminal : Bool
+    rankCoordinateGrowthProvesUnboundedRequirement : Bool
+    ranksRemainUsefulDiagnostics : Bool
     exactReplayTailStillRetainedSeparately : Bool
 
     rhFinitePhaseLocalized : Bool
@@ -188,6 +189,7 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
 
     adequacyMustPrecedeParetoRanking : Bool
     weakerConsumerSufficientRoutePreferredWhenAvailable : Bool
+    receiptIdentityMustBeJustifiedByDownstreamConsumer : Bool
     threeQueuesMayAdvanceIndependently : Bool
 open RSA260RHUntanglingRoadmapBoundary public
 
@@ -196,7 +198,7 @@ canonicalRSA260RHUntanglingRoadmapBoundary :
 canonicalRSA260RHUntanglingRoadmapBoundary =
   rsa260-rh-untangling-roadmap-boundary
     true true
-    true true true true true true true false false true
+    true true true true false false true true
     true true true true false false false false false
     false true false
-    true true true
+    true true true true
