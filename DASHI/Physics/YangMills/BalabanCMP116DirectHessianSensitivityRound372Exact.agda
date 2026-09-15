@@ -35,7 +35,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _≤ℝ_)
+  (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCMP116DirectParametricSensitivityRound370Exact as R370
@@ -58,9 +58,13 @@ record CMP116DirectHessianSensitivityData : Set₁ where
     -- background on the SAME source analytic carrier.
     hessianFamily : Boundary → SubstitutedBackground → HessianValue
 
-    sourceMagnitudeBound sourceRadius sourceSubstitutionDistance : ℝ
+    sourceMagnitudeBound sourceRadius : ℝ
+
+    -- Keep the selected substitution scale pointwise.  R352 does not require a
+    -- stronger global scalar upper over every boundary coordinate.
+    sourceSubstitutionDistance : Boundary → ℝ
     sourceSubstitutionDistanceNonnegative :
-      0ℝ ≤ℝ sourceSubstitutionDistance
+      ∀ boundary → 0ℝ ≤ℝ sourceSubstitutionDistance boundary
 
     sourceHessianAnalytic :
       ∀ boundary →
@@ -85,7 +89,7 @@ record CMP116DirectHessianSensitivityData : Set₁ where
       ∀ boundary →
       R370.parameterDistance sensitivity
         (leftSubstituted boundary) (rightSubstituted boundary)
-      ≤ℝ sourceSubstitutionDistance
+      ≤ℝ sourceSubstitutionDistance boundary
 
     -- Same-object scalarization consumed by R352.  The source Hessian
     -- difference is exactly the target-space distance between the two values of
@@ -110,8 +114,8 @@ sourceHessianStableFromCauchy :
   ∀ boundary →
   sourceHessianDifference dataSet boundary
     ≤ℝ
-  sourceHessianLipschitz dataSet *
-    sourceSubstitutionDistance dataSet
+  sourceHessianLipschitz dataSet *ℝ
+    sourceSubstitutionDistance dataSet boundary
 sourceHessianStableFromCauchy dataSet boundary
   rewrite sourceHessianDifferenceIsTargetDistance dataSet boundary =
   R370.cauchySensitivityWithDistanceUpper (sensitivity dataSet)
@@ -120,7 +124,7 @@ sourceHessianStableFromCauchy dataSet boundary
     (sourceRadius dataSet)
     (leftSubstituted dataSet boundary)
     (rightSubstituted dataSet boundary)
-    (sourceSubstitutionDistance dataSet)
+    (sourceSubstitutionDistance dataSet boundary)
     (sourceHessianAnalytic dataSet boundary)
     (sourceHessianUniformlyBounded dataSet boundary)
     (sourceRadiusPositive dataSet)
@@ -133,8 +137,7 @@ round372ToR352Source :
 round372ToR352Source dataSet = record
   { R352.sourceHessianDifference = sourceHessianDifference dataSet
   ; R352.sourceLipschitz = sourceHessianLipschitz dataSet
-  ; R352.sourceSubstitutionDistance =
-      λ _ → sourceSubstitutionDistance dataSet
+  ; R352.sourceSubstitutionDistance = sourceSubstitutionDistance dataSet
   ; R352.sourceHessianStable = sourceHessianStableFromCauchy dataSet
   }
 
@@ -222,4 +225,3 @@ clayPromotion : Bool
 clayPromotion = false
 
 clayPromotionIsFalse : clayPromotion ≡ false
-clayPromotionIsFalse = refl
