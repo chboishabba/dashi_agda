@@ -188,7 +188,7 @@ data OneInstrumentSeesWholeChemicalUniverse : Set where
 data TargetedNegativeCreatesUnknownNegative : Set where
 data OrganicScreenCreatesMetalAbsence : Set where
 data EarlyAerosolCreatesWholeLifeExposure : Set where
-\data MaximalPacketCreatesScientificAuthority : Set where
+data MaximalPacketCreatesScientificAuthority : Set where
 
 oneInstrumentNotComplete : OneInstrumentSeesWholeChemicalUniverse → ⊥
 oneInstrumentNotComplete ()
