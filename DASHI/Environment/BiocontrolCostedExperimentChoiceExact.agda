@@ -11,7 +11,7 @@ import DASHI.Environment.BiocontrolExternalityExperimentExact as Experiment
 -- Declared experiment library.
 --
 -- The Nat costs below are synthetic search/resource ranks for the finite
--- fixture.  They are not dollars, welfare weights, empirical effort estimates,
+-- fixture. They are not dollars, welfare weights, empirical effort estimates,
 -- experimental ethics, or deployment authority.
 ------------------------------------------------------------------------
 
@@ -164,6 +164,32 @@ canonicalCheapestInteraction = Choice.cheapestResolvingMove
     helper .interactionMove interactionProbeResolves = ≤-refl
 
 ------------------------------------------------------------------------
+-- Concrete collision -> separating bundle witnesses.
+------------------------------------------------------------------------
+
+oxygenBundleSeparatesCollision :
+  Synthesis.BundleSeparates
+    oxygenBiomassFateBundle Experiment.oxygenDebtWorld Experiment.oxygenRecoveryWorld
+oxygenBundleSeparatesCollision = Synthesis.bundleSeparates (λ ())
+
+reboundBundleSeparatesCollision :
+  Synthesis.BundleSeparates
+    nutrientSeedbankBundle Experiment.reboundHighWorld Experiment.reboundLowWorld
+reboundBundleSeparatesCollision = Synthesis.bundleSeparates (λ ())
+
+communityBundleSeparatesCollision :
+  Synthesis.BundleSeparates
+    communityCompositionBundle
+    Experiment.restorationFailureWorld Experiment.restorationRecoveryWorld
+communityBundleSeparatesCollision = Synthesis.bundleSeparates (λ ())
+
+agentBundleSeparatesCollision :
+  Synthesis.BundleSeparates
+    agentInteractionBundle
+    Experiment.agentIndependentWorld Experiment.agentInterferenceWorld
+agentBundleSeparatesCollision = Synthesis.bundleSeparates (λ ())
+
+------------------------------------------------------------------------
 -- Regression-facing receipts and cross-consumer firewall.
 ------------------------------------------------------------------------
 
@@ -189,6 +215,68 @@ canonicalCommunityChoice = communityChoiceReceipt canonicalCheapestCommunity
 canonicalAgentInteractionChoice : AgentInteractionChoiceReceipt
 canonicalAgentInteractionChoice = agentInteractionChoiceReceipt canonicalCheapestInteraction
 
+record OxygenCollisionBackedChoiceReceipt : Set₁ where
+  constructor oxygenCollisionBackedChoiceReceipt
+  field
+    collision : Experiment.OxygenCollisionReceipt
+    separator :
+      Synthesis.BundleSeparates
+        oxygenBiomassFateBundle Experiment.oxygenDebtWorld Experiment.oxygenRecoveryWorld
+    cheapestResolving : Choice.CheapestResolvingMove oxygenProblem DeclaredMove
+
+canonicalOxygenCollisionBackedChoice : OxygenCollisionBackedChoiceReceipt
+canonicalOxygenCollisionBackedChoice = oxygenCollisionBackedChoiceReceipt
+  Experiment.canonicalOxygenCollision
+  oxygenBundleSeparatesCollision
+  canonicalCheapestOxygen
+
+record ReboundCollisionBackedChoiceReceipt : Set₁ where
+  constructor reboundCollisionBackedChoiceReceipt
+  field
+    collision : Experiment.ReboundCollisionReceipt
+    separator :
+      Synthesis.BundleSeparates
+        nutrientSeedbankBundle Experiment.reboundHighWorld Experiment.reboundLowWorld
+    cheapestResolving : Choice.CheapestResolvingMove nutrientProblem DeclaredMove
+
+canonicalReboundCollisionBackedChoice : ReboundCollisionBackedChoiceReceipt
+canonicalReboundCollisionBackedChoice = reboundCollisionBackedChoiceReceipt
+  Experiment.canonicalReboundCollision
+  reboundBundleSeparatesCollision
+  canonicalCheapestNutrient
+
+record RestorationCollisionBackedChoiceReceipt : Set₁ where
+  constructor restorationCollisionBackedChoiceReceipt
+  field
+    collision : Experiment.RestorationCollisionReceipt
+    separator :
+      Synthesis.BundleSeparates
+        communityCompositionBundle
+        Experiment.restorationFailureWorld Experiment.restorationRecoveryWorld
+    cheapestResolving : Choice.CheapestResolvingMove communityProblem DeclaredMove
+
+canonicalRestorationCollisionBackedChoice : RestorationCollisionBackedChoiceReceipt
+canonicalRestorationCollisionBackedChoice = restorationCollisionBackedChoiceReceipt
+  Experiment.canonicalRestorationCollision
+  communityBundleSeparatesCollision
+  canonicalCheapestCommunity
+
+record AgentCollisionBackedChoiceReceipt : Set₁ where
+  constructor agentCollisionBackedChoiceReceipt
+  field
+    collision : Experiment.AgentInteractionCollisionReceipt
+    separator :
+      Synthesis.BundleSeparates
+        agentInteractionBundle
+        Experiment.agentIndependentWorld Experiment.agentInterferenceWorld
+    cheapestResolving : Choice.CheapestResolvingMove interactionProblem DeclaredMove
+
+canonicalAgentCollisionBackedChoice : AgentCollisionBackedChoiceReceipt
+canonicalAgentCollisionBackedChoice = agentCollisionBackedChoiceReceipt
+  Experiment.canonicalAgentInteractionCollision
+  agentBundleSeparatesCollision
+  canonicalCheapestInteraction
+
 cheaperNutrientProbeDoesNotResolveOxygen :
   Choice.Resolves oxygenProblem nutrientMove (Choice.currentObstruction oxygenProblem) → ⊥
 cheaperNutrientProbeDoesNotResolveOxygen ()
@@ -204,6 +292,10 @@ record CrossConsumerCostBoundary : Set where
     leastCostResolutionCreatesDeploymentAuthority : Bool
     leastCostResolutionCreatesDeploymentAuthorityIsFalse :
       leastCostResolutionCreatesDeploymentAuthority ≡ false
+    abstractObstructionMayIgnoreConcreteCollision : Bool
+    abstractObstructionMayIgnoreConcreteCollisionIsFalse :
+      abstractObstructionMayIgnoreConcreteCollision ≡ false
 
 canonicalCrossConsumerCostBoundary : CrossConsumerCostBoundary
-canonicalCrossConsumerCostBoundary = crossConsumerCostBoundary true refl false refl false refl
+canonicalCrossConsumerCostBoundary =
+  crossConsumerCostBoundary true refl false refl false refl false refl
