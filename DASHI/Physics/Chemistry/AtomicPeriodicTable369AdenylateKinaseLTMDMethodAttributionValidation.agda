@@ -1,0 +1,15 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDMethodAttributionValidation where
+
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDMethodAttributionExact as Owner
+
+open Owner
+
+methodReceipt = canonicalLTMDMethodAttributionBoundary
+forceFieldReceipt = canonicalLTMDMethodProtocol
+sourceReceiptPinned = sourceReceipt
+articleDOIPinned = articleDOI
+articlePMIDPinned = articlePMID
+articlePMCIDPinned = articlePMCID
+articleQIDPinned = articleQID
+adkQIDPinned = adkQID
+adkUniProtPinned = adkUniProt
