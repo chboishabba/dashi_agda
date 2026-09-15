@@ -13,6 +13,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact as GateA
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact as A2
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as A2Square
+import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
 
 preferredLinearizationClosed :
   GateA.r571GateAPreferredLinearizationClosed ≡ true
@@ -69,6 +70,22 @@ radialCurvatureSquareGapRationalizationClosed = refl
 radialCurvatureTriangleExcessFactorizationClosed :
   A2Square.r571A2TriangleExcessPolarizationFactorizationClosed ≡ true
 radialCurvatureTriangleExcessFactorizationClosed = refl
+
+centeredShiftModeSumIsDoubledCenterClosed :
+  CenteredShift.r571A2CenteredShiftModeSumClosed ≡ true
+centeredShiftModeSumIsDoubledCenterClosed = refl
+
+centeredShiftSquaredOutputScalingClosed :
+  CenteredShift.r571A2CenteredShiftSquaredOutputScalingClosed ≡ true
+centeredShiftSquaredOutputScalingClosed = refl
+
+centeredShiftAlignedPluckerScalingClosed :
+  CenteredShift.r571A2CenteredShiftPluckerScalingClosed ≡ true
+centeredShiftAlignedPluckerScalingClosed = refl
+
+centeredShiftScalarRadiusDoublingStillOpen :
+  CenteredShift.r571A2CenteredShiftScalarRadiusDoublingClosed ≡ false
+centeredShiftScalarRadiusDoublingStillOpen = refl
 
 radialCurvatureUsesExistingGapProductDonor :
   A2Square.r571A2R127SquareGapAlgebraReused ≡ true
