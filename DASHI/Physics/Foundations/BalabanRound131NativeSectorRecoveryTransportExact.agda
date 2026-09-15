@@ -16,6 +16,10 @@ module DASHI.Physics.Foundations.BalabanRound131NativeSectorRecoveryTransportExa
 --      QFT target qftTarget(coarseGrain candidate regime);
 --   3. pairing coherence for the one literal sector stress.
 --
+-- The unification adapter also selects the UnifiedCandidate's own qftSemantics
+-- by construction.  A separate arbitrary-S -> qftSemantics equality would be an
+-- unnecessary representation obligation at this consumer.
+--
 -- Once (2) is supplied, the shared-stress identity is derived from the existing
 -- UnifiedCandidate.qftSectorStressToShared map rather than restated opaquely.
 -- No aggregation is performed here; BalabanTransportedSectorFamilyProducerExact
@@ -40,8 +44,8 @@ record Round131SharedTransportData
     {trajectory split}
     {inputs : BetaDensity.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}}
-    {S : Top.LiteralYangMillsSemantics (Weld.qftCarriers U)}
-    {Y : Top.LiteralYangMillsConstruction (Weld.qftCarriers U) S}
+    {Y : Top.LiteralYangMillsConstruction
+      (Weld.qftCarriers U) (Weld.qftSemantics U)}
     {group : Top.CompactSimpleGroup (Weld.qftCarriers U)}
     {Scale Volume : Set}
     {activity : Chain.SubstitutedActivitySecondVariation}
@@ -49,7 +53,8 @@ record Round131SharedTransportData
     {representation : StressRep.CanonicalMetricStressRepresentation domain}
     {stressLane : R123.DensityAnchoredCanonicalMetricStressLane
       {trajectory = trajectory} {split = split} {inputs = inputs}
-      {C = Weld.qftCarriers U} {S = S} {Y = Y} {group = group}
+      {C = Weld.qftCarriers U} {S = Weld.qftSemantics U}
+      {Y = Y} {group = group}
       domain representation}
     (recovery : R131.CommonMetricReadyBalabanSectorRecovery stressLane)
     (MetricPerturbation VariationScalar : Set) : Set₁ where
@@ -84,11 +89,12 @@ record Round131SharedTransportData
 open Round131SharedTransportData public
 
 round131RecoveryToNativeSectorTransport :
-  ∀ {U trajectory split inputs S Y group Scale Volume activity domain representation stressLane}
+  ∀ {U trajectory split inputs Y group Scale Volume activity domain representation stressLane}
     {MetricPerturbation VariationScalar : Set}
     (recovery : R131.CommonMetricReadyBalabanSectorRecovery
       {trajectory = trajectory} {split = split} {inputs = inputs}
-      {C = Weld.qftCarriers U} {S = S} {Y = Y} {group = group}
+      {C = Weld.qftCarriers U} {S = Weld.qftSemantics U}
+      {Y = Y} {group = group}
       {Scale = Scale} {Volume = Volume} {activity = activity}
       {domain = domain} {representation = representation}
       stressLane) →
@@ -154,6 +160,10 @@ record Round131NativeSectorTransportBoundary : Set where
     secondStressConvergenceTheoremRequiredIsFalse :
       secondStressConvergenceTheoremRequired ≡ false
 
+    arbitraryQFTSemanticsTransportRequired : Bool
+    arbitraryQFTSemanticsTransportRequiredIsFalse :
+      arbitraryQFTSemanticsTransportRequired ≡ false
+
     allNativeStressTransportRequired : Bool
     allNativeStressTransportRequiredIsFalse :
       allNativeStressTransportRequired ≡ false
@@ -174,6 +184,7 @@ canonicalRound131NativeSectorTransportBoundary :
   Round131NativeSectorTransportBoundary
 canonicalRound131NativeSectorTransportBoundary =
   round131-native-sector-transport-boundary
+    false refl
     false refl
     false refl
     false refl
