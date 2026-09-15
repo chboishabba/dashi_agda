@@ -50,6 +50,9 @@ record CMP116DecoupledCompositeContraction
 
 open CMP116DecoupledCompositeContraction public
 
+symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+symEq refl = refl
+
 sourceMapPreservesItsBall :
   ∀ {Parameter Point Bound}
     (dataSet : CMP116DecoupledCompositeContraction Parameter Point Bound)
@@ -58,20 +61,8 @@ sourceMapPreservesItsBall :
   QIF.InBall (sourceBall dataSet parameter)
     (sourceMap dataSet parameter point)
 sourceMapPreservesItsBall dataSet parameter point inBall
-  rewrite QIF.mapPreservesBall (sourceBall dataSet parameter) point inBall =
-  substInBall
-  where
-    -- Rewrite the source-ball map to the literal CMP116 map only at the final
-    -- carrier boundary; the contraction theorem itself stays owned by QIF.
-    substInBall :
-      QIF.InBall (sourceBall dataSet parameter)
-        (sourceMap dataSet parameter point)
-    substInBall
-      rewrite symEq (sourceBallUsesLiteralMap dataSet parameter) =
-      QIF.mapPreservesBall (sourceBall dataSet parameter) point inBall
-
-    symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-    symEq refl = refl
+  rewrite symEq (sourceBallUsesLiteralMap dataSet parameter) =
+  QIF.mapPreservesBall (sourceBall dataSet parameter) point inBall
 
 sourceMapContractiveAtFixedParameter :
   ∀ {Parameter Point Bound}
@@ -90,9 +81,6 @@ sourceMapContractiveAtFixedParameter dataSet parameter left right leftIn rightIn
   rewrite symEq (sourceBallUsesLiteralMap dataSet parameter) =
   QIF.mapContractive (sourceBall dataSet parameter)
     left right leftIn rightIn
-  where
-    symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-    symEq refl = refl
 
 sourceContractionFactorBelowOne :
   ∀ {Parameter Point Bound}
