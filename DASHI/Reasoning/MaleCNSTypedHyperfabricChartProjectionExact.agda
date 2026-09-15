@@ -184,10 +184,6 @@ sectionPairChartRealizationExact code edge = refl
 
 ------------------------------------------------------------------------
 -- Executed Python representation receipts.
---
--- These are empirical/runtime coordinates, not kernel proofs. They record that
--- the already-used eight-coordinate chart can be lifted to/projected from the
--- local-hyperfabric runtime without numerical change for the declared consumer.
 ------------------------------------------------------------------------
 
 record MaleCNSHyperfabricProjectionReceipt : Set where
@@ -270,6 +266,49 @@ currentMaleCNSPhysicalIncidenceProjectionReceipt = malecns-physical-incidence-pr
   "At the declared 26-region aggregation every ordered pair has nonzero direct coupling, and this aggregated support regenerates all eight NDim coordinates exactly. Completeness of the coarse region support does not identify it with the raw neuron/synapse physical hypergraph."
 
 ------------------------------------------------------------------------
+-- Official source authority.
+--
+-- Source-bounded facts from the MaleCNS v1.0 download surface. This receipt
+-- identifies which upstream objects may pay which roles; it does not claim a
+-- new runtime download or a fresh Agda kernel check.
+------------------------------------------------------------------------
+
+record MaleCNSOfficialPhysicalSourceReceipt : Set where
+  constructor malecns-official-physical-source-receipt
+  field
+    datasetPage : String
+    datasetId : String
+    neuPrintServer : String
+    fullConnectionGraphObject : String
+    synapticPartnerObject : String
+    fullbrainROIObject : String
+    jrc2018SkeletonProduct : String
+    fullConnectionGraphPaysRawSegmentConnectivity : Bool
+    synapticPartnerPairsPaySynapseIncidence : Bool
+    jrc2018SkeletonProductPaysConnectivity : Bool
+    jrc2018SkeletonProductPaysSpatialTransformProduct : Bool
+    regionAggregationIsDerivedQuotient : Bool
+    interpretation : String
+
+open MaleCNSOfficialPhysicalSourceReceipt public
+
+currentMaleCNSOfficialPhysicalSourceReceipt : MaleCNSOfficialPhysicalSourceReceipt
+currentMaleCNSOfficialPhysicalSourceReceipt = malecns-official-physical-source-receipt
+  "https://male-cns.janelia.org/download/"
+  "male-cns:v1.0"
+  "https://neuprint.janelia.org"
+  "gs://flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather"
+  "gs://flyem-male-cns/v1.0/connectome-data/flat-connectome/syn-partners-male-cns-v1.0-minconf-0.5.feather"
+  "gs://flyem-male-cns/rois/fullbrain-roi-v4"
+  "gs://flyem-male-cns/v1.0/segmentation/skeletons-unisex-template/"
+  true
+  true
+  false
+  true
+  true
+  "The official full connection graph and synaptic-partner table own raw segment/synapse connectivity authority. The JRC2018-unisex skeleton product pays only a spatial-transform product role. The 26-region structural carrier is a membership-aggregated quotient derived from upstream connectivity, not the raw physical graph itself."
+
+------------------------------------------------------------------------
 -- Boundary.
 ------------------------------------------------------------------------
 
@@ -320,6 +359,14 @@ record MaleCNSHyperfabricChartProjectionBoundary : Set where
     exactProjectionPromotesSufficiencyIsFalse :
       exactProjectionPromotesSufficiency ≡ false
 
+    officialFullGraphSourceBound : Bool
+    officialFullGraphSourceBoundIsTrue :
+      officialFullGraphSourceBound ≡ true
+
+    transformedSkeletonsPayConnectivityAuthority : Bool
+    transformedSkeletonsPayConnectivityAuthorityIsFalse :
+      transformedSkeletonsPayConnectivityAuthority ≡ false
+
 open MaleCNSHyperfabricChartProjectionBoundary public
 
 canonicalMaleCNSHyperfabricChartProjectionBoundary :
@@ -335,5 +382,7 @@ canonicalMaleCNSHyperfabricChartProjectionBoundary =
     false refl
     false refl
     true refl
+    true refl
+    false refl
     true refl
     false refl
