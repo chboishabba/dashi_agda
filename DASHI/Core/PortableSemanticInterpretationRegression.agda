@@ -11,7 +11,7 @@ refinementSurfaceExists :
   (backend : Portable.Backend problem) →
   (syntax : Portable.Syntax problem) →
   (query : Portable.Query problem) →
-  Set₁
+  Set
 refinementSurfaceExists problem backend syntax query =
   Portable.SemanticRefinement problem backend syntax query
 
