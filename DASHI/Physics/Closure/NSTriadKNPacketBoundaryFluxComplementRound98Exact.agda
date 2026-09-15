@@ -25,7 +25,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -66,7 +66,7 @@ threeLegOrderedPowerZero :
   ≡ 0ℚ
 threeLegOrderedPowerZero E I velocity reality divergenceFree tau =
   trans
-    (Round38.threeLegPowerIsPairOrbitSum E I tau velocity)
+    (sym (Round38.threeLegPowerIsPairOrbitSum E I tau velocity))
     (TriadEnergy.literalPhysicalTriadPowerZero
       E I tau velocity reality divergenceFree)
 
@@ -89,18 +89,26 @@ boundaryTriadComplementSumZero
      | selected (Physical.q tau)
 ... | true | true | true = refl
 ... | false | false | false = refl
-... | true | true | false =
-  threeLegOrderedPowerZero E I velocity reality divergenceFree tau
-... | true | false | true =
-  threeLegOrderedPowerZero E I velocity reality divergenceFree tau
-... | false | true | true =
-  threeLegOrderedPowerZero E I velocity reality divergenceFree tau
-... | true | false | false =
-  threeLegOrderedPowerZero E I velocity reality divergenceFree tau
-... | false | true | false =
-  threeLegOrderedPowerZero E I velocity reality divergenceFree tau
-... | false | false | true =
-  threeLegOrderedPowerZero E I velocity reality divergenceFree tau
+... | true | true | false = normalizeThenCancel
+... | true | false | true = normalizeThenCancel
+... | false | true | true = normalizeThenCancel
+... | true | false | false = normalizeThenCancel
+... | false | true | false = normalizeThenCancel
+... | false | false | true = normalizeThenCancel
+  where
+  a = Round38.orderedPairPower E I tau velocity
+  b = Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
+  c = Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
+
+  normalizeThenCancel :
+    R96.boundaryTriadTransfer E I selected velocity tau
+      + R96.boundaryTriadTransfer E I
+          (complementSelector selected) velocity tau
+    ≡ 0ℚ
+  normalizeThenCancel =
+    trans
+      (solve (a ∷ b ∷ c ∷ []))
+      (threeLegOrderedPowerZero E I velocity reality divergenceFree tau)
 
 sumBoundaryComplementZero :
   (E : C3.IntegerEmbedding F) →
@@ -141,11 +149,22 @@ normalizedBoundaryComplementSumZero :
 normalizedBoundaryComplementSumZero
     E I selected velocity reality divergenceFree cutoff =
   let
+    triads = Physical.physicalTriadEnumeration cutoff
+    leftRaw = R96.sumBoundaryTransfer E I selected velocity triads
+    rightRaw = R96.sumBoundaryTransfer E I
+      (complementSelector selected) velocity triads
+    rawZero : leftRaw + rightRaw ≡ 0ℚ
     rawZero = sumBoundaryComplementZero
-      E I selected velocity reality divergenceFree
-      (Physical.physicalTriadEnumeration cutoff)
+      E I selected velocity reality divergenceFree triads
+    factor :
+      R98.oneSixth * leftRaw + R98.oneSixth * rightRaw
+      ≡ R98.oneSixth * (leftRaw + rightRaw)
+    factor = solve (leftRaw ∷ rightRaw ∷ [])
   in
-  rewrite rawZero = solve []
+  trans factor
+    (trans
+      (cong (R98.oneSixth *_) rawZero)
+      (solve []))
 
 sumZeroGivesRightNegative :
   (left right : ℚ) → left + right ≡ 0ℚ → right ≡ - left
