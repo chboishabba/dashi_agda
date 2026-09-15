@@ -161,6 +161,7 @@ record PythonLatentExecutionFrontier : Set where
     allSixSourceTrialsSearched : Bool
     completeIdentityRecovery : Bool
     identityRecoveryImpliesReplication : Bool
+    unresolvedIdentityRowsBlockDiscoveryLatentExecution : Bool
     pythonLatentSourceWritten : Bool
     pythonLatentRuntimeReceiptObserved : Bool
     frozenEncoderArtifactObserved : Bool
@@ -189,12 +190,13 @@ currentPythonLatentExecutionFrontier =
     true
     false
     false
+    false
     true
     false
     false
     false
     false
-    "All six Gauthey LBM source trials have been searched under exact trace-identity recovery: 1209/1620 deposited selected rows are paid and 411 remain unresolved. This pays acquisition/search coverage only. It does not pay trial-native atlas registration, learned Z_d execution, frozen-encoder runtime artifact, independent latent replication, consumer-family adequacy, or Agda kernel certification."
+    "All six Gauthey LBM source trials have been searched under exact trace-identity recovery: 1209/1620 deposited selected rows are paid and 411 remain unresolved. This pays acquisition/search coverage only. The unresolved pooled selected rows do not block the already-materialized a2_r5 discovery latent run; they matter only insofar as they limit reconstruction of other trial-native carriers. This state does not pay learned Z_d execution, frozen-encoder runtime artifact, independent latent replication, consumer-family adequacy, or Agda kernel certification."
 
 ------------------------------------------------------------------------
 -- Aggregate boundary.
