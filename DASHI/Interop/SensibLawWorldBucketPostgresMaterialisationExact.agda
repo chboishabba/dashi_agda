@@ -28,10 +28,11 @@ data WorldBucketTableFamily : Set where
   growthReceiptTable
   projectionTable
   projectionMemberTable
+  projectionParentTable
   materialisationReceiptTable : WorldBucketTableFamily
 
 worldBucketTableFamilyCount : Nat
-worldBucketTableFamilyCount = 6
+worldBucketTableFamilyCount = 7
 
 record PostgresWorldBucketBoundary : Set where
   constructor postgresWorldBucketBoundary
@@ -41,6 +42,7 @@ record PostgresWorldBucketBoundary : Set where
     jsonbPayloadRequired : Bool
     growthReceiptsTyped : Bool
     projectionMembersExplicit : Bool
+    projectionParentsExplicit : Bool
     materialisationReceiptsAppendOnly : Bool
     replayUsesInsertDoNothing : Bool
     updateMayRewritePriorEvidence : Bool
@@ -59,6 +61,7 @@ canonicalPostgresWorldBucketBoundary =
     true
     false
     false
+    true
     true
     true
     true
