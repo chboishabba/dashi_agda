@@ -72,7 +72,16 @@ def test_literal_collision_search_excludes_oeis_and_unpaid_coordinates_from_proo
 
     assert "sameIntegerCollisionOnly" not in eligible
     assert all(not name.startswith("oeis") for name in eligible)
-    assert result.minimum_size >= 1
+    assert result.minimum_size == 5
+    assert result.transversals == (
+        (
+            "balanced196830Bulk",
+            "monster196883Degree",
+            "moonshine196884Dimension",
+            "selected3BRestrictionCoordinate",
+            "tauModularCoordinate",
+        ),
+    )
     assert all(set(candidate).issubset(set(eligible)) for candidate in result.transversals)
     assert not runtime.literal_edges_hit_by(runtime.OEIS_ONLY_SELECTION)
 
@@ -89,6 +98,16 @@ def test_runtime_receipt_keeps_discovery_separate_from_proof_authority():
     assert report["minimum_transversal_search"]["kernel_proved_minimum"] is False
     assert report["literal_collision_portfolio"]["world_count"] == 11
     assert report["literal_collision_portfolio"]["collision_edge_count"] == 11
+    assert report["literal_collision_portfolio"]["runtime_minimum_size"] == 5
+    assert report["literal_collision_portfolio"]["runtime_minimum_transversals"] == [
+        [
+            "balanced196830Bulk",
+            "monster196883Degree",
+            "moonshine196884Dimension",
+            "selected3BRestrictionCoordinate",
+            "tauModularCoordinate",
+        ]
+    ]
     assert report["literal_collision_portfolio"]["kernel_proved_minimum"] is False
     assert report["authority"]["python_runtime_creates_monster_theorem"] is False
     assert report["authority"]["oeis_identity_creates_monster_action"] is False
