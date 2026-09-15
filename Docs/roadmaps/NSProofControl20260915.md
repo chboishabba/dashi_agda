@@ -26,7 +26,7 @@ Boolean status field cannot manufacture a kernel receipt or a missing theorem.
 FourLaneProofProgramExact / this document
   -> merged #937   canonical A/B/C/D baseline + S0/S1/S2a state
   -> draft #948    S2b finite/same-object successor + physical layer-cake weld
-  -> draft #957    S2b2 complement/no-go/collar-remote analytic successor
+  -> draft #957    S2b2 complement/no-go/three-region analytic successor
   -> #945          Gate-A cross-prover receipt/status surface
   -> #947          local Hermitian G0' vector->scalar/R27 splice
   -> #890          retained comparable/P3 route + negative controls
@@ -103,17 +103,13 @@ concrete scalar FTC                                          OPEN infrastructure
 concrete integrateTo linearity                               OPEN infrastructure
 S2a literal N_N -> R39/R98 projected pairing                 DONE source
 S2b0 projected pairing -> R104 BandTransfer                  DONE source
-S2b1a shell sort + exact permutation + fold invariance       DONE source
-S2b1b0 reject-zero R98 full cutoff -> nonzero cutoff         DONE source
-S2b1b1 literal upper-shell selector -> sorted fold -> R98    DONE source
-S2b1b2a selector -> canonical sorted suffix -> R98 flux      DONE source
-S2b1b2b0 local strict-jump R104 tail -> canonical suffix     DONE source
-S2b1b2b1 global recursive-prefix physical packet weld        DONE source
-S2b1b full R104 layer-cake -> physical upper-shell flux      DONE source
+S2b1 full R104 layer-cake -> physical upper-shell flux       DONE source
 S2b2a upper/lower packet complement antisymmetry             DONE source
 S2b2 no-go adjacent shellIndex -> Euclidean spectral gap     DONE source negative control
 S2b2b exact upper-shell = collar + remote flux split         DONE source
-S2b2c remote spectrally-separated quantitative payment       OPEN
+S2b2c0 exact low + collar + remote physical flux identity    DONE source
+S2b2c1 two-shell low/remote Euclidean mode gap               DONE source
+S2b2c2 literal packet-level R98 spectral datum               OPEN REMOTE
 S2b2d exact-shell collar signed local payment                OPEN PRIMARY
 S3 cutoff-uniform initial critical ceiling                   OPEN
 S4 positive retained viscosity                               OPEN
@@ -168,61 +164,32 @@ criticalProductionRate
 The literal modern production is already on the R39/R98 projected-pairing
 carrier; no historical R372-style scalar-identification receipt remains.
 
-### S2b0 — DONE: R104 BandTransfer embedding
+### S2b0 / S2b1 — DONE SOURCE: physical packet layer-cake
 
-`NSTriadKNLiteralCriticalProductionBandTransferExact` maps each literal mode to
-
-```text
-b_k = (w(k), Re<u_k,N_k(u)>) : R104.BandTransfer
-```
-
-and proves R104 `weightedTransfer` is exactly the S2a weighted projected-pairing
-fold. Critical production is therefore twice that R104 weighted transfer.
-
-### S2b1a — DONE: literal radial order + exact carrier preservation
-
-`NSTriadKNLiteralCriticalProductionRadialOrderExact` insertion-sorts the SAME
-literal mode list by executable `shellIndex` and proves:
+The selected representation path is complete:
 
 ```text
-sortByShell modes ↭ modes
-ShellOrdered (sortByShell modes)
-weightedProjectedPairing(sortByShell modes)
-  = weightedProjectedPairing(modes).
+literal projected pairing
+  -> R104 BandTransfer
+  -> literal shell order/permutation
+  -> reject-zero full/nonzero cutoff bridge
+  -> upperShellPacket selected fold
+  -> canonical sorted suffix
+  -> local strict-jump R104 tail
+  -> recursive-prefix weld
+  -> normalized physical R98 boundary-flux layer-cake.
 ```
 
-Sorting changes only order, never the physical finite support.
-
-### S2b1b — DONE SOURCE: structural suffixes are physical R98 packets
-
-The representation path is complete:
-
-```text
-S2b1b0  reject-zero full cutoff -> nonzero cutoff                 DONE
-S2b1b1  upperShellPacket(shellIndex) -> sorted selected fold
-          -> normalized R98 physical boundary flux                DONE
-S2b1b2a selected fold -> canonical dropBelowShell suffix           DONE
-S2b1b2b0 local strict shell jump: R104 tail = canonical suffix     DONE
-S2b1b2b1 recursive-prefix weld to ORIGINAL sorted support          DONE
-```
-
-`NSTriadKNR104GlobalLayerCakePhysicalPacketWeldExact` proves the complete
-canonical representation theorem:
+`NSTriadKNR104GlobalLayerCakePhysicalPacketWeldExact` proves
 
 ```text
 R104.radialLayerCake(literal radially sorted bands)
-  = physicalUpperShellLayerCake,
+  = physicalUpperShellLayerCake.
 ```
 
-where every genuine shell jump uses the corresponding R98 normalized physical
-boundary flux. Equal-shell interfaces are inactive because their dyadic radial
-increment is zero.
+No quantitative estimate is imported by this representation chain.
 
-This is representation/same-object mathematics only. It introduces no
-absolute-value majorant, Schur bound, quantitative flux estimate, or R406
-estimate.
-
-### S2b2 — PRIMARY nonlinear theorem, now collar/remote factored
+### S2b2 — PRIMARY nonlinear theorem, three-region factored
 
 The integrated target remains
 
@@ -232,74 +199,104 @@ N_N(T)
      + literalR406RemainderIntegral(N,T).
 ```
 
-#957 first paid the orientation bridge on the SAME normalized R98 carrier:
+#957 first paid the exact orientation bridge:
 
 ```text
 F(selected) + F(complement selected) = 0
 F_lower(j) = -F_upper(j).
 ```
 
-It then recorded an explicit append-only no-go against the naive spectral-gap
-route. At threshold 2:
+It then recorded the explicit adjacent-shell no-go:
 
 ```text
 low  = (2,2,2): shellIndex = 1, |low|_2^2 = 12
 high = (3,0,0): shellIndex = 2, |high|_2^2 = 9.
 ```
 
-Therefore adjacent `shellIndex` separation does NOT imply the positive
-Euclidean squared-frequency gap required by the existing R98 spectral
-cross-dissipation coercivity. Do not reopen that route without a stronger packet
-split.
+Therefore adjacent max-shell separation does not imply the positive Euclidean
+frequency gap required by R98 spectral coercivity.
 
-`NSTriadKNUpperShellCollarRemoteSplitExact` now proves, still on the SAME R98
-physical boundary-flux carrier,
+`NSTriadKNUpperShellCollarRemoteSplitExact` proves
 
 ```text
 F_{>=j} = F_{=j} + F_{>=j+1}.
 ```
 
-This is source-written finite decomposition only; it does not pay either
-quantitative term.
-
-The selected analytic frontier is therefore:
+A further correction is now frozen: `F_{>=j+1}` is NOT the Boolean complement
+of a spectrally separated low packet because that complement also contains the
+collar. The correct physical geometry is three-region:
 
 ```text
-remote piece F_{>=j+1}
-  -> prove explicit dyadic/Euclidean separation with R518 geometry
-  -> apply/recalibrate R98/R99 coercive mechanism only where its hypotheses hold
-
-exact-shell collar F_{=j}
-  -> preserve signed local physical components
-  -> prove the genuinely local cancellation/payment without Schur/Wiener flattening
-
-remote + collar
-  -> reconstruct the integrated S2b2 R104/R414 inequality.
+low    : shellIndex < j
+collar : shellIndex = j
+remote : shellIndex >= j+1.
 ```
 
-The remote route is promising because peeling the exact-shell collar creates a
-factor-four dyadic jump against the dimension-three Euclidean upper constant;
-that claim still requires its exact same-object finite proof before any
-coercivity status is promoted. The collar is currently the likely hard local
-analytic leaf.
+`NSTriadKNLowCollarRemotePacketSplitExact` proves on the SAME normalized R98
+carrier
 
-Equivalent producer formulations are admissible only if they construct this
+```text
+F_low + F_collar + F_remote = 0.
+```
+
+and explicitly prevents treating remote as the Boolean complement of low.
+
+For `j = suc K`, `NSTriadKNTwoShellLowRemoteEuclideanGapExact` proves the exact
+modewise finite geometry
+
+```text
+shell(low) < j       -> |low|_2^2 <= 3 * (2^K)^2
+j+1 <= shell(remote) -> 4 * (2^K)^2 <= |remote|_2^2.
+```
+
+Thus the needed `3 < 4` low/remote spectral separation is now paid at the
+modewise lattice level.
+
+The remote route's first unpaid object is no longer geometry or the PDE RHS.
+R407 already constructs the canonical literal viscous term `nu |k|^2 u_k`.
+The first unpaid remote seam is now:
+
+```text
+S2b2c2:
+construct the literal packet-level R98 SpectralCrossDissipationDatum
+on the live low/remote regions:
+  - packet/off-packet energy nonnegativity,
+  - low dissipation upper bound,
+  - remote dissipation lower bound,
+  - exact frequency ceiling/floor with the correct viscosity/half-energy normalization.
+```
+
+Do not silently lose the half-energy normalization: R98 packet energy uses
+`(1/2) sum |u_k|^2`, while the canonical viscous pairing uses
+`nu |k|^2 |u_k|^2`; the spectral constants supplied to the abstract R98 datum
+must therefore carry the corresponding factor `2*nu` when that datum is built.
+
+The exact-shell collar remains the likely hard local analytic leaf:
+
+```text
+S2b2d:
+preserve signed exact-shell physical components
+-> prove local collar cancellation/payment without Schur/Wiener flattening.
+```
+
+Then recombine remote + collar into the integrated R104/R414 S2b2 inequality.
+
+Equivalent producer formulations are admissible only if they construct the
 bound on the SAME literal S0/S2 physical production and R406 remainder. A theorem
-merely accepting `signedProductionEstimateByLiteralRemainder`,
-`globalDangerPaidByEndpoint`, an R303/R353 payment, R568 budget, or equivalent as
-a field is a compiler, not this producer.
+merely accepting a signed-production estimate, historical payment, or R568
+budget as a field is a compiler, not the missing producer.
 
-No more S2a/S2b1 representation archaeology. Search only named remote/collar
-quantitative producers or dependencies exposed by those exact theorems.
+No more S2a/S2b1 representation archaeology. Search only named packet-datum or
+collar quantitative dependencies.
 
 ## S3 / S4
 
 S3: S0 supplies the literal initial functional; remaining payment is one
 cutoff-uniform initial-critical ceiling.
 
-S4: calibrate the absorbed coefficient against the exact S0/S1 convention
-`viscousCoefficient = 2*nu` and prove `0 < 2*nu - a`. Because `a` is produced by
-S2b2, S4 must not be promoted ahead of S2b2 except conditionally.
+S4: calibrate against `viscousCoefficient = 2*nu` and prove `0 < 2*nu-a`.
+Because `a` is produced by S2b2, S4 must not be promoted ahead of S2b2 except
+conditionally.
 
 ## Historical/provenance routes — retain append-only
 
@@ -314,12 +311,6 @@ adjacent max-shell -> Euclidean gap             refuted by #957 explicit lattice
 modern signed/nested commutator route           selected B_comm producer family
 ```
 
-R303/R353/R372 preserved the signed architecture and isolated essentially the
-same production-identification problem, but left it as an input. S2a through
-S2b1b now pay the modern representation/same-object chain directly; #957 then
-removes the false adjacent-shell spectral-gap shortcut and isolates the remote
-and exact-shell collar quantitative leaves.
-
 ## C / D
 
 C/D remain integration lanes only. Their activity does not change A/B routing.
@@ -331,11 +322,11 @@ and B active.
 ```text
 P0  keep this tracker + canonical/thin-successor status synchronized
 P1  B_phase S2b2d: exact-shell collar signed local payment
-P2  B_phase S2b2c: remote separated packet coercive payment
+P2  B_phase S2b2c2: literal low/remote R98 spectral datum + coercive transport
 P3  S1b infrastructure: concrete scalar FTC / integrateTo linearity
 P4  B_phase S3/S4: initial ceiling + retained-viscosity calibration
 P5  B_comm reconstruction/certification
-P6  certify recovered S0/S1/S2 representation and #957 split surfaces
+P6  certify recovered S0/S1/S2 representation and #957 split/gap surfaces
 P7  A deferred until explicit B portability audit
 ```
 
@@ -345,7 +336,7 @@ Operating rule:
 focus A/B only;
 A remains deferred unless completed B exposes a named portability seam;
 no broad NS archaeology;
-start at the collar/remote S2b2 split;
+start at exact collar payment and literal low/remote spectral datum;
 preserve signed/local components before norms;
 new mathematics only for the named unpaid quantitative leaves.
 ```
