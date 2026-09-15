@@ -135,8 +135,9 @@ canonicalEvaluationLayerBoundary =
 --
 -- Source/certification remains split. The current dashiBRAIN head contains the
 -- normalized terminal scorecards, structure-only PCA latent ladder, persisted
--- frozen encoder, cross-recording frozen-encoder evaluator, and Turner-style
--- inverse-weight shortest-path comparator. Exact selected-row acquisition has
+-- frozen encoder, cross-recording frozen-encoder evaluator, Turner-style
+-- inverse-weight shortest-path comparator, and an exact structural-family
+-- fingerprint gate for frozen-latent reuse. Exact selected-row acquisition has
 -- now searched all six source trials, but the learned Z_d tranche still lacks a
 -- fresh discovery real-data execution receipt and no independent registered
 -- latent replication has yet been observed.
@@ -165,6 +166,9 @@ record PythonLatentExecutionFrontier : Set where
     pythonLatentSourceWritten : Bool
     pythonLatentRuntimeReceiptObserved : Bool
     frozenEncoderArtifactObserved : Bool
+    frozenEncoderSameStructuralCarrierRequired : Bool
+    sameRegionVocabularyAuthorizesLatentReuse : Bool
+    structuralCarrierFingerprintRuntimeObserved : Bool
     independentTrialLatentReplicationObserved : Bool
     agdaKernelReceiptObserved : Bool
     interpretation : String
@@ -194,9 +198,12 @@ currentPythonLatentExecutionFrontier =
     true
     false
     false
+    true
     false
     false
-    "All six Gauthey LBM source trials have been searched under exact trace-identity recovery: 1209/1620 deposited selected rows are paid and 411 remain unresolved. This pays acquisition/search coverage only. The unresolved pooled selected rows do not block the already-materialized a2_r5 discovery latent run; they matter only insofar as they limit reconstruction of other trial-native carriers. This state does not pay learned Z_d execution, frozen-encoder runtime artifact, independent latent replication, consumer-family adequacy, or Agda kernel certification."
+    false
+    false
+    "All six Gauthey LBM source trials have been searched under exact trace-identity recovery: 1209/1620 deposited selected rows are paid and 411 remain unresolved. The dashiBRAIN source now also requires exact same-object structural-family identity before a persisted latent encoder may be reused; equality of the 26-region vocabulary alone is insufficient. The fingerprint gate is source-written but no fresh runtime fingerprint/artifact receipt has been observed. This state does not pay learned Z_d execution, independent latent replication, consumer-family adequacy, or Agda kernel certification."
 
 ------------------------------------------------------------------------
 -- Aggregate boundary.
@@ -229,6 +236,14 @@ record MaleCNSConsumerRelativeLatentParetoBoundary : Set where
     frozenEncoderRequiresIndependentRecordingForReplicationIsTrue :
       frozenEncoderRequiresIndependentRecordingForReplication ≡ true
 
+    sameStructuralCarrierRequiredForFrozenReuse : Bool
+    sameStructuralCarrierRequiredForFrozenReuseIsTrue :
+      sameStructuralCarrierRequiredForFrozenReuse ≡ true
+
+    sameRegionVocabularyAuthorizesFrozenReuse : Bool
+    sameRegionVocabularyAuthorizesFrozenReuseIsFalse :
+      sameRegionVocabularyAuthorizesFrozenReuse ≡ false
+
     lowerLossPromotesMechanism : Bool
     lowerLossPromotesMechanismIsFalse :
       lowerLossPromotesMechanism ≡ false
@@ -247,5 +262,7 @@ canonicalMaleCNSConsumerRelativeLatentParetoBoundary =
     false refl
     false refl
     true refl
+    true refl
     false refl
-    "MaleCNS latent search is consumer-relative: first establish admissibility/factorisation for the declared consumer family, then compare dimension, description length and terminal held-out/replicated metrics. A discovery-recording Z_d curve is a candidate compression frontier, not universal sufficiency or physical-state dimensionality."
+    false refl
+    "MaleCNS latent search is consumer-relative and same-object constrained: first establish admissibility/factorisation for the declared consumer family, then compare dimension, description length and terminal held-out/replicated metrics. Frozen latent reuse additionally requires the same structural-family carrier, not merely the same region labels. A discovery-recording Z_d curve remains a candidate compression frontier, not universal sufficiency or physical-state dimensionality."
