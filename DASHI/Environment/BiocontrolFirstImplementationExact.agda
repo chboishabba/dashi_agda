@@ -58,3 +58,15 @@ springfieldMechanicalRemovalFirstImplementation = Chronology.first-implementatio
   "Australia/Brisbane (AEST, UTC+10)"
   Chronology.exactRepresentationImplemented
   Chronology.sourceCommittedOnly
+
+biocontrolChemistryObserverParetoFirstImplementation :
+  Chronology.FirstImplementationReceipt
+biocontrolChemistryObserverParetoFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Environment.BiocontrolChemistryObserverParetoExact"
+    "e472798201a360c42670e6218f7911cbef9cabe8"
+    "2026-09-15T04:57:05Z"
+    "2026-09-15T14:57:05+10:00"
+    "Australia/Brisbane (AEST, UTC+10)"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
