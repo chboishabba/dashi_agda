@@ -52,8 +52,8 @@ open SameSignalEvidenceCollision public
 
 sameSignalCannotEraseEvidenceDifference :
   ∀ {G B} {I : SourceConditionedInformation {G} B} →
-  SameSignalEvidenceCollision I →
-  evidenceAt I (leftWorld _) ≡ evidenceAt I (rightWorld _) →
+  (collision : SameSignalEvidenceCollision I) →
+  evidenceAt I (leftWorld collision) ≡ evidenceAt I (rightWorld collision) →
   ⊥
 sameSignalCannotEraseEvidenceDifference collision = evidenceDifferent collision
 
