@@ -37,7 +37,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _≤ℝ_)
+  (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
 import DASHI.Foundations.FinitePolydiscCauchyAxioms as Cauchy
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -162,7 +162,7 @@ record CMP116PublishedParametricToR370Data : Set₁ where
               leftVariation rightVariation)
             (Cauchy.boundaryAssignment (Decoupled.cauchy decoupled) s)))
         ≤ℝ
-      sourceLipschitz * R370._*ℝ_ (boundarySubstitutionDistance s)
+      sourceLipschitz *ℝ boundarySubstitutionDistance s
 
 open CMP116PublishedParametricToR370Data public
 
