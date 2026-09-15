@@ -16,6 +16,9 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderRegres
 import DASHI.Physics.Closure.NSTriadKNSelectedPacketNonzeroCutoffBridgeRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellPacketSelectorRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellCanonicalSuffixRegression
+import DASHI.Physics.Closure.NSTriadKNR104StrictShellJumpTailRegression
+import DASHI.Physics.Closure.NSTriadKNUpperShellPrefixErasureRegression
+import DASHI.Physics.Closure.NSTriadKNR104GlobalLayerCakePhysicalPacketWeldRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
@@ -29,11 +32,12 @@ import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellCanonicalSuffixRegression
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
 -- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1a radial
--- ordering/permutation, reject-zero full->nonzero transport, literal upper-shell
--- selector -> R98 boundary flux, and canonical shell suffix transport may be
--- source-written while concrete scalar FTC / integration authorities, the last
--- structural R104-tail equality, quantitative S2 payment, initial ceiling and
--- retained-viscosity payments remain unobserved or open.
+-- ordering/permutation, reject-zero full->nonzero transport, upper-shell R98
+-- transport, canonical suffix realization, local strict-jump tails, prefix
+-- erasure, and the global R104 physical packet layer-cake weld may all be
+-- source-written while concrete scalar FTC / integration authorities, the
+-- quantitative S2 payment, initial ceiling and retained-viscosity payments
+-- remain unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
