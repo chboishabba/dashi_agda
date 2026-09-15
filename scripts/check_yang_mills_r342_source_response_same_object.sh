@@ -10,9 +10,13 @@ done
 
 # Static fail-closed contract before invoking Agda.
 grep -q 'record SourceResponseSameObjectPayment' "$PRODUCTION"
+grep -q 'record CMP109CMP116SourceResponseIdentity' "$PRODUCTION"
+grep -q 'r321SameObjectBuildsB1AfterSourceIdentity' "$PRODUCTION"
+grep -q 'r321SameObjectCanFeedB1AfterSourceIdentity = true' "$PRODUCTION"
 grep -q 'SourceEnvelopeCalibration' "$PRODUCTION"
 grep -q 'asRound341Application' "$PRODUCTION"
 grep -q 'round342SourceResponseSameObjectLevel = conditional' "$PRODUCTION"
+grep -q 'round342CMP109CMP116SourceIdentityLevel = conditional' "$PRODUCTION"
 grep -q 'round342EnvelopeCalibrationLevel = conditional' "$PRODUCTION"
 grep -q 'freshYMDecayEstimateIntroduced = false' "$PRODUCTION"
 grep -q 'clayPromotion = false' "$PRODUCTION"
