@@ -10,3 +10,10 @@ import DASHI.Biology.Protein.ProteinFunctionProjection
 import DASHI.Biology.Protein.AlliumThiolProteinInteractionExact
 import DASHI.Biology.Protein.TRPA1SingleResidueThermalAdaptationExact
 import DASHI.Biology.Protein.TRPA1SingleResidueThermalAdaptationRegression
+
+-- Source-bounded acquisition continuation: cross-pollinates only the reusable
+-- information architecture from the AdK calibration tranche.  Feng et al.'s
+-- residue/gating biology and Li-Liu-Ji's numeric dynamics remain source-local;
+-- neither source gains authorship or authority over the other's propositions.
+import DASHI.Biology.Protein.TRPA1AdKSourceBoundedAcquisitionCrossPollinationExact
+import DASHI.Biology.Protein.TRPA1AdKSourceBoundedAcquisitionCrossPollinationValidation
