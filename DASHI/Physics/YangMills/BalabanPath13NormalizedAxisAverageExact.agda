@@ -41,12 +41,12 @@ oneThirteenth = + 1 / 13
 side13NormalizationExact :
   oneThirteenth * natAsRational (length (allCyclicIndices side13)) ≡ 1ℚ
 side13NormalizationExact
-  rewrite lengthAllCyclicIndices side13 = ℚRing.solve []
+  rewrite lengthAllCyclicIndices side13 = refl
 
 side13AverageData : Average.NormalizedAxisAverageData side13
 side13AverageData = record
-  { Average.NormalizedAxisAverageData.weight = oneThirteenth
-  ; Average.NormalizedAxisAverageData.normalized = side13NormalizationExact
+  { weight = oneThirteenth
+  ; normalized = side13NormalizationExact
   }
 
 path13NormalizedAxisAverageLevel : ProofLevel

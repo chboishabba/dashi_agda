@@ -5,4 +5,4 @@ module DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCertificate where
 -- and checks the physical-gap/LDL identity on closed rational coefficient rows.
 -- No twelve-variable polynomial is sent to rational ring reflection.
 
-open import DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCoefficientProofExact public
+open import DASHI.Physics.YangMills.BalabanPath13NativeIntegerPoincareBridgeExact public
