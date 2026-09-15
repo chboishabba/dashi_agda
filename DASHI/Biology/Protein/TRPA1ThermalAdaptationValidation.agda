@@ -23,3 +23,12 @@ import DASHI.Biology.Protein.TRPA1SourceAttributionEnvelopeValidation
 -- neither source gains authorship or authority over the other's propositions.
 import DASHI.Biology.Protein.TRPA1AdKSourceBoundedAcquisitionCrossPollinationExact
 import DASHI.Biology.Protein.TRPA1AdKSourceBoundedAcquisitionCrossPollinationValidation
+
+-- Parent-level situated-protein abstraction: TRPA1 and AdK now instantiate the
+-- same query-indexed witness interface while retaining residue-state versus
+-- conformation/context fibres.  External identifiers remain provenance only;
+-- generic factorisation/refinement structure is DASHI synthesis.
+import DASHI.Biology.Protein.ProteinSituatedHyperfabricExact
+import DASHI.Biology.Protein.TRPA1SituatedProteinWitnessExact
+import DASHI.Biology.Protein.AdenylateKinaseSituatedProteinWitnessExact
+import DASHI.Biology.Protein.ProteinSituatedHyperfabricValidation
