@@ -5,24 +5,28 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.ComputerScience.RSA260CADOBlockWiedemannArtifactSchemaSnowballExact as CADO
+import DASHI.ComputerScience.RSA260GNFSRunParameterArtifactSnowballExact as Run
 import DASHI.ComputerScience.RSA260BidiMksolConsumerProjectionExact as Mksol
 import DASHI.ComputerScience.RSA260BidiMksolVContextStressExact as Stress
 
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE CADO MKSOL CONTEXT FAMILY
 --
--- The correct compression consumer is not one fixed synthetic V block.  CADO's
+-- The correct compression consumer is not one fixed synthetic V block. CADO's
 -- BWC schema distinguishes the generator artifact F.sols*, starting V blocks,
 -- prepared/balanced matrix action and S.sols* partial solution ranges.
 --
--- This owner therefore defines the family shape that any generator quotient has
--- to preserve.  Public implementation schema pays the artifact roles and naming
--- pattern only.  It does NOT recover the exact RSA-260 V partition, solution
--- range schedule, balanced operator bytes, or historical mksol revision.
+-- RSA-260's primary run-parameter owner additionally pays two width-256 Krylov
+-- sequences and 40 mksol ranges of width 32768.  Those published coordinates are
+-- retained here, while exact file/range binding and prepared-operator identity
+-- remain unpaid.
 ------------------------------------------------------------------------
 
 cadoSchema : CADO.CADOBlockWiedemannArtifactSchema
 cadoSchema = CADO.currentCADOBlockWiedemannArtifactSchema
+
+rsa260RunParameters : Run.RunParameterReceipt
+rsa260RunParameters = Run.rsa260LinearAlgebraParameters
 
 mksolBoundary : Mksol.MksolConsumerProjectionBoundary
 mksolBoundary = Mksol.canonicalMksolConsumerProjectionBoundary
@@ -51,10 +55,6 @@ record CADOMksolContextFamily : Set₁ where
       PartialSolution
 open CADOMksolContextFamily public
 
-------------------------------------------------------------------------
--- Exact preservation is quantified over the declared family, not one context.
-------------------------------------------------------------------------
-
 record FamilyAdequateGeneratorRepresentation
     (family : CADOMksolContextFamily) : Set₁ where
   constructor family-adequate-generator-representation
@@ -80,7 +80,7 @@ record FamilyAdequateGeneratorRepresentation
 open FamilyAdequateGeneratorRepresentation public
 
 ------------------------------------------------------------------------
--- Source-paid schema coordinates and unpaid same-object coordinates.
+-- Source-paid coordinates versus same-object binding.
 ------------------------------------------------------------------------
 
 record CADOMksolContextSchemaReceipt : Set where
@@ -93,8 +93,15 @@ record CADOMksolContextSchemaReceipt : Set where
     mksolProducesSolutionSequence : Bool
     gatherProducesKernelVectors : Bool
     binarySplitWidth : Nat
-    exactRSA260VBlockPartitionKnown : Bool
-    exactRSA260SolutionRangesKnown : Bool
+
+    publishedKrylovSequenceCount : Nat
+    publishedKrylovSequenceWidth : Nat
+    publishedMksolRangeCount : Nat
+    publishedMksolRangeWidth : Nat
+    primaryRunCoordinatesPaid : Bool
+
+    exactRSA260VBlockFileBindingKnown : Bool
+    exactRSA260MksolRangeFileBindingKnown : Bool
     exactRSA260PreparedOperatorBytesKnown : Bool
 open CADOMksolContextSchemaReceipt public
 
@@ -108,6 +115,11 @@ currentCADOMksolContextSchemaReceipt =
     (CADO.mksolProducesSolutionSequence cadoSchema)
     (CADO.gatherProducesKernelVectors cadoSchema)
     (CADO.binarySplitWidth cadoSchema)
+    2
+    256
+    40
+    32768
+    true
     false false false
 
 record CADOMksolContextFamilyBoundary : Set where
@@ -117,10 +129,12 @@ record CADOMksolContextFamilyBoundary : Set where
     sourceNativeInitialVRolePaid : Bool
     sourceNativePartialSolutionRolePaid : Bool
     contextFamilyPreservationInterfaceWritten : Bool
+    primaryTwoWidth256SequenceCoordinatePaid : Bool
+    primaryFortyMksolRangesOf32768Paid : Bool
     oneFixedVContextIsSufficientCompressionConsumer : Bool
     syntheticTwoVStressShowsContextExpansionCanReopenKernel : Bool
-    exactRSA260VPartitionPaid : Bool
-    exactRSA260SolutionRangesPaid : Bool
+    exactRSA260VFileBindingPaid : Bool
+    exactRSA260MksolRangeFileBindingPaid : Bool
     exactRSA260PreparedOperatorPaid : Bool
     exactHistoricalMksolRevisionPaid : Bool
     compressionMayBeRankedBeforeContextFamilyAdequacy : Bool
@@ -129,16 +143,16 @@ open CADOMksolContextFamilyBoundary public
 canonicalCADOMksolContextFamilyBoundary : CADOMksolContextFamilyBoundary
 canonicalCADOMksolContextFamilyBoundary =
   cado-mksol-context-family-boundary
-    true true true true
+    true true true true true true
     false true false false false false false
 
 data CADOMksolContextFamilyResidual : Set where
-  acquireExactRSA260VBlockPartition : CADOMksolContextFamilyResidual
-  acquireExactRSA260MksolSolutionRanges : CADOMksolContextFamilyResidual
+  bindPublishedSequencesToExactRSA260VFiles : CADOMksolContextFamilyResidual
+  bindPublishedMksolRangesToExactSolutionFiles : CADOMksolContextFamilyResidual
   bindPreparedOperatorSameObjectIdentity : CADOMksolContextFamilyResidual
   instantiateDeclaredProductionContextFamily : CADOMksolContextFamilyResidual
   testGeneratorRepresentationAgainstWholeFamily : CADOMksolContextFamilyResidual
   rankOnlyInsideFamilyAdequateStratum : CADOMksolContextFamilyResidual
 
 firstCADOMksolContextFamilyResidual : CADOMksolContextFamilyResidual
-firstCADOMksolContextFamilyResidual = acquireExactRSA260VBlockPartition
+firstCADOMksolContextFamilyResidual = bindPublishedSequencesToExactRSA260VFiles
