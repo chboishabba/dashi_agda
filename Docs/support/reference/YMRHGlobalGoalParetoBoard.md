@@ -2,23 +2,23 @@
 
 Status: **live proof-search/accounting board**, not theorem authority.
 
-Update rule: every Pareto recut that changes a preferred producer or live terminal leaf updates this file in the same tranche. Historical detail stays in the archaeology/producer companions; this file is the current scheduling source of truth.
+This is the compact/current companion to the broad historical catalogue:
 
-Companions:
-
-- `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md` — broad PR/round chronology.
-- `Docs/support/reference/YMRHFinalizationProducerAtlas.md` — producer inventory.
+- `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md` — hundreds-PR / round card catalogue; preserve append-only history.
+- `Docs/support/reference/YMRHFinalizationProducerAtlas.md` — producer inventory and alternate routes.
 - `Docs/support/reference/YMClayEndpointDecompositionMap.md` — YM endpoint/decomposition history.
-- `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 authority boundary.
+- `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 authority/payment boundary.
+
+Update rule: every Pareto recut that changes a preferred producer or live terminal leaf updates this board in the same tranche. Historical routes remain in the archaeology/atlas files even when dominated.
 
 ## 1. Scheduling discipline
 
 ```text
 terminal consumer
--> enumerate in-repo producers
--> quotient only by theorem-bearing same-object transports
--> separate source theorem / local replay / physical application / compiler
--> weaken producer interfaces to the least consumer-sufficient statement
+-> enumerate every in-repo producer
+-> quotient only by theorem-bearing same-object transport
+-> distinguish source authority / replay / attachment / compiler / certification
+-> weaken to the least consumer-sufficient theorem
 -> Pareto-rank remaining payments
 -> implement only a non-dominated leaf
 ```
@@ -36,17 +36,17 @@ VALIDATION_ONLY
 PROVENANCE_ONLY
 ```
 
-Identifiers/citations do not pay theorem fields. Source authority does not imply local ABI replay. `machineChecked` status in a source file is not a fresh exact-head kernel receipt.
+Identifiers, DOI/QID/Dewey/link metadata and source status never inhabit theorem fields.
 
-## 2. Yang–Mills global endpoint
+## 2. Current global endpoints
 
-Official endpoint:
+Yang–Mills has one official endpoint:
 
 ```text
 ClayYangMillsSolution
 ```
 
-Preferred Level-II finalisation board:
+Preferred Level-II decomposition:
 
 ```text
 T78-A = UVToContinuumYM Y
@@ -54,404 +54,306 @@ T78-B = SameHamiltonianPhysicalMassGap Y
 T78-C = SameFamilyLocalFieldsOPEStressWard Y
 ```
 
-all on the same literal construction `Y`.
+on the same literal construction `Y`.
 
-Frozen Round87–89 A/B/C/D are lower-level internal research rows for this one endpoint. They remain donors/scoreboards, not four Clay problems and not mandatory route architecture.
+Frozen YM A/B/C/D are lower-level research rows/donors, not four Clay problems.
 
-## 3. YM T78-B — current Pareto leader
-
-Terminal consumer:
+RH current high route:
 
 ```text
-CutoffUniformPhysicalMassGap Y
+R1 representation
+-> R2 strict actual-ClusterResponse theorem
 ```
 
-Current source-native spine:
+with independent terminal coordinate work:
 
 ```text
-R278 selected finite/continuum covariance carrier
--> R281 reconstructed covariance spectrum on that exact covariance carrier
--> CMP116 differentiated J-localization on the selected source directions
--> positive subgap exclusion / same-H mass gap
+R3 critical-line / constructive stability / verified-region carrier.
 ```
 
-Historical producer sequence:
+## 3. YM T78-B — specialist frontier is PR #944
+
+### Historical parent retained
+
+PR #940 established R343 as the least-privilege weakening of the older R341 source-response equality:
 
 ```text
-R338 canonical CMP116 source ABI
--> R339/R341 {source-response equality + envelope calibration}
--> R343 weaker direct selected-source upper
+S1: selected literal mixed-log magnitude <= CMP116 sourceEnvelope
+B2: CMP116 sourceEnvelope <= R281 clusteringEnvelope
+B3: one-sided rational upper closes under actual R278 convergence
 ```
 
-R343 is now the preferred consumer surface because R341's source-response equality is stronger than the terminal mass-gap proof actually uses.
+R343 remains an important parent because it proves equality is not primitive for the terminal mass-gap consumer.
 
-### 3.1 R343 live coordinates — current preferred T78-B cut
+### Current detailed source frontier
+
+Specialist PR **#944** now owns the deeper T78-B reduction through internal R345–R359. Do not duplicate its theorem files from the global coordinator.
+
+Its preferred source-native route is currently:
 
 ```text
-S1 SOURCE_REALIZATION / SAME_OBJECT APPLICATION
-   selected literal mixed-log magnitude
-   <= CMP116 sourceEnvelope
-   on the exact R318/R281 selected scale, volume and J(F),J(G) pair.
-
-B2 SOURCE_REALIZATION / QUANTITATIVE CALIBRATION
-   CMP116 sourceEnvelope
-   <= R281 selected spectral clusteringEnvelope.
-
-B3 STANDARD IMPORT / SHARED TOPOLOGY
-   one-sided rational upper closed under actual R278 convergence.
+same reconstructed continuum family
+<- selected finite covariance upper
+<- { L_marked , D_time }
+<- { C_attach , H_stab , H_sub }
+<- source marked replay / charging / selected attachments
 ```
 
-`BalabanCMP116R281SelectedSourceUpperRound343Exact.agda` compiles `{S1,B2,B3}` directly to the same reconstructed subgap clustering upper consumed by T78-B.
-
-No source-magnitude equality is primitive on this route.
-
-### 3.2 Why R343 Pareto-dominates R341 B1
-
-R341 asks for:
+Latest reduction:
 
 ```text
-B1:
-R338 CMP116 differentiatedMagnitude
-= selected literal mixed-log magnitude.
+G_exit
+  literal CMP109 coefficient-collar exit
+  -> canonical YMSupportGraphDistance on the selected support graph
+
+G_tree
+  same localization's CMP116 tree/localisation length
+  = selected support-tree edge count
+
+positive source rate split
+  delta_mark = delta_collar + delta_slack
+  kappa = delta_collar + kappa' + kappa_slack
 ```
 
-The proof then uses the source theorem only as:
+These compile through the existing collar/weighted-charge machinery. Subsequent live coordinates retained by #944 include marked branch attachment, exponent attachment, charged CMP116 summability, source replay, scale payment, selected stability/substitution attachments, `C_attach`, and `D_time`.
+
+Current specialist queue from #944:
 
 ```text
-CMP116 differentiatedMagnitude <= sourceEnvelope.
+1  G_exit
+2  G_tree
+3  positive same-carrier source rate split
+4  marked branch attachment
+5  R355 exponent -> R354 attachment
+6  R354 H_sum charged CMP116 summability
+7  R353 H_factor / source replay
+8  R353 H_scale
+9  R352 H_stab^attach
+10 R351 H_sub^source
+11 R351 H_sub^attach
+12 R348 C_attach
+13 R346 D_time
 ```
 
-Hence B1 is used solely to derive:
+This queue is Pareto ordering, not a fixed logical sequence: recut if one literal source theorem pays multiple same-carrier coordinates.
+
+Primary specialist source coordinates:
+
+- Bałaban CMP99, *Propagators for Lattice Gauge Theories in a Background Field*, DOI `10.1007/BF01240355`.
+- CMP109 DOI `10.1007/BF01215223`.
+- CMP116 DOI `10.1007/BF01239022`.
+
+Source authority is not the local attachment.
+
+## 4. YM T78-A and T78-C
+
+These remain globally live but are currently dominated by the specialist T78-B source replay and RH R1 representation work unless a shared same-object constructor makes one cheap.
+
+### T78-A
 
 ```text
-selected literal mixed-log magnitude <= sourceEnvelope.
+LiteralWeakCouplingRGConstruction
++ UnifiedContinuumYMConstruction
 ```
 
-R343 takes that one-sided statement directly as `S1`.
-
-The old R341 application mechanically compiles to R343 using the source localization theorem plus B1. The converse is intentionally unavailable: the one-sided upper does not recover the discarded equality.
-
-Therefore:
+Major live families retained:
 
 ```text
-{B1, B2, B3}  ->  {S1, B2, B3}
+literal physical finite state = published CMP119/CMP122 active carrier
+selected continuum determining-test semantics
+same-family Schwinger/OS semantics
+physical Hamiltonian/domain/core / OS reconstruction
 ```
 
-with no reverse theorem, so the R343 surface is strictly weaker and preferred.
+Generic CMP paper authority and generic Kato/Mosco/Stone machinery are already donor/source-owned; do not reopen them generically.
 
-### 3.3 WrongType / source-family firewall
-
-R322 explicitly records:
+### T78-C
 
 ```text
-cmp109PolarizationTensorIsDefinitionallyTwoJConnectedCumulant = false
-cmp116JDomainIsCorrectSourceFamilyForR320 = true
+same-family local composite/stress fields
+physical OPE identification
+one-step OPE/AF coefficient identification
+local Ward/stress charge -> same reconstructed H
 ```
 
-The preferred selected-T5 route uses CMP116's declared analytic `J` directions, not CMP109's vacuum-polarization field Hessian/Pi.
+Whole-action/stress/common-metric work is a provenance/consistency lane and must not be run backwards to define upstream source semantics.
 
-R318 already carries proof-bearing selected observable -> literal J-direction meaning. R335–R337 place the remaining source-domain issue at CMP116 common-`U,J` replay/application.
+## 5. RH R1 — now split into R1a + R1b
 
-Do not reintroduce CMP109 Pi as a primitive B payment.
-
-### 3.4 Status of R342 and the CMP109 donor
-
-R342 remains a useful historical/optional compiler:
+Canonical consumer remains:
 
 ```text
-IF
-  R338 CMP116 differentiatedMagnitude
-  = R321 CMP109 E^(2)/Pi source magnitude
-AND
-  the R321 selected-response weld is supplied
-THEN
-  R341 B1 follows.
+nearResponseAt(chosen J) = finiteNearSum(cellResponse)
 ```
 
-That is a **stronger optional donor route**, not part of the preferred R343 cut.
+Merged PR #918 established that this is a genuine theorem-bearing same-object/source wall. Status receipts and generic phase algebra do not pay it.
 
-R342 validation now guards:
+PR #940 now makes its two acquisition halves independently inhabitable on the **same checked scalar**:
 
 ```text
-directCMP116JResponseIsPreferredB1Route = true
-r321CMP109DonorIsPreferredB1Route       = false
-cmp109PiIdentificationRequiredByPreferredB1 = false
-CMP109 Pi definitionally equals selected two-J cumulant = false
+R1a  CROSS_PROVER_TRANSPORT / SAME_OBJECT_TRANSPORT
+     final nearResponseAt(chosen J)
+       = checked/imported finite-near scalar
+
+R1b  SAME_OBJECT / LITERAL REPRESENTATION
+     SAME checked/imported finite-near scalar
+       = literal finiteNearSum(cellResponse)
 ```
 
-R343 goes one step further and removes primitive B1 equality altogether.
+Owner:
 
-### 3.5 S1 source/application boundary
+`DASHI/Analysis/RiemannG2FinalNearLiteralKernelExact.agda`
 
-Already owned and not to be reproved:
-
-- R318 selected observable -> literal J-direction meaning;
-- normalized two-source mixed-log / connected-covariance algebra;
-- CMP116 common radius and selected common-domain membership once source demands are instantiated;
-- CMP116 differentiated-localization source authority;
-- selected finite covariance identity and R278 continuum convergence.
-
-What remains in S1 is the physical/source **application of the published differentiated-localization theorem directly to the selected literal response and its source-native envelope**.
-
-R327 is a historical proof that this application style is legitimate: it states the published localization result directly on the selected mixed-log response, but routes through the older configured rooted shell. R343 preserves the later source-native `sourceEnvelope` instead and therefore does not reintroduce rooted-shell geometry.
-
-### 3.6 B2 stop condition
-
-`R338.sourceEnvelope` and `R281.clusteringEnvelope` are abstract producer fields. No current theorem-bearing common prefactor/rate decomposition makes
+New least-privilege surfaces:
 
 ```text
-sourceEnvelope <= clusteringEnvelope
+FinalNearCheckedScalarAttachment
+CheckedScalarLiteralFoldIdentification
+compileFinalNearCheckedScalarBridge
+compileFinalNearRepresentationEqualityFromSplit
 ```
 
-compiler output.
-
-R284/R339 rooted-shell routes add root/distance/geometric calibration coordinates and are Pareto-dominated for the direct R343 consumer unless those coordinates become independently free.
-
-Hence the honest T78-B frontier is now:
+TDD/source chronology for this recut:
 
 ```text
-{ S1 selected-response source upper,
-  B2 direct envelope calibration }
-+ standard B3.
+460933bfd9eccbef5e6def491a24a96ebfabfbab  RED checker requires split
+ff8f5daf3f0c8b9ff5b12ead7fd12c8ce138b7b7  initial split implementation
+e57b08b86577866f4eb1ecbf423d2f717d9afc1a  projection-name hygiene / unambiguous API
 ```
 
-No fresh YM decay estimate is introduced by this recut.
+Neither R1a nor R1b is inhabited merely by defining these records.
 
-## 4. YM T78-A — UV -> same continuum YM
+Known source status:
 
-Target:
+- generic target-gap/even-projection cosine algebra is proof-bearing in Agda;
+- retained Lean source ownership names the reflection-pair `4*g*cosh*cos` formula;
+- the Aug-30 8883 return names `NearFarCarrierSplit.lean`, `OffOrdinateCutoffCarrier.lean`, and `FarShellCutoffTailBound.lean`;
+- theorem-bearing checked-near bytes/transport are not currently present in the accessible Agda/Lean repository surface;
+- status / opaque same-carrier receipts pay neither R1a nor R1b.
+
+Therefore stop blind archaeology unless new theorem-bearing bytes/paths appear. R1a/R1b are now the honest acquisition API.
+
+## 6. RH executable/certified donor route
+
+Do not invent another certificate theory.
+
+PR #868 already reduced the optional executable path to:
 
 ```text
-UVToContinuumYM Y
-= LiteralWeakCouplingRGConstruction Y
-+ UnifiedContinuumYMConstruction Y
+canonical R1
++ exact literal finite enumeration
++ one-sided cell certificates
+    cellResponse sigma <= cellUpper sigma
+-> finite additive upper
+    nearResponseAt(J) <= fold(cellUpper)
+-> strict R2 complement theorem.
 ```
 
-Current four-part recut:
+A concrete certificate scalar may remain distinct from the abstract final scalar, provided there is local proof-bearing embedding/fold/order transport.
 
-### A1 — literal finite physical state -> published active RG carrier
+The numerical wall is one-sided certification of literal cell integrals; it is downstream of R1 representation identity.
 
-Generic four-dimensional nonlinear RG stability is source-owned by CMP119/CMP122. The finite beta history supplies the active small-coupling hypothesis.
+## 7. RH R2 — first genuinely new high analytic family
 
-Live seam:
-
-```text
-literal selected Wilson/ghost/Haar/background finite construction
-= published CMP119/CMP122 active effective-density carrier
-```
-
-plus actual finite signed / one-loop / transfer identities required by the literal weak-RG constructor.
-
-Classification: `SOURCE_REALIZATION + SAME_OBJECT_TRANSPORT`.
-
-### A2 — selected continuum target / determining-test meaning
-
-The preferred T5 expectation producer already carries one continuum target. Global Prokhorov extraction is compatibility-only on this route.
-
-Live payment:
+Preferred phase-visible form:
 
 ```text
-selected determining observable belongs to the controlled bounded-test class
-+ finite expectation semantics for normalization / positivity / action-gauge invariance.
-```
-
-Round211's preferred first status remains `missingSelectedExpectationPropertyAndDeterminingTestMeaning`.
-
-Classification: `SAME_OBJECT_TRANSPORT / LOGICAL-CARRIER SEMANTICS`.
-
-### A3 — selected continuum Schwinger / OS semantics
-
-Live semantics on that same selected target:
-
-```text
-Euclidean covariance
-symmetry
-temperedness
-regularity
-clustering
-Gram reflection positivity -> Schwinger reflection positivity
-```
-
-Normalization/positivity/action invariance compile from A2 on the preferred route.
-
-Classification: `SOURCE_REALIZATION / SAME_OBJECT SEMANTICS`.
-
-### A4 — same-object OS reconstruction / physical Hamiltonian package
-
-Still-open physical leaves include:
-
-```text
-physical action-variation = Hamiltonian
-genuine partial operator domain
-common invariant dense physical core
-physical self-adjoint selected YM form
-YM evolution = OS reconstructed evolution
-finite-to-continuum YM construction
-continuum OS/Wightman package
-```
-
-Generic Kato/Mosco/Stone/dense-core machinery is donor/compiler structure only.
-
-A4's Hamiltonian must be shared with T78-B's same-H gap and T78-C's stress-charge generator.
-
-## 5. YM T78-C — same-family local fields / OPE / stress / Ward
-
-Target:
-
-```text
-SameFamilyLocalFieldsOPEStressWard Y
-```
-
-Current four-part recut:
-
-### C1 — same completed marked state -> composite + stress fields
-
-R109–R115 show that one `LiteralStressCoordinate` compiles:
-
-```text
-source-native stress Cauchy modulus
-finite Hilbert data
-same-completed-state provenance
-completed marked stress field
-literal Clay stress derivative
-```
-
-The physical content remains upstream same-object realization:
-
-```text
-literal stress insertion = CMP119 local insertion
-its Cauchy completion = completed marked stress field
-completed marked stress = literal stressTensor Y group
-```
-
-No concrete `LiteralStressCoordinate` inhabitant is currently known. C1 remains broader than T78-B S1.
-
-### C2 — physical composite/OPE identification
-
-Shared composite-mark tail already gives the OPE remainder majorant/geometric decay. Live payment is the actual same-family curvature/composite insertion and identification of its physical RG remainder with that shared tail.
-
-### C3 — OPE coefficient / asymptotic-freedom identification
-
-All-depth matching is compiler-owned from:
-
-```text
-same UV normalization
-+ same one-step physical mixing law
-+ same one-step AF/reference mixing law.
-```
-
-Live payment is the physical one-step coefficient identification + common UV normalization.
-
-### C4 — local stress/Ward -> same-H generator
-
-Global spatial-cutoff convergence is not primitive. Live inputs are local current/charge shell decomposition, outer-shell commutator vanishing, vacuum-neutral Ward relation, and same-H identification with A4's reconstructed Hamiltonian.
-
-## 6. RH global endpoint
-
-Current acquisition map remains the universal pole-quotient direct route.
-
-### R1 — final-near representation wall
-
-```text
-nearResponseAt(chosen J)
-= finiteNearSum(cellResponse)
-```
-
-Classification: `SAME_OBJECT_TRANSPORT / representation theorem`.
-
-The evaluator-independent literal kernel exists. Generic target-gap/even-projection algebra is proof-bearing. A checked Lean return names the near/far object, but the theorem-bearing checked-near-scalar bridge and actual universal-pole-quotient phase realization are not present in the Agda repo/history.
-
-Current status: genuine representation implementation/transport wall unless source proof bytes reappear.
-
-### R2 — first high analytic wall
-
-```text
-literalNear(J) + B_far(J) + D_Gamma(g_pole)
+literalNear(J)
++ B_far(J)
++ D_Gamma(g_pole)
 < actual ClusterResponse(g_pole)
 ```
 
-uniformly for arbitrary high off-line zeros.
+uniformly for every arbitrary high off-line zero.
 
-Optional certificate form may replace `literalNear(J)` by a proof-carrying upper `U`.
+Optional certified form:
 
-Pruned as primitive: intermediate `M_cluster`, separate near/Gamma envelope theorems, final balance as analytic input, determinant-q payment.
+```text
+nearResponseAt(J) <= U
+U + B_far(J) + D_Gamma(g_pole)
+  < actual ClusterResponse(g_pole)
+```
 
-Classification: `NEW_ANALYSIS`.
+Pruned as primitive:
 
-### R3 — independent terminal coordinate wall
+```text
+intermediate M_cluster
+separate near envelope theorem
+separate Gamma envelope theorem
+final cluster = Off + Gamma balance as analytic input
+determinant-q consumer
+```
 
-One same-`AnalyticSubstrate` refinement must provide:
+Historical 8889 quantitative cluster work remains an optional donor only if theorem-bearing same-object transport and an explicit local strict bridge into actual `ClusterResponse` are recovered.
+
+Classification: `NEW_ANALYSIS` after R1.
+
+## 8. RH R3 — independent terminal coordinate
+
+One same analytic substrate still needs theorem-bearing:
 
 ```text
 criticalLine(s) iff realPart(s)=half
 constructive equality-to-half stability
-theorem-bearing interpretation of the published verified region
-on the abstract analytic Real carrier
+published verified-region interpretation on that same carrier
+verified-region-or-High cover as required by the terminal compiler
 ```
 
-`CompletedRiemannZeta.criticalLine` is abstract in `RiemannAnalyticSubstrate`; no concrete in-repo analytic substrate currently makes it definitionally `Re=half`. Opaque same-predicate/exact-height Set receipts are pruned.
+Do not use opaque same-predicate/status receipts to pay this.
 
-Classification: `SAME_OBJECT SEMANTICS + VERIFIED-REGION INTERPRETATION`.
+## 9. Current cross-lane Pareto queue
 
-## 7. Current cross-lane Pareto queue
+Global queue:
 
 ```text
-1. YM T78-B / R343 S1
-   selected literal mixed-log magnitude
-   <= CMP116 sourceEnvelope on the exact selected J pair.
+1. YM specialist #944
+   G_exit / G_tree / positive source-rate split,
+   then its marked-replay same-object queue.
 
-2. YM T78-B / B2
-   direct sourceEnvelope -> R281 clusteringEnvelope calibration.
+2. RH R1a / R1b
+   final checked-scalar attachment + same-scalar literal-fold identification.
 
-3. RH R1
-   exact final-near finite representation.
-   Stop archaeology unless theorem-bearing source bytes appear.
+3. RH R2
+   strict literal complement vs actual ClusterResponse.
 
-4. YM T78-A / A2 or A4
-   only if a new same-object constructor makes one cheaper than S1/B2/RH R1.
+4. YM T78-A / T78-C
+   only when a shared same-object constructor makes one cheaper than 1-3.
 
-5. YM T78-C / C1-C4
-   C1 is compressed to one literal stress-coordinate package but still carries
-   more physical same-object information than S1.
-
-6. RH R2
-   fresh strict actual-ClusterResponse analysis after R1 unless an exact donor
-   pays the same literal scalar inequality.
-
-7. RH R3
-   keep verified-region / critical-line carrier work independent from R1/R2.
+5. RH R3
+   independent critical-line / verified-region carrier work.
 ```
 
-Historical/optional donors, not queue leaves:
+Coordinator ownership rule:
 
 ```text
-R341 direct B1 equality producer
-R321 CMP109 E^(2)/Pi route -> R341 B1 only after extra source-source identity
-Heat/Doob/Langevin Row-C producer family
-rooted-shell R284/R339 producer family
+#944 owns detailed YM mass-gap theorem implementation.
+#940 owns global accounting and non-conflicting RH R1 recuts.
 ```
 
-## 8. Shared YM coordinates to exploit
+Do not duplicate a specialist worker merely because its leaf globally ranks first.
 
-```text
-A1 finite source-native RG state
-  <-> C2/C3 composite/OPE source coordinates
+## 10. Recent PR delta for the archaeology catalogue
 
-A2/A3 selected continuum measure/Schwinger family
-  <-> B selected covariance/clustering family
-  <-> C completed local-field family
+The broad `YMRHPRRoundArchaeologyAudit.md` remains the append-only card catalogue. Recent route-changing entries to retain when maintaining it:
 
-A4 reconstructed Hamiltonian/domain/core
-  <-> B same-H mass-gap consumer
-  <-> C4 stress-charge generator
-```
+| PR | Lane | Role | Key route change |
+|---:|---|---|---|
+| #918 | YM + RH | CORE / CORRECTED | YM concrete regular-E localization predicate; RH R1 fail-closed source/transport decomposition |
+| #934 | YM + RH | SUPPORT / CURRENT | producer atlas + explicit CMP completion/authority boundary |
+| #940 | YM + RH | CURRENT coordinator | R343 least-privilege YM parent; global Pareto board; RH R1a/R1b split |
+| #944 | YM | CURRENT specialist | R345–R359 marked CMP116 replay/collar/rate source frontier |
 
-Always search these shared-carrier seams before proving a role-local duplicate theorem.
+Older RH executable donor to keep easy to find:
 
-## 9. Primary source / metadata coordinates
+| #868 | RH | ACTIVE DONOR | certified route reduced to exact enumeration + one-sided cellwise integral uppers |
+
+Do not delete older PR rows when these are added; supersession is an edge, not erasure.
+
+## 11. Attribution/navigation coordinates
 
 YM:
 
+- CMP99 DOI `10.1007/BF01240355`
 - CMP109 DOI `10.1007/BF01215223`
 - CMP116 DOI `10.1007/BF01239022`
 - CMP119 DOI `10.1007/BF01217741`
@@ -459,7 +361,7 @@ YM:
 - CMP122-II DOI `10.1007/BF01238433`
 - Yang–Mills theory QID `Q1192873`
 - Bałaban person QID unresolved
-- exact CMP119/CMP122 Dewey unresolved
+- exact paper-specific Dewey unresolved
 - OEIS not applicable
 
 RH:
@@ -472,20 +374,18 @@ RH:
 
 These are navigation/provenance coordinates only.
 
-## 10. Accounting invariants
+## 12. Accounting invariants
 
-- One YM Clay endpoint; T78-A/B/C and frozen A/B/C/D are internal decompositions.
-- A cheaper terminal producer may route around a historical research row without declaring that row inhabited.
-- Prefer the weakest theorem sufficient for the terminal consumer; equality is overpayment when a one-sided application upper suffices.
-- Correct source family matters: CMP109 field-Hessian/Pi and CMP116 analytic-J response are not interchangeable by name.
-- Source authority != source realization.
-- Same scalar shape != same-object theorem.
+- One YM Clay endpoint; all rows/packages are internal decompositions.
+- Prefer the weakest theorem actually consumed.
+- Source authority != physical/source realization.
+- Same scalar expression != same-object theorem.
 - Cross-prover status != transported proof.
-- Compiler closure != physical theorem closure.
-- Standard imported analysis may remove generic work but never manufactures physical same-object/calibration data.
-- Historical donors remain append-only even when dominated.
-- Every producer/leaf recut updates this board in the same tranche.
+- Compiler closure != physical/analytic closure.
+- A specialist branch may advance beyond this board; when it does, recut this board instead of duplicating it.
+- Historical donors stay append-only in the archaeology catalogue.
+- Every route-changing tranche updates this board and notes the corresponding PR delta.
 
-## 11. Validation boundary
+## 13. Validation boundary
 
-This board records scheduling/accounting only. It does not promote a Clay Yang–Mills solution or RH proof. No exact-head Agda/kernel success may be inferred from these classifications without an exact-head receipt.
+This board records scheduling/accounting only. It does not promote a Clay Yang–Mills solution or RH proof. Source-written interfaces do not become kernel receipts. Exact-head success requires an observed commit-specific validation receipt.
