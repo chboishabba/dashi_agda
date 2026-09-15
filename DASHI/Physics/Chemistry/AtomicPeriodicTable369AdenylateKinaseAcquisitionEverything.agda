@@ -16,3 +16,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationP
 -- three-CV endpoint pair.  Intermediate-state dLN cells remain unpaid.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseEndpointDLnAcquisitionExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourcePaidThreeCVEndpointExact
+
+-- Cell-level acquisition frontier: 8 named states x four numeric coordinates
+-- plus six route-edge Kramers-rate cells.  Each unpaid cell retains a locator,
+-- source role and next-payment obligation instead of disappearing into a global
+-- "uncalibrated" flag.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationPaymentLedgerExact
