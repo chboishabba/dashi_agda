@@ -31,7 +31,7 @@ open import Data.Nat.Properties using (_≤?_; n≤1+n; ≤-trans)
 open import Data.Rational.Base using (ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Nullary using (yes; no)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
@@ -39,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Reality
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNF4ProjectedOutputPairingRound39Exact as Pairing
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellPacketSelectorExact as Upper
 import DASHI.Physics.Closure.NSTriadKNSelectedPacketProjectedPairingRound98Exact as R98
@@ -104,12 +105,12 @@ selectedProjectedOutputPowerCollarRemoteSplit
 ... | false | false = solve []
 ... | true | false =
   solve
-    (R98.OutputPairing.realHermitianPower
+    (Pairing.realHermitianPower
       (Audit.velocity system output)
       (Audit.projectedNonlinearity system output) ∷ [])
 ... | true | true =
   solve
-    (R98.OutputPairing.realHermitianPower
+    (Pairing.realHermitianPower
       (Audit.velocity system output)
       (Audit.projectedNonlinearity system output) ∷ [])
 ... | false | true =
