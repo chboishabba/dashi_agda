@@ -15,6 +15,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionBandTransferRegre
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderRegression
 import DASHI.Physics.Closure.NSTriadKNSelectedPacketNonzeroCutoffBridgeRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellPacketSelectorRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellCanonicalSuffixRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
@@ -28,10 +29,10 @@ import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellPacketSelectorRegression
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
 -- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1a radial
--- ordering/permutation, reject-zero full->nonzero transport, and the literal
--- upper-shell selector -> R98 boundary-flux transport may be source-written
--- while concrete scalar FTC / integration authorities, the structural R104
--- suffix/selector identity, quantitative S2 payment, initial ceiling and
+-- ordering/permutation, reject-zero full->nonzero transport, literal upper-shell
+-- selector -> R98 boundary flux, and canonical shell suffix transport may be
+-- source-written while concrete scalar FTC / integration authorities, the last
+-- structural R104-tail equality, quantitative S2 payment, initial ceiling and
 -- retained-viscosity payments remain unobserved or open.
 ------------------------------------------------------------------------
 
@@ -94,7 +95,7 @@ directOffDiagonalConsumerConstructedIsTrue =
 commutatorOnlySpacetimeProducerClosedIsFalse :
   Paper.NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosed status ≡ false
 commutatorOnlySpacetimeProducerClosedIsFalse =
-  Paper.NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosedIsFalse status
+  Paper.NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosedIsFalse
 
 sameOutputDebtPaymentClosedIsFalse :
   Paper.NSPaperTheoremStatus.sameOutputDebtPaymentClosed status ≡ false
