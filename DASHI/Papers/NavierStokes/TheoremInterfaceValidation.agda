@@ -13,6 +13,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionProjectedPairingRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionBandTransferRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderRegression
+import DASHI.Physics.Closure.NSTriadKNSelectedPacketNonzeroCutoffBridgeRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
@@ -25,10 +26,11 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderRegres
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
--- compiler, S2a same-object weld, S2b0 BandTransfer embedding, and S2b1a radial
--- ordering may be source-written while concrete scalar FTC / integration
--- authorities, radial suffix/packet identity, the quantitative S2 payment,
--- initial ceiling and retained-viscosity payments remain unobserved or open.
+-- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1a radial
+-- ordering/permutation, and the reject-zero full->nonzero packet bridge may be
+-- source-written while concrete scalar FTC / integration authorities, the
+-- radial suffix/selector identity, quantitative S2 payment, initial ceiling
+-- and retained-viscosity payments remain unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
