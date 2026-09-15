@@ -41,7 +41,7 @@ sequenceProjectionDefect =
     AdK.conformationsDiffer
 
 adkSituatedQueryWitness : Situated.SituatedProteinQueryWitness
-adkSituatedQueryWitness = situated-protein-query-witness
+adkSituatedQueryWitness = Situated.situated-protein-query-witness
   AdK.AdKResolvedState
   AdK.AdKPrimarySequence
   ConformationQuery
@@ -54,6 +54,11 @@ adkSituatedQueryWitness = situated-protein-query-witness
   "environment/ligand context separates the two resolved conformations while primary-sequence identity is retained in the finite empirical fixture"
   "4AKE/1AKE PDB depositions and their primary structural literature own the bounded same-polypeptide open/closed structural observations; PDB DOI, UniProt and QID coordinates retain identity/provenance only"
   "DASHI owns the query-indexed situated-protein wrapper and the structural reuse of the paid collision; no AdK source is attributed with the generic theorem"
+
+sequenceNotAdequateForConformationQuery :
+  Query.AdequateFor AdK.primarySequence conformationSemantics resolvedConformationQuery → ⊥
+sequenceNotAdequateForConformationQuery =
+  Situated.witnessBlocksCoarseAdequacy adkSituatedQueryWitness
 
 environmentRepair = AdK.environmentPaysFixture
 structuralIdentityBoundary = Source.canonicalAdKStructuralIdentitySnowballBoundary
