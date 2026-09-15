@@ -75,6 +75,12 @@ zoomLevelDetailTag zoomFit = 3
 wireVersion : Nat
 wireVersion = 1
 
+maxProgramSteps : Nat
+maxProgramSteps = 1048576
+
+maxTargetBytes : Nat
+maxTargetBytes = 1048576
+
 record WorkSignature : Set where
   constructor workSignature
   field
@@ -107,7 +113,11 @@ record UIInteractionWireParity : Set where
     versionIsOne : Bool
     littleEndianHeader : Bool
     explicitU32StepCount : Bool
+    stepCountBoundedBeforeAllocation : Bool
+    maxStepsIs1048576 : Bool
     explicitU32TargetLength : Bool
+    targetLengthBoundedBeforeDecode : Bool
+    maxTargetBytesIs1048576 : Bool
     targetKindsExact : Bool
     stepKindsExact : Bool
     actionTagsExact : Bool
@@ -128,7 +138,8 @@ open UIInteractionWireParity public
 canonicalUIInteractionWireParity : UIInteractionWireParity
 canonicalUIInteractionWireParity =
   uiInteractionWireParity
-    true true true true true
+    true true true true true true
+    true true true
     true true true true true true
     false false false false
     false false false false
