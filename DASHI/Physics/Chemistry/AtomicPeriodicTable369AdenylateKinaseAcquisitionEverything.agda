@@ -69,6 +69,12 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETDistribu
 -- UniProt identity metadata cannot manufacture that equivalence or a state value.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCollectiveVariableDefinitionAcquisitionExact
 
+-- Direct same-object Figure-5 source-image acquisition: gamma/delta/eta/lambda
+-- relative-energy labels are paid at their printed precision.  Three visible
+-- bidirectional Kramers-rate numeral pairs are retained without assigning each
+-- numeral to a directed arrow; experimental-rate promotion remains blocked.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureFiveImageNumericAcquisitionExact
+
 -- Cell-level acquisition frontier: 8 named states x four numeric coordinates
 -- plus six route-edge Kramers-rate cells.  Each unpaid cell retains a locator,
 -- source role and next-payment obligation instead of disappearing into a global
