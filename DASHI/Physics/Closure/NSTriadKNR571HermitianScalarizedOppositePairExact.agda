@@ -24,7 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact w
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_; _*_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -106,6 +106,19 @@ asOppositeRound27PairData dataSet = record
   ; minusStateAtCenter = minusStateAtCenter dataSet
   }
 
+hermitianScalarizedPairCenteredIdentity :
+  (dataSet : HermitianOppositePairInputs) →
+  Pair.pairedRound27Scalar (asOppositeRound27PairData dataSet)
+  ≡
+  Pair.Centered.weightedCenteredBranch
+    (Pair.pairedCenteredSample (asOppositeRound27PairData dataSet))
+  +
+  Pair.Centered.weightedHighDifferenceBranch
+    (Pair.pairedCenteredSample (asOppositeRound27PairData dataSet))
+hermitianScalarizedPairCenteredIdentity dataSet =
+  Pair.oppositeRound27PairCenteredIdentity
+    (asOppositeRound27PairData dataSet)
+
 scalarizesVectorSum :
   (left right spectatorCell : C3.Complex3 F) →
   hermitianScalar (C3.complex3Add left right) spectatorCell
@@ -121,6 +134,9 @@ scalarizesRealScale = R291.scaledRealCrossLeft
 hermitianOppositePairCarrierClosed : Bool
 hermitianOppositePairCarrierClosed = true
 
+hermitianOppositePairCenteredIdentityClosed : Bool
+hermitianOppositePairCenteredIdentityClosed = true
+
 hermitianOppositePairIntroducesGlobalScalarState : Bool
 hermitianOppositePairIntroducesGlobalScalarState = false
 
@@ -133,3 +149,7 @@ hermitianOppositePairClosesR568 = false
 hermitianOppositePairCarrierClosedIsTrue :
   hermitianOppositePairCarrierClosed ≡ true
 hermitianOppositePairCarrierClosedIsTrue = refl
+
+hermitianOppositePairCenteredIdentityClosedIsTrue :
+  hermitianOppositePairCenteredIdentityClosed ≡ true
+hermitianOppositePairCenteredIdentityClosedIsTrue = refl
