@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanDecoupledActivityDirectStabilityRound364Exact where
 
 ------------------------------------------------------------------------
@@ -25,6 +24,10 @@ module DASHI.Physics.YangMills.BalabanDecoupledActivityDirectStabilityRound364Ex
 -- specializes the existing theorem and packages its conclusion in the exact
 -- R352 source ABI.  It does not manufacture H_local, H_subScale, or any
 -- selected-carrier attachment.
+--
+-- Safety boundary: BalabanDecoupledActivityHessian is an older non---safe
+-- donor, so this owner intentionally does not claim a --safe header.  That is
+-- an import/safety coordinate, not additional YM theorem content.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -145,24 +148,18 @@ round364ToR352Source dataSet = record
 -- Pareto / route accounting.
 ------------------------------------------------------------------------
 
--- These two fields are now the first theorem-bearing coordinates on the
--- direct source-native route.
 literalCMP116BoundaryHessianStabilityLevel : ProofLevel
 literalCMP116BoundaryHessianStabilityLevel = conditional
 
 literalCMP116SubstitutionScaleComparisonLevel : ProofLevel
 literalCMP116SubstitutionScaleComparisonLevel = conditional
 
--- The finite-polydisc coefficient lift is already theorem-owned in the donor.
 decoupledActivityCauchyLiftLevel : ProofLevel
 decoupledActivityCauchyLiftLevel = machineChecked
 
 round364ToR352CompilerLevel : ProofLevel
 round364ToR352CompilerLevel = machineChecked
 
--- R353 remains mathematically valid and potentially useful, but its
--- marked-majorant H_scale is no longer mandatory when this direct producer is
--- inhabited.
 markedWalkHScaleMandatoryForR352 : Bool
 markedWalkHScaleMandatoryForR352 = false
 
