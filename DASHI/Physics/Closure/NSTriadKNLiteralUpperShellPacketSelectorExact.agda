@@ -49,10 +49,6 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderExact 
 F : C3.RealField _
 F = Rational.rationalRealField
 
-------------------------------------------------------------------------
--- Literal dyadic upper-shell selector.
-------------------------------------------------------------------------
-
 upperShellPacket : Nat → Z3.FourierMode → Bool
 upperShellPacket threshold mode
   with Output.modeEqual mode Z3.zeroMode
@@ -66,10 +62,6 @@ upperShellPacketRejectsZero :
   Nonzero.RejectsZero (upperShellPacket threshold)
 upperShellPacketRejectsZero threshold
   rewrite Output.modeEqualRefl Z3.zeroMode = refl
-
-------------------------------------------------------------------------
--- Selected projected-pairing folds respect exact finite reindexing.
-------------------------------------------------------------------------
 
 sumSelectedProjectedPairingsRespPermutation :
   ∀ {E : C3.IntegerEmbedding F}
@@ -88,11 +80,10 @@ sumSelectedProjectedPairingsRespPermutation system selected
     (sumSelectedProjectedPairingsRespPermutation
       system selected permutation)
 sumSelectedProjectedPairingsRespPermutation system selected
-    (Perm.swap {xs = xs} left right permutation) =
+    (Perm.swap {xs = xs} {ys = ys} left right permutation) =
   let
     leftPower = R98.selectedProjectedOutputPower system selected left
     rightPower = R98.selectedProjectedOutputPower system selected right
-    tailRight = R98.sumSelectedProjectedPairings system selected _
   in
   trans
     (cong
@@ -101,16 +92,12 @@ sumSelectedProjectedPairingsRespPermutation system selected
         system selected permutation))
     (solve
       ( leftPower ∷ rightPower
-      ∷ R98.sumSelectedProjectedPairings system selected _ ∷ [] ))
+      ∷ R98.sumSelectedProjectedPairings system selected ys ∷ [] ))
 sumSelectedProjectedPairingsRespPermutation system selected
     (Perm.trans first second) =
   trans
     (sumSelectedProjectedPairingsRespPermutation system selected first)
     (sumSelectedProjectedPairingsRespPermutation system selected second)
-
-------------------------------------------------------------------------
--- R98 full cutoff -> live nonzero cutoff -> S2b1a radial order.
-------------------------------------------------------------------------
 
 literalUpperShellPacketEqualsSortedNonzeroFold :
   ∀ {E : C3.IntegerEmbedding F}
@@ -152,10 +139,6 @@ sortedNonzeroUpperShellFoldIsNormalizedBoundaryFlux
     (sym (literalUpperShellPacketEqualsSortedNonzeroFold system threshold))
     (R98.literalSelectedProjectedPairingIsNormalizedBoundaryFlux
       system (upperShellPacket threshold) reality divergenceFree)
-
-------------------------------------------------------------------------
--- Status / remaining exact seam.
-------------------------------------------------------------------------
 
 literalUpperShellSelectorConstructed : Bool
 literalUpperShellSelectorConstructed = true
