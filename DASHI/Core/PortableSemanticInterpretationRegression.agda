@@ -8,10 +8,10 @@ problemSurfaceExists = Portable.SemanticInterpretationProblem
 
 refinementSurfaceExists :
   (problem : Portable.SemanticInterpretationProblem) →
-  (backend : Portable.SemanticInterpretationProblem.Backend problem) →
-  (syntax : Portable.SemanticInterpretationProblem.Syntax problem) →
-  (query : Portable.SemanticInterpretationProblem.Query problem) →
-  Set
+  (backend : Portable.Backend problem) →
+  (syntax : Portable.Syntax problem) →
+  (query : Portable.Query problem) →
+  Set₁
 refinementSurfaceExists problem backend syntax query =
   Portable.SemanticRefinement problem backend syntax query
 
