@@ -174,3 +174,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverLoca
 -- Li-Liu-Ji remain attributed only to the three-CV AdK premise; the generic
 -- counterexample->repair->selection theorem is DASHI synthesis.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConsumerSafePromotionExact
+
+-- Static-to-future promotion weld: the Pareto-selected three-axis model is
+-- explicitly related to a query-adequate, frozen, dynamically safe joined
+-- observer.  The included no-action dynamics is only a repository interface
+-- fixture and is blocked from promotion to physical AdK kinetics or rates.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConsumerSafeFuturePromotionExact
