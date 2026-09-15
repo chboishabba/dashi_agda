@@ -12,6 +12,9 @@ import DASHI.Biology.AnimalCommunicationInteractionExact
 import DASHI.Biology.AnimalCommunicationLatentExact
 import DASHI.Biology.AnimalCommunicationSemanticEvidenceExact
 import DASHI.Biology.MagpieAnimalCommunicationAdapterExact
+import DASHI.Biology.AnimalCommunicationMultiObserverVisualBridgeExact
+import DASHI.Biology.AnimalCommunicationPassiveAcousticLocalizationExact
+import DASHI.Biology.AnimalCommunicationSharedWorldAVAssociationExact
 import DASHI.Biology.DrosophilaConnectomeFunctionalEffectorStateSpaceVisualisationExact
 import DASHI.Biology.DrosophilaGautheyFunctionalTrajectoryProducerExact
 import DASHI.Biology.BioacousticFlySnowballParetoBidiExact
@@ -24,9 +27,11 @@ import DASHI.Biology.DrosophilaGautheyExternalManifestHashBidiExact
 import DASHI.Biology.DrosophilaGautheyROIIdentityRecoveryBidiExact
 
 -- Focused import root for birdsong / Animalexic / fly state-space work,
--- including source-bound YouTube seeds, the append-only magpie atlas, and the
--- generic multi-emitter animal communication / interaction core.  The generic
--- core separates scene species presence, emitter association, addressee,
--- receiver response, function and semantic evidence as query-indexed fibres;
--- cross-species structural analogy transfers neither mechanism nor semantics.
--- A kernel-clean claim still requires an exact-head Agda receipt.
+-- including source-bound YouTube seeds, the append-only magpie atlas, generic
+-- multi-emitter communication, multi-observer trail-camera tracks, passive
+-- acoustic localization and shared-world audiovisual association.  Species
+-- presence, emitter identity, spatial association, addressee, receiver
+-- response, function and semantic evidence remain query-indexed fibres.
+-- Cross-species analogy and shared-world overlap transfer neither mechanism,
+-- same-object identity nor semantics.  A kernel-clean claim still requires an
+-- exact-head Agda receipt.
