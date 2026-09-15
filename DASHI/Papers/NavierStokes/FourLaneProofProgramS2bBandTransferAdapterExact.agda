@@ -5,13 +5,15 @@ module DASHI.Papers.NavierStokes.FourLaneProofProgramS2bBandTransferAdapterExact
 --
 -- PR #937 merged the authoritative A/B/C/D coordinator onto master. This
 -- module does not introduce another lane ontology, scheduler, or dashboard.
--- It records only the current branch-local delta while reusing that canonical
--- coordinator unchanged:
+-- It records only the current branch-local S2 delta while reusing that
+-- canonical coordinator unchanged:
 --
---   S2b0   literal production -> R104 BandTransfer carrier          CLOSED
---   S2b1a  finite radial shell ordering + weighted-fold invariance  CLOSED
---   S2b1b  radial suffix -> physical R98 upper packet               OPEN
---   S2b2   quantitative packet-flux / R406 estimate                 OPEN
+--   S2b0    literal production -> R104 BandTransfer                  CLOSED
+--   S2b1a   radial ordering + exact permutation + fold invariance    CLOSED
+--   S2b1b0  R98 full cutoff -> live nonzero cutoff for reject-zero   CLOSED
+--   S2b1b1  literal upper-shell selector -> sorted fold -> R98 flux  CLOSED
+--   S2b1b2  structural R104 suffix = upper-shell selector fold       OPEN
+--   S2b2    quantitative packet-flux / R406 estimate                 OPEN
 --
 -- The Markdown NS proof-control record remains the routing truth.
 ------------------------------------------------------------------------
@@ -22,6 +24,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Papers.NavierStokes.FourLaneProofProgramExact as Base
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionBandTransferExact as S2b0
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderExact as S2b1a
+import DASHI.Physics.Closure.NSTriadKNSelectedPacketNonzeroCutoffBridgeExact as S2b1b0
+import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellPacketSelectorExact as S2b1b1
 
 baseFourLaneCoordinatorReused : Bool
 baseFourLaneCoordinatorReused = true
@@ -34,13 +38,25 @@ s2b1aRadialOrderRecovered : Bool
 s2b1aRadialOrderRecovered =
   S2b1a.literalRadialShellOrderProved
 
+s2b1aRadialPermutationRecovered : Bool
+s2b1aRadialPermutationRecovered =
+  S2b1a.literalRadialShellSortPermutationClosed
+
 s2b1aWeightedProductionInvariantRecovered : Bool
 s2b1aWeightedProductionInvariantRecovered =
   S2b1a.literalWeightedProductionInvariantUnderRadialSort
 
-s2b1bRadialSuffixPacketRecovered : Bool
-s2b1bRadialSuffixPacketRecovered =
-  S2b1a.radialSuffixPhysicalPacketSameObjectClosed
+s2b1b0FullToNonzeroSelectorBridgeRecovered : Bool
+s2b1b0FullToNonzeroSelectorBridgeRecovered =
+  S2b1b0.rejectZeroSelectorFullToNonzeroCutoffClosed
+
+s2b1b1UpperShellR98TransportRecovered : Bool
+s2b1b1UpperShellR98TransportRecovered =
+  S2b1b1.literalUpperShellSelectorR98TransportClosed
+
+s2b1bStructuralSuffixRecovered : Bool
+s2b1bStructuralSuffixRecovered =
+  S2b1b1.r104StructuralSuffixEqualsUpperShellSelectorClosed
 
 s2QuantitativeEstimateRecovered : Bool
 s2QuantitativeEstimateRecovered =
@@ -64,15 +80,30 @@ s2b1aRadialOrderRecoveredIsTrue :
 s2b1aRadialOrderRecoveredIsTrue =
   S2b1a.literalRadialShellOrderProvedIsTrue
 
+s2b1aRadialPermutationRecoveredIsTrue :
+  s2b1aRadialPermutationRecovered ≡ true
+s2b1aRadialPermutationRecoveredIsTrue =
+  S2b1a.literalRadialShellSortPermutationClosedIsTrue
+
 s2b1aWeightedProductionInvariantRecoveredIsTrue :
   s2b1aWeightedProductionInvariantRecovered ≡ true
 s2b1aWeightedProductionInvariantRecoveredIsTrue =
   S2b1a.literalWeightedProductionInvariantUnderRadialSortIsTrue
 
-s2b1bRadialSuffixPacketRecoveredIsFalse :
-  s2b1bRadialSuffixPacketRecovered ≡ false
-s2b1bRadialSuffixPacketRecoveredIsFalse =
-  S2b1a.radialSuffixPhysicalPacketSameObjectClosedIsFalse
+s2b1b0FullToNonzeroSelectorBridgeRecoveredIsTrue :
+  s2b1b0FullToNonzeroSelectorBridgeRecovered ≡ true
+s2b1b0FullToNonzeroSelectorBridgeRecoveredIsTrue =
+  S2b1b0.rejectZeroSelectorFullToNonzeroCutoffClosedIsTrue
+
+s2b1b1UpperShellR98TransportRecoveredIsTrue :
+  s2b1b1UpperShellR98TransportRecovered ≡ true
+s2b1b1UpperShellR98TransportRecoveredIsTrue =
+  S2b1b1.literalUpperShellSelectorR98TransportClosedIsTrue
+
+s2b1bStructuralSuffixRecoveredIsFalse :
+  s2b1bStructuralSuffixRecovered ≡ false
+s2b1bStructuralSuffixRecoveredIsFalse =
+  S2b1b1.r104StructuralSuffixEqualsUpperShellSelectorClosedIsFalse
 
 s2QuantitativeEstimateRecoveredIsFalse :
   s2QuantitativeEstimateRecovered ≡ false
