@@ -34,5 +34,11 @@ contextRealisedFibre :
   Scheduler.contextObservedFibre Scheduler.contextDryWorld
 contextRealisedFibre = Scheduler.contextDryWorldRemainsLive
 
+speciesPacket : Scheduler.SpeciesParetoScheduledExperiment
+speciesPacket = Scheduler.canonicalSpeciesParetoScheduledExperiment
+
+contextPacket : Scheduler.ContextParetoScheduledExperiment
+contextPacket = Scheduler.canonicalContextParetoScheduledExperiment
+
 attributionBoundary : Scheduler.BiocontrolChemistryParetoSchedulerBoundary
 attributionBoundary = Scheduler.canonicalBiocontrolChemistryParetoSchedulerBoundary
