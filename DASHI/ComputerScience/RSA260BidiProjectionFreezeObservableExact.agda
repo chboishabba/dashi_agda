@@ -159,37 +159,6 @@ mismatchedProjectionPairNotComparable comparison with sameProjectionPair compari
 ... | ()
 
 ------------------------------------------------------------------------
--- The same carrier and same d can still differ under a different pair.
--- Projection freeze therefore cannot be reconstructed from carrier+d alone.
-------------------------------------------------------------------------
-
-data CarrierDegreeSurface : Set where
-  carrier32Degree22 : CarrierDegreeSurface
-
-data FrozenPairSurface : Set where
-  carrier32Degree22X0Y0 : FrozenPairSurface
-  carrier32Degree22X0Y3 : FrozenPairSurface
-
-data ExtensionAnswer : Set where
-  leftOnlyExtension : ExtensionAnswer
-  noExtension : ExtensionAnswer
-
-carrierDegreeSurface : ProjectionIndexedObservable → CarrierDegreeSurface
-carrierDegreeSurface carrier32BaselineObservable = carrier32Degree22
-carrierDegreeSurface carrier32Y3Observable = carrier32Degree22
-carrierDegreeSurface _ = carrier32Degree22
-
-frozenPairSurface : ProjectionIndexedObservable → FrozenPairSurface
-frozenPairSurface carrier32BaselineObservable = carrier32Degree22X0Y0
-frozenPairSurface carrier32Y3Observable = carrier32Degree22X0Y3
-frozenPairSurface _ = carrier32Degree22X0Y0
-
-extensionAt32 : ProjectionIndexedObservable → ExtensionAnswer
-extensionAt32 carrier32BaselineObservable = leftOnlyExtension
-extensionAt32 carrier32Y3Observable = noExtension
-extensionAt32 _ = leftOnlyExtension
-
-------------------------------------------------------------------------
 -- Interpretation / roadmap boundary.
 ------------------------------------------------------------------------
 
