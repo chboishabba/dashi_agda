@@ -13,9 +13,11 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopePublicationAggregate wher
 --   isolated A2 centered radial-curvature leaf,
 --   denominator-cleared A2 square-gap rationalization,
 --   exact centered-shift p+q=2k / squared-output / Plucker geometry,
---   rational scalar radius doubling without a square-root axiom.
+--   rational scalar radius doubling without a square-root axiom,
+--   literal aligned P-Q complement on the R467/R455 carrier,
+--   centered angular second-moment payment by 4|y|^2.
 --
--- Ordered denominator payment, aligned angular second moment, inner-fibre gain,
+-- Ordered denominator payment, final uniform A2 curvature, inner-fibre gain,
 -- R568 and Clay promotion remain open.
 
 import DASHI.Physics.Closure.NSTriadKNR571PairedSecondMomentPublicationAggregate
@@ -24,4 +26,5 @@ import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact
+import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkRegression
