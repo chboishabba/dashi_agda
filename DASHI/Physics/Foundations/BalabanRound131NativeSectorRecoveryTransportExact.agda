@@ -13,8 +13,14 @@ module DASHI.Physics.Foundations.BalabanRound131NativeSectorRecoveryTransportExa
 --
 --   1. common perturbation/scalar transport;
 --   2. attachment of Round131's fixed literal construction Y to the selected
---      QFT target qftTarget(coarseGrain candidate regime);
+--      QFT construction;
 --   3. pairing coherence for the one literal sector stress.
+--
+-- A further least-privilege recut separates source construction from target
+-- identification.  If Y is attached to the actual recovered QFT construction
+-- on the selected coarse-grained candidate, the existing QFTRecoveryReceipt
+-- transports that equality to qftTarget.  Therefore direct Y = qftTarget is not
+-- a primitive obligation once the recovery receipt is available.
 --
 -- The unification adapter also selects the UnifiedCandidate's own qftSemantics
 -- by construction.  A separate arbitrary-S -> qftSemantics equality would be an
@@ -27,6 +33,7 @@ module DASHI.Physics.Foundations.BalabanRound131NativeSectorRecoveryTransportExa
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.Foundations.BalabanNativeSectorRecoveryTransportExact as Transport
@@ -38,6 +45,34 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationR
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as R123
 import DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact as R131
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
+
+------------------------------------------------------------------------
+-- Existing QFT recovery turns the source-native recovered-construction weld
+-- into the direct selected-target weld consumed by the transport record.
+------------------------------------------------------------------------
+
+recoveredConstructionIsSelectedQFTTarget :
+  ∀ {U : Weld.UnifiedCandidate}
+    {Y : Top.LiteralYangMillsConstruction
+      (Weld.qftCarriers U) (Weld.qftSemantics U)} →
+  (qftRecovery : Weld.QFTRecoveryReceipt U) →
+  (constructionIsRecovered :
+    ∀ candidate regime →
+    Weld.qftRegime U regime →
+    Y ≡ Weld.recoverQFT U
+      (Weld.microscopicState U (Weld.coarseGrain U candidate regime))) →
+  ∀ candidate regime →
+  Weld.qftRegime U regime →
+  Y ≡ Weld.qftTarget U (Weld.coarseGrain U candidate regime)
+recoveredConstructionIsSelectedQFTTarget
+    qftRecovery constructionIsRecovered candidate regime qftAtRegime =
+  trans
+    (constructionIsRecovered candidate regime qftAtRegime)
+    (Weld.qftRecoveryAfterCoarseGrainingCommutes
+      qftRecovery candidate regime qftAtRegime)
+
+round131RecoveredConstructionToTargetCompilerLevel : ProofLevel
+round131RecoveredConstructionToTargetCompilerLevel = machineChecked
 
 record Round131SharedTransportData
     {U : Weld.UnifiedCandidate}
@@ -67,6 +102,8 @@ record Round131SharedTransportData
 
     -- Same-object construction attachment.  Round131 is proved for one fixed Y;
     -- the shared consumer is indexed by the selected coarse-grained QFT target.
+    -- `recoveredConstructionIsSelectedQFTTarget` is the preferred compiler when
+    -- Y is first attached to the actual recovered QFT construction.
     literalConstructionIsSelectedQFTTarget :
       ∀ candidate regime →
       Weld.qftRegime U regime →
@@ -148,6 +185,20 @@ round131NativeSectorTransportCompilerLevel = machineChecked
 round131LiteralSectorTransportCompilerLevel : ProofLevel
 round131LiteralSectorTransportCompilerLevel =
   round131NativeSectorTransportCompilerLevel
+
+directQFTTargetAttachmentPrimitiveAfterRecoveryReceipt : Bool
+directQFTTargetAttachmentPrimitiveAfterRecoveryReceipt = false
+
+directQFTTargetAttachmentPrimitiveAfterRecoveryReceiptIsFalse :
+  directQFTTargetAttachmentPrimitiveAfterRecoveryReceipt ≡ false
+directQFTTargetAttachmentPrimitiveAfterRecoveryReceiptIsFalse = refl
+
+recoveredQFTConstructionAttachmentStillRequired : Bool
+recoveredQFTConstructionAttachmentStillRequired = true
+
+recoveredQFTConstructionAttachmentStillRequiredIsTrue :
+  recoveredQFTConstructionAttachmentStillRequired ≡ true
+recoveredQFTConstructionAttachmentStillRequiredIsTrue = refl
 
 record Round131NativeSectorTransportBoundary : Set where
   constructor round131-native-sector-transport-boundary
