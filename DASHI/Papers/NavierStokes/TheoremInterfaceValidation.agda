@@ -9,18 +9,57 @@ import DASHI.Papers.NavierStokes.TheoremInterface as Paper
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
--- the authoritative owners it imports.  In particular, checking this file does
--- NOT prove R568 or P3: both are required to remain false here while their
--- analytic producers are open.
+-- the authoritative owners it imports. In particular, checking this file does
+-- NOT prove R568, the periodic-B centered/Taylor realization, or the historical
+-- P3 route: those required fields remain false while their analytic producers
+-- are open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
 status = Paper.canonicalNSPaperTheoremStatus
 
+periodicBIsActiveConstructionIsTrue :
+  Paper.NSPaperTheoremStatus.periodicBIsActiveConstruction status ≡ true
+periodicBIsActiveConstructionIsTrue =
+  Paper.NSPaperTheoremStatus.periodicBIsActiveConstructionIsTrue status
+
+wholeSpaceAIsIndependentObligationIsTrue :
+  Paper.NSPaperTheoremStatus.wholeSpaceAIsIndependentObligation status ≡ true
+wholeSpaceAIsIndependentObligationIsTrue =
+  Paper.NSPaperTheoremStatus.wholeSpaceAIsIndependentObligationIsTrue status
+
+periodicBProofProgressDoesNotPromoteWholeSpaceAIsTrue :
+  Paper.NSPaperTheoremStatus.periodicBProofProgressDoesNotPromoteWholeSpaceA status
+  ≡ true
+periodicBProofProgressDoesNotPromoteWholeSpaceAIsTrue =
+  Paper.NSPaperTheoremStatus.periodicBProofProgressDoesNotPromoteWholeSpaceAIsTrue status
+
+wholeSpaceAProofProgressDoesNotPromotePeriodicBIsTrue :
+  Paper.NSPaperTheoremStatus.wholeSpaceAProofProgressDoesNotPromotePeriodicB status
+  ≡ true
+wholeSpaceAProofProgressDoesNotPromotePeriodicBIsTrue =
+  Paper.NSPaperTheoremStatus.wholeSpaceAProofProgressDoesNotPromotePeriodicBIsTrue status
+
+forcedCDDoesNotSettleUnforcedABIsTrue :
+  Paper.NSPaperTheoremStatus.forcedCDDoesNotSettleUnforcedAB status ≡ true
+forcedCDDoesNotSettleUnforcedABIsTrue =
+  Paper.NSPaperTheoremStatus.forcedCDDoesNotSettleUnforcedABIsTrue status
+
 directCompanionConstructedIsTrue :
   Paper.NSPaperTheoremStatus.directCompanionConstructed status ≡ true
 directCompanionConstructedIsTrue =
   Paper.NSPaperTheoremStatus.directCompanionConstructedIsTrue status
+
+periodicBR571TaylorRealizationClosedIsFalse :
+  Paper.NSPaperTheoremStatus.periodicBR571TaylorRealizationClosed status ≡ false
+periodicBR571TaylorRealizationClosedIsFalse =
+  Paper.NSPaperTheoremStatus.periodicBR571TaylorRealizationClosedIsFalse status
+
+periodicBSecondMomentSixThreeTransplantClosedIsFalse :
+  Paper.NSPaperTheoremStatus.periodicBSecondMomentSixThreeTransplantClosed status
+  ≡ false
+periodicBSecondMomentSixThreeTransplantClosedIsFalse =
+  Paper.NSPaperTheoremStatus.periodicBSecondMomentSixThreeTransplantClosedIsFalse status
 
 directLeafACompilerConstructedIsTrue :
   Paper.NSPaperTheoremStatus.directLeafACompilerConstructed status ≡ true
@@ -46,6 +85,17 @@ p3SeparationProducerClosedIsFalse :
   Paper.NSPaperTheoremStatus.p3SeparationProducerClosed status ≡ false
 p3SeparationProducerClosedIsFalse =
   Paper.NSPaperTheoremStatus.p3SeparationProducerClosedIsFalse status
+
+p3GramAttemptRetainedAsHistoricalProvenanceIsTrue :
+  Paper.NSPaperTheoremStatus.p3GramAttemptRetainedAsHistoricalProvenance status
+  ≡ true
+p3GramAttemptRetainedAsHistoricalProvenanceIsTrue =
+  Paper.NSPaperTheoremStatus.p3GramAttemptRetainedAsHistoricalProvenanceIsTrue status
+
+p3GramAttemptAbandonedAsPrimaryRouteIsTrue :
+  Paper.NSPaperTheoremStatus.p3GramAttemptAbandonedAsPrimaryRoute status ≡ true
+p3GramAttemptAbandonedAsPrimaryRouteIsTrue =
+  Paper.NSPaperTheoremStatus.p3GramAttemptAbandonedAsPrimaryRouteIsTrue status
 
 historicalA1A9RetainedIsTrue :
   Paper.NSPaperTheoremStatus.historicalA1A9Retained status ≡ true
