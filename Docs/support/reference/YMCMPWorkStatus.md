@@ -13,9 +13,49 @@ Use this classification instead:
 | Source family | Repository status for current search | What is already owned | What may still be legitimately open |
 |---|---|---|---|
 | CMP109 | SOURCE/COMPILER LARGELY OWNED | regular small-field effective-action lane, differentiated coordinate machinery, Eq.(5.1)-facing continuation interfaces, downstream BC/response compilers | a *specific literal physical differential/source identification* required by a live consumer; not CMP109 as a whole |
-| CMP116 | SOURCE/COMPILER LARGELY OWNED | localization/cluster-expansion continuation, marked-source/localization machinery, common continuation interfaces, Row-C donor machinery | a *specific carrier realization, uniform analytic radius, marked-row or quantitative physical estimate* if still demanded by the current consumer |
-| CMP119 | SOURCE OBJECT/DICTIONARY LARGELY OWNED | complete-density dictionary, raw source state, finite-beta construction, `rho_k/U_k/E_k/R_k/B_k/A_k/vacuum` vocabulary, Eq.(2.23), function-valued regular `E_k`, selected regular-E projection, source-localization interface | exact same-object realization of a selected physical carrier if not already attached; do not reconstruct the complete-density theory merely because a later wrapper is conditional |
-| CMP122 | PUBLISHED THEOREM BOUNDARY OWNED | Theorem-1/UV-stability authority, finite-history coupling hypothesis, active-scale source theorem carrier, raw-CMP119 active specialization | theorem-bearing exact instantiation on a selected source family if a current consumer lacks it; continuum/OS/mass-gap consequences remain separate and are **not** supplied by CMP122 |
+| CMP116 | SOURCE/COMPILER LARGELY OWNED | localization/cluster-expansion continuation, marked-source/localization machinery, common continuation interfaces, Row-C donor machinery | a *specific carrier realization, selected-J coordinate identification, marked-row or quantitative physical estimate* if still demanded by the current consumer |
+| CMP119 | SOURCE OBJECT/DICTIONARY LARGELY OWNED | complete-density dictionary, raw source state, finite-beta construction, `rho_k/U_k/E_k/R_k/B_k/A_k/vacuum` vocabulary, Eq.(2.23), function-valued regular `E_k`, selected regular-E projection, concrete active E-localization decoder, source-localization interfaces | exact same-object realization of a selected physical carrier if not already attached; do not reconstruct the complete-density theory merely because a later wrapper is conditional |
+| CMP122 | PUBLISHED THEOREM BOUNDARY OWNED | Theorem-1/UV-stability authority, finite-history coupling hypothesis, active-scale source theorem carrier, form-only source projection, raw-CMP119 active specialization | theorem-bearing exact instantiation on the selected concrete source family if the current consumer lacks it; continuum/OS/mass-gap consequences remain separate and are **not** supplied by CMP122 |
+
+## Current Pareto snapshot — 2026-09-15
+
+The preferred BC1 source path is now below R247:
+
+```text
+finite-history raw CMP119 objects
+  -> concrete Sect.-2 predicate family
+       ELocalizedAnalytic := exact same-E localization record
+  -> genuine CMP122 Theorem-1 witness on that concrete family
+  -> identity E-localization decoder                     [R248 compiler]
+  -> active raw Sect.-2 witness                          [compiler]
+  -> active regular-E/localization form                 [R248 compiler]
+  -> active CMP109/CMP116 continuation                  [R247 compiler]
+  -> BC1 representation                                 [R250/R115 compiler]
+```
+
+The preferred representation compiler is now explicit in R250. On this route **decoder + raw active witness are not primitive payments**. The remaining theorem-bearing BC1 inputs after representation are:
+
+```text
+P0  genuine CMP122 Theorem-1 witness on the selected concrete predicate family
+P1  physical SecondVariationLinearity on the exact active E_k carrier
+P2  literal CMP109 Eq.(5.1) binding on that same continuation
+P3  literal extraction of the finite normalized CMP116 analytic demands
+```
+
+Do not count `decoder`, `runningCoupling = history coupling`, active raw witness assembly, regular-E form projection, R247 continuation, common-radius construction, or BC1 same-E identity as separate theorem payments on the preferred route.
+
+Two alternate source constructions remain useful:
+
+```text
+legacy opaque-predicate route:
+  explicit RawELocalizedAnalyticDecoder
+
+R249 reuse route:
+  R244 function-valued localization carrier
+  + one same-E_k weld to the finite-history raw E_k
+```
+
+They are donors/alternates, not extra mandatory coordinates.
 
 ## PR chronology that established this
 
@@ -56,12 +96,18 @@ This explicitly superseded full CMP119 raw-state reconstruction as the preferred
 - CMP109/CMP116 continuation is compiler-owned once the regular-E realization is supplied;
 - BC1 potential same-objectness is compiler-owned once that realization is supplied.
 
+### #883 — archaeology consolidation
+
+`Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger`
+
+Merged 2026-09-13. This is the historical coordination point that made the route reductions explicit and added the companion PR/round survey. Later source work should update this status file / live coordination sheet rather than forcing future investigators to replay #883 archaeology.
+
 ## Internal-round compression after #846
 
-The roundup's internal-round crosswalk should be read as a sequence of **reductions**, not as a list of new CMP theorems that still need proving:
+The internal-round crosswalk is a sequence of **reductions**, not a list of new CMP theorems that still need proving:
 
 ```text
-R214   source-fixed rho_k -> A_k semantics (important for generated-action/unification provenance)
+R214   source-fixed rho_k -> A_k semantics (generated-action/unification provenance)
 R215   BC1 route reversal: use literal regular E_k, not whole A_k
 R216-217 broad raw-source split (historical preferred wall)
 R218   published source flow
@@ -79,7 +125,10 @@ R243   extraction/evaluation become projection/application
 R244   published CMP119 localization authority separated from repository carrier realization
 R245   function-valued E + localization -> CMP109/116 continuation compiler
 R246   consumer-indexed active-scale Section-2 regular-E form
-R247   active continuation / focused validation; full quantitative bounds no longer primitive for BC1 continuation
+R247   active continuation / focused validation; quantitative bounds no longer downstream BC1 primitives
+R248   raw active E-localization decoder; preferred concrete predicate makes decoding identity
+R249   alternate reuse of R244 localization via one honest same-E_k weld; no history coercion
+R250   modern active raw -> BC1 proof spine; decoder/rawWitness demoted on preferred concrete-predicate route
 ```
 
 The direction of travel is therefore:
@@ -90,7 +139,9 @@ broad CMP reconstruction
   -> selected regular E
   -> function-valued regular E
   -> active-scale regular-E/localization form
-  -> compiler-owned CMP109/116 -> BC1
+  -> concrete raw E-localization predicate
+  -> compiler-owned active continuation / BC1 representation
+  -> three literal physical BC1 inputs (D2, Eq.5.1, CMP116 demands)
 ```
 
 not the reverse.
@@ -102,7 +153,7 @@ A `ProofLevel = conditional` on a late CMP wrapper does **not** imply “CMP the
 1. **published source theorem authority missing?** Usually no for CMP109/116/119/122 core source statements already imported.
 2. **generic compiler missing?** Frequently already closed in later rounds.
 3. **same-object carrier realization missing?** Potentially yes.
-4. **literal physical estimate missing?** Potentially yes.
+4. **literal physical estimate/differential identification missing?** Potentially yes.
 5. **continuum/OS/mass-gap consequence missing?** These are separate programmes and must not be charged to CMP122.
 
 Only (3) or (4), when demanded by the current consumer, should normally survive the Pareto filter.
@@ -116,7 +167,9 @@ Unless a current exact consumer demonstrates otherwise, do not spend proof-searc
 - re-deriving the finite-beta running-coupling identity already made definitional in the source-native construction;
 - rebuilding an abstract `RegularTerm` semantics instead of using the function-valued `E_k` representation;
 - rebuilding CMP109/CMP116 continuation plumbing already compiled from regular-E/localization;
+- treating the legacy opaque E-localization decoder as mandatory when the concrete predicate route is available;
 - treating the complete action `A_k` as the object differentiated by CMP109 Eq.(5.1);
+- treating the common positive analytic radius as an independent theorem after the finite normalized demands are supplied;
 - treating CMP122 UV stability as continuum Schwinger construction, OS reconstruction, nontriviality, clustering, or physical mass gap.
 
 ## Live-search rule
@@ -128,6 +181,7 @@ Which exact current consumer?
 Which exact selected source object?
 Which same-object equality/physical estimate is absent?
 Was that equality already paid under an earlier/later round alias?
+Is a later concrete-predicate or active-scale route strictly weaker than the wrapper currently in view?
 ```
 
 Only search the wider PR history if the roundup/status files do not answer those questions.
