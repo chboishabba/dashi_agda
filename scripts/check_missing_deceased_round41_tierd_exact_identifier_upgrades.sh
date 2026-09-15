@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+TARGET="DASHI/Culture/MissingDeceasedTwentyScientistRound41TierDExactIdentifierUpgradesExact.agda"
+AGG="DASHI/Culture/MissingDeceasedCommonObjectProgrammeEverything.agda"
+test -f "$TARGET"
+grep -q "record ExactIdentifierUpgrade" "$TARGET"
+grep -q "jasonThomasGrantIdentifierPaid = true" "$TARGET"
+grep -q "liMinyongPatentIdentifiersPaid = true" "$TARGET"
+grep -q "yanHongGrantIdentifierPaid = true" "$TARGET"
+grep -q "liuDonghaoRoleSurfacePaid = true" "$TARGET"
+grep -q "liuDonghaoExactTaskIdentifierPaid = false" "$TARGET"
+grep -q "round41H2PaidCount = 0" "$TARGET"
+grep -q "round41H3PaidCount = 0" "$TARGET"
+grep -q "exactIdentifierWithoutSecondRetainedPersonDoesNotPayH2 = true" "$TARGET"
+grep -q "MissingDeceasedTwentyScientistRound41TierDExactIdentifierUpgradesExact" "$AGG"
