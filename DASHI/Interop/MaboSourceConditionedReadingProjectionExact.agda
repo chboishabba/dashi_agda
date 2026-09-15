@@ -9,41 +9,33 @@ import DASHI.Interop.SemanticReaderElucidatoryConeExact as Reader
 import DASHI.Interop.SensibLawMaboProgressiveExplanationProjectionExact as Mabo
 
 ------------------------------------------------------------------------
--- SOURCE-CONDITIONED MABO READING PROJECTION
+-- POSTGRESQL-CONDITIONED MABO READING PROJECTION
 --
 -- Runtime counterpart:
---   ITIR-suite/itir-svelte/src/lib/workbench/maboSourceProjection.js
+--   SensibLaw/src/storage/postgres/semantic_reader_projection.py
 --
--- The retained SensibLaw corpus currently pays only a coarse Mabo coordinate:
--- native title is recognised and terra-nullius is rejected in the corpus
--- summary.  It does not contain the exact judgment span/revision necessary to
--- pay the detailed radical-title proposition chain.  The reader may therefore
--- display a shallow explanation while exact Source/Why requests defer with an
--- acquisition/review residual rather than manufacturing authority coordinates.
+-- PostgreSQL is the active semantic persistence spine.  A persisted legal
+-- source revision pays retrieval readiness only.  Source execution additionally
+-- requires the requested exact span to be persisted on the same canonical
+-- document with valid coordinates.  Proposition support, applicability, and
+-- legal truth remain separate payments.
 ------------------------------------------------------------------------
 
-record CanonicalMaboCorpusPayment : Set where
-  constructor canonicalMaboCorpusPayment
+record PostgresMaboSourcePayment : Set where
+  constructor postgresMaboSourcePayment
   field
-    corpusReference : String
-    citationReference : String
-    recognisedNativeTitleCoordinatePaid : Bool
-    rejectedTerraNulliusCoordinatePaid : Bool
-    exactRadicalTitleSpanPaid : Bool
-    detailedFiveStageChainPaid : Bool
-    corpusSummaryIsExactAuthoritySpan : Bool
+    sourceRevisionReference : String
+    canonicalDocumentReference : String
+    requestedSpanReference : String
+    sourceRevisionPersisted : Bool
+    canonicalDocumentPersisted : Bool
+    exactRequestedSpanPersisted : Bool
+    exactSpanBoundsValid : Bool
+    propositionChainPaid : Bool
+    applicabilityPaid : Bool
+    claimTruthPaid : Bool
 
-open CanonicalMaboCorpusPayment public
-
-canonicalCorpusPayment : CanonicalMaboCorpusPayment
-canonicalCorpusPayment = canonicalMaboCorpusPayment
-  "sensiblaw:data/corpus/mabo_v_queensland_no2.json"
-  "Mabo v Queensland (No 2) [1992] HCA 23"
-  true
-  true
-  false
-  false
-  false
+open PostgresMaboSourcePayment public
 
 data ReaderAction : Set where
   explainAction
@@ -56,20 +48,73 @@ data ReaderDisposition : Set where
   deferExactAuthoritySpan
   deferDetailedPropositionChain : ReaderDisposition
 
-sourceConditionedDisposition : ReaderAction → ReaderDisposition
-sourceConditionedDisposition explainAction = executeDisposition
-sourceConditionedDisposition contextAction = executeDisposition
-sourceConditionedDisposition sourceAction = deferExactAuthoritySpan
-sourceConditionedDisposition whyAction = deferDetailedPropositionChain
+exactSourcePayment : PostgresMaboSourcePayment → Bool
+exactSourcePayment p with sourceRevisionPersisted p
+... | false = false
+... | true with canonicalDocumentPersisted p
+...   | false = false
+...   | true with exactRequestedSpanPersisted p
+...     | false = false
+...     | true = exactSpanBoundsValid p
 
-sourceDefers : sourceConditionedDisposition sourceAction ≡ deferExactAuthoritySpan
-sourceDefers = refl
+postgresConditionedDisposition :
+  PostgresMaboSourcePayment → ReaderAction → ReaderDisposition
+postgresConditionedDisposition p explainAction = executeDisposition
+postgresConditionedDisposition p contextAction = executeDisposition
+postgresConditionedDisposition p sourceAction with exactSourcePayment p
+... | true = executeDisposition
+... | false = deferExactAuthoritySpan
+postgresConditionedDisposition p whyAction with propositionChainPaid p
+... | true = executeDisposition
+... | false = deferDetailedPropositionChain
 
-whyDefers : sourceConditionedDisposition whyAction ≡ deferDetailedPropositionChain
-whyDefers = refl
+------------------------------------------------------------------------
+-- Canonical fixtures expose the intended payment boundary.
+------------------------------------------------------------------------
 
-explainExecutes : sourceConditionedDisposition explainAction ≡ executeDisposition
-explainExecutes = refl
+persistedRevisionOnly : PostgresMaboSourcePayment
+persistedRevisionOnly = postgresMaboSourcePayment
+  "source-revision:mabo-hca23"
+  "document:mabo-hca23"
+  "span:mabo:radical-title-native-title"
+  true
+  true
+  false
+  false
+  false
+  false
+  false
+
+exactSpanPaid : PostgresMaboSourcePayment
+exactSpanPaid = postgresMaboSourcePayment
+  "source-revision:mabo-hca23"
+  "document:mabo-hca23"
+  "span:mabo:radical-title-native-title"
+  true
+  true
+  true
+  true
+  false
+  false
+  false
+
+persistedRevisionStillDefersSource :
+  postgresConditionedDisposition persistedRevisionOnly sourceAction
+    ≡ deferExactAuthoritySpan
+persistedRevisionStillDefersSource = refl
+
+exactSpanExecutesSource :
+  postgresConditionedDisposition exactSpanPaid sourceAction
+    ≡ executeDisposition
+exactSpanExecutesSource = refl
+
+exactSpanStillDefersWhy :
+  postgresConditionedDisposition exactSpanPaid whyAction
+    ≡ deferDetailedPropositionChain
+exactSpanStillDefersWhy = refl
+
+exactSpanDoesNotPayTruth : claimTruthPaid exactSpanPaid ≡ false
+exactSpanDoesNotPayTruth = refl
 
 ------------------------------------------------------------------------
 -- Existing semantic-reader and Mabo owners remain the parent contracts.
@@ -82,46 +127,61 @@ maboRuntimeAnchor : Mabo.RuntimeReadingConeParity
 maboRuntimeAnchor = Mabo.canonicalRuntimeReadingConeParity
 
 ------------------------------------------------------------------------
--- Firewalls: coarse corpus support cannot be laundered into the unpaid detail.
+-- Firewalls: persistence and projection coordinates cannot launder authority.
 ------------------------------------------------------------------------
 
-data CoarseCorpusPaysExactAuthoritySpanPermission : Set where
-data CoarseCorpusPaysDetailedFiveStageChainPermission : Set where
-data DeferredSourceRequestCreatesAuthorityPermission : Set where
+data PersistedRevisionCreatesExactSpanPermission : Set where
+data ExactSpanCreatesPropositionSupportPermission : Set where
+data PropositionSupportCreatesApplicabilityPermission : Set where
+data PersistedRowCreatesClaimTruthPermission : Set where
+data DetachedPresentationCreatesSemanticAuthorityPermission : Set where
+
 data ReaderProseCreatesEvidencePaymentPermission : Set where
 
-coarseCorpusCannotPayExactAuthoritySpan :
-  CoarseCorpusPaysExactAuthoritySpanPermission → ⊥
-coarseCorpusCannotPayExactAuthoritySpan ()
+persistedRevisionCannotCreateExactSpan :
+  PersistedRevisionCreatesExactSpanPermission → ⊥
+persistedRevisionCannotCreateExactSpan ()
 
-coarseCorpusCannotPayDetailedFiveStageChain :
-  CoarseCorpusPaysDetailedFiveStageChainPermission → ⊥
-coarseCorpusCannotPayDetailedFiveStageChain ()
+exactSpanCannotCreatePropositionSupport :
+  ExactSpanCreatesPropositionSupportPermission → ⊥
+exactSpanCannotCreatePropositionSupport ()
 
-deferredSourceRequestCannotCreateAuthority :
-  DeferredSourceRequestCreatesAuthorityPermission → ⊥
-deferredSourceRequestCannotCreateAuthority ()
+propositionSupportCannotCreateApplicability :
+  PropositionSupportCreatesApplicabilityPermission → ⊥
+propositionSupportCannotCreateApplicability ()
+
+persistedRowCannotCreateClaimTruth :
+  PersistedRowCreatesClaimTruthPermission → ⊥
+persistedRowCannotCreateClaimTruth ()
+
+detachedPresentationCannotCreateSemanticAuthority :
+  DetachedPresentationCreatesSemanticAuthorityPermission → ⊥
+detachedPresentationCannotCreateSemanticAuthority ()
 
 readerProseCannotCreateEvidencePayment :
   ReaderProseCreatesEvidencePaymentPermission → ⊥
 readerProseCannotCreateEvidencePayment ()
 
 ------------------------------------------------------------------------
--- Certification coordinates stay explicit.
+-- Concrete storage references and certification coordinates.
 ------------------------------------------------------------------------
 
-itirRuntimeReference : String
-itirRuntimeReference =
-  "ITIR-suite/itir-svelte/src/lib/workbench/maboSourceProjection.js"
+sensibLawRuntimeReference : String
+sensibLawRuntimeReference =
+  "src/storage/postgres/semantic_reader_projection.py"
 
-sensibLawCorpusReference : String
-sensibLawCorpusReference = "data/corpus/mabo_v_queensland_no2.json"
+postgresPersistenceDoctrineReference : String
+postgresPersistenceDoctrineReference =
+  "database/postgres_migrations/README.md"
 
 sourceWritten : Bool
 sourceWritten = true
 
-runtimeExactHeadReceiptObserved : Bool
-runtimeExactHeadReceiptObserved = false
+runtimeFocusedReceiptObserved : Bool
+runtimeFocusedReceiptObserved = true
+
+runtimeRepositoryToolchainReceiptObserved : Bool
+runtimeRepositoryToolchainReceiptObserved = false
 
 agdaKernelReceiptObserved : Bool
 agdaKernelReceiptObserved = false
