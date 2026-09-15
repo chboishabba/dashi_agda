@@ -12,15 +12,19 @@ required=(
   "A001379"
   "A014708"
   "A058678"
+  "A007255"
   "A199014"
   "A309510"
   "17496"
+  "32772"
   "196883"
   "196884"
   "sameIntegerMonsterContextDoesNotIdentifyObject"
   "mcKayThompson42d17496DoesNotIdentifyRestriction17496"
+  "sameSixBSeries32772DoesNotIdentifyWeightTwoEigenspace"
   "oeisPaysNumericalCoordinateOnly"
   "sameIntegerCollisionCounterexamplePaid"
+  "sameSeriesDifferentRoleCollisionPaid"
 )
 for needle in "${required[@]}"; do
   grep -Fq "$needle" "$OWNER" || { echo "missing OEIS same-integer collision marker: $needle" >&2; exit 1; }
