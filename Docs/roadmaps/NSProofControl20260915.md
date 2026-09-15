@@ -2,105 +2,166 @@
 
 Status: active proof-search control document; non-promoting.
 
-This document replaces neither the historical roadmaps nor their source
-owners.  It records the current division of labour and active search priority
-so that work is not sent back through the entire historical round graph merely
-because that graph remains valuable donor material.
+Timestamped current-state update: `2026-09-15 12:15 AEST (UTC+10)`.
 
-## Objective and operating rule
+This is the default answer source for current NS proof-search state. Historical
+roadmaps and the canonical archaeology ledger remain append-only provenance and
+donor maps; exact-owner inspection should be triggered by a named unpaid field,
+not used as the default way to rediscover where the programme is.
 
-The objective is to solve the unforced DASHI Navier–Stokes programme with
-actual Lean proof receipts.  The complete Agda, Lean, archived, and published
-corpus is active proof material and searchable donor space.  Historical routes
-are maps, not mandatory premises: a worker may bypass, strengthen, or replace
-one only by recording the exact endpoint, hypotheses, consumer, provenance,
-and relation to the displaced route.
+## Operating hierarchy
+
+```text
+1. current control / producer summary
+2. canonical archaeology ledger / PR-title chronology
+3. exact owner only for the named unpaid theorem or field
+```
 
 No statement may be promoted from source provenance, a Boolean ledger, a
 conditional compiler surface, or a similarly named theorem.
 
-## Three distinct jobs
-
-### C/D — published forced-breakdown proof
-
-The official `openai/NavierStokesAndEuler` source has two public snapshots:
-
-| snapshot | role |
-| --- | --- |
-| `8937a8f4…` | initial public release snapshot |
-| `f9e8bc5b38b6e212696e8a30e3e91517af887bbd` | current observation, 2026-09-10; adds `NavierStokes.PaperResults` to the top-level surface |
-
-The public roots are:
+## Four proof lanes
 
 ```text
-NavierStokes.Comparator.navier_stokes_breakdown_R3
-NavierStokes.Comparator.navier_stokes_breakdown_periodic
+A — unforced whole-space R^3 regularity       independent / deferred
+B — unforced periodic T^3 regularity          active construction lane
+C — forced whole-space R^3 breakdown          released-proof BIDI/integration
+D — forced periodic T^3 breakdown             released-proof BIDI/integration
 ```
 
-They establish forced breakdown alternatives C and D.  Work here is source
-lineage, independent checking, dependency closure, and same-object carrier
-integration.  It is not discovery of an A/B proof.  Preserve the old source
-observation append-only; never overwrite it with the newer observation.
+Transfer firewalls are load-bearing: B does not imply A; A does not imply B;
+released forced C/D results do not settle either unforced lane absent an exact
+typed transport theorem.
 
-The existing C/D-to-DASHI statement alignment remains useful.  The first
-representation seam is the concrete released candidate/field/forcing to the
-DASHI Fourier/R406 carrier.  A released theorem does not itself pay that weld.
+### A — unforced whole-space R^3
 
-### A — active independent unforced proof search
+A remains an independent obligation. Do not transport periodic B progress into
+A without an explicit carrier theorem. Preserve the earlier whole-space and
+same-output/Gram/P3 attempts as historical/provenance routes, including why
+specific producer ideas were abandoned or superseded.
 
-The current primary target is:
+### B — unforced periodic T^3 — ACTIVE
+
+The active proof spine is now:
 
 ```text
-CommutatorOnlySpacetimeBudget568
+R571 exact signed helical multiplier-difference carrier
+  -> opposite-shift y,-y realization
+  -> paired second-order identity
+  -> scoped paired second-moment compiler
+  -> Gate-A physical envelopes {A1, A2, G2, G1}
+  -> centered six-three weld
+  -> signed inner-fibre gain
+  -> R545/R567 full-square transport
+  -> R568 CommutatorOnlySpacetimeBudget568
+  -> R572
+  -> R503/R415 critical-barrier consumer
 ```
 
-Its intended content is a cutoff-uniform bound
+Representation/Taylor/paired-second-moment plumbing is no longer the active
+unknown. The current Gate-A coordinates are:
 
 ```text
-4 * integral[0,T] globalForcingFull(N,t) dt <= B(T).
+A1  modeNorm/radius first-increment transport
+A2  centered radial curvature
+G2  Fourier coefficient increment -> path/gradient transport
+G1  shifted coefficient -> modal-energy envelope
 ```
 
-The recommended first route is R571 through the literal signed `+y/-y`
-multiplier-difference carrier, then existing centered/Taylor, six-three,
-inner-fibre, resolvent, spectator, and full-square machinery toward R568.
-Use signed structure before positive Schur majorisation.  R577's four-positive-
-receipt construction is a fallback, not a mandatory first route.
-
-The true terminal work is two independent payments:
+Current donor reading:
 
 ```text
-A1  CommutatorOnlySpacetimeBudget568
-A2  literal R406 phase-sensitive critical-production estimate
+A1  increasingly transport/bookkeeping; R124/R455 donors retained
+G2  finite path/Jensen donor exists; torus-gradient same-object/uniform transport open
+G1  exact modal-energy/Cauchy donor exists; shifted-state envelope transport open
+A2  likeliest genuinely new local mathematics
 ```
 
-Neither payment may be used to silently discharge the other.  Only after both
-exist may the already-constructed R414/R104/barrier compiler cascade be run.
+Preferred A2 linearization makes the + remainder exactly zero. The remaining
+centered defect has already been reduced to historical square-gap and
+triangle-excess coordinates. PR #935 now additionally proves on the literal
+integer Fourier carrier:
 
-### B — deferred unforced periodic/global consumer
+```text
+(k+y) + (k-y) = 2k
+|2k|^2 = 4 |k|^2
+Plucker(k+y,k-y) = 4 Plucker(k,y)
+```
 
-B remains an independent target unless a genuine transport theorem is built.
-It is deferred for Pareto reasons, not because A automatically proves B.
-Reuse A machinery only through exact typed transport.
+Therefore A2 is currently localized to:
 
-## What is donor material, not mandatory rework
+```text
+1. scalar radius transport  modeNorm(2k) = 2 modeNorm(k)  on the selected rational carrier;
+2. ordered/annular positive radial-sum denominator payment;
+3. aligned angular/square-gap second-moment estimate;
+4. the resulting uniform centered radial-curvature bound.
+```
 
-Do not spend the first proof-search pass rediscovering Fourier representation,
-signed commutator algebra, Waleffe geometry, primitive R574 control,
-fibre/global aggregation, resolvent symmetry, spectator rows, transpose/full-
-square collapse, the `C_direct` identification, or the R145-to-R584
-archaeology.  Search and reuse them where their actual consumer factors
-through the existing carrier.
+Fail-closed status:
 
-## Required delivery discipline
+```text
+R+ preferred remainder                       exactly zero / source-written
+square-gap numerator reduction                source-written
+triangle-excess polarization factorization    source-written
+centered shift p+q=2k                         source-written
+centered squared-output scaling                source-written
+centered Plucker scaling                       source-written
+scalar radius doubling                         open
+ordered radial denominator payment             open
+A2 uniform curvature                           open
+A1/G2/G1 final physical envelopes              open
+centered six-three weld                        downstream / open
+signed inner-fibre gain                        open
+R568                                           open
+phase-production leaf                          independent / open
+Clay promotion                                 false
+```
 
-For every new Lean result or proposed replacement, report:
+The positive R576/R577 Gram/Schur routes remain valid fallbacks. Preserve signed
+structure and fixed-helicity information before positive majorization whenever
+the centered route is still viable.
 
-1. exact theorem endpoint and consumer;
-2. source/Agda/Lean lineage and any same-object map;
-3. hypotheses and axiom receipt;
-4. whether it pays A1, A2, C/D integration, or only infrastructure;
-5. the remaining unpaid seam.
+### Historical/provenance B attempt — same-output Gram / P3
 
-Completion means actual Lean receipts for the named payment(s) and their
-consumer composition, not another inventory.  No C/D result may be treated as
-an A/B result merely because all concern Navier–Stokes.
+Retain R179/R181/R201/R205/R207/R209/R211 and PR #890 append-only. The route
+proved useful algebra and negative controls, but the generic incidence-only
+pair-separation strategy was abandoned as primary producer after a many-to-one
+slot-observable collision showed that distinct incidences can yield equal
+compressed slot kernels. Do not hide or rewrite that history; it remains useful
+as theorem-bearing infrastructure and as a warning against false coercivity.
+
+### C/D — released forced-breakdown proofs
+
+Use the canonical four-alternative BIDI owner and released-proof dependency
+atlas for source verification, exact hypothesis matching and same-object
+integration. Source proof presence is not DASHI same-object payment and is not
+an A/B regularity result.
+
+## Current priority order
+
+```text
+P0  keep this control record + PR progress description synchronized
+P1  B/A2: pay scalar radius-doubling transport on the exact rational carrier
+P2  B/A2: pay ordered radial denominator + aligned angular second moment
+P3  B: close remaining A1/G2/G1 physical envelope transports
+P4  B: centered six-three weld -> signed inner-fibre gain -> R568
+parallel A: named-field only; no broad archaeology unless a live field forces it
+parallel C/D: BIDI verification + same-object integration
+orthogonal: commit-specific certification receipts
+```
+
+Operating rule:
+
+```text
+no broad NS archaeology unless a named unpaid field forces it;
+search summary first, then provenance ledger, then exact owner;
+retain failed/superseded routes and explain why they were abandoned;
+separate MathematicalStatus, StatementStatus and CertificationStatus.
+```
+
+## Certification boundary
+
+Source-written algebra is not a kernel receipt. Validation roots and workflow
+wiring are separate from observed commit-specific Agda success. For PR #935,
+no Agda/Actions success may be claimed until a run tied to the current head is
+observed.
