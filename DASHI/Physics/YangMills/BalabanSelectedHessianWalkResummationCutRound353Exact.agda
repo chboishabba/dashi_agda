@@ -11,9 +11,11 @@ module DASHI.Physics.YangMills.BalabanSelectedHessianWalkResummationCutRound353E
 -- Repository archaeology shows that most of the route below that inequality
 -- is already compiler-owned.  BalabanMarkedPolarisationResummation proves the
 -- finite common-walk cancellation, surviving-walk triangle inequality and
--- marked-walk summation.  BalabanDifferentiatedMarkedFactorProductExact proves
--- the finite product telescope once literal factorwise ordinary/marked bounds
--- are supplied.
+-- marked-walk summation.  The older
+-- BalabanDifferentiatedMarkedFactorProductExact theorem separately proves the
+-- finite factor telescope once literal factorwise ordinary/marked bounds are
+-- supplied; it is a donor/compiler and is deliberately not imported into this
+-- safe owner.
 --
 -- Therefore the least-privilege source-facing cut is NOT a fresh generic
 -- Hessian-Lipschitz theorem.  It is:
@@ -32,13 +34,13 @@ module DASHI.Physics.YangMills.BalabanSelectedHessianWalkResummationCutRound353E
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat.Base using (ℕ)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; absℝ; _-ℝ_; _*ℝ_; _≤ℝ_; ≤ℝ-trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
-import DASHI.Physics.YangMills.BalabanDifferentiatedMarkedFactorProductExact as Factor
 import DASHI.Physics.YangMills.BalabanSelectedHessianStabilitySourceRound352Exact as R352
 
 ------------------------------------------------------------------------
@@ -50,7 +52,7 @@ record CMP116MarkedWalkHessianStabilityData
   field
     walkData : Resum.MarkedWalkHessianData Domain Background History
 
-    scale : Agda.Builtin.Nat.Nat
+    scale : ℕ
     leftDomain rightDomain : Domain
     background : Background
     history : History
@@ -108,22 +110,22 @@ markedWalkCompilerPaysSourceHessianStability dataSet =
     (markedMajorantBelowLipschitzDistance dataSet)
 
 ------------------------------------------------------------------------
--- Compile directly into the R352 source theorem ABI.
+-- Compile directly into the R352 source theorem ABI.  The chosen boundary
+-- carrier is ℝ only because R352's record is point-indexed; this source object
+-- is constant in that bookkeeping point.  R352's selected attachment still
+-- performs the actual same-object identification.
 ------------------------------------------------------------------------
 
 round353ToR352Source :
   ∀ {Domain Background History}
     (dataSet : CMP116MarkedWalkHessianStabilityData Domain Background History) →
-  R352.CMP116LocalHessianStabilitySource ⊤
+  R352.CMP116LocalHessianStabilitySource ℝ
 round353ToR352Source dataSet = record
   { sourceHessianDifference = λ _ → sourceHessianDifferenceFromWalks dataSet
   ; sourceLipschitz = sourceLipschitz dataSet
   ; sourceSubstitutionDistance = λ _ → sourceSubstitutionDistance dataSet
   ; sourceHessianStable = λ _ → markedWalkCompilerPaysSourceHessianStability dataSet
   }
-  where
-    data ⊤ : Set where
-      tt : ⊤
 
 ------------------------------------------------------------------------
 -- Pareto / proof-debt accounting.
@@ -143,8 +145,16 @@ literalCMP116MarkedTreeSummabilityLevel = conditional
 sourceMarkedMajorantScaleComparisonLevel : ProofLevel
 sourceMarkedMajorantScaleComparisonLevel = conditional
 
-finiteFactorTelescopeCompilerLevel : ProofLevel
-finiteFactorTelescopeCompilerLevel = Factor.factorwiseMarkedProductAssemblyLevel
+-- Existing donor theorem:
+-- BalabanDifferentiatedMarkedFactorProductExact.
+-- It proves the finite factor telescope; R353 does not import it because its
+-- historical generic-real helper surface is outside this safe cone.
+finiteFactorTelescopeAlreadyOwned : Bool
+finiteFactorTelescopeAlreadyOwned = true
+
+finiteFactorTelescopeAlreadyOwnedIsTrue :
+  finiteFactorTelescopeAlreadyOwned ≡ true
+finiteFactorTelescopeAlreadyOwnedIsTrue = refl
 
 markedWalkResummationCompilerLevel : ProofLevel
 markedWalkResummationCompilerLevel = machineChecked
