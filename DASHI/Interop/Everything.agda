@@ -86,4 +86,5 @@ import DASHI.Interop.SLRBoundedResearchIterationControlExact
 import DASHI.Interop.SensibLawFederatedZOSAcquisitionExact
 import DASHI.Interop.SensibLawMaboProgressiveExplanationProjectionExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
+import DASHI.Interop.JesusCrustUIInteractionIRExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
