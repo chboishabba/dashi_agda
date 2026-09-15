@@ -44,7 +44,7 @@ record SemanticRefinement
     (problem : SemanticInterpretationProblem)
     (backend : Backend problem)
     (syntax : Syntax problem)
-    (query : Query problem) : Set where
+    (query : Query problem) : Set₁ where
   constructor semanticRefinement
   field
     preservesObservation :
