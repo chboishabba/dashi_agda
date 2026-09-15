@@ -21,6 +21,12 @@ required=(
   "sixBTraceEquation"
   "threeBTraceEquation"
   "twoBTraceEquation"
+  "IbrahimMonster236BMcKayThompsonNormalizationInvariantOEISExact"
+  "IbrahimMonster6BCompleteReplicabilityPowerSnowballExact"
+  "normalizationInvariantTraceBoundary"
+  "replicabilityPowerBoundary"
+  "normalizationInvariantTraceExtractionPaid"
+  "wholeSeriesReplicabilityPowerRelationPaid"
   "c6SpectrumDoesNotCreateN3BMultiplicityWeld"
   "weightTwoC6FourierFrontier"
 )
