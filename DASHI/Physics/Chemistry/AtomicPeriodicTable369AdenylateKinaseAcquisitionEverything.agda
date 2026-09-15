@@ -69,14 +69,17 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETDistribu
 -- UniProt identity metadata cannot manufacture that equivalence or a state value.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCollectiveVariableDefinitionAcquisitionExact
 
--- Direct same-object Figure-5 source-image acquisition: gamma/delta/eta/lambda
--- relative-energy labels are paid at their printed precision.  Three visible
--- bidirectional Kramers-rate numeral pairs are retained without assigning each
--- numeral to a directed arrow; experimental-rate promotion remains blocked.
+-- Historical narrow Figure-5 image acquisition, now corrected to the source's
+-- nonnegative relative-energy sign convention. It is retained for provenance.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureFiveImageNumericAcquisitionExact
 
--- Cell-level acquisition frontier: 8 named states x four numeric coordinates
--- plus six route-edge Kramers-rate cells.  Each unpaid cell retains a locator,
--- source role and next-payment obligation instead of disappearing into a global
--- "uncalibrated" flag.
+-- Full-resolution same-object Figure-5 panel-c acquisition: all eight printed
+-- relative free energies and all twenty visible directed Kramers-rate labels are
+-- paid at printed precision.  The six forward rate cells used by the route graph
+-- are therefore paid too.  Kramers-derived remains distinct from experimental.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureFivePanelCFullNumericAcquisitionExact
+
+-- Cell-level acquisition ledger: endpoint theta/dLN values plus all eight
+-- Figure-5 relative energies and all six forward route-edge Kramers rates are
+-- now paid. Named intermediate theta/dLN cells remain explicitly unpaid.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationPaymentLedgerExact
