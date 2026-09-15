@@ -207,3 +207,15 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePartialState
 -- and alpha->beta->epsilon prefixes while refusing delta/epsilon->xi until the
 -- xi/zeta seam is paid.  Partiality remains explicit rather than totalized.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePartialAlignedDynamicsExact
+
+-- Source-internal terminal-notation seam: prose/Figure routes terminate at zeta
+-- while Eq. (1) writes the corresponding flux paths with terminal xi.  The
+-- bridge records a shared terminal-closed-route role while preserving distinct
+-- source notation tags; it does not assert xi=zeta or diagnose a source typo.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseTerminalNotationRoleBridgeExact
+
+-- Role-completed aligned dynamics: delta/epsilon can now reach a tagged terminal
+-- route-role state carrying Figure-zeta's closed two-angle region, while the
+-- equation-xi and figure-zeta source objects remain non-identical.  This closes
+-- the route at role level without manufacturing dLN, per-edge rates, or kinetics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseTerminalRoleCompletedDynamicsExact
