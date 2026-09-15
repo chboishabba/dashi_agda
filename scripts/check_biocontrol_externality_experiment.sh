@@ -7,12 +7,14 @@ FILES=(
   DASHI/Environment/BiocontrolActiveExperimentSearchRegression.agda
   DASHI/Environment/BiocontrolCostedExperimentChoiceRegression.agda
   DASHI/Environment/BiocontrolAttributionSnowballRegression.agda
+  DASHI/Environment/BiocontrolSIQuantityRegression.agda
   DASHI/Environment/BiocontrolFirstImplementationRegression.agda
   DASHI/Environment/BiocontrolExternalityExperimentExact.agda
   DASHI/Environment/BiocontrolExternalityExperimentSourceAtlasExact.agda
   DASHI/Environment/WaterHyacinthLESExact.agda
   DASHI/Environment/BiocontrolActiveExperimentSearchExact.agda
   DASHI/Environment/BiocontrolCostedExperimentChoiceExact.agda
+  DASHI/Environment/BiocontrolSIQuantityExact.agda
   DASHI/Environment/BiocontrolFirstImplementationExact.agda
 )
 
