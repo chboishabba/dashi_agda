@@ -5,13 +5,16 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Core.ConsumerIndexedUntanglingTowerExact as Tower
 import DASHI.ComputerScience.RSA260BidiConsumerIndexedUntanglingTowerExact as RSA
+import DASHI.ComputerScience.RSA260BidiHybridTailCostShapeCollisionExact as CostCollision
+import DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionExact as FactorCollision
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
+import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
 import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Production
 
 ------------------------------------------------------------------------
 -- RSA-260 / RH CONSUMER-INDEXED UNTANGLING ROADMAP
 --
--- Three queues are now explicit and non-blocking:
+-- Three queues remain explicit and non-blocking:
 --
 --   (A) recursive untangling research
 --       projection collision -> missing coordinate -> retained residual ->
@@ -23,11 +26,20 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 --
 --   (C) RH analytic refinement
 --       coarse count/envelope collision -> phase-sensitive residual -> literal
---       target-relative model -> translation/modulation -> strict consumer margin.
+--       target-relative model -> same-carrier translation/modulation weld ->
+--       strict consumer margin.
 --
--- The queues share Core structure but not empirical or analytic payment. In
--- particular, finite RSA replay does not prove RH and finite RH cell separation
--- does not recover withheld RSA artifacts.
+-- New frontier information:
+--
+-- * RSA: rotate3/affine7 collide not only on codec cost shape but on the entire
+--   current factor-mode basis/mask footprint (layers 0,1,16). The next retained
+--   residual is therefore the complementary raw-mode layer payload, which must
+--   itself be factorized and attacked rather than accepted as globally minimal.
+--
+-- * RH: proof-relevant phase laws and the literal near-cell kernel now have an
+--   explicit weld interface. The live theorem is to inhabit that interface on
+--   the actual universal pole-quotient analytic carrier; merely identifying the
+--   missing phase coordinate is no longer the sharp frontier.
 ------------------------------------------------------------------------
 
 coreTowerBoundary : Tower.ConsumerIndexedUntanglingTowerBoundary
@@ -36,30 +48,38 @@ coreTowerBoundary = Tower.canonicalConsumerIndexedUntanglingTowerBoundary
 rsaTowerBoundary : RSA.RSAConsumerIndexedUntanglingBoundary
 rsaTowerBoundary = RSA.canonicalRSAConsumerIndexedUntanglingBoundary
 
+rsaCostCollisionBoundary : CostCollision.HybridTailCostShapeCollisionBoundary
+rsaCostCollisionBoundary = CostCollision.canonicalHybridTailCostShapeCollisionBoundary
+
+rsaFactorCollisionBoundary : FactorCollision.FactorLayerStructureCollisionBoundary
+rsaFactorCollisionBoundary = FactorCollision.canonicalFactorLayerStructureCollisionBoundary
+
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
+
+rhWeldBoundary : RHWeld.LiteralPhaseModulationWeldBoundary
+rhWeldBoundary = RHWeld.canonicalLiteralPhaseModulationWeldBoundary
 
 productionFirstResidual : Production.ProductionResidual
 productionFirstResidual = Production.firstUnpaidProductionResidual
 
 ------------------------------------------------------------------------
--- Research queue: keep attacking residuals rather than stopping at one codec.
+-- Research queue: the current tail has now been attacked twice.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
-  recursivelyFactorRSAResidualBelowCurrentTail : ResearchUntanglingTarget
+  factorRawModePayloadBelowFactorStructureCollision : ResearchUntanglingTarget
   adversariallyAttackEveryProposedRSAQuotient : ResearchUntanglingTarget
+  testWhetherSomeRawLayersAreConsumerIrrelevant : ResearchUntanglingTarget
   deriveConsumerTerminalBeforeExactTerminalWhenPossible : ResearchUntanglingTarget
   separateDescriptionWitnessExecutionCosts : ResearchUntanglingTarget
   transportOnlyGenericUntanglingStructureIntoRH : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = recursivelyFactorRSAResidualBelowCurrentTail
+firstResearchUntanglingTarget = factorRawModePayloadBelowFactorStructureCollision
 
 ------------------------------------------------------------------------
 -- Production queue: historical A*/F.sols custody is not assumed available.
--- The canonical production-substitution owner already identifies the earlier
--- same-object fine-incidence/matrix carrier as the first unpaid residual.
 ------------------------------------------------------------------------
 
 data ProductionReconstructionTarget : Set where
@@ -75,18 +95,20 @@ firstProductionReconstructionTarget : ProductionReconstructionTarget
 firstProductionReconstructionTarget = acquireSameObjectFineIncidenceBearingLACarrier
 
 ------------------------------------------------------------------------
--- RH queue: same methodology, different terminal theorem.
+-- RH queue: phase coordinate found; now inhabit the same-carrier weld.
 ------------------------------------------------------------------------
 
 data RHAnalyticRefinementTarget : Set where
-  realizeProofRelevantTargetRelativePhase : RHAnalyticRefinementTarget
-  proveTargetTranslationModulationOnLiteralCarrier : RHAnalyticRefinementTarget
-  identifyFinalNearResponseWithLiteralFiniteSum : RHAnalyticRefinementTarget
+  inhabitUniversalPoleQuotientPhaseModulationWeld : RHAnalyticRefinementTarget
+  bindLiteralScalarFrequencyOrdinatePhaseCarriers : RHAnalyticRefinementTarget
+  proveEvenProjectionEqualsLiteralCosineKernel : RHAnalyticRefinementTarget
+  pushWeldThroughLiteralCellResponse : RHAnalyticRefinementTarget
+  deriveFiniteNearConsumerBudget : RHAnalyticRefinementTarget
   payStrictNearComplementConsumerMargin : RHAnalyticRefinementTarget
   closeOnlyThenPromoteRHTerminal : RHAnalyticRefinementTarget
 
 firstRHAnalyticRefinementTarget : RHAnalyticRefinementTarget
-firstRHAnalyticRefinementTarget = realizeProofRelevantTargetRelativePhase
+firstRHAnalyticRefinementTarget = inhabitUniversalPoleQuotientPhaseModulationWeld
 
 ------------------------------------------------------------------------
 -- Pareto interpretation.
@@ -102,17 +124,21 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
   field
     genericConsumerIndexedTowerPaid : Bool
     rsaFiniteExactTowerPaid : Bool
+    rsaFullCostShapeCollisionPaid : Bool
+    rsaFactorLayerStructureCollisionPaid : Bool
+    rawModePayloadIsNextRSAResidual : Bool
+    rawModePayloadProvedGloballyMinimal : Bool
     rhFiniteCollisionRefinementPaid : Bool
+    rhLiteralPhaseWeldInterfaceWritten : Bool
+    rhActualUniversalPoleQuotientWeldPaid : Bool
     researchShouldContinueBelowCurrentRSAResidual : Bool
-    scalarInvariantAccumulationDominatedWhenConsumerCollisionPersists : Bool
     productionSearchForUnpublishedIntermediateBytesRequired : Bool
     productionSubstitutionReturnsToFineIncidenceMatrixCarrier : Bool
     publishedRunEnvelopeUsedAsConstraintSurface : Bool
     independentExecutionMayProduceNewAStarGeneratorMksolArtifacts : Bool
     independentArtifactsAreHistoricalWithheldArtifacts : Bool
-    rhMayReuseGenericUntanglingStructure : Bool
     rsaFiniteReplayPaysRHAnalyticRepresentation : Bool
-    rhFiniteCollisionPaysStrictRHMargin : Bool
+    rhPhaseCoordinateAlonePaysStrictRHMargin : Bool
     adequacyMustPrecedeParetoRanking : Bool
     threeQueuesMayAdvanceIndependently : Bool
 open RSA260RHUntanglingRoadmapBoundary public
@@ -129,9 +155,13 @@ canonicalRSA260RHUntanglingRoadmapBoundary =
     false
     true
     true
+    false
     true
     false
     true
+    true
+    true
+    false
     false
     false
     true
