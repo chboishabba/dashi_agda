@@ -15,27 +15,29 @@ import DASHI.Wikimedia.IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurr
 -- OEIS SAME-INTEGER / DIFFERENT-ROLE COLLISION BOUNDARY
 --
 -- OEIS is valuable here precisely because it gives us both useful numerical
--- coordinates and a concrete warning against numeral-based object identity.
+-- coordinates and concrete warnings against numeral-based object identity.
 --
--- In particular, 17496 occurs in two genuinely Monster-adjacent contexts:
+-- First collision:
 --
---   * the source-paid N(3B) restriction degree
---         17496 = 2 * 729 * 12,
+--   * source-paid N(3B) restriction degree 17496 = 2 * 729 * 12;
+--   * OEIS A058678 / Monster class-42d McKay--Thompson coefficient 17496.
 --
---   * OEIS A058678, the class-42d McKay--Thompson series, where 17496 is an
---     unrelated series coefficient.
+-- Second, even stronger collision:
 --
--- Therefore even
+--   * OEIS A007255 / normalized Monster 6B McKay--Thompson q^6 coefficient
+--     is 32772;
+--   * the separately derived C6 weight-two Fourier spectrum has
+--     eigenspace multiplicities m1 = m5 = 32772.
 --
---   same integer + Monster context + genuine OEIS record
---
--- does NOT identify the same representation, character constituent, action,
--- basis, intertwiner, or same-object carrier.
+-- The second example is same integer + same Monster class + same OEIS series,
+-- yet the roles are still different: higher graded-trace coefficient versus
+-- weight-two cyclic eigenspace multiplicity.  Numerical equality therefore
+-- remains strictly weaker than object/grade/action identity.
 ------------------------------------------------------------------------
 
 pow : Nat → Nat → Nat
 pow b zero = 1
-pow b (suc n) = b * pow b n
+pow b (suc n) = b * pow 3 n
 
 a000244 : Nat → Nat
 a000244 n = pow 3 n
@@ -69,6 +71,16 @@ restriction17496Factorisation = Occurrence.twelvePairedDegree
 
 restriction113724Factorisation : 2 * 729 * 78 ≡ 113724
 restriction113724Factorisation = Occurrence.seventyEightPairedDegree
+
+sixBMcKayThompsonQSix32772 : Nat
+sixBMcKayThompsonQSix32772 = 32772
+
+weightTwoC6EigenspaceMultiplicity32772 : Nat
+weightTwoC6EigenspaceMultiplicity32772 = 32772
+
+same32772Integer :
+  sixBMcKayThompsonQSix32772 ≡ weightTwoC6EigenspaceMultiplicity32772
+same32772Integer = refl
 
 ------------------------------------------------------------------------
 -- Source-bounded OEIS manifestations.
@@ -129,6 +141,17 @@ oeisA058678 = Attribution.mkNoDOISource
   "Monster-adjacent numerical provenance whose listed coefficients include 17496; explicitly not the N(3B) 17496 restriction constituent"
   Attribution.publicAttribution
 
+oeisA007255 : Attribution.AttributedSource
+oeisA007255 = Attribution.mkNoDOISource
+  "N. J. A. Sloane; OEIS contributors"
+  "A007255: normalized McKay-Thompson series of class 6B for Monster"
+  "On-Line Encyclopedia of Integer Sequences"
+  "retrieved 2026-09-15"
+  "https://oeis.org/A007255"
+  (Attribution.namedSourceKind "integer-sequence database record")
+  "normalized 6B series provenance including q^1=78 and q^6=32772; q^6=32772 does not identify the independently derived weight-two C6 eigenspace multiplicity 32772"
+  Attribution.publicAttribution
+
 oeisA199014 : Attribution.AttributedSource
 oeisA199014 = Attribution.mkNoDOISource
   "Omar E. Pol; OEIS contributors"
@@ -156,6 +179,7 @@ a005052Attribution = Snowball.canonicalSourceRoleSnowballReceipt oeisA005052
 a001379Attribution = Snowball.canonicalSourceRoleSnowballReceipt oeisA001379
 a014708Attribution = Snowball.canonicalSourceRoleSnowballReceipt oeisA014708
 a058678Attribution = Snowball.canonicalSourceRoleSnowballReceipt oeisA058678
+a007255Attribution = Snowball.canonicalSourceRoleSnowballReceipt oeisA007255
 a199014Attribution = Snowball.canonicalSourceRoleSnowballReceipt oeisA199014
 a309510Attribution = Snowball.canonicalSourceRoleSnowballReceipt oeisA309510
 
@@ -200,6 +224,11 @@ mckayThompson42d17496 = oeis-role-coordinate
   "A058678" "McKay-Thompson series of Monster class 42d" 17496
   "series coefficient; deliberately not the N(3B) restriction constituent" false false
 
+mckayThompson6BQSix32772 : OEISRoleCoordinate
+mckayThompson6BQSix32772 = oeis-role-coordinate
+  "A007255" "normalized McKay-Thompson series of Monster class 6B" 32772
+  "q^6 graded-trace coefficient; deliberately not the weight-two C6 eigenspace multiplicity" false false
+
 divisors196884 : OEISRoleCoordinate
 divisors196884 = oeis-role-coordinate
   "A199014" "divisors of 196884" 196884
@@ -211,7 +240,7 @@ divisors196883 = oeis-role-coordinate
   "integer/divisor surface only" false false
 
 ------------------------------------------------------------------------
--- Same-number collision counterexample.
+-- Same-number collision counterexamples.
 ------------------------------------------------------------------------
 
 record SameIntegerRoleCollision : Set where
@@ -238,8 +267,20 @@ monster17496Collision = same-integer-role-collision
   "degree of the source-paid N(3B) constituent factoring as 2*729*12"
   true true false false false
 
+monster6BSameSeries32772Collision : SameIntegerRoleCollision
+monster6BSameSeries32772Collision = same-integer-role-collision
+  "OEIS A007255 / normalized Monster class 6B McKay-Thompson series"
+  "IbrahimMonster6BWeightTwoC6FourierOEISExact / independently derived C6 spectrum"
+  32772
+  "q^6 coefficient of the normalized 6B graded trace"
+  "weight-two eigenvalue multiplicity m1=m5 for the C6 action"
+  true true false false false
+
 sameIntegerCollisionCounterexamplePaid : Bool
 sameIntegerCollisionCounterexamplePaid = true
+
+sameSeriesDifferentRoleCollisionPaid : Bool
+sameSeriesDifferentRoleCollisionPaid = true
 
 oeisPaysNumericalCoordinateOnly : Bool
 oeisPaysNumericalCoordinateOnly = true
@@ -250,6 +291,7 @@ oeisPaysNumericalCoordinateOnly = true
 
 data SameIntegerMonsterContextIdentifiesObject : Set where
 data McKayThompson42d17496IdentifiesRestriction17496 : Set where
+data SameSixBSeries32772IdentifiesWeightTwoEigenspace : Set where
 data A001379CreatesLiteralMonsterAction : Set where
 data A014708CreatesVOASameObjectWeld : Set where
 data A000244CreatesStoneVonNeumannTheorem : Set where
@@ -263,6 +305,10 @@ sameIntegerMonsterContextDoesNotIdentifyObject ()
 mcKayThompson42d17496DoesNotIdentifyRestriction17496 :
   McKayThompson42d17496IdentifiesRestriction17496 → ⊥
 mcKayThompson42d17496DoesNotIdentifyRestriction17496 ()
+
+sameSixBSeries32772DoesNotIdentifyWeightTwoEigenspace :
+  SameSixBSeries32772IdentifiesWeightTwoEigenspace → ⊥
+sameSixBSeries32772DoesNotIdentifyWeightTwoEigenspace ()
 
 a001379DoesNotCreateLiteralAction : A001379CreatesLiteralMonsterAction → ⊥
 a001379DoesNotCreateLiteralAction ()
@@ -291,10 +337,12 @@ record OEISSameIntegerCollisionFrontier : Set where
     monsterDegreeCoordinatePaid : Bool
     jCoefficientCoordinatePaid : Bool
     monster42dCoordinatePaid : Bool
+    monster6BSameSeries32772CoordinatePaid : Bool
     divisor196883CoordinatePaid : Bool
     divisor196884CoordinatePaid : Bool
     restriction17496OccurrencePaidUpstream : Bool
     sameIntegerCollisionPaid : Bool
+    sameSeriesDifferentRoleCollisionPaidInFrontier : Bool
     sameIntegerCreatesSameObject : Bool
     oeisCreatesCharacterOccurrence : Bool
     nextResidual : String
@@ -302,8 +350,8 @@ open OEISSameIntegerCollisionFrontier public
 
 currentOEISSameIntegerCollisionFrontier : OEISSameIntegerCollisionFrontier
 currentOEISSameIntegerCollisionFrontier = oeis-same-integer-collision-frontier
-  true true true true true true true true true false false
-  "retain OEIS as role-indexed numerical/search provenance. In particular, use A058678's independent Monster-context 17496 collision as a regression against numeral-based promotion. The theorem-bearing 12+78 lane must continue through the source-native N(3B) restriction/action and same-action character/intertwiner receipts; no OEIS occurrence, even a Monster-related one with the same integer, can pay that identity step."
+  true true true true true true true true true true true false false
+  "retain OEIS as role-indexed numerical/search provenance. A058678 versus N(3B) gives a cross-source 17496 collision; A007255 q^6 versus the independently derived 6B weight-two C6 spectrum gives the stronger same-class/same-sequence 32772 collision. Both are regressions against numeral-based promotion. The theorem-bearing 12+78 lane must continue through source-native N(3B) action/character/intertwiner receipts, and the 6B spectral lane through a literal same-element graded VOA action; no repeated integer pays either identity step."
 
 restrictionOccurrenceFrontier : Occurrence.RestrictionOccurrenceFrontier
 restrictionOccurrenceFrontier = Occurrence.currentRestrictionOccurrenceFrontier
