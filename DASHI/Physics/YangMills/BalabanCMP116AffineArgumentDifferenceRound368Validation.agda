@@ -1,3 +1,0 @@
-module DASHI.Physics.YangMills.BalabanCMP116AffineArgumentDifferenceRound368Validation where
-
-import DASHI.Physics.YangMills.BalabanCMP116AffineArgumentDifferenceRound368Exact
