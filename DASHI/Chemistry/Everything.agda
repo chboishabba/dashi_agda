@@ -180,3 +180,17 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConsumerSafe
 -- observer.  The included no-action dynamics is only a repository interface
 -- fixture and is blocked from promotion to physical AdK kinetics or rates.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConsumerSafeFuturePromotionExact
+
+-- Preferred nontrivial future-dynamics continuation: the six source-owned
+-- alpha/beta/gamma/delta/epsilon/xi route edges become typed admissible actions.
+-- The graph coordinate moves while the independent third-axis consumer world is
+-- preserved, so dynamic safety is proved without identifying the two carriers.
+-- Route topology remains computational/source-bounded, not experimental kinetics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBoundedFutureDynamicsExact
+
+-- Composite source-bounded future promotion: the Pareto-selected three-axis
+-- model is now welded to the non-empty graph action system through an explicit
+-- application realisation relation.  Static selection, query adequacy, frozen
+-- selection and dynamic safety remain independent payments; source attribution
+-- is not transferred into the DASHI composition theorem.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBoundedConsumerSafeFuturePromotionExact
