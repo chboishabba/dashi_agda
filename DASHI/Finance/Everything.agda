@@ -12,6 +12,7 @@ import DASHI.Finance.TradeRealizationSharpeAuthorityExact
 -- tranche.  Documentary ownership/timing edges remain separate from PNF,
 -- game-theoretic interpretation and dashiTRADE execution authority.
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact
+import DASHI.Finance.TrumpFamilyTradePrimarySourceExtensionExact
 import DASHI.Finance.TrumpFamilyTradePNFBridgeExact
 import DASHI.Finance.TrumpFamilyTradeGameTheoryBridgeExact
 import DASHI.Finance.TrumpFamilyTradeAcquisitionFrontierExact
