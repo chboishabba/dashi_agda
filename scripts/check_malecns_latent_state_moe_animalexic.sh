@@ -6,6 +6,7 @@ bidi="DASHI/Reasoning/MaleCNSJointConsumerBidiRefinementExact.agda"
 kernel="DASHI/Core/ConsumerFamilyRefinementKernelExact.agda"
 trial_context="DASHI/Reasoning/MaleCNSStructureFunctionTrialContextRefinementExact.agda"
 pareto="DASHI/Reasoning/MaleCNSConsumerRelativeLatentParetoExact.agda"
+acquisition="DASHI/Reasoning/MaleCNSIndependentReplicationAcquisitionFrontierExact.agda"
 validation="DASHI/Reasoning/MaleCNSLatentStateMoEGrokkingAnimalexicValidation.agda"
 
 [[ -f "$owner" ]]
@@ -13,6 +14,7 @@ validation="DASHI/Reasoning/MaleCNSLatentStateMoEGrokkingAnimalexicValidation.ag
 [[ -f "$kernel" ]]
 [[ -f "$trial_context" ]]
 [[ -f "$pareto" ]]
+[[ -f "$acquisition" ]]
 [[ -f "$validation" ]]
 
 grep -q 'record LatentStateProgrammeBoundary' "$owner"
@@ -74,11 +76,23 @@ grep -q 'd2LowestObservedMAE' "$pareto"
 grep -q 'senderGainRemainsParetoTradeoff' "$pareto"
 grep -q 'discoveryBestDimensionPromotesUniversalMinimum' "$pareto"
 
+grep -q 'resolvedSelectedRows = 1209' "$acquisition"
+grep -q 'allSixTrialsSearched = true' "$acquisition"
+grep -q 'record PublicAccessArchaeologyBoundary' "$acquisition"
+grep -q 'princetonMirrorAdvertised' "$acquisition"
+grep -q 'pdcGenericGlobusSupportObserved' "$acquisition"
+grep -q 'historicalPrincetonHPCNamespaceObserved' "$acquisition"
+grep -q '/scratch/gpfs/albertl/rigE_data/' "$acquisition"
+grep -q 'datasetSpecificPublicGlobusEndpointObserved' "$acquisition"
+grep -q 'internalHPCPathCreatesPublicAccessReceipt' "$acquisition"
+grep -q 'sameTrialAnatomyOrExecutedTransformStillRequired' "$acquisition"
+
 grep -q 'MaleCNSLatentStateMoEGrokkingAnimalexicCrossPollinationExact' "$validation"
 grep -q 'MaleCNSJointConsumerBidiRefinementExact' "$validation"
 grep -q 'ConsumerFamilyRefinementKernelExact' "$validation"
 grep -q 'MaleCNSStructureFunctionTrialContextRefinementExact' "$validation"
 grep -q 'MaleCNSConsumerRelativeLatentParetoExact' "$validation"
+grep -q 'MaleCNSIndependentReplicationAcquisitionFrontierExact' "$validation"
 grep -q 'FunctionalConnectomeBodyMemoryBridge' "$validation"
 grep -q 'IntersectionalLongitudinalProxyTransitionBridge' "$validation"
 grep -q 'AnimalexicDrosophilaEmbodiedBridge' "$validation"
