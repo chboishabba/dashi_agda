@@ -1,0 +1,15 @@
+module DASHI.ComputerScience.RSA260BidiSignedResidualAStarSearchValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiSignedResidualAStarSearchExact as Search
+
+boundary : Search.SignedResidualAStarSearchBoundary
+boundary = Search.canonicalSignedResidualAStarSearchBoundary
+
+fullAndSketchSharePlateauObservation :
+  Search.aStarObserve Search.fullResidualSearchState
+  ≡ Search.aStarObserve Search.sketchResidualSearchState
+fullAndSketchSharePlateauObservation =
+  Search.fullAndSketchShareAStarObservation
+
+firstResidual : Search.SignedResidualAStarSearchResidual
+firstResidual = Search.firstSignedResidualAStarSearchResidual
