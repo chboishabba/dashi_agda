@@ -28,9 +28,9 @@ module DASHI.Physics.YangMills.BalabanCMP116SharedMarkedAmplitudeDirectRound346E
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Common
@@ -44,6 +44,7 @@ import DASHI.Physics.YangMills.BalabanCMP116R281ModeSelectedDirectRound341Exact 
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact as Geometric
 import DASHI.Physics.YangMills.BalabanCMP116TwoSourceTrajectoryRound280Exact as R280
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanQuantitativePositiveTimeCyclicityRound299Exact as R299
 import DASHI.Physics.YangMills.BalabanCyclicSubgapNonzeroByConstructionRound297Exact as R297
@@ -71,8 +72,6 @@ record SharedMarkedAmplitudeDirectCMP116Source
     shared : Shared.SharedMarkedAnalyticShellControl
       (R318.Scale base) (R318.Volume base) (R318.Root base)
 
-    -- The one source/application theorem, already on the selected literal
-    -- mixed-log response and the actual T5 root/distance coordinates.
     literalSelectedDifferentiatedLocalization :
       ∀ cutoff observable time →
       let
@@ -94,8 +93,6 @@ record SharedMarkedAmplitudeDirectCMP116Source
           (R318.connectingRoot base cutoff left right)
           (R318.physicalDistance base left right)
 
-    -- Physical meaning of the selected T5 pair.  No source-native second
-    -- distance coordinate is introduced.
     selectedPhysicalDistanceIsTime : ∀ observable time →
       let
         index = R300.indexFor decomposition observable time
@@ -104,7 +101,6 @@ record SharedMarkedAmplitudeDirectCMP116Source
         (R278.left tests index) (R278.right tests index)
       ≡ time
 
-    -- Standard ordered-limit authority on the concrete rational carrier.
     rationalUpperClosedUnderSelectedLimit :
       (sequence : Nat → ℚ) (target upper : ℚ) →
       Gram.Converges (Gram.scalarConvergence dataSet) sequence target →
@@ -144,7 +140,7 @@ fastAmplitudeNonnegative :
       dataSet extension tests quantitative family}
     (source : SharedMarkedAmplitudeDirectCMP116Source
       base demands tests quantitative family decomposition) →
-  Data.Rational.Base.0ℚ ≤ fastAmplitude source
+  0ℚ ≤ fastAmplitude source
 fastAmplitudeNonnegative source =
   Geometric.markedBaseEnergyNonnegative (shared source) Shared.hessianMark
 
@@ -167,8 +163,7 @@ finiteSelectedUpper :
   R278.connectedCovarianceMagnitude extension
     (Gram.measureSequence dataSet cutoff)
     (R278.left tests index) (R278.right tests index)
-  ≤ fastAmplitude source * Power.rationalPower
-      DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.half time
+  ≤ fastAmplitude source * Power.rationalPower Geo.half time
 finiteSelectedUpper
     {dataSet = dataSet} {extension = extension} {base = base}
     {demands = demands} {tests = tests} {decomposition = decomposition}
@@ -177,8 +172,6 @@ finiteSelectedUpper
     index = R300.indexFor decomposition observable time
     left = R278.left tests index
     right = R278.right tests index
-    leftJ = Cumulant.sourceDirectionOf (R318.meaning base) left
-    rightJ = Cumulant.sourceDirectionOf (R318.meaning base) right
     commonInside =
       Common.sourceCoordinateInside
         (R114.canonicalCMP116CommonDomain
@@ -206,8 +199,7 @@ finiteSelectedUpper
       (λ distance →
         R278.connectedCovarianceMagnitude extension
           (Gram.measureSequence dataSet cutoff) left right
-        ≤ fastAmplitude source
-          * DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.halfPower distance)
+        ≤ fastAmplitude source * Geo.halfPower distance)
       (selectedPhysicalDistanceIsTime source observable time)
       covarianceBelowGeometric
   in
@@ -248,8 +240,7 @@ continuumSelectedUpper
       (Gram.continuumMeasure dataSet)
       (R278.left tests (R300.indexFor decomposition observable time))
       (R278.right tests (R300.indexFor decomposition observable time)))
-    (fastAmplitude source * Power.rationalPower
-      DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.half time)
+    (fastAmplitude source * Power.rationalPower Geo.half time)
     (R278.selectedConnectedCovarianceMagnitudeConverges
       extension tests (R300.indexFor decomposition observable time))
     (λ cutoff → finiteSelectedUpper source cutoff observable time)
