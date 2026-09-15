@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.BalabanCMP116HessianBidiBridgeRound375Validation 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Bool using (true; false)
 
 import DASHI.Physics.YangMills.BalabanCMP116HessianBidiBridgeRound375Exact as R375
 
