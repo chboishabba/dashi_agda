@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import DASHI.Algebra.Trit using (pos; neg)
 
 import DASHI.Algebra.TriadicDepthOneCharacters as DepthOne
 import DASHI.Moonshine.C3FourierConjugationExact as Fourier
@@ -11,6 +12,7 @@ import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.GradedRepresentation as GR
 import DASHI.Moonshine.Monster3BPhaseTransportExact as Phase
 import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
+import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact as Schrodinger
 import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact as VOAAdapter
 import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact as Zeta54
 import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as LinearZeta
@@ -28,16 +30,11 @@ import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 --      -> exact cyclotomic scalar C3.zeta
 --      -> literal VOA phaseZeta eigenspace.
 --
--- The first arrow is an exact finite Fourier/Monster phase chart.  The latter
--- two arrows are stronger: Base369Monster3BVOAActionPhaseAdapterBidiExact puts
--- the exact Q(zeta_3) scalar on the SAME literal VOA carrier and defines the
--- literal zeta sector as that dependent central eigenspace.
---
--- What is NOT yet paid is the representation-layer completion:
---   literal zeta eigenspace -> actual linear W_zeta,
---   finite Schrodinger H_zeta model -> that same actual W_zeta,
---   S_zeta = Hom_E(H_zeta,W_zeta),
---   evaluation/intertwiner -> 12 + 78 decomposition.
+-- The finite Schrodinger model independently uses that SAME C3.zeta object as
+-- its positive modulation phase, so the model/VOA scalar mismatch is already
+-- closed at the cyclotomic-value level.  The remaining debt is not "which
+-- zeta?" but whether the finite H_zeta model is the actual Heisenberg
+-- constituent acting on the same literal W_zeta carrier.
 --
 -- Base369's 54-site zeta-sheet carrier is retained only as a conjugate-sheet
 -- chart.  Its constructor name `zetaSheet` is not promoted to literal equality
@@ -79,7 +76,24 @@ cyclotomicConjugationMatchesSelectedInverseScalar :
 cyclotomicConjugationMatchesSelectedInverseScalar = C3.conjugateZetaIsZetaSquared
 
 ------------------------------------------------------------------------
--- 3. On any inhabited literal VOA phase source, the chosen zeta sector is
+-- 3. The finite Schrodinger H_zeta MODEL uses the same exact scalar object.
+------------------------------------------------------------------------
+
+schrodingerPositivePhaseIsExactZeta :
+  Schrodinger.phase pos ≡ C3.zeta
+schrodingerPositivePhaseIsExactZeta = refl
+
+schrodingerNegativePhaseIsExactZetaSquared :
+  Schrodinger.phase neg ≡ C3.zetaSquared
+schrodingerNegativePhaseIsExactZetaSquared = refl
+
+schrodingerPositivePhaseMatchesVOAZetaScalar :
+  Schrodinger.phase pos
+  ≡ VOAAdapter.phaseCyclotomic Inertia.phaseZeta
+schrodingerPositivePhaseMatchesVOAZetaScalar = refl
+
+------------------------------------------------------------------------
+-- 4. On any inhabited literal VOA phase source, the chosen zeta sector is
 --    definitionally the dependent phaseZeta eigenspace on that SAME carrier.
 ------------------------------------------------------------------------
 
@@ -93,7 +107,7 @@ literalVOAZetaSectorIsSelectedEigenspace :
 literalVOAZetaSectorIsSelectedEigenspace source = refl
 
 ------------------------------------------------------------------------
--- 4. Existing downstream frontiers.  These are retained, not promoted.
+-- 5. Existing downstream frontiers.  These are retained, not promoted.
 ------------------------------------------------------------------------
 
 linearZetaFrontier : LinearZeta.LinearZetaSectorFrontier
@@ -107,15 +121,15 @@ zeta54Boundary = Zeta54.canonicalZetaHeisenbergFiftyFourBoundary
 
 nextZetaResidual : String
 nextZetaResidual =
-  "instantiate the existing literal VOA zeta eigenspace as the actual linear W_zeta on the same selected 3B action; then identify the finite Stone-von-Neumann H_zeta model with the corresponding actual Heisenberg constituent and construct S_zeta = Hom_E(H_zeta,W_zeta). The current Base369 54-site zeta-sheet chart and shared zeta notation do not discharge either same-object recognition."
+  "instantiate the existing literal VOA phaseZeta eigenspace as the actual linear W_zeta on the same selected 3B action, and weld the finite Schrodinger function module—which already uses the identical C3.zeta scalar—to the actual Heisenberg constituent H_zeta on that same carrier. Then construct S_zeta = Hom_E(H_zeta,W_zeta) and its evaluation/intertwiner. The Base369 54-site zeta-sheet chart and shared zeta notation do not discharge that representation-level recognition."
 
 ------------------------------------------------------------------------
--- 5. WrongType firewalls.
+-- 6. WrongType firewalls.
 ------------------------------------------------------------------------
 
 data SameZetaGlyphCreatesSameObject : Set where
 data Zeta54SheetCreatesCyclotomicScalar : Set where
-data CyclotomicPolynomialCreatesActualWZeta : Set where
+data SameCyclotomicScalarCreatesActualRepresentationIdentity : Set where
 data FiniteHeisenbergModelCreatesActualHZetaRecognition : Set where
 data LiteralZetaSectorCreatesLinearHomIntertwiner : Set where
 
@@ -125,9 +139,9 @@ sameZetaGlyphDoesNotCreateSameObject ()
 zeta54SheetDoesNotCreateCyclotomicScalar : Zeta54SheetCreatesCyclotomicScalar → ⊥
 zeta54SheetDoesNotCreateCyclotomicScalar ()
 
-cyclotomicPolynomialDoesNotCreateActualWZeta :
-  CyclotomicPolynomialCreatesActualWZeta → ⊥
-cyclotomicPolynomialDoesNotCreateActualWZeta ()
+sameCyclotomicScalarDoesNotCreateRepresentationIdentity :
+  SameCyclotomicScalarCreatesActualRepresentationIdentity → ⊥
+sameCyclotomicScalarDoesNotCreateRepresentationIdentity ()
 
 finiteHeisenbergModelDoesNotCreateActualRecognition :
   FiniteHeisenbergModelCreatesActualHZetaRecognition → ⊥
@@ -138,7 +152,7 @@ literalSectorDoesNotCreateLinearHomIntertwiner :
 literalSectorDoesNotCreateLinearHomIntertwiner ()
 
 ------------------------------------------------------------------------
--- 6. Frontier summary.
+-- 7. Frontier summary.
 ------------------------------------------------------------------------
 
 record Monster369ZetaWeldBoundary : Set where
@@ -146,6 +160,7 @@ record Monster369ZetaWeldBoundary : Set where
   field
     fourierZetaMapsToMonsterZeta : Bool
     inertiaZetaMapsToExactCyclotomicZeta : Bool
+    schrodingerModelUsesSameCyclotomicZeta : Bool
     literalVOAZetaSectorUsesThatPhase : Bool
     linearRestrictionReusesLiteralZetaSector : Bool
     base369ZetaSheetIsLiteralCyclotomicScalar : Bool
@@ -158,6 +173,6 @@ open Monster369ZetaWeldBoundary public
 canonicalMonster369ZetaWeldBoundary : Monster369ZetaWeldBoundary
 canonicalMonster369ZetaWeldBoundary =
   monster-369-zeta-weld-boundary
-    true true true true
+    true true true true true
     false false false false
     nextZetaResidual
