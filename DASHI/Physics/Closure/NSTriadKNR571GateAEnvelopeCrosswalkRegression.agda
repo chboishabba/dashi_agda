@@ -36,6 +36,10 @@ radialCurvatureSquareGapRationalizationClosed :
   A2Square.r571A2CenteredRadiusDefectSquareGapRationalized ≡ true
 radialCurvatureSquareGapRationalizationClosed = refl
 
+radialCurvatureTriangleExcessFactorizationClosed :
+  A2Square.r571A2TriangleExcessPolarizationFactorizationClosed ≡ true
+radialCurvatureTriangleExcessFactorizationClosed = refl
+
 radialCurvatureUsesExistingGapProductDonor :
   A2Square.r571A2R127SquareGapAlgebraReused ≡ true
 radialCurvatureUsesExistingGapProductDonor = refl
