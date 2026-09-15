@@ -25,18 +25,23 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product.Base using (_,_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNF4ProjectedOutputPairingRound39Exact as R39
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as S0
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionProjectedPairingExact as S2a
 import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104Exact as LayerCake
 
 F : C3.RealField _
 F = Rational.rationalRealField
+
+------------------------------------------------------------------------
+-- Canonical raw R104 band data.
+------------------------------------------------------------------------
 
 literalBandTransfer :
   ∀ {E : C3.IntegerEmbedding F}
@@ -46,20 +51,10 @@ literalBandTransfer :
   LayerCake.BandTransfer
 literalBandTransfer system mode =
   ( S0.dyadicCriticalWeight mode
-  , S2a.weightedProjectedPairing system (mode ∷ [])
+  , R39.realHermitianPower
+      (Audit.velocity system mode)
+      (Audit.projectedNonlinearity system mode)
   )
-
--- For one mode, S2a's singleton fold is exactly the unweighted projected
--- pairing, so the R104 band transfer can be exposed without inventing a second
--- scalar observable.
-singletonTransferMeaning :
-  ∀ {E : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F E} →
-  (system : Audit.FiniteComplex3GalerkinSystem F E I) →
-  (mode : Z3.FourierMode) →
-  LayerCake.transfer (literalBandTransfer system mode)
-  ≡ S2a.weightedProjectedPairing system (mode ∷ [])
-singletonTransferMeaning system mode = refl
 
 literalBandTransfers :
   ∀ {E : C3.IntegerEmbedding F}
@@ -71,45 +66,12 @@ literalBandTransfers system [] = []
 literalBandTransfers system (mode ∷ rest) =
   literalBandTransfer system mode ∷ literalBandTransfers system rest
 
-------------------------------------------------------------------------
--- Exact weighted fold identity.
---
--- `literalBandTransfer` deliberately stores the singleton S2a fold as the
--- transfer coordinate. Since the singleton S2a fold is itself
---   w(k) * Re<u_k,N_k>,
--- R104's weightedTransfer would square the weight. That is not the desired
--- carrier. Therefore expose the correct raw transfer directly below instead.
-------------------------------------------------------------------------
-
-rawLiteralBandTransfer :
-  ∀ {E : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F E} →
-  Audit.FiniteComplex3GalerkinSystem F E I →
-  Z3.FourierMode →
-  LayerCake.BandTransfer
-rawLiteralBandTransfer system mode =
-  ( S0.dyadicCriticalWeight mode
-  , S2a.R39.realHermitianPower
-      (Audit.velocity system mode)
-      (Audit.projectedNonlinearity system mode)
-  )
-
-rawLiteralBandTransfers :
-  ∀ {E : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F E} →
-  Audit.FiniteComplex3GalerkinSystem F E I →
-  List Z3.FourierMode →
-  List LayerCake.BandTransfer
-rawLiteralBandTransfers system [] = []
-rawLiteralBandTransfers system (mode ∷ rest) =
-  rawLiteralBandTransfer system mode ∷ rawLiteralBandTransfers system rest
-
 weightedTransferIsWeightedProjectedPairing :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
   (system : Audit.FiniteComplex3GalerkinSystem F E I) →
   (modes : List Z3.FourierMode) →
-  LayerCake.weightedTransfer (rawLiteralBandTransfers system modes)
+  LayerCake.weightedTransfer (literalBandTransfers system modes)
   ≡ S2a.weightedProjectedPairing system modes
 weightedTransferIsWeightedProjectedPairing system [] = refl
 weightedTransferIsWeightedProjectedPairing system (mode ∷ rest) =
@@ -122,15 +84,13 @@ literalCriticalProductionIsTwiceR104WeightedTransfer :
   (system : Audit.FiniteComplex3GalerkinSystem F E I) →
   S0.criticalProductionRate system
   ≡ S0.two * LayerCake.weightedTransfer
-      (rawLiteralBandTransfers system (Audit.modes system))
+      (literalBandTransfers system (Audit.modes system))
 literalCriticalProductionIsTwiceR104WeightedTransfer system =
   trans
     (S2a.literalCriticalProductionIsTwiceWeightedProjectedPairing system)
     (cong (S0.two *_)
       (sym (weightedTransferIsWeightedProjectedPairing
         system (Audit.modes system))))
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 ------------------------------------------------------------------------
 -- Status / boundary.
