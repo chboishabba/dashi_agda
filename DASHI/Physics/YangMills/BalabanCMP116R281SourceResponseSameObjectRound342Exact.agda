@@ -16,20 +16,29 @@ module DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342
 -- source identity from citation/provenance.  Supplying B1, B2, and the standard
 -- R278 order-closure theorem mechanically reconstructs the existing R341
 -- application.
+--
+-- Archaeology refinement: R321 already isolated the older CMP109 E^(2)/Pi
+-- source-response <-> selected normalized mixed-log response weld.  The generic
+-- two-source calculus also already proves that the literal J-direction mixed
+-- log derivative is the same selected mixed-log derivative.  Therefore B1 need
+-- not be re-proved from scratch: after ONE source-source identification between
+-- R338's canonical CMP116 differentiated magnitude and R321's E^(2)/Pi source
+-- magnitude, the old R321 weld compiles to the current R341 B1 consumer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as Common
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
+import DASHI.Physics.YangMills.BalabanCMP109SelectedT5SameObjectRound321Exact as R321
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338Exact as R338
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
 import DASHI.Physics.YangMills.BalabanCMP116R281ModeSelectedDirectRound341Exact as R341
@@ -67,6 +76,75 @@ record SourceResponseSameObjectPayment
           leftJ rightJ cutoff)
 
 open SourceResponseSameObjectPayment public
+
+------------------------------------------------------------------------
+-- Cross-pollinate the older R321 same-object weld.
+--
+-- R321 already owns the *shape* of the source E^(2)/Pi <-> selected mixed-log
+-- response identity.  The only extra physical/source coordinate needed to reuse
+-- it here is that R338's canonical CMP116 response magnitude is literally that
+-- same R321 source E^(2)/Pi magnitude on the selected scale/volume/J pair.
+------------------------------------------------------------------------
+
+record CMP109CMP116SourceResponseIdentity
+    {Measure TestObservable : Set}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    (base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension)
+    (demands : R104.CMP116FiniteNormalizedAnalyticDemands)
+    (source : R338.CanonicalCommonDomainCMP116Source base demands)
+    (cmp109Source : R321.PublishedCMP109SelectedShellPayment base)
+    : Set₁ where
+  field
+    canonicalCMP116MagnitudeIsCMP109E2PiMagnitude :
+      ∀ cutoff left right →
+      R338.differentiatedMagnitude source
+        (R318.scaleOf base cutoff) (R318.volumeOf base cutoff)
+        (Cumulant.sourceDirectionOf (R318.meaning base) left)
+        (Cumulant.sourceDirectionOf (R318.meaning base) right)
+      ≡
+      R321.sourceE2PiMagnitude cmp109Source cutoff left right
+
+open CMP109CMP116SourceResponseIdentity public
+
+r321SameObjectBuildsB1AfterSourceIdentity :
+  ∀ {Measure TestObservable SpectralObservable Energy}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    {demands : R104.CMP116FiniteNormalizedAnalyticDemands}
+    {source : R338.CanonicalCommonDomainCMP116Source base demands}
+    {tests : R278.SelectedConnectedCovarianceTests dataSet}
+    {spectrumSource : R281.ContinuumCovarianceSpectrumData dataSet extension tests}
+    {cmp109Source : R321.PublishedCMP109SelectedShellPayment base} →
+  CMP109CMP116SourceResponseIdentity base demands source cmp109Source →
+  R321.SelectedT5CMP109SameObject base cmp109Source →
+  SourceResponseSameObjectPayment base demands source tests spectrumSource
+r321SameObjectBuildsB1AfterSourceIdentity
+    {extension = extension} {base = base} {tests = tests}
+    {spectrumSource = spectrumSource} {cmp109Source = cmp109Source}
+    sourceIdentity oldWeld = record
+  { sourceMagnitudeIsSelectedMixedLogMagnitude = λ cutoff observable time →
+      let
+        index = R281.indexFor spectrumSource observable time
+        left = R278.left tests index
+        right = R278.right tests index
+        sourceToOld =
+          canonicalCMP116MagnitudeIsCMP109E2PiMagnitude
+            sourceIdentity cutoff left right
+        oldToSelected =
+          sym (R321.selectedMixedDerivativeMagnitudeIsSourceE2Pi
+            oldWeld cutoff left right)
+        literalToSelected =
+          cong
+            (λ response → R278.magnitude extension (response cutoff))
+            (Cumulant.logSecondDirectionAgrees (R318.meaning base) left right)
+      in
+      trans sourceToOld (trans oldToSelected (sym literalToSelected))
+  }
+
+r321SameObjectCanFeedB1AfterSourceIdentity : Bool
+r321SameObjectCanFeedB1AfterSourceIdentity = true
 
 ------------------------------------------------------------------------
 -- Keep B2 independent.
@@ -140,9 +218,13 @@ asRound341Application b1 b2 limitClosure = record
 round342CompilerLevel : ProofLevel
 round342CompilerLevel = machineChecked
 
--- B1 remains the physical/source same-object payment.
+-- The current B1 can be supplied directly, but the preferred archaeology route
+-- reuses R321 and reduces the novel payment to the CMP109/CMP116 source identity.
 round342SourceResponseSameObjectLevel : ProofLevel
 round342SourceResponseSameObjectLevel = conditional
+
+round342CMP109CMP116SourceIdentityLevel : ProofLevel
+round342CMP109CMP116SourceIdentityLevel = conditional
 
 -- B2 remains an independent quantitative calibration payment.
 round342EnvelopeCalibrationLevel : ProofLevel
