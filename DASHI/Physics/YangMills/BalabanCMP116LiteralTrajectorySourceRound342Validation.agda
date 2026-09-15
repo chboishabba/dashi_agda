@@ -8,7 +8,7 @@ module DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Valid
 -- compile is the Round342 source constructor which removes the post-hoc
 -- source-magnitude equality from the R341 route.
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Exact as R342
