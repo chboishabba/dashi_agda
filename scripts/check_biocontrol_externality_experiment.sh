@@ -14,6 +14,7 @@ FILES=(
   DASHI/Environment/BiocontrolChemistryActiveDiscriminatorRegression.agda
   DASHI/Environment/BiocontrolChemistryObserverParetoRegression.agda
   DASHI/Environment/BiocontrolChemistryParetoExperimentSchedulerRegression.agda
+  DASHI/Environment/BiocontrolChemistryAcquisitionPromotionRegression.agda
   DASHI/Environment/SpringfieldLakesAquaticWeedMechanicalRemovalRegression.agda
   DASHI/Environment/SpringfieldLakesInterventionGeometryRegression.agda
   DASHI/Environment/BiocontrolFirstImplementationRegression.agda
@@ -29,6 +30,7 @@ FILES=(
   DASHI/Environment/BiocontrolChemistryActiveDiscriminatorExact.agda
   DASHI/Environment/BiocontrolChemistryObserverParetoExact.agda
   DASHI/Environment/BiocontrolChemistryParetoExperimentSchedulerExact.agda
+  DASHI/Environment/BiocontrolChemistryAcquisitionPromotionExact.agda
   DASHI/Environment/SpringfieldLakesAquaticWeedMechanicalRemovalExact.agda
   DASHI/Environment/SpringfieldLakesInterventionGeometryExact.agda
   DASHI/Environment/BiocontrolFirstImplementationExact.agda
