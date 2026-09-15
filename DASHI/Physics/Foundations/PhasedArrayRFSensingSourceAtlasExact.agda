@@ -33,7 +33,7 @@ rfPosePrimary = Source.mkNoDOISource
 
 csiModelSurvey : Source.AttributedSource
 csiModelSurvey = Source.mkDOISource
-  "CSI-based human sensing survey authors"
+  "Zhengjie Wang; Zehua Huang; Chengming Zhang; Wenwen Dou; Yinjing Guo; Da Chen"
   "CSI-based human sensing using model-based approaches: a survey"
   "Journal of Computational Design and Engineering 8(2), 510-523"
   "2021"
@@ -60,7 +60,7 @@ dcsCommunityLead = Source.mkNoDOISource
   "DCS community contributors"
   "Any plans to make RWR more realistic and less accurate?"
   "DCS / Eagle Dynamics community forum"
-  "2022"
+  "2026 snapshot"
   "https://forum.dcs.world/topic/305917-any-plans-to-make-rwr-more-realistic-and-less-accurate/"
   Source.communitySource
   "lead-generation source for amplitude-comparison versus phase/interferometric RWR terminology; requires primary-source payment before promotion to technical fact"
@@ -71,7 +71,7 @@ warThunderCommunityLead = Source.mkNoDOISource
   "War Thunder community contributors"
   "Phased Array Radars ACM Mode Scan Speeds"
   "War Thunder official forum"
-  "2025"
+  "2026 snapshot"
   "https://forum.warthunder.com/t/phased-array-radars-acm-mode-scan-speeds/240549"
   Source.communitySource
   "lead-generation source for mechanically oriented versus electronically steered phased-array terminology; not technical authority"
