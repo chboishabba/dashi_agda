@@ -24,8 +24,9 @@ import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as ThreeB
 --
 -- An edge is therefore consumer-indexed.  Hitting all declared edges is only
 -- a finite adequacy statement for this atlas; it is not a global minimality
--- theorem and it is never permission to promote an OEIS identity into a
--- Monster action or representation identity.
+-- theorem, is not itself a proof of any consumer theorem, and is never
+-- permission to promote an OEIS identity into a Monster action or
+-- representation identity.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -96,13 +97,11 @@ coordinateStrength oeisA309510Coordinate = oeisNavigation
 coordinateStrength oeisA199014Coordinate = oeisNavigation
 coordinateStrength sameIntegerCollisionOnly = unpaidCoincidence
 
--- Deliberately stricter than `coordinateStrength`: character/dimension theorems
--- are representation evidence but do not thereby become literal action maps.
-proofBearingForMonsterAction : Monster369Coordinate → Bool
-proofBearingForMonsterAction actualWeylActionCoordinate = true
-proofBearingForMonsterAction selected3BRestrictionCoordinate = true
-proofBearingForMonsterAction twelvePlusSeventyEightCoordinate = true
-proofBearingForMonsterAction _ = false
+-- A constructor names a coordinate slot.  It does not carry the inhabitant or
+-- theorem receipt for that slot.  Actual proof authority stays in the imported
+-- same-object/action owners.
+coordinateNameAlonePaysMonsterAction : Monster369Coordinate → Bool
+coordinateNameAlonePaysMonsterAction _ = false
 
 ------------------------------------------------------------------------
 -- 3. Reuse exact arithmetic/carrier receipts already paid elsewhere.
@@ -253,6 +252,7 @@ data OEISIdentityCreatesMonsterAction : Set where
 data EqualIntegerCreatesTypedCarrierMap : Set where
 data DivisorMembershipCreates369Semantics : Set where
 data FiniteHittingSetCreatesGlobalMinimality : Set where
+data CoordinateSelectionCreatesConsumerProof : Set where
 
 oeisIdentityDoesNotCreateMonsterAction : OEISIdentityCreatesMonsterAction → ⊥
 oeisIdentityDoesNotCreateMonsterAction ()
@@ -266,6 +266,9 @@ divisorMembershipDoesNotCreate369Semantics ()
 finiteHittingSetDoesNotCreateGlobalMinimality : FiniteHittingSetCreatesGlobalMinimality → ⊥
 finiteHittingSetDoesNotCreateGlobalMinimality ()
 
+coordinateSelectionDoesNotCreateConsumerProof : CoordinateSelectionCreatesConsumerProof → ⊥
+coordinateSelectionDoesNotCreateConsumerProof ()
+
 record Monster369SeparatingHyperfabricBoundary : Set where
   constructor monster369-separating-hyperfabric-boundary
   field
@@ -277,6 +280,7 @@ record Monster369SeparatingHyperfabricBoundary : Set where
     oeisIdentityCreatesMonsterAction : Bool
     equalIntegerCreatesTypedCarrierMap : Bool
     divisorMembershipCreates369Semantics : Bool
+    coordinateSelectionCreatesConsumerProof : Bool
     minimumHittingSetKernelProved : Bool
     consumerCollisionReopensTypedResidual : Bool
     nextResidual : String
@@ -286,5 +290,5 @@ canonicalMonster369SeparatingHyperfabricBoundary : Monster369SeparatingHyperfabr
 canonicalMonster369SeparatingHyperfabricBoundary =
   monster369-separating-hyperfabric-boundary
     true true true true
-    false false false false false true
-    "Instantiate more literal Monster worlds/consumers against this finite coordinate universe. If a typed selection collides, retain the first semantic coordinate that separates the failed consumer. OEIS may propose candidate coordinates or negative controls, but only typed carrier/action/source receipts can promote them into the Monster proof graph. Do not claim a globally minimal hitting set until an exhaustive finite search and kernel-level minimum proof are separately paid."
+    false false false false false false true
+    "Instantiate more literal Monster worlds/consumers against this finite coordinate universe. If a typed selection collides, retain the first semantic coordinate that separates the failed consumer. OEIS may propose candidate coordinates or negative controls, but only typed carrier/action/source receipts can promote them into the Monster proof graph. Hitting all finite edges does not itself prove the consumer theorems. Do not claim a globally minimal hitting set until an exhaustive finite search and kernel-level minimum proof are separately paid."
