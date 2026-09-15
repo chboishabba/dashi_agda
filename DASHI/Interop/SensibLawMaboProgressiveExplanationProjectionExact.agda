@@ -3,6 +3,7 @@ module DASHI.Interop.SensibLawMaboProgressiveExplanationProjectionExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
@@ -57,6 +58,119 @@ data ChainStage : Set where
   comparatorStage
   residualStage
   explanationStage : ChainStage
+
+------------------------------------------------------------------------
+-- Exact runtime parity for src/pnf/mabo_proof_specimen.py.
+--
+-- These constructors mirror the Python enums without making this UI owner a
+-- parser or a second legal semantics engine.  The Reading Lens merely asks a
+-- question of the already-existing PNF carrier.
+------------------------------------------------------------------------
+
+data RuntimeReadingDepth : Set where
+  readDepth inspectDepth traceDepth proveDepth : RuntimeReadingDepth
+
+data RuntimeLegalChangeKind : Set where
+  rejectedChange
+  qualifiedChange
+  distinguishedChange
+  overruledChange
+  displacedChange
+  reinterpretedChange
+  leftOpenChange : RuntimeLegalChangeKind
+
+data RuntimeProofRole : Set where
+  supportRole defeaterRole comparatorRole residualRole : RuntimeProofRole
+
+data RuntimeReadingQuestion : Set where
+  whoDidIt
+  whatHappened
+  toWhat
+  howCertain
+  assertedOrQuoted
+  whenQuestion
+  whoDoesThisReferTo : RuntimeReadingQuestion
+
+data RuntimeTranslationLoss : Set where
+  aspectLoss evidentialityLoss modalityLoss otherLoss : RuntimeTranslationLoss
+
+readingQuestionCue : RuntimeReadingQuestion → ReadingPnfCue
+readingQuestionCue whoDidIt = actorCue
+readingQuestionCue whatHappened = predicateCue
+readingQuestionCue toWhat = patientCue
+readingQuestionCue howCertain = modalityCue
+readingQuestionCue assertedOrQuoted = conditionCue
+readingQuestionCue whenQuestion = temporalCue
+readingQuestionCue whoDoesThisReferTo = coreferenceCue
+
+maboWikidataQid : String
+maboWikidataQid = "Q1501525"
+
+record RuntimeReadingConeParity : Set where
+  constructor runtimeReadingConeParity
+  field
+    canonicalSpecimenHasFiveBoundedNodes : Bool
+    literalFormulationSeparateFromInferredIssue : Bool
+    readViewHidesInternalIds : Bool
+    readViewHidesProofGraph : Bool
+    everyVisibleNodeRetainsSourceReopenRef : Bool
+    everyVisibleNodeRetainsProofReopenRef : Bool
+    hiddenInformationDiscarded : Bool
+    readingLensCreatesNewGrammarSemantics : Bool
+    readingLensRoleProjectionClaimsTruth : Bool
+    flagshipChangeKindIsRejected : Bool
+    worldTruthClaimed : Bool
+    legalConclusionClaimed : Bool
+    wikidataIdentityIsLegalAuthority : Bool
+    wikipediaIsPrimaryAuthority : Bool
+    fullPrimarySourceRequiredForPayment : Bool
+
+open RuntimeReadingConeParity public
+
+canonicalRuntimeReadingConeParity : RuntimeReadingConeParity
+canonicalRuntimeReadingConeParity =
+  runtimeReadingConeParity
+    true
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+    false
+    true
+    false
+    false
+    false
+    false
+    true
+
+record MultilingualReadingSurfaceBoundary : Set where
+  constructor multilingualReadingSurfaceBoundary
+  field
+    qidIdentityMayBePaid : Bool
+    semanticEquivalencePaidBySameQid : Bool
+    roleCarrierCompatibilityMayBeObserved : Bool
+    roleCarrierCompatibilityPaysExactTranslation : Bool
+    translationLossesRemainExplicit : Bool
+    aspectLossRepresentable : Bool
+    evidentialityLossRepresentable : Bool
+    modalityLossRepresentable : Bool
+
+open MultilingualReadingSurfaceBoundary public
+
+canonicalMultilingualReadingSurfaceBoundary : MultilingualReadingSurfaceBoundary
+canonicalMultilingualReadingSurfaceBoundary =
+  multilingualReadingSurfaceBoundary
+    true
+    false
+    true
+    false
+    true
+    true
+    true
+    true
 
 record ExplanationAnchorBoundary : Set where
   constructor explanationAnchorBoundary
@@ -314,6 +428,9 @@ data ProgressiveDisclosureImpliesEvidenceLoss : Set where
 data WikipediaCreatesLegalAuthority : Set where
 data WiktionaryCreatesAustralianLegalRule : Set where
 data QIDIdentityCreatesApplicability : Set where
+data QIDIdentityCreatesSemanticEquivalence : Set where
+data RoleCarrierCompatibilityCreatesExactTranslation : Set where
+data ReadingLensRoleCreatesClaimTruth : Set where
 data ContextNavigationPaysEvidence : Set where
 data SLRRouteSelectionCreatesLegalConclusion : Set where
 data AcquiredSourcePaysWithoutReview : Set where
@@ -335,6 +452,16 @@ wiktionaryIsNotAustralianLegalRule ()
 
 qidIdentityIsNotApplicability : QIDIdentityCreatesApplicability → ⊥
 qidIdentityIsNotApplicability ()
+
+qidIdentityIsNotSemanticEquivalence : QIDIdentityCreatesSemanticEquivalence → ⊥
+qidIdentityIsNotSemanticEquivalence ()
+
+roleCarrierCompatibilityIsNotExactTranslation :
+  RoleCarrierCompatibilityCreatesExactTranslation → ⊥
+roleCarrierCompatibilityIsNotExactTranslation ()
+
+readingLensRoleIsNotClaimTruth : ReadingLensRoleCreatesClaimTruth → ⊥
+readingLensRoleIsNotClaimTruth ()
 
 contextNavigationIsNotEvidencePayment : ContextNavigationPaysEvidence → ⊥
 contextNavigationIsNotEvidencePayment ()
