@@ -11,13 +11,16 @@ paidRegression :
   × P.Monster369ZetaWeldBoundary.inertiaZetaMapsToExactCyclotomicZeta
     P.canonicalMonster369ZetaWeldBoundary
   ≡ true
+  × P.Monster369ZetaWeldBoundary.schrodingerModelUsesSameCyclotomicZeta
+    P.canonicalMonster369ZetaWeldBoundary
+  ≡ true
   × P.Monster369ZetaWeldBoundary.literalVOAZetaSectorUsesThatPhase
     P.canonicalMonster369ZetaWeldBoundary
   ≡ true
   × P.Monster369ZetaWeldBoundary.linearRestrictionReusesLiteralZetaSector
     P.canonicalMonster369ZetaWeldBoundary
   ≡ true
-paidRegression = refl , refl , refl , refl
+paidRegression = refl , refl , refl , refl , refl
 
 frontierRegression :
   P.Monster369ZetaWeldBoundary.base369ZetaSheetIsLiteralCyclotomicScalar
