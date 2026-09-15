@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanSelectedHessianWalkResummationCutRound353Exact where
 
 ------------------------------------------------------------------------
@@ -14,8 +13,7 @@ module DASHI.Physics.YangMills.BalabanSelectedHessianWalkResummationCutRound353E
 -- marked-walk summation.  The older
 -- BalabanDifferentiatedMarkedFactorProductExact theorem separately proves the
 -- finite factor telescope once literal factorwise ordinary/marked bounds are
--- supplied; it is a donor/compiler and is deliberately not imported into this
--- safe owner.
+-- supplied; it is a donor/compiler and is deliberately not imported here.
 --
 -- Therefore the least-privilege source-facing cut is NOT a fresh generic
 -- Hessian-Lipschitz theorem.  It is:
@@ -30,6 +28,11 @@ module DASHI.Physics.YangMills.BalabanSelectedHessianWalkResummationCutRound353E
 -- is compiler output.  This owner deliberately does not identify those source
 -- coordinates with the selected R318/R350 carrier; R352's attachment remains
 -- a separate same-object payment.
+--
+-- Safety boundary: this owner consumes the historical marked-resummation
+-- module, which predates the current `--safe` tranche.  Therefore this file
+-- does not claim a `--safe` header.  This is an import/safety-coordinate issue,
+-- not extra Yang--Mills theorem content.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -148,7 +151,7 @@ sourceMarkedMajorantScaleComparisonLevel = conditional
 -- Existing donor theorem:
 -- BalabanDifferentiatedMarkedFactorProductExact.
 -- It proves the finite factor telescope; R353 does not import it because its
--- historical generic-real helper surface is outside this safe cone.
+-- historical generic-real helper surface is outside the newer safety cone.
 finiteFactorTelescopeAlreadyOwned : Bool
 finiteFactorTelescopeAlreadyOwned = true
 
@@ -217,4 +220,3 @@ clayPromotion : Bool
 clayPromotion = false
 
 clayPromotionIsFalse : clayPromotion ≡ false
-clayPromotionIsFalse = refl
