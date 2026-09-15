@@ -37,6 +37,10 @@ open import DASHI.Biology.BioacousticStateSpaceVisualisationExact
 open import DASHI.Biology.DrosophilaConnectomeFunctionalEffectorStateSpaceVisualisationExact
 open import DASHI.Biology.BioacousticAnimalexicTrajectoryBridgeExact
 open import DASHI.Biology.BioacousticAreseSharedManifoldProducerExact
+open import DASHI.Biology.BioacousticYouTubeSeedSourceExact
+open import DASHI.Biology.MagpieVocalAtlasObservationExact
+open import DASHI.Biology.MagpieVocalAtlasLatentExact
+open import DASHI.Biology.MagpieSemanticPromotionExact
 open import DASHI.Biology.DrosophilaGautheyFunctionalTrajectoryProducerExact
 open import DASHI.Biology.BioacousticFlySnowballParetoBidiExact
 open import DASHI.Biology.BioacousticFlySIUnitSnowballParetoBidiExact
