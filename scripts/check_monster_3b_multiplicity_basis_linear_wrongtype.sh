@@ -38,6 +38,7 @@ bash "$ROOT/scripts/check_monster_3b_z3_orbifold_phase_recognition_snowball.sh"
 bash "$ROOT/scripts/check_monster_3b_cyclotomic_norm_separation.sh"
 bash "$ROOT/scripts/check_monster_3b_schrodinger_nonzero_witness_extraction.sh"
 bash "$ROOT/scripts/check_monster_3b_stone_von_neumann_witness_frontier_correction.sh"
+bash "$ROOT/scripts/check_monster_3b_oeis_same_integer_role_collision.sh"
 
 # Character determination now uses the direct scalar-product/Hom/Schur route
 # over the existing exact Q(zeta_3) field.  The scalar-extension checkers remain
