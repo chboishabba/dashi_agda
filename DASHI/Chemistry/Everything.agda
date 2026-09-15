@@ -194,3 +194,16 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBounde
 -- selection and dynamic safety remain independent payments; source attribution
 -- is not transferred into the DASHI composition theorem.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBoundedConsumerSafeFuturePromotionExact
+
+-- Partial state-coordinate alignment: Figure-5 named states are related only to
+-- source-paid theta1/theta2 regions.  Alpha/zeta inherit composed open/closed
+-- endpoint angles; beta/gamma/delta/epsilon remain qualitative semi-open/semi-
+-- closed regions; eta/lambda remain near-closed; per-state dLN stays unpaid.
+-- Equation-level xi is deliberately not identified with Figure-level zeta.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePartialStateCoordinateAlignmentExact
+
+-- Dynamics on the paid alignment fibre: states exist only when a graph node has
+-- a retained Figure-state alignment.  This supports alpha->beta->gamma->delta
+-- and alpha->beta->epsilon prefixes while refusing delta/epsilon->xi until the
+-- xi/zeta seam is paid.  Partiality remains explicit rather than totalized.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePartialAlignedDynamicsExact
