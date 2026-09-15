@@ -8,6 +8,8 @@ FILES=(
   DASHI/Environment/BiocontrolCostedExperimentChoiceRegression.agda
   DASHI/Environment/BiocontrolAttributionSnowballRegression.agda
   DASHI/Environment/BiocontrolSIQuantityRegression.agda
+  DASHI/Environment/BiocontrolChemistry369IndexRegression.agda
+  DASHI/Environment/SpringfieldLakesAquaticWeedMechanicalRemovalRegression.agda
   DASHI/Environment/BiocontrolFirstImplementationRegression.agda
   DASHI/Environment/BiocontrolExternalityExperimentExact.agda
   DASHI/Environment/BiocontrolExternalityExperimentSourceAtlasExact.agda
@@ -15,6 +17,8 @@ FILES=(
   DASHI/Environment/BiocontrolActiveExperimentSearchExact.agda
   DASHI/Environment/BiocontrolCostedExperimentChoiceExact.agda
   DASHI/Environment/BiocontrolSIQuantityExact.agda
+  DASHI/Environment/BiocontrolChemistry369IndexExact.agda
+  DASHI/Environment/SpringfieldLakesAquaticWeedMechanicalRemovalExact.agda
   DASHI/Environment/BiocontrolFirstImplementationExact.agda
 )
 
