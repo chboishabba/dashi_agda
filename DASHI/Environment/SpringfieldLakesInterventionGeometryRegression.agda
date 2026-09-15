@@ -1,0 +1,19 @@
+module DASHI.Environment.SpringfieldLakesInterventionGeometryRegression where
+
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
+import DASHI.Environment.SpringfieldLakesInterventionGeometryExact as Geometry
+
+coarseTreatmentFails :
+  NonFactor.NonFactorabilityWitness Geometry.treatmentObserver Geometry.equipmentConsumer
+coarseTreatmentFails = Geometry.treatmentTypeNonFactorabilityWitness
+
+coarseTreatmentCannotPayEquipment :
+  NonFactor.FactorsThrough Geometry.treatmentObserver Geometry.equipmentConsumer → ⊥
+coarseTreatmentCannotPayEquipment = Geometry.equipmentDoesNotFactorThroughTreatmentType
+
+accessRepairFactors :
+  NonFactor.FactorsThrough Geometry.treatmentAccessObserver Geometry.equipmentConsumer
+accessRepairFactors = Geometry.equipmentFactorsThroughTreatmentAndAccess
+
+boundary : Geometry.SpringfieldInterventionGeometryBoundary
+boundary = Geometry.canonicalSpringfieldInterventionGeometryBoundary
