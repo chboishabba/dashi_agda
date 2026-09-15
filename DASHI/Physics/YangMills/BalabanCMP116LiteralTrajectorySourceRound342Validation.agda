@@ -3,10 +3,10 @@ module DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Valid
 
 -- RED regression surface for Round342.
 --
--- This module intentionally names the desired literal-source API before the
--- implementation owner exists.  The production change that makes this surface
--- compile is the Round342 source constructor which removes the post-hoc
--- source-magnitude equality from the R341 route.
+-- The desired API removes two historical overpayments:
+--   * no post-hoc source-magnitude equality;
+--   * no theorem over every source-direction pair when the B consumer only
+--     asks for the selected mode/time pair.
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
@@ -22,3 +22,8 @@ literalTrajectorySourceIsDirectProducerABI :
   R342.literalTrajectorySourceDirectProducer ≡ true
 literalTrajectorySourceIsDirectProducerABI =
   R342.literalTrajectorySourceDirectProducerIsTrue
+
+allSourceDirectionPairsNotRequired :
+  R342.allSourceDirectionPairsRequired ≡ false
+allSourceDirectionPairsNotRequired =
+  R342.allSourceDirectionPairsRequiredIsFalse
