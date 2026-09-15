@@ -1,249 +1,342 @@
 # YM / RH Global Goal Pareto Board
 
-Status: **live proof-search/accounting board**, not theorem authority.
+Status: **live global coordinator / scheduling board**, not theorem authority.
 
-Update rule: every Pareto recut that changes a preferred producer or live terminal leaf updates this file in the same tranche.
+This file is intentionally short and current. Broad history belongs in
+`Docs/support/reference/YMRHPRRoundArchaeologyAudit.md`; source-authority detail belongs in
+`Docs/support/reference/YMCMPWorkStatus.md`; typed cross-lane archaeology belongs in
+`DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda`.
 
-Companions:
-
-- `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md` — broad PR/round chronology and route catalogue.
-- `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 source-authority boundary.
-- `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda` — typed cross-lane archaeology ledger.
-
-## 1. Scheduling discipline
-
-```text
-terminal consumer
--> enumerate in-repo producers
--> quotient only by theorem-bearing same-object transports
--> separate source theorem / local replay / physical application / compiler
--> weaken producer interfaces to the least consumer-sufficient statement
--> Pareto-rank remaining payments
--> implement only a non-dominated leaf
-```
+Update rule: every Pareto recut that changes a preferred producer, live terminal leaf, or BIDI acquisition path updates this file in the same tranche.
 
 Source/DOI/QID/Dewey/link/status coordinates never manufacture theorem payment.
 
-## 2. Current cross-lane queue
+## 1. Global terminal goals
+
+### Yang--Mills
+
+Preferred current mass-gap consumer:
 
 ```text
-1. YM T78-B / R350 selected local-Hessian stability on the literal substituted background
-2. YM T78-B / R350 selected substituted-background marked displacement bound
-3. YM T78-B / R348 source/Cauchy coefficient = literal selected mixed-log response
-4. YM T78-B / R346 selected physical distance = Euclidean time
-5. RH R1a/R1b final-near representation transport when theorem-bearing checked-near bytes/object are recoverable
-6. RH R2 fresh strict literal complement theorem
+quantitative connected-correlation decay
+  on the SAME reconstructed continuum family
+-> existing clustering-to-spectral-gap compiler
+-> SameHamiltonianPhysicalMassGap.
 ```
 
-RH is representation-only at R1 but presently less actionable: the checked near/far return exposes status/coordinates, not a theorem-bearing scalar object in the accessible repo.
+CMP116, Row C, Heat/Doob/Langevin, Step-V/KP, unified polymer norms and older rooted-shell constructions are producer families, not mandatory Clay architecture.
 
-## 3. YM T78-B — current preferred producer
+### Riemann hypothesis
 
-Terminal consumer: `SameHamiltonianPhysicalMassGap`.
-
-Current preferred line is **PR #944, internal R345-R350**. R349 is retained as an optional donor audit rather than a preferred leaf.
-
-### 3.1 Historical recut
+Preferred current direct high route:
 
 ```text
-#940 / R343
-  { S1 selected response <= CMP116 sourceEnvelope,
-    B2 sourceEnvelope <= clusteringEnvelope }
-
-        SUPERSEDED AS PREFERRED T78-B PRODUCER
-
-#944 / R345-R346
-  literal selected response
-    <= actual shared CMP116 hessian markedAnalyticShell
-    <= ((1/4) C_H) * 2^{-physicalDistance}
-  + physicalDistance(selected pair) = Euclidean time
-  -> amplitude-parametric continuum covariance upper
-  -> positive-subgap contradiction
-  -> existing clustering->gap compiler
+R1a/R1b final-near representation
+-> R2 strict literal complement inequality
+-> existing uniform-high contradiction compiler.
 ```
 
-R345 removes fixed `1/4` amplitude overpayment. R346 carries `A_H = (1/4) C_H` directly, so `C_H <= 1` is not primitive.
+RH remains behind YM in immediate actionability because the checked-near theorem-bearing scalar object/bytes are not presently recoverable in the accessible repo surfaces.
 
-### 3.2 R346 consumer surface
+## 2. Current cross-lane Pareto queue
 
 ```text
-L_marked:
-|D^2_{J_L,J_R} log Z|_selected
-  <= markedAnalyticShell(shared,hessianMark,
-       selected scale, volume, connecting root, physical distance)
+1. YM R350 H_stab
+   selected boundary Hessian-integrand difference
+     <= lipschitz * selected substitutionDistance
 
-D_time:
-physicalDistance_R318(selected left,selected right) = spectral Euclidean time
+2. YM R351 H_sub^source
+   literal CMP116 substituted-background displacement theorem
+     d_sub^source <= M_marked^source
+
+3. YM R351 H_sub^attach
+   same-object attachment
+     d_sub^selected = d_sub^source
+     M_marked^selected = M_marked^source
+
+4. YM R348 C_attach
+   source/Cauchy coefficient
+     = literal R318 selected mixed-log response
+
+5. YM R346 D_time
+   selected R318 physical distance = Euclidean spectral time
+
+6. RH R1a/R1b
+   final-near checked-object / literal-finite representation transport
+   when theorem-bearing checked-near material is recoverable
+
+7. RH R2
+   fresh strict literal-complement analysis.
 ```
 
-### 3.3 R347 — below L_marked
+R351 removes the previous reason to prefer `H_sub` merely because CMP99 looked close: CMP99/CMP109 owns marked **response/Hessian domain-comparison** decay, not the prior geometric theorem `d_sub <= M_marked`.
 
-`BalabanDecoupledActivityHessian` already owns the generic steps
+## 3. YM T78-B current preferred producer
+
+Current integration vehicle: PR #944, internal R345--R351.
+
+Backward from the terminal consumer:
 
 ```text
-pointwise marked boundary comparison
-  -> Cauchy coefficient/Hessian bound
+SameHamiltonianPhysicalMassGap
+<- positive-subgap contradiction
+<- same-family continuum covariance upper
+<- R346 literal shared marked amplitude / selected finite covariance upper
+<- { L_marked , D_time }
+<- { R348 C_attach , R350 H_stab , R350/R351 H_sub }
+<- { H_sub^source , H_sub^attach } for the H_sub branch.
 ```
 
-and
+Forward from source acquisition:
 
 ```text
-substituted-background stability
-  -> marked boundary comparison
-  -> Cauchy coefficient/Hessian bound.
+CMP116 substituted-background source construction
+-> H_sub^source
++ exact R318/R350 same-object selected attachment
+-> H_sub
+
+H_sub + H_stab
+-> existing substitution/boundary/Cauchy compiler
+-> source/Cauchy coefficient
+
++ C_attach
+-> R318 literal selected mixed-log response
+-> R346 L_marked
+
++ D_time
+-> finite selected covariance upper
+-> same-family continuum upper
+-> positive-subgap contradiction
+-> existing clustering-to-gap compiler.
 ```
 
-Canonical R347 owner:
-`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryCutRound347Exact.agda`
+This forward/backward agreement is the current **BIDI invariant**: downstream consumers determine the least source statement to acquire, but may not define or weaken source semantics post hoc.
 
-R347 leaves source-specific boundary/substitution comparison + same-object selected-response attachment; `D_time` remains independent.
+## 4. R345--R351 reductions
 
-### 3.4 R348 — remove fake J-direction selection
+### R345
 
-R318 already fixes
+Fixed amplitude `1/4` was overpayment. The contradiction only needs finite nonnegative `A_fast * (1/2)^t`.
+
+### R346
+
+Retains the literal shared-marked amplitude
 
 ```text
-J_L = sourceDirectionOf (meaning base) left
-J_R = sourceDirectionOf (meaning base) right.
+A_H = (1/4) C_H
 ```
 
-The normalized two-source calculus also already identifies the literal mixed second log derivative with connected covariance on that selected carrier.
+directly. `C_H <= 1` is not primitive.
 
-Residual payment:
+Live terminal coordinates exposed here:
+
+```text
+L_marked
+D_time.
+```
+
+### R347
+
+Descends `L_marked` below generic Cauchy machinery. The generic pointwise-boundary -> Cauchy coefficient lift is already owned.
+
+### R348
+
+R318 already constructs the selected directions. The surviving same-object coordinate is only
 
 ```text
 C_attach:
-source/Cauchy coefficient on the already-selected J_L,J_R
-  = R318 literal selected mixed-log response on that same pair.
+source/Cauchy coefficient(J_L,J_R)
+  = literal selected mixed-log response(J_L,J_R).
 ```
 
-Owner:
-`DASHI/Physics/YangMills/BalabanCMP116SelectedCoefficientAttachmentRound348Exact.agda`
+### R349
 
-### 3.5 R350 — split the selected boundary/substitution comparison
+R304 distance=time is retained as an optional donor only. Reaching it through R296 would reintroduce the stronger rooted-shell producer, so direct `D_time` remains Pareto-preferred.
 
-The exact generic ABI `markedSubstitutionStabilityLiftsToCoefficient` shows that the coarse R347 boundary leaf consists of two source-specific physical inputs:
+### R350
+
+Splits the selected boundary comparison at the existing generic ABI:
 
 ```text
 H_stab:
-selected boundary Hessian-integrand difference
-  <= lipschitz * selected substitutionDistance
+Hessian-integrand difference <= lipschitz * substitutionDistance
 
 H_sub:
-selected substitutionDistance
-  <= selected markedInput.
+substitutionDistance <= markedInput.
 ```
 
-Once `H_stab` and `H_sub` are supplied, the pointwise boundary envelope and finite-polydisc Cauchy coefficient estimate are existing compiler output.
+No fresh Cauchy theorem or boundary-envelope theorem is primitive.
 
-Owner:
-`DASHI/Physics/YangMills/BalabanSelectedSubstitutionHessianCutRound350Exact.agda`
+### R351
 
-Focused validation:
-`DASHI/Physics/YangMills/BalabanSelectedSubstitutionHessianCutRound350Validation.agda`
-
-Current preferred T78-B queue:
+Further splits `H_sub` into source theorem and same-object attachment:
 
 ```text
-H_stab
-H_sub
-C_attach
-D_time
+H_sub^source:
+sourceSubstitutionDistance <= sourceMarkedInput
+
+H_sub^attach:
+selectedSubstitutionDistance = sourceSubstitutionDistance
+selectedMarkedInput = sourceMarkedInput.
 ```
 
-### 3.6 R349 optional donor audit for D_time
+The equality-transport compiler is source-written in
+`BalabanSelectedSubstitutionMarkedSourceRound351Exact.agda`.
 
-R304 owns distance=time on the exact R300-selected pair, but only inside `ModeSelectedDirectT5UpperPayment`, which carries the older R284 rooted-shell producer. No independent concrete R304 payment is currently present.
-
-Constructing one through R296 reintroduces stronger rooted-shell localization merely to obtain time semantics. Therefore R349 is donor-only unless that stronger payment becomes independently free.
-
-Optional owner:
-`DASHI/Physics/YangMills/BalabanSelectedDistanceCarrierWeldRound349Exact.agda`
-
-### 3.7 Explicitly pruned T78-B requirements
-
-Do not reintroduce as primitive:
+Important donor correction:
 
 ```text
-R343 sourceEnvelope -> R281 clusteringEnvelope calibration
-C_H <= 1
-fresh selection of J_L,J_R
-fresh mixed-log-Hessian -> connected-covariance calculus
-fresh Cauchy coefficient extraction
-fresh boundary-envelope compiler
-source-root weld for the preferred R346 route
-source-distance weld to an abstract source carrier
-rootedShell <= markedAnalyticShell
-selected response = older hessianInfluenceShell
-selected response = CMP109 Pi / field-Hessian carrier
+CMP99 marked background-propagator/domain comparison
+  != direct H_sub payment.
 ```
 
-The shared-shell direction is
+CMP99/CMP109 remains a high-value donor for the differentiated-response / Hessian side, but does not by itself prove the prior substituted-background displacement bound.
+
+## 5. Current source investigation map
+
+### H_sub source family
+
+Primary route to inspect next:
 
 ```text
-markedAnalyticShell
-  <= C_H * rootedShell
-  <= ((1/4) C_H) * 2^{-d}.
+CMP116 Sect. 1 substituted-background construction
+  around (1.13)--(1.21)
+-> exact source displacement/mark inequality
+-> R351 H_sub^source.
 ```
 
-### 3.8 Primary source boundary
+Source authority and exact local replay are separate. The existence of the CMP116 analytic construction does not itself inhabit `CMP116SubstitutionMarkedSource`.
 
-Tadeusz Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, CMP 116 (1988), DOI `10.1007/BF01239022`.
+### H_stab donor family
 
-CMP116 supplies analytic localization/substitution/Cauchy authority on its declared domain. Physical selected-coordinate, substituted-background, and same-object attachments remain theorem-bearing repository work.
-
-## 4. YM T78-A / T78-C
-
-Still live on the same construction but currently Pareto-dominated by the narrower T78-B R348/R350 leaves.
-
-Shared-carrier reminder:
+Most relevant existing donor chain:
 
 ```text
-A4 reconstructed Hamiltonian/domain/core
-  <-> B same-H mass-gap consumer
-  <-> C4 stress-charge generator
+CMP99(3) background-propagator marked domain comparison
+-> CMP109 twice-differentiated marked E^(2) locality/decay
+-> CMP116 differentiated localization / Cauchy continuation.
 ```
 
-## 5. RH current route
+This is closer to the effect-of-substitution/Hessian side than to `H_sub`, but exact selected R350 applicability still requires a theorem-bearing same-object bridge.
 
-### R1 — final-near representation
+Primary source identifiers retained:
+
+- Bałaban, *Propagators for Lattice Gauge Theories in a Background Field*, CMP 99(3) (1985), DOI `10.1007/BF01240355`.
+- Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories I*, CMP 109 (1987), DOI `10.1007/BF01215223`.
+- Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, CMP 116 (1988), DOI `10.1007/BF01239022`.
+
+## 6. BIDI roadmap
+
+The current route is deliberately bidirectional.
+
+### Consumer -> source, backwards
+
+```text
+mass gap
+<- continuum covariance decay
+<- finite selected covariance upper
+<- L_marked + D_time
+<- C_attach + H_stab + H_sub
+<- H_sub^source + H_sub^attach.
+```
+
+This direction identifies the **least consumer-sufficient source theorem** and prevents stronger historical routes from becoming accidental prerequisites.
+
+### Source -> consumer, forwards
+
+```text
+published/source CMP116 substituted-background theorem
++ selected same-object attachment
+-> H_sub
++ H_stab
+-> generic Cauchy coefficient bound
++ C_attach
+-> literal selected mixed-log response bound
++ D_time
+-> continuum covariance decay
+-> existing spectral-gap compiler.
+```
+
+This direction prevents source citation/status from being mistaken for payment and catches missing attachment seams.
+
+### BIDI firewalls
+
+Do not allow:
+
+```text
+downstream BC/selected consumer -> define source semantics
+source citation/status -> selected physical theorem
+CMP99 domain comparison -> H_sub by name similarity
+compiler availability -> source theorem possession
+stronger rooted-shell producer -> mandatory route merely because it exists.
+```
+
+## 7. Roadmap position after R351
+
+The preferred YM mass-gap route is now below the old clustering/envelope architecture. It has reached a **local selected substituted-background / Hessian comparison layer**.
+
+Practical interpretation:
+
+```text
+old problem statement:
+  build a clustering/mass-gap producer
+
+current problem statement:
+  pay one selected Hessian stability estimate,
+  extract one CMP116 substituted-background displacement theorem,
+  attach its source coordinates to the R318/R350 selected carrier,
+  then pay two same-object geometry/response attachments (C_attach, D_time).
+```
+
+T78-A and T78-C remain live on the same global construction but are currently Pareto-dominated by this narrower T78-B route. They should only regain priority if they pay one of the current B leaves for free or expose a strictly cheaper same-object producer.
+
+Unification/common-action work remains downstream consistency structure; it does not currently shorten R350/R351.
+
+## 8. RH current route
+
+### R1
 
 ```text
 R1a: nearResponseAt(J) = N_checked
-R1b: N_checked = finiteNearSum(literal cells)
+R1b: N_checked = finiteNearSum(literal cells).
 ```
 
-The accessible checked return exposes status/coordinates but no theorem-bearing checked scalar object/bytes currently recoverable in-repo or in the audited `dashi_lean4` surface. Stop archaeology until such an object reappears.
+The accessible checked return exposes status/coordinates but no recoverable theorem-bearing checked scalar object in the audited repo surfaces. Stop archaeology until such an object reappears.
 
-### R2 — strict literal complement
+### R2
 
 ```text
 literalNear(J) + B_far(J) + D_Gamma(g_pole)
   < actual ClusterResponse(g_pole)
 ```
 
-uniformly for arbitrary high off-line zeros. This remains fresh analysis absent an exact same-carrier donor.
+uniformly for arbitrary high off-line zeros. This remains the first direct high analytic family after R1.
 
-## 6. Current producer status
+## 9. Explicitly dominated / pruned requirements
+
+Do not reintroduce as primitive:
 
 ```text
-#940 / R343  SUPERSEDED preferred T78-B route; historical/donor only.
-#944 / R345  removes fixed-amplitude overpayment.
-#944 / R346  direct shared-marked terminal consumer surface.
-#944 / R347  descends L_marked below generic Cauchy machinery.
-#944 / R348  removes fresh J selection; leaves scalar coefficient attachment.
-#944 / R349  optional donor only; R304 route reintroduces stronger shell debt.
-#944 / R350  current decomposition of selected boundary comparison into H_stab + H_sub.
-
-RH R1         representation wall; theorem-bearing source bytes unavailable.
-RH R2         analytic wall after R1.
+#940 / R343 {S1,B2} preferred route
+R343 sourceEnvelope -> clusteringEnvelope calibration
+C_H <= 1
+fresh J-direction selection
+fresh mixed-log -> connected-covariance calculus
+fresh Cauchy coefficient extraction
+fresh boundary-envelope construction
+reverse rootedShell <= markedAnalyticShell
+equality with older hessianInfluenceShell
+forcing T78-B through Heat/Doob/Langevin
+fresh clustering-to-gap theorem
+R304/R296 rooted-shell path merely to obtain D_time
+CMP99 marked-domain comparison counted directly as H_sub.
 ```
 
-## 7. Validation boundary
+## 10. Validation boundary
 
 This board is scheduling/accounting only.
 
 - `machineChecked` labels are not fresh exact-head kernel receipts.
 - CodeRabbit status is not Agda validation.
-- No Clay YM solution or RH proof is claimed.
-- R347-R350 refine dependencies; conditional source/physical fields remain unpaid unless separately inhabited.
+- R351 is source-written frontier/transport refinement; both source displacement and selected attachment remain conditional.
+- No Clay Yang--Mills solution or RH proof is claimed.
