@@ -1,0 +1,47 @@
+module DASHI.Finance.TrumpFamilyTradeEvidenceValidation where
+
+import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
+import DASHI.Finance.TrumpFamilyTradePrimarySourceExtensionExact as Primary
+import DASHI.Finance.TrumpFamilyExternalCounterpartyEvidenceExact as Counterparty
+import DASHI.Finance.TrumpFamilyTradePNFBridgeExact as PNF
+import DASHI.GameTheory.SourceConditionedMarketInformationExact as Information
+import DASHI.Finance.TrumpFamilyTradeGameTheoryBridgeExact as GameBridge
+import DASHI.Finance.TrumpFamilyTradeAcquisitionFrontierExact as Acquisition
+
+sourceBoundary : Atlas.TrumpFamilyTradeSourceBoundary
+sourceBoundary = Atlas.canonicalTrumpFamilyTradeSourceBoundary
+
+primaryBoundary : Primary.TrumpFamilyPrimarySourceExtensionBoundary
+primaryBoundary = Primary.canonicalTrumpFamilyPrimarySourceExtensionBoundary
+
+-- RED extension: exact transaction/ownership receipts must exist rather than
+-- being reconstructed from aggregate/private-placement or secondary prose.
+psqhPersonalAllocation : Atlas.TradeEvidenceClaim
+psqhPersonalAllocation = Primary.donJrPSQHPrivatePlacementPersonalAllocation
+
+donJrDominariOwnership : Atlas.TradeEvidenceClaim
+donJrDominariOwnership = Primary.donJrDominariOwnership
+
+trumpTechPurchaseSeries : Atlas.TradeEvidenceClaim
+trumpTechPurchaseSeries = Primary.trump2025TechEquityPurchaseSeries
+
+mgxPrimaryInvestment : Counterparty.CounterpartyEvidence
+mgxPrimaryInvestment = Counterparty.mgxBinancePrimaryInvestment
+
+counterpartyBoundary : Counterparty.TrumpFamilyExternalCounterpartyBoundary
+counterpartyBoundary = Counterparty.canonicalTrumpFamilyExternalCounterpartyBoundary
+
+pnfBoundary : PNF.TrumpFamilyTradePNFBoundary
+pnfBoundary = PNF.canonicalTrumpFamilyTradePNFBoundary
+
+informationBoundary : Information.SourceConditionedMarketInformationBoundary
+informationBoundary = Information.canonicalSourceConditionedMarketInformationBoundary
+
+gameBoundary : GameBridge.TrumpFamilyTradeGameTheoryBoundary
+gameBoundary = GameBridge.canonicalTrumpFamilyTradeGameTheoryBoundary
+
+acquisitionBoundary : Acquisition.TrumpFamilyTradeAcquisitionBoundary
+acquisitionBoundary = Acquisition.canonicalTrumpFamilyTradeAcquisitionBoundary
+
+acquisitionProgress : Acquisition.TrumpFamilyTradeAcquisitionProgress
+acquisitionProgress = Acquisition.currentTrumpFamilyTradeAcquisitionProgress
