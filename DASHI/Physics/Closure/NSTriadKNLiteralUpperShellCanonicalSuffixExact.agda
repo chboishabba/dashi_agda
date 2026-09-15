@@ -27,7 +27,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Empty using (⊥-elim)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Nat.Base using (_≤_)
 open import Data.Nat.Properties using (_≤?_; ≤-trans)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
@@ -55,10 +55,6 @@ import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104E
 
 F : C3.RealField _
 F = Rational.rationalRealField
-
-------------------------------------------------------------------------
--- All-nonzero witness for literal/sorted carriers.
-------------------------------------------------------------------------
 
 data AllNonzero : List Z3.FourierMode → Set where
   allNonzero[] : AllNonzero []
@@ -112,10 +108,6 @@ sortPreservesAllNonzero
 allNonzeroTail :
   ∀ {mode rest} → AllNonzero (mode ∷ rest) → AllNonzero rest
 allNonzeroTail (allNonzero∷ modeNonzero restNonzero) = restNonzero
-
-------------------------------------------------------------------------
--- Ordered lower/upper split.
-------------------------------------------------------------------------
 
 data AllAtOrAbove (threshold : Nat) : List Z3.FourierMode → Set where
   allAbove[] : AllAtOrAbove threshold []
@@ -173,10 +165,6 @@ upperShellPacketFalseBelow threshold mode modeNonzero below
 ... | false | yes proof = ⊥-elim (below proof)
 ... | false | no refutation = refl
 
-------------------------------------------------------------------------
--- Raw unweighted projected pairing and R104 transfer meaning.
-------------------------------------------------------------------------
-
 rawProjectedPairing :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
@@ -226,10 +214,6 @@ selectedAllAboveIsRawPairing system threshold (mode ∷ rest)
       (Audit.projectedNonlinearity system mode) +_)
     (selectedAllAboveIsRawPairing
       system threshold rest restNonzero restAbove)
-
-------------------------------------------------------------------------
--- Canonical sorted suffix selected by shell threshold.
-------------------------------------------------------------------------
 
 dropBelowShell : Nat → List Z3.FourierMode → List Z3.FourierMode
 dropBelowShell threshold [] = []
