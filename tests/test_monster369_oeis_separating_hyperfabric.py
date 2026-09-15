@@ -7,6 +7,12 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = REPO_ROOT / "scripts" / "monster369_oeis_separating_hyperfabric.py"
+AGDA_OWNER = (
+    REPO_ROOT
+    / "DASHI"
+    / "Wikimedia"
+    / "IbrahimMonster369OEISSeparatingHyperfabricExact.agda"
+)
 
 
 def load_runtime():
@@ -17,6 +23,12 @@ def load_runtime():
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def test_runtime_coordinate_universe_matches_agda_owner():
+    runtime = load_runtime()
+
+    assert runtime.extract_agda_coordinates(AGDA_OWNER) == runtime.COORDINATES
 
 
 def test_current_monster369_portfolio_has_expected_shape_and_negative_control():
