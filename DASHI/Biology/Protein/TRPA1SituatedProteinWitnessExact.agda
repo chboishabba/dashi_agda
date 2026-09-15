@@ -39,7 +39,7 @@ proteinIdentityDefect =
     TRPA1.thermalResponseSeparates
 
 trpa1SituatedQueryWitness : Situated.SituatedProteinQueryWitness
-trpa1SituatedQueryWitness = situated-protein-query-witness
+trpa1SituatedQueryWitness = Situated.situated-protein-query-witness
   TRPA1.TRPA1RichState
   TRPA1.ProteinIdentity
   ThermalQuery
@@ -52,6 +52,11 @@ trpa1SituatedQueryWitness = situated-protein-query-witness
   "pore-residue state separates thermal responses while protein identity is unchanged in the finite source-shaped witness"
   "Feng et al. 2026 owns the bounded residue/gating and intervention propositions; DOI 10.1126/sciadv.aee3948, PMID 42685214, PMCID PMC13537265; article QID remains unresolved"
   "DASHI owns the generic query-indexed non-factorability/situated-protein instantiation; it does not transfer Feng authorship to the generic theorem"
+
+proteinIdentityNotAdequateForThermalQuery :
+  Query.AdequateFor TRPA1.proteinIdentity thermalSemantics thermalResponseQuery → ⊥
+proteinIdentityNotAdequateForThermalQuery =
+  Situated.witnessBlocksCoarseAdequacy trpa1SituatedQueryWitness
 
 residueAwareRepair = TRPA1.thermalResponseFactorsThroughResidueAware
 sourceAttributionBoundary = Source.canonicalTRPA1SourceAttributionBoundary
