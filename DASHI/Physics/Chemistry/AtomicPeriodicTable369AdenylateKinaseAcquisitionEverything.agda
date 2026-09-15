@@ -17,6 +17,17 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationP
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseEndpointDLnAcquisitionExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourcePaidThreeCVEndpointExact
 
+-- Machine-readable article-text acquisition of the BE-META method envelope:
+-- CV walls, Gaussian bias widths/height, deposition/swap cadence, replica count
+-- and duration. These are method coordinates, not state/rate measurements.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseBEMetaAcquisitionExact
+
+-- Machine-readable free-energy statements that do not require visual Figure-5
+-- transcription: gamma reference minimum; alpha/beta/gamma near-level relation;
+-- ligand-bound delta_L below zeta_L; bound ~8.0 kcal/mol open->closed difference;
+-- and ligand-free open<->closed difference reported in the 1--2 kBT range.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFreeEnergyTextAcquisitionExact
+
 -- Cell-level acquisition frontier: 8 named states x four numeric coordinates
 -- plus six route-edge Kramers-rate cells.  Each unpaid cell retains a locator,
 -- source role and next-payment obligation instead of disappearing into a global
