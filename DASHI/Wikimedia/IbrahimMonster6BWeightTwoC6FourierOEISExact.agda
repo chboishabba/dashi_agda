@@ -11,6 +11,8 @@ import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as ThreeB
 import DASHI.Wikimedia.IbrahimMonster3BOEIS6BPowerNormalizationBridgeExact as SixB
+import DASHI.Wikimedia.IbrahimMonster236BMcKayThompsonNormalizationInvariantOEISExact as Normalization
+import DASHI.Wikimedia.IbrahimMonster6BCompleteReplicabilityPowerSnowballExact as Replicability
 
 ------------------------------------------------------------------------
 -- MONSTER 6B WEIGHT-TWO C6 FOURIER SPECTRUM
@@ -28,7 +30,15 @@ import DASHI.Wikimedia.IbrahimMonster3BOEIS6BPowerNormalizationBridgeExact as Si
 -- Tr(g^5)=78 and Tr(g^4)=54.  Finite C6 Fourier inversion then determines
 -- the six eigenspace multiplicities.
 --
--- This spectrum is NOT the N(3B) multiplicity-space 12+78 decomposition.
+-- Two upstream refinements are now retained explicitly:
+--
+--   * normalization invariance: q^1 traces 78/54/276 survive the documented
+--     OEIS q^0 normalization variants for 6B/3B/2B;
+--   * complete replicability: the whole normalized 6B series has power-map
+--     replicate targets 3B and 2B at the class-function level.
+--
+-- Neither refinement creates a literal selected VOA action or the separate
+-- N(3B) multiplicity-space 12+78 decomposition.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -51,6 +61,12 @@ oeisA007246Attribution = Snowball.canonicalSourceRoleSnowballReceipt oeisA007246
 conwayNortonSource = SixB.conwayNorton
 atlasMonsterSource = SixB.atlasMonster
 oeisA007255Source = SixB.oeisA007255
+
+normalizationInvariantTraceBoundary : Normalization.NormalizationInvariantOEISFrontier
+normalizationInvariantTraceBoundary = Normalization.currentNormalizationInvariantOEISFrontier
+
+replicabilityPowerBoundary : Replicability.Monster6BReplicabilityFrontier
+replicabilityPowerBoundary = Replicability.currentMonster6BReplicabilityFrontier
 
 ------------------------------------------------------------------------
 -- 2. Weight-two trace vector.
@@ -156,6 +172,8 @@ data SharedSeventyEightCreatesMultiplicityCharacter : Set where
 data OEISTraceCreatesLiteralMonsterMatrix : Set where
 data ClassPowerCreatesSubspaceIntertwiner : Set where
 
+data ReplicabilityCreatesLiteralSpectralProjectors : Set where
+
 c6SpectrumDoesNotCreateN3BMultiplicityWeld :
   C6SpectrumCreatesN3BMultiplicityWeld → ⊥
 c6SpectrumDoesNotCreateN3BMultiplicityWeld ()
@@ -174,6 +192,10 @@ oeisTraceDoesNotCreateLiteralMatrix ()
 classPowerDoesNotCreateIntertwiner : ClassPowerCreatesSubspaceIntertwiner → ⊥
 classPowerDoesNotCreateIntertwiner ()
 
+replicabilityDoesNotCreateLiteralProjectors :
+  ReplicabilityCreatesLiteralSpectralProjectors → ⊥
+replicabilityDoesNotCreateLiteralProjectors ()
+
 ------------------------------------------------------------------------
 -- 6. Pareto frontier.
 ------------------------------------------------------------------------
@@ -186,6 +208,8 @@ record WeightTwoC6FourierFrontier : Set where
     threeBTrace54Paid : Bool
     sixBCubeTo2BPaid : Bool
     twoBNormalizedTrace276Paid : Bool
+    normalizationInvariantTraceExtractionPaid : Bool
+    wholeSeriesReplicabilityPowerRelationPaid : Bool
     inverseTraceSymmetryPaid : Bool
     weightTwoDimension196884Paid : Bool
     c6FourierIntegerSpectrumPaid : Bool
@@ -196,8 +220,8 @@ open WeightTwoC6FourierFrontier public
 
 weightTwoC6FourierFrontier : WeightTwoC6FourierFrontier
 weightTwoC6FourierFrontier = weight-two-c6-fourier-frontier
-  true true true true true true true true false false
-  "the class-function/graded-trace data now determine the C6 weight-two spectrum (32904,32772,32838,32760,32838,32772). Keep this as an independent Moonshine spectral receipt. The next action-level payment would be a literal 6B endomorphism on the same V^natural_2 carrier with projectors realizing these eigenspaces. Do not use the shared integer 78, the 6B^2->3B power edge, or OEIS coefficients to identify the separate N(3B) 12+78 multiplicity representation."
+  true true true true true true true true true true false false
+  "the class-function/graded-trace data determine the C6 weight-two spectrum (32904,32772,32838,32760,32838,32772), and complete replicability supplies the whole normalized-series power relation behind 6B -> 3B / 2B rather than isolated coefficient matching. Keep both as independent source-paid receipts. The next action-level payment is a literal selected 6B endomorphism on the same V^natural_2 carrier, with its square/cube identified to the selected 3B/2B actions and spectral projectors realizing these eigenspaces. Do not use q^0 normalization constants, shared 78, or replicability alone to identify the separate N(3B) 12+78 multiplicity representation."
 
 sixBPowerNormalizationFrontier : SixB.OEIS6BPowerNormalizationFrontier
 sixBPowerNormalizationFrontier = SixB.oeis6BPowerNormalizationFrontier
