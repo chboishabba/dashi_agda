@@ -2,8 +2,11 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBounde
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.ConsumerSafeRefinementPromotionExact as StaticCore
 import DASHI.Core.ConsumerSafeFuturePromotionExact as Composite
 import DASHI.Core.FrozenProvenanceDynamicRefinementExact as Frozen
+import DASHI.Core.DynamicalQuotientSafety as Dynamic
+import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConsumerSafePromotionExact as Static
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverParetoExact as Pareto
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBoundedFutureDynamicsExact as Dynamics
@@ -53,16 +56,25 @@ adkSourceBoundedConsumerSafeFuturePromotion =
     threeAxisRealisesSourceBoundedFuture
 
 staticSafeSelectionRetained :
-  Composite.ConsumerSafeSelectionReceipt
+  StaticCore.ConsumerSafeSelectionReceipt
     Static.thirdAxisCostHyperfabric
     Pareto.threeAxis
 staticSafeSelectionRetained =
   Composite.staticSafeSelection adkSourceBoundedConsumerSafeFuturePromotion
 
+dynamicSafetyRetained :
+  Dynamic.DynamicConsumerSafety
+    Dynamics.adkSourceBoundedActionSystem
+    Dynamics.adkFutureObservation
 dynamicSafetyRetained =
   Composite.selectedObserverDynamicSafe
     adkSourceBoundedConsumerSafeFuturePromotion
 
+queryAdequacyRetained :
+  Query.AdequateFor
+    Dynamics.adkFutureObservation
+    Dynamics.dynamicThirdAxisSemantics
+    Third.askThirdCoordinate
 queryAdequacyRetained =
   Composite.selectedObserverQueryAdequate
     adkSourceBoundedConsumerSafeFuturePromotion
