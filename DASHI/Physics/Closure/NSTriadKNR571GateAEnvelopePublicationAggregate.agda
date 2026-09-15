@@ -15,10 +15,13 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopePublicationAggregate wher
 --   exact centered-shift p+q=2k / squared-output / Plucker geometry,
 --   rational scalar radius doubling without a square-root axiom,
 --   literal aligned P-Q complement on the R467/R455 carrier,
---   centered angular second-moment payment by 4|y|^2.
+--   centered angular second-moment payment by 4|y|^2,
+--   division-free ordered-rational denominator compiler.
 --
--- Ordered denominator payment, final uniform A2 curvature, inner-fibre gain,
--- R568 and Clay promotion remain open.
+-- The remaining A2 seam is the literal same-object bridge supplying the
+-- centered cleared-product bound to that compiler, followed by final transport
+-- into the Gate-A sample.  Inner-fibre gain, R568 and Clay promotion remain
+-- open.
 
 import DASHI.Physics.Closure.NSTriadKNR571PairedSecondMomentPublicationAggregate
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact
@@ -27,4 +30,5 @@ import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact
 import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact
+import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialDenominatorOrderExact
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkRegression
