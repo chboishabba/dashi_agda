@@ -28,6 +28,10 @@ speciesToContextualRepair :
     Pareto.contextualProblem Pareto.speciesSensitive Pareto.contextualChemistry
 speciesToContextualRepair = Pareto.speciesToContextualRepair
 
+speciesExcludedForContextualConsumer :
+  MDL.Eligible Pareto.contextualProblem Pareto.speciesSensitive → ⊥
+speciesExcludedForContextualConsumer = Pareto.speciesExcludedFromContextualEligibility
+
 contextualSelectedMinimal :
   MDL.MinimalEligibleDescription
     Pareto.contextualProblem Pareto.contextualChemistry
@@ -37,6 +41,18 @@ contextualSelectedPareto :
   MDL.ParetoAdmissible
     Pareto.contextualCostHyperfabric Pareto.contextualChemistry
 contextualSelectedPareto = Pareto.contextualParetoAdmissible
+
+bulkRepairStaysLocal :
+  MDL.sameNeighbourhood Pareto.speciesNeighbourhood
+    (MDL.address Pareto.speciesNeighbourhood Pareto.bulkOnly)
+    (MDL.address Pareto.speciesNeighbourhood Pareto.speciesSensitive)
+bulkRepairStaysLocal = Pareto.bulkRepairStaysLocal
+
+contextualRepairStaysLocal :
+  MDL.sameNeighbourhood Pareto.contextualNeighbourhood
+    (MDL.address Pareto.contextualNeighbourhood Pareto.speciesSensitive)
+    (MDL.address Pareto.contextualNeighbourhood Pareto.contextualChemistry)
+contextualRepairStaysLocal = Pareto.contextualRepairStaysLocal
 
 boundary : Pareto.BiocontrolChemistryObserverParetoBoundary
 boundary = Pareto.canonicalBiocontrolChemistryObserverParetoBoundary
