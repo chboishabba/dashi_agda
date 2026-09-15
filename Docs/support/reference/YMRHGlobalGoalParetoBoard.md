@@ -155,26 +155,126 @@ Target:
 
 ```text
 UVToContinuumYM Y
+= LiteralWeakCouplingRGConstruction Y
++ UnifiedContinuumYMConstruction Y
 ```
 
-This remains a bundle:
+The audit removes several historical overpayments. The current A accounting is four physical/source coordinates.
+
+### A1 — literal finite physical state -> published active RG carrier
+
+Bałaban CMP119/CMP122 already own the generic four-dimensional nonlinear RG stability mechanism on the source-native active flow. The finite beta history supplies the active small-coupling hypothesis.
+
+`BalabanPublishedUVStabilityNonlinearRGCoreExact` records:
 
 ```text
-literal weak-coupling RG construction
-+ continuum limit of same finite family
-+ Schwinger belongs to same continuum measure
-+ accepted OS/Wightman axioms
-+ reconstructed Hilbert space
-+ positive self-adjoint Hamiltonian
+publishedFourDimensionalNonlinearRGCoreLevel = standardImported
+finiteHistoryToPublishedCoreCompilerLevel     = machineChecked
 ```
 
-Current status:
+The live finite-RG seam is not “re-prove nonlinear RG stability”. It is:
 
 ```text
-OPEN / producer audit incomplete.
+literal selected Wilson / ghost / Haar / background finite construction
+= the CMP119/CMP122 active effective-density carrier
 ```
 
-Prefer shared continuum/OS/operator completion with T78-B and T78-C rather than duplicating a second continuum construction. Historical Prokhorov/all-scale RG packaging is not automatically the cheapest route.
+plus the genuinely physical finite signed / one-loop / transfer identities required by the literal `LiteralWeakCouplingRGConstruction Y` fields.
+
+Current classification:
+
+```text
+A1 SOURCE_REALIZATION / SAME_OBJECT_TRANSPORT
+```
+
+Primary source authorities remain CMP119 DOI `10.1007/BF01217741` and CMP122-II DOI `10.1007/BF01238433`.
+
+### A2 — selected continuum target / determining-test meaning
+
+The preferred quantitative T5 expectation producer already contains ONE continuum measure and proves selected expectation convergence to expectations under that exact target.
+
+Round211 therefore removes global measure compactness / Prokhorov as a prerequisite on this route. Those remain compatibility/existence routes only for producers which do not already select the continuum measure.
+
+The live semantic payment is:
+
+```text
+selected determining observable
+-> is among the bounded tests controlled by the T5 expectation producer
++ finite expectation semantics needed for normalization / positivity / action-gauge invariance
+```
+
+Once this meaning is supplied, the scalar expectation closure compilers pay the corresponding continuum properties on the exact selected target.
+
+Current classification:
+
+```text
+A2 SAME_OBJECT_TRANSPORT / LOGICAL-CARRIER SEMANTICS
+```
+
+Round211’s preferred first status is exactly `missingSelectedExpectationPropertyAndDeterminingTestMeaning`.
+
+### A3 — selected continuum Schwinger / OS semantics
+
+`BalabanClayT5ExpectationLinkedContinuumOSExact` already makes the continuum target definitionally the expectation producer’s selected target and machine-compiles the OS-axiom record once the physical property meanings are supplied.
+
+Live physical semantics on that exact Schwinger family:
+
+```text
+continuum Euclidean covariance
+continuum symmetry
+continuum temperedness
+continuum regularity
+continuum clustering
+Gram reflection positivity -> Schwinger reflection positivity
+```
+
+Normalization, positivity and action/gauge invariance are not separate global-limit theorems on this preferred route; they compile from A2 expectation semantics.
+
+Current classification:
+
+```text
+A3 SOURCE_REALIZATION / SAME_OBJECT SEMANTICS
+```
+
+Important shared-coordinate rule: continuum clustering is also consumed by T78-B. Reuse the same selected covariance/clustering family; do not build a second A-specific clustering theory.
+
+### A4 — same-object OS reconstruction / physical Hamiltonian operator package
+
+Standard OS reconstruction is generic analysis after the physical Schwinger package is available, but the physical Yang–Mills operator realization remains open.
+
+`YMOperatorDomainContinuumFrontier2026Exact` keeps the genuine physical leaves explicit:
+
+```text
+selected gauge-invariant L2 carrier          already chosen
+physical action-variation = Hamiltonian      open
+genuine partial operator domain              open
+common invariant dense physical core         open
+physical self-adjoint selected YM form       open
+YM evolution = OS reconstructed evolution    open
+finite-to-continuum YM construction          open
+continuum OS/Wightman package                open
+```
+
+Generic Kato/Mosco/Stone, dense-core spectral exclusion and recovery compilers do not manufacture these physical identifications.
+
+Current classification:
+
+```text
+A4 SAME_OBJECT_TRANSPORT + SOURCE_REALIZATION / OPERATOR-DOMAIN PHYSICS
+```
+
+This operator/Hamiltonian carrier must be shared with T78-B’s same-H gap and T78-C’s stress-charge generator. Do not construct separate Hamiltonians for A, B and C.
+
+### T78-A current verdict
+
+```text
+A1 literal physical finite RG state -> published CMP119/CMP122 carrier
+A2 selected determining-test / expectation semantics on the already-selected continuum target
+A3 physical continuum Schwinger/OS property semantics on that exact target
+A4 same-object OS reconstruction + domain/core/self-adjoint physical Hamiltonian
+```
+
+Historical global Prokhorov extraction, arbitrary-sequence convergence and “generic nonlinear RG stability” are not primitive payments on this preferred route.
 
 ## 5. YM T78-C — same-family local fields / OPE / stress / Ward
 
@@ -242,7 +342,7 @@ local current/charge shell decomposition
 + same reconstructed OS translation group/Hamiltonian.
 ```
 
-The last same-H identification should share the T78-A reconstructed-Hamiltonian carrier rather than build a second Hamiltonian.
+The last same-H identification shares A4’s reconstructed-Hamiltonian carrier.
 
 ### T78-C current verdict
 
@@ -253,7 +353,7 @@ C3 one-step OPE/AF coefficient identification + UV normalization
 C4 local Ward/current realization + same-H charge identification
 ```
 
-This is the current C accounting; historical monolithic `ContinuumLocalOperatorOPEStressTensor` remains a target/donor, not the preferred proof-search granularity.
+Historical monolithic `ContinuumLocalOperatorOPEStressTensor` remains a target/donor, not the preferred proof-search granularity.
 
 Whole-action `A_k` semantics belongs here when first-variation/stress provenance requires it. Do not make it a prerequisite of the shorter BC1 regular-E route.
 
@@ -346,12 +446,12 @@ Opaque same-predicate / exact-height Set receipts are pruned. Numeric verified-r
 3. RH R1
    exact final-near finite representation; stop archaeology unless theorem-bearing source bytes appear.
 
-4. YM T78-C / C1-C4
-   work only if one leaf gains a cheaper same-object/source route than RH R1;
-   current recut is now explicit above.
+4. YM T78-A / A2 or A4
+   investigate only if a same-object carrier weld is cheaper than B1a/B2/RH R1;
+   A1/A3 remain broader source-realization packages.
 
-5. YM T78-A
-   fresh producer audit with shared continuum/OS/Hamiltonian completion preferred.
+5. YM T78-C / C1-C4
+   work only if one leaf gains a cheaper same-object/source route than RH R1.
 
 6. RH R2
    begin fresh analysis after R1, unless an exact donor pays the same literal scalar inequality.
@@ -360,7 +460,26 @@ Opaque same-predicate / exact-height Set receipts are pruned. Numeric verified-r
    keep numeric verified-region / critical-line carrier work independent from R1/R2.
 ```
 
-## 8. Accounting invariants
+## 8. Shared YM coordinates to exploit
+
+The T78 roles are independent endpoint roles but should share physical carriers wherever theorem-bearing:
+
+```text
+A1 finite source-native RG state
+  <-> C2/C3 composite/OPE source coordinates
+
+A2/A3 selected continuum measure/Schwinger family
+  <-> B selected covariance/clustering family
+  <-> C completed local-field family
+
+A4 reconstructed Hamiltonian/domain/core
+  <-> B same-H mass-gap consumer
+  <-> C4 stress-charge generator
+```
+
+The next global optimization should look for these shared coordinates before proving any role-local duplicate theorem.
+
+## 9. Accounting invariants
 
 - One YM Clay endpoint; T78-A/B/C and frozen A/B/C/D are internal decompositions.
 - A cheaper terminal producer can route around a historical research row without declaring that historical row literally inhabited.
@@ -372,16 +491,16 @@ Opaque same-predicate / exact-height Set receipts are pruned. Numeric verified-r
 - Historical donors are retained append-only even when dominated.
 - Every Pareto recut updates this board before the tranche is considered complete.
 
-## 9. Snapshot
+## 10. Snapshot
 
 Date: 2026-09-15 Australia/Brisbane.
 
 ```text
 YM T78-B: preferred route R341; current smallest B1 leaf is R342 B1a; B2 independent.
+YM T78-A: recut to A1 finite source-state weld, A2 selected expectation/test semantics, A3 continuum OS semantics, A4 shared physical OS/operator Hamiltonian.
 YM T78-C: recut to C1 marked fields, C2 composite/OPE identity, C3 one-step OPE/AF law, C4 local Ward/same-H stress charge.
 RH high: R1 representation then R2 strict actual-ClusterResponse family.
 RH terminal: R3 verified-region / critical-line same-carrier interpretation remains independent.
-YM T78-A: next un-audited global producer bundle.
 ```
 
 No Clay Yang–Mills solution or RH proof is claimed by this accounting document.
