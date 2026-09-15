@@ -59,9 +59,19 @@ grep -q 'CheckedScalarLiteralFoldIdentification' "$R1"
 grep -q 'compileFinalNearCheckedScalarBridge' "$R1"
 grep -q 'compileFinalNearRepresentationEqualityFromSplit' "$R1"
 
-# RED: source/status audit must fail-close the two halves independently.  A future
-# source recovery may pay R1a without R1b or vice versa; bundled status must not
-# make both appear closed.
+# R1b is itself two source-shaped payments: the checked scalar must first be
+# identified with the literal reflection-pair scalar on the final pole-quotient
+# carrier, and only then must that SAME scalar be identified with the finite fold.
+grep -q 'CheckedScalarLiteralReflectionPairIdentification' "$R1"
+grep -q 'LiteralReflectionPairFiniteFoldIdentification' "$R1"
+grep -q 'compileCheckedScalarLiteralFoldIdentificationFromReflectionPairSplit' "$R1"
+grep -q 'r1b1CheckedScalarReflectionPairIdentificationInhabited' "$R1"
+grep -q 'r1b1CheckedScalarReflectionPairIdentificationInhabitedIsFalse' "$R1"
+grep -q 'r1b2ReflectionPairFiniteFoldIdentificationInhabited' "$R1"
+grep -q 'r1b2ReflectionPairFiniteFoldIdentificationInhabitedIsFalse' "$R1"
+
+# Source/status audit must fail-close every independently payable representation
+# edge. A future recovery may pay R1a, R1b1, or R1b2 separately.
 grep -q 'r1aCheckedScalarAttachmentInhabited' "$R1"
 grep -q 'r1aCheckedScalarAttachmentInhabitedIsFalse' "$R1"
 grep -q 'r1bLiteralFoldIdentificationInhabited' "$R1"
