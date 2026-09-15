@@ -3,10 +3,12 @@ module DASHI.Finance.TrumpFamilyTradeAcquisitionProgressExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Finance.TrumpFamilyTradeAcquisitionFrontierExact as Frontier
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Exact as Primary2
 import DASHI.Finance.TrumpFamilyExternalCounterpartyPrimaryExact as CounterpartyPrimary
+import DASHI.Governance.QuotientDefectResidualRouting as Residual
 
 ------------------------------------------------------------------------
 -- ACQUISITION PROGRESS
@@ -42,8 +44,7 @@ currentTrumpFamilyTradeAcquisitionProgress =
     true
 
 annualPagePaymentWitness :
-  Frontier.targetsResidual Frontier.acquireAnnualDisclosurePages
-    DASHI.Governance.QuotientDefectResidualRouting.authority ≡ true
+  Frontier.targetsResidual Frontier.acquireAnnualDisclosurePages Residual.authority ≡ true
 annualPagePaymentWitness = refl
 
 ------------------------------------------------------------------------
