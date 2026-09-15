@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalSubstitutionContractionRate
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _*_; _<_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
@@ -30,7 +30,7 @@ canonicalSubstitutionContractionRate dataSet =
 
 canonicalSubstitutionContractionRateStrict :
   (dataSet : R104.CMP116FiniteNormalizedAnalyticDemands) →
-  canonicalSubstitutionContractionRate dataSet < ℚ.1ℚ
+  canonicalSubstitutionContractionRate dataSet < 1ℚ
 canonicalSubstitutionContractionRateStrict dataSet =
   R104.substitutedBackgroundDemandPaid dataSet
 
