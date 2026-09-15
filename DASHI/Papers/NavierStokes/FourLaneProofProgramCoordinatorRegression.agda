@@ -27,14 +27,6 @@ periodicBPhaseR104CompilerRecovered :
 periodicBPhaseR104CompilerRecovered =
   Program.periodicBPhaseR104CompilerRecoveredIsTrue
 
--- A concrete physical slice is still not recovered: the phase-sensitive
--- signed-production inequality remains an input field of R414.
-periodicBPhasePhysicalR104StillOpen :
-  Program.periodicBPhasePhysicalR104Recovered
-    Program.canonicalNSFourLaneProofProgram ≡ false
-periodicBPhasePhysicalR104StillOpen =
-  Program.periodicBPhasePhysicalR104RecoveredIsFalse
-
 -- R414 definitionally sets the Round104 integrable remainder to the literal
 -- R406 remainder integral and reuses the R410 cutoff-uniform remainder bound.
 periodicBPhaseR406WeldRecovered :
@@ -43,11 +35,49 @@ periodicBPhaseR406WeldRecovered :
 periodicBPhaseR406WeldRecovered =
   Program.periodicBPhaseLiteralR406RemainderWeldRecoveredIsTrue
 
+-- R516/R517 close the finite-carrier critical radial/norm realization, but
+-- they do not manufacture the full R414 physical critical-observable slice.
+periodicBPhaseCriticalRadialRealizationRecovered :
+  Program.periodicBPhaseCriticalRadialRealizationRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseCriticalRadialRealizationRecovered =
+  Program.periodicBPhaseCriticalRadialRealizationRecoveredIsTrue
+
+periodicBPhasePhysicalCriticalObservablesStillOpen :
+  Program.periodicBPhasePhysicalCriticalObservableRealizationRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhasePhysicalCriticalObservablesStillOpen =
+  Program.periodicBPhasePhysicalCriticalObservableRealizationRecoveredIsFalse
+
+periodicBPhaseCriticalEnergyIdentityStillOpen :
+  Program.periodicBPhaseCriticalEnergyInequalityRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseCriticalEnergyIdentityStillOpen =
+  Program.periodicBPhaseCriticalEnergyInequalityRecoveredIsFalse
+
 periodicBPhaseSignedProductionEstimateStillOpen :
   Program.periodicBPhaseSignedProductionEstimateRecovered
     Program.canonicalNSFourLaneProofProgram ≡ false
 periodicBPhaseSignedProductionEstimateStillOpen =
   Program.periodicBPhaseSignedProductionEstimateRecoveredIsFalse
+
+periodicBPhaseInitialCriticalCeilingStillOpen :
+  Program.periodicBPhaseUniformInitialCriticalCeilingRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseInitialCriticalCeilingStillOpen =
+  Program.periodicBPhaseUniformInitialCriticalCeilingRecoveredIsFalse
+
+periodicBPhasePositiveRetainedViscosityStillOpen :
+  Program.periodicBPhasePositiveRetainedViscosityRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhasePositiveRetainedViscosityStillOpen =
+  Program.periodicBPhasePositiveRetainedViscosityRecoveredIsFalse
+
+periodicBPhasePhysicalR104StillOpen :
+  Program.periodicBPhasePhysicalR104Recovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhasePhysicalR104StillOpen =
+  Program.periodicBPhasePhysicalR104RecoveredIsFalse
 
 periodicBDiscoveryFrontierIsPhaseUnderRecoveryAssumption :
   Program.periodicBOnlyPhaseDiscoveryRemainsUnderCommRecoveryAssumption
