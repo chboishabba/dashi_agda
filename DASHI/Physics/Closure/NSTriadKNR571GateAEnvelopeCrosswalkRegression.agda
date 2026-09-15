@@ -4,7 +4,8 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkRegression where
 -- Production must preserve the merged R571 paired-second-moment carrier,
 -- reuse existing donors for A1/G2/G1, isolate A2 as the radial-curvature leaf,
 -- record the theorem-bearing Lean A1/A2 receipts without fabricating an Agda
--- sample transport, and must not promote R568 or a Clay endpoint.
+-- sample transport, expose the local Hermitian G0' weld, and must not promote
+-- G1/G2, R568, or a Clay endpoint.
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -36,6 +37,14 @@ leanReceiptDoesNotCreateAgdaA1SampleWeld = refl
 leanReceiptDoesNotCreateAgdaA2SampleWeld :
   GateA.r571GateAA2AgdaSampleTransportObserved ≡ false
 leanReceiptDoesNotCreateAgdaA2SampleWeld = refl
+
+localHermitianG0WeldClosed :
+  GateA.r571GateAG0HermitianScalarizedPairClosed ≡ true
+localHermitianG0WeldClosed = refl
+
+globalScalarStateStillNotRequired :
+  GateA.r571GateAGlobalPhysicalScalarStateRequired ≡ false
+globalScalarStateStillNotRequired = refl
 
 existingG2PathDonorRetained :
   GateA.r571GateAG2FinitePathDonorLocated ≡ true
