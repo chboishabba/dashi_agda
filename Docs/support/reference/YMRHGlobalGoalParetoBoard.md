@@ -28,7 +28,7 @@ Source/DOI/QID/Dewey/link/status coordinates never manufacture theorem payment.
 
 ```text
 1. YM T78-B / R347 selected marked boundary-substitution comparison
-2. YM T78-B / R347 selected-J physical-coordinate attachment
+2. YM T78-B / R348 selected coefficient = literal selected mixed-log response
 3. YM T78-B / R346 selected physical distance = Euclidean time
 4. RH R1a/R1b final-near representation transport when theorem-bearing checked-near bytes/object are recoverable
 5. RH R2 fresh strict literal complement theorem
@@ -45,7 +45,7 @@ Terminal consumer:
 SameHamiltonianPhysicalMassGap
 ```
 
-Current preferred line is **PR #944, internal R345-R347**.
+Current preferred line is **PR #944, internal R345-R348**.
 
 Historical recut:
 
@@ -107,7 +107,7 @@ substituted-background stability
 
 Therefore Cauchy extraction is not fresh YM analysis.
 
-Current R347 source/application frontier:
+Current R347 source/application cut:
 
 ```text
 L_boundary/substitution
@@ -115,28 +115,68 @@ L_boundary/substitution
   on the exact shared Hessian-marked source carrier.
 
 J_attach
-  theorem-bearing same-object attachment from that source/Cauchy coefficient
-  to R318's literal selected J(F),J(G) mixed-log response.
+  SAME-object attachment from the resulting source/Cauchy coefficient
+  to R318's literal selected mixed-log response.
 
 D_time
   R318 physical distance for the exact R300-selected pair equals Euclidean time.
 ```
 
-Compiler/status owner:
+Canonical owner:
 
-`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact.agda`
+`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryCutRound347Exact.agda`
 
 Focused validation:
 
-`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryRound347Validation.agda`
+`DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedBoundaryCutRound347Validation.agda`
 
-### 3.3 Explicitly pruned T78-B requirements
+### 3.3 R348 recut below J_attach
+
+R318 already fixes the selected source directions by construction:
+
+```text
+J_L = sourceDirectionOf (meaning base) left
+J_R = sourceDirectionOf (meaning base) right.
+```
+
+There is no independent theorem left to choose or discover the J pair.
+
+The residual same-object payment is therefore only:
+
+```text
+C_attach:
+source/Cauchy coefficient evaluated on the already-selected J_L,J_R
+  = R318 literal selected mixed-log response on that same J_L,J_R pair.
+```
+
+This is strictly weaker than reviving R318's older three-coordinate applicability record. The preferred R346 route already uses R318's selected connecting root and physical distance directly, so separate source-root/source-distance welds are not primitive.
+
+Owner:
+
+`DASHI/Physics/YangMills/BalabanCMP116SelectedCoefficientAttachmentRound348Exact.agda`
+
+Focused validation:
+
+`DASHI/Physics/YangMills/BalabanCMP116SelectedCoefficientAttachmentRound348Validation.agda`
+
+The remaining T78-B queue is therefore:
+
+```text
+L_boundary/substitution
+C_attach
+D_time
+```
+
+### 3.4 Explicitly pruned T78-B requirements
 
 Do **not** reintroduce as primitive:
 
 ```text
 R343 sourceEnvelope -> R281 clusteringEnvelope calibration
 C_H <= 1
+fresh selection of J_L,J_R
+source-root weld for the preferred R346 route
+source-distance weld for the preferred R346 route
 rootedShell <= markedAnalyticShell
 selected response = older hessianInfluenceShell
 selected response = CMP109 Pi / field-Hessian carrier
@@ -153,7 +193,7 @@ markedAnalyticShell
 
 It does not imply `rootedShell <= markedAnalyticShell`.
 
-### 3.4 Primary source boundary
+### 3.5 Primary source boundary
 
 CMP116 authority:
 
@@ -163,7 +203,7 @@ The source supports analytic localization, substitution and Cauchy differentiati
 
 ## 4. YM T78-A / T78-C
 
-These remain live endpoint coordinates on the same construction but are currently Pareto-dominated by the narrower T78-B R347 leaves.
+These remain live endpoint coordinates on the same construction but are currently Pareto-dominated by the narrower T78-B R347/R348 leaves.
 
 T78-A still owns the UV->same-continuum construction/OS/Hamiltonian obligations.
 
@@ -216,8 +256,9 @@ The older 8889 cluster result is an optional donor only; status is not transport
                retained as historical/donor route.
 
 #944 / R345  removes fixed 1/4 amplitude overpayment.
-#944 / R346  direct shared-marked shell producer; current terminal T78-B consumer surface.
-#944 / R347  current Pareto decomposition below L_marked.
+#944 / R346  direct shared-marked shell producer; terminal T78-B consumer surface.
+#944 / R347  decomposes L_marked below the generic Cauchy compiler.
+#944 / R348  removes fresh J-direction selection; leaves only coefficient same-object attachment.
 
 RH R1         genuine representation wall; source bytes currently unavailable.
 RH R2         genuine analytic wall after R1.
@@ -230,4 +271,4 @@ This board is scheduling/accounting only.
 - `machineChecked` labels in source owners are not fresh exact-head kernel receipts.
 - CodeRabbit status is not Agda validation.
 - No Clay Yang-Mills solution or RH proof is claimed.
-- The R347 owner records the current frontier; it does not inhabit its conditional physical/source fields.
+- R347/R348 record the current frontier; they do not inhabit their conditional physical/source fields.
