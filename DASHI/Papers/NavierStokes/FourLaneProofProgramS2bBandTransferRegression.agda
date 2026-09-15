@@ -46,10 +46,15 @@ s2b1b2b0LocalStrictJumpTailRecovered :
 s2b1b2b0LocalStrictJumpTailRecovered =
   Subject.s2b1b2b0LocalStrictJumpTailRecoveredIsTrue
 
-s2b1bGlobalLayerCakeStillOpen :
-  Subject.s2b1bStructuralSuffixRecovered ≡ false
-s2b1bGlobalLayerCakeStillOpen =
-  Subject.s2b1bStructuralSuffixRecoveredIsFalse
+s2b1b2b1GlobalRecursivePrefixWeldRecovered :
+  Subject.s2b1b2b1GlobalRecursivePrefixWeldRecovered ≡ true
+s2b1b2b1GlobalRecursivePrefixWeldRecovered =
+  Subject.s2b1b2b1GlobalRecursivePrefixWeldRecoveredIsTrue
+
+s2b1bGlobalLayerCakeRecovered :
+  Subject.s2b1bStructuralSuffixRecovered ≡ true
+s2b1bGlobalLayerCakeRecovered =
+  Subject.s2b1bStructuralSuffixRecoveredIsTrue
 
 s2QuantitativeEstimateStillOpen :
   Subject.s2QuantitativeEstimateRecovered ≡ false
