@@ -14,6 +14,7 @@ import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact as GateA
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact as A2
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as A2Square
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
+import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact as RadiusDouble
 
 preferredLinearizationClosed :
   GateA.r571GateAPreferredLinearizationClosed ≡ true
@@ -83,9 +84,13 @@ centeredShiftAlignedPluckerScalingClosed :
   CenteredShift.r571A2CenteredShiftPluckerScalingClosed ≡ true
 centeredShiftAlignedPluckerScalingClosed = refl
 
-centeredShiftScalarRadiusDoublingStillOpen :
-  CenteredShift.r571A2CenteredShiftScalarRadiusDoublingClosed ≡ false
-centeredShiftScalarRadiusDoublingStillOpen = refl
+centeredShiftScalarRadiusDoublingClosed :
+  RadiusDouble.r571A2CenteredShiftScalarRadiusDoublingClosed ≡ true
+centeredShiftScalarRadiusDoublingClosed = refl
+
+centeredShiftRadiusDoublingUsesSquareRootAxiom :
+  RadiusDouble.r571A2CenteredShiftRadiusDoublingUsesSquareRootAxiom ≡ false
+centeredShiftRadiusDoublingUsesSquareRootAxiom = refl
 
 radialCurvatureUsesExistingGapProductDonor :
   A2Square.r571A2R127SquareGapAlgebraReused ≡ true
