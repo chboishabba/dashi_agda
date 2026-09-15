@@ -166,13 +166,13 @@ magpieSingingSeedObservation = magpie-vocal-event
   "unpaid: transient YouTube representation is not stable media-byte identity"
   "Animalexic yt-dlp transient resolution + ffmpeg stream"
   identityCandidate identityUnknown identityUnknown
-  "Western Australia only as bounded source-context family; exact site unpaid"
-  regionLevel
-  "WA Department of Education external source role; not exact coordinates"
-  "Western Australia candidate region"
+  "unresolved"
+  locationUnknown
+  "WA Department of Education is a source-context receipt only; it does not locate the recording"
   "unresolved"
   "unresolved"
-  "external source role: Australian magpie singing; exact behaviour/individual unpaid"
+  "unresolved"
+  "external source role: Australian magpie singing; exact behaviour/individual/location unpaid"
   "pending synchronized audio feature extraction"
   "pending visible-motion extraction"
   "unassigned"
@@ -182,7 +182,7 @@ magpieSingingSeedObservation = magpie-vocal-event
   "unpaid"
   ("BioacousticYouTubeSeedSourceExact" ∷ [])
   []
-  ("runtime metadata" ∷ "event segmentation" ∷ "individual/group identity" ∷ "site precision" ∷ [])
+  ("runtime metadata" ∷ "event segmentation" ∷ "individual/group identity" ∷ "location precision" ∷ [])
 
 initialAtlasObservations : List MagpieVocalEvent
 initialAtlasObservations =
