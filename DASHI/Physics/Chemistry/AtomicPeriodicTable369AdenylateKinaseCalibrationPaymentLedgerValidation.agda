@@ -16,10 +16,10 @@ paymentRegression :
   ≡ false
   × P.AdKCalibrationPaymentLedgerBoundary.intermediateFreeEnergyCellsPaid
     P.canonicalAdKCalibrationPaymentLedgerBoundary
-  ≡ false
+  ≡ true
   × P.AdKCalibrationPaymentLedgerBoundary.perEdgeKramersNumericsPaid
     P.canonicalAdKCalibrationPaymentLedgerBoundary
-  ≡ false
+  ≡ true
 paymentRegression = refl , refl , refl , refl , refl
 
 provenanceRegression :
