@@ -14,7 +14,8 @@ import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 --   SensibLaw owns legal proposition identity, authority/application,
 --   support/defeater/comparator roles, review/payment and legal explanation.
 --   SLR owns the generic parse -> residual -> acquire -> parse recurrence.
---   ITIR/Svelte owns user-facing projections over the same proof specimen.
+--   JCUI / ITIR-Svelte owns user-facing projections over the same specimen.
+--   StatiBaker may retain opted-in interaction observations only.
 --
 -- This module formalises UI/projection firewalls only.  It does not prove a
 -- legal conclusion in Mabo and does not turn discovery/context sources into
@@ -22,7 +23,27 @@ import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 ------------------------------------------------------------------------
 
 data ViewDepth : Set where
-  explainView whyView sourceView contextView graphView : ViewDepth
+  explainView whyView sourceView contextView graphView guideView : ViewDepth
+
+data ReadingCardKind : Set where
+  identityCard sourceCard proofCard : ReadingCardKind
+
+data ReadingPnfCue : Set where
+  actorCue
+  predicateCue
+  patientCue
+  negationCue
+  modalityCue
+  conditionCue
+  temporalCue
+  coreferenceCue : ReadingPnfCue
+
+data BoundedReadingRole : Set where
+  challengedPremiseRole
+  historicalInputRole
+  authorityPropositionRole
+  immediateImplicationRole
+  downstreamApplicationRole : BoundedReadingRole
 
 data LegalTermLayer : Set where
   lexicalLayer encyclopediaLayer australianLawLayer contingentArgumentLayer : LegalTermLayer
@@ -59,6 +80,50 @@ canonicalExplanationAnchorBoundary =
     true
     true
     false
+    false
+    false
+    false
+
+------------------------------------------------------------------------
+-- JCUI runtime parity.
+--
+-- JesusCrust's ReadingSurface is a projection over one Semantic target.  It
+-- may open a separate Source target, but switching Explain/Why/Source/
+-- Context/Graph/Guide never changes the underlying semantic identity.
+------------------------------------------------------------------------
+
+record JCUIReadingSurfaceParity : Set where
+  constructor jcuiReadingSurfaceParity
+  field
+    siblingViewsPreserveSemanticRef : Bool
+    sourceCardUsesDistinctSourceRef : Bool
+    whyUsesSemanticExpand : Bool
+    contextUsesSemanticFollow : Bool
+    graphUsesSemanticZoomFit : Bool
+    guideUsesSameSemanticRef : Bool
+    guideExposesActorPredicatePatient : Bool
+    guideInteractionCreatesUnderstanding : Bool
+    identitySourceProofCardsCollapsed : Bool
+    boundedDefaultHasFiveRoles : Bool
+    graphVisibleByDefault : Bool
+    contextVisibleByDefault : Bool
+    guideVisibleByDefault : Bool
+
+open JCUIReadingSurfaceParity public
+
+canonicalJCUIReadingSurfaceParity : JCUIReadingSurfaceParity
+canonicalJCUIReadingSurfaceParity =
+  jcuiReadingSurfaceParity
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+    true
     false
     false
     false
@@ -254,6 +319,9 @@ data SLRRouteSelectionCreatesLegalConclusion : Set where
 data AcquiredSourcePaysWithoutReview : Set where
 data TypedPublicInterestArgumentCreatesStanding : Set where
 data TypedPublicInterestArgumentCreatesLegalAdvice : Set where
+data ReadingViewChangeMutatesSemanticIdentity : Set where
+data GuideInteractionCreatesUnderstanding : Set where
+data IdentitySourceProofCardsAreOneThing : Set where
 
 progressiveDisclosureDoesNotLoseEvidence :
   ProgressiveDisclosureImpliesEvidenceLoss → ⊥
@@ -282,3 +350,13 @@ typedArgumentDoesNotCreateStanding ()
 
 typedArgumentDoesNotCreateLegalAdvice : TypedPublicInterestArgumentCreatesLegalAdvice → ⊥
 typedArgumentDoesNotCreateLegalAdvice ()
+
+readingViewPreservesSemanticIdentity :
+  ReadingViewChangeMutatesSemanticIdentity → ⊥
+readingViewPreservesSemanticIdentity ()
+
+guideInteractionIsNotUnderstanding : GuideInteractionCreatesUnderstanding → ⊥
+guideInteractionIsNotUnderstanding ()
+
+identitySourceAndProofRemainDistinct : IdentitySourceProofCardsAreOneThing → ⊥
+identitySourceAndProofRemainDistinct ()
