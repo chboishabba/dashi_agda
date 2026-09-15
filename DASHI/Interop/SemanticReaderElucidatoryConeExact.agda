@@ -21,13 +21,13 @@ data SemanticTargetKind : Set where
   roleTarget constituentTarget compositeTarget claimTarget entityTarget : SemanticTargetKind
 
 data SemanticIntent : Set where
-  explainSpanIntent
-  explainRoleIntent
-  whyClaimIntent
-  openSourceIntent
-  exploreEntityIntent
-  followReferenceIntent
-  expandProofConeIntent
+  explainSpanIntent : SemanticIntent
+  explainRoleIntent : SemanticIntent
+  whyClaimIntent : SemanticIntent
+  openSourceIntent : SemanticIntent
+  exploreEntityIntent : SemanticIntent
+  followReferenceIntent : SemanticIntent
+  expandProofConeIntent : SemanticIntent
   backIntent : SemanticIntent
 
 data IntentOutcome : Set where
