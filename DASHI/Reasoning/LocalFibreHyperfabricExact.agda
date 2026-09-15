@@ -63,7 +63,7 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. MaleCNSTypedHyperfabricChartProjectionExact supplies that selected chart-code carrier and now also records the executed lossless chart/hyperfabric and sender-gain projection receipts. At the 26-region quotient all 676 ordered pairs have nonzero direct coupling, but the coarse complete support is still not identified with the raw neuron/synapse physical hypergraph."
+  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. MaleCNSTypedHyperfabricChartProjectionExact supplies that selected chart-code carrier, executed lossless chart/hyperfabric and sender-gain projection receipts, and the official MaleCNS v1.0 source-authority receipt. The official full segment graph and synaptic-partner table own raw connectivity authority; the complete 26-region support is a derived aggregation and is not the raw neuron/synapse hypergraph."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -137,6 +137,16 @@ maleCNSCoarseCompleteSupportIsNotRawPhysicalHypergraph :
   MaleCNSChart.aggregatedRegionSupportEqualsRawPhysicalSynapseHypergraph
     MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ false
 maleCNSCoarseCompleteSupportIsNotRawPhysicalHypergraph = refl
+
+maleCNSOfficialFullGraphSourceIsBound :
+  MaleCNSChart.officialFullGraphSourceBound
+    MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ true
+maleCNSOfficialFullGraphSourceIsBound = refl
+
+maleCNSTransformedSkeletonsDoNotPayConnectivity :
+  MaleCNSChart.transformedSkeletonsPayConnectivityAuthority
+    MaleCNSChart.canonicalMaleCNSHyperfabricChartProjectionBoundary ≡ false
+maleCNSTransformedSkeletonsDoNotPayConnectivity = refl
 
 ------------------------------------------------------------------------
 -- The symmetry/quotient rule is already owned canonically.
@@ -250,4 +260,4 @@ currentLocalFibreMissingFields = local-fibre-missing-fields
   false
   true
   true
-  "TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact pays projection from compatible GlobalSections, the Set-sized complete ordered-pair chart code, and the executed lossless runtime projection receipts. The 26-region direct support is empirically complete (676/676), but the raw neuron/synapse physical incidence instance remains unpaid. Remaining generic work is NDim refinement, pants seams, braid transport, and source-bound raw physical incidence distinct from the coarse observational chart."
+  "TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact pays projection from compatible GlobalSections, the Set-sized complete ordered-pair chart code, the executed lossless runtime projection receipts, and official MaleCNS v1.0 source authority for raw segment/synapse connectivity. The 26-region direct support is empirically complete (676/676) but remains a derived aggregation; the actual source-bound raw physical incidence -> TypedHyperfabric instance is still unpaid. Remaining generic work is NDim refinement, pants seams, braid transport, and that typed raw-incidence adapter."
