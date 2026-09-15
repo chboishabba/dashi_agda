@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionProjectedPairingRegression where
 
-open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionProjectedPairingExact as Subject
