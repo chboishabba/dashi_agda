@@ -14,7 +14,7 @@ module DASHI.Papers.NavierStokes.FourLaneProofProgramS2bBandTransferAdapterExact
 --   S2b1b1    literal upper-shell selector -> sorted fold -> R98     CLOSED
 --   S2b1b2a   selector -> canonical sorted suffix -> R98 flux        CLOSED
 --   S2b1b2b0  local strict-jump R104 tail = canonical suffix         CLOSED
---   S2b1b2b1  global recursive-prefix R104 layer-cake packet weld    OPEN
+--   S2b1b2b1  global recursive-prefix R104 layer-cake packet weld    CLOSED
 --   S2b2      quantitative packet-flux / R406 estimate               OPEN
 --
 -- The Markdown NS proof-control record remains the routing truth.
@@ -30,6 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNSelectedPacketNonzeroCutoffBridgeExact as 
 import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellPacketSelectorExact as S2b1b1
 import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellCanonicalSuffixExact as S2b1b2a
 import DASHI.Physics.Closure.NSTriadKNR104StrictShellJumpTailExact as S2b1b2b0
+import DASHI.Physics.Closure.NSTriadKNR104GlobalLayerCakePhysicalPacketWeldExact as S2b1b2b1
 
 baseFourLaneCoordinatorReused : Bool
 baseFourLaneCoordinatorReused = true
@@ -66,13 +67,17 @@ s2b1b2b0LocalStrictJumpTailRecovered : Bool
 s2b1b2b0LocalStrictJumpTailRecovered =
   S2b1b2b0.localR104StructuralTailCanonicalSuffixClosed
 
+s2b1b2b1GlobalRecursivePrefixWeldRecovered : Bool
+s2b1b2b1GlobalRecursivePrefixWeldRecovered =
+  S2b1b2b1.globalRecursivePrefixPhysicalPacketWeldClosed
+
 s2b1bStructuralSuffixRecovered : Bool
 s2b1bStructuralSuffixRecovered =
-  S2b1b2b0.globalR104LayerCakePhysicalPacketWeldClosed
+  S2b1b2b1.globalR104LayerCakePhysicalPacketWeldClosed
 
 s2QuantitativeEstimateRecovered : Bool
 s2QuantitativeEstimateRecovered =
-  S2b1a.s2QuantitativePacketFluxEstimateClosed
+  S2b1b2b1.s2QuantitativePacketFluxEstimateClosed
 
 periodicBLaneStillCanonical :
   Base.laneB Base.canonicalNSFourLaneProofProgram ≡ Base.periodicB
@@ -122,12 +127,17 @@ s2b1b2b0LocalStrictJumpTailRecoveredIsTrue :
 s2b1b2b0LocalStrictJumpTailRecoveredIsTrue =
   S2b1b2b0.localR104StructuralTailCanonicalSuffixClosedIsTrue
 
-s2b1bStructuralSuffixRecoveredIsFalse :
-  s2b1bStructuralSuffixRecovered ≡ false
-s2b1bStructuralSuffixRecoveredIsFalse =
-  S2b1b2b0.globalR104LayerCakePhysicalPacketWeldClosedIsFalse
+s2b1b2b1GlobalRecursivePrefixWeldRecoveredIsTrue :
+  s2b1b2b1GlobalRecursivePrefixWeldRecovered ≡ true
+s2b1b2b1GlobalRecursivePrefixWeldRecoveredIsTrue =
+  S2b1b2b1.globalRecursivePrefixPhysicalPacketWeldClosedIsTrue
+
+s2b1bStructuralSuffixRecoveredIsTrue :
+  s2b1bStructuralSuffixRecovered ≡ true
+s2b1bStructuralSuffixRecoveredIsTrue =
+  S2b1b2b1.globalR104LayerCakePhysicalPacketWeldClosedIsTrue
 
 s2QuantitativeEstimateRecoveredIsFalse :
   s2QuantitativeEstimateRecovered ≡ false
 s2QuantitativeEstimateRecoveredIsFalse =
-  S2b1a.s2QuantitativePacketFluxEstimateClosedIsFalse
+  S2b1b2b1.s2QuantitativePacketFluxEstimateClosedIsFalse
