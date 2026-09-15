@@ -5,17 +5,22 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Papers.NavierStokes.TheoremInterface as Paper
 import DASHI.Papers.NavierStokes.FourLaneProofProgramCoordinatorRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
--- the authoritative owners it imports.  The coordinator regression is also
--- imported so the current A/B/C/D routing state is checked by the same root.
+-- the authoritative owners it imports.  The coordinator regression and the
+-- strict-S0 literal critical-observable regression are also imported so the
+-- current A/B/C/D routing state and the first physical phase seam are checked
+-- by the same root whenever this root is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
--- into an observed commit-specific Agda receipt, and it does not manufacture
--- either the R104 physical phase family or the literal-R406 remainder weld.
+-- into an observed commit-specific Agda receipt.  The S0 regression requires a
+-- literal finite observable construction, but it does not manufacture the
+-- later critical-energy, R414 normalisation, phase estimate, initial ceiling,
+-- or retained-viscosity payments.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
