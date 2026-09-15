@@ -10,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Wikimedia.DASHIMathOEIS196883AuditRoadmapExact as Audit
 import DASHI.Wikimedia.IbrahimMonster3BOEIS369UnifiedCrossPollinationExact as Cross
 import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact as Zeta54
+import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as ThreeB
 
 ------------------------------------------------------------------------
 -- MONSTER369 / OEIS SEPARATING HYPERFABRIC
@@ -79,7 +80,7 @@ coordinateStrength zeta54Carrier = typedCarrierMap
 coordinateStrength multiplicity90Arithmetic = exactArithmetic
 coordinateStrength heisenberg729Carrier = typedCarrierMap
 coordinateStrength monster3B65610Character = representationActionTheorem
-coordinateStrength balanced196830Bulk = typedCarrierMap
+coordinateStrength balanced196830Bulk = representationActionTheorem
 coordinateStrength monster196883Degree = representationActionTheorem
 coordinateStrength moonshine196884Dimension = representationActionTheorem
 coordinateStrength ogg475971Factor = exactArithmetic
@@ -95,6 +96,8 @@ coordinateStrength oeisA309510Coordinate = oeisNavigation
 coordinateStrength oeisA199014Coordinate = oeisNavigation
 coordinateStrength sameIntegerCollisionOnly = unpaidCoincidence
 
+-- Deliberately stricter than `coordinateStrength`: character/dimension theorems
+-- are representation evidence but do not thereby become literal action maps.
 proofBearingForMonsterAction : Monster369Coordinate → Bool
 proofBearingForMonsterAction actualWeylActionCoordinate = true
 proofBearingForMonsterAction selected3BRestrictionCoordinate = true
@@ -127,10 +130,10 @@ heisenbergCarrierCountIs729 : Zeta54.heisenbergStateCount ≡ 729
 heisenbergCarrierCountIs729 = Zeta54.heisenbergStateCountIsSevenTwentyNine
 
 monsterIdentityEvaluationIs196883 :
-  Cross.ThreeB.identityEvaluation Cross.ThreeB.monster3BResidualRegularCarrier ≡ 196883
+  ThreeB.identityEvaluation ThreeB.monster3BResidualRegularCarrier ≡ 196883
 monsterIdentityEvaluationIs196883 = Cross.threeBIdentityEvaluationStill196883
 
-moonshineDimensionIs196884 : Cross.ThreeB.monster3BConformalDimension ≡ 196884
+moonshineDimensionIs196884 : ThreeB.monster3BConformalDimension ≡ 196884
 moonshineDimensionIs196884 = Cross.threeBConformalDimensionStill196884
 
 largestOggTripleProductIs196883 : 47 * 59 * 71 ≡ 196883
