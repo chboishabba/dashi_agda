@@ -13,6 +13,8 @@ FILES=(
   DASHI/Core/PortableLoopInterpretationRegression.agda
   DASHI/Core/PortableSemanticConsumerAdequacyBridgeExact.agda
   DASHI/Core/PortableSemanticConsumerAdequacyRegression.agda
+  DASHI/Core/PortableSemanticTranslationRealisationBridgeExact.agda
+  DASHI/Core/PortableSemanticTranslationRealisationRegression.agda
   DASHI/Core/PortableSemanticInterpretationValidation.agda
 )
 
@@ -34,5 +36,6 @@ grep -q '^canonicalFrontendEquivalence :' DASHI/Core/PortableInteractiveViewExac
 grep -q '^jsAndGpuEquivalentForResult :' DASHI/Core/PortableLoopInterpretationExact.agda
 grep -q '^canonicalDifferentExecutionStrategy :' DASHI/Core/PortableLoopInterpretationExact.agda
 grep -q '^semanticAdequacyRequiredByEligibility :' DASHI/Core/PortableSemanticConsumerAdequacyBridgeExact.agda
+grep -q '^refinementGivesAdequateFor :' DASHI/Core/PortableSemanticTranslationRealisationBridgeExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Core/PortableSemanticInterpretationValidation.agda
