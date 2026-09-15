@@ -41,9 +41,14 @@ s2b1b2aCanonicalSuffixR98Recovered :
 s2b1b2aCanonicalSuffixR98Recovered =
   Subject.s2b1b2aCanonicalSuffixR98RecoveredIsTrue
 
-s2b1bStructuralTailStillOpen :
+s2b1b2b0LocalStrictJumpTailRecovered :
+  Subject.s2b1b2b0LocalStrictJumpTailRecovered ≡ true
+s2b1b2b0LocalStrictJumpTailRecovered =
+  Subject.s2b1b2b0LocalStrictJumpTailRecoveredIsTrue
+
+s2b1bGlobalLayerCakeStillOpen :
   Subject.s2b1bStructuralSuffixRecovered ≡ false
-s2b1bStructuralTailStillOpen =
+s2b1bGlobalLayerCakeStillOpen =
   Subject.s2b1bStructuralSuffixRecoveredIsFalse
 
 s2QuantitativeEstimateStillOpen :
