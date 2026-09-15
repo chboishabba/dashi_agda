@@ -9,8 +9,8 @@ import DASHI.ComputerScience.RSA260BidiConsumerIndexedUntanglingTowerExact as RS
 import DASHI.ComputerScience.RSA260BidiHybridTailCostShapeCollisionExact as CostCollision
 import DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionExact as FactorCollision
 import DASHI.ComputerScience.RSA260BidiRawModeRankResidualLocalizationExact as RawLocalization
-import DASHI.ComputerScience.RSA260BidiDegreeRawRankMinimalFrontierExact as MinimalRaw
 import DASHI.ComputerScience.RSA260BidiSparseRawRankObserverFrontierExact as SparseRaw
+import DASHI.ComputerScience.RSA260BidiSparseRawRankStressFrontierExact as StressRaw
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
 import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
 import DASHI.Analysis.RiemannG2PhaseResidualRealizationExact as RHRealization
@@ -21,8 +21,6 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 ------------------------------------------------------------------------
 -- RSA-260 / RH CONSUMER-INDEXED UNTANGLING ROADMAP
 --
--- The common programme now has two dual motions.
---
 -- INFORMATION DESCENT
 --   collide -> retain residual -> localize residual -> prune coordinates ->
 --   adversarially attack the smaller observer again.
@@ -31,7 +29,10 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 --   localized coordinate -> same-object realization -> weakest downstream
 --   consequence sufficient for the active consumer -> aggregate consumer.
 --
--- RSA currently demonstrates descent.  RH currently demonstrates ascent.
+-- The repo-native ConsumerRelativeReduction kernel already distinguishes
+-- consumer-preserving reduction, candidate-reduction failure/fidelity escalation,
+-- and external target realization.  The tower/localization layer specializes
+-- those patterns to recursively retained fibres rather than replacing them.
 ------------------------------------------------------------------------
 
 coreTowerBoundary : Tower.ConsumerIndexedUntanglingTowerBoundary
@@ -52,11 +53,11 @@ rsaFactorCollisionBoundary = FactorCollision.canonicalFactorLayerStructureCollis
 rsaRawLocalizationBoundary : RawLocalization.RawModeRankResidualLocalizationBoundary
 rsaRawLocalizationBoundary = RawLocalization.canonicalRawModeRankResidualLocalizationBoundary
 
-rsaMinimalRawBoundary : MinimalRaw.DegreeRawRankMinimalFrontierBoundary
-rsaMinimalRawBoundary = MinimalRaw.canonicalDegreeRawRankMinimalFrontierBoundary
-
 rsaSparseBoundary : SparseRaw.SparseRawRankObserverFrontierBoundary
 rsaSparseBoundary = SparseRaw.canonicalSparseRawRankObserverFrontierBoundary
+
+rsaStressBoundary : StressRaw.SparseRawRankStressFrontierBoundary
+rsaStressBoundary = StressRaw.canonicalSparseRawRankStressFrontierBoundary
 
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
@@ -79,26 +80,31 @@ productionFirstResidual = Production.firstUnpaidProductionResidual
 ------------------------------------------------------------------------
 -- RSA research queue.
 --
--- Independent seeds falsified the ten-world contiguous candidate.  Reacquired
--- data then exposed a sparse 18-world factorisation:
+-- 18-world stage:
+--   (degree,r2,r4,r10) separated every then-current receipt.
 --
---   (degree, rank F2, rank F4, rank F10).
+-- Stress with eight fresh seed worlds:
+--   the same observer collides on seed7/seed8/seed11/seed14 at (16,7,6,7).
+--   Exhaustive runtime subset search over ranks 0..15 finds no degree + <=3
+--   rank observer on the 26-world family.  A selected four-rank raw-mode set
 --
--- Runtime exhaustive search found no degree+one-rank or degree+two-rank subset
--- over indices 0..15, but that global two-rank impossibility is not yet an Agda
--- theorem.  Keep exact replay tail orthogonal to the receipt consumer.
+--     (degree,r4,r5,r7,r9)
+--
+--   separates all 26 formally.  The first contiguous F2-prefix that survives
+--   requires five ranks F2..F6.  Continue attacking the sparse four-rank code;
+--   do not call runtime subset minimality a kernel theorem.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
-  attackSparseObserverWithNewSeedAndAdapterFamilies : ResearchUntanglingTarget
-  formallyAttackAllDegreePlusTwoRankSubsets : ResearchUntanglingTarget
-  compareSparseTriplesOnDescriptionAndAcquisitionCost : ResearchUntanglingTarget
+  attackSelectedFourRankObserverWithFreshAdapters : ResearchUntanglingTarget
+  compareSixRuntimeMinimalFourRankSetsOnAcquisitionCost : ResearchUntanglingTarget
+  formallyAttackAllDegreePlusThreeRankSubsets : ResearchUntanglingTarget
   testSparseObserverAgainstNonReceiptConsumers : ResearchUntanglingTarget
   refineSparseRanksIntoRowSpaceAndPayloadResidual : ResearchUntanglingTarget
   retainExactReplayTailSeparately : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = attackSparseObserverWithNewSeedAndAdapterFamilies
+firstResearchUntanglingTarget = attackSelectedFourRankObserverWithFreshAdapters
 
 ------------------------------------------------------------------------
 -- Production queue: independent execution from a same-object fine carrier.
@@ -119,17 +125,16 @@ firstProductionReconstructionTarget = acquireSameObjectFineIncidenceBearingLACar
 ------------------------------------------------------------------------
 -- RH analytic queue.
 --
--- Two semantic-ascent routes now coexist:
+-- Strong route:
+--   same-object weld -> exact aggregation congruence -> exact final-near rewrite.
 --
---   strong equality route:
---     weld -> integration congruence -> finite-sum congruence -> exact final near;
+-- Pareto-preferred current-consumer route:
+--   same-object weld -> phase-sensitive pointwise majorant -> pair-specific
+--   integral monotonicity -> certified cell upper -> existing finite enumerated
+--   additive monotonicity -> final near upper -> strict near/far consumer margin.
 --
---   consumer-sufficient upper route:
---     weld -> phase-sensitive pointwise majorant -> pair-specific integral
---     monotonicity -> cell upper -> existing finite-fold monotonicity -> final
---     near upper.
---
--- The second route is Pareto-preferred for the current strict-upper consumer.
+-- Thus exact integrate/finiteNearSum congruence is optional for the upper-bound
+-- consumer, although still useful as a stronger representation certificate.
 ------------------------------------------------------------------------
 
 data RHAnalyticRefinementTarget : Set where
@@ -156,12 +161,15 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     genericConsumerIndexedTowerPaid : Bool
     genericResidualLocalizationPaid : Bool
 
-    contiguousDegreeR2R3R4FailsIndependentSeeds : Bool
-    sparseDegreeR2R4R10SeparatesCombinedEighteen : Bool
-    sparseObserverFormalFactorisationPaid : Bool
-    runtimeSearchFoundNoDegreePlusTwoRankObserver : Bool
-    allDegreePlusTwoRankImpossibilityKernelProved : Bool
-    sparseObserverReplaysCoefficients : Bool
+    priorSparseDegreeR2R4R10SeparatedEighteen : Bool
+    priorSparseObserverFailsFreshSeedStress : Bool
+    explicitSeed7Seed8StressCollisionPaid : Bool
+    runtimeSearchFindsNoDegreePlusThreeRankObserverOnTwentySix : Bool
+    selectedDegreeR4R5R7R9SeparatesTwentySix : Bool
+    selectedStressFactorisationPaid : Bool
+    firstContiguousStressRepairNeedsFiveRanks : Bool
+    runtimeFourRankMinimalityKernelProved : Bool
+    selectedSparseObserverReplaysCoefficients : Bool
     exactReplayTailStillRetainedSeparately : Bool
 
     rhFinitePhaseLocalized : Bool
@@ -188,7 +196,7 @@ canonicalRSA260RHUntanglingRoadmapBoundary :
 canonicalRSA260RHUntanglingRoadmapBoundary =
   rsa260-rh-untangling-roadmap-boundary
     true true
-    true true true true false false true
+    true true true true true true true false false true
     true true true true false false false false false
     false true false
     true true true
