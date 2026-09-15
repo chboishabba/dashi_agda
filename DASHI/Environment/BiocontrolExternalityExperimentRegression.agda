@@ -24,3 +24,26 @@ restorationCollisionIsConsumerRelevant = Biocontrol.canonicalRestorationCollisio
 
 communityProbeSeparatesRestorationCollision : Biocontrol.RestorationDiscriminatorReceipt
 communityProbeSeparatesRestorationCollision = Biocontrol.canonicalRestorationDiscriminator
+
+------------------------------------------------------------------------
+-- RED regression: equal present target suppression does not close future
+-- nutrient/seedbank rebound risk.
+------------------------------------------------------------------------
+
+reboundCollisionIsConsumerRelevant : Biocontrol.ReboundCollisionReceipt
+reboundCollisionIsConsumerRelevant = Biocontrol.canonicalReboundCollision
+
+nutrientCoordinateSeparatesReboundCollision : Biocontrol.ReboundDiscriminatorReceipt
+nutrientCoordinateSeparatesReboundCollision = Biocontrol.canonicalReboundDiscriminator
+
+------------------------------------------------------------------------
+-- RED regression: equal target suppression and equal declared agent-count
+-- surface do not determine whether the agent assemblage is independent or
+-- interfering.
+------------------------------------------------------------------------
+
+agentInteractionCollisionIsConsumerRelevant : Biocontrol.AgentInteractionCollisionReceipt
+agentInteractionCollisionIsConsumerRelevant = Biocontrol.canonicalAgentInteractionCollision
+
+agentInteractionCoordinateSeparatesCollision : Biocontrol.AgentInteractionDiscriminatorReceipt
+agentInteractionCoordinateSeparatesCollision = Biocontrol.canonicalAgentInteractionDiscriminator
