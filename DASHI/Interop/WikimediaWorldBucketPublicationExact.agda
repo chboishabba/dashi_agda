@@ -25,6 +25,7 @@ import DASHI.Core.ReopenableProjectionComposition as Reopenable
 
 data WorldEdgeFamily : Set where
   wikidataOntology : WorldEdgeFamily
+  wikidataProperty : WorldEdgeFamily
   wikipediaNavigation : WorldEdgeFamily
   sourceReference : WorldEdgeFamily
   pnfSemantic : WorldEdgeFamily
