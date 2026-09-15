@@ -110,3 +110,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureSixPan
 -- Figure-5 relative energies and all six forward route-edge Kramers rates are
 -- now paid. Named intermediate theta/dLN cells remain explicitly unpaid.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationPaymentLedgerExact
+
+-- Rate-method attribution: Figure-5/Figure-6 Kramers numerics stay owned by
+-- Li-Liu-Ji's same-object manifestations, while Hänggi-Talkner-Borkovec 1990
+-- supplies general reaction-rate theory and Sriraman/Kevrekidis/Hummer 2005 +
+-- Hummer 2005 supply the cited diffusion-inference method lineage. Method-source
+-- DOI/PMID/QID metadata cannot create AdK numeric cells or experimental kinetics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseKramersMethodAttributionAcquisitionExact
