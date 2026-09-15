@@ -35,3 +35,7 @@ sustainableControlRoleSnowballs = Atlas.chalaEtAl2026SnowballReceipt
 
 agentInteractionRoleSnowballs : Snowball.SourceRoleSnowballReceipt Atlas.marianiEtAl2026Source
 agentInteractionRoleSnowballs = Atlas.marianiEtAl2026SnowballReceipt
+
+springfieldMechanicalRoleSnowballs :
+  Snowball.SourceRoleSnowballReceipt Atlas.ipswichSpringfield2025Source
+springfieldMechanicalRoleSnowballs = Atlas.ipswichSpringfield2025SnowballReceipt
