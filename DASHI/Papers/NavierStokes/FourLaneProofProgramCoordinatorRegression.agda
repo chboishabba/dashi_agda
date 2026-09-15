@@ -1,0 +1,135 @@
+module DASHI.Papers.NavierStokes.FourLaneProofProgramCoordinatorRegression where
+
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (true; false)
+
+import DASHI.Papers.NavierStokes.FourLaneProofProgramExact as Program
+
+-- RED-first coordinator contract. These are routing/status coordinates only;
+-- they do not promote branch-local source receipts into Agda kernel receipts.
+
+periodicBCommRecoveryModeIsActive :
+  Program.periodicBCommutatorSpineRecoveryAssumptionActive
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBCommRecoveryModeIsActive =
+  Program.periodicBCommutatorSpineRecoveryAssumptionActiveIsTrue
+
+periodicBCommKernelReceiptStillAbsent :
+  Program.periodicBCommutatorSpineCertificationObserved
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBCommKernelReceiptStillAbsent =
+  Program.periodicBCommutatorSpineCertificationObservedIsFalse
+
+periodicBPhaseR104CompilerRecovered :
+  Program.periodicBPhaseR104CompilerRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseR104CompilerRecovered =
+  Program.periodicBPhaseR104CompilerRecoveredIsTrue
+
+periodicBPhaseR406WeldRecovered :
+  Program.periodicBPhaseLiteralR406RemainderWeldRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseR406WeldRecovered =
+  Program.periodicBPhaseLiteralR406RemainderWeldRecoveredIsTrue
+
+periodicBPhaseCriticalRadialRealizationRecovered :
+  Program.periodicBPhaseCriticalRadialRealizationRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseCriticalRadialRealizationRecovered =
+  Program.periodicBPhaseCriticalRadialRealizationRecoveredIsTrue
+
+periodicBPhaseLiteralFiniteCriticalFoldRecovered :
+  Program.periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralFiniteCriticalFoldRecovered =
+  Program.periodicBPhaseLiteralFiniteCriticalObservableFoldRecoveredIsTrue
+
+periodicBPhasePointwiseCriticalEnergySplitRecovered :
+  Program.periodicBPhasePointwiseCriticalEnergySplitRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhasePointwiseCriticalEnergySplitRecovered =
+  Program.periodicBPhasePointwiseCriticalEnergySplitRecoveredIsTrue
+
+periodicBPhaseLiteralModeCarrierRecovered :
+  Program.periodicBPhaseLiteralModeListCarrierRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralModeCarrierRecovered =
+  Program.periodicBPhaseLiteralModeListCarrierRecoveredIsTrue
+
+periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered :
+  Program.periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered =
+  Program.periodicBPhaseCriticalEnergyCompilerGivenCalculusRecoveredIsTrue
+
+periodicBPhaseConcreteScalarFTCStillAbsent :
+  Program.periodicBPhaseConcreteScalarFTCObserved
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseConcreteScalarFTCStillAbsent =
+  Program.periodicBPhaseConcreteScalarFTCObservedIsFalse
+
+periodicBPhaseConcreteIntegrationLinearityStillAbsent :
+  Program.periodicBPhaseConcreteIntegrationLinearityObserved
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseConcreteIntegrationLinearityStillAbsent =
+  Program.periodicBPhaseConcreteIntegrationLinearityObservedIsFalse
+
+periodicBPhaseLiteralProductionPairingSameObjectRecovered :
+  Program.periodicBPhaseLiteralProductionPairingSameObjectRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralProductionPairingSameObjectRecovered =
+  Program.periodicBPhaseLiteralProductionPairingSameObjectRecoveredIsTrue
+
+periodicBPhaseR414ProductionNormalisationStillOpen :
+  Program.periodicBPhaseR414ProductionNormalisationRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseR414ProductionNormalisationStillOpen =
+  Program.periodicBPhaseR414ProductionNormalisationRecoveredIsFalse
+
+periodicBPhasePhysicalCriticalObservablesStillOpen :
+  Program.periodicBPhasePhysicalCriticalObservableRealizationRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhasePhysicalCriticalObservablesStillOpen =
+  Program.periodicBPhasePhysicalCriticalObservableRealizationRecoveredIsFalse
+
+periodicBPhaseCriticalEnergyIdentityStillOpen :
+  Program.periodicBPhaseCriticalEnergyInequalityRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseCriticalEnergyIdentityStillOpen =
+  Program.periodicBPhaseCriticalEnergyInequalityRecoveredIsFalse
+
+periodicBPhaseSignedProductionEstimateStillOpen :
+  Program.periodicBPhaseSignedProductionEstimateRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseSignedProductionEstimateStillOpen =
+  Program.periodicBPhaseSignedProductionEstimateRecoveredIsFalse
+
+periodicBPhaseInitialCriticalCeilingStillOpen :
+  Program.periodicBPhaseUniformInitialCriticalCeilingRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseInitialCriticalCeilingStillOpen =
+  Program.periodicBPhaseUniformInitialCriticalCeilingRecoveredIsFalse
+
+periodicBPhasePositiveRetainedViscosityStillOpen :
+  Program.periodicBPhasePositiveRetainedViscosityRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhasePositiveRetainedViscosityStillOpen =
+  Program.periodicBPhasePositiveRetainedViscosityRecoveredIsFalse
+
+periodicBPhasePhysicalR104StillOpen :
+  Program.periodicBPhasePhysicalR104Recovered
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhasePhysicalR104StillOpen =
+  Program.periodicBPhasePhysicalR104RecoveredIsFalse
+
+periodicBDiscoveryFrontierIsPhaseUnderRecoveryAssumption :
+  Program.periodicBOnlyPhaseDiscoveryRemainsUnderCommRecoveryAssumption
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBDiscoveryFrontierIsPhaseUnderRecoveryAssumption =
+  Program.periodicBOnlyPhaseDiscoveryRemainsUnderCommRecoveryAssumptionIsTrue
+
+wholeSpaceAWaitsForPortabilityAudit :
+  Program.wholeSpaceADeferredUntilPeriodicPortabilityAudit
+    Program.canonicalNSFourLaneProofProgram ≡ true
+wholeSpaceAWaitsForPortabilityAudit =
+  Program.wholeSpaceADeferredUntilPeriodicPortabilityAuditIsTrue
