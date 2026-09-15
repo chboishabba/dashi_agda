@@ -53,8 +53,8 @@ localizedObserver :
   ∀ {FineState Observation}
     {geometry : Fibre.CoarseFineReopening FineState}
     {observe : FineState -> Observation} ->
-  LocalizedResidualWitness geometry observe ->
-  FineState -> Fibre.Coarse geometry × ResidualCoordinate
+  (witness : LocalizedResidualWitness geometry observe) ->
+  FineState -> Fibre.Coarse geometry × ResidualCoordinate witness
 localizedObserver {geometry = geometry} witness state =
   Fibre.coarse geometry state ,
   residualCoordinate witness (Fibre.relativeFine geometry state)
