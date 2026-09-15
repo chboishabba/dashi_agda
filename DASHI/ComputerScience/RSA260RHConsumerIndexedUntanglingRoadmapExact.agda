@@ -10,9 +10,12 @@ import DASHI.ComputerScience.RSA260BidiHybridTailCostShapeCollisionExact as Cost
 import DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionExact as FactorCollision
 import DASHI.ComputerScience.RSA260BidiRawModeRankResidualLocalizationExact as RawLocalization
 import DASHI.ComputerScience.RSA260BidiRawRankPrefixFrontierExact as RawFrontier
+import DASHI.ComputerScience.RSA260BidiDegreeRawRankMinimalFrontierExact as MinimalRaw
+import DASHI.ComputerScience.RSA260BidiRawRankCrossValidationAcquisitionExact as RawAcquisition
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
 import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
 import DASHI.Analysis.RiemannG2PhaseResidualRealizationExact as RHRealization
+import DASHI.Analysis.RiemannG2PhaseWeldCellResponseTransportExact as RHTransport
 import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Production
 
 ------------------------------------------------------------------------
@@ -24,36 +27,43 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 --   (B) RSA production reconstruction from a same-object fine carrier;
 --   (C) RH analytic refinement on the literal pole-quotient carrier.
 --
--- The common tower now has a second generic operation: residual localization.
--- Once a coarse collision proves that RelativeFine matters, do not automatically
--- retain the whole residual. Search a smaller observer on RelativeFine and
--- prove that it still separates the concrete consumer witness.
+-- The shared research calculus now has two operations:
+--   1. exact recursive reopening through a tower of coarse/residual fibres;
+--   2. consumer-indexed residual localization, allowing a retained residual to
+--      be observed more coarsely and attacked again before it is kept wholesale.
 --
--- Current RSA descent:
+-- RSA frontier:
 --
 --   whole generator
---     -> rank prefix + hybrid tail
+--     -> rank prefix + hybrid replay tail
 --     -> codec-cost collision
 --     -> identical factor basis/mask structure
 --     -> raw-mode residual
---     -> rank(F_2) separates rotate3/affine7 (7 vs 5)
---     -> raw ranks (F_2,F_3,F_4) still collide on affine5/bitrev9
---     -> (degree, rank F_2, rank F_3, rank F_4) separates all ten current
---        receipt identities.
+--     -> rank(F2) separates rotate3/affine7
+--     -> (r2,r3,r4) still collides
+--     -> (degree,r2,r3,r4) separates the ten current receipt identities
+--     -> degree+one and degree+two raw ranks still collide.
 --
--- This strictly improves the current receipt observer over the older
--- (degree, ranks F_0..F_4) sketch: the leading factor-mode ranks are unnecessary
--- for this finite receipt consumer.  It remains a discriminator, not replay.
+-- Hence three raw ranks are the first separating CHECKED contiguous raw prefix
+-- from F2 once degree is retained.  That is not global minimality.  The next
+-- payment is cross-validation on independent seed runs; the existing 12-run
+-- codec receipt does not retain per-run degree/r2/r3/r4 coordinates, so those
+-- coordinates must be reacquired rather than inferred from aggregate metrics.
 --
--- Current RH descent:
+-- RH frontier:
 --
 --   count/envelope collision
 --     -> signed target-relative phase residual
---     -> finite phase class localizes the consumer witness
---     -> same-object analytic weld must realize that phase as the literal
---        target-gap/cosine equality on the universal pole-quotient carrier.
+--     -> finite phase class localizes the witness
+--     -> same-object phase/modulation weld realizes target gap + literal cosine
+--     -> integration congruence transports pointwise equality through cellResponse
+--     -> finite-sum congruence transports cell equality through finiteNearSum
+--     -> final nearResponseAt(J) equality.
 --
--- Finite localization does not pay the analytic weld, near budget, or RH.
+-- The last three arrows are now compiler output CONDITIONALLY on an inhabited
+-- same-object weld plus explicit congruence laws.  The current literal kernel
+-- interface carries neither aggregation congruence law, so no strict near budget
+-- or RH terminal is promoted here.
 ------------------------------------------------------------------------
 
 coreTowerBoundary : Tower.ConsumerIndexedUntanglingTowerBoundary
@@ -77,6 +87,12 @@ rsaRawLocalizationBoundary = RawLocalization.canonicalRawModeRankResidualLocaliz
 rsaRawFrontierBoundary : RawFrontier.RawRankPrefixFrontierBoundary
 rsaRawFrontierBoundary = RawFrontier.canonicalRawRankPrefixFrontierBoundary
 
+rsaMinimalRawBoundary : MinimalRaw.DegreeRawRankMinimalFrontierBoundary
+rsaMinimalRawBoundary = MinimalRaw.canonicalDegreeRawRankMinimalFrontierBoundary
+
+rsaRawAcquisitionBoundary : RawAcquisition.RawRankCrossValidationAcquisitionBoundary
+rsaRawAcquisitionBoundary = RawAcquisition.canonicalRawRankCrossValidationAcquisitionBoundary
+
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
 
@@ -86,24 +102,26 @@ rhWeldBoundary = RHWeld.canonicalLiteralPhaseModulationWeldBoundary
 rhRealizationBoundary : RHRealization.PhaseResidualRealizationBoundary
 rhRealizationBoundary = RHRealization.canonicalPhaseResidualRealizationBoundary
 
+rhTransportBoundary : RHTransport.PhaseWeldCellResponseTransportBoundary
+rhTransportBoundary = RHTransport.canonicalPhaseWeldCellResponseTransportBoundary
+
 productionFirstResidual : Production.ProductionResidual
 productionFirstResidual = Production.firstUnpaidProductionResidual
 
 ------------------------------------------------------------------------
--- Research queue: attack whether the four-coordinate current receipt observer
--- can be shortened or generalized before retaining more payload.
+-- Research queue: validate the smaller observer before claiming a terminal.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
-  attackShorterDegreeRawRankPrefixes : ResearchUntanglingTarget
+  reacquireIndependentSeedDegreeRawRanks : ResearchUntanglingTarget
   crossValidateDegreeRawRanksOnIndependentSeedPortfolio : ResearchUntanglingTarget
+  attackNonContiguousSubsetsOfCurrentRawRanks : ResearchUntanglingTarget
   refineRawRankIntoRowSpaceAndPayloadResidual : ResearchUntanglingTarget
   adversariallyAttackEveryProposedRSAQuotient : ResearchUntanglingTarget
   deriveConsumerTerminalBeforeExactTerminalWhenPossible : ResearchUntanglingTarget
-  transportOnlyGenericUntanglingStructureIntoRH : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = attackShorterDegreeRawRankPrefixes
+firstResearchUntanglingTarget = reacquireIndependentSeedDegreeRawRanks
 
 ------------------------------------------------------------------------
 -- Production queue: historical A*/F.sols custody is not assumed available.
@@ -122,15 +140,15 @@ firstProductionReconstructionTarget : ProductionReconstructionTarget
 firstProductionReconstructionTarget = acquireSameObjectFineIncidenceBearingLACarrier
 
 ------------------------------------------------------------------------
--- RH queue: localized phase found; now realize it on the literal carrier.
+-- RH queue: same-object realization first, then aggregation laws.
 ------------------------------------------------------------------------
 
 data RHAnalyticRefinementTarget : Set where
   inhabitUniversalPoleQuotientPhaseModulationWeld : RHAnalyticRefinementTarget
-  bindLiteralScalarFrequencyOrdinatePhaseCarriers : RHAnalyticRefinementTarget
-  proveEvenProjectionEqualsLiteralCosineKernel : RHAnalyticRefinementTarget
-  pushWeldThroughLiteralCellResponse : RHAnalyticRefinementTarget
-  aggregateLiteralCellsOverFiniteNearSum : RHAnalyticRefinementTarget
+  proveLiteralIntegrationCongruence : RHAnalyticRefinementTarget
+  proveLiteralFiniteNearSumCongruence : RHAnalyticRefinementTarget
+  compilePhaseThroughLiteralCellResponse : RHAnalyticRefinementTarget
+  compilePhaseThroughFiniteNearSum : RHAnalyticRefinementTarget
   deriveFiniteNearConsumerBudget : RHAnalyticRefinementTarget
   payStrictNearComplementConsumerMargin : RHAnalyticRefinementTarget
   closeOnlyThenPromoteRHTerminal : RHAnalyticRefinementTarget
@@ -142,38 +160,29 @@ firstRHAnalyticRefinementTarget = inhabitUniversalPoleQuotientPhaseModulationWel
 -- Pareto interpretation.
 ------------------------------------------------------------------------
 
-data GlobalLane : Set where
-  recursiveUntanglingResearch : GlobalLane
-  rsaProductionReconstruction : GlobalLane
-  rhAnalyticRefinement : GlobalLane
-
 record RSA260RHUntanglingRoadmapBoundary : Set where
   constructor rsa260-rh-untangling-roadmap-boundary
   field
     genericConsumerIndexedTowerPaid : Bool
     genericResidualLocalizationPaid : Bool
-    rsaFiniteExactTowerPaid : Bool
-    rsaFullCostShapeCollisionPaid : Bool
-    rsaFactorLayerStructureCollisionPaid : Bool
-    rsaFirstRawLayerRankLocalizesCurrentWitness : Bool
-    rawRankTripleAloneStillCollides : Bool
-    degreePlusThreeRawRanksSeparatesCurrentReceipts : Bool
-    leadingFactorRanksNeededForCurrentReceiptConsumer : Bool
-    degreePlusRawRanksReplayCoefficients : Bool
-    degreePlusRawRanksGloballyMinimal : Bool
-    rhFiniteCollisionRefinementPaid : Bool
+    degreePlusOneRawRankStillCollides : Bool
+    degreePlusTwoRawRanksStillCollide : Bool
+    degreePlusThreeRawRanksSeparateCurrentTen : Bool
+    threeRawRanksFirstSeparatingCheckedContiguousPrefix : Bool
+    degreePlusThreeRawRanksGloballyMinimal : Bool
+    independentSeedPerRunRawRanksRetained : Bool
+    independentSeedRawRankCrossValidationPaid : Bool
+    exactReplayTailStillRetainedSeparately : Bool
     rhFinitePhaseLocalized : Bool
     rhLiteralPhaseWeldInterfaceWritten : Bool
-    rhConditionalAnalyticRealizationCompilerWritten : Bool
+    rhConditionalCellAndFiniteNearTransportCompilerWritten : Bool
     rhActualUniversalPoleQuotientWeldPaid : Bool
-    researchShouldContinueBelowCurrentRSAResidual : Bool
+    rhIntegrationCongruencePaid : Bool
+    rhFiniteNearSumCongruencePaid : Bool
+    rhNumericNearBudgetPaid : Bool
     productionSearchForUnpublishedIntermediateBytesRequired : Bool
     productionSubstitutionReturnsToFineIncidenceMatrixCarrier : Bool
-    publishedRunEnvelopeUsedAsConstraintSurface : Bool
-    independentExecutionMayProduceNewAStarGeneratorMksolArtifacts : Bool
     independentArtifactsAreHistoricalWithheldArtifacts : Bool
-    rsaFiniteReplayPaysRHAnalyticRepresentation : Bool
-    rhFinitePhaseLocalizationPaysStrictRHMargin : Bool
     adequacyMustPrecedeParetoRanking : Bool
     threeQueuesMayAdvanceIndependently : Bool
 open RSA260RHUntanglingRoadmapBoundary public
@@ -188,8 +197,6 @@ canonicalRSA260RHUntanglingRoadmapBoundary =
     true
     true
     true
-    true
-    true
     false
     false
     false
@@ -198,13 +205,11 @@ canonicalRSA260RHUntanglingRoadmapBoundary =
     true
     true
     false
-    true
-    false
-    true
-    true
-    true
     false
     false
+    false
+    false
+    true
     false
     true
     true
