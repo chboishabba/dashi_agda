@@ -13,10 +13,6 @@ import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact as Final
 import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact as Phase
 import DASHI.Analysis.RiemannAristotleFiniteNearSchurKernelCovarianceTargetExact as Reflection
 
-------------------------------------------------------------------------
--- EVALUATOR-INDEPENDENT FINAL LITERAL NEAR KERNEL
-------------------------------------------------------------------------
-
 record FinalNearLiteralKernel
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
@@ -73,17 +69,6 @@ record FinalNearLiteralKernel
     kernelReference : String
 
 open FinalNearLiteralKernel public
-
-------------------------------------------------------------------------
--- CROSS-PROVER REPRESENTATION FACTORIZATION
---
--- R1a and R1b are independent theorem-bearing acquisition obligations:
---
---   R1a  final nearResponseAt(chosen J) = checked/imported scalar
---   R1b  that SAME checked scalar = literal finite cell fold
---
--- Their conjunction compiles to the old bundled bridge and hence to R1.
-------------------------------------------------------------------------
 
 record FinalNearCheckedScalarAttachment
     {S : NearFar.OrderedAdditiveNearFarSurface}
@@ -164,10 +149,6 @@ compileFinalNearRepresentationEqualityFromSplit offInput attachment identificati
   compileFinalNearRepresentationEquality offInput
     (compileFinalNearCheckedScalarBridge offInput attachment identification)
 
-------------------------------------------------------------------------
--- R1 SOURCE/TRANSPORT AUDIT
-------------------------------------------------------------------------
-
 genericTargetGapCosineCompilerClosedReceipt :
   Phase.ProofRelevantTranslationModulationBoundary.targetGapCosineCompilerClosed
     Phase.canonicalProofRelevantTranslationModulationBoundary ≡ true
@@ -208,26 +189,16 @@ compileFinalPoleNearLiteralModel offInput kernel = record
   ; Final.literalFiniteNearValueIsSum = refl
   ; Final.finalNearResponseIsLiteralFiniteNear =
       finalNearResponseIsLiteralFiniteSum kernel
-  ; Final.exactNearIndexIsCheckedNearOffFinset =
-      exactNearIndexIsCheckedNearOffFinset kernel
-  ; Final.exactNearIndexIsCheckedNearOffFinsetReceipt =
-      exactNearIndexIsCheckedNearOffFinsetReceipt kernel
-  ; Final.exactMultiplicityIsZetaMultiplicity =
-      exactMultiplicityIsZetaMultiplicity kernel
-  ; Final.exactMultiplicityIsZetaMultiplicityReceipt =
-      exactMultiplicityIsZetaMultiplicityReceipt kernel
-  ; Final.exactHorizontalDisplacementIsOffLineRealPart =
-      exactHorizontalDisplacementIsOffLineRealPart kernel
-  ; Final.exactHorizontalDisplacementIsOffLineRealPartReceipt =
-      exactHorizontalDisplacementIsOffLineRealPartReceipt kernel
-  ; Final.exactPoleTaperIsFinalUniversalPoleQuotientTaper =
-      exactPoleTaperIsFinalUniversalPoleQuotientTaper kernel
-  ; Final.exactPoleTaperIsFinalUniversalPoleQuotientTaperReceipt =
-      exactPoleTaperIsFinalUniversalPoleQuotientTaperReceipt kernel
-  ; Final.reflectionPairAlreadyCancelsOddHeightChannel =
-      reflectionPairAlreadyCancelsOddHeightChannel kernel
-  ; Final.reflectionPairAlreadyCancelsOddHeightChannelReceipt =
-      reflectionPairAlreadyCancelsOddHeightChannelReceipt kernel
+  ; Final.exactNearIndexIsCheckedNearOffFinset = exactNearIndexIsCheckedNearOffFinset kernel
+  ; Final.exactNearIndexIsCheckedNearOffFinsetReceipt = exactNearIndexIsCheckedNearOffFinsetReceipt kernel
+  ; Final.exactMultiplicityIsZetaMultiplicity = exactMultiplicityIsZetaMultiplicity kernel
+  ; Final.exactMultiplicityIsZetaMultiplicityReceipt = exactMultiplicityIsZetaMultiplicityReceipt kernel
+  ; Final.exactHorizontalDisplacementIsOffLineRealPart = exactHorizontalDisplacementIsOffLineRealPart kernel
+  ; Final.exactHorizontalDisplacementIsOffLineRealPartReceipt = exactHorizontalDisplacementIsOffLineRealPartReceipt kernel
+  ; Final.exactPoleTaperIsFinalUniversalPoleQuotientTaper = exactPoleTaperIsFinalUniversalPoleQuotientTaper kernel
+  ; Final.exactPoleTaperIsFinalUniversalPoleQuotientTaperReceipt = exactPoleTaperIsFinalUniversalPoleQuotientTaperReceipt kernel
+  ; Final.reflectionPairAlreadyCancelsOddHeightChannel = reflectionPairAlreadyCancelsOddHeightChannel kernel
+  ; Final.reflectionPairAlreadyCancelsOddHeightChannelReceipt = reflectionPairAlreadyCancelsOddHeightChannelReceipt kernel
   ; Final.modelReference = kernelReference kernel
   }
 
@@ -235,33 +206,29 @@ record FinalNearLiteralKernelBoundary : Set where
   constructor final-near-literal-kernel-boundary
   field
     evaluatorRequiredToStateLiteralKernel : Bool
-    evaluatorRequiredToStateLiteralKernelIsFalse :
-      evaluatorRequiredToStateLiteralKernel ≡ false
+    evaluatorRequiredToStateLiteralKernelIsFalse : evaluatorRequiredToStateLiteralKernel ≡ false
     oneFinalNearToLiteralSumEqualityRequired : Bool
-    oneFinalNearToLiteralSumEqualityRequiredIsTrue :
-      oneFinalNearToLiteralSumEqualityRequired ≡ true
+    oneFinalNearToLiteralSumEqualityRequiredIsTrue : oneFinalNearToLiteralSumEqualityRequired ≡ true
     existingFinalObserverModelIsCompilerOutput : Bool
-    existingFinalObserverModelIsCompilerOutputIsTrue :
-      existingFinalObserverModelIsCompilerOutput ≡ true
+    existingFinalObserverModelIsCompilerOutputIsTrue : existingFinalObserverModelIsCompilerOutput ≡ true
     selectedWeilWindowRequired : Bool
     selectedWeilWindowRequiredIsFalse : selectedWeilWindowRequired ≡ false
     determinantConsumerRequired : Bool
     determinantConsumerRequiredIsFalse : determinantConsumerRequired ≡ false
     genericTargetGapCosineLawClosed : Bool
-    genericTargetGapCosineLawClosedIsTrue :
-      genericTargetGapCosineLawClosed ≡ true
+    genericTargetGapCosineLawClosedIsTrue : genericTargetGapCosineLawClosed ≡ true
     reflectionPairLiteralFormulaSourceOwned : Bool
-    reflectionPairLiteralFormulaSourceOwnedIsTrue :
-      reflectionPairLiteralFormulaSourceOwned ≡ true
+    reflectionPairLiteralFormulaSourceOwnedIsTrue : reflectionPairLiteralFormulaSourceOwned ≡ true
     actualUniversalPoleQuotientPhaseRealizationInhabited : Bool
-    actualUniversalPoleQuotientPhaseRealizationInhabitedIsFalse :
-      actualUniversalPoleQuotientPhaseRealizationInhabited ≡ false
+    actualUniversalPoleQuotientPhaseRealizationInhabitedIsFalse : actualUniversalPoleQuotientPhaseRealizationInhabited ≡ false
     checkedNearScalarBridgeInhabited : Bool
-    checkedNearScalarBridgeInhabitedIsFalse :
-      checkedNearScalarBridgeInhabited ≡ false
+    checkedNearScalarBridgeInhabitedIsFalse : checkedNearScalarBridgeInhabited ≡ false
+    r1aCheckedScalarAttachmentInhabited : Bool
+    r1aCheckedScalarAttachmentInhabitedIsFalse : r1aCheckedScalarAttachmentInhabited ≡ false
+    r1bLiteralFoldIdentificationInhabited : Bool
+    r1bLiteralFoldIdentificationInhabitedIsFalse : r1bLiteralFoldIdentificationInhabited ≡ false
     statusReceiptPaysR1Equality : Bool
-    statusReceiptPaysR1EqualityIsFalse :
-      statusReceiptPaysR1Equality ≡ false
+    statusReceiptPaysR1EqualityIsFalse : statusReceiptPaysR1Equality ≡ false
     analyticClusterMarginPaidHere : Bool
     analyticClusterMarginPaidHereIsFalse : analyticClusterMarginPaidHere ≡ false
     rhDerived : Bool
@@ -283,4 +250,6 @@ canonicalFinalNearLiteralKernelBoundary =
     false refl
     false refl
     false refl
-    "Representation is evaluator-independent. Generic target-gap/even-projection cosine algebra is already proof-bearing in Agda, and a Lean source owner names the literal reflection-pair 4*g*cosh*cos formula. Neither fact supplies the actual universal pole-quotient phase realization or theorem-bearing checked-near-scalar transport. R1 may be acquired directly or as two independent theorem-bearing payments: R1a attaches final nearResponseAt(chosen J) to one checked/imported near scalar; R1b identifies that SAME checked scalar with the literal finite cell fold. The bundled bridge and final R1 equality are compiler output from R1a+R1b. Status Booleans and opaque same-carrier receipts pay neither equality. Numerical/symbolic certificates remain downstream, no selected Weil window or determinant consumer is required, and no strict ClusterResponse inequality or RH is proved here."
+    false refl
+    false refl
+    "R1 is evaluator-independent and now split into two independently payable theorem obligations. R1a attaches final nearResponseAt(chosen J) to one checked/imported finite-near scalar. R1b identifies that SAME scalar with the literal finite cell fold. Generic target-gap/even-projection algebra and the retained Lean reflection-pair formula do not inhabit either payment; the 8883 status owner explicitly records that Lean proof terms are not transported into Agda. The bundled bridge and final R1 equality compile from R1a+R1b. Certificates remain downstream; no strict ClusterResponse inequality or RH is proved here."
