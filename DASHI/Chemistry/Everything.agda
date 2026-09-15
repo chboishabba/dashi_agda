@@ -226,3 +226,15 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseTerminalRole
 -- beside explicitly missing dLN/free-energy/edge-rate coordinates; RateKind
 -- keeps Kramers-derived values distinct from simulation, experiment and inference.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSparseCalibrationFibreExact
+
+-- Attribution envelope for calibration atoms: DOI, PMID, PMCID, OpenAlex,
+-- unresolved article QID, AdK QID, UniProt and PDB identities are retained via
+-- the repository-wide source/identity machinery.  Identity coordinates remain
+-- non-authoritative and cannot manufacture a missing numerical payment.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAttributionEnvelopeExact
+
+-- Attributed sparse transition kernel: all six paid route edges survive even
+-- while exact Figure-5 Kramers numerics are absent.  Each edge carries its rate
+-- role, source locator and attribution envelope; state geometry/free energy and
+-- path flux remain distinct from edge-rate calibration and experimental kinetics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAttributedSparseTransitionKernelExact
