@@ -125,7 +125,7 @@ data OEISCreatesRepresentationIdentity : Set where
 data QIDCreatesActualHZetaRecognition : Set where
 data SameScalarCreatesSameRepresentation : Set where
 data SourceOccurrenceCreatesIntertwiner : Set where
-\data WikipediaCreatesActionWitness : Set where
+data WikipediaCreatesActionWitness : Set where
 
 oeisDoesNotCreateCyclotomicSameObject :
   OEISCreatesCyclotomicSameObject → ⊥
