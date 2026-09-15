@@ -1,0 +1,12 @@
+module DASHI.ComputerScience.RSA260BidiGF2SelectedBasisExpansionRuntimeReceiptValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiGF2SelectedBasisExpansionRuntimeReceiptExact as Receipt
+
+runtimeReceipt : Receipt.SelectedBasisExpansionRuntimeReceipt
+runtimeReceipt = Receipt.currentSelectedBasisExpansionRuntimeReceipt
+
+boundary : Receipt.SelectedBasisExpansionRuntimeBoundary
+boundary = Receipt.canonicalSelectedBasisExpansionRuntimeBoundary
+
+firstResidual : Receipt.SelectedBasisExpansionRuntimeResidual
+firstResidual = Receipt.firstSelectedBasisExpansionRuntimeResidual
