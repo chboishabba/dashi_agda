@@ -29,9 +29,9 @@ R1a/R1b final-near same-object representation
 
 RH remains behind the current YM source seam because theorem-bearing checked-near bytes are not presently available through the accessible repo surfaces.
 
-## 2. Current YM Pareto queue — R367 cut
+## 2. Current YM Pareto queue — R368 cut
 
-The old R359 queue is superseded. The current preferred ordering is:
+The old R359 and R367 queues are superseded. The current preferred ordering is:
 
 ```text
 A. H_sub direct sensitivity route
@@ -44,18 +44,18 @@ A. H_sub direct sensitivity route
    Attach CMP99 Theorem 3.14/(3.154) marked propagator-difference authority to
    the exact CMP116 decoupled H(s(Y0)) used in D(A') = C(A' - H D(A')).
 
-3. argument-operation weld
-   Identify the literal source subtraction/operator action so the algebraic
-   identity
+3. operation attachment
+   Identify the literal CMP116 background subtraction and operator-difference
+   action with the ordinary R368 affine carrier.  The algebraic identity
      (A' - H_L X) - (A' - H_R X) = (H_R - H_L) X
-   is compiler algebra on the SAME carrier. This is representation debt, not a
-   new analytic theorem.
+   is now compiler-owned once this same-object operation attachment exists.
+   Do NOT schedule a new analytic inequality here.
 
 4. common-ball attachment
    Attach the source-owned CMP102/CMP116 radius/common invariant ball to the
-   selected R365/R367 carrier.
+   selected R365/R367/R368 carrier.
 
-R367 + R366 then give
+R368 + R367 + R366 then give
   delta_map <= L_C M_H R.
 R365 absorbs the contraction and pays H_subScale.
 R364 lifts that into the selected source Hessian-stability ABI.
@@ -78,7 +78,7 @@ C. Existing marked/localisation producer route (optional parallel producer)
 9. charged CMP116 summability / marked replay
 
 These remain useful producers for the marked Hessian branch, but they are not
-prerequisites of the R365--R367 H_sub sensitivity compiler.
+prerequisites of the R365--R368 H_sub sensitivity compiler.
 
 D. Terminal residuals
 
@@ -107,8 +107,11 @@ H_sub
 <- R365 fixed-point perturbation
 <- R366 one-step map defect
 <- R367 exact-C contraction payment
-   + CMP99->CMP116 H-difference attachment
-   + source operation/radius same-object welds.
+<- R368 generic affine argument compiler
+   + CMP102/CMP116 C attachment
+   + CMP99/CMP116 H-difference attachment
+   + CMP116 operation attachment
+   + source radius/common-ball attachment.
 
 H_stab
 <- source local Hessian stability H_local
@@ -119,10 +122,17 @@ H_stab
 Forward:
 
 ```text
+ordinary abelian difference laws
++ operator subtraction acting pointwise
+-> R368
+   (A' - H_L X) - (A' - H_R X) = (H_R - H_L) X
+-> argument-defect scalar inequality by equality/reflexivity
+
 CMP102/CMP116 source contraction of the literal C map
 + exact C same-object attachment
 + CMP99 marked H_L-H_R theorem attached to literal H(s(Y0))
-+ source argument-operation/radius attachment
++ exact CMP116 operation attachment
++ source radius/common-ball attachment
 -> R367 proof-bearing C-Lipschitz stage
 -> R366 delta_map <= L_C M_H R
 -> R365 contraction absorption
@@ -144,7 +154,7 @@ H_stab + H_sub
 
 BIDI invariant: downstream consumers may identify the least source statement to acquire, but they may not define source semantics post hoc. Source authority/status does not substitute for theorem-bearing replay or same-object attachment.
 
-## 4. R365--R367 Pareto reductions
+## 4. R365--R368 Pareto reductions
 
 ### R365 — fixed-point perturbation
 
@@ -153,53 +163,55 @@ BIDI invariant: downstream consumers may identify the least source statement to 
 The two-solution displacement is no longer primitive. For fixed points `x_L`, `x_R` of nearby contractions:
 
 ```text
-d(x_L,x_R)
-<= q d(x_L,x_R) + delta,
+d(x_L,x_R) <= q d(x_L,x_R) + delta.
 ```
 
-where `delta` is needed only at one common candidate. Scalar absorption then gives a multiple of `delta`.
+`delta` is needed only at one common candidate; scalar absorption gives a multiple of `delta`.
 
 ### R366 — one-step map defect
 
 `BalabanCMP116OneStepMapDefectRound366Exact.agda`
 
-Using the literal CMP116 equation
+Using
 
 ```text
 D(A') = C(A' - H D(A')),
 ```
 
-the one-step defect factors as
-
-```text
-||F_L(X)-F_R(X)||
-<= L_C ||(A'-H_L X)-(A'-H_R X)||
-<= L_C ||(H_L-H_R)X||
-<= L_C M_H ||X||
-<= L_C M_H R.
-```
-
-CMP99 is therefore a legitimate upstream producer for `M_H`; it is **not** the fixed-point displacement theorem itself.
+the one-step defect factors into `C` Lipschitz, affine argument difference, propagator difference, candidate size and common radius. CMP99 is therefore a legitimate upstream producer for the propagator-difference factor, not the full fixed-point displacement theorem.
 
 ### R367 — source C contraction becomes proof-bearing
 
 `BalabanCMP102CriticalMapLipschitzRound367Exact.agda`
 
-The source-facing C payment is no longer a free scalar inequality. R367 requires a proof-bearing theorem on the exact source map:
+R367 requires a proof-bearing source theorem on the exact source map:
 
 ```text
-d(C x, C y) <= L_C d(x,y)
+d(C x,C y) <= L_C d(x,y)
 ```
 
-inside the declared source ball, then compiles it into R366. CMP116 Sect. 1 explicitly states that the reused CMP102 fixed-point transformation maps the selected small ball into itself and is contractive there.
+inside the declared source ball and compiles it into R366.
 
-Important firewall:
+Firewall:
 
 ```text
-source analyticity/locality status != quantitative C-Lipschitz inhabitant
+source analyticity/locality status != quantitative C-Lipschitz inhabitant.
 ```
 
-The actual `C` same-object attachment remains required.
+### R368 — affine argument inequality demoted to generic compiler algebra
+
+`BalabanCMP116AffineArgumentDifferenceRound368Exact.agda`
+
+R368 introduces a generic abelian difference carrier and a generic operator-difference action. From those ordinary laws it proves
+
+```text
+(A' - H_L X) - (A' - H_R X)
+  = (H_R - H_L) X.
+```
+
+It then transports this equality through the selected size function, making the old R366 `argumentDefectBelowPropagatorAction` inequality reflexive.
+
+This is a genuine Pareto reduction: the scalar argument inequality is no longer primitive. What remains is the same-object statement that the actual CMP116 subtraction and operator action instantiate the R368 generic carrier.
 
 ## 5. Source-owned versus application debt
 
@@ -209,6 +221,7 @@ The actual `C` same-object attachment remains required.
 CMP99 background propagator bounds and marked domain-sequence comparison;
 CMP102 variational/background theorem and contraction/locality proof shape;
 CMP116 literal substituted-background equation and common small-ball contraction construction;
+ordinary affine cancellation once subtraction/operator semantics are attached;
 CMP109 differentiated E^(2) locality machinery;
 CMP116 positive localisation/tree summability;
 finite marked-walk/replacement compiler algebra.
@@ -219,8 +232,8 @@ finite marked-walk/replacement compiler algebra.
 ```text
 actual CMP102 C == C used in selected CMP116/R367 carrier;
 actual CMP99 marked H difference == selected CMP116 H(s(Y0)) difference;
-literal argument subtraction/operator action == R366 argument-defect carrier;
-source radius/common ball == selected R365/R367 ball;
+actual CMP116 subtraction/operator-difference semantics == R368 affine carrier;
+source radius/common ball == selected R365/R367/R368 ball;
 source-local D^2E variation estimate == selected H_local consumer.
 ```
 
@@ -235,7 +248,8 @@ CMP99 marked propagator comparison -> full fixed-point displacement
 shared symbol C -> same nonlinear map
 shared symbol H/Green -> same propagator
 source ball existence -> selected ball attachment
-algebraically obvious affine difference -> same-object source operation semantics
+R368 generic affine algebra -> automatic same-object source operation attachment
+algebraically obvious affine difference -> source operation semantics
 H_subScale -> primitive theorem after R365/R366
 full CMP109/116/119/122 reconstruction -> current live task
 Row C / Heat / Langevin / Step-V -> mandatory merely because sufficient
@@ -256,7 +270,7 @@ raw finite-history CMP119 E_k
 -> BC1.
 ```
 
-Its live theorem-bearing inputs are `P0` genuine CMP122 witness, `P1` physical second variation, `P2` literal CMP109 Eq.(5.1) binding, and `P3` literal normalized CMP116 demand extraction. Do not merge that BC1 source-realization queue with the current R365--R367 mass-gap sensitivity queue merely because both mention CMP116.
+Its live theorem-bearing inputs are `P0` genuine CMP122 witness, `P1` physical second variation, `P2` literal CMP109 Eq.(5.1) binding, and `P3` literal normalized CMP116 demand extraction. Do not merge that BC1 source-realization queue with the current R365--R368 mass-gap sensitivity queue merely because both mention CMP116.
 
 ## 8. RH current route
 
@@ -273,7 +287,7 @@ Stop alias archaeology until theorem-bearing checked-near material becomes recov
 
 This file is scheduling/accounting only.
 
-- R365--R367 are source-written compiler/interface reductions.
+- R365--R368 are source-written compiler/interface reductions.
 - `machineChecked` repository labels are not fresh exact-head kernel receipts.
 - source statements and source extracts are not Agda proof terms.
 - same-object C/H/operation/radius attachments remain conditional.
@@ -285,4 +299,5 @@ This file is scheduling/accounting only.
 - R359: source decay-rate split replaced three independent rate inequalities.
 - R365: full two-fixed-point `H_subScale` demoted to one-step defect + contraction absorption.
 - R366: one-step defect factored into `C` Lipschitz × propagator difference × common radius.
-- R367: source `C` contraction made proof-bearing; mere analyticity blocked from paying it. Current dominant H_sub debt is the same-object CMP102/CMP116 `C` attachment plus CMP99/CMP116 `H` attachment.
+- R367: source `C` contraction made proof-bearing; mere analyticity blocked from paying it.
+- R368: common-base affine argument cancellation and operator-difference action compiled generically; the scalar argument-defect inequality is no longer primitive. Current dominant H_sub debt is same-object `C`, same-object `H`, source-operation attachment, and common-ball attachment.
