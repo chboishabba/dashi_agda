@@ -82,3 +82,15 @@ biocontrolChemistryParetoSchedulerFirstImplementation =
     "Australia/Brisbane (AEST, UTC+10)"
     Chronology.exactRepresentationImplemented
     Chronology.sourceCommittedOnly
+
+biocontrolChemistryAcquisitionPromotionFirstImplementation :
+  Chronology.FirstImplementationReceipt
+biocontrolChemistryAcquisitionPromotionFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Environment.BiocontrolChemistryAcquisitionPromotionExact"
+    "3165ff61c335cf5c8a2c189aed8c4380b0886244"
+    "2026-09-15T05:46:49Z"
+    "2026-09-15T15:46:49+10:00"
+    "Australia/Brisbane (AEST, UTC+10)"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
