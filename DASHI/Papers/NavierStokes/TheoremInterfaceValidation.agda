@@ -24,6 +24,7 @@ import DASHI.Physics.Closure.NSTriadKNS2b2AdjacentShellSpectralGapNoGoRegression
 import DASHI.Physics.Closure.NSTriadKNUpperShellCollarRemoteSplitRegression
 import DASHI.Physics.Closure.NSTriadKNLowCollarRemotePacketSplitRegression
 import DASHI.Physics.Closure.NSTriadKNTwoShellLowRemoteEuclideanGapRegression
+import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
@@ -31,19 +32,19 @@ import DASHI.Physics.Closure.NSTriadKNTwoShellLowRemoteEuclideanGapRegression
 -- This file certifies only that the paper-facing status surface agrees with
 -- the authoritative owners it imports. The canonical coordinator regression,
 -- thin S2b successor delta, strict S0/S1/S2 representation regressions, and
--- the current S2b2 sign/no-go/collar/three-region/gap regressions are imported
--- so the current A/B routing and physical phase seams are checked by the same
--- root whenever it is actually kernel-run.
+-- the current S2b2 sign/no-go/collar/three-region/gap/live-norm regressions are
+-- imported so the current A/B routing and physical phase seams are checked by
+-- the same root whenever it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
 -- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1 radial
 -- packet realization, packet-complement antisymmetry, the adjacent-shell-gap
--- no-go, exact collar/remote split, exact low/collar/remote flux identity and
--- the two-shell finite Euclidean frequency gap may all be source-written while
--- concrete scalar FTC / integration authorities, the literal R98 spectral
--- datum, the collar quantitative payment, initial ceiling and retained-viscosity
--- payments remain unobserved or open.
+-- no-go, exact collar/remote split, exact low/collar/remote flux identity,
+-- two-shell concrete frequency gap and rational live-norm transport may all be
+-- source-written while concrete scalar FTC / integration authorities, the
+-- packet-level R98 spectral datum, collar quantitative payment, initial ceiling
+-- and retained-viscosity payments remain unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
