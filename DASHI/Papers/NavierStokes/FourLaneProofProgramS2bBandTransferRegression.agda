@@ -36,9 +36,14 @@ s2b1b1UpperShellR98TransportRecovered :
 s2b1b1UpperShellR98TransportRecovered =
   Subject.s2b1b1UpperShellR98TransportRecoveredIsTrue
 
-s2b1bStructuralSuffixStillOpen :
+s2b1b2aCanonicalSuffixR98Recovered :
+  Subject.s2b1b2aCanonicalSuffixR98Recovered ≡ true
+s2b1b2aCanonicalSuffixR98Recovered =
+  Subject.s2b1b2aCanonicalSuffixR98RecoveredIsTrue
+
+s2b1bStructuralTailStillOpen :
   Subject.s2b1bStructuralSuffixRecovered ≡ false
-s2b1bStructuralSuffixStillOpen =
+s2b1bStructuralTailStillOpen =
   Subject.s2b1bStructuralSuffixRecoveredIsFalse
 
 s2QuantitativeEstimateStillOpen :
