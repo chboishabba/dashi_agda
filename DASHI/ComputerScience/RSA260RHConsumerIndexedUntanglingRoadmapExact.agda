@@ -25,7 +25,7 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 --
 -- The common tower now has a second generic operation: residual localization.
 -- Once a coarse collision proves that RelativeFine matters, do not automatically
--- retain the whole residual.  Search a smaller observer on RelativeFine and
+-- retain the whole residual. Search a smaller observer on RelativeFine and
 -- prove that it still separates the concrete consumer witness.
 --
 -- Current RSA descent:
@@ -191,7 +191,6 @@ canonicalRSA260RHUntanglingRoadmapBoundary =
     true
     true
     true
-    false
     false
     false
     false
