@@ -4,16 +4,15 @@ module DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342
 ------------------------------------------------------------------------
 -- Focused contract for the current T78-B R341 Pareto leaf.
 --
--- Round342 isolates B1:
---   CMP116 differentiated source magnitude
+-- Preferred B1:
+--   CMP116 differentiated J-response magnitude
 --   = selected literal mixed-log magnitude
 -- on the exact R318/R278/R281 selected pair.
 --
--- Archaeology also exposes a strictly smaller donor route: R321 already owns
--- the selected mixed-log <-> CMP109 E^(2)/Pi same-object socket. Therefore B1
--- must be compilable from ONE additional source-source identification between
--- R338's canonical CMP116 differentiated magnitude and R321's source E2/Pi
--- magnitude. B2 remains independent.
+-- R322 is a WrongType firewall: CMP109 vacuum-polarization Pi is not
+-- definitionally the selected two-J connected cumulant.  R321 may therefore be
+-- reused only as an OPTIONAL stronger donor after an additional CMP109<->CMP116
+-- source-magnitude theorem; it is not the preferred B1 acquisition route.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -25,18 +24,34 @@ import DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342
 b1CompilerOwned : ProofLevel
 b1CompilerOwned = R342.round342CompilerLevel
 
-b1StillPhysical : ProofLevel
-b1StillPhysical = R342.round342SourceResponseSameObjectLevel
+preferredDirectB1StillPhysical : ProofLevel
+preferredDirectB1StillPhysical = R342.round342SourceResponseSameObjectLevel
 
-sourceSourceIdentityStillPhysical : ProofLevel
-sourceSourceIdentityStillPhysical = R342.round342CMP109CMP116SourceIdentityLevel
+optionalCMP109CMP116IdentityStillPhysical : ProofLevel
+optionalCMP109CMP116IdentityStillPhysical = R342.round342CMP109CMP116SourceIdentityLevel
 
 b2StillIndependent : ProofLevel
 b2StillIndependent = R342.round342EnvelopeCalibrationLevel
 
-r321DonorReuseIsCompilerOwned :
+r321DonorReuseIsAvailableAfterExtraIdentity :
   R342.r321SameObjectCanFeedB1AfterSourceIdentity ≡ true
-r321DonorReuseIsCompilerOwned = refl
+r321DonorReuseIsAvailableAfterExtraIdentity = refl
+
+r321DonorIsNotPreferred :
+  R342.r321CMP109DonorIsPreferredB1Route ≡ false
+r321DonorIsNotPreferred = refl
+
+directCMP116JResponseIsPreferred :
+  R342.directCMP116JResponseIsPreferredB1Route ≡ true
+directCMP116JResponseIsPreferred = refl
+
+cmp109PiNotRequiredByPreferredB1 :
+  R342.cmp109PiIdentificationRequiredByPreferredB1 ≡ false
+cmp109PiNotRequiredByPreferredB1 = refl
+
+cmp109PiWrongTypeFirewallRetained :
+  R342.cmp109PiIsDefinitionallyTwoJConnectedCumulant ≡ false
+cmp109PiWrongTypeFirewallRetained = refl
 
 freshDecayEstimateNotIntroduced :
   R342.freshYMDecayEstimateIntroduced ≡ false
