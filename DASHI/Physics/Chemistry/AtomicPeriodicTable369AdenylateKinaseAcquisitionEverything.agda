@@ -79,6 +79,12 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureFiveIm
 -- are therefore paid too.  Kramers-derived remains distinct from experimental.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureFivePanelCFullNumericAcquisitionExact
 
+-- Full-resolution same-object Figure-6 panel-c acquisition for ligand-bound AdK:
+-- all eight printed relative free energies and sixteen visible directed Kramers
+-- labels are retained at printed precision.  The exceptional beta_L->alpha_L
+-- reading remains literal "9.34 x 10^-3" rather than being silently normalized.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureSixPanelCFullNumericAcquisitionExact
+
 -- Cell-level acquisition ledger: endpoint theta/dLN values plus all eight
 -- Figure-5 relative energies and all six forward route-edge Kramers rates are
 -- now paid. Named intermediate theta/dLN cells remain explicitly unpaid.
