@@ -37,8 +37,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact as R347
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
-import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as R103
-import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian as Generic
 
 ------------------------------------------------------------------------
 -- Minimal source-specific acquisition cut below R347.
@@ -65,17 +63,15 @@ selectedSubstitutedBackgroundControlLevel = conditional
 selectedLocalActivityHessianStabilityLevel : ProofLevel
 selectedLocalActivityHessianStabilityLevel = conditional
 
--- The generic boundary/Cauchy consumer already exists; R350 only exposes the
--- exact source-facing shape required to feed it.
+-- The generic boundary/Cauchy consumer is already represented through the
+-- canonical R347 frontier; no import of the older generic-real authority is
+-- required here.
 selectedBoundaryCompilerLevel : ProofLevel
 selectedBoundaryCompilerLevel = R347.genericBoundaryToCauchyLiftLevel
 
 -- Common radius/domain existence is not rescheduled as a fresh analytic leaf.
 canonicalCommonRadiusCompilerLevel : ProofLevel
 canonicalCommonRadiusCompilerLevel = R104.cmp116CanonicalCommonRadiusCompilerLevel
-
-commonDomainCarrierLevel : ProofLevel
-commonDomainCarrierLevel = machineChecked
 
 ------------------------------------------------------------------------
 -- Pareto / WrongType boundaries.
@@ -118,8 +114,6 @@ canonicalRound350Boundary =
     true refl
     true refl
 
--- Imported only to pin the exact existing compiler authority in the dependency
--- graph; no theorem is re-proved or promoted here.
 markedSubstitutionCompilerOwned : Bool
 markedSubstitutionCompilerOwned = true
 
