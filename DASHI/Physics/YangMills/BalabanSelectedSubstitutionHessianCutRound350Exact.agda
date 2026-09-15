@@ -5,15 +5,15 @@ module DASHI.Physics.YangMills.BalabanSelectedSubstitutionHessianCutRound350Exac
 -- ROUND350 / SPLIT R347 BOUNDARY COMPARISON AT THE EXISTING GENERIC ABI
 --
 -- `BalabanDecoupledActivityHessian.markedSubstitutionStabilityLiftsToCoefficient`
--- already proves the exact generic implication needed below R347:
+-- already proves the generic implication that motivates this cut:
 --
 --   selected Hessian stability against substitutionDistance
 -- + selected substitutionDistance <= markedInput
 -- ---------------------------------------------------------
 --   marked Cauchy/Hessian coefficient <= lipschitz * markedInput.
 --
--- Hence the pointwise boundary/Cauchy extraction is not a primitive YM leaf.
--- The source-specific physical application splits into exactly two inputs:
+-- Hence pointwise boundary/Cauchy extraction is not a primitive YM leaf.  The
+-- source-specific physical application splits into exactly two inputs:
 --
 --   H_stab:
 --     selected boundary Hessian-integrand difference
@@ -23,36 +23,33 @@ module DASHI.Physics.YangMills.BalabanSelectedSubstitutionHessianCutRound350Exac
 --     selected substitutionDistance <= selected markedInput.
 --
 -- Both are on the literal selected CMP116 substituted-background carrier.
--- Positivity and finite-polydisc bookkeeping belong to the existing generic
--- compiler once the physical realization supplies its concrete nonnegative
--- quantities.
+-- Common-domain existence/smallness and generic Cauchy bookkeeping are already
+-- separated by earlier owners; neither quantitative source estimate is created
+-- by those compilers.
 --
--- Independent leaves remain R348 C_attach and R346 D_time.
--- This owner records the dependency cut only; neither H_stab nor H_sub is
--- manufactured here.
+-- Independent leaves remain R348 C_attach and R346 D_time.  This owner records
+-- the dependency cut only; neither H_stab nor H_sub is manufactured here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian as Hess
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as Source
-import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryCutRound347Exact as R347
+import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact as R347
 import DASHI.Physics.YangMills.BalabanCMP116SelectedCoefficientAttachmentRound348Exact as R348
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 
 ------------------------------------------------------------------------
--- Generic compiler already owned.
+-- Existing compiler/admissibility surfaces already owned.
 ------------------------------------------------------------------------
 
 genericSubstitutionToCoefficientCompilerLevel : ProofLevel
 genericSubstitutionToCoefficientCompilerLevel =
   Source.markedBoundaryToHessianCauchyLiftLevel
 
--- The exact implementation theorem lives in `BalabanDecoupledActivityHessian`:
--- `markedSubstitutionStabilityLiftsToCoefficient`.  Importing that module here
--- keeps the compiler dependency explicit without pretending its physical inputs
--- are inhabited.
+canonicalCommonRadiusCompilerLevel : ProofLevel
+canonicalCommonRadiusCompilerLevel = R104.cmp116CanonicalCommonRadiusCompilerLevel
 
 ------------------------------------------------------------------------
 -- Remaining source-specific physical inputs.
@@ -74,6 +71,11 @@ selectedSubstitutionMarkedLevel = conditional
 selectedCoefficientAttachmentLevel : ProofLevel
 selectedCoefficientAttachmentLevel = R348.selectedCoefficientSameObjectLevel
 
+-- The parent R347 physical boundary leaf is exactly the consumer these two
+-- estimates are intended to inhabit after physical/source instantiation.
+selectedBoundaryParentLevel : ProofLevel
+selectedBoundaryParentLevel = R347.selectedMarkedBoundarySubstitutionLevel
+
 ------------------------------------------------------------------------
 -- Pareto firewalls.
 ------------------------------------------------------------------------
@@ -91,6 +93,13 @@ freshBoundaryEnvelopeTheoremRequired = false
 freshBoundaryEnvelopeTheoremRequiredIsFalse :
   freshBoundaryEnvelopeTheoremRequired ≡ false
 freshBoundaryEnvelopeTheoremRequiredIsFalse = refl
+
+commonDomainExistenceStillPrimitiveHere : Bool
+commonDomainExistenceStillPrimitiveHere = false
+
+commonDomainExistenceStillPrimitiveHereIsFalse :
+  commonDomainExistenceStillPrimitiveHere ≡ false
+commonDomainExistenceStillPrimitiveHereIsFalse = refl
 
 selectedCoefficientAttachmentStillIndependent : Bool
 selectedCoefficientAttachmentStillIndependent = true
@@ -113,6 +122,9 @@ record Round350Boundary : Set where
     substitutionCauchyCompilerOwnedIsTrue :
       substitutionCauchyCompilerOwned ≡ true
 
+    commonDomainCompilerOwned : Bool
+    commonDomainCompilerOwnedIsTrue : commonDomainCompilerOwned ≡ true
+
     selectedHessianStabilityStillPhysical : Bool
     selectedHessianStabilityStillPhysicalIsTrue :
       selectedHessianStabilityStillPhysical ≡ true
@@ -128,6 +140,7 @@ record Round350Boundary : Set where
 canonicalRound350Boundary : Round350Boundary
 canonicalRound350Boundary =
   round350-boundary
+    true refl
     true refl
     true refl
     true refl
