@@ -5,13 +5,14 @@ module DASHI.Physics.Foundations.BalabanNativeSectorRecoveryTransportExact where
 -- BIDI REPRESENTATION TRANSPORT FOR ONE NATIVE YM SECTOR
 --
 -- The source-native producer on YM PR #638 uses its canonical CMP116 metric
--- perturbation, native pairing scalar, and native literal stress carrier.
+-- perturbation, native pairing scalar, and one distinguished literal stress.
 -- The TOE consumer uses one QFT-side perturbation/scalar convention and the
 -- `SharedStressEnergy` carrier.  These are not identified by name.
 --
--- This record isolates exactly the representation theorem needed to transport a
--- native endpoint identity into the shared sector identity consumed by
--- `BalabanAllSectorContinuumProducer`.
+-- Pareto correction: the downstream proof uses stress transport only at the
+-- distinguished literal stress.  Requiring a map and pairing law for every
+-- native stress was stronger than the consumer.  This record therefore stores
+-- only the literal shared stress and its pairing coherence.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -44,23 +45,25 @@ record NativeBalabanSectorRecoveryTransport
     fromNativeVariationScalar :
       NativeVariationScalar → VariationScalar
 
-    nativeStressToShared : NativeStress → Weld.SharedStressEnergy U
+    -- Least-privilege stress transport: only the distinguished literal stress
+    -- is consumed by the endpoint theorem.
+    nativeLiteralStressShared : Weld.SharedStressEnergy U
 
     nativeLiteralStressIsActualSharedSectorStress :
       ∀ candidate regime →
       Weld.qftRegime U regime →
-      nativeStressToShared nativeLiteralStress
+      nativeLiteralStressShared
       ≡ Weld.actualQFTSectorStressShared U
           (Weld.coarseGrain U candidate regime) group
 
     sharedStressMetricPairing :
       Weld.SharedStressEnergy U → MetricPerturbation → VariationScalar
 
-    nativePairingCommutes :
-      ∀ stress perturbation →
-      sharedStressMetricPairing (nativeStressToShared stress) perturbation
+    nativeLiteralPairingCommutes :
+      ∀ perturbation →
+      sharedStressMetricPairing nativeLiteralStressShared perturbation
       ≡ fromNativeVariationScalar
-          (nativeStressMetricPairing stress
+          (nativeStressMetricPairing nativeLiteralStress
             (toNativeMetricPerturbation perturbation))
 
 open NativeBalabanSectorRecoveryTransport public
@@ -108,8 +111,7 @@ transportedSectorVariationIsActualSharedStressPairing
     nativeIdentity = nativeContinuumVariationIsLiteralStressPairing transport
       (toNativeMetricPerturbation transport perturbation) admissible
     scalarIdentity = cong (fromNativeVariationScalar transport) nativeIdentity
-    pairingIdentity = sym (nativePairingCommutes transport
-      (nativeLiteralStress transport) perturbation)
+    pairingIdentity = sym (nativeLiteralPairingCommutes transport perturbation)
     stressIdentity = nativeLiteralStressIsActualSharedSectorStress
       transport candidate regime qftAtRegime
     sharedStressIdentity = cong
@@ -120,6 +122,11 @@ transportedSectorVariationIsActualSharedStressPairing
 
 nativeBalabanSectorRecoveryTransportCompilerLevel : ProofLevel
 nativeBalabanSectorRecoveryTransportCompilerLevel = machineChecked
+
+-- Alias used by the focused Pareto validation root.
+nativeLiteralSectorRecoveryTransportCompilerLevel : ProofLevel
+nativeLiteralSectorRecoveryTransportCompilerLevel =
+  nativeBalabanSectorRecoveryTransportCompilerLevel
 
 record NativeSectorTransportBoundary : Set where
   constructor nativeSectorTransportBoundary
@@ -132,10 +139,14 @@ record NativeSectorTransportBoundary : Set where
     nativeYMMetricPerturbationIsCommonPerturbationByNameIsFalse :
       nativeYMMetricPerturbationIsCommonPerturbationByName ≡ false
 
-    explicitStressPerturbationScalarTransportIsSufficient : Bool
-    explicitStressPerturbationScalarTransportIsSufficientIsTrue :
-      explicitStressPerturbationScalarTransportIsSufficient ≡ true
+    allNativeStressTransportRequired : Bool
+    allNativeStressTransportRequiredIsFalse :
+      allNativeStressTransportRequired ≡ false
+
+    literalStressPerturbationScalarTransportIsSufficient : Bool
+    literalStressPerturbationScalarTransportIsSufficientIsTrue :
+      literalStressPerturbationScalarTransportIsSufficient ≡ true
 
 canonicalNativeSectorTransportBoundary : NativeSectorTransportBoundary
 canonicalNativeSectorTransportBoundary =
-  nativeSectorTransportBoundary false refl false refl true refl
+  nativeSectorTransportBoundary false refl false refl false refl true refl
