@@ -6,7 +6,8 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact where
 -- Post-PR #920 boundary.  The R571 -> paired second-order -> scoped finite
 -- second-moment compiler is already source-written.  This owner does not add
 -- another compiler.  It records the shortest existing donor for each physical
--- envelope and makes one useful canonical choice on the radial Taylor side.
+-- envelope, the theorem-bearing Lean radial receipts, and the local Hermitian
+-- vector->scalar weld used by the old centered pair.
 --
 -- Preferred Taylor choice:
 --   L := m(k+y) - m(k).
@@ -18,11 +19,13 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact where
 -- Donor / receipt firewall:
 -- * A1 geometry donor: resonant reverse-triangle / radial-gap machinery.
 -- * A1/A2 theorem-bearing Lean receipts: dedicated periodic-B Aristotle task.
+-- * G0': existing R291 real-Hermitian scalarization into the old R27 pair.
 -- * G2 algebra donor: finite path difference -> gradient-energy theorem.
 -- * G1 magnitude donor: exact modal-energy/Cauchy amplitude machinery.
 --
 -- The Lean radial receipts do not themselves construct the rational Agda
--- family/sample weld.  G2/G1 remain the live state-side physical envelope.
+-- family/sample weld.  G0' does not construct a global scalar Fourier state and
+-- does not pay G2/G1.  Those remain the live state-side physical envelopes.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -38,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializatio
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizationExact as R571Pair
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceExact as Taylor
 import DASHI.Physics.Closure.NSTriadKNR571LeanGateAEnvelopeReceiptExact as LeanReceipt
+import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact as G0
 
 -- Existing donors.  Importing them here is intentional: this is the typed
 -- archaeology/crosswalk surface for the four Gate-A leaves.
@@ -120,8 +124,21 @@ r571GateAA1PhysicalFamilyUniformBoundClosed : Bool
 r571GateAA1PhysicalFamilyUniformBoundClosed = false
 
 ------------------------------------------------------------------------
--- G2/G1 state side.
+-- G0'/G2/G1 state side.
 ------------------------------------------------------------------------
+
+-- The local vector->scalar bridge is now source-written: two literal rational
+-- C^3 samples are paired against the existing spectator via the R291
+-- real-Hermitian functional and packaged into the old opposite R27 pair.  This
+-- is a same-object adapter only; it does not choose the eventual physical
+-- X-/X+ grouping and does not add an estimate.
+r571GateAG0HermitianScalarizedPairClosed : Bool
+r571GateAG0HermitianScalarizedPairClosed =
+  G0.r571HermitianScalarizedOppositePairClosed
+
+r571GateAGlobalPhysicalScalarStateRequired : Bool
+r571GateAGlobalPhysicalScalarStateRequired =
+  G0.r571GlobalPhysicalScalarStateRequired
 
 r571GateAG2FinitePathDonorLocated : Bool
 r571GateAG2FinitePathDonorLocated = true
