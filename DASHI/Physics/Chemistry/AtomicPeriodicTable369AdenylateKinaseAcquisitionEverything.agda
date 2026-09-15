@@ -41,6 +41,13 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDTextAcqu
 -- residual at region level without paying any named beta/gamma/delta/epsilon dLN cell.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseIntermediateGeometryTextAcquisitionExact
 
+-- Cross-source gamma-near crystal references: Li-Liu-Ji place PDB 1AK2/2AK2
+-- near gamma under their theta1/theta2 projection, while the primary bovine-AK2
+-- structure paper classifies the same unligated PDB objects as open.  PDB DOI,
+-- PMID and UniProt P08166 are retained; exact object/article QIDs remain unresolved.
+-- Role differences are preserved rather than collapsed into gamma-state identity.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaCrystalReferenceAcquisitionExact
+
 -- Source-paid projection limitation: the one-dimensional dLN free-energy view
 -- shows a double well and ligand-dependent population shift but averages over
 -- theta1/theta2 states; the three-CV view is richer for the paper's pathway
