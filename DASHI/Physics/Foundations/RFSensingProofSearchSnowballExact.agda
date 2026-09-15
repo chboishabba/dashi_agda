@@ -7,11 +7,11 @@ import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as SnowballAttribution
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Discovery
 import DASHI.Core.ProofSearchLeastPrivilegeAdmissionExact as ProofSearch
+import DASHI.Physics.Foundations.PhasedArrayRFSensingSourceAtlasExact as Sources
 
 ------------------------------------------------------------------------
 -- Consumer/SDR examples are acquisition leads, not promoted technical facts.
--- The exact source role is retained so the snowball cannot silently turn a
--- Hackaday demonstration into primary scientific authority.
+-- Reuse the exact source-atlas objects so source identity is not duplicated.
 ------------------------------------------------------------------------
 
 record AcquisitionLead : Set where
@@ -28,37 +28,13 @@ record AcquisitionLead : Set where
 open AcquisitionLead public
 
 hackadayConsumerWifiSource : Attribution.AttributedSource
-hackadayConsumerWifiSource = Attribution.mkNoDOISource
-  "Donald Papp / Hackaday"
-  "Make Your Own ESP32-Based Person Sensor, No Special Hardware Needed"
-  "Hackaday"
-  "2026"
-  "https://hackaday.com/2026/01/28/make-your-own-esp32-based-person-sensor-no-special-hardware-needed/"
-  Attribution.communitySource
-  "lead showing commodity ESP32 Wi-Fi CSI used for person/motion sensing and reported wall penetration; primary literature still required for general technical claims"
-  Attribution.publicAttribution
+hackadayConsumerWifiSource = Sources.hackadayConsumerWifiLead
 
 hackadaySDRPassiveRadarSource : Attribution.AttributedSource
-hackadaySDRPassiveRadarSource = Attribution.mkNoDOISource
-  "Juha Vierinen / Hackaday"
-  "Building Your Own SDR-based Passive Radar On A Shoestring"
-  "Hackaday"
-  "2015"
-  "https://hackaday.com/2015/06/05/building-your-own-sdr-based-passive-radar-on-a-shoestring/"
-  Attribution.communitySource
-  "lead showing passive-radar experimentation with inexpensive RTL-SDR receivers and existing illuminators; not a source for operational surveillance or system-identification claims"
-  Attribution.publicAttribution
+hackadaySDRPassiveRadarSource = Sources.hackadaySDRPassiveRadarLead
 
 hackadayPhasedArrayThroughWallSource : Attribution.AttributedSource
-hackadayPhasedArrayThroughWallSource = Attribution.mkNoDOISource
-  "Gregory L. Charvat / Hackaday"
-  "Build A Phased-Array Radar In Your Garage That Sees Through Walls"
-  "Hackaday"
-  "2015"
-  "https://hackaday.com/2015/04/07/build-a-phased-array-radar-in-your-garage-that-sees-through-walls/"
-  Attribution.communitySource
-  "lead connecting low-cost phased-array experimentation, Wi-Fi-band antennas and through-wall radar demonstrations; underlying technical papers remain the authority-bearing acquisition target"
-  Attribution.publicAttribution
+hackadayPhasedArrayThroughWallSource = Sources.hackadayPhasedArrayThroughWallLead
 
 hackadayConsumerWifiLead : AcquisitionLead
 hackadayConsumerWifiLead =
