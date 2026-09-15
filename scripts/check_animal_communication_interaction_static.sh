@@ -9,8 +9,11 @@ INTERACTION="DASHI/Biology/AnimalCommunicationInteractionExact.agda"
 LATENT="DASHI/Biology/AnimalCommunicationLatentExact.agda"
 SEMANTIC="DASHI/Biology/AnimalCommunicationSemanticEvidenceExact.agda"
 MAGPIE="DASHI/Biology/MagpieAnimalCommunicationAdapterExact.agda"
+VISUAL="DASHI/Biology/AnimalCommunicationMultiObserverVisualBridgeExact.agda"
+ACOUSTIC="DASHI/Biology/AnimalCommunicationPassiveAcousticLocalizationExact.agda"
+AVWELD="DASHI/Biology/AnimalCommunicationSharedWorldAVAssociationExact.agda"
 
-for owner in "$SCENE" "$INTERACTION" "$LATENT" "$SEMANTIC" "$MAGPIE"; do
+for owner in "$SCENE" "$INTERACTION" "$LATENT" "$SEMANTIC" "$MAGPIE" "$VISUAL" "$ACOUSTIC" "$AVWELD"; do
   test -f "$owner"
 done
 
@@ -32,5 +35,24 @@ grep -q "data CommunicationQuery" "$LATENT"
 grep -q "crossSpeciesAnalogyDoesNotCreateSameMechanism" "$LATENT"
 grep -q "responsePredictionDoesNotCreateMeaning" "$SEMANTIC"
 grep -q "magpieAdapterDoesNotPromoteSemantics" "$MAGPIE"
+
+grep -q "record MultiObserverAnimalTrackReceipt" "$VISUAL"
+grep -q "dynamicTargetDoesNotCreateCameraPose" "$VISUAL"
+grep -q "sameWorldTrackDoesNotCreateSpeciesIdentity" "$VISUAL"
+grep -q "speciesIdentityDoesNotCreateIndividualIdentity" "$VISUAL"
+grep -q "visualTrackDoesNotCreateVocalEmitterIdentity" "$VISUAL"
+
+grep -q "record PassiveAcousticLocalizationReceipt" "$ACOUSTIC"
+grep -q "timeDifferenceOfArrivalReference" "$ACOUSTIC"
+grep -q "microphoneGeometryReference" "$ACOUSTIC"
+grep -q "localizedCallDoesNotCreateUniqueBird" "$ACOUSTIC"
+grep -q "tdoaFitDoesNotCreateSpeciesIdentity" "$ACOUSTIC"
+grep -q "activeProbeUsed" "$ACOUSTIC"
+
+grep -q "record SharedWorldAVAssociationReceipt" "$AVWELD"
+grep -q "spatialOverlapDoesNotCreateSameEmitter" "$AVWELD"
+grep -q "lowWorldWeldResidualDoesNotCreateSameAnimal" "$AVWELD"
+grep -q "avAssociationDoesNotCreateSemanticMeaning" "$AVWELD"
+grep -q "manyToManyAssociationRetained" "$AVWELD"
 
 echo "animal communication interaction static contract passed"
