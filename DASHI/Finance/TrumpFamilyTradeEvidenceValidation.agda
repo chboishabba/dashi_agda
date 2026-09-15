@@ -2,11 +2,14 @@ module DASHI.Finance.TrumpFamilyTradeEvidenceValidation where
 
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 import DASHI.Finance.TrumpFamilyTradePrimarySourceExtensionExact as Primary
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Exact as Primary2
 import DASHI.Finance.TrumpFamilyExternalCounterpartyEvidenceExact as Counterparty
+import DASHI.Finance.TrumpFamilyExternalCounterpartyPrimaryExact as CounterpartyPrimary
 import DASHI.Finance.TrumpFamilyTradePNFBridgeExact as PNF
 import DASHI.GameTheory.SourceConditionedMarketInformationExact as Information
 import DASHI.Finance.TrumpFamilyTradeGameTheoryBridgeExact as GameBridge
 import DASHI.Finance.TrumpFamilyTradeAcquisitionFrontierExact as Acquisition
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressExact as Progress
 
 sourceBoundary : Atlas.TrumpFamilyTradeSourceBoundary
 sourceBoundary = Atlas.canonicalTrumpFamilyTradeSourceBoundary
@@ -17,16 +20,16 @@ primaryBoundary = Primary.canonicalTrumpFamilyPrimarySourceExtensionBoundary
 -- RED extension: exact transaction/ownership receipts must exist rather than
 -- being reconstructed from aggregate/private-placement or secondary prose.
 psqhPersonalAllocation : Atlas.TradeEvidenceClaim
-psqhPersonalAllocation = Primary.donJrPSQHPrivatePlacementPersonalAllocation
+psqhPersonalAllocation = Primary2.donJrPSQHPrivatePlacementPersonalAllocation
 
 donJrDominariOwnership : Atlas.TradeEvidenceClaim
-donJrDominariOwnership = Primary.donJrDominariOwnership
+donJrDominariOwnership = Primary2.donJrDominariOwnership
 
 trumpTechPurchaseSeries : Atlas.TradeEvidenceClaim
-trumpTechPurchaseSeries = Primary.trump2025TechEquityPurchaseSeries
+trumpTechPurchaseSeries = Primary2.trump2025TechEquityPurchaseSeries
 
 mgxPrimaryInvestment : Counterparty.CounterpartyEvidence
-mgxPrimaryInvestment = Counterparty.mgxBinancePrimaryInvestment
+mgxPrimaryInvestment = CounterpartyPrimary.mgxBinancePrimaryInvestment
 
 counterpartyBoundary : Counterparty.TrumpFamilyExternalCounterpartyBoundary
 counterpartyBoundary = Counterparty.canonicalTrumpFamilyExternalCounterpartyBoundary
@@ -43,5 +46,5 @@ gameBoundary = GameBridge.canonicalTrumpFamilyTradeGameTheoryBoundary
 acquisitionBoundary : Acquisition.TrumpFamilyTradeAcquisitionBoundary
 acquisitionBoundary = Acquisition.canonicalTrumpFamilyTradeAcquisitionBoundary
 
-acquisitionProgress : Acquisition.TrumpFamilyTradeAcquisitionProgress
-acquisitionProgress = Acquisition.currentTrumpFamilyTradeAcquisitionProgress
+acquisitionProgress : Progress.TrumpFamilyTradeAcquisitionProgress
+acquisitionProgress = Progress.currentTrumpFamilyTradeAcquisitionProgress
