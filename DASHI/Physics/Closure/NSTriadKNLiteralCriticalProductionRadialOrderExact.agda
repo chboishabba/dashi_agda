@@ -13,7 +13,8 @@ module DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderExact 
 --
 -- This owner performs only the finite ordering step. It insertion-sorts the
 -- SAME literal mode list by the repository's executable `shellIndex`, proves
--- the resulting shell indices are nondecreasing, and proves the S2a weighted
+-- the resulting shell indices are nondecreasing, proves the sorted list is an
+-- exact permutation of the incoming modes, and proves the S2a weighted
 -- projected-pairing fold is invariant under that reorder. Consequently S0's
 -- critical production is exactly twice R104.weightedTransfer on the radially
 -- ordered band list.
@@ -35,6 +36,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Nullary using (yes; no; ¬_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+import Data.List.Relation.Binary.Permutation.Propositional as Perm
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -60,6 +62,32 @@ insertByShell mode (head ∷ rest)
 sortByShell : List Z3.FourierMode → List Z3.FourierMode
 sortByShell [] = []
 sortByShell (mode ∷ rest) = insertByShell mode (sortByShell rest)
+
+------------------------------------------------------------------------
+-- Exact carrier preservation: sorting changes only order, never identity.
+------------------------------------------------------------------------
+
+insertByShellPermutation :
+  (mode : Z3.FourierMode) →
+  (modes : List Z3.FourierMode) →
+  insertByShell mode modes Perm.↭ (mode ∷ modes)
+insertByShellPermutation mode [] = Perm.refl
+insertByShellPermutation mode (head ∷ rest)
+  with Shell.shellIndex mode ≤? Shell.shellIndex head
+... | yes proof = Perm.refl
+... | no refutation =
+  Perm.trans
+    (Perm.prep head (insertByShellPermutation mode rest))
+    (Perm.swap head mode Perm.refl)
+
+sortByShellPermutation :
+  (modes : List Z3.FourierMode) →
+  sortByShell modes Perm.↭ modes
+sortByShellPermutation [] = Perm.refl
+sortByShellPermutation (mode ∷ rest) =
+  Perm.trans
+    (insertByShellPermutation mode (sortByShell rest))
+    (Perm.prep mode (sortByShellPermutation rest))
 
 data ShellOrdered : List Z3.FourierMode → Set where
   ordered[] : ShellOrdered []
@@ -193,6 +221,9 @@ literalRadialShellSortConstructed = true
 literalRadialShellOrderProved : Bool
 literalRadialShellOrderProved = true
 
+literalRadialShellSortPermutationClosed : Bool
+literalRadialShellSortPermutationClosed = true
+
 literalWeightedProductionInvariantUnderRadialSort : Bool
 literalWeightedProductionInvariantUnderRadialSort = true
 
@@ -209,6 +240,10 @@ literalRadialShellSortConstructedIsTrue = refl
 literalRadialShellOrderProvedIsTrue :
   literalRadialShellOrderProved ≡ true
 literalRadialShellOrderProvedIsTrue = refl
+
+literalRadialShellSortPermutationClosedIsTrue :
+  literalRadialShellSortPermutationClosed ≡ true
+literalRadialShellSortPermutationClosedIsTrue = refl
 
 literalWeightedProductionInvariantUnderRadialSortIsTrue :
   literalWeightedProductionInvariantUnderRadialSort ≡ true
