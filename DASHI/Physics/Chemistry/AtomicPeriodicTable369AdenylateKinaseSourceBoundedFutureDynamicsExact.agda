@@ -2,6 +2,7 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBounde
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Core.TypedDependencyCore as Dependency
@@ -11,6 +12,7 @@ import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Core.FrozenProvenanceDynamicRefinementExact as Frozen
 import DASHI.Core.QueryIndexedFrozenDynamicPromotionExact as Future
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseWeightedNDimStateGraphExact as Graph
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverJoinExact as JoinFRET
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETThirdAxisExact as Third
 
 ------------------------------------------------------------------------
@@ -168,9 +170,7 @@ executesPreservesThirdAxisWorld
     (proj₁ (Dependency.postcondition admissible))
 
 AdKFutureSurface : Set
-AdKFutureSurface =
-  (DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverJoinExact.LidNmpCoordinate ×
-   DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETObserverJoinExact.LidCoreCoordinate)
+AdKFutureSurface = JoinFRET.LidNmpCoordinate × JoinFRET.LidCoreCoordinate
 
 adkFutureSurface : AdKDynamicState → AdKFutureSurface
 adkFutureSurface state = Third.twoFretAxisProjection (proj₁ state)
