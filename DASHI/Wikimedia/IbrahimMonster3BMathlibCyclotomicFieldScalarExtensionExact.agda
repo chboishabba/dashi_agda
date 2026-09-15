@@ -137,7 +137,7 @@ record DashiCyclotomic3ToMathlibCyclotomicFieldTransport : Set₁ where
 open DashiCyclotomic3ToMathlibCyclotomicFieldTransport public
 
 ------------------------------------------------------------------------
--- 3. Cross-kernel receipt expected from the Lean/Kant side.
+-- 3. Cross-kernel receipt expected from the Lean side.
 --
 -- This is deliberately NOT an Agda reconstruction of mathlib's PowerBasis.
 -- A producer must pay the exact Lean theorem application and return the
@@ -161,7 +161,52 @@ compilePairTransportFromLeanPhi3Receipt :
 compilePairTransportFromLeanPhi3Receipt = pairTransport
 
 ------------------------------------------------------------------------
--- 4. Algebraic-closure lift after the coordinate receipt.
+-- 4. Exact Lean execution candidate: source exists, kernel receipt does not.
+--
+-- This record is evidence metadata only.  It does not inhabit the receipt
+-- above and it cannot be promoted to one by source existence, commit identity,
+-- or a pull-request URL.  The candidate must actually be kernel checked.
+------------------------------------------------------------------------
+
+record LeanPhi3PowerBasisExecutionCandidate : Set where
+  constructor lean-phi3-power-basis-execution-candidate
+  field
+    leanRepository : String
+    leanToolchain : String
+    mathlibVersion : String
+    leanBranch : String
+    leanCandidateCommit : String
+    leanSourcePath : String
+    leanRegressionPath : String
+    leanDraftPullRequest : String
+    candidateScope : String
+open LeanPhi3PowerBasisExecutionCandidate public
+
+canonicalLeanPhi3PowerBasisExecutionCandidate :
+  LeanPhi3PowerBasisExecutionCandidate
+canonicalLeanPhi3PowerBasisExecutionCandidate =
+  lean-phi3-power-basis-execution-candidate
+    "chboishabba/dashi_lean4"
+    "leanprover/lean4:v4.28.0"
+    "mathlib v4.28.0"
+    "agent/monster3b-phi3-power-basis"
+    "c8ad5e4cab226d75c1fee2d7c4811e7336c27014"
+    "Synthesis/Monster3BPhi3PowerBasis.lean"
+    "Synthesis/Monster3BPhi3PowerBasisRegression.lean"
+    "chboishabba/dashi_lean4#3"
+    "candidate proves only the Q(zeta_3) pair-coordinate seam: selected primitive cubic root, dimension-two power basis, Phi_3 relation, unique rational pair coordinates, and pair multiplication compatibility; no Monster constituent, FDRep, inertia character, or 12+78 same-object claim"
+
+leanWrapperSourceWritten : Bool
+leanWrapperSourceWritten = true
+
+leanWrapperKernelReceiptObserved : Bool
+leanWrapperKernelReceiptObserved = false
+
+agdaTransportReceiptObserved : Bool
+agdaTransportReceiptObserved = false
+
+------------------------------------------------------------------------
+-- 5. Algebraic-closure lift after the coordinate receipt.
 ------------------------------------------------------------------------
 
 record MathlibAlgebraicClosureLift
@@ -175,12 +220,14 @@ record MathlibAlgebraicClosureLift
 open MathlibAlgebraicClosureLift public
 
 ------------------------------------------------------------------------
--- 5. WrongType / non-promotion firewalls.
+-- 6. WrongType / non-promotion firewalls.
 ------------------------------------------------------------------------
 
 data DimensionTwoCreatesPairPresentationEquivalence : Set where
 data PowerBasisDimensionCreatesCoordinateWeld : Set where
 data PhiThreeTheoremNameCreatesLeanReceipt : Set where
+data LeanSourceCreatesKernelReceipt : Set where
+data DraftPullRequestCreatesLeanReceipt : Set where
 data CyclotomicFieldNameCreatesSelectedPrimitiveRoot : Set where
 data AlgebraicClosureInstanceCreatesDashiTransport : Set where
 data QidCreatesCyclotomicEquivalence : Set where
@@ -198,6 +245,14 @@ powerBasisDimensionDoesNotCreateCoordinateWeld ()
 phiThreeTheoremNameDoesNotCreateLeanReceipt :
   PhiThreeTheoremNameCreatesLeanReceipt → ⊥
 phiThreeTheoremNameDoesNotCreateLeanReceipt ()
+
+leanSourceDoesNotCreateKernelReceipt :
+  LeanSourceCreatesKernelReceipt → ⊥
+leanSourceDoesNotCreateKernelReceipt ()
+
+draftPullRequestDoesNotCreateLeanReceipt :
+  DraftPullRequestCreatesLeanReceipt → ⊥
+draftPullRequestDoesNotCreateLeanReceipt ()
 
 cyclotomicFieldNameDoesNotSelectPrimitiveRoot :
   CyclotomicFieldNameCreatesSelectedPrimitiveRoot → ⊥
@@ -217,7 +272,7 @@ oeisDoesNotCreateCyclotomicEquivalence : OeisCreatesCyclotomicEquivalence → �
 oeisDoesNotCreateCyclotomicEquivalence ()
 
 ------------------------------------------------------------------------
--- 6. Snowball/navigation coordinates remain non-promoting.
+-- 7. Snowball/navigation coordinates remain non-promoting.
 ------------------------------------------------------------------------
 
 record MathlibCyclotomicExternalCoordinates : Set where
@@ -242,7 +297,7 @@ canonicalMathlibCyclotomicExternalCoordinates =
     false
 
 ------------------------------------------------------------------------
--- 7. Pareto frontier.
+-- 8. Pareto frontier.
 ------------------------------------------------------------------------
 
 record MathlibCyclotomicScalarExtensionFrontier : Set where
@@ -255,6 +310,9 @@ record MathlibCyclotomicScalarExtensionFrontier : Set where
     powerBasisDimensionTwoPaidUpstream : Bool
     phiThreePolynomialPaidUpstream : Bool
     algebraicClosureTargetIsAlgClosedPaidUpstream : Bool
+    leanPhi3WrapperSourceWritten : Bool
+    leanPhi3CandidatePinned : Bool
+    leanPhi3KernelReceiptObserved : Bool
     leanPhi3CoordinateReceiptObserved : Bool
     dashiPairCoordinateWeldPaid : Bool
     selectedPrimitiveRootSameObjectPaid : Bool
@@ -268,5 +326,5 @@ currentMathlibCyclotomicScalarExtensionFrontier :
 currentMathlibCyclotomicScalarExtensionFrontier =
   mathlib-cyclotomic-scalar-extension-frontier
     true true true true true true true
-    false false false false false
-    "produce LeanPhi3PowerBasisCoordinateReceipt in the Lean/Kant layer by specializing the primitive-root power basis to p=3,k=1, using Polynomial.cyclotomic_three and PowerBasis.basis_eq_pow to prove that the unique coordinates are exactly u+v*zeta and that the DASHI multiplication formula is the quotient relation zeta^2=-zeta-1. Then compile the receipt here, compose the canonical algebra map into AlgebraicClosure (CyclotomicField 3 ℚ), and instantiate Cyclotomic3ScalarExtension. Theorem names, dimension two, Washington DOI/QID/Dewey/OEIS coordinates, or matching formulas do not create the Lean receipt."
+    true true false false false false false false
+    "execute the exact pinned dashi_lean4 candidate c8ad5e4cab226d75c1fee2d7c4811e7336c27014 under leanprover/lean4:v4.28.0 with mathlib v4.28.0, repair any compiler/API failures, and bind the successful kernel result plus exact source identity into LeanPhi3PowerBasisCoordinateReceipt. Source existence and draft PR #3 are not proof. Only after the kernel receipt is observed may compilePairTransportFromLeanPhi3Receipt pay the pair weld; then compose the canonical algebra map into AlgebraicClosure (CyclotomicField 3 ℚ), instantiate Cyclotomic3ScalarExtension, and extend the Schrodinger translation/modulation actions. Washington DOI/QID/Dewey/OEIS coordinates remain source/navigation provenance and do not create the kernel receipt."
