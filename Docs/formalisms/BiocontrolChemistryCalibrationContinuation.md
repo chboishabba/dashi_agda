@@ -88,6 +88,8 @@ The three Pareto axes are repository-local synthetic design coordinates: observe
 
 The richer `multiCoordinatePanel` therefore remains available without receiving automatic preference. `more dimensions -> better` is explicitly blocked.
 
+The first source implementation of this owner is commit `e472798201a360c42670e6218f7911cbef9cabe8`, timestamped `2026-09-15T04:57:05Z` / `2026-09-15T14:57:05+10:00`, and is recorded as `sourceCommittedOnly`; this chronology does not imply Agda typecheck or kernel certification.
+
 ## Springfield Lakes intervention geometry
 
 `SpringfieldLakesInterventionGeometryExact` uses only the two source-bound operational roles already recorded from Ipswich City Council: spider excavator at the hard-access Viewpoint Drive pond and aquatic weed harvester at the Vistula Circuit pond. On that finite carrier, treatment type alone does not determine equipment choice, while treatment plus access geometry does.
