@@ -5,9 +5,15 @@ FILES=(
   DASHI/Environment/BiocontrolExternalityExperimentRegression.agda
   DASHI/Environment/WaterHyacinthLESRegression.agda
   DASHI/Environment/BiocontrolActiveExperimentSearchRegression.agda
+  DASHI/Environment/BiocontrolCostedExperimentChoiceRegression.agda
+  DASHI/Environment/BiocontrolAttributionSnowballRegression.agda
+  DASHI/Environment/BiocontrolFirstImplementationRegression.agda
   DASHI/Environment/BiocontrolExternalityExperimentExact.agda
+  DASHI/Environment/BiocontrolExternalityExperimentSourceAtlasExact.agda
   DASHI/Environment/WaterHyacinthLESExact.agda
   DASHI/Environment/BiocontrolActiveExperimentSearchExact.agda
+  DASHI/Environment/BiocontrolCostedExperimentChoiceExact.agda
+  DASHI/Environment/BiocontrolFirstImplementationExact.agda
 )
 
 for file in "${FILES[@]}"; do
