@@ -84,9 +84,9 @@ productionFirstResidual = Production.firstUnpaidProductionResidual
 ------------------------------------------------------------------------
 -- RSA research queue.
 --
--- Rank fingerprints fail a concrete generator-action consumer.  Exact replay is
--- a sufficient upper endpoint.  A fixed synthetic V can expose an action-kernel
--- quotient, but a second V can reopen that kernel completely.  Therefore any
+-- Rank fingerprints fail a concrete generator-action consumer. Exact replay is
+-- a sufficient upper endpoint. A fixed synthetic V can expose an action-kernel
+-- quotient, but a second V can reopen that kernel completely. Therefore any
 -- useful compression must preserve the whole DECLARED source-native mksol family.
 --
 -- Published RSA-260 coordinates now retained:
@@ -133,7 +133,7 @@ firstProductionReconstructionTarget = acquireSameObjectFineIncidenceBearingLACar
 -- Every tested one-sided phase-sensitive upper held; the broader stress ratio
 -- phaseUpper/coarseUpper ranged approximately 0.318..0.906 with median 0.373.
 --
--- This still uses diagnostic Gaussian tapers.  Repository source names the final
+-- This still uses diagnostic Gaussian tapers. Repository source names the final
 -- literal carrier as 4*g_pole*cosh(a*u)*cos(delta*u) but keeps g_pole abstract;
 -- it explicitly rejects silently substituting the rank-two determinant taper.
 ------------------------------------------------------------------------
@@ -201,7 +201,7 @@ canonicalRSA260RHUntanglingRoadmapBoundary :
 canonicalRSA260RHUntanglingRoadmapBoundary =
   rsa260-rh-untangling-roadmap-boundary
     true true
-    true false true true true false true true true true false false false
+    true false true true true false true true true false false false false
     true true true true true true false false false false false false
     false true false
     true true true true
