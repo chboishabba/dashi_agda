@@ -133,14 +133,11 @@ canonicalEvaluationLayerBoundary =
 ------------------------------------------------------------------------
 -- Python execution frontier.
 --
--- Source/certification remains split. The current dashiBRAIN head contains the
--- normalized terminal scorecards, structure-only PCA latent ladder, persisted
--- frozen encoder, cross-recording frozen-encoder evaluator, Turner-style
--- inverse-weight shortest-path comparator, and an exact structural-family
--- fingerprint gate for frozen-latent reuse. Exact selected-row acquisition has
--- now searched all six source trials, but the learned Z_d tranche still lacks a
--- fresh discovery real-data execution receipt and no independent registered
--- latent replication has yet been observed.
+-- Source/certification remains split. The current dashiBRAIN head now has a
+-- fresh discovery execution receipt for the training-structure-only latent
+-- ladder, a persisted frozen encoder, and an observed structural-family digest.
+-- Exact selected-row acquisition has searched all six source trials. No
+-- independent registered latent replication or Agda kernel receipt is promoted.
 ------------------------------------------------------------------------
 
 record PythonLatentExecutionFrontier : Set where
@@ -180,13 +177,13 @@ currentPythonLatentExecutionFrontier =
   python-latent-execution-frontier
     "github.com/chboishabba/dashiBRAIN"
     "agent/malecns-real-benchmark-tranche"
-    "c4ce0292309a7edd79a86b9c21f93bbc3f21b6c7"
+    "5752ad525d707b70f483f6359f3b5f34efff1586"
     "dashi/analysis/consumer_relative_scorecard.py"
     "dashi/analysis/structural_latent_ladder.py"
     "dashi/analysis/frozen_structural_latent_encoder.py"
     "scripts/run_malecns_replication_set.py"
     "dashi/analysis/structural_path_baselines.py"
-    "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_remaining_identity_recovery.json"
+    "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_identity_accumulation.json"
     6
     1620
     1209
@@ -196,14 +193,87 @@ currentPythonLatentExecutionFrontier =
     false
     false
     true
+    true
+    true
+    true
     false
+    true
+    false
+    false
+    "All six Gauthey LBM source trials have been searched under exact trace-identity recovery: 1209/1620 deposited selected rows are paid and 411 remain unresolved. Fresh a2_r5 discovery execution now observes the training-structure-only latent ladder, persists the frozen encoder, and records the exact structural-family SHA-256 prerequisite for reuse. This pays discovery runtime/fingerprint observation only; it does not pay independent latent replication, consumer-family adequacy, mechanism, universal minimum dimension, or Agda kernel certification."
+
+------------------------------------------------------------------------
+-- Observed discovery runtime receipt.
+--
+-- d=2 has the lowest observed MAE in the fresh discovery ladder. It does not
+-- dominate the sender-gain carrier across all reported metrics: mP has slightly
+-- better R², so the two remain a terminal-metric tradeoff rather than a scalar
+-- promotion from mP to Z₂.
+------------------------------------------------------------------------
+
+record PythonLatentDiscoveryRuntimeReceipt : Set where
+  constructor python-latent-discovery-runtime-receipt
+  field
+    runtimeCommit : String
+    discoveryTrial : String
+    runtimeReceiptPath : String
+    frozenEncoderArtifactPath : String
+    structuralCarrierSha256 : String
+    d1MAE : String
+    d1R2 : String
+    d1Pearson : String
+    d1MeanVarianceFraction : String
+    d2MAE : String
+    d2R2 : String
+    d2Pearson : String
+    d2MeanVarianceFraction : String
+    d8MAE : String
+    d8R2 : String
+    d8Pearson : String
+    d8MeanVarianceFraction : String
+    zeroPredictionMAE : String
+    senderGainMAE : String
+    senderGainR2 : String
+    d2LowestObservedMAE : Bool
+    d2DominatesSenderGainAcrossReportedMetrics : Bool
+    senderGainRemainsParetoTradeoff : Bool
+    discoveryBestDimensionPromotesUniversalMinimum : Bool
+    independentReplicationPaid : Bool
+    agdaKernelReceiptPaid : Bool
+    interpretation : String
+
+open PythonLatentDiscoveryRuntimeReceipt public
+
+currentPythonLatentDiscoveryRuntimeReceipt : PythonLatentDiscoveryRuntimeReceipt
+currentPythonLatentDiscoveryRuntimeReceipt =
+  python-latent-discovery-runtime-receipt
+    "5752ad525d707b70f483f6359f3b5f34efff1586"
+    "04032024_6f_a2_r5"
+    "data/gauthey_lbm/jrc2018_regions_a2_r5/malecns_local_fibre_hyperfabric_latent.json"
+    "data/gauthey_lbm/jrc2018_regions_a2_r5/malecns_local_fibre_hyperfabric_latent_encoder.npz"
+    "f2db278a4790e4c1b397845ef6a4aeea9e2fb9cd606f6613e1faaa2412a6cf00"
+    "0.132517"
+    "-0.008609"
+    "-0.19256"
+    "0.82676"
+    "0.131358"
+    "-0.000624"
+    "0.06384"
+    "0.90787"
+    "0.136395"
+    "-0.068988"
+    "-0.03545"
+    "1.00000"
+    "0.131961"
+    "0.13189851095808636"
+    "-0.000239"
+    true
     false
     true
     false
     false
     false
-    false
-    "All six Gauthey LBM source trials have been searched under exact trace-identity recovery: 1209/1620 deposited selected rows are paid and 411 remain unresolved. The dashiBRAIN source now also requires exact same-object structural-family identity before a persisted latent encoder may be reused; equality of the 26-region vocabulary alone is insufficient. The fingerprint gate is source-written but no fresh runtime fingerprint/artifact receipt has been observed. This state does not pay learned Z_d execution, independent latent replication, consumer-family adequacy, or Agda kernel certification."
+    "The observed discovery ladder is consumer-relative. Z2 has the lowest observed MAE, while sender-gain mP retains slightly better R2; neither terminal metric vector authorizes representation identity, universal sufficiency, mechanism, or population minimality. The frozen encoder and structural digest are runtime-observed and are now eligible for same-carrier independent-recording evaluation."
 
 ------------------------------------------------------------------------
 -- Aggregate boundary.
@@ -248,6 +318,14 @@ record MaleCNSConsumerRelativeLatentParetoBoundary : Set where
     lowerLossPromotesMechanismIsFalse :
       lowerLossPromotesMechanism ≡ false
 
+    observedD2MAEOptimumPromotesUniversalMinimum : Bool
+    observedD2MAEOptimumPromotesUniversalMinimumIsFalse :
+      observedD2MAEOptimumPromotesUniversalMinimum ≡ false
+
+    senderGainAndD2RemainMetricTradeoff : Bool
+    senderGainAndD2RemainMetricTradeoffIsTrue :
+      senderGainAndD2RemainMetricTradeoff ≡ true
+
     interpretation : String
 
 open MaleCNSConsumerRelativeLatentParetoBoundary public
@@ -265,4 +343,6 @@ canonicalMaleCNSConsumerRelativeLatentParetoBoundary =
     true refl
     false refl
     false refl
-    "MaleCNS latent search is consumer-relative and same-object constrained: first establish admissibility/factorisation for the declared consumer family, then compare dimension, description length and terminal held-out/replicated metrics. Frozen latent reuse additionally requires the same structural-family carrier, not merely the same region labels. A discovery-recording Z_d curve remains a candidate compression frontier, not universal sufficiency or physical-state dimensionality."
+    false refl
+    true refl
+    "MaleCNS latent search is consumer-relative and same-object constrained. Fresh discovery runtime now places Z2 and sender-gain mP on a terminal-metric tradeoff frontier: Z2 has lower MAE, while mP has slightly better R2. Frozen latent reuse requires the exact structural-family carrier, not merely the same region labels. Discovery-optimal dimension remains a candidate compression frontier, not universal sufficiency or physical-state dimensionality."
