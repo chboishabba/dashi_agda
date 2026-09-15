@@ -26,6 +26,8 @@ import DASHI.Law.SensibLawHistoricalLegalResearchOperatorExact as Historical
 import DASHI.Law.SensibLawProofGapExecutableSearchCompilerExact as Compiler
 import DASHI.Law.SensibLawIterativeProofSearchStateMachineExact as Iterative
 import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as Fixture
+import DASHI.Law.SensibLawMaboDistributedLegalCorpusMaterialisationExact as Materialisation
+import DASHI.Law.SensibLawMaboDistributedLegalCorpusMaterialisationRegression as MaterialisationRegression
 import DASHI.Law.SensibLawOfflinePabaiLoopRustReceiptV01Exact as RustReceipt
 
 ------------------------------------------------------------------------
@@ -45,6 +47,10 @@ import DASHI.Law.SensibLawOfflinePabaiLoopRustReceiptV01Exact as RustReceipt
 --   -> proof payment / frontier delta
 --   -> costed iterative Pareto continuation or saturation
 --   -> memoised world-model extension
+--
+-- Mabo distributed materialisation adds a query-indexed storage/retrieval seam:
+-- navigation may use a legal skeleton, while quotation/strict primary review can
+-- force exact reacquisition without turning possession into authority or payment.
 --
 -- The exact Rust offline Pabai receipt is pinned separately as a bounded runtime
 -- witness and never upgrades candidate-only runtime output into Agda authority.
@@ -205,6 +211,16 @@ selectedIterativeBoundary = Iterative.canonicalIterativeProofSearchBoundary
 
 selectedMaboPabaiBoundary : Fixture.MaboPabaiSearchBoundary
 selectedMaboPabaiBoundary = Fixture.canonicalMaboPabaiSearchBoundary
+
+selectedMaboDistributedMaterialisationBoundary :
+  Materialisation.DistributedLegalCorpusBoundary
+selectedMaboDistributedMaterialisationBoundary =
+  Materialisation.canonicalDistributedLegalCorpusBoundary
+
+selectedMaboDistributedCorpusHierarchy :
+  Materialisation.AustralianLegalCorpusHierarchy
+selectedMaboDistributedCorpusHierarchy =
+  Materialisation.canonicalAustralianLegalCorpusHierarchy
 
 selectedRustReceiptBoundary : RustReceipt.OfflinePabaiRustReceiptBoundary
 selectedRustReceiptBoundary = RustReceipt.canonicalOfflinePabaiRustReceiptBoundary
