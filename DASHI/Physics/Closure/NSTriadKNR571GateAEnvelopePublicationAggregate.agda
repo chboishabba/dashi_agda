@@ -11,12 +11,25 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopePublicationAggregate wher
 --   G1 modal-energy donor,
 --   preferred radial linearization with R+ = 0,
 --   isolated A2 centered radial-curvature leaf,
---   denominator-cleared A2 square-gap rationalization.
+--   denominator-cleared A2 square-gap rationalization,
+--   exact centered-shift p+q=2k / squared-output / Plucker geometry,
+--   rational scalar radius doubling without a square-root axiom,
+--   literal aligned P-Q complement on the R467/R455 carrier,
+--   centered angular second-moment payment by 4|y|^2,
+--   division-free ordered-rational denominator compiler,
+--   literal centered cleared-product bridge and radial-curvature payment.
 --
--- No inner-fibre, R568 or Clay promotion is introduced here.
+-- The remaining A2 seam is only the exact sign/absolute-value/stepMagnitude
+-- transport into the Gate-A sample.  A1/G2/G1, inner-fibre gain, R568 and Clay
+-- promotion remain open.
 
 import DASHI.Physics.Closure.NSTriadKNR571PairedSecondMomentPublicationAggregate
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact
+import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact
+import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact
+import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact
+import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialDenominatorOrderExact
+import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialProductBridgeExact
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkRegression

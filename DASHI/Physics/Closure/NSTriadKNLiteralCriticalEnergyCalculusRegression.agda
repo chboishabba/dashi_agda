@@ -1,0 +1,36 @@
+module DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Energy
+
+modeEnergyDerivativeCompilerClosed :
+  Energy.literalModeCriticalEnergyDerivativeCompilerClosed ≡ true
+modeEnergyDerivativeCompilerClosed =
+  Energy.literalModeCriticalEnergyDerivativeCompilerClosedIsTrue
+
+fixedListEnergyDerivativeCompilerClosed :
+  Energy.literalFixedListCriticalEnergyDerivativeCompilerClosed ≡ true
+fixedListEnergyDerivativeCompilerClosed =
+  Energy.literalFixedListCriticalEnergyDerivativeCompilerClosedIsTrue
+
+integratedEnergyCompilerClosedGivenAuthorities :
+  Energy.integratedCriticalEnergyCompilerClosedGivenCalculus ≡ true
+integratedEnergyCompilerClosedGivenAuthorities =
+  Energy.integratedCriticalEnergyCompilerClosedGivenCalculusIsTrue
+
+concreteScalarFTCStillOpen :
+  Energy.concreteScalarFTCInstalled ≡ false
+concreteScalarFTCStillOpen =
+  Energy.concreteScalarFTCInstalledIsFalse
+
+concreteIntegrationLinearityStillOpen :
+  Energy.concreteIntegrationLinearityInstalled ≡ false
+concreteIntegrationLinearityStillOpen =
+  Energy.concreteIntegrationLinearityInstalledIsFalse
+
+unconditionalS1StillOpen :
+  Energy.integratedCriticalEnergyIdentityUnconditionallyClosed ≡ false
+unconditionalS1StillOpen =
+  Energy.integratedCriticalEnergyIdentityUnconditionallyClosedIsFalse
