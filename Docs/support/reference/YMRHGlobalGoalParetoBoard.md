@@ -1,27 +1,26 @@
 # YM / RH Global Goal Pareto Board
 
-Status: live proof-search/accounting board. This is navigation and dependency accounting, not theorem authority.
+Status: **live proof-search/accounting board**, not theorem authority.
 
-Update rule: every Pareto recut that changes the preferred producer or live leaf for a terminal consumer must update this file in the same tranche.
+Update rule: every Pareto recut that changes a preferred producer or live terminal leaf must update this file in the same tranche. Historical detail belongs in the companion archaeology/producer documents; this file is the current source of truth for scheduling.
 
 Companions:
 
-- `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md` — full PR/round history.
-- `Docs/support/reference/YMRHFinalizationProducerAtlas.md` — route/producer atlas.
-- `Docs/support/reference/YMClayEndpointDecompositionMap.md` — YM endpoint/decomposition map.
-- `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 authority/work boundary.
+- `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md` — full PR/round chronology.
+- `Docs/support/reference/YMRHFinalizationProducerAtlas.md` — route/producer inventory.
+- `Docs/support/reference/YMClayEndpointDecompositionMap.md` — YM endpoint/decomposition history.
+- `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 authority boundary.
 
-## 1. Global goal discipline
-
-Do not schedule from the round currently in view. Schedule from the terminal consumer.
+## 1. Global scheduling rule
 
 ```text
 terminal consumer
--> enumerate in-repo producers
+-> enumerate all in-repo producers
 -> quotient only by theorem-bearing same-object transports
 -> classify remaining debt
--> Pareto-rank
--> work only at the BIDI intersection
+-> Pareto-rank producers
+-> BIDI intersect backward consumer search with forward source search
+-> only then implement/prove something new
 ```
 
 Debt classes:
@@ -39,13 +38,13 @@ PROVENANCE_ONLY
 
 ## 2. Yang–Mills global endpoint
 
-Official repository endpoint:
+Official endpoint:
 
 ```text
 ClayYangMillsSolution
 ```
 
-Round78 is currently the cleanest Level-II finalisation compiler because it has an explicit theorem into the literal endpoint on one same construction `Y`:
+Preferred Level-II finalisation compiler:
 
 ```text
 T78-A = UVToContinuumYM Y
@@ -53,133 +52,166 @@ T78-B = SameHamiltonianPhysicalMassGap Y
 T78-C = SameFamilyLocalFieldsOPEStressWard Y
 ```
 
-Frozen Round87–89 A/B/C/D remain a lower-level research scoreboard/donor decomposition. They are not four Clay problems and are not mandatory route architecture when a cheaper producer pays a T78 role directly.
+all on the same literal construction `Y`.
 
-### 2.1 T78-A — UV -> same continuum YM
+Frozen Round87–89 A/B/C/D are lower-level internal research rows for this one endpoint. They remain useful scoreboards/donors but are not mandatory route architecture when a cheaper producer pays a T78 role directly.
 
-Current global target:
+## 3. YM T78-B — current Pareto winner
 
-```text
-UVToContinuumYM Y
-```
-
-Current scheduling status:
-
-```text
-OPEN / needs fresh Pareto audit against the current source-native CMP119/CMP122,
-selected T5 continuum, OS/operator, and unified-continuum producer families.
-```
-
-Do not assume historical Prokhorov/all-scale RG packaging is the current cheapest route. Reuse shared continuum completion with T78-B/T78-C wherever same-object identity is theorem-bearing.
-
-### 2.2 T78-B — same-H physical mass gap
-
-Canonical consumer:
+Terminal consumer:
 
 ```text
 CutoffUniformPhysicalMassGap Y
 ```
 
-Historical producer families retained as alternates/donors:
+Current preferred source-native route:
 
 ```text
-Heat/Doob/Langevin/Dyson
-source-native CMP116 / cluster expansion
-unified polymer/Schwinger norm
-direct same-family clustering
-direct same-H spectral theorem
-operator-domain / OS reconstruction
+R278 selected finite/continuum covariance carrier
+-> R281 reconstructed covariance spectrum
+-> R341 direct CMP116 selected-spectrum application
+-> positive subgap exclusion / same-H mass gap
 ```
 
-Current preferred source-native route is Round341, not the older R279/R280 accounting.
+Heat/Doob/Langevin, unified polymer norm, rooted-shell R284, older R279/R280, and operator-domain/spectral constructions remain alternates/donors. Do not force the terminal consumer through historical frozen Row C.
 
-Round341 uses the existing R278 continuum covariance carrier and R281 reconstructed spectrum directly. It removes independent:
+### 3.1 R341 live coordinates
 
-```text
-mode -> source-direction theorem
-same-spectrum convergence theorem
-continuum covariance spectrum weld
-```
-
-from the primitive T78-B payment.
-
-Current live R341 source/application coordinates:
+R341 removes independent mode->J selection, same-spectrum convergence, and continuum-covariance-spectrum welds from the primitive payment.
 
 ```text
 B1 SAME_OBJECT_TRANSPORT
    CMP116 differentiated source-response magnitude
-   = selected literal mixed-log magnitude
-   on the exact R318/R278 selected source pair.
+   = selected literal mixed-log magnitude.
 
 B2 SOURCE_REALIZATION / QUANTITATIVE CALIBRATION
-   CMP116 sourceEnvelope(...)
-   <= R281 clusteringEnvelope(...)
-   for the selected mode/time observable.
+   CMP116 sourceEnvelope
+   <= R281 selected spectral clusteringEnvelope.
 
 B3 STANDARD IMPORT / SHARED TOPOLOGY
-   one-sided rational upper closed under the actual R278 convergence relation.
-   R341 marks this standardImported, not a fresh YM decay estimate.
+   one-sided rational upper closed under actual R278 convergence.
 ```
 
-Boundary recorded by R341:
+R341 records `freshYMDecayEstimateIntroduced = false`.
+
+### 3.2 R342 B1 recut — current exact leaf
+
+`BalabanCMP116R281SourceResponseSameObjectRound342Exact.agda` isolates B1 from B2.
+
+Archaeology then cross-pollinates two already-owned facts:
+
+1. `NormalizedTwoSourceConnectedCumulantExact` owns
 
 ```text
-freshYMDecayEstimateIntroduced = false
-sourceResponseSameObjectStillRequired = true
-sourceEnvelopeCalibrationStillRequired = true
-oneSidedOrderClosureStillRequired = true  [standard imported]
+literalMixedSecondLogDerivative(J(F), J(G))
+= selected mixedSecondLogDerivative(F,G)
 ```
 
-Current Pareto verdict for T78-B:
+through proof-bearing `logSecondDirectionAgrees`.
+
+2. R321 (`BalabanCMP109SelectedT5SameObjectRound321Exact`) already isolates the historical source-response weld
 
 ```text
-PRIMARY: R341 same-object response identity + envelope calibration.
-ALTERNATES: Heat/Doob, unified polymer norm, direct spectral theorem, historical R279/R280 path.
-STOP RULE: do not prove a new Heat/Doob clustering theorem merely to satisfy the old frozen Row-C shape.
+selected mixed-log magnitude
+= CMP109 E^(2)/Pi source magnitude.
 ```
 
-### 2.3 T78-C — same-family local fields / OPE / stress / Ward
+Therefore the current B1 leaf is **not** another independent source->selected theorem. It is the smaller source-source identity:
 
-Canonical consumer:
+```text
+B1a SAME_OBJECT_TRANSPORT
+
+R338 CanonicalCommonDomainCMP116Source.differentiatedMagnitude
+  =
+R321 PublishedCMP109SelectedShellPayment.sourceE2PiMagnitude
+
+on the exact selected scale / volume / J(F) / J(G) pair.
+```
+
+Once B1a is supplied, `r321SameObjectBuildsB1AfterSourceIdentity` mechanically constructs the current R341 B1 witness.
+
+Current statuses:
+
+```text
+R342 B1 compiler                          machineChecked status
+B1a CMP109/CMP116 source-source identity conditional
+B2 envelope calibration                  conditional
+B3 one-sided closure                      standardImported
+fresh YM decay estimate                   false
+Clay promotion                            false
+```
+
+Important source boundary: CMP116 Sect.1 supplies differentiated localized J-response authority and exponential source envelopes; citation/source authority does **not** identify its differentiated response with the selected normalized mixed-log response. B1a remains a physical/source same-object payment.
+
+### 3.3 T78-B next action
+
+```text
+PRIMARY:
+  acquire/prove B1a on the exact selected source carrier.
+
+PARALLEL:
+  investigate B2 only for cheaper exact calibration donors;
+  do not regress to stronger rooted-shell geometry unless it actually lowers debt.
+```
+
+## 4. YM T78-A — UV -> same continuum YM
+
+Target:
+
+```text
+UVToContinuumYM Y
+```
+
+This remains a bundle:
+
+```text
+literal weak-coupling RG construction
++ continuum limit of same finite family
++ Schwinger belongs to same continuum measure
++ accepted OS/Wightman axioms
++ reconstructed Hilbert space
++ positive self-adjoint Hamiltonian
+```
+
+Current status:
+
+```text
+OPEN / producer audit incomplete.
+```
+
+Prefer shared continuum/OS/operator completion with T78-B and T78-C rather than duplicating a second continuum construction. Historical Prokhorov/all-scale RG packaging is not automatically the cheapest route.
+
+## 5. YM T78-C — same-family local fields / OPE / stress / Ward
+
+Target:
 
 ```text
 SameFamilyLocalFieldsOPEStressWard Y
 ```
 
-Current global target:
+High-value owned donor lanes:
 
 ```text
-same continuum family
-+ source/generated-action provenance
-+ local field/OPE identities
-+ stress/Ward identity
+R107–R131 finite -> Schwinger -> same-family stress -> common metric
+R132–R145 generated-action / first-variation provenance
+CMP119/CMP116 marked-source and regular-E localization
+OPE recurrence/uniqueness
+OS/operator reconstruction when same-family identity is retained
 ```
 
-High-value donors/producers already present:
+Current status:
 
 ```text
-R107–R131 same-family stress/Schwinger/common-metric lane
-R132–R145 generated-action / first-variation provenance corrections
-CMP119/CMP116 marked-source / regular-E localization
-OPE recurrence/uniqueness machinery
-OS/operator reconstruction donors where same-family identity is retained
+OPEN / producer audit incomplete.
 ```
 
-Current scheduling status:
+Whole-action `A_k` semantics belongs here when first-variation/stress provenance requires it. Do not make it a prerequisite of the shorter BC1 regular-E route.
 
-```text
-OPEN / needs fresh Pareto audit after T78-B recut.
-```
+## 6. RH global endpoint
 
-Whole-action `A_k` semantics belongs here when needed for first-variation/stress provenance. Do not make it a prerequisite of the shorter BC1 regular-E route.
+Terminal strategy is producer-agnostic. Current acquisition map remains the universal pole-quotient direct route.
 
-## 3. RH global endpoint
-
-Terminal strategy is producer-agnostic. Current producer acquisition map remains the universal pole-quotient direct route.
-
-### 3.1 High-ordinate producer
-
-R1 — first direct nonanalytic wall:
+### 6.1 RH R1 — first high-route representation wall
 
 ```text
 nearResponseAt(chosen J)
@@ -192,9 +224,15 @@ Classification:
 SAME_OBJECT_TRANSPORT / representation theorem
 ```
 
-The evaluator-independent literal kernel is already owned as an interface. The checked Lean return does not transport this equality into Agda.
+The evaluator-independent literal kernel is already owned as an interface. The checked Lean return records the near/far theorem but does not transport this exact finite representation equality into Agda. Earlier archaeology found no theorem-bearing `nearSignedSum` / `nearOffFinset` copy in the current Agda tree/history.
 
-R2 — first high analytic wall:
+Current status:
+
+```text
+OPEN / genuine representation implementation unless source proof bytes reappear.
+```
+
+### 6.2 RH R2 — first high analytic wall
 
 Direct form:
 
@@ -203,9 +241,11 @@ literalNear(J) + B_far(J) + D_Gamma(g_pole)
 < actual ClusterResponse(g_pole)
 ```
 
-or, with an optional proof-carrying finite upper `nearResponseAt(J) <= U`:
+Optional proof-carrying certificate form:
 
 ```text
+nearResponseAt(J) <= U
+and
 U + B_far(J) + D_Gamma(g_pole)
 < actual ClusterResponse(g_pole).
 ```
@@ -216,7 +256,7 @@ Classification:
 NEW_ANALYSIS
 ```
 
-Pruned as primitive requirements:
+Pruned primitive requirements:
 
 ```text
 intermediate M_cluster
@@ -226,92 +266,70 @@ final balance as analytic input
 determinant-q payment
 ```
 
-Optional donors:
+8889 remains `STATUS ONLY / SAME_OBJECT_BLOCKED` until theorem-bearing proof/carrier transport is recovered.
+
+### 6.3 RH R3 — independent terminal coordinate wall
+
+One same-carrier analytic-coordinate package now feeds low-region verification and critical-line stability.
+
+Live work:
 
 ```text
-8889 checked-Lean cluster theorem — STATUS ONLY until theorem-bearing same-carrier transport is recovered
-proof-carrying finite certificate — valid optional producer once exact fold embedding is inhabited
-explicit-formula/window/Schur/determinant lanes — donors/alternates only unless they lower exact R1/R2 debt
+criticalLine iff Re = 1/2 on the same AnalyticSubstrate
+equality stability
+theorem-bearing interpretation of published numeric verified region
+on the abstract analytic Real carrier
 ```
 
-### 3.2 Terminal coordinate / low-region side
+Opaque same-predicate / exact-height Set receipts are pruned. Numeric verified-region interpretation remains live and independent of R1/R2.
 
-Current generic-high refinement records one shared analytic-coordinate package feeding low-region and critical-line stability.
-
-Live terminal coordinate work:
+## 7. Current cross-lane Pareto queue
 
 ```text
-R3 REPRESENTATION / LOGICAL-CARRIER
-   criticalLine iff Re = 1/2 on the same AnalyticSubstrate
-   equality stability
-   theorem-bearing interpretation of the published numeric verified region
-   on the abstract analytic Real carrier.
+1. YM T78-B / R342 B1a
+   CMP109 E^(2)/Pi source magnitude
+   = R338 canonical CMP116 differentiated magnitude.
+
+2. YM T78-B / B2
+   search only for exact source-envelope -> R281 spectrum-envelope calibration donors.
+
+3. RH R1
+   exact final-near finite representation; stop archaeology unless theorem-bearing source bytes appear.
+
+4. YM T78-A
+   fresh producer audit with shared continuum/OS completion preferred.
+
+5. YM T78-C
+   fresh same-family local-fields/OPE/stress/Ward producer audit.
+
+6. RH R2
+   begin fresh analysis after R1, unless an exact donor pays the same literal scalar inequality.
+
+7. RH R3
+   keep numeric verified-region / critical-line carrier work independent from R1/R2.
 ```
 
-The numeric verified-region interpretation remains a terminal wall. Opaque same-predicate and exact-height Set receipts have been pruned.
-
-### 3.3 RH current Pareto verdict
-
-```text
-PRIMARY high acquisition route:
-  R1 exact final-near finite representation
-  -> R2 strict actual-ClusterResponse theorem.
-
-PARALLEL terminal coordinate route:
-  R3 same-carrier low/stability/numeric verified-region interpretation.
-
-STOP RULES:
-  do not reopen low-region numerics generically;
-  do not treat 8889 status as proof transport;
-  do not rebuild window/Schur/determinant machinery unless it pays the exact current carrier more cheaply.
-```
-
-## 4. Current cross-lane Pareto queue
-
-```text
-1. YM T78-B / R341
-   Search for existing theorem-bearing aliases of B1 and B2.
-   If absent, implement the thinnest exact source/application witness.
-
-2. RH R1
-   Search only same-object finite-kernel transports / source bytes.
-   If no theorem-bearing donor exists, treat as genuine representation implementation.
-
-3. YM T78-A
-   Fresh producer audit, with shared continuum completion from T78-B/T78-C preferred over duplicate continuum work.
-
-4. YM T78-C
-   Fresh producer audit on same-family local fields/OPE/stress/Ward.
-
-5. RH R2
-   Begin new analysis only after R1 carrier is exact, unless an existing donor already proves the same literal scalar inequality.
-
-6. RH R3
-   Keep terminal coordinate work independent from the high analytic producer.
-```
-
-## 5. Accounting invariants
+## 8. Accounting invariants
 
 - One YM Clay endpoint; T78-A/B/C and frozen A/B/C/D are internal decompositions.
-- A cheaper producer can reroute a terminal role without declaring a historical scoreboard row literally closed.
+- A cheaper terminal producer can route around a historical research row without declaring that historical row literally inhabited.
 - Source authority != source realization.
 - Same scalar shape != same-object theorem.
 - Cross-prover status != transported proof.
 - Compiler closure != physical theorem closure.
-- A standard imported theorem may remove generic analysis, but not the physical same-object/calibration input.
-- Every current recut must update this board before the tranche is considered complete.
+- Standard imported analysis may remove generic work but never manufactures physical same-object/calibration data.
+- Historical donors are retained append-only even when dominated.
+- Every Pareto recut updates this board before the tranche is considered complete.
 
-## 6. Snapshot
+## 9. Snapshot
 
 Date: 2026-09-15 Australia/Brisbane.
 
-Current highest-alpha readings:
-
 ```text
-YM T78-B: R341 B1+B2 are the preferred live physical/source payments.
+YM T78-B: preferred route R341; current smallest B1 leaf is R342 B1a source-source identity; B2 independent.
 RH high: R1 representation then R2 strict actual-ClusterResponse family.
-RH terminal: R3 numeric verified-region / critical-line same-carrier interpretation remains independent.
-YM T78-A/T78-C: next global producer audits after T78-B accounting sync.
+RH terminal: R3 verified-region / critical-line same-carrier interpretation remains independent.
+YM T78-A/T78-C: next global producer audits after the current B1/B2 mass-gap recut.
 ```
 
 No Clay Yang–Mills solution or RH proof is claimed by this accounting document.
