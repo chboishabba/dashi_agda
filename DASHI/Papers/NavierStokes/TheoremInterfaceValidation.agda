@@ -95,7 +95,7 @@ directOffDiagonalConsumerConstructedIsTrue =
 commutatorOnlySpacetimeProducerClosedIsFalse :
   Paper.NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosed status ≡ false
 commutatorOnlySpacetimeProducerClosedIsFalse =
-  Paper.NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosedIsFalse
+  Paper.NSPaperTheoremStatus.commutatorOnlySpacetimeProducerClosedIsFalse status
 
 sameOutputDebtPaymentClosedIsFalse :
   Paper.NSPaperTheoremStatus.sameOutputDebtPaymentClosed status ≡ false
