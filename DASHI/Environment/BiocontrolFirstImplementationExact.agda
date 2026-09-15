@@ -38,3 +38,23 @@ biocontrolSIQuantityFirstImplementation = Chronology.first-implementation-receip
   "Australia/Brisbane (AEST, UTC+10)"
   Chronology.exactRepresentationImplemented
   Chronology.sourceCommittedOnly
+
+biocontrolChemistry369FirstImplementation : Chronology.FirstImplementationReceipt
+biocontrolChemistry369FirstImplementation = Chronology.first-implementation-receipt
+  "DASHI.Environment.BiocontrolChemistry369IndexExact"
+  "0cb687799527bc0b1c2b72e401dc31c8f8f04669"
+  "2026-09-15T01:44:18Z"
+  "2026-09-15T11:44:18+10:00"
+  "Australia/Brisbane (AEST, UTC+10)"
+  Chronology.exactRepresentationImplemented
+  Chronology.sourceCommittedOnly
+
+springfieldMechanicalRemovalFirstImplementation : Chronology.FirstImplementationReceipt
+springfieldMechanicalRemovalFirstImplementation = Chronology.first-implementation-receipt
+  "DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalExact"
+  "03a91dbb1edc15ac27b7698bcbe27672c70f562a"
+  "2026-09-15T01:44:42Z"
+  "2026-09-15T11:44:42+10:00"
+  "Australia/Brisbane (AEST, UTC+10)"
+  Chronology.exactRepresentationImplemented
+  Chronology.sourceCommittedOnly
