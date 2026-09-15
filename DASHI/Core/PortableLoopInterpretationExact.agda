@@ -34,8 +34,7 @@ record LoopArtifact : Set where
 open LoopArtifact public
 
 LoopImplementation : LoopBackend → Set
-LoopImplementation jsSequential = LoopArtifact
-LoopImplementation gpuParallel = LoopArtifact
+LoopImplementation _ = LoopArtifact
 
 interpretLoop :
   (backend : LoopBackend) →
