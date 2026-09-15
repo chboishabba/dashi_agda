@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.ConsumerIndexedResidualRefinementExact as Refinement
 import DASHI.Wikimedia.IbrahimMonster3BConstituentAttachmentSnowballExact as Constituent
 import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterIsotypicBypassExact as Whole
 import DASHI.Wikimedia.IbrahimMonster3BCharacterExecutionCutsetSnowballExact as Cutset
@@ -12,22 +13,17 @@ import DASHI.Wikimedia.IbrahimMonster3BCharacterExecutionCutsetSnowballExact as 
 ------------------------------------------------------------------------
 -- RECOGNITION ROUTE PARETO SELECTOR
 --
--- Two theorem-bearing routes now coexist after the same actual-kernel replay.
+-- Two theorem-bearing routes coexist after the same actual-kernel replay.
+-- The whole-character probe has now localized one concrete implementation seam:
+-- character evidence is on FDRep while the strongest isotypic assembly APIs are
+-- group-algebra-module level.  That is not evidence against the theorem; it is
+-- exactly the residual to test before paying the richer constituent route.
 --
---   constituent route:
---     actual W_zeta|E -> literal simple constituents -> classify each by
---     selected central phase / equal irreducible character -> 90 H_zeta.
---
---   whole-character route:
---     chi(W_zeta|E)=90 chi(H_zeta) + Maschke/isotypic assembly ->
---     whole equivariant isomorphism W_zeta|E ~= H_zeta^90.
---
--- Neither route Pareto-dominates the other before execution.  The whole route
--- removes a Monster-specific literal constituent enumeration, but adds one
--- stronger generic semisimple/isotypic producer that has not yet been written
--- or kernel-checked.  We therefore keep both and probe the whole-character
--- route first because a cheap generic theorem would collapse more downstream
--- same-object bookkeeping.
+-- Bidi rule:
+--   coarse whole-character route succeeds -> keep the cheaper consumer proof;
+--   coarse route hits a real obstruction -> reopen constituent-level residual;
+--   neither outcome licenses an automatic jump to the concrete X6 x Fin90
+--   basis/action representation.
 ------------------------------------------------------------------------
 
 data RecognitionRoute : Set where
@@ -56,10 +52,6 @@ wholeCharacterTradeoff = recognition-route-tradeoff
   wholeCharacterIsotypicRoute
   true true false true true true
 
-------------------------------------------------------------------------
--- Existing owners remain authoritative for each leaf.
-------------------------------------------------------------------------
-
 constituentFrontier : Constituent.ConstituentAttachmentFrontier
 constituentFrontier = Constituent.currentConstituentAttachmentFrontier
 
@@ -69,6 +61,9 @@ wholeCharacterFrontier = Whole.canonicalWholeCharacterIsotypicBypassBoundary
 executionFrontier : Cutset.Monster3BCharacterExecutionFrontier
 executionFrontier = Cutset.currentMonster3BCharacterExecutionFrontier
 
+refinementBoundary : Refinement.ConsumerIndexedResidualRefinementBoundary
+refinementBoundary = Refinement.canonicalConsumerIndexedResidualRefinementBoundary
+
 ------------------------------------------------------------------------
 -- WrongType boundaries.
 ------------------------------------------------------------------------
@@ -77,6 +72,7 @@ data SearchPriorityCreatesProof : Set where
 data RoutePreferenceCreatesExecutionReceipt : Set where
 data OEISSelectsRepresentationProofRoute : Set where
 data DimensionClosesRepresentationRoute : Set where
+data FailedCoarseRouteForcesConcreteBasisReconstruction : Set where
 
 searchPriorityDoesNotCreateProof : SearchPriorityCreatesProof → ⊥
 searchPriorityDoesNotCreateProof ()
@@ -90,6 +86,10 @@ oeisDoesNotSelectRepresentationRoute ()
 dimensionDoesNotCloseRoute : DimensionClosesRepresentationRoute → ⊥
 dimensionDoesNotCloseRoute ()
 
+failedCoarseRouteDoesNotForceConcreteBasis :
+  FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+failedCoarseRouteDoesNotForceConcreteBasis ()
+
 ------------------------------------------------------------------------
 -- Boundary.
 ------------------------------------------------------------------------
@@ -102,6 +102,10 @@ record RecognitionRouteParetoBoundary : Set where
     routesParetoIncomparableBeforeExecution : Bool
     wholeCharacterRouteHighestAlphaProbe : Bool
     literalConstituentEnumerationMandatory : Bool
+
+    wholeCharacterInterfaceSeamLocalized : Bool
+    failedCoarseRouteReopensConstituentResidual : Bool
+    failedCoarseRouteForcesConcreteBasisReconstruction : Bool
 
     actualKernelReplayReceiptObserved : Bool
     wholeCharacterBypassKernelReceiptObserved : Bool
@@ -117,6 +121,7 @@ open RecognitionRouteParetoBoundary public
 canonicalRecognitionRouteParetoBoundary : RecognitionRouteParetoBoundary
 canonicalRecognitionRouteParetoBoundary = recognition-route-pareto-boundary
   true true true true false
+  true true false
   false false false false
   false false
-  "probe the whole-character route first: implement the smallest generic Lean semisimple/isotypic theorem at the pinned v4.28.0 dependency that turns char(V)=90*char(H), with H simple, into a whole equivariant isomorphism V ~= H^90. If that source route becomes awkward or requires more infrastructure than the existing constituent attachment, fall back immediately to the literal constituent route. In either case, actual MN3B kernel replay remains upstream and the concrete X6 x Fin90 / Base369 action weld remains downstream. OEIS A005052 and 65610=729*90 stay navigation/arithmetic only."
+  "probe only the localized FDRep-to-group-algebra interface seam on the whole-character route. If a small adapter closes it, pursue the consumer-sufficient isotypic theorem. If the adapter exposes a substantive obstruction, reopen the literal constituent decomposition as the next residual. Do not jump directly from either failure or numerical equalities to the X6 x Fin90/Base369 basis-action representation. Actual MN3B replay remains upstream; same-object action recognition remains downstream; OEIS A005052 and 65610=729*90 remain navigation/arithmetic only."
