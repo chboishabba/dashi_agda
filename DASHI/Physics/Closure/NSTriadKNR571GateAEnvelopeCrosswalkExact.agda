@@ -15,15 +15,14 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact where
 -- concentrated in the opposite/centered remainder.  This avoids inventing an
 -- independent derivative model merely to populate MultiplierTaylorPair.
 --
--- Donor firewall:
+-- Donor / receipt firewall:
 -- * A1 geometry donor: resonant reverse-triangle / radial-gap machinery.
+-- * A1/A2 theorem-bearing Lean receipts: dedicated periodic-B Aristotle task.
 -- * G2 algebra donor: finite path difference -> gradient-energy theorem.
 -- * G1 magnitude donor: exact modal-energy/Cauchy amplitude machinery.
 --
--- None of those donor theorems by itself supplies the required cutoff- and
--- scale-uniform physical R571 family envelope.  Those same-object transports
--- remain explicit below.  A2 is isolated in
--- NSTriadKNR571RadialCurvatureBoundaryExact.
+-- The Lean radial receipts do not themselves construct the rational Agda
+-- family/sample weld.  G2/G1 remain the live state-side physical envelope.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -38,6 +37,7 @@ import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact as Weld
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizationExact as R571Pair
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceExact as Taylor
+import DASHI.Physics.Closure.NSTriadKNR571LeanGateAEnvelopeReceiptExact as LeanReceipt
 
 -- Existing donors.  Importing them here is intentional: this is the typed
 -- archaeology/crosswalk surface for the four Gate-A leaves.
@@ -82,10 +82,10 @@ preferredPlusRemainderZero sign S center plus minus =
     ∷ R571Pair.radialSymbol sign S center
     ∷ [])
 
--- A1: exact radial-gap/reverse-triangle geometry already exists, and R455 owns
--- the rational modeNorm^2/radius crosswalk.  What remains is the explicit
--- transport from the chosen R571 +y displacement to the scalar stepMagnitude
--- used by the physical sample family.
+------------------------------------------------------------------------
+-- A1/A2 radial side.
+------------------------------------------------------------------------
+
 r571GateAPreferredLinearizationClosed : Bool
 r571GateAPreferredLinearizationClosed = true
 
@@ -95,27 +95,48 @@ r571GateAA1ReverseTriangleDonorLocated = true
 r571GateAA1RadiusSquareCrosswalkLocated : Bool
 r571GateAA1RadiusSquareCrosswalkLocated = true
 
+-- Dedicated Lean theorem receipts now pay the radial mathematics on the
+-- periodic-B real carrier.  These are receipt coordinates, not Agda proof
+-- inhabitants.
+r571GateAA1LeanTheoremReceiptObserved : Bool
+r571GateAA1LeanTheoremReceiptObserved =
+  LeanReceipt.leanGateAA1ReceiptObserved LeanReceipt.currentR571LeanGateAReceipt
+
+r571GateAA2LeanTheoremReceiptObserved : Bool
+r571GateAA2LeanTheoremReceiptObserved =
+  LeanReceipt.leanGateAA2ReceiptObserved LeanReceipt.currentR571LeanGateAReceipt
+
+r571GateAA1AgdaSampleTransportObserved : Bool
+r571GateAA1AgdaSampleTransportObserved =
+  LeanReceipt.agdaGateAA1SampleTransportObserved LeanReceipt.currentR571LeanGateAReceipt
+
+r571GateAA2AgdaSampleTransportObserved : Bool
+r571GateAA2AgdaSampleTransportObserved =
+  LeanReceipt.agdaGateAA2SampleTransportObserved LeanReceipt.currentR571LeanGateAReceipt
+
+-- Historical field retained with its original meaning: the rational Agda
+-- physical-family/sample theorem is not manufactured by the Lean receipt.
 r571GateAA1PhysicalFamilyUniformBoundClosed : Bool
 r571GateAA1PhysicalFamilyUniformBoundClosed = false
 
--- G2: the finite vector path/Jensen inequality is already theorem-bearing.
--- The remaining work is same-object identification of the transported physical
--- Fourier coefficient difference with a torus path/gradient family carrying a
--- scale-uniform coefficient.
+------------------------------------------------------------------------
+-- G2/G1 state side.
+------------------------------------------------------------------------
+
 r571GateAG2FinitePathDonorLocated : Bool
 r571GateAG2FinitePathDonorLocated = true
 
 r571GateAG2PhysicalGradientCrosswalkClosed : Bool
 r571GateAG2PhysicalGradientCrosswalkClosed = false
 
--- G1: exact Cauchy/Lagrange modal-energy majorants already exist.  The remaining
--- work is the least-privilege shifted-state coefficient envelope on the actual
--- R571 family, with the desired scale/cutoff uniformity.
 r571GateAG1ModalEnergyDonorLocated : Bool
 r571GateAG1ModalEnergyDonorLocated = true
 
 r571GateAG1ShiftedCoefficientEnvelopeClosed : Bool
 r571GateAG1ShiftedCoefficientEnvelopeClosed = false
+
+r571GateAStateDerivativeEnvelopeClosed : Bool
+r571GateAStateDerivativeEnvelopeClosed = false
 
 r571GateAA2DelegatedToRadialCurvatureBoundary : Bool
 r571GateAA2DelegatedToRadialCurvatureBoundary = true
