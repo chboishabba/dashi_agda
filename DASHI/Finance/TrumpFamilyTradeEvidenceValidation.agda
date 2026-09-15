@@ -14,6 +14,20 @@ sourceBoundary = Atlas.canonicalTrumpFamilyTradeSourceBoundary
 primaryBoundary : Primary.TrumpFamilyPrimarySourceExtensionBoundary
 primaryBoundary = Primary.canonicalTrumpFamilyPrimarySourceExtensionBoundary
 
+-- RED extension: exact transaction/ownership receipts must exist rather than
+-- being reconstructed from aggregate/private-placement or secondary prose.
+psqhPersonalAllocation : Atlas.TradeEvidenceClaim
+psqhPersonalAllocation = Primary.donJrPSQHPrivatePlacementPersonalAllocation
+
+donJrDominariOwnership : Atlas.TradeEvidenceClaim
+donJrDominariOwnership = Primary.donJrDominariOwnership
+
+trumpTechPurchaseSeries : Atlas.TradeEvidenceClaim
+trumpTechPurchaseSeries = Primary.trump2025TechEquityPurchaseSeries
+
+mgxPrimaryInvestment : Counterparty.CounterpartyEvidence
+mgxPrimaryInvestment = Counterparty.mgxBinancePrimaryInvestment
+
 counterpartyBoundary : Counterparty.TrumpFamilyExternalCounterpartyBoundary
 counterpartyBoundary = Counterparty.canonicalTrumpFamilyExternalCounterpartyBoundary
 
@@ -28,3 +42,6 @@ gameBoundary = GameBridge.canonicalTrumpFamilyTradeGameTheoryBoundary
 
 acquisitionBoundary : Acquisition.TrumpFamilyTradeAcquisitionBoundary
 acquisitionBoundary = Acquisition.canonicalTrumpFamilyTradeAcquisitionBoundary
+
+acquisitionProgress : Acquisition.TrumpFamilyTradeAcquisitionProgress
+acquisitionProgress = Acquisition.currentTrumpFamilyTradeAcquisitionProgress
