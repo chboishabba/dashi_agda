@@ -53,6 +53,42 @@ BIPM authority over SI != ecological or deployment authority
 
 The BIPM SI Brochure (9th edition, revision 4.01, 2026; DOI `10.59161/AUEZ1291`) is represented as a separate `AttributedSource` with its own snowball receipt. It is used only for SI dimensions, units and scale semantics. Numeric ecological observations still require site/time/sensor/assay-specific provenance.
 
+## Actual-chemistry / 369-chemistry indexing
+
+`BiocontrolChemistry369IndexExact` now explicitly indexes the lane onto the existing chemistry stack rather than treating `nutrient`, `oxygen` and `pH` as sufficient chemistry by themselves.
+
+The weld reuses:
+
+- `DASHI.Chemistry.OceanCarbonateSaltTemperatureStressBidiExact` for the multicoordinate aquatic-chemistry rule that temperature, salinity, pH/carbonate system, oxygen, nutrient state and history remain separate coordinates;
+- `DASHI.Chemistry.MechanismDiscriminationExact` for matched multi-coordinate chemical mechanism discrimination and selective reopening;
+- `DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact` for the existing 369 chemistry hierarchy from atomic/valence state through molecular identity, reaction enablement/conservation, kinetics/environment and observed chemical state;
+- `BiocontrolSIQuantityExact` for dimension/unit/scale semantics.
+
+The key anti-collapse is retained:
+
+```text
+same bulk nutrient mass concentration != same nutrient species/speciation
+same SI dimension != same chemical species
+369 periodic/atomic recovery != complete aquatic reaction state
+one matching chemistry observable != proved mechanism
+```
+
+A synthetic finite witness uses equal coarse bulk-nutrient mass class with different nitrate-dominant versus ammonium-dominant states. That witness is DASHI mathematics only; it is not asserted as an observed Springfield Lakes pair.
+
+## Springfield Lakes operational analogue
+
+Ipswich City Council reported on 19 June 2025 that more than 80 tonnes of **salvinia** had been removed from two Springfield Lakes waterways. A council-first `spider excavator` was trialled at the hard-to-access pond at 9000 Viewpoint Drive; the council reported some success there with works continuing. A separate aquatic weed harvester at the pond near 31 Vistula Circuit Reserve was reported to have removed 80 tonnes of salvinia from that single pond.
+
+`SpringfieldLakesAquaticWeedMechanicalRemovalExact` retains this as a local operational analogue for access geometry, equipment choice and the biomass-export branch of the intervention model. It explicitly blocks the invalid transfer:
+
+```text
+Springfield salvinia removal != Springfield water-hyacinth removal evidence
+salvinia equipment success != automatic water-hyacinth efficacy
+mass removed != net ecosystem benefit
+```
+
+The source is retained as an `AttributedSource` with a snowball receipt. It supplies local operational context only; the finite intervention mathematics remains DASHI-owned.
+
 ## Attribution and source roles
 
 The ecological source atlas uses `DASHI.Core.AttributedSourceCore` and `DASHI.Core.SnowballAttributionProvenanceInvariantExact`; source identity, source kind, formalisation relationship, visibility, proof non-import and authority non-creation therefore survive downstream snowballing.
@@ -67,11 +103,12 @@ The retained ecological source rows are deliberately non-interchangeable:
 - Ted D. Center et al. (2005), *Herbivory alters competitive interactions between two invasive aquatic plants*, Biological Control 33(2), 173-185, DOI `10.1016/j.biocontrol.2005.02.005`: competition/community-reassembly calibration.
 - Desalegn Chala, Diress Tsegaye, Habtamu Alem et al. (2026), *Beyond Removal: Strategies for Sustainable Control of Water Hyacinth in Tropical Freshwater Ecosystems*, Environmental Management 76, article 187, DOI `10.1007/s00267-026-02494-1`: sustainable-control/nutrient-recycling synthesis.
 - F. Mariani, E. G. Steen, B. G. Rector, P. D. Pratt and R. Diaz (2026), *Too hot, too tough, too crowded...*, Biological Control 216, 106023, DOI `10.1016/j.biocontrol.2026.106023`: agent-interaction and abiotic-context calibration in a southeastern-US setting; no geographic transfer to Australia is asserted.
+- Ipswich City Council (2025), *Strides made in salvinia weed management across Springfield Lakes waterways*: local operational analogue for mechanical aquatic-weed removal only; it is not water-hyacinth efficacy evidence.
 
-These external ecological sources do **not** own the finite non-factorability witnesses, consumer-indexed residual/discriminator construction, selective certificate reopening, SI adapters, or costed experiment-search theorems. Those are repository-native DASHI extensions motivated or calibrated by source material. Conversely, DASHI's formalisation does not manufacture empirical measurements or retroactively strengthen the external sources.
+These external ecological sources do **not** own the finite non-factorability witnesses, consumer-indexed residual/discriminator construction, selective certificate reopening, SI adapters, chemistry-index construction, or costed experiment-search theorems. Those are repository-native DASHI extensions motivated or calibrated by source material. Conversely, DASHI's formalisation does not manufacture empirical measurements or retroactively strengthen the external sources.
 
 ## LES and status boundary
 
 The LES scenario carries the canonical typed ecological source atlas rather than only a prose citation. Water-hyacinth control, restoration, host-specificity evidence, observed post-release safety, and net ecosystem benefit remain distinct coordinates. The canonical fixture records host-specificity support while leaving post-release safety and net ecosystem benefit unresolved; a citation neither imports proof nor creates deployment authority.
 
-Repository first-implementation chronology is recorded independently from validation. The initial externality owner is tied to commit `38aaea92eb21cccc41ec38d03c3a55e5e1ab178e`; the costed-choice owner to `0cd907c423041bade3b5cfa4e5a7d5aeca4b6c45`; and the SI bridge owner to `d3144c596df0c6696ad7f908f69f8669f3ebe52b`. All are recorded as `sourceCommittedOnly`, not as type-check or kernel certification receipts.
+Repository first-implementation chronology is recorded independently from validation. The initial externality owner is tied to commit `38aaea92eb21cccc41ec38d03c3a55e5e1ab178e`; the costed-choice owner to `0cd907c423041bade3b5cfa4e5a7d5aeca4b6c45`; the SI bridge owner to `d3144c596df0c6696ad7f908f69f8669f3ebe52b`; the chemistry/369 index to `0cb687799527bc0b1c2b72e401dc31c8f8f04669`; and the Springfield mechanical-removal owner to `03a91dbb1edc15ac27b7698bcbe27672c70f562a`. All are recorded as `sourceCommittedOnly`, not as type-check or kernel certification receipts.
