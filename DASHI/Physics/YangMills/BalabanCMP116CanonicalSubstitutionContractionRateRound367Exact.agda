@@ -43,12 +43,16 @@ record LiteralCMP116SubstitutionContractionAttachment
   field
     State : Set
     literalSubstitutionMap : State → State
-    DistanceBound : State → State → Set
 
-    -- This is the actual source theorem still required: the literal map is
-    -- contractive at the exact normalized rate whose strictness R104 proves.
+    -- Consumer-owned meaning of a quantitative contraction statement on the
+    -- literal map.  Keeping the map and rate as indices prevents the source
+    -- theorem from being detached from the object/rate it is supposed to pay.
+    ContractionAtRate : (State → State) → ℚ → Set
+
     literalMapContractsAtCanonicalRate :
-      ∀ left right → DistanceBound left right
+      ContractionAtRate
+        literalSubstitutionMap
+        (canonicalSubstitutionContractionRate dataSet)
 
 open LiteralCMP116SubstitutionContractionAttachment public
 
