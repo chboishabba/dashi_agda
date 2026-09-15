@@ -15,6 +15,7 @@ import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact as A2
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as A2Square
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact as RadiusDouble
+import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact as Aligned
 
 preferredLinearizationClosed :
   GateA.r571GateAPreferredLinearizationClosed ≡ true
@@ -91,6 +92,22 @@ centeredShiftScalarRadiusDoublingClosed = refl
 centeredShiftRadiusDoublingUsesSquareRootAxiom :
   RadiusDouble.r571A2CenteredShiftRadiusDoublingUsesSquareRootAxiom ≡ false
 centeredShiftRadiusDoublingUsesSquareRootAxiom = refl
+
+literalAlignedComplementIdentityClosed :
+  Aligned.r571A2LiteralAlignedComplementIdentityClosed ≡ true
+literalAlignedComplementIdentityClosed = refl
+
+centeredAlignedAngularSecondMomentPaymentClosed :
+  Aligned.r571A2CenteredAlignedAngularSecondMomentPaymentClosed ≡ true
+centeredAlignedAngularSecondMomentPaymentClosed = refl
+
+alignedComplementUsesLiteralR467R455Carrier :
+  Aligned.r571A2UsesR467R455LiteralCarrier ≡ true
+alignedComplementUsesLiteralR467R455Carrier = refl
+
+alignedComplementUsesSquareRootAxiom :
+  Aligned.r571A2UsesSquareRootAxiom ≡ false
+alignedComplementUsesSquareRootAxiom = refl
 
 radialCurvatureUsesExistingGapProductDonor :
   A2Square.r571A2R127SquareGapAlgebraReused ≡ true
