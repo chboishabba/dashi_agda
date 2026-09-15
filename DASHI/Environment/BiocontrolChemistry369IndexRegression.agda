@@ -1,0 +1,14 @@
+module DASHI.Environment.BiocontrolChemistry369IndexRegression where
+
+import DASHI.Environment.BiocontrolChemistry369IndexExact as Chemistry
+
+chemistryIndex : Chemistry.BiocontrolChemistry369Index
+chemistryIndex = Chemistry.canonicalBiocontrolChemistry369Index
+
+chemistryBoundary : Chemistry.BiocontrolChemistry369Boundary
+chemistryBoundary = Chemistry.canonicalBiocontrolChemistry369Boundary
+
+bulkNutrientMassDoesNotPaySpecies :
+  Chemistry.bulkNutrientObserver Chemistry.nitrateWorld
+  ≡ Chemistry.bulkNutrientObserver Chemistry.ammoniumWorld
+bulkNutrientMassDoesNotPaySpecies = Chemistry.bulkNutrientCollision
