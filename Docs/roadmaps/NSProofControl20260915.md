@@ -2,7 +2,7 @@
 
 Status: authoritative live routing/control document; non-promoting.
 
-Timestamped current-state update: `2026-09-16 08:05 AEST (UTC+10)`.
+Timestamped current-state update: `2026-09-16 08:29 AEST (UTC+10)`.
 
 This is the default answer source for current NS proof-search state. Historical
 roadmaps and the canonical archaeology ledger remain append-only provenance and
@@ -25,7 +25,7 @@ Boolean status field cannot manufacture a kernel receipt or a missing theorem.
 ```text
 FourLaneProofProgramExact / this document
   -> merged #937   canonical A/B/C/D baseline + S0/S1/S2a state
-  -> draft #948    S2b0 + S2b1 finite/same-object successor delta
+  -> draft #948    S2b finite/same-object successor + physical layer-cake weld
   -> #945          Gate-A cross-prover receipt/status surface
   -> #947          local Hermitian G0' vector->scalar/R27 splice
   -> #890          retained comparable/P3 route + negative controls
@@ -40,7 +40,7 @@ that imports the merged canonical coordinator. It is not a second dashboard.
 
 ```text
 A — unforced whole-space R^3 regularity       independent / deferred
-B — unforced periodic T^3 regularity          active; near terminal cut
+B — unforced periodic T^3 regularity          active; quantitative phase leaf
 C — forced whole-space R^3 breakdown          released-proof BIDI/integration
 D — forced periodic T^3 breakdown             released-proof BIDI/integration
 ```
@@ -104,8 +104,11 @@ S2b0 projected pairing -> R104 BandTransfer                  DONE source
 S2b1a shell sort + exact permutation + fold invariance       DONE source
 S2b1b0 reject-zero R98 full cutoff -> nonzero cutoff         DONE source
 S2b1b1 literal upper-shell selector -> sorted fold -> R98    DONE source
-S2b1b2 structural R104 suffix = upper-shell selector fold    OPEN
-S2b2 quantitative signed packet-flux estimate                OPEN
+S2b1b2a selector -> canonical sorted suffix -> R98 flux      DONE source
+S2b1b2b0 local strict-jump R104 tail -> canonical suffix     DONE source
+S2b1b2b1 global recursive-prefix physical packet weld        DONE source
+S2b1b full R104 layer-cake -> physical upper-shell flux      DONE source
+S2b2 quantitative signed packet-flux / R406 estimate         OPEN PRIMARY
 S3 cutoff-uniform initial critical ceiling                   OPEN
 S4 positive retained viscosity                               OPEN
 ```
@@ -182,89 +185,41 @@ weightedProjectedPairing(sortByShell modes)
   = weightedProjectedPairing(modes).
 ```
 
-The permutation theorem is load-bearing for S2b1b: radial sorting changes only
-order, not the physical finite support.
+Sorting changes only order, never the physical finite support.
 
-### S2b1b0 — DONE: R98 full-cutoff -> live nonzero-cutoff bridge
+### S2b1b — DONE SOURCE: structural suffixes are physical R98 packets
 
-`NSTriadKNSelectedPacketNonzeroCutoffBridgeExact` proves for any selector with
-
-```text
-selected zeroMode = false
-```
-
-that
+The representation path is now complete:
 
 ```text
-R98 selected pairing over cutoffModes N
-  = R98 selected pairing over nonzeroCutoffModes N.
+S2b1b0  reject-zero full cutoff -> nonzero cutoff                 DONE
+S2b1b1  upperShellPacket(shellIndex) -> sorted selected fold
+          -> normalized R98 physical boundary flux                DONE
+S2b1b2a selected fold -> canonical dropBelowShell suffix           DONE
+S2b1b2b0 local strict shell jump: R104 tail = canonical suffix     DONE
+S2b1b2b1 recursive-prefix weld to ORIGINAL sorted support          DONE
 ```
 
-This is proved directly through the executable R34 `removeZero` recursion: a
-removed zero-mode contribution is already literally zero under such a selector.
-No separate velocity-at-zero hypothesis is used.
-
-### S2b1b1 — DONE: literal upper-shell selector -> physical R98 flux
-
-`NSTriadKNLiteralUpperShellPacketSelectorExact` avoids the unnecessary
-max-norm/Euclidean-squared identification. R98 already accepts an arbitrary
-Boolean selector, so the physical packet is defined directly from the same
-shell geometry used by S0:
+`NSTriadKNR104GlobalLayerCakePhysicalPacketWeldExact` proves the complete
+canonical representation theorem:
 
 ```text
-upperShellPacket j k
-  = false                         if k = 0
-  = true                          if k != 0 and j <= shellIndex k
-  = false                         otherwise.
+R104.radialLayerCake(literal radially sorted bands)
+  = physicalUpperShellLayerCake,
 ```
 
-The owner proves:
+where every genuine shell jump uses the corresponding R98 normalized physical
+boundary flux. Equal-shell interfaces are inactive because their dyadic radial
+increment is zero.
 
-```text
-upperShellPacket j zeroMode = false,
-selected projected-pairing folds respect finite permutation,
-R98 literal full-cutoff selected pairing
-  = selected pairing on sortByShell(nonzeroCutoffModes N),
-and with reality + divergence-free hypotheses,
-that sorted selected fold
-  = R98 normalized physical boundary flux.
-```
+This is still representation/same-object mathematics only. It introduces no
+absolute-value majorant, Schur bound, quantitative flux estimate, or R406
+estimate.
 
-Thus the physical packet itself is no longer missing. The older
-`ConcreteUpperSquaredPacketRound104Exact` remains a valid Euclidean-squared
-packet donor/comparator, but it is not required to identify the dyadic max-norm
-shell selector used by this proof route.
+### S2b2 — PRIMARY nonlinear theorem
 
-### S2b1b2 — NEXT: one pure finite tail/selector identity
-
-The remaining representation theorem is now only:
-
-```text
-at each strict shell jump in the sorted literal carrier,
-R104.totalTransfer(structural suffix)
-  = R98 selected projected-pairing fold for upperShellPacket(newShell).
-```
-
-Equal-shell adjacent entries are not a separate physical boundary: their R104
-radial increment is zero. Therefore the theorem only needs to pay structural
-tails at genuine shell changes.
-
-This is finite-list/shell-order mathematics. It should not consume the S2b2 PDE
-budget and should introduce no positive majorant.
-
-Useful already-paid inputs:
-
-```text
-S2b1a sort permutation + ShellOrdered
-R404 every member of nonzeroCutoffModes is NonZeroMode
-S2b1b0 reject-zero full/nonzero selector bridge
-S2b1b1 upperShellPacket + permutation-invariant selected folds + R98 flux
-R104 exact Abel layer-cake on structural suffixes
-```
-
-### S2b2 — PRIMARY quantitative nonlinear theorem after S2b1b2
-
-Once that finite identity is paid, the discovery theorem is literally
+The first unpaid PDE theorem is now the quantitative bound on the already-literal
+physical packet layer-cake. In integrated R104/R414 form:
 
 ```text
 N_N(T)
@@ -272,9 +227,15 @@ N_N(T)
      + literalR406RemainderIntegral(N,T).
 ```
 
-A theorem merely accepting `signedProductionEstimateByLiteralRemainder`,
+Equivalent producer formulations are admissible only if they construct this
+bound on the SAME literal S0/S2 physical production and R406 remainder. A theorem
+merely accepting `signedProductionEstimateByLiteralRemainder`,
 `globalDangerPaidByEndpoint`, an R303/R353 payment, R568 budget, or equivalent as
-a field remains a compiler, not this producer.
+a field is a compiler, not this producer.
+
+Targeted archaeology/analysis may now search only producers of the quantitative
+weighted upper-shell packet-flux estimate. All representation searches S2a ->
+S2b1b are closed on the preferred route.
 
 ## S3 / S4
 
@@ -298,8 +259,8 @@ modern signed/nested commutator route           selected B_comm producer family
 
 R303/R353/R372 preserved the signed architecture and isolated essentially the
 same production-identification problem, but left it as an input. S2a through
-S2b1b1 now pay the modern representation/same-object chain directly; the actual
-quantitative estimate remains open.
+S2b1b now pay the modern representation/same-object chain directly; only the
+quantitative packet-flux/R406 estimate remains as the main B nonlinear leaf.
 
 ## C / D
 
@@ -314,14 +275,13 @@ infer D -> B merely from shared periodic geometry.
 
 ```text
 P0  keep this tracker + canonical/thin-successor status synchronized
-P1  B_phase S2b1b2: structural R104 suffix = literal upper-shell selector fold
-P2  B_phase S2b2: quantitative signed packet-flux / R406 estimate
-P3  S1b infrastructure: concrete scalar FTC / integrateTo linearity
-P4  B_phase S3/S4
-P5  B_comm reconstruction/certification
-P6  certify recovered S0/S1/S2a/S2b0/S2b1 surfaces
-P7  C/D BIDI integration + typed donor mining
-P8  A deferred until explicit B portability audit
+P1  B_phase S2b2: quantitative signed physical packet-flux / R406 estimate
+P2  S1b infrastructure: concrete scalar FTC / integrateTo linearity
+P3  B_phase S3/S4: initial ceiling + retained-viscosity calibration
+P4  B_comm reconstruction/certification
+P5  certify recovered S0/S1/S2a/S2b representation surfaces
+P6  C/D BIDI integration + typed donor mining
+P7  A deferred until explicit B portability audit
 ```
 
 Operating rule:
@@ -329,9 +289,9 @@ Operating rule:
 ```text
 no broad NS archaeology;
 start here;
-search only the named producer chain for the first unpaid coordinate;
+search only quantitative S2b2 producers for the first unpaid coordinate;
 use the archaeology ledger for provenance/donors only;
-new mathematics only after that targeted search bottoms out.
+new mathematics only after that targeted producer search bottoms out.
 ```
 
 ## Certification boundary
