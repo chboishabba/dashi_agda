@@ -50,15 +50,12 @@ periodicBPhasePointwiseCriticalEnergySplitRecovered :
 periodicBPhasePointwiseCriticalEnergySplitRecovered =
   Program.periodicBPhasePointwiseCriticalEnergySplitRecoveredIsTrue
 
--- S1b needs one time-independent mode carrier but not positive viscosity.
 periodicBPhaseLiteralModeCarrierRecovered :
   Program.periodicBPhaseLiteralModeListCarrierRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
 periodicBPhaseLiteralModeCarrierRecovered =
   Program.periodicBPhaseLiteralModeListCarrierRecoveredIsTrue
 
--- The integrated S1 compiler is closed *given* the ordinary derivative/FTC and
--- integration-linearity authorities.  This is not an unconditional S1 receipt.
 periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered :
   Program.periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
@@ -76,6 +73,12 @@ periodicBPhaseConcreteIntegrationLinearityStillAbsent :
     Program.canonicalNSFourLaneProofProgram ≡ false
 periodicBPhaseConcreteIntegrationLinearityStillAbsent =
   Program.periodicBPhaseConcreteIntegrationLinearityObservedIsFalse
+
+periodicBPhaseLiteralProductionPairingSameObjectRecovered :
+  Program.periodicBPhaseLiteralProductionPairingSameObjectRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralProductionPairingSameObjectRecovered =
+  Program.periodicBPhaseLiteralProductionPairingSameObjectRecoveredIsTrue
 
 periodicBPhaseR414ProductionNormalisationStillOpen :
   Program.periodicBPhaseR414ProductionNormalisationRecovered
