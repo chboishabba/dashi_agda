@@ -10,11 +10,13 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopePublicationAggregate wher
 --   G2 finite path/gradient donor,
 --   G1 modal-energy donor,
 --   preferred radial linearization with R+ = 0,
---   isolated A2 centered radial-curvature leaf.
+--   isolated A2 centered radial-curvature leaf,
+--   denominator-cleared A2 square-gap rationalization.
 --
 -- No inner-fibre, R568 or Clay promotion is introduced here.
 
 import DASHI.Physics.Closure.NSTriadKNR571PairedSecondMomentPublicationAggregate
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact
+import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkRegression
