@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Reasoning.FibreRoutingGrokkingMoEBrainCrossPollinationExact as Routing
+import DASHI.Biology.SpectralGrokkingLatticeExact as Spectral
 import DASHI.Biology.AnimalexicLexicIntegrationExact as Lexic
 import DASHI.Biology.AnimalexicDrosophilaEmbodiedBridge as FlyLexic
 import DASHI.Biology.ConsciousAccessCoalition as Access
@@ -14,20 +15,10 @@ import DASHI.Biology.ConsciousAccessCoalition as Access
 ------------------------------------------------------------------------
 -- MALECNS LATENT-STATE / MoE / GROKKING / ANIMALEXIC CROSS-POLLINATION
 --
--- This owner composes existing theorem surfaces.  It does not identify a
+-- This owner composes existing theorem surfaces. It does not identify a
 -- predictive latent with a biological mechanism, an E8-like chart with the
 -- ontology of a fly brain, a behavioural motif with semantic meaning, or an
 -- access-consciousness candidate with phenomenal consciousness.
---
--- Intended chain:
---
---   physical hyperfabric / observation
---     -> routing coalition
---     -> learned latent state
---     -> optional structured geometry
---     -> embodied semantic hypotheses
---     -> declared consumer family
---     -> admissible interaction / intervention tests.
 ------------------------------------------------------------------------
 
 data RoutingState : Set where
@@ -76,13 +67,12 @@ learningMayChangeConsumerCarryingFibres :
 learningMayChangeConsumerCarryingFibres = refl
 
 grokkingCleanupRetainsDeclaredSymmetryModes :
-  Routing.cleanupRetainsSymmetryModes ≡ Routing.cleanupRetainsSymmetryModes
-grokkingCleanupRetainsDeclaredSymmetryModes = refl
+  Spectral.symmetryAdaptedComponentCount Spectral.cleanupPhase ≡ 3
+grokkingCleanupRetainsDeclaredSymmetryModes =
+  Routing.cleanupRetainsSymmetryModes
 
 ------------------------------------------------------------------------
--- LILA/E8 is a candidate latent atlas only.  The existing cross-pollination
--- owner already blocks promotion from the E8 carrier into an explanation of
--- the Fly structure/function result.
+-- LILA/E8 is a candidate latent atlas only.
 ------------------------------------------------------------------------
 
 e8GeometryDoesNotPromoteBiologicalOntology :
@@ -125,11 +115,19 @@ semanticDebtRemainsConsumerIndexed :
     Lexic.canonicalAnimalLexicIntegrationBoundary ≡ true
 semanticDebtRemainsConsumerIndexed = refl
 
+flyNeuralStateDoesNotEqualBehaviourMotif : FlyLexic.DrosophilaAnimalexicBoundary
+flyNeuralStateDoesNotEqualBehaviourMotif =
+  FlyLexic.noNeuralStateEqualsBehaviourMotif
+
+flyFunctionalCorrelationDoesNotEqualCommunicativeAct :
+  FlyLexic.DrosophilaAnimalexicBoundary
+flyFunctionalCorrelationDoesNotEqualCommunicativeAct =
+  FlyLexic.noFunctionalCorrelationEqualsCommunicativeAct
+
 ------------------------------------------------------------------------
 -- Interactive semantic refinement: identical current observations do not
 -- establish semantic equivalence if an admissible interaction separates the
--- hidden states.  This is the Animalexic-style semantic analogue of a fibre
--- collision / local refinement witness.
+-- hidden states.
 ------------------------------------------------------------------------
 
 record InteractiveSemanticRefinement
@@ -149,16 +147,15 @@ record InteractiveSemanticRefinement
 
 open InteractiveSemanticRefinement public
 
-interactiveSemanticRefinement :
+interactiveSemanticRefinementRetainsCollision :
   ∀ {State Interaction Observation Meaning}
     (witness : InteractiveSemanticRefinement State Interaction Observation Meaning) →
   observe witness (left witness) ≡ observe witness (right witness)
-interactiveSemanticRefinement = sameCurrentObservation
+interactiveSemanticRefinementRetainsCollision = sameCurrentObservation
 
 ------------------------------------------------------------------------
--- Joint consumer family.  Adequacy for each declared consumer is carried as
--- one family-indexed obligation.  Separate success on isolated consumers is
--- not automatically promoted into a joint-family theorem.
+-- Joint consumer family. Separate success on isolated consumers is not
+-- automatically promoted into a joint-family theorem.
 ------------------------------------------------------------------------
 
 record JointConsumerAdequacy
@@ -177,7 +174,7 @@ consumerFamilyAdequacyIsJoint :
 consumerFamilyAdequacyIsJoint ()
 
 ------------------------------------------------------------------------
--- Three distinct compression axes.  None is definitionally another.
+-- Three distinct compression axes.
 ------------------------------------------------------------------------
 
 data CompressionKind : Set where
@@ -212,9 +209,7 @@ phenomenalIdentityRemainsUnpaid =
   Access.canonicalCoalitionPhenomenalIdentityNotPromoted
 
 ------------------------------------------------------------------------
--- Programme boundary.  The structural/formal cross-pollination is paid here;
--- empirical affect labels, subjective phenomenology, and cross-task/cross-
--- animal replication remain unpaid.
+-- Programme boundary.
 ------------------------------------------------------------------------
 
 record LatentStateProgrammeBoundary : Set where
