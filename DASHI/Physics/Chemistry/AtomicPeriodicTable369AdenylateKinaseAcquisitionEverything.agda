@@ -28,6 +28,13 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseBEMetaAcquis
 -- and ligand-free open<->closed difference reported in the 1--2 kBT range.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFreeEnergyTextAcquisitionExact
 
+-- Machine-readable LT-MD trajectory statements: ligand-bound theta2 ~45-degree
+-- intermediate, ~50--100 ns LID-closure timescale, no full closure by 1000 ns,
+-- closed-start ~65/~30-degree coordinates and later ~30->~45-degree NMP motion,
+-- plus ligand-free open-start angular ranges. These remain simulation-observed
+-- coordinates, never Kramers rates or experimental kinetics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDTextAcquisitionExact
+
 -- Cell-level acquisition frontier: 8 named states x four numeric coordinates
 -- plus six route-edge Kramers-rate cells.  Each unpaid cell retains a locator,
 -- source role and next-payment obligation instead of disappearing into a global
