@@ -28,7 +28,8 @@ GLOBAL #1
 
   M_Hessian^src <= L^src * d_sub^src
 
-  This is now the preferred specialist mathematical attack.
+  This is the current specialist mathematical attack. Do not duplicate #944 on
+  the coordinator branch.
 
 GLOBAL FALLBACK
   YM #944 / R364 analytic substituted-background path
@@ -41,12 +42,20 @@ GLOBAL FALLBACK
   Valid alternate producer, but currently more source debt than H_scale.
 
 COORDINATOR #1
-  RH #940 / R1a + R1b
+  RH #940 / R1 representation
 
-  R1a final nearResponseAt(J) = checked/imported finite-near scalar
-  R1b SAME checked scalar = literal finiteNearSum(cellResponse)
+  R1a:
+    final nearResponseAt(J) = checked/imported finite-near scalar
 
-  both independently unpaid.
+  R1b1:
+    SAME checked scalar = literal reflection-pair scalar on the final
+    universal pole-quotient carrier
+
+  R1b2:
+    SAME literal reflection-pair scalar = literal finiteNearSum(cellResponse)
+
+  all three are independently fail-closed. R1b compiles from R1b1+R1b2;
+  final R1 compiles from R1a+R1b.
 
 NEXT TRUE RH MATH
   R2:
@@ -111,13 +120,6 @@ Primary CMP116 source audit also does not print this exact endpoint-difference i
 
 ## Fallback Route B: R364 analytic path
 
-R364 source-written sequence on #944:
-
-```text
-36fbd33c... RED validation import
-a0d6e1ea... analytic-path alternate producer
-```
-
 It factors H_stab^src through:
 
 ```text
@@ -142,8 +144,6 @@ Source audit:
 - no explicit third/background-derivative theorem of the R364 shape was found in the retained CMP116 extract.
 
 Therefore Route B currently costs at least `A_path + A_D3`; it does not dominate the single Route-A H_scale payment.
-
-Pareto verdict recorded on #944 comment `5677260105`: **attack H_scale first; keep R364 as fallback.**
 
 ## YM downstream after H_stab^src
 
@@ -192,45 +192,62 @@ R1a CROSS_PROVER / SAME_OBJECT TRANSPORT
   final nearResponseAt(J)
     = checked/imported finite-near scalar
 
-R1b LITERAL REPRESENTATION
+R1b1 CROSS_PROVER / FINAL-CARRIER ATTACHMENT
   SAME checked/imported finite-near scalar
+    = literal reflection-pair scalar on the final universal pole-quotient carrier
+
+R1b2 LITERAL ENUMERATION / FOLD REPRESENTATION
+  SAME literal reflection-pair scalar
     = literal finiteNearSum(cellResponse)
 ```
 
 Current status:
 
 ```text
-R1a = unpaid
-R1b = unpaid
+R1a  = unpaid
+R1b1 = unpaid
+R1b2 = unpaid
 ```
 
-Implementation sequence:
+Implementation sequence for the current split:
 
 ```text
-460933bfd... RED split
-ff8f5daf3... split implementation
-e57b08b86... API hygiene
-938ce38b7... RED independent fail-closed status
-0b6d51e62... GREEN R1a=false / R1b=false
+460933bfd... original RED R1a/R1b split
+ff8f5daf3... original GREEN split
+e57b08b86... projection-name hygiene
+92fce82b9... RED R1b1/R1b2 split
+6b631363d... GREEN R1b1/R1b2 + transitivity compiler
 ```
 
-The 8883 Lean return reports `nearFinset` / `nearOffFinset`, `nearSignedSum`, explicit far-shell decay and the literal D_off cutoff theorem, but explicitly says the proof terms were not transported into Agda. It therefore pays neither R1a nor R1b.
+The 8883 Lean return reports `nearFinset` / `nearOffFinset`, `nearSignedSum`, explicit far-shell decay and the literal D_off cutoff theorem, but explicitly says the proof terms were not transported into Agda. It therefore pays none of R1a/R1b1/R1b2.
 
-## RH donor audit: determinant lane does not pay final R1b
-
-Historical #642 / `NearCoreDeterminantTaper.lean` reportedly kernel-checked a whole finite near scalar and an equivalent finite exponential-sum form. This remains an **active donor only**.
-
-Current RH owners explicitly separate the determinant taper/carrier from the final universal pole-quotient taper. Similar reflection-paired cosine formulas do not establish same-object identity. No later theorem-bearing same-taper bridge was found.
-
-The reflection-pair Lean theorem owns the individual cell formula
+The retained reflection-pair source names
 
 ```text
-4 * g(u) * cosh(a*u) * cos(delta*u)
+LiteralWeilOffOrdinateReflectionPair.zeroConeValue_add_reflect_eq_integral
 ```
 
-but not the final `nearOffFinset` fold identity. Thus it does not alone pay R1b.
+and records the individual cell formula
 
-Stop blind R1 archaeology unless theorem-bearing checked-near bytes or a genuinely same-carrier object appears.
+```text
+4 * g(u) * cosh(a*u) * cos(delta*u).
+```
+
+That return is source-owned only: its own status says not machine-checked for that return and not transported into Agda. It therefore does **not** inhabit R1b1. It also does not provide the final `nearOffFinset` fold identity, so it does not inhabit R1b2.
+
+Historical #642 / `NearCoreDeterminantTaper.lean` kernel-checked a whole finite near scalar and an equivalent finite exponential-sum form, but the determinant taper is not definitionally the final universal pole-quotient taper. It remains donor-only without a theorem-bearing same-carrier bridge.
+
+### Pareto stop condition for R1 refactoring
+
+Do not create further intermediate scalar names unless they correspond to a real source or carrier boundary. In particular, making a newly named `literalReflectionPairScalar` *definitionally equal* to the finite fold would only move the entire old R1b debt into R1b1; it would not pay mathematics or same-object transport.
+
+Further R1 work is justified only by one of:
+
+1. recovered theorem-bearing checked-near bytes / cross-prover transport;
+2. a genuine final-carrier object that already owns the reflection-pair finite scalar;
+3. a concrete finite enumeration/fold constructor that pays R1b2 without using the target final-near equality.
+
+Otherwise move proof-search budget to R2 rather than adding interface layers.
 
 # RH R2
 
