@@ -1,0 +1,13 @@
+module DASHI.Wikimedia.IbrahimCannabisBtBiopesticideRegression where
+
+open import DASHI.Core.Prelude
+import DASHI.Wikimedia.IbrahimCannabisBtBiopesticideExposureParetoExact as Bt
+
+btIsNotSmallMoleculeRegression : Bt.BtOntologyBoundary
+btIsNotSmallMoleculeRegression = Bt.canonicalBtOntologyBoundary
+
+btChemicalPanelBlindSpotRegression : Bt.BtCoverageBoundary
+btChemicalPanelBlindSpotRegression = Bt.canonicalBtCoverageBoundary
+
+btInhalationResidualRegression : Bt.BtExposureBoundary
+btInhalationResidualRegression = Bt.canonicalBtExposureBoundary
