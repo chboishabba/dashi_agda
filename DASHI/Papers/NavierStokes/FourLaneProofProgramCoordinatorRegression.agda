@@ -20,22 +20,18 @@ periodicBCommKernelReceiptStillAbsent :
 periodicBCommKernelReceiptStillAbsent =
   Program.periodicBCommutatorSpineCertificationObservedIsFalse
 
--- R104's algebraic family/compiler is already recovered in-repo (R104/R372/R414).
 periodicBPhaseR104CompilerRecovered :
   Program.periodicBPhaseR104CompilerRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
 periodicBPhaseR104CompilerRecovered =
   Program.periodicBPhaseR104CompilerRecoveredIsTrue
 
--- R414 definitionally sets the Round104 integrable remainder to the literal
--- R406 remainder integral and reuses the R410 cutoff-uniform remainder bound.
 periodicBPhaseR406WeldRecovered :
   Program.periodicBPhaseLiteralR406RemainderWeldRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
 periodicBPhaseR406WeldRecovered =
   Program.periodicBPhaseLiteralR406RemainderWeldRecoveredIsTrue
 
--- R516/R517 close the finite-carrier critical radial/norm realization.
 periodicBPhaseCriticalRadialRealizationRecovered :
   Program.periodicBPhaseCriticalRadialRealizationRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
@@ -43,13 +39,20 @@ periodicBPhaseCriticalRadialRealizationRecovered =
   Program.periodicBPhaseCriticalRadialRealizationRecoveredIsTrue
 
 -- S0 now has an actual live-trajectory finite fold for endpoint mass,
--- dissipation and projected-nonlinearity production.  This is intentionally
--- weaker than a full R414 same-object slice.
+-- ODE-compatible dissipation and projected-nonlinearity production.
 periodicBPhaseLiteralFiniteCriticalFoldRecovered :
   Program.periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
 periodicBPhaseLiteralFiniteCriticalFoldRecovered =
   Program.periodicBPhaseLiteralFiniteCriticalObservableFoldRecoveredIsTrue
+
+-- S1a closes the purely finite R30 pointwise energy split, but not the
+-- derivative/FTC/integration step.
+periodicBPhasePointwiseCriticalEnergySplitRecovered :
+  Program.periodicBPhasePointwiseCriticalEnergySplitRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhasePointwiseCriticalEnergySplitRecovered =
+  Program.periodicBPhasePointwiseCriticalEnergySplitRecoveredIsTrue
 
 periodicBPhaseR414ProductionNormalisationStillOpen :
   Program.periodicBPhaseR414ProductionNormalisationRecovered
