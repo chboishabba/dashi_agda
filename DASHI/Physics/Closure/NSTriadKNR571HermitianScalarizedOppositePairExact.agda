@@ -33,6 +33,7 @@ import DASHI.Physics.Closure.NSTriadKNFiniteTranslationMultiplierCommutatorRound
 import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact as R311
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact as Weld
 import DASHI.Physics.Closure.NSTriadKNR571OppositeRound27PairedTaylorExact as Pair
+import DASHI.Physics.Closure.NSTriadKNLuoCenteredPairedCommutatorIdentityExact as Centered
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 
@@ -110,10 +111,10 @@ hermitianScalarizedPairCenteredIdentity :
   (dataSet : HermitianOppositePairInputs) →
   Pair.pairedRound27Scalar (asOppositeRound27PairData dataSet)
   ≡
-  Pair.Centered.weightedCenteredBranch
+  Centered.weightedCenteredBranch
     (Pair.pairedCenteredSample (asOppositeRound27PairData dataSet))
   +
-  Pair.Centered.weightedHighDifferenceBranch
+  Centered.weightedHighDifferenceBranch
     (Pair.pairedCenteredSample (asOppositeRound27PairData dataSet))
 hermitianScalarizedPairCenteredIdentity dataSet =
   Pair.oppositeRound27PairCenteredIdentity
