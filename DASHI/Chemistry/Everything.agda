@@ -168,3 +168,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverPare
 -- repair theorem constructs eligibility inside the same observer family before
 -- minimal-description/Pareto ranking resumes; no new experiment is manufactured.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverLocalRepairExact
+
+-- Generic promotion instantiation: the AdK local repair, minimal-eligible proof,
+-- and Pareto selection are packaged through the domain-neutral Core theorem.
+-- Li-Liu-Ji remain attributed only to the three-CV AdK premise; the generic
+-- counterexample->repair->selection theorem is DASHI synthesis.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConsumerSafePromotionExact
