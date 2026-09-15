@@ -8,3 +8,6 @@ externalityFirstImplementation = First.biocontrolExternalityFirstImplementation
 
 costedChoiceFirstImplementation : Chronology.FirstImplementationReceipt
 costedChoiceFirstImplementation = First.biocontrolCostedChoiceFirstImplementation
+
+siQuantityFirstImplementation : Chronology.FirstImplementationReceipt
+siQuantityFirstImplementation = First.biocontrolSIQuantityFirstImplementation
