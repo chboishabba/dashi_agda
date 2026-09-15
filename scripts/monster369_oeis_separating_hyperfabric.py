@@ -112,6 +112,23 @@ class TransversalSearchResult:
     transversals: tuple[tuple[str, ...], ...]
 
 
+def extract_agda_coordinates(path: Path) -> tuple[str, ...]:
+    text = path.read_text(encoding="utf-8")
+    header = "data Monster369Coordinate : Set where"
+    start = text.index(header) + len(header)
+    section_marker = "\n------------------------------------------------------------------------\n-- 2."
+    end = text.index(section_marker, start)
+    coordinates: list[str] = []
+    for line in text[start:end].splitlines():
+        stripped = line.strip()
+        suffix = " : Monster369Coordinate"
+        if stripped.endswith(suffix):
+            coordinates.append(stripped[: -len(suffix)])
+    if not coordinates:
+        raise ValueError(f"no Monster369Coordinate constructors found in {path}")
+    return tuple(coordinates)
+
+
 def _validate_coordinate_names(names: Iterable[str]) -> frozenset[str]:
     selected = frozenset(names)
     unknown = selected.difference(COORDINATES)
