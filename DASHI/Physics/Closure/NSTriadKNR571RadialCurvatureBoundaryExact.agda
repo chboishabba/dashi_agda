@@ -13,25 +13,33 @@ module DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact where
 -- For the homochiral R571 multiplier m_sigma(k) = sigma |k| this is precisely
 -- the centered second-difference / Euclidean-radius curvature estimate.
 --
--- The square-gap owner pays the exact denominator-cleared algebra.  The
--- centered-shift owners additionally prove on the literal rational Fourier
--- carrier
+-- The current centered-shift tranche source-writes on the literal rational
+-- Fourier carrier:
 --
 --   (k+y) + (k-y) = 2k,
 --   |2k|^2 = 4|k|^2,
 --   Plucker(k+y,k-y) = 4 Plucker(k,y),
 --   modeNorm(2k) = 2 modeNorm(k),
 --
--- and the aligned R467/R455 companion now proves
+-- together with the aligned complement
 --
 --   (r_p-r_q)^2 + r_p r_q ||P-Q||^2 = |p-q|^2,
---   r_p r_q ||P-Q||^2 <= 4 |y|^2
+--   r_p r_q ||P-Q||^2 <= 4 |y|^2.
 --
--- for p=k+y, q=k-y.  No square-root axiom is introduced.
+-- The centered product bridge then proves exactly
 --
--- The remaining A2 payment is therefore the ordered/annular positive radial
--- denominator and its final transport into the uniform centered curvature
--- sample.  The angular second-moment numerator is no longer open.
+--   (r_p+r_q-2r_k)(r_p+r_q+2r_k)
+--     = r_p r_q ||P-Q||^2
+--     <= 4 |y|^2,
+--
+-- and the division-free order compiler yields
+--
+--   r_k (r_p+r_q-2r_k) <= 4 |y|^2.
+--
+-- Thus the previously named ordered radial-denominator leaf is paid without
+-- division or an annular lower bound.  The remaining A2 seam is only the
+-- same-object transport of this literal curvature payment into the exact
+-- Gate-A `minusRemainderCurvatureBound` sample interface.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -47,6 +55,8 @@ import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as Squar
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact as RadiusDouble
 import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact as Aligned
+import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialDenominatorOrderExact as Denominator
+import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialProductBridgeExact as ProductBridge
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceExact as Taylor
 
 record R571PreferredRadialCurvatureSample : Set₁ where
@@ -111,13 +121,24 @@ r571A2AlignedAngularSecondMomentPaymentClosed : Bool
 r571A2AlignedAngularSecondMomentPaymentClosed =
   Aligned.r571A2CenteredAlignedAngularSecondMomentPaymentClosed
 
+r571A2DivisionFreeDenominatorCompilerClosed : Bool
+r571A2DivisionFreeDenominatorCompilerClosed =
+  Denominator.r571A2DivisionFreeDenominatorCompilerClosed
+
+r571A2LiteralCenteredProductBridgeClosed : Bool
+r571A2LiteralCenteredProductBridgeClosed =
+  ProductBridge.r571A2LiteralCenteredProductBridgeClosed
+
 r571A2OrderedRadialDenominatorPaymentClosed : Bool
 r571A2OrderedRadialDenominatorPaymentClosed =
-  Aligned.r571A2OrderedRadialDenominatorPaymentClosed
+  ProductBridge.r571A2DivisionFreeRadialCurvaturePaymentClosed
 
 r571A2UsesIncidenceOnlyCoercivity : Bool
 r571A2UsesIncidenceOnlyCoercivity = false
 
+-- The local centered Euclidean-radius curvature is now paid.  This flag stays
+-- false until the exact sign/absolute-value/stepMagnitude transport into
+-- R571PreferredRadialCurvatureSample is source-written.
 r571A2UniformCurvatureEstimateClosed : Bool
 r571A2UniformCurvatureEstimateClosed = false
 
