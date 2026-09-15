@@ -31,7 +31,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -48,10 +47,6 @@ import DASHI.Physics.YangMills.BalabanExponentialToDyadicShellCoarseningExact as
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
-
-------------------------------------------------------------------------
--- Concrete dyadic producer data.
-------------------------------------------------------------------------
 
 record DyadicLiteralTrajectoryCMP116Source
     {Measure TestObservable SpectralObservable Energy : Set}
@@ -100,7 +95,6 @@ record DyadicLiteralTrajectoryCMP116Source
 
     dyadicMajorant : Dyadic.SourceExponentialShellMajorant
 
-    -- Same-object shell weld only on the selected pair actually consumed.
     selectedSourceEnvelopeIsDyadicShell :
       ∀ cutoff observable time →
       let
@@ -142,10 +136,6 @@ record DyadicLiteralTrajectoryCMP116Source
 
 open DyadicLiteralTrajectoryCMP116Source public
 
-------------------------------------------------------------------------
--- Compiler-owned calibration inequality.
-------------------------------------------------------------------------
-
 dyadicSourceEnvelopeBelowSpectrumEnvelope :
   ∀ {Measure TestObservable SpectralObservable Energy}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
@@ -171,13 +161,14 @@ dyadicSourceEnvelopeBelowSpectrumEnvelope :
     (sourceDistance source leftJ rightJ)
   ≤ R281.clusteringEnvelope spectrumSource observable time
 dyadicSourceEnvelopeBelowSpectrumEnvelope
-    {tests = tests} {spectrumSource = spectrumSource} source cutoff observable time =
+    {base = base} {tests = tests} {spectrumSource = spectrumSource}
+    source cutoff observable time =
   let
     index = R281.indexFor spectrumSource observable time
     left = R278.left tests index
     right = R278.right tests index
-    leftJ = Cumulant.sourceDirectionOf (R318.meaning _ ) left
-    rightJ = Cumulant.sourceDirectionOf (R318.meaning _ ) right
+    leftJ = Cumulant.sourceDirectionOf (R318.meaning base) left
+    rightJ = Cumulant.sourceDirectionOf (R318.meaning base) right
     distance = sourceDistance source leftJ rightJ
 
     shellBound :
@@ -204,6 +195,16 @@ dyadicSourceEnvelopeBelowSpectrumEnvelope
       (Geo.halfPowerNonnegative time)
       (sourceAmplitudeBelowQuarter source)
 
+    rightAdjusted :
+      Geo.halfPower time * Dyadic.amplitude (dyadicMajorant source)
+      ≤ Shell.quarter * Geo.halfPower time
+    rightAdjusted = subst
+      (λ rightProduct →
+        Geo.halfPower time * Dyadic.amplitude (dyadicMajorant source)
+        ≤ rightProduct)
+      (ℚP.*-comm (Geo.halfPower time) Shell.quarter)
+      scaledAmplitude
+
     amplitudeBound :
       Dyadic.amplitude (dyadicMajorant source) * Geo.halfPower time
       ≤ Shell.quarter * Geo.halfPower time
@@ -212,25 +213,23 @@ dyadicSourceEnvelopeBelowSpectrumEnvelope
         leftProduct ≤ Shell.quarter * Geo.halfPower time)
       (ℚP.*-comm (Geo.halfPower time)
         (Dyadic.amplitude (dyadicMajorant source)))
-      (subst
-        (λ rightProduct →
-          Geo.halfPower time * Dyadic.amplitude (dyadicMajorant source)
-          ≤ rightProduct)
-        (ℚP.*-comm (Geo.halfPower time) Shell.quarter)
-        scaledAmplitude)
+      rightAdjusted
+
+    sourceEnvelopeToAmplitude :
+      sourceEnvelope source cutoff
+        (sourceRoot source cutoff leftJ rightJ) distance
+      ≤ Dyadic.amplitude (dyadicMajorant source) * Geo.halfPower time
+    sourceEnvelopeToAmplitude = subst
+      (λ lower →
+        lower ≤ Dyadic.amplitude (dyadicMajorant source) * Geo.halfPower time)
+      (sym (selectedSourceEnvelopeIsDyadicShell source cutoff observable time))
+      atTime
 
     sourceToQuarter :
       sourceEnvelope source cutoff
         (sourceRoot source cutoff leftJ rightJ) distance
       ≤ Shell.quarter * Geo.halfPower time
-    sourceToQuarter = ℚP.≤-trans
-      (subst
-        (λ selectedShell →
-          selectedShell
-          ≤ Dyadic.amplitude (dyadicMajorant source) * Geo.halfPower time)
-        (selectedSourceEnvelopeIsDyadicShell source cutoff observable time)
-        atTime)
-      amplitudeBound
+    sourceToQuarter = ℚP.≤-trans sourceEnvelopeToAmplitude amplitudeBound
   in
   subst
     (λ upper →
@@ -239,10 +238,6 @@ dyadicSourceEnvelopeBelowSpectrumEnvelope
       ≤ upper)
     (sym (spectrumEnvelopeIsQuarterHalfPower source observable time))
     sourceToQuarter
-
-------------------------------------------------------------------------
--- Compile the concrete producer into the generic R342 direct source ABI.
-------------------------------------------------------------------------
 
 asLiteralTrajectoryCMP116Source :
   ∀ {Measure TestObservable SpectralObservable Energy}
@@ -271,10 +266,6 @@ asLiteralTrajectoryCMP116Source source = record
   ; R342.LiteralTrajectoryCMP116Source.rationalUpperClosedUnderSelectedLimit =
       rationalUpperClosedUnderSelectedLimit source
   }
-
-------------------------------------------------------------------------
--- Boundary: this is a producer tactic, not a new canonical consumer.
-------------------------------------------------------------------------
 
 pointwiseEnvelopeComparisonPrimitive : Bool
 pointwiseEnvelopeComparisonPrimitive = false
