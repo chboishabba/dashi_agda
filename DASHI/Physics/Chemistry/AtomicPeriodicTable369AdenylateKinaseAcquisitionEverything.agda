@@ -35,6 +35,12 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFreeEnergyTe
 -- coordinates, never Kramers rates or experimental kinetics.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDTextAcquisitionExact
 
+-- Source-paid projection limitation: the one-dimensional dLN free-energy view
+-- shows a double well and ligand-dependent population shift but averages over
+-- theta1/theta2 states; the three-CV view is richer for the paper's pathway
+-- analysis. This is an AdK empirical premise, not the generic adequacy theorem.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOneDimensionalDLnProjectionAcquisitionExact
+
 -- Cell-level acquisition frontier: 8 named states x four numeric coordinates
 -- plus six route-edge Kramers-rate cells.  Each unpaid cell retains a locator,
 -- source role and next-payment obligation instead of disappearing into a global
