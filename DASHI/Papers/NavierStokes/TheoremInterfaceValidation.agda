@@ -4,15 +4,18 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Papers.NavierStokes.TheoremInterface as Paper
+import DASHI.Papers.NavierStokes.FourLaneProofProgramCoordinatorRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
--- the authoritative owners it imports. In particular, checking this file does
--- NOT prove R568, the periodic-B centered/Taylor realization, or the historical
--- P3 route: those required fields remain false while their analytic producers
--- are open.
+-- the authoritative owners it imports.  The coordinator regression is also
+-- imported so the current A/B/C/D routing state is checked by the same root.
+--
+-- IMPORTANT: checking this file does NOT promote branch-recovery/source status
+-- into an observed commit-specific Agda receipt, and it does not manufacture
+-- either the R104 physical phase family or the literal-R406 remainder weld.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
