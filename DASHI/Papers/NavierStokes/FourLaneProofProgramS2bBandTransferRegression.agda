@@ -17,15 +17,29 @@ s2b1aRadialOrderRecovered :
   Subject.s2b1aRadialOrderRecovered ≡ true
 s2b1aRadialOrderRecovered = Subject.s2b1aRadialOrderRecoveredIsTrue
 
+s2b1aPermutationRecovered :
+  Subject.s2b1aRadialPermutationRecovered ≡ true
+s2b1aPermutationRecovered = Subject.s2b1aRadialPermutationRecoveredIsTrue
+
 s2b1aWeightedProductionInvariantRecovered :
   Subject.s2b1aWeightedProductionInvariantRecovered ≡ true
 s2b1aWeightedProductionInvariantRecovered =
   Subject.s2b1aWeightedProductionInvariantRecoveredIsTrue
 
-s2b1bRadialSuffixPacketStillOpen :
-  Subject.s2b1bRadialSuffixPacketRecovered ≡ false
-s2b1bRadialSuffixPacketStillOpen =
-  Subject.s2b1bRadialSuffixPacketRecoveredIsFalse
+s2b1b0FullToNonzeroSelectorBridgeRecovered :
+  Subject.s2b1b0FullToNonzeroSelectorBridgeRecovered ≡ true
+s2b1b0FullToNonzeroSelectorBridgeRecovered =
+  Subject.s2b1b0FullToNonzeroSelectorBridgeRecoveredIsTrue
+
+s2b1b1UpperShellR98TransportRecovered :
+  Subject.s2b1b1UpperShellR98TransportRecovered ≡ true
+s2b1b1UpperShellR98TransportRecovered =
+  Subject.s2b1b1UpperShellR98TransportRecoveredIsTrue
+
+s2b1bStructuralSuffixStillOpen :
+  Subject.s2b1bStructuralSuffixRecovered ≡ false
+s2b1bStructuralSuffixStillOpen =
+  Subject.s2b1bStructuralSuffixRecoveredIsFalse
 
 s2QuantitativeEstimateStillOpen :
   Subject.s2QuantitativeEstimateRecovered ≡ false
