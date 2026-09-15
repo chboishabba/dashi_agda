@@ -59,12 +59,13 @@ unitSquare E = embeddingUnit E * embeddingUnit E
 -- Tiny Nat -> Q algebra for the exact S0 embedding.
 ------------------------------------------------------------------------
 
+oneNonnegative : 0ℚ ≤ 1ℚ
+oneNonnegative = ℚP.0≤∣p∣ 1ℚ
+
 natAsRationalNonnegative : ∀ n → 0ℚ ≤ S0.natAsRational n
 natAsRationalNonnegative zero = ℚP.≤-refl
 natAsRationalNonnegative (suc n) =
-  Rational.addNonnegative
-    (subst (λ value → 0ℚ ≤ value) (sym (ℚP.+-identityʳ 1ℚ)) ℚP.≤-refl)
-    (natAsRationalNonnegative n)
+  Rational.addNonnegative oneNonnegative (natAsRationalNonnegative n)
 
 natAsRationalAdd : ∀ m n →
   S0.natAsRational (m + n)
@@ -77,7 +78,7 @@ natAsRationalAdd (suc m) n
 natAsRationalMul : ∀ m n →
   S0.natAsRational (m * n)
   ≡ S0.natAsRational m * S0.natAsRational n
-natAsRationalMul zero n = sym (ℚP.zero* (S0.natAsRational n))
+natAsRationalMul zero n = sym (ℚP.*-zeroˡ (S0.natAsRational n))
 natAsRationalMul (suc m) n
   rewrite natAsRationalAdd n (m * n)
         | natAsRationalMul m n =
@@ -111,7 +112,7 @@ positiveNatEmbeddingScale :
   C3.embedInteger E (+ n)
   ≡ S0.natAsRational n * embeddingUnit E
 positiveNatEmbeddingScale E zero =
-  trans (C3.embedZero E) (sym (ℚP.zero* (embeddingUnit E)))
+  trans (C3.embedZero E) (sym (ℚP.*-zeroˡ (embeddingUnit E)))
 positiveNatEmbeddingScale E (suc n) =
   let
     step :
