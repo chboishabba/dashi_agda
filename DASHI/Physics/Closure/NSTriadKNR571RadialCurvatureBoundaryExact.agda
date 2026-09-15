@@ -11,15 +11,14 @@ module DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact where
 --      <= |y|^2 A2.
 --
 -- For the homochiral R571 multiplier m_sigma(k) = sigma |k| this is precisely
--- the centered second-difference / Euclidean-radius curvature estimate.  This
--- owner names that leaf without manufacturing a bound from shell labels or
--- from the older incidence-only separation route abandoned after PR #890.
+-- the centered second-difference / Euclidean-radius curvature estimate.
 --
--- Expected analytic realization on a scoped annulus/nonzero-radius carrier:
+-- The post-#935 square-gap owner now pays the exact denominator-cleared algebra:
+-- the centered defect times the two radial sums is a sum of two square-gap
+-- numerators.  Therefore the remaining A2 payment is no longer opaque Taylor
+-- theory.  It is the ordered/annular denominator control plus the geometric
+-- bound on that square-gap combination.
 --
---   ||x+y| - |x| - linear_x(y)| <= C |y|^2 / |x|
---
--- or an equivalent centered form sufficient for the preferred Taylor pair.
 -- Existing finite centered/six-three compilers remain downstream consumers.
 ------------------------------------------------------------------------
 
@@ -32,6 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact as R311
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact as Weld
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact as GateA
+import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as SquareGap
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceExact as Taylor
 
 record R571PreferredRadialCurvatureSample : Set₁ where
@@ -62,14 +62,22 @@ preferredPlusRemainderIsExactlyZero sample =
     (sign sample) (scalars sample)
     (center sample) (plus sample) (minus sample)
 
--- The record above is deliberately the smallest A2 producer socket.  It does
--- not say that shell comparability, incidence geometry, or a finite family by
--- itself supplies the curvature constant.
+-- The record above remains the least-privilege A2 producer socket.  The new
+-- square-gap theorem is an exact algebraic reduction of that socket, not a
+-- manufactured uniform bound.
 r571A2RadialCurvatureIsolated : Bool
 r571A2RadialCurvatureIsolated = true
 
 r571A2PlusRemainderEliminatedByPreferredLinearization : Bool
 r571A2PlusRemainderEliminatedByPreferredLinearization = true
+
+r571A2SquareGapNumeratorReductionClosed : Bool
+r571A2SquareGapNumeratorReductionClosed =
+  SquareGap.r571A2CenteredRadiusDefectSquareGapRationalized
+
+r571A2OrderedRadialDenominatorPaymentClosed : Bool
+r571A2OrderedRadialDenominatorPaymentClosed =
+  SquareGap.r571A2OrderedRadialDenominatorPaymentClosed
 
 r571A2UsesIncidenceOnlyCoercivity : Bool
 r571A2UsesIncidenceOnlyCoercivity = false
