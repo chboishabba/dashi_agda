@@ -32,3 +32,10 @@ import DASHI.Biology.Protein.ProteinSituatedHyperfabricExact
 import DASHI.Biology.Protein.TRPA1SituatedProteinWitnessExact
 import DASHI.Biology.Protein.AdenylateKinaseSituatedProteinWitnessExact
 import DASHI.Biology.Protein.ProteinSituatedHyperfabricValidation
+
+-- Parent-level temporal continuation: existing translation, conformation,
+-- protein-function, cell-state and open-metabolism owners are composed through
+-- explicit obligations.  No empirical paper is credited with the generic
+-- composition theorem, and identity metadata cannot pay any temporal leg.
+import DASHI.Biology.Protein.ProteinTemporalObligationChainExact
+import DASHI.Biology.Protein.ProteinTemporalObligationChainValidation
