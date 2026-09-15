@@ -1,0 +1,19 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOneDimensionalDLnProjectionAcquisitionValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOneDimensionalDLnProjectionAcquisitionExact as D1
+
+boundary : D1.AdKOneDimensionalDLnProjectionBoundary
+boundary = D1.canonicalAdKOneDimensionalDLnProjectionBoundary
+
+doubleWellPaid : Bool
+doubleWellPaid = D1.dLnOneDimensionalDoubleWellPaid boundary
+
+populationShiftPaid : Bool
+populationShiftPaid = D1.dLnLigandPopulationShiftPaid boundary
+
+fullStateAdequacy : Bool
+fullStateAdequacy = D1.dLnAloneDeterminesFullThreeCvState boundary
+
+articleEnvelopeRetained : Bool
+articleEnvelopeRetained = D1.articleAttributionEnvelopeRetained boundary
