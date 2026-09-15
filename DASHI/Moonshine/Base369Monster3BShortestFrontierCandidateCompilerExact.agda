@@ -44,6 +44,12 @@ record Shortest3BBase369CandidateSource (Monster K : Set) : Setω where
 
 open Shortest3BBase369CandidateSource public
 
+------------------------------------------------------------------------
+-- The one compiler below is sufficient: every X6/Fin90 coordinate, appraisal
+-- slice, translation theorem and modulation theorem exported by the existing
+-- capstone becomes ordinary compiler output from this smaller native input.
+------------------------------------------------------------------------
+
 compileShortestFrontierSource :
   ∀ {Monster K} →
   Shortest3BBase369CandidateSource Monster K →
@@ -54,26 +60,6 @@ compileShortestFrontierSource source = record
       Completion.compileBase369Recognition
         (base369RecognitionCandidate source)
   }
-
-------------------------------------------------------------------------
--- The existing capstone tail is now available from the smaller native input.
-------------------------------------------------------------------------
-
-compiledCentralZetaAmplitudeIs65610 :
-  ∀ {Monster K}
-    (source : Shortest3BBase369CandidateSource Monster K) →
-  _
-compiledCentralZetaAmplitudeIs65610 source =
-  Capstone.selectedCentralZetaAmplitudeIs65610
-    (compileShortestFrontierSource source)
-
-compiledKernelMultiplicityIsNinety :
-  ∀ {Monster K}
-    (source : Shortest3BBase369CandidateSource Monster K) →
-  _
-compiledKernelMultiplicityIsNinety source =
-  Capstone.selectedKernelMultiplicityIsNinety
-    (compileShortestFrontierSource source)
 
 ------------------------------------------------------------------------
 -- WrongType / attribution firewalls.
