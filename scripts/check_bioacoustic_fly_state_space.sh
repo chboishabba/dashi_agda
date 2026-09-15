@@ -47,6 +47,7 @@ bash scripts/check_bioacoustic_situated_performance_static.sh
 bash scripts/check_bioacoustic_multimodal_episode_static.sh
 bash scripts/check_bioacoustic_multimodal_lag_factorisation_static.sh
 bash scripts/check_magpie_vocal_language_atlas_static.sh
+bash scripts/check_animal_communication_interaction_static.sh
 bash scripts/check_gauthey_external_manifest_static.sh
 
 if command -v agda >/dev/null 2>&1; then
