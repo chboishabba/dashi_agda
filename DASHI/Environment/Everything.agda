@@ -26,8 +26,8 @@ import DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollination
 
 -- Water-hyacinth biocontrol as a concrete LES / experimental-coordinate /
 -- active proof-search consumer with canonical attribution, SI semantics,
--- actual-chemistry/369 indexing, local Springfield operational context and
--- collision-backed costed probes.
+-- actual-chemistry/369 indexing, contextual classification, local Springfield
+-- operational geometry and collision-backed costed probes.
 import DASHI.Environment.BiocontrolExternalityExperimentExact
 import DASHI.Environment.BiocontrolExternalityExperimentRegression
 import DASHI.Environment.BiocontrolExternalityExperimentSourceAtlasExact
@@ -42,8 +42,16 @@ import DASHI.Environment.BiocontrolSIQuantityExact
 import DASHI.Environment.BiocontrolSIQuantityRegression
 import DASHI.Environment.BiocontrolChemistry369IndexExact
 import DASHI.Environment.BiocontrolChemistry369IndexRegression
+import DASHI.Environment.BiocontrolChemistryObservationFibreExact
+import DASHI.Environment.BiocontrolChemistryObservationFibreRegression
+import DASHI.Environment.BiocontrolCalibratedEcologicalClassificationExact
+import DASHI.Environment.BiocontrolCalibratedEcologicalClassificationRegression
+import DASHI.Environment.BiocontrolChemistryActiveDiscriminatorExact
+import DASHI.Environment.BiocontrolChemistryActiveDiscriminatorRegression
 import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalExact
 import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalRegression
+import DASHI.Environment.SpringfieldLakesInterventionGeometryExact
+import DASHI.Environment.SpringfieldLakesInterventionGeometryRegression
 import DASHI.Environment.BiocontrolFirstImplementationExact
 import DASHI.Environment.BiocontrolFirstImplementationRegression
 
