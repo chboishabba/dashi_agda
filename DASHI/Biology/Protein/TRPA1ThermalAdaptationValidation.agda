@@ -39,3 +39,10 @@ import DASHI.Biology.Protein.ProteinSituatedHyperfabricValidation
 -- composition theorem, and identity metadata cannot pay any temporal leg.
 import DASHI.Biology.Protein.ProteinTemporalObligationChainExact
 import DASHI.Biology.Protein.ProteinTemporalObligationChainValidation
+
+-- Source-bounded payment profiles: Feng pays a residue/thermal-readout slice;
+-- the AdK structural lane pays a sequence/context/conformation slice.  Neither
+-- profile totalises translation, metabolism, complete function, or history, and
+-- payments do not transfer between protein lanes.
+import DASHI.Biology.Protein.ProteinTemporalObligationProfilesExact
+import DASHI.Biology.Protein.ProteinTemporalObligationProfilesValidation
