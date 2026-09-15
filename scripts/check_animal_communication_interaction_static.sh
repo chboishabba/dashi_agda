@@ -12,8 +12,9 @@ MAGPIE="DASHI/Biology/MagpieAnimalCommunicationAdapterExact.agda"
 VISUAL="DASHI/Biology/AnimalCommunicationMultiObserverVisualBridgeExact.agda"
 ACOUSTIC="DASHI/Biology/AnimalCommunicationPassiveAcousticLocalizationExact.agda"
 AVWELD="DASHI/Biology/AnimalCommunicationSharedWorldAVAssociationExact.agda"
+RUNTIME="DASHI/Biology/AnimalCommunicationRuntimeObservatoryBridgeExact.agda"
 
-for owner in "$SCENE" "$INTERACTION" "$LATENT" "$SEMANTIC" "$MAGPIE" "$VISUAL" "$ACOUSTIC" "$AVWELD"; do
+for owner in "$SCENE" "$INTERACTION" "$LATENT" "$SEMANTIC" "$MAGPIE" "$VISUAL" "$ACOUSTIC" "$AVWELD" "$RUNTIME"; do
   test -f "$owner"
 done
 
@@ -54,5 +55,13 @@ grep -q "spatialOverlapDoesNotCreateSameEmitter" "$AVWELD"
 grep -q "lowWorldWeldResidualDoesNotCreateSameAnimal" "$AVWELD"
 grep -q "avAssociationDoesNotCreateSemanticMeaning" "$AVWELD"
 grep -q "manyToManyAssociationRetained" "$AVWELD"
+
+grep -q "record AnimalCommunicationRuntimeObservatoryReceipt" "$RUNTIME"
+grep -q "animalexic-animal-communication-observatory-v1" "$RUNTIME"
+grep -q "scripts/passive_acoustic_localization.py" "$RUNTIME"
+grep -q "scripts/animal_communication_observatory.py" "$RUNTIME"
+grep -q "pythonRuntimeCandidateWritten" "$RUNTIME"
+grep -q "runtimePytestReceiptObserved" "$RUNTIME"
+grep -q "fieldValidationObserved" "$RUNTIME"
 
 echo "animal communication interaction static contract passed"
