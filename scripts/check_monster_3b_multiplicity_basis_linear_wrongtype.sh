@@ -41,6 +41,7 @@ bash "$ROOT/scripts/check_monster_3b_stone_von_neumann_witness_frontier_correcti
 bash "$ROOT/scripts/check_monster_3b_oeis_same_integer_role_collision.sh"
 bash "$ROOT/scripts/check_monster_3b_oeis_6b_power_normalization_bridge.sh"
 bash "$ROOT/scripts/check_monster_6b_weight_two_c6_fourier_oeis.sh"
+bash "$ROOT/scripts/check_monster_236b_mckay_thompson_normalization_invariant_oeis.sh"
 
 # Character determination now uses the direct scalar-product/Hom/Schur route
 # over the existing exact Q(zeta_3) field.  The scalar-extension checkers remain
