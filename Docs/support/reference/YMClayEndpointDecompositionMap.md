@@ -162,7 +162,7 @@ These are alternate dependency decompositions, not additional prize problems.
 | six-package / ten-physical-leaf compiler | physical-leaf refinement |
 | top-down five-theorem closure | stronger packaging of terminal obligations |
 | Round65 four-package compiler | conditional collapse if one unified continuum package is inhabited |
-| Round78 top-down three-analytic frontier | still stronger conditional compression after structural/source work |
+| Round78 top-down three-analytic frontier | explicit three-role compiler into `ClayYangMillsSolution` |
 | Round87–89 frozen A/B/C/D | four-family research scoreboard for remaining physical analytic work |
 
 These decompositions may not be pairwise equivalent without explicit compilers. A smaller count can be stronger because each item packages more mathematics.
@@ -203,7 +203,7 @@ six packages / ten or eleven leaves
 five theorems
 conditional four packages
 frozen A/B/C/D
-three-analytic conditional frontier
+three-analytic frontier
 ```
 
 These tell us how a complete solution could be assembled.
@@ -234,7 +234,7 @@ Most day-to-day implementation happens at Level III. Never promote a Level-III p
 |---|---|---|---|---|
 | A | same-history positive+tuned beta trajectory | CMP109/Ward + finite beta-history source route | five-channel, interval/certificate, source-native RG | counting one-sided smallness as positive AF slope |
 | B | differentiated locality + geometric shell-energy | CMP116 regular-E/marked-source localization | unified polymer norm, stress/Hilbert completion | confusing source transcription/compiler with physical shell estimate |
-| C | same-density cutoff-uniform clustering/gap | Heat/Doob + same-density influence | BBD after chart bridge; source-native polymer/cluster expansion; operator route | treating one convenient producer as definition of row C |
+| C | same-density cutoff-uniform clustering/gap | historical Heat/Doob frozen-row producer | BBD after chart bridge; source-native two-J CMP116 route; unified norm; operator route | treating frozen row C as the definition of the Clay mass-gap consumer |
 | D | same-family OPE/stress/AF identification | local-field/OPE recurrence + same-family stress route | generated-action/common-metric and OS/operator donors | splicing obligations from unrelated continuum families |
 
 ## 7. Current Clay-facing Pareto rule
@@ -242,7 +242,7 @@ Most day-to-day implementation happens at Level III. Never promote a Level-III p
 Before working a frozen row:
 
 ```text
-1. name the exact row consumer;
+1. name the exact endpoint or row consumer;
 2. enumerate all Level-III producers already in repo;
 3. quotient only by explicit same-object transports;
 4. compare live debt type:
@@ -268,18 +268,19 @@ The active CMP119 regular-E/localization route dominates whole-`A_k` semantics f
 
 Whole generated-action / first-variation provenance is the appropriate producer. The regular-E route is only a subobject here.
 
-### Row C clustering / mass gap
+### Frozen Row C versus the Clay mass-gap endpoint
 
-Do not schedule `prove Heat/Doob` by default. Compare at least:
+Do not schedule `prove Heat/Doob` by default. The frozen row-C record is Heat/Doob-shaped, but the literal Clay-facing mass-gap consumer is not.
+
+Round270 explicitly normalizes the endpoint to:
 
 ```text
-Heat/Doob same-density
-source-native polymer/cluster expansion
-unified polymer/Schwinger norm
-operator/spectral route
+CutoffUniformPhysicalMassGap Y
 ```
 
-against one normalized exact clustering/gap consumer.
+and classifies Heat/Doob/Langevin/Dyson and source-native cluster expansion as optional producer tactics. Direct same-family clustering and direct same-H spectral gap are canonical residuals.
+
+Therefore a direct clustering producer may dominate Heat/Doob for the Clay endpoint without literally inhabiting the historical frozen row-C record. In that situation the correct operation is endpoint rerouting / decomposition supersession, not falsely declaring the frozen row closed.
 
 ### Physical Hamiltonian
 
@@ -289,26 +290,171 @@ Compare the historical rooted-quotient/wavefunction/Hamiltonian construction aga
 
 Require a same-continuum-family weld. Common metric/stress export can donate structure, but cannot define upstream source semantics or splice a different continuum limit into the Clay endpoint.
 
-## 9. Attribution boundary
+## 9. Explicit top-down three-role Clay compiler
+
+`BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.agda` is currently the cleanest Level-II finalisation map because it contains an explicit theorem into `ClayYangMillsSolution`.
+
+On one literal Yang–Mills construction `Y`, its independent analytic roles are:
+
+```text
+T78-A = UVToContinuumYM Y
+T78-B = SameHamiltonianPhysicalMassGap Y
+T78-C = SameFamilyLocalFieldsOPEStressWard Y
+```
+
+plus structural endpoint data and a standard same-H Gaussian/nontriviality consequence.
+
+The compiler:
+
+```text
+literalClaySolutionFromTopDownThree
+```
+
+combines those objects into the literal Clay endpoint.
+
+This is a different use of A/B/C lettering from the frozen Round87 A/B/C/D scoreboard. To avoid ambiguity, call these `T78-A`, `T78-B`, and `T78-C` in future archaeology.
+
+## 10. T78-B mass-gap producer Pareto board
+
+Canonical endpoint:
+
+```text
+T78-B = CutoffUniformPhysicalMassGap Y
+```
+
+Round270 says the producer tactic is not part of that type.
+
+### Candidate 1 — Heat/Doob/Langevin/Dyson
+
+Useful structure:
+
+- same-density LSI;
+- curvature/Hessian debt;
+- covariant influence;
+- stochastic finite speed;
+- connected clustering.
+
+Status for T78-B: legitimate alternate producer, but stronger/more structured than the canonical residual.
+
+### Candidate 2 — direct source-native CMP116 two-J route
+
+R279 reduces the finite-scale analytic/source input to:
+
+```text
+literal physical J direction F
++ literal physical J direction G
++ same mixed log-generating response
++ CMP116 differentiated localization on the existing hessian/spatial shell
+```
+
+The one live finite-scale source theorem is:
+
+```text
+round279LiteralTwoJDirectionsToSpatialShellLevel
+```
+
+Everything from the shell estimate to geometric covariance decay is compiler-owned.
+
+R280 converts that source-native shell into the route-neutral:
+
+```text
+QuantitativeCorrelationDecayTrajectory
+```
+
+but retains one independent same-object representation debt:
+
+```text
+correlationSnapshotMeaning
+```
+
+meaning the continuum-capable correlation snapshot at each scale must evaluate to the same finite covariance proved in R279.
+
+Current Pareto classification:
+
+```text
+B1 = SOURCE_REALIZATION
+     two literal J insertions -> CMP116 spatial shell
+
+B2 = SAME_OBJECT_TRANSPORT
+     correlation snapshot evaluation = same finite covariance
+```
+
+This is presently leaner for the canonical clustering residual than the whole Heat/Doob stack.
+
+### Candidate 3 — unified polymer/Schwinger norm
+
+The stronger `PhysicalYMUnifiedPolymerNormProducer` mechanically projects to the same route-neutral `QuantitativeCorrelationDecayTrajectory`.
+
+However the normalized trajectory record deliberately removes large-field, derivative, composite and generic state-distance coordinates. Therefore the whole unified norm is an optional stronger tactic, attractive only if those extra coordinates simultaneously pay T78-A or T78-C cheaply.
+
+### Candidate 4 — direct spectral theorem
+
+A direct same-H spectral theorem can pay T78-B without a clustering proof. This remains a canonical alternative, but it must live on the reconstructed Hamiltonian of the same literal continuum family `Y`.
+
+## 11. Shared downstream path from a quantitative correlation trajectory
+
+R272 proves that any valid finite-scale producer may supply:
+
+```text
+QuantitativeCorrelationDecayTrajectory
+```
+
+A separate `SameCorrelationTrajectoryCompletion` transports the same correlation object to the continuum limit. The geometric upper bound is then closed under that convergence; no second clustering estimate is needed.
+
+R278 further minimizes the spatial-to-temporal/spectral bridge. The gap contradiction does not require an all-observable clustering upper. It only requires O(4)/same-object transport for observables associated with hypothetical positive subgap modes.
+
+Thus after B1/B2 the remaining B-specific obligations should be classified primarily as representation/same-object payments:
+
+```text
+B3 = shared continuum same-correlation completion
+     (normally shared with T78-A, not a second B-specific continuum theorem)
+
+B4 = SAME_OBJECT_TRANSPORT / O(4)
+     continuum spatial subgap-mode pair
+     = temporal spectral pair on the same reconstructed family
+
+B5 = physical spectral interpretation inputs
+     required by the clustering -> positive transfer-gap compiler
+```
+
+The abstract slow-vs-fast spectral contradiction and gap assembly are already compiler-owned once those physical meanings are supplied.
+
+## 12. Current T78-B Pareto verdict
+
+For the *canonical mass-gap consumer*, the current preferred investigative order is:
+
+```text
+1. direct CMP116 two-J source realization (B1)
+2. exact correlation snapshot same-object weld (B2)
+3. reuse/shared continuum completion from T78-A where possible (B3)
+4. least-privilege subgap-mode O(4)/spectral meaning weld (B4/B5)
+```
+
+Heat/Doob remains an important alternate and donor, especially where its LSI/semigroup structure pays other consumers. It should not receive primary budget merely because the frozen row-C record was written around it.
+
+## 13. Attribution boundary
 
 Primary Clay attribution remains Jaffe–Witten, `Quantum Yang-Mills Theory`, official Clay Mathematics Institute problem description; no DOI is assigned.
 
-The A/B/C/D lettering, ten/seven/four/three decompositions, and producer rankings are DASHI proof-engineering/search structures. Do not attribute those internal decompositions to Jaffe–Witten, Bałaban, or Clay.
+The A/B/C/D lettering, T78-A/B/C naming, ten/seven/four/three decompositions, and producer rankings are DASHI proof-engineering/search structures. Do not attribute those internal decompositions to Jaffe–Witten, Bałaban, or Clay.
 
 Bałaban CMP109/CMP116/CMP119/CMP122 sources remain source authorities for their bounded theorem roles; citation does not make a DASHI decomposition an authorial claim of those papers.
 
-## 10. Bottom line
+## 14. Bottom line
 
 ```text
 NS A/B/C/D:
   alternative equation/domain proof programmes.
 
-YM A/B/C/D:
+YM frozen A/B/C/D:
   four internal physical research rows for one Clay YM endpoint.
+
+YM T78-A/B/C:
+  three analytic endpoint roles with an explicit compiler into ClayYangMillsSolution.
 
 Clay YM itself:
   one complete solution contract, with multiple in-repo decompositions
   and multiple competing producer constructions under each decomposition.
 ```
 
-Use this file before interpreting any future statement such as `row C open`, `four YM leaves`, `seven programmes`, or `three analytic theorems`.
+Use this file before interpreting any future statement such as `row C open`, `four YM leaves`, `seven programmes`, `three analytic theorems`, or `mass gap route`.
