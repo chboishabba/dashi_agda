@@ -55,6 +55,15 @@ grep -q 'actualUniversalPoleQuotientPhaseRealizationInhabitedIsFalse' "$R1"
 grep -q 'checkedNearScalarBridgeInhabitedIsFalse' "$R1"
 grep -q 'statusReceiptPaysR1EqualityIsFalse' "$R1"
 
+# Pareto refinement: the two theorem-bearing R1 acquisition debts must be
+# independently inhabitable.  R1a attaches the final Agda near response to the
+# checked/imported scalar; R1b identifies that same scalar with the literal fold.
+# The existing bundled bridge must remain compiler output from those two parts.
+grep -q 'FinalNearCheckedScalarAttachment' "$R1"
+grep -q 'CheckedScalarLiteralFoldIdentification' "$R1"
+grep -q 'compileFinalNearCheckedScalarBridge' "$R1"
+grep -q 'compileFinalNearRepresentationEqualityFromSplit' "$R1"
+
 if command -v agda >/dev/null 2>&1; then
   echo "Agda: $(agda --version)"
   for f in "${FILES[@]}"; do
