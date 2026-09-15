@@ -1,0 +1,26 @@
+{
+  "schema": "dashi.agda-typecheck-resource-profiles.v1",
+  "description": "Operational resource classes for live Agda targets. These are scheduling hints only; they do not change liveness, proof status, or typecheck requirements.",
+  "classes": {
+    "ordinary": {
+      "description": "Default target class; fresh Agda process per target through the existing checker."
+    },
+    "long-cpu": {
+      "description": "Observed CPU-heavy target. Keep it live, but schedule it separately so it cannot dominate the ordinary frontier."
+    },
+    "memory-risk": {
+      "description": "Observed high-memory target. Keep it live, run with reduced Agda parallelism and the repository RSS guard."
+    }
+  },
+  "exact": {
+    "DASHI/Physics/YangMills/BalabanPath13DirectionalEnergyContractionExact.agda": {
+      "class": "long-cpu",
+      "reason": "Observed successful local kernel check is materially slower than ordinary targets."
+    },
+    "DASHI/Physics/YangMills/BalabanPath13FourAxisPhysicalPoincareExact.agda": {
+      "class": "long-cpu",
+      "reason": "Observed successful local kernel check is materially slower than ordinary targets."
+    }
+  },
+  "prefix": []
+}
