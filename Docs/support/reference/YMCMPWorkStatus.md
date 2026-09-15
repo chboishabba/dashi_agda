@@ -2,142 +2,196 @@
 
 Status: navigation / archaeology companion to `YMRHPRRoundArchaeologyAudit.md`. **Not theorem authority and not a Clay-completion claim.**
 
-Purpose: stop repeated proof-search from treating `CMP109`, `CMP116`, `CMP119`, or `CMP122` as one undifferentiated open task. The paper-level source authority, most carrier dictionaries, and downstream compiler plumbing have already been developed across many PRs. Future Pareto search should reopen a CMP-labelled object only when a current consumer exposes a specific unpaid same-object physical/source instantiation.
+Purpose: stop repeated proof-search from treating `CMP99`, `CMP102`, `CMP109`, `CMP116`, `CMP119`, or `CMP122` as one undifferentiated open task. The paper-level source authority, most carrier dictionaries, and downstream compiler plumbing have already been developed across many PRs. Future Pareto search should reopen a CMP-labelled object only when a current consumer exposes a specific unpaid same-object physical/source instantiation.
 
 ## Executive rule
 
 **DO NOT reopen “formalise CMP109/116/119/122” as a generic task.**
 
-Use this classification instead:
-
 | Source family | Repository status for current search | What is already owned | What may still be legitimately open |
 |---|---|---|---|
-| CMP109 | SOURCE/COMPILER LARGELY OWNED | regular small-field effective-action lane, differentiated coordinate machinery, Eq.(5.1)-facing continuation interfaces, downstream BC/response compilers | a *specific literal physical differential/source identification* required by a live consumer; not CMP109 as a whole |
-| CMP116 | SOURCE/COMPILER LARGELY OWNED | localization/cluster-expansion continuation, marked-source/localization machinery, common continuation interfaces, Row-C donor machinery | a *specific carrier realization, uniform analytic radius, marked-row or quantitative physical estimate* if still demanded by the current consumer |
-| CMP119 | SOURCE OBJECT/DICTIONARY LARGELY OWNED | complete-density dictionary, raw source state, finite-beta construction, `rho_k/U_k/E_k/R_k/B_k/A_k/vacuum` vocabulary, Eq.(2.23), function-valued regular `E_k`, selected regular-E projection, source-localization interface | exact same-object realization of a selected physical carrier if not already attached; do not reconstruct the complete-density theory merely because a later wrapper is conditional |
-| CMP122 | PUBLISHED THEOREM BOUNDARY OWNED | Theorem-1/UV-stability authority, finite-history coupling hypothesis, active-scale source theorem carrier, raw-CMP119 active specialization | theorem-bearing exact instantiation on a selected source family if a current consumer lacks it; continuum/OS/mass-gap consequences remain separate and are **not** supplied by CMP122 |
+| CMP99 | SOURCE PROPAGATOR AUTHORITY OWNED | regular-background Green/gradient bounds, analytic background dependence, marked domain-sequence propagator comparison / discrepancy-decay source boundary | exact attachment of the published marked propagator-difference theorem to the selected `H(s(Y0))` carrier |
+| CMP102 | SOURCE VARIATIONAL/BACKGROUND AUTHORITY OWNED | background criticality/minimization/uniqueness modulo gauge, analyticity/locality/derivative locality, common source radius; source contraction/locality proof shape | exact `C` identification only if R367 is used as the cross-parameter sensitivity producer |
+| CMP109 | SOURCE/COMPILER LARGELY OWNED | regular small-field effective-action lane, differentiated coordinate machinery, Eq.(5.1)-facing continuation interfaces, downstream BC/response compilers | a specific literal physical differential/source identification demanded by a live consumer |
+| CMP116 | SOURCE/COMPILER LARGELY OWNED | localization/cluster-expansion continuation, marked-source/localization machinery, literal substituted-background equation, fixed-parameter contraction-ball construction, common continuation interfaces | selected same-object propagator/operation attachment, one-sided cross-membership, cross-parameter defect, or other literal quantitative estimate demanded by the current consumer |
+| CMP119 | SOURCE OBJECT/DICTIONARY LARGELY OWNED | complete-density dictionary, finite-beta construction, raw source state, function-valued regular `E_k`, selected regular-E projection, source-localization interface | exact selected physical realization only when still demanded downstream |
+| CMP122 | PUBLISHED THEOREM BOUNDARY OWNED | Theorem-1/UV-stability authority, finite-history coupling hypothesis, active-scale source theorem carrier | theorem-bearing exact instantiation on selected source family; continuum/OS/mass-gap consequences remain separate |
 
-## PR chronology that established this
+## Current live sensitivity recut: R365--R370
 
-### #543 — source-faithful complete-density reuse
-
-`YM Gate I + source-faithful complete-density RG reuse`
-
-This is the major route correction from “rebuild RG1a/RG1b” to “reuse Bałaban's published complete-density theorem”. It introduced/used the CMP119/CMP122 -> existing `CombinedRGAdmissibility` path and explicitly stated that the frontier is literal source-carrier identification rather than another generic cluster/RG theorem.
-
-### #568 — published four-dimensional UV boundary
-
-`YM Round58: canonical G2, compact-group one-loop, and published 4D UV boundary`
-
-This tranche separated:
-
-- raw CMP119 scale-indexed objects and Eq.(2.23);
-- finite-beta-history construction;
-- CMP122 Theorem-1 active-scale specialization;
-- published four-dimensional finite-cutoff UV stability;
-- later continuum Schwinger/OS/nontriviality/clustering obligations.
-
-Important conclusion: **published CMP122 UV stability is not a missing DASHI theorem and is not the Clay mass-gap theorem.**
-
-### #821 — broad raw-source wall (historical, later superseded as preferred prerequisite)
-
-`YM: isolate literal CMP119 raw-source family as first preferred source wall`
-
-This correctly enforced same-object source discipline and separated complete action `A_k` from the regular small-field `E_k`, but its broad “raw objects first” route was later made unnecessarily strong for the BC1 consumer.
-
-### #846 — consumer-indexed regular-E recut
-
-`YM: recut preferred source frontier to regular-E and marked-history seams`
-
-This explicitly superseded full CMP119 raw-state reconstruction as the preferred BC1 prerequisite. It records that:
-
-- BC1 only needs the source regular-E coordinate `(k,rho_k) -> E_k`;
-- stronger full CMP119 residual-family construction is only an alternate producer;
-- CMP109/CMP116 continuation is compiler-owned once the regular-E realization is supplied;
-- BC1 potential same-objectness is compiler-owned once that realization is supplied.
-
-## Internal-round compression after #846
-
-The roundup's internal-round crosswalk should be read as a sequence of **reductions**, not as a list of new CMP theorems that still need proving:
+CMP116 Part II, Sect. 1 uses
 
 ```text
-R214   source-fixed rho_k -> A_k semantics (important for generated-action/unification provenance)
-R215   BC1 route reversal: use literal regular E_k, not whole A_k
-R216-217 broad raw-source split (historical preferred wall)
-R218   published source flow
-R219   beta-driven complete-density/residual-family construction
-R221   regular-E source projection
-R225   preferred regular-E route; full residual family demoted to stronger alternate producer
-R234   source-fixed regular-E semantics
-R235   localization-radius split
-R236   recomputed source frontier
-R237   selected-scale semantics
-R240   consumer priority router
-R241   regular-E projection becomes compiler consequence
-R242   `RegularTerm = Background -> Real` at source construction
-R243   extraction/evaluation become projection/application
-R244   published CMP119 localization authority separated from repository carrier realization
-R245   function-valued E + localization -> CMP109/116 continuation compiler
-R246   consumer-indexed active-scale Section-2 regular-E form
-R247   active continuation / focused validation; full quantitative bounds no longer primitive for BC1 continuation
+D(A') = C(A' - H D(A')).
 ```
 
-The direction of travel is therefore:
+The current direct sensitivity route separates four logically different layers: fixed-parameter contraction, cross-parameter map defect, affine/operator algebra, and source-domain overlap.
+
+### R365 — fixed-point displacement is compiler-owned
+
+`BalabanCMP116SubstitutionContractionRound365Exact.agda` proves
 
 ```text
-broad CMP reconstruction
-  -> source-native complete density
-  -> selected regular E
-  -> function-valued regular E
-  -> active-scale regular-E/localization form
-  -> compiler-owned CMP109/116 -> BC1
+d(x_L,x_R) <= q d(x_L,x_R) + delta
 ```
 
-not the reverse.
+from contraction of the left map and one cross-parameter defect at the common candidate. Scalar absorption then bounds the displacement by an amplified `delta`.
 
-## What “conditional” means here
+### R366 — factor the cross-parameter defect
 
-A `ProofLevel = conditional` on a late CMP wrapper does **not** imply “CMP theorem missing”. Before doing new CMP work, classify the condition:
+`BalabanCMP116OneStepMapDefectRound366Exact.agda` factors
 
-1. **published source theorem authority missing?** Usually no for CMP109/116/119/122 core source statements already imported.
-2. **generic compiler missing?** Frequently already closed in later rounds.
-3. **same-object carrier realization missing?** Potentially yes.
-4. **literal physical estimate missing?** Potentially yes.
-5. **continuum/OS/mass-gap consequence missing?** These are separate programmes and must not be charged to CMP122.
+```text
+||F_L(X)-F_R(X)||
+<= L_C ||(A'-H_L X)-(A'-H_R X)||
+<= L_C ||(H_L-H_R)X||
+<= L_C M_H ||X||
+<= L_C M_H R.
+```
 
-Only (3) or (4), when demanded by the current consumer, should normally survive the Pareto filter.
+CMP99 belongs at the `M_H` propagator-difference layer, not as the complete fixed-point displacement theorem.
+
+### R367 — optional proof-bearing cross-parameter C producer
+
+`BalabanCMP102CriticalMapLipschitzRound367Exact.agda` turns the C stage into a proof-bearing source theorem
+
+```text
+d(C x,C y) <= L_C d(x,y).
+```
+
+It is a valid producer if the exact C attachment is supplied. Analyticity/locality metadata alone do not pay it.
+
+### R368 — direct fixed-parameter CMP116 composite contraction
+
+`BalabanCMP116DirectDecoupledContractionRound368Exact.agda` imports the source theorem directly on
+
+```text
+F_s(X) = C(A' - H(s)X).
+```
+
+Each parameter has a source ball on which the literal composite map preserves the ball and contracts with factor `<1`. Therefore a CMP102→CMP116 C identity is **not mandatory merely to obtain the same-parameter contraction factor**.
+
+R368 does not pay cross-parameter sensitivity.
+
+### R369 — affine cross-parameter argument difference is generic algebra
+
+`BalabanCMP116AffineArgumentDifferenceRound369Exact.agda` derives
+
+```text
+(A' - H_L X) - (A' - H_R X)
+  = (H_R - H_L) X
+```
+
+from abelian difference laws plus pointwise operator subtraction. The scalar argument-defect inequality follows by equality transport/reflexivity.
+
+Thus only the actual CMP116 operation same-object attachment remains; no new analytic affine inequality is scheduled.
+
+### R370 — common-ball equality is stronger than the perturbation proof needs
+
+`BalabanCMP116OneSidedBallPerturbationRound370Exact.agda` compares R365 with the direct R368 source balls.
+
+R365 contracts only the left map between the two fixed points. Hence it needs
+
+```text
+leftPoint  ∈ sourceBall(leftParameter)
+rightPoint ∈ sourceBall(leftParameter)
+```
+
+plus each point's own fixed-point equation and the cross-parameter map defect. It does **not** require
+
+```text
+sourceBall(leftParameter) = sourceBall(rightParameter).
+```
+
+R370 compiles the direct R368 source maps/balls into R365 using exactly this one-sided cross-membership interface.
+
+Therefore the old “common ball equality” scheduling item is Pareto-dominated. The remaining source/domain payment is the concrete right-fixed-point-in-left-source-ball statement (or any stronger source theorem that implies it).
+
+### Current live payments after R370
+
+```text
+H_attach^99/116:
+  CMP99 marked H_L-H_R authority == selected CMP116 H(s(Y0)) difference;
+
+cross-parameter C sensitivity:
+  R367 + exact C attachment is the current proof-bearing producer,
+  unless a more direct CMP116 composite-map parameter theorem is recovered;
+
+operation attachment:
+  actual CMP116 subtraction/operator difference == R369 affine carrier;
+
+one-sided source-ball cross-membership:
+  right fixed point lies in the left source contraction ball.
+```
+
+Fixed-parameter contraction, affine cancellation, and equality of the two balls are no longer primitive debts.
+
+The next genuinely local analytic branch remains `H_local`:
+
+```text
+||D^2 E(H_Omega) - D^2 E(H_Omega')|| <= L_source d_sub,
+```
+
+unless source-native derivative archaeology reduces it too.
+
+## Broader CMP chronology / lane separation
+
+- **#543**: source-faithful complete-density reuse; stop rebuilding generic RG.
+- **#568 / Round58**: raw CMP119 state + finite-beta source history + CMP122 active Theorem-1 / published UV boundary.
+- **#821**: broad raw-source wall; historically important but later too strong for BC1.
+- **#846 onward / R215→R250**: consumer-indexed regular-E route; function-valued `E_k`, localization, active source form, R248 identity decoder and R250 preferred concrete continuation.
+
+Current BC1 source lane and current mass-gap sensitivity lane remain distinct:
+
+```text
+BC1: P0 CMP122 witness + P1 D² + P2 CMP109 Eq.(5.1) + P3 normalized CMP116 demands.
+
+mass-gap H_sub: R368 fixed contraction + R369 affine algebra + R370 one-sided ball
+                + true cross-parameter/H attachments.
+```
+
+Do not merge these queues merely because both mention CMP116.
 
 ## Current do-not-reopen list
 
-Unless a current exact consumer demonstrates otherwise, do not spend proof-search budget on:
+Do not spend proof-search budget on:
 
-- re-proving CMP119 complete-density RG theory generically;
-- re-proving CMP122 four-dimensional UV stability generically;
-- re-deriving the finite-beta running-coupling identity already made definitional in the source-native construction;
-- rebuilding an abstract `RegularTerm` semantics instead of using the function-valued `E_k` representation;
-- rebuilding CMP109/CMP116 continuation plumbing already compiled from regular-E/localization;
-- treating the complete action `A_k` as the object differentiated by CMP109 Eq.(5.1);
-- treating CMP122 UV stability as continuum Schwinger construction, OS reconstruction, nontriviality, clustering, or physical mass gap.
+- generic re-proofs of CMP99/CMP102/CMP109/CMP116/CMP119/CMP122;
+- full two-fixed-point `H_subScale` after R365;
+- CMP99 marked comparison as direct fixed-point displacement;
+- source analyticity as a numerical C-Lipschitz proof;
+- a cross-paper C identity merely to recover fixed-parameter contraction after R368;
+- the affine R366 inequality as new physics after R369;
+- equality of the two source contraction balls after R370;
+- generic operator algebra detached from the actual same-object operation attachment;
+- abstract `RegularTerm` reconstruction instead of function-valued `E_k`;
+- complete `A_k` as the object differentiated by CMP109 Eq.(5.1);
+- CMP122 UV stability as continuum Schwinger construction, OS reconstruction, clustering or physical mass gap.
 
 ## Live-search rule
 
-When YM Pareto search lands on a CMP-labelled conditional, first search this status file and the roundup. Then ask:
+When a CMP-labelled conditional appears, ask:
 
 ```text
-Which exact current consumer?
-Which exact selected source object?
-Which same-object equality/physical estimate is absent?
-Was that equality already paid under an earlier/later round alias?
+Which exact consumer?
+Which selected source object?
+Which same-object equality or physical estimate is absent?
+Is a stronger condition being requested than the compiler actually consumes?
+Was the apparent theorem already reduced under another round alias?
 ```
-
-Only search the wider PR history if the roundup/status files do not answer those questions.
 
 ## Primary source coordinates retained
 
+- CMP99 — Bałaban, *Propagators for Lattice Gauge Theories in a Background Field*, DOI `10.1007/BF01240355`.
+- CMP102 — Bałaban, *The Variational Problem and Background Fields in Renormalization Group Method for Lattice Gauge Theories*, DOI `10.1007/BF01229381`.
 - CMP109 — Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories I*, DOI `10.1007/BF01215223`.
 - CMP116 — Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, DOI `10.1007/BF01239022`.
 - CMP119 — Bałaban, *Convergent Renormalization Expansions for Lattice Gauge Theories*, DOI `10.1007/BF01217741`.
-- CMP122 I — Bałaban, *Large Field Renormalization I: The Basic Step of the R-Operation*, DOI `10.1007/BF01257412`.
-- CMP122 II — Bałaban, *Large Field Renormalization II: Localization, Exponentiation, and Bounds for the R Operation*, DOI `10.1007/BF01238433`.
+- CMP122 I — DOI `10.1007/BF01257412`.
+- CMP122 II — DOI `10.1007/BF01238433`.
 
 Person QID / exact paper-specific Dewey remain unresolved unless an authoritative identity/catalogue source is acquired. Do not guess them.
+
+## Validation boundary
+
+This is navigation/status only. R365--R370 are source-written reductions; repository `machineChecked` / `standardImported` labels are not fresh exact-head kernel receipts. Source text does not create same-object Agda inhabitants. No continuum YM construction, physical mass-gap theorem, Clay promotion, or RH proof is claimed here.
