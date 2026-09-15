@@ -1,0 +1,38 @@
+module DASHI.Environment.BiocontrolChemistryParetoExperimentSchedulerRegression where
+
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
+import DASHI.Core.DiscriminatorSynthesisExact as Synthesis
+import DASHI.Environment.BiocontrolChemistryObserverParetoExact as Pareto
+import DASHI.Environment.BiocontrolChemistryParetoExperimentSchedulerExact as Scheduler
+
+speciesObserverSelection :
+  MDL.ParetoAdmissible Pareto.speciesCostHyperfabric Pareto.speciesSensitive
+speciesObserverSelection = Scheduler.speciesObserverParetoReceipt
+
+speciesMinimalAssay :
+  Synthesis.MinimalDiscriminator
+    Scheduler.speciesExistingObserver
+    Scheduler.SpeciesDeclaredBundle
+speciesMinimalAssay = Scheduler.speciesMinimalDiscriminator
+
+contextualObserverSelection :
+  MDL.ParetoAdmissible
+    Pareto.contextualCostHyperfabric Pareto.contextualChemistry
+contextualObserverSelection = Scheduler.contextualObserverParetoReceipt
+
+contextualMinimalAssay :
+  Synthesis.MinimalDiscriminator
+    Scheduler.contextExistingObserver
+    Scheduler.ContextDeclaredBundle
+contextualMinimalAssay = Scheduler.contextMinimalDiscriminator
+
+speciesRealisedFibre :
+  Scheduler.speciesObservedFibre Scheduler.speciesNitrateWorld
+speciesRealisedFibre = Scheduler.speciesNitrateWorldRemainsLive
+
+contextRealisedFibre :
+  Scheduler.contextObservedFibre Scheduler.contextDryWorld
+contextRealisedFibre = Scheduler.contextDryWorldRemainsLive
+
+attributionBoundary : Scheduler.BiocontrolChemistryParetoSchedulerBoundary
+attributionBoundary = Scheduler.canonicalBiocontrolChemistryParetoSchedulerBoundary
