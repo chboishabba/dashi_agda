@@ -2,12 +2,14 @@ module DASHI.Finance.TrumpFamilyTradeGameTheoryBridgeExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 import DASHI.Finance.TrumpFamilyTradePNFBridgeExact as PNF
 import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTrade
+import DASHI.GameTheory.StrategicInteractionCoreExact as Game
 import DASHI.GameTheory.SourceConditionedMarketInformationExact as Information
 import DASHI.GameTheory.RepeatedStrategicLearningMemoryBridgeExact as Repeated
 
@@ -108,7 +110,7 @@ canonicalEvidenceTradeBoundary =
 ------------------------------------------------------------------------
 
 record SourceBackedRepeatedHistory
-    {G : DASHI.GameTheory.StrategicInteractionCoreExact.StrategicGame}
+    {G : Game.StrategicGame}
     (R : Repeated.RepeatedStrategicLearningProcess G) : Set₁ where
   constructor source-backed-repeated-history
   field
