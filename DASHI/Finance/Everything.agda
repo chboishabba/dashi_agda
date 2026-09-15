@@ -13,10 +13,13 @@ import DASHI.Finance.TradeRealizationSharpeAuthorityExact
 -- from PNF, game-theoretic interpretation and dashiTRADE execution authority.
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact
 import DASHI.Finance.TrumpFamilyTradePrimarySourceExtensionExact
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Exact
 import DASHI.Finance.TrumpFamilyExternalCounterpartyEvidenceExact
+import DASHI.Finance.TrumpFamilyExternalCounterpartyPrimaryExact
 import DASHI.Finance.TrumpFamilyTradePNFBridgeExact
 import DASHI.Finance.TrumpFamilyTradeGameTheoryBridgeExact
 import DASHI.Finance.TrumpFamilyTradeAcquisitionFrontierExact
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressExact
 import DASHI.Finance.TrumpFamilyTradeEvidenceValidation
 
 -- Canonical trading-control semantics. Earlier BAN/action experiments remain
