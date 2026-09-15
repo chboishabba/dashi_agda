@@ -56,6 +56,19 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaCrystal
 -- same-sequence states and near-gamma_L does not create exact gamma_L identity.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaLCrystalReferenceAcquisitionExact
 
+-- Machine-readable ligand-bound geometry/path constraints: most ligand-bound
+-- crystal structures occupy a closed cluster near theta1~65/theta2~28, the
+-- theta1~90/theta2~30 NMP-first region is strongly unfavourable, and the source
+-- pays alpha_L->beta_L->gamma_L->delta_L->zeta_L plus delta_L's semi-open NMP
+-- role.  These are region/role constraints, not exact gamma_L or named dLN cells.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandBoundGeometryTextAcquisitionExact
+
+-- Ligand-bound partial calibration table: combines the exact Figure-6 state
+-- energies and directed Kramers labels with the text-paid geometry/route roles
+-- and separately attributed 1DVR/2C9Y gamma_L-near references.  Composition is
+-- DASHI synthesis; missing named intermediate theta/dLN cells remain missing.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandBoundPartialCalibrationExact
+
 -- Source-paid projection limitation: the one-dimensional dLN free-energy view
 -- shows a double well and ligand-dependent population shift but averages over
 -- theta1/theta2 states; the three-CV view is richer for the paper's pathway
