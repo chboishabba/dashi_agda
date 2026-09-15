@@ -2,7 +2,7 @@
 
 Status: authoritative live routing/control document; non-promoting.
 
-Timestamped current-state update: `2026-09-16 08:29 AEST (UTC+10)`.
+Timestamped current-state update: `2026-09-16 09:25 AEST (UTC+10)`.
 
 This is the default answer source for current NS proof-search state. Historical
 roadmaps and the canonical archaeology ledger remain append-only provenance and
@@ -26,6 +26,7 @@ Boolean status field cannot manufacture a kernel receipt or a missing theorem.
 FourLaneProofProgramExact / this document
   -> merged #937   canonical A/B/C/D baseline + S0/S1/S2a state
   -> draft #948    S2b finite/same-object successor + physical layer-cake weld
+  -> draft #957    S2b2 complement/no-go/collar-remote analytic successor
   -> #945          Gate-A cross-prover receipt/status surface
   -> #947          local Hermitian G0' vector->scalar/R27 splice
   -> #890          retained comparable/P3 route + negative controls
@@ -67,7 +68,8 @@ completed B theorem spine
   -> explicit R^3 transport obligations
 ```
 
-No implicit B -> A promotion.
+No implicit B -> A promotion. Current implementation work stays on B; A changes
+only when a completed B theorem exposes a named portability obligation.
 
 ## B — periodic unforced — ACTIVE
 
@@ -108,7 +110,11 @@ S2b1b2a selector -> canonical sorted suffix -> R98 flux      DONE source
 S2b1b2b0 local strict-jump R104 tail -> canonical suffix     DONE source
 S2b1b2b1 global recursive-prefix physical packet weld        DONE source
 S2b1b full R104 layer-cake -> physical upper-shell flux      DONE source
-S2b2 quantitative signed packet-flux / R406 estimate         OPEN PRIMARY
+S2b2a upper/lower packet complement antisymmetry             DONE source
+S2b2 no-go adjacent shellIndex -> Euclidean spectral gap     DONE source negative control
+S2b2b exact upper-shell = collar + remote flux split         DONE source
+S2b2c remote spectrally-separated quantitative payment       OPEN
+S2b2d exact-shell collar signed local payment                OPEN PRIMARY
 S3 cutoff-uniform initial critical ceiling                   OPEN
 S4 positive retained viscosity                               OPEN
 ```
@@ -189,7 +195,7 @@ Sorting changes only order, never the physical finite support.
 
 ### S2b1b — DONE SOURCE: structural suffixes are physical R98 packets
 
-The representation path is now complete:
+The representation path is complete:
 
 ```text
 S2b1b0  reject-zero full cutoff -> nonzero cutoff                 DONE
@@ -212,14 +218,13 @@ where every genuine shell jump uses the corresponding R98 normalized physical
 boundary flux. Equal-shell interfaces are inactive because their dyadic radial
 increment is zero.
 
-This is still representation/same-object mathematics only. It introduces no
+This is representation/same-object mathematics only. It introduces no
 absolute-value majorant, Schur bound, quantitative flux estimate, or R406
 estimate.
 
-### S2b2 — PRIMARY nonlinear theorem
+### S2b2 — PRIMARY nonlinear theorem, now collar/remote factored
 
-The first unpaid PDE theorem is now the quantitative bound on the already-literal
-physical packet layer-cake. In integrated R104/R414 form:
+The integrated target remains
 
 ```text
 N_N(T)
@@ -227,15 +232,65 @@ N_N(T)
      + literalR406RemainderIntegral(N,T).
 ```
 
+#957 first paid the orientation bridge on the SAME normalized R98 carrier:
+
+```text
+F(selected) + F(complement selected) = 0
+F_lower(j) = -F_upper(j).
+```
+
+It then recorded an explicit append-only no-go against the naive spectral-gap
+route. At threshold 2:
+
+```text
+low  = (2,2,2): shellIndex = 1, |low|_2^2 = 12
+high = (3,0,0): shellIndex = 2, |high|_2^2 = 9.
+```
+
+Therefore adjacent `shellIndex` separation does NOT imply the positive
+Euclidean squared-frequency gap required by the existing R98 spectral
+cross-dissipation coercivity. Do not reopen that route without a stronger packet
+split.
+
+`NSTriadKNUpperShellCollarRemoteSplitExact` now proves, still on the SAME R98
+physical boundary-flux carrier,
+
+```text
+F_{>=j} = F_{=j} + F_{>=j+1}.
+```
+
+This is source-written finite decomposition only; it does not pay either
+quantitative term.
+
+The selected analytic frontier is therefore:
+
+```text
+remote piece F_{>=j+1}
+  -> prove explicit dyadic/Euclidean separation with R518 geometry
+  -> apply/recalibrate R98/R99 coercive mechanism only where its hypotheses hold
+
+exact-shell collar F_{=j}
+  -> preserve signed local physical components
+  -> prove the genuinely local cancellation/payment without Schur/Wiener flattening
+
+remote + collar
+  -> reconstruct the integrated S2b2 R104/R414 inequality.
+```
+
+The remote route is promising because peeling the exact-shell collar creates a
+factor-four dyadic jump against the dimension-three Euclidean upper constant;
+that claim still requires its exact same-object finite proof before any
+coercivity status is promoted. The collar is currently the likely hard local
+analytic leaf.
+
 Equivalent producer formulations are admissible only if they construct this
 bound on the SAME literal S0/S2 physical production and R406 remainder. A theorem
 merely accepting `signedProductionEstimateByLiteralRemainder`,
 `globalDangerPaidByEndpoint`, an R303/R353 payment, R568 budget, or equivalent as
 a field is a compiler, not this producer.
 
-Targeted archaeology/analysis may now search only producers of the quantitative
-weighted upper-shell packet-flux estimate. All representation searches S2a ->
-S2b1b are closed on the preferred route.
+No more S2a/S2b1 representation archaeology. Search only named remote/collar
+quantitative producers or dependencies exposed by those exact theorems.
 
 ## S3 / S4
 
@@ -243,7 +298,8 @@ S3: S0 supplies the literal initial functional; remaining payment is one
 cutoff-uniform initial-critical ceiling.
 
 S4: calibrate the absorbed coefficient against the exact S0/S1 convention
-`viscousCoefficient = 2*nu` and prove `0 < 2*nu - a`.
+`viscousCoefficient = 2*nu` and prove `0 < 2*nu - a`. Because `a` is produced by
+S2b2, S4 must not be promoted ahead of S2b2 except conditionally.
 
 ## Historical/provenance routes — retain append-only
 
@@ -254,44 +310,44 @@ R303/R353/R372 signed-resolvent route          serious precursor; production ide
 #890 incidence/P3 work                         retained theorem-bearing comparator
 R576/R577 positive Gram/Schur route            fallbackProducerRoute
 constant shell-localization payment            refuted as sufficient by R214
+adjacent max-shell -> Euclidean gap             refuted by #957 explicit lattice witness
 modern signed/nested commutator route           selected B_comm producer family
 ```
 
 R303/R353/R372 preserved the signed architecture and isolated essentially the
 same production-identification problem, but left it as an input. S2a through
-S2b1b now pay the modern representation/same-object chain directly; only the
-quantitative packet-flux/R406 estimate remains as the main B nonlinear leaf.
+S2b1b now pay the modern representation/same-object chain directly; #957 then
+removes the false adjacent-shell spectral-gap shortcut and isolates the remote
+and exact-shell collar quantitative leaves.
 
 ## C / D
 
-C: released forced whole-space theorem -> verification/provenance/same-object
-integration. No current discovery queue.
-
-D: released forced periodic theorem -> verification/integration + typed donor
-mining only where hypotheses survive the forced/unforced distinction. Never
-infer D -> B merely from shared periodic geometry.
+C/D remain integration lanes only. Their activity does not change A/B routing.
+Current implementation effort is intentionally focused on A/B, with A deferred
+and B active.
 
 ## Current Pareto allocation
 
 ```text
 P0  keep this tracker + canonical/thin-successor status synchronized
-P1  B_phase S2b2: quantitative signed physical packet-flux / R406 estimate
-P2  S1b infrastructure: concrete scalar FTC / integrateTo linearity
-P3  B_phase S3/S4: initial ceiling + retained-viscosity calibration
-P4  B_comm reconstruction/certification
-P5  certify recovered S0/S1/S2a/S2b representation surfaces
-P6  C/D BIDI integration + typed donor mining
+P1  B_phase S2b2d: exact-shell collar signed local payment
+P2  B_phase S2b2c: remote separated packet coercive payment
+P3  S1b infrastructure: concrete scalar FTC / integrateTo linearity
+P4  B_phase S3/S4: initial ceiling + retained-viscosity calibration
+P5  B_comm reconstruction/certification
+P6  certify recovered S0/S1/S2 representation and #957 split surfaces
 P7  A deferred until explicit B portability audit
 ```
 
 Operating rule:
 
 ```text
+focus A/B only;
+A remains deferred unless completed B exposes a named portability seam;
 no broad NS archaeology;
-start here;
-search only quantitative S2b2 producers for the first unpaid coordinate;
-use the archaeology ledger for provenance/donors only;
-new mathematics only after that targeted producer search bottoms out.
+start at the collar/remote S2b2 split;
+preserve signed/local components before norms;
+new mathematics only for the named unpaid quantitative leaves.
 ```
 
 ## Certification boundary
@@ -303,8 +359,7 @@ source-written theorem
   != observed successful commit-specific Agda receipt.
 ```
 
-#937 is the merged coordinator baseline. Draft #948 is the live S2b successor
-and remains source-written until an exact-head kernel/workflow receipt is
-actually observed.
+#937 is the merged coordinator baseline. Draft #948 owns the completed S2b
+representation tranche. Draft #957 is the live S2b2 analytic successor.
 
 No unconditional Clay Navier–Stokes promotion is made here.
