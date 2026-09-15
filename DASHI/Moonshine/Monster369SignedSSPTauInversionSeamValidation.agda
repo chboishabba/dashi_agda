@@ -17,10 +17,16 @@ boundaryRegression :
   × P.Monster369SignedSSPTauInversionBoundary.coarseTritNegationCompatible
     P.canonicalMonster369SignedSSPTauInversionBoundary
   ≡ true
-boundaryRegression = refl , refl , refl , refl
+  × P.Monster369SignedSSPTauInversionBoundary.signedFRACTRANSeamWordReusedInModularReplication
+    P.canonicalMonster369SignedSSPTauInversionBoundary
+  ≡ true
+boundaryRegression = refl , refl , refl , refl , refl
 
 firewallRegression :
   P.Monster369SignedSSPTauInversionBoundary.signedSSPIsLiteralFrickeAction
+    P.canonicalMonster369SignedSSPTauInversionBoundary
+  ≡ false
+  × P.Monster369SignedSSPTauInversionBoundary.modularTauIsRamanujanTau
     P.canonicalMonster369SignedSSPTauInversionBoundary
   ≡ false
   × P.Monster369SignedSSPTauInversionBoundary.sameTauCarrierFor6BReplicabilityPaid
@@ -29,4 +35,4 @@ firewallRegression :
   × P.Monster369SignedSSPTauInversionBoundary.literalMonsterActionWeldPaid
     P.canonicalMonster369SignedSSPTauInversionBoundary
   ≡ false
-firewallRegression = refl , refl , refl
+firewallRegression = refl , refl , refl , refl
