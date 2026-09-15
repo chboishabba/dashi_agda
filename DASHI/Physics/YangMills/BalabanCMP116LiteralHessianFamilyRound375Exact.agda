@@ -30,7 +30,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using
+  (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as R103
@@ -48,7 +49,7 @@ record CMP116LiteralHessianSensitivityData : Set₁ where
     Boundary : Set
 
     leftVariation rightVariation :
-      Boundary -> Source.Tangent (R103.source literal)
+      Boundary → Source.Tangent (R103.source literal)
 
     sensitivity :
       R370.CauchyParametricSensitivityAuthority
@@ -56,21 +57,21 @@ record CMP116LiteralHessianSensitivityData : Set₁ where
 
     sourceMagnitudeBound sourceRadius : ℝ
 
-    sourceSubstitutionDistance : Boundary -> ℝ
+    sourceSubstitutionDistance : Boundary → ℝ
     sourceSubstitutionDistanceNonnegative :
-      forall boundary -> 0ℝ ≤ℝ sourceSubstitutionDistance boundary
+      ∀ boundary → 0ℝ ≤ℝ sourceSubstitutionDistance boundary
 
     sourceHessianAnalytic :
-      forall boundary ->
+      ∀ boundary →
       R370.AnalyticFamily sensitivity
-        (lambda background ->
+        (λ background →
           R103.cmp116PhysicalMarkedHessian literal background
             (leftVariation boundary) (rightVariation boundary))
 
     sourceHessianUniformlyBounded :
-      forall boundary ->
+      ∀ boundary →
       R370.UniformMagnitudeBound sensitivity
-        (lambda background ->
+        (λ background →
           R103.cmp116PhysicalMarkedHessian literal background
             (leftVariation boundary) (rightVariation boundary))
         sourceMagnitudeBound
@@ -79,22 +80,22 @@ record CMP116LiteralHessianSensitivityData : Set₁ where
       R370.PositiveRadiusMargin sensitivity sourceRadius
 
     leftSubstituted rightSubstituted :
-      Boundary -> Source.Background (R103.source literal)
+      Boundary → Source.Background (R103.source literal)
 
     selectedSubstitutedBackgroundsShareNeighbourhood :
-      forall boundary ->
+      ∀ boundary →
       R370.CommonNeighbourhood sensitivity
         (leftSubstituted boundary) (rightSubstituted boundary)
 
     selectedSubstitutionDistanceBelowSourceDistance :
-      forall boundary ->
+      ∀ boundary →
       R370.parameterDistance sensitivity
         (leftSubstituted boundary) (rightSubstituted boundary)
       ≤ℝ sourceSubstitutionDistance boundary
 
-    sourceHessianDifference : Boundary -> ℝ
+    sourceHessianDifference : Boundary → ℝ
     sourceHessianDifferenceIsTargetDistance :
-      forall boundary ->
+      ∀ boundary →
       sourceHessianDifference boundary ≡
       R370.backgroundDistance sensitivity
         (R103.cmp116PhysicalMarkedHessian literal
@@ -107,9 +108,9 @@ record CMP116LiteralHessianSensitivityData : Set₁ where
 open CMP116LiteralHessianSensitivityData public
 
 literalHessianFamily :
-  (dataSet : CMP116LiteralHessianSensitivityData) ->
-  Boundary dataSet ->
-  Source.Background (R103.source (literal dataSet)) -> ℝ
+  (dataSet : CMP116LiteralHessianSensitivityData) →
+  Boundary dataSet →
+  Source.Background (R103.source (literal dataSet)) → ℝ
 literalHessianFamily dataSet boundary background =
   R103.cmp116PhysicalMarkedHessian
     (literal dataSet) background
@@ -117,8 +118,8 @@ literalHessianFamily dataSet boundary background =
     (rightVariation dataSet boundary)
 
 literalHessianFamilyIsCMP109Polarization :
-  (dataSet : CMP116LiteralHessianSensitivityData) ->
-  forall boundary background ->
+  (dataSet : CMP116LiteralHessianSensitivityData) →
+  ∀ boundary background →
   literalHessianFamily dataSet boundary background ≡
   R103.cmp109Polarization
     (literal dataSet) background
@@ -132,7 +133,7 @@ literalHessianFamilyIsCMP109Polarization dataSet boundary background =
       (rightVariation dataSet boundary))
 
 round375ToR372 :
-  CMP116LiteralHessianSensitivityData ->
+  CMP116LiteralHessianSensitivityData →
   R372.CMP116DirectHessianSensitivityData
 round375ToR372 dataSet = record
   { R372.SubstitutedBackground =
@@ -161,13 +162,12 @@ round375ToR372 dataSet = record
   }
 
 sourceHessianStableFromLiteralCarrier :
-  (dataSet : CMP116LiteralHessianSensitivityData) ->
-  forall boundary ->
+  (dataSet : CMP116LiteralHessianSensitivityData) →
+  ∀ boundary →
   sourceHessianDifference dataSet boundary
     ≤ℝ
   R372.sourceHessianLipschitz (round375ToR372 dataSet)
-    R372.*ℝ
-  sourceSubstitutionDistance dataSet boundary
+    *ℝ sourceSubstitutionDistance dataSet boundary
 sourceHessianStableFromLiteralCarrier dataSet =
   R372.sourceHessianStableFromCauchy (round375ToR372 dataSet)
 
