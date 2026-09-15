@@ -13,6 +13,11 @@ radialSortProvedOrdered :
   Subject.literalRadialShellOrderProved ≡ true
 radialSortProvedOrdered = Subject.literalRadialShellOrderProvedIsTrue
 
+radialSortPreservesExactModes :
+  Subject.literalRadialShellSortPermutationClosed ≡ true
+radialSortPreservesExactModes =
+  Subject.literalRadialShellSortPermutationClosedIsTrue
+
 weightedProductionInvariantUnderSort :
   Subject.literalWeightedProductionInvariantUnderRadialSort ≡ true
 weightedProductionInvariantUnderSort =
