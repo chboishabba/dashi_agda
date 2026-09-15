@@ -7,11 +7,12 @@ open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as Four
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as S0
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseExact as S1a
 
 ------------------------------------------------------------------------
 -- NAVIER-STOKES A/B/C/D PAPER/PROGRAMME ADAPTER
 --
--- Timestamp: 2026-09-15 18:24 AEST (UTC+10).
+-- Timestamp: 2026-09-15 18:38 AEST (UTC+10).
 --
 -- This file deliberately DOES NOT introduce a second four-alternative
 -- ontology. The canonical mathematical/source alternatives already live in
@@ -61,9 +62,6 @@ record NSFourLaneProofProgram : Set where
     periodicBSecondMomentSixThreeTransplantClosed : Bool
     periodicBR568PaymentClosed : Bool
 
-    -- Coordinator/recovery coordinates. These do not overwrite the older
-    -- owner-local booleans above, which remain useful for branch-local/source
-    -- status. They record how current proof search should be routed.
     periodicBCommutatorSpineRecoveryAssumptionActive : Bool
     periodicBCommutatorSpineCertificationObserved : Bool
 
@@ -71,9 +69,8 @@ record NSFourLaneProofProgram : Set where
     periodicBPhaseLiteralR406RemainderWeldRecovered : Bool
     periodicBPhaseCriticalRadialRealizationRecovered : Bool
 
-    -- Strict S0 is now split into the concrete finite fold and the still-open
-    -- exact consumer normalisation/same-object weld into R414.
     periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered : Bool
+    periodicBPhasePointwiseCriticalEnergySplitRecovered : Bool
     periodicBPhaseR414ProductionNormalisationRecovered : Bool
 
     periodicBPhasePhysicalCriticalObservableRealizationRecovered : Bool
@@ -113,7 +110,7 @@ canonicalNSFourLaneProofProgram = record
   ; laneADescription =
       "Lane A: unforced three-dimensional Navier-Stokes regularity on whole-space R^3. Independent proof obligation; defer new proof search until periodic-B stabilizes enough for an explicit portability quotient."
   ; laneBDescription =
-      "Lane B: unforced three-dimensional periodic Navier-Stokes regularity on T^3. The recent commutator spine is routed as recovery/certification. R104/R372/R414 recover the signed-critical compiler and literal-R406 remainder identity; R516/R517 recover the finite-carrier critical radial realization. S0 now source-constructs literal live-trajectory finite endpoint/dissipation/projected-nonlinearity folds, while the exact R414 production normalisation, critical-energy identity, phase-sensitive estimate, initial ceiling and retained-viscosity receipt remain fail-closed."
+      "Lane B: unforced three-dimensional periodic Navier-Stokes regularity on T^3. The recent commutator spine is routed as recovery/certification. R104/R372/R414 recover the signed-critical compiler and literal-R406 remainder identity; R516/R517 recover finite-carrier critical radial realization. S0 now source-constructs literal live-trajectory endpoint/dissipation/projected-nonlinearity folds in the exact quadratic-energy convention, and S1a closes the finite R30 pointwise critical-energy split. Integrated derivative/FTC authority, the phase-sensitive estimate, initial ceiling and retained-viscosity receipt remain fail-closed."
   ; laneCDescription =
       "Lane C: forced whole-space R^3 breakdown. Current job is released-proof BIDI verification, provenance, dependency closure, and same-object integration; it is not discovery evidence for A or B."
   ; laneDDescription =
@@ -135,6 +132,8 @@ canonicalNSFourLaneProofProgram = record
 
   ; periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered =
       S0.literalCriticalEndpointFoldConstructed
+  ; periodicBPhasePointwiseCriticalEnergySplitRecovered =
+      S1a.literalFiniteCriticalEnergySplitClosed
   ; periodicBPhaseR414ProductionNormalisationRecovered =
       S0.r414ProductionNormalisationRecovered
 
@@ -160,10 +159,6 @@ canonicalNSFourLaneProofProgram = record
       "The partner-first/same-output Gram route, PSD compressed-difference carrier, complete-graph/P3 separation attempt, and R214 constant-band no-go are retained append-only. The route was abandoned as the primary producer after the exact amplitude telescope exposed a many-to-one observable map: incidence geometry alone cannot force separation when distinct same-output incidences can carry equal velocity arguments and therefore equal compressed slot kernels. This is a route-selection result, not a deletion or refutation of the theorem-bearing Gram infrastructure."
   }
 
-------------------------------------------------------------------------
--- Canonical lane/source identity is inherited from the existing Four owner.
-------------------------------------------------------------------------
-
 laneAIsWholeSpace : laneA canonicalNSFourLaneProofProgram ≡ Four.A-euclidean-unforced-global
 laneAIsWholeSpace = refl
 
@@ -188,16 +183,10 @@ statusCIsCanonical = refl
 statusDIsCanonical : statusD canonicalNSFourLaneProofProgram ≡ Four.statusD4
 statusDIsCanonical = refl
 
--- Re-export the stronger existing typed firewall: a forced-breakdown witness
--- cannot be reused as permission to pay an unforced alternative.
 forcedBreakdownDoesNotPayUnforcedAlternative :
   Four.ForcedBreakdownPaysUnforcedAlternativePermission4 → ⊥
 forcedBreakdownDoesNotPayUnforcedAlternative =
   Four.forcedBreakdownDoesNotPayUnforcedAlternative4
-
-------------------------------------------------------------------------
--- Fail-closed route and transfer status.
-------------------------------------------------------------------------
 
 periodicBIsActiveConstructionIsTrue :
   periodicBIsActiveConstruction canonicalNSFourLaneProofProgram ≡ true
@@ -235,6 +224,11 @@ periodicBPhaseLiteralFiniteCriticalObservableFoldRecoveredIsTrue :
   periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered canonicalNSFourLaneProofProgram ≡ true
 periodicBPhaseLiteralFiniteCriticalObservableFoldRecoveredIsTrue =
   S0.literalCriticalEndpointFoldConstructedIsTrue
+
+periodicBPhasePointwiseCriticalEnergySplitRecoveredIsTrue :
+  periodicBPhasePointwiseCriticalEnergySplitRecovered canonicalNSFourLaneProofProgram ≡ true
+periodicBPhasePointwiseCriticalEnergySplitRecoveredIsTrue =
+  S1a.literalFiniteCriticalEnergySplitClosedIsTrue
 
 periodicBPhaseR414ProductionNormalisationRecoveredIsFalse :
   periodicBPhaseR414ProductionNormalisationRecovered canonicalNSFourLaneProofProgram ≡ false
@@ -293,10 +287,6 @@ forcedCDDoesNotSettleUnforcedABIsTrue :
   forcedCDDoesNotSettleUnforcedAB canonicalNSFourLaneProofProgram ≡ true
 forcedCDDoesNotSettleUnforcedABIsTrue = refl
 
-------------------------------------------------------------------------
--- Historical route retention.
-------------------------------------------------------------------------
-
 gramP3AttemptRetainedAsHistoricalProvenanceIsTrue :
   gramP3AttemptRetainedAsHistoricalProvenance canonicalNSFourLaneProofProgram ≡ true
 gramP3AttemptRetainedAsHistoricalProvenanceIsTrue = refl
@@ -304,14 +294,6 @@ gramP3AttemptRetainedAsHistoricalProvenanceIsTrue = refl
 gramP3AttemptAbandonedAsPrimaryRouteIsTrue :
   gramP3AttemptAbandonedAsPrimaryRoute canonicalNSFourLaneProofProgram ≡ true
 gramP3AttemptAbandonedAsPrimaryRouteIsTrue = refl
-
-------------------------------------------------------------------------
--- Older branch-local B booleans remain fail-closed.
---
--- These values intentionally do not get promoted merely because the global
--- coordinator is in recovery mode. They represent older/local owner status,
--- while the recovery coordinates above govern current proof-search routing.
-------------------------------------------------------------------------
 
 periodicBR571TaylorRealizationClosedIsFalse :
   periodicBR571TaylorRealizationClosed canonicalNSFourLaneProofProgram ≡ false
