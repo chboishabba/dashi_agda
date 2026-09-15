@@ -20,10 +20,20 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
   exit 1
 fi
 
+grep -q '^record NativeBalabanSectorRecoveryTransport' "${files[1]}"
+grep -q 'nativeLiteralStressShared' "${files[1]}"
+grep -q 'nativeLiteralPairingCommutes' "${files[1]}"
+grep -q '^nativeLiteralSectorRecoveryTransportCompilerLevel :' "${files[1]}"
+
 grep -q '^record Round131SharedTransportData' "${files[4]}"
+grep -q 'literalConstructionIsSelectedQFTTarget' "${files[4]}"
+grep -q 'literalStressPairingCommutes' "${files[4]}"
 grep -q '^round131RecoveryToNativeSectorTransport :' "${files[4]}"
 grep -q '^round131NativeSectorTransportCompilerLevel :' "${files[4]}"
-grep -q 'Adapter.round131NativeSectorTransportCompilerLevel' "${files[5]}"
+grep -q '^round131LiteralSectorTransportCompilerLevel :' "${files[4]}"
+
+grep -q 'Transport.nativeLiteralSectorRecoveryTransportCompilerLevel' "${files[5]}"
+grep -q 'Adapter.round131LiteralSectorTransportCompilerLevel' "${files[5]}"
 
 cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-round131-native-transport}"
 export DASHI_AGDA29_CACHE_ROOT="$cache_root"
