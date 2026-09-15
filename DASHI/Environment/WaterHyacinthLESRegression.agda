@@ -1,11 +1,11 @@
 module DASHI.Environment.WaterHyacinthLESRegression where
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Environment.WaterHyacinthLESExact as Hyacinth
 
 ------------------------------------------------------------------------
--- RED regression: the water-hyacinth fixture must retain biomass fate,
--- dissolved oxygen, nutrient/seedbank residuals, non-target evidence and
--- restoration state as distinct coordinates rather than a scalar success flag.
+-- The water-hyacinth fixture retains externality/status axes separately and
+-- carries its empirical provenance through the canonical typed source atlas.
 ------------------------------------------------------------------------
 
 canonicalScenario : Hyacinth.WaterHyacinthInterventionScenario
@@ -19,3 +19,6 @@ statusAxesRemainDistinct = Hyacinth.canonicalBiocontrolStatusSeparation
 
 sourceBoundary : Hyacinth.WaterHyacinthSourceBoundary
 sourceBoundary = Hyacinth.canonicalWaterHyacinthSourceBoundary
+
+typedSourceAtlas : Attribution.AttributedSourceAtlas
+typedSourceAtlas = Hyacinth.sourceAtlas canonicalScenario
