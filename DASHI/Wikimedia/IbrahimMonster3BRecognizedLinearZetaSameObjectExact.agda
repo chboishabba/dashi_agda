@@ -10,6 +10,7 @@ import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact as Phase
+import DASHI.Moonshine.Base369Monster3BRecognitionCompletionCompilerExact as Base369Compiler
 import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selected
 import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as Composition
 import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as LinearZeta
@@ -37,19 +38,19 @@ import DASHI.Wikimedia.IbrahimMonster3BZ3OrbifoldPhaseRecognitionSnowballExact a
 -- source strengthens the phase-resolved W_zeta side but does NOT provide the
 -- repository-specific X6 x Fin90 chart or translation/modulation intertwiners.
 --
--- This owner therefore does not manufacture either inhabitant.  It states the
--- exact same-object equalities required before the recognition model H_zeta
--- and the actual linear W_zeta can be used together:
+-- The Base369 recognition-completion compiler now gives an equivalent native
+-- acquisition presentation: instead of constructing the X6 x Fin90 chart
+-- directly, one may construct a two-sided chart to
 --
---   1. the selected-3B producer compiled from the recognized literal source is
---      the producer carried by the linear-zeta object;
---   2. the linear zeta carrier is literally the same recognized literal
---      zeta-sector set, not a second equal-dimension carrier.
+--   appraisal-fibre x Fin90
 --
--- Once inhabited, this is the shortest gate from ActualZetaSectorRecognition
--- to S_zeta = Hom_E(H_zeta,W_zeta).  Character occurrence, dimensions,
--- OEIS/QID/Dewey/Wikipedia coordinates, source-level phase grading and shared
--- cyclotomic zeta do not construct this object.
+-- on the SAME literal zeta sector, together with the six translation and six
+-- modulation-exponent intertwiners.  The exact existing Base369 <-> X6 chart
+-- then compiles that candidate into ActualZetaSectorRecognition.
+--
+-- This owner still manufactures no inhabitant.  It states the same-object
+-- equalities required before the recognition model H_zeta and the actual
+-- linear W_zeta can be used together.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -79,6 +80,11 @@ chenLamShimakuraAttribution = Orbifold.chenLamShimakuraAttribution
 orbifoldRecognitionFrontier : Orbifold.Z3OrbifoldRecognitionFrontier
 orbifoldRecognitionFrontier = Orbifold.currentZ3OrbifoldRecognitionFrontier
 
+base369RecognitionCompilerBoundary :
+  Base369Compiler.Base369RecognitionCompletionBoundary
+base369RecognitionCompilerBoundary =
+  Base369Compiler.canonicalBase369RecognitionCompletionBoundary
+
 ------------------------------------------------------------------------
 -- 2. Same-object recognition + linearity contract.
 ------------------------------------------------------------------------
@@ -90,15 +96,11 @@ record RecognizedLinearZetaSameObject (Monster K : Set) : Setω where
 
     linearProducer : LinearZeta.LinearSingleActionProducer
 
-    -- The recognized literal source and the linear producer must compile to
-    -- one selected-3B action producer, not merely isomorphic carriers.
     compiledSelectedProducerIsLinearProducer :
       Phase.singleActionProducerFromVOA
         (Composition.recognizedActionSourceFromSameElement recognizedSource)
       ≡ LinearZeta.singleActionProducer linearProducer
 
-    -- Direct carrier payment: the inherited linear W_zeta carrier is the
-    -- exact literal sector carrying ActualZetaSectorRecognition.
     linearZetaCarrierIsRecognizedLiteralSector :
       Linear.Vector (LinearZeta.zetaLinearCarrier linearProducer)
       ≡ Selected.selectedLiteralZetaSector
@@ -125,6 +127,7 @@ occurrenceFrontier = Occurrence.currentRestrictionOccurrenceFrontier
 
 data RecognitionInterfaceCreatesInhabitant : Set where
 data OrbifoldSourceCreatesActualRecognition : Set where
+data Base369CarrierChartCreatesRecognitionCandidate : Set where
 data CharacterOccurrenceCreatesRecognition : Set where
 data EqualDimensionCreatesCarrierEquality : Set where
 data SameCyclotomicZetaCreatesRepresentationIdentity : Set where
@@ -139,6 +142,10 @@ recognitionInterfaceDoesNotCreateInhabitant ()
 orbifoldSourceDoesNotCreateActualRecognition :
   OrbifoldSourceCreatesActualRecognition → ⊥
 orbifoldSourceDoesNotCreateActualRecognition ()
+
+base369CarrierChartDoesNotCreateRecognitionCandidate :
+  Base369CarrierChartCreatesRecognitionCandidate → ⊥
+base369CarrierChartDoesNotCreateRecognitionCandidate ()
 
 characterOccurrenceDoesNotCreateRecognition :
   CharacterOccurrenceCreatesRecognition → ⊥
@@ -201,17 +208,19 @@ canonicalRecognizedLinearZetaExternalCoordinates =
 
 nextResidual : String
 nextResidual =
-  "use the Chen-Lam-Shimakura Z3-graded Moonshine phase structure as source authority for the phase-resolved linear VOA context, but separately acquire an actual Selected3BRecognizedSameElementSource on the exact repo literal selected source by constructing the X6 x Fin90 two-sided chart and six translation/modulation intertwiners. Then pair it with the actual LinearSingleActionProducer and prove compiledSelectedProducerIsLinearProducer plus linearZetaCarrierIsRecognizedLiteralSector. Once this RecognizedLinearZetaSameObject is inhabited, instantiate Selected3BNormalizerMonsterActionWeld on that same producer and form S_zeta = Hom_E(H_zeta,W_zeta). OEIS/QID/Dewey/Wikipedia, dimensions, character occurrence, source-level Z3 grading and shared C3.zeta remain non-promoting."
+  "use the Chen-Lam-Shimakura Z3-graded Moonshine phase structure as source authority for the phase-resolved linear VOA context, then acquire a Base369RecognitionCandidate on the exact repo selected literal W_zeta sector: a two-sided chart to appraisal-fibre x Fin90 plus six translation and six modulation-exponent intertwiners. The reverse compiler then produces ActualZetaSectorRecognition. Pair that recognition with the actual LinearSingleActionProducer and prove compiledSelectedProducerIsLinearProducer plus linearZetaCarrierIsRecognizedLiteralSector. Once RecognizedLinearZetaSameObject is inhabited, instantiate Selected3BNormalizerMonsterActionWeld and form S_zeta = Hom_E(H_zeta,W_zeta). OEIS/QID/Dewey/Wikipedia, dimensions, character occurrence, source-level Z3 grading, the bare Base369 carrier bijection and shared C3.zeta remain non-promoting."
 
 record RecognizedLinearZetaBoundary : Set where
   constructor recognized-linear-zeta-boundary
   field
     recognitionInterfaceAvailable : Bool
     linearZetaInterfaceAvailable : Bool
+    base369ReverseRecognitionCompilerAvailable : Bool
     sameSelectedProducerEqualityRequired : Bool
     sameLiteralZetaCarrierEqualityRequired : Bool
     orbifoldPhaseSourcePaid : Bool
     orbifoldSourceCreatesActualRecognition : Bool
+    base369RecognitionCandidateInhabited : Bool
     recognitionInhabitantPaid : Bool
     recognizedLinearSameObjectInhabitantPaid : Bool
     selectedNormalizerMonsterActionWeldPaid : Bool
@@ -222,6 +231,6 @@ open RecognizedLinearZetaBoundary public
 currentRecognizedLinearZetaBoundary : RecognizedLinearZetaBoundary
 currentRecognizedLinearZetaBoundary =
   recognized-linear-zeta-boundary
-    true true true true true
-    false false false false false
+    true true true true true true
+    false false false false false false
     nextResidual
