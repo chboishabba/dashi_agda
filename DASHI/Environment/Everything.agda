@@ -25,7 +25,8 @@ import DASHI.Environment.PhotosyntheticAssimilationValidationExact
 import DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollinationExact
 
 -- Water-hyacinth biocontrol as a concrete LES / experimental-coordinate /
--- active proof-search consumer with canonical attribution and costed probes.
+-- active proof-search consumer with canonical attribution, SI semantics and
+-- collision-backed costed probes.
 import DASHI.Environment.BiocontrolExternalityExperimentExact
 import DASHI.Environment.BiocontrolExternalityExperimentRegression
 import DASHI.Environment.BiocontrolExternalityExperimentSourceAtlasExact
@@ -36,6 +37,8 @@ import DASHI.Environment.BiocontrolActiveExperimentSearchExact
 import DASHI.Environment.BiocontrolActiveExperimentSearchRegression
 import DASHI.Environment.BiocontrolCostedExperimentChoiceExact
 import DASHI.Environment.BiocontrolCostedExperimentChoiceRegression
+import DASHI.Environment.BiocontrolSIQuantityExact
+import DASHI.Environment.BiocontrolSIQuantityRegression
 import DASHI.Environment.BiocontrolFirstImplementationExact
 import DASHI.Environment.BiocontrolFirstImplementationRegression
 
