@@ -15,26 +15,32 @@ module DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact w
 --
 --   X_N(t)   -- dyadic critical endpoint mass;
 --   D_N(T)   -- integrated ODE-compatible critical viscous mass;
---   N_N(T)   -- integrated dyadic critical real-Hermitian pairing of u_N with
---               the literal Audit.projectedNonlinearity.
+--   N_N(T)   -- integrated signed nonlinear production in the exact quadratic
+--               energy convention, i.e. 2 Re<u_N,N(u_N)> after weighting.
 --
 -- The nonlinear production is NOT defined by rearranging an energy identity.
 -- Hence the later critical-energy identity remains a genuine theorem rather
 -- than becoming true by definition.
 --
--- Exact dissipation normalization
--- -------------------------------
--- If the endpoint critical weight is w(k), differentiating that quadratic
--- energy against the literal viscous term produces the exact weight
+-- Exact dissipation / production normalization
+-- ---------------------------------------------
+-- If the endpoint critical weight is w(k), differentiating
+--   sum_k w(k)|u_k|^2
+-- against the literal projected ODE yields
 --
---     w(k) * |k|^2 * |u_k|^2,
+--   -2 nu sum_k w(k)|k|^2|u_k|^2
+--   +2 sum_k w(k) Re<N_k(u),u_k>.
 --
--- not w(k)^3 * |u_k|^2.  The latter is an equivalent dyadic H^(3/2) norm, but
--- replacing the exact ODE weight by it at definition time would silently turn
--- the energy identity into an inequality.  Therefore this S0 owner keeps the
--- exact mixed viscous weight. R517 remains the theorem-backed finite-carrier
--- comparison authority used later to transport this dyadic route to the
--- physical H^(1/2)/H^(3/2) interpretation.
+-- Accordingly D_N uses the exact mixed viscous weight w(k)|k|^2 and N_N uses
+-- the factor-two signed Hermitian production. The corresponding R104 viscous
+-- coefficient is 2 nu. This fixes the energy convention at the literal fold
+-- rather than leaving a hidden factor-two transport for later.
+--
+-- The dyadic cube w(k)^3 is an equivalent H^(3/2) weight, but replacing the
+-- exact ODE viscous weight by it at definition time would silently turn the
+-- energy identity into an inequality. R517 remains the theorem-backed
+-- finite-carrier comparison authority used later to transport the dyadic route
+-- to the physical H^(1/2)/H^(3/2) interpretation.
 --
 -- Scalar / physical-norm boundary
 -- -------------------------------
@@ -50,7 +56,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact w
 -- rational-geometry alias is introduced here.
 --
 -- Remaining strict leaves after this owner:
---   S1  critical energy identity / exact production normalisation;
+--   S1  critical energy identity from the literal derivative + scalar calculus;
 --   S2  signed-production estimate by the literal R406 remainder;
 --   S3  cutoff-uniform initial-critical ceiling;
 --   S4  positive retained viscosity.
@@ -73,6 +79,9 @@ import DASHI.Physics.Closure.NSTriadKNDyadicCriticalNormEquivalenceBoundaryRound
 
 F : C3.RealField _
 F = Rational.rationalRealField
+
+two : ℚ
+two = 1ℚ + 1ℚ
 
 ------------------------------------------------------------------------
 -- Exact rational dyadic endpoint weight.
@@ -111,7 +120,6 @@ criticalEndpointMass :
 criticalEndpointMass system =
   weightedVelocityMass dyadicCriticalWeight system (Audit.modes system)
 
--- Exact viscous quadratic form paired with the selected endpoint multiplier.
 criticalViscousMass :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
@@ -147,8 +155,8 @@ weightedProjectedNonlinearProduction system [] = 0ℚ
 weightedProjectedNonlinearProduction system (mode ∷ rest) =
   dyadicCriticalWeight mode
     * realHermitianPairing
-        (Audit.velocity system mode)
         (Audit.projectedNonlinearity system mode)
+        (Audit.velocity system mode)
     + weightedProjectedNonlinearProduction system rest
 
 criticalProductionRate :
@@ -157,7 +165,7 @@ criticalProductionRate :
   Audit.FiniteComplex3GalerkinSystem F E I →
   ℚ
 criticalProductionRate system =
-  weightedProjectedNonlinearProduction system (Audit.modes system)
+  two * weightedProjectedNonlinearProduction system (Audit.modes system)
 
 ------------------------------------------------------------------------
 -- Same-trajectory spacetime specialization.
@@ -263,6 +271,9 @@ r517CriticalMultiplierComparisonReused =
 productionDefinedByEnergyResidual : Bool
 productionDefinedByEnergyResidual = false
 
+-- The factor-two energy convention is now fixed at the literal fold, but the
+-- full R414 slice still needs the S1 derivative/FTC theorem before this can be
+-- promoted to a complete same-object critical-energy realization.
 r414ProductionNormalisationRecovered : Bool
 r414ProductionNormalisationRecovered = false
 
