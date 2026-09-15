@@ -37,7 +37,7 @@ import DASHI.Wikimedia.IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurr
 
 pow : Nat → Nat → Nat
 pow b zero = 1
-pow b (suc n) = b * pow 3 n
+pow b (suc n) = b * pow b n
 
 a000244 : Nat → Nat
 a000244 n = pow 3 n
