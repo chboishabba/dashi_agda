@@ -21,7 +21,7 @@ module DASHI.Physics.Closure.NSTriadKNTwoShellLowRemoteEuclideanGapExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat.Base using (_≤_; _<_; _∸_; z≤n; s≤s)
 import Data.Nat.Properties as Nat
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
@@ -39,12 +39,12 @@ import DASHI.Physics.Closure.NSTriadKNDyadicEuclideanShellMarginRound88Exact as 
 
 dropOneFromTwoShellSeparation :
   ∀ {K J} → suc (suc K) ≤ J → suc K ≤ J ∸ 1
-dropOneFromTwoShellSeparation {J = Nat.zero} ()
+dropOneFromTwoShellSeparation {J = zero} ()
 dropOneFromTwoShellSeparation {J = suc J} (s≤s separated) = separated
 
 twoShellSeparationForcesPositiveHighShell :
   ∀ {K J} → suc (suc K) ≤ J → 0 < J
-twoShellSeparationForcesPositiveHighShell {J = Nat.zero} ()
+twoShellSeparationForcesPositiveHighShell {J = zero} ()
 twoShellSeparationForcesPositiveHighShell {J = suc J} separated = s≤s z≤n
 
 pow2Successor : ∀ K → Shell.pow2 (suc K) ≡ 2 * Shell.pow2 K
