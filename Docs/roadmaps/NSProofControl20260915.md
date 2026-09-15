@@ -2,7 +2,7 @@
 
 Status: authoritative live routing/control document; non-promoting.
 
-Timestamped current-state update: `2026-09-15 19:32 AEST (UTC+10)`.
+Timestamped current-state update: `2026-09-16 08:05 AEST (UTC+10)`.
 
 This is the default answer source for current NS proof-search state. Historical
 roadmaps and the canonical archaeology ledger remain append-only provenance and
@@ -25,7 +25,7 @@ Boolean status field cannot manufacture a kernel receipt or a missing theorem.
 ```text
 FourLaneProofProgramExact / this document
   -> merged #937   canonical A/B/C/D baseline + S0/S1/S2a state
-  -> draft #948    S2b0 BandTransfer + S2b1a radial-order successor delta
+  -> draft #948    S2b0 + S2b1 finite/same-object successor delta
   -> #945          Gate-A cross-prover receipt/status surface
   -> #947          local Hermitian G0' vector->scalar/R27 splice
   -> #890          retained comparable/P3 route + negative controls
@@ -90,22 +90,24 @@ missing producer.
 ### B_phase current status
 
 ```text
-R104 abstract signed-critical compiler                 DONE
-R414 literal-R406 remainder chosen definitionally      DONE
-R516/R517 critical radial/norm realization             DONE
-S0 literal finite X_N,D_N,N_N fold                     DONE source
-S1a finite pointwise critical-energy algebra           DONE source
-fixed nonzero cutoff mode carrier without S4           DONE source
-S1b integrated-energy compiler given calculus          DONE conditional source
-concrete scalar FTC                                    OPEN infrastructure
-concrete integrateTo linearity                         OPEN infrastructure
-S2a literal N_N -> R39/R98 projected pairing           DONE source
-S2b0 projected pairing -> R104 BandTransfer            DONE source
-S2b1a shell sort + weighted-fold invariance             DONE source
-S2b1b radial suffix -> physical R98 upper packet        OPEN
-S2b2 quantitative signed packet-flux estimate          OPEN
-S3 cutoff-uniform initial critical ceiling             OPEN
-S4 positive retained viscosity                         OPEN
+R104 abstract signed-critical compiler                       DONE
+R414 literal-R406 remainder chosen definitionally            DONE
+R516/R517 critical radial/norm realization                   DONE
+S0 literal finite X_N,D_N,N_N fold                           DONE source
+S1a finite pointwise critical-energy algebra                 DONE source
+fixed nonzero cutoff mode carrier without S4                 DONE source
+S1b integrated-energy compiler given calculus                DONE conditional source
+concrete scalar FTC                                          OPEN infrastructure
+concrete integrateTo linearity                               OPEN infrastructure
+S2a literal N_N -> R39/R98 projected pairing                 DONE source
+S2b0 projected pairing -> R104 BandTransfer                  DONE source
+S2b1a shell sort + exact permutation + fold invariance       DONE source
+S2b1b0 reject-zero R98 full cutoff -> nonzero cutoff         DONE source
+S2b1b1 literal upper-shell selector -> sorted fold -> R98    DONE source
+S2b1b2 structural R104 suffix = upper-shell selector fold    OPEN
+S2b2 quantitative signed packet-flux estimate                OPEN
+S3 cutoff-uniform initial critical ceiling                   OPEN
+S4 positive retained viscosity                               OPEN
 ```
 
 No unconditional physical R104 slice or Clay promotion is claimed.
@@ -154,8 +156,8 @@ criticalProductionRate
   = 2 * sum_k w(k) R39.realHermitianPower(u_k,N_k(u)).
 ```
 
-The literal modern production is therefore already on the R39/R98 projected-
-pairing carrier; no historical R372-style scalar-identification receipt remains.
+The literal modern production is already on the R39/R98 projected-pairing
+carrier; no historical R372-style scalar-identification receipt remains.
 
 ### S2b0 — DONE: R104 BandTransfer embedding
 
@@ -165,59 +167,104 @@ pairing carrier; no historical R372-style scalar-identification receipt remains.
 b_k = (w(k), Re<u_k,N_k(u)>) : R104.BandTransfer
 ```
 
-and proves
+and proves R104 `weightedTransfer` is exactly the S2a weighted projected-pairing
+fold. Critical production is therefore twice that R104 weighted transfer.
 
-```text
-R104.weightedTransfer (map b modes)
-  = S2a.weightedProjectedPairing system modes,
-```
-
-hence critical production is exactly twice that R104 weighted transfer.
-
-### S2b1a — DONE: literal radial order
+### S2b1a — DONE: literal radial order + exact carrier preservation
 
 `NSTriadKNLiteralCriticalProductionRadialOrderExact` insertion-sorts the SAME
-literal mode list by the executable `shellIndex`, proves the resulting shell
-indices are nondecreasing, and proves the signed weighted projected-pairing fold
-is invariant under the reorder. Therefore
+literal mode list by executable `shellIndex` and proves:
 
 ```text
-criticalProductionRate
-  = 2 * R104.weightedTransfer(radialBandTransfers).
+sortByShell modes ↭ modes
+ShellOrdered (sortByShell modes)
+weightedProjectedPairing(sortByShell modes)
+  = weightedProjectedPairing(modes).
 ```
 
-This is still representation/finite combinatorics. It does not identify any
-suffix with a physical packet and does not use positive majorization.
+The permutation theorem is load-bearing for S2b1b: radial sorting changes only
+order, not the physical finite support.
 
-### S2b1b — NEXT same-object seam
+### S2b1b0 — DONE: R98 full-cutoff -> live nonzero-cutoff bridge
 
-For each radial boundary in the sorted/aggregated literal carrier, prove that the
-corresponding R104 suffix is exactly the selected physical upper packet consumed
-by R98.
-
-Load-bearing carrier warning:
+`NSTriadKNSelectedPacketNonzeroCutoffBridgeExact` proves for any selector with
 
 ```text
-live R34/R240 retained modes = nonzeroCutoffModes N,
-older R39 global cancellation = cutoffModes N.
+selected zeroMode = false
 ```
 
-Do not silently replace those lists. Pay the zero-mode bridge explicitly or use
-a conservation theorem already stated on the canonical nonzero carrier.
-
-Useful donors already checked:
+that
 
 ```text
-LiteralDyadicShellConstants          executable shellIndex / pow2
-LuoFiniteHalfShellPartitionExact     finite shell-splitting precedent
-R98                                 arbitrary Boolean packet selector -> boundary flux
-ConcreteUpperSquaredPacketRound104   executable physical upper-packet selector
-R104 layer-cake                      exact Abel identity on ordered BandTransfer data
+R98 selected pairing over cutoffModes N
+  = R98 selected pairing over nonzeroCutoffModes N.
 ```
 
-### S2b2 — PRIMARY quantitative nonlinear theorem after S2b1b
+This is proved directly through the executable R34 `removeZero` recursion: a
+removed zero-mode contribution is already literally zero under such a selector.
+No separate velocity-at-zero hypothesis is used.
 
-Prove on those literal objects
+### S2b1b1 — DONE: literal upper-shell selector -> physical R98 flux
+
+`NSTriadKNLiteralUpperShellPacketSelectorExact` avoids the unnecessary
+max-norm/Euclidean-squared identification. R98 already accepts an arbitrary
+Boolean selector, so the physical packet is defined directly from the same
+shell geometry used by S0:
+
+```text
+upperShellPacket j k
+  = false                         if k = 0
+  = true                          if k != 0 and j <= shellIndex k
+  = false                         otherwise.
+```
+
+The owner proves:
+
+```text
+upperShellPacket j zeroMode = false,
+selected projected-pairing folds respect finite permutation,
+R98 literal full-cutoff selected pairing
+  = selected pairing on sortByShell(nonzeroCutoffModes N),
+and with reality + divergence-free hypotheses,
+that sorted selected fold
+  = R98 normalized physical boundary flux.
+```
+
+Thus the physical packet itself is no longer missing. The older
+`ConcreteUpperSquaredPacketRound104Exact` remains a valid Euclidean-squared
+packet donor/comparator, but it is not required to identify the dyadic max-norm
+shell selector used by this proof route.
+
+### S2b1b2 — NEXT: one pure finite tail/selector identity
+
+The remaining representation theorem is now only:
+
+```text
+at each strict shell jump in the sorted literal carrier,
+R104.totalTransfer(structural suffix)
+  = R98 selected projected-pairing fold for upperShellPacket(newShell).
+```
+
+Equal-shell adjacent entries are not a separate physical boundary: their R104
+radial increment is zero. Therefore the theorem only needs to pay structural
+tails at genuine shell changes.
+
+This is finite-list/shell-order mathematics. It should not consume the S2b2 PDE
+budget and should introduce no positive majorant.
+
+Useful already-paid inputs:
+
+```text
+S2b1a sort permutation + ShellOrdered
+R404 every member of nonzeroCutoffModes is NonZeroMode
+S2b1b0 reject-zero full/nonzero selector bridge
+S2b1b1 upperShellPacket + permutation-invariant selected folds + R98 flux
+R104 exact Abel layer-cake on structural suffixes
+```
+
+### S2b2 — PRIMARY quantitative nonlinear theorem after S2b1b2
+
+Once that finite identity is paid, the discovery theorem is literally
 
 ```text
 N_N(T)
@@ -225,7 +272,7 @@ N_N(T)
      + literalR406RemainderIntegral(N,T).
 ```
 
-An owner merely accepting `signedProductionEstimateByLiteralRemainder`,
+A theorem merely accepting `signedProductionEstimateByLiteralRemainder`,
 `globalDangerPaidByEndpoint`, an R303/R353 payment, R568 budget, or equivalent as
 a field remains a compiler, not this producer.
 
@@ -250,8 +297,8 @@ modern signed/nested commutator route           selected B_comm producer family
 ```
 
 R303/R353/R372 preserved the signed architecture and isolated essentially the
-same production-identification problem, but left it as an input. S2a/S2b0/S2b1a
-now pay progressively more of the literal representation while the actual
+same production-identification problem, but left it as an input. S2a through
+S2b1b1 now pay the modern representation/same-object chain directly; the actual
 quantitative estimate remains open.
 
 ## C / D
@@ -267,12 +314,12 @@ infer D -> B merely from shared periodic geometry.
 
 ```text
 P0  keep this tracker + canonical/thin-successor status synchronized
-P1  B_phase S2b1b: radial suffix -> physical R98 upper packet
+P1  B_phase S2b1b2: structural R104 suffix = literal upper-shell selector fold
 P2  B_phase S2b2: quantitative signed packet-flux / R406 estimate
 P3  S1b infrastructure: concrete scalar FTC / integrateTo linearity
 P4  B_phase S3/S4
 P5  B_comm reconstruction/certification
-P6  certify recovered S0/S1/S2a/S2b0/S2b1a surfaces
+P6  certify recovered S0/S1/S2a/S2b0/S2b1 surfaces
 P7  C/D BIDI integration + typed donor mining
 P8  A deferred until explicit B portability audit
 ```
