@@ -20,12 +20,18 @@ module DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact where
 --   (k+y) + (k-y) = 2k,
 --   |2k|^2 = 4|k|^2,
 --   Plucker(k+y,k-y) = 4 Plucker(k,y),
---   modeNorm(2k) = 2 modeNorm(k).
+--   modeNorm(2k) = 2 modeNorm(k),
 --
--- Radius doubling is obtained from R455 square calibration + nonnegative root
--- separation, not a square-root axiom.  The remaining A2 payment is now the
--- ordered/annular denominator control and final aligned angular/square-gap
--- second-moment bound.
+-- and the aligned R467/R455 companion now proves
+--
+--   (r_p-r_q)^2 + r_p r_q ||P-Q||^2 = |p-q|^2,
+--   r_p r_q ||P-Q||^2 <= 4 |y|^2
+--
+-- for p=k+y, q=k-y.  No square-root axiom is introduced.
+--
+-- The remaining A2 payment is therefore the ordered/annular positive radial
+-- denominator and its final transport into the uniform centered curvature
+-- sample.  The angular second-moment numerator is no longer open.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -40,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact as GateA
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as SquareGap
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact as RadiusDouble
+import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact as Aligned
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceExact as Taylor
 
 record R571PreferredRadialCurvatureSample : Set₁ where
@@ -96,9 +103,17 @@ r571A2CenteredShiftScalarRadiusDoublingClosed : Bool
 r571A2CenteredShiftScalarRadiusDoublingClosed =
   RadiusDouble.r571A2CenteredShiftScalarRadiusDoublingClosed
 
+r571A2LiteralAlignedComplementIdentityClosed : Bool
+r571A2LiteralAlignedComplementIdentityClosed =
+  Aligned.r571A2LiteralAlignedComplementIdentityClosed
+
+r571A2AlignedAngularSecondMomentPaymentClosed : Bool
+r571A2AlignedAngularSecondMomentPaymentClosed =
+  Aligned.r571A2CenteredAlignedAngularSecondMomentPaymentClosed
+
 r571A2OrderedRadialDenominatorPaymentClosed : Bool
 r571A2OrderedRadialDenominatorPaymentClosed =
-  SquareGap.r571A2OrderedRadialDenominatorPaymentClosed
+  Aligned.r571A2OrderedRadialDenominatorPaymentClosed
 
 r571A2UsesIncidenceOnlyCoercivity : Bool
 r571A2UsesIncidenceOnlyCoercivity = false
