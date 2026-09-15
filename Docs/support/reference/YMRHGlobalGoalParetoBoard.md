@@ -29,7 +29,7 @@ Source/DOI/QID/Dewey/link/status coordinates never manufacture theorem payment.
 ```text
 1. YM T78-B / R347 selected marked boundary-substitution comparison
 2. YM T78-B / R348 selected coefficient = literal selected mixed-log response
-3. YM T78-B / R349 R318-distance = R284-distance on the exact R300-selected pair
+3. YM T78-B / R346 selected physical distance = Euclidean time
 4. RH R1a/R1b final-near representation transport when theorem-bearing checked-near bytes/object are recoverable
 5. RH R2 fresh strict literal complement theorem
 6. YM T78-A / T78-C only when a new same-object constructor makes one cheaper than the T78-B leaves above
@@ -45,7 +45,7 @@ Terminal consumer:
 SameHamiltonianPhysicalMassGap
 ```
 
-Current preferred line is **PR #944, internal R345-R349**.
+Current preferred line is **PR #944, internal R345-R348**, with R349 retained as an optional donor audit.
 
 Historical recut:
 
@@ -149,42 +149,29 @@ Owner:
 Focused validation:
 `DASHI/Physics/YangMills/BalabanCMP116SelectedCoefficientAttachmentRound348Validation.agda`
 
-### 3.4 R349 recut below D_time
+### 3.4 R349 optional donor audit for D_time
 
-R304 already owns distance = time on the **exact same R300-selected spectral pair**:
+R304 does own distance = time on the exact same R300-selected spectral pair, but only inside `ModeSelectedDirectT5UpperPayment`, whose `directShell` is the older R284 rooted-shell producer. No independent concrete R304 payment is currently present in-repo.
 
-```text
-physicalDistance_R284(directShell,
-  left(indexFor decomposition observable time),
-  right(indexFor decomposition observable time))
-= time.
-```
+Constructing that payment through R296 reintroduces the stronger rooted-shell localization theorem solely to recover time semantics. That is Pareto-dominated by keeping R346's direct `D_time` field.
 
-R346 uses R318's `physicalDistance` instead. Re-proving time semantics is therefore overpayment.
-
-The residual distance payment is only:
+R349 therefore remains an **optional donor/transport lemma**, not the preferred distance route:
 
 ```text
-D_weld:
-physicalDistance_R318(selected left, selected right)
-=
-physicalDistance_R284(directShell, selected left, selected right).
+IF a compatible R304 payment becomes independently available,
+THEN only the selected R318-distance = R284-distance weld remains,
+and R304 supplies distance=time by transitivity.
 ```
 
-R304's existing theorem then yields R346 `D_time` by transitivity, with no change of pair, observable, time, or decomposition.
-
-Owner:
+Owner retained for archaeology/donor reuse:
 `DASHI/Physics/YangMills/BalabanSelectedDistanceCarrierWeldRound349Exact.agda`
 
-Focused validation:
-`DASHI/Physics/YangMills/BalabanSelectedDistanceCarrierWeldRound349Validation.agda`
-
-The current T78-B queue is exactly:
+Preferred current T78-B queue remains:
 
 ```text
 L_boundary/substitution
 C_attach
-D_weld
+D_time
 ```
 
 ### 3.5 Explicitly pruned T78-B requirements
@@ -195,7 +182,6 @@ Do **not** reintroduce as primitive:
 R343 sourceEnvelope -> R281 clusteringEnvelope calibration
 C_H <= 1
 fresh selection of J_L,J_R
-fresh selected-pair Euclidean-time theorem
 source-root weld for the preferred R346 route
 source-distance weld to an abstract source carrier
 rootedShell <= markedAnalyticShell
@@ -224,7 +210,7 @@ The source supports analytic localization, substitution and Cauchy differentiati
 
 ## 4. YM T78-A / T78-C
 
-These remain live endpoint coordinates on the same construction but are currently Pareto-dominated by the narrower T78-B R347-R349 leaves.
+These remain live endpoint coordinates on the same construction but are currently Pareto-dominated by the narrower T78-B R347/R348 leaves.
 
 T78-A still owns the UV->same-continuum construction/OS/Hamiltonian obligations.
 
@@ -280,7 +266,7 @@ The older 8889 cluster result is an optional donor only; status is not transport
 #944 / R346  direct shared-marked shell producer; terminal T78-B consumer surface.
 #944 / R347  decomposes L_marked below the generic Cauchy compiler.
 #944 / R348  removes fresh J-direction selection; leaves coefficient same-object attachment.
-#944 / R349  reuses R304 distance=time; leaves only R318<->R284 selected distance weld.
+#944 / R349  optional donor: R304 distance=time reuse is dominated unless its stronger shell payment is independently free.
 
 RH R1         genuine representation wall; source bytes currently unavailable.
 RH R2         genuine analytic wall after R1.
@@ -293,4 +279,4 @@ This board is scheduling/accounting only.
 - `machineChecked` labels in source owners are not fresh exact-head kernel receipts.
 - CodeRabbit status is not Agda validation.
 - No Clay Yang-Mills solution or RH proof is claimed.
-- R347-R349 record the current frontier; they do not inhabit their conditional physical/source fields.
+- R347/R348 record the preferred current frontier; R349 is donor-only unless its R304 payment is independently available.
