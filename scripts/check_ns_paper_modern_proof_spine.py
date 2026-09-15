@@ -4,6 +4,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PAPER = ROOT / "Docs/papers/live/Paper1NavierStokesClayDraft.md"
 INTERFACE = ROOT / "DASHI/Papers/NavierStokes/TheoremInterface.agda"
+PROGRAM = ROOT / "DASHI/Papers/NavierStokes/FourLaneProofProgramExact.agda"
+CONTROL = ROOT / "Docs/roadmaps/NSProofControl20260915.md"
+ADDENDUM = ROOT / "Docs/papers/NSFourLanePublicationAddendum20260915.md"
 
 REQUIRED_PAPER = [
     "CommutatorOnlySpacetimeBudget568",
@@ -22,6 +25,7 @@ REQUIRED_PAPER = [
 ]
 
 REQUIRED_INTERFACE = [
+    "FourLaneProofProgramExact",
     "CommutatorOnlySpacetimeBudget568",
     "directCompanionConstructed",
     "commutatorOnlySpacetimeProducerClosed",
@@ -31,12 +35,64 @@ REQUIRED_INTERFACE = [
     "p3SeparationProducerClosed",
     "historicalAlternativeRoute",
     "clayTerminalPromotion",
+    "periodicBProofProgressDoesNotPromoteWholeSpaceA",
+    "wholeSpaceAProofProgressDoesNotPromotePeriodicB",
+    "forcedCDDoesNotSettleUnforcedAB",
     "R500.round500IntegratedDirectCompanionWeldClosedModuloIntegrationAuthority",
     "R568.round568LiveCommutatorSpacetimeBudgetClosed",
     "R572.round572R503DirectBudgetCompilerClosedGivenReceipts",
     "R503.round503ExactR500ToR415CompilerClosed",
     "R211.round211ConcreteSameOutputResidualPaymentConstructed",
     "R214.round214ConstantShellBandAlonePaysGramDebt",
+]
+
+REQUIRED_PROGRAM = [
+    "wholeSpaceA",
+    "periodicB",
+    "forcedWholeSpaceC",
+    "forcedPeriodicD",
+    "periodicBIsActiveConstruction",
+    "wholeSpaceAIsIndependentObligation",
+    "forcedCDIsVerificationAndProvenance",
+    "periodicBProofProgressDoesNotPromoteWholeSpaceA",
+    "wholeSpaceAProofProgressDoesNotPromotePeriodicB",
+    "forcedCDDoesNotSettleUnforcedAB",
+    "gramP3AttemptRetainedAsHistoricalProvenance",
+    "gramP3AttemptAbandonedAsPrimaryRoute",
+    "r571CenteredTaylorSixThreeR568IsPeriodicB",
+]
+
+REQUIRED_CONTROL = [
+    "A — unforced whole-space",
+    "B — unforced periodic",
+    "C — forced whole-space breakdown",
+    "D — forced periodic breakdown",
+    "R571",
+    "centered/Taylor",
+    "six-three",
+    "R568",
+    "historical/provenance",
+    "P3",
+    "does not imply",
+]
+
+REQUIRED_ADDENDUM = [
+    "Lane A",
+    "Lane B",
+    "Lane C",
+    "Lane D",
+    "unforced whole-space",
+    "unforced periodic",
+    "forced whole-space",
+    "forced periodic",
+    "R571",
+    "centered/Taylor",
+    "six-three",
+    "R568",
+    "many-to-one observable map",
+    "MathematicalStatus",
+    "StatementStatus",
+    "CertificationStatus",
 ]
 
 REQUIRED_FAIL_CLOSED_PROOFS = [
@@ -56,6 +112,11 @@ REQUIRED_CONSTRUCTED_PROOFS = [
 FORBIDDEN_PRIMARY_PAPER_PHRASES = [
     "Its live frontiers are the quantitative `A1/A3`",
     "The current Clay-blocking frontier is also sharp. The coupled `A1/A3` problem",
+]
+
+FORBIDDEN_CONTROL_PHRASES = [
+    "### A — active independent unforced proof search",
+    "### B — deferred unforced periodic/global consumer",
 ]
 
 
@@ -85,9 +146,15 @@ def historical_appendix(text: str) -> str:
 def main() -> None:
     paper = PAPER.read_text(encoding="utf-8")
     interface = INTERFACE.read_text(encoding="utf-8")
+    program = PROGRAM.read_text(encoding="utf-8")
+    control = CONTROL.read_text(encoding="utf-8")
+    addendum = ADDENDUM.read_text(encoding="utf-8")
 
     require_all(paper, REQUIRED_PAPER, "paper")
     require_all(interface, REQUIRED_INTERFACE, "interface")
+    require_all(program, REQUIRED_PROGRAM, "four-lane programme")
+    require_all(control, REQUIRED_CONTROL, "proof-control record")
+    require_all(addendum, REQUIRED_ADDENDUM, "publication addendum")
     require_all(interface, REQUIRED_FAIL_CLOSED_PROOFS, "interface fail-closed proofs")
     require_all(interface, REQUIRED_CONSTRUCTED_PROOFS, "interface constructed proofs")
 
@@ -97,7 +164,11 @@ def main() -> None:
         if phrase in primary:
             fail(f"stale A1-A9 primary-frontier phrase remains: {phrase!r}")
 
-    print("PASS: modern NS paper proof-spine source contract")
+    for phrase in FORBIDDEN_CONTROL_PHRASES:
+        if phrase in control:
+            fail(f"stale A/B lane assignment remains: {phrase!r}")
+
+    print("PASS: modern NS paper/four-lane proof-program source contract")
 
 
 if __name__ == "__main__":
