@@ -1,0 +1,11 @@
+module DASHI.ComputerScience.RSA260BidiHybridReplayMksolAdequacyValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.ComputerScience.RSA260BidiHybridReplayMksolAdequacyExact as A
+
+boundary : A.HybridReplayMksolAdequacyBoundary
+boundary = A.canonicalHybridReplayMksolAdequacyBoundary
+
+firstResidual : A.HybridReplayMksolAdequacyResidual
+firstResidual = A.firstHybridReplayMksolAdequacyResidual
