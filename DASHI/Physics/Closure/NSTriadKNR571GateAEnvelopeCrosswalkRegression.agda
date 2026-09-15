@@ -16,6 +16,7 @@ import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as A2Squ
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact as RadiusDouble
 import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact as Aligned
+import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialDenominatorOrderExact as Denominator
 
 preferredLinearizationClosed :
   GateA.r571GateAPreferredLinearizationClosed ≡ true
@@ -109,13 +110,25 @@ alignedComplementUsesSquareRootAxiom :
   Aligned.r571A2UsesSquareRootAxiom ≡ false
 alignedComplementUsesSquareRootAxiom = refl
 
+divisionFreeDenominatorCompilerClosed :
+  Denominator.r571A2DivisionFreeDenominatorCompilerClosed ≡ true
+divisionFreeDenominatorCompilerClosed = refl
+
+denominatorRequiresAnnularPositiveLowerBound :
+  Denominator.r571A2RequiresAnnularPositiveLowerBound ≡ false
+denominatorRequiresAnnularPositiveLowerBound = refl
+
+denominatorRequiresRadiusDivision :
+  Denominator.r571A2RequiresRadiusDivision ≡ false
+denominatorRequiresRadiusDivision = refl
+
+literalCenteredProductBridgeStillOpen :
+  Denominator.r571A2LiteralCenteredProductBridgeClosedHere ≡ false
+literalCenteredProductBridgeStillOpen = refl
+
 radialCurvatureUsesExistingGapProductDonor :
   A2Square.r571A2R127SquareGapAlgebraReused ≡ true
 radialCurvatureUsesExistingGapProductDonor = refl
-
-radialCurvatureDenominatorPaymentStillOpen :
-  A2Square.r571A2OrderedRadialDenominatorPaymentClosed ≡ false
-radialCurvatureDenominatorPaymentStillOpen = refl
 
 radialCurvatureNotFalselyPromoted :
   A2.r571A2UniformCurvatureEstimateClosed ≡ false
