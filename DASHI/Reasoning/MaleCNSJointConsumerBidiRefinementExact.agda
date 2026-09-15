@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.ConsumerFamilyRefinementKernelExact as Family
 import DASHI.Biology.FunctionalConnectomeBodyMemoryBridge as Connectome
 import DASHI.Biology.IntersectionalLongitudinalProxyTransitionBridge as Longitudinal
 import DASHI.Biology.AnimalexicDrosophilaEmbodiedBridge as Animalexic
@@ -22,8 +23,12 @@ import DASHI.Reasoning.MaleCNSLatentStateMoEGrokkingAnimalexicCrossPollinationEx
 --
 -- Backward direction:
 --   a consumer or admissible-intervention collision is a typed obligation to
---   refine the latent observer locally.  It is not permission to manufacture
+--   refine the latent observer locally. It is not permission to manufacture
 --   an unobserved biological mechanism.
+--
+-- The generic obligation/repair grammar is owned by
+-- ConsumerFamilyRefinementKernelExact; this module is only its finite
+-- choice x memory instantiation plus the biological/proxy boundaries.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -80,7 +85,57 @@ choiceRechartCannotRecoverMemory rechart =
     rechart choiceOnlyJointConsumerCollision
 
 ------------------------------------------------------------------------
--- Local repair: add exactly the missing memory distinction.
+-- Put the finite specimen into the reusable consumer-family kernel.
+------------------------------------------------------------------------
+
+data ChoiceMemoryConsumer : Set where
+  jointChoiceMemoryConsumer : ChoiceMemoryConsumer
+
+ChoiceMemoryConsumerOutcome : ChoiceMemoryConsumer → Set
+ChoiceMemoryConsumerOutcome jointChoiceMemoryConsumer = ChoiceMemoryOutcome
+
+choiceMemoryConsumerObservation :
+  (consumer : ChoiceMemoryConsumer) →
+  HiddenState →
+  ChoiceMemoryConsumerOutcome consumer
+choiceMemoryConsumerObservation jointChoiceMemoryConsumer =
+  jointChoiceMemoryOutcome
+
+choiceMemoryConsumerFamily :
+  Family.ConsumerFamily HiddenState ChoiceMemoryConsumer
+choiceMemoryConsumerFamily =
+  Family.consumer-family
+    ChoiceMemoryConsumerOutcome
+    choiceMemoryConsumerObservation
+
+choiceFamilyCollision :
+  Family.FamilyCollision
+    choiceProjection
+    choiceMemoryConsumerFamily
+choiceFamilyCollision =
+  Family.family-collision
+    jointChoiceMemoryConsumer
+    choiceOnlyJointConsumerCollision
+
+interventionFailureCreatesRefinementObligation :
+  ∀ {Situated Flat Index : Set}
+    {flatten : Situated → Flat}
+    {family : Family.ConsumerFamily Situated Index} →
+  Family.FamilyCollision flatten family →
+  Family.ConsumerRefinementObligation flatten family
+interventionFailureCreatesRefinementObligation =
+  Family.collisionCreatesRefinementObligation
+
+choiceCollisionCreatesRefinementObligation :
+  Family.ConsumerRefinementObligation
+    choiceProjection
+    choiceMemoryConsumerFamily
+choiceCollisionCreatesRefinementObligation =
+  interventionFailureCreatesRefinementObligation choiceFamilyCollision
+
+------------------------------------------------------------------------
+-- Local repair: add exactly the missing memory distinction while retaining
+-- the original choice-only observer.
 ------------------------------------------------------------------------
 
 data RepairedLatent : Set where
@@ -90,6 +145,20 @@ data RepairedLatent : Set where
 repairedProjection : HiddenState → RepairedLatent
 repairedProjection chooseArememberA = chooseAwithMemoryA
 repairedProjection chooseArememberB = chooseAwithMemoryB
+
+recoverChoiceOnly : RepairedLatent → ChoiceOnlyLatent
+recoverChoiceOnly chooseAwithMemoryA = chooseA
+recoverChoiceOnly chooseAwithMemoryB = chooseA
+
+repairedLatentRetainsChoiceOnly :
+  NF.FactorsThrough repairedProjection choiceProjection
+repairedLatentRetainsChoiceOnly =
+  NF.factorsThrough
+    recoverChoiceOnly
+    (λ
+      { chooseArememberA → refl
+      ; chooseArememberB → refl
+      })
 
 interpretRepairedLatent : RepairedLatent → ChoiceMemoryOutcome
 interpretRepairedLatent chooseAwithMemoryA = choseAWithMemoryA
@@ -105,26 +174,27 @@ repairedLatentFactorsJointOutcome =
       ; chooseArememberB → refl
       })
 
-------------------------------------------------------------------------
--- Bidi refinement obligation.
-------------------------------------------------------------------------
+choiceMemoryRepair :
+  Family.ConsumerFamilyRepair
+    choiceProjection
+    choiceMemoryConsumerFamily
+    choiceFamilyCollision
+choiceMemoryRepair =
+  Family.consumer-family-repair
+    RepairedLatent
+    repairedProjection
+    repairedLatentRetainsChoiceOnly
+    repairedLatentFactorsJointOutcome
 
-data RefinementObligation : Set where
-  addConsumerSeparatingFibre : RefinementObligation
+choiceRepairRetainsChoiceObserver :
+  NF.FactorsThrough repairedProjection choiceProjection
+choiceRepairRetainsChoiceObserver =
+  Family.repairRetainsCoarseObserver choiceMemoryRepair
 
-interventionFailureCreatesRefinementObligation :
-  ∀ {Situated Flat Outcome : Set}
-    {flatten : Situated → Flat}
-    {phenomenon : Situated → Outcome} →
-  NF.NonFactorabilityWitness flatten phenomenon →
-  RefinementObligation
-interventionFailureCreatesRefinementObligation _ =
-  addConsumerSeparatingFibre
-
-choiceCollisionCreatesRefinementObligation : RefinementObligation
-choiceCollisionCreatesRefinementObligation =
-  interventionFailureCreatesRefinementObligation
-    choiceOnlyJointConsumerCollision
+choiceRepairPaysFailedMemoryConsumer :
+  NF.FactorsThrough repairedProjection jointChoiceMemoryOutcome
+choiceRepairPaysFailedMemoryConsumer =
+  Family.repairPaysFailedConsumer choiceMemoryRepair
 
 ------------------------------------------------------------------------
 -- Broader connectome / longitudinal donors.
@@ -190,6 +260,10 @@ record ConnectomeLatentBidiBoundary : Set where
     repairedLatentPaysFiniteJointConsumerIsTrue :
       repairedLatentPaysFiniteJointConsumer ≡ true
 
+    repairedLatentRetainsCoarseChoiceObserver : Bool
+    repairedLatentRetainsCoarseChoiceObserverIsTrue :
+      repairedLatentRetainsCoarseChoiceObserver ≡ true
+
     connectomeConstraintEqualsHiddenStateInversion : Bool
     connectomeConstraintEqualsHiddenStateInversionIsFalse :
       connectomeConstraintEqualsHiddenStateInversion ≡ false
@@ -217,8 +291,9 @@ canonicalConnectomeLatentBidiBoundary =
     true refl
     false refl
     true refl
+    true refl
     false refl
     false refl
     false refl
     false refl
-    "Bidi discipline: connectome/proxy observations constrain candidate latent state forward; consumer/intervention collisions flow backward only as local refinement obligations. Neither direction supplies hidden-state inversion, mechanism, affect semantics, or subjective phenomenology."
+    "Bidi discipline: connectome/proxy observations constrain candidate latent state forward; consumer/intervention collisions flow backward only as local refinement obligations. Repairs are monotone: the finite choice x memory repair retains the old choice observer while paying the failed joint consumer. Neither direction supplies hidden-state inversion, mechanism, affect semantics, or subjective phenomenology."
