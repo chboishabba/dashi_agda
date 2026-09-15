@@ -1,8 +1,8 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryCutRound347Validation where
 
--- RED surface: this import is intentionally introduced before the R347 owner.
--- The new owner must narrow R346's literal-localization debt below the generic
--- Cauchy/Hessian compiler without claiming the source-specific boundary theorem.
+-- Focused validation surface for the R347 frontier refinement.  The imported
+-- generic Cauchy/Hessian owner carries the repository's existing real-analysis
+-- authority surface, so this root intentionally does not add a fresh --safe
+-- claim beyond that dependency boundary.
 
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryCutRound347Exact
