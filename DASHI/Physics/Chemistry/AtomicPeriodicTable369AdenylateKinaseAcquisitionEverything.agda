@@ -54,6 +54,14 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGammaCrystal
 -- analysis. This is an AdK empirical premise, not the generic adequacy theorem.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOneDimensionalDLnProjectionAcquisitionExact
 
+-- Machine-readable Figure-7/FRET distribution text: ligand-free dLN has two
+-- major contact/no-contact states with the closed-like fraction smaller than the
+-- open-like fraction; dLC can read LID as closed while NMP remains open/semi-open.
+-- Intermediate beta/gamma/delta contacts decrease dLN/dLC.  These remain
+-- qualitative simulation/distribution observations, not exact fractions or a
+-- promotion of FRET-closed to fully closed three-domain AdK.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETDistributionTextAcquisitionExact
+
 -- Cell-level acquisition frontier: 8 named states x four numeric coordinates
 -- plus six route-edge Kramers-rate cells.  Each unpaid cell retains a locator,
 -- source role and next-payment obligation instead of disappearing into a global
