@@ -9,20 +9,20 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourcePaidTh
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGuardedCalibrationAcquisitionExact as Guard
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMetadynamicsUncertaintyExact as Uncertainty
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationProvenanceGraphExact as Provenance
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureFivePanelCFullNumericAcquisitionExact as Full
 
 ------------------------------------------------------------------------
 -- CELL-LEVEL CALIBRATION PAYMENT LEDGER
 --
--- The provenance graph records dependency classes globally.  This owner records
+-- The provenance graph records dependency classes globally. This owner records
 -- the current payment state of each concrete numerical consumer cell:
 --
 --   8 named Figure-state roles x (theta1, theta2, dLN, relative Delta G)
---   + 6 source-paid route edges x Kramers rate.
+--   + 6 source-paid forward route edges x Kramers rate.
 --
--- Paid endpoint values are retained at the source's approximate precision.
--- Qualitative regions do not become numeric cells.  Every unpaid row carries a
--- next-payment description so archive/supplement acquisition can update one cell
--- without totalising the rest of the graph.
+-- Figure-5 panel c now pays all eight printed relative free energies and all six
+-- forward rate labels used by the existing route graph. Intermediate named-state
+-- theta/dLN cells remain unpaid unless independently source-located.
 ------------------------------------------------------------------------
 
 data CalibrationCoordinateRole : Set where
@@ -75,7 +75,7 @@ unpaidCell subject role locator sourceRole next =
     "UNPAID" "unresolved" next false
 
 ------------------------------------------------------------------------
--- Canonical paid endpoint objects remain live.
+-- Canonical paid endpoint and Figure-5 objects remain live.
 ------------------------------------------------------------------------
 
 openEndpoint = ThreeCV.openEndpoint
@@ -83,6 +83,18 @@ closedEndpoint = ThreeCV.closedEndpoint
 freeEnergyUncertainty = Uncertainty.canonicalAdKMetadynamicsUncertaintyBoundary
 acquisitionGuard = Guard.canonicalGuardedCalibrationAcquisitionBoundary
 provenanceGraph = Provenance.calibrationProvenanceGraph
+fullFigureFivePanelC = Full.canonicalFigureFivePanelCFullNumericBoundary
+
+figureFivePanelCLocator : String
+figureFivePanelCLocator = Full.figureFivePanelCLocator
+
+figureFiveEnergyUncertainty : String
+figureFiveEnergyUncertainty =
+  "source reports approximately 0.5 kcal/mol metadynamics free-energy error; printed panel-c value retained at source precision"
+
+figureFiveRateUncertainty : String
+figureFiveRateUncertainty =
+  "printed Kramers-derived rate at Figure-5 precision; no experimental-rate uncertainty is manufactured"
 
 ------------------------------------------------------------------------
 -- State cells: alpha.
@@ -110,11 +122,10 @@ alphaDLn = paidCell
   "printed approximate endpoint value"
 
 alphaEnergy : CalibrationPaymentCell
-alphaEnergy = unpaidCell
-  "alpha" relativeFreeEnergyRole
-  "Figure 5c state-energy label"
-  "BE-META relative free-energy state coordinate"
-  "acquire exact same-article Figure/Table locator and numeric alpha relative-energy label; attach approximately 0.5 kcal/mol method uncertainty where applicable"
+alphaEnergy = paidCell
+  "alpha" relativeFreeEnergyRole figureFivePanelCLocator
+  "BE-META Figure-5 panel-c relative free-energy state coordinate"
+  "0.1 kcal/mol" figureFiveEnergyUncertainty
 
 ------------------------------------------------------------------------
 -- State cells: beta, gamma, delta, epsilon.
@@ -123,27 +134,25 @@ alphaEnergy = unpaidCell
 betaThetaOne = unpaidCell "beta" thetaOneRole "Figure 5 named-state geometry" "qualitative semi-open/semi-closed region only" "acquire locator-specific beta theta1 numeric label if the source supplies one"
 betaThetaTwo = unpaidCell "beta" thetaTwoRole "Figure 5 named-state geometry" "qualitative semi-open/semi-closed region only" "acquire locator-specific beta theta2 numeric label if the source supplies one"
 betaDLn = unpaidCell "beta" dLnRole "Figure 5 / supporting material" "three-CV state coordinate" "acquire same-object beta dLN numeric value"
-betaEnergy = unpaidCell "beta" relativeFreeEnergyRole "Figure 5c state-energy label" "BE-META relative free-energy state coordinate" "acquire same-object beta relative-energy label with method uncertainty"
+betaEnergy = paidCell "beta" relativeFreeEnergyRole figureFivePanelCLocator "BE-META Figure-5 panel-c relative free-energy state coordinate" "0.0 kcal/mol" figureFiveEnergyUncertainty
 
 gammaThetaOne = unpaidCell "gamma" thetaOneRole "Figure 5 named-state geometry" "qualitative semi-open/semi-closed region only" "acquire locator-specific gamma theta1 numeric label if supplied"
 gammaThetaTwo = unpaidCell "gamma" thetaTwoRole "Figure 5 named-state geometry" "qualitative semi-open/semi-closed region only" "acquire locator-specific gamma theta2 numeric label if supplied"
 gammaDLn = unpaidCell "gamma" dLnRole "Figure 5 / supporting material" "three-CV state coordinate" "acquire same-object gamma dLN numeric value"
 gammaEnergy = paidCell
-  "gamma" relativeFreeEnergyRole
-  "existing canonical free-energy receipt: gamma zero reference"
-  "relative free-energy reference convention"
-  "0 relative to the declared source/repository reference"
-  "approximately 0.5 kcal/mol metadynamics method error does not alter the chosen zero convention"
+  "gamma" relativeFreeEnergyRole figureFivePanelCLocator
+  "Figure-5 declared relative free-energy reference minimum"
+  "0.0 kcal/mol" "zero-reference convention; method uncertainty does not alter the chosen reference value"
 
 deltaThetaOne = unpaidCell "delta" thetaOneRole "Figure 5 named-state geometry" "qualitative semi-open/semi-closed region only" "acquire locator-specific delta theta1 numeric label if supplied"
 deltaThetaTwo = unpaidCell "delta" thetaTwoRole "Figure 5 named-state geometry" "qualitative semi-open/semi-closed region only" "acquire locator-specific delta theta2 numeric label if supplied"
 deltaDLn = unpaidCell "delta" dLnRole "Figure 5 / supporting material" "three-CV state coordinate" "acquire same-object delta dLN numeric value"
-deltaEnergy = unpaidCell "delta" relativeFreeEnergyRole "Figure 5c state-energy label" "BE-META relative free-energy state coordinate" "acquire same-object delta relative-energy label with method uncertainty"
+deltaEnergy = paidCell "delta" relativeFreeEnergyRole figureFivePanelCLocator "BE-META Figure-5 panel-c relative free-energy state coordinate" "0.6 kcal/mol" figureFiveEnergyUncertainty
 
 epsilonThetaOne = unpaidCell "epsilon" thetaOneRole "Figure 5 named-state geometry" "qualitative semi-open/semi-closed region only" "acquire locator-specific epsilon theta1 numeric label if supplied"
 epsilonThetaTwo = unpaidCell "epsilon" thetaTwoRole "Figure 5 named-state geometry" "qualitative semi-open/semi-closed region only" "acquire locator-specific epsilon theta2 numeric label if supplied"
 epsilonDLn = unpaidCell "epsilon" dLnRole "Figure 5 / supporting material" "three-CV state coordinate" "acquire same-object epsilon dLN numeric value"
-epsilonEnergy = unpaidCell "epsilon" relativeFreeEnergyRole "Figure 5c state-energy label" "BE-META relative free-energy state coordinate" "acquire same-object epsilon relative-energy label with method uncertainty"
+epsilonEnergy = paidCell "epsilon" relativeFreeEnergyRole figureFivePanelCLocator "BE-META Figure-5 panel-c relative free-energy state coordinate" "1.6 kcal/mol" figureFiveEnergyUncertainty
 
 ------------------------------------------------------------------------
 -- State cells: zeta terminal/closed role, eta and lambda.
@@ -170,29 +179,29 @@ zetaDLn = paidCell
   "article-text closed endpoint geometry; role-level use does not assert xi=zeta"
   "approximately 20 angstrom" "printed approximate endpoint value"
 
-zetaEnergy = unpaidCell "zeta" relativeFreeEnergyRole "Figure 5c state-energy label" "BE-META relative free-energy state coordinate" "acquire same-object zeta relative-energy label with method uncertainty"
+zetaEnergy = paidCell "zeta" relativeFreeEnergyRole figureFivePanelCLocator "BE-META Figure-5 panel-c relative free-energy state coordinate; Figure-zeta role retained separately from equation-xi notation" "1.2 kcal/mol" figureFiveEnergyUncertainty
 
 etaThetaOne = unpaidCell "eta" thetaOneRole "Figure 5 named-state geometry" "qualitative near-closed region only" "acquire locator-specific eta theta1 numeric label if supplied"
 etaThetaTwo = unpaidCell "eta" thetaTwoRole "Figure 5 named-state geometry" "qualitative near-closed region only" "acquire locator-specific eta theta2 numeric label if supplied"
 etaDLn = unpaidCell "eta" dLnRole "Figure 5 / supporting material" "three-CV state coordinate" "acquire same-object eta dLN numeric value"
-etaEnergy = unpaidCell "eta" relativeFreeEnergyRole "Figure 5c state-energy label" "BE-META relative free-energy state coordinate" "acquire same-object eta relative-energy label with method uncertainty"
+etaEnergy = paidCell "eta" relativeFreeEnergyRole figureFivePanelCLocator "BE-META Figure-5 panel-c relative free-energy state coordinate" "0.7 kcal/mol" figureFiveEnergyUncertainty
 
 lambdaThetaOne = unpaidCell "lambda" thetaOneRole "Figure 5 named-state geometry" "qualitative near-closed region only" "acquire locator-specific lambda theta1 numeric label if supplied"
 lambdaThetaTwo = unpaidCell "lambda" thetaTwoRole "Figure 5 named-state geometry" "qualitative near-closed region only" "acquire locator-specific lambda theta2 numeric label if supplied"
 lambdaDLn = unpaidCell "lambda" dLnRole "Figure 5 / supporting material" "three-CV state coordinate" "acquire same-object lambda dLN numeric value"
-lambdaEnergy = unpaidCell "lambda" relativeFreeEnergyRole "Figure 5c state-energy label" "BE-META relative free-energy state coordinate" "acquire same-object lambda relative-energy label with method uncertainty"
+lambdaEnergy = paidCell "lambda" relativeFreeEnergyRole figureFivePanelCLocator "BE-META Figure-5 panel-c relative free-energy state coordinate" "1.0 kcal/mol" figureFiveEnergyUncertainty
 
 ------------------------------------------------------------------------
--- Edge-rate cells.  The rate role, unit and Kramers calibration are paid;
--- the six visual arrow numerals remain unpaid.
+-- Forward route-edge rate cells. The full-resolution same-object panel now
+-- pays the arrowhead/value association used by the six-edge route graph.
 ------------------------------------------------------------------------
 
-alphaBetaRate = unpaidCell "alpha->beta" edgeKramersRateRole "Figure 5c alpha->beta arrow" "Kramers-derived rate; display unit 10^-2 ns^-1" "acquire exact same-object arrow numeric label"
-betaGammaRate = unpaidCell "beta->gamma" edgeKramersRateRole "Figure 5c beta->gamma arrow" "Kramers-derived rate; display unit 10^-2 ns^-1" "acquire exact same-object arrow numeric label"
-gammaDeltaRate = unpaidCell "gamma->delta" edgeKramersRateRole "Figure 5c gamma->delta arrow" "Kramers-derived rate; display unit 10^-2 ns^-1" "acquire exact same-object arrow numeric label"
-deltaTerminalRate = unpaidCell "delta->terminal xi/zeta role" edgeKramersRateRole "Figure 5c terminal-route arrow" "Kramers-derived rate; xi/zeta notation history retained" "acquire exact arrow label without collapsing xi and zeta source objects"
-betaEpsilonRate = unpaidCell "beta->epsilon" edgeKramersRateRole "Figure 5c beta->epsilon arrow" "Kramers-derived rate; display unit 10^-2 ns^-1" "acquire exact same-object arrow numeric label"
-epsilonTerminalRate = unpaidCell "epsilon->terminal xi/zeta role" edgeKramersRateRole "Figure 5c terminal-route arrow" "Kramers-derived rate; xi/zeta notation history retained" "acquire exact arrow label without collapsing xi and zeta source objects"
+alphaBetaRate = paidCell "alpha->beta" edgeKramersRateRole figureFivePanelCLocator "Kramers-derived Figure-5 directed rate; display unit 10^-2 ns^-1" "8.12 x 10^-2 ns^-1" figureFiveRateUncertainty
+betaGammaRate = paidCell "beta->gamma" edgeKramersRateRole figureFivePanelCLocator "Kramers-derived Figure-5 directed rate; display unit 10^-2 ns^-1" "2.59 x 10^-2 ns^-1" figureFiveRateUncertainty
+gammaDeltaRate = paidCell "gamma->delta" edgeKramersRateRole figureFivePanelCLocator "Kramers-derived Figure-5 directed rate; display unit 10^-2 ns^-1" "2.66 x 10^-2 ns^-1" figureFiveRateUncertainty
+deltaTerminalRate = paidCell "delta->terminal zeta-role; equation-xi notation history retained" edgeKramersRateRole figureFivePanelCLocator "Kramers-derived Figure-5 delta->zeta directed rate; role bridge does not assert xi=zeta" "3.85 x 10^-2 ns^-1" figureFiveRateUncertainty
+betaEpsilonRate = paidCell "beta->epsilon" edgeKramersRateRole figureFivePanelCLocator "Kramers-derived Figure-5 directed rate; display unit 10^-2 ns^-1" "0.31 x 10^-2 ns^-1" figureFiveRateUncertainty
+epsilonTerminalRate = paidCell "epsilon->terminal zeta-role; equation-xi notation history retained" edgeKramersRateRole figureFivePanelCLocator "Kramers-derived Figure-5 epsilon->zeta directed rate; role bridge does not assert xi=zeta" "2.52 x 10^-2 ns^-1" figureFiveRateUncertainty
 
 stateCells : List CalibrationPaymentCell
 stateCells =
@@ -220,7 +229,6 @@ calibrationPaymentLedger = stateCells ++ edgeRateCells
 data PaidEndpointCreatesIntermediateTable : Set where
 data UncertaintyCreatesMissingEnergy : Set where
 data IdentityCreatesNumericPayment : Set where
-
 data LedgerCompletenessCreatesPhysicalCompleteness : Set where
 
 paidEndpointDoesNotCreateIntermediateTable : PaidEndpointCreatesIntermediateTable → ⊥
@@ -260,6 +268,6 @@ open AdKCalibrationPaymentLedgerBoundary public
 canonicalAdKCalibrationPaymentLedgerBoundary : AdKCalibrationPaymentLedgerBoundary
 canonicalAdKCalibrationPaymentLedgerBoundary =
   adk-calibration-payment-ledger-boundary
-    true true false false false
+    true true false true true
     true true true true
     false false false false
