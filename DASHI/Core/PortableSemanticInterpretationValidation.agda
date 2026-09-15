@@ -8,3 +8,5 @@ import DASHI.Core.PortableLoopInterpretationExact
 import DASHI.Core.PortableLoopInterpretationRegression
 import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
 import DASHI.Core.PortableSemanticConsumerAdequacyRegression
+import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
+import DASHI.Core.PortableSemanticTranslationRealisationRegression
