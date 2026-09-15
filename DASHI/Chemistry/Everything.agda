@@ -219,3 +219,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseTerminalNota
 -- equation-xi and figure-zeta source objects remain non-identical.  This closes
 -- the route at role level without manufacturing dLN, per-edge rates, or kinetics.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseTerminalRoleCompletedDynamicsExact
+
+-- Sparse numerical calibration fibre: reuses AttributedSourceCore, snowball
+-- attribution, and optional external-identity demands rather than inventing an
+-- AdK provenance schema. Paid endpoint angles and the gamma zero-reference sit
+-- beside explicitly missing dLN/free-energy/edge-rate coordinates; RateKind
+-- keeps Kramers-derived values distinct from simulation, experiment and inference.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSparseCalibrationFibreExact
