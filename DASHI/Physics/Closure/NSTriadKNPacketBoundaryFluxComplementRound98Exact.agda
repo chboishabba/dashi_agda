@@ -89,26 +89,54 @@ boundaryTriadComplementSumZero
      | selected (Physical.q tau)
 ... | true | true | true = refl
 ... | false | false | false = refl
-... | true | true | false = normalizeThenCancel
-... | true | false | true = normalizeThenCancel
-... | false | true | true = normalizeThenCancel
-... | true | false | false = normalizeThenCancel
-... | false | true | false = normalizeThenCancel
-... | false | false | true = normalizeThenCancel
-  where
-  a = Round38.orderedPairPower E I tau velocity
-  b = Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
-  c = Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
-
-  normalizeThenCancel :
-    R96.boundaryTriadTransfer E I selected velocity tau
-      + R96.boundaryTriadTransfer E I
-          (complementSelector selected) velocity tau
-    ≡ 0ℚ
-  normalizeThenCancel =
-    trans
-      (solve (a ∷ b ∷ c ∷ []))
-      (threeLegOrderedPowerZero E I velocity reality divergenceFree tau)
+... | true | true | false =
+  trans
+    (solve
+      ( Round38.orderedPairPower E I tau velocity
+      ∷ Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
+      ∷ Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
+      ∷ []))
+    (threeLegOrderedPowerZero E I velocity reality divergenceFree tau)
+... | true | false | true =
+  trans
+    (solve
+      ( Round38.orderedPairPower E I tau velocity
+      ∷ Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
+      ∷ Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
+      ∷ []))
+    (threeLegOrderedPowerZero E I velocity reality divergenceFree tau)
+... | false | true | true =
+  trans
+    (solve
+      ( Round38.orderedPairPower E I tau velocity
+      ∷ Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
+      ∷ Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
+      ∷ []))
+    (threeLegOrderedPowerZero E I velocity reality divergenceFree tau)
+... | true | false | false =
+  trans
+    (solve
+      ( Round38.orderedPairPower E I tau velocity
+      ∷ Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
+      ∷ Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
+      ∷ []))
+    (threeLegOrderedPowerZero E I velocity reality divergenceFree tau)
+... | false | true | false =
+  trans
+    (solve
+      ( Round38.orderedPairPower E I tau velocity
+      ∷ Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
+      ∷ Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
+      ∷ []))
+    (threeLegOrderedPowerZero E I velocity reality divergenceFree tau)
+... | false | false | true =
+  trans
+    (solve
+      ( Round38.orderedPairPower E I tau velocity
+      ∷ Round38.orderedPairPower E I (Orbit.pEnergyLeg tau) velocity
+      ∷ Round38.orderedPairPower E I (Orbit.qEnergyLeg tau) velocity
+      ∷ []))
+    (threeLegOrderedPowerZero E I velocity reality divergenceFree tau)
 
 sumBoundaryComplementZero :
   (E : C3.IntegerEmbedding F) →
