@@ -90,13 +90,52 @@ Exact status:
 ```text
 C_direct constructed                         yes
 R571 signed carrier                          constructed
-literal R571 centered/Taylor realization     open
-old second-moment/six-three transplant       open on the modern carrier
+R571 radial A1/A2 geometry                   constructed (Lean receipt 5fb665d1)
+paired second-moment real-carrier transport  constructed given G1/G2
+state-side G1/G2 envelopes                   open
 R568 commutator-only spacetime producer      open
 R572 compiler                                constructed given its receipts
 R503 R500->R415 compiler surface             constructed
 periodic/global regularity promotion         false
 ```
+
+### 2026-09-15 Aristotle Lean receipt — exact scope
+
+The dedicated NS worker receipt was based on `dashi_lean4` source commit
+`63fa6af1d45680e9d618e9e2c59d49ed5873ce56`; its active Lean intake is
+recorded separately in that repository.
+It supplies Lean theorems for the **geometric** B-carrier Gate-A constants,
+not an endpoint payment:
+
+```text
+0 ≤ ||k+y|| - 2||k|| + ||k-y|| ≤ ||y||² / ||k||
+```
+
+Thus the periodic nonzero-mode realization has radial constants `A1 = 1` and
+`A2 = 1` independently of the Galerkin cutoff.  It also supplies the exact
+real paired-second-moment transport conditional on the state-side `G1`/`G2`
+envelopes, and a helical-vertex antiparallel cancellation/output-gain theorem
+for the heterochiral rows.  These are active Lean proof material, not merely
+an archive observation.
+
+The following boundaries remain explicit:
+
+```text
+G1/G2 state-side envelopes                    open
+R574-style c_A dissipation identification     open
+pair-resolvent c_B / bounded Gram factor      open
+TOE network-forcing M1                        open
+R568 and its A1ChannelObligation              open
+independent phase-production leaf             open
+periodic regularity                           false
+whole-space A / B-to-A transport              untouched
+```
+
+The source-local TOE proposition labels `A1`/`A2` are distinct from the
+B-carrier radial constants named `A1`/`A2`; no conclusion was relabelled or
+transported across that collision.  The worker also supplies only a Lean
+mirror/crosswalk of `DASHI.Core.ProofDebtRouterExact`, preserving that Agda
+owner as canonical.
 
 ### Historical/provenance B attempt — same-output Gram / P3
 
