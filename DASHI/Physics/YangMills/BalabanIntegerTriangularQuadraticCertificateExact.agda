@@ -17,9 +17,6 @@ open import Data.Product using (_×_; _,_)
 zeroZ : ℤ
 zeroZ = + 0
 
-twoZ : ℤ
-twoZ = + 2
-
 data TriQuadraticZ : Set where
   qnilZ  : TriQuadraticZ
   qconsZ : ℤ → List ℤ → TriQuadraticZ → TriQuadraticZ
@@ -47,7 +44,7 @@ addTriZ (qconsZ dl rl tl) (qconsZ dr rr tr) =
 squareLinearZ : List ℤ → TriQuadraticZ
 squareLinearZ [] = qnilZ
 squareLinearZ (a ∷ as) =
-  qconsZ (a * a) (scaleListZ (twoZ * a) as) (squareLinearZ as)
+  qconsZ (a * a) (scaleListZ (a + a) as) (squareLinearZ as)
 
 sumSquareTriZ : List (List ℤ) → TriQuadraticZ
 sumSquareTriZ [] = qnilZ
