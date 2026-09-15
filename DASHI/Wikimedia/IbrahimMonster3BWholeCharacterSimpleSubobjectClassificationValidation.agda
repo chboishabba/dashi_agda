@@ -11,7 +11,7 @@ sourceRegression :
   × P.SimpleSubobjectClassificationBoundary.classifiesOnlySimpleSourcesWithNonzeroHom
     P.canonicalSimpleSubobjectClassificationBoundary
   ≡ true
-  × P.SimpleSubobjectClassificationBoundary.semisisimpleAssemblyWritten
+  × P.SimpleSubobjectClassificationBoundary.semisimpleAssemblyWritten
     P.canonicalSimpleSubobjectClassificationBoundary
   ≡ false
 sourceRegression = refl , refl , refl
