@@ -77,9 +77,9 @@ periodicBSecondMomentSixThreeTransplantClosedIsFalse =
   Paper.NSPaperTheoremStatus.periodicBSecondMomentSixThreeTransplantClosedIsFalse status
 
 directLeafACompilerConstructedIsTrue :
-  Paper.NSPaperTheoremStatus.directCompanionConstructed status ≡ true
+  Paper.NSPaperTheoremStatus.directLeafACompilerConstructed status ≡ true
 directLeafACompilerConstructedIsTrue =
-  Paper.NSPaperTheoremStatus.directCompanionConstructedIsTrue status
+  Paper.NSPaperTheoremStatus.directLeafACompilerConstructedIsTrue status
 
 directOffDiagonalConsumerConstructedIsTrue :
   Paper.NSPaperTheoremStatus.directOffDiagonalConsumerConstructed status ≡ true
