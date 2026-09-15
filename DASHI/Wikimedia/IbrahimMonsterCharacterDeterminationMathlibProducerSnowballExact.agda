@@ -22,15 +22,17 @@ import DASHI.Wikimedia.IbrahimMonsterCharacterDeterminationPrimarySourceSnowball
 -- (and the FDRep version) for irreducible finite-group representations over an
 -- algebraically closed field with |G| invertible in the coefficient field.
 --
--- This theorem is strong enough to make the desired corollary tiny:
--- equal irreducible characters force Nonempty (Equiv sigma rho), because the
--- common character inner product is 1, whereas the no-isomorphism branch of
--- char_orthonormal is 0.
+-- The previously-open tiny Lean wrapper now exists in chboishabba/dashi_lean4
+-- and was merged to main.  That pays SOURCE EXISTENCE and repository
+-- integration only.  GitHub reports no workflow run for the exact merge SHA,
+-- so no fresh Lean kernel receipt is promoted here; Agda transport and the
+-- actual Monster same-object attachment also remain separate payments.
 --
 -- Important ownership split:
 --   Serre 1977              = mathematical literature provenance;
 --   mathlib Character.lean  = external machine-checked producer;
---   a tiny Lean corollary    = still needs an execution receipt;
+--   dashi_lean4 wrapper     = merged source artifact;
+--   Lean workflow/kernel    = not observed for the exact merge here;
 --   Agda IrreducibleCharacterDetermination = local consumer interface;
 --   same-object actual W_zeta attachment    = separate downstream payment.
 ------------------------------------------------------------------------
@@ -154,9 +156,38 @@ canonicalMathlibCharOrthonormalProducer = mathlib-char-orthonormal-producer
   true true true true true true true true true true
 
 ------------------------------------------------------------------------
--- 5. The desired corollary is now a tiny cross-prover wrapper, not a request
---    for a new representation theory library. We deliberately do not mark it
---    paid until an actual Lean execution receipt exists.
+-- 5. Exact dashi_lean4 source/merge receipt.
+------------------------------------------------------------------------
+
+record LeanWrapperRepositoryReceipt : Set where
+  constructor lean-wrapper-repository-receipt
+  field
+    repository : String
+    branch : String
+    sourcePath : String
+    regressionPath : String
+    theoremName : String
+    branchHeadCommit : String
+    mergeCommit : String
+    sourceMergedToMain : Bool
+    workflowRunObservedAtMerge : Bool
+open LeanWrapperRepositoryReceipt public
+
+canonicalLeanWrapperRepositoryReceipt : LeanWrapperRepositoryReceipt
+canonicalLeanWrapperRepositoryReceipt = lean-wrapper-repository-receipt
+  "chboishabba/dashi_lean4"
+  "agent/monster-character-determination-mathlib"
+  "Synthesis/MonsterCharacterDetermination.lean"
+  "Synthesis/MonsterCharacterMultiplicityRegression.lean"
+  "Synthesis.nonempty_iso_of_character_eq"
+  "751d58de09bcb37d1b1f3dbac2511f6cb362da5e"
+  "ff0b3a02fb4e3581b3518fb2abfe381a5b36e1cd"
+  true
+  false
+
+------------------------------------------------------------------------
+-- 6. Corollary route: source is now written+merged; execution/transport remain
+--    fail-closed because no workflow run was observed for the exact merge SHA.
 ------------------------------------------------------------------------
 
 record EqualCharacterIsoCorollaryRoute : Set where
@@ -179,12 +210,11 @@ currentEqualCharacterIsoCorollaryRoute = equal-character-iso-corollary-route
   "equal irreducible characters -> Nonempty equivariant isomorphism"
   "rewrite the two orthogonality inner products using character equality; the self-pair is 1, while the no-isomorphism branch is 0; contradiction with one_ne_zero eliminates the empty-isomorphism branch"
   false false false
-  false false false
+  true false false
 
 ------------------------------------------------------------------------
--- 6. Local consumer alignment. The existing Agda record remains authoritative
---    for downstream use; this file does not pretend a theorem-name citation is
---    an inhabitant of that record.
+-- 7. Local consumer alignment. The existing Agda record remains authoritative
+--    for downstream use; a merged Lean source file is not an Agda inhabitant.
 ------------------------------------------------------------------------
 
 localConsumer : Set₂
@@ -200,15 +230,20 @@ record MathlibToDASHICharacterDeterminationTransport : Set₂ where
 open MathlibToDASHICharacterDeterminationTransport public
 
 ------------------------------------------------------------------------
--- 7. WrongType / attribution boundaries.
+-- 8. WrongType / attribution boundaries.
 ------------------------------------------------------------------------
 
+data MergedLeanSourceCreatesKernelReceipt : Set where
 data MathlibTheoremNameCreatesAgdaWitness : Set where
 data SerreCitationCreatesLeanKernelReceipt : Set where
 data TopicDeweyClassifiesSpecificBook : Set where
 data QidCreatesEquivariantIso : Set where
 data OeisCreatesCharacterTheorem : Set where
 data ExternalOrthogonalityAutomaticallyAttachesActualMonsterSector : Set where
+
+mergedLeanSourceDoesNotCreateKernelReceipt :
+  MergedLeanSourceCreatesKernelReceipt → ⊥
+mergedLeanSourceDoesNotCreateKernelReceipt ()
 
 mathlibNameDoesNotCreateAgdaWitness : MathlibTheoremNameCreatesAgdaWitness → ⊥
 mathlibNameDoesNotCreateAgdaWitness ()
@@ -230,7 +265,7 @@ orthogonalityDoesNotAttachActualMonsterSector :
 orthogonalityDoesNotAttachActualMonsterSector ()
 
 ------------------------------------------------------------------------
--- 8. Highest-alpha frontier after the source search.
+-- 9. Highest-alpha frontier after reconciling the merged Lean source.
 ------------------------------------------------------------------------
 
 record MathlibCharacterDeterminationSnowballFrontier : Set where
@@ -258,4 +293,4 @@ currentMathlibCharacterDeterminationSnowballFrontier =
   mathlib-character-determination-snowball-frontier
     true true true true true true true false true true
     false false false
-    "write the smallest Lean wrapper over the pinned mathlib char_orthonormal theorem proving equal irreducible characters imply Nonempty equivariant isomorphism; obtain a Lean kernel receipt and content-address that exact source/result. Then transport only that theorem into the existing Agda IrreducibleCharacterDetermination interface. Do not re-prove Maschke/Schur in Agda, and do not attach the result to W_zeta until the actual restricted Monster representation is same-object connected."
+    "obtain a Lean kernel execution receipt for the exact merged dashi_lean4 source at ff0b3a02fb4e3581b3518fb2abfe381a5b36e1cd, content-address that receipt, then transport only nonempty_iso_of_character_eq into the existing Agda IrreducibleCharacterDetermination interface. After that, use finite Stone-von Neumann uniqueness on the SAME actual W_zeta restricted constituents; do not attach the result from 65610=729*90, A005052, QIDs, Dewey or citation alone."
