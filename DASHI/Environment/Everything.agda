@@ -27,8 +27,8 @@ import DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollination
 -- Water-hyacinth biocontrol as a concrete LES / experimental-coordinate /
 -- active proof-search consumer with canonical attribution, SI semantics,
 -- actual-chemistry/369 indexing, contextual classification, consumer-indexed
--- chemistry Pareto selection, local Springfield operational geometry and
--- collision-backed costed probes.
+-- chemistry Pareto selection, Pareto-selected assay scheduling, local
+-- Springfield operational geometry and collision-backed costed probes.
 import DASHI.Environment.BiocontrolExternalityExperimentExact
 import DASHI.Environment.BiocontrolExternalityExperimentRegression
 import DASHI.Environment.BiocontrolExternalityExperimentSourceAtlasExact
@@ -51,6 +51,8 @@ import DASHI.Environment.BiocontrolChemistryActiveDiscriminatorExact
 import DASHI.Environment.BiocontrolChemistryActiveDiscriminatorRegression
 import DASHI.Environment.BiocontrolChemistryObserverParetoExact
 import DASHI.Environment.BiocontrolChemistryObserverParetoRegression
+import DASHI.Environment.BiocontrolChemistryParetoExperimentSchedulerExact
+import DASHI.Environment.BiocontrolChemistryParetoExperimentSchedulerRegression
 import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalExact
 import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalRegression
 import DASHI.Environment.SpringfieldLakesInterventionGeometryExact
