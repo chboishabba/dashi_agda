@@ -1,10 +1,10 @@
-# Dioxus Shell + Independent wgpu Hyperfabric Design
+# Dioxus Shell + Independent wgpu Visualisation/Hyperfabric Design
 
 ## Status
 
-Approved architectural direction for a Rust-first application shell and a first-class GPU graph interpreter.
+Revised architectural direction for a Rust-first application shell and a first-class GPU visualisation interpreter.
 
-The concrete application witness is `meta-introspector/solfunmeme-dioxus`, which already uses Dioxus 0.7.3, Dioxus web, WASM/browser bindings, `rsx!`, `Router`, `use_signal`, and `dioxus-charts`. The target architecture preserves that application investment while preventing Dioxus component state or chart widgets from becoming authoritative for the complex 3D graph surface.
+The concrete application witness is `meta-introspector/solfunmeme-dioxus`, which already uses Dioxus 0.7.3, Dioxus web, WASM/browser bindings, `rsx!`, `Router`, `use_signal`, and `dioxus-charts`. The target architecture preserves that application investment while preventing Dioxus component state or chart widgets from becoming authoritative for any interactive visualisation surface.
 
 This design extends the existing `PortableSemanticInterpretationExact` parent rather than replacing it.
 
@@ -13,13 +13,13 @@ This design extends the existing `PortableSemanticInterpretationExact` parent ra
 Use:
 
 ```text
-Dioxus shell + portable semantic state + independent wgpu graph interpreter
+Dioxus ordinary-UI shell + portable semantic state + independent wgpu visualisation engine
 ```
 
 not:
 
 ```text
-Dioxus -> dioxus-charts -> every visualization
+Dioxus -> dioxus-charts -> visualisation
 ```
 
 and not:
@@ -28,9 +28,45 @@ and not:
 pure wgpu app with the existing Dioxus application discarded
 ```
 
-The Dioxus shell owns normal application UI: routing, forms, search, document panes, tables, provenance cards, settings, accessible controls, and ordinary analytical charts.
+The Dioxus shell owns ordinary application UI:
 
-The wgpu lane owns complex visual computation and rendering: 3D Sankey/hyperfabric geometry, GPU buffers, picking, camera state, LOD/culling, graph-layout compute, edge bundling, flow animation, and WGSL pipelines.
+- routing;
+- menus and navigation;
+- forms;
+- search inputs;
+- document/reading panes;
+- settings;
+- textual provenance and citation cards;
+- ordinary non-visual data tables;
+- accessibility/chrome around the visual surface;
+- commands and selectors that configure a visualisation.
+
+The wgpu lane owns **all charts and interaction-heavy visualisation**, including:
+
+- bar, line, area, pie, scatter and other analytical charts;
+- timelines and interval views;
+- 2D graph views;
+- 3D Sankey/hyperfabric geometry;
+- proof/dependency topology;
+- GPU buffers;
+- picking and brushing;
+- pan/zoom/orbit cameras;
+- hover/selection overlays;
+- LOD/culling;
+- graph-layout compute;
+- edge bundling;
+- flow animation;
+- spatial aggregation;
+- WGSL render and compute pipelines.
+
+`dioxus-charts` is therefore an existing implementation/prototype witness, not part of the durable target visualisation architecture.
+
+The strong ownership rule is:
+
+```text
+Dioxus owns ordinary UI.
+wgpu owns visualisation.
+```
 
 ## Semantic application
 
@@ -56,43 +92,59 @@ native input event != domain command != semantic transition
 
 ## Independent projections
 
-Define two sibling projections from semantic state:
+Define sibling projections from semantic state:
 
 ```text
 pi_D : S -> D
-pi_G : S -> G
+pi_V : S -> V
 ```
 
-`D` is the ordinary Dioxus/application view model. Typical fields include routes, forms, search state, selected semantic target, inspector/provenance panels, textual reading state, and ordinary chart data.
+`D` is the ordinary Dioxus/application view model. Typical fields include routes, forms, search state, selected semantic target, textual inspector/provenance state, document-reading state, configuration controls, and parameters which configure a visualisation.
 
-`G` is the graph/GPU view model. A minimal graph projection is:
-
-```text
-G = (V, E, P, F, L)
-```
-
-where:
-
-- `V` = nodes;
-- `E` = edges/hyperedges;
-- `P` = positions/layout state;
-- `F` = flow/weight data;
-- `L` = visual-layer, LOD, selection, and picking metadata.
+`V` is the framework-neutral visualisation view model consumed by the GPU engine.
 
 The architectural non-factorisation rule is:
 
 ```text
-pi_G need not FactorsThrough(pi_D)
-pi_D need not FactorsThrough(pi_G)
+pi_V need not FactorsThrough(pi_D)
+pi_D need not FactorsThrough(pi_V)
 ```
 
-A Dioxus component tree is therefore not the canonical source of graph topology or GPU resources.
+A Dioxus component tree is therefore not the canonical source of chart data, graph topology, geometric state, or GPU resources.
 
-## Framework-neutral graph IR
+## Framework-neutral visualisation IR
 
-The graph IR must be independent of Dioxus and wgpu resource handles.
+The visualisation IR must be independent of both Dioxus and wgpu resource handles.
 
-Conceptually:
+The IR may contain multiple consumer-specific visual families under one typed surface, for example:
+
+```text
+Visualisation
+  = Chart(ChartIR)
+  | Timeline(TimelineIR)
+  | Graph(GraphIR)
+  | Sankey(SankeyIR)
+  | Spatial(SpatialIR)
+  | ProofTopology(ProofTopologyIR)
+```
+
+This does not require every family to share one geometry representation. They share the semantic/interpreter boundary, interaction command surface, provenance references, and execution ownership.
+
+A chart IR may be conceptually:
+
+```text
+ChartIR = (
+  chartId,
+  series,
+  axes,
+  marks,
+  scales,
+  semanticRefs,
+  interactionPolicy
+)
+```
+
+A graph IR may be conceptually:
 
 ```text
 Node = (
@@ -114,7 +166,7 @@ Edge = (
 )
 ```
 
-The semantic graph contract concerns endpoint identity, graph relations, flow/weight meaning, provenance references, and consumer-required selection semantics.
+The semantic contract concerns data identity, graph relations, flow/weight meaning, series/axis meaning, provenance references, and consumer-required interaction semantics.
 
 It does not require equal triangles, equal shader invocations, equal rasterization, equal execution order, or equal performance across backends.
 
@@ -126,19 +178,24 @@ Gamma(e) = Sweep(Curve(p_src, ..., p_dst), width(flow(e)))
 
 but `Gamma` is an interpreter-level realization, not the semantic identity of `e`.
 
-## GPU interpreter
+Likewise a line chart series may become a GPU polyline, a triangle strip, or another batched geometry without changing the series semantics.
 
-The graph renderer is a sibling consumer of graph IR and owns long-lived GPU resources such as:
+## GPU visualisation interpreter
+
+The renderer is a sibling consumer of visualisation IR and owns long-lived GPU resources such as:
 
 ```text
-GraphGpu
+VisualGpu
+  mark_buffers
   node_buffer
   edge_buffer
   flow_buffer
+  axis_buffers
   camera
   picking_buffer
+  selection_buffer
   layout_compute
-  render_pipeline
+  render_pipelines
   shaders
 ```
 
@@ -154,17 +211,66 @@ Native deployment:
 Rust -> wgpu -> native backend
 ```
 
-The same semantic graph and Rust graph engine may be shared even where execution strategy, supported limits, timing, and raster output differ.
+The same semantic visualisation IR and Rust renderer may be shared even where execution strategy, supported limits, timing, and raster output differ.
 
 ## Dioxus interpreter
 
 Dioxus remains the application shell and ordinary-UI interpreter.
 
-A graph-hosting Dioxus component is only a controller/host. It may expose filters, routing, selection summaries, provenance, and graph-surface placement, but it does not own GPU topology or buffers.
+A visualisation-hosting Dioxus component is only a controller/host. It may expose filters, routing, search, selection summaries, provenance, textual details, settings, and visual-surface placement, but it does not own visual geometry, chart marks, graph topology, layout buffers, or GPU state.
 
-The graph surface must remain removable/rehostable without rewriting semantic state or graph IR.
+The visual surface must remain removable/rehostable without rewriting semantic state or visualisation IR.
 
-`dioxus-charts` remains appropriate for conventional bar/line/pie-style analytical views. It is not the architectural owner for the 3D Sankey/hyperfabric surface.
+Existing `dioxus-charts` use is treated as historical/prototype implementation evidence. Durable analytical charts migrate to the same wgpu visualisation engine used for Sankey, hyperfabric, graph and proof-topology surfaces.
+
+## One visualisation engine, multiple semantic views
+
+The reason for putting ordinary charts into wgpu as well is architectural coherence rather than GPU novelty.
+
+A scatter plot, line chart, timeline, dependency graph and Sankey all need overlapping capabilities:
+
+```text
+semantic object identity
+projection/scales/layout
+GPU-resident geometry
+selection
+hover
+picking
+brushing
+filtering
+zoom/camera
+provenance overlays
+animation
+LOD
+```
+
+Keeping these in one engine allows one interaction and rendering substrate instead of separate DOM/SVG/chart-library and GPU worlds.
+
+This does **not** mean every simple chart must use expensive 3D machinery. The same GPU engine may have lightweight 2D pipelines and richer 3D pipelines.
+
+Conceptually:
+
+```text
+VisualGpu
+  2d/
+    bars
+    lines
+    points
+    areas
+    timelines
+  graph/
+    nodes
+    edges
+    labels
+  sankey3d/
+    ribbons
+    bundles
+    flow
+  interaction/
+    picking
+    brushing
+    selection
+```
 
 ## Interaction refinement
 
@@ -177,15 +283,15 @@ Dioxus side-panel click
   -> decode_D
   -> SelectNode(42)
 
-GPU ray/pick hit
-  -> decode_G
+GPU pick hit
+  -> decode_V
   -> SelectNode(42)
 ```
 
 The semantic invariant is:
 
 ```text
-decode_D(i_D) = decode_G(i_G) = SelectNode(42)
+decode_D(i_D) = decode_V(i_V) = SelectNode(42)
 ```
 
 for interactions that denote the same consumer-relevant selection.
@@ -198,7 +304,17 @@ delta(S, SelectNode(42))
 
 is independent of which interpreter emitted the command.
 
-The same pattern applies to `FollowTarget(id)` from the semantic-reading work: DOM activation, Dioxus component activation, or GPU picking may all emit the same domain command after boundary admission.
+Likewise a GPU bar click, timeline selection, graph-node pick, Sankey-ribbon pick, or proof-node pick may all emit ordinary domain commands such as:
+
+```text
+SelectObject(id)
+FollowTarget(id)
+FilterBy(predicate)
+SetRange(a, b)
+FocusProvenance(id)
+```
+
+The same pattern applies to the semantic-reading work: Dioxus text activation or GPU picking may emit the same domain command after boundary admission.
 
 ## Portable semantic refinement
 
@@ -212,7 +328,7 @@ Q(interpret_b(x)) = Q(meaning(x))
 
 is the required semantic-refinement receipt.
 
-For GPU rendering, `Q` should normally observe graph semantics such as selected object identity, endpoint connectivity, flow quantity, visibility class, or interaction result—not raw framebuffer identity.
+For GPU visualisation, `Q` should normally observe semantics such as selected object identity, series identity, endpoint connectivity, flow quantity, range/filter result, visibility class, or interaction result—not raw framebuffer identity.
 
 Consequently:
 
@@ -231,24 +347,24 @@ same semantics != same performance
 
 Concrete Dioxus/WASM shell witness.
 
-Role:
+Target role:
 
 ```text
-application chrome + routes + ordinary controls + ordinary charts
+application chrome + routes + ordinary controls + textual/document UI
 ```
 
-Not authority for graph semantics or GPU realization.
+Existing `dioxus-charts` is not the target owner of analytical visualisation.
 
 ### `meta-introspector/erdfa-publish-rs`
 
 Existing semantic-presentation IR precedent. It defines typed Rust components serialized as content-addressed DA51 CBOR shards and explicitly separates semantic component structure from renderer choice.
 
-This should be reused conceptually for graph/provenance shard representation rather than inventing a second generic presentation ontology.
+This should be reused conceptually for visual/provenance shard representation rather than inventing a second generic presentation ontology.
 
-Potential graph relation:
+Potential relation:
 
 ```text
-semantic graph object
+semantic visual object
   -> content-addressed shard / manifest
   -> renderer-specific realization
 ```
@@ -292,7 +408,7 @@ Role:
 replication transport != semantic authority
 ```
 
-Graph updates received through a mesh transport remain candidate state until admitted by the semantic/application boundary.
+Visualisation updates received through a mesh transport remain candidate state until admitted by the semantic/application boundary.
 
 ### `meta-introspector/zos-server`
 
@@ -301,7 +417,7 @@ Distributed reconciliation/runtime witness. Its documented sync lane distinguish
 Role:
 
 ```text
-transport/recovery capability != canonical graph identity
+transport/recovery capability != canonical visual/domain identity
 ```
 
 Its zkperf/eRDFa-shaped identity normalization is a useful upstream adapter precedent.
@@ -317,7 +433,7 @@ execution strategy
   -> measured witness / trace / performance receipt
 ```
 
-This is downstream operational evidence, not semantic identity. It can compare JS/Rust/WASM/WebGPU/native strategies without changing the graph meaning.
+This is downstream operational evidence, not semantic identity. It can compare JS/Rust/WASM/WebGPU/native strategies without changing the visualisation meaning.
 
 ### `chboishabba/zkSEC`
 
@@ -343,26 +459,26 @@ Role:
 semantic/provenance shard publication and retrieval
 ```
 
-It should remain a persistence/distribution adapter rather than becoming the canonical graph store by implication.
+It should remain a persistence/distribution adapter rather than becoming the canonical visual/domain store by implication.
 
-## Shard / graph / rendering relationship
+## Shard / visualisation / rendering relationship
 
 A useful composition is:
 
 ```text
 Semantic state S
-  -> graph projection G
+  -> visualisation projection V
   -> content-addressed semantic shards H
-  -> graph renderer R
+  -> GPU renderer R
 ```
 
-where both `G` and `H` retain semantic/provenance identity, while `R` owns transient GPU realization.
+where both `V` and `H` retain semantic/provenance identity, while `R` owns transient GPU realization.
 
-GPU handles, buffers, pipelines, bind groups, textures, and triangles are therefore execution resources, not durable semantic identifiers.
+GPU handles, buffers, pipelines, bind groups, textures, marks and triangles are therefore execution resources, not durable semantic identifiers.
 
 ## Admission and failure locality
 
-Any external graph update, JSON command, mesh event, persisted shard, or UI/GPU event must enter through an explicit admission boundary before obtaining semantic mutation authority.
+Any external visual update, JSON command, mesh event, persisted shard, or Dioxus/GPU event must enter through an explicit admission boundary before obtaining semantic mutation authority.
 
 Conceptually:
 
@@ -381,7 +497,7 @@ Failure at one boundary does not imply application-wide failure:
 Fails(here) != Fails(everywhere)
 ```
 
-Malformed transport payloads, unknown graph ids, stale CIDs, unsupported GPU capabilities, or invalid commands must remain local failures unless a higher-level consumer explicitly escalates them.
+Malformed transport payloads, unknown semantic ids, stale CIDs, unsupported GPU capabilities, or invalid commands must remain local failures unless a higher-level consumer explicitly escalates them.
 
 ## Formal owner decomposition
 
@@ -407,8 +523,8 @@ step
 DioxusView
 projectDioxus
 
-GraphView
-projectGraph
+VisualView
+projectVisual
 
 DioxusInput
 GpuInput
@@ -416,7 +532,7 @@ GpuInput
 decodeDioxus
 decodeGpu
 
-GraphSemanticQuery
+VisualSemanticQuery
 GpuImplementation
 GpuObservation
 semanticRefinement
@@ -430,31 +546,34 @@ Suggested concrete bridge:
 DioxusWgpuHyperfabricBridgeExact
 ```
 
+The generic core should talk about visualisation rather than Sankey specifically so line/scatter/bar/timeline/graph views instantiate the same owner.
+
 ## First concrete implementation slice
 
-After spec approval, the smallest retained implementation should be a tiny graph specimen with:
+After spec approval, the smallest retained implementation should prove both sides of the new ownership rule:
 
-- 3-5 semantic nodes;
-- 2-4 weighted edges;
-- one overlapping provenance/reference relation;
-- Dioxus-hosted graph surface;
-- wgpu/WGSL rendering of the graph surface;
-- GPU picking that emits an ordinary domain `SelectNode` command;
-- Dioxus side-panel activation that emits the same command;
+- a Dioxus ordinary-UI host/control surface;
+- a wgpu-hosted visual surface;
+- one tiny 2D interactive chart specimen using GPU marks;
+- one tiny weighted graph/Sankey specimen;
+- shared semantic object ids between visual forms;
+- GPU picking that emits an ordinary domain command;
+- a Dioxus control that emits the same command;
 - tests proving command-level equivalence without asserting equal pixels or equal event mechanisms.
 
-The first slice does not need production 3D Sankey layout. A minimal rendered graph is sufficient to prove the architecture before adding layout compute, ribbon extrusion, LOD, or bundling.
+The first slice does not need production 3D Sankey layout. Minimal GPU chart marks plus a minimal rendered graph are sufficient to prove that charts and graph visualisations share the wgpu-owned visual lane before adding layout compute, ribbon extrusion, LOD, or bundling.
 
 ## Firewalls
 
 ```text
 Dioxus component state != domain authority
-Dioxus renderer != graph renderer
-dioxus-charts != 3D graph engine
+Dioxus renderer != visualisation renderer
+dioxus-charts != durable chart architecture
+semantic chart != GPU mark buffers
 semantic graph != GPU buffers
 semantic graph != triangles
-same semantic graph != same GPU geometry
-same semantic graph != same pixels
+same semantic visualisation != same GPU geometry
+same semantic visualisation != same pixels
 same command != same input mechanism
 mesh transport != mutation authority
 content address != legal/domain authority
@@ -467,10 +586,11 @@ hidden from renderer != absent from semantic world
 
 The architecture is successful when:
 
-1. the Dioxus shell can be replaced or bypassed without changing semantic graph identity;
+1. the Dioxus shell can be replaced or bypassed without changing semantic visualisation identity;
 2. the wgpu renderer can be hosted by web/WASM or native execution without changing domain-command semantics;
-3. ordinary charts can continue using `dioxus-charts` independently of the 3D graph engine;
-4. graph/provenance objects can be serialized/content-addressed without GPU handles becoming durable identity;
-5. transport/persistence/security/performance systems remain distinct downstream/upstream roles;
-6. Dioxus and GPU interactions can refine to the same domain command;
-7. consumer-indexed semantic equivalence is required instead of pixel/geometry/execution equivalence.
+3. **all retained charts and interactive visualisations use the wgpu visualisation engine rather than a Dioxus chart renderer**;
+4. lightweight 2D charts and complex 3D Sankey/hyperfabric views can share interaction, picking, selection and provenance infrastructure while retaining distinct pipelines;
+5. visual/provenance objects can be serialized/content-addressed without GPU handles becoming durable identity;
+6. transport/persistence/security/performance systems remain distinct downstream/upstream roles;
+7. Dioxus and GPU interactions can refine to the same domain command;
+8. consumer-indexed semantic equivalence is required instead of pixel/geometry/execution equivalence.
