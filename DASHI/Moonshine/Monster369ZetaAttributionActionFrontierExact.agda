@@ -11,14 +11,15 @@ import DASHI.Moonshine.Monster369ZetaSameObjectWeldExact as ZetaWeld
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact as ZetaOEIS
 import DASHI.Wikimedia.IbrahimMonster3BModernRestrictionTwelveSeventyEightOccurrenceSnowballExact as Occurrence
 import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
+import DASHI.Wikimedia.IbrahimMonster3BRecognizedLinearZetaSameObjectExact as RecognizedLinear
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as Acquisition
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 
 ------------------------------------------------------------------------
 -- MONSTER / 369 ZETA ATTRIBUTION -> ACTION FRONTIER
 --
--- This owner composes two already-existing source graphs without promoting
--- either beyond its role:
+-- This owner composes already-existing source graphs without promoting either
+-- beyond its role:
 --
 --   Washington / exact Q(zeta_3) machinery
 --       pays the cyclotomic scalar algebra and the selected zeta value;
@@ -27,15 +28,20 @@ import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 --       pay the 3B normalizer/inertia character route and the source-level
 --       occurrence of the 12 and 78 multiplicity constituents;
 --
---   OEIS / QID / Dewey coordinates
+--   OEIS / QID / Dewey / Wikipedia coordinates
 --       remain discovery, classification and arithmetic provenance only.
 --
 -- The exact same scalar zeta is already reused by both the finite Schrodinger
--- model and the literal selected VOA phase chart.  That closes the scalar
--- identity question.  It does NOT identify the finite H_zeta model with the
--- actual Heisenberg constituent inside the literal W_zeta carrier.  That
--- representation-level recognition/action weld is the first unpaid theorem
--- on the critical path to S_zeta = Hom_E(H_zeta,W_zeta) and 12+78.
+-- model and the literal selected VOA phase chart.  The next typed gate now
+-- separates two further obligations that used to be described together:
+--
+--   (a) obtain an ActualZetaSectorRecognition inhabitant on the exact selected
+--       literal source;
+--   (b) pair that recognition with the LinearSingleActionProducer and prove
+--       both the selected-producer identity and literal-zeta-carrier identity.
+--
+-- Only after (a)+(b) does the route proceed to the normalizer/Monster action
+-- weld and then S_zeta = Hom_E(H_zeta,W_zeta).
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -70,6 +76,9 @@ occurrenceBoundary = Occurrence.currentRestrictionOccurrenceFrontier
 
 voaCompositionBoundary : VOAComposition.ActualVOASelected3BCompositionFrontier
 voaCompositionBoundary = VOAComposition.currentActualVOASelected3BCompositionFrontier
+
+recognizedLinearBoundary : RecognizedLinear.RecognizedLinearZetaBoundary
+recognizedLinearBoundary = RecognizedLinear.currentRecognizedLinearZetaBoundary
 
 acquisitionBoundary : Acquisition.ActualLinearMultiplicityAcquisitionFrontier
 acquisitionBoundary = Acquisition.currentActualLinearMultiplicityAcquisitionFrontier
@@ -156,7 +165,7 @@ wikipediaDoesNotCreateActionWitness ()
 
 nextResidual : String
 nextResidual =
-  "construct or acquire the actual same-object representation recognition that identifies the finite Schrodinger H_zeta model with the Heisenberg constituent acting inside the literal selected VOA W_zeta carrier. Then instantiate the existing ActualLinearMultiplicityAcquisition/Selected3BNormalizerMonsterActionWeld on that same selected 3B action, form S_zeta = Hom_E(H_zeta,W_zeta), and apply the already source-paid 12+78 character. Washington pays the cyclotomic algebra; Barraclough-Wilson pays the representation-theoretic character context; A003136/A349039/A005052, QIDs, Dewey and Wikipedia navigation do not pay the missing action, representation identity or intertwiner."
+  "first acquire an ActualZetaSectorRecognition inhabitant on the exact literal selected-3B source. Then inhabit RecognizedLinearZetaSameObject by pairing it with the actual LinearSingleActionProducer and proving the same compiled producer plus same literal W_zeta carrier. Only then instantiate Selected3BNormalizerMonsterActionWeld, form S_zeta = Hom_E(H_zeta,W_zeta), and apply the already source-paid 12+78 character. Washington pays the cyclotomic algebra; Barraclough-Wilson pays the representation-theoretic character context; A003136/A349039/A005052, QIDs, Dewey and Wikipedia navigation do not pay recognition, linear carrier identity, action or intertwiner."
 
 record Monster369ZetaAttributionActionBoundary : Set where
   constructor monster-369-zeta-attribution-action-boundary
@@ -165,13 +174,16 @@ record Monster369ZetaAttributionActionBoundary : Set where
     schrodingerAndVOAUseSameCyclotomicZeta : Bool
     literalSelectedZetaSectorTyped : Bool
     sourcePaidTwelveSeventyEightOccurrenceAvailable : Bool
+    recognitionInterfaceAvailable : Bool
+    recognizedLinearSameObjectGateTyped : Bool
     washingtonPaysCyclotomicAlgebraRole : Bool
     barracloughWilsonPaysRepresentationCharacterRole : Bool
     oeisCreatesCyclotomicSameObject : Bool
     oeisCreatesRepresentationIdentity : Bool
     qidCreatesActualHZetaRecognition : Bool
     wikipediaCreatesActionWitness : Bool
-    actualHZetaWZetaRecognitionPaid : Bool
+    actualZetaRecognitionInhabitantPaid : Bool
+    recognizedLinearSameObjectInhabitantPaid : Bool
     selectedNormalizerMonsterActionWeldPaid : Bool
     actualMultiplicityHomEvaluationPaid : Bool
     actualTwelveSeventyEightIntertwinerPaid : Bool
@@ -182,8 +194,8 @@ canonicalMonster369ZetaAttributionActionBoundary :
   Monster369ZetaAttributionActionBoundary
 canonicalMonster369ZetaAttributionActionBoundary =
   monster-369-zeta-attribution-action-boundary
-    true true true true
+    true true true true true true
     true true
     false false false false
-    false false false false
+    false false false false false
     nextResidual
