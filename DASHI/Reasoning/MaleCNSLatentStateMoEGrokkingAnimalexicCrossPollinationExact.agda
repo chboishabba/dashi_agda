@@ -268,6 +268,7 @@ record AnimalexicRuntimeSource : Set where
   constructor animalexic-runtime-source
   field
     repository : String
+    commit : String
     architecturePath : String
     governanceReading : String
 
@@ -275,5 +276,6 @@ canonicalAnimalexicRuntimeSource : AnimalexicRuntimeSource
 canonicalAnimalexicRuntimeSource =
   animalexic-runtime-source
     "github.com/chboishabba/animalexic"
+    "8f0ee8bb07c4788601306de67a0f97edc0e9a0dd"
     "architecture.md"
     "Candidate generation is separated from governed promotion/canonical state mutation; runtime metadata does not promote fly affect semantics."
