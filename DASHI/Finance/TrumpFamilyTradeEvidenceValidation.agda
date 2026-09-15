@@ -1,6 +1,7 @@
 module DASHI.Finance.TrumpFamilyTradeEvidenceValidation where
 
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
+import DASHI.Finance.TrumpFamilyTradePrimarySourceExtensionExact as Primary
 import DASHI.Finance.TrumpFamilyTradePNFBridgeExact as PNF
 import DASHI.GameTheory.SourceConditionedMarketInformationExact as Information
 import DASHI.Finance.TrumpFamilyTradeGameTheoryBridgeExact as GameBridge
@@ -8,6 +9,9 @@ import DASHI.Finance.TrumpFamilyTradeAcquisitionFrontierExact as Acquisition
 
 sourceBoundary : Atlas.TrumpFamilyTradeSourceBoundary
 sourceBoundary = Atlas.canonicalTrumpFamilyTradeSourceBoundary
+
+primaryBoundary : Primary.TrumpFamilyPrimarySourceExtensionBoundary
+primaryBoundary = Primary.canonicalTrumpFamilyPrimarySourceExtensionBoundary
 
 pnfBoundary : PNF.TrumpFamilyTradePNFBoundary
 pnfBoundary = PNF.canonicalTrumpFamilyTradePNFBoundary
