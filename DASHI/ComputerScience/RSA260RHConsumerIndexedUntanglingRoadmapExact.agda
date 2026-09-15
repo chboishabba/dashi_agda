@@ -13,11 +13,14 @@ import DASHI.ComputerScience.RSA260BidiHybridReplayMksolAdequacyExact as ReplayA
 import DASHI.ComputerScience.RSA260BidiMksolActionKernelQuotientExact as ActionKernel
 import DASHI.ComputerScience.RSA260BidiMksolVContextStressExact as VStress
 import DASHI.ComputerScience.RSA260BidiCADOMksolContextFamilyExact as CADOFamily
+import DASHI.ComputerScience.RSA260BidiMksolActionChunkedStressExact as ChunkStress
+import DASHI.ComputerScience.RSA260BidiActionConsumerSufficiencyExact as ActionSufficiency
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
 import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
 import DASHI.Analysis.RiemannG2PhaseWeldCellwiseUpperBridgeExact as RHUpper
 import DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeDiagnosticExact as RHRuntime
 import DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeStressExact as RHStress
+import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Production
 
 ------------------------------------------------------------------------
@@ -31,6 +34,10 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 -- SEMANTIC ASCENT
 --   localized coordinate -> same-object realization -> weakest theorem/estimate
 --   sufficient for the DECLARED downstream consumer -> aggregate consumer.
+--
+-- Cross-pollination is structural only. RSA rank-coordinate sufficiency does
+-- not prove an RH estimate; RH taper positivity does not prove an RSA action
+-- invariant. Both instantiate the same consumer-indexed bidi discipline.
 ------------------------------------------------------------------------
 
 coreTowerBoundary : Tower.ConsumerIndexedUntanglingTowerBoundary
@@ -63,6 +70,12 @@ vStressBoundary = VStress.canonicalMksolVContextStressBoundary
 cadoFamilyBoundary : CADOFamily.CADOMksolContextFamilyBoundary
 cadoFamilyBoundary = CADOFamily.canonicalCADOMksolContextFamilyBoundary
 
+chunkStressBoundary : ChunkStress.MksolActionChunkedStressBoundary
+chunkStressBoundary = ChunkStress.canonicalMksolActionChunkedStressBoundary
+
+actionSufficiencyBoundary : ActionSufficiency.RSAActionConsumerSufficiencyBoundary
+actionSufficiencyBoundary = ActionSufficiency.canonicalRSAActionConsumerSufficiencyBoundary
+
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
 
@@ -78,24 +91,20 @@ rhRuntimeBoundary = RHRuntime.canonicalPhaseSensitiveRuntimeDiagnosticBoundary
 rhStressBoundary : RHStress.PhaseSensitiveRuntimeStressBoundary
 rhStressBoundary = RHStress.canonicalPhaseSensitiveRuntimeStressBoundary
 
+universalEvenConeReturn : Universal.UniversalEvenConeReturn
+universalEvenConeReturn = Universal.canonicalUniversalEvenConeReturn
+
 productionFirstResidual : Production.ProductionResidual
 productionFirstResidual = Production.firstUnpaidProductionResidual
 
 ------------------------------------------------------------------------
 -- RSA research queue.
---
--- Rank fingerprints fail a concrete generator-action consumer. Exact replay is
--- a sufficient upper endpoint. A fixed synthetic V can expose an action-kernel
--- quotient, but a second V can reopen that kernel completely. Therefore any
--- useful compression must preserve the whole DECLARED source-native mksol family.
---
--- Published RSA-260 coordinates now retained:
---   * two width-256 Krylov sequences;
---   * 40 mksol ranges of width 32768.
--- Exact V-file/range binding and prepared-operator identity remain unpaid.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
+  completeChunkedThirtyFourWorldActionStress : ResearchUntanglingTarget
+  rebuildBroaderActionConsumerHypergraph : ResearchUntanglingTarget
+  localizeNextCoordinateFromFirstActionCollision : ResearchUntanglingTarget
   bindPublishedSequencesToExactRSA260VFiles : ResearchUntanglingTarget
   bindPublishedMksolRangesToExactSolutionFiles : ResearchUntanglingTarget
   bindPreparedOperatorSameObjectIdentity : ResearchUntanglingTarget
@@ -106,7 +115,7 @@ data ResearchUntanglingTarget : Set where
   retainRanksOnlyAsCheapDiagnostics : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = bindPublishedSequencesToExactRSA260VFiles
+firstResearchUntanglingTarget = completeChunkedThirtyFourWorldActionStress
 
 ------------------------------------------------------------------------
 -- Production queue.
@@ -128,20 +137,18 @@ firstProductionReconstructionTarget = acquireSameObjectFineIncidenceBearingLACar
 ------------------------------------------------------------------------
 -- RH analytic queue.
 --
--- Runtime diagnostics now cover 18 initial cells and a 72-case stress family
--- over multiple target zeros, Gaussian widths and horizontal displacements.
--- Every tested one-sided phase-sensitive upper held; the broader stress ratio
--- phaseUpper/coarseUpper ranged approximately 0.318..0.906 with median 0.373.
---
--- This still uses diagnostic Gaussian tapers. Repository source names the final
--- literal carrier as 4*g_pole*cosh(a*u)*cos(delta*u) but keeps g_pole abstract;
--- it explicitly rejects silently substituting the rank-two determinant taper.
+-- The universal even-cone owner already records the source-side existence of a
+-- nonnegative pole-quotient taper for arbitrary nonzero target ordinate, exact
+-- pole-class annihilation, and positive same-ordinate cluster. The immediate
+-- debt is transport/same-object realization on the final Agda carrier, not a
+-- new taper design. Once that is paid, the phase-sensitive positive-part
+-- majorant can feed the existing one-sided cell/fold upper route.
 ------------------------------------------------------------------------
 
 data RHAnalyticRefinementTarget : Set where
-  obtainConcreteFinalUniversalPoleQuotientTaperEvaluation : RHAnalyticRefinementTarget
+  transportUniversalEvenConeTaperToFinalPoleQuotientCarrier : RHAnalyticRefinementTarget
   inhabitUniversalPoleQuotientPhaseModulationWeld : RHAnalyticRefinementTarget
-  constructProofCarryingPhaseSensitivePointwiseMajorant : RHAnalyticRefinementTarget
+  constructPositivePartPhaseSensitivePointwiseMajorant : RHAnalyticRefinementTarget
   provePairSpecificIntegralMonotonicity : RHAnalyticRefinementTarget
   certifyIntegratedMajorantCellUppers : RHAnalyticRefinementTarget
   instantiateExactFiniteNearEnumeration : RHAnalyticRefinementTarget
@@ -151,7 +158,17 @@ data RHAnalyticRefinementTarget : Set where
   closeOnlyThenPromoteRHTerminal : RHAnalyticRefinementTarget
 
 firstRHAnalyticRefinementTarget : RHAnalyticRefinementTarget
-firstRHAnalyticRefinementTarget = obtainConcreteFinalUniversalPoleQuotientTaperEvaluation
+firstRHAnalyticRefinementTarget = transportUniversalEvenConeTaperToFinalPoleQuotientCarrier
+
+------------------------------------------------------------------------
+-- Cross-domain non-promotion boundary.
+------------------------------------------------------------------------
+
+data OEISNumericalOverlapCreatesCrossDomainProof : Set where
+
+oeisOverlapDoesNotCreateCrossDomainProof :
+  OEISNumericalOverlapCreatesCrossDomainProof -> ⊥
+oeisOverlapDoesNotCreateCrossDomainProof ()
 
 record RSA260RHUntanglingRoadmapBoundary : Set where
   constructor rsa260-rh-untangling-roadmap-boundary
@@ -173,6 +190,10 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     exactRSA260RangeFileBindingPaid : Bool
     exactPreparedOperatorIdentityPaid : Bool
 
+    rsaChunkedActionStressProtocolAvailable : Bool
+    rsaActionConsumerSufficiencyBidiAvailable : Bool
+    rsaBroaderThirtyFourWorldActionStressPaid : Bool
+
     rhFinitePhaseLocalized : Bool
     rhLiteralPhaseWeldInterfaceWritten : Bool
     rhOneSidedCellUpperBridgeWritten : Bool
@@ -186,6 +207,10 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     rhStrictNearComplementMarginPaid : Bool
     exactAggregationCongruenceRequiredForCurrentUpperConsumer : Bool
 
+    rhUniversalEvenConeTaperSourceOwned : Bool
+    rhUniversalEvenConeLeanTransportPaid : Bool
+    rhPositivePartMajorantCompilerPaid : Bool
+
     productionSearchForUnpublishedIntermediateBytesRequired : Bool
     productionSubstitutionReturnsToFineIncidenceMatrixCarrier : Bool
     independentArtifactsAreHistoricalWithheldArtifacts : Bool
@@ -194,6 +219,9 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     consumerFamilyMustPrecedeCompressionRanking : Bool
     weakerConsumerSufficientRoutePreferredWhenAvailable : Bool
     threeQueuesMayAdvanceIndependently : Bool
+
+    rsaAndRHShareConsumerIndexedBidiPattern : Bool
+    oeisNumericalOverlapCreatesCrossDomainProof : Bool
 open RSA260RHUntanglingRoadmapBoundary public
 
 canonicalRSA260RHUntanglingRoadmapBoundary :
@@ -202,6 +230,9 @@ canonicalRSA260RHUntanglingRoadmapBoundary =
   rsa260-rh-untangling-roadmap-boundary
     true true
     true false true true true false true true true false false false false
+    true true false
     true true true true true true false false false false false false
+    true false false
     false true false
     true true true true
+    true false
