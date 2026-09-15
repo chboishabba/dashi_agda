@@ -35,6 +35,12 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFreeEnergyTe
 -- coordinates, never Kramers rates or experimental kinetics.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDTextAcquisitionExact
 
+-- Source-text intermediate geometry envelope: ligand-free semi-open/semi-closed
+-- structures are reported in theta1 ~60--70 deg, theta2 ~35--60 deg and
+-- dLN ~16--30 A, with example LT-MD snapshot locators.  This narrows the dLN
+-- residual at region level without paying any named beta/gamma/delta/epsilon dLN cell.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseIntermediateGeometryTextAcquisitionExact
+
 -- Source-paid projection limitation: the one-dimensional dLN free-energy view
 -- shows a double well and ligand-dependent population shift but averages over
 -- theta1/theta2 states; the three-CV view is richer for the paper's pathway
