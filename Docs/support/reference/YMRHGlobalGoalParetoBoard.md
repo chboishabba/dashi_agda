@@ -19,7 +19,7 @@ quantitative connected-correlation decay
 -> SameHamiltonianPhysicalMassGap.
 ```
 
-CMP116, Row C, Heat/Doob/Langevin, Step-V/KP, unified polymer norms and R350--R357 are producer strategies beneath this fixed consumer.
+CMP116, Row C, Heat/Doob/Langevin, Step-V/KP, unified polymer norms and R350--R359 are producer strategies beneath this fixed consumer.
 
 ### Riemann hypothesis
 
@@ -34,38 +34,39 @@ RH remains behind YM in immediate actionability because theorem-bearing checked-
 ## 2. Current cross-lane Pareto queue
 
 ```text
-1. YM source metric attachment for the collar dichotomy
-   a. literal CMP109 localization X -> support graph / anchor / outside-collar vertex
-   b. leaving D^2 -> collarRadius <= source graph distance
-   c. support tree size -> CMP116 treeLength
+1. YM G_exit
+   literal CMP109 coefficient-collar exit on the selected support graph:
+   collarRadius <= ymGraphDist anchor outside
 
-2. YM source rate calibration
-   delta_collar <= delta_mark
-   delta_collar + kappa' <= kappa
-   kappa' <= kappa
-   plus nonnegativity / common block-scale interpretation
+2. YM G_tree
+   same localization's CMP116 tree/localisation length identified with
+   the selected YM support-tree edge count
 
-3. YM marked branch attachment
+3. YM positive source-rate split
+   extract one same-carrier CMP109/CMP116 split with retained positive
+   collar/tree rates and nonnegative slack; R359 compiles the R357 order facts
+
+4. YM marked branch attachment
    collarRadius <= CMP99 markedDistance on the exact surviving-walk carrier
 
-4. YM R355 exponent-to-R354 attachment
+5. YM R355 exponent-to-R354 attachment
    generic exp(-x) antitonicity + same-object identification of source exponent
    charges with R354 raw/charged majorants
 
-5. YM R354 H_sum
+6. YM R354 H_sum
    same-carrier CMP116 charged-family summability with residual positive tree rate
 
-6. YM R353 H_factor / source replay
+7. YM R353 H_factor / source replay
    theorem-bearing CMP99/CMP109 differentiated marked input on exact walk carrier
 
-7. YM R353 H_scale
-8. YM R352 H_stab^attach
-9. YM R351 H_sub^source
-10. YM R351 H_sub^attach
-11. YM R348 C_attach
-12. YM R346 D_time
-13. RH R1a/R1b when theorem-bearing checked-near material is recoverable
-14. RH R2 fresh strict literal-complement analysis.
+8. YM R353 H_scale
+9. YM R352 H_stab^attach
+10. YM R351 H_sub^source
+11. YM R351 H_sub^attach
+12. YM R348 C_attach
+13. YM R346 D_time
+14. RH R1a/R1b when theorem-bearing checked-near material is recoverable
+15. RH R2 fresh strict literal-complement analysis.
 ```
 
 The queue is Pareto ordering, not a fixed logical sequence. Recut immediately if one source theorem supplies several coordinates on the same carrier.
@@ -83,7 +84,7 @@ SameHamiltonianPhysicalMassGap
 <- { H_stab^source , H_stab^attach,
      H_sub^source , H_sub^attach }
 <- { source marked replay,
-     R355--R357 collar charge,
+     R355--R359 collar/rate charge,
      R354 charged CMP116 summability,
      R353 H_scale }.
 ```
@@ -94,11 +95,12 @@ Forward:
 CMP99/CMP109 differentiated marked replay
 -> raw marked walk/localisation majorant
 
-CMP109 coefficient-collar dichotomy
-+ CMP99 discrepancy geometry
-+ source graph/tree/block-scale attachments
--> R356 unweighted large-X span / marked-distance alternative
-+ source rate calibration
+G_exit + G_tree
+-> R358 literal support-metric attachment
+-> R356 unweighted large-X branch
+
+same-carrier positive source-rate split
+-> R359 order calibration
 -> R357 weighted R355 branch
 -> R355 combined linear charge
 + generic exp(-x) transport + same-object exponent attachment
@@ -123,7 +125,7 @@ H_stab + H_sub
 
 BIDI invariant: downstream consumers identify the least source statement to acquire but may not define source semantics post hoc; source authority/status never substitutes for theorem-bearing replay or same-object attachment.
 
-## 4. R345--R357 reductions
+## 4. R345--R359 reductions
 
 ### R345--R350
 
@@ -144,7 +146,7 @@ rawMarked <= charged
   sum rawMarked <= envelope.
 ```
 
-No fresh finite sum theorem or generic Hessian/Cauchy theorem is primitive.
+No fresh finite-sum theorem or generic Hessian/Cauchy theorem is primitive.
 
 ### R355
 
@@ -168,32 +170,39 @@ collarRadius <= graphDistance <= treePathLength <= treeSize
 => collarRadius <= treeSize.
 ```
 
-The live work becomes literal CMP109 localization/support-graph attachment, collar-exit distance, source tree-length attachment and block-scale calibration.
-
 ### R357
 
-`BalabanCoefficientCollarWeightRound357Exact.agda` removes the weighted branch itself as a fresh analytic theorem.
+`BalabanCoefficientCollarWeightRound357Exact.agda` proves the weighted R355 branch from the unweighted source alternative plus nonnegative-rate calibration. The weighted branch is compiler algebra, not an independent analytic theorem.
 
-From source-unweighted geometry
+### R358
+
+`BalabanLiteralSupportMetricAttachmentRound358Exact.agda` reuses `YMSupportGraphDistance`. Once the literal source supplies
 
 ```text
-collarRadius <= markedDistance
-OR
-collarRadius <= treeLength
+G_exit : collarRadius <= ymGraphDist anchor outside
+G_tree : cmp116TreeLength = ymTreeEdgeCount,
 ```
 
-and rate calibration
+graph-distance minimality and tree-path boundedness mechanically construct the R356 large-tree payment. Source metric attachment is therefore not one opaque leaf.
+
+### R359
+
+`BalabanSourceDecayRateSplitRound359Exact.agda` replaces three independent R357 rate inequalities with one source-native split:
 
 ```text
-0 <= all relevant rates/distances
+delta_mark = delta_collar + delta_slack
+kappa = delta_collar + kappa' + kappa_slack
+```
+
+with nonnegative pieces. Ordered-real algebra then gives
+
+```text
 delta_collar <= delta_mark
 kappa' <= kappa
-delta_collar + kappa' <= kappa,
+delta_collar + kappa' <= kappa.
 ```
 
-ordered-real monotonicity constructs the exact weighted R355 dichotomy. R357 then builds the `R355.CoefficientCollarChargeGeometry` record mechanically.
-
-Therefore `G_weight` is no longer an opaque leaf. The surviving acquisition is **same-scale metric attachment + decay-rate calibration**.
+The source task is now one same-carrier positive rate-split attachment, not three order proofs.
 
 ## 5. Source investigation map
 
@@ -202,12 +211,13 @@ Therefore `G_weight` is no longer an opaque leaf. The surviving acquisition is *
 ```text
 CMP99 domain-sequence marked propagator comparison;
 CMP109 differentiated E^(2) tree/locality structure;
-CMP109 coefficient-collar dichotomy around (3.5);
-CMP116 positive tree/localisation summability;
-finite marked replacement/resummation compiler.
+CMP109 coefficient-collar dichotomy;
+CMP116 positive tree/localisation summability and retained positive rate;
+finite marked replacement/resummation compiler;
+YM support-graph graph-distance/tree-path compiler.
 ```
 
-### Source metric attachments — current geometric core
+### Source metric application
 
 The source ledger says:
 
@@ -215,27 +225,19 @@ The source ledger says:
 if the localization is separated from the coefficient cube:
   CMP99/CMP109 marked propagator distance pays;
 
-if X meets the anchor region but reaches outside D^2:
+if X meets the anchor region but reaches outside the enlarged collar:
   connectedness makes X large and tree/localisation length pays.
 ```
 
-R356 owns abstract connected span. The remaining theorem-bearing work is to place CMP109's literal localization/collar and CMP99's discrepancy distance on the same graph/block metric and identify that graph tree-size with the CMP116 treeLength coordinate.
+R358 shows that the large-X branch now needs only literal source selection of the anchor/outside pair and the two same-object welds `G_exit` and `G_tree`.
 
 ### Rate calibration
 
-R357 shows that no further weighted analysis is needed once the source constants are chosen/proved to satisfy:
-
-```text
-delta_collar <= delta_mark
-kappa' <= kappa
-delta_collar + kappa' <= kappa
-```
-
-with the required positivity. Source archaeology should now look for the CMP116 decay split / positive residual exponent that can inhabit these inequalities on the exact source normalization.
+CMP116 says a positive localization exponent survives the decay split/resummation. R359 makes the preferred acquisition object the positive split itself. Do not ask the source separately for three order inequalities once the split is identified on the exact normalization.
 
 ### Exponent attachment
 
-After R357/R355, passing from a larger positive exponent charge to a smaller exponential majorant is generic analysis. The live debt is the same-object identification of those source exponentials with R354's raw/charged majorants.
+After R359/R357/R355, passing from a larger positive exponent charge to a smaller exponential majorant is generic analysis. The live debt is same-object identification of those source exponentials with R354's raw/charged majorants.
 
 ### H_sum / H_scale / H_sub
 
@@ -258,32 +260,34 @@ CMP99 marked comparison -> H_sub
 CMP116 ordinary summability -> collar charge
 connected-support graph metric -> CMP109/CMP116 source metric without attachment
 support-tree size -> CMP116 treeLength by name similarity
-R356 span -> R355 weighted branch without R357 rate/scale calibration
+R358 graph compiler -> G_exit or G_tree
+R356 span -> R355 weighted branch without R357/R359 rate calibration
 rate calibration -> source metric attachment
+nonnegative rate split -> positive retained collar rate without a source positivity receipt
 coefficient charge -> R354 majorant inequality without exp/same-object attachment
 selected J-direction distance -> nonlinear substituted-background distance
 fresh generic Cauchy theorem after source differentiation
 stronger rooted-shell/Step-V route -> mandatory merely because it exists.
 ```
 
-## 7. Roadmap position after R357
+## 7. Roadmap position after R359
 
-The global consumer is unchanged. The preferred T78-B route is now below generic Hessian stability, finite marked-walk summation, generic connectedness and weighted collar arithmetic.
+The global consumer is unchanged. The preferred T78-B route is now below generic Hessian stability, finite marked-walk summation, generic connectedness, support-graph path inequalities and weighted-rate arithmetic.
 
 The first active source acquisition surface is:
 
 ```text
-literal CMP109 coefficient-collar / localization geometry
-+ CMP99 marked discrepancy geometry
-+ source graph/tree/block-scale attachments
-+ CMP116/CMP109 decay-rate calibration
--> R356/R357/R355 charge compilers
+G_exit
++ G_tree
++ positive CMP109/CMP116 rate split
++ CMP99 marked discrepancy attachment
+-> R358/R359/R357/R356/R355 charge compilers
 -> R354 H_charge
 -> retained-tree CMP116 summation
 -> source marked Hessian majorant.
 ```
 
-T78-A/T78-C remain live but Pareto-dominated unless they pay a current leaf for free. Unification/common-action remains downstream consistency structure and does not currently shorten R351--R357.
+T78-A/T78-C remain live but Pareto-dominated unless they pay a current leaf for free. Unification/common-action remains downstream consistency structure and does not currently shorten R351--R359.
 
 ## 8. RH current route
 
@@ -311,7 +315,9 @@ fresh generic Cauchy Hessian-Lipschitz theorem
 fresh finite marked-walk sum theorem
 fresh ordinary CMP116 tree summability theorem
 fresh abstract connected-support span theorem
+fresh support-graph graph-distance/tree-path theorem
 fresh weighted collar-charge theorem after R357
+three separately acquired rate inequalities after R359
 forcing T78-B through Heat/Doob/Langevin or Step-V/KP
 fresh clustering-to-gap theorem
 R304/R296 rooted-shell path merely to obtain D_time
@@ -325,9 +331,11 @@ This board is scheduling/accounting only.
 
 - `machineChecked` labels are not fresh exact-head kernel receipts.
 - CodeRabbit status is not Agda validation.
-- R351--R357 are source-written frontier/transport refinements; physical/source inputs and same-object attachments remain conditional.
+- R351--R359 are source-written frontier/transport refinements; physical/source inputs and same-object attachments remain conditional.
 - R355 proves ordered-real charge assembly only.
 - R356 proves natural-number connected-span assembly only.
 - R357 proves ordered-real coefficient weighting only.
+- R358 reuses existing support-graph compiler theorems and does not inhabit literal source metric welds.
+- R359 proves order consequences of a nonnegative split and does not inhabit the literal positive source rate split.
 - Historical imported owners are not promoted to fresh kernel receipts by reuse.
 - No Clay Yang--Mills solution or RH proof is claimed.
