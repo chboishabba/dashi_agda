@@ -12,10 +12,12 @@ import DASHI.ComputerScience.RSA260BidiMksolStyleConsumerCollisionExact as Mksol
 import DASHI.ComputerScience.RSA260BidiHybridReplayMksolAdequacyExact as ReplayAdequacy
 import DASHI.ComputerScience.RSA260BidiMksolActionKernelQuotientExact as ActionKernel
 import DASHI.ComputerScience.RSA260BidiMksolVContextStressExact as VStress
+import DASHI.ComputerScience.RSA260BidiCADOMksolContextFamilyExact as CADOFamily
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
 import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
 import DASHI.Analysis.RiemannG2PhaseWeldCellwiseUpperBridgeExact as RHUpper
 import DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeDiagnosticExact as RHRuntime
+import DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeStressExact as RHStress
 import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Production
 
 ------------------------------------------------------------------------
@@ -29,11 +31,6 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 -- SEMANTIC ASCENT
 --   localized coordinate -> same-object realization -> weakest theorem/estimate
 --   sufficient for the DECLARED downstream consumer -> aggregate consumer.
---
--- This tranche now demonstrates both failure modes of over-solving:
---
---   RSA: receipt-identity rank sketches optimize the wrong downstream query;
---   RH: exact aggregation equality is stronger than the current upper consumer.
 ------------------------------------------------------------------------
 
 coreTowerBoundary : Tower.ConsumerIndexedUntanglingTowerBoundary
@@ -63,6 +60,9 @@ actionKernelBoundary = ActionKernel.canonicalMksolActionKernelQuotientBoundary
 vStressBoundary : VStress.MksolVContextStressBoundary
 vStressBoundary = VStress.canonicalMksolVContextStressBoundary
 
+cadoFamilyBoundary : CADOFamily.CADOMksolContextFamilyBoundary
+cadoFamilyBoundary = CADOFamily.canonicalCADOMksolContextFamilyBoundary
+
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
 
@@ -75,36 +75,41 @@ rhUpperBoundary = RHUpper.canonicalPhaseWeldCellwiseUpperBridgeBoundary
 rhRuntimeBoundary : RHRuntime.PhaseSensitiveRuntimeDiagnosticBoundary
 rhRuntimeBoundary = RHRuntime.canonicalPhaseSensitiveRuntimeDiagnosticBoundary
 
+rhStressBoundary : RHStress.PhaseSensitiveRuntimeStressBoundary
+rhStressBoundary = RHStress.canonicalPhaseSensitiveRuntimeStressBoundary
+
 productionFirstResidual : Production.ProductionResidual
 productionFirstResidual = Production.firstUnpaidProductionResidual
 
 ------------------------------------------------------------------------
 -- RSA research queue.
 --
--- Rank sketches failed not only receipt identity but a concrete synthetic
--- generator-action consumer.  Exact replay is a proved sufficient upper endpoint
--- for every pure consumer after decode.  The first useful quotient is therefore
--- the kernel of the ACTUAL generator-action family, not a receipt fingerprint.
+-- Rank fingerprints fail a concrete generator-action consumer.  Exact replay is
+-- a sufficient upper endpoint.  A fixed synthetic V can expose an action-kernel
+-- quotient, but a second V can reopen that kernel completely.  Therefore any
+-- useful compression must preserve the whole DECLARED source-native mksol family.
 --
--- A single synthetic V context exposed hidden coefficient directions, but a
--- second independent V context reopened all 1088 coefficient bits in the tested
--- degree-17 identity case.  Therefore the next object must be the source-native
--- mksol CONTEXT FAMILY before any compression search is ranked.
+-- Published RSA-260 coordinates now retained:
+--   * two width-256 Krylov sequences;
+--   * 40 mksol ranges of width 32768.
+-- Exact V-file/range binding and prepared-operator identity remain unpaid.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
-  defineSourceNativeCADOMksolContextFamily : ResearchUntanglingTarget
-  determineActualVBlockFamilyAndSolutionRanges : ResearchUntanglingTarget
+  bindPublishedSequencesToExactRSA260VFiles : ResearchUntanglingTarget
+  bindPublishedMksolRangesToExactSolutionFiles : ResearchUntanglingTarget
+  bindPreparedOperatorSameObjectIdentity : ResearchUntanglingTarget
+  instantiateDeclaredProductionMksolContextFamily : ResearchUntanglingTarget
   testActionKernelIntersectionAcrossDeclaredContextFamily : ResearchUntanglingTarget
   searchOnlyPersistentEvaluationKernelForCompression : ResearchUntanglingTarget
   retainExactReplayAsSufficientUpperEndpoint : ResearchUntanglingTarget
   retainRanksOnlyAsCheapDiagnostics : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = defineSourceNativeCADOMksolContextFamily
+firstResearchUntanglingTarget = bindPublishedSequencesToExactRSA260VFiles
 
 ------------------------------------------------------------------------
--- Production queue: independent execution from a same-object fine carrier.
+-- Production queue.
 ------------------------------------------------------------------------
 
 data ProductionReconstructionTarget : Set where
@@ -123,21 +128,19 @@ firstProductionReconstructionTarget = acquireSameObjectFineIncidenceBearingLACar
 ------------------------------------------------------------------------
 -- RH analytic queue.
 --
--- The Python diagnostic executes the correct 4*g*cosh*cos phase architecture
--- with a deliberately non-authoritative Gaussian taper.  Across 18 tested cells
--- the phase-sensitive positive-part majorant was a valid upper and retained much
--- more cancellation than the coarse absolute envelope.  This is diagnostic
--- evidence for the route, not a same-object RH payment.
+-- Runtime diagnostics now cover 18 initial cells and a 72-case stress family
+-- over multiple target zeros, Gaussian widths and horizontal displacements.
+-- Every tested one-sided phase-sensitive upper held; the broader stress ratio
+-- phaseUpper/coarseUpper ranged approximately 0.318..0.906 with median 0.373.
 --
--- Critical path remains:
---   actual universal pole-quotient weld/taper -> proof-carrying phase-sensitive
---   majorant -> pair-specific integral monotonicity -> cell upper -> exact finite
---   enumeration/fold -> final near upper -> strict near/far margin.
+-- This still uses diagnostic Gaussian tapers.  Repository source names the final
+-- literal carrier as 4*g_pole*cosh(a*u)*cos(delta*u) but keeps g_pole abstract;
+-- it explicitly rejects silently substituting the rank-two determinant taper.
 ------------------------------------------------------------------------
 
 data RHAnalyticRefinementTarget : Set where
+  obtainConcreteFinalUniversalPoleQuotientTaperEvaluation : RHAnalyticRefinementTarget
   inhabitUniversalPoleQuotientPhaseModulationWeld : RHAnalyticRefinementTarget
-  replaceDiagnosticGaussianByExactUniversalPoleQuotientTaper : RHAnalyticRefinementTarget
   constructProofCarryingPhaseSensitivePointwiseMajorant : RHAnalyticRefinementTarget
   provePairSpecificIntegralMonotonicity : RHAnalyticRefinementTarget
   certifyIntegratedMajorantCellUppers : RHAnalyticRefinementTarget
@@ -148,11 +151,7 @@ data RHAnalyticRefinementTarget : Set where
   closeOnlyThenPromoteRHTerminal : RHAnalyticRefinementTarget
 
 firstRHAnalyticRefinementTarget : RHAnalyticRefinementTarget
-firstRHAnalyticRefinementTarget = inhabitUniversalPoleQuotientPhaseModulationWeld
-
-------------------------------------------------------------------------
--- Pareto interpretation.
-------------------------------------------------------------------------
+firstRHAnalyticRefinementTarget = obtainConcreteFinalUniversalPoleQuotientTaperEvaluation
 
 record RSA260RHUntanglingRoadmapBoundary : Set where
   constructor rsa260-rh-untangling-roadmap-boundary
@@ -167,15 +166,21 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     fixedContextActionKernelObserved : Bool
     fixedContextKernelStableUnderCheckedSecondV : Bool
     checkedTwoVFamilyReopensFullDegree17CoefficientSpace : Bool
-    actualCADOMksolContextFamilyFormalized : Bool
-    compressionSearchShouldWaitForDeclaredConsumerFamily : Bool
+    sourceNativeMksolContextFamilyInterfacePaid : Bool
+    publishedTwoWidth256SequencesRetained : Bool
+    publishedFortyRangesOf32768Retained : Bool
+    exactRSA260VFileBindingPaid : Bool
+    exactRSA260RangeFileBindingPaid : Bool
+    exactPreparedOperatorIdentityPaid : Bool
 
     rhFinitePhaseLocalized : Bool
     rhLiteralPhaseWeldInterfaceWritten : Bool
     rhOneSidedCellUpperBridgeWritten : Bool
-    rhPythonDiagnosticExecuted : Bool
-    rhPythonAllEighteenOneSidedBoundsHeld : Bool
+    rhInitialPythonDiagnosticExecuted : Bool
+    rhBroaderSeventyTwoCaseStressExecuted : Bool
+    rhAllSeventyTwoStressBoundsHeld : Bool
     rhPythonUsesFinalUniversalPoleQuotientTaper : Bool
+    concreteFinalPoleQuotientTaperEvaluationOwned : Bool
     rhPhaseSensitiveMajorantAuthorityPaid : Bool
     rhActualUniversalPoleQuotientWeldPaid : Bool
     rhStrictNearComplementMarginPaid : Bool
@@ -196,7 +201,7 @@ canonicalRSA260RHUntanglingRoadmapBoundary :
 canonicalRSA260RHUntanglingRoadmapBoundary =
   rsa260-rh-untangling-roadmap-boundary
     true true
-    true false true true true false true false true
-    true true true true true false false false false false
+    true false true true true false true true true true false false false
+    true true true true true true false false false false false false
     false true false
     true true true true
