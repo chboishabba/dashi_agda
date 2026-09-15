@@ -36,7 +36,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
-import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryCutRound347Exact as R347
+import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact as R347
 
 ------------------------------------------------------------------------
 -- Existing selected-direction construction.
@@ -70,13 +70,13 @@ selectedCoefficientSameObjectLevel = conditional
 -- R347's source-specific boundary/substitution comparison remains independent.
 selectedMarkedBoundarySubstitutionLevel : ProofLevel
 selectedMarkedBoundarySubstitutionLevel =
-  R347.selectedBoundarySubstitutionComparisonLevel
+  R347.selectedMarkedBoundarySubstitutionLevel
 
 -- R346's distance/time semantics remains independent of the scalar coefficient
 -- identity.  R318 fixes the physicalDistance function, not its equality to time
 -- on R300's selected spectral pair.
 selectedDistanceTimeLevel : ProofLevel
-selectedDistanceTimeLevel = R347.selectedDistanceTimeMeaningLevel
+selectedDistanceTimeLevel = R347.selectedDistanceTimeLevel
 
 ------------------------------------------------------------------------
 -- Pareto firewalls.
