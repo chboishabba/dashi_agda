@@ -1,0 +1,9 @@
+module DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldValidationExact where
+
+import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as Weld
+
+boundary : Weld.LiteralPhaseModulationWeldBoundary
+boundary = Weld.canonicalLiteralPhaseModulationWeldBoundary
+
+firstResidual : Weld.LiteralPhaseModulationWeldResidual
+firstResidual = Weld.firstLiteralPhaseModulationWeldResidual
