@@ -1,7 +1,6 @@
 module DASHI.Environment.SpringfieldLakesInterventionGeometryExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
 
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalExact as Springfield
@@ -11,9 +10,9 @@ import DASHI.Environment.SpringfieldLakesAquaticWeedMechanicalRemovalExact as Sp
 --
 -- The Ipswich record supplies two source-bound local operational examples:
 -- spider excavator at the hard-access Viewpoint Drive pond and an aquatic weed
--- harvester at the Vistula Circuit pond.  The finite witness below is DASHI
--- mathematics over those declared operational roles; it does not generalise
--- efficacy across weed species or sites.
+-- harvester at the Vistula Circuit pond. The finite witness below is DASHI
+-- mathematics over exactly those two source-backed worlds; it does not
+-- generalise efficacy across weed species or sites.
 ------------------------------------------------------------------------
 
 data TreatmentType : Set where
@@ -27,29 +26,24 @@ data EquipmentChoice : Set where
   spiderExcavator : EquipmentChoice
   aquaticWeedHarvester : EquipmentChoice
 
-record OperationalWorld : Set where
-  constructor operationalWorld
-  field
-    treatment : TreatmentType
-    access : AccessGeometry
-    equipment : EquipmentChoice
-    sourceReference : String
+data OperationalWorld : Set where
+  viewpointWorld : OperationalWorld
+  vistulaWorld : OperationalWorld
 
-open OperationalWorld public
+treatmentObserver : OperationalWorld → TreatmentType
+treatmentObserver viewpointWorld = mechanicalRemoval
+treatmentObserver vistulaWorld = mechanicalRemoval
 
-viewpointWorld : OperationalWorld
-viewpointWorld = operationalWorld
-  mechanicalRemoval
-  steepHardAccess
-  spiderExcavator
-  "Ipswich City Council source-bound Viewpoint Drive spider-excavator operation"
+accessObserver : OperationalWorld → AccessGeometry
+accessObserver viewpointWorld = steepHardAccess
+accessObserver vistulaWorld = shallowSurfaceMat
 
-vistulaWorld : OperationalWorld
-vistulaWorld = operationalWorld
-  mechanicalRemoval
-  shallowSurfaceMat
-  aquaticWeedHarvester
-  "Ipswich City Council source-bound Vistula Circuit aquatic-weed-harvester operation"
+equipmentConsumer : OperationalWorld → EquipmentChoice
+equipmentConsumer viewpointWorld = spiderExcavator
+equipmentConsumer vistulaWorld = aquaticWeedHarvester
+
+treatmentAccessObserver : OperationalWorld → TreatmentType × AccessGeometry
+treatmentAccessObserver world = treatmentObserver world , accessObserver world
 
 viewpointSourceReceipt : Springfield.SpringfieldMechanicalRemovalReceipt
 viewpointSourceReceipt = Springfield.viewpointSpiderReceipt
@@ -58,18 +52,9 @@ vistulaSourceReceipt : Springfield.SpringfieldMechanicalRemovalReceipt
 vistulaSourceReceipt = Springfield.vistulaHarvesterReceipt
 
 ------------------------------------------------------------------------
--- Treatment type alone is too coarse for equipment-choice in this finite
+-- Treatment type alone is too coarse for equipment choice in this finite
 -- fixture; retaining access geometry repairs exactly this declared consumer.
 ------------------------------------------------------------------------
-
-treatmentObserver : OperationalWorld → TreatmentType
-treatmentObserver = treatment
-
-equipmentConsumer : OperationalWorld → EquipmentChoice
-equipmentConsumer = equipment
-
-treatmentAccessObserver : OperationalWorld → TreatmentType × AccessGeometry
-treatmentAccessObserver world = treatment world , access world
 
 treatmentTypeNonFactorabilityWitness :
   NonFactor.NonFactorabilityWitness treatmentObserver equipmentConsumer
@@ -99,10 +84,8 @@ equipmentFactorsThroughTreatmentAndAccess = NonFactor.factorsThrough
     factorisation : (world : OperationalWorld) →
       equipmentConsumer world ≡
       equipmentFromTreatmentAndAccess (treatmentAccessObserver world)
-    factorisation (operationalWorld mechanicalRemoval steepHardAccess spiderExcavator ref) = refl
-    factorisation (operationalWorld mechanicalRemoval steepHardAccess aquaticWeedHarvester ref) = refl
-    factorisation (operationalWorld mechanicalRemoval shallowSurfaceMat spiderExcavator ref) = refl
-    factorisation (operationalWorld mechanicalRemoval shallowSurfaceMat aquaticWeedHarvester ref) = refl
+    factorisation viewpointWorld = refl
+    factorisation vistulaWorld = refl
 
 ------------------------------------------------------------------------
 -- Boundary.
