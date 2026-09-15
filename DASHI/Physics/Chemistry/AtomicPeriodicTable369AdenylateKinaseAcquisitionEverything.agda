@@ -62,6 +62,13 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOneDimension
 -- promotion of FRET-closed to fully closed three-domain AdK.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETDistributionTextAcquisitionExact
 
+-- Machine-readable Figure-1 observable definitions: theta1/theta2 retain the
+-- exact residue-group center-of-mass constructions and dLN retains its LID--NMP
+-- center-of-mass distance role.  A later numeric cell only counts as the same
+-- coordinate if the observable definition and locator are preserved; DOI/QID/
+-- UniProt identity metadata cannot manufacture that equivalence or a state value.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCollectiveVariableDefinitionAcquisitionExact
+
 -- Cell-level acquisition frontier: 8 named states x four numeric coordinates
 -- plus six route-edge Kramers-rate cells.  Each unpaid cell retains a locator,
 -- source role and next-payment obligation instead of disappearing into a global
