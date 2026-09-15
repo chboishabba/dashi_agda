@@ -8,11 +8,13 @@ open import Data.Empty using (⊥)
 import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as Four
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as S0
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseExact as S1a
+import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as S1b
 
 ------------------------------------------------------------------------
 -- NAVIER-STOKES A/B/C/D PAPER/PROGRAMME ADAPTER
 --
--- Timestamp: 2026-09-15 18:38 AEST (UTC+10).
+-- Timestamp: 2026-09-15 18:55 AEST (UTC+10).
 --
 -- This file deliberately DOES NOT introduce a second four-alternative
 -- ontology. The canonical mathematical/source alternatives already live in
@@ -21,9 +23,8 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseExact as S1a
 -- A<->B transfer guards, and the current coordinator-level recovery state.
 --
 -- IMPORTANT: branch-recovery/source status is not certification. In
--- particular, the periodic-B commutator spine may be treated as recovered for
--- routing purposes while the observed commit-specific Agda kernel receipt
--- remains false.
+-- particular, a source-written conditional compiler does not become an
+-- unconditional theorem or an observed commit-specific Agda kernel receipt.
 ------------------------------------------------------------------------
 
 NSClayLane : Set
@@ -71,6 +72,10 @@ record NSFourLaneProofProgram : Set where
 
     periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered : Bool
     periodicBPhasePointwiseCriticalEnergySplitRecovered : Bool
+    periodicBPhaseLiteralModeListCarrierRecovered : Bool
+    periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered : Bool
+    periodicBPhaseConcreteScalarFTCObserved : Bool
+    periodicBPhaseConcreteIntegrationLinearityObserved : Bool
     periodicBPhaseR414ProductionNormalisationRecovered : Bool
 
     periodicBPhasePhysicalCriticalObservableRealizationRecovered : Bool
@@ -110,7 +115,7 @@ canonicalNSFourLaneProofProgram = record
   ; laneADescription =
       "Lane A: unforced three-dimensional Navier-Stokes regularity on whole-space R^3. Independent proof obligation; defer new proof search until periodic-B stabilizes enough for an explicit portability quotient."
   ; laneBDescription =
-      "Lane B: unforced three-dimensional periodic Navier-Stokes regularity on T^3. The recent commutator spine is routed as recovery/certification. R104/R372/R414 recover the signed-critical compiler and literal-R406 remainder identity; R516/R517 recover finite-carrier critical radial realization. S0 now source-constructs literal live-trajectory endpoint/dissipation/projected-nonlinearity folds in the exact quadratic-energy convention, and S1a closes the finite R30 pointwise critical-energy split. Integrated derivative/FTC authority, the phase-sensitive estimate, initial ceiling and retained-viscosity receipt remain fail-closed."
+      "Lane B: unforced three-dimensional periodic Navier-Stokes regularity on T^3. The recent commutator spine is routed as recovery/certification. R104/R372/R414 recover the signed-critical compiler and literal-R406 remainder identity; R516/R517 recover finite-carrier critical radial realization. S0 constructs the live finite critical fold, S1a closes the finite R30 pointwise energy split, and S1b compiles the integrated energy identity given explicit scalar FTC and integration-linearity authorities. Those concrete calculus authorities remain absent, so unconditional S1 and the later phase estimate, initial ceiling and retained-viscosity receipt remain fail-closed."
   ; laneCDescription =
       "Lane C: forced whole-space R^3 breakdown. Current job is released-proof BIDI verification, provenance, dependency closure, and same-object integration; it is not discovery evidence for A or B."
   ; laneDDescription =
@@ -134,6 +139,14 @@ canonicalNSFourLaneProofProgram = record
       S0.literalCriticalEndpointFoldConstructed
   ; periodicBPhasePointwiseCriticalEnergySplitRecovered =
       S1a.literalFiniteCriticalEnergySplitClosed
+  ; periodicBPhaseLiteralModeListCarrierRecovered =
+      ModeCarrier.literalModeListConstancyWithoutViscosity
+  ; periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered =
+      S1b.integratedCriticalEnergyCompilerClosedGivenCalculus
+  ; periodicBPhaseConcreteScalarFTCObserved =
+      S1b.concreteScalarFTCInstalled
+  ; periodicBPhaseConcreteIntegrationLinearityObserved =
+      S1b.concreteIntegrationLinearityInstalled
   ; periodicBPhaseR414ProductionNormalisationRecovered =
       S0.r414ProductionNormalisationRecovered
 
@@ -229,6 +242,26 @@ periodicBPhasePointwiseCriticalEnergySplitRecoveredIsTrue :
   periodicBPhasePointwiseCriticalEnergySplitRecovered canonicalNSFourLaneProofProgram ≡ true
 periodicBPhasePointwiseCriticalEnergySplitRecoveredIsTrue =
   S1a.literalFiniteCriticalEnergySplitClosedIsTrue
+
+periodicBPhaseLiteralModeListCarrierRecoveredIsTrue :
+  periodicBPhaseLiteralModeListCarrierRecovered canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralModeListCarrierRecoveredIsTrue =
+  ModeCarrier.literalModeListConstancyWithoutViscosityIsTrue
+
+periodicBPhaseCriticalEnergyCompilerGivenCalculusRecoveredIsTrue :
+  periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseCriticalEnergyCompilerGivenCalculusRecoveredIsTrue =
+  S1b.integratedCriticalEnergyCompilerClosedGivenCalculusIsTrue
+
+periodicBPhaseConcreteScalarFTCObservedIsFalse :
+  periodicBPhaseConcreteScalarFTCObserved canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseConcreteScalarFTCObservedIsFalse =
+  S1b.concreteScalarFTCInstalledIsFalse
+
+periodicBPhaseConcreteIntegrationLinearityObservedIsFalse :
+  periodicBPhaseConcreteIntegrationLinearityObserved canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseConcreteIntegrationLinearityObservedIsFalse =
+  S1b.concreteIntegrationLinearityInstalledIsFalse
 
 periodicBPhaseR414ProductionNormalisationRecoveredIsFalse :
   periodicBPhaseR414ProductionNormalisationRecovered canonicalNSFourLaneProofProgram ≡ false
