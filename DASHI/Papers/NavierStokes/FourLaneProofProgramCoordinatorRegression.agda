@@ -38,21 +38,44 @@ periodicBPhaseCriticalRadialRealizationRecovered :
 periodicBPhaseCriticalRadialRealizationRecovered =
   Program.periodicBPhaseCriticalRadialRealizationRecoveredIsTrue
 
--- S0 now has an actual live-trajectory finite fold for endpoint mass,
--- ODE-compatible dissipation and projected-nonlinearity production.
 periodicBPhaseLiteralFiniteCriticalFoldRecovered :
   Program.periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
 periodicBPhaseLiteralFiniteCriticalFoldRecovered =
   Program.periodicBPhaseLiteralFiniteCriticalObservableFoldRecoveredIsTrue
 
--- S1a closes the purely finite R30 pointwise energy split, but not the
--- derivative/FTC/integration step.
 periodicBPhasePointwiseCriticalEnergySplitRecovered :
   Program.periodicBPhasePointwiseCriticalEnergySplitRecovered
     Program.canonicalNSFourLaneProofProgram ≡ true
 periodicBPhasePointwiseCriticalEnergySplitRecovered =
   Program.periodicBPhasePointwiseCriticalEnergySplitRecoveredIsTrue
+
+-- S1b needs one time-independent mode carrier but not positive viscosity.
+periodicBPhaseLiteralModeCarrierRecovered :
+  Program.periodicBPhaseLiteralModeListCarrierRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralModeCarrierRecovered =
+  Program.periodicBPhaseLiteralModeListCarrierRecoveredIsTrue
+
+-- The integrated S1 compiler is closed *given* the ordinary derivative/FTC and
+-- integration-linearity authorities.  This is not an unconditional S1 receipt.
+periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered :
+  Program.periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered
+    Program.canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseCriticalEnergyCompilerGivenCalculusRecovered =
+  Program.periodicBPhaseCriticalEnergyCompilerGivenCalculusRecoveredIsTrue
+
+periodicBPhaseConcreteScalarFTCStillAbsent :
+  Program.periodicBPhaseConcreteScalarFTCObserved
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseConcreteScalarFTCStillAbsent =
+  Program.periodicBPhaseConcreteScalarFTCObservedIsFalse
+
+periodicBPhaseConcreteIntegrationLinearityStillAbsent :
+  Program.periodicBPhaseConcreteIntegrationLinearityObserved
+    Program.canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseConcreteIntegrationLinearityStillAbsent =
+  Program.periodicBPhaseConcreteIntegrationLinearityObservedIsFalse
 
 periodicBPhaseR414ProductionNormalisationStillOpen :
   Program.periodicBPhaseR414ProductionNormalisationRecovered
