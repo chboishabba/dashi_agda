@@ -17,7 +17,7 @@ quantitative connected-correlation decay
 -> SameHamiltonianPhysicalMassGap.
 ```
 
-CMP99/CMP102/CMP109/CMP116, Row C, Heat/Doob/Langevin, Step-V/KP and unified polymer norms are **producer families beneath this consumer**, not alternate endpoints.
+CMP99/CMP102/CMP109/CMP116, Row C, Heat/Doob/Langevin, Step-V/KP and unified polymer norms are producer families beneath this consumer, not alternate endpoints.
 
 ### Riemann hypothesis
 
@@ -27,69 +27,66 @@ R1a/R1b final-near same-object representation
 -> existing uniform-high contradiction compiler.
 ```
 
-RH remains behind the current YM source seam because theorem-bearing checked-near bytes are not presently available through the accessible repo surfaces.
+RH remains behind the current YM source seam because theorem-bearing checked-near bytes are not presently available through accessible repo surfaces.
 
-## 2. Current YM Pareto queue — R368 cut
+## 2. Current YM Pareto queue — R369 cut
 
-The old R359 and R367 queues are superseded. The current preferred ordering is:
+The old R359/R367 queues are superseded. Keep fixed-parameter contraction, cross-parameter sensitivity and affine algebra distinct.
 
 ```text
 A. H_sub direct sensitivity route
 
-1. C_attach^102/116
-   Identify the literal CMP102 nonlinear critical-map C reused by CMP116 with
-   the proof-bearing R367 source contraction carrier.
-
-2. H_attach^99/116
+1. H_attach^99/116
    Attach CMP99 Theorem 3.14/(3.154) marked propagator-difference authority to
-   the exact CMP116 decoupled H(s(Y0)) used in D(A') = C(A' - H D(A')).
+   the exact CMP116 decoupled H(s(Y0)) used in the selected composite maps.
+
+2. cross-parameter C sensitivity
+   Preferred available producer: R367 proof-bearing C-Lipschitz on the exact C.
+   This requires C_attach^102/116.  Keep open the possibility of a more direct
+   CMP116 composite-map parameter-defect theorem if archaeology finds one.
 
 3. operation attachment
-   Identify the literal CMP116 background subtraction and operator-difference
-   action with the ordinary R368 affine carrier.  The algebraic identity
+   Identify literal CMP116 background subtraction and operator-difference action
+   with the generic R369 affine carrier.  The identity
      (A' - H_L X) - (A' - H_R X) = (H_R - H_L) X
-   is now compiler-owned once this same-object operation attachment exists.
-   Do NOT schedule a new analytic inequality here.
+   is already compiler-owned; do not schedule a new analytic inequality.
 
-4. common-ball attachment
-   Attach the source-owned CMP102/CMP116 radius/common invariant ball to the
-   selected R365/R367/R368 carrier.
+4. common-comparison ball/radius
+   R368 gives each fixed parameter its own source contraction ball.  R365's
+   two-parameter perturbation still needs the selected points in the comparison
+   context/common-ball required by the chosen cross-parameter producer.
 
-R368 + R367 + R366 then give
-  delta_map <= L_C M_H R.
+R368 supplies fixed-parameter source contraction.
+R369 + R367 + R366 supply the preferred cross-parameter defect factorization.
 R365 absorbs the contraction and pays H_subScale.
-R364 lifts that into the selected source Hessian-stability ABI.
+R364 lifts that into selected source Hessian stability.
 
 B. Remaining local Hessian branch
 
 5. H_local
-   literal source estimate of the form
+   literal source estimate
      ||D^2 E(H_Omega) - D^2 E(H_Omega')|| <= L_source d_sub
-   on the same selected continuation, unless a source-native derivative theorem
+   on the same selected continuation, unless source-native derivative archaeology
    reduces it further.
 
-6. H_stab selected attachment / H_scale, only after the source-local estimate is
-   pinned to the selected continuation.
+6. H_stab selected attachment / H_scale.
 
-C. Existing marked/localisation producer route (optional parallel producer)
+C. Optional marked/localisation producer route
 
 7. G_exit / G_tree / positive source-rate split / CMP99 marked-distance attachment
 8. exponent-to-majorant same-object weld
 9. charged CMP116 summability / marked replay
 
-These remain useful producers for the marked Hessian branch, but they are not
-prerequisites of the R365--R368 H_sub sensitivity compiler.
-
 D. Terminal residuals
 
-10. C_attach for the selected mixed-log response
+10. C_attach for selected mixed-log response
 11. D_time / same-family continuum covariance decay
 12. existing clustering-to-gap compiler
-13. RH R1a/R1b only when theorem-bearing checked-near material is recoverable
+13. RH R1a/R1b when theorem-bearing checked-near material is recoverable
 14. RH R2 strict literal-complement analysis.
 ```
 
-This is Pareto ordering, not a fixed logical sequence. Recut immediately when one same-object source theorem pays several coordinates.
+This is Pareto ordering, not a fixed logical sequence. Recut immediately when one source theorem pays several coordinates.
 
 ## 3. Current YM BIDI map
 
@@ -105,13 +102,14 @@ SameHamiltonianPhysicalMassGap
 H_sub
 <- R364 H_subScale
 <- R365 fixed-point perturbation
-<- R366 one-step map defect
-<- R367 exact-C contraction payment
-<- R368 generic affine argument compiler
-   + CMP102/CMP116 C attachment
-   + CMP99/CMP116 H-difference attachment
-   + CMP116 operation attachment
-   + source radius/common-ball attachment.
+   <- R368 direct fixed-parameter composite contraction
+   <- cross-parameter one-step defect
+      <- R366 factorization
+      <- { R367 exact-C sensitivity producer,
+           R369 affine argument compiler,
+           CMP99/CMP116 H attachment,
+           operation attachment,
+           common-comparison ball/radius }.
 
 H_stab
 <- source local Hessian stability H_local
@@ -122,18 +120,19 @@ H_stab
 Forward:
 
 ```text
-ordinary abelian difference laws
-+ operator subtraction acting pointwise
--> R368
-   (A' - H_L X) - (A' - H_R X) = (H_R - H_L) X
--> argument-defect scalar inequality by equality/reflexivity
+CMP116 fixed-parameter source theorem
+-> R368 literal F_s contraction on its source ball
 
-CMP102/CMP116 source contraction of the literal C map
-+ exact C same-object attachment
-+ CMP99 marked H_L-H_R theorem attached to literal H(s(Y0))
+ordinary abelian difference laws
++ pointwise operator subtraction
+-> R369 affine cancellation
+-> argument-defect equality / reflexive scalar inequality
+
+proof-bearing cross-parameter C sensitivity (R367 producer)
++ exact C attachment if that producer is used
++ CMP99 H_L-H_R theorem attached to literal H(s(Y0))
 + exact CMP116 operation attachment
-+ source radius/common-ball attachment
--> R367 proof-bearing C-Lipschitz stage
++ common comparison ball/radius
 -> R366 delta_map <= L_C M_H R
 -> R365 contraction absorption
 -> H_subScale
@@ -152,66 +151,37 @@ H_stab + H_sub
 -> existing clustering-to-gap compiler.
 ```
 
-BIDI invariant: downstream consumers may identify the least source statement to acquire, but they may not define source semantics post hoc. Source authority/status does not substitute for theorem-bearing replay or same-object attachment.
-
-## 4. R365--R368 Pareto reductions
+## 4. R365--R369 Pareto reductions
 
 ### R365 — fixed-point perturbation
+Two-fixed-point displacement is no longer primitive; one same-candidate parameter defect plus contraction absorption suffices.
 
-`BalabanCMP116SubstitutionContractionRound365Exact.agda`
+### R366 — cross-parameter defect factorization
+The one-step defect factors into C sensitivity, affine argument difference, propagator difference, candidate size and radius. CMP99 belongs at the propagator-difference layer.
 
-The two-solution displacement is no longer primitive. For fixed points `x_L`, `x_R` of nearby contractions:
+### R367 — optional cross-parameter C sensitivity producer
+`BalabanCMP102CriticalMapLipschitzRound367Exact.agda` requires a proof-bearing
+`d(Cx,Cy) <= L_C d(x,y)` theorem on the exact source C. Analyticity metadata does not pay it.
 
-```text
-d(x_L,x_R) <= q d(x_L,x_R) + delta.
-```
-
-`delta` is needed only at one common candidate; scalar absorption gives a multiple of `delta`.
-
-### R366 — one-step map defect
-
-`BalabanCMP116OneStepMapDefectRound366Exact.agda`
-
-Using
+### R368 — direct fixed-parameter CMP116 composite contraction
+`BalabanCMP116DirectDecoupledContractionRound368Exact.agda` represents the source theorem directly on
 
 ```text
-D(A') = C(A' - H D(A')),
+F_s(X) = C(A' - H(s)X)
 ```
 
-the one-step defect factors into `C` Lipschitz, affine argument difference, propagator difference, candidate size and common radius. CMP99 is therefore a legitimate upstream producer for the propagator-difference factor, not the full fixed-point displacement theorem.
+and supplies ball preservation, contraction and factor `<1` for each fixed parameter. It therefore avoids a mandatory CMP102->CMP116 C identity merely to obtain R365's same-parameter contraction. It does not pay the cross-parameter defect or a common two-parameter ball.
 
-### R367 — source C contraction becomes proof-bearing
-
-`BalabanCMP102CriticalMapLipschitzRound367Exact.agda`
-
-R367 requires a proof-bearing source theorem on the exact source map:
+### R369 — affine argument inequality is generic compiler algebra
+`BalabanCMP116AffineArgumentDifferenceRound369Exact.agda` derives
 
 ```text
-d(C x,C y) <= L_C d(x,y)
+(A' - H_L X) - (A' - H_R X) = (H_R - H_L) X
 ```
 
-inside the declared source ball and compiles it into R366.
+from ordinary abelian difference laws plus pointwise operator subtraction, then transports equality through the selected size function. The old R366 argument-defect inequality is no longer primitive.
 
-Firewall:
-
-```text
-source analyticity/locality status != quantitative C-Lipschitz inhabitant.
-```
-
-### R368 — affine argument inequality demoted to generic compiler algebra
-
-`BalabanCMP116AffineArgumentDifferenceRound368Exact.agda`
-
-R368 introduces a generic abelian difference carrier and a generic operator-difference action. From those ordinary laws it proves
-
-```text
-(A' - H_L X) - (A' - H_R X)
-  = (H_R - H_L) X.
-```
-
-It then transports this equality through the selected size function, making the old R366 `argumentDefectBelowPropagatorAction` inequality reflexive.
-
-This is a genuine Pareto reduction: the scalar argument inequality is no longer primitive. What remains is the same-object statement that the actual CMP116 subtraction and operator action instantiate the R368 generic carrier.
+The remaining operation coordinate is same-object attachment, not analysis.
 
 ## 5. Source-owned versus application debt
 
@@ -219,10 +189,11 @@ This is a genuine Pareto reduction: the scalar argument inequality is no longer 
 
 ```text
 CMP99 background propagator bounds and marked domain-sequence comparison;
-CMP102 variational/background theorem and contraction/locality proof shape;
-CMP116 literal substituted-background equation and common small-ball contraction construction;
-ordinary affine cancellation once subtraction/operator semantics are attached;
-CMP109 differentiated E^(2) locality machinery;
+CMP102 variational/background authority and contraction/locality proof shape;
+CMP116 literal fixed-parameter composite contraction on source balls;
+CMP116 substituted-background equation;
+ordinary affine cancellation after operation attachment;
+CMP109 differentiated E^(2) locality;
 CMP116 positive localisation/tree summability;
 finite marked-walk/replacement compiler algebra.
 ```
@@ -230,10 +201,10 @@ finite marked-walk/replacement compiler algebra.
 ### Current application / same-object debt
 
 ```text
-actual CMP102 C == C used in selected CMP116/R367 carrier;
 actual CMP99 marked H difference == selected CMP116 H(s(Y0)) difference;
-actual CMP116 subtraction/operator-difference semantics == R368 affine carrier;
-source radius/common ball == selected R365/R367/R368 ball;
+actual CMP116 subtraction/operator-difference semantics == R369 affine carrier;
+common two-parameter comparison ball/radius == selected R365 context;
+actual CMP102 C == selected C only if R367 is the cross-parameter producer;
 source-local D^2E variation estimate == selected H_local consumer.
 ```
 
@@ -244,14 +215,15 @@ Do not allow:
 ```text
 source citation/status -> theorem payment
 background analyticity -> numerical Lipschitz bound
+same-parameter R368 contraction -> cross-parameter defect
 CMP99 marked propagator comparison -> full fixed-point displacement
 shared symbol C -> same nonlinear map
 shared symbol H/Green -> same propagator
-source ball existence -> selected ball attachment
-R368 generic affine algebra -> automatic same-object source operation attachment
-algebraically obvious affine difference -> source operation semantics
+source ball existence -> common two-parameter ball attachment
+R369 generic algebra -> automatic source operation attachment
+algebraically obvious affine difference -> same-object operation semantics
 H_subScale -> primitive theorem after R365/R366
-full CMP109/116/119/122 reconstruction -> current live task
+full CMP109/116/119/122 reconstruction -> current task
 Row C / Heat / Langevin / Step-V -> mandatory merely because sufficient
 fresh clustering-to-gap theorem -> current debt.
 ```
@@ -270,7 +242,7 @@ raw finite-history CMP119 E_k
 -> BC1.
 ```
 
-Its live theorem-bearing inputs are `P0` genuine CMP122 witness, `P1` physical second variation, `P2` literal CMP109 Eq.(5.1) binding, and `P3` literal normalized CMP116 demand extraction. Do not merge that BC1 source-realization queue with the current R365--R368 mass-gap sensitivity queue merely because both mention CMP116.
+Its live theorem-bearing inputs are P0 genuine CMP122 witness, P1 physical second variation, P2 literal CMP109 Eq.(5.1) binding, and P3 literal normalized CMP116 demand extraction. Do not merge that BC1 queue with R365--R369 mass-gap sensitivity merely because both mention CMP116.
 
 ## 8. RH current route
 
@@ -287,17 +259,19 @@ Stop alias archaeology until theorem-bearing checked-near material becomes recov
 
 This file is scheduling/accounting only.
 
-- R365--R368 are source-written compiler/interface reductions.
-- `machineChecked` repository labels are not fresh exact-head kernel receipts.
-- source statements and source extracts are not Agda proof terms.
-- same-object C/H/operation/radius attachments remain conditional.
-- no exact-head Agda workflow receipt is currently claimed here.
+- R365--R369 are source-written compiler/interface reductions.
+- repository `machineChecked` labels are not fresh exact-head kernel receipts.
+- source statements/extracts are not Agda proof terms.
+- same-object H/operation/common-ball attachments remain conditional.
+- R367 C attachment remains conditional if that cross-parameter producer is used.
+- no exact-head Agda workflow receipt is claimed here unless separately observed.
 - no continuum YM construction, mass-gap theorem, Clay completion, or RH proof is claimed.
 
 ## 10. Update log
 
 - R359: source decay-rate split replaced three independent rate inequalities.
-- R365: full two-fixed-point `H_subScale` demoted to one-step defect + contraction absorption.
-- R366: one-step defect factored into `C` Lipschitz × propagator difference × common radius.
-- R367: source `C` contraction made proof-bearing; mere analyticity blocked from paying it.
-- R368: common-base affine argument cancellation and operator-difference action compiled generically; the scalar argument-defect inequality is no longer primitive. Current dominant H_sub debt is same-object `C`, same-object `H`, source-operation attachment, and common-ball attachment.
+- R365: full two-fixed-point H_subScale demoted to one-step defect + contraction absorption.
+- R366: one-step defect factored into C sensitivity × H difference × radius.
+- R367: cross-parameter C sensitivity made proof-bearing; mere analyticity blocked.
+- R368: fixed-parameter CMP116 composite contraction imported directly; cross-paper C identity no longer mandatory for the R365 contraction factor.
+- R369: common-base affine argument cancellation compiled generically; the scalar argument inequality is no longer primitive.
