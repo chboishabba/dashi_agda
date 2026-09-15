@@ -7,26 +7,25 @@ module DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342
 -- R341 reduced the preferred source-native T78-B route to two physical/source
 -- coordinates plus standard one-sided order closure:
 --
---   B1. CMP116 differentiated source-response magnitude
+--   B1. CMP116 differentiated J-response magnitude
 --       = selected literal mixed-log magnitude;
 --   B2. CMP116 source envelope <= selected spectral clustering envelope.
 --
--- This owner isolates B1 as a standalone same-object witness.  It does not
--- weaken B2, does not introduce a new decay estimate, and does not infer the
--- source identity from citation/provenance.  Supplying B1, B2, and the standard
--- R278 order-closure theorem mechanically reconstructs the existing R341
--- application.
+-- This owner isolates B1 from B2.  The DIRECT CMP116 J-response equality is the
+-- preferred B1 payment.  It is exactly the same coordinate already exposed by
+-- R339/R341 and does not require a CMP109 polarization detour.
 --
--- Archaeology refinement: R321 already isolated the older CMP109 E^(2)/Pi
--- source-response <-> selected normalized mixed-log response weld.  The generic
--- two-source calculus also already proves that the literal J-direction mixed
--- log derivative is the same selected mixed-log derivative.  Therefore B1 need
--- not be re-proved from scratch: after ONE source-source identification between
--- R338's canonical CMP116 differentiated magnitude and R321's E^(2)/Pi source
--- magnitude, the old R321 weld compiles to the current R341 B1 consumer.
+-- ARCHAEOLOGY CORRECTION (2026-09-15): R322 explicitly records that CMP109's
+-- vacuum-polarization tensor is NOT definitionally the selected two-J connected
+-- cumulant, and identifies CMP116's declared analytic J directions as the
+-- correct source family for this selected-T5 route.  Hence the older R321
+-- E^(2)/Pi same-object result may be reused only as an OPTIONAL stronger donor:
+-- if one independently proves that R338's CMP116 J-response magnitude equals
+-- R321's CMP109 E^(2)/Pi source magnitude, then R321 compiles to B1.  That extra
+-- source-source identity is not part of the preferred Pareto cut.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
@@ -38,13 +37,14 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact a
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
+import DASHI.Physics.YangMills.BalabanCMP116SelectedJDomainApplicationRound322Exact as R322
 import DASHI.Physics.YangMills.BalabanCMP109SelectedT5SameObjectRound321Exact as R321
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338Exact as R338
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
 import DASHI.Physics.YangMills.BalabanCMP116R281ModeSelectedDirectRound341Exact as R341
 
 ------------------------------------------------------------------------
--- B1 only.
+-- Preferred B1: direct same-object CMP116 J-response payment.
 ------------------------------------------------------------------------
 
 record SourceResponseSameObjectPayment
@@ -78,12 +78,11 @@ record SourceResponseSameObjectPayment
 open SourceResponseSameObjectPayment public
 
 ------------------------------------------------------------------------
--- Cross-pollinate the older R321 same-object weld.
+-- Optional donor: CMP109 E^(2)/Pi route.
 --
--- R321 already owns the *shape* of the source E^(2)/Pi <-> selected mixed-log
--- response identity.  The only extra physical/source coordinate needed to reuse
--- it here is that R338's canonical CMP116 response magnitude is literally that
--- same R321 source E^(2)/Pi magnitude on the selected scale/volume/J pair.
+-- This is deliberately NOT the preferred source family.  It proves only that,
+-- after an additional CMP109<->CMP116 source-magnitude identity is supplied,
+-- R321's already-owned selected-response weld can inhabit the preferred B1.
 ------------------------------------------------------------------------
 
 record CMP109CMP116SourceResponseIdentity
@@ -145,6 +144,19 @@ r321SameObjectBuildsB1AfterSourceIdentity
 
 r321SameObjectCanFeedB1AfterSourceIdentity : Bool
 r321SameObjectCanFeedB1AfterSourceIdentity = true
+
+r321CMP109DonorIsPreferredB1Route : Bool
+r321CMP109DonorIsPreferredB1Route = false
+
+directCMP116JResponseIsPreferredB1Route : Bool
+directCMP116JResponseIsPreferredB1Route = true
+
+cmp109PiIdentificationRequiredByPreferredB1 : Bool
+cmp109PiIdentificationRequiredByPreferredB1 = false
+
+cmp109PiIsDefinitionallyTwoJConnectedCumulant : Bool
+cmp109PiIsDefinitionallyTwoJConnectedCumulant =
+  R322.cmp109PolarizationTensorIsDefinitionallyTwoJConnectedCumulant
 
 ------------------------------------------------------------------------
 -- Keep B2 independent.
@@ -218,11 +230,13 @@ asRound341Application b1 b2 limitClosure = record
 round342CompilerLevel : ProofLevel
 round342CompilerLevel = machineChecked
 
--- The current B1 can be supplied directly, but the preferred archaeology route
--- reuses R321 and reduces the novel payment to the CMP109/CMP116 source identity.
+-- Preferred physical B1: direct CMP116 J-response magnitude = selected literal
+-- mixed-log magnitude on the exact R318/R281 selected pair.
 round342SourceResponseSameObjectLevel : ProofLevel
 round342SourceResponseSameObjectLevel = conditional
 
+-- Optional stronger donor route only.  The preferred B1 does not require this
+-- CMP109/CMP116 source-source identity.
 round342CMP109CMP116SourceIdentityLevel : ProofLevel
 round342CMP109CMP116SourceIdentityLevel = conditional
 
