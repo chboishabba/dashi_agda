@@ -10,12 +10,12 @@ import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 --
 -- External sources below retain identity, source kind, relationship and
 -- visibility through the repo-wide AttributedSource/Snowball machinery.
--- They supply empirical, historical, regulatory, or literature context only.
+-- They supply empirical, historical, regulatory, operational, or literature
+-- context only.
 --
 -- The finite non-factorability witnesses, consumer-indexed discriminator
--- selection, selective reopening, and costed experiment-search constructions in
--- this tranche are DASHI synthetic extensions.  They are not attributed back to
--- CSIRO, the management-guide contributors, DAFF, or the academic authors.
+-- selection, selective reopening, chemistry-indexing and costed experiment-
+-- search constructions in this tranche are DASHI synthetic extensions.
 ------------------------------------------------------------------------
 
 csiroHyacinthSource : Attribution.AttributedSource
@@ -110,6 +110,17 @@ marianiEtAl2026Source = Attribution.mkDOISource
   "agent-interaction and abiotic-context calibration from a southeastern-US field setting; no geographic transfer to Australia is asserted by the atlas"
   Attribution.publicAttribution
 
+ipswichSpringfield2025Source : Attribution.AttributedSource
+ipswichSpringfield2025Source = Attribution.mkNoDOISource
+  "Ipswich City Council"
+  "Strides made in salvinia weed management across Springfield Lakes waterways"
+  "Ipswich City Council news release"
+  "2025"
+  "https://www.ipswich.qld.gov.au/News-Articles-Folder/2025/Strides-made-in-salvinia-weed-management-across-Springfield-Lakes-waterways"
+  Attribution.governmentSource
+  "local Springfield Lakes operational record for SALVINIA mechanical removal using a spider excavator and aquatic weed harvester; supports access/equipment/biomass-export context only and is not water-hyacinth efficacy evidence"
+  Attribution.publicAttribution
+
 ------------------------------------------------------------------------
 -- One canonical atlas: absence of DOI is atlas-local, and none of the rows
 -- creates proof, exhaustive coverage, endorsement, or deployment authority.
@@ -127,8 +138,9 @@ canonicalBiocontrolSourceAtlas = Attribution.mkSourceAtlas
     ∷ centerEtAl2005Source
     ∷ chalaEtAl2026Source
     ∷ marianiEtAl2026Source
+    ∷ ipswichSpringfield2025Source
     ∷ [])
-  "source-bound context for programme history, Australian management mechanisms/governance, host specificity, biomass fate, community competition, nutrient recycling and agent interaction; DASHI finite witnesses and experiment-search results remain repository-native extensions"
+  "source-bound context for programme history, Australian management mechanisms/governance, host specificity, biomass fate, community competition, nutrient recycling, agent interaction and local mechanical-removal operations; DASHI finite witnesses and experiment-search results remain repository-native extensions"
 
 ------------------------------------------------------------------------
 -- Snowball receipts preserve source role through downstream projection.
@@ -160,6 +172,11 @@ chalaEtAl2026SnowballReceipt = Snowball.canonicalSourceRoleSnowballReceipt chala
 
 marianiEtAl2026SnowballReceipt : Snowball.SourceRoleSnowballReceipt marianiEtAl2026Source
 marianiEtAl2026SnowballReceipt = Snowball.canonicalSourceRoleSnowballReceipt marianiEtAl2026Source
+
+ipswichSpringfield2025SnowballReceipt :
+  Snowball.SourceRoleSnowballReceipt ipswichSpringfield2025Source
+ipswichSpringfield2025SnowballReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt ipswichSpringfield2025Source
 
 record SourceAtlasBoundary : Set where
   constructor sourceAtlasBoundary
