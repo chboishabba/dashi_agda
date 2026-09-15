@@ -109,6 +109,27 @@ open FinalNearLiteralKernel public
 -- Once both are supplied, the final R1 equality is compiler output by transitivity.
 ------------------------------------------------------------------------
 
+record FinalNearCheckedScalarAttachment
+    {S : NearFar.OrderedAdditiveNearFarSurface}
+    {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
+    (offInput : Direct.DirectLiteralOffTargetInput S transport) : Set where
+  field
+    checkedNearScalar : NearFar.Scalar S
+    finalNearResponseIsCheckedNearScalar :
+      Transport.nearResponseAt transport (Direct.chosenCutoff offInput)
+      ≡ checkedNearScalar
+
+open FinalNearCheckedScalarAttachment public
+
+record CheckedScalarLiteralFoldIdentification
+    {S : NearFar.OrderedAdditiveNearFarSurface}
+    (checkedNearScalar literalFiniteNearValue : NearFar.Scalar S) : Set where
+  field
+    checkedNearScalarIsLiteralFiniteNearValue :
+      checkedNearScalar ≡ literalFiniteNearValue
+
+open CheckedScalarLiteralFoldIdentification public
+
 record FinalNearCheckedScalarBridge
     {S : NearFar.OrderedAdditiveNearFarSurface}
     {transport : Transport.ExplicitCutoffNearFarAgdaTransport S}
@@ -126,6 +147,25 @@ record FinalNearCheckedScalarBridge
 
 open FinalNearCheckedScalarBridge public
 
+compileFinalNearCheckedScalarBridge :
+  forall {S transport} ->
+  (offInput : Direct.DirectLiteralOffTargetInput S transport) ->
+  {literalFiniteNearValue : NearFar.Scalar S} ->
+  (attachment : FinalNearCheckedScalarAttachment offInput) ->
+  CheckedScalarLiteralFoldIdentification
+    (FinalNearCheckedScalarAttachment.checkedNearScalar attachment)
+    literalFiniteNearValue ->
+  FinalNearCheckedScalarBridge offInput literalFiniteNearValue
+compileFinalNearCheckedScalarBridge offInput attachment identification = record
+  { FinalNearCheckedScalarBridge.checkedNearScalar =
+      FinalNearCheckedScalarAttachment.checkedNearScalar attachment
+  ; FinalNearCheckedScalarBridge.finalNearResponseIsCheckedNearScalar =
+      FinalNearCheckedScalarAttachment.finalNearResponseIsCheckedNearScalar attachment
+  ; FinalNearCheckedScalarBridge.checkedNearScalarIsLiteralFiniteNearValue =
+      CheckedScalarLiteralFoldIdentification.checkedNearScalarIsLiteralFiniteNearValue
+        identification
+  }
+
 compileFinalNearRepresentationEquality :
   forall {S transport} ->
   (offInput : Direct.DirectLiteralOffTargetInput S transport) ->
@@ -135,8 +175,22 @@ compileFinalNearRepresentationEquality :
   ≡ literalFiniteNearValue
 compileFinalNearRepresentationEquality offInput bridge =
   trans
-    (finalNearResponseIsCheckedNearScalar bridge)
-    (checkedNearScalarIsLiteralFiniteNearValue bridge)
+    (FinalNearCheckedScalarBridge.finalNearResponseIsCheckedNearScalar bridge)
+    (FinalNearCheckedScalarBridge.checkedNearScalarIsLiteralFiniteNearValue bridge)
+
+compileFinalNearRepresentationEqualityFromSplit :
+  forall {S transport} ->
+  (offInput : Direct.DirectLiteralOffTargetInput S transport) ->
+  {literalFiniteNearValue : NearFar.Scalar S} ->
+  (attachment : FinalNearCheckedScalarAttachment offInput) ->
+  CheckedScalarLiteralFoldIdentification
+    (FinalNearCheckedScalarAttachment.checkedNearScalar attachment)
+    literalFiniteNearValue ->
+  Transport.nearResponseAt transport (Direct.chosenCutoff offInput)
+  ≡ literalFiniteNearValue
+compileFinalNearRepresentationEqualityFromSplit offInput attachment identification =
+  compileFinalNearRepresentationEquality offInput
+    (compileFinalNearCheckedScalarBridge offInput attachment identification)
 
 ------------------------------------------------------------------------
 -- R1 SOURCE/TRANSPORT AUDIT
@@ -150,8 +204,13 @@ compileFinalNearRepresentationEquality offInput bridge =
 --      carrier or transports the checked finite-near scalar into this Agda
 --      final carrier.
 --
+-- R1a and R1b are now separately inhabitable theorem obligations:
+--
+--   R1a  final nearResponseAt(chosen J) = checked/imported scalar
+--   R1b  checked/imported scalar = literal finite cell fold
+--
 -- The booleans below are deliberately fail-closed acquisition status.  They do
--- not replace either equality in `FinalNearCheckedScalarBridge`.
+-- not replace either theorem-bearing obligation.
 ------------------------------------------------------------------------
 
 genericTargetGapCosineCompilerClosedReceipt :
@@ -281,4 +340,4 @@ canonicalFinalNearLiteralKernelBoundary =
     false refl
     false refl
     false refl
-    "Representation is evaluator-independent. Generic target-gap/even-projection cosine algebra is already proof-bearing in Agda, and a Lean source owner names the literal reflection-pair 4*g*cosh*cos formula. Neither fact supplies the actual universal pole-quotient phase realization or the theorem-bearing checked-near-scalar transport. The final R1 equality may be acquired directly or factored through one checked/imported near scalar: identify final nearResponseAt(chosen J) with that scalar, then identify the same scalar with the literal finite cell fold. Status Booleans and opaque same-carrier receipts pay neither equality. Numerical/symbolic certificates remain downstream, no selected Weil window or determinant consumer is required, and no strict ClusterResponse inequality or RH is proved here."
+    "Representation is evaluator-independent. Generic target-gap/even-projection cosine algebra is already proof-bearing in Agda, and a Lean source owner names the literal reflection-pair 4*g*cosh*cos formula. Neither fact supplies the actual universal pole-quotient phase realization or the theorem-bearing checked-near-scalar transport. R1 may be acquired directly or as two independent theorem-bearing payments: R1a attaches final nearResponseAt(chosen J) to one checked/imported near scalar; R1b identifies that SAME checked scalar with the literal finite cell fold. The bundled bridge and final R1 equality are compiler output from R1a+R1b. Status Booleans and opaque same-carrier receipts pay neither equality. Numerical/symbolic certificates remain downstream, no selected Weil window or determinant consumer is required, and no strict ClusterResponse inequality or RH is proved here."
