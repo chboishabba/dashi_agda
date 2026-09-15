@@ -12,12 +12,14 @@ module DASHI.Physics.Foundations.BalabanRound131NativeSectorTransportValidation 
 -- Required least-privilege production surface:
 --
 --   Round131.CommonMetricReadyBalabanSectorRecovery
---     + literal-construction attachment to the selected QFT target
+--     + literal construction Y = recovered QFT construction
+--     + existing QFT recovery receipt
+--       => literal construction Y = selected qftTarget
 --     + literal-stress/common-pairing transport
 --     -> native literal-sector recovery transport
 --
 -- This remains representation plumbing only.  It must not add a second
--- continuum, stress-convergence, or aggregation theorem.
+-- continuum, stress-convergence, QFT-recovery, or aggregation theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -32,3 +34,7 @@ nativeLiteralSectorRecoveryTransportCompilerLevel =
 round131LiteralSectorTransportCompilerLevel : ProofLevel
 round131LiteralSectorTransportCompilerLevel =
   Adapter.round131LiteralSectorTransportCompilerLevel
+
+round131RecoveredConstructionToTargetCompilerLevel : ProofLevel
+round131RecoveredConstructionToTargetCompilerLevel =
+  Adapter.round131RecoveredConstructionToTargetCompilerLevel
