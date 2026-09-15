@@ -22,11 +22,11 @@ module DASHI.Physics.YangMills.BalabanSourceDecayRateSplitRound359Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ ; 0ℝ ; _+ℝ_ ; _≤ℝ_
-  ; ≤ℝ-refl ; ≤ℝ-trans ; +-mono-≤ ; +-identityˡ ; +-identityʳ ; +-assoc )
+  ; ≤ℝ-refl ; ≤ℝ-trans ; +-mono-≤ ; +-identityˡ ; +-identityʳ )
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCoefficientCollarWeightRound357Exact as R357
 
@@ -47,6 +47,17 @@ deltaMark dataSet = deltaCollar dataSet +ℝ deltaSlack dataSet
 kappa : SourceDecayRateSplit → ℝ
 kappa dataSet =
   (deltaCollar dataSet +ℝ residualKappa dataSet) +ℝ kappaSlack dataSet
+
+deltaMarkNonnegative :
+  (dataSet : SourceDecayRateSplit) →
+  0ℝ ≤ℝ deltaMark dataSet
+deltaMarkNonnegative dataSet =
+  subst
+    (λ left → left ≤ℝ deltaMark dataSet)
+    (+-identityˡ 0ℝ)
+    (+-mono-≤
+      (deltaCollarNonnegative dataSet)
+      (deltaSlackNonnegative dataSet))
 
 collarRateBelowMarkedRate :
   (dataSet : SourceDecayRateSplit) →
@@ -116,9 +127,7 @@ asR357Calibration dataSet = record
   ; R357.CoefficientCollarWeightCalibration.deltaCollarNonnegative =
       deltaCollarNonnegative (split dataSet)
   ; R357.CoefficientCollarWeightCalibration.deltaMarkNonnegative =
-      +-mono-≤
-        (deltaCollarNonnegative (split dataSet))
-        (deltaSlackNonnegative (split dataSet))
+      deltaMarkNonnegative (split dataSet)
   ; R357.CoefficientCollarWeightCalibration.residualKappaNonnegative =
       residualKappaNonnegative (split dataSet)
   ; R357.CoefficientCollarWeightCalibration.collarRadiusNonnegative =
