@@ -86,7 +86,7 @@ record SimpleSubobjectClassificationBoundary : Set where
     simpleOrthogonalityConsumed : Bool
     literalConstituentEnumerationLogicallyMandatoryAfterClassifier : Bool
 
-    semisisimpleAssemblyWritten : Bool
+    semisimpleAssemblyWritten : Bool
     multiplicityNinetyPaid : Bool
     directSumNinetyIsoPaid : Bool
     concreteWeylBasisActionRecognitionPaid : Bool
