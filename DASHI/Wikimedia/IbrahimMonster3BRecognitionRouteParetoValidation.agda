@@ -11,13 +11,16 @@ routeSelectionRegression :
   × P.RecognitionRouteParetoBoundary.wholeCharacterRouteRetained
     P.canonicalRecognitionRouteParetoBoundary
   ≡ true
-  × P.RecognitionRouteParetoBoundary.wholeCharacterRouteParetoPreferredBeforeExecution
+  × P.RecognitionRouteParetoBoundary.routesParetoIncomparableBeforeExecution
+    P.canonicalRecognitionRouteParetoBoundary
+  ≡ true
+  × P.RecognitionRouteParetoBoundary.wholeCharacterRouteHighestAlphaProbe
     P.canonicalRecognitionRouteParetoBoundary
   ≡ true
   × P.RecognitionRouteParetoBoundary.literalConstituentEnumerationMandatory
     P.canonicalRecognitionRouteParetoBoundary
   ≡ false
-routeSelectionRegression = refl , refl , refl , refl
+routeSelectionRegression = refl , refl , refl , refl , refl
 
 paymentRegression :
   P.RecognitionRouteParetoBoundary.actualKernelReplayReceiptObserved
