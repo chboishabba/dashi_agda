@@ -14,16 +14,18 @@ module DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureBoundaryExact where
 -- the centered second-difference / Euclidean-radius curvature estimate.
 --
 -- The square-gap owner pays the exact denominator-cleared algebra.  The
--- centered-shift owner additionally proves on the literal integer Fourier
+-- centered-shift owners additionally prove on the literal rational Fourier
 -- carrier
 --
 --   (k+y) + (k-y) = 2k,
 --   |2k|^2 = 4|k|^2,
---   Plucker(k+y,k-y) = 4 Plucker(k,y).
+--   Plucker(k+y,k-y) = 4 Plucker(k,y),
+--   modeNorm(2k) = 2 modeNorm(k).
 --
--- Therefore the remaining A2 payment is no longer opaque Taylor theory or
--- unresolved lattice geometry.  It is scalar radius doubling, ordered/annular
--- denominator control, and the final angular/square-gap second-moment bound.
+-- Radius doubling is obtained from R455 square calibration + nonnegative root
+-- separation, not a square-root axiom.  The remaining A2 payment is now the
+-- ordered/annular denominator control and final aligned angular/square-gap
+-- second-moment bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -37,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializatio
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact as GateA
 import DASHI.Physics.Closure.NSTriadKNR571RadialCurvatureSquareGapExact as SquareGap
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
+import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact as RadiusDouble
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceExact as Taylor
 
 record R571PreferredRadialCurvatureSample : Set₁ where
@@ -91,7 +94,7 @@ r571A2CenteredShiftPluckerScalingClosed =
 
 r571A2CenteredShiftScalarRadiusDoublingClosed : Bool
 r571A2CenteredShiftScalarRadiusDoublingClosed =
-  CenteredShift.r571A2CenteredShiftScalarRadiusDoublingClosed
+  RadiusDouble.r571A2CenteredShiftScalarRadiusDoublingClosed
 
 r571A2OrderedRadialDenominatorPaymentClosed : Bool
 r571A2OrderedRadialDenominatorPaymentClosed =
