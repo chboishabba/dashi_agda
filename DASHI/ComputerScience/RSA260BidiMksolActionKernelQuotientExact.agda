@@ -15,17 +15,22 @@ import DASHI.ComputerScience.RSA260BidiHybridReplayMksolAdequacyExact as Replay
 -- two generator states are consumer-equivalent exactly when they induce the same
 -- action output.
 --
--- This owner packages that quotient generically and binds a finite runtime probe
--- on the existing synthetic BWC harness.  The runtime probe studies the linear
--- map
+-- The finite runtime probe studies the linear map
 --
 --   (F_0,...,F_{d-1}) |-> XOR_l M^l V F_l.
 --
--- It finds a nontrivial kernel on the degree-17 synthetic contexts but an
--- injective map on the checked degree-16 contexts.  This is positive evidence
--- for consumer-relative quotienting, not a universal compression theorem:
--- changing V, the prepared operator, or the requested solution context can
--- reopen directions hidden by one fixed action map.
+-- IMPORTANT AUDIT CORRECTION:
+-- The first draft of this receipt accidentally ranked the helper's extra K_d
+-- block although the action uses only K_0..K_{d-1}.  The corrected probe below
+-- slices exactly d Krylov blocks.  With that correction most checked degree-16
+-- contexts are injective, but seed4 has a 16-bit kernel and bitrev9 an 8-bit
+-- kernel.  Ordinary checked degree-17 contexts have a 64-bit kernel; rotate1
+-- has 72 bits.  This preserves the qualitative conclusion (consumer-relative
+-- hidden directions exist) while removing the false claim that every checked
+-- degree-16 context was injective.
+--
+-- Any such kernel remains context-indexed: changing V, the prepared operator,
+-- or the requested solution context can reopen hidden directions.
 ------------------------------------------------------------------------
 
 mksolBoundary : Mksol.MksolConsumerProjectionBoundary
@@ -72,7 +77,7 @@ equalCodeImpliesEqualAction {context} representation encodedEq =
       (sym (actionFactorsThroughCode representation _)))
 
 ------------------------------------------------------------------------
--- Runtime rank probe.
+-- Corrected runtime rank probe.
 ------------------------------------------------------------------------
 
 record MksolActionKernelRuntimeReceipt : Set where
@@ -85,12 +90,13 @@ record MksolActionKernelRuntimeReceipt : Set where
     degree16Worlds : Nat
     degree17Worlds : Nat
     degree16CoefficientDomainBits : Nat
-    degree16ActionMapRankBits : Nat
-    allCheckedDegree16MapsInjective : Bool
+    seed0KernelBits : Nat
+    seed3KernelBits : Nat
+    seed4KernelBits : Nat
+    seed7KernelBits : Nat
+    bitrev9KernelBits : Nat
     degree17CoefficientDomainBits : Nat
-    ordinaryDegree17ActionMapRankBits : Nat
     ordinaryDegree17KernelBits : Nat
-    rotate1ActionMapRankBits : Nat
     rotate1KernelBits : Nat
     fixedSyntheticContextOnly : Bool
     exactCADOMksolSemantics : Bool
@@ -102,19 +108,16 @@ open MksolActionKernelRuntimeReceipt public
 currentMksolActionKernelRuntimeReceipt : MksolActionKernelRuntimeReceipt
 currentMksolActionKernelRuntimeReceipt =
   mksol-action-kernel-runtime-receipt
-    "/mnt/data/rsa260_bidi_raw_rank_crossvalidate.py plus action-map rank probe"
-    "/mnt/data/rsa260_bidi_mksol_action_kernel_quotient.json"
-    "4f70d638ea963182df530f30464060035a6a9f036622c0a0cdd1e36f480a143f"
+    "/mnt/data/rsa260_bidi_raw_rank_crossvalidate.py plus corrected action-map rank probe"
+    "/mnt/data/rsa260_bidi_mksol_action_kernel_quotient_corrected.json"
+    "517f456a44265044e659b11f74d163bc7c8b97d473e003fa874e2150a75d94a6"
     12
     5
     7
     1024
-    1024
-    true
+    0 0 16 0 8
     1088
-    1024
     64
-    1016
     72
     true
     false
@@ -133,7 +136,10 @@ record MksolActionKernelQuotientBoundary : Set where
     actionKernelEquivalenceDefined : Bool
     genericActionFactoringRepresentationDefined : Bool
     exactReplayRemainsSufficientUpperEndpoint : Bool
-    checkedDegree16FixedContextActionInjective : Bool
+    someCheckedDegree16FixedContextActionsInjective : Bool
+    allCheckedDegree16FixedContextActionsInjective : Bool
+    seed4Degree16Has16HiddenBits : Bool
+    bitrev9Degree16Has8HiddenBits : Bool
     checkedDegree17FixedContextHasUnobservedDirections : Bool
     ordinaryDegree17KernelHas64BitsInRuntimeProbe : Bool
     rotate1KernelHas72BitsInRuntimeProbe : Bool
@@ -149,16 +155,17 @@ canonicalMksolActionKernelQuotientBoundary : MksolActionKernelQuotientBoundary
 canonicalMksolActionKernelQuotientBoundary =
   mksol-action-kernel-quotient-boundary
     true true true true
-    true true true true
+    true false true true
+    true true true
     false false false false false true
 
 data MksolActionKernelResidual : Set where
-  buildConcreteQuotientCoordinatesForFixedSyntheticContext : MksolActionKernelResidual
   stressQuotientAcrossMultipleVContexts : MksolActionKernelResidual
   stressQuotientAcrossPreparedOperatorContexts : MksolActionKernelResidual
   identifyIntersectionKernelAcrossDeclaredMksolContextFamily : MksolActionKernelResidual
+  buildConcreteCoordinatesOnlyIfIntersectionKernelPersists : MksolActionKernelResidual
   alignContextFamilyWithSourceNativeCADOMksol : MksolActionKernelResidual
   bindSameObjectProductionVAndPreparedOperator : MksolActionKernelResidual
 
 firstMksolActionKernelResidual : MksolActionKernelResidual
-firstMksolActionKernelResidual = buildConcreteQuotientCoordinatesForFixedSyntheticContext
+firstMksolActionKernelResidual = stressQuotientAcrossMultipleVContexts
