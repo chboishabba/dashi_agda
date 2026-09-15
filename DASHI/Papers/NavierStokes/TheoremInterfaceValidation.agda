@@ -19,25 +19,28 @@ import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellCanonicalSuffixRegression
 import DASHI.Physics.Closure.NSTriadKNR104StrictShellJumpTailRegression
 import DASHI.Physics.Closure.NSTriadKNUpperShellPrefixErasureRegression
 import DASHI.Physics.Closure.NSTriadKNR104GlobalLayerCakePhysicalPacketWeldRegression
+import DASHI.Physics.Closure.NSTriadKNPacketBoundaryFluxComplementRound98Regression
+import DASHI.Physics.Closure.NSTriadKNS2b2AdjacentShellSpectralGapNoGoRegression
+import DASHI.Physics.Closure.NSTriadKNUpperShellCollarRemoteSplitRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
 -- the authoritative owners it imports. The canonical coordinator regression,
--- thin S2b successor delta, and strict S0/S1/S2 representation regressions are
--- imported so current A/B/C/D routing and physical phase seams are checked by
--- the same root whenever it is actually kernel-run.
+-- thin S2b successor delta, strict S0/S1/S2 representation regressions, and
+-- the current S2b2 sign/no-go/collar-split regressions are imported so the
+-- current A/B routing and physical phase seams are checked by the same root
+-- whenever it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
--- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1a radial
--- ordering/permutation, reject-zero full->nonzero transport, upper-shell R98
--- transport, canonical suffix realization, local strict-jump tails, prefix
--- erasure, and the global R104 physical packet layer-cake weld may all be
--- source-written while concrete scalar FTC / integration authorities, the
--- quantitative S2 payment, initial ceiling and retained-viscosity payments
--- remain unobserved or open.
+-- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1 radial
+-- packet realization, packet-complement antisymmetry, the adjacent-shell-gap
+-- no-go, and the exact collar/remote split may all be source-written while
+-- concrete scalar FTC / integration authorities, the remote/collar S2b2
+-- quantitative payment, initial ceiling and retained-viscosity payments remain
+-- unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
