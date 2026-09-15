@@ -5,18 +5,19 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
+import DASHI.Core.ConsumerRelativeReductionKernelExact as Reduction
 import DASHI.ComputerScience.RSA260BidiCoefficientHybridReplayCodecExact as Codec
 
 ------------------------------------------------------------------------
 -- DESCENDING BELOW THE HYBRID TAIL
 --
 -- The first recursive untangling step below HybridEncodedGenerator should not
--- simply rename generator identity as the next coarse coordinate.  Attack a
+-- simply rename generator identity as the next coarse coordinate. Attack a
 -- cheaper candidate first: the complete currently-recorded codec cost shape
 -- (raw bits, description bits, witness bits, decode XOR work, savings).
 --
 -- rotate3 and affine7 collide on this entire shape while decoding to different
--- generator identities.  Therefore even the combined description/witness/
+-- generator identities. Therefore even the combined description/witness/
 -- execution summary is not a consumer terminal for exact generator identity.
 -- The relative-fine coordinate must retain more structural information.
 ------------------------------------------------------------------------
@@ -59,7 +60,7 @@ rotate3Affine7DifferentGenerator ()
 
 ------------------------------------------------------------------------
 -- Exact reopening keeps generator identity as the residual for this attacked
--- quotient.  The next research step is to replace that residual by explicit
+-- quotient. The next research step is to replace that residual by explicit
 -- layer mode/basis/mask structure and attack again.
 ------------------------------------------------------------------------
 
@@ -105,8 +106,7 @@ exactGeneratorIdentityFineSensitive =
 costShapeRefutesGeneratorIdentityReduction :
   ∀ {Action : Set}
     {step : Action → Codec.HybridEncodedGenerator → Codec.HybridEncodedGenerator} →
-  DASHI.Core.ConsumerRelativeReductionKernelExact.CandidateReductionFailure
-    step Codec.decodeHybrid codecShape
+  Reduction.CandidateReductionFailure step Codec.decodeHybrid codecShape
 costShapeRefutesGeneratorIdentityReduction =
   Fibre.fineSensitivityRefutesCoarseOnlyReduction
     hybridTailCostShapeGeometry
