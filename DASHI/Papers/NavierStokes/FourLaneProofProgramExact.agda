@@ -6,11 +6,12 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as Four
+import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as S0
 
 ------------------------------------------------------------------------
 -- NAVIER-STOKES A/B/C/D PAPER/PROGRAMME ADAPTER
 --
--- Timestamp: 2026-09-15 18:10 AEST (UTC+10).
+-- Timestamp: 2026-09-15 18:24 AEST (UTC+10).
 --
 -- This file deliberately DOES NOT introduce a second four-alternative
 -- ontology. The canonical mathematical/source alternatives already live in
@@ -70,6 +71,11 @@ record NSFourLaneProofProgram : Set where
     periodicBPhaseLiteralR406RemainderWeldRecovered : Bool
     periodicBPhaseCriticalRadialRealizationRecovered : Bool
 
+    -- Strict S0 is now split into the concrete finite fold and the still-open
+    -- exact consumer normalisation/same-object weld into R414.
+    periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered : Bool
+    periodicBPhaseR414ProductionNormalisationRecovered : Bool
+
     periodicBPhasePhysicalCriticalObservableRealizationRecovered : Bool
     periodicBPhaseCriticalEnergyInequalityRecovered : Bool
     periodicBPhaseSignedProductionEstimateRecovered : Bool
@@ -107,7 +113,7 @@ canonicalNSFourLaneProofProgram = record
   ; laneADescription =
       "Lane A: unforced three-dimensional Navier-Stokes regularity on whole-space R^3. Independent proof obligation; defer new proof search until periodic-B stabilizes enough for an explicit portability quotient."
   ; laneBDescription =
-      "Lane B: unforced three-dimensional periodic Navier-Stokes regularity on T^3. The recent commutator spine is routed as recovery/certification. R104/R372/R414 recover the signed-critical compiler and literal-R406 remainder identity; R516/R517 recover the finite-carrier critical radial realization. The strict R515 physical slice still requires concrete physical critical observables, the critical-energy inequality, phase-sensitive signed production, a uniform initial-critical ceiling, and positive retained viscosity."
+      "Lane B: unforced three-dimensional periodic Navier-Stokes regularity on T^3. The recent commutator spine is routed as recovery/certification. R104/R372/R414 recover the signed-critical compiler and literal-R406 remainder identity; R516/R517 recover the finite-carrier critical radial realization. S0 now source-constructs literal live-trajectory finite endpoint/dissipation/projected-nonlinearity folds, while the exact R414 production normalisation, critical-energy identity, phase-sensitive estimate, initial ceiling and retained-viscosity receipt remain fail-closed."
   ; laneCDescription =
       "Lane C: forced whole-space R^3 breakdown. Current job is released-proof BIDI verification, provenance, dependency closure, and same-object integration; it is not discovery evidence for A or B."
   ; laneDDescription =
@@ -126,6 +132,11 @@ canonicalNSFourLaneProofProgram = record
   ; periodicBPhaseR104CompilerRecovered = true
   ; periodicBPhaseLiteralR406RemainderWeldRecovered = true
   ; periodicBPhaseCriticalRadialRealizationRecovered = true
+
+  ; periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered =
+      S0.literalCriticalEndpointFoldConstructed
+  ; periodicBPhaseR414ProductionNormalisationRecovered =
+      S0.r414ProductionNormalisationRecovered
 
   ; periodicBPhasePhysicalCriticalObservableRealizationRecovered = false
   ; periodicBPhaseCriticalEnergyInequalityRecovered = false
@@ -219,6 +230,16 @@ periodicBPhaseLiteralR406RemainderWeldRecoveredIsTrue = refl
 periodicBPhaseCriticalRadialRealizationRecoveredIsTrue :
   periodicBPhaseCriticalRadialRealizationRecovered canonicalNSFourLaneProofProgram ≡ true
 periodicBPhaseCriticalRadialRealizationRecoveredIsTrue = refl
+
+periodicBPhaseLiteralFiniteCriticalObservableFoldRecoveredIsTrue :
+  periodicBPhaseLiteralFiniteCriticalObservableFoldRecovered canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralFiniteCriticalObservableFoldRecoveredIsTrue =
+  S0.literalCriticalEndpointFoldConstructedIsTrue
+
+periodicBPhaseR414ProductionNormalisationRecoveredIsFalse :
+  periodicBPhaseR414ProductionNormalisationRecovered canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseR414ProductionNormalisationRecoveredIsFalse =
+  S0.r414ProductionNormalisationRecoveredIsFalse
 
 periodicBPhasePhysicalCriticalObservableRealizationRecoveredIsFalse :
   periodicBPhasePhysicalCriticalObservableRealizationRecovered canonicalNSFourLaneProofProgram ≡ false
