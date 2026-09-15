@@ -14,7 +14,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact w
 -- Galerkin system at (N,t) it computes, without caller-supplied scalar aliases:
 --
 --   X_N(t)   -- dyadic critical endpoint mass;
---   D_N(T)   -- integrated dyadic 3/2 dissipation mass;
+--   D_N(T)   -- integrated ODE-compatible critical viscous mass;
 --   N_N(T)   -- integrated dyadic critical real-Hermitian pairing of u_N with
 --               the literal Audit.projectedNonlinearity.
 --
@@ -22,20 +22,32 @@ module DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact w
 -- Hence the later critical-energy identity remains a genuine theorem rather
 -- than becoming true by definition.
 --
+-- Exact dissipation normalization
+-- -------------------------------
+-- If the endpoint critical weight is w(k), differentiating that quadratic
+-- energy against the literal viscous term produces the exact weight
+--
+--     w(k) * |k|^2 * |u_k|^2,
+--
+-- not w(k)^3 * |u_k|^2.  The latter is an equivalent dyadic H^(3/2) norm, but
+-- replacing the exact ODE weight by it at definition time would silently turn
+-- the energy identity into an inequality.  Therefore this S0 owner keeps the
+-- exact mixed viscous weight. R517 remains the theorem-backed finite-carrier
+-- comparison authority used later to transport this dyadic route to the
+-- physical H^(1/2)/H^(3/2) interpretation.
+--
 -- Scalar / physical-norm boundary
 -- -------------------------------
--- R414 is a rational finite algebra surface. The selected dyadic weights below
--- therefore stay in Q so that R240's existing integrateTo : (Time -> Q) -> ...
--- can be reused literally. R517 owns the theorem-backed finite-carrier bridge
--- between the dyadic critical multiplier route and physical H^(1/2)/H^(3/2)
--- multipliers. This file reuses that route as the critical-norm authority; it
--- does NOT claim that its rational dyadic weight is definitionally the Bishop
--- real physical multiplier.
+-- R414 is a rational finite algebra surface. The selected dyadic endpoint
+-- weight therefore stays in Q so that R240's existing
+-- integrateTo : (Time -> Q) -> ... can be reused literally. This file does NOT
+-- claim that its rational dyadic weight is definitionally the Bishop-real
+-- physical multiplier.
 --
 -- Geometry is deliberately generic in the exact integer embedding E and
 -- inverse-square witness I carried by the finite system. The live R240 state
 -- therefore supplies its own same-object Fourier geometry; no invented
--- "rationalIntegerEmbedding" alias is introduced here.
+-- rational-geometry alias is introduced here.
 --
 -- Remaining strict leaves after this owner:
 --   S1  critical energy identity / exact production normalisation;
@@ -63,7 +75,7 @@ F : C3.RealField _
 F = Rational.rationalRealField
 
 ------------------------------------------------------------------------
--- Exact rational dyadic weights.
+-- Exact rational dyadic endpoint weight.
 ------------------------------------------------------------------------
 
 natAsRational : Nat → ℚ
@@ -73,12 +85,6 @@ natAsRational (suc n) = 1ℚ + natAsRational n
 dyadicCriticalWeight : Z3.FourierMode → ℚ
 dyadicCriticalWeight mode =
   natAsRational (Shell.pow2 (Shell.shellIndex mode))
-
-cube : ℚ → ℚ
-cube value = value * value * value
-
-dyadicCriticalThreeHalfWeight : Z3.FourierMode → ℚ
-dyadicCriticalThreeHalfWeight mode = cube (dyadicCriticalWeight mode)
 
 ------------------------------------------------------------------------
 -- Literal finite state folds, generic in the SAME E/I geometry carried by the
@@ -105,14 +111,26 @@ criticalEndpointMass :
 criticalEndpointMass system =
   weightedVelocityMass dyadicCriticalWeight system (Audit.modes system)
 
+-- Exact viscous quadratic form paired with the selected endpoint multiplier.
+criticalViscousMass :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  Audit.FiniteComplex3GalerkinSystem F E I →
+  List Z3.FourierMode →
+  ℚ
+criticalViscousMass system [] = 0ℚ
+criticalViscousMass system (mode ∷ rest) =
+  (dyadicCriticalWeight mode * C3.normSquared (Audit.inverseSquare system) mode)
+    * L2.complex3NormSquared (Audit.velocity system mode)
+    + criticalViscousMass system rest
+
 criticalDissipationRate :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
   Audit.FiniteComplex3GalerkinSystem F E I →
   ℚ
 criticalDissipationRate system =
-  weightedVelocityMass
-    dyadicCriticalThreeHalfWeight system (Audit.modes system)
+  criticalViscousMass system (Audit.modes system)
 
 realHermitianPairing :
   C3.Complex3 F → C3.Complex3 F → ℚ
@@ -242,21 +260,12 @@ r517CriticalMultiplierComparisonReused : Bool
 r517CriticalMultiplierComparisonReused =
   R517.round517FiniteCarrierCriticalNormRealizationClosed
 
--- The production scalar above is computed from the projected nonlinearity.
--- It is deliberately not defined as X(T)-X(0)+nu*D or any equivalent residual.
 productionDefinedByEnergyResidual : Bool
 productionDefinedByEnergyResidual = false
 
--- The exact coefficient/factor identifying this fold with R414's chosen
--- integratedSignedProduction is the next same-object theorem. Keeping this
--- false prevents an unnoticed factor-two or convention mismatch from becoming
--- definitional.
 r414ProductionNormalisationRecovered : Bool
 r414ProductionNormalisationRecovered = false
 
--- S0 constructs literal finite observables, but R414's complete slice still
--- needs S1--S4. In particular this owner does not invent critical-energy,
--- signed-remainder, initial-ceiling, or retained-viscosity receipts.
 r414FullPhysicalSliceConstructed : Bool
 r414FullPhysicalSliceConstructed = false
 
