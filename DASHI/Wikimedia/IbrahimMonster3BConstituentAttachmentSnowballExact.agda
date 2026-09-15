@@ -19,11 +19,12 @@ import DASHI.Wikimedia.IbrahimMonsterCharacterDeterminationMathlibProducerSnowba
 -- character is 90 copies of the Heisenberg character once its execution
 -- certificate is supplied.  The multiplicity owner, however, starts from a
 -- literal list of irreducible constituents already certified as selected-phase
--- Stone--von Neumann objects.  Repo search found no second semisimple/isotypic
--- compiler connecting those two owners.
+-- Stone--von Neumann objects.
 --
--- Therefore the next mathematical object is not another dimension identity:
--- it is a SAME-OBJECT constituent attachment for W_zeta|E.
+-- The generic equal-irreducible-character Lean wrapper is now source-written
+-- and merged in dashi_lean4, but there is still no observed kernel receipt for
+-- that exact merged source in this audit.  Source integration therefore moves
+-- the execution frontier without creating the SAME-object constituent split.
 ------------------------------------------------------------------------
 
 record ActualZetaConstituentAttachment
@@ -62,6 +63,9 @@ attachedMultiplicityIsNinety attachment =
 
 serreSource : Attribution.AttributedSource
 serreSource = Mathlib.serreMathematicalSource
+
+leanWrapperRepositoryReceipt : Mathlib.LeanWrapperRepositoryReceipt
+leanWrapperRepositoryReceipt = Mathlib.canonicalLeanWrapperRepositoryReceipt
 
 terrasSource : Attribution.AttributedSource
 terrasSource = Attribution.mkDOISource
@@ -108,17 +112,22 @@ canonicalConstituentAttachmentExternalCoordinates =
   constituent-attachment-external-coordinates
     "Q1055807" "Q600043" "Q1057968"
     "512.22" "512.23"
-    "A005052 remains only a numerical coordinate for 90 = 10*3^2"
+    "A005052 remains only a numerical coordinate for 90 = 10*3^2; DASHIMathOEIS196883AuditRoadmapExact independently records its exact role as the family a(n)=10*3^n and still denies Monster representation semantics"
     false
 
 ------------------------------------------------------------------------
 -- WrongType boundaries.
 ------------------------------------------------------------------------
 
+data MergedLeanSourceCreatesConstituentAttachment : Set where
 data WholeCharacterEqualityCreatesLiteralDirectSum : Set where
 data DegreeCountCreatesSameObjectAttachment : Set where
 data OEISMultiplicityCreatesRepresentation : Set where
 data QidCreatesConstituentIso : Set where
+
+mergedLeanSourceDoesNotCreateConstituentAttachment :
+  MergedLeanSourceCreatesConstituentAttachment → ⊥
+mergedLeanSourceDoesNotCreateConstituentAttachment ()
 
 wholeCharacterDoesNotCreateDirectSum : WholeCharacterEqualityCreatesLiteralDirectSum → ⊥
 wholeCharacterDoesNotCreateDirectSum ()
@@ -142,6 +151,7 @@ record ConstituentAttachmentFrontier : Set where
     wholeActualCharacterCompilerExists : Bool
     constituentListMultiplicityCompilerExists : Bool
     equalIrreducibleCharacterProducerLocated : Bool
+    equalIrreducibleCharacterSourceMerged : Bool
     sameObjectConstituentAttachmentExists : Bool
     leanEqualCharacterKernelReceiptObserved : Bool
     actualKernelReplayReceiptObserved : Bool
@@ -151,5 +161,6 @@ open ConstituentAttachmentFrontier public
 
 currentConstituentAttachmentFrontier : ConstituentAttachmentFrontier
 currentConstituentAttachmentFrontier = constituent-attachment-frontier
-  true true true false false false false
-  "pay the actual MN3B kernel replay and the Lean equal-character kernel receipt; then construct the SAME W_zeta|E constituent decomposition with selected central phase, irreducibility and per-constituent character match. The existing multiplicity compiler then forces exactly 90 constituents. Do not replace this attachment with 65610=729*90, A005052, QIDs, or source citation."
+  true true true true
+  false false false false
+  "obtain a Lean kernel execution receipt for merged theorem source ff0b3a02fb4e3581b3518fb2abfe381a5b36e1cd and pay the actual MN3B kernel replay; then construct the SAME W_zeta|E constituent decomposition with selected central phase, irreducibility and per-constituent character match. Finite Stone-von Neumann uniqueness can then identify each irreducible constituent with H_zeta and the existing multiplicity compiler forces exactly 90. Do not replace this attachment with 65610=729*90, A005052, QIDs, Dewey, Wikipedia or source citation."
