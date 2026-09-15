@@ -28,11 +28,11 @@ module DASHI.Physics.YangMills.BalabanCMP116OneStepMapDefectRound366Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ ; 0ℝ ; _*ℝ_ ; _≤ℝ_
-  ; ≤ℝ-trans ; mulMonotoneNonnegative ; *-assoc )
+  ; ≤ℝ-refl ; ≤ℝ-trans ; mulMonotoneNonnegative ; *-assoc )
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutionContractionRound365Exact as R365
@@ -102,9 +102,7 @@ propagatorActionDefectBelowDifferenceTimesRadius dataSet =
       {c = candidateSize dataSet}
       {d = candidateRadius dataSet}
       (propagatorDifferenceNonnegative dataSet)
-      (≤ℝ-trans
-        (propagatorDifferenceNonnegative dataSet)
-        (propagatorDifferenceNonnegative dataSet))
+      ≤ℝ-refl
       (candidateSizeNonnegative dataSet)
       (candidateSizeBelowRadius dataSet))
 
@@ -123,9 +121,7 @@ mapDefectBelowSourceProduct dataSet =
       {c = argumentDefect dataSet}
       {d = propagatorDifference dataSet *ℝ candidateRadius dataSet}
       (nonlinearLipschitzNonnegative dataSet)
-      (≤ℝ-trans
-        (nonlinearLipschitzNonnegative dataSet)
-        (nonlinearLipschitzNonnegative dataSet))
+      ≤ℝ-refl
       (argumentDefectNonnegative dataSet)
       (≤ℝ-trans
         (argumentDefectBelowPropagatorAction dataSet)
@@ -140,10 +136,10 @@ mapDefectBelowAssociatedSourceProduct :
 mapDefectBelowAssociatedSourceProduct dataSet =
   subst
     (λ upper → mapDefect dataSet ≤ℝ upper)
-    (*-assoc
+    (sym (*-assoc
       (nonlinearLipschitz dataSet)
       (propagatorDifference dataSet)
-      (candidateRadius dataSet))
+      (candidateRadius dataSet)))
     (mapDefectBelowSourceProduct dataSet)
 
 ------------------------------------------------------------------------
