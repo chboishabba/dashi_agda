@@ -9,6 +9,7 @@ import DASHI.ComputerScience.RSA260BidiConsumerIndexedUntanglingTowerExact as RS
 import DASHI.ComputerScience.RSA260BidiHybridTailCostShapeCollisionExact as CostCollision
 import DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionExact as FactorCollision
 import DASHI.ComputerScience.RSA260BidiRawModeRankResidualLocalizationExact as RawLocalization
+import DASHI.ComputerScience.RSA260BidiRawRankPrefixFrontierExact as RawFrontier
 import DASHI.Analysis.RiemannG2ConsumerIndexedUntanglingTowerExact as RH
 import DASHI.Analysis.RiemannG2LiteralPhaseModulationWeldExact as RHWeld
 import DASHI.Analysis.RiemannG2PhaseResidualRealizationExact as RHRealization
@@ -35,11 +36,14 @@ import DASHI.ComputerScience.RSA260ProductionSubstitutionRoadmapExact as Product
 --     -> codec-cost collision
 --     -> identical factor basis/mask structure
 --     -> raw-mode residual
---     -> first raw layer rank(F_2) separates rotate3/affine7 (7 vs 5).
+--     -> rank(F_2) separates rotate3/affine7 (7 vs 5)
+--     -> raw ranks (F_2,F_3,F_4) still collide on affine5/bitrev9
+--     -> (degree, rank F_2, rank F_3, rank F_4) separates all ten current
+--        receipt identities.
 --
--- Therefore full raw payload is not required merely to separate that witness.
--- The new research frontier is to attack this localized raw-rank coordinate on
--- a wider collision family and refine again if it fails.
+-- This strictly improves the current receipt observer over the older
+-- (degree, ranks F_0..F_4) sketch: the leading factor-mode ranks are unnecessary
+-- for this finite receipt consumer.  It remains a discriminator, not replay.
 --
 -- Current RH descent:
 --
@@ -70,6 +74,9 @@ rsaFactorCollisionBoundary = FactorCollision.canonicalFactorLayerStructureCollis
 rsaRawLocalizationBoundary : RawLocalization.RawModeRankResidualLocalizationBoundary
 rsaRawLocalizationBoundary = RawLocalization.canonicalRawModeRankResidualLocalizationBoundary
 
+rsaRawFrontierBoundary : RawFrontier.RawRankPrefixFrontierBoundary
+rsaRawFrontierBoundary = RawFrontier.canonicalRawRankPrefixFrontierBoundary
+
 rhTowerBoundary : RH.RHConsumerIndexedUntanglingBoundary
 rhTowerBoundary = RH.canonicalRHConsumerIndexedUntanglingBoundary
 
@@ -83,19 +90,20 @@ productionFirstResidual : Production.ProductionResidual
 productionFirstResidual = Production.firstUnpaidProductionResidual
 
 ------------------------------------------------------------------------
--- Research queue: attack the newly localized RSA coordinate.
+-- Research queue: attack whether the four-coordinate current receipt observer
+-- can be shortened or generalized before retaining more payload.
 ------------------------------------------------------------------------
 
 data ResearchUntanglingTarget : Set where
-  attackLocalizedRawRankAcrossWiderCollisionFamily : ResearchUntanglingTarget
+  attackShorterDegreeRawRankPrefixes : ResearchUntanglingTarget
+  crossValidateDegreeRawRanksOnIndependentSeedPortfolio : ResearchUntanglingTarget
   refineRawRankIntoRowSpaceAndPayloadResidual : ResearchUntanglingTarget
   adversariallyAttackEveryProposedRSAQuotient : ResearchUntanglingTarget
   deriveConsumerTerminalBeforeExactTerminalWhenPossible : ResearchUntanglingTarget
-  separateDescriptionWitnessExecutionCosts : ResearchUntanglingTarget
   transportOnlyGenericUntanglingStructureIntoRH : ResearchUntanglingTarget
 
 firstResearchUntanglingTarget : ResearchUntanglingTarget
-firstResearchUntanglingTarget = attackLocalizedRawRankAcrossWiderCollisionFamily
+firstResearchUntanglingTarget = attackShorterDegreeRawRankPrefixes
 
 ------------------------------------------------------------------------
 -- Production queue: historical A*/F.sols custody is not assumed available.
@@ -148,9 +156,11 @@ record RSA260RHUntanglingRoadmapBoundary : Set where
     rsaFullCostShapeCollisionPaid : Bool
     rsaFactorLayerStructureCollisionPaid : Bool
     rsaFirstRawLayerRankLocalizesCurrentWitness : Bool
-    fullRawPayloadRequiredToSeparateCurrentWitness : Bool
-    firstRawRankGloballyAdequate : Bool
-    firstRawRankGloballyMinimal : Bool
+    rawRankTripleAloneStillCollides : Bool
+    degreePlusThreeRawRanksSeparatesCurrentReceipts : Bool
+    leadingFactorRanksNeededForCurrentReceiptConsumer : Bool
+    degreePlusRawRanksReplayCoefficients : Bool
+    degreePlusRawRanksGloballyMinimal : Bool
     rhFiniteCollisionRefinementPaid : Bool
     rhFinitePhaseLocalized : Bool
     rhLiteralPhaseWeldInterfaceWritten : Bool
@@ -172,6 +182,8 @@ canonicalRSA260RHUntanglingRoadmapBoundary :
   RSA260RHUntanglingRoadmapBoundary
 canonicalRSA260RHUntanglingRoadmapBoundary =
   rsa260-rh-untangling-roadmap-boundary
+    true
+    true
     true
     true
     true
