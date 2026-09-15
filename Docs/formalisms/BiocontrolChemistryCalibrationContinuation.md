@@ -102,6 +102,43 @@ with no declared edge to the Springfield equipment-selection lane. Thus an acqui
 
 The regression surface was committed first at `2f0c94c84e5d760512412c56c6de99cd13632343`; exact lookup of `BiocontrolChemistryAcquisitionPromotionExact.agda` then returned 404 before the production owner was added at `3165ff61c335cf5c8a2c189aed8c4380b0886244`, timestamped `2026-09-15T05:46:49Z` / `2026-09-15T15:46:49+10:00`. The chronology receipt remains `sourceCommittedOnly`.
 
+## Pareto frontier over acquisition obligations
+
+`BiocontrolAcquisitionParetoFrontierExact` now ranks the open acquisition obligations themselves, but only after hard provenance/admissibility gates. The finite acquisition family is:
+
+```text
+metadataOnlyShortcut
+  -> speciesQualifiedPackage
+  -> combinedQualifiedPanel
+
+metadataOnlyShortcut
+  -> contextQualifiedPackage
+  -> combinedQualifiedPanel
+```
+
+`metadataOnlyShortcut` is deliberately the shortest/cheapest-looking candidate, but it is provenance-inadmissible and consumer-inadequate. It is therefore excluded before Pareto comparison rather than allowed to win by a low synthetic burden rank.
+
+For the species/fraction consumer, `speciesQualifiedPackage` is the minimum eligible next acquisition. For contextual classification, `contextQualifiedPackage` is the minimum eligible next acquisition. The combined panel remains available but is not preferred merely because it can serve both consumers.
+
+The four acquisition Pareto axes are repository-local synthetic coordinates: acquisition/search burden, provenance deficit, redundant-coordinate burden, and remaining consumer gap. They are not dollars, labour hours, measured field effort, credibility probabilities, ecological value, expected utility, truth, ethics, or deployment authority.
+
+A second dependency graph distinguishes the expected reopening surfaces of the two qualified acquisitions:
+
+```text
+species observation
+  -> chemistry interpretation
+  -> calibrated classification
+  -> rebound consumer
+
+context observation
+  -> calibrated classification
+  -> rebound consumer
+```
+
+No edge is declared to the Springfield equipment lane. These are proof-bearing reopening obligations about what must be reconsidered if a qualified observation changes; they are not claims that a field observation has occurred or that the downstream ecological state changed.
+
+The acquisition-frontier regression landed first at `e63cf254012dca88752ce86daa8279623f08819f`; exact lookup of `BiocontrolAcquisitionParetoFrontierExact.agda` then returned 404; the owner landed at `5faa6b71d9c005fc17f25e0fdcedccaff1dcdeb5`, timestamped `2026-09-15T05:57:53Z` / `2026-09-15T15:57:53+10:00`, and is recorded as `sourceCommittedOnly`.
+
 ## Springfield Lakes intervention geometry
 
 `SpringfieldLakesInterventionGeometryExact` uses only the two source-bound operational roles already recorded from Ipswich City Council: spider excavator at the hard-access Viewpoint Drive pond and aquatic weed harvester at the Vistula Circuit pond. On that finite carrier, treatment type alone does not determine equipment choice, while treatment plus access geometry does.
@@ -118,7 +155,7 @@ Attribution remains role-specific and append-only across this and previous round
 - Existing DASHI actual-chemistry/369 owners supply repository-native structural contracts and non-promotion boundaries; importing those contracts does not transfer external authorship or empirical authority.
 - Site sensors, assays, operator/laboratory records and runtime acquisition own actual numeric/context observations only when separately acquired with source/site/time/sample/protocol/uncertainty provenance and same-object identity.
 - Calibration or threshold sources own only the classification premises they actually justify; BIPM unit authority cannot be promoted into ecological threshold authority.
-- DASHI owns the finite counterexamples, synthetic worlds, local-refinement constructions, non-factorability statements, active discriminator adapters, contextual classification firewalls, finite observer family, synthetic cost axes, Pareto/MDL selections, minimal-discriminator proofs, acquisition obligations, dependency graph and selective-reopening theorems.
+- DASHI owns the finite counterexamples, synthetic worlds, local-refinement constructions, non-factorability statements, active discriminator adapters, contextual classification firewalls, finite observer/acquisition families, synthetic cost axes, Pareto/MDL selections, minimal-discriminator/minimum-acquisition proofs, acquisition obligations, dependency graphs and selective-reopening theorems.
 
 Citation imports neither proof nor deployment authority. Cross-pollination transfers structure, not authorship, truth, empirical status, geographic applicability, mechanism, causal authority or operational authority. A synthetic repository witness must not be redescribed as a sourced field observation. A source-backed operational analogue must not be promoted across species, site, assay or consumer without a separate paid transfer receipt.
 
