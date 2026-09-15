@@ -32,12 +32,13 @@ import Data.Nat.Properties as NatP
 open import Data.Rational.Base using (ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Nullary using (yes; no; ¬_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNF4ProjectedOutputPairingRound39Exact as R39
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as S0
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionProjectedPairingExact as S2a
@@ -46,10 +47,6 @@ import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104E
 
 F : C3.RealField _
 F = Rational.rationalRealField
-
-------------------------------------------------------------------------
--- Finite insertion sort by literal shell index.
-------------------------------------------------------------------------
 
 insertByShell : Z3.FourierMode → List Z3.FourierMode → List Z3.FourierMode
 insertByShell mode [] = mode ∷ []
@@ -103,10 +100,6 @@ sortByShellOrdered [] = ordered[]
 sortByShellOrdered (mode ∷ rest) =
   insertPreservesShellOrder mode (sortByShellOrdered rest)
 
-------------------------------------------------------------------------
--- The signed weighted production is invariant under that finite reorder.
-------------------------------------------------------------------------
-
 modeTerm :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
@@ -114,7 +107,7 @@ modeTerm :
   Z3.FourierMode → ℚ
 modeTerm system mode =
   S0.dyadicCriticalWeight mode
-    * S2a.R39.realHermitianPower
+    * R39.realHermitianPower
         (Audit.velocity system mode)
         (Audit.projectedNonlinearity system mode)
 
@@ -186,13 +179,9 @@ literalCriticalProductionIsTwiceRadialWeightedTransfer system =
   trans
     (S2a.literalCriticalProductionIsTwiceWeightedProjectedPairing system)
     (cong (S0.two *_)
-      (NatP.sym
+      (sym
         (radialWeightedTransferIsLiteralWeightedPairing
           system (Audit.modes system))))
-
-------------------------------------------------------------------------
--- Status / boundary.
-------------------------------------------------------------------------
 
 literalRadialShellSortConstructed : Bool
 literalRadialShellSortConstructed = true
