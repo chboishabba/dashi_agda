@@ -34,7 +34,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SubstitutionContractionRound365Exact
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _*ℝ_; _≤ℝ_; ≤ℝ-trans)
@@ -44,6 +44,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommonExact as QIF
 import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian as Decoupled
 import DASHI.Physics.YangMills.BalabanDecoupledActivityDirectStabilityRound364Exact as R364
+import DASHI.Physics.YangMills.BalabanSelectedHessianStabilitySourceRound352Exact as R352
 
 ------------------------------------------------------------------------
 -- Generic least-privilege fixed-point perturbation compiler.
@@ -129,8 +130,8 @@ fixedPointDistanceBelowContractedPlusDefect dataSet =
               (leftPoint dataSet) (rightPoint dataSet)))
           (defect dataSet)))
     (cong₂ (QIF.distance (metric dataSet))
-      (sym (leftPointFixed dataSet))
-      (sym (rightPointFixed dataSet)))
+      (leftPointFixed dataSet)
+      (rightPointFixed dataSet))
     (QIF.transitive (metric dataSet)
       (triangle dataSet
         (QIF.map (leftBall dataSet) (leftPoint dataSet))
@@ -274,7 +275,7 @@ round365ToR364 dataSet = record
 
 round365DirectR352Source :
   (dataSet : CMP116SubstitutionContractionData) →
-  R364.R352.CMP116LocalHessianStabilitySource ℝ
+  R352.CMP116LocalHessianStabilitySource ℝ
 round365DirectR352Source dataSet =
   R364.round364ToR352Source (round365ToR364 dataSet)
 
