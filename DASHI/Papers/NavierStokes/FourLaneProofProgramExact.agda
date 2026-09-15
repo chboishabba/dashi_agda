@@ -10,15 +10,15 @@ import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as Four
 ------------------------------------------------------------------------
 -- NAVIER-STOKES A/B/C/D PAPER/PROGRAMME ADAPTER
 --
--- Timestamp: 2026-09-15 17:00 AEST (UTC+10).
+-- Timestamp: 2026-09-15 17:50 AEST (UTC+10).
 --
 -- This file deliberately DOES NOT introduce a second four-alternative
--- ontology.  The canonical mathematical/source alternatives already live in
--- NSClayFourAlternativeReleasedProofBidiExact.  This owner only adds the
+-- ontology. The canonical mathematical/source alternatives already live in
+-- NSClayFourAlternativeReleasedProofBidiExact. This owner only adds the
 -- current Paper-1 route selection, historical/provenance status, explicit
 -- A<->B transfer guards, and the current coordinator-level recovery state.
 --
--- IMPORTANT: branch-recovery/source status is not certification.  In
+-- IMPORTANT: branch-recovery/source status is not certification. In
 -- particular, the periodic-B commutator spine may be treated as recovered for
 -- routing purposes while the observed commit-specific Agda kernel receipt
 -- remains false.
@@ -60,13 +60,15 @@ record NSFourLaneProofProgram : Set where
     periodicBSecondMomentSixThreeTransplantClosed : Bool
     periodicBR568PaymentClosed : Bool
 
-    -- Coordinator/recovery coordinates.  These do not overwrite the older
+    -- Coordinator/recovery coordinates. These do not overwrite the older
     -- owner-local booleans above, which remain useful for branch-local/source
-    -- status.  They record how current proof search should be routed.
+    -- status. They record how current proof search should be routed.
     periodicBCommutatorSpineRecoveryAssumptionActive : Bool
     periodicBCommutatorSpineCertificationObserved : Bool
+    periodicBPhaseR104CompilerRecovered : Bool
     periodicBPhasePhysicalR104Recovered : Bool
     periodicBPhaseLiteralR406RemainderWeldRecovered : Bool
+    periodicBPhaseSignedProductionEstimateRecovered : Bool
     periodicBOnlyPhaseDiscoveryRemainsUnderCommRecoveryAssumption : Bool
     wholeSpaceADeferredUntilPeriodicPortabilityAudit : Bool
 
@@ -97,7 +99,7 @@ canonicalNSFourLaneProofProgram = record
   ; laneADescription =
       "Lane A: unforced three-dimensional Navier-Stokes regularity on whole-space R^3. Independent proof obligation; defer new proof search until periodic-B stabilizes enough for an explicit portability quotient."
   ; laneBDescription =
-      "Lane B: unforced three-dimensional periodic Navier-Stokes regularity on T^3. Current coordinator mode treats the recent commutator spine as a recovery/certification problem; the live proof-discovery frontier is the physical R104 signed-critical family plus the literal-R406 remainder same-object weld."
+      "Lane B: unforced three-dimensional periodic Navier-Stokes regularity on T^3. Current coordinator mode treats the recent commutator spine as a recovery/certification problem. R104/R372/R414 recover the signed-critical compiler and literal-R406 remainder identity; the live proof-discovery field is the same-object phase-sensitive signed-production inequality carried by R414."
   ; laneCDescription =
       "Lane C: forced whole-space R^3 breakdown. Current job is released-proof BIDI verification, provenance, dependency closure, and same-object integration; it is not discovery evidence for A or B."
   ; laneDDescription =
@@ -111,8 +113,10 @@ canonicalNSFourLaneProofProgram = record
   ; periodicBR568PaymentClosed = false
   ; periodicBCommutatorSpineRecoveryAssumptionActive = true
   ; periodicBCommutatorSpineCertificationObserved = false
+  ; periodicBPhaseR104CompilerRecovered = true
   ; periodicBPhasePhysicalR104Recovered = false
-  ; periodicBPhaseLiteralR406RemainderWeldRecovered = false
+  ; periodicBPhaseLiteralR406RemainderWeldRecovered = true
+  ; periodicBPhaseSignedProductionEstimateRecovered = false
   ; periodicBOnlyPhaseDiscoveryRemainsUnderCommRecoveryAssumption = true
   ; wholeSpaceADeferredUntilPeriodicPortabilityAudit = true
   ; wholeSpaceACurrentTerminalCutFrozen = false
@@ -186,13 +190,21 @@ periodicBCommutatorSpineCertificationObservedIsFalse :
   periodicBCommutatorSpineCertificationObserved canonicalNSFourLaneProofProgram ≡ false
 periodicBCommutatorSpineCertificationObservedIsFalse = refl
 
+periodicBPhaseR104CompilerRecoveredIsTrue :
+  periodicBPhaseR104CompilerRecovered canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseR104CompilerRecoveredIsTrue = refl
+
 periodicBPhasePhysicalR104RecoveredIsFalse :
   periodicBPhasePhysicalR104Recovered canonicalNSFourLaneProofProgram ≡ false
 periodicBPhasePhysicalR104RecoveredIsFalse = refl
 
-periodicBPhaseLiteralR406RemainderWeldRecoveredIsFalse :
-  periodicBPhaseLiteralR406RemainderWeldRecovered canonicalNSFourLaneProofProgram ≡ false
-periodicBPhaseLiteralR406RemainderWeldRecoveredIsFalse = refl
+periodicBPhaseLiteralR406RemainderWeldRecoveredIsTrue :
+  periodicBPhaseLiteralR406RemainderWeldRecovered canonicalNSFourLaneProofProgram ≡ true
+periodicBPhaseLiteralR406RemainderWeldRecoveredIsTrue = refl
+
+periodicBPhaseSignedProductionEstimateRecoveredIsFalse :
+  periodicBPhaseSignedProductionEstimateRecovered canonicalNSFourLaneProofProgram ≡ false
+periodicBPhaseSignedProductionEstimateRecoveredIsFalse = refl
 
 periodicBOnlyPhaseDiscoveryRemainsUnderCommRecoveryAssumptionIsTrue :
   periodicBOnlyPhaseDiscoveryRemainsUnderCommRecoveryAssumption canonicalNSFourLaneProofProgram ≡ true
@@ -238,7 +250,7 @@ gramP3AttemptAbandonedAsPrimaryRouteIsTrue = refl
 -- Older branch-local B booleans remain fail-closed.
 --
 -- These values intentionally do not get promoted merely because the global
--- coordinator is in recovery mode.  They represent older/local owner status,
+-- coordinator is in recovery mode. They represent older/local owner status,
 -- while the recovery coordinates above govern current proof-search routing.
 ------------------------------------------------------------------------
 
