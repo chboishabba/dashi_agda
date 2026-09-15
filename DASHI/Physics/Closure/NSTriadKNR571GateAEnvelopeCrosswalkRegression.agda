@@ -17,6 +17,7 @@ import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as Ce
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftRadiusDoublingExact as RadiusDouble
 import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact as Aligned
 import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialDenominatorOrderExact as Denominator
+import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialProductBridgeExact as ProductBridge
 
 preferredLinearizationClosed :
   GateA.r571GateAPreferredLinearizationClosed ≡ true
@@ -102,14 +103,6 @@ centeredAlignedAngularSecondMomentPaymentClosed :
   Aligned.r571A2CenteredAlignedAngularSecondMomentPaymentClosed ≡ true
 centeredAlignedAngularSecondMomentPaymentClosed = refl
 
-alignedComplementUsesLiteralR467R455Carrier :
-  Aligned.r571A2UsesR467R455LiteralCarrier ≡ true
-alignedComplementUsesLiteralR467R455Carrier = refl
-
-alignedComplementUsesSquareRootAxiom :
-  Aligned.r571A2UsesSquareRootAxiom ≡ false
-alignedComplementUsesSquareRootAxiom = refl
-
 divisionFreeDenominatorCompilerClosed :
   Denominator.r571A2DivisionFreeDenominatorCompilerClosed ≡ true
 divisionFreeDenominatorCompilerClosed = refl
@@ -122,17 +115,28 @@ denominatorRequiresRadiusDivision :
   Denominator.r571A2RequiresRadiusDivision ≡ false
 denominatorRequiresRadiusDivision = refl
 
-literalCenteredProductBridgeStillOpen :
-  Denominator.r571A2LiteralCenteredProductBridgeClosedHere ≡ false
-literalCenteredProductBridgeStillOpen = refl
+literalCenteredProductBridgeClosed :
+  ProductBridge.r571A2LiteralCenteredProductBridgeClosed ≡ true
+literalCenteredProductBridgeClosed = refl
+
+divisionFreeRadialCurvaturePaymentClosed :
+  ProductBridge.r571A2DivisionFreeRadialCurvaturePaymentClosed ≡ true
+divisionFreeRadialCurvaturePaymentClosed = refl
+
+orderedRadialDenominatorLeafPaid :
+  A2.r571A2OrderedRadialDenominatorPaymentClosed ≡ true
+orderedRadialDenominatorLeafPaid = refl
 
 radialCurvatureUsesExistingGapProductDonor :
   A2Square.r571A2R127SquareGapAlgebraReused ≡ true
 radialCurvatureUsesExistingGapProductDonor = refl
 
-radialCurvatureNotFalselyPromoted :
+-- Deliberately still false: the local centered curvature is now paid, but its
+-- exact sign/absolute-value/stepMagnitude transport into the Gate-A sample has
+-- not yet been written.
+radialCurvatureSampleTransportStillOpen :
   A2.r571A2UniformCurvatureEstimateClosed ≡ false
-radialCurvatureNotFalselyPromoted = refl
+radialCurvatureSampleTransportStillOpen = refl
 
 r568StillOpen :
   GateA.r571GateAClosesR568 ≡ false
