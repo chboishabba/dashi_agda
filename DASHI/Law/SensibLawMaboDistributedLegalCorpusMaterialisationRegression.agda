@@ -8,16 +8,20 @@ import DASHI.Law.SensibLawMaboDistributedLegalCorpusMaterialisationExact as Mate
 
 ------------------------------------------------------------------------
 -- Regression surface for the distributed Mabo legal-corpus materialisation
--- packet.  This file intentionally imports the production owner so creating it
--- first gives a source-level RED state until the owner exists.
+-- packet.  This file intentionally imported the production owner before that
+-- owner existed, giving the tranche its source-level RED state.
 ------------------------------------------------------------------------
 
 materialisationOrderStartsAtReferenceOnly :
-  Materialisation.referenceOnly Materialisation.≺m Materialisation.skeletalLegalGraph
+  Materialisation._≺m_
+    Materialisation.referenceOnly
+    Materialisation.skeletalLegalGraph
 materialisationOrderStartsAtReferenceOnly = Materialisation.reference≺skeleton
 
 materialisationOrderEndsAtVerifiedFullSource :
-  Materialisation.derivedSpan Materialisation.≺m Materialisation.verifiedFullSource
+  Materialisation._≺m_
+    Materialisation.derivedSpan
+    Materialisation.verifiedFullSource
 materialisationOrderEndsAtVerifiedFullSource = Materialisation.span≺full
 
 navigationFactorsThroughSkeleton :
