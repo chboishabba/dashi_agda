@@ -18,7 +18,7 @@ import DASHI.Core.ReopenableProjectionComposition as Reopenable
 --
 -- A local inquiry bucket may grow through heterogeneous edge families while
 -- retaining ambiguity, failed follows, cycles, alternate readings and source
--- residuals.  Publication is a separate candidate-only projection.  Neither a
+-- residuals. Publication is a separate candidate-only projection. Neither a
 -- content digest/CID nor inclusion in a global graph manufactures truth,
 -- authority, applicability or evidence payment.
 ------------------------------------------------------------------------
@@ -69,6 +69,10 @@ record WorldBucketManifestBoundary : Set where
     semanticPromotion : Bool
     liveIPFSPublicationPerformed : Bool
     publicationProjectionIsBrowsingHistory : Bool
+    packagingTarget : String
+    manifestEnvelope : String
+    contentAddressingState : String
+    sinkReferencesPopulated : Bool
     contentDigestIsAuthority : Bool
     cidImportsProof : Bool
     worldsMayReferenceParentWorlds : Bool
@@ -85,12 +89,16 @@ canonicalManifestBoundary =
     false
     false
     false
+    "kant-erdfa-shardset"
+    "cbor-compatible-logical-envelope"
+    "sha256-now-cid-later"
+    false
     false
     false
     true
 
 ------------------------------------------------------------------------
--- Publication is a query-indexed projection.  Two local worlds may publish the
+-- Publication is a query-indexed projection. Two local worlds may publish the
 -- same selected graph while retaining different private Reading-Trail state.
 ------------------------------------------------------------------------
 
@@ -156,24 +164,23 @@ browsingHistoryDoesNotFactorThroughPublishedProjection :
     publishSelectedWorld
     browsingHistoryQuestion →
   ⊥
-browsingHistoryDoesNotFactorThroughPublishedProjection factor = impossible
+browsingHistoryDoesNotFactorThroughPublishedProjection factor = helper first second
   where
-    open Query.FactorsThrough factor
+    first :
+      privateTrailA ≡
+      Query.quotientAnswer factor sameCandidatePublishedWorld
+    first = Query.factorisation factor samePublishedWorldPrivateTrailA
 
-    first : privateTrailA ≡ quotientAnswer sameCandidatePublishedWorld
-    first = factorisation samePublishedWorldPrivateTrailA
-
-    second : privateTrailB ≡ quotientAnswer sameCandidatePublishedWorld
-    second = factorisation samePublishedWorldPrivateTrailB
+    second :
+      privateTrailB ≡
+      Query.quotientAnswer factor sameCandidatePublishedWorld
+    second = Query.factorisation factor samePublishedWorldPrivateTrailB
 
     helper :
-      privateTrailA ≡ quotientAnswer sameCandidatePublishedWorld →
-      privateTrailB ≡ quotientAnswer sameCandidatePublishedWorld →
+      privateTrailA ≡ Query.quotientAnswer factor sameCandidatePublishedWorld →
+      privateTrailB ≡ Query.quotientAnswer factor sameCandidatePublishedWorld →
       ⊥
     helper refl ()
-
-    impossible : ⊥
-    impossible = helper first second
 
 ------------------------------------------------------------------------
 -- Reopening is possible only when a private residual receipt is retained.
@@ -234,7 +241,7 @@ publishProjectionCannotLeakBrowsingHistoryByDefault ()
 
 ------------------------------------------------------------------------
 -- Existing append-only revision doctrine remains the canonical evidence-history
--- owner.  World-walk growth inherits that boundary rather than creating a new
+-- owner. World-walk growth inherits that boundary rather than creating a new
 -- monotonic-truth calculus.
 ------------------------------------------------------------------------
 
