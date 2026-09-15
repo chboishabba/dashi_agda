@@ -7,20 +7,23 @@ import DASHI.Papers.NavierStokes.TheoremInterface as Paper
 import DASHI.Papers.NavierStokes.FourLaneProofProgramCoordinatorRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
--- the authoritative owners it imports. The coordinator regression, strict-S0
--- literal critical-observable regression, and S1a pointwise-energy regression
--- are imported so the current A/B/C/D routing state and first physical phase
--- seams are checked by the same root whenever it is actually kernel-run.
+-- the authoritative owners it imports. The coordinator regression plus the
+-- strict S0/S1 regressions are imported so the current A/B/C/D routing state
+-- and first physical phase seams are checked by the same root whenever it is
+-- actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
--- into an observed commit-specific Agda receipt. S0/S1a require literal finite
--- constructions, but they do not manufacture the integrated critical-energy
--- theorem, phase estimate, initial ceiling, or retained-viscosity payments.
+-- into an observed commit-specific Agda receipt. S0, S1a and the conditional
+-- S1b compiler may be source-written while the concrete scalar FTC / integration
+-- authorities, phase estimate, initial ceiling and retained-viscosity payments
+-- remain unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
