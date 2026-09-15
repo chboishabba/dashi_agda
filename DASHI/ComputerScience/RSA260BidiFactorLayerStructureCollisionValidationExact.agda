@@ -1,0 +1,13 @@
+module DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiFactorLayerStructureCollisionExact as Collision
+
+boundary : Collision.FactorLayerStructureCollisionBoundary
+boundary = Collision.canonicalFactorLayerStructureCollisionBoundary
+
+factorStructureCollision :
+  Collision.rotate3FactorStructure ≡ Collision.affine7FactorStructure
+factorStructureCollision = Collision.rotate3Affine7SameFactorStructure
+
+firstResidual : Collision.FactorLayerStructureResidual
+firstResidual = Collision.firstFactorLayerStructureResidual
