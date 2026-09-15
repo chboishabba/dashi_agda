@@ -109,3 +109,7 @@ Attribution remains role-specific:
 - DASHI owns the new finite counterexamples, local-refinement constructions, non-factorability statements, active discriminator adapters, contextual classification firewalls, finite observer family, synthetic cost axes and Pareto/MDL selections.
 
 Citation imports neither proof nor deployment authority. Cross-pollination transfers structure, not authorship, empirical status, geographic applicability or causal authority.
+
+## Certification/status boundary
+
+The Pareto regression surface was committed first at `248345e3a691b0a5a45ac1852ac52b8ca1e1acd0`; exact lookup of `BiocontrolChemistryObserverParetoExact.agda` then returned 404 before the production owner was added at `e472798201a360c42670e6218f7911cbef9cabe8`. The local checker and aggregate rollup enumerate the new owner and regression, but no fresh Agda invocation or GitHub Actions receipt has been produced in this continuation. Source presence and TDD ordering therefore remain distinct from typecheck/kernel status.
