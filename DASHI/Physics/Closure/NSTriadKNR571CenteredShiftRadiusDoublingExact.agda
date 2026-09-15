@@ -34,6 +34,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Sum.Base using (inj₁; inj₂)
+open import Function.Base using (case_of_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -114,7 +115,6 @@ radiusSquaresAgree :
 radiusSquaresAgree {E} {I} {S} {center} D =
   let
     r = Helical.modeNorm S center
-    rd = Helical.modeNorm S (CenteredShift.doubledCenter center)
   in
   trans
     (R455.modeNormSquareMeaning (doubledCalibration D))
