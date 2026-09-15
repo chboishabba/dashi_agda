@@ -2,8 +2,10 @@
 set -euo pipefail
 
 owner="DASHI/Reasoning/MaleCNSLatentStateMoEGrokkingAnimalexicCrossPollinationExact.agda"
+validation="DASHI/Reasoning/MaleCNSLatentStateMoEGrokkingAnimalexicValidation.agda"
 
 [[ -f "$owner" ]]
+[[ -f "$validation" ]]
 
 grep -q 'record LatentStateProgrammeBoundary' "$owner"
 grep -q 'RoutingState' "$owner"
@@ -16,4 +18,7 @@ grep -q 'phenomenalIdentityRemainsUnpaid' "$owner"
 grep -q 'consumerFamilyAdequacyIsJoint' "$owner"
 grep -q 'compressionKindsRemainDistinct' "$owner"
 grep -q 'interactiveSemanticRefinement' "$owner"
-grep -q 'empiricalAffectLabelPaid = false' "$owner"
+grep -q 'empiricalAffectLabelPaidIsFalse' "$owner"
+grep -q 'MaleCNSLatentStateMoEGrokkingAnimalexicCrossPollinationExact' "$validation"
+grep -q 'AnimalexicDrosophilaEmbodiedBridge' "$validation"
+grep -q 'ConsciousAccessCoalition' "$validation"
