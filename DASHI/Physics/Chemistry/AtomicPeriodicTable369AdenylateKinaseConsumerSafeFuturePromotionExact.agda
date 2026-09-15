@@ -19,12 +19,12 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFRETThirdAxi
 -- ADK CONSUMER-SAFE FUTURE-PROMOTION INTERFACE FIXTURE
 --
 -- This module instantiates the generic static+future weld over the existing AdK
--- third-axis observer problem.  The static side is the source-bounded AdK repair
--- and Pareto selection already owned upstream.  The future side below is a
--- deliberately repository-local identity/no-action fixture whose only purpose
--- is to pay the composition interface.
+-- third-axis observer problem. The static side is the source-bounded AdK repair
+-- and Pareto selection already owned upstream. The future side below is a
+-- deliberately repository-local no-action fixture whose only purpose is to pay
+-- the composition interface.
 --
--- It is NOT a model of physical adenylate-kinase kinetics.  Li, Liu & Ji 2015
+-- It is NOT a model of physical adenylate-kinase kinetics. Li, Liu & Ji 2015
 -- remain attributed only to the source-bounded three-CV AdK premise already
 -- retained in ThirdAxisExact; they do not pay this dynamic fixture, the DASHI
 -- future-safety theorem, or the generic composition theorem.
@@ -55,7 +55,7 @@ adkFutureSystem = record
 
 ------------------------------------------------------------------------
 -- The future-safe observer is the retained two-axis surface plus the third-axis
--- provenance/residual coordinate.  This has exactly the information required by
+-- provenance/residual coordinate. This has exactly the information required by
 -- the declared third-axis consumer, but no physical transition law is invented.
 ------------------------------------------------------------------------
 
@@ -71,41 +71,6 @@ adkFutureSurface = Third.twoFretAxisProjection
 
 adkFutureProvenance : Third.ThirdAxisWorld → Third.NmpCoreAngleCoordinate
 adkFutureProvenance = Third.thirdCoordinate
-
-adkFutureStrictRefinement :
-  Frozen.FrozenStaticRefinementCandidate
-    {Rule = AdKFreezeRule}
-    adkFutureSurface
-    adkFutureProvenance
-adkFutureStrictRefinement =
-  Frozen.frozen-static-refinement-candidate
-    (Frozen.provenanceJoinStrictRefinement
-      adkFutureSurface
-      adkFutureProvenance
-      Third.lowThetaTwoWorld
-      Third.highThetaTwoWorld
-      refl
-      (λ ()))
-    adkFrozenSelection
-  where
-    data AdKFreezeRule : Set where
-      freezeThreeAxisObserver : AdKFreezeRule
-
-    adkFrozenSelection : Frozen.FrozenSelectionReceipt AdKFreezeRule
-    adkFrozenSelection =
-      Frozen.frozen-selection-receipt
-        freezeThreeAxisObserver
-        true
-        true
-        false
-        refl
-        refl
-        refl
-
-------------------------------------------------------------------------
--- The previous local definition cannot escape its where-block, so expose the
--- rule and frozen candidate again at module scope for the future-promotion type.
-------------------------------------------------------------------------
 
 data AdKFreezeRule : Set where
   freezeThreeAxisObserver : AdKFreezeRule
@@ -138,8 +103,8 @@ adkFrozenStaticCandidate =
     adkFrozenSelection
 
 ------------------------------------------------------------------------
--- With no admissible action constructor, the only executable trace is empty.
--- Dynamic safety here is therefore an interface fixture, not kinetic evidence.
+-- With no action constructor, the only executable trace is empty. Dynamic
+-- safety here is therefore an interface fixture, not kinetic evidence.
 ------------------------------------------------------------------------
 
 adkFutureDynamicSafety :
@@ -224,7 +189,7 @@ adkConsumerSafeFuturePromotion =
     adkQueryIndexedFutureSafePromotion
     threeAxisRealisesFutureJoin
 
-adkCompositeStaticSelection :
+adkCompositeSafeSelection :
   Composite.ConsumerSafeFuturePromotion
     Static.thirdAxisCostHyperfabric
     Pareto.joinedTwo
@@ -236,7 +201,7 @@ adkCompositeStaticSelection :
     Third.thirdAxisSemantics
     Third.askThirdCoordinate
     AdKObserverRealisesFuture
-adkCompositeStaticSelection = adkConsumerSafeFuturePromotion
+adkCompositeSafeSelection = adkConsumerSafeFuturePromotion
 
 ------------------------------------------------------------------------
 -- Attribution / promotion boundary.
