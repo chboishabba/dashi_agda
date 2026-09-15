@@ -19,30 +19,15 @@ import DASHI.Wikimedia.IbrahimMonsterCharacterDeterminationMathlibProducerSnowba
 -- W_zeta|E as mandatory before Stone--von Neumann classification.  That is a
 -- sufficient route, but not obviously the shortest generic route.
 --
--- At the pinned mathlib v4.28.0 execution dependency we already have:
+-- At pinned mathlib v4.28.0 the needed ingredients exist, but source inspection
+-- exposes a real interface seam: character equalities live on bundled FDRep,
+-- while the strongest isotypic APIs are phrased for modules over the group
+-- algebra.  Mathlib exposes semantic bridges between these views, but no
+-- repo-local theorem has yet been located that directly converts the whole
+-- FDRep character identity into the required isotypic-module witness.
 --
---   * finite-group Maschke semisimplicity for k[G]-modules;
---   * isotypicComponent / isotypicComponents;
---   * exhaustion of a semisimple module by its isotypic components;
---   * IsIsotypicOfType.linearEquiv_fun for finite isotypic modules;
---   * character inner product = equivariant-Hom finrank;
---   * irreducible character orthogonality.
---
--- Therefore a stronger generic producer may work directly from the whole
--- character identity
---
---     chi(W_zeta|E) = 90 chi(H_zeta)
---
--- by proving all non-H_zeta simple types have zero Hom multiplicity and the
--- H_zeta type has multiplicity 90, then using semisimplicity/isotypic
--- exhaustion to construct the whole equivariant isomorphism.  If that producer
--- is obtained, the explicit constituent-list attachment becomes an optional
--- witness route rather than a mandatory theorem dependency.
---
--- This owner DOES NOT assert that the Lean producer is already written or
--- kernel-checked, and it DOES NOT turn a whole equivariant isomorphism into the
--- concrete X6 x Fin 90 basis/action recognition automatically.  The latter
--- still needs a same-object action/basis weld.
+-- Therefore the whole-character route remains a high-value probe, not a paid
+-- shortcut.  The literal constituent route stays available as fallback.
 ------------------------------------------------------------------------
 
 mathlibCharacterSource : Attribution.AttributedSource
@@ -78,16 +63,24 @@ mathlibIsotypicSource = Attribution.mkNoDOISource
   "external producer for isotypic components, semisimple exhaustion and finite isotypic linear equivalences; no Monster-specific conclusion imported"
   Attribution.publicAttribution
 
+mathlibFDRepSource : Attribution.AttributedSource
+mathlibFDRepSource = Attribution.mkNoDOISource
+  "Kim Morrison; mathlib contributors"
+  "Mathlib.RepresentationTheory.FDRep / Semisimple"
+  "mathlib4 source repository"
+  "RequestProject pin v4.28.0"
+  "https://github.com/leanprover-community/mathlib4/blob/v4.28.0/Mathlib/RepresentationTheory/FDRep.lean"
+  (Attribution.namedSourceKind "machine-checked theorem-library source")
+  "owns the bundled finite-dimensional representation carrier and semantic representation/module bridges; does not itself prove the desired whole-character isotypic theorem"
+  Attribution.publicAttribution
+
 characterAttribution = Snowball.canonicalSourceRoleSnowballReceipt mathlibCharacterSource
 maschkeAttribution = Snowball.canonicalSourceRoleSnowballReceipt mathlibMaschkeSource
 isotypicAttribution = Snowball.canonicalSourceRoleSnowballReceipt mathlibIsotypicSource
+fdrepAttribution = Snowball.canonicalSourceRoleSnowballReceipt mathlibFDRepSource
 
 ------------------------------------------------------------------------
 -- Stronger generic producer contract.
---
--- This is deliberately representation-level.  It is stronger than the
--- already-written irreducible equal-character theorem because V itself need
--- not be simple.  Its intended proof route is semisimple/isotypic assembly.
 ------------------------------------------------------------------------
 
 record WholeCharacterIsotypicProducer : Set₁ where
@@ -114,16 +107,6 @@ record WholeCharacterIsotypicProducer : Set₁ where
 
 open WholeCharacterIsotypicProducer public
 
-------------------------------------------------------------------------
--- The two routes are alternatives after the same actual-kernel replay:
---
---   A. literal constituent attachment -> classify each constituent;
---   B. whole-character semisimple/isotypic producer -> whole representation.
---
--- Route B can bypass the literal list, but neither route creates the concrete
--- Base369/X6 basis chart or Weyl-operator intertwiners by itself.
-------------------------------------------------------------------------
-
 record RecognitionRoutePareto : Set where
   constructor recognition-route-pareto
   field
@@ -138,10 +121,6 @@ open RecognitionRoutePareto public
 canonicalRecognitionRoutePareto : RecognitionRoutePareto
 canonicalRecognitionRoutePareto = recognition-route-pareto
   true true true true false false
-
-------------------------------------------------------------------------
--- Existing state anchors.
-------------------------------------------------------------------------
 
 kernelStatus : Kernel.ActualKernelPromotionStatus
 kernelStatus = Kernel.canonicalActualKernelPromotionStatus
@@ -164,6 +143,7 @@ data DimensionEqualityCreatesWholeRepresentationIso : Set where
 data OEISCreatesWholeRepresentationIso : Set where
 data WholeRepresentationIsoCreatesConcreteActionRecognition : Set where
 data IsotypicAPICitationCreatesProducerWitness : Set where
+data SemanticBridgeCreatesWholeCharacterTheorem : Set where
 
 characterEqualityAloneDoesNotCreateWholeIso :
   CharacterEqualityAloneCreatesWholeRepresentationIso → ⊥
@@ -184,6 +164,10 @@ isotypicCitationDoesNotCreateProducerWitness :
   IsotypicAPICitationCreatesProducerWitness → ⊥
 isotypicCitationDoesNotCreateProducerWitness ()
 
+semanticBridgeDoesNotCreateWholeCharacterTheorem :
+  SemanticBridgeCreatesWholeCharacterTheorem → ⊥
+semanticBridgeDoesNotCreateWholeCharacterTheorem ()
+
 ------------------------------------------------------------------------
 -- Current boundary.
 ------------------------------------------------------------------------
@@ -198,8 +182,14 @@ record WholeCharacterIsotypicBypassBoundary : Set where
     isotypicExhaustionAPILocated : Bool
     isotypicFiniteMultiplicityAPILocated : Bool
 
+    fdrepCharacterAPIIsBundledRepresentationLevel : Bool
+    isotypicAPIIsGroupAlgebraModuleLevel : Bool
+    fdrepToGroupAlgebraSemanticBridgeLocated : Bool
+    directWholeCharacterToIsotypicBridgeLocated : Bool
+
     wholeCharacterBypassCompilerSpecified : Bool
     literalConstituentListMandatoryAfterBypassProducer : Bool
+    literalConstituentRouteRetainedAsFallback : Bool
 
     wholeCharacterBypassLeanSourceWritten : Bool
     wholeCharacterBypassKernelReceiptObserved : Bool
@@ -217,7 +207,8 @@ open WholeCharacterIsotypicBypassBoundary public
 canonicalWholeCharacterIsotypicBypassBoundary : WholeCharacterIsotypicBypassBoundary
 canonicalWholeCharacterIsotypicBypassBoundary = whole-character-isotypic-bypass-boundary
   true true true true true true
-  true false
+  true true true false
+  true false true
   false false false false false
   false false false
-  "attempt the smallest Lean theorem on the pinned v4.28.0 APIs: for a finite-group FDRep V and simple H, if char(V)=90*char(H), derive that V is the H-isotypic semisimple representation with multiplicity 90 and obtain an equivariant isomorphism to 90 copies of H. Keep the current literal-constituent attachment route as fallback. Even after that theorem is kernel-paid, separately weld the resulting whole equivariant isomorphism to the SAME selected Monster W_zeta carrier and then to the concrete X6 x Fin 90 / Base369 basis with translation and modulation intertwiners. A005052(2)=90 and 65610=729*90 remain numerical coordinates only."
+  "the whole-character probe has localized a concrete Lean interface seam: FDRep owns the character statement, while the strongest finite isotypic decomposition APIs are group-algebra module theorems. First try one small adapter theorem transporting the FDRep object to the semisimple group-algebra module view and back. If that adapter remains awkward, immediately use the retained literal-constituent route rather than inventing another representation ontology. In either route, same-object Monster action recognition and the X6 x Fin90/Base369 operator weld remain downstream. A005052(2)=90 and 65610=729*90 remain numerical coordinates only."
