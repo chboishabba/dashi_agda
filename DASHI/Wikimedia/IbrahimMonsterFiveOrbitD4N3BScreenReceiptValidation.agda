@@ -29,9 +29,21 @@ existingGapWorkflowRegression :
   R.existingGapWorkflowWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 existingGapWorkflowRegression = refl
 
+directExecutionBranchTriggerRegression :
+  R.directExecutionBranchPushTriggerWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+directExecutionBranchTriggerRegression = refl
+
+summaryClassifierRegression :
+  R.failLocatingSummaryClassifierSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+summaryClassifierRegression = refl
+
 jsonArtifactUploadRegression :
   R.jsonArtifactUploadWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 jsonArtifactUploadRegression = refl
+
+summaryArtifactUploadRegression :
+  R.summaryArtifactUploadWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+summaryArtifactUploadRegression = refl
 
 runtimeFirewallRegression :
   R.gapRuntimeReceiptObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
