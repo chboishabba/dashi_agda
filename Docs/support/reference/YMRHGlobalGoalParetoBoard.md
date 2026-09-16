@@ -1,294 +1,282 @@
 # YM / RH Global Goal Pareto Board
 
-Status: **live current-state scheduling board**. Rewrite this file when the frontier moves. It is not theorem authority and not an append-only history.
+Status: **live scheduling / Pareto board**, not theorem authority and not a Clay/RH completion claim.
 
-Historical/search references:
+Historical archaeology belongs in `YMRHPRRoundArchaeologyAudit.md`; the focused #944 chronology is in `YMPR944BIDIR345R378Audit.md`; CMP source-family status belongs in `YMCMPWorkStatus.md`.
 
-- `YMRHPRRoundArchaeologyAudit.md` — broad hundreds-PR / every-route survey.
-- `YMRHFinalizationProducerAtlas.md` — producer atlas / alternate routes.
-- `YMCMPWorkStatus.md` — CMP authority/payment boundary.
+**Update rule:** whenever a Pareto recut changes the preferred producer, first live theorem leaf, or same-object acquisition path, update this file in the same tranche. Source/DOI/QID/Dewey/status metadata never manufacture theorem payment.
 
-## Current global endpoints
+## 1. Fixed terminal consumers
 
-```text
-YM = ClayYangMillsSolution on one literal family Y
-  T78-A UVToContinuumYM Y
-  T78-B SameHamiltonianPhysicalMassGap Y
-  T78-C SameFamilyLocalFieldsOPEStressWard Y
-
-RH high = R1 representation -> R2 strict actual-ClusterResponse theorem
-RH R3 = independent critical-line / verified-region carrier work
-```
-
-Frozen YM A/B/C/D remain lower-level research rows/donors, not four Clay problems.
-
-## Current Pareto queue — 16 Sep 2026
+### Yang--Mills
 
 ```text
-GLOBAL #1 — YM specialist #944
-  current preferred BIDI path is no longer the old R353 H_scale scheduler.
-
-  R371 published CMP116 parametric family
-    -> R370 parametric fixed-point sensitivity
-    -> selected R373 <-> R370 boundary-distance same-object attachment
-    -> R380 direct distance-upper bridge
-    -> R379 least-privilege Hessian coefficient consumer
-    -> R375 coefficient/Hessian payment
-    -> same-family continuum covariance decay
-    -> existing clustering-to-gap compiler.
-
-  #940 MUST NOT duplicate #944 theorem files.
-
-COORDINATOR #1 — RH #940 / R1 representation
-
-  R1a:
-    final nearResponseAt(J)
-      = checked/imported finite-near scalar
-
-  R1b1:
-    SAME checked scalar
-      = literal reflection-pair scalar on the final universal pole-quotient carrier
-
-  R1b2:
-    SAME literal reflection-pair scalar
-      = literal finiteNearSum(cellResponse)
-
-  all three are independently fail-closed.
-  R1b compiles from R1b1 + R1b2.
-  final R1 compiles from R1a + R1b.
-
-COORDINATOR PARETO STOP
-  R1a/R1b1 cannot be paid by status metadata.
-  R1b2 cannot be made reflexive by inventing a convenient intermediate scalar;
-  that would merely move the old same-object debt into R1b1.
-
-  If no theorem-bearing checked-near bytes or genuine final-carrier reflection-pair
-  scalar constructor is recovered, stop interface refactoring and spend proof-search
-  budget on R2.
-
-NEXT TRUE RH MATH — R2
-  D_near(J) + B_far(J) + D_Gamma(g_pole)
-    < actual ClusterResponse(g_pole)
-
-LATER / OPPORTUNISTIC
-  YM T78-A / T78-C only if a shared same-object constructor makes one cheap.
-  RH R3 remains independent.
+quantitative connected-correlation decay
+  on the SAME reconstructed continuum family
+-> existing clustering-to-spectral-gap compiler
+-> SameHamiltonianPhysicalMassGap.
 ```
 
-# YM specialist ownership — PR #944
-
-Terminal consumer is quantitative connected-correlation decay on the **same reconstructed continuum family**, followed by the already-owned clustering -> physical spectral-gap compiler.
-
-Current #944 source replay has moved well beyond the earlier R343/R353 coordinator summaries. The latest preferred direct route is:
+### Riemann hypothesis
 
 ```text
-CMP116 published common parametric analytic family
--> R371 source family
--> R370 Cauchy/mean-value parametric sensitivity
--> [R373 selected boundary distance = R370 boundary fixed-point distance]
--> R380 choose U := U_par = L_par * d_parameter
--> R379 least-privilege distanceUpper consumer
--> R375 Hessian-coefficient payment
--> downstream selected attachments
--> same-family finite-to-continuum connected-covariance decay
--> existing clustering-to-gap compiler.
+R1a/R1b final-near same-object representation
+-> R2 strict literal complement inequality
+-> existing uniform-high contradiction compiler.
 ```
 
-Current non-dominated source/same-object payments in #944 include:
+RH stays behind the present YM same-object/source-calibration seam while theorem-bearing checked-near bytes remain unavailable.
 
-1. selected R370 fixed-point family = literal CMP116 substituted-background family;
-2. selected R372/R373 Hessian family = literal differentiated CMP109/CMP116 family;
-3. selected parameters lie in the published common complex neighbourhood;
-4. selected canonical radius/magnitude data instantiate source bounds;
-5. selected parameter-distance upper is paid;
-6. **R373 selected boundary distance = R370 boundary fixed-point distance on the same selected object**;
-7. R348 selected coefficient/mixed-log same-object attachment `C_attach`;
-8. R346 selected differentiated localization on the shared Hessian mark;
-9. R346 selected physical distance = Euclidean spectral time `D_time`;
-10. same-family finite-to-continuum connected-covariance limit;
-11. existing clustering-to-gap compiler.
+## 2. Current YM Pareto frontier — R386 cut
 
-The historical marked-walk/collar/rate-split route, R364 analytic-path route, CMP102/CMP99 cross-propagator route, Row-C Heat/Doob/Langevin, and unified polymer norm remain donors/optional producers unless a current consumer requires their extra semantics.
+The R379/R380 audit already showed that R375's coefficient theorem observes only a proof-bearing substitution-distance upper, not the semantic identity of that upper as a historical marked coordinate.
 
-Source coordinates:
-
-- CMP99 DOI `10.1007/BF01240355`
-- CMP109 DOI `10.1007/BF01215223`
-- CMP116 DOI `10.1007/BF01239022`
-- CMP119 DOI `10.1007/BF01217741`
-- CMP122-I DOI `10.1007/BF01257412`
-- CMP122-II DOI `10.1007/BF01238433`
-- Yang--Mills QID `Q1192873`
-
-Bałaban QID / exact paper Dewey remain unresolved; do not guess them.
-
-# YM BC1/source route retained as a separate lower-level lane
-
-The active CMP119 regular-E route from the earlier Pareto tranche remains useful and should not be confused with #944's current mass-gap specialist path:
+R381--R385 tighten that producer again:
 
 ```text
-finite beta history
--> active density family
--> CMP122 Sect.-2 FORM witness
--> active function-valued regular E_k + literal localization
--> CMP109/CMP116 continuation
--> BC1.
+published CMP116 fixed-point family
+  -> R384 minimal fixed-point distance producer
+       d_boundary <= U_par
+       U_par := L_par(M,r) * d_parameter
+
+literal R103 CMP116 marked Hessian
+  -> Cauchy sensitivity in the SAME fixed-point-output metric
+
+R384 + literal Hessian
+  -> R385
+  -> R379 coefficient comparison.
 ```
 
-The active source theorem was recut to a **form-only** projection: BC1 does not primitively require the independent quantitative Sect.-2 bounds merely to obtain regular-E/localization. The remaining payment is literal source realization on the exact active carrier, not more compiler plumbing.
+### What R381 removes
 
-# RH #940 current cut
-
-## R1 is split and fail-closed
-
-Canonical consumer:
+R373's selected boundary carrier is chosen to be the R370 boundary carrier and
 
 ```text
-nearResponseAt(chosen J) = finiteNearSum(cellResponse)
+selectedBoundarySubstitutionDistance := R370.boundarySubstitutionDistance.
 ```
 
-Acquisition split:
+The old R380 boundary map/equality become `refl` on that compatibility presentation.
+
+Do **not** identify the R370 fixed-point parametric Lipschitz constant with the R372 Hessian-family Lipschitz constant. They are different consumers.
+
+### What R384 removes
+
+Full R370 contains a historical `boundaryHessianStable` field because it compiles back to R364. That field is not observed by the fixed-point-distance consumer and can create a false dependency cycle.
+
+R384 therefore extracts the least-privilege fixed-point producer without:
 
 ```text
-R1a CROSS_PROVER / SAME_OBJECT TRANSPORT
-  final nearResponseAt(J)
-    = checked/imported finite-near scalar
-
-R1b1 CROSS_PROVER / FINAL-CARRIER ATTACHMENT
-  SAME checked/imported finite-near scalar
-    = literal reflection-pair scalar on the final universal pole-quotient carrier
-
-R1b2 LITERAL ENUMERATION / FOLD REPRESENTATION
-  SAME literal reflection-pair scalar
-    = literal finiteNearSum(cellResponse)
+boundaryHessianStable,
+left/right physical Hessian domains,
+physical field variations.
 ```
 
-Current status:
+The published R371 family can pay fixed-point distance before any Hessian theorem.
+
+### What R385 removes
+
+R385 directly meets the R384 distance producer with the literal R103 Hessian family. It no longer requires as mandatory prerequisites:
 
 ```text
-R1a  = unpaid
-R1b1 = unpaid
-R1b2 = unpaid
+full R370,
+R380--R383 compatibility chain,
+historical marked-input identity,
+fixed-point Lipschitz = Hessian Lipschitz.
 ```
 
-Implementation history for this recut:
+The surviving local same-object theorem is the scalarization
 
 ```text
-460933bfd... RED original R1a/R1b split
-ff8f5daf3... GREEN original split
-e57b08b86... projection-name hygiene
-92fce82b9... RED R1b1/R1b2 split
-6b631363d... GREEN R1b1/R1b2 + transitivity compiler
+R373 boundary norm
+  = target-space distance between the two literal R103 Hessian values.
 ```
 
-The 8883 Lean return reports `nearFinset` / `nearOffFinset`, `nearSignedSum`, explicit far-shell decay and the literal `D_off` cutoff theorem, but its proof terms were not transported into Agda. It therefore pays none of R1a/R1b1/R1b2.
+### R386 terminal firewall
 
-The retained reflection-pair source names:
+R385 is still only a **comparison** theorem:
 
 ```text
-LiteralWeilOffOrdinateReflectionPair.zeroConeValue_add_reflect_eq_integral
+||H_left - H_right|| <= L_Hessian * U_par.
 ```
 
-with individual-pair formula:
+R346/R338/R341 consume an **absolute** selected mixed-log / connected-response localization theorem. R386 gives an exact finite counterexample to any generic promotion from endpoint-difference control to absolute endpoint control.
+
+Therefore:
 
 ```text
-4 * g(u) * cosh(a*u) * cos(delta*u).
+R385 coefficient comparison
+!=
+R346 literal selected localization.
 ```
 
-Its retained return says source-written, **not machine-checked for that return**, and not transported into Agda. It does not inhabit R1b1. It also does not own the final `nearOffFinset` fold identity, so it does not inhabit R1b2.
+An absolute reference/anchor or the direct source-owned absolute localization theorem remains an independent coordinate.
 
-Historical #642 / `NearCoreDeterminantTaper.lean` owns a different finite-near scalar on the determinant taper. It remains donor-only unless a theorem-bearing same-carrier bridge to the final universal pole-quotient taper is recovered.
+Hence R385 is an **optional subproducer**, not the canonical B theorem.
 
-### Pareto stop condition for R1
+## 3. Current non-dominated YM payments
 
-Do not create further intermediate scalar names unless they correspond to a real source/carrier boundary.
+### A. Canonical B-facing physical payment
 
-Further R1 implementation is justified only by:
-
-1. recovered theorem-bearing checked-near bytes / cross-prover transport;
-2. a genuine final-carrier object that owns the reflection-pair finite scalar;
-3. a concrete finite enumeration/fold constructor that pays R1b2 without using the target final-near equality.
-
-Otherwise spend proof-search budget on R2.
-
-# RH R2
-
-Preferred theorem:
+1. **literal selected differentiated localization**
 
 ```text
-D_near(J)
-+ B_far(J)
-+ D_Gamma(g_pole)
-< actual ClusterResponse(g_pole)
+|D²_{J_L,J_R} log Z|
+  <= selected rooted/source exponential envelope
 ```
 
-uniformly for every arbitrary high off-line nontrivial zero.
+on the SAME active density, selected J pair, connecting root and physical support distance.
 
-The current direct-frontier audit reports **no exact same-object harmonic donor already found**. This is therefore genuine analytic search unless a new same-carrier donor is recovered.
+R309/R338/R341/R346 already own the compiler and carrier plumbing around this theorem; the selected source/application payment remains physical.
 
-Optional certified route:
+2. **physical Euclidean-time semantics**
 
 ```text
-nearResponseAt(J) <= U
-U + B_far(J) + D_Gamma(g_pole) < actual ClusterResponse(g_pole).
+selected physical support distance = Euclidean spectral time.
 ```
 
-PR #868 already owns the proof-carrying finite/cellwise certificate architecture. Do not build another certificate calculus.
+3. **selected observable same-carrier admissibility** where required. Existing Wilson-cylinder bounds compile most of the bounded-test work once the selected observables and multiplication are attached.
 
-Pruned as primitive:
+4. **same-family finite->continuum connected-covariance transport.**
+
+5. Existing clustering->positive transfer-gap compiler.
+
+### B. Optional R385 coefficient/sensitivity producer for item 1
+
+If the coefficient route is used to help manufacture literal localization, its remaining source-facing coordinates are:
 
 ```text
-intermediate M_cluster
-separate near-envelope theorem
-separate Gamma-envelope theorem
-final ClusterResponse = Off + Gamma as analytic input
-determinant-q terminal consumer
+P1 selected published fixed-point family/domain attachment;
+P2 selected parameter-distance calibration;
+P3 literal R103 Hessian analyticity/magnitude/radius/common-neighbourhood;
+P4 R373 boundary norm = literal Hessian target distance;
+P5 R348 coefficient/mixed-log same-object attachment;
+P6 absolute anchor/reference OR direct absolute source-localization theorem.
 ```
 
-Historical 8889 cluster work is only an optional donor if theorem-bearing same-carrier transport plus a strict local bridge to actual `ClusterResponse` is recovered.
+P6 cannot be manufactured by the comparison theorem.
 
-# RH R3
+### C. Historical-mark compatibility seam — optional only if semantically consumed
 
-Independent terminal carrier work:
+If a downstream theorem truly observes the historical/source marked coordinate, prove
 
 ```text
-criticalLine(s) iff realPart(s)=half
-constructive equality-to-half stability
-published verified-region interpretation on SAME carrier
-verified-region-or-High cover
+sourceParametricLipschitz * sourceParameterDistance
+  <= sourceMarkedInput
 ```
 
-Current repo search exposes only an abstract `AnalyticSubstrate`; R3 currently does not dominate R1/R2.
+and use the R378/R351/R377/R376 branch.
 
-# Decision discipline
+## 4. Attachment / Aristotle donor interpretation
 
-For every proposed next step:
+The supplied `ym-clay-final-output-20260916` bundle reinforces the same cut.
+
+Its Lean files prove substantial downstream producer mathematics once a literal source activity majorant is available:
 
 ```text
-terminal consumer
--> enumerate in-repo producers
--> quotient only by theorem-bearing same-object transport
--> separate source authority / source realization / attachment / compiler / validation
--> weaken to least consumer-sufficient theorem
--> Pareto-rank remaining payments
--> implement only a non-dominated leaf
+CMP116ActivityRate:
+  source volume/tree form -> block-unit decay rate;
+  block size cancels exactly in the volume form;
+  entropy competition becomes an explicit source-parameter inequality.
+
+MarkedPolymerDecay:
+  finite differentiation costs only a polynomial size factor;
+  an arbitrarily small decay-rate loss absorbs that polynomial.
+
+RowBShellEnergy / PolymerActivityDecay:
+  source activity majorant + entropy/product smallness
+  -> geometric marked shell energy and summability.
+
+WeightedInfluenceRows:
+  one weighted row -> all iterates / quasi-locality.
+
+RowBToRowCTemporalFusion:
+  marked shell + covariance response
+  -> much of Row-C accumulated temporal curvature debt.
 ```
 
-Debt classes:
+But the bundle remains fail-closed at the same physical/source point: the literal differentiated CMP116 activity/source majorant and same-object identification are still inputs. It compresses producer plumbing; it does not pay the canonical B-facing localization theorem.
+
+## 5. Dominated / optional YM routes
+
+Still valid donors, but not architectural prerequisites for the present canonical B consumer:
 
 ```text
-NEW_ANALYSIS
-SOURCE_REALIZATION
-SAME_OBJECT_TRANSPORT
-CROSS_PROVER_TRANSPORT
-NUMERIC_CERTIFICATE
-COMPILER_PLUMBING
-VALIDATION_ONLY
-PROVENANCE_ONLY
+R351--R378 historical-mark route when no mark semantics are consumed;
+R353--R363 marked-walk / H_scale / collar / charging route;
+R364 separate D^3-style analytic-path route;
+R365--R369 contraction + cross-parameter map-defect route;
+R380--R383 compatibility presentations after R384/R385;
+CMP102-Lipschitz / cross-propagator route;
+Row-C Heat/Doob/Langevin;
+unified polymer/Schwinger norm route;
+Step-V/KP as a producer tactic rather than a terminal endpoint.
 ```
 
-Source metadata, DOI/QID/Dewey/link/status do not inhabit proof fields.
+Do not reopen these unless a current consumer needs them or one donor pays a live coordinate directly.
 
-# Validation boundary
+## 6. Source evidence currently supporting the direct route
 
-This board is scheduling/accounting only. No Clay YM solution or RH proof is promoted here. Source-written owners, imported-source status and `ProofLevel = machineChecked` declarations are not current-head kernel receipts. Exact-head certification requires an observed commit-specific validation run.
+Retained CMP116 Sect.1 source extract records:
+
+- decoupling parameters `s(Delta)` and `s(Y0)`;
+- `H(s(Y0))` analytic on a complex parameter domain;
+- nonlinear fixed-point equations for `D` and `A0`;
+- small-ball preservation and contraction;
+- analytic fixed-point dependence on `A'` and `s(Y0)`;
+- literal substituted background `H_k(s(Y0),B')` in (1.17);
+- uniform norm bounds in (1.18)/(1.21);
+- localization by differentiation in the decoupling parameters;
+- finite field/source differentiation followed by Cauchy representation.
+
+Primary source:
+
+Tadeusz Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, Commun. Math. Phys. 116 (1988), DOI `10.1007/BF01239022`.
+
+These facts support source theorem shapes. They do not by citation alone identify the selected family, metric, parameter distance, physical root/distance or response.
+
+## 7. Current RH route
+
+```text
+R1a: nearResponseAt(J) = N_checked
+R1b: N_checked = finiteNearSum(literal cells)
+R2: literalNear(J) + B_far(J) + D_Gamma(g_pole)
+      < actual ClusterResponse(g_pole).
+```
+
+Stop alias archaeology until theorem-bearing checked-near material becomes recoverable. The 8889 cluster return remains an optional donor only if theorem-bearing same-carrier transport is recovered.
+
+## 8. Firewalls
+
+Do not allow:
+
+```text
+source status -> theorem payment
+source text/citation -> selected same-object family identity
+analyticity -> arbitrary metric/distance calibration
+uniform bound -> exact historical marked-input identity
+R379 distance upper -> historical mark identity
+R384 fixed-point distance -> absolute selected response localization
+R385 coefficient comparison -> absolute localization without an anchor
+fixed-point Lipschitz -> Hessian Lipschitz by name
+R374 common radius scalar -> automatic consumer margin interpretation
+shared symbols H/D/C/s -> same-object proof
+external Lean donor theorem -> Agda kernel theorem without a local payment/replay.
+```
+
+## 9. Validation boundary
+
+- R381--R386 are source-written compiler/reduction surfaces on #944.
+- repository `machineChecked` fields are not fresh exact-head kernel receipts.
+- the stale R347 imports in R348/R350 have been removed, but source repair is not a kernel run.
+- no continuum YM construction, mass-gap theorem, Clay completion or RH proof is claimed.
+
+## 10. Update log
+
+- R381: one selected R370/R373 boundary carrier; duplicate boundary map/equality becomes `refl`; fixed-point/Hessian Lipschitz WrongType corrected.
+- R382: Hessian sensitivity uses the exact R370 fixed-point output metric.
+- R383: literal R103 marked Hessian specializes the generic Hessian family and removes a free difference coordinate.
+- R384: minimal source fixed-point-distance producer removes the legacy `boundaryHessianStable` dependency cycle.
+- R385: R384 distance and literal R103 Hessian feed R379 directly; full R370 and R380--R383 are no longer mandatory.
+- R386: exact comparison-vs-absolute no-go; coefficient sensitivity is demoted to optional subproducer below the literal selected-localization theorem.
+
+Exact-head status is queried directly from GitHub and is not inferred from these round labels.

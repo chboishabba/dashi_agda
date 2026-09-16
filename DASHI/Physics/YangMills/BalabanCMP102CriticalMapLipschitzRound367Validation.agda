@@ -1,0 +1,3 @@
+module DASHI.Physics.YangMills.BalabanCMP102CriticalMapLipschitzRound367Validation where
+
+import DASHI.Physics.YangMills.BalabanCMP102CriticalMapLipschitzRound367Exact
