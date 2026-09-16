@@ -12,176 +12,175 @@ import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Prior
 
 ------------------------------------------------------------------------
 -- PRIMARY-SOURCE EXTENSION ATLAS FOR THE MANUSCRIPT/METHOD TRANCHE
---
--- Only genuinely new source objects live here. Existing call, Charter, LCA,
--- circularity, participatory and longitudinal sources remain owned by their
--- prior canonical atlases and are imported rather than duplicated.
 ------------------------------------------------------------------------
 
 unescoESD2030RoadmapSource : Attr.AttributedSource
-unescoESD2030RoadmapSource =
-  Attr.mkNoDOISource
-    "UNESCO"
-    "Education for sustainable development: a roadmap"
-    "UNESCO"
-    "2020"
-    "https://www.unesco.org/en/articles/education-sustainable-development-roadmap"
-    Attr.institutionalSource
-    "Primary UNESCO implementation framework for ESD for 2030. Supports five priority action areas and the system-transformation framing; it is normative/programmatic guidance, not evidence that a named digital intervention achieved transformation."
-    Attr.publicAttribution
+unescoESD2030RoadmapSource = Attr.mkNoDOISource
+  "UNESCO"
+  "Education for sustainable development: a roadmap"
+  "UNESCO"
+  "2020"
+  "https://www.unesco.org/en/articles/education-sustainable-development-roadmap"
+  Attr.institutionalSource
+  "Primary UNESCO implementation framework for ESD for 2030. Supports five priority action areas and the system-transformation framing; it is normative/programmatic guidance, not evidence that a named digital intervention achieved transformation."
+  Attr.publicAttribution
 
 unescoESD2030MidtermSource : Attr.AttributedSource
-unescoESD2030MidtermSource =
-  Attr.mkNoDOISource
-    "Simon Broek; Anahat Kaur; Ockham IPS (Netherlands); UNESCO"
-    "Mid-term evaluation of the ESD for 2030 framework, 2021-2024"
-    "UNESCO"
-    "2026"
-    "https://www.unesco.org/en/articles/mid-term-evaluation-esd-2030-framework-2021-2024"
-    Attr.institutionalSource
-    "Primary institutional evaluation of ESD-for-2030 implementation. Supports the source-bounded observation that substantial activity can coexist with limited systemic transformation and recommendations for stronger coherence, monitoring and national ownership; does not evaluate this manuscript's proposed digital-ESD framework."
-    Attr.publicAttribution
+unescoESD2030MidtermSource = Attr.mkNoDOISource
+  "Simon Broek; Anahat Kaur; Ockham IPS (Netherlands); UNESCO"
+  "Mid-term evaluation of the ESD for 2030 framework, 2021-2024"
+  "UNESCO"
+  "2026"
+  "https://www.unesco.org/en/articles/mid-term-evaluation-esd-2030-framework-2021-2024"
+  Attr.institutionalSource
+  "Primary institutional evaluation of ESD-for-2030 implementation. Supports the source-bounded observation that substantial activity can coexist with limited systemic transformation and recommendations for stronger coherence, monitoring and national ownership; does not evaluate this manuscript's proposed digital-ESD framework."
+  Attr.publicAttribution
 
 oecdDigitalEducationOutlook2026Source : Attr.AttributedSource
-oecdDigitalEducationOutlook2026Source =
-  Attr.mkDOISource
-    "OECD"
-    "OECD Digital Education Outlook 2026: Exploring Effective Uses of Generative AI in Education"
-    "OECD Publishing"
-    "2026"
-    "10.1787/062a7394-en"
-    "https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html"
-    Attr.institutionalSource
-    "Primary OECD synthesis/report for current digital/GenAI education policy and evidence. Supports the distinction between task performance and learning, and the need for pedagogical guidance, human-centred design, research, governance and enabling infrastructure; it does not establish sustainability or learning effects for every technology or context."
-    Attr.publicAttribution
+oecdDigitalEducationOutlook2026Source = Attr.mkDOISource
+  "OECD"
+  "OECD Digital Education Outlook 2026: Exploring Effective Uses of Generative AI in Education"
+  "OECD Publishing"
+  "2026"
+  "10.1787/062a7394-en"
+  "https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html"
+  Attr.institutionalSource
+  "Primary OECD synthesis/report for current digital/GenAI education policy and evidence. Supports the distinction between task performance and learning, and the need for pedagogical guidance, human-centred design, research, governance and enabling infrastructure; it does not establish sustainability or learning effects for every technology or context."
+  Attr.publicAttribution
 
 unescoAICommonGoodMinisterialSource : Attr.AttributedSource
-unescoAICommonGoodMinisterialSource =
-  Attr.mkNoDOISource
-    "Education ministers and designated representatives convened by UNESCO"
-    "Ministerial Statement: Sustaining education as a common good in the age of AI"
-    "UNESCO Digital Learning Week 2026"
-    "2026"
-    "https://www.unesco.org/en/articles/education-ministers-call-education-remain-common-good-age-ai-unescos-digital-learning-week"
-    Attr.institutionalSource
-    "Primary intergovernmental normative/governance source adopted during UNESCO Digital Learning Week 2026. Supports deliberative governance, public accountability, learner/teacher rights and source-bounded procurement/infrastructure principles including total-cost-of-ownership, interoperability, portability and open systems; it is not evidence that any named AI or digital-education intervention is effective or sustainable."
-    Attr.publicAttribution
+unescoAICommonGoodMinisterialSource = Attr.mkNoDOISource
+  "Education ministers and designated representatives convened by UNESCO"
+  "Ministerial Statement: Sustaining education as a common good in the age of AI"
+  "UNESCO Digital Learning Week 2026"
+  "2026"
+  "https://www.unesco.org/en/articles/education-ministers-call-education-remain-common-good-age-ai-unescos-digital-learning-week"
+  Attr.institutionalSource
+  "Primary intergovernmental normative/governance source adopted during UNESCO Digital Learning Week 2026. Supports deliberative governance, public accountability, learner/teacher rights and source-bounded procurement/infrastructure principles including total-cost-of-ownership, interoperability, portability and open systems; it is not evidence that any named AI or digital-education intervention is effective or sustainable."
+  Attr.publicAttribution
 
 unescoAICommonGoodDiscussionSource : Attr.AttributedSource
-unescoAICommonGoodDiscussionSource =
-  Attr.mkNoDOISource
-    "UNESCO"
-    "Sustaining education as a common good in the age of AI: The case for deliberative governance"
-    "UNESCO global consultation on education in the age of AI"
-    "2026"
-    "https://www.unesco.org/en/digital-education/artificial-intelligence/consultation"
-    Attr.institutionalSource
-    "Primary UNESCO discussion-paper/consultation source. It frames deliberative governance and six directional shifts for public consultation feeding future policy briefs; it is not the adopted ministerial statement, settled policy, intervention evidence, or proof that consultation recommendations have been implemented."
-    Attr.publicAttribution
+unescoAICommonGoodDiscussionSource = Attr.mkNoDOISource
+  "UNESCO"
+  "Sustaining education as a common good in the age of AI: The case for deliberative governance"
+  "UNESCO global consultation on education in the age of AI"
+  "2026"
+  "https://www.unesco.org/en/digital-education/artificial-intelligence/consultation"
+  Attr.institutionalSource
+  "Primary UNESCO discussion-paper/consultation source. It frames deliberative governance and six directional shifts for public consultation feeding future policy briefs; it is not the adopted ministerial statement, settled policy, intervention evidence, or proof that consultation recommendations have been implemented."
+  Attr.publicAttribution
+
+unescoAIProcurementBackgroundSource : Attr.AttributedSource
+unescoAIProcurementBackgroundSource = Attr.mkNoDOISource
+  "Kalervo N. Gulson; Xiaonan Huang; Jose-Miguel Bello Villarino; Penny Vlies; UNESCO"
+  "AI procurement in education: the missing lever in AI governance"
+  "UNESCO background paper for the global consultation on education in the age of AI"
+  "2026"
+  "https://www.unesco.org/en/digital-education/artificial-intelligence/consultation"
+  Attr.institutionalSource
+  "Primary UNESCO-commissioned background paper on procurement as an AI-governance lever in education. It pays procurement/governance framing for the consultation and can inform observable procurement criteria; it is not adopted policy, a purchasing mandate, or evidence that any deployed system meets those criteria."
+  Attr.publicAttribution
+
+unescoAITCOBackgroundSource : Attr.AttributedSource
+unescoAITCOBackgroundSource = Attr.mkNoDOISource
+  "Keith Krueger; Frankie Jackson; UNESCO"
+  "Beyond the price tag: Rethinking total cost of ownership for AI in education systems"
+  "UNESCO background paper for the global consultation on education in the age of AI"
+  "2026"
+  "https://www.unesco.org/en/digital-education/artificial-intelligence/consultation"
+  Attr.institutionalSource
+  "Primary UNESCO-commissioned background paper on total cost of ownership for AI in education systems. It pays TCO/procurement framing and supports treating acquisition price as narrower than lifecycle/system cost; it is not adopted policy, a deployment cost measurement, or proof of sustainability."
+  Attr.publicAttribution
 
 primaryMethodologySourceAtlas : Attr.AttributedSourceAtlas
-primaryMethodologySourceAtlas =
-  Attr.mkSourceAtlas
-    "digital ESD manuscript primary-source methodology extension"
-    "DASHI.Education.DigitalESDPrimarySourceMethodologyAtlasExact"
-    ( unescoESD2030RoadmapSource
-    ∷ unescoESD2030MidtermSource
-    ∷ oecdDigitalEducationOutlook2026Source
-    ∷ unescoAICommonGoodMinisterialSource
-    ∷ unescoAICommonGoodDiscussionSource
-    ∷ [] )
-    "Primary institutional sources for ESD system transformation, current digital-education conditions and 2026 AI-era public-purpose governance. The adopted ministerial statement and consultation discussion paper remain distinct source roles. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
+primaryMethodologySourceAtlas = Attr.mkSourceAtlas
+  "digital ESD manuscript primary-source methodology extension"
+  "DASHI.Education.DigitalESDPrimarySourceMethodologyAtlasExact"
+  ( unescoESD2030RoadmapSource
+  ∷ unescoESD2030MidtermSource
+  ∷ oecdDigitalEducationOutlook2026Source
+  ∷ unescoAICommonGoodMinisterialSource
+  ∷ unescoAICommonGoodDiscussionSource
+  ∷ unescoAIProcurementBackgroundSource
+  ∷ unescoAITCOBackgroundSource
+  ∷ [] )
+  "Primary institutional sources for ESD system transformation, current digital-education conditions and 2026 AI-era public-purpose governance. Adopted statements, consultation discussion papers and commissioned background papers remain distinct source roles. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
 
-unescoRoadmapSourceRoleReceipt :
-  Snowball.SourceRoleSnowballReceipt unescoESD2030RoadmapSource
-unescoRoadmapSourceRoleReceipt =
-  Snowball.canonicalSourceRoleSnowballReceipt unescoESD2030RoadmapSource
+unescoRoadmapSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt unescoESD2030RoadmapSource
+unescoRoadmapSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt unescoESD2030RoadmapSource
 
-unescoMidtermSourceRoleReceipt :
-  Snowball.SourceRoleSnowballReceipt unescoESD2030MidtermSource
-unescoMidtermSourceRoleReceipt =
-  Snowball.canonicalSourceRoleSnowballReceipt unescoESD2030MidtermSource
+unescoMidtermSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt unescoESD2030MidtermSource
+unescoMidtermSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt unescoESD2030MidtermSource
 
-oecdOutlookSourceRoleReceipt :
-  Snowball.SourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
-oecdOutlookSourceRoleReceipt =
-  Snowball.canonicalSourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
+oecdOutlookSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
+oecdOutlookSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
 
-unescoAICommonGoodMinisterialSourceRoleReceipt :
-  Snowball.SourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
-unescoAICommonGoodMinisterialSourceRoleReceipt =
-  Snowball.canonicalSourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
+unescoAICommonGoodMinisterialSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
+unescoAICommonGoodMinisterialSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
 
-unescoAICommonGoodDiscussionSourceRoleReceipt :
-  Snowball.SourceRoleSnowballReceipt unescoAICommonGoodDiscussionSource
-unescoAICommonGoodDiscussionSourceRoleReceipt =
-  Snowball.canonicalSourceRoleSnowballReceipt unescoAICommonGoodDiscussionSource
+unescoAICommonGoodDiscussionSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt unescoAICommonGoodDiscussionSource
+unescoAICommonGoodDiscussionSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt unescoAICommonGoodDiscussionSource
+
+unescoAIProcurementBackgroundSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt unescoAIProcurementBackgroundSource
+unescoAIProcurementBackgroundSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt unescoAIProcurementBackgroundSource
+
+unescoAITCOBackgroundSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt unescoAITCOBackgroundSource
+unescoAITCOBackgroundSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt unescoAITCOBackgroundSource
 
 priorAcquisitionAtlasRetained : Prior.DigitalESDAcquisitionAtlas
 priorAcquisitionAtlasRetained = Prior.canonicalDigitalESDAcquisitionAtlas
-
-------------------------------------------------------------------------
--- Promotion firewalls.
-------------------------------------------------------------------------
 
 data InstitutionalFrameworkCreatesInterventionEffect : Set where
 data MidtermProgrammeEvaluationCreatesLocalCausalEffect : Set where
 data DigitalEducationOutlookCreatesSustainabilityProof : Set where
 data MinisterialGovernanceSourceCreatesInterventionEffect : Set where
 data ConsultationDiscussionCreatesAdoptedPolicy : Set where
+data ConsultationBackgroundCreatesAdoptedPolicy : Set where
+data TCOBackgroundCreatesDeploymentCostMeasurement : Set where
 
-institutionalFrameworkDoesNotCreateInterventionEffect :
-  InstitutionalFrameworkCreatesInterventionEffect → ⊥
+institutionalFrameworkDoesNotCreateInterventionEffect : InstitutionalFrameworkCreatesInterventionEffect → ⊥
 institutionalFrameworkDoesNotCreateInterventionEffect ()
 
-midtermEvaluationDoesNotCreateLocalCausalEffect :
-  MidtermProgrammeEvaluationCreatesLocalCausalEffect → ⊥
+midtermEvaluationDoesNotCreateLocalCausalEffect : MidtermProgrammeEvaluationCreatesLocalCausalEffect → ⊥
 midtermEvaluationDoesNotCreateLocalCausalEffect ()
 
-digitalEducationOutlookDoesNotCreateSustainabilityProof :
-  DigitalEducationOutlookCreatesSustainabilityProof → ⊥
+digitalEducationOutlookDoesNotCreateSustainabilityProof : DigitalEducationOutlookCreatesSustainabilityProof → ⊥
 digitalEducationOutlookDoesNotCreateSustainabilityProof ()
 
-ministerialGovernanceSourceDoesNotCreateInterventionEffect :
-  MinisterialGovernanceSourceCreatesInterventionEffect → ⊥
+ministerialGovernanceSourceDoesNotCreateInterventionEffect : MinisterialGovernanceSourceCreatesInterventionEffect → ⊥
 ministerialGovernanceSourceDoesNotCreateInterventionEffect ()
 
-consultationDiscussionDoesNotCreateAdoptedPolicy :
-  ConsultationDiscussionCreatesAdoptedPolicy → ⊥
+consultationDiscussionDoesNotCreateAdoptedPolicy : ConsultationDiscussionCreatesAdoptedPolicy → ⊥
 consultationDiscussionDoesNotCreateAdoptedPolicy ()
+
+consultationBackgroundDoesNotCreateAdoptedPolicy : ConsultationBackgroundCreatesAdoptedPolicy → ⊥
+consultationBackgroundDoesNotCreateAdoptedPolicy ()
+
+tcoBackgroundDoesNotCreateDeploymentCostMeasurement : TCOBackgroundCreatesDeploymentCostMeasurement → ⊥
+tcoBackgroundDoesNotCreateDeploymentCostMeasurement ()
 
 record PrimarySourceMethodologyBoundary : Set where
   constructor primary-source-methodology-boundary
   field
     primaryInstitutionalSourcesAttributed : Bool
-    primaryInstitutionalSourcesAttributedIsTrue :
-      primaryInstitutionalSourcesAttributed ≡ true
+    primaryInstitutionalSourcesAttributedIsTrue : primaryInstitutionalSourcesAttributed ≡ true
     priorAtlasRetainedWithoutDuplication : Bool
-    priorAtlasRetainedWithoutDuplicationIsTrue :
-      priorAtlasRetainedWithoutDuplication ≡ true
+    priorAtlasRetainedWithoutDuplicationIsTrue : priorAtlasRetainedWithoutDuplication ≡ true
     citationImportsProof : Bool
     citationImportsProofIsFalse : citationImportsProof ≡ false
     citationCreatesAuthority : Bool
     citationCreatesAuthorityIsFalse : citationCreatesAuthority ≡ false
     institutionalReportCreatesSameObjectInterventionEffect : Bool
-    institutionalReportCreatesSameObjectInterventionEffectIsFalse :
-      institutionalReportCreatesSameObjectInterventionEffect ≡ false
+    institutionalReportCreatesSameObjectInterventionEffectIsFalse : institutionalReportCreatesSameObjectInterventionEffect ≡ false
     ministerialGovernanceSourceCreatesInterventionEffect : Bool
-    ministerialGovernanceSourceCreatesInterventionEffectIsFalse :
-      ministerialGovernanceSourceCreatesInterventionEffect ≡ false
+    ministerialGovernanceSourceCreatesInterventionEffectIsFalse : ministerialGovernanceSourceCreatesInterventionEffect ≡ false
     consultationDiscussionCreatesAdoptedPolicy : Bool
-    consultationDiscussionCreatesAdoptedPolicyIsFalse :
-      consultationDiscussionCreatesAdoptedPolicy ≡ false
+    consultationDiscussionCreatesAdoptedPolicyIsFalse : consultationDiscussionCreatesAdoptedPolicy ≡ false
+    consultationBackgroundCreatesAdoptedPolicy : Bool
+    consultationBackgroundCreatesAdoptedPolicyIsFalse : consultationBackgroundCreatesAdoptedPolicy ≡ false
 
 open PrimarySourceMethodologyBoundary public
 
 canonicalPrimarySourceMethodologyBoundary : PrimarySourceMethodologyBoundary
-canonicalPrimarySourceMethodologyBoundary =
-  primary-source-methodology-boundary
-    true refl
-    true refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
+canonicalPrimarySourceMethodologyBoundary = primary-source-methodology-boundary
+  true refl true refl false refl false refl false refl false refl false refl false refl
