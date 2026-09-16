@@ -5,9 +5,24 @@ import json
 
 RETRIEVED = "2026-09-16"
 
+TRITS = (-1, 0, 1)
 FIVE_MODES = ("mode09", "mode18", "mode27", "mode36", "mode45")
 BALANCED_PHASES = (-1, 0, 1)
 BINARY_ORIENTATIONS = (-1, 1)
+INNER_ORBITS = (
+    "zeroOrbit",
+    "firstAxisOrbit",
+    "secondAxisOrbit",
+    "equalSignOrbit",
+    "oppositeSignOrbit",
+)
+ORBIT_TO_MODE = {
+    "zeroOrbit": "mode09",
+    "firstAxisOrbit": "mode18",
+    "secondAxisOrbit": "mode27",
+    "equalSignOrbit": "mode36",
+    "oppositeSignOrbit": "mode45",
+}
 
 
 def _node(
@@ -244,12 +259,14 @@ RELATIONS: dict[str, dict[str, object]] = {
     "42d-five-mode-phase-carrier": {
         "sources": ["A058678"],
         "observed": (
-            "repo-native finite carrier probe: 5 modes * 3 balanced phases = 15; "
-            "the same five modes have 10 binary-oriented states; deleting one "
-            "distinguished neutral lane leaves 14; one outer ternary phase gives 3*14=42"
+            "phase-preserving symmetry reduction: T^3 = T x T^2 has three outer phases; "
+            "each inner nine-state sheet quotients by global inner inversion to five orbits, "
+            "giving 3*5=15; deleting one distinguished neutral lane leaves 14 and a new "
+            "outer ternary phase gives 3*14=42"
         ),
         "paid": True,
         "twenty_seven_to_five_mode_selection_paid": False,
+        "twenty_seven_to_three_times_five_reduction_paid": True,
         "monster_42d_same_object_paid": False,
     },
     "6b-q6-to-c6-spectrum-32772": {
@@ -267,7 +284,58 @@ RELATIONS: dict[str, dict[str, object]] = {
 }
 
 
+def _quotient_inner_sheet(y: int, z: int) -> str:
+    if y == 0 and z == 0:
+        return "zeroOrbit"
+    if z == 0:
+        return "firstAxisOrbit"
+    if y == 0:
+        return "secondAxisOrbit"
+    if y == z:
+        return "equalSignOrbit"
+    return "oppositeSignOrbit"
+
+
+def _negate_state(state: tuple[int, int, int]) -> tuple[int, int, int]:
+    x, y, z = state
+    return (-x, -y, -z)
+
+
+def build_ternary27_phase_preserving_reduction_probe() -> dict[str, object]:
+    raw_states = [(x, y, z) for x in TRITS for y in TRITS for z in TRITS]
+    reduced_states = [(x, _quotient_inner_sheet(y, z)) for x, y, z in raw_states]
+    image_states = set(reduced_states)
+
+    fiber_sizes: dict[tuple[int, str], int] = {}
+    for reduced in reduced_states:
+        fiber_sizes[reduced] = fiber_sizes.get(reduced, 0) + 1
+    fiber_size_histogram: dict[int, int] = {}
+    for size in fiber_sizes.values():
+        fiber_size_histogram[size] = fiber_size_histogram.get(size, 0) + 1
+
+    full_global_orbits = {
+        min(state, _negate_state(state))
+        for state in raw_states
+    }
+
+    return {
+        "raw_state_count": len(raw_states),
+        "outer_phase_count": len(TRITS),
+        "inner_sheet_state_count": len(TRITS) * len(TRITS),
+        "inner_global_inversion_orbit_count": len(INNER_ORBITS),
+        "phase_preserving_reduced_state_count": len(TRITS) * len(INNER_ORBITS),
+        "image_state_count": len(image_states),
+        "fiber_size_histogram": fiber_size_histogram,
+        "full_global_inversion_orbit_count": len(full_global_orbits),
+        "phase_preserving_reduction_is_full_global_inversion": False,
+        "twenty_seven_to_three_times_five_reduction_paid": True,
+        "three_times_five_carrier_is_monster_class_42d_paid": False,
+        "orbit_to_mode_indexing_semantic_identity_paid": False,
+    }
+
+
 def build_42d_five_mode_phase_probe() -> dict[str, object]:
+    reduction = build_ternary27_phase_preserving_reduction_probe()
     lanes = [(mode, phase) for mode in FIVE_MODES for phase in BALANCED_PHASES]
     binary_oriented_lanes = [
         (mode, orientation) for mode in FIVE_MODES for orientation in BINARY_ORIENTATIONS
@@ -286,18 +354,22 @@ def build_42d_five_mode_phase_probe() -> dict[str, object]:
         "outer_phase_count": len(BALANCED_PHASES),
         "outer_phase_times_residual": len(BALANCED_PHASES) * len(residual_lanes),
         "twenty_seven_to_five_mode_selection_paid": False,
+        "twenty_seven_to_three_times_five_reduction_paid": reduction[
+            "twenty_seven_to_three_times_five_reduction_paid"
+        ],
         "forty_two_carrier_is_monster_class_42d_paid": False,
     }
 
 
 def build_report() -> dict[str, object]:
     return {
-        "schema": "monster369-oeis-acquisition-snapshot-v5",
+        "schema": "monster369-oeis-acquisition-snapshot-v6",
         "retrieved": RETRIEVED,
         "sequence_count": len(SEQUENCES),
         "sequences": SEQUENCES,
         "relations": RELATIONS,
         "carrier_probes": {
+            "ternary27_phase_preserving_3x5": build_ternary27_phase_preserving_reduction_probe(),
             "42d_five_mode_phase": build_42d_five_mode_phase_probe(),
         },
         "positive_bridge_candidates": {
@@ -307,6 +379,7 @@ def build_report() -> dict[str, object]:
             "17496-42d-to-n3b-restriction": True,
             "42d-five-mode-phase-carrier": True,
             "42-class-eta-level-family": True,
+            "ternary27-phase-preserving-3x5-reduction": True,
         },
         "authority": {
             "oeis_snapshot_creates_same_object": False,
