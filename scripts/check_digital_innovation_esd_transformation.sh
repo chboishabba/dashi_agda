@@ -41,6 +41,9 @@ grep -q '^aiClassificationDoesNotPromoteStudentMeaning :' DASHI/Education/AliceB
 grep -q '^dataAvailabilityDoesNotPromoteContextPreservingReuse :' DASHI/Education/AliceBrownDigitalESDEpistemicGovernanceBridgeExact.agda
 grep -q '^invitationDoesNotPromoteEvidence :' DASHI/Education/MDPISpecialIssueResearchGovernanceExact.agda
 grep -q '^genAIDoesNotPromoteAuthor :' DASHI/Education/MDPISpecialIssueResearchGovernanceExact.agda
+grep -q '^conflictedGuestEditorCannotHandleManuscript :' DASHI/Education/MDPISpecialIssueResearchGovernanceExact.agda
+grep -q '^genAICannotProduceSubstantiveReview :' DASHI/Education/MDPISpecialIssueResearchGovernanceExact.agda
+grep -q '^genAICannotMakeEditorialDecision :' DASHI/Education/MDPISpecialIssueResearchGovernanceExact.agda
 grep -q '^coarseAgendaCannotDetermineReciprocalBraidAdequacy :' DASHI/Education/DigitalESDReciprocalBraidExact.agda
 grep -q '^canonicalDigitalESDReciprocalBraid :' DASHI/Education/DigitalESDReciprocalBraidExact.agda
 grep -q '^canonicalDirectionalObligations :' DASHI/Education/DigitalESDReciprocalBraidExact.agda
@@ -62,6 +65,11 @@ grep -q '^traumaGeneralisationRegression :' DASHI/Education/DigitalInnovationESD
 grep -q '^patternMindCandidateOnlyRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^duplicateSnapshotReceiptRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^snapshotSingleAuthorityRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^conflictedGuestEditorHandlingRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^reviewerGenAIRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^editorGenAIDecisionRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^substantiveGenAIDisclosureRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^humanAccountabilityRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 
 if command -v nix >/dev/null 2>&1 && [[ -x scripts/run_agda29_parallel_check.sh ]]; then
   scripts/run_agda29_parallel_check.sh DASHI/Education/DigitalInnovationESDRegression.agda
