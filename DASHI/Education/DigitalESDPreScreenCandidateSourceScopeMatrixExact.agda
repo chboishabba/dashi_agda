@@ -61,6 +61,9 @@ gousetiPlatformisationCandidate = candidate-source-scope-row Scholarly.gousetiPl
 zagamiAustralianEdtechCandidate : CandidateSourceScopeRow
 zagamiAustralianEdtechCandidate = candidate-source-scope-row Scholarly.zagamiAustralianEdtechSource Method.contextualComparatorEvidence (Method.transformationBeyondTechnologyUseRQ ∷ Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "four Australian edtech cases: Canva for Education, Education Perfect, LearningField and Grok Academy" "comparative historical trajectories analysed in 2026" "governance, funding, legitimacy and sustainable-capital alignment shape edtech emergence, expansion, crisis, collapse and consolidation; includes interoperability/procurement tensions in case histories" "comparative public-document case study; does not establish universal durability, interoperability or causal success rules" true refl
 
+chughSustainabilityParadoxCandidate : CandidateSourceScopeRow
+chughSustainabilityParadoxCandidate = candidate-source-scope-row Scholarly.chughSustainabilityParadoxSource Method.contextualComparatorEvidence (Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "opinion/conceptual paper focused primarily on higher-education digital sustainability" "published March 2026; lifecycle-oriented conceptual horizon" "close prior-art framing: digital education can support access/participation while increasing energy/material impacts and inequalities; recommends lifecycle, procurement and circularity responses" "opinion paper; no empirical intervention effect. Pays the sustainability-paradox antecedent but not reciprocal ESD-capacity, same-object payment discipline, participant-authority or structured-review contributions" true refl
+
 gianniniTwinTransitionCandidate : CandidateSourceScopeRow
 gianniniTwinTransitionCandidate = candidate-source-scope-row Prior.gianniniTwinTransitionSource Method.institutionalFrameworkEvidence (Method.digitalEducationBuildsESDCapacityRQ ∷ Method.sustainabilityConstrainsDigitalEducationRQ ∷ []) Method.bidirectionalReciprocalRelation "global UNESCO green/digital transition framing through education" "2024 policy/conceptual horizon" "green and digital transitions may be distinct or in tension; education can help align them" "antecedent framing only; does not prove automatic synergy or intervention effectiveness" true refl
 
@@ -74,10 +77,10 @@ ituL1023Candidate : CandidateSourceScopeRow
 ituL1023Candidate = candidate-source-scope-row ICT.ituL1023CircularityMethodSource Method.infrastructureLifecycleEvidence (Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "ICT product circularity performance method scope" "in-force August 2023 recommendation" "defines circularity scoring coordinates including durability, repair, reuse, recycle and upgrade aspects" "method authority only; no same-object circularity score, repair support, service-life or durability observation" true refl
 
 canonicalCandidateSourceScopeMatrix : List CandidateSourceScopeRow
-canonicalCandidateSourceScopeMatrix = unescoRoadmapCandidate ∷ unescoMidtermCandidate ∷ oecdOutlook2026Candidate ∷ unescoAICommonGoodCandidate ∷ unescoAIConsultationDiscussionCandidate ∷ unescoAIProcurementBackgroundCandidate ∷ unescoAITCOBackgroundCandidate ∷ ardilaDigitalFuturesCandidate ∷ gousetiPlatformisationCandidate ∷ zagamiAustralianEdtechCandidate ∷ gianniniTwinTransitionCandidate ∷ publicPlatformCharterCandidate ∷ ituL1410Candidate ∷ ituL1023Candidate ∷ []
+canonicalCandidateSourceScopeMatrix = unescoRoadmapCandidate ∷ unescoMidtermCandidate ∷ oecdOutlook2026Candidate ∷ unescoAICommonGoodCandidate ∷ unescoAIConsultationDiscussionCandidate ∷ unescoAIProcurementBackgroundCandidate ∷ unescoAITCOBackgroundCandidate ∷ ardilaDigitalFuturesCandidate ∷ gousetiPlatformisationCandidate ∷ zagamiAustralianEdtechCandidate ∷ chughSustainabilityParadoxCandidate ∷ gianniniTwinTransitionCandidate ∷ publicPlatformCharterCandidate ∷ ituL1410Candidate ∷ ituL1023Candidate ∷ []
 
 candidateSourceCount : Nat
-candidateSourceCount = 14
+candidateSourceCount = 15
 
 data PreScreenMatrixCreatesIncludedCorpus : Set where
 data PreScreenMatrixClosesStructuredSearch : Set where
