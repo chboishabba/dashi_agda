@@ -6,9 +6,15 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Education.DigitalESDStudyResultPNFProofSearchExact as StudyPNF
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
+import DASHI.Reasoning.AristotleExperimentalProofSearchExact as ProofSearch
 
 studyResultAssertionCountRegression : StudyPNF.studyResultAssertionCount ≡ 4
 studyResultAssertionCountRegression = refl
+
+proofSearchBoundaryReuseRegression :
+  StudyPNF.proofSearchBoundary
+  ≡ ProofSearch.canonicalAristotleExperimentalProofSearchBoundary
+proofSearchBoundaryReuseRegression = refl
 
 iaqInferentialForceRegression :
   PNF.PredicateNormalAssertion.inferentialForce StudyPNF.iaqObservedGainAssertion
