@@ -4,11 +4,9 @@ module DASHI.Physics.YangMills.YMClayMassGapAssemblyParityExact where
 ------------------------------------------------------------------------
 -- AGDA PARITY FOR LEAN RequestProject.YangMills.Clay.MassGapAssembly
 --
--- Lean now exposes two finite-gap producers (energy-form and source/clustering)
+-- Lean exposes two finite-gap producers (energy-form and source/clustering)
 -- feeding one common cutoff->continuum->OS spine.  This Agda owner mirrors that
--- exact consumer topology and deliberately keeps the literal physical inputs
--- visible.  The theorem below is composition only: it does not manufacture a
--- Yang--Mills cutoff family, continuum graph limit, or YM/OS same-object weld.
+-- consumer topology and keeps all literal physical inputs visible.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -17,8 +15,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayBoundedFormParityExact as Form
 
--- Final consumer shape.  The concrete proposition families are parameters so
--- the same theorem can be instantiated by the existing spectral/OS owners.
 record MassGapConclusion
     (ContinuumHamiltonian Vacuum GapParameter : Set) : Set₁ where
   field
@@ -40,7 +36,6 @@ record MassGapConclusion
 
 open MassGapConclusion public
 
--- One common continuum/OS spine, matching Lean CutoffFamily + OSWeld.
 record CommonContinuumOSRoute
     (FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) : Set₁ where
   field
@@ -59,24 +54,26 @@ commonContinuumOSCompiler :
 commonContinuumOSCompiler route finiteGap =
   ymOSSameObject route (cutoffToContinuum route finiteGap)
 
--- Energy-form route.  The form package itself is concrete; the only bridge
--- here is the already-proved mathematical implication from its vacuum-null,
--- coercive form data to the finite gap object expected by the common spine.
+-- Energy-form route: unlike the first parity draft, there is no separate
+-- `formGapCompiler` hypothesis.  The finite vacuum-form-gap datum is constructed
+-- directly by YMClayBoundedFormParityExact from the bounded physical form
+-- package, matching the Lean FormHamiltonian consumer semantics.
 record EnergyFormRoute
-    (Hilbert Scalar FiniteGap : Set) : Set₁ where
+    (Hilbert Scalar : Set) : Set₁ where
   field
     finiteForms : Form.BoundedFormGapPackage Hilbert Scalar
-    formGapCompiler : Form.BoundedFormGapPackage Hilbert Scalar → FiniteGap
 
 open EnergyFormRoute public
 
 finiteGapOfEnergyForms :
-  ∀ {Hilbert Scalar FiniteGap} →
-  EnergyFormRoute Hilbert Scalar FiniteGap → FiniteGap
-finiteGapOfEnergyForms route = formGapCompiler route (finiteForms route)
+  ∀ {Hilbert Scalar} →
+  EnergyFormRoute Hilbert Scalar →
+  Form.FiniteVacuumFormGapDatum Hilbert Scalar
+finiteGapOfEnergyForms route =
+  Form.boundedFormBuildsFiniteVacuumGapDatum (finiteForms route)
 
--- Source/clustering route.  This mirrors Lean's
--- SpectralRepresentation + covariance decay -> finite vacuum gap theorem.
+-- Source/clustering route.  This remains abstract at this layer because the
+-- live R387 specialization is supplied by YMClayFullChainParityExact below.
 record SourceClusteringRoute
     (SpectralRepresentation CovarianceDecay FiniteGap : Set) : Set₁ where
   field
@@ -97,10 +94,11 @@ finiteGapOfSourceClustering route =
     (covarianceDecay route)
 
 massGapOfEnergyForms :
-  ∀ {Hilbert Scalar FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter} →
-  EnergyFormRoute Hilbert Scalar FiniteGap →
+  ∀ {Hilbert Scalar ContinuumGap ContinuumHamiltonian Vacuum GapParameter} →
+  EnergyFormRoute Hilbert Scalar →
   CommonContinuumOSRoute
-    FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter →
+    (Form.FiniteVacuumFormGapDatum Hilbert Scalar)
+    ContinuumGap ContinuumHamiltonian Vacuum GapParameter →
   MassGapConclusion ContinuumHamiltonian Vacuum GapParameter
 massGapOfEnergyForms energy common =
   commonContinuumOSCompiler common (finiteGapOfEnergyForms energy)
@@ -115,7 +113,6 @@ massGapOfSourceClustering :
 massGapOfSourceClustering source common =
   commonContinuumOSCompiler common (finiteGapOfSourceClustering source)
 
--- Validation sentinels name the existence of the two executable assemblers.
 data EnergyAssemblerPresent : Set where
   energyAssemblerPresent : EnergyAssemblerPresent
 
@@ -132,7 +129,7 @@ massGapAssemblyParityCompilerLevel : ProofLevel
 massGapAssemblyParityCompilerLevel = machineChecked
 
 energyFormToFiniteGapMathematicsLevel : ProofLevel
-energyFormToFiniteGapMathematicsLevel = conditional
+energyFormToFiniteGapMathematicsLevel = machineChecked
 
 sourceClusteringToFiniteGapMathematicsLevel : ProofLevel
 sourceClusteringToFiniteGapMathematicsLevel = conditional
