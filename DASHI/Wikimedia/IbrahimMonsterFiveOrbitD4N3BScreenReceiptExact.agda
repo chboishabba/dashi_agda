@@ -12,27 +12,19 @@ import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BCharacterAcquisitionExact as 
 ------------------------------------------------------------------------
 -- FIVE-ORBIT D4 / N(3B) EXECUTION RECEIPT BOUNDARY
 --
--- The GAP producer has two explicit stages:
+-- Runtime observation supplied from the existing GAP checker:
 --
---   1. enumerate admissible D4 -> MN3B class fusions and test whether the
---      actual restricted Monster character contains
+--   possible class fusions            = 17
+--   character-compatible fusions      = 17
+--   five-orbit route falsified        = false
+--   AtlasRep group realized           = false
+--   actual D4 subgroup found          = false
+--   selected action same-object paid  = false
 --
---        theta = (5,5,1,3,3) = 3 A1 + B1 + B2;
---
---   2. construct the existing AtlasRep MN3B group, find a concrete D8 inside
---      a Sylow-2 subgroup, transport the canonical D4 classes through an
---      explicit group isomorphism, and identify the resulting MN3B class
---      fusion by ambient order/class-size invariants.
---
--- The runtime schema is fail-locating: AtlasRep group realization, D8 subgroup
--- discovery, canonical isomorphism, unique ambient class identification,
--- character-table admissibility and character compatibility remain separate
--- observations. Source for both stages is written. The dedicated shell checker,
--- the existing GAP/CTblLib/AtlasRep workflow wiring, a direct push trigger for
--- the isolated execution branch, the raw JSON artifact, and the derived
--- fail-locating summary artifact are all source-written. These execution-
--- enablement receipts remain strictly weaker than observing a GAP runtime
--- result on this revision.
+-- Therefore the five-orbit character route survives the table-level screen,
+-- but the first unresolved execution seam is concrete MN3B realization.  This
+-- receipt does not promote 17 compatible table fusions to a realized subgroup,
+-- action intertwiner, or Monster theorem.
 ------------------------------------------------------------------------
 
 kernelBoundary : Kernel.FiveOrbitD4KernelCharacterBoundary
@@ -41,34 +33,22 @@ kernelBoundary = Kernel.currentFiveOrbitD4KernelCharacterBoundary
 acquisitionBoundary : Acquisition.FiveOrbitD4N3BCharacterAcquisition
 acquisitionBoundary = Acquisition.currentFiveOrbitD4N3BCharacterAcquisition
 
-------------------------------------------------------------------------
--- WrongType firewalls.
-------------------------------------------------------------------------
-
 data SourceScriptCreatesRuntimeReceipt : Set where
 data PossibleFusionCreatesActualD4Subgroup : Set where
 data CharacterContainmentCreatesSelectedActionWeld : Set where
-data ExecutionWiringCreatesRuntimeVerdict : Set where
+data RuntimeCountsCreateMonsterTheorem : Set where
 
-sourceScriptDoesNotCreateRuntimeReceipt :
-  SourceScriptCreatesRuntimeReceipt → ⊥
+sourceScriptDoesNotCreateRuntimeReceipt : SourceScriptCreatesRuntimeReceipt → ⊥
 sourceScriptDoesNotCreateRuntimeReceipt ()
 
-possibleFusionDoesNotCreateActualD4Subgroup :
-  PossibleFusionCreatesActualD4Subgroup → ⊥
+possibleFusionDoesNotCreateActualD4Subgroup : PossibleFusionCreatesActualD4Subgroup → ⊥
 possibleFusionDoesNotCreateActualD4Subgroup ()
 
-characterContainmentDoesNotCreateSelectedActionWeld :
-  CharacterContainmentCreatesSelectedActionWeld → ⊥
+characterContainmentDoesNotCreateSelectedActionWeld : CharacterContainmentCreatesSelectedActionWeld → ⊥
 characterContainmentDoesNotCreateSelectedActionWeld ()
 
-executionWiringDoesNotCreateRuntimeVerdict :
-  ExecutionWiringCreatesRuntimeVerdict → ⊥
-executionWiringDoesNotCreateRuntimeVerdict ()
-
-------------------------------------------------------------------------
--- Runtime boundary.
-------------------------------------------------------------------------
+runtimeCountsDoNotCreateMonsterTheorem : RuntimeCountsCreateMonsterTheorem → ⊥
+runtimeCountsDoNotCreateMonsterTheorem ()
 
 record FiveOrbitD4N3BScreenReceipt : Set where
   constructor five-orbit-d4-n3b-screen-receipt
@@ -87,12 +67,18 @@ record FiveOrbitD4N3BScreenReceipt : Set where
     summaryArtifactUploadWired : Bool
     possibleFusionCountObserved : Bool
     characterCompatibleFusionCountObserved : Bool
+    possibleFusionCount : Nat
+    characterCompatibleFusionCount : Nat
+    fiveOrbitRouteFalsified : Bool
+    atlasGroupRealized : Bool
     actualD4SubgroupRuntimeObserved : Bool
     actualD4CharacterCompatibilityObserved : Bool
     gapRuntimeReceiptObserved : Bool
     selectedActionSameObjectPaid : Bool
     selectedActionIntertwinerPaid : Bool
     minimumRuntimeCountsPromotedToTheorem : Bool
+    runtimeScreenCreatesMonsterTheorem : Bool
+    firstUnpaidExecutionStage : String
     nextResidual : String
 open FiveOrbitD4N3BScreenReceipt public
 
@@ -101,6 +87,8 @@ currentFiveOrbitD4N3BScreenReceipt =
   five-orbit-d4-n3b-screen-receipt
     true true true true true
     true true true true true true true
-    false false false false false
-    false false false
-    "The producer, fail-locating raw JSON schema, dedicated checker, established GAP/CTblLib/AtlasRep workflow hook, direct execution-branch push trigger, fail-locating summary classifier, and both raw/summary JSON artifact upload paths are source-written. No current workflow run has been observed on this revision, so every runtime observation remains false. When execution becomes available, first consume build/monster_3b_five_orbit_d4_n3b_screen.json and build/monster_3b_five_orbit_d4_n3b_summary.json. A zero character-compatible fusion count falsifies the current five-orbit D4 route. Otherwise follow the realization ladder AtlasRep group -> D8 subgroup -> canonical D4 isomorphism -> unique ambient class fusion -> table-admissible realized fusion -> character-compatible realized fusion. Even a positive realized compatible subgroup remains weaker than Selected3BNormalizerMonsterActionWeld: the actual selected Monster carrier/action intertwiner must still be paid independently."
+    true true 17 17 false
+    false false false true
+    false false false false
+    "atlas-group-realization-residual"
+    "The observed GAP table screen retains 17 admissible D4->MN3B class fusions and all 17 are character-compatible with theta=(5,5,1,3,3)=3A1+B1+B2, so the five-orbit route is not falsified at character-table level. The concrete AtlasRep MN3B realization was not obtained in this run; consequently no actual D4 subgroup, realized ambient fusion, selected-action same-object receipt, or intertwiner is paid. Continue from the atlas-group-realization residual, preferably by factoring through the 3^(1+12) normal core to 2.Suz.2 or another known-good MN3B construction rather than attempting an unassisted Sylow-2 computation on the 78-dimensional matrix group."
