@@ -103,6 +103,8 @@ import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionRegression
 import DASHI.Reasoning.PlatoSymposiumSnowballParetoIndexingExact
 import DASHI.Reasoning.PlatoSymposiumResidualDialecticMechanismExact
 import DASHI.Reasoning.PlatoSymposiumResidualDialecticMechanismRegression
+import DASHI.Reasoning.PlatoSymposiumPNFAttributionIdentityExact
+import DASHI.Reasoning.PlatoSymposiumPNFAttributionIdentityRegression
 
 -- Source-bounded metaphor-as-structure / task-relative compression layer.
 import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact
