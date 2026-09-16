@@ -31,7 +31,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -159,8 +159,8 @@ foldPointwiseDampedEquation :
   ≡ C3.complex3Add
       (R224.foldVector (variableDecayCell rho S velocity) items)
       (R224.foldVector (R230.productRuleForcingCell S velocity forcing) items)
-foldPointwiseDampedEquation rho S velocity forcing [] =
-  R230.complex3AddZeroLeft (C3.complex3Zero _)
+foldPointwiseDampedEquation {F = F} rho S velocity forcing [] =
+  sym (R230.complex3AddZeroLeft (C3.complex3Zero F))
 foldPointwiseDampedEquation rho S velocity forcing (tau ∷ rest) =
   trans
     (cong₂ C3.complex3Add
