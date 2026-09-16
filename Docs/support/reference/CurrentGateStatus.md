@@ -15,8 +15,9 @@ below.  The current lane split is:
 - C: forced whole-space R^3 breakdown; released-proof integration lane.
 - D: forced periodic T^3 breakdown; released-proof integration lane.
 
-The live periodic-B min-cut is `S2b2d1b`: the signed coherent-covariance /
-ordered-kernel payment.  The same-object bookkeeping now routes through the
+The live periodic-B min-cut is `S2b2d1b2`: the quantitative signed
+coherent-covariance payment, after `d1b0` coherent-work splitting and `d1b1`
+endpoint compilation.  The same-object bookkeeping now routes through the
 R541/R573/R584/R503 signed Hermitian consumer before norm, with
 `OrderedOrientedSpacetimeBudget -> R503` recorded as the direct compiler.
 This correction changes no Clay promotion flag and makes no A<->B theorem
