@@ -90,12 +90,14 @@ import DASHI.Reasoning.JusticeLeeSensibLawAdversarialProofGraphBidiExact
 import DASHI.Reasoning.JusticeLeeSensibLawExperimentSearchCrossPollinationExact
 import DASHI.Reasoning.JusticeLeeSensibLawBidiSearchClosureExact
 
--- JMD Symposium/Republic source-bounded dialectic/history bridges.
+-- JMD Symposium/Republic source-bounded dialectic/history/search bridges.
 import DASHI.Reasoning.PlatoSymposiumDialecticBraidHyperformalExact
 import DASHI.Reasoning.PlatoSymposiumResidualRevision369BridgeExact
 import DASHI.Reasoning.PlatoSymposiumResidualRevision369BridgeRegression
 import DASHI.Reasoning.PlatoSymposiumMultiplePersistenceChannelsExact
 import DASHI.Reasoning.PlatoSymposiumMultiplePersistenceChannelsRegression
+import DASHI.Reasoning.PlatoSymposiumProofSearchExperimentExact
+import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionExact
 
 -- Source-bounded metaphor-as-structure / task-relative compression layer.
 import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact
