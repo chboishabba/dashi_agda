@@ -13,6 +13,7 @@ import DASHI.Education.DigitalInnovationESDTransformationExact as Transformation
 import DASHI.Education.MDPISpecialIssueResearchGovernanceExact as Publication
 import DASHI.Education.AliceBrownDigitalESDEpistemicGovernanceBridgeExact as Alice
 import DASHI.Education.DigitalESDReciprocalBraidExact as Braid
+import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 
 technologyUseTransformationRegression :
   Intersection.FactorsThrough
@@ -212,3 +213,70 @@ snapshotSingleAuthorityRegression :
     Publication.canonicalMDPISpecialIssueResearchGovernance
   ≡ true
 snapshotSingleAuthorityRegression = refl
+
+------------------------------------------------------------------------
+-- Acquisition / snowball / Pareto regression.
+------------------------------------------------------------------------
+
+acquisitionAtlasRegression : Acquisition.DigitalESDAcquisitionAtlas
+acquisitionAtlasRegression = Acquisition.canonicalDigitalESDAcquisitionAtlas
+
+unescoTwinTransitionSameObjectRegression :
+  Acquisition.DigitalESDAcquisitionAtlas.unescoTwinTransitionExactObjectPaid
+    Acquisition.canonicalDigitalESDAcquisitionAtlas
+  ≡ true
+unescoTwinTransitionSameObjectRegression = refl
+
+reviewAntecedentSameObjectRegression :
+  Acquisition.DigitalESDAcquisitionAtlas.systematicReviewExactObjectPaid
+    Acquisition.canonicalDigitalESDAcquisitionAtlas
+  ≡ true
+reviewAntecedentSameObjectRegression = refl
+
+citationNonPromotionSnowballRegression :
+  Acquisition.CitationPromotesDigitalESDConclusion → ⊥
+citationNonPromotionSnowballRegression =
+  Acquisition.citationDoesNotPromoteDigitalESDConclusion
+
+energySourceScopeRegression :
+  Acquisition.DigitalESDAcquisitionAtlas.ieaEnergyEvidenceIsEducationSpecific
+    Acquisition.canonicalDigitalESDAcquisitionAtlas
+  ≡ false
+energySourceScopeRegression = refl
+
+ewasteSourceScopeRegression :
+  Acquisition.DigitalESDAcquisitionAtlas.ituEwasteEvidenceIsEducationSpecific
+    Acquisition.canonicalDigitalESDAcquisitionAtlas
+  ≡ false
+ewasteSourceScopeRegression = refl
+
+lifecyclePaymentRegression :
+  Acquisition.paymentState Acquisition.educationSpecificLifecycleMeasurement
+  ≡ Acquisition.unpaid
+lifecyclePaymentRegression = refl
+
+currentAcquisitionFrontierRegression :
+  Acquisition.currentAcquisitionFrontier
+  ≡ Acquisition.educationSpecificLifecycleMeasurement
+  ∷ Acquisition.longitudinalInterventionImpact
+  ∷ Acquisition.esdParticipantGovernanceTransfer
+  ∷ Acquisition.openInteroperabilityDurability
+  ∷ []
+currentAcquisitionFrontierRegression = refl
+
+firstAcquisitionLeafRegression :
+  Acquisition.firstAcquisitionLeaf
+  ≡ Acquisition.educationSpecificLifecycleMeasurement
+firstAcquisitionLeafRegression = refl
+
+acquisitionOrderPaymentOrderRegression :
+  Acquisition.SnowballParetoBoundary.acquisitionOrderEqualsPaymentOrder
+    Acquisition.canonicalSnowballParetoBoundary
+  ≡ false
+acquisitionOrderPaymentOrderRegression = refl
+
+unpaidDependencyReopensRegression :
+  Acquisition.SnowballParetoBoundary.unpaidDependencyMayReopenDownstreamClaim
+    Acquisition.canonicalSnowballParetoBoundary
+  ≡ true
+unpaidDependencyReopensRegression = refl
