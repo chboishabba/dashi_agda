@@ -10,6 +10,11 @@ currentStatementDoesNotFixNextProbe :
     Bridge.canonicalHistorySensitiveProbeBoundary ≡ false
 currentStatementDoesNotFixNextProbe = refl
 
+statementPlusConsumerStillDoesNotFixNextProbe :
+  Bridge.statementPlusFixedConsumerDeterminesNextProbe
+    Bridge.canonicalHistorySensitiveProbeBoundary ≡ false
+statementPlusConsumerStillDoesNotFixNextProbe = refl
+
 retainedHistoryMayChangeProbe :
   Bridge.retainedInquiryHistoryMayChangeNextProbe
     Bridge.canonicalHistorySensitiveProbeBoundary ≡ true
@@ -24,6 +29,16 @@ probePolicyDoesNotRewriteEvidence :
   Bridge.probePolicyChangeRewritesCurrentInstitutionalSurface
     Bridge.canonicalHistorySensitiveProbeBoundary ≡ false
 probePolicyDoesNotRewriteEvidence = refl
+
+laterConsumerDemandAddsObligation :
+  Bridge.laterConsumerDemandCreatesNewObligation
+    Bridge.canonicalHistorySensitiveProbeBoundary ≡ true
+laterConsumerDemandAddsObligation = refl
+
+laterConsumerDemandDoesNotRefuteEarlierIndexedAnswer :
+  Bridge.laterConsumerDemandMakesEarlierIndexedAnswerFalse
+    Bridge.canonicalHistorySensitiveProbeBoundary ≡ false
+laterConsumerDemandDoesNotRefuteEarlierIndexedAnswer = refl
 
 existing369AndPortfolioOwnersAreReused :
   Bridge.existingSearchOwnersReused ≡ true
