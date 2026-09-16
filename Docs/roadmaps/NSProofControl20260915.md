@@ -92,6 +92,7 @@ S2b2d0 output-local fixed-output reduction domain-independent candidate
 S2b2d1a damped-tangent residual identity   domain-independent analytic candidate
 #920 paired-second-moment compiler         mixed; generic centered algebra vs periodic realization
 R568/R572/R503 commutator chain            mixed; analytic core vs output-fibre/lattice plumbing
+R541/R573/R584/R503 ordered-kernel cone    mixed; signed consumer core vs periodic realization
 ```
 
 The `S2b2d0` result is important for BIDI: once an output is selected, the
@@ -103,10 +104,10 @@ active.
 `S2b2d1a` sharpens this again without proving A from B: the unweighted
 commutator is exactly the forcing residual in the generic damped mixed-product
 tangent identity.  Its algebra does not mention the periodic shell selector.
-The remaining signed coherent-covariance/endpoint payment is therefore the
-analytic object to keep generic for eventual whole-space transport, while the
-finite output-fibre realization remains periodic plumbing until explicitly
-ported.
+The remaining signed coherent-covariance payment is now most sharply exposed
+as the ordered-kernel endpoint budget. That signed consumer core is the object
+to keep generic for eventual whole-space transport, while the finite
+output-fibre realization remains periodic plumbing until explicitly ported.
 
 BIDI questions:
 
@@ -170,7 +171,7 @@ S2b2c2a integer gap -> live rational C3.normSquared          DONE source
 S2b2c2b literal low/remote R98 spectral datum                SOURCE-WRITTEN / certification pending
 S2b2d0 output-local collar weight -> active unweighted fibre DONE source
 S2b2d1a fixed-output damped tangent = decay + commutator      SOURCE-WRITTEN / certification pending
-S2b2d1b signed coherent covariance / endpoint payment         OPEN PRIMARY
+S2b2d1b signed coherent covariance / ordered-kernel payment   OPEN PRIMARY
 S2b2d2 cutoff-uniform sum of fixed-output budgets             OPEN after d1b
 S3 cutoff-uniform initial critical ceiling                   OPEN
 S4 positive retained viscosity 0 < 2*nu-a                   OPEN
@@ -332,7 +333,7 @@ P3's compressed cells are quadratic velocity blocks, while the R230 commutator
 is cubic after inserting physical NS forcing. Any useful bridge must be a typed
 same-object theorem, not analogy.
 
-### S2b2d1b — PRIMARY analytic leaf: signed coherent covariance / endpoint payment
+### S2b2d1b — PRIMARY analytic leaf: signed coherent covariance / ordered-kernel payment
 
 The remaining local theorem is now sharper than “bound the commutator”:
 
