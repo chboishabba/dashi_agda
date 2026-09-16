@@ -168,3 +168,10 @@ import DASHI.Core.SnowballHistoricalProgrammeNameCollisionExact
 
 -- Domain-neutral source/provenance/observation carrier.
 import DASHI.Core.SourceConditionedObservationExact
+
+-- Portable consumer-indexed semantics with UI and loop interpretation fixtures.
+import DASHI.Core.PortableSemanticInterpretationExact
+import DASHI.Core.PortableInteractiveViewExact
+import DASHI.Core.PortableLoopInterpretationExact
+import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
+import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact

@@ -1,0 +1,9 @@
+module DASHI.Core.PortableLoopInterpretationRegression where
+
+import DASHI.Core.PortableLoopInterpretationExact as Loop
+
+loopEquivalenceExists : Loop.CanonicalLoopConsumerEquivalence
+loopEquivalenceExists = Loop.jsAndGpuEquivalentForResult
+
+scheduleDistinctionExists : Loop.DifferentExecutionStrategy
+scheduleDistinctionExists = Loop.canonicalDifferentExecutionStrategy
