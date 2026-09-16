@@ -18,10 +18,6 @@ import DASHI.Education.DigitalInnovationESDTransformationExact as Transformation
 import DASHI.Education.DigitalESDEducationSustainabilityLiteratureMapExact as Literature
 import DASHI.Education.DigitalESDParticipantGovernanceContextTransferExact as Governance
 
-------------------------------------------------------------------------
--- PAPER-FACING METHODOLOGY
-------------------------------------------------------------------------
-
 currentPaperType : Paper.PaperType
 currentPaperType = Paper.currentPaperType
 
@@ -33,28 +29,17 @@ data ManuscriptResearchQuestion : Set where
   durabilityAndLongitudinalTransformationRQ : ManuscriptResearchQuestion
 
 researchQuestions : List ManuscriptResearchQuestion
-researchQuestions =
-  digitalEducationBuildsESDCapacityRQ
-  ∷ transformationBeyondTechnologyUseRQ
-  ∷ sustainabilityConstrainsDigitalEducationRQ
-  ∷ participantAgencyAndGovernanceRQ
-  ∷ durabilityAndLongitudinalTransformationRQ
-  ∷ []
+researchQuestions = digitalEducationBuildsESDCapacityRQ ∷ transformationBeyondTechnologyUseRQ ∷ sustainabilityConstrainsDigitalEducationRQ ∷ participantAgencyAndGovernanceRQ ∷ durabilityAndLongitudinalTransformationRQ ∷ []
 
 researchQuestionCount : Nat
 researchQuestionCount = 5
 
 researchQuestionReference : ManuscriptResearchQuestion → String
-researchQuestionReference digitalEducationBuildsESDCapacityRQ =
-  "RQ1: Through what pedagogical, curricular, competence, learning-environment and institutional mechanisms can digital education build ESD capacity?"
-researchQuestionReference transformationBeyondTechnologyUseRQ =
-  "RQ2: Under what conditions does digital innovation support educational/system transformation rather than technology adoption or task performance alone?"
-researchQuestionReference sustainabilityConstrainsDigitalEducationRQ =
-  "RQ3: How should environmental, social, economic, lifecycle, circularity and infrastructure considerations constrain digital education itself?"
-researchQuestionReference participantAgencyAndGovernanceRQ =
-  "RQ4: How should learner/participant voice, epistemic agency and governance enter digital-ESD design without inflating literature, consent or consultation into local authority?"
-researchQuestionReference durabilityAndLongitudinalTransformationRQ =
-  "RQ5: What evidence and conditions bear on durability, institutionalisation, context transfer and longitudinal transformation, and which claims remain future empirical debt?"
+researchQuestionReference digitalEducationBuildsESDCapacityRQ = "RQ1: Through what pedagogical, curricular, competence, learning-environment and institutional mechanisms can digital education build ESD capacity?"
+researchQuestionReference transformationBeyondTechnologyUseRQ = "RQ2: Under what conditions does digital innovation support educational/system transformation rather than technology adoption or task performance alone?"
+researchQuestionReference sustainabilityConstrainsDigitalEducationRQ = "RQ3: How should environmental, social, economic, lifecycle, circularity and infrastructure considerations constrain digital education itself?"
+researchQuestionReference participantAgencyAndGovernanceRQ = "RQ4: How should learner/participant voice, epistemic agency and governance enter digital-ESD design without inflating literature, consent or consultation into local authority?"
+researchQuestionReference durabilityAndLongitudinalTransformationRQ = "RQ5: What evidence and conditions bear on durability, institutionalisation, context transfer and longitudinal transformation, and which claims remain future empirical debt?"
 
 data IntegrativeReviewStage : Set where
   problemIdentification : IntegrativeReviewStage
@@ -64,13 +49,7 @@ data IntegrativeReviewStage : Set where
   presentationAndLimitations : IntegrativeReviewStage
 
 canonicalIntegrativeReviewStages : List IntegrativeReviewStage
-canonicalIntegrativeReviewStages =
-  problemIdentification
-  ∷ literatureSearch
-  ∷ dataEvaluation
-  ∷ dataAnalysisAndSynthesis
-  ∷ presentationAndLimitations
-  ∷ []
+canonicalIntegrativeReviewStages = problemIdentification ∷ literatureSearch ∷ dataEvaluation ∷ dataAnalysisAndSynthesis ∷ presentationAndLimitations ∷ []
 
 methodSourceAtlas : Attr.AttributedSourceAtlas
 methodSourceAtlas = Paper.paperMethodSourceAtlas
@@ -140,26 +119,7 @@ data ExtractionCoordinate : Set where
   uncertaintyLimitationCoordinate : ExtractionCoordinate
 
 canonicalExtractionSchema : List ExtractionCoordinate
-canonicalExtractionSchema =
-  sourceIdentityCoordinate
-  ∷ sourceKindAndRoleCoordinate
-  ∷ publicationDateCoordinate
-  ∷ populationEducationLevelCoordinate
-  ∷ jurisdictionInstitutionContextCoordinate
-  ∷ digitalTechnologyOrPracticeCoordinate
-  ∷ pedagogyCurriculumCompetenceCoordinate
-  ∷ sustainabilityDimensionCoordinate
-  ∷ studyOrReviewDesignCoordinate
-  ∷ outcomeOrClaimCoordinate
-  ∷ timeHorizonCoordinate
-  ∷ lifecycleBoundaryCoordinate
-  ∷ circularityRepairabilityCoordinate
-  ∷ participantAgencyAuthorityCoordinate
-  ∷ interoperabilityGovernanceCoordinate
-  ∷ sameObjectStatusCoordinate
-  ∷ contextTransferCoordinate
-  ∷ uncertaintyLimitationCoordinate
-  ∷ []
+canonicalExtractionSchema = sourceIdentityCoordinate ∷ sourceKindAndRoleCoordinate ∷ publicationDateCoordinate ∷ populationEducationLevelCoordinate ∷ jurisdictionInstitutionContextCoordinate ∷ digitalTechnologyOrPracticeCoordinate ∷ pedagogyCurriculumCompetenceCoordinate ∷ sustainabilityDimensionCoordinate ∷ studyOrReviewDesignCoordinate ∷ outcomeOrClaimCoordinate ∷ timeHorizonCoordinate ∷ lifecycleBoundaryCoordinate ∷ circularityRepairabilityCoordinate ∷ participantAgencyAuthorityCoordinate ∷ interoperabilityGovernanceCoordinate ∷ sameObjectStatusCoordinate ∷ contextTransferCoordinate ∷ uncertaintyLimitationCoordinate ∷ []
 
 data ReciprocityDirection : Set where
   digitalEducationToESDCapacity : ReciprocityDirection
@@ -219,6 +179,12 @@ unescoAICommonGoodMinisterialReceipt = source-receipt Primary.unescoAICommonGood
 unescoAIConsultationDiscussionReceipt : SourceReceipt
 unescoAIConsultationDiscussionReceipt = source-receipt Primary.unescoAICommonGoodDiscussionSource "2026-09-16" "primary UNESCO discussion-paper/consultation source / deliberative-governance framing under active public consultation; not adopted policy" true refl
 
+unescoAIProcurementBackgroundReceipt : SourceReceipt
+unescoAIProcurementBackgroundReceipt = source-receipt Primary.unescoAIProcurementBackgroundSource "2026-09-16" "primary UNESCO-commissioned consultation background paper / AI procurement-governance framing; not adopted policy or deployment evidence" true refl
+
+unescoAITCOBackgroundReceipt : SourceReceipt
+unescoAITCOBackgroundReceipt = source-receipt Primary.unescoAITCOBackgroundSource "2026-09-16" "primary UNESCO-commissioned consultation background paper / AI total-cost-of-ownership framing; not a deployment cost measurement" true refl
+
 data ActivityLevelDeterminesSystemTransformation : Set where
 data TaskPerformanceDeterminesLearning : Set where
 data SearchClosureEqualsEvidenceSynthesis : Set where
@@ -226,6 +192,7 @@ data PrimarySourceAcquisitionCreatesIncludedStudy : Set where
 data MethodCitationCreatesExecution : Set where
 data InstitutionalFrameworkCreatesLocalAuthority : Set where
 data ConsultationDiscussionPaperEqualsAdoptedMinisterialStatement : Set where
+data ConsultationBackgroundPaperEqualsAdoptedPolicy : Set where
 
 activityDoesNotDetermineSystemTransformation : ActivityLevelDeterminesSystemTransformation → ⊥
 activityDoesNotDetermineSystemTransformation ()
@@ -245,9 +212,11 @@ methodCitationDoesNotCreateExecution ()
 institutionalFrameworkDoesNotCreateLocalAuthority : InstitutionalFrameworkCreatesLocalAuthority → ⊥
 institutionalFrameworkDoesNotCreateLocalAuthority ()
 
-consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement :
-  ConsultationDiscussionPaperEqualsAdoptedMinisterialStatement → ⊥
+consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement : ConsultationDiscussionPaperEqualsAdoptedMinisterialStatement → ⊥
 consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement ()
+
+consultationBackgroundPaperDoesNotEqualAdoptedPolicy : ConsultationBackgroundPaperEqualsAdoptedPolicy → ⊥
+consultationBackgroundPaperDoesNotEqualAdoptedPolicy ()
 
 transformationBoundary = Transformation.canonicalIntegratedTransitionBoundary
 literatureObserverMap = Literature.canonicalDigitalESDLiteratureMap
@@ -287,4 +256,4 @@ canonicalMethodologyBoundary : MethodologyBoundary
 canonicalMethodologyBoundary = methodology-boundary true refl true refl true refl true refl true refl true refl false refl false refl false refl false refl false refl
 
 methodologyReading : String
-methodologyReading = "This manuscript is an integrative conceptual review with a transparent structured search, not a systematic review and not an empirical intervention study. Search execution, eligibility, extraction and synthesis remain distinct receipts. Sources are extracted with role, population/context, time horizon, lifecycle/governance coordinates and explicit limitations. Adopted ministerial statements remain distinct from consultation discussion papers. The reciprocal synthesis asks both how digital education can build ESD capacity and how sustainability should constrain digital education itself."
+methodologyReading = "This manuscript is an integrative conceptual review with a transparent structured search, not a systematic review and not an empirical intervention study. Search execution, eligibility, extraction and synthesis remain distinct receipts. Sources are extracted with role, population/context, time horizon, lifecycle/governance coordinates and explicit limitations. Adopted ministerial statements remain distinct from consultation discussion papers and commissioned background papers. The reciprocal synthesis asks both how digital education can build ESD capacity and how sustainability should constrain digital education itself."
