@@ -16,7 +16,8 @@ import DASHI.Education.DigitalESDStructuredSearchExact as Search
 --
 -- A translated query is not an execution. An execution attempt may itself stop
 -- before submission. Blocked-before-submission states therefore carry neither
--- result counts nor exports by construction.
+-- result counts nor exports by construction. querySubmitted remains an ordinary
+-- receipt coordinate so future successful executions may set it to true.
 ------------------------------------------------------------------------
 
 data ExportState : Set where
@@ -38,7 +39,6 @@ record DatabaseExecutionReceipt : Set where
     executionAttempted : Bool
     executionAttemptedIsTrue : executionAttempted ≡ true
     querySubmitted : Bool
-    querySubmittedIsFalse : querySubmitted ≡ false
     attemptTimestamp : String
     platformEntrypoint : String
     outcome : ExecutionOutcome
@@ -78,7 +78,7 @@ scopusBlockedExecution q = database-execution-receipt
   q
   Search.scopus
   true refl
-  false refl
+  false
   attemptTimestamp20260916
   scopusEntrypoint
   scopusBlockedOutcome
@@ -90,7 +90,7 @@ wosBlockedExecution q = database-execution-receipt
   q
   Search.webOfScience
   true refl
-  false refl
+  false
   attemptTimestamp20260916
   wosCoreEntrypoint
   wosBlockedOutcome
@@ -203,6 +203,9 @@ record DatabaseExecutionBoundary : Set where
     blockedExecutionCarriesNoResultCountOrExport : Bool
     blockedExecutionCarriesNoResultCountOrExportIsTrue :
       blockedExecutionCarriesNoResultCountOrExport ≡ true
+    successfulExecutionMayRecordSubmittedQuery : Bool
+    successfulExecutionMayRecordSubmittedQueryIsTrue :
+      successfulExecutionMayRecordSubmittedQuery ≡ true
     executionAttemptCreatesIncludedCorpus : Bool
     executionAttemptCreatesIncludedCorpusIsFalse :
       executionAttemptCreatesIncludedCorpus ≡ false
@@ -216,8 +219,9 @@ canonicalDatabaseExecutionBoundary = database-execution-boundary
   true refl
   true refl
   true refl
+  true refl
   false refl
 
 executionReceiptReading : String
 executionReceiptReading =
-  "All fourteen frozen Scopus/Web-of-Science translations received explicit execution-attempt receipts on 2026-09-16. Both live database entrypoints returned HTTP 403 before query submission in the available web execution environment. The blocked outcome constructors cannot carry result counts or exports, so access failure cannot be mistaken for zero results. A future authenticated/institutional execution must create new executedWithObservedResultSet receipts retaining the exact translated query, count, result-set identity/export state and execution evidence."
+  "All fourteen frozen Scopus/Web-of-Science translations received explicit execution-attempt receipts on 2026-09-16. Both live database entrypoints returned HTTP 403 before query submission in the available web execution environment. The blocked outcome constructors cannot carry result counts or exports, so access failure cannot be mistaken for zero results. querySubmitted is a retained coordinate rather than globally forced false, allowing a future authenticated execution to record true together with executedWithObservedResultSet, exact translated query, count, result-set identity/export state and execution evidence."
