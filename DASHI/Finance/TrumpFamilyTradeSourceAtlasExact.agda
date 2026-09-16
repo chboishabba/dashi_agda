@@ -11,9 +11,9 @@ import DASHI.Core.SourceConditionedObservationExact as Source
 ------------------------------------------------------------------------
 -- TRUMP-FAMILY TRADE / MARKET-INTEREST SOURCE ATLAS
 --
--- Claim-level documentary layer only.  Transaction/ownership records, company
+-- Claim-level documentary layer only. Transaction/ownership records, company
 -- product disclosures, annual financial disclosure and attributed regulatory
--- concerns remain separate.  None of these source edges by itself proves
+-- concerns remain separate. None of these source edges by itself proves
 -- insider trading, corruption, motive, illegality, material nonpublic
 -- information, policy causation or a profitable trade.
 ------------------------------------------------------------------------
@@ -37,6 +37,8 @@ data TradeClaimKind : Set where
   restrictedStockClaim : TradeClaimKind
   warrantExerciseClaim : TradeClaimKind
   financialDisclosureClaim : TradeClaimKind
+  trustOwnershipClaim : TradeClaimKind
+  filingComplianceClaim : TradeClaimKind
   marketDataProductClaim : TradeClaimKind
   informationLatencyClaim : TradeClaimKind
   regulatoryConcernClaim : TradeClaimKind
@@ -84,7 +86,7 @@ ogeArtifact =
   Source.sourceArtifact
     "Trump-2026-certified-annual-financial-disclosure"
     Source.documentaryArtifact
-    "https://www2.oge.gov/web/oge.nsf/Resources/Now%2BAvailable%3A%2BThe%2BPresident%E2%80%99s%2Band%2BVice%2BPresident%E2%80%99s%2Bcertified%2Bannual%2Bfinancial%2Bdisclosure%2Breports"
+    "https://oge.box.com/shared/static/zycb5i2ny8kssm51uzqm8ygyq2zkpkqq.pdf"
     "U.S. Office of Government Ethics"
 
 ------------------------------------------------------------------------
@@ -99,7 +101,7 @@ donJrTMTGRSU = tradeEvidenceClaim
   restrictedStockClaim
   "2026-06-19"
   "2026-06-23"
-  "SEC Form 4 reports acquisition of 23,600 restricted stock units/shares at reported price $0; reporting person is identified as director and 10% owner. The form separately reports 114,750,000 shares held indirectly through the Donald J. Trump Revocable Trust."
+  "SEC Form 4 reports acquisition of 23,600 restricted stock units at reported price $0; reporting person is identified as director and 10% owner. The form separately reports 114,750,000 shares held indirectly through the Donald J. Trump Revocable Trust."
   directDocumentarySupport
   (sourceCitation
     "U.S. Securities and Exchange Commission"
@@ -110,7 +112,7 @@ donJrTMTGRSU = tradeEvidenceClaim
     beneficialOwnershipChange)
   (secArtifact "0001437749-26-021434"
     "https://www.sec.gov/Archives/edgar/data/1849635/000143774926021434/xslF345X06/rdgdoc.xml")
-  "Supports the reported ownership transaction and relationship-to-issuer fields only."
+  "Supports the reported RSU acquisition, ownership counts, trust relation and relationship-to-issuer fields only."
   true false false false
 
 donJrPSQHRSU : TradeEvidenceClaim
@@ -157,26 +159,48 @@ donJrGrabAGunVesting = tradeEvidenceClaim
   "Supports the reported vesting/conversion and beneficial-ownership count only."
   true false false false
 
-ericDominariWarrantExercise : TradeEvidenceClaim
-ericDominariWarrantExercise = tradeEvidenceClaim
+donJrDominariWarrantExercise : TradeEvidenceClaim
+donJrDominariWarrantExercise = tradeEvidenceClaim
   "DOMH-2026-05-22-warrant-exercise"
-  "Eric Trump"
+  "Donald J. Trump Jr."
   "Dominari Holdings Inc."
   warrantExerciseClaim
   "2026-05-22"
   "2026-06-01"
-  "SEC Schedule 13G reports exercise of 216,138 Series B warrants into common stock on May 22, 2026 and reported beneficial ownership of 1,182,276 shares, approximately 5.23% of the class as calculated in the filing."
+  "SEC Schedule 13G reports Donald J. Trump Jr. acquired 216,138 shares upon exercise of 216,138 Series B warrants on May 22, 2026 and reports 1,182,276 shares beneficially owned, approximately 5.23% of the class under the filing's denominator."
   directDocumentarySupport
   (sourceCitation
     "U.S. Securities and Exchange Commission"
-    "Schedule 13G — Eric Trump / Dominari Holdings Inc., accession 0001213900-26-063163"
+    "Schedule 13G — Donald J. Trump Jr. / Dominari Holdings Inc., accession 0001213900-26-063164"
     "2026-06-01"
     "no DOI"
-    "https://www.sec.gov/Archives/edgar/data/12239/000121390026063163/xslSCHEDULE_13G_X02/primary_doc.xml"
+    "https://www.sec.gov/Archives/edgar/data/12239/000121390026063164/xslSCHEDULE_13G_X02/primary_doc.xml"
     ownershipSchedule)
-  (secArtifact "0001213900-26-063163"
-    "https://www.sec.gov/Archives/edgar/data/12239/000121390026063163/xslSCHEDULE_13G_X02/primary_doc.xml")
-  "Supports the warrant exercise and beneficial-ownership quantities reported in the Schedule 13G only."
+  (secArtifact "0001213900-26-063164"
+    "https://www.sec.gov/Archives/edgar/data/12239/000121390026063164/xslSCHEDULE_13G_X02/primary_doc.xml")
+  "Supports the named reporting person, warrant exercise and beneficial-ownership quantities in the Schedule 13G only."
+  true false false false
+
+ericAmericanBitcoinOwnership : TradeEvidenceClaim
+ericAmericanBitcoinOwnership = tradeEvidenceClaim
+  "ABTC-2026-proxy-Eric-Trump-ownership"
+  "Eric Trump"
+  "American Bitcoin Corp. (ABTC)"
+  ownershipClaim
+  "2026-04-10 ownership snapshot"
+  "2026-04-24"
+  "American Bitcoin Corp.'s 2026 proxy statement reports Eric Trump with 68,147,664 Class B shares, corresponding to 9.3% beneficial ownership/voting power under the proxy's stated calculation; this is an ownership snapshot, not a transaction inference."
+  directDocumentarySupport
+  (sourceCitation
+    "American Bitcoin Corp.; filed with U.S. Securities and Exchange Commission"
+    "DEF 14A — 2026 proxy statement, beneficial ownership table"
+    "2026-04-24"
+    "no DOI"
+    "https://www.sec.gov/Archives/edgar/data/1755953/000119312526178754/abtc-20260424.htm"
+    ownershipSchedule)
+  (secArtifact "ABTC-2026-DEF14A"
+    "https://www.sec.gov/Archives/edgar/data/1755953/000119312526178754/abtc-20260424.htm")
+  "Supports the issuer-reported beneficial-ownership snapshot only; does not establish acquisition timing, profit, policy influence or nonpublic-information use."
   true false false false
 
 trump2026AnnualDisclosure : TradeEvidenceClaim
@@ -187,17 +211,59 @@ trump2026AnnualDisclosure = tradeEvidenceClaim
   financialDisclosureClaim
   "2025 reporting period"
   "2026-06-30"
-  "The U.S. Office of Government Ethics states that President Trump's certified annual financial disclosure report was made available on June 30, 2026."
+  "The U.S. Office of Government Ethics made President Trump's certified annual financial disclosure report available on June 30, 2026."
   directDocumentarySupport
   (sourceCitation
     "U.S. Office of Government Ethics"
-    "Now Available: The President's and Vice President's certified annual financial disclosure reports"
+    "President Donald J. Trump — Executive Branch Personnel Public Financial Disclosure Report (OGE Form 278e), annual report for 2025"
     "2026-06-30"
     "no DOI"
-    "https://www2.oge.gov/web/oge.nsf/Resources/Now%2BAvailable%3A%2BThe%2BPresident%E2%80%99s%2Band%2BVice%2BPresident%E2%80%99s%2Bcertified%2Bannual%2Bfinancial%2Bdisclosure%2Breports"
+    "https://oge.box.com/shared/static/zycb5i2ny8kssm51uzqm8ygyq2zkpkqq.pdf"
     annualFinancialDisclosure)
   ogeArtifact
-  "Supports existence/certification/availability of the annual disclosure; individual asset or income claims require page-level payment from the report."
+  "Supports existence/certification/availability of the annual disclosure; component claims are paid separately below."
+  true false false false
+
+trumpTMTGTrustDisclosure : TradeEvidenceClaim
+trumpTMTGTrustDisclosure = tradeEvidenceClaim
+  "Trump-2026-OGE-TMTG-trust"
+  "Donald J. Trump"
+  "Trump Media & Technology Group Corp. / Donald J. Trump Revocable Trust"
+  trustOwnershipClaim
+  "2024-12-17 transfer described in 2026 annual report"
+  "2026-06-30"
+  "Donald Trump's certified annual financial disclosure states that on December 17, 2024 he transferred all 114,750,000 TMTG shares to the Donald J. Trump Revocable Trust, of which he is presently sole beneficiary, and states that the transfer did not involve a purchase or sale."
+  directDocumentarySupport
+  (sourceCitation
+    "Donald J. Trump; certified by U.S. Office of Government Ethics"
+    "Executive Branch Personnel Public Financial Disclosure Report (OGE Form 278e), Part 3, TMTG arrangement"
+    "2026-06-30"
+    "no DOI"
+    "https://oge.box.com/shared/static/zycb5i2ny8kssm51uzqm8ygyq2zkpkqq.pdf"
+    annualFinancialDisclosure)
+  ogeArtifact
+  "Supports the filer-declared trust transfer, beneficiary status and no-purchase/no-sale characterization in Part 3 of the certified disclosure."
+  true false false false
+
+trumpLateTransactionReportingFees : TradeEvidenceClaim
+trumpLateTransactionReportingFees = tradeEvidenceClaim
+  "Trump-2026-OGE-late-278T-fees"
+  "Donald J. Trump"
+  "OGE periodic transaction reporting"
+  filingComplianceClaim
+  "transactions preceding annual filing"
+  "2026-06-30"
+  "The reviewing-official comments on the certified 2026 annual disclosure state that the filer paid late filing fees related to transactions not previously reported on OGE Form 278-Ts."
+  directDocumentarySupport
+  (sourceCitation
+    "U.S. Office of Government Ethics / reviewing official comment"
+    "Executive Branch Personnel Public Financial Disclosure Report (OGE Form 278e), filer-information page"
+    "2026-06-30"
+    "no DOI"
+    "https://oge.box.com/shared/static/zycb5i2ny8kssm51uzqm8ygyq2zkpkqq.pdf"
+    annualFinancialDisclosure)
+  ogeArtifact
+  "Supports only the reviewing-official statement that late filing fees were paid for transactions not previously reported on 278-Ts; it does not by itself establish motive, concealment or any separate criminal/civil violation."
   true false false false
 
 truthAPIPrimary : TradeEvidenceClaim
@@ -255,7 +321,7 @@ trumpCryptoToTraditionalAssetsReuters = tradeEvidenceClaim
   financialDisclosureClaim
   "2025 reporting period"
   "2026-07-13"
-  "Reuters reports, based on the 2026 financial disclosures, that Trump invested substantial crypto-related gains into stocks and bonds while retaining crypto-related holdings. This is retained as an independent secondary synthesis pending page-level extraction of each underlying disclosure item."
+  "Reuters reports, based on the 2026 financial disclosures, that Trump invested substantial crypto-related gains into stocks and bonds while retaining crypto-related holdings. This is retained as an independent secondary synthesis; exact component amounts require individual line-item binding to the disclosure."
   independentSynthesisSupport
   (sourceCitation
     "Reuters"
@@ -269,7 +335,7 @@ trumpCryptoToTraditionalAssetsReuters = tradeEvidenceClaim
     Source.derivedArtifact
     "https://www.reuters.com/legal/government/trump-invested-crypto-gains-stocks-bonds-filings-show-2026-07-13/"
     "Reuters")
-  "Independent synthesis of filed disclosures; exact component amounts remain source-debt until bound to the underlying annual-disclosure pages."
+  "Independent synthesis of filed disclosures; exact component amounts remain source-debt until bound to the underlying annual-disclosure lines/pages."
   false true false false
 
 ------------------------------------------------------------------------
@@ -282,6 +348,7 @@ data TimingAlignmentAutomaticallyProvesCausation : Set where
 data RegulatoryConcernAutomaticallyProvesViolation : Set where
 data PaidLowLatencyPublicDataAutomaticallyMeansMNPI : Set where
 data FinancialInterestAutomaticallyAuthorisesTrade : Set where
+data LateFeeAutomaticallyMeansConcealment : Set where
 
 filingDoesNotProveInsiderTrading : FilingAutomaticallyProvesInsiderTrading → ⊥
 filingDoesNotProveInsiderTrading ()
@@ -301,6 +368,9 @@ lowLatencyPublicDataDoesNotBecomeMNPI ()
 financialInterestDoesNotAuthoriseTrade : FinancialInterestAutomaticallyAuthorisesTrade → ⊥
 financialInterestDoesNotAuthoriseTrade ()
 
+lateFeeDoesNotProveConcealment : LateFeeAutomaticallyMeansConcealment → ⊥
+lateFeeDoesNotProveConcealment ()
+
 record TrumpFamilyTradeSourceBoundary : Set where
   constructor trump-family-trade-source-boundary
   field
@@ -311,8 +381,9 @@ record TrumpFamilyTradeSourceBoundary : Set where
     familyRelationDoesNotTransportKnowledge : Bool
     timingDoesNotProveCausation : Bool
     lowLatencyPublicDataDoesNotAutomaticallyMeanMNPI : Bool
-    annualDisclosureNeedsPageLevelPaymentForComponentClaims : Bool
+    annualDisclosureComponentClaimsRequirePageLevelPayment : Bool
+    lateFilingFeeDoesNotAutomaticallyMeanConcealment : Bool
 
 canonicalTrumpFamilyTradeSourceBoundary : TrumpFamilyTradeSourceBoundary
 canonicalTrumpFamilyTradeSourceBoundary =
-  trump-family-trade-source-boundary true true true true true true true true
+  trump-family-trade-source-boundary true true true true true true true true true
