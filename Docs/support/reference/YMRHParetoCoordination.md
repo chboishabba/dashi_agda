@@ -28,7 +28,7 @@ Current specialist:
 
 ```text
 #967  open/draft — source-native CMP116 decay + one-sided selected geometry
-current source-written frontier: R387–R396
+current source-written frontier: R387–R397
 ```
 
 ## 1. YM current route — #967
@@ -52,8 +52,8 @@ The live source/application chain is:
 ```text
 published CMP116 differentiated localization             [source-owned]
  -> literal selected-trajectory application              [R342]
- -> selected source-envelope / shell attachment          [physical same-object]
- -> source-native geometric majorant A_fast * q_fast^d  [quantitative calibration]
+ -> selected source-envelope <= selected shell           [physical one-sided attachment]
+ -> source-native shell <= A_fast * q_fast^d             [quantitative calibration]
  -> one-sided selected distance geometry                 [R392 / time<=distance]
  -> source-rate -> reconstructed spectral semantics      [physical]
  -> existing finite->continuum + subgap compilers.
@@ -84,19 +84,39 @@ q >= 0
 
 with **no `q <= 1/2` field**. The old dyadic object remains an optional producer and compiles into R395.
 
-### R396: selected envelope attachment
+### R396: equality-based selected attachment is sufficient but stronger than needed
 
-R396 proves that once
+R396 proves that
 
 ```text
 selected sourceEnvelope = source-native shell
 ```
 
-on the same source distance, R395 supplies the pointwise `sourceEnvelope <= A*q^d` theorem mechanically. Together with `time <= sourceDistance`, this builds R394 and then R389.
+plus R395 and `time <= sourceDistance` is sufficient to build R394 and then R389.
 
-Therefore the pointwise geometric estimate is no longer an independent selected leaf.
+This remains a valid stronger producer, but it is no longer the least-privilege selected application after R397.
 
-### Current YM payments after R396
+### R397: prune selected source-envelope = shell equality
+
+R397 weakens the selected attachment to the orientation the downstream consumer actually observes:
+
+```text
+selected sourceEnvelope <= source-native shell
+source-native shell <= A_fast * q_fast^d
+time <= sourceDistance
+```
+
+and compiles those three inputs directly into R394.
+
+This is a strict Pareto improvement in interface strength: a same-object equality is no longer mandatory. The older R334/R339 CMP116 application family is an important buried donor because it already exposes the source-facing orientation
+
+```text
+sourceEnvelope <= selected rooted shell
+```
+
+rather than equality. R397 therefore aligns the current consumer with the older source theorem shape instead of strengthening the source application to match a later representation.
+
+### Current YM payments after R397
 
 ```text
 YM-P0  actual proof-bearing CMP116 source theorem / R342 literal selected trajectory
@@ -104,9 +124,9 @@ YM-P0  actual proof-bearing CMP116 source theorem / R342 literal selected trajec
        The generic differentiated localization theorem itself is source-owned.
 
 YM-P1  source-native geometric-majorant realization:
-       selected sourceEnvelope = selected shell
-       + source-native A_fast,q_fast majorant.
-       Fixed q=1/2 is not required.
+       selected sourceEnvelope <= selected shell
+       + source-native shell <= A_fast * q_fast^d.
+       Equality and fixed q=1/2 are not required.
 
 YM-P2  one-sided selected support geometry:
        d_R284(selected pair) <= d_R318(selected pair),
@@ -157,7 +177,7 @@ The 8889 lower-envelope lane is optional until theorem-bearing same-carrier tran
 
 | Priority | Work |
 |---|---|
-| 1 | **#967 YM: selected source-envelope/shell attachment + source-native rate realization + one-sided geometry + spectral-rate semantics** |
+| 1 | **#967 YM: one-sided source-envelope<=shell attachment + source-native rate realization + one-sided geometry + spectral-rate semantics** |
 | 2 | **RH-R2 direct strict literal complement** |
 | 3 | RH-R1 only on new theorem-bearing same-object evidence |
 | 4 | #949 CMP119/BC1 retained source foundation |
@@ -168,6 +188,7 @@ The 8889 lower-envelope lane is optional until theorem-bearing same-carrier tran
 Unless a current consumer proves otherwise, do not spend cycles on:
 
 - re-proving CMP116 differentiated localization;
+- selected `sourceEnvelope = shell` equality when the one-sided upper is sufficient;
 - fixed `q_fast = 1/2` as a primitive requirement;
 - dyadic normalization as mandatory architecture;
 - exact `sourceDistance = physicalDistance = time` welds;
@@ -215,7 +236,7 @@ Agda/kernel receipt observed?
 cross-prover proof transported?
 ```
 
-R387–R396 are source-written on #967. At the latest check there were no PR-triggered Actions runs; CodeRabbit success alone is not an Agda/kernel receipt.
+R387–R397 are source-written on #967. R397 has a focused validation surface, but no exact-head Agda/kernel receipt is claimed until an actual run is observed. CodeRabbit success alone is not an Agda/kernel receipt.
 
 ## 7. Update log — 2026-09-16
 
@@ -224,5 +245,6 @@ R387–R396 are source-written on #967. At the latest check there were no PR-tri
 - R393 recuts localization as upstream source authority plus selected application debt.
 - R394 compiles R342 literal localization + source-native envelope/geometry into R389.
 - R395 removes `q<=1/2` from the primitive geometric-majorant ABI while retaining the dyadic carrier as an optional producer.
-- R396 reduces selected pointwise geometric calibration to source-envelope↔shell attachment plus one-sided geometry.
+- R396 shows equality-based selected envelope attachment is sufficient.
+- R397 weakens that equality to the one-sided `sourceEnvelope <= shell` attachment actually observed by R394; R334/R339 are identified as buried donors for this orientation.
 - RH remains at the R1 stop condition followed by direct R2.
