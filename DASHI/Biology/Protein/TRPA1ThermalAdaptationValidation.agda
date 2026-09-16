@@ -10,3 +10,39 @@ import DASHI.Biology.Protein.ProteinFunctionProjection
 import DASHI.Biology.Protein.AlliumThiolProteinInteractionExact
 import DASHI.Biology.Protein.TRPA1SingleResidueThermalAdaptationExact
 import DASHI.Biology.Protein.TRPA1SingleResidueThermalAdaptationRegression
+
+-- Repository-native source attribution continuation: DOI/PMID/PMCID/canonical
+-- Science link are stable provenance coordinates around the already-formalised
+-- Feng biology.  Exact article QID remains explicitly unresolved.
+import DASHI.Biology.Protein.TRPA1SourceAttributionEnvelopeExact
+import DASHI.Biology.Protein.TRPA1SourceAttributionEnvelopeValidation
+
+-- Source-bounded acquisition continuation: cross-pollinates only the reusable
+-- information architecture from the AdK calibration tranche.  Feng et al.'s
+-- residue/gating biology and Li-Liu-Ji's numeric dynamics remain source-local;
+-- neither source gains authorship or authority over the other's propositions.
+import DASHI.Biology.Protein.TRPA1AdKSourceBoundedAcquisitionCrossPollinationExact
+import DASHI.Biology.Protein.TRPA1AdKSourceBoundedAcquisitionCrossPollinationValidation
+
+-- Parent-level situated-protein abstraction: TRPA1 and AdK now instantiate the
+-- same query-indexed witness interface while retaining residue-state versus
+-- conformation/context fibres.  External identifiers remain provenance only;
+-- generic factorisation/refinement structure is DASHI synthesis.
+import DASHI.Biology.Protein.ProteinSituatedHyperfabricExact
+import DASHI.Biology.Protein.TRPA1SituatedProteinWitnessExact
+import DASHI.Biology.Protein.AdenylateKinaseSituatedProteinWitnessExact
+import DASHI.Biology.Protein.ProteinSituatedHyperfabricValidation
+
+-- Parent-level temporal continuation: existing translation, conformation,
+-- protein-function, cell-state and open-metabolism owners are composed through
+-- explicit obligations.  No empirical paper is credited with the generic
+-- composition theorem, and identity metadata cannot pay any temporal leg.
+import DASHI.Biology.Protein.ProteinTemporalObligationChainExact
+import DASHI.Biology.Protein.ProteinTemporalObligationChainValidation
+
+-- Source-bounded payment profiles: Feng pays a residue/thermal-readout slice;
+-- the AdK structural lane pays a sequence/context/conformation slice.  Neither
+-- profile totalises translation, metabolism, complete function, or history, and
+-- payments do not transfer between protein lanes.
+import DASHI.Biology.Protein.ProteinTemporalObligationProfilesExact
+import DASHI.Biology.Protein.ProteinTemporalObligationProfilesValidation
