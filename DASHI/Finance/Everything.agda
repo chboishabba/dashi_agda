@@ -8,6 +8,42 @@ import DASHI.Finance.UniverseLeakageResidualDependencyExact
 import DASHI.Finance.DashiTradeFibreBridgeExact
 import DASHI.Finance.TradeRealizationSharpeAuthorityExact
 
+-- Source-bounded political/family financial-interest and market-information
+-- tranche. Documentary ownership/timing/counterparty edges remain separate
+-- from PNF, game-theoretic interpretation and dashiTRADE execution authority.
+import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact
+import DASHI.Finance.TrumpFamilyTradePrimarySourceExtensionExact
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Exact
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Exact
+import DASHI.Finance.OGE278TReportingSemanticsExact
+import DASHI.Finance.TrumpPresident278TTechnologyBasketExact
+import DASHI.Finance.TrumpTradePointInTimeInformationExact
+import DASHI.Finance.TrumpTMTGTrustControlPrimaryExact
+import DASHI.Finance.TrumpPortfolioManagementAttributionExact
+import DASHI.Finance.TrumpTradeOversightAcquisitionExact
+import DASHI.Finance.TrumpFamilyExternalCounterpartyEvidenceExact
+import DASHI.Finance.TrumpFamilyExternalCounterpartyPrimaryExact
+import DASHI.Finance.TruthAPIExecutiveStatementExact
+import DASHI.Finance.TruthAPIIndependentCorroborationExact
+import DASHI.Finance.TruthAPILitigationAllegationExact
+import DASHI.Finance.TruthAPISourceRoleTriangulationExact
+import DASHI.Finance.TrumpTradeFundingSourceConsumerCollisionExact
+import DASHI.Finance.TrumpFamilyTradePNFBridgeExact
+import DASHI.Finance.TrumpFamilyTradeGameTheoryBridgeExact
+import DASHI.Finance.TrumpFamilyTradeAcquisitionFrontierExact
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressExact
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressRound3Exact
+import DASHI.Finance.TrumpFamilyTradeSourceQualityExact
+import DASHI.Finance.TrumpFamilyTradeSourceQualityRound3Exact
+import DASHI.Finance.TrumpFamilyTradeSourceStackExact
+import DASHI.Finance.TrumpFamilyTradeEvidenceValidation
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Validation
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Validation
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound4Validation
+import DASHI.Finance.TrumpFamilyTradeIndependentCorroborationValidation
+import DASHI.Finance.TrumpPortfolioManagementAttributionValidation
+import DASHI.Finance.TrumpFamilyTradeSourceQualityValidation
+
 -- Canonical trading-control semantics. Earlier BAN/action experiments remain
 -- in the branch as historical development artifacts but are deliberately not
 -- imported by this aggregate.
