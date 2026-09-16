@@ -31,9 +31,11 @@ participantTransferRequiresAuthorityRegression = refl
 
 admissionRequiresBothReceiptsRegression :
   (context : Learning.ContextGeneralisationReceipt) →
-  (authority : Transfer.ParticipantAuthorityReceipt) →
+  (authority :
+    Transfer.ParticipantAuthorityReceipt (Learning.targetContext context)) →
   Transfer.ParticipantGovernanceContextTransferAdmission
-admissionRequiresBothReceiptsRegression = Transfer.admitParticipantGovernanceContextTransfer
+admissionRequiresBothReceiptsRegression =
+  Transfer.admitParticipantGovernanceContextTransfer
 
 literatureCannotCreateAuthorityRegression :
   Transfer.LiteratureCreatesParticipantAuthority → ⊥
@@ -55,6 +57,21 @@ aliceCorpusCannotCreateLocalAuthorityRegression :
 aliceCorpusCannotCreateLocalAuthorityRegression =
   Transfer.aliceCorpusDoesNotCreateLocalParticipantAuthority
 
+contextSimilarityCannotCreateTransferRegression :
+  Transfer.ContextSimilarityCreatesGeneralisationReceipt → ⊥
+contextSimilarityCannotCreateTransferRegression =
+  Transfer.contextSimilarityDoesNotCreateGeneralisationReceipt
+
+contextReceiptCannotSkipAuthorityRegression :
+  Transfer.PaidContextReceiptSkipsAuthorityReceipt → ⊥
+contextReceiptCannotSkipAuthorityRegression =
+  Transfer.paidContextReceiptDoesNotSkipAuthorityReceipt
+
+authorityReceiptCannotSkipContextRegression :
+  Transfer.PaidAuthorityReceiptSkipsContextReceipt → ⊥
+authorityReceiptCannotSkipContextRegression =
+  Transfer.paidAuthorityReceiptDoesNotSkipContextReceipt
+
 contextGeneralisationRemainsNonAutomaticRegression :
   (context : Learning.ContextGeneralisationReceipt) →
   Learning.generalisationIsAutomatic context ≡ false
@@ -72,6 +89,24 @@ transferBoundaryForbidsSkippedDependencyRegression :
     Transfer.canonicalParticipantGovernanceContextTransferBoundary
   ≡ false
 transferBoundaryForbidsSkippedDependencyRegression = refl
+
+transferBoundaryContextAloneNotEnoughRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.contextReceiptAlonePaysParticipantAuthority
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ false
+transferBoundaryContextAloneNotEnoughRegression = refl
+
+transferBoundaryAuthorityAloneNotEnoughRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.participantAuthorityReceiptAlonePaysContextTransfer
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ false
+transferBoundaryAuthorityAloneNotEnoughRegression = refl
+
+transferBoundaryCurrentReviewDoesNotInventStudyRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.currentConceptualReviewAutomaticallyRequiresLocalAuthorityStudy
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ false
+transferBoundaryCurrentReviewDoesNotInventStudyRegression = refl
 
 transferBoundaryLabelsDASHISynthesisRegression :
   Transfer.ParticipantGovernanceContextTransferBoundary.transferRuleIsAliceEmpiricalFinding
