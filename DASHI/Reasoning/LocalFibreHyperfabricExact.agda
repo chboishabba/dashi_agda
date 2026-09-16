@@ -13,6 +13,7 @@ import DASHI.Reasoning.RelationalBranchCobordismGeometry as Pants
 import DASHI.Topology.WormSoilPantsSheafBoundary as WormPants
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact as ReductionBridge
 import DASHI.Reasoning.TypedHyperfabricConsumerReductionBridgeExact as SectionReduction
+import DASHI.Reasoning.TypedHyperfabricLocalRefinementBridgeExact as LocalRefinement
 import DASHI.Reasoning.MaleCNSTypedHyperfabricChartProjectionExact as MaleCNSChart
 import DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact as Braid
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
@@ -56,14 +57,14 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Reasoning.TypedHyperfabricCore.vertexStalk / edgeStalk"
   "DASHI.Reasoning.TypedHyperfabricCore.restrict"
   "DASHI.Reasoning.TypedHyperfabricCore.GlobalSection.compatible"
-  "DASHI.Topology.TetrationalGateField.TransitionKind (local requested transition)"
+  "DASHI.Reasoning.TypedHyperfabricLocalRefinementBridgeExact.LocalStalkRefinement"
   "DASHI.Topology.ClopenNDimFibreBoundary.ClopenBallDescriptor / FiniteFibreAt"
   "DASHI.Topology.TetrationalGateField.TowerTransition"
   "DASHI.Reasoning.RelationalBranchCobordismGeometry.InterfaceMatch / composeAt"
   "DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. MaleCNSTypedHyperfabricChartProjectionExact supplies that selected chart-code carrier and now also records the executed lossless chart/hyperfabric and sender-gain projection receipts. At the 26-region quotient all 676 ordered pairs have nonzero direct coupling, but the coarse complete support is still not identified with the raw neuron/synapse physical hypergraph."
+  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; TypedHyperfabricLocalRefinementBridgeExact now pays the generic refineWithinChart relation between compatible sections at a declared stalk without promoting it to a fibre-dimension or tower transition. A declared Set-sized selected-section code realizes into GlobalSections before consumer reduction. MaleCNSTypedHyperfabricChartProjectionExact supplies that selected chart-code carrier and records the executed lossless chart/hyperfabric and sender-gain projection receipts. At the 26-region quotient all 676 ordered pairs have nonzero direct coupling, but the coarse complete support is still not identified with the raw neuron/synapse physical hypergraph."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -85,6 +86,21 @@ refinementAndTowerAreDistinctTransitions ()
 fibreDimensionAndTowerAreDistinctTransitions :
   Gate.increaseFibreDimension ≡ Gate.openTowerLevel → ⊥
 fibreDimensionAndTowerAreDistinctTransitions ()
+
+localRefinementLivesOnTypedHyperfabricSections :
+  LocalRefinement.refinementActsOnDeclaredVertexStalkValues
+    LocalRefinement.canonicalTypedHyperfabricLocalRefinementBoundary ≡ true
+localRefinementLivesOnTypedHyperfabricSections = refl
+
+localRefinementDoesNotOpenTower :
+  LocalRefinement.refinementImpliesOpenTowerLevel
+    LocalRefinement.canonicalTypedHyperfabricLocalRefinementBoundary ≡ false
+localRefinementDoesNotOpenTower = refl
+
+localRefinementDoesNotLiftFibreDimension :
+  LocalRefinement.refinementImpliesIncreaseFibreDimension
+    LocalRefinement.canonicalTypedHyperfabricLocalRefinementBoundary ≡ false
+localRefinementDoesNotLiftFibreDimension = refl
 
 pantsOutputMultiplicityIsLocal : Pants.outputCount Pants.composedOneToThree ≡ 3
 pantsOutputMultiplicityIsLocal = Pants.composedOutputCountIsThree
@@ -242,12 +258,12 @@ open LocalFibreMissingFields public
 
 currentLocalFibreMissingFields : LocalFibreMissingFields
 currentLocalFibreMissingFields = local-fibre-missing-fields
-  false
-  false
-  false
   true
-  true
+  false
   false
   true
   true
-  "TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact pays projection from compatible GlobalSections, the Set-sized complete ordered-pair chart code, and the executed lossless runtime projection receipts. The 26-region direct support is empirically complete (676/676), but the raw neuron/synapse physical incidence instance remains unpaid. Remaining generic work is NDim refinement, pants seams, braid transport, and source-bound raw physical incidence distinct from the coarse observational chart."
+  false
+  true
+  true
+  "TypedHyperfabricLocalRefinementBridgeExact now pays the generic refineWithinChart relation on declared TypedHyperfabric stalk values between compatible GlobalSections, without promoting refinement to fibre-dimension increase, tower recursion, or an exclusive-single-stalk theorem. TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam. MaleCNSTypedHyperfabricChartProjectionExact pays the selected chart carrier and executed lossless runtime projection receipts. Remaining generic work is pants seam lifting and braid transport; source-bound raw MaleCNS neuron/synapse physical incidence also remains distinct and unpaid."
