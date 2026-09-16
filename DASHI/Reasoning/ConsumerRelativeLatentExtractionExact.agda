@@ -139,9 +139,9 @@ record LatentExtractionFrontier : Set where
     latentDecoderMayBeConsumerSpecificIsTrue :
       latentDecoderMayBeConsumerSpecific ≡ true
 
-    postprocessingA lossyObservationRecoversErasedLatent : Bool
-    postprocessingA lossyObservationRecoversErasedLatentIsFalse :
-      postprocessingA lossyObservationRecoversErasedLatent ≡ false
+    postprocessingALossyObservationRecoversErasedLatent : Bool
+    postprocessingALossyObservationRecoversErasedLatentIsFalse :
+      postprocessingALossyObservationRecoversErasedLatent ≡ false
 
     consumerMinimalCodeIdentifiesPhysicalLatentDimension : Bool
     consumerMinimalCodeIdentifiesPhysicalLatentDimensionIsFalse :
