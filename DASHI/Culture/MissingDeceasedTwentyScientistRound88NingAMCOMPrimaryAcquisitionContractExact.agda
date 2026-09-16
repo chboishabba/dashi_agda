@@ -35,7 +35,7 @@ canonicalAMCOMRoute = primaryAcquisitionRoute
   "Gravito - Electro Magnetic Superconductivity Experiment"
   "US Army Aviation and Missile Command (AMCOM), AMSAM-AC-RD-BA"
   "AMCOM CIO/G6 FOIA Office, Redstone Arsenal"
-  "AMCOM official FOIA page"
+  "https://www.amcom.army.mil/FOIA/"
   "agreement instrument; statement of work and attachments; modifications; obligation/disbursement/payment records; administrative closeout; final technical/result records"
   true
 
