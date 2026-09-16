@@ -73,3 +73,50 @@ unexecutedDatabaseDoesNotCreateReceiptRegression :
   Search.PlannedDatabaseCreatesExecutionReceipt → ⊥
 unexecutedDatabaseDoesNotCreateReceiptRegression =
   Search.plannedDatabaseDoesNotCreateExecutionReceipt
+
+------------------------------------------------------------------------
+-- RED surface for executable transparent-search closure.
+------------------------------------------------------------------------
+
+closureRequiresExecutedDatabasesRegression :
+  Search.DatabaseExecutionReceipt Search.scopus →
+  Search.DatabaseExecutionReceipt Search.webOfScience →
+  Search.DatabaseExecutionReceipt Search.eric →
+  Search.DatabaseExecutionReceipt Search.acmDigitalLibrary →
+  Search.DatabaseExecutionReceipt Search.ieeeXplore →
+  Search.DeduplicationReceipt →
+  Search.EligibilityScreeningReceipt →
+  Search.StructuredExtractionReceipt →
+  Search.TransparentStructuredSearchClosureReceipt
+closureRequiresExecutedDatabasesRegression = Search.closeTransparentStructuredSearch
+
+closureDoesNotPromoteSystematicReviewRegression :
+  (receipt : Search.TransparentStructuredSearchClosureReceipt) →
+  Search.TransparentStructuredSearchClosureReceipt.promotesSystematicReview receipt
+  ≡ false
+closureDoesNotPromoteSystematicReviewRegression =
+  Search.TransparentStructuredSearchClosureReceipt.promotesSystematicReviewIsFalse
+
+executionReceiptRetainsQueryRegression :
+  {surface : Search.SearchSurface} →
+  (receipt : Search.DatabaseExecutionReceipt surface) →
+  Search.DatabaseExecutionReceipt.queryReferenceRetained receipt ≡ true
+executionReceiptRetainsQueryRegression =
+  Search.DatabaseExecutionReceipt.queryReferenceRetainedIsTrue
+
+executionReceiptRetainsExportRegression :
+  {surface : Search.SearchSurface} →
+  (receipt : Search.DatabaseExecutionReceipt surface) →
+  Search.DatabaseExecutionReceipt.resultExportRetained receipt ≡ true
+executionReceiptRetainsExportRegression =
+  Search.DatabaseExecutionReceipt.resultExportRetainedIsTrue
+
+closureWithoutExecutionBlockedRegression :
+  Search.UnobservedDatabaseClosesStructuredSearch → ⊥
+closureWithoutExecutionBlockedRegression =
+  Search.unobservedDatabaseDoesNotCloseStructuredSearch
+
+searchClosureDoesNotCloseSynthesisRegression :
+  Search.StructuredSearchClosurePaysEvidenceSynthesis → ⊥
+searchClosureDoesNotCloseSynthesisRegression =
+  Search.structuredSearchClosureDoesNotPayEvidenceSynthesis
