@@ -2,183 +2,185 @@
 
 Status: navigation / archaeology companion to `YMRHPRRoundArchaeologyAudit.md`. **Not theorem authority and not a Clay-completion claim.**
 
-Purpose: stop repeated proof-search from treating `CMP99`, `CMP102`, `CMP109`, `CMP116`, `CMP119`, or `CMP122` as one undifferentiated open task. The paper-level source authority, most carrier dictionaries, and downstream compiler plumbing have already been developed across many PRs. Future Pareto search should reopen a CMP-labelled object only when a current consumer exposes a specific unpaid same-object physical/source instantiation.
+Purpose: stop repeated proof-search from treating `CMP99`, `CMP102`, `CMP109`, `CMP116`, `CMP119`, or `CMP122` as one undifferentiated open task. Reopen a CMP-labelled object only when a current consumer exposes a specific unpaid same-object physical/source instantiation.
 
 ## Executive rule
 
 **DO NOT reopen “formalise CMP109/116/119/122” as a generic task.**
 
-| Source family | Repository status for current search | What is already owned | What may still be legitimately open |
+| Source family | Repository status for current search | Already owned | Legitimately open only when demanded |
 |---|---|---|---|
-| CMP99 | SOURCE PROPAGATOR AUTHORITY OWNED | regular-background Green/gradient bounds, analytic background dependence, marked domain-sequence propagator comparison / discrepancy-decay source boundary | exact attachment of the published marked propagator-difference theorem to the selected `H(s(Y0))` carrier |
-| CMP102 | SOURCE VARIATIONAL/BACKGROUND AUTHORITY OWNED | background criticality/minimization/uniqueness modulo gauge, analyticity/locality/derivative locality, common source radius; source contraction/locality proof shape | exact `C` identification only if R367 is used as the cross-parameter sensitivity producer |
-| CMP109 | SOURCE/COMPILER LARGELY OWNED | regular small-field effective-action lane, differentiated coordinate machinery, Eq.(5.1)-facing continuation interfaces, downstream BC/response compilers | a specific literal physical differential/source identification demanded by a live consumer |
-| CMP116 | SOURCE/COMPILER LARGELY OWNED | localization/cluster-expansion continuation, marked-source/localization machinery, literal substituted-background equation, fixed-parameter contraction-ball construction, common continuation interfaces | selected same-object propagator/operation attachment, one-sided cross-membership, cross-parameter defect, or other literal quantitative estimate demanded by the current consumer |
-| CMP119 | SOURCE OBJECT/DICTIONARY LARGELY OWNED | complete-density dictionary, finite-beta construction, raw source state, function-valued regular `E_k`, selected regular-E projection, source-localization interface | exact selected physical realization only when still demanded downstream |
-| CMP122 | PUBLISHED THEOREM BOUNDARY OWNED | Theorem-1/UV-stability authority, finite-history coupling hypothesis, active-scale source theorem carrier | theorem-bearing exact instantiation on selected source family; continuum/OS/mass-gap consequences remain separate |
+| CMP99 | SOURCE PROPAGATOR AUTHORITY OWNED | regular-background Green/gradient bounds, analytic background dependence, marked domain-sequence propagator comparison | exact attachment to a selected consumer if the optional perturbative producer is used |
+| CMP102 | SOURCE VARIATIONAL/BACKGROUND AUTHORITY OWNED | background criticality/minimization/uniqueness modulo gauge, analyticity/locality/derivative locality, common source radius | exact `C` identification only for the optional R367 cross-parameter route |
+| CMP109 | SOURCE/COMPILER LARGELY OWNED | regular small-field effective-action lane, differentiated coordinates, R103 polarization/Hessian same-carrier identity, Eq.(5.1)-facing continuation | one literal physical differential/source identification demanded by a live consumer |
+| CMP116 | SOURCE/COMPILER LARGELY OWNED | fixed-point ball preservation/contraction, analytic fixed-point dependence, marked/localized differentiated activity machinery, common source domain/radius framework | selected same-object family/domain/radius/distance attachments and consumer-specific quantitative calibration |
+| CMP119 | SOURCE OBJECT/DICTIONARY LARGELY OWNED | complete-density dictionary, finite-beta construction, raw source state, function-valued regular `E_k`, selected regular-E projection | exact selected physical realization only when demanded downstream |
+| CMP122 | PUBLISHED THEOREM BOUNDARY OWNED | Theorem-1/UV-stability authority, finite-history coupling hypothesis, active-scale source carrier | exact selected-family instantiation; continuum/OS/mass-gap remain separate |
 
-## Current live sensitivity recut: R365--R370
+## Current live sensitivity recut: R368--R380
 
-CMP116 Part II, Sect. 1 uses
+The preferred direct route is no longer the old cross-propagator / CMP102-Lipschitz construction and no longer requires a historical marked-input calibration for the Hessian-coefficient consumer.
 
-```text
-D(A') = C(A' - H D(A')).
-```
+### R368 — fixed-parameter contraction is source-shaped directly
 
-The current direct sensitivity route separates four logically different layers: fixed-parameter contraction, cross-parameter map defect, affine/operator algebra, and source-domain overlap.
-
-### R365 — fixed-point displacement is compiler-owned
-
-`BalabanCMP116SubstitutionContractionRound365Exact.agda` proves
+`BalabanCMP116DirectDecoupledContractionRound368Exact.agda` uses the literal composite map
 
 ```text
-d(x_L,x_R) <= q d(x_L,x_R) + delta
+F_s(X) = C(A' - H(s)X)
 ```
 
-from contraction of the left map and one cross-parameter defect at the common candidate. Scalar absorption then bounds the displacement by an amplified `delta`.
+on its source ball. A CMP102→CMP116 C identity is not mandatory merely to recover same-parameter contraction.
 
-### R366 — factor the cross-parameter defect
+### R370/R371 — direct fixed-point parametric sensitivity
 
-`BalabanCMP116OneStepMapDefectRound366Exact.agda` factors
+`BalabanCMP116DirectParametricSensitivityRound370Exact.agda` provides the generic Cauchy/mean-value ABI. Once the selected CMP116 analytic fixed-point family, common neighbourhood, uniform magnitude/radius and parameter-distance upper are attached, it proves
 
 ```text
-||F_L(X)-F_R(X)||
-<= L_C ||(A'-H_L X)-(A'-H_R X)||
-<= L_C ||(H_L-H_R)X||
-<= L_C M_H ||X||
-<= L_C M_H R.
+d_boundary^R370(s) <= U_par
+U_par := L_par(M,r) * d_parameter.
 ```
 
-CMP99 belongs at the `M_H` propagator-difference layer, not as the complete fixed-point displacement theorem.
+`BalabanCMP116PublishedParametricFixedPointRound371Exact.agda` records the corresponding CMP116 Sect.1 source theorem shape. The older R365--R369 perturbative route remains optional.
 
-### R367 — optional proof-bearing cross-parameter C producer
+### R372/R373 — same Cauchy mechanism for the local Hessian
 
-`BalabanCMP102CriticalMapLipschitzRound367Exact.agda` turns the C stage into a proof-bearing source theorem
+R372 reuses the same parametric-sensitivity ABI for the selected local Hessian family. R373 attaches that theorem to the literal boundary Hessian scalar. No independent primitive `D^3` / Hessian-Lipschitz theorem is mandatory.
+
+### R374/R375 — common radius and existing coefficient lift
+
+R374 reuses one canonical CMP116 radius for both fixed-point and Hessian derivative consumers.
+
+R375 sends R372/R373 pointwise Hessian sensitivity into the already-owned `BalabanDecoupledActivityHessian.markedSubstitutionStabilityLiftsToCoefficient` theorem. R103 already owns the literal CMP116 marked-Hessian = CMP109 polarization = D² effective-potential carrier identity.
+
+### R376/R377/R378 — historical-mark compatibility route
+
+R376 splices the old R351 H_sub carrier into R375.
+
+R377 removes duplicated selected distance coordinates: the R351 selected distance is defined to be the R373 boundary distance; only the boundary-to-source distance attachment remains proof-bearing.
+
+R378 factors the R351 source inequality through R370:
 
 ```text
-d(C x,C y) <= L_C d(x,y).
+d_boundary <= U_par
+U_par <= M_marked^src
+--------------------
+d_boundary <= M_marked^src.
 ```
 
-It is a valid producer if the exact C attachment is supplied. Analyticity/locality metadata alone do not pay it.
+This is a valid compatibility producer when a downstream consumer truly needs the historical/source marked coordinate.
 
-### R368 — direct fixed-parameter CMP116 composite contraction
+### R379 — consumer audit removes the historical-mark overpayment
 
-`BalabanCMP116DirectDecoupledContractionRound368Exact.agda` imports the source theorem directly on
+`BalabanCMP116DistanceUpperHessianBidiRound379Exact.agda` checks what R375 actually observes. The coefficient theorem only needs
 
 ```text
-F_s(X) = C(A' - H(s)X).
+0 <= U
+selectedBoundarySubstitutionDistance(s) <= U.
 ```
 
-Each parameter has a source ball on which the literal composite map preserves the ball and contracts with factor `<1`. Therefore a CMP102→CMP116 C identity is **not mandatory merely to obtain the same-parameter contraction factor**.
+It does not inspect the provenance/identity of `U` as a historical mark. Therefore `U` is recut to the least-privilege `distanceUpper` coordinate.
 
-R368 does not pay cross-parameter sensitivity.
-
-### R369 — affine cross-parameter argument difference is generic algebra
-
-`BalabanCMP116AffineArgumentDifferenceRound369Exact.agda` derives
+Result:
 
 ```text
-(A' - H_L X) - (A' - H_R X)
-  = (H_R - H_L) X
+||Delta H_coeff|| <= L_Hessian * U.
 ```
 
-from abelian difference laws plus pointwise operator subtraction. The scalar argument-defect inequality follows by equality transport/reflexivity.
+The historical mark is not identified or manufactured.
 
-Thus only the actual CMP116 operation same-object attachment remains; no new analytic affine inequality is scheduled.
+### R380 — R370 upper feeds R379 directly
 
-### R370 — common-ball equality is stronger than the perturbation proof needs
-
-`BalabanCMP116OneSidedBallPerturbationRound370Exact.agda` compares R365 with the direct R368 source balls.
-
-R365 contracts only the left map between the two fixed points. Hence it needs
+`BalabanCMP116ParametricDistanceUpperHessianRound380Exact.agda` instantiates
 
 ```text
-leftPoint  ∈ sourceBall(leftParameter)
-rightPoint ∈ sourceBall(leftParameter)
+U := U_par = L_par * d_parameter.
 ```
 
-plus each point's own fixed-point equation and the cross-parameter map defect. It does **not** require
+The only new preferred-route same-object coordinate is
 
 ```text
-sourceBall(leftParameter) = sourceBall(rightParameter).
+d_selected^R373(s)
+  = d_boundary^R370(iota s).
 ```
 
-R370 compiles the direct R368 source maps/balls into R365 using exactly this one-sided cross-membership interface.
+After that equality, R370's existing upper gives the R379 premise, and R375 gives the coefficient bound.
 
-Therefore the old “common ball equality” scheduling item is Pareto-dominated. The remaining source/domain payment is the concrete right-fixed-point-in-left-source-ball statement (or any stronger source theorem that implies it).
-
-### Current live payments after R370
+So the preferred local route is now
 
 ```text
-H_attach^99/116:
-  CMP99 marked H_L-H_R authority == selected CMP116 H(s(Y0)) difference;
-
-cross-parameter C sensitivity:
-  R367 + exact C attachment is the current proof-bearing producer,
-  unless a more direct CMP116 composite-map parameter theorem is recovered;
-
-operation attachment:
-  actual CMP116 subtraction/operator difference == R369 affine carrier;
-
-one-sided source-ball cross-membership:
-  right fixed point lies in the left source contraction ball.
+CMP116 published parametric family
+-> R371
+-> R370
+-> [R373 <-> R370 selected-boundary same-object map]
+-> R380
+-> R379
+-> R375 coefficient/Hessian payment.
 ```
 
-Fixed-parameter contraction, affine cancellation, and equality of the two balls are no longer primitive debts.
+The R351--R378 historical-mark route remains available but is **not mandatory for this coefficient consumer**.
 
-The next genuinely local analytic branch remains `H_local`:
+## Current preferred live payments after R380
 
 ```text
-||D^2 E(H_Omega) - D^2 E(H_Omega')|| <= L_source d_sub,
+P1 selected fixed-point family attachment:
+   published CMP116 D(H(s(Y0)),A') / H_k(s(Y0),B')
+   == selected R370 family;
+
+P2 selected local-Hessian family attachment:
+   published differentiated CMP109/CMP116 activity
+   == selected R372/R373 family;
+
+P3 common source-domain/radius/magnitude application:
+   selected points lie in the source complex neighbourhood and use the
+   source quantitative radius/magnitude data;
+
+P4 selected parameter-distance calibration:
+   parameterDistance(left,right) <= sourceParameterDistance;
+
+P5 selected boundary-distance same-object map:
+   d_selected^R373(s) = d_boundary^R370(iota s).
 ```
 
-unless source-native derivative archaeology reduces it too.
+For consumers that semantically require the historical marked coordinate, add the optional compatibility payment
 
-## Broader CMP chronology / lane separation
+```text
+U_par <= M_marked^src
+```
 
-- **#543**: source-faithful complete-density reuse; stop rebuilding generic RG.
-- **#568 / Round58**: raw CMP119 state + finite-beta source history + CMP122 active Theorem-1 / published UV boundary.
-- **#821**: broad raw-source wall; historically important but later too strong for BC1.
-- **#846 onward / R215→R250**: consumer-indexed regular-E route; function-valued `E_k`, localization, active source form, R248 identity decoder and R250 preferred concrete continuation.
+and use R378/R351/R377/R376.
+
+## What is no longer primitive debt
+
+Do not schedule as independent mathematics:
+
+- full two-fixed-point H_sub after R370;
+- CMP99 marked propagator comparison as direct fixed-point displacement;
+- CMP102 C-Lipschitz merely to obtain fixed-parameter contraction;
+- affine subtraction algebra after R369;
+- equality of two source contraction balls;
+- a new D³/Hessian Lipschitz theorem after R372;
+- a second Hessian-family identity after R103/R375;
+- a separate radius for first- and second-derivative consumers after R374;
+- a duplicate selected R351/R373 distance equality after R377;
+- R351 `d_sub <= M_marked` as a primitive theorem after R378;
+- **historical marked-input calibration as a requirement of R375 after R379/R380**.
+
+## Broader lane separation
 
 Current BC1 source lane and current mass-gap sensitivity lane remain distinct:
 
 ```text
-BC1: P0 CMP122 witness + P1 D² + P2 CMP109 Eq.(5.1) + P3 normalized CMP116 demands.
+BC1:
+  P0 CMP122 witness + P1 D² + P2 CMP109 Eq.(5.1) + P3 normalized CMP116 demands.
 
-mass-gap H_sub: R368 fixed contraction + R369 affine algebra + R370 one-sided ball
-                + true cross-parameter/H attachments.
+mass-gap direct sensitivity:
+  R371/R370 parametric fixed-point sensitivity
+  + R372/R373 local-Hessian sensitivity
+  + R374 common radius
+  + R380/R379/R375 direct coefficient payment.
 ```
 
 Do not merge these queues merely because both mention CMP116.
-
-## Current do-not-reopen list
-
-Do not spend proof-search budget on:
-
-- generic re-proofs of CMP99/CMP102/CMP109/CMP116/CMP119/CMP122;
-- full two-fixed-point `H_subScale` after R365;
-- CMP99 marked comparison as direct fixed-point displacement;
-- source analyticity as a numerical C-Lipschitz proof;
-- a cross-paper C identity merely to recover fixed-parameter contraction after R368;
-- the affine R366 inequality as new physics after R369;
-- equality of the two source contraction balls after R370;
-- generic operator algebra detached from the actual same-object operation attachment;
-- abstract `RegularTerm` reconstruction instead of function-valued `E_k`;
-- complete `A_k` as the object differentiated by CMP109 Eq.(5.1);
-- CMP122 UV stability as continuum Schwinger construction, OS reconstruction, clustering or physical mass gap.
-
-## Live-search rule
-
-When a CMP-labelled conditional appears, ask:
-
-```text
-Which exact consumer?
-Which selected source object?
-Which same-object equality or physical estimate is absent?
-Is a stronger condition being requested than the compiler actually consumes?
-Was the apparent theorem already reduced under another round alias?
-```
 
 ## Primary source coordinates retained
 
@@ -194,4 +196,4 @@ Person QID / exact paper-specific Dewey remain unresolved unless an authoritativ
 
 ## Validation boundary
 
-This is navigation/status only. R365--R370 are source-written reductions; repository `machineChecked` / `standardImported` labels are not fresh exact-head kernel receipts. Source text does not create same-object Agda inhabitants. No continuum YM construction, physical mass-gap theorem, Clay promotion, or RH proof is claimed here.
+This is navigation/status only. R368--R380 are source-written reductions unless an exact-head Agda/kernel receipt says otherwise. Repository `machineChecked` / `standardImported` labels are not fresh kernel receipts. Source text does not create same-object inhabitants. No continuum YM construction, physical mass-gap theorem, Clay promotion, or RH proof is claimed here.
