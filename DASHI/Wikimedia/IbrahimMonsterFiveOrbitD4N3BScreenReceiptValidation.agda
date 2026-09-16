@@ -17,6 +17,18 @@ actualGroupRealizationSourceRegression :
   R.actualD4RealizationSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 actualGroupRealizationSourceRegression = refl
 
+executionCheckerRegression :
+  R.executionCheckerSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+executionCheckerRegression = refl
+
+existingGapWorkflowRegression :
+  R.existingGapWorkflowWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+existingGapWorkflowRegression = refl
+
+jsonArtifactUploadRegression :
+  R.jsonArtifactUploadWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+jsonArtifactUploadRegression = refl
+
 runtimeFirewallRegression :
   R.gapRuntimeReceiptObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
 runtimeFirewallRegression = refl
