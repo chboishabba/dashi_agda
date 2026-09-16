@@ -20,9 +20,13 @@ axisReflectionCharacterRegression = refl
 diagonalReflectionCharacterRegression : K.diagonalReflectionFixedOrbitCount ≡ 3
 diagonalReflectionCharacterRegression = refl
 
-kernelPermutationCharacterRegression :
-  K.agdaKernelPermutationCharacterObserved K.currentFiveOrbitD4PermutationKernelBoundary ≡ true
-kernelPermutationCharacterRegression = refl
+kernelPermutationCharacterSourceRegression :
+  K.agdaKernelPermutationCharacterSourceWritten K.currentFiveOrbitD4PermutationKernelBoundary ≡ true
+kernelPermutationCharacterSourceRegression = refl
+
+kernelPermutationCharacterReceiptStillUnpaidRegression :
+  K.agdaKernelPermutationCharacterObserved K.currentFiveOrbitD4PermutationKernelBoundary ≡ false
+kernelPermutationCharacterReceiptStillUnpaidRegression = refl
 
 kernelDecompositionStillUnpaidRegression :
   K.agdaKernelIrrepDecompositionObserved K.currentFiveOrbitD4PermutationKernelBoundary ≡ false
