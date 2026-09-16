@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.Base369DialecticRoleBoundaryExact as Role369
 import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 import DASHI.Core.RecursiveParetoFrontierLiftingExact as Pareto
@@ -14,6 +15,8 @@ import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeExact as Plato
 import DASHI.Reasoning.DialecticalOppositionNonExplosionExact as Opposition
 import DASHI.Reasoning.JMDAristotleSymposiumSourceAtlasExact as Source
 import DASHI.Reasoning.PlatoSymposiumSnowballParetoIndexingExact as Indexing
+import DASHI.Reasoning.TypedHyperfabricFiniteBraidEquivarianceExact as HyperBraid
+import DASHI.Reasoning.UnifiedCarryBraidReceipt as CarryBraid
 
 ------------------------------------------------------------------------
 -- RESIDUAL JMD SYMPOSIUM DIALECTIC / MECHANISM CROSS-POLLINATION
@@ -25,8 +28,9 @@ import DASHI.Reasoning.PlatoSymposiumSnowballParetoIndexingExact as Indexing
 --   those source fixtures; they are NOT reattributed to Plato, JMD or Lean.
 --
 -- This owner deliberately does not create another dialectic, mechanism,
--- contextual-valuation, Pareto or projection-adequacy ontology.  It adds the
--- two residual consumer distinctions that were not already paid exactly:
+-- contextual-valuation, Pareto, braid/hyperfabric, 369, or projection-adequacy
+-- ontology.  It adds the two residual consumer distinctions that were not
+-- already paid exactly:
 --
 --   conflict intensity !-> reconciliation possibility
 --   observed effect   !-> means/mechanism
@@ -40,6 +44,9 @@ archiveOwner = "James Michael DuPont (JMD / meta-introspector)"
 
 archiveHash : String
 archiveHash = Source.archiveSha256
+
+archiveOwnershipDeclaration : Source.OwnershipDeclaration
+archiveOwnershipDeclaration = Source.jmdOwnershipDeclaration
 
 eryximachusHostileReconcilableContract : Plato.LeanPhilosophyTheoremContract
 eryximachusHostileReconcilableContract = Plato.mkJMDContract
@@ -83,6 +90,15 @@ existingRecursiveParetoBoundary = Pareto.canonicalRecursiveParetoFrontierBoundar
 
 existingIndexingBoundary : Indexing.PlatoSymposiumIndexingBoundary
 existingIndexingBoundary = Indexing.canonicalPlatoSymposiumIndexingBoundary
+
+existingCarryBraidReceipt : CarryBraid.UnifiedCarryBraidReceipt
+existingCarryBraidReceipt = CarryBraid.canonicalUnifiedCarryBraidReceipt
+
+existingTypedHyperfabricBraidBoundary : HyperBraid.TypedHyperfabricFiniteBraidBoundary
+existingTypedHyperfabricBraidBoundary = HyperBraid.canonicalTypedHyperfabricFiniteBraidBoundary
+
+existingBase369RoleBoundary : Role369.Base369DialecticRoleBoundary
+existingBase369RoleBoundary = Role369.canonicalBase369DialecticRoleBoundary
 
 ------------------------------------------------------------------------
 -- 1. Conflict intensity does not determine reconciliation possibility.
@@ -227,6 +243,16 @@ paretoSelectionStillNotProofAuthority :
     Pareto.canonicalRecursiveParetoFrontierBoundary ≡ false
 paretoSelectionStillNotProofAuthority = refl
 
+hyperfabricBraidStillRequiresExplicitTransport :
+  HyperBraid.arbitraryTypedHyperfabricAutomaticallyBraidEquivariant
+    HyperBraid.canonicalTypedHyperfabricFiniteBraidBoundary ≡ false
+hyperfabricBraidStillRequiresExplicitTransport = refl
+
+samePrinted369StillDoesNotCreateSameTypedRole :
+  Role369.samePrintedNumeralImpliesSameTypedRole
+    Role369.canonicalBase369DialecticRoleBoundary ≡ false
+samePrinted369StillDoesNotCreateSameTypedRole = refl
+
 ------------------------------------------------------------------------
 -- Cross-pollination boundary.
 ------------------------------------------------------------------------
@@ -242,6 +268,9 @@ record PlatoSymposiumResidualDialecticMechanismBoundary : Set where
     observedEffectDeterminesMeans : Bool
     contextualDifferenceCreatesLogicalContradiction : Bool
     selectedDomainSuccessCreatesUniversalValidity : Bool
+    hostileFixtureDefinitionallyEqualsCarryTension : Bool
+    conflictAutomaticallyCreatesHyperfabricBraidAction : Bool
+    reconciliationDefinitionallyIsBase369Stage : Bool
     sourceFixtureMayMotivateDashiCollision : Bool
     canonicalDashiOwnersRemainAuthoritative : Bool
 
@@ -259,9 +288,12 @@ canonicalPlatoSymposiumResidualDialecticMechanismBoundary =
     false
     false
     false
+    false
+    false
+    false
     true
     true
 
 residualCrossPollinationSummary : String
 residualCrossPollinationSummary =
-  "All source contracts remain attributed to the JMD-owned archive. Eryximachus supplies a source-bounded hostile-yet-reconcilable fixture and Marsyas/Socrates supplies a same-effect/different-means fixture. DASHI independently proves that conflict intensity does not determine reconciliation possibility and observed effect does not determine means, while Pausanias context-sensitivity and Republic selection-vs-validity reuse canonical context and query-indexed projection adequacy boundaries."
+  "All source contracts remain attributed to the JMD-owned archive. Eryximachus supplies a source-bounded hostile-yet-reconcilable fixture and Marsyas/Socrates supplies a same-effect/different-means fixture. DASHI independently proves that conflict intensity does not determine reconciliation possibility and observed effect does not determine means. Pausanias context-sensitivity and Republic selection-vs-validity reuse canonical context/projection owners. Unified carry/braid, typed hyperfabric braid transport and Base369 role boundaries remain independent and are not promoted into Platonic semantics."
