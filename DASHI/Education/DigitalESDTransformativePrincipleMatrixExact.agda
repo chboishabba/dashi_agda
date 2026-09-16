@@ -11,6 +11,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Education.DigitalInnovationESDTransformationExact as Transformation
 import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesExact as Principles
+import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
 import DASHI.Education.DigitalESDPrimarySourceMethodologyAtlasExact as Primary
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Prior
 import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
@@ -22,6 +23,8 @@ import DASHI.Education.DigitalESDCurrentScholarlySnowballExact as Scholarly
 -- Corpus A supplies source-attributed digital-education principles.
 -- The canonical transformation owner supplies enactment/scaling conditions.
 -- Corpus B supplies sustainability/ESD constraints and contextual evidence.
+-- The externality-incidence owner keeps contribution, benefit, burden, voice,
+-- control, exit, lifecycle stage, time and material position distinct.
 --
 --   pedagogical principle support != scaling condition != sustainability evidence
 --
@@ -54,6 +57,9 @@ constraintName institutionalDurabilityAndMonitoring =
   "institutional durability, monitoring, integration depth and longitudinal revision"
 constraintName intergenerationalOptionPreservation =
   "preservation of future learner/institutional options under long-horizon consequences"
+
+externalityIncidenceBoundary : Incidence.ExternalityIncidenceBoundary
+externalityIncidenceBoundary = Incidence.canonicalExternalityIncidenceBoundary
 
 record PrincipleConstraintRow : Set where
   constructor principle-constraint-row
@@ -194,8 +200,8 @@ contextualCustodianshipConstraintRow =
     ∷ Scholarly.chughSustainabilityParadoxSource
     ∷ [] )
     true refl
-    "The ecology-of-data demand to map edges, affordances, effort and value flows expands into material and institutional custodianship: devices, networks, energy, repair, procurement, portability and vendor dependence become educational concerns that require institutional capability and policy support."
-    "This is a cross-domain synthesis. ITU methods and governance sources define observables and obligations but do not supply a same-object lifecycle inventory, circularity score, procurement result or sustainability verdict for a digital-education deployment."
+    "The ecology-of-data demand to map edges, affordances, effort and value flows expands into material and institutional custodianship: devices, networks, energy, repair, procurement, portability, vendor dependence and externality incidence become educational concerns that require institutional capability and policy support."
+    "This is a cross-domain synthesis. ITU methods and governance sources define observables and obligations but do not supply a same-object lifecycle inventory, circularity score, procurement result, burden allocation or sustainability verdict for a digital-education deployment."
 
 iterativeEvidenceReturnAndRechartingConstraintRow : PrincipleConstraintRow
 iterativeEvidenceReturnAndRechartingConstraintRow =
@@ -218,8 +224,8 @@ iterativeEvidenceReturnAndRechartingConstraintRow =
     ∷ Scholarly.boehmeDigitainabilitySource
     ∷ [] )
     true refl
-    "Transformative digital-ESD should be governed as an iterative institutional process: build professional and organisational capacity to monitor integration and outcomes, return evidence to affected participants, revise decisions, retain portability/exit options and avoid locking current classifications or infrastructure choices into future generations."
-    "Longitudinal input integration is not outcome transformation; future-option language is a DASHI synthesis constraint rather than a claim that the cited sources share one intergenerational theory."
+    "Transformative digital-ESD should be governed as an iterative institutional process: build professional and organisational capacity to monitor integration, outcomes and burden incidence; return evidence to affected participants; revise decisions; retain portability/exit options; and avoid locking current classifications or infrastructure choices into future generations."
+    "Longitudinal input integration is not outcome transformation; present benefit does not determine later burden; future-option language is a DASHI synthesis constraint rather than a claim that the cited sources share one intergenerational theory."
 
 canonicalTransformativePrincipleMatrix : List PrincipleConstraintRow
 canonicalTransformativePrincipleMatrix =
@@ -271,6 +277,8 @@ record TransformativePrincipleMatrixBoundary : Set where
       selectedPairingsNotCartesianDecoration ≡ true
     scalingConditionsRetained : Bool
     scalingConditionsRetainedIsTrue : scalingConditionsRetained ≡ true
+    externalityIncidenceAuditRetained : Bool
+    externalityIncidenceAuditRetainedIsTrue : externalityIncidenceAuditRetained ≡ true
     environmentalSocialEconomicEpistemicInfrastructureDimensionsRetained : Bool
     environmentalSocialEconomicEpistemicInfrastructureDimensionsRetainedIsTrue :
       environmentalSocialEconomicEpistemicInfrastructureDimensionsRetained ≡ true
@@ -301,9 +309,10 @@ canonicalTransformativePrincipleMatrixBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     true refl
 
 transformativePrincipleMatrixReading : String
 transformativePrincipleMatrixReading =
-  "The manuscript's generative centre is represented as seven source-attributed digital-education principles cross-pollinated with canonical scaling conditions and independent sustainability constraints. The A-side preserves the Alice Brown / colleague education corpus; the enactment layer retains scalable pedagogy, institutional practice, professional development and policy; the B-side preserves ESD, lifecycle, governance, TCO, interoperability, equity and longitudinal sources. Their pairing produces candidate digital-ESD design propositions, not empirical effects. This allows the paper to leverage mature digital-education expertise while asking, for every proposed transformation, who participates, who interprets, who bears externalities, what educator/institutional capability is required, what infrastructure and lifecycle obligations are created, and whether future learner/institutional options remain open."
+  "The manuscript's generative centre is represented as seven source-attributed digital-education principles cross-pollinated with canonical scaling conditions and independent sustainability constraints. The A-side preserves the Alice Brown / colleague education corpus; the enactment layer retains scalable pedagogy, institutional practice, professional development and policy; the B-side preserves ESD, lifecycle, governance, TCO, interoperability, equity and longitudinal sources. The externality-incidence audit separately retains contribution, benefit, burden, voice, control/mediation, exit, lifecycle stage, temporal displacement and material position. Their pairing produces candidate digital-ESD design propositions, not empirical effects. This allows the paper to ask not only whether a proposed transformation works but who contributes, who benefits, who bears burdens, who controls or mediates the system, who has voice, who can exit, where in the lifecycle impacts arise, and whether future learner/institutional options remain open."
