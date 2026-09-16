@@ -41,7 +41,7 @@ fi;
 r := (1,2,3,4);
 s := (2,4);
 d4Group := Group([r,s]);
-if Size(d4Group) <> 8 or not IsNonabelian(d4Group) then
+if Size(d4Group) <> 8 or not IsAbelian(d4Group) then
   Error("failed to construct the canonical order-eight dihedral group");
 fi;
 d4 := CharacterTable(d4Group);
@@ -61,7 +61,6 @@ targetValues := List(d4Classes, cl ->
 target := ClassFunction(d4, targetValues);
 targetMult := List(d4Irr, psi -> ScalarProduct(d4, target, psi));
 
-# Canonical class positions determined by the explicit generators.
 classE := PositionProperty(d4Classes, cl -> One(d4Group) in Elements(cl));
 classR2 := PositionProperty(d4Classes, cl -> r^2 in Elements(cl));
 classR := PositionProperty(d4Classes, cl -> r in Elements(cl));
@@ -76,7 +75,6 @@ if canonicalTargetValues <> [5,5,1,3,3] then
   Error("five-orbit D4 action does not reproduce target character (5,5,1,3,3)");
 fi;
 
-# Identify irreducibles by their values in the canonical class order.
 FindIrrByCanonicalValues := function(values)
   local positions;
   positions := Filtered([1..Length(d4Irr)], i ->
@@ -98,10 +96,6 @@ if [targetMult[posA1],targetMult[posA2],targetMult[posB1],targetMult[posB2],targ
   Error("target D4 multiplicities are not 3A1+B1+B2");
 fi;
 
-# ----------------------------------------------------------------------
-# Actual Monster character restricted to MN3B.
-# ----------------------------------------------------------------------
-
 monsterIrr := Irr(monster);
 chiPositions := Filtered([1..Length(monsterIrr)], i -> monsterIrr[i][1] = 196883);
 if Length(chiPositions) <> 1 then
@@ -113,10 +107,6 @@ if mn3bToMonster = fail then
   Error("stored MN3B -> Monster class fusion is unavailable");
 fi;
 chiMN3BValues := List(mn3bToMonster, i -> chiMonster[i]);
-
-# ----------------------------------------------------------------------
-# Stage 1: exhaustive character-table fusion screening.
-# ----------------------------------------------------------------------
 
 possibleFusions := PossibleClassFusions(d4, mn3b);
 if possibleFusions = fail then
@@ -137,23 +127,12 @@ for fusion in possibleFusions do
   fi;
 od;
 
-# ----------------------------------------------------------------------
-# Stage 2: realize MN3B using exactly the established construction ladder,
-# then search its Sylow-2 subgroup for an actual D8.
-# ----------------------------------------------------------------------
-
 expectedGroupOrder := Size(mn3b);
-groupNames := [
-  "MN3B",
-  "3^(1+12).2.Suz.2",
-  "3^(1+12):2.Suz.2",
-  "3^1+12.2.Suz.2"
-];
+groupNames := ["MN3B","3^(1+12).2.Suz.2","3^(1+12):2.Suz.2","3^1+12.2.Suz.2"];
 G := fail;
 atlasGroupRealized := false;
 selectedConstructionSource := fail;
 
-# First use the documented AtlasRep information-record route.
 for groupName in groupNames do
   infos := AllAtlasGeneratingSetInfos(groupName);
   infos := Filtered(infos, info -> IsBound(info.size) and info.size = expectedGroupOrder);
@@ -169,8 +148,6 @@ for groupName in groupNames do
   if G <> fail then break; fi;
 od;
 
-# Some installations construct the group directly even when the local
-# information list is incomplete.
 if G = fail then
   for groupName in groupNames do
     candidate := AtlasGroup(groupName);
@@ -183,7 +160,6 @@ if G = fail then
   od;
 fi;
 
-# Reuse the CTblLib/Browse fallback from the established actual-kernel producer.
 if G = fail and LoadPackage("browse") = true then
   groupInfos := GroupInfoForCharacterTable(mn3b);
   for groupInfo in groupInfos do
@@ -217,7 +193,7 @@ if G <> fail then
       Order(x) = 2 and not x in C4 and rr^x = rr^-1);
     if Length(candidatesS) > 0 then
       H := Group([rr,candidatesS[1]]);
-      if Size(H) = 8 and IsNonabelian(H) then
+      if Size(H) = 8 and not IsAbelian(H) then
         actualD4 := H;
         d4SubgroupFound := true;
         break;
@@ -233,9 +209,6 @@ if G <> fail then
       mnSizes := SizesConjugacyClasses(mn3b);
       candidateFusion := List([1..Length(d4Classes)], i -> fail);
       unique := true;
-
-      # Transport each canonical abstract-D4 class representative into the
-      # concrete subgroup, then identify its ambient MN3B class.
       for canonicalPosition in [1..Length(d4Classes)] do
         x := Image(canonicalToActual,Representative(d4Classes[canonicalPosition]));
         xOrder := Order(x);
@@ -249,7 +222,6 @@ if G <> fail then
         fi;
         candidateFusion[canonicalPosition] := matches[1];
       od;
-
       if unique then
         ambientClassFusionUnique := true;
         actualFusion := candidateFusion;
@@ -264,10 +236,6 @@ if G <> fail then
 fi;
 
 actualD4SubgroupRealized := d4SubgroupFound and canonicalIsomorphismFound and ambientClassFusionUnique;
-
-# ----------------------------------------------------------------------
-# Receipt. Character compatibility is not action/intertwiner authority.
-# ----------------------------------------------------------------------
 
 JsonBool := function(x)
   if x then return "true"; else return "false"; fi;
