@@ -9,3 +9,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAcquisitionE
 -- as well as source identity and an exact locator. Matching theta1/theta2/dLN
 -- labels or DOI/QID/PDB/UniProt metadata alone cannot pay a measurement cell.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObservableIdentityPromotionGateExact
+
+-- Machine-readable monitoring-surface acquisition: Li-Liu-Ji monitor LT-MD with
+-- four variables (open/closed-reference C-alpha RMSD, theta1, theta2 and dLN),
+-- while BE-META biases only theta1/theta2/dLN.  This keeps the paper's broader
+-- observation surface distinct from the three-CV landscape coordinates without
+-- promoting RMSD to an independent or universally required consumer coordinate.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDObservableSetAcquisitionExact
