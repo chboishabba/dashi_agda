@@ -26,6 +26,7 @@ import DASHI.Physics.Closure.NSTriadKNUpperShellCollarRemoteSplitRegression
 import DASHI.Physics.Closure.NSTriadKNLowCollarRemotePacketSplitRegression
 import DASHI.Physics.Closure.NSTriadKNTwoShellLowRemoteEuclideanGapRegression
 import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleRegression
+import DASHI.Physics.Closure.NSTriadKNLowRemoteSpectralDatumRound98Regression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
@@ -34,18 +35,18 @@ import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleRegre
 -- the authoritative owners it imports. The canonical coordinator regression,
 -- thin S2b successor delta, explicit A/B portability audit, strict S0/S1/S2
 -- representation regressions, and the current S2b2 sign/no-go/collar/
--- three-region/gap/live-norm regressions are imported so current A/B routing
--- and physical phase seams are checked by the same root whenever it is
--- actually kernel-run.
+-- three-region/gap/live-norm/low-remote-datum regressions are imported so the
+-- current A/B routing and physical phase seams are checked by the same root
+-- whenever it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
 -- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1 radial
 -- packet realization, packet-complement antisymmetry, the adjacent-shell-gap
 -- no-go, exact collar/remote split, exact low/collar/remote flux identity,
--- two-shell concrete frequency gap, rational live-norm transport and A/B
--- portability classification may all be source-written while concrete scalar
--- FTC / integration authorities, the packet-level R98 spectral datum, collar
+-- two-shell concrete frequency gap, rational live-norm transport, the literal
+-- low/remote R98 datum and A/B portability classification may all be
+-- source-written while concrete scalar FTC / integration authorities, collar
 -- quantitative payment, initial ceiling and retained-viscosity payments remain
 -- unobserved or open.
 ------------------------------------------------------------------------
