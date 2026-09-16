@@ -8,15 +8,21 @@ import DASHI.Interop.CrossLaneProofArchaeologyLedgerExact as Archaeology
 import DASHI.Analysis.RiemannG2ExplicitCutoffTargetWindowFrontierExact as Riemann
 import DASHI.Governance.AustralianSenateAutismInquiryExact as Governance
 import DASHI.Papers.NavierStokes.FourLaneProofProgramExact as NS
+import DASHI.Interop.SLRGWBExecutionRoadmapExact as Wiki
 
 ------------------------------------------------------------------------
 -- ORTHOGONAL STATUS DECOMPOSITION AUDIT
 --
--- This owner does NOT introduce a replacement mega-enum.  It audits four
--- representative existing lanes and classifies the semantic axis actually
--- carried by their status constructors/coordinates.  The point is to prove
--- that enum/type naming is too coarse to determine meaning before any future
--- migration to a product-style status record is designed.
+-- This owner does NOT introduce a replacement mega-enum.  It audits existing
+-- lanes and classifies the semantic axis actually carried by their status
+-- constructors/coordinates.  The point is to prove that enum/type naming is
+-- too coarse to determine meaning before any future migration to a product-
+-- style status record is designed.
+--
+-- The multilingual Wikimedia lane adds a second guard: even a well-factored
+-- status product is not the complete provenance/context state.  Target-surface
+-- assertion, language-surface provenance and semantic-equivalence debt must not
+-- be silently absorbed into payment/routing/ownership/certification/residual.
 ------------------------------------------------------------------------
 
 data StatusAxis : Set where
@@ -25,6 +31,11 @@ data StatusAxis : Set where
   ownershipAxis : StatusAxis
   certificationAxis : StatusAxis
   residualAxis : StatusAxis
+
+data NonStatusContextAxis : Set where
+  sourceSurfaceAssertionAxis : NonStatusContextAxis
+  languageSurfaceProvenanceAxis : NonStatusContextAxis
+  semanticEquivalenceAxis : NonStatusContextAxis
 
 ------------------------------------------------------------------------
 -- Archaeology: genuine evidentiary/payment state.
@@ -119,10 +130,49 @@ nsCommutatorCertificationObserved =
   NS.periodicBCommutatorSpineCertificationObservedIsFalse
 
 ------------------------------------------------------------------------
+-- Wikimedia multilingual refinement.
+--
+-- SLR/GWB already pays shared-QID multilingual parser/PNF compatibility and
+-- per-surface semantic closure, while explicitly refusing three promotions:
+--   shared QID -> translation equivalence;
+--   propagated atom -> assertion by the target article/surface;
+--   SimpleWiki -> subset/translation of English Wikipedia.
+--
+-- These are not merely payment/routing statuses.  They retain provenance and
+-- source-surface semantics that any future status-product migration must keep
+-- outside, or explicitly alongside, the five candidate status axes.
+------------------------------------------------------------------------
+
+wikiSourceSurfaceAssertionAxis : NonStatusContextAxis
+wikiSourceSurfaceAssertionAxis = sourceSurfaceAssertionAxis
+
+wikiLanguageSurfaceProvenanceAxis : NonStatusContextAxis
+wikiLanguageSurfaceProvenanceAxis = languageSurfaceProvenanceAxis
+
+wikiSemanticEquivalenceAxis : NonStatusContextAxis
+wikiSemanticEquivalenceAxis = semanticEquivalenceAxis
+
+wikiSharedQidDoesNotPromoteTranslationEquivalence :
+  Wiki.sharedQidMayPromoteTranslationEquivalence
+    Wiki.canonicalGWBExecutionBoundary ≡ false
+wikiSharedQidDoesNotPromoteTranslationEquivalence = refl
+
+wikiSemanticPropagationDoesNotRewriteTargetSurface :
+  Wiki.semanticPropagationMayRewriteTargetSurface
+    Wiki.canonicalGWBExecutionBoundary ≡ false
+wikiSemanticPropagationDoesNotRewriteTargetSurface = refl
+
+wikiSimpleWikiIsNotEnglishSubset :
+  Wiki.simpleWikiMayBePresumedEnglishSubset
+    Wiki.canonicalGWBExecutionBoundary ≡ false
+wikiSimpleWikiIsNotEnglishSubset = refl
+
+------------------------------------------------------------------------
 -- Audit result.  The representative lanes support orthogonal factorisation,
 -- but this file is intentionally not the replacement product or migration
 -- layer.  Canonical promotion remains false until an exact record, translations
 -- and consumer-by-consumer migration obligations are designed and checked.
+-- The multilingual audit further requires preservation of non-status context.
 ------------------------------------------------------------------------
 
 record OrthogonalStatusAuditBoundary : Set where
@@ -137,6 +187,13 @@ record OrthogonalStatusAuditBoundary : Set where
     canonicalFiveAxisProductReadyForPromotion : Bool
     singleMegaEnumWouldPreserveAllDistinctions : Bool
 
+    multilingualSurfaceAssertionIsIndependentCoordinate : Bool
+    fiveStatusAxesSufficientForMultilingualSurfaceSemantics : Bool
+    sharedQidPaysTranslationEquivalence : Bool
+    semanticPropagationAssertsTargetSurface : Bool
+    simpleWikiPresumedEnglishSubset : Bool
+    provenanceContextMustSurviveStatusMigration : Bool
+
 open OrthogonalStatusAuditBoundary public
 
 canonicalOrthogonalStatusAuditBoundary : OrthogonalStatusAuditBoundary
@@ -150,6 +207,12 @@ canonicalOrthogonalStatusAuditBoundary =
     true
     false
     false
+    true
+    false
+    false
+    false
+    false
+    true
 
 record StatusAuditReading : Set where
   constructor status-audit-reading
@@ -158,6 +221,7 @@ record StatusAuditReading : Set where
     riemannReading : String
     governanceReading : String
     certificationReading : String
+    multilingualReading : String
     nextDesignStep : String
 
 open StatusAuditReading public
@@ -168,4 +232,5 @@ canonicalStatusAuditReading = status-audit-reading
   "RiemannG2ExplicitCutoffTargetWindowFrontierExact.PaymentStatus mixes ownership (ownedExternally) with route/frontier disposition (live, pruned, optional); the shared type name therefore cannot be treated as evidence of shared semantics."
   "AustralianSenateAutismInquiryExact.PropositionPaymentStatus mixes a paid external-record state with distinct downstream residual classes: same-object weld, implementation and outcome."
   "FourLaneProofProgramExact explicitly retains recovery/source progress independently from observed Agda certification; source-written/recovered structure cannot manufacture a kernel receipt."
-  "A later design may factor status into PaymentState × RoutingState × OwnershipState × CertificationState × ResidualKind, but only with exact translations and consumer-preservation proofs; this audit does not yet promote that product as canonical."
+  "SLRGWBExecutionRoadmapExact shows that shared-QID identity, multilingual parser/PNF compatibility, target-surface assertion and semantic equivalence are distinct: propagation keeps target_surface_asserted=false, and SimpleWiki remains a peer evidence surface rather than a presumed English subset or translation. These provenance/context coordinates must survive any status migration rather than being squeezed into payment or residual status."
+  "A later design may factor status into PaymentState × RoutingState × OwnershipState × CertificationState × ResidualKind, but only with exact translations, consumer-preservation proofs, and explicit retention of orthogonal provenance/context coordinates such as language surface and target-surface assertion. This audit does not yet promote that product as canonical."
