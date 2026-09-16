@@ -94,7 +94,7 @@ canonicalTruthAPITriangulation =
 data ThreeSourcesAutomaticallyProveLegalConclusion : Set where
 data PrimaryPleadingPlusReportingAutomaticallyProvesAllegation : Set where
 data IssuerAndReporterAgreementAutomaticallyPaysCustomerIdentity : Set where
-\data DifferentSourceRolesMayBeCollapsedPermission : Set where
+data DifferentSourceRolesMayBeCollapsedPermission : Set where
 
 threeSourcesDoNotProveLegalConclusion :
   ThreeSourcesAutomaticallyProveLegalConclusion → ⊥
