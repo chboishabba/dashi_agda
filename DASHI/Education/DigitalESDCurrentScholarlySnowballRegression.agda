@@ -1,0 +1,38 @@
+module DASHI.Education.DigitalESDCurrentScholarlySnowballRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDCurrentScholarlySnowballExact as Scholarly
+
+ardilaSourcePaidRegression :
+  Scholarly.ScholarlyCandidateBoundary.ardilaSourceRolePaid
+    Scholarly.canonicalScholarlyCandidateBoundary
+  ≡ true
+ardilaSourcePaidRegression = refl
+
+gousetiSourcePaidRegression :
+  Scholarly.ScholarlyCandidateBoundary.gousetiSourceRolePaid
+    Scholarly.canonicalScholarlyCandidateBoundary
+  ≡ true
+gousetiSourcePaidRegression = refl
+
+zagamiSourcePaidRegression :
+  Scholarly.ScholarlyCandidateBoundary.zagamiSourceRolePaid
+    Scholarly.canonicalScholarlyCandidateBoundary
+  ≡ true
+zagamiSourcePaidRegression = refl
+
+caseStudyDoesNotUniversaliseRegression :
+  Scholarly.SingleCaseCreatesUniversalDigitalESDRule → ⊥
+caseStudyDoesNotUniversaliseRegression = Scholarly.singleCaseDoesNotCreateUniversalDigitalESDRule
+
+platformExperienceDoesNotProveAllPlatformEffectsRegression :
+  Scholarly.TwoSchoolPlatformStudyCreatesUniversalPlatformEffect → ⊥
+platformExperienceDoesNotProveAllPlatformEffectsRegression =
+  Scholarly.twoSchoolPlatformStudyDoesNotCreateUniversalPlatformEffect
+
+historicalCaseDoesNotProveDurabilityRegression :
+  Scholarly.AustralianEdtechCaseCreatesUniversalDurabilityRule → ⊥
+historicalCaseDoesNotProveDurabilityRegression = Scholarly.australianEdtechCaseDoesNotCreateUniversalDurabilityRule
