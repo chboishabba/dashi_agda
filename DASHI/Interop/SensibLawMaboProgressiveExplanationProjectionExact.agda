@@ -30,33 +30,33 @@ data ReadingCardKind : Set where
   identityCard sourceCard proofCard : ReadingCardKind
 
 data ReadingPnfCue : Set where
-  actorCue
-  predicateCue
-  patientCue
-  negationCue
-  modalityCue
-  conditionCue
-  temporalCue
+  actorCue : ReadingPnfCue
+  predicateCue : ReadingPnfCue
+  patientCue : ReadingPnfCue
+  negationCue : ReadingPnfCue
+  modalityCue : ReadingPnfCue
+  conditionCue : ReadingPnfCue
+  temporalCue : ReadingPnfCue
   coreferenceCue : ReadingPnfCue
 
 data BoundedReadingRole : Set where
-  challengedPremiseRole
-  historicalInputRole
-  authorityPropositionRole
-  immediateImplicationRole
+  challengedPremiseRole : BoundedReadingRole
+  historicalInputRole : BoundedReadingRole
+  authorityPropositionRole : BoundedReadingRole
+  immediateImplicationRole : BoundedReadingRole
   downstreamApplicationRole : BoundedReadingRole
 
 data LegalTermLayer : Set where
   lexicalLayer encyclopediaLayer australianLawLayer contingentArgumentLayer : LegalTermLayer
 
 data ChainStage : Set where
-  literalArgumentStage
-  authorityCandidateStage
-  applicabilityStage
-  supportStage
-  defeaterStage
-  comparatorStage
-  residualStage
+  literalArgumentStage : ChainStage
+  authorityCandidateStage : ChainStage
+  applicabilityStage : ChainStage
+  supportStage : ChainStage
+  defeaterStage : ChainStage
+  comparatorStage : ChainStage
+  residualStage : ChainStage
   explanationStage : ChainStage
 
 ------------------------------------------------------------------------
@@ -71,24 +71,24 @@ data RuntimeReadingDepth : Set where
   readDepth inspectDepth traceDepth proveDepth : RuntimeReadingDepth
 
 data RuntimeLegalChangeKind : Set where
-  rejectedChange
-  qualifiedChange
-  distinguishedChange
-  overruledChange
-  displacedChange
-  reinterpretedChange
+  rejectedChange : RuntimeLegalChangeKind
+  qualifiedChange : RuntimeLegalChangeKind
+  distinguishedChange : RuntimeLegalChangeKind
+  overruledChange : RuntimeLegalChangeKind
+  displacedChange : RuntimeLegalChangeKind
+  reinterpretedChange : RuntimeLegalChangeKind
   leftOpenChange : RuntimeLegalChangeKind
 
 data RuntimeProofRole : Set where
   supportRole defeaterRole comparatorRole residualRole : RuntimeProofRole
 
 data RuntimeReadingQuestion : Set where
-  whoDidIt
-  whatHappened
-  toWhat
-  howCertain
-  assertedOrQuoted
-  whenQuestion
+  whoDidIt : RuntimeReadingQuestion
+  whatHappened : RuntimeReadingQuestion
+  toWhat : RuntimeReadingQuestion
+  howCertain : RuntimeReadingQuestion
+  assertedOrQuoted : RuntimeReadingQuestion
+  whenQuestion : RuntimeReadingQuestion
   whoDoesThisReferTo : RuntimeReadingQuestion
 
 data RuntimeTranslationLoss : Set where
@@ -374,8 +374,11 @@ layExplanationFactorsThroughExplainView :
   Query.AdequateFor explainProjection projectionSemantics layExplanationQuery
 layExplanationFactorsThroughExplainView =
   Query.factorsForQuery
+    {project = explainProjection}
+    {semantics = projectionSemantics}
+    {query = layExplanationQuery}
     (λ _ → layExplanationAnswer)
-    (λ state → refl)
+    (λ { sourceVersionA → refl ; sourceVersionB → refl })
 
 primaryAuthorityAuditDefect :
   Query.QueryAdequacyDefect
@@ -384,6 +387,9 @@ primaryAuthorityAuditDefect :
     primaryAuthorityAuditQuery
 primaryAuthorityAuditDefect =
   Query.queryAdequacyDefect
+    {project = explainProjection}
+    {semantics = projectionSemantics}
+    {query = primaryAuthorityAuditQuery}
     sourceVersionA
     sourceVersionB
     refl
@@ -396,7 +402,11 @@ primaryAuthorityAuditDoesNotFactorThroughExplainView :
     primaryAuthorityAuditQuery →
   ⊥
 primaryAuthorityAuditDoesNotFactorThroughExplainView =
-  Query.queryAdequacyDefectBlocksFactorisation primaryAuthorityAuditDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = explainProjection}
+    {semantics = projectionSemantics}
+    {query = primaryAuthorityAuditQuery}
+    primaryAuthorityAuditDefect
 
 record ProgressiveDisclosureAdequacyReceipt : Set₁ where
   constructor progressiveDisclosureAdequacyReceipt
