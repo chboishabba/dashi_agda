@@ -210,22 +210,22 @@ localizeBaseAsR295 :
   SelectedBaseJApplicability base published →
   R295.DirectT5StateFamilyJPresentation dataSet extension
 localizeBaseAsR295 base applicability = record
-  { R295.DirectT5StateFamilyJPresentation.Scale = Scale base
-  ; R295.DirectT5StateFamilyJPresentation.Volume = Volume base
-  ; R295.DirectT5StateFamilyJPresentation.Root = Root base
-  ; R295.DirectT5StateFamilyJPresentation.SourceDirection = SourceDirection base
-  ; R295.DirectT5StateFamilyJPresentation.calculus = calculus base
-  ; R295.DirectT5StateFamilyJPresentation.meaning = meaning base
-  ; R295.DirectT5StateFamilyJPresentation.shellData = shellData base
-  ; R295.DirectT5StateFamilyJPresentation.scaleOf = scaleOf base
-  ; R295.DirectT5StateFamilyJPresentation.volumeOf = volumeOf base
-  ; R295.DirectT5StateFamilyJPresentation.physicalDistance = physicalDistance base
-  ; R295.DirectT5StateFamilyJPresentation.connectingRoot = connectingRoot base
-  ; R295.DirectT5StateFamilyJPresentation.ConnectingClusterMeetsBothSupports =
+  { Scale = Scale base
+  ; Volume = Volume base
+  ; Root = Root base
+  ; SourceDirection = SourceDirection base
+  ; calculus = calculus base
+  ; meaning = meaning base
+  ; shellData = shellData base
+  ; scaleOf = scaleOf base
+  ; volumeOf = volumeOf base
+  ; physicalDistance = physicalDistance base
+  ; connectingRoot = connectingRoot base
+  ; ConnectingClusterMeetsBothSupports =
       ConnectingClusterMeetsBothSupports base
-  ; R295.DirectT5StateFamilyJPresentation.signedBelowMagnitude =
+  ; signedBelowMagnitude =
       signedBelowMagnitude base
-  ; R295.DirectT5StateFamilyJPresentation.differentiatedSourceMagnitudeBoundOnSelectedDirections =
+  ; differentiatedSourceMagnitudeBoundOnSelectedDirections =
       selectedMagnitudeLocalizationFromPublished applicability
   }
 
