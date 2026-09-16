@@ -4,12 +4,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Education.DigitalESDStudyClaimQuantitativePilotExact as Quant
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
-import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
+import DASHI.Education.DigitalESDSourceAttributionCorrectionExact as Correction
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 
 brasslerSourceRegression :
   Ceiling.StudyClaimProfile.source Quant.brasslerPilotProfile
-  ≡ Acquisition.brasslerOERESDStudentProducerSource
+  ≡ Correction.brasslerOERESDPublisherSpellingSource
 brasslerSourceRegression = refl
 
 brasslerEnrolledNRegression :
