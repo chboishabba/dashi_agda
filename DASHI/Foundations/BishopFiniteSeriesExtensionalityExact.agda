@@ -9,6 +9,7 @@ module DASHI.Foundations.BishopFiniteSeriesExtensionalityExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product using (_,_)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -53,7 +54,7 @@ termwiseEquivalentSeriesHaveEquivalentLimits
   termCongruence leftConverges rightConverges =
   BishopSequence.uniqueness-of-limits
     (BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
-      (seriesPartialSumsCongruent termCongruence)
+      (λ n {{_}} → seriesPartialSumsCongruent termCongruence n)
       (leftLimit , leftConverges))
     rightConverges
 
