@@ -64,7 +64,7 @@ currentCoefficientByteSourceReceipt =
     "Synthesis/LinearConsumerSyntheticBidiCoefficientBytesRegression.lean"
     "Synthesis/LinearConsumerSyntheticBidiCoefficientBytes.lean"
     "5da10473cff3d6d2163293ced86b6dbeab8037a1"
-    "332ad6201f19bd606289dd5da048892081ccf4ca"
+    "332ad62036712a34a472234b5f0170f73c1c27de"
     "1e3542098a6a644a6d0916d4286d33e8b92f366b"
 
 ------------------------------------------------------------------------
