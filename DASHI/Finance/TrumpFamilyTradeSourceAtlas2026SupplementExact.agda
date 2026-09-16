@@ -11,9 +11,9 @@ import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 ------------------------------------------------------------------------
 -- 2026 SOURCE-ACQUISITION SUPPLEMENT
 --
--- This module pays additional transaction/ownership propositions discovered
--- after the first atlas pass.  Primary SEC/OGE documentary records remain
--- separate from independent Reuters synthesis.  None of the records below
+-- Pays additional transaction/ownership propositions not already represented
+-- by the existing source stack. Primary SEC/OGE documentary records remain
+-- separate from independent Reuters synthesis. None of the records below
 -- establishes hidden knowledge, illegality, policy causation, motive, or a
 -- dashiTRADE execution signal.
 ------------------------------------------------------------------------
@@ -38,7 +38,7 @@ ericABTCTrustPurchase = Atlas.tradeEvidenceClaim
   (Atlas.secArtifact
     "0001213900-25-124157"
     "https://www.sec.gov/Archives/edgar/data/1755953/000121390025124157/xslSCHEDULE_13D_X01/primary_doc.xml")
-  "Supports the transaction date, quantity, price, source-of-funds statement, trustee relation and beneficial-ownership treatment in the filing only."
+  "Supports transaction date, quantity, price, source-of-funds statement, trustee relation and beneficial-ownership treatment in the filing only."
   true false false false
 
 trumpOGE278TNvidiaSale : Atlas.TradeEvidenceClaim
@@ -66,15 +66,15 @@ trumpOGE278TNvidiaSale = Atlas.tradeEvidenceClaim
   "Supports the disclosed sale, date and statutory value range only; not beneficial purpose, broker discretion, market impact, hidden information or motive."
   true false false false
 
-trumpOGE278TAmazonSale : Atlas.TradeEvidenceClaim
-trumpOGE278TAmazonSale = Atlas.tradeEvidenceClaim
+trumpOGE278TAmazonMarchSale : Atlas.TradeEvidenceClaim
+trumpOGE278TAmazonMarchSale = Atlas.tradeEvidenceClaim
   "Trump-2026-OGE-278T-AMZN-sale-2026-03-27"
   "Donald J. Trump"
   "Amazon.com Inc. common stock"
   Atlas.financialDisclosureClaim
   "2026-03-27"
   "2026-05-08"
-  "The same public OGE Form 278-T lists a sale of Amazon.com Inc. common stock on March 27, 2026 in the $250,001-$500,000 reporting range."
+  "The same public OGE Form 278-T lists a sale of Amazon.com Inc. common stock on March 27, 2026 in the $250,001-$500,000 reporting range; this is a distinct row from the separately formalised February 10 Amazon sale."
   Atlas.directDocumentarySupport
   (Atlas.sourceCitation
     "Donald J. Trump / U.S. Office of Government Ethics"
@@ -88,7 +88,7 @@ trumpOGE278TAmazonSale = Atlas.tradeEvidenceClaim
     Source.documentaryArtifact
     "https://extapps2.oge.gov/201/Presiden.nsf/PAS%2BIndex/405E4EC4E27BE8D185258DF7002DD1C0/%24FILE/Trump%2C%20Donald%20J.-05.08.2026-278T%282%29.pdf"
     "U.S. Office of Government Ethics")
-  "Supports the disclosed sale, date and statutory value range only; not beneficial purpose, market timing advantage, hidden information or motive."
+  "Supports the disclosed sale, date and statutory value range only; does not merge this row with another Amazon transaction or infer common strategy."
   true false false false
 
 trumpSpaceXReutersSecondary : Atlas.TradeEvidenceClaim
@@ -116,12 +116,9 @@ trumpSpaceXReutersSecondary = Atlas.tradeEvidenceClaim
   "Independent secondary report; exact primary disclosure row remains acquisition debt."
   false true false false
 
-------------------------------------------------------------------------
--- Exact source-diversity / granularity boundaries.
-------------------------------------------------------------------------
-
 sameFilerDoesNotCollapseTransactionIdentity :
-  Atlas.claimId trumpOGE278TNvidiaSale ≡ Atlas.claimId trumpOGE278TAmazonSale → ⊥
+  Atlas.claimId trumpOGE278TNvidiaSale
+  ≡ Atlas.claimId trumpOGE278TAmazonMarchSale → ⊥
 sameFilerDoesNotCollapseTransactionIdentity ()
 
 record TrumpFamilyTrade2026SupplementBoundary : Set where

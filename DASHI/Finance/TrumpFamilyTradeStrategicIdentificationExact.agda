@@ -9,14 +9,6 @@ import DASHI.GameTheory.StrategicExperimentalIdentificationFibreExact as Identif
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 import DASHI.Finance.TrumpFamilyTradeSourceAtlas2026SupplementExact as SourceAtlas
 
-------------------------------------------------------------------------
--- EXACT IDENTIFICATION COLLISION
---
--- A perfectly observed, source-paid transaction does not identify the latent
--- information state that generated it.  This is an abstract finite collision,
--- not a claim that either latent model describes any named person.
-------------------------------------------------------------------------
-
 data LatentInformationModel : Set where
   publicInformationOnly : LatentInformationModel
   additionalInformationAvailable : LatentInformationModel
@@ -85,13 +77,6 @@ transactionObservationCannotIdentifyInformationState :
 transactionObservationCannotIdentifyInformationState =
   Identify.identificationDefectBlocksIdentification
     transactionObservationHasInformationIdentificationDefect
-
-------------------------------------------------------------------------
--- Keep the empirical anchor and the abstract collision in separate authority
--- layers.  The exact source record establishes a transaction; the collision
--- establishes a non-identifiability theorem about what that observation alone
--- can recover.
-------------------------------------------------------------------------
 
 sourceAnchor : Atlas.TradeEvidenceClaim
 sourceAnchor = SourceAtlas.trumpOGE278TNvidiaSale

@@ -1,0 +1,24 @@
+module DASHI.Finance.TrumpFamilyTradePNFTradeIntegrationValidation where
+
+import DASHI.Finance.TrumpFamilyTradeSourceAtlas2026SupplementExact as Source
+import DASHI.Finance.TrumpFamilyTradePNFChronologyExact as PNF
+import DASHI.Finance.TrumpFamilyTradeSituatedActionabilityExact as Trade
+import DASHI.Finance.TrumpFamilyTradeStrategicIdentificationExact as Identify
+
+sourceBoundary : Source.TrumpFamilyTrade2026SupplementBoundary
+sourceBoundary = Source.canonicalTrumpFamilyTrade2026SupplementBoundary
+
+pnfBoundary : PNF.TrumpFamilyTradePNFChronologyBoundary
+pnfBoundary = PNF.canonicalTrumpFamilyTradePNFChronologyBoundary
+
+tradeBoundary : Trade.TrumpFamilyTradeSituatedActionabilityBoundary
+tradeBoundary = Trade.canonicalTrumpFamilyTradeSituatedActionabilityBoundary
+
+identificationBoundary : Identify.TrumpFamilyTradeStrategicIdentificationBoundary
+identificationBoundary = Identify.canonicalTrumpFamilyTradeStrategicIdentificationBoundary
+
+sameEvidenceDifferentActionability =
+  Trade.sameDocumentaryEvidenceDifferentBuyActionability
+
+exactTransactionStillFailsHiddenInformationIdentification =
+  Identify.transactionObservationCannotIdentifyInformationState

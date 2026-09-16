@@ -14,7 +14,7 @@ import DASHI.Trading.DashiTradeDreamOptionConeExact as Dream
 -- SOURCE-BACKED EVENT x SITUATED DASHITRADE FIBRE
 --
 -- A documentary transaction event is a world/evidence coordinate, not a trade
--- instruction.  The same exact evidence claim may be considered in different
+-- instruction. The same exact evidence claim may be considered in different
 -- market/portfolio/execution fibres, and actionability can differ.
 ------------------------------------------------------------------------
 
@@ -58,15 +58,10 @@ sameDocumentaryEvidenceDifferentBuyActionability :
 sameDocumentaryEvidenceDifferentBuyActionability =
   Trade.buyAvailabilityDiffersAcrossTradeFibres
 
-------------------------------------------------------------------------
--- Conversely, two distinct transaction claims may share the same situated
--- trading fibre without becoming the same event/proposition.
-------------------------------------------------------------------------
-
 amazonSaleCleanContext : SourceBackedTradeContext
 amazonSaleCleanContext =
   source-backed-trade-context
-    Supplement.trumpOGE278TAmazonSale
+    Supplement.trumpOGE278TAmazonMarchSale
     Trade.cleanLongTradeFibre
     refl
 

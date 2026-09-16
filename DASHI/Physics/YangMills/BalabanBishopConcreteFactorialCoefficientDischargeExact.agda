@@ -94,8 +94,9 @@ oddFactorialDenominatorGrowth index =
       six * oldFactorial
       ≤ (leftFactor * rightFactor) * oldFactorial
     multiplied =
-      ℕP.*-monoʳ-≤ oldFactorial
+      ℕP.*-mono-≤
         (sixBelowOddFactorialStepFactor index)
+        ℕP.≤-refl
 
     associated :
       six * oldFactorial
@@ -126,8 +127,9 @@ evenFactorialDenominatorGrowth index =
       two * oldFactorial
       ≤ (leftFactor * rightFactor) * oldFactorial
     multiplied =
-      ℕP.*-monoʳ-≤ oldFactorial
+      ℕP.*-mono-≤
         (twoBelowEvenFactorialStepFactor index)
+        ℕP.≤-refl
 
     associated :
       two * oldFactorial
