@@ -8,7 +8,7 @@ import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 import DASHI.Reasoning.AristotleExperimentalProofSearchExact as ProofSearch
 
-studyResultAssertionCountRegression : StudyPNF.studyResultAssertionCount ≡ 4
+studyResultAssertionCountRegression : StudyPNF.studyResultAssertionCount ≡ 5
 studyResultAssertionCountRegression = refl
 
 proofSearchBoundaryReuseRegression :
@@ -55,3 +55,18 @@ firstUnpaidGreenRegression :
   StudyPNF.StudyResultAudit.firstUnpaidImplication StudyPNF.greenResultAudit
   ≡ Cone.attributesCausalEffect
 firstUnpaidGreenRegression = refl
+
+colladoInferentialForceRegression :
+  PNF.PredicateNormalAssertion.inferentialForce StudyPNF.colladoLongitudinalAssertion
+  ≡ PNF.comparativeF
+colladoInferentialForceRegression = refl
+
+colladoCeilingRegression :
+  StudyPNF.StudyResultAudit.strongestPaidImplication StudyPNF.colladoResultAudit
+  ≡ Cone.derivesBoundedContrast
+colladoCeilingRegression = refl
+
+colladoFirstUnpaidRegression :
+  StudyPNF.StudyResultAudit.firstUnpaidImplication StudyPNF.colladoResultAudit
+  ≡ Cone.attributesCausalEffect
+colladoFirstUnpaidRegression = refl
