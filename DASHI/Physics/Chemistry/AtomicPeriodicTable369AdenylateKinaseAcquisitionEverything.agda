@@ -139,3 +139,20 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseKramersMetho
 -- a named numeric cell.  Access/search failure is a typed gap, not value absence,
 -- and DOI/QID/PDB/UniProt remain provenance rather than universal numeric premises.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAcquisitionFrontierExact
+
+-- Same-object Figure-5a apo geometry envelopes: conservative visual theta1/theta2
+-- intervals for all eight named states. These narrow the search space only;
+-- exact theta centroids and every named-state dLN cell remain unpaid.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureFivePanelAVisualGeometryEnvelopeExact
+
+-- Same-object Figure-6a ligand-bound counterpart: conservative visual theta1/
+-- theta2 intervals for alpha_L/beta_L/gamma_L/delta_L/epsilon_L/zeta_L/mu_L/
+-- lambda_L. Ligand context is retained; exact centroids and dLN remain unpaid.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureSixPanelAVisualGeometryEnvelopeExact
+
+-- Three-CV manifestation frontier: source prose explicitly says pathway states
+-- are characterised by theta1/theta2/dLN and points to Supporting Figure S18
+-- when discussing simultaneous three-coordinate mapping and gamma/delta-style
+-- intermediates.  S18 is retained as a same-article acquisition target only;
+-- its citation does not manufacture an exact named-state table or dLN numeral.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNamedStateThreeCVManifestationFrontierExact
