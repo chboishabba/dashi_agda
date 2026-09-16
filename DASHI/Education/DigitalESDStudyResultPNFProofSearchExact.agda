@@ -10,26 +10,13 @@ import DASHI.Education.DigitalESDQuantitativeUncertaintyAcquisitionExact as IAQ
 import DASHI.Education.DigitalESDStudyClaimQuantitativePilotExact as Brassler
 import DASHI.Education.DigitalESDStudyClaimPilotExact as Pilot
 import DASHI.Education.DigitalESDRandomizedCausalAcquisitionExact as Green
+import DASHI.Education.DigitalESDColladoLongitudinalClaimExact as Collado
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 import DASHI.Reasoning.AristotleExperimentalProofSearchExact as ProofSearch
 
 proofSearchBoundary : ProofSearch.AristotleExperimentalProofSearchBoundary
 proofSearchBoundary = ProofSearch.canonicalAristotleExperimentalProofSearchBoundary
-
-------------------------------------------------------------------------
--- STUDY RESULT -> PNF -> IMPLICATION / PROOF-SEARCH FRONTIER
---
--- This owner does not infer a paper's meaning from its title or discussion.
--- Each fixture starts from a source-local result already extracted into the
--- study-claim profile, normalises that result into explicit population,
--- context, intervention, comparator, outcome, time and inferential-force
--- coordinates, then states the strongest implication paid by those receipts.
--- The first stronger unpaid implication is retained as proof-search debt.
--- Canonical proof-search semantics are reused above: a useful next probe must
--- discriminate a consumer-relevant collision; search policy does not replace
--- proof-validity semantics and may adapt to the previous observed outcome.
-------------------------------------------------------------------------
 
 record StudyResultAudit : Set where
   constructor study-result-audit
@@ -239,12 +226,62 @@ greenResultAudit = study-result-audit
   "post-randomization exclusion changes the comparator analysis set; causal promotion requires an explicit estimand/analysis-set decision rather than inference from the RCT label alone"
   "next proof-search target is not another supporting citation: it is the analysis-set/estimand question—whether the reported exclusion rule is admissible for the declared causal consumer; construct completeness and transport remain separate later obligations"
 
+colladoScope : PNF.AssertionScope
+colladoScope = PNF.assertionScope
+  "University of Zaragoza Teruel Campus students in the observed intervention/control longitudinal sample"
+  "single Spanish university campus"
+  "voluntary participation in the ESD intervention"
+  "contemporaneous non-participation control group"
+  "environmental knowledge, personal environmental norm, and self-reported pro-environmental behaviour"
+  "baseline T0, immediate T1, and one-year T2"
+
+colladoPredicates : List PNF.PredicateAtom
+colladoPredicates =
+  PNF.predicateAtom "observed-longitudinal-student" PNF.populationPredicate "student × retained-wave"
+    "student belongs to the reported quasi-experimental longitudinal analysis surface"
+  ∷ PNF.predicateAtom "voluntary-esd-participation" PNF.interventionPredicate "student × ESD-intervention"
+    "intervention group consists of students who voluntarily enrolled in the ESD intervention"
+  ∷ PNF.predicateAtom "nonparticipation-control" PNF.comparatorPredicate "intervention-group × control-group"
+    "contemporaneous comparison group did not participate in the intervention but was not randomly assigned"
+  ∷ PNF.predicateAtom "time-condition-coefficient" PNF.outcomePredicate "outcome × time × condition"
+    "source reports mixed-effects Time×Experimental coefficients for knowledge, personal norm and self-reported behaviour"
+  ∷ PNF.predicateAtom "one-year-persistence" PNF.temporalPredicate "outcome × T2"
+    "source reports nonzero Time×Experimental coefficients at the one-year follow-up"
+  ∷ PNF.predicateAtom "coefficient-interval" PNF.significancePredicate "coefficient × 95%-CI"
+    "reported T2 95% CIs are knowledge [0.35,1.14], norm [0.02,0.67], behaviour [0.40,0.98]"
+  ∷ PNF.predicateAtom "selection-and-attrition" PNF.contextPredicate "allocation × retention"
+    "allocation was voluntary/non-random and 61.87% dropout left 98 complete T2 participants"
+  ∷ []
+
+colladoLongitudinalAssertion : PNF.PredicateNormalAssertion
+colladoLongitudinalAssertion = PNF.predicateNormalAssertion
+  "collado-2022-one-year-time-condition-contrast"
+  "In the observed quasi-experimental sample, intervention/control differences in measured environmental knowledge, personal norms and self-reported behaviour remained at one-year follow-up under the reported mixed-effects model."
+  PNF.studyPopulationQ
+  PNF.comparativeF
+  colladoScope
+  colladoPredicates
+  "same-object DOI 10.1108/IJSHE-07-2021-0315; immediate n=257 derived from 120+137, one-year complete n=98, exact mixed-effects coefficients and 95% CIs retained"
+
+colladoResultAudit : StudyResultAudit
+colladoResultAudit = study-result-audit
+  "collado-moreno-martin-albo-2022-longitudinal"
+  Collado.colladoLongitudinalProfile
+  colladoLongitudinalAssertion
+  "T2 Time×Experimental coefficients: knowledge b=.74; norm b=.34; self-reported behaviour b=.69; one-year complete n=98"
+  "T2 95% CIs: knowledge [0.35,1.14]; norm [0.02,0.67]; behaviour [0.40,0.98]; intervals are conditional on the non-random observed longitudinal sample"
+  Cone.derivesBoundedContrast
+  "same-object repeated-measure/control coefficients with intervals pay bounded immediate and one-year observed contrasts"
+  Cone.attributesCausalEffect
+  "voluntary allocation leaves selection/unmeasured confounding, and 61.87% dropout leaves a strong retention/selection residual"
+  "next discriminator must address allocation/attrition for the causal consumer; narrower confidence intervals on the same selected sample cannot pay randomization or missing-outcome assumptions"
+
 studyResultAudits : List StudyResultAudit
-studyResultAudits = iaqResultAudit ∷ brasslerResultAudit ∷ descampsResultAudit ∷ greenResultAudit ∷ []
+studyResultAudits = iaqResultAudit ∷ brasslerResultAudit ∷ descampsResultAudit ∷ greenResultAudit ∷ colladoResultAudit ∷ []
 
 studyResultAssertionCount : Nat
-studyResultAssertionCount = 4
+studyResultAssertionCount = 5
 
 studyResultPNFReading : String
 studyResultPNFReading =
-  "Digital-ESD synthesis now consumes explicit study-result predicates rather than article-level rhetoric. Each audit retains the sampled population, context, intervention/exposure, comparator, measured outcome, time window and inferential force together with n/effect/uncertainty receipts. Canonical Aristotle experimental proof-search semantics are reused only for discriminator/search structure: proof search starts at the first unpaid implication and seeks the least consumer-relevant observation that separates live worlds. Deng needs counterfactual control for causal promotion; Brassler needs both analysis-set recovery and non-random-allocation repair; Descamps needs an estimand-specific control plus missingness account; Green needs an explicit post-randomization analysis-set/estimand decision before causal promotion. More citations cannot substitute for those discriminators."
+  "Digital-ESD synthesis consumes explicit study-result predicates rather than article-level rhetoric. Each audit retains sampled population, context, intervention/exposure, comparator, measured outcome, time window and inferential force together with n/effect/uncertainty receipts. Canonical Aristotle experimental proof-search semantics are reused only for discriminator/search structure: proof search starts at the first unpaid implication and seeks the least consumer-relevant observation that separates live worlds. Deng needs counterfactual control; Brassler needs analysis-set recovery plus non-random-allocation repair; Descamps needs an estimand-specific control plus missingness account; Green needs an explicit post-randomization analysis-set/estimand decision; Collado needs allocation/attrition repair before causal promotion. More citations or narrower intervals cannot substitute for those discriminators."
