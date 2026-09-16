@@ -2,33 +2,42 @@
 module DASHI.Physics.YangMills.YMClayAgdaParityValidation where
 
 -- RED/GREEN parity surface for the retained Lean RequestProject.YangMills.Clay
--- tranche.  The production owners imported below must expose the same two
--- consumer routes: bounded physical energy form and source/clustering, both
--- entering one common continuum/OS mass-gap conclusion.
+-- tranche.  The production owners below expose the same two finite routes and
+-- one common cutoff/OS mass-gap conclusion, with proof objects retained at
+-- their actual universe levels.
 
 import DASHI.Physics.YangMills.YMClayBoundedFormParityExact as Form
 import DASHI.Physics.YangMills.YMClayMassGapAssemblyParityExact as Assembly
+import DASHI.Physics.YangMills.YMClayFullChainParityExact as Full
 
 open Form
 open Assembly
+open Full
 
 boundedFormPackageAvailable : ∀ Hilbert Scalar → Set₁
 boundedFormPackageAvailable = BoundedFormGapPackage
+
+finiteVacuumGapDatumAvailable : ∀ Hilbert Scalar → Set₁
+finiteVacuumGapDatumAvailable = FiniteVacuumFormGapDatum
 
 massGapConclusionAvailable :
   ∀ ContinuumHamiltonian Vacuum GapParameter → Set₁
 massGapConclusionAvailable = MassGapConclusion
 
-energyFormRouteAvailable : ∀ Hilbert Scalar FiniteGap → Set₁
+energyFormRouteAvailable : ∀ Hilbert Scalar → Set₁
 energyFormRouteAvailable = EnergyFormRoute
 
 sourceRouteAvailable :
-  ∀ SpectralRepresentation CovarianceDecay FiniteGap → Set₁
+  ∀ SpectralRepresentation CovarianceDecay → Set₁ → Set₂
 sourceRouteAvailable = SourceClusteringRoute
 
 commonContinuumRouteAvailable :
-  ∀ FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter → Set₁
+  ∀ (FiniteGap : Set₁) ContinuumGap ContinuumHamiltonian Vacuum GapParameter → Set₂
 commonContinuumRouteAvailable = CommonContinuumOSRoute
+
+boundedFullChainAvailable :
+  ∀ Hilbert Scalar ContinuumGap ContinuumHamiltonian Vacuum GapParameter → Set₂
+boundedFullChainAvailable = BoundedFormClayInputs
 
 -- The validation surface intentionally names the two headline assemblers.
 energyAssemblerIsPresent : Set
