@@ -1,0 +1,21 @@
+module DASHI.ComputerScience.RSA260BidiProjectionIndexedGeneratorSignatureValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiProjectionIndexedGeneratorSignatureExact as Signature
+
+baselineSignature : Signature.ProjectionIndexedGeneratorSignature
+baselineSignature = Signature.carrier32BaselineSignature
+
+alternateSameDegreeSignature : Signature.ProjectionIndexedGeneratorSignature
+alternateSameDegreeSignature = Signature.carrier32Y3Signature
+
+degreeOnlyDefect : Signature.DegreeOnlySignatureAdequacyDefect
+degreeOnlyDefect = Signature.sameDegreeCanHideDifferentGeneratorSignature
+
+projectionIndexedAdequacy : Signature.ProjectionIndexedSignatureAdequacy
+projectionIndexedAdequacy = Signature.signatureFactorsThroughProjectionIndexedObserver
+
+boundary : Signature.ProjectionIndexedGeneratorBoundary
+boundary = Signature.canonicalProjectionIndexedGeneratorBoundary
+
+nextResidual : Signature.ProjectionIndexedGeneratorResidual
+nextResidual = Signature.firstProjectionIndexedGeneratorResidual

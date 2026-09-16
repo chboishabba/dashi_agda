@@ -1,0 +1,15 @@
+module DASHI.ComputerScience.RSA260BidiProductionGeneratorResidualAdapterValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiProductionGeneratorResidualAdapterExact as Adapter
+
+routeBoundary : Adapter.ProductionGeneratorResidualBoundary
+routeBoundary = Adapter.canonicalProductionGeneratorResidualBoundary
+
+astarRoute : Adapter.GeneratorResidualRoute
+astarRoute = Adapter.projectedSequenceAStar
+
+fsolsRoute : Adapter.GeneratorResidualRoute
+fsolsRoute = Adapter.lingenGeneratorFSols
+
+firstResidual : Adapter.ProductionGeneratorResidualResidual
+firstResidual = Adapter.firstProductionGeneratorResidualResidual

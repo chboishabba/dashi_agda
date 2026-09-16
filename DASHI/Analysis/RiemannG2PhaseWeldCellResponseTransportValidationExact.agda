@@ -1,0 +1,9 @@
+module DASHI.Analysis.RiemannG2PhaseWeldCellResponseTransportValidationExact where
+
+import DASHI.Analysis.RiemannG2PhaseWeldCellResponseTransportExact as Transport
+
+boundary : Transport.PhaseWeldCellResponseTransportBoundary
+boundary = Transport.canonicalPhaseWeldCellResponseTransportBoundary
+
+firstResidual : Transport.PhaseWeldCellResponseTransportResidual
+firstResidual = Transport.firstPhaseWeldCellResponseTransportResidual

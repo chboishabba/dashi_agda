@@ -1,0 +1,14 @@
+module DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeDiagnosticValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeDiagnosticExact as Diagnostic
+
+boundary : Diagnostic.PhaseSensitiveRuntimeDiagnosticBoundary
+boundary = Diagnostic.canonicalPhaseSensitiveRuntimeDiagnosticBoundary
+
+runtime : Diagnostic.PhaseSensitiveRuntimeReceipt
+runtime = Diagnostic.currentPhaseSensitiveRuntimeReceipt
+
+firstResidual : Diagnostic.PhaseSensitiveRuntimeResidual
+firstResidual = Diagnostic.firstPhaseSensitiveRuntimeResidual
