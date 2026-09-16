@@ -278,3 +278,5 @@ external Lean donor theorem -> Agda kernel theorem without a local payment/repla
 - R384: minimal source fixed-point-distance producer removes the legacy `boundaryHessianStable` dependency cycle.
 - R385: R384 distance and literal R103 Hessian feed R379 directly; full R370 and R380--R383 are no longer mandatory.
 - R386: exact comparison-vs-absolute no-go; coefficient sensitivity is demoted to optional subproducer below the literal selected-localization theorem.
+
+Exact-head status is queried directly from GitHub and is not inferred from these round labels.
