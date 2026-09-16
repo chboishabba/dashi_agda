@@ -8,3 +8,4 @@ module DASHI.Finance.TrumpFamilyTradeIndependentCorroborationValidation where
 
 import DASHI.Finance.TruthAPIIndependentCorroborationExact
 import DASHI.Finance.TruthAPILitigationAllegationExact
+import DASHI.Finance.TruthAPISourceRoleTriangulationExact
