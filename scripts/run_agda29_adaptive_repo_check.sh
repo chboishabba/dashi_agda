@@ -21,8 +21,10 @@ Resource classes are operational only:
   long-cpu    observed CPU-heavy; isolated from the ordinary frontier
   memory-risk observed high-memory; reduced Agda parallelism / RSS ceiling
 
-No class changes liveness or proof status. Every selected target still has to
-pass before a non-resumed invocation writes a success receipt.
+Resource classes propagate through first-party imports: a target whose import
+closure reaches a memory-risk owner is memory-risk too; long-cpu propagates in
+the same way unless memory-risk dominates.  This changes scheduling only, not
+liveness or proof status.
 
 Options:
   --include-heavy       include YM/NS/Balaban and their dependency closure
@@ -36,7 +38,7 @@ Environment controls:
   AGDA_JOBS                         ordinary jobs (default 2)
   AGDA_LONG_CPU_JOBS                long-cpu jobs (default 2)
   AGDA_MEMORY_RISK_JOBS             memory-risk jobs (default 1)
-  DASHI_AGDA_RSS_LIMIT_MB           ordinary RSS guard (default 15360)
+  DASHI_AGDA_RSS_LIMIT_MB           ordinary RSS guard (default 8192)
   DASHI_AGDA_LONG_CPU_RSS_MB        long-cpu RSS guard (default ordinary limit)
   DASHI_AGDA_MEMORY_RISK_RSS_MB     memory-risk RSS guard (default 5120)
   DASHI_AGDA_HOST_HEADROOM_FLOOR_MB minimum MemAvailable+SwapFree before launch
@@ -126,46 +128,109 @@ else
 fi
 
 python3 - \
-  "$RUN_TARGETS_FILE" "$PROFILE_FILE" \
+  "$TARGETS_FILE" "$RUN_TARGETS_FILE" "$PROFILE_FILE" "$REPO_ROOT" \
   "$ORDINARY_FILE" "$LONG_CPU_FILE" "$MEMORY_RISK_FILE" \
   "$RESOURCE_SUMMARY" <<'PY'
 import json
+import re
 import sys
 from pathlib import Path
 
-targets_path, profile_path, ordinary_path, long_path, memory_path, summary_path = sys.argv[1:]
-targets = [line.strip() for line in Path(targets_path).read_text().splitlines() if line.strip()]
+(
+    all_targets_path, run_targets_path, profile_path, root_path,
+    ordinary_path, long_path, memory_path, summary_path,
+) = sys.argv[1:]
+root = Path(root_path)
+all_targets = [line.strip() for line in Path(all_targets_path).read_text().splitlines() if line.strip()]
+run_targets = [line.strip() for line in Path(run_targets_path).read_text().splitlines() if line.strip()]
 profile = json.loads(Path(profile_path).read_text())
 exact = profile.get("exact", {})
 prefix_rules = profile.get("prefix", [])
 allowed = {"ordinary", "long-cpu", "memory-risk"}
+severity = {"ordinary": 0, "long-cpu": 1, "memory-risk": 2}
+by_severity = {value: key for key, value in severity.items()}
+module_re = re.compile(r"^\s*module\s+([A-Za-z0-9_.]+)\s+where\b")
+import_re = re.compile(r"^\s*(?:open\s+)?import\s+([A-Za-z0-9_.]+)")
 
-buckets = {name: [] for name in allowed}
-matched_exact = 0
-matched_prefix = 0
+module_to_path = {}
+imports_by_path = {}
+for rel in all_targets:
+    module = None
+    imports = []
+    try:
+        lines = (root / rel).read_text(errors="ignore").splitlines()
+    except OSError:
+        lines = []
+    for raw in lines:
+        if raw.lstrip().startswith("--"):
+            continue
+        if module is None:
+            match = module_re.match(raw)
+            if match:
+                module = match.group(1)
+        match = import_re.match(raw)
+        if match:
+            imports.append(match.group(1))
+    if module:
+        module_to_path[module] = rel
+    imports_by_path[rel] = imports
 
-for target in targets:
-    resource_class = "ordinary"
+deps = {
+    rel: {module_to_path[name] for name in imports if name in module_to_path}
+    for rel, imports in imports_by_path.items()
+}
+
+def direct_class(target):
     entry = exact.get(target)
     if isinstance(entry, dict):
         candidate = entry.get("class", "ordinary")
         if candidate not in allowed:
             raise SystemExit(f"invalid resource class {candidate!r} for {target}")
-        resource_class = candidate
+        return candidate, "exact"
+    for rule in prefix_rules:
+        if not isinstance(rule, dict):
+            continue
+        prefix = rule.get("path")
+        candidate = rule.get("class")
+        if isinstance(prefix, str) and target.startswith(prefix):
+            if candidate not in allowed:
+                raise SystemExit(f"invalid resource class {candidate!r} for prefix {prefix}")
+            return candidate, "prefix"
+    return "ordinary", "default"
+
+memo = {}
+visiting = set()
+
+def effective_class(target):
+    if target in memo:
+        return memo[target]
+    direct, _ = direct_class(target)
+    best = severity[direct]
+    if target in visiting:
+        return direct
+    visiting.add(target)
+    for dep in deps.get(target, ()):
+        best = max(best, severity[effective_class(dep)])
+        if best == severity["memory-risk"]:
+            break
+    visiting.remove(target)
+    memo[target] = by_severity[best]
+    return memo[target]
+
+buckets = {name: [] for name in allowed}
+matched_exact = 0
+matched_prefix = 0
+inherited = 0
+for target in run_targets:
+    direct, source = direct_class(target)
+    effective = effective_class(target)
+    if source == "exact":
         matched_exact += 1
-    else:
-        for rule in prefix_rules:
-            if not isinstance(rule, dict):
-                continue
-            prefix = rule.get("path")
-            candidate = rule.get("class")
-            if isinstance(prefix, str) and target.startswith(prefix):
-                if candidate not in allowed:
-                    raise SystemExit(f"invalid resource class {candidate!r} for prefix {prefix}")
-                resource_class = candidate
-                matched_prefix += 1
-                break
-    buckets[resource_class].append(target)
+    elif source == "prefix":
+        matched_prefix += 1
+    if severity[effective] > severity[direct]:
+        inherited += 1
+    buckets[effective].append(target)
 
 for path, key in [
     (ordinary_path, "ordinary"),
@@ -175,14 +240,17 @@ for path, key in [
     Path(path).write_text("".join(f"{target}\n" for target in buckets[key]))
 
 summary = {
-    "schema": "dashi.agda-resource-plan.v1",
-    "selected_total": len(targets),
+    "schema": "dashi.agda-resource-plan.v2",
+    "selected_total": len(run_targets),
     "ordinary": len(buckets["ordinary"]),
     "long_cpu": len(buckets["long-cpu"]),
     "memory_risk": len(buckets["memory-risk"]),
     "matched_exact_profiles": matched_exact,
     "matched_prefix_profiles": matched_prefix,
-    "unprofiled_defaulted_to_ordinary": len(targets) - matched_exact - matched_prefix,
+    "inherited_resource_profiles": inherited,
+    "unprofiled_defaulted_to_ordinary_before_dependency_propagation": (
+        len(run_targets) - matched_exact - matched_prefix
+    ),
     "profile_file": str(Path(profile_path).resolve()),
 }
 Path(summary_path).write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
@@ -216,7 +284,7 @@ fi
 ORDINARY_JOBS="${AGDA_JOBS:-2}"
 LONG_CPU_JOBS="${AGDA_LONG_CPU_JOBS:-2}"
 MEMORY_RISK_JOBS="${AGDA_MEMORY_RISK_JOBS:-1}"
-ORDINARY_RSS_MB="${DASHI_AGDA_RSS_LIMIT_MB:-15360}"
+ORDINARY_RSS_MB="${DASHI_AGDA_RSS_LIMIT_MB:-8192}"
 LONG_CPU_RSS_MB="${DASHI_AGDA_LONG_CPU_RSS_MB:-$ORDINARY_RSS_MB}"
 MEMORY_RISK_RSS_MB="${DASHI_AGDA_MEMORY_RISK_RSS_MB:-5120}"
 HOST_HEADROOM_FLOOR_MB="${DASHI_AGDA_HOST_HEADROOM_FLOOR_MB:-10240}"
@@ -293,16 +361,10 @@ run_class() {
     "$REPO_ROOT/scripts/run_agda29_parallel_check.sh"
 }
 
-# Cheap/default targets advance first; known slow and memory-sensitive owners
-# remain live but cannot monopolise the ordinary frontier.  Host headroom is
-# checked before each class so a swap-saturated workstation fails closed before
-# Agda starts rather than racing the kernel OOM killer.
 run_class "ordinary" "$ORDINARY_FILE" "$ORDINARY_JOBS" "$ORDINARY_RSS_MB"
 run_class "long-cpu" "$LONG_CPU_FILE" "$LONG_CPU_JOBS" "$LONG_CPU_RSS_MB"
 run_class "memory-risk" "$MEMORY_RISK_FILE" "$MEMORY_RISK_JOBS" "$MEMORY_RISK_RSS_MB"
 
-# A suffix run repairs/advances the frontier but cannot certify the skipped
-# prefix in this invocation.
 if [ -n "$FROM_TARGET" ]; then
   echo "Resumed suffix passed; rerun without --from before claiming full coverage."
   exit 0
