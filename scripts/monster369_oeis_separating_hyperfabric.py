@@ -23,6 +23,7 @@ COORDINATES: tuple[str, ...] = (
     "ogg475971Factor",
     "zetaPhaseCoordinate",
     "tauModularCoordinate",
+    "c6WeightTwoSpectrumCoordinate",
     "actualWeylActionCoordinate",
     "selected3BRestrictionCoordinate",
     "twelvePlusSeventyEightCoordinate",
@@ -49,6 +50,7 @@ RELATION_STRENGTH: dict[str, str] = {
     "ogg475971Factor": "exactArithmetic",
     "zetaPhaseCoordinate": "typedCarrierMap",
     "tauModularCoordinate": "typedCarrierMap",
+    "c6WeightTwoSpectrumCoordinate": "representationSpectrumTheorem",
     "actualWeylActionCoordinate": "representationActionTheorem",
     "selected3BRestrictionCoordinate": "representationActionTheorem",
     "twelvePlusSeventyEightCoordinate": "representationActionTheorem",
@@ -109,7 +111,11 @@ PROOF_ELIGIBLE_COORDINATES: tuple[str, ...] = tuple(
     coordinate
     for coordinate in COORDINATES
     if RELATION_STRENGTH[coordinate]
-    in {"typedCarrierMap", "representationActionTheorem"}
+    in {
+        "typedCarrierMap",
+        "representationSpectrumTheorem",
+        "representationActionTheorem",
+    }
 )
 
 
@@ -150,6 +156,24 @@ LITERAL_WORLDS: tuple[LiteralWorld, ...] = (
             "selected3BRestrictionCoordinate": "N3B-restriction-17496",
             "twelvePlusSeventyEightCoordinate": "12-block-occurrence",
             "sameIntegerCollisionOnly": "N3B-restriction-role",
+        },
+    ),
+    LiteralWorld(
+        "oeis6BQSIXCoefficient32772",
+        32772,
+        "OEIS A007255 normalized Monster class-6B q^6 graded-trace coefficient",
+        {
+            "tauModularCoordinate": "6B-q6-graded-trace",
+            "sameIntegerCollisionOnly": "6B-q6-series-role",
+        },
+    ),
+    LiteralWorld(
+        "c6WeightTwoMultiplicity32772",
+        32772,
+        "source-paid weight-two C6 Fourier eigenspace multiplicity m1=m5",
+        {
+            "c6WeightTwoSpectrumCoordinate": "C6-weight-two-m1-m5",
+            "sameIntegerCollisionOnly": "C6-weight-two-spectrum-role",
         },
     ),
     LiteralWorld(
@@ -377,7 +401,7 @@ def build_report() -> dict[str, object]:
     literal_search = minimum_literal_collision_transversals()
     literal_edges = literal_collision_edges()
     return {
-        "schema": "monster369-oeis-separating-hyperfabric-runtime-v2",
+        "schema": "monster369-oeis-separating-hyperfabric-runtime-v3",
         "portfolio": {
             "coordinate_count": len(COORDINATES),
             "edge_count": len(EDGES),
