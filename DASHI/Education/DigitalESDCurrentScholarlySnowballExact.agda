@@ -85,6 +85,18 @@ holstSDG47MonitoringSource = Attr.mkDOISource
   "Longitudinal input-level ESD monitoring study and methodology using more than 11,000 documents across ten years and all formal education sectors in Germany. Supports independent assessment of depth and speed of ESD integration in policies, curricula, educator training and student assessment; input integration does not by itself establish learning, output/outcome transformation or digital-ESD effects."
   Attr.publicAttribution
 
+martinezDigitalEducationSystematicReviewSource : Attr.AttributedSource
+martinezDigitalEducationSystematicReviewSource = Attr.mkDOISource
+  "Héctor Martínez García; Marta Rubio Gómez-Cadiñanos; Trinidad García; Débora Areces; Ana Isabel Álvarez; Celestino Rodríguez; José Carlos Núñez"
+  "Conceptualizing Digital Education for Sustainable and Equitable Face-to-Face Schooling: A Systematic Review"
+  "Sustainability 18(15), 7979"
+  "2026"
+  "10.3390/su18157979"
+  "https://doi.org/10.3390/su18157979"
+  Attr.academicArticleSource
+  "Systematic review of 33 peer-reviewed empirical studies in face-to-face compulsory schooling, selected from Scopus, Web of Science and reference checking. It finds substantial ambiguity between digital education, ICT use and digital competence; positive outcomes depend on pedagogical purpose, teacher mediation, policy/infrastructure and equitable access rather than device presence alone. The review's database execution belongs to that review and cannot pay the current manuscript's declared search receipts."
+  Attr.publicAttribution
+
 canonicalCurrentScholarlySourceAtlas : Attr.AttributedSourceAtlas
 canonicalCurrentScholarlySourceAtlas = Attr.mkSourceAtlas
   "current digital-ESD scholarly snowball extension"
@@ -95,8 +107,9 @@ canonicalCurrentScholarlySourceAtlas = Attr.mkSourceAtlas
   ∷ chughSustainabilityParadoxSource
   ∷ boehmeDigitainabilitySource
   ∷ holstSDG47MonitoringSource
+  ∷ martinezDigitalEducationSystematicReviewSource
   ∷ [] )
-  "Recent scholarly candidates extending the existing digital-ESD literature map with sustainability co-design, platformisation, edtech durability, close sustainability-paradox and twin-transformation conceptual antecedents, and longitudinal SDG 4.7 input-monitoring methodology. Acquisition remains candidate-only pending structured search and screening."
+  "Recent scholarly candidates extending the existing digital-ESD literature map with sustainability co-design, platformisation, edtech durability, close sustainability-paradox and twin-transformation conceptual antecedents, longitudinal SDG 4.7 input-monitoring methodology, and a compulsory-school digital-education systematic review. Acquisition remains candidate-only pending the current manuscript's own structured search and screening."
 
 ardilaSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt ardilaDigitalFuturesSource
 ardilaSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt ardilaDigitalFuturesSource
@@ -116,6 +129,9 @@ boehmeSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt boehmeDigi
 holstSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt holstSDG47MonitoringSource
 holstSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt holstSDG47MonitoringSource
 
+martinezReviewSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt martinezDigitalEducationSystematicReviewSource
+martinezReviewSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt martinezDigitalEducationSystematicReviewSource
+
 priorLiteratureMapRetained : PriorMap.DigitalESDLiteratureMap
 priorLiteratureMapRetained = PriorMap.canonicalDigitalESDLiteratureMap
 
@@ -126,6 +142,7 @@ data OpinionPaperCreatesEmpiricalDigitalESDEffect : Set where
 data SustainabilityParadoxExhaustsReciprocalDigitalESDFramework : Set where
 data TwinTransformationFrameworkCreatesEvidencePaymentArchitecture : Set where
 data InputIndicatorMonitoringCreatesOutcomeTransformation : Set where
+data OtherReviewDatabaseExecutionPaysCurrentReviewSearch : Set where
 
 singleCaseDoesNotCreateUniversalDigitalESDRule : SingleCaseCreatesUniversalDigitalESDRule → ⊥
 singleCaseDoesNotCreateUniversalDigitalESDRule ()
@@ -148,6 +165,9 @@ twinTransformationFrameworkDoesNotCreateEvidencePaymentArchitecture ()
 inputIndicatorMonitoringDoesNotCreateOutcomeTransformation : InputIndicatorMonitoringCreatesOutcomeTransformation → ⊥
 inputIndicatorMonitoringDoesNotCreateOutcomeTransformation ()
 
+otherReviewDatabaseExecutionDoesNotPayCurrentReviewSearch : OtherReviewDatabaseExecutionPaysCurrentReviewSearch → ⊥
+otherReviewDatabaseExecutionDoesNotPayCurrentReviewSearch ()
+
 record ScholarlyCandidateBoundary : Set where
   constructor scholarly-candidate-boundary
   field
@@ -163,6 +183,8 @@ record ScholarlyCandidateBoundary : Set where
     boehmeSourceRolePaidIsTrue : boehmeSourceRolePaid ≡ true
     holstSourceRolePaid : Bool
     holstSourceRolePaidIsTrue : holstSourceRolePaid ≡ true
+    martinezReviewSourceRolePaid : Bool
+    martinezReviewSourceRolePaidIsTrue : martinezReviewSourceRolePaid ≡ true
     acquisitionCreatesInclusion : Bool
     acquisitionCreatesInclusionIsFalse : acquisitionCreatesInclusion ≡ false
     citationImportsProof : Bool
@@ -174,4 +196,4 @@ open ScholarlyCandidateBoundary public
 
 canonicalScholarlyCandidateBoundary : ScholarlyCandidateBoundary
 canonicalScholarlyCandidateBoundary = scholarly-candidate-boundary
-  true refl true refl true refl true refl true refl true refl false refl false refl false refl
+  true refl true refl true refl true refl true refl true refl true refl false refl false refl false refl
