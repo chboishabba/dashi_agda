@@ -46,3 +46,20 @@ import DASHI.Biology.Protein.ProteinTemporalObligationChainValidation
 -- payments do not transfer between protein lanes.
 import DASHI.Biology.Protein.ProteinTemporalObligationProfilesExact
 import DASHI.Biology.Protein.ProteinTemporalObligationProfilesValidation
+
+-- Consumer-projection portfolio and refinement kernel: four query-specific
+-- protein defects (thermal, conformation, rate, thiol modification) now select
+-- the shortest eligible retained-coordinate family only after adequacy.  Feng,
+-- AdK and Allium sources retain ownership only of their source-bounded premises;
+-- the shared selection/minimality theorem is DASHI synthesis.
+import DASHI.Biology.Protein.ProteinConsumerProjectionAdequacyExact
+import DASHI.Biology.Protein.ProteinConsumerProjectionAdequacyValidation
+import DASHI.Biology.Protein.ProteinConsumerFamilyRefinementKernelExact
+import DASHI.Biology.Protein.ProteinConsumerFamilyRefinementKernelValidation
+
+-- Cross-domain architecture check: the independent biocontrol chemistry lane
+-- already uses the same admissibility/consumer-adequacy-before-MDL ordering.
+-- Only the formal selection pattern is cross-pollinated; protein biology,
+-- chemistry/ecology mechanism, source attribution and authority do not transfer.
+import DASHI.Biology.Protein.ProteinConsumerFamilyBiocontrolCrossPollinationExact
+import DASHI.Biology.Protein.ProteinConsumerFamilyBiocontrolCrossPollinationValidation
