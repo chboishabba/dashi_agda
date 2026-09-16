@@ -36,8 +36,13 @@ record MassGapConclusion
 
 open MassGapConclusion public
 
+-- Finite gap evidence lives in Set₁ in both active routes (the concrete source
+-- route uses Gap.PositiveTransferGapCore; the form route uses
+-- Form.FiniteVacuumFormGapDatum), so the common route is universe-correct at
+-- Set₂ instead of erasing the proof object to a Bool/token.
 record CommonContinuumOSRoute
-    (FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) : Set₁ where
+    (FiniteGap : Set₁)
+    (ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) : Set₂ where
   field
     cutoffToContinuum : FiniteGap → ContinuumGap
     ymOSSameObject : ContinuumGap →
@@ -46,7 +51,8 @@ record CommonContinuumOSRoute
 open CommonContinuumOSRoute public
 
 commonContinuumOSCompiler :
-  ∀ {FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter} →
+  ∀ {FiniteGap : Set₁}
+    {ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set} →
   CommonContinuumOSRoute
     FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter →
   FiniteGap →
@@ -54,10 +60,6 @@ commonContinuumOSCompiler :
 commonContinuumOSCompiler route finiteGap =
   ymOSSameObject route (cutoffToContinuum route finiteGap)
 
--- Energy-form route: unlike the first parity draft, there is no separate
--- `formGapCompiler` hypothesis.  The finite vacuum-form-gap datum is constructed
--- directly by YMClayBoundedFormParityExact from the bounded physical form
--- package, matching the Lean FormHamiltonian consumer semantics.
 record EnergyFormRoute
     (Hilbert Scalar : Set) : Set₁ where
   field
@@ -72,10 +74,9 @@ finiteGapOfEnergyForms :
 finiteGapOfEnergyForms route =
   Form.boundedFormBuildsFiniteVacuumGapDatum (finiteForms route)
 
--- Source/clustering route.  This remains abstract at this layer because the
--- live R387 specialization is supplied by YMClayFullChainParityExact below.
 record SourceClusteringRoute
-    (SpectralRepresentation CovarianceDecay FiniteGap : Set) : Set₁ where
+    (SpectralRepresentation CovarianceDecay : Set)
+    (FiniteGap : Set₁) : Set₂ where
   field
     spectralRepresentation : SpectralRepresentation
     covarianceDecay : CovarianceDecay
@@ -85,7 +86,8 @@ record SourceClusteringRoute
 open SourceClusteringRoute public
 
 finiteGapOfSourceClustering :
-  ∀ {SpectralRepresentation CovarianceDecay FiniteGap} →
+  ∀ {SpectralRepresentation CovarianceDecay : Set}
+    {FiniteGap : Set₁} →
   SourceClusteringRoute SpectralRepresentation CovarianceDecay FiniteGap →
   FiniteGap
 finiteGapOfSourceClustering route =
@@ -104,8 +106,9 @@ massGapOfEnergyForms energy common =
   commonContinuumOSCompiler common (finiteGapOfEnergyForms energy)
 
 massGapOfSourceClustering :
-  ∀ {SpectralRepresentation CovarianceDecay FiniteGap ContinuumGap
-      ContinuumHamiltonian Vacuum GapParameter} →
+  ∀ {SpectralRepresentation CovarianceDecay : Set}
+    {FiniteGap : Set₁}
+    {ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set} →
   SourceClusteringRoute SpectralRepresentation CovarianceDecay FiniteGap →
   CommonContinuumOSRoute
     FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter →
