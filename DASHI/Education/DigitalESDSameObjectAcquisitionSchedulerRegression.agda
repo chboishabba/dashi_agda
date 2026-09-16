@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.RequirementProducerSchedulerExact as CoreScheduler
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
 import DASHI.Education.DigitalESDSameObjectAcquisitionSchedulerExact as Scheduler
@@ -107,3 +108,29 @@ canonicalSchedulerBoundaryRegression :
     CoreScheduler.canonicalRequirementProducerSchedulerBoundary
   ≡ false
 canonicalSchedulerBoundaryRegression = refl
+
+------------------------------------------------------------------------
+-- Pareto/MDL only begins after hard admissibility + consumer adequacy.
+------------------------------------------------------------------------
+
+canonicalParetoEligibilityBoundaryRegression : MDL.AdmissibleConsumerMDLBoundary
+canonicalParetoEligibilityBoundaryRegression =
+  Scheduler.canonicalProducerParetoEligibilityBoundary
+
+inadmissibleCannotWinByShortCodeRegression :
+  MDL.AdmissibleConsumerMDLBoundary.inadmissibleModelMayWinByShortCode
+    Scheduler.canonicalProducerParetoEligibilityBoundary
+  ≡ false
+inadmissibleCannotWinByShortCodeRegression = refl
+
+consumerInadequateCannotWinByShortCodeRegression :
+  MDL.AdmissibleConsumerMDLBoundary.consumerInadequateModelMayWinByShortCode
+    Scheduler.canonicalProducerParetoEligibilityBoundary
+  ≡ false
+consumerInadequateCannotWinByShortCodeRegression = refl
+
+paretoAxesRemainApplicationDeclaredRegression :
+  MDL.AdmissibleConsumerMDLBoundary.paretoAxesAreApplicationDeclared
+    Scheduler.canonicalProducerParetoEligibilityBoundary
+  ≡ true
+paretoAxesRemainApplicationDeclaredRegression = refl
