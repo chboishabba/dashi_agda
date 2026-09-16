@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlAtomTransportExact where
 
 open import Relation.Binary.PropositionalEquality using (sym; trans)

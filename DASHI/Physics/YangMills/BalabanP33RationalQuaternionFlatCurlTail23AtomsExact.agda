@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlTail23AtomsExact where
 
 ------------------------------------------------------------------------

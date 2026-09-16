@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanDecoupledActivityHessian where
 
 -- CMP 116 (1.9)--(1.10) decouples a local activity by parameters s(Δ), while

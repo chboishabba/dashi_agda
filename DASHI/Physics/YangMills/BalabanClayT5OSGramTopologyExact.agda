@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact where
 
 open import Agda.Builtin.Equality using (_≡_)

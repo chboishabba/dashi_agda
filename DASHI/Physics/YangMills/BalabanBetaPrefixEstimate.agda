@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanBetaPrefixEstimate where
 
 -- The analytic RG obstruction, stated against the generated finite-cutoff

@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlIdentityExact where
 
 open import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlSquareExact public

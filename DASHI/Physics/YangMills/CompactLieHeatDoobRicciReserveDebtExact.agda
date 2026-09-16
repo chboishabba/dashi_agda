@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.CompactLieHeatDoobRicciReserveDebtExact where
 
 ------------------------------------------------------------------------

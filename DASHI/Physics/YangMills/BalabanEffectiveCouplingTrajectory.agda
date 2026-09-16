@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanEffectiveCouplingTrajectory where
 
 -- Source ledger for the *actual* effective-coupling coordinate used by

@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact where
 
 open import Agda.Builtin.Equality using (_≡_)
