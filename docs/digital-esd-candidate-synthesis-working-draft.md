@@ -106,7 +106,21 @@ The final paper should therefore distinguish:
 
 At present, this is appropriately represented as a residual rather than filled by analogy.
 
-## 6. Working synthesis claim
+## 6. Contribution positioning against the sustainability-paradox antecedent
+
+A close conceptual antecedent materially narrows the contribution claim. Chugh (2026; DOI 10.1057/s41599-026-06845-5), *The sustainability paradox: rethinking digital technologies in education for a sustainable future*, already argues that educational digitalisation can improve access and participation while producing environmental and social costs, and advocates lifecycle-oriented, procurement and circular-economy responses. The present manuscript should therefore **not** claim novelty for the bare proposition that digital education itself must be sustainable.
+
+The candidate distinctive contribution is narrower and compound. Relative to this close antecedent, the present framework attempts to integrate:
+
+1. the **forward** question of how digital education can build ESD capacities with the **reverse** sustainability constraint on digital education itself;
+2. explicit separations among technology adoption, task performance, learning, institutional durability and system transformation;
+3. source-role, population/context, time-horizon and same-object evidence-payment discipline;
+4. a participant-governance boundary in which context generalisation and same-target-context epistemic authority are separate conjunctive obligations; and
+5. a dependency-aware review method in which search, eligible corpus, source/scope extraction and synthesis remain separately receipted.
+
+These differences are a **candidate contribution position**, not yet a global novelty claim. A close antecedent does not by itself make the manuscript duplicative, but formal differences from one antecedent do not themselves establish publication novelty either. That question remains open until the declared structured search and screening are completed.
+
+## 7. Working synthesis claim
 
 The pre-screen evidence increasingly supports the paper's reciprocal architecture while also narrowing what can responsibly be claimed. Digital education can contribute to sustainability learning and competencies under identifiable pedagogical and design conditions. At the same time, digital education creates governance, social, material, lifecycle and institutional obligations that cannot be inferred from educational benefit alone.
 
