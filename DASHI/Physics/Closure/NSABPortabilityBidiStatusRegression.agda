@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSABPortabilityBidiStatusRegression where
 
 ------------------------------------------------------------------------
--- RED regression for the A/B bidirectional portability audit.
+-- Regression for the A/B bidirectional portability audit.
 --
 -- A remains mathematically independent.  This regression requires the live
 -- control plane to distinguish reusable analytic structure from torus-only
@@ -33,6 +33,11 @@ torusSpecificRealizationSeparated :
   Bidi.torusSpecificRealizationSeparated ≡ true
 torusSpecificRealizationSeparated =
   Bidi.torusSpecificRealizationSeparatedIsTrue
+
+currentS2b2PortabilityFactoredIsTrue :
+  Bidi.currentS2b2PortabilityFactored ≡ true
+currentS2b2PortabilityFactoredIsTrue =
+  Bidi.currentS2b2PortabilityFactoredIsTrue
 
 wholeSpaceTransportObservedIsFalse :
   Bidi.wholeSpaceTransportObserved ≡ false
