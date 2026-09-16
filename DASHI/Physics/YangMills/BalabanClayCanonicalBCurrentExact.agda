@@ -7,6 +7,11 @@ module DASHI.Physics.YangMills.BalabanClayCanonicalBCurrentExact where
 -- R304-R306 are the preferred shortest standard-theorem mass-gap route.
 -- R299-R305 also retain the explicit mode/spectral reconstruction as an
 -- independent audit.  Both routes share the exact finite T5 source carrier.
+--
+-- R384-R386 add the current producer audit:
+-- * minimal fixed-point distance can be paid without the legacy Hessian socket;
+-- * literal R103 Hessian sensitivity can meet that distance directly at R379;
+-- * coefficient comparison is NOT promoted to absolute selected localization.
 ------------------------------------------------------------------------
 
 import DASHI.Interop.IntrospectiveResidualNormalizationExact
@@ -92,6 +97,13 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalModeSelectedApplicationRoun
 import DASHI.Physics.YangMills.BalabanCMP116R281ModeSelectedDirectRound341Exact
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Exact
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Validation
+
+-- Current coefficient/sensitivity Pareto audit.  These are below the canonical
+-- literal localization consumer; R386 explicitly prevents comparison-only
+-- information from being promoted to absolute localization.
+import DASHI.Physics.YangMills.BalabanCMP116MinimalFixedPointDistanceRound384Exact
+import DASHI.Physics.YangMills.BalabanCMP116MinimalDistanceLiteralHessianRound385Exact
+import DASHI.Physics.YangMills.BalabanCMP116ComparisonVsAbsoluteLocalizationRound386Exact
 
 -- Optional producer families and provenance snowballs retained below the
 -- canonical consumer.  The source snowball is attribution/search metadata plus
