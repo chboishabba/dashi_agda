@@ -49,15 +49,6 @@ parentCohnDiscursiveBoundary =
 
 ------------------------------------------------------------------------
 -- Finite DASHI composition witness.
---
--- The carrier deliberately includes three conventionally normal states:
---   * one legally within range and evidence-adequate,
---   * one legally outside range and evidence-inadequate,
---   * one legally within range but evidence-inadequate.
---
--- This gives two independent collisions:
---   normality cannot recover legal reasonableness;
---   legal reasonableness cannot recover evidence adequacy.
 ------------------------------------------------------------------------
 
 data InstitutionalLegalEvidenceState : Set where
@@ -147,10 +138,6 @@ institutionalNormalityDoesNotDetermineLegalReasonableness =
 
 ------------------------------------------------------------------------
 -- Legal reasonableness != evidence / consumer adequacy.
---
--- The two compared states are both within the finite legal-reasonableness code
--- while differing in evidence adequacy.  This does not assert anything about a
--- particular court case; it is a DASHI anti-collapse witness.
 ------------------------------------------------------------------------
 
 reasonablenessAdequacyCollision :
@@ -191,15 +178,10 @@ institutionalNormalityDoesNotDetermineEvidenceAdequacy =
 
 ------------------------------------------------------------------------
 -- Constructive audit refinement.
---
--- The richer carrier keeps convention, legal classification, consumer
--- adequacy, production history and evidence provenance separate.  It repairs
--- the finite evidence-adequacy query because the relevant coordinate is
--- retained; this is not a completeness or legal-authority theorem.
 ------------------------------------------------------------------------
 
 record EnrichedLegalEvidenceAudit : Set where
-  constructor enrichedLegalEvidenceAudit
+  constructor mkEnrichedLegalEvidenceAudit
   field
     normality : InstitutionalNormalityCode
     legalReasonableness : LegalReasonablenessCode
@@ -212,7 +194,7 @@ open EnrichedLegalEvidenceAudit public
 enrichedLegalEvidenceAudit :
   InstitutionalLegalEvidenceState → EnrichedLegalEvidenceAudit
 enrichedLegalEvidenceAudit state =
-  enrichedLegalEvidenceAudit
+  mkEnrichedLegalEvidenceAudit
     (institutionalNormalityProjection state)
     (legalReasonablenessProjection state)
     (evidenceAdequacyProjection state)
@@ -251,8 +233,7 @@ socialConformityNotAutomaticallyCredible :
     Expert.canonicalExpertSituatedObserverBoundary ≡ false
 socialConformityNotAutomaticallyCredible = refl
 
-legalReasonablenessRemainsIndexed :
-  Situated.ReasonablenessIndex
+legalReasonablenessRemainsIndexed : Situated.ReasonablenessIndex
 legalReasonablenessRemainsIndexed = Legal.legalReasonablenessIndexExample
 
 ------------------------------------------------------------------------
