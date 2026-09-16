@@ -32,6 +32,8 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BT1ComplementClass18LambdaZeroSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonsterFiveOrbitD4N3BScreenReceiptExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonsterFiveOrbitD4N3BScreenReceiptValidation.agda'
       - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
       - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
       - 'scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh'
@@ -40,6 +42,7 @@ on:
       - 'scripts/check_monster_3b_linear_shortest_frontier_correction.sh'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/monster_3b_five_orbit_d4_n3b_screen.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
       - 'scripts/monster_3b_suzuki_main_quotient_match.g'
       - 'scripts/monster_3b_inertia_phase_resolution.g'
@@ -49,9 +52,12 @@ on:
       - 'scripts/render_monster_3b_suzuki_main_quotient_match.py'
       - 'scripts/render_monster_3b_inertia_phase_certificate.py'
       - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'scripts/check_monster_3b_five_orbit_d4_n3b_screen.sh'
       - 'scripts/check_monster_3b_suzuki_multiplicity_characters.sh'
       - 'scripts/check_monster_3b_suzuki_main_quotient_match.sh'
       - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
+      - 'tests/test_monster_3b_five_orbit_d4_n3b_screen.py'
+      - 'tests/test_monster_3b_five_orbit_d4_n3b_ci_contract.py'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
   pull_request:
@@ -87,6 +93,8 @@ on:
       - 'DASHI/Wikimedia/IbrahimMonster3BTripleLambdaCentralCarrierSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BT1ComplementClass18LambdaZeroSnowballExact.agda'
       - 'DASHI/Wikimedia/IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonsterFiveOrbitD4N3BScreenReceiptExact.agda'
+      - 'DASHI/Wikimedia/IbrahimMonsterFiveOrbitD4N3BScreenReceiptValidation.agda'
       - 'scripts/monster_3b_modern_restriction_degree_uniqueness.py'
       - 'scripts/check_monster_3b_modern_restriction_degree_uniqueness.sh'
       - 'scripts/check_monster_3b_multiplicity_basis_linear_wrongtype.sh'
@@ -95,6 +103,7 @@ on:
       - 'scripts/check_monster_3b_linear_shortest_frontier_correction.sh'
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
+      - 'scripts/monster_3b_five_orbit_d4_n3b_screen.g'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
       - 'scripts/monster_3b_suzuki_main_quotient_match.g'
       - 'scripts/monster_3b_inertia_phase_resolution.g'
@@ -104,9 +113,12 @@ on:
       - 'scripts/render_monster_3b_suzuki_main_quotient_match.py'
       - 'scripts/render_monster_3b_inertia_phase_certificate.py'
       - 'scripts/check_monster_3b_actual_kernel_character_round4.sh'
+      - 'scripts/check_monster_3b_five_orbit_d4_n3b_screen.sh'
       - 'scripts/check_monster_3b_suzuki_multiplicity_characters.sh'
       - 'scripts/check_monster_3b_suzuki_main_quotient_match.sh'
       - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
+      - 'tests/test_monster_3b_five_orbit_d4_n3b_screen.py'
+      - 'tests/test_monster_3b_five_orbit_d4_n3b_ci_contract.py'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
   workflow_dispatch:
@@ -173,6 +185,12 @@ jobs:
             gap-browse \
             python3
 
+      - name: Run five-orbit D4/N(3B) screen
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_monster_3b_five_orbit_d4_n3b_screen.sh
+
       - name: Run actual-kernel and Agda checker
         shell: bash
         run: |
@@ -212,6 +230,7 @@ jobs:
             build/monster_3b_normalizer_restriction.json
             build/monster_3b_actual_kernel_structure.json
             build/monster_3b_actual_kernel_character_certificate.json
+            build/monster_3b_five_orbit_d4_n3b_screen.json
             build/monster_3b_suzuki_multiplicity_characters.json
             build/monster_3b_suzuki_main_quotient_match.json
             build/monster_3b_inertia_phase_resolution.json
