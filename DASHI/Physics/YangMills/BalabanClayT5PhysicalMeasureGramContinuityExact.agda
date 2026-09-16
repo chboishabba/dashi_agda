@@ -143,6 +143,8 @@ record ScalarConvergenceAlgebra
       Converges
         (λ cutoff → multiplyValue coefficient (sequence cutoff))
         (multiplyValue coefficient limit)
+    limit : (Nat → Scalar) → Scalar
+    sequenceConvergesToLimit : ∀ sequence → Converges sequence (limit sequence)
 
 open ScalarConvergenceAlgebra public
 
@@ -248,7 +250,7 @@ record AdmissiblePhysicalTestFamily
     (dataSet : PhysicalMeasureConvergenceData Measure Observable Scalar)
     (family : PhysicalOSFiniteTestFamily Observable Scalar) : Set₁ where
   field
-    testObservableLocal : ∀ (test : PhysicalPositiveTimeCylinderTest Observable Scalar) →
+    testObservableLocal : ∀ test →
       LocalGaugeInvariant dataSet (observable test)
 
 open AdmissiblePhysicalTestFamily public
@@ -362,7 +364,11 @@ physicalMeasureTopologyControlsOSGram dataSet = record
           (operations (convergenceData dataSet)) measure
           (decodeFamily dataSet family)
   ; scalarLimit = record
-      { Converges = Converges (scalarConvergence (convergenceData dataSet)) }
+      { limit = limit (scalarConvergence (convergenceData dataSet))
+      ; Converges = Converges (scalarConvergence (convergenceData dataSet))
+      ; sequenceConvergesToLimit =
+          sequenceConvergesToLimit (scalarConvergence (convergenceData dataSet))
+      }
   ; Nonnegative = Nonnegative dataSet
   ; gramQuadraticFormConverges =
       λ family →
