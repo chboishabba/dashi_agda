@@ -3,7 +3,8 @@
 Status: repository archaeology / navigation reference. **Not theorem authority.**
 
 Canonical companion owner: `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda`  
-Maintenance PR: #883 — `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger`
+Historical maintenance PR: #883 — `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger`  
+Current Pareto coordinator: #940 — `YM/RH Pareto: global board + split RH R1 checked-scalar attachment`
 
 ## Purpose
 
@@ -212,7 +213,13 @@ The dedicated GitHub-era YM sequence begins at **PR #5**, not around #200.
 | #857 | CORE, ALT | `YM Row C: minimize Heat/Doob debt to real majorants and one weighted generator row` | internal R251–259; Row-C tactic |
 | #867 | CORE, SUPERSEDED | `YM Row C: split Langevin commutator from symmetric Hessian row weld` | explicitly superseded by #869 |
 | #869 | CORE, CURRENT | `YM: normalize mass-gap search to quantitative clustering consumer` | internal R270–275; Row C demoted to optional tactic |
-| #883 | SUPPORT, CURRENT | `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger` | archaeology / current survey branch |
+| #883 | SUPPORT | `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger` | merged archaeology baseline; branch later used append-only |
+| #918 | CORE, CORRECTED | `YM/RH Pareto: compress active E-localization and fail-close final-near R1` | post-#883; YM R248 concrete localization predicate; RH R1 source/transport split |
+| #934 | SUPPORT, CURRENT | `Document YM/RH producer atlas and CMP completion boundary` | adds producer atlas + CMP status + Pareto/BIDI operating protocol |
+| #940 | CORE, CURRENT | `YM/RH Pareto: global board + split RH R1 checked-scalar attachment` | current cross-lane coordinator; RH R1a/R1b1/R1b2; live global board |
+| #944 | CORE, CURRENT | `YM: carry literal CMP116 marked amplitude directly into canonical B` | current detailed YM specialist; internal R345–R380+; direct CMP116 parametric sensitivity/Hessian BIDI route |
+| #949 | CORE, CURRENT | `YM/RH Pareto: promote concrete CMP119 source route and add live coordination sheet` | YM R248–R250 concrete active raw->BC1; P0–P3 inputs; live coordination sheet |
+| #953 | CORE, SUPPORT | `YM/RH Pareto: transport Round131 sector recovery into common-action carrier` | unification/common-metric representation weld; does not replace Clay-facing YM/RH cuts |
 
 ### YM internal-round-only gaps explicitly retained
 
@@ -243,8 +250,10 @@ highest-alpha Wilson/KKT       #409–#522
 Gate-I / source-native RG      #540–#583
 Path13 / CMP98 Eq.(119)        #670, #732, #753, #764, #789–#804
 Hamiltonian / OS support       #806, #809, #811
-CMP119/CMP122 source recuts    #821, #846
-Row C / mass-gap recut         #857, #867, #869
+CMP119/CMP122 source recuts    #821, #846, #918, #949
+Row C / mass-gap recut         #857, #867, #869, #944
+unification/common metric      #953 plus internal R131–R133 ancestry
+coordinator / producer atlas   #883, #934, #940
 ```
 
 **Search warning:** `CMP98 Eq.(119)` / `Eq119` is not `CMP119` the Bałaban journal paper. Keep those search families separate.
@@ -286,7 +295,12 @@ Row C / mass-gap recut         #857, #867, #869
 | #856 | SUPPORT, BODY-ONLY | `J invariant Base369 formulaic renderer and pants/q-series follow-up` | carries RH observer-governance / fibre BIDI support |
 | #865 | CORE, ALT | `RH: fold-local concrete certificate bridge and R3 min-cut` | certificate scalar need not equal final analytic scalar |
 | #868 | CORE, ALT | `RH: reduce certified near route to cellwise integral uppers` | cellwise one-sided numerical certification route |
-| #883 | SUPPORT, CURRENT | `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger` | archaeology / current survey branch |
+| #883 | SUPPORT | `Collate NS/YM/RH/GRQ proof archaeology into one canonical ledger` | merged archaeology baseline |
+| #918 | CORE, CORRECTED | `YM/RH Pareto: compress active E-localization and fail-close final-near R1` | makes R1 source/transport boundary explicit; status receipts do not pay representation |
+| #934 | SUPPORT, CURRENT | `Document YM/RH producer atlas and CMP completion boundary` | every-route producer atlas / Pareto protocol |
+| #940 | CORE, CURRENT | `YM/RH Pareto: global board + split RH R1 checked-scalar attachment` | current coordinator; R1a / R1b1 / R1b2 and R2 scheduling |
+| #949 | CORE, SUPPORT | `YM/RH Pareto: promote concrete CMP119 source route and add live coordination sheet` | no new RH theorem; records R1/R2 current state and live coordination |
+| #953 | SUPPORT | `YM/RH Pareto: transport Round131 sector recovery into common-action carrier` | unification representation plumbing; RH cut unchanged |
 
 ## RH route-family index
 
@@ -458,6 +472,36 @@ Search aliases: `Platt`, `Trudgian`, `critical line`, `verified region`, `R3`.
 
 Support/cross-pollination only. Keep because these PRs influenced observer/refinement/search machinery, but do not treat them as independent RH proof routes unless their exact RH owners are being investigated.
 
+### RH-21 — post-#883 R1 same-object decomposition / global Pareto coordinator
+
+```text
+#918 -> #940
+```
+
+#918 fail-closes the source/transport wall. #940 splits the canonical representation into independently payable same-scalar obligations:
+
+```text
+R1a  final nearResponseAt(J) = checked/imported finite-near scalar
+R1b1 same checked scalar = final-carrier reflection-pair scalar
+R1b2 same reflection-pair scalar = literal finiteNearSum(cellResponse)
+```
+
+Status/source ownership is insufficient for all three. Do not invent intermediate scalars merely to make an equality reflexive.
+
+### RH-22 — current R2 strict actual-ClusterResponse search
+
+```text
+#940 coordinator, using #847/#855/#868 owners
+```
+
+Current Pareto rule: if no theorem-bearing checked-near bytes or genuine final-carrier R1 constructor is recovered, stop R1 interface refactoring and search the genuine analytic leaf
+
+```text
+D_near(J) + B_far(J) + D_Gamma(g_pole) < actual ClusterResponse(g_pole).
+```
+
+Historical 8889 cluster work remains an optional donor only after theorem-bearing same-carrier transport.
+
 ---
 
 # C. Internal YM source-frontier round crosswalk
@@ -495,9 +539,18 @@ These are **module rounds, not PR-title rounds**. They are indexed here because 
 | R245 | function-valued E + localization -> CMP109/116 continuation |
 | R246 | active-scale Section-2 form/predicate |
 | R247 | active continuation / focused validation |
+| R248–R250 | post-#883 concrete predicate / identity decoder / preferred active raw-to-BC1 route; #918/#949 |
 | R251–259 | least-privilege Row-C Heat/Doob/Hessian/generator-row tranche |
 | R260 | anchored Hessian-majorant correction |
 | R270–275 | canonical quantitative-clustering/mass-gap consumer |
+| R343 | post-#934 least-privilege source-envelope weakening parent on #940 |
+| R345–R350 | #944 selected marked amplitude / coefficient attachment / Hessian-vs-displacement split |
+| R351–R364 | #944 historical marked-walk/collar/rate-split and analytic-path donor routes |
+| R365–R371 | #944 direct CMP116 fixed-point parametric-sensitivity route |
+| R372–R375 | #944 Hessian sensitivity / selected literal Hessian / common-radius / coefficient payment |
+| R376–R378 | #944 historical-mark compatibility route |
+| R379 | #944 least-privilege distance-upper Hessian coefficient consumer |
+| R380 | #944 direct R370 parametric distance upper -> R379/R375 compiler |
 
 ---
 
@@ -513,7 +566,10 @@ These are **module rounds, not PR-title rounds**. They are indexed here because 
 | 8894 | #686 | gap-split/taper no-go / adaptive clustering / modulation recovery |
 | R0 | #855+ | optional concrete numeric/certificate scalar realization |
 | R1 | #855+ | final-near same-object representation |
-| R2 | #847/#855+ | independent strict high theorem vs actual ClusterResponse |
+| R1a | #940 | final near -> checked/imported finite-near scalar |
+| R1b1 | #940 | checked scalar -> final-carrier reflection-pair scalar |
+| R1b2 | #940 | reflection-pair scalar -> literal finite cell fold |
+| R2 | #847/#855/#940 | independent strict high theorem vs actual ClusterResponse |
 | R3 | #855+ | critical-coordinate / verified-low-region / high-low terminal lane |
 
 ---
@@ -537,11 +593,14 @@ stale reduced-KKT follow-up #519
 
 broad raw-source-first #821 / R216–217
   -> regular-E preferred recut #846 / R218–228
-  -> later R242–247 function-valued active regular-E route
+  -> R242–247 function-valued active regular-E route
+  -> #918/#949 R248–R250 concrete predicate / preferred active raw-to-BC1 route
 
 Row-C tactic #857 / R251–260
   -> canonical clustering consumer #869 / R270–275
      (Row C retained as optional producer)
+  -> #940 historical R343 weakening/coordinator
+  -> #944 specialist R345–R380 direct parametric-sensitivity/Hessian route
 
 #867
   -> explicitly superseded by #869
@@ -576,6 +635,11 @@ determinant scalarization remains diagnostic only
 
 8889 status/return
   -> optional donor unless theorem-bearing same-carrier transport is recovered
+
+#918 R1 fail-close
+  -> #940 R1a/R1b1/R1b2 least-privilege same-scalar decomposition
+  -> stop refactoring if no theorem-bearing source/carrier boundary is recovered
+  -> move coordinator proof-search to R2
 ```
 
 ---
@@ -616,6 +680,10 @@ Wilson
 SU(2)
 SU(N)
 OS bridge
+T78
+R370
+R379
+R380
 ```
 
 ### RH aliases
@@ -648,6 +716,10 @@ Trudgian
 certificate
 ClusterResponse
 nearOffFinset
+nearSignedSum
+R1a
+R1b1
+R1b2
 ```
 
 ### Inclusion rule
@@ -672,8 +744,11 @@ These are navigation shortcuts, not mathematical claims.
 | Gate-I/source-native RG era? | #540–#583 |
 | Path13 / CMP98 Eq119? | #670, #732, #753, #764, #789–#804 |
 | Kato/Hamiltonian/T5 support? | #806, #809, #811 |
-| CMP119 raw/source recut? | #821, #846, then internal R242–247 |
-| Row-C / mass-gap recut? | #857, #867, #869 |
+| CMP119 raw/source recut? | #821, #846, #918, #949; internal R242–R250 |
+| Row-C / mass-gap consumer recut? | #857, #867, #869 |
+| current detailed YM mass-gap specialist? | #944, especially internal R345–R380 |
+| unification/common-metric continuation? | #953; Round131 ancestry |
+| global YM/RH coordinator? | #940 |
 | first RH Weil route? | #100, #121, #128 |
 | Hermitian-zeta alternate route? | #604 |
 | G21? | #622 |
@@ -690,13 +765,33 @@ These are navigation shortcuts, not mathematical claims.
 | direct one-leaf introspection? | #824 |
 | actual ClusterResponse correction? | #847 |
 | certified/computational route? | #855, #865, #868 |
-| current archaeology branch? | #883 |
+| post-#883 RH R1 fail-close? | #918 |
+| current R1a/R1b1/R1b2 coordinator? | #940 |
+| current R2 scheduling? | #940, using #847/#855/#868 |
+| historical archaeology baseline? | merged #883 |
 
 ---
 
-# H. Maintenance rule
+# H. Post-#883 continuation at a glance
 
-When a future PR materially changes YM or RH, append/update this catalogue in the same tranche with:
+This section exists so the broad catalogue does not silently stop at the merged archaeology baseline.
+
+| PR | State at 16 Sep 2026 audit | Lane | Why it matters |
+|---:|---|---|---|
+| #918 | merged | YM + RH | YM R248 concrete E-localization predicate; RH final-near R1 fail-close |
+| #934 | merged | YM + RH support | producer atlas, CMP completion boundary, explicit Pareto/BIDI protocol |
+| #940 | open draft | YM + RH coordinator | live global board; RH R1a/R1b1/R1b2; R2 next if R1 source bytes remain unavailable |
+| #944 | open draft | YM specialist | current detailed mass-gap replay; R345–R380+; R370/R380/R379/R375 direct parametric-sensitivity route |
+| #949 | open draft | YM + RH coordination | preferred concrete R248–R250 active raw->BC1 route; P0–P3 source/physical payments; live coordination sheet |
+| #953 | open draft | YM unification/support | Round131 common/native sector transport into common-action carrier; representation plumbing only |
+
+**Ownership rule after #883:** `#940` coordinates and maintains global bookkeeping; `#944` owns detailed current YM T78-B theorem search; `#949` owns a concrete lower-level CMP119/BC1 source route; `#953` owns the common-metric/unification representation weld. Do not collapse these into one branch or infer that one supersedes the others unless their exact consumers coincide.
+
+---
+
+# I. Maintenance rule
+
+When a future PR materially changes YM or RH, update this catalogue **in the same tranche** with:
 
 1. exact PR number and title;
 2. lane (`YM`, `RH`, or both/support);
@@ -704,6 +799,7 @@ When a future PR materially changes YM or RH, append/update this catalogue in th
 4. round clock if one exists;
 5. whether it is core, alternate, validation, support, corrected, superseded, or current;
 6. predecessor/successor relationship;
-7. if an internal round has no standalone PR, leave the gap explicit instead of guessing.
+7. if an internal round has no standalone PR, leave the gap explicit instead of guessing;
+8. current specialist/coordinator ownership so a future worker does not duplicate another active PR.
 
 Do not delete failed routes just because a newer route is preferred. The failed and superseded routes are exactly what make this document useful for investigation.
