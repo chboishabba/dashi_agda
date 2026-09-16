@@ -2,314 +2,278 @@
 
 Status: **live coordination sheet**. Not theorem authority, source authority, or a Clay-completion claim.
 
-Historical companions:
-- `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md` — broad PR/round catalogue.
-- `Docs/support/reference/YMRHFinalizationProducerAtlas.md` — producer/construction atlas.
-- `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 status boundary.
-- `Docs/support/reference/YMRHGlobalGoalParetoBoard.md` — global scheduling board.
-- `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda` — typed archaeology ledger.
+Detailed current YM closure ledger:
 
-Use this as the first-stop **current** state sheet; use the archaeology files for history.
+- `Docs/support/reference/YMFinalDirectUpperClosure20260916.md`
+
+Historical companions:
+
+- `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md`
+- `Docs/support/reference/YMRHFinalizationProducerAtlas.md`
+- `Docs/support/reference/YMCMPWorkStatus.md`
+- `Docs/support/reference/YMRHGlobalGoalParetoBoard.md`
+- `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda`
+
+Use this file as the first-stop current state sheet; use the archaeology files for history.
 
 ## Snapshot — 2026-09-16
 
-Merged foundations:
-
 ```text
-#918  merged — active CMP119 regular-E compression + RH R1 decomposition
-#934  merged — producer atlas + CMP status boundary
-#940  merged — global YM/RH board + RH R1 checked-scalar split
-#944  merged — detailed CMP116 R345–R386 sensitivity/localization audit
-#949  merged — concrete CMP119 source route
-#953  merged — Round131 common-metric/unification recut
+master 58e264df... — current integration base before final direct-upper closure tranche
+
+#970 merged — AUTHORITATIVE TERMINAL B CONSUMER
+       one direct selected finite mixed-log/spectral upper
+       -> finite covariance
+       -> continuum clustering
+       -> positive transfer-gap consumer
+
+#967 open/draft — OPTIONAL LOW-LEVEL SOURCE REPLAY / PROVENANCE
+       R404-R409 noncommutative CMP99/CMP109/CMP116 replay
+       useful proof tactic, no longer mandatory terminal architecture
+
+agent/ym-final-direct-upper-closure — CURRENT MASTER-BASED CLOSURE LANE
+       R387 direct upper -> PositiveTransferGapCore
+       + final archaeology/bookkeeping
+
+dashi_lean4 #7 — PARALLEL OPERATOR/BIDI COMPILER LANE
+       equation (25), direct Row-A1 form-bound constructors,
+       CMP116-native covariance compiler, cutoff->continuum->same-object welds
 ```
 
-Current YM specialists:
+Important branch correction: old #967 is roughly 35 commits ahead but 1296 commits behind current `master`. Do not finish the terminal proof by treating that stale branch as the integration base.
+
+## 1. Authoritative terminal source cut
+
+Merged #970 / R387 observes exactly one theorem-bearing Yang--Mills field:
 
 ```text
-#970  open/draft — TERMINAL CONSUMER:
-       direct selected finite spectral upper -> covariance -> continuum -> gap
-
-#967  open/draft — SOURCE / PRODUCER underneath #970:
-       R387–R403 consumer-first reconstruction of the selected CMP116 upper
+|D^2_{J_L,J_R} log Z_N|
+  <= selected clusteringEnvelope(O,t).
 ```
 
-Do not treat #967 and #970 as competing routes. #970 is the terminal B ABI; #967 constructs it.
-
-## 1. Terminal B consumer — #970
-
-The theorem-bearing field is only
+R387 then compiles:
 
 ```text
-|D^2_{J_L,J_R} log Z_N| <= clusteringEnvelope(O,t)
-```
-
-on the exact mode/time-selected pair.
-
-Everything after it is already compiler/standard-analysis plumbing:
-
-```text
-direct finite mixed-log upper
+direct selected finite mixed-log upper
  -> exact mixed-log = finite connected covariance
- -> one-sided finite->continuum closure
- -> same-family continuum clustering
- -> existing clustering-to-gap contradiction/compiler.
+ -> selected one-sided finite->continuum closure
+ -> subgap-mode clustering upper.
 ```
 
-No source root, source distance, Heat/Doob object, generic polymer norm, or intermediate envelope is observed by this ABI.
+The current-master closure owner
 
-## 2. Source / producer route — #967
+`BalabanDirectSelectedUpperToGapFinalExact`
 
-### R387–R401: previous Pareto reductions retained
-
-The previous reductions remain authoritative:
-
-- arbitrary source-native `q_fast`, not fixed `1/2`, is enough for the generic separation route;
-- one-sided physical geometry `time <= distance` is enough;
-- R398 constructs the R284 direct shell from R318/R320, so a second root/distance carrier is not mandatory;
-- R400 reuses the existing order-reversing same-Hamiltonian `Energy <-> q(E)` coordinate;
-- R401 is donor-only compatibility for the stronger uninhabited R343 producer;
-- R353–R385 comparison/sensitivity machinery is optional producer ancestry, not the direct B theorem.
-
-### R402: absolute Cauchy WrongType repair
-
-P0 is an **absolute** localization theorem. The historical foundational Cauchy ABI was optimized for **differences** of two analytic functions. Its historical `coefficientBound` consumes `BoundaryDifferenceBound F F M`, which is not the correct semantic surface for an absolute boundary-value estimate.
-
-R402 therefore adds, without mutating the old comparison ABI:
+adds the final composition
 
 ```text
-DASHI/Foundations/FinitePolydiscCauchyAbsoluteAxioms.agda
-DASHI/Physics/YangMills/BalabanDecoupledActivityAbsoluteCauchyExact.agda
+R387 direct upper
++ selected limit closure
++ positive selected candidate gap
+--------------------------------
+PositiveTransferGapCore.
 ```
 
-The new generic theorem is:
+Therefore the following are **not terminal dependencies**:
 
 ```text
-(for every selected polydisc boundary assignment s,
-   ||D^2 E(H_k(s,B'))|| <= M)
-        ->
-|| finite-polydisc coefficient of D^2 E || <= M.
+R410 factor replay
+source root as a separate terminal coordinate
+source distance as a separate terminal coordinate
+sourceEnvelope as a separate terminal coordinate
+CMP109 polarization as a terminal coordinate.
 ```
 
-This is theorem-producing generic complex-analysis plumbing on the **same** `BalabanDecoupledActivityHessian.decoupledHessianCoefficient`; no comparison object or same-object coefficient weld is introduced.
+R410 remains an optional stronger proof/provenance route for deriving the direct upper.
 
-RED-first validation was committed before the two production owners. The validation root deliberately does not claim a `--safe` cone because the historical finite-polydisc complex-analysis authority is imported/axiomatic.
+## 2. Source producer: true primitive cut
 
-### R403: make observable -> J indexing definitional
-
-`LiteralTwoSourceInsertionMeaning` permits the physical observable carrier itself to be the source-direction carrier. R403 chooses
+The repository already machine-compiles:
 
 ```text
-SourceDirection := TestObservable
-sourceDirectionOf := id
-literal derivative maps := normalized source-calculus derivative maps.
+normalized two-source calculus
+mixed-log derivative = finite connected covariance
+signed-vs-magnitude correction
+exact T5 covariance same-object identity
+absolute-value transport
+rooted-shell/direct-shell adapters
+finite->continuum one-sided order closure
+subgap clustering -> positive transfer-gap contradiction/core.
 ```
 
-The agreement equations are `refl`, and `observableIndexedUnlocalizedT5` constructs the R318 carrier in this presentation.
-
-This removes a syntactic source-direction type/equality weld. It does **not** prove the source semantics: the external CMP116/CMP119 theorem still has to be applied with the physical fact that these observable-indexed directions are the actual local source insertions on the same selected density.
-
-### P0 has moved below representation and coefficient extraction
-
-R274, R279 and R320 independently identify the same physical theorem:
+R295 isolates the sole source-facing theorem on the exact finite T5 presentation:
 
 ```text
-literal two-J selected mixed-log response
-  <= selected connecting rooted shell.
+magnitude(D^2_J log Z_N)
+  <= rootedShell(scale, volume, connectingRoot, physicalDistance).
 ```
 
-After R402 and R403:
+R313 proves the explicit absolute-value form is compiler output from that R295 magnitude theorem.
 
-- normalized two-source log/covariance algebra is compiler-owned;
-- the source-direction index can be definitionally the observable index;
-- finite-polydisc coefficient extraction is compiler-owned.
-
-The remaining source-native analytic content is the **pointwise absolute boundary-integrand localization** for the actual CMP116 decoupled activity, with the selected observable-indexed directions interpreted as the physical CMP116/CMP119 insertions:
+R318 then separates source authority from physical application:
 
 ```text
-for every selected complex decoupling-boundary assignment s,
-  ||D^2 E(H_k(s(Y0),B'))||
-    <= the source/rooted connecting-shell majorant.
+PublishedTwoJLocalizationForBase       [published source theorem]
+SelectedBaseJApplicability             [same-object application only]
 ```
 
-CMP99 supplies the published generalized-random-walk propagator decay mechanism; CMP116 Sect. 1 supplies the decoupling, common analytic domain, differentiated local activities and positive tree-distance localization. What remains absent in-repo is a concrete theorem term carrying those source results onto the literal selected T5/RG density and boundary integrand.
-
-A repository-wide constructor search found no inhabitant of `PublishedCMP116DifferentiatedLocalization`; all hits define, repackage, or consume the authority. Do not count a `ProofLevel`, citation, or record type as payment.
-
-### Current direct chain
+The applicability record contains only:
 
 ```text
-CMP99 generalized random-walk decay                 [published/source]
- + CMP116 decoupled local-activity construction     [published/source]
- + literal selected T5/RG source semantics          [physical]
-                |
-                v
-POINTWISE ABSOLUTE CMP116 BOUNDARY LOCALIZATION     [FIRST LIVE P0 THEOREM]
-                |
-                v
-R402 absolute finite-polydisc Cauchy lift           [compiler]
-                |
-                v
-R320/R274 selected two-J rooted-shell upper         [compiler after P0]
-                |
-                v
-R398 direct-shell carrier                           [compiler]
-R399 time <= selected physicalDistance              [small physical coordinate]
-                |
-                v
-#970 direct selected spectral upper                 [terminal B ABI]
-                |
-                v
-finite covariance -> continuum -> gap               [existing compiler chain]
+source magnitude = selected mixed-log magnitude
+source root      = selected connecting root
+source distance  = selected physical distance.
 ```
 
-### Current YM payments
+### Exact source status
+
+The mathematical differentiated-localization theorem is source-owned by Bałaban CMP116 Sect. 1, especially the differentiated Cauchy representation around (1.23), the positive tree/localization sum around (1.29), and Lemma 1 / (1.33)-(1.36). The repository grades this source theorem `standardImported`.
+
+However, repository-wide constructor search finds **no concrete proof-bearing inhabitant** of `PublishedCMP116DifferentiatedLocalization`; every hit defines, adapts, repackages, or consumes the ABI.
+
+Do not confuse:
 
 ```text
-YM-P0a  SEMANTIC SOURCE REPLAY:
-        instantiate CMP116/CMP119 localization on the selected T5/RG density.
-        R403 removes the avoidable independent SourceDirection carrier, but the
-        observable-indexed directions must still be the actual physical J
-        insertions used by the source theorem.
-
-YM-P0b  ABSOLUTE BOUNDARY LOCALIZATION:
-        prove the pointwise CMP116 generalized-walk/decoupling tree-shell bound
-        for the twice-varied local activity on every selected complex boundary
-        assignment.  THIS is the first substantial analytic theorem below B.
-
-YM-P0c  absolute finite-polydisc coefficient extraction — PAID by R402.
-
-YM-P1   generic sourceEnvelope<=shell + shell<=A*q^d route — optional if direct
-        R320/R274 is cheaper.
-
-YM-P2   time <= selected physicalDistance on the single R318 carrier.
-
-YM-P3   same-Hamiltonian selected mode ratio=q(E) and
-        gapCandidate=energyOfRatio(q_fast) when using R400.
-
-YM-P4   same-family finite->continuum covariance transport — existing.
-YM-P5   clustering/positive-subgap -> positive transfer gap — existing.
+published theorem accepted as source mathematics
+!= ProofLevel/citation metadata
+!= proof-bearing Agda record inhabitant
+!= selected physical same-object application.
 ```
 
-## 3. What is actually paid vs not paid
-
-Paid structurally / compiler-owned:
+Current source primitive payments:
 
 ```text
-normalized two-source log calculus
-mixed-log second derivative = finite connected covariance
-observable-indexed SourceDirection presentation (R403)
-canonical common-J domain generation from finite demands
-rooted-shell geometric summation
-absolute Cauchy coefficient lift (R402)
-R318 -> R284 canonical direct shell (R398)
-one-sided time/distance consumer shape (R399)
-energy/ratio monotonic compiler (R400)
-one-sided finite->continuum order closure
-clustering -> transfer-gap contradiction
+YM-A1 proof-bearing imported CMP116 differentiated-localization inhabitant
+YM-A2 selected-T5 same-object applicability of magnitude/root/distance
 ```
 
-Still theorem-bearing / physical:
+Everything downstream to the transfer-gap core is compiler-owned.
+
+## 3. Finite physical form / Row-A1 cut
+
+Already theorem/compiler-owned:
 
 ```text
-P0a semantic application of CMP116/CMP119 source localization to the selected density
-P0b pointwise absolute CMP116 differentiated boundary localization
-P2 selected support/time geometry inhabitant
-P3 same-Hamiltonian ratio/energy identifications where that producer is used
+finite gauge / gauge-invariant wavefunction carrier
+finite-measure quotient semantics
+P33 five literal local mechanisms
+P33 exact coercive floor from primitive operator norms
+explicit finite SU(2) physical coordinate realization
+matrix quadratic realization
+Kato closed-semibounded-form -> operator domain + self-adjoint Hamiltonian
+Lean direct form-bound -> VacuumGapDatum / Row-A1 instance
+finite Row-A1 family -> continuum inverse compiler.
 ```
 
-The direct terminal route may bypass P1/P3 producer details if a stronger selected upper is proved directly.
+Concrete searches do **not** find an inhabitant of the actual primitive physical norm/Hessian package. The only `PrimitivePhysicalOperatorNorms` construction is an adapter from `PrimitiveAbsoluteOperatorNorms`; no concrete `PrimitiveAbsoluteOperatorNorms` record construction is present. Likewise `PhysicalSU2MatrixHessian` has theorem consumers but no concrete producer term.
 
-## 4. Pareto order
+Current finite physical primitive payments:
+
+```text
+YM-B1 concrete primitive absolute/physical operator norm package
+YM-B2 concrete PhysicalSU2MatrixHessian / literal closed semibounded q_a
+YM-B3 same-object q_a / associated H_a = selected physical action variation
+YM-B4 direct Row-A1 coercive floor on that same q_a/H_a.
+```
+
+Do not separately search for self-adjointness after B2 when the Kato route applies.
+
+## 4. Continuum / OS cut
+
+Already compiler-owned:
+
+```text
+finite->continuum covariance/order closure
+clustering -> vacuum form gap / positive transfer gap
+vacuum form gap -> resolvent / spectral exclusion
+uniform finite Row-A1 -> continuum inverse
+same evolution + common core -> unbounded-operator equality
+preferred physical continuum/OS adapter packages.
+```
+
+But exact searches find no concrete inhabitant of the preferred physical continuum/OS input package; visible constructors are adapters from already-filled records.
+
+Current continuum primitive payments:
+
+```text
+YM-C1 actual selected cutoff physical family -> continuum closure/graph limit
+YM-C2 actual YM/OS same-object reconstruction/evolution identification
+YM-C3 physical continuum vacuum/Hamiltonian meaning where required.
+```
+
+Equation (25) is **PAID** and must not be reopened:
+
+```text
+continuum covariance decay
++ spectral representation / Laplace comparison
+-> no subgap spectral weight
+-> vacuum form gap.
+```
+
+## 5. Current shortest YM proof normal form
+
+```text
+A. CMP116 published localization term + selected same-object applicability
+      -> R295/R313/R284/R388/R387
+      -> continuum clustering upper
+      -> PositiveTransferGapCore
+
+B. concrete finite physical norms/form + direct Row-A1 coercivity
+      -> Kato associated self-adjoint H_a
+      -> VacuumGapDatum / quantitative inverse bound
+
+C. actual cutoff->continuum + YM/OS same-object reconstruction
+      -> same quantitative gap/inverse statement for physical H_infinity.
+```
+
+There is no remaining generic proof infrastructure presently identified as necessary.
+
+## 6. Pareto order
 
 | Priority | Work |
 |---|---|
-| 1 | **YM-P0a/P0b: construct the literal selected CMP116 boundary localization; do not add another P0 wrapper** |
-| 2 | **YM-P2: `time <= selected physicalDistance` if it is not definitional from the selected support construction** |
-| 3 | **YM-P3: same-Hamiltonian `q(E)` / candidate-energy identifications only where the source-native-q route needs them** |
-| 4 | #967 generic envelope/rate producer only if cheaper than direct R320/#970 |
+| 1 | **YM-A1/A2: turn the already-source-owned CMP116 differentiated localization into a proof-bearing imported theorem term and instantiate it on the selected T5 magnitude/root/distance coordinates** |
+| 2 | **YM-B1/B2: construct the concrete primitive physical norm package and resulting P33 matrix Hessian / closed physical form; reuse the existing five-mechanism and Kato compilers** |
+| 3 | **YM-B3/B4: same-object action-variation identification and direct Row-A1 coercive floor on that exact form/operator** |
+| 4 | **YM-C1/C2/C3: inhabit the already-defined preferred physical continuum/OS package and same-object reconstruction** |
 | 5 | RH-R2 direct strict literal complement |
-| 6 | RH-R1 only on new theorem-bearing same-object evidence |
-| 7 | #949 CMP119/BC1 retained source foundation |
-| 8 | #953 common-metric/unification downstream representation lane |
 
-## 5. Do not reopen
+## 7. Do not reopen
 
-Unless a literal current consumer requires it, do not spend cycles on:
+Unless a literal current consumer requires it:
 
-- another alias/record for P0;
-- another independent observable->source-direction carrier on the preferred route;
-- re-proving CMP116 merely by restating it as a source receipt;
-- comparison-only Hessian stability as if it implied absolute localization;
-- selected `sourceEnvelope=shell` equality when one-sided order suffices;
-- generic source-envelope plumbing when direct R320/#970 is cheaper;
-- independent R284/R318 distances after R398;
-- exact `distance=time` when R399 consumes only `time<=distance`;
-- fixed `q_fast=1/2` as architecture;
-- independent positive-subgap rate inequalities after R400;
-- uninhabited R343/R344 producer records as completed routes;
-- R353–R385 sensitivity as mandatory architecture;
-- Row-C Heat/Doob/Langevin as mandatory architecture;
-- generic re-formalization of CMP109/116/119/122 with no current consumer;
-- unification as an upstream definition of YM source semantics.
+- no mandatory R410 after R387/#970;
+- no new generic Cauchy theorem;
+- no new covariance carrier;
+- no second clustering-to-gap theorem;
+- no exact `distance=time` when only `time<=distance` is consumed;
+- no second P33 coercivity calculus;
+- no independent self-adjointness proof when Kato closed-form representation applies;
+- no citation/`ProofLevel`/record-definition promotion into a theorem term;
+- no old #967 branch as current-master integration base.
 
-## 6. RH current route
+## 8. Source attribution
 
-No newer RH-specific work displaces #940/#949.
+- CMP99 background propagators: DOI `10.1007/BF01240355`.
+- CMP109 effective actions I: DOI `10.1007/BF01215223`.
+- CMP116 cluster expansions: DOI `10.1007/BF01239022`.
+- CMP119 RG lattice gauge I: DOI `10.1007/BF01217741`.
+- CMP122-I: DOI `10.1007/BF01257412`.
+- CMP122-II: DOI `10.1007/BF01238433`.
 
-R1 remains fail-closed at its same-object checked-near transports. Resume it only with theorem-bearing bytes/transport or a concrete final reflection-pair fold. Otherwise the live RH theorem is still the direct strict complement R2.
+Durable source extracts remain working/OCR aids only; verify source-critical formulas against the original paper/PDF before using them as proof authority.
 
-YM remains the global priority while P0 is this sharply isolated.
-
-## 7. Source / attribution
-
-YM/Bałaban:
-- CMP99 DOI `10.1007/BF01240355`
-- CMP109 DOI `10.1007/BF01215223`
-- CMP116 DOI `10.1007/BF01239022`
-- CMP119 DOI `10.1007/BF01217741`
-- CMP122-I DOI `10.1007/BF01257412`
-- CMP122-II DOI `10.1007/BF01238433`
-- Yang–Mills theory QID `Q1192873`
-
-CMP116 live source neighbourhood: Sect. 1, generalized-walk/decoupling construction around (1.6)–(1.21), differentiated Cauchy representation around (1.23), and positive tree/localization summation around (1.29)–(1.36).
-
-The Kotecký–Preiss/rooted-shell compiler is downstream geometry; it does not establish the literal YM boundary activity estimate.
-
-## 8. Validation / closure boundary
+## 9. Verification boundary
 
 Track separately:
 
 ```text
 source written?
-focused validation root written?
-exact-head workflow observed?
-Agda/kernel receipt observed?
-external/source theorem replay formalized?
-Clay/external acceptance?
+exact-head Agda kernel checked?
+retained/imported theorem authority?
+proof-bearing theorem inhabitant?
+selected physical same-object inhabitant?
+Clay completion?
 ```
 
-R402/R403 source commits:
-
-```text
-7ec7bbdc...  R402 RED-first validation imports missing absolute owners
-66521b0f...  absolute finite-polydisc Cauchy authority
-217e000b...  absolute decoupled-activity coefficient lift
-27918da8...  R402 validation safety correction
-ee6bfa3e...  initial R403 observable-indexed source presentation
-fa36a012...  R403 explicit namespace/carrier correction
-69d194ca...  focused R403 validation root
-```
-
-These are **source-written only** until an exact-head Agda/kernel receipt is observed.
-
-## 9. Update log — 2026-09-16
-
-- #970 remains the terminal-consumer recut; #967 remains its producer lane.
-- R387–R401 retain the previous source-rate, geometry, carrier and energy/ratio minimizations.
-- R402 identifies and repairs the absolute-vs-difference finite-polydisc Cauchy ABI mismatch without breaking historical comparison consumers.
-- Absolute Cauchy extraction is compiler-owned on the same decoupled CMP116 coefficient.
-- R403 removes the optional separate SourceDirection representation by indexing J directions directly with selected observables.
-- P0a is now semantic source replay, not a type/equality weld; P0b is the literal pointwise absolute CMP116 boundary-integrand localization.
-- Repository search found no concrete `PublishedCMP116DifferentiatedLocalization` inhabitant and no cross-prover theorem already paying that literal source replay.
-- RH remains behind YM in the current Pareto order.
+The current-master final direct-upper composition is source-written and intentionally non-promotable until an observed exact-head Agda/kernel receipt exists.
