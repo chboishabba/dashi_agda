@@ -85,12 +85,59 @@ Therefore:
 S5 literal differentiated CMP116 activity satisfies source majorant        LIVE
 S6 selected physical source coordinates + uniform analytic radii           LIVE
 S7 physical finite->continuum covariance convergence                        LIVE
-S8 OS/spectral correlation same-object representation                       LIVE
 ```
 
 Generic `hact`, polymer entropy, Cauchy, marked-polynomial loss and continuum order closure are no longer independent search leaves.
 
-## 4. Finite measure status
+## 4. Equation (25): continuum covariance decay -> vacuum form gap — PAID theorem path
+
+The previous ledger incorrectly carried the whole spectral step as live. The retained BIDI tranche already proves equation (25) as theorem-producing composition:
+
+```text
+SpectralRepresentation H vac
++ continuum covariance bound
++ Laplace/spectral same-object comparison
+-----------------------------------------
+ClusteringSpectralData.ofSourceBound
+ -> hasVacuumFormGap_of_clustering
+ -> HasVacuumFormGap H vac m.
+```
+
+Lean #7 now exposes this composition directly as:
+
+```text
+Welds.YMSourceClusteringGap.vacuumFormGapOfSourceCovariance
+```
+
+Source-order RED/GREEN:
+
+```text
+c20ccf5a... RED: demand source covariance -> form-gap weld
+db931520... expose equation (25) as consumer-facing theorem
+125a6113... aggregate Welds axiom-audit request
+```
+
+The Agda lane independently already contains the physical-continuum OS compiler in `BalabanClayT5PhysicalContinuumOSGapBridgeExact`:
+
+```text
+continuum clustering
++ OS4 spectral interpretation
+--------------------------------
+physicalContinuumPositiveTransferGap.
+```
+
+Its assembly/compiler levels are machine-checked. Therefore **covariance/clustering -> spectral/form gap is not a proof-search leaf**.
+
+Keep only the narrower same-object question when a concrete carrier still needs it:
+
+```text
+S8i this exact physical covariance / OS4 field is the spectral-Laplace
+    representation of this exact reconstructed Hamiltonian                SAME-OBJECT INHABITATION / LOCATE-OR-INSTANTIATE
+```
+
+Do not relabel S8i as a missing generic spectral theorem.
+
+## 5. Finite measure status
 
 R124 is a machine-checked compiler **from** an explicit `BalabanDensityLiteralFiniteMeasureWeld`; it does not construct that physical weld.
 
@@ -102,7 +149,7 @@ M7a1  expectation/L2/null semantics on that SAME measure                   LIVE
 
 R205/R206 own the generic finite-measure quotient and selected-IBP -> same-measure symmetry compilers after these physical identities are supplied.
 
-## 5. M7 recut: construct the closed physical form first
+## 6. M7 recut: construct the closed physical form first
 
 Repo archaeology of `YMKatoClosedFormHamiltonianExact` and `BalabanClayMassGapGatePackageExact` narrows M7 again.
 
@@ -135,7 +182,7 @@ M7c  selected common invariant operator core                                LIVE
 
 The Kato interface is theorem/compiler infrastructure; it does not itself inhabit the literal physical form or the common core.
 
-## 6. M9 recut: direct Row-A1 form inequality is the primitive target
+## 7. M9 recut: direct Row-A1 form inequality is the primitive target
 
 The old search target
 
@@ -170,7 +217,7 @@ M9p direct physical Row-A1 quadratic-form/coercivity inequality            LIVE
 
 On the Kato route, the highest-alpha physical theorem is naturally stated first on the same closed physical form `q_a`, then transported/identified with its associated Hamiltonian through the representation theorem.
 
-## 7. Operator closure normal form
+## 8. Operator closure normal form
 
 Lean #7 `Welds.YMPhysicalClosureNormalForm` compiles a genuine finite family into the terminal quantitative operator bound.
 
@@ -194,25 +241,27 @@ Given additionally actual equality of YM/OS evolutions on a common core:
 
 Thus the finite->continuum->same-object **compiler path is paid up to physical inhabitation**.
 
-## 8. Continuum / reconstruction residual
+## 9. Continuum / reconstruction residual
 
 ```text
 C1 actual physical cutoff family -> vacuum-sector graph limit             LIVE
 C2 physical H_inf self-adjoint + normalized zero vacuum instance           LIVE
 C3 actual U^YM = U^OS on a common core                                    LIVE
-C4 physical spectral/OS correlation representation                         LIVE
+C4c covariance/clustering -> spectral/form gap compiler                    PAID
+C4i concrete physical OS4/spectral same-object interpretation              LOCATE-OR-INSTANTIATE
 ```
 
-Generic graph-limit gap transport, common-core generator uniqueness, vacuum-sector resolvent estimates and spectral exclusion are compiler-owned.
+Generic graph-limit gap transport, common-core generator uniqueness, vacuum-sector resolvent estimates, covariance/clustering -> form-gap, and spectral exclusion are compiler-owned.
 
-## 9. Compressed current wall
+## 10. Compressed current wall
 
 ```text
 SOURCE SAME-OBJECT
   R410: S0--S4
   literal differentiated CMP116 activity -> source majorant
   selected uniform analytic source domain
-  physical covariance convergence + OS correlation identification
+  physical finite->continuum covariance convergence
+  concrete covariance/OS4/spectral same-object interpretation only
 
 FINITE PHYSICAL FORM
   physical Balaban density -> literal measure weld
@@ -226,12 +275,11 @@ CONTINUUM / RECONSTRUCTION
   actual physical cutoff family -> H_inf graph limit
   physical continuum vacuum/self-adjoint instance
   actual U^YM = U^OS on common core
-  physical spectral/OS representation
 ```
 
-Everything between these inhabitants and the terminal form-gap/resolvent conclusion is now represented by theorem-producing compiler machinery in the active Lean/Agda lanes.
+Everything between these inhabitants and the terminal form-gap/resolvent conclusion is now represented by theorem-producing compiler machinery in the active Lean/Agda lanes. Equation (25) is explicitly **not** on this wall.
 
-## 10. New Lean #7 continuation commits
+## 11. New Lean #7 continuation commits
 
 ```text
 e8c4d4ba... RED physical closure normal form
@@ -245,15 +293,18 @@ c83f1a6b... CMP116-native source -> continuum covariance decay
 c5ce37e3... RED direct Row-A1 form-bound constructor
 784850d4... direct form bound -> VacuumGapDatum / physical Row-A1 instance
 ad5d36e4... aggregate axiom-audit sync
+c20ccf5a... RED source covariance -> vacuum form gap
+db931520... expose equation (25) theorem composition
+125a6113... aggregate equation (25) axiom-audit request
 ```
 
-## 11. Proof-search order
+## 12. Proof-search order
 
 1. **R410 literal source replay** — establish S0--S4 without guessing stage structure.
 2. **Literal CMP116 differentiated activity theorem** — establish S5 in the exact source volume/tree form.
 3. **Physical measure + closed form** — M7a0p/M7a1/M7f/M7a: construct the literal `L2_gauge(mu_a)` form and same-object action variation.
 4. **Direct Row-A1 coercivity + common core** — prove M9p on that exact form/operator and construct the invariant core; let Kato + Lean compilers produce self-adjoint/gap infrastructure.
-5. **S6--S8 / C1--C4** — selected analytic uniformity, covariance/OS representation and actual cutoff-to-continuum reconstruction.
+5. **S6--S7 / C1--C3 plus locate C4i** — selected analytic uniformity, physical covariance convergence, actual cutoff-to-continuum reconstruction and existing physical OS4/spectral interpretation inhabitant.
 
 ## Hard boundary
 
