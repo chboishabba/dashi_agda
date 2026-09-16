@@ -37,7 +37,7 @@ CMP99 generalized-walk propagator decay               [published/source]
  + selected T5/RG physical source semantics           [physical]
                 |
                 v
-R406 LITERAL SELECTED TERM/COMMON-Y LOCALIZATION       [LIVE RED / theorem-bearing]
+R406 LITERAL SELECTED TERM/COMMON-Y LOCALIZATION       [owner written / source replay unpaid]
                 |
                 v
 R404 common-Y absolute finite-walk resummation         [compiler / paid]
@@ -122,7 +122,15 @@ RED-first validation is now present:
 
 `DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Validation.agda`
 
-The missing owner must produce the actual theorem-bearing inputs consumed by R404/R405:
+The theorem-bearing owner is now written:
+
+`DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Exact.agda`
+
+Commit: `b2ec32e1c0f8b13ccc471b75d35edcebcc9a5078`.
+
+It composes R404 and R405 into the selected boundary inequality and binds the selected R318 carrier, observable-indexed J insertions, and decoupling-boundary coordinate. Its fields still require the literal CMP99/CMP116 source replay; no concrete source replay inhabitant or kernel receipt is claimed.
+
+The remaining source/application inputs are:
 
 ```text
 selected T5/RG density
@@ -174,8 +182,8 @@ clustering -> transfer-gap contradiction
 Still theorem-bearing/physical:
 
 ```text
-R406 / P0a selected-density source applicability for actual J insertions
-R406 / P0b CMP99/CMP116 differentiated term/local-activity majorants
+R406 / P0a selected-density source applicability for actual J insertions — owner interface written; inhabitant unpaid
+R406 / P0b CMP99/CMP116 differentiated term/local-activity majorants — owner interface written; inhabitant unpaid
 P2 selected support/time geometry inhabitant
 P3 same-Hamiltonian ratio/energy identity only where used
 ```
@@ -240,6 +248,7 @@ Current focused commits:
                 R405 RED validation already existed on #967
 143c8f66...  R405 nested source-domain summation GREEN source
 14b13cbf...  R406 RED-first validation requires missing literal theorem owner
+b2ec32e1...  R406 theorem-bearing owner written; R404/R405 composition present; source replay still unpaid
 ```
 
 No exact-head workflow has been observed for the R405/R406 head in this connector session. Do not upgrade source ordering to kernel certification.
@@ -251,6 +260,6 @@ No exact-head workflow has been observed for the R405/R406 head in this connecto
 - R402 pays absolute coefficient extraction.
 - R403 pays observable-index representation.
 - R404/R405 pay both finite summation layers.
-- R406 is now the explicit theorem-bearing RED frontier: selected-density/J applicability plus actual CMP99/CMP116 differentiated term/local-activity majorants.
+- R406 now has a theorem-bearing owner and explicit R404/R405 composition; the selected-density/J/source-localization fields remain unpaid until an inhabitant is supplied.
 - The R76 `E^(2)/Pi` representation bridge is donor-only unless R406 demonstrates a need.
 - RH remains behind YM in the live Pareto order.
