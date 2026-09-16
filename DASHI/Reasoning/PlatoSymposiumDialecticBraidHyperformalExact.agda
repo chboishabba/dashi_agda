@@ -11,6 +11,7 @@ import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Core.Base369DialecticRoleBoundaryExact as Role369
 import DASHI.Moonshine.Base369MonsterHistoryIndexedComputationObserverExact as Monster369
 import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeExact as Plato
+import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeCompletionExact as Completion
 import DASHI.Reasoning.DialecticMotifKernel as Dialectic
 import DASHI.Reasoning.TypedHyperfabricFiniteBraidEquivarianceExact as HyperBraid
 import DASHI.Reasoning.UnifiedCarryBraidReceipt as CarryBraid
@@ -20,23 +21,17 @@ import DASHI.Reasoning.ZizekPNFSourceAtlas as LegacyJMD
 -- PLATO SYMPOSIUM x DIALECTIC / BRAID / HYPERFABRIC / 369 / MONSTER
 --
 -- This owner cross-pollinates structural shapes, not semantic authority.
+-- The generic same-ascent-shape != same-semantics result is already owned by
+-- PlatoSymposiumPhilosophyBridgeCompletionExact and is reused rather than
+-- re-proved here.
 --
--- JMD's supplied Plato formalization gives historical/philosophical fixtures:
---   * incompatible speeches retained in one dialogue;
---   * right opinion between knowledge and ignorance;
---   * a finite ascent with an absorbing top;
---   * an involutive other-half operation;
---   * persistence as same-yet-other through change.
---
--- Existing DASHI owners independently provide:
---   * trinary self/norm/mirror x past/now/future dialectic state;
---   * unresolved carry and distributed braid tension;
---   * typed hyperfabric braid equivariance with explicit transport witnesses;
---   * strict separation of Base369 arithmetic/stage/motif/traversal roles;
---   * a Base369/Monster history-indexed computation observer that explicitly
---     refuses to identify the chart with a Monster representation.
---
--- Shared structure may motivate a bridge, but does not identify semantics.
+-- New seams here:
+--   * several retained voices/strands do not determine braid semantics;
+--   * a shared involution law does not determine semantic role;
+--   * Plato-shaped fixtures do not automatically acquire TypedHyperfabric
+--     braid equivariance;
+--   * Base369 numeral/stage/motif roles and Monster observers retain their
+--     existing authority boundaries.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -63,69 +58,90 @@ existingMonsterObserverBoundary =
 existingJMDLegacySourceAtlas : Attribution.AttributedSourceAtlas
 existingJMDLegacySourceAtlas = LegacyJMD.zizekPNFSourceAtlas
 
+existingEpistemicMiddleCrosswalk : Completion.EpistemicMiddleCrosswalk
+existingEpistemicMiddleCrosswalk = Completion.canonicalEpistemicMiddleCrosswalk
+
+pluralSpeechSourceContract : Plato.LeanPhilosophyTheoremContract
+pluralSpeechSourceContract = Plato.pluralSpeechConflictContract
+
+aristophanesInvolutionSourceContract : Plato.LeanPhilosophyTheoremContract
+aristophanesInvolutionSourceContract = Plato.aristophanesHalvesContract
+
 ------------------------------------------------------------------------
--- Shared-shape collision 1: an ascent/layering shape does not determine its
--- semantics. Diotima's source-defined ascent, an operational stage chart and
--- a typed hyperfabric transport can share a local-to-global shape while asking
--- different questions and carrying different authority.
+-- 1. Many retained voices/strands do not determine braid semantics.
+--
+-- The Symposium's incompatible speakers and a typed topological braid can
+-- both have multiple persistent strands. That shared multiplicity does not
+-- identify philosophical disagreement with a braid action, isotopy class,
+-- hyperfabric incidence transport, or section transport.
 ------------------------------------------------------------------------
 
-data AscentWorld : Set where
-  diotimaAscentWorld : AscentWorld
-  operationalStageWorld : AscentWorld
+data ManyStrandWorld : Set where
+  symposiumPluralVoices : ManyStrandWorld
+  typedHyperformalBraid : ManyStrandWorld
 
-data SharedAscentShape : Set where
-  localToGeneralLayeredShape : SharedAscentShape
+data ManyStrandShape : Set where
+  retainedMultipleStrands : ManyStrandShape
 
-data AscentMeaningQuery : Set where
-  ascentMeaningQuestion : AscentMeaningQuery
+data ManyStrandMeaningQuery : Set where
+  manyStrandMeaningQuestion : ManyStrandMeaningQuery
 
-data AscentMeaningAnswer : Set where
-  sourceBoundPlatonicAscent : AscentMeaningAnswer
-  operationalIndexOrTransport : AscentMeaningAnswer
+data ManyStrandMeaningAnswer : Set where
+  sourceBoundDialogicalPlurality : ManyStrandMeaningAnswer
+  typedTopologicalTransport : ManyStrandMeaningAnswer
 
-ascentShapeProjection : AscentWorld → SharedAscentShape
-ascentShapeProjection diotimaAscentWorld = localToGeneralLayeredShape
-ascentShapeProjection operationalStageWorld = localToGeneralLayeredShape
+manyStrandProjection : ManyStrandWorld → ManyStrandShape
+manyStrandProjection symposiumPluralVoices = retainedMultipleStrands
+manyStrandProjection typedHyperformalBraid = retainedMultipleStrands
 
-AscentMeaningAnswerFor : AscentMeaningQuery → Set
-AscentMeaningAnswerFor ascentMeaningQuestion = AscentMeaningAnswer
+ManyStrandMeaningAnswerFor : ManyStrandMeaningQuery → Set
+ManyStrandMeaningAnswerFor manyStrandMeaningQuestion = ManyStrandMeaningAnswer
 
-askAscentMeaning :
-  (query : AscentMeaningQuery) →
-  AscentWorld →
-  AscentMeaningAnswerFor query
-askAscentMeaning ascentMeaningQuestion diotimaAscentWorld = sourceBoundPlatonicAscent
-askAscentMeaning ascentMeaningQuestion operationalStageWorld = operationalIndexOrTransport
+askManyStrandMeaning :
+  (query : ManyStrandMeaningQuery) →
+  ManyStrandWorld →
+  ManyStrandMeaningAnswerFor query
+askManyStrandMeaning manyStrandMeaningQuestion symposiumPluralVoices =
+  sourceBoundDialogicalPlurality
+askManyStrandMeaning manyStrandMeaningQuestion typedHyperformalBraid =
+  typedTopologicalTransport
 
-ascentMeaningQuestions : Query.InquiryQuestionFamily AscentWorld AscentMeaningQuery
-ascentMeaningQuestions = Query.inquiryQuestionFamily AscentMeaningAnswerFor askAscentMeaning
+manyStrandMeaningQuestions :
+  Query.InquiryQuestionFamily ManyStrandWorld ManyStrandMeaningQuery
+manyStrandMeaningQuestions =
+  Query.inquiryQuestionFamily ManyStrandMeaningAnswerFor askManyStrandMeaning
 
-sharedAscentShapeDoesNotDetermineSemantics :
-  Query.FactorsThrough ascentMeaningQuestions ascentShapeProjection ascentMeaningQuestion → ⊥
-sharedAscentShapeDoesNotDetermineSemantics factor = helper first second
+sharedManyStrandShapeDoesNotDetermineSemantics :
+  Query.FactorsThrough
+    manyStrandMeaningQuestions
+    manyStrandProjection
+    manyStrandMeaningQuestion →
+  ⊥
+sharedManyStrandShapeDoesNotDetermineSemantics factor = helper first second
   where
     first :
-      sourceBoundPlatonicAscent ≡
-      Query.quotientAnswer factor localToGeneralLayeredShape
-    first = Query.factorisation factor diotimaAscentWorld
+      sourceBoundDialogicalPlurality ≡
+      Query.quotientAnswer factor retainedMultipleStrands
+    first = Query.factorisation factor symposiumPluralVoices
 
     second :
-      operationalIndexOrTransport ≡
-      Query.quotientAnswer factor localToGeneralLayeredShape
-    second = Query.factorisation factor operationalStageWorld
+      typedTopologicalTransport ≡
+      Query.quotientAnswer factor retainedMultipleStrands
+    second = Query.factorisation factor typedHyperformalBraid
 
     helper :
-      sourceBoundPlatonicAscent ≡ Query.quotientAnswer factor localToGeneralLayeredShape →
-      operationalIndexOrTransport ≡ Query.quotientAnswer factor localToGeneralLayeredShape →
+      sourceBoundDialogicalPlurality ≡ Query.quotientAnswer factor retainedMultipleStrands →
+      typedTopologicalTransport ≡ Query.quotientAnswer factor retainedMultipleStrands →
       ⊥
     helper refl ()
 
 ------------------------------------------------------------------------
--- Shared-shape collision 2: involution alone does not determine meaning.
--- Aristophanes' source-defined otherHalf involution and the DASHI dialectic
--- valuation involution both satisfy a double-application identity, but their
--- semantic roles remain independent.
+-- 2. Involution alone does not determine meaning.
+--
+-- Aristophanes' source-defined otherHalf operation and the DASHI dialectic
+-- valuation involution both have a double-application identity, but the first
+-- is a source-bounded relation grammar while the second flips a complete
+-- ternary State9 valuation.
 ------------------------------------------------------------------------
 
 data InvolutionWorld : Set where
@@ -153,8 +169,10 @@ askInvolutionMeaning :
   (query : InvolutionMeaningQuery) →
   InvolutionWorld →
   InvolutionMeaningAnswerFor query
-askInvolutionMeaning involutionMeaningQuestion aristophanicRelationInvolution = complementaryRelationMeaning
-askInvolutionMeaning involutionMeaningQuestion dialecticValuationInvolution = tritValuationReversalMeaning
+askInvolutionMeaning involutionMeaningQuestion aristophanicRelationInvolution =
+  complementaryRelationMeaning
+askInvolutionMeaning involutionMeaningQuestion dialecticValuationInvolution =
+  tritValuationReversalMeaning
 
 involutionMeaningQuestions :
   Query.InquiryQuestionFamily InvolutionWorld InvolutionMeaningQuery
@@ -196,11 +214,13 @@ record PlatoSymposiumHyperformalBoundary : Set where
     rightOpinionMayMotivateNeutralIntermediateFixture : Bool
     diotimaAscentMayMotivateLayeredCarrierComparison : Bool
     aristophanesInvolutionMayMotivateInvolutionComparison : Bool
+    dialogueMayBeModelledAsBraidOnlyWithExplicitBridge : Bool
 
     platoDialogueDefinitionallyEqualsDASHIDialectic : Bool
     platoAscentDefinitionallyEqualsBase369Stage : Bool
     platoAscentDefinitionallyEqualsHyperformalTransport : Bool
     platoDialogueAutomaticallyHasBraidEquivariance : Bool
+    sharedManyStrandShapeMeansSharedSemantics : Bool
     sharedBraidShapeCollapsesDistinctVoices : Bool
     base369NumeralCreatesPlatonicMeaning : Bool
     base369MonsterChartCreatesPlatonicOrMonsterRepresentation : Bool
@@ -219,6 +239,8 @@ canonicalPlatoSymposiumHyperformalBoundary =
     true
     true
     true
+    true
+    false
     false
     false
     false
@@ -258,4 +280,4 @@ carryBraidCrossDomainEqualityNotClaimed = CarryBraid.carryGrammarSummary
 
 platoHyperformalSummary : String
 platoHyperformalSummary =
-  "The Symposium can serve as a source-bounded philosophical fixture for retained contradiction, intermediate epistemic state, layered ascent, involution and persistence. DASHI dialectic, braid, hyperfabric, Base369 and Monster observers may compare those structural shapes only through explicit typed bridges; shared shape never creates shared semantics or theorem authority."
+  "JMD's Symposium supplies source-bounded fixtures for retained contradiction, intermediate epistemic state, layered ascent, involution and persistence. DASHI dialectic, carry/braid, typed hyperfabric, Base369 and Monster observers may compare those structural shapes only through explicit typed bridges; many strands, matching involutions or matching indices never create shared semantics or theorem authority."
