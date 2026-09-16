@@ -168,6 +168,31 @@ brasslerOERESDStudentProducerSource =
     "Higher-education ESD/OER source in which students produce open resources and digital competence is evaluated; supports an open-practice/student-producer precedent, not constitutive authority, material sustainability or universal transfer."
     Attr.publicAttribution
 
+publicDigitalLearningPlatformCharterSource : Attr.AttributedSource
+publicDigitalLearningPlatformCharterSource =
+  Attr.mkNoDOISource
+    "UNESCO; UNICEF; International Telecommunication Union"
+    "Charter for Public Digital Learning Platforms: Seven principles to steer the development of public digital learning platforms"
+    "UNESCO-UNICEF-ITU Gateways to Public Digital Learning Initiative"
+    "2026"
+    "https://www.unesco.org/en/digital-education/learning-platforms-gateway/charter"
+    Attr.institutionalSource
+    "Normative public-digital-learning-platform source: open standards, reuse licensing, modular/interoperable architecture, integration with public digital infrastructure, public accountability and avoidance of fragmentation/vendor lock-in. It guides architecture/governance but does not empirically prove durability of a deployed platform."
+    Attr.publicAttribution
+
+fishlockRightToRepairEducationSource : Attr.AttributedSource
+fishlockRightToRepairEducationSource =
+  Attr.mkDOISource
+    "Sam Fishlock; Matthew Thompson; Anoop Grewal"
+    "Sustainable Engineering Design in Education: A Pilot Study of Teaching Right-to-Repair Principles through Project-Based Learning"
+    "Global Challenges 7(10), 2300158"
+    "2023"
+    "10.1002/gch2.202300158"
+    "https://doi.org/10.1002/gch2.202300158"
+    Attr.academicArticleSource
+    "Educational right-to-repair precedent identifying repair barriers and teaching repairability principles; does not certify repairability, spare-part availability, maintenance capacity or device longevity of the digital-ESD deployment."
+    Attr.publicAttribution
+
 ieaEnergyAISource : Attr.AttributedSource
 ieaEnergyAISource =
   Attr.mkNoDOISource
@@ -233,13 +258,15 @@ canonicalDigitalESDAcquisitionSourceAtlas =
     ∷ colladoLongitudinalESDSource
     ∷ aksoyZawackiRichterOERSustainabilitySource
     ∷ brasslerOERESDStudentProducerSource
+    ∷ publicDigitalLearningPlatformCharterSource
+    ∷ fishlockRightToRepairEducationSource
     ∷ ieaEnergyAISource
     ∷ ieaKeyQuestionsEnergyAISource
     ∷ ituGlobalEwasteSource
     ∷ unescoSixPillarsSource
     ∷ []
     )
-    "Exact call antecedents plus pedagogical, participatory, learner-centred, longitudinal, OER/open-practice, education-LCA, digital-sobriety and infrastructure sustainability context. Contextual payments retain scope and do not erase finer same-object, transfer, material or authority residuals."
+    "Exact call antecedents plus pedagogical, participatory, learner-centred, longitudinal, OER/open-practice, interoperability/public-platform governance, repair education, education-LCA, digital-sobriety and infrastructure sustainability context. Contextual payments retain scope and do not erase finer same-object, transfer, material or authority residuals."
 
 ------------------------------------------------------------------------
 -- Source-role snowball receipts. These reuse the canonical owner directly.
@@ -290,6 +317,16 @@ oerESDStudentProducerSourceRoleReceipt :
 oerESDStudentProducerSourceRoleReceipt =
   Snowball.canonicalSourceRoleSnowballReceipt brasslerOERESDStudentProducerSource
 
+publicPlatformCharterSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt publicDigitalLearningPlatformCharterSource
+publicPlatformCharterSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt publicDigitalLearningPlatformCharterSource
+
+rightToRepairEducationSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt fishlockRightToRepairEducationSource
+rightToRepairEducationSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt fishlockRightToRepairEducationSource
+
 ieaSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt ieaEnergyAISource
 ieaSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt ieaEnergyAISource
 
@@ -335,6 +372,12 @@ record DigitalESDAcquisitionAtlas : Set where
     oerESDStudentProducerEvidencePaid : Bool
     oerESDStudentProducerEvidencePaidIsTrue :
       oerESDStudentProducerEvidencePaid ≡ true
+    publicPlatformInteroperabilityCharterPaid : Bool
+    publicPlatformInteroperabilityCharterPaidIsTrue :
+      publicPlatformInteroperabilityCharterPaid ≡ true
+    rightToRepairEducationSourcePaid : Bool
+    rightToRepairEducationSourcePaidIsTrue :
+      rightToRepairEducationSourcePaid ≡ true
     generalDataCentreEnergyContextPaid : Bool
     generalDataCentreEnergyContextPaidIsTrue :
       generalDataCentreEnergyContextPaid ≡ true
@@ -362,6 +405,8 @@ canonicalDigitalESDAcquisitionAtlas : DigitalESDAcquisitionAtlas
 canonicalDigitalESDAcquisitionAtlas =
   digital-esd-acquisition-atlas
     canonicalDigitalESDAcquisitionSourceAtlas
+    true refl
+    true refl
     true refl
     true refl
     true refl
@@ -417,6 +462,18 @@ oerOrganisationalSustainabilityDoesNotPayMaterialRepairability :
   OEROrganisationalSustainabilityPaysMaterialRepairability → ⊥
 oerOrganisationalSustainabilityDoesNotPayMaterialRepairability ()
 
+data OpenStandardsCharterProvesPlatformDurability : Set where
+
+openStandardsCharterDoesNotProvePlatformDurability :
+  OpenStandardsCharterProvesPlatformDurability → ⊥
+openStandardsCharterDoesNotProvePlatformDurability ()
+
+data RightToRepairEducationProvesDeployedHardwareRepairability : Set where
+
+rightToRepairEducationDoesNotProveDeployedHardwareRepairability :
+  RightToRepairEducationProvesDeployedHardwareRepairability → ⊥
+rightToRepairEducationDoesNotProveDeployedHardwareRepairability ()
+
 ------------------------------------------------------------------------
 -- Bidi acquisition leaves: evidence -> bounded claim; consumer -> reopen debt.
 ------------------------------------------------------------------------
@@ -444,7 +501,7 @@ leafReference longitudinalInterventionImpact =
 leafReference esdParticipantGovernanceTransfer =
   "Fernando/Tajan participatory-ESD review plus still-unpaid context-generalised Alice constitutive-agency/authority transfer"
 leafReference openInteroperabilityDurability =
-  "Aksoy/Zawacki-Richter OER organisational-sustainability review + Brassler student-producer OER/ESD precedent; material repairability/interoperability/lifecycle durability remains unpaid"
+  "OER sustainability + student-producer HESD + UNESCO/UNICEF/ITU open/interoperable platform charter + RtR education precedent; actual platform/hardware material durability remains unpaid"
 
 data PaymentState : Set where
   unpaid : PaymentState
@@ -508,9 +565,9 @@ openDurabilityBidi : AcquisitionBidiReceipt
 openDurabilityBidi =
   acquisition-bidi-receipt
     openInteroperabilityDurability
-    "Aksoy/Zawacki-Richter pays an OER initiative-sustainability review and Brassler pays a student-producer OER/HESD precedent"
-    "open-resource sustainability depends on multiple institutional/platform/creator/learner/material factors, and students can co-produce OERs in HESD"
-    "reopen before claiming source availability, licensing or OER organisational sustainability pays hardware repairability, interoperability, energy/material lifecycle durability or durable governance of the actual digital-ESD system"
+    "Aksoy/Zawacki-Richter pays OER initiative sustainability; Brassler pays student-producer OER/HESD; the 2026 UNESCO/UNICEF/ITU Charter pays open-standards/interoperability/public-governance guidance; Fishlock/Thompson/Grewal pays an educational RtR precedent"
+    "open standards, interoperability, public governance, OER sustainability and repairability are now source-grounded digital-education design coordinates rather than unsupported discussion-only ideas"
+    "reopen before claiming these normative/practice precedents prove the actual platform avoids lock-in over time, the selected hardware is repairable, spare parts/support persist, or lifecycle/environmental durability is achieved"
     true true true true false false
 
 ------------------------------------------------------------------------
@@ -549,7 +606,7 @@ leafCost consumerSpecificityDebt genericInfrastructureExternalityContext = 3
 leafCost consumerSpecificityDebt educationSpecificLifecycleMeasurement = 0
 leafCost consumerSpecificityDebt longitudinalInterventionImpact = 1
 leafCost consumerSpecificityDebt esdParticipantGovernanceTransfer = 1
-leafCost consumerSpecificityDebt openInteroperabilityDurability = 2
+leafCost consumerSpecificityDebt openInteroperabilityDurability = 1
 
 leafCost sustainabilityCoverageDebt exactCallAntecedentIdentity = 3
 leafCost sustainabilityCoverageDebt pedagogicalNonSufficiencyContext = 3
@@ -565,7 +622,7 @@ leafCost authorityPromotionRisk genericInfrastructureExternalityContext = 2
 leafCost authorityPromotionRisk educationSpecificLifecycleMeasurement = 1
 leafCost authorityPromotionRisk longitudinalInterventionImpact = 1
 leafCost authorityPromotionRisk esdParticipantGovernanceTransfer = 4
-leafCost authorityPromotionRisk openInteroperabilityDurability = 2
+leafCost authorityPromotionRisk openInteroperabilityDurability = 1
 
 leafCost opportunityLoss exactCallAntecedentIdentity = 4
 leafCost opportunityLoss pedagogicalNonSufficiencyContext = 3
@@ -573,7 +630,7 @@ leafCost opportunityLoss genericInfrastructureExternalityContext = 2
 leafCost opportunityLoss educationSpecificLifecycleMeasurement = 0
 leafCost opportunityLoss longitudinalInterventionImpact = 1
 leafCost opportunityLoss esdParticipantGovernanceTransfer = 1
-leafCost opportunityLoss openInteroperabilityDurability = 2
+leafCost opportunityLoss openInteroperabilityDurability = 1
 
 leafCost acquisitionEffort exactCallAntecedentIdentity = 0
 leafCost acquisitionEffort pedagogicalNonSufficiencyContext = 0
@@ -581,7 +638,7 @@ leafCost acquisitionEffort genericInfrastructureExternalityContext = 0
 leafCost acquisitionEffort educationSpecificLifecycleMeasurement = 3
 leafCost acquisitionEffort longitudinalInterventionImpact = 3
 leafCost acquisitionEffort esdParticipantGovernanceTransfer = 2
-leafCost acquisitionEffort openInteroperabilityDurability = 2
+leafCost acquisitionEffort openInteroperabilityDurability = 1
 
 frontierProblem : Pareto.ConsumerMDLProblem
 frontierProblem =
@@ -636,6 +693,8 @@ record SnowballParetoBoundary : Set where
     participatoryContextCreatesParticipantAuthority : Bool
     oneYearESDClosesDigitalLongHorizonImpact : Bool
     oerOrganisationalDurabilityEqualsMaterialDurability : Bool
+    openStandardsNormCreatesEmpiricalDurability : Bool
+    repairEducationCreatesHardwareRepairability : Bool
     paretoRequiresScalarScore : Bool
     lowestAcquisitionEffortAutomaticallyWins : Bool
     paidLeafMustStayOnUnpaidFrontier : Bool
@@ -647,8 +706,8 @@ open SnowballParetoBoundary public
 canonicalSnowballParetoBoundary : SnowballParetoBoundary
 canonicalSnowballParetoBoundary =
   snowball-pareto-boundary
-    false false false false false false false false false false false false false true true
+    false false false false false false false false false false false false false false false true true
 
 currentHighestAlphaReading : String
 currentHighestAlphaReading =
-  "Exact call antecedents, pedagogical context, participatory-ESD context, a one-year ESD longitudinal benchmark, OER organisational-sustainability review, student-producer OER/HESD precedent, education-scenario LCA benchmark, digital-sobriety pedagogy, and general infrastructure context are now source-role paid. The live frontier intentionally remains four finer residuals: same-object intervention lifecycle measurement; digital-ESD/institutional long-horizon impact; context-generalised constitutive participant governance; and material/interoperability/repairability durability. Context acquisition reduces debt without silently paying these stronger consumers."
+  "Exact call antecedents, pedagogical context, participatory-ESD context, one-year ESD longitudinal evidence, OER organisational sustainability, student-producer OER/HESD, open-standard/interoperability/public-platform guidance, right-to-repair education, education-scenario LCA, digital-sobriety pedagogy, and general infrastructure context are source-role paid. The live frontier remains four finer residuals: same-object intervention lifecycle measurement; digital-ESD/institutional long-horizon impact; context-generalised constitutive participant governance; and empirical material/interoperability/repairability durability of the actual deployment."
