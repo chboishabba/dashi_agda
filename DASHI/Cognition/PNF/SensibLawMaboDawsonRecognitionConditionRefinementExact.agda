@@ -147,8 +147,8 @@ record DawsonSourceCreationBoundary : Set where
     boundaryReference : String
 open DawsonSourceCreationBoundary public
 
-dawsonSourceCreationBoundary : DawsonSourceCreationBoundary
-dawsonSourceCreationBoundary = dawsonSourceCreationBoundary
+canonicalDawsonSourceCreationBoundary : DawsonSourceCreationBoundary
+canonicalDawsonSourceCreationBoundary = dawsonSourceCreationBoundary
   antecedentCommunityNormativeRelation
   commonLawLegalRecognitionRelation
   crownRecognitionEvidenceState
@@ -173,7 +173,7 @@ record PluralRecognitionObserverBoundary : Set where
   field
     affectedVoice : RecognitionObserverPosition
     stateRecognition : RecognitionObserverPosition
-    judicialRecognition : RecognitionObserverPosition
+    judicialRecognitionPosition : RecognitionObserverPosition
     affectedVoiceEqualsStateRecognition : Bool
     affectedVoiceEqualsStateRecognitionIsFalse : affectedVoiceEqualsStateRecognition ≡ false
     stateRecognitionExhaustsNormativeSource : Bool
@@ -183,8 +183,8 @@ record PluralRecognitionObserverBoundary : Set where
     boundaryReference : String
 open PluralRecognitionObserverBoundary public
 
-pluralRecognitionObserverBoundary : PluralRecognitionObserverBoundary
-pluralRecognitionObserverBoundary = pluralRecognitionObserverBoundary
+canonicalPluralRecognitionObserverBoundary : PluralRecognitionObserverBoundary
+canonicalPluralRecognitionObserverBoundary = pluralRecognitionObserverBoundary
   affectedCommunitySelfArticulation
   crownOrStateRecognition
   judicialRecognition
