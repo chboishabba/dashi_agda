@@ -34,10 +34,6 @@ import DASHI.Education.DigitalESDParticipantGovernanceContextTransferExact as Go
 currentPaperType : Paper.PaperType
 currentPaperType = Paper.currentPaperType
 
-------------------------------------------------------------------------
--- Research questions.
-------------------------------------------------------------------------
-
 data ManuscriptResearchQuestion : Set where
   digitalEducationBuildsESDCapacityRQ : ManuscriptResearchQuestion
   transformationBeyondTechnologyUseRQ : ManuscriptResearchQuestion
@@ -69,10 +65,6 @@ researchQuestionReference participantAgencyAndGovernanceRQ =
 researchQuestionReference durabilityAndLongitudinalTransformationRQ =
   "RQ5: What evidence and conditions bear on durability, institutionalisation, context transfer and longitudinal transformation, and which claims remain future empirical debt?"
 
-------------------------------------------------------------------------
--- Integrative-review process stages.
-------------------------------------------------------------------------
-
 data IntegrativeReviewStage : Set where
   problemIdentification : IntegrativeReviewStage
   literatureSearch : IntegrativeReviewStage
@@ -102,15 +94,6 @@ structuredSearchLedger : Search.StructuredSearchLedger
 structuredSearchLedger = Search.canonicalStructuredSearchLedger
 
 manuscriptDependencyGraph = Payment.canonicalManuscriptDependencyGraph
-
-------------------------------------------------------------------------
--- Inclusion / exclusion policy.
---
--- Eligibility is question- and role-relative. A source need not be an
--- empirical intervention study to be included in an integrative review, but it
--- must contribute a declared role and retain the population/context/time and
--- evidentiary limitations needed by its consumer.
-------------------------------------------------------------------------
 
 data EvidenceRole : Set where
   empiricalOutcomeEvidence : EvidenceRole
@@ -158,10 +141,6 @@ canonicalEligibilityPolicy =
     false refl
     false refl
 
-------------------------------------------------------------------------
--- Structured extraction schema.
-------------------------------------------------------------------------
-
 data ExtractionCoordinate : Set where
   sourceIdentityCoordinate : ExtractionCoordinate
   sourceKindAndRoleCoordinate : ExtractionCoordinate
@@ -204,10 +183,6 @@ canonicalExtractionSchema =
   ∷ uncertaintyLimitationCoordinate
   ∷ []
 
-------------------------------------------------------------------------
--- Synthesis axes.
-------------------------------------------------------------------------
-
 data ReciprocityDirection : Set where
   digitalEducationToESDCapacity : ReciprocityDirection
   sustainabilityToDigitalEducationConstraint : ReciprocityDirection
@@ -239,10 +214,6 @@ record SynthesisCell : Set where
     limitationReference : String
 
 open SynthesisCell public
-
-------------------------------------------------------------------------
--- Newly acquired primary-source receipts.
-------------------------------------------------------------------------
 
 record SourceReceipt : Set where
   constructor source-receipt
@@ -279,9 +250,13 @@ oecdDigitalEducationOutlook2026Receipt =
     "primary institutional evidence/policy synthesis / performance-versus-learning and pedagogical-condition context"
     true refl
 
-------------------------------------------------------------------------
--- Consumer-facing separations strengthened by the primary sources.
-------------------------------------------------------------------------
+unescoAICommonGoodMinisterialReceipt : SourceReceipt
+unescoAICommonGoodMinisterialReceipt =
+  source-receipt
+    Primary.unescoAICommonGoodMinisterialSource
+    "2026-09-16"
+    "primary intergovernmental normative/governance source / public-purpose, deliberative-governance and infrastructure-procurement context"
+    true refl
 
 data ActivityLevelDeterminesSystemTransformation : Set where
 
@@ -317,20 +292,12 @@ institutionalFrameworkDoesNotCreateLocalAuthority :
   InstitutionalFrameworkCreatesLocalAuthority → ⊥
 institutionalFrameworkDoesNotCreateLocalAuthority ()
 
-------------------------------------------------------------------------
--- Canonical owners retained rather than copied.
-------------------------------------------------------------------------
-
 transformationBoundary = Transformation.canonicalIntegratedTransitionBoundary
 literatureObserverMap = Literature.canonicalDigitalESDLiteratureMap
 governanceTransferBoundary =
   Governance.canonicalParticipantGovernanceContextTransferBoundary
 paymentBoundary = Payment.canonicalManuscriptDependencyPaymentBoundary
 snowballBoundary = Snowball.canonicalAttributionSnowballBoundary
-
-------------------------------------------------------------------------
--- Reporting boundary.
-------------------------------------------------------------------------
 
 record MethodologyBoundary : Set where
   constructor methodology-boundary
