@@ -144,7 +144,7 @@ data ManifestationIdentityEqualsAuthorityIdentityPermission : Set where
 data ExactLiteralCreatesApplicabilityPermission : Set where
 data ExactLiteralCreatesClaimTruthPermission : Set where
 data ExactLiteralCreatesProofChainPermission : Set where
-\data StaleLiteralMayExecuteSourcePermission : Set where
+data StaleLiteralMayExecuteSourcePermission : Set where
 
 manifestationIdentityCannotCollapseIntoAuthorityIdentity :
   ManifestationIdentityEqualsAuthorityIdentityPermission → ⊥
