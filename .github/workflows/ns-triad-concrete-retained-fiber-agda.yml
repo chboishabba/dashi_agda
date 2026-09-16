@@ -232,6 +232,12 @@ jobs:
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Physics/Closure/NSTriadKNClayFrontierRound202Validation.agda
 
+      - name: Type-check released Clay C source alignment
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNOpenAIReleasedClayCAlignmentValidation.agda
+
       - name: Type-check canonical Paper 1 modern theorem interface
         run: >-
           nix develop .# --command
