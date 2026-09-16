@@ -7,16 +7,25 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = REPO_ROOT / "scripts" / "monster369_oeis_acquisition_snapshot.py"
+POWER_BRIDGE_SCRIPT = REPO_ROOT / "scripts" / "monster369_42b_power_bridge_snapshot.py"
 
 
-def load_runtime():
-    spec = importlib.util.spec_from_file_location("monster369_oeis_acquisition", SCRIPT)
+def load_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, path)
     assert spec is not None
     assert spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def load_runtime():
+    return load_module(SCRIPT, "monster369_oeis_acquisition")
+
+
+def load_power_bridge():
+    return load_module(POWER_BRIDGE_SCRIPT, "monster369_42b_power_bridge")
 
 
 def test_a005052_ladder_snapshot_retains_90_65610_196830():
@@ -60,18 +69,17 @@ def test_oeis_42d_and_atlas_42D_labels_are_not_silently_identified():
 
 
 def test_42b_is_the_order_42_power_bridge_to_3b():
-    runtime = load_runtime()
-    relation = runtime.RELATIONS["oeis42b-atlas42B-power-bridge-to-3B"]
-    assert relation["oeis_sequence"] == "A058676"
-    assert relation["oeis_label"] == "42b"
-    assert relation["atlas_label"] == "42B"
-    assert relation["atlas_fourteenth_power_target"] == "3B"
-    assert relation["atlas_seventh_power_target"] == "6B"
-    assert relation["atlas_third_power_target"] == "14C"
-    assert relation["atlas_second_power_target"] == "21D"
-    assert relation["direct_power_bridge_to_3B"] is True
-    assert relation["same_class_paid"] is True
-    assert relation["creates_n3b_action_weld"] is False
+    bridge = load_power_bridge().build_42b_power_bridge_receipt()
+    assert bridge["oeis_sequence"] == "A058676"
+    assert bridge["oeis_label"] == "42b"
+    assert bridge["atlas_label"] == "42B"
+    assert bridge["atlas_fourteenth_power_target"] == "3B"
+    assert bridge["atlas_seventh_power_target"] == "6B"
+    assert bridge["atlas_third_power_target"] == "14C"
+    assert bridge["atlas_second_power_target"] == "21D"
+    assert bridge["direct_power_bridge_to_3B"] is True
+    assert bridge["same_class_paid"] is True
+    assert bridge["creates_n3b_action_weld"] is False
 
 
 def test_42_class_eta_family_retains_native_14_and_42_levels():
@@ -146,7 +154,7 @@ def test_snapshot_keeps_positive_bridge_signal_separate_from_proof_authority():
     assert report["positive_bridge_candidates"]["a025616-parent-lattice"] is True
     assert report["positive_bridge_candidates"]["6b-q6-to-c6-spectrum-32772"] is True
     assert report["positive_bridge_candidates"]["17496-42d-to-n3b-restriction"] is True
-    assert report["positive_bridge_candidates"]["42b-power-bridge-to-3b"] is True
+    assert load_power_bridge().build_42b_power_bridge_receipt()["direct_power_bridge_to_3B"] is True
     assert report["positive_bridge_candidates"]["42d-five-mode-phase-carrier"] is True
     assert report["positive_bridge_candidates"]["42-class-eta-level-family"] is True
     assert report["positive_bridge_candidates"]["ternary27-phase-preserving-3x5-reduction"] is True
