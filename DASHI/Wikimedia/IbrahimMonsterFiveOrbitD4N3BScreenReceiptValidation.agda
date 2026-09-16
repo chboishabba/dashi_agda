@@ -45,9 +45,29 @@ summaryArtifactUploadRegression :
   R.summaryArtifactUploadWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 summaryArtifactUploadRegression = refl
 
-runtimeFirewallRegression :
-  R.gapRuntimeReceiptObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
-runtimeFirewallRegression = refl
+runtimeObservedRegression :
+  R.gapRuntimeReceiptObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+runtimeObservedRegression = refl
+
+possibleFusionCountRegression :
+  R.possibleFusionCount R.currentFiveOrbitD4N3BScreenReceipt ≡ 17
+possibleFusionCountRegression = refl
+
+characterCompatibleFusionCountRegression :
+  R.characterCompatibleFusionCount R.currentFiveOrbitD4N3BScreenReceipt ≡ 17
+characterCompatibleFusionCountRegression = refl
+
+routeSurvivesTableScreenRegression :
+  R.fiveOrbitRouteFalsified R.currentFiveOrbitD4N3BScreenReceipt ≡ false
+routeSurvivesTableScreenRegression = refl
+
+atlasRealizationResidualRegression :
+  R.atlasGroupRealized R.currentFiveOrbitD4N3BScreenReceipt ≡ false
+atlasRealizationResidualRegression = refl
+
+actualD4StillUnpaidRegression :
+  R.actualD4SubgroupRuntimeObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
+actualD4StillUnpaidRegression = refl
 
 sameObjectFirewallRegression :
   R.selectedActionSameObjectPaid R.currentFiveOrbitD4N3BScreenReceipt ≡ false
