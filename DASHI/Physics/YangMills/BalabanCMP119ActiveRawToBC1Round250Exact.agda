@@ -4,18 +4,26 @@ module DASHI.Physics.YangMills.BalabanCMP119ActiveRawToBC1Round250Exact where
 ------------------------------------------------------------------------
 -- ROUND250 / MODERN ACTIVE RAW CMP119 -> BC1 PROOF SPINE
 --
--- This is the consumer-first composition of the current source route:
+-- Preferred source route after Round248:
 --
 --   finite-history raw CMP119 E_k
---     -> exact raw E-localization decoder                 [source payment]
+--     -> concrete E-localization Sect.-2 predicate family
+--     -> genuine CMP122 Theorem-1 witness                [source payment]
+--     -> identity E-localization decoder                 [R248 compiler]
+--     -> active raw Sect.-2 witness                      [compiler]
 --     -> active regular-E/localization form              [R248 compiler]
 --     -> active CMP109/CMP116 continuation               [R247 compiler]
 --     -> D2 + CMP109 Eq.(5.1) + finite CMP116 demands    [physical inputs]
 --     -> canonical differentiated BC1 carrier            [R115 compiler].
 --
+-- The older opaque-predicate decoder route is retained below as a legitimate
+-- alternate construction, but decoder/rawWitness are not primitive inputs on
+-- the preferred concrete-predicate route.
+--
 -- No all-Nat source history is reintroduced.  No full CMP122 quantitative-bounds
--- package is required merely to reach BC1.  The BC1 effective potential remains
--- definitionally the SAME function-valued raw E_k at the selected active scale.
+-- package is required merely to reach the BC1-facing regular-E continuation.
+-- The BC1 effective potential remains definitionally the SAME function-valued
+-- raw E_k at the selected active scale.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -26,7 +34,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as FiniteBeta
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
+import DASHI.Physics.YangMills.Balaban1989ActiveScaleTheorem1BetaBridgeExact as Active
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
+import DASHI.Physics.YangMills.BalabanCMP122Theorem1ToRawCMP119ActiveExact as Theorem1Raw
 import DASHI.Physics.YangMills.BalabanCMP119RawStateFromFiniteBetaHistoryExact as RawHistory
 import DASHI.Physics.YangMills.BalabanCMP119RawActiveRegularEDecoderRound248Exact as R248
 import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as R246
@@ -82,6 +92,38 @@ activeContinuation :
 activeContinuation decoder rawWitness Tangent =
   R247.asActiveCMP109116ContinuationFromRegularEForm
     (activeRegularEFormWitness decoder rawWitness)
+    Tangent
+
+------------------------------------------------------------------------
+-- Preferred concrete-predicate source route.
+--
+-- Round248 already proves that if the source predicate vocabulary chooses its
+-- E-localization field to BE the concrete same-E localization record, decoding
+-- is identity and the finite-history coupling weld is definitional.  Therefore
+-- Round250 should expose the direct composition from the genuine CMP122 theorem
+-- witness to the BC1-facing CMP109/CMP116 continuation, rather than presenting
+-- decoder/rawWitness as new primitive payments.
+------------------------------------------------------------------------
+
+preferredConcreteActiveContinuation :
+  ∀ {trajectory Mode Atom betaData history
+      Density Background Fluctuation
+      Action WilsonTerm RTerm BoundaryTerm Vacuum}
+    {objects : RawHistory.CMP119RawObjectsOverHistory history
+      Density Background Fluctuation
+      Action WilsonTerm (Background → ℝ) RTerm BoundaryTerm Vacuum} →
+  (inputs : R248.ConcreteELocalizationSection2PredicateInputs objects) →
+  Active.ActiveBalaban1989Theorem1Witness
+    (Theorem1Raw.asActiveEffectiveDensityFlow
+      {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+      {betaData = betaData} {history = history}
+      (R248.preferredConcreteELocalizationPredicates inputs)) →
+  (Tangent : Set) →
+  Continue.CMP109116LiteralEffectiveActionContinuation
+preferredConcreteActiveContinuation inputs theorem1 Tangent =
+  R247.asActiveCMP109116ContinuationFromRegularEForm
+    (R248.preferredConcreteActiveRegularEFormWitnessFromTheorem1
+      inputs theorem1)
     Tangent
 
 ------------------------------------------------------------------------
@@ -211,7 +253,18 @@ activeRawToBC1CompilerLevel = machineChecked
 activeRawBC1SameRegularELevel : ProofLevel
 activeRawBC1SameRegularELevel = machineChecked
 
--- Exact source interpretation of CMP119 (2.25)--(2.29) on the raw E_k.
+-- Preferred route: representation plumbing from one genuine source theorem
+-- witness on the concrete raw predicate family to the BC1-facing continuation.
+-- Decoder/coupling/raw-active/form-witness steps are compiler-owned.
+preferredConcreteActiveRawToBC1CompilerLevel : ProofLevel
+preferredConcreteActiveRawToBC1CompilerLevel = machineChecked
+
+preferredConcreteCMP122SourceWitnessLevel : ProofLevel
+preferredConcreteCMP122SourceWitnessLevel =
+  R248.literalCMP122Theorem1OnConcreteELocalizationPredicateLevel
+
+-- Legacy opaque-predicate route: exact source interpretation of CMP119
+-- (2.25)--(2.29) on the raw E_k remains an explicit decoder payment.
 literalRawELocalizedAnalyticDecoderLevel : ProofLevel
 literalRawELocalizedAnalyticDecoderLevel =
   R248.literalRawELocalizedAnalyticDecoderLevel
