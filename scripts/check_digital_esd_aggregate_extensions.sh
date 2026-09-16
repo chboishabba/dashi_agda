@@ -29,6 +29,8 @@ grep -q '^import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesExac
 grep -q '^import DASHI.Education.DigitalESDTransferablePedagogicalPrinciplesRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDTransformativePrincipleMatrixExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDTransformativePrincipleMatrixRegression$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDPaperTypeRequirementRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDConsumerRelativeLifecycleExact$' "$AGG"
