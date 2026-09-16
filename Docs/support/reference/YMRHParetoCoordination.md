@@ -7,97 +7,127 @@ Historical companions:
 - `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md` — broad PR/round card catalogue.
 - `Docs/support/reference/YMRHFinalizationProducerAtlas.md` — alternate producer/construction atlas.
 - `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 completion/status boundary.
+- `Docs/support/reference/YMRHGlobalGoalParetoBoard.md` — current global scheduling board.
 - `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda` — typed archaeology ledger.
 
 This file is the **first-stop current-state sheet**. Update it whenever a Pareto pass changes a live primitive, demotes a route, closes a compiler seam, or discovers a better producer. Do not make future investigators reconstruct the current cut from chat history.
 
-## Snapshot — 2026-09-15
+## Snapshot — 2026-09-16
 
-Repository base used for this tranche:
-
-```text
-master = 20ddc053cc7d98be40cb60c9dafcdccf43bca695
-branch = agent/ym-rh-pareto-form-flow-v1
-```
-
-Recent archaeology consolidation:
+Merged coordination / source lanes:
 
 ```text
-PR #883 merged 2026-09-13
-92 commits / 51 files
-merge commit 7e7c493f196c82f884efa71a47ae455c5877d5b7
+#918  merged — active CMP119 regular-E compression + RH R1 fail-closed decomposition
+#934  merged — producer atlas + CMP completion boundary
+#940  merged — global YM/RH Pareto board + RH R1 checked-scalar split
+#949  merged — preferred concrete CMP119 source route + live coordination sheet
+#953  merged — Round131 common-metric/unification transport recut
 ```
+
+Current detailed specialist owner:
+
+```text
+#944  open/draft — YM CMP116 marked/localization route
+current observed head: 60467c74c1c217dbec214bc5b3702ba257c51568
+```
+
+Do not infer exact-head kernel validation from this bookkeeping snapshot.
 
 ## 1. Current Pareto frontier
 
-### YM — preferred BC1 source/representation route
+### YM — canonical mass-gap / B-facing route
 
-Current preferred representation path:
+The current detailed YM frontier is owned by **#944**, not by the older CMP119/BC1 coordination lane.
 
-```text
-finite-history raw CMP119 objects
-  -> concrete Sect.-2 predicate family
-       ELocalizedAnalytic := exact same-E localization record
-  -> genuine CMP122 Theorem-1 witness on that concrete family
-  -> identity E-localization decoder                         [R248 compiler]
-  -> active raw Sect.-2 witness                              [compiler]
-  -> active regular-E/localization form                      [R248 compiler]
-  -> active CMP109/CMP116 continuation                       [R247 compiler]
-  -> canonical BC1 representation                            [R250/R115 compiler]
-```
-
-Round250 now exposes this preferred source-to-continuation compiler directly. On this route, the following are **not primitive theorem payments**:
+Current consumer remains:
 
 ```text
-runningCoupling = finite-history coupling
-decoder construction
-active raw witness assembly
-regular-E form projection
-R247 continuation
-common-radius construction after finite demand extraction
-BC1 potential = same raw E_k
+literal selected differentiated localization
+  -> selected physical Euclidean-time semantics
+  -> same-family finite-to-continuum connected-covariance transport
+  -> existing clustering-to-positive-gap compiler.
 ```
 
-Current theorem-bearing inputs at the BC1 cut:
+The R381--R386 recut removes several historical producer obligations:
 
 ```text
-YM-P0  genuine CMP122 Theorem-1 witness on the selected concrete predicate family
-YM-P1  physical SecondVariationLinearity on the exact active E_k carrier
-YM-P2  literal CMP109 Eq.(5.1) binding on that SAME continuation
-YM-P3  literal finite normalized CMP116 demand extraction
+R381  one canonical R370/R373 boundary carrier; duplicate equality becomes refl
+R384  minimal fixed-point distance producer removes legacy Hessian socket
+R385  meets R384 fixed-point distance directly with literal R103 Hessian
+R386  audits the remaining scalarization/comparison boundary
 ```
 
-Do not reopen whole CMP119/CMP122 theory. See `YMCMPWorkStatus.md`.
-
-#### YM alternate/donor routes
+The important current firewall is:
 
 ```text
-R249 reuse route:
-  R244 function-valued localization carrier
-  + same-E_k weld into finite-history raw carrier
-
-legacy route:
-  opaque ELocalizedAnalytic
-  + explicit decoder
+R385/R386 coefficient or endpoint-difference comparison
+  !=
+literal absolute selected differentiated localization.
 ```
 
-Both are legitimate donors. Neither should be counted in addition to the preferred concrete-predicate route.
+Therefore the R385 sensitivity route is currently an **optional subproducer**. It cannot manufacture the absolute selected localization theorem without an independent anchor/reference or direct source-owned absolute localization theorem.
+
+Current canonical B-facing physical payments:
+
+```text
+YM-B0  literal selected differentiated CMP116 localization / source majorant
+YM-B1  selected physical support distance = Euclidean spectral time
+YM-B2  selected observable same-carrier admissibility where required
+YM-B3  same-family finite -> continuum connected-covariance transport
+YM-B4  existing clustering -> positive transfer/spectral gap compiler
+```
+
+If the coefficient/sensitivity route is used beneath YM-B0, its remaining live source coordinates include the selected published fixed-point family/domain, parameter-distance calibration, literal R103 Hessian source attachment, scalarization/same-object attachment, coefficient/mixed-log attachment, and an absolute anchor/direct localization payment.
+
+#### Older CMP119 / BC1 source lane — retained, not current detailed T78-B owner
+
+Merged #949 keeps the concrete source route available:
+
+```text
+finite-history raw CMP119 E_k
+  -> concrete Sect.-2 localization predicate
+  -> genuine CMP122 Theorem-1 witness
+  -> active CMP109/CMP116 continuation
+  -> BC1
+```
+
+On its preferred route, decoder/raw witness assembly and same-regular-E plumbing are compiler-owned. The theorem-bearing BC1 inputs remain the genuine source witness, physical D2 calculus, literal CMP109 Eq.(5.1) binding, and finite normalized CMP116 demand extraction.
+
+Do not reopen broad CMP119/CMP122 formalization merely because #944 is pursuing a different mass-gap producer.
 
 ### RH — current direct high route
 
-Representation wall:
+R1 archaeology has bottomed out at three proof-relevant same-object obligations:
 
 ```text
-RH-R1
-nearResponseAt(chosen J)
-  = finiteNearSum(cellResponse)
+RH-R1a:
+  final nearResponseAt(chosen J)
+    = checked/imported finite-near scalar
+
+RH-R1b1:
+  SAME checked/imported finite-near scalar
+    = final-carrier reflection-pair scalar
+
+RH-R1b2:
+  SAME final-carrier reflection-pair scalar
+    = finiteNearSum(literal cellResponse)
 ```
 
-First genuinely high analytic family after R1:
+The bundled final-near equality is compiler output from R1a + R1b1 + R1b2.
+
+The retained 8883 `nearFinset` / `nearOffFinset` / `nearSignedSum` return and retained reflection-pair theorem names remain source/status coordinates only; theorem-bearing Agda transport has not been recovered. Do not add more intermediate scalar aliases to make the equalities reflexive.
+
+**R1 stop condition:** resume R1 implementation only if one of the following appears:
+
+1. theorem-bearing checked-near bytes / cross-prover transport;
+2. a genuine final-carrier reflection-pair scalar object;
+3. a concrete finite enumeration/fold constructor paying R1b2 independently of the target equality.
+
+Absent that, the next genuine RH mathematics is direct R2:
 
 ```text
 RH-R2
-literalNear(J)
+D_near(J)
   + B_far(J)
   + D_Gamma(g_pole)
   < actual ClusterResponse(g_pole)
@@ -105,42 +135,34 @@ literalNear(J)
 
 uniformly for every arbitrary high off-line nontrivial zero.
 
-Current rules:
-
-- `B_near = D_near` and `B_Gamma = D_Gamma` are normalization/reflexive choices, not extra analytic theorems.
-- intermediate `M_cluster` is not a primitive target.
-- determinant/G2d and old window/Schur lanes are donors/alternates unless same-object transport to the final universal pole-quotient carrier is explicit.
-- checked Lean 8889 cluster status is not an Agda theorem payment without theorem-bearing same-carrier transport.
-- repeated alias/history search for `nearSignedSum` / `nearOffFinset` is currently dominated: the theorem-bearing bytes are not present in the indexed Agda tree/history.
+The 8889 cluster-lower route remains an optional producer only after theorem-bearing same-carrier transport plus a strict bridge to actual `ClusterResponse`. The determinant-taper cancellation lane remains a structural donor, not final-pole-quotient payment.
 
 ### Unification / common metric
 
-Keep downstream of source-realized YM action/stress:
+Merged #953 keeps this downstream of source-realized YM action/stress. Its least-privilege representation seam is now:
 
 ```text
-source-generated YM action
-  -> first variation
-  -> T_YM
-  -> Round131 native continuum/Schwinger/common-metric endpoint
-  -> shared stress representation
-  -> sector aggregation / Einstein variation
+Round131 native sector recovery
+  + common -> native perturbation map
+  + native -> common scalar map
+  + literal construction attachment Y = selected qftTarget
+  + literal-stress pairing coherence
+  -> common-action/shared-sector transport.
 ```
 
-Do not use the unification lane backwards to define upstream CMP119 semantics or to block the shorter regular-E -> BC1 route.
+An all-native-stress transport theorem is not required. An arbitrary-semantics transport theorem is not required. Do not run this lane backwards to define upstream CMP119/CMP116 source semantics.
 
-## 2. Pareto ordering for next work
-
-Current ordering as of this snapshot:
+## 2. Current Pareto ordering
 
 | Priority | Work | Why |
 |---|---|---|
-| 1 | YM-P1 / YM-P2 archaeology together | Eq.(5.1) depends on the physical D2 calculus on the SAME E_k; likely shared source/differential seam. |
-| 2 | YM-P3 finite CMP116 demand extraction | Common radius is already compiler-owned once these source coordinates are paid; later R324 confirms extraction remains physical. |
-| 3 | RH-R1 representation | High fanout and nonanalytic, but no hidden theorem-bearing Agda donor currently recoverable. |
-| 4 | RH-R2 strict literal complement | Genuine hard analytic family after R1. |
-| 5 | Unification transport | Important consistency/endgame work, but downstream of shorter YM Clay-facing source route. |
+| 1 | #944 YM literal selected differentiated localization / same-object source attachment | Active detailed specialist route; highest immediate mass-gap impact. |
+| 2 | RH-R2 direct strict literal complement | R1 archaeology is stopped absent theorem-bearing same-object material. |
+| 3 | RH-R1a/R1b1/R1b2 only on new theorem-bearing evidence | High fanout but currently representation-blocked. |
+| 4 | CMP119/BC1 source lane (#949 merged) | Retained concrete route; revisit when it pays a current shared consumer cheaper than #944. |
+| 5 | Common-metric/unification (#953 merged) | Representation work retained downstream; not a blocker for the current YM/RH leaves. |
 
-Recompute this table whenever a new donor or same-object weld is found. Do not preserve priorities by inertia.
+Recompute this table whenever a recovered theorem pays several coordinates at once. Do not preserve priorities by inertia.
 
 ## 3. Do-not-reopen list
 
@@ -148,14 +170,18 @@ Unless a current consumer proves otherwise, do not spend cycles on:
 
 - generic CMP109/116/119/122 re-formalization;
 - running-coupling identity already definitional on the finite history;
-- abstract regular-term evaluation after `RegularTerm = Background -> Real`;
-- R246/R247 active continuation plumbing;
-- BC1 same-regular-E identity;
-- common-radius existence after finite normalized demands are supplied;
 - old all-Nat source histories;
+- historical R351--R378 marked-coordinate semantics when the current consumer observes only a distance upper;
+- R353--R363 marked-walk/collar/charging route as mandatory architecture;
+- R364 D3-style analytic-path route as mandatory architecture;
+- R365--R369 contraction/map-defect route as mandatory architecture;
+- Row-C Heat/Doob/Langevin as mandatory architecture;
+- unified polymer/Schwinger norm as mandatory architecture;
+- generic promotion from endpoint-difference control to absolute selected localization;
 - RH determinant taper as if definitionally equal to final `g_pole`;
 - generic RH local zero counts that erase target-centred phase;
-- re-searching inaccessible 8883/8889 Lean filenames unless new source bytes/path appear;
+- re-searching inaccessible 8883/8889 Lean filenames absent new source bytes/path;
+- new RH scalar aliases whose only purpose is to make R1 reflexive;
 - unification as an upstream definition of YM source semantics.
 
 ## 4. Source / attribution coordinates
@@ -164,6 +190,7 @@ Keep identifiers separate from proof payment.
 
 ### Yang--Mills / Bałaban source family
 
+- CMP99 — DOI `10.1007/BF01240355`
 - CMP109 — DOI `10.1007/BF01215223`
 - CMP116 — DOI `10.1007/BF01239022`
 - CMP119 — DOI `10.1007/BF01217741`
@@ -199,16 +226,19 @@ cross-prover theorem transported?
 
 Do not merge those statuses.
 
+Current #944 R381--R386 work remains source-written unless an exact-head Agda/kernel receipt is separately observed.
+
 ## 6. Update log
 
-### 2026-09-15 — R248/R250 Pareto recut
+### 2026-09-16 — post-#940/#949/#953 synchronization
 
-- R248 found to already own the exact raw active E-localization decoder architecture.
-- preferred concrete Sect.-2 predicate makes E-localization decoding identity.
-- R249 retained as alternate R244-reuse route using one honest same-E_k weld and no history coercion.
-- R250 now exposes direct composition from concrete predicate + genuine CMP122 theorem witness to the BC1-facing active continuation.
-- decoder/rawWitness demoted from primitive inputs on the preferred route.
-- current BC1 theorem inputs normalized to CMP122 source witness + D2 + Eq.(5.1) + finite CMP116 demands.
-- RH unchanged: R1 remains representation wall; R2 remains first high analytic family.
+- #918 and #934 retained as merged archaeology/producer-atlas foundations.
+- #940 merged the global Pareto board and split RH R1 into R1a/R1b1/R1b2.
+- #949 merged the preferred concrete CMP119 source-to-BC1 route and the live coordination sheet.
+- #953 merged the least-privilege Round131 common-metric/unification representation transport.
+- #944 remains the active detailed YM specialist owner.
+- R381--R385 compress fixed-point/Hessian compatibility; historical marked-input semantics cease to be mandatory for the least-privilege coefficient consumer.
+- R386 establishes the comparison-vs-absolute localization firewall; R385 sensitivity is demoted to an optional subproducer beneath the canonical B-facing literal localization theorem.
+- RH R1 archaeology is stop-conditioned; absent theorem-bearing same-object evidence, direct R2 is the next coordinator-side analytic target.
 
 When the next Pareto pass changes any of these statements, update this file in the same tranche as the code change.
