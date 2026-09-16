@@ -2,29 +2,40 @@ module DASHI.Reasoning.PlatoSymposiumTransmissionAttributionRegression where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (true; false)
+open import Data.Empty using (⊥)
 
+import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionExact as Bridge
 
 immediateSpeakerDoesNotFixClaimRole :
-  Bridge.immediateSpeakerDeterminesClaimRole
-    Bridge.canonicalPlatoTransmissionAttributionBoundary ≡ false
-immediateSpeakerDoesNotFixClaimRole = refl
+  Query.FactorsThrough
+    Bridge.claimRoleQuestions
+    Bridge.immediateSpeakerProjection
+    Bridge.claimRoleQuestion → ⊥
+immediateSpeakerDoesNotFixClaimRole =
+  Bridge.immediateSpeakerDoesNotDetermineClaimRole
 
-historicalSpeakerIsNotFormalisationAuthor :
-  Bridge.historicalSpeakerEqualsFormalisationAuthor
-    Bridge.canonicalPlatoTransmissionAttributionBoundary ≡ false
-historicalSpeakerIsNotFormalisationAuthor = refl
+reportedSourceIsNotImmediateSpeakerByBoundary :
+  Bridge.immediateSpeakerEqualsReportedSource
+    Bridge.canonicalPlatoSymposiumTransmissionBoundary ≡ false
+reportedSourceIsNotImmediateSpeakerByBoundary = refl
 
-dramaticAttributionDoesNotCreateAuthority :
-  Bridge.dramaticAttributionCreatesClaimAuthority
-    Bridge.canonicalPlatoTransmissionAttributionBoundary ≡ false
-dramaticAttributionDoesNotCreateAuthority = refl
+formalisationAuthorIsNotDialogueAuthor :
+  Bridge.dialogueAuthorEqualsFormalisationAuthor
+    Bridge.canonicalPlatoSymposiumTransmissionBoundary ≡ false
+formalisationAuthorIsNotDialogueAuthor = refl
 
-transmissionPathIsRetained :
-  Bridge.layeredTransmissionPathRetained
-    Bridge.canonicalPlatoTransmissionAttributionBoundary ≡ true
-transmissionPathIsRetained = refl
+transmissionDoesNotCreateProofAuthority :
+  Bridge.transmissionPathCreatesProofAuthority
+    Bridge.canonicalPlatoSymposiumTransmissionBoundary ≡ false
+transmissionDoesNotCreateProofAuthority = refl
 
-canonicalAttributionOwnersAreReused :
-  Bridge.existingAttributionOwnersReused ≡ true
-canonicalAttributionOwnersAreReused = refl
+jmdAttributionIsRetained :
+  Bridge.JMDAttributionRetained
+    Bridge.canonicalPlatoSymposiumTransmissionBoundary ≡ true
+jmdAttributionIsRetained = refl
+
+sourceRoleSurvivesSnowball :
+  Bridge.sourceRoleRetainedAcrossSnowball
+    Bridge.canonicalPlatoSymposiumTransmissionBoundary ≡ true
+sourceRoleSurvivesSnowball = refl
