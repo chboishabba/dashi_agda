@@ -70,8 +70,8 @@ twoBelowEvenFactorialStepFactor :
       * suc (Estimates.evenExponent index)
 twoBelowEvenFactorialStepFactor index =
   ℕP.*-mono-≤
-    (s≤s (s≤s z≤n))
-    (s≤s z≤n)
+    (s≤s (s≤s (z≤n {n = Estimates.evenExponent index})))
+    (s≤s (z≤n {n = Estimates.evenExponent index}))
 
 six : Nat
 six = suc (suc (suc (suc (suc (suc zero)))))
