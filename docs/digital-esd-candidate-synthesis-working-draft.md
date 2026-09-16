@@ -19,11 +19,13 @@ The source-bounded implication is therefore not that co-design or digital techno
 
 with population, context and implementation details retained.
 
-## 2. Transformation is not adoption, activity or performance
+## 2. Transformation is not adoption, activity, input integration or performance
 
-Three independent candidate source families converge on the need to keep activity, performance and transformation separate.
+The current candidate source families converge on the need to keep activity, input integration, performance and transformation separate.
 
 UNESCO's 2026 mid-term evaluation of ESD for 2030 reports substantial programme implementation activity alongside limited systemic transformation. This is programme-level evidence, not evidence about the present digital-ESD manuscript, but it demonstrates why implementation activity cannot stand in for system change.
+
+Holst, Singer-Brodowski, Brock and de Haan (2024; DOI 10.1002/sd.2865) provide a more explicit monitoring architecture. Their longitudinal analysis covers more than 11,000 documents across ten years and all formal education sectors in Germany, operationalising the **depth** and **speed** of ESD integration in policies, curricula, educator training and student assessment. The paper also argues for monitoring across input, process, output and outcome. This is valuable precisely because it marks the input boundary: deeper or faster integration in formal system documents is measurable institutional evidence, but it does not itself establish learning, behavioural outcomes or broader transformation.
 
 OECD's 2026 digital-education synthesis provides the corresponding learning-level distinction: successful task completion using generative AI can occur without learning gains. The relevant transformation chain therefore cannot be collapsed to tool uptake or immediate output quality.
 
@@ -34,16 +36,20 @@ Taken together, these candidates suggest a multi-level transformation ladder:
 \[
 \text{technology presence}
 \neq
+\text{implementation activity}
+\neq
+\text{input-level institutional integration}
+\neq
 \text{task performance}
 \neq
-\text{learning}
+\text{learning/outcomes}
 \neq
 \text{institutional durability}
 \neq
 \text{system transformation}.
 \]
 
-The final review should therefore code evidence separately at each level rather than treating all positive digital-education outcomes as instances of transformation.
+The final review should therefore code evidence separately at each level rather than treating all positive digital-education or ESD indicators as instances of transformation.
 
 ## 3. Sustainability must constrain digital education itself
 
@@ -84,15 +90,17 @@ The synthesis should therefore retain at least three participant-related coordin
 
 These coordinates may co-occur but should not be promoted into one another without an explicit receipt.
 
-## 5. Durability and longitudinal evidence remain the weakest empirical lane
+## 5. Durability and longitudinal evidence remain the weakest same-object lane
 
-The current candidate set contains useful longitudinal and institutional precedents but comparatively little evidence that follows a digital-ESD intervention through sustained institutionalisation, infrastructure support windows, replacement cycles and long-horizon educational outcomes.
+The current candidate set now contains useful longitudinal and institutional monitoring precedents, but comparatively little evidence that follows a **digital-ESD intervention itself** through sustained institutionalisation, infrastructure support windows, replacement cycles and long-horizon educational outcomes.
 
-Zagami's Australian cases provide historical trajectories of edtech institutions and platforms. Existing ESD sources in the acquisition atlas include a one-year longitudinal intervention benchmark, and the UNESCO ESD mid-term evaluation provides programme-level evidence across 2021–2024. These are useful comparators but observe different objects.
+Holst et al. provide ten-year longitudinal monitoring of ESD integration at the system-input level. Zagami's Australian cases provide historical trajectories of edtech institutions and platforms. Existing ESD sources in the acquisition atlas include a one-year longitudinal intervention benchmark, and the UNESCO ESD mid-term evaluation provides programme-level evidence across 2021–2024. These improve the methodological and contextual basis for RQ5, but they observe different objects and cannot be combined into a same-object long-horizon claim.
 
 The final paper should therefore distinguish:
 
 \[
+\text{longitudinal input integration}
+\neq
 \text{follow-up outcome}
 \neq
 \text{institutionalisation}
@@ -104,7 +112,7 @@ The final paper should therefore distinguish:
 \text{intergenerational option preservation}.
 \]
 
-At present, this is appropriately represented as a residual rather than filled by analogy.
+At present, the missing same-object digital-ESD longitudinal carrier is appropriately represented as a residual rather than filled by analogy.
 
 ## 6. Contribution positioning against the sustainability-paradox antecedent
 
@@ -113,7 +121,7 @@ A close conceptual antecedent materially narrows the contribution claim. Chugh (
 The candidate distinctive contribution is narrower and compound. Relative to this close antecedent, the present framework attempts to integrate:
 
 1. the **forward** question of how digital education can build ESD capacities with the **reverse** sustainability constraint on digital education itself;
-2. explicit separations among technology adoption, task performance, learning, institutional durability and system transformation;
+2. explicit separations among technology adoption, implementation activity, system-input integration, task performance, learning, institutional durability and system transformation;
 3. source-role, population/context, time-horizon and same-object evidence-payment discipline;
 4. a participant-governance boundary in which context generalisation and same-target-context epistemic authority are separate conjunctive obligations; and
 5. a dependency-aware review method in which search, eligible corpus, source/scope extraction and synthesis remain separately receipted.
