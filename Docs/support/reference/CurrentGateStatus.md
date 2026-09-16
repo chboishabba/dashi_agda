@@ -1,13 +1,36 @@
 # Current Gate Status
 
+## NS A/B/C/D Control-Plane Correction 2026-09-16
+
+Owner: `Codex orchestrator`
+Status: `docs-only; fail-closed; non-promoting`
+
+For Navier-Stokes, the canonical current-state reader is now
+`Docs/roadmaps/NSProofControl20260915.md`, not the older June packet summary
+below.  The current lane split is:
+
+- A: unforced whole-space R^3 regularity; independent theorem obligation,
+  with A/B portability audit active.
+- B: unforced periodic T^3 regularity; active proof-discovery lane.
+- C: forced whole-space R^3 breakdown; released-proof integration lane.
+- D: forced periodic T^3 breakdown; released-proof integration lane.
+
+The live periodic-B min-cut is `S2b2d1b`: the signed coherent-covariance /
+ordered-kernel payment.  The same-object bookkeeping now routes through the
+R541/R573/R584/R503 signed Hermitian consumer before norm, with
+`OrderedOrientedSpacetimeBudget -> R503` recorded as the direct compiler.
+This correction changes no Clay promotion flag and makes no A<->B theorem
+transport claim.
+
 ## NS/YM/Unification Gate Correction 2026-06-12
 
 Owner: `Codex orchestrator`
 Status: `docs-only; fail-closed; non-promoting`
 
-The current cross-lane correction is:
+The June cross-lane correction is:
 
-- Navier-Stokes no longer lacks theorem-shape grammar. The repo now carries an
+- Navier-Stokes no longer lacked theorem-shape grammar as of this snapshot.
+  The repo carried an
   explicit candidate self-contained packet
   `CKN + ESS + LRT + A1/A3 + A4 + A5-A9`.
   The remaining issue is exact theorem acceptance / promotion in the consumed
@@ -31,8 +54,11 @@ Status: `docs-only; fail-closed; non-promoting`
 
 This file now has a strict interpretation rule:
 
-- Treat the `2026-06-12` correction above as the canonical current-state
-  reading for the Clay-facing NS/YM/unification lanes.
+- Treat the `2026-09-16` correction above as the canonical current-state
+  reading for the Clay-facing NS lane.
+- Treat the `2026-06-12` correction above as the retained current-state
+  reading for Clay-facing YM/unification lanes until a newer control plane
+  supersedes them.
 - Read older sections below as historical governance notes, route archives,
   or legacy blocker maps unless they explicitly restate the same sharpened
   posture.
