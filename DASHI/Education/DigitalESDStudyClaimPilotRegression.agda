@@ -21,6 +21,11 @@ martinezSourceIdentityRegression :
   ≡ Sources.martinezDigitalEducationSystematicReviewSource
 martinezSourceIdentityRegression = refl
 
+boehmeSourceIdentityRegression :
+  Ceiling.StudyClaimProfile.source Pilot.boehmePilotProfile
+  ≡ Sources.boehmeDigitainabilitySource
+boehmeSourceIdentityRegression = refl
+
 ardilaClaimKindRegression :
   Ceiling.StudyClaimProfile.strongestSupportedClaim Pilot.ardilaPilotProfile
   ≡ Ceiling.implementationContextClaim
@@ -36,6 +41,11 @@ martinezClaimKindRegression :
   ≡ Ceiling.reviewSynthesisClaim
 martinezClaimKindRegression = refl
 
+boehmeClaimKindRegression :
+  Ceiling.StudyClaimProfile.strongestSupportedClaim Pilot.boehmePilotProfile
+  ≡ Ceiling.conceptualMechanismClaim
+boehmeClaimKindRegression = refl
+
 ardilaNRegression :
   Ceiling.StudyClaimProfile.enrolledOrReportedN Pilot.ardilaPilotProfile
   ≡ Ceiling.explicitlyReportedNat 10 "two five-member HE student teams; Methods 3.1"
@@ -50,3 +60,8 @@ martinezStudyCountRegression :
   Ceiling.StudyClaimProfile.enrolledOrReportedN Pilot.martinezPilotProfile
   ≡ Ceiling.explicitlyReportedNat 33 "final included-study count; PRISMA flow"
 martinezStudyCountRegression = refl
+
+boehmeNoInventedNRegression :
+  Ceiling.StudyClaimProfile.enrolledOrReportedN Pilot.boehmePilotProfile
+  ≡ Ceiling.natNotReported "no empirical enrolled-sample size applies to this conceptual framework source"
+boehmeNoInventedNRegression = refl
