@@ -64,6 +64,9 @@ zagamiAustralianEdtechCandidate = candidate-source-scope-row Scholarly.zagamiAus
 chughSustainabilityParadoxCandidate : CandidateSourceScopeRow
 chughSustainabilityParadoxCandidate = candidate-source-scope-row Scholarly.chughSustainabilityParadoxSource Method.contextualComparatorEvidence (Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "opinion/conceptual paper focused primarily on higher-education digital sustainability" "published March 2026; lifecycle-oriented conceptual horizon" "close prior-art framing: digital education can support access/participation while increasing energy/material impacts and inequalities; recommends lifecycle, procurement and circularity responses" "opinion paper; no empirical intervention effect. Pays the sustainability-paradox antecedent but not reciprocal ESD-capacity, same-object payment discipline, participant-authority or structured-review contributions" true refl
 
+holstSDG47MonitoringCandidate : CandidateSourceScopeRow
+holstSDG47MonitoringCandidate = candidate-source-scope-row Scholarly.holstSDG47MonitoringSource Method.longitudinalDurabilityEvidence (Method.transformationBeyondTechnologyUseRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.digitalEducationToESDCapacity "all formal education sectors in Germany; more than 11,000 policy/curriculum/training/assessment documents" "ten-year longitudinal input-monitoring window; article 2024" "operationalises depth and speed of ESD integration and argues for independent integrative monitoring across input, process, output and outcome" "input-indicator evidence only; does not itself establish learning, output/outcome transformation, digital-ESD effects or transfer beyond the monitoring context" true refl
+
 gianniniTwinTransitionCandidate : CandidateSourceScopeRow
 gianniniTwinTransitionCandidate = candidate-source-scope-row Prior.gianniniTwinTransitionSource Method.institutionalFrameworkEvidence (Method.digitalEducationBuildsESDCapacityRQ ∷ Method.sustainabilityConstrainsDigitalEducationRQ ∷ []) Method.bidirectionalReciprocalRelation "global UNESCO green/digital transition framing through education" "2024 policy/conceptual horizon" "green and digital transitions may be distinct or in tension; education can help align them" "antecedent framing only; does not prove automatic synergy or intervention effectiveness" true refl
 
@@ -77,10 +80,10 @@ ituL1023Candidate : CandidateSourceScopeRow
 ituL1023Candidate = candidate-source-scope-row ICT.ituL1023CircularityMethodSource Method.infrastructureLifecycleEvidence (Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "ICT product circularity performance method scope" "in-force August 2023 recommendation" "defines circularity scoring coordinates including durability, repair, reuse, recycle and upgrade aspects" "method authority only; no same-object circularity score, repair support, service-life or durability observation" true refl
 
 canonicalCandidateSourceScopeMatrix : List CandidateSourceScopeRow
-canonicalCandidateSourceScopeMatrix = unescoRoadmapCandidate ∷ unescoMidtermCandidate ∷ oecdOutlook2026Candidate ∷ unescoAICommonGoodCandidate ∷ unescoAIConsultationDiscussionCandidate ∷ unescoAIProcurementBackgroundCandidate ∷ unescoAITCOBackgroundCandidate ∷ ardilaDigitalFuturesCandidate ∷ gousetiPlatformisationCandidate ∷ zagamiAustralianEdtechCandidate ∷ chughSustainabilityParadoxCandidate ∷ gianniniTwinTransitionCandidate ∷ publicPlatformCharterCandidate ∷ ituL1410Candidate ∷ ituL1023Candidate ∷ []
+canonicalCandidateSourceScopeMatrix = unescoRoadmapCandidate ∷ unescoMidtermCandidate ∷ oecdOutlook2026Candidate ∷ unescoAICommonGoodCandidate ∷ unescoAIConsultationDiscussionCandidate ∷ unescoAIProcurementBackgroundCandidate ∷ unescoAITCOBackgroundCandidate ∷ ardilaDigitalFuturesCandidate ∷ gousetiPlatformisationCandidate ∷ zagamiAustralianEdtechCandidate ∷ chughSustainabilityParadoxCandidate ∷ holstSDG47MonitoringCandidate ∷ gianniniTwinTransitionCandidate ∷ publicPlatformCharterCandidate ∷ ituL1410Candidate ∷ ituL1023Candidate ∷ []
 
 candidateSourceCount : Nat
-candidateSourceCount = 15
+candidateSourceCount = 16
 
 data PreScreenMatrixCreatesIncludedCorpus : Set where
 data PreScreenMatrixClosesStructuredSearch : Set where
