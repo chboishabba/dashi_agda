@@ -143,18 +143,18 @@ currentRuntimeParity =
     true
     false
 
-providerRevisionPinned : providerRevisionPinned currentRuntimeParity ≡ true
-providerRevisionPinned = refl
+providerRevisionPinnedIsTrue : providerRevisionPinned currentRuntimeParity ≡ true
+providerRevisionPinnedIsTrue = refl
 
-reviewedEdgeBuilderPresent : reviewedEdgeBuilderPresent currentRuntimeParity ≡ true
-reviewedEdgeBuilderPresent = refl
+reviewedEdgeBuilderPresentIsTrue : reviewedEdgeBuilderPresent currentRuntimeParity ≡ true
+reviewedEdgeBuilderPresentIsTrue = refl
 
-persistenceReceiptPresent : persistenceReceiptPresent currentRuntimeParity ≡ true
-persistenceReceiptPresent = refl
+persistenceReceiptPresentIsTrue : persistenceReceiptPresent currentRuntimeParity ≡ true
+persistenceReceiptPresentIsTrue = refl
 
-unchangedWalkerConsumesPersistedEdges :
+unchangedWalkerConsumesPersistedEdgesIsTrue :
   unchangedWalkerConsumesPersistedEdges currentRuntimeParity ≡ true
-unchangedWalkerConsumesPersistedEdges = refl
+unchangedWalkerConsumesPersistedEdgesIsTrue = refl
 
 legalIRPromotionNotPerformed : legalIRPromotionPerformed currentRuntimeParity ≡ false
 legalIRPromotionNotPerformed = refl
