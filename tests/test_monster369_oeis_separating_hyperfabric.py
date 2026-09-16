@@ -34,7 +34,7 @@ def test_runtime_coordinate_universe_matches_agda_owner():
 def test_current_monster369_portfolio_has_expected_shape_and_negative_control():
     runtime = load_runtime()
 
-    assert len(runtime.COORDINATES) == 23
+    assert len(runtime.COORDINATES) == 24
     assert len(runtime.EDGES) == 5
     assert runtime.hits_every_edge(runtime.CANONICAL_TYPED_SELECTION)
     assert not runtime.hits_every_edge(runtime.OEIS_ONLY_SELECTION)
@@ -57,11 +57,32 @@ def test_literal_same_integer_worlds_generate_nonempty_collision_edges():
     worlds = runtime.LITERAL_WORLDS
     edges = runtime.literal_collision_edges()
 
-    assert len(worlds) == 11
-    assert len(edges) == 11
-    assert {world.observed_integer for world in worlds} == {17496, 65610, 196883, 196884}
+    assert len(worlds) == 13
+    assert len(edges) == 12
+    assert {world.observed_integer for world in worlds} == {
+        17496,
+        32772,
+        65610,
+        196883,
+        196884,
+    }
     assert all(edge.coordinates for edge in edges)
     assert all(edge.left_world != edge.right_world for edge in edges)
+
+
+def test_32772_collision_uses_real_c6_spectrum_coordinate():
+    runtime = load_runtime()
+
+    matching = [edge for edge in runtime.literal_collision_edges() if edge.common_integer == 32772]
+
+    assert len(matching) == 1
+    assert matching[0].coordinates.issuperset(
+        {"tauModularCoordinate", "c6WeightTwoSpectrumCoordinate"}
+    )
+    assert runtime.RELATION_STRENGTH["c6WeightTwoSpectrumCoordinate"] == (
+        "representationSpectrumTheorem"
+    )
+    assert "c6WeightTwoSpectrumCoordinate" in runtime.PROOF_ELIGIBLE_COORDINATES
 
 
 def test_literal_collision_search_excludes_oeis_and_unpaid_coordinates_from_proof_candidates():
@@ -91,13 +112,13 @@ def test_runtime_receipt_keeps_discovery_separate_from_proof_authority():
 
     report = runtime.build_report()
 
-    assert report["portfolio"]["coordinate_count"] == 23
+    assert report["portfolio"]["coordinate_count"] == 24
     assert report["portfolio"]["edge_count"] == 5
     assert report["negative_controls"]["oeis_only_hits_every_edge"] is False
     assert report["minimum_transversal_search"]["minimum_size"] == 2
     assert report["minimum_transversal_search"]["kernel_proved_minimum"] is False
-    assert report["literal_collision_portfolio"]["world_count"] == 11
-    assert report["literal_collision_portfolio"]["collision_edge_count"] == 11
+    assert report["literal_collision_portfolio"]["world_count"] == 13
+    assert report["literal_collision_portfolio"]["collision_edge_count"] == 12
     assert report["literal_collision_portfolio"]["runtime_minimum_size"] == 5
     assert report["literal_collision_portfolio"]["runtime_minimum_transversals"] == [
         [
