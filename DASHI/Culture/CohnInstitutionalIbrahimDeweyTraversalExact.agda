@@ -20,13 +20,14 @@ import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Ibrahim
 --   * DOI = bibliographic/source-object identity;
 --   * publication QID = external publication-item identity when verified;
 --   * author QID = author identity only;
+--   * concept QID = concept identity only;
 --   * Dewey = broad subject-space navigation coordinate;
 --   * typed edge = DASHI-selected dependency/cross-pollination relation;
 --   * none of the above imports proof or creates authority.
 --
 -- Broad Dewey parents below are repository navigation coordinates, NOT claims
 -- that the exact publication/edition has a verified catalogue assignment to
--- that number.  Where publication-QID coverage was not verified in the current
+-- that number. Where publication-QID coverage was not verified in the current
 -- traversal, debt remains explicit rather than borrowing an author/concept QID.
 ------------------------------------------------------------------------
 
@@ -81,8 +82,8 @@ institutionalTraversalSourceAtlas = Source.mkSourceAtlas
   "Primary-source objects reached from the Cohn/institutional consumer-adequacy lane. Traversal proximity records where to inspect next; it does not establish historical identity, agreement, causal continuity, proof authority, legal authority, or universal relevance."
 
 ------------------------------------------------------------------------
--- Identifier states. Publication identity and author identity never substitute
--- for one another.
+-- Identifier states. Publication identity, author identity and concept identity
+-- never substitute for one another.
 ------------------------------------------------------------------------
 
 data ItemResolution : Set where
