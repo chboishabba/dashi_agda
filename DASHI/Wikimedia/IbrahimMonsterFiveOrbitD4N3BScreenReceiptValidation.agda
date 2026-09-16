@@ -17,6 +17,10 @@ actualGroupRealizationSourceRegression :
   R.actualD4RealizationSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 actualGroupRealizationSourceRegression = refl
 
+failLocatingRuntimeSchemaRegression :
+  R.failLocatingRuntimeReceiptSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+failLocatingRuntimeSchemaRegression = refl
+
 executionCheckerRegression :
   R.executionCheckerSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 executionCheckerRegression = refl
