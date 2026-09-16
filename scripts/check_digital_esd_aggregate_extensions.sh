@@ -14,6 +14,8 @@ grep -q '^import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact$
 grep -q '^import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDPaperTypeRequirementRegression$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDConsumerRelativeLifecycleExact$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDConsumerRelativeLifecycleRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDCanonicalOwnerRegression$' "$AGG"
 
 echo "digital ESD aggregate extension source audit passed"
