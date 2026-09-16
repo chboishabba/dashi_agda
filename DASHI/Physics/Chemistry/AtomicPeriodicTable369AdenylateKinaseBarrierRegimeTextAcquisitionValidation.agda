@@ -1,0 +1,33 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseBarrierRegimeTextAcquisitionValidation where
+
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseBarrierRegimeTextAcquisitionExact as Barrier
+
+open Barrier
+
+-- Validation pins the source-paid context-indexed barrier roles and the
+-- fail-closed promotion boundary.  This file is intentionally narrow: it does
+-- not demand a numerical barrier height or identify computed barriers with
+-- experimental activation kinetics.
+
+apoBoundary = canonicalBarrierRegimeTextAcquisitionBoundary
+
+apoNoSignificantBarrierPaid =
+  AdKBarrierRegimeTextAcquisitionBoundary.apoNoSignificantOpenClosedBarrierPaid apoBoundary
+
+apoMultipleIntermediateStatesPaid =
+  AdKBarrierRegimeTextAcquisitionBoundary.apoMultipleIntermediateStatesPaid apoBoundary
+
+boundClosedEnergeticallyFavouredPaid =
+  AdKBarrierRegimeTextAcquisitionBoundary.boundClosedEnergeticallyFavouredPaid apoBoundary
+
+boundLargeOpeningBarrierPaid =
+  AdKBarrierRegimeTextAcquisitionBoundary.boundLargeOpeningBarrierPaid apoBoundary
+
+numericBarrierHeightPaid =
+  AdKBarrierRegimeTextAcquisitionBoundary.numericBarrierHeightPaid apoBoundary
+
+barrierRegimeEqualsExperimentalKinetics =
+  AdKBarrierRegimeTextAcquisitionBoundary.barrierRegimeEqualsExperimentalKinetics apoBoundary
+
+identityMetadataCreatesBarrierPayment =
+  AdKBarrierRegimeTextAcquisitionBoundary.identityMetadataCreatesBarrierPayment apoBoundary
