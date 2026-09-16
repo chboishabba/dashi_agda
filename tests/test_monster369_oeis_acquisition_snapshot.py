@@ -28,6 +28,17 @@ def test_a005052_ladder_snapshot_retains_90_65610_196830():
     assert node["authority"] == "numerical-navigation"
 
 
+def test_a025616_parent_lattice_contains_90_729_65610_196830():
+    runtime = load_runtime()
+    node = runtime.SEQUENCES["A025616"]
+
+    assert node["formula"] == "3^i*10^j"
+    assert node["selected_values"] == {90, 729, 65610, 196830}
+    relation = runtime.RELATIONS["a025616-parent-lattice"]
+    assert relation["paid"] is True
+    assert relation["same_object_paid"] is False
+
+
 def test_6b_normalization_family_retains_q6_32772_across_three_manifests():
     runtime = load_runtime()
 
@@ -56,6 +67,7 @@ def test_snapshot_keeps_positive_bridge_signal_separate_from_proof_authority():
     report = runtime.build_report()
 
     assert report["positive_bridge_candidates"]["a005052-heisenberg-ladder"] is True
+    assert report["positive_bridge_candidates"]["a025616-parent-lattice"] is True
     assert report["positive_bridge_candidates"]["6b-q6-to-c6-spectrum-32772"] is True
     assert report["authority"]["oeis_snapshot_creates_same_object"] is False
     assert report["authority"]["oeis_snapshot_creates_monster_action"] is False
