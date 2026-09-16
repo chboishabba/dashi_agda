@@ -5,8 +5,9 @@ AGDA_FLAKE="${AGDA_FLAKE:-/home/c/Documents/code/agda#debug.bin}"
 # Protect ordinary direct checks too.  A pathological elaboration should stop
 # before it can drive a 32 GiB workstation into swap thrash.  Callers may
 # override this explicitly for exceptional runs.
-DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-15360}"
+DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-8192}"
 export DASHI_AGDA_RSS_LIMIT_MB
+
 
 SESSION_NAME="${DASHI_TMUX_SESSION:-dashi_agda_check_$$}"
 WAIT_CHANNEL="dashi_wait_$$"

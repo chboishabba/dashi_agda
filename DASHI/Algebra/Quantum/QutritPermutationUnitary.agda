@@ -42,11 +42,11 @@ rotateSumRight {A} laws a b c =
 cyclePreservesInner :
   ∀ {A : ComplexStarSemiring} →
   ScalarAdditiveCommutativeLaws A →
-  ∀ x y →
-  innerQutrit
+  ∀ (x y : QutritState A) →
+  innerQutrit {A}
     (applyAmplitudeGate cycleGate x)
     (applyAmplitudeGate cycleGate y)
-  ≡ innerQutrit x y
+  ≡ innerQutrit {A} x y
 cyclePreservesInner {A} laws
   (qstate a b c)
   (qstate x y z) =
@@ -58,11 +58,11 @@ cyclePreservesInner {A} laws
 inverseCyclePreservesInner :
   ∀ {A : ComplexStarSemiring} →
   ScalarAdditiveCommutativeLaws A →
-  ∀ x y →
-  innerQutrit
+  ∀ (x y : QutritState A) →
+  innerQutrit {A}
     (applyAmplitudeGate inverseCycleGate x)
     (applyAmplitudeGate inverseCycleGate y)
-  ≡ innerQutrit x y
+  ≡ innerQutrit {A} x y
 inverseCyclePreservesInner {A} laws
   (qstate a b c)
   (qstate x y z) =
@@ -75,14 +75,14 @@ qutritPermutationInnerProductAuthority :
   ∀ {A : ComplexStarSemiring} →
   ScalarAdditiveCommutativeLaws A →
   PermutationGateInnerProductAuthority A
-qutritPermutationInnerProductAuthority laws =
+qutritPermutationInnerProductAuthority {A} laws =
   record
     { permutationPreservesInner = preserves
     }
   where
-    preserves : ∀ gate x y →
-      innerQutrit (applyAmplitudeGate gate x) (applyAmplitudeGate gate y)
-      ≡ innerQutrit x y
+    preserves : (gate : QutritGate) (x y : QutritState A) →
+      innerQutrit {A} (applyAmplitudeGate gate x) (applyAmplitudeGate gate y)
+      ≡ innerQutrit {A} x y
     preserves identityGate x y = refl
     preserves cycleGate x y = cyclePreservesInner laws x y
     preserves inverseCycleGate x y = inverseCyclePreservesInner laws x y
@@ -92,5 +92,5 @@ qutritPermutationUnitary :
   ScalarAdditiveCommutativeLaws A →
   (gate : QutritGate) →
   QutritUnitary A (applyAmplitudeGate gate)
-qutritPermutationUnitary laws =
-  permutationGateUnitary (qutritPermutationInnerProductAuthority laws)
+qutritPermutationUnitary {A} laws =
+  permutationGateUnitary (qutritPermutationInnerProductAuthority {A} laws)

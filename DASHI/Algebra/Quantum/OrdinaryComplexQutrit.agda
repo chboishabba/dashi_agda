@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.ConcreteComplex
+open import DASHI.Algebra.Quantum.TernaryCircuit
 open import DASHI.Algebra.Quantum.QutritAmplitude
 open import DASHI.Algebra.Quantum.ConcreteQutritScalar
 open import DASHI.Algebra.Quantum.QutritMatrixGates
@@ -113,12 +114,8 @@ ordinaryQutritScalarPackage {R} C Z =
 ------------------------------------------------------------------------
 -- Computational-basis Born probabilities are the real norm squares.
 
-realPartCong :
-  ∀ {R : ConstructedOrderedCompleteReal}
-    {a b c d : Real R} →
-  complex a b ≡ complex c d →
-  a ≡ c
-realPartCong refl = refl
+cong : ∀ {a b} {A : Set a} {B : Set b} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
+cong f refl = refl
 
 ordinaryQutritBornAuthority :
   ∀ {R : ConstructedOrderedCompleteReal}
@@ -142,18 +139,18 @@ ordinaryQutritBornAuthority {R} C Z =
       Normalized {A = scalarSemiring P} state →
       _+_ R
         (_+_ R
-          (normSqC (ampNeg state))
-          (normSqC (ampZero state)))
-        (normSqC (ampPos state))
+          (normSqC {R} (ampNeg state))
+          (normSqC {R} (ampZero state)))
+        (normSqC {R} (ampPos state))
       ≡ one R
-    bornTotalReal state normalized = realPartCong normalized
+    bornTotalReal (qstate a b c) normalized = cong re normalized
 
 record PhysicalProbabilityLaws
   {R : ConstructedOrderedCompleteReal}
   (C : ComplexAlgebraLaws R)
   (Z : RealZeroMultiplicationLaws R) : Set₁ where
   field
-    normSquareNonnegative : ∀ z → _≤_ R (zero R) (normSqC z)
+    normSquareNonnegative : ∀ z → _≤_ R (zero R) (normSqC {R} z)
     probabilityOneNonnegative : _≤_ R (zero R) (one R)
     addNonnegative : ∀ {x y} →
       _≤_ R (zero R) x →
@@ -183,41 +180,135 @@ ordinaryMatrixSimplification {R} C Z =
     A : ComplexStarSemiring
     A = scalarSemiring P
 
-    zeroMulLeft : ∀ z → _*C_ zeroC z ≡ zeroC
-    zeroMulLeft = complexMulZeroLeft Z
+    elim001 :
+      ∀ x y u v z w →
+      _+_ R (_+_ R (_-_ R (_*_ R (zero R) x) (_*_ R (zero R) y))
+                   (_-_ R (_*_ R (zero R) u) (_*_ R (zero R) v)))
+            (_-_ R (_*_ R (one R) z) (_*_ R (zero R) w))
+      ≡ z
+    elim001 x y u v z w
+      rewrite mulZeroLeft Z x
+            | mulZeroLeft Z y
+            | mulZeroLeft Z u
+            | mulZeroLeft Z v
+            | mulZeroLeft Z w
+            | mulOneLeft R z
+            | subSelf R (zero R)
+            | subZeroRight C z
+            | addZeroLeft R (zero R)
+            | addZeroLeft R z = refl
 
-    oneMulLeft : ∀ z → _*C_ oneC z ≡ z
-    oneMulLeft = complexMulOneLeft C Z
+    elim001-add :
+      ∀ x y u v z w →
+      _+_ R (_+_ R (_+_ R (_*_ R (zero R) x) (_*_ R (zero R) y))
+                   (_+_ R (_*_ R (zero R) u) (_*_ R (zero R) v)))
+            (_+_ R (_*_ R (one R) z) (_*_ R (zero R) w))
+      ≡ z
+    elim001-add x y u v z w
+      rewrite mulZeroLeft Z x
+            | mulZeroLeft Z y
+            | mulZeroLeft Z u
+            | mulZeroLeft Z v
+            | mulZeroLeft Z w
+            | mulOneLeft R z
+            | addZeroLeft R (zero R)
+            | addZeroRight R z
+            | addZeroLeft R (zero R)
+            | addZeroLeft R z = refl
+
+    elim100 :
+      ∀ x y u v z w →
+      _+_ R (_+_ R (_-_ R (_*_ R (one R) x) (_*_ R (zero R) y))
+                   (_-_ R (_*_ R (zero R) u) (_*_ R (zero R) v)))
+            (_-_ R (_*_ R (zero R) z) (_*_ R (zero R) w))
+      ≡ x
+    elim100 x y u v z w
+      rewrite mulOneLeft R x
+            | mulZeroLeft Z y
+            | mulZeroLeft Z u
+            | mulZeroLeft Z v
+            | mulZeroLeft Z z
+            | mulZeroLeft Z w
+            | subZeroRight C x
+            | subSelf R (zero R)
+            | addZeroRight R x
+            | addZeroRight R x = refl
+
+    elim100-add :
+      ∀ x y u v z w →
+      _+_ R (_+_ R (_+_ R (_*_ R (one R) x) (_*_ R (zero R) y))
+                   (_+_ R (_*_ R (zero R) u) (_*_ R (zero R) v)))
+            (_+_ R (_*_ R (zero R) z) (_*_ R (zero R) w))
+      ≡ x
+    elim100-add x y u v z w
+      rewrite mulOneLeft R x
+            | mulZeroLeft Z y
+            | mulZeroLeft Z u
+            | mulZeroLeft Z v
+            | mulZeroLeft Z z
+            | mulZeroLeft Z w
+            | addZeroRight R x
+            | addZeroLeft R (zero R)
+            | addZeroRight R x
+            | addZeroRight R x = refl
+
+    elim010 :
+      ∀ x y u v z w →
+      _+_ R (_+_ R (_-_ R (_*_ R (zero R) x) (_*_ R (zero R) y))
+                   (_-_ R (_*_ R (one R) u) (_*_ R (zero R) v)))
+            (_-_ R (_*_ R (zero R) z) (_*_ R (zero R) w))
+      ≡ u
+    elim010 x y u v z w
+      rewrite mulZeroLeft Z x
+            | mulZeroLeft Z y
+            | mulOneLeft R u
+            | mulZeroLeft Z v
+            | mulZeroLeft Z z
+            | mulZeroLeft Z w
+            | subZeroRight C u
+            | subSelf R (zero R)
+            | addZeroLeft R u
+            | addZeroRight R u = refl
+
+    elim010-add :
+      ∀ x y u v z w →
+      _+_ R (_+_ R (_+_ R (_*_ R (zero R) x) (_*_ R (zero R) y))
+                   (_+_ R (_*_ R (one R) u) (_*_ R (zero R) v)))
+            (_+_ R (_*_ R (zero R) z) (_*_ R (zero R) w))
+      ≡ u
+    elim010-add x y u v z w
+      rewrite mulZeroLeft Z x
+            | mulZeroLeft Z y
+            | mulOneLeft R u
+            | mulZeroLeft Z v
+            | mulZeroLeft Z z
+            | mulZeroLeft Z w
+            | addZeroRight R u
+            | addZeroLeft R (zero R)
+            | addZeroLeft R u
+            | addZeroRight R u = refl
 
     cycleAgrees : ∀ state →
       applyMatrix3 (cycleMatrix3 {A}) state
       ≡ applyAmplitudeGate cycleGate state
-    cycleAgrees (qstate a b c)
-      rewrite zeroMulLeft a
-            | zeroMulLeft b
-            | zeroMulLeft c
-            | oneMulLeft a
-            | oneMulLeft b
-            | oneMulLeft c
-            | complexAddZeroLeft zeroC
-            | complexAddZeroLeft c
-            | complexAddZeroLeft a
-            | complexAddZeroLeft b = refl
+    cycleAgrees (qstate (complex ar ai) (complex br bi) (complex cr ci))
+      rewrite elim001 ar ai br bi cr ci
+            | elim001-add ai ar bi br ci cr
+            | elim100 ar ai br bi cr ci
+            | elim100-add ai ar bi br ci cr
+            | elim010 ar ai br bi cr ci
+            | elim010-add ai ar bi br ci cr = refl
 
     inverseCycleAgrees : ∀ state →
       applyMatrix3 (inverseCycleMatrix3 {A}) state
       ≡ applyAmplitudeGate inverseCycleGate state
-    inverseCycleAgrees (qstate a b c)
-      rewrite zeroMulLeft a
-            | zeroMulLeft b
-            | zeroMulLeft c
-            | oneMulLeft a
-            | oneMulLeft b
-            | oneMulLeft c
-            | complexAddZeroLeft zeroC
-            | complexAddZeroLeft a
-            | complexAddZeroLeft b
-            | complexAddZeroLeft c = refl
+    inverseCycleAgrees (qstate (complex ar ai) (complex br bi) (complex cr ci))
+      rewrite elim010 ar ai br bi cr ci
+            | elim010-add ai ar bi br ci cr
+            | elim001 ar ai br bi cr ci
+            | elim001-add ai ar bi br ci cr
+            | elim100 ar ai br bi cr ci
+            | elim100-add ai ar bi br ci cr = refl
 
 ------------------------------------------------------------------------
 -- Analytic roots of unity promote directly to the finite qutrit gate package.
@@ -235,11 +326,11 @@ record OrdinaryQutritRootData
 
   field
     omega omegaSquared : ComplexPair R
-    omegaCubedIsOne : _*C_ (_*C_ omega omega) omega ≡ oneC
-    rootSumZero : _+C_ (_+C_ oneC omega) omegaSquared ≡ zeroC
-    omegaNormOne : complex (normSqC omega) (zero R) ≡ oneC
+    omegaCubedIsOne : _*C_ {R} (_*C_ {R} omega omega) omega ≡ oneC {R}
+    rootSumZero : _+C_ {R} (_+C_ {R} (oneC {R}) omega) omegaSquared ≡ zeroC {R}
+    omegaNormOne : complex (normSqC {R} omega) (zero R) ≡ oneC {R}
 
-open OrdinaryQutritRootData public
+open OrdinaryQutritRootData public hiding (P; A)
 
 ordinaryQutritRootOfUnity :
   ∀ {R : ConstructedOrderedCompleteReal}
@@ -248,7 +339,7 @@ ordinaryQutritRootOfUnity :
   OrdinaryQutritRootData C Z →
   QutritRootOfUnity
     (scalarSemiring (ordinaryQutritScalarPackage C Z))
-ordinaryQutritRootOfUnity W =
+ordinaryQutritRootOfUnity {R} {C} {Z} W =
   record
     { omega = omega W
     ; omegaSquared = omegaSquared W

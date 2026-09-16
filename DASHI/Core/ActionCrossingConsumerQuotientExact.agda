@@ -38,33 +38,34 @@ open TraceRewrite public
 record InvisibleTo
     {Strand Action : Set}
     (consumer : TraceConsumer Strand Action)
-    (rewrite : TraceRewrite {Strand} {Action}) : Set where
+    (rw : TraceRewrite {Strand} {Action}) : Set where
   constructor invisible-to
   field
     observationPreserved :
-      TraceEquivalent consumer (before rewrite) (after rewrite)
+      TraceEquivalent consumer (before rw) (after rw)
 
 open InvisibleTo public
 
 record VisibleTo
     {Strand Action : Set}
     (consumer : TraceConsumer Strand Action)
-    (rewrite : TraceRewrite {Strand} {Action}) : Set where
+    (rw : TraceRewrite {Strand} {Action}) : Set where
   constructor visible-to
   field
     observationChanges :
-      TraceEquivalent consumer (before rewrite) (after rewrite) → ⊥
+      TraceEquivalent consumer (before rw) (after rw) → ⊥
 
 open VisibleTo public
 
 record ConsumerSplit
     {Strand Action : Set}
     (coarse fine : TraceConsumer Strand Action)
-    (rewrite : TraceRewrite {Strand} {Action}) : Set where
+    (rw : TraceRewrite {Strand} {Action}) : Set where
   constructor consumer-split
   field
-    coarseInvisible : InvisibleTo coarse rewrite
-    fineVisible : VisibleTo fine rewrite
+    coarseInvisible : InvisibleTo coarse rw
+    fineVisible : VisibleTo fine rw
+
 
 open ConsumerSplit public
 
@@ -80,11 +81,12 @@ data RepresentativeSide : Set where
 record ReopenableConsumerCollapse
     {Strand Action : Set}
     (coarse : TraceConsumer Strand Action)
-    (rewrite : TraceRewrite {Strand} {Action}) : Set where
+    (rw : TraceRewrite {Strand} {Action}) : Set where
   constructor reopenable-consumer-collapse
   field
-    collapsedForCoarseConsumer : InvisibleTo coarse rewrite
+    collapsedForCoarseConsumer : InvisibleTo coarse rw
     residual : RepresentativeSide
+
 
 open ReopenableConsumerCollapse public
 

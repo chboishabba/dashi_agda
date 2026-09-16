@@ -34,7 +34,7 @@ Environment controls:
   AGDA_JOBS                     ordinary jobs (default 4)
   AGDA_LONG_CPU_JOBS            long-cpu jobs (default 2)
   AGDA_MEMORY_RISK_JOBS         memory-risk jobs (default 1)
-  DASHI_AGDA_RSS_LIMIT_MB       ordinary RSS guard (default 15360)
+  DASHI_AGDA_RSS_LIMIT_MB       ordinary RSS guard (default 8192)
   DASHI_AGDA_LONG_CPU_RSS_MB    long-cpu RSS guard (default ordinary limit)
   DASHI_AGDA_MEMORY_RISK_RSS_MB memory-risk RSS guard (default ordinary limit)
 EOF
@@ -181,8 +181,9 @@ fi
 ORDINARY_JOBS="${AGDA_JOBS:-4}"
 LONG_CPU_JOBS="${AGDA_LONG_CPU_JOBS:-2}"
 MEMORY_RISK_JOBS="${AGDA_MEMORY_RISK_JOBS:-1}"
-ORDINARY_RSS_MB="${DASHI_AGDA_RSS_LIMIT_MB:-15360}"
+ORDINARY_RSS_MB="${DASHI_AGDA_RSS_LIMIT_MB:-8192}"
 LONG_CPU_RSS_MB="${DASHI_AGDA_LONG_CPU_RSS_MB:-$ORDINARY_RSS_MB}"
+
 MEMORY_RISK_RSS_MB="${DASHI_AGDA_MEMORY_RISK_RSS_MB:-$ORDINARY_RSS_MB}"
 
 run_class() {
