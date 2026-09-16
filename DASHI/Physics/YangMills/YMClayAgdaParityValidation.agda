@@ -14,29 +14,35 @@ open Form
 open Assembly
 open Full
 
-boundedFormPackageAvailable : ∀ Hilbert Scalar → Set₁
+boundedFormPackageAvailable :
+  ∀ (Hilbert Scalar : Set) → Set₁
 boundedFormPackageAvailable = BoundedFormGapPackage
 
-finiteVacuumGapDatumAvailable : ∀ Hilbert Scalar → Set₁
+finiteVacuumGapDatumAvailable :
+  ∀ (Hilbert Scalar : Set) → Set₁
 finiteVacuumGapDatumAvailable = FiniteVacuumFormGapDatum
 
 massGapConclusionAvailable :
-  ∀ ContinuumHamiltonian Vacuum GapParameter → Set₁
+  ∀ (ContinuumHamiltonian Vacuum GapParameter : Set) → Set₁
 massGapConclusionAvailable = MassGapConclusion
 
-energyFormRouteAvailable : ∀ Hilbert Scalar → Set₁
+energyFormRouteAvailable :
+  ∀ (Hilbert Scalar : Set) → Set₁
 energyFormRouteAvailable = EnergyFormRoute
 
 sourceRouteAvailable :
-  ∀ SpectralRepresentation CovarianceDecay → Set₁ → Set₂
+  ∀ (SpectralRepresentation CovarianceDecay : Set)
+    (FiniteGap : Set₁) → Set₂
 sourceRouteAvailable = SourceClusteringRoute
 
 commonContinuumRouteAvailable :
-  ∀ (FiniteGap : Set₁) ContinuumGap ContinuumHamiltonian Vacuum GapParameter → Set₂
+  ∀ (FiniteGap : Set₁)
+    (ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) → Set₂
 commonContinuumRouteAvailable = CommonContinuumOSRoute
 
 boundedFullChainAvailable :
-  ∀ Hilbert Scalar ContinuumGap ContinuumHamiltonian Vacuum GapParameter → Set₂
+  ∀ (Hilbert Scalar ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) →
+  Set₂
 boundedFullChainAvailable = BoundedFormClayInputs
 
 -- The validation surface intentionally names the two headline assemblers.
