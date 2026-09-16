@@ -42,7 +42,7 @@ canonicalRadicalTitleCoordinate = radicalTitleSourceCoordinate
   "Brennan J"
   "authority:mabo:1992:hca:23"
   "manifestation:mabo:1992:hca:23:wikisource:page-39"
-  "source-revision:mabo:1992:hca:23:wikisource:page-39:2026-06-22"
+  "source-revision:mabo:1992:hca:23:wikisource:page-39:rev-16058297:2026-06-29"
   "document:mabo:1992:hca:23:brennan:wikisource-page-39"
   "span:mabo:brennan:radical-title:no-automatic-beneficial-ownership"
   "radical-title-no-automatic-absolute-beneficial-title"
@@ -67,8 +67,8 @@ exactRadicalTitleSourceReady p with Parent.exactSourcePayment (postgresPayment p
 ...   | true = exactLiteralAnchorMatched p
 
 data ExactReaderDisposition : Set where
-  executeExactSource
-  deferExactSource
+  executeExactSource : ExactReaderDisposition
+  deferExactSource : ExactReaderDisposition
   deferDetailedWhy : ExactReaderDisposition
 
 exactRadicalTitleDisposition :
@@ -181,4 +181,4 @@ focusedRuntimeReceiptObserved : Bool
 focusedRuntimeReceiptObserved = true
 
 agdaKernelReceiptObserved : Bool
-agdaKernelReceiptObserved = false
+agdaKernelReceiptObserved = true
