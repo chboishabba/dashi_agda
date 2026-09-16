@@ -250,6 +250,28 @@ ewasteSourceScopeRegression :
   ≡ false
 ewasteSourceScopeRegression = refl
 
+educationScenarioLCABenchmarkRegression :
+  Acquisition.DigitalESDAcquisitionAtlas.educationScenarioLCABenchmarkPaid
+    Acquisition.canonicalDigitalESDAcquisitionAtlas
+  ≡ true
+educationScenarioLCABenchmarkRegression = refl
+
+digitalSobrietyPedagogyRegression :
+  Acquisition.DigitalESDAcquisitionAtlas.digitalSobrietyPedagogySourcePaid
+    Acquisition.canonicalDigitalESDAcquisitionAtlas
+  ≡ true
+digitalSobrietyPedagogyRegression = refl
+
+reflexiveSustainabilityRegression :
+  Acquisition.TeachingSustainabilityWithTechnologyPromotesSustainabilityOfTechnology → ⊥
+reflexiveSustainabilityRegression =
+  Acquisition.teachingSustainabilityWithTechnologyDoesNotPromoteSustainabilityOfTechnology
+
+singleLCAGeneralisationRegression :
+  Acquisition.OneEducationLCAEstablishesUniversalOnlineSuperiority → ⊥
+singleLCAGeneralisationRegression =
+  Acquisition.oneEducationLCADoesNotEstablishUniversalOnlineSuperiority
+
 lifecyclePaymentRegression :
   Acquisition.paymentState Acquisition.educationSpecificLifecycleMeasurement
   ≡ Acquisition.unpaid
