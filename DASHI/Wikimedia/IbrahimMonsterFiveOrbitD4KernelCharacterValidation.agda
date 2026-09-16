@@ -1,7 +1,6 @@
 module DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4KernelCharacterValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4KernelCharacterExact as K
 
@@ -20,9 +19,6 @@ axisReflectionCharacterRegression = refl
 diagonalReflectionCharacterRegression : K.fixedOrbitCount K.sDiag ≡ 3
 diagonalReflectionCharacterRegression = refl
 
-quotientCharacterRegression : K.quotientCharacterVector ≡ (5 K.∷ₙ 5 K.∷ₙ 1 K.∷ₙ 3 K.∷ₙ 3 K.∷ₙ K.[]ₙ)
-quotientCharacterRegression = refl
-
 quotientDecompositionA1Regression : K.quotientA1Multiplicity ≡ 3
 quotientDecompositionA1Regression = refl
 
@@ -38,8 +34,24 @@ quotientDecompositionB2Regression = refl
 quotientDecompositionERegression : K.quotientEMultiplicity ≡ 0
 quotientDecompositionERegression = refl
 
-characterReconstructionRegression : K.reconstructedCharacterVector ≡ K.quotientCharacterVector
-characterReconstructionRegression = refl
+characterReconstructionRegression :
+  K.reconstructedCharacterVector ≡ K.quotientCharacterVector
+characterReconstructionRegression = K.reconstructedCharacterIsQuotientCharacter
 
-removedERawNineRegression : K.rawNineCharacterVector ≡ (9 K.∷ₙ 1 K.∷ₙ 1 K.∷ₙ 3 K.∷ₙ 3 K.∷ₙ K.[]ₙ)
-removedERawNineRegression = refl
+rawIdentityRegression : K.rawIdentity ≡ 9
+rawIdentityRegression = refl
+
+rawHalfTurnRegression : K.rawHalfTurn ≡ 1
+rawHalfTurnRegression = refl
+
+rawQuarterTurnRegression : K.rawQuarterTurn ≡ 1
+rawQuarterTurnRegression = refl
+
+rawAxisReflectionRegression : K.rawAxisReflection ≡ 3
+rawAxisReflectionRegression = refl
+
+rawDiagonalReflectionRegression : K.rawDiagonalReflection ≡ 3
+rawDiagonalReflectionRegression = refl
+
+removedEDimensionRegression : K.removedEDimension ≡ 4
+removedEDimensionRegression = K.removedEDimensionIsFour
