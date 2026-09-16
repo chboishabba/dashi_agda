@@ -30,11 +30,23 @@ guaranteeBoundaryReuseRegression :
   Ceiling.guaranteeBoundary ≡ Guarantees.canonicalCausalEstimatorGuaranteeBoundary
 guaranteeBoundaryReuseRegression = refl
 
+attributedSourceRetainedRegression :
+  Ceiling.StudyClaimCeilingBoundary.attributedSourceObjectRetained
+    Ceiling.canonicalStudyClaimCeilingBoundary
+  ≡ true
+attributedSourceRetainedRegression = refl
+
 sampleSizeRetainedRegression :
   Ceiling.StudyClaimCeilingBoundary.sampleSizeAndAnalysisNRetained
     Ceiling.canonicalStudyClaimCeilingBoundary
   ≡ true
 sampleSizeRetainedRegression = refl
+
+unreportedSampleSizeHasNoFabricatedNatRegression :
+  Ceiling.StudyClaimCeilingBoundary.unreportedSampleSizeHasNoFabricatedNat
+    Ceiling.canonicalStudyClaimCeilingBoundary
+  ≡ true
+unreportedSampleSizeHasNoFabricatedNatRegression = refl
 
 uncertaintyRetainedRegression :
   Ceiling.StudyClaimCeilingBoundary.uncertaintyAndIntervalSemanticsRetained
