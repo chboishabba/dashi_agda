@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Discovery
 import DASHI.Physics.Foundations.PhasedArrayRFSensingSourceAtlasExact as Sources
+import DASHI.Physics.Foundations.InterferometricDirectionFindingSourceAtlasExact as InterferometricSources
 import DASHI.Physics.Foundations.RadioRadarGoniometerDirectionFindingExact as Goniometer
 import DASHI.Physics.Foundations.PhasedArrayDirectionFindingExact as Array
 
@@ -84,6 +85,33 @@ canonicalPhasedArrayAngleAcquisition =
     false refl
     false refl
 
+record InterferometricDFAcquisition : Set where
+  constructor interferometric-df-acquisition
+  field
+    phaseDifferenceAoASourceRetained :
+      Snowball.SourceRoleSnowballReceipt InterferometricSources.phaseDifferenceAoAPrimary
+    correlativeInterferometerSourceRetained :
+      Snowball.SourceRoleSnowballReceipt InterferometricSources.correlativeInterferometerDFPrimary
+    phaseDifferenceToAoARelationshipPaid : Bool
+    phaseDifferenceToAoARelationshipPaidIsTrue :
+      phaseDifferenceToAoARelationshipPaid ≡ true
+    antennaArrayPhaseDFRelationshipPaid : Bool
+    antennaArrayPhaseDFRelationshipPaidIsTrue :
+      antennaArrayPhaseDFRelationshipPaid ≡ true
+    phaseObservationIsUnambiguousForAllGeometryPaid : Bool
+    phaseObservationIsUnambiguousForAllGeometryPaidIsFalse :
+      phaseObservationIsUnambiguousForAllGeometryPaid ≡ false
+open InterferometricDFAcquisition public
+
+canonicalInterferometricDFAcquisition : InterferometricDFAcquisition
+canonicalInterferometricDFAcquisition =
+  interferometric-df-acquisition
+    (Snowball.canonicalSourceRoleSnowballReceipt InterferometricSources.phaseDifferenceAoAPrimary)
+    (Snowball.canonicalSourceRoleSnowballReceipt InterferometricSources.correlativeInterferometerDFPrimary)
+    true refl
+    true refl
+    false refl
+
 ------------------------------------------------------------------------
 -- Acquisition frontier.  Paid leaves are distinct from remaining source debt.
 ------------------------------------------------------------------------
@@ -110,7 +138,7 @@ acquisitionStatus historicalReceptionDFLeaf = paid
 acquisitionStatus exactObservedInstrumentLeaf = boundedUnresolved
 acquisitionStatus phasedArrayMonopulseLeaf = paid
 acquisitionStatus sumDifferenceAngleLeaf = paid
-acquisitionStatus phaseComparisonInterferometerPrimaryLeaf = unpaid
+acquisitionStatus phaseComparisonInterferometerPrimaryLeaf = paid
 acquisitionStatus exactOperationalUseLeaf = boundedUnresolved
 
 record AcquisitionFrontier : Set where
@@ -123,8 +151,8 @@ record AcquisitionFrontier : Set where
       acquisitionStatus exactObservedInstrumentLeaf ≡ boundedUnresolved
     phasedArrayMonopulsePaid : acquisitionStatus phasedArrayMonopulseLeaf ≡ paid
     sumDifferenceAnglePaid : acquisitionStatus sumDifferenceAngleLeaf ≡ paid
-    phaseComparisonPrimaryStillUnpaid :
-      acquisitionStatus phaseComparisonInterferometerPrimaryLeaf ≡ unpaid
+    phaseComparisonPrimaryPaid :
+      acquisitionStatus phaseComparisonInterferometerPrimaryLeaf ≡ paid
     operationalUseStillUnresolved :
       acquisitionStatus exactOperationalUseLeaf ≡ boundedUnresolved
 open AcquisitionFrontier public
@@ -142,10 +170,20 @@ mechanicalGoniometerStillCarriesAngleRole :
   ≡ Goniometer.angleEstimationRole
 mechanicalGoniometerStillCarriesAngleRole = refl
 
+phaseComparisonStillCarriesAngleRole :
+  Goniometer.implementationRole Goniometer.phaseComparison
+  ≡ Goniometer.angleEstimationRole
+phaseComparisonStillCarriesAngleRole = refl
+
 phasedArrayStillCarriesAngularRole :
   Array.supportsAngularObservation Array.electronicallySteeredPhasedArray
   ≡ Array.angularObservationRole
 phasedArrayStillCarriesAngularRole = refl
+
+phaseComparisonArrayStillCarriesAngularRole :
+  Array.supportsAngularObservation Array.phaseComparisonInterferometer
+  ≡ Array.angularObservationRole
+phaseComparisonArrayStillCarriesAngularRole = refl
 
 arrayBearingStillCoarse : ¬ Array.ArrayBearingDeterminesExactEmitterWorld
 arrayBearingStillCoarse = Array.arrayBearingDoesNotDetermineExactEmitterWorld
@@ -154,21 +192,23 @@ goniometerBearingStillCoarse : ¬ Goniometer.BearingDeterminesExactEmitterWorld
 goniometerBearingStillCoarse = Goniometer.bearingDoesNotDetermineExactEmitterWorld
 
 ------------------------------------------------------------------------
--- Snowball proposal for the unpaid interferometric phase-comparison leaf.
+-- The previously unpaid phase-comparison leaf is now paid by primary sources.
+-- Discovery remains recorded as the reason the acquisition happened; payment
+-- does not erase the proof-search/snowball history.
 ------------------------------------------------------------------------
 
 data AcquisitionAxis : Set where
   primaryInterferometricDFSourceAxis : AcquisitionAxis
 
-phaseComparisonPrimaryProposal : Discovery.AxisProposal AcquisitionAxis
-phaseComparisonPrimaryProposal = Discovery.axis-proposal
+phaseComparisonPrimaryAcquisitionTrace : Discovery.AxisProposal AcquisitionAxis
+phaseComparisonPrimaryAcquisitionTrace = Discovery.axis-proposal
   primaryInterferometricDFSourceAxis
   Discovery.sourceProvenanceMismatch
   "phase-comparison/interferometric direction-finding consumer"
   "which primary source pays phase-difference/array-baseline to direction-of-arrival inference?"
-  "current formal role exists, but dedicated primary interferometric DF payment is still marked unpaid"
-  "community/forum terminology cannot pay this leaf"
-  "source acquisition cannot identify exact observed hardware or create operational authority"
+  "failed acquisition frontier exposed a source-payment gap; Younger 2017 and Oh et al. 2023 now pay the bounded leaf"
+  "community/forum terminology did not pay this leaf"
+  "source acquisition does not identify exact observed hardware or create operational authority"
 
 record AcquisitionAuthorityFirewall : Set where
   constructor acquisition-authority-firewall
