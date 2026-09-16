@@ -39,6 +39,16 @@ currentS2b2PortabilityFactoredIsTrue :
 currentS2b2PortabilityFactoredIsTrue =
   Bidi.currentS2b2PortabilityFactoredIsTrue
 
+d1aDampedTangentAnalyticCoreTrackedIsTrue :
+  Bidi.d1aDampedTangentAnalyticCoreTracked ≡ true
+d1aDampedTangentAnalyticCoreTrackedIsTrue =
+  Bidi.d1aDampedTangentAnalyticCoreTrackedIsTrue
+
+d1bWholeSpaceTransportStillOpenIsTrue :
+  Bidi.d1bWholeSpaceTransportStillOpen ≡ true
+d1bWholeSpaceTransportStillOpenIsTrue =
+  Bidi.d1bWholeSpaceTransportStillOpenIsTrue
+
 wholeSpaceTransportObservedIsFalse :
   Bidi.wholeSpaceTransportObserved ≡ false
 wholeSpaceTransportObservedIsFalse =
