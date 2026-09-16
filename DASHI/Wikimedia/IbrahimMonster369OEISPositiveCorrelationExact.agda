@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.IbrahimMonster3BOEISSameIntegerRoleCollisionExact as Collision
+import DASHI.Wikimedia.IbrahimMonster42d17496PositiveBridgeAcquisitionExact as FortyTwoD
 import DASHI.Wikimedia.IbrahimMonster6BWeightTwoC6FourierOEISExact as C6
 import DASHI.Wikimedia.IbrahimMonster6BPositiveDegreeNormalizationAcquisitionExact as Acquisition
 
@@ -86,6 +87,9 @@ same17496IntegerPaid = Collision.sameIntegerCollisionCounterexamplePaid
 same32772IntegerPaid : Bool
 same32772IntegerPaid = Collision.sameSeriesDifferentRoleCollisionPaid
 
+fortyTwoDBridgeAcquisition : FortyTwoD.Monster42d17496BridgeBoundary
+fortyTwoDBridgeAcquisition = FortyTwoD.currentMonster42d17496BridgeBoundary
+
 c6WeightTwoSpectrumReceipt : C6.C6WeightTwoMultiplicitySpectrum
 c6WeightTwoSpectrumReceipt = C6.canonicalC6WeightTwoMultiplicitySpectrum
 
@@ -124,12 +128,6 @@ searchPriorityDoesNotCreateEvidenceWeight ()
 
 ------------------------------------------------------------------------
 -- Search-priority boundary.
---
--- 32772 is inspected first because it shares the Monster class/source family,
--- crosses roles, is source-bound to an exact C6 Fourier spectrum theorem, and
--- is stable across three documented q^0 normalization variants of the same 6B
--- McKay--Thompson positive-degree series.  This is still search guidance, not
--- proof authority.
 ------------------------------------------------------------------------
 
 record PositiveCorrelationBoundary : Set where
@@ -138,6 +136,7 @@ record PositiveCorrelationBoundary : Set where
     sameIntegerCanBePositiveBridgeSignal : Bool
     correlation17496RetainedAsPositiveSignal : Bool
     correlation32772RetainedAsPositiveSignal : Bool
+    fortyTwoDRestrictionBridgeSourcePaid : Bool
     c6WeightTwoSpectrumBridgeSourcePaid : Bool
     sixBPositiveDegreeNormalizationBridgePaid : Bool
     sameClassSourceFamilyBridgeSearchFirst : Bool
@@ -149,6 +148,6 @@ open PositiveCorrelationBoundary public
 
 currentPositiveCorrelationBoundary : PositiveCorrelationBoundary
 currentPositiveCorrelationBoundary = positive-correlation-boundary
-  true true true true true true
+  true true true true true true true
   false false false
-  "Prioritize the 32772 6B same-class cross-role bridge. The graded-trace side is now source-bound to q^6=32772 across A007255/A045485/A121665 despite differing q^0 normalizations, and the C6 side is source-bound to the exact weight-two Fourier spectrum m1=m5=32772. Inspect replicability, power-map and spectral-projector identities for a structural explanation. In parallel retain 17496 as a positive cross-context Monster bridge candidate. Promote neither to same-object or representation identity until an explicit factorization/intertwiner or source-paid bridge is obtained."
+  "Prioritize the 32772 6B same-class cross-role bridge, where the graded-trace side is normalization-stable and the C6 side is source-bound to the exact weight-two Fourier spectrum. Retain 17496 as a separate positive cross-context bridge whose 42d modular-function side and actual N(3B) degree-occurrence side are now both source-paid. Search each for an explicit shared character, power-map, restriction/induction, graded-module, or spectral-projector construction. Promote neither shared integer to same-object or representation identity without that bridge."
