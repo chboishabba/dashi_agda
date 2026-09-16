@@ -8,6 +8,7 @@ import DASHI.Core.RequirementProducerSchedulerExact as CoreScheduler
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
+import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact as Paper
 import DASHI.Education.DigitalESDSameObjectAcquisitionSchedulerExact as Scheduler
 
 lifecycleLeafProducerRegression :
@@ -83,18 +84,36 @@ schedulerForbidsSkippedDependencyRegression :
 schedulerForbidsSkippedDependencyRegression = refl
 
 ------------------------------------------------------------------------
--- The domain adapter must reuse the repository's canonical requirement ->
--- missing-coordinate -> producer scheduler rather than invent another planner.
+-- The domain adapter reuses the canonical requirement scheduler and is
+-- claim/consumer-relative.  Current conceptual-review synthesis does not
+-- silently acquire empirical-intervention same-object obligations.
 ------------------------------------------------------------------------
 
 canonicalSchedulerReuseRegression : CoreScheduler.RequirementSystem
 canonicalSchedulerReuseRegression =
   Scheduler.digitalESDAcquisitionRequirementSystem
 
+currentPaperTypeRegression : Paper.PaperType
+currentPaperTypeRegression = Paper.currentPaperType
+
+conceptualReviewLCINotRequiredRegression :
+  Scheduler.requiredForDigitalESD
+    Scheduler.currentConceptualReviewSynthesis
+    Scheduler.sameObjectInterventionLCI
+  ≡ false
+conceptualReviewLCINotRequiredRegression = refl
+
+empiricalLifecycleLCIRequiredRegression :
+  Scheduler.requiredForDigitalESD
+    Scheduler.empiricalInterventionLifecycleClaim
+    Scheduler.sameObjectInterventionLCI
+  ≡ true
+empiricalLifecycleLCIRequiredRegression = refl
+
 lifecycleInventoryMissingRegression :
   CoreScheduler.MissingFor
     Scheduler.digitalESDAcquisitionRequirementSystem
-    Scheduler.digitalESDResearchDecision
+    Scheduler.empiricalInterventionLifecycleClaim
     Scheduler.sameObjectInterventionLCI
 lifecycleInventoryMissingRegression = refl , refl
 
@@ -102,6 +121,20 @@ canonicalScheduledLCIProducerRegression :
   CoreScheduler.scheduledProducer Scheduler.lifecycleInventoryMissingReceipt
   ≡ Scheduler.interventionLCIProducer
 canonicalScheduledLCIProducerRegression = refl
+
+longitudinalClaimOnlyRequiresFollowupRegression :
+  Scheduler.requiredForDigitalESD
+    Scheduler.longitudinalImpactClaim
+    Scheduler.sameObjectLongitudinalImpact
+  ≡ true
+longitudinalClaimOnlyRequiresFollowupRegression = refl
+
+participantAuthorityClaimRequiresAuthorityRegression :
+  Scheduler.requiredForDigitalESD
+    Scheduler.participantGovernanceTransferClaim
+    Scheduler.participantEpistemicAuthority
+  ≡ true
+participantAuthorityClaimRequiresAuthorityRegression = refl
 
 canonicalSchedulerBoundaryRegression :
   CoreScheduler.RequirementProducerSchedulerBoundary.producerIdentityAloneClosesRequirement
