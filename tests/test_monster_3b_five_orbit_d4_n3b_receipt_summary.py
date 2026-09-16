@@ -40,6 +40,14 @@ def test_no_table_fusion_falsifies_five_orbit_route():
     assert m.classify_receipt(r) == "no-compatible-table-fusion"
 
 
+def test_structural_fusions_without_character_match_also_falsify_route():
+    m = load_summary_module()
+    r = base_receipt()
+    r["possible_fusion_count"] = 3
+    r["character_compatible_fusion_count"] = 0
+    assert m.classify_receipt(r) == "no-compatible-table-fusion"
+
+
 def test_no_actual_group_localizes_atlas_realization_residual():
     m = load_summary_module()
     r = base_receipt()
