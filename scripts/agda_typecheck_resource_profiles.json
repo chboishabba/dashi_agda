@@ -13,6 +13,10 @@
     }
   },
   "exact": {
+    "DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda": {
+      "class": "memory-risk",
+      "reason": "Observed kernel OOM at about 6.45 GiB anon RSS while host swap was saturated; isolate at jobs=1 with a lower process ceiling."
+    },
     "DASHI/Physics/YangMills/BalabanPath13DirectionalEnergyContractionExact.agda": {
       "class": "long-cpu",
       "reason": "Observed successful local kernel check is materially slower than ordinary targets."
