@@ -13,6 +13,7 @@ import DASHI.Education.DigitalESDManuscriptMethodologyExact as Method
 import DASHI.Education.DigitalESDPrimarySourceMethodologyAtlasExact as Primary
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Prior
 import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
+import DASHI.Education.DigitalESDCurrentScholarlySnowballExact as Scholarly
 
 record CandidateSourceScopeRow : Set where
   constructor candidate-source-scope-row
@@ -44,6 +45,13 @@ unescoAIProcurementBackgroundCandidate = candidate-source-scope-row Primary.unes
 
 unescoAITCOBackgroundCandidate = candidate-source-scope-row Primary.unescoAITCOBackgroundSource Method.institutionalFrameworkEvidence (Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "UNESCO-commissioned total-cost-of-ownership background paper for AI in education systems" "2026 consultation background; lifecycle/system-cost framing" "supports treating acquisition price as narrower than total cost of ownership and retaining lifecycle/system cost coordinates in procurement analysis" "background framing only; not a deployment-specific cost model, lifecycle inventory or sustainability result" true refl
 
+ardilaDigitalFuturesCandidate = candidate-source-scope-row Scholarly.ardilaDigitalFuturesSource Method.empiricalOutcomeEvidence (Method.digitalEducationBuildsESDCapacityRQ ∷ Method.transformationBeyondTechnologyUseRQ ∷ Method.participantAgencyAndGovernanceRQ ∷ []) Method.digitalEducationToESDCapacity "two postgraduate Education and Technology student design teams at a London-based university; n=10" "ten-week design-thinking module in 2023; article 2025" "context-bounded evidence that design-thinking practices can foster or hinder sustainability competencies while students co-design digital educational technologies" "small reflective case study; does not establish universal learning effects, infrastructure sustainability or constitutive authority beyond the studied teams" true refl
+
+gousetiPlatformisationCandidate = candidate-source-scope-row Scholarly.gousetiPlatformisationSource Method.empiricalOutcomeEvidence (Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.participantAgencyAndGovernanceRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "school leaders, teachers, students and parents in two English secondary schools" "fieldwork April-May 2024 and September-October 2024; article 2026" "situated platformisation experiences including administrative/pedagogical benefits plus monitoring, surveillance, digital exclusion and teacher digital wellbeing" "two-school qualitative context; does not universalise platform effects, environmental sustainability or durability"
+  true refl
+
+zagamiAustralianEdtechCandidate = candidate-source-scope-row Scholarly.zagamiAustralianEdtechSource Method.contextualComparatorEvidence (Method.transformationBeyondTechnologyUseRQ ∷ Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "four Australian edtech cases: Canva for Education, Education Perfect, LearningField and Grok Academy" "comparative historical trajectories analysed in 2026" "governance, funding, legitimacy and sustainable-capital alignment shape edtech emergence, expansion, crisis, collapse and consolidation; includes interoperability/procurement tensions in case histories" "comparative public-document case study; does not establish universal durability, interoperability or causal success rules" true refl
+
 gianniniTwinTransitionCandidate = candidate-source-scope-row Prior.gianniniTwinTransitionSource Method.institutionalFrameworkEvidence (Method.digitalEducationBuildsESDCapacityRQ ∷ Method.sustainabilityConstrainsDigitalEducationRQ ∷ []) Method.bidirectionalReciprocalRelation "global UNESCO green/digital transition framing through education" "2024 policy/conceptual horizon" "green and digital transitions may be distinct or in tension; education can help align them" "antecedent framing only; does not prove automatic synergy or intervention effectiveness" true refl
 
 publicPlatformCharterCandidate = candidate-source-scope-row Prior.publicDigitalLearningPlatformCharterSource Method.institutionalFrameworkEvidence (Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.participantAgencyAndGovernanceRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "public digital learning platforms / education-system infrastructure governance" "2026 charter / design-governance horizon" "public accountability, inclusion, pedagogical purpose, openness, interoperability and trustworthiness are explicit platform principles" "normative charter; does not prove deployed platform durability, interoperability persistence or learning effect" true refl
@@ -53,10 +61,10 @@ ituL1410Candidate = candidate-source-scope-row ICT.ituL1410LifecycleMethodSource
 ituL1023Candidate = candidate-source-scope-row ICT.ituL1023CircularityMethodSource Method.infrastructureLifecycleEvidence (Method.sustainabilityConstrainsDigitalEducationRQ ∷ Method.durabilityAndLongitudinalTransformationRQ ∷ []) Method.sustainabilityToDigitalEducationConstraint "ICT product circularity performance method scope" "in-force August 2023 recommendation" "defines circularity scoring coordinates including durability, repair, reuse, recycle and upgrade aspects" "method authority only; no same-object circularity score, repair support, service-life or durability observation" true refl
 
 canonicalCandidateSourceScopeMatrix : List CandidateSourceScopeRow
-canonicalCandidateSourceScopeMatrix = unescoRoadmapCandidate ∷ unescoMidtermCandidate ∷ oecdOutlook2026Candidate ∷ unescoAICommonGoodCandidate ∷ unescoAIConsultationDiscussionCandidate ∷ unescoAIProcurementBackgroundCandidate ∷ unescoAITCOBackgroundCandidate ∷ gianniniTwinTransitionCandidate ∷ publicPlatformCharterCandidate ∷ ituL1410Candidate ∷ ituL1023Candidate ∷ []
+canonicalCandidateSourceScopeMatrix = unescoRoadmapCandidate ∷ unescoMidtermCandidate ∷ oecdOutlook2026Candidate ∷ unescoAICommonGoodCandidate ∷ unescoAIConsultationDiscussionCandidate ∷ unescoAIProcurementBackgroundCandidate ∷ unescoAITCOBackgroundCandidate ∷ ardilaDigitalFuturesCandidate ∷ gousetiPlatformisationCandidate ∷ zagamiAustralianEdtechCandidate ∷ gianniniTwinTransitionCandidate ∷ publicPlatformCharterCandidate ∷ ituL1410Candidate ∷ ituL1023Candidate ∷ []
 
 candidateSourceCount : Nat
-candidateSourceCount = 11
+candidateSourceCount = 14
 
 data PreScreenMatrixCreatesIncludedCorpus : Set where
 data PreScreenMatrixClosesStructuredSearch : Set where
