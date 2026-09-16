@@ -8,9 +8,9 @@
 
 Digital transformation and Education for Sustainable Development (ESD) are increasingly treated as connected agendas. Recent scholarship already establishes two important antecedents: digital education can itself generate environmental and social sustainability tensions, and sustainability and digitality can be conceptualised as coupled or twin educational transformations. The present paper therefore does not claim novelty for coupling these agendas. Instead, it asks a more operational question: **what can a mature body of digital-education research legitimately contribute to transformative ESD, under what enactment conditions, and subject to what sustainability constraints?**
 
-We use an integrative conceptual review with a transparent structured-search protocol and a two-corpus synthesis design. First, a bounded corpus of digital-education research is retained source by source and synthesised into seven provisional transferable principles: situated relational engagement; feedback as revisable signal; constitutive learner agency; adaptive support with local choice; plural situated observers; contextual custodianship; and iterative evidence return and recharting. Second, these principles are connected to existing scaling conditions—pedagogy, institutional practice, professional development and policy—and cross-pollinated with independently sourced environmental, social, economic, epistemic, infrastructural, lifecycle and longitudinal sustainability constraints. Source roles remain separate throughout: pedagogical evidence does not create lifecycle evidence; institutional guidance does not create intervention effects; and cross-paper synthesis is not attributed back to individual source papers as an empirical finding.
+We use an integrative conceptual review with a transparent structured-search protocol and a two-corpus synthesis design. First, a bounded corpus of digital-education research is retained source by source and synthesised into seven provisional transferable principles: situated relational engagement; feedback as revisable signal; constitutive learner agency; adaptive support with local choice; plural situated observers; contextual custodianship; and iterative evidence return and recharting. Second, these principles are connected to existing scaling conditions—pedagogy, institutional practice, professional development and policy—and cross-pollinated with independently sourced environmental, social, economic, epistemic, infrastructural, lifecycle and longitudinal sustainability constraints. A separate externality-incidence audit prevents total impact from being treated as sufficient information about who contributed, who benefits, who bears burden, who has voice, who controls or mediates the system, who can exit, and where and when burdens arise. Source roles remain separate throughout: pedagogical evidence does not create lifecycle evidence; institutional guidance does not create intervention effects; cross-domain calibration does not create political conclusions; and cross-paper synthesis is not attributed back to individual source papers as an empirical finding.
 
-The framework is deliberately provisional. Candidate principle generation may precede search closure, but final promotion requires the principles to be challenged and revised against the searched, screened and structured-extracted corpus. The paper's candidate contribution is therefore an **evidence-governed transfer architecture** for moving from established digital-education research toward transformative ESD while distinguishing technology presence, implementation activity, institutional integration, task performance, learning, durability and system transformation.
+The framework is deliberately provisional. Candidate principle generation may precede search closure, but final promotion requires the principles to be challenged and revised against the searched, screened and structured-extracted corpus. The paper's candidate contribution is therefore an **evidence-governed transfer architecture** for moving from established digital-education research toward transformative ESD while distinguishing technology presence, implementation activity, institutional integration, task performance, learning, durability, system transformation and distributional incidence.
 
 ## 1. Introduction
 
@@ -54,7 +54,7 @@ The resulting framework remains reciprocal:
 \text{Digital education} \rightleftarrows \text{Education for Sustainable Development}.
 \]
 
-But reciprocity is now only the outer structure. The paper's generative centre is the **evidence-governed translation of digital-education expertise into candidate transformative principles**, followed by independent scaling and sustainability tests. Conceptually:
+But reciprocity is now only the outer structure. The paper's generative centre is the **evidence-governed translation of digital-education expertise into candidate transformative principles**, followed by independent scaling, sustainability and incidence tests. Conceptually:
 
 \[
 \text{TransformativeDigitalESD}
@@ -65,10 +65,12 @@ But reciprocity is now only the outer structure. The paper's generative centre i
 \times
 \text{sustainability admissibility}
 \times
+\text{distributional incidence adequacy}
+\times
 \text{scope-appropriate evidence}.
 \]
 
-This is a conceptual decomposition rather than an empirical effect equation. Its purpose is to stop one coordinate—for example a short-term learning gain—from silently paying another coordinate such as institutional transformation, participant authority or infrastructure lifecycle sustainability.
+This is a conceptual decomposition rather than an empirical effect equation. Its purpose is to stop one coordinate—for example a short-term learning gain or a total environmental footprint—from silently paying another coordinate such as institutional transformation, participant authority, burden allocation or infrastructure lifecycle sustainability.
 
 ## 2. Review aims and research questions
 
@@ -76,13 +78,13 @@ The review has five research questions.
 
 1. **ESD capacity.** Through what pedagogical, curricular, competence, learning-environment and institutional mechanisms can digital education build ESD capacity?
 2. **Transformation.** Under what conditions does digital innovation support educational or system transformation rather than technology adoption, implementation activity or task performance alone?
-3. **Reflexive sustainability.** How should environmental, social, economic, lifecycle, circularity and infrastructure considerations constrain digital education itself?
+3. **Reflexive sustainability.** How should environmental, social, economic, lifecycle, circularity and infrastructure considerations constrain digital education itself, and how are the resulting benefits and burdens distributed across affected parties, lifecycle stages and time horizons?
 4. **Participant governance.** How should learner and participant voice, epistemic agency and governance enter digital-ESD design without treating literature, consent, feedback or consultation as equivalent to local constitutive authority?
 5. **Durability and time.** What evidence and conditions bear on durability, institutionalisation, context transfer and longitudinal transformation, and which claims remain future empirical debt?
 
 A cross-cutting methodological question governs all five RQs:
 
-> **Which evidence supports each proposed principle, for whom, over what time horizon, through which observer surface, and what does that evidence not justify?**
+> **Which evidence supports each proposed principle, for whom, over what time horizon, through which observer surface; who contributes, benefits, bears burden, controls or mediates; and what does that evidence not justify?**
 
 ## 3. Conceptual framework
 
@@ -151,7 +153,15 @@ It also separates:
 \text{sustainability-admissible intervention}.
 \]
 
-A study may support a learning mechanism while providing no lifecycle evidence about devices, networks, data centres, procurement arrangements or replacement cycles.
+A study may support a learning mechanism while providing no lifecycle evidence about devices, networks, data centres, procurement arrangements or replacement cycles. Equally, an accurate aggregate impact estimate does not by itself identify incidence:
+
+\[
+\text{impact magnitude}
+\neq
+\text{impact incidence}.
+\]
+
+The review therefore asks separately who contributed, who benefits, who bears burden, who has voice, who controls or mediates, who can exit, where in the lifecycle an impact occurs, when the burden arrives, and which material position is being observed.
 
 ### 3.4 Transformation rather than adoption
 
@@ -183,19 +193,21 @@ This distinction carries into ESD. Participatory ESD, consultation and co-design
 
 The recurring design questions are:
 
-> **Who participates? Who interprets? Who benefits? Who bears the externalities? Who can contest the categories? Who retains meaningful exit or choice?**
+> **Who participates? Who interprets? Who contributes? Who benefits? Who bears the externalities? Who controls or mediates the infrastructure and decision? Who can contest the categories? Who retains meaningful exit or choice?**
+
+A further distinction—voice present versus testimony uptake versus adequacy of shared interpretive resources—is retained as a candidate future refinement only. It should enter the extraction or audit carrier only if an admitted source/collision shows that the existing participant-authority and voice coordinates are insufficient for the declared consumer.
 
 ### 3.6 Contextual custodianship and educational ecology
 
 The ecology-of-data work supplies a particularly productive cross-pollination. Educational data are not interpreted as context-free objects: person and place, available affordances, student effort, institutional conditions and flows of attention, labour, care and value remain material to interpretation.
 
-In digital ESD, that custodianship principle expands beyond data interpretation. Devices, networks, energy, material throughput, repair, procurement, portability, vendor dependence and replacement cycles become part of the educational ecology rather than technical externalities. This expansion is a cross-domain synthesis; lifecycle standards and sustainability evidence remain independently sourced.
+In digital ESD, that custodianship principle expands beyond data interpretation. Devices, networks, energy, material throughput, repair, procurement, portability, vendor dependence and replacement cycles become part of the educational ecology rather than technical externalities. Externality incidence belongs inside that ecology too: the party carrying a visible burden need not be its sufficient cause, contribution and burden need not coincide, present benefit need not determine later burden, and nominal participation need not identify who controls or mediates the system. These are source-neutral structural constraints; cross-domain industrial and political-economic examples are used only as calibration and do not supply digital-education evidence or political conclusions.
 
 ### 3.7 Time, durability and intergenerational option preservation
 
 Short-term outcomes do not determine durable transformation. The review therefore distinguishes immediate performance, learning outcomes, institutionalisation, platform/service persistence, hardware/service-life durability and longer-term system consequences.
 
-Intergenerational framing is used here as an option-preservation constraint rather than as a borrowed cultural-authority claim. A present digital-education choice can be evaluated partly by whether future learners and institutions retain meaningful ability to revise, repair, migrate, exit or reject inherited systems. Openness, portability, interoperability, repair/support windows and procurement lock-in consequently become educational as well as technical concerns.
+Intergenerational framing is used here as an option-preservation constraint rather than as a borrowed cultural-authority claim. A present digital-education choice can be evaluated partly by whether future learners and institutions retain meaningful ability to revise, repair, migrate, exit or reject inherited systems. Openness, portability, interoperability, repair/support windows and procurement lock-in consequently become educational as well as technical concerns. Present benefit does not determine later burden, and present voice does not by itself establish representation of future interests.
 
 ## 4. Methods
 
@@ -275,6 +287,7 @@ For every included source, the synthesis will retain:
 - lifecycle/circularity boundary where applicable;
 - participant-agency or authority role where applicable;
 - interoperability/governance coordinates where applicable;
+- **externality incidence**, including contribution, benefit, burden, voice, control/mediation, exit, lifecycle stage, temporal displacement and material position where applicable;
 - same-object versus contextual status;
 - context-transfer limitations; and
 - uncertainty, limitations and defeaters.
@@ -291,6 +304,9 @@ Records will be excluded from a research-question synthesis when they do not add
 - task performance does not establish learning;
 - learning gain does not establish system transformation;
 - technology used for sustainability education does not establish sustainability of the technology;
+- aggregate impact magnitude does not establish contribution, benefit, burden, voice or control distribution;
+- a visible burden carrier does not thereby establish sufficient cause;
+- present benefit does not establish later burden;
 - a lifecycle or circularity method does not create a deployment-specific inventory;
 - a standard, charter or ministerial statement does not prove implementation or durability of a deployed system;
 - participation literature, consultation or consent does not create local participant authority;
@@ -302,7 +318,7 @@ Records will be excluded from a research-question synthesis when they do not add
 
 ### 4.7 Data extraction
 
-Structured extraction will use an 18-coordinate schema corresponding to the fields above. The extraction object will retain the included-set identity produced by screening and produce a source-role/scope matrix. Downstream synthesis therefore depends on the exact screened corpus rather than a manually curated bibliography that has lost its search genealogy.
+Structured extraction will use a **19-coordinate schema** corresponding to the fields above, including an explicit externality-incidence coordinate. The extraction object will retain the included-set identity produced by screening and produce a source-role/scope matrix. Downstream synthesis therefore depends on the exact screened corpus rather than a manually curated bibliography that has lost its search genealogy.
 
 ### 4.8 Synthesis and framework challenge
 
@@ -318,13 +334,13 @@ The review will use structured integrative synthesis rather than statistical met
 - time horizon; and
 - limitation/transfer boundary.
 
-Three broad transformation states are retained—technology adoption only, learning/performance change, and institutional/system transformation—with explicit unresolved status where evidence is insufficient. The wider analysis further separates implementation activity and input integration from those states when sources permit.
+Three broad transformation states are retained—technology adoption only, learning/performance change, and institutional/system transformation—with explicit unresolved status where evidence is insufficient. The wider analysis further separates implementation activity and input integration from those states when sources permit. Externality incidence is retained in structured extraction rather than inferred from aggregate outcomes during synthesis.
 
-The searched corpus will not merely be used to populate a pre-existing seven-box taxonomy. Instead, the seven candidate principles become objects of challenge. A screened source may support a principle, narrow its scope, reveal a missing principle, split a principle into distinct mechanisms, supply a defeater, or show that two principles should be merged. This revision requirement prevents a bounded expert corpus from becoming a closed authority surface.
+The searched corpus will not merely be used to populate a pre-existing seven-box taxonomy. Instead, the seven candidate principles become objects of challenge. A screened source may support a principle, narrow its scope, reveal a missing principle, split a principle into distinct mechanisms, supply a defeater, or show that two principles should be merged. The incidence carrier is equally revisable: a new coordinate such as testimony uptake should be added only if an admitted source and concrete consumer collision show that the current audit loses a decision-relevant distinction. This revision requirement prevents a bounded expert corpus from becoming a closed authority surface.
 
 ### 4.9 Lifecycle and circularity interpretation
 
-ICT lifecycle evidence is interpreted against ITU-T L.1410, which separates ICT life-cycle assessment from comparative analysis against a reference product system. Circularity coordinates are informed by ITU-T L.1023, including durability and the ability to repair, reuse, recycle and upgrade. These methods define measurement coordinates; they do not provide an inventory for a digital-education intervention unless same-object deployment data are actually acquired.
+ICT lifecycle evidence is interpreted against ITU-T L.1410, which separates ICT life-cycle assessment from comparative analysis against a reference product system. Circularity coordinates are informed by ITU-T L.1023, including durability and the ability to repair, reuse, recycle and upgrade. These methods define measurement coordinates; they do not provide an inventory for a digital-education intervention unless same-object deployment data are actually acquired. A process or technology label also does not by itself recover lifecycle stage or quantitative impact.
 
 ### 4.10 Participant governance and context transfer
 
@@ -340,11 +356,11 @@ Close scholarly antecedents are retained explicitly. Chugh's sustainability-para
 
 The formal repository represents search and synthesis as dependent receipts. Database exports feed deduplication; the exact deduplicated object feeds screening; the exact screening object feeds structured extraction; and extraction feeds the source/scope matrix used in synthesis. This prevents downstream claims from being marked complete merely because upstream work is described as completed in prose.
 
-The current draft is therefore reproducible at the level of declared method, source-bounded candidate framework and extraction schema, but not yet at the level of completed database execution. No unobserved database receipt, screening count or extracted corpus is reported.
+The current draft is therefore reproducible at the level of declared method, source-bounded candidate framework and 19-coordinate extraction schema, but not yet at the level of completed database execution. No unobserved database receipt, screening count, externality-incidence allocation or extracted corpus is reported.
 
 ## 5. Candidate transformative-principle matrix
 
-The candidate framework has three layers:
+The candidate framework has four layers:
 
 \[
 \boxed{
@@ -353,6 +369,8 @@ The candidate framework has three layers:
 \text{enactment/scaling conditions}
 \rightarrow
 \text{sustainability constraints}
+\rightarrow
+\text{externality-incidence audit}
 }
 \]
 
@@ -364,11 +382,11 @@ The current seven rows are summarised below.
 | Feedback as revisable signal | Institutional practice; professional development; policy | Epistemic governance; equity; monitoring | Analytics can support inquiry only as contestable, human-reviewed signals. |
 | Constitutive learner agency | Scalable pedagogy; institutional practice; policy | Public governance; inclusion; future options | Learners should help shape questions, interpretation and design rather than merely receive content or supply data. |
 | Adaptive support with local choice | Scalable pedagogy; institutional practice; professional development | Equity; durability; TCO/procurement | Support should be locally selectable, revisable and institutionally sustainable. |
-| Plural situated observers | Institutional practice; professional development; policy | Equity; epistemic governance; burden distribution | Transformation should retain multiple observer perspectives and ask who bears benefits and externalities. |
-| Contextual custodianship | Institutional practice; professional development; policy | Lifecycle/circularity; TCO/procurement; openness/interoperability; equity | Educational ecology includes devices, networks, energy, labour, repair, procurement and vendor dependence. |
-| Iterative evidence return and recharting | Institutional practice; professional development; policy | Monitoring; public governance; portability/exit; intergenerational options | Institutions should monitor, return evidence, revise choices and preserve the possibility of migration or exit. |
+| Plural situated observers | Institutional practice; professional development; policy | Equity; epistemic governance; burden distribution | Transformation should retain multiple observer perspectives and distinguish beneficiaries, burden bearers, decision controllers and affected voices. |
+| Contextual custodianship | Institutional practice; professional development; policy | Lifecycle/circularity; TCO/procurement; openness/interoperability; equity | Educational ecology includes devices, networks, energy, labour, repair, procurement, vendor dependence and the distribution of resulting burdens. |
+| Iterative evidence return and recharting | Institutional practice; professional development; policy | Monitoring; public governance; portability/exit; intergenerational options | Institutions should monitor outcomes and incidence, return evidence, revise choices and preserve the possibility of migration or exit. |
 
-The matrix is intentionally not a Cartesian product between every pedagogical idea and every sustainability source. Pairings are retained only where the consumer relationship is meaningful and source roles remain visible.
+The matrix is intentionally not a Cartesian product between every pedagogical idea and every sustainability source. Pairings are retained only where the consumer relationship is meaningful and source roles remain visible. Likewise, the incidence audit does not assign burdens by assumption: any deployment-specific allocation remains an empirical obligation.
 
 ## 6. Planned evidence synthesis and revision
 
@@ -376,9 +394,9 @@ The completed evidence synthesis will be organised around five coupled sections:
 
 1. **Digital education as an ESD-capacity mechanism** — pedagogy, curriculum, learning environments, competencies and institutional practice;
 2. **From adoption to transformation** — conditions separating tool presence, implementation activity, integration, performance/learning outcomes and system change;
-3. **The sustainability of digital education** — lifecycle, circularity, energy/material infrastructure, repairability, interoperability and public digital infrastructure;
-4. **Participant epistemic agency and governance** — voice, co-design, authority, context transfer and institutional choice; and
-5. **Durability, institutionalisation and intergenerational consequences** — longitudinal evidence, professional/institutional capacity, support windows, persistence, option preservation and residual empirical debt.
+3. **The sustainability of digital education** — lifecycle, circularity, energy/material infrastructure, repairability, interoperability, public digital infrastructure and distributional incidence;
+4. **Participant epistemic agency and governance** — voice, co-design, authority, context transfer, institutional choice and control/mediation; and
+5. **Durability, institutionalisation and intergenerational consequences** — longitudinal evidence, professional/institutional capacity, support windows, persistence, burden displacement, option preservation and residual empirical debt.
 
 Within each section the final screened corpus will be used to revise rather than merely illustrate the candidate principles.
 
@@ -388,7 +406,7 @@ The present contribution is not the proposition that digital education must itse
 
 The candidate contribution is narrower:
 
-> **an evidence-governed method for translating established digital-education research into candidate principles for transformative ESD while preserving source provenance, enactment conditions, participant authority, sustainability constraints and unresolved evidence dependencies.**
+> **an evidence-governed method for translating established digital-education research into candidate principles for transformative ESD while preserving source provenance, enactment conditions, participant authority, sustainability constraints, externality incidence and unresolved evidence dependencies.**
 
 The approach asks not merely whether a digital practice is innovative or whether it is associated with a positive outcome, but:
 
@@ -396,16 +414,19 @@ The approach asks not merely whether a digital practice is innovative or whether
 - Which source and population support it?
 - What educator, institutional and policy capability is required for enactment?
 - Who participates in interpretation and design?
-- Who benefits and who bears environmental, social or epistemic externalities?
+- Who contributes, who benefits and who bears environmental, social, economic or epistemic burdens?
+- Who controls or mediates the relevant infrastructure and decisions?
+- Who retains practical refusal, repair, migration or exit options?
+- At which lifecycle stage and time horizon do burdens occur?
 - What lifecycle and infrastructure commitments are created?
 - What evidence remains contextual rather than same-object?
 - What can still be repaired, revised, migrated, rejected or exited later?
 
-These questions convert the original digital-education expertise into a testable sustainability-facing framework without claiming that the transfer has already been empirically validated.
+These questions convert the original digital-education expertise into a testable sustainability-facing framework without claiming that the transfer or any deployment-specific burden allocation has already been empirically validated.
 
 ## 8. Current evidence-status boundary
 
-The repository currently contains a bounded digital-education source corpus, source-attributed cross-paper synthesis, a seven-principle candidate framework, a sustainability-constraint matrix, a broad open-web/primary-source snowball, lifecycle/circularity methods, participant-governance transfer formalisation, a frozen search protocol and close-antecedent positioning. Those materials are **candidate inputs and pre-search synthesis**, not a completed review corpus.
+The repository currently contains a bounded digital-education source corpus, source-attributed cross-paper synthesis, a seven-principle candidate framework, a sustainability-constraint matrix, a nine-question externality-incidence audit, a broad open-web/primary-source snowball, lifecycle/circularity methods, participant-governance transfer formalisation, a frozen search protocol and close-antecedent positioning. Those materials are **candidate inputs and pre-search synthesis**, not a completed review corpus.
 
 The following remain operationally unpaid:
 
@@ -414,8 +435,9 @@ The following remain operationally unpaid:
 - retained database exports and counts;
 - cross-database deduplication;
 - eligibility screening with exclusion reasons;
-- structured extraction of the included corpus;
-- challenge/revision of the seven candidate principles against that corpus; and
+- structured extraction of the included corpus using the 19-coordinate schema;
+- empirical allocation of externality incidence for any named deployment;
+- challenge/revision of the seven candidate principles and incidence carrier against that corpus; and
 - corpus-dependent final evidence synthesis and novelty positioning.
 
 Consequently, this draft does not report review-result counts, pooled effects, prevalence estimates or claims of evidence completeness.
