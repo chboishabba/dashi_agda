@@ -126,7 +126,8 @@ The theorem-bearing owner is now written:
 
 `DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Exact.agda`
 
-Commit: `b2ec32e1c0f8b13ccc471b75d35edcebcc9a5078`.
+Initial owner commit: `b2ec32e1c0f8b13ccc471b75d35edcebcc9a5078`.
+Current owner/type-fix head: `7520151494f2b6d425d4b481847eff91b5a79645`.
 
 It composes R404 and R405 into the selected boundary inequality and binds the selected R318 carrier, observable-indexed J insertions, and decoupling-boundary coordinate. Its fields still require the literal CMP99/CMP116 source replay; no concrete source replay inhabitant or kernel receipt is claimed.
 
@@ -248,7 +249,8 @@ Current focused commits:
                 R405 RED validation already existed on #967
 143c8f66...  R405 nested source-domain summation GREEN source
 14b13cbf...  R406 RED-first validation requires missing literal theorem owner
-b2ec32e1...  R406 theorem-bearing owner written; R404/R405 composition present; source replay still unpaid
+75201514...  R406 owner type-fix: selected J insertions aligned with R318 carrier
+                R404/R405 composition present; source replay still unpaid
 ```
 
 No exact-head workflow has been observed for the R405/R406 head in this connector session. Do not upgrade source ordering to kernel certification.
