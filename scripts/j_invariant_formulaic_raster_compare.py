@@ -10,6 +10,10 @@ The source-calibration distinction is explicit:
 * ``mathematica-klein-j`` divides that value by 1728, matching the Wolfram
   ``KleinInvariantJ`` normalization used by the Homann source family.
 
+The default viewport is the canonical DASHI annotated regression viewport
+[-1.5, 1.2] x [0, 1.95].  It is NOT claimed to be the recovered historical
+Homann Mathematica notebook viewport.
+
 The default colour model is PHASE-ONLY.  It is useful for structural comparison
 of argument/colour-wheel/pants seams, but it is NOT the exact Homann 2007 colour
 function.  ``--claim-source-exact`` therefore fails closed unless an exact
@@ -27,7 +31,6 @@ import json
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
 
 from cm_j_alpha_scan import j_invariant
 
@@ -36,6 +39,7 @@ NORMALIZATION_STANDARD = "standard-j"
 NORMALIZATION_MATHEMATICA = "mathematica-klein-j"
 COLOR_PHASE_ONLY = "phase-only"
 COLOR_HOMANN_EXACT = "homann-exact"
+DASHI_VIEWPORT = (-1.5, 1.2, 0.0, 1.95)
 
 
 @dataclass(frozen=True)
@@ -61,12 +65,10 @@ def normalized_j(tau: complex, terms: int, normalization: str) -> complex:
 
 
 def phase01(value: complex) -> float:
-    """Map principal argument to one full hue turn [0,1)."""
     return (math.atan2(value.imag, value.real) / (2.0 * math.pi)) % 1.0
 
 
 def phase_only_rgb(value: complex) -> tuple[int, int, int]:
-    """Diagnostic only: constant saturation/value, hue = argument."""
     h = phase01(value)
     r, g, b = colorsys.hsv_to_rgb(h, 1.0, 1.0)
     return round(255 * r), round(255 * g), round(255 * b)
@@ -84,9 +86,7 @@ def render_rgb(value: complex, color_model: str) -> tuple[int, int, int]:
 
 
 def pixel_to_tau(config: RasterConfig, x: int, y: int) -> complex:
-    """Affine pixel-centre chart; this is a parameter, not a source viewport claim."""
     re = config.xmin + (x + 0.5) * (config.xmax - config.xmin) / config.width
-    # raster row zero is the top, so imaginary coordinate descends with y
     im = config.ymax - (y + 0.5) * (config.ymax - config.ymin) / config.height
     return complex(re, im)
 
@@ -113,7 +113,7 @@ def write_ppm(path: Path, config: RasterConfig, pixels: bytes) -> None:
 def compare_with_image(path: Path, config: RasterConfig, pixels: bytes) -> dict[str, float | int]:
     try:
         from PIL import Image
-    except ImportError as exc:  # pragma: no cover - optional runtime dependency
+    except ImportError as exc:
         raise RuntimeError("comparison requires Pillow; raster generation does not") from exc
 
     source = Image.open(path).convert("RGB")
@@ -158,10 +158,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--width", type=int, default=947)
     parser.add_argument("--height", type=int, default=704)
-    parser.add_argument("--xmin", type=float, default=-2.0)
-    parser.add_argument("--xmax", type=float, default=2.0)
-    parser.add_argument("--ymin", type=float, default=0.05)
-    parser.add_argument("--ymax", type=float, default=3.0)
+    parser.add_argument("--xmin", type=float, default=DASHI_VIEWPORT[0])
+    parser.add_argument("--xmax", type=float, default=DASHI_VIEWPORT[1])
+    parser.add_argument("--ymin", type=float, default=DASHI_VIEWPORT[2])
+    parser.add_argument("--ymax", type=float, default=DASHI_VIEWPORT[3])
     parser.add_argument("--terms", type=int, default=80)
     parser.add_argument(
         "--normalization",
@@ -216,6 +216,13 @@ def main() -> None:
     pixels = render(config)
     write_ppm(args.output, config, pixels)
 
+    uses_default_dashi_viewport = (
+        args.xmin,
+        args.xmax,
+        args.ymin,
+        args.ymax,
+    ) == DASHI_VIEWPORT
+
     metadata: dict[str, object] = {
         "status": "diagnostic_not_source_exact",
         "formula_owner": "scripts/cm_j_alpha_scan.py:j_invariant",
@@ -233,14 +240,20 @@ def main() -> None:
             "ymin": args.ymin,
             "ymax": args.ymax,
             "pixel_chart": "affine pixel-centre; row zero maps to ymax",
+            "viewport_role": (
+                "dashi-annotated-regression-viewport"
+                if uses_default_dashi_viewport
+                else "caller-supplied-viewport"
+            ),
             "viewport_source_calibrated": bool(args.viewport_calibrated),
+            "historical_homann_notebook_viewport_claimed": False,
         },
         "color_model": args.color_model,
         "homann_color_function_transcribed": bool(args.homann_color_transcribed),
         "source_exact_claim": bool(args.claim_source_exact),
         "known_blockers": [
             "exact Homann Mathematica colour function transcription",
-            "source image complex-plane viewport calibration",
+            "historical Homann notebook viewport calibration if source-exact fidelity is demanded",
             "finite q-series pixel error budget",
             "JPEG/postprocessing model if exact RGB equality is demanded",
         ],
