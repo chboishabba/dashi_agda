@@ -1,4 +1,4 @@
-{-# OPTIONS --safe #-}
+
 module DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact where
 
 open import Agda.Builtin.Equality using (_≡_)

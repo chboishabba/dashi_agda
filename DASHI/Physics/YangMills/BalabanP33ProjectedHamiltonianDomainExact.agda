@@ -1,4 +1,4 @@
-{-# OPTIONS --safe #-}
+
 module DASHI.Physics.YangMills.BalabanP33ProjectedHamiltonianDomainExact where
 
 ------------------------------------------------------------------------
