@@ -73,3 +73,15 @@ def test_quotient_character_is_raw_nine_character_with_two_e_copies_removed():
     }
     assert probe["removed_dimension"] == 4
     assert probe["removed_irrep_content"] == {"E": 2}
+
+
+def test_d4_to_n3b_screen_retains_occurrences_without_promoting_action_identity():
+    probe = load_probe().build_report()
+    screen = probe["d4_to_n3b_screen"]
+
+    assert screen["n3b_degree_occurrences_paid"] == {17496: True, 113724: True}
+    assert screen["selected3b_normalizer_monster_action_weld_paid"] is False
+    assert screen["d4_subgroup_embedding_paid"] is False
+    assert screen["d4_quotient_character_restriction_same_object_paid"] is False
+    assert screen["d4_quotient_equals_n3b_character"] is False
+    assert screen["monster_42d_action_paid"] is False
