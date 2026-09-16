@@ -107,8 +107,9 @@ record ActionCrossingTraceBoundary : Set where
   field
     actionEventsAreExplicitCrossings : Bool
     crossingOrderIsFirstClass : Bool
-    traceConcatenationAssociative : Bool
+    traceConcatenationIsAssociative : Bool
     associativityErasesOrder : Bool
+
     everyCrossingReversible : Bool
     braidGroupConstructed : Bool
     crossingCountDeterminesProvenance : Bool

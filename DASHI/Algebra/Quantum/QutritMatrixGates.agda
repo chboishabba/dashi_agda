@@ -64,8 +64,12 @@ cycleMatrixAgreesWithBasisGate :
   ∀ q →
   applyMatrix3 (cycleMatrix3 {A}) (basisState A q)
   ≡ basisState A (cycleQutrit q)
-cycleMatrixAgreesWithBasisGate authority q
-  rewrite matrixCycleAgrees authority (basisState _ q) = refl
+cycleMatrixAgreesWithBasisGate authority qNeg
+  rewrite matrixCycleAgrees authority (basisState _ qNeg) = refl
+cycleMatrixAgreesWithBasisGate authority qZero
+  rewrite matrixCycleAgrees authority (basisState _ qZero) = refl
+cycleMatrixAgreesWithBasisGate authority qPos
+  rewrite matrixCycleAgrees authority (basisState _ qPos) = refl
 
 record QutritRootOfUnity (A : ComplexStarSemiring) : Set₁ where
   field

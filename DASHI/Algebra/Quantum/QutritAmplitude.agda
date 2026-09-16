@@ -123,7 +123,9 @@ record QutritUnitary
     inverseU : QutritState A → QutritState A
     inverseLeftU : ∀ state → inverseU (U state) ≡ state
     inverseRightU : ∀ state → U (inverseU state) ≡ state
-    preservesInner : ∀ x y → innerQutrit (U x) (U y) ≡ innerQutrit x y
+    preservesInner :
+      ∀ (x y : QutritState A) →
+      innerQutrit {A} (U x) (U y) ≡ innerQutrit {A} x y
 
 open QutritUnitary public
 
@@ -133,10 +135,10 @@ record PermutationGateInnerProductAuthority
 
   field
     permutationPreservesInner :
-      ∀ gate x y →
-      innerQutrit (applyAmplitudeGate gate x)
+      ∀ (gate : QutritGate) (x y : QutritState A) →
+      innerQutrit {A} (applyAmplitudeGate gate x)
         (applyAmplitudeGate gate y)
-      ≡ innerQutrit x y
+      ≡ innerQutrit {A} x y
 
 open PermutationGateInnerProductAuthority public
 
@@ -161,7 +163,7 @@ record QutritBornAuthority (A : ComplexStarSemiring) : Set₁ where
     _+P_ : Probability → Probability → Probability
 
     bornTotal :
-      ∀ state →
+      ∀ (state : QutritState A) →
       Normalized state →
       _+P_
         (_+P_
@@ -169,6 +171,7 @@ record QutritBornAuthority (A : ComplexStarSemiring) : Set₁ where
           (probabilityOfScalar (normSq A (ampZero state))))
         (probabilityOfScalar (normSq A (ampPos state)))
       ≡ totalOne
+
 
 open QutritBornAuthority public
 
