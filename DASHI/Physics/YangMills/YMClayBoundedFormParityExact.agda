@@ -77,6 +77,33 @@ record BoundedFormGapPackage
 
 open BoundedFormGapPackage public
 
+-- The finite Lean `VacuumGapDatum` carries no extra mysterious spectral input:
+-- it is the associated self-adjoint operator together with normalized vacuum,
+-- vacuum-null form data, and the vacuum-complement coercive estimate.  Mirror
+-- exactly that consumer content here.
+record FiniteVacuumFormGapDatum
+    (Hilbert Scalar : Set) : Set₁ where
+  field
+    package : BoundedFormGapPackage Hilbert Scalar
+    selfAdjoint : Kato.SelfAdjointOnDomain (hamiltonian package)
+    normalizedVacuumDatum : NormalizedVacuum package
+    vacuumNullDatum : VacuumNullForm package
+    coerciveDatum : CoerciveOnVacuumComplement package
+
+open FiniteVacuumFormGapDatum public
+
+boundedFormBuildsFiniteVacuumGapDatum :
+  ∀ {Hilbert Scalar} →
+  (package : BoundedFormGapPackage Hilbert Scalar) →
+  FiniteVacuumFormGapDatum Hilbert Scalar
+boundedFormBuildsFiniteVacuumGapDatum package = record
+  { package = package
+  ; selfAdjoint = Kato.selfAdjointOnDomain (hamiltonian package)
+  ; normalizedVacuumDatum = normalizedVacuum package
+  ; vacuumNullDatum = vacuumNullForm package
+  ; coerciveDatum = coerciveOnVacuumComplement package
+  }
+
 -- The package exposes exactly the finite information consumed downstream.
 -- Self-adjointness is not a separate input: it is projected from the associated
 -- Hamiltonian produced by the canonical representation compiler.
@@ -95,6 +122,9 @@ boundedFormSelfAdjointProof package =
 
 boundedFormHamiltonianCompilerLevel : ProofLevel
 boundedFormHamiltonianCompilerLevel = machineChecked
+
+boundedFormFiniteGapDatumCompilerLevel : ProofLevel
+boundedFormFiniteGapDatumCompilerLevel = machineChecked
 
 boundedFormRepresentationAuthorityLevel : ProofLevel
 boundedFormRepresentationAuthorityLevel =
