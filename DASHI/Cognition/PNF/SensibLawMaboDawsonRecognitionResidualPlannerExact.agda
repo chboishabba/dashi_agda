@@ -52,7 +52,7 @@ record DawsonRecognitionResidualPlan : Set where
   constructor dawsonRecognitionResidualPlan
   field
     query : Minimal.MinimalDoctrinalQuery
-    firstResidual : Cutset.MinimalDoctrinalResidual
+    firstResidual : Cutset.MinimalFirstResidual
     firstResidualExact : firstResidual ≡ Cutset.recognitionConditionResidual
     hyperfabricObligation : Hyper.MinimalProofObligation
     hyperfabricObligationExact : hyperfabricObligation ≡ Hyper.establishRecognitionConditionRule
