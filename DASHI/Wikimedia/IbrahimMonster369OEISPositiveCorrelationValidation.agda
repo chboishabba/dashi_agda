@@ -21,6 +21,10 @@ fortyTwoDBridgeSourceRegression :
   P.fortyTwoDRestrictionBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 fortyTwoDBridgeSourceRegression = refl
 
+fortyTwoCarrierRegression :
+  P.fortyTwoCarrierBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
+fortyTwoCarrierRegression = refl
+
 c6SpectrumSourceRegression :
   P.c6WeightTwoSpectrumBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 c6SpectrumSourceRegression = refl
