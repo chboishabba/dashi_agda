@@ -26,6 +26,13 @@ def test_screen_reuses_all_known_good_mn3b_group_construction_fallbacks():
     assert "GroupForGroupInfo(groupInfo)" in text
 
 
+def test_gap_screen_uses_standard_abelian_predicate_negation():
+    text = SCREEN.read_text()
+    assert "IsNonabelian" not in text
+    assert "not IsAbelian(d4Group)" in text
+    assert "not IsAbelian(H)" in text
+
+
 def test_checker_classifies_raw_receipt_into_fail_locating_summary():
     text = CHECKER.read_text()
     assert SUMMARY_SCRIPT in text
