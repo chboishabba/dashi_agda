@@ -14,10 +14,10 @@
 # every transported representative maps uniquely to an MN3B table class by the
 # pair (element order, ambient conjugacy-class size).
 #
-# The runtime receipt is deliberately fail-locating: AtlasRep realization,
-# subgroup discovery, canonical isomorphism, unique ambient class fusion,
-# admissibility of the realized fusion and character compatibility are retained
-# as separate booleans. No character match creates the
+# The runtime receipt is deliberately fail-locating: AtlasRep/CTblLib group
+# realization, subgroup discovery, canonical isomorphism, unique ambient class
+# fusion, admissibility of the realized fusion and character compatibility are
+# retained as separate booleans. No character match creates the
 # Selected3BNormalizerMonsterActionWeld or an intertwiner on the selected
 # Monster carrier.
 
@@ -138,7 +138,8 @@ for fusion in possibleFusions do
 od;
 
 # ----------------------------------------------------------------------
-# Stage 2: try to realize one actual D8 subgroup in the existing MN3B model.
+# Stage 2: realize MN3B using exactly the established construction ladder,
+# then search its Sylow-2 subgroup for an actual D8.
 # ----------------------------------------------------------------------
 
 expectedGroupOrder := Size(mn3b);
@@ -150,6 +151,9 @@ groupNames := [
 ];
 G := fail;
 atlasGroupRealized := false;
+selectedConstructionSource := fail;
+
+# First use the documented AtlasRep information-record route.
 for groupName in groupNames do
   infos := AllAtlasGeneratingSetInfos(groupName);
   infos := Filtered(infos, info -> IsBound(info.size) and info.size = expectedGroupOrder);
@@ -158,11 +162,40 @@ for groupName in groupNames do
     if candidate <> fail and Size(candidate) = expectedGroupOrder then
       G := candidate;
       atlasGroupRealized := true;
+      selectedConstructionSource := "AtlasRep-info";
       break;
     fi;
   od;
   if G <> fail then break; fi;
 od;
+
+# Some installations construct the group directly even when the local
+# information list is incomplete.
+if G = fail then
+  for groupName in groupNames do
+    candidate := AtlasGroup(groupName);
+    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+      G := candidate;
+      atlasGroupRealized := true;
+      selectedConstructionSource := "AtlasGroup-direct";
+      break;
+    fi;
+  od;
+fi;
+
+# Reuse the CTblLib/Browse fallback from the established actual-kernel producer.
+if G = fail and LoadPackage("browse") = true then
+  groupInfos := GroupInfoForCharacterTable(mn3b);
+  for groupInfo in groupInfos do
+    candidate := GroupForGroupInfo(groupInfo);
+    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+      G := candidate;
+      atlasGroupRealized := true;
+      selectedConstructionSource := "CTblLib-GroupForGroupInfo";
+      break;
+    fi;
+  od;
+fi;
 
 actualD4 := fail;
 actualFusion := fail;
@@ -258,6 +291,11 @@ AppendTo(output,"  \"target_multiplicities\": {\"A1\":3,\"A2\":0,\"B1\":1,\"B2\"
 AppendTo(output,"  \"possible_fusion_count\": ",String(Length(possibleFusions)),",\n");
 AppendTo(output,"  \"character_compatible_fusion_count\": ",String(Length(compatible)),",\n");
 AppendTo(output,"  \"atlas_group_realized\": ",JsonBool(atlasGroupRealized),",\n");
+if selectedConstructionSource = fail then
+  AppendTo(output,"  \"group_construction_source\": null,\n");
+else
+  AppendTo(output,"  \"group_construction_source\": \"",selectedConstructionSource,"\",\n");
+fi;
 AppendTo(output,"  \"d4_subgroup_found\": ",JsonBool(d4SubgroupFound),",\n");
 AppendTo(output,"  \"canonical_isomorphism_found\": ",JsonBool(canonicalIsomorphismFound),",\n");
 AppendTo(output,"  \"ambient_class_fusion_unique\": ",JsonBool(ambientClassFusionUnique),",\n");
@@ -279,6 +317,7 @@ CloseStream(output);
 
 Print("D4/N3B character screen written: possible=",Length(possibleFusions),
   "; compatible=",Length(compatible),
+  "; group-source=",selectedConstructionSource,
   "; atlas-group=",atlasGroupRealized,
   "; d4-found=",d4SubgroupFound,
   "; canonical-iso=",canonicalIsomorphismFound,
