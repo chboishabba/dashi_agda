@@ -17,6 +17,17 @@ researchQuestionCountRegression = refl
 methodRetainsStructuredSearchRegression : Method.MethodologyBoundary.transparentStructuredSearchRequired Method.canonicalMethodologyBoundary ≡ true
 methodRetainsStructuredSearchRegression = refl
 
+methodRetainsPrincipleDerivationRegression :
+  Method.principleDerivationBoundary
+  ≡ Method.Derivation.canonicalPrincipleDerivationBoundary
+methodRetainsPrincipleDerivationRegression = refl
+
+preSearchFrameworkNotReviewResultRegression :
+  Method.Derivation.PrincipleDerivationBoundary.preSearchFrameworkEqualsReviewResult
+    Method.principleDerivationBoundary
+  ≡ false
+preSearchFrameworkNotReviewResultRegression = refl
+
 searchClosureDoesNotEqualSynthesisRegression : Method.SearchClosureEqualsEvidenceSynthesis → ⊥
 searchClosureDoesNotEqualSynthesisRegression = Method.searchClosureDoesNotEqualEvidenceSynthesis
 
