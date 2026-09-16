@@ -8,6 +8,7 @@ import DASHI.Reasoning.PlatoSymposiumDialecticBraidHyperformalExact as Hyperform
 import DASHI.Reasoning.PlatoSymposiumProofSearchExperimentExact as ProofSearch
 import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionExact as Transmission
 import DASHI.Reasoning.PlatoSymposiumSnowballParetoIndexingExact as Indexing
+import DASHI.Reasoning.PlatoSymposiumResidualDialecticMechanismExact as Residual
 
 ------------------------------------------------------------------------
 -- RED/GREEN regression surface for the JMD-owned Aristotle Symposium bundle.
@@ -15,8 +16,10 @@ import DASHI.Reasoning.PlatoSymposiumSnowballParetoIndexingExact as Indexing
 -- entailment from empirical authority, separate content-addressed procedural
 -- invariance from epistemic correctness, keep Plato-shaped philosophical
 -- carriers distinct from DASHI dialectic/braid/369/hyperfabric semantics,
--- preserve proof-search / transmission-history boundaries, and keep
--- snowball/Pareto/Dewey/QID coordinates non-promoting.
+-- preserve proof-search / transmission-history boundaries, keep
+-- snowball/Pareto/Dewey/QID coordinates non-promoting, and retain the residual
+-- conflict/reconciliation and effect/means distinctions without reassigning
+-- ownership of JMD archive contents to DASHI.
 ------------------------------------------------------------------------
 
 sourceAtlasPinned = Source.jmdAristotleSymposiumSourceAtlas
@@ -63,3 +66,11 @@ indexingBoundary = Indexing.canonicalPlatoSymposiumIndexingBoundary
 canonicalAttributionSnowballPinned = Indexing.existingAttributionSnowballBoundary
 canonicalTraversalBoundaryPinned = Indexing.existingKnowledgeTraversalBoundary
 canonicalRecursiveParetoBoundaryPinned = Indexing.existingRecursiveParetoBoundary
+
+conflictReconciliationBoundary = Residual.conflictIntensityDoesNotDetermineReconciliationPossibility
+effectMeansBoundary = Residual.observedEffectDoesNotDetermineMeans
+eryximachusSourceContractPinned = Residual.eryximachusHostileReconcilableContract
+marsyasSourceContractPinned = Residual.marsyasSameEffectDifferentMeansContract
+pausaniasSourceContractPinned = Residual.pausaniasContextContract
+republicSelectionSourceContractPinned = Residual.republicSelectionValidityContract
+residualDialecticMechanismBoundary = Residual.canonicalPlatoSymposiumResidualDialecticMechanismBoundary
