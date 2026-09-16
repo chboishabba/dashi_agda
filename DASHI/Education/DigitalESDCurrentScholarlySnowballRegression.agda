@@ -24,15 +24,29 @@ zagamiSourcePaidRegression :
   ≡ true
 zagamiSourcePaidRegression = refl
 
+chughSourcePaidRegression :
+  Scholarly.ScholarlyCandidateBoundary.chughSourceRolePaid
+    Scholarly.canonicalScholarlyCandidateBoundary
+  ≡ true
+chughSourcePaidRegression = refl
+
 caseStudyDoesNotUniversaliseRegression :
   Scholarly.SingleCaseCreatesUniversalDigitalESDRule → ⊥
 caseStudyDoesNotUniversaliseRegression = Scholarly.singleCaseDoesNotCreateUniversalDigitalESDRule
 
 platformExperienceDoesNotProveAllPlatformEffectsRegression :
   Scholarly.TwoSchoolPlatformStudyCreatesUniversalPlatformEffect → ⊥
-platformExperienceDoesNotProveAllPlatformEffectsRegression =
-  Scholarly.twoSchoolPlatformStudyDoesNotCreateUniversalPlatformEffect
+platformExperienceDoesNotProveAllPlatformEffectsRegression = Scholarly.twoSchoolPlatformStudyDoesNotCreateUniversalPlatformEffect
 
 historicalCaseDoesNotProveDurabilityRegression :
   Scholarly.AustralianEdtechCaseCreatesUniversalDurabilityRule → ⊥
 historicalCaseDoesNotProveDurabilityRegression = Scholarly.australianEdtechCaseDoesNotCreateUniversalDurabilityRule
+
+opinionPaperDoesNotCreateEmpiricalEffectRegression :
+  Scholarly.OpinionPaperCreatesEmpiricalDigitalESDEffect → ⊥
+opinionPaperDoesNotCreateEmpiricalEffectRegression = Scholarly.opinionPaperDoesNotCreateEmpiricalDigitalESDEffect
+
+paradoxFramingDoesNotExhaustReciprocalFrameworkRegression :
+  Scholarly.SustainabilityParadoxExhaustsReciprocalDigitalESDFramework → ⊥
+paradoxFramingDoesNotExhaustReciprocalFrameworkRegression =
+  Scholarly.sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework
