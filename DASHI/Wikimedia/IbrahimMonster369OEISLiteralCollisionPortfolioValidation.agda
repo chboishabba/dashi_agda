@@ -8,15 +8,26 @@ import DASHI.Wikimedia.IbrahimMonster369OEISLiteralCollisionPortfolioExact as P
 boundary : P.Monster369LiteralCollisionPortfolioBoundary
 boundary = P.canonicalMonster369LiteralCollisionPortfolioBoundary
 
-literalWorldCountRegression : P.literalWorldCount boundary ≡ 11
+literalWorldCountRegression : P.literalWorldCount boundary ≡ 13
 literalWorldCountRegression = refl
 
-literalCollisionEdgeCountRegression : P.literalCollisionEdgeCount boundary ≡ 11
+literalCollisionEdgeCountRegression : P.literalCollisionEdgeCount boundary ≡ 12
 literalCollisionEdgeCountRegression = refl
+
+observedIntegerGroupCountRegression : P.observedIntegerGroupCount boundary ≡ 5
+observedIntegerGroupCountRegression = refl
 
 sameIntegerRolesRetainedRegression :
   P.sameIntegerDifferentRoleFixturesRetained boundary ≡ true
 sameIntegerRolesRetainedRegression = refl
+
+positiveSignalRegression :
+  P.sameIntegerCanBePositiveBridgeSignal boundary ≡ true
+positiveSignalRegression = refl
+
+c6TypedCoordinateRegression :
+  P.typedC6WeightTwoSpectrumCoordinateRetained boundary ≡ true
+c6TypedCoordinateRegression = refl
 
 literalRuntimeMinimumRegression :
   P.equivalentFiniteSearchMinimumSize boundary ≡ 5
@@ -37,3 +48,7 @@ kernelFirewallRegression = refl
 oeisAuthorityFirewallRegression :
   P.oeisCreatesLiteralMonsterIdentity boundary ≡ false
 oeisAuthorityFirewallRegression = refl
+
+positiveCorrelationAuthorityFirewallRegression :
+  P.positiveCorrelationCreatesSameObject boundary ≡ false
+positiveCorrelationAuthorityFirewallRegression = refl
