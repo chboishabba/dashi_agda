@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
+import DASHI.Education.DigitalESDCrossRoundAttributionBoundaryExact as Round
 
 participatoryESDContextRegression :
   Acquisition.DigitalESDAcquisitionAtlas.participatoryESDResearchContextPaid
@@ -94,24 +95,24 @@ frontierStillRetainsResidualsRegression :
 frontierStillRetainsResidualsRegression = refl
 
 crossRoundAttributionBoundaryRegression :
-  Acquisition.crossRoundAttributionBoundary
+  Round.crossRoundAttributionBoundary
   ≡ Snowball.canonicalAttributionSnowballBoundary
 crossRoundAttributionBoundaryRegression = refl
 
 futureSourceRolesMaySnowballRegression :
   Snowball.AttributionSnowballBoundary.sourceRolesMaySnowball
-    Acquisition.crossRoundAttributionBoundary
+    Round.crossRoundAttributionBoundary
   ≡ true
 futureSourceRolesMaySnowballRegression = refl
 
 crossRoundCitationProofRegression :
   Snowball.AttributionSnowballBoundary.citationMayPromoteProof
-    Acquisition.crossRoundAttributionBoundary
+    Round.crossRoundAttributionBoundary
   ≡ false
 crossRoundCitationProofRegression = refl
 
 crossRoundCitationAuthorityRegression :
   Snowball.AttributionSnowballBoundary.citationMayCreateAuthority
-    Acquisition.crossRoundAttributionBoundary
+    Round.crossRoundAttributionBoundary
   ≡ false
 crossRoundCitationAuthorityRegression = refl
