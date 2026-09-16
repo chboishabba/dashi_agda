@@ -13,6 +13,7 @@ import DASHI.Cognition.CommaDiffusionLanguage
 import DASHI.Cognition.DashiCognitiveSystem
 import DASHI.Cognition.ElectrochemicalDiffusionBridge
 import DASHI.Cognition.FibreBraidReasoning
+import DASHI.Cognition.FibreBraidActionTraceExact
 import DASHI.Cognition.IdEgoSuperego369
 import DASHI.Cognition.IdentityVacuumClosure
 import DASHI.Cognition.KepplerFiniteResonanceMDL
@@ -28,6 +29,7 @@ import DASHI.Cognition.PsychedelicNetworkDiffusion
 import DASHI.Cognition.QuantumMindEnrichedRetyping
 import DASHI.Cognition.QuantumMindRetypingBoundary
 import DASHI.Cognition.RecursiveFibreTower
+import DASHI.Cognition.RecursiveFibreTowerGateSeparationExact
 import DASHI.Cognition.ResidualPhaseEmpiricalContact
 import DASHI.Cognition.ResidualPhaseGeometry
 import DASHI.Cognition.TernaryCommitmentLogic
