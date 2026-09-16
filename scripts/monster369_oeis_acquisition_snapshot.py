@@ -85,7 +85,7 @@ SEQUENCES: dict[str, dict[str, object]] = {
         "A058674",
         title="McKay-Thompson series of class 42D for Monster",
         class_label="42D",
-        positive_coefficients={1: 0, 2: 1, 3: 3, 4: 3},
+        positive_coefficients={1: 1, 2: 3, 3: 3},
         formula=(
             "-1+eta(q^2)*eta(q^6)*eta(q^7)*eta(q^21)/"
             "(eta(q)*eta(q^3)*eta(q^14)*eta(q^42))"
@@ -93,10 +93,10 @@ SEQUENCES: dict[str, dict[str, object]] = {
         authority="source-navigation",
         url="https://oeis.org/A058674",
         notes=(
-            "Neighboring Monster class-42 series. Its eta quotient explicitly contains "
-            "levels 14 and 42. OEIS also exposes a local coefficient tail 1,3,3; this is "
-            "retained only as a search echo against the D4 quotient character tail, not as "
-            "character identity."
+            "Neighboring Monster class-42 series. OEIS offset -1 gives q^1,q^2,q^3 = "
+            "1,3,3 after the displayed 1/q and q^0 terms. Its eta quotient explicitly "
+            "contains levels 14 and 42. The 1,3,3 tail is retained only as a search echo "
+            "against the D4 quotient character tail, not as character identity."
         ),
     ),
     "A058676": _node(
@@ -254,9 +254,9 @@ RELATIONS: dict[str, dict[str, object]] = {
         "sources": ["A058674", "A058678"],
         "observed": (
             "the theorem-shaped five-orbit D4 quotient has character (5,5,1,3,3) = "
-            "3*A1+B1+B2; A058674 independently exposes a local coefficient tail 1,3,3 "
-            "inside the class-42D McKay-Thompson series. Retain the tail only as a weak "
-            "OEIS search echo while the actual D4 -> N(3B) same-action restriction remains unpaid."
+            "3*A1+B1+B2; A058674 independently exposes q^1,q^2,q^3 = 1,3,3 after "
+            "respecting its OEIS offset -1. Retain this only as a weak search echo while "
+            "the actual D4 -> N(3B) same-action restriction remains unpaid."
         ),
         "paid": True,
         "n3b_same_object_character_paid": False,
