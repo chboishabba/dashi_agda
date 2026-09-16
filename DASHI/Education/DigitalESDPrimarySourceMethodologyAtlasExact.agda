@@ -48,6 +48,17 @@ oecdDigitalEducationOutlook2026Source = Attr.mkDOISource
   "Primary OECD synthesis/report for current digital/GenAI education policy and evidence. Supports the distinction between task performance and learning, and the need for pedagogical guidance, human-centred design, research, governance and enabling infrastructure; it does not establish sustainability or learning effects for every technology or context."
   Attr.publicAttribution
 
+uneceFifthESDEvaluationSource : Attr.AttributedSource
+uneceFifthESDEvaluationSource = Attr.mkNoDOISource
+  "United Nations Economic Commission for Europe Steering Committee on Education for Sustainable Development"
+  "Learning from each other: achievements, challenges and ways forward — Fifth evaluation report of the Strategy for Education for Sustainable Development"
+  "United Nations Economic and Social Council, ECE/CEP/AC.13/2026/3"
+  "2026"
+  "https://documents.un.org/doc/undoc/gen/g26/034/70/pdf/g2603470.pdf"
+  Attr.institutionalSource
+  "Primary regional implementation evaluation based on analysis of 31 national reports for 2021-2025. Supports the source-bounded observation that digital tools/platforms and digital-access initiatives are expanding while intentional integration of sustainability principles into digital-education policy/practice remains limited and whole-institution/digital-ESD approaches remain uneven. National-report synthesis does not establish intervention effects or transfer automatically beyond the UNECE regional reporting population."
+  Attr.publicAttribution
+
 unescoAICommonGoodMinisterialSource : Attr.AttributedSource
 unescoAICommonGoodMinisterialSource = Attr.mkNoDOISource
   "Education ministers and designated representatives convened by UNESCO"
@@ -99,12 +110,13 @@ primaryMethodologySourceAtlas = Attr.mkSourceAtlas
   ( unescoESD2030RoadmapSource
   ∷ unescoESD2030MidtermSource
   ∷ oecdDigitalEducationOutlook2026Source
+  ∷ uneceFifthESDEvaluationSource
   ∷ unescoAICommonGoodMinisterialSource
   ∷ unescoAICommonGoodDiscussionSource
   ∷ unescoAIProcurementBackgroundSource
   ∷ unescoAITCOBackgroundSource
   ∷ [] )
-  "Primary institutional sources for ESD system transformation, current digital-education conditions and 2026 AI-era public-purpose governance. Adopted statements, consultation discussion papers and commissioned background papers remain distinct source roles. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
+  "Primary institutional sources for ESD system transformation, current digital-education conditions, regional digital-ESD integration status and 2026 AI-era public-purpose governance. Adopted statements, evaluation reports, consultation discussion papers and commissioned background papers remain distinct source roles. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
 
 unescoRoadmapSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt unescoESD2030RoadmapSource
 unescoRoadmapSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt unescoESD2030RoadmapSource
@@ -114,6 +126,9 @@ unescoMidtermSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt une
 
 oecdOutlookSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
 oecdOutlookSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
+
+uneceFifthESDEvaluationSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt uneceFifthESDEvaluationSource
+uneceFifthESDEvaluationSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt uneceFifthESDEvaluationSource
 
 unescoAICommonGoodMinisterialSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
 unescoAICommonGoodMinisterialSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
@@ -133,6 +148,7 @@ priorAcquisitionAtlasRetained = Prior.canonicalDigitalESDAcquisitionAtlas
 data InstitutionalFrameworkCreatesInterventionEffect : Set where
 data MidtermProgrammeEvaluationCreatesLocalCausalEffect : Set where
 data DigitalEducationOutlookCreatesSustainabilityProof : Set where
+data RegionalImplementationReportsCreateDigitalESDEffect : Set where
 data MinisterialGovernanceSourceCreatesInterventionEffect : Set where
 data ConsultationDiscussionCreatesAdoptedPolicy : Set where
 data ConsultationBackgroundCreatesAdoptedPolicy : Set where
@@ -146,6 +162,9 @@ midtermEvaluationDoesNotCreateLocalCausalEffect ()
 
 digitalEducationOutlookDoesNotCreateSustainabilityProof : DigitalEducationOutlookCreatesSustainabilityProof → ⊥
 digitalEducationOutlookDoesNotCreateSustainabilityProof ()
+
+regionalImplementationReportsDoNotCreateDigitalESDEffect : RegionalImplementationReportsCreateDigitalESDEffect → ⊥
+regionalImplementationReportsDoNotCreateDigitalESDEffect ()
 
 ministerialGovernanceSourceDoesNotCreateInterventionEffect : MinisterialGovernanceSourceCreatesInterventionEffect → ⊥
 ministerialGovernanceSourceDoesNotCreateInterventionEffect ()
@@ -172,6 +191,8 @@ record PrimarySourceMethodologyBoundary : Set where
     citationCreatesAuthorityIsFalse : citationCreatesAuthority ≡ false
     institutionalReportCreatesSameObjectInterventionEffect : Bool
     institutionalReportCreatesSameObjectInterventionEffectIsFalse : institutionalReportCreatesSameObjectInterventionEffect ≡ false
+    regionalEvaluationCreatesDigitalESDEffect : Bool
+    regionalEvaluationCreatesDigitalESDEffectIsFalse : regionalEvaluationCreatesDigitalESDEffect ≡ false
     ministerialGovernanceSourceCreatesInterventionEffect : Bool
     ministerialGovernanceSourceCreatesInterventionEffectIsFalse : ministerialGovernanceSourceCreatesInterventionEffect ≡ false
     consultationDiscussionCreatesAdoptedPolicy : Bool
@@ -183,4 +204,4 @@ open PrimarySourceMethodologyBoundary public
 
 canonicalPrimarySourceMethodologyBoundary : PrimarySourceMethodologyBoundary
 canonicalPrimarySourceMethodologyBoundary = primary-source-methodology-boundary
-  true refl true refl false refl false refl false refl false refl false refl false refl
+  true refl true refl false refl false refl false refl false refl false refl false refl false refl
