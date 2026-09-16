@@ -1,0 +1,121 @@
+module DASHI.Education.DigitalESDParticipantGovernanceContextTransferRegression where
+
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Cognition.PNF.LearningAlgebra as Learning
+import DASHI.Education.DigitalESDParticipantGovernanceContextTransferExact as Transfer
+import DASHI.Education.DigitalESDSameObjectAcquisitionSchedulerExact as Scheduler
+
+conceptualReviewDoesNotRequireAuthorityRegression :
+  Scheduler.requiredForDigitalESD
+    Scheduler.currentConceptualReviewSynthesis
+    Scheduler.participantEpistemicAuthority
+  ≡ false
+conceptualReviewDoesNotRequireAuthorityRegression = refl
+
+participantTransferRequiresContextRegression :
+  Scheduler.requiredForDigitalESD
+    Scheduler.participantGovernanceTransferClaim
+    Scheduler.contextGeneralisationAdmission
+  ≡ true
+participantTransferRequiresContextRegression = refl
+
+participantTransferRequiresAuthorityRegression :
+  Scheduler.requiredForDigitalESD
+    Scheduler.participantGovernanceTransferClaim
+    Scheduler.participantEpistemicAuthority
+  ≡ true
+participantTransferRequiresAuthorityRegression = refl
+
+admissionRequiresBothReceiptsRegression :
+  (context : Learning.ContextGeneralisationReceipt) →
+  (authority :
+    Transfer.ParticipantAuthorityReceipt (Learning.targetContext context)) →
+  Transfer.ParticipantGovernanceContextTransferAdmission
+admissionRequiresBothReceiptsRegression =
+  Transfer.admitParticipantGovernanceContextTransfer
+
+literatureCannotCreateAuthorityRegression :
+  Transfer.LiteratureCreatesParticipantAuthority → ⊥
+literatureCannotCreateAuthorityRegression =
+  Transfer.literatureDoesNotCreateParticipantAuthority
+
+consentCannotCreateAuthorityRegression :
+  Transfer.ConsentCreatesParticipantAuthority → ⊥
+consentCannotCreateAuthorityRegression =
+  Transfer.consentDoesNotCreateParticipantAuthority
+
+proceduralEthicsCannotCreateAuthorityRegression :
+  Transfer.ProceduralEthicsCreatesParticipantAuthority → ⊥
+proceduralEthicsCannotCreateAuthorityRegression =
+  Transfer.proceduralEthicsDoesNotCreateParticipantAuthority
+
+aliceCorpusCannotCreateLocalAuthorityRegression :
+  Transfer.AliceCorpusCreatesLocalParticipantAuthority → ⊥
+aliceCorpusCannotCreateLocalAuthorityRegression =
+  Transfer.aliceCorpusDoesNotCreateLocalParticipantAuthority
+
+contextSimilarityCannotCreateTransferRegression :
+  Transfer.ContextSimilarityCreatesGeneralisationReceipt → ⊥
+contextSimilarityCannotCreateTransferRegression =
+  Transfer.contextSimilarityDoesNotCreateGeneralisationReceipt
+
+contextReceiptCannotSkipAuthorityRegression :
+  Transfer.PaidContextReceiptSkipsAuthorityReceipt → ⊥
+contextReceiptCannotSkipAuthorityRegression =
+  Transfer.paidContextReceiptDoesNotSkipAuthorityReceipt
+
+authorityReceiptCannotSkipContextRegression :
+  Transfer.PaidAuthorityReceiptSkipsContextReceipt → ⊥
+authorityReceiptCannotSkipContextRegression =
+  Transfer.paidAuthorityReceiptDoesNotSkipContextReceipt
+
+contextGeneralisationRemainsNonAutomaticRegression :
+  (context : Learning.ContextGeneralisationReceipt) →
+  Learning.generalisationIsAutomatic context ≡ false
+contextGeneralisationRemainsNonAutomaticRegression =
+  Learning.generalisationIsAutomaticIsFalse
+
+canonicalAttributionSnowballReuseRegression :
+  Snowball.AttributionSnowballBoundary
+canonicalAttributionSnowballReuseRegression =
+  Transfer.canonicalAttributionSnowballBoundaryRetained
+
+transferBoundaryRetainsAttributionRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.sourceRoleAndSameObjectRetained
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ true
+transferBoundaryRetainsAttributionRegression = refl
+
+transferBoundaryForbidsSkippedDependencyRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.downstreamPaymentMaySkipUnpaidDependency
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ false
+transferBoundaryForbidsSkippedDependencyRegression = refl
+
+transferBoundaryContextAloneNotEnoughRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.contextReceiptAlonePaysParticipantAuthority
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ false
+transferBoundaryContextAloneNotEnoughRegression = refl
+
+transferBoundaryAuthorityAloneNotEnoughRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.participantAuthorityReceiptAlonePaysContextTransfer
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ false
+transferBoundaryAuthorityAloneNotEnoughRegression = refl
+
+transferBoundaryCurrentReviewDoesNotInventStudyRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.currentConceptualReviewAutomaticallyRequiresLocalAuthorityStudy
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ false
+transferBoundaryCurrentReviewDoesNotInventStudyRegression = refl
+
+transferBoundaryLabelsDASHISynthesisRegression :
+  Transfer.ParticipantGovernanceContextTransferBoundary.transferRuleIsAliceEmpiricalFinding
+    Transfer.canonicalParticipantGovernanceContextTransferBoundary
+  ≡ false
+transferBoundaryLabelsDASHISynthesisRegression = refl
