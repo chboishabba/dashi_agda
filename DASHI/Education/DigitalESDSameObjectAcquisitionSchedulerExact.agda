@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.RequirementProducerSchedulerExact as CoreScheduler
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
 
@@ -15,9 +16,12 @@ import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
 -- SAME-OBJECT ACQUISITION SCHEDULER ADAPTER
 --
 -- This module supplies only digital-ESD questions, coordinates and producer
--- identities.  Requirement/missing-coordinate/producer scheduling semantics
+-- identities. Requirement/missing-coordinate/producer scheduling semantics
 -- are imported from the repository's canonical
 -- RequirementProducerSchedulerExact; no parallel planner is introduced here.
+-- Pareto/MDL semantics are likewise imported from the canonical admissible
+-- consumer MDL owner: cost/ranking begins only after admissibility and consumer
+-- adequacy. No synthetic dollar/time score is invented here.
 --
 -- It does not create evidence and it does not permit literature similarity,
 -- standards, or citations to discharge same-object, future, context-transfer,
@@ -59,11 +63,6 @@ producerLabel participantAuthorityReceiptProducer = "participant epistemic-autho
 
 ------------------------------------------------------------------------
 -- Parent acquisition leaves.
---
--- Paid contextual leaves retain source-role/context producers for provenance;
--- unpaid leaves route to the producer that can actually change their payment
--- status.  The richer `requiredProducersForAcquisitionLeaf` records conjunctions
--- where one producer is insufficient.
 ------------------------------------------------------------------------
 
 producerForAcquisitionLeaf :
@@ -205,6 +204,18 @@ producerIdentityStillDoesNotCloseRequirement =
   CoreScheduler.producerExistenceDoesNotAutoCloseCoordinate
 
 ------------------------------------------------------------------------
+-- Canonical admissibility/Pareto boundary.
+--
+-- We deliberately do not manufacture numerical cost axes.  Once application
+-- evidence supplies admissibility, adequacy and real cost observations,
+-- downstream ranking can instantiate the canonical MDL/Pareto machinery.
+------------------------------------------------------------------------
+
+canonicalProducerParetoEligibilityBoundary : MDL.AdmissibleConsumerMDLBoundary
+canonicalProducerParetoEligibilityBoundary =
+  MDL.canonicalAdmissibleConsumerMDLBoundary
+
+------------------------------------------------------------------------
 -- Citation-resistant dependency firewalls.
 ------------------------------------------------------------------------
 
@@ -257,10 +268,7 @@ paidSiblingDoesNotAllowSkippedDependency :
 paidSiblingDoesNotAllowSkippedDependency ()
 
 ------------------------------------------------------------------------
--- Current producer frontier.  This is a work queue, not evidence and not an
--- empirical conclusion.  Duplicate producers are intentionally collapsed here
--- only at the scheduling layer; each acquired receipt must still retain its
--- own same-object/source provenance at payment time.
+-- Current producer frontier.
 ------------------------------------------------------------------------
 
 currentProducerFrontier : List ResidualProducer
@@ -315,6 +323,10 @@ record SameObjectAcquisitionSchedulerBoundary : Set where
     canonicalRequirementSchedulerReusedIsTrue :
       canonicalRequirementSchedulerReused ≡ true
 
+    paretoRankingRequiresEligibilityFirst : Bool
+    paretoRankingRequiresEligibilityFirstIsTrue :
+      paretoRankingRequiresEligibilityFirst ≡ true
+
 open SameObjectAcquisitionSchedulerBoundary public
 
 canonicalSameObjectAcquisitionSchedulerBoundary :
@@ -331,11 +343,12 @@ canonicalSameObjectAcquisitionSchedulerBoundary =
     false refl
     false refl
     true refl
+    true refl
 
 ------------------------------------------------------------------------
 -- BIDI scheduling receipt: an unpaid coordinate determines a producer request;
 -- a producer's eventual output may return only as a provenance-bearing receipt
--- for that coordinate.  The schedule itself never promotes payment.
+-- for that coordinate. The schedule itself never promotes payment.
 ------------------------------------------------------------------------
 
 record ProducerScheduleReceipt : Set where
@@ -384,4 +397,4 @@ interoperabilityPersistenceSchedule =
 
 highestAlphaSchedulerReading : String
 highestAlphaSchedulerReading =
-  "The Pareto frontier is now partitioned by evidence producer rather than citation count. Method/context sources may be acquired and paid out of order, but same-object deployment, future longitudinal, context-transfer and participant-authority coordinates remain blocked until their own provenance-bearing producers return receipts; no paid sibling or citation can skip those dependencies. Scheduling semantics reuse DASHI.Core.RequirementProducerSchedulerExact rather than introducing a parallel planner."
+  "The Pareto frontier is partitioned by evidence producer rather than citation count. Method/context sources may be acquired and paid out of order, but same-object deployment, future longitudinal, context-transfer and participant-authority coordinates remain blocked until their own provenance-bearing producers return receipts; no paid sibling or citation can skip those dependencies. Scheduling semantics reuse DASHI.Core.RequirementProducerSchedulerExact, and Pareto ranking is gated by DASHI.Core.AdmissibleConsumerMDLHyperfabricExact rather than by invented synthetic costs."
