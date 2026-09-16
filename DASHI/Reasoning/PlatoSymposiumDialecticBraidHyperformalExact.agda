@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Core.Base369DialecticRoleBoundaryExact as Role369
 import DASHI.Moonshine.Base369MonsterHistoryIndexedComputationObserverExact as Monster369
@@ -59,11 +60,12 @@ existingMonsterObserverBoundary : Monster369.Base369MonsterComputationObserverBo
 existingMonsterObserverBoundary =
   Monster369.canonicalBase369MonsterComputationObserverBoundary
 
+existingJMDLegacySourceAtlas : Attribution.AttributedSourceAtlas
 existingJMDLegacySourceAtlas = LegacyJMD.zizekPNFSourceAtlas
 
 ------------------------------------------------------------------------
 -- Shared-shape collision 1: an ascent/layering shape does not determine its
--- semantics.  Diotima's source-defined ascent, an operational stage chart and
+-- semantics. Diotima's source-defined ascent, an operational stage chart and
 -- a typed hyperfabric transport can share a local-to-global shape while asking
 -- different questions and carrying different authority.
 ------------------------------------------------------------------------
@@ -252,8 +254,7 @@ monster369ChartIsNotMonsterRepresentation :
 monster369ChartIsNotMonsterRepresentation = refl
 
 carryBraidCrossDomainEqualityNotClaimed : String
-carryBraidCrossDomainEqualityNotClaimed =
-  CarryBraid.carryGrammarSummary
+carryBraidCrossDomainEqualityNotClaimed = CarryBraid.carryGrammarSummary
 
 platoHyperformalSummary : String
 platoHyperformalSummary =
