@@ -51,6 +51,23 @@ def test_42d_snapshot_retains_17496_eta_product_bridge_candidate():
     assert relation["same_object_paid"] is False
 
 
+def test_42d_five_mode_phase_probe_realizes_15_14_42_without_authority_promotion():
+    runtime = load_runtime()
+    probe = runtime.build_42d_five_mode_phase_probe()
+
+    assert probe["mode_count"] == 5
+    assert probe["phase_count"] == 3
+    assert probe["lane_count"] == 15
+    assert probe["binary_oriented_lane_count"] == 10
+    assert probe["five_plus_ten"] == 15
+    assert probe["distinguished_lane"] == ("mode09", 0)
+    assert probe["residual_lane_count"] == 14
+    assert probe["outer_phase_count"] == 3
+    assert probe["outer_phase_times_residual"] == 42
+    assert probe["twenty_seven_to_five_mode_selection_paid"] is False
+    assert probe["forty_two_carrier_is_monster_class_42d_paid"] is False
+
+
 def test_6b_normalization_family_retains_q6_32772_across_three_manifests():
     runtime = load_runtime()
 
@@ -82,6 +99,7 @@ def test_snapshot_keeps_positive_bridge_signal_separate_from_proof_authority():
     assert report["positive_bridge_candidates"]["a025616-parent-lattice"] is True
     assert report["positive_bridge_candidates"]["6b-q6-to-c6-spectrum-32772"] is True
     assert report["positive_bridge_candidates"]["17496-42d-to-n3b-restriction"] is True
+    assert report["positive_bridge_candidates"]["42d-five-mode-phase-carrier"] is True
     assert report["authority"]["oeis_snapshot_creates_same_object"] is False
     assert report["authority"]["oeis_snapshot_creates_monster_action"] is False
     assert report["authority"]["positive_bridge_signal_creates_theorem"] is False
