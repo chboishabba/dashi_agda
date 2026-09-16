@@ -379,14 +379,62 @@ state side:
 PR #945 records theorem-bearing Lean receipts for the periodic-B A1/A2 radial
 mathematics. It keeps the Agda sample/same-object transport distinct, and it
 identifies the existing finite-path difference theorem as G2 donor and the
-Waleffe amplitude-energy theorem as G1 donor. The G0' local Hermitian
-vector->scalar splice is source-written. The state-side G1/G2 physical
-crosswalk remains a named unpaid field.
+Waleffe amplitude-energy theorem as an older G1 magnitude donor. The G0'
+local Hermitian vector->scalar splice is source-written, and the R579 local
+Hermitian Young owner now pays the same-carrier scalar G1 magnitude step
+without square roots or a fibre-cardinality factor. The remaining state-side
+work on this donor lane is therefore not a generic `|g_\pm| <= G1` search:
+it is the G2 physical-gradient crosswalk plus any cutoff-uniform
+shifted-coefficient/family transport needed to attach the local G1 envelope to
+the live physical family.
 
 For S2b2d1b this route remains a candidate donor only. Any attachment must land
 on the same damped-tangent/covariance carrier without losing the signed
 cancellation. Otherwise retain #920/#945 as provenance donors and prove d1b
 directly. Do not reopen their representation/scalarization chain.
+
+#### Current signed consumer / ordered-kernel min-cut
+
+The later R541/R573/R584/R503 cone has already pushed the live nested
+four-sign carrier through the signed Hermitian consumer before norm. The
+canonical status owner is
+`NSTriadKNLiteralR406SpectatorWeightedClassNormEverythingExact`, with the
+local exact producers
+`NSTriadKNWeightedNestedSignedCrossThreeOrbitBidiExact`,
+`NSTriadKNDirectCompanionThreeOrbitSignedRowBidiExact`,
+`NSTriadKNNestedFactoredFullToOrderedOrientedForceBidiExact`, and
+`NSTriadKNOrderedOrientedForceToR503BidiExact`.
+
+The recorded same-object facts are:
+
+```text
+R329 -> R572 single-cell same-slot weld                 closed
+signed Hermitian consumer three-orbit reduction          closed
+live R503 direct companion rewritten as ordered kernel   closed
+OrderedOrientedSpacetimeBudget -> R503                  closed
+outer forcing Gram route mandatory for R503              false
+independent amplitude budget required                    false
+```
+
+Thus the narrowest current analytic field on the direct R503 route is:
+
+```text
+cutoff-uniform bound for
+  2 * integratedOrderedOrientedForce,
+where H(alpha,beta) = w(alpha,beta) Re <G_alpha,D_beta>.
+```
+
+This is the signed-consumer version of the same operating rule:
+
+```text
+pair / cancel -> scalarize -> envelope -> majorize.
+```
+
+Do not take the nested forcing norm-square as the primary route before this
+consumer: the homogeneity audit records that doing so changes the quintic
+signed cross into a sextic object and opens a degree-seven derivative
+remainder. The Gram/class-norm surfaces remain optional diagnostics or
+producer routes only if they descend to the signed ordered-kernel budget.
 
 ### S2b2d2 — global aggregation after local payments
 
@@ -416,6 +464,8 @@ R303/R353/R372 signed-resolvent route          serious precursor; production ide
 #890 incidence/P3 work                         retained theorem-bearing comparator
 #920 R571/Aug-5 paired-second-moment transplant theorem-bearing representation donor
 #945/#947 Gate-A/G0' work                      cross-prover + same-object donor surfaces
+R579 local Hermitian G1 envelope               same-carrier scalar magnitude donor
+R541/R573/R584/R503 ordered-kernel cone        selected signed-consumer same-object cone
 R576/R577 positive Gram/Schur route            fallbackProducerRoute
 constant shell-localization payment            refuted as sufficient by R214
 adjacent max-shell -> Euclidean gap             refuted by #957 explicit witness
@@ -427,7 +477,7 @@ modern signed/nested commutator route           selected B_comm producer family
 
 ```text
 P0  keep this tracker + #957 + #883 archaeology summary synchronized
-P1  B_phase S2b2d1b: signed coherent covariance / endpoint fixed-output payment
+P1  B_phase S2b2d1b: cutoff-uniform signed coherent covariance / ordered-kernel endpoint payment
 P2  static/certification validation of d1a + S2b2c2b remote datum + d0 reduction
 P3  A/B portability BIDI audit on each paid B theorem family (non-promoting)
 P4  S1b infrastructure: concrete scalar FTC / integrateTo linearity
@@ -444,7 +494,7 @@ A proof discovery deferred, A portability BIDI active;
 never restart broad NS archaeology;
 start every search from a named unpaid theorem/field;
 preserve failed/superseded routes as append-only provenance;
-B new mathematics starts at S2b2d1b signed coherent covariance/endpoint payment;
+B new mathematics starts at S2b2d1b signed coherent covariance/ordered-kernel endpoint payment;
 preserve signed/local components before norms;
 only after d1b search the cutoff-uniform sum d2;
 never infer B -> A or A -> B without explicit same-object transport.
