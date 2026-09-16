@@ -13,6 +13,18 @@ characterTableScreenRegression :
   R.characterTableFusionScreenSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 characterTableScreenRegression = refl
 
+literalFusionRowsSerializationRegression :
+  R.literalCharacterCompatibleFusionRowsSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+literalFusionRowsSerializationRegression = refl
+
+centralClassDerivationRegression :
+  R.centralMonsterClassLabelDerivedFromFusionSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+centralClassDerivationRegression = refl
+
+schedulerLiteralRowLoaderRegression :
+  R.literalFusionSchedulerLoaderSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+schedulerLiteralRowLoaderRegression = refl
+
 actualGroupRealizationSourceRegression :
   R.actualD4RealizationSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 actualGroupRealizationSourceRegression = refl
@@ -44,6 +56,14 @@ jsonArtifactUploadRegression = refl
 summaryArtifactUploadRegression :
   R.summaryArtifactUploadWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 summaryArtifactUploadRegression = refl
+
+literalRowsRuntimeFirewallRegression :
+  R.literalFusionRowsRuntimeObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
+literalRowsRuntimeFirewallRegression = refl
+
+centralSplitRuntimeFirewallRegression :
+  R.central2A2BSplitRuntimeObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
+centralSplitRuntimeFirewallRegression = refl
 
 runtimeFirewallRegression :
   R.gapRuntimeReceiptObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
