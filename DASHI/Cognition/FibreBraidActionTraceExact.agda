@@ -71,7 +71,7 @@ canonicalTraceLowersDefect :
 canonicalTraceLowersDefect = Reasoning.auxiliaryTransportLowersDefect
 
 ------------------------------------------------------------------------
--- Ordered history remains explicit.
+-- Ordered history remains explicit even when endpoint action forgets order.
 ------------------------------------------------------------------------
 
 traceConcatenationKeepsExistingEvaluationOrder :
@@ -87,6 +87,22 @@ traceConcatenationKeepsExistingEvaluationOrder [] right value =
 traceConcatenationKeepsExistingEvaluationOrder (auxiliary ∷ rest) right value =
   traceConcatenationKeepsExistingEvaluationOrder
     rest right (Base.triXor auxiliary value)
+
+highThenMidTrace : Trace.ActionTrace ReasoningStrand Base.TriTruth
+highThenMidTrace =
+  reasoningBraidTrace (Base.tri-high ∷ Base.tri-mid ∷ [])
+
+midThenHighTrace : Trace.ActionTrace ReasoningStrand Base.TriTruth
+midThenHighTrace =
+  reasoningBraidTrace (Base.tri-mid ∷ Base.tri-high ∷ [])
+
+sameEndpointDifferentOrderedTrace :
+  evaluateReasoningTrace highThenMidTrace Base.tri-low
+  ≡ evaluateReasoningTrace midThenHighTrace Base.tri-low
+sameEndpointDifferentOrderedTrace = refl
+
+orderedTracesAreDistinct : highThenMidTrace ≡ midThenHighTrace → ⊥
+orderedTracesAreDistinct ()
 
 ------------------------------------------------------------------------
 -- Promotion firewalls.
@@ -117,6 +133,7 @@ record FibreBraidActionTraceBoundary : Set where
     auxiliaryActionsBecomeExplicitCrossings : Bool
     traceEvaluationEqualsExistingTransport : Bool
     crossingOrderRetainedAsHistory : Bool
+    endpointMayForgetCrossingOrder : Bool
     actionTracePromotedToBraidGroup : Bool
     actionTracePromotedToBraidGroupIsFalse :
       actionTracePromotedToBraidGroup ≡ false
@@ -137,7 +154,8 @@ canonicalFibreBraidActionTraceBoundary =
     true
     true
     true
+    true
     false refl
     false refl
     false refl
-    "The existing FibreBraidReasoning transport is represented as an ordered ActionTrace with explicit auxiliary/latent crossings. Trace evaluation is extensionally the old transportBraid. Order remains provenance and no braid-group or endpoint-complete-history claim is promoted."
+    "The existing FibreBraidReasoning transport is represented as an ordered ActionTrace with explicit auxiliary/latent crossings. Trace evaluation is extensionally the old transportBraid. In the triXor carrier, high-then-mid and mid-then-high reach the same endpoint while remaining distinct ordered traces, so provenance cannot be reconstructed from endpoint state. No braid-group claim is promoted."
