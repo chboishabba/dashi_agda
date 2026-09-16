@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as S
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as V
 
 regressionFiniteCenteringIdentity :
   S.divisionFreePairDifferenceCenteringClosed ≡ true
@@ -13,12 +14,12 @@ regressionFiniteCenteringIdentity =
 regressionPhysicalFixedOutputAttachment :
   S.fixedOutputCovariancePairDifferenceAttachmentClosed ≡ true
 regressionPhysicalFixedOutputAttachment =
-  S.fixedOutputWorkDifferenceVectorBridgeClosed ≡ true
+  S.fixedOutputCovariancePairDifferenceAttachmentClosedIsTrue
 
 regressionWorkDifferenceVectorBridge :
-  S.fixedOutputWorkDifferenceVectorBridgeClosed ≡ true
+  V.fixedOutputWorkDifferenceVectorBridgeClosed ≡ true
 regressionWorkDifferenceVectorBridge =
-  S.fixedOutputWorkDifferenceVectorBridgeClosedIsTrue
+  V.fixedOutputWorkDifferenceVectorBridgeClosedIsTrue
 
 regressionQuantitativePairDifferencePaymentStillOpen :
   S.quantitativePairDifferencePaymentClosed ≡ false
