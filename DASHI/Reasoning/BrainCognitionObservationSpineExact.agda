@@ -13,21 +13,21 @@ import DASHI.Cognition.PNF.LearningAlgebra as Learning
 import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact as Decision
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as Brain
 import DASHI.Reasoning.AuthorityBooleanPolarityRepairExact as Authority
+import DASHI.Reasoning.ConsumerRelativeLatentExtractionExact as Latent
 import DASHI.Reasoning.MaleCNSTypedHyperfabricChartProjectionExact as MaleCNS
 import DASHI.Reasoning.FibreRoutingMaleCNSMagnitudeAssignmentReplicationFrontierExact as Replication
 
 ------------------------------------------------------------------------
 -- BRAIN / COGNITION / OBSERVATION SPINE
 --
--- This owner adds no new neuroscience ontology.  It composes existing owners
+-- This owner adds no new neuroscience ontology. It composes existing owners
 -- around one common rule:
 --
---   latent/fine state -> lossy consumer observation
+--   latent/fine state -> lossy consumer observation.
 --
--- and therefore observational equality does not itself authorize latent-state
--- identity or reverse inference.  Memory identity, present influence, decision
--- state, motor policy, connectome structure, imaging readout, and action remain
--- distinct consumers/coordinates unless a separate bridge pays the relation.
+-- Exact extraction of a requested latent L from observation Q is a separate
+-- factorisation obligation L = decode o Q. Observational equality therefore
+-- does not itself authorize latent-state identity or reverse inference.
 ------------------------------------------------------------------------
 
 data LatentConsumerQuery : Set where
@@ -63,7 +63,7 @@ candidateLatentConsumerQuestion =
     "versioned MemoryFibre / remembered PNF event"
     "behavioural, functional-imaging, or other declared observation"
     "consumer-relative quotient of latent state"
-    "same-object memory decoder or a non-factorability/adequacy witness for the declared observation"
+    "FactorsThrough observation rememberedEvent, or a non-factorability witness proving this observer cannot decode it"
     candidateOnly
     "Memory identity is represented in the repo, but no MaleCNS/connectome observation currently decodes remembered semantic event identity."
   ∷ candidate-latent-consumer-question
@@ -71,15 +71,15 @@ candidateLatentConsumerQuestion =
     "memory valuation/salience/action-weight/retrieval coordinates"
     "declared behaviour or functional observation"
     "consumer-relative influence code"
-    "held-out consumer adequacy plus intervention/transport receipt"
+    "FactorsThrough observation requested influence coordinate plus held-out/intervention adequacy for the declared consumer"
     candidateOnly
-    "Present influence may change while the remembered event persists; influence is a different consumer from memory identity."
+    "Present influence may change while the remembered event persists; influence is a different latent query from memory identity."
   ∷ candidate-latent-consumer-question
     motorPolicyQuery
     "internal policy / transition / actuation state"
     "executed movement or behavioural action"
     "minimal policy code adequate for a declared future-action consumer"
-    "policy-labelled intervention or same-object latent/behaviour binding"
+    "FactorsThrough observation motorPolicy with policy-labelled intervention or same-object latent/behaviour binding"
     candidateOnly
     "A compact motor-policy latent is a valid target question, but action alone does not establish its identity."
   ∷ candidate-latent-consumer-question
@@ -87,9 +87,9 @@ candidateLatentConsumerQuestion =
     "fine decision state"
     "executed action"
     "action quotient"
-    "already-paid non-factorability witness plus any future refined observer"
+    "existing NonFactorabilityWitness already proves this action observer cannot decode the fine state"
     representationAdequacyPaid
-    "The current repo already proves that identical observed action can hide distinct fine decision states."
+    "The current repo proves that identical observed action can hide distinct fine decision states."
   ∷ []
 
 ------------------------------------------------------------------------
@@ -111,9 +111,16 @@ extinctionLearningPreservesSemanticContent memory =
   Learning.publicSemanticContentPreservedIsTrue (Learning.extinctionReceipt memory)
 
 observedActionDoesNotRecoverFineDecisionState :
-  NF.FactorsThrough Decision.observedAction Decision.fineDecisionState → ⊥
+  Latent.CanExtractLatent Decision.observedAction Decision.fineDecisionState → ⊥
 observedActionDoesNotRecoverFineDecisionState =
-  Decision.actionCannotRecoverFineDecisionState
+  Latent.decisionFineStateNotExtractableFromAction
+
+latentExtractionIsFactorisation :
+  ∀ {State Observation RequestedLatent : Set}
+    (observe : State → Observation)
+    (latent : State → RequestedLatent) →
+  Set₁
+latentExtractionIsFactorisation = Latent.CanExtractLatent
 
 highResolutionImagingIsObservationChannel :
   Brain.highResolutionFMRIIsObservationChannel
@@ -174,8 +181,33 @@ consumerMinimalityDoesNotIdentifyPhysicalLatentDimension :
 consumerMinimalityDoesNotIdentifyPhysicalLatentDimension ()
 
 ------------------------------------------------------------------------
--- Current bounded state.
+-- Current bounded state / missing-fields ledger.
 ------------------------------------------------------------------------
+
+record BrainLatentExtractionMissingFields : Set where
+  constructor brain-latent-extraction-missing-fields
+  field
+    rememberedEventDecoder : Bool
+    memoryInfluenceDecoder : Bool
+    internalisedMotorPolicyDecoder : Bool
+    fineDecisionStateDecoderFromAction : Bool
+    refinedDecisionObserverNeeded : Bool
+    sameObjectLatentObservationBindingNeeded : Bool
+    interventionOrTransportReceiptNeeded : Bool
+    interpretation : String
+
+open BrainLatentExtractionMissingFields public
+
+currentBrainLatentExtractionMissingFields : BrainLatentExtractionMissingFields
+currentBrainLatentExtractionMissingFields = brain-latent-extraction-missing-fields
+  false
+  false
+  false
+  false
+  true
+  true
+  true
+  "Open latent-extraction obligations are query-specific. Action-only fine-decision decoding is ruled out by an existing non-factorability witness; memory identity, memory influence, and motor-policy decoding need their own observation bindings/factorisation receipts rather than inheriting authority from the connectome or MaleCNS compression result."
 
 record BrainCognitionObservationSpineBoundary : Set where
   constructor brain-cognition-observation-spine-boundary
@@ -187,6 +219,10 @@ record BrainCognitionObservationSpineBoundary : Set where
     learningMayChangeInfluenceWithoutSemanticErasure : Bool
     learningMayChangeInfluenceWithoutSemanticErasureIsTrue :
       learningMayChangeInfluenceWithoutSemanticErasure ≡ true
+
+    exactLatentExtractionRequiresFactorisation : Bool
+    exactLatentExtractionRequiresFactorisationIsTrue :
+      exactLatentExtractionRequiresFactorisation ≡ true
 
     actionProjectionNonfactorabilityPaid : Bool
     actionProjectionNonfactorabilityPaidIsTrue :
@@ -256,6 +292,7 @@ canonicalBrainCognitionObservationSpineBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
     false refl
@@ -263,10 +300,13 @@ canonicalBrainCognitionObservationSpineBoundary =
     false refl
     false refl
     false refl
-    "Unified bounded thesis: cognitive state is multi-coordinate/history-dependent; memory content may persist while influence changes; learning changes weighting/transition structure; action and imaging are lossy observations; connectome structure constrains candidate dynamics but does not decode memory, motor policy, trauma, or latent identity. MaleCNS pays one structural-to-functional projection result only. Consumer-relative compression may identify a useful minimal representation for a declared task without identifying a physically minimal brain state."
+    "Unified bounded thesis: cognitive state is multi-coordinate/history-dependent; memory content may persist while influence changes; learning changes weighting/transition structure; action and imaging are lossy observations; exact latent extraction is a consumer-specific factorisation obligation. Connectome structure constrains candidate dynamics but does not decode memory, motor policy, trauma, or latent identity. MaleCNS pays one structural-to-functional projection result only. Consumer-relative compression may identify a useful minimal representation for a declared task without identifying a physically minimal brain state."
 
 authorityBoundary : Authority.AuthorityBooleanPolarityRepair
 authorityBoundary = Authority.canonicalAuthorityBooleanPolarityRepair
+
+latentExtractionFrontier : Latent.LatentExtractionFrontier
+latentExtractionFrontier = Latent.canonicalLatentExtractionFrontier
 
 replicationFrontier : Replication.MagnitudeReplicationBoundary
 replicationFrontier = Replication.canonicalMagnitudeReplicationBoundary
