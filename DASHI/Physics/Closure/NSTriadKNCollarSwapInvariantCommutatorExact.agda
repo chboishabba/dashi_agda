@@ -29,8 +29,10 @@ open import Level using (Level)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNUpperShellCollarRemoteSplitExact as Collar
 
@@ -69,19 +71,19 @@ collarFixedOutputProductRuleIsCommutator :
   (S : Helical.HelicalModeScalars F) →
   (velocity forcing : Z3.FourierMode → C3.Complex3 F) →
   (cutoff : Nat) (output : Z3.FourierMode) →
-  R294.fixedOutputWeightedProductRuleIsCommutator
-    (collarSwapInvariantWeight F shell)
-    S velocity forcing cutoff output
+  R224.foldVector
+    (R294.weightedProductRuleCell
+      (collarSwapInvariantWeight F shell) S velocity forcing)
+    (Output.physicalOutputFiber cutoff output)
   ≡
-  R294.fixedOutputWeightedProductRuleIsCommutator
-    (collarSwapInvariantWeight F shell)
-    S velocity forcing cutoff output
+  R224.foldVector
+    (R294.weightedCommutatorCell
+      (collarSwapInvariantWeight F shell) S velocity forcing)
+    (Output.physicalOutputFiber cutoff output)
 collarFixedOutputProductRuleIsCommutator shell S velocity forcing cutoff output =
-  refl
-
--- The theorem above deliberately exposes the existing R294 equality as the
--- canonical collar equality.  These status coordinates distinguish the exact
--- algebraic specialization from the still-open quantitative producer.
+  R294.fixedOutputWeightedProductRuleIsCommutator
+    (collarSwapInvariantWeight _ shell)
+    S velocity forcing cutoff output
 
 collarWeightSwapInvariantClosed : Bool
 collarWeightSwapInvariantClosed = true
