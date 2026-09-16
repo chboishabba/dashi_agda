@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 import DASHI.Finance.TrumpFamilyTradeSourceQualityExact as Quality
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Exact as Round3
 import DASHI.Finance.TrumpTMTGTrustControlPrimaryExact as Trust
@@ -61,8 +62,7 @@ truthAPILaunchPromotionReady =
 ------------------------------------------------------------------------
 
 truthAPICorroborationWitness :
-  DASHI.Finance.TrumpFamilyTradeSourceAtlasExact.independentCorroborationPaid
-    Independent.truthAPIReutersCorroboration ≡ true
+  Atlas.independentCorroborationPaid Independent.truthAPIReutersCorroboration ≡ true
 truthAPICorroborationWitness = refl
 
 ------------------------------------------------------------------------
