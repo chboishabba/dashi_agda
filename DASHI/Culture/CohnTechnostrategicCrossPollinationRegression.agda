@@ -8,6 +8,7 @@ import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Culture.CohnTechnostrategicDiscourseExact as Cohn
 import DASHI.Culture.CohnTechnostrategicSourceAtlasExact as CohnSources
 import DASHI.Culture.CohnDiscursiveAdmissibilityNaturalisationExact as Admissibility
+import DASHI.Culture.CohnInstitutionalNormReasonablenessEvidenceCrossPollinationExact as LegalBridge
 import DASHI.Culture.IntellectualReceptionAdmissibilityStratumWhatIfExact as Reception
 
 ------------------------------------------------------------------------
@@ -136,8 +137,6 @@ samePresentVocabularyCannotDetermineFutureCone =
 
 ------------------------------------------------------------------------
 -- Feminist subject-position weld.
--- A representational category can make a subject visible while still failing
--- to recover originating subject-position/authority.
 ------------------------------------------------------------------------
 
 representationCannotRecoverOriginatingSubjectPosition :
@@ -145,6 +144,63 @@ representationCannotRecoverOriginatingSubjectPosition :
     Subject.categoryVisibility Subject.subjectPosition → ⊥
 representationCannotRecoverOriginatingSubjectPosition =
   Admissibility.representedCategoryCannotRecoverOriginatingSubjectPosition
+
+------------------------------------------------------------------------
+-- Institutional norm / legal reasonableness / evidence adequacy weld.
+------------------------------------------------------------------------
+
+institutionalNormalityCannotDetermineLegalReasonableness :
+  Intersectional.FactorsThrough
+    LegalBridge.institutionalNormalityProjection
+    LegalBridge.legalReasonablenessProjection → ⊥
+institutionalNormalityCannotDetermineLegalReasonableness =
+  LegalBridge.institutionalNormalityDoesNotDetermineLegalReasonableness
+
+legalReasonablenessCannotDetermineEvidenceAdequacy :
+  Intersectional.FactorsThrough
+    LegalBridge.legalReasonablenessProjection
+    LegalBridge.evidenceAdequacyProjection → ⊥
+legalReasonablenessCannotDetermineEvidenceAdequacy =
+  LegalBridge.legalReasonablenessDoesNotDetermineEvidenceAdequacy
+
+institutionalNormalityCannotDetermineEvidenceAdequacy :
+  Intersectional.FactorsThrough
+    LegalBridge.institutionalNormalityProjection
+    LegalBridge.evidenceAdequacyProjection → ⊥
+institutionalNormalityCannotDetermineEvidenceAdequacy =
+  LegalBridge.institutionalNormalityDoesNotDetermineEvidenceAdequacy
+
+richerLegalEvidenceAuditRecoversAdequacy :
+  Intersectional.FactorsThrough
+    LegalBridge.enrichedLegalEvidenceAudit
+    LegalBridge.evidenceAdequacyProjection
+richerLegalEvidenceAuditRecoversAdequacy =
+  LegalBridge.evidenceAdequacyFactorsThroughEnrichedAudit
+
+declaredStandardCannotRecoverProductionHistory :
+  LegalBridge.ProductionHistoryThroughDeclaredStandard → ⊥
+declaredStandardCannotRecoverProductionHistory =
+  LegalBridge.productionHistoryDoesNotFactorThroughDeclaredStandard
+
+cohnCitationDoesNotCreateLegalAuthority :
+  LegalBridge.cohnCitationCreatesLegalAuthority
+    LegalBridge.canonicalCohnInstitutionalLegalEvidenceBoundary ≡ false
+cohnCitationDoesNotCreateLegalAuthority = refl
+
+discourseAnalysisDoesNotDetermineLegalOutcome :
+  LegalBridge.discourseAnalysisDeterminesLegalOutcome
+    LegalBridge.canonicalCohnInstitutionalLegalEvidenceBoundary ≡ false
+discourseAnalysisDoesNotDetermineLegalOutcome = refl
+
+institutionalConventionDoesNotAutoBecomeLegallyReasonable :
+  LegalBridge.institutionalNormalityImpliesLegalReasonableness
+    LegalBridge.canonicalCohnInstitutionalLegalEvidenceBoundary ≡ false
+institutionalConventionDoesNotAutoBecomeLegallyReasonable = refl
+
+legalReasonablenessDoesNotAutoBecomeUniversalAdequacy :
+  LegalBridge.legalReasonablenessImpliesUniversalEvidenceAdequacy
+    LegalBridge.canonicalCohnInstitutionalLegalEvidenceBoundary ≡ false
+legalReasonablenessDoesNotAutoBecomeUniversalAdequacy = refl
 
 secondCohnSourceDoesNotCreateAuthority :
   Source.citationCreatesAuthority CohnSources.cohnWarsWimpsWomen ≡ false
