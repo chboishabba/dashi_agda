@@ -234,9 +234,9 @@ data PrincipleCreatesSustainabilityEvidence : Set where
 data PrincipleCreatesUniversalPrescription : Set where
 data CoarseProxyDeterminesContextAdequateIntervention : Set where
 
-a crossPaperPrincipleIsNotAliceEmpiricalFinding :
+crossPaperPrincipleIsNotAliceEmpiricalFinding :
   CrossPaperPrincipleIsAliceEmpiricalFinding → ⊥
-a crossPaperPrincipleIsNotAliceEmpiricalFinding ()
+crossPaperPrincipleIsNotAliceEmpiricalFinding ()
 
 principleDoesNotCreateSustainabilityEvidence :
   PrincipleCreatesSustainabilityEvidence → ⊥
