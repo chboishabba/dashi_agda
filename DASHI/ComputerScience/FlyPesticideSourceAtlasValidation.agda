@@ -2,11 +2,9 @@ module DASHI.ComputerScience.FlyPesticideSourceAtlasValidation where
 
 import DASHI.ComputerScience.FlyPesticideSourceAtlasExact as Atlas
 
--- Focused source/attribution contract. The production owner is required to
--- expose literature roles spanning neural/cognitive, reproductive,
--- genotoxic, mixture/environmental, resistance/behaviour, and longitudinal
--- chlorpyrifos observations while retaining publication and organism identities
--- separately.
+-- Focused source/attribution contract for the shared source atlas. Longitudinal
+-- chlorpyrifos acquisition is validated by its own owner so its generation/time
+-- role cannot be flattened into a generic endpoint-family flag.
 
 sourceAtlas : Atlas.FlyPesticideSourceAtlas
 sourceAtlas = Atlas.canonicalFlyPesticideSourceAtlas
@@ -16,9 +14,6 @@ organismIdentityPaid = Atlas.organismIdentityPaid sourceAtlas
 
 publicationIdentitiesRetained : Bool
 publicationIdentitiesRetained = Atlas.publicationIdentitiesRetained sourceAtlas
-
-chlorpyrifosMultigenerationFamilyPaid : Bool
-chlorpyrifosMultigenerationFamilyPaid = Atlas.chlorpyrifosMultigenerationFamilyPaid sourceAtlas
 
 articleQidsMayRemainUnresolved : Bool
 articleQidsMayRemainUnresolved = Atlas.articleQidsMayRemainUnresolved sourceAtlas
