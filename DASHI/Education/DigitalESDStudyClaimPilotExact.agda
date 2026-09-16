@@ -5,7 +5,10 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
 import DASHI.Education.DigitalESDCurrentScholarlySnowballExact as Sources
+import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
+import DASHI.Education.DigitalESDSourceAttributionCorrectionExact as Correction
 import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
+import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 
 ------------------------------------------------------------------------
 -- PILOT EXTRACTION PROFILES
@@ -159,8 +162,87 @@ boehmePilotProfile = Ceiling.study-claim-profile
   "supports prior-art positioning for sustainable digitality/digital sustainability as coupled transformation and constrains novelty; does not establish empirical intervention effects, participant authority, infrastructure lifecycle measurements or the current review's evidence-payment architecture"
   "conceptual source; no empirical sample, effect estimate or causal identification; useful as antecedent/framework evidence only"
 
+descampsPilotProfile : Ceiling.StudyClaimProfile
+descampsPilotProfile = Ceiling.study-claim-profile
+  "descamps-2025-digital-sobriety-scenarios"
+  Acquisition.descampsDigitalSobrietySource
+  "candidate experimental / bounded educational-contrast evidence"
+  "10.1186/s41239-025-00569-3; Methods; Sample; Results Tables 2-6"
+  "pre/post pedagogical intervention with students randomly divided between individual-action and collective-action scenario groups; non-parametric group contrasts reported"
+  (Ceiling.sourceReportedDesignUnmapped
+    "randomly divided two-scenario pre/post educational intervention"
+    "retain the source-reported design without promoting it to a stronger generic randomized-controlled-trial class: the source reports random division, substantial incomplete pre/post data, and no separate untreated control group")
+  "first-year Psychological and Educational Sciences undergraduates at the University of Mons, Belgium"
+  (Ceiling.explicitlyReportedNat 164 "students participating in the learning session; Sample section")
+  (Ceiling.explicitlyReportedNat 107 "students completing both pre-test and post-test and used for analysis")
+  "students were reported as randomly divided at scenario allocation; analytic groups were 57 and 50"
+  "individual-action charter scenario versus collective-action charter scenario; both groups received the broader digital-sobriety learning intervention"
+  "EMSN pre/post maturity and collective-efficacy items; EMCE motivation scale; source describes EMSN as psychometrically validated"
+  "164 participated but only 107 completed both pre and post measures; missingness/attrition is therefore material and is not erased by the group randomization statement"
+  "random allocation addresses some between-group confounding, but complete-case analysis and one-institution context remain live limitations; no causal promotion beyond the bounded contrasts in this pilot"
+  "intervention sequence and scenario differences are described; no independent intervention-fidelity estimate is reported"
+  "multiple outcomes and motivation dimensions were tested; this pilot does not manufacture a multiplicity-adjustment receipt where none is reported"
+  (Ceiling.reported-surface Ceiling.explicitlyReported
+    "relative maturity gains 27.63% and 25.85%; these are normalized within-group gains, not a standardized between-group effect size"
+    "Results, digital sobriety maturity"
+    "Mann-Whitney group contrast W=1531, p=0.051; do not relabel relative gain as standardized effect size")
+  (Ceiling.reported-surface Ceiling.explicitlyReported
+    "reported Mann-Whitney p-values include p=0.051 for maturity, p=0.038 for amotivation, p=0.015 and p<0.001 for collective-efficacy contrasts; no educational-effect confidence interval is reported"
+    "Results Tables 2-6"
+    "p-values provide contrast evidence under the reported analysis; they do not create effect-size magnitude, confidence intervals, mechanism, transport or universal pedagogy")
+  "single learning intervention/session with immediate pre/post assessment; no long-term follow-up"
+  "one Belgian public university, first-year cohort, predominantly female analytic sample; no population-transport receipt"
+  (Ceiling.reportedEpistemicRole Design.informant
+    "students supplied self-report outcome data and participated in learning activities; this does not create governance authority")
+  (Ceiling.implicationConeClaim Cone.derivesBoundedContrast)
+  "supports bounded within-study scenario contrasts and pre/post descriptive gains; this pilot does not promote the source's stronger causal rhetoric to universal intervention effectiveness"
+  "57 of 164 session participants lack complete pre/post data; two active scenarios but no untreated control; self-report outcomes; multiple tested outcomes; no reported educational-effect CI or standardized between-group effect size; short horizon and single institution"
+
+pinzonePilotProfile : Ceiling.StudyClaimProfile
+pinzonePilotProfile = Ceiling.study-claim-profile
+  "pinzone-2026-education-scenario-lca"
+  Correction.pinzoneEducationLCACorrectedSource
+  "candidate model-based lifecycle / environmental-impact evidence"
+  "10.1007/s11367-026-02656-7; Methods 2.1-2.3; Results 3.1-3.4; uncertainty analysis"
+  "comparative life-cycle assessment of face-to-face, hybrid and online higher-education scenarios using ReCiPe 2016 Midpoint (H), sensitivity analysis and Monte Carlo uncertainty"
+  (Ceiling.sourceReportedDesignUnmapped
+    "comparative education-scenario life-cycle assessment"
+    "this is a model/inventory study rather than a participant intervention; forcing it into an experimental participant design would destroy the evidence role")
+  "modelled educational scenarios at an Italian university; functional unit = 25 hours of education per student, including 10 lecture hours and 15 independent-study hours; staff preparation/support allocations are also modelled"
+  (Ceiling.natNotReported "no participant enrolment n is the estimand carrier for the LCA; one-student functional unit is not a participant sample size")
+  (Ceiling.natNotReported "no empirical participant analysis n applies to the scenario LCA")
+  "not applicable: scenario shares are model inputs rather than participant treatment allocation"
+  "face-to-face, multiple hybrid configurations, and fully online synchronous/asynchronous configurations are modelled against the same functional-unit framework"
+  "ISO-style LCA inventory/model architecture with ReCiPe 2016 Midpoint (H); parameter collection includes estimates from 10 lecturers/support staff and an average-course-size allocation of 130 students, which are model inputs rather than an analysis sample"
+  "not applicable as participant attrition; uncertainty belongs to inventory/model parameters"
+  "scenario conclusions depend on commuting, attendance-share, ICT, energy and other modelling assumptions; sensitivity analysis explicitly tests several of these"
+  "model implementation is reported through SimaPro scenario/parameter functions and the defined functional unit; no empirical intervention-fidelity concept applies"
+  "multiple impact categories and scenario/sensitivity comparisons are reported; this profile retains them as model outputs rather than inferential participant tests"
+  (Ceiling.reported-surface Ceiling.explicitlyReported
+    "global-warming examples: face-to-face 17.2 kg CO2eq per functional unit; hybrid variants about 14.4-14.5 kg; fully online synchronous 6.0 kg and asynchronous 5.88 kg CO2eq"
+    "Results 3.1, Table 4 and scenario descriptions"
+    "these are scenario-model outputs for the declared functional unit, not measured emissions for every university or digital-ESD deployment")
+  (Ceiling.reported-surface Ceiling.explicitlyReported
+    "Monte Carlo uncertainty analysis reports 95% intervals; face-to-face key categories have CV about 2%, while hybrid key indicators are substantially more variable (reported around 31-36% in the article discussion of uncertainty)"
+    "Results 3.4, Figs 7-9 and Annex uncertainty analysis"
+    "95% model uncertainty intervals quantify variability under specified parameter distributions; they do not create participant sampling CIs or same-object deployment measurements")
+  "scenario model represents the declared course functional unit rather than longitudinal educational outcomes"
+  "Politecnico di Milano / Italian higher-education scenario assumptions, transport mix, energy mix, course structure and modelling boundaries limit direct transport; disposal was excluded for lack of sufficient data"
+  (Ceiling.epistemicRoleNotApplicable
+    "the LCA has no direct participant epistemic-role coordinate at model level; surveyed lecturer/support-staff inputs do not make the model a participant-outcome study")
+  Ceiling.modelBasedEnvironmentalImpactClaim
+  "supports bounded comparative environmental-impact claims for the declared functional unit and model assumptions, including sensitivity/uncertainty structure; does not establish measured footprint for another deployment or pedagogical effectiveness"
+  "model-based scenario evidence; disposal excluded; results depend on inventory choices and uncertain attendance/transport/ICT parameters; model confidence intervals do not create external-validity or same-object measurement receipts"
+
 pilotProfiles : List Ceiling.StudyClaimProfile
-pilotProfiles = ardilaPilotProfile ∷ gousetiPilotProfile ∷ martinezPilotProfile ∷ boehmePilotProfile ∷ []
+pilotProfiles =
+  ardilaPilotProfile
+  ∷ gousetiPilotProfile
+  ∷ martinezPilotProfile
+  ∷ boehmePilotProfile
+  ∷ descampsPilotProfile
+  ∷ pinzonePilotProfile
+  ∷ []
 
 pilotStatus : String
 pilotStatus = "method-validation pilot only: source acquisition and profile construction do not create final manuscript inclusion"
