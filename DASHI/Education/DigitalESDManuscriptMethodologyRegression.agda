@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDManuscriptMethodologyExact as Method
 import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact as Derivation
+import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
 import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact as Paper
 import DASHI.Education.DigitalESDStructuredSearchExact as Search
 
@@ -28,6 +29,17 @@ preSearchFrameworkNotReviewResultRegression :
     Method.principleDerivationBoundary
   ≡ false
 preSearchFrameworkNotReviewResultRegression = refl
+
+methodRetainsExternalityIncidenceRegression :
+  Method.externalityIncidenceBoundary
+  ≡ Incidence.canonicalExternalityIncidenceBoundary
+methodRetainsExternalityIncidenceRegression = refl
+
+methodRequiresExternalityIncidenceAuditRegression :
+  Method.MethodologyBoundary.externalityIncidenceAuditRetained
+    Method.canonicalMethodologyBoundary
+  ≡ true
+methodRequiresExternalityIncidenceAuditRegression = refl
 
 searchClosureDoesNotEqualSynthesisRegression : Method.SearchClosureEqualsEvidenceSynthesis → ⊥
 searchClosureDoesNotEqualSynthesisRegression = Method.searchClosureDoesNotEqualEvidenceSynthesis
