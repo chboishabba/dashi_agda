@@ -20,8 +20,8 @@ module DASHI.Physics.YangMills.BalabanCMP116ParametricDistanceUpperHessianRound3
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (subst)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Foundations.FinitePolydiscCauchyAxioms as Cauchy
@@ -75,8 +75,6 @@ selectedDistanceNonnegativeFromParametric dataSet s =
     (R370.boundarySubstitutionDistanceNonnegativeFromParametric
       (parametric dataSet)
       (jointBoundaryToParametricBoundary dataSet s))
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 selectedDistanceBelowParametricUpper :
   (dataSet : CMP116ParametricDistanceUpperHessianData) →
@@ -91,8 +89,6 @@ selectedDistanceBelowParametricUpper dataSet s =
     (R370.boundarySubstitutionBelowSourceDistanceFromParametric
       (parametric dataSet)
       (jointBoundaryToParametricBoundary dataSet s))
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
 
 asRound379 :
   CMP116ParametricDistanceUpperHessianData →
@@ -129,7 +125,7 @@ selectedCoefficientDifferenceFromParametricUpper :
         (R373.leftVariation (joint dataSet))
         (R373.rightVariation (joint dataSet))))
   ≤ℝ
-  R373.selectedLipschitz (joint dataSet) R379.*ℝ
+  R373.selectedLipschitz (joint dataSet) *ℝ
     R370.sourceSubstitutionDistance (parametric dataSet)
 selectedCoefficientDifferenceFromParametricUpper dataSet =
   R379.selectedCoefficientDifferenceBelowDistanceUpper (asRound379 dataSet)
@@ -185,3 +181,4 @@ clayPromotion : Bool
 clayPromotion = false
 
 clayPromotionIsFalse : clayPromotion ≡ false
+clayPromotionIsFalse = refl
