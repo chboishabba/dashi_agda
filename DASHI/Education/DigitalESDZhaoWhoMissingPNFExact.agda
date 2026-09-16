@@ -3,10 +3,12 @@ module DASHI.Education.DigitalESDZhaoWhoMissingPNFExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Core.IntersectionalNonFactorability as Factors
 import DASHI.Education.DigitalESDDisabilityIntersectionalityAuditExact as Disability
 import DASHI.Education.DigitalESDStudyIntersectionalAbsenceAuditExact as Absence
@@ -18,14 +20,17 @@ import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 -- ZHAO / COX / CHEN: WHO IS NOT AT THE TABLE?
 --
 -- This is a source-specific refinement of the already-canonical disability PNF
--- audit.  It does not create a new disability ontology.  It retains the same
--- attributed DOI object and asks what the 124-response analytic carrier can and
--- cannot say about the much larger registered-disabled-student frame and about
+-- audit. It does not create a new disability ontology. It retains the exact
+-- attributed DOI source and asks what the 124-response analytic carrier can and
+-- cannot say about the larger registered-disabled-student frame and about
 -- students whose disability or access needs are not visible to that frame.
 ------------------------------------------------------------------------
 
-source : Disability.DisabilityDigitalESDBoundary
-source = Disability.canonicalDisabilityDigitalESDBoundary
+sourceObject : Attr.AttributedSource
+sourceObject = Disability.zhaoCoxChenGenAISource
+
+disabilityBoundary : Disability.DisabilityDigitalESDBoundary
+disabilityBoundary = Disability.canonicalDisabilityDigitalESDBoundary
 
 registeredDisabledStudentCount : Nat
 registeredDisabledStudentCount = 7188
@@ -96,7 +101,7 @@ absenceQuestions = Absence.absenceAuditQuestions
 ------------------------------------------------------------------------
 -- Constructive source-shaped collision: the same response count can coexist
 -- with different representation adequacy depending on access/disclosure and
--- coverage.  Therefore n=124 by itself cannot pay the 'who is missing?' audit.
+-- coverage. Therefore n=124 by itself cannot pay the 'who is missing?' audit.
 ------------------------------------------------------------------------
 
 data ZhaoRepresentationWorld : Set where
@@ -138,9 +143,9 @@ data ResponseFractionCreatesPopulationPrevalence : Set where
 data NonresponseCreatesKnownExclusionCause : Set where
 data DisclosurePatternCreatesDiagnosis : Set where
 
-a disabilityRegistrationFrameDoesNotEqualAllDisabledStudents :
+disabilityRegistrationFrameDoesNotEqualAllDisabledStudents :
   RegisteredDisabilityFrameEqualsAllDisabledStudents → ⊥
-a disabilityRegistrationFrameDoesNotEqualAllDisabledStudents ()
+disabilityRegistrationFrameDoesNotEqualAllDisabledStudents ()
 
 responseFractionDoesNotCreatePopulationPrevalence :
   ResponseFractionCreatesPopulationPrevalence → ⊥
