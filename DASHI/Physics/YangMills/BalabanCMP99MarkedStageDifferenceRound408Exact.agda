@@ -51,6 +51,17 @@ record CMP99MarkedR407StageDifference (Operator Bound : Set) : Set₁ where
     telescopeAlgebra : Marked.MarkedOperatorNormAlgebra Operator Bound
     resolventData : Resolvent.ResolventIdentityData Operator Bound
 
+    -- R407 ordinary estimates are stated in the Gate4 algebra of the BEFORE
+    -- pipeline; R406/Round72 uses the telescope algebra.  These two fields pay
+    -- the norm/order representation seam once for every stage.
+    gate4NormIsTelescopeNorm : ∀ operator →
+      Gate4.operatorNorm (Gate4.algebra (R407.before ordinaryPair)) operator
+      ≡ Marked.operatorNorm telescopeAlgebra operator
+
+    gate4OrderToTelescope : ∀ {lower upper} →
+      Gate4.LessEqual (Gate4.algebra (R407.before ordinaryPair)) lower upper →
+      Marked.LessEqual telescopeAlgebra lower upper
+
     markedStageMajorant : Bound
     markedStageMajorantIsResolventBudget :
       markedStageMajorant ≡ Resolvent.differenceBudget resolventData
@@ -85,6 +96,47 @@ record CMP99MarkedR407StageDifference (Operator Bound : Set) : Set₁ where
       Marked.LessEqual telescopeAlgebra lower upper
 
 open CMP99MarkedR407StageDifference public
+
+------------------------------------------------------------------------
+-- R407 ordinary factor bounds transported into the R406/Round72 algebra.
+------------------------------------------------------------------------
+
+beforeStageBelowTelescopeOrdinaryMajorant :
+  ∀ {Operator Bound}
+    (dataSet : CMP99MarkedR407StageDifference Operator Bound) stage →
+  Marked.LessEqual (telescopeAlgebra dataSet)
+    (Marked.operatorNorm (telescopeAlgebra dataSet)
+      (R407.stageOperator
+        (R407.before (ordinaryPair dataSet)) stage))
+    (R407.ordinaryStageMajorant (ordinaryPair dataSet) stage)
+beforeStageBelowTelescopeOrdinaryMajorant dataSet stage =
+  subst
+    (λ lower →
+      Marked.LessEqual (telescopeAlgebra dataSet) lower
+        (R407.ordinaryStageMajorant (ordinaryPair dataSet) stage))
+    (gate4NormIsTelescopeNorm dataSet
+      (R407.stageOperator (R407.before (ordinaryPair dataSet)) stage))
+    (gate4OrderToTelescope dataSet
+      (R407.beforeStageBelowCommonMajorant (ordinaryPair dataSet) stage))
+
+afterStageBelowTelescopeOrdinaryMajorant :
+  ∀ {Operator Bound}
+    (dataSet : CMP99MarkedR407StageDifference Operator Bound) stage →
+  Marked.LessEqual (telescopeAlgebra dataSet)
+    (Marked.operatorNorm (telescopeAlgebra dataSet)
+      (R407.stageOperator
+        (R407.after (ordinaryPair dataSet)) stage))
+    (R407.ordinaryStageMajorant (ordinaryPair dataSet) stage)
+afterStageBelowTelescopeOrdinaryMajorant dataSet stage =
+  subst
+    (λ lower →
+      Marked.LessEqual (telescopeAlgebra dataSet) lower
+        (R407.ordinaryStageMajorant (ordinaryPair dataSet) stage))
+    (gate4NormIsTelescopeNorm dataSet
+      (R407.stageOperator (R407.after (ordinaryPair dataSet)) stage))
+    (gate4OrderToTelescope dataSet
+      (R407.afterStageBelowCommonMajorantOnBeforeAlgebra
+        (ordinaryPair dataSet) stage))
 
 ------------------------------------------------------------------------
 -- The marked changed-stage inequality is compiler output.
@@ -201,6 +253,13 @@ round408ChangedStageMarkedInequalityIsCompilerOutput = true
 round408ChangedStageMarkedInequalityIsCompilerOutputIsTrue :
   round408ChangedStageMarkedInequalityIsCompilerOutput ≡ true
 round408ChangedStageMarkedInequalityIsCompilerOutputIsTrue = refl
+
+round408OrdinaryGate4ToTelescopeTransportWritten : Bool
+round408OrdinaryGate4ToTelescopeTransportWritten = true
+
+round408OrdinaryGate4ToTelescopeTransportWrittenIsTrue :
+  round408OrdinaryGate4ToTelescopeTransportWritten ≡ true
+round408OrdinaryGate4ToTelescopeTransportWrittenIsTrue = refl
 
 round408OpaqueMarkedStageInequalityStillPrimitive : Bool
 round408OpaqueMarkedStageInequalityStillPrimitive = false
