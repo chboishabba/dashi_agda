@@ -13,7 +13,12 @@ regressionFiniteCenteringIdentity =
 regressionPhysicalFixedOutputAttachment :
   S.fixedOutputCovariancePairDifferenceAttachmentClosed ≡ true
 regressionPhysicalFixedOutputAttachment =
-  S.fixedOutputCovariancePairDifferenceAttachmentClosedIsTrue
+  S.fixedOutputWorkDifferenceVectorBridgeClosed ≡ true
+
+regressionWorkDifferenceVectorBridge :
+  S.fixedOutputWorkDifferenceVectorBridgeClosed ≡ true
+regressionWorkDifferenceVectorBridge =
+  S.fixedOutputWorkDifferenceVectorBridgeClosedIsTrue
 
 regressionQuantitativePairDifferencePaymentStillOpen :
   S.quantitativePairDifferencePaymentClosed ≡ false
