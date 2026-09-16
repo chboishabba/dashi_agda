@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.RequirementProducerSchedulerExact as CoreScheduler
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
 import DASHI.Education.DigitalESDSameObjectAcquisitionSchedulerExact as Scheduler
@@ -79,3 +80,30 @@ schedulerForbidsSkippedDependencyRegression :
     Scheduler.canonicalSameObjectAcquisitionSchedulerBoundary
   ≡ false
 schedulerForbidsSkippedDependencyRegression = refl
+
+------------------------------------------------------------------------
+-- The domain adapter must reuse the repository's canonical requirement ->
+-- missing-coordinate -> producer scheduler rather than invent another planner.
+------------------------------------------------------------------------
+
+canonicalSchedulerReuseRegression : CoreScheduler.RequirementSystem
+canonicalSchedulerReuseRegression =
+  Scheduler.digitalESDAcquisitionRequirementSystem
+
+lifecycleInventoryMissingRegression :
+  CoreScheduler.MissingFor
+    Scheduler.digitalESDAcquisitionRequirementSystem
+    Scheduler.digitalESDResearchDecision
+    Scheduler.sameObjectInterventionLCI
+lifecycleInventoryMissingRegression = refl , refl
+
+canonicalScheduledLCIProducerRegression :
+  CoreScheduler.scheduledProducer Scheduler.lifecycleInventoryMissingReceipt
+  ≡ Scheduler.interventionLCIProducer
+canonicalScheduledLCIProducerRegression = refl
+
+canonicalSchedulerBoundaryRegression :
+  CoreScheduler.RequirementProducerSchedulerBoundary.producerIdentityAloneClosesRequirement
+    CoreScheduler.canonicalRequirementProducerSchedulerBoundary
+  ≡ false
+canonicalSchedulerBoundaryRegression = refl
