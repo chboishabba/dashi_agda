@@ -173,14 +173,14 @@ generatorAnticommutes a32 = refl
 bladeCount : Nat
 bladeCount = 16
 
-record ConcreteCl31Basis : Set where
+record ConcreteCl31Basis : Set₁ where
   field
     Basis : Set
+
     basisCount : Nat
-    GeneratorCarrier : Set
-    generatorBlade : GeneratorCarrier → Basis
-    generatorMetric : GeneratorCarrier → Sign
-    leftGeneratorMultiply : GeneratorCarrier → Basis → SignedBlade
+    generatorBlade : Generator → Basis
+    generatorMetric : Generator → Sign
+    leftGeneratorMultiply : Generator → Basis → SignedBlade
     squaresToMetric :
       ∀ g →
       leftGeneratorMultiply g (generatorBlade g)
@@ -198,13 +198,13 @@ canonicalConcreteCl31Basis =
   record
     { Basis = Blade
     ; basisCount = bladeCount
-    ; GeneratorCarrier = Generator
     ; generatorBlade = bladeOf
     ; generatorMetric = metricSign
     ; leftGeneratorMultiply = genMul
     ; squaresToMetric = generatorSquare
     ; distinctGeneratorsAnticommute = generatorAnticommutes
     }
+
 
 ------------------------------------------------------------------------
 -- Honest next boundary.

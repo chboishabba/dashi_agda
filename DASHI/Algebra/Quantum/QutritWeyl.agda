@@ -50,7 +50,7 @@ ZPhase ket2 = omegaSquared
 
 Z³PhaseIsIdentity :
   (q : QutritBasis) →
-  phaseMul (ZPhase q) (phaseMul (ZPhase q) (ZPhase q)) ≡ one
+  phaseMul (phase (Z q)) (phaseMul (phase (Z q)) (phase (Z q))) ≡ one
 Z³PhaseIsIdentity ket0 = refl
 Z³PhaseIsIdentity ket1 = refl
 Z³PhaseIsIdentity ket2 = refl

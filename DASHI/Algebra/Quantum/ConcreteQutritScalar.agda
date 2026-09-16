@@ -9,11 +9,11 @@ open import DASHI.Algebra.Quantum.QutritAmplitude
 record ComplexPairStarSemiringLaws
   (R : ConstructedOrderedCompleteReal) : Set₁ where
   field
-    addZeroLeftC : ∀ z → _+C_ zeroC z ≡ z
-    addZeroRightC : ∀ z → _+C_ z zeroC ≡ z
-    mulOneLeftC : ∀ z → _*C_ oneC z ≡ z
-    mulOneRightC : ∀ z → _*C_ z oneC ≡ z
-    conjugateInvolutiveLaw : ∀ z → conjugateC (conjugateC z) ≡ z
+    addZeroLeftC : ∀ (z : ComplexPair R) → _+C_ (zeroC {R}) z ≡ z
+    addZeroRightC : ∀ (z : ComplexPair R) → _+C_ z (zeroC {R}) ≡ z
+    mulOneLeftC : ∀ (z : ComplexPair R) → _*C_ (oneC {R}) z ≡ z
+    mulOneRightC : ∀ (z : ComplexPair R) → _*C_ z (oneC {R}) ≡ z
+    conjugateInvolutiveLaw : ∀ (z : ComplexPair R) → conjugateC (conjugateC z) ≡ z
 
 open ComplexPairStarSemiringLaws public
 
@@ -24,18 +24,19 @@ complexPairStarSemiring :
 complexPairStarSemiring {R} laws =
   record
     { Scalar = ComplexPair R
-    ; zeroS = zeroC
-    ; oneS = oneC
-    ; _+S_ = _+C_
-    ; _*S_ = _*C_
-    ; conjugate = conjugateC
-    ; normSq = λ z → complex (normSqC z) (zero R)
+    ; zeroS = zeroC {R}
+    ; oneS = oneC {R}
+    ; _+S_ = _+C_ {R}
+    ; _*S_ = _*C_ {R}
+    ; conjugate = conjugateC {R}
+    ; normSq = λ (z : ComplexPair R) → complex (normSqC {R} z) (zero R)
     ; +-identityLeft = addZeroLeftC laws
     ; +-identityRight = addZeroRightC laws
     ; *-identityLeft = mulOneLeftC laws
     ; *-identityRight = mulOneRightC laws
     ; conjugateInvolutive = conjugateInvolutiveLaw laws
     }
+
 
 record ConcreteQutritScalarPackage : Set₁ where
   field

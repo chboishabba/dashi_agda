@@ -53,11 +53,12 @@ endpointCannotRecoverCrossingProvenance witness =
       (sameEndpoint witness)
       (differentProvenance witness))
 
-record ActionCrossingBoundary : Set where
+record ActionCrossingBoundary : Set₁ where
   constructor action-crossing-boundary
   field
     actionOrderCanBeFirstClass : Set
     endpointMayForgetPath : Set
+
 
 -- Empty promotion types make the nonclaims theorem-visible.
 data EveryActionLiterallyTopologicalBraid : Set where

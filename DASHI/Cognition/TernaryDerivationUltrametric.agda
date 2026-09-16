@@ -100,12 +100,12 @@ lcpLen-ultratriangle (x ∷ xs) (y ∷ ys) (z ∷ zs) with x | y | z
 ... | BT.zero | BT.pos  | _ rewrite ⊓-zeroˡ (lcpLen (y ∷ ys) (z ∷ zs)) = z≤n
 ... | BT.pos  | BT.neg  | _ rewrite ⊓-zeroˡ (lcpLen (y ∷ ys) (z ∷ zs)) = z≤n
 ... | BT.pos  | BT.zero | _ rewrite ⊓-zeroˡ (lcpLen (y ∷ ys) (z ∷ zs)) = z≤n
-... | BT.neg  | BT.neg  | BT.zero rewrite ⊓-zeroʳ (lcpLen (x ∷ xs) (y ∷ ys)) = z≤n
-... | BT.neg  | BT.neg  | BT.pos rewrite ⊓-zeroʳ (lcpLen (x ∷ xs) (y ∷ ys)) = z≤n
-... | BT.zero | BT.zero | BT.neg rewrite ⊓-zeroʳ (lcpLen (x ∷ xs) (y ∷ ys)) = z≤n
-... | BT.zero | BT.zero | BT.pos rewrite ⊓-zeroʳ (lcpLen (x ∷ xs) (y ∷ ys)) = z≤n
-... | BT.pos  | BT.pos  | BT.neg rewrite ⊓-zeroʳ (lcpLen (x ∷ xs) (y ∷ ys)) = z≤n
-... | BT.pos  | BT.pos  | BT.zero rewrite ⊓-zeroʳ (lcpLen (x ∷ xs) (y ∷ ys)) = z≤n
+... | BT.neg  | BT.neg  | BT.zero rewrite ⊓-zeroʳ (suc (lcpLen xs ys)) = z≤n
+... | BT.neg  | BT.neg  | BT.pos rewrite ⊓-zeroʳ (suc (lcpLen xs ys)) = z≤n
+... | BT.zero | BT.zero | BT.neg rewrite ⊓-zeroʳ (suc (lcpLen xs ys)) = z≤n
+... | BT.zero | BT.zero | BT.pos rewrite ⊓-zeroʳ (suc (lcpLen xs ys)) = z≤n
+... | BT.pos  | BT.pos  | BT.neg rewrite ⊓-zeroʳ (suc (lcpLen xs ys)) = z≤n
+... | BT.pos  | BT.pos  | BT.zero rewrite ⊓-zeroʳ (suc (lcpLen xs ys)) = z≤n
 
 ultraTrit :
   ∀ {n} (x y z : Vec BT.Trit n) →
