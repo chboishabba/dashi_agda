@@ -126,6 +126,29 @@ invitationEvidenceRegression = Publication.invitationDoesNotPromoteEvidence
 genAIAuthorRegression : Publication.GenAIPromotesAuthor → ⊥
 genAIAuthorRegression = Publication.genAIDoesNotPromoteAuthor
 
+conflictedGuestEditorHandlingRegression :
+  Publication.ConflictedGuestEditorMayHandleManuscript → ⊥
+conflictedGuestEditorHandlingRegression =
+  Publication.conflictedGuestEditorCannotHandleManuscript
+
+reviewerGenAIRegression : Publication.GenAIProducesSubstantiveReview → ⊥
+reviewerGenAIRegression = Publication.genAICannotProduceSubstantiveReview
+
+editorGenAIDecisionRegression : Publication.GenAIMakesEditorialDecision → ⊥
+editorGenAIDecisionRegression = Publication.genAICannotMakeEditorialDecision
+
+substantiveGenAIDisclosureRegression :
+  Publication.MDPISpecialIssueResearchGovernance.substantiveGenAIUseRequiresDisclosure
+    Publication.canonicalMDPISpecialIssueResearchGovernance
+  ≡ true
+substantiveGenAIDisclosureRegression = refl
+
+humanAccountabilityRegression :
+  Publication.MDPISpecialIssueResearchGovernance.humanAuthorsRetainAccountability
+    Publication.canonicalMDPISpecialIssueResearchGovernance
+  ≡ true
+humanAccountabilityRegression = refl
+
 coarseConjunctionBraidRegression :
   Intersection.FactorsThrough Braid.coarseAgendaObservation Braid.braidAdequacy → ⊥
 coarseConjunctionBraidRegression =
@@ -167,7 +190,7 @@ traumaGeneralisationRegression :
 traumaGeneralisationRegression = refl
 
 patternMindCandidateOnlyRegression :
-  PatternMind.bridgeCandidateOnly
+  PatternMind.registryCandidateOnly
     (Braid.DigitalESDReciprocalBraid.patternMindBoundary
       Braid.canonicalDigitalESDReciprocalBraid)
   ≡ true
