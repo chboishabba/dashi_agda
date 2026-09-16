@@ -54,6 +54,11 @@ d1bOrderedKernelCoordinateTrackedIsTrue :
 d1bOrderedKernelCoordinateTrackedIsTrue =
   Bidi.d1bOrderedKernelCoordinateTrackedIsTrue
 
+d1b2CoherentCovarianceCoordinateTrackedIsTrue :
+  Bidi.d1b2CoherentCovarianceCoordinateTracked ≡ true
+d1b2CoherentCovarianceCoordinateTrackedIsTrue =
+  Bidi.d1b2CoherentCovarianceCoordinateTrackedIsTrue
+
 wholeSpaceTransportObservedIsFalse :
   Bidi.wholeSpaceTransportObserved ≡ false
 wholeSpaceTransportObservedIsFalse =

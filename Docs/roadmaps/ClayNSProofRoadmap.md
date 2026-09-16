@@ -15,7 +15,9 @@ below.  The live control plane has narrowed B to:
 
 ```text
 S2b2d1a damped-tangent residual identity                  source-written
-S2b2d1b signed coherent covariance / ordered-kernel budget open primary
+S2b2d1b0 coherent-work scalar split                   source-written
+S2b2d1b1 fixed-output endpoint compiler               conditional source
+S2b2d1b2 quantitative signed coherent-covariance pay  open primary
 S2b2d2 cutoff-uniform sum of fixed-output budgets          after d1b
 ```
 
