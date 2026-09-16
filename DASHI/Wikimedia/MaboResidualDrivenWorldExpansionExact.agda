@@ -27,7 +27,7 @@ slrBranch : String
 slrBranch = "agent/mabo-context-federation-v1"
 
 slrWorldExpansionSourceHead : String
-slrWorldExpansionSourceHead = "f2e851e8b9872db93a16b9ea4b3e29606ab5def8"
+slrWorldExpansionSourceHead = "b8a62b0f92f9d791414111a2c3b899e8536f241d"
 
 targetNovelObjects : Nat
 targetNovelObjects = 100
