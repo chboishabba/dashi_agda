@@ -301,10 +301,7 @@ bondEdgeEnergy block =
   + (edgeEnergy (component2 block)
   + edgeEnergy (component3 block)))
 
-postulate twoDistributesFour :
-  ∀ a b c d →
-  twoℚ * (a + (b + (c + d)))
-  ≡ twoℚ * a + (twoℚ * b + (twoℚ * c + twoℚ * d))
+postulate twoDistributesFour : ∀ a b c d → twoℚ * (a + (b + (c + d))) ≡ twoℚ * a + (twoℚ * b + (twoℚ * c + twoℚ * d))
 
 fourComponentBoolean4BlockPoincare :
   ∀ block →
@@ -348,9 +345,7 @@ familyEdgeEnergy [] = 0ℚ
 familyEdgeEnergy (block ∷ blocks) =
   bondEdgeEnergy block + familyEdgeEnergy blocks
 
-postulate twoDistributesPlus :
-  ∀ a b →
-  twoℚ * (a + b) ≡ twoℚ * a + twoℚ * b
+postulate twoDistributesPlus : ∀ a b → twoℚ * (a + b) ≡ twoℚ * a + twoℚ * b
 
 finiteDisjointBoolean4BlockPoincare :
   ∀ blocks →
