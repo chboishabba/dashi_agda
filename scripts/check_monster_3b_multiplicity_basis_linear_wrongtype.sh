@@ -38,6 +38,12 @@ bash "$ROOT/scripts/check_monster_3b_z3_orbifold_phase_recognition_snowball.sh"
 bash "$ROOT/scripts/check_monster_3b_cyclotomic_norm_separation.sh"
 bash "$ROOT/scripts/check_monster_3b_schrodinger_nonzero_witness_extraction.sh"
 bash "$ROOT/scripts/check_monster_3b_stone_von_neumann_witness_frontier_correction.sh"
+bash "$ROOT/scripts/check_monster_3b_oeis_same_integer_role_collision.sh"
+bash "$ROOT/scripts/check_monster_3b_oeis_6b_power_normalization_bridge.sh"
+bash "$ROOT/scripts/check_monster_6b_weight_two_c6_fourier_oeis.sh"
+bash "$ROOT/scripts/check_monster_236b_mckay_thompson_normalization_invariant_oeis.sh"
+bash "$ROOT/scripts/check_monster_6b_complete_replicability_power_snowball.sh"
+bash "$ROOT/scripts/check_monster_tesla_oeis_wikimedia_attribution_weld.sh"
 
 # Character determination now uses the direct scalar-product/Hom/Schur route
 # over the existing exact Q(zeta_3) field.  The scalar-extension checkers remain

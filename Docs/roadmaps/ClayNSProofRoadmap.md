@@ -2,20 +2,36 @@
 
 Status: lemma roadmap; non-promoting.
 
-## Current control record (2026-09-15)
+## Current control record (2026-09-16)
 
 This is a historical and broad dependency ledger.  For the current active
-proof-search objective, the C/D source-integration split, the R568/R571
-priority, the independent R406 phase-production leaf, and the exact delivery
+proof-search objective, the A/B/C/D lane split, the C/D source-integration
+firewall, the periodic-B ordered-kernel min-cut, and the exact delivery
 discipline, read `Docs/roadmaps/NSProofControl20260915.md` first.  Nothing in
 this older roadmap promotes a Clay claim or supersedes that control record.
+
+The current periodic-B frontier is not the older P3/R211 priority described
+below.  The live control plane has narrowed B to:
+
+```text
+S2b2d1a damped-tangent residual identity                  source-written
+S2b2d1b signed coherent covariance / ordered-kernel budget open primary
+S2b2d2 cutoff-uniform sum of fixed-output budgets          after d1b
+```
+
+The same-object cone now records the R541/R573/R584/R503 signed Hermitian
+consumer before norm, the R329 -> R572 same-slot weld, and the
+`OrderedOrientedSpacetimeBudget -> R503` compiler.  The narrow analytic field
+is the cutoff-uniform bound for `2 * integratedOrderedOrientedForce`; outer
+forcing Gram/class-norm routes are optional diagnostics unless they descend to
+that signed ordered-kernel budget.
 
 This document is a dependency graph for what a DASHI-based proof of the
 three-dimensional incompressible Navier-Stokes global regularity problem would
 have to prove. It is not a proof, and it does not promote any Clay,
 smooth-solution, or terminal claim.
 
-## 2026-09-13 current canonical reading
+## 2026-09-13 superseded canonical reading
 
 The live Clay-facing manuscript is
 `Docs/papers/live/Paper1NavierStokesClayDraft.md`.  Its primary route is now the

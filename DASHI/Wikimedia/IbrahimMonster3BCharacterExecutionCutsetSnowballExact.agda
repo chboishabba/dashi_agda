@@ -19,12 +19,12 @@ import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact as Actio
 -- W_zeta recognition can be promoted:
 --
 --   A. actual MN3B / kernel-character certificate replay;
---   B. generic equal-character -> equivariant-isomorphism theorem execution
---      and explicit cross-prover transport.
+--   B. generic equal-character -> equivariant-isomorphism theorem KERNEL
+--      execution and explicit cross-prover transport.
 --
--- Source acquisition may happen in either order.  Payment may not skip either
--- gate.  The later action/multiplicity pipeline is compiler output only after
--- the SAME actual representation has been attached.
+-- The Lean source for gate B is now merged to dashi_lean4 main.  That removes
+-- source authoring from the cutset but does not pay a kernel receipt: GitHub
+-- reports no workflow run for the exact reconciliation merge SHA.
 ------------------------------------------------------------------------
 
 record LeanCharacterExecutionReceipt : Set where
@@ -34,13 +34,16 @@ record LeanCharacterExecutionReceipt : Set where
     projectName : String
     branch : String
     pullRequest : String
-    headCommit : String
+    branchHeadCommit : String
+    mergeCommit : String
     mathlibRevision : String
     sourceFile : String
+    regressionFile : String
     theoremName : String
     sourceWritten : Bool
     sourceImportedByDefaultTarget : Bool
     pullRequestOpen : Bool
+    sourceMergedToMain : Bool
     workflowAdvertisedForPullRequests : Bool
     workflowRunObservedForHead : Bool
     kernelSuccessObserved : Bool
@@ -52,16 +55,18 @@ currentLeanCharacterExecutionReceipt = lean-character-execution-receipt
   "RequestProject"
   "agent/monster-character-determination-mathlib"
   "https://github.com/chboishabba/dashi_lean4/pull/1"
-  "8591b8c8bcd6d038c89bda726a85533ca077c523"
+  "751d58de09bcb37d1b1f3dbac2511f6cb362da5e"
+  "ff0b3a02fb4e3581b3518fb2abfe381a5b36e1cd"
   "v4.28.0"
   "Synthesis/MonsterCharacterDetermination.lean"
+  "Synthesis/MonsterCharacterMultiplicityRegression.lean"
   "Synthesis.nonempty_iso_of_character_eq"
-  true true true true false false
+  true true false true true false false
 
 ------------------------------------------------------------------------
 -- The pinned execution environment is stronger evidence than a floating
 -- current-master lookup.  Current mathlib master remains a compatibility
--- observation only; RequestProject actually executes against v4.28.0.
+-- observation only; RequestProject is pinned to v4.28.0.
 ------------------------------------------------------------------------
 
 record MathlibExecutionPinCorrection : Set where
@@ -105,8 +110,6 @@ replayStatus = Replay.currentReplayMultiplicityFrontier
 -- Constituent recognition gate.  The existing multiplicity theorem only
 -- counts a literal finite list AFTER each constituent has already been given
 -- selected central character, irreducibility, and Stone-von Neumann degree.
--- Therefore it cannot construct the missing decomposition from the whole
--- 65610-dimensional character equality by itself.
 ------------------------------------------------------------------------
 
 record ConstituentRecognitionBoundary : Set where
@@ -118,13 +121,14 @@ record ConstituentRecognitionBoundary : Set where
     eachConstituentClassificationRequiredUpstream : Bool
     genericIrreducibleCharacterIsoConsumerExists : Bool
     leanWrapperSourceExists : Bool
+    leanWrapperSourceMerged : Bool
     leanWrapperKernelPaid : Bool
     agdaCrossProverTransportPaid : Bool
 open ConstituentRecognitionBoundary public
 
 canonicalConstituentRecognitionBoundary : ConstituentRecognitionBoundary
 canonicalConstituentRecognitionBoundary = constituent-recognition-boundary
-  true true false true true true false false
+  true true false true true true true false false
 
 ------------------------------------------------------------------------
 -- Ordered proof cutset.
@@ -132,7 +136,7 @@ canonicalConstituentRecognitionBoundary = constituent-recognition-boundary
 
 data CharacterRecognitionLeaf : Set where
   actualKernelReplay : CharacterRecognitionLeaf
-  leanEqualCharacterWrapper : CharacterRecognitionLeaf
+  leanEqualCharacterKernelExecution : CharacterRecognitionLeaf
   agdaCharacterTheoremTransport : CharacterRecognitionLeaf
   actualIrreducibleConstituentAttachment : CharacterRecognitionLeaf
   actualZetaSectorRecognition : CharacterRecognitionLeaf
@@ -141,11 +145,11 @@ data CharacterRecognitionLeaf : Set where
 
 
 data LeafState : Set where
-  closed sourceWritten waiting blocked : LeafState
+  closed sourceMerged waiting blocked : LeafState
 
 leafState : CharacterRecognitionLeaf → LeafState
 leafState actualKernelReplay = waiting
-leafState leanEqualCharacterWrapper = sourceWritten
+leafState leanEqualCharacterKernelExecution = sourceMerged
 leafState agdaCharacterTheoremTransport = blocked
 leafState actualIrreducibleConstituentAttachment = blocked
 leafState actualZetaSectorRecognition = blocked
@@ -156,12 +160,11 @@ highestAlphaExecutableLeaf : CharacterRecognitionLeaf
 highestAlphaExecutableLeaf = actualKernelReplay
 
 parallelExecutableLeaf : CharacterRecognitionLeaf
-parallelExecutableLeaf = leanEqualCharacterWrapper
+parallelExecutableLeaf = leanEqualCharacterKernelExecution
 
 ------------------------------------------------------------------------
--- Attribution coordinates are retained from their authoritative owners.  OEIS
--- remains relevant to the 90=A005052(2) arithmetic observation but not to the
--- character-determination theorem or actual action.
+-- Attribution coordinates. OEIS is a numerical-family/discovery coordinate,
+-- not a character-determination theorem or actual-action witness.
 ------------------------------------------------------------------------
 
 record CutsetAttributionCoordinates : Set where
@@ -197,13 +200,13 @@ canonicalCutsetAttributionCoordinates = cutset-attribution-coordinates
 -- WrongType boundaries.
 ------------------------------------------------------------------------
 
-data LeanSourceCreatesKernelReceipt : Set where
+data MergedLeanSourceCreatesKernelReceipt : Set where
 data KernelCharacterEqualityCreatesConstituentList : Set where
 data NinetyOEISEqualityCreatesMultiplicityAction : Set where
 data AgdaConsumerRecordCreatesExternalTheorem : Set where
 
-leanSourceDoesNotCreateReceipt : LeanSourceCreatesKernelReceipt → ⊥
-leanSourceDoesNotCreateReceipt ()
+mergedLeanSourceDoesNotCreateReceipt : MergedLeanSourceCreatesKernelReceipt → ⊥
+mergedLeanSourceDoesNotCreateReceipt ()
 
 characterEqualityDoesNotCreateConstituentList :
   KernelCharacterEqualityCreatesConstituentList → ⊥
@@ -227,6 +230,7 @@ record Monster3BCharacterExecutionFrontier : Set where
     mathlibPinnedProducerFound : Bool
     leanWrapperSourceWritten : Bool
     leanWrapperInDefaultBuildTarget : Bool
+    leanWrapperMergedToMain : Bool
     leanWrapperKernelReceiptPaid : Bool
     actualKernelReplayRecipeExists : Bool
     actualKernelReplayReceiptPaid : Bool
@@ -241,7 +245,7 @@ open Monster3BCharacterExecutionFrontier public
 
 currentMonster3BCharacterExecutionFrontier : Monster3BCharacterExecutionFrontier
 currentMonster3BCharacterExecutionFrontier = monster3b-character-execution-frontier
-  true true true false
+  true true true true false
   true false true false
   false false false false
-  "run or observe the two executable producers without changing theorem architecture: (1) the current MN3B AtlasRep/CTblLib/generated-certificate replay, and (2) dashi_lean4 PR #1 proving the tiny equal-character irreducible corollary against the actual RequestProject mathlib pin v4.28.0. Once both receipts exist, transport the Lean theorem into the existing Agda IrreducibleCharacterDetermination consumer and attach actual irreducible E-constituents. Do not infer a constituent list from the 65610 = 90*729 character identity, and do not let A005052(2)=90 manufacture the multiplicity action."
+  "observe the two remaining execution receipts without changing theorem architecture: (1) the current MN3B AtlasRep/CTblLib/generated-certificate replay, and (2) a Lean kernel execution of the exact merged dashi_lean4 theorem source at ff0b3a02fb4e3581b3518fb2abfe381a5b36e1cd under RequestProject/mathlib v4.28.0. Then transport only that theorem into Agda and attach the SAME actual irreducible E-constituents. Do not infer a constituent list from 65610 = 90*729, and do not let A005052(2)=90 manufacture the multiplicity action."
