@@ -9,25 +9,21 @@ import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Ontology.EpistemicTrit as Trit
 import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeExact as Bridge
 import DASHI.Reasoning.JMDAristotleSymposiumSourceAtlasExact as Source
+import DASHI.Reasoning.PlatoSymposiumDialecticBraidHyperformalExact as Hyperformal
 
 ------------------------------------------------------------------------
 -- COMPLETION SEAMS FOR THE JMD PLATO PHILOSOPHY BRIDGE
 --
--- The parent bridge already owns the finite non-collapse results for:
---   lack -> seeking,
---   knowledge Boolean -> rich epistemic state,
---   complementarity -> relational adequacy,
---   surface appearance -> interior significance,
---   consensus -> plural dialectical state.
+-- Parent owners already pay:
+--   * Bridge: lack/seeking, right-opinion/ignorance, complementarity/relation,
+--     appearance/interior and consensus/plural-state non-collapse;
+--   * Hyperformal: same ascent shape != same semantic grammar, plus the
+--     Aristophanes/DASHI involution-shape semantic firewall.
 --
--- This file adds only the two missing theorem-bearing cross-pollinations from
--- the supplied design:
---   * same ascent-shaped carrier != same semantic grammar;
---   * same ruling role/authority != same service orientation.
---
--- It also records explicitly that Diotima's right opinion and DASHI's
--- `unresolved` epistemic trit are structural analogues, not definitionally or
--- historically identical concepts.
+-- Therefore this file does NOT re-prove the ascent theorem.  It imports that
+-- exact owner and adds only the remaining Republic role/service-orientation
+-- theorem plus an explicit Diotima-middle <-> DASHI epistemic-trit calibration
+-- that refuses semantic identity.
 ------------------------------------------------------------------------
 
 existingBridgeRetained : Bool
@@ -36,9 +32,6 @@ existingBridgeRetained = true
 sourceArchiveHash : String
 sourceArchiveHash = Source.archiveSha256
 
-ascentSourceContract : Bridge.LeanPhilosophyTheoremContract
-ascentSourceContract = Bridge.diotimaAscentContract
-
 craftSourceContract : Bridge.LeanPhilosophyTheoremContract
 craftSourceContract = Bridge.republicCraftContract
 
@@ -46,66 +39,16 @@ rightOpinionSourceContract : Bridge.LeanPhilosophyTheoremContract
 rightOpinionSourceContract = Bridge.rightOpinionContract
 
 ------------------------------------------------------------------------
--- 1. Shared ascent-shaped carrier does not identify semantics.
+-- 1. Reuse the already-owned ascent semantic-separation theorem.
 ------------------------------------------------------------------------
 
-data AscentReadingWorld : Set where
-  jmdPlatonicAscentReading : AscentReadingWorld
-  dashiRefinementReading : AscentReadingWorld
-
-data SharedAscentCarrier : Set where
-  localToGeneralAscentShape : SharedAscentCarrier
-
-data AscentSemanticQuery : Set where
-  ascentSemanticQuestion : AscentSemanticQuery
-
-data AscentSemanticAnswer : Set where
-  erosBeautyFormSemantics : AscentSemanticAnswer
-  consumerRefinementSemantics : AscentSemanticAnswer
-
-sharedAscentProjection : AscentReadingWorld → SharedAscentCarrier
-sharedAscentProjection jmdPlatonicAscentReading = localToGeneralAscentShape
-sharedAscentProjection dashiRefinementReading = localToGeneralAscentShape
-
-AscentAnswerFor : AscentSemanticQuery → Set
-AscentAnswerFor ascentSemanticQuestion = AscentSemanticAnswer
-
-askAscentSemantics :
-  (query : AscentSemanticQuery) →
-  AscentReadingWorld →
-  AscentAnswerFor query
-askAscentSemantics ascentSemanticQuestion jmdPlatonicAscentReading =
-  erosBeautyFormSemantics
-askAscentSemantics ascentSemanticQuestion dashiRefinementReading =
-  consumerRefinementSemantics
-
-ascentQuestions : Query.InquiryQuestionFamily AscentReadingWorld AscentSemanticQuery
-ascentQuestions = Query.inquiryQuestionFamily AscentAnswerFor askAscentSemantics
-
-sharedAscentCarrierDoesNotDetermineSemantics :
+ascentSemanticSeparationReuse :
   Query.FactorsThrough
-    ascentQuestions
-    sharedAscentProjection
-    ascentSemanticQuestion → ⊥
-sharedAscentCarrierDoesNotDetermineSemantics factor = helper first second
-  where
-    first :
-      erosBeautyFormSemantics
-      ≡ Query.quotientAnswer factor localToGeneralAscentShape
-    first = Query.factorisation factor jmdPlatonicAscentReading
-
-    second :
-      consumerRefinementSemantics
-      ≡ Query.quotientAnswer factor localToGeneralAscentShape
-    second = Query.factorisation factor dashiRefinementReading
-
-    helper :
-      erosBeautyFormSemantics
-      ≡ Query.quotientAnswer factor localToGeneralAscentShape →
-      consumerRefinementSemantics
-      ≡ Query.quotientAnswer factor localToGeneralAscentShape →
-      ⊥
-    helper refl ()
+    Hyperformal.ascentMeaningQuestions
+    Hyperformal.ascentShapeProjection
+    Hyperformal.ascentMeaningQuestion → ⊥
+ascentSemanticSeparationReuse =
+  Hyperformal.sharedAscentShapeDoesNotDetermineSemantics
 
 ------------------------------------------------------------------------
 -- 2. Same role authority does not determine who the practice serves.
@@ -190,7 +133,7 @@ canonicalEpistemicMiddleCrosswalk =
   epistemic-middle-crosswalk
     rightOpinionSourceContract
     Trit.unresolved
-    "both preserve room between two determinate endpoints; Diotima right opinion concerns a source-specific epistemic category, while DASHI unresolved is an evidence-state constructor"
+    "both preserve room between two determinate endpoints; Diotima right opinion is a source-specific epistemic category, while DASHI unresolved is a scoped evidence-state constructor"
     false
 
 ------------------------------------------------------------------------
@@ -206,6 +149,7 @@ record PlatoSymposiumCompletionBoundary : Set where
     jmdLeanOwnsDashiFactorisationTheorems : Bool
     jmdCraftArgumentProvesModernInstitutionalDesign : Bool
     dashiRefinementIsPlatonicAscent : Bool
+    ascentTheoremWasReprovedInsteadOfReused : Bool
     structuralCrossPollinationRetainsSourceGrammar : Bool
 
 open PlatoSymposiumCompletionBoundary public
@@ -213,6 +157,7 @@ open PlatoSymposiumCompletionBoundary public
 canonicalPlatoSymposiumCompletionBoundary : PlatoSymposiumCompletionBoundary
 canonicalPlatoSymposiumCompletionBoundary =
   plato-symposium-completion-boundary
+    false
     false
     false
     false
