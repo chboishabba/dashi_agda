@@ -13,7 +13,7 @@ Use this as the first-stop **current** state sheet; use the archaeology files fo
 
 ## Snapshot — 2026-09-16
 
-Merged foundations:
+Merged foundations / consumers:
 
 ```text
 #918  merged — active CMP119 regular-E compression + RH R1 decomposition
@@ -22,21 +22,20 @@ Merged foundations:
 #944  merged — detailed CMP116 R345–R386 sensitivity/localization audit
 #949  merged — concrete CMP119 source route
 #953  merged — Round131 common-metric/unification recut
+#970  merged — TERMINAL CONSUMER:
+       direct selected finite spectral upper -> covariance -> continuum -> gap
 ```
 
-Current YM specialists:
+Current YM producer:
 
 ```text
-#970  open/draft — TERMINAL CONSUMER:
-       direct selected finite spectral upper -> covariance -> continuum -> gap
-
-#967  open/draft — SOURCE / PRODUCER underneath #970:
+#967  open/draft — SOURCE / PRODUCER feeding merged #970:
        R387–R405 consumer-first reconstruction of the selected CMP116 upper
 ```
 
-Do not treat #967 and #970 as competing routes. #970 is the terminal B ABI; #967 constructs it.
+#970 is no longer a competing/open branch. Its terminal B ABI is merged. #967 now has one job: manufacture the direct selected upper that the merged consumer already knows how to use.
 
-## 1. Terminal B consumer — #970
+## 1. Merged terminal B consumer — #970
 
 The theorem-bearing field is only
 
@@ -71,14 +70,14 @@ No source root, source distance, Heat/Doob object, generic polymer norm, or inte
 
 ### R402 — absolute finite-polydisc Cauchy repair
 
-Canonical P0 is an **absolute** localization theorem. R402 adds an absolute finite-polydisc Cauchy authority and applies it to the literal CMP116 decoupled Hessian coefficient:
+Canonical P0 is an **absolute** localization theorem. R402 pays:
 
 ```text
-pointwise absolute boundary control
+pointwise absolute CMP116 boundary control
   -> absolute finite-polydisc coefficient control.
 ```
 
-This pays coefficient extraction only. It does not prove the CMP116 boundary estimate.
+It does not prove the CMP116 boundary estimate.
 
 ### R403 — observable-indexed J carrier
 
@@ -90,13 +89,11 @@ sourceDirectionOf := id
 literal derivative maps := normalized source-calculus derivative maps
 ```
 
-with the agreement equations by `refl`.
-
-Therefore a separate observable->source-direction representation theorem is not primitive debt on the preferred route. Physical/source applicability still has to be paid.
+with agreement by `refl`. A separate observable->source-direction representation theorem is therefore not primitive debt on the preferred route.
 
 ### R404 — absolute common-Y walk resummation
 
-`BalabanCMP116AbsoluteWalkResummationRound404Exact.agda` pays the finite triangle/monotonicity compiler inside one common localization domain `Y`:
+`BalabanCMP116AbsoluteWalkResummationRound404Exact.agda` pays:
 
 ```text
 boundary integrand = finite sum of differentiated walk terms
@@ -106,11 +103,11 @@ boundary integrand = finite sum of differentiated walk terms
 |common-Y boundary integrand| <= common-Y shell.
 ```
 
-No source theorem is manufactured here. The termwise generalized-walk/local-activity estimate remains theorem-bearing.
+The source-native termwise estimate remains theorem-bearing.
 
 ### R405 — nested source-domain summation
 
-`BalabanCMP116NestedSourceSummationRound405Exact.agda` pays the next positive summation layer corresponding to the source progression around CMP116 (1.26)–(1.29):
+`BalabanCMP116NestedSourceSummationRound405Exact.agda` pays:
 
 ```text
 selected boundary = finite sum of common-Y contributions
@@ -120,11 +117,11 @@ selected boundary = finite sum of common-Y contributions
 |selected boundary integrand| <= selected connecting shell.
 ```
 
-R404 + R405 therefore make the **finite summation/resummation algebra compiler-owned**. They do not pay the actual CMP99/CMP116 differentiated local-activity bound or selected-density source applicability.
+R404 + R405 make the **finite summation/resummation algebra compiler-owned**. They do not pay the actual CMP99/CMP116 differentiated local-activity estimate or selected-density source applicability.
 
 ### P0 has moved below representation, Cauchy extraction, and finite resummation
 
-The preferred direct chain is now:
+The shortest live chain is now:
 
 ```text
 CMP99 generalized-walk propagator decay               [published/source]
@@ -154,13 +151,13 @@ R398 canonical direct shell                            [compiler]
 R399 time <= selected physicalDistance                 [small physical coordinate]
                 |
                 v
-#970 direct selected spectral upper                    [terminal B ABI]
+MERGED #970 direct selected spectral upper             [terminal B ABI]
                 |
                 v
 finite covariance -> continuum -> gap                  [existing compiler chain]
 ```
 
-The remaining analytic leaf is no longer “prove a boundary sum inequality”. It is the **literal source replay at the term/local-activity level**:
+The remaining analytic leaf is the **literal source replay at the term/local-activity level**:
 
 ```text
 selected T5/RG density
@@ -171,7 +168,7 @@ x CMP99 generalized-walk/local activity localization
 term/common-Y differentiated activity majorants required by R404/R405.
 ```
 
-The older R76 `E^(2)/Pi` -> R318 mixed-log representation remains a **conditional donor obligation only**. Activate it only if the literal CMP116 replay cannot be stated directly through the R403 observable-indexed carrier.
+The R76 `E^(2)/Pi` -> R318 mixed-log bridge is a **conditional donor only**. Activate it only if direct R403 source replay cannot express a required source coordinate.
 
 ## 3. Current YM payments
 
@@ -185,17 +182,14 @@ YM-P0b  TERM/LOCAL-ACTIVITY ABSOLUTE LOCALIZATION:
         by R404 and the positive nested summability consumed by R405.
 
 YM-P0c  absolute finite-polydisc coefficient extraction — PAID by R402.
+YM-P0d  common-Y + nested finite source summation — PAID by R404/R405.
 
-YM-P0d  finite common-Y and nested source summation — PAID by R404/R405.
-
-YM-P1   generic sourceEnvelope<=shell + shell<=A*q^d route — optional if direct
-        R320/R274 is cheaper.
+YM-P1   generic sourceEnvelope<=shell + shell<=A*q^d — optional if direct
+        R320/merged-#970 is cheaper.
 
 YM-P2   time <= selected physicalDistance on the single R318 carrier.
-
-YM-P3   same-Hamiltonian selected mode ratio=q(E) and
-        gapCandidate=energyOfRatio(q_fast) only when using the R400 producer.
-
+YM-P3   same-Hamiltonian selected mode ratio=q(E) / candidate-energy only if
+        the R400 producer is used.
 YM-P4   same-family finite->continuum covariance transport — existing.
 YM-P5   clustering/positive-subgap -> positive transfer gap — existing.
 ```
@@ -215,6 +209,7 @@ absolute Cauchy coefficient lift (R402)
 R318 -> R284 canonical direct shell (R398)
 one-sided time/distance consumer shape (R399)
 energy/ratio monotonic compiler (R400)
+merged #970 direct selected terminal B consumer
 one-sided finite->continuum order closure
 clustering -> transfer-gap contradiction
 ```
@@ -225,7 +220,7 @@ Still theorem-bearing / physical:
 P0a selected-density/source applicability for the actual J insertions
 P0b source-native term/local-activity generalized-walk absolute bounds
 P2 selected support/time geometry inhabitant
-P3 same-Hamiltonian ratio/energy identifications where that producer is used
+P3 same-Hamiltonian ratio/energy identifications only where that producer is used
 ```
 
 ## 5. Pareto order
@@ -233,9 +228,9 @@ P3 same-Hamiltonian ratio/energy identifications where that producer is used
 | Priority | Work |
 |---|---|
 | 1 | **YM-P0a/P0b: construct the literal selected CMP99/CMP116 term/local-activity localization consumed by R404/R405; do not add another P0 wrapper** |
-| 2 | **YM-P2: `time <= selected physicalDistance` if it is not definitional from the selected support construction** |
-| 3 | **YM-P3: same-Hamiltonian `q(E)` / candidate-energy identifications only where the source-native-q route needs them** |
-| 4 | #967 generic envelope/rate producer only if cheaper than direct R320/#970 |
+| 2 | **YM-P2: `time <= selected physicalDistance` if not definitional from the selected support construction** |
+| 3 | **YM-P3: same-Hamiltonian `q(E)` / candidate-energy identities only where the source-native-q route needs them** |
+| 4 | #967 generic envelope/rate producer only if cheaper than direct R320/merged-#970 |
 | 5 | RH-R2 direct strict literal complement |
 | 6 | RH-R1 only on new theorem-bearing same-object evidence |
 | 7 | #949 CMP119/BC1 retained source foundation |
@@ -251,7 +246,7 @@ Unless a literal current consumer requires it, do not spend cycles on:
 - re-proving CMP116 merely by restating it as a source receipt;
 - comparison-only Hessian stability as if it implied absolute localization;
 - selected `sourceEnvelope=shell` equality when one-sided order suffices;
-- generic source-envelope plumbing when direct R320/#970 is cheaper;
+- generic source-envelope plumbing when direct R320/merged-#970 is cheaper;
 - another finite-summation wrapper after R404/R405;
 - independent R284/R318 distances after R398;
 - exact `distance=time` when R399 consumes only `time<=distance`;
@@ -265,9 +260,7 @@ Unless a literal current consumer requires it, do not spend cycles on:
 
 ## 7. RH current route
 
-No newer RH-specific work displaces #940/#949.
-
-R1 remains fail-closed at its same-object checked-near transports. Resume it only with theorem-bearing bytes/transport or a concrete final reflection-pair fold. Otherwise the live RH theorem is still the direct strict complement R2.
+No newer RH-specific work displaces #940/#949. R1 remains fail-closed at its same-object checked-near transports. Otherwise the live RH theorem remains the direct strict complement R2.
 
 YM remains the global priority while P0 is this sharply isolated.
 
@@ -318,12 +311,12 @@ No exact-head workflow exists yet for `143c8f66...`; R405 is source-written, not
 
 ## 10. Update log — 2026-09-16
 
-- #970 remains the terminal-consumer recut; #967 remains its producer lane.
+- #970 merged and is now the stable terminal B consumer; #967 remains the live producer lane feeding it.
 - R402 pays absolute finite-polydisc coefficient extraction.
 - R403 removes the optional separate SourceDirection representation.
-- R404 pays the finite absolute resummation of differentiated walk terms for one common localization domain `Y`.
+- R404 pays finite absolute resummation of differentiated walk terms for one common localization domain `Y`.
 - R405 pays the finite positive outer summation of common-Y contributions into the selected connecting shell.
-- P0a/P0b are therefore narrower again: selected-density/J applicability plus the actual source-native term/local-activity generalized-walk majorants and positive summability feeding R404/R405.
+- P0a/P0b are narrower again: selected-density/J applicability plus the actual source-native term/local-activity generalized-walk majorants and positive summability feeding R404/R405.
 - The R76 `E^(2)/Pi` representation bridge is donor-only unless direct R403 replay fails to express a required source coordinate.
 - No new P0 wrapper, comparison-Hessian route, generic source-envelope layer, or spectral object was introduced.
 - RH remains behind YM in the current Pareto order.
