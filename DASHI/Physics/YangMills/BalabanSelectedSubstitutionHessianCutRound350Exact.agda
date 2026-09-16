@@ -2,7 +2,7 @@
 module DASHI.Physics.YangMills.BalabanSelectedSubstitutionHessianCutRound350Exact where
 
 ------------------------------------------------------------------------
--- ROUND350 / SPLIT R347 BOUNDARY COMPARISON AT THE EXISTING GENERIC ABI
+-- ROUND350 / SPLIT THE SELECTED BOUNDARY COMPARISON AT THE EXISTING ABI
 --
 -- `BalabanDecoupledActivityHessian.markedSubstitutionStabilityLiftsToCoefficient`
 -- already proves the generic implication that motivates this cut:
@@ -27,8 +27,12 @@ module DASHI.Physics.YangMills.BalabanSelectedSubstitutionHessianCutRound350Exac
 -- separated by earlier owners; neither quantitative source estimate is created
 -- by those compilers.
 --
--- Independent leaves remain R348 C_attach and R346 D_time.  This owner records
--- the dependency cut only; neither H_stab nor H_sub is manufactured here.
+-- Independent leaves remain R348 C_attach and R346 D_time.
+--
+-- SOURCE-HYGIENE REPAIR (R385 audit): an earlier version imported the absent
+-- `BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact` solely to recover a
+-- parent status coordinate.  The canonical parent is R346's literal selected
+-- differentiated-localization theorem, so no R347 facade is recreated.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -36,7 +40,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as Source
-import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact as R347
+import DASHI.Physics.YangMills.BalabanCMP116SharedMarkedAmplitudeDirectRound346Exact as R346
 import DASHI.Physics.YangMills.BalabanCMP116SelectedCoefficientAttachmentRound348Exact as R348
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 
@@ -55,26 +59,22 @@ canonicalCommonRadiusCompilerLevel = R104.cmp116CanonicalCommonRadiusCompilerLev
 -- Remaining source-specific physical inputs.
 ------------------------------------------------------------------------
 
--- H_stab: on the selected boundary assignment, varying the nonlinear
--- substituted background changes the twice-varied local activity by at most a
--- nonnegative Lipschitz factor times the substitution distance.
 selectedHessianStabilityLevel : ProofLevel
 selectedHessianStabilityLevel = conditional
 
--- H_sub: the selected nonlinear substituted-background distance is controlled by
--- the actual marked input/shell coordinate used by the shared Hessian mark.
 selectedSubstitutionMarkedLevel : ProofLevel
 selectedSubstitutionMarkedLevel = conditional
 
--- R348's scalar same-object coefficient attachment is not implied by these
--- analytic inequalities and remains independent.
 selectedCoefficientAttachmentLevel : ProofLevel
 selectedCoefficientAttachmentLevel = R348.selectedCoefficientSameObjectLevel
 
--- The parent R347 physical boundary leaf is exactly the consumer these two
--- estimates are intended to inhabit after physical/source instantiation.
+-- The literal selected differentiated-localization theorem is the actual parent
+-- consumer.  It lives canonically in R346.
 selectedBoundaryParentLevel : ProofLevel
-selectedBoundaryParentLevel = R347.selectedMarkedBoundarySubstitutionLevel
+selectedBoundaryParentLevel = R346.round346LiteralSelectedLocalizationLevel
+
+selectedDistanceTimeLevel : ProofLevel
+selectedDistanceTimeLevel = R346.round346SelectedPhysicalDistanceMeaningLevel
 
 ------------------------------------------------------------------------
 -- Pareto firewalls.
@@ -139,12 +139,7 @@ record Round350Boundary : Set where
 
 canonicalRound350Boundary : Round350Boundary
 canonicalRound350Boundary =
-  round350-boundary
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
+  round350-boundary true refl true refl true refl true refl true refl
 
 round350FrontierRefinementLevel : ProofLevel
 round350FrontierRefinementLevel = machineChecked
@@ -153,4 +148,3 @@ clayPromotion : Bool
 clayPromotion = false
 
 clayPromotionIsFalse : clayPromotion ≡ false
-clayPromotionIsFalse = refl
