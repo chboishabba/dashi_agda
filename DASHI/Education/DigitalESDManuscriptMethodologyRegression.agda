@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 import DASHI.Education.DigitalESDManuscriptMethodologyExact as Method
 import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact as Derivation
 import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
+import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
 import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact as Paper
 import DASHI.Education.DigitalESDStructuredSearchExact as Search
 
@@ -16,7 +17,7 @@ paperTypeRegression = refl
 researchQuestionCountRegression : Method.researchQuestionCount ≡ 5
 researchQuestionCountRegression = refl
 
-extractionCoordinateCountRegression : Method.extractionCoordinateCount ≡ 19
+extractionCoordinateCountRegression : Method.extractionCoordinateCount ≡ 20
 extractionCoordinateCountRegression = refl
 
 methodRetainsStructuredSearchRegression : Method.MethodologyBoundary.transparentStructuredSearchRequired Method.canonicalMethodologyBoundary ≡ true
@@ -43,6 +44,17 @@ methodRequiresExternalityIncidenceAuditRegression :
     Method.canonicalMethodologyBoundary
   ≡ true
 methodRequiresExternalityIncidenceAuditRegression = refl
+
+methodRetainsStudyClaimCeilingRegression :
+  Method.studyClaimCeilingBoundary
+  ≡ Ceiling.canonicalStudyClaimCeilingBoundary
+methodRetainsStudyClaimCeilingRegression = refl
+
+methodRequiresStudyClaimCeilingRegression :
+  Method.MethodologyBoundary.studyClaimCeilingRetained
+    Method.canonicalMethodologyBoundary
+  ≡ true
+methodRequiresStudyClaimCeilingRegression = refl
 
 searchClosureDoesNotEqualSynthesisRegression : Method.SearchClosureEqualsEvidenceSynthesis → ⊥
 searchClosureDoesNotEqualSynthesisRegression = Method.searchClosureDoesNotEqualEvidenceSynthesis
