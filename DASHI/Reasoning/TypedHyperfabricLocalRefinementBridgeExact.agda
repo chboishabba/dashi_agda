@@ -7,113 +7,82 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
+import DASHI.Cognition.PNF.FibreNaturalDeltaTransportExact as Natural
 import DASHI.Topology.TetrationalGateField as Gate
-import DASHI.Reasoning.TypedHyperfabricConsumerReductionBridgeExact as SectionReduction
 
 ------------------------------------------------------------------------
--- TYPED HYPERFABRIC LOCAL REFINEMENT BRIDGE
+-- TYPED HYPERFABRIC LOCAL REFINEMENT ROLE ADAPTER
 --
--- This is an adapter, not a second hyperfabric kernel.  It records that two
--- already-compatible GlobalSections are related by one declared local
--- refinement request at a selected vertex.  The gate transition is pinned to
--- refineWithinChart, which keeps chart refinement distinct from fibre-
--- dimension increase and tower recursion.
+-- The repository already has the stronger generic owner:
+--   DASHI.Cognition.PNF.FibreNaturalDeltaTransportExact.HyperfabricNaturalDelta
 --
--- No generic decidable inequality on Vertex is assumed, so this witness does
--- not claim that every other stalk is definitionally unchanged.  Domains that
--- need an exclusive one-stalk update must supply that stronger property
--- separately.
+-- It supplies vertex/edge delta types, local application, incidence transport,
+-- and the exact restriction-naturality square.  This file therefore does NOT
+-- define another refinement carrier.  It only exposes that owner at the local-
+-- fibre role boundary and pins chart refinement apart from fibre-dimension and
+-- tower transitions.
 ------------------------------------------------------------------------
 
-record LocalStalkRefinement
-    {Vertex Edge : Set}
-    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge}
-    (before after : Hyperfabric.GlobalSection fabric) : Set₁ where
-  constructor local-stalk-refinement
-  field
-    refinedVertex : Vertex
-    beforeLocalValue : Hyperfabric.vertexStalk fabric refinedVertex
-    afterLocalValue : Hyperfabric.vertexStalk fabric refinedVertex
-    beforeValueMatchesSection :
-      beforeLocalValue ≡ Hyperfabric.vertexValue before refinedVertex
-    afterValueMatchesSection :
-      afterLocalValue ≡ Hyperfabric.vertexValue after refinedVertex
-    requestedTransition : Gate.TransitionKind
-    requestedTransitionIsRefineWithinChart :
-      requestedTransition ≡ Gate.refineWithinChart
-    refinementReceipt : String
+HyperfabricNaturalDeltaSurface :
+  {Vertex Edge : Set} →
+  Hyperfabric.TypedHyperfabric Vertex Edge → Set₁
+HyperfabricNaturalDeltaSurface = Natural.HyperfabricNaturalDelta
 
-open LocalStalkRefinement public
+transportDeltaSurface :
+  ∀ {Vertex Edge}
+    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} →
+  (deltaSystem : HyperfabricNaturalDeltaSurface fabric) →
+  ∀ {vertex edge} →
+  Hyperfabric.incidence fabric vertex edge →
+  Natural.VertexDelta deltaSystem vertex →
+  Natural.EdgeDelta deltaSystem edge
+transportDeltaSurface = Natural.transportDelta
+
+restrictionNaturalitySurface :
+  ∀ {Vertex Edge}
+    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge} →
+  (deltaSystem : HyperfabricNaturalDeltaSurface fabric) →
+  ∀ {vertex edge}
+    (membership : Hyperfabric.incidence fabric vertex edge)
+    (value : Hyperfabric.vertexStalk fabric vertex)
+    (delta : Natural.VertexDelta deltaSystem vertex) →
+  Hyperfabric.restrict fabric membership
+    (Natural.applyVertex deltaSystem vertex value delta)
+  ≡
+  Natural.applyEdge deltaSystem edge
+    (Hyperfabric.restrict fabric membership value)
+    (Natural.transportDelta deltaSystem membership delta)
+restrictionNaturalitySurface = Natural.restrictionNaturality
 
 localRefinementDoesNotOpenTower :
-  ∀ {Vertex Edge}
-    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge}
-    {before after : Hyperfabric.GlobalSection fabric} →
-  (refinement : LocalStalkRefinement before after) →
-  requestedTransition refinement ≡ Gate.openTowerLevel → ⊥
-localRefinementDoesNotOpenTower refinement equality
-  with requestedTransitionIsRefineWithinChart refinement | equality
-... | refl | ()
+  Gate.refineWithinChart ≡ Gate.openTowerLevel → ⊥
+localRefinementDoesNotOpenTower ()
 
 localRefinementDoesNotIncreaseFibreDimension :
-  ∀ {Vertex Edge}
-    {fabric : Hyperfabric.TypedHyperfabric Vertex Edge}
-    {before after : Hyperfabric.GlobalSection fabric} →
-  (refinement : LocalStalkRefinement before after) →
-  requestedTransition refinement ≡ Gate.increaseFibreDimension → ⊥
-localRefinementDoesNotIncreaseFibreDimension refinement equality
-  with requestedTransitionIsRefineWithinChart refinement | equality
-... | refl | ()
-
-------------------------------------------------------------------------
--- Finite specimen reusing the existing section/reduction fixture.
-------------------------------------------------------------------------
-
-finiteHiddenStalkRefinement :
-  LocalStalkRefinement SectionReduction.leftSection SectionReduction.rightSection
-finiteHiddenStalkRefinement = local-stalk-refinement
-  SectionReduction.region
-  (false , false)
-  (false , true)
-  refl
-  refl
-  Gate.refineWithinChart
-  refl
-  "refine the hidden coordinate while preserving compatibility with the visible edge value"
-
-finiteRefinementTransitionIsWithinChart :
-  requestedTransition finiteHiddenStalkRefinement ≡ Gate.refineWithinChart
-finiteRefinementTransitionIsWithinChart = refl
+  Gate.refineWithinChart ≡ Gate.increaseFibreDimension → ⊥
+localRefinementDoesNotIncreaseFibreDimension ()
 
 ------------------------------------------------------------------------
 -- Promotion firewalls.
 ------------------------------------------------------------------------
 
-data LocalRefinementProvesExclusiveSingleStalkMutation : Set where
-
-localRefinementDoesNotProveExclusiveSingleStalkMutation :
-  LocalRefinementProvesExclusiveSingleStalkMutation → ⊥
-localRefinementDoesNotProveExclusiveSingleStalkMutation ()
-
 record TypedHyperfabricLocalRefinementBoundary : Set where
   constructor typed-hyperfabric-local-refinement-boundary
   field
     typedHyperfabricCoreRemainsCanonicalKernel : Bool
-    beforeAndAfterAreCompatibleGlobalSections : Bool
+    canonicalNaturalDeltaOwnerReused : Bool
+    vertexDeltaTransportedToIncidentEdgeDelta : Bool
+    restrictionNaturalityRequired : Bool
     refinementActsOnDeclaredVertexStalkValues : Bool
-    requestedTransitionPinnedToRefineWithinChart : Bool
     refinementImpliesIncreaseFibreDimension : Bool
     refinementImpliesIncreaseFibreDimensionIsFalse :
       refinementImpliesIncreaseFibreDimension ≡ false
     refinementImpliesOpenTowerLevel : Bool
     refinementImpliesOpenTowerLevelIsFalse :
       refinementImpliesOpenTowerLevel ≡ false
-    refinementProvesEveryOtherStalkUnchanged : Bool
-    refinementProvesEveryOtherStalkUnchangedIsFalse :
-      refinementProvesEveryOtherStalkUnchanged ≡ false
-    refinementCreatesParallelHyperfabricKernel : Bool
-    refinementCreatesParallelHyperfabricKernelIsFalse :
-      refinementCreatesParallelHyperfabricKernel ≡ false
+    localRefinementBridgeDefinesParallelDeltaKernel : Bool
+    localRefinementBridgeDefinesParallelDeltaKernelIsFalse :
+      localRefinementBridgeDefinesParallelDeltaKernel ≡ false
     boundaryNote : String
 
 open TypedHyperfabricLocalRefinementBoundary public
@@ -126,8 +95,8 @@ canonicalTypedHyperfabricLocalRefinementBoundary =
     true
     true
     true
+    true
     false refl
     false refl
     false refl
-    false refl
-    "Local refinement is a relation between already-compatible GlobalSections at one declared vertex and is pinned to refineWithinChart. It neither opens a tower nor increases fibre dimension, and it does not manufacture an exclusivity theorem for untouched stalks."
+    "Local hyperfabric refinement reuses FibreNaturalDeltaTransportExact: vertex deltas transport to incident edge deltas and commute with restriction. refineWithinChart remains distinct from fibre-dimension increase and tower opening; no second refinement kernel is introduced."
