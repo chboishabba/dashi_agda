@@ -42,3 +42,18 @@ fishlockFocusGroupNRegression :
   Ext.fishlockFocusGroupAnalysisN
   ≡ Ceiling.explicitlyReportedNat 5 "focus-group participants"
 fishlockFocusGroupNRegression = refl
+
+colladoSourceRegression :
+  Ceiling.StudyClaimProfile.source Ext.colladoPilotProfile
+  ≡ Acquisition.colladoLongitudinalESDSource
+colladoSourceRegression = refl
+
+colladoClaimRegression :
+  Ceiling.StudyClaimProfile.strongestSupportedClaim Ext.colladoPilotProfile
+  ≡ Ceiling.implicationConeClaim Cone.associatesTreatmentAndOutcome
+colladoClaimRegression = refl
+
+colladoSampleDebtRegression :
+  Ceiling.StudyClaimProfile.enrolledOrReportedN Ext.colladoPilotProfile
+  ≡ Ceiling.natNotReported "exact enrolled/group sample counts not recovered from currently accessible same-object publisher/repository text"
+colladoSampleDebtRegression = refl
