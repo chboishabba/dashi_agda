@@ -41,6 +41,8 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityCellDampedTangentRound292Exact as R292
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as R30
+import DASHI.Physics.Closure.NSTriadKNWaleffeAmplitudeDampedNetworkTangentRound94Exact as R94Base
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinWaleffeAmplitudeTangentRound94Exact as R94
 import DASHI.Physics.Closure.NSTriadKNHelicalDampedProjectorLinearityRound381Exact as R381
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
@@ -61,7 +63,7 @@ oneHalf : ℚ
 oneHalf = Int.+ 1 / 2
 
 two : ℚ
-two = Int.+ 2 / 1
+two = Work.two
 
 record VectorZeroDerivative
     (Time : Set)
@@ -111,11 +113,7 @@ module Endpoint
   velocityAt : Nat → Time → Z3.FourierMode → C3.Complex3 F
   velocityAt cutoff time = Cell.liveVelocity D cutoff time
 
-  systemAt : Nat → Time → Audit.FiniteComplex3GalerkinSystem F E I
-  systemAt cutoff time = Live.Base.systemAt state cutoff time
-
-  physicalSystemAt : Nat → Time →
-    DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.PhysicalFiniteComplex3GalerkinSystem F
+  physicalSystemAt : Nat → Time → R30.PhysicalFiniteComplex3GalerkinSystem F
   physicalSystemAt = Live.physicalSystemAt support
 
   rateAt : Nat → Time → Z3.FourierMode → ℚ
@@ -152,8 +150,8 @@ module Endpoint
       q = Physical.q tau
       coefficientAt :
         (mode : Z3.FourierMode) →
-        R94.PhysicalField.literalViscousQuadraticCoefficient sys mode
-        ≡ R94.Tangent.dampedPlusForcing
+        R30.literalViscousQuadraticCoefficient sys mode
+        ≡ R94Base.dampedPlusForcing
             (rho mode) (velocity mode) (forcing mode)
       coefficientAt = R94.literalCoefficientIsDampedPlusNetwork sys
       regroup =
