@@ -3,22 +3,6 @@ module DASHI.Physics.YangMills.BalabanCMP116R343ToR397SourceNativeRound398Exact 
 
 ------------------------------------------------------------------------
 -- ROUND398 / MATURE R343 PRODUCER -> CURRENT ONE-SIDED R397 ABI
---
--- R397 is the authoritative current selected application interface:
---
---   selected sourceEnvelope <= source-native shell
---   time <= sourceDistance.
---
--- The historical R343 dyadic-calibration producer is stronger. It already
--- stores equality of the selected source envelope with its owned shell and
--- equality of source distance with spectral time. Its shell majorant also
--- retains the ACTUAL source ratio q; q<=1/2 is only an extra historical
--- criterion. R395 forgets that extra criterion while preserving q.
---
--- Therefore every inhabited R343 producer compiles mechanically into R397.
--- This is compatibility archaeology only: it does not inhabit R343's physical
--- source/application fields and does not make the stronger R343 carrier
--- mandatory architecture.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -31,6 +15,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
+import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
@@ -48,8 +33,7 @@ r343SourceNativeMajorant :
     {spectrumSource : R281.ContinuumCovarianceSpectrumData
       {SpectralObservable = SpectralObservable} {Energy = Energy}
       dataSet extension tests} →
-  R343.DyadicLiteralTrajectoryCMP116Source
-    base demands tests spectrumSource →
+  R343.DyadicLiteralTrajectoryCMP116Source base demands tests spectrumSource →
   R395.SourceNativeGeometricMajorant
 r343SourceNativeMajorant source =
   R395.fromDyadicMajorant (R343.dyadicMajorant source)
@@ -69,27 +53,22 @@ r343AsR397Application :
   R397.SelectedSourceNativeUpperApplication
     (R343.asLiteralTrajectoryCMP116Source source)
     (r343SourceNativeMajorant source)
-r343AsR397Application source = record
+r343AsR397Application
+    {base = base} {tests = tests} {spectrumSource = spectrumSource} source = record
   { R397.SelectedSourceNativeUpperApplication.selectedSourceEnvelopeBelowMajorantShell =
       λ cutoff observable time →
+        let
+          index = R281.indexFor spectrumSource observable time
+          left = R278.left tests index
+          right = R278.right tests index
+          leftJ = Cumulant.sourceDirectionOf (R318.meaning base) left
+          rightJ = Cumulant.sourceDirectionOf (R318.meaning base) right
+          distance = R343.sourceDistance source leftJ rightJ
+          sourceValue = R343.sourceEnvelope source cutoff
+            (R343.sourceRoot source cutoff leftJ rightJ) distance
+        in
         subst
-          (λ shell →
-            R343.sourceEnvelope source cutoff
-              (R343.sourceRoot source cutoff
-                (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
-                  (R318.meaning _)
-                  (R278.left _ (R281.indexFor _ observable time)))
-                (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
-                  (R318.meaning _)
-                  (R278.right _ (R281.indexFor _ observable time))))
-              (R343.sourceDistance source
-                (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
-                  (R318.meaning _)
-                  (R278.left _ (R281.indexFor _ observable time)))
-                (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
-                  (R318.meaning _)
-                  (R278.right _ (R281.indexFor _ observable time))))
-            ≤ shell)
+          (λ shell → sourceValue ≤ shell)
           (R343.selectedSourceEnvelopeIsDyadicShell source cutoff observable time)
           ℚP.≤-refl
   ; R397.SelectedSourceNativeUpperApplication.selectedTimeBelowSourceDistance =
@@ -99,10 +78,6 @@ r343AsR397Application source = record
           (sym (R343.selectedSourceDistanceIsTime source observable time))
           Nat.≤-refl
   }
-
-------------------------------------------------------------------------
--- Pareto / authority boundary.
-------------------------------------------------------------------------
 
 round398R343ToR397CompilerLevel : ProofLevel
 round398R343ToR397CompilerLevel = machineChecked
