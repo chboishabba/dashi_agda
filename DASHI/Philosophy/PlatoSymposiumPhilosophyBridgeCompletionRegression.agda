@@ -10,6 +10,11 @@ sameAscentCarrierStillNeedsSemanticBridge :
     Completion.canonicalPlatoSymposiumCompletionBoundary ≡ false
 sameAscentCarrierStillNeedsSemanticBridge = refl
 
+ascentTheoremWasReusedNotReproved :
+  Completion.ascentTheoremWasReprovedInsteadOfReused
+    Completion.canonicalPlatoSymposiumCompletionBoundary ≡ false
+ascentTheoremWasReusedNotReproved = refl
+
 rulerRoleStillDoesNotFixServiceOrientation :
   Completion.roleAuthorityDeterminesServiceOrientation
     Completion.canonicalPlatoSymposiumCompletionBoundary ≡ false
