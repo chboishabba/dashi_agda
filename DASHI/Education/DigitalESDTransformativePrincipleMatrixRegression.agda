@@ -6,6 +6,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalInnovationESDTransformationExact as Transformation
+import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
 import DASHI.Education.DigitalESDTransformativePrincipleMatrixExact as Matrix
 
 matrixRowCountRegression : Matrix.transformativePrincipleMatrixRowCount ≡ 7
@@ -22,6 +23,17 @@ scalingConditionsRetainedRegression :
     Matrix.canonicalTransformativePrincipleMatrixBoundary
   ≡ true
 scalingConditionsRetainedRegression = refl
+
+externalityIncidenceAuditRetainedRegression :
+  Matrix.TransformativePrincipleMatrixBoundary.externalityIncidenceAuditRetained
+    Matrix.canonicalTransformativePrincipleMatrixBoundary
+  ≡ true
+externalityIncidenceAuditRetainedRegression = refl
+
+matrixPinsCanonicalIncidenceBoundaryRegression :
+  Matrix.externalityIncidenceBoundary
+  ≡ Incidence.canonicalExternalityIncidenceBoundary
+matrixPinsCanonicalIncidenceBoundaryRegression = refl
 
 relationalPrincipleRetainsProfessionalDevelopmentRegression :
   Matrix.PrincipleConstraintRow.scalingConditions
