@@ -49,6 +49,11 @@ d1bWholeSpaceTransportStillOpenIsTrue :
 d1bWholeSpaceTransportStillOpenIsTrue =
   Bidi.d1bWholeSpaceTransportStillOpenIsTrue
 
+d1bOrderedKernelCoordinateTrackedIsTrue :
+  Bidi.d1bOrderedKernelCoordinateTracked ≡ true
+d1bOrderedKernelCoordinateTrackedIsTrue =
+  Bidi.d1bOrderedKernelCoordinateTrackedIsTrue
+
 wholeSpaceTransportObservedIsFalse :
   Bidi.wholeSpaceTransportObserved ≡ false
 wholeSpaceTransportObservedIsFalse =
